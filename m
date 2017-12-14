@@ -1,10 +1,10 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [seabios test] 117117: regressions - FAIL
-Date: Thu, 14 Dec 2017 08:40:06 +0000
-Message-ID: <osstest-117117-mainreport@xen.org>
+Subject: [libvirt test] 117023: regressions - trouble:
+	blocked/broken/fail/pass
+Date: Thu, 14 Dec 2017 08:46:27 +0000
+Message-ID: <osstest-117023-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8775410285058435398=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -17,105 +17,251 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDExNzExNyBzZWFiaW9zIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMTcxMTcvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3Rz
-IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMg
-d2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1h
-bWQ2NCAxNyBndWVzdC1zdG9wICAgICAgIGZhaWwgUkVHUi4gdnMuIDExNTUzOQogdGVzdC1hbWQ2
-NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTYgZ3Vlc3QtbG9jYWxtaWdyYXRl
-L3gxMCBmYWlsIFJFR1IuIHZzLiAxMTU1MzkKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwg
-YnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1k
-NjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMTU1MzkKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBs
-aWtlIDExNTUzOQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qt
-c3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTE1NTM5CiB0ZXN0LWFtZDY0LWkzODYtbGlidmly
-dC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWls
-IG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1k
-NjQteHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1k
-NjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAxNyBkZWJpYW4taHZtLWluc3RhbGwvbDEvbDIgIGZh
-aWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2lu
-ZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICBmYWlsIG5ldmVyIHBh
-c3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiBzZWFiaW9zICAgICAgICAgICAgICA4
-NDRiODY0NjRhNWNiZmZmYjYyYjg3ODA4NjMyMDE4Y2EyNTBkODY3CmJhc2VsaW5lIHZlcnNpb246
-CiBzZWFiaW9zICAgICAgICAgICAgICAwY2E2ZDYyNzdkZmFmYzY3MWE1YjM3MThjYmViNWM3OGUy
-YTg4OGVhCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMTU1MzkgIDIwMTctMTEtMDMgMjA6NDg6NTgg
-WiAgIDQwIGRheXMKRmFpbGluZyBzaW5jZSAgICAgICAgMTE1NzMzICAyMDE3LTExLTEwIDE3OjE5
-OjU5IFogICAzMyBkYXlzICAgNTEgYXR0ZW1wdHMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTE3MDE0
-ICAyMDE3LTEyLTA4IDE5OjExOjIzIFogICAgNSBkYXlzICAgIDYgYXR0ZW1wdHMKCi0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9w
-bGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgS2V2aW4gTydDb25ub3IgPGtl
-dmluQGtvY29ubm9yLm5ldD4KICBQYXVsIE1lbnplbCA8cG1lbnplbEBtb2xnZW4ubXBnLmRlPgog
-IFN0ZWZhbiBCZXJnZXIgPHN0ZWZhbmJAbGludXgudm5ldC5pYm0uY29tPgoKam9iczoKIGJ1aWxk
-LWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-YW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20g
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0t
-YW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVt
-dXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11
-dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAg
-ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1
-LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAg
-ICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAg
-ICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtaW50ZWwgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhl
-bDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVw
-b3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21l
-L2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMs
-IGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVj
-dC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Yg
-b3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3
-ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0
-cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1F
-O2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8v
-eGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNo
-aW5nLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tCmNvbW1pdCA4NDRiODY0NjRhNWNiZmZmYjYyYjg3ODA4NjMyMDE4Y2EyNTBkODY3
-CkF1dGhvcjogUGF1bCBNZW56ZWwgPHBtZW56ZWxAbW9sZ2VuLm1wZy5kZT4KRGF0ZTogICBNb24g
-T2N0IDIgMDg6MTM6MTMgMjAxNyArMDIwMAoKICAgIGRvY3MvRG93bmxvYWQ6IFVzZSBtb3JlIHNl
-Y3VyZSBIVFRQUyBVUkxzIHdoZXJlIHBvc3NpYmxlCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IFBh
-dWwgTWVuemVsIDxwbWVuemVsQG1vbGdlbi5tcGcuZGU+Cgpjb21taXQgZGY0NmQxMGM4YTdiODhl
-YjgyZjNjZWIyYWEzMTc4MmRlZTE1NTkzZApBdXRob3I6IFN0ZWZhbiBCZXJnZXIgPHN0ZWZhbmJA
-bGludXgudm5ldC5pYm0uY29tPgpEYXRlOiAgIFR1ZSBOb3YgMTQgMTU6MDM6NDcgMjAxNyAtMDUw
-MAoKICAgIHRwbTogQWRkIHN1cHBvcnQgZm9yIFRQTTIgQUNQSSB0YWJsZQogICAgCiAgICBBZGQg
-c3VwcG9ydCBmb3IgdGhlIFRQTTIgQUNQSSB0YWJsZS4gSWYgd2UgZmluZCBpdCBhbmQgaXRzCiAg
-ICBvZiB0aGUgYXBwcm9wcmlhdGUgc2l6ZSwgd2UgY2FuIGdldCB0aGUgbG9nX2FyZWFfc3RhcnRf
-YWRkcmVzcwogICAgYW5kIGxvZ19hcmVhX21pbmltdW1fc2l6ZSBmcm9tIGl0LgogICAgCiAgICBU
-aGUgbGF0ZXN0IHZlcnNpb24gb2YgdGhlIHNwZWMgY2FuIGJlIGZvdW5kIGhlcmU6CiAgICAKICAg
-IGh0dHBzOi8vdHJ1c3RlZGNvbXB1dGluZ2dyb3VwLm9yZy90Y2ctYWNwaS1zcGVjaWZpY2F0aW9u
-LwogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBTdGVmYW4gQmVyZ2VyIDxzdGVmYW5iQGxpbnV4LnZu
-ZXQuaWJtLmNvbT4KCmNvbW1pdCAwNTQxZjJmMGYyNDZlNzdkN2M3MjY5MjY5NzY5MjBlODA3MmQx
-MTE5CkF1dGhvcjogS2V2aW4gTydDb25ub3IgPGtldmluQGtvY29ubm9yLm5ldD4KRGF0ZTogICBG
-cmkgTm92IDEwIDEyOjIwOjM1IDIwMTcgLTA1MDAKCiAgICBwYXJhdmlydDogT25seSBlbmFibGUg
-c2VyY29uIGluIE5PR1JBUEhJQyBtb2RlIGlmIG5vIG90aGVyIGNvbnNvbGUgc3BlY2lmaWVkCiAg
-ICAKICAgIFNpZ25lZC1vZmYtYnk6IEtldmluIE8nQ29ubm9yIDxrZXZpbkBrb2Nvbm5vci5uZXQ+
-Cgpjb21taXQgOWNlNjc3OGYwOGM2MzJjNTJiMjViYzhmNzU0MjkxZWYxODcxMGQ1MwpBdXRob3I6
-IEtldmluIE8nQ29ubm9yIDxrZXZpbkBrb2Nvbm5vci5uZXQ+CkRhdGU6ICAgRnJpIE5vdiAxMCAx
-MjoxNjozNiAyMDE3IC0wNTAwCgogICAgZG9jczogQWRkIHNlcmNvbi1wb3J0IHRvIFJ1bnRpbWVf
-Y29uZmlnLm1kIGRvY3VtZW50YXRpb24KICAgIAogICAgU2lnbmVkLW9mZi1ieTogS2V2aW4gTydD
-b25ub3IgPGtldmluQGtvY29ubm9yLm5ldD4KCmNvbW1pdCA2MzQ1MWZjYTEzYzc1ODcwZTE3MDNl
-YjNlMjA1ODRkOTExNzlhZWJjCkF1dGhvcjogS2V2aW4gTydDb25ub3IgPGtldmluQGtvY29ubm9y
-Lm5ldD4KRGF0ZTogICBGcmkgTm92IDEwIDExOjQ5OjE5IDIwMTcgLTA1MDAKCiAgICBkb2NzOiBO
-b3RlIHYxLjExLjAgcmVsZWFzZQogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBLZXZpbiBPJ0Nvbm5v
-ciA8a2V2aW5Aa29jb25ub3IubmV0PgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+--===============8775410285058435398==
+Content-Type: text/plain
+
+flight 117023 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117023/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64-xsm                 <job status>                 broken
+ build-amd64-pvops               <job status>                 broken
+ build-i386-pvops                <job status>                 broken
+ build-amd64                     <job status>                 broken
+ build-i386                      <job status>                 broken
+ build-armhf-pvops               <job status>                 broken
+ build-armhf-xsm                 <job status>                 broken
+ build-armhf                     <job status>                 broken
+ build-i386-xsm                  <job status>                 broken
+ build-armhf-pvops             4 host-install(4)        broken REGR. vs. 116965
+ build-armhf                   4 host-install(4)        broken REGR. vs. 116965
+ build-armhf-xsm               4 host-install(4)        broken REGR. vs. 116965
+ build-amd64-pvops             4 host-install(4)        broken REGR. vs. 116965
+ build-i386-xsm                4 host-install(4)        broken REGR. vs. 116965
+ build-amd64                   4 host-install(4)        broken REGR. vs. 116965
+ build-i386-pvops              4 host-install(4)        broken REGR. vs. 116965
+ build-amd64-xsm               4 host-install(4)        broken REGR. vs. 116965
+ build-i386                    4 host-install(4)        broken REGR. vs. 116965
+ test-arm64-arm64-libvirt-qcow2 10 debian-di-install      fail REGR. vs. 116965
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt-vhd  1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
+ build-armhf-libvirt           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-pair  1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-xsm   1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-xsm  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ test-armhf-armhf-libvirt-xsm  1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-pair  1 build-check(1)               blocked  n/a
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ libvirt              984c534a3f2219444f4cb4df61d77b8c6e5054d7
+baseline version:
+ libvirt              e2ad8e5993df3cf1ebb575cd960f8f3d0efd2424
+
+Last test of basis   116965  2017-12-08 04:20:53 Z    6 days
+Testing same since   117023  2017-12-09 04:22:55 Z    5 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Jiri Denemark <jdenemar@redhat.com>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Peter Krempa <pkrempa@redhat.com>
+
+jobs:
+ build-amd64-xsm                                              broken  
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              broken  
+ build-i386-xsm                                               broken  
+ build-amd64                                                  broken  
+ build-arm64                                                  pass    
+ build-armhf                                                  broken  
+ build-i386                                                   broken  
+ build-amd64-libvirt                                          blocked 
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            broken  
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            broken  
+ build-i386-pvops                                             broken  
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           blocked 
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            blocked 
+ test-amd64-amd64-libvirt-xsm                                 blocked 
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 blocked 
+ test-amd64-i386-libvirt-xsm                                  blocked 
+ test-amd64-amd64-libvirt                                     blocked 
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     blocked 
+ test-amd64-i386-libvirt                                      blocked 
+ test-amd64-amd64-libvirt-pair                                blocked 
+ test-amd64-i386-libvirt-pair                                 blocked 
+ test-arm64-arm64-libvirt-qcow2                               fail    
+ test-armhf-armhf-libvirt-raw                                 blocked 
+ test-amd64-amd64-libvirt-vhd                                 blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job build-amd64-xsm broken
+broken-job build-amd64-pvops broken
+broken-job build-i386-pvops broken
+broken-job build-amd64 broken
+broken-job build-i386 broken
+broken-job build-armhf-pvops broken
+broken-job build-armhf-xsm broken
+broken-job build-armhf broken
+broken-job build-i386-xsm broken
+broken-step build-armhf-pvops host-install(4)
+broken-step build-armhf host-install(4)
+broken-step build-armhf-xsm host-install(4)
+broken-step build-amd64-pvops host-install(4)
+broken-step build-i386-xsm host-install(4)
+broken-step build-amd64 host-install(4)
+broken-step build-i386-pvops host-install(4)
+broken-step build-amd64-xsm host-install(4)
+broken-step build-i386 host-install(4)
+
+Not pushing.
+
+------------------------------------------------------------
+commit 984c534a3f2219444f4cb4df61d77b8c6e5054d7
+Author: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Date:   Thu Dec 7 03:27:47 2017 +0100
+
+    tests: add test for multiple IPs for libxl and xenconfig driver
+    
+    Test conversion of multiple IP addresses to/from xl format and
+    domXML. Also test libxl_domain_config generator handling of
+    multiple IP addresses.
+    
+    Reviewed-by: Jim Fehlig <jfehlig@suse.com>
+
+commit a861054fc7999ccb41fcbe9592c1df80456cca94
+Author: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Date:   Thu Dec 7 03:27:46 2017 +0100
+
+    xenconfig: add support for multiple IP addresses
+    
+    Xen's xl config format has long supported specifying multiple IP
+    addresses for virtual interfaces. E.g.
+    
+    vif = [ "ip=10.0.0.1 10.1.1.1 2000::1, ..." ]
+    
+    Add support for converting multiple IP addresses to/from domXML.
+    
+    Reviewed-by: Jim Fehlig <jfehlig@suse.com>
+
+commit 82ef04fe79751ba98f48e220b7c2e9366935449a
+Author: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Date:   Thu Dec 7 03:27:45 2017 +0100
+
+    libxl: add support for multiple IP addresses
+    
+    vif-* scripts support it for a long time, and expect addresses to be
+    separated by spaces. Add appropriate support to libxl driver.
+    
+    Reviewed-by: Jim Fehlig <jfehlig@suse.com>
+
+commit 2c01e4febcd161226ce707892d8e53f4e66f708f
+Author: Jiri Denemark <jdenemar@redhat.com>
+Date:   Fri Dec 8 10:31:38 2017 +0100
+
+    migration.html: Clarify configuration file handling docs
+    
+    Migration never removes any configuration files on the destination host.
+    Thus when the domain is already defined on the destination, it will stay
+    persistent even after migration without --persist.
+    
+    https://bugzilla.redhat.com/show_bug.cgi?id=1514930
+    
+    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
+
+commit ce73de441d35e17a29b83b8741e668a6ddc013ba
+Author: Jiri Denemark <jdenemar@redhat.com>
+Date:   Thu Dec 7 11:23:50 2017 +0100
+
+    qemu: Make sure host-model uses CPU model supported by QEMU
+    
+    When reconnecting to a running domain started by old libvirt, which did
+    not change host-model into a custom CPU definition, we replace the CPU
+    definition with a specific CPU model from host capabilities. However,
+    that CPU model may not be supported by the running qemu process. We need
+    to translate the CPU model to one of the models which libvirt could have
+    used when starting the domain.
+    
+    https://bugzilla.redhat.com/show_bug.cgi?id=1521202
+    
+    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
+
+commit 4486dcdb4a386a906807d4eb7de586202e50cd18
+Author: Jiri Denemark <jdenemar@redhat.com>
+Date:   Thu Dec 7 11:21:48 2017 +0100
+
+    qemu: Separate fetching CPU definitions from filling qemuCaps
+    
+    virQEMUCapsProbeQMPCPUDefinitions is now a small wrapper which fills in
+    qemuCaps with CPU models fetched by virQEMUCapsFetchCPUDefinitions.
+    
+    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
+
+commit fac8724ceb371f962d5d185c639456a34d71659e
+Author: Peter Krempa <pkrempa@redhat.com>
+Date:   Thu Dec 7 16:11:18 2017 +0100
+
+    qemu: blockjob: Reset disk source index after pivot
+    
+    Since we are re-detecting the backing chain after pivoting to the active
+    block commit target (or block copy target) the disk index needs to be
+    reset to 0. This is necessary since we move a member of the backing
+    chain to disk->src but clear indexes only starting from
+    disk->src->backingStore. The freshly detected images have indexes
+    starting from 1, but since we've pivoted into an image which was
+    previously a backing store it would have a non-0 index.
+    The lookup function would then return the top of the chain for queries
+    like 'vda[1]' instead of the first backing store.
+    
+    This problem will not be present once we keep the disk indexes stable.
+    
+    Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1519745
+
+
+--===============8775410285058435398==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8775410285058435398==--
