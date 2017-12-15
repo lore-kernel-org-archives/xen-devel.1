@@ -1,27 +1,10 @@
-From: Bjorn Helgaas <helgaas@kernel.org>
-Subject: Re: [PATCH V3 1/2] Drivers/PCI: Export pcie_has_flr()
- interface
-Date: Fri, 15 Dec 2017 12:18:02 -0600
-Message-ID: <20171215181801.GU30595__18567.6706642427$1513361958$gmane$org@bhelgaas-glaptop.roam.corp.google.com>
-References: <20171207222145.9769-1-Govinda.Tatti@Oracle.COM>
- <20171207222145.9769-2-Govinda.Tatti@Oracle.COM>
- <20171208202424.GC12367@bhelgaas-glaptop.roam.corp.google.com>
- <426eeeab-0dcd-8de3-9c5f-a166acf2c130@Oracle.COM>
- <20171212005919.GB30595@bhelgaas-glaptop.roam.corp.google.com>
- <49956aaf-5fd5-939d-5fc7-231ffdb98b70@Oracle.COM>
- <20171213212420.GH30595@bhelgaas-glaptop.roam.corp.google.com>
- <fea075cf-fe6f-0d0b-11e4-4279fbfc280a@Oracle.COM>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 117187: trouble: broken/pass
+Date: Fri, 15 Dec 2017 18:21:06 +0000
+Message-ID: <osstest-117187-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6127570870989222805=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=i1mu=dl=kernel.org=helgaas@srs-us1.protection.inumbo.net>)
- id 1ePuYr-0003Oq-Ct
- for xen-devel@lists.xenproject.org; Fri, 15 Dec 2017 18:18:17 +0000
-Content-Disposition: inline
-In-Reply-To: <fea075cf-fe6f-0d0b-11e4-4279fbfc280a@Oracle.COM>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,90 +13,355 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Govinda Tatti <Govinda.Tatti@Oracle.COM>
-Cc: jgross@suse.com, Sinan Kaya <okaya@codeaurora.org>, Srikanth Jampala <Jampala.Srikanth@cavium.com>, Herbert Xu <herbert@gondor.apana.org.au>, Satanand Burla <satananda.burla@caviumnetworks.com>, linux-pci@vger.kernel.org, Felix Manlunas <felix.manlunas@caviumnetworks.com>, linux-kernel@vger.kernel.org, Derek Chickles <derek.chickles@caviumnetworks.com>, Christoph Hellwig <hch@infradead.org>, JBeulich@suse.com, Russell Currey <ruscur@russell.cc>, bhelgaas@google.com, xen-devel@lists.xenproject.org, boris.ostrovsky@Oracle.COM, Raghu Vatsavayi <raghu.vatsavayi@caviumnetworks.com>, roger.pau@citrix.com
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-WytjYyBSdXNzZWxsLCBTaW5hbiwgSGVyYmVydCwgU3Jpa2FudGgsIERlcmVrLCBTYXRhbmFuZCwg
-RmVsaXgsIFJhZ2h1XQoKT24gRnJpLCBEZWMgMTUsIDIwMTcgYXQgMDk6NDg6MDJBTSAtMDYwMCwg
-R292aW5kYSBUYXR0aSB3cm90ZToKPiBPbiAxMi8xMy8yMDE3IDM6MjQgUE0sIEJqb3JuIEhlbGdh
-YXMgd3JvdGU6Cj4gPk9uIFdlZCwgRGVjIDEzLCAyMDE3IGF0IDAyOjQ2OjU3UE0gLTA2MDAsIEdv
-dmluZGEgVGF0dGkgd3JvdGU6Cgo+ID4+Pj4+Pi1zdGF0aWMgYm9vbCBwY2llX2hhc19mbHIoc3Ry
-dWN0IHBjaV9kZXYgKmRldikKPiA+Pj4+Pj4rYm9vbCBwY2llX2hhc19mbHIoc3RydWN0IHBjaV9k
-ZXYgKmRldikKPiA+Pj4+Pj4gIHsKPiA+Pj4+Pj4gIAl1MzIgY2FwOwo+ID4+Pj4+PkBAIC0zODgy
-LDYgKzM4ODIsNyBAQCBzdGF0aWMgYm9vbCBwY2llX2hhc19mbHIoc3RydWN0IHBjaV9kZXYgKmRl
-dikKPiA+Pj4+Pj4gIAlwY2llX2NhcGFiaWxpdHlfcmVhZF9kd29yZChkZXYsIFBDSV9FWFBfREVW
-Q0FQLCAmY2FwKTsKPiA+Pj4+Pj4gIAlyZXR1cm4gY2FwICYgUENJX0VYUF9ERVZDQVBfRkxSOwo+
-ID4+Pj4+PiAgfQo+ID4+Pj4+PitFWFBPUlRfU1lNQk9MX0dQTChwY2llX2hhc19mbHIpOwoKPiA+
-Pj4+PkknZCByYXRoZXIgY2hhbmdlIHBjaWVfZmxyKCkgc28geW91IGNvdWxkICphbHdheXMqIGNh
-bGwgaXQsIGFuZAo+ID4+Pj4+aXQgd291bGQgcmV0dXJuIDAsIC1FTk9UVFksIG9yIHdoYXRldmVy
-LCBiYXNlZCBvbiB3aGV0aGVyIEZMUgo+ID4+Pj4+aXMgc3VwcG9ydGVkLiAgSXMgdGhhdCBmZWFz
-aWJsZT8KCj4gPj4+PlN1cmUsIEkgd2lsbCBhZGQgcGNpZV9oYXNfZmxyKCkgbG9naWMgaW5zaWRl
-IHBjaWVfZmxyKCkgYW5kCj4gPj4+PnJldHVybiBhcHByb3ByaWF0ZSB2YWx1ZXMgYXMgc3VnZ2Vz
-dGVkIGJ5IHlvdS4gRG8gd2Ugc3RpbGwgd2FudAo+ID4+Pj50byByZXRhaW4gcGNpZV9oYXNfZmxy
-KCkgYW5kIGl0cyB1c2FnZSBpbnNpZGUgcGNpLmM/Lk90aGVyd2lzZSwKPiA+Pj4+SSB3aWxsIHJl
-bW92ZSBpdCBhbmQgZG8gcmVxdWlyZWQgY2xlYW51cC4KCj4gPj4+SWYgeW91IGNhbiByZXN0cnVj
-dHVyZSB0aGUgY29kZSBhbmQgcmVtb3ZlIHBjaWVfaGFzX2ZscigpIHdoaWxlCj4gPj4+cmV0YWlu
-aW5nIHRoZSBleGlzdGluZyBiZWhhdmlvciBvZiBpdHMgY2FsbGVycywgdGhhdCB3b3VsZCBiZQo+
-ID4+PmdyZWF0LgoKPiA+PkkgY2hlY2tlZCB0aGUgY3VycmVudCB1c2FnZSBvZiBwY2llX2hhc19m
-bHIoKSBhbmQgcGNpZV9mbHIoKS4gSQo+ID4+aGF2ZSBhIGNvdXBsZSBvZiBxdWVzdGlvbnMgb3Ig
-bmVlZCBzb21lIGNsYXJpZmljYXRpb24uCj4gPj4KPiA+PjEuIHBjaWVfaGFzX2ZscigpIHVzYWdl
-IGluc2lkZSBwY2lfcHJvYmVfcmVzZXRfZnVuY3Rpb24oKS4KPiA+Pgo+ID4+IMKgwqAgVGhpcyBm
-dW5jdGlvbiBpcyBvbmx5IGNhbGxpbmcgcGNpZV9oYXNfZmxyKCkgYnV0IG5vdCBwY2llX2Zscigp
-Lgo+ID4+IMKgwqAgUmVzdCBvZiB0aGUgY29kZSBpcyB0cnlpbmcgdG8gZG8gc3BlY2lmaWMgdHlw
-ZSBvZiByZXNldCBleGNlcHQKPiA+PiAgICBwY2llX2ZscigpLgo+ID4+Cj4gPj4gwqDCoMKgwqDC
-oMKgwqAgcmMgPSBwY2lfZGV2X3NwZWNpZmljX3Jlc2V0KGRldiwgMSk7Cj4gPj4gwqDCoMKgwqDC
-oMKgwqAgaWYgKHJjICE9IC1FTk9UVFkpCj4gPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIHJldHVybiByYzsKPiA+PiDCoMKgwqDCoMKgwqDCoCBpZiAocGNpZV9oYXNfZmxyKGRldikp
-Cj4gPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAwOwo+ID4+IMKgwqDC
-oMKgwqDCoMKgIHJjID0gcGNpX2FmX2ZscihkZXYsIDEpOwo+ID4+IMKgwqDCoMKgwqDCoMKgIGlm
-IChyYyAhPSAtRU5PVFRZKQo+ID4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1
-cm4gcmM7Cj4gPj4KPiA+PiDCoMKgIEluIG90aGVyLXdvcmRzLCBJIGNhbiByZW1vdmUgdXNhZ2Ug
-b2YgcGNpZV9oYXNfZmxyKCkgaW4gYWxsCj4gPj4gICAgb3RoZXIgcGxhY2VzIGluIHBjaS5jIGV4
-Y2VwdCBpbiBhYm92ZSBmdW5jdGlvbi4KCj4gPkkgdGhpbmsgd2Ugc2hvdWxkIGtlZXAgdGhlIEVY
-UE9SVF9TWU1CT0xfR1BMKCkgcGFydCBvZiBhNjBhMmI3M2JhNjkKPiA+KCJQQ0k6IEV4cG9ydCBw
-Y2llX2ZscigpIiksIGJ1dCByZXZlcnQgdGhlIHJlc3RydWN0dXJpbmcgcGFydC4KPiA+Cj4gPlBy
-aW9yIHRvIGE2MGEyYjczYmE2OSwgd2UgaGFkCj4gPgo+ID4gICBpbnQgcGNpZV9mbHIoc3RydWN0
-IHBjaV9kZXYgKmRldiwgaW50IHByb2JlKTsKPiA+Cj4gPmxpa2UgYWxsIHRoZSBvdGhlciByZXNl
-dCBtZXRob2RzLiAgQUZBSUNULCB0aGUgYWRkaXRpb24gb2YKPiA+cGNpZV9oYXNfZmxyKCkgd2Fz
-IHRvIG9wdGltaXplIHRoZSBwYXRoIHNsaWdodGx5IGJlY2F1c2Ugd2hlbgo+ID5kcml2ZXJzIGNh
-bGwgcGNpZV9mbHIoKSwgdGhleSBzaG91bGQgYWxyZWFkeSBrbm93IHRoYXQgdGhlaXIKPiA+aGFy
-ZHdhcmUgc3VwcG9ydHMgRkxSLiAgQnV0IEkgZG9uJ3QgdGhpbmsgdGhhdCBvcHRpbWl6YXRpb24g
-aXMKPiA+d29ydGggdGhlIGV4dHJhIGNvZGUgY29tcGxleGl0eS4gIElmIHdlIGRvIG5lZWQgdG8g
-b3B0aW1pemUgaXQsIHdlCj4gPmNhbiBjaGVjayB0aGlzIGluIHRoZSBjb3JlIGR1cmluZyBlbnVt
-ZXJhdGlvbiBhbmQgc2V0Cj4gPlBDSV9ERVZfRkxBR1NfTk9fRkxSX1JFU0VUIGFjY29yZGluZ2x5
-LgoKPiBOb3QgYWxsIGNvZGUgcGF0aHMgYXJlIGF3YXJlIG9mIEZMUiBjYXBhYmlsaXR5IGFuZCBh
-bHNvLCBub3QKPiB1c2luZyBwY2llX2ZscigpLsKgIEZvciBleGFtcGxlLAo+IAo+IGFyY2gvcG93
-ZXJwYy9wbGF0Zm9ybXMvcG93ZXJudi9lZWgtcG93ZXJudi5jCgpJIGFzc3VtZSB5b3UncmUgcmVm
-ZXJyaW5nIHRvIHBudl9lZWhfZG9fZmxyKCkgKHdoaWNoIGNvbnRhaW5zIGNvZGUgc2ltaWxhcgp0
-byBwY2llX2ZscigpKSBhbmQgcG52X2VlaF9kb19hZl9mbHIoKSAod2hpY2ggaGFzIGNvZGUgc2lt
-aWxhciB0bwpwY2lfYWZfZmxyKCkpLiAgSSBhZ3JlZSB0aGF0IHRob3NlIGFyZSBwcm9ibGVtYXRp
-YyBhbmQgd291bGQgaWRlYWxseSBiZQp1bmlmaWVkIHdpdGggdGhlIFBDSSBjb3JlIGltcGxlbWVu
-dGF0aW9ucy4KClBvd2VycGMgaGFzIHF1aXRlIGEgYml0IG9mIHRoaXMgc29ydCBvZiBzcGVjaWFs
-LWNhc2UgY29kZSBmb3Igc2V2ZXJhbApyZWFzb25zLCBzb21lIGp1c3QgaGlzdG9yaWNhbCBhbmQg
-c29tZSBtb3JlIGNvbmNyZXRlLCBzbyBJIGRvbid0IGtub3cgaG93CmZlYXNpYmxlIHRoaXMgaXMu
-Cgo+IGRyaXZlcnMvY3J5cHRvL2Nhdml1bS9uaXRyb3gvbml0cm94X21haW4uYwoKVGhpcyBoYXMg
-bml0cm94X3Jlc2V0X2RldmljZSgpLCB3aGljaCBzaG91bGQgZGVmaW5pdGVseSBiZSByZXBsYWNl
-ZCB3aXRoIGEKY29yZSBpbnRlcmZhY2UuCgo+IGRyaXZlcnMvbmV0L2V0aGVybmV0L2Nhdml1bS9s
-aXF1aWRpby9vY3Rlb25fbWFpbGJveC5jCgpBbmQgdGhpcyBoYXMgb2N0ZW9uX21ib3hfcHJvY2Vz
-c19jbWQoKSB3aGljaCBhbHNvIGRvZXMgYSBob21lLWdyb3duClBDSV9FWFBfREVWQ1RMX0JDUl9G
-TFIgcmVxdWVzdCBhbmQgYWxzbyBzaG91bGQgZGVmaW5pdGVseSB1c2UgYSBjb3JlCmludGVyZmFj
-ZS4KCj4gU28sIHdlIHNob3VsZCBjb25zaWRlciBvbmUgb2YgdGhlc2Ugb3B0aW9ucy4KPiAKPiAt
-IHNldCBQQ0lfREVWX0ZMQUdTX05PX0ZMUl9SRVNFVCBpZiBpdCBpcyBub3Qgc3VwcG9ydGVkLgo+
-IC0gcGNpZV9mbHIoKSBzaG91bGQgcmV0dXJuIGlmIGl0IGlzIG5vdCBzdXBwb3J0ZWQKPiAKPiBJ
-ZiB3ZSBtb2RpZnkgcGNpZV9mbHIoKSB0byByZXR1cm4gZXJyb3IgY29kZXMsIHRoZW4gd2UgbmVl
-ZCB0byBtb2RpZnkKPiBhbGwgZXhpc3RpbmcgbW9kdWxlcyB0aGF0IGFyZSBjYWxsaW5nIHRoaXMg
-ZnVuY3Rpb24uCgpZZXMsIG9mIGNvdXJzZS4KCj4gUGxlYXNlIGxldCBtZSBrbm93IHlvdXIgcHJl
-ZmVyZW5jZSwgc28gdGhhdCBJIGNhbiBtb3ZlIGFjY29yZGluZ2x5LiBUaGFua3MuCgpJIHRoaW5r
-IENocmlzdG9waCB2b2x1bnRlZXJlZCB0byBkbyBzb21lIHJlc3RydWN0dXJpbmcsIGJ1dCBJIGRv
-bid0Cmtub3cgaGlzIHRpbWVmcmFtZS4gIElmIHlvdSBjYW4sIEkgd291bGQgcHJvYmFibHkgd2Fp
-dCBmb3IgdGhhdApiZWNhdXNlIHRoZXJlJ3Mgc28gbXVjaCBvdmVybGFwIGhlcmUuCgpUaGUgb3Ro
-ZXIgcGF0aHMgdGhhdCB1c2UgUENJX0VYUF9ERVZDVExfQkNSX0ZMUiBhcmUgZGVmaW5pdGVseSBp
-c3N1ZXMKYW5kIHNob3VsZCBiZSBmaXhlZCwgYnV0IGFnYWluIHNob3VsZCB3YWl0IGZvciB0aGUg
-cmV2aXNlZCBwY2llX2ZscigpCmludGVyZmFjZS4gIEFuZCBpZiB0aGV5J3JlIG5vdCBhY3R1YWxs
-eSByZXF1aXJlZCBmb3IgeW91ciBYZW4gaXNzdWUsCnRoZXkgc291bmQgbGlrZSAibmljZSB0byBo
-YXZlIiBjbGVhbnVwcyB0aGF0IHdpbGwgbm90IGdhdGUgeW91ciBYZW4KZml4ZXMuICBJIGFkZGVk
-IHRoaXMgdG8gbXkgZXZlci1ncm93aW5nIGxpc3Qgb2YgY2xlYW51cHMgdG8gZG8uCgpCam9ybgoK
+--===============6127570870989222805==
+Content-Type: text/plain
+
+flight 117187 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117187/
+
+Failures and problems with tests :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-arm64-arm64-xl-xsm         <job status>                 broken
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  ec320542e4f4de12305551ef5e3cd4d2ced85771
+baseline version:
+ xen                  c4f6ad4c5fd25cb0ccc0cdbe711db97e097f0407
+
+Last test of basis   117152  2017-12-14 16:18:09 Z    1 days
+Failing since        117157  2017-12-14 19:03:00 Z    0 days    9 attempts
+Testing same since   117183  2017-12-15 13:02:36 Z    0 days    2 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Daniel De Graaf <dgdegra@tycho.nsa.gov>
+  Jan Beulich <jbeulich@suse.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Wei Liu <wei.liu2@citrix.com>
+  Yi Sun <yi.y.sun@linux.intel.com>
+
+jobs:
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      broken  
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job test-arm64-arm64-xl-xsm broken
+
+Not pushing.
+
+------------------------------------------------------------
+commit ec320542e4f4de12305551ef5e3cd4d2ced85771
+Author: Roger Pau Monne <roger.pau@citrix.com>
+Date:   Thu Nov 9 12:15:00 2017 +0100
+
+    gcov: rename folder and header to coverage
+    
+    Preparatory change before adding llvm profiling support.
+    No functional change.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+
+commit 767e6c5fd55b3f286402da466cce5944c7ed6333
+Author: Roger Pau Monne <roger.pau@citrix.com>
+Date:   Thu Nov 9 12:16:00 2017 +0100
+
+    kconfig/gcov: remove gcc version choice from kconfig
+    
+    Use autodetect only.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit 3c88e927b2d710dc7d4b5c107c46c74c1ff0e1bd
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Fri Dec 15 11:18:06 2017 +0100
+
+    VMX: drop bogus gpa parameter from __invept()
+    
+    Perhaps there once was a plan to have a flush type requiring this, but
+    the current SDM has no mention of such and all callers pass zero anyway.
+    
+    Take the opportunity and also change involved types to uint64_t.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Kevin Tian <kevin.tian@intel.com>
+
+commit 228ab9992ffb1d8f9d2475f2581e68b2913acb88
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Fri Dec 15 11:17:19 2017 +0100
+
+    domctl: improve locking during domain destruction
+    
+    There is no need to hold the global domctl lock across domain_kill() -
+    the domain lock is fully sufficient here, and parallel cleanup after
+    multiple domains performs quite a bit better this way.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 6046789dccab0c4eca836e8291d371871154289e
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Fri Dec 15 11:16:32 2017 +0100
+
+    x86: make _get_page_type() a proper counterpart of _put_page_type() again
+    
+    Drop one of the leading underscores and use bool for its "preemptible"
+    parameter.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 40df03fc6ff8410b3d9aa2e7bb5163b698c39b3e
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Fri Dec 15 11:15:54 2017 +0100
+
+    x86: use switch() in _put_page_type()
+    
+    Use this to cheaply add another assertion.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 932dddc440f2a3e390b04fade513940296b7e99a
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Fri Dec 15 11:15:16 2017 +0100
+
+    x86: improve _put_page_type() readability
+    
+    By limiting the scope of rc it is more obvious that failure can be
+    reported only if _put_final_page_type() failed.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citix.com>
+
+commit 5d0f135265b8da4ee037ad25ee07f801b873bbd8
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Fri Dec 15 11:14:31 2017 +0100
+
+    x86: remove _PAGE_PSE check from get_page_from_l2e()
+    
+    With L2_DISALLOW_MASK containing _PAGE_PSE unconditionally as of commit
+    56fff3e5e9 ("x86: nuke PV superpage option and code") there's no point
+    anymore in separately checking for the bit.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit b13d5a4567a98870450622b1c27a60edfee0fbbc
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Fri Dec 15 11:13:49 2017 +0100
+
+    x86: make get_page_from_mfn() return struct page_info *
+    
+    Almost all users of it want it, and it calculates it anyway.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 378d31ab3e007d7a059b3e26d4062d7ac318eef4
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Fri Dec 15 11:11:36 2017 +0100
+
+    x86/HVM: fix hvmemul_rep_outs_set_context()
+    
+    There were two issues with this function: Its use of
+    hvmemul_do_pio_buffer() was wrong (the function deals only with
+    individual port accesses, not repeated ones, i.e. passing it
+    "*reps * bytes_per_rep" does not have the intended effect). And it
+    could have processed a larger set of operations in one go than was
+    probably intended (limited just by the size that xmalloc() can hand
+    back).
+    
+    By converting to proper use of hvmemul_do_pio_buffer(), no intermediate
+    buffer is needed at all. As a result a preemption check is being added.
+    
+    Also drop unused parameters from the function.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Razvan Cojocaru <rcojocaru@bitdefender.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+
+commit 8439e8b6c13f0c11ee30dba8d209e8800537c1d5
+Author: Yi Sun <yi.y.sun@linux.intel.com>
+Date:   Fri Oct 20 10:50:00 2017 +0200
+
+    x86: implement data structure and CPU init flow for MBA
+    
+    This patch implements main data structures of MBA.
+    
+    Like CAT features, MBA HW info has cos_max which means the max thrtl
+    register number, and thrtl_max which means the max throttle value
+    (delay value). It also has a flag to represent if the throttle
+    value is linear or non-linear.
+    
+    One thrtl register of MBA stores a throttle value for one or more
+    domains. The throttle value means the delay applied to traffic between
+    L2 cache and next cache level.
+    
+    This patch also implements init flow for MBA and register stub
+    callback functions.
+    
+    Signed-off-by: Yi Sun <yi.y.sun@linux.intel.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit d7714b2b7bac8d9ea1698793c9d040ee04c61201
+Author: Yi Sun <yi.y.sun@linux.intel.com>
+Date:   Fri Oct 20 10:50:00 2017 +0200
+
+    x86: a few optimizations to psr codes
+    
+    This patch refines psr codes:
+    1. Change type of 'cat_init_feature' to 'bool' to remove the pointless
+       returning of error code.
+    2. Move printk in 'cat_init_feature' to reduce a return path.
+    3. Define a local variable 'feat_mask' in 'psr_cpu_init' to reduce calling of
+       'cpuid_count_leaf()'.
+    4. Change 'PSR_INFO_IDX_CAT_FLAG' to 'PSR_INFO_IDX_CAT_FLAGS'.
+    
+    Signed-off-by: Yi Sun <yi.y.sun@linux.intel.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit d6c683d846c2018934c52bb59fcd2d6980ebb6c4
+Author: Yi Sun <yi.y.sun@linux.intel.com>
+Date:   Fri Oct 20 10:50:00 2017 +0200
+
+    x86: rename 'cbm_type' to 'psr_type' to make it general
+    
+    This patch renames 'cbm_type' to 'psr_type' to generalize it.
+    Then, we can reuse this for all psr allocation features.
+    
+    Signed-off-by: Yi Sun <yi.y.sun@linux.intel.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit a58cad2d36d515ee2fa5f163a001e682b6247f55
+Author: Yi Sun <yi.y.sun@linux.intel.com>
+Date:   Tue Oct 24 11:33:00 2017 +0200
+
+    Rename PSR sysctl/domctl interfaces and xsm policy to make them be general
+    
+    This patch renames PSR sysctl/domctl interfaces and related xsm policy to
+    make them be general for all resource allocation features but not only
+    for CAT. Then, we can resuse the interfaces for all allocation features.
+    
+    Basically, it changes 'psr_cat_op' to 'psr_alloc', and remove 'CAT_' from some
+    macros. E.g.:
+    1. psr_cat_op -> psr_alloc
+    2. XEN_DOMCTL_psr_cat_op -> XEN_DOMCTL_psr_alloc
+    3. XEN_SYSCTL_psr_cat_op -> XEN_SYSCTL_psr_alloc
+    4. XEN_DOMCTL_PSR_CAT_SET_L3_CBM -> XEN_DOMCTL_PSR_SET_L3_CBM
+    5. XEN_SYSCTL_PSR_CAT_get_l3_info -> XEN_SYSCTL_PSR_get_l3_info
+    
+    Signed-off-by: Yi Sun <yi.y.sun@linux.intel.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Daniel De Graaf <dgdegra@tycho.nsa.gov>
+
+commit 0062b96961c42eff0aa0ff3b00c26e484718c8fd
+Author: Yi Sun <yi.y.sun@linux.intel.com>
+Date:   Fri Oct 20 10:50:00 2017 +0200
+
+    docs: create Memory Bandwidth Allocation (MBA) feature document
+    
+    This patch creates MBA feature document in doc/features/. It describes
+    key points to implement MBA which is described in details in Intel SDM
+    "Introduction to Memory Bandwidth Allocation".
+    
+    Signed-off-by: Yi Sun <yi.y.sun@linux.intel.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+
+commit 896ee3980e72866b602e743396751384de301fb0
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Wed Dec 6 17:46:20 2017 +0000
+
+    x86/vmx: Don't use hvm_inject_hw_exception() in long_mode_do_msr_write()
+    
+    Since c/s 49de10f3c1718 "x86/hvm: Don't raise #GP behind the emulators back
+    for MSR accesses", returning X86EMUL_EXCEPTION has pushed the exception
+    generation to the top of the call tree.
+    
+    Using hvm_inject_hw_exception() and returning X86EMUL_EXCEPTION causes a
+    double #GP injection, which combines to #DF.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Kevin Tian <kevin.tian@intel.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit d630832f9f9c2ef80b04a2c7d7f08581a18df2b3
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Mon Oct 23 10:49:33 2017 +0100
+
+    x86/efer: Make {read,write}_efer() into inline helpers
+    
+    There is no need for the overhead of a call to a separate translation unit.
+    While moving the implementation, update them to use uint64_t over u64
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit fe66b42da63b820ae75dd9dd2987b32f0631ec4e
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Dec 1 13:16:12 2017 +0000
+
+    x86/domctl: Avoid redundant zeroing in XEN_DOMCTL_get_vcpu_msrs
+    
+    Zero the msr structure once at initialisation time, and avoid re-zeroing the
+    reserved field every time the structure is used.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+(qemu changes not included)
+
+
+--===============6127570870989222805==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6127570870989222805==--
