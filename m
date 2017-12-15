@@ -1,9 +1,11 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 117193: trouble: broken/pass
-Date: Fri, 15 Dec 2017 21:29:06 +0000
-Message-ID: <osstest-117193-mainreport@xen.org>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [qemu-mainline baseline-only test] 72853: trouble:
+	blocked/broken
+Date: Fri, 15 Dec 2017 21:46:07 +0000
+Message-ID: <osstest-72853-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5967021496608988193=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -16,352 +18,246 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============5967021496608988193==
-Content-Type: text/plain
-
-flight 117193 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/117193/
-
-Failures and problems with tests :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-arm64-arm64-xl-xsm         <job status>                 broken
-
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  ec320542e4f4de12305551ef5e3cd4d2ced85771
-baseline version:
- xen                  c4f6ad4c5fd25cb0ccc0cdbe711db97e097f0407
-
-Last test of basis   117152  2017-12-14 16:18:09 Z    1 days
-Failing since        117157  2017-12-14 19:03:00 Z    1 days   10 attempts
-Testing same since   117183  2017-12-15 13:02:36 Z    0 days    3 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Daniel De Graaf <dgdegra@tycho.nsa.gov>
-  Jan Beulich <jbeulich@suse.com>
-  Kevin Tian <kevin.tian@intel.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Wei Liu <wei.liu2@citrix.com>
-  Yi Sun <yi.y.sun@linux.intel.com>
-
-jobs:
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      broken  
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-broken-job test-arm64-arm64-xl-xsm broken
-
-Not pushing.
-
-------------------------------------------------------------
-commit ec320542e4f4de12305551ef5e3cd4d2ced85771
-Author: Roger Pau Monne <roger.pau@citrix.com>
-Date:   Thu Nov 9 12:15:00 2017 +0100
-
-    gcov: rename folder and header to coverage
-    
-    Preparatory change before adding llvm profiling support.
-    No functional change.
-    
-    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-    Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-
-commit 767e6c5fd55b3f286402da466cce5944c7ed6333
-Author: Roger Pau Monne <roger.pau@citrix.com>
-Date:   Thu Nov 9 12:16:00 2017 +0100
-
-    kconfig/gcov: remove gcc version choice from kconfig
-    
-    Use autodetect only.
-    
-    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-    Acked-by: Wei Liu <wei.liu2@citrix.com>
-    Acked-by: Jan Beulich <jbeulich@suse.com>
-
-commit 3c88e927b2d710dc7d4b5c107c46c74c1ff0e1bd
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Dec 15 11:18:06 2017 +0100
-
-    VMX: drop bogus gpa parameter from __invept()
-    
-    Perhaps there once was a plan to have a flush type requiring this, but
-    the current SDM has no mention of such and all callers pass zero anyway.
-    
-    Take the opportunity and also change involved types to uint64_t.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Kevin Tian <kevin.tian@intel.com>
-
-commit 228ab9992ffb1d8f9d2475f2581e68b2913acb88
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Dec 15 11:17:19 2017 +0100
-
-    domctl: improve locking during domain destruction
-    
-    There is no need to hold the global domctl lock across domain_kill() -
-    the domain lock is fully sufficient here, and parallel cleanup after
-    multiple domains performs quite a bit better this way.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-commit 6046789dccab0c4eca836e8291d371871154289e
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Dec 15 11:16:32 2017 +0100
-
-    x86: make _get_page_type() a proper counterpart of _put_page_type() again
-    
-    Drop one of the leading underscores and use bool for its "preemptible"
-    parameter.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-commit 40df03fc6ff8410b3d9aa2e7bb5163b698c39b3e
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Dec 15 11:15:54 2017 +0100
-
-    x86: use switch() in _put_page_type()
-    
-    Use this to cheaply add another assertion.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-commit 932dddc440f2a3e390b04fade513940296b7e99a
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Dec 15 11:15:16 2017 +0100
-
-    x86: improve _put_page_type() readability
-    
-    By limiting the scope of rc it is more obvious that failure can be
-    reported only if _put_final_page_type() failed.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citix.com>
-
-commit 5d0f135265b8da4ee037ad25ee07f801b873bbd8
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Dec 15 11:14:31 2017 +0100
-
-    x86: remove _PAGE_PSE check from get_page_from_l2e()
-    
-    With L2_DISALLOW_MASK containing _PAGE_PSE unconditionally as of commit
-    56fff3e5e9 ("x86: nuke PV superpage option and code") there's no point
-    anymore in separately checking for the bit.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-commit b13d5a4567a98870450622b1c27a60edfee0fbbc
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Dec 15 11:13:49 2017 +0100
-
-    x86: make get_page_from_mfn() return struct page_info *
-    
-    Almost all users of it want it, and it calculates it anyway.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-commit 378d31ab3e007d7a059b3e26d4062d7ac318eef4
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Dec 15 11:11:36 2017 +0100
-
-    x86/HVM: fix hvmemul_rep_outs_set_context()
-    
-    There were two issues with this function: Its use of
-    hvmemul_do_pio_buffer() was wrong (the function deals only with
-    individual port accesses, not repeated ones, i.e. passing it
-    "*reps * bytes_per_rep" does not have the intended effect). And it
-    could have processed a larger set of operations in one go than was
-    probably intended (limited just by the size that xmalloc() can hand
-    back).
-    
-    By converting to proper use of hvmemul_do_pio_buffer(), no intermediate
-    buffer is needed at all. As a result a preemption check is being added.
-    
-    Also drop unused parameters from the function.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Razvan Cojocaru <rcojocaru@bitdefender.com>
-    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
-
-commit 8439e8b6c13f0c11ee30dba8d209e8800537c1d5
-Author: Yi Sun <yi.y.sun@linux.intel.com>
-Date:   Fri Oct 20 10:50:00 2017 +0200
-
-    x86: implement data structure and CPU init flow for MBA
-    
-    This patch implements main data structures of MBA.
-    
-    Like CAT features, MBA HW info has cos_max which means the max thrtl
-    register number, and thrtl_max which means the max throttle value
-    (delay value). It also has a flag to represent if the throttle
-    value is linear or non-linear.
-    
-    One thrtl register of MBA stores a throttle value for one or more
-    domains. The throttle value means the delay applied to traffic between
-    L2 cache and next cache level.
-    
-    This patch also implements init flow for MBA and register stub
-    callback functions.
-    
-    Signed-off-by: Yi Sun <yi.y.sun@linux.intel.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-commit d7714b2b7bac8d9ea1698793c9d040ee04c61201
-Author: Yi Sun <yi.y.sun@linux.intel.com>
-Date:   Fri Oct 20 10:50:00 2017 +0200
-
-    x86: a few optimizations to psr codes
-    
-    This patch refines psr codes:
-    1. Change type of 'cat_init_feature' to 'bool' to remove the pointless
-       returning of error code.
-    2. Move printk in 'cat_init_feature' to reduce a return path.
-    3. Define a local variable 'feat_mask' in 'psr_cpu_init' to reduce calling of
-       'cpuid_count_leaf()'.
-    4. Change 'PSR_INFO_IDX_CAT_FLAG' to 'PSR_INFO_IDX_CAT_FLAGS'.
-    
-    Signed-off-by: Yi Sun <yi.y.sun@linux.intel.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Acked-by: Jan Beulich <jbeulich@suse.com>
-
-commit d6c683d846c2018934c52bb59fcd2d6980ebb6c4
-Author: Yi Sun <yi.y.sun@linux.intel.com>
-Date:   Fri Oct 20 10:50:00 2017 +0200
-
-    x86: rename 'cbm_type' to 'psr_type' to make it general
-    
-    This patch renames 'cbm_type' to 'psr_type' to generalize it.
-    Then, we can reuse this for all psr allocation features.
-    
-    Signed-off-by: Yi Sun <yi.y.sun@linux.intel.com>
-    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Acked-by: Jan Beulich <jbeulich@suse.com>
-
-commit a58cad2d36d515ee2fa5f163a001e682b6247f55
-Author: Yi Sun <yi.y.sun@linux.intel.com>
-Date:   Tue Oct 24 11:33:00 2017 +0200
-
-    Rename PSR sysctl/domctl interfaces and xsm policy to make them be general
-    
-    This patch renames PSR sysctl/domctl interfaces and related xsm policy to
-    make them be general for all resource allocation features but not only
-    for CAT. Then, we can resuse the interfaces for all allocation features.
-    
-    Basically, it changes 'psr_cat_op' to 'psr_alloc', and remove 'CAT_' from some
-    macros. E.g.:
-    1. psr_cat_op -> psr_alloc
-    2. XEN_DOMCTL_psr_cat_op -> XEN_DOMCTL_psr_alloc
-    3. XEN_SYSCTL_psr_cat_op -> XEN_SYSCTL_psr_alloc
-    4. XEN_DOMCTL_PSR_CAT_SET_L3_CBM -> XEN_DOMCTL_PSR_SET_L3_CBM
-    5. XEN_SYSCTL_PSR_CAT_get_l3_info -> XEN_SYSCTL_PSR_get_l3_info
-    
-    Signed-off-by: Yi Sun <yi.y.sun@linux.intel.com>
-    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Acked-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Daniel De Graaf <dgdegra@tycho.nsa.gov>
-
-commit 0062b96961c42eff0aa0ff3b00c26e484718c8fd
-Author: Yi Sun <yi.y.sun@linux.intel.com>
-Date:   Fri Oct 20 10:50:00 2017 +0200
-
-    docs: create Memory Bandwidth Allocation (MBA) feature document
-    
-    This patch creates MBA feature document in doc/features/. It describes
-    key points to implement MBA which is described in details in Intel SDM
-    "Introduction to Memory Bandwidth Allocation".
-    
-    Signed-off-by: Yi Sun <yi.y.sun@linux.intel.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-
-commit 896ee3980e72866b602e743396751384de301fb0
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Wed Dec 6 17:46:20 2017 +0000
-
-    x86/vmx: Don't use hvm_inject_hw_exception() in long_mode_do_msr_write()
-    
-    Since c/s 49de10f3c1718 "x86/hvm: Don't raise #GP behind the emulators back
-    for MSR accesses", returning X86EMUL_EXCEPTION has pushed the exception
-    generation to the top of the call tree.
-    
-    Using hvm_inject_hw_exception() and returning X86EMUL_EXCEPTION causes a
-    double #GP injection, which combines to #DF.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Kevin Tian <kevin.tian@intel.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-commit d630832f9f9c2ef80b04a2c7d7f08581a18df2b3
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Mon Oct 23 10:49:33 2017 +0100
-
-    x86/efer: Make {read,write}_efer() into inline helpers
-    
-    There is no need for the overhead of a call to a separate translation unit.
-    While moving the implementation, update them to use uint64_t over u64
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Jan Beulich <jbeulich@suse.com>
-
-commit fe66b42da63b820ae75dd9dd2987b32f0631ec4e
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Fri Dec 1 13:16:12 2017 +0000
-
-    x86/domctl: Avoid redundant zeroing in XEN_DOMCTL_get_vcpu_msrs
-    
-    Zero the msr structure once at initialisation time, and avoid re-zeroing the
-    reserved field every time the structure is used.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Jan Beulich <jbeulich@suse.com>
-(qemu changes not included)
-
-
---===============5967021496608988193==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5967021496608988193==--
+VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
+Mjg1MyBxZW11LW1haW5saW5lIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhzLmNpdHJpdGUu
+bmV0L35vc3N0ZXN0L3Rlc3Rsb2dzL2xvZ3MvNzI4NTMvCgpGYWlsdXJlcyBhbmQgcHJvYmxlbXMg
+d2l0aCB0ZXN0cyA6LSgKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2Nr
+aW5nLAppbmNsdWRpbmcgdGVzdHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFtZDY0
+ICAgICAgICAgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4K
+IGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAg
+ICAgICBicm9rZW4KIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgPGpvYiBzdGF0dXM+
+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAgICAg
+PGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1aWxkLWFtZDY0LXhzbSAgICAg
+ICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1aWxkLWFt
+ZDY0LXB2b3BzICAgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9r
+ZW4KIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAg
+ICAgICAgICBicm9rZW4KIGJ1aWxkLWFybWhmLXhzbSAgICAgICAgICAgICAgICAgPGpvYiBzdGF0
+dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAg
+ICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1aWxkLWFybWhmICAgICAg
+ICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgYnJva2VuIFJFR1IuIHZzLiA3
+MjUyMwogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAg
+ICAgICBicm9rZW4gUkVHUi4gdnMuIDcyNTIzCiBidWlsZC1hcm1oZi14c20gICAgICAgICAgICAg
+ICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gNzI1MjMKIGJ1aWxk
+LWFtZDY0LXB2b3BzICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgYnJva2Vu
+IFJFR1IuIHZzLiA3MjUyMwogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgNCBob3N0LWlu
+c3RhbGwoNCkgICAgICAgICBicm9rZW4gUkVHUi4gdnMuIDcyNTIzCiBidWlsZC1pMzg2LXhzbSAg
+ICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4g
+NzI1MjMKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAg
+ICAgICAgYnJva2VuIFJFR1IuIHZzLiA3MjUyMwogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAg
+ICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgICBicm9rZW4gUkVHUi4gdnMuIDcyNTIzCiBidWls
+ZC1pMzg2ICAgICAgICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgIGJyb2tl
+biBSRUdSLiB2cy4gNzI1MjMKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBu
+b3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xY293MiAgMSBidWlsZC1jaGVj
+aygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
+dS1kZWJpYW5odm0tYW1kNjQgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgIGJsb2NrZWQgbi9hCiB0
+ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWkzODYgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAg
+ICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWludGVsICAx
+IGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1pMzg2
+LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxIGJ1aWxkLWNoZWNrKDEpIGJsb2Nr
+ZWQgbi9hCiB0ZXN0LWFybWhmLWFybWhmLXhsLW1pZHdheSAgICAxIGJ1aWxkLWNoZWNrKDEpICAg
+ICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgICAx
+IGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkz
+ODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgMSBidWlsZC1jaGVjaygxKSAgICAgYmxv
+Y2tlZCBuL2EKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW4xMC1pMzg2ICAxIGJ1aWxkLWNo
+ZWNrKDEpICAgICAgICAgICAgICBibG9ja2VkIG4vYQogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0
+LXJhdyAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1h
+bWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJs
+b2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1tdWx0aXZjcHUgIDEgYnVpbGQtY2hlY2so
+MSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAg
+ICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1k
+NjQtaTM4Ni1mcmVlYnNkMTAtYW1kNjQgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBi
+bG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtcGFpciAgICAgICAgIDEgYnVpbGQtY2hlY2so
+MSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0
+MiAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1k
+NjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAg
+ICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0ICAxIGJ1
+aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LWxp
+YnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxIGJ1aWxkLWNoZWNrKDEpIGJsb2NrZWQg
+bi9hCiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAg
+ICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2
+NCAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgYmxvY2tlZCBuL2EKIHRlc3QtYW1kNjQt
+YW1kNjQteGwtcWNvdzIgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2Vk
+ICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZncnViICAxIGJ1aWxkLWNoZWNrKDEpICAg
+ICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFu
+aHZtLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgYmxvY2tlZCBuL2EKIHRlc3QtYXJt
+aGYtYXJtaGYtbGlidmlydC14c20gIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9j
+a2VkICBuL2EKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkg
+ICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtaTM4Ni14bCAgICAgICAgICAg
+IDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQt
+aTM4Ni1saWJ2aXJ0LXBhaXIgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2Vk
+ICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgMSBidWlsZC1jaGVj
+aygxKSAgICAgICAgICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZo
+ZCAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2
+NC1hbWQ2NC14bC1jcmVkaXQyICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2Nr
+ZWQgIG4vYQogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgIDEgYnVpbGQtY2hlY2soMSkg
+ICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAgICAg
+IDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIGJ1aWxkLWFtZDY0
+LWxpYnZpcnQgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2Vk
+ICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgMSBi
+dWlsZC1jaGVjaygxKSAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92
+bWYtYW1kNjQgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgIGJsb2NrZWQgbi9hCiB0ZXN0
+LWFtZDY0LWkzODYteGwtcmF3ICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAg
+YmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LWkzODYtcHZncnViICAxIGJ1aWxkLWNoZWNr
+KDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhl
+bDZodm0tYW1kICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCBuL2EKIGJ1
+aWxkLWFybWhmLWxpYnZpcnQgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAg
+ICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAgMSBi
+dWlsZC1jaGVjaygxKSAgICAgICAgICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1pMzg2LWxp
+YnZpcnQgICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQog
+dGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAg
+ICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItaW50ZWwgIDEgYnVp
+bGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYt
+eGwgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EK
+IHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14c20gIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAg
+ICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQteGwteHNtICAgICAgIDEgYnVpbGQt
+Y2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtaTM4Ni1xZW11
+dS1yaGVsNmh2bS1pbnRlbCAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICBibG9ja2VkIG4v
+YQogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAg
+ICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQg
+IDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgIGJsb2NrZWQgbi9hCiB0ZXN0LWFtZDY0LWFt
+ZDY0LXhsICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAg
+bi9hCiB0ZXN0LWFtZDY0LWkzODYtcGFpciAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAg
+ICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAgMSBi
+dWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2
+NC1xZW11dS1uZXN0ZWQtYW1kICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tl
+ZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAg
+ICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgICAx
+IGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWFt
+ZDY0LXhsLXJ0ZHMgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAg
+bi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogcWVtdXUgICAgICAgICAgICAgICAg
+MGEwZGM1OWQyNzUyN2I3OGExOTVjMmQ4MzhkMjhiN2I0OWU1YTYzOQpiYXNlbGluZSB2ZXJzaW9u
+OgogcWVtdXUgICAgICAgICAgICAgICAgMmJhYmZlMGM5MjQxYzIzOTI3MmEwM2ZlYzc4NTE2NWE1
+MGU4Mjg4YwoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgIDcyNTIzICAyMDE3LTEyLTA3IDA0OjE4OjM0
+IFogICAgOCBkYXlzClRlc3Rpbmcgc2FtZSBzaW5jZSAgICA3Mjg1MyAgMjAxNy0xMi0xNSAxNjo0
+NjowNyBaICAgIDAgZGF5cyAgICAxIGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJl
+dmlzaW9ucyB1bmRlciB0ZXN0OgogIFBldGVyIE1heWRlbGwgPHBldGVyLm1heWRlbGxAbGluYXJv
+Lm9yZz4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFybWhmLXhzbSAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtaTM4Ni14c20g
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBi
+dWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgYnJva2VuICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1hbWQ2NC1saWJ2
+aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIGJ1
+aWxkLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBibG9ja2VkIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIGJsb2NrZWQgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFybWhmLXB2b3Bz
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVp
+bGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IGJyb2tlbiAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LXhs
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0
+LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAg
+YmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14
+c20gICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5o
+dm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYteGwt
+cWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3Qt
+YW1kNjQtYW1kNjQtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBi
+bG9ja2VkIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
+eHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1h
+cm1oZi1hcm1oZi14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJs
+b2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1w
+dmh2Mi1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFt
+ZDY0LWkzODYtcWVtdXUtcmhlbDZodm0tYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxv
+Y2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAg
+ICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1h
+bWQ2NCAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJz
+ZDEwLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1k
+NjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBibG9j
+a2VkIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAg
+ICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQg
+ICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11
+dS13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2
+NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2Nr
+ZWQgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAg
+ICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVk
+aXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0
+LWkzODYtZnJlZWJzZDEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tl
+ZCAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAg
+ICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5l
+c3RlZC1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQt
+YW1kNjQteGwtcHZodjItaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2Vk
+IAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWludGVsICAgICAgICAgICAgICAgICAg
+ICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1p
+Mzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQg
+CiB0ZXN0LWFybWhmLWFybWhmLXhsLW1pZHdheSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1ICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZj
+cHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFt
+ZDY0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAK
+IHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1wYWly
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1k
+NjQtYW1kNjQtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAog
+dGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFjb3cy
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2
+NC14bC1xY293MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0
+ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni14bC1yYXcgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1ydGRzICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFybWhmLWFybWhm
+LXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRl
+c3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBibG9ja2VkIAogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIGJsb2NrZWQgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVz
+dC54cy5jaXRyaXRlLm5ldApsb2dzOiAvaG9tZS9vc3N0ZXN0L2xvZ3MKaW1hZ2VzOiAvaG9tZS9v
+c3N0ZXN0L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQK
+ICAgIGh0dHA6Ly9vc3N0ZXN0LnhzLmNpdHJpdGUubmV0L35vc3N0ZXN0L3Rlc3Rsb2dzL2xvZ3MK
+ClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVu
+c291cmNlLmNvbS9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCmJyb2tlbi1qb2IgYnVp
+bGQtYW1kNjQgYnJva2VuCmJyb2tlbi1qb2IgYnVpbGQtaTM4NiBicm9rZW4KYnJva2VuLWpvYiBi
+dWlsZC1hcm1oZi1wdm9wcyBicm9rZW4KYnJva2VuLWpvYiBidWlsZC1pMzg2LXhzbSBicm9rZW4K
+YnJva2VuLWpvYiBidWlsZC1hbWQ2NC14c20gYnJva2VuCmJyb2tlbi1qb2IgYnVpbGQtYW1kNjQt
+cHZvcHMgYnJva2VuCmJyb2tlbi1qb2IgYnVpbGQtaTM4Ni1wdm9wcyBicm9rZW4KYnJva2VuLWpv
+YiBidWlsZC1hcm1oZi14c20gYnJva2VuCmJyb2tlbi1qb2IgYnVpbGQtYXJtaGYgYnJva2VuCmJy
+b2tlbi1zdGVwIGJ1aWxkLWFybWhmIGhvc3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1h
+cm1oZi1wdm9wcyBob3N0LWluc3RhbGwoNCkKYnJva2VuLXN0ZXAgYnVpbGQtYXJtaGYteHNtIGhv
+c3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1hbWQ2NC1wdm9wcyBob3N0LWluc3RhbGwo
+NCkKYnJva2VuLXN0ZXAgYnVpbGQtaTM4Ni1wdm9wcyBob3N0LWluc3RhbGwoNCkKYnJva2VuLXN0
+ZXAgYnVpbGQtaTM4Ni14c20gaG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWFtZDY0
+IGhvc3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1hbWQ2NC14c20gaG9zdC1pbnN0YWxs
+KDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWkzODYgaG9zdC1pbnN0YWxsKDQpCgpQdXNoIG5vdCBhcHBs
+aWNhYmxlLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tCmNvbW1pdCAwYTBkYzU5ZDI3NTI3Yjc4YTE5NWMyZDgzOGQyOGI3YjQ5ZTVh
+NjM5CkF1dGhvcjogUGV0ZXIgTWF5ZGVsbCA8cGV0ZXIubWF5ZGVsbEBsaW5hcm8ub3JnPgpEYXRl
+OiAgIFdlZCBEZWMgMTMgMTQ6MzE6MDkgMjAxNyArMDAwMAoKICAgIFVwZGF0ZSB2ZXJzaW9uIGZv
+ciB2Mi4xMS4wIHJlbGVhc2UKICAgIAogICAgU2lnbmVkLW9mZi1ieTogUGV0ZXIgTWF5ZGVsbCA8
+cGV0ZXIubWF5ZGVsbEBsaW5hcm8ub3JnPgoKY29tbWl0IDZhZmQwYzE5OThmZWQ3MzlkN2U2MmM0
+OTFiYTQ0OTM2NWIwZTljMjgKQXV0aG9yOiBQZXRlciBNYXlkZWxsIDxwZXRlci5tYXlkZWxsQGxp
+bmFyby5vcmc+CkRhdGU6ICAgTW9uIERlYyAxMSAxNzo0OTo1MyAyMDE3ICswMDAwCgogICAgVXBk
+YXRlIHZlcnNpb24gZm9yIHYyLjExLjAtcmM1IHJlbGVhc2UKICAgIAogICAgU2lnbmVkLW9mZi1i
+eTogUGV0ZXIgTWF5ZGVsbCA8cGV0ZXIubWF5ZGVsbEBsaW5hcm8ub3JnPgoKY29tbWl0IDc0NzJl
+MmVmYjA0OWVhNjVhNmE1ZTcyNjFiNzhlYmY1YzU2MWJjMmYKQXV0aG9yOiBQZXRlciBNYXlkZWxs
+IDxwZXRlci5tYXlkZWxsQGxpbmFyby5vcmc+CkRhdGU6ICAgTW9uIERlYyAxMSAxNTo0Mjo0NCAy
+MDE3ICswMDAwCgogICAgdGFyZ2V0L2FybTogR2VuZXJhdGUgVU5ERUYgZm9yIDMyLWJpdCBUaHVt
+YjIgaW5zbnMKICAgIAogICAgVGhlIHJlZmFjdG9yaW5nIG9mIGNvbW1pdCAyOTZlNWEwYTZjMzkz
+NSBoYXMgYSBuYXN0eSBidWc6CiAgICBpdCBhY2NpZGVudGFsbHkgZHJvcHBlZCB0aGUgZ2VuZXJh
+dGlvbiBvZiBjb2RlIHRvIHJhaXNlCiAgICB0aGUgVU5ERUYgZXhjZXB0aW9uIHdoZW4gZGlzYXNf
+dGh1bWIyX2luc24oKSByZXR1cm5zIG5vbnplcm8uCiAgICBUaGlzIG1lYW5zIHRoYXQgMzItYml0
+IFRodW1iMiBpbnN0cnVjdGlvbiBwYXR0ZXJucyB0aGF0CiAgICBvdWdodCB0byBVTkRFRiBqdXN0
+IGFjdCBsaWtlIG5vcHMgaW5zdGVhZC4gVGhpcyBpcyBsaWtlbHkKICAgIHRvIGJyZWFrIGFueSBu
+dW1iZXIgb2YgdGhpbmdzLCBpbmNsdWRpbmcgdGhlIGtlcm5lbCdzICJkaXNhYmxlCiAgICB0aGUg
+RlBVIGFuZCB1c2UgdGhlIFVOREVGIGV4Y2VwdGlvbiB0byBpZGVudGlmeSB3aGVuIHRvIHR1cm4K
+ICAgIGl0IGJhY2sgb24gYWdhaW4iIHRyaWNrLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBQZXRl
+ciBNYXlkZWxsIDxwZXRlci5tYXlkZWxsQGxpbmFyby5vcmc+CiAgICBNZXNzYWdlLWlkOiAxNTEz
+MDA2OTY0LTMzNzEtMS1naXQtc2VuZC1lbWFpbC1wZXRlci5tYXlkZWxsQGxpbmFyby5vcmcKICAg
+IFJldmlld2VkLWJ5OiBSaWNoYXJkIEhlbmRlcnNvbiA8cmljaGFyZC5oZW5kZXJzb25AbGluYXJv
+Lm9yZz4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
