@@ -1,9 +1,9 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 117200: trouble: broken/pass
-Date: Fri, 15 Dec 2017 23:52:30 +0000
-Message-ID: <osstest-117200-mainreport@xen.org>
+Subject: [xen-unstable-smoke test] 117201: trouble: broken/pass
+Date: Sat, 16 Dec 2017 02:09:29 +0000
+Message-ID: <osstest-117201-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2719273540667054505=="
+Content-Type: multipart/mixed; boundary="===============0843072058525694907=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -16,11 +16,11 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============2719273540667054505==
+--===============0843072058525694907==
 Content-Type: text/plain
 
-flight 117200 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/117200/
+flight 117201 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117201/
 
 Failures and problems with tests :-(
 
@@ -40,8 +40,8 @@ baseline version:
  xen                  c4f6ad4c5fd25cb0ccc0cdbe711db97e097f0407
 
 Last test of basis   117152  2017-12-14 16:18:09 Z    1 days
-Failing since        117157  2017-12-14 19:03:00 Z    1 days   11 attempts
-Testing same since   117183  2017-12-15 13:02:36 Z    0 days    4 attempts
+Failing since        117157  2017-12-14 19:03:00 Z    1 days   12 attempts
+Testing same since   117183  2017-12-15 13:02:36 Z    0 days    5 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
@@ -354,7 +354,7 @@ Date:   Fri Dec 1 13:16:12 2017 +0000
 (qemu changes not included)
 
 
---===============2719273540667054505==
+--===============0843072058525694907==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -364,4 +364,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============2719273540667054505==--
+--===============0843072058525694907==--
