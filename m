@@ -1,20 +1,20 @@
-From: George Dunlap <dunlapg@umich.edu>
-Subject: Re: XSA machine readable feeds
-Date: Mon, 18 Dec 2017 11:20:49 +0000
-Message-ID: <CAFLBxZZW_wSO7qex=fYDW=sEO3Z9dshtagtuQJcc02oJs81oQg@mail.gmail.com>
-References: <c5f2d94f-a0b0-341d-78d2-8ae241a38f31@cardoe.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 2/2] x86: introduce NOP9 forms
+Date: Mon, 18 Dec 2017 11:23:45 +0000
+Message-ID: <6ada8d1c-497a-7f91-61f2-ab837b4a9239@citrix.com>
+References: <5A37982B0200007800198055@prv-mh.provo.novell.com>
+ <5A37A2EE02000078001980A1@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=0rlm=do=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
- id 1eQtTZ-0001CK-0U
- for xen-devel@lists.xenproject.org; Mon, 18 Dec 2017 11:20:53 +0000
-Received: by mail-qt0-x233.google.com with SMTP id a16so19509931qtj.3
- for <xen-devel@lists.xenproject.org>; Mon, 18 Dec 2017 03:20:50 -0800 (PST)
-In-Reply-To: <c5f2d94f-a0b0-341d-78d2-8ae241a38f31@cardoe.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=mkns=do=citrix.com=prvs=5189c08a0=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1eQtWT-0001MQ-GV
+ for xen-devel@lists.xenproject.org; Mon, 18 Dec 2017 11:23:53 +0000
+In-Reply-To: <5A37A2EE02000078001980A1@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,37 +23,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Doug Goldstein <cardoe@cardoe.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBEZWMgMTUsIDIwMTcgYXQgMzowMSBBTSwgRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBj
-YXJkb2UuY29tPiB3cm90ZToKPiBIZWxsbyBhbGwsCj4KPiBMb29raW5nIHRvIHNlZSBpZiB0aGVy
-ZSBpcyBpbnRlcmVzdCBmcm9tIGFueW9uZSBpbiBoYXZpbmcgbWFjaGluZQo+IHJlYWRhYmxlIGZl
-ZWRzIGZvciB0aGUgWFNBIGNvbnRlbnQgKGUuZy4gSlNPTikuIEkgbWVudGlvbmVkIGl0IG9uIElS
-Qwo+IGJ1dCBmaWd1cmVkIEkgc2hvdWxkIHBvc3QgdGhpcyBvbiB0aGUgTUwgdG8gZ2V0IGludGVy
-ZXN0IGFuZCBzZWUgaWYKPiBhbnlvbmUgaGFzIHN0cm9uZyBmZWVsaW5ncyBhYm91dCBhIGZvcm1h
-dC4gSSBhbSBjdXJyZW50bHkgY29udmVydGluZyB0aGUKPiBIVE1MIGluZGV4IHRvIGEgSlNPTiBm
-aWxlIG9mIFhTQXMgYW5kIHRoZW4gZWFjaCBYU0EgdG8gaXRzIG93biBKU09OIGZpbGUuCgpGV0lX
-IEkndmUgYmVlbiB3b3JraW5nIG9uIGEgdG9vbCB0byBoZWxwIHRoZSBzZWN1cml0eSB0ZWFtIG1h
-bmFnZSB0aGUKY29tcGxleGl0eSBvZiBtYWtpbmcgc3VyZSBhbGwgY29tYmluYXRpb25zIG9mIHRo
-ZSBYU0FzIGFjdHVhbGx5IHdvcmsKYmVmb3JlIHNlbmRpbmcgdGhlbSBvdXQ7IHdlJ3ZlIHN0YXJ0
-ZWQgaW5jbHVkaW5nIHNvbWUgb2YgdGhlIGRhdGEgZnJvbQp0aGVzZSBhcyAiLm1ldGEiIGZpbGVz
-IGF0dGFjaGVkIHRvIFhTQXMuCgpBdCB0aGUgbW9tZW50IHRoZSBjb250ZW50IGlzIFhlbi1zZWN1
-cml0eS10ZWFtLWZvY3VzZWQ6IEl0IGFzc3VtZXMgeW91CmhhdmUgYWNjZXNzIHRvIG91ciBwcml2
-YXRlIHJlcG9zaXRvcnkgZm9yIFhTQXMgYW5kIGFkdmlzb3JpZXM7IGFuZCB0aGUKJ3JlY2lwZXMn
-IGFyZSBkZXNpZ25lZCB0byBhbGxvdyB0aGUgdGVhbSB0byBtYWludGFpbiBhIHBhdGNoIHdoaWNo
-CndpbGwgYXBwbHkgdG8gc3RhZ2luZy1YWCB3aXRob3V0IHByb2JsZW1zLgoKQnV0IGl0IGNvdWxk
-IGNlcnRhaW5seSBiZSBkZXNpZ25lZCB0byB3b3JrIGFsc28gZnJvbSBqc29uIGZpbGVzCnByb3Zp
-ZGVkIG9uIHRoZSB3ZWJzaXRlIChvciBlbHNld2hlcmUpLCBhbmQgdGhlICdyZWNpcGUnIGNvdWxk
-IGFsc28KaW5jbHVkZSB1c2VyLWZvY3VzZWQgaW5zdHJ1Y3Rpb25zIGZvciBob3cgdG8gYXBwbHkg
-aXQgYW5kL29yIG1ha2Ugc3VyZQppdCdzIGJlZW4gYXBwbGllZC4KCklmIHNvbWVvbmUgaW4gdGhl
-IGNvbW11bml0eSB3YW50ZWQgdG8gc3RlcCB1cCBhbmQgdGFrZSBhIGxlYWQgb24KZGV2ZWxvcGlu
-ZyB3aGF0IHRoaXMgbG9va3MgbGlrZSwgaXQgd291bGQgcHJvYmFibHkgaGFwcGVuIGZhc3Rlci4g
-Oi0pCgpUaGUgdG9vbCBhcyBpdCBpcyBpcyBoZXJlOgoKaHR0cDovL3hlbmJpdHMueGVucHJvamVj
-dC5vcmcvZ2l0d2ViLz9wPXBlb3BsZS9nZHVubGFwL3hzYXRvb2w7YT1zdW1tYXJ5CgpJdCdzIHN0
-aWxsIHZlcnkgbXVjaCAnRXhwZXJpbWVudGFsJyAtLSBpbnRlcmZhY2Ugd2lsbCBjZXJ0YWlubHkK
-Y2hhbmdlLCByZWxpYWJpbGl0eSAiaGVyZSBiZSBkcmFnb25zIi4KCiAtR2VvcmdlCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTgvMTIvMTcgMTA6MTMsIEphbiBCZXVsaWNoIHdyb3RlOgo+IEJvdGggSW50ZWwgYW5kIEFN
+RCByZWNvbW1lbmQgYW4gb3BlcmFuZC1zaXplLW92ZXJyaWRlLXByZWZpeGVkIGxvbmcgTk9QCj4g
+Zm9ybSBmb3IgY292ZXJpbmcgOSBieXRlcywgc28gaW50cm9kdWNlIHRoaXMgYW5kIHVzZSBpdCBp
+biBwNl9ub3BzW10gdG8KPiBhbGxvdyBmdXJ0aGVyIHJlZHVjaW5nIHRoZSBudW1iZXIgb2YgTk9Q
+cyBuZWVkZWQgd2hlbiBjb3ZlcmluZyBsYXJnZXIKPiByYW5nZXMuCj4KPiBTaWduZWQtb2ZmLWJ5
+OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpSZXZpZXdlZC1ieTogQW5kcmV3IENv
+b3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
