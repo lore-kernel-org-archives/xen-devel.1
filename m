@@ -1,17 +1,18 @@
 From: Bruno Alvisio <bruno.alvisio@gmail.com>
-Subject: [PATCH RFC 05/16] Save/Restore Support: Add kernel
-	shutdown logic to shutdown.c
-Date: Tue, 19 Dec 2017 15:42:00 -0800
-Message-ID: <1513726931-7516-6-git-send-email-bruno.alvisio@gmail.com>
+Subject: [PATCH RFC 06/16] Save/Restore Support: Moved shutdown
+	thread to shutdown.c
+Date: Tue, 19 Dec 2017 15:42:01 -0800
+Message-ID: <1513726931-7516-7-git-send-email-bruno.alvisio@gmail.com>
 References: <1513726931-7516-1-git-send-email-bruno.alvisio@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2424689312498665044=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=2vxx=dp=balvisio-mac.localdomain=balvisio@srs-us1.protection.inumbo.net>)
- id 1eRRWf-00043U-0S
- for xen-devel@lists.xenproject.org; Tue, 19 Dec 2017 23:42:21 +0000
+ id 1eRRWj-00043K-Hi
+ for xen-devel@lists.xenproject.org; Tue, 19 Dec 2017 23:42:25 +0000
 In-Reply-To: <1513726931-7516-1-git-send-email-bruno.alvisio@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,258 +26,66 @@ To: minios-devel@lists.xenproject.org, xen-devel@lists.xenproject.org
 Cc: jgross@suse.com, samuel.thibault@ens-lyon.org, wei.liu2@citrix.com, Bruno Alvisio <bruno.alvisio@gmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2424689312498665044==
-Content-Type: text/plain; charset=y
-Content-Transfer-Encoding: 8bit
-
-Created shutdown.c for the shutdown thread and all the shutdown related
-functions.
-
-Signed-off-by: Bruno Alvisio <bruno.alvisio@gmail.com>
----
- Makefile           |   1 +
- include/shutdown.h |  11 ++++
- shutdown.c         | 188 +++++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 200 insertions(+)
- create mode 100644 include/shutdown.h
- create mode 100644 shutdown.c
-
-diff --git a/Makefile b/Makefile
-index 88315c4..6a05de6 100644
---- a/Makefile
-+++ b/Makefile
-@@ -53,6 +53,7 @@ src-y += mm.c
- src-$(CONFIG_NETFRONT) += netfront.c
- src-$(CONFIG_PCIFRONT) += pcifront.c
- src-y += sched.c
-+src-y += shutdown.c
- src-$(CONFIG_TEST) += test.c
- src-$(CONFIG_BALLOON) += balloon.c
- 
-diff --git a/include/shutdown.h b/include/shutdown.h
-new file mode 100644
-index 0000000..a5ec019
---- /dev/null
-+++ b/include/shutdown.h
-@@ -0,0 +1,11 @@
-+#ifndef _SHUTDOWN_H_
-+#define _SHUTDOWN_H_
-+
-+#include <mini-os/hypervisor.h>
-+
-+void init_shutdown(start_info_t *si);
-+
-+void kernel_shutdown(int reason) __attribute__((noreturn));
-+void kernel_suspend(void);
-+
-+#endif
-diff --git a/shutdown.c b/shutdown.c
-new file mode 100644
-index 0000000..b3cea6d
---- /dev/null
-+++ b/shutdown.c
-@@ -0,0 +1,188 @@
-+/*
-+ *          MiniOS
-+ *
-+ *   file: fromdevice.cc
-+ *
-+ *          NEC Europe Ltd. PROPRIETARY INFORMATION
-+ *
-+ * This software is supplied under the terms of a license agreement
-+ * or nondisclosure agreement with NEC Europe Ltd. and may not be
-+ * copied or disclosed except in accordance with the terms of that
-+ * agreement. The software and its source code contain valuable trade
-+ * secrets and confidential information which have to be maintained in
-+ * confidence.
-+ * Any unauthorized publication, transfer to third parties or duplication
-+ * of the object or source code - either totally or in part – is
-+ * prohibited.
-+ *
-+ *      Copyright (c) 2014 NEC Europe Ltd. All Rights Reserved.
-+ *
-+ * Authors: Filipe Manco <filipe.manco@neclab.eu>
-+ *
-+ * NEC Europe Ltd. DISCLAIMS ALL WARRANTIES, EITHER EXPRESS OR IMPLIED,
-+ * INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY
-+ * AND FITNESS FOR A PARTICULAR PURPOSE AND THE WARRANTY AGAINST LATENT
-+ * DEFECTS, WITH RESPECT TO THE PROGRAM AND THE ACCOMPANYING
-+ * DOCUMENTATION.
-+ *
-+ * No Liability For Consequential Damages IN NO EVENT SHALL NEC Europe
-+ * Ltd., NEC Corporation OR ANY OF ITS SUBSIDIARIES BE LIABLE FOR ANY
-+ * DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS
-+ * OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF INFORMATION, OR
-+ * OTHER PECUNIARY LOSS AND INDIRECT, CONSEQUENTIAL, INCIDENTAL,
-+ * ECONOMIC OR PUNITIVE DAMAGES) ARISING OUT OF THE USE OF OR INABILITY
-+ * TO USE THIS PROGRAM, EVEN IF NEC Europe Ltd. HAS BEEN ADVISED OF THE
-+ * POSSIBILITY OF SUCH DAMAGES.
-+ *
-+ *     THIS HEADER MAY NOT BE EXTRACTED OR MODIFIED IN ANY WAY.
-+ */
-+#include <mini-os/os.h>
-+#include <mini-os/events.h>
-+#include <mini-os/kernel.h>
-+#include <mini-os/sched.h>
-+#include <mini-os/shutdown.h>
-+#include <mini-os/lib.h>
-+#include <mini-os/xenbus.h>
-+#include <mini-os/xmalloc.h>
-+
-+
-+static start_info_t *start_info_ptr;
-+
-+static const char *path = "control/shutdown";
-+static const char *token = "control/shutdown";
-+static xenbus_event_queue events = NULL;
-+static int end_shutdown_thread = 0;
-+
-+#ifdef CONFIG_XENBUS
-+/* This should be overridden by the application we are linked against. */
-+__attribute__((weak)) void app_shutdown(unsigned reason)
-+{
-+    printk("Shutdown requested: %d\n", reason);
-+    if (reason == SHUTDOWN_suspend) {
-+        kernel_suspend();
-+    } else {
-+        struct sched_shutdown sched_shutdown = { .reason = reason };
-+        HYPERVISOR_sched_op(SCHEDOP_shutdown, &sched_shutdown);
-+    }
-+}
-+
-+static void shutdown_thread(void *p)
-+{
-+    char *shutdown, *err;
-+    unsigned int shutdown_reason;
-+
-+    xenbus_watch_path_token(XBT_NIL, path, token, &events);
-+
-+    for ( ;; ) {
-+        xenbus_wait_for_watch(&events);
-+        if ((err = xenbus_read(XBT_NIL, path, &shutdown))) {
-+            free(err);
-+            do_exit();
-+        }
-+
-+        if (end_shutdown_thread)
-+            break;
-+
-+        if (!strcmp(shutdown, "")) {
-+            /* Avoid spurious event on xenbus */
-+            /* FIXME: investigate the reason of the spurious event */
-+            free(shutdown);
-+            continue;
-+        } else if (!strcmp(shutdown, "poweroff")) {
-+            shutdown_reason = SHUTDOWN_poweroff;
-+        } else if (!strcmp(shutdown, "reboot")) {
-+            shutdown_reason = SHUTDOWN_reboot;
-+        } else if (!strcmp(shutdown, "suspend")) {
-+            shutdown_reason = SHUTDOWN_suspend;
-+        } else {
-+            shutdown_reason = SHUTDOWN_crash;
-+        }
-+        free(shutdown);
-+
-+        /* Acknowledge shutdown request */
-+        if ((err = xenbus_write(XBT_NIL, path, ""))) {
-+            free(err);
-+            do_exit();
-+        }
-+
-+        app_shutdown(shutdown_reason);
-+    }
-+}
-+#endif
-+
-+static void fini_shutdown(void)
-+{
-+    char *err;
-+
-+    end_shutdown_thread = 1;
-+    xenbus_release_wait_for_watch(&events);
-+    err = xenbus_unwatch_path_token(XBT_NIL, path, token);
-+    if (err) {
-+        free(err);
-+        do_exit();
-+    }
-+}
-+
-+void init_shutdown(start_info_t *si)
-+{
-+    start_info_ptr = si;
-+
-+    end_shutdown_thread = 0;
-+    create_thread("shutdown", shutdown_thread, NULL);
-+}
-+
-+void kernel_shutdown(int reason)
-+{
-+    char* reason_str = NULL;
-+
-+    switch(reason) {
-+        case SHUTDOWN_poweroff:
-+            reason_str = "poweroff";
-+            break;
-+        case SHUTDOWN_reboot:
-+            reason_str = "reboot";
-+            break;
-+        case SHUTDOWN_crash:
-+            reason_str = "crash";
-+            break;
-+        default:
-+            do_exit();
-+            break;
-+    }
-+
-+    printk("MiniOS will shutdown (reason = %s) ...\n", reason_str);
-+
-+    fini_shutdown();
-+
-+    stop_kernel();
-+
-+    for ( ;; ) {
-+        struct sched_shutdown sched_shutdown = { .reason = reason };
-+        HYPERVISOR_sched_op(SCHEDOP_shutdown, &sched_shutdown);
-+    }
-+}
-+
-+void kernel_suspend(void)
-+{
-+    int rc;
-+
-+    printk("MiniOS will suspend ...\n");
-+
-+    pre_suspend();
-+    arch_pre_suspend();
-+
-+    /*
-+     * This hypercall returns 1 if the suspend
-+     * was cancelled and 0 if resuming in a new domain
-+     */
-+    rc = HYPERVISOR_suspend(virt_to_mfn(start_info_ptr));
-+
-+    arch_post_suspend(rc);
-+    post_suspend(rc);
-+
-+    if (rc) {
-+        printk("MiniOS suspend canceled!");
-+    } else {
-+        printk("MiniOS resumed from suspend!\n");
-+    }
-+}
--- 
-2.3.2 (Apple Git-55)
-
-
-
---===============2424689312498665044==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2424689312498665044==--
+VGhlIHNodXRkb3duIHRocmVhZCBwcmVzZW50IGluIGtlcm5lbC5jIHdhcyByZW1vdmVkIGFuZCBu
+b3cgdGhlIHRocmVhZCBpbgpzaHV0ZG93bi5jIGlzIGNyZWF0ZWQgaW5zdGVhZC4KClNpZ25lZC1v
+ZmYtYnk6IEJydW5vIEFsdmlzaW8gPGJydW5vLmFsdmlzaW9AZ21haWwuY29tPgotLS0KIGFyY2gv
+eDg2L3NldHVwLmMgfCAgMiArLQogaW5jbHVkZS9rZXJuZWwuaCB8ICAyICstCiBrZXJuZWwuYyAg
+ICAgICAgIHwgNTAgKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0KIDMgZmlsZXMgY2hhbmdlZCwgOCBpbnNlcnRpb25zKCspLCA0NiBkZWxldGlvbnMoLSkK
+CmRpZmYgLS1naXQgYS9hcmNoL3g4Ni9zZXR1cC5jIGIvYXJjaC94ODYvc2V0dXAuYwppbmRleCAz
+ZGQ4NmY5Li4zMWZhMmM2IDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9zZXR1cC5jCisrKyBiL2FyY2gv
+eDg2L3NldHVwLmMKQEAgLTIwMSw3ICsyMDEsNyBAQCBhcmNoX2luaXQodm9pZCAqcGFyKQogCW1l
+bWNweSgmc3RhcnRfaW5mbywgcGFyLCBzaXplb2Yoc3RhcnRfaW5mbykpOwogI2VuZGlmCiAKLQlz
+dGFydF9rZXJuZWwoKTsKKwlzdGFydF9rZXJuZWwoKHN0YXJ0X2luZm9fdCAqKXBhcik7CiB9CiAK
+IHZvaWQgYXJjaF9wcmVfc3VzcGVuZCh2b2lkKQpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9rZXJuZWwu
+aCBiL2luY2x1ZGUva2VybmVsLmgKaW5kZXggMTYxZDc1Ny4uNzQyYWJmNSAxMDA2NDQKLS0tIGEv
+aW5jbHVkZS9rZXJuZWwuaAorKysgYi9pbmNsdWRlL2tlcm5lbC5oCkBAIC00LDcgKzQsNyBAQAog
+I2RlZmluZSBNQVhfQ01ETElORV9TSVpFIDEwMjQKIGV4dGVybiBjaGFyIGNtZGxpbmVbTUFYX0NN
+RExJTkVfU0laRV07CiAKLXZvaWQgc3RhcnRfa2VybmVsKHZvaWQpOwordm9pZCBzdGFydF9rZXJu
+ZWwodm9pZCogcGFyKTsKIHZvaWQgcHJlX3N1c3BlbmQodm9pZCk7CiB2b2lkIHBvc3Rfc3VzcGVu
+ZChpbnQgY2FuY2VsZWQpOwogdm9pZCBkb19leGl0KHZvaWQpIF9fYXR0cmlidXRlX18oKG5vcmV0
+dXJuKSk7CmRpZmYgLS1naXQgYS9rZXJuZWwuYyBiL2tlcm5lbC5jCmluZGV4IDkwYzg2NWEuLjFj
+ZDQwZTggMTAwNjQ0Ci0tLSBhL2tlcm5lbC5jCisrKyBiL2tlcm5lbC5jCkBAIC00Miw2ICs0Miw5
+IEBACiAjaW5jbHVkZSA8bWluaS1vcy9ibGtmcm9udC5oPgogI2luY2x1ZGUgPG1pbmktb3MvZmJm
+cm9udC5oPgogI2luY2x1ZGUgPG1pbmktb3MvcGNpZnJvbnQuaD4KKyNpZmRlZiBDT05GSUdfWEVO
+QlVTCisjaW5jbHVkZSA8bWluaS1vcy9zaHV0ZG93bi5oPgorI2VuZGlmCiAjaW5jbHVkZSA8bWlu
+aS1vcy94bWFsbG9jLmg+CiAjaW5jbHVkZSA8ZmNudGwuaD4KICNpbmNsdWRlIDx4ZW4vZmVhdHVy
+ZXMuaD4KQEAgLTY2LDQ4ICs2OSw2IEBAIHZvaWQgc2V0dXBfeGVuX2ZlYXR1cmVzKHZvaWQpCiAg
+ICAgfQogfQogCi0jaWZkZWYgQ09ORklHX1hFTkJVUwotLyogVGhpcyBzaG91bGQgYmUgb3ZlcnJp
+ZGRlbiBieSB0aGUgYXBwbGljYXRpb24gd2UgYXJlIGxpbmtlZCBhZ2FpbnN0LiAqLwotX19hdHRy
+aWJ1dGVfXygod2VhaykpIHZvaWQgYXBwX3NodXRkb3duKHVuc2lnbmVkIHJlYXNvbikKLXsKLSAg
+ICBzdHJ1Y3Qgc2NoZWRfc2h1dGRvd24gc2NoZWRfc2h1dGRvd24gPSB7IC5yZWFzb24gPSByZWFz
+b24gfTsKLSAgICBwcmludGsoIlNodXRkb3duIHJlcXVlc3RlZDogJWRcbiIsIHJlYXNvbik7Ci0g
+ICAgSFlQRVJWSVNPUl9zY2hlZF9vcChTQ0hFRE9QX3NodXRkb3duLCAmc2NoZWRfc2h1dGRvd24p
+OwotfQotCi1zdGF0aWMgdm9pZCBzaHV0ZG93bl90aHJlYWQodm9pZCAqcCkKLXsKLSAgICBjb25z
+dCBjaGFyICpwYXRoID0gImNvbnRyb2wvc2h1dGRvd24iOwotICAgIGNvbnN0IGNoYXIgKnRva2Vu
+ID0gcGF0aDsKLSAgICB4ZW5idXNfZXZlbnRfcXVldWUgZXZlbnRzID0gTlVMTDsKLSAgICBjaGFy
+ICpzaHV0ZG93biA9IE5VTEwsICplcnI7Ci0gICAgdW5zaWduZWQgaW50IHNodXRkb3duX3JlYXNv
+bjsKLSAgICB4ZW5idXNfd2F0Y2hfcGF0aF90b2tlbihYQlRfTklMLCBwYXRoLCB0b2tlbiwgJmV2
+ZW50cyk7Ci0gICAgd2hpbGUgKChlcnIgPSB4ZW5idXNfcmVhZChYQlRfTklMLCBwYXRoLCAmc2h1
+dGRvd24pKSAhPSBOVUxMIHx8ICFzdHJjbXAoc2h1dGRvd24sICIiKSkKLSAgICB7Ci0gICAgICAg
+IGZyZWUoZXJyKTsKLSAgICAgICAgZnJlZShzaHV0ZG93bik7Ci0gICAgICAgIHNodXRkb3duID0g
+TlVMTDsKLSAgICAgICAgeGVuYnVzX3dhaXRfZm9yX3dhdGNoKCZldmVudHMpOwotICAgIH0KLSAg
+ICBlcnIgPSB4ZW5idXNfdW53YXRjaF9wYXRoX3Rva2VuKFhCVF9OSUwsIHBhdGgsIHRva2VuKTsK
+LSAgICBmcmVlKGVycik7Ci0gICAgZXJyID0geGVuYnVzX3dyaXRlKFhCVF9OSUwsIHBhdGgsICIi
+KTsKLSAgICBmcmVlKGVycik7Ci0gICAgcHJpbnRrKCJTaHV0dGluZyBkb3duICglcylcbiIsIHNo
+dXRkb3duKTsKLQotICAgIGlmICghc3RyY21wKHNodXRkb3duLCAicG93ZXJvZmYiKSkKLSAgICAg
+ICAgc2h1dGRvd25fcmVhc29uID0gU0hVVERPV05fcG93ZXJvZmY7Ci0gICAgZWxzZSBpZiAoIXN0
+cmNtcChzaHV0ZG93biwgInJlYm9vdCIpKQotICAgICAgICBzaHV0ZG93bl9yZWFzb24gPSBTSFVU
+RE9XTl9yZWJvb3Q7Ci0gICAgZWxzZQotICAgICAgICAvKiBVbmtub3duICovCi0gICAgICAgIHNo
+dXRkb3duX3JlYXNvbiA9IFNIVVRET1dOX2NyYXNoOwotICAgIGFwcF9zaHV0ZG93bihzaHV0ZG93
+bl9yZWFzb24pOwotICAgIGZyZWUoc2h1dGRvd24pOwotfQotI2VuZGlmCi0KIAogLyogVGhpcyBz
+aG91bGQgYmUgb3ZlcnJpZGRlbiBieSB0aGUgYXBwbGljYXRpb24gd2UgYXJlIGxpbmtlZCBhZ2Fp
+bnN0LiAqLwogX19hdHRyaWJ1dGVfXygod2VhaykpIGludCBhcHBfbWFpbih2b2lkICpwKQpAQCAt
+MTE2LDcgKzc3LDcgQEAgX19hdHRyaWJ1dGVfXygod2VhaykpIGludCBhcHBfbWFpbih2b2lkICpw
+KQogICAgIHJldHVybiAwOwogfQogCi12b2lkIHN0YXJ0X2tlcm5lbCh2b2lkKQordm9pZCBzdGFy
+dF9rZXJuZWwodm9pZCogcGFyKQogewogICAgIC8qIFNldCB1cCBldmVudHMuICovCiAgICAgaW5p
+dF9ldmVudHMoKTsKQEAgLTE0NSw3ICsxMDYsOCBAQCB2b2lkIHN0YXJ0X2tlcm5lbCh2b2lkKQog
+ICAgIGluaXRfeGVuYnVzKCk7CiAKICNpZmRlZiBDT05GSUdfWEVOQlVTCi0gICAgY3JlYXRlX3Ro
+cmVhZCgic2h1dGRvd24iLCBzaHV0ZG93bl90aHJlYWQsIE5VTEwpOworICAgIC8qIEluaXQgc2h1
+dGRvd24gdGhyZWFkICovCisgICAgaW5pdF9zaHV0ZG93bigoc3RhcnRfaW5mb190ICopcGFyKTsK
+ICNlbmRpZgogCiAgICAgLyogQ2FsbCAocG9zc2libHkgb3ZlcnJpZGRlbikgYXBwX21haW4oKSAq
+LwotLSAKMi4zLjIgKEFwcGxlIEdpdC01NSkKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
