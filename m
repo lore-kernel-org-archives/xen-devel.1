@@ -1,19 +1,17 @@
-From: Olivier Lambert <lambert.olivier@gmail.com>
-Subject: Re: [Xen-users] Data corruption with xl migrate
-Date: Tue, 19 Dec 2017 12:01:34 +0100
-Message-ID: <CACJ1ZNvamD4SvroBZ+j4NAyAW6=ubXJFAavNuEtzx-a5+WkyqQ__16009.7134569243$1513682459$gmane$org@mail.gmail.com>
-References: <8dd20c44-d4ab-056c-9b9e-bc0f1b85367c@pse-consulting.de>
- <f3192d23-bf33-9377-ca3e-6562c426fa57@pse-consulting.de>
- <CAFLBxZYMWqf5rJQAOh_ZuR+i1q2ESraH08Vx5u=dJNmWJ9zqPw@mail.gmail.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: Xen release cycle revisited
+Date: Tue, 19 Dec 2017 11:44:04 +0000
+Message-ID: <113051ed-cdd5-cf4d-374b-6e29efb79a7e@citrix.com>
+References: <63cf216a-71af-bd35-55e7-88c69b773e52@suse.com>
+ <9ae5f5ce-85d5-ee68-eef7-36f3026e1c13@suse.com>
+ <5A38E022020000780019858F@prv-mh.provo.novell.com>
+ <3091712.73UAgB5JZV@wopr.lan.crc.id.au>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4561084563634927415=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=riaz=dp=gmail.com=lambert.olivier@srs-us1.protection.inumbo.net>)
- id 1eRFfR-0008Cj-GM
- for xen-devel@lists.xenproject.org; Tue, 19 Dec 2017 11:02:37 +0000
-In-Reply-To: <CAFLBxZYMWqf5rJQAOh_ZuR+i1q2ESraH08Vx5u=dJNmWJ9zqPw@mail.gmail.com>
+In-Reply-To: <3091712.73UAgB5JZV@wopr.lan.crc.id.au>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,159 +20,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <dunlapg@umich.edu>
-Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Andreas Pflug <pgadmin@pse-consulting.de>, xen-users@lists.xenproject.org, xen-devel <xen-devel@lists.xenproject.org>, Joao Martins <joao.m.martins@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+To: Steven Haigh <netwiz@crc.id.au>, xen-devel@lists.xen.org
+Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, George Dunlap <dunlapg@umich.edu>, Julien Grall <julien.grall@linaro.org>, "committers@xenproject.org" <committers@xenproject.org>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4561084563634927415==
-Content-Type: multipart/alternative; boundary="001a11c15518e98d380560af633c"
-
---001a11c15518e98d380560af633c
-Content-Type: text/plain; charset="UTF-8"
-
-Hi!
-
-Xen Orchestra team here. Our virtual appliance (XOA) is running on Jessie
-and few customers experienced this problem on XenServer too. I'm trying to
-investigate more to correlate if the affected customers did a migration
-before this happened (XOA is running on prem, so we can't monitor it
-directly).
-
-Keep us posted for any bug report created on Debian side.
-
-Thanks!
-
-Olivier.
-
-On Tue, Dec 19, 2017 at 11:33 AM, George Dunlap <dunlapg@umich.edu> wrote:
-
-> On Sun, Dec 17, 2017 at 3:53 PM, Andreas Pflug
-> <pgadmin@pse-consulting.de> wrote:
-> > Still experiencing data corruption when migrating 3.16 VMs from one host
-> > to another...
-> > Seems independent of Xen version or storage backend.
-> >
-> > Regards
-> > Andreas
-> >
-> > Am 13.12.17 um 09:12 schrieb Andreas Pflug:
-> >> Recently, I encountered file system data corruption on several systems
-> >> after a migration (ext4, xfs, zfs). So far, I haven't been able to nail
-> >> down the cause for it.
-> >>
-> >> All VMs affected run Debian Jessie with 3.16 kernel. Possibly newer 3.16
-> >> kernels are more likely to suffer corruption.
-> >>
-> >> This happened on a Xen 4.1 cluster (yes, really old) using a SAN storage
-> >> system, but also on a Xen 4.8 cluster with DRBD mirroring. All systems
-> >> are working for >>1 year now, only recently those filesystem corruption
-> >> started to happen. Data blocks seem to get randomly garbled.
-> >>
-> >> Migration of Debian Stretch or Windows VMs didn't show any anomalies so
-> far.
-> >>
-> >> Can anyone shed some light on this?
->
-> Thanks for the report -- cc'ing a few random people who know more
-> about the block layer / Debian kernels.
->
-> It seems Debian Jessie 3.16 kernel was experiencing corruption on
-> migration, but not the Debian Stretch kernel or Windows VMs.  That
-> sounds like a bug in the Debian kernel; any ideas about what patch may
-> be worth backporting / any steps to help further investigate the
-> source of the problems?
->
-> Thanks,
->  -George
->
-> _______________________________________________
-> Xen-users mailing list
-> Xen-users@lists.xenproject.org
-> https://lists.xenproject.org/mailman/listinfo/xen-users
->
-
---001a11c15518e98d380560af633c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><div><div><div>Hi!<br><br></div>Xen Orchestra team he=
-re. Our virtual appliance (XOA) is running on Jessie and few customers expe=
-rienced this problem on XenServer too. I&#39;m trying to investigate more t=
-o correlate if the affected customers did a migration before this happened =
-(XOA is running on prem, so we can&#39;t monitor it directly).<br><br></div=
->Keep us posted for any bug report created on Debian side.<br><br></div>Tha=
-nks!<br><br></div>Olivier.<br></div><div class=3D"gmail_extra"><br><div cla=
-ss=3D"gmail_quote">On Tue, Dec 19, 2017 at 11:33 AM, George Dunlap <span di=
-r=3D"ltr">&lt;<a href=3D"mailto:dunlapg@umich.edu" target=3D"_blank">dunlap=
-g@umich.edu</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><span c=
-lass=3D"">On Sun, Dec 17, 2017 at 3:53 PM, Andreas Pflug<br>
-&lt;<a href=3D"mailto:pgadmin@pse-consulting.de">pgadmin@pse-consulting.de<=
-/a>&gt; wrote:<br>
-&gt; Still experiencing data corruption when migrating 3.16 VMs from one ho=
-st<br>
-&gt; to another...<br>
-&gt; Seems independent of Xen version or storage backend.<br>
-&gt;<br>
-&gt; Regards<br>
-&gt; Andreas<br>
-&gt;<br>
-&gt; Am 13.12.17 um 09:12 schrieb Andreas Pflug:<br>
-&gt;&gt; Recently, I encountered file system data corruption on several sys=
-tems<br>
-&gt;&gt; after a migration (ext4, xfs, zfs). So far, I haven&#39;t been abl=
-e to nail<br>
-&gt;&gt; down the cause for it.<br>
-&gt;&gt;<br>
-&gt;&gt; All VMs affected run Debian Jessie with 3.16 kernel. Possibly newe=
-r 3.16<br>
-&gt;&gt; kernels are more likely to suffer corruption.<br>
-&gt;&gt;<br>
-&gt;&gt; This happened on a Xen 4.1 cluster (yes, really old) using a SAN s=
-torage<br>
-&gt;&gt; system, but also on a Xen 4.8 cluster with DRBD mirroring. All sys=
-tems<br>
-&gt;&gt; are working for &gt;&gt;1 year now, only recently those filesystem=
- corruption<br>
-&gt;&gt; started to happen. Data blocks seem to get randomly garbled.<br>
-&gt;&gt;<br>
-&gt;&gt; Migration of Debian Stretch or Windows VMs didn&#39;t show any ano=
-malies so far.<br>
-&gt;&gt;<br>
-&gt;&gt; Can anyone shed some light on this?<br>
-<br>
-</span>Thanks for the report -- cc&#39;ing a few random people who know mor=
-e<br>
-about the block layer / Debian kernels.<br>
-<br>
-It seems Debian Jessie 3.16 kernel was experiencing corruption on<br>
-migration, but not the Debian Stretch kernel or Windows VMs.=C2=A0 That<br>
-sounds like a bug in the Debian kernel; any ideas about what patch may<br>
-be worth backporting / any steps to help further investigate the<br>
-source of the problems?<br>
-<br>
-Thanks,<br>
-=C2=A0-George<br>
-<div class=3D"HOEnZb"><div class=3D"h5"><br>
-______________________________<wbr>_________________<br>
-Xen-users mailing list<br>
-<a href=3D"mailto:Xen-users@lists.xenproject.org">Xen-users@lists.xenprojec=
-t.org</a><br>
-<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-users" rel=3D"=
-noreferrer" target=3D"_blank">https://lists.xenproject.org/<wbr>mailman/lis=
-tinfo/xen-users</a></div></div></blockquote></div><br></div>
-
---001a11c15518e98d380560af633c--
-
-
---===============4561084563634927415==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4561084563634927415==--
+T24gMTIvMTkvMjAxNyAxMDo0MiBBTSwgU3RldmVuIEhhaWdoIHdyb3RlOgo+IE9uIFR1ZXNkYXks
+IDE5IERlY2VtYmVyIDIwMTcgNzo0NzoxNCBQTSBBRURUIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+
+PiBPbiAxOS4xMi4xNyBhdCAwNzo1OCwgPGpncm9zc0BzdXNlLmNvbT4gd3JvdGU6Cj4+PiBNeSBw
+cm9wb3NhbCBhZGRyZXNzZXMgdGhlIDQuMTAgZXhwZXJpZW5jZS4gSSBzZWUgdGhlIGZvbGxvd2lu
+Zwo+Pj4gYWx0ZXJuYXRpdmVzIChhc3N1bWluZyB3ZSB3YW50IHRvIGtlZXAgdGhlIHR3byByZWxl
+YXNlcyBwZXIgeWVhcgo+Pj4gc2NoZW1lKToKPj4+Cj4+PiAxLiBMZWF2ZSBldmVyeXRoaW5nIGFz
+IGlzCj4+Pgo+Pj4gICAgUHJvOiBzZWVtcyB0byB3b3JrIGZvciB0aGUgSnVuZSByZWxlYXNlCj4+
+PiAgICBDb246IHJlbGVhc2UgZGF0ZSBmb3IgdGhlIERlY2VtYmVyIHJlbGVhc2UgaXMgcmlza3kK
+Pj4+Cj4+PiAyLiBNb3ZlIHJlbGVhc2VzIG9uZSBtb250aCBlYXJsaWVyLCBmcmVlemUgZGF0ZXMg
+YXMgd2VsbCAobXkgcHJvcG9zYWwpCj4+Pgo+Pj4gICAgUHJvOiBtb3JlIHRpbWUgZm9yIHJlbGVh
+c2UgYXQgZW5kIG9mIHRoZSB5ZWFyCj4+PiAgICBDb246IGZyZWV6ZSBkYXRlIGVuZCBvZiBGZWJy
+dWFyeSBhdCBlbmQgb2YgQ2hpbmVzZSBOZXcgWWVhciBob2xpZGF5cwo+Pj4gICAgCj4+PiAgICAg
+ICAgIGluIHNvbWUgeWVhcnMgKDIwMTggbm90IGFwcGxpY2FibGUsIGFzIHdlIHdvdWxkIG1vdmUg
+dGhhdAo+Pj4gICAgICAgICByZWxlYXNlIGJ5IDIgd2Vla3Mgb25seSwgc28gbmV4dCB0aW1lIHRo
+aXMgd2lsbCByZWFsbHkgaGl0IHVzCj4+PiAgICAgICAgIHdpbGwgYmUgMjAyNiwgbWF5YmUgYSBs
+aXR0bGUgYml0IGluIDIwMjEpCj4+Pgo+Pj4gMy4gTW92ZSByZWxlYXNlcyBvbmUgbW9udGggZWFy
+bGllciwgZnJlZXplIGRhdGVzIGJlZm9yZSBob2xpZGF5cwo+Pj4KPj4+ICAgIFBybzogZGV2ZWxv
+cGVycyB3b24ndCBoYXZlIHRvIGxldCBmZWF0dXJlIHNsaXAgZHVlIHRvIGhvbGlkYXkKPj4+ICAg
+IENvbjogc2hvcnRlciBkZXZlbG9wbWVudCB0aW1lIGZvciBfYWxsXyBkZXZlbG9wZXJzCj4+Pgo+
+Pj4gNC4gS2VlcCB0aGUgSnVuZSByZWxlYXNlIGxpa2UgdG9kYXksIG1vdmUgdGhlIERlY2VtYmVy
+IHJlbGVhc2UgMiBvciA0Cj4+Pgo+Pj4gICAgd2Vla3MgZWFybGllcgo+Pj4gICAgUHJvOiBhbGwg
+UHJvcyBvZiAxLTMKPj4+ICAgIENvbjogZXZlcnkgc2Vjb25kIHJlbGVhc2Ugd2lsbCBoYXZlIHNo
+b3J0ZXIgZGV2ZWxvcG1lbnQgY3ljbGUKPj4KPj4gNS4gR28gdG8gYSB5ZWFybHkgcmVsZWFzZSBj
+eWNsZSwgd2l0aCBKdW5lIGFzIGV4cGVjdGVkIHJlbGVhc2UgZGF0ZS4KPj4gQXQgdGhlIHJpc2sg
+b2YgKHN0aWxsKSBiZWluZyB0aGUgb25seSBvbmUgdG8gZGlzbGlrZSB0aGUgNi1tb250aCBjeWNs
+ZSwKPj4gSSBoYXZlIHRvIHNheSB0aGF0IHRoZXJlLCBhdCB0aGUgbW9tZW50LCBiZWluZyA0IGFj
+dGl2ZWx5IG1haW50YWluZWQKPj4gc3RhYmxlIGJyYW5jaGVzIGFuZCA2IHNlY3VyaXR5IG1haW50
+YWluZWQgb25lcyBpcyAtIGp1c3QgbGlrZSBJIGRpZAo+PiBhbnRpY2lwYXRlIGJhY2sgd2hlbiB3
+ZSBkaXNjdXNzZWQgdGhlIHNob3J0ZW5pbmcgb2YgdGhlIGN5Y2xlIC0gYQo+PiBzaWduaWZpY2Fu
+dCBidXJkZW4uIEFuZCB3ZSBoYXZlbid0IGV2ZW4gcmVhY2hlZCB0aGUgcG9pbnQgeWV0Cj4+IHdo
+ZXJlIGFsbCBzZWN1cml0eSBtYWludGFpbmVkIGJyYW5jaGVzIGFyZSBmcm9tIHRoZSA2LW1vbnRo
+IGN5Y2xlLgo+IAo+IEkndmUgZ290dGEgYWdyZWUgaGVyZSAtIEkndmUgYWxyZWFkeSBiZWVuIHNr
+aXBwaW5nIHJlbGVhc2VzIHRvIGtlZXAgdXAuIDQuOCAKPiB3YXMgYSBjb21wbGV0ZSBub24tc3Rh
+cnRlciBmb3IgbWUsIGFuZCA0LjEwIG1pZ2h0IGJlIHRoZSBzYW1lLiBJdHMgZXhoYXVzdGluZy4K
+CkZXSVcgdGhlIENlbnRPUyBWaXJ0IFNJRyBoYWQgYWxyZWFkeSBkZWNpZGVkIHRvIG9ubHkgY29u
+c2lkZXIgdXBkYXRpbmcKZXZlcnkgb3RoZXIgcmVsZWFzZSwgYmFjayB3aGVuIHRoZSByZWxlYXNl
+IGNhZGVuY2Ugd2FzIDkgbW9udGhzIChsZWF2aW5nCmEgeWVhciBhbmQgYSBoYWxmIGJldHdlZW4g
+dXBncmFkZXMpLgoKQnV0IG9mIGNvdXJzZSwgdGhhdCdzIGluIHBhcnQgIGJlY2F1c2UgQ2VudE9T
+IGlzIG1lYW50IHRvIGJlICJzdG9kZ3kgYW5kCnJlbGlhYmxlIi4gIEZlZG9yYSBhbmQgVWJ1bnR1
+LCBmb3IgaW5zdGFuY2UsIGhhdmUgNi1tb250aCByZWxlYXNlCmN5Y2xlcy4gIEl0IGxvb2tzIGxp
+a2UgVWJ1bnR1IDE3LjEwIGhhcyBYZW4gNC45IGluIGl0OyBhbmQgdGhlcmUncyBubwpyZWFzb24g
+dG8gdGhpbmsgVWJ1bnR1IDE4LjA0IExUUyB3b24ndCBoYXZlIDQuMTAgaW4gaXQuCgpTdGV2ZW4s
+IHdoZW4gSSBnbGFuY2VkIGF0IHlvdXIgc2l0ZSBpdCBsb29rZWQgbGlrZSB5b3UncmUgYWN0aXZl
+bHkKc3VwcG9ydGluZyBhbGwgdmVyc2lvbnMgb2YgWGVuIHlvdSd2ZSBldmVyIHJlbGVhc2VkIC0t
+IGlzIHRoYXQgcmlnaHQ/CklmIHNvIGl0J3MgYSBsb3QgbW9yZSB3b3JrIHRoYW4gSSB0aGluayBh
+bnlvbmUgZWxzZSBpcyBkb2luZy4gOi0pCgogLUdlb3JnZQoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
