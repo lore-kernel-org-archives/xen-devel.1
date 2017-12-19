@@ -1,20 +1,11 @@
-From: Eduardo Habkost <ehabkost@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH V5] pci: removed the is_express
- field since a uniform interface was inserted
-Date: Tue, 19 Dec 2017 14:42:18 -0200
-Message-ID: <20171219164218.GB4836@localhost.localdomain>
-References: <20171218152140.17985-1-ybettan@redhat.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 117339: tolerable all pass -
+	PUSHED
+Date: Tue, 19 Dec 2017 16:55:53 +0000
+Message-ID: <osstest-117339-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5390475362556144404=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=qjqi=dp=redhat.com=ehabkost@srs-us1.protection.inumbo.net>)
- id 1eRKyT-0001Xd-3J
- for xen-devel@lists.xenproject.org; Tue, 19 Dec 2017 16:42:37 +0000
-Content-Disposition: inline
-In-Reply-To: <20171218152140.17985-1-ybettan@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,24 +14,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Yoni Bettan <ybettan@redhat.com>
-Cc: Kevin Wolf <kwolf@redhat.com>, Hannes Reinecke <hare@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, "open list:nvme" <qemu-block@nongnu.org>, "Michael S. Tsirkin" <mst@redhat.com>, Marcel Apfelbaum <marcel@redhat.com>, Jason Wang <jasowang@redhat.com>, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, Keith Busch <keith.busch@intel.com>, Anthony Perard <anthony.perard@citrix.com>, Alex Williamson <alex.williamson@redhat.com>, Paul Burton <paul.burton@mips.com>, Paolo Bonzini <pbonzini@redhat.com>, Dmitry Fleytman <dmitry@daynix.com>, "open list:X86" <xen-devel@lists.xenproject.org>, Gerd Hoffmann <kraxel@redhat.com>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBEZWMgMTgsIDIwMTcgYXQgMDU6MjE6NDBQTSArMDIwMCwgWW9uaSBCZXR0YW4gd3Jv
-dGU6Cj4gYWNjb3JkaW5nIHRvIEVkdWFyZG8gSGFia29zdCdzIGNvbW1pdCBmZDNiMDJjODg5IGFs
-bCBQQ0lFcyBub3cgaW1wbGVtZW50Cj4gSU5URVJGQUNFX1BDSUVfREVWSUNFIHNvIHdlIGRvbid0
-IG5lZWQgaXNfZXhwcmVzcyBmaWVsZCBhbnltb3JlLgo+IAo+IERldmljZXMgdGhhdCBpbXBsZW1l
-bnRzIG9ubHkgSU5URVJGQUNFX1BDSUVfREVWSUNFIChpc19leHByZXNzID09IDEpCj4gb3IKPiBk
-ZXZpY2VzIHRoYXQgaW1wbGVtZW50cyBvbmx5IElOVEVSRkFDRV9DT05WRU5USU9OQUxfUENJX0RF
-VklDRSAoaXNfZXhwcmVzcyA9PSAwKQo+IHdoZXJlIG5vdCBhZmZlY3RlZCBieSB0aGUgY2hhbmdl
-Lgo+IAo+IFRoZSBvbmx5IGRldmljZXMgdGhhdCB3ZXJlIGFmZmVjdGVkIGFyZSB0aG9zZSB0aGF0
-IGFyZSBoeWJyaWQgYW5kIGFsc28KPiBoYWQgKGlzX2V4cHJlc3MgPT0gMSkgLSB0aGVyZWZvciBv
-bmx5Ogo+ICAgLSBody92ZmlvL3BjaS5jCj4gICAtIGh3L3VzYi9oY2QteGhjaS5jCj4gICAtIGh3
-L3hlbi94ZW5fcHQuYwo+IAo+IEZvciB0aG9zZSAzIEkgbWFkZSBzdXJlIHRoYXQgUUVNVV9QQ0lf
-Q0FQX0VYUFJFU1MgaXMgb24gaW4gaW5zdGFuY2VfaW5pdCgpCj4gCj4gU2lnbmVkLW9mZi1ieTog
-WW9uaSBCZXR0YW4gPHliZXR0YW5AcmVkaGF0LmNvbT4KClJldmlld2VkLWJ5OiBFZHVhcmRvIEhh
-Ymtvc3QgPGVoYWJrb3N0QHJlZGhhdC5jb20+CgotLSAKRWR1YXJkbwoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============5390475362556144404==
+Content-Type: text/plain
+
+flight 117339 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117339/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  1b33150fe06ab9217f7f12b01bc5e607f4f55658
+baseline version:
+ xen                  ec320542e4f4de12305551ef5e3cd4d2ced85771
+
+Last test of basis   117208  2017-12-16 06:21:55 Z    3 days
+Testing same since   117339  2017-12-19 15:02:59 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Ian Jackson <Ian.Jackson@eu.citrix.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To osstest@xenbits.xen.org:/home/xen/git/xen.git
+   ec32054..1b33150  1b33150fe06ab9217f7f12b01bc5e607f4f55658 -> smoke
+
+
+--===============5390475362556144404==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5390475362556144404==--
