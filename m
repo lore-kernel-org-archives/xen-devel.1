@@ -1,19 +1,14 @@
-From: George Dunlap <dunlapg@umich.edu>
-Subject: Re: [Xen-users] Data corruption with xl migrate
-Date: Tue, 19 Dec 2017 10:33:29 +0000
-Message-ID: <CAFLBxZYMWqf5rJQAOh_ZuR+i1q2ESraH08Vx5u=dJNmWJ9zqPw@mail.gmail.com>
-References: <8dd20c44-d4ab-056c-9b9e-bc0f1b85367c@pse-consulting.de>
- <f3192d23-bf33-9377-ca3e-6562c426fa57@pse-consulting.de>
+From: Steven Haigh <netwiz@crc.id.au>
+Subject: Re: Xen release cycle revisited
+Date: Tue, 19 Dec 2017 21:42:34 +1100
+Message-ID: <3091712.73UAgB5JZV@wopr.lan.crc.id.au>
+References: <63cf216a-71af-bd35-55e7-88c69b773e52@suse.com>
+ <9ae5f5ce-85d5-ee68-eef7-36f3026e1c13@suse.com>
+ <5A38E022020000780019858F@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5976514840417281122=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=jkdo=dp=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
- id 1eRFEK-0005dZ-VY
- for xen-devel@lists.xenproject.org; Tue, 19 Dec 2017 10:34:37 +0000
-In-Reply-To: <f3192d23-bf33-9377-ca3e-6562c426fa57@pse-consulting.de>
+In-Reply-To: <5A38E022020000780019858F@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,35 +17,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andreas Pflug <pgadmin@pse-consulting.de>
-Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-users@lists.xenproject.org, xen-devel <xen-devel@lists.xenproject.org>, Joao Martins <joao.m.martins@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+To: xen-devel@lists.xen.org
+Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, George Dunlap <dunlapg@umich.edu>, Julien Grall <julien.grall@linaro.org>, "committers@xenproject.org" <committers@xenproject.org>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gU3VuLCBEZWMgMTcsIDIwMTcgYXQgMzo1MyBQTSwgQW5kcmVhcyBQZmx1Zwo8cGdhZG1pbkBw
-c2UtY29uc3VsdGluZy5kZT4gd3JvdGU6Cj4gU3RpbGwgZXhwZXJpZW5jaW5nIGRhdGEgY29ycnVw
-dGlvbiB3aGVuIG1pZ3JhdGluZyAzLjE2IFZNcyBmcm9tIG9uZSBob3N0Cj4gdG8gYW5vdGhlci4u
-Lgo+IFNlZW1zIGluZGVwZW5kZW50IG9mIFhlbiB2ZXJzaW9uIG9yIHN0b3JhZ2UgYmFja2VuZC4K
-Pgo+IFJlZ2FyZHMKPiBBbmRyZWFzCj4KPiBBbSAxMy4xMi4xNyB1bSAwOToxMiBzY2hyaWViIEFu
-ZHJlYXMgUGZsdWc6Cj4+IFJlY2VudGx5LCBJIGVuY291bnRlcmVkIGZpbGUgc3lzdGVtIGRhdGEg
-Y29ycnVwdGlvbiBvbiBzZXZlcmFsIHN5c3RlbXMKPj4gYWZ0ZXIgYSBtaWdyYXRpb24gKGV4dDQs
-IHhmcywgemZzKS4gU28gZmFyLCBJIGhhdmVuJ3QgYmVlbiBhYmxlIHRvIG5haWwKPj4gZG93biB0
-aGUgY2F1c2UgZm9yIGl0Lgo+Pgo+PiBBbGwgVk1zIGFmZmVjdGVkIHJ1biBEZWJpYW4gSmVzc2ll
-IHdpdGggMy4xNiBrZXJuZWwuIFBvc3NpYmx5IG5ld2VyIDMuMTYKPj4ga2VybmVscyBhcmUgbW9y
-ZSBsaWtlbHkgdG8gc3VmZmVyIGNvcnJ1cHRpb24uCj4+Cj4+IFRoaXMgaGFwcGVuZWQgb24gYSBY
-ZW4gNC4xIGNsdXN0ZXIgKHllcywgcmVhbGx5IG9sZCkgdXNpbmcgYSBTQU4gc3RvcmFnZQo+PiBz
-eXN0ZW0sIGJ1dCBhbHNvIG9uIGEgWGVuIDQuOCBjbHVzdGVyIHdpdGggRFJCRCBtaXJyb3Jpbmcu
-IEFsbCBzeXN0ZW1zCj4+IGFyZSB3b3JraW5nIGZvciA+PjEgeWVhciBub3csIG9ubHkgcmVjZW50
-bHkgdGhvc2UgZmlsZXN5c3RlbSBjb3JydXB0aW9uCj4+IHN0YXJ0ZWQgdG8gaGFwcGVuLiBEYXRh
-IGJsb2NrcyBzZWVtIHRvIGdldCByYW5kb21seSBnYXJibGVkLgo+Pgo+PiBNaWdyYXRpb24gb2Yg
-RGViaWFuIFN0cmV0Y2ggb3IgV2luZG93cyBWTXMgZGlkbid0IHNob3cgYW55IGFub21hbGllcyBz
-byBmYXIuCj4+Cj4+IENhbiBhbnlvbmUgc2hlZCBzb21lIGxpZ2h0IG9uIHRoaXM/CgpUaGFua3Mg
-Zm9yIHRoZSByZXBvcnQgLS0gY2MnaW5nIGEgZmV3IHJhbmRvbSBwZW9wbGUgd2hvIGtub3cgbW9y
-ZQphYm91dCB0aGUgYmxvY2sgbGF5ZXIgLyBEZWJpYW4ga2VybmVscy4KCkl0IHNlZW1zIERlYmlh
-biBKZXNzaWUgMy4xNiBrZXJuZWwgd2FzIGV4cGVyaWVuY2luZyBjb3JydXB0aW9uIG9uCm1pZ3Jh
-dGlvbiwgYnV0IG5vdCB0aGUgRGViaWFuIFN0cmV0Y2gga2VybmVsIG9yIFdpbmRvd3MgVk1zLiAg
-VGhhdApzb3VuZHMgbGlrZSBhIGJ1ZyBpbiB0aGUgRGViaWFuIGtlcm5lbDsgYW55IGlkZWFzIGFi
-b3V0IHdoYXQgcGF0Y2ggbWF5CmJlIHdvcnRoIGJhY2twb3J0aW5nIC8gYW55IHN0ZXBzIHRvIGhl
-bHAgZnVydGhlciBpbnZlc3RpZ2F0ZSB0aGUKc291cmNlIG9mIHRoZSBwcm9ibGVtcz8KClRoYW5r
-cywKIC1HZW9yZ2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============5976514840417281122==
+Content-Type: multipart/signed; boundary="nextPart1911371.vt4kXoLan2"; micalg="pgp-sha256"; protocol="application/pgp-signature"
+
+--nextPart1911371.vt4kXoLan2
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+
+On Tuesday, 19 December 2017 7:47:14 PM AEDT Jan Beulich wrote:
+> >>> On 19.12.17 at 07:58, <jgross@suse.com> wrote:
+> > My proposal addresses the 4.10 experience. I see the following
+> > alternatives (assuming we want to keep the two releases per year
+> > scheme):
+> >=20
+> > 1. Leave everything as is
+> >=20
+> >    Pro: seems to work for the June release
+> >    Con: release date for the December release is risky
+> >=20
+> > 2. Move releases one month earlier, freeze dates as well (my proposal)
+> >=20
+> >    Pro: more time for release at end of the year
+> >    Con: freeze date end of February at end of Chinese New Year holidays
+> >   =20
+> >         in some years (2018 not applicable, as we would move that
+> >         release by 2 weeks only, so next time this will really hit us
+> >         will be 2026, maybe a little bit in 2021)
+> >=20
+> > 3. Move releases one month earlier, freeze dates before holidays
+> >=20
+> >    Pro: developers won't have to let feature slip due to holiday
+> >    Con: shorter development time for _all_ developers
+> >=20
+> > 4. Keep the June release like today, move the December release 2 or 4
+> >=20
+> >    weeks earlier
+> >    Pro: all Pros of 1-3
+> >    Con: every second release will have shorter development cycle
+>=20
+> 5. Go to a yearly release cycle, with June as expected release date.
+> At the risk of (still) being the only one to dislike the 6-month cycle,
+> I have to say that there, at the moment, being 4 actively maintained
+> stable branches and 6 security maintained ones is - just like I did
+> anticipate back when we discussed the shortening of the cycle - a
+> significant burden. And we haven't even reached the point yet
+> where all security maintained branches are from the 6-month cycle.
+
+I've gotta agree here - I've already been skipping releases to keep up. 4.8=
+=20
+was a complete non-starter for me, and 4.10 might be the same. Its exhausti=
+ng.
+
+I'm not sure there are really enough under-the-hood changes to justify a 6=
+=20
+month rapid release cycle.
+
+It adds extra load on the security team, packagers, distro builders etc etc=
+=20
+which could probably be avoided with a sane release cycle.
+
+I would think one release per year + point releases / roll ups with all XSA=
+s=20
+and backported fixes every quarter would be fantastic - as well as a 'maste=
+r'=20
+that people can build off git at will...
+
+=2D-=20
+Steven Haigh
+
+=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB http://www.crc.id.au
+=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
+--nextPart1911371.vt4kXoLan2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAlo47RoACgkQQa811Xp9
+MdzXMw/+P69wudvkjgglQA+ZPWI2IXgLuK8AV9zeFTfTuK5w1iLb17krTLvq7pEr
+87b7JKAYMtE1uQ1zQbA8Q4nBWVJb/R0dO/xM0FtroDeZjpSMvTBRDwiJi7ptmHJD
+DKjXdR/PoG1c17WqgZ88CRKXlNU07i6xaI/32DWyIz8j9pI8qwiNN1APWLU1zf7N
+li6Sj1QVAskWeU84sAYHWoMJkfubsPXKDIr1oCu0pEnz3G9SqG8+e+BVlc0SboZ8
+Tm+QAG8L8f5Ai1az80Q1AXl5sOiRapcDm7+hTPMYA9hAQsmGav8XvLKSaW81ePg+
+SCKykj+xZ3XOcY4nbwbu19Bz85T3eezHWcX2mZKivtiA9h0GKL06+5/MXo5kkZl+
+WVLUdfjSk0/l9NCaXdrAXlkE9EuecfNAvLjuc02dtyrlgHENwFOcil7e9m1Kv3Mr
+czp/coJVpcQ1CeHCaYHgVWHaaP33kOOKZYdPXw6Rz7cpcbLMkUCa7vGrKTvkYD7l
+3XyHAUBHKGlkc/arbAvx+dN6kggdVz2oIL6SU8ctK9UZV3IvFRf14bagD/kT9Bmu
+DYFUwogWXoUtsi7W5n3P16wBMtDHOrJjqF3Nfa237n1UICXN0NQw0t5RMoLM0cOC
+hqMYpqVmj8+wrjjRIzw74ggY9BGQX3FSndu51OUycrt44LFUH/o=
+=2Z5X
+-----END PGP SIGNATURE-----
+
+--nextPart1911371.vt4kXoLan2--
+
+
+
+
+
+--===============5976514840417281122==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5976514840417281122==--
