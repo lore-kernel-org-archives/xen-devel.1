@@ -1,19 +1,10 @@
-From: Steven Haigh <netwiz@crc.id.au>
-Subject: Re: Xen release cycle revisited
-Date: Tue, 19 Dec 2017 23:25:39 +1100
-Message-ID: <5204240.rhRYlsoWYG@wopr.lan.crc.id.au>
-References: <63cf216a-71af-bd35-55e7-88c69b773e52@suse.com>
- <3091712.73UAgB5JZV@wopr.lan.crc.id.au>
- <113051ed-cdd5-cf4d-374b-6e29efb79a7e@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [qemu-mainline test] 117276: regressions - FAIL
+Date: Tue, 19 Dec 2017 12:46:57 +0000
+Message-ID: <osstest-117276-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0207456798680248316=="
+Content-Type: multipart/mixed; boundary="===============3456480466849656580=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=jtcn=dp=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
- id 1eRGxu-00068N-2P
- for xen-devel@lists.xenproject.org; Tue, 19 Dec 2017 12:25:46 +0000
-In-Reply-To: <113051ed-cdd5-cf4d-374b-6e29efb79a7e@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,142 +13,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, George Dunlap <dunlapg@umich.edu>, Julien Grall <julien.grall@linaro.org>, xen-devel@lists.xen.org, "committers@xenproject.org" <committers@xenproject.org>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0207456798680248316==
-Content-Type: multipart/signed; boundary="nextPart2800510.cViNDkOHev"; micalg="pgp-sha256"; protocol="application/pgp-signature"
+--===============3456480466849656580==
+Content-Type: text/plain
 
---nextPart2800510.cViNDkOHev
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
+flight 117276 qemu-mainline real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117276/
 
-On Tuesday, 19 December 2017 10:44:04 PM AEDT George Dunlap wrote:
-> On 12/19/2017 10:42 AM, Steven Haigh wrote:
-> > On Tuesday, 19 December 2017 7:47:14 PM AEDT Jan Beulich wrote:
-> >>>>> On 19.12.17 at 07:58, <jgross@suse.com> wrote:
-> >>> My proposal addresses the 4.10 experience. I see the following
-> >>> alternatives (assuming we want to keep the two releases per year
-> >>> scheme):
-> >>>=20
-> >>> 1. Leave everything as is
-> >>>=20
-> >>>    Pro: seems to work for the June release
-> >>>    Con: release date for the December release is risky
-> >>>=20
-> >>> 2. Move releases one month earlier, freeze dates as well (my proposal)
-> >>>=20
-> >>>    Pro: more time for release at end of the year
-> >>>    Con: freeze date end of February at end of Chinese New Year holida=
-ys
-> >>>   =20
-> >>>         in some years (2018 not applicable, as we would move that
-> >>>         release by 2 weeks only, so next time this will really hit us
-> >>>         will be 2026, maybe a little bit in 2021)
-> >>>=20
-> >>> 3. Move releases one month earlier, freeze dates before holidays
-> >>>=20
-> >>>    Pro: developers won't have to let feature slip due to holiday
-> >>>    Con: shorter development time for _all_ developers
-> >>>=20
-> >>> 4. Keep the June release like today, move the December release 2 or 4
-> >>>=20
-> >>>    weeks earlier
-> >>>    Pro: all Pros of 1-3
-> >>>    Con: every second release will have shorter development cycle
-> >>=20
-> >> 5. Go to a yearly release cycle, with June as expected release date.
-> >> At the risk of (still) being the only one to dislike the 6-month cycle,
-> >> I have to say that there, at the moment, being 4 actively maintained
-> >> stable branches and 6 security maintained ones is - just like I did
-> >> anticipate back when we discussed the shortening of the cycle - a
-> >> significant burden. And we haven't even reached the point yet
-> >> where all security maintained branches are from the 6-month cycle.
-> >=20
-> > I've gotta agree here - I've already been skipping releases to keep up.
-> > 4.8
-> > was a complete non-starter for me, and 4.10 might be the same. Its
-> > exhausting.
-> FWIW the CentOS Virt SIG had already decided to only consider updating
-> every other release, back when the release cadence was 9 months (leaving
-> a year and a half between upgrades).
+Regressions :-(
 
-Understandable.
-=20
-> But of course, that's in part  because CentOS is meant to be "stodgy and
-> reliable".  Fedora and Ubuntu, for instance, have 6-month release
-> cycles.  It looks like Ubuntu 17.10 has Xen 4.9 in it; and there's no
-> reason to think Ubuntu 18.04 LTS won't have 4.10 in it.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-armhf-armhf-xl-cubietruck  6 xen-install            fail REGR. vs. 117236
+ test-armhf-armhf-xl-credit2 16 guest-start/debian.repeat fail REGR. vs. 117236
 
-Agreed - but things like Fedora evolve pretty rapidly. I'm not sure Xen is =
-in=20
-the same rapid development model - so I don't think we should follow suit i=
-n=20
-this. It would be more than reasonable to have, say, Xen 4.10.0 in one vers=
-ion=20
-of Fedora - and 4.10.2 in the next...
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 117236
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 117236
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 117236
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 117236
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 117236
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 117236
+ test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop              fail never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
 
-> Steven, when I glanced at your site it looked like you're actively
-> supporting all versions of Xen you've ever released -- is that right?
-> If so it's a lot more work than I think anyone else is doing. :-)
+version targeted for testing:
+ qemuu                411ad78115ebeb3411cf4b7622784b93dfabe259
+baseline version:
+ qemuu                38d1b31e0501f938db39c5b2e508328530410246
 
-Correct. The only versions I don't support are EOL'ed versions and 4.8 - wh=
-ich=20
-I skipped due to workload.
+Last test of basis   117236  2017-12-17 04:28:20 Z    2 days
+Testing same since   117276  2017-12-18 10:27:59 Z    1 days    1 attempts
 
-This means the current build list is 4.5, 4.6, 4.7, 4.9 for both EL6 and EL=
-7.
+------------------------------------------------------------
+People who touched revisions under test:
+  Marc-André Lureau <marcandre.lureau@redhat.com>
+  Peter Maydell <peter.maydell@linaro.org>
+  Stefan Berger <stefanb@linux.vnet.ibm.com>
 
-4.2 and 4.4 got EOL'ed a while back and I don't make them available anymore.
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  fail    
+ test-armhf-armhf-xl-cubietruck                               fail    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
-If I didn't miss a 4.8 and already had 4.10 out the door, then I'd be=20
-publishing 4.5, 4.6, 4.7, 4.8, 4.9 and 4.10. I'm not sure if that's feasibl=
-e=20
-for anyone - let alone how it'd be managed effectively by the security team!
 
-=46or me personally, December release dates for builds is horrible - so its=
-=20
-likely just about any December release would be on the ignore list - hence =
-I=20
-feel a single yearly release in July (+/- up to 2 months) would be fine as =
-a=20
-target.
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-=2D-=20
-Steven Haigh
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB http://www.crc.id.au
-=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
---nextPart2800510.cViNDkOHev
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAlo5BUMACgkQQa811Xp9
-MdwCzg//aNNxh+o1rkr05JArTzWDIBEe1GfAUg2cOUW3PPb/tQ+o/JGSwPJLZHiX
-joya+AKGdG40V32wCUQ86x8SlVLGj2IwapZNFrXVOWqb25m/JNBJZ2WRTHPicA95
-o1eg91AcUZ2Y6w9XvR7/Ym+2y/daOXUcQXnBbmxaYLYDmKIEkXKM7A65b5RDGpmf
-A90uUZcEyK2aY5Er6tWh9GccNpXIkPbS9LmhNojAP44hGYWQ2x0a4zFwaHLniY5D
-g/odyo/lsDEBP0WylfeeDhEtNsjIKD3lGmwL7uINwUyCoApXTPGJvKJhbnsPlJmU
-PCBJsolhwAeqNKuX5DjD6jivx6PYbUaM3GMfMiRG806rdusNLXunQHIn2I10HJOb
-e8AWl6Vx8ckQWzXxRIN4gSeMoQsDvACSJmec5JKO0eJ5U2pF+ROegkO8V6G0WflC
-kdMGATsfg3iDzMZcbtwxeao1PzAGfsnzpNevIsmRdrcLQBAG42UjrnMfZeiThNqU
-TGpcU46GIRtORcfT0wbHH8UgW1LKNrg5kY7+Cmwtr7XA3gx1XlaV3MifjeFU/c6P
-SbRadz/L4FAsV5cfUUJOttw47phwgixTjcPsHZ3MOVbsx/QCRudR7xRJg8A+WV66
-yL8lKOKYVg1JXAgk1izXmHgXXm8GLev+99Pxs01puTCA5Tcvrh4=
-=vPkO
------END PGP SIGNATURE-----
-
---nextPart2800510.cViNDkOHev--
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
+Not pushing.
+
+(No revision log; it would be 454 lines long.)
 
 
-
---===============0207456798680248316==
+--===============3456480466849656580==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -167,4 +197,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============0207456798680248316==--
+--===============3456480466849656580==--
