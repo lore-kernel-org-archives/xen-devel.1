@@ -1,18 +1,19 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2] xen/balloon: Mark unallocated host
- memory as UNUSABLE
-Date: Tue, 19 Dec 2017 11:08:25 +0100
-Message-ID: <334c80f2-92a6-7e24-8cf1-c6472194f813__33340.1872231208$1513678055$gmane$org@suse.com>
-References: <1513635771-11779-1-git-send-email-boris.ostrovsky@oracle.com>
- <5A38DA840200007800198579@suse.com>
- <d84d3fa6-f4f3-7312-b5c0-0e774742af95@suse.com>
- <5A38E9A502000078001985CF@suse.com>
+From: George Dunlap <dunlapg@umich.edu>
+Subject: Re: [Xen-users] Data corruption with xl migrate
+Date: Tue, 19 Dec 2017 10:33:29 +0000
+Message-ID: <CAFLBxZYMWqf5rJQAOh_ZuR+i1q2ESraH08Vx5u=dJNmWJ9zqPw@mail.gmail.com>
+References: <8dd20c44-d4ab-056c-9b9e-bc0f1b85367c@pse-consulting.de>
+ <f3192d23-bf33-9377-ca3e-6562c426fa57@pse-consulting.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A38E9A502000078001985CF@suse.com>
-Content-Language: de-DE
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=jkdo=dp=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
+ id 1eRFEK-0005dZ-VY
+ for xen-devel@lists.xenproject.org; Tue, 19 Dec 2017 10:34:37 +0000
+In-Reply-To: <f3192d23-bf33-9377-ca3e-6562c426fa57@pse-consulting.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,25 +22,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: linux-kernel@vger.kernel.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, helgaas@kernel.org, christian.koenig@amd.com, xen-devel@lists.xen.org
+To: Andreas Pflug <pgadmin@pse-consulting.de>
+Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-users@lists.xenproject.org, xen-devel <xen-devel@lists.xenproject.org>, Joao Martins <joao.m.martins@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTkvMTIvMTcgMTA6MjcsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDE5LjEyLjE3IGF0
-IDEwOjIxLCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4gT24gMTkvMTIvMTcgMDk6MjMsIEph
-biBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4gT24gMTguMTIuMTcgYXQgMjM6MjIsIDxib3Jpcy5vc3Ry
-b3Zza3lAb3JhY2xlLmNvbT4gd3JvdGU6Cj4+Pj4gK3ZvaWQgX19pbml0IGFyY2hfeGVuX2JhbGxv
-b25faW5pdChzdHJ1Y3QgcmVzb3VyY2UgKmhvc3RtZW1fcmVzb3VyY2UpCj4+Pj4gK3sKPj4+PiAr
-CXN0cnVjdCB4ZW5fbWVtb3J5X21hcCBtZW1tYXA7Cj4+Pj4gKwlpbnQgcmM7Cj4+Pj4gKwl1bnNp
-Z25lZCBpbnQgaSwgbGFzdF9ndWVzdF9yYW07Cj4+Pj4gKwlwaHlzX2FkZHJfdCBtYXhfYWRkciA9
-IG1heF9wZm4gPDwgUEFHRV9TSElGVDsKPj4+Cj4+PiBQRk5fUEhZUygpIGFzIHJpZ2h0IG5vdyB5
-b3Ugc3RpbGwgaGF2ZSBhbiBpc3N1ZSBvbiAzMi1iaXQuCj4+Cj4+IFdoeT8gUEZOX1BIWVMgaXMg
-ZGVmaW5lZCBhczoKPj4KPj4gI2RlZmluZSBQRk5fUEhZUyh4KSAoKHBoeXNfYWRkcl90KSh4KSA8
-PCBQQUdFX1NISUZUKQo+IAo+IFdlbGwsIHRoYXQncyB3aHkgSSBzdWdnZXN0ZWQgaXRzIHVzZSAo
-anVzdCBsaWtlIHlvdSBkaWQgaW4geW91cgo+IG93biByZXZpZXcpLiBJT1cgLSBub3cgSSdtIGNv
-bmZ1c2VkLgoKU29ycnksIGp1c3QgZ290IHlvdXIgYW5zd2VyIHdyb25nLgoKQXMgSSBoYWQgYWxy
-ZWFkeSBmb3VuZCB0aGUgc2FtZSBpc3N1ZSBzb21laG93IEkgYXNzdW1rZWQgdGhpcyByZW1hcmsK
-d291bGQgYmUgcmVmZXJlbmNpbmcgbXkgcmV2aWV3LiBTb3JyeSBmb3IgdGhlIG5vaXNlLgoKCkp1
-ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gU3VuLCBEZWMgMTcsIDIwMTcgYXQgMzo1MyBQTSwgQW5kcmVhcyBQZmx1Zwo8cGdhZG1pbkBw
+c2UtY29uc3VsdGluZy5kZT4gd3JvdGU6Cj4gU3RpbGwgZXhwZXJpZW5jaW5nIGRhdGEgY29ycnVw
+dGlvbiB3aGVuIG1pZ3JhdGluZyAzLjE2IFZNcyBmcm9tIG9uZSBob3N0Cj4gdG8gYW5vdGhlci4u
+Lgo+IFNlZW1zIGluZGVwZW5kZW50IG9mIFhlbiB2ZXJzaW9uIG9yIHN0b3JhZ2UgYmFja2VuZC4K
+Pgo+IFJlZ2FyZHMKPiBBbmRyZWFzCj4KPiBBbSAxMy4xMi4xNyB1bSAwOToxMiBzY2hyaWViIEFu
+ZHJlYXMgUGZsdWc6Cj4+IFJlY2VudGx5LCBJIGVuY291bnRlcmVkIGZpbGUgc3lzdGVtIGRhdGEg
+Y29ycnVwdGlvbiBvbiBzZXZlcmFsIHN5c3RlbXMKPj4gYWZ0ZXIgYSBtaWdyYXRpb24gKGV4dDQs
+IHhmcywgemZzKS4gU28gZmFyLCBJIGhhdmVuJ3QgYmVlbiBhYmxlIHRvIG5haWwKPj4gZG93biB0
+aGUgY2F1c2UgZm9yIGl0Lgo+Pgo+PiBBbGwgVk1zIGFmZmVjdGVkIHJ1biBEZWJpYW4gSmVzc2ll
+IHdpdGggMy4xNiBrZXJuZWwuIFBvc3NpYmx5IG5ld2VyIDMuMTYKPj4ga2VybmVscyBhcmUgbW9y
+ZSBsaWtlbHkgdG8gc3VmZmVyIGNvcnJ1cHRpb24uCj4+Cj4+IFRoaXMgaGFwcGVuZWQgb24gYSBY
+ZW4gNC4xIGNsdXN0ZXIgKHllcywgcmVhbGx5IG9sZCkgdXNpbmcgYSBTQU4gc3RvcmFnZQo+PiBz
+eXN0ZW0sIGJ1dCBhbHNvIG9uIGEgWGVuIDQuOCBjbHVzdGVyIHdpdGggRFJCRCBtaXJyb3Jpbmcu
+IEFsbCBzeXN0ZW1zCj4+IGFyZSB3b3JraW5nIGZvciA+PjEgeWVhciBub3csIG9ubHkgcmVjZW50
+bHkgdGhvc2UgZmlsZXN5c3RlbSBjb3JydXB0aW9uCj4+IHN0YXJ0ZWQgdG8gaGFwcGVuLiBEYXRh
+IGJsb2NrcyBzZWVtIHRvIGdldCByYW5kb21seSBnYXJibGVkLgo+Pgo+PiBNaWdyYXRpb24gb2Yg
+RGViaWFuIFN0cmV0Y2ggb3IgV2luZG93cyBWTXMgZGlkbid0IHNob3cgYW55IGFub21hbGllcyBz
+byBmYXIuCj4+Cj4+IENhbiBhbnlvbmUgc2hlZCBzb21lIGxpZ2h0IG9uIHRoaXM/CgpUaGFua3Mg
+Zm9yIHRoZSByZXBvcnQgLS0gY2MnaW5nIGEgZmV3IHJhbmRvbSBwZW9wbGUgd2hvIGtub3cgbW9y
+ZQphYm91dCB0aGUgYmxvY2sgbGF5ZXIgLyBEZWJpYW4ga2VybmVscy4KCkl0IHNlZW1zIERlYmlh
+biBKZXNzaWUgMy4xNiBrZXJuZWwgd2FzIGV4cGVyaWVuY2luZyBjb3JydXB0aW9uIG9uCm1pZ3Jh
+dGlvbiwgYnV0IG5vdCB0aGUgRGViaWFuIFN0cmV0Y2gga2VybmVsIG9yIFdpbmRvd3MgVk1zLiAg
+VGhhdApzb3VuZHMgbGlrZSBhIGJ1ZyBpbiB0aGUgRGViaWFuIGtlcm5lbDsgYW55IGlkZWFzIGFi
+b3V0IHdoYXQgcGF0Y2ggbWF5CmJlIHdvcnRoIGJhY2twb3J0aW5nIC8gYW55IHN0ZXBzIHRvIGhl
+bHAgZnVydGhlciBpbnZlc3RpZ2F0ZSB0aGUKc291cmNlIG9mIHRoZSBwcm9ibGVtcz8KClRoYW5r
+cywKIC1HZW9yZ2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
