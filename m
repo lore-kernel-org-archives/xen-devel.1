@@ -1,8 +1,7 @@
 From: Sameer Goel <sameer.goel@linaro.org>
-Subject: [RFC v4 7/8] xen/smmu: Add a new config define for
-	legacy SMMU
-Date: Mon, 18 Dec 2017 20:17:02 -0700
-Message-ID: <20171219031703.23420-8-sameer.goel@linaro.org>
+Subject: [RFC v4 1/8] Port WARN_ON_ONCE() from Linux
+Date: Mon, 18 Dec 2017 20:16:56 -0700
+Message-ID: <20171219031703.23420-2-sameer.goel@linaro.org>
 References: <20171219031703.23420-1-sameer.goel@linaro.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,10 +10,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=ximu=dp=linaro.org=sameer.goel@srs-us1.protection.inumbo.net>)
- id 1eR8PF-0006cA-Su
- for xen-devel@lists.xenproject.org; Tue, 19 Dec 2017 03:17:25 +0000
-Received: by mail-pl0-x244.google.com with SMTP id bi12so6149690plb.6
- for <xen-devel@lists.xenproject.org>; Mon, 18 Dec 2017 19:17:24 -0800 (PST)
+ id 1eR8P2-0006aG-UC
+ for xen-devel@lists.xenproject.org; Tue, 19 Dec 2017 03:17:12 +0000
+Received: by mail-pf0-x244.google.com with SMTP id y89so10605546pfk.0
+ for <xen-devel@lists.xenproject.org>; Mon, 18 Dec 2017 19:17:11 -0800 (PST)
 In-Reply-To: <20171219031703.23420-1-sameer.goel@linaro.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,29 +24,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, julien.grall@arm.com, mjaggi@caviumnetworks.com
-Cc: sstabellini@kernel.org, shankerd@codeaurora.org, andre.przywara@linaro.org, Sameer Goel <sameer.goel@linaro.org>
+Cc: sstabellini@kernel.org, wei.liu2@citrix.com, george.dunlap@eu.citrix.com, Andrew.Cooper3@citrix.com, andre.przywara@linaro.org, jbeulich@suse.com, Sameer Goel <sameer.goel@linaro.org>, Ian.Jackson@citrix.com, nd@arm.com, shankerd@codeaurora.org
 List-Id: xen-devel@lists.xenproject.org
 
-QWRkIGEgbmV3IGNvbmZpZyBpdGVtIHRvIGNvbnRyb2wgY29tcGlsYXRpb24gZm9yIGxlZ2FjeSBh
-cm0gU01NVS4KClNpZ25lZC1vZmYtYnk6IFNhbWVlciBHb2VsIDxzYW1lZXIuZ29lbEBsaW5hcm8u
-b3JnPgotLS0KIHhlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FybS9LY29uZmlnICB8IDYgKysrKysr
-CiB4ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9hcm0vTWFrZWZpbGUgfCAyICstCiAyIGZpbGVzIGNo
-YW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL3hlbi9k
-cml2ZXJzL3Bhc3N0aHJvdWdoL2FybS9LY29uZmlnIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gv
-YXJtL0tjb25maWcKaW5kZXggY2RhODk5ZjYwOC4uNTk3ZjU4ZjEwYiAxMDA2NDQKLS0tIGEveGVu
-L2RyaXZlcnMvcGFzc3Rocm91Z2gvYXJtL0tjb25maWcKKysrIGIveGVuL2RyaXZlcnMvcGFzc3Ro
-cm91Z2gvYXJtL0tjb25maWcKQEAgLTYsMyArNiw5IEBAIGNvbmZpZyBBUk1fU01NVV92MwogCSBT
-dXBwb3J0IGZvciBpbXBsZW1lbnRhdGlvbnMgb2YgdGhlIEFSTSBTeXN0ZW0gTU1VIGFyY2hpdGVj
-dHVyZQogCSB2ZXJzaW9uIDMuCiAKK2NvbmZpZyBBUk1fU01NVQorCWJvb2wgIkFSTSBMZWdhY3kg
-U01NVSBTdXBwb3J0IgorCWRlcGVuZHMgb24gKEFSTV82NCB8fCBBUk0pCisJaGVscAorCSBTdXBw
-b3J0IGZvciBpbXBsZW1lbnRhdGlvbnMgb2YgdGhlIEFSTSBTeXN0ZW0gTU1VIGFyY2hpdGVjdHVy
-ZQorCSB2ZXJzaW9uIDEgYW5kIDIuCmRpZmYgLS1naXQgYS94ZW4vZHJpdmVycy9wYXNzdGhyb3Vn
-aC9hcm0vTWFrZWZpbGUgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9hcm0vTWFrZWZpbGUKaW5k
-ZXggZTE0NzMyYjU1Yy4uNWIzZWIxNTQ1ZSAxMDA2NDQKLS0tIGEveGVuL2RyaXZlcnMvcGFzc3Ro
-cm91Z2gvYXJtL01ha2VmaWxlCisrKyBiL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FybS9NYWtl
-ZmlsZQpAQCAtMSwzICsxLDMgQEAKIG9iai15ICs9IGlvbW11Lm8KLW9iai15ICs9IHNtbXUubwor
-b2JqLSQoQ09ORklHX0FSTV9TTU1VKSArPSBzbW11Lm8KIG9iai0kKENPTkZJR19BUk1fU01NVV92
-MykgKz0gc21tdS12My5vCi0tIAoyLjE0LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+UG9ydCBXQVJOX09OX09OQ0UgbWFjcm8gZnJvbSBMaW51eC4KClNpZ25lZC1vZmYtYnk6IFNhbWVl
+ciBHb2VsIDxzYW1lZXIuZ29lbEBsaW5hcm8ub3JnPgotLS0KIHhlbi9pbmNsdWRlL3hlbi9saWIu
+aCB8IDExICsrKysrKysrKysrCiAxIGZpbGUgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygrKQoKZGlm
+ZiAtLWdpdCBhL3hlbi9pbmNsdWRlL3hlbi9saWIuaCBiL3hlbi9pbmNsdWRlL3hlbi9saWIuaApp
+bmRleCBlZDAwYWUxMzc5Li44MzIwNmMwODQ4IDEwMDY0NAotLS0gYS94ZW4vaW5jbHVkZS94ZW4v
+bGliLmgKKysrIGIveGVuL2luY2x1ZGUveGVuL2xpYi5oCkBAIC0xMSw2ICsxMSwxNyBAQAogI2Rl
+ZmluZSBCVUdfT04ocCkgIGRvIHsgaWYgKHVubGlrZWx5KHApKSBCVUcoKTsgIH0gd2hpbGUgKDAp
+CiAjZGVmaW5lIFdBUk5fT04ocCkgZG8geyBpZiAodW5saWtlbHkocCkpIFdBUk4oKTsgfSB3aGls
+ZSAoMCkKIAorI2RlZmluZSBXQVJOX09OX09OQ0UocCkJKHsgICAgICAgICAgICAgICAgICAgICAg
+ICAgIFwKKyAgICBzdGF0aWMgYm9vbCBfX3NlY3Rpb24oIi5kYXRhLnVubGlrZWx5IikgX193YXJu
+ZWQ7IFwKKyAgICBpbnQgX19yZXRfd2Fybl9vbmNlID0gISEocCk7ICAgICAgICAgICAgICAgICAg
+ICBcCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+XAorICAgIGlmICh1bmxpa2VseShfX3JldF93YXJuX29uY2UgJiYgIV9fd2FybmVkKSkgeyAgIFwK
+KyAgICAgICAgX193YXJuZWQgPSB0cnVlOyAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCisg
+ICAgICAgIFdBUk5fT04oMSk7ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXAorICAg
+IH0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKKyAgICB1
+bmxpa2VseShfX3JldF93YXJuX29uY2UpOyAgICAgICAgICAgICAgICAgICAgICBcCit9KQorCiAj
+aWYgX19HTlVDX18gPiA0IHx8IChfX0dOVUNfXyA9PSA0ICYmIF9fR05VQ19NSU5PUl9fID49IDYp
+CiAvKiBGb3JjZSBhIGNvbXBpbGF0aW9uIGVycm9yIGlmIGNvbmRpdGlvbiBpcyB0cnVlICovCiAj
+ZGVmaW5lIEJVSUxEX0JVR19PTihjb25kKSAoeyBfU3RhdGljX2Fzc2VydCghKGNvbmQpLCAiISgi
+ICNjb25kICIpIik7IH0pCi0tIAoyLjE0LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
 X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
 cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
 dGluZm8veGVuLWRldmVs
