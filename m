@@ -1,15 +1,30 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v3] xen/balloon: Mark unallocated host
-	memory as UNUSABLE
-Date: Wed, 20 Dec 2017 18:33:17 +0100
-Message-ID: <14100e87-ba75-3ebd-e39d-f1df2b298c8c__32156.351049389$1513791145$gmane$org@suse.com>
-References: <1513778746-6155-1-git-send-email-boris.ostrovsky@oracle.com>
+From: Kevin Stange <kevin@steadfast.net>
+Subject: PCI Device Subtree Change from Traditional to Upstream
+Date: Wed, 20 Dec 2017 11:40:03 -0600
+Message-ID: <c8ed6851-70c1-500d-5d66-1e8a6b7133c5@steadfast.net>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1513778746-6155-1-git-send-email-boris.ostrovsky@oracle.com>
-Content-Language: de-DE
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=6grp=dq=steadfast.net=kevin@srs-us1.protection.inumbo.net>)
+ id 1eRiLm-0001I8-6h
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 17:40:14 +0000
+Received: from staffmx.steadfast.net (localhost [IPv6:::1])
+ by staffmx.steadfast.net (Postfix) with ESMTPS id 8533314800D6
+ for <xen-devel@lists.xenproject.org>; Wed, 20 Dec 2017 11:40:10 -0600 (CST)
+Received: from localhost (localhost [IPv6:::1])
+ by staffmx.steadfast.net (Postfix) with ESMTP id 6CF1A14800C2
+ for <xen-devel@lists.xenproject.org>; Wed, 20 Dec 2017 11:40:10 -0600 (CST)
+Received: from staffmx.steadfast.net ([IPv6:::1])
+ by localhost (staffmx.steadfast.net [IPv6:::1]) (amavisd-new, port 10026)
+ with ESMTP id Qcc6dGepgOYZ for <xen-devel@lists.xenproject.org>;
+ Wed, 20 Dec 2017 11:40:10 -0600 (CST)
+Received: from ziyal.office.steadfast.net (unknown [10.254.4.33])
+ by staffmx.steadfast.net (Postfix) with ESMTPSA id 554CD14800C0
+ for <xen-devel@lists.xenproject.org>; Wed, 20 Dec 2017 11:40:10 -0600 (CST)
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,24 +33,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xen.org, linux-kernel@vger.kernel.org
-Cc: helgaas@kernel.org, christian.koenig@amd.com, JBeulich@suse.com
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAvMTIvMTcgMTU6MDUsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiBDb21taXQgZjU3NzVl
-MGI2MTE2ICgieDg2L3hlbjogZGlzY2FyZCBSQU0gcmVnaW9ucyBhYm92ZSB0aGUgbWF4aW11bQo+
-IHJlc2VydmF0aW9uIikgbGVmdCBob3N0IG1lbW9yeSBub3QgYXNzaWduZWQgdG8gZG9tMCBhcyBh
-dmFpbGFibGUgZm9yCj4gbWVtb3J5IGhvdHBsdWcuCj4gCj4gVW5mb3J0dW5hdGVseSB0aGlzIGFs
-c28gbWVhbnQgdGhhdCB0aG9zZSByZWdpb25zIGNvdWxkIGJlIHVzZWQgYnkKPiBvdGhlcnMuIFNw
-ZWNpZmljYWxseSwgY29tbWl0IGZhNTY0YWQ5NjM2NiAoIng4Ni9QQ0k6IEVuYWJsZSBhIDY0Yml0
-IEJBUgo+IG9uIEFNRCBGYW1pbHkgMTVoIChNb2RlbHMgMDAtMWYsIDMwLTNmLCA2MC03ZikiKSBt
-YXkgdHJ5IHRvIG1hcCB0aG9zZQo+IGFkZHJlc3NlcyBhcyBNTUlPLgo+IAo+IFRvIHByZXZlbnQg
-dGhpcyBtYXJrIHVuYWxsb2NhdGVkIGhvc3QgbWVtb3J5IGFzIEU4MjBfVFlQRV9VTlVTQUJMRSAo
-dGh1cwo+IGVmZmVjdGl2ZWx5IHJldmVydGluZyBmNTc3NWUwYjYxMTYpIGFuZCBrZWVwIHRyYWNr
-IG9mIHRoYXQgcmVnaW9uIGFzCj4gYSBob3N0bWVtIHJlc291cmNlIHRoYXQgY2FuIGJlIHVzZWQg
-Zm9yIHRoZSBob3RwbHVnLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9y
-aXMub3N0cm92c2t5QG9yYWNsZS5jb20+CgpSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdy
-b3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+SGksCgpJJ3ZlIGJlZW4gd29ya2luZyBvbiB0cmFuc2l0aW9uaW5nIGEgbnVtYmVyIG9mIFdpbmRv
+d3MgZ3Vlc3RzIHVuZGVyIEhWTQpmcm9tIHVzaW5nIFFFTVUgdHJhZGl0aW9uYWwgdG8gUUVNVSB1
+cHN0cmVhbSBhcyBpcyByZWNvbW1lbmRlZCBpbiB0aGUKZG9jdW1lbnRhdGlvbi4gIFdoZW4gSSBt
+b3ZlIHRoZXNlIGd1ZXN0cywgdGhlIFBDSSBzdWJ0cmVlIGZvciBYZW4KZGV2aWNlcyBjaGFuZ2Vz
+IGFuZCBXaW5kb3dzIGNyZWF0ZXMgYSB0b3RhbGx5IG5ldyBjb3B5IG9mIGVhY2ggZGV2aWNlLgpX
+aW5kb3dzIHRyYWNrcyBkb3duIHRoZSBzdG9yYWdlIHdpdGhvdXQgaXNzdWUsIGJ1dCBpdCB0cmVh
+dHMgdGhlIG5ldwppbnN0YW5jZSBvZiB0aGUgTklDIGRyaXZlciBhcyBhIG5ldyBkZXZpY2UgYW5k
+IGNsZWFycyB0aGUgbmV0d29yawpjb25maWd1cmF0aW9uIGV2ZW4gdGhvdWdoIHRoZSBNQUMgYWRk
+cmVzcyBpcyB1bmNoYW5nZWQuICBNYW51YWxseQpib290aW5nIHRoZSBndWVzdCBiYWNrIG9uIHRo
+ZSB0cmFkaXRpb25hbCBkZXZpY2UgbW9kZWwgcmVhY3RpdmF0ZXMgdGhlCm9yaWdpbmFsIFBDSSBz
+dWJ0cmVlIGFuZCB0aGUgb2xkIG5ldHdvcmsgY29uZmlndXJhdGlvbiB3aXRoIGl0LgoKVGhlIG9u
+bHkgdGhpbmcgdGhhdCBJIGhhdmUgYmVlbiBhYmxlIHRvIGZpbmQgdGhhdCdzIHN1YnN0YW50aWFs
+bHkKZGlmZmVyZW50IGNvbXBhcmluZyB0aGUgZGV2aWNlIHRyZWVzIGlzIHRoYXQgdGhlIGRldmlj
+ZSBpbnN0YW5jZSBJRAp2YWx1ZXMgZGlmZmVyIG9uIHRoZSBwYXJlbnQgWGVuIFBDSSBkZXZpY2U6
+CgpQQ0lcVkVOXzU4NTMmREVWXzAwMDEmU1VCU1lTXzAwMDE1ODUzJlJFVl8wMVwzJjI2N0E2MTZB
+JjMmMTgKClBDSVxWRU5fNTg1MyZERVZfMDAwMSZTVUJTWVNfMDAwMTU4NTMmUkVWXzAxXDMmMjY3
+QTYxNkEmMyYxMAoKQmVzaWRlcyBhY3R1YWxseSBzZXR0aW5nIHRoZSBndWVzdCB0byBib290IHVz
+aW5nIFFFTVUgdHJhZGl0aW9uYWwsIGlzCnRoZXJlIGEgd2F5IHRvIGNvbnZpbmNlIFdpbmRvd3Mg
+dG8gdHJlYXQgdGhlc2UgZGV2aWNlcyBhcyB0aGUgc2FtZT8gIEEKcGF0Y2gtYmFzZWQgc29sdXRp
+b24gd291bGQgYmUgYWNjZXB0YWJsZSB0byBtZSBpZiB0aGVyZSBpcyBvbmUsIGJ1dCBJCmRvbid0
+IHVuZGVyc3RhbmQgdGhlIGNvZGUgd2VsbCBlbm91Z2ggdG8gY3JlYXRlIG15IG93biBzb2x1dGlv
+bi4KCi0tIApLZXZpbiBTdGFuZ2UKQ2hpZWYgVGVjaG5vbG9neSBPZmZpY2VyClN0ZWFkZmFzdCB8
+IE1hbmFnZWQgSW5mcmFzdHJ1Y3R1cmUsIERhdGFjZW50ZXIgYW5kIENsb3VkIFNlcnZpY2VzCjgw
+MCBTIFdlbGxzLCBTdWl0ZSAxOTAgfCBDaGljYWdvLCBJTCA2MDYwNwozMTIuNjAyLjI2ODkgWDIw
+MyB8IEZheDogMzEyLjYwMi4yNjg4CmtldmluQHN0ZWFkZmFzdC5uZXQgfCB3d3cuc3RlYWRmYXN0
+Lm5ldAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
