@@ -1,21 +1,21 @@
-From: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
-Subject: Re: [RFC PATCH 01/60] hyper_dmabuf: initial working
- version of hyper_dmabuf drv
-Date: Wed, 20 Dec 2017 10:38:08 +0200
-Message-ID: <51dda471-e623-f30d-f40f-ca0767b31ca9__15582.2464883842$1513759041$gmane$org@epam.com>
-References: <1513711816-2618-1-git-send-email-dongwon.kim@intel.com>
- <20171219232731.GA6497@downor-Z87X-UD5H>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v10 01/11] x86: implement get hw info flow
+	for MBA
+Date: Wed, 20 Dec 2017 01:56:21 -0700
+Message-ID: <5A3A33C50200007800198C4A@prv-mh.provo.novell.com>
+References: <1513644142-50972-1-git-send-email-yi.y.sun@linux.intel.com>
+ <1513644142-50972-2-git-send-email-yi.y.sun@linux.intel.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=+7+m=dq=epam.com=oleksandr_andrushchenko@srs-us1.protection.inumbo.net>)
- id 1eRZtM-0005Ue-HV
- for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 08:38:20 +0000
-In-Reply-To: <20171219232731.GA6497@downor-Z87X-UD5H>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=t9kc=dq=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1eRaAq-0006oa-KE
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 08:56:24 +0000
+In-Reply-To: <1513644142-50972-2-git-send-email-yi.y.sun@linux.intel.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dongwon Kim <dongwon.kim@intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Potrola,
- MateuszX" <mateuszx.potrola@intel.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
+To: Yi Sun <yi.y.sun@linux.intel.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Chao Peng <chao.p.peng@linux.intel.com>, =?UTF-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Ck9uIDEyLzIwLzIwMTcgMDE6MjcgQU0sIERvbmd3b24gS2ltIHdyb3RlOgo+IFRoaXMgcGF0Y2gg
-c2VyaWVzIGNvbnRhaW5zIHRoZSBpbXBsZW1lbnRhdGlvbiBvZiBhIG5ldyBkZXZpY2UgZHJpdmVy
-LAo+IGh5cGVyX2RtYWJ1Ziwgd2hpY2ggcHJvdmlkZXMgYSBtZXRob2QgZm9yIERNQS1CVUYgc2hh
-cmluZyBhY3Jvc3MKPiBkaWZmZXJlbnQgT1NlcyBydW5uaW5nIG9uIHRoZSBzYW1lIHZpcnR1YWwg
-T1MgcGxhdGZvcm0gcG93ZXJlZCBieQo+IGEgaHlwZXJ2aXNvci4KVGhpcyBpcyB2ZXJ5IGludGVy
-ZXN0aW5nIGF0IGxlYXN0IGluIGNvbnRleHQgb2YgZW1iZWRkZWQgc3lzdGVtcy4KQ291bGQgeW91
-IHBsZWFzZSBzaGFyZSB1c2UtY2FzZXMgZm9yIHRoaXMgd29yayBhbmQsIGlmIHBvc3NpYmxlLApz
-b3VyY2VzIG9mIHRoZSB0ZXN0IGFwcGxpY2F0aW9ucyBpZiBhbnkuCgpUaGFuayB5b3UsCk9sZWtz
-YW5kcgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDE5LjEyLjE3IGF0IDAxOjQyLCA8eWkueS5zdW5AbGludXguaW50ZWwuY29tPiB3cm90
+ZToKPiBUaGlzIHBhdGNoIGltcGxlbWVudHMgZ2V0IEhXIGluZm8gZmxvdyBmb3IgTUJBIGluY2x1
+ZGluZyBpdHMgY2FsbGJhY2sKPiBmdW5jdGlvbiBhbmQgc3lzY3RsIGludGVyZmFjZS4KPiAKPiBT
+aWduZWQtb2ZmLWJ5OiBZaSBTdW4gPHlpLnkuc3VuQGxpbnV4LmludGVsLmNvbT4KClJldmlld2Vk
+LWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
