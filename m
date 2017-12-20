@@ -1,21 +1,10 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: Xen PV DomU running Kernel
- 4.14.5-1.el7.elrepo.x86_64: xl -v vcpu-set <domU> <val> triggers domU
- kernel WARNING, then domU becomes unresponsive
-Date: Wed, 20 Dec 2017 11:44:08 +0100
-Message-ID: <33fb1ef0-1f38-4fbd-e9b2-4e4667a1d3ef@suse.com>
-References: <a6b5ea989fca5a6833c159d89a6da71e@ddns.com.au>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-coverity test] 117377: all pass - PUSHED
+Date: Wed, 20 Dec 2017 10:50:10 +0000
+Message-ID: <osstest-117377-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5212354557685578233=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=groa=dq=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1eRbrF-0008A4-FE
- for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 10:44:17 +0000
-In-Reply-To: <a6b5ea989fca5a6833c159d89a6da71e@ddns.com.au>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,22 +13,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Adi Pircalabu <adi@ddns.com.au>, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTkvMTIvMTcgMDc6MzEsIEFkaSBQaXJjYWxhYnUgd3JvdGU6Cj4gUG9zdGVkIGluaXRpYWxs
-eSB0byBjZW50b3MtdmlydCBtYWlsaW5nIGxpc3QuIFBsZWFzZSBub3RlIEknbSBub3QKPiBzdWJz
-Y3JpYmVkIHRvIHhlbi1kZXZlbC4KPiAKPiBSdW5uaW5nICJ4bCAtdiB2Y3B1LXNldCA8ZG9tVT4g
-PHZhbD4iIG9uIGJvdGggQ2VudE9TIDYgcnVubmluZwo+IDQuMTQuNS0xLmVsNi5lbHJlcG8ueDg2
-XzY0IGFuZCBDZW50T1MgNyBydW5uaW5nCj4gNC4xNC41LTEuZWw3LmVscmVwby54ODZfNjQgSSdt
-IGFibGUgdG8gdHJpZ2dlciB0aGlzIGJ1ZyB3aGVyZSBjZXJ0YWluCj4gY29tbWFuZHMgaW4gdGhl
-IGRvbVUgc3RhbGw6CgpBcyBJIGNhbid0IHJlcHJvZHVjZSB0aGlzIHByb2JsZW0gd2l0aCBhIDQu
-MTUtcmM0IHVwc3RyZWFtIGtlcm5lbApJIHN1c3BlY3QgdGhpcyBtaWdodCBiZSBhIENlbnRPUyBz
-cGVjaWZpYyBwcm9ibGVtLgoKT3IgaXMgdGhlcmUgYW55dGhpbmcgc3BlY2lhbCB3aGljaCBtdXN0
-IGJlIGRvbmUgdG8gc2VlIHRoZSBwcm9ibGVtPwpZb3UgYXJlIHF1aXRlIHZhZ3VlIGluIHRoaXMg
-cmVzcGVjdCAobm8gY29uZmlnIGRldGFpbHMsIG5vIGNsdWUgd2hldGhlcgphZGRpbmcgb3IgcmVt
-b3ZpbmcgdmNwdXMgaXMgYSBwcm9ibGVtLCBub3RoaW5nIG1lbnRpb25lZCBhYm91dCB0aGUKbG9h
-ZCBvZiB0aGUgZG9tVXMuLi4pLgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+--===============5212354557685578233==
+Content-Type: text/plain
+
+flight 117377 xen-unstable-coverity real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117377/
+
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ xen                  1b33150fe06ab9217f7f12b01bc5e607f4f55658
+baseline version:
+ xen                  ec320542e4f4de12305551ef5e3cd4d2ced85771
+
+Last test of basis   117243  2017-12-17 09:19:03 Z    3 days
+Testing same since   117377  2017-12-20 09:48:29 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Ian Jackson <Ian.Jackson@eu.citrix.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+
+jobs:
+ coverity-amd64                                               pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To osstest@xenbits.xen.org:/home/xen/git/xen.git
+   ec32054..1b33150  1b33150fe06ab9217f7f12b01bc5e607f4f55658 -> coverity-tested/smoke
+
+
+--===============5212354557685578233==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5212354557685578233==--
