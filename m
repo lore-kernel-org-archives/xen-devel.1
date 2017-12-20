@@ -1,11 +1,19 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/mcheck: Drop unnecessary barriers
-Date: Wed, 20 Dec 2017 19:15:41 +0000
-Message-ID: <1513797341-29285-1-git-send-email-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/Intel: drop another 32-bit leftover
+Date: Wed, 20 Dec 2017 19:25:53 +0000
+Message-ID: <013a2569-dbf5-4f14-6a20-f98604b313a8@citrix.com>
+References: <5A282672020000780019523A@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=4g8x=dq=citrix.com=prvs=520a8dc14=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1eRk06-0001Fc-2P
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 19:25:58 +0000
+In-Reply-To: <5A282672020000780019523A@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,29 +22,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-c3Bpbl91bmxvY2soKSBoYXMgZnVsbCBiYXJyaWVyIHNlbWFudGljcyBhbHJlYWR5LgoKU2lnbmVk
-LW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KLS0tCkND
-OiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+Ci0tLQogeGVuL2FyY2gveDg2L2NwdS9t
-Y2hlY2svbWN0ZWxlbS5jIHwgMyAtLS0KIDEgZmlsZSBjaGFuZ2VkLCAzIGRlbGV0aW9ucygtKQoK
-ZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9jcHUvbWNoZWNrL21jdGVsZW0uYyBiL3hlbi9hcmNo
-L3g4Ni9jcHUvbWNoZWNrL21jdGVsZW0uYwppbmRleCA0OTJlMmFmLi4zNTQzMWRmIDEwMDY0NAot
-LS0gYS94ZW4vYXJjaC94ODYvY3B1L21jaGVjay9tY3RlbGVtLmMKKysrIGIveGVuL2FyY2gveDg2
-L2NwdS9tY2hlY2svbWN0ZWxlbS5jCkBAIC01MjAsNyArNTIwLDYgQEAgbWN0ZWxlbV9jb29raWVf
-dCBtY3RlbGVtX2NvbnN1bWVfb2xkZXN0X2JlZ2luKG1jdGVsZW1fY2xhc3NfdCB3aGljaCkKIAl9
-CiAKIAltY3RlbGVtX3Byb2Nlc3NpbmdfaG9sZCh0ZXApOwotCXdtYigpOwogCXNwaW5fdW5sb2Nr
-KCZwcm9jZXNzaW5nX2xvY2spOwogCXJldHVybiBNQ1RFMkNPT0tJRSh0ZXApOwogfQpAQCAtNTMx
-LDcgKzUzMCw2IEBAIHZvaWQgbWN0ZWxlbV9jb25zdW1lX29sZGVzdF9lbmQobWN0ZWxlbV9jb29r
-aWVfdCBjb29raWUpCiAKIAlzcGluX2xvY2soJnByb2Nlc3NpbmdfbG9jayk7CiAJbWN0ZWxlbV9w
-cm9jZXNzaW5nX3JlbGVhc2UodGVwKTsKLQl3bWIoKTsKIAlzcGluX3VubG9jaygmcHJvY2Vzc2lu
-Z19sb2NrKTsKIH0KIApAQCAtNTQ3LDcgKzU0NSw2IEBAIHZvaWQgbWN0ZWxlbV9hY2sobWN0ZWxl
-bV9jbGFzc190IHdoaWNoLCBtY3RlbGVtX2Nvb2tpZV90IGNvb2tpZSkKIAlzcGluX2xvY2soJnBy
-b2Nlc3NpbmdfbG9jayk7CiAJaWYgKHRlcCA9PSBtY3RjdGwubWN0Y19wcm9jZXNzaW5nX2hlYWRb
-dGFyZ2V0XSkKIAkJbWN0ZWxlbV9wcm9jZXNzaW5nX3JlbGVhc2UodGVwKTsKLQl3bWIoKTsKIAlz
-cGluX3VubG9jaygmcHJvY2Vzc2luZ19sb2NrKTsKIH0KIAotLSAKMi4xLjQKCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMDYvMTIvMTcgMTY6MTgsIEphbiBCZXVsaWNoIHdyb3RlOgo+IE5vbmUgb2YgdGhlIG1vZGVs
+cyBNSVNDX0VOQUJMRSBNU1IgYWNjZXNzIGlzIGV4Y2x1ZGVkIGZvciBzdXBwb3J0IDY0LWJpdAo+
+IG1vZGUgLSBkcm9wIHRoZSBjb25kaXRpb25hbCBmcm9tIGVhcmx5X2luaXRfaW50ZWwoKS4gQWxz
+byBjb252ZXJ0Cj4gcG9pbnRsZXNzIHJkbXNyX3NhZmUoKSBlbHNld2hlcmUgdG8gcmRtc3JsKCku
+Cj4KPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpSZXZp
+ZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
