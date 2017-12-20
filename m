@@ -1,18 +1,19 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86/Intel: drop another 32-bit leftover
-Date: Wed, 20 Dec 2017 19:25:53 +0000
-Message-ID: <013a2569-dbf5-4f14-6a20-f98604b313a8@citrix.com>
-References: <5A282672020000780019523A@prv-mh.provo.novell.com>
+Subject: Re: [PATCH v2] x86/IRQ: conditionally preserve access
+ permission on map error paths
+Date: Wed, 20 Dec 2017 19:26:48 +0000
+Message-ID: <9515ffc0-a262-c9e0-e5e1-59fc5abaa1ff@citrix.com>
+References: <5A29208B0200007800195540@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=4g8x=dq=citrix.com=prvs=520a8dc14=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1eRk06-0001Fc-2P
- for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 19:25:58 +0000
-In-Reply-To: <5A282672020000780019523A@prv-mh.provo.novell.com>
+ id 1eRk11-0001KX-Pm
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 19:26:55 +0000
+In-Reply-To: <5A29208B0200007800195540@prv-mh.provo.novell.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,12 +26,11 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDYvMTIvMTcgMTY6MTgsIEphbiBCZXVsaWNoIHdyb3RlOgo+IE5vbmUgb2YgdGhlIG1vZGVs
-cyBNSVNDX0VOQUJMRSBNU1IgYWNjZXNzIGlzIGV4Y2x1ZGVkIGZvciBzdXBwb3J0IDY0LWJpdAo+
-IG1vZGUgLSBkcm9wIHRoZSBjb25kaXRpb25hbCBmcm9tIGVhcmx5X2luaXRfaW50ZWwoKS4gQWxz
-byBjb252ZXJ0Cj4gcG9pbnRsZXNzIHJkbXNyX3NhZmUoKSBlbHNld2hlcmUgdG8gcmRtc3JsKCku
-Cj4KPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpSZXZp
-ZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDcvMTIvMTcgMTA6MDUsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFBlcm1pc3Npb25zIHRoYXQg
+aGFkIGJlZW4gZ3JhbnRlZCBiZWZvcmUgc2hvdWxkIG5vdCBiZSByZXZva2VkIHdoZW4KPiBoYW5k
+bGluZyB1bnJlbGF0ZWQgZXJyb3JzLgo+Cj4gUmVwb3J0ZWQtYnk6IEhXNDIgPGh3NDJAaXBzdW1q
+LmRlPgo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCkFj
+a2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
