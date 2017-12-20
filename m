@@ -1,10 +1,10 @@
 From: Samuel Thibault <samuel.thibault@ens-lyon.org>
-Subject: Re: [Minios-devel] [PATCH RFC 08/16] Save/Restore
- Support: Add arch_mm_pre|post_suspend
-Date: Wed, 20 Dec 2017 01:24:51 +0100
-Message-ID: <20171220002451.ftmfwlgw47fm7kyc@var.youpi.perso.aquilenet.fr>
+Subject: Re: [Minios-devel] [PATCH RFC 09/16] Save/Restore
+ Support: Disable/enable IRQs during suspend/restore
+Date: Wed, 20 Dec 2017 01:25:10 +0100
+Message-ID: <20171220002510.x2t5aqxwymsnlk4i@var.youpi.perso.aquilenet.fr>
 References: <1513726931-7516-1-git-send-email-bruno.alvisio@gmail.com>
- <1513726931-7516-9-git-send-email-bruno.alvisio@gmail.com>
+ <1513726931-7516-10-git-send-email-bruno.alvisio@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,10 +12,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=drp2=dq=ens-lyon.org=samuel.thibault@srs-us1.protection.inumbo.net>)
- id 1eRSBw-0001x9-Ly
- for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 00:25:00 +0000
+ id 1eRSCE-00020K-9b
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 00:25:18 +0000
 Content-Disposition: inline
-In-Reply-To: <1513726931-7516-9-git-send-email-bruno.alvisio@gmail.com>
+In-Reply-To: <1513726931-7516-10-git-send-email-bruno.alvisio@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,47 +25,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Bruno Alvisio <bruno.alvisio@gmail.com>
-Cc: minios-devel@lists.xenproject.org, xen-devel@lists.xenproject.org, Bruno Alvisio <bruno.alvisio@oracle.com>, wei.liu2@citrix.com, jgross@suse.com
+Cc: minios-devel@lists.xenproject.org, xen-devel@lists.xenproject.org, wei.liu2@citrix.com, jgross@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
-QnJ1bm8gQWx2aXNpbywgb24gbWFyLiAxOSBkw6ljLiAyMDE3IDE1OjQyOjAzIC0wODAwLCB3cm90
-ZToKPiBGb3IgUFYgZ3Vlc3RzIHRoZSBwYWdldGFibGVzIHJlZmVyZW5jZSB0aGUgcmVhbCBNRk5z
-IHJhdGhlciB0aGFuIFBGTnMsIHNvIHdoZW4KPiB0aGUgZ3Vlc3QgaXMgcmVzdW1lZCBpbnRvIGEg
-ZGlmZmVyZW50IGFyZWEgb2YgYSBob3N0cyBtZW1vcnksIHRoZXNlIHdpbGwgbmVlZCB0bwo+IGJl
-IHJld3JpdHRlbi4gVGh1cyBmb3IgUFYgZ3Vlc3RzIHRoZSBNRk5zIG5lZWQgdG8gYmUgcmVwbGFj
-ZWQgd2l0aCBQRk5zOgo+IGNhbm9uaWNhbGl6YXRpb24uCj4gCj4gUFZIIGd1ZXN0cyBhcmUgYXV0
-by10cmFuc2xhdGVkIHNvIG5vIG1lbW9yeSBvcGVyYXRpb24gaXMgbmVlZGVkLgo+IAo+IFNpZ25l
-ZC1vZmYtYnk6IEJydW5vIEFsdmlzaW8gPGJydW5vLmFsdmlzaW9Ab3JhY2xlLmNvbT4KClJldmll
-d2VkLWJ5OiBTYW11ZWwgVGhpYmF1bHQgPHNhbXVlbC50aGliYXVsdEBlbnMtbHlvbi5vcmc+Cgo+
-IC0tLQo+ICBhcmNoL3g4Ni9tbS5jICAgICAgICAgfCAxNCArKysrKysrKysrKysrKwo+ICBpbmNs
-dWRlL3g4Ni9hcmNoX21tLmggfCAgMyArKysKPiAgMiBmaWxlcyBjaGFuZ2VkLCAxNyBpbnNlcnRp
-b25zKCspCj4gCj4gZGlmZiAtLWdpdCBhL2FyY2gveDg2L21tLmMgYi9hcmNoL3g4Ni9tbS5jCj4g
-aW5kZXggMDVhZDAyOS4uMWIxNjNhYyAxMDA2NDQKPiAtLS0gYS9hcmNoL3g4Ni9tbS5jCj4gKysr
-IGIvYXJjaC94ODYvbW0uYwo+IEBAIC04NDgsNiArODQ4LDIwIEBAIHZvaWQgYXJjaF9pbml0X3Ay
-bSh1bnNpZ25lZCBsb25nIG1heF9wZm4pCj4gIAo+ICAgICAgYXJjaF9yZW1hcF9wMm0obWF4X3Bm
-bik7Cj4gIH0KPiArCj4gK3ZvaWQgYXJjaF9tbV9wcmVfc3VzcGVuZCh2b2lkKQo+ICt7Cj4gKyAg
-ICAvL1RPRE86IENhbm9uaWNhbGl6ZSBwYWdldGFibGVzCj4gK30KPiArCj4gK3ZvaWQgYXJjaF9t
-bV9wb3N0X3N1c3BlbmQoaW50IGNhbmNlbGVkKQo+ICt7Cj4gKyAgICAvL1RPRE86IExvY2F0ZSBw
-YWdldGFibGVzIGFuZCAndW5jYW5vbmljYWxpemUnIHRoZW0KPiArfQo+ICsjZWxzZQo+ICt2b2lk
-IGFyY2hfbW1fcHJlX3N1c3BlbmQodm9pZCl7IH0KPiArCj4gK3ZvaWQgYXJjaF9tbV9wb3N0X3N1
-c3BlbmQoaW50IGNhbmNlbGVkKXsgfQo+ICAjZW5kaWYKPiAgCj4gIHZvaWQgYXJjaF9pbml0X21t
-KHVuc2lnbmVkIGxvbmcqIHN0YXJ0X3Bmbl9wLCB1bnNpZ25lZCBsb25nKiBtYXhfcGZuX3ApCj4g
-ZGlmZiAtLWdpdCBhL2luY2x1ZGUveDg2L2FyY2hfbW0uaCBiL2luY2x1ZGUveDg2L2FyY2hfbW0u
-aAo+IGluZGV4IGFiOGE1M2UuLmNiYmViMjEgMTAwNjQ0Cj4gLS0tIGEvaW5jbHVkZS94ODYvYXJj
-aF9tbS5oCj4gKysrIGIvaW5jbHVkZS94ODYvYXJjaF9tbS5oCj4gQEAgLTI3OSw2ICsyNzksOSBA
-QCBwZ2VudHJ5X3QgKm5lZWRfcGd0KHVuc2lnbmVkIGxvbmcgYWRkcik7Cj4gIHZvaWQgYXJjaF9t
-bV9wcmVpbml0KHZvaWQgKnApOwo+ICB1bnNpZ25lZCBsb25nIGFsbG9jX3ZpcnRfa2VybmVsKHVu
-c2lnbmVkIG5fcGFnZXMpOwo+ICAKPiArdm9pZCBhcmNoX21tX3ByZV9zdXNwZW5kKHZvaWQpOwo+
-ICt2b2lkIGFyY2hfbW1fcG9zdF9zdXNwZW5kKGludCBjYW5jZWxlZCk7Cj4gKwo+ICAjaWZuZGVm
-IENPTkZJR19QQVJBVklSVAo+ICB2b2lkIGFyY2hfcHJpbnRfbWVtbWFwKHZvaWQpOwo+ICAjZW5k
-aWYKPiAtLSAKPiAyLjMuMiAoQXBwbGUgR2l0LTU1KQo+IAo+IAo+IF9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTWluaW9zLWRldmVsIG1haWxpbmcgbGlz
-dAo+IE1pbmlvcy1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwo+IGh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby9taW5pb3MtZGV2ZWwKCi0tIApTYW11ZWwKIEon
-YWkgdW4gZ3JvcyBwcm9ibMOobWU6IGonYWkgY2V0IGV4ZXJjaWNlIMOgIHJlbmRyZSBkZW1haW4g
-bHVuZGksIG1haXMgbWEKIFRJIDg5IG5lIHNhaXQgcGFzIGxlIGZhaXJlLi4uCiBFc3QtY2UgcXVl
-IHF1ZWxxdSd1biBwb3VycmFpdCBtJ2FpZGVyPz8KIC0rLSBPRCBJbiBHdWlkZSBkdSBOZXVuZXUg
-VXNlbmV0IDogQ29tbWVudCDDp2EgISBJbCBmYXV0IHLDqWZsw6ljaGlyID8tKy0KCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+QnJ1bm8gQWx2aXNpbywgb24gbWFyLiAxOSBkw6ljLiAyMDE3IDE1OjQyOjA0IC0wODAwLCB3cm90
+ZToKPiBTaWduZWQtb2ZmLWJ5OiBCcnVubyBBbHZpc2lvIDxicnVuby5hbHZpc2lvQGdtYWlsLmNv
+bT4KClJldmlld2VkLWJ5OiBTYW11ZWwgVGhpYmF1bHQgPHNhbXVlbC50aGliYXVsdEBlbnMtbHlv
+bi5vcmc+Cgo+IC0tLQo+ICBrZXJuZWwuYyB8IDQgKystLQo+ICAxIGZpbGUgY2hhbmdlZCwgMiBp
+bnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9rZXJuZWwuYyBi
+L2tlcm5lbC5jCj4gaW5kZXggMWNkNDBlOC4uNzgyZWI3OSAxMDA2NDQKPiAtLS0gYS9rZXJuZWwu
+Ywo+ICsrKyBiL2tlcm5lbC5jCj4gQEAgLTExOSwxMiArMTE5LDEyIEBAIHZvaWQgc3RhcnRfa2Vy
+bmVsKHZvaWQqIHBhcikKPiAgCj4gIHZvaWQgcHJlX3N1c3BlbmQodm9pZCkKPiAgewo+IC0KPiAr
+ICAgIGxvY2FsX2lycV9kaXNhYmxlKCk7Cj4gIH0KPiAgCj4gIHZvaWQgcG9zdF9zdXNwZW5kKGlu
+dCBjYW5jZWxlZCkKPiAgewo+IC0KPiArICAgIGxvY2FsX2lycV9lbmFibGUoKTsKPiAgfQo+ICAK
+PiAgdm9pZCBzdG9wX2tlcm5lbCh2b2lkKQo+IC0tIAo+IDIuMy4yIChBcHBsZSBHaXQtNTUpCj4g
+Cj4gCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiBN
+aW5pb3MtZGV2ZWwgbWFpbGluZyBsaXN0Cj4gTWluaW9zLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCj4gaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL21pbmlv
+cy1kZXZlbAoKLS0gClNhbXVlbApROglIb3cgZG8geW91IHBsYXkgcmVsaWdpb3VzIHJvdWxldHRl
+PwpBOglZb3Ugc3RhbmQgYXJvdW5kIGluIGEgY2lyY2xlIGFuZCBibGFzcGhlbWUgYW5kIHNlZSB3
+aG8gZ2V0cyBzdHJ1Y2sgYnkgbGlnaHRuaW5nIGZpcnN0LgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
