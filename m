@@ -1,10 +1,19 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 117377: all pass - PUSHED
-Date: Wed, 20 Dec 2017 10:50:10 +0000
-Message-ID: <osstest-117377-mainreport@xen.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2] simplify xenmem_add_to_physmap_batch()
+Date: Wed, 20 Dec 2017 11:36:44 +0000
+Message-ID: <03606f37-8589-0116-6bde-b5325867ce79@citrix.com>
+References: <5A3A39070200007800198C70@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5212354557685578233=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=4g8x=dq=citrix.com=prvs=520a8dc14=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1eRcg9-0003c8-Bd
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 11:36:53 +0000
+In-Reply-To: <5A3A39070200007800198C70@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,65 +22,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5212354557685578233==
-Content-Type: text/plain
-
-flight 117377 xen-unstable-coverity real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/117377/
-
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xen                  1b33150fe06ab9217f7f12b01bc5e607f4f55658
-baseline version:
- xen                  ec320542e4f4de12305551ef5e3cd4d2ced85771
-
-Last test of basis   117243  2017-12-17 09:19:03 Z    3 days
-Testing same since   117377  2017-12-20 09:48:29 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Ian Jackson <Ian.Jackson@eu.citrix.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-
-jobs:
- coverity-amd64                                               pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To osstest@xenbits.xen.org:/home/xen/git/xen.git
-   ec32054..1b33150  1b33150fe06ab9217f7f12b01bc5e607f4f55658 -> coverity-tested/smoke
-
-
---===============5212354557685578233==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5212354557685578233==--
+T24gMjAvMTIvMTcgMDk6MTgsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFRoZXJlJ3Mgbm8gbmVlZCBm
+b3IKPiAtIGFkdmFuY2luZyB0aGUgaGFuZGxlcyBhbmQgYXQgdGhlIHNhbWUgdGltZSB1c2luZwo+
+ICAgX19jb3B5X3tmcm9tLHRvfV9ndWVzdF9vZmZzZXQoKSwKPiAtIGFuICJvdXQiIGxhYmVsLAo+
+IC0gbG9jYWwgdmFyaWFibGVzICJkb25lIiBhbmQgKGZ1bmN0aW9uIHNjb3BlKSAicmMiLgo+Cj4g
+VG8gYmV0dGVyIHJlZmxlY3QgaXRzIHJlc3VsdGluZyB1c2UgYWxzbyByZW5hbWUgdGhlIGZ1bmN0
+aW9uJ3MgInN0YXJ0Igo+IHBhcmFtZXRlciB0byAiZXh0ZW50Ii4KPgo+IFNpZ25lZC1vZmYtYnk6
+IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KClJldmlld2VkLWJ5OiBBbmRyZXcgQ29v
+cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
