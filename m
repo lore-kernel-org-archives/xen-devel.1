@@ -1,18 +1,21 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Problem with IOMEM and domain reboot
-Date: Wed, 20 Dec 2017 18:27:02 +0200
-Message-ID: <ebf78aec-dcfd-72d9-dac2-06b29e4a66ae@gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v16 06/11] x86/hvm/ioreq: add a new mappable
+ resource type...
+Date: Wed, 20 Dec 2017 09:35:00 -0700
+Message-ID: <5A3A9F440200007800198E6F@prv-mh.provo.novell.com>
+References: <20171215104151.29754-1-paul.durrant@citrix.com>
+ <20171215104151.29754-7-paul.durrant@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------D5801BDF1013BA325F9C5294"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=ttav=dq=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1eRhD2-0002E5-J4
- for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 16:27:08 +0000
-Received: by mail-lf0-x22f.google.com with SMTP id j124so24715006lfg.2
- for <xen-devel@lists.xenproject.org>; Wed, 20 Dec 2017 08:27:06 -0800 (PST)
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=t9kc=dq=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1eRhKc-00033t-Hx
+ for xen-devel@lists.xenproject.org; Wed, 20 Dec 2017 16:34:58 +0000
+In-Reply-To: <20171215104151.29754-7-paul.durrant@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,126 +24,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, ian.jackson@eu.citrix.com, Wei Liu <wei.liu2@citrix.com>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, JulienGrall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---------------D5801BDF1013BA325F9C5294
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-Hi, all!
-
-While trying to reboot a domain which has iomem configured
-(we are passing through some devices), I found an issue,
-that after domain reboot those iomem's are incorrectly re-mapped,
-e.g. for the configuration snippet below fe960 -> 0.
-
-Part of the domain config I use:
-iomem=[
-     "0xfd010,1@0xfd000",
-     "fe960,8",
-]
-
-During domain creation:
-libxl_create.c:210:libxl__domain_build_info_setdefault: iomem gfn fd000 
-start fd010
-libxl_create.c:210:libxl__domain_build_info_setdefault: iomem gfn 
-ffffffffffffffff start fe960
-
-which means that for fe960 initial value was set to LIBXL_INVALID_GFN
-and then on domain configuration, 
-tools/libxl/libxl_create.c:libxl__domain_build_info_setdefault:
-
-     for (i = 0 ; i < b_info->num_iomem; i++)
-         if (b_info->iomem[i].gfn == LIBXL_INVALID_GFN)
-             b_info->iomem[i].gfn = b_info->iomem[i].start;
-
-made that GFN for fe960 to be set to the correct value.
-
-But during domain reboot I see that 
-tools/xl/xl_vmcontrol.c:reload_domain_config
-tries to replicate configuration from the original domain config
-being rebooted, but that leads to iomem's GFN to be set to 0 (if configured
-in form [IOMEM_START,NUM_PAGES], but for [IOMEM_START,NUM_PAGES[@GFN] it 
-is ok):
-
-iomem gfn fd000 start fd010
-iomem gfn 0 start fe960
-
-Thus, further domain restart procedure leads to invalid mapping, e.g. 
-fe960 -> 0.
-
-I created a patch which allowed me to reboot the domain, but I would love
-to hear comments on what would be the proper fix.
-
-Thank you,
-Oleksandr
-
-
---------------D5801BDF1013BA325F9C5294
-Content-Type: text/x-patch;
- name="0001-HACK-Reset-iomem-s-gfn-to-LIBXL_INVALID_GFN-on-reboo.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0001-HACK-Reset-iomem-s-gfn-to-LIBXL_INVALID_GFN-on-reboo.pa";
- filename*1="tch"
-
->From aa1f20af73a5a3c8f2c904b857a79334d18d41ff Mon Sep 17 00:00:00 2001
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Date: Wed, 20 Dec 2017 17:51:18 +0200
-Subject: [PATCH] [HACK] Reset iomem's gfn to LIBXL_INVALID_GFN on reboot
-
-During domain reboot its configuration is partially reused
-to re-create a new domain, but iomem's GFN field for the
-iomem is only restored for those memory ranges, which are
-configured in form of [IOMEM_START,NUM_PAGES[@GFN], but not for
-those in form of [IOMEM_START,NUM_PAGES], e.g. without GFN.
-For the latter GFN is reset to 0, but while mapping ranges
-to a domain during reboot there is a check that GFN treated
-as valid if it is not equal to LIBXL_INVALID_GFN, thus making
-Xen to map IOMEM_START to address 0 in the guest's address space.
-
-Workaround it by resseting GFN to LIBXL_INVALID_GFN, so xl
-can set proper values for mapping on reboot.
-
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
- tools/libxl/libxl_domain.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/tools/libxl/libxl_domain.c b/tools/libxl/libxl_domain.c
-index ef1a0927b00d..2678ad2ad54f 100644
---- a/tools/libxl/libxl_domain.c
-+++ b/tools/libxl/libxl_domain.c
-@@ -1647,6 +1647,15 @@ int libxl_retrieve_domain_configuration(libxl_ctx *ctx, uint32_t domid,
-         }
-     }
- 
-+    /* reset IOMEM's GFN to initial value */
-+    {
-+        int i;
-+
-+        for (i = 0; i < d_config->b_info.num_iomem; i++)
-+            if (d_config->b_info.iomem[i].gfn == 0)
-+                d_config->b_info.iomem[i].gfn = LIBXL_INVALID_GFN;
-+    }
-+
-     /* Devices: disk, nic, vtpm, pcidev etc. */
- 
-     /* The MERGE macro implements following logic:
--- 
-2.7.4
-
-
---------------D5801BDF1013BA325F9C5294
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------D5801BDF1013BA325F9C5294--
+Pj4+IE9uIDE1LjEyLjE3IGF0IDExOjQxLCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
+Ogo+ICtzdGF0aWMgaW50IGh2bV9hbGxvY19pb3JlcV9tZm4oc3RydWN0IGh2bV9pb3JlcV9zZXJ2
+ZXIgKnMsIGJvb2wgYnVmKQo+ICt7Cj4gKyAgICBzdHJ1Y3QgaHZtX2lvcmVxX3BhZ2UgKmlvcnAg
+PSBidWYgPyAmcy0+YnVmaW9yZXEgOiAmcy0+aW9yZXE7Cj4gKwo+ICsgICAgaWYgKCBpb3JwLT5w
+YWdlICkKPiArICAgIHsKPiArICAgICAgICAvKgo+ICsgICAgICAgICAqIElmIGEgZ3Vlc3QgZnJh
+bWUgaGFzIGFscmVhZHkgYmVlbiBtYXBwZWQgKHdoaWNoIG1heSBoYXBwZW4KPiArICAgICAgICAg
+KiBvbiBkZW1hbmQgaWYgaHZtX2dldF9pb3JlcV9zZXJ2ZXJfaW5mbygpIGlzIGNhbGxlZCksIHRo
+ZW4KPiArICAgICAgICAgKiBhbGxvY2F0aW5nIGEgcGFnZSBpcyBub3QgcGVybWl0dGVkLgo+ICsg
+ICAgICAgICAqLwo+ICsgICAgICAgIGlmICggIWdmbl9lcShpb3JwLT5nZm4sIElOVkFMSURfR0ZO
+KSApCj4gKyAgICAgICAgICAgIHJldHVybiAtRVBFUk07Cj4gKwo+ICsgICAgICAgIHJldHVybiAw
+Owo+ICsgICAgfQo+ICsKPiArICAgIGlvcnAtPnZhID0gYWxsb2NfeGVuaGVhcF9wYWdlKCk7Cj4g
+KyAgICBpZiAoICFpb3JwLT52YSApCj4gKyAgICAgICAgcmV0dXJuIC1FTk9NRU07Cj4gKwo+ICsg
+ICAgY2xlYXJfcGFnZShpb3JwLT52YSk7Cj4gKwo+ICsgICAgaW9ycC0+cGFnZSA9IHZpcnRfdG9f
+cGFnZShpb3JwLT52YSk7Cj4gKyAgICBzaGFyZV94ZW5fcGFnZV93aXRoX2d1ZXN0KGlvcnAtPnBh
+Z2UsIHMtPmRvbWFpbiwgWEVOU0hBUkVfd3JpdGFibGUpOwo+ICsgICAgcmV0dXJuIDA7Cj4gK30K
+CldoeSB0aGUgbXVjaCBtb3JlIGxpbWl0ZWQgKG9uIGh1Z2Ugc3lzdGVtcykgWGVuIGhlYXAgYWxs
+IG9mIHRoZQpzdWRkZW4/Cgo+ICtzdGF0aWMgdm9pZCBodm1fZnJlZV9pb3JlcV9tZm4oc3RydWN0
+IGh2bV9pb3JlcV9zZXJ2ZXIgKnMsIGJvb2wgYnVmKQo+ICt7Cj4gKyAgICBzdHJ1Y3QgaHZtX2lv
+cmVxX3BhZ2UgKmlvcnAgPSBidWYgPyAmcy0+YnVmaW9yZXEgOiAmcy0+aW9yZXE7Cj4gKwo+ICsg
+ICAgaWYgKCAhaW9ycC0+cGFnZSApCj4gKyAgICAgICAgcmV0dXJuOwo+ICsKPiArICAgIGlvcnAt
+PnBhZ2UgPSBOVUxMOwo+ICsKPiArICAgIGZyZWVfeGVuaGVhcF9wYWdlKGlvcnAtPnZhKTsKPiAr
+ICAgIGlvcnAtPnZhID0gTlVMTDsKPiArfQoKSSd2ZSBsb29rZWQgb3ZlciB0aGUgY29kZSBwYXRo
+cyBjb21pbmcgaGVyZSwgYW5kIEkgY2FuJ3QgY29udmluY2UKbXlzZWxmIHRoYXQgYW55IG1hcHBp
+bmcgdGhhdCB0aGUgc2VydmVyIGhhcyBlc3RhYmxpc2hlZCB3b3VsZCBiZQpnb25lIGJ5IHRoZSB0
+aW1lIHRoZSBwYWdlIGlzIGJlaW5nIGZyZWVkLiBJJ20gbGlrZWx5IChob3BlZnVsbHkpCm92ZXJs
+b29raW5nIHNvbWUgYXNwZWN0IGhlcmUuCgo+ICtpbnQgYXJjaF9hY3F1aXJlX3Jlc291cmNlKHN0
+cnVjdCBkb21haW4gKmQsIHVuc2lnbmVkIGludCB0eXBlLAo+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHVuc2lnbmVkIGludCBpZCwgdW5zaWduZWQgbG9uZyBmcmFtZSwKPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgICB1bnNpZ25lZCBpbnQgbnJfZnJhbWVzLCB4ZW5fcGZuX3QgbWZuX2xp
+c3RbXSkKPiArewo+ICsgICAgaW50IHJjOwo+ICsKPiArICAgIHN3aXRjaCAoIHR5cGUgKQo+ICsg
+ICAgewo+ICsgICAgY2FzZSBYRU5NRU1fcmVzb3VyY2VfaW9yZXFfc2VydmVyOgo+ICsgICAgewo+
+ICsgICAgICAgIGlvc2VydmlkX3QgaW9zZXJ2aWQgPSBpZDsKPiArICAgICAgICB1bnNpZ25lZCBp
+bnQgaTsKPiArCj4gKyAgICAgICAgcmMgPSAtRUlOVkFMOwo+ICsgICAgICAgIGlmICggaWQgIT0g
+KHVuc2lnbmVkIGludClpb3NlcnZpZCApCj4gKyAgICAgICAgICAgIGJyZWFrOwo+ICsKPiArICAg
+ICAgICByYyA9IDA7Cj4gKyAgICAgICAgZm9yICggaSA9IDA7IGkgPCBucl9mcmFtZXM7IGkrKyAp
+Cj4gKyAgICAgICAgewo+ICsgICAgICAgICAgICBtZm5fdCBtZm47Cj4gKwo+ICsgICAgICAgICAg
+ICByYyA9IGh2bV9nZXRfaW9yZXFfc2VydmVyX2ZyYW1lKGQsIGlkLCBmcmFtZSArIGksICZtZm4p
+OwoKTmVpdGhlciB1cCBmcm9tIGhlcmUgbm9yIGluIHRoZSBjYWxsZWQgZnVuY3Rpb24gaXQgaXMg
+YmVpbmcgY2hlY2tlZAp0aGF0IGQgaXMgYWN0dWFsbHkgYSBIVk0gZG9tYWluLgoKSmFuCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
