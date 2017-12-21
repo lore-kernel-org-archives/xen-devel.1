@@ -1,34 +1,21 @@
-From: Christoph Moench-Tegeder <cmt@burggraben.net>
-Subject: Re: 4.8.3 preparations
-Date: Thu, 21 Dec 2017 23:12:15 +0100
-Message-ID: <20171221221214.GB1587@elch.exwg.net>
-References: <5A3A8C7C0200007800198E0E@prv-mh.provo.novell.com>
- <5f369630-da03-ea6d-3b2d-01ef5ce05674@citrix.com>
- <5a3c0ea0.d24a620a.f5713.ef59@mx.google.com>
+From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Subject: Re: [PATCH RFC 05/16] Save/Restore Support: Add kernel
+ shutdown logic to shutdown.c
+Date: Thu, 21 Dec 2017 17:49:11 -0500
+Message-ID: <20171221224910.GH13559@char.us.oracle.com>
+References: <1513726931-7516-1-git-send-email-bruno.alvisio@gmail.com>
+ <1513726931-7516-6-git-send-email-bruno.alvisio@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=r5do=dr=burggraben.net=cmt@srs-us1.protection.inumbo.net>)
- id 1eS94i-0006WM-NB
- for xen-devel@lists.xenproject.org; Thu, 21 Dec 2017 22:12:24 +0000
-Received: from localhost (localhost [127.0.0.1])
- by smtp.burggraben.net (Postfix) with ESMTP id ABA2E6002F5
- for <xen-devel@lists.xenproject.org>; Thu, 21 Dec 2017 23:12:20 +0100 (CET)
-Received: from smtp.burggraben.net ([127.0.0.1])
- by localhost (ns.burggraben.net [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id spb02LsaoPkV for <xen-devel@lists.xenproject.org>;
- Thu, 21 Dec 2017 23:12:15 +0100 (CET)
-Received: from elch.exwg.net (elch.exwg.net
- [IPv6:2001:470:7120:1:922b:34ff:fe56:321])
- (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "elch.exwg.net", Issuer "Christoph Moench-Tegeder" (verified OK))
- by smtp.burggraben.net (Postfix) with ESMTPS
- for <xen-devel@lists.xenproject.org>; Thu, 21 Dec 2017 23:12:15 +0100 (CET)
+ <srs0=uflf=dr=oracle.com=konrad.wilk@srs-us1.protection.inumbo.net>)
+ id 1eS9fd-0000e8-CX
+ for xen-devel@lists.xenproject.org; Thu, 21 Dec 2017 22:50:33 +0000
 Content-Disposition: inline
-In-Reply-To: <5a3c0ea0.d24a620a.f5713.ef59@mx.google.com>
+In-Reply-To: <1513726931-7516-6-git-send-email-bruno.alvisio@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -37,17 +24,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Bruno Alvisio <bruno.alvisio@gmail.com>
+Cc: minios-devel@lists.xenproject.org, xen-devel@lists.xenproject.org, wei.liu2@citrix.com, jgross@suse.com, samuel.thibault@ens-lyon.org
 List-Id: xen-devel@lists.xenproject.org
 
-IyMgQWxleCBCcmF1bmVnZyAoYWxleC5icmF1bmVnZ0BnbWFpbC5jb20pOgoKPiBXaXRoIENocmlz
-dG9waCBhbnkgbXlzZWxmIHJlcG9ydGluZyB0aGUgc2FtZSBrZXJuZWwgY3Jhc2ggd2hlbiB1c2lu
-Zwo+IDQuMTQueCBrZXJuZWxzIGFuZCBYZW4gNC44LjIgaXMgdGhlcmUgYW55IGNoYW5jZSB0byBs
-b29rIGF0IHRoaXMgYnVnCj4gYmVmb3JlIDQuOC4zIGlzIHJlbGVhc2VkPyAKCkFzICJvdXIiIGJ1
-ZyBzZWVtcyB0byBiZSBrZXJuZWwtc2lkZSAoSSd2ZSBubyBwcm9ibGVtcyBpbiA0LjEzLjE2LCBv
-cgphbnkgb3RoZXIgNC4xMy54IEkgd2FzIHJ1bm5pbmcgYmVmb3JlIC0gbmVpdGhlciBpbiA0LjEy
-IGFuZCBzb21lIHdheQpiYWNrLCBhcyBmYXIgYXMgSSBjYW4gcmVtZW1iZXIpLCB0aGF0J3MgcmF0
-aGVyIHVucmVsYXRlZC4KClJlZ2FyZHMsCkNocmlzdG9waAoKLS0gClNwYXJlIFNwYWNlCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+LnNuaXAuLgo+IGRpZmYgLS1naXQgYS9zaHV0ZG93bi5jIGIvc2h1dGRvd24uYwo+IG5ldyBmaWxl
+IG1vZGUgMTAwNjQ0Cj4gaW5kZXggMDAwMDAwMC4uYjNjZWE2ZAo+IC0tLSAvZGV2L251bGwKPiAr
+KysgYi9zaHV0ZG93bi5jCj4gQEAgLTAsMCArMSwxODggQEAKPiArLyoKPiArICogICAgICAgICAg
+TWluaU9TCj4gKyAqCj4gKyAqICAgZmlsZTogZnJvbWRldmljZS5jYwo+ICsgKgo+ICsgKiAgICAg
+ICAgICBORUMgRXVyb3BlIEx0ZC4gUFJPUFJJRVRBUlkgSU5GT1JNQVRJT04KPiArICoKPiArICog
+VGhpcyBzb2Z0d2FyZSBpcyBzdXBwbGllZCB1bmRlciB0aGUgdGVybXMgb2YgYSBsaWNlbnNlIGFn
+cmVlbWVudAo+ICsgKiBvciBub25kaXNjbG9zdXJlIGFncmVlbWVudCB3aXRoIE5FQyBFdXJvcGUg
+THRkLiBhbmQgbWF5IG5vdCBiZQo+ICsgKiBjb3BpZWQgb3IgZGlzY2xvc2VkIGV4Y2VwdCBpbiBh
+Y2NvcmRhbmNlIHdpdGggdGhlIHRlcm1zIG9mIHRoYXQKPiArICogYWdyZWVtZW50LiBUaGUgc29m
+dHdhcmUgYW5kIGl0cyBzb3VyY2UgY29kZSBjb250YWluIHZhbHVhYmxlIHRyYWRlCgpVbT8hPwoK
+PiArICogc2VjcmV0cyBhbmQgY29uZmlkZW50aWFsIGluZm9ybWF0aW9uIHdoaWNoIGhhdmUgdG8g
+YmUgbWFpbnRhaW5lZCBpbgo+ICsgKiBjb25maWRlbmNlLgo+ICsgKiBBbnkgdW5hdXRob3JpemVk
+IHB1YmxpY2F0aW9uLCB0cmFuc2ZlciB0byB0aGlyZCBwYXJ0aWVzIG9yIGR1cGxpY2F0aW9uCj4g
+KyAqIG9mIHRoZSBvYmplY3Qgb3Igc291cmNlIGNvZGUgLSBlaXRoZXIgdG90YWxseSBvciBpbiBw
+YXJ0IOKAkyBpcwo+ICsgKiBwcm9oaWJpdGVkLgoKU28gLi4uIHRoaXMgbmVlZHMgdG8gYmUgYSBk
+aWZmZXJlbnQgbGljZW5zZSBJIHRoaW5rLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
