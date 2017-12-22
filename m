@@ -1,21 +1,11 @@
-From: "Wang, Baoqian" <bwang1@islander.tamucc.edu>
-Subject: Fw:  Boot Xen on Jetson TX2
-Date: Fri, 22 Dec 2017 16:54:41 +0000
-Message-ID: <BLUPR0601MB1604E5A3A199D671AF52473AC5020@BLUPR0601MB1604.namprd06.prod.outlook.com>
-References: <BLUPR0601MB1604582245D8B0216ED9EFE7C50C0@BLUPR0601MB1604.namprd06.prod.outlook.com>,
- <816de85a-ae38-6a8d-f0d0-11b7ef042025@epam.com>,
- <BLUPR0601MB16044C498E0DC89334F19283C50D0@BLUPR0601MB1604.namprd06.prod.outlook.com>,
- <SN1PR0601MB161539E5C0AE0B8DAA585FD7C5020@SN1PR0601MB1615.namprd06.prod.outlook.com>
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
+Subject: [RFC v2] xen/arm: Suspend to RAM Support in Xen for ARM
+Date: Fri, 22 Dec 2017 18:41:37 +0100
+Message-ID: <20171222174137.30076-1-mirela.simonovic@aggios.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4007706569132676952=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=mhd2=ds=islander.tamucc.edu=bwang1@srs-us1.protection.inumbo.net>)
- id 1eSQat-0000QW-2h
- for xen-devel@lists.xenproject.org; Fri, 22 Dec 2017 16:54:47 +0000
-In-Reply-To: <SN1PR0601MB161539E5C0AE0B8DAA585FD7C5020@SN1PR0601MB1615.namprd06.prod.outlook.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,407 +14,225 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xen.org
+Cc: edgar.iglesias@xilinx.com, sstabellini@kernel.org, Mirela Simonovic <mirela.simonovic@aggios.com>, julien.grall@linaro.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============4007706569132676952==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_BLUPR0601MB1604E5A3A199D671AF52473AC5020BLUPR0601MB1604_"
-
---_000_BLUPR0601MB1604E5A3A199D671AF52473AC5020BLUPR0601MB1604_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-
-
-
-________________________________
-From: Wang, Baoqian
-Sent: Thursday, December 21, 2017 7:53 PM
-To: Andrii Anisov
-Subject: Re: [Xen-devel] Boot Xen on Jetson TX2
-
-
-I also dumped domain0 info, it shows :
-
-
-VCPU information and callbacks for domain 0:
-(XEN)     VCPU0: CPU0 [has=3DF] poll=3D0 upcall_pend=3D00 upcall_mask=3D01 =
-dirty_cpus=3D{}
-(XEN)     cpu_hard_affinity=3D{0} cpu_soft_affinity=3D{0}
-(XEN)     pause_count=3D0 pause_flags=3D0
-(XEN) GICH_LRs (vcpu 0) mask=3D0
-(XEN)    VCPU_LR[0]=3D0
-(XEN)    VCPU_LR[1]=3D0
-(XEN)    VCPU_LR[2]=3D0
-(XEN)    VCPU_LR[3]=3D0
-(XEN)     No periodic timer
-
-
-There is not periodic timer and the CPU0[has=3DF], is this the problem?
-
-
-________________________________
-From: Wang, Baoqian
-Sent: Thursday, December 21, 2017 7:24:02 PM
-To: Andrii Anisov
-Subject: Re: [Xen-devel] Boot Xen on Jetson TX2
-
-
-Hi Andrii,
-
-
-Thanks for your reply. I tried your suggestions and got the following messa=
-ges.  The PC is a0080000 where the kernel image is loaded.  The X0 is a8000=
-000 where dtb is loaded. It seems that vcpu did not even execute the zImage=
-.  Other things looks normal. is it possible something wrong  with the doma=
-in0 kernel or the memory address where it is loaded.  Any other suggestions=
-? Thank you!
-
-Baoqian Wang
-
-
-(XEN) *** Dumping Dom0 vcpu#0 state: ***
-(XEN) ----[ Xen-4.9.0  arm64  debug=3Dy   Not tainted ]----
-(XEN) CPU:    0
-(XEN) PC:     00000000a0080000
-(XEN) LR:     0000000000000000
-(XEN) SP_EL0: 0000000000000000
-(XEN) SP_EL1: 0000000000000000
-(XEN) CPSR:   000001c5 MODE:64-bit EL1h (Guest Kernel, handler)
-(XEN)      X0: 00000000a8000000  X1: 0000000000000000  X2: 0000000000000000
-(XEN)      X3: 0000000000000000  X4: 0000000000000000  X5: 0000000000000000
-(XEN)      X6: 0000000000000000  X7: 0000000000000000  X8: 0000000000000000
-(XEN)      X9: 0000000000000000 X10: 0000000000000000 X11: 0000000000000000
-(XEN)     X12: 0000000000000000 X13: 0000000000000000 X14: 0000000000000000
-(XEN)     X15: 0000000000000000 X16: 0000000000000000 X17: 0000000000000000
-(XEN)     X18: 0000000000000000 X19: 0000000000000000 X20: 0000000000000000
-(XEN)     X21: 0000000000000000 X22: 0000000000000000 X23: 0000000000000000
-(XEN)     X24: 0000000000000000 X25: 0000000000000000 X26: 0000000000000000
-(XEN)     X27: 0000000000000000 X28: 0000000000000000  FP: 0000000000000000
-(XEN)
-(XEN)    ELR_EL1: 0000000000000000
-(XEN)    ESR_EL1: 00000000
-(XEN)    FAR_EL1: 0000000000000000
-(XEN)
-(XEN)  SCTLR_EL1: 00c50838
-(XEN)    TCR_EL1: 00000000
-(XEN)  TTBR0_EL1: 0000000000000000
-(XEN)  TTBR1_EL1: 0000000000000000
-(XEN)
-(XEN)   VTCR_EL2: 80043594
-(XEN)  VTTBR_EL2: 0001000275d33000
-(XEN)
-(XEN)  SCTLR_EL2: 30cd183d
-(XEN)    HCR_EL2: 000000008038663f
-(XEN)  TTBR0_EL2: 0000000275cfe000
-
-(XEN)    ESR_EL2: 8200000d
-(XEN)  HPFAR_EL2: 0000000000000000
-(XEN)    FAR_EL2: 00000000a0080000
-(XEN)
-(XEN) Guest stack trace from sp=3D0:
-(XEN)   Failed to convert stack to physical address
-(XEN) '0' pressed -> dumping Dom0's registers
-
-
-
-
-________________________________
-From: Andrii Anisov <andrii_anisov@epam.com>
-Sent: Thursday, December 21, 2017 3:16:01 AM
-To: Wang, Baoqian; xen-devel@lists.xenproject.org
-Subject: Re: [Xen-devel] Boot Xen on Jetson TX2
-
-Hello Wang,
-
-
-On 20.12.17 23:29, Wang, Baoqian wrote:
-> (XEN) 3... 2... 1...
-> (XEN) *** Serial input -> DOM0 (type 'CTRL-a' three times to switch
-> input to Xen)
-> (XEN) Freed 288kB init memory.
-Try switching to XEN console now. Hit Ctrl-a three (six with minicom)
-times, then '0'.
-
---
-
-*Andrii Anisov*
-
-*
-*
-
-
---_000_BLUPR0601MB1604E5A3A199D671AF52473AC5020BLUPR0601MB1604_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
-n-bottom:0;} --></style>
-</head>
-<body dir=3D"ltr">
-<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
--family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
-<p style=3D"margin-top:0;margin-bottom:0"><br>
-</p>
-<br>
-<br>
-<div style=3D"color: rgb(0, 0, 0);">
-<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
-<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font style=3D"font-size:11pt" face=
-=3D"Calibri, sans-serif" color=3D"#000000"><b>From:</b> Wang, Baoqian<br>
-<b>Sent:</b> Thursday, December 21, 2017 7:53 PM<br>
-<b>To:</b> Andrii Anisov<br>
-<b>Subject:</b> Re: [Xen-devel] Boot Xen on Jetson TX2</font>
-<div>&nbsp;</div>
-</div>
-<div dir=3D"ltr">
-<div id=3D"x_divtagdefaultwrapper" dir=3D"ltr" style=3D"font-size:12pt; col=
-or:#000000; font-family:Calibri,Helvetica,sans-serif">
-<p style=3D"margin-top:0; margin-bottom:0">I also dumped domain0 info, it s=
-hows :</p>
-<p style=3D"margin-top:0; margin-bottom:0"><br>
-</p>
-<div>VCPU information and callbacks for domain 0:&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp; VCPU0: CPU0 [has=3DF] poll=3D0 upcall_pend=3D=
-00 upcall_mask=3D01 dirty_cpus=3D{}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp; cpu_hard_affinity=3D{0} cpu_soft_affinity=3D{=
-0}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp; pause_count=3D0 pause_flags=3D0&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
-(XEN) GICH_LRs (vcpu 0) mask=3D0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
-(XEN)&nbsp;&nbsp;&nbsp; VCPU_LR[0]=3D0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
-(XEN)&nbsp;&nbsp;&nbsp; VCPU_LR[1]=3D0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
-(XEN)&nbsp;&nbsp;&nbsp; VCPU_LR[2]=3D0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
-(XEN)&nbsp;&nbsp;&nbsp; VCPU_LR[3]=3D0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp; No periodic timer&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
-<br>
-<br>
-There is not periodic timer and the CPU0[has=3DF], is this the problem? &nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<br>
-</div>
-<p></p>
-<p style=3D"margin-top:0; margin-bottom:0"><br>
-</p>
-</div>
-<hr tabindex=3D"-1" style=3D"display:inline-block; width:98%">
-<div id=3D"x_divRplyFwdMsg" dir=3D"ltr"><font style=3D"font-size:11pt" face=
-=3D"Calibri, sans-serif" color=3D"#000000"><b>From:</b> Wang, Baoqian<br>
-<b>Sent:</b> Thursday, December 21, 2017 7:24:02 PM<br>
-<b>To:</b> Andrii Anisov<br>
-<b>Subject:</b> Re: [Xen-devel] Boot Xen on Jetson TX2</font>
-<div>&nbsp;</div>
-</div>
-<style type=3D"text/css" style=3D"display:none">=0A=
-<!--=0A=
-p=0A=
-	{margin-top:0;=0A=
-	margin-bottom:0}=0A=
--->=0A=
-</style>
-<div dir=3D"ltr">
-<div id=3D"x_x_divtagdefaultwrapper" dir=3D"ltr" style=3D"font-size:12pt; c=
-olor:#000000; font-family:Calibri,Helvetica,sans-serif">
-<p style=3D"margin-top:0; margin-bottom:0">Hi Andrii,</p>
-<p style=3D"margin-top:0; margin-bottom:0"><br>
-</p>
-<p style=3D"margin-top:0; margin-bottom:0">Thanks for your reply. I tried y=
-our suggestions and got the following messages.&nbsp; The PC is a0080000 wh=
-ere the kernel image is loaded.&nbsp; The X0 is a8000000 where dtb is loade=
-d. It seems that vcpu did not even execute the
- zImage.&nbsp; Other things looks normal. is it possible something wrong&nb=
-sp; with the domain0 kernel or the memory address where it is loaded.&nbsp;=
- Any other suggestions? Thank you!</p>
-<p style=3D"margin-top:0; margin-bottom:0">Baoqian Wang</p>
-<p style=3D"margin-top:0; margin-bottom:0"><br>
-</p>
-<p style=3D"margin-top:0; margin-bottom:0"></p>
-<div>(XEN) *** Dumping Dom0 vcpu#0 state: ***<br>
-(XEN) ----[ Xen-4.9.0&nbsp; arm64&nbsp; debug=3Dy&nbsp;&nbsp; Not tainted ]=
-----<br>
-(XEN) CPU:&nbsp;&nbsp;&nbsp; 0<br>
-(XEN) PC:&nbsp;&nbsp;&nbsp;&nbsp; 00000000a0080000<br>
-(XEN) LR:&nbsp;&nbsp;&nbsp;&nbsp; 0000000000000000<br>
-(XEN) SP_EL0: 0000000000000000<br>
-(XEN) SP_EL1: 0000000000000000<br>
-(XEN) CPSR:&nbsp;&nbsp; 000001c5 MODE:64-bit EL1h (Guest Kernel, handler)<b=
-r>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; X0: 00000000a8000000&nbsp; X1: 00000000=
-00000000&nbsp; X2: 0000000000000000<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; X3: 0000000000000000&nbsp; X4: 00000000=
-00000000&nbsp; X5: 0000000000000000<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; X6: 0000000000000000&nbsp; X7: 00000000=
-00000000&nbsp; X8: 0000000000000000<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; X9: 0000000000000000 X10: 0000000000000=
-000 X11: 0000000000000000<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp; X12: 0000000000000000 X13: 0000000000000000 X=
-14: 0000000000000000<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp; X15: 0000000000000000 X16: 0000000000000000 X=
-17: 0000000000000000<br>
-<div>(XEN)&nbsp;&nbsp;&nbsp;&nbsp; X18: 0000000000000000 X19: 0000000000000=
-000 X20: 0000000000000000<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp; X21: 0000000000000000 X22: 0000000000000000 X=
-23: 0000000000000000<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp; X24: 0000000000000000 X25: 0000000000000000 X=
-26: 0000000000000000<br>
-(XEN)&nbsp;&nbsp;&nbsp;&nbsp; X27: 0000000000000000 X28: 0000000000000000&n=
-bsp; FP: 0000000000000000<br>
-(XEN)<br>
-(XEN)&nbsp;&nbsp;&nbsp; ELR_EL1: 0000000000000000<br>
-(XEN)&nbsp;&nbsp;&nbsp; ESR_EL1: 00000000<br>
-(XEN)&nbsp;&nbsp;&nbsp; FAR_EL1: 0000000000000000<br>
-(XEN)<br>
-(XEN)&nbsp; SCTLR_EL1: 00c50838<br>
-</div>
-<div>(XEN)&nbsp;&nbsp;&nbsp; TCR_EL1: 00000000<br>
-(XEN)&nbsp; TTBR0_EL1: 0000000000000000<br>
-(XEN)&nbsp; TTBR1_EL1: 0000000000000000<br>
-(XEN)<br>
-(XEN)&nbsp;&nbsp; VTCR_EL2: 80043594<br>
-(XEN)&nbsp; VTTBR_EL2: 0001000275d33000<br>
-(XEN)<br>
-(XEN)&nbsp; SCTLR_EL2: 30cd183d<br>
-(XEN)&nbsp;&nbsp;&nbsp; HCR_EL2: 000000008038663f<br>
-(XEN)&nbsp; TTBR0_EL2: 0000000275cfe000<br>
-</div>
-<br>
-</div>
-<div>(XEN)&nbsp;&nbsp;&nbsp; ESR_EL2: 8200000d<br>
-(XEN)&nbsp; HPFAR_EL2: 0000000000000000<br>
-(XEN)&nbsp;&nbsp;&nbsp; FAR_EL2: 00000000a0080000<br>
-(XEN)<br>
-(XEN) Guest stack trace from sp=3D0:<br>
-(XEN)&nbsp;&nbsp; Failed to convert stack to physical address<br>
-</div>
-<div>(XEN) '0' pressed -&gt; dumping Dom0's registers<br>
-</div>
-<br>
-<p></p>
-<p style=3D"margin-top:0; margin-bottom:0"><br>
-</p>
-<p style=3D"margin-top:0; margin-bottom:0"><br>
-</p>
-</div>
-<hr tabindex=3D"-1" style=3D"display:inline-block; width:98%">
-<div id=3D"x_x_divRplyFwdMsg" dir=3D"ltr"><font style=3D"font-size:11pt" fa=
-ce=3D"Calibri, sans-serif" color=3D"#000000"><b>From:</b> Andrii Anisov &lt=
-;andrii_anisov@epam.com&gt;<br>
-<b>Sent:</b> Thursday, December 21, 2017 3:16:01 AM<br>
-<b>To:</b> Wang, Baoqian; xen-devel@lists.xenproject.org<br>
-<b>Subject:</b> Re: [Xen-devel] Boot Xen on Jetson TX2</font>
-<div>&nbsp;</div>
-</div>
-<div class=3D"x_x_BodyFragment"><font size=3D"2"><span style=3D"font-size:1=
-1pt">
-<div class=3D"x_x_PlainText">Hello Wang,<br>
-<br>
-<br>
-On 20.12.17 23:29, Wang, Baoqian wrote:<br>
-&gt; (XEN) 3... 2... 1...<br>
-&gt; (XEN) *** Serial input -&gt; DOM0 (type 'CTRL-a' three times to switch=
- <br>
-&gt; input to Xen)<br>
-&gt; (XEN) Freed 288kB init memory.<br>
-Try switching to XEN console now. Hit Ctrl-a three (six with minicom) <br>
-times, then '0'.<br>
-<br>
--- <br>
-<br>
-*Andrii Anisov*<br>
-<br>
-*<br>
-*<br>
-<br>
-</div>
-</span></font></div>
-</div>
-</div>
-</div>
-</div>
-</body>
-</html>
-
---_000_BLUPR0601MB1604E5A3A199D671AF52473AC5020BLUPR0601MB1604_--
-
-
---===============4007706569132676952==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4007706569132676952==--
+VGhpcyBkb2N1bWVudCBjb250YWlucyBvdXIgZGVzaWduIHNwZWNpZmljYXRpb24gZm9yICJzdXNw
+ZW5kIHRvIFJBTSIKc3VwcG9ydCBmb3IgQVJNIGluIFhlbi4gSXQgY292ZXJzIHRoZSBiYXNpYyBz
+dXNwZW5kIHRvIFJBTSBtZWNoYW5pc20KYmFzZWQgb24gQVJNIFBTQ0kgc3RhbmRhcmQsIHRoYXQg
+d291bGQgYWxsb3cgaW5kaXZpZHVhbCBndWVzdHMgYW5kClhlbiBpdHNlbGYgdG8gc3VzcGVuZC9y
+ZXN1bWUuCgpXZSB3b3VsZCBhcHByZWNpYXRlIHlvdXIgZmVlZGJhY2suCgpTaWduZWQtb2ZmLWJ5
+OiBNaXJlbGEgU2ltb25vdmljIDxtaXJlbGEuc2ltb25vdmljQGFnZ2lvcy5jb20+Ci0tLQp2MjoK
+LUltcHJvdmVkIHNwZWNpZmljYXRpb24gYWNjb3JkaW5nIHRvIGNvbW1lbnRzCi1BZGRlZCBtb3Jl
+IGltcGxlbWVudGF0aW9uIGRldGFpbHMKLUluY3JlbWVudGVkIHJldmlzaW9uIG51bWJlciB0byAx
+LjEKLS0tCiBkb2NzL21pc2MvYXJtL3N1c3BlbmQtdG8tcmFtLnR4dCB8IDI2NiArKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysKIDEgZmlsZSBjaGFuZ2VkLCAyNjYgaW5zZXJ0
+aW9ucygrKQogY3JlYXRlIG1vZGUgMTAwNjQ0IGRvY3MvbWlzYy9hcm0vc3VzcGVuZC10by1yYW0u
+dHh0CgpkaWZmIC0tZ2l0IGEvZG9jcy9taXNjL2FybS9zdXNwZW5kLXRvLXJhbS50eHQgYi9kb2Nz
+L21pc2MvYXJtL3N1c3BlbmQtdG8tcmFtLnR4dApuZXcgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAw
+MDAwMDAwMDAwLi42ZThmMTBkMWNlCi0tLSAvZGV2L251bGwKKysrIGIvZG9jcy9taXNjL2FybS9z
+dXNwZW5kLXRvLXJhbS50eHQKQEAgLTAsMCArMSwyNjYgQEAKKyUgU3VzcGVuZCB0byBSQU0gU3Vw
+cG9ydCBpbiBYZW4gZm9yIEFSTQorJSBSZXZpc2lvbiAxLjEKKworPT09PT09PT0KK092ZXJ2aWV3
+Cis9PT09PT09PQorCitTdXNwZW5kIHRvIFJBTSAoaW4gdGhlIGZvbGxvd2luZyB0ZXh0ICdzdXNw
+ZW5kJykgZm9yIEFSTSBpbiBYZW4gc2hvdWxkIGJlCitjb29yZGluYXRlZCB1c2luZyBBUk0gUFND
+SSBzdGFuZGFyZCBbMV0uCisKK0lkZWFsbHksIEVMMS8yIHNob3VsZCBzdXNwZW5kIGluIHRoZSBm
+b2xsb3dpbmcgb3JkZXI6CisxKSBVbnByaXZpbGVnZWQgZ3Vlc3RzIChEb21Vcykgc3VzcGVuZAor
+MikgUHJpdmlsZWdlZCBndWVzdCAoRG9tMCkgc3VzcGVuZHMKKzMpIFhlbiBzdXNwZW5kcworCitI
+b3dldmVyLCBzdXNwZW5kaW5nIHVucHJpdmlsZWdlZCBndWVzdHMgaXMgbm90IG1hbmRhdG9yeSBm
+b3Igc3VzcGVuZGluZworRG9tMCBhbmQgWGVuLiBTeXN0ZW0gc3VzcGVuZCBpbml0aWF0ZWQgYnkg
+RG9tMCAoc3RlcCAyKSBpcyBjb25zaWRlcmVkIHRvIGJlIGFuCit1bHRpbWF0ZSBkZWNpc2lvbiB0
+byBzdXNwZW5kIHRoZSBwaHlzaWNhbCBtYWNoaW5lLiBTdXNwZW5kaW5nIG9mIFhlbiAoc3RlcCAz
+KQoraXMgdHJpZ2dlcmVkIHdoZW5ldmVyIERvbTAgY29tcGxldGVzIHN1c3BlbmQuIFhlbiBzdXNw
+ZW5kIGxlYWRzIHRvIHRoZSBmdWxsCitzdXNwZW5kIG9mIEVMMi4KKworSWYgYW4gdW5wcml2aWxl
+Z2VkIGd1ZXN0IGlzIG5vdCBzdXNwZW5kZWQgYXQgdGhlIG1vbWVudCB3aGVuIERvbTAgaW5pdGlh
+dGVzCitpdHMgb3duIHN1c3BlbmQsIHRoZSBndWVzdCB3aWxsIGJlIHBhdXNlZCBvbiBYZW4ncyBz
+dXNwZW5kIGFuZCB1bnBhdXNlZCBvbgorWGVuJ3MgcmVzdW1lLiBUaGF0IHdheSwgYSBndWVzdCB3
+aGljaCBkb2Vzbid0IGhhdmUgcG93ZXIgbWFuYWdlbWVudCBzdXBwb3J0CitjYW5ub3QgcHJldmVu
+dCB0aGUgcGh5c2ljYWwgc3lzdGVtIGZyb20gc3VzcGVuZGluZyB3aGVuIHRoZSBkZWNpc2lvbiB0
+byBzdXNwZW5kCitpcyBtYWRlIGJ5IHByaXZpbGVnZWQgc29mdHdhcmUgKERvbTApLgorCitFYWNo
+IGd1ZXN0IGluIHRoZSBzeXN0ZW0gaXMgcmVzcG9uc2libGUgZm9yIHN1c3BlbmRpbmcgdGhlIGRl
+dmljZXMgaXQgb3ducy4KK0lmIGEgZ3Vlc3QgZG9lcyBub3Qgc3VzcGVuZCBhIGRldmljZSwgdGhl
+IGRldmljZSB3aWxsIGNvbnRpbnVlIHRvIG9wZXJhdGUgYXMKK2l0IGlzIGNvbmZpZ3VyZWQgYXQg
+dGhlIG1vbWVudCB3aGVuIHRoZSBzeXN0ZW0gc3VzcGVuZHMuIElmIGEgZGV2aWNlIHRyaWdnZXJz
+CithbiBpbnRlcnJ1cHQgd2hpbGUgdGhlIHBoeXNpY2FsIHN5c3RlbSBpcyBzdXNwZW5kZWQsIHRo
+ZSBzeXN0ZW0gd2lsbCByZXN1bWUuCisKK0l0IGlzIHJlY29tbWVuZGVkIGZvciBhbiB1bnByaXZp
+bGVnZWQgZ3Vlc3QgdG8gcGFydGljaXBhdGUgaW4gcG93ZXIgbWFuYWdlbWVudAoraW4gdGhlIGZv
+bGxvd2luZyBzY2VuYXJpbzoKK0Fzc3VtZSB1bnByaXZpbGVnZWQgZ3Vlc3Qgb3ducyBhIGRldmlj
+ZSB3aGljaCB3aWxsIHRyaWdnZXIgaW50ZXJydXB0IGF0IHNvbWUKK3BvaW50LiBUaGlzIGludGVy
+cnVwdCB3aWxsIHdha2UtdXAgdGhlIHN5c3RlbS4gSWYgc3VjaCBhIGJlaGF2aW9yIGlzIG5vdCB3
+YW50ZWQsCitjb29yZGluYXRpb24gYmV0d2VlbiBEb20wIGFuZCB0aGUgZ3Vlc3QgaXMgcmVxdWly
+ZWQgaW4gb3JkZXIgdG8gaW5mb3JtIHRoZSBndWVzdAorYWJvdXQgdGhlIGludGVuZGVkIHBoeXNp
+Y2FsIHN5c3RlbSBzdXNwZW5kLiBUaGVuLCB0aGUgZ3Vlc3Qgd2lsbCBoYXZlIGEgY2hhbmNlCit0
+byBzdXNwZW5kIHRoZSBkZXZpY2Ugb3IgcmVzcG9uZCB0byB0aGUgcmVxdWVzdCBpbiBhbiBhYm9y
+dCBmYXNoaW9uLgorCitTaW5jZSB0aGlzIHByb3Bvc2FsIGlzIGZvY3VzZWQgb24gaW1wbGVtZW50
+aW5nIFBTQ0ktYmFzZWQgc3VzcGVuZCBtZWNoYW5pc21zIGluCitYZW4sIGNvbW11bmljYXRpb24g
+d2l0aCBvciBhbW9uZyB0aGUgZ3Vlc3RzIGlzIG5vdCBjb3ZlcmVkIGJ5IHRoaXMgZG9jdW1lbnQu
+CitUaGUgb3JkZXIgb2Ygc3VzcGVuZGluZyB0aGUgZ3Vlc3RzIGlzIGFzc3VtZWQgdG8gYmUgZ3Vh
+cmFudGVlZCBieSB0aGUgc29mdHdhcmUKK3J1bm5pbmcgaW4gRUwxLgorCitUaGlzIGRvY3VtZW50
+IGNvdmVycyB0aGUgZm9sbG93aW5nOgorMSkgTWVjaGFuaXNtIGZvciBzdXNwZW5kaW5nL3Jlc3Vt
+aW5nIGEgZ3Vlc3Q6CisJMS4xKSBTdXNwZW5kIGlzIGluaXRpYXRlZCBieSB0aGUgZ3Vlc3QKKwkx
+LjIpIFJlc3VtZSBpcyBpbml0aWF0ZWQgYnkgYSBkZXZpY2UgaW50ZXJydXB0CisyKSBNZWNoYW5p
+c20gZm9yIHBhdXNpbmcvdW5wYXVzaW5nIHJ1bm5pbmcgZ3Vlc3RzIHdoZW4gRG9tMCBzdXNwZW5k
+cworMykgTWVjaGFuaXNtIGZvciBzdXNwZW5kaW5nL3Jlc3VtaW5nIFhlbiB3aGVuIERvbTAgY29t
+cGxldGVzIHN1c3BlbmQKKzQpIFJlc3VtaW5nIGZyb20gYW55IHN0YXRlIG9uIGEgd2FrZS11cCBl
+dmVudCAoZGV2aWNlIGludGVycnVwdCk6CisJNC4xKSBSZXN1bWUgRG9tVSBvbiB3YWtlLXVwIGV2
+ZW50IHdoZW4gRG9tMCBpcyBzdGlsbCBydW5uaW5nCisJNC4yKSBSZXN1bWUgRG9tVSBvbiB3YWtl
+LXVwIGV2ZW50IHdoZW4gWGVuIGlzIHN1c3BlbmRlZAorCTQuMykgUmVzdW1lIERvbTAgb24gd2Fr
+ZS11cCBldmVudAorCitNZWNoYW5pc21zIGVudW1lcmF0ZWQgYWJvdmUgd2lsbCBhbGxvdyBkaWZm
+ZXJlbnQga2luZCBvZiBwb2xpY2llcyBhbmQKK2Nvb3JkaW5hdGlvbiBhbW9uZyBndWVzdHMgdG8g
+YmUgaW1wbGVtZW50ZWQgaW4gRUwxLiBUaGF0IGlzIG91dCBvZiB0aGUgc2NvcGUgb2YKK3RoaXMg
+ZG9jdW1lbnQuCisKKy0tLS0tLS0tLS0tLS0tLS0tCitTdXNwZW5kaW5nIEd1ZXN0cworLS0tLS0t
+LS0tLS0tLS0tLS0KKworU3VzcGVuZCBwcm9jZWR1cmUgZm9yIGEgZ3Vlc3QgY29uc2lzdHMgb2Yg
+dGhlIGZvbGxvd2luZzoKKzEpIFN1c3BlbmRpbmcgZGV2aWNlcworMikgU3VzcGVuZGluZyBub24t
+Ym9vdCBDUFVzIChiYXNlZCBvbiBob3RwbHVnL1BTQ0kpCiszKSBTeXN0ZW0gc3VzcGVuZCwgcGVy
+Zm9ybWVkIGJ5IHRoZSBib290IENQVQorCitFYWNoIGd1ZXN0IHNob3VsZCBzdXNwZW5kIHRoZSBk
+ZXZpY2VzIGl0IG93bnMganVzdCBsaWtlIGl0IHdvdWxkIHdoZW4gcnVubmluZword2l0aG91dCBY
+ZW4uCisKK0d1ZXN0cyBzaG91bGQgc3VzcGVuZCB0aGVpciBub24tYm9vdCB2Q1BVcyB1c2luZyB0
+aGUgaG90cGx1ZyBtZWNoYW5pc20uCitWaXJ0dWFsIENQVXMgc2hvdWxkIGJlIHB1dCBvZmZsaW5l
+IHVzaW5nIHRoZSBhbHJlYWR5IGltcGxlbWVudGVkIFBTQ0kgdkNQVV9PRkYKK2NhbGwgKHByZWZp
+eCAndicgaXMgYWRkZWQgdG8gZGlzdGluZ3Vpc2ggUFNDSSBjYWxscyBtYWRlIGJ5IGd1ZXN0cyB0
+byBYZW4sIHdoaWNoCithZmZlY3QgdmlydHVhbCBtYWNoaW5lczsgYXMgb3Bwb3NlZCB0byBQU0NJ
+IGNhbGxzIG1hZGUgYnkgWGVuIHRvIHRoZSBFTDMsIHdoaWNoCitjYW4gYWZmZWN0IHBvd2VyIHN0
+YXRlIG9mIHRoZSBwaHlzaWNhbCBtYWNoaW5lKS4KKworQWZ0ZXIgc3VzcGVuZGluZyBpdHMgbm9u
+LWJvb3QgdkNQVXMgYSBndWVzdCBzaG91bGQgZmluYWxpemUgdGhlIHN1c3BlbmQgYnkKK21ha2lu
+ZyB0aGUgdlNZU1RFTV9TVVNQRU5EIFBTQ0kgY2FsbC4gVGhlIHJlc3VtZSBhZGRyZXNzIGlzIHNw
+ZWNpZmllZCBieSB0aGUKK2d1ZXN0IHZpYSB0aGUgdlNZU1RFTV9TVVNQRU5EIGVudHJ5X3BvaW50
+X2FkZHJlc3MgYXJndW1lbnQuIFRoZSB2U1lTVEVNX1NVU1BFTkQKK2NhbGwgaXMgY3VycmVudGx5
+IG5vdCBpbXBsZW1lbnRlZCBpbiBYZW4uCisKK0l0IGlzIGV4cGVjdGVkIHRoYXQgYSBndWVzdCBs
+ZWF2ZXMgZW5hYmxlZCBhbGwgaW50ZXJydXB0cyB0aGF0IHNob3VsZCB3YWtlIGl0Cit1cC4gT3Ro
+ZXIgaW50ZXJydXB0cyBzaG91bGQgYmUgZGlzYWJsZWQgYnkgdGhlIGd1ZXN0IHByaW9yIHRvIGNh
+bGxpbmcKK3ZTWVNURU1fU1VTUEVORC4KKworQWZ0ZXIgYW4gdW5wcml2aWxlZ2VkIGd1ZXN0IHN1
+c3BlbmRzLCBYZW4gd2lsbCBub3Qgc3VzcGVuZC4gWGVuIHdvdWxkIHN1c3BlbmQKK29ubHkgYWZ0
+ZXIgdGhlIERvbTAgY29tcGxldGVzIHRoZSBzeXN0ZW0gc3VzcGVuZC4KKworLS0tLS0tLS0tLS0t
+LS0KK1N1c3BlbmRpbmcgWGVuCistLS0tLS0tLS0tLS0tLQorCitYZW4gc2hvdWxkIHN0YXJ0IHN1
+c3BlbmRpbmcgaXRzZWxmIHVwb24gcmVjZWl2aW5nIHRoZSB2U1lTVEVNX1NVU1BFTkQgY2FsbAor
+ZnJvbSB0aGUgbGFzdCBydW5uaW5nIGd1ZXN0IChEb20wKS4gQXQgdGhhdCBtb21lbnQgYWxsIHBo
+eXNpY2FsIENQVXMgYXJlIHN0aWxsCitvbmxpbmUgKHRha2luZyBvZmZsaW5lIGEgdkNQVSBvciBz
+dXNwZW5kaW5nIGEgVk0gZG9lcyBub3QgYWZmZWN0IHBoeXNpY2FsIENQVXMpLgorWGVuIHNoYWxs
+IG5vdyBwdXQgb2ZmbGluZSB0aGUgbm9uLWJvb3QgcENQVXMgYnkgbWFraW5nIHRoZSBDUFVfT0ZG
+IFBTQ0kgY2FsbAordG8gRUwzLiBUaGUgQ1BVX09GRiBQU0NJIGZ1bmN0aW9uIGlzIGN1cnJlbnRs
+eSBub3QgaW1wbGVtZW50ZWQgaW4gWGVuLgorCitBZnRlciBwdXR0aW5nIG9mZmxpbmUgdGhlIG5v
+bi1ib290IGNvcmVzIFhlbiBtdXN0IHNhdmUgdGhlIGNvbnRleHQgYW5kIGZpbmFsaXplCitzdXNw
+ZW5kIGJ5IGludm9raW5nIFNZU1RFTV9TVVNQRU5EIFBTQ0kgY2FsbCwgd2hpY2ggaXMgcGFzc2Vk
+IHRvIEVMMy4KK1RoZSByZXN1bWUgcG9pbnQgb2YgWGVuIGlzIHNwZWNpZmllZCBieSB0aGUgZW50
+cnlfcG9pbnRfYWRkcmVzcyBhcmd1bWVudCBvZiB0aGUKK1NZU1RFTV9TVVNQRU5EIGNhbGwuIFRo
+ZSBTWVNURU1fU1VTUEVORCBmdW5jdGlvbiBhbmQgY29udGV4dCBzYXZpbmcgaXMgbm90CitpbXBs
+ZW1lbnRlZCBpbiBYZW4gZm9yIEFSTSB0b2RheS4KKworLS0tLS0tLS0tLS0tCitSZXN1bWluZyBY
+ZW4KKy0tLS0tLS0tLS0tLQorCitYZW4gbXVzdCBiZSByZXN1bWVkIHByaW9yIHRvIGFueSBzb2Z0
+d2FyZSBydW5uaW5nIGluIEVMMS4gU3RhcnRpbmcgZnJvbSB0aGUKK3Jlc3VtZSBwb2ludCwgWGVu
+IHNob3VsZCByZXN0b3JlIHRoZSBjb250ZXh0IGFuZCByZXN1bWUgRG9tMC4gRG9tMCBzaGFsbCBh
+bHdheXMKK2JlIHJlc3VtZWQgd2hlbmV2ZXIgWGVuIHJlc3VtZXMuCisKKy0tLS0tLS0tLS0tLS0t
+LQorUmVzdW1pbmcgR3Vlc3RzCistLS0tLS0tLS0tLS0tLS0KKworUmVzdW1lIG9mIHRoZSBwcml2
+aWxlZ2VkIGd1ZXN0IChEb20wKSBpcyBhbHdheXMgZm9sbG93aW5nIHRoZSBYZW4gcmVzdW1lLgor
+CitBbiB1bnByaXZpbGVnZWQgZ3Vlc3Qgc2hhbGwgcmVzdW1lIG9uY2UgYSBkZXZpY2UgaXQgb3du
+cyB0cmlnZ2VycyBhIHdha2UtdXAKK2ludGVycnVwdCwgcmVnYXJkbGVzcyBvZiB3aGV0aGVyIFhl
+biB3YXMgc3VzcGVuZGVkIHdoZW4gdGhlIHdha2UtdXAgaW50ZXJydXB0Cit3YXMgdHJpZ2dlcmVk
+LiBJZiBYZW4gd2FzIHN1c3BlbmRlZCwgaXQgaXMgYXNzdW1lZCB0aGF0IERvbTAgd2lsbCBiZSBy
+dW5uaW5nCitiZWZvcmUgdGhlIERvbVUgZ3Vlc3Qgc3RhcnRzIHRvIHJlc3VtZS4gVGhlIHN5bmNo
+cm9uaXphdGlvbiBtZWNoYW5pc20gdG8KK2VuZm9yY2UgdGhlIGFzc3VtZWQgY29uZGl0aW9uIGlz
+IFRCRC4KKworSWYgdGhlIEFSTSdzIEdJQyB3YXMgcG93ZXJlZCBkb3duIGFmdGVyIHRoZSBBUk0g
+c3Vic3lzdGVtIHN1c3BlbmRlZCwgaXQgaXMKK2Fzc3VtZWQgdGhhdCBYZW4gbmVlZHMgdG8gcmVz
+dG9yZSB0aGUgR0lDIGludGVyZmFjZSBmb3IgYSBWTSBwcmlvciB0byBoYW5kaW5nCitvdmVyIGNv
+bnRyb2wgdG8gdGhlIGd1ZXN0LiBIb3dldmVyLCB0aGUgZ3Vlc3Qgc2hvdWxkIHJlc3RvcmUgaXRz
+IG93biBjb250ZXh0Cit1cG9uIGVudGVyaW5nIHRoZSByZXN1bWUgcG9pbnQsIGp1c3QgbGlrZSBp
+dCB3b3VsZCB3aGVuIHJ1bm5pbmcgd2l0aG91dCBYZW4uCisKKz09PT09PT09PT09PT09PQorSW1w
+bGVtZW50YXRpb24KKz09PT09PT09PT09PT09PQorCistLS0tLS0tLQorT3ZlcnZpZXcKKy0tLS0t
+LS0tCisKK0luIG9yZGVyIHRvIGVuYWJsZSB0aGUgc3VzcGVuZC9yZXN1bWUgb2YgVk1zIGFuZCBY
+ZW4gaXRzZWxmLCB0aGUgZm9sbG93aW5nIFBTQ0kKK2NhbGxzIGhhdmUgdG8gYmUgaW1wbGVtZW50
+ZWQgYW5kIGludGVncmF0ZWQgaW4gWGVuOgorMSkgdlNZU1RFTV9TVVNQRU5ECisyKSBDUFVfT0ZG
+CiszKSBTWVNURU1fU1VTUEVORAorCitJbiBhZGRpdGlvbiwgdGhlIGZvbGxvd2luZyBoYXZlIHRv
+IGJlIGltcGxlbWVudGVkOgorKiBTdXNwZW5kL3Jlc3VtZSB2Q1BVICh0cmlnZ2VyZWQgYnkgdlNZ
+U1RFTV9TVVNQRU5EIGNhbGwpCisqIFN1c3BlbmQvcmVzdW1lIFhlbiAodHJpZ2dlcmVkIGJ5IHZT
+WVNURU1fU1VTUEVORCBjYWxsZWQgYnkgRG9tMCksIGluY2x1ZGluZzoKKwkqIERpc2FibGUgd2F0
+aGRvZyBvbiBzdXNwZW5kLCBlbmFibGUgaXQgb24gcmVzdW1lCisJKiBQYXVzZSBkb21haW5zIG9u
+IHN1c3BlbmQsIHVucGF1c2UgdGhlbSBvbiByZXN1bWUKKwkqIERpc2FibGUgbm9uLWJvb3QgcENQ
+VXMgb24gc3VzcGVuZCwgZW5hYmxlIHRoZW0gb24gcmVzdW1lCisJKiBTYXZlL3Jlc3RvcmUgb2Yg
+R0lDIGNvbmZpZ3VyYXRpb24KKwkqIFN1c3BlbmQvcmVzdW1lIHRpbWVyCisJKiBTYXZlL3Jlc3Rv
+cmUgb2YgRUwyIGNvbnRleHQKKwkqIEltcGxlbWVudCByZXN1bWUgZW50cnkgcG9pbnQgaW4gWGVu
+LCBpbmNsdWRpbmcgTU1VIGNvbmZpZ3VyYXRpb24KKworSW1wbGVtZW50YXRpb24gZGV0YWlscyBh
+cmUgcHJvdmlkZWQgaW4gdGhlIHNlY3Rpb25zIGJlbG93LiBGdW5jdGlvbiBuYW1lcyBhbmQKK3Bh
+dGhzIHVzZWQgYmVsb3cgYXJlIGNvbnNpc3RlbnQgd2l0aGluIHRoZSBkb2N1bWVudCBidXQgbWF5
+IG5vdCBhbHdheXMgbWF0Y2ggdGhlCituYW1lcyB1c2VkIGluIGZ1dHVyZSBpbXBsZW1lbnRhdGlv
+bi4gRXhpc3RpbmcgZnVuY3Rpb25zIGFuZCBwYXRocyBhcmUgbmFtZWQgYXMKK2luIFhlbiBzb3Vy
+Y2UgdHJlZS4KKworLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQorU3VzcGVu
+ZC9SZXN1bWUgSW1wbGVtZW50YXRpb24gRGV0YWlscworLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLQorCitQU0NJIEltcGxlbWVudGF0aW9uIGFuZCBJbnRlZ3JhdGlvbgorLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KK3ZTWVNURU1fU1VTUEVORAorLS0tLS0t
+LS0tLS0tLS0tCit2U1lTVEVNX1NVU1BFTkQgc2hhbGwgYmUgaW1wbGVtZW50ZWQgaW4KKyogZG9f
+cHNjaV9zeXN0ZW1fc3VzcGVuZCgpIGluIGFyY2gvYXJtL3Zwc2NpLmMKKyogQ29kZSBpbmRlcGVu
+ZGVudCBmcm9tIFBTQ0kgaW50ZXJmYWNlIHdpbGwgYmUgYWRkZWQgaW4gYXJjaC9hcm0vc3VzcGVu
+ZC5jCisKK1RoZSBpbXBsZW1lbnRhdGlvbiBzaGFsbCBpbmNsdWRlIHRoZSBmb2xsb3dpbmcgc3Rl
+cHM6CisqIFN1c3BlbmQgdGhlIGN1cnJlbnQgKGNhbGxpbmcpIHZDUFUuIENvbnNpc3RzIG9mIDIg
+bWFqb3Igc3RlcHM6CisxKSBSZXNldCBjb250ZXh0IG9mIHZDUFUgYW5kIHNhdmUgZW50cnkgcG9p
+bnQgaW50byBQQyBhbmQgY29udGV4dCBJRCBpbnRvIFgwCisoZW50cnkgcG9pbnQgYW5kIGNvbnRl
+eHQgSUQgYXJlIHByb3ZpZGVkIHZpYSB2U1lTVEVNX1NVU1BFTkQgYXJndW1lbnRzKQorMikgQmxv
+Y2sgdkNQVSB0byBlbnN1cmUgdGhhdCBpdCBpcyBub3Qgc2NoZWR1bGVkIHVudGlsIGl0IGlzIHVu
+YmxvY2tlZCBieSBhbgoraW50ZXJydXB0LgorSW4gc3RlcCAxKSBhYm92ZSwgdGhlIGNvbnRleHQg
+aXMgcmVzZXQgaW4gb3JkZXIgdG8gcHJlcGFyZSB0aGUgdkNQVSBmb3IgcmVzdW1lLAoraS5lLiB0
+byBzYXZlIHZDUFUgY29udGV4dCB0aGF0IG1hdGNoZXMgcmVzZXQgdmFsdWVzIGFzIGV4cGVjdGVk
+IGJ5IHNvZnR3YXJlIG9uCityZXN1bWUuIFRoaXMgZG9lc24ndCBob2xkIGZvciBQQyBhbmQgWDAs
+IHNpbmNlIHRoZSBQQyBjb250YWlucyByZXN1bWUgZW50cnkKK3BvaW50IGFuZCBYMCBjb250YWlu
+cyBjb250ZXh0IElELCBhcyBkZWZpbmVkIGJ5IFBTQ0kuCisqIElmIHRoZSBoYXJkd2FyZSBkb21h
+aW4gbWFkZSB0aGUgY2FsbCB0cmlnZ2VyIFhlbiBzdXNwZW5kLCBpLmUuCisgIGNhbGwgbWFjaGlu
+ZV9zdXNwZW5kKCkgd2hpY2ggd2lsbCBiZSBpbXBsZW1lbnRlZCBpbiBhcmNoL2FybS9zdXNwZW5k
+LmMKKyAoc2ltaWxhciBhcyB0aGUgbWFjaGluZV9yZXN0YXJ0KCkgaXMgaW1wbGVtZW50ZWQgaW4g
+YXJjaC9hcm0vc2h1dGRvd24uYykKKworVGhlIGZ1bmN0aW9uIGRvX3BzY2lfc3lzdGVtX3N1c3Bl
+bmQoKSBzaGFsbCBiZSBjYWxsZWQgZnJvbQorKiBkb190cmFwX3BzY2koKSBpbiBhcmNoL2FybS90
+cmFwcy5jCisKK0NQVV9PRkYgKHBoeXNpY2FsIENQVXMpCistLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LQorVGhlIENQVV9PRkYgZnVuY3Rpb24gc2hhbGwgYmUgaW1wbGVtZW50ZWQgaW4KKyogY2FsbF9w
+c2NpX2NwdV9vZmYoKSBpbiBhcmNoL2FybS9wc2NpLmMKKworVGhlIGltcGxlbWVudGF0aW9uIHNo
+YWxsIGNvbnNpc3QganVzdCBvZiBtYWtpbmcgdGhlIFNNQyBjYWxsIHRvIEVMMy4KKworVGhpcyBm
+dW5jdGlvbiBuZWVkcyB0byBiZSBjYWxsZWQgd2hlbiBYZW4gZ2VuZXJpYyBjb2RlIGRpc2FibGVz
+IGEgbm9uLWJvb3QgQ1BVLgorV2hlbiBhIENQVSBpcyBkaXNhYmxlZCBpdCB3aWxsIGxvb3AgZm9y
+ZXZlciBpbiB3aGlsZSBsb29wIChzdG9wX2NwdSgpIGZ1bmN0aW9uCit3aGljaCBpcyBhbHJlYWR5
+IGltcGxlbWVudGVkIGluIHhlbi9hcmNoL2FybS9zbXBib290LmMpLiBDYWxsIHRvCitjYWxsX3Bz
+Y2lfY3B1X29mZigpIHNoYWxsIGJlIG1hZGUgYmVmb3JlIHRoZSBDUFUgZW50ZXJzIGluZmluaXRl
+IGxvb3AuCisKK1NZU1RFTV9TVVNQRU5EIChwaHlzaWNhbCkKKy0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0KK1RoZSBTWVNURU1fU1VTUEVORCBmdW5jdGlvbiBzaGFsbCBiZSBpbXBsZW1lbnRlZCBp
+bgorKiBjYWxsX3BzY2lfc3lzdGVtX3N1c3BlbmQoKSBpbiBhcmNoL2FybS9wc2NpLmMKKworVGhl
+IGltcGxlbWVudGF0aW9uIHNoYWxsIGNvbnNpc3QganVzdCBvZiBtYWtpbmcgdGhlIFNNQyBjYWxs
+IHRvIEVMMy4gVGhlCitlbnRyeV9wb2ludF9hZGRyZXNzIGFyZ3VtZW50IG9mIHRoZSBTTUMgY2Fs
+bCBuZWVkcyB0byBiZSBhbiBBUk0gYXJjaGl0ZWN0dXJlCityZXN1bWUgYWRkcmVzcywgd2hpY2gg
+c2hhbGwgYmUgaW1wbGVtZW50ZWQsIGUuZy4gYXMgaHlwX3Jlc3VtZSgpIGluCithcmNoL2FybS9h
+cm02NC9lbnRyeS5TLiBUaGUgY2FsbF9wc2NpX3N5c3RlbV9zdXNwZW5kKCkgZnVuY3Rpb24gZG9l
+cyBub3QgcmV0dXJuLgorT24gdGhlIHJlc3VtZSwgdGhlIGV4ZWN1dGlvbiBmbG93IGNvbnRpbnVl
+cyBmcm9tIGh5cF9yZXN1bWUuCisKK1RoZSBmdW5jdGlvbiBuZWVkcyB0byBiZSBjYWxsZWQgZnJv
+bSBtYWNoaW5lX3N1c3BlbmQoKSB0byBmaW5hbGl6ZSB0aGUgc3VzcGVuZAorcHJvY2VkdXJlLgor
+CistLS0tLS0tLS0tLS0tLS0tLS0KK0FkZGl0aW9uYWwgQ2hhbmdlcworLS0tLS0tLS0tLS0tLS0t
+LS0tCisKK1N1c3BlbmQgRmxvdworLS0tLS0tLS0tLS0tCitUaGUgc3VzcGVuZCBwcm9jZWR1cmUg
+c2hhbGwgYmUgaW1wbGVtZW50ZWQgaW4KKyogbWFjaGluZV9zdXNwZW5kKCkgaW4gYXJjaC9hcm0v
+c3VzcGVuZC5jCisKK1RoZSBpbXBsZW1lbnRhdGlvbiBzaGFsbCBpbmNsdWRlIHRoZSBmb2xsb3dp
+bmcgc3RlcHM6CisqIE1vdmUgdGhlIGV4ZWN1dGlvbiB0byBib290IHBDUFUKKyogU2V0IHRoZSBz
+eXN0ZW1fc3RhdGUgdmFyaWFibGUgdG8gU1lTX1NUQVRFX3N1c3BlbmQKKyogRGlzYWJsZSB3YXRj
+aGRvZworKiBGcmVlemUgZG9tYWlucyBieSBjYWxsaW5nIGRvbWFpbl9wYXVzZSgpIGZvciBlYWNo
+IGRvbWFpbgorKiBEaXNhYmxlIG5vbi1ib290IENQVXMgYnkgY2FsbGluZyBkaXNhYmxlX25vbmJv
+b3RfY3B1cygpCisqIERpc2FibGUgaW50ZXJydXB0cworKiBTdXNwZW5kIHRpbWVyCisqIFNhdmUg
+R0lDIGNvbnRleHQuIFNoYWxsIGJlIGltcGxlbWVudGVkIGluIGFyY2gvYXJtL2dpYy5jLAorICBp
+bmNsdWRlL2FzbS1hcm0vZ2ljLmggYW5kIGFyY2gvYXJtL2dpYy12Mi5jIChvbmx5IEdJQ3YyIHdp
+bGwgYmUgc3VwcG9ydGVkKS4KKyogU2F2ZSBDUFUgY29udGV4dC4gVGhpcyBzaGFsbCBiZSBpbXBs
+ZW1lbnRlZCBpbiBhc3NlbWJseSwgaW4gaHlwX3N1c3BlbmQoKQorICBpbiBhcmNoL2FybS9hcm02
+NC9lbnRyeS5TLiBUaGUgY29udGV4dCBjb25zaXN0cyBvZiBjYWxsZWUtc2F2ZWQgZ2VuZXJhbAor
+ICBwdXJwb3NlIHJlZ2lzdGVycywgYXMgd2VsbCBhcyBmZXcgc3lzdGVtIHJlZ2lzdGVycy4gQ29u
+dGV4dCBvZiByZWdpc3RlcnMgc2hhbGwKKyAgYmUgc2F2ZWQgaW4gYSBzdGF0aWNhbGx5IGFsbG9j
+YXRlZCBzdHJ1Y3R1cmUuCisqIEZpbmFsaXplIHRoZSBzdXNwZW5kIGJ5IGNhbGxpbmcgY2FsbF9w
+c2NpX3N5c3RlbV9zdXNwZW5kKCkKKworUmVzdW1lIEZsb3cKKy0tLS0tLS0tLS0tLQorVGhlIHJl
+c3VtZSBlbnRyeSBwb2ludCBzaGFsbCBiZSBpbXBsZW1lbnRlZCBpbgorKiBoeXBfcmVzdW1lKCkg
+aW4gYXJjaC9hcm0vYXJtNjQvZW50cnkuUworVGhlIHZlcnkgYmVnaW5uaW5nIG9mIHRoZSByZXN1
+bWUgcHJvY2VkdXJlIGhhcyB0byBiZSBpbXBsZW1lbnRlZCBpbiBhc3NlbWJseS4KK0l0IHNoYWxs
+IGNvbnRhaW4gdGhlIGZvbGxvd2luZzoKKyogRW5hYmxlIHRoZSBNTVUgc28gdGhhdCB0aGUgc3Ry
+dWN0dXJlIGNvbnRhaW5pbmcgQ1BVIGNvbnRleHQgd2hpY2ggd2FzIHNhdmVkIG9uCitzdXNwZW5k
+IGNhbiBiZSBhY2Nlc3NlZAorKiBSZXN0b3JlIENQVSBjb250ZXh0ICh0byBtYXRjaCB0aGUgdmFs
+dWVzIHNhdmVkIG9uIHN1c3BlbmQpIGFuZCByZXR1cm4gaW50byBDCisqIFNldCB0aGUgc3lzdGVt
+X3N0YXRlIHZhcmlhYmxlIHRvIFNZU19TVEFURV9yZXN1bWUKKyogUmVzdG9yZSBHSUMgY29udGV4
+dAorKiBSZXN1bWUgdGltZXIKKyogRW5hYmxlIGludGVycnVwdHMKKyogRW5hYmxlIG5vbi1ib290
+IENQVXMgYnkgY2FsbGluZyBlbmFibGVfbm9uYm9vdF9jcHVzKCkKKyogVGhhdyBkb21haW5zIGJ5
+IGNhbGxpbmcgZG9tYWluX3VucGF1c2UoKSBmb3IgZWFjaCBkb21haW4KKyogRW5hYmxlIHdhdGNo
+ZG9nCisqIFNldCB0aGUgc3lzdGVtX3N0YXRlIHZhcmlhYmxlIHRvIFNZU19TVEFURV9hY3RpdmUK
+KyogUmVzdW1lIERvbTAKKworPT09PT09PT09PQorUmVmZXJlbmNlcworPT09PT09PT09PQorCitb
+MV0gUG93ZXIgU3RhdGUgQ29vcmRpbmF0aW9uIEludGVyZmFjZSAoQVJNKToKK2h0dHA6Ly9pbmZv
+Y2VudGVyLmFybS5jb20vaGVscC90b3BpYy9jb20uYXJtLmRvYy5kZW4wMDIyZC9Qb3dlcl9TdGF0
+ZV9Db29yZGluYXRpb25fSW50ZXJmYWNlX1BERF92MV8xX0RFTjAwMjJELnBkZgotLSAKMi4xMy4w
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
