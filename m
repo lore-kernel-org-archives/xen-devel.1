@@ -1,13 +1,23 @@
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
-Subject: Re: [RFC] xen/arm: Suspend to RAM Support in Xen for ARM
-Date: Fri, 22 Dec 2017 18:51:10 +0100
-Message-ID: <CAKPH-NijP6uU_7W-ssBceZ0wov3BDjEGqzTcwapBHHM3rpCVzQ@mail.gmail.com>
-References: <20170809174338.10143-1-mirela.simonovic@aggios.com>
- <alpine.DEB.2.10.1712111456180.8052@sstabellini-ThinkPad-X260>
+From: "Alex Braunegg" <alex.braunegg@gmail.com>
+Subject: Re: [BUG] kernel bug encountered at
+	drivers/net/xen-netback/netback.c:430!
+Date: Sat, 23 Dec 2017 07:35:22 +1100
+Message-ID: <5a3d6c93.886f620a.2522d.c2fb@mx.google.com>
+References: <5a3ca8ee.4426620a.b956d.1799@mx.google.com>
+ <352b0317-cfc5-1ef4-fbd0-2b2879f9712e@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4626821286136253464=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1712111456180.8052@sstabellini-ThinkPad-X260>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=r7+5=ds=gmail.com=alex.braunegg@srs-us1.protection.inumbo.net>)
+ id 1eSU2b-0006N6-Cx
+ for xen-devel@lists.xenproject.org; Fri, 22 Dec 2017 20:35:37 +0000
+Received: by mail-pl0-x233.google.com with SMTP id bd8so13503336plb.9
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Dec 2017 12:35:34 -0800 (PST)
+In-Reply-To: <352b0317-cfc5-1ef4-fbd0-2b2879f9712e@suse.com>
+Content-Language: en-au
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,699 +26,204 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Will Wong <will.wong@xilinx.com>, Davorin Mista <davorin.mista@aggios.com>, Nirmala Pelluri <nirmala.pelluri@xilinx.com>, xen-devel@lists.xen.org
+To: 'Juergen Gross' <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: 'Paul Durrant' <paul.durrant@citrix.com>, 'Wei Liu' <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4626821286136253464==
-Content-Type: multipart/alternative; boundary="001a113fe8b24957ee0560f17662"
-
---001a113fe8b24957ee0560f17662
-Content-Type: text/plain; charset="UTF-8"
-
-Hi Stefano,
-
-Thanks for review.
-
-On Tue, Dec 12, 2017 at 12:10 AM, Stefano Stabellini <sstabellini@kernel.org
-> wrote:
-
-> On Wed, 9 Aug 2017, Mirela Simonovic wrote:
-> > This document contains our draft proposal for implementing "suspend to
-> RAM"
-> > support for ARM in Xen, as discussed during the last Xen ARM community
-> call.
-> > It covers the basic suspend to RAM mechanism based on ARM PSCI standard,
-> > that would allow individual guests and Xen itself to suspend.
-> >
-> > We would appreciate your feedback.
-> >
-> > Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
->
-> I am really sorry, for the very late reply. This email fell through the
-> cracks. In general, if I forget about an email, please send a follow up
-> to help me remember :-) Do you have an more up-to-date proposal or is
-> this still the latest?
->
-
-I've just sent new version, you're cc-ed.
-
-
->
-> From an high level, it looks good, only one minor comment: don't call it
-> "hotplug" because usually in the Xen community hotplug means adding more
-> vcpus or removing vcpus at runtime (removing entirely, not suspending).
->
->
-PSCI-based suspend relies on hotplug mechanism for suspending/resuming
-non-boot CPUs. I believe we are aligned with the terminology, but if I
-missed something please let me know.
-I have updated the design spec, hope it's better now.
-
-Thanks,
-Mirela
-
-
-> But the approach looks good to me.
->
->
-> > ---
-> >  docs/misc/arm/suspend-to-ram.txt | 210 ++++++++++++++++++++++++++++++
-> +++++++++
-> >  1 file changed, 210 insertions(+)
-> >  create mode 100644 docs/misc/arm/suspend-to-ram.txt
-> >
-> > diff --git a/docs/misc/arm/suspend-to-ram.txt
-> b/docs/misc/arm/suspend-to-ram.txt
-> > new file mode 100644
-> > index 0000000000..ec8080fc64
-> > --- /dev/null
-> > +++ b/docs/misc/arm/suspend-to-ram.txt
-> > @@ -0,0 +1,210 @@
-> > +% Suspend to RAM Support in Xen for ARM
-> > +% Revision 1.0
-> > +
-> > +========
-> > +Overview
-> > +========
-> > +
-> > +Suspend to RAM (in the following text 'suspend') for ARM in Xen should
-> be
-> > +coordinated using ARM PSCI standard [1].
-> > +
-> > +EL1/2 should suspend in the following order:
-> > +1) Unprivileged guests (DomUs) suspend
-> > +2) Privileged guest (Dom0) suspends
-> > +3) Xen suspends
-> > +
-> > +Since this proposal is focused on implementing PSCI-based suspend
-> mechanisms in
-> > +Xen, communication with or among the guests is not covered by this
-> document.
-> > +The order of suspending the guests is assumed to be guaranteed by the
-> software
-> > +running in EL1.
-> > +
-> > +-----------------
-> > +Suspending Guests
-> > +-----------------
-> > +
-> > +Suspend procedure for a guest consists of the following:
-> > +1) Suspending devices
-> > +2) Suspending non-boot CPUs
-> > +3) System suspend, performed by the boot CPU
-> > +
-> > +Each guest should suspend the devices it owns. Suspending of devices is
-> not
-> > +covered by this document. The document covers only mechanisms for
-> suspending
-> > +non-boot CPUs, as well as the system suspend.
-> > +
-> > +Guests should suspend their non-boot vCPUs using the hotplug mechanism.
-> > +Virtual CPUs should be put offline using the already implemented PSCI
-> vCPU_OFF
-> > +call (prefix 'v' is added to distinguish PSCI calls made by guests to
-> Xen, which
-> > +affect virtual machines; as opposed to PSCI calls made by Xen to the
-> EL3, which
-> > +can affect power state of the physical machine).
-> > +
-> > +After suspending its non-boot vCPUs a guest should finalize the suspend
-> by
-> > +making the vSYSTEM_SUSPEND PSCI call. The resume address is specified
-> by the
-> > +guest via the vSYSTEM_SUSPEND entry_point_address argument. The
-> vSYSTEM_SUSPEND
-> > +call is currently not implemented in Xen.
-> > +
-> > +It is expected that a guest leaves enabled all interrupts that should
-> wake it
-> > +up. Other interrupts should be disabled by the guest prior to calling
-> > +vSYSTEM_SUSPEND.
-> > +
-> > +After an unprivileged guest suspends, Xen will not suspend. Xen would
-> suspend
-> > +only after the Dom0 completes the system suspend.
-> > +
-> > +--------------
-> > +Suspending Xen
-> > +--------------
-> > +
-> > +Xen should start suspending itself upon receiving the vSYSTEM_SUSPEND
-> call
-> > +from the last running guest (Dom0). At that moment all physical CPUs
-> are still
-> > +online (taking offline a vCPU or suspending a VM does not affect
-> physical CPUs).
-> > +Xen shall now put offline the non-boot pCPUs by making the CPU_OFF PSCI
-> call
-> > +to EL3. The CPU_OFF PSCI function is currently not implemented in Xen.
-> > +
-> > +After putting offline the non-boot cores Xen must save the context and
-> finalize
-> > +suspend by invoking SYSTEM_SUSPEND PSCI call, which is passed to EL3.
-> > +The resume point of Xen is specified by the entry_point_address
-> argument of the
-> > +SYSTEM_SUSPEND call. The SYSTEM_SUSPEND function and context saving is
-> not
-> > +implemented in Xen for ARM today.
-> > +
-> > +------------
-> > +Resuming Xen
-> > +------------
-> > +
-> > +Xen must be resumed prior to any software running in EL1. Starting from
-> the
-> > +resume point, Xen should restore the context and resume Dom0. Dom0
-> shall always
-> > +be resumed whenever Xen resumes.
-> > +The whole Xen resume flow for the ARM architecture has to be
-> implemented.
-> > +
-> > +---------------
-> > +Resuming Guests
-> > +---------------
-> > +
-> > +Resume of the privileged guest (Dom0) is always following the Xen
-> resume.
-> > +
-> > +An unprivileged guest shall resume once a device it owns triggers a
-> wake-up
-> > +interrupt, regardless of whether Xen was suspended when the wake-up
-> interrupt
-> > +was triggered. If Xen was suspended, it is assumed that Dom0 will be
-> running
-> > +before the DomU guest starts to resume. The synchronization mechanism to
-> > +enforce the assumed condition is TBD.
-> > +
-> > +If the ARM's GIC was powered down after the ARM subsystem suspended, it
-> is
-> > +assumed that Xen needs to restore the GIC interface for a VM prior to
-> handing
-> > +over control to the guest. However, the guest should restore its own
-> context
-> > +upon entering the resume point (out of scope of this document).
-> > +
-> > +=======================
-> > +Implementation Proposal
-> > +=======================
-> > +
-> > +--------
-> > +Overview
-> > +--------
-> > +
-> > +In order to enable the suspend/resume of VMs and Xen itself, the
-> following PSCI
-> > +calls have to be implemented and integrated in Xen:
-> > +1) vSYSTEM_SUSPEND
-> > +2) CPU_OFF
-> > +3) SYSTEM_SUSPEND
-> > +
-> > +In addition, the following have to be implemented:
-> > +* Save/restore of EL2 context
-> > +* Save/restore of GIC configuration for each VM
-> > +
-> > +Implementation details are provided in the sections below. Function
-> names and
-> > +paths used below are consistent within the document but may not always
-> match the
-> > +names used in future implementation. Existing functions and paths are
-> named as
-> > +in Xen source tree.
-> > +
-> > +Note: The proposal is still incomplete and shall be refined in future
-> revisions.
-> > +Specific issues that are not addressed are marked as "TBD".
-> > +
-> > +-------------------------------------
-> > +Suspend/Resume Implementation Details
-> > +-------------------------------------
-> > +
-> > +PSCI Implementation and Integration
-> > +-----------------------------------
-> > +vSYSTEM_SUSPEND
-> > +---------------
-> > +vSYSTEM_SUSPEND shall be implemented in
-> > +* do_psci_system_suspend() in arch/arm/vpsci.c
-> > +
-> > +The implementation shall include the following steps:
-> > +* Block the current vCPU
-> > +* If the hardware domain made the call trigger Xen suspend, i.e.
-> > +  call machine_suspend() which will be implemented in arch/arm/suspend.c
-> > + (similar as the machine_restart() is implemented in
-> arch/arm/shutdown.c)
-> > +
-> > +The function do_psci_system_suspend() shall be called from
-> > +* do_trap_psci() in arch/arm/traps.c
-> > +
-> > +CPU_OFF (physical CPUs)
-> > +-----------------------
-> > +The CPU_OFF function shall be implemented in
-> > +* call_psci_cpu_off() in arch/arm/psci.c
-> > +
-> > +The implementation shall consist just of making the SMC call to EL3.
-> > +
-> > +This function needs to be called when Xen generic code disables
-> non-boot CPUs,
-> > +which is done by
-> > +* disable_nonboot_cpus() in common/cpu.c
-> > +This function calls architecture specific
-> > +* __cpu_die() implemented in arch/arm/smpboot.c
-> > +The call_psci_cpu_off() shall be invoked when the respective CPU dies.
-> To make
-> > +that happen, the
-> > +* arch_cpu_die() would be implemented in arch/arm/arm64/smpboot.c
-> > +and called from __cpu_die().
-> > +Finally the call_psci_cpu_off() shall be invoked from arch_cpu_die().
-> > +
-> > +Such a control flow would be similar to the already existing flow for
-> enabling
-> > +non-boot CPUs, which looks like this:
-> > +enable_nonboot_cpus() -> cpu_up() -> __cpu_up() -> arch_cpu_up() ->
-> > +call_psci_cpu_on()
-> > +
-> > +SYSTEM_SUSPEND (physical)
-> > +-------------------------
-> > +The SYSTEM_SUSPEND function shall be implemented in
-> > +* call_psci_system_suspend() in arch/arm/psci.c
-> > +
-> > +The implementation shall consist just of making the SMC call to EL3. The
-> > +entry_point_address argument of the SMC call needs to be an ARM
-> architecture
-> > +resume address. The call_psci_system_suspend() function does not return.
-> > +
-> > +The function needs to be called from machine_suspend() to finalize the
-> suspend
-> > +procedure.
-> > +
-> > +------------------
-> > +Additional Changes
-> > +------------------
-> > +
-> > +Suspend Flow
-> > +------------
-> > +The suspend procedure shall be implemented in
-> > +* machine_suspend() in arch/arm/suspend.c
-> > +
-> > +The implementation shall include the following steps:
-> > +* Set the system_state variable to SYS_STATE_suspend
-> > +* Freeze domains by calling domain_pause() for each domain (we assume
-> this needs
-> > +  to be done)
-> > +* Disable non-boot CPUs by calling disable_nonboot_cpus()
-> > +* Save ARM specific context
-> > +
-> > +Resume Flow
-> > +------------
-> > +The resume procedure shall be implemented in
-> > +* machine_resume() in arch/arm/suspend.c
-> > +
-> > +The machine_resume() implementation shall include the following steps:
-> > +* Restore ARM specific context
-> > +* Enable non-boot CPUs by calling enable_nonboot_cpus()
-> > +* Thaw domains by calling domain_unpause() for each domain (we assume
-> this needs
-> > +  to be done)
-> > +* Set the system_state variable to SYS_STATE_resume
-> > +* TBD: how to resume Dom0, i.e. how to hand over control to Dom0?
-> > +
-> > +==========
-> > +References
-> > +==========
-> > +
-> > +[1] Power State Coordination Interface (ARM):
-> > +http://infocenter.arm.com/help/topic/com.arm.doc.den0022d/Power_State_
-> Coordination_Interface_PDD_v1_1_DEN0022D.pdf
-> > +
-> > --
-> > 2.13.0
-> >
-> >
-> > _______________________________________________
-> > Xen-devel mailing list
-> > Xen-devel@lists.xen.org
-> > https://lists.xen.org/xen-devel
-> >
->
-
---001a113fe8b24957ee0560f17662
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi Stefano,<div><br></div><div>Thanks for review.</div><di=
-v class=3D"gmail_extra"><br><div class=3D"gmail_quote">On Tue, Dec 12, 2017=
- at 12:10 AM, Stefano Stabellini <span dir=3D"ltr">&lt;<a href=3D"mailto:ss=
-tabellini@kernel.org" target=3D"_blank">sstabellini@kernel.org</a>&gt;</spa=
-n> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
-0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><span class=
-=3D"gmail-">On Wed, 9 Aug 2017, Mirela Simonovic wrote:<br>
-&gt; This document contains our draft proposal for implementing &quot;suspe=
-nd to RAM&quot;<br>
-&gt; support for ARM in Xen, as discussed during the last Xen ARM community=
- call.<br>
-&gt; It covers the basic suspend to RAM mechanism based on ARM PSCI standar=
-d,<br>
-&gt; that would allow individual guests and Xen itself to suspend.<br>
-&gt;<br>
-&gt; We would appreciate your feedback.<br>
-&gt;<br>
-&gt; Signed-off-by: Mirela Simonovic &lt;<a href=3D"mailto:mirela.simonovic=
-@aggios.com">mirela.simonovic@aggios.com</a>&gt;<br>
-<br>
-</span>I am really sorry, for the very late reply. This email fell through =
-the<br>
-cracks. In general, if I forget about an email, please send a follow up<br>
-to help me remember :-) Do you have an more up-to-date proposal or is<br>
-this still the latest?<br></blockquote><div><br></div><div>I&#39;ve just se=
-nt new version, you&#39;re cc-ed.</div><div>=C2=A0</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">
-<br>
->From an high level, it looks good, only one minor comment: don&#39;t call i=
-t<br>
-&quot;hotplug&quot; because usually in the Xen community hotplug means addi=
-ng more<br>
-vcpus or removing vcpus at runtime (removing entirely, not suspending).<br>
-<br></blockquote><div><br></div><div>PSCI-based suspend relies on hotplug m=
-echanism for suspending/resuming non-boot CPUs. I believe we are aligned wi=
-th the terminology, but if I missed something please let me know.=C2=A0</di=
-v><div>I have updated the design spec, hope it&#39;s better now.<br></div><=
-div><br></div><div>Thanks,</div><div>Mirela</div><div>=C2=A0</div><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">
-But the approach looks good to me.<br>
-<div><div class=3D"gmail-h5"><br>
-<br>
-&gt; ---<br>
-&gt;=C2=A0 docs/misc/arm/suspend-to-ram.<wbr>txt | 210 ++++++++++++++++++++=
-++++++++++<wbr>+++++++++<br>
-&gt;=C2=A0 1 file changed, 210 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 docs/misc/arm/suspend-to-ram.<wbr>txt<br>
-&gt;<br>
-&gt; diff --git a/docs/misc/arm/suspend-to-<wbr>ram.txt b/docs/misc/arm/sus=
-pend-to-<wbr>ram.txt<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..ec8080fc64<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/docs/misc/arm/suspend-to-<wbr>ram.txt<br>
-&gt; @@ -0,0 +1,210 @@<br>
-&gt; +% Suspend to RAM Support in Xen for ARM<br>
-&gt; +% Revision 1.0<br>
-&gt; +<br>
-&gt; +=3D=3D=3D=3D=3D=3D=3D=3D<br>
-&gt; +Overview<br>
-&gt; +=3D=3D=3D=3D=3D=3D=3D=3D<br>
-&gt; +<br>
-&gt; +Suspend to RAM (in the following text &#39;suspend&#39;) for ARM in X=
-en should be<br>
-&gt; +coordinated using ARM PSCI standard [1].<br>
-&gt; +<br>
-&gt; +EL1/2 should suspend in the following order:<br>
-&gt; +1) Unprivileged guests (DomUs) suspend<br>
-&gt; +2) Privileged guest (Dom0) suspends<br>
-&gt; +3) Xen suspends<br>
-&gt; +<br>
-&gt; +Since this proposal is focused on implementing PSCI-based suspend mec=
-hanisms in<br>
-&gt; +Xen, communication with or among the guests is not covered by this do=
-cument.<br>
-&gt; +The order of suspending the guests is assumed to be guaranteed by the=
- software<br>
-&gt; +running in EL1.<br>
-&gt; +<br>
-&gt; +-----------------<br>
-&gt; +Suspending Guests<br>
-&gt; +-----------------<br>
-&gt; +<br>
-&gt; +Suspend procedure for a guest consists of the following:<br>
-&gt; +1) Suspending devices<br>
-&gt; +2) Suspending non-boot CPUs<br>
-&gt; +3) System suspend, performed by the boot CPU<br>
-&gt; +<br>
-&gt; +Each guest should suspend the devices it owns. Suspending of devices =
-is not<br>
-&gt; +covered by this document. The document covers only mechanisms for sus=
-pending<br>
-&gt; +non-boot CPUs, as well as the system suspend.<br>
-&gt; +<br>
-&gt; +Guests should suspend their non-boot vCPUs using the hotplug mechanis=
-m.<br>
-&gt; +Virtual CPUs should be put offline using the already implemented PSCI=
- vCPU_OFF<br>
-&gt; +call (prefix &#39;v&#39; is added to distinguish PSCI calls made by g=
-uests to Xen, which<br>
-&gt; +affect virtual machines; as opposed to PSCI calls made by Xen to the =
-EL3, which<br>
-&gt; +can affect power state of the physical machine).<br>
-&gt; +<br>
-&gt; +After suspending its non-boot vCPUs a guest should finalize the suspe=
-nd by<br>
-&gt; +making the vSYSTEM_SUSPEND PSCI call. The resume address is specified=
- by the<br>
-&gt; +guest via the vSYSTEM_SUSPEND entry_point_address argument. The vSYST=
-EM_SUSPEND<br>
-&gt; +call is currently not implemented in Xen.<br>
-&gt; +<br>
-&gt; +It is expected that a guest leaves enabled all interrupts that should=
- wake it<br>
-&gt; +up. Other interrupts should be disabled by the guest prior to calling=
-<br>
-&gt; +vSYSTEM_SUSPEND.<br>
-&gt; +<br>
-&gt; +After an unprivileged guest suspends, Xen will not suspend. Xen would=
- suspend<br>
-&gt; +only after the Dom0 completes the system suspend.<br>
-&gt; +<br>
-&gt; +--------------<br>
-&gt; +Suspending Xen<br>
-&gt; +--------------<br>
-&gt; +<br>
-&gt; +Xen should start suspending itself upon receiving the vSYSTEM_SUSPEND=
- call<br>
-&gt; +from the last running guest (Dom0). At that moment all physical CPUs =
-are still<br>
-&gt; +online (taking offline a vCPU or suspending a VM does not affect phys=
-ical CPUs).<br>
-&gt; +Xen shall now put offline the non-boot pCPUs by making the CPU_OFF PS=
-CI call<br>
-&gt; +to EL3. The CPU_OFF PSCI function is currently not implemented in Xen=
-.<br>
-&gt; +<br>
-&gt; +After putting offline the non-boot cores Xen must save the context an=
-d finalize<br>
-&gt; +suspend by invoking SYSTEM_SUSPEND PSCI call, which is passed to EL3.=
-<br>
-&gt; +The resume point of Xen is specified by the entry_point_address argum=
-ent of the<br>
-&gt; +SYSTEM_SUSPEND call. The SYSTEM_SUSPEND function and context saving i=
-s not<br>
-&gt; +implemented in Xen for ARM today.<br>
-&gt; +<br>
-&gt; +------------<br>
-&gt; +Resuming Xen<br>
-&gt; +------------<br>
-&gt; +<br>
-&gt; +Xen must be resumed prior to any software running in EL1. Starting fr=
-om the<br>
-&gt; +resume point, Xen should restore the context and resume Dom0. Dom0 sh=
-all always<br>
-&gt; +be resumed whenever Xen resumes.<br>
-&gt; +The whole Xen resume flow for the ARM architecture has to be implemen=
-ted.<br>
-&gt; +<br>
-&gt; +---------------<br>
-&gt; +Resuming Guests<br>
-&gt; +---------------<br>
-&gt; +<br>
-&gt; +Resume of the privileged guest (Dom0) is always following the Xen res=
-ume.<br>
-&gt; +<br>
-&gt; +An unprivileged guest shall resume once a device it owns triggers a w=
-ake-up<br>
-&gt; +interrupt, regardless of whether Xen was suspended when the wake-up i=
-nterrupt<br>
-&gt; +was triggered. If Xen was suspended, it is assumed that Dom0 will be =
-running<br>
-&gt; +before the DomU guest starts to resume. The synchronization mechanism=
- to<br>
-&gt; +enforce the assumed condition is TBD.<br>
-&gt; +<br>
-&gt; +If the ARM&#39;s GIC was powered down after the ARM subsystem suspend=
-ed, it is<br>
-&gt; +assumed that Xen needs to restore the GIC interface for a VM prior to=
- handing<br>
-&gt; +over control to the guest. However, the guest should restore its own =
-context<br>
-&gt; +upon entering the resume point (out of scope of this document).<br>
-&gt; +<br>
-&gt; +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-<br>
-&gt; +Implementation Proposal<br>
-&gt; +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-<br>
-&gt; +<br>
-&gt; +--------<br>
-&gt; +Overview<br>
-&gt; +--------<br>
-&gt; +<br>
-&gt; +In order to enable the suspend/resume of VMs and Xen itself, the foll=
-owing PSCI<br>
-&gt; +calls have to be implemented and integrated in Xen:<br>
-&gt; +1) vSYSTEM_SUSPEND<br>
-&gt; +2) CPU_OFF<br>
-&gt; +3) SYSTEM_SUSPEND<br>
-&gt; +<br>
-&gt; +In addition, the following have to be implemented:<br>
-&gt; +* Save/restore of EL2 context<br>
-&gt; +* Save/restore of GIC configuration for each VM<br>
-&gt; +<br>
-&gt; +Implementation details are provided in the sections below. Function n=
-ames and<br>
-&gt; +paths used below are consistent within the document but may not alway=
-s match the<br>
-&gt; +names used in future implementation. Existing functions and paths are=
- named as<br>
-&gt; +in Xen source tree.<br>
-&gt; +<br>
-&gt; +Note: The proposal is still incomplete and shall be refined in future=
- revisions.<br>
-&gt; +Specific issues that are not addressed are marked as &quot;TBD&quot;.=
-<br>
-&gt; +<br>
-&gt; +-----------------------------<wbr>--------<br>
-&gt; +Suspend/Resume Implementation Details<br>
-&gt; +-----------------------------<wbr>--------<br>
-&gt; +<br>
-&gt; +PSCI Implementation and Integration<br>
-&gt; +-----------------------------<wbr>------<br>
-&gt; +vSYSTEM_SUSPEND<br>
-&gt; +---------------<br>
-&gt; +vSYSTEM_SUSPEND shall be implemented in<br>
-&gt; +* do_psci_system_suspend() in arch/arm/vpsci.c<br>
-&gt; +<br>
-&gt; +The implementation shall include the following steps:<br>
-&gt; +* Block the current vCPU<br>
-&gt; +* If the hardware domain made the call trigger Xen suspend, i.e.<br>
-&gt; +=C2=A0 call machine_suspend() which will be implemented in arch/arm/s=
-uspend.c<br>
-&gt; + (similar as the machine_restart() is implemented in arch/arm/shutdow=
-n.c)<br>
-&gt; +<br>
-&gt; +The function do_psci_system_suspend() shall be called from<br>
-&gt; +* do_trap_psci() in arch/arm/traps.c<br>
-&gt; +<br>
-&gt; +CPU_OFF (physical CPUs)<br>
-&gt; +-----------------------<br>
-&gt; +The CPU_OFF function shall be implemented in<br>
-&gt; +* call_psci_cpu_off() in arch/arm/psci.c<br>
-&gt; +<br>
-&gt; +The implementation shall consist just of making the SMC call to EL3.<=
-br>
-&gt; +<br>
-&gt; +This function needs to be called when Xen generic code disables non-b=
-oot CPUs,<br>
-&gt; +which is done by<br>
-&gt; +* disable_nonboot_cpus() in common/cpu.c<br>
-&gt; +This function calls architecture specific<br>
-&gt; +* __cpu_die() implemented in arch/arm/smpboot.c<br>
-&gt; +The call_psci_cpu_off() shall be invoked when the respective CPU dies=
-. To make<br>
-&gt; +that happen, the<br>
-&gt; +* arch_cpu_die() would be implemented in arch/arm/arm64/smpboot.c<br>
-&gt; +and called from __cpu_die().<br>
-&gt; +Finally the call_psci_cpu_off() shall be invoked from arch_cpu_die().=
-<br>
-&gt; +<br>
-&gt; +Such a control flow would be similar to the already existing flow for=
- enabling<br>
-&gt; +non-boot CPUs, which looks like this:<br>
-&gt; +enable_nonboot_cpus() -&gt; cpu_up() -&gt; __cpu_up() -&gt; arch_cpu_=
-up() -&gt;<br>
-&gt; +call_psci_cpu_on()<br>
-&gt; +<br>
-&gt; +SYSTEM_SUSPEND (physical)<br>
-&gt; +-------------------------<br>
-&gt; +The SYSTEM_SUSPEND function shall be implemented in<br>
-&gt; +* call_psci_system_suspend() in arch/arm/psci.c<br>
-&gt; +<br>
-&gt; +The implementation shall consist just of making the SMC call to EL3. =
-The<br>
-&gt; +entry_point_address argument of the SMC call needs to be an ARM archi=
-tecture<br>
-&gt; +resume address. The call_psci_system_suspend() function does not retu=
-rn.<br>
-&gt; +<br>
-&gt; +The function needs to be called from machine_suspend() to finalize th=
-e suspend<br>
-&gt; +procedure.<br>
-&gt; +<br>
-&gt; +------------------<br>
-&gt; +Additional Changes<br>
-&gt; +------------------<br>
-&gt; +<br>
-&gt; +Suspend Flow<br>
-&gt; +------------<br>
-&gt; +The suspend procedure shall be implemented in<br>
-&gt; +* machine_suspend() in arch/arm/suspend.c<br>
-&gt; +<br>
-&gt; +The implementation shall include the following steps:<br>
-&gt; +* Set the system_state variable to SYS_STATE_suspend<br>
-&gt; +* Freeze domains by calling domain_pause() for each domain (we assume=
- this needs<br>
-&gt; +=C2=A0 to be done)<br>
-&gt; +* Disable non-boot CPUs by calling disable_nonboot_cpus()<br>
-&gt; +* Save ARM specific context<br>
-&gt; +<br>
-&gt; +Resume Flow<br>
-&gt; +------------<br>
-&gt; +The resume procedure shall be implemented in<br>
-&gt; +* machine_resume() in arch/arm/suspend.c<br>
-&gt; +<br>
-&gt; +The machine_resume() implementation shall include the following steps=
-:<br>
-&gt; +* Restore ARM specific context<br>
-&gt; +* Enable non-boot CPUs by calling enable_nonboot_cpus()<br>
-&gt; +* Thaw domains by calling domain_unpause() for each domain (we assume=
- this needs<br>
-&gt; +=C2=A0 to be done)<br>
-&gt; +* Set the system_state variable to SYS_STATE_resume<br>
-&gt; +* TBD: how to resume Dom0, i.e. how to hand over control to Dom0?<br>
-&gt; +<br>
-&gt; +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-&gt; +References<br>
-&gt; +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-&gt; +<br>
-&gt; +[1] Power State Coordination Interface (ARM):<br>
-&gt; +<a href=3D"http://infocenter.arm.com/help/topic/com.arm.doc.den0022d/=
-Power_State_Coordination_Interface_PDD_v1_1_DEN0022D.pdf" rel=3D"noreferrer=
-" target=3D"_blank">http://infocenter.arm.com/<wbr>help/topic/com.arm.doc.<=
-wbr>den0022d/Power_State_<wbr>Coordination_Interface_PDD_v1_<wbr>1_DEN0022D=
-.pdf</a><br>
-&gt; +<br>
-&gt; --<br>
-&gt; 2.13.0<br>
-&gt;<br>
-&gt;<br>
-</div></div>&gt; ______________________________<wbr>_________________<br>
-&gt; Xen-devel mailing list<br>
-&gt; <a href=3D"mailto:Xen-devel@lists.xen.org">Xen-devel@lists.xen.org</a>=
-<br>
-&gt; <a href=3D"https://lists.xen.org/xen-devel" rel=3D"noreferrer" target=
-=3D"_blank">https://lists.xen.org/xen-<wbr>devel</a><br>
-&gt;<br>
-</blockquote></div><br></div></div>
-
---001a113fe8b24957ee0560f17662--
-
-
---===============4626821286136253464==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4626821286136253464==--
+SGkgYWxsLAoKQW5vdGhlciBjcmFzaCB0aGlzIG1vcm5pbmc6Cgp2aWYgdmlmLTItMCB2aWYyLjA6
+IFRyeWluZyB0byB1bm1hcCBpbnZhbGlkIGhhbmRsZSEgcGVuZGluZ19pZHg6IDB4M2EKLS0tLS0t
+LS0tLS0tWyBjdXQgaGVyZSBdLS0tLS0tLS0tLS0tCmtlcm5lbCBCVUcgYXQgZHJpdmVycy9uZXQv
+eGVuLW5ldGJhY2svbmV0YmFjay5jOjQzMCEKaW52YWxpZCBvcGNvZGU6IDAwMDAgWyMxXSBTTVAK
+TW9kdWxlcyBsaW5rZWQgaW46IHh0X3BoeXNkZXYoRSkgaXB0YWJsZV9maWx0ZXIoRSkgaXBfdGFi
+bGVzKEUpIHhlbl9uZXRiYWNrKEUpIG5mc2QoRSkgbG9ja2QoRSkgZ3JhY2UoRSkgbmZzX2FjbChF
+KSBhdXRoX3JwY2dzcyhFKSBzdW5ycGMoRSkgaXBtaV9zaShFKSBpcG1pX21zZ2hhbmRsZXIoRSkg
+azEwdGVtcChFKSB6ZnMoUE9FKSB6Y29tbW9uKFBPRSkgem52cGFpcihQT0UpIGljcChQT0UpIHNw
+bChPRSkgemF2bChQT0UpIHp1bmljb2RlKFBPRSkgdHBtX2luZmluZW9uKEUpIHNwNTEwMF90Y28o
+RSkgaTJjX3BpaXg0KEUpIGkyY19jb3JlKEUpIG9oY2lfcGNpKEUpIG9oY2lfaGNkKEUpIHRnMyhF
+KSBwdHAoRSkgcHBzX2NvcmUoRSkgc2coRSkgcmFpZDEoRSkgc2RfbW9kKEUpIGF0YV9nZW5lcmlj
+KEUpIHBhdGFfYWNwaShFKSBwYXRhX2F0aWl4cChFKSBhaGNpKEUpIGxpYmFoY2koRSkgZG1fbWly
+cm9yKEUpIGRtX3JlZ2lvbl9oYXNoKEUpIGRtX2xvZyhFKSBkbV9tb2QoRSkgZGF4KEUpCkNQVTog
+MCBQSUQ6IDE0MjM4IENvbW06IHZpZjIuMC1xMC1kZWFsbCBUYWludGVkOiBQICAgICAgICAgICBP
+RSAgIDQuMTQuNi0xLmVsNi54ODZfNjQgIzEKSGFyZHdhcmUgbmFtZTogSFAgUHJvTGlhbnQgTWlj
+cm9TZXJ2ZXIsIEJJT1MgTzQxICAgICAxMC8wMS8yMDEzCnRhc2s6IGZmZmY4ODAwNTllMjU1YzAg
+dGFzay5zdGFjazogZmZmZmM5MDAwMWY2NDAwMApSSVA6IGUwMzA6eGVudmlmX3R4X2RlYWxsb2Nf
+YWN0aW9uKzB4MWJiLzB4MjMwIFt4ZW5fbmV0YmFja10KUlNQOiBlMDJiOmZmZmZjOTAwMDFmNjdj
+NjggRUZMQUdTOiAwMDAxMDI5MgpSQVg6IDAwMDAwMDAwMDAwMDAwNDUgUkJYOiBmZmZmYzkwMDAx
+ZjU1MDAwIFJDWDogMDAwMDAwMDAwMDAwMDAwMApSRFg6IGZmZmY4ODAwN2Y0MTQ2ZTggUlNJOiBm
+ZmZmODgwMDdmNDBkYjM4IFJESTogZmZmZjg4MDA3ZjQwZGIzOApSQlA6IGZmZmZjOTAwMDFmNjdl
+OTggUjA4OiAwMDAwMDAwMDAwMDAwMzcyIFIwOTogMDAwMDAwMDAwMDAwMDM3MwpSMTA6IDAwMDAw
+MDAwMDAwMDAwMDEgUjExOiAwMDAwMDAwMDAwMDAwMDAwIFIxMjogZmZmZmM5MDAwMWY1ZTczMApS
+MTM6IDAwMDAxNjAwMDAwMDAwMDAgUjE0OiBhYWFhYWFhYWFhYWFhYWFiIFIxNTogZmZmZmM5MDAw
+MDk5YmJlOApGUzogIDAwMDA3ZjkyODY1ZDI5YTAoMDAwMCkgR1M6ZmZmZjg4MDA3ZjQwMDAwMCgw
+MDAwKSBrbmxHUzowMDAwMDAwMDAwMDAwMDAwCkNTOiAgZTAzMyBEUzogMDAwMCBFUzogMDAwMCBD
+UjA6IDAwMDAwMDAwODAwNTAwMzMKQ1IyOiBmZmZmZmZmZmZmNjAwNDAwIENSMzogMDAwMDAwMDA2
+MjA5YzAwMCBDUjQ6IDAwMDAwMDAwMDAwMDA2NjAKQ2FsbCBUcmFjZToKID8gX3Jhd19zcGluX3Vu
+bG9ja19pcnFyZXN0b3JlKzB4MTEvMHgyMAogPyBlcnJvcl9leGl0KzB4NS8weDIwCiA/IF9fdXBk
+YXRlX2xvYWRfYXZnX2Nmc19ycSsweDE3Ni8weDE4MAogPyB4ZW5fbWNfZmx1c2grMHg4Ny8weDEy
+MAogPyB4ZW5fbG9hZF9zcDArMHg4NC8weGEwCiA/IF9fc3dpdGNoX3RvKzB4MWMxLzB4MzYwCiA/
+IGZpbmlzaF90YXNrX3N3aXRjaCsweDc4LzB4MjQwCiA/IF9fc2NoZWR1bGUrMHgxOTIvMHg0OTYK
+ID8gX3Jhd19zcGluX2xvY2tfaXJxc2F2ZSsweDFhLzB4M2MKID8gX3Jhd19zcGluX2xvY2tfaXJx
+c2F2ZSsweDFhLzB4M2MKID8gX3Jhd19zcGluX3VubG9ja19pcnFyZXN0b3JlKzB4MTEvMHgyMAog
+eGVudmlmX2RlYWxsb2Nfa3RocmVhZCsweDY4LzB4ZjAgW3hlbl9uZXRiYWNrXQogPyBkb193YWl0
+X2ludHIrMHg4MC8weDgwCiA/IHhlbnZpZl9tYXBfZnJvbnRlbmRfZGF0YV9yaW5ncysweGUwLzB4
+ZTAgW3hlbl9uZXRiYWNrXQoga3RocmVhZCsweDEwNi8weDE0MAogPyBrdGhyZWFkX2Rlc3Ryb3lf
+d29ya2VyKzB4NjAvMHg2MAogcmV0X2Zyb21fZm9yaysweDI1LzB4MzAKQ29kZTogODkgZGYgNDkg
+ODMgYzQgMDIgZTggZTUgZjUgZmYgZmYgNGQgMzkgZWMgNzUgZTggZWIgYTIgNDggOGIgNDMgMjAg
+NDggYzcgYzYgMTAgMmIgNTUgYTAgNDggOGIgYjggMjAgMDMgMDAgMDAgMzEgYzAgZTggODUgYzkg
+MDYgZTEgPDBmPiAwYiAwZiAwYiA0OCA4YiA1MyAyMCA4OSBjMSA0OCBjNyBjNiA0OCAyYiA1NSBh
+MCAzMSBjMCA0NSAzMSAKUklQOiB4ZW52aWZfdHhfZGVhbGxvY19hY3Rpb24rMHgxYmIvMHgyMzAg
+W3hlbl9uZXRiYWNrXSBSU1A6IGZmZmZjOTAwMDFmNjdjNjgKLS0tWyBlbmQgdHJhY2UgMTMwZGUw
+YjdlMzlkMGVlYSBdLS0tCgpCZXN0IHJlZ2FyZHMsCgpBbGV4CgoKCi0tLS0tT3JpZ2luYWwgTWVz
+c2FnZS0tLS0tCkZyb206IEp1ZXJnZW4gR3Jvc3MgW21haWx0bzpqZ3Jvc3NAc3VzZS5jb21dIApT
+ZW50OiBGcmlkYXksIDIyIERlY2VtYmVyIDIwMTcgNTo0NyBQTQpUbzogQWxleCBCcmF1bmVnZzsg
+eGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCkNjOiBXZWkgTGl1OyBQYXVsIER1cnJhbnQK
+U3ViamVjdDogUmU6IFtYZW4tZGV2ZWxdIFtCVUddIGtlcm5lbCBidWcgZW5jb3VudGVyZWQgYXQg
+ZHJpdmVycy9uZXQveGVuLW5ldGJhY2svbmV0YmFjay5jOjQzMCEKCk9uIDIyLzEyLzE3IDA3OjQw
+LCBBbGV4IEJyYXVuZWdnIHdyb3RlOgo+IEhpIGFsbCwKPiAKPiBFeHBlcmllbmNlZCB0aGUgc2Ft
+ZSBpc3N1ZSBhZ2FpbiB0b2RheToKCkNjaW5nIHRoZSBtYWludGFpbmVycy4KCgpKdWVyZ2VuCgo+
+IAo+ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT0KPiA9PT09PT09PT0KPiAKPiB2aWYgdmlmLTItMCB2aWYy
+LjA6IFRyeWluZyB0byB1bm1hcCBpbnZhbGlkIGhhbmRsZSEgcGVuZGluZ19pZHg6IDB4MmYKPiAt
+LS0tLS0tLS0tLS1bIGN1dCBoZXJlIF0tLS0tLS0tLS0tLS0KPiBrZXJuZWwgQlVHIGF0IGRyaXZl
+cnMvbmV0L3hlbi1uZXRiYWNrL25ldGJhY2suYzo0MzAhCj4gaW52YWxpZCBvcGNvZGU6IDAwMDAg
+WyMxXSBTTVAKPiBNb2R1bGVzIGxpbmtlZCBpbjogeHRfcGh5c2RldihFKSBpcHRhYmxlX2ZpbHRl
+cihFKSBpcF90YWJsZXMoRSkKPiB4ZW5fbmV0YmFjayhFKSBuZnNkKEUpIGxvY2tkKEUpIGdyYWNl
+KEUpIG5mc19hY2woRSkgYXV0aF9ycGNnc3MoRSkgc3VucnBjKEUpCj4gaXBtaV9zaShFKSBpcG1p
+X21zZ2hhbmRsZXIoRSkgazEwdGVtcChFKSB6ZnMoUE9FKSB6Y29tbW9uKFBPRSkgem52cGFpcihQ
+T0UpCj4gaWNwKFBPRSkgc3BsKE9FKSB6YXZsKFBPRSkgenVuaWNvZGUoUE9FKSB0cG1faW5maW5l
+b24oRSkgc3A1MTAwX3RjbyhFKQo+IGkyY19waWl4NChFKSBpMmNfY29yZShFKSBvaGNpX3BjaShF
+KSBvaGNpX2hjZChFKSB0ZzMoRSkgcHRwKEUpIHBwc19jb3JlKEUpCj4gc2coRSkgcmFpZDEoRSkg
+c2RfbW9kKEUpIGF0YV9nZW5lcmljKEUpIHBhdGFfYWNwaShFKSBwYXRhX2F0aWl4cChFKSBhaGNp
+KEUpCj4gbGliYWhjaShFKSBkbV9taXJyb3IoRSkgZG1fcmVnaW9uX2hhc2goRSkgZG1fbG9nKEUp
+IGRtX21vZChFKSBkYXgoRSkKPiBDUFU6IDAgUElEOiAxMjYzNiBDb21tOiB2aWYyLjAtcTAtZGVh
+bGwgVGFpbnRlZDogUCAgICAgICAgICAgT0UKPiA0LjE0LjYtMS5lbDYueDg2XzY0ICMxCj4gSGFy
+ZHdhcmUgbmFtZTogSFAgUHJvTGlhbnQgTWljcm9TZXJ2ZXIsIEJJT1MgTzQxICAgICAxMC8wMS8y
+MDEzCj4gdGFzazogZmZmZjg4MDA2MjUxODAwMCB0YXNrLnN0YWNrOiBmZmZmYzkwMDA0Zjg4MDAw
+Cj4gUklQOiBlMDMwOnhlbnZpZl90eF9kZWFsbG9jX2FjdGlvbisweDFiYi8weDIzMCBbeGVuX25l
+dGJhY2tdCj4gUlNQOiBlMDJiOmZmZmZjOTAwMDRmOGJjNjggRUZMQUdTOiAwMDAxMDI5Mgo+IFJB
+WDogMDAwMDAwMDAwMDAwMDA0NSBSQlg6IGZmZmZjOTAwMDBmY2QwMDAgUkNYOiAwMDAwMDAwMDAw
+MDAwMDAwCj4gUkRYOiBmZmZmODgwMDdmNDE0NmU4IFJTSTogZmZmZjg4MDA3ZjQwZGIzOCBSREk6
+IGZmZmY4ODAwN2Y0MGRiMzgKPiBSQlA6IGZmZmZjOTAwMDRmOGJlOTggUjA4OiAwMDAwMDAwMDAw
+MDAwMzdkIFIwOTogMDAwMDAwMDAwMDAwMDM3ZQo+IFIxMDogMDAwMDAwMDAwMDAwMDAwMSBSMTE6
+IDAwMDAwMDAwMDAwMDAwMDAgUjEyOiBmZmZmYzkwMDAwZmQ2NzMwCj4gUjEzOiAwMDAwMTYwMDAw
+MDAwMDAwIFIxNDogYWFhYWFhYWFhYWFhYWFhYiBSMTU6IGZmZmZjOTAwMDA5OWJiZTgKPiBGUzog
+IDAwMDA3ZjQwYzYzNjM5YTAoMDAwMCkgR1M6ZmZmZjg4MDA3ZjQwMDAwMCgwMDAwKSBrbmxHUzow
+MDAwMDAwMDAwMDAwMDAwCj4gQ1M6ICBlMDMzIERTOiAwMDAwIEVTOiAwMDAwIENSMDogMDAwMDAw
+MDA4MDA1MDAzMwo+IENSMjogZmZmZmZmZmZmZjYwMDQwMCBDUjM6IDAwMDAwMDAwNjM3NWYwMDAg
+Q1I0OiAwMDAwMDAwMDAwMDAwNjYwCj4gQ2FsbCBUcmFjZToKPiAgPyBlcnJvcl9leGl0KzB4NS8w
+eDIwCj4gID8gX191cGRhdGVfbG9hZF9hdmdfY2ZzX3JxKzB4MTc2LzB4MTgwCj4gID8geGVuX21j
+X2ZsdXNoKzB4ODcvMHgxMjAKPiAgPyB4ZW5fbG9hZF9zcDArMHg4NC8weGEwCj4gID8gX19zd2l0
+Y2hfdG8rMHgxYzEvMHgzNjAKPiAgPyBmaW5pc2hfdGFza19zd2l0Y2grMHg3OC8weDI0MAo+ICA/
+IF9fc2NoZWR1bGUrMHgxOTIvMHg0OTYKPiAgPyBfcmF3X3NwaW5fbG9ja19pcnFzYXZlKzB4MWEv
+MHgzYwo+ICA/IF9yYXdfc3Bpbl9sb2NrX2lycXNhdmUrMHgxYS8weDNjCj4gID8gX3Jhd19zcGlu
+X3VubG9ja19pcnFyZXN0b3JlKzB4MTEvMHgyMAo+ICB4ZW52aWZfZGVhbGxvY19rdGhyZWFkKzB4
+NjgvMHhmMCBbeGVuX25ldGJhY2tdCj4gID8gZG9fd2FpdF9pbnRyKzB4ODAvMHg4MAo+ICA/IHhl
+bnZpZl9tYXBfZnJvbnRlbmRfZGF0YV9yaW5ncysweGUwLzB4ZTAgW3hlbl9uZXRiYWNrXQo+ICBr
+dGhyZWFkKzB4MTA2LzB4MTQwCj4gID8ga3RocmVhZF9kZXN0cm95X3dvcmtlcisweDYwLzB4NjAK
+PiAgPyBrdGhyZWFkX2Rlc3Ryb3lfd29ya2VyKzB4NjAvMHg2MAo+ICByZXRfZnJvbV9mb3JrKzB4
+MjUvMHgzMAo+IENvZGU6IDg5IGRmIDQ5IDgzIGM0IDAyIGU4IGU1IGY1IGZmIGZmIDRkIDM5IGVj
+IDc1IGU4IGViIGEyIDQ4IDhiIDQzIDIwIDQ4Cj4gYzcgYzYgMTAgNWIgNTUgYTAgNDggOGIgYjgg
+MjAgMDMgMDAgMDAgMzEgYzAgZTggODUgOTkgMDYgZTEgPDBmPiAwYiAwZiAwYiA0OAo+IDhiIDUz
+IDIwIDg5IGMxIDQ4IGM3IGM2IDQ4IDViIDU1IGEwIDMxIGMwIDQ1IDMxIAo+IFJJUDogeGVudmlm
+X3R4X2RlYWxsb2NfYWN0aW9uKzB4MWJiLzB4MjMwIFt4ZW5fbmV0YmFja10gUlNQOgo+IGZmZmZj
+OTAwMDRmOGJjNjgKPiAtLS1bIGVuZCB0cmFjZSAwMTA2ODJjNzY2MTlhMWJkIF0tLS0KPiAKPiA9
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09Cj4gPT09PT09PT09Cj4gCj4gQmVzdCByZWdhcmRzLAo+IAo+IEFs
+ZXgKPiAKPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IEFsZXggQnJhdW5lZ2cg
+W21haWx0bzphbGV4LmJyYXVuZWdnQGdtYWlsLmNvbV0gCj4gU2VudDogVGh1cnNkYXksIDIxIERl
+Y2VtYmVyIDIwMTcgODowNCBBTQo+IFRvOiAneGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Jwo+IFN1YmplY3Q6IFtCVUddIGtlcm5lbCBidWcgZW5jb3VudGVyZWQgYXQKPiBkcml2ZXJzL25l
+dC94ZW4tbmV0YmFjay9uZXRiYWNrLmM6NDMwIQo+IAo+IEhpIGFsbCwKPiAKPiBJIGV4cGVyaWVu
+Y2VkIHRoZSBmb2xsb3dpbmcgYnVnIHdoaWxzdCB1c2luZyBhIFhlbiBWTS4gV2hhdCBoYXBwZW5l
+ZCB3YXMKPiB0aGF0IHRoaXMgbW9ybmluZyBhIHNpbmdsZSBYZW4gVk0gc3VkZGVubHkgdGVybWlu
+YXRlZCB3aXRob3V0IGNhdXNlIHdpdGggdGhlCj4gZm9sbG93aW5nIGJlaW5nIGxvZ2dlZCBpbiBk
+bWVzZy4gCj4gCj4gT25seSAxIFZNIGV4cGVyaWVuY2VkIGFuIGlzc3VlIChvdXQgb2YgMiB3aGlj
+aCB3ZXJlIHJ1bm5pbmcpLCB0aGUgb3RoZXIKPiByZW1haW5lZCB1cCBhbmQgZnVsbHkgZnVuY3Rp
+b25hbCB1bnRpbCBJIGF0dGVtcHRlZCB0byByZXN0YXJ0IHRoZSBjcmFzaGVkIFZNCj4gd2hpY2gg
+dHJpZ2dlcmVkIHRoZSBrZXJuZWwgYnVnLgo+IAo+IEtlcm5lbDoJNC4xNC42Cj4gWGVuOgkJNC44
+LjIKPiAKPiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09Cj4gPT09PT09PT09Cj4gCj4gdmlmIHZpZi0yLTAg
+dmlmMi4wOiBUcnlpbmcgdG8gdW5tYXAgaW52YWxpZCBoYW5kbGUhIHBlbmRpbmdfaWR4OiAweDNm
+Cj4gLS0tLS0tLS0tLS0tWyBjdXQgaGVyZSBdLS0tLS0tLS0tLS0tCj4ga2VybmVsIEJVRyBhdCBk
+cml2ZXJzL25ldC94ZW4tbmV0YmFjay9uZXRiYWNrLmM6NDMwIQo+IGludmFsaWQgb3Bjb2RlOiAw
+MDAwIFsjMV0gU01QCj4gTW9kdWxlcyBsaW5rZWQgaW46IHh0X3BoeXNkZXYoRSkgaXB0YWJsZV9m
+aWx0ZXIoRSkgaXBfdGFibGVzKEUpCj4geGVuX25ldGJhY2soRSkgbmZzZChFKSBsb2NrZChFKSBn
+cmFjZShFKSBuZnNfYWNsKEUpIGF1dGhfcnBjZ3NzKEUpIHN1bnJwYyhFKQo+IGlwbWlfc2koRSkg
+aXBtaV9tc2doYW5kbGVyKEUpIHpmcyhQT0UpIHpjb21tb24oUE9FKSB6bnZwYWlyKFBPRSkgaWNw
+KFBPRSkKPiBzcGwoT0UpIHphdmwoUE9FKSB6dW5pY29kZShQT0UpIGsxMHRlbXAoRSkgdHBtX2lu
+ZmluZW9uKEUpIHNwNTEwMF90Y28oRSkKPiBpMmNfcGlpeDQoRSkgaTJjX2NvcmUoRSkgb2hjaV9w
+Y2koRSkgb2hjaV9oY2QoRSkgdGczKEUpIHB0cChFKSBwcHNfY29yZShFKQo+IHNnKEUpIHJhaWQx
+KEUpIHNkX21vZChFKSBhdGFfZ2VuZXJpYyhFKSBwYXRhX2FjcGkoRSkgcGF0YV9hdGlpeHAoRSkg
+YWhjaShFKQo+IGxpYmFoY2koRSkgZG1fbWlycm9yKEUpIGRtX3JlZ2lvbl9oYXNoKEUpIGRtX2xv
+ZyhFKSBkbV9tb2QoRSkgZGF4KEUpCj4gQ1BVOiAwIFBJRDogMTMxNjMgQ29tbTogdmlmMi4wLXEw
+LWRlYWxsIFRhaW50ZWQ6IFAgICAgICAgICAgIE9FCj4gNC4xNC42LTEuZWw2Lng4Nl82NCAjMQo+
+IEhhcmR3YXJlIG5hbWU6IEhQIFByb0xpYW50IE1pY3JvU2VydmVyLCBCSU9TIE80MSAgICAgMTAv
+MDEvMjAxMwo+IHRhc2s6IGZmZmY4ODAwNTk1Y2M5ODAgdGFzay5zdGFjazogZmZmZmM5MDAwMjhl
+MDAwMAo+IFJJUDogZTAzMDp4ZW52aWZfdHhfZGVhbGxvY19hY3Rpb24rMHgxYmIvMHgyMzAgW3hl
+bl9uZXRiYWNrXQo+IFJTUDogZTAyYjpmZmZmYzkwMDAyOGUzYzY4IEVGTEFHUzogMDAwMTAyOTIK
+PiBSQVg6IDAwMDAwMDAwMDAwMDAwNDUgUkJYOiBmZmZmYzkwMDAyOTY5MDAwIFJDWDogMDAwMDAw
+MDAwMDAwMDAwMAo+IFJEWDogZmZmZjg4MDA3ZjQxNDZlOCBSU0k6IGZmZmY4ODAwN2Y0MGRiMzgg
+UkRJOiBmZmZmODgwMDdmNDBkYjM4Cj4gUkJQOiBmZmZmYzkwMDAyOGUzZTk4IFIwODogMDAwMDAw
+MDAwMDAwMDM3YiBSMDk6IDAwMDAwMDAwMDAwMDAzN2MKPiBSMTA6IDAwMDAwMDAwMDAwMDAwMDEg
+UjExOiAwMDAwMDAwMDAwMDAwMDAwIFIxMjogZmZmZmM5MDAwMjk3MjczMAo+IFIxMzogMDAwMDE2
+MDAwMDAwMDAwMCBSMTQ6IGFhYWFhYWFhYWFhYWFhYWIgUjE1OiBmZmZmYzkwMDAwOTliYmU4Cj4g
+RlM6ICAwMDAwN2ZlZTI2MGZmOWEwKDAwMDApIEdTOmZmZmY4ODAwN2Y0MDAwMDAoMDAwMCkga25s
+R1M6MDAwMDAwMDAwMDAwMDAwMAo+IENTOiAgZTAzMyBEUzogMDAwMCBFUzogMDAwMCBDUjA6IDAw
+MDAwMDAwODAwNTAwMzMKPiBDUjI6IGZmZmZmZmZmZmY2MDA0MDAgQ1IzOiAwMDAwMDAwMDYyODE1
+MDAwIENSNDogMDAwMDAwMDAwMDAwMDY2MAo+IENhbGwgVHJhY2U6Cj4gID8gZXJyb3JfZXhpdCsw
+eDUvMHgyMAo+ICA/IF9fdXBkYXRlX2xvYWRfYXZnX2Nmc19ycSsweDE3Ni8weDE4MAo+ICA/IHhl
+bl9tY19mbHVzaCsweDg3LzB4MTIwCj4gID8geGVuX2xvYWRfc3AwKzB4ODQvMHhhMAo+ICA/IF9f
+c3dpdGNoX3RvKzB4MWMxLzB4MzYwCj4gID8gZmluaXNoX3Rhc2tfc3dpdGNoKzB4NzgvMHgyNDAK
+PiAgPyBfX3NjaGVkdWxlKzB4MTkyLzB4NDk2Cj4gID8gX3Jhd19zcGluX2xvY2tfaXJxc2F2ZSsw
+eDFhLzB4M2MKPiAgPyBfcmF3X3NwaW5fbG9ja19pcnFzYXZlKzB4MWEvMHgzYwo+ICA/IF9yYXdf
+c3Bpbl91bmxvY2tfaXJxcmVzdG9yZSsweDExLzB4MjAKPiAgeGVudmlmX2RlYWxsb2Nfa3RocmVh
+ZCsweDY4LzB4ZjAgW3hlbl9uZXRiYWNrXQo+ICA/IGRvX3dhaXRfaW50cisweDgwLzB4ODAKPiAg
+PyB4ZW52aWZfbWFwX2Zyb250ZW5kX2RhdGFfcmluZ3MrMHhlMC8weGUwIFt4ZW5fbmV0YmFja10K
+PiAga3RocmVhZCsweDEwNi8weDE0MAo+ICA/IGt0aHJlYWRfZGVzdHJveV93b3JrZXIrMHg2MC8w
+eDYwCj4gID8ga3RocmVhZF9kZXN0cm95X3dvcmtlcisweDYwLzB4NjAKPiAgcmV0X2Zyb21fZm9y
+aysweDI1LzB4MzAKPiBDb2RlOiA4OSBkZiA0OSA4MyBjNCAwMiBlOCBlNSBmNSBmZiBmZiA0ZCAz
+OSBlYyA3NSBlOCBlYiBhMiA0OCA4YiA0MyAyMCA0OAo+IGM3IGM2IDEwIDNiIDU1IGEwIDQ4IDhi
+IGI4IDIwIDAzIDAwIDAwIDMxIGMwIGU4IDg1IGI5IDA2IGUxIDwwZj4gMGIgMGYgMGIgNDgKPiA4
+YiA1MyAyMCA4OSBjMSA0OCBjNyBjNiA0OCAzYiA1NSBhMCAzMSBjMCA0NSAzMSAKPiBSSVA6IHhl
+bnZpZl90eF9kZWFsbG9jX2FjdGlvbisweDFiYi8weDIzMCBbeGVuX25ldGJhY2tdIFJTUDoKPiBm
+ZmZmYzkwMDAyOGUzYzY4Cj4gLS0tWyBlbmQgdHJhY2UgN2Q4MjdkYWU2NzAwMmZmYyBdLS0tCj4g
+Cj4gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PQo+ID09PT09PT09PQo+IAo+IFRoZSBzZWN0aW9uIG9mIHJl
+bGV2YW50IGtlcm5lbCBjb2RlIGlzOgo+IAo+ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KPiA9PT09PT09
+PT0KPiAKPiBzdGF0aWMgaW5saW5lIHZvaWQgeGVudmlmX2dyYW50X2hhbmRsZV9yZXNldChzdHJ1
+Y3QgeGVudmlmX3F1ZXVlICpxdWV1ZSwKPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICB1MTYgcGVuZGluZ19pZHgpCj4gewo+ICAgICAgICAgaWYgKHVubGlrZWx5
+KHF1ZXVlLT5ncmFudF90eF9oYW5kbGVbcGVuZGluZ19pZHhdID09Cj4gICAgICAgICAgICAgICAg
+ICAgICAgTkVUQkFDS19JTlZBTElEX0hBTkRMRSkpIHsKPiAgICAgICAgICAgICAgICAgbmV0ZGV2
+X2VycihxdWV1ZS0+dmlmLT5kZXYsCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgIlRyeWlu
+ZyB0byB1bm1hcCBpbnZhbGlkIGhhbmRsZSEgcGVuZGluZ19pZHg6Cj4gMHgleFxuIiwKPiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBwZW5kaW5nX2lkeCk7Cj4gICAgICAgICAgICAgICAgIEJV
+RygpOwo+ICAgICAgICAgfQo+ICAgICAgICAgcXVldWUtPmdyYW50X3R4X2hhbmRsZVtwZW5kaW5n
+X2lkeF0gPSBORVRCQUNLX0lOVkFMSURfSEFORExFOwo+IH0KPiAKPiA9PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09Cj4gPT09PT09PT09Cj4gCj4gSW4gYW4gYXR0ZW1wdCB0byByZWNvdmVyIGZyb20gdGhpcyBz
+aXR1YXRpb24gSSByZXN0YXJ0ZWQgLyBkZXN0cm95ZWQgKHhsCj4gcmVzdGFydCA8dm1uYW1lPiAv
+IHhsIGRlc3Ryb3kgPHZtbmFtZT4pIHRoZSBWTSB0byByZWNvdmVyIGl0J3Mgc3RhdGUgYW5kIHRo
+ZQo+IGZvbGxvd2luZyBlcnJvciBtZXNzYWdlcyB3ZXJlIGxvZ2dlZCBhdCB0aGUgY29uc29sZToK
+PiAKPiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09Cj4gPT09PT09PT09Cj4gCj4gbGlieGw6IGVycm9yOiBs
+aWJ4bF9leGVjLmM6MTI5OmxpYnhsX3JlcG9ydF9jaGlsZF9leGl0c3RhdHVzOgo+IC9ldGMveGVu
+L3NjcmlwdHMvYmxvY2sgcmVtb3ZlIFsyNTI3MV0gZGllZCBkdWUgdG8gZmF0YWwgc2lnbmFsIFNl
+Z21lbnRhdGlvbgo+IGZhdWx0Cj4gbGlieGw6IGVycm9yOiBsaWJ4bF9kZXZpY2UuYzoxMDgwOmRl
+dmljZV9iYWNrZW5kX2NhbGxiYWNrOiB1bmFibGUgdG8gcmVtb3ZlCj4gZGV2aWNlIHdpdGggcGF0
+aCAvbG9jYWwvZG9tYWluLzAvYmFja2VuZC92aWYvMi8wCj4gbGlieGw6IGVycm9yOiBsaWJ4bC5j
+OjE2NDc6ZGV2aWNlc19kZXN0cm95X2NiOiBsaWJ4bF9fZGV2aWNlc19kZXN0cm95IGZhaWxlZAo+
+IGZvciAyCj4gCj4gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQo+ID09PT09PT09PQo+IAo+IEFmdGVyIHdo
+aWNoIHRoZSBwaHlzaWNhbCBzeXN0ZW0gaHVuZywgdGhlbiB0aGUgcGh5c2ljYWwgc3lzdGVtIHJl
+c3RhcnRlZAo+IHdpdGggbm90aGluZyBlbHNlIGxvZ2dlZCBhbmQgZXZlcnl0aGluZyBjYW1lIGJh
+Y2sgT0sgJiBvcGVyYXRpb25hbCBpbmNsdWRpbmcKPiB0aGUgVk0gdGhhdCBjcmFzaGVkLgo+IAo+
+IEZ1cnRoZXIgZGV0YWlscyAoeGwgZG1lc2csIHhsIGluZm8pIGF0dGFjaGVkLgo+IAo+IEJlc3Qg
+cmVnYXJkcywKPiAKPiBBbGV4IEJyYXVuZWdnCj4gCj4gCj4gX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KPiBYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Cj4gWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCj4gaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbAo+IAoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
