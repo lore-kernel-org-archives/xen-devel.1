@@ -1,12 +1,17 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [distros-debian-stretch test] 73257: trouble:
-	blocked/broken
-Date: Sat, 23 Dec 2017 12:50:00 +0000
-Message-ID: <osstest-73257-mainreport@xen.org>
+From: Bruno Alvisio <bruno.alvisio@gmail.com>
+Subject: Question about PV normalise_pagetable
+Date: Sat, 23 Dec 2017 13:35:41 +0000
+Message-ID: <CADNMjEBeAsuyFA_=e6hL5XKCCPSG8uQxBxJrM0Q+iwHVKMzObA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4778665772851210536=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=6jw/=dt=gmail.com=bruno.alvisio@srs-us1.protection.inumbo.net>)
+ id 1eSjxp-0007Lp-D3
+ for xen-devel@lists.xenproject.org; Sat, 23 Dec 2017 13:35:45 +0000
+Received: by mail-yw0-x22d.google.com with SMTP id f1so4982616ywd.8
+ for <xen-devel@lists.xenproject.org>; Sat, 23 Dec 2017 05:35:42 -0800 (PST)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,58 +20,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: andrew.cooper3@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDczMjU3IGRpc3Ryb3MtZGViaWFuLXN0cmV0Y2ggcmVhbCBbcmVhbF0KaHR0cDovL29z
-c3Rlc3QueHMuY2l0cml0ZS5uZXQvfm9zc3Rlc3QvdGVzdGxvZ3MvbG9ncy83MzI1Ny8KCkZhaWx1
-cmVzIGFuZCBwcm9ibGVtcyB3aXRoIHRlc3RzIDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNj
-ZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUg
-cnVuOgogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAg
-ICAgICAgICAgIGJyb2tlbgogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICA8am9iIHN0
-YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAg
-ICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQtYXJtaGYgICAg
-ICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVp
-bGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAg
-IGJyb2tlbgogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAg
-ICAgICAgICAgICAgIGJyb2tlbgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJl
-IG5vdCBibG9ja2luZzoKIHRlc3QtYW1kNjQtaTM4Ni1hbWQ2NC1zdHJldGNoLW5ldGJvb3QtcHln
-cnViICAxIGJ1aWxkLWNoZWNrKDEpICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC1h
-bWQ2NC1zdHJldGNoLW5ldGJvb3QtcHZncnViICAxIGJ1aWxkLWNoZWNrKDEpICAgIGJsb2NrZWQg
-bi9hCiB0ZXN0LWFtZDY0LWkzODYtaTM4Ni1zdHJldGNoLW5ldGJvb3QtcHZncnViICAxIGJ1aWxk
-LWNoZWNrKDEpICAgICAgYmxvY2tlZCBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1zdHJldGNo
-LW5ldGJvb3QtcHlncnViICAxIGJ1aWxkLWNoZWNrKDEpICAgICBibG9ja2VkIG4vYQogdGVzdC1h
-cm1oZi1hcm1oZi1hcm1oZi1zdHJldGNoLW5ldGJvb3QtcHlncnViICAxIGJ1aWxkLWNoZWNrKDEp
-ICAgIGJsb2NrZWQgbi9hCiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICA0IGhvc3QtaW5z
-dGFsbCg0KSAgICAgICAgICAgICAgYnJva2VuIGxpa2UgNzI4ODcKIGJ1aWxkLWFybWhmICAgICAg
-ICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgICAgICBicm9rZW4gbGlrZSA3
-Mjg4NwogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAg
-ICAgICAgICAgIGJyb2tlbiBsaWtlIDcyODg3CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAg
-ICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgICAgICAgYnJva2VuIGxpa2UgNzI4ODcKIGJ1aWxk
-LWkzODYtcHZvcHMgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgICAgICBi
-cm9rZW4gbGlrZSA3Mjg4NwogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgNCBob3N0LWlu
-c3RhbGwoNCkgICAgICAgICAgICAgIGJyb2tlbiBsaWtlIDcyODg3CgpiYXNlbGluZSB2ZXJzaW9u
-OgogZmxpZ2h0ICAgICAgICAgICAgICAgNzI4ODcKCmpvYnM6CiBidWlsZC1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxk
-LWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBi
-cm9rZW4gIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFybWhmLXB2b3BzICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQt
-aTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJy
-b2tlbiAgCiB0ZXN0LWFtZDY0LWFtZDY0LWFtZDY0LXN0cmV0Y2gtbmV0Ym9vdC1wdmdydWIgICAg
-ICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni1pMzg2LXN0cmV0Y2gtbmV0Ym9v
-dC1wdmdydWIgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LWFtZDY0
-LXN0cmV0Y2gtbmV0Ym9vdC1weWdydWIgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFy
-bWhmLWFybWhmLWFybWhmLXN0cmV0Y2gtbmV0Ym9vdC1weWdydWIgICAgICAgICAgICAgICAgYmxv
-Y2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1zdHJldGNoLW5ldGJvb3QtcHlncnViICAgICAg
-ICAgICAgICAgICBibG9ja2VkIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QueHMu
-Y2l0cml0ZS5uZXQKbG9nczogL2hvbWUvb3NzdGVzdC9sb2dzCmltYWdlczogL2hvbWUvb3NzdGVz
-dC9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBo
-dHRwOi8vb3NzdGVzdC54cy5jaXRyaXRlLm5ldC9+b3NzdGVzdC90ZXN0bG9ncy9sb2dzCgpUZXN0
-IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbnNvdXJj
-ZS5jb20vZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaCBub3QgYXBwbGljYWJs
-ZS4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============4778665772851210536==
+Content-Type: multipart/alternative; boundary="001a114922d26ecc78056102029f"
+
+--001a114922d26ecc78056102029f
+Content-Type: text/plain; charset="UTF-8"
+
+Hi all,
+
+I was understanding the code in tools/libxc/xc_sr_save_x86_pv.c and found
+this comment to the normalise_pagetable:
+
+/*
+ * Normalise a pagetable for the migration stream.  Performs pfn->mfn
+ * conversions on the ptes.
+ */
+static int normalise_pagetable(struct xc_sr_context *ctx, const uint64_t *src,
+                               uint64_t *dst, unsigned long type)
+
+
+Looks like the function (as it should) is doing the reverse conversion mfn->pfn.
+
+Wanted to confirm this typo or if I am missing something?
+
+Thanks,
+
+Bruno
+
+--001a114922d26ecc78056102029f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi all,<div><br></div><div>I was understanding the code in=
+ tools/libxc/xc_sr_save_x86_pv.c and found this comment to the normalise_pa=
+getable:</div><div><br></div><div><pre style=3D"font-family:Menlo"><span st=
+yle=3D"background-color:rgb(255,255,255)"><font color=3D"#000000" size=3D"1=
+"><span style=3D"font-style:italic">/*<br></span><span style=3D"font-style:=
+italic"> * Normalise a pagetable for the migration stream.  Performs pfn-&g=
+t;mfn<br></span><span style=3D"font-style:italic"> * conversions on the pte=
+s.<br></span><span style=3D"font-style:italic"> */<br></span><span style=3D=
+"font-weight:bold">static int </span>normalise_pagetable(<span style=3D"fon=
+t-weight:bold">struct </span>xc_sr_context *ctx, <span style=3D"font-weight=
+:bold">const </span>uint64_t *src,<br>                               uint64=
+_t *dst, <span style=3D"font-weight:bold">unsigned long </span>type)</font>=
+</span></pre><pre style=3D"font-family:Menlo"><span style=3D"background-col=
+or:rgb(255,255,255)"><font color=3D"#000000" size=3D"1"><br></font></span><=
+/pre><pre><span style=3D"background-color:rgb(255,255,255)"><font color=3D"=
+#000000" face=3D"arial, helvetica, sans-serif">Looks like the function (as =
+it should) is doing the reverse conversion mfn-&gt;pfn.</font></span></pre>=
+<pre><span style=3D"background-color:rgb(255,255,255)"><font color=3D"#0000=
+00" face=3D"arial, helvetica, sans-serif">Wanted to confirm this typo or if=
+ I am missing something?</font></span></pre><pre><span style=3D"background-=
+color:rgb(255,255,255)"><font color=3D"#000000" face=3D"arial, helvetica, s=
+ans-serif">Thanks,</font></span></pre><pre><span style=3D"color:rgb(0,0,0)"=
+><font face=3D"arial, helvetica, sans-serif">Bruno</font></span><font face=
+=3D"Menlo"><br></font></pre></div></div>
+
+--001a114922d26ecc78056102029f--
+
+
+--===============4778665772851210536==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4778665772851210536==--
