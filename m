@@ -1,70 +1,78 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [distros-debian-squeeze test] 73464: trouble:
-	blocked/broken
-Date: Wed, 27 Dec 2017 11:09:32 +0000
-Message-ID: <osstest-73464-mainreport@xen.org>
+From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Subject: Re: PROBLEM: consolidated IDT invalidation causes kexec to reboot
+Date: Wed, 27 Dec 2017 20:30:16 -0500
+Message-ID: <20171228013016.GA19799@char.us.oracle.com>
+References: <20171224014415.GA5663@chirva-void>
+ <CA+55aFypaeWzKh=wmwdw0PmMsVyP98hts5doC7CMtAH4095KTA@mail.gmail.com>
+ <CALCETrWFK0kY7ety3Hsipi3W3Ni-sm2vQ5kbi3N_OhExNrMmHw@mail.gmail.com>
+ <20171225212934.GA1410@arch-chirva.localdomain>
+ <CA+55aFxWRTsU-ys1BjabhrxoikFnYspePm37UQcsBwC9vD9roA@mail.gmail.com>
+ <20171226231900.GB1410@arch-chirva.localdomain>
+ <CA+55aFzU8tRSuCoS2TmXjGZ5WRUzMCrG6Jk4eNCQZjP+5sVE9w@mail.gmail.com>
+ <A0C04B15-956D-47C7-ABBA-3D30C2299F62@zytor.com>
+ <CA+55aFwyOq4-uXrSNOrFoxfCPJZAdMGdXnUDUHi=gTy+CcYmvQ@mail.gmail.com>
+ <8678ABA7-1195-468D-8252-94D7ED0794B6@zytor.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Return-path: <xen-devel-bounces@lists.xenproject.org>
-List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
-List-Post: <mailto:xen-devel@lists.xenproject.org>
-List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
-List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Errors-To: xen-devel-bounces@lists.xenproject.org
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+Content-Type: text/plain; charset=us-ascii
+Return-path: <linux-kernel-owner@vger.kernel.org>
+Content-Disposition: inline
+In-Reply-To: <8678ABA7-1195-468D-8252-94D7ED0794B6@zytor.com>
+Sender: linux-kernel-owner@vger.kernel.org
+To: hpa@zytor.com, xen-devel@lists.xensource.com
+Cc: Linus Torvalds <torvalds@linux-foundation.org>, Alexandru Chirvasitu <achirvasub@gmail.com>, Andy Lutomirski <luto@kernel.org>, Thomas Gleixner <tglx@linutronix.de>, kernel list <linux-kernel@vger.kernel.org>, Borislav Petkov <bp@alien8.de>, Brian Gerst <brgerst@gmail.com>, Denys Vlasenko <dvlasenk@redhat.com>, Josh Poimboeuf <jpoimboe@redhat.com>, Peter Zijlstra <peterz@infradead.org>, Steven Rostedt <rostedt@goodmis.org>, Ingo Molnar <mingo@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDczNDY0IGRpc3Ryb3MtZGViaWFuLXNxdWVlemUgcmVhbCBbcmVhbF0KaHR0cDovL29z
-c3Rlc3QueHMuY2l0cml0ZS5uZXQvfm9zc3Rlc3QvdGVzdGxvZ3MvbG9ncy83MzQ2NC8KCkZhaWx1
-cmVzIGFuZCBwcm9ibGVtcyB3aXRoIHRlc3RzIDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNj
-ZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUg
-cnVuOgogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAg
-ICAgICAgICAgIGJyb2tlbgogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICA8am9iIHN0
-YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAg
-ICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQtYXJtaGYgICAg
-ICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVp
-bGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAg
-IGJyb2tlbgogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAg
-ICAgICAgICAgICAgIGJyb2tlbgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJl
-IG5vdCBibG9ja2luZzoKIHRlc3QtYW1kNjQtaTM4Ni1pMzg2LXNxdWVlemUtbmV0Ym9vdC1weWdy
-dWIgIDEgYnVpbGQtY2hlY2soMSkgICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC1p
-Mzg2LXNxdWVlemUtbmV0Ym9vdC1weWdydWIgIDEgYnVpbGQtY2hlY2soMSkgICAgIGJsb2NrZWQg
-bi9hCiB0ZXN0LWFtZDY0LWkzODYtYW1kNjQtc3F1ZWV6ZS1uZXRib290LXB5Z3J1YiAgMSBidWls
-ZC1jaGVjaygxKSAgICAgYmxvY2tlZCBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtc3F1ZWV6
-ZS1uZXRib290LXB5Z3J1YiAgMSBidWlsZC1jaGVjaygxKSAgICBibG9ja2VkIG4vYQogYnVpbGQt
-YXJtaGYgICAgICAgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgICAgICAgIGJy
-b2tlbiBsaWtlIDczMDk4CiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICA0IGhvc3QtaW5z
-dGFsbCg0KSAgICAgICAgICAgICAgYnJva2VuIGxpa2UgNzMwOTgKIGJ1aWxkLWFtZDY0ICAgICAg
-ICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgICAgICBicm9rZW4gbGlrZSA3
-MzA5OAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAg
-ICAgICAgICAgIGJyb2tlbiBsaWtlIDczMDk4CiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAg
-ICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgICAgICAgYnJva2VuIGxpa2UgNzMwOTgKIGJ1aWxk
-LWkzODYgICAgICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgICAgICBi
-cm9rZW4gbGlrZSA3MzA5OAoKYmFzZWxpbmUgdmVyc2lvbjoKIGZsaWdodCAgICAgICAgICAgICAg
-IDczMDk4Cgpqb2JzOgogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWkzODYgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAog
-YnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGJyb2tlbiAgCiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogdGVzdC1hbWQ2NC1hbWQ2
-NC1hbWQ2NC1zcXVlZXplLW5ldGJvb3QtcHlncnViICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0
-ZXN0LWFtZDY0LWkzODYtYW1kNjQtc3F1ZWV6ZS1uZXRib290LXB5Z3J1YiAgICAgICAgICAgICAg
-ICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1zcXVlZXplLW5ldGJvb3QtcHlncnVi
-ICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LWkzODYtc3F1ZWV6ZS1u
-ZXRib290LXB5Z3J1YiAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCgoKLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1m
-bGlnaHQgb24gb3NzdGVzdC54cy5jaXRyaXRlLm5ldApsb2dzOiAvaG9tZS9vc3N0ZXN0L2xvZ3MK
-aW1hZ2VzOiAvaG9tZS9vc3N0ZXN0L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFy
-ZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9vc3N0ZXN0LnhzLmNpdHJpdGUubmV0L35vc3N0ZXN0
-L3Rlc3Rsb2dzL2xvZ3MKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0
-cDovL3hlbmJpdHMueGVuc291cmNlLmNvbS9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkK
-CgpQdXNoIG5vdCBhcHBsaWNhYmxlLgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+On Tue, Dec 26, 2017 at 07:00:43PM -0800, hpa@zytor.com wrote:
+> On December 26, 2017 6:54:55 PM PST, Linus Torvalds <torvalds@linux-foundation.org> wrote:
+> >On Tue, Dec 26, 2017 at 6:25 PM,  <hpa@zytor.com> wrote:
+> >>
+> >> This is why I personally prefer to see these kinds of terminal stubs
+> >written in assembly explicitly: the C compiler simply doesn't have all
+> >the information needed to do the right thing.
+> >>
+> >> I'm personally very sceptical to nuking the GDT unless we're in real
+> >mode.  There seems to be no point, and just opens up failure modes.
+> >
+> >Agreed, but I think it was originally probably done for that exact
+> >reason: to explicitly trigger issues if somebody did something odd.
+> >
+> >That said, this time it's actually the "load_segments()" that causes
+> >the real problem, and the GDT and IDT invalidation shouldn't have
+> >actually done anything at all, since we shouldn't actually be taking
+> >faults or loading segments.
+> >
+> >And historically that segment reset didn't matter either, because
+> >apparently we don't do any percpu stuff either. And the stack canary
+> >use for %gs is actually fairly recent (well, "recent" is relative: the
+> >stack protector code goes back to 2006, but the load_segments() use
+> >predates that.
+> >
+> >So I think we should actually fix "load_segments()" to not load fs/gs
+> >with __KERNEL_DS, but with __KERNEL_PERCPU and __KERNEL_STACK_CANARY
+> >respectively.
+> >
+> >... and yes, we should also look at the idt/gdt invalidation, but I
+> >wonder if the paravirt code might want to trigger there for people. Do
+> >people do kexec under paravirt?
+
+Not anymore. The kexec loading under hypervisors (say Xen) ends up making
+hypercalls directly and loads the kernel in the hypervisor bypassing the Linux
+kexec machinery.
+
+If the Linux kernel hits a crash it makes an hypercall - and the hypervisor
+continues with its own kexec invocation.
+
+Not sure how KVM does it (which also uses some paravirt functionality).
+> >
+> >                 Linus
+> 
+> It's not paravirt, but also broken HVM hypervisors, sadly.  Some versions of Xen HVM would shite itself if the memory that the GDT or IDT pointers were in was overwritten, and these functions seem to put them on the stack.
+
+Are you sure? I do remember the Xen PV ABI being a trainwreck, but
+I don't recall anything in the HVM paths being so oddball as this?
+Would you remember the links / context of this?
+
+CCing xen-devel folks in case they recall.
+
+> -- 
+> Sent from my Android device with K-9 Mail. Please excuse my brevity.
