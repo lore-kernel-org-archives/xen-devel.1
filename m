@@ -1,18 +1,11 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: Problem creating x86_64 PVH mini-os domain
-Date: Sun, 31 Dec 2017 17:12:52 +0000
-Message-ID: <ec95e89a-a4ef-6701-d7c2-e16d8fcb74e1@citrix.com>
-References: <CADNMjEBvi8P9OxeVfYH8nev+kwsGne=wjSeUQ0T=meUi20kTsw@mail.gmail.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [distros-debian-sid test] 73723: trouble: blocked/broken
+Date: Mon, 1 Jan 2018 12:30:38 +0000
+Message-ID: <osstest-73723-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3741017634737786973=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=rj2g=d3=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
- id 1eVhAY-00009v-7w
- for xen-devel@lists.xenproject.org; Sun, 31 Dec 2017 17:13:06 +0000
-In-Reply-To: <CADNMjEBvi8P9OxeVfYH8nev+kwsGne=wjSeUQ0T=meUi20kTsw@mail.gmail.com>
-Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,143 +14,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Bruno Alvisio <bruno.alvisio@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---===============3741017634737786973==
-Content-Type: multipart/alternative;
- boundary="------------E87E4FDDC3CC527647B16CFE"
-Content-Language: en-GB
-
-This is a multi-part message in MIME format.
---------------E87E4FDDC3CC527647B16CFE
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-On 31/12/2017 15:19, Bruno Alvisio wrote:
->
-> Hi all,
->
->  
->
-> I was trying to create mini-os PVH instances both x86_32 and x86_64. I
-> have no issue with x86_32 but when trying to ‘xl create’ x86_64 type I
-> get the following error:
->
->
-> <snip>
->
-> xc: error: panic: xc_dom_hvmloader.c:113: xc_dom_parse_hvm_kernel: ELF
-> image is not 32bit: Invalid kernel
->
-
-The domain loader only ever accepts elf32 images, because the starting
-state is 32bit flat mode.
-
-This is how XTF deals with the problem:
-
-http://xenbits.xen.org/gitweb/?p=xtf.git;a=blob;f=build/gen.mk;h=8d7a6bf89725fedc8343d2e4d3c8e2c93c16811f;hb=HEAD#l47
-
-There is a lot of template meta-programming in there, but basically
-after doing the final link, do a further objcopy to convert the image to
-elf32-x86-64 (if available), or elf32-i386.  The former is only
-available if you have an x32 toolchain, and allows the binary to load
-properly and disassemble correctly.
-
->  Happy New Year!
->
-
-Happy new year.
-
-~Andrew
-
---------------E87E4FDDC3CC527647B16CFE
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 31/12/2017 15:19, Bruno Alvisio
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CADNMjEBvi8P9OxeVfYH8nev+kwsGne=wjSeUQ0T=meUi20kTsw@mail.gmail.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <div dir="ltr">
-        <p class="gmail-MsoNormal" style="line-height:16pt;margin:0in
-          0in 0.0001pt;font-family:Calibri"><span
-            style="font-family:&quot;Helvetica Neue&quot;;color:black">Hi
-            all,</span></p>
-        <p class="gmail-MsoNormal" style="line-height:16pt;margin:0in
-          0in 0.0001pt;font-family:Calibri"><span
-            style="font-family:&quot;Helvetica Neue&quot;;color:black"><span> </span></span></p>
-        <p class="gmail-MsoNormal" style="line-height:16pt;margin:0in
-          0in 0.0001pt;font-family:Calibri"><span
-            style="font-family:&quot;Helvetica Neue&quot;;color:black">I
-            was trying to create
-            mini-os PVH instances both x86_32 and x86_64. I have no
-            issue with x86_32 but
-            when trying to ‘xl create’ x86_64 type I get the following
-            error:<span></span></span></p>
-        <p class="gmail-MsoNormal" style="line-height:16pt;margin:0in
-          0in 0.0001pt;font-family:Calibri"><span
-            style="font-family:&quot;Helvetica Neue&quot;;color:black"><br>
-          </span></p>
-        &lt;snip&gt;<span style="font-family:Menlo;color:black"><span></span></span>
-        <p class="gmail-MsoNormal" style="margin:0in 0in
-          0.0001pt;font-family:Calibri"><span
-            style="font-family:Menlo;color:black">xc: error: panic:
-            xc_dom_hvmloader.c:113: xc_dom_parse_hvm_kernel: ELF image
-            is not 32bit:
-            Invalid kernel</span></p>
-      </div>
-    </blockquote>
-    <br>
-    The domain loader only ever accepts elf32 images, because the
-    starting state is 32bit flat mode.<br>
-    <br>
-    This is how XTF deals with the problem:<br>
-    <br>
-<a class="moz-txt-link-freetext" href="http://xenbits.xen.org/gitweb/?p=xtf.git;a=blob;f=build/gen.mk;h=8d7a6bf89725fedc8343d2e4d3c8e2c93c16811f;hb=HEAD#l47">http://xenbits.xen.org/gitweb/?p=xtf.git;a=blob;f=build/gen.mk;h=8d7a6bf89725fedc8343d2e4d3c8e2c93c16811f;hb=HEAD#l47</a><br>
-    <br>
-    There is a lot of template meta-programming in there, but basically
-    after doing the final link, do a further objcopy to convert the
-    image to elf32-x86-64 (if available), or elf32-i386.  The former is
-    only available if you have an x32 toolchain, and allows the binary
-    to load properly and disassemble correctly.<br>
-    <br>
-    <blockquote type="cite"
-cite="mid:CADNMjEBvi8P9OxeVfYH8nev+kwsGne=wjSeUQ0T=meUi20kTsw@mail.gmail.com">
-      <div dir="ltr">
-        <p class="gmail-MsoNormal" style="line-height:16pt;margin:0in
-          0in 0.0001pt"><span style="color:black"><span><font
-                face="arial, helvetica, sans-serif"> </font></span></span><span
-            style="color:black"><font face="arial, helvetica,
-              sans-serif">Happy New Year!</font></span></p>
-      </div>
-    </blockquote>
-    <br>
-    Happy new year.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------E87E4FDDC3CC527647B16CFE--
-
-
---===============3741017634737786973==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3741017634737786973==--
+ZmxpZ2h0IDczNzIzIGRpc3Ryb3MtZGViaWFuLXNpZCByZWFsIFtyZWFsXQpodHRwOi8vb3NzdGVz
+dC54cy5jaXRyaXRlLm5ldC9+b3NzdGVzdC90ZXN0bG9ncy9sb2dzLzczNzIzLwoKRmFpbHVyZXMg
+YW5kIHByb2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQg
+YW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46
+CiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAg
+ICAgICAgYnJva2VuCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVz
+PiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAg
+IDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hcm1oZiAgICAgICAg
+ICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1h
+bWQ2NCAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJv
+a2VuCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAg
+ICAgICAgICAgYnJva2VuCiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICA1IGNhcHR1cmUt
+bG9ncyAgICAgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gNzMzNjAKIGJ1aWxkLWFybWhmICAgICAg
+ICAgICAgICAgICAgIDUgY2FwdHVyZS1sb2dzICAgICAgICAgICAgYnJva2VuIFJFR1IuIHZzLiA3
+MzM2MAogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAgMyBzeXNsb2ctc2VydmVyICAgICAg
+ICAgICAgICAgIHJ1bm5pbmcKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgIDMgc3lzbG9n
+LXNlcnZlciAgICAgICAgICAgICAgICBydW5uaW5nCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2Nl
+ZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXNpZC1uZXRi
+b290LXB5Z3J1YiAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgIGJsb2NrZWQgbi9hCiB0ZXN0LWFt
+ZDY0LWkzODYtaTM4Ni1zaWQtbmV0Ym9vdC1wdmdydWIgIDEgYnVpbGQtY2hlY2soMSkgICAgICAg
+ICAgYmxvY2tlZCBuL2EKIHRlc3QtYXJtaGYtYXJtaGYtYXJtaGYtc2lkLW5ldGJvb3QtcHlncnVi
+ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1pMzg2LWFt
+ZDY0LXNpZC1uZXRib290LXB5Z3J1YiAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgIGJsb2NrZWQg
+bi9hCiB0ZXN0LWFtZDY0LWFtZDY0LWFtZDY0LXNpZC1uZXRib290LXB2Z3J1YiAgMSBidWlsZC1j
+aGVjaygxKSAgICAgICAgYmxvY2tlZCBuL2EKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAg
+IDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgICAgICBicm9rZW4gbGlrZSA3MzM2MAogYnVpbGQt
+YXJtaGYtcHZvcHMgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgICAgICAgIGJy
+b2tlbiBsaWtlIDczMzYwCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICA0IGhvc3QtaW5z
+dGFsbCg0KSAgICAgICAgICAgICAgYnJva2VuIGxpa2UgNzMzNjAKIGJ1aWxkLWFtZDY0ICAgICAg
+ICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgICAgICBicm9rZW4gbGlrZSA3
+MzM2MAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAg
+ICAgICAgICAgIGJyb2tlbiBsaWtlIDczMzYwCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAg
+ICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgICAgICAgYnJva2VuIGxpa2UgNzMzNjAKCmJhc2Vs
+aW5lIHZlcnNpb246CiBmbGlnaHQgICAgICAgICAgICAgICA3MzM2MAoKam9iczoKIGJ1aWxkLWFt
+ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9r
+ZW4gIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtYXJt
+aGYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tl
+biAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgYnJva2VuICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtc2lkLW5ldGJvb3QtcHZn
+cnViICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LWkzODYtc2lk
+LW5ldGJvb3QtcHZncnViICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0
+LWkzODYtYW1kNjQtc2lkLW5ldGJvb3QtcHlncnViICAgICAgICAgICAgICAgICAgICAgYmxvY2tl
+ZCAKIHRlc3QtYXJtaGYtYXJtaGYtYXJtaGYtc2lkLW5ldGJvb3QtcHlncnViICAgICAgICAgICAg
+ICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXNpZC1uZXRib290LXB5Z3J1
+YiAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24g
+b3NzdGVzdC54cy5jaXRyaXRlLm5ldApsb2dzOiAvaG9tZS9vc3N0ZXN0L2xvZ3MKaW1hZ2VzOiAv
+aG9tZS9vc3N0ZXN0L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFi
+bGUgYXQKICAgIGh0dHA6Ly9vc3N0ZXN0LnhzLmNpdHJpdGUubmV0L35vc3N0ZXN0L3Rlc3Rsb2dz
+L2xvZ3MKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJp
+dHMueGVuc291cmNlLmNvbS9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoIG5v
+dCBhcHBsaWNhYmxlLgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
