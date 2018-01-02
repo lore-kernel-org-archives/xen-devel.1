@@ -1,19 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2] x86: implement cpu_possible_map
-Date: Tue, 02 Jan 2018 02:45:03 -0700
-Message-ID: <5A4B62AF020000780019A1B8@prv-mh.provo.novell.com>
-References: <20171228172515.12757-1-roger.pau@citrix.com>
+From: Bruno Alvisio <bruno.alvisio@gmail.com>
+Subject: Re: Problem creating x86_64 PVH mini-os domain
+Date: Tue, 2 Jan 2018 10:08:45 +0000
+Message-ID: <CADNMjEB1Mh6iNQCRpztMwb_g4aakBvcLbrVbEE-0LMqrEpjjFw@mail.gmail.com>
+References: <CADNMjEBvi8P9OxeVfYH8nev+kwsGne=wjSeUQ0T=meUi20kTsw@mail.gmail.com>
+ <ec95e89a-a4ef-6701-d7c2-e16d8fcb74e1@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0701169526856711055=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=z30q=d5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1eWJ8E-00054O-UD
- for xen-devel@lists.xenproject.org; Tue, 02 Jan 2018 09:45:14 +0000
-In-Reply-To: <20171228172515.12757-1-roger.pau@citrix.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=vkcx=d5=gmail.com=bruno.alvisio@srs-us1.protection.inumbo.net>)
+ id 1eWJV2-0006ZL-PW
+ for xen-devel@lists.xenproject.org; Tue, 02 Jan 2018 10:08:48 +0000
+Received: by mail-yw0-x242.google.com with SMTP id w128so11728248ywa.1
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Jan 2018 02:08:46 -0800 (PST)
+In-Reply-To: <ec95e89a-a4ef-6701-d7c2-e16d8fcb74e1@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,25 +23,171 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI4LjEyLjE3IGF0IDE4OjI1LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IE9uIHg4NiBjcHVfcG9zc2libGVfbWFwIGlzIG5vdCBkZWZpbmVkLCBzbyB0cnlpbmcgdG8gdXNl
-Cj4gbnVtX3Bvc3NpYmxlX2NwdXMgd2lsbCBnZW5lcmF0ZSBsaW5rIHRpbWUgZXJyb3JzLgoKSSB0
-aGluayB0aGlzIG1ha2VzIHNlbnNlIG9ubHkgaW4gY29ubmVjdGlvbiB3aXRoIGEgcGF0Y2ggYWN0
-dWFsbHkKcmVxdWlyaW5nIHRoZSBzeW1ib2wuIFRoZSB2YXJpYWJsZSBpc24ndCB0aGVyZSBvbiB4
-ODYgKGFueW1vcmUKaWlyYykgZm9yIHRoZSB2ZXJ5IHJlYXNvbiB0aGF0IHRoZSBsYXN0IHVzZXIg
-aGFzIGxvbmcgZ29uZS4KCj4gQEAgLTE0NzQsMTEgKzE0NzUsMTQgQEAgdm9pZCBfX2luaXQgbm9y
-ZXR1cm4gX19zdGFydF94ZW4odW5zaWduZWQgbG9uZyBtYmlfcCkKPiAgICAgIHsKPiAgICAgICAg
-ICBtYXhfY3B1cyA9IDA7Cj4gICAgICAgICAgc2V0X25yX2NwdV9pZHMoMSk7Cj4gKyAgICAgICAg
-X19jcHVtYXNrX3NldF9jcHUoMCwgJmNwdV9wb3NzaWJsZV9tYXApOwo+ICAgICAgfQo+ICAgICAg
-ZWxzZQo+ICAgICAgewo+ICAgICAgICAgIHNldF9ucl9jcHVfaWRzKG1heF9jcHVzKTsKPiAgICAg
-ICAgICBtYXhfY3B1cyA9IG5yX2NwdV9pZHM7Cj4gKyAgICAgICAgZm9yICggaSA9IDA7IGkgPCBu
-cl9jcHVfaWRzOyBpKysgKQo+ICsgICAgICAgICAgICBfX2NwdW1hc2tfc2V0X2NwdShpLCAmY3B1
-X3Bvc3NpYmxlX21hcCk7Cj4gICAgICB9CgpDb25zaWRlcmluZyB0aGlzIC0gd2h5IGNhbid0IHlv
-dSB1c2UgbnJfY3B1X2lkcyBpbnN0ZWFkIG9mCm51bV9wb3NzaWJsZV9jcHVzPwoKSmFuCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============0701169526856711055==
+Content-Type: multipart/alternative; boundary="001a11429284c9745b0561c8487e"
+
+--001a11429284c9745b0561c8487e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Dec 31, 2017 at 5:12 PM, Andrew Cooper <andrew.cooper3@citrix.com>
+wrote:
+
+> On 31/12/2017 15:19, Bruno Alvisio wrote:
+>
+> Hi all,
+>
+>
+>
+> I was trying to create mini-os PVH instances both x86_32 and x86_64. I
+> have no issue with x86_32 but when trying to =E2=80=98xl create=E2=80=99 =
+x86_64 type I get
+> the following error:
+>
+>
+> <snip>
+>
+> xc: error: panic: xc_dom_hvmloader.c:113: xc_dom_parse_hvm_kernel: ELF
+> image is not 32bit: Invalid kernel
+>
+>
+> The domain loader only ever accepts elf32 images, because the starting
+> state is 32bit flat mode.
+>
+> This is how XTF deals with the problem:
+>
+> http://xenbits.xen.org/gitweb/?p=3Dxtf.git;a=3Dblob;f=3Dbuild/gen.mk;h=3D
+> 8d7a6bf89725fedc8343d2e4d3c8e2c93c16811f;hb=3DHEAD#l47
+>
+> There is a lot of template meta-programming in there, but basically after
+> doing the final link, do a further objcopy to convert the image to
+> elf32-x86-64 (if available), or elf32-i386.  The former is only available
+> if you have an x32 toolchain, and allows the binary to load properly and
+> disassemble correctly.
+>
+
+Thank you. Doing:
+
+$objcopy <obj_file> -O elf32-x86-64 <new_obj_file>
+
+ worked perfectly!
+
+>
+>  Happy New Year!
+>
+>
+> Happy new year.
+>
+> ~Andrew
+>
+
+--001a11429284c9745b0561c8487e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">On Sun, Dec 31, 2017 at 5:12 PM, Andrew Cooper <span dir=
+=3D"ltr">&lt;<a href=3D"mailto:andrew.cooper3@citrix.com" target=3D"_blank"=
+>andrew.cooper3@citrix.com</a>&gt;</span> wrote:<br><div class=3D"gmail_ext=
+ra"><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"m=
+argin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+ =20
+   =20
+ =20
+  <div text=3D"#000000" bgcolor=3D"#FFFFFF"><span class=3D"">
+    <div class=3D"m_5283853962972203132moz-cite-prefix">On 31/12/2017 15:19=
+, Bruno Alvisio
+      wrote:<br>
+    </div>
+    </span><blockquote type=3D"cite">
+     =20
+      <div dir=3D"ltr"><span class=3D"">
+        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"line-hei=
+ght:16pt;margin:0in 0in 0.0001pt;font-family:Calibri"><span style=3D"font-f=
+amily:&quot;Helvetica Neue&quot;;color:black">Hi
+            all,</span></p>
+        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"line-hei=
+ght:16pt;margin:0in 0in 0.0001pt;font-family:Calibri"><span style=3D"font-f=
+amily:&quot;Helvetica Neue&quot;;color:black"><span>=C2=A0</span></span></p=
+>
+        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"line-hei=
+ght:16pt;margin:0in 0in 0.0001pt;font-family:Calibri"><span style=3D"font-f=
+amily:&quot;Helvetica Neue&quot;;color:black">I
+            was trying to create
+            mini-os PVH instances both x86_32 and x86_64. I have no
+            issue with x86_32 but
+            when trying to =E2=80=98xl create=E2=80=99 x86_64 type I get th=
+e following
+            error:<span></span></span></p>
+        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"line-hei=
+ght:16pt;margin:0in 0in 0.0001pt;font-family:Calibri"><span style=3D"font-f=
+amily:&quot;Helvetica Neue&quot;;color:black"><br>
+          </span></p></span>
+        &lt;snip&gt;<span class=3D""><span style=3D"font-family:Menlo;color=
+:black"><span></span></span>
+        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"margin:0=
+in 0in 0.0001pt;font-family:Calibri"><span style=3D"font-family:Menlo;color=
+:black">xc: error: panic:
+            xc_dom_hvmloader.c:113: xc_dom_parse_hvm_kernel: ELF image
+            is not 32bit:
+            Invalid kernel</span></p>
+      </span></div>
+    </blockquote>
+    <br>
+    The domain loader only ever accepts elf32 images, because the
+    starting state is 32bit flat mode.<br>
+    <br>
+    This is how XTF deals with the problem:<br>
+    <br>
+<a class=3D"m_5283853962972203132moz-txt-link-freetext" href=3D"http://xenb=
+its.xen.org/gitweb/?p=3Dxtf.git;a=3Dblob;f=3Dbuild/gen.mk;h=3D8d7a6bf89725f=
+edc8343d2e4d3c8e2c93c16811f;hb=3DHEAD#l47" target=3D"_blank">http://xenbits=
+.xen.org/gitweb/<wbr>?p=3Dxtf.git;a=3Dblob;f=3Dbuild/gen.<wbr>mk;h=3D<wbr>8=
+d7a6bf89725fedc8343d2e4d3c8e2<wbr>c93c16811f;hb=3DHEAD#l47</a><br>
+    <br>
+    There is a lot of template meta-programming in there, but basically
+    after doing the final link, do a further objcopy to convert the
+    image to elf32-x86-64 (if available), or elf32-i386.=C2=A0 The former i=
+s
+    only available if you have an x32 toolchain, and allows the binary
+    to load properly and disassemble correctly.<br></div></blockquote><div>=
+<br></div><div>Thank you. Doing:</div><div><br></div><div>$objcopy &lt;obj_=
+file&gt; -O elf32-x86-64 &lt;new_obj_file&gt;</div><div><br></div><div>=C2=
+=A0worked perfectly!</div><blockquote class=3D"gmail_quote" style=3D"margin=
+:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div text=3D"#0000=
+00" bgcolor=3D"#FFFFFF">
+    <br>
+    <blockquote type=3D"cite">
+      <div dir=3D"ltr">
+        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"line-hei=
+ght:16pt;margin:0in 0in 0.0001pt"><span style=3D"color:black"><span><font f=
+ace=3D"arial, helvetica, sans-serif">=C2=A0</font></span></span><span style=
+=3D"color:black"><font face=3D"arial, helvetica,
+              sans-serif">Happy New Year!</font></span></p>
+      </div>
+    </blockquote>
+    <br>
+    Happy new year.<span class=3D"HOEnZb"><font color=3D"#888888"><br>
+    <br>
+    ~Andrew<br>
+  </font></span></div>
+
+</blockquote></div><br></div></div>
+
+--001a11429284c9745b0561c8487e--
+
+
+--===============0701169526856711055==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0701169526856711055==--
