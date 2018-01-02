@@ -1,20 +1,18 @@
-From: Bruno Alvisio <bruno.alvisio@gmail.com>
-Subject: Re: Problem creating x86_64 PVH mini-os domain
-Date: Tue, 2 Jan 2018 10:08:45 +0000
-Message-ID: <CADNMjEB1Mh6iNQCRpztMwb_g4aakBvcLbrVbEE-0LMqrEpjjFw@mail.gmail.com>
-References: <CADNMjEBvi8P9OxeVfYH8nev+kwsGne=wjSeUQ0T=meUi20kTsw@mail.gmail.com>
- <ec95e89a-a4ef-6701-d7c2-e16d8fcb74e1@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2] x86/hvm: Add MSR old value
+Date: Tue, 02 Jan 2018 04:42:26 -0700
+Message-ID: <5A4B7E32020000780019A21C@prv-mh.provo.novell.com>
+References: <1507899057-4667-1-git-send-email-aisaila@bitdefender.com>
+ <20171016161304.5kfoobz63ibpmu44@citrix.com>
+ <02ee615a-7ecc-6ec4-4916-c109a7e7de5c@bitdefender.com>
+ <5A266FE90200007800194A04@prv-mh.provo.novell.com>
+ <fa8778c5-f65a-c381-ae23-b427a2a6dd53@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0701169526856711055=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=vkcx=d5=gmail.com=bruno.alvisio@srs-us1.protection.inumbo.net>)
- id 1eWJV2-0006ZL-PW
- for xen-devel@lists.xenproject.org; Tue, 02 Jan 2018 10:08:48 +0000
-Received: by mail-yw0-x242.google.com with SMTP id w128so11728248ywa.1
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jan 2018 02:08:46 -0800 (PST)
-In-Reply-To: <ec95e89a-a4ef-6701-d7c2-e16d8fcb74e1@citrix.com>
+In-Reply-To: <fa8778c5-f65a-c381-ae23-b427a2a6dd53@bitdefender.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,171 +21,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: tim@xen.org, sstabellini@kernel.org, Wei Liu <wei.liu2@citrix.com>, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, xen-devel@lists.xen.org, tamas@tklengyel.com, Alexandru Isaila <aisaila@bitdefender.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============0701169526856711055==
-Content-Type: multipart/alternative; boundary="001a11429284c9745b0561c8487e"
-
---001a11429284c9745b0561c8487e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Sun, Dec 31, 2017 at 5:12 PM, Andrew Cooper <andrew.cooper3@citrix.com>
-wrote:
-
-> On 31/12/2017 15:19, Bruno Alvisio wrote:
->
-> Hi all,
->
->
->
-> I was trying to create mini-os PVH instances both x86_32 and x86_64. I
-> have no issue with x86_32 but when trying to =E2=80=98xl create=E2=80=99 =
-x86_64 type I get
-> the following error:
->
->
-> <snip>
->
-> xc: error: panic: xc_dom_hvmloader.c:113: xc_dom_parse_hvm_kernel: ELF
-> image is not 32bit: Invalid kernel
->
->
-> The domain loader only ever accepts elf32 images, because the starting
-> state is 32bit flat mode.
->
-> This is how XTF deals with the problem:
->
-> http://xenbits.xen.org/gitweb/?p=3Dxtf.git;a=3Dblob;f=3Dbuild/gen.mk;h=3D
-> 8d7a6bf89725fedc8343d2e4d3c8e2c93c16811f;hb=3DHEAD#l47
->
-> There is a lot of template meta-programming in there, but basically after
-> doing the final link, do a further objcopy to convert the image to
-> elf32-x86-64 (if available), or elf32-i386.  The former is only available
-> if you have an x32 toolchain, and allows the binary to load properly and
-> disassemble correctly.
->
-
-Thank you. Doing:
-
-$objcopy <obj_file> -O elf32-x86-64 <new_obj_file>
-
- worked perfectly!
-
->
->  Happy New Year!
->
->
-> Happy new year.
->
-> ~Andrew
->
-
---001a11429284c9745b0561c8487e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">On Sun, Dec 31, 2017 at 5:12 PM, Andrew Cooper <span dir=
-=3D"ltr">&lt;<a href=3D"mailto:andrew.cooper3@citrix.com" target=3D"_blank"=
->andrew.cooper3@citrix.com</a>&gt;</span> wrote:<br><div class=3D"gmail_ext=
-ra"><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
- =20
-   =20
- =20
-  <div text=3D"#000000" bgcolor=3D"#FFFFFF"><span class=3D"">
-    <div class=3D"m_5283853962972203132moz-cite-prefix">On 31/12/2017 15:19=
-, Bruno Alvisio
-      wrote:<br>
-    </div>
-    </span><blockquote type=3D"cite">
-     =20
-      <div dir=3D"ltr"><span class=3D"">
-        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"line-hei=
-ght:16pt;margin:0in 0in 0.0001pt;font-family:Calibri"><span style=3D"font-f=
-amily:&quot;Helvetica Neue&quot;;color:black">Hi
-            all,</span></p>
-        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"line-hei=
-ght:16pt;margin:0in 0in 0.0001pt;font-family:Calibri"><span style=3D"font-f=
-amily:&quot;Helvetica Neue&quot;;color:black"><span>=C2=A0</span></span></p=
->
-        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"line-hei=
-ght:16pt;margin:0in 0in 0.0001pt;font-family:Calibri"><span style=3D"font-f=
-amily:&quot;Helvetica Neue&quot;;color:black">I
-            was trying to create
-            mini-os PVH instances both x86_32 and x86_64. I have no
-            issue with x86_32 but
-            when trying to =E2=80=98xl create=E2=80=99 x86_64 type I get th=
-e following
-            error:<span></span></span></p>
-        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"line-hei=
-ght:16pt;margin:0in 0in 0.0001pt;font-family:Calibri"><span style=3D"font-f=
-amily:&quot;Helvetica Neue&quot;;color:black"><br>
-          </span></p></span>
-        &lt;snip&gt;<span class=3D""><span style=3D"font-family:Menlo;color=
-:black"><span></span></span>
-        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"margin:0=
-in 0in 0.0001pt;font-family:Calibri"><span style=3D"font-family:Menlo;color=
-:black">xc: error: panic:
-            xc_dom_hvmloader.c:113: xc_dom_parse_hvm_kernel: ELF image
-            is not 32bit:
-            Invalid kernel</span></p>
-      </span></div>
-    </blockquote>
-    <br>
-    The domain loader only ever accepts elf32 images, because the
-    starting state is 32bit flat mode.<br>
-    <br>
-    This is how XTF deals with the problem:<br>
-    <br>
-<a class=3D"m_5283853962972203132moz-txt-link-freetext" href=3D"http://xenb=
-its.xen.org/gitweb/?p=3Dxtf.git;a=3Dblob;f=3Dbuild/gen.mk;h=3D8d7a6bf89725f=
-edc8343d2e4d3c8e2c93c16811f;hb=3DHEAD#l47" target=3D"_blank">http://xenbits=
-.xen.org/gitweb/<wbr>?p=3Dxtf.git;a=3Dblob;f=3Dbuild/gen.<wbr>mk;h=3D<wbr>8=
-d7a6bf89725fedc8343d2e4d3c8e2<wbr>c93c16811f;hb=3DHEAD#l47</a><br>
-    <br>
-    There is a lot of template meta-programming in there, but basically
-    after doing the final link, do a further objcopy to convert the
-    image to elf32-x86-64 (if available), or elf32-i386.=C2=A0 The former i=
-s
-    only available if you have an x32 toolchain, and allows the binary
-    to load properly and disassemble correctly.<br></div></blockquote><div>=
-<br></div><div>Thank you. Doing:</div><div><br></div><div>$objcopy &lt;obj_=
-file&gt; -O elf32-x86-64 &lt;new_obj_file&gt;</div><div><br></div><div>=C2=
-=A0worked perfectly!</div><blockquote class=3D"gmail_quote" style=3D"margin=
-:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div text=3D"#0000=
-00" bgcolor=3D"#FFFFFF">
-    <br>
-    <blockquote type=3D"cite">
-      <div dir=3D"ltr">
-        <p class=3D"m_5283853962972203132gmail-MsoNormal" style=3D"line-hei=
-ght:16pt;margin:0in 0in 0.0001pt"><span style=3D"color:black"><span><font f=
-ace=3D"arial, helvetica, sans-serif">=C2=A0</font></span></span><span style=
-=3D"color:black"><font face=3D"arial, helvetica,
-              sans-serif">Happy New Year!</font></span></p>
-      </div>
-    </blockquote>
-    <br>
-    Happy new year.<span class=3D"HOEnZb"><font color=3D"#888888"><br>
-    <br>
-    ~Andrew<br>
-  </font></span></div>
-
-</blockquote></div><br></div></div>
-
---001a11429284c9745b0561c8487e--
-
-
---===============0701169526856711055==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0701169526856711055==--
+Pj4+IE9uIDIyLjEyLjE3IGF0IDEwOjA5LCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3Jv
+dGU6Cj4gT24gMTIvMDUvMjAxNyAxMTowNyBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9u
+IDA0LjEyLjE3IGF0IDE2OjQ1LCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4+
+Pj4gIE9uIEZyaSwgT2N0IDEzLCAyMDE3IGF0IDAzOjUwOjU3UE0gKzAzMDAsIEFsZXhhbmRydSBJ
+c2FpbGEgd3JvdGU6Cj4+Pj4+IFRoaXMgcGF0Y2ggYWRkcyB0aGUgb2xkIHZhbHVlIHBhcmFtIGFu
+ZCB0aGUgb25jaGFuZ2Vvbmx5IG9wdGlvbgo+Pj4+PiB0byB0aGUgVk1fRVZFTlRfUkVBU09OX01P
+Vl9UT19NU1IgZXZlbnQuCj4+Pj4+Cj4+Pj4+IFRoZSBwYXJhbSB3YXMgYWRkZWQgdG8gdGhlIHZt
+X2V2ZW50X21vdl90b19tc3Igc3RydWN0IGFuZCB0byB0aGUKPj4+Pj4gaHZtX21vbml0b3JfbXNy
+IGZ1bmN0aW9uLiBGaW5hbGx5IEkndmUgY2hhbmdlZCB0aGUgYm9vbF90IHBhcmFtCj4+Pj4+IHRv
+IGEgYm9vbCBmb3IgdGhlIGh2bV9tc3Jfd3JpdGVfaW50ZXJjZXB0IGZ1bmN0aW9uLgo+Pj4+Pgo+
+Pj4+PiBTaWduZWQtb2ZmLWJ5OiBBbGV4YW5kcnUgSXNhaWxhIDxhaXNhaWxhQGJpdGRlZmVuZGVy
+LmNvbT4KPj4+Pj4gQWNrZWQtYnk6IFRhbWFzIEsgTGVuZ3llbCA8dGFtYXNAdGtsZW5neWVsLmNv
+bT4KPj4+Pj4KPj4+Pj4gLS0tCj4+Pj4+IENoYW5nZXMgc2luY2UgVjE6Cj4+Pj4+IAktIFJlbW92
+ZWQgU3RyYXkgYmxhbmtzIGluc2lkZSB0aGUgaW5uZXIgcGFyZW50aGVzZXMKPj4+Pj4gCS0gQWRk
+ZWQgc3BhY2UgYWZ0ZXIgdGhlIGlmIHN0YXRlbWVudAo+Pj4+PiAJLSBBZGRlZCAqIDggdG8gdGhl
+IHNldC9jbGVhci90ZXN0X2JpdCBzdGF0ZW1lbnRzCj4+Pj4+IAktIFJlbW92ZWQgdGhlIGJsYW5r
+IGxpbmUgYWZ0ZXIgbW9uaXRvcmVkX21zci4KPj4+Pj4gLS0tCj4+Pj4+ICB0b29scy9saWJ4Yy9p
+bmNsdWRlL3hlbmN0cmwuaCAgICAgfCAgMiArLQo+Pj4+PiAgdG9vbHMvbGlieGMveGNfbW9uaXRv
+ci5jICAgICAgICAgIHwgIDMgKystCj4+Pj4KPj4+PiBBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxp
+dTJAY2l0cml4LmNvbT4KPj4+Cj4+PiBQaW5nIC0gQUZBSUNUIHRoaXMgcGF0Y2ggaGFzIGFsbCB0
+aGUgcmVxdWlyZWQgYWNrcz8KPj4gCj4+IFN1cmUsIGFuZCBpdCBpcyBub3QgYmVpbmcgZm9yZ290
+dGVuLiBCdXQgdGhlIHRyZWUgaXMgbm90IGZ1bGx5IG9wZW4KPj4geWV0LCBzbyBpdCBpcyBzdWJq
+ZWN0IHRvIHRoZSBqdWRnbWVudCBvZiBjb21taXR0ZXJzIHdoZXRoZXIgYW55Cj4+IHBhdGNoIChv
+ciBzZXJpZXMpIGlzIHN1aXRhYmxlIG9mIGNvbW1pdHRpbmcgYXQgdGhpcyBwb2ludC4gSSBkaWQg
+dGhpbmsKPj4gYWJvdXQgY29tbWl0dGluZyB0aGlzIHBhdGNoIHllc3RlcmRheSwgYnV0IGRlY2lk
+ZWQgYWdhaW5zdAo+PiBkb2luZyBzby4gUGxlYXNlIGJlIGEgbGl0dGxlIG1vcmUgcGF0aWVudCAt
+IGV2ZW4gb25jZSB0aGUgdHJlZSBpcwo+PiBmdWxseSBvcGVuLCBhIGZldyB3b3JraW5nIGRheXMg
+c2hvdWxkIGJlIGFsbG93ZWQgZm9yIGV2ZXJ5b25lCj4+IHRvIGRlYWwgd2l0aCBiYWNrbG9nLCBi
+ZWZvcmUgc2VuZGluZyBwaW5ncy4KPiAKPiBTb3JyeSBmb3IgdGhlIHByZXZpb3VzIGVhcmx5IHBp
+bmcuIEp1c3QgdG8gY2hlY2s6IGlzIHRoZXJlIGFjdGlvbgo+IHJlcXVpcmVkIG9uIG91ciBwYXJ0
+IGZvciB0aGlzIHBhdGNoIHBvc3QtNC4xMCAocmViYXNpbmcsIGV0Yy4pPwoKSSB0aGluayB3aGVu
+IEkgaGFkIGxhc3QgbG9va2VkIEkgZGlkIGdldCB0aGUgKHdyb25nKSBpbXByZXNzaW9uCnRoYXQg
+dGhlcmUgd2FzIGEgbWlzc2luZyBhY2suIEknbGwgdHJ5IHRvIHJlbWVtYmVyIHRvIGNvbW1pdCB0
+aGlzCndpdGggdGhlIG5leHQgYmF0Y2guCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
