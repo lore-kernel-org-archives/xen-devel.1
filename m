@@ -1,20 +1,19 @@
-From: manish.jaggi@linaro.org
-Subject: [RFC 11/11] Add to_pci_dev macro
-Date: Tue,  2 Jan 2018 14:58:09 +0530
-Message-ID: <20180102092809.1841-12-manish.jaggi@linaro.org>
-References: <20180102092809.1841-1-manish.jaggi@linaro.org>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2] x86: implement cpu_possible_map
+Date: Tue, 02 Jan 2018 02:45:03 -0700
+Message-ID: <5A4B62AF020000780019A1B8@prv-mh.provo.novell.com>
+References: <20171228172515.12757-1-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=aiit=d5=linaro.org=manish.jaggi@srs-us1.protection.inumbo.net>)
- id 1eWIsm-0002rI-Ln
- for xen-devel@lists.xenproject.org; Tue, 02 Jan 2018 09:29:16 +0000
-Received: by mail-pl0-x243.google.com with SMTP id b96so28335661pli.2
- for <xen-devel@lists.xenproject.org>; Tue, 02 Jan 2018 01:29:15 -0800 (PST)
-In-Reply-To: <20180102092809.1841-1-manish.jaggi@linaro.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=z30q=d5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1eWJ8E-00054O-UD
+ for xen-devel@lists.xenproject.org; Tue, 02 Jan 2018 09:45:14 +0000
+In-Reply-To: <20171228172515.12757-1-roger.pau@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,23 +22,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, julien.grall@linaro.org, sameer.goel@linaro.org, andre.przywara@linaro.org
-Cc: Manish Jaggi <manish.jaggi@linaro.org>, manish.jaggi@cavium.com
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogTWFuaXNoIEphZ2dpIDxtYW5pc2guamFnZ2lAbGluYXJvLm9yZz4KClRoaXMgcGF0Y2gg
-YWRkcyB0b19wY2lfZGV2IG1hY3JvCgpTaWduZWQtb2ZmLWJ5OiBNYW5pc2ggSmFnZ2kgPG1hbmlz
-aC5qYWdnaUBsaW5hcm8ub3JnPgotLS0KIHhlbi9pbmNsdWRlL3hlbi9wY2kuaCB8IDMgKysrCiAx
-IGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUv
-eGVuL3BjaS5oIGIveGVuL2luY2x1ZGUveGVuL3BjaS5oCmluZGV4IDQzZjIxMjUxYTUuLjRjN2Zm
-NGRkMTAgMTAwNjQ0Ci0tLSBhL3hlbi9pbmNsdWRlL3hlbi9wY2kuaAorKysgYi94ZW4vaW5jbHVk
-ZS94ZW4vcGNpLmgKQEAgLTkyLDggKzkyLDExIEBAIHN0cnVjdCBwY2lfZGV2IHsKICNkZWZpbmUg
-UFRfRkFVTFRfVEhSRVNIT0xEIDEwCiAgICAgfSBmYXVsdDsKICAgICB1NjQgdmZfcmxlbls2XTsK
-KyAgICBzdHJ1Y3QgZGV2aWNlIGRldjsKIH07CiAKKyNkZWZpbmUgdG9fcGNpX2RldihwKSBjb250
-YWluZXJfb2YocCwgc3RydWN0IHBjaV9kZXYsIGRldikKKyNkZWZpbmUgcGNpX2RvbWFpbl9ucihk
-ZXYpIGRldi0+c2VnCiAjZGVmaW5lIGZvcl9lYWNoX3BkZXYoZG9tYWluLCBwZGV2KSBcCiAgICAg
-bGlzdF9mb3JfZWFjaF9lbnRyeShwZGV2LCAmKGRvbWFpbi0+YXJjaC5wZGV2X2xpc3QpLCBkb21h
-aW5fbGlzdCkKIAotLSAKMi4xNC4xCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+Pj4+IE9uIDI4LjEyLjE3IGF0IDE4OjI1LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
+IE9uIHg4NiBjcHVfcG9zc2libGVfbWFwIGlzIG5vdCBkZWZpbmVkLCBzbyB0cnlpbmcgdG8gdXNl
+Cj4gbnVtX3Bvc3NpYmxlX2NwdXMgd2lsbCBnZW5lcmF0ZSBsaW5rIHRpbWUgZXJyb3JzLgoKSSB0
+aGluayB0aGlzIG1ha2VzIHNlbnNlIG9ubHkgaW4gY29ubmVjdGlvbiB3aXRoIGEgcGF0Y2ggYWN0
+dWFsbHkKcmVxdWlyaW5nIHRoZSBzeW1ib2wuIFRoZSB2YXJpYWJsZSBpc24ndCB0aGVyZSBvbiB4
+ODYgKGFueW1vcmUKaWlyYykgZm9yIHRoZSB2ZXJ5IHJlYXNvbiB0aGF0IHRoZSBsYXN0IHVzZXIg
+aGFzIGxvbmcgZ29uZS4KCj4gQEAgLTE0NzQsMTEgKzE0NzUsMTQgQEAgdm9pZCBfX2luaXQgbm9y
+ZXR1cm4gX19zdGFydF94ZW4odW5zaWduZWQgbG9uZyBtYmlfcCkKPiAgICAgIHsKPiAgICAgICAg
+ICBtYXhfY3B1cyA9IDA7Cj4gICAgICAgICAgc2V0X25yX2NwdV9pZHMoMSk7Cj4gKyAgICAgICAg
+X19jcHVtYXNrX3NldF9jcHUoMCwgJmNwdV9wb3NzaWJsZV9tYXApOwo+ICAgICAgfQo+ICAgICAg
+ZWxzZQo+ICAgICAgewo+ICAgICAgICAgIHNldF9ucl9jcHVfaWRzKG1heF9jcHVzKTsKPiAgICAg
+ICAgICBtYXhfY3B1cyA9IG5yX2NwdV9pZHM7Cj4gKyAgICAgICAgZm9yICggaSA9IDA7IGkgPCBu
+cl9jcHVfaWRzOyBpKysgKQo+ICsgICAgICAgICAgICBfX2NwdW1hc2tfc2V0X2NwdShpLCAmY3B1
+X3Bvc3NpYmxlX21hcCk7Cj4gICAgICB9CgpDb25zaWRlcmluZyB0aGlzIC0gd2h5IGNhbid0IHlv
+dSB1c2UgbnJfY3B1X2lkcyBpbnN0ZWFkIG9mCm51bV9wb3NzaWJsZV9jcHVzPwoKSmFuCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
