@@ -1,25 +1,12 @@
-From: Christoph Moench-Tegeder <cmt@burggraben.net>
-Subject: Re: [BUG] kernel bug encountered at
- drivers/net/xen-netback/netback.c:430!
-Date: Wed, 3 Jan 2018 21:33:38 +0100
-Message-ID: <20180103203337.GA79570@elch.exwg.net>
-References: <5a3ca8ee.4426620a.b956d.1799@mx.google.com>
- <352b0317-cfc5-1ef4-fbd0-2b2879f9712e@suse.com>
- <5a3d6c93.886f620a.2522d.c2fb@mx.google.com>
- <23eb0f3f-590d-f03a-f971-65e86c52fbe4@ark-net.org>
- <5a4546b1.55da620a.5c435.4b4b@mx.google.com>
- <3f860d32831940e7aa40d97979155b6e@AMSPEX02CL03.citrite.net>
+From: Xen.org security team <security@xen.org>
+Subject: Xen Security Advisory 254 - Information leak via side
+ effects of speculative execution
+Date: Wed, 03 Jan 2018 22:30:00 +0000
+Message-ID: <E1eWrXs-0007D0-Bg@xenbits.xenproject.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=ecqm=d6=burggraben.net=cmt@srs-us1.protection.inumbo.net>)
- id 1eWpjW-0006fB-1v
- for xen-devel@lists.xenproject.org; Wed, 03 Jan 2018 20:33:54 +0000
-Content-Disposition: inline
-In-Reply-To: <3f860d32831940e7aa40d97979155b6e@AMSPEX02CL03.citrite.net>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,43 +15,177 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>
-Cc: 'Michael Collins' <mike@ark-net.org>, 'Juergen Gross' <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, 'Alex Braunegg' <alex.braunegg@gmail.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org, xen-users@lists.xen.org, oss-security@lists.openwall.com
+Cc: "Xen.org security team" <security-team-members@xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-IyMgUGF1bCBEdXJyYW50IChQYXVsLkR1cnJhbnRAY2l0cml4LmNvbSk6Cgo+IEhvdyBlYXN5IGlz
-IGl0IHRvIHRyaWdnZXIgdGhpcz8gSSdtIGFzc3VtaW5nLCBmcm9tIHRoZSBvcmlnaW5hbAo+IGRl
-c2NyaXB0aW9uLCB0aGF0IEkgY2FuIHByb2JhYmx5IHRyaWdnZXIgaXQgYnkgZm9yY2libHkgdGVy
-bWluYXRpbmcKPiBhIHJ1bm5pbmcgZG9tYWluIGFuZCB0aGVuIHRyeWluZyB0byByZXN0YXJ0IGl0
-LgoKQXMgQWxleCBzYWlkOiBpbiB0aGUgImNvbW1vbiBjYXNlcyIgKGxpa2UgaGlzIGFuZCBtaW5l
-KSBpdCBzZWVtcyB0bwpiZSBlbm91Z2ggdG8gcnVuIGEgZmV3IERvbVVzIGFuZCBqdXN0IHdhaXQg
-YSBsaXR0bGUgKG5vIHNwZWNpYWwKbG9hZCByZXF1aXJlZCkgLSB3aXRoIG15IDEwIGRvbWFpbnMs
-IHRoZSBiZyB0cmlnZ2VycyBpbiBhIGZldyBtaW51dGVzCiggaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE3LTEyL21zZzAxNTE2Lmh0bWwKaXMg
-bXkgcmVwb3J0IG9mIHRoZSBpc3N1ZSAtIEkgZGlkbid0IHNwb3QgQWxleCcgcmVwb3J0KS4KVGhl
-IG9yZGVyIG9mIGV2ZW50IGhlcmUgaXM6Ci0gYm9vdCBEb20wCi0geGwgY3JlYXRlIGEgZmV3IERv
-bVVzIChhbGwgcmVjZW50IExpbnV4LCBhbGwgYnVpbGRlcj1odm0gaW4gbXkgc2V0dXAsCiAgZWFj
-aCBWTSBoYXMgZXhhY3RseSBvbmUgdmlydHVhbCBuZXR3b3JrIGludGVyZmFjZSwgYWxsIGJyaWRn
-ZWQgb250bwogIHRoZSBvbmUgZXRoZXJuZXQgaW50ZXJmYWNlIG9uIHRoZSBEb20wIHdoaWNoIGNh
-cnJpZXMgYWxsIHRyYWZmaWMKICB0byB0aGUgRG9tMCBhbmQgdGhlIERvbVVzKQotIGFmdGVyIGEg
-ZmV3IG1pbnV0ZXMsIHRoZSBEb20wIGtlcm5lbCBsb2dzIHRoZSBCVUcoKSBpbiBxdWVzdGlvbgot
-IHNob3J0bHkgYWZ0ZXIgKG5vdCBpbW1lZGlhdGVseSEgLSBtYXkgdGFrZSBldmVuIHNvbWUgbW9y
-ZSBtaW51dGVzKQogIHRoZSBEb21VIGJlaGluZCB0aGUgdmlmIHJlcG9ydGVkIGluIHRoZSBCVUcg
-YmVjb21lcyB1bnJlc3BvbnNpdmU6CiAgbm8gbmV0d29yayB0cmFmZmljLCBubyByZWFjdGlvbiBv
-biB0aGUgdmlydHVhbCBjb25zb2xlLCBubyBtZXNzYWdlCiAgaW4gc3lzbG9nKS4KLSB0cnlpbmcg
-dG8geGwgZGVzdHJveSB0aGUgdW5yZXNwb25zaXZlIGRvbWFpbiAob3IgdHJ5aW5nIHRvIGRvIGEK
-ICBub3JtYWwgc2h1dGRvd24gb24gb25lIG9mIHRoZSBvdGhlciBkb21haW5zKSByZXN1bHRzIGlu
-IHRoZSBjb3JydXB0ZWQKICBzdGF0ZSBkb2N1bWVudGVkIGluIG15IGVhcmxpZXIgcmVwb3J0IChz
-ZWUgbGluaykuCgpJbiBteSBjYXNlIHRoaXMgImNhbm5vdCIgYmUgYW4gaXNzdWUgd2l0aCBhbiBv
-bGQgZ2NjIC0gRGViaWFuIDkgc2hpcHMKd2l0aCAiZ2NjIChEZWJpYW4gNi4zLjAtMTgpIDYuMy4w
-IDIwMTcwNTE2IiAoYnV0IGJld2FyZSBvZiBuZXcgYnVncywKd2hvIGtub3dzPykuCgpJIGNvdWxk
-IHRyeSBhIG5ldyBrZXJuZWwgKEtQVEksIHlheSEpIHdpdGggdGhhdCAibWlsZGx5IHN1c3BpY2lv
-dXMiIGNvbW1pdApjYzg3MzdhNWZlOTA1MWI3ZmEwNTJiMDhjNTdkZGI5ZjUzOWMzODlhIHJldmVy
-dGVkIG9uIHRoZSB3ZWVrZW5kIGFuZApyZXBvcnQgYmFjayAoanVzdCB0byBydWxlIHRoYXQgb3V0
-IC0gbGlrZSB5b3UsIEkgZG9uJ3QgcmVhbGx5IGJlbGlldmUKdGhhdCB0aGlzIGlzIHRoZSBjYXVz
-ZSkuCkZvciB0aGUgcmVjb3JkLCBJJ20gc3RpbGwgcnVubmluZyA0LjEzLjE2IG9uIHRoZSBEb20w
-ICh0aGF0J3MgdGhlIGxhc3QKd29ya2luZyBEb20wIGtlcm5lbCkuCgpSZWdhcmRzLApDaHJpc3Rv
-cGgKCi0tIApTcGFyZSBTcGFjZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+                    Xen Security Advisory XSA-254
+
+        Information leak via side effects of speculative execution
+
+ISSUE DESCRIPTION
+=================
+
+Processors give the illusion of a sequence of instructions executed
+one-by-one.  However, in order to most efficiently use cpu resources,
+modern superscalar processors actually begin executing many
+instructions in parallel.  In cases where instructions depend on the
+result of previous instructions or checks which have not yet
+completed, execution happens based on guesses about what the outcome
+will be.  If the guess is correct, execution has been sped up.  If the
+guess is incorrect, partially-executed instructions are cancelled and
+architectural state changes (to registers, memory, and so on)
+reverted; but the whole process is no slower than if no guess had been
+made at all.  This is sometimes called "speculative execution".
+
+Unfortunately, although architectural state is rolled back, there are
+other side effects, such as changes to TLB or cache state, which are
+not rolled back.  These side effects can subsequently be detected by
+an attacker to determine information about what happened during the
+speculative execution phase.  If an attacker can cause speculative
+execution to access sensitive memory areas, they may be able to infer
+what that sensitive memory contained.
+
+Furthermore, these guesses can often be 'poisoned', such that attacker
+can cause logic to reliably 'guess' the way the attacker chooses.
+This advisory discusses three ways to cause speculative execution to
+access sensitive memory areas (named here according to the
+discoverer's naming scheme):
+
+SP1, "Bounds-check bypass": Poison the branch predictor, such that
+operating system or hypervisor code is speculatively executed past
+boundary and security checks.  This would allow an attacker to, for
+instance, cause speculative code in the normal hypercall / emulation
+path to execute with wild array indexes.
+
+SP2, "Branch Target Injection": Poison the branch predictor.
+Well-abstracted code often involves calling function pointers via
+indirect branches; reading these function pointers may involve a
+(slow) memory access, so the CPU attempts to guess where indirect
+branches will lead.  Poisoning this enables an attacker to
+speculatively branch to any code that exists in the hypervisor.
+
+SP3, "Rogue Data Load": On some processors, certain pagetable
+permission checks only happen when the instruction is retired;
+effectively meaning that speculative execution is not subject to
+pagetable permission checks.  On such processors, an attacker can
+speculatively execute arbitrary code in userspace with, effectively,
+the highest privilege level.
+
+More information is available here:
+  https://meltdownattack.com/
+  https://spectreattack.com/
+
+Additional Xen-specific background:
+
+64-bit Xen hypervisors on systems with less than 5TiB of RAM map all
+of physical RAM, so code speculatively executed in a hypervisor
+context can read all of system RAM.
+
+When running PV guests, the guest and the hypervisor share the address
+space; guest kernels run in a lower privilege level, and Xen runs in
+the highest privilege level.  (HVM and PVH guests run in a separate
+address space to the hypervisor.)  However, only 64-bit PV guests can
+generate addresses large enough to point to hypervisor memory.
+
+IMPACT
+======
+
+Xen guests may be able to infer the contents of arbitrary host memory,
+including memory assigned to other guests.
+
+An attacker's choice of code to speculatively execute (and thus the
+ease of extracting useful information) goes up with the numbers.  For
+SP1, or SP2 on systems where SMEP (supervisor mode execute protection)
+is enabled: an attacker is limited to windows of code after bound
+checks of user-supplied indexes.  For SP2 without SMEP, or SP3, an
+attacker can write arbitrary code to speculatively execute.
+
+NOTE ON TIMING
+==============
+
+This vulnerability was originally scheduled to be made public on 9
+January.  It was accelerated at the request of the discloser due to
+one of the issues being made public.
+
+VULNERABLE SYSTEMS
+==================
+
+Systems running all versions of Xen are affected.
+
+For SP1 and SP2, both Intel and AMD are vulnerable.
+
+For SP3, only Intel processors are vulnerable. Furthermore, only
+64-bit PV guests can exploit SP3 against Xen.  PVH and 32-bit PV
+guests cannot exploit SP3.
+
+We believe that ARM is affected, but unfortunately due to the
+accelerated schedule, we haven't been able to get concrete input from
+ARM.  We are asking ARM and will publish more information when it is
+available.
+
+MITIGATION
+==========
+
+There is no mitigation for SP1 and SP2.
+
+SP3 can be mitigated by running guests in HVM or PVH mode.
+
+For guests with legacy PV kernels which cannot be run in HVM mode, we
+have developed a "shim" hypervisor that allows PV guests to run in PVH
+mode.  Unfortunately, due to the accelerated schedule, this is not yet
+ready to release.  We expect to have it ready for 4.10, as well as PVH
+backports to 4.9 and 4.8, available over the next few days.
+
+RESOLUTION
+==========
+
+There is no available resolution for SP1 or SP3.
+
+We are working on patches which mitigate SP2 but these are not
+currently available.  Given that the vulnerabilities are now public,
+these will be developed and published in public, initially via
+xen-devel.
+
+When we have useful information we will send an update.
+
+NOTE ON LACK OF EMBARGO
+=======================
+
+The timetable and process were set by the discloser.
+
+After the intensive initial response period for these vulnerabilities
+is over, we will prepare and publish a full timeline, as we have done
+in a handful of other cases of significant public interest where we
+saw opportunities for process improvement.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBCAAGBQJaTVlQAAoJEIP+FMlX6CvZRIkH/3LGBnVPE6/4eBYwUTAZZ1bC
++PLMLiUpSZuSwxbKrt80Tuu8hXBWPvf9bTL5gwEg0IGbypLmehoRc1Xj1Ra+9U2h
+PVcmyoP2rcgENSqGKqv8CKHI0xt1QqXK0hF2L7q370+3crgNAx79T+nJf11SAsnA
+m3MUvi7eDm1BUf4sIYlePkVcSbxcyjcejGKr/aAwo4Ku3aInO0lgapb8kjYiMKME
+wgQ9oOVLuSvkTwcOCTnJaMF3FkpFATq6VpmtbRDNkeSd8yrF3d9C/GAoPwoMt6oY
+zLNBs77T5LfrQtLJ62aOeXmPcu3vZOZlTH89+1IBLef4Gs5eqD5rTfKcTc8AaPE=
+=70SF
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--=separator--
