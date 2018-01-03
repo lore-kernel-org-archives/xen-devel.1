@@ -1,12 +1,21 @@
-From: Xen.org security team <security@xen.org>
-Subject: Xen Security Advisory 254 - Information leak via side
- effects of speculative execution
-Date: Wed, 03 Jan 2018 22:30:00 +0000
-Message-ID: <E1eWrXs-0007D0-Bg@xenbits.xenproject.org>
+From: Kevin Stange <kevin@steadfast.net>
+Subject: Re: PCI Device Subtree Change from Traditional to
+ Upstream
+Date: Wed, 3 Jan 2018 17:10:54 -0600
+Message-ID: <3a19395e-c52f-bbfd-5986-ba56cc10c767@steadfast.net>
+References: <c8ed6851-70c1-500d-5d66-1e8a6b7133c5@steadfast.net>
+ <20180103175759.GA1905@perard.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
-Content-Transfer-Encoding: binary
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=m+2y=d6=steadfast.net=kevin@srs-us1.protection.inumbo.net>)
+ id 1eWsBZ-0001kE-3U
+ for xen-devel@lists.xenproject.org; Wed, 03 Jan 2018 23:11:01 +0000
+In-Reply-To: <20180103175759.GA1905@perard.uk.xensource.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,177 +24,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-announce@lists.xen.org, xen-devel@lists.xen.org, xen-users@lists.xen.org, oss-security@lists.openwall.com
-Cc: "Xen.org security team" <security-team-members@xen.org>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---=separator
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA256
-
-                    Xen Security Advisory XSA-254
-
-        Information leak via side effects of speculative execution
-
-ISSUE DESCRIPTION
-=================
-
-Processors give the illusion of a sequence of instructions executed
-one-by-one.  However, in order to most efficiently use cpu resources,
-modern superscalar processors actually begin executing many
-instructions in parallel.  In cases where instructions depend on the
-result of previous instructions or checks which have not yet
-completed, execution happens based on guesses about what the outcome
-will be.  If the guess is correct, execution has been sped up.  If the
-guess is incorrect, partially-executed instructions are cancelled and
-architectural state changes (to registers, memory, and so on)
-reverted; but the whole process is no slower than if no guess had been
-made at all.  This is sometimes called "speculative execution".
-
-Unfortunately, although architectural state is rolled back, there are
-other side effects, such as changes to TLB or cache state, which are
-not rolled back.  These side effects can subsequently be detected by
-an attacker to determine information about what happened during the
-speculative execution phase.  If an attacker can cause speculative
-execution to access sensitive memory areas, they may be able to infer
-what that sensitive memory contained.
-
-Furthermore, these guesses can often be 'poisoned', such that attacker
-can cause logic to reliably 'guess' the way the attacker chooses.
-This advisory discusses three ways to cause speculative execution to
-access sensitive memory areas (named here according to the
-discoverer's naming scheme):
-
-SP1, "Bounds-check bypass": Poison the branch predictor, such that
-operating system or hypervisor code is speculatively executed past
-boundary and security checks.  This would allow an attacker to, for
-instance, cause speculative code in the normal hypercall / emulation
-path to execute with wild array indexes.
-
-SP2, "Branch Target Injection": Poison the branch predictor.
-Well-abstracted code often involves calling function pointers via
-indirect branches; reading these function pointers may involve a
-(slow) memory access, so the CPU attempts to guess where indirect
-branches will lead.  Poisoning this enables an attacker to
-speculatively branch to any code that exists in the hypervisor.
-
-SP3, "Rogue Data Load": On some processors, certain pagetable
-permission checks only happen when the instruction is retired;
-effectively meaning that speculative execution is not subject to
-pagetable permission checks.  On such processors, an attacker can
-speculatively execute arbitrary code in userspace with, effectively,
-the highest privilege level.
-
-More information is available here:
-  https://meltdownattack.com/
-  https://spectreattack.com/
-
-Additional Xen-specific background:
-
-64-bit Xen hypervisors on systems with less than 5TiB of RAM map all
-of physical RAM, so code speculatively executed in a hypervisor
-context can read all of system RAM.
-
-When running PV guests, the guest and the hypervisor share the address
-space; guest kernels run in a lower privilege level, and Xen runs in
-the highest privilege level.  (HVM and PVH guests run in a separate
-address space to the hypervisor.)  However, only 64-bit PV guests can
-generate addresses large enough to point to hypervisor memory.
-
-IMPACT
-======
-
-Xen guests may be able to infer the contents of arbitrary host memory,
-including memory assigned to other guests.
-
-An attacker's choice of code to speculatively execute (and thus the
-ease of extracting useful information) goes up with the numbers.  For
-SP1, or SP2 on systems where SMEP (supervisor mode execute protection)
-is enabled: an attacker is limited to windows of code after bound
-checks of user-supplied indexes.  For SP2 without SMEP, or SP3, an
-attacker can write arbitrary code to speculatively execute.
-
-NOTE ON TIMING
-==============
-
-This vulnerability was originally scheduled to be made public on 9
-January.  It was accelerated at the request of the discloser due to
-one of the issues being made public.
-
-VULNERABLE SYSTEMS
-==================
-
-Systems running all versions of Xen are affected.
-
-For SP1 and SP2, both Intel and AMD are vulnerable.
-
-For SP3, only Intel processors are vulnerable. Furthermore, only
-64-bit PV guests can exploit SP3 against Xen.  PVH and 32-bit PV
-guests cannot exploit SP3.
-
-We believe that ARM is affected, but unfortunately due to the
-accelerated schedule, we haven't been able to get concrete input from
-ARM.  We are asking ARM and will publish more information when it is
-available.
-
-MITIGATION
-==========
-
-There is no mitigation for SP1 and SP2.
-
-SP3 can be mitigated by running guests in HVM or PVH mode.
-
-For guests with legacy PV kernels which cannot be run in HVM mode, we
-have developed a "shim" hypervisor that allows PV guests to run in PVH
-mode.  Unfortunately, due to the accelerated schedule, this is not yet
-ready to release.  We expect to have it ready for 4.10, as well as PVH
-backports to 4.9 and 4.8, available over the next few days.
-
-RESOLUTION
-==========
-
-There is no available resolution for SP1 or SP3.
-
-We are working on patches which mitigate SP2 but these are not
-currently available.  Given that the vulnerabilities are now public,
-these will be developed and published in public, initially via
-xen-devel.
-
-When we have useful information we will send an update.
-
-NOTE ON LACK OF EMBARGO
-=======================
-
-The timetable and process were set by the discloser.
-
-After the intensive initial response period for these vulnerabilities
-is over, we will prepare and publish a full timeline, as we have done
-in a handful of other cases of significant public interest where we
-saw opportunities for process improvement.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBCAAGBQJaTVlQAAoJEIP+FMlX6CvZRIkH/3LGBnVPE6/4eBYwUTAZZ1bC
-+PLMLiUpSZuSwxbKrt80Tuu8hXBWPvf9bTL5gwEg0IGbypLmehoRc1Xj1Ra+9U2h
-PVcmyoP2rcgENSqGKqv8CKHI0xt1QqXK0hF2L7q370+3crgNAx79T+nJf11SAsnA
-m3MUvi7eDm1BUf4sIYlePkVcSbxcyjcejGKr/aAwo4Ku3aInO0lgapb8kjYiMKME
-wgQ9oOVLuSvkTwcOCTnJaMF3FkpFATq6VpmtbRDNkeSd8yrF3d9C/GAoPwoMt6oY
-zLNBs77T5LfrQtLJ62aOeXmPcu3vZOZlTH89+1IBLef4Gs5eqD5rTfKcTc8AaPE=
-=70SF
------END PGP SIGNATURE-----
-
---=separator
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---=separator--
+T24gMDEvMDMvMjAxOCAxMTo1NyBBTSwgQW50aG9ueSBQRVJBUkQgd3JvdGU6Cj4gT24gV2VkLCBE
+ZWMgMjAsIDIwMTcgYXQgMTE6NDA6MDNBTSAtMDYwMCwgS2V2aW4gU3RhbmdlIHdyb3RlOgo+PiBI
+aSwKPj4KPj4gSSd2ZSBiZWVuIHdvcmtpbmcgb24gdHJhbnNpdGlvbmluZyBhIG51bWJlciBvZiBX
+aW5kb3dzIGd1ZXN0cyB1bmRlciBIVk0KPj4gZnJvbSB1c2luZyBRRU1VIHRyYWRpdGlvbmFsIHRv
+IFFFTVUgdXBzdHJlYW0gYXMgaXMgcmVjb21tZW5kZWQgaW4gdGhlCj4+IGRvY3VtZW50YXRpb24u
+ICBXaGVuIEkgbW92ZSB0aGVzZSBndWVzdHMsIHRoZSBQQ0kgc3VidHJlZSBmb3IgWGVuCj4+IGRl
+dmljZXMgY2hhbmdlcyBhbmQgV2luZG93cyBjcmVhdGVzIGEgdG90YWxseSBuZXcgY29weSBvZiBl
+YWNoIGRldmljZS4KPj4gV2luZG93cyB0cmFja3MgZG93biB0aGUgc3RvcmFnZSB3aXRob3V0IGlz
+c3VlLCBidXQgaXQgdHJlYXRzIHRoZSBuZXcKPj4gaW5zdGFuY2Ugb2YgdGhlIE5JQyBkcml2ZXIg
+YXMgYSBuZXcgZGV2aWNlIGFuZCBjbGVhcnMgdGhlIG5ldHdvcmsKPj4gY29uZmlndXJhdGlvbiBl
+dmVuIHRob3VnaCB0aGUgTUFDIGFkZHJlc3MgaXMgdW5jaGFuZ2VkLiAgTWFudWFsbHkKPj4gYm9v
+dGluZyB0aGUgZ3Vlc3QgYmFjayBvbiB0aGUgdHJhZGl0aW9uYWwgZGV2aWNlIG1vZGVsIHJlYWN0
+aXZhdGVzIHRoZQo+PiBvcmlnaW5hbCBQQ0kgc3VidHJlZSBhbmQgdGhlIG9sZCBuZXR3b3JrIGNv
+bmZpZ3VyYXRpb24gd2l0aCBpdC4KPj4KPj4gVGhlIG9ubHkgdGhpbmcgdGhhdCBJIGhhdmUgYmVl
+biBhYmxlIHRvIGZpbmQgdGhhdCdzIHN1YnN0YW50aWFsbHkKPj4gZGlmZmVyZW50IGNvbXBhcmlu
+ZyB0aGUgZGV2aWNlIHRyZWVzIGlzIHRoYXQgdGhlIGRldmljZSBpbnN0YW5jZSBJRAo+PiB2YWx1
+ZXMgZGlmZmVyIG9uIHRoZSBwYXJlbnQgWGVuIFBDSSBkZXZpY2U6Cj4+Cj4+IFBDSVxWRU5fNTg1
+MyZERVZfMDAwMSZTVUJTWVNfMDAwMTU4NTMmUkVWXzAxXDMmMjY3QTYxNkEmMyYxOAo+Pgo+PiBQ
+Q0lcVkVOXzU4NTMmREVWXzAwMDEmU1VCU1lTXzAwMDE1ODUzJlJFVl8wMVwzJjI2N0E2MTZBJjMm
+MTAKPj4KPj4gQmVzaWRlcyBhY3R1YWxseSBzZXR0aW5nIHRoZSBndWVzdCB0byBib290IHVzaW5n
+IFFFTVUgdHJhZGl0aW9uYWwsIGlzCj4+IHRoZXJlIGEgd2F5IHRvIGNvbnZpbmNlIFdpbmRvd3Mg
+dG8gdHJlYXQgdGhlc2UgZGV2aWNlcyBhcyB0aGUgc2FtZT8gIEEKPj4gcGF0Y2gtYmFzZWQgc29s
+dXRpb24gd291bGQgYmUgYWNjZXB0YWJsZSB0byBtZSBpZiB0aGVyZSBpcyBvbmUsIGJ1dCBJCj4+
+IGRvbid0IHVuZGVyc3RhbmQgdGhlIGNvZGUgd2VsbCBlbm91Z2ggdG8gY3JlYXRlIG15IG93biBz
+b2x1dGlvbi4KPiAKPiBIaSBLZXZpbiwKPiAKPiBJJ3ZlIGdvdCBhIHBhdGNoIHRvIFFFTVUgdGhh
+dCBzZWVtcyB0byBkbyB0aGUgdHJpY2s6Cj4gCj4gRnJvbTogQW50aG9ueSBQRVJBUkQgPGFudGhv
+bnkucGVyYXJkQGNpdHJpeC5jb20+Cj4gU3ViamVjdDogW1BBVENIXSB4ZW4tcGxhdGZvcm06IEhh
+cmRjb2RlIFBDSSBzbG90IHRvIDMKPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbnRob255IFBFUkFSRCA8
+YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KPiAtLS0KPiAgaHcvaTM4Ni9wY19waWl4LmMgfCAy
+ICstCj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+IAo+
+IGRpZmYgLS1naXQgYS9ody9pMzg2L3BjX3BpaXguYyBiL2h3L2kzODYvcGNfcGlpeC5jCj4gaW5k
+ZXggNWU0NzUyODk5My4uOTNlM2E5YTkxNiAxMDA2NDQKPiAtLS0gYS9ody9pMzg2L3BjX3BpaXgu
+Ywo+ICsrKyBiL2h3L2kzODYvcGNfcGlpeC5jCj4gQEAgLTQwNSw3ICs0MDUsNyBAQCBzdGF0aWMg
+dm9pZCBwY194ZW5faHZtX2luaXQoTWFjaGluZVN0YXRlICptYWNoaW5lKQo+ICAKPiAgICAgIGJ1
+cyA9IHBjaV9maW5kX3ByaW1hcnlfYnVzKCk7Cj4gICAgICBpZiAoYnVzICE9IE5VTEwpIHsKPiAt
+ICAgICAgICBwY2lfY3JlYXRlX3NpbXBsZShidXMsIC0xLCAieGVuLXBsYXRmb3JtIik7Cj4gKyAg
+ICAgICAgcGNpX2NyZWF0ZV9zaW1wbGUoYnVzLCBQQ0lfREVWRk4oMywgMCksICJ4ZW4tcGxhdGZv
+cm0iKTsKPiAgICAgIH0KPiAgfQo+ICAjZW5kaWYKPiAKPiAKPiBUaGUgc2FtZSB0aGluZyBjb3Vs
+ZCBiZSBkb25lIGJ5IGxpYnhsLCBieSBwcm92aWRpbmcgc3BlY2lmaWMgY29tbWFuZAo+IGxpbmUg
+b3B0aW9ucyB0byBxZW11LiAoSSB0aGluayB0aGF0IGNvdWxkIGV2ZW4gYmUgZG9uZSB2aWEgYSBk
+aWZmZXJlbnQKPiBjb25maWcgZmlsZSBmb3IgdGhlIGd1ZXN0LikKClRoaXMgcGF0Y2ggZG9lc24n
+dCBzZWVtIHRvIHdvcmsgZm9yIG1lLiAgSXQgc2VlbXMgbGlrZSB0aGUgZGV2aWNlIG1vZGVsCnBy
+b2Nlc3MgaXMgZXhpdGluZyBpbW1lZGlhdGVseSwgYnV0IEkgaGF2ZW4ndCBiZWVuIGFibGUgdG8g
+ZmluZCBhbnkKaW5mb3JtYXRpb24gYXMgdG8gd2hhdCBpcyBnb2luZyB3cm9uZy4gIEkgdGVzdGVk
+IHdpdGggWGVuIDQuNi42IGFuZCB0aGUKUUVNVSBwYWNrYWdlZCB3aXRoIHRoYXQgcmVsZWFzZS4g
+IFNob3VsZCBJIHRyeSBpdCBvbiBhIGRpZmZlcmVudCB2ZXJzaW9uCm9mIFhlbiBhbmQgUUVNVT8K
+Ci0tIApLZXZpbiBTdGFuZ2UKQ2hpZWYgVGVjaG5vbG9neSBPZmZpY2VyClN0ZWFkZmFzdCB8IE1h
+bmFnZWQgSW5mcmFzdHJ1Y3R1cmUsIERhdGFjZW50ZXIgYW5kIENsb3VkIFNlcnZpY2VzCjgwMCBT
+IFdlbGxzLCBTdWl0ZSAxOTAgfCBDaGljYWdvLCBJTCA2MDYwNwozMTIuNjAyLjI2ODkgWDIwMyB8
+IEZheDogMzEyLjYwMi4yNjg4CmtldmluQHN0ZWFkZmFzdC5uZXQgfCB3d3cuc3RlYWRmYXN0Lm5l
+dAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
