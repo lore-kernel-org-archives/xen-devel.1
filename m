@@ -1,19 +1,10 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: [PATCH v2] x86/hvm: Add MSR old value
-Date: Wed, 3 Jan 2018 12:04:19 +0200
-Message-ID: <490bb84a-ddf4-a9a4-4442-130a36f126c0@bitdefender.com>
-References: <1507899057-4667-1-git-send-email-aisaila@bitdefender.com>
- <20171016161304.5kfoobz63ibpmu44@citrix.com>
- <02ee615a-7ecc-6ec4-4916-c109a7e7de5c@bitdefender.com>
- <5A266FE90200007800194A04@prv-mh.provo.novell.com>
- <fa8778c5-f65a-c381-ae23-b427a2a6dd53@bitdefender.com>
- <5A4CB7C8020000780019A684@prv-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-coverity test] 117598: all pass - PUSHED
+Date: Wed, 03 Jan 2018 10:16:31 +0000
+Message-ID: <osstest-117598-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6200669376111769100=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A4CB7C8020000780019A684@prv-mh.provo.novell.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,53 +13,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Alexandru Isaila <aisaila@bitdefender.com>
-Cc: tim@xen.org, sstabellini@kernel.org, Wei Liu <wei.liu2@citrix.com>, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, xen-devel@lists.xen.org, tamas@tklengyel.com
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMDMvMjAxOCAxMjowMCBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMjIuMTIu
-MTcgYXQgMTA6MDksIDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29tPiB3cm90ZToKPj4gT24gMTIv
-MDUvMjAxNyAxMTowNyBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+PiBPbiAwNC4xMi4xNyBh
-dCAxNjo0NSwgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+IHdyb3RlOgo+Pj4+PiAgT24gRnJp
-LCBPY3QgMTMsIDIwMTcgYXQgMDM6NTA6NTdQTSArMDMwMCwgQWxleGFuZHJ1IElzYWlsYSB3cm90
-ZToKPj4+Pj4+IFRoaXMgcGF0Y2ggYWRkcyB0aGUgb2xkIHZhbHVlIHBhcmFtIGFuZCB0aGUgb25j
-aGFuZ2Vvbmx5IG9wdGlvbgo+Pj4+Pj4gdG8gdGhlIFZNX0VWRU5UX1JFQVNPTl9NT1ZfVE9fTVNS
-IGV2ZW50Lgo+Pj4+Pj4KPj4+Pj4+IFRoZSBwYXJhbSB3YXMgYWRkZWQgdG8gdGhlIHZtX2V2ZW50
-X21vdl90b19tc3Igc3RydWN0IGFuZCB0byB0aGUKPj4+Pj4+IGh2bV9tb25pdG9yX21zciBmdW5j
-dGlvbi4gRmluYWxseSBJJ3ZlIGNoYW5nZWQgdGhlIGJvb2xfdCBwYXJhbQo+Pj4+Pj4gdG8gYSBi
-b29sIGZvciB0aGUgaHZtX21zcl93cml0ZV9pbnRlcmNlcHQgZnVuY3Rpb24uCj4+Pj4+Pgo+Pj4+
-Pj4gU2lnbmVkLW9mZi1ieTogQWxleGFuZHJ1IElzYWlsYSA8YWlzYWlsYUBiaXRkZWZlbmRlci5j
-b20+Cj4+Pj4+PiBBY2tlZC1ieTogVGFtYXMgSyBMZW5neWVsIDx0YW1hc0B0a2xlbmd5ZWwuY29t
-Pgo+Pj4+Pj4KPj4+Pj4+IC0tLQo+Pj4+Pj4gQ2hhbmdlcyBzaW5jZSBWMToKPj4+Pj4+IAktIFJl
-bW92ZWQgU3RyYXkgYmxhbmtzIGluc2lkZSB0aGUgaW5uZXIgcGFyZW50aGVzZXMKPj4+Pj4+IAkt
-IEFkZGVkIHNwYWNlIGFmdGVyIHRoZSBpZiBzdGF0ZW1lbnQKPj4+Pj4+IAktIEFkZGVkICogOCB0
-byB0aGUgc2V0L2NsZWFyL3Rlc3RfYml0IHN0YXRlbWVudHMKPj4+Pj4+IAktIFJlbW92ZWQgdGhl
-IGJsYW5rIGxpbmUgYWZ0ZXIgbW9uaXRvcmVkX21zci4KPj4+Pj4+IC0tLQo+Pj4+Pj4gIHRvb2xz
-L2xpYnhjL2luY2x1ZGUveGVuY3RybC5oICAgICB8ICAyICstCj4+Pj4+PiAgdG9vbHMvbGlieGMv
-eGNfbW9uaXRvci5jICAgICAgICAgIHwgIDMgKystCj4+Pj4+Cj4+Pj4+IEFja2VkLWJ5OiBXZWkg
-TGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+Pj4+Cj4+Pj4gUGluZyAtIEFGQUlDVCB0aGlzIHBh
-dGNoIGhhcyBhbGwgdGhlIHJlcXVpcmVkIGFja3M/Cj4+Pgo+Pj4gU3VyZSwgYW5kIGl0IGlzIG5v
-dCBiZWluZyBmb3Jnb3R0ZW4uIEJ1dCB0aGUgdHJlZSBpcyBub3QgZnVsbHkgb3Blbgo+Pj4geWV0
-LCBzbyBpdCBpcyBzdWJqZWN0IHRvIHRoZSBqdWRnbWVudCBvZiBjb21taXR0ZXJzIHdoZXRoZXIg
-YW55Cj4+PiBwYXRjaCAob3Igc2VyaWVzKSBpcyBzdWl0YWJsZSBvZiBjb21taXR0aW5nIGF0IHRo
-aXMgcG9pbnQuIEkgZGlkIHRoaW5rCj4+PiBhYm91dCBjb21taXR0aW5nIHRoaXMgcGF0Y2ggeWVz
-dGVyZGF5LCBidXQgZGVjaWRlZCBhZ2FpbnN0Cj4+PiBkb2luZyBzby4gUGxlYXNlIGJlIGEgbGl0
-dGxlIG1vcmUgcGF0aWVudCAtIGV2ZW4gb25jZSB0aGUgdHJlZSBpcwo+Pj4gZnVsbHkgb3Blbiwg
-YSBmZXcgd29ya2luZyBkYXlzIHNob3VsZCBiZSBhbGxvd2VkIGZvciBldmVyeW9uZQo+Pj4gdG8g
-ZGVhbCB3aXRoIGJhY2tsb2csIGJlZm9yZSBzZW5kaW5nIHBpbmdzLgo+Pgo+PiBTb3JyeSBmb3Ig
-dGhlIHByZXZpb3VzIGVhcmx5IHBpbmcuIEp1c3QgdG8gY2hlY2s6IGlzIHRoZXJlIGFjdGlvbgo+
-PiByZXF1aXJlZCBvbiBvdXIgcGFydCBmb3IgdGhpcyBwYXRjaCBwb3N0LTQuMTAgKHJlYmFzaW5n
-LCBldGMuKT8KPiAKPiBJJ3ZlIGp1c3QgdHJpZWQgdG8gY29tbWl0IGl0LCBhbmQgSSdtIG5vdyBw
-dXp6bGVkOiBCZWZvcmUgYXNraW5nCj4gdGhlIHF1ZXN0aW9uIGFib3ZlLCBkaWQgeW91IGNoZWNr
-IHdoZXRoZXIgcmUtYmFzaW5nIG1pZ2h0IGJlCj4gbmVjZXNzYXJ5PyBUaGUgbGlieGMgY2hhbmdl
-cyBkb24ndCBhcHBseSBhbnltb3JlLCBhbmQgc2luY2UKPiBpdCdzIG5vdCBqdXN0IGZ1enogdGhh
-dCBuZWVkcyByZXNvbHZpbmcgSSBkb24ndCB0aGluayBJJ20gZ29pbmcgdG8KPiBkbyB0aGF0IGZv
-ciB5b3UuCgpObywgc29ycnkgZm9yIHRoZSBtaXN1bmRlcnN0YW5kaW5nIC0gd2UgZGlkbid0IGNo
-ZWNrIGlmIGl0IG5lZWRzCnJlYmFzaW5nIGJlY2F1c2UgaXQgd2Fzbid0IGNsZWFyIHRoYXQgdGhh
-dCB3YXMgdGhlIGlzc3VlIG9yIHNvbWV0aGluZwplbHNlIHRoYXQgd291bGQgaGF2ZSBiZWVuIGJl
-c3Qgc29sdmVkIGFsb25nIHdpdGggcmViYXNpbmcuCgpUaGF0J3MgdmVyeSBmYWlyLCBpZiByZWJh
-c2luZyBpcyBhbGwgdGhhdCdzIG5lZWRlZCB3ZSdyZSBoYXBweSB0byByZWJhc2UKYW5kIHNlbmQg
-YSBuZXcgdmVyc2lvbi4KCgpUaGFua3MsClJhenZhbgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============6200669376111769100==
+Content-Type: text/plain
+
+flight 117598 xen-unstable-coverity real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117598/
+
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ xen                  971d299c04df379734d10c44d637433e9e564f36
+baseline version:
+ xen                  1b33150fe06ab9217f7f12b01bc5e607f4f55658
+
+Last test of basis   117377  2017-12-20 09:48:29 Z   14 days
+Testing same since   117598  2018-01-03 09:21:56 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Adrian Hunter <adrian.hunter@intel.com>
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Andrew Morton <akpm@linux-foundation.org>
+  David Woodhouse <David.Woodhouse@intel.com>
+  Jan Beulich <jbeulich@suse.com>
+  Linus Torvalds <torvalds@linux-foundation.org>
+  Michel Lespinasse <walken@google.com>
+  Peter Zijlstra <a.p.zijlstra@chello.nl>
+  Praveen Kumar <kpraveen.lkml@gmail.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Stephen Rothwell <sfr@canb.auug.org.au>
+  Tim Deegan <tim@xen.org>
+  Wolfram Strepp <wstrepp@gmx.de>
+  Yi Sun <yi.y.sun@linux.intel.com>
+
+jobs:
+ coverity-amd64                                               pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   1b33150fe0..971d299c04  971d299c04df379734d10c44d637433e9e564f36 -> coverity-tested/smoke
+
+
+--===============6200669376111769100==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6200669376111769100==--
