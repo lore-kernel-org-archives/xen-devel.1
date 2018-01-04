@@ -1,25 +1,11 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] xen: Add EFI_LOAD_OPTION support
-Date: Thu, 04 Jan 2018 08:00:05 -0700
-Message-ID: <5A4E4F85020000780019B1AB@prv-mh.provo.novell.com>
-References: <20180102155628.3007-1-tamas@tklengyel.com>
- <5A4CCA8C020000780019A74B@prv-mh.provo.novell.com>
- <CABfawhkNbLJNbxHxxne=AMPZanGh6V=+o5=WY1jT0POjCTLFoQ@mail.gmail.com>
- <5A4D14AD020000780019A971@prv-mh.provo.novell.com>
- <CABfawhkMKcOECtZcA4wmapUtaFerv4xBAkudeYYCLWoCrMPUxQ@mail.gmail.com>
- <5A4E136F020000780019AE06@prv-mh.provo.novell.com>
- <CABfawhk4CRHwZVj6Sy5WvkzzSTH-AUNxq83DBnYTH4sDbONfXA@mail.gmail.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 117634: tolerable all pass -
+	PUSHED
+Date: Thu, 04 Jan 2018 16:13:48 +0000
+Message-ID: <osstest-117634-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5629990030122954567=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=q53i=d7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1eX709-0003Hh-U5
- for xen-devel@lists.xenproject.org; Thu, 04 Jan 2018 15:00:13 +0000
-In-Reply-To: <CABfawhk4CRHwZVj6Sy5WvkzzSTH-AUNxq83DBnYTH4sDbONfXA@mail.gmail.com>
-Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,31 +14,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Tamas K Lengyel <tamas@tklengyel.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, openxt <openxt@googlegroups.com>, Tamas K Lengyel <lengyelt@ainfosec.com>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA0LjAxLjE4IGF0IDE1OjM5LCA8dGFtYXNAdGtsZW5neWVsLmNvbT4gd3JvdGU6Cj4g
-T24gVGh1LCBKYW4gNCwgMjAxOCBhdCAzOjQzIEFNLCBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3Vz
-ZS5jb20+IHdyb3RlOgo+PiBKdXN0IGxvb2tpbmcgYXQgdGhlIGxvdyBiaXQgb2YgdGhlIGZpcnN0
-Cj4+IGJ5dGUgYmVmb3JlIGFzc3VtaW5nIHRoaXMgY291bGQgYmUgYSBsb2FkIG9wdGlvbiBzdHJ1
-Y3R1cmUsCj4+IGhvd2V2ZXIsIGlzIHRvbyB3ZWFrIGEgY2hlY2sgZm9yIG15IHRhc3RlLgo+IAo+
-IFRoZXJlIGlzIG1vcmUgZG9uZSBpbiB0aGlzIHBhdGNoIHRoZW4ganVzdCBjaGVja2luZyB0aGUg
-bG93IGJpdCBvZiB0aGUKPiBBdHRyaWJ1dGVzIGZpZWxkOiBjYWxjdWxhdGluZyB3aGVyZSB0aGUg
-T3B0aW9uYWxEYXRhIHNob3VsZCBiZSBpZiB0aGlzCj4gaXMgaW5kZWVkIGFuIEVGSV9MT0FEX09Q
-VElPTiBhbmQgdGhlbiBzYW5pdHkgY2hlY2tpbmcgaWYgdGhhdCBhZGRyZXNzCj4gaXMgc2FuZSBv
-ciBub3QuIFRoaXMgcmVxdWlyZXMgdGhlIGJ1ZmZlciB0byBoYXZlIGEgbGF5b3V0IHRoYXQgYXQK
-PiBsZWFzdCBwYXJzZXMgcHJvcGVybHkgYXMgYW4gRUZJX0xPQURfT1BUSU9OLCBoZW5jZSBpdCBs
-aWtlbHkgaXMgb25lLi4KCkJ1dCB0aGF0IGNhbGN1bGF0aW9uIGlzIG5vdCBkb2luZyBhbGwgdGhl
-IGNoZWNraW5nIHRoYXQgd291bGQgYmUKbmVlZGVkIHRvIGJlIHJlYXNvbmFibHkgc2FmZS4gSW4g
-cGFydGljdWxhciwgeW91IG11c3RuJ3QgY2FsbAp3c3RybGVuKCkgd2hlbiB5b3UgZG9uJ3Qga25v
-dyB3aGV0aGVyIGFsbCBvZiB0aGUgc3VwcG9zZWQKc3RyaW5nIGlzIGFjdHVhbGx5IGluc2lkZSB0
-aGUgZ2l2ZW4gbWVtb3J5IGJsb2NrIHNpemUuIEFuZCBJJ20KYWxzbyBub3QgZW50aXJlbHkgY2Vy
-dGFpbiB3aGV0aGVyIGNhcmluZyBvZiBvdmVyZmxvdyBpbiBvbmx5IG9uZQoobGF0ZSkgcGxhY2Ug
-aXMgc3VmZmljaWVudC4KCkJ0dywgbG9va2luZyBhdCB0aGUgY29kZSBhZ2FpbiwgSSBzZWUgdHdv
-IG1vcmUgY29zbWV0aWMgdGhpbmdzCmZvciB5b3UgdG8gY2hhbmdlOiBQbGVhc2UgdXNlIHNpemVv
-ZihDSEFSMTYpIGJvdGggaW4gcGxhY2Ugb2YKc2l6ZW9mKEwnXDAnKSBhbmQgaW5zdGVhZCBvZiB0
-aGUgbGl0ZXJhbCAyIHRoZXJlLgoKSmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+--===============5629990030122954567==
+Content-Type: text/plain
+
+flight 117634 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117634/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  7b5b8ca7dffde866d851f0b87b994e0b13e5b867
+baseline version:
+ xen                  f98689c6cd6b0d04e7a02c24ce08591216f910ab
+
+Last test of basis   117606  2018-01-03 16:01:09 Z    1 days
+Testing same since   117634  2018-01-04 14:01:11 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Alexandru Isaila <aisaila@bitdefender.com>
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Tamas K Lengyel <tamas@tklengyel.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   f98689c6cd..7b5b8ca7df  7b5b8ca7dffde866d851f0b87b994e0b13e5b867 -> smoke
+
+
+--===============5629990030122954567==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5629990030122954567==--
