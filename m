@@ -1,21 +1,10 @@
-From: Kevin Stange <kevin@steadfast.net>
-Subject: Re: PCI Device Subtree Change from Traditional to
- Upstream
-Date: Wed, 3 Jan 2018 17:10:54 -0600
-Message-ID: <3a19395e-c52f-bbfd-5986-ba56cc10c767@steadfast.net>
-References: <c8ed6851-70c1-500d-5d66-1e8a6b7133c5@steadfast.net>
- <20180103175759.GA1905@perard.uk.xensource.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable test] 117557: trouble: broken/fail/pass
+Date: Thu, 04 Jan 2018 00:09:36 +0000
+Message-ID: <osstest-117557-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8288367731095891447=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=m+2y=d6=steadfast.net=kevin@srs-us1.protection.inumbo.net>)
- id 1eWsBZ-0001kE-3U
- for xen-devel@lists.xenproject.org; Wed, 03 Jan 2018 23:11:01 +0000
-In-Reply-To: <20180103175759.GA1905@perard.uk.xensource.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,60 +13,279 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMDMvMjAxOCAxMTo1NyBBTSwgQW50aG9ueSBQRVJBUkQgd3JvdGU6Cj4gT24gV2VkLCBE
-ZWMgMjAsIDIwMTcgYXQgMTE6NDA6MDNBTSAtMDYwMCwgS2V2aW4gU3RhbmdlIHdyb3RlOgo+PiBI
-aSwKPj4KPj4gSSd2ZSBiZWVuIHdvcmtpbmcgb24gdHJhbnNpdGlvbmluZyBhIG51bWJlciBvZiBX
-aW5kb3dzIGd1ZXN0cyB1bmRlciBIVk0KPj4gZnJvbSB1c2luZyBRRU1VIHRyYWRpdGlvbmFsIHRv
-IFFFTVUgdXBzdHJlYW0gYXMgaXMgcmVjb21tZW5kZWQgaW4gdGhlCj4+IGRvY3VtZW50YXRpb24u
-ICBXaGVuIEkgbW92ZSB0aGVzZSBndWVzdHMsIHRoZSBQQ0kgc3VidHJlZSBmb3IgWGVuCj4+IGRl
-dmljZXMgY2hhbmdlcyBhbmQgV2luZG93cyBjcmVhdGVzIGEgdG90YWxseSBuZXcgY29weSBvZiBl
-YWNoIGRldmljZS4KPj4gV2luZG93cyB0cmFja3MgZG93biB0aGUgc3RvcmFnZSB3aXRob3V0IGlz
-c3VlLCBidXQgaXQgdHJlYXRzIHRoZSBuZXcKPj4gaW5zdGFuY2Ugb2YgdGhlIE5JQyBkcml2ZXIg
-YXMgYSBuZXcgZGV2aWNlIGFuZCBjbGVhcnMgdGhlIG5ldHdvcmsKPj4gY29uZmlndXJhdGlvbiBl
-dmVuIHRob3VnaCB0aGUgTUFDIGFkZHJlc3MgaXMgdW5jaGFuZ2VkLiAgTWFudWFsbHkKPj4gYm9v
-dGluZyB0aGUgZ3Vlc3QgYmFjayBvbiB0aGUgdHJhZGl0aW9uYWwgZGV2aWNlIG1vZGVsIHJlYWN0
-aXZhdGVzIHRoZQo+PiBvcmlnaW5hbCBQQ0kgc3VidHJlZSBhbmQgdGhlIG9sZCBuZXR3b3JrIGNv
-bmZpZ3VyYXRpb24gd2l0aCBpdC4KPj4KPj4gVGhlIG9ubHkgdGhpbmcgdGhhdCBJIGhhdmUgYmVl
-biBhYmxlIHRvIGZpbmQgdGhhdCdzIHN1YnN0YW50aWFsbHkKPj4gZGlmZmVyZW50IGNvbXBhcmlu
-ZyB0aGUgZGV2aWNlIHRyZWVzIGlzIHRoYXQgdGhlIGRldmljZSBpbnN0YW5jZSBJRAo+PiB2YWx1
-ZXMgZGlmZmVyIG9uIHRoZSBwYXJlbnQgWGVuIFBDSSBkZXZpY2U6Cj4+Cj4+IFBDSVxWRU5fNTg1
-MyZERVZfMDAwMSZTVUJTWVNfMDAwMTU4NTMmUkVWXzAxXDMmMjY3QTYxNkEmMyYxOAo+Pgo+PiBQ
-Q0lcVkVOXzU4NTMmREVWXzAwMDEmU1VCU1lTXzAwMDE1ODUzJlJFVl8wMVwzJjI2N0E2MTZBJjMm
-MTAKPj4KPj4gQmVzaWRlcyBhY3R1YWxseSBzZXR0aW5nIHRoZSBndWVzdCB0byBib290IHVzaW5n
-IFFFTVUgdHJhZGl0aW9uYWwsIGlzCj4+IHRoZXJlIGEgd2F5IHRvIGNvbnZpbmNlIFdpbmRvd3Mg
-dG8gdHJlYXQgdGhlc2UgZGV2aWNlcyBhcyB0aGUgc2FtZT8gIEEKPj4gcGF0Y2gtYmFzZWQgc29s
-dXRpb24gd291bGQgYmUgYWNjZXB0YWJsZSB0byBtZSBpZiB0aGVyZSBpcyBvbmUsIGJ1dCBJCj4+
-IGRvbid0IHVuZGVyc3RhbmQgdGhlIGNvZGUgd2VsbCBlbm91Z2ggdG8gY3JlYXRlIG15IG93biBz
-b2x1dGlvbi4KPiAKPiBIaSBLZXZpbiwKPiAKPiBJJ3ZlIGdvdCBhIHBhdGNoIHRvIFFFTVUgdGhh
-dCBzZWVtcyB0byBkbyB0aGUgdHJpY2s6Cj4gCj4gRnJvbTogQW50aG9ueSBQRVJBUkQgPGFudGhv
-bnkucGVyYXJkQGNpdHJpeC5jb20+Cj4gU3ViamVjdDogW1BBVENIXSB4ZW4tcGxhdGZvcm06IEhh
-cmRjb2RlIFBDSSBzbG90IHRvIDMKPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbnRob255IFBFUkFSRCA8
-YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KPiAtLS0KPiAgaHcvaTM4Ni9wY19waWl4LmMgfCAy
-ICstCj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+IAo+
-IGRpZmYgLS1naXQgYS9ody9pMzg2L3BjX3BpaXguYyBiL2h3L2kzODYvcGNfcGlpeC5jCj4gaW5k
-ZXggNWU0NzUyODk5My4uOTNlM2E5YTkxNiAxMDA2NDQKPiAtLS0gYS9ody9pMzg2L3BjX3BpaXgu
-Ywo+ICsrKyBiL2h3L2kzODYvcGNfcGlpeC5jCj4gQEAgLTQwNSw3ICs0MDUsNyBAQCBzdGF0aWMg
-dm9pZCBwY194ZW5faHZtX2luaXQoTWFjaGluZVN0YXRlICptYWNoaW5lKQo+ICAKPiAgICAgIGJ1
-cyA9IHBjaV9maW5kX3ByaW1hcnlfYnVzKCk7Cj4gICAgICBpZiAoYnVzICE9IE5VTEwpIHsKPiAt
-ICAgICAgICBwY2lfY3JlYXRlX3NpbXBsZShidXMsIC0xLCAieGVuLXBsYXRmb3JtIik7Cj4gKyAg
-ICAgICAgcGNpX2NyZWF0ZV9zaW1wbGUoYnVzLCBQQ0lfREVWRk4oMywgMCksICJ4ZW4tcGxhdGZv
-cm0iKTsKPiAgICAgIH0KPiAgfQo+ICAjZW5kaWYKPiAKPiAKPiBUaGUgc2FtZSB0aGluZyBjb3Vs
-ZCBiZSBkb25lIGJ5IGxpYnhsLCBieSBwcm92aWRpbmcgc3BlY2lmaWMgY29tbWFuZAo+IGxpbmUg
-b3B0aW9ucyB0byBxZW11LiAoSSB0aGluayB0aGF0IGNvdWxkIGV2ZW4gYmUgZG9uZSB2aWEgYSBk
-aWZmZXJlbnQKPiBjb25maWcgZmlsZSBmb3IgdGhlIGd1ZXN0LikKClRoaXMgcGF0Y2ggZG9lc24n
-dCBzZWVtIHRvIHdvcmsgZm9yIG1lLiAgSXQgc2VlbXMgbGlrZSB0aGUgZGV2aWNlIG1vZGVsCnBy
-b2Nlc3MgaXMgZXhpdGluZyBpbW1lZGlhdGVseSwgYnV0IEkgaGF2ZW4ndCBiZWVuIGFibGUgdG8g
-ZmluZCBhbnkKaW5mb3JtYXRpb24gYXMgdG8gd2hhdCBpcyBnb2luZyB3cm9uZy4gIEkgdGVzdGVk
-IHdpdGggWGVuIDQuNi42IGFuZCB0aGUKUUVNVSBwYWNrYWdlZCB3aXRoIHRoYXQgcmVsZWFzZS4g
-IFNob3VsZCBJIHRyeSBpdCBvbiBhIGRpZmZlcmVudCB2ZXJzaW9uCm9mIFhlbiBhbmQgUUVNVT8K
-Ci0tIApLZXZpbiBTdGFuZ2UKQ2hpZWYgVGVjaG5vbG9neSBPZmZpY2VyClN0ZWFkZmFzdCB8IE1h
-bmFnZWQgSW5mcmFzdHJ1Y3R1cmUsIERhdGFjZW50ZXIgYW5kIENsb3VkIFNlcnZpY2VzCjgwMCBT
-IFdlbGxzLCBTdWl0ZSAxOTAgfCBDaGljYWdvLCBJTCA2MDYwNwozMTIuNjAyLjI2ODkgWDIwMyB8
-IEZheDogMzEyLjYwMi4yNjg4CmtldmluQHN0ZWFkZmFzdC5uZXQgfCB3d3cuc3RlYWRmYXN0Lm5l
-dAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============8288367731095891447==
+Content-Type: text/plain
+
+flight 117557 xen-unstable real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117557/
+
+Failures and problems with tests :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-xl-credit2     <job status>                 broken
+ test-amd64-i386-qemuu-rhel6hvm-intel    <job status>                 broken
+ test-amd64-amd64-xl-qemuu-win7-amd64    <job status>                 broken
+ test-amd64-amd64-xl-qemut-win7-amd64    <job status>                 broken
+ test-amd64-i386-xl-qemuu-win10-i386    <job status>                 broken
+ test-amd64-amd64-xl-qemuu-ws16-amd64    <job status>                 broken
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm    <job status>            broken
+
+Tests which are failing intermittently (not blocking):
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm 4 host-install(4) broken pass in 117365
+ test-amd64-i386-xl-qemuu-win10-i386  4 host-install(4)   broken pass in 117365
+ test-amd64-amd64-xl-qemut-win7-amd64  4 host-install(4)  broken pass in 117365
+ test-amd64-amd64-xl-qemuu-ws16-amd64  4 host-install(4)  broken pass in 117365
+ test-amd64-i386-qemuu-rhel6hvm-intel  4 host-install(4)  broken pass in 117365
+ test-amd64-amd64-xl-qemuu-win7-amd64  4 host-install(4)  broken pass in 117365
+ test-amd64-amd64-xl-credit2   4 host-install(4)          broken pass in 117365
+ test-amd64-amd64-xl-qemut-ws16-amd64 16 guest-localmigrate/x10 fail in 117365 pass in 117557
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop  fail in 117365 like 117311
+ test-amd64-amd64-xl-qemut-win7-amd64 17 guest-stop  fail in 117365 like 117311
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop  fail in 117365 like 117311
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install fail in 117365 never pass
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 117311
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 117311
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 117311
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 117311
+ test-amd64-i386-xl-qemut-win7-amd64 17 guest-stop             fail like 117311
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop             fail like 117311
+ test-amd64-amd64-xl-qemut-ws16-amd64 17 guest-stop            fail like 117311
+ test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-amd64-i386-xl-qemut-ws16-amd64 17 guest-stop              fail never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+ test-amd64-amd64-xl-qemut-win10-i386 10 windows-install        fail never pass
+ test-amd64-i386-xl-qemut-win10-i386 10 windows-install         fail never pass
+
+version targeted for testing:
+ xen                  1b33150fe06ab9217f7f12b01bc5e607f4f55658
+baseline version:
+ xen                  ec320542e4f4de12305551ef5e3cd4d2ced85771
+
+Last test of basis   117311  2017-12-19 02:35:18 Z   15 days
+Testing same since   117365  2017-12-20 07:31:12 Z   14 days    3 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Ian Jackson <Ian.Jackson@eu.citrix.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64-xtf                                              pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-prev                                             pass    
+ build-i386-prev                                              pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ build-amd64-rumprun                                          pass    
+ build-i386-rumprun                                           pass    
+ test-xtf-amd64-amd64-1                                       pass    
+ test-xtf-amd64-amd64-2                                       pass    
+ test-xtf-amd64-amd64-3                                       pass    
+ test-xtf-amd64-amd64-4                                       pass    
+ test-xtf-amd64-amd64-5                                       pass    
+ test-amd64-amd64-xl                                          pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 broken  
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-i386-qemut-rhel6hvm-amd                           pass    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64                     pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-rumprun-amd64                               pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         broken  
+ test-amd64-i386-xl-qemut-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         broken  
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemut-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         broken  
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit2                                  broken  
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     pass    
+ test-armhf-armhf-examine                                     pass    
+ test-amd64-i386-examine                                      pass    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-i386-rumprun-i386                                 pass    
+ test-amd64-amd64-xl-qemut-win10-i386                         fail    
+ test-amd64-i386-xl-qemut-win10-i386                          fail    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          broken  
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-i386-qemut-rhel6hvm-intel                         pass    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         broken  
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-livepatch                                   pass    
+ test-amd64-i386-livepatch                                    pass    
+ test-amd64-amd64-migrupgrade                                 pass    
+ test-amd64-i386-migrupgrade                                  pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job test-amd64-amd64-xl-credit2 broken
+broken-job test-amd64-i386-qemuu-rhel6hvm-intel broken
+broken-job test-amd64-amd64-xl-qemuu-win7-amd64 broken
+broken-job test-amd64-amd64-xl-qemut-win7-amd64 broken
+broken-job test-amd64-i386-xl-qemuu-win10-i386 broken
+broken-job test-amd64-amd64-xl-qemuu-ws16-amd64 broken
+broken-job test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm broken
+broken-step test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm host-install(4)
+broken-step test-amd64-i386-xl-qemuu-win10-i386 host-install(4)
+broken-step test-amd64-amd64-xl-qemut-win7-amd64 host-install(4)
+broken-step test-amd64-amd64-xl-qemuu-ws16-amd64 host-install(4)
+broken-step test-amd64-i386-qemuu-rhel6hvm-intel host-install(4)
+broken-step test-amd64-amd64-xl-qemuu-win7-amd64 host-install(4)
+broken-step test-amd64-amd64-xl-credit2 host-install(4)
+
+Not pushing.
+
+------------------------------------------------------------
+commit 1b33150fe06ab9217f7f12b01bc5e607f4f55658
+Author: Roger Pau Monne <roger.pau@citrix.com>
+Date:   Tue Dec 19 14:17:52 2017 +0000
+
+    libxl/pvh: force PVH guests to use the xenstore shutdown
+    
+    PVH guests are all required to support the xenstore-based shutdown
+    signalling, since there is no other way for a PVH guest to be
+    requested to shut down.
+    
+    For HVM guests we check whether the guest has installed a PV-on-HVM
+    interrupt callback; that does not make sense for PVH guests.
+    
+    So for PVH guests, take the PV path: assume that all PVH guests have
+    suitable xenstore drivers.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Signed-off-by: Ian Jackson <Ian.Jackson@eu.citrix.com>
+(qemu changes not included)
+
+
+--===============8288367731095891447==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8288367731095891447==--
