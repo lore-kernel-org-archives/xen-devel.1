@@ -1,22 +1,12 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
-Subject: Re: PCI Device Subtree Change from Traditional to
- Upstream
-Date: Thu, 4 Jan 2018 12:52:17 +0000
-Message-ID: <20180104125217.GB1905@perard.uk.xensource.com>
-References: <c8ed6851-70c1-500d-5d66-1e8a6b7133c5@steadfast.net>
- <20180103175759.GA1905@perard.uk.xensource.com>
- <3a19395e-c52f-bbfd-5986-ba56cc10c767@steadfast.net>
+From: Xen.org security team <security@xen.org>
+Subject: Xen Security Advisory 253 - x86: memory leak with MSR
+	emulation
+Date: Thu, 04 Jan 2018 13:02:49 +0000
+Message-ID: <E1eX5AX-0003nj-R9@xenbits.xenproject.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=ni0h=d7=citrix.com=prvs=535c308fd=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1eX50U-0007TY-39
- for xen-devel@lists.xenproject.org; Thu, 04 Jan 2018 12:52:26 +0000
-Content-Disposition: inline
-In-Reply-To: <3a19395e-c52f-bbfd-5986-ba56cc10c767@steadfast.net>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,99 +15,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Kevin Stange <kevin@steadfast.net>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel@lists.xenproject.org
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org, xen-users@lists.xen.org, oss-security@lists.openwall.com
+Cc: "Xen.org security team" <security-team-members@xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKYW4gMDMsIDIwMTggYXQgMDU6MTA6NTRQTSAtMDYwMCwgS2V2aW4gU3RhbmdlIHdy
-b3RlOgo+IE9uIDAxLzAzLzIwMTggMTE6NTcgQU0sIEFudGhvbnkgUEVSQVJEIHdyb3RlOgo+ID4g
-T24gV2VkLCBEZWMgMjAsIDIwMTcgYXQgMTE6NDA6MDNBTSAtMDYwMCwgS2V2aW4gU3RhbmdlIHdy
-b3RlOgo+ID4+IEhpLAo+ID4+Cj4gPj4gSSd2ZSBiZWVuIHdvcmtpbmcgb24gdHJhbnNpdGlvbmlu
-ZyBhIG51bWJlciBvZiBXaW5kb3dzIGd1ZXN0cyB1bmRlciBIVk0KPiA+PiBmcm9tIHVzaW5nIFFF
-TVUgdHJhZGl0aW9uYWwgdG8gUUVNVSB1cHN0cmVhbSBhcyBpcyByZWNvbW1lbmRlZCBpbiB0aGUK
-PiA+PiBkb2N1bWVudGF0aW9uLiAgV2hlbiBJIG1vdmUgdGhlc2UgZ3Vlc3RzLCB0aGUgUENJIHN1
-YnRyZWUgZm9yIFhlbgo+ID4+IGRldmljZXMgY2hhbmdlcyBhbmQgV2luZG93cyBjcmVhdGVzIGEg
-dG90YWxseSBuZXcgY29weSBvZiBlYWNoIGRldmljZS4KPiA+PiBXaW5kb3dzIHRyYWNrcyBkb3du
-IHRoZSBzdG9yYWdlIHdpdGhvdXQgaXNzdWUsIGJ1dCBpdCB0cmVhdHMgdGhlIG5ldwo+ID4+IGlu
-c3RhbmNlIG9mIHRoZSBOSUMgZHJpdmVyIGFzIGEgbmV3IGRldmljZSBhbmQgY2xlYXJzIHRoZSBu
-ZXR3b3JrCj4gPj4gY29uZmlndXJhdGlvbiBldmVuIHRob3VnaCB0aGUgTUFDIGFkZHJlc3MgaXMg
-dW5jaGFuZ2VkLiAgTWFudWFsbHkKPiA+PiBib290aW5nIHRoZSBndWVzdCBiYWNrIG9uIHRoZSB0
-cmFkaXRpb25hbCBkZXZpY2UgbW9kZWwgcmVhY3RpdmF0ZXMgdGhlCj4gPj4gb3JpZ2luYWwgUENJ
-IHN1YnRyZWUgYW5kIHRoZSBvbGQgbmV0d29yayBjb25maWd1cmF0aW9uIHdpdGggaXQuCj4gPj4K
-PiA+PiBUaGUgb25seSB0aGluZyB0aGF0IEkgaGF2ZSBiZWVuIGFibGUgdG8gZmluZCB0aGF0J3Mg
-c3Vic3RhbnRpYWxseQo+ID4+IGRpZmZlcmVudCBjb21wYXJpbmcgdGhlIGRldmljZSB0cmVlcyBp
-cyB0aGF0IHRoZSBkZXZpY2UgaW5zdGFuY2UgSUQKPiA+PiB2YWx1ZXMgZGlmZmVyIG9uIHRoZSBw
-YXJlbnQgWGVuIFBDSSBkZXZpY2U6Cj4gPj4KPiA+PiBQQ0lcVkVOXzU4NTMmREVWXzAwMDEmU1VC
-U1lTXzAwMDE1ODUzJlJFVl8wMVwzJjI2N0E2MTZBJjMmMTgKPiA+Pgo+ID4+IFBDSVxWRU5fNTg1
-MyZERVZfMDAwMSZTVUJTWVNfMDAwMTU4NTMmUkVWXzAxXDMmMjY3QTYxNkEmMyYxMAo+ID4+Cj4g
-Pj4gQmVzaWRlcyBhY3R1YWxseSBzZXR0aW5nIHRoZSBndWVzdCB0byBib290IHVzaW5nIFFFTVUg
-dHJhZGl0aW9uYWwsIGlzCj4gPj4gdGhlcmUgYSB3YXkgdG8gY29udmluY2UgV2luZG93cyB0byB0
-cmVhdCB0aGVzZSBkZXZpY2VzIGFzIHRoZSBzYW1lPyAgQQo+ID4+IHBhdGNoLWJhc2VkIHNvbHV0
-aW9uIHdvdWxkIGJlIGFjY2VwdGFibGUgdG8gbWUgaWYgdGhlcmUgaXMgb25lLCBidXQgSQo+ID4+
-IGRvbid0IHVuZGVyc3RhbmQgdGhlIGNvZGUgd2VsbCBlbm91Z2ggdG8gY3JlYXRlIG15IG93biBz
-b2x1dGlvbi4KPiA+IAo+ID4gSGkgS2V2aW4sCj4gPiAKPiA+IEkndmUgZ290IGEgcGF0Y2ggdG8g
-UUVNVSB0aGF0IHNlZW1zIHRvIGRvIHRoZSB0cmljazoKPiA+IAo+ID4gRnJvbTogQW50aG9ueSBQ
-RVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+Cj4gPiBTdWJqZWN0OiBbUEFUQ0hdIHhl
-bi1wbGF0Zm9ybTogSGFyZGNvZGUgUENJIHNsb3QgdG8gMwo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5
-OiBBbnRob255IFBFUkFSRCA8YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KPiA+IC0tLQo+ID4g
-IGh3L2kzODYvcGNfcGlpeC5jIHwgMiArLQo+ID4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlv
-bigrKSwgMSBkZWxldGlvbigtKQo+ID4gCj4gPiBkaWZmIC0tZ2l0IGEvaHcvaTM4Ni9wY19waWl4
-LmMgYi9ody9pMzg2L3BjX3BpaXguYwo+ID4gaW5kZXggNWU0NzUyODk5My4uOTNlM2E5YTkxNiAx
-MDA2NDQKPiA+IC0tLSBhL2h3L2kzODYvcGNfcGlpeC5jCj4gPiArKysgYi9ody9pMzg2L3BjX3Bp
-aXguYwo+ID4gQEAgLTQwNSw3ICs0MDUsNyBAQCBzdGF0aWMgdm9pZCBwY194ZW5faHZtX2luaXQo
-TWFjaGluZVN0YXRlICptYWNoaW5lKQo+ID4gIAo+ID4gICAgICBidXMgPSBwY2lfZmluZF9wcmlt
-YXJ5X2J1cygpOwo+ID4gICAgICBpZiAoYnVzICE9IE5VTEwpIHsKPiA+IC0gICAgICAgIHBjaV9j
-cmVhdGVfc2ltcGxlKGJ1cywgLTEsICJ4ZW4tcGxhdGZvcm0iKTsKPiA+ICsgICAgICAgIHBjaV9j
-cmVhdGVfc2ltcGxlKGJ1cywgUENJX0RFVkZOKDMsIDApLCAieGVuLXBsYXRmb3JtIik7Cj4gPiAg
-ICAgIH0KPiA+ICB9Cj4gPiAgI2VuZGlmCj4gPiAKPiA+IAo+ID4gVGhlIHNhbWUgdGhpbmcgY291
-bGQgYmUgZG9uZSBieSBsaWJ4bCwgYnkgcHJvdmlkaW5nIHNwZWNpZmljIGNvbW1hbmQKPiA+IGxp
-bmUgb3B0aW9ucyB0byBxZW11LiAoSSB0aGluayB0aGF0IGNvdWxkIGV2ZW4gYmUgZG9uZSB2aWEg
-YSBkaWZmZXJlbnQKPiA+IGNvbmZpZyBmaWxlIGZvciB0aGUgZ3Vlc3QuKQo+IAo+IFRoaXMgcGF0
-Y2ggZG9lc24ndCBzZWVtIHRvIHdvcmsgZm9yIG1lLiAgSXQgc2VlbXMgbGlrZSB0aGUgZGV2aWNl
-IG1vZGVsCj4gcHJvY2VzcyBpcyBleGl0aW5nIGltbWVkaWF0ZWx5LCBidXQgSSBoYXZlbid0IGJl
-ZW4gYWJsZSB0byBmaW5kIGFueQo+IGluZm9ybWF0aW9uIGFzIHRvIHdoYXQgaXMgZ29pbmcgd3Jv
-bmcuICBJIHRlc3RlZCB3aXRoIFhlbiA0LjYuNiBhbmQgdGhlCj4gUUVNVSBwYWNrYWdlZCB3aXRo
-IHRoYXQgcmVsZWFzZS4gIFNob3VsZCBJIHRyeSBpdCBvbiBhIGRpZmZlcmVudCB2ZXJzaW9uCj4g
-b2YgWGVuIGFuZCBRRU1VPwoKV2hhdCB0aGlzIHBhdGNoIGRvZXMgaXMgYXNraW5nIFFFTVUgdG8g
-aW5zZXJ0IHRoZSBQQ0kgY2FyZAoieGVuLXBsYXRmb3JtIiBpbnRvIHRoZSAzcmQgUENJIHNsb3Qu
-IE15IGd1ZXNzIGlzIHRoYXQgZmFpbGVkIGJlY2F1c2UKdGhlcmUgaXMgYWxyZWFkeSBhIFBDSSBk
-ZXZpY2UgdGhlcmUuCgpZb3UgY291bGQgY2hlY2sgcWVtdSdzIGxvZ3MsIGl0J3MgaW4KL3Zhci9s
-b2cveGVuL3FlbXUtZG0tJHtndWVzdF9uYW1lfS5sb2cKCgpMZXQncyB0cnkgc29tZXRoaW5nIGVs
-c2UsIGluc3RlYWQgb2YgcGF0Y2hpbmcgUUVNVSwgd2UgY2FuIHBhdGNoIGxpYnhsLAp0aGF0IG1p
-Z2h0IHdvcmsgYmV0dGVyLiBDYW4geW91IHRyeSB0aGlzIHBhdGNoPyAoSSd2ZSBvbmx5IHRlc3QK
-Y29tcGlsZWQuKSBJJ3ZlIHdyaXRlIHRoZSBwYXRjaCBmb3IgWGVuIDQuNiwgc2luY2UgdGhhdCB0
-aGUgdmVyc2lvbiB5b3UKYXJlIHVzaW5nLgoKCkZyb206IEFudGhvbnkgUEVSQVJEIDxhbnRob255
-LnBlcmFyZEBjaXRyaXguY29tPgpTdWJqZWN0OiBbUEFUQ0hdIGxpYnhsX2RtOiBFeHBsaWNpdGx5
-IHB1dCB4ZW4tcGxhdGZvcm0gZGV2aWNlIG9uIFBDSSBzbG90IDMKCkluIG9yZGVyIHRvIGRvIHRo
-YXQsIHdlIGRvbid0IHVzZSB4ZW5mdiBtYWNoaW5lIGFueW1vcmUgYW5kIGV4cGxpY2l0eQphZGQg
-dGhlIHBsYXRmb3JtIGRldmljZSBvbiB0aGUgY29tbWFuZCBsaW5lLgoKU2lnbmVkLW9mZi1ieTog
-QW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+Ci0tLQogdG9vbHMvbGli
-eGwvbGlieGxfZG0uYyB8IDExICsrKysrKy0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgNiBpbnNlcnRp
-b25zKCspLCA1IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3Rvb2xzL2xpYnhsL2xpYnhsX2Rt
-LmMgYi90b29scy9saWJ4bC9saWJ4bF9kbS5jCmluZGV4IDBkYjVmMTM1NTMuLjU5YzAxMDJhM2Ug
-MTAwNjQ0Ci0tLSBhL3Rvb2xzL2xpYnhsL2xpYnhsX2RtLmMKKysrIGIvdG9vbHMvbGlieGwvbGli
-eGxfZG0uYwpAQCAtODk5LDYgKzg5OSwxMSBAQCBzdGF0aWMgaW50IGxpYnhsX19idWlsZF9kZXZp
-Y2VfbW9kZWxfYXJnc19uZXcobGlieGxfX2djICpnYywKICAgICAgICAgICAgIH0KICAgICAgICAg
-fQogCisgICAgICAgIGlmIChsaWJ4bF9kZWZib29sX3ZhbChiX2luZm8tPnUuaHZtLnhlbl9wbGF0
-Zm9ybV9wY2kpKSB7CisgICAgICAgICAgICBmbGV4YXJyYXlfdmFwcGVuZChkbV9hcmdzLCAiLWRl
-dmljZSIsCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAieGVuLXBsYXRmb3JtLGFkZHI9
-MyIsIE5VTEwpOworICAgICAgICB9CisKICAgICAgICAgaWYgKGxpYnhsX2RlZmJvb2xfdmFsKGJf
-aW5mby0+dS5odm0ubm9ncmFwaGljKSAmJiAoIXNkbCAmJiAhdm5jKSkgewogICAgICAgICAgICAg
-ZmxleGFycmF5X2FwcGVuZChkbV9hcmdzLCAiLW5vZ3JhcGhpYyIpOwogICAgICAgICB9CkBAIC0x
-MDc1LDE0ICsxMDgwLDEwIEBAIHN0YXRpYyBpbnQgbGlieGxfX2J1aWxkX2RldmljZV9tb2RlbF9h
-cmdzX25ldyhsaWJ4bF9fZ2MgKmdjLAogICAgICAgICAgICAgZmxleGFycmF5X2FwcGVuZChkbV9h
-cmdzLCBiX2luZm8tPmV4dHJhX3B2W2ldKTsKICAgICAgICAgYnJlYWs7CiAgICAgY2FzZSBMSUJY
-TF9ET01BSU5fVFlQRV9IVk06Ci0gICAgICAgIGlmICghbGlieGxfZGVmYm9vbF92YWwoYl9pbmZv
-LT51Lmh2bS54ZW5fcGxhdGZvcm1fcGNpKSkgewogICAgICAgICAgICAgLyogU3dpdGNoaW5nIGhl
-cmUgdG8gdGhlIG1hY2hpbmUgInBjIiB3aGljaCBkb2VzIG5vdCBhZGQKICAgICAgICAgICAgICAq
-IHRoZSB4ZW4tcGxhdGZvcm0gZGV2aWNlIGluc3RlYWQgb2YgdGhlIGRlZmF1bHQgInhlbmZ2IiBt
-YWNoaW5lLgogICAgICAgICAgICAgICovCi0gICAgICAgICAgICBtYWNoaW5lYXJnID0gbGlieGxf
-X3NwcmludGYoZ2MsICJwYyxhY2NlbD14ZW4iKTsKLSAgICAgICAgfSBlbHNlIHsKLSAgICAgICAg
-ICAgIG1hY2hpbmVhcmcgPSBsaWJ4bF9fc3ByaW50ZihnYywgInhlbmZ2Iik7Ci0gICAgICAgIH0K
-KyAgICAgICAgbWFjaGluZWFyZyA9IGxpYnhsX19zcHJpbnRmKGdjLCAicGMsYWNjZWw9eGVuIik7
-CiAgICAgICAgIGlmIChiX2luZm8tPnUuaHZtLm1taW9faG9sZV9tZW1rYikgewogICAgICAgICAg
-ICAgdWludDY0X3QgbWF4X3JhbV9iZWxvd180ZyA9ICgxVUxMIDw8IDMyKSAtCiAgICAgICAgICAg
-ICAgICAgKGJfaW5mby0+dS5odm0ubW1pb19ob2xlX21lbWtiIDw8IDEwKTsKCi0tIApBbnRob255
-IFBFUkFSRAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+                    Xen Security Advisory XSA-253
+                              version 2
+
+                  x86: memory leak with MSR emulation
+
+UPDATES IN VERSION 2
+====================
+
+Public release.
+
+ISSUE DESCRIPTION
+=================
+
+In Xen 4.10, new infrastructure was introduced as part of an overhaul to
+how MSR emulation happens for guests.  Unfortunately, one tracking
+structure isn't freed when a vcpu is destroyed.
+
+IMPACT
+======
+
+A memory allocation of 8 bytes is leaked each time a vcpu is destroyed.
+
+A malicious guest may, by frequently rebooting over extended periods of
+time, run the system out of memory, resulting in a Denial of Service
+(DoS).
+
+VULNERABLE SYSTEMS
+==================
+
+Xen versions 4.10 and later are affected.  Xen 4.9 and earlier are not
+affected.
+
+Only x86 systems are affected.  ARM systems are not.
+
+All guest kinds can exploit this vulnerability.
+
+MITIGATION
+==========
+
+Limiting the frequency with which a guest is able to reboot, will
+limit the memory leak.
+
+Rebooting each host (after migrating its guests) periodically will
+reclaim the leaked space.
+
+CREDITS
+=======
+
+This issue was discovered by Andrew Cooper of Citrix.
+
+RESOLUTION
+==========
+
+Applying the appropriate attached patch resolves this issue.
+
+xsa253.patch           Xen 4.10, xen-unstable
+
+$ sha256sum xsa253*
+bba1abb5e4368421de29385e37f8477bf3534d3ba3ff7e2aae9c9d3da53f1393  xsa253.patch
+$
+
+DEPLOYMENT DURING EMBARGO
+=========================
+
+Deployment of the patches and/or mitigations described above (or
+others which are substantially similar) is permitted during the
+embargo, even on public-facing systems with untrusted guest users and
+administrators.
+
+But: Distribution of updated software is prohibited (except to other
+members of the predisclosure list).
+
+Predisclosure list members who wish to deploy significantly different
+patches and/or mitigations, please contact the Xen Project Security
+Team.
+
+(Note: this during-embargo deployment notice is retained in
+post-embargo publicly released Xen Project advisories, even though it
+is then no longer applicable.  This is to enable the community to have
+oversight of the Xen Project Security Team's decisionmaking.)
+
+For more information about permissible uses of embargoed information,
+consult the Xen Project community's agreed Security Policy:
+  http://www.xenproject.org/security-policy.html
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBCAAGBQJaTiXyAAoJEIP+FMlX6CvZ/CIH/3LEbyAmWUSs4C2Rt0EENDLO
+JnnAGXWIy3DsffGiG9zOhfYiItn2iD+J+EcO+WC5lGPBSkX1KiXdsWVla/dJuy0F
+frx5pdqJNSHFihK/6fGU0WnSBFz6o2gkn2hOnzWfpxNLiJMrHCI6GEOcdMx6xtOQ
+9QZAa7rCN1aRx0Lx1LjuvaqPwy4rJ294zLnwarMoN10KZ3oRVbQ8mf4kN+/X+hlK
+9MxUj99WYZWcJhcRLGiQALPdRQeabh72/ZTFsfIAwPxaEgT6YhwFrFDG526iNcM0
+MkruO8HeD+byrQrni/qgB5EAIyPsFuBfvzddHzPA+9sSrf4QDjQWPFihQ3ti+xg=
+=sQVC
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: application/octet-stream; name="xsa253.patch"
+Content-Disposition: attachment; filename="xsa253.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNv
+bT4KU3ViamVjdDogeDg2L21zcjogRnJlZSBtc3JfdmNwdV9wb2xpY3kgZHVy
+aW5nIHZjcHUgZGVzdHJ1Y3Rpb24KCmMvcyA0MTg3Zjc5ZGM3ICJ4ODYvbXNy
+OiBpbnRyb2R1Y2Ugc3RydWN0IG1zcl92Y3B1X3BvbGljeSIgaW50cm9kdWNl
+ZCBhCnBlci12Y3B1IG1lbW9yeSBhbGxvY2F0aW9uLCBidXQgZmFpbGVkIHRv
+IGZyZWUgaXQgaW4gdGhlIGNsZWFuIHZjcHUKZGVzdHJ1Y3Rpb24gY2FzZS4K
+ClRoaXMgaXMgWFNBLTI1MwoKU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3Bl
+ciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KUmV2aWV3ZWQtYnk6IEph
+biBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCmRpZmYgLS1naXQgYS94
+ZW4vYXJjaC94ODYvZG9tYWluLmMgYi94ZW4vYXJjaC94ODYvZG9tYWluLmMK
+aW5kZXggYjE3NDY4Yy4uMGFlNzE1ZCAxMDA2NDQKLS0tIGEveGVuL2FyY2gv
+eDg2L2RvbWFpbi5jCisrKyBiL3hlbi9hcmNoL3g4Ni9kb21haW4uYwpAQCAt
+MzgyLDYgKzM4Miw5IEBAIHZvaWQgdmNwdV9kZXN0cm95KHN0cnVjdCB2Y3B1
+ICp2KQogCiAgICAgdmNwdV9kZXN0cm95X2ZwdSh2KTsKIAorICAgIHhmcmVl
+KHYtPmFyY2gubXNyKTsKKyAgICB2LT5hcmNoLm1zciA9IE5VTEw7CisKICAg
+ICBpZiAoICFpc19pZGxlX2RvbWFpbih2LT5kb21haW4pICkKICAgICAgICAg
+dnBtdV9kZXN0cm95KHYpOwogCg==
+
+--=separator
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--=separator--
