@@ -1,25 +1,11 @@
-From: Kevin Stange <kevin@steadfast.net>
-Subject: Re: PCI Device Subtree Change from Traditional to
- Upstream
-Date: Fri, 5 Jan 2018 14:56:16 -0600
-Message-ID: <4eb0ad8b-059e-7cb0-3523-aa499570afcd@steadfast.net>
-References: <c8ed6851-70c1-500d-5d66-1e8a6b7133c5@steadfast.net>
- <20180103175759.GA1905@perard.uk.xensource.com>
- <3a19395e-c52f-bbfd-5986-ba56cc10c767@steadfast.net>
- <20180104125217.GB1905@perard.uk.xensource.com>
- <e469d26e-5530-e759-c3a8-c9d4ff9d2479@steadfast.net>
- <7cd695d9-860f-2322-ffdb-66fd4c2223bc@steadfast.net>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [libvirt test] 117631: regressions - trouble:
+	broken/fail/pass
+Date: Fri, 05 Jan 2018 20:56:15 +0000
+Message-ID: <osstest-117631-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5785949260779979549=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=yazp=ea=steadfast.net=kevin@srs-us1.protection.inumbo.net>)
- id 1eXZ2L-0000jC-DH
- for xen-devel@lists.xenproject.org; Fri, 05 Jan 2018 20:56:21 +0000
-In-Reply-To: <7cd695d9-860f-2322-ffdb-66fd4c2223bc@steadfast.net>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,104 +14,311 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMDUvMjAxOCAxMToxMCBBTSwgS2V2aW4gU3RhbmdlIHdyb3RlOgo+IE9uIDAxLzA0LzIw
-MTggMDM6MTYgUE0sIEtldmluIFN0YW5nZSB3cm90ZToKPj4gT24gMDEvMDQvMjAxOCAwNjo1MiBB
-TSwgQW50aG9ueSBQRVJBUkQgd3JvdGU6Cj4+PiBPbiBXZWQsIEphbiAwMywgMjAxOCBhdCAwNTox
-MDo1NFBNIC0wNjAwLCBLZXZpbiBTdGFuZ2Ugd3JvdGU6Cj4+Pj4gT24gMDEvMDMvMjAxOCAxMTo1
-NyBBTSwgQW50aG9ueSBQRVJBUkQgd3JvdGU6Cj4+Pj4+IE9uIFdlZCwgRGVjIDIwLCAyMDE3IGF0
-IDExOjQwOjAzQU0gLTA2MDAsIEtldmluIFN0YW5nZSB3cm90ZToKPj4+Pj4+IEhpLAo+Pj4+Pj4K
-Pj4+Pj4+IEkndmUgYmVlbiB3b3JraW5nIG9uIHRyYW5zaXRpb25pbmcgYSBudW1iZXIgb2YgV2lu
-ZG93cyBndWVzdHMgdW5kZXIgSFZNCj4+Pj4+PiBmcm9tIHVzaW5nIFFFTVUgdHJhZGl0aW9uYWwg
-dG8gUUVNVSB1cHN0cmVhbSBhcyBpcyByZWNvbW1lbmRlZCBpbiB0aGUKPj4+Pj4+IGRvY3VtZW50
-YXRpb24uICBXaGVuIEkgbW92ZSB0aGVzZSBndWVzdHMsIHRoZSBQQ0kgc3VidHJlZSBmb3IgWGVu
-Cj4+Pj4+PiBkZXZpY2VzIGNoYW5nZXMgYW5kIFdpbmRvd3MgY3JlYXRlcyBhIHRvdGFsbHkgbmV3
-IGNvcHkgb2YgZWFjaCBkZXZpY2UuCj4+Pj4+PiBXaW5kb3dzIHRyYWNrcyBkb3duIHRoZSBzdG9y
-YWdlIHdpdGhvdXQgaXNzdWUsIGJ1dCBpdCB0cmVhdHMgdGhlIG5ldwo+Pj4+Pj4gaW5zdGFuY2Ug
-b2YgdGhlIE5JQyBkcml2ZXIgYXMgYSBuZXcgZGV2aWNlIGFuZCBjbGVhcnMgdGhlIG5ldHdvcmsK
-Pj4+Pj4+IGNvbmZpZ3VyYXRpb24gZXZlbiB0aG91Z2ggdGhlIE1BQyBhZGRyZXNzIGlzIHVuY2hh
-bmdlZC4gIE1hbnVhbGx5Cj4+Pj4+PiBib290aW5nIHRoZSBndWVzdCBiYWNrIG9uIHRoZSB0cmFk
-aXRpb25hbCBkZXZpY2UgbW9kZWwgcmVhY3RpdmF0ZXMgdGhlCj4+Pj4+PiBvcmlnaW5hbCBQQ0kg
-c3VidHJlZSBhbmQgdGhlIG9sZCBuZXR3b3JrIGNvbmZpZ3VyYXRpb24gd2l0aCBpdC4KPj4+Pj4+
-Cj4+Pj4+PiBUaGUgb25seSB0aGluZyB0aGF0IEkgaGF2ZSBiZWVuIGFibGUgdG8gZmluZCB0aGF0
-J3Mgc3Vic3RhbnRpYWxseQo+Pj4+Pj4gZGlmZmVyZW50IGNvbXBhcmluZyB0aGUgZGV2aWNlIHRy
-ZWVzIGlzIHRoYXQgdGhlIGRldmljZSBpbnN0YW5jZSBJRAo+Pj4+Pj4gdmFsdWVzIGRpZmZlciBv
-biB0aGUgcGFyZW50IFhlbiBQQ0kgZGV2aWNlOgo+Pj4+Pj4KPj4+Pj4+IFBDSVxWRU5fNTg1MyZE
-RVZfMDAwMSZTVUJTWVNfMDAwMTU4NTMmUkVWXzAxXDMmMjY3QTYxNkEmMyYxOAo+Pj4+Pj4KPj4+
-Pj4+IFBDSVxWRU5fNTg1MyZERVZfMDAwMSZTVUJTWVNfMDAwMTU4NTMmUkVWXzAxXDMmMjY3QTYx
-NkEmMyYxMAo+Pj4+Pj4KPj4+Pj4+IEJlc2lkZXMgYWN0dWFsbHkgc2V0dGluZyB0aGUgZ3Vlc3Qg
-dG8gYm9vdCB1c2luZyBRRU1VIHRyYWRpdGlvbmFsLCBpcwo+Pj4+Pj4gdGhlcmUgYSB3YXkgdG8g
-Y29udmluY2UgV2luZG93cyB0byB0cmVhdCB0aGVzZSBkZXZpY2VzIGFzIHRoZSBzYW1lPyAgQQo+
-Pj4+Pj4gcGF0Y2gtYmFzZWQgc29sdXRpb24gd291bGQgYmUgYWNjZXB0YWJsZSB0byBtZSBpZiB0
-aGVyZSBpcyBvbmUsIGJ1dCBJCj4+Pj4+PiBkb24ndCB1bmRlcnN0YW5kIHRoZSBjb2RlIHdlbGwg
-ZW5vdWdoIHRvIGNyZWF0ZSBteSBvd24gc29sdXRpb24uCj4+Pj4+Cj4+Pj4+IEhpIEtldmluLAo+
-Pj4+Pgo+Pj4+PiBJJ3ZlIGdvdCBhIHBhdGNoIHRvIFFFTVUgdGhhdCBzZWVtcyB0byBkbyB0aGUg
-dHJpY2s6Cj4+Pj4+Cj4+Pj4+IEZyb206IEFudGhvbnkgUEVSQVJEIDxhbnRob255LnBlcmFyZEBj
-aXRyaXguY29tPgo+Pj4+PiBTdWJqZWN0OiBbUEFUQ0hdIHhlbi1wbGF0Zm9ybTogSGFyZGNvZGUg
-UENJIHNsb3QgdG8gMwo+Pj4+Pgo+Pj4+PiBTaWduZWQtb2ZmLWJ5OiBBbnRob255IFBFUkFSRCA8
-YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KPj4+Pj4gLS0tCj4+Pj4+ICBody9pMzg2L3BjX3Bp
-aXguYyB8IDIgKy0KPj4+Pj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxl
-dGlvbigtKQo+Pj4+Pgo+Pj4+PiBkaWZmIC0tZ2l0IGEvaHcvaTM4Ni9wY19waWl4LmMgYi9ody9p
-Mzg2L3BjX3BpaXguYwo+Pj4+PiBpbmRleCA1ZTQ3NTI4OTkzLi45M2UzYTlhOTE2IDEwMDY0NAo+
-Pj4+PiAtLS0gYS9ody9pMzg2L3BjX3BpaXguYwo+Pj4+PiArKysgYi9ody9pMzg2L3BjX3BpaXgu
-Ywo+Pj4+PiBAQCAtNDA1LDcgKzQwNSw3IEBAIHN0YXRpYyB2b2lkIHBjX3hlbl9odm1faW5pdChN
-YWNoaW5lU3RhdGUgKm1hY2hpbmUpCj4+Pj4+ICAKPj4+Pj4gICAgICBidXMgPSBwY2lfZmluZF9w
-cmltYXJ5X2J1cygpOwo+Pj4+PiAgICAgIGlmIChidXMgIT0gTlVMTCkgewo+Pj4+PiAtICAgICAg
-ICBwY2lfY3JlYXRlX3NpbXBsZShidXMsIC0xLCAieGVuLXBsYXRmb3JtIik7Cj4+Pj4+ICsgICAg
-ICAgIHBjaV9jcmVhdGVfc2ltcGxlKGJ1cywgUENJX0RFVkZOKDMsIDApLCAieGVuLXBsYXRmb3Jt
-Iik7Cj4+Pj4+ICAgICAgfQo+Pj4+PiAgfQo+Pj4+PiAgI2VuZGlmCj4+Pj4+Cj4+Pj4+Cj4+Pj4+
-IFRoZSBzYW1lIHRoaW5nIGNvdWxkIGJlIGRvbmUgYnkgbGlieGwsIGJ5IHByb3ZpZGluZyBzcGVj
-aWZpYyBjb21tYW5kCj4+Pj4+IGxpbmUgb3B0aW9ucyB0byBxZW11LiAoSSB0aGluayB0aGF0IGNv
-dWxkIGV2ZW4gYmUgZG9uZSB2aWEgYSBkaWZmZXJlbnQKPj4+Pj4gY29uZmlnIGZpbGUgZm9yIHRo
-ZSBndWVzdC4pCj4+Pj4KPj4+PiBUaGlzIHBhdGNoIGRvZXNuJ3Qgc2VlbSB0byB3b3JrIGZvciBt
-ZS4gIEl0IHNlZW1zIGxpa2UgdGhlIGRldmljZSBtb2RlbAo+Pj4+IHByb2Nlc3MgaXMgZXhpdGlu
-ZyBpbW1lZGlhdGVseSwgYnV0IEkgaGF2ZW4ndCBiZWVuIGFibGUgdG8gZmluZCBhbnkKPj4+PiBp
-bmZvcm1hdGlvbiBhcyB0byB3aGF0IGlzIGdvaW5nIHdyb25nLiAgSSB0ZXN0ZWQgd2l0aCBYZW4g
-NC42LjYgYW5kIHRoZQo+Pj4+IFFFTVUgcGFja2FnZWQgd2l0aCB0aGF0IHJlbGVhc2UuICBTaG91
-bGQgSSB0cnkgaXQgb24gYSBkaWZmZXJlbnQgdmVyc2lvbgo+Pj4+IG9mIFhlbiBhbmQgUUVNVT8K
-Pj4+Cj4+PiBXaGF0IHRoaXMgcGF0Y2ggZG9lcyBpcyBhc2tpbmcgUUVNVSB0byBpbnNlcnQgdGhl
-IFBDSSBjYXJkCj4+PiAieGVuLXBsYXRmb3JtIiBpbnRvIHRoZSAzcmQgUENJIHNsb3QuIE15IGd1
-ZXNzIGlzIHRoYXQgZmFpbGVkIGJlY2F1c2UKPj4+IHRoZXJlIGlzIGFscmVhZHkgYSBQQ0kgZGV2
-aWNlIHRoZXJlLgo+Pj4KPj4+IFlvdSBjb3VsZCBjaGVjayBxZW11J3MgbG9ncywgaXQncyBpbgo+
-Pj4gL3Zhci9sb2cveGVuL3FlbXUtZG0tJHtndWVzdF9uYW1lfS5sb2cKPj4KPj4gVGhlIGxvZyBm
-aWxlIGluIHF1ZXN0aW9uIG9ubHkgc2F5czoKPj4KPj4gcWVtdTogdGVybWluYXRpbmcgb24gc2ln
-bmFsIDEgZnJvbSBwaWQgODg2NQo+Pgo+Pj4gTGV0J3MgdHJ5IHNvbWV0aGluZyBlbHNlLCBpbnN0
-ZWFkIG9mIHBhdGNoaW5nIFFFTVUsIHdlIGNhbiBwYXRjaCBsaWJ4bCwKPj4+IHRoYXQgbWlnaHQg
-d29yayBiZXR0ZXIuIENhbiB5b3UgdHJ5IHRoaXMgcGF0Y2g/IChJJ3ZlIG9ubHkgdGVzdAo+Pj4g
-Y29tcGlsZWQuKSBJJ3ZlIHdyaXRlIHRoZSBwYXRjaCBmb3IgWGVuIDQuNiwgc2luY2UgdGhhdCB0
-aGUgdmVyc2lvbiB5b3UKPj4+IGFyZSB1c2luZy4KPj4KPj4gVGhpcyBpc24ndCBkb2luZyB0aGUg
-dHJpY2sgZWl0aGVyLCB3aXRoIHRoZSBzYW1lIG1pc2JlaGF2aW9yLiBUaGUgbG9nCj4+IGZpbGUg
-aXMgdGhlIHNhbWUgaW4gYm90aCBjYXNlcy4KPiAKPiBJJ20gZ2V0dGluZyBjb25mdXNpbmcgYmVo
-YXZpb3IgaGVyZS4gSSB0cmllZCB0byBib290IGEgZ3Vlc3QgdXNpbmcgYQo+IGJ1aWxkIHdpdGgg
-dGhlIHNlY29uZCBwYXRjaCBhbmQgYmVoYXZlcyB0aGUgd2F5IHRoZSBmaXJzdCBvbmUgZGlkLCB3
-aXRoCj4gdGhlIHFlbXUtc3lzdGVtLWkzODYgcHJvY2VzcyBleGl0aW5nIGFuZCBwcmV2ZW50aW5n
-IHRoZSBndWVzdCBmcm9tIGV2ZXIKPiBib290aW5nLiAgSG93ZXZlciwgSSB0cmllZCB0byBkb3du
-Z3JhZGUgdGhlIHBhY2thZ2VzIHRvIGNvbXBsZXRlbHkKPiB1bnBhdGNoZWQgdmVyc2lvbiBpbiBw
-cmVwYXJhdGlvbiB0byByZWJvb3QgYWdhaW4gYW5kIG9uY2UgdGhlIG9sZGVyIGNvcHkKPiBvZiB0
-aGUgcnVudGltZSBpcyBpbnN0YWxsZWQsIHRoZSBxZW11LXN5c3RlbS1pMzg2IHN0YXJ0cyBwcm9w
-ZXJseSB1c2luZwo+IHRoZSBjb21tYW5kIGxpbmUgYXJndW1lbnRzIHRoYXQgbGlieGwgaGFkIHNw
-ZWNpZmllZCBhbmQgdGhlIHN5c3RlbSBjb21lcwo+IHVwIHdpdGggdGhlIGNvcnJlY3QgUENJIHN1
-YnRyZWUuCj4gCj4gVGhpcyBsZWFkcyBtZSB0byBiZWxpZXZlIHNvbWV0aGluZyBhYm91dCBteSBi
-dWlsZCBpcyBzY3Jld2VkIHVwIHNvbWVob3cKPiBzdWNoIHRoYXQgbXkgcWVtdS1zeXN0ZW0taTM4
-NiBpcyBicm9rZW4uICBJJ20gcXVpdGUgc3VyZSBJJ20gbm90Cj4gYXBwbHlpbmcgYW55IGV4dHJh
-IHBhdGNoZXMgdG8gaXQgdGhhdCB3ZXJlbid0IG90aGVyd2lzZSBpbiB0aGUgQ2VudE9TCj4gdmly
-dCBwYWNrYWdlcy4KCkdlb3JnZSBwb2ludGVkIG1lIGF0IHRoZSBmYWN0IEkgaGFkIGZhaWxlZCB0
-byBwdWxsIGluIHRoZSBzZWFiaW9zCnBhY2thZ2UgZnJvbSBDZW50T1MgdmlydC4gIFRoZSB2ZXJz
-aW9uIGZyb20gUkhFTCBpcyBicm9rZW4gYW5kIHRoYXQgd2FzCm15IGlzc3VlLiAgU29ycnkgZm9y
-IGdlbmVyYXRpbmcgZXh0cmEgbm9pc2UgYXMgYSByZXN1bHQuCgpJIGNhbiBjb25maXJtIHRoYXQg
-cGF0Y2ggMiAoYW5kIHByb2JhYmx5IHBhdGNoIDEsIHJlYWxseSkgd29yayBhcm91bmQKdGhlIGlz
-c3VlIGZvciBtZS4gIFRoYW5rIHlvdSBmb3IgdGhlIGhlbHAhCgpJdCB3b3VsZCBiZSBuaWNlIGlm
-IHRoZXJlIHdhcyBhIHdheSB0byBzZXQgZGVmYXVsdCBvciBvdmVycmlkZSBvcHRpb25zCnRvIGRv
-bWFpbnMgZnJvbSBhIGNvbmZpZ3VyYXRpb24gZmlsZSB0aGF0IGlzIHJlYWQgYnkgbGlieGwsIHFl
-bXUsIG9yCmxpYnZpcnQgYnV0IEkgc2VlIG5vIGNvZGUgb3IgZG9jdW1lbnRhdGlvbiB0byBzdXBw
-b3J0IHRoYXQgcmlnaHQgbm93LgoKLS0gCktldmluIFN0YW5nZQpDaGllZiBUZWNobm9sb2d5IE9m
-ZmljZXIKU3RlYWRmYXN0IHwgTWFuYWdlZCBJbmZyYXN0cnVjdHVyZSwgRGF0YWNlbnRlciBhbmQg
-Q2xvdWQgU2VydmljZXMKODAwIFMgV2VsbHMsIFN1aXRlIDE5MCB8IENoaWNhZ28sIElMIDYwNjA3
-CjMxMi42MDIuMjY4OSBYMjAzIHwgRmF4OiAzMTIuNjAyLjI2ODgKa2V2aW5Ac3RlYWRmYXN0Lm5l
-dCB8IHd3dy5zdGVhZGZhc3QubmV0CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+--===============5785949260779979549==
+Content-Type: text/plain
+
+flight 117631 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117631/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-libvirt-pair    <job status>                 broken
+ test-amd64-amd64-libvirt-pair 4 host-install/src_host(4) broken REGR. vs. 117589
+ test-amd64-amd64-libvirt-pair 5 host-install/dst_host(5) broken REGR. vs. 117589
+ test-armhf-armhf-libvirt-xsm 16 guest-start/debian.repeat fail REGR. vs. 117589
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 117589
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 117589
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 117589
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-arm64-arm64-libvirt-qcow2 12 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 13 saverestore-support-check    fail never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ libvirt              9a22251bbe6a4ff8dab90da53a1c0df82d8d29fc
+baseline version:
+ libvirt              8bcceaa9244fbf89dd1173756dd835c8c0d5af1c
+
+Last test of basis   117589  2018-01-03 04:22:30 Z    2 days
+Testing same since   117631  2018-01-04 10:04:20 Z    1 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Chen Hanxiao <chenhanxiao@gmail.com>
+  Christian Ehrhardt <christian.ehrhardt@canonical.com>
+  Cédric Bosdonnat <cbosdonnat@suse.com>
+  Eduardo Habkost <ehabkost@redhat.com>
+  Eric Blake <eblake@redhat.com>
+  Erik Skultety <eskultet@redhat.com>
+  Julio Faracco <jcfaracco@gmail.com>
+  Michal Privoznik <mprivozn@redhat.com>
+  Peter Krempa <pkrempa@redhat.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 fail    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-libvirt-pair                                broken  
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job test-amd64-amd64-libvirt-pair broken
+broken-step test-amd64-amd64-libvirt-pair host-install/src_host(4)
+broken-step test-amd64-amd64-libvirt-pair host-install/dst_host(5)
+
+Not pushing.
+
+------------------------------------------------------------
+commit 9a22251bbe6a4ff8dab90da53a1c0df82d8d29fc
+Author: Eduardo Habkost <ehabkost@redhat.com>
+Date:   Thu Dec 28 15:41:28 2017 -0200
+
+    qemu_cgroup: Fix 'rc' argument on virDomainAuditCgroupPath() calls
+    
+    All calls to virDomainAuditCgroupPath() were passing 'rc == 0' as
+    argument, when it was supposed to pass the 'rc' value directly.
+    
+    As a consequence, the audit events that were supposed to be
+    logged (actual cgroup changes) were never being logged, and bogus
+    audit events were logged when using regular files as disk image.
+    
+    Fix all calls to use the return value of
+    virCgroup{Allow,Deny}Device*() directly as the 'rc' argument.
+    
+    Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
+    Signed-off-by: Michal Privoznik <mprivozn@redhat.com>
+
+commit 474c7a2ffa74d6acc93d0749a899e851dc2cc94d
+Author: Michal Privoznik <mprivozn@redhat.com>
+Date:   Thu Jan 4 09:29:49 2018 +0100
+
+    virstringtest: Fix alignment of backslashes
+    
+    We don't try to right align the backslashes anymore.
+    
+    Signed-off-by: Michal Privoznik <mprivozn@redhat.com>
+
+commit 450bf83a929d2f789c7300980ee4e54973806fe7
+Author: Eric Blake <eblake@redhat.com>
+Date:   Tue Oct 10 09:56:31 2017 +0100
+
+    maint: update to latest gnulib
+    
+    This pulls in updates for the 2018 copyright year, among other things.
+    
+    Signed-off-by: Eric Blake <eblake@redhat.com>
+
+commit 259a2cc34e0b006be3ba8489d2e26b69cd3361a8
+Author: Cédric Bosdonnat <cbosdonnat@suse.com>
+Date:   Tue Jan 2 09:54:46 2018 +0100
+
+    apparmor: fix virt-aa-helper profile
+    
+    Fix rule introduced by commit 0f33025a:
+      * to handle /var/run not being a symlink to /run
+      * to be properly parsed: missing comma at the end.
+
+commit d0307a9a766f1eb0f24ad2cc7c7ae730f1bde966
+Author: Julio Faracco <jcfaracco@gmail.com>
+Date:   Tue Jan 2 16:52:20 2018 -0200
+
+    storage: Fixing missing 'backingStore' tag from volume XML dumps.
+    
+    After commit a693fdb 'vol-dumpxml' missed the ability to show backingStore
+    information. This commit adds a volume type for files that fixes this
+    problem.
+    
+    Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1529663
+    
+    Signed-off-by: Julio Faracco <jcfaracco@gmail.com>
+
+commit 6534b3c4bb146d0c2a8412bd032ce5f356af6e4a
+Author: Michal Privoznik <mprivozn@redhat.com>
+Date:   Tue Dec 12 14:03:13 2017 +0100
+
+    qemuBuildMemPathStr: Forbid memoryBacking/access for non-numa case
+    
+    https://bugzilla.redhat.com/show_bug.cgi?id=1448149
+    
+    If a domain has no numa nodes, that means we don't put any
+    memory-backend-file onto the qemu command line. That in turn
+    means we can't set access='shared'. Therefore, we should produce
+    an error instead of ignoring the setting silently.
+    
+    Signed-off-by: Michal Privoznik <mprivozn@redhat.com>
+
+commit f10bb3347b43d900ff361cda5fe1996782284991
+Author: Peter Krempa <pkrempa@redhat.com>
+Date:   Wed Dec 20 13:09:07 2017 +0100
+
+    qemu: monitor: Decrease logging verbosity
+    
+    The PROBE macro used in qemuMonitorIOProcess and the VIR_DEBUG message
+    in qemuMonitorJSONIOProcess create a lot of logging churn when debug
+    logging is enabled during monitor communication.
+    
+    The messages logged from the PROBE macro are rather useless since they
+    are reporting the partial state of receiving the reply from qemu. The
+    actual full reply is still logged in qemuMonitorJSONIOProcessLine once
+    the full message is received.
+
+commit f06e488d5484031a76e7ed231c8fef8fa1181d2c
+Author: Peter Krempa <pkrempa@redhat.com>
+Date:   Wed Dec 20 12:58:36 2017 +0100
+
+    util: probe: Add quiet versions of the "PROBE" macro
+    
+    PROBE macro adds a logging entry, when used in places seeing a lot of
+    traffic this can cause a significant slowdown.
+
+commit c1a6e2fb43156b096787ad6e300f42b3da753826
+Author: Chen Hanxiao <chenhanxiao@gmail.com>
+Date:   Wed Jan 3 17:56:35 2018 +0800
+
+    util: virstring: Tweak a few more descriptions.
+    
+    There are a few more description-related issues that commit @9026d115
+    forgot to address.
+    
+    Signed-off-by: Chen Hanxiao <chenhanxiao@gmail.com>
+    Signed-off-by: Erik Skultety <eskultet@redhat.com>
+
+commit faec1958614bfcdb535b1bcc0ddac8cde4516e1a
+Author: Cédric Bosdonnat <cbosdonnat@suse.com>
+Date:   Mon Dec 18 15:48:33 2017 +0100
+
+    lxc: set a hostname based on the container name
+    
+    Set a transient hostname on containers. The hostname is computed from
+    the container name, only keeping the valid characters [a-zA-Z0-9-] in it.
+    This filtering is based on RFC 1123 and allows a digit to start the
+    hostname.
+
+commit b475a91b7753281eb60b87f75b0055fe3c139276
+Author: Cédric Bosdonnat <cbosdonnat@suse.com>
+Date:   Mon Dec 18 15:46:53 2017 +0100
+
+    Add virStringFilterChars() string utility
+    
+    Add a function to filter a string based on a list of valid characters.
+
+commit 9026d1152c236ac7a7ab25845220a8e14d6bc630
+Author: Chen Hanxiao <chenhanxiao@gmail.com>
+Date:   Sat Dec 23 17:49:08 2017 +0800
+
+    util: fix the description of virStringSearch
+    
+    There's no argument named @result, use @matches instead.
+    
+    Signed-off-by: Chen Hanxiao <chenhanxiao@gmail.com>
+    Signed-off-by: Erik Skultety <eskultet@redhat.com>
+
+commit 8f882cf36e4709b103fa237253052d09ff349cfe
+Author: Christian Ehrhardt <christian.ehrhardt@canonical.com>
+Date:   Tue Dec 19 14:13:06 2017 +0100
+
+    apparmor: allow unix stream for p2p migrations
+    
+    On live migration with --p2p like:
+     $ virsh migrate --live --p2p kvmguest-bionic-normal \
+           qemu+ssh://10.6.221.80/system
+    
+    We hit an apparmor deny like:
+      apparmor="DENIED" operation="file_inherit"
+      profile="/usr/sbin/libvirtd" pid=23477 comm="ssh" family="unix"
+      sock_type="stream" protocol=0 requested_mask="send receive"
+      denied_mask="send" addr=none peer_addr=none peer="unconfined"
+    
+    The rule is not perfect, but can't be restricted further at the moment
+    (new upstream kernel features needed). For now the lack of a profile on the
+    peer as well as comm not being a conditional on rules do not allow to filter
+    further.
+    
+    Signed-off-by: Christian Ehrhardt <christian.ehrhardt@canonical.com>
+
+commit 4ce06ba6f43ebaeeb6d47d70237fd1c747f42883
+Author: Michal Privoznik <mprivozn@redhat.com>
+Date:   Tue Dec 12 13:52:50 2017 +0100
+
+    src: Export virDomainMemoryAccessType*String
+    
+    These are already exported at header file level because of
+    VIR_ENUM_DECL being in numa_conf.h. However, they are not being
+    exported at object level because of missing libvirt_private.syms
+    record.
+    
+    Signed-off-by: Michal Privoznik <mprivozn@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+
+--===============5785949260779979549==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5785949260779979549==--
