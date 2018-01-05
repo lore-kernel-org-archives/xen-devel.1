@@ -1,24 +1,13 @@
-From: Kevin Stange <kevin@steadfast.net>
-Subject: Re: PCI Device Subtree Change from Traditional to
- Upstream
-Date: Fri, 5 Jan 2018 11:10:14 -0600
-Message-ID: <7cd695d9-860f-2322-ffdb-66fd4c2223bc@steadfast.net>
-References: <c8ed6851-70c1-500d-5d66-1e8a6b7133c5@steadfast.net>
- <20180103175759.GA1905@perard.uk.xensource.com>
- <3a19395e-c52f-bbfd-5986-ba56cc10c767@steadfast.net>
- <20180104125217.GB1905@perard.uk.xensource.com>
- <e469d26e-5530-e759-c3a8-c9d4ff9d2479@steadfast.net>
+From: Doug Goldstein <cardoe@cardoe.com>
+Subject: Re: Xen Security Advisory 254 - Information leak via
+ side effects of speculative execution
+Date: Fri, 5 Jan 2018 11:22:25 -0600
+Message-ID: <10684fe8-5aca-3ce0-c109-1c7cd1d952be@cardoe.com>
+References: <E1eWrXs-0007D0-Bg@xenbits.xenproject.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3518798959862378143=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=yazp=ea=steadfast.net=kevin@srs-us1.protection.inumbo.net>)
- id 1eXVVb-0000bW-Qv
- for xen-devel@lists.xenproject.org; Fri, 05 Jan 2018 17:10:19 +0000
-In-Reply-To: <e469d26e-5530-e759-c3a8-c9d4ff9d2479@steadfast.net>
-Content-Language: en-US
+In-Reply-To: <E1eWrXs-0007D0-Bg@xenbits.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,92 +16,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel@lists.xenproject.org
+To: "Xen.org security team" <security@xen.org>, xen-announce@lists.xen.org, xen-devel@lists.xen.org, xen-users@lists.xen.org, oss-security@lists.openwall.com
+Cc: "Xen.org security team" <security-team-members@xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMDQvMjAxOCAwMzoxNiBQTSwgS2V2aW4gU3RhbmdlIHdyb3RlOgo+IE9uIDAxLzA0LzIw
-MTggMDY6NTIgQU0sIEFudGhvbnkgUEVSQVJEIHdyb3RlOgo+PiBPbiBXZWQsIEphbiAwMywgMjAx
-OCBhdCAwNToxMDo1NFBNIC0wNjAwLCBLZXZpbiBTdGFuZ2Ugd3JvdGU6Cj4+PiBPbiAwMS8wMy8y
-MDE4IDExOjU3IEFNLCBBbnRob255IFBFUkFSRCB3cm90ZToKPj4+PiBPbiBXZWQsIERlYyAyMCwg
-MjAxNyBhdCAxMTo0MDowM0FNIC0wNjAwLCBLZXZpbiBTdGFuZ2Ugd3JvdGU6Cj4+Pj4+IEhpLAo+
-Pj4+Pgo+Pj4+PiBJJ3ZlIGJlZW4gd29ya2luZyBvbiB0cmFuc2l0aW9uaW5nIGEgbnVtYmVyIG9m
-IFdpbmRvd3MgZ3Vlc3RzIHVuZGVyIEhWTQo+Pj4+PiBmcm9tIHVzaW5nIFFFTVUgdHJhZGl0aW9u
-YWwgdG8gUUVNVSB1cHN0cmVhbSBhcyBpcyByZWNvbW1lbmRlZCBpbiB0aGUKPj4+Pj4gZG9jdW1l
-bnRhdGlvbi4gIFdoZW4gSSBtb3ZlIHRoZXNlIGd1ZXN0cywgdGhlIFBDSSBzdWJ0cmVlIGZvciBY
-ZW4KPj4+Pj4gZGV2aWNlcyBjaGFuZ2VzIGFuZCBXaW5kb3dzIGNyZWF0ZXMgYSB0b3RhbGx5IG5l
-dyBjb3B5IG9mIGVhY2ggZGV2aWNlLgo+Pj4+PiBXaW5kb3dzIHRyYWNrcyBkb3duIHRoZSBzdG9y
-YWdlIHdpdGhvdXQgaXNzdWUsIGJ1dCBpdCB0cmVhdHMgdGhlIG5ldwo+Pj4+PiBpbnN0YW5jZSBv
-ZiB0aGUgTklDIGRyaXZlciBhcyBhIG5ldyBkZXZpY2UgYW5kIGNsZWFycyB0aGUgbmV0d29yawo+
-Pj4+PiBjb25maWd1cmF0aW9uIGV2ZW4gdGhvdWdoIHRoZSBNQUMgYWRkcmVzcyBpcyB1bmNoYW5n
-ZWQuICBNYW51YWxseQo+Pj4+PiBib290aW5nIHRoZSBndWVzdCBiYWNrIG9uIHRoZSB0cmFkaXRp
-b25hbCBkZXZpY2UgbW9kZWwgcmVhY3RpdmF0ZXMgdGhlCj4+Pj4+IG9yaWdpbmFsIFBDSSBzdWJ0
-cmVlIGFuZCB0aGUgb2xkIG5ldHdvcmsgY29uZmlndXJhdGlvbiB3aXRoIGl0Lgo+Pj4+Pgo+Pj4+
-PiBUaGUgb25seSB0aGluZyB0aGF0IEkgaGF2ZSBiZWVuIGFibGUgdG8gZmluZCB0aGF0J3Mgc3Vi
-c3RhbnRpYWxseQo+Pj4+PiBkaWZmZXJlbnQgY29tcGFyaW5nIHRoZSBkZXZpY2UgdHJlZXMgaXMg
-dGhhdCB0aGUgZGV2aWNlIGluc3RhbmNlIElECj4+Pj4+IHZhbHVlcyBkaWZmZXIgb24gdGhlIHBh
-cmVudCBYZW4gUENJIGRldmljZToKPj4+Pj4KPj4+Pj4gUENJXFZFTl81ODUzJkRFVl8wMDAxJlNV
-QlNZU18wMDAxNTg1MyZSRVZfMDFcMyYyNjdBNjE2QSYzJjE4Cj4+Pj4+Cj4+Pj4+IFBDSVxWRU5f
-NTg1MyZERVZfMDAwMSZTVUJTWVNfMDAwMTU4NTMmUkVWXzAxXDMmMjY3QTYxNkEmMyYxMAo+Pj4+
-Pgo+Pj4+PiBCZXNpZGVzIGFjdHVhbGx5IHNldHRpbmcgdGhlIGd1ZXN0IHRvIGJvb3QgdXNpbmcg
-UUVNVSB0cmFkaXRpb25hbCwgaXMKPj4+Pj4gdGhlcmUgYSB3YXkgdG8gY29udmluY2UgV2luZG93
-cyB0byB0cmVhdCB0aGVzZSBkZXZpY2VzIGFzIHRoZSBzYW1lPyAgQQo+Pj4+PiBwYXRjaC1iYXNl
-ZCBzb2x1dGlvbiB3b3VsZCBiZSBhY2NlcHRhYmxlIHRvIG1lIGlmIHRoZXJlIGlzIG9uZSwgYnV0
-IEkKPj4+Pj4gZG9uJ3QgdW5kZXJzdGFuZCB0aGUgY29kZSB3ZWxsIGVub3VnaCB0byBjcmVhdGUg
-bXkgb3duIHNvbHV0aW9uLgo+Pj4+Cj4+Pj4gSGkgS2V2aW4sCj4+Pj4KPj4+PiBJJ3ZlIGdvdCBh
-IHBhdGNoIHRvIFFFTVUgdGhhdCBzZWVtcyB0byBkbyB0aGUgdHJpY2s6Cj4+Pj4KPj4+PiBGcm9t
-OiBBbnRob255IFBFUkFSRCA8YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KPj4+PiBTdWJqZWN0
-OiBbUEFUQ0hdIHhlbi1wbGF0Zm9ybTogSGFyZGNvZGUgUENJIHNsb3QgdG8gMwo+Pj4+Cj4+Pj4g
-U2lnbmVkLW9mZi1ieTogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+
-Cj4+Pj4gLS0tCj4+Pj4gIGh3L2kzODYvcGNfcGlpeC5jIHwgMiArLQo+Pj4+ICAxIGZpbGUgY2hh
-bmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKPj4+Pgo+Pj4+IGRpZmYgLS1naXQg
-YS9ody9pMzg2L3BjX3BpaXguYyBiL2h3L2kzODYvcGNfcGlpeC5jCj4+Pj4gaW5kZXggNWU0NzUy
-ODk5My4uOTNlM2E5YTkxNiAxMDA2NDQKPj4+PiAtLS0gYS9ody9pMzg2L3BjX3BpaXguYwo+Pj4+
-ICsrKyBiL2h3L2kzODYvcGNfcGlpeC5jCj4+Pj4gQEAgLTQwNSw3ICs0MDUsNyBAQCBzdGF0aWMg
-dm9pZCBwY194ZW5faHZtX2luaXQoTWFjaGluZVN0YXRlICptYWNoaW5lKQo+Pj4+ICAKPj4+PiAg
-ICAgIGJ1cyA9IHBjaV9maW5kX3ByaW1hcnlfYnVzKCk7Cj4+Pj4gICAgICBpZiAoYnVzICE9IE5V
-TEwpIHsKPj4+PiAtICAgICAgICBwY2lfY3JlYXRlX3NpbXBsZShidXMsIC0xLCAieGVuLXBsYXRm
-b3JtIik7Cj4+Pj4gKyAgICAgICAgcGNpX2NyZWF0ZV9zaW1wbGUoYnVzLCBQQ0lfREVWRk4oMywg
-MCksICJ4ZW4tcGxhdGZvcm0iKTsKPj4+PiAgICAgIH0KPj4+PiAgfQo+Pj4+ICAjZW5kaWYKPj4+
-Pgo+Pj4+Cj4+Pj4gVGhlIHNhbWUgdGhpbmcgY291bGQgYmUgZG9uZSBieSBsaWJ4bCwgYnkgcHJv
-dmlkaW5nIHNwZWNpZmljIGNvbW1hbmQKPj4+PiBsaW5lIG9wdGlvbnMgdG8gcWVtdS4gKEkgdGhp
-bmsgdGhhdCBjb3VsZCBldmVuIGJlIGRvbmUgdmlhIGEgZGlmZmVyZW50Cj4+Pj4gY29uZmlnIGZp
-bGUgZm9yIHRoZSBndWVzdC4pCj4+Pgo+Pj4gVGhpcyBwYXRjaCBkb2Vzbid0IHNlZW0gdG8gd29y
-ayBmb3IgbWUuICBJdCBzZWVtcyBsaWtlIHRoZSBkZXZpY2UgbW9kZWwKPj4+IHByb2Nlc3MgaXMg
-ZXhpdGluZyBpbW1lZGlhdGVseSwgYnV0IEkgaGF2ZW4ndCBiZWVuIGFibGUgdG8gZmluZCBhbnkK
-Pj4+IGluZm9ybWF0aW9uIGFzIHRvIHdoYXQgaXMgZ29pbmcgd3JvbmcuICBJIHRlc3RlZCB3aXRo
-IFhlbiA0LjYuNiBhbmQgdGhlCj4+PiBRRU1VIHBhY2thZ2VkIHdpdGggdGhhdCByZWxlYXNlLiAg
-U2hvdWxkIEkgdHJ5IGl0IG9uIGEgZGlmZmVyZW50IHZlcnNpb24KPj4+IG9mIFhlbiBhbmQgUUVN
-VT8KPj4KPj4gV2hhdCB0aGlzIHBhdGNoIGRvZXMgaXMgYXNraW5nIFFFTVUgdG8gaW5zZXJ0IHRo
-ZSBQQ0kgY2FyZAo+PiAieGVuLXBsYXRmb3JtIiBpbnRvIHRoZSAzcmQgUENJIHNsb3QuIE15IGd1
-ZXNzIGlzIHRoYXQgZmFpbGVkIGJlY2F1c2UKPj4gdGhlcmUgaXMgYWxyZWFkeSBhIFBDSSBkZXZp
-Y2UgdGhlcmUuCj4+Cj4+IFlvdSBjb3VsZCBjaGVjayBxZW11J3MgbG9ncywgaXQncyBpbgo+PiAv
-dmFyL2xvZy94ZW4vcWVtdS1kbS0ke2d1ZXN0X25hbWV9LmxvZwo+IAo+IFRoZSBsb2cgZmlsZSBp
-biBxdWVzdGlvbiBvbmx5IHNheXM6Cj4gCj4gcWVtdTogdGVybWluYXRpbmcgb24gc2lnbmFsIDEg
-ZnJvbSBwaWQgODg2NQo+IAo+PiBMZXQncyB0cnkgc29tZXRoaW5nIGVsc2UsIGluc3RlYWQgb2Yg
-cGF0Y2hpbmcgUUVNVSwgd2UgY2FuIHBhdGNoIGxpYnhsLAo+PiB0aGF0IG1pZ2h0IHdvcmsgYmV0
-dGVyLiBDYW4geW91IHRyeSB0aGlzIHBhdGNoPyAoSSd2ZSBvbmx5IHRlc3QKPj4gY29tcGlsZWQu
-KSBJJ3ZlIHdyaXRlIHRoZSBwYXRjaCBmb3IgWGVuIDQuNiwgc2luY2UgdGhhdCB0aGUgdmVyc2lv
-biB5b3UKPj4gYXJlIHVzaW5nLgo+IAo+IFRoaXMgaXNuJ3QgZG9pbmcgdGhlIHRyaWNrIGVpdGhl
-ciwgd2l0aCB0aGUgc2FtZSBtaXNiZWhhdmlvci4gVGhlIGxvZwo+IGZpbGUgaXMgdGhlIHNhbWUg
-aW4gYm90aCBjYXNlcy4KCkknbSBnZXR0aW5nIGNvbmZ1c2luZyBiZWhhdmlvciBoZXJlLiBJIHRy
-aWVkIHRvIGJvb3QgYSBndWVzdCB1c2luZyBhCmJ1aWxkIHdpdGggdGhlIHNlY29uZCBwYXRjaCBh
-bmQgYmVoYXZlcyB0aGUgd2F5IHRoZSBmaXJzdCBvbmUgZGlkLCB3aXRoCnRoZSBxZW11LXN5c3Rl
-bS1pMzg2IHByb2Nlc3MgZXhpdGluZyBhbmQgcHJldmVudGluZyB0aGUgZ3Vlc3QgZnJvbSBldmVy
-CmJvb3RpbmcuICBIb3dldmVyLCBJIHRyaWVkIHRvIGRvd25ncmFkZSB0aGUgcGFja2FnZXMgdG8g
-Y29tcGxldGVseQp1bnBhdGNoZWQgdmVyc2lvbiBpbiBwcmVwYXJhdGlvbiB0byByZWJvb3QgYWdh
-aW4gYW5kIG9uY2UgdGhlIG9sZGVyIGNvcHkKb2YgdGhlIHJ1bnRpbWUgaXMgaW5zdGFsbGVkLCB0
-aGUgcWVtdS1zeXN0ZW0taTM4NiBzdGFydHMgcHJvcGVybHkgdXNpbmcKdGhlIGNvbW1hbmQgbGlu
-ZSBhcmd1bWVudHMgdGhhdCBsaWJ4bCBoYWQgc3BlY2lmaWVkIGFuZCB0aGUgc3lzdGVtIGNvbWVz
-CnVwIHdpdGggdGhlIGNvcnJlY3QgUENJIHN1YnRyZWUuCgpUaGlzIGxlYWRzIG1lIHRvIGJlbGll
-dmUgc29tZXRoaW5nIGFib3V0IG15IGJ1aWxkIGlzIHNjcmV3ZWQgdXAgc29tZWhvdwpzdWNoIHRo
-YXQgbXkgcWVtdS1zeXN0ZW0taTM4NiBpcyBicm9rZW4uICBJJ20gcXVpdGUgc3VyZSBJJ20gbm90
-CmFwcGx5aW5nIGFueSBleHRyYSBwYXRjaGVzIHRvIGl0IHRoYXQgd2VyZW4ndCBvdGhlcndpc2Ug
-aW4gdGhlIENlbnRPUwp2aXJ0IHBhY2thZ2VzLgoKLS0gCktldmluIFN0YW5nZQpDaGllZiBUZWNo
-bm9sb2d5IE9mZmljZXIKU3RlYWRmYXN0IHwgTWFuYWdlZCBJbmZyYXN0cnVjdHVyZSwgRGF0YWNl
-bnRlciBhbmQgQ2xvdWQgU2VydmljZXMKODAwIFMgV2VsbHMsIFN1aXRlIDE5MCB8IENoaWNhZ28s
-IElMIDYwNjA3CjMxMi42MDIuMjY4OSBYMjAzIHwgRmF4OiAzMTIuNjAyLjI2ODgKa2V2aW5Ac3Rl
-YWRmYXN0Lm5ldCB8IHd3dy5zdGVhZGZhc3QubmV0CgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============3518798959862378143==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="8IQptyakRbnfMa8SSyuCeDWFRbyMuvG3R"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--8IQptyakRbnfMa8SSyuCeDWFRbyMuvG3R
+Content-Type: multipart/mixed; boundary="43cm8qMKcf7xGHs54TlcvDEc9E1uMLr3o";
+ protected-headers="v1"
+From: Doug Goldstein <cardoe@cardoe.com>
+To: "Xen.org security team" <security@xen.org>, xen-announce@lists.xen.org,
+ xen-devel@lists.xen.org, xen-users@lists.xen.org,
+ oss-security@lists.openwall.com
+Cc: "Xen.org security team" <security-team-members@xen.org>
+Message-ID: <10684fe8-5aca-3ce0-c109-1c7cd1d952be@cardoe.com>
+Subject: Re: [Xen-devel] Xen Security Advisory 254 - Information leak via side
+ effects of speculative execution
+References: <E1eWrXs-0007D0-Bg@xenbits.xenproject.org>
+In-Reply-To: <E1eWrXs-0007D0-Bg@xenbits.xenproject.org>
+
+--43cm8qMKcf7xGHs54TlcvDEc9E1uMLr3o
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+I'm just adding some comments below on some updates that might be
+helpful to add to help clarify things for interested parties. These
+comments are driven purely based on the questions that I've had to field
+from others.
+
+- Since this advisory talks about 3 CVEs and then breaks the issue into
+3 items SP1, SP2 and SP3 it would be helpful to directly map them to
+their CVEs.
+- There has been some confusion around mitigation and resolution where
+people misunderstand the terms and therefore there might be some value
+in providing some updates to provide some more clarity.
+
+>=20
+> SP1, "Bounds-check bypass": Poison the branch predictor, such that
+> operating system or hypervisor code is speculatively executed past
+> boundary and security checks.  This would allow an attacker to, for
+> instance, cause speculative code in the normal hypercall / emulation
+> path to execute with wild array indexes.
+
+please add CVE-2017-5753
+
+>=20
+> SP2, "Branch Target Injection": Poison the branch predictor.
+> Well-abstracted code often involves calling function pointers via
+> indirect branches; reading these function pointers may involve a
+> (slow) memory access, so the CPU attempts to guess where indirect
+> branches will lead.  Poisoning this enables an attacker to
+> speculatively branch to any code that exists in the hypervisor.
+
+please add CVE-2017-5715
+
+
+>=20
+> SP3, "Rogue Data Load": On some processors, certain pagetable
+> permission checks only happen when the instruction is retired;
+> effectively meaning that speculative execution is not subject to
+> pagetable permission checks.  On such processors, an attacker can
+> speculatively execute arbitrary code in userspace with, effectively,
+> the highest privilege level.
+
+please add CVE-2017-5754 and/or reference this is meltdown.
+
+>=20
+> MITIGATION
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>=20
+> There is no mitigation for SP1 and SP2.
+>=20
+> SP3 can be mitigated by running guests in HVM or PVH mode.
+>=20
+> For guests with legacy PV kernels which cannot be run in HVM mode, we
+> have developed a "shim" hypervisor that allows PV guests to run in PVH
+> mode.  Unfortunately, due to the accelerated schedule, this is not yet
+> ready to release.  We expect to have it ready for 4.10, as well as PVH
+> backports to 4.9 and 4.8, available over the next few days.
+>=20
+> RESOLUTION
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>=20
+> There is no available resolution for SP1 or SP3.
+
+I believe there has been some confusion among some people about the
+terms here. There are some people that understand "mitigation" as "what
+can I do now to avoid this" and "resolution" as "what updates can I
+apply". As a result they are misunderstanding here what the net result
+is. Some clarifications could be that the PVH shim is the resolution for
+the SP3 issue. However its not a fix for PV itself but instead changes
+the very nature of how PV guests are started up.
+
+
+--=20
+Doug Goldstein
+
+
+--43cm8qMKcf7xGHs54TlcvDEc9E1uMLr3o--
+
+--8IQptyakRbnfMa8SSyuCeDWFRbyMuvG3R
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlpPtFFfFIAAAAAALgAo
+aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
+MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
+Nl3uIRAAgPDbI32pAZafdRYBbqYgytdFb26s5elMJIiP0GFbNxiA3YhbDU/BSxSH
+58QTd3p+fjWBBKSnkWR3kwFuFdlQoPXaFXRh4aLthnuF2oSs3XV4S1vZt57QyZcV
+f9OMpItxlrq/1W7XD8t5suY9ZZPll1RNYl3wGQUSa7SI8KxEcFmqUOfRlWw+bM0z
+fZOsfilxhCGpMJUJipqcukKMk5Ok3EJQm1aonZAScLo5txDZD7kic4NF3xkC6dpY
+HelCO2TDcXtFvLY0TMk2TWuqcz56ijbVPJG/4QkBf6iXpWFt8/Olw1deuUR0mX/A
+aFtWbUHm7Uvgugq0Iu7LQOhVgNXGf8VrmHpijxtxDbd3E90VydZkg72aCvdrTxv6
+xXHNblT+TIbswCNSxY13mnszgOtfOcd0+IUYVDf63abzn3x3IXWfsFHJRiuDlOm4
+9W+UNvylh25FCdYsRDNRKsESq1eliX0gEeU2DSIRZfWeXJ99uQnFvPbPxTMfL8eJ
+PtC2NZhQ25hEgNw2dn/tIqkvOkqYNM1zRytGZ9UaziyF5Mll49kQQY7pKeN7MD8W
+j1JkFmmkz/smBB9fwXnjpFhnfotaZYRQVtI6/7QtB2z3AbaJC55+RVZZwr6U+DmP
+CrgjjPet/hPdgDG969D6/nU4Kx5+M4h/2MBz07UpUvavbyiG6rE=
+=oWc2
+-----END PGP SIGNATURE-----
+
+--8IQptyakRbnfMa8SSyuCeDWFRbyMuvG3R--
+
+
+--===============3518798959862378143==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3518798959862378143==--
