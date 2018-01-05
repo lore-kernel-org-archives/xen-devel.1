@@ -1,18 +1,21 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: Xen Project Spectre/Meltdown FAQ
-Date: Fri, 5 Jan 2018 14:54:25 +0000
-Message-ID: <7586D6AD-2EE4-413D-81CD-A333D7336123@gmail.com>
-References: <B3F5B430-F55E-446C-A7C5-7830F2CEDFCD@gmail.com>
- <CAEC2CxqA9DagoV=qibqW=ucuhPymRcRH61kb9r5M0PiG+1dmuA@mail.gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-Content-Type: multipart/mixed; boundary="===============6912901353651769218=="
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH RFC v1 33/74] x86/guest: enable event
+ channels upcalls
+Date: Fri, 05 Jan 2018 08:07:19 -0700
+Message-ID: <5A4FA2B7020000780019B712@prv-mh.provo.novell.com>
+References: <20180104130625.28605-1-wei.liu2@citrix.com>
+ <20180104130625.28605-34-wei.liu2@citrix.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=wlwn=ea=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1eXTOA-00067c-Bq
- for xen-devel@lists.xenproject.org; Fri, 05 Jan 2018 14:54:30 +0000
-In-Reply-To: <CAEC2CxqA9DagoV=qibqW=ucuhPymRcRH61kb9r5M0PiG+1dmuA@mail.gmail.com>
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=ivak=ea=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1eXTab-0007H1-UN
+ for xen-devel@lists.xenproject.org; Fri, 05 Jan 2018 15:07:21 +0000
+In-Reply-To: <20180104130625.28605-34-wei.liu2@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,121 +24,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@linaro.org>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, George Dunlap <george.dunlap@citrix.com>, xen-users@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, wei.liu2@citrix.com
+Cc: Xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6912901353651769218==
-Content-Type: multipart/alternative;
- boundary="Apple-Mail=_25C038CA-E557-40CF-BA9C-B0DBD1A4F612"
-
-
---Apple-Mail=_25C038CA-E557-40CF-BA9C-B0DBD1A4F612
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-Julien,
-
-> On 5 Jan 2018, at 14:40, Julien Grall <julien.grall@linaro.org> wrote:
->=20
-> (apologies for the formatting)
->=20
-> Hi Lars,
->=20
-> Thank you for putting together an FAQ.
->=20
-> Few comments below around Arm.
->=20
-> Systems running Xen, like all operating systems and hypervisors, are =
-potentially affected by Spectre (referred to as SP1 and SP2 in Advisory =
-254 [1]). For Arm Processors information, you can find which processors =
-are impacted here [2].  In general, both the hypervisor and a guest =
-kernel are vulnerable to attack via SP1 and SP2.
->=20
-> The website list processors designed by Arm (i.e Cortex family). It =
-does not include processors made by Arm licensees. I will leave the =
-various licensees speak for themselves here.
->=20
-> Regarding Arm-designed processors, most of them are not vulnerable to =
-any variant. Those affected will mostly be vulnerable to attack via SP1 =
-and SP2.
->=20
-> But this does not rule out attack via SP3 on Arm. =46rom the website, =
-one Cortex processor is affected.
->=20
-> While this will not affect Xen (the hypervisor is using a different =
-set  of page-tables). Guest kernel will be vulnerable to it.
-
-I would be quite happy to have a specific question covering ARM/ARM =
-eco-system where you can explain all this. Feel free to formulate a =
-question + answer and I will add it
-Lars=
-
---Apple-Mail=_25C038CA-E557-40CF-BA9C-B0DBD1A4F612
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; -webkit-line-break: after-white-space;" =
-class=3D"">Julien,<div class=3D""><br class=3D""><div><blockquote =
-type=3D"cite" class=3D""><div class=3D"">On 5 Jan 2018, at 14:40, Julien =
-Grall &lt;<a href=3D"mailto:julien.grall@linaro.org" =
-class=3D"">julien.grall@linaro.org</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><div dir=3D"auto" =
-style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;" =
-class=3D""><div dir=3D"auto" class=3D"">(apologies for the =
-formatting)</div><div dir=3D"auto" class=3D""><br class=3D""></div><div =
-class=3D"">Hi Lars,</div><div dir=3D"auto" class=3D""><div dir=3D"auto" =
-class=3D""><br class=3D""></div><div dir=3D"auto" class=3D"">Thank you =
-for putting together an FAQ.</div><div dir=3D"auto" class=3D""><br =
-class=3D""></div><div dir=3D"auto" class=3D"">Few comments below around =
-Arm.</div><div class=3D"gmail_extra" dir=3D"auto"><br class=3D""><div =
-class=3D"gmail_quote"><blockquote class=3D"quote" style=3D"margin: 0px =
-0px 0px 0.8ex; border-left-width: 1px; border-left-style: solid; =
-border-left-color: rgb(204, 204, 204); padding-left: 1ex;">Systems =
-running Xen, like all operating systems and hypervisors, are potentially =
-affected by Spectre (referred to as SP1 and SP2 in Advisory 254 [1]). =
-For Arm Processors information, you can find which processors are =
-impacted here [2].&nbsp; In general, both the hypervisor and a guest =
-kernel are vulnerable to attack via SP1 and =
-SP2.</blockquote></div></div></div><div dir=3D"auto" class=3D""><br =
-class=3D""></div><div dir=3D"auto" class=3D""></div><div dir=3D"auto" =
-class=3D"">The website list processors designed by Arm (i.e Cortex =
-family). It does not include processors made by Arm licensees. I will =
-leave the various licensees speak for themselves here.</div><div =
-dir=3D"auto" class=3D""><br class=3D""></div><div dir=3D"auto" =
-class=3D"">Regarding Arm-designed processors, most of them are not =
-vulnerable to any variant. Those affected will mostly be vulnerable to =
-attack via SP1 and SP2.</div><div dir=3D"auto" class=3D""><br =
-class=3D""></div><div dir=3D"auto" class=3D"">But this does not rule out =
-attack via SP3 on Arm. =46rom the website, one Cortex processor is =
-affected.</div><div dir=3D"auto" class=3D""><br class=3D""></div><div =
-dir=3D"auto" class=3D"">While this will not affect Xen (the hypervisor =
-is using a different set&nbsp; of page-tables). Guest kernel will be =
-vulnerable to it.</div></div></div></blockquote></div><br =
-class=3D""></div><div class=3D"">I would be quite happy to have a =
-specific question covering ARM/ARM eco-system where you can explain all =
-this. Feel free to formulate a question + answer and I will add =
-it</div><div class=3D"">Lars</div></body></html>=
-
---Apple-Mail=_25C038CA-E557-40CF-BA9C-B0DBD1A4F612--
-
-
---===============6912901353651769218==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6912901353651769218==--
+Pj4+IE9uIDA0LjAxLjE4IGF0IDE0OjA1LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+QEAgLTMwLDYgKzMxLDcgQEAKPiAgYm9vbCB4ZW5fZ3Vlc3Q7Cj4gIAo+ICBzdGF0aWMgdWludDMy
+X3QgeGVuX2NwdWlkX2Jhc2U7Cj4gK3N0YXRpYyB1aW50OF90IGV2dGNobl91cGNhbGxfdmVjdG9y
+OwoKVGhlcmUgYmVpbmcgYSBzaW5nbGUgZ2xvYmFsIHZlY3Rvciwgd2h5IGRvIHlvdSB1c2UKSFZN
+T1Bfc2V0X2V2dGNobl91cGNhbGxfdmVjdG9yIGluc3RlYWQgb2Ygc2V0dGluZwpIVk1fUEFSQU1f
+Q0FMTEJBQ0tfSVJRPyBBaXVpIHRoaXMgd291bGQgYWxzbyBtYWtlIC4uLgoKPiBAQCAtOTEsOSAr
+OTMsODEgQEAgc3RhdGljIHZvaWQgbWFwX3NoYXJlZF9pbmZvKHN0cnVjdCBlODIwbWFwICplODIw
+KQo+ICAgICAgc2V0X2ZpeG1hcChGSVhfWEVOX1NIQVJFRF9JTkZPLCBmcmFtZSk7Cj4gIH0KPiAg
+Cj4gK3N0YXRpYyB2b2lkIHhlbl9ldnRjaG5fdXBjYWxsKHN0cnVjdCBjcHVfdXNlcl9yZWdzICpy
+ZWdzKQo+ICt7Cj4gKyAgICB1bnNpZ25lZCBpbnQgY3B1ID0gc21wX3Byb2Nlc3Nvcl9pZCgpOwo+
+ICsgICAgc3RydWN0IHZjcHVfaW5mbyAqdmNwdV9pbmZvID0gJlhFTl9zaGFyZWRfaW5mby0+dmNw
+dV9pbmZvW2NwdV07Cj4gKwo+ICsgICAgdmNwdV9pbmZvLT5ldnRjaG5fdXBjYWxsX3BlbmRpbmcg
+PSAwOwo+ICsgICAgeGNoZygmdmNwdV9pbmZvLT5ldnRjaG5fcGVuZGluZ19zZWwsIDApOwo+ICsK
+PiArICAgIGFja19BUElDX2lycSgpOwoKLi4uIHRoaXMgY2FsbCB1bm5lY2Vzc2FyeS4KCkFsc28g
+d291bGRuJ3QgaXQgYmUgYmV0dGVyIHRvIGRlY291cGxlIHVzZXMgb2YgdmNwdV9pbmZvIGZyb20K
+WEVOX3NoYXJlZF9pbmZvIHJpZ2h0IGF3YXksIGZvciB0aGUgbGF0ZXIgZXh0ZW5zaW9uIHRvIG1v
+cmUKdkNQVS1zIHRvIGJlIGxlc3MgaW50cnVzaXZlPwoKQWxzbyAtIHdoeSB4Y2hnKCkgcmF0aGVy
+IHRoYW4gd3JpdGVfYXRvbWljKCkgKGFnYWluIGZ1cnRoZXIgZG93bik/Cgo+ICtzdGF0aWMgdm9p
+ZCBhcF9zZXR1cF9ldmVudF9jaGFubmVscyhib29sIGNsZWFyKQo+ICt7Cj4gKyAgICB1bnNpZ25l
+ZCBpbnQgaSwgY3B1ID0gc21wX3Byb2Nlc3Nvcl9pZCgpOwo+ICsgICAgc3RydWN0IHZjcHVfaW5m
+byAqdmNwdV9pbmZvID0gJlhFTl9zaGFyZWRfaW5mby0+dmNwdV9pbmZvW2NwdV07Cj4gKyAgICBp
+bnQgcmM7Cj4gKwo+ICsgICAgQVNTRVJUKGV2dGNobl91cGNhbGxfdmVjdG9yKTsKPiArICAgIEFT
+U0VSVChjcHUgPCBBUlJBWV9TSVpFKFhFTl9zaGFyZWRfaW5mby0+dmNwdV9pbmZvKSk7CgpTdHJp
+Y3RseSBzcGVha2luZyB0aGlzIGFzc2VydGlvbiBjb21lcyB0b28gbGF0ZS4gQnV0IHllcywgd2Ug
+aGF2ZQpxdWl0ZSBhIGZldyBzdWNoIGV4YW1wbGVzIGVsc2V3aGVyZSwgc28gSSBkb24ndCByZWFs
+bHkgbWluZC4KCj4gKyAgICBpZiAoICFjbGVhciApCj4gKyAgICB7Cj4gKyAgICAgICAgLyoKPiAr
+ICAgICAgICAgKiBUaGlzIGlzIG5lY2Vzc2FyeSB0byBlbnN1cmUgdGhhdCBhIENQVSB3aWxsIGJl
+IGludGVycnVwdGVkIGluIGNhc2UKPiArICAgICAgICAgKiBvZiBhbiBldmVudCBjaGFubmVsIG5v
+dGlmaWNhdGlvbi4KPiArICAgICAgICAgKi8KPiArICAgICAgICBBU1NFUlQodmNwdV9pbmZvLT5l
+dnRjaG5fdXBjYWxsX3BlbmRpbmcgPT0gMCk7Cj4gKyAgICAgICAgQVNTRVJUKHZjcHVfaW5mby0+
+ZXZ0Y2huX3BlbmRpbmdfc2VsID09IDApOwo+ICsgICAgfQo+ICsKPiArICAgIHJjID0geGVuX2h5
+cGVyY2FsbF9zZXRfZXZ0Y2huX3VwY2FsbF92ZWN0b3IoY3B1LCBldnRjaG5fdXBjYWxsX3ZlY3Rv
+cik7Cj4gKyAgICBpZiAoIHJjICkKPiArICAgICAgICBwYW5pYygiVW5hYmxlIHRvIHNldCBldnRj
+aG4gdXBjYWxsIHZlY3RvcjogJWQiLCByYyk7Cj4gKwo+ICsgICAgaWYgKCBjbGVhciApCj4gKyAg
+ICB7Cj4gKyAgICAgICAgLyoKPiArICAgICAgICAgKiBDbGVhciBhbnkgcGVuZGluZyB1cGNhbGwg
+Yml0cy4gVGhpcyBtYWtlcyB1cyBlZmZlY3RpdmVseSBpZ25vcmUgYW55Cj4gKyAgICAgICAgICog
+cHJldmlvdXMgdXBjYWxscyB3aGljaCBtaWdodCBiZSBzdWJvcHRpbWFsLgo+ICsgICAgICAgICAq
+Lwo+ICsgICAgICAgIHZjcHVfaW5mby0+ZXZ0Y2huX3VwY2FsbF9wZW5kaW5nID0gMDsKPiArICAg
+ICAgICB4Y2hnKCZ2Y3B1X2luZm8tPmV2dGNobl9wZW5kaW5nX3NlbCwgMCk7Cj4gKwo+ICsgICAg
+ICAgIC8qCj4gKyAgICAgICAgICogZXZ0Y2huX3BlbmRpbmcgY2FuIGJlIGNsZWFyZWQgb25seSBv
+biB0aGUgYm9vdCBDUFUgYmVjYXVzZSBpdCdzCj4gKyAgICAgICAgICogbG9jYXRlZCBpbiBhIHNo
+YXJlZCBzdHJ1Y3R1cmUuCj4gKyAgICAgICAgICovCj4gKyAgICAgICAgZm9yICggaSA9IDA7IGkg
+PCA4OyBpKysgKQoKQVJSQVlfU0laRSgpIChhbHNvIGZ1cnRoZXIgZG93bikKCkkgYWxzbyBkb24n
+dCByZWFsbHkgdW5kZXJzdGFuZCB0aGUgY29tbWVudCAtIGFsbCBDUFVzIGNhbiBhY2Nlc3MKc2hh
+cmVkIGluZm8uIEJ1dCB0aGVuIGFnYWluIEkgZG9uJ3QgcmVhbGx5IHVuZGVyc3RhbmQgYWxsIHRo
+aXMKY2xlYXJpbmcgYW55d2F5LCBpbmNsdWRpbmcgdGhlIHJlc3BlY3RpdmUgQVNTRVJUKClzIGZ1
+cnRoZXIgdXAuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
