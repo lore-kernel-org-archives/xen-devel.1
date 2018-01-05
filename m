@@ -1,12 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [seabios test] 117612: regressions - trouble:
-	broken/fail/pass
-Date: Fri, 05 Jan 2018 02:02:04 +0000
-Message-ID: <osstest-117612-mainreport@xen.org>
+From: Man Chon Kuok <manchonkuok@gmail.com>
+Subject: Dynamic Disassembling domU Instructions
+Date: Thu, 4 Jan 2018 17:17:28 -1000
+Message-ID: <CAJnNCGMXY6+pGrp+Vb7nxucKGZxyrZPS8SDRsZNCv0Njw+YYiA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7790599314317835292=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=fnaf=ea=gmail.com=manchonkuok@srs-us1.protection.inumbo.net>)
+ id 1eXIVf-0006Eg-GC
+ for xen-devel@lists.xenproject.org; Fri, 05 Jan 2018 03:17:31 +0000
+Received: by mail-io0-x22a.google.com with SMTP id v30so4373547iov.7
+ for <xen-devel@lists.xenproject.org>; Thu, 04 Jan 2018 19:17:30 -0800 (PST)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,112 +20,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDExNzYxMiBzZWFiaW9zIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMTc2MTIvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3Rz
-IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMg
-d2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1p
-bnRlbCAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgZmFpbCBSRUdSLiB2
-cy4gMTE1NTM5CgpUZXN0cyB3aGljaCBhcmUgZmFpbGluZyBpbnRlcm1pdHRlbnRseSAobm90IGJs
-b2NraW5nKToKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1pbnRlbCAgNCBob3N0LWlu
-c3RhbGwoNCkgIGJyb2tlbiBwYXNzIGluIDExNzU4NAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNj
-ZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43
-LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDExNTUzOQogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBm
-YWlsIGxpa2UgMTE1NTM5CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAxNyBn
-dWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMTU1MzkKIHRlc3QtYW1kNjQtaTM4Ni1s
-aWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
-IGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2
-bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVz
-dC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRlYmlhbi1odm0taW5zdGFsbC9sMS9s
-MiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAx
-MCB3aW5kb3dzLWluc3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2
-ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHNlYWJpb3MgICAgICAgICAg
-ICAgIDg0NGI4NjQ2NGE1Y2JmZmZiNjJiODc4MDg2MzIwMThjYTI1MGQ4NjcKYmFzZWxpbmUgdmVy
-c2lvbjoKIHNlYWJpb3MgICAgICAgICAgICAgIDBjYTZkNjI3N2RmYWZjNjcxYTViMzcxOGNiZWI1
-Yzc4ZTJhODg4ZWEKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDExNTUzOSAgMjAxNy0xMS0wMyAyMDo0
-ODo1OCBaICAgNjIgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMTU3MzMgIDIwMTctMTEtMTAg
-MTc6MTk6NTkgWiAgIDU1IGRheXMgICA2MSBhdHRlbXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAx
-MTcwMTQgIDIwMTctMTItMDggMTk6MTE6MjMgWiAgIDI3IGRheXMgICAxNiBhdHRlbXB0cwoKLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-ClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBLZXZpbiBPJ0Nvbm5v
-ciA8a2V2aW5Aa29jb25ub3IubmV0PgogIFBhdWwgTWVuemVsIDxwbWVuemVsQG1vbGdlbi5tcGcu
-ZGU+CiAgU3RlZmFuIEJlcmdlciA8c3RlZmFuYkBsaW51eC52bmV0LmlibS5jb20+Cgpqb2JzOgog
-YnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3Bz
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0
-LXhzbSAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlh
-bmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14
-bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0tYW1kICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFu
-aHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAg
-ZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFt
-ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwt
-cWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRl
-bCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11
-dS1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAoKCi0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpz
-Zy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczog
-L2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBm
-aWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5w
-cm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFu
-ZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
-L2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAg
-ICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1S
-RUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0
-dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5Cgpicm9r
-ZW4tam9iIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1pbnRlbCBicm9rZW4KYnJva2Vu
-LXN0ZXAgdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWludGVsIGhvc3QtaW5zdGFsbCg0
-KQoKTm90IHB1c2hpbmcuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0KY29tbWl0IDg0NGI4NjQ2NGE1Y2JmZmZiNjJiODc4MDg2MzIw
-MThjYTI1MGQ4NjcKQXV0aG9yOiBQYXVsIE1lbnplbCA8cG1lbnplbEBtb2xnZW4ubXBnLmRlPgpE
-YXRlOiAgIE1vbiBPY3QgMiAwODoxMzoxMyAyMDE3ICswMjAwCgogICAgZG9jcy9Eb3dubG9hZDog
-VXNlIG1vcmUgc2VjdXJlIEhUVFBTIFVSTHMgd2hlcmUgcG9zc2libGUKICAgIAogICAgU2lnbmVk
-LW9mZi1ieTogUGF1bCBNZW56ZWwgPHBtZW56ZWxAbW9sZ2VuLm1wZy5kZT4KCmNvbW1pdCBkZjQ2
-ZDEwYzhhN2I4OGViODJmM2NlYjJhYTMxNzgyZGVlMTU1OTNkCkF1dGhvcjogU3RlZmFuIEJlcmdl
-ciA8c3RlZmFuYkBsaW51eC52bmV0LmlibS5jb20+CkRhdGU6ICAgVHVlIE5vdiAxNCAxNTowMzo0
-NyAyMDE3IC0wNTAwCgogICAgdHBtOiBBZGQgc3VwcG9ydCBmb3IgVFBNMiBBQ1BJIHRhYmxlCiAg
-ICAKICAgIEFkZCBzdXBwb3J0IGZvciB0aGUgVFBNMiBBQ1BJIHRhYmxlLiBJZiB3ZSBmaW5kIGl0
-IGFuZCBpdHMKICAgIG9mIHRoZSBhcHByb3ByaWF0ZSBzaXplLCB3ZSBjYW4gZ2V0IHRoZSBsb2df
-YXJlYV9zdGFydF9hZGRyZXNzCiAgICBhbmQgbG9nX2FyZWFfbWluaW11bV9zaXplIGZyb20gaXQu
-CiAgICAKICAgIFRoZSBsYXRlc3QgdmVyc2lvbiBvZiB0aGUgc3BlYyBjYW4gYmUgZm91bmQgaGVy
-ZToKICAgIAogICAgaHR0cHM6Ly90cnVzdGVkY29tcHV0aW5nZ3JvdXAub3JnL3RjZy1hY3BpLXNw
-ZWNpZmljYXRpb24vCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IFN0ZWZhbiBCZXJnZXIgPHN0ZWZh
-bmJAbGludXgudm5ldC5pYm0uY29tPgoKY29tbWl0IDA1NDFmMmYwZjI0NmU3N2Q3YzcyNjkyNjk3
-NjkyMGU4MDcyZDExMTkKQXV0aG9yOiBLZXZpbiBPJ0Nvbm5vciA8a2V2aW5Aa29jb25ub3IubmV0
-PgpEYXRlOiAgIEZyaSBOb3YgMTAgMTI6MjA6MzUgMjAxNyAtMDUwMAoKICAgIHBhcmF2aXJ0OiBP
-bmx5IGVuYWJsZSBzZXJjb24gaW4gTk9HUkFQSElDIG1vZGUgaWYgbm8gb3RoZXIgY29uc29sZSBz
-cGVjaWZpZWQKICAgIAogICAgU2lnbmVkLW9mZi1ieTogS2V2aW4gTydDb25ub3IgPGtldmluQGtv
-Y29ubm9yLm5ldD4KCmNvbW1pdCA5Y2U2Nzc4ZjA4YzYzMmM1MmIyNWJjOGY3NTQyOTFlZjE4NzEw
-ZDUzCkF1dGhvcjogS2V2aW4gTydDb25ub3IgPGtldmluQGtvY29ubm9yLm5ldD4KRGF0ZTogICBG
-cmkgTm92IDEwIDEyOjE2OjM2IDIwMTcgLTA1MDAKCiAgICBkb2NzOiBBZGQgc2VyY29uLXBvcnQg
-dG8gUnVudGltZV9jb25maWcubWQgZG9jdW1lbnRhdGlvbgogICAgCiAgICBTaWduZWQtb2ZmLWJ5
-OiBLZXZpbiBPJ0Nvbm5vciA8a2V2aW5Aa29jb25ub3IubmV0PgoKY29tbWl0IDYzNDUxZmNhMTNj
-NzU4NzBlMTcwM2ViM2UyMDU4NGQ5MTE3OWFlYmMKQXV0aG9yOiBLZXZpbiBPJ0Nvbm5vciA8a2V2
-aW5Aa29jb25ub3IubmV0PgpEYXRlOiAgIEZyaSBOb3YgMTAgMTE6NDk6MTkgMjAxNyAtMDUwMAoK
-ICAgIGRvY3M6IE5vdGUgdjEuMTEuMCByZWxlYXNlCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEtl
-dmluIE8nQ29ubm9yIDxrZXZpbkBrb2Nvbm5vci5uZXQ+CgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7790599314317835292==
+Content-Type: multipart/alternative; boundary="f403043cc2747526950561fee3b8"
+
+--f403043cc2747526950561fee3b8
+Content-Type: text/plain; charset="UTF-8"
+
+Greeting,
+
+I am trying to modify Xen 4.8 to have it print out the opcode as well as
+some registers of an HVM domU as it runs. I tried to modify
+xen/arch/x86/hvm/emulate.c 's hvmemul_insn_fetch to output the content in
+hvmemul_ctxt->insn_buf with printk. In hvmemul_insn_fetch, it seems that a
+lot of the requested bytes are cached, does the domU's OS repeatedly calls
+the same instruction region over and over again?
+
+If xen/arch/x86/hvm/emulate.c is not the right file / function to look at,
+I was wondering if someone can point me to the correct file / functions to
+look into modifying.
+
+Lastly, I am using printk to log the opcodes. Ideally I would want the
+opcode to be written to a separate file, but I read that it is not good to
+do any file access in kernel programming. Are there other alternatives or
+util functions that I should consider using?
+
+P.S. This is a test environment, so it can be assumed that only one VM will
+be created at any given time.
+
+Best,
+Man Chon
+
+--f403043cc2747526950561fee3b8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><div><div><div>Greeting,<br><br></div>I am trying to =
+modify Xen 4.8 to have it print out the opcode as well as some registers of=
+ an HVM domU as it runs. I tried to modify xen/arch/x86/hvm/emulate.c &#39;=
+s hvmemul_insn_fetch to output the content in hvmemul_ctxt-&gt;insn_buf wit=
+h printk. In hvmemul_insn_fetch, it seems that a lot of the requested bytes=
+ are cached, does the domU&#39;s OS repeatedly calls the same instruction r=
+egion over and over again? <br></div><div><br></div><div>If xen/arch/x86/hv=
+m/emulate.c is not the right file / function to look at, I was wondering if=
+ someone can point me to the correct file / functions to look into modifyin=
+g. <br></div><div><br></div><div>Lastly, I am using printk to log the opcod=
+es. Ideally I would want the opcode to be written to a separate file, but I=
+ read that it is not good to do any file access in kernel programming. Are =
+there other alternatives or util functions that I should consider using?<br=
+></div><div><br></div>P.S. This is a test environment, so it can be assumed=
+ that only one VM will be created at any given time. <br><br></div>Best,<br=
+></div>Man Chon<br></div>
+
+--f403043cc2747526950561fee3b8--
+
+
+--===============7790599314317835292==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7790599314317835292==--
