@@ -1,19 +1,25 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: Xen Project Spectre/Meltdown FAQ
-Date: Fri, 5 Jan 2018 19:05:56 +0000
-Message-ID: <edec8de6-c678-2aa1-5c50-97533c14f8f6@citrix.com>
-References: <B3F5B430-F55E-446C-A7C5-7830F2CEDFCD@gmail.com>
- <888C1DAE-2B56-4D59-8529-D9DEA410BB9E@gmail.com>
+From: Kevin Stange <kevin@steadfast.net>
+Subject: Re: PCI Device Subtree Change from Traditional to
+ Upstream
+Date: Fri, 5 Jan 2018 14:56:16 -0600
+Message-ID: <4eb0ad8b-059e-7cb0-3523-aa499570afcd@steadfast.net>
+References: <c8ed6851-70c1-500d-5d66-1e8a6b7133c5@steadfast.net>
+ <20180103175759.GA1905@perard.uk.xensource.com>
+ <3a19395e-c52f-bbfd-5986-ba56cc10c767@steadfast.net>
+ <20180104125217.GB1905@perard.uk.xensource.com>
+ <e469d26e-5530-e759-c3a8-c9d4ff9d2479@steadfast.net>
+ <7cd695d9-860f-2322-ffdb-66fd4c2223bc@steadfast.net>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1326065759161694564=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=oku2=ea=citrix.com=prvs=536ec9109=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1eXXJd-0001iK-F0
- for xen-devel@lists.xenproject.org; Fri, 05 Jan 2018 19:06:05 +0000
-In-Reply-To: <888C1DAE-2B56-4D59-8529-D9DEA410BB9E@gmail.com>
-Content-Language: en-GB
+ <srs0=yazp=ea=steadfast.net=kevin@srs-us1.protection.inumbo.net>)
+ id 1eXZ2L-0000jC-DH
+ for xen-devel@lists.xenproject.org; Fri, 05 Jan 2018 20:56:21 +0000
+In-Reply-To: <7cd695d9-860f-2322-ffdb-66fd4c2223bc@steadfast.net>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,258 +28,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Rich Persaud <persaur@gmail.com>, Lars Kurth <lars.kurth.xen@gmail.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, George Dunlap <george.dunlap@citrix.com>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============1326065759161694564==
-Content-Type: multipart/alternative;
-	boundary="------------AFA48A2ED81F36CA70168F38"
-Content-Language: en-GB
-
---------------AFA48A2ED81F36CA70168F38
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 05/01/18 18:16, Rich Persaud wrote:
->> On Jan 5, 2018, at 06:35, Lars Kurth <lars.kurth.xen@gmail.com
->> <mailto:lars.kurth.xen@gmail.com>> wrote:
->> SP2 can be mitigated in two ways, both of which essentially prevent
->> speculative execution of indirect branches. The first is to flush the
->> branch prediction logic on entry into the hypervisor. This requires
->> microcode updates, which Intel and AMD are in the process of
->> preparing, as well as patches to the hypervisor which are also in
->> process and should be available soon.
->
-> The Linux kernel's IBRS patchset has a doc link which compares
-> retpoline, IBRS Dynamic ("opt-in") and IBRS Always On ("opt-in if more
-> paranoid").  
->
-> https://lkml.org/lkml/2018/1/4/615
->
-> https://docs.google.com/document/d/e/2PACX-1vSMrwkaoSUBAFc6Fjd19F18c1O9pudkfAY-7lGYGOTN8mc9ul-J6pWadcAaBJZcVA7W_3jlLKRtKRbd/pub
->
-> Would be nice to have that comparison for other CPU vendors.  Some
-> information is aggregated at https://github.com/marcan/speculation-bugs:
->
-> "This repo is an attempt to collect information on the class of
-> information disclosure vulnerabilities caused by CPU speculative
-> execution that were disclosed on January 3rd, 2018.  Existing
-> nomenclature is inconsistent and there is no agreed-upon name for the
-> entire class of bugs, but the names Spectre and Meltdown have been
-> used for subclasses of attacks.  This is a combination of publicly
-> available information and educated guesses/ speculation based on the
-> nature of the attacks. Pull requests with corrections or discussion
-> are welcome."
-
-Prefer the google names.  Spectre in particular is a mix of two quite
-different attack techniques.
-
->
->> Linux’s KPTI series is designed to address SP3 only.  For Xen guests,
->> only 64-bit PV guests are affected by SP3. A KPTI-like approach was
->> explored initially, but required significant ABI changes.  Instead
->> we’ve decided to go with an alternate approach, which is less
->> disruptive and less complex to implement. The chosen approach runs PV
->> guests in a PVH container, which ensures that PV guests continue to
->> behave as before, while providing the isolation that protects the
->> hypervisor from SP3. This works well for Xen 4.8 to Xen 4.10, which
->> is currently our priority.
->
-> Since PVH does not yet support PCI passthrough, are there other
-> recommended SP3 mitigations for 64-bit PV driver domains?
-
-Lock them down?  Device driver domains, even if not fully trusted, are
-going to be part of the system and therefore at least semi-TCB.
-
-If an attacker can't run code in your driver domain (and be aware of
-things like server side processing, JIT of SQL, etc as "running code"
-methods), they aren't in a position to mount an SP3 attack.
-
->  Would CPU pinning of an untrusted guest driver domain reduce its
-> ability to attack the host?
-
-All of SP1/2/3 can in principle be used to attack Xen, at which point
-you have to presume that the entire system is readable.
-
-CPU pinning can be used to prevent certain guests from sharing branch
-prediction resources, and thus prevent them from directly attacking each
-other using SP1 or SP2.
-
-However, you can't isolate Xen away from the guest, so pinning is no
-mitigation against attacks targeting Xen.
-
-> Since 32-bit PV guests are not affected by SP3, will they continue to
-> run without a PVH container, so that PCI passthrough continues to
-> function?
-
-32bit PV guests are unable to use SP3 to attack Xen, but 32bit PV guest
-userspace can still use SP3 to attack the guest kernel.
-
-~Andrew
-
---------------AFA48A2ED81F36CA70168F38
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 05/01/18 18:16, Rich Persaud wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:888C1DAE-2B56-4D59-8529-D9DEA410BB9E@gmail.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <div><span></span></div>
-      <div>
-        <div><span></span></div>
-        <div>
-          <div><span></span></div>
-          <div>
-            <blockquote type="cite"><span>On Jan 5, 2018, at 06:35, Lars
-                Kurth &lt;<a href="mailto:lars.kurth.xen@gmail.com"
-                  moz-do-not-send="true">lars.kurth.xen@gmail.com</a>&gt;
-                wrote:</span><br>
-            </blockquote>
-            <blockquote type="cite"><span>SP2 can be mitigated in two
-                ways, both of which essentially prevent speculative
-                execution of indirect branches. The first is to flush
-                the branch prediction logic on entry into the
-                hypervisor. This requires microcode updates, which Intel
-                and AMD are in the process of preparing, as well as
-                patches to the hypervisor which are also in process and
-                should be available soon.</span><br>
-            </blockquote>
-            <div><br>
-            </div>
-            <div>The Linux kernel's IBRS patchset has a doc link which
-              compares retpoline, IBRS Dynamic ("opt-in") and IBRS
-              Always On ("opt-in if more paranoid").  </div>
-            <div><br>
-            </div>
-            <div><a href="https://lkml.org/lkml/2018/1/4/615"
-                moz-do-not-send="true">https://lkml.org/lkml/2018/1/4/615</a></div>
-            <div><br>
-            </div>
-            <div><a
-href="https://docs.google.com/document/d/e/2PACX-1vSMrwkaoSUBAFc6Fjd19F18c1O9pudkfAY-7lGYGOTN8mc9ul-J6pWadcAaBJZcVA7W_3jlLKRtKRbd/pub"
-                moz-do-not-send="true">https://docs.google.com/document/d/e/2PACX-1vSMrwkaoSUBAFc6Fjd19F18c1O9pudkfAY-7lGYGOTN8mc9ul-J6pWadcAaBJZcVA7W_3jlLKRtKRbd/pub</a></div>
-            <div><br>
-            </div>
-            <div>Would be nice to have that comparison for other CPU
-              vendors.  Some information is aggregated at <a
-                href="https://github.com/marcan/speculation-bugs"
-                moz-do-not-send="true">https://github.com/marcan/speculation-bugs</a>:</div>
-            <div><br>
-            </div>
-            <div>"<span style="background-color: rgba(255, 255, 255,
-                0);">This repo is an attempt to collect information on
-                the class of information disclosure vulnerabilities
-                caused by CPU speculative execution that were disclosed
-                on January 3rd, 2018.  </span><span
-                style="background-color: rgba(255, 255, 255, 0);">Existing
-                nomenclature is inconsistent and there is no agreed-upon
-                name for the entire class of bugs, but the names Spectre
-                and Meltdown have been used for subclasses of attacks.  </span><span
-                style="background-color: rgba(255, 255, 255, 0);">This
-                is a combination of publicly available information and
-                educated guesses/ speculation based on the nature of the
-                attacks. Pull requests with corrections or discussion
-                are welcome."</span></div>
-          </div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    Prefer the google names.  Spectre in particular is a mix of two
-    quite different attack techniques.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:888C1DAE-2B56-4D59-8529-D9DEA410BB9E@gmail.com">
-      <div>
-        <div>
-          <div><br>
-            <blockquote type="cite"><span>Linux’s KPTI series is
-                designed to address SP3 only.  For Xen guests, only
-                64-bit PV guests are affected by SP3. A KPTI-like
-                approach was explored initially, but required
-                significant ABI changes.  Instead we’ve decided to go
-                with an alternate approach, which is less disruptive and
-                less complex to implement. The chosen approach runs PV
-                guests in a PVH container, which ensures that PV guests
-                continue to behave as before, while providing the
-                isolation that protects the hypervisor from SP3. This
-                works well for Xen 4.8 to Xen 4.10, which is currently
-                our priority.</span><br>
-            </blockquote>
-            <span></span>
-            <div><br>
-            </div>
-            Since PVH does not yet support PCI passthrough, are there
-            other recommended SP3 mitigations for 64-bit PV driver
-            domains?</div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    Lock them down?  Device driver domains, even if not fully trusted,
-    are going to be part of the system and therefore at least semi-TCB.<br>
-    <br>
-    If an attacker can't run code in your driver domain (and be aware of
-    things like server side processing, JIT of SQL, etc as "running
-    code" methods), they aren't in a position to mount an SP3 attack.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:888C1DAE-2B56-4D59-8529-D9DEA410BB9E@gmail.com">
-      <div>
-        <div>
-          <div>  Would CPU pinning of an untrusted guest driver domain
-            reduce its ability to attack the host?</div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    All of SP1/2/3 can in principle be used to attack Xen, at which
-    point you have to presume that the entire system is readable.<br>
-    <br>
-    CPU pinning can be used to prevent certain guests from sharing
-    branch prediction resources, and thus prevent them from directly
-    attacking each other using SP1 or SP2.<br>
-    <br>
-    However, you can't isolate Xen away from the guest, so pinning is no
-    mitigation against attacks targeting Xen.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:888C1DAE-2B56-4D59-8529-D9DEA410BB9E@gmail.com">
-      <div>
-        <div>
-          <div>Since 32-bit PV guests are not affected by SP3, will they
-            continue to run without a PVH container, so that PCI
-            passthrough continues to function?</div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    32bit PV guests are unable to use SP3 to attack Xen, but 32bit PV
-    guest userspace can still use SP3 to attack the guest kernel.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------AFA48A2ED81F36CA70168F38--
-
-
---===============1326065759161694564==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1326065759161694564==--
+T24gMDEvMDUvMjAxOCAxMToxMCBBTSwgS2V2aW4gU3RhbmdlIHdyb3RlOgo+IE9uIDAxLzA0LzIw
+MTggMDM6MTYgUE0sIEtldmluIFN0YW5nZSB3cm90ZToKPj4gT24gMDEvMDQvMjAxOCAwNjo1MiBB
+TSwgQW50aG9ueSBQRVJBUkQgd3JvdGU6Cj4+PiBPbiBXZWQsIEphbiAwMywgMjAxOCBhdCAwNTox
+MDo1NFBNIC0wNjAwLCBLZXZpbiBTdGFuZ2Ugd3JvdGU6Cj4+Pj4gT24gMDEvMDMvMjAxOCAxMTo1
+NyBBTSwgQW50aG9ueSBQRVJBUkQgd3JvdGU6Cj4+Pj4+IE9uIFdlZCwgRGVjIDIwLCAyMDE3IGF0
+IDExOjQwOjAzQU0gLTA2MDAsIEtldmluIFN0YW5nZSB3cm90ZToKPj4+Pj4+IEhpLAo+Pj4+Pj4K
+Pj4+Pj4+IEkndmUgYmVlbiB3b3JraW5nIG9uIHRyYW5zaXRpb25pbmcgYSBudW1iZXIgb2YgV2lu
+ZG93cyBndWVzdHMgdW5kZXIgSFZNCj4+Pj4+PiBmcm9tIHVzaW5nIFFFTVUgdHJhZGl0aW9uYWwg
+dG8gUUVNVSB1cHN0cmVhbSBhcyBpcyByZWNvbW1lbmRlZCBpbiB0aGUKPj4+Pj4+IGRvY3VtZW50
+YXRpb24uICBXaGVuIEkgbW92ZSB0aGVzZSBndWVzdHMsIHRoZSBQQ0kgc3VidHJlZSBmb3IgWGVu
+Cj4+Pj4+PiBkZXZpY2VzIGNoYW5nZXMgYW5kIFdpbmRvd3MgY3JlYXRlcyBhIHRvdGFsbHkgbmV3
+IGNvcHkgb2YgZWFjaCBkZXZpY2UuCj4+Pj4+PiBXaW5kb3dzIHRyYWNrcyBkb3duIHRoZSBzdG9y
+YWdlIHdpdGhvdXQgaXNzdWUsIGJ1dCBpdCB0cmVhdHMgdGhlIG5ldwo+Pj4+Pj4gaW5zdGFuY2Ug
+b2YgdGhlIE5JQyBkcml2ZXIgYXMgYSBuZXcgZGV2aWNlIGFuZCBjbGVhcnMgdGhlIG5ldHdvcmsK
+Pj4+Pj4+IGNvbmZpZ3VyYXRpb24gZXZlbiB0aG91Z2ggdGhlIE1BQyBhZGRyZXNzIGlzIHVuY2hh
+bmdlZC4gIE1hbnVhbGx5Cj4+Pj4+PiBib290aW5nIHRoZSBndWVzdCBiYWNrIG9uIHRoZSB0cmFk
+aXRpb25hbCBkZXZpY2UgbW9kZWwgcmVhY3RpdmF0ZXMgdGhlCj4+Pj4+PiBvcmlnaW5hbCBQQ0kg
+c3VidHJlZSBhbmQgdGhlIG9sZCBuZXR3b3JrIGNvbmZpZ3VyYXRpb24gd2l0aCBpdC4KPj4+Pj4+
+Cj4+Pj4+PiBUaGUgb25seSB0aGluZyB0aGF0IEkgaGF2ZSBiZWVuIGFibGUgdG8gZmluZCB0aGF0
+J3Mgc3Vic3RhbnRpYWxseQo+Pj4+Pj4gZGlmZmVyZW50IGNvbXBhcmluZyB0aGUgZGV2aWNlIHRy
+ZWVzIGlzIHRoYXQgdGhlIGRldmljZSBpbnN0YW5jZSBJRAo+Pj4+Pj4gdmFsdWVzIGRpZmZlciBv
+biB0aGUgcGFyZW50IFhlbiBQQ0kgZGV2aWNlOgo+Pj4+Pj4KPj4+Pj4+IFBDSVxWRU5fNTg1MyZE
+RVZfMDAwMSZTVUJTWVNfMDAwMTU4NTMmUkVWXzAxXDMmMjY3QTYxNkEmMyYxOAo+Pj4+Pj4KPj4+
+Pj4+IFBDSVxWRU5fNTg1MyZERVZfMDAwMSZTVUJTWVNfMDAwMTU4NTMmUkVWXzAxXDMmMjY3QTYx
+NkEmMyYxMAo+Pj4+Pj4KPj4+Pj4+IEJlc2lkZXMgYWN0dWFsbHkgc2V0dGluZyB0aGUgZ3Vlc3Qg
+dG8gYm9vdCB1c2luZyBRRU1VIHRyYWRpdGlvbmFsLCBpcwo+Pj4+Pj4gdGhlcmUgYSB3YXkgdG8g
+Y29udmluY2UgV2luZG93cyB0byB0cmVhdCB0aGVzZSBkZXZpY2VzIGFzIHRoZSBzYW1lPyAgQQo+
+Pj4+Pj4gcGF0Y2gtYmFzZWQgc29sdXRpb24gd291bGQgYmUgYWNjZXB0YWJsZSB0byBtZSBpZiB0
+aGVyZSBpcyBvbmUsIGJ1dCBJCj4+Pj4+PiBkb24ndCB1bmRlcnN0YW5kIHRoZSBjb2RlIHdlbGwg
+ZW5vdWdoIHRvIGNyZWF0ZSBteSBvd24gc29sdXRpb24uCj4+Pj4+Cj4+Pj4+IEhpIEtldmluLAo+
+Pj4+Pgo+Pj4+PiBJJ3ZlIGdvdCBhIHBhdGNoIHRvIFFFTVUgdGhhdCBzZWVtcyB0byBkbyB0aGUg
+dHJpY2s6Cj4+Pj4+Cj4+Pj4+IEZyb206IEFudGhvbnkgUEVSQVJEIDxhbnRob255LnBlcmFyZEBj
+aXRyaXguY29tPgo+Pj4+PiBTdWJqZWN0OiBbUEFUQ0hdIHhlbi1wbGF0Zm9ybTogSGFyZGNvZGUg
+UENJIHNsb3QgdG8gMwo+Pj4+Pgo+Pj4+PiBTaWduZWQtb2ZmLWJ5OiBBbnRob255IFBFUkFSRCA8
+YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KPj4+Pj4gLS0tCj4+Pj4+ICBody9pMzg2L3BjX3Bp
+aXguYyB8IDIgKy0KPj4+Pj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxl
+dGlvbigtKQo+Pj4+Pgo+Pj4+PiBkaWZmIC0tZ2l0IGEvaHcvaTM4Ni9wY19waWl4LmMgYi9ody9p
+Mzg2L3BjX3BpaXguYwo+Pj4+PiBpbmRleCA1ZTQ3NTI4OTkzLi45M2UzYTlhOTE2IDEwMDY0NAo+
+Pj4+PiAtLS0gYS9ody9pMzg2L3BjX3BpaXguYwo+Pj4+PiArKysgYi9ody9pMzg2L3BjX3BpaXgu
+Ywo+Pj4+PiBAQCAtNDA1LDcgKzQwNSw3IEBAIHN0YXRpYyB2b2lkIHBjX3hlbl9odm1faW5pdChN
+YWNoaW5lU3RhdGUgKm1hY2hpbmUpCj4+Pj4+ICAKPj4+Pj4gICAgICBidXMgPSBwY2lfZmluZF9w
+cmltYXJ5X2J1cygpOwo+Pj4+PiAgICAgIGlmIChidXMgIT0gTlVMTCkgewo+Pj4+PiAtICAgICAg
+ICBwY2lfY3JlYXRlX3NpbXBsZShidXMsIC0xLCAieGVuLXBsYXRmb3JtIik7Cj4+Pj4+ICsgICAg
+ICAgIHBjaV9jcmVhdGVfc2ltcGxlKGJ1cywgUENJX0RFVkZOKDMsIDApLCAieGVuLXBsYXRmb3Jt
+Iik7Cj4+Pj4+ICAgICAgfQo+Pj4+PiAgfQo+Pj4+PiAgI2VuZGlmCj4+Pj4+Cj4+Pj4+Cj4+Pj4+
+IFRoZSBzYW1lIHRoaW5nIGNvdWxkIGJlIGRvbmUgYnkgbGlieGwsIGJ5IHByb3ZpZGluZyBzcGVj
+aWZpYyBjb21tYW5kCj4+Pj4+IGxpbmUgb3B0aW9ucyB0byBxZW11LiAoSSB0aGluayB0aGF0IGNv
+dWxkIGV2ZW4gYmUgZG9uZSB2aWEgYSBkaWZmZXJlbnQKPj4+Pj4gY29uZmlnIGZpbGUgZm9yIHRo
+ZSBndWVzdC4pCj4+Pj4KPj4+PiBUaGlzIHBhdGNoIGRvZXNuJ3Qgc2VlbSB0byB3b3JrIGZvciBt
+ZS4gIEl0IHNlZW1zIGxpa2UgdGhlIGRldmljZSBtb2RlbAo+Pj4+IHByb2Nlc3MgaXMgZXhpdGlu
+ZyBpbW1lZGlhdGVseSwgYnV0IEkgaGF2ZW4ndCBiZWVuIGFibGUgdG8gZmluZCBhbnkKPj4+PiBp
+bmZvcm1hdGlvbiBhcyB0byB3aGF0IGlzIGdvaW5nIHdyb25nLiAgSSB0ZXN0ZWQgd2l0aCBYZW4g
+NC42LjYgYW5kIHRoZQo+Pj4+IFFFTVUgcGFja2FnZWQgd2l0aCB0aGF0IHJlbGVhc2UuICBTaG91
+bGQgSSB0cnkgaXQgb24gYSBkaWZmZXJlbnQgdmVyc2lvbgo+Pj4+IG9mIFhlbiBhbmQgUUVNVT8K
+Pj4+Cj4+PiBXaGF0IHRoaXMgcGF0Y2ggZG9lcyBpcyBhc2tpbmcgUUVNVSB0byBpbnNlcnQgdGhl
+IFBDSSBjYXJkCj4+PiAieGVuLXBsYXRmb3JtIiBpbnRvIHRoZSAzcmQgUENJIHNsb3QuIE15IGd1
+ZXNzIGlzIHRoYXQgZmFpbGVkIGJlY2F1c2UKPj4+IHRoZXJlIGlzIGFscmVhZHkgYSBQQ0kgZGV2
+aWNlIHRoZXJlLgo+Pj4KPj4+IFlvdSBjb3VsZCBjaGVjayBxZW11J3MgbG9ncywgaXQncyBpbgo+
+Pj4gL3Zhci9sb2cveGVuL3FlbXUtZG0tJHtndWVzdF9uYW1lfS5sb2cKPj4KPj4gVGhlIGxvZyBm
+aWxlIGluIHF1ZXN0aW9uIG9ubHkgc2F5czoKPj4KPj4gcWVtdTogdGVybWluYXRpbmcgb24gc2ln
+bmFsIDEgZnJvbSBwaWQgODg2NQo+Pgo+Pj4gTGV0J3MgdHJ5IHNvbWV0aGluZyBlbHNlLCBpbnN0
+ZWFkIG9mIHBhdGNoaW5nIFFFTVUsIHdlIGNhbiBwYXRjaCBsaWJ4bCwKPj4+IHRoYXQgbWlnaHQg
+d29yayBiZXR0ZXIuIENhbiB5b3UgdHJ5IHRoaXMgcGF0Y2g/IChJJ3ZlIG9ubHkgdGVzdAo+Pj4g
+Y29tcGlsZWQuKSBJJ3ZlIHdyaXRlIHRoZSBwYXRjaCBmb3IgWGVuIDQuNiwgc2luY2UgdGhhdCB0
+aGUgdmVyc2lvbiB5b3UKPj4+IGFyZSB1c2luZy4KPj4KPj4gVGhpcyBpc24ndCBkb2luZyB0aGUg
+dHJpY2sgZWl0aGVyLCB3aXRoIHRoZSBzYW1lIG1pc2JlaGF2aW9yLiBUaGUgbG9nCj4+IGZpbGUg
+aXMgdGhlIHNhbWUgaW4gYm90aCBjYXNlcy4KPiAKPiBJJ20gZ2V0dGluZyBjb25mdXNpbmcgYmVo
+YXZpb3IgaGVyZS4gSSB0cmllZCB0byBib290IGEgZ3Vlc3QgdXNpbmcgYQo+IGJ1aWxkIHdpdGgg
+dGhlIHNlY29uZCBwYXRjaCBhbmQgYmVoYXZlcyB0aGUgd2F5IHRoZSBmaXJzdCBvbmUgZGlkLCB3
+aXRoCj4gdGhlIHFlbXUtc3lzdGVtLWkzODYgcHJvY2VzcyBleGl0aW5nIGFuZCBwcmV2ZW50aW5n
+IHRoZSBndWVzdCBmcm9tIGV2ZXIKPiBib290aW5nLiAgSG93ZXZlciwgSSB0cmllZCB0byBkb3du
+Z3JhZGUgdGhlIHBhY2thZ2VzIHRvIGNvbXBsZXRlbHkKPiB1bnBhdGNoZWQgdmVyc2lvbiBpbiBw
+cmVwYXJhdGlvbiB0byByZWJvb3QgYWdhaW4gYW5kIG9uY2UgdGhlIG9sZGVyIGNvcHkKPiBvZiB0
+aGUgcnVudGltZSBpcyBpbnN0YWxsZWQsIHRoZSBxZW11LXN5c3RlbS1pMzg2IHN0YXJ0cyBwcm9w
+ZXJseSB1c2luZwo+IHRoZSBjb21tYW5kIGxpbmUgYXJndW1lbnRzIHRoYXQgbGlieGwgaGFkIHNw
+ZWNpZmllZCBhbmQgdGhlIHN5c3RlbSBjb21lcwo+IHVwIHdpdGggdGhlIGNvcnJlY3QgUENJIHN1
+YnRyZWUuCj4gCj4gVGhpcyBsZWFkcyBtZSB0byBiZWxpZXZlIHNvbWV0aGluZyBhYm91dCBteSBi
+dWlsZCBpcyBzY3Jld2VkIHVwIHNvbWVob3cKPiBzdWNoIHRoYXQgbXkgcWVtdS1zeXN0ZW0taTM4
+NiBpcyBicm9rZW4uICBJJ20gcXVpdGUgc3VyZSBJJ20gbm90Cj4gYXBwbHlpbmcgYW55IGV4dHJh
+IHBhdGNoZXMgdG8gaXQgdGhhdCB3ZXJlbid0IG90aGVyd2lzZSBpbiB0aGUgQ2VudE9TCj4gdmly
+dCBwYWNrYWdlcy4KCkdlb3JnZSBwb2ludGVkIG1lIGF0IHRoZSBmYWN0IEkgaGFkIGZhaWxlZCB0
+byBwdWxsIGluIHRoZSBzZWFiaW9zCnBhY2thZ2UgZnJvbSBDZW50T1MgdmlydC4gIFRoZSB2ZXJz
+aW9uIGZyb20gUkhFTCBpcyBicm9rZW4gYW5kIHRoYXQgd2FzCm15IGlzc3VlLiAgU29ycnkgZm9y
+IGdlbmVyYXRpbmcgZXh0cmEgbm9pc2UgYXMgYSByZXN1bHQuCgpJIGNhbiBjb25maXJtIHRoYXQg
+cGF0Y2ggMiAoYW5kIHByb2JhYmx5IHBhdGNoIDEsIHJlYWxseSkgd29yayBhcm91bmQKdGhlIGlz
+c3VlIGZvciBtZS4gIFRoYW5rIHlvdSBmb3IgdGhlIGhlbHAhCgpJdCB3b3VsZCBiZSBuaWNlIGlm
+IHRoZXJlIHdhcyBhIHdheSB0byBzZXQgZGVmYXVsdCBvciBvdmVycmlkZSBvcHRpb25zCnRvIGRv
+bWFpbnMgZnJvbSBhIGNvbmZpZ3VyYXRpb24gZmlsZSB0aGF0IGlzIHJlYWQgYnkgbGlieGwsIHFl
+bXUsIG9yCmxpYnZpcnQgYnV0IEkgc2VlIG5vIGNvZGUgb3IgZG9jdW1lbnRhdGlvbiB0byBzdXBw
+b3J0IHRoYXQgcmlnaHQgbm93LgoKLS0gCktldmluIFN0YW5nZQpDaGllZiBUZWNobm9sb2d5IE9m
+ZmljZXIKU3RlYWRmYXN0IHwgTWFuYWdlZCBJbmZyYXN0cnVjdHVyZSwgRGF0YWNlbnRlciBhbmQg
+Q2xvdWQgU2VydmljZXMKODAwIFMgV2VsbHMsIFN1aXRlIDE5MCB8IENoaWNhZ28sIElMIDYwNjA3
+CjMxMi42MDIuMjY4OSBYMjAzIHwgRmF4OiAzMTIuNjAyLjI2ODgKa2V2aW5Ac3RlYWRmYXN0Lm5l
+dCB8IHd3dy5zdGVhZGZhc3QubmV0CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
