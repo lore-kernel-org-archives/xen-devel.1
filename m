@@ -1,20 +1,11 @@
-From: Man Chon Kuok <manchonkuok@gmail.com>
-Subject: Re: Dynamic Disassembling domU Instructions
-Date: Fri, 5 Jan 2018 14:34:00 -1000
-Message-ID: <CAJnNCGMo7GOFi90t+Th30b71Jiq2gpFdd_1Ks1wKE-Q6vvVq_w@mail.gmail.com>
-References: <CAJnNCGMXY6+pGrp+Vb7nxucKGZxyrZPS8SDRsZNCv0Njw+YYiA@mail.gmail.com>
- <5A4F558C020000780019B4AC@prv-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [qemu-mainline test] 117633: regressions - trouble:
+	broken/fail/pass
+Date: Sat, 06 Jan 2018 01:16:08 +0000
+Message-ID: <osstest-117633-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6957707367474030089=="
+Content-Type: multipart/mixed; boundary="===============2860847679583767688=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=0vun=eb=gmail.com=manchonkuok@srs-us1.protection.inumbo.net>)
- id 1eXcR1-0007wN-KW
- for xen-devel@lists.xenproject.org; Sat, 06 Jan 2018 00:34:03 +0000
-Received: by mail-io0-x231.google.com with SMTP id z130so7468455ioe.13
- for <xen-devel@lists.xenproject.org>; Fri, 05 Jan 2018 16:34:01 -0800 (PST)
-In-Reply-To: <5A4F558C020000780019B4AC@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,114 +14,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============6957707367474030089==
-Content-Type: multipart/alternative; boundary="001a1144758cb35d3d056210b80e"
+--===============2860847679583767688==
+Content-Type: text/plain
 
---001a1144758cb35d3d056210b80e
-Content-Type: text/plain; charset="UTF-8"
+flight 117633 qemu-mainline real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117633/
 
-Hi Jan,
+Regressions :-(
 
-Thank you for the insight. That explains a lot of the repeated cached
-instruction fetching.
-This might belong to another thread, I was exploring xentrace, ran it with
-"sudo xentrace output", but it returns the message of "ERROR: Failed to map
-cpu buffer! (13 = Permission denied)", even running as root. Googled around
-but nothing insightful showed up, any suggestion would be appreciated.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-libvirt-xsm    <job status>                 broken
+ test-amd64-amd64-libvirt-vhd    <job status>                 broken
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm <job status> broken in 117590
+ test-amd64-amd64-xl-xsm         <job status>                 broken  in 117590
+ test-amd64-amd64-xl             <job status>                 broken  in 117590
+ test-amd64-i386-xl-qemuu-debianhvm-amd64    <job status>      broken in 117590
+ test-armhf-armhf-xl-credit2 16 guest-start/debian.repeat fail REGR. vs. 117335
 
-Best,
+Tests which are failing intermittently (not blocking):
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 4 host-install(4) broken in 117590 pass in 117633
+ test-amd64-amd64-xl-xsm      4 host-install(4) broken in 117590 pass in 117633
+ test-amd64-i386-xl-qemuu-debianhvm-amd64 4 host-install(4) broken in 117590 pass in 117633
+ test-amd64-amd64-xl          4 host-install(4) broken in 117590 pass in 117633
+ test-amd64-amd64-libvirt-xsm  4 host-install(4)          broken pass in 117590
+ test-amd64-amd64-libvirt-vhd  4 host-install(4)          broken pass in 117590
+ test-armhf-armhf-xl-rtds 16 guest-start/debian.repeat fail in 117590 pass in 117633
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check fail in 117590 never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check fail in 117590 never pass
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 117335
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 117335
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 117335
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 117335
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 117335
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 117335
+ test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop              fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+
+version targeted for testing:
+ qemuu                281f327487c9c9b1599f93c589a408bbf4a651b8
+baseline version:
+ qemuu                eaefea537b476cb853e2edbdc68e969ec777e4bb
+
+Last test of basis   117335  2017-12-19 12:50:51 Z   17 days
+Testing same since   117534  2018-01-02 17:34:07 Z    3 days    3 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Alex Bennée <alex.bennee@linaro.org>
+  Aurelien Jarno <aurelien@aurel32.net>
+  Chen Hanxiao <chenhanxiao@gmail.com>
+  Cornelia Huck <cohuck@redhat.com>
+  Daniel Henrique Barboza <danielhb@linux.vnet.ibm.com>
+  Daniel P. Berrange <berrange@redhat.com>
+  David Hildenbrand <david@redhat.com>
+  Doug Gale <doug16k@gmail.com>
+  Dr. David Alan Gilbert <dgilbert@redhat.com>
+  Evgeny Yakovlev <eyakovlev@virtuozzo.com>
+  Fam Zheng <famz@redhat.com>
+  Jeff Cody <jcody@redhat.com>
+  John Snow <jsnow@redhat.com>
+  Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
+  Laurent Vivier <laurent@vivier.eu>
+  linzhecheng <linzhecheng@huawei.com>
+  Mao Zhongyi <maozy.fnst@cn.fujitsu.com>
+  Marc-André Lureau <marcandre.lureau@redhat.com>
+  Mark Kanda <mark.kanda@oracle.com>
+  Markus Armbruster <armbru@redhat.com>
+  Namhyung Kim <namhyung@gmail.com>
+  Paolo Bonzini <pbonzini@redhat.com>
+  Peter Lieven <pl@kamp.de>
+  Peter Maydell <peter.maydell@linaro.org>
+  Peter Xu <peterx@redhat.com>
+  Philippe Mathieu-Daudé <f4bug@amsat.org>
+  Richard Henderson <rth@twiddle.net>
+  Roman Kagan <rkagan@virtuozzo.com>
+  Samuel Thibault <samuel.thibault@ens-lyon.org>
+  Stefan Berger <stefanb@linux.vnet.ibm.com>
+  Stefan Hajnoczi <stefanha@redhat.com>
+  Stefan Weil <sw@weilnetz.de>
+  Thomas Huth <thuth@redhat.com>
+  Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+  Yang Zhong <yang.zhong@intel.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 broken  
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  fail    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-amd64-amd64-libvirt-vhd                                 broken  
+ test-armhf-armhf-xl-vhd                                      pass    
 
 
-On Thu, Jan 4, 2018 at 11:38 PM, Jan Beulich <JBeulich@suse.com> wrote:
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-> >>> On 05.01.18 at 04:17, <manchonkuok@gmail.com> wrote:
-> > I am trying to modify Xen 4.8 to have it print out the opcode as well as
-> > some registers of an HVM domU as it runs. I tried to modify
-> > xen/arch/x86/hvm/emulate.c 's hvmemul_insn_fetch to output the content in
-> > hvmemul_ctxt->insn_buf with printk. In hvmemul_insn_fetch, it seems that
-> a
-> > lot of the requested bytes are cached, does the domU's OS repeatedly
-> calls
-> > the same instruction region over and over again?
->
-> No, but certain operations require going through the emulator
-> twice (e.g. once to formulate a request to qemu, and a second
-> time to process its response). It would be wrong to read guest
-> memory a second time in such a case.
->
-> You will also notice that after a completed emulation that cache
-> is being invalidated.
->
-> > Lastly, I am using printk to log the opcodes. Ideally I would want the
-> > opcode to be written to a separate file, but I read that it is not good
-> to
-> > do any file access in kernel programming. Are there other alternatives or
-> > util functions that I should consider using?
->
-> xentrace would come to mind.
->
-> Jan
->
->
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
---001a1144758cb35d3d056210b80e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-<div dir=3D"ltr"><div><div><div>Hi Jan,<br><br></div>Thank you for the insi=
-ght. That explains a lot of the repeated cached instruction fetching.<br></=
-div>This might belong to another thread, I was exploring xentrace, ran it w=
-ith &quot;sudo xentrace output&quot;, but it returns the message of &quot;E=
-RROR: Failed to map cpu buffer! (13 =3D Permission denied)&quot;, even runn=
-ing as root. Googled around but nothing insightful showed up, any suggestio=
-n would be appreciated.<br><br></div>Best,<br><br></div><div class=3D"gmail=
-_extra"><br><div class=3D"gmail_quote">On Thu, Jan 4, 2018 at 11:38 PM, Jan=
- Beulich <span dir=3D"ltr">&lt;<a href=3D"mailto:JBeulich@suse.com" target=
-=3D"_blank">JBeulich@suse.com</a>&gt;</span> wrote:<br><blockquote class=3D=
-"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding=
--left:1ex"><span class=3D"">&gt;&gt;&gt; On 05.01.18 at 04:17, &lt;<a href=
-=3D"mailto:manchonkuok@gmail.com">manchonkuok@gmail.com</a>&gt; wrote:<br>
-&gt; I am trying to modify Xen 4.8 to have it print out the opcode as well =
-as<br>
-&gt; some registers of an HVM domU as it runs. I tried to modify<br>
-&gt; xen/arch/x86/hvm/emulate.c &#39;s hvmemul_insn_fetch to output the con=
-tent in<br>
-&gt; hvmemul_ctxt-&gt;insn_buf with printk. In hvmemul_insn_fetch, it seems=
- that a<br>
-&gt; lot of the requested bytes are cached, does the domU&#39;s OS repeated=
-ly calls<br>
-&gt; the same instruction region over and over again?<br>
-<br>
-</span>No, but certain operations require going through the emulator<br>
-twice (e.g. once to formulate a request to qemu, and a second<br>
-time to process its response). It would be wrong to read guest<br>
-memory a second time in such a case.<br>
-<br>
-You will also notice that after a completed emulation that cache<br>
-is being invalidated.<br>
-<span class=3D""><br>
-&gt; Lastly, I am using printk to log the opcodes. Ideally I would want the=
-<br>
-&gt; opcode to be written to a separate file, but I read that it is not goo=
-d to<br>
-&gt; do any file access in kernel programming. Are there other alternatives=
- or<br>
-&gt; util functions that I should consider using?<br>
-<br>
-</span>xentrace would come to mind.<br>
-<span class=3D"HOEnZb"><font color=3D"#888888"><br>
-Jan<br>
-<br>
-</font></span></blockquote></div><br></div>
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
---001a1144758cb35d3d056210b80e--
+broken-job test-amd64-amd64-libvirt-xsm broken
+broken-job test-amd64-amd64-libvirt-vhd broken
+broken-step test-amd64-amd64-libvirt-xsm host-install(4)
+broken-step test-amd64-amd64-libvirt-vhd host-install(4)
+broken-job test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm broken
+broken-job test-amd64-amd64-xl-xsm broken
+broken-job test-amd64-amd64-xl broken
+broken-job test-amd64-i386-xl-qemuu-debianhvm-amd64 broken
+
+Not pushing.
+
+(No revision log; it would be 2401 lines long.)
 
 
---===============6957707367474030089==
+--===============2860847679583767688==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -140,4 +254,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============6957707367474030089==--
+--===============2860847679583767688==--
