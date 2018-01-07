@@ -1,9 +1,12 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 117698: all pass - PUSHED
-Date: Sun, 07 Jan 2018 10:08:50 +0000
-Message-ID: <osstest-117698-mainreport@xen.org>
+From: Martin Cerveny <martin@c-home.cz>
+Subject: [BUG] unable to shutdown (page fault in
+ mwait_idle()/do_dbs_timer()/__find_next_bit()) (fwd)
+Date: Sun, 7 Jan 2018 13:34:05 +0100 (CET)
+Message-ID: <alpine.GSO.2.00.1801071253201.12024@dmz.c-home.cz>
+Reply-To: Martin Cerveny <M.Cerveny@computer.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3661788910101754466=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -13,75 +16,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: xen-devel@lists.xensource.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============3661788910101754466==
-Content-Type: text/plain
-
-flight 117698 xen-unstable-coverity real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/117698/
-
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xen                  2d1c82261d966735e82e5971eddb63ba3c565a37
-baseline version:
- xen                  971d299c04df379734d10c44d637433e9e564f36
-
-Last test of basis   117598  2018-01-03 09:21:56 Z    4 days
-Testing same since   117698  2018-01-07 09:19:02 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Alexandru Isaila <aisaila@bitdefender.com>
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Andrew Morton <akpm@linux-foundation.org>
-  David Woodhouse <David.Woodhouse@intel.com>
-  Jan Beulich <jbeulich@suse.com>
-  Linus Torvalds <torvalds@linux-foundation.org>
-  Michel Lespinasse <walken@google.com>
-  Praveen Kumar <kpraveen.lkml@gmail.com>
-  Rik van Riel <riel@redhat.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Tamas K Lengyel <tamas@tklengyel.com>
-  Wei Liu <wei.liu2@citrix.com>
-  Wei Yang <weiyang@linux.vnet.ibm.com>
-
-jobs:
- coverity-amd64                                               pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   971d299c04..2d1c82261d  2d1c82261d966735e82e5971eddb63ba3c565a37 -> coverity-tested/smoke
-
-
---===============3661788910101754466==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3661788910101754466==--
+SGVsbG8uCgpJIGNhbm5vdCBzaHV0ZG93biBYRU40LjEwLjAgKHByb2JhYmlsaXR5IDEwJSkgd2l0
+aCBjcmFzaCBkdXJpbmcgIlByZXBhcmluZyBzeXN0ZW0gZm9yIEFDUEkgUzUgc3RhdGUuIgpAeGVu
+LXVzZXJzIHJlY29tZW5kcyB0byBidWdyZXBvcnQuCgotIGRvbTAgLSA0LjEzLjktMzAwLmZjMjcu
+eDg2XzY0Ci0gaHcgLSBzdXBlcm1pY3JvL1g5RFIzLUYvQ1BVIEU1LTI2MjAKCktub3duIHByb2Js
+ZW0gPwpIb3cgdG8gZml4IGl0ID8KClRoYW5rcywgTWFydGluCgotLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0KClsgMTM2OS40Njg4NjFdIEFDUEk6IFByZXBhcmluZyB0byBlbnRlciBzeXN0ZW0gc2xlZXAg
+c3RhdGUgUzVeTQpbIDEzNjkuNTE2MDYxXSByZWJvb3Q6IFBvd2VyIGRvd25eTQooWEVOKSBQcmVw
+YXJpbmcgc3lzdGVtIGZvciBBQ1BJIFM1IHN0YXRlLgooWEVOKSBEaXNhYmxpbmcgbm9uLWJvb3Qg
+Q1BVcyAuLi4KKFhFTikgQnJva2UgYWZmaW5pdHkgZm9yIGlycSAxMzkKKFhFTikgQnJva2UgYWZm
+aW5pdHkgZm9yIGlycSAxNDAKKFhFTikgQnJva2UgYWZmaW5pdHkgZm9yIGlycSA4MwooWEVOKSBC
+cm9rZSBhZmZpbml0eSBmb3IgaXJxIDE0MQooWEVOKSBCcm9rZSBhZmZpbml0eSBmb3IgaXJxIDEz
+OAooWEVOKSAtLS0tWyBYZW4tNC4xMC4wLXZncHUgIHg4Nl82NCAgZGVidWc9biAgIE5vdCB0YWlu
+dGVkIF0tLS0tCihYRU4pIENQVTogICAgMjMKKFhFTikgUklQOiAgICBlMDA4Ols8ZmZmZjgyZDA4
+MDI2YWU2MD5dIF9fZmluZF9uZXh0X2JpdCsweDEwLzB4ODAKKFhFTikgUkZMQUdTOiAwMDAwMDAw
+MDAwMDEwMjA2ICAgQ09OVEVYVDogaHlwZXJ2aXNvcgooWEVOKSByYXg6IDAwMDAwMDAwMDAwMDAw
+MDAgICByYng6IGZmZmY4MzA4NzlkYjA0MDAgICByY3g6IDAwMDAwMDAwMDAwMDAwMTgKKFhFTikg
+cmR4OiAwMDAwMDAwMDAwMDAwMDE4ICAgcnNpOiAwMDAwMDAwMDAwMDAwMDE4ICAgcmRpOiAwMDAw
+MDAwMDAwMDAwMDAwCihYRU4pIHJicDogMDAwMDAwMDAwNjFiZTY1YyAgIHJzcDogZmZmZjgzMTA0
+ZWFhZmRkOCAgIHI4OiAgMDAwMDAwMDAwMDAwMDAxOAooWEVOKSByOTogIGZmZmY4MzA4NzlkYjZk
+NzAgICByMTA6IGZmZmY4MzA4NzlkYjI4ZTggICByMTE6IDAwMDAwMTQxNjFhZWNiZjEKKFhFTikg
+cjEyOiAwMDAwMDAwMDAwMDAwMDAwICAgcjEzOiBmZmZmODMwODc4OGNlZjgwICAgcjE0OiBmZmZm
+ODJkMDgwNTYxNGUwCihYRU4pIHIxNTogMDAwMDAwMDAwMDAwMDAxNyAgIGNyMDogMDAwMDAwMDA4
+MDA1MDAzYiAgIGNyNDogMDAwMDAwMDAwMDE1MjZlMAooWEVOKSBjcjM6IDAwMDAwMDAwN2RhMmYw
+MDAgICBjcjI6IDAwMDAwMDAwMDAwMDAwMDAKKFhFTikgZnNiOiAwMDAwMDAwMDAwMDAwMDAwICAg
+Z3NiOiAwMDAwMDAwMDAwMDAwMDAwICAgZ3NzOiAwMDAwMDAwMDAwMDAwMDAwCihYRU4pIGRzOiAw
+MDAwICAgZXM6IDAwMDAgICBmczogMDAwMCAgIGdzOiAwMDAwICAgc3M6IDAwMDAgICBjczogZTAw
+OAooWEVOKSBYZW4gY29kZSBhcm91bmQgPGZmZmY4MmQwODAyNmFlNjA+IChfX2ZpbmRfbmV4dF9i
+aXQrMHgxMC8weDgwKToKKFhFTikgIGUxIDNmIDQ4IDhkIDNjIGM3IDc0IDI1IDw0Yz4gOGIgMGYg
+NDEgYjggNDAgMDAgMDAgMDAgNDEgMjkgYzggNDkgZDMgZTkgNDkKKFhFTikgWGVuIHN0YWNrIHRy
+YWNlIGZyb20gcnNwPWZmZmY4MzEwNGVhYWZkZDg6CihYRU4pICAgIGZmZmY4MmQwODAyNTMxODAg
+MDAwMDAwMDAwMDAwMDAxNyBmZmZmODMwODAwMDAwMDE4IGZmZmY4MmQwODA1NzczODAKKFhFTikg
+ICAgMDAyMDBmMDg3OWRiNmQ5OCAwMDAwMDE0MTVmZjdiNjZkIDAwMDAwMDAwMDAwMDAwMDQgZmZm
+ZjgzMDg3OWRiNmU0MAooWEVOKSAgICBmZmZmODJkMDgwNTRhYzgwIDAwMDAwMTQxNWZmN2I2NmQg
+MDAwMDAwMDAwMDAwMDAxNyAwMDAwMDAwMDAwMDAwMDE3CihYRU4pICAgIGZmZmY4MmQwODAyYzdj
+MGUgZmZmZjgzMDg3OWRiMDMwMCAwMDAwMDE0MTVhMDFmODJkIGZmZmY4MzA4NzlkYjZlZjgKKFhF
+TikgICAgMDAwMDAwMjAwMDAwMDAwOCAwMDAwMTIzNDAwMDAxNTJlIDAwMDAwMDAwMDAwMDAwMDAg
+MDAwMDAwMDAwMDAwMDAwMAooWEVOKSAgICAwMDAwMDAxOTAwMDAwMDAxIGZmZmY4MmUwMjhjNGIz
+MDAgZmZmZjgyMDAwMDA3ZmZmZiBmZmZmODJkMDgwNTUyYzgwCihYRU4pICAgIGZmZmY4MmQwODA1
+NGI4MDAgZmZmZjgyZDA4MDU3NzFmMCAwMDAwMDAwMDAwMDAwMDE3IDAwMDAwMDAwMDAwMDAwMTcK
+KFhFTikgICAgZmZmZjgyZDA4MDU2MTRlMCBmZmZmODJkMDgwNDIwZTgwIGZmZmY4MmQwODAyNmZh
+NTYgMDAwMDAwZmQwMDAwMDAwMAooWEVOKSAgICBmZmZmODMxMDRlYWFmZmZmIGZmZmY4MzAwN2Rk
+ZjUwMDAgZmZmZjgzMDA3ZGRmNTAwMCBmZmZmODMwMDdkZGY1MDAwCihYRU4pICAgIGZmZmY4MzA4
+NzlkYjAxODAgZmZmZjgzMDg3OWRiMDE4OCAwMDAwMDE0MTVhMDBkZjRiIGZmZmY4MmQwODA1NjE0
+ZTAKKFhFTikgICAgMDAwMDAwMDAwMDAwMDAwMiAwMDAwMDAwMDAwMDA4MDAwIDAwMDAwMDAwMDAw
+MDAwMDQgMDAwMDAwMDAwMDAwMDAwMAooWEVOKSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAw
+MDAwMDAwNTAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwCihYRU4pICAgIDAwMDAw
+MDAwMDAwMDAyMDMgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAyMDAxIDAwMDAwMDAwMDAw
+MDAwMDEKKFhFTikgICAgMDAwMDAwMDAwMDAwYjAwNCAwMDAwMDAwMDAwMDBiMDAwIDAwMDAwMDAw
+MDAwMGIwMDAgMDAwMDAwZmEwMDAwMDAwMAooWEVOKSAgICBmZmZmZjgwMDAyYTA5MTBjIDAwMDAw
+MDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMiBmZmZmZjg4MDAyZmZiODQwCihYRU4pICAgIDAw
+MDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAw
+MDAwMDAwMDAKKFhFTikgICAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDE3IGZmZmY4
+MzAwN2RkZjUwMDAgMDAwMDAwMzdmOTgzOTA4MAooWEVOKSAgICAwMDAwMDAwMDAwMTUyNmUwCihY
+RU4pIFhlbiBjYWxsIHRyYWNlOgooWEVOKSAgICBbPGZmZmY4MmQwODAyNmFlNjA+XSBfX2ZpbmRf
+bmV4dF9iaXQrMHgxMC8weDgwCihYRU4pICAgIFs8ZmZmZjgyZDA4MDI1MzE4MD5dIGNwdWZyZXFf
+b25kZW1hbmQuYyNkb19kYnNfdGltZXIrMHgxNjAvMHgyMjAKKFhFTikgICAgWzxmZmZmODJkMDgw
+MmM3YzBlPl0gbXdhaXQtaWRsZS5jI213YWl0X2lkbGUrMHgyM2UvMHgzNDAKKFhFTikgICAgWzxm
+ZmZmODJkMDgwMjZmYTU2Pl0gZG9tYWluLmMjaWRsZV9sb29wKzB4ODYvMHhjMAooWEVOKQooWEVO
+KSBQYWdldGFibGUgd2FsayBmcm9tIDAwMDAwMDAwMDAwMDAwMDA6CihYRU4pICBMNFsweDAwMF0g
+PSAwMDAwMDAwODdmZmViMDYzIGZmZmZmZmZmZmZmZmZmZmYKKFhFTikgIEwzWzB4MDAwXSA9IDAw
+MDAwMDA4N2ZmZWEwNjMgZmZmZmZmZmZmZmZmZmZmZgooWEVOKSAgTDJbMHgwMDBdID0gMDAwMDAw
+MDg3ZmZlOTA2MyBmZmZmZmZmZmZmZmZmZmZmCihYRU4pICBMMVsweDAwMF0gPSAwMDAwMDAwMDAw
+MDAwMDAwIGZmZmZmZmZmZmZmZmZmZmYKKFhFTikKKFhFTikgKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKgooWEVOKSBQYW5pYyBvbiBDUFUgMjM6CihYRU4pIEZBVEFMIFBB
+R0UgRkFVTFQKKFhFTikgW2Vycm9yX2NvZGU9MDAwMF0KKFhFTikgRmF1bHRpbmcgbGluZWFyIGFk
+ZHJlc3M6IDAwMDAwMDAwMDAwMDAwMDAKKFhFTikgKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKgooWEVOKQooWEVOKSBSZWJvb3QgaW4gZml2ZSBzZWNvbmRzLi4uCihYRU4p
+IFJlc2V0dGluZyB3aXRoIEFDUEkgTUVNT1JZIG9yIEkvTyBSRVNFVF9SRUcuCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
