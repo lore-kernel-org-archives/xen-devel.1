@@ -1,27 +1,21 @@
-From: 'Christoph Moench-Tegeder' <cmt@burggraben.net>
-Subject: Re: [BUG] kernel bug encountered at
- drivers/net/xen-netback/netback.c:430!
-Date: Sun, 7 Jan 2018 23:19:05 +0100
-Message-ID: <20180107221904.GA78680@elch.exwg.net>
-References: <5a3ca8ee.4426620a.b956d.1799@mx.google.com>
- <352b0317-cfc5-1ef4-fbd0-2b2879f9712e@suse.com>
- <5a3d6c93.886f620a.2522d.c2fb@mx.google.com>
- <23eb0f3f-590d-f03a-f971-65e86c52fbe4@ark-net.org>
- <5a4546b1.55da620a.5c435.4b4b@mx.google.com>
- <3f860d32831940e7aa40d97979155b6e@AMSPEX02CL03.citrite.net>
- <20180103203337.GA79570@elch.exwg.net>
- <3104994914c94a26baed6195f486c03f@AMSPEX02CL03.citrite.net>
+From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Subject: Re: [PATCH v2 09/23] vixen: modify the e820 table to
+ advertise HVM special pages as RAM
+Date: Sun, 7 Jan 2018 19:18:37 -0500
+Message-ID: <20180108001837.GZ21689@char.us.oracle.com>
+References: <1515356919-922-1-git-send-email-aliguori@amzn.com>
+ <1515356919-922-10-git-send-email-aliguori@amzn.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=3dtw=ec=burggraben.net=cmt@srs-us1.protection.inumbo.net>)
- id 1eYJHl-0006ES-3X
- for xen-devel@lists.xenproject.org; Sun, 07 Jan 2018 22:19:21 +0000
+ <srs0=45m3=ed=oracle.com=konrad.wilk@srs-us1.protection.inumbo.net>)
+ id 1eYL9L-0006IS-VI
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2018 00:18:48 +0000
 Content-Disposition: inline
-In-Reply-To: <3104994914c94a26baed6195f486c03f@AMSPEX02CL03.citrite.net>
+In-Reply-To: <1515356919-922-10-git-send-email-aliguori@amzn.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,25 +24,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>
-Cc: 'Michael Collins' <mike@ark-net.org>, 'Juergen Gross' <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, 'Alex Braunegg' <alex.braunegg@gmail.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Anthony Liguori <aliguori@amzn.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Matt Wilson <msw@amazon.com>, KarimAllah Ahmed <karahmed@amazon.de>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan =?iso-8859-1?Q?H=2E_Sch=F6nherr?= <jschoenh@amazon.de>, Anthony Liguori <aliguori@amazon.com>, xen-devel@lists.xenproject.org, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-IyMgUGF1bCBEdXJyYW50IChQYXVsLkR1cnJhbnRAY2l0cml4LmNvbSk6Cgo+ID4gSSBjb3VsZCB0
-cnkgYSBuZXcga2VybmVsIChLUFRJLCB5YXkhKSB3aXRoIHRoYXQgIm1pbGRseSBzdXNwaWNpb3Vz
-IiBjb21taXQKPiA+IGNjODczN2E1ZmU5MDUxYjdmYTA1MmIwOGM1N2RkYjlmNTM5YzM4OWEgcmV2
-ZXJ0ZWQgb24gdGhlIHdlZWtlbmQgYW5kCj4gPiByZXBvcnQgYmFjayAoanVzdCB0byBydWxlIHRo
-YXQgb3V0IC0gbGlrZSB5b3UsIEkgZG9uJ3QgcmVhbGx5IGJlbGlldmUKPiA+IHRoYXQgdGhpcyBp
-cyB0aGUgY2F1c2UpLgo+ID4gRm9yIHRoZSByZWNvcmQsIEknbSBzdGlsbCBydW5uaW5nIDQuMTMu
-MTYgb24gdGhlIERvbTAgKHRoYXQncyB0aGUgbGFzdAo+ID4gd29ya2luZyBEb20wIGtlcm5lbCku
-Cj4gCj4gVGhhbmtzLiBXZWxsLCB0aGF0J3MgdGhlIG9ubHkgbmV0YmFjayBjb21taXQgdGhhdCdz
-IGluIG1hc3RlciBidXQgbm90IGluCj4gNC4xMy4xNiBzbyBpdCB3b3VsZCBiZSB1c2VmdWwgdG8g
-Y29uY2x1c2l2ZWx5IHJ1bGUgdGhhdCBvdXQgYXMgYSBjYXVzZS4KCkZ1bm55IHRoaW5nOiB3aXRo
-IHRoYXQgY29tbWl0IHJldmVydGVkLCBJJ20gcnVubmluZyA0LjE0LjEyIG9uIG15IERvbTAuClRo
-YXQncyBob2xkaW5nIG11Y2ggbG9uZ2VyIHRoYW4gYW55IDQuNCBrZXJuZWwgb24gdGhhdCBob3N0
-IGJlZm9yZS4KVGhhdCdzIGludGVyZXNpbmcsIGFzIHRoZSBjcmFzaGluZyBjb2RlIGxvb2tzIG1v
-cmUgY29ycmVjdCAoYXQgbGVhc3QKZm9yIG1lIGFuZCBzb21lIGNvbXBpbGVyLi4uKSwgYW5kIHRo
-ZSBjaGFuZ2UgaXMgcmF0aGVyIHNtYWxsLgoKUmVnYXJkcywKQ2hyaXN0b3BoCgotLSAKU3BhcmUg
-U3BhY2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gU3VuLCBKYW4gMDcsIDIwMTggYXQgMTI6Mjg6MjVQTSAtMDgwMCwgQW50aG9ueSBMaWd1b3Jp
+IHdyb3RlOgo+IEZyb206IEFudGhvbnkgTGlndW9yaSA8YWxpZ3VvcmlAYW1hem9uLmNvbT4KCi4u
+c25pcC4KPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2d1ZXN0L3ZpeGVuLmMgYi94ZW4vYXJj
+aC94ODYvZ3Vlc3Qvdml4ZW4uYwo+IGluZGV4IGMwYTgxZGQuLmNhY2JlNjkgMTAwNjQ0Cj4gLS0t
+IGEveGVuL2FyY2gveDg2L2d1ZXN0L3ZpeGVuLmMKPiArKysgYi94ZW4vYXJjaC94ODYvZ3Vlc3Qv
+dml4ZW4uYwo+IEBAIC0yMyw2ICsyMyw3IEBACj4gIAo+ICBzdGF0aWMgaW50IGluX3ZpeGVuOwo+
+ICBzdGF0aWMgaW50IHZpeGVuX2RvbWlkID0gMTsKPiArc3RhdGljIHVpbnQzMl90IHZpeGVuX3Jl
+c2VydmVkX21lbV9wZ3N0YXJ0ID0gMHhmZWZmMDAwMDsKClRoaXMgaXMgaW50ZXJlc3RpbmcuIFdv
+dWxkIGl0IG1ha2Ugc2Vuc2UgdG8gaGF2ZSB0aGlzIGJlCmF1dG8tZGV0ZWN0ZWQ/IE9yIGEgYm9v
+dCBwYXJhbWV0ZXIgdG8gb3Zlci13cml0ZT8KCj4gIAo+ICBpbnRlZ2VyX3BhcmFtKCJ2aXhlbl9k
+b21pZCIsIHZpeGVuX2RvbWlkKTsKPiAgCj4gQEAgLTM1LDMgKzM2LDExIEBAIGludCB2aXhlbl9n
+ZXRfZG9taWQodm9pZCkKPiAgewo+ICAgICAgcmV0dXJuIHZpeGVuX2RvbWlkOwo+ICB9Cj4gKwo+
+ICt2b2lkIHZpeGVuX2dldF9yZXNlcnZlZF9tZW0odW5zaWduZWQgbG9uZyAqc3RhcnRfcGZuLCB1
+bnNpZ25lZCBsb25nICplbmRfcGZuKQo+ICt7Cj4gKyAgICAqc3RhcnRfcGZuID0gdml4ZW5fcmVz
+ZXJ2ZWRfbWVtX3Bnc3RhcnQgPj4gWEVOX1BBR0VfU0hJRlQ7Cj4gKwo+ICsgICAgLyogVGhpcyBp
+cyBwYXJ0IG9mIHRoZSBYZW4gQUJJICovCgouLiB3aGljaCBvbmUgOi0pID8KPiArICAgICplbmRf
+cGZuICAgPSAweDEwMDAwMDsKPiArfQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
