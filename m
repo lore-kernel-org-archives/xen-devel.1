@@ -1,10 +1,10 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v2 05/23] char: optionally redirect {,
- g}printk output to QEMU debug log
-Date: Mon, 8 Jan 2018 12:16:05 +0000
-Message-ID: <20180108121605.dags3eci52bxssar@citrix.com>
-References: <1515356919-922-1-git-send-email-aliguori@amzn.com>
- <1515356919-922-6-git-send-email-aliguori@amzn.com>
+Subject: Re: [PATCH v10 10/11] tools: implement new generic set
+ value interface and MBA set value command
+Date: Mon, 8 Jan 2018 12:23:55 +0000
+Message-ID: <20180108122355.hejwofzmmtnz3hgq@citrix.com>
+References: <1513644142-50972-1-git-send-email-yi.y.sun@linux.intel.com>
+ <1513644142-50972-11-git-send-email-yi.y.sun@linux.intel.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,10 +12,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=9h6o=ed=citrix.com=prvs=53941dece=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1eYWPq-00048J-BY
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2018 12:20:34 +0000
+ id 1eYWTI-0004SZ-3B
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2018 12:24:08 +0000
 Content-Disposition: inline
-In-Reply-To: <1515356919-922-6-git-send-email-aliguori@amzn.com>
+In-Reply-To: <1513644142-50972-11-git-send-email-yi.y.sun@linux.intel.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +24,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony Liguori <aliguori@amzn.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, KarimAllah Ahmed <karahmed@amazon.de>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan =?iso-8859-1?Q?H=2E_Sch=F6nherr?= <jschoenh@amazon.de>, Matt Wilson <msw@amazon.com>, xen-devel@lists.xenproject.org, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Yi Sun <yi.y.sun@linux.intel.com>
+Cc: xen-devel@lists.xenproject.org, Chao Peng <chao.p.peng@linux.intel.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gU3VuLCBKYW4gMDcsIDIwMTggYXQgMTI6Mjg6MjFQTSAtMDgwMCwgQW50aG9ueSBMaWd1b3Jp
-IHdyb3RlOgo+IEZyb206IE1hdHQgV2lsc29uIDxtc3dAYW1hem9uLmNvbT4KPiAKPiBXaGVuIHVz
-aW5nIFZpeGVuLCBpdCBpcyBoZWxwZnVsIHRvIGdldCB0aGUgWGVuIG1lc3NhZ2VzIGluIGEKPiBz
-ZXBhcmF0ZSBjaGFubmVsIHRoYW4gdGhlIGNvbnNvbGUgb3V0cHV0LiAgQWRkIGFuIG9wdGlvbiB0
-bwo+IG91dHB1dCB0byB0aGUgUUVNVSBiYWNrZG9vciBsb2dnaW5nIHBvcnQuCj4gCj4gU2lnbmVk
-LW9mZi1ieTogTWF0dCBXaWxzb24gPG1zd0BhbWF6b24uY29tPgoKSSB0aGluayB0aGlzIHNob3Vs
-ZCBiZSBtZXJnZWQgd2l0aCBvciBidWlsdCBvbiB0b3Agb2Ygb25lIG9mIHRoZSBwYXRjaGVzCmlu
-IHB2LWluLXB2aCBzaGltIHNlcmllcyB0aGF0IGFkZHMgY29uc29sZSBhbmQgbWFnaWMgZGVidWcg
-cG9ydCBvdXRwdXQuCgpJIHdpbGwgc2VlIHdoYXQgSSBjYW4gZG8uCgpXZWkuCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVHVlLCBEZWMgMTksIDIwMTcgYXQgMDg6NDI6MjFBTSArMDgwMCwgWWkgU3VuIHdyb3RlOgo+
+IFRoaXMgcGF0Y2ggaW1wbGVtZW50cyBuZXcgZ2VuZXJpYyBzZXQgdmFsdWUgaW50ZXJmYWNlcyBp
+biBsaWJ4YyBhbmQgbGlieGwuCj4gVGhlc2UgaW50ZXJmYWNlcyBhcmUgc3VpdGFibGUgZm9yIGFs
+bCBhbGxvY2F0aW9uIGZlYXR1cmVzLiBJdCBhbHNvIGFkZHMgYQo+IG5ldyBNQkEgc2V0IHZhbHVl
+IGNvbW1hbmQgaW4geGwuCj4gCj4gU2lnbmVkLW9mZi1ieTogWWkgU3VuIDx5aS55LnN1bkBsaW51
+eC5pbnRlbC5jb20+CgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
