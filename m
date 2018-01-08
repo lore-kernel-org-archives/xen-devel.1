@@ -1,21 +1,22 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v10 10/11] tools: implement new generic set
- value interface and MBA set value command
-Date: Mon, 8 Jan 2018 12:23:55 +0000
-Message-ID: <20180108122355.hejwofzmmtnz3hgq@citrix.com>
+Subject: Re: [PATCH v10 00/11] Enable Memory Bandwidth
+	Allocation in Xen
+Date: Mon, 8 Jan 2018 12:25:02 +0000
+Message-ID: <20180108122502.pqm4yljz5zd7m4cp@citrix.com>
 References: <1513644142-50972-1-git-send-email-yi.y.sun@linux.intel.com>
- <1513644142-50972-11-git-send-email-yi.y.sun@linux.intel.com>
+ <5A3A37540200007800198C59@prv-mh.provo.novell.com>
+ <20180108042858.GA31347@yi.y.sun>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=9h6o=ed=citrix.com=prvs=53941dece=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1eYWTI-0004SZ-3B
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2018 12:24:08 +0000
+ id 1eYWUG-0004b1-2b
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2018 12:25:08 +0000
 Content-Disposition: inline
-In-Reply-To: <1513644142-50972-11-git-send-email-yi.y.sun@linux.intel.com>
+In-Reply-To: <20180108042858.GA31347@yi.y.sun>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,15 +26,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Yi Sun <yi.y.sun@linux.intel.com>
-Cc: xen-devel@lists.xenproject.org, Chao Peng <chao.p.peng@linux.intel.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xenproject.org, Chao Peng <chao.p.peng@linux.intel.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBEZWMgMTksIDIwMTcgYXQgMDg6NDI6MjFBTSArMDgwMCwgWWkgU3VuIHdyb3RlOgo+
-IFRoaXMgcGF0Y2ggaW1wbGVtZW50cyBuZXcgZ2VuZXJpYyBzZXQgdmFsdWUgaW50ZXJmYWNlcyBp
-biBsaWJ4YyBhbmQgbGlieGwuCj4gVGhlc2UgaW50ZXJmYWNlcyBhcmUgc3VpdGFibGUgZm9yIGFs
-bCBhbGxvY2F0aW9uIGZlYXR1cmVzLiBJdCBhbHNvIGFkZHMgYQo+IG5ldyBNQkEgc2V0IHZhbHVl
-IGNvbW1hbmQgaW4geGwuCj4gCj4gU2lnbmVkLW9mZi1ieTogWWkgU3VuIDx5aS55LnN1bkBsaW51
-eC5pbnRlbC5jb20+CgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gTW9uLCBKYW4gMDgsIDIwMTggYXQgMTI6Mjg6NThQTSArMDgwMCwgWWkgU3VuIHdyb3RlOgo+
+IE9uIDE3LTEyLTIwIDAyOjExOjMyLCBKYW4gQmV1bGljaCB3cm90ZToKPiA+ID4+PiBPbiAxOS4x
+Mi4xNyBhdCAwMTo0MiwgPHlpLnkuc3VuQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6Cj4gPiA+IFdl
+IHBsYW4gdG8gYnJpbmcgYSBuZXcgUFNSIChQbGF0Zm9ybSBTaGFyZWQgUmVzb3VyY2UpIGZlYXR1
+cmUgY2FsbGVkCj4gPiA+IEludGVsIE1lbW9yeSBCYW5kd2lkdGggQWxsb2NhdGlvbiAoTUJBKSB0
+byBYZW4uCj4gPiA+IAo+ID4gPiBCZXNpZGVzIHRoZSBNQkEgZW5hYmxpbmcsIHdlIGNoYW5nZSBz
+b21lIGludGVyZmFjZXMgdG8gbWFrZSB0aGVtIG1vcmUKPiA+ID4gZ2VuZXJhbCBidXQgbm90IG9u
+bHkgZm9yIENBVC4KPiA+ID4gCj4gPiA+IFRoZSBmaXJzdCA1IHBhdGNoZXMgb2YgVjkgaGF2ZW4g
+YmVlbiBtZXJnZWQuIFRvIGZpeCBhIGZldyBpc3N1ZXMsIHRoZQo+ID4gPiBWMTAgaXMgc3VibWl0
+dGVkLgo+ID4gCj4gPiBJJ3ZlIGNvbW1pdHRlZCB0aGUgdGhyZWUgaHlwZXJ2aXNvciBwYXRjaGVz
+OyBJJ3ZlIG5vdCBkb25lIGFueXRoaW5nCj4gPiB3aXRoIHRoZSBlaWdodCB0b29scyBvbmVzLCBh
+cyBvbmUgb2YgdGhlbSBuZWVkcyB0byBiZSAocmUtKWFja2VkLiBJJ2xsCj4gPiBsZWF2ZSB0aGF0
+IHBhcnQgdG8gb25lIG9mIHlvdS4KPiA+IAo+ID4gSmFuCj4gCj4gSGksIElhbiBhbmQgV2VpLAo+
+IAo+IENvdWxkIHlvdSBwbGVhc2UgaGVscCB0byBjaGVjayB0b29scy8gcGF0Y2hlcz8gVGhhbmtz
+IQo+IAoKSSBqdXN0IGFja2VkIHRoZSBvbmUgcGF0Y2ggdGhhdCBtaXNzZWQgYW4gYWNrLiBJIHdp
+bGwgdHJ5IHRvIGdldCBhcm91bmQKdG8gY29tbWl0IHRoZW0gbGF0ZXIgdGhpcyB3ZWVrLgoKV2Vp
+LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
