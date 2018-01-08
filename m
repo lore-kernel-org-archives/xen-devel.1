@@ -1,17 +1,20 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: [PATCH] xl: Don't warn on using 'deprecated' mode
-	selection
-Date: Mon, 8 Jan 2018 15:50:53 +0000
-Message-ID: <20180108155053.14214-1-george.dunlap@citrix.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH v2] x86: xen: remove the use of VLAIS
+Date: Mon, 8 Jan 2018 10:54:24 -0500
+Message-ID: <37fc26d2-734a-4690-d4f2-6d0df82015a4__33815.2576158338$1515426836$gmane$org@oracle.com>
+References: <c2217783-9d18-912f-8c13-996489dbe602@suse.com>
+ <1515274788-24548-1-git-send-email-nick.desaulniers@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=gjyc=ed=citrix.com=prvs=5397da941=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1eYZha-0006AN-IN
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2018 15:51:06 +0000
+ <srs0=fog3=ed=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1eYZl3-0006Kk-Oc
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2018 15:54:41 +0000
+In-Reply-To: <1515274788-24548-1-git-send-email-nick.desaulniers@gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,29 +23,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@citrix.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Nick Desaulniers <nick.desaulniers@gmail.com>, Juergen Gross <jgross@suse.com>
+Cc: x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, linux-kernel@vger.kernel.org, ghackmann@google.com, mka@google.com, Ingo Molnar <mingo@redhat.com>, srhines@google.com, kees@google.com, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>
 List-Id: xen-devel@lists.xenproject.org
 
-V2UgZ2VuZXJhbGx5IHN1cHBvcnQgb2xkIGNvbmZpZyBmb3JtYXRzIGluZGVmaW5pbnRlbHkgKHNl
-ZSB0aGUgZGlzawpmb3JtYXQpIHdpdGhvdXQgZW1pdHRpbmcgd2FybmluZ3MuCgpTaWduZWQtb2Zm
-LWJ5OiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+Ci0tLQpUaGlzIGlz
-IGEgY2FuZGlkYXRlIHRvIGJhY2twb3J0IHRvIDQuMTAuCgpDQzogSWFuIEphY2tzb24gPGlhbi5q
-YWNrc29uQGNpdHJpeC5jb20+CkNDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgpDQzog
-Um9nZXIgUGF1IE1vbm5lIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KQ0M6IEphbiBCZXVsaWNoIDxq
-YmV1bGljaEBzdXNlLmNvbT4KLS0tCiB0b29scy94bC94bF9wYXJzZS5jIHwgMyAtLS0KIDEgZmls
-ZSBjaGFuZ2VkLCAzIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3Rvb2xzL3hsL3hsX3BhcnNl
-LmMgYi90b29scy94bC94bF9wYXJzZS5jCmluZGV4IGQxOWY4NWQzN2MuLjJmMjYzY2E1YmQgMTAw
-NjQ0Ci0tLSBhL3Rvb2xzL3hsL3hsX3BhcnNlLmMKKysrIGIvdG9vbHMveGwveGxfcGFyc2UuYwpA
-QCAtODY5LDkgKzg2OSw2IEBAIHZvaWQgcGFyc2VfY29uZmlnX2RhdGEoY29uc3QgY2hhciAqY29u
-ZmlnX3NvdXJjZSwKICAgICBpZiAoIXhsdV9jZmdfZ2V0X3N0cmluZyhjb25maWcsICJidWlsZGVy
-IiwgJmJ1ZiwgMCkpIHsKICAgICAgICAgbGlieGxfZG9tYWluX3R5cGUgYnVpbGRlcl90eXBlOwog
-Ci0gICAgICAgIGlmIChjX2luZm8tPnR5cGUgPT0gTElCWExfRE9NQUlOX1RZUEVfSU5WQUxJRCkK
-LSAgICAgICAgICAgIGZwcmludGYoc3RkZXJyLAotIlRoZSBcImJ1aWxkZXJcIiBvcHRpb24gaXMg
-YmVpbmcgZGVwcmVjYXRlZCwgcGxlYXNlIHVzZSBcInR5cGVcIiBpbnN0ZWFkLlxuIik7CiAgICAg
-ICAgIGlmICghc3RybmNtcChidWYsICJodm0iLCBzdHJsZW4oYnVmKSkpCiAgICAgICAgICAgICBi
-dWlsZGVyX3R5cGUgPSBMSUJYTF9ET01BSU5fVFlQRV9IVk07CiAgICAgICAgIGVsc2UgaWYgKCFz
-dHJuY21wKGJ1ZiwgImdlbmVyaWMiLCBzdHJsZW4oYnVmKSkpCi0tIAoyLjE1LjEKCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMDEvMDYvMjAxOCAwNDozOSBQTSwgTmljayBEZXNhdWxuaWVycyB3cm90ZToKPiBWYXJpYWJs
+ZSBMZW5ndGggQXJyYXlzIEluIFN0cnVjdHMgKFZMQUlTKSBpcyBub3Qgc3VwcG9ydGVkIGJ5IENs
+YW5nLCBhbmQKPiBmcm93bmVkIHVwb24gYnkgb3RoZXJzLgo+Cj4gaHR0cHM6Ly9sa21sLm9yZy9s
+a21sLzIwMTMvOS8yMy81MDAKPgo+IEhlcmUsIHRoZSBWTEFJUyB3YXMgdXNlZCBiZWNhdXNlIHRo
+ZSBzaXplIG9mIHRoZSBiaXRtYXAgcmV0dXJuZWQgZnJvbQo+IHhlbl9tY19lbnRyeSgpIGRlcGVu
+ZGVkIG9uIHBvc3NpYmx5IChiYXNlZCBvbiBrZXJuZWwgY29uZmlndXJhdGlvbikKPiBydW50aW1l
+IHNpemVkIGRhdGEuIFJhdGhlciB0aGFuIGRlY2xhcmluZyBhcmdzIGFzIGEgVkxBSVMgdGhlbiBj
+YWxsaW5nCj4gc2l6ZW9mIG9uICphcmdzLCB3ZSBjYWxjdWxhdGUgdGhlIGFwcHJvcHJpYXRlIHNp
+emVvZiBhcmdzIG1hbnVhbGx5Lgo+IEZ1cnRoZXIsIHdlIGNhbiBnZXQgcmlkIG9mIHRoZSAjaWZk
+ZWYncyBhbmQgcmVseSBvbiBudW1fcG9zc2libGVfY3B1cygpCj4gKHRoYW5rcyB0byBhIGhlbHBm
+dWwgY2hlY2twYXRjaCB3YXJuaW5nIGZyb20gYW4gZWFybGllciB2ZXJzaW9uIG9mIHRoaXMKPiBw
+YXRjaCkuCj4KPiBTdWdnZXN0ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4K
+PiBTaWduZWQtb2ZmLWJ5OiBOaWNrIERlc2F1bG5pZXJzIDxuaWNrLmRlc2F1bG5pZXJzQGdtYWls
+LmNvbT4KCkFwcGxpZWQgdG8gZm9yLWxpbnVzLTQuMTUuCgotYm9yaXMKCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
