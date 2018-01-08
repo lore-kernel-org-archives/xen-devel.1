@@ -1,22 +1,19 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v10 00/11] Enable Memory Bandwidth
-	Allocation in Xen
-Date: Mon, 8 Jan 2018 12:25:02 +0000
-Message-ID: <20180108122502.pqm4yljz5zd7m4cp@citrix.com>
-References: <1513644142-50972-1-git-send-email-yi.y.sun@linux.intel.com>
- <5A3A37540200007800198C59@prv-mh.provo.novell.com>
- <20180108042858.GA31347@yi.y.sun>
+Subject: Re: Xen 4.11 Development Update
+Date: Mon, 8 Jan 2018 12:29:45 +0000
+Message-ID: <20180108122945.fvosbgzdklqq2xxz@citrix.com>
+References: <20180105091638.4500-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=9h6o=ed=citrix.com=prvs=53941dece=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1eYWUG-0004b1-2b
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2018 12:25:08 +0000
+ id 1eYWZ9-0005X9-6F
+ for xen-devel@lists.xenproject.org; Mon, 08 Jan 2018 12:30:11 +0000
 Content-Disposition: inline
-In-Reply-To: <20180108042858.GA31347@yi.y.sun>
+In-Reply-To: <20180105091638.4500-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,26 +22,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Yi Sun <yi.y.sun@linux.intel.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xenproject.org, Chao Peng <chao.p.peng@linux.intel.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKYW4gMDgsIDIwMTggYXQgMTI6Mjg6NThQTSArMDgwMCwgWWkgU3VuIHdyb3RlOgo+
-IE9uIDE3LTEyLTIwIDAyOjExOjMyLCBKYW4gQmV1bGljaCB3cm90ZToKPiA+ID4+PiBPbiAxOS4x
-Mi4xNyBhdCAwMTo0MiwgPHlpLnkuc3VuQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6Cj4gPiA+IFdl
-IHBsYW4gdG8gYnJpbmcgYSBuZXcgUFNSIChQbGF0Zm9ybSBTaGFyZWQgUmVzb3VyY2UpIGZlYXR1
-cmUgY2FsbGVkCj4gPiA+IEludGVsIE1lbW9yeSBCYW5kd2lkdGggQWxsb2NhdGlvbiAoTUJBKSB0
-byBYZW4uCj4gPiA+IAo+ID4gPiBCZXNpZGVzIHRoZSBNQkEgZW5hYmxpbmcsIHdlIGNoYW5nZSBz
-b21lIGludGVyZmFjZXMgdG8gbWFrZSB0aGVtIG1vcmUKPiA+ID4gZ2VuZXJhbCBidXQgbm90IG9u
-bHkgZm9yIENBVC4KPiA+ID4gCj4gPiA+IFRoZSBmaXJzdCA1IHBhdGNoZXMgb2YgVjkgaGF2ZW4g
-YmVlbiBtZXJnZWQuIFRvIGZpeCBhIGZldyBpc3N1ZXMsIHRoZQo+ID4gPiBWMTAgaXMgc3VibWl0
-dGVkLgo+ID4gCj4gPiBJJ3ZlIGNvbW1pdHRlZCB0aGUgdGhyZWUgaHlwZXJ2aXNvciBwYXRjaGVz
-OyBJJ3ZlIG5vdCBkb25lIGFueXRoaW5nCj4gPiB3aXRoIHRoZSBlaWdodCB0b29scyBvbmVzLCBh
-cyBvbmUgb2YgdGhlbSBuZWVkcyB0byBiZSAocmUtKWFja2VkLiBJJ2xsCj4gPiBsZWF2ZSB0aGF0
-IHBhcnQgdG8gb25lIG9mIHlvdS4KPiA+IAo+ID4gSmFuCj4gCj4gSGksIElhbiBhbmQgV2VpLAo+
-IAo+IENvdWxkIHlvdSBwbGVhc2UgaGVscCB0byBjaGVjayB0b29scy8gcGF0Y2hlcz8gVGhhbmtz
-IQo+IAoKSSBqdXN0IGFja2VkIHRoZSBvbmUgcGF0Y2ggdGhhdCBtaXNzZWQgYW4gYWNrLiBJIHdp
-bGwgdHJ5IHRvIGdldCBhcm91bmQKdG8gY29tbWl0IHRoZW0gbGF0ZXIgdGhpcyB3ZWVrLgoKV2Vp
-LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gRnJpLCBKYW4gMDUsIDIwMTggYXQgMTA6MTY6MzhBTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBUaGlzIGVtYWlsIG9ubHkgdHJhY2tzIGJpZyBpdGVtcyBmb3IgeGVuLmdpdCB0cmVl
+LiBQbGVhc2UgcmVwbHkgZm9yIGl0ZW1zIHlvdQo+IHdvdWxkIGxpa2UgdG8gc2VlIGluIDQuMTEg
+c28gdGhhdCBwZW9wbGUgaGF2ZSBhbiBpZGVhIHdoYXQgaXMgZ29pbmcgb24gYW5kCj4gcHJpb3Jp
+dGlzZSBhY2NvcmRpbmdseS4KPiAKPiBZb3UncmUgd2VsY29tZSB0byBwcm92aWRlIGRlc2NyaXB0
+aW9uIGFuZCB1c2UgY2FzZXMgb2YgdGhlIGZlYXR1cmUgeW91J3JlCj4gd29ya2luZyBvbi4KPiAK
+PiA9IFRpbWVsaW5lID0KPiAKPiBXZSBub3cgYWRvcHQgYSBmaXhlZCBjdXQtb2ZmIGRhdGUgc2No
+ZW1lLiBXZSB3aWxsIHJlbGVhc2UgdHdpY2UgYQo+IHllYXIuIFRoZSB1cGNvbWluZyA0LjExIHRp
+bWVsaW5lIGFyZSBhcyBmb2xsb3dlZDoKPiAKPiAqIExhc3QgcG9zdGluZyBkYXRlOiBNYXJjaCAx
+NnRoLCAyMDE4Cj4gKiBIYXJkIGNvZGUgZnJlZXplOiBNYXJjaCAzMHRoLCAyMDE4Cj4gKiBSQzE6
+IFRCRAo+ICogUmVsZWFzZTogSnVuZSAxc3QsIDIwMTgKPiAKPiBOb3RlIHRoYXQgd2UgZG9uJ3Qg
+aGF2ZSBmcmVlemUgZXhjZXB0aW9uIHNjaGVtZSBhbnltb3JlLiBBbGwgcGF0Y2hlcwo+IHRoYXQg
+d2lzaCB0byBnbyBpbnRvIDQuMTEgbXVzdCBiZSBwb3N0ZWQgbm8gbGF0ZXIgdGhhbiB0aGUgbGFz
+dCBwb3N0aW5nCj4gZGF0ZS4gQWxsIHBhdGNoZXMgcG9zdGVkIGFmdGVyIHRoYXQgZGF0ZSB3aWxs
+IGJlIGF1dG9tYXRpY2FsbHkgcXVldWVkCj4gaW50byBuZXh0IHJlbGVhc2UuCj4gCj4gUkNzIHdp
+bGwgYmUgYXJyYW5nZWQgaW1tZWRpYXRlbHkgYWZ0ZXIgZnJlZXplLgo+IAo+IFdlIHJlY2VudGx5
+IGludHJvZHVjZWQgYSBqaXJhIGluc3RhbmNlIHRvIHRyYWNrIGFsbCB0aGUgdGFza3MgKG5vdCBv
+bmx5IGJpZykKPiBmb3IgdGhlIHByb2plY3QuIFNlZTogaHR0cHM6Ly94ZW5wcm9qZWN0LmF0bGFz
+c2lhbi5uZXQvcHJvamVjdHMvWEVOL2lzc3Vlcy4KPiAKPiBNb3N0IG9mIHRoZSB0YXNrcyB0cmFj
+a2VkIGJ5IHRoaXMgZS1tYWlsIGFsc28gaGF2ZSBhIGNvcnJlc3BvbmRpbmcgamlyYSB0YXNrCj4g
+cmVmZXJyZWQgYnkgWEVOLU4uCj4gCj4gSSBoYXZlIHN0YXJ0ZWQgdG8gaW5jbHVkZSB0aGUgdmVy
+c2lvbiBudW1iZXIgb2Ygc2VyaWVzIGFzc29jaWF0ZWQgdG8gZWFjaAo+IGZlYXR1cmUuIENhbiBl
+YWNoIG93bmVyIHNlbmQgYW4gdXBkYXRlIG9uIHRoZSB2ZXJzaW9uIG51bWJlciBpZiB0aGUgc2Vy
+aWVzCj4gd2FzIHBvc3RlZCB1cHN0cmVhbT8KPiAKPiA9IFByb2plY3RzID0KPiAKPiA9PSBIeXBl
+cnZpc29yID09IAo+IAo+ICogIFBlci1jcHUgdGFza2xldAo+ICAgLSAgWEVOLTI4Cj4gICAtICBL
+b25yYWQgUnplc3p1dGVrIFdpbGsKPiAKPiA9PT0geDg2ID09PSAKPiAKPiAqICBFbmFibGUgTWVt
+b3J5IEJhbmR3aWR0aCBBbGxvY2F0aW9uIGluIFhlbiAodjEwKQo+ICAgLSAgWEVOLTQ4Cj4gICAt
+ICBZaSBTdW4KCkFsbW9zdCBkb25lIC0tIHdhaXRpbmcgZm9yIG1lIHRvIGNvbW1pdCB0b29sc3Rh
+Y2sgcGF0Y2hlcy4KCkFuZCB0cmFjayBNaXRpZ2F0aW9uICh2YXJpb3VzIHNlcmllcykgZm9yIGFs
+bCB0aGUgcmVjZW50IHNlY3VyaXR5Cmlzc3Vlcz8KClRoZXkgc2hvdWxkIGJlIGJsb2NrZXJzIGZv
+ciA0LjExIElNSE8uCgpXZWkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
