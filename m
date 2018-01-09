@@ -1,20 +1,21 @@
-From: Doug Goldstein <cardoe@cardoe.com>
+From: George Dunlap <george.dunlap@citrix.com>
 Subject: Re: Radical proposal: ship not-fully-tidied shim as
  4.10.1
-Date: Tue, 9 Jan 2018 12:13:47 -0600
-Message-ID: <42f1e433-beda-cce3-ec38-864f3f509fb5@cardoe.com>
+Date: Tue, 9 Jan 2018 18:21:19 +0000
+Message-ID: <3a29a83b-8c94-e02f-c201-4e33035bb1e8@citrix.com>
 References: <23123.44604.284781.889416@mariner.uk.xensource.com>
+ <42f1e433-beda-cce3-ec38-864f3f509fb5@cardoe.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0518585584375829883=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=2je3=ee=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
- id 1eYyPJ-0004ys-Je
- for xen-devel@lists.xenproject.org; Tue, 09 Jan 2018 18:13:53 +0000
-Received: by mail-yb0-x22d.google.com with SMTP id v17so4886049ybl.10
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jan 2018 10:13:52 -0800 (PST)
-In-Reply-To: <23123.44604.284781.889416@mariner.uk.xensource.com>
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=qo9r=ee=citrix.com=prvs=5401a2e7b=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1eYyWZ-0005jE-N0
+ for xen-devel@lists.xenproject.org; Tue, 09 Jan 2018 18:21:23 +0000
+In-Reply-To: <42f1e433-beda-cce3-ec38-864f3f509fb5@cardoe.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,130 +24,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org, Jan Beulich <JBeulich@suse.com>, security@xenproject.org
+To: Doug Goldstein <cardoe@cardoe.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org, Jan Beulich <JBeulich@suse.com>, security@xenproject.org
 Cc: committers@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0518585584375829883==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="RA3g5NZWOdyeaFxtRCm7HZ6f85HllQNmv"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---RA3g5NZWOdyeaFxtRCm7HZ6f85HllQNmv
-Content-Type: multipart/mixed; boundary="5sqkk6KPYPMUSxvuCIZjgIweb89Lkuflj";
- protected-headers="v1"
-From: Doug Goldstein <cardoe@cardoe.com>
-To: Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org,
- Jan Beulich <JBeulich@suse.com>, security@xenproject.org
-Cc: committers@xenproject.org
-Message-ID: <42f1e433-beda-cce3-ec38-864f3f509fb5@cardoe.com>
-Subject: Re: [Xen-devel] Radical proposal: ship not-fully-tidied shim as
- 4.10.1
-References: <23123.44604.284781.889416@mariner.uk.xensource.com>
-In-Reply-To: <23123.44604.284781.889416@mariner.uk.xensource.com>
-
---5sqkk6KPYPMUSxvuCIZjgIweb89Lkuflj
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 1/8/18 11:45 AM, Ian Jackson wrote:
-> But this is not a usual situation.  This time, we don't have the time
-> to wait.
->=20
-> Opinions ?
-
-I'm going to follow up with a top post with my feelings and from info on
-various parts of the thread.
-
-We have 2 versions of PV shim, the Citrix version and the Amazon
-version. The proposal here is to go with the Citrix version. I'll
-compare the two how I see them.
-
-Citrix Version
---------------
-- based on PVH which means 4.10 only
-  - supported on 4.8 and 4.9 if we backport changes to the toolstack
-- no solution for 4.7 and prior versions
-- no backports currently available
-- supports *most* Xen PV features
-  - no support for PCI pass through
-- confirmed to not work on HVM [1] [2]
-
-Amazon Version
---------------
-- based on HVM
-- tested and deployed across Amazon's large fleet
-- works from Xen 3.4 and up
-- backported to 4.9 and 4.10 [3]
-- supports *most* Xen PV features
-  - ballooning is broken but Anthony has committed to providing a v3
-with this support. [4]
-  - migration is currently untested
-
-If the primary driver for getting these patches in is for end users and
-consumers of Xen, a large portion of them who have not yet deployed Xen
-4.10 then why are we moving forard with an approach that requires them
-to potentially upgrade or change a lot more of their environment. This
-seems down right hostile to their concerns and needs.
-
-
-[1]
-https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg00711.htm=
-l
-[2]
-https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg00778.htm=
-l
-[3]
-https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg00751.htm=
-l
-[4]
-https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg00736.htm=
-l
---=20
-Doug Goldstein
-
-
---5sqkk6KPYPMUSxvuCIZjgIweb89Lkuflj--
-
---RA3g5NZWOdyeaFxtRCm7HZ6f85HllQNmv
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlpVBltfFIAAAAAALgAo
-aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
-MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
-Nl26hA/9EQ9dDGexaX2ImlF+zlK7scnmZLm+tba42+En27h8nbNM1h4UW4s0hr+l
-38j5WyD57XbiBTEFEqJPXNKc0Bl5t1e7wkAdDM6A15DdWEHNDJNdUGjncrMxAhCM
-/GNEu116gim5EsfoqX2RKK5kSsHjdldLiGDC/cvFfQOLggobCIPiRS69Z37L1G3d
-J8K8fipeOyRNUcBnigDntuN3JiLCfjZc7meK7RUrtfCsN1WTo2XGcplb5jmsh5Ur
-cu+UnA9VA8nV+XGC1ASmACQxo0L5F5vgr6YNyEyIQ53SfyJ7jYJ63c3ihCazi0yg
-sPUfANX1TzzVF9s7avf0lnkG8KtnZnUSnGK0A4h0gl3mDRBU7nm6M7PleT4UdSpQ
-fv2dCF1+VxOoaRvsXoY9VSzneKMNe6YwTcVFa1pFXBnj17GDjF+nPooJEbLTR0EI
-GFl+2UReYmI6PbyNAGUwIJhKd8jTIt9Z+t4/Wd7w5F6G08a+Wzr7+0HYRgKQGKtL
-L+nMp/qMGlAKdbu7OtyWxxSAhR9ysFyIpendLLEcvfE09utcNgrPAAKtgejGU/6n
-JBVSGD6wJIACxas2uzqxo25Y4Etnlrm1wWocIsiRqCCQH4TGccOoVj23J/3YD7Ha
-GnGR4gZram7x/6wk/hJ2MAt1L1iiYjWJ6KqOUsx9yP9yLorClho=
-=BGnm
------END PGP SIGNATURE-----
-
---RA3g5NZWOdyeaFxtRCm7HZ6f85HllQNmv--
-
-
---===============0518585584375829883==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0518585584375829883==--
+T24gMDEvMDkvMjAxOCAwNjoxMyBQTSwgRG91ZyBHb2xkc3RlaW4gd3JvdGU6Cj4gT24gMS84LzE4
+IDExOjQ1IEFNLCBJYW4gSmFja3NvbiB3cm90ZToKPj4gQnV0IHRoaXMgaXMgbm90IGEgdXN1YWwg
+c2l0dWF0aW9uLiAgVGhpcyB0aW1lLCB3ZSBkb24ndCBoYXZlIHRoZSB0aW1lCj4+IHRvIHdhaXQu
+Cj4+Cj4+IE9waW5pb25zID8KPiAKPiBJJ20gZ29pbmcgdG8gZm9sbG93IHVwIHdpdGggYSB0b3Ag
+cG9zdCB3aXRoIG15IGZlZWxpbmdzIGFuZCBmcm9tIGluZm8gb24KPiB2YXJpb3VzIHBhcnRzIG9m
+IHRoZSB0aHJlYWQuCj4gCj4gV2UgaGF2ZSAyIHZlcnNpb25zIG9mIFBWIHNoaW0sIHRoZSBDaXRy
+aXggdmVyc2lvbiBhbmQgdGhlIEFtYXpvbgo+IHZlcnNpb24uIFRoZSBwcm9wb3NhbCBoZXJlIGlz
+IHRvIGdvIHdpdGggdGhlIENpdHJpeCB2ZXJzaW9uLiBJJ2xsCj4gY29tcGFyZSB0aGUgdHdvIGhv
+dyBJIHNlZSB0aGVtLgo+IAo+IENpdHJpeCBWZXJzaW9uCj4gLS0tLS0tLS0tLS0tLS0KPiAtIGJh
+c2VkIG9uIFBWSCB3aGljaCBtZWFucyA0LjEwIG9ubHkKPiAgIC0gc3VwcG9ydGVkIG9uIDQuOCBh
+bmQgNC45IGlmIHdlIGJhY2twb3J0IGNoYW5nZXMgdG8gdGhlIHRvb2xzdGFjawo+IC0gbm8gc29s
+dXRpb24gZm9yIDQuNyBhbmQgcHJpb3IgdmVyc2lvbnMKCldlIGFyZSBjb21taXR0ZWQgdG8gaGF2
+aW5nIEhWTSBzdXBwb3J0IGFsb25nIHdpdGggUFZIIHN1cHBvcnQgKGlmIHdlIGdvCnRoaXMgcm91
+dGUpLgoKV2UgY2FuIGNoYW5nZSB0aGlzIHRvOgogLSBGb3IgNC4xMCwgYW5kIDQuOCAvIDQuOSB3
+aXRoIGJhY2twb3J0cywgdXNlcnMgd2lsbCBiZSBhYmxlIHRvIGJvb3QgUFYKZ3Vlc3RzIHdpdGhv
+dXQgYSBzaWRlY2FyIG9yIHFlbXUsIGFuZCAoaG9wZWZ1bGx5KSB0cmFuc3BhcmVudGx5IHRvIHRo
+ZQp0b29sc3RhY2sKIC0gRm9yIDQuNyBhbmQgcHJpb3IsIG9yIDQuOCsgd2l0aG91dCBiYWNrcG9y
+dHMsIGF2YWlsYWJsZSB3aXRoIHNpZGVjYXIKYm9vdCBkaXNrIChhbmQgYWRkZWQgcWVtdSBpbnN0
+YW5jZSkKCj4gLSBubyBiYWNrcG9ydHMgY3VycmVudGx5IGF2YWlsYWJsZQo+IC0gc3VwcG9ydHMg
+Km1vc3QqIFhlbiBQViBmZWF0dXJlcwo+ICAgLSBubyBzdXBwb3J0IGZvciBQQ0kgcGFzcyB0aHJv
+dWdoCj4gLSBjb25maXJtZWQgdG8gbm90IHdvcmsgb24gSFZNIFsxXSBbMl0KPiAKPiBBbWF6b24g
+VmVyc2lvbgo+IC0tLS0tLS0tLS0tLS0tCj4gLSBiYXNlZCBvbiBIVk0KPiAtIHRlc3RlZCBhbmQg
+ZGVwbG95ZWQgYWNyb3NzIEFtYXpvbidzIGxhcmdlIGZsZWV0Cj4gLSB3b3JrcyBmcm9tIFhlbiAz
+LjQgYW5kIHVwCgogLSBCdXQgcmVxdWlyZXMgInNpZGVjYXIgYm9vdCBkaXNrIiwgYW5kIHdpbGwg
+YWRkIGEgcWVtdSBpbnN0YW5jZSBwZXIgZ3Vlc3QKCj4gLSBiYWNrcG9ydGVkIHRvIDQuOSBhbmQg
+NC4xMCBbM10KPiAtIHN1cHBvcnRzICptb3N0KiBYZW4gUFYgZmVhdHVyZXMKPiAgIC0gYmFsbG9v
+bmluZyBpcyBicm9rZW4gYnV0IEFudGhvbnkgaGFzIGNvbW1pdHRlZCB0byBwcm92aWRpbmcgYSB2
+Mwo+IHdpdGggdGhpcyBzdXBwb3J0LiBbNF0KPiAgIC0gbWlncmF0aW9uIGlzIGN1cnJlbnRseSB1
+bnRlc3RlZAoKIC1HZW9yZ2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
