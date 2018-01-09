@@ -1,23 +1,22 @@
-From: Anthony Liguori <anthony@codemonkey.ws>
-Subject: Re: [PATCH RFC v1 55/74] xen/pvshim: forward evtchn ops
- between L0 Xen and L2 DomU
-Date: Tue, 9 Jan 2018 09:50:14 -0800
-Message-ID: <CA+aC4ksmO0OfGWmLYgzbURccrsSz6mZxTbA2k9OQ9gzYM6827Q@mail.gmail.com>
-References: <20180104130625.28605-1-wei.liu2@citrix.com>
- <20180104130625.28605-56-wei.liu2@citrix.com>
- <5A53A4E4020000780019C50B@prv-mh.provo.novell.com>
+From: Doug Goldstein <cardoe@cardoe.com>
+Subject: Re: Radical proposal: ship not-fully-tidied shim as
+ 4.10.1
+Date: Tue, 9 Jan 2018 11:55:13 -0600
+Message-ID: <b1eee1f5-6715-9a83-6cd7-34f5de2ff3fd@cardoe.com>
+References: <23123.44604.284781.889416@mariner.uk.xensource.com>
+ <4F771D10-4A3C-4F73-B02C-CDFB211A0A75@gmail.com>
+ <CA+aC4ktW9yK7hX1ynxWHtFuJer-mw847XO=M0T8ghBBmcV2ZhQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6462727071322556045=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=n3h8=ee=codemonkey.ws=anthony@srs-us1.protection.inumbo.net>)
- id 1eYy2U-0002j5-Ve
- for xen-devel@lists.xenproject.org; Tue, 09 Jan 2018 17:50:19 +0000
-Received: by mail-lf0-x231.google.com with SMTP id a12so16843086lfe.13
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jan 2018 09:50:17 -0800 (PST)
-In-Reply-To: <5A53A4E4020000780019C50B@prv-mh.provo.novell.com>
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=2je3=ee=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
+ id 1eYy7J-00031t-8T
+ for xen-devel@lists.xenproject.org; Tue, 09 Jan 2018 17:55:17 +0000
+Received: by mail-yw0-x229.google.com with SMTP id y187so5977180ywd.12
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jan 2018 09:55:15 -0800 (PST)
+In-Reply-To: <CA+aC4ktW9yK7hX1ynxWHtFuJer-mw847XO=M0T8ghBBmcV2ZhQ@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,44 +25,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Anthony Liguori <aliguori@amazon.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Anthony Liguori <anthony@codemonkey.ws>, Rich Persaud <persaur@gmail.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, security@xenproject.org, Jan Beulich <JBeulich@suse.com>, committers@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKYW4gOCwgMjAxOCBhdCA4OjA1IEFNLCBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3Vz
-ZS5jb20+IHdyb3RlOgo+Pj4+IE9uIDA0LjAxLjE4IGF0IDE0OjA2LCA8d2VpLmxpdTJAY2l0cml4
-LmNvbT4gd3JvdGU6Cj4+IEZyb206IFJvZ2VyIFBhdSBNb25uZSA8cm9nZXIucGF1QGNpdHJpeC5j
-b20+Cj4+Cj4+IE5vdGUgdGhhdCB0aGUgdW5tYXNrIGFuZCB0aGUgdmlycSBvcGVyYXRpb25zIGFy
-ZSBoYW5kbGVkIGJ5IHRoZSBzaGltCj4+IGl0c2VsZiwgYW5kIHRoYXQgRklGTyBldmVudCBjaGFu
-bmVscyBhcmUgbm90IGV4cG9zZWQgdG8gdGhlIGd1ZXN0Lgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBB
-bnRob255IExpZ3VvcmkgPGFsaWd1b3JpQGFtYXpvbi5jb20+Cj4+IFNpZ25lZC1vZmYtYnk6IFJv
-Z2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgo+PiBTaWduZWQtb2ZmLWJ5OiBT
-ZXJnZXkgRHlhc2xpIDxzZXJnZXkuZHlhc2xpQGNpdHJpeC5jb20+Cj4KPiBJbiBSRkMgc3RhdGUg
-dGhpcyBjZXJ0YWlubHkgZG9lc24ndCBtYXR0ZXIgeWV0LCBidXQgZ2VuZXJhbGx5IEknZAo+IGV4
-cGVjdCBGcm9tOiB0byBtYXRjaCB0aGUgZmlyc3QgUy1vLWIuCj4KPj4gQEAgLTE1NSwxMSArMTU2
-LDMxIEBAIHN0YXRpYyB2b2lkIHNldF92Y3B1X2lkKHZvaWQpCj4+ICBzdGF0aWMgdm9pZCB4ZW5f
-ZXZ0Y2huX3VwY2FsbChzdHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncykKPj4gIHsKPj4gICAgICBz
-dHJ1Y3QgdmNwdV9pbmZvICp2Y3B1X2luZm8gPSB0aGlzX2NwdSh2Y3B1X2luZm8pOwo+PiArICAg
-IHVuc2lnbmVkIGxvbmcgcGVuZGluZzsKPj4KPj4gICAgICB2Y3B1X2luZm8tPmV2dGNobl91cGNh
-bGxfcGVuZGluZyA9IDA7Cj4+IC0gICAgeGNoZygmdmNwdV9pbmZvLT5ldnRjaG5fcGVuZGluZ19z
-ZWwsIDApOwo+PiArICAgIHBlbmRpbmcgPSB4Y2hnKCZ2Y3B1X2luZm8tPmV2dGNobl9wZW5kaW5n
-X3NlbCwgMCk7Cj4+Cj4+IC0gICAgcHZfY29uc29sZV9yeChyZWdzKTsKPj4gKyAgICB3aGlsZSAo
-IHBlbmRpbmcgKQo+PiArICAgIHsKPj4gKyAgICAgICAgdW5zaWduZWQgaW50IGwxID0gZmZzbChw
-ZW5kaW5nKSAtIDE7Cj4KPiBmaW5kX2ZpcnN0X3NldF9iaXQoKSB3b3VsZCBsb29rIHRvIGJlIHRo
-ZSBiZXR0ZXIgbWF0Y2ggaGVyZSAoYW5kCj4gYmVsb3cpLCBub3QgdGhlIGxlYXN0IGJlY2F1c2Ug
-aXQgdHJhbnNsYXRlcyAob24gY2FwYWJsZSBoYXJkd2FyZSkKPiB0byBUWkNOVCBpbnN0ZWFkIG9m
-IEJTRi4KPgo+PiArICAgICAgICB1bnNpZ25lZCBsb25nIGV2dGNobiA9IHhjaGcoJlhFTl9zaGFy
-ZWRfaW5mby0+ZXZ0Y2huX3BlbmRpbmdbbDFdLCAwKTsKPj4gKwo+PiArICAgICAgICBfX2NsZWFy
-X2JpdChsMSwgJnBlbmRpbmcpOwo+PiArICAgICAgICBldnRjaG4gJj0gflhFTl9zaGFyZWRfaW5m
-by0+ZXZ0Y2huX21hc2tbbDFdOwo+PiArICAgICAgICB3aGlsZSAoIGV2dGNobiApCj4+ICsgICAg
-ICAgIHsKPj4gKyAgICAgICAgICAgIHVuc2lnbmVkIGludCBwb3J0ID0gZmZzbChldnRjaG4pIC0g
-MTsKPj4gKwo+PiArICAgICAgICAgICAgX19jbGVhcl9iaXQocG9ydCwgJmV2dGNobik7Cj4+ICsg
-ICAgICAgICAgICBwb3J0ICs9IGwxICogQklUU19QRVJfTE9ORzsKPgo+IFdoYXQgYWJvdXQgYSAz
-Mi1iaXQgY2xpZW50PyBJZiB0aGF0J3Mgbm90IGludGVuZGVkIHRvIGJlIHN1cHBvcnRlZCwKPiBi
-dWlsZGluZyBvZiBzdWNoIGEgZ3Vlc3Qgc2hvdWxkIGJlIHByZXZlbnRlZCAoaW4gZG9tMF9idWls
-ZC5jKS4KCk5vdGUgdGhhdCB3ZSBkaXNjYXJkZWQgdGhpcyBhcHByb2FjaCBpbiB0aGUgVml4ZW4g
-c2VyaWVzIGJlY2F1c2UgaXQKd2Fzbid0IHdvcmtpbmcgcmVsaWFibHkgZm9yIGluamVjdGluZyBy
-ZW1vdGUgZXZlbnQgY2hhbm5lbApub3RpZmljYXRpb25zLgoKUmVnYXJkcywKCkFudGhvbnkgTGln
-dW9yaQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============6462727071322556045==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="E4DoB5Yr2hRSRln6fhLzEKpcsiUXqPP2L"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--E4DoB5Yr2hRSRln6fhLzEKpcsiUXqPP2L
+Content-Type: multipart/mixed; boundary="SEkHqFxuCJ9aUVBskxeLGmYzk4Gpv9OvT";
+ protected-headers="v1"
+From: Doug Goldstein <cardoe@cardoe.com>
+To: Anthony Liguori <anthony@codemonkey.ws>, Rich Persaud <persaur@gmail.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, security@xenproject.org,
+ Jan Beulich <JBeulich@suse.com>, committers@xenproject.org
+Message-ID: <b1eee1f5-6715-9a83-6cd7-34f5de2ff3fd@cardoe.com>
+Subject: Re: [Xen-devel] Radical proposal: ship not-fully-tidied shim as
+ 4.10.1
+References: <23123.44604.284781.889416@mariner.uk.xensource.com>
+ <4F771D10-4A3C-4F73-B02C-CDFB211A0A75@gmail.com>
+ <CA+aC4ktW9yK7hX1ynxWHtFuJer-mw847XO=M0T8ghBBmcV2ZhQ@mail.gmail.com>
+In-Reply-To: <CA+aC4ktW9yK7hX1ynxWHtFuJer-mw847XO=M0T8ghBBmcV2ZhQ@mail.gmail.com>
+
+--SEkHqFxuCJ9aUVBskxeLGmYzk4Gpv9OvT
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+On 1/8/18 3:44 PM, Anthony Liguori wrote:
+>=20
+> It's not particularly hard to plumb through I think but if you are
+> using PCI passthrough for PV, then you really shouldn't worry about
+> Spectre/Meltdown.  That PV guest can already read all of physical
+> memory (since no IOMMU is used) and they can also write to all
+> physical memory which is far worse than what you can do with
+> Spectre/Meltdown.
+>=20
+
+That's certainly not true. The IOMMU is used by default with PV if its
+available since Xen 4.0.1. Prior to that there was an option that was
+"iommu=3Dpv" which was not the default for 4.0.0. Its certainly possible
+that's true for Xen 3.4 however.
+
+--=20
+Doug Goldstein
+
+
+--SEkHqFxuCJ9aUVBskxeLGmYzk4Gpv9OvT--
+
+--E4DoB5Yr2hRSRln6fhLzEKpcsiUXqPP2L
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlpVAgFfFIAAAAAALgAo
+aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
+MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
+Nl3kqQ/9HCsCI3GyC4AVx24SDA9Wus2KnTUlYVdXjYusL66ilRYjeYpQD9vMq9KV
+zylmIkf+x8tg7PQH4pifsEolzZX+C0wbCLOsgMSN4qf45/vNPtbrp7gCtktEH4yf
+s5lfm0Rg6BknkqOqPhS6zvoEzs2eVvWbaVobhilBmY1XuReEDj+qr6hTeWqd6uHg
+UcjWDQoZxGM8v3WhwhN8Y1g0gwOQ5O+jMbfgV5u7A8si/AHAWtUet2vea3t9c7Cl
+OlBYVlEI6nOV/GjOJyy+TL1lmm5RcU6e8LaapDE8tyRfYbCScJamVudbvUPvtRSE
+pp8SagfYvJOgLC6mCITRrDo9+cnkKABjAk+Egz9l42j1FBYtiq1+MiHAEFlHOvMa
+ZrGv/gntyVVWrYfV0SNlkLiCw8QBsNtCJ3byVOIN6z/7RwFns5A/Jvz/uB0mW5m+
+6E18rJVLnmwDFgzE/FaCfUo9Dv8lKSvOETdXsxW+ErjFjCJCM5ZBLdwqTjdF+g1v
+/dtQCFHHJOgj22y42YnIPjTYAfW7npjZyyP5eJQ0bFXghnLT6mxQJKHCFYUiRtKd
+kIyJY3IDvbmOW0L70mFru2CjMLUpirix1yYRG2oG3vKLdCQyE6wMjLcbQdDpyYaO
+zE8wu/F4aoh025Q+3TGJ52EIsXM71ExFHpmkNmcP/CxXwnzn3lE=
+=boXG
+-----END PGP SIGNATURE-----
+
+--E4DoB5Yr2hRSRln6fhLzEKpcsiUXqPP2L--
+
+
+--===============6462727071322556045==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6462727071322556045==--
