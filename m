@@ -1,8 +1,8 @@
-From: Anthony Liguori <anthony@codemonkey.ws>
+From: Doug Goldstein <cardoe@cardoe.com>
 Subject: Re: Radical proposal: ship not-fully-tidied shim as
-	4.10.1
-Date: Tue, 9 Jan 2018 09:48:07 -0800
-Message-ID: <CA+aC4kvOtmFprYiL4894efsmyzXatjdEcTTMhcSZF+hpVZaqzQ@mail.gmail.com>
+ 4.10.1
+Date: Tue, 9 Jan 2018 11:49:55 -0600
+Message-ID: <819ffe6b-6399-507c-4e31-2f0babb49684@cardoe.com>
 References: <23123.44604.284781.889416@mariner.uk.xensource.com>
  <4F771D10-4A3C-4F73-B02C-CDFB211A0A75@gmail.com>
  <CAFLBxZbsNZR5h1a9aCHZwMs7xiq6_qOs+2Ptj4A7qWTtNqE6iA@mail.gmail.com>
@@ -10,16 +10,15 @@ References: <23123.44604.284781.889416@mariner.uk.xensource.com>
  <CA+aC4kuWr00CmQeLAh0szYZDdNRCWBLSqu65TaQ1hBWTuXcnFA@mail.gmail.com>
  <5A550AF5020000780019CDF4@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4902442378489131634=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=n3h8=ee=codemonkey.ws=anthony@srs-us1.protection.inumbo.net>)
- id 1eYy0R-00024n-GN
- for xen-devel@lists.xenproject.org; Tue, 09 Jan 2018 17:48:11 +0000
-Received: by mail-lf0-x230.google.com with SMTP id h137so16850087lfe.8
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jan 2018 09:48:10 -0800 (PST)
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=2je3=ee=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
+ id 1eYy2E-0002Qj-RP
+ for xen-devel@lists.xenproject.org; Tue, 09 Jan 2018 17:50:03 +0000
+Received: by mail-yb0-x233.google.com with SMTP id b18so2936363ybn.2
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Jan 2018 09:50:01 -0800 (PST)
 In-Reply-To: <5A550AF5020000780019CDF4@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -29,69 +28,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
+To: Jan Beulich <JBeulich@suse.com>, Anthony Liguori <anthony@codemonkey.ws>
 Cc: Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <dunlapg@umich.edu>, Ian Jackson <ian.jackson@eu.citrix.com>, Rich Persaud <persaur@gmail.com>, committers@xenproject.org, security@xenproject.org, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBKYW4gOSwgMjAxOCBhdCA5OjMzIEFNLCBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3Vz
-ZS5jb20+IHdyb3RlOgo+Pj4+IE9uIDA5LjAxLjE4IGF0IDE4OjIzLCA8YW50aG9ueUBjb2RlbW9u
-a2V5LndzPiB3cm90ZToKPj4gT24gVHVlLCBKYW4gOSwgMjAxOCBhdCA4OjUyIEFNLCBTdGVmYW5v
-IFN0YWJlbGxpbmkKPj4gPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+IHdyb3RlOgo+Pj4gT24gVHVl
-LCA5IEphbiAyMDE4LCBHZW9yZ2UgRHVubGFwIHdyb3RlOgo+Pj4+IE9uIE1vbiwgSmFuIDgsIDIw
-MTggYXQgOTowMSBQTSwgUmljaCBQZXJzYXVkIDxwZXJzYXVyQGdtYWlsLmNvbT4gd3JvdGU6Cj4+
-Pj4gPiBPbiBhIHNpbWlsYXJseSBwcmFnbWF0aWMgbm90ZTogd291bGQgYSB2YXJpYXRpb24gb2Yg
-QW50aG9ueSdzIHZpeGVuIHBhdGNoCj4+IHNlcmllcyBiZSBzdWl0YWJsZSBmb3IgcHJlLVBWSCBY
-ZW4gNC42IC0gNC45PyAgVGhlc2UgdmVyc2lvbnMgYXJlIGN1cnJlbnRseQo+PiBkb2N1bWVudGVk
-IGFzIHNlY3VyaXR5LXN1cHBvcnRlZCAoT2N0IDIwMTggLSBKdWx5IDIwMjApLgo+Pj4+Cj4+Pj4g
-SG1tLCBJYW4ncyBtYWlsIHNlZW1zIHRvIGJlIGZvY3VzaW5nIG9uIHRoZSBpZGVhIG9mIGNoZWNr
-aW5nIGluIGEKPj4+PiBub24tcG9saXNoZWQgc2VyaWVzIHRvIDQuMTAsIHJhdGhlciB0aGFuIGV4
-Y3RseSB3aGF0IHRoZSBjb250ZW50IG9mCj4+Pj4gdGhhdCBzZXJpZXMgd291bGQgYmUuCj4+Pj4K
-Pj4+PiBJbiB0aGUgSVJMIGNvbnZlcnNhdGlvbiB0aGF0IHByZWNlZWRlZCB0aGlzIG1haWwsIHRo
-ZSBuZXcgc2hvcnQtdGVybQo+Pj4+IHRhcmdldCB3ZSBkaXNjdXNzZWQgd2FzOgo+Pj4+IDEuIEEg
-NC4xMC1iYXNlZCBzaGltIHRoYXQgY291bGQgYm9vdCBlaXRoZXIgdW5kZXIgSFZNIG9yIFBWSAo+
-Pj4+IDIuIEEgc2NyaXB0IHRoYXQgd291bGQgdGFrZSBhbiBleGlzdGluZyBQViBjb25maWcsIGFu
-ZCBzcGl0IG91dCBhKSBhCj4+Pj4gYm9vdGFibGUgSVNPIHdpdGggdGhlIHNoaW0gJiB3aGF0ZXZl
-ciB3YXMgbmVlZGVkLCBhbmQgYikgYSBuZXcgY29uZmlnCj4+Pj4gdGhhdCB3b3VsZCBib290IHRo
-ZSBzYW1lIFZNLCBidXQgaW4gSFZNIG1vZGUgd2l0aCB0aGUgc2hpbQo+Pj4+Cj4+Pj4gVGhlIHNj
-cmlwdCArIGEgNC4xMCBzaGltIGJpbmFyeSAqc2hvdWxkKiBhbGxvdyBtb3N0IFBWIGd1ZXN0cyB0
-byBib290Cj4+Pj4gd2l0aG91dCBhbnkgY2hhbmdlcyB3aGF0c29ldmVyIGZvciBtb3N0IG9sZGVy
-IHZlcnNpb25zIG9mIFhlbi4KPj4+Pgo+Pj4+IFRoZXJlIGFyZSBhIG51bWJlciBvZiBwZW9wbGUg
-Zm9yIHdob20gdGhpcyB3b24ndCB3b3JrOyBJIHRoaW5rIHdlIGFsc28KPj4+PiBuZWVkIHRvIHBy
-b3ZpZGUgYSB3YXkgdG8gdHJhbnNwYXJlbnRseSBjaGFuZ2UgUFYgZ3Vlc3RzIGludG8gUFZzaGlt
-Cj4+Pj4gZ3Vlc3RzLiAgQnV0IHRoYXQgd2lsbCBuZWNlc3NhcmlseSBpbnZvbHZlIHNpZ25pZmlj
-YW50IHRvb2xzdGFjawo+Pj4+IGZ1bmN0aW9uYWxpdHksIGF0IHdoaWNoIHBvaW50IHlvdSBtaWdo
-dCBhcyB3ZWxsIGJhY2twb3J0IFBWSCBhcyB3ZWxsLgo+Pj4KPj4+IFllcywgdGhlcmUgd2lsbCBi
-ZSBhIG51bWJlciBvZiBwZW9wbGUgdGhhdCB3b24ndCBiZSBjb3ZlcmVkIGJ5IHRoaXMgZml4LAo+
-Pj4gaW5jbHVkaW5nIHRob3NlIHRoYXQgY2FuJ3QgdXNlIEhWTS9QVkggbW9kZSBiZWNhdXNlIFZU
-LXggaXNuJ3QgYXZhaWxhYmxlCj4+PiBhdCBhbGwgaW4gdGhlaXIgZW52aXJvbm1lbnQuIFRoYXQg
-aXMgdGhlIG9ubHkgcmVhc29uIHRvIHJ1biBQViB0b2RheS4KPj4+IFByb3ZpZGluZyBhIHdheSB0
-byB0cmFuc3BhcmVudGx5IGNoYW5nZSBQViBndWVzdHMgaW50byBQVnNoaW0gZ3Vlc3RzCj4+PiB3
-b24ndCBjb3ZlciBhbnkgb2YgdGhlc2UgY2FzZXMuIEEgbW9yZSBjb21wbGV0ZSB3b3JrYXJvdW5k
-IHRvIFNQMyBpcwo+Pj4gYWxvbmcgdGhlIGxpbmVzIG9mIGh0dHBzOi8vbWFyYy5pbmZvLz9sPXhl
-bi1kZXZlbCZtPTE1MTUwOTc0MDYyNTY5MC4KPj4+Cj4+PiBUaGF0IHNhaWQsIEkgcmVhbGl6ZSB0
-aGF0IHdlIGFyZSBvbmx5IHRyeWluZyB0byBkbyB0aGUgYmVzdCB3ZSBjYW4gaW4gYQo+Pj4gdmVy
-eSBkaWZmaWN1bHQgc2l0dWF0aW9uLCB3aXRoIHZlcnkgbGl0dGxlIHRpbWUgaW4gb3VyIGhhbmRz
-LiBJIGFncmVlCj4+PiB3aXRoIElhbiB0aGF0IHdlIHNob3VsZCBjb21taXQgc29tZXRoaW5nIHVu
-cG9saXNoZWQgYW5kIG9ubHkgcGFydGlhbGx5Cj4+PiByZXZpZXdlZCBzb29uLCBldmVuIHRob3Vn
-aCBpdCBkb2Vzbid0IGNvdmVyIGEgZ29vZCBjaHVuayBvZiB0aGUgdXNlcmJhc2UKPj4+IGZvciBv
-bmUgcmVhc29uIG9yIGFub3RoZXIuIEV2ZW4gaWYgbWlncmF0aW9uIGRvZXNuJ3Qgd29yaywgaXQg
-d2lsbCBzdGlsbAo+Pj4gaGVscCBhbGwgdGhhdCBkb24ndCByZXF1aXJlIGl0LiBJdCBpcyBvbmx5
-IGEgcGFydGlhbCBmaXggYnkgbmF0dXJlCj4+PiBhbnl3YXkuCj4+Cj4+IENhbiBwZW9wbGUgYmUg
-YSBiaXQgbW9yZSBleHBsaWNpdCBhYm91dCB3aGF0IHRoZXkgdGhpbmsgc2hvdWxkIGJlIGRvbmUg
-aGVyZT8KPj4KPj4gSSdtIGhhcHB5IHRvIHJlZGlyZWN0IGVmZm9ydCB0byBQVkggc2hpbSBpZiB0
-aGF0J3Mgd2hhdCB0aGUgc29sdXRpb24KPj4gaXMgZ29pbmcgdG8gYmUuCj4+Cj4+IEkgb2J2aW91
-c2x5IHByZWZlciB0aGUgSFZNIGFwcHJvYWNoIGFzIGl0IHdvcmtzIG9uIGEgYnJvYWQgcmFuZ2Ug
-b2YgWGVuCj4+IHZlcnNpb25zCj4+IHdpdGhvdXQgbW9kaWZpY2F0aW9uIGJ1dCBJJ20ga2VlbiB0
-byBnZXQgc29tZXRoaW5nIGRvbmUgcXVpY2tseSBhbmQKPj4gZG9uJ3Qgd2FudCB0bwo+PiB3YXN0
-ZSBlZmZvcnQuCj4KPiBGcm9tIHdoYXQgSSd2ZSByZWFkIHRvZGF5LCBJIGhhdmUgbm8gcmVhc29u
-IHRvIGJlbGlldmUgdGhlIFBWSAo+IHNoaW0gd29uJ3Qgd29yayBpbiBIVk0gbW9kZS4gSG93IHdv
-dWxkIHRoZSBIVk0tb25seSBhcHByb2FjaAo+IGJlIGJldHRlciBpbiB0aGF0IGNhc2U/CgpQVlNo
-aW0gZG9lc24ndCB3b3JrIG9uIEhWTS4gIEkgaGF2ZW4ndCBkZWJ1Z2dlZCBpdCBidXQgSSBnZXQg
-YW4gZWFybHkKcGFuaWMgZHVlIHdoZW4gY29uc3RydWN0aW5nIGRvbTAuCgpUaGVyZSBpc24ndCBh
-ZGVxdWF0ZSBjb21wYXRpYmlsaXR5IGluIHRoZSBzZXJpZXMgdG9vIHRvIHN1cHBvcnQKYW55dGhp
-bmcgYnV0IHZlcnkgcmVjZW50IFhlbiB2ZXJzaW9ucyAoZm9yIGV2ZW50IGNoYW5uZWxzIGF0IGxl
-YXN0KS4KClRoZSBIVk0tb25seSBhcHByb2FjaCBpcyBrbm93biB0byB3b3JrIG9uIGEgd2lkZSBz
-ZXQgb2YgWGVuIHZlcnNpb25zLgoKUmVnYXJkcywKCkFudGhvbnkgTGlndW9yaQoKPiBKYW4KPgoK
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============4902442378489131634==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="djxSGm5w39m8sKeyAH6e3BLwvVakYgBWY"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--djxSGm5w39m8sKeyAH6e3BLwvVakYgBWY
+Content-Type: multipart/mixed; boundary="MfNw7Ccw7KcpUSnqhzhkbDET4ORXTRrgd";
+ protected-headers="v1"
+From: Doug Goldstein <cardoe@cardoe.com>
+To: Jan Beulich <JBeulich@suse.com>, Anthony Liguori <anthony@codemonkey.ws>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ George Dunlap <dunlapg@umich.edu>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Rich Persaud <persaur@gmail.com>, committers@xenproject.org,
+ security@xenproject.org, xen-devel <xen-devel@lists.xenproject.org>
+Message-ID: <819ffe6b-6399-507c-4e31-2f0babb49684@cardoe.com>
+Subject: Re: [Xen-devel] Radical proposal: ship not-fully-tidied shim as
+ 4.10.1
+References: <23123.44604.284781.889416@mariner.uk.xensource.com>
+ <4F771D10-4A3C-4F73-B02C-CDFB211A0A75@gmail.com>
+ <CAFLBxZbsNZR5h1a9aCHZwMs7xiq6_qOs+2Ptj4A7qWTtNqE6iA@mail.gmail.com>
+ <alpine.DEB.2.10.1801090821190.4603@sstabellini-ThinkPad-X260>
+ <CA+aC4kuWr00CmQeLAh0szYZDdNRCWBLSqu65TaQ1hBWTuXcnFA@mail.gmail.com>
+ <5A550AF5020000780019CDF4@prv-mh.provo.novell.com>
+In-Reply-To: <5A550AF5020000780019CDF4@prv-mh.provo.novell.com>
+
+--MfNw7Ccw7KcpUSnqhzhkbDET4ORXTRrgd
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+On 1/9/18 11:33 AM, Jan Beulich wrote:
+>>>> On 09.01.18 at 18:23, <anthony@codemonkey.ws> wrote:
+>> On Tue, Jan 9, 2018 at 8:52 AM, Stefano Stabellini
+>> <sstabellini@kernel.org> wrote:
+>>> On Tue, 9 Jan 2018, George Dunlap wrote:
+>>>> On Mon, Jan 8, 2018 at 9:01 PM, Rich Persaud <persaur@gmail.com> wro=
+te:
+>>>>> On a similarly pragmatic note: would a variation of Anthony's vixen=
+ patch=20
+>> series be suitable for pre-PVH Xen 4.6 - 4.9?  These versions are curr=
+ently=20
+>> documented as security-supported (Oct 2018 - July 2020).
+>>>>
+>>>> Hmm, Ian's mail seems to be focusing on the idea of checking in a
+>>>> non-polished series to 4.10, rather than exctly what the content of
+>>>> that series would be.
+>>>>
+>>>> In the IRL conversation that preceeded this mail, the new short-term=
+
+>>>> target we discussed was:
+>>>> 1. A 4.10-based shim that could boot either under HVM or PVH
+>>>> 2. A script that would take an existing PV config, and spit out a) a=
+
+>>>> bootable ISO with the shim & whatever was needed, and b) a new confi=
+g
+>>>> that would boot the same VM, but in HVM mode with the shim
+>>>>
+>>>> The script + a 4.10 shim binary *should* allow most PV guests to boo=
+t
+>>>> without any changes whatsoever for most older versions of Xen.
+>>>>
+>>>> There are a number of people for whom this won't work; I think we al=
+so
+>>>> need to provide a way to transparently change PV guests into PVshim
+>>>> guests.  But that will necessarily involve significant toolstack
+>>>> functionality, at which point you might as well backport PVH as well=
+=2E
+>>>
+>>> Yes, there will be a number of people that won't be covered by this f=
+ix,
+>>> including those that can't use HVM/PVH mode because VT-x isn't availa=
+ble
+>>> at all in their environment. That is the only reason to run PV today.=
+
+>>> Providing a way to transparently change PV guests into PVshim guests
+>>> won't cover any of these cases. A more complete workaround to SP3 is
+>>> along the lines of https://marc.info/?l=3Dxen-devel&m=3D1515097406256=
+90.
+>>>
+>>> That said, I realize that we are only trying to do the best we can in=
+ a
+>>> very difficult situation, with very little time in our hands. I agree=
+
+>>> with Ian that we should commit something unpolished and only partiall=
+y
+>>> reviewed soon, even though it doesn't cover a good chunk of the userb=
+ase
+>>> for one reason or another. Even if migration doesn't work, it will st=
+ill
+>>> help all that don't require it. It is only a partial fix by nature
+>>> anyway.
+>>
+>> Can people be a bit more explicit about what they think should be done=
+ here?
+>>
+>> I'm happy to redirect effort to PVH shim if that's what the solution
+>> is going to be.
+>>
+>> I obviously prefer the HVM approach as it works on a broad range of Xe=
+n=20
+>> versions
+>> without modification but I'm keen to get something done quickly and
+>> don't want to
+>> waste effort.
+>=20
+> From what I've read today, I have no reason to believe the PVH
+> shim won't work in HVM mode. How would the HVM-only approach
+> be better in that case?
+>=20
+> Jan
+
+I feel like I should state the obvious here. Its tested over a large
+data set.
+--=20
+Doug Goldstein
+
+
+--MfNw7Ccw7KcpUSnqhzhkbDET4ORXTRrgd--
+
+--djxSGm5w39m8sKeyAH6e3BLwvVakYgBWY
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlpVAMZfFIAAAAAALgAo
+aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
+MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
+Nl2qEg//SdbM8Cg2dY2LziXj2ptw/KkVJg1MzRW7OFjdYWH3VO/yWUEhOXCBemlG
+wTeMv+R9CYfOof0dKjb+jX3VXPH7xBCTqnxiRa/AfgCShwdoNcyiuDtGnJx//kWR
+E4YlH3t/I/tKi8nC/fHtSx+qp44KwHTETD8ImYwGPjbPp3JMomKYO7lJ55erCh4k
+Y04a0S33g8wt81wzUqP3vQON4VjErRjRG0urh0kILf+VH1KGPNwXRdIeYaqHS8rx
+tpal6XjlnF0eTDTdKIul7GX74WAMRV7jKx/Qeag0BQQg+83ky+IBsHt6QPWrryfA
+L36wvIddVU8fd9P6HYZA4GzNJIFqP0wCgxsIG/DOfX0F9OqfKR/3QiBWDMpoWgDK
+0En488pXCbccrqyyyelZAQ6ZJ2hMLpl9KMhHd2UqsaEP23CBV9pTN6lUpMfzs+Si
++OX1uiT6EjJQe5wQQPNHyEyRgLMMoTVmOG1ZzQU7FolxF+huOPmHtyXBYu0r4Exc
+LgGA2tqKZewSCzJRhAK7kgnai9ZawaORbZkUQejIDzYt++A8PggJBdaIt3IN++Gd
+ew5/nPmIVpJMH9WKQS0D8VXOLq5aoNIAcxARMRFBPkOKf2amQq6FGnXs5EgCI76r
+xg86ovHekD3M0Wc+VCz2NaBZ5+NN32HG+6MC8aRQqHghc4C/nCs=
+=Bav9
+-----END PGP SIGNATURE-----
+
+--djxSGm5w39m8sKeyAH6e3BLwvVakYgBWY--
+
+
+--===============4902442378489131634==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4902442378489131634==--
