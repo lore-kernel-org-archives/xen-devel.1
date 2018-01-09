@@ -1,22 +1,20 @@
-From: Rich Persaud <persaur@gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
 Subject: Re: Radical proposal: ship not-fully-tidied shim as
 	4.10.1
-Date: Mon, 8 Jan 2018 17:08:57 -0500
-Message-ID: <E43C556A-7832-4A3F-BEAB-0B5C877C9CDD@gmail.com>
+Date: Tue, 9 Jan 2018 00:14:32 +0000
+Message-ID: <08bdc18d-7d05-9e56-5a7a-513603698576@citrix.com>
 References: <23123.44604.284781.889416@mariner.uk.xensource.com>
- <4F771D10-4A3C-4F73-B02C-CDFB211A0A75@gmail.com>
- <CA+aC4ktW9yK7hX1ynxWHtFuJer-mw847XO=M0T8ghBBmcV2ZhQ@mail.gmail.com>
-Mime-Version: 1.0 (1.0)
-Content-Type: multipart/mixed; boundary="===============0149647936112215176=="
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=p7ta=ed=gmail.com=persaur@srs-us1.protection.inumbo.net>)
- id 1eYfbJ-0005sS-8Q
- for xen-devel@lists.xenproject.org; Mon, 08 Jan 2018 22:09:01 +0000
-Received: by mail-it0-x22d.google.com with SMTP id u62so9258436ita.2
- for <xen-devel@lists.xenproject.org>; Mon, 08 Jan 2018 14:08:59 -0800 (PST)
-In-Reply-To: <CA+aC4ktW9yK7hX1ynxWHtFuJer-mw847XO=M0T8ghBBmcV2ZhQ@mail.gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=gchx=ee=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
+ id 1eYhYx-00072I-Pw
+ for xen-devel@lists.xenproject.org; Tue, 09 Jan 2018 00:14:43 +0000
+In-Reply-To: <23123.44604.284781.889416@mariner.uk.xensource.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,121 +23,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony Liguori <anthony@codemonkey.ws>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, security@xenproject.org, Jan Beulich <JBeulich@suse.com>, committers@xenproject.org
+To: Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org, Jan Beulich <JBeulich@suse.com>, security@xenproject.org
+Cc: Juergen Gross <JGross@suse.com>, committers@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0149647936112215176==
-Content-Type: multipart/alternative;
-	boundary=Apple-Mail-DBAE291F-9EB1-4EB1-95B7-5DFBAC8B8F61
-Content-Transfer-Encoding: 7bit
-
-
---Apple-Mail-DBAE291F-9EB1-4EB1-95B7-5DFBAC8B8F61
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-> On Jan 8, 2018, at 16:44, Anthony Liguori <anthony@codemonkey.ws> wrote:
->> On Mon, Jan 8, 2018 at 1:01 PM, Rich Persaud <persaur@gmail.com> wrote:
->> On a similarly pragmatic note: would a variation of Anthony's vixen patch=
- series be suitable for pre-PVH Xen 4.6 - 4.9?  These versions are currently=
- documented as security-supported (Oct 2018 - July 2020).
->>=20
->> There are production environments where upgrading to Xen 4.10 in a timefr=
-ame of days or weeks is not practical.
->>=20
->> Will PCI passthrough for PV guests be supported in any of the solutions t=
-hat are being considered?  If not, it would be helpful to document this in t=
-he Spectre/Meltdown XSA and/or FAQ, including timeline or complexity estimat=
-es for the return of security support for Xen PV driver domains.  SUPPORT.md=
- will also need an update.
->=20
-> It's not particularly hard to plumb through I think
-
-An earlier discussion [1] suggested that it was feasible but not easy.  This=
- feature is used for device driver (e.g. NIC or USB) domains in OpenXT and Q=
-ubes deployments.
-
-
-> but if you are using PCI passthrough for PV, then you really shouldn't wor=
-ry about
-> Spectre/Meltdown.  That PV guest can already read all of physical
-> memory (since no IOMMU is used) and they can also write to all
-> physical memory which is far worse than what you can do with
-> Spectre/Meltdown.
-
-We may be using different terminology?  OpenXT and Qubes typically require I=
-OMMU for PV driver domains.  XSM can [2] enforce a policy which requires tha=
-t an IOMMU be present before a driver domain is started.  =20
-
-Rich
-
-[1] https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg00475.ht=
-ml
-
-[2] https://www.mail-archive.com/xen-devel@lists.xen.org/msg118728.html
-
-
---Apple-Mail-DBAE291F-9EB1-4EB1-95B7-5DFBAC8B8F61
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"></head><body dir=3D"auto"><div><span></span></div><div><meta http-equ=
-iv=3D"content-type" content=3D"text/html; charset=3Dutf-8"><div></div><div>O=
-n Jan 8, 2018, at 16:44, Anthony Liguori &lt;<a href=3D"mailto:anthony@codem=
-onkey.ws">anthony@codemonkey.ws</a>&gt; wrote:<br></div><blockquote type=3D"=
-cite"><div><span>On Mon, Jan 8, 2018 at 1:01 PM, Rich Persaud &lt;<a href=3D=
-"mailto:persaur@gmail.com">persaur@gmail.com</a>&gt; wrote:</span><blockquot=
-e type=3D"cite"><span>On a similarly pragmatic note: would a variation of An=
-thony's vixen patch series be suitable for pre-PVH Xen 4.6 - 4.9? &nbsp;Thes=
-e versions are currently documented as security-supported (Oct 2018 - July 2=
-020).</span><br></blockquote><blockquote type=3D"cite"><span></span><br></bl=
-ockquote><blockquote type=3D"cite"><span>There are production environments w=
-here upgrading to Xen 4.10 in a timeframe of days or weeks is not practical.=
-</span><br></blockquote><blockquote type=3D"cite"><span></span><br></blockqu=
-ote><blockquote type=3D"cite"><span>Will PCI passthrough for PV guests be su=
-pported in any of the solutions that are being considered? &nbsp;If not, it w=
-ould be helpful to document this in the Spectre/Meltdown XSA and/or FAQ, inc=
-luding timeline or complexity estimates for the return of security support f=
-or Xen PV driver domains. &nbsp;SUPPORT.md will also need an update.</span><=
-br></blockquote><span></span><br><span>It's not particularly hard to plumb t=
-hrough I think </span></div></blockquote><div><br></div><div><span style=3D"=
-background-color: rgba(255, 255, 255, 0);">An earlier discussion [1] suggest=
-ed that it was feasible but not easy. &nbsp;</span>This feature is used for d=
-evice driver (e.g. NIC or USB) domains in OpenXT and Qubes deployments.</div=
-><div><br></div><br><blockquote type=3D"cite"><div><span>but if you are&nbsp=
-;</span><span>using PCI passthrough for PV, then you really shouldn't worry a=
-bout</span><br><span>Spectre/Meltdown. &nbsp;That PV guest can already read a=
-ll of physical</span><br><span>memory (since no IOMMU is used) and they can a=
-lso write to all</span><br><span>physical memory which is far worse than wha=
-t you can do with</span><br><span>Spectre/Meltdown.</span><br></div></blockq=
-uote><div><br></div><div>We may be using different terminology? &nbsp;OpenXT=
- and Qubes typically require IOMMU for PV driver domains. &nbsp;XSM can [2] e=
-nforce a policy which requires that an IOMMU be present before a driver doma=
-in is started. &nbsp;&nbsp;</div><div><br></div><div>Rich</div><div><br></di=
-v><div>[1]&nbsp;<a href=3D"https://lists.xenproject.org/archives/html/xen-de=
-vel/2018-01/msg00475.html">https://lists.xenproject.org/archives/html/xen-de=
-vel/2018-01/msg00475.html</a></div><div><br></div><div>[2]&nbsp;<a href=3D"h=
-ttps://www.mail-archive.com/xen-devel@lists.xen.org/msg118728.html">https://=
-www.mail-archive.com/xen-devel@lists.xen.org/msg118728.html</a></div><div><b=
-r></div><blockquote type=3D"cite"><div><span></span></div></blockquote></div=
-></body></html>=
-
---Apple-Mail-DBAE291F-9EB1-4EB1-95B7-5DFBAC8B8F61--
-
-
---===============0149647936112215176==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0149647936112215176==--
+T24gMDgvMDEvMjAxOCAxNzo0NSwgSWFuIEphY2tzb24gd3JvdGU6Cj4gQUlVSSB3ZSBoYXZlIGEg
+c2VyaWVzIGZvciBwdi1pbi1wdmggc2hpbSB3aGljaCBpcyBuZWFyaW5nIGNvbXBsZXRpb24KPiBp
+biB0aGUgc2Vuc2UgdGhhdCBpdCB3aWxsIGhhdmUgYmVlbiB3ZWxsLXRlc3RlZCAoZXNwZWNpYWxs
+eSB0aGUKPiBoeXBlcnZpc29yIHBhcnRzKSBhbmQgaGFzIGdvb2QgZnVuY3Rpb25hbGl0eS4gIChX
+ZWkgaXMgaGFuZGxpbmcgdGhlCj4gYXNzZW1ibHkgb2YgdGhpcyBzZXJpZXMuKQo+Cj4gVGhlIHNl
+cmllcywgaG93ZXZlciwgbmVlZHMgcHJvcGVyIHJldmlldyBhbmQgdGlkeWluZyB1cC4KPiBTcGVj
+aWZpY2FsbHksIGl0IG5lZWRzIHRoZSBraW5kIG9mIHRpZHlpbmcgdXAgdGhhdCBmaXhlcyBjb2Rl
+Cj4gc3RydWN0dXJlIGFuZCBzdHlsZSBpc3N1ZXMgdGhhdCB3aWxsIGhpbmRlciBmdXR1cmUgWGVu
+IGRldmVsb3BtZW50Lgo+IEkuZS4gdGhlIGtpbmQgb2YgdGVjaG5pY2FsIGRlYnQgd2hpY2ggZG9l
+cyBub3QgZGlyZWN0bHkgY2F1c2UgYnVncyBub3cKPiBidXQgd2lsbCBjYXVzZSB0cm91YmxlIChp
+bmNsdWRpbmcgYnVncykgaW4gdGhlIGZ1dHVyZS4KPgo+IElNTyB0aGF0IGtpbmQgb2YgdGlkeWlu
+ZyB1cCBpcyBkZWZpbml0ZWx5IGVzc2VudGlhbCBmb3IKPiB4ZW4uZ2l0I21hc3Rlci4gIEhvd2V2
+ZXIsIGl0IGlzIG11Y2ggbGVzcyBvZiBhbiBpc3N1ZSBmb3IgWGVuIDQuMTAuCj4gWGVuIDQuMTAs
+IGFzIGEgc3RhYmxlIGJyYW5jaCwgd2lsbCBnZXQgbXVjaCBtb3JlIGxpbWl0ZWQgZnVydGhlcgo+
+IGRldmVsb3BtZW50LiAgRmFpbHVyZSB0byB0aWR5IHRoaW5ncyB1cCB0aGVyZSB3aWxsIG1ha2Ug
+YmFja3BvcnRpbmcKPiBvdGhlciBjaGFuZ2VzIG1vcmUgYXdrd2FyZCBidXQgdGhlIG92ZXJhbGwg
+aW1wYWN0IGlzIGJvdGggbG93ZXIgYW5kCj4gdGltZS1ib3VuZC4KPgo+IEN1cnJlbnRseSB0aGUg
+WGVuIFByb2plY3QgaGFzIG5vIHB1Ymxpc2hlZCByZXNvbHV0aW9uIGZvciBQViBndWVzdHMKPiB0
+aGF0IGNhbid0IGJlIGJvb3RlZCBhcywgb3IgY29udmVydGVkIHRvLCBQVkggb3IgSFZNLiAgKEFu
+ZCBIVk0gZ3Vlc3RzCj4gYnJpbmcgdGhlaXIgb3duIHByb2JsZW1zLikgIFdlIG5lZWQgdG8gcHJv
+dmlkZSBvdXIgdXNlcnMgd2l0aCBtb3JlCj4gZ29vZCBvcHRpb25zIGFzIHF1aWNrbHkgYXMgcG9z
+c2libGUuCj4KPiBJIHdvdWxkIGxpa2UgdG8gc3VnZ2VzdCB0aGF0IGEgZ29vZCB3YXkgb2YgZG9p
+bmcgdGhpcyB3b3VsZCBiZSB0byBzaGlwCj4gdGhlIHNoaW0gc2VyaWVzIGFzIDQuMTAuMSB3aXRo
+aW4gdGhlIG5leHQgdmVyeSBmZXcgZGF5cy4gIEl0IG5lZWRzCj4gc29tZSBtaW5vciBidWdmaXhp
+bmcgKGJ1aWxkIGJyZWFrYWdlIGV0Yy4pIGJ1dCBpcyBiYXNpY2FsbHkgcmVhZHkgZm9yCj4gdXNl
+Lgo+Cj4gU3BlYWtpbmcgYXMgYSBzeXNhZG1pbiAoZXZlbiwgYSB2ZXJ5IGNvbnNlcnZhdGl2ZSBz
+eXNhZG1pbiBtYW55IG9mCj4gd2hvc2Ugc3lzdGVtcyBhcmUgcnVubmluZyBEZWJpYW4gb2xkc3Rh
+YmxlKSwgSSBoYXZlIGFscmVhZHkgdGFrZW4gYQo+IGRlY2lzaW9uIHRvIHJhcGlkbHkgYWR2YW5j
+ZSB0byBuZXcgc29mdHdhcmUsIGluIG9uZSBjb250ZXh0LCBiZWNhdXNlCj4gb2YgdGhlc2UgdnVs
+bmVyYWJpbGl0aWVzIC0gYW5kIHRha2UgYW5kIGZpeCB3aGF0ZXZlciBpbXBhY3QgdGhhdCBoYXMu
+Cj4gSSB0aGluayBtYW55IG9mIG91ciB1c2VycyB3b3VsZCBsaWtlIHRvIG1ha2UgdGhlIHNhbWUg
+Y2hvaWNlLgo+Cj4gUmVsZWFzZWluZyA0LjEwLjEgdGhpcyB3ZWVrIHdpdGggcHYtaW4tcHZoIHN1
+cHBvcnQgd291bGQgZ2l2ZSBtYW55IG9mCj4gb3VyIHVzZXJzIHdpdGggUFYgZ3Vlc3RzIGFuIGlt
+bWVkaWF0ZWx5IGRlcGxveWFibGUgdXBkYXRlLCBldmVuIHRob3VnaAo+IG9mIGNvdXJzZSB0aGUg
+dmVyc2lvbiBidW1wIHRvIGdldCB0byA0LjEwIG1heSBiZSBkaXNydXB0aXZlLgo+Cj4gRG9pbmcg
+dGhpcyB3b3VsZCBiZSBhIGRlcGFydHVyZSBmcm9tIG91ciB1dXN1YWwgbm9uLXNlY3VyaXR5LWJ1
+Zwo+IHByb2Nlc3Mgb2YgY29tbWl0dGluZyBjaGFuZ2VzIHRvIHhlbi5naXQjc3RhZ2luZywgYW5k
+IHRoZW4gYmFja3BvcnRpbmcKPiBvbmx5IGFmdGVyIHRoZSBwYXRjaGVzIGhhdmUgYmVlbiBzaXR0
+aW5nIGluIHhlbi5naXQjbWFzdGVyIGZvciBzb21lCj4gdGltZS4gIEl0J3MgYWxzbyBhIGRlcGFy
+dHVyZSBmcm9tIG91ciB1c3VhbCBzZWN1cml0eS1idWcgcHJvY2VzcyBvZgo+IGRldmVsb3Bpbmcg
+YW5kIHRlc3RpbmcgYW5kIGNvbW1pdHRpbmcgcGF0Y2hlcyBmb3IgYWxsIHN1cHBvcnRlZAo+IHZl
+cnNpb25zIGluIHBhcmFsbGVsLgo+Cj4gQnV0IHRoaXMgaXMgbm90IGEgdXN1YWwgc2l0dWF0aW9u
+LiAgVGhpcyB0aW1lLCB3ZSBkb24ndCBoYXZlIHRoZSB0aW1lCj4gdG8gd2FpdC4KPgo+IE9waW5p
+b25zID8KCkdpdmVuIHRoZSBzaXR1YXRpb24sIGdldHRpbmcgYSBtaXRpZ2F0aW9uIGluIHBsYWNl
+IGlzIHVyZ2VudC7CoCBUaGF0CnNhaWQsIHdlIHNob3VsZCBlcnIgb24gdGhlIHNpZGUgb2YgaGFz
+dGUgcmF0aGVyIHRoYW4gcGFuaWMuCgpBcyBhIGZpcnN0IHJlcXVpcmVtZW50LCBub3RoaW5nIHNo
+b3VsZCBnbyBpbnRvIDQuMTAgd2hpY2ggaXNuJ3QgaW4Kc3RhZ2luZy7CoCAoVGhlIHR3byBhcmUg
+dmVyeSBjbG9zZSB0b2dldGhlciBhdCB0aGUgbW9tZW50IGJ1dCkgdGhlIG1vbWVudAp3ZSBzdGFy
+dCBjb21taXR0aW5nIHN0cmFpZ2h0IHRvIDQuMTAsIHdlIHdpbGwgbG9vc2Ugc29tZSBzdWJ0bGUg
+Y2hhbmdlCmZyb20gc3RhZ2luZywgYW5kIGl0IHdpbGwgdGFrZSBhZ2VzIHRvIHNwb3QuwqAgV2hh
+dCBJIG1lYW4gYnkgdGhpcyBpcwp0aGF0LCBpZiB3ZSBhZ3JlZSB0byBnbyBhbG9uZyB0aGlzIHJv
+dXRlLCBwYXRjaGVzIHNob3VsZCBiZSBjb21taXR0ZWQgdG8Kc3RhZ2luZyB0aGVuIGltbWVkaWF0
+ZWx5IGNoZXJyeXBpY2tlZCB0byBzdGFnaW5nLTQuMTAsIHJhdGhlciB0aGFuCmNvbW1pdHRlZCB0
+byBzdGFnaW5nLTQuMTAgZGlyZWN0bHkuwqAgVGhpcyBlbnN1cmVzIHRoYXQgd2UgZG9uJ3QKYWNj
+aWRlbnRhbGx5IG1pc3MgZnVuY3Rpb25hbGl0eSBpbiB0aGUgbWFpbmxpbmUuCgpXZSBtdXN0IGVu
+c3VyZSB0aGF0IHBlcmZlY3Rpb24gZG9lc24ndCBnZXQgaW4gdGhlIHdheSBvZiBleHBlZGllbmN5
+LsKgClRoZXJlZm9yZSwgcmV2aWV3cyBzaG91bGQgYmUgZXh0cmEgY2FyZWZ1bCBhYm91dCB3aGlj
+aCByZXZpZXcgY29tbWVudHMKYXJlIG5pY2UtdG8taGF2ZSwgYW5kIHdoaWNoIGFyZSBtYW5kYXRv
+cnkuwqAgVGVjaG5pY2FsIGFyZ3VtZW50cyBhcmUgcGFydApvZiB0aGUgY291cnNlLCBidXQgc2hv
+dWxkIGNvbXByb21pc2Ugb24gdGhlIGVhc2llciBzb2x1dGlvbiB3aGVuIGl0CmRvZXNuJ3QgYWZm
+ZWN0IGEgY29ycmVjdG5lc3MgaXNzdWUuCgpTb21lIG5pY2UtdG8taGF2ZXMgKHN1Y2ggYXMgbWlu
+b3IgY29ycmVjdGlvbnMgdG8gY29kaW5nIHN0eWxlKSBjYW4gYmUKZWFzaWx5IGZpeGVkIG9uIGNv
+bW1pdC7CoCBOb3Qtc28tbWlub3IgbmljZS10by1oYXZlcyB3aGljaCBzdGlsbCBkb24ndAppbXBh
+Y3QgdGhlIHRlY2huaWNhbCBjb3JyZWN0bmVzcyBvZiB0aGUgaXNzdWUgc2hvdWxkIGJlIGRlZmVy
+cmVkLsKgIFRoZQpsaXN0IG9mIG5vdC1zby1taW5vciBuaWNlLXRvLWhhdmVzIHNob3VsZCBiZSBt
+YWludGFpbmVkIGFuZCBiZSBibG9ja2Vycwpmb3IgNC4xMSAoYXMgdGhlIGNvZGUgd291bGRuJ3Qg
+aGF2ZSBub3JtYWxseSBnb3R0ZW4gaW4pLCBhbmQgZm9yIHdhbnQgb2YKYW55b25lIGJldHRlciwg
+SSBub21pbmF0ZSBKdWVyZ2VuIGFzIHRoZSByZWxlYXNlIG1hbmFnZXIgZm9yIDQuMTEgdG8gYmUK
+aW4gY2hhcmdlIG9mIHRoaXMgbGlzdC4KCkRvZXMgdGhpcyBzb3VuZCBmYWlyP8KgIFByZXNzaW5n
+IHRpbWVzIGNhbGwgZm9yIGV4dHJhb3JkaW5hcnkgbWVhc3VyZXMsCmJ1dCBpbiB0aGlzIGNhc2Us
+IEkgdGhpbmsgaXQgaXMgdGhlIGJldHRlciBjb3Vyc2Ugb2YgYWN0aW9uIGZvciB0aGUKcHJvamVj
+dCBhcyBhIHdob2xlLgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
