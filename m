@@ -1,19 +1,17 @@
-From: Oleksandr Grytsov <al1img@gmail.com>
-Subject: Re: [PATCH] libxl: add libxl__is_driver_domain function
-Date: Tue, 9 Jan 2018 13:34:29 +0200
-Message-ID: <CACvf2oUDKQvX+KCXNfGRJCbcC0wz6j5xQNZ4rYjApeOzwaXvcg@mail.gmail.com>
-References: <1513260853-3450-1-git-send-email-al1img@gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v6.5 14/26] x86: Introduce alternative
+ indirect thunks
+Date: Tue, 9 Jan 2018 11:44:14 +0000
+Message-ID: <8eec3fa0-6ff3-056c-fef7-1950b74989e9@citrix.com>
+References: <1515024955-13390-1-git-send-email-andrew.cooper3@citrix.com>
+ <1515024955-13390-15-git-send-email-andrew.cooper3@citrix.com>
+ <5A4E0488020000780019AD47@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7798241259817920857=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=mj+z=ee=gmail.com=al1img@srs-us1.protection.inumbo.net>)
- id 1eYsAp-0002wE-DX
- for xen-devel@lists.xenproject.org; Tue, 09 Jan 2018 11:34:31 +0000
-Received: by mail-it0-x244.google.com with SMTP id f190so11550779ita.5
- for <xen-devel@lists.xenproject.org>; Tue, 09 Jan 2018 03:34:30 -0800 (PST)
-In-Reply-To: <1513260853-3450-1-git-send-email-al1img@gmail.com>
+In-Reply-To: <5A4E0488020000780019AD47@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,148 +20,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7798241259817920857==
-Content-Type: multipart/alternative; boundary="089e0820061043c0580562564c87"
-
---089e0820061043c0580562564c87
-Content-Type: text/plain; charset="UTF-8"
-
-On Thu, Dec 14, 2017 at 4:14 PM, Oleksandr Grytsov <al1img@gmail.com> wrote:
-
-> From: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
->
-> We have following arm-based setup:
->
-> - Dom0 with xen and xen tools;
-> - Dom1 with device backends (but it is not the driver domain);
-> - Dom2 with device frontend;
->
-> On Dom2 destroying we have timeout error. Because xl treats our
-> Dom1 as driver domain and waits for backend path to be cleared
-> by the driver domain which is not our case.
->
-> According to libxl__domain_make in case of driver domain it has
-> "libxl" xen store entry:
->
->     if (libxl_defbool_val(info->driver_domain)) {
->         /*
->          * Create a local "libxl" directory for each guest, since we might
-> want
->          * to use libxl from inside the guest
->          */
->         libxl__xs_mknod(gc, t, GCSPRINTF("%s/libxl", dom_path), rwperm,
->                         ARRAY_SIZE(rwperm));
->
-> This patch introduces libxl__is_driver_domain which determines the driver
-> domain by checking if "libxl" entry is present and uses this function on
-> device destroy to check by whom domain path should be cleaned up (libxl
-> or the driver domain).
->
-> Oleksandr Grytsov (1):
->   libxl: add libxl__is_driver_domain function
->
->  tools/libxl/libxl_device.c   | 17 ++++++++++-------
->  tools/libxl/libxl_internal.c | 16 ++++++++++++++++
->  tools/libxl/libxl_internal.h |  4 ++++
->  3 files changed, 30 insertions(+), 7 deletions(-)
->
-> --
-> 2.7.4
->
->
-
-ping and update
-
-There is run_hotplug_scripts parameter in xl.cfg. I guess it is related to
-this issue. But looking
-through the code I see that this parameter is not used. Could anyone
-provide more info about
-this parameter?
-
--- 
-Best Regards,
-Oleksandr Grytsov.
-
---089e0820061043c0580562564c87
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On T=
-hu, Dec 14, 2017 at 4:14 PM, Oleksandr Grytsov <span dir=3D"ltr">&lt;<a hre=
-f=3D"mailto:al1img@gmail.com" target=3D"_blank">al1img@gmail.com</a>&gt;</s=
-pan> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><span clas=
-s=3D"gmail-">From: Oleksandr Grytsov &lt;<a href=3D"mailto:oleksandr_grytso=
-v@epam.com">oleksandr_grytsov@epam.com</a>&gt;<br>
-<br>
-We have following arm-based setup:<br>
-<br>
-- Dom0 with xen and xen tools;<br>
-- Dom1 with device backends (but it is not the driver domain);<br>
-- Dom2 with device frontend;<br>
-<br>
-On Dom2 destroying we have timeout error. Because xl treats our<br>
-Dom1 as driver domain and waits for backend path to be cleared<br>
-by the driver domain which is not our case.<br>
-<br>
-According to libxl__domain_make in case of driver domain it has<br>
-&quot;libxl&quot; xen store entry:<br>
-<br>
-=C2=A0 =C2=A0 if (libxl_defbool_val(info-&gt;<wbr>driver_domain)) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Create a local &quot;libxl&quot; direct=
-ory for each guest, since we might want<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* to use libxl from inside the guest<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 libxl__xs_mknod(gc, t, GCSPRINTF(&quot;%s/libxl=
-&quot;, dom_path), rwperm,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 ARRAY_SIZE(rwperm));<br>
-<br>
-This patch introduces libxl__is_driver_domain which determines the driver<b=
-r>
-domain by checking if &quot;libxl&quot; entry is present and uses this func=
-tion on<br>
-device destroy to check by whom domain path should be cleaned up (libxl<br>
-or the driver domain).<br>
-<br>
-Oleksandr Grytsov (1):<br>
-=C2=A0 libxl: add libxl__is_driver_domain function<br>
-<br>
-</span><span class=3D"gmail-">=C2=A0tools/libxl/libxl_device.c=C2=A0 =C2=A0=
-| 17 ++++++++++-------<br>
-=C2=A0tools/libxl/libxl_internal.c | 16 ++++++++++++++++<br>
-=C2=A0tools/libxl/libxl_internal.h |=C2=A0 4 ++++<br>
-=C2=A03 files changed, 30 insertions(+), 7 deletions(-)<br>
-<br>
-</span>--<br>
-2.7.4<br>
-<br>
-</blockquote></div><br><br clear=3D"all"></div><div class=3D"gmail_extra">p=
-ing and update</div><div class=3D"gmail_extra"><br></div><div class=3D"gmai=
-l_extra">There is run_hotplug_scripts parameter in xl.cfg. I guess it is re=
-lated to this issue. But looking</div><div class=3D"gmail_extra">through th=
-e code I see that this parameter is not used. Could anyone provide more inf=
-o about</div><div class=3D"gmail_extra">this parameter?<br></div><div class=
-=3D"gmail_extra"><br></div><div class=3D"gmail_extra">-- <br><div class=3D"=
-gmail_signature">Best Regards,<br>Oleksandr Grytsov.</div>
-</div></div>
-
---089e0820061043c0580562564c87--
-
-
---===============7798241259817920857==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7798241259817920857==--
+T24gMDQvMDEvMTggMDk6NDAsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDA0LjAxLjE4IGF0
+IDAxOjE1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IC0tLSBhL2RvY3Mv
+bWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3duCj4+ICsrKyBiL2RvY3MvbWlzYy94ZW4tY29t
+bWFuZC1saW5lLm1hcmtkb3duCj4+IEBAIC0yNDUsNiArMjQ1LDIwIEBAIGFuZCBub3QgcnVubmlu
+ZyBzb2Z0aXJxcy4gUmVkdWNlIHRoaXMgaWYgc29mdGlycXMgYXJlIG5vdCBiZWluZyBydW4gZnJl
+cXVlbnRseQo+PiAgZW5vdWdoLiBTZXR0aW5nIHRoaXMgdG8gYSBoaWdoIHZhbHVlIG1heSBjYXVz
+ZSBib290IGZhaWx1cmUsIHBhcnRpY3VsYXJseSBpZgo+PiAgdGhlIE5NSSB3YXRjaGRvZyBpcyBh
+bHNvIGVuYWJsZWQuCj4+ICAKPj4gKyMjIyBidGkgKHg4NikKPj4gKz4gYD0gTGlzdCBvZiBbIHRo
+dW5rPXJldHBvbGluZXxsZmVuY2V8cGxhaW4gXWAKPj4gKwo+PiArQnJhbmNoIFRhcmdldCBJbmpl
+Y3Rpb24gY29udHJvbHMuICBCeSBkZWZhdWx0LCBYZW4gd2lsbCBwaWNrIHRoZSBtb3N0Cj4+ICth
+cHByb3ByaWF0ZSBCVEkgbWl0aWdhdGlvbnMgYmFzZWQgb24gY29tcGlsZWQgaW4gc3VwcG9ydCwg
+bG9hZGVkIG1pY3JvY29kZSwKPj4gK2FuZCBoYXJkd2FyZSBkZXRhaWxzLgo+PiArCj4+ICsqKldB
+Uk5JTkc6IEFueSB1c2Ugb2YgdGhpcyBvcHRpb24gaW5oaWJpdHMgYWxsIGhlcmlzdGNzLiAgVXNl
+IHdpdGggZXh0cmVtZSBjYXJlLioqCj4gImhldXJpc3RpY3MiCj4KPj4gQEAgLTI3LDcgKzI4LDQy
+IEBAIGVudW0gaW5kX3RodW5rIHsKPj4gICAgICBUSFVOS19OT05FLCAgICAvKiBNaXNzaW5nIGNv
+bXBpbGVyIHN1cHBvcnQgZm9yIHRodW5rcy4gKi8KPj4gIAo+PiAgICAgIFRIVU5LX1JFVFBPTElO
+RSwKPj4gLX07Cj4+ICsgICAgVEhVTktfTEZFTkNFLAo+PiArICAgIFRIVU5LX0pNUCwKPj4gK30g
+b3B0X3RodW5rIF9faW5pdGRhdGEgPSBUSFVOS19ERUZBVUxUOwo+IFRoaXMgd2FudHMgdG8gYmUg
+c3RhdGljLgo+Cj4+IEBAIC00OCw2ICs4NiwzMSBAQCB2b2lkIF9faW5pdCBpbml0X3NwZWN1bGF0
+aW9uX21pdGlnYXRpb25zKHZvaWQpCj4+ICAgICAgZW51bSBpbmRfdGh1bmsgdGh1bmsgPSBUSFVO
+S19ERUZBVUxUOwo+PiAgCj4+ICAgICAgLyoKPj4gKyAgICAgKiBIYXMgdGhlIHVzZXIgc3BlY2lm
+aWVkIGFueSBjdXN0b20gQlRJIG1pdGlnYXRpb25zPyAgSWYgc28sIGZvbGxvdyB0aGVpcgo+PiAr
+ICAgICAqIGluc3RydWN0aW9ucyBleGFjdGx5IGFuZCBkaXNhYmxlIGFsbCBoZXVyaXN0aWNzLgo+
+PiArICAgICAqLwo+PiArICAgIGlmICggb3B0X3RodW5rICE9IFRIVU5LX0RFRkFVTFQgKQo+PiAr
+ICAgIHsKPj4gKyAgICAgICAgdGh1bmsgPSBvcHRfdGh1bms7Cj4+ICsgICAgfQo+IFRoZSBicmFj
+ZXMgYXJlbid0IHJlYWxseSBuZWVkZWQgaGVyZS4KClRoZXkgYXJlIGluIGxhdGVyIHBhdGNoZXMu
+Cgo+Cj4+ICsgICAgZWxzZQo+PiArICAgIHsKPj4gKyAgICAgICAgLyoKPj4gKyAgICAgICAgICog
+RXZhbHVhdGUgdGhlIHNhZmVzdCBCcmFuY2ggVGFyZ2V0IEluamVjdGlvbiBtaXRpZ2F0aW9ucyB0
+byB1c2UuCj4+ICsgICAgICAgICAqIEZpcnN0LCBiZWdpbiB3aXRoIGNvbXBpbGVyLWFpZGVkIG1p
+dGlnYXRpb25zLgo+PiArICAgICAgICAgKi8KPj4gKyAgICAgICAgaWYgKCBJU19FTkFCTEVEKENP
+TkZJR19JTkRJUkVDVF9USFVOSykgKQo+PiArICAgICAgICB7Cj4+ICsgICAgICAgICAgICAvKgo+
+PiArICAgICAgICAgICAgICogQU1EJ3MgcmVjb21tZW5kZWQgbWl0aWdhdGlvbiBpcyB0byBzZXQg
+bGZlbmNlIGFzIGJlaW5nIGRpc3BhdGNoCj4+ICsgICAgICAgICAgICAgKiBzZXJpYWxpc2luZywg
+YW5kIHRvIHVzZSBJTkRfVEhVTktfTEZFTkNFLgo+PiArICAgICAgICAgICAgICovCj4+ICsgICAg
+ICAgICAgICBpZiAoIGNwdV9oYXNfbGZlbmNlX2Rpc3BhdGNoICkKPj4gKyAgICAgICAgICAgICAg
+ICB0aHVuayA9IFRIVU5LX0xGRU5DRTsKPj4gKyAgICAgICAgfQo+PiArICAgIH0KPiBBcyBhc2tl
+ZCBlbHNld2hlcmUsIGlzIHRoZSBDT05GSUdfSU5ESVJFQ1RfVEhVTksgZGVwZW5kZW5jeQo+IGhl
+cmUgcmVhbGx5IG1lYW5pbmdmdWwgZm9yIHRoZSBvdmVyYWxsIGVmZmVjdD8gU3VyZWx5IGlmIHdl
+IGNhbid0IHVzZQo+IHRodW5rcyBpbiB0aGUgZmlyc3QgcGxhY2UgaXQgZG9lc24ndCBtYXR0ZXIg
+d2hpY2ggdmFyaWFudCBvZiB0aGVtIHdlCj4gZG9uJ3QgdXNlPwoKSW4gbGF0ZXIgcGF0Y2hlcywg
+dGhlIGxhY2sgb2YgSU5ESVJFQ1RfVEhVTksgY2F1c2VzIHVzIHRvIGNob29zZSB0byB1c2UKSUJS
+UysgaWYgYXZhaWxhYmxlIGluIG1pY3JvY29kZS4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
