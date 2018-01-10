@@ -1,10 +1,10 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [seabios test] 117733: regressions - FAIL
-Date: Wed, 10 Jan 2018 00:12:08 +0000
-Message-ID: <osstest-117733-mainreport@xen.org>
+Subject: [qemu-upstream-unstable test] 117731: trouble:
+	broken/fail/pass
+Date: Wed, 10 Jan 2018 01:19:23 +0000
+Message-ID: <osstest-117731-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5505297812874758700=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -17,103 +17,389 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDExNzczMyBzZWFiaW9zIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMTc3MzMvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3Rz
-IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMg
-d2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1h
-bWQ2NCAxNyBndWVzdC1zdG9wICAgICAgIGZhaWwgUkVHUi4gdnMuIDExNTUzOQoKVGVzdHMgd2hp
-Y2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYW1kNjQtaTM4
-Ni14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtl
-IDExNTUzOQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0
-b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTE1NTM5CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUt
-d3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMTU1MzkKIHRl
-c3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1pZ3Jh
-dGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0
-LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwg
-bmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRlYmlhbi1o
-dm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVt
-dXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwg
-ICAgICAgIGZhaWwgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHNl
-YWJpb3MgICAgICAgICAgICAgIDg0NGI4NjQ2NGE1Y2JmZmZiNjJiODc4MDg2MzIwMThjYTI1MGQ4
-NjcKYmFzZWxpbmUgdmVyc2lvbjoKIHNlYWJpb3MgICAgICAgICAgICAgIDBjYTZkNjI3N2RmYWZj
-NjcxYTViMzcxOGNiZWI1Yzc4ZTJhODg4ZWEKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDExNTUzOSAg
-MjAxNy0xMS0wMyAyMDo0ODo1OCBaICAgNjcgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMTU3
-MzMgIDIwMTctMTEtMTAgMTc6MTk6NTkgWiAgIDYwIGRheXMgICA2NSBhdHRlbXB0cwpUZXN0aW5n
-IHNhbWUgc2luY2UgICAxMTcwMTQgIDIwMTctMTItMDggMTk6MTE6MjMgWiAgIDMyIGRheXMgICAy
-MCBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoK
-ICBLZXZpbiBPJ0Nvbm5vciA8a2V2aW5Aa29jb25ub3IubmV0PgogIFBhdWwgTWVuemVsIDxwbWVu
-emVsQG1vbGdlbi5tcGcuZGU+CiAgU3RlZmFuIEJlcmdlciA8c3RlZmFuYkBsaW51eC52bmV0Lmli
-bS5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZv
-cHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1k
-NjQteHNtICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0t
-YW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-eGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAg
-ICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFt
-ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
-LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAg
-ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkz
-ODYgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFl
-bXV1LW5lc3RlZC1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJv
-amVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMK
-CkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9n
-cy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRo
-ZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8v
-eGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1h
-aWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0
-LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUg
-Zm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7
-YT1zdW1tYXJ5CgoKTm90IHB1c2hpbmcuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KY29tbWl0IDg0NGI4NjQ2NGE1Y2JmZmZiNjJi
-ODc4MDg2MzIwMThjYTI1MGQ4NjcKQXV0aG9yOiBQYXVsIE1lbnplbCA8cG1lbnplbEBtb2xnZW4u
-bXBnLmRlPgpEYXRlOiAgIE1vbiBPY3QgMiAwODoxMzoxMyAyMDE3ICswMjAwCgogICAgZG9jcy9E
-b3dubG9hZDogVXNlIG1vcmUgc2VjdXJlIEhUVFBTIFVSTHMgd2hlcmUgcG9zc2libGUKICAgIAog
-ICAgU2lnbmVkLW9mZi1ieTogUGF1bCBNZW56ZWwgPHBtZW56ZWxAbW9sZ2VuLm1wZy5kZT4KCmNv
-bW1pdCBkZjQ2ZDEwYzhhN2I4OGViODJmM2NlYjJhYTMxNzgyZGVlMTU1OTNkCkF1dGhvcjogU3Rl
-ZmFuIEJlcmdlciA8c3RlZmFuYkBsaW51eC52bmV0LmlibS5jb20+CkRhdGU6ICAgVHVlIE5vdiAx
-NCAxNTowMzo0NyAyMDE3IC0wNTAwCgogICAgdHBtOiBBZGQgc3VwcG9ydCBmb3IgVFBNMiBBQ1BJ
-IHRhYmxlCiAgICAKICAgIEFkZCBzdXBwb3J0IGZvciB0aGUgVFBNMiBBQ1BJIHRhYmxlLiBJZiB3
-ZSBmaW5kIGl0IGFuZCBpdHMKICAgIG9mIHRoZSBhcHByb3ByaWF0ZSBzaXplLCB3ZSBjYW4gZ2V0
-IHRoZSBsb2dfYXJlYV9zdGFydF9hZGRyZXNzCiAgICBhbmQgbG9nX2FyZWFfbWluaW11bV9zaXpl
-IGZyb20gaXQuCiAgICAKICAgIFRoZSBsYXRlc3QgdmVyc2lvbiBvZiB0aGUgc3BlYyBjYW4gYmUg
-Zm91bmQgaGVyZToKICAgIAogICAgaHR0cHM6Ly90cnVzdGVkY29tcHV0aW5nZ3JvdXAub3JnL3Rj
-Zy1hY3BpLXNwZWNpZmljYXRpb24vCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IFN0ZWZhbiBCZXJn
-ZXIgPHN0ZWZhbmJAbGludXgudm5ldC5pYm0uY29tPgoKY29tbWl0IDA1NDFmMmYwZjI0NmU3N2Q3
-YzcyNjkyNjk3NjkyMGU4MDcyZDExMTkKQXV0aG9yOiBLZXZpbiBPJ0Nvbm5vciA8a2V2aW5Aa29j
-b25ub3IubmV0PgpEYXRlOiAgIEZyaSBOb3YgMTAgMTI6MjA6MzUgMjAxNyAtMDUwMAoKICAgIHBh
-cmF2aXJ0OiBPbmx5IGVuYWJsZSBzZXJjb24gaW4gTk9HUkFQSElDIG1vZGUgaWYgbm8gb3RoZXIg
-Y29uc29sZSBzcGVjaWZpZWQKICAgIAogICAgU2lnbmVkLW9mZi1ieTogS2V2aW4gTydDb25ub3Ig
-PGtldmluQGtvY29ubm9yLm5ldD4KCmNvbW1pdCA5Y2U2Nzc4ZjA4YzYzMmM1MmIyNWJjOGY3NTQy
-OTFlZjE4NzEwZDUzCkF1dGhvcjogS2V2aW4gTydDb25ub3IgPGtldmluQGtvY29ubm9yLm5ldD4K
-RGF0ZTogICBGcmkgTm92IDEwIDEyOjE2OjM2IDIwMTcgLTA1MDAKCiAgICBkb2NzOiBBZGQgc2Vy
-Y29uLXBvcnQgdG8gUnVudGltZV9jb25maWcubWQgZG9jdW1lbnRhdGlvbgogICAgCiAgICBTaWdu
-ZWQtb2ZmLWJ5OiBLZXZpbiBPJ0Nvbm5vciA8a2V2aW5Aa29jb25ub3IubmV0PgoKY29tbWl0IDYz
-NDUxZmNhMTNjNzU4NzBlMTcwM2ViM2UyMDU4NGQ5MTE3OWFlYmMKQXV0aG9yOiBLZXZpbiBPJ0Nv
-bm5vciA8a2V2aW5Aa29jb25ub3IubmV0PgpEYXRlOiAgIEZyaSBOb3YgMTAgMTE6NDk6MTkgMjAx
-NyAtMDUwMAoKICAgIGRvY3M6IE5vdGUgdjEuMTEuMCByZWxlYXNlCiAgICAKICAgIFNpZ25lZC1v
-ZmYtYnk6IEtldmluIE8nQ29ubm9yIDxrZXZpbkBrb2Nvbm5vci5uZXQ+CgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============5505297812874758700==
+Content-Type: text/plain
+
+flight 117731 qemu-upstream-unstable real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117731/
+
+Failures and problems with tests :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-amd64-pvgrub    <job status>                 broken
+ test-amd64-i386-libvirt         <job status>                 broken
+ test-amd64-i386-libvirt       4 host-install(4)        broken REGR. vs. 116133
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-amd64-pvgrub  4 host-install(4)            broken like 115739
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 116133
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 116133
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 116133
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 116133
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 116133
+ test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop             fail never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop              fail never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+
+version targeted for testing:
+ qemuu                2b033e396f4fa0981bae1213cdacd15775655a97
+baseline version:
+ qemuu                b79708a8ed1b3d18bee67baeaf33b3fa529493e2
+
+Last test of basis   116133  2017-11-13 06:47:58 Z   57 days
+Testing same since   117731  2018-01-08 18:12:06 Z    1 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  "Daniel P. Berrange" <berrange@redhat.com>
+  Aaron Lindsay <alindsay@codeaurora.org>
+  Alberto Garcia <berto@igalia.com>
+  Aleksandr Bezzubikov <zuban32s@gmail.com>
+  Alex Bennée <alex.bennee@linaro.org>
+  Alex Williamson <alex.williamson@redhat.com>
+  Alexander Graf <agraf@suse.de>
+  Alexey Kardashevskiy <aik@ozlabs.ru>
+  Alexey Perevalov <a.perevalov@samsung.com>
+  Alistair Francis <alistair.francis@xilinx.com>
+  Amador Pahim <apahim@redhat.com>
+  Amarnath Valluri <amarnath.valluri@intel.com>
+  Andreas Färber <afaerber@suse.de>
+  Andrew Baumann <Andrew.Baumann@microsoft.com>
+  Andrew Jeffery <andrew@aj.id.au>
+  Andrew Jones <drjones@redhat.com>
+  Anthoine Bourgeois <anthoine.bourgeois@blade-group.com>
+  Anthony PERARD <anthony.perard@citrix.com>
+  Anton Nefedov <anton.nefedov@virtuozzo.com>
+  Artyom Tarasenko <atar4qemu@gmail.com>
+  BALATON Zoltan <balaton@eik.bme.hu>
+  Benjamin Herrenschmidt <benh@kernel.crashing.org>
+  Bishara AbuHattoum <bishara@daynix.com>
+  Brad Smith <brad@comstyle.com>
+  Brandon Carpenter <brandon.carpenter@cypherpath.com>
+  Brijesh Singh <brijesh.singh@amd.com>
+  Cao jin <caoj.fnst@cn.fujitsu.com>
+  Carlo Marcelo Arenas Belón <carenas@gmail.com>
+  Chao Gao <chao.gao@intel.com>
+  Chen Hanxiao <chenhanxiao@gmail.com>
+  Christian Borntraeger <borntraeger@de.ibm.com>
+  Cleber Rosa <crosa@redhat.com>
+  Collin L. Walling <walling@linux.vnet.ibm.com>
+  Cornelia Huck <cohuck@redhat.com>
+  Cornelia Huck <Cornelia Huck <cohuck@redhat.com>
+  Cornelia Huck <cornelia.huck@de.ibm.com>
+  Cédric Le Goater <clg@kaod.org>
+  Dan Aloni <dan@kernelim.com>
+  Daniel Henrique Barboza <danielhb@linux.vnet.ibm.com>
+  Daniel P. Berrange <berrange@redhat.com>
+  Dariusz Stojaczyk <dariuszx.stojaczyk@intel.com>
+  David Gibson <david@gibson.dropbear.id.au>
+  David Hildenbrand <david@redhat.com>
+  Dong Jia Shi <bjsdjshi@linux.vnet.ibm.com>
+  Dou Liyang <douly.fnst@cn.fujitsu.com>
+  Dr. David Alan Gilbert <dgilbert@redhat.com>
+  Ed Swierk <eswierk@skyportsystems.com>
+  Edgar E. Iglesias <edgar.iglesias@xilinx.com>
+  Eduardo Habkost <ehabkost@redhat.com>
+  Eduardo Otubo <eduardo.otubo@profitbricks.com>
+  Eduardo Otubo <otubo@redhat.com>
+  Emilio G. Cota <cota@braap.org>
+  Eric Auger <eric.auger@redhat.com>
+  Eric Blake <eblake@redhat.com>
+  Eric Farman <farman@linux.vnet.ibm.com>
+  Fam Zheng <famz@redhat.com>
+  Farhan Ali <alifm@linux.vnet.ibm.com>
+  Felipe Franciosi <felipe@nutanix.com>
+  Feng Kan <fkan@apm.com>
+  Fred Rolland <frolland@redhat.com>
+  Fred Rolland <rollandf@gmail.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Gonglei <arei.gonglei@huawei.com>
+  Greg Kurz <groug@kaod.org>
+  Halil Pasic <pasic@linux.vnet.ibm.com>
+  Hannes Reinecke <hare@suse.com>
+  Hannes Reinecke <hare@suse.de>
+  Helge Deller <deller@gmx.de>
+  Hua Yanghao <huayanghao@gmail.com>
+  Ian Jackson <ian.jackson@eu.citrix.com>
+  Igor Mammedov <imammedo@redhat.com>
+  James Clarke <jrtc27@jrtc27.com>
+  James Cowgill <james.cowgill@mips.com>
+  James Hogan <james.hogan@imgtec.com>
+  Jan Dakinevich <jan.dakinevich@gmail.com>
+  Jan Kiszka <jan.kiszka@siemens.com>
+  Janosch Frank <frankja@linux.vnet.ibm.com>
+  Jaroslaw Pelczar <j.pelczar@samsung.com>
+  Jason J . Herne <jjherne@linux.vnet.ibm.com>
+  Jason J. Herne <jjherne@linux.vnet.ibm.com>
+  Jason Wang <jasowang@redhat.com>
+  Jeff Cody <jcody@redhat.com>
+  Jens Freimann <jfreimann@redhat.com>
+  Jiang Biao <jiang.biao2@zte.com.cn>
+  Jim Somerville <Jim.Somerville@windriver.com>
+  Jindrich Makovicka <makovick@gmail.com>
+  Joe Clifford <joeclifford@gmail.com>
+  Joel Stanley <joel@jms.id.au>
+  John Arbuckle <programmingkidx@gmail.com>
+  John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+  John Snow <jsnow@redhat.com>
+  Joseph Myers <joseph@codesourcery.com>
+  Juan Quintela <quintela@redhat.com>
+  Juergen Gross <jgross@suse.com>
+  Kamil Rytarowski <n54@gmx.com>
+  Kashyap Chamarthy <kchamart@redhat.com>
+  Kevin Cernekee <cernekee@chromium.org>
+  Kevin Wolf <kwolf@redhat.com>
+  Knut Omang <knut.omang@oracle.com>
+  KONRAD Frederic <frederic.konrad@adacore.com>
+  Kurban Mallachiev <mallachiev@ispras.ru>
+  Ladi Prosek <lprosek@redhat.com>
+  Lan Tianyu <tianyu.lan@intel.com>
+  Laszlo Ersek <lersek@redhat.com>
+  Laurent Desnogues <laurent.desnogues@gmail.com>
+  Laurent Vivier <laurent@vivier.eu>
+  Laurent Vivier <lvivier@redhat.com>
+  Liang Yan <lyan@suse.com>
+  linzhecheng <linzhecheng@huawei.com>
+  Lluís Vilanova <vilanova@ac.upc.edu>
+  Longpeng <longpeng2@huawei.com>
+  Lukáš Doktor <ldoktor@redhat.com>
+  Manos Pitsidianakis <el13635@mail.ntua.gr>
+  Mao Zhongyi <maozy.fnst@cn.fujitsu.com>
+  Marc-André Lureau <marcandre.lureau@redhat.com>
+  Marcel Apfelbaum <marcel@redhat.com>
+  Marco A L Barbosa <malbarbo@gmail.com>
+  Maria Klimushenkova <maria.klimushenkova@ispras.ru>
+  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+  Mark Kanda <mark.kanda@oracle.com>
+  Markus Armbruster <armbru@redhat.com>
+  Matt Parker <mtparkr@gmail.com>
+  Matt Redfearn <matt.redfearn@imgtec.com>
+  Matthew Rosato <mjrosato@linux.vnet.ibm.com>
+  Max Filippov <jcmvbkbc@gmail.com>
+  Max Reitz <mreitz@redhat.com>
+  Maxime Coquelin <maxime.coquelin@redhat.com>
+  Michael Davidsaver <mdavidsaver@gmail.com>
+  Michael Olbrich <m.olbrich@pengutronix.de>
+  Michael Roth <mdroth@linux.vnet.ibm.com>
+  Michael S. Tsirkin <mst@redhat.com>
+  Michael Tokarev <mjt@tls.msk.ru>
+  Michael Walle <michael@walle.cc>
+  Michal Privoznik <mprivozn@redhat.com>
+  Mike Nawrocki <michael.nawrocki@gtri.gatech.edu>
+  Mohammed Gamal <mohammed.gamal@profitbricks.com>
+  Olaf Hering <olaf@aepfle.de>
+  Paolo Bonzini <pbonzini@redhat.com>
+  Paul Burton <paul.burton@imgtec.com>
+  Pavel Butsykin <pbutsykin@virtuozzo.com>
+  Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>
+  Peter Krempa <pkrempa@redhat.com>
+  Peter Lieven <pl@kamp.de>
+  Peter Maydell <peter.maydell@linaro.org>
+  Peter Xu <peterx@redhat.com>
+  Philippe Mathieu-DaudÃ© <f4bug@amsat.org>
+  Philippe Mathieu-Daudé <f4bug@amsat.org>
+  Portia Stephens <portia.stephens@xilinx.com>
+  Pranavkumar Sawargaonkar <pranavkumar@linaro.org>
+  Pranith Kumar <bobby.prani@gmail.com>
+  Prasad J Pandit <pjp@fedoraproject.org>
+  Richard Henderson <richard.henderson@linaro.org>
+  Richard Henderson <rth@twiddle.net>
+  Richard Purdie <richard.purdie@linuxfoundation.org>
+  Richard W.M. Jones <rjones@redhat.com>
+  Riku Voipio <riku.voipio@linaro.org>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Roman Kagan <rkagan@virtuozzo.com>
+  Ross Lagerwall <ross.lagerwall@citrix.com>
+  Sam Bobroff <sam.bobroff@au1.ibm.com>
+  Samuel Thibault <samuel.thibault@ens-lyon.org>
+  Sandipan Das <sandipan@linux.vnet.ibm.com>
+  Seeteena Thoufeek <s1seetee@linux.vnet.ibm.com>
+  Sergio Lopez <slp@redhat.com>
+  Shanker Donthineni <shankerd@codeaurora.org>
+  Stafford Horne <shorne@gmail.com>
+  Stefan Berger <stefanb@linux.vnet.ibm.com>
+  Stefan Hajnoczi <stefanha@redhat.com>
+  Stefan Weil <sw@weilnetz.de>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Subbaraya Sundeep <sundeep.lkml@gmail.com>
+  Suraj Jitindar Singh <sjitindarsingh@gmail.com>
+  Tao Wu <lepton@google.com>
+  Thomas Huth <huth@tuxfamily.org>
+  Thomas Huth <thuth@redhat.com>
+  Todd Eisenberger <teisenbe@google.com>
+  Tushar Jagad <tushar.jagad@linaro.org>
+  Vadim Galitsyn <vadim.galitsyn@profitbricks.com>
+  Vasilis Liaskovitis <vasilis.liaskovitis@profitbricks.com>
+  Viktor Mihajlovski <mihajlov@linux.vnet.ibm.com>
+  Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+  Wang Guang <wang.guang55@zte.com.cn>
+  Wang Yong <wang.yong155@zte.com.cn>
+  Wanpeng Li <wanpeng.li@hotmail.com>
+  Wei Huang <wei@redhat.com>
+  Wei Liu <wei.liu2@citrix.com>
+  Wolfgang Bumiller <w.bumiller@proxmox.com>
+  Xiao Guangrong <xiaoguangrong.eric@gmail.com>
+  Yi Min Zhao <zyimin@linux.vnet.ibm.com>
+  Yi Wang <wang.yi59@zte.com.cn>
+  Yongbok Kim <yongbok.kim@imgtec.com>
+  Yongbok Kim <yongbok.kim@mips.com>
+  Yoni Bettan <ybettan@redhat.com>
+  Yun Liu <liu.yunh@zte.com.cn>
+  Zack Cornelius <zack.cornelius@kove.net>
+  Zhang Chen <zhangchen.fnst@cn.fujitsu.com>
+  Zhang Chen <zhangckid@gmail.com>
+  Zhengui <lizhengui@huawei.com>
+  Zhipeng Lu <lu.zhipeng@zte.com.cn>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      broken  
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                broken  
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job test-amd64-amd64-amd64-pvgrub broken
+broken-job test-amd64-i386-libvirt broken
+broken-step test-amd64-amd64-amd64-pvgrub host-install(4)
+broken-step test-amd64-i386-libvirt host-install(4)
+
+Not pushing.
+
+(No revision log; it would be 39057 lines long.)
+
+
+--===============5505297812874758700==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5505297812874758700==--
