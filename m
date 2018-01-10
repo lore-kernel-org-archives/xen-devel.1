@@ -1,23 +1,17 @@
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: Re: sidecar (hvm shim) creation script
-Date: Wed, 10 Jan 2018 15:12:22 +0000
-Message-ID: <23126.11606.582758.38945@mariner.uk.xensource.com>
-References: <23123.44604.284781.889416@mariner.uk.xensource.com>
- <20180109194351.mmbmjzwhptlkr5as@citrix.com>
- <20180110083224.cmgr7flxewhx5enf@MacBook-Pro-de-Roger.local>
- <20180110122734.rgut34iw6ltqeipy@citrix.com>
- <23126.4117.777031.227394@mariner.uk.xensource.com>
- <20180110131049.rv6emm32efbczhl2@citrix.com>
+From: Norbert Manthey <nmanthey@amazon.com>
+Subject: [Makefile] asm: handle comments when creating header
+	file
+Date: Wed, 10 Jan 2018 16:14:36 +0100
+Message-ID: <1515597276-8279-1-git-send-email-nmanthey@amazon.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="RAT7z7wwE9"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=97or=ef=citrix.com=prvs=5411a6c19=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1eZI3k-0008Go-Ob
- for xen-devel@lists.xenproject.org; Wed, 10 Jan 2018 15:12:56 +0000
-In-Reply-To: <20180110131049.rv6emm32efbczhl2@citrix.com>
+ <srs0=x2ay=ef=amazon.com=prvs=541a60d03=nmanthey@srs-us1.protection.inumbo.net>)
+ id 1eZI61-0008PS-FB
+ for xen-devel@lists.xenproject.org; Wed, 10 Jan 2018 15:15:17 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,303 +20,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: committers@xenproject.org, Dario Faggioli <raistlin@linux.it>, security@xenproject.org, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xenproject.org, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+Cc: Michael Tautschnig <tautschn@amazon.co.uk>, Norbert Manthey <nmanthey@amazon.com>, Norbert Manthey <nmanthey@amazon.de>
 List-Id: xen-devel@lists.xenproject.org
 
---RAT7z7wwE9
-Content-Type: text/plain; charset="us-ascii"
-Content-Description: message body text
-Content-Transfer-Encoding: 7bit
-
-Here is the converter script where I just got my guest to boot with
-the Vixen shim, as built and provided by Wei.
-
-Ian.
-
-
---RAT7z7wwE9
-Content-Type: text/plain; name="pvshim-converter"
-Content-Description: for vixen
-Content-Disposition: inline; filename="pvshim-converter"
-Content-Transfer-Encoding: 7bit
-
-#!/usr/bin/perl -w
-#
-# usage:
-#   pvshim-converter [OPTIONS] OLD-CONFIG NEW-CONFIG
-#
-# options:
-#   --sidecars-directory DIR   default is /var/lib/xen/pvshim-sidecars
-#   --shim SHIM                overrides domain config file
-#   --debug                    verbose, and leaves sidecar prep dir around
-#
-# What we do
-#
-#  read existing config file using python
-#  determine kernel, ramdisk and cmdline
-#  use them to produce sidecar and save it under domain name
-#  mess with the things that need to be messed with
-#  spit out new config file
-
-use strict;
-
-use Getopt::Long;
-use JSON;
-use IO::Handle;
-use POSIX;
-use Fcntl qw(:flock);
-
-our $debug;
-
-sub runcmd {
-    print STDERR "+ @_\n" if $debug;
-    $!=0; $?=0; system @_ and die "$_[0]: $! $?";
-}
-
-our $shim;
-our $sidecars_dir = '/var/lib/xen/pvshim-sidecars';
-
-GetOptions('sidecars-directory=s' => \$sidecars_dir,
-           'shim=s' => \$shim,
-           'debug' => \$debug)
-    or die "pvshim-converter: bad options\n";
-
-@ARGV==2 or die "pvshim-converter: need old and new config filenames";
-
-our ($in,$out) = @ARGV;
-
-our $indata;
-
-if ($in ne '-') {
-    open I, '<', "$in" or die "open input config file: $!\n";
-} else {
-    open I, '<&STDIN' or die $!;
-}
-{
-    local $/;
-    $indata = <I>;
-}
-I->error and die $!;
-close I;
-
-open P, "-|", qw(python -c), <<END, $indata or die $!;
-import sys
-import json
-l = {}
-exec sys.argv[1] in l
-for k in l.keys():
-	if k.startswith("_"):
-		del l[k]
-print json.dumps(l)
-END
-
-our $c;
-
-{
-    local $/;
-    $_ = <P>;
-    $!=0; $?=0; close P or die "$! $?";
-    $c = decode_json $_;
-}
-
-die "no domain name ?" unless exists $c->{name};
-die "bootloader not yet supported" if $c->{bootloader};
-die "no kernel" unless $c->{kernel};
-
-our $sidecar = $c->{pvshim_sidecar_path} || "$sidecars_dir/$c->{name}.iso";
-our $dmwrap = $c->{pvshim_sidecar_path} || "$sidecars_dir/$c->{name}.dm";
-
-$shim ||= $c->{pvshim_path};
-$shim ||= '/usr/local/lib/xen/boot/xen-shim';
-
-our $shim_cmdline = $c->{pvshim_cmdline} || 'console=com1 com1=115200n1 loglvl=all guest_loglvl=all';
-$shim_cmdline .= ' '.$c->{pvshim_extra} if $c->{pvshim_extra};
-
-our $kernel_cmdline = $c->{cmdline} || '';
-$kernel_cmdline .= ' root='.$c->{root} if $c->{root};
-$kernel_cmdline .= ' '.$c->{extra} if $c->{extra};
-
-print "pvshim-converter: creating sidecar in $sidecar\n";
-
-runcmd qw(mkdir -m700 -p --), $sidecars_dir;
-
-open L, ">", "$sidecar.lock" or die "$sidecar.lock: open $!";
-flock L, LOCK_EX or die "$sidecar.lock: lock: $!";
-
-my $sd = "$sidecar.dir";
-
-system qw(rm -rf --), $sd;
-mkdir $sd, 0700;
-
-runcmd qw(cp --), $shim, "$sd/shim";
-runcmd qw(cp --), $c->{kernel}, "$sd/kernel";
-runcmd qw(cp --), $c->{ramdisk}, "$sd/ramdisk" if $c->{ramdisk};
-
-my $grubcfg = <<END;
-serial --unit=0 --speed=9600 --word=8 --parity=no --stop=1
-terminal_input serial
-terminal_output serial
-
-set timeout=1
-
-menuentry 'Xen shim' {
-	insmod gzio
-	insmod xzio
-        multiboot (cd)/shim placeholder $shim_cmdline
-        module (cd)/kernel placeholder $kernel_cmdline
-        module (cd)/ramdisk
-}
-END
-
-runcmd qw(mkdir -p --), "$sd/boot/grub";
-open G, ">", "$sd/boot/grub/grub.cfg" or die "$sd, grub.cfg: $!";
-print G $grubcfg or die $!;
-close G or die $!;
-
-unlink "$sidecar.new" or $!==ENOENT or die "$sidecar.new: rm: $!";
-runcmd qw(grub-mkrescue -o), "$sidecar.new", "$sidecar.dir";
-if (!stat "$sidecar.new") {
-    $!==ENOENT or die "$sidecar.new: stat: $!";
-
-    print STDERR <<END;
-pvshim-converter: grub-mkrescue exited with status zero but failed to make iso.
-NB that grub-mkrescue has a tendency to lie in its error messages.
-END
-    my $missing;
-    foreach my $check (qw(xorriso mformat)) {
-        $missing |= system qw(sh -c), "type $check";
-    }
-
-    if ($missing) {
-        print STDERR <<END;
-You seem to have some program(s) missing which grub-mkrescue depends on,
-see above.  ("mformat" is normally in the package "mtools".)
-Installing those programs will probably help.
-END
-    } else {
-        print STDERR <<END;
-And older grub-mkrescue has a tendency not to notice certain problems.
-Maybe strace will tell you what is wrong.  :-/
-END
-    }
-    die "pvshim-converter: grub-mkrescue did not make iso\n";
-}
-
-runcmd qw(rm -rf --), "$sidecar.dir" unless $debug;
-
-open Q, ">", "$dmwrap.new" or die "$dmwrap: $!";
-print Q <<'END_DMWRAP';
-#!/bin/bash
-
-set -x
-: "$@"
-set +x
-
-newargs=()
-
-newarg () {
-    newargs+=("$1")
-}
-
-while [ $# -gt 1 ]; do
-    case "$1" in
-	-no-shutdown|-nodefaults|-no-user-config)
-	    newarg "$1"; shift
-	    ;;
-	-xen-domid|-chardev|-mon|-display|-boot|-m|-machine)
-	    newarg "$1"; shift
-	    newarg "$1"; shift
-	    ;;
-        -name)
-            newarg "$1"; shift
-            name="$1"; shift
-            newarg "$name"
-            ;;
-	-netdev|-cdrom)
-	    : fixme
-	    newarg "$1"; shift
-	    newarg "$1"; shift
-	    ;;
-	-drive|-kernel|-initrd|-append|-vnc)
-	    shift; shift
-	    ;;
-	-device)
-	    shift
-	    case "$1" in
-		XXXrtl8139*)
-		    newarg "-device"
-		    newarg "$1"; shift
-		    ;;
-		*)
-		    shift
-		    ;;
-	    esac
-	    ;;
-	*)
-	    echo >&2 "warning: unexpected argument $1 being passed through"
-	    newarg "$1"; shift
-	    ;;
-    esac
-done
-
-if [ "x$name" != x ]; then
-    logdir=/var/log/xen
-    logfile="$logdir/shim-$name.log"
-    savelog "$logfile" ||:
-    newarg -serial
-    newarg "file:$logfile"
-fi
-
-set -x
-exec /usr/local/lib/xen/bin/qemu-system-i386 "${newargs[@]}"
-END_DMWRAP
-
-chmod 0755, "$dmwrap.new" or die "$dmwrap: chmod: $!";
-
-close Q or die $!;
-
-rename "$sidecar.new", $sidecar or die "$sidecar: install: $!";
-rename "$dmwrap.new",  $dmwrap  or die "$dmwrap: install: $!";
-
-print STDERR <<END;
-pvshim-converter: wrote qemu wrapper to $dmwrap
-pvshim-converter: wrote sidecar to $sidecar
-END
-
-my $append = <<END;
-builder='hvm'
-type='hvm'
-device_model_version='qemu-xen'
-device_model_override='$dmwrap'
-device_model_args_hvm=['-cdrom','$sidecar']
-boot='c'
-END
-
-if ($out ne '-') {
-    open O, ">", "$out.tmp" or die "open output config temp: $out.tmp: $!\n";
-} else {
-    open O, ">&STDOUT" or die $!;
-}
-
-print O $indata, "\n", $append or die "write output: $!";
-close O or die "close output: $!";
-
-if ($out ne '-') {
-    rename "$out.tmp", $out or die "install output: $!";
-    print STDERR "pvshim-converter: wrote new guest config to $out\n";
-} else {
-    print STDERR "pvshim-converter: wrote new guest config to stdout\n";
-}
-
---RAT7z7wwE9
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---RAT7z7wwE9--
+SW4gdGhlIGVhcmx5IHN0ZXBzIG9mIGNvbXBpbGF0aW9uLCB0aGUgYXNtIGhlYWRlciBmaWxlcyBh
+cmUgY3JlYXRlZCwgc3VjaAphcyBpbmNsdWRlL2FzbS0kKFRBUkdFVF9BUkNIKS9hc20tb2Zmc2V0
+cy5oLiBUaGVzZSBmaWxlcyBkZXBlbmQgb24gdGhlCmFzc2VtYmx5IGZpbGUgYXJjaC8kKFRBUkdF
+VF9BUkNIKS9hc20tb2Zmc2V0cy5zLCB3aGljaCBpcyBnZW5lcmF0ZWQKYmVmb3JlLiBEZXBlbmRp
+bmcgb24gdGhlIHVzZWQgYXNzZW1ibGVyLCB0aGVyZSBtaWdodCBiZSBjb21tZW50cyBpbiB0aGUK
+YXNzZW1ibHkgZmlsZXMuCgpUaGlzIGNvbW1pdCBhZGRzIGhhbmRsaW5nIGNvbW1lbnRzIGluIHRo
+ZSBhc3NlbWJsZXIgZHVyaW5nIHRoZSBjcmVhdGlvbiBvZgp0aGUgYXNtIGhlYWRlciBmaWxlcy4K
+ClNpZ25lZC1vZmYtYnk6IE5vcmJlcnQgTWFudGhleSA8bm1hbnRoZXlAYW1hem9uLmRlPgpTaWdu
+ZWQtb2ZmLWJ5OiBNaWNoYWVsIFRhdXRzY2huaWcgPHRhdXRzY2huQGFtYXpvbi5jby51az4KUmV2
+aWV3ZWQtYnk6IFBhd2VsIFdpZWN6b3JraWV3aWN6IDx3aXBhd2VsQGFtYXpvbi5kZT4KUmV2aWV3
+ZWQtYnk6IEJqb2VybiBEb2ViZWwgPGRvZWJlbEBhbWF6b24uZGU+Ci0tLQogeGVuL01ha2VmaWxl
+IHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpk
+aWZmIC0tZ2l0IGEveGVuL01ha2VmaWxlIGIveGVuL01ha2VmaWxlCmluZGV4IDA0NGU3YzguLjg0
+MWE5ZTUgMTAwNjQ0Ci0tLSBhL3hlbi9NYWtlZmlsZQorKysgYi94ZW4vTWFrZWZpbGUKQEAgLTE4
+OSw3ICsxODksNyBAQCBpbmNsdWRlL2FzbS0kKFRBUkdFVF9BUkNIKS9hc20tb2Zmc2V0cy5oOiBh
+cmNoLyQoVEFSR0VUX0FSQ0gpL2FzbS1vZmZzZXRzLnMKIAkgIGVjaG8gIiNpZm5kZWYgX19BU01f
+T0ZGU0VUU19IX18iOyBcCiAJICBlY2hvICIjZGVmaW5lIF9fQVNNX09GRlNFVFNfSF9fIjsgXAog
+CSAgZWNobyAiIjsgXAotCSAgc2VkIC1ybmUgIi89PT4ve3M6Lio9PT4oLiopPD09Lio6XDE6OyBz
+OiBbXCQkI106IDo7IHA7fSI7IFwKKwkgIHNlZCAtcm5lICIvXlteI10uKj09Pi97czouKj09Pigu
+Kik8PT0uKjpcMTo7IHM6IFtcJCQjXTogOjsgcDt9IjsgXAogCSAgZWNobyAiIjsgXAogCSAgZWNo
+byAiI2VuZGlmIikgPCQ8ID4kQAogCi0tIAoyLjcuNAoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
