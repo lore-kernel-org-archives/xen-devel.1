@@ -1,24 +1,23 @@
-From: Anthony Liguori <anthony@codemonkey.ws>
-Subject: Re: Radical proposal: ship not-fully-tidied shim as
-	4.10.1
-Date: Wed, 10 Jan 2018 06:47:44 -0800
-Message-ID: <CA+aC4ktaqJhDx9otODp4idTa4Hyys3jCPazK=ZHMCdCdtm3XGw@mail.gmail.com>
+From: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: Re: sidecar (hvm shim) creation script
+Date: Wed, 10 Jan 2018 15:12:22 +0000
+Message-ID: <23126.11606.582758.38945@mariner.uk.xensource.com>
 References: <23123.44604.284781.889416@mariner.uk.xensource.com>
  <20180109194351.mmbmjzwhptlkr5as@citrix.com>
  <20180110083224.cmgr7flxewhx5enf@MacBook-Pro-de-Roger.local>
  <20180110122734.rgut34iw6ltqeipy@citrix.com>
+ <23126.4117.777031.227394@mariner.uk.xensource.com>
+ <20180110131049.rv6emm32efbczhl2@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="RAT7z7wwE9"
+Content-Transfer-Encoding: 7bit
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=tj2m=ef=codemonkey.ws=anthony@srs-us1.protection.inumbo.net>)
- id 1eZHfQ-0005kt-QE
- for xen-devel@lists.xenproject.org; Wed, 10 Jan 2018 14:47:48 +0000
-Received: by mail-lf0-x230.google.com with SMTP id h137so20124923lfe.8
- for <xen-devel@lists.xenproject.org>; Wed, 10 Jan 2018 06:47:47 -0800 (PST)
-In-Reply-To: <20180110122734.rgut34iw6ltqeipy@citrix.com>
+ <srs0=97or=ef=citrix.com=prvs=5411a6c19=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1eZI3k-0008Go-Ob
+ for xen-devel@lists.xenproject.org; Wed, 10 Jan 2018 15:12:56 +0000
+In-Reply-To: <20180110131049.rv6emm32efbczhl2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,105 +27,302 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Wei Liu <wei.liu2@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Committers <committers@xenproject.org>, security@xenproject.org, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, g@macbook-pro-de-roger.local, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: committers@xenproject.org, Dario Faggioli <raistlin@linux.it>, security@xenproject.org, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xenproject.org, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKYW4gMTAsIDIwMTggYXQgNDoyNyBBTSwgV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4
-LmNvbT4gd3JvdGU6Cj4gT24gV2VkLCBKYW4gMTAsIDIwMTggYXQgMDg6MzI6MjRBTSArMDAwMCwg
-Um9nZXIgUGF1IE1vbm7DqSB3cm90ZToKPj4gT24gVHVlLCBKYW4gMDksIDIwMTggYXQgMDc6NDM6
-NTFQTSArMDAwMCwgV2VpIExpdSB3cm90ZToKPj4gPiBPbiBNb24sIEphbiAwOCwgMjAxOCBhdCAw
-NTo0NTozMlBNICswMDAwLCBJYW4gSmFja3NvbiB3cm90ZToKPj4gPiA+IEFJVUkgd2UgaGF2ZSBh
-IHNlcmllcyBmb3IgcHYtaW4tcHZoIHNoaW0gd2hpY2ggaXMgbmVhcmluZyBjb21wbGV0aW9uCj4+
-ID4gPiBpbiB0aGUgc2Vuc2UgdGhhdCBpdCB3aWxsIGhhdmUgYmVlbiB3ZWxsLXRlc3RlZCAoZXNw
-ZWNpYWxseSB0aGUKPj4gPiA+IGh5cGVydmlzb3IgcGFydHMpIGFuZCBoYXMgZ29vZCBmdW5jdGlv
-bmFsaXR5LiAgKFdlaSBpcyBoYW5kbGluZyB0aGUKPj4gPiA+IGFzc2VtYmx5IG9mIHRoaXMgc2Vy
-aWVzLikKPj4gPiA+Cj4+ID4gPiBUaGUgc2VyaWVzLCBob3dldmVyLCBuZWVkcyBwcm9wZXIgcmV2
-aWV3IGFuZCB0aWR5aW5nIHVwLgo+PiA+ID4gU3BlY2lmaWNhbGx5LCBpdCBuZWVkcyB0aGUga2lu
-ZCBvZiB0aWR5aW5nIHVwIHRoYXQgZml4ZXMgY29kZQo+PiA+ID4gc3RydWN0dXJlIGFuZCBzdHls
-ZSBpc3N1ZXMgdGhhdCB3aWxsIGhpbmRlciBmdXR1cmUgWGVuIGRldmVsb3BtZW50Lgo+PiA+ID4g
-SS5lLiB0aGUga2luZCBvZiB0ZWNobmljYWwgZGVidCB3aGljaCBkb2VzIG5vdCBkaXJlY3RseSBj
-YXVzZSBidWdzIG5vdwo+PiA+ID4gYnV0IHdpbGwgY2F1c2UgdHJvdWJsZSAoaW5jbHVkaW5nIGJ1
-Z3MpIGluIHRoZSBmdXR1cmUuCj4+ID4gPgo+PiA+ID4gSU1PIHRoYXQga2luZCBvZiB0aWR5aW5n
-IHVwIGlzIGRlZmluaXRlbHkgZXNzZW50aWFsIGZvcgo+PiA+ID4geGVuLmdpdCNtYXN0ZXIuICBI
-b3dldmVyLCBpdCBpcyBtdWNoIGxlc3Mgb2YgYW4gaXNzdWUgZm9yIFhlbiA0LjEwLgo+PiA+ID4g
-WGVuIDQuMTAsIGFzIGEgc3RhYmxlIGJyYW5jaCwgd2lsbCBnZXQgbXVjaCBtb3JlIGxpbWl0ZWQg
-ZnVydGhlcgo+PiA+ID4gZGV2ZWxvcG1lbnQuICBGYWlsdXJlIHRvIHRpZHkgdGhpbmdzIHVwIHRo
-ZXJlIHdpbGwgbWFrZSBiYWNrcG9ydGluZwo+PiA+ID4gb3RoZXIgY2hhbmdlcyBtb3JlIGF3a3dh
-cmQgYnV0IHRoZSBvdmVyYWxsIGltcGFjdCBpcyBib3RoIGxvd2VyIGFuZAo+PiA+ID4gdGltZS1i
-b3VuZC4KPj4gPiA+Cj4+ID4gPiBDdXJyZW50bHkgdGhlIFhlbiBQcm9qZWN0IGhhcyBubyBwdWJs
-aXNoZWQgcmVzb2x1dGlvbiBmb3IgUFYgZ3Vlc3RzCj4+ID4gPiB0aGF0IGNhbid0IGJlIGJvb3Rl
-ZCBhcywgb3IgY29udmVydGVkIHRvLCBQVkggb3IgSFZNLiAgKEFuZCBIVk0gZ3Vlc3RzCj4+ID4g
-PiBicmluZyB0aGVpciBvd24gcHJvYmxlbXMuKSAgV2UgbmVlZCB0byBwcm92aWRlIG91ciB1c2Vy
-cyB3aXRoIG1vcmUKPj4gPiA+IGdvb2Qgb3B0aW9ucyBhcyBxdWlja2x5IGFzIHBvc3NpYmxlLgo+
-PiA+ID4KPj4gPiA+IEkgd291bGQgbGlrZSB0byBzdWdnZXN0IHRoYXQgYSBnb29kIHdheSBvZiBk
-b2luZyB0aGlzIHdvdWxkIGJlIHRvIHNoaXAKPj4gPiA+IHRoZSBzaGltIHNlcmllcyBhcyA0LjEw
-LjEgd2l0aGluIHRoZSBuZXh0IHZlcnkgZmV3IGRheXMuICBJdCBuZWVkcwo+PiA+ID4gc29tZSBt
-aW5vciBidWdmaXhpbmcgKGJ1aWxkIGJyZWFrYWdlIGV0Yy4pIGJ1dCBpcyBiYXNpY2FsbHkgcmVh
-ZHkgZm9yCj4+ID4gPiB1c2UuCj4+ID4gPgo+PiA+ID4gU3BlYWtpbmcgYXMgYSBzeXNhZG1pbiAo
-ZXZlbiwgYSB2ZXJ5IGNvbnNlcnZhdGl2ZSBzeXNhZG1pbiBtYW55IG9mCj4+ID4gPiB3aG9zZSBz
-eXN0ZW1zIGFyZSBydW5uaW5nIERlYmlhbiBvbGRzdGFibGUpLCBJIGhhdmUgYWxyZWFkeSB0YWtl
-biBhCj4+ID4gPiBkZWNpc2lvbiB0byByYXBpZGx5IGFkdmFuY2UgdG8gbmV3IHNvZnR3YXJlLCBp
-biBvbmUgY29udGV4dCwgYmVjYXVzZQo+PiA+ID4gb2YgdGhlc2UgdnVsbmVyYWJpbGl0aWVzIC0g
-YW5kIHRha2UgYW5kIGZpeCB3aGF0ZXZlciBpbXBhY3QgdGhhdCBoYXMuCj4+ID4gPiBJIHRoaW5r
-IG1hbnkgb2Ygb3VyIHVzZXJzIHdvdWxkIGxpa2UgdG8gbWFrZSB0aGUgc2FtZSBjaG9pY2UuCj4+
-ID4gPgo+PiA+ID4gUmVsZWFzZWluZyA0LjEwLjEgdGhpcyB3ZWVrIHdpdGggcHYtaW4tcHZoIHN1
-cHBvcnQgd291bGQgZ2l2ZSBtYW55IG9mCj4+ID4gPiBvdXIgdXNlcnMgd2l0aCBQViBndWVzdHMg
-YW4gaW1tZWRpYXRlbHkgZGVwbG95YWJsZSB1cGRhdGUsIGV2ZW4gdGhvdWdoCj4+ID4gPiBvZiBj
-b3Vyc2UgdGhlIHZlcnNpb24gYnVtcCB0byBnZXQgdG8gNC4xMCBtYXkgYmUgZGlzcnVwdGl2ZS4K
-Pj4gPiA+Cj4+ID4gPiBEb2luZyB0aGlzIHdvdWxkIGJlIGEgZGVwYXJ0dXJlIGZyb20gb3VyIHV1
-c3VhbCBub24tc2VjdXJpdHktYnVnCj4+ID4gPiBwcm9jZXNzIG9mIGNvbW1pdHRpbmcgY2hhbmdl
-cyB0byB4ZW4uZ2l0I3N0YWdpbmcsIGFuZCB0aGVuIGJhY2twb3J0aW5nCj4+ID4gPiBvbmx5IGFm
-dGVyIHRoZSBwYXRjaGVzIGhhdmUgYmVlbiBzaXR0aW5nIGluIHhlbi5naXQjbWFzdGVyIGZvciBz
-b21lCj4+ID4gPiB0aW1lLiAgSXQncyBhbHNvIGEgZGVwYXJ0dXJlIGZyb20gb3VyIHVzdWFsIHNl
-Y3VyaXR5LWJ1ZyBwcm9jZXNzIG9mCj4+ID4gPiBkZXZlbG9waW5nIGFuZCB0ZXN0aW5nIGFuZCBj
-b21taXR0aW5nIHBhdGNoZXMgZm9yIGFsbCBzdXBwb3J0ZWQKPj4gPiA+IHZlcnNpb25zIGluIHBh
-cmFsbGVsLgo+PiA+ID4KPj4gPiA+IEJ1dCB0aGlzIGlzIG5vdCBhIHVzdWFsIHNpdHVhdGlvbi4g
-IFRoaXMgdGltZSwgd2UgZG9uJ3QgaGF2ZSB0aGUgdGltZQo+PiA+ID4gdG8gd2FpdC4KPj4gPiA+
-Cj4+ID4gPiBPcGluaW9ucyA/Cj4+ID4gPgo+PiA+Cj4+ID4gQW50aG9ueSBhbmQgb3RoZXJzIGpv
-aW5lZCAjeGVuZGV2ZWwgdG8gZXhwcmVzcyB0aGVpciBmaW5kaW5ncyBhbmQKPj4gPiBvcGluaW9u
-cy4KPj4gPgo+PiA+IENvbnZlcmdpbmcgdGhlIFBWSCBhbmQgSFZNIHNvbHV0aW9uIGlzIGRvYWJs
-ZSBhbmQgZXNzZW50aWFsIGluIHRoZSBsb25nCj4+ID4gcnVuLCBidXQgbWVyZ2luZyB0aGUgdHdv
-IHNlcmllcyBpbiB0d28gb3IgdGhyZWUgZGF5cyAoaWYgd2Ugd2FudCB0byBtYWtlCj4+ID4gc29t
-ZXRoaW5nIHJlYWR5IHRoaXMgd2VlaykgaXMgbm90IHBvc3NpYmxlLiBJdCBhbGwgY29tZXMgZG93
-biB0byB3aGljaAo+PiA+IHNlcmllcyBzaG91bGQgd2UgdXNlIGZvciB0aGUgdGVtcG9yYXJ5IHNv
-bHV0aW9uLgo+PiA+Cj4+ID4gV2UgZGlzY3Vzc2VkIHRoZSB0ZXN0IGNvdmVyYWdlIG9mIGJvdGgg
-c2VyaWVzLiBJdCBzZWVtcyB0aGF0IHRoZSBQViBpbgo+PiA+IFBWSCBzZXJpZXMgaGFzIGhhZCBp
-biBkZXB0aCB0ZXN0aW5nIGRvbmUgb24gNC43IGFuZCA0LjEwLCB3aGlsZSBQViBpbgo+PiA+IEhW
-TSBzZXJpZXMgaGFzIGhhZCB0ZXN0aW5nIGRvbmUgZnJvbSBYZW4gMy40IG9ud2FyZCB3aXRoIHZh
-cmlvdXMgb2xkIGFuZAo+PiA+IG5ldyBndWVzdHMuIEFudGhvbnkgYWxzbyBwb2ludGVkIG91dCB0
-aGF0IFBWIGluIFBWSCBzaGltIHdvbid0IHdvcmsgZm9yCj4+ID4gc29tZSBjb25maWd1cmF0aW9u
-cyAtLSB0aGVyZSBhcmUgZmFyIHRvbyBtYW55IHN1YnRsZXRpZXMgdG8gZml4IHdpdGhvdXQKPj4g
-PiB0aW1lIGFuZCB0ZXN0aW5nIHJlc291cmNlcyAoYm90aCBvZiB3aGljaCB1cHN0cmVhbSBsYWNr
-cykuIFRoZXNlIGFyZQo+PiA+IHJhdGhlciBzdHJvbmcgYXJndW1lbnRzIGZvciB0aGUgUFYgaW4g
-SFZNIHNlcmllcywgYmVjYXVzZSBiZWluZyBhYmxlIHRvCj4+ID4gcnVuIG9uIG9sZGVyIHZlcnNp
-b25zIG9mIFhlbiBhbmQgb2xkZXIgdmVyc2lvbnMgb2YgZ3Vlc3Qga2VybmVscwo+PiA+IHByb3Zp
-ZGVzIG91ciB1c2VycyB3aXRoIHRoZSBtYXhpbXVtIGNvdmVyYWdlLgo+PiA+Cj4+ID4gQW4gYXJn
-dW1lbnQgZm9yIFBWIGluIFBWSCBzZXJpZXMgaXMgdGhhdCBpdCBoYXMgbW9yZSBmdW5jdGlvbmFs
-aXRpZXMsCj4+ID4gYnV0IEkgdGhpbmsgbWlncmF0aW9uIGV0YyBhcmUganVzdCBuaWNlLXRvLWhh
-dmUncyBpbiB0aGUgY29udGV4dCBvZiB0aGlzCj4+ID4gc2VjdXJpdHkgZml4IHNlcmllcy4KPj4g
-Pgo+PiA+IEkgdGhpbmsgcHJvdmlkaW5nIGEgd2VsbCB0ZXN0ZWQgc29sdXRpb24gdG8gb3VyIHVz
-ZXJzIGFzIHNvb24gYXMKPj4gPiBwb3NzaWJsZSwgZXZlbiBpZiB0aGUgc29sdXRpb24gaGFzIHJl
-ZHVjZWQgZnVuY3Rpb25hbGl0eSwgaXMgYmV0dGVyIHRoYW4KPj4gPiBkZWxheWluZyBmb3IgdGhl
-IHBlcmZlY3Qgc29sdXRpb24uICBJIHN1Z2dlc3Qgd2UgZ28gd2l0aCBBbWF6b24ncyBzZXJpZXMK
-Pj4gPiBmaXJzdCBhbmQgcHJvZHVjZSBzb21ldGhpbmcgdGhpcyB3ZWVrLCB0aGVuIHdlIHNlZWsg
-dG8gbWVyZ2UgdGhlIHR3bwo+PiA+IHNvbHV0aW9ucy4gQW50aG9ueSBoYXMgYWdyZWVkIHRvIGJl
-IG9uIHRoZSBob29rIHRvIHJldmlldyBmdXR1cmUKPj4gPiBwYXRjaGVzLiA7LSkKPj4KPj4gSSB0
-aGluayB0aGlzIHBvaW50IGlzIG1vb3QgdGhlIG1vbWVudCB2aXhlbiBzdGFydHMgbWVyZ2luZyBj
-b2RlIGZyb20KPj4gdGhlIHB2c2hpbSBicmFuY2gsIGF0IHdoaWNoIHBvaW50IHdlIGdldCBzb21l
-IGtpbmQgb2YgRnJhbmtlbnN0ZWluCj4+IHNoaW0gd2hpY2ggaGFzIG1vcmUgZnVuY3Rpb25hbGl0
-eSB0aGFuIHRoZSBvcmlnaW5hbCB2aXhlbiBjb2RlLCBidXQKPj4gaGFzIG5laXRoZXIgYmVlbiB0
-ZXN0ZWQgYnkgQW1hem9uIG5vciBieSBDaXRyaXgsIGllOiB0aGUgd29yc2Ugb2YgYm90aAo+PiBz
-Y2VuYXJpb3MuCj4+Cj4+IElmIHRoZSB2aXhlbiBzZXJpZXMgaGFzIHRvIGJlIG1lcmdlZCwgSSB0
-aGluayB0aGUgdmVyc2lvbiBtZXJnZWQKPj4gc2hvdWxkIGJlIHRoZSBvbmUgZXh0ZW5zaXZlbHkg
-dGVzdGVkIGJ5IEFtYXpvbiwgb3IgZWxzZSB0aGUgdGVzdGluZwo+PiBwb2ludCBpbiB0aGUgYXJn
-dW1lbnQgYWJvdmUgaXQncyBqdXN0IG5vdCB0cnVlLgo+Pgo+Cj4gWWVzLCBpZiB0aGUgY29uc2Vu
-c3VzIGlzIHRvIHVzZSB0aGUgdml4ZW4gc2VyaWVzLCAgd2Ugc2hvdWxkIHVzZSB0aGUKPiB3ZWxs
-LXRlc3RlZCBwYXRjaGVzIGluc3RlYWQgb2YgdHJ5aW5nIHRvIG1lcmdlIHRoZSB0d28gaW1wbGVt
-ZW50YXRpb25zCj4gaW4gYSBodXJyeS4KCkkgYWdyZWUsIGFuZCB0aGF0J3MgdjEuCgpSZWdhcmRz
-LAoKQW50aG9ueSBMaWd1b3JpCgo+IFdlaS4KPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fCj4gWGVuLWRldmVsIG1haWxpbmcgbGlzdAo+IFhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwo+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+--RAT7z7wwE9
+Content-Type: text/plain; charset="us-ascii"
+Content-Description: message body text
+Content-Transfer-Encoding: 7bit
+
+Here is the converter script where I just got my guest to boot with
+the Vixen shim, as built and provided by Wei.
+
+Ian.
+
+
+--RAT7z7wwE9
+Content-Type: text/plain; name="pvshim-converter"
+Content-Description: for vixen
+Content-Disposition: inline; filename="pvshim-converter"
+Content-Transfer-Encoding: 7bit
+
+#!/usr/bin/perl -w
+#
+# usage:
+#   pvshim-converter [OPTIONS] OLD-CONFIG NEW-CONFIG
+#
+# options:
+#   --sidecars-directory DIR   default is /var/lib/xen/pvshim-sidecars
+#   --shim SHIM                overrides domain config file
+#   --debug                    verbose, and leaves sidecar prep dir around
+#
+# What we do
+#
+#  read existing config file using python
+#  determine kernel, ramdisk and cmdline
+#  use them to produce sidecar and save it under domain name
+#  mess with the things that need to be messed with
+#  spit out new config file
+
+use strict;
+
+use Getopt::Long;
+use JSON;
+use IO::Handle;
+use POSIX;
+use Fcntl qw(:flock);
+
+our $debug;
+
+sub runcmd {
+    print STDERR "+ @_\n" if $debug;
+    $!=0; $?=0; system @_ and die "$_[0]: $! $?";
+}
+
+our $shim;
+our $sidecars_dir = '/var/lib/xen/pvshim-sidecars';
+
+GetOptions('sidecars-directory=s' => \$sidecars_dir,
+           'shim=s' => \$shim,
+           'debug' => \$debug)
+    or die "pvshim-converter: bad options\n";
+
+@ARGV==2 or die "pvshim-converter: need old and new config filenames";
+
+our ($in,$out) = @ARGV;
+
+our $indata;
+
+if ($in ne '-') {
+    open I, '<', "$in" or die "open input config file: $!\n";
+} else {
+    open I, '<&STDIN' or die $!;
+}
+{
+    local $/;
+    $indata = <I>;
+}
+I->error and die $!;
+close I;
+
+open P, "-|", qw(python -c), <<END, $indata or die $!;
+import sys
+import json
+l = {}
+exec sys.argv[1] in l
+for k in l.keys():
+	if k.startswith("_"):
+		del l[k]
+print json.dumps(l)
+END
+
+our $c;
+
+{
+    local $/;
+    $_ = <P>;
+    $!=0; $?=0; close P or die "$! $?";
+    $c = decode_json $_;
+}
+
+die "no domain name ?" unless exists $c->{name};
+die "bootloader not yet supported" if $c->{bootloader};
+die "no kernel" unless $c->{kernel};
+
+our $sidecar = $c->{pvshim_sidecar_path} || "$sidecars_dir/$c->{name}.iso";
+our $dmwrap = $c->{pvshim_sidecar_path} || "$sidecars_dir/$c->{name}.dm";
+
+$shim ||= $c->{pvshim_path};
+$shim ||= '/usr/local/lib/xen/boot/xen-shim';
+
+our $shim_cmdline = $c->{pvshim_cmdline} || 'console=com1 com1=115200n1 loglvl=all guest_loglvl=all';
+$shim_cmdline .= ' '.$c->{pvshim_extra} if $c->{pvshim_extra};
+
+our $kernel_cmdline = $c->{cmdline} || '';
+$kernel_cmdline .= ' root='.$c->{root} if $c->{root};
+$kernel_cmdline .= ' '.$c->{extra} if $c->{extra};
+
+print "pvshim-converter: creating sidecar in $sidecar\n";
+
+runcmd qw(mkdir -m700 -p --), $sidecars_dir;
+
+open L, ">", "$sidecar.lock" or die "$sidecar.lock: open $!";
+flock L, LOCK_EX or die "$sidecar.lock: lock: $!";
+
+my $sd = "$sidecar.dir";
+
+system qw(rm -rf --), $sd;
+mkdir $sd, 0700;
+
+runcmd qw(cp --), $shim, "$sd/shim";
+runcmd qw(cp --), $c->{kernel}, "$sd/kernel";
+runcmd qw(cp --), $c->{ramdisk}, "$sd/ramdisk" if $c->{ramdisk};
+
+my $grubcfg = <<END;
+serial --unit=0 --speed=9600 --word=8 --parity=no --stop=1
+terminal_input serial
+terminal_output serial
+
+set timeout=1
+
+menuentry 'Xen shim' {
+	insmod gzio
+	insmod xzio
+        multiboot (cd)/shim placeholder $shim_cmdline
+        module (cd)/kernel placeholder $kernel_cmdline
+        module (cd)/ramdisk
+}
+END
+
+runcmd qw(mkdir -p --), "$sd/boot/grub";
+open G, ">", "$sd/boot/grub/grub.cfg" or die "$sd, grub.cfg: $!";
+print G $grubcfg or die $!;
+close G or die $!;
+
+unlink "$sidecar.new" or $!==ENOENT or die "$sidecar.new: rm: $!";
+runcmd qw(grub-mkrescue -o), "$sidecar.new", "$sidecar.dir";
+if (!stat "$sidecar.new") {
+    $!==ENOENT or die "$sidecar.new: stat: $!";
+
+    print STDERR <<END;
+pvshim-converter: grub-mkrescue exited with status zero but failed to make iso.
+NB that grub-mkrescue has a tendency to lie in its error messages.
+END
+    my $missing;
+    foreach my $check (qw(xorriso mformat)) {
+        $missing |= system qw(sh -c), "type $check";
+    }
+
+    if ($missing) {
+        print STDERR <<END;
+You seem to have some program(s) missing which grub-mkrescue depends on,
+see above.  ("mformat" is normally in the package "mtools".)
+Installing those programs will probably help.
+END
+    } else {
+        print STDERR <<END;
+And older grub-mkrescue has a tendency not to notice certain problems.
+Maybe strace will tell you what is wrong.  :-/
+END
+    }
+    die "pvshim-converter: grub-mkrescue did not make iso\n";
+}
+
+runcmd qw(rm -rf --), "$sidecar.dir" unless $debug;
+
+open Q, ">", "$dmwrap.new" or die "$dmwrap: $!";
+print Q <<'END_DMWRAP';
+#!/bin/bash
+
+set -x
+: "$@"
+set +x
+
+newargs=()
+
+newarg () {
+    newargs+=("$1")
+}
+
+while [ $# -gt 1 ]; do
+    case "$1" in
+	-no-shutdown|-nodefaults|-no-user-config)
+	    newarg "$1"; shift
+	    ;;
+	-xen-domid|-chardev|-mon|-display|-boot|-m|-machine)
+	    newarg "$1"; shift
+	    newarg "$1"; shift
+	    ;;
+        -name)
+            newarg "$1"; shift
+            name="$1"; shift
+            newarg "$name"
+            ;;
+	-netdev|-cdrom)
+	    : fixme
+	    newarg "$1"; shift
+	    newarg "$1"; shift
+	    ;;
+	-drive|-kernel|-initrd|-append|-vnc)
+	    shift; shift
+	    ;;
+	-device)
+	    shift
+	    case "$1" in
+		XXXrtl8139*)
+		    newarg "-device"
+		    newarg "$1"; shift
+		    ;;
+		*)
+		    shift
+		    ;;
+	    esac
+	    ;;
+	*)
+	    echo >&2 "warning: unexpected argument $1 being passed through"
+	    newarg "$1"; shift
+	    ;;
+    esac
+done
+
+if [ "x$name" != x ]; then
+    logdir=/var/log/xen
+    logfile="$logdir/shim-$name.log"
+    savelog "$logfile" ||:
+    newarg -serial
+    newarg "file:$logfile"
+fi
+
+set -x
+exec /usr/local/lib/xen/bin/qemu-system-i386 "${newargs[@]}"
+END_DMWRAP
+
+chmod 0755, "$dmwrap.new" or die "$dmwrap: chmod: $!";
+
+close Q or die $!;
+
+rename "$sidecar.new", $sidecar or die "$sidecar: install: $!";
+rename "$dmwrap.new",  $dmwrap  or die "$dmwrap: install: $!";
+
+print STDERR <<END;
+pvshim-converter: wrote qemu wrapper to $dmwrap
+pvshim-converter: wrote sidecar to $sidecar
+END
+
+my $append = <<END;
+builder='hvm'
+type='hvm'
+device_model_version='qemu-xen'
+device_model_override='$dmwrap'
+device_model_args_hvm=['-cdrom','$sidecar']
+boot='c'
+END
+
+if ($out ne '-') {
+    open O, ">", "$out.tmp" or die "open output config temp: $out.tmp: $!\n";
+} else {
+    open O, ">&STDOUT" or die $!;
+}
+
+print O $indata, "\n", $append or die "write output: $!";
+close O or die "close output: $!";
+
+if ($out ne '-') {
+    rename "$out.tmp", $out or die "install output: $!";
+    print STDERR "pvshim-converter: wrote new guest config to $out\n";
+} else {
+    print STDERR "pvshim-converter: wrote new guest config to stdout\n";
+}
+
+--RAT7z7wwE9
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--RAT7z7wwE9--
