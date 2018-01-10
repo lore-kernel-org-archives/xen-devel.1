@@ -1,14 +1,27 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: Radical proposal v2: Publish Amazon's verison now,
- Citrix's version soon
-Date: Wed, 10 Jan 2018 09:25:12 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1801100913130.4603@sstabellini-ThinkPad-X260>
-References: <4a587ed7-fa68-931a-dcbd-ea1570da1bdc@citrix.com>
+From: Dario Faggioli <raistlin@linux.it>
+Subject: Re: sidecar (hvm shim) creation script
+Date: Wed, 10 Jan 2018 18:44:17 +0100
+Message-ID: <1515606257.13211.15.camel@linux.it>
+References: <23123.44604.284781.889416@mariner.uk.xensource.com>
+ <20180109194351.mmbmjzwhptlkr5as@citrix.com>
+ <20180110083224.cmgr7flxewhx5enf@MacBook-Pro-de-Roger.local>
+ <20180110122734.rgut34iw6ltqeipy@citrix.com>
+ <23126.4117.777031.227394@mariner.uk.xensource.com>
+ <20180110131049.rv6emm32efbczhl2@citrix.com>
+ <23126.11606.582758.38945@mariner.uk.xensource.com>
+ <23126.13224.18254.699605@mariner.uk.xensource.com>
+ <23126.13380.315656.733601@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3317594075286001824=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <4a587ed7-fa68-931a-dcbd-ea1570da1bdc@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=dmh2=ef=gmail.com=raistlin.df@srs-us1.protection.inumbo.net>)
+ id 1eZKQL-0006UD-1B
+ for xen-devel@lists.xenproject.org; Wed, 10 Jan 2018 17:44:25 +0000
+Received: by mail-wr0-x22c.google.com with SMTP id w50so8953844wrc.11
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Jan 2018 09:44:22 -0800 (PST)
+In-Reply-To: <23126.13380.315656.733601@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,138 +30,344 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>
-Cc: Doug Goldstein <cardoe@cardoe.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, Rich Persaud <persaur@gmail.com>, Committers <committers@xenproject.org>, Anthony Liguori <aliguori@amazon.com>, "security@xen.org" <security@xen.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, xen-devel@lists.xenproject.org, committers@xenproject.org, security@xenproject.org, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCAxMCBKYW4gMjAxOCwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiAqIEV4ZWN1dGl2ZSBz
-dW1tYXJ5Cj4gCj4gLSBXZSd2ZSBhZ3JlZWQgb24gYSAiY29udmVyZ2VuY2UiIHBvaW50IGZvciBQ
-ViBzaGltIGZ1bmN0aW9uYWxpdHkgdGhhdAo+ICAgY292ZXJzIGFzIG1hbnkgdXNlcnMgYXMgcG9z
-c2libGU6Cj4gIC0gJ0hWTScgZnVuY3Rpb25hbGl0eTogYm9vdHMgaW4gSFZNIG1vZGUsIGhhcyBz
-dXBwb3J0IGZvciBYZW4gMy40Cj4gICAgZXZlbnQgY2hhbm5lbHMsICZjLCBib290ZWQgdmlhICdz
-aWRlY2FyJwo+ICAtICdQVkgnIGZ1bmN0aW9uYWxpdHk6IGJvb3RzIGluIFBWSCBtb2RlLCBib290
-ZWQgdmlhIHRvb2xzdGFjawo+ICAgIGNoYW5nZXMKPiAKPiAtICJWaXhlbiIgKHRoZSBBbWF6b24g
-c2hpbSkgYW5kIFBWSCBzaGltIChtb3N0bHkgZGV2ZWxvcGVkIGJ5IENpdHJpeCkKPiAgIGVhY2gg
-Y292ZXIgc29tZSB1c2VycyBhbmQgbm90IG90aGVyczsgbmVpdGhlciBvbmUgKHlldCkgY292ZXJz
-IGFsbAo+ICAgdXNlcnMKClNvcnJ5IGZvciBiZWluZyBwdW5jdGlsaW91cywgYnV0IG5laXRoZXIg
-b25lIGNhbiBjb3ZlciBhbGwgdXNlcnM6IHRoZXJlCmFyZSB1c2VycyB3aXRob3V0IFZULXggb24g
-dGhlaXIgcGxhdGZvcm0sIGFuZCBib3RoIGFwcHJvYWNoZXMgcmVxdWlyZQpWVC14LgoKQm90aCBj
-YW4gb25seSBiZSB0ZW1wb3Jhcnkgc3RvcC1nYXBzLiBJIG1hZGUgYSBjb3VwbGUgb2YgbW9yZSBj
-b21tZW50cwppbiB0aGlzIHJlc3BlY3QgYmVsb3cuCgoKCj4gLSBWaXhlbiBpcyByZWFkeSBmb3Ig
-aW1tZWRpYXRlIHJlbGVhc2U7IFBWSCBzaGltIHN0aWxsIG5lZWRzIHNvbWUKPiAgIG1pbm9yIHJl
-dmlzaW9uLCBhbmQgdGhlIHRvb2xzdGFjayBjb21wb25lbnQKPiAKPiAtIFByb3Bvc2FsOgo+ICAt
-IFJlbGVhc2UgIkhPV1RPIiBmb3IgQW1hem9uIHNoaW0gdjEgaW1tZWRpYXRlbHkgKGluY2x1ZGlu
-ZyBhIHNpZ25lZAo+ICAgIHRhZyBvbiB4ZW5iaXRzIHdpdGggdGhlIHJlcXVpc2l0ZSBwYXRjaGVz
-KQo+ICAtIFJlbGVhc2UgIkhPV1RPIiBmb3IgUFZIIHNoaW0gYXMgc29vbiBhcyBpdCdzIHJlYWR5
-IChpbmNsdWRpbmcgYQo+ICAgIHNpZ25lZCB0YWcgb3IgdGFncyBvbiB4ZW5iaXRzIHdpdGggdGhl
-IHJlcXVpc2l0ZSBwYXRjaGVzKQo+ICAtIEJhc2UgZnV0dXJlIGRldmVsb3BtZW50IG9uIHRoZSBQ
-Vkggc2hpbSAocG9ydGluZyBvdmVyIGZ1bmN0aW9uYWxpdHkKPiAgICBmcm9tIHRoZSBBbWF6b24g
-c2VyaWVzKQo+IAo+ICogRGlzY3Vzc2lvbgo+IAo+IEluIG91ciBkaXNjdXNzaW9ucywgd2UndmUg
-Z2VuZXJhbGx5IGlkZW50aWZpZWQgZm91ciBraW5kcyBvZiB1c2VycyAvCj4gY29uc3VtZXJzIG9m
-IFhlbjoKPiAKPiAxLiBUaG9zZSBmb3Igd2hvbSB1cGdyYWRpbmcgdG8gYSBuZXdlciB2ZXJzaW9u
-IG9mIFhlbiBpcyB0aGUgYmlnZ2VzdAo+IHByb2JsZW0KPiAKPiBUaGlzIGNvdWxkIGJlIHBlb3Bs
-ZSB3aG8gaGF2ZSBsb2NhbCBjaGFuZ2VzIHRoZXkgY2FuJ3QgZm9yd2FyZC1wb3J0LAo+IHBlb3Bs
-ZSB3aG9zZSBTTEFzIGZvcmJpZCB1cGRhdGluZyB2ZXJzaW9ucywgb3IgYW55IG51bWJlciBvZiBv
-dGhlcgo+IHRoaW5ncyB0aGF0IG1ha2UgdXBkYXRpbmcgdG8gYSBuZXdlciB2ZXJzaW9uIG9mIFhl
-biB1bnBhbGF0YWJsZSBvcgo+IGltcG9zc2libGUuCj4gCj4gMi4gVGhvc2UgZm9yIHdob20gYWRk
-aW5nIGEgUUVNVSBpbnN0YW5jZSB0byBhbGwgUFYgZ3Vlc3RzIGlzIHRoZQo+IGJpZ2dlc3QgcHJv
-YmxlbQo+IAo+IE1hbnkgdXNlcnMgSSd2ZSB0YWxrZWQgdG8gZXh0cmVtZWx5IGRpc2xpa2UgdGhl
-IGlkZWEgb2YgYWRkaW5nIFFFTVUKPiBpbnN0YW5jZXMgdG8gYWxsIHRoZWlyIFBWIGd1ZXN0cywg
-YW5kIHdvdWxkIHJhdGhlciBkbyB1cGdyYWRlcyBhbmQvb3IKPiBtb2RpZnkgZ3Vlc3QgdHlwZXMg
-dG8gYXZvaWQgdGhpcwo+IAo+IDMuIFRob3NlIGZvciB3aG9tIG1vZGlmeWluZyBndWVzdCBwYXJh
-bWV0ZXJzIGlzIHRoZSBiaWdnZXN0IHByb2JsZW0KPiAKPiBNYW55IHVzZXJzIEkndmUgdGFsa2Vk
-IHRvIGFyZSB1c2luZyBzb2Z0d2FyZSB3aGljaCBzZXZlcmVseSBsaW1pdHMgdGhlCj4gZmxleGli
-aWxpdHkgdGhleSBoYXZlIGluIHRlcm1zIG9mIGhvdyBndWVzdHMgYXJlIGNyZWF0ZWQKPiAKPiA0
-LiBUaG9zZSBmb3Igd2hvbSBzb21lIHN1YnNldCBvZiBmZWF0dXJlcyAobWlncmF0aW9uLCBiYWxs
-b29uaW5nLCB2Y3B1Cj4gaG90cGx1ZywgJmMpIGlzIHRoZSBiaWdnZXN0IHByb2JsZW0uCj4gCj4g
-VGhpcyBpbmNsdWRlcyB1c2VycyB3aG8gcmVseSBvbiB0aGVzZSBmZWF0dXJlcywgYXMgd2VsbCBh
-cyBzb2Z0d2FyZQo+IHByb3ZpZGVycyB0aGF0IHByb3ZpZGUgdGhvc2UgZmVhdHVyZXMuCgo1LiBU
-aG9zZSB0aGF0IGNhbm5vdCBkZXBsb3kgbmVpdGhlciBWaXhlbiBub3IgUFZTaGltIGR1ZSB0byBs
-YWNrIG9mIFZULXgKCgoKPiBBbWF6b24gaXMgaW4gdGhlIGZpcnN0IGNhdGVnb3J5LCBhbmQgaGF2
-ZSBkZXZlbG9wZWQgYSAiUFYgc2hpbSIKPiBzZXJpZXMgdGhhdCBhZGRyZXNzZXMgdGhlaXIgbmVl
-ZHMuICBUaGV5IGhhdmUgYWxzbyB2ZXJ5IGtpbmRseQo+IHNoYXJlZCB0aGUgcGF0Y2hlcyBwdWJs
-aWNseSBmb3IgdGhlIGNvbW11bml0eSB0byBiZSBhYmxlIHRvIHVzZS4KPiAKPiBDaXRyaXggaXMg
-aW4gdGhlIGZvdXJ0aCBjYXRlZ29yeSwgYW5kIGhhdmUgZGV2ZWxvcGVkIGEgIlBWIHNoaW0iCj4g
-c2VyaWVzIHRoYXQgYWRkcmVzc2VzIHRoZWlyIG5lZWRzLiAgVGhpcyBzaGltIGFsc28gc2F0aXNm
-aWVzIGNhdGVnb3J5IDIsCj4gYW5kIHdpdGggc29tZSB3b3JrIGNvdWxkIHN1cHBvcnQgY2F0ZWdv
-cnkgMy4KPiAKPiBHb2luZyBmb3J3YXJkLCB0aGUgYmVzdCBzb2x1dGlvbnMgZm9yIG5ldyBoeXBl
-cnZpc29ycyAoWGVuIDQuMTErKQo+IHdvdWxkIGJlIHRvIGF2b2lkIG5lZWRpbmcgUUVNVSwgYnVp
-bGRpbmcgdGhlIHNpZGVjYXIsIGFuZCBzbyBvbi4gIEJ1dAo+IHdlIHN0aWxsIHdhbnQgdG8gYmUg
-YWJsZSB0byBzdXBwb3J0IHBlb3BsZSBydW5uaW5nIHRoZSAnSFZNIHNoaW0gd2l0aAo+IHNpZGVj
-YXInIHZlcnNpb24gZ29pbmcgZm9yd2FyZC4gIFNvIHRoZSAiY29udmVyZ2VuY2UgcG9pbnQiIHdl
-J3ZlIGFsbAo+IHNlZW1lZCB0byBhZ3JlZSBvbiBpcyB0byBoYXZlIGEgc2hpbSBjYXBhYmxlIG9m
-IHNhdGlzZnlpbmcgYWxsIGdyb3VwczoKCkdvaW5nIGZvcndhcmQsIHRoZSBiZXN0IHNvbHV0aW9u
-cyBmb3IgbmV3IGh5cGVydmlzb3JzIChYZW4gNC4xMSspIGlzIHRvCmZpeCBQViBpbiBhIHdheSB0
-aGF0IGlzIHNlY3VyZSB3aXRob3V0IG5lZWRpbmcgVlQteC4KCgoKPiAtIENhbiBydW4gaW4gSFZN
-IG1vZGUgYmFjayBhcyBmYXIgYXMgWGVuIDMuNAo+IC0gQ2FuIHJ1biBpbiBQVkggbW9kZSwgd2l0
-aG91dCBRRU1VIG9yICJzaWRlY2FyIiwgYW5kIGRvZXNuJ3QgcmVxdWlyZQo+ICAgbWFueSB0b29s
-c3RhY2sgY2hhbmdlcwo+IC0gSGFzIGZlYXR1cmUgcGFyaXR5IHdpdGggUFYgbW9kZSAobWlncmF0
-aW9uLCBiYWxsb29uaW5nLCB2Y3B1Cj4gICBtaWdyYXRpb24sICZjKQo+Cj4gVGhlIGlzc3VlIGhh
-cyBiZWVuIG1hZGUgcHVibGljIGZvciBuZWFybHkgYSB3ZWVrIG5vdywgc28gdGhlcmUgaXMgYQo+
-IGxvdCBvZiBwcmVzc3VyZSB0byBnZXQgYSBzb2x1dGlvbiB0byBvdXIgdXNlcnMgYXMgc29vbiBh
-cyBwb3NzaWJsZTsgYnkKPiB0aGUgZW5kIG9mIHRoZSB3ZWVrIGF0IGFic29sdXRlIGxhdGVzdCwg
-YnV0IHRvZGF5IGlmIHBvc3NpYmxlLgo+IAo+IEFtYXpvbidzIHYxIHNlcmllczoKPiAtIEhhcyBz
-dXBwb3J0IGZvciAnbGVnYWN5JyBldmVudCBjaGFubmVscwo+IAo+IC0gSGFzIGJlZW4gdGVzdGVk
-IGJ5IEFtYXpvbiBvdmVyIGEgd2lkZSByYW5nZSBvZiB0aGVpciBoeXBlcnZpc29yCj4gICB2ZXJz
-aW9ucyBhbmQgZ3Vlc3QgdHlwZXMgKGluY2x1ZGluZyBwdmdydWIgdHlwZXMpIGJhY2sgYXMgZmFy
-IGFzIFhlbgo+ICAgMy40Cj4gCj4gLSBVc2VzIEhWTSBtb2RlLCBhbmQgc28gaGFzIHRoZSBvdmVy
-aGVhZCBhbmQgc2VjdXJpdHkgaW1wbGljYXRpb25zIG9mCj4gICBydW5uaW5nIFFFTVUKPiAKPiAt
-IFJlcXVpcmVzIG5vIEwwIGh5cGVydmlzb3Igb3IgdG9vbHN0YWNrIGNoYW5nZXMKPiAKPiAtIFJl
-cXVpcmVzIHVzZXJzIHRvIGJ1aWxkIGEgImJvb3Qgc2lkZWNhciIgaW1hZ2UgZm9yIGVhY2ggdW5p
-cXVlIGd1ZXN0Cj4gICBib290IGNvbmZpZ3VyYXRpb24KPiAKPiAtIElzIG1pc3NpbmcgbWFueSBm
-ZWF0dXJlcywgc3VjaCBhcyBtaWdyYXRpb24sIG1lbW9yeSBiYWxsb29uaW5nLCBhbmQKPiAgIHZj
-cHUgaG90cGx1Zwo+IAo+IC0gSGFzIGFjY3VyYXRlICdzdG9sZW4gdGltZScgc3VwcG9ydAo+IAo+
-IENpdHJpeCdzIHNlcmllczoKPiAtIEhhcyBiZWVuIGV4dGVuc2l2ZWx5IHRlc3RlZCBieSBYZW5T
-ZXJ2ZXIncyBYZW5SVCBmb3IgWGVuIDQuNyAod2l0aAo+ICAgUFZIIGJhY2twb3J0cykgYW5kIDQu
-MTAKPiAtIFVzZXMgUFZIIG1vZGUsIGFuZCBzbyBkb2Vzbid0IGhhdmUgdGhlIG92ZXJoZWFkIGFu
-ZCBzZWN1cml0eQo+ICAgaW1wbGljYXRpb25zIG9mIHJ1bm5pbmcgUUVNVQo+IC0gTm8gbmVlZCB0
-byBidWlsZCAiYm9vdCBzaWRlY2FyIgo+IC0gUmVxdWlyZXMgaHlwZXJ2aXNvciBjaGFuZ2VzIGZv
-ciB2ZXJzaW9ucyBmb3IgdmVyc2lvbnMgYmVmb3JlIDQuMTAKPiAgIHdoaWNoIGNhbm5vdCByZWFz
-b25hYmx5IGJlIGJhY2twb3J0ZWQgYnkgdGhlIG9wZW4tc291cmNlIHRlYW0gYmV5b25kCj4gICBY
-ZW4gNC44Cj4gLSBSZXF1aXJlcyB0b29sc3RhY2sgY2hhbmdlcyBpbiBhbGwgdmVyc2lvbnMKPiAt
-IEhhcyBtaWdyYXRpb24sIG1lbW9yeSBiYWxsb29uaW5nLCBhbmQgdmNwdSBob3RwbHVnIChleHRl
-bnNpdmVseQo+ICAgdGVzdGVkIGJ5IFhlblJUKQo+IC0gRG9lc24ndCBoYXZlIGFjY3VyYXRlICdz
-dG9sZW4gdGltZScgc3VwcG9ydAo+IC0gQ3VycmVudGx5IGlzIG1pc3NpbmcgYSBjbGVhbiB0b29s
-c3RhY2sgaW50ZXJmYWNlCj4gCj4gV2l0aCBzb21lIHR3ZWFrcywgQ2l0cml4J3MgdmVyc2lvbiBo
-YXMgYmVlbiBtYWRlIHRvIGJvb3QgaW4gSFZNIG1vZGUuCj4gSG93ZXZlciwgdGhpcyBtb2RpZmll
-ZCB2ZXJzaW9uOgo+IC0gRG9lc24ndCBzdXBwb3J0IHRoZSAnbGVnYWN5JyBldmVudCBjaGFubmVs
-IG1vZGUsIGFuZCBzbyB3b24ndCB3b3JrCj4gICBmb3IgdmVyc2lvbnMgYXMgb2xkIGFzIEFtYXpv
-bidzCj4gLSBIYXNuJ3QgYmVlbiB0ZXN0ZWQgZXh0ZW5zaXZlbHkgb24gb2xkZXIgdmVyc2lvbnMK
-PiAKPiBJYW4gc3VnZ2VzdGVkIHRoYXQgd2UgZ2V0IHNvbWV0aGluZyBhbmQgY2hlY2sgaXQgaW50
-byA0LjEwLXN0YWdpbmcKPiBhcyBzb29uIGFzIHBvc3NpYmxlLiAgQnV0IHRoZXJlIGhhcyBiZWVu
-IGEgZGViYXRlIGFib3V0IHdoZXRoZXIgd2UKPiBzaG91bGQgc3RhcnQgd2l0aCBBbWF6b24ncyBz
-ZXJpZXMgYW5kIGFkZCBQVkggc3VwcG9ydCwgb3Igc3RhcnQgd2l0aAo+IENpdHJpeCdzIHNlcmll
-cyBhbmQgYWRkIEhWTSBzdXBwb3J0IChpbmNsdWRpbmcgbGVnYWN5IGV2ZW50IGNoYW5uZWxzLAo+
-IGFuZCBzbyBvbikuCj4gCj4gTm8gbWF0dGVyIHdoYXQsIGluZGl2aWR1YWwgdXNlcnMgd2lsbCBu
-ZWVkIHRvIGRlY2lkZSB3aGV0aGVyIHRvIHRha2UKPiB0aGUgJ0hWTSArIHNpZGVjYXInIG9wdGlv
-biBvciB0aGUgJ1BWSCcgb3B0aW9uLi4KPiAKPiBJJ2QgbGlrZSB0byBwcm9wb3NlIGEgbmV3IGFw
-cHJhb2NoOgo+IAo+IDEuIEltbWVkaWF0ZWx5IHJlbGVhc2UgQW1hem9uJ3MgdjEgc2VyaWVzIGZv
-ciBwZW9wbGUgd2hvIGNhbiAvIHByZWZlcgo+IHRvIHVzZSB0aGUgSFZNICsgc2lkZWNhciBvcHRp
-b24uCj4gLSBBZHZpc29yeSBhbmQgSE9XVE8gc2hvdWxkIGluY2x1ZGUgd2hvIHNob3VsZCB1c2Ug
-dGhpcyBvcHRpb24sIGFuZAo+ICAgaG93IHRvIGRvIGl0Lgo+IC0gQ2hlY2sgdGhlIHNlcmllcyBp
-bnRvIGEgYnJhbmNoIG9uIHhlbmJpdHMsIGFuZCBhZGQgYSBzaWduZWQgdGFnCj4gLSBIT1dUTy12
-aXhlbiwgYW5kIHNpZGVjYXIgc2NyaXB0LCB0byBiZSBpbmNsdWRlZCBpbiB0aGUgYWR2aXNvcnku
-Cj4gCj4gMi4gQXMgc29vbiBhcyBwb3NzaWJsZSwgcmVsZWFzZSBDaXRyaXgncyBzZXJpZXMgZm9y
-IHBlb3BsZSB3aG8gY2FuIC8KPiBwcmVmZXIgdG8gdXNlIHRoZSBQVkggKyB0b29sc3RhY2sgb3B0
-aW9uLgo+IC0gSW1tZWRpYXRlIHdvcmsgc2hvdWxkIGZvY3VzIG9uIGdldHRpbmcgUFZIICsgdG9v
-bHN0YWNrIGZ1bmN0aW9uYWxpdHkKPiAgIHJlYWR5IHRvIHJlbGVhc2UKPiAtIFdoZW4gcmVhZHks
-IGFkdmlzb3J5IGFuZCBIT1dUTyBzaG91bGQgaW5jbHVkZSB3aG8gc2hvdWxkIHVzZSB0aGlzCj4g
-ICBvcHRpb24gYW5kIGhvdwo+IC0gRWl0aGVyIGNoZWNrIHRoZSBzZXJpZXMgaW50byBhIGJyYW5j
-aCBvbiB4ZW5iaXRzLCBvciBpbnRvCj4gICBzdGFnaW5nLTQuMTAKPiAtIEhPV1RPLXB2aCB0byBi
-ZSBpbmNsdWRlZCBpbiB0aGUgYWR2aXNvcnkuCj4gCj4gVGhpcyBzaG91bGQgYWxsb3cgdXMgdG8g
-Z2V0IGEgc29sdXRpb24gdG8gdGhlIHdpZGVzdCBudW1iZXIgb2YgdXNlcnMKPiBpbiB0aGUgc2hv
-cnRlc3QgYW1vdW50IG9mIHRpbWU7IGl0IGFsc28gYWxsb3dzIHVzIHRvIGxldmVyYWdlIHRoZQo+
-IHRlc3RpbmcgZWZmb3J0cyBvZiBib3RoIEFtYXpvbiAoZm9yIGJyZWFkdGggb2YgWGVuIHZlcnNp
-b25zKSBhbmQKPiBDaXRyaXggKGZvciBkZXB0aCBvZiBmdW5jdGlvbmFsaXR5KS4KPiAKPiBUaGF0
-IHRha2VzIHRoZSBwcmVzc3VyZSBvZmYgdXMgdG8gY2hlY2sgaW4gb25lIG9yIHRoZSBvdGhlciB2
-ZXJzaW9uIG9mCj4gdGhlIHBhdGNoIHNlcmllcy4KPiAKPiBHb2luZyBmb3J3YXJkLCB3ZSBjb3Vs
-ZCB3b3JrIHRvd2FyZHMgdGhlIGNvbnZlcmdlbmNlIG9mIGZ1bmN0aW9uYWxpdHkKPiBmcm9tIGVp
-dGhlciBwYXRjaCBzZXJpZXMuICBCdXQgaXQgbG9va3Mgc3VwZXJmaWNpYWxseSBhdCBsZWFzdCBs
-aWtlCj4gdGhlIENpdHJpeCBzZXJpZXMgaXMgY2xvc2VyIHRvIHRoZSBjb252ZXJnZW5jZSBwb2lu
-dCwgYW5kIHNvIGl0IHNlZW1zCj4gbGlrZSB1c2luZyB0aGF0IGFzIGEgc3RhcnRpbmcgcG9pbnQg
-d291bGQgbWFrZSB0aGUgbW9zdCBzZW5zZS4KPiAKPiBSZWdhcmRsZXNzIG9mIHdoYXQgd2UgdGhp
-bmsgb2Ygc3RlcCAyLCBJIHRoaW5rIHdlIHNob3VsZCB0YWtlIHN0ZXAgMQo+IGltbWVkaWF0ZWx5
-Lgo+IAo+IExldCBtZSBrbm93IHdoYXQgeW91IHRoaW5rLgo+IAo+ICAtR2VvcmdlCj4gCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============3317594075286001824==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-dc005lnMAHu+3zedJ/Yc"
+
+
+--=-dc005lnMAHu+3zedJ/Yc
+Content-Type: multipart/mixed; boundary="=-u4cdaGaJ7adBzKQQFhQV"
+
+
+--=-u4cdaGaJ7adBzKQQFhQV
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-01-10 at 15:41 +0000, Ian Jackson wrote:
+> Ian Jackson writes ("Re: sidecar (hvm shim) creation script"):
+> > And here is one which handles the guest console correctly.  Vixen
+> > sends the L2 guest console to the emulated serial, along with the
+> > shim's own output.
+
+So, I've got a PV guest that works.
+
+Now I shut it down, run this script, and do `xl create -c' on the
+resulting config file, but it dies. :-(
+
+I'm using what's in this branch https://github.com/aliguori/xen/tree/vi
+xen-upstream-v2 both as the host hypervisor and as the shim.
+
+So, here's what I see on what I think is vixen's console:
+
+error: Can't get controller info..
+ __  __            _  _    _
+_                    _        _     _     =20
+ \ \/ /___ _ __   | || |  / / |   _   _ _ __  ___| |_ __ _| |__ | |
+___=20
+  \  // _ \ '_ \  | || |_ | | |__| | | | '_ \/ __| __/ _` | '_ \| |/ _
+\
+  /  \  __/ | | | |__   _|| | |__| |_| | | | \__ \ || (_| | |_) |
+|  __/
+ /_/\_\___|_| |_|    |_|(_)_|_|   \__,_|_|
+|_|___/\__\__,_|_.__/|_|\___|
+                                                                      =20
+=20
+(XEN) Xen version 4.11-unstable (dario@fritz.box) (gcc (Debian 7.2.0-
+19) 7.2.0) debug=3Dy  Wed Jan 10 13:28:20 UTC 2018
+(XEN) Latest ChangeSet: Wed Dec 20 11:09:09 2017 +0000 git:d80556acd4
+(XEN) Bootloader: GRUB 2.02-2
+(XEN) Command line: placeholder console=3Dcom1 com1=3D115200n1
+(XEN) Xen image load base address: 0
+(XEN) Video information:
+(XEN)  No VGA detected
+(XEN) Disc information:
+(XEN)  Found 0 MBR signatures
+(XEN)  Found 0 EDD information structures
+(XEN) Vixen running under Xen 4.11
+(XEN) Xen-e820 RAM map:
+(XEN)  0000000000000000 - 000000000009fc00 (usable)
+(XEN)  000000000009fc00 - 00000000000a0000 (reserved)
+(XEN)  00000000000f0000 - 0000000000100000 (reserved)
+(XEN)  0000000000100000 - 000000007f7ff000 (usable)
+(XEN)  000000007f7ff000 - 000000007f800000 (reserved)
+(XEN)  00000000fc000000 - 00000000feff0000 (reserved)
+(XEN)  00000000feff0000 - 0000000100000000 (usable)
+
+
+
+While this is L0's console:
+
+(XEN) [  298.886732] grant_table.c:1681:d0v2 Expanding d2 grant table
+from 0 to 1 frames
+(XEN) [  299.087102] HVM2 save: CPU
+(XEN) [  299.087105] HVM2 save: PIC
+(XEN) [  299.087108] HVM2 save: IOAPIC
+(XEN) [  299.087111] HVM2 save: LAPIC
+(XEN) [  299.087113] HVM2 save: LAPIC_REGS
+(XEN) [  299.087117] HVM2 save: PCI_IRQ
+(XEN) [  299.087119] HVM2 save: ISA_IRQ
+(XEN) [  299.087121] HVM2 save: PCI_LINK
+(XEN) [  299.087123] HVM2 save: PIT
+(XEN) [  299.087125] HVM2 save: RTC
+(XEN) [  299.087128] HVM2 save: HPET
+(XEN) [  299.087131] HVM2 save: PMTIMER
+(XEN) [  299.087133] HVM2 save: MTRR
+(XEN) [  299.087141] HVM2 save: VIRIDIAN_DOMAIN
+(XEN) [  299.087143] HVM2 save: CPU_XSAVE
+(XEN) [  299.087149] HVM2 save: VIRIDIAN_VCPU
+(XEN) [  299.087151] HVM2 save: VMCE_VCPU
+(XEN) [  299.087153] HVM2 save: TSC_ADJUST
+(XEN) [  299.087155] HVM2 save: CPU_MSR
+(XEN) [  299.087195] HVM2 restore: CPU 0
+[  293.712868] tun: Universal TUN/TAP device driver, 1.6^M
+[  293.940987] xenbr0: port 2(vif2.0) entered blocking state^M
+[  293.941014] xenbr0: port 2(vif2.0) entered disabled state^M
+[  293.941111] device vif2.0 entered promiscuous mode^M
+[  293.946041] IPv6: ADDRCONF(NETDEV_UP): vif2.0: link is not ready^M
+[  294.139158] xenbr0: port 3(vif2.0-emu) entered blocking state^M
+[  294.139202] xenbr0: port 3(vif2.0-emu) entered disabled state^M
+[  294.139261] device vif2.0-emu entered promiscuous mode^M
+[  294.144532] xenbr0: port 3(vif2.0-emu) entered blocking state^M
+[  294.144544] xenbr0: port 3(vif2.0-emu) entered listening state^M
+(d2) [  300.952702] HVM Loader
+(d2) [  300.952773] Detected Xen v4.11-unstable
+(d2) [  300.952850] Xenbus rings @0xfeffc000, event channel 1
+(d2) [  300.953103] System requested SeaBIOS
+(d2) [  300.953139] CPU speed is 2394 MHz
+(d2) [  300.953491] Relocating guest memory for lowmem MMIO space
+disabled
+(XEN) [  300.954017] irq.c:334: Dom2 PCI link 0 changed 0 -> 5
+(d2) [  300.954246] PCI-ISA link 0 routed to IRQ5
+(XEN) [  300.954423] irq.c:334: Dom2 PCI link 1 changed 0 -> 10
+(d2) [  300.954633] PCI-ISA link 1 routed to IRQ10
+(XEN) [  300.954794] irq.c:334: Dom2 PCI link 2 changed 0 -> 11
+(d2) [  300.954999] PCI-ISA link 2 routed to IRQ11
+(XEN) [  300.955233] irq.c:334: Dom2 PCI link 3 changed 0 -> 5
+(d2) [  300.955415] PCI-ISA link 3 routed to IRQ5
+(d2) [  300.971627] pci dev 01:3 INTA->IRQ10
+(d2) [  300.975567] pci dev 02:0 INTA->IRQ11
+(d2) [  300.997380] No RAM in high memory; setting high_mem resource
+base to 100000000
+(d2) [  300.997576] pci dev 02:0 bar 14 size 001000000: 0f0000008
+(d2) [  300.998673] pci dev 02:0 bar 10 size 000000100: 00000c001
+(d2) [  300.999767] pci dev 01:1 bar 20 size 000000010: 00000c101
+(d2) [  301.000817] Multiprocessor initialisation:
+(d2) [  301.000951]  - CPU0 ... 40-bit phys ... fixed MTRRs ... var
+MTRRs [1/8] ... done.
+(d2) [  301.001249]  - CPU1 ... 40-bit phys ... fixed MTRRs ... var
+MTRRs [1/8] ... done.
+(d2) [  301.001562]  - CPU2 ... 40-bit phys ... fixed MTRRs ... var
+MTRRs [1/8] ... done.
+(d2) [  301.001870]  - CPU3 ... 40-bit phys ... fixed MTRRs ... var
+MTRRs [1/8] ... done.
+(d2) [  301.001953] Testing HVM environment:
+(d2) [  301.002002] Using scratch memory at 400000
+(d2) [  301.019991]  - REP INSB across page boundaries ... passed
+(d2) [  301.031612]  - REP INSW across page boundaries ... passed
+(d2) [  301.041228]  - GS base MSRs and SWAPGS ... passed
+(d2) [  301.041249] Passed 3 of 3 tests
+(d2) [  301.041275] Writing SMBIOS tables ...
+(d2) [  301.042145] Loading SeaBIOS ...
+(d2) [  301.042231] Creating MP tables ...
+(d2) [  301.042387] Loading ACPI ...
+(d2) [  301.043421] CONV disabled
+(d2) [  301.043630] vm86 TSS at fc00a780
+(d2) [  301.044162] BIOS map:
+(d2) [  301.044196]  10000-100e3: Scratch space
+(d2) [  301.044219]  c0000-fffff: Main BIOS
+(d2) [  301.044259] E820 table:
+(d2) [  301.044308]  [00]: 00000000:00000000 - 00000000:000a0000: RAM
+(d2) [  301.044353]  HOLE: 00000000:000a0000 - 00000000:000c0000
+(d2) [  301.044403]  [01]: 00000000:000c0000 - 00000000:00100000:
+RESERVED
+(d2) [  301.044449]  [02]: 00000000:00100000 - 00000000:7f800000: RAM
+(d2) [  301.044491]  HOLE: 00000000:7f800000 - 00000000:fc000000
+(d2) [  301.044545]  [03]: 00000000:fc000000 - 00000001:00000000:
+RESERVED
+(d2) [  301.044642] Invoking SeaBIOS ...
+(d2) [  301.045027] SeaBIOS (version rel-1.10.2-0-g5f4c7b1)
+(d2) [  301.045096] BUILD: gcc: (Debian 7.2.0-19) 7.2.0 binutils: (GNU
+Binutils for Debian) 2.29.1
+(d2) [  301.045099]=20
+(d2) [  301.045138] Found Xen hypervisor signature at 40000000
+(d2) [  301.045442] Running on QEMU (i440fx)
+(d2) [  301.045465] xen: copy e820...
+(d2) [  301.045524] Relocating init from 0x000daf80 to 0x7f7ad360 (size
+76800)
+(d2) [  301.048415] Found 5 PCI devices (max PCI bus is 00)
+(d2) [  301.048456] Allocated Xen hypercall page at 7f7ff000
+(d2) [  301.048492] Detected Xen v4.11-unstable
+(d2) [  301.048518] xen: copy BIOS tables...
+(d2) [  301.048576] Copying SMBIOS entry point from 0x00010020 to
+0x000f6b20
+(d2) [  301.048631] Copying MPTABLE from 0xfc0011f0/fc001200 to
+0x000f6a00
+(d2) [  301.048674] Copying PIR from 0x00010040 to 0x000f6980
+(d2) [  301.048718] Copying ACPI RSDP from 0x000100c0 to 0x000f6950
+(d2) [  301.048747] Using pmtimer, ioport 0xb008
+(d2) [  301.048893] Scan for VGA option rom
+(d2) [  301.050267] ATA controller 1 at 1f0/3f4/c100 (irq 14 dev 9)
+(d2) [  301.051553] ATA controller 2 at 170/374/c108 (irq 15 dev 9)
+(d2) [  301.052569] Found 0 lpt ports
+(d2) [  301.052762] Found 1 serial ports
+(d2) [  301.055677] DVD/CD [ata1-0: QEMU DVD-ROM ATAPI-4 DVD/CD]
+(d2) [  301.055731] Searching bootorder for: /pci@i0cf8/*@1,1/drive@1/d
+isk@0
+(d2) [  301.056943] PS2 keyboard initialized
+(d2) [  301.056965] All threads complete.
+(d2) [  301.056986] Scan for option roms
+(d2) [  301.058379]=20
+(d2) [  301.065610] Press ESC for boot menu.
+(d2) [  301.066100]=20
+[  296.154652] xenbr0: port 3(vif2.0-emu) entered learning state^M
+(d2) [  303.684355] Searching bootorder for: HALT
+(d2) [  303.684666] Space available for UMB: c0000-ec800, f6340-f68b0
+(d2) [  303.684720] Returned 258048 bytes of ZoneHigh
+(d2) [  303.684755] e820 map has 6 items:
+(d2) [  303.684828]   0: 0000000000000000 - 000000000009fc00 =3D 1 RAM
+(d2) [  303.684909]   1: 000000000009fc00 - 00000000000a0000 =3D 2
+RESERVED
+(d2) [  303.684990]   2: 00000000000f0000 - 0000000000100000 =3D 2
+RESERVED
+(d2) [  303.685064]   3: 0000000000100000 - 000000007f7ff000 =3D 1 RAM
+(d2) [  303.685144]   4: 000000007f7ff000 - 000000007f800000 =3D 2
+RESERVED
+(d2) [  303.685225]   5: 00000000fc000000 - 0000000100000000 =3D 2
+RESERVED
+(d2) [  303.686459] enter handle_19:
+(d2) [  303.686473]   NULL
+(d2) [  303.694760] Booting from DVD/CD...
+(d2) [  303.701138] Booting from 0000:7c00
+[  298.170547] xenbr0: port 3(vif2.0-emu) entered forwarding state^M
+[  298.170616] xenbr0: topology change detected, propagating^M
+(XEN) [  314.149788] d2v0 Triple fault - invoking HVM shutdown action 1
+(XEN) [  314.149791] *** Dumping Dom2 vcpu#0 state: ***
+(XEN) [  314.149796] ----[ Xen-4.11-unstable  x86_64  debug=3Dy   Not
+tainted ]----
+(XEN) [  314.149798] CPU:    15
+(XEN) [  314.149801] RIP:    e008:[<ffff82d080417368>]
+(XEN) [  314.149803] RFLAGS: 0000000000010002   CONTEXT: hvm guest
+(d2v0)
+(XEN) [  314.149807] rax: ffff8300ffe80000   rbx:
+00000000ffe73000   rcx: 0000000000000000
+(XEN) [  314.149810] rdx: ffff82d080480000   rsi:
+0000000000000020   rdi: ffff8300ffe88000
+(XEN) [  314.149814] rbp: ffff82d080487f08   rsp:
+ffff82d080487dd8   r8:  fff0000000000fff
+(XEN) [  314.149817] r9:  000ffffffffff000   r10:
+000000ffffffffff   r11: 0000000000001000
+(XEN) [  314.149820] r12: ffff830000000000   r13:
+00000000ffa00000   r14: 00000000ff000000
+(XEN) [  314.149823] r15: ffff82d0804552bc   cr0:
+0000000080050033   cr4: 0000000000000020
+(XEN) [  314.149825] cr3: 00000000ffe73000   cr2: ffff82d080417368
+(XEN) [  314.149827] fsb: 0000000000000000   gsb:
+0000000000000000   gss: 0000000000000002
+(XEN) [  314.149830] ds: 0000   es: 0000   fs: 0000   gs: 0000   ss:
+0000   cs: e008
+
+
+
+Also, find attached the various log files.
+
+So... what am I doing wrong? :-)
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-u4cdaGaJ7adBzKQQFhQV
+Content-Disposition: attachment; filename="xl-vm10.log"
+Content-Type: text/x-log; name="xl-vm10.log"; charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+V2FpdGluZyBmb3IgZG9tYWluIHZtMTAgKGRvbWlkIDIpIHRvIGRpZSBbcGlkIDIwNDFdCkRvbWFp
+biAyIGhhcyBzaHV0IGRvd24sIHJlYXNvbiBjb2RlIDEgMHgxCkFjdGlvbiBmb3Igc2h1dGRvd24g
+cmVhc29uIGNvZGUgMSBpcyBkZXN0cm95CkRvbWFpbiAyIG5lZWRzIHRvIGJlIGNsZWFuZWQgdXA6
+IGRlc3Ryb3lpbmcgdGhlIGRvbWFpbgpEb25lLiBFeGl0aW5nIG5vdwo=
+
+
+--=-u4cdaGaJ7adBzKQQFhQV
+Content-Disposition: attachment; filename="qemu-dm-vm10.log"
+Content-Type: text/x-log; name="qemu-dm-vm10.log"; charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+KyA6IC14ZW4tZG9taWQgMiAtY2hhcmRldiBzb2NrZXQsaWQ9bGlieGwtY21kLHBhdGg9L3Zhci9y
+dW4veGVuL3FtcC1saWJ4bC0yLHNlcnZlcixub3dhaXQgLW5vLXNodXRkb3duIC1tb24gY2hhcmRl
+dj1saWJ4bC1jbWQsbW9kZT1jb250cm9sIC1jaGFyZGV2IHNvY2tldCxpZD1saWJ4ZW5zdGF0LWNt
+ZCxwYXRoPS92YXIvcnVuL3hlbi9xbXAtbGlieGVuc3RhdC0yLHNlcnZlcixub3dhaXQgLW1vbiBj
+aGFyZGV2PWxpYnhlbnN0YXQtY21kLG1vZGU9Y29udHJvbCAtbm9kZWZhdWx0cyAtbm8tdXNlci1j
+b25maWcgLW5hbWUgdm0xMCAtdm5jIDEyNy4wLjAuMTowLHRvPTk5IC1kaXNwbGF5IG5vbmUgLWtl
+cm5lbCAvcm9vdC92bTEwL3ZtbGludXotNC4xNC4wLTMtYW1kNjQgLWluaXRyZCAvcm9vdC92bTEw
+L2luaXRyZC5pbWctNC4xNC4wLTMtYW1kNjQgLWFwcGVuZCAncm9vdD0vZGV2L3h2ZGExIHJvJyAt
+c2VyaWFsIHB0eSAtZGV2aWNlIGNpcnJ1cy12Z2EsdmdhbWVtX21iPTggLWJvb3Qgb3JkZXI9YyAt
+c21wIDQsbWF4Y3B1cz00IC1kZXZpY2UgcnRsODEzOSxpZD1uaWMwLG5ldGRldj1uZXQwLG1hYz0w
+MDoxNjozZTo2Yzo1YTpkNCAtbmV0ZGV2IHR5cGU9dGFwLGlkPW5ldDAsaWZuYW1lPXZpZjIuMC1l
+bXUsc2NyaXB0PW5vLGRvd25zY3JpcHQ9bm8gLW1hY2hpbmUgeGVuZnYgLWNkcm9tIC92YXIvbGli
+L3hlbi9wdnNoaW0tc2lkZWNhcnMvdm0xMC5pc28gLW0gMjA0MCAtZHJpdmUgZmlsZT0vZGV2L3Zt
+cy92bTEwLWRpc2ssaWY9aWRlLGluZGV4PTAsbWVkaWE9ZGlzayxmb3JtYXQ9cmF3LGNhY2hlPXdy
+aXRlYmFjaworIHNldCAreAp3YXJuaW5nOiB1bmV4cGVjdGVkIGFyZ3VtZW50IC1zZXJpYWwgYmVp
+bmcgcGFzc2VkIHRocm91Z2gKd2FybmluZzogdW5leHBlY3RlZCBhcmd1bWVudCBwdHkgYmVpbmcg
+cGFzc2VkIHRocm91Z2gKd2FybmluZzogdW5leHBlY3RlZCBhcmd1bWVudCAtc21wIGJlaW5nIHBh
+c3NlZCB0aHJvdWdoCndhcm5pbmc6IHVuZXhwZWN0ZWQgYXJndW1lbnQgNCxtYXhjcHVzPTQgYmVp
+bmcgcGFzc2VkIHRocm91Z2gKKyBleGVjIC91c3IvbG9jYWwvbGliL3hlbi9iaW4vcWVtdS1zeXN0
+ZW0taTM4NiAteGVuLWRvbWlkIDIgLWNoYXJkZXYgc29ja2V0LGlkPWxpYnhsLWNtZCxwYXRoPS92
+YXIvcnVuL3hlbi9xbXAtbGlieGwtMixzZXJ2ZXIsbm93YWl0IC1uby1zaHV0ZG93biAtbW9uIGNo
+YXJkZXY9bGlieGwtY21kLG1vZGU9Y29udHJvbCAtY2hhcmRldiBzb2NrZXQsaWQ9bGlieGVuc3Rh
+dC1jbWQscGF0aD0vdmFyL3J1bi94ZW4vcW1wLWxpYnhlbnN0YXQtMixzZXJ2ZXIsbm93YWl0IC1t
+b24gY2hhcmRldj1saWJ4ZW5zdGF0LWNtZCxtb2RlPWNvbnRyb2wgLW5vZGVmYXVsdHMgLW5vLXVz
+ZXItY29uZmlnIC1uYW1lIHZtMTAgLWRpc3BsYXkgbm9uZSAtc2VyaWFsIHB0eSAtYm9vdCBvcmRl
+cj1jIC1zbXAgNCxtYXhjcHVzPTQgLW5ldGRldiB0eXBlPXRhcCxpZD1uZXQwLGlmbmFtZT12aWYy
+LjAtZW11LHNjcmlwdD1ubyxkb3duc2NyaXB0PW5vIC1tYWNoaW5lIHhlbmZ2IC1jZHJvbSAvdmFy
+L2xpYi94ZW4vcHZzaGltLXNpZGVjYXJzL3ZtMTAuaXNvIC1tIDIwNDAKcWVtdS1zeXN0ZW0taTM4
+NjogLXNlcmlhbCBwdHk6IGNoYXIgZGV2aWNlIHJlZGlyZWN0ZWQgdG8gL2Rldi9wdHMvMiAobGFi
+ZWwgc2VyaWFsMCkKV2FybmluZzogbmV0ZGV2IG5ldDAgaGFzIG5vIHBlZXIKcWVtdS1zeXN0ZW0t
+aTM4NjogdGVybWluYXRpbmcgb24gc2lnbmFsIDEgZnJvbSBwaWQgMjA0MSAoeGwpCg==
+
+
+--=-u4cdaGaJ7adBzKQQFhQV--
+
+--=-dc005lnMAHu+3zedJ/Yc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlpWUPEACgkQFkJ4iaW4
+c+4l/A/+KQ9uWL9ou1yPmOvCLCoQlK96MU3/MFg7akJovbhfPfzAkxAarPYCOyia
+0cmOYlWvRK9guxjOSJkVRfK+Z11RJplnbjHLqkemlcgLn6yDDYpo6zmO/RG8hAWv
+xO3CO7jRzL3u5bTSzBrr3IBz9EXWbLi6zINzaOaOwJ0+2whzIOfQo8lJ4vGA5yR0
+T4sMxZlbMHXpUzEBayIIil2KPKQGG9KC302GmUHAdPWXosyrM3fFVgbz+7tQtubC
+MVn9jUSPf6gFepPbA36bQrnTCxOpwGw8qFA8ZfXpYINz0fcOuZOMNIv8bEMEKut6
+BKMI2cZDfVu8ksXjk6rSAfZfwkBxLprmpOf+sRW/bMf992SJJitbm3QkD5UVV534
+2TGXlaWM03Y/2f3pwZh8vfEKqrc0QFuyVvF/qPEH/hQ1sw32uq/Sz/jutMwa2Eh9
+OQERzfMjGxrOBCk4S69UWP04dDmQA8j93hhavKcW0UgJHB6vDsAsv8b6ThLihc/B
+c4iXqxMLdASv6k2l7yh7XrIRFINtQfIUJZCyLYdIks4e1k/Ui3SGcCTBZu7mQjPM
+l2lK3gaCDnGIX+cZc5kIfhSHSvGBVn2oXHTnDpn8cuAOkFKfnb/SU8d7bD/0lfHe
+It8gsJslU8BTg4F8xdZIgFiZyxOfWNzDeQvvS9umy9dKsVSMcmA=
+=dqo6
+-----END PGP SIGNATURE-----
+
+--=-dc005lnMAHu+3zedJ/Yc--
+
+
+
+--===============3317594075286001824==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3317594075286001824==--
