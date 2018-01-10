@@ -1,7 +1,7 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 Subject: Re: sidecar (hvm shim) creation script
-Date: Wed, 10 Jan 2018 15:39:20 +0000
-Message-ID: <23126.13224.18254.699605@mariner.uk.xensource.com>
+Date: Wed, 10 Jan 2018 15:41:56 +0000
+Message-ID: <23126.13380.315656.733601@mariner.uk.xensource.com>
 References: <23123.44604.284781.889416@mariner.uk.xensource.com>
  <20180109194351.mmbmjzwhptlkr5as@citrix.com>
  <20180110083224.cmgr7flxewhx5enf@MacBook-Pro-de-Roger.local>
@@ -9,16 +9,17 @@ References: <23123.44604.284781.889416@mariner.uk.xensource.com>
  <23126.4117.777031.227394@mariner.uk.xensource.com>
  <20180110131049.rv6emm32efbczhl2@citrix.com>
  <23126.11606.582758.38945@mariner.uk.xensource.com>
+ <23126.13224.18254.699605@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="BiHOZehDZk"
+Content-Type: multipart/mixed; boundary="GhPD4uVW1c"
 Content-Transfer-Encoding: 7bit
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=97or=ef=citrix.com=prvs=5411a6c19=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1eZITQ-0001f3-ME
- for xen-devel@lists.xenproject.org; Wed, 10 Jan 2018 15:39:28 +0000
-In-Reply-To: <23126.11606.582758.38945@mariner.uk.xensource.com>
+ id 1eZIVw-0002LT-LD
+ for xen-devel@lists.xenproject.org; Wed, 10 Jan 2018 15:42:04 +0000
+In-Reply-To: <23126.13224.18254.699605@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,23 +31,22 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Wei Liu <wei.liu2@citrix.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, xen-devel@lists.xenproject.org, committers@xenproject.org, security@xenproject.org, Jan Beulich <JBeulich@suse.com>, Dario Faggioli <raistlin@linux.it>
 List-Id: xen-devel@lists.xenproject.org
 
---BiHOZehDZk
+--GhPD4uVW1c
 Content-Type: text/plain; charset="us-ascii"
 Content-Description: message body text
 Content-Transfer-Encoding: 7bit
 
 Ian Jackson writes ("Re: sidecar (hvm shim) creation script"):
-> Here is the converter script where I just got my guest to boot with
-> the Vixen shim, as built and provided by Wei.
+> And here is one which handles the guest console correctly.  Vixen
+> sends the L2 guest console to the emulated serial, along with the
+> shim's own output.
 
-And here is one which handles the guest console correctly.  Vixen
-sends the L2 guest console to the emulated serial, along with the
-shim's own output.
+Some debugging stuff removed again.
 
 
---BiHOZehDZk
+--GhPD4uVW1c
 Content-Type: text/plain; name="pvshim-converter"
-Content-Description: for vixen, fixed the console
+Content-Description: this time for real
 Content-Disposition: inline; filename="pvshim-converter"
 Content-Transfer-Encoding: 7bit
 
@@ -139,7 +139,7 @@ our $dmwrap = $c->{pvshim_sidecar_path} || "$sidecars_dir/$c->{name}.dm";
 $shim ||= $c->{pvshim_path};
 $shim ||= '/usr/local/lib/xen/boot/xen-shim';
 
-our $shim_cmdline = $c->{pvshim_cmdline} || 'console=com1 com1=115200n1 loglvl=all guest_loglvl=all';
+our $shim_cmdline = $c->{pvshim_cmdline} || 'console=com1 com1=115200n1';
 $shim_cmdline .= ' '.$c->{pvshim_extra} if $c->{pvshim_extra};
 
 our $kernel_cmdline = $c->{cmdline} || '';
@@ -319,7 +319,7 @@ if ($out ne '-') {
     print STDERR "pvshim-converter: wrote new guest config to stdout\n";
 }
 
---BiHOZehDZk
+--GhPD4uVW1c
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -329,4 +329,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---BiHOZehDZk--
+--GhPD4uVW1c--
