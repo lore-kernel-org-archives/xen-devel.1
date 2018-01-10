@@ -1,18 +1,18 @@
 From: Anthony Liguori <aliguori@amzn.com>
-Subject: [PATCH v3 06/24] console: do not print banner if below
-	info log threshold
-Date: Tue, 9 Jan 2018 16:02:40 -0800
-Message-ID: <1515542578-15412-7-git-send-email-aliguori@amzn.com>
+Subject: [PATCH v3 01/24] ---- x86/Kconfig: Options for Xen and
+	PVH support
+Date: Tue, 9 Jan 2018 16:02:35 -0800
+Message-ID: <1515542578-15412-2-git-send-email-aliguori@amzn.com>
 References: <1515542578-15412-1-git-send-email-aliguori@amzn.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=9dv8=ef=amzn.com=prvs=541bb313f=aliguori@srs-us1.protection.inumbo.net>)
- id 1eZ3ra-0005p4-2Z
- for xen-devel@lists.xenproject.org; Wed, 10 Jan 2018 00:03:26 +0000
+ id 1eZ3rP-0005m5-Dv
+ for xen-devel@lists.xenproject.org; Wed, 10 Jan 2018 00:03:15 +0000
 In-Reply-To: <1515542578-15412-1-git-send-email-aliguori@amzn.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,32 +23,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Wei Liu <wei.liu2@citrix.com>, Anthony Liguori <aliguori@amazon.com>, KarimAllah Ahmed <karahmed@amazon.de>, Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?q?Jan=20H=2E=20Sch=C3=B6nherr?= <jschoenh@amazon.de>, Matt Wilson <msw@amazon.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, KarimAllah Ahmed <karahmed@amazon.de>, Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?q?Jan=20H=2E=20Sch=C3=B6nherr?= <jschoenh@amazon.de>, Matt Wilson <msw@amazon.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogQW50aG9ueSBMaWd1b3JpIDxhbGlndW9yaUBhbWF6b24uY29tPgoKT25seSBwcmludCB0
-aGUgYmFubmVyIGlmIHRoZSBsb2cgdGhyZXNob2xkIGlzIGF0IGxlYXN0IGluZm8uCgpGb3IgVml4
-ZW4gZ3Vlc3RzLCB3ZSB3YW50IHRoZSBjb25zb2xlIG91dHB1dCB0byBiZSBleGFjdGx5IHdoYXQg
-dGhlClBWIGd1ZXN0IHdvdWxkIHNob3cgb24gaXQncyBvd24uICBUaGF0IG1lYW5zIHRoZSBpbm5l
-ciBYZW4gYmFubmVyCmNhbiBwb3RlbnRpYWxseSBicmVhayBhdXRvbWF0aW9uIHRoYXQgYXNzdW1l
-cyBhIHNwZWNpZmljIHR5cGUgb2YKY29uc29sZSBvdXRwdXQuCgpTaWduZWQtb2ZmLWJ5OiBBbnRo
-b255IExpZ3VvcmkgPGFsaWd1b3JpQGFtYXpvbi5jb20+Ci0tLQogeGVuL2RyaXZlcnMvY2hhci9j
-b25zb2xlLmMgfCA5ICsrKysrKy0tLQogMSBmaWxlIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKSwg
-MyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vZHJpdmVycy9jaGFyL2NvbnNvbGUuYyBi
-L3hlbi9kcml2ZXJzL2NoYXIvY29uc29sZS5jCmluZGV4IDBmODU3MDcuLjNlYjEzMGQgMTAwNjQ0
-Ci0tLSBhL3hlbi9kcml2ZXJzL2NoYXIvY29uc29sZS5jCisrKyBiL3hlbi9kcml2ZXJzL2NoYXIv
-Y29uc29sZS5jCkBAIC04MTIsOSArODEyLDEyIEBAIHZvaWQgX19pbml0IGNvbnNvbGVfaW5pdF9w
-cmVpcnEodm9pZCkKICAgICBzZXJpYWxfc2V0X3J4X2hhbmRsZXIoc2VyY29uX2hhbmRsZSwgc2Vy
-aWFsX3J4KTsKIAogICAgIC8qIEhFTExPIFdPUkxEIC0tLSBzdGFydC1vZi1kYXkgYmFubmVyIHRl
-eHQuICovCi0gICAgc3Bpbl9sb2NrKCZjb25zb2xlX2xvY2spOwotICAgIF9fcHV0c3RyKHhlbl9i
-YW5uZXIoKSk7Ci0gICAgc3Bpbl91bmxvY2soJmNvbnNvbGVfbG9jayk7CisgICAgaWYgKCAyIDwg
-eGVubG9nX2xvd2VyX3RocmVzaCApIHsKKyAgICAgICAgLyogT25seSBkaXNwbGF5IGF0IFhFTkxP
-R19JTkZPIGxldmVsICovCisgICAgICAgIHNwaW5fbG9jaygmY29uc29sZV9sb2NrKTsKKyAgICAg
-ICAgX19wdXRzdHIoeGVuX2Jhbm5lcigpKTsKKyAgICAgICAgc3Bpbl91bmxvY2soJmNvbnNvbGVf
-bG9jayk7CisgICAgfQogICAgIHByaW50aygiWGVuIHZlcnNpb24gJWQuJWQlcyAoJXNAJXMpICgl
-cykgZGVidWc9JWMgIiBnY292X3N0cmluZyAiICVzXG4iLAogICAgICAgICAgICB4ZW5fbWFqb3Jf
-dmVyc2lvbigpLCB4ZW5fbWlub3JfdmVyc2lvbigpLCB4ZW5fZXh0cmFfdmVyc2lvbigpLAogICAg
-ICAgICAgICB4ZW5fY29tcGlsZV9ieSgpLCB4ZW5fY29tcGlsZV9kb21haW4oKSwKLS0gCjEuOS4x
-CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+RnJvbTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KClNpZ25lZC1v
+ZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Ci0tLQogeGVu
+L2FyY2gveDg2L0tjb25maWcgfCAxNyArKysrKysrKysrKysrKysrKwogMSBmaWxlIGNoYW5nZWQs
+IDE3IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvS2NvbmZpZyBiL3hl
+bi9hcmNoL3g4Ni9LY29uZmlnCmluZGV4IDdjNDU4MjkuLjA3NTMwYmYgMTAwNjQ0Ci0tLSBhL3hl
+bi9hcmNoL3g4Ni9LY29uZmlnCisrKyBiL3hlbi9hcmNoL3g4Ni9LY29uZmlnCkBAIC0xMTcsNiAr
+MTE3LDIzIEBAIGNvbmZpZyBUQk9PVAogCSAgVGVjaG5vbG9neSAoVFhUKQogCiAJICBJZiB1bnN1
+cmUsIHNheSBZLgorCitjb25maWcgWEVOX0dVRVNUCisJZGVmX2Jvb2wgeQorCXByb21wdCAiWGVu
+IEd1ZXN0IgorCS0tLWhlbHAtLS0KKwkgIFN1cHBvcnQgZm9yIFhlbiBkZXRlY3Rpbmcgd2hlbiBp
+dCBpcyBydW5uaW5nIHVuZGVyIFhlbi4KKworCSAgSWYgdW5zdXJlLCBzYXkgWS4KKworY29uZmln
+IFBWSF9HVUVTVAorCWRlZl9ib29sIG4KKwlwcm9tcHQgIlBWSCBHdWVzdCIKKwlkZXBlbmRzIG9u
+IFhFTl9HVUVTVAorCS0tLWhlbHAtLS0KKwkgIFN1cHBvcnQgYm9vdGluZyB1c2luZyB0aGUgUFZI
+IEFCSS4KKworCSAgSWYgdW5zdXJlLCBzYXkgTi4KIGVuZG1lbnUKIAogc291cmNlICJjb21tb24v
+S2NvbmZpZyIKLS0gCjEuOS4xCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
