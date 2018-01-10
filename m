@@ -1,15 +1,10 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86/ioemul: Account for
- ioemul_handle_quirk() in stub length check
-Date: Wed, 10 Jan 2018 02:52:17 -0700
-Message-ID: <5A55F061020000780019D1DB@prv-mh.provo.novell.com>
-References: <1515516467-26501-1-git-send-email-andrew.cooper3@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-coverity test] 117768: all pass - PUSHED
+Date: Wed, 10 Jan 2018 09:56:17 +0000
+Message-ID: <osstest-117768-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7268715439775586209=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1515516467-26501-1-git-send-email-andrew.cooper3@citrix.com>
-Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,46 +13,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA5LjAxLjE4IGF0IDE3OjQ3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gVGhlIG9wY29kZSBwb3RlbnRpYWxseSB3cml0dGVuIGludG8gY3R4dC0+aW9fZW11bF9z
-dHViW10gaW4gdGhlIGNhc2UKPiB0aGF0IGlvZW11bF9oYW5kbGVfcXVpcmsoKSBpcyBvdmVycmlk
-aW5nIHRoZSBkZWZhdWx0IGxvZ2ljIGlzbnQKPiBhY2NvdW50ZWQgZm9yIGluIHRoZSBidWlsZC10
-aW1lIGNoZWNrIHRoYXQgdGhlIHN0dWJzIGFyZSBsYXJnZSBlbm91Z2guCj4gCj4gSW50cm9kdWNl
-IElPRU1VTF9RVUlSS19TVFVCX0JZVEVTIGFuZCB1c2UgZm9yIGJvdGggdGhlIG1haW4gYW5kIHF1
-aXJrCj4gc3R1YiBjYXNlcy4gIEFzIGEgc2xpbSBvcHRpbWlzYXRpb24sIGF2b2lkIHdyaXRpbmcg
-b3V0IHRoZSBkZWZhdWx0IHN0dWIKPiB3aGVuIHdlIGtub3cgd2UgYXJlIGdvaW5nIHRvIG92ZXJ3
-cml0ZSBpdC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVy
-M0BjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNv
-bT4Kd2l0aCBvbmUgc3VnZ2VzdGlvbjoKCj4gLS0tIGEveGVuL2FyY2gveDg2L3B2L2VtdWwtcHJp
-di1vcC5jCj4gKysrIGIveGVuL2FyY2gveDg2L3B2L2VtdWwtcHJpdi1vcC5jCj4gQEAgLTg5LDE5
-ICs4OSwyNCBAQCBzdGF0aWMgaW9fZW11bF9zdHViX3QgKmlvX2VtdWxfc3R1Yl9zZXR1cChzdHJ1
-Y3QgcHJpdl9vcF9jdHh0ICpjdHh0LCB1OCBvcGNvZGUsCj4gICAgICAvKiBjYWxscSAqJXJjeCAq
-Lwo+ICAgICAgY3R4dC0+aW9fZW11bF9zdHViWzEwXSA9IDB4ZmY7Cj4gICAgICBjdHh0LT5pb19l
-bXVsX3N0dWJbMTFdID0gMHhkMTsKPiAtICAgIC8qIGRhdGExNiBvciBub3AgKi8KPiAtICAgIGN0
-eHQtPmlvX2VtdWxfc3R1YlsxMl0gPSAoYnl0ZXMgIT0gMikgPyAweDkwIDogMHg2NjsKPiAtICAg
-IC8qIDxpby1hY2Nlc3Mgb3Bjb2RlPiAqLwo+IC0gICAgY3R4dC0+aW9fZW11bF9zdHViWzEzXSA9
-IG9wY29kZTsKPiAtICAgIC8qIGltbTggb3Igbm9wICovCj4gLSAgICBjdHh0LT5pb19lbXVsX3N0
-dWJbMTRdID0gIShvcGNvZGUgJiA4KSA/IHBvcnQgOiAweDkwOwo+IC0gICAgLyogcmV0IChqdW1w
-cyB0byBndWVzdF90b19ob3N0X2dwcl9zd2l0Y2gpICovCj4gLSAgICBjdHh0LT5pb19lbXVsX3N0
-dWJbMTVdID0gMHhjMzsKPiAtICAgIEJVSUxEX0JVR19PTihTVFVCX0JVRl9TSVpFIC8gMiA8IDE2
-KTsKPiAtCj4gLSAgICBpZiAoIGlvZW11bF9oYW5kbGVfcXVpcmsgKQo+ICsKPiArICAgIGlmICgg
-bGlrZWx5KCFpb2VtdWxfaGFuZGxlX3F1aXJrKSApCj4gKyAgICB7Cj4gKyAgICAgICAgLyogZGF0
-YTE2IG9yIG5vcCAqLwo+ICsgICAgICAgIGN0eHQtPmlvX2VtdWxfc3R1YlsxMl0gPSAoYnl0ZXMg
-IT0gMikgPyAweDkwIDogMHg2NjsKPiArICAgICAgICAvKiA8aW8tYWNjZXNzIG9wY29kZT4gKi8K
-PiArICAgICAgICBjdHh0LT5pb19lbXVsX3N0dWJbMTNdID0gb3Bjb2RlOwo+ICsgICAgICAgIC8q
-IGltbTggb3Igbm9wICovCj4gKyAgICAgICAgY3R4dC0+aW9fZW11bF9zdHViWzE0XSA9ICEob3Bj
-b2RlICYgOCkgPyBwb3J0IDogMHg5MDsKPiArICAgICAgICAvKiByZXQgKGp1bXBzIHRvIGd1ZXN0
-X3RvX2hvc3RfZ3ByX3N3aXRjaCkgKi8KPiArICAgICAgICBjdHh0LT5pb19lbXVsX3N0dWJbMTVd
-ID0gMHhjMzsKPiArICAgIH0KPiArICAgIGVsc2UKPiAgICAgICAgICBpb2VtdWxfaGFuZGxlX3F1
-aXJrKG9wY29kZSwgJmN0eHQtPmlvX2VtdWxfc3R1YlsxMl0sIGN0eHQtPmN0eHQucmVncyk7Cj4g
-IAo+ICsgICAgQlVJTERfQlVHX09OKFNUVUJfQlVGX1NJWkUgLyAyIDwgTUFYKDE2LCAvKiBSZWd1
-bGFyIHN0dWJzICovCgpOb3cgdGhhdCB3ZSBoYXZlIGl0IGF2YWlsYWJsZSBnbG9iYWxseSwgd291
-bGQgeW91IG1pbmQgdXNpbmcKTUFYX0lOU1RfTEVOICsgMSBoZXJlIGluc3RlYWQgb2YgdGhlIGxp
-dGVyYWwgMTY/CgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+--===============7268715439775586209==
+Content-Type: text/plain
+
+flight 117768 xen-unstable-coverity real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/117768/
+
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ xen                  d51baf310e530659f73e714acf575555bdc46303
+baseline version:
+ xen                  2d1c82261d966735e82e5971eddb63ba3c565a37
+
+Last test of basis   117698  2018-01-07 09:19:02 Z    3 days
+Testing same since   117768  2018-01-10 09:19:58 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Jan H. Schönherr <jschoenh@amazon.de>
+
+jobs:
+ coverity-amd64                                               pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   2d1c82261d..d51baf310e  d51baf310e530659f73e714acf575555bdc46303 -> coverity-tested/smoke
+
+
+--===============7268715439775586209==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7268715439775586209==--
