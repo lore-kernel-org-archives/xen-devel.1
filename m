@@ -1,12 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 117843: tolerable all pass -
-	PUSHED
-Date: Thu, 11 Jan 2018 16:53:40 +0000
-Message-ID: <osstest-117843-mainreport@xen.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: Radical proposal v2: Publish Amazon's verison now,
+ Citrix's version soon
+Date: Thu, 11 Jan 2018 08:56:17 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1801110853540.4603@sstabellini-ThinkPad-X260>
+References: <4a587ed7-fa68-931a-dcbd-ea1570da1bdc@citrix.com>
+ <alpine.DEB.2.10.1801100913130.4603@sstabellini-ThinkPad-X260>
+ <5A572A81020000780019D8FC@prv-mh.provo.novell.com>
+ <alpine.DEB.2.10.1801110817250.4603@sstabellini-ThinkPad-X260>
+ <4b047cbf-f711-b326-6a76-6dbc52ca3911@citrix.com>
+ <alpine.DEB.2.10.1801110832090.4603@sstabellini-ThinkPad-X260>
+ <152C6CA8-A45D-457F-9AC0-6F731535E8C7@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-241156044-1515689669=:4603"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <152C6CA8-A45D-457F-9AC0-6F731535E8C7@gmail.com>
+Content-ID: <alpine.DEB.2.10.1801110855100.4603@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,54 +23,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: Rich Persaud <persaur@gmail.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Anthony Liguori <aliguori@amazon.com>, Doug Goldstein <cardoe@cardoe.com>, George Dunlap <george.dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, Committers <committers@xenproject.org>, Jan Beulich <JBeulich@suse.com>, "security@xen.org" <security@xen.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDExNzg0MyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzExNzg0My8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
-ICAgICAgICAgICAgICAzY2Y3ZWU4MmUxNmNhY2Q3YzNkZDM3MWRlYWQ0NmI5MGY1MmZhOTA1CmJh
-c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICAyMWJkOGI4YjA4MzY3MDIyODRk
-MjgzZTJiYmIxMDRlZDllMGQ1ODY1CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMTc4MzQgIDIwMTgt
-MDEtMTEgMTM6MDE6MzIgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTE3ODQzICAy
-MDE4LTAxLTExIDE1OjAxOjIwIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
-d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KICBEYXJpbyBGYWdnaW9saSA8ZGZhZ2dpb2xpQHN1c2UuY29t
-PgogIEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KICBKdWVyZ2VuIEdy
-b3NzIDxqZ3Jvc3NAc3VzZS5jb20+CiAgTWVuZyBYdSA8bWVuZ3h1QGNpcy51cGVubi5lZHU+CiAg
-U3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgogIFdlaSBMaXUgPHdl
-aS5saXUyQGNpdHJpeC5jb20+Cgpqb2JzOgogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQt
-eGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0taTM4NiAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0
-LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9o
-b21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBh
-dAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpF
-eHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBp
-cyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1i
-bG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9n
-aXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJu
-ZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdl
-Yj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1c2hpbmcgcmV2aXNpb24gOgoKVG8geGVuYml0
-cy54ZW4ub3JnOi9ob21lL3hlbi9naXQveGVuLmdpdAogICAyMWJkOGI4YjA4Li4zY2Y3ZWU4MmUx
-ICAzY2Y3ZWU4MmUxNmNhY2Q3YzNkZDM3MWRlYWQ0NmI5MGY1MmZhOTA1IC0+IHNtb2tlCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-241156044-1515689669=:4603
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1801110855101.4603@sstabellini-ThinkPad-X260>
+
+On Thu, 11 Jan 2018, Rich Persaud wrote:
+> On Jan 11, 2018, at 11:36, Stefano Stabellini <sstabellini@kernel.org> wrote:
+> > 
+> >> On Thu, 11 Jan 2018, George Dunlap wrote:
+> >>> On 01/11/2018 04:23 PM, Stefano Stabellini wrote:
+> >>> On Thu, 11 Jan 2018, Jan Beulich wrote:
+> >>>>>>> On 10.01.18 at 18:25, <sstabellini@kernel.org> wrote:
+> >>>>>> On Wed, 10 Jan 2018, George Dunlap wrote:
+> >>>>>> * Executive summary
+> >>>>>> 
+> >>>>>> - We've agreed on a "convergence" point for PV shim functionality that
+> >>>>>>  covers as many users as possible:
+> >>>>>> - 'HVM' functionality: boots in HVM mode, has support for Xen 3.4
+> >>>>>>   event channels, &c, booted via 'sidecar'
+> >>>>>> - 'PVH' functionality: boots in PVH mode, booted via toolstack
+> >>>>>>   changes
+> >>>>>> 
+> >>>>>> - "Vixen" (the Amazon shim) and PVH shim (mostly developed by Citrix)
+> >>>>>>  each cover some users and not others; neither one (yet) covers all
+> >>>>>>  users
+> >>>>> 
+> >>>>> Sorry for being punctilious, but neither one can cover all users: there
+> >>>>> are users without VT-x on their platform, and both approaches require
+> >>>>> VT-x.
+> >>>> 
+> >>>> For the record, yesterday I've decided to make an attempt to
+> >>>> create a very simplistic patch to deal with the issue in the
+> >>>> hypervisor, ignoring (almost) all performance considerations
+> >>>> (not all, because I didn't want to go the "disable caching" route).
+> >>>> I've dealt with some of the to-be-expected early bugs, but I'm
+> >>>> now debugging a host hang (note: not a triple fault apparently,
+> >>>> as the box doesn't reboot, yet triple faults is what I would have
+> >>>> expected to occur if anything is wrong here or missing).
+> >>>> 
+> >>>> I know that's late, and I have to admit that I don't understand
+> >>>> myself why I didn't consider doing such earlier on, but the
+> >>>> much increased pressure to get something like the shim out,
+> >>>> which
+> >>>> - doesn't address all cases
+> >>>> - requires changes to how VMs are being created (which likely will
+> >>>>  be a problem for various customers)
+> >>>> - later will want those changes undone
+> >>>> plus the pretty obvious impossibility to backport something like
+> >>>> Andrew's (not yet complete) series to baselines as old as 3.2
+> >>>> made it seem to me that some (measurable!) performance
+> >>>> overhead can't be all that bad in the given situation.
+> >>> 
+> >>> Thank you for giving it a look! I completely agree with you on these
+> >>> points. I think we should approach this problem with the assumption that
+> >>> this is going to be the only long term solution to SP3, while Vixen (or
+> >>> PVshim) incomplete stopgaps for now.
+> >> 
+> >> Well the pvshim is a feature for people who want to be able to eliminate
+> >> all PV interfaces to the hypervisor whatsover for security / maintenance
+> >> purposes.  I do agree a "proper" fix for PV would be good, assuming the
+> >> overhead is lower than pvshim.
+> > 
+> > Why "assuming the overhead is lower than pvshim"? What if the overhead
+> > is higher?  As I said, there are users that *cannot* deploy HVM because
+> > it is not available to them.
+> > 
+> > In other words, PVshim is irrelevant to me because I cannot use it.
+> 
+> Would a “proper” PV fix (does this have a codename?) benefit stubdoms?  These are needed to isolate Qemu, e.g. on an HVM driver domain.  PVshim does not yet support driver domains.
+
+Yes, good point. A "proper" fix should support stubdoms too. I think
+that Jan's approach above should be able to cover them.
+--8323329-241156044-1515689669=:4603
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-241156044-1515689669=:4603--
