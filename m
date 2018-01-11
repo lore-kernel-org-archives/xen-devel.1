@@ -1,8 +1,8 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
+From: George Dunlap <george.dunlap@citrix.com>
 Subject: Re: Radical proposal v2: Publish Amazon's verison now,
  Citrix's version soon
-Date: Thu, 11 Jan 2018 08:56:17 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1801110853540.4603@sstabellini-ThinkPad-X260>
+Date: Thu, 11 Jan 2018 16:55:50 +0000
+Message-ID: <4195455a-6e42-561d-e038-73b90945d81f@citrix.com>
 References: <4a587ed7-fa68-931a-dcbd-ea1570da1bdc@citrix.com>
  <alpine.DEB.2.10.1801100913130.4603@sstabellini-ThinkPad-X260>
  <5A572A81020000780019D8FC@prv-mh.provo.novell.com>
@@ -11,10 +11,11 @@ References: <4a587ed7-fa68-931a-dcbd-ea1570da1bdc@citrix.com>
  <alpine.DEB.2.10.1801110832090.4603@sstabellini-ThinkPad-X260>
  <152C6CA8-A45D-457F-9AC0-6F731535E8C7@gmail.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-241156044-1515689669=:4603"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 In-Reply-To: <152C6CA8-A45D-457F-9AC0-6F731535E8C7@gmail.com>
-Content-ID: <alpine.DEB.2.10.1801110855100.4603@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,93 +24,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Rich Persaud <persaur@gmail.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Anthony Liguori <aliguori@amazon.com>, Doug Goldstein <cardoe@cardoe.com>, George Dunlap <george.dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, Committers <committers@xenproject.org>, Jan Beulich <JBeulich@suse.com>, "security@xen.org" <security@xen.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Rich Persaud <persaur@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: Jan Beulich <JBeulich@suse.com>, Doug Goldstein <cardoe@cardoe.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, Committers <committers@xenproject.org>, Anthony Liguori <aliguori@amazon.com>, "security@xen.org" <security@xen.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-241156044-1515689669=:4603
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1801110855101.4603@sstabellini-ThinkPad-X260>
-
-On Thu, 11 Jan 2018, Rich Persaud wrote:
-> On Jan 11, 2018, at 11:36, Stefano Stabellini <sstabellini@kernel.org> wrote:
-> > 
-> >> On Thu, 11 Jan 2018, George Dunlap wrote:
-> >>> On 01/11/2018 04:23 PM, Stefano Stabellini wrote:
-> >>> On Thu, 11 Jan 2018, Jan Beulich wrote:
-> >>>>>>> On 10.01.18 at 18:25, <sstabellini@kernel.org> wrote:
-> >>>>>> On Wed, 10 Jan 2018, George Dunlap wrote:
-> >>>>>> * Executive summary
-> >>>>>> 
-> >>>>>> - We've agreed on a "convergence" point for PV shim functionality that
-> >>>>>>  covers as many users as possible:
-> >>>>>> - 'HVM' functionality: boots in HVM mode, has support for Xen 3.4
-> >>>>>>   event channels, &c, booted via 'sidecar'
-> >>>>>> - 'PVH' functionality: boots in PVH mode, booted via toolstack
-> >>>>>>   changes
-> >>>>>> 
-> >>>>>> - "Vixen" (the Amazon shim) and PVH shim (mostly developed by Citrix)
-> >>>>>>  each cover some users and not others; neither one (yet) covers all
-> >>>>>>  users
-> >>>>> 
-> >>>>> Sorry for being punctilious, but neither one can cover all users: there
-> >>>>> are users without VT-x on their platform, and both approaches require
-> >>>>> VT-x.
-> >>>> 
-> >>>> For the record, yesterday I've decided to make an attempt to
-> >>>> create a very simplistic patch to deal with the issue in the
-> >>>> hypervisor, ignoring (almost) all performance considerations
-> >>>> (not all, because I didn't want to go the "disable caching" route).
-> >>>> I've dealt with some of the to-be-expected early bugs, but I'm
-> >>>> now debugging a host hang (note: not a triple fault apparently,
-> >>>> as the box doesn't reboot, yet triple faults is what I would have
-> >>>> expected to occur if anything is wrong here or missing).
-> >>>> 
-> >>>> I know that's late, and I have to admit that I don't understand
-> >>>> myself why I didn't consider doing such earlier on, but the
-> >>>> much increased pressure to get something like the shim out,
-> >>>> which
-> >>>> - doesn't address all cases
-> >>>> - requires changes to how VMs are being created (which likely will
-> >>>>  be a problem for various customers)
-> >>>> - later will want those changes undone
-> >>>> plus the pretty obvious impossibility to backport something like
-> >>>> Andrew's (not yet complete) series to baselines as old as 3.2
-> >>>> made it seem to me that some (measurable!) performance
-> >>>> overhead can't be all that bad in the given situation.
-> >>> 
-> >>> Thank you for giving it a look! I completely agree with you on these
-> >>> points. I think we should approach this problem with the assumption that
-> >>> this is going to be the only long term solution to SP3, while Vixen (or
-> >>> PVshim) incomplete stopgaps for now.
-> >> 
-> >> Well the pvshim is a feature for people who want to be able to eliminate
-> >> all PV interfaces to the hypervisor whatsover for security / maintenance
-> >> purposes.  I do agree a "proper" fix for PV would be good, assuming the
-> >> overhead is lower than pvshim.
-> > 
-> > Why "assuming the overhead is lower than pvshim"? What if the overhead
-> > is higher?  As I said, there are users that *cannot* deploy HVM because
-> > it is not available to them.
-> > 
-> > In other words, PVshim is irrelevant to me because I cannot use it.
-> 
-> Would a “proper” PV fix (does this have a codename?) benefit stubdoms?  These are needed to isolate Qemu, e.g. on an HVM driver domain.  PVshim does not yet support driver domains.
-
-Yes, good point. A "proper" fix should support stubdoms too. I think
-that Jan's approach above should be able to cover them.
---8323329-241156044-1515689669=:4603
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-241156044-1515689669=:4603--
+T24gMDEvMTEvMjAxOCAwNDo1MiBQTSwgUmljaCBQZXJzYXVkIHdyb3RlOgo+IE9uIEphbiAxMSwg
+MjAxOCwgYXQgMTE6MzYsIFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9y
+Zz4gd3JvdGU6Cj4+Cj4+PiBPbiBUaHUsIDExIEphbiAyMDE4LCBHZW9yZ2UgRHVubGFwIHdyb3Rl
+Ogo+Pj4+IE9uIDAxLzExLzIwMTggMDQ6MjMgUE0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToK
+Pj4+PiBPbiBUaHUsIDExIEphbiAyMDE4LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4+Pj4gT24g
+MTAuMDEuMTggYXQgMTg6MjUsIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPiB3cm90ZToKPj4+Pj4+
+PiBPbiBXZWQsIDEwIEphbiAyMDE4LCBHZW9yZ2UgRHVubGFwIHdyb3RlOgo+Pj4+Pj4+ICogRXhl
+Y3V0aXZlIHN1bW1hcnkKPj4+Pj4+Pgo+Pj4+Pj4+IC0gV2UndmUgYWdyZWVkIG9uIGEgImNvbnZl
+cmdlbmNlIiBwb2ludCBmb3IgUFYgc2hpbSBmdW5jdGlvbmFsaXR5IHRoYXQKPj4+Pj4+PiAgY292
+ZXJzIGFzIG1hbnkgdXNlcnMgYXMgcG9zc2libGU6Cj4+Pj4+Pj4gLSAnSFZNJyBmdW5jdGlvbmFs
+aXR5OiBib290cyBpbiBIVk0gbW9kZSwgaGFzIHN1cHBvcnQgZm9yIFhlbiAzLjQKPj4+Pj4+PiAg
+IGV2ZW50IGNoYW5uZWxzLCAmYywgYm9vdGVkIHZpYSAnc2lkZWNhcicKPj4+Pj4+PiAtICdQVkgn
+IGZ1bmN0aW9uYWxpdHk6IGJvb3RzIGluIFBWSCBtb2RlLCBib290ZWQgdmlhIHRvb2xzdGFjawo+
+Pj4+Pj4+ICAgY2hhbmdlcwo+Pj4+Pj4+Cj4+Pj4+Pj4gLSAiVml4ZW4iICh0aGUgQW1hem9uIHNo
+aW0pIGFuZCBQVkggc2hpbSAobW9zdGx5IGRldmVsb3BlZCBieSBDaXRyaXgpCj4+Pj4+Pj4gIGVh
+Y2ggY292ZXIgc29tZSB1c2VycyBhbmQgbm90IG90aGVyczsgbmVpdGhlciBvbmUgKHlldCkgY292
+ZXJzIGFsbAo+Pj4+Pj4+ICB1c2Vycwo+Pj4+Pj4KPj4+Pj4+IFNvcnJ5IGZvciBiZWluZyBwdW5j
+dGlsaW91cywgYnV0IG5laXRoZXIgb25lIGNhbiBjb3ZlciBhbGwgdXNlcnM6IHRoZXJlCj4+Pj4+
+PiBhcmUgdXNlcnMgd2l0aG91dCBWVC14IG9uIHRoZWlyIHBsYXRmb3JtLCBhbmQgYm90aCBhcHBy
+b2FjaGVzIHJlcXVpcmUKPj4+Pj4+IFZULXguCj4+Pj4+Cj4+Pj4+IEZvciB0aGUgcmVjb3JkLCB5
+ZXN0ZXJkYXkgSSd2ZSBkZWNpZGVkIHRvIG1ha2UgYW4gYXR0ZW1wdCB0bwo+Pj4+PiBjcmVhdGUg
+YSB2ZXJ5IHNpbXBsaXN0aWMgcGF0Y2ggdG8gZGVhbCB3aXRoIHRoZSBpc3N1ZSBpbiB0aGUKPj4+
+Pj4gaHlwZXJ2aXNvciwgaWdub3JpbmcgKGFsbW9zdCkgYWxsIHBlcmZvcm1hbmNlIGNvbnNpZGVy
+YXRpb25zCj4+Pj4+IChub3QgYWxsLCBiZWNhdXNlIEkgZGlkbid0IHdhbnQgdG8gZ28gdGhlICJk
+aXNhYmxlIGNhY2hpbmciIHJvdXRlKS4KPj4+Pj4gSSd2ZSBkZWFsdCB3aXRoIHNvbWUgb2YgdGhl
+IHRvLWJlLWV4cGVjdGVkIGVhcmx5IGJ1Z3MsIGJ1dCBJJ20KPj4+Pj4gbm93IGRlYnVnZ2luZyBh
+IGhvc3QgaGFuZyAobm90ZTogbm90IGEgdHJpcGxlIGZhdWx0IGFwcGFyZW50bHksCj4+Pj4+IGFz
+IHRoZSBib3ggZG9lc24ndCByZWJvb3QsIHlldCB0cmlwbGUgZmF1bHRzIGlzIHdoYXQgSSB3b3Vs
+ZCBoYXZlCj4+Pj4+IGV4cGVjdGVkIHRvIG9jY3VyIGlmIGFueXRoaW5nIGlzIHdyb25nIGhlcmUg
+b3IgbWlzc2luZykuCj4+Pj4+Cj4+Pj4+IEkga25vdyB0aGF0J3MgbGF0ZSwgYW5kIEkgaGF2ZSB0
+byBhZG1pdCB0aGF0IEkgZG9uJ3QgdW5kZXJzdGFuZAo+Pj4+PiBteXNlbGYgd2h5IEkgZGlkbid0
+IGNvbnNpZGVyIGRvaW5nIHN1Y2ggZWFybGllciBvbiwgYnV0IHRoZQo+Pj4+PiBtdWNoIGluY3Jl
+YXNlZCBwcmVzc3VyZSB0byBnZXQgc29tZXRoaW5nIGxpa2UgdGhlIHNoaW0gb3V0LAo+Pj4+PiB3
+aGljaAo+Pj4+PiAtIGRvZXNuJ3QgYWRkcmVzcyBhbGwgY2FzZXMKPj4+Pj4gLSByZXF1aXJlcyBj
+aGFuZ2VzIHRvIGhvdyBWTXMgYXJlIGJlaW5nIGNyZWF0ZWQgKHdoaWNoIGxpa2VseSB3aWxsCj4+
+Pj4+ICBiZSBhIHByb2JsZW0gZm9yIHZhcmlvdXMgY3VzdG9tZXJzKQo+Pj4+PiAtIGxhdGVyIHdp
+bGwgd2FudCB0aG9zZSBjaGFuZ2VzIHVuZG9uZQo+Pj4+PiBwbHVzIHRoZSBwcmV0dHkgb2J2aW91
+cyBpbXBvc3NpYmlsaXR5IHRvIGJhY2twb3J0IHNvbWV0aGluZyBsaWtlCj4+Pj4+IEFuZHJldydz
+IChub3QgeWV0IGNvbXBsZXRlKSBzZXJpZXMgdG8gYmFzZWxpbmVzIGFzIG9sZCBhcyAzLjIKPj4+
+Pj4gbWFkZSBpdCBzZWVtIHRvIG1lIHRoYXQgc29tZSAobWVhc3VyYWJsZSEpIHBlcmZvcm1hbmNl
+Cj4+Pj4+IG92ZXJoZWFkIGNhbid0IGJlIGFsbCB0aGF0IGJhZCBpbiB0aGUgZ2l2ZW4gc2l0dWF0
+aW9uLgo+Pj4+Cj4+Pj4gVGhhbmsgeW91IGZvciBnaXZpbmcgaXQgYSBsb29rISBJIGNvbXBsZXRl
+bHkgYWdyZWUgd2l0aCB5b3Ugb24gdGhlc2UKPj4+PiBwb2ludHMuIEkgdGhpbmsgd2Ugc2hvdWxk
+IGFwcHJvYWNoIHRoaXMgcHJvYmxlbSB3aXRoIHRoZSBhc3N1bXB0aW9uIHRoYXQKPj4+PiB0aGlz
+IGlzIGdvaW5nIHRvIGJlIHRoZSBvbmx5IGxvbmcgdGVybSBzb2x1dGlvbiB0byBTUDMsIHdoaWxl
+IFZpeGVuIChvcgo+Pj4+IFBWc2hpbSkgaW5jb21wbGV0ZSBzdG9wZ2FwcyBmb3Igbm93Lgo+Pj4K
+Pj4+IFdlbGwgdGhlIHB2c2hpbSBpcyBhIGZlYXR1cmUgZm9yIHBlb3BsZSB3aG8gd2FudCB0byBi
+ZSBhYmxlIHRvIGVsaW1pbmF0ZQo+Pj4gYWxsIFBWIGludGVyZmFjZXMgdG8gdGhlIGh5cGVydmlz
+b3Igd2hhdHNvdmVyIGZvciBzZWN1cml0eSAvIG1haW50ZW5hbmNlCj4+PiBwdXJwb3Nlcy4gIEkg
+ZG8gYWdyZWUgYSAicHJvcGVyIiBmaXggZm9yIFBWIHdvdWxkIGJlIGdvb2QsIGFzc3VtaW5nIHRo
+ZQo+Pj4gb3ZlcmhlYWQgaXMgbG93ZXIgdGhhbiBwdnNoaW0uCj4+Cj4+IFdoeSAiYXNzdW1pbmcg
+dGhlIG92ZXJoZWFkIGlzIGxvd2VyIHRoYW4gcHZzaGltIj8gV2hhdCBpZiB0aGUgb3ZlcmhlYWQK
+Pj4gaXMgaGlnaGVyPyAgQXMgSSBzYWlkLCB0aGVyZSBhcmUgdXNlcnMgdGhhdCAqY2Fubm90KiBk
+ZXBsb3kgSFZNIGJlY2F1c2UKPj4gaXQgaXMgbm90IGF2YWlsYWJsZSB0byB0aGVtLgo+Pgo+PiBJ
+biBvdGhlciB3b3JkcywgUFZzaGltIGlzIGlycmVsZXZhbnQgdG8gbWUgYmVjYXVzZSBJIGNhbm5v
+dCB1c2UgaXQuCj4gCj4gV291bGQgYSDigJxwcm9wZXLigJ0gUFYgZml4IChkb2VzIHRoaXMgaGF2
+ZSBhIGNvZGVuYW1lPykgYmVuZWZpdCBzdHViZG9tcz8gIFRoZXNlIGFyZSBuZWVkZWQgdG8gaXNv
+bGF0ZSBRZW11LCBlLmcuIG9uIGFuIEhWTSBkcml2ZXIgZG9tYWluLiAgUFZzaGltIGRvZXMgbm90
+IHlldCBzdXBwb3J0IGRyaXZlciBkb21haW5zLgoKV2UnZCBoYXZlIHRvIHNlZSB0aGUgYWN0dWFs
+IGNvZGUgYmVmb3JlIHdlIGNvdWxkIGJlIHN1cmUsIGJ1dCBJIGNhbid0CnRoaW5rIG9mIGEgcmVh
+c29uIHdoeSBhICJwcm9wZXIiIFBWIGZpeCB3b3VsZG4ndCB3b3JrIGZvciBkcml2ZXIgZG9tYWlu
+cy4KCiAtR2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
