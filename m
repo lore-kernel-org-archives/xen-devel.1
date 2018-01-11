@@ -1,22 +1,21 @@
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
+From: David Miller <davem@davemloft.net>
 Subject: Re: [PATCH 2/2] xen-netfront: Fix race between device
-	setup and open
-Date: Thu, 11 Jan 2018 15:49:07 +0000
-Message-ID: <f297b1a4-d287-ba66-ad44-bf6073950bdf__12977.5407178842$1515685678$gmane$org@citrix.com>
-References: <20180111093638.28937-1-ross.lagerwall@citrix.com>
- <20180111093638.28937-3-ross.lagerwall@citrix.com>
+ setup and open
+Date: Thu, 11 Jan 2018 11:08:10 -0500 (EST)
+Message-ID: <20180111.110810.1332044409040498618.davem__28549.2171220996$1515686839$gmane$org@davemloft.net>
+References: <20180111093638.28937-3-ross.lagerwall@citrix.com>
  <20180111.102622.769744562294438306.davem@davemloft.net>
+ <f297b1a4-d287-ba66-ad44-bf6073950bdf@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=oq2j=eg=citrix.com=prvs=54256733d=ross.lagerwall@srs-us1.protection.inumbo.net>)
- id 1eZf6O-0002sy-9C
- for xen-devel@lists.xenproject.org; Thu, 11 Jan 2018 15:49:12 +0000
-In-Reply-To: <20180111.102622.769744562294438306.davem@davemloft.net>
-Content-Language: en-US
+ <srs0=93p6=eg=davemloft.net=davem@srs-us1.protection.inumbo.net>)
+ id 1eZfOo-0005Ie-TQ
+ for xen-devel@lists.xenproject.org; Thu, 11 Jan 2018 16:08:14 +0000
+In-Reply-To: <f297b1a4-d287-ba66-ad44-bf6073950bdf@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,39 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: David Miller <davem@davemloft.net>
+To: ross.lagerwall@citrix.com
 Cc: jgross@suse.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com, linux-kernel@vger.kernel.org, netdev@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMTEvMjAxOCAwMzoyNiBQTSwgRGF2aWQgTWlsbGVyIHdyb3RlOgo+IEZyb206IFJvc3Mg
-TGFnZXJ3YWxsIDxyb3NzLmxhZ2Vyd2FsbEBjaXRyaXguY29tPgo+IERhdGU6IFRodSwgMTEgSmFu
-IDIwMTggMDk6MzY6MzggKzAwMDAKPiAKPj4gV2hlbiBhIG5ldGZyb250IGRldmljZSBpcyBzZXQg
-dXAgaXQgcmVnaXN0ZXJzIGEgbmV0ZGV2IGZhaXJseSBlYXJseSBvbiwKPj4gYmVmb3JlIGl0IGhh
-cyBzZXQgdXAgdGhlIHF1ZXVlcyBhbmQgaXMgYWN0dWFsbHkgdXNhYmxlLiBBIHVzZXJzcGFjZSB0
-b29sCj4+IGxpa2UgTmV0d29ya01hbmFnZXIgd2lsbCBpbW1lZGlhdGVseSB0cnkgdG8gb3BlbiBp
-dCBhbmQgYWNjZXNzIGl0cyBzdGF0ZQo+PiBhcyBzb29uIGFzIGl0IGFwcGVhcnMuIFRoZSBidWcg
-Y2FuIGJlIHJlcHJvZHVjZWQgYnkgaG90cGx1Z2dpbmcgVklGcwo+PiB1bnRpbCB0aGUgVk0gcnVu
-cyBvdXQgb2YgZ3JhbnQgcmVmcy4gSXQgcmVnaXN0ZXJzIHRoZSBuZXRkZXYgYnV0IGZhaWxzCj4+
-IHRvIHNldCB1cCBhbnkgcXVldWVzIChzaW5jZSB0aGVyZSBhcmUgbm8gbW9yZSBncmFudCByZWZz
-KS4gSW4gdGhlCj4+IG1lYW50aW1lLCBOZXR3b3JrTWFuYWdlciBvcGVucyB0aGUgZGV2aWNlIGFu
-ZCB0aGUga2VybmVsIGNyYXNoZXMgdHJ5aW5nCj4+IHRvIGFjY2VzcyB0aGUgcXVldWVzIChvZiB3
-aGljaCB0aGVyZSBhcmUgbm9uZSkuCj4+Cj4+IEZpeCB0aGlzIGluIHR3byB3YXlzOgo+PiAqIEZv
-ciBpbml0aWFsIHNldHVwLCByZWdpc3RlciB0aGUgbmV0ZGV2IG11Y2ggbGF0ZXIsIGFmdGVyIHRo
-ZSBxdWV1ZXMKPj4gYXJlIHNldHVwLiBUaGlzIGF2b2lkcyB0aGUgcmFjZSBlbnRpcmVseS4KPj4g
-KiBEdXJpbmcgYSBzdXNwZW5kL3Jlc3VtZSBjeWNsZSwgdGhlIGZyb250ZW5kIHJlY29ubmVjdHMg
-dG8gdGhlIGJhY2tlbmQKPj4gYW5kIHRoZSBxdWV1ZXMgYXJlIHJlY3JlYXRlZC4gSXQgaXMgcG9z
-c2libGUgKHRob3VnaCBoaWdobHkgdW5saWtlbHkpIHRvCj4+IHJhY2Ugd2l0aCBzb21ldGhpbmcg
-b3BlbmluZyB0aGUgZGV2aWNlIGFuZCBhY2Nlc3NpbmcgdGhlIHF1ZXVlcyBhZnRlcgo+PiB0aGV5
-IGhhdmUgYmVlbiBkZXN0cm95ZWQgYnV0IGJlZm9yZSB0aGV5IGhhdmUgYmVlbiByZWNyZWF0ZWQu
-IEV4dGVuZCB0aGUKPj4gcmVnaW9uIGNvdmVyZWQgYnkgdGhlIHJ0bmwgc2VtYXBob3JlIHRvIHBy
-b3RlY3QgYWdhaW5zdCB0aGlzIHJhY2UuIFRoZXJlCj4+IGlzIGEgcG9zc2liaWxpdHkgdGhhdCB3
-ZSBmYWlsIHRvIHJlY3JlYXRlIHRoZSBxdWV1ZXMgc28gY2hlY2sgZm9yIHRoaXMKPj4gaW4gdGhl
-IG9wZW4gZnVuY3Rpb24uCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IFJvc3MgTGFnZXJ3YWxsIDxyb3Nz
-LmxhZ2Vyd2FsbEBjaXRyaXguY29tPgo+IAo+IFdoZXJlIGlzIHBhdGNoIDEvMiBhbmQgdGhlIDAv
-MiBoZWFkZXIgcG9zdGluZyB3aGljaCBleHBsYWlucyB3aGF0IHRoaXMKPiBwYXRjaCBzZXJpZXMg
-aXMgZG9pbmcsIGhvdyBpdCBpcyBkb2luZyBpdCwgYW5kIHdoeSBpdCBpcyBkb2luZyBpdCB0aGF0
-Cj4gd2F5Pwo+IAoKSSd2ZSBub3cgYWRkZWQgQ0MnZCBuZXRkZXYgb24gdGhlIG90aGVyIHR3by4K
-CkNoZWVycywKLS0gClJvc3MgTGFnZXJ3YWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+RnJvbTogUm9zcyBMYWdlcndhbGwgPHJvc3MubGFnZXJ3YWxsQGNpdHJpeC5jb20+CkRhdGU6IFRo
+dSwgMTEgSmFuIDIwMTggMTU6NDk6MDcgKzAwMDAKCj4gSSd2ZSBub3cgYWRkZWQgQ0MnZCBuZXRk
+ZXYgb24gdGhlIG90aGVyIHR3by4KClRoYXQgZG9lc24ndCB3b3JrLgoKSWYgeW91IGRvbid0IHBv
+c3QgdGhlIG9yaWdpbmFscyBleHBsaWNpdGx5IHRvIG5ldGRldiB0aGVuIGl0IHdvbid0CmdldCBw
+cm9wZXJseSBxdWV1ZWQgaW4gcGF0Y2h3b3JrLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
