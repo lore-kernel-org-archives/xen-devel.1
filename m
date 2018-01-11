@@ -1,11 +1,11 @@
 From: Dario Faggioli <dfaggioli@suse.com>
 Subject: Re: [PATCH] xen/sched_rt: Move repl_timer into struct
 	rt_private
-Date: Thu, 11 Jan 2018 19:18:52 +0100
-Message-ID: <1515694732.30117.72.camel@suse.com>
+Date: Thu, 11 Jan 2018 19:19:20 +0100
+Message-ID: <1515694760.30117.73.camel@suse.com>
 References: <1515690052-4221-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8598113485717622384=="
+Content-Type: multipart/mixed; boundary="===============8341877391293427230=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 In-Reply-To: <1515690052-4221-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -21,12 +21,12 @@ Cc: Meng Xu <mengxu@cis.upenn.edu>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============8598113485717622384==
+--===============8341877391293427230==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-5AXSAdrKxG2FJTAUxW/m"
+	protocol="application/pgp-signature"; boundary="=-G0OWC6IKZOH2sJmFRVRu"
 
 
---=-5AXSAdrKxG2FJTAUxW/m
+--=-G0OWC6IKZOH2sJmFRVRu
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -63,33 +63,33 @@ Dario
 -----------------------------------------------------------------
 Dario Faggioli, Ph.D, http://about.me/dario.faggioli
 Software Engineer @ SUSE https://www.suse.com/
---=-5AXSAdrKxG2FJTAUxW/m
+--=-G0OWC6IKZOH2sJmFRVRu
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlpXqowACgkQFkJ4iaW4
-c+5Lew//XSkAAuQCAaX0cH6yMOLoJUmbTvHe2gx16x/WFMqwHj/fM+tfRR7tTULO
-68pji1ZKVym1l1c6ttpsfqosaW7zcCFQXQG6JUfTk6732UDsB7/QmNoK4lc5PYdz
-ifIKAmP1hHtxsoDROxqU38Ly7CH/rQNl2EwTR2rAFXkrzXR41DJYjEejrnk0k9wO
-Njps9+B9t8NfNgSuqkWm0hd2Eks/RF+o5b5d6lrvJ6YMErSZQfR5Z8qUdyLMyLZt
-tSiRVm2NUwZ2/jlO59nXcEj+Ea6cUiynj1e/40o2URn8rDE+kwIcWmfX5/igZIN4
-ik3Tv9OkohXMqdM14qx5hl6iz1PDzhzVDd3VgomT+FQ3nHcWXWLPQetnz1gHbHqm
-saziDb4A6L1ygc1fK5LHsd/qPtXLOnvcHZbZagzHmVC7TBijQWEE3xGXs2WKOz7H
-lmmNo6CZMcGbbhJiLVkmSHbWFbJacn5bBIbBSidHM8+LGcsZEZ1cM51VSFkunwLN
-OLY9lXhHDh+X8gIIsY1/CLi8tMbGbWSkam+4a99p2wGemyCN0ES9iBTF4mzFKyEk
-QUPT5u1OvVJOCuKTQ7T+G1TDTcbw7XVYrXdNdJMu2JfSZCewwi8f1KHrSeexlwoF
-UYUWddqkCSi/2cIy8EAMb6wcbyADA6tFYc3hkIWlLXalfco8auc=
-=z8EN
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlpXqqgACgkQFkJ4iaW4
+c+4+gg/8D/JotQeLXBCDClr0YmyiQf46475tBlACx3s3yKL4cN0DcLFxe1zZBGeC
+s+Kw6Hs9/65OH9ajfuMbd2hu1fQfL3z/gelD148mwTbUoWC86inRdY+LuuLIFLgp
+CYKf/6lP2YDyiArYOKZyO79x6NLipbeHmv415HpvCESlAX0mfWOrePl81qYCMOwO
+Ei7jbb4KPaefa6OcjxcPrCpnuDPdDpLR8quCW8FKLTexiSmw2avMchfMvwcpeO77
+WEVOQ6890HjIy84CKnH43LCe7R0HY9LNJ9NGo//pQ/qtRSXdohU8I/+d26Mi+QAk
+z73IpyBEJ98LJFKTdW6FEGb/ThaiV4tbhva1Mo04rvPQivGZq1NPLU0lkHr1f1qE
+kpTgYz2cYsYGuVWfzy7NRgRwN7K+pGtPylREQ3yzhQmrrKkEtuFjnECuqWauwLCA
+ltetV9sFsP/hTALsorhXVMyjDz4iVuHK4Dpdp/m3WkldbY1FZCjQoonhYki0hNbH
+qRP7x8DH3uOFaBWDFMEYTQVoj4R5i0ODcLjf9fkB7xmjtRY5FOeQ4geCwCEe/wY2
+7Egc5ihzIdhHMIaDw24RFKMEryP6GnL0xvvUX1qBAEtCbbSnPDGiZRAkhQk8aLvh
+UUgIdiptutGMlHdim9CyXEXsc1FSj8mcmPHGLM5wb5sbvuUNOJE=
+=wRsa
 -----END PGP SIGNATURE-----
 
---=-5AXSAdrKxG2FJTAUxW/m--
+--=-G0OWC6IKZOH2sJmFRVRu--
 
 
 
---===============8598113485717622384==
+--===============8341877391293427230==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -99,4 +99,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============8598113485717622384==--
+--===============8341877391293427230==--
