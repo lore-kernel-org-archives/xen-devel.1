@@ -1,20 +1,14 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH] MAINTAINERS: update my entries to new email
-	address.
-Date: Thu, 11 Jan 2018 10:51:23 +0000
-Message-ID: <2cb56413-5295-3468-ca6b-5f7393a0f82b@citrix.com>
-References: <151560843487.4124.18009287657473903109.stgit@Solace.fritz.box>
+From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Subject: Re: PVH backports to 4.9 and 4.8
+Date: Thu, 11 Jan 2018 10:58:01 +0000
+Message-ID: <20180111105801.wriqwvwpi7ot4tks@MacBook-Pro-de-Roger.local>
+References: <d06762c0-049e-0f9a-c674-e9bee70ec5c6@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=xcah=eg=citrix.com=prvs=54239b149=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1eZaSF-0001FD-VZ
- for xen-devel@lists.xenproject.org; Thu, 11 Jan 2018 10:51:28 +0000
-In-Reply-To: <151560843487.4124.18009287657473903109.stgit@Solace.fritz.box>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <d06762c0-049e-0f9a-c674-e9bee70ec5c6@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,13 +17,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>, xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Meng Xu <mengxu@cis.upenn.edu>, Jan Beulich <jbeulich@suse.com>
+To: George Dunlap <george.dunlap@citrix.com>
+Cc: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMTAvMjAxOCAwNjoyMCBQTSwgRGFyaW8gRmFnZ2lvbGkgd3JvdGU6Cj4gU2lnbmVkLW9m
-Zi1ieTogRGFyaW8gRmFnZ2lvbGkgPGRmYWdnaW9saUBzdXNlLmNvbT4KCkFja2VkLWJ5OiBHZW9y
-Z2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CgpHb29kIHRvIGhhdmUgeW91IGJh
-Y2shCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVHVlLCBKYW4gMDksIDIwMTggYXQgMDU6MDg6MTVQTSArMDAwMCwgR2VvcmdlIER1bmxhcCB3
+cm90ZToKPiBQYXJ0IG9mIG91ciBzb2x1dGlvbiB0byBYU0EtMjU0IFNQMyAoYWthICJNZWx0ZG93
+biIpIGlzIHRvIGJhY2twb3J0Cj4gdGhlIFBWSCBtb2RlIGZyb20gNC4xMCB0byA0LjkgYW5kIDQu
+OC4gIFRoaXMgd2lsbCBmaXJzdCBhbGxvdyBwZW9wbGUKPiBhYmxlIHRvIHJ1biBQVkgga2VybmVs
+cyB0byBzd2l0Y2ggdGhlaXIgUFYgZ3Vlc3RzIGRpcmVjdGx5IHRvIFBWSAo+IGd1ZXN0czsgYW5k
+IHNlY29uZCwgZXZlbnR1YWxseSBlbmFibGUgdGhlIGJhY2twb3J0IG9mIHBhdGNoZXMgd2hpY2gK
+PiB3aWxsIGVuYWJsZSB0cmFuc3BhcmVudCBjaGFuZ2luZyBvZiBQViBndWVzdHMgaW50byBQVkgg
+Z3Vlc3RzLgo+IAo+IEFsbCBvZiB0aGUgaHlwZXJ2aXNvciBzdXBwb3J0IHNlZW1zIHRvIGhhdmUg
+ZXhpc3RlZCBhbHJlYWR5IGluIDQuOCwgc28KPiB0aGUgb25seSBiYWNrcG9ydHMgaW52b2x2ZSB0
+b29sc3RhY2sgcGF0Y2hlcy4KClRoYW5rcyBmb3IgbG9va2luZyBpbnRvIHRoaXMuCgpNeSBnZW5l
+cmFsIG9waW5pb24gZ2l2ZW4gdGhvc2UgYXJlIHRvb2xzdGFjayBvbmx5IHBhdGNoZXMgaXMgdGhh
+dCBpZgppdCB3b3JrcyBpdCdzIGZpbmUuCgo+IEkndmUgcHV0IHVwIHR3byB0cmVlcyBmb3IgYSBm
+aXJzdC1jdXQgYmFja3BvcnQgb2YgdGhlIFBWSAo+IGZ1bmN0aW9uYWxpdHksIHRvIDQuOSBhbmQg
+NC44IGhlcmU6Cj4gCj4gZ2l0Oi8veGVuYml0cy54ZW4ub3JnL3Blb3BsZS9nZHVubGFwL3hlbi5n
+aXQKPiAKPiBCcmFuY2hlcyBvdXQvcHZoLWJhY2twb3J0LzQuOC92MSBhbmQgb3V0L3B2aC1iYWNr
+cG9ydC80LjkvdjEKPiAKPiBCZWxvdyBhcmUgdGhlIHBhdGNoZXMgYmFja3BvcnRlZCBmcm9tIDQu
+MTAgdG8gNC45ICgyMyBwYXRjaGVzIHRvdGFsKToKPiAKPiBSb2dlciBQYXUgTW9ubmUJbGlieGw6
+IGFkZCBpc19kZWZhdWx0IGNoZWNrZXJzIGZvciBzdHJpbmcgYW5kIHRpbWVyX21vZGUKPiB0eXBl
+cwo+IFJvZ2VyIFBhdSBNb25uZQlsaWJ4bDogaW50cm9kdWNlIGEgd2F5IHRvIG1hcmsgZmllbGRz
+IGFzIGRlcHJlY2F0ZWQgaW4KPiB0aGUgaWRsCgpUaGlzIG9yIG9uZSBvZiB0aGUgcmVsYXRlZCBw
+YXRjaGVzIGlzIGdvaW5nIHRvIGFkZCBmaWVsZHMgaW4KZG9tYWluX2J1aWxkX2luZm8sIHdoaWNo
+IHdpbGwgYnJlYWsgdGhlIEFCSS4gSXMgdGhpcyBleHBlY3RlZC9PSz8KClJvZ2VyLgoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
