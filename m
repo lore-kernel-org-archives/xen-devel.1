@@ -1,14 +1,12 @@
-From: Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH 4/5] x86/pv: Drop support for paging out the
- LDT
-Date: Fri, 12 Jan 2018 15:53:13 -0600
-Message-ID: <81859510-5bae-4742-c044-caabc6d85121@cardoe.com>
-References: <1515782244-6412-1-git-send-email-andrew.cooper3@citrix.com>
- <1515782244-6412-5-git-send-email-andrew.cooper3@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 117927: tolerable all pass -
+	PUSHED
+Date: Fri, 12 Jan 2018 22:28:35 +0000
+Message-ID: <osstest-117927-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0950158625153629200=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1515782244-6412-5-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,111 +15,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Jan Beulich <JBeulich@suse.com>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0950158625153629200==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="uGqi60R2KM6i2vFNVF78wYEiP5M4i8e9T"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---uGqi60R2KM6i2vFNVF78wYEiP5M4i8e9T
-Content-Type: multipart/mixed; boundary="5ymQsrXGhufkicVq8pRgoeuuBjaglxcUP";
- protected-headers="v1"
-From: Doug Goldstein <cardoe@cardoe.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Xen-devel <xen-devel@lists.xen.org>
-Cc: Jan Beulich <JBeulich@suse.com>
-Message-ID: <81859510-5bae-4742-c044-caabc6d85121@cardoe.com>
-Subject: Re: [Xen-devel] [PATCH 4/5] x86/pv: Drop support for paging out the
- LDT
-References: <1515782244-6412-1-git-send-email-andrew.cooper3@citrix.com>
- <1515782244-6412-5-git-send-email-andrew.cooper3@citrix.com>
-In-Reply-To: <1515782244-6412-5-git-send-email-andrew.cooper3@citrix.com>
-
---5ymQsrXGhufkicVq8pRgoeuuBjaglxcUP
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 1/12/18 12:37 PM, Andrew Cooper wrote:
-> Windows is the only OS which pages out kernel datastructures, so chance=
-s are
-> good that this is a vestigial remnant of the PV Windows XP experiment.
-> Furthermore the implementation is incomplete; it only functions for a p=
-resent
-> =3D> not-present transition, rather than a present =3D> read/write tran=
-sition.
->=20
-> The for_each_vcpu() is one scalability limitation for PV guests, which =
-can't
-> reasonably be altered to be continuable.
->=20
-> One side effects of dropping paging out support is that now, the LDT (l=
-ike the
-> GDT) is only ever modified in current context, allowing us to drop
-> shadow_ldt_mapcnt and shadow_ldt_lock from struct vcpu.
->=20
-> Another side effect is that the LDT no longer automatically cleans itse=
-lf up
-> on domain destruction.  Cover this by explicitly releasing the LDT fram=
-es at
-> the same time as the GDT frames.
->=20
-> Finally, leave some asserts around to confirm the expected behaviour of=
- all
-> the functions playing with PGT_seg_desc_page references.
->=20
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-Makes sense to me and the code looks good.
-
-Reviewed-by: Doug Goldstein <cardoe@cardoe.com>
-
---=20
-Doug Goldstein
-
-
---5ymQsrXGhufkicVq8pRgoeuuBjaglxcUP--
-
---uGqi60R2KM6i2vFNVF78wYEiP5M4i8e9T
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlpZLklfFIAAAAAALgAo
-aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
-MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
-Nl2DDg/8CsCbjrq38KBXXLf/OVry+bY9NA6bPKGYRvdW0y1Dvj36JD0ss6qQClQv
-k/oXHXoSVHFk9ZwUqB2WAu13lntUSS4d+wVqlRxI5w2Rm5DV8dimbOYRDvHWIfxo
-9zyOEQHPVCCWRCt9ETy/ta5r22MlQgyC3ff4YoLaJhZ0TXK2zggUaZf87bDbXKv5
-hgOAk9vwiFMhkDGIvF0H6OqbCKiJlW+nq7+0JuKpxDhQxfzfxiSJ5SmadLafWEhc
-nhpiKcOKfJVjatX0L5JjQQ5M00gcgcxoDjKE95jfitwVwWOw9TTrRQbl8MlkgrKh
-42CDa41Y5Kb4PtS0PatBxmVoEMSltc3i5ywW2Ipw78FinnpKZJ25JqMlCGD7Xp/C
-UJXOms6ygdywgUUeRukqJQhBhBSbdhBzV/s7u8cXJCEfN5BMV3C53GfwancA0hWb
-C8wmeJS9MSeHN32Xrih44CznaqXkg+3acqiz3LHwr8MFhcznpyMqgQA+5cxJ/KBZ
-wYnHaJJmNZYJbPOwb938bCAYpqNPgsyNgpSRRKWEiX5sgv9FjVaNoHW8laup1OQ/
-XzZKnuV5gSS896iHI1gpq2S7efVWx4U/aSaTOUmgXgoRp3iOUzh88xI/c7KcPht7
-O/9JlOGZLFE6xMKG/zDB3uy5WNIACXh7MqxOIEgBgNhBM7uDIaI=
-=OfeU
------END PGP SIGNATURE-----
-
---uGqi60R2KM6i2vFNVF78wYEiP5M4i8e9T--
-
-
---===============0950158625153629200==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0950158625153629200==--
+ZmxpZ2h0IDExNzkyNyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzExNzkyNy8KCkZhaWx1cmVzIDot
+LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
+cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
+LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
+LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
+ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
+LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
+ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
+ICAgICAgICAgICAgICAyZDcwYjU0ZTA1NTYzNWZmNjA1MjZiNjk0OTE1NjUwNGI2MTk0YjdjCmJh
+c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICAyYjg0MDE2YzU5ZGJlOWY2ZTQy
+ZTg1N2E1ZDgxNzZmZDRlNTJjOTVjCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMTc5MjQgIDIwMTgt
+MDEtMTIgMTI6MDE6MzcgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTE3OTI3ICAy
+MDE4LTAxLTEyIDIwOjAyOjEzIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
+d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3IENvb3BlciA8YW5kcmV3
+LmNvb3BlcjNAY2l0cml4LmNvbT4KCmpvYnM6CiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
+YnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02
+NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
+ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1pMzg2ICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rl
+c3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczog
+L2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxl
+IGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MK
+CkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWws
+IGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDth
+PWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
+L2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhh
+cm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0
+d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5i
+aXRzLnhlbi5vcmc6L2hvbWUveGVuL2dpdC94ZW4uZ2l0CiAgIDJiODQwMTZjNTkuLjJkNzBiNTRl
+MDUgIDJkNzBiNTRlMDU1NjM1ZmY2MDUyNmI2OTQ5MTU2NTA0YjYxOTRiN2MgLT4gc21va2UKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
