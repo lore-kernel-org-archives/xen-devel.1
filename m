@@ -1,24 +1,13 @@
-From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH RFC v1 42/74] sched/null: skip vCPUs on the
- waitqueue that are blocked
-Date: Fri, 12 Jan 2018 10:45:49 +0000
-Message-ID: <20180112104549.7n45ufiv7my7wwv6@MacBook-Pro-de-Roger.local>
-References: <20180104130625.28605-1-wei.liu2@citrix.com>
- <20180104130625.28605-43-wei.liu2@citrix.com>
- <5A535803020000780019C0D5@prv-mh.provo.novell.com>
- <ff97179c-1303-5668-4623-c3b4eec006e4@citrix.com>
- <1515750843.30117.96.camel@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH] x86/bitops: Introduce variable/constant
+ pairs for __{set, clear, change}_bit()
+Date: Fri, 12 Jan 2018 11:58:58 +0100
+Message-ID: <1515754738.30117.126.camel@suse.com>
+References: <1515688450-27444-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5290123361500773920=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=nckw=eh=citrix.com=prvs=543738cf7=roger.pau@srs-us1.protection.inumbo.net>)
- id 1eZwqZ-0002fP-Jf
- for xen-devel@lists.xenproject.org; Fri, 12 Jan 2018 10:46:03 +0000
-Content-Disposition: inline
-In-Reply-To: <1515750843.30117.96.camel@suse.com>
+In-Reply-To: <1515688450-27444-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,87 +16,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Xen-devel <xen-devel@lists.xenproject.org>, wei.liu2@citrix.com, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBKYW4gMTIsIDIwMTggYXQgMTA6NTQ6MDNBTSArMDEwMCwgRGFyaW8gRmFnZ2lvbGkg
-d3JvdGU6Cj4gSGkhCj4gCj4gRmlyc3Qgb2YgYWxsLCBteSBmaWx0ZXJzIHNvbWVob3cgZmFpbGVk
-IHRvIGhpZ2hsaWdodCB0aGlzIGZvciBtZSwgc28KPiBzb3JyeSBpZiBJIGRpZCBub3Qgbm90aWNl
-IGl0IGVhcmxpZXIgKGFuZCBub3csIEkgbmVlZCBuZXcgZmlsdGVycwo+IGFueXdheSwgYXMgdGhl
-IGVtYWlsIEknbSB1c2luZyBpcyBkaWZmZXJlbnQgOi1EKS4KPiAKPiBJJ2xsIGhhdmUgYSBsb29r
-IGF0IHRoZSBwYXRjaCBBU0FQLgo+IAo+IE9uIE1vbiwgMjAxOC0wMS0wOCBhdCAxMToxMiArMDAw
-MCwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiA+IE9uIDAxLzA4LzIwMTggMTA6MzcgQU0sIEphbiBC
-ZXVsaWNoIHdyb3RlOgo+ID4KPiA+ID4gSSBkb24ndCB1bmRlcnN0YW5kOiBJc24ndCB0aGUgbnVs
-bCBzY2hlZHVsZXIgbm90IG1vdmluZyBhcm91bmQKPiA+ID4gdkNQVS1zIGF0IGFsbD8gQXQgbGVh
-c3QgdGhhdCdzIHdoYXQgdGhlIGNvbW1lbnQgYXQgdGhlIHRvcCBvZiB0aGUKPiA+ID4gZmlsZSBz
-YXlzLCB1bmxlc3MgSSdtIG1pcy1pbnRlcnByZXRpbmcgaXQuIElmIHNvLCBob3cgY2FuICJzb21l
-IENQVQo+ID4gPiAoLi4uKSBwaWNrIHRoaXMgdkNQVSI/Cj4gPiAKPiA+IFRoZXJlJ3Mgbm8gY3Vy
-cmVudCB3YXkgdG8gcHJldmVudCBhIHVzZXIgZnJvbSBhZGRpbmcgbW9yZSB2Y3B1cyB0byBhCj4g
-PiBwb29sIHRoYW4gdGhlcmUgYXJlIHBjcHVzIChpZiBub3RoaW5nIGVsc2UsIGJ5IGNyZWF0aW5n
-IGEgbmV3IFZNIGluIGEKPiA+IGdpdmVuIHBvb2wpLCBvciBmcm9tIHRha2luZyBwY3B1cyBmcm9t
-IGEgcG9vbCBpbiB3aGljaCAjdmNwdXMgPj0KPiA+ICNwY3B1cy4KPiA+IAo+IEV4YWN0bHkuIEFu
-ZCBzb21ldGhpbmcgdGhhdCBjaGVja3MgZm9yIHRoYXQgaXMgYWxsIGJ1dCBlYXN5IHRvCj4gaW50
-cm9kdWNlIChsZXQncyBqdXN0IGF2b2lkIGV2ZW4gbWVudGlvbmluZyBlbmZvcmNpbmchKS4KPiAK
-PiA+IFRoZSBudWxsIHNjaGVkdWxlciBkZWFscyB3aXRoIHRoaXMgYnkgaGF2aW5nIGEgcXVldWUg
-b2YgInVuYXNzaWduZWQiCj4gPiB2Y3B1cyB0aGF0IGFyZSB3YWl0aW5nIGZvciBhIGZyZWUgcGNw
-dS4gIFdoZW4gYSBwY3B1IGJlY29tZXMKPiA+IGF2YWlsYWJsZSwKPiA+IGl0IHdpbGwgZG8gdGhl
-IGFzc2lnbm1lbnQuICBXaGVuIGEgcGNwdSB0aGF0IGhhcyBhIHZjcHUgaXMgYXNzaWduZWQKPiA+
-IGlzCj4gPiByZW1vdmVkIGZyb20gdGhlIHBvb2wsIHRoYXQgdmNwdSBpcyBhc3NpZ25lZCB0byBh
-IGRpZmZlcmVudCBwY3B1IGlmCj4gPiBvbmUKPiA+IGlzIGF2YWlsYWJsZTsgaWYgbm90LCBpdCBp
-cyBwdXQgb24gdGhlIGxpc3QuCj4gPiAKPiBFcnIuLi4geWVzLiBCVFcsIGVpdGhlciB0aGVyZSBh
-cmUgYSBjb3VwbGUgb2YgdHlwb3MgaW4gdGhlIGFib3ZlCj4gcGFyYWdyYXBoLCBvciBpdCdzIG1l
-IHRoYXQgY2FuJ3QgcmVhZCBpdCB3ZWxsLiBBbnl3YXksIGp1c3QgdG8gYmUKPiBjbGVhciwgaWYg
-d2UgaGF2ZSA0IHBDUFVzLCBhbmQgNiBWTXMsIHdpdGggMSB2Q1BVIGVhY2gsIHRoaXMgbWlnaHQg
-YmUKPiB0aGUgc2l0dWF0aW9uOgo+IAo+IENQVTAgPC0tIGQxdjAKPiBDUFUxIDwtLSBkMnYwCj4g
-Q1BVMiA8LS0gZDN2MAo+IENQVTMgPC0tIGQ0djAKPiAKPiBXYWl0cXVldWU6IGQ1djAsZDZ2MAo+
-IAo+IFRoZW4sIGlmIGQyIGxlYXZlcy9kaWVzL2V0YywgbGVhdmluZyBDUFUxIGlkbGUsIGQ1djAg
-aXMgcGlja2VkIHVwIGZyb20KPiB0aGUgd2FpdHF1ZXVlIGFuZCBhc3NpZ25lZCB0byBDUFUxLgoK
-SSB0aGluayB0aGUgYWJvdmUgZXhhbXBsZSBpcyBub3QgcmVwcmVzZW50YXRpdmUgb2Ygd2hhdCBo
-YXBwZW5zIGluc2lkZQpvZiB0aGUgc2hpbSwgc2luY2UgdGhlcmUncyBvbmx5IG9uZSBkb21haW4g
-dGhhdCBydW5zIG9uIHRoZSBzaGltLCBzbwp0aGUgcGljdHVyZSBpcyBzb21ldGhpbmcgbGlrZToK
-CkNQVTAgPC0tIGQxdjAKQ1BVMSA8LS0gZDF2MQoKd2FpdHF1ZXVlOiBkMXYyIChkb3duKSwgZDF2
-MyAoZG93bikKClRoZW4gaWYgdGhlIGd1ZXN0IGJyaW5ncyB1cCBhbm90aGVyIHZDUFUsIGxldCdz
-IGFzc3VtZSBpdCdzIHZDUFUjMwpwQ1BVIzMgd2lsbCBiZSBicmluZyB1cCBmb3JtIHRoZSBzaGlt
-IFBvViwgYW5kIHRoZSBudWxsIHNjaGVkdWxlciB3aWxsCmFzc2lnbiB0aGUgZmlyc3QgdkNQVSBv
-biB0aGUgd2FpdHF1ZXVlOgoKQ1BVMCA8LS0gZDF2MApDUFUxIDwtLSBkMXYxCkNQVTMgPC0tIGQx
-djIgKGRvd24pCk5VTEwgPC0tIGQxdjMgKHVwKQoKSGVuY2UgZDF2MiB3aGljaCBpcyBzdGlsbCBk
-b3duIHdpbGwgZ2V0IGFzc2lnbmVkIHRvIENQVSMzLCBhbmQgZDF2Mwp3aGljaCBpcyB1cCB3b24n
-dCBnZXQgYXNzaWduZWQgdG8gYW55IHBDUFUsIGFuZCBoZW5jZSB3b24ndCBydW4uCgo+ID4gSW4g
-dGhlIGNhc2Ugb2Ygc2hpbSBtb2RlLCB0aGlzIGFsc28gc2VlbXMgdG8gaGFwcGVuIHdoZW5ldmVy
-IGN1cnZjcHVzCj4gPiA8Cj4gPiBtYXh2Y3B1czogVGhlIEwxIGh5cGVydmlzb3IgKHNoaW0pIG9u
-bHkgc2VlcyBjdXJ2Y3B1cyBjcHVzIG9uIHdoaWNoCj4gPiB0bwo+ID4gc2NoZWR1bGUgTDIgdmNw
-dXMsIGJ1dCB0aGUgTDIgZ3Vlc3QgaGFzIG1heHZjcHVzIHZjcHVzIHRvIHNjaGVkdWxlLAo+ID4g
-b2YKPiA+IHdoaWNoIChtYXh2Y3B1cy1jdXJ2Y3B1cykgYXJlICBtYXJrZWQgJ2Rvd24nLiAgCj4g
-Pgo+IE1tbSwgd2FpdC4gSW4gY2FzZSBvZiBhIGRvbWFpbiB3aGljaCBzcGVjaWZpZXMgYm90aCBt
-YXh2Y3B1cyBhbmQKPiBjdXJ2Y3B1cywgaG93IG1hbnkgdkNQVXMgZG9lcyB0aGUgZG9tYWluIGlu
-IHdoaWNoIHRoZSBzaGltIHJ1bj8KClJlZ2FyZGxlc3Mgb2YgdGhlIHZhbHVlcyBvZiBtYXh2Y3B1
-cyBhbmQgY3VydmNwdXMgUFYgZ3Vlc3RzIGFyZSBhbHdheXMKc3RhcnRlZCB3aXRoIG9ubHkgdGhl
-IEJTUCBvbmxpbmUsIGFuZCB0aGVuIHRoZSBndWVzdCBpdHNlbGYgYnJpbmdzIHVwCm90aGVyIHZD
-UFVzLgoKSW4gdGhlIHNoaW0gY2FzZSB2Q1BVIGhvdHBsdWcgaXMgdGllZCB0byBwQ1BVIGhvdHBs
-dWcsIHNvIGV2ZXJ5dGltZQp0aGUgZ3Vlc3QgaG90cGx1Z3Mgb3IgdW5wbHVncyBhIHZDUFUgdGhl
-IHNoaW0gZG9lcyBleGFjdGx5IHRoZSBzYW1lCndpdGggaXQncyBDUFVzLgoKPiA+IEluIHRoaXMg
-Y2FzZSwgaXQgYWxzbwo+ID4gc2VlbXMgdGhhdCB0aGUgbnVsbCBzY2hlZHVsZXIgc29tZXRpbWVz
-IHNjaGVkdWxlcyBhICJkb3duIiB2Y3B1IHdoZW4KPiA+IHRoZXJlIGFyZSAidXAiIHZjcHVzIG9u
-IHRoZSBsaXN0OyBtZWFuaW5nIHRoYXQgdGhlICJ1cCIgdmNwdXMgYXJlCj4gPiBuZXZlcgo+ID4g
-c2NoZWR1bGVkLgo+ID4gCj4gSSdtIG5vdCBzdXJlIGhvdyBhbiBvZmZsaW5lIHZDUFUgY2FuIGVu
-ZCB1cCB0aGVyZS4uLiBidXQgbWF5YmUgSSBuZWVkCj4gdG8gbG9vayBhdCB0aGUgY29kZSBiZXR0
-ZXIsIHdpdGggdGhlIHNoaW0gdXNlIGNhc2UgaW4gbWluZC4KPiAKPiBBbnl3YXksIEknbSBmaW5l
-IHdpdGggY2hlY2tzIHRoYXQgcHJldmVudCBvZmZsaW5lIHZDUFVzIHRvIGJlIGFzc2lnbmVkCj4g
-dG8gZWl0aGVyIHBDUFVzIChsaWtlLCB0aGUgQ1BVcyBvZiBMMCBYZW4pIG9yIHNoaW0ncyB2Q1BV
-cyAoc28sIHRoZQo+IENQVXMgb2YgTDEgWGVuKS4gSSdtIGxlc3MgZmluZSB3aXRoIHJlc2NoZWR1
-bGluZyBldmVyeW9uZSBhdCBldmVyeQo+IHdha2V1cC4KClNvIHVzaW5nIHRoZSBzY2VuYXJpbyBm
-cm9tIGJlZm9yZToKCkNQVTAgPC0tIGQxdjAKQ1BVMSA8LS0gZDF2MQoKd2FpdHF1ZXVlOiBkMXYy
-IChkb3duKSwgZDF2MyAoZG93bikKCkd1ZXN0IGRlY2lkZWQgdG8gaG90cGx1ZyB2Q1BVIzIsIGFu
-ZCBoZW5jZSB0aGUgc2hpbSBmaXJzdCBob3RwbHVncwpDUFUjMiwgYnV0IGF0IHRoZSBwb2ludCBD
-UFUyIGlzIGFkZGVkIHRvIHRoZSBwb29sIG9mIENQVXMgdkNQVTIgaXMKc3RpbGwgbm90IHVwLCBo
-ZW5jZSB3ZSBnZXQgdGhlIGZvbGxvd2luZzoKCkNQVTAgPC0tIGQxdjAKQ1BVMSA8LS0gZDF2MQpD
-UFUyIDwtLSBOVUxMCgoKd2FpdHF1ZXVlOiBkMXYyIChkb3duKSwgZDF2MyAoZG93bikKClRoZW4g
-ZDF2MiBpcyBicm91Z2h0IHVwLCBidXQgc2luY2UgdGhlIG51bGwgc2NoZWR1bGVyIGRvZXNuJ3Qg
-cmVhY3QgdG8Kd2FrZXVwIHRoZSBwaWN0dXJlIHN0YXlzIHRoZSBzYW1lOgoKQ1BVMCA8LS0gZDF2
-MApDUFUxIDwtLSBkMXYxCkNQVTIgPC0tIE5VTEwKCgp3YWl0cXVldWU6IGQxdjIgKHVwKSwgZDF2
-MyAoZG93bikKCkFuZCBkMXYyIGRvZXNuJ3QgZ2V0IHNjaGVkdWxlZC4KCkhvcGUgdGhpcyBtYWtl
-cyBzZW5zZSA6KQoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+
+--===============5290123361500773920==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-2bfctn7lfUaf4gYP4LBV"
+
+
+--=-2bfctn7lfUaf4gYP4LBV
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2018-01-11 at 16:34 +0000, Andrew Cooper wrote:
+> Just as with test_bit, the non-atomic set/clear/change helpers can be
+> better
+> optimised by the compiler in the case that the nr parameter is
+> constant, and
+> it often is.
+>=20
+> This results in a general replacement of `mov $imm, %reg; bt* %reg,
+> mem` with
+> the more simple `op $imm, mem`, reducing register pressure.
+>=20
+> The net diffstat is:
+>   add/remove: 0/1 grow/shrink: 5/17 up/down: 90/-301 (-211)
+>=20
+> As a piece of minor cleanup, drop unnecessary brackets in the
+> test_bit()
+> macro, and fix the indentation.
+>=20
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>
+FWIW,
+
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-2bfctn7lfUaf4gYP4LBV
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlpYlPIACgkQFkJ4iaW4
+c+6NNhAA6J+/aCQ0G5SnO3qGWrEZvK2dBtOQGgbTGUXWuTrIV5wRViVlgFuu50Xm
+VSVKfN0KsnfkIE87FOZKzJSoihZR/PjPx0MvVlSLe7xsklEEeiO8LkwOR/c+atlV
+aIbyup7gc5i5tFk2qk+SyXNKr2PqZI4H0U+orWXhNb0+FmtPpxxL3ynOyZefhGuA
+YA7sQ4SKHlHnd/cMRGfhVLCamhNKMhlNX1B6tN8DpBsw3LTa4rIzIZiRI8Vxh0KP
+8yBK7UELy08kE4XeZS226K1Z/GNgoRWu96Laj/t5XNA4B7pW+XXbm0sx3TCe4f5M
+PNq8ZyUkIMK7bMFKFXI84Z1iheo2hsI37TC6nFyaXvUWWmgMRnoPnoFWSI4TODNc
+3APvOjzs56OaxjJ10md/R58DobVu+Tzsmq7zebOqCKUoujMMs/tdEH6OSu/7b/7u
+EerRBLAb5eeEMwasnHxUKAJTHfYQnca7q6NIOOlPzYqDsqIXkfG5jsRDAg4kQ+dH
+83EowtSK0fO6JvQfjIteNdSVAq2IU0kpzLxlIByRzBv+1gnUo1rXVq4DNBnqCxK2
+HcaQVDwbWK6fPMgIUePbxITyGu9PYN65h4qGZS9Qxj5tRmFua2LT4vQaaS92EA5b
+xTelPaHd3kuUyruzNhq7q2yTyDe8KVc/qUIeLjXCLkmPdiipx+8=
+=kYzd
+-----END PGP SIGNATURE-----
+
+--=-2bfctn7lfUaf4gYP4LBV--
+
+
+
+--===============5290123361500773920==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5290123361500773920==--
