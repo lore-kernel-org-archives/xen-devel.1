@@ -1,12 +1,23 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [qemu-upstream-4.10-testing test] 117803: trouble:
-	blocked/broken/fail/pass
-Date: Fri, 12 Jan 2018 11:13:07 +0000
-Message-ID: <osstest-117803-mainreport@xen.org>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH RFC v1 42/74] sched/null: skip vCPUs on the
+ waitqueue that are blocked
+Date: Fri, 12 Jan 2018 12:16:47 +0100
+Message-ID: <1515755807.30117.139.camel@suse.com>
+References: <20180104130625.28605-1-wei.liu2@citrix.com>
+ <20180104130625.28605-43-wei.liu2@citrix.com>
+ <5A535803020000780019C0D5@prv-mh.provo.novell.com>
+ <ff97179c-1303-5668-4623-c3b4eec006e4@citrix.com>
+ <1515750843.30117.96.camel@suse.com>
+ <20180112104549.7n45ufiv7my7wwv6@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4377287721997195662=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=to5s=eh=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1eZxKv-0005vS-0u
+ for xen-devel@lists.xenproject.org; Fri, 12 Jan 2018 11:17:25 +0000
+In-Reply-To: <20180112104549.7n45ufiv7my7wwv6@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,197 +26,190 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Xen-devel <xen-devel@lists.xenproject.org>, wei.liu2@citrix.com, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDExNzgwMyBxZW11LXVwc3RyZWFtLTQuMTAtdGVzdGluZyByZWFsIFtyZWFsXQpodHRw
-Oi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTE3ODAzLwoKRmFp
-bHVyZXMgYW5kIHByb2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1
-Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBi
-ZSBydW46CiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAg
-ICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICA0IGhvc3Qt
-aW5zdGFsbCg0KSAgICAgICAgYnJva2VuIFJFR1IuIHZzLiAxMTczNDUKClRlc3RzIHdoaWNoIGRp
-ZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFybWhmLWFybWhmLXhs
-LWFybmRhbGUgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0
-ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAg
-ICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3ICAxIGJ1aWxkLWNo
-ZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhmLXhsLWN1
-YmlldHJ1Y2sgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRl
-c3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAg
-ICBibG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgIDEgYnVpbGQtY2hl
-Y2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVs
-dGl2Y3B1ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0
-LWFybWhmLWFybWhmLXhsLXhzbSAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAg
-YmxvY2tlZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNtICAxIGJ1aWxkLWNoZWNr
-KDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRp
-dDIgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFy
-bWhmLWFybWhmLXhsLXJ0ZHMgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxv
-Y2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWludGVsIDEyIGd1ZXN0LXN0YXJ0
-ICAgICAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmly
-dCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwog
-dGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAg
-ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgIDEzIG1p
-Z3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
-aTM4Ni1saWJ2aXJ0LXhzbSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAg
-bmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAxMyBtaWdyYXRlLXN1cHBv
-cnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsICAg
-ICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MK
-IHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAg
-ICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAxNCBz
-YXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0
-LWFybTY0LXhsLWNyZWRpdDIgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAg
-IG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwtY3JlZGl0MiAgMTQgc2F2ZXJlc3RvcmUt
-c3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2
-aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNz
-CiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hl
-Y2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItYW1kIDEy
-IGd1ZXN0LXN0YXJ0ICAgICAgICAgICAgICAgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2
-NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBw
-b3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBw
-YXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1hbWQgMTcgZGViaWFuLWh2bS1pbnN0
-YWxsL2wxL2wyICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQg
-MTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAg
-ZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBn
-dWVzdC1zdG9wICAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQt
-eGwtcWVtdXUtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbmV2ZXIg
-cGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAg
-ICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdp
-bjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3Qt
-YW1kNjQtaTM4Ni14bC1xZW11dS13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAg
-IGZhaWwgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHFlbXV1ICAg
-ICAgICAgICAgICAgIGJiMDE5ZmIyY2JiZTIzZTI0MTllMDdiZjM0N2Y0NTQxNTM2MDY3N2QKYmFz
-ZWxpbmUgdmVyc2lvbjoKIHFlbXV1ICAgICAgICAgICAgICAgIGE0MTY2YTBhNTBkZGE5NjdmMzBj
-OWQ4NWZhOGFhMmVhMjUzOTc5OGUKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDExNzM0NSAgMjAxNy0x
-Mi0xOSAxODo0ODo1MCBaICAgMjMgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMTc3MzAgIDIw
-MTgtMDEtMDggMTc6MTQ6MjIgWiAgICAzIGRheXMgICAgMyBhdHRlbXB0cwoKLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3
-aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbGV4IFdpbGxpYW1zb24gPGFsZXgu
-d2lsbGlhbXNvbkByZWRoYXQuY29tPgogIEFsZXhleSBLYXJkYXNoZXZza2l5IDxhaWtAb3psYWJz
-LnJ1PgogIEFudGhvbnkgUEVSQVJEIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPgogIERhbmll
-bCBIZW5yaXF1ZSBCYXJib3phIDxkYW5pZWxoYkBsaW51eC52bmV0LmlibS5jb20+CiAgRGFuaWVs
-IFAuIEJlcnJhbmdlIDxiZXJyYW5nZUByZWRoYXQuY29tPgogIERhdmlkIEdpYnNvbiA8ZGF2aWRA
-Z2lic29uLmRyb3BiZWFyLmlkLmF1PgogIEVyaWMgQXVnZXIgPGVyaWMuYXVnZXJAcmVkaGF0LmNv
-bT4KICBFcmljIEJsYWtlIDxlYmxha2VAcmVkaGF0LmNvbT4KICBHZXJkIEhvZmZtYW5uIDxrcmF4
-ZWxAcmVkaGF0LmNvbT4KICBHcmVnIEt1cnogPGdyb3VnQGthb2Qub3JnPgogIEphc29uIFdhbmcg
-PGphc293YW5nQHJlZGhhdC5jb20+CiAgSmVucyBGcmVpbWFubiA8amZyZWltYW5uQHJlZGhhdC5j
-b20+CiAgSmltIFNvbWVydmlsbGUgPEppbS5Tb21lcnZpbGxlQHdpbmRyaXZlci5jb20+CiAgS2V2
-aW4gV29sZiA8a3dvbGZAcmVkaGF0LmNvbT4KICBMYXVyZW50IFZpdmllciA8bHZpdmllckByZWRo
-YXQuY29tPgogIE1heCBSZWl0eiA8bXJlaXR6QHJlZGhhdC5jb20+CiAgTWF4aW1lIENvcXVlbGlu
-IDxtYXhpbWUuY29xdWVsaW5AcmVkaGF0LmNvbT4KICBNaWNoYWVsIE9sYnJpY2ggPG0ub2xicmlj
-aEBwZW5ndXRyb25peC5kZT4KICBNaWNoYWVsIFJvdGggPG1kcm90aEBsaW51eC52bmV0LmlibS5j
-b20+CiAgTWljaGFlbCBTLiBUc2lya2luIDxtc3RAcmVkaGF0LmNvbT4KICBQYW9sbyBCb256aW5p
-IDxwYm9uemluaUByZWRoYXQuY29tPgogIFBldGVyIExpZXZlbiA8cGxAa2FtcC5kZT4KICBQZXRl
-ciBNYXlkZWxsIDxwZXRlci5tYXlkZWxsQGxpbmFyby5vcmc+CiAgUGV0ZXIgWHUgPHBldGVyeEBy
-ZWRoYXQuY29tPgogIFN1cmFqIEppdGluZGFyIFNpbmdoIDxzaml0aW5kYXJzaW5naEBnbWFpbC5j
-b20+CiAgVGhvbWFzIEh1dGggPHRodXRoQHJlZGhhdC5jb20+CiAgVmxhZGltaXIgU2VtZW50c292
-LU9naWV2c2tpeSA8dnNlbWVudHNvdkB2aXJ0dW96em8uY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0
-LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi14c20gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1hcm02NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1s
-aWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IGJ1aWxkLWFybTY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2
-b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtYXJtNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFybTY0LWFybTY0LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LXhsICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNt
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFu
-aHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-bGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhzbSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXhzbSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFl
-bXV1LW5lc3RlZC1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtcHZodjItYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2
-bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1pMzg2LWZyZWVic2QxMC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
-ZW11dS13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFp
-bCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAg
-ICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFy
-bmRhbGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3Vi
-aWV0cnVjayAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2
-NC1pMzg2LWZyZWVic2QxMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW4xMC1pMzg2ICAg
-ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1u
-ZXN0ZWQtaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LXhsLXB2aHYyLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAg
-ICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQt
-aTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQtcGFpciAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1wdmdy
-dWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LWkzODYtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQtcHlncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xY293MiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4
-Ni14bC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1ydGRzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1o
-Zi14bC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCgoK
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwps
-b2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29u
-ZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFi
-LnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0
-cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhl
-bi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0
-ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9Ymxv
-YjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAog
-ICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkK
-CmJyb2tlbi1qb2IgYnVpbGQtYXJtaGYtcHZvcHMgYnJva2VuCmJyb2tlbi1zdGVwIGJ1aWxkLWFy
-bWhmLXB2b3BzIGhvc3QtaW5zdGFsbCg0KQoKTm90IHB1c2hpbmcuCgooTm8gcmV2aXNpb24gbG9n
-OyBpdCB3b3VsZCBiZSAxNTUyIGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4377287721997195662==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-zr9ZmWL8p7jWcqZbBGp1"
+
+
+--=-zr9ZmWL8p7jWcqZbBGp1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-01-12 at 10:45 +0000, Roger Pau Monn=C3=A9 wrote:
+> On Fri, Jan 12, 2018 at 10:54:03AM +0100, Dario Faggioli wrote:
+>
+> > Err... yes. BTW, either there are a couple of typos in the above
+> > paragraph, or it's me that can't read it well. Anyway, just to be
+> > clear, if we have 4 pCPUs, and 6 VMs, with 1 vCPU each, this might
+> > be
+> > the situation:
+> >=20
+> > CPU0 <-- d1v0
+> > CPU1 <-- d2v0
+> > CPU2 <-- d3v0
+> > CPU3 <-- d4v0
+> >=20
+> > Waitqueue: d5v0,d6v0
+> >=20
+> > Then, if d2 leaves/dies/etc, leaving CPU1 idle, d5v0 is picked up
+> > from
+> > the waitqueue and assigned to CPU1.
+>=20
+> I think the above example is not representative of what happens
+> inside
+> of the shim,=20
+>
+Indeed it's not. I was just trying to clarify, via an example, George's
+explanation of how null works in general.
+
+> since there's only one domain that runs on the shim, so
+> the picture is something like:
+>=20
+> CPU0 <-- d1v0
+> CPU1 <-- d1v1
+>=20
+> waitqueue: d1v2 (down), d1v3 (down)
+>=20
+Right. So, how about we change this in such a way that d1v2 and d1v3,
+since they're offline, won't end up in the waitqueue?
+
+> Then if the guest brings up another vCPU, let's assume it's vCPU#3
+> pCPU#3 will be bring up form the shim PoV, and the null scheduler
+> will
+> assign the first vCPU on the waitqueue:
+>=20
+> CPU0 <-- d1v0
+> CPU1 <-- d1v1
+> CPU3 <-- d1v2 (down)
+> NULL <-- d1v3 (up)
+>=20
+> Hence d1v2 which is still down will get assigned to CPU#3, and d1v3
+> which is up won't get assigned to any pCPU, and hence won't run.
+>=20
+Exactly. While, if d1v2 and d1v3 were not in the waitqueue, while
+offline, at all, whould would (should) happen is:
+
+- CPU3 comes online ("in" the shim)
+- CPU3 stays idle, as there's nothing in the waitqueue
+- d1v3 comes online and is added to the shim's null scheduler
+- as CPU3 does not have any vCPU assigned, d1v3 is assigned to it
+
+> > Mmm, wait. In case of a domain which specifies both maxvcpus and
+> > curvcpus, how many vCPUs does the domain in which the shim run?
+>=20
+> Regardless of the values of maxvcpus and curvcpus PV guests are
+> always
+> started with only the BSP online, and then the guest itself brings up
+> other vCPUs.
+>=20
+> In the shim case vCPU hotplug is tied to pCPU hotplug, so everytime
+> the guest hotplugs or unplugs a vCPU the shim does exactly the same
+> with it's CPUs.
+>=20
+Sure, what I was asking was much rather this: if the guest config file
+has "maxvcpus=3D4;vcpus=3D1", at the end of domain creation, and before any
+`xl vcpu-set' or anything that would bring online other guest vCPU,
+what's the output of `vl vcpu-list'. :-)
+
+Anyway, I think you've answered to this below.
+
+> > I'm not sure how an offline vCPU can end up there... but maybe I
+> > need
+> > to look at the code better, with the shim use case in mind.
+> >=20
+> > Anyway, I'm fine with checks that prevent offline vCPUs to be
+> > assigned
+> > to either pCPUs (like, the CPUs of L0 Xen) or shim's vCPUs (so, the
+> > CPUs of L1 Xen). I'm less fine with rescheduling everyone at every
+> > wakeup.
+>=20
+> So using the scenario from before:
+>=20
+> CPU0 <-- d1v0
+> CPU1 <-- d1v1
+>=20
+> waitqueue: d1v2 (down), d1v3 (down)
+>=20
+> Guest decided to hotplug vCPU#2, and hence the shim first hotplugs
+> CPU#2, but at the point CPU2 is added to the pool of CPUs vCPU2 is
+> still not up, hence we get the following:
+>=20
+> CPU0 <-- d1v0
+> CPU1 <-- d1v1
+> CPU2 <-- NULL
+>=20
+> waitqueue: d1v2 (down), d1v3 (down)
+>=20
+> Then d1v2 is brought up, but since the null scheduler doesn't react
+> to
+> wakeup the picture stays the same:
+>=20
+> CPU0 <-- d1v0
+> CPU1 <-- d1v1
+> CPU2 <-- NULL
+>=20
+> waitqueue: d1v2 (up), d1v3 (down)
+>=20
+> And d1v2 doesn't get scheduled.
+>=20
+> Hope this makes sense :)
+>=20
+Yeah, and I see that it works.
+
+What I'm saying is that I'd prefer, instead than having the null
+scheduler reacting to wakeups of vCPUs in the waitqueue, to avoid
+having the offline vCPUs in the waitqueue all together.
+
+At which point, when d1v2 hotplug happens, there has to be a
+null_vcpu_insert() (or something equivalent), to which the null
+scheduler should react already.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-zr9ZmWL8p7jWcqZbBGp1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlpYmR8ACgkQFkJ4iaW4
+c+5wEw/9GUyKnuoxD8XocundGF/q+kOa0RiGSerrNfEyULNxUbtXBeYFggApdxpp
+j/hAMHcyvzUiZn3RnjySHOxymLC0x0BlB+9N40fE8IL9m+GmQ7ipXkw7XZ4KSWPT
+o/7qTmoymA90MkkdvORnFc3bW/HLXZyTJ4KDRfKgdUFWNCzfpwBIGy4S0QUs+tbo
+RV4SkLF8NM4s5IsZw+wKHo3KhxyOOblFSDVr/ClpR/akZ40GmsvYaMFq2AM/iYJY
+slXEEtmEQJ8vYqIHqaklG+dXyfDhnEOKDdizcnwW77D9YrDEcdNzB2gDYnolOb65
+KO5h2rHRV94Efydpkv/dUaFGFKVeq63toPUGBH0Uf1P7sDUzLqVGTO7sbFERofqn
+kV3tixcFm429gXkm/fvdBUm+wl2OUX9KxuK8Ia/se503kC9rFendT1xBGQs2x+6j
+DF07LxFZAG4PM7oXTpLCejTWfDY18d575tyGxIT0u1JNE4UcaIMw/+Bebl7MPeMp
+tH9393D4PBxA3TCrZvj6V+eha8yK+Gw545rt3pIF2dT1sNTqYfKgPWVZxkMHgVOk
+3daPRTF5h1Eg+70P7XyMB0ofpqbixhydGLcUrUKYAuyodgPtVlvXAohWOqSkLPxy
+3iurPYrzB5T/QxF7kZUaw8Fpq7ju4UR6/uUE6bsCwBNJTYb2yOA=
+=GfZh
+-----END PGP SIGNATURE-----
+
+--=-zr9ZmWL8p7jWcqZbBGp1--
+
+
+
+--===============4377287721997195662==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4377287721997195662==--
