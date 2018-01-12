@@ -1,13 +1,12 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] x86/bitops: Introduce variable/constant
- pairs for __{set, clear, change}_bit()
-Date: Fri, 12 Jan 2018 11:58:58 +0100
-Message-ID: <1515754738.30117.126.camel@suse.com>
-References: <1515688450-27444-1-git-send-email-andrew.cooper3@citrix.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [distros-debian-jessie test] 74300: trouble:
+	blocked/broken
+Date: Fri, 12 Jan 2018 11:06:39 +0000
+Message-ID: <osstest-74300-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5290123361500773920=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1515688450-27444-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,85 +15,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Jan Beulich <JBeulich@suse.com>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5290123361500773920==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-2bfctn7lfUaf4gYP4LBV"
-
-
---=-2bfctn7lfUaf4gYP4LBV
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2018-01-11 at 16:34 +0000, Andrew Cooper wrote:
-> Just as with test_bit, the non-atomic set/clear/change helpers can be
-> better
-> optimised by the compiler in the case that the nr parameter is
-> constant, and
-> it often is.
->=20
-> This results in a general replacement of `mov $imm, %reg; bt* %reg,
-> mem` with
-> the more simple `op $imm, mem`, reducing register pressure.
->=20
-> The net diffstat is:
->   add/remove: 0/1 grow/shrink: 5/17 up/down: 90/-301 (-211)
->=20
-> As a piece of minor cleanup, drop unnecessary brackets in the
-> test_bit()
-> macro, and fix the indentation.
->=20
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->
-FWIW,
-
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-2bfctn7lfUaf4gYP4LBV
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlpYlPIACgkQFkJ4iaW4
-c+6NNhAA6J+/aCQ0G5SnO3qGWrEZvK2dBtOQGgbTGUXWuTrIV5wRViVlgFuu50Xm
-VSVKfN0KsnfkIE87FOZKzJSoihZR/PjPx0MvVlSLe7xsklEEeiO8LkwOR/c+atlV
-aIbyup7gc5i5tFk2qk+SyXNKr2PqZI4H0U+orWXhNb0+FmtPpxxL3ynOyZefhGuA
-YA7sQ4SKHlHnd/cMRGfhVLCamhNKMhlNX1B6tN8DpBsw3LTa4rIzIZiRI8Vxh0KP
-8yBK7UELy08kE4XeZS226K1Z/GNgoRWu96Laj/t5XNA4B7pW+XXbm0sx3TCe4f5M
-PNq8ZyUkIMK7bMFKFXI84Z1iheo2hsI37TC6nFyaXvUWWmgMRnoPnoFWSI4TODNc
-3APvOjzs56OaxjJ10md/R58DobVu+Tzsmq7zebOqCKUoujMMs/tdEH6OSu/7b/7u
-EerRBLAb5eeEMwasnHxUKAJTHfYQnca7q6NIOOlPzYqDsqIXkfG5jsRDAg4kQ+dH
-83EowtSK0fO6JvQfjIteNdSVAq2IU0kpzLxlIByRzBv+1gnUo1rXVq4DNBnqCxK2
-HcaQVDwbWK6fPMgIUePbxITyGu9PYN65h4qGZS9Qxj5tRmFua2LT4vQaaS92EA5b
-xTelPaHd3kuUyruzNhq7q2yTyDe8KVc/qUIeLjXCLkmPdiipx+8=
-=kYzd
------END PGP SIGNATURE-----
-
---=-2bfctn7lfUaf4gYP4LBV--
-
-
-
---===============5290123361500773920==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5290123361500773920==--
+ZmxpZ2h0IDc0MzAwIGRpc3Ryb3MtZGViaWFuLWplc3NpZSByZWFsIFtyZWFsXQpodHRwOi8vb3Nz
+dGVzdC54cy5jaXRyaXRlLm5ldC9+b3NzdGVzdC90ZXN0bG9ncy9sb2dzLzc0MzAwLwoKRmFpbHVy
+ZXMgYW5kIHByb2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2Nl
+ZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBy
+dW46CiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAg
+ICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3Rh
+dHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAg
+ICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hcm1oZiAgICAg
+ICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWls
+ZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAg
+YnJva2VuCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAg
+ICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAzIHN5c2xv
+Zy1zZXJ2ZXIgICAgICAgICAgICAgICAgcnVubmluZwogYnVpbGQtYXJtaGYgICAgICAgICAgICAg
+ICAgICAgMyBzeXNsb2ctc2VydmVyICAgICAgICAgICAgICAgIHJ1bm5pbmcKClRlc3RzIHdoaWNo
+IGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWkzODYt
+aTM4Ni1qZXNzaWUtbmV0Ym9vdC1wdmdydWIgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgYmxvY2tl
+ZCBuL2EKIHRlc3QtYW1kNjQtaTM4Ni1hbWQ2NC1qZXNzaWUtbmV0Ym9vdC1weWdydWIgIDEgYnVp
+bGQtY2hlY2soMSkgICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LWplc3Np
+ZS1uZXRib290LXB5Z3J1YiAgMSBidWlsZC1jaGVjaygxKSAgICAgIGJsb2NrZWQgbi9hCiB0ZXN0
+LWFybWhmLWFybWhmLWFybWhmLWplc3NpZS1uZXRib290LXB5Z3J1YiAgMSBidWlsZC1jaGVjaygx
+KSAgICAgYmxvY2tlZCBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtamVzc2llLW5ldGJvb3Qt
+cHZncnViICAxIGJ1aWxkLWNoZWNrKDEpICAgICBibG9ja2VkIG4vYQogYnVpbGQtYXJtaGYtcHZv
+cHMgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgICAgICAgIGJyb2tlbiBsaWtl
+IDczOTMyCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAg
+ICAgICAgICAgICAgYnJva2VuIGxpa2UgNzM5MzIKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAg
+ICAgIDUgY2FwdHVyZS1sb2dzICAgICAgICAgICAgICAgICBicm9rZW4gbGlrZSA3MzkzMgogYnVp
+bGQtYXJtaGYgICAgICAgICAgICAgICAgICAgNSBjYXB0dXJlLWxvZ3MgICAgICAgICAgICAgICAg
+IGJyb2tlbiBsaWtlIDczOTMyCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICA0IGhvc3Qt
+aW5zdGFsbCg0KSAgICAgICAgICAgICAgYnJva2VuIGxpa2UgNzM5MzIKIGJ1aWxkLWFtZDY0ICAg
+ICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgICAgICBicm9rZW4gbGlr
+ZSA3MzkzMgogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkg
+ICAgICAgICAgICAgIGJyb2tlbiBsaWtlIDczOTMyCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAg
+ICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgICAgICAgYnJva2VuIGxpa2UgNzM5MzIKCmJh
+c2VsaW5lIHZlcnNpb246CiBmbGlnaHQgICAgICAgICAgICAgICA3MzkzMgoKam9iczoKIGJ1aWxk
+LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBi
+cm9rZW4gIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQt
+YXJtaGYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJy
+b2tlbiAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgYnJva2VuICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtamVzc2llLW5ldGJv
+b3QtcHZncnViICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LWkzODYt
+amVzc2llLW5ldGJvb3QtcHZncnViICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFt
+ZDY0LWkzODYtYW1kNjQtamVzc2llLW5ldGJvb3QtcHlncnViICAgICAgICAgICAgICAgICAgYmxv
+Y2tlZCAKIHRlc3QtYXJtaGYtYXJtaGYtYXJtaGYtamVzc2llLW5ldGJvb3QtcHlncnViICAgICAg
+ICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LWplc3NpZS1uZXRib290
+LXB5Z3J1YiAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQg
+b24gb3NzdGVzdC54cy5jaXRyaXRlLm5ldApsb2dzOiAvaG9tZS9vc3N0ZXN0L2xvZ3MKaW1hZ2Vz
+OiAvaG9tZS9vc3N0ZXN0L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFp
+bGFibGUgYXQKICAgIGh0dHA6Ly9vc3N0ZXN0LnhzLmNpdHJpdGUubmV0L35vc3N0ZXN0L3Rlc3Rs
+b2dzL2xvZ3MKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hl
+bmJpdHMueGVuc291cmNlLmNvbS9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNo
+IG5vdCBhcHBsaWNhYmxlLgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
