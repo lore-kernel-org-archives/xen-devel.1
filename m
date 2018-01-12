@@ -1,20 +1,17 @@
-From: Wei Liu <wei.liu2@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: Rudolph: merging Vixen and Comet
-Date: Fri, 12 Jan 2018 14:12:17 +0000
-Message-ID: <20180112141217.ff4f7m7lv2zebx7d@citrix.com>
+Date: Fri, 12 Jan 2018 15:17:04 +0100
+Message-ID: <20180112141704.GC16260@aepfle.de>
 References: <20180112132409.4d4fn6mbprgm7vhg@citrix.com>
- <5A58CCC5020000780019E331@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6964772002263003869=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=clhg=eh=citrix.com=prvs=54360ad83=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1ea04H-0000wH-HO
- for xen-devel@lists.xenproject.org; Fri, 12 Jan 2018 14:12:25 +0000
-Content-Disposition: inline
-In-Reply-To: <5A58CCC5020000780019E331@prv-mh.provo.novell.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=9va+=eh=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1ea0A0-0001Sd-HF
+ for xen-devel@lists.xenproject.org; Fri, 12 Jan 2018 14:18:20 +0000
+In-Reply-To: <20180112132409.4d4fn6mbprgm7vhg@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,37 +20,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: wei.liu2@citrix.com, Anthony Liguori <aliguori@amazon.com>, KarimAllah Ahmed <karahmed@amazon.de>, jschoenh@amazon.de, Matt Wilson <msw@amazon.com>, Xen-devel <xen-devel@lists.xenproject.org>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Matt Wilson <msw@amazon.com>, KarimAllah Ahmed <karahmed@amazon.de>, jschoenh@amazon.de, Anthony Liguori <aliguori@amazon.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>, Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBKYW4gMTIsIDIwMTggYXQgMDY6NTc6MDlBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gPj4+IE9uIDEyLjAxLjE4IGF0IDE0OjI0LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gPiBIZXJlIEkgbGlzdCB0aGUgZGlmZmVyZW5jZXMgYmV0d2VlbiB0aGUgdHdvIGltcGxl
-bWVudGF0aW9ucy4KPiAKPiBUaGFua3MgZm9yIHRoZSBzdW1tYXJ5Lgo+IAo+ID4gICAgICAgICAg
-ICAgICAgICAgICAgIFZpeGVuICAgICAgICAgICAgICAgICAgICAgICAgICBDb21ldAo+ID4gQm9v
-dCBtb2RlICAgICAgICAgICAgIEhWTSAgICAgICAgICAgICAgICAgICAgICAgICAgICBQVkggKyBI
-Vk0KPiA+IEtjb25maWcgb3B0aW9ucyAgICAgICBYRU5fR1VFU1QgICAgICAgICAgICAgICAgICAg
-ICAgWEVOX0dVRVNUICsgUFZIX0dVRVNUICsgU0hJTV9FWENMVVNJVkUKPiA+IFhlbiBidWlsZCBz
-eXN0ZW0gICAgICBObyBjaGFuZ2UgICAgICAgICAgICAgICAgICAgICAgTmV3IGJ1aWxkIHRhcmdl
-dCBmb3Igc2hpbSAKPiA+IEd1ZXN0IGNvbnNvbGUgICAgICAgICBPdXRwdXQgb25seSAgICAgICAg
-ICAgICAgICAgICAgQmktZGlyZWN0aW9uYWwKPiA+IEd1ZXN0IGRvbWlkICAgICAgICAgICAxIG9y
-IHNldCB2aWEgc2hpbSBvcHRpb24gICAgICAgMSBvciByZXRyaWV2ZWQgdmlhIGNwdWlkCj4gPiBH
-dWVzdCB0eXBlICAgICAgICAgICAgSGFyZHdhcmUgZG9tYWluICAgICAgICAgICAgICAgIE5vcm1h
-bCBkb21haW4KPiA+IFRpbWUgc291cmNlICAgICAgICAgICBFbXVsYXRlZCAgICAgICAgICAgICAg
-ICAgICAgICAgWGVuIFBWIGNsb2NrCj4gPiBTaHV0ZG93biAgICAgICAgICAgICAgUFYgKyBIVyAg
-ICAgICAgICAgICAgICAgICAgICAgIFBWCj4gPiBTSSBtYXBwaW5nICAgICAgICAgICAgUmVzZXJ2
-ZWQgcGFnZSAgICAgICAgICAgICAgICAgIEZpeGVkIG1hcCwgUEZOIGNob3NlbiBhdCBydW50aW1l
-Cj4gPiBWQ1BVIGlkICAgICAgICAgICAgICAgSGFuZGxlZCBieSBMMSAgICAgICAgICAgICAgICAg
-IFByb3ZpZGUgYnkgTDAgaWYgYXZhaWxhYmxlCj4gPiBWQ1BVIHJ1bnN0YXRlICAgICAgICAgRm9y
-d2FyZGVkIHRvIEwwICAgICAgICAgICAgICAgIEhhbmRsZWQgYnkgTDEKPiAKPiBJcyB0aGVyZSBh
-bnl0aGluZyBrbm93biBhcyB0byB3aGljaCBvZiB0aGUgdHdvIG1pZ2h0IGJlIGJldHRlciwKPiBv
-ciB3aGV0aGVyIHBlcmhhcHMgdGhlIGJlc3QgY2hvaWNlIGRlcGVuZHMgb24gb3RoZXIKPiBjaXJj
-dW1zdGFuY2VzPwoKSGF2aW5nIHRoZSBydW5zdGF0ZSBtYXBwZWQgaW50byBMMCBjYW4gbGV0IHRo
-ZSBMMiBndWVzdCBoYXZlIGFjY3VyYXRlCnN0b2xlbiB0aW1lIGFjY291bnRpbmcuIEkgY2FuIHNl
-ZSBpdCBpcyB1c2VmdWwgaW4gYSBjbG91ZCBlbnZpcm9ubWVudApidXQgbm90IGFzIGltcG9ydGFu
-dCBpbiBhIHNlcnZlciB2aXJ0dWFsaXNhdGlvbiBlbnZpcm9ubWVudC4KCkkgdGhpbmsgaGF2aW5n
-IHRoZSBydW5zdGF0ZSBmb3J3YXJkZWQgYnkgZGVmYXVsdCB3b3VsZCBiZSBiZXR0ZXIuCgpXZWku
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============6964772002263003869==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="H8ygTp4AXg6deix2"
+Content-Disposition: inline
+
+
+--H8ygTp4AXg6deix2
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Fri, Jan 12, Wei Liu wrote:
+
+>                       Vixen                          Comet
+> Guest console         Output only                    Bi-directional
+
+With the proper patch input works for Vixen. Unless this item mean
+something else.
+
+Olaf
+
+--H8ygTp4AXg6deix2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWljDXQAKCRBdQqD6ppg2
+flnRAJ9z/nKC50aar0KgH7dN+4s86JnaDgCgoHPwqv/mKSW5kNaCkFdf9Ctv9MI=
+=2Fhm
+-----END PGP SIGNATURE-----
+
+--H8ygTp4AXg6deix2--
+
+
+--===============6964772002263003869==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6964772002263003869==--
