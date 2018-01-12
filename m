@@ -1,10 +1,17 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: vixen and vfb, missing vfb support in qemu
-Date: Fri, 12 Jan 2018 14:02:21 +0100
-Message-ID: <20180112130221.GA16260@aepfle.de>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] xen/efi: Avoid EFI stub using absolute
+	symbols
+Date: Fri, 12 Jan 2018 06:13:35 -0700
+Message-ID: <5A58C28F020000780019E2E2@prv-mh.provo.novell.com>
+References: <20171221145521.29526-1-julien.grall@linaro.org>
+ <5A4BC2F4020000780019A3B8@prv-mh.provo.novell.com>
+ <02a421a8-ef6c-c7c7-a4ea-e12eabc8662d@linaro.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0877454372555420982=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <02a421a8-ef6c-c7c7-a4ea-e12eabc8662d@linaro.org>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,53 +20,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Julien Grall <julien.grall@linaro.org>
+Cc: tim@xen.org, sstabellini@kernel.org, wei.liu2@citrix.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, andre.przywara@linaro.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0877454372555420982==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="6c2NcOVqGQ03X4Wi"
-Content-Disposition: inline
-
-
---6c2NcOVqGQ03X4Wi
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-It seems the list of missing features of vixen does not cover the lack
-of framebuffer support. 'xl create -Vf PV.cfg' would show the guest
-console in the VNC window. With vixen this can not work because the vfb
-code triggers only for PV guests.
-
-Is that missing feature on anyones radar already? At least I did not
-find it in the public discussions that took place in the past days.
-
-What would it take for qemu to provide a vfb backend?
-
-Olaf
-
---6c2NcOVqGQ03X4Wi
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWlix2gAKCRBdQqD6ppg2
-foWWAJ9ctSJxll639Ev/YMm4cquEXHZNWQCfSkXlSnXgqK2dcaBjO8wd19F53lQ=
-=K5HI
------END PGP SIGNATURE-----
-
---6c2NcOVqGQ03X4Wi--
-
-
---===============0877454372555420982==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0877454372555420982==--
+Pj4+IE9uIDA5LjAxLjE4IGF0IDIwOjQzLCA8anVsaWVuLmdyYWxsQGxpbmFyby5vcmc+IHdyb3Rl
+Ogo+IFdoZW4gSSBjb21waWxlZCB0aGUgc25pcHBldCBvbiB4ODYgYW5kIEFybSwgbm8gcmVsb2Nh
+dGlvbiBpcyBhdmFpbGFibGUgCj4gZm9yIHRoZSBwb2ludGVycyB0byBzdHJpbmcgaW4gdGhlIGFy
+cmF5IGluIHRoZSBmaW5hbCBiaW5hcnkuIFlldCB0aGV5IAo+IGFyZSBhdmFpbGFibGUgaW4gdGhl
+IG9iamVjdC4KCkkgY2FuIHNlZSB0aGVtIHRoZXJlIGluIHRoZSBiaW5hcnkgSSBsb29rIGF0LiBJ
+IHVzZSBteSBvd24gdG9vbApmb3IgZHVtcGluZywgc28gdGhlIG91dHB1dCBtYXkgbG9vayB1bmZh
+bWlsaWFyIHRvIHlvdSwgYnV0IGhlcmUKYXJlIHRoZSByZWxldmFudCBwaWVjZXM6CgpTZWN0aW9u
+IGNvdW50ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDAwMDkgKCAgICAgICAgIDkpCi4u
+LgogIFNlY3Rpb24gMDAwNCAoICAgIDQpOiAnLmluaXQnLCBzaXplIDAwMDg1NTc4LCBSVkEgMDA2
+MDAwMDAsIGZsYWdzIEUwRDAwMDYwCiAgY29kZSBkYXRhIHJlYWQgd3JpdGUgZXhlYyA0MDk2LWJ5
+dGUgYWxpZ24gCiAgICAwMDA4NjAwMCBieXRlcyBhdCBmaWxlIG9mZnNldCAwMDE5MTAwMAoKU3lt
+Ym9sIGNvdW50ICAgICAgICAgICAgICAgICAgICAgICAgICAgIDAwMDAxREUyICggICAgICA3NjUw
+KQouLi4KICAwMDAwMTE1QTogRXJyQ29kZVRvU3RyLjk3OTUKICAgIFZhbHVlIDAwMDQ0MzQwLCBT
+ZWN0aW9uIDAwMDQsIFR5cGUgbm9uZSwgU3RvcmFnZSBzdGF0aWMKCndoaWNoIG1ha2VzIHRoZSBh
+cnJheSBzdGFydCBhdCBSVkEgMHg2NDQzNDAuCgogRml4dXBzIGZvciBwYWdlIGF0IDAwNjQ0MDAw
+LCAwMDAwMDA5NCAoICAgICAgIDE0OCkgYnl0ZXMKLi4uCiAgRElSNjQgICAwMzE4ICBESVI2NCAg
+IDAzMjAgIERJUjY0ICAgMDMyOCAgRElSNjQgICAwMzY4ICBESVI2NCAgIDAzNzgKICBESVI2NCAg
+IDAzODggIERJUjY0ICAgMDM5MCAgRElSNjQgICAwMzk4ICBESVI2NCAgIDAzQTAgIERJUjY0ICAg
+MDNBOAogIERJUjY0ICAgMDNCMCAgRElSNjQgICAwM0I4ICBESVI2NCAgIDA0MTAgIERJUjY0ICAg
+MDQxOCAgRElSNjQgICAwNDQ4CgpUaGUgbnVtYmVycyBoZXJlIGFyZSB0aGUgb2Zmc2V0cyBpbnRv
+IHRoZSBwYWdlIG5hbWVkIGluIHRoZQoidGl0bGUiIGxpbmUsIGFuZCB0aGUgbGFzdCAxMiBhcmUg
+dGhlIG9uZXMgdGFyZ2V0aW5nIHRoZSBhcnJheSBpbgpxdWVzdGlvbi4KCj4gSW5kZWVkIHRoZSBy
+ZWxvY2F0aW9uIHNlZW0gdG8gYmUgYWJzb2x1dGUgKGUuZyBSX1g4Nl82NF82NCkgYW5kIAo+IGRp
+c2FwcGVhcmVkIGF0IGxpbmtpbmcuIEhlbmNlIHdoeSBJIHN1Z2dlc3RlZCBhIGNvbXBpbGVyIGJ1
+ZyBiZWNhdXNlIHRoZSAKPiBjb2RlIHNob3VsZCBiZSBQSUUgYW5kIHRoYXQgd291bGQgbm90IGV2
+ZW4gd29yayBpcyB0aGUgYmluYXJ5IGlzIAo+IHJhbmRvbWl6ZWQgb24gTGludXguCgpXZWxsLCB3
+aXRob3V0IGhhdmluZyBzZWVuIHRoZSBiaW5hcnkgSSBkb24ndCB0aGluayBJIGNhbiBjb25jbHVk
+ZQppbiB0aGUgZGlyZWN0aW9uIG9mIGNvbXBpbGVyIGJ1Zy4gUGxlYXNlIGRvbid0IGZvcmdldCB0
+aGF0IGxkIGl0c2VsZgpkb2VzIGluZGVlZCBub3QgKHlldCkgY3JlYXRlIGFueSByZWxvY2F0aW9u
+cyBpbiBQRSBleGVjdXRhYmxlcwood2hpY2ggYW4gRUZJIGFwcGxpY2F0aW9uIGlzKS4gVGhleSdy
+ZSBiZWluZyBhZGRlZCBpbiBhIHBvc3QtCnByb2Nlc3Npbmcgc3RlcCAoaGVuY2UgdGhlIG5lZWQg
+dG8gbGluayB0aGUgYmluYXJ5IHR3aWNlIGF0CmRpZmZlcmVudCBiYXNlIGFkZHJlc3NlcywgZm9y
+IHRoZSBoZWxwZXIgdG9vbCBbbWtyZWxvY10gdG8gZmlndXJlCm91dCB3aGVyZSByZWxvY2F0aW9u
+cyBhcmUgbmVlZGVkKS4KCj4gU28gSSBhbSB3b25kZXJpbmcgaG93IHRoaXMgd29yayBvbiB4ODY/
+IE5vdGUgdGhhdCB0aGlzIGNvZGUgaXMgb25seSB1c2VkIAo+IGluIGVycm9yIHBhdGguCgpTdXJl
+LCBidXQgYW4gZXJyb3IgcGF0aCBpcyBiZWluZyB0YWtlbiBldmVyeSBub3cgYW5kIHRoZW4sIGFu
+ZApJIHBlcnNvbmFsbHkgaGF2ZSBzZWVuIGVycm9ycyBjb21pbmcgYmFjayAobW9zdGx5IGFmdGVy
+IGhhdmluZwptYWRlIG1pc3Rha2VzIGVsc2V3aGVyZSkuCgpKYW4KCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
