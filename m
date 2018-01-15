@@ -1,14 +1,16 @@
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: Re: [xen-unstable test] 117920: regressions - FAIL
-Date: Mon, 15 Jan 2018 11:18:50 +0000
-Message-ID: <23132.36378.757551.638119@mariner.uk.xensource.com>
-References: <osstest-117920-mainreport@xen.org>
- <20180115103116.fxuvnx6jyheybxlj@MacBook-Pro-de-Roger.local>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v8 11/17] x86: Protect unaware domains from
+ meddling hyperthreads
+Date: Mon, 15 Jan 2018 04:26:29 -0700
+Message-ID: <5A5C9DF5020000780019EBCA@prv-mh.provo.novell.com>
+References: <1515780067-31735-1-git-send-email-andrew.cooper3@citrix.com>
+ <1515780067-31735-12-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180115103116.fxuvnx6jyheybxlj@MacBook-Pro-de-Roger.local>
+In-Reply-To: <1515780067-31735-12-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,14 +19,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xensource.com
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Um9nZXIgUGF1IE1vbm7DqSB3cml0ZXMgKCJSZTogW1hlbi1kZXZlbF0gW3hlbi11bnN0YWJsZSB0
-ZXN0XSAxMTc5MjA6IHJlZ3Jlc3Npb25zIC0gRkFJTCIpOgo+IFRoaXMgZmFpbHVyZSBpcyBxdWl0
-ZSB3ZWlyZDoKClRoaXMgaXMgcHJvYmFibHkgbXkgZmF1bHQgZHVlIHRvIG15IGJyb2tlbiBhZC1o
-b2MgZmxpZ2h0IG9uIEZyaWRheS4KCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDEyLjAxLjE4IGF0IDE5OjAxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gLS0tIGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9zcGVjX2N0cmwuaAo+ICsrKyBiL3hlbi9p
+bmNsdWRlL2FzbS14ODYvc3BlY19jdHJsLmgKPiBAQCAtMjAsOCArMjAsMjkgQEAKPiAgI2lmbmRl
+ZiBfX1g4Nl9TUEVDX0NUUkxfSF9fCj4gICNkZWZpbmUgX19YODZfU1BFQ19DVFJMX0hfXwo+ICAK
+PiArI2luY2x1ZGUgPHhlbi9zY2hlZC5oPgo+ICsKPiAgdm9pZCBpbml0X3NwZWN1bGF0aW9uX21p
+dGlnYXRpb25zKHZvaWQpOwo+ICAKPiArLyoKPiArICogRm9yIGd1ZXN0cyB3aGljaCBrbm93IGFi
+b3V0IElCUlMgYnV0IGFyZSBub3QgdG9sZCBhYm91dCBTVElCUCBydW5uaW5nIG9uCj4gKyAqIGhh
+cmR3YXJlIHN1cHBvcnRpbmcgaHlwZXJ0aHJlYWRpbmcsIHRoZSBndWVzdCBkb2Vzbid0IGtub3cg
+dG8gcHJvdGVjdAo+ICsgKiBpdHNlbGYgZnVsbHkuICAoU3VjaCBhIGd1ZXN0IHdvbid0IGJlIHBl
+cm1pdHRlZCBkaXJlY3QgYWNjZXNzIHRvIHRoZSBNU1IuKQo+ICsgKiBIYXZlIFhlbiBmaWxsIGlu
+IHRoZSBnYXBzLCBzbyBhbiB1bmF3YXJlIGd1ZXN0IGNhbid0IGJlIGludGVyZmVyZWQgd2l0aCBi
+eQo+ICsgKiBhIG1lZGRsaW5nIGd1ZXN0IG9uIGFuIGFkamFjZW50IGh5cGVydGhyZWFkLgo+ICsg
+Ki8KPiArc3RhdGljIGlubGluZSB1bnNpZ25lZCBpbnQgc3BlY19jdHJsX2hvc3RfdmFsKGNvbnN0
+IHN0cnVjdCBkb21haW4gKmQsCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB1bnNpZ25lZCBpbnQgZ3Vlc3RfdmFsKQo+ICt7Cj4gKyAgICBjb25zdCBzdHJ1
+Y3QgY3B1aWRfcG9saWN5ICpjcCA9IGQtPmFyY2guY3B1aWQ7Cj4gKwo+ICsgICAgaWYgKCAhY3At
+PmZlYXQuc3RpYnAgJiYgY3B1X2hhc19zdGlicCAmJgo+ICsgICAgICAgICAhKGd1ZXN0X3ZhbCAm
+IChTUEVDX0NUUkxfSUJSUyB8IFNQRUNfQ1RSTF9TVElCUCkpICkKPiArICAgICAgICByZXR1cm4g
+U1BFQ19DVFJMX1NUSUJQOwo+ICsgICAgZWxzZQo+ICsgICAgICAgIHJldHVybiBndWVzdF92YWw7
+Cj4gK30KClRoZSBjb21tZW50J3MgIndvbid0IGJlIHBlcm1pdHRlZCBkaXJlY3QgYWNjZXNzIiBj
+YW4gYmUgdmVyaWZpZWQKYnkgbG9va2luZyBhdCBwYXRjaCAxMCwgYnV0IHdoZXJlJ3MgdGhlIEhU
+IGRlcGVuZGVuY3kgaGVyZSAob3IKaW4gYW5vdGhlciBwYXRjaCk/IEZvciBub3cgaXQgbG9va3Mg
+dG8gbWUgYXMgaWYgeW91IGVuYWJsZWQgdGhpcwpiZWhpbmQtdGhlLWJhY2sgcHJvdGVjdGlvbiBl
+dmVuIGluIHRoZSBub24tSFQgY2FzZS4KCkphbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
