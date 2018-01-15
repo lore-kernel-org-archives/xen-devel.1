@@ -1,22 +1,21 @@
 From: Julien Grall <julien.grall@linaro.org>
-Subject: Re: [PATCH] fix potential null dereference
-Date: Mon, 15 Jan 2018 18:56:39 +0000
-Message-ID: <CAEC2Cxpsk9W=gW8ucvJqUCWBDND28qH3CZ831P+KYOtkMC=Vaw@mail.gmail.com>
-References: <alpine.DEB.2.10.1801121538050.5767@sstabellini-ThinkPad-X260>
- <5ba8b0e5-21a9-1999-5aff-f9b9062827f6@linaro.org>
- <5A5C72F2020000780019EAB8@prv-mh.provo.novell.com>
- <alpine.DEB.2.10.1801151049130.5767@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH] remove dead code in allocate_memory
+Date: Mon, 15 Jan 2018 18:06:54 +0000
+Message-ID: <7f6cec19-7883-5494-0809-f547fc4a3ae3@linaro.org>
+References: <alpine.DEB.2.10.1801121619160.5767@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7843946272983151464=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=92s9=ek=linaro.org=julien.grall@srs-us1.protection.inumbo.net>)
- id 1eb9w2-0000It-Oh
- for xen-devel@lists.xenproject.org; Mon, 15 Jan 2018 18:56:42 +0000
-Received: by mail-qk0-x22f.google.com with SMTP id d18so18015412qke.7
- for <xen-devel@lists.xenproject.org>; Mon, 15 Jan 2018 10:56:40 -0800 (PST)
-In-Reply-To: <alpine.DEB.2.10.1801151049130.5767@sstabellini-ThinkPad-X260>
+ id 1ebAkK-0003eR-Ib
+ for xen-devel@lists.xenproject.org; Mon, 15 Jan 2018 19:48:40 +0000
+Received: by mail-wr0-x243.google.com with SMTP id e41so12575579wre.9
+ for <xen-devel@lists.xenproject.org>; Mon, 15 Jan 2018 11:48:38 -0800 (PST)
+In-Reply-To: <alpine.DEB.2.10.1801121619160.5767@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,110 +25,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============7843946272983151464==
-Content-Type: multipart/alternative; boundary="94eb2c04316aa9b7cf0562d52c66"
-
---94eb2c04316aa9b7cf0562d52c66
-Content-Type: text/plain; charset="UTF-8"
-
-Hi Stefano,
-
-
-On 15 Jan 2018 19:51, "Stefano Stabellini" <sstabellini@kernel.org> wrote:
-
-On Mon, 15 Jan 2018, Jan Beulich wrote:
-> >>> On 13.01.18 at 07:21, <julien.grall@linaro.org> wrote:
-> > On 01/12/2018 11:40 PM, Stefano Stabellini wrote:
-> >> handles can theoretically be NULL, check for it explicitly before
-> >> dereferencing it.
-> >
-> > I doubt handles could be NULL if LocateHandle succeed. This seems to be
-> > confirmed by the spec (Page 208 in UEFI spec 2.7).
-> >
-> > So I am not entirely convince we should add yet another check in the
-> > code. An ASSERT might be better.
->
-> Indeed if there is a platform where NULL is coming back in the
-> success case, that platform should be named as a justification
-> in the commit message. Otherwise I don't see the value of this
-> change.
-
-Truthfully, it is mostly to silence Coverity. We can all appreciate when
-static analysts cannot find defects in the code.
-
-
-Can't you mark as such in coverity? I mean, I see limited value to always
-try to fix in Xen something that we can consider as a false positive.
-
-
-
-An ASSERT should satisfy it as well.
-
-
-Cheers,
-
---94eb2c04316aa9b7cf0562d52c66
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div>Hi Stefano,</div><div dir=3D"auto"><br><div class=3D=
-"gmail_extra" dir=3D"auto"><br><div class=3D"gmail_quote">On 15 Jan 2018 19=
-:51, &quot;Stefano Stabellini&quot; &lt;<a href=3D"mailto:sstabellini@kerne=
-l.org">sstabellini@kernel.org</a>&gt; wrote:<br type=3D"attribution"><block=
-quote class=3D"quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid=
-;padding-left:1ex"><div class=3D"elided-text">On Mon, 15 Jan 2018, Jan Beul=
-ich wrote:<br>
-&gt; &gt;&gt;&gt; On 13.01.18 at 07:21, &lt;<a href=3D"mailto:julien.grall@=
-linaro.org">julien.grall@linaro.org</a>&gt; wrote:<br>
-&gt; &gt; On 01/12/2018 11:40 PM, Stefano Stabellini wrote:<br>
-&gt; &gt;&gt; handles can theoretically be NULL, check for it explicitly be=
-fore<br>
-&gt; &gt;&gt; dereferencing it.<br>
-&gt; &gt;<br>
-&gt; &gt; I doubt handles could be NULL if LocateHandle succeed. This seems=
- to be<br>
-&gt; &gt; confirmed by the spec (Page 208 in UEFI spec 2.7).<br>
-&gt; &gt;<br>
-&gt; &gt; So I am not entirely convince we should add yet another check in =
-the<br>
-&gt; &gt; code. An ASSERT might be better.<br>
-&gt;<br>
-&gt; Indeed if there is a platform where NULL is coming back in the<br>
-&gt; success case, that platform should be named as a justification<br>
-&gt; in the commit message. Otherwise I don&#39;t see the value of this<br>
-&gt; change.<br>
-<br>
-</div>Truthfully, it is mostly to silence Coverity. We can all appreciate w=
-hen<br>
-static analysts cannot find defects in the code.<br></blockquote></div></di=
-v></div><div dir=3D"auto"><br></div><div dir=3D"auto">Can&#39;t you mark as=
- such in coverity? I mean, I see limited value to always try to fix in Xen =
-something that we can consider as a false positive.</div><div dir=3D"auto">=
-<br></div><div dir=3D"auto"><br></div><div dir=3D"auto"><div class=3D"gmail=
-_extra"><div class=3D"gmail_quote"><blockquote class=3D"quote" style=3D"mar=
-gin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-<br>
-An ASSERT should satisfy it as well.<br></blockquote></div></div></div><div=
- dir=3D"auto"><br></div><div dir=3D"auto">Cheers,</div><div dir=3D"auto"><b=
-r></div><div dir=3D"auto"><div class=3D"gmail_extra"><div class=3D"gmail_qu=
-ote"><blockquote class=3D"quote" style=3D"margin:0 0 0 .8ex;border-left:1px=
- #ccc solid;padding-left:1ex">
-</blockquote></div><br></div></div></div>
-
---94eb2c04316aa9b7cf0562d52c66--
-
-
---===============7843946272983151464==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7843946272983151464==--
+SGkgU3RlZmFubywKCk9uIDAxLzEzLzIwMTggMTI6MjkgQU0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3
+cm90ZToKPiBsb3dtZW0gaXMgdW5jaGFuZ2VkIHVudGlsIGFmdGVyIHRoaXMgbG9vcCwgdGhlcmUg
+aXMgbm8gcG9pbnQgaW4gdGVzdGluZwo+IGZvciBpdHMgdmFsdWUuIE1vcmVvdmVyLCBDb3Zlcml0
+eSBjb21wbGFpbnMgYWJvdXQgZGVhZCBjb2RlLgo+IAo+IFJlbW92ZSB0aGUgbG93bWVtIHRlc3Qg
+aW4gdGhlIGZpcnN0IGxvb3AuCgpXaGlsZSBJIHVuZGVyc3RhbmQgQ292ZXJpdHkgY29tcGxhaW5z
+IGFib3V0IGRlYWQgY29kZSwgaW4gdGhhdCAKcGFydGljdWxhciBjYXNlIEkgZG9uJ3QgdGhpbmsg
+cmVtb3ZpbmcgdGhpcyB0ZXN0IGlzIHRoZSByaWdodCB0aGluZyB0byBkby4KCkl0IGlzIHZlcnkg
+ZWFzeSB0byB0b2dnbGUgbG93bWVuIHRvIGZhbHNlIGluIHRoZSBkZWNsYXJhdGlvbiBhcyB0aGlz
+IHdhcyAKZG9uZSBiZWZvcmUgYWI1YjAwYSAieGVuL2FybTogZG9tYWluX2J1aWxkOiBhbGxvY2F0
+ZSBsb3dtZW0gZm9yIGRvbTAgYXMgCm11Y2ggYXMgcG9zc2libGUiLiBPbmUgZXhhbXBsZSB3b3Vs
+ZCBiZSBrZWVwIGxvdyBtZW1vcnkgZnJlZSBmb3Igb3RoZXIgCnB1cnBvc2UuCgpDaGVlcnMsCgo+
+IAo+IENJRDogMTM4MTgzMgo+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0
+YWJlbGxpbmlAa2VybmVsLm9yZz4KPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2RvbWFp
+bl9idWlsZC5jIGIveGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5jCj4gaW5kZXggMTU1Yzk1Mi4u
+ZmE1ODkwNiAxMDA2NDQKPiAtLS0gYS94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMKPiArKysg
+Yi94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMKPiBAQCAtMjc3LDcgKzI3Nyw3IEBAIHN0YXRp
+YyB2b2lkIGFsbG9jYXRlX21lbW9yeShzdHJ1Y3QgZG9tYWluICpkLCBzdHJ1Y3Qga2VybmVsX2lu
+Zm8gKmtpbmZvKQo+ICAgICAgICAqLwo+ICAgICAgIHdoaWxlICggb3JkZXIgPj0gbWluX2xvd19v
+cmRlciApCj4gICAgICAgewo+IC0gICAgICAgIGZvciAoIGJpdHMgPSBvcmRlciA7IGJpdHMgPD0g
+KGxvd21lbSA/IDMyIDogUEFERFJfQklUUyk7IGJpdHMrKyApCj4gKyAgICAgICAgZm9yICggYml0
+cyA9IG9yZGVyIDsgYml0cyA8PSAzMjsgYml0cysrICkKPiAgICAgICAgICAgewo+ICAgICAgICAg
+ICAgICAgcGcgPSBhbGxvY19kb21oZWFwX3BhZ2VzKGQsIG9yZGVyLCBNRU1GX2JpdHMoYml0cykp
+Owo+ICAgICAgICAgICAgICAgaWYgKCBwZyAhPSBOVUxMICkKPiAKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
