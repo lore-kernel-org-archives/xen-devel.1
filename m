@@ -1,14 +1,19 @@
-From: mjaggi@caviumnetworks.com
-Subject: [PATCH 10/10] Enable Trapping of Group1 registers which
-	is controlled by command line
-Date: Tue, 16 Jan 2018 21:13:05 +0530
-Message-ID: <20180116154305.19186-11-mjaggi@caviumnetworks.com>
-References: <20180116154305.19186-1-mjaggi@caviumnetworks.com>
+From: Andrii Anisov <andrii_anisov@epam.com>
+Subject: Re: Access I2C bus from guest/DomU on ARM board
+Date: Tue, 16 Jan 2018 17:52:19 +0200
+Message-ID: <37217807-7f20-bdbf-f852-033fcae1bd01@epam.com>
+References: <CAONE6OA9h6omWptvGQE6EdD+s0geCbUcGUwX1NKPj16PF7_TNA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180116154305.19186-1-mjaggi@caviumnetworks.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=umwe=el=epam.com=andrii_anisov@srs-us1.protection.inumbo.net>)
+ id 1ebTXR-0002lP-6d
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2018 15:52:37 +0000
+In-Reply-To: <CAONE6OA9h6omWptvGQE6EdD+s0geCbUcGUwX1NKPj16PF7_TNA@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,40 +22,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org, marc.zyngier@arm.com, sstabellini@kernel.org, julien.grall@linaro.org, andre.przywara@linaro.org
-Cc: manish.jaggi@cavium.com
+To: Saumya Rajesh <saumyarajesh93@gmail.com>, xen-devel@lists.xenproject.org, xen-users@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogTWFuaXNoIEphZ2dpIDxtYW5pc2guamFnZ2lAY2F2aXVtLmNvbT4KCkluIG9yZGVyIHRv
-IGJlIGFibGUgdG8gdHJhcCBHcm91cC0xIEdJQ3YzIHN5c3RlbSByZWdpc3RlcnMsIHdlIG5lZWQg
-dG8Kc2V0IElDSF9IQ1JfRUwyLlRBTEwxIGJlZm9yZSBlbnRlcmluZyB0aGUgZ3Vlc3QuIFRoaXMg
-aXMgY29udHJvbGxlZCBieQp0aGUgY29tbWFuZCBsaW5lIHBhcmFtZXRlciBncm91cDFfdHJhcC4K
-ClNpbmdlZC1vZmYtYnk6IE1hbmlzaCBKYWdnaSA8bWFuaXNoLmphZ2dpQGNhdml1bS5jb20+Ci0t
-LQogeGVuL2FyY2gvYXJtL2dpYy12My5jICAgICB8IDExICsrKysrKysrKystCiB4ZW4vaW5jbHVk
-ZS9hc20tYXJtL2dpYy5oIHwgIDEgKwogMiBmaWxlcyBjaGFuZ2VkLCAxMSBpbnNlcnRpb25zKCsp
-LCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2dpYy12My5jIGIveGVu
-L2FyY2gvYXJtL2dpYy12My5jCmluZGV4IDVkYmE4YmM5MzIuLmYyMjg3N2M0NjggMTAwNjQ0Ci0t
-LSBhL3hlbi9hcmNoL2FybS9naWMtdjMuYworKysgYi94ZW4vYXJjaC9hcm0vZ2ljLXYzLmMKQEAg
-LTgzMyw5ICs4MzMsMTIgQEAgc3RhdGljIHZvaWQgZ2ljdjNfY3B1X2Rpc2FibGUodm9pZCkKICAg
-ICBpc2IoKTsKIH0KIAorc3RhdGljIHVuc2lnbmVkIGludCBncm91cDFfdHJhcCA9IDA7CitpbnRl
-Z2VyX3BhcmFtKCJncm91cDFfdHJhcCIsIGdyb3VwMV90cmFwKTsKKwogc3RhdGljIHZvaWQgZ2lj
-djNfaHlwX2luaXQodm9pZCkKIHsKLSAgICB1aW50MzJfdCB2dHI7CisgICAgdWludDMyX3QgdnRy
-LCByZWczMjsKIAogICAgIHZ0ciA9IFJFQURfU1lTUkVHMzIoSUNIX1ZUUl9FTDIpOwogICAgIGdp
-Y3YzX2luZm8ubnJfbHJzICA9ICh2dHIgJiBHSUNIX1ZUUl9OUkxSR1MpICsgMTsKQEAgLTg0Nyw2
-ICs4NTAsMTIgQEAgc3RhdGljIHZvaWQgZ2ljdjNfaHlwX2luaXQodm9pZCkKIAogICAgIFdSSVRF
-X1NZU1JFRzMyKEdJQ0hfVk1DUl9FT0kgfCBHSUNIX1ZNQ1JfVkVORzEsIElDSF9WTUNSX0VMMik7
-CiAgICAgV1JJVEVfU1lTUkVHMzIoR0lDSF9IQ1JfRU4sIElDSF9IQ1JfRUwyKTsKKworICAgIHJl
-ZzMyID0gUkVBRF9TWVNSRUczMihJQ0hfSENSX0VMMik7CisgICAgaWYgKCBncm91cDFfdHJhcCAp
-CisgICAgICAgIHJlZzMyIHw9IEdJQ0hfSENSX1RBTEwxOworCisgICAgV1JJVEVfU1lTUkVHMzIo
-cmVnMzIsIElDSF9IQ1JfRUwyKTsKIH0KIAogLyogU2V0IHVwIHRoZSBwZXItQ1BVIHBhcnRzIG9m
-IHRoZSBHSUMgZm9yIGEgc2Vjb25kYXJ5IENQVSAqLwpkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUv
-YXNtLWFybS9naWMuaCBiL3hlbi9pbmNsdWRlL2FzbS1hcm0vZ2ljLmgKaW5kZXggZDNkN2JkYTUw
-ZC4uZTRjNzdmZWZkNiAxMDA2NDQKLS0tIGEveGVuL2luY2x1ZGUvYXNtLWFybS9naWMuaAorKysg
-Yi94ZW4vaW5jbHVkZS9hc20tYXJtL2dpYy5oCkBAIC0xMTcsNiArMTE3LDcgQEAKICNkZWZpbmUg
-R0lDSF9IQ1JfVkdSUDBESUUgKDEgPDwgNSkKICNkZWZpbmUgR0lDSF9IQ1JfVkdSUDFFSUUgKDEg
-PDwgNikKICNkZWZpbmUgR0lDSF9IQ1JfVkdSUDFESUUgKDEgPDwgNykKKyNkZWZpbmUgR0lDSF9I
-Q1JfVEFMTDEgICAgKDEgPDwgMTIpCiAKICNkZWZpbmUgR0lDSF9NSVNSX0VPSSAgICAgKDEgPDwg
-MCkKICNkZWZpbmUgR0lDSF9NSVNSX1UgICAgICAgKDEgPDwgMSkKLS0gCjIuMTQuMQoKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+RGVhciBSYWplc2gsCgoKWW91IGNhbiB0cnkgdG8gZ2V0IGFuIEkyQyBidXMgY29udHJvbGxlciBp
+biBEb21VIGluIFBJTyBtb2RlIGZvbGxvd2luZyAKWzFdLCBrZWVwaW5nIGluIG1pbmQgWzJdLgoK
+SWYgeW91IHdhbnQgaXQgRE1BIGNhcGFibGUgeW91IG5lZWQgUmVuZXNhcyBJUE1NVSBzdXBwb3J0
+IGluIFhFTiBbM10sIApbNF0gdG8gYmUgaW5jb3Jwb3JhdGVkLgoKClsxXSAtIGh0dHBzOi8veGVu
+Yml0cy54ZW4ub3JnL2RvY3MvdW5zdGFibGUvbWlzYy9hcm0vcGFzc3Rocm91Z2gudHh0CgpbMl0g
+LSAKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi11c2Vycy8y
+MDE3LTEwL21zZzAwMDMxLmh0bWwKClszXSAtIApodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMTctMDcvbXNnMDI1NDUuaHRtbAoKWzRdIC0gCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxNy0w
+Ny9tc2cwMjY3OS5odG1sCgoKLS0gCgoqQW5kcmlpIEFuaXNvdioKCgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
