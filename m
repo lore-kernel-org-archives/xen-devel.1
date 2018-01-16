@@ -1,11 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [qemu-mainline test] 118034: regressions - FAIL
-Date: Tue, 16 Jan 2018 04:59:19 +0000
-Message-ID: <osstest-118034-mainreport@xen.org>
+From: Bruno Alvisio <bruno.alvisio@gmail.com>
+Subject: Unexpected behavior: Xen creating domains on startup
+Date: Mon, 15 Jan 2018 21:01:35 -0800
+Message-ID: <CADNMjEB=GiiaZqqd8KYCofrPag-oAxk0Td5HbGWXa7a+DjHUug@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0791998991113820049=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=rmxq=el=gmail.com=bruno.alvisio@srs-us1.protection.inumbo.net>)
+ id 1ebJNS-0007ED-OM
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2018 05:01:38 +0000
+Received: by mail-yb0-x233.google.com with SMTP id i13so2028525ybl.9
+ for <xen-devel@lists.xenproject.org>; Mon, 15 Jan 2018 21:01:36 -0800 (PST)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,299 +20,521 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDExODAzNCBxZW11LW1haW5saW5lIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3Qt
-bGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMTgwMzQvCgpSZWdyZXNzaW9ucyA6LSgK
-ClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcg
-dGVzdHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-d3MxNi1hbWQ2NCAxNiBndWVzdC1sb2NhbG1pZ3JhdGUveDEwIGZhaWwgUkVHUi4gdnMuIDExNzkz
-MAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRl
-c3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAg
-ICBmYWlsICBsaWtlIDExNzkzMAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0
-IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTE3OTMwCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlr
-ZSAxMTc5MzAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTMgc2F2ZXJlc3RvcmUtc3Vw
-cG9ydC1jaGVjayAgICBmYWlsICBsaWtlIDExNzkzMAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0
-LXhzbSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTE3OTMwCiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWludGVsIDEyIGd1ZXN0LXN0YXJ0ICAgICAgICAgICAg
-ICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItYW1kIDEyIGd1
-ZXN0LXN0YXJ0ICAgICAgICAgICAgICAgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1h
-bWQ2NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBu
-ZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9y
-dC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0
-ICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwog
-dGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAg
-ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1p
-Z3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQt
-YXJtNjQteGwtY3JlZGl0MiAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAg
-bmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAxMyBtaWdyYXRlLXN1cHBv
-cnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhz
-bSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MK
-IHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAg
-ICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAxNCBz
-YXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0
-LWFybTY0LWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAg
-IG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20gMTQgc2F2ZXJlc3RvcmUt
-c3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZp
-cnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFp
-bCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFt
-ZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1hbWQgMTcgZGViaWFuLWh2bS1pbnN0YWxsL2wxL2wyICBm
-YWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQgMTIgbWlncmF0ZS1z
-dXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14
-bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQt
-Y2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAg
-MTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-cm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBm
-YWlsICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDEzIG1pZ3JhdGUt
-c3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYt
-eGwtbXVsdGl2Y3B1IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgbmV2ZXIg
-cGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0
-LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAg
-IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwteHNtICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
-LXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAxMyBtaWdyYXRlLXN1cHBvcnQt
-Y2hlY2sgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRy
-dWNrIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3IDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgMTIgbWlncmF0
-ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1o
-Zi14bC12aGQgICAgICAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZl
-ciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFs
-ZSAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAx
-NyBndWVzdC1zdG9wICAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2
-ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1p
-bnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0
-aW5nOgogcWVtdXUgICAgICAgICAgICAgICAgYzc5NDczNDJkN2RkYTg3ZWVlYjRhMDRiNmU0Njdm
-ODEzODUwMTRjZQpiYXNlbGluZSB2ZXJzaW9uOgogcWVtdXUgICAgICAgICAgICAgICAgNzM5ODE2
-NmRkZjdjNmRiYmM5Y2FlNmFjNjliYjJmZWRhMTRiNDBhYwoKTGFzdCB0ZXN0IG9mIGJhc2lzICAg
-MTE3OTMwICAyMDE4LTAxLTEyIDIzOjQ4OjM0IFogICAgMyBkYXlzClRlc3Rpbmcgc2FtZSBzaW5j
-ZSAgIDExODAzNCAgMjAxOC0wMS0xNSAxMDoxODo1OCBaICAgIDAgZGF5cyAgICAxIGF0dGVtcHRz
-CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIERhbmllbCBQ
-LiBCZXJyYW5nZSA8YmVycmFuZ2VAcmVkaGF0LmNvbT4KICBGcmVkaWFubyBaaWdsaW8gPGZ6aWds
-aW9AcmVkaGF0LmNvbT4KICBHZXJkIEhvZmZtYW5uIDxrcmF4ZWxAcmVkaGF0LmNvbT4KICBKaW5k
-cmljaCBNYWtvdmlja2EgPG1ha292aWNrQGdtYWlsLmNvbT4KICBsaW56aGVjaGVuZyA8bGluemhl
-Y2hlbmdAaHVhd2VpLmNvbT4KICBQZXRlciBNYXlkZWxsIDxwZXRlci5tYXlkZWxsQGxpbmFyby5v
-cmc+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXhzbSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
-bGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
-ZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1saWJ2aXJ0
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-aTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bCAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNt
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFu
-aHZtLWFtZDY0LXhzbSAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFl
-bXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmly
-dC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC14c20g
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWkzODYteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1hbWQgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhl
-bDZodm0tYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-b3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0ICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13
-czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1jcmVkaXQyICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDIg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJt
-aGYteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWkzODYgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2lu
-MTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2
-LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0
-ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItaW50ZWwgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZt
-LWludGVsICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLW11bHRpdmNwdSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYt
-eGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1wYWlyICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxp
-YnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LWFtZDY0LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1wdmdydWIgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdydWIgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXFjb3cyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YXJtaGYtYXJtaGYtbGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwt
-cnRkcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC1saWJ2aXJ0LXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRl
-c3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21l
-L2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAog
-ICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBs
-YW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBh
-dAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9i
-O2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3
-ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNz
-IGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9w
-PW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCBjNzk0NzM0
-MmQ3ZGRhODdlZWViNGEwNGI2ZTQ2N2Y4MTM4NTAxNGNlCk1lcmdlOiA3Mzk4MTY2ZGRmIDg0OWJi
-ZTYwMzUKQXV0aG9yOiBQZXRlciBNYXlkZWxsIDxwZXRlci5tYXlkZWxsQGxpbmFyby5vcmc+CkRh
-dGU6ICAgRnJpIEphbiAxMiAxNjo0MToyNCAyMDE4ICswMDAwCgogICAgTWVyZ2UgcmVtb3RlLXRy
-YWNraW5nIGJyYW5jaCAncmVtb3Rlcy9rcmF4ZWwvdGFncy91aS0yMDE4MDExMi1wdWxsLXJlcXVl
-c3QnIGludG8gc3RhZ2luZwogICAgCiAgICBzZGwyOiBidWdmaXhlcy4KICAgIHNwaWNlOiBjbGVh
-bnVwcy4KICAgIGlucHV0OiBtZW0gbGVhayBmaXguCiAgICBndGs6IGRlcHJlY2F0ZSAyLnggc3Vw
-cG9ydC4KICAgIAogICAgIyBncGc6IFNpZ25hdHVyZSBtYWRlIEZyaSAxMiBKYW4gMjAxOCAxNDo1
-MjozOSBHTVQKICAgICMgZ3BnOiAgICAgICAgICAgICAgICB1c2luZyBSU0Ega2V5IDB4NENCNkQ4
-RUVEM0U4NzEzOAogICAgIyBncGc6IEdvb2Qgc2lnbmF0dXJlIGZyb20gIkdlcmQgSG9mZm1hbm4g
-KHdvcmspIDxrcmF4ZWxAcmVkaGF0LmNvbT4iCiAgICAjIGdwZzogICAgICAgICAgICAgICAgIGFr
-YSAiR2VyZCBIb2ZmbWFubiA8Z2VyZEBrcmF4ZWwub3JnPiIKICAgICMgZ3BnOiAgICAgICAgICAg
-ICAgICAgYWthICJHZXJkIEhvZmZtYW5uIChwcml2YXRlKSA8a3JheGVsQGdtYWlsLmNvbT4iCiAg
-ICAjIFByaW1hcnkga2V5IGZpbmdlcnByaW50OiBBMDMyIDhDRkYgQjkzQSAxN0E3IDk5MDEgIEZF
-N0QgNENCNiBEOEVFIEQzRTggNzEzOAogICAgCiAgICAqIHJlbW90ZXMva3JheGVsL3RhZ3MvdWkt
-MjAxODAxMTItcHVsbC1yZXF1ZXN0OgogICAgICBzZGwyOiBJZ25vcmUgVUkgaG90a2V5cyBhZnRl
-ciBhIGZvY3VzIGNoYW5nZSB3aGVuIEdVSSBtb2RpZmllciBpcyBoZWxkCiAgICAgIHNkbDIgdXNl
-cyBzdXJmYWNlIHJlbGF0aXZlIGNvb3JkaW5hdGVzCiAgICAgIHNkbDI6IERvIG5vdCBoaWRlIHRo
-ZSBjdXJzb3Igb24gYXV4aWxsaWFyeSB3aW5kb3dzCiAgICAgIHNwaWNlOiByZW1vdmUgdW51c2Vk
-IHRpbWVyIGxpc3QKICAgICAgc3BpY2U6IHJlbW92ZSBvbmx5IHdyaXR0ZW4gZXZlbnRfbWFzayBm
-aWVsZAogICAgICBzcGljZTogcmVtb3ZlIHVudXNlZCB3YXRjaCBsaXN0CiAgICAgIHNwaWNlOiBy
-ZW1vdmUgUVhMV29ya2VyIGludGVyZmFjZSBmaWVsZAogICAgICB1aTogZGVwcmVjYXRlIHVzZSBv
-ZiBHVEsgMi54IGluIGZhdm91ciBvZiAzLnggc2VyaWVzCiAgICAgIGlucHV0OiBmaXggbWVtb3J5
-IGxlYWsKICAgIAogICAgU2lnbmVkLW9mZi1ieTogUGV0ZXIgTWF5ZGVsbCA8cGV0ZXIubWF5ZGVs
-bEBsaW5hcm8ub3JnPgoKY29tbWl0IDg0OWJiZTYwMzU2Y2FmM2QzMjAyMDJkNDVmMWRkZmZlZWZh
-ZTA2YzcKQXV0aG9yOiBKaW5kcmljaCBNYWtvdmlja2EgPG1ha292aWNrQGdtYWlsLmNvbT4KRGF0
-ZTogICBGcmkgTm92IDE3IDEyOjIyOjU4IDIwMTcgKzAxMDAKCiAgICBzZGwyOiBJZ25vcmUgVUkg
-aG90a2V5cyBhZnRlciBhIGZvY3VzIGNoYW5nZSB3aGVuIEdVSSBtb2RpZmllciBpcyBoZWxkCiAg
-ICAKICAgIFdoZW4gU0RMMiB3aW5kb3dzIGNoYW5nZSBmb2N1cyB3aGlsZSBhIGtleSBpcyBoZWxk
-LCB0aGUgd2luZG93IHRoYXQKICAgIHJlY2VpdmVzIHRoZSBmb2N1cyBhbHNvIHJlY2VpdmVzIGEg
-bmV3IEtleURvd24gZXZlbnQsIHdpdGhvdXQgYW4KICAgIGF1dG9yZXBlYXQgZmxhZy4gVGhpcyBt
-ZWFucyB0aGF0IGlmIGEgV00gcGxhY2VzIHRoZSBxZW11IGNvbnNvbGUKICAgIG92ZXIgdGhlIG1h
-aW4gd2luZG93IGFmdGVyIEN0cmwtQWx0LTIsIHRoZSBjb25zb2xlIGNsb3NlcyBpbW1lZGlhdGVs
-eQogICAgYWZ0ZXIgb3BlbmluZy4gVGhlbiwgdGhlIG1haW4gd2luZG93IHJlY2VpdmVzIHRoZSBL
-ZXlEb3duIGV2ZW50IGFnYWluCiAgICBhbmQgdGhlIHdob2xlIHByb2Nlc3MgcmVwZWF0cy4KICAg
-IAogICAgVGhpcyBwYXRjaCBtYWtlcyB0aGUgU0RMMiBVSSBpZ25vcmUgdGhlIEtleURvd24gZXZl
-bnRzIG9uIGEgd2luZG93IHRoYXQKICAgIGp1c3QgcmVjZWl2ZWQgdGhlIGZvY3VzLCBpZiB0aGUg
-R1VJIG1vZGlmaWVyIHdhcyBoZWxkLiBUaGUgaWdub3JlIGZsYWcKICAgIGlzIHJlc2V0IG9uIGEg
-Zmlyc3QgS2V5VXAgZXZlbnQuIFRoaXMgZWZmZWN0aXZlbHkgd29ya3MgYXJvdW5kIHRoZSBpc3N1
-ZQogICAgYWJvdmUuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEppbmRyaWNoIE1ha292aWNrYSA8
-bWFrb3ZpY2tAZ21haWwuY29tPgogICAgTWVzc2FnZS1JZDogPDIwMTcxMTE3MTEyMjU4LjU4ODgt
-NC1tYWtvdmlja0BnbWFpbC5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBHZXJkIEhvZmZtYW5uIDxr
-cmF4ZWxAcmVkaGF0LmNvbT4KCmNvbW1pdCBkOWYwNjI2MjgwZmI1MjI0MDcxNDE1ZTZmZDgyY2Mw
-YzJlOWQ2NTkwCkF1dGhvcjogSmluZHJpY2ggTWFrb3ZpY2thIDxtYWtvdmlja0BnbWFpbC5jb20+
-CkRhdGU6ICAgRnJpIE5vdiAxNyAxMjoyMjo1NyAyMDE3ICswMTAwCgogICAgc2RsMiB1c2VzIHN1
-cmZhY2UgcmVsYXRpdmUgY29vcmRpbmF0ZXMKICAgIAogICAgVGhpcyBwYXRjaCBmaXhlcyBtb3Vz
-ZSBwb3NpdGlvbmluZyB3aXRoIC1kZXZpY2UgdXNiLXRhYmxldCBhbmQgZnVsbHNjcmVlbgogICAg
-b3IgcmVzaXplZCB3aW5kb3cuCiAgICAKICAgIEZpeGVzOiA0NjUyMmE4MjIzNmVhMGNmOTAxMWI4
-OTg5NmQyZDhmOGRkYWYyNDQzCiAgICBTaWduZWQtb2ZmLWJ5OiBKaW5kcmljaCBNYWtvdmlja2Eg
-PG1ha292aWNrQGdtYWlsLmNvbT4KICAgIE1lc3NhZ2UtSWQ6IDwyMDE3MTExNzExMjI1OC41ODg4
-LTMtbWFrb3ZpY2tAZ21haWwuY29tPgogICAgU2lnbmVkLW9mZi1ieTogR2VyZCBIb2ZmbWFubiA8
-a3JheGVsQHJlZGhhdC5jb20+Cgpjb21taXQgMjgyMTY3MTYyOTUzMTE4NGQ5ZmEyZjhmY2MzY2Vh
-MWJkNjA1Yjg3MgpBdXRob3I6IEppbmRyaWNoIE1ha292aWNrYSA8bWFrb3ZpY2tAZ21haWwuY29t
-PgpEYXRlOiAgIEZyaSBOb3YgMTcgMTI6MjI6NTYgMjAxNyArMDEwMAoKICAgIHNkbDI6IERvIG5v
-dCBoaWRlIHRoZSBjdXJzb3Igb24gYXV4aWxsaWFyeSB3aW5kb3dzCiAgICAKICAgIFNpZ25lZC1v
-ZmYtYnk6IEppbmRyaWNoIE1ha292aWNrYSA8bWFrb3ZpY2tAZ21haWwuY29tPgogICAgTWVzc2Fn
-ZS1JZDogPDIwMTcxMTE3MTEyMjU4LjU4ODgtMi1tYWtvdmlja0BnbWFpbC5jb20+CiAgICBTaWdu
-ZWQtb2ZmLWJ5OiBHZXJkIEhvZmZtYW5uIDxrcmF4ZWxAcmVkaGF0LmNvbT4KCmNvbW1pdCBhYmRh
-NDc2NjgxNWFmM2RiM2MzYzQzZmE5NmE0NWQ5MzVlMmIyMTdhCkF1dGhvcjogRnJlZGlhbm8gWmln
-bGlvIDxmemlnbGlvQHJlZGhhdC5jb20+CkRhdGU6ICAgV2VkIE5vdiAyMiAxMzo1NjoyNSAyMDE3
-ICswMDAwCgogICAgc3BpY2U6IHJlbW92ZSB1bnVzZWQgdGltZXIgbGlzdAogICAgCiAgICBTaWdu
-ZWQtb2ZmLWJ5OiBGcmVkaWFubyBaaWdsaW8gPGZ6aWdsaW9AcmVkaGF0LmNvbT4KICAgIE1lc3Nh
-Z2UtaWQ6IDIwMTcxMTIyMTM1NjI1LjE2NjI1LTQtZnppZ2xpb0ByZWRoYXQuY29tCiAgICBTaWdu
-ZWQtb2ZmLWJ5OiBHZXJkIEhvZmZtYW5uIDxrcmF4ZWxAcmVkaGF0LmNvbT4KCmNvbW1pdCA1OGE1
-ZDMzYWE4ZGE4YjBmNTVjOTcyMzJmNzRiZGY5ODc4ODVkZjE3CkF1dGhvcjogRnJlZGlhbm8gWmln
-bGlvIDxmemlnbGlvQHJlZGhhdC5jb20+CkRhdGU6ICAgV2VkIE5vdiAyMiAxMzo1NjoyNCAyMDE3
-ICswMDAwCgogICAgc3BpY2U6IHJlbW92ZSBvbmx5IHdyaXR0ZW4gZXZlbnRfbWFzayBmaWVsZAog
-ICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBGcmVkaWFubyBaaWdsaW8gPGZ6aWdsaW9AcmVkaGF0LmNv
-bT4KICAgIE1lc3NhZ2UtaWQ6IDIwMTcxMTIyMTM1NjI1LjE2NjI1LTMtZnppZ2xpb0ByZWRoYXQu
-Y29tCiAgICBTaWduZWQtb2ZmLWJ5OiBHZXJkIEhvZmZtYW5uIDxrcmF4ZWxAcmVkaGF0LmNvbT4K
-CmNvbW1pdCA0NGU4ZjIyOTg2YTAxMGQ2MDc4ZTVjZDg2ODA5ODI4M2I4NzVhNTE1CkF1dGhvcjog
-RnJlZGlhbm8gWmlnbGlvIDxmemlnbGlvQHJlZGhhdC5jb20+CkRhdGU6ICAgV2VkIE5vdiAyMiAx
-Mzo1NjoyMyAyMDE3ICswMDAwCgogICAgc3BpY2U6IHJlbW92ZSB1bnVzZWQgd2F0Y2ggbGlzdAog
-ICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBGcmVkaWFubyBaaWdsaW8gPGZ6aWdsaW9AcmVkaGF0LmNv
-bT4KICAgIE1lc3NhZ2UtaWQ6IDIwMTcxMTIyMTM1NjI1LjE2NjI1LTItZnppZ2xpb0ByZWRoYXQu
-Y29tCiAgICBTaWduZWQtb2ZmLWJ5OiBHZXJkIEhvZmZtYW5uIDxrcmF4ZWxAcmVkaGF0LmNvbT4K
-CmNvbW1pdCA5ZmVkZmE0OTA5MmM1NTYyOGE5NmZkMjc4MzA2MGQ1OGNjZWM5ZGIwCkF1dGhvcjog
-RnJlZGlhbm8gWmlnbGlvIDxmemlnbGlvQHJlZGhhdC5jb20+CkRhdGU6ICAgV2VkIE5vdiAyMiAx
-Mzo1NjoyMiAyMDE3ICswMDAwCgogICAgc3BpY2U6IHJlbW92ZSBRWExXb3JrZXIgaW50ZXJmYWNl
-IGZpZWxkCiAgICAKICAgIFRoaXMgZmllbGRzIHBvaW50cyB0byBhbiBvbGQgaW50ZXJmYWNlIHRo
-YXQgaXMgbm8gbW9yZQogICAgdXNlZCBpbiB0aGUgY3VycmVudCBjb2RlLgogICAgCiAgICBTaWdu
-ZWQtb2ZmLWJ5OiBGcmVkaWFubyBaaWdsaW8gPGZ6aWdsaW9AcmVkaGF0LmNvbT4KICAgIE1lc3Nh
-Z2UtaWQ6IDIwMTcxMTIyMTM1NjI1LjE2NjI1LTEtZnppZ2xpb0ByZWRoYXQuY29tCiAgICBTaWdu
-ZWQtb2ZmLWJ5OiBHZXJkIEhvZmZtYW5uIDxrcmF4ZWxAcmVkaGF0LmNvbT4KCmNvbW1pdCBiNzcx
-NWFmMmIzMWY0NzA2MGNjNWI0YmU5MzBkMTZjMTNiZTkzZmE5CkF1dGhvcjogRGFuaWVsIFAuIEJl
-cnJhbmdlIDxiZXJyYW5nZUByZWRoYXQuY29tPgpEYXRlOiAgIFR1ZSBEZWMgMTIgMTE6MzQ6NDAg
-MjAxNyArMDAwMAoKICAgIHVpOiBkZXByZWNhdGUgdXNlIG9mIEdUSyAyLnggaW4gZmF2b3VyIG9m
-IDMueCBzZXJpZXMKICAgIAogICAgVGhlIEdUSyAzLjAgcmVsZWFzZSB3YXMgbWFkZSBpbiBGZWIs
-IDIwMTE6CiAgICAKICAgICAgaHR0cHM6Ly9ibG9nLmd0ay5vcmcvMjAxMS8wMi8xMC9ndGstMy0w
-LXJlbGVhc2VkLwogICAgCiAgICBUaGF0IHdpbGwgc29vbiBiZSA3IHllYXJzIGFnbywgd2hpY2gg
-aXMgZW5vdWdoIHRpbWUgdG8gY29uc2lkZXIKICAgIHRoZSAzLnggc2VyaWVzIHdpZGVseSBzdXBw
-b3J0ZWQuCiAgICAKICAgIFRodXMgd2UgZGVwcmVjYXRlIHRoZSBHVEsgMi54IHN1cHBvcnQsIHdo
-aWNoIHdpbGwgYWxsb3cgdXMgdG8KICAgIGRlbGV0ZSBpdCBpbiB0aGUgbGFzdCByZWxlYXNlIG9m
-IDIwMTguIEJ5IHRoaXMgdGltZSwgR1RLIDMueAogICAgd2lsbCBiZSBhbG1vc3QgOCB5ZWFycyBv
-bGQuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IERhbmllbCBQLiBCZXJyYW5nZSA8YmVycmFuZ2VA
-cmVkaGF0LmNvbT4KICAgIE1lc3NhZ2UtaWQ6IDIwMTcxMjEyMTEzNDQwLjE2NDgzLTEtYmVycmFu
-Z2VAcmVkaGF0LmNvbQogICAgU2lnbmVkLW9mZi1ieTogR2VyZCBIb2ZmbWFubiA8a3JheGVsQHJl
-ZGhhdC5jb20+Cgpjb21taXQgZmNhNDc3NGE5Njg0M2JhOWQzMmE1ZDVkMWMzODI2ZTE0NzhmYWNh
-ZQpBdXRob3I6IGxpbnpoZWNoZW5nIDxsaW56aGVjaGVuZ0BodWF3ZWkuY29tPgpEYXRlOiAgIE1v
-biBEZWMgMjUgMTA6Mzc6MzAgMjAxNyArMDgwMAoKICAgIGlucHV0OiBmaXggbWVtb3J5IGxlYWsK
-ICAgIAogICAgSWYga2JkX3F1ZXVlIGlzIG5vdCBlbXB0eSBhbmQgcXVldWVfY291bnQgPj0gcXVl
-dWVfbGltaXQsCiAgICB3ZSBzaG91bGQgZnJlZSBldnQuCiAgICAKICAgIENoYW5nZS1JZDogSWVl
-YWNmOTBkNWU3ZTM3MGE0MDQ1MmVjNzkwMzE5MTJkOGI4NjRkODMKICAgIFNpZ25lZC1vZmYtYnk6
-IGxpbnpoZWNoZW5nIDxsaW56aGVjaGVuZ0BodWF3ZWkuY29tPgogICAgTWVzc2FnZS1pZDogMjAx
-NzEyMjUwMjM3MzAuNTUxMi0xLWxpbnpoZWNoZW5nQGh1YXdlaS5jb20KICAgIFNpZ25lZC1vZmYt
-Ynk6IEdlcmQgSG9mZm1hbm4gPGtyYXhlbEByZWRoYXQuY29tPgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============0791998991113820049==
+Content-Type: multipart/alternative; boundary="089e0828f134074ea20562dda0b2"
+
+--089e0828f134074ea20562dda0b2
+Content-Type: text/plain; charset="UTF-8"
+
+Hello all,
+
+I am doing some testing with Xen. After some of the guest domains I am
+testing crashed, I decided to add some logging to Xen and the tools. After
+rebuilding, reinstalling and rebooting the system, Xen seems to create
+guest domains (the ones created before reboot) on startup (with no 'xl
+create' command issued by me). The domains are deleted a few seconds after
+startup and when I create the first domain, the domain number is not 1 but
+3 or 4. Below is an example of dmesg logs right after startup: (int this
+case a domain 2 was launched, xl list shows no domain few seconds later):
+
+(XEN) Dom0 has maximum 8 VCPUs
+
+(XEN) ELF: phdr 0 at 0xffffffff81000000 -> 0xffffffff81aca000
+
+(XEN) ELF: phdr 1 at 0xffffffff81c00000 -> 0xffffffff81d1e000
+
+(XEN) ELF: phdr 2 at 0xffffffff81d1e000 -> 0xffffffff81d37418
+
+(XEN) ELF: phdr 3 at 0xffffffff81d38000 -> 0xffffffff81e82000
+
+(XEN) Initial low memory virq threshold set at 0x4000 pages.
+
+(XEN) Scrubbing Free RAM on 1 nodes using 4 CPUs
+
+(XEN) ..................................done.
+
+(XEN) Std. Loglevel: All
+
+(XEN) Guest Loglevel: All
+
+(XEN) Xen is relinquishing VGA console.
+
+(XEN) *** Serial input -> DOM0 (type 'CTRL-a' three times to switch input
+to Xen)
+
+(XEN) Freed 456kB init memory
+
+(XEN) PCI add device 0000:00:00.0
+
+(XEN) PCI add device 0000:00:01.0
+
+(XEN) PCI add device 0000:00:16.0
+
+(XEN) PCI add device 0000:00:16.1
+
+(XEN) PCI add device 0000:00:1a.0
+
+(XEN) PCI add device 0000:00:1d.0
+
+(XEN) PCI add device 0000:00:1e.0
+
+(XEN) PCI add device 0000:00:1f.0
+
+(XEN) PCI add device 0000:00:1f.2
+
+(XEN) PCI add device 0000:00:1f.3
+
+(XEN) PCI add device 0000:01:00.0
+
+(XEN) PCI add device 0000:01:00.1
+
+(XEN) PCI add device 0000:02:03.0
+
+(XEN) PCI: Using MCFG for segment 0000 bus 00-ff
+
+(XEN) d0: Forcing read-only access to MFN fed00
+
+(XEN) traps.c:1540: GPF (0000): ffff82d080363383
+[emul-priv-op.c#read_msr+0x370/0x45c] -> ffff82d08036d9b2
+
+(XEN) traps.c:1540: GPF (0000): ffff82d080363383
+[emul-priv-op.c#read_msr+0x370/0x45c] -> ffff82d08036d9b2
+
+(XEN) traps.c:1540: GPF (0000): ffff82d080363383
+[emul-priv-op.c#read_msr+0x370/0x45c] -> ffff82d08036d9b2
+
+(XEN) grant_table.c:1688:d0v1 Expanding d1 grant table from 0 to 1 frames
+
+(XEN) HVM1 restore: CPU 0
+
+(XEN) HVM1 restore: CPU 1
+
+(XEN) HVM1 restore: PIC 0
+
+(XEN) HVM1 restore: PIC 1
+
+(XEN) HVM1 restore: IOAPIC 0
+
+(XEN) HVM1 restore: LAPIC 0
+
+(XEN) HVM1 restore: LAPIC 1
+
+(XEN) HVM1 restore: LAPIC_REGS 0
+
+(XEN) HVM1 restore: LAPIC_REGS 1
+
+(XEN) HVM1 restore: PCI_IRQ 0
+
+(XEN) HVM1 restore: ISA_IRQ 0
+
+(XEN) HVM1 restore: PCI_LINK 0
+
+(XEN) HVM1 restore: PIT 0
+
+(XEN) HVM1 restore: RTC 0
+
+(XEN) HVM1 restore: HPET 0
+
+(XEN) HVM1 restore: PMTIMER 0
+
+(XEN) HVM1 restore: MTRR 0
+
+(XEN) HVM1 restore: MTRR 1
+
+(XEN) HVM1 restore: CPU_XSAVE 0
+
+(XEN) HVM1 restore: CPU_XSAVE 1
+
+(XEN) HVM1 restore: VMCE_VCPU 0
+
+(XEN) HVM1 restore: VMCE_VCPU 1
+
+(XEN) HVM1 restore: TSC_ADJUST 0
+
+(XEN) HVM1 restore: TSC_ADJUST 1
+
+(XEN) grant_table.c:1688:d0v6 Expanding d2 grant table from 0 to 1 frames
+
+(d2) Bootstrapping...
+
+(d2) Xen Minimal OS (pv)!
+
+(d2)   start_info: 0x574000(VA)
+
+(d2)     nr_pages: 0x2000
+(d2)   shared_inf: 0x06182000(MA)
+
+
+Any explanation/idea on what could be occurring would be appreciated.
+
+Cheers,
+
+Bruno
+
+--089e0828f134074ea20562dda0b2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hello all,<div><br></div><div>I am doing some testing with=
+ Xen. After some of the guest domains I am testing crashed, I decided to ad=
+d some logging to Xen and the tools. After rebuilding, reinstalling and reb=
+ooting the system, Xen seems to create guest domains (the ones created befo=
+re reboot) on startup (with no &#39;xl create&#39; command issued by me). T=
+he domains are deleted a few seconds after startup and when I create the fi=
+rst domain, the domain number is not 1 but 3 or 4. Below is an example of d=
+mesg logs right after startup: (int this case a domain 2 was launched, xl l=
+ist shows no domain few seconds later):</div><div><font size=3D"1" style=3D=
+"background-color:rgb(255,255,255)" color=3D"#000000"><br></font></div>
+
+
+
+
+
+
+
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) Dom0 has maximum 8 VCPUs</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) ELF: phdr 0 at 0xffffffff81000000 -&gt; 0xffffffff81aca000</font>=
+</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) ELF: phdr 1 at 0xffffffff81c00000 -&gt; 0xffffffff81d1e000</font>=
+</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) ELF: phdr 2 at 0xffffffff81d1e000 -&gt; 0xffffffff81d37418</font>=
+</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) ELF: phdr 3 at 0xffffffff81d38000 -&gt; 0xffffffff81e82000</font>=
+</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) Initial low memory virq threshold set at 0x4000 pages.</font></sp=
+an></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) Scrubbing Free RAM on 1 nodes using 4 CPUs</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) ..................................done.</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) Std. Loglevel: All</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) Guest Loglevel: All</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) Xen is relinquishing VGA console.</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) *** Serial input -&gt; DOM0 (type &#39;CTRL-a&#39; three times to=
+ switch input to Xen)</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) Freed 456kB init memory</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:00:00.0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:00:01.0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:00:16.0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:00:16.1</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:00:1a.0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:00:1d.0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:00:1e.0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:00:1f.0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:00:1f.2</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:00:1f.3</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:01:00.0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:01:00.1</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI add device 0000:02:03.0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) PCI: Using MCFG for segment 0000 bus 00-ff</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) d0: Forcing read-only access to MFN fed00</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) traps.c:1540: GPF (0000): ffff82d080363383 [emul-priv-op.c#read_m=
+sr+0x370/0x45c] -&gt; ffff82d08036d9b2</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) traps.c:1540: GPF (0000): ffff82d080363383 [emul-priv-op.c#read_m=
+sr+0x370/0x45c] -&gt; ffff82d08036d9b2</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) traps.c:1540: GPF (0000): ffff82d080363383 [emul-priv-op.c#read_m=
+sr+0x370/0x45c] -&gt; ffff82d08036d9b2</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) grant_table.c:1688:d0v1 Expanding d1 grant table from 0 to 1 fram=
+es</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: CPU 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: CPU 1</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: PIC 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: PIC 1</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: IOAPIC 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: LAPIC 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: LAPIC 1</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: LAPIC_REGS 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: LAPIC_REGS 1</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: PCI_IRQ 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: ISA_IRQ 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: PCI_LINK 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: PIT 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: RTC 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: HPET 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: PMTIMER 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: MTRR 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: MTRR 1</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: CPU_XSAVE 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: CPU_XSAVE 1</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: VMCE_VCPU 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: VMCE_VCPU 1</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: TSC_ADJUST 0</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) HVM1 restore: TSC_ADJUST 1</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(XEN) grant_table.c:1688:d0v6 Expanding d2 grant table from 0 to 1 fram=
+es</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(d2) Bootstrapping...</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(d2) Xen Minimal OS (pv)!</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(d2) <span class=3D"gmail-Apple-converted-space">=C2=A0 </span>start_in=
+fo: 0x574000(VA)</font></span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
+rmal;font-weight:normal;font-stretch:normal;line-height:normal;font-family:=
+Menlo"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-l=
+igatures;background-color:rgb(255,255,255)"><font size=3D"1" color=3D"#0000=
+00">(d2) <span class=3D"gmail-Apple-converted-space">=C2=A0 =C2=A0 </span>n=
+r_pages: 0x2000</font></span></p>
+<div><font size=3D"1" style=3D"background-color:rgb(255,255,255)" color=3D"=
+#000000"><span style=3D"font-variant-ligatures:no-common-ligatures;font-fam=
+ily:Menlo">(d2) </span><span class=3D"gmail-Apple-converted-space" style=3D=
+"font-variant-ligatures:no-common-ligatures;font-family:Menlo">=C2=A0 </spa=
+n><span style=3D"font-variant-ligatures:no-common-ligatures;font-family:Men=
+lo">shared_inf: 0x06182000(MA)</span>=C2=A0</font></div><div><font size=3D"=
+1" style=3D"background-color:rgb(255,255,255)" color=3D"#000000"><br></font=
+></div><div><br></div><div>Any explanation/idea on what could be occurring =
+would be appreciated.</div><div><br></div><div>Cheers,</div><div><br></div>=
+<div>Bruno</div></div>
+
+--089e0828f134074ea20562dda0b2--
+
+
+--===============0791998991113820049==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0791998991113820049==--
