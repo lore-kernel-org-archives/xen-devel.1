@@ -1,16 +1,22 @@
-From: "Ganesh  H" <ganesh.h@tataelxsi.co.in>
-Subject: Xen on RCarH3 Starter Kit
-Date: Tue, 16 Jan 2018 06:52:02 +0000
-Message-ID: <HK2PR04MB162076BDCBFCBC19FA68CFD1CAEA0@HK2PR04MB1620.apcprd04.prod.outlook.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] fix potential null dereference
+Date: Tue, 16 Jan 2018 00:11:20 -0700
+Message-ID: <5A5DB3A8020000780019EF05@prv-mh.provo.novell.com>
+References: <alpine.DEB.2.10.1801121538050.5767@sstabellini-ThinkPad-X260>
+ <5ba8b0e5-21a9-1999-5aff-f9b9062827f6@linaro.org>
+ <5A5C72F2020000780019EAB8@prv-mh.provo.novell.com>
+ <alpine.DEB.2.10.1801151049130.5767@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1608682436152475442=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=eqwl=el=tataelxsi.co.in=ganesh.h@srs-us1.protection.inumbo.net>)
- id 1ebL6V-0006Gd-At
- for xen-devel@lists.xenproject.org; Tue, 16 Jan 2018 06:52:15 +0000
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=n0uv=el=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1ebLP8-0007j9-Bi
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2018 07:11:30 +0000
+In-Reply-To: <alpine.DEB.2.10.1801151049130.5767@sstabellini-ThinkPad-X260>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,145 +25,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "embedded-pv-devel@lists.xenproject.org" <embedded-pv-devel@lists.xenproject.org>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@linaro.org>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1608682436152475442==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_HK2PR04MB162076BDCBFCBC19FA68CFD1CAEA0HK2PR04MB1620apcp_"
-
---_000_HK2PR04MB162076BDCBFCBC19FA68CFD1CAEA0HK2PR04MB1620apcp_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-Does Xen support RCarH3 Starter Kit -  https://elinux.org/R-Car/Boards/H3SK
-
-I followed the build procedures explained in this link for Salvator X - htt=
-ps://wiki.xenproject.org/wiki/Xen_ARM_with_Virtualization_Extensions/Salvat=
-or-X
-
-But the Yocto build instructions given in the link is for RcarH3 Starter ki=
-t.So I am unable to find Image-r8a7795-salvator-x-xen.dtb and xen-salvator-=
-x.uImage which is mentioned in the tutorial.
-Can anyone explain what can be the issue and the fix for it. Does the Xen d=
-tb and uImage for salvator will work on RCarH3 starter kit.
-
-Best Regards
-Ganesh.H
-
-
-
---_000_HK2PR04MB162076BDCBFCBC19FA68CFD1CAEA0HK2PR04MB1620apcp_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:"Calibri Light";
-	panose-1:2 15 3 2 2 2 4 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-@font-face
-	{font-family:"Segoe UI";
-	panose-1:2 11 5 2 4 2 4 2 2 3;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:#0563C1;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:#954F72;
-	text-decoration:underline;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri",sans-serif;
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">Hi,<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Does Xen support RCarH3 Starter Kit - &nbsp;<a href=
-=3D"https://elinux.org/R-Car/Boards/H3SK">https://elinux.org/R-Car/Boards/H=
-3SK</a><o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">I followed the build procedures explained in this li=
-nk for Salvator X -
-<a href=3D"https://wiki.xenproject.org/wiki/Xen_ARM_with_Virtualization_Ext=
-ensions/Salvator-X">
-https://wiki.xenproject.org/wiki/Xen_ARM_with_Virtualization_Extensions/Sal=
-vator-X</a><o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">But the Yocto build instructions given in the link i=
-s for RcarH3 Starter kit.So I am unable to find Image-r8a7795-salvator-x-xe=
-n.dtb and xen-salvator-x.uImage which is mentioned in the tutorial.<o:p></o=
-:p></p>
-<p class=3D"MsoNormal">Can anyone explain what can be the issue and the fix=
- for it. Does the Xen dtb and uImage for salvator will work on RCarH3 start=
-er kit.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;color:#1F497D;backg=
-round:white">Best Regards</span><span style=3D"font-size:11.5pt;font-family=
-:&quot;Segoe UI&quot;,sans-serif;color:#212121"><o:p></o:p></span></p>
-<p class=3D"MsoNormal" style=3D"background:white"><span style=3D"font-size:=
-10.0pt;font-family:&quot;Calibri Light&quot;,sans-serif;color:#1F497D;backg=
-round:#FFEE94">Ganesh.H</span><span style=3D"font-size:10.0pt;font-family:&=
-quot;Calibri Light&quot;,sans-serif;color:#1F497D;background:white"><br>
-<br>
-</span><span style=3D"font-size:11.5pt;font-family:&quot;Segoe UI&quot;,san=
-s-serif;color:#212121"><o:p></o:p></span></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-</body>
-</html>
-
---_000_HK2PR04MB162076BDCBFCBC19FA68CFD1CAEA0HK2PR04MB1620apcp_--
-
-
---===============1608682436152475442==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1608682436152475442==--
+Pj4+IE9uIDE1LjAxLjE4IGF0IDE5OjUxLCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6
+Cj4gT24gTW9uLCAxNSBKYW4gMjAxOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+ID4+PiBPbiAxMy4w
+MS4xOCBhdCAwNzoyMSwgPGp1bGllbi5ncmFsbEBsaW5hcm8ub3JnPiB3cm90ZToKPj4gPiBPbiAw
+MS8xMi8yMDE4IDExOjQwIFBNLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4+ID4+IGhhbmRs
+ZXMgY2FuIHRoZW9yZXRpY2FsbHkgYmUgTlVMTCwgY2hlY2sgZm9yIGl0IGV4cGxpY2l0bHkgYmVm
+b3JlCj4+ID4+IGRlcmVmZXJlbmNpbmcgaXQuCj4+ID4gCj4+ID4gSSBkb3VidCBoYW5kbGVzIGNv
+dWxkIGJlIE5VTEwgaWYgTG9jYXRlSGFuZGxlIHN1Y2NlZWQuIFRoaXMgc2VlbXMgdG8gYmUgCj4+
+ID4gY29uZmlybWVkIGJ5IHRoZSBzcGVjIChQYWdlIDIwOCBpbiBVRUZJIHNwZWMgMi43KS4KPj4g
+PiAKPj4gPiBTbyBJIGFtIG5vdCBlbnRpcmVseSBjb252aW5jZSB3ZSBzaG91bGQgYWRkIHlldCBh
+bm90aGVyIGNoZWNrIGluIHRoZSAKPj4gPiBjb2RlLiBBbiBBU1NFUlQgbWlnaHQgYmUgYmV0dGVy
+Lgo+PiAKPj4gSW5kZWVkIGlmIHRoZXJlIGlzIGEgcGxhdGZvcm0gd2hlcmUgTlVMTCBpcyBjb21p
+bmcgYmFjayBpbiB0aGUKPj4gc3VjY2VzcyBjYXNlLCB0aGF0IHBsYXRmb3JtIHNob3VsZCBiZSBu
+YW1lZCBhcyBhIGp1c3RpZmljYXRpb24KPj4gaW4gdGhlIGNvbW1pdCBtZXNzYWdlLiBPdGhlcndp
+c2UgSSBkb24ndCBzZWUgdGhlIHZhbHVlIG9mIHRoaXMKPj4gY2hhbmdlLgo+IAo+IFRydXRoZnVs
+bHksIGl0IGlzIG1vc3RseSB0byBzaWxlbmNlIENvdmVyaXR5LiBXZSBjYW4gYWxsIGFwcHJlY2lh
+dGUgd2hlbgo+IHN0YXRpYyBhbmFseXN0cyBjYW5ub3QgZmluZCBkZWZlY3RzIGluIHRoZSBjb2Rl
+LgoKU28gd2hhdCBkb2VzIENvdmVyaXR5IGRpc2xpa2UgaGVyZSAodGhlIG1vcmUgdGhhdCB0aGlz
+IGlzIG9uIGEKYm9vdCBwYXRoLCBpLmUuIG5vdCBleHBsb2l0YWJsZSBieSBndWVzdHMgYXQgYWxs
+IGluIHRoZSBmaXJzdCBwbGFjZSk/Ck1lcmVseSB0aGUgTlVMTCBwb2ludGVyPyBXaGF0IGlmIHRo
+ZSBpbnRlcmZhY2UgZ2F2ZSBiYWNrIGEKcG9pbnRlciB3aXRoIGEgdmFsdWUgb2YgMHgxMjM0NTY3
+ODlhYmNkZWY/CgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
