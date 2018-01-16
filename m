@@ -1,21 +1,23 @@
-From: Doug Goldstein <cardoe@cardoe.com>
+From: George Dunlap <dunlapg@umich.edu>
 Subject: Re: Rudolph: merging Vixen and Comet
-Date: Tue, 16 Jan 2018 10:42:17 -0600
-Message-ID: <808b6de4-be69-4a4c-1cd3-40b6dc8a5bde@cardoe.com>
+Date: Tue, 16 Jan 2018 16:51:13 +0000
+Message-ID: <CAFLBxZYsneE=pst_aJ0rEyV_855UD4PfUAuQiogxL9hG_9nRKg@mail.gmail.com>
 References: <20180112132409.4d4fn6mbprgm7vhg@citrix.com>
  <20180112141704.GC16260@aepfle.de>
  <20180112142030.puipf25gp2fooaxe@citrix.com>
+ <808b6de4-be69-4a4c-1cd3-40b6dc8a5bde@cardoe.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5730787383855562524=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=y/8d=el=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
- id 1ebUJf-000719-Il
- for xen-devel@lists.xenproject.org; Tue, 16 Jan 2018 16:42:27 +0000
-Received: by mail-yw0-x244.google.com with SMTP id u21so7033347ywc.2
- for <xen-devel@lists.xenproject.org>; Tue, 16 Jan 2018 08:42:25 -0800 (PST)
-In-Reply-To: <20180112142030.puipf25gp2fooaxe@citrix.com>
+ (envelope-from <srs0=prux=el=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
+ id 1ebUSB-0007kp-CW
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2018 16:51:15 +0000
+Received: by mail-qk0-x244.google.com with SMTP id l64so21574553qke.13
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Jan 2018 08:51:14 -0800 (PST)
+In-Reply-To: <808b6de4-be69-4a4c-1cd3-40b6dc8a5bde@cardoe.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,103 +26,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>, Olaf Hering <olaf@aepfle.de>
-Cc: Anthony Liguori <aliguori@amazon.com>, KarimAllah Ahmed <karahmed@amazon.de>, jschoenh@amazon.de, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>, Matt Wilson <msw@amazon.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: Doug Goldstein <cardoe@cardoe.com>
+Cc: Olaf Hering <olaf@aepfle.de>, Wei Liu <wei.liu2@citrix.com>, Anthony Liguori <aliguori@amazon.com>, KarimAllah Ahmed <karahmed@amazon.de>, =?UTF-8?Q?Jan_H=2E_Sch=C3=B6nherr?= <jschoenh@amazon.de>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>, Matt Wilson <msw@amazon.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5730787383855562524==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="ZPSXp31pp1W2dAR2d2OmfldD562YF16WW"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---ZPSXp31pp1W2dAR2d2OmfldD562YF16WW
-Content-Type: multipart/mixed; boundary="be9DHN2QGTo0NE1QnfEuvsdd4JbizoElS";
- protected-headers="v1"
-From: Doug Goldstein <cardoe@cardoe.com>
-To: Wei Liu <wei.liu2@citrix.com>, Olaf Hering <olaf@aepfle.de>
-Cc: Matt Wilson <msw@amazon.com>, KarimAllah Ahmed <karahmed@amazon.de>,
- jschoenh@amazon.de, Anthony Liguori <aliguori@amazon.com>,
- Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Message-ID: <808b6de4-be69-4a4c-1cd3-40b6dc8a5bde@cardoe.com>
-Subject: Re: [Xen-devel] Rudolph: merging Vixen and Comet
-References: <20180112132409.4d4fn6mbprgm7vhg@citrix.com>
- <20180112141704.GC16260@aepfle.de>
- <20180112142030.puipf25gp2fooaxe@citrix.com>
-In-Reply-To: <20180112142030.puipf25gp2fooaxe@citrix.com>
-
---be9DHN2QGTo0NE1QnfEuvsdd4JbizoElS
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 1/12/18 8:20 AM, Wei Liu wrote:
-> On Fri, Jan 12, 2018 at 03:17:04PM +0100, Olaf Hering wrote:
->> On Fri, Jan 12, Wei Liu wrote:
->>
->>>                       Vixen                          Comet
->>> Guest console         Output only                    Bi-directional
->>
->> With the proper patch input works for Vixen. Unless this item mean
->> something else.
->=20
-> Vixen means the version upstream put into the advisory. The patch you
-> talked about is not provided in that branch.
->=20
-> Wei.
->=20
-
-Can we merge some fixes people have proposed into the Vixen branch?
-There are a number of virtualization providers that have rolled forward
-with Vixen. They are clearly contributing patches on the ML and having
-one place to work together would be nice.
-
-We can always host a fork on GitHub and merge patches there as well if
-that's preferred.
-
---=20
-Doug Goldstein
-
-
---be9DHN2QGTo0NE1QnfEuvsdd4JbizoElS--
-
---ZPSXp31pp1W2dAR2d2OmfldD562YF16WW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlpeK2lfFIAAAAAALgAo
-aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
-MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
-Nl1HcA//QOfI5+8TlHESO2Mn8DWlTR8jjfVykgfqaLJhHl+yIKBiN0v0ZFD0Mxk9
-3EXyL6yyMLNZRXs02MEfmAZzClINN8jUTNFEHZr1uwHOXqCyeMJ608jd6eqbuC3f
-9kT/UwCYquPO6gPDMM2w5CFj8sDuUj3rgiC+SqcQkn/KBDOEW73DlzHLyscwxwGG
-pM9O5GzaplUlw138emF4x7MDHIS/UsO9iK0lr+b5GgeTBNY8anyZXdfWBA505jh/
-IW9fvcRlYX9qlxL3g0pONWZguLaFQrZBkagmJ57tHMhnvv6KBKb4agwsm/GvGjdk
-3tIoiN1Bu5DC2aRAEY0/SU4s6Q35GMrd5JtkZHVTkqp/9pa2Jl6Wjn7KjEts00II
-Igl3lMl1p383c2syy7+a2hSM/SrT/HBWQlCZwlnRGMprDFGbmCpUBc9nNtuEJBg5
-fgQgPNYurUPxfzRSa2CP4ynjqxLN2N633jN2sKKxtAMq+7MF1C/YiAH4sdHJnCcP
-hxNUvKxhGfo9X9DeGM9bN38YhqnRGYYu0Zk53VVdPHT4l1CEMGJImqxLg+nfyrjb
-I9UvIRRhCjxTXFOpKrhecBjTckirizq+G8mq9v4vGLe4lyZIpNIbVYFos8zlXvWW
-AbHvgEhQ/hr0B8W7XFB0jcGdMysir4kSZ+YhZpzUyA1ovVPalYo=
-=cKvx
------END PGP SIGNATURE-----
-
---ZPSXp31pp1W2dAR2d2OmfldD562YF16WW--
-
-
---===============5730787383855562524==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5730787383855562524==--
+T24gVHVlLCBKYW4gMTYsIDIwMTggYXQgNDo0MiBQTSwgRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBj
+YXJkb2UuY29tPiB3cm90ZToKPiBPbiAxLzEyLzE4IDg6MjAgQU0sIFdlaSBMaXUgd3JvdGU6Cj4+
+IE9uIEZyaSwgSmFuIDEyLCAyMDE4IGF0IDAzOjE3OjA0UE0gKzAxMDAsIE9sYWYgSGVyaW5nIHdy
+b3RlOgo+Pj4gT24gRnJpLCBKYW4gMTIsIFdlaSBMaXUgd3JvdGU6Cj4+Pgo+Pj4+ICAgICAgICAg
+ICAgICAgICAgICAgICBWaXhlbiAgICAgICAgICAgICAgICAgICAgICAgICAgQ29tZXQKPj4+PiBH
+dWVzdCBjb25zb2xlICAgICAgICAgT3V0cHV0IG9ubHkgICAgICAgICAgICAgICAgICAgIEJpLWRp
+cmVjdGlvbmFsCj4+Pgo+Pj4gV2l0aCB0aGUgcHJvcGVyIHBhdGNoIGlucHV0IHdvcmtzIGZvciBW
+aXhlbi4gVW5sZXNzIHRoaXMgaXRlbSBtZWFuCj4+PiBzb21ldGhpbmcgZWxzZS4KPj4KPj4gVml4
+ZW4gbWVhbnMgdGhlIHZlcnNpb24gdXBzdHJlYW0gcHV0IGludG8gdGhlIGFkdmlzb3J5LiBUaGUg
+cGF0Y2ggeW91Cj4+IHRhbGtlZCBhYm91dCBpcyBub3QgcHJvdmlkZWQgaW4gdGhhdCBicmFuY2gu
+Cj4+Cj4+IFdlaS4KPj4KPgo+IENhbiB3ZSBtZXJnZSBzb21lIGZpeGVzIHBlb3BsZSBoYXZlIHBy
+b3Bvc2VkIGludG8gdGhlIFZpeGVuIGJyYW5jaD8KPiBUaGVyZSBhcmUgYSBudW1iZXIgb2Ygdmly
+dHVhbGl6YXRpb24gcHJvdmlkZXJzIHRoYXQgaGF2ZSByb2xsZWQgZm9yd2FyZAo+IHdpdGggVml4
+ZW4uIFRoZXkgYXJlIGNsZWFybHkgY29udHJpYnV0aW5nIHBhdGNoZXMgb24gdGhlIE1MIGFuZCBo
+YXZpbmcKPiBvbmUgcGxhY2UgdG8gd29yayB0b2dldGhlciB3b3VsZCBiZSBuaWNlLgoKSWYgQW50
+aG9ueSBpcyBPSywgd2UgY2FuIGNhbGwgaGltIHRoZSAibWFpbnRhaW5lciIgZm9yIHRoZSBWaXhl
+bgpicmFuY2g7IHRoZSBjb21taXR0ZXJzIGNhbiBjaGVjayBpbiBhbnl0aGluZyB0aGF0IGhhcyBo
+aXMgQWNrIHRvIHRoZQpWaXhlbiBicmFuY2gsIGFuZCB0aGUgU2VjdXJpdHkgVGVhbSBjYW4gcG9z
+dCBuZXcgc2lnbmVkIHRhZ3Mgd2hlbgphcHByb3ByaWF0ZS4KCkl0IGxvb2tlZCBsaWtlIEFudGhv
+bnkgaGFkIHNvbWUgaXNzdWVzIHdpdGggdGhlIG1vc3QgcmVjZW50IHBhdGNoIHRob3VnaC4KCiAt
+R2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
