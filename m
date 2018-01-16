@@ -1,10 +1,23 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [qemu-mainline test] 118091: regressions - FAIL
-Date: Tue, 16 Jan 2018 11:34:38 +0000
-Message-ID: <osstest-118091-mainreport@xen.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2 1/2] x86: Meltdown band-aid against
+ malicious 64-bit PV guests
+Date: Tue, 16 Jan 2018 11:51:58 +0000
+Message-ID: <52d452a0-5b01-25a3-5ac6-28c033408fe6@citrix.com>
+References: <5A5C981A020000780019EB82@prv-mh.provo.novell.com>
+ <5A5C994B020000780019EB94@prv-mh.provo.novell.com>
+ <793eca29-b24b-9807-cc37-fd0332b35dbe@citrix.com>
+ <5A5DBBCA020000780019EF2F@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6528777687019789921=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=3dza=el=citrix.com=prvs=547832a6c=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1ebPmd-00053b-8S
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2018 11:52:03 +0000
+In-Reply-To: <5A5DBBCA020000780019EF2F@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,201 +26,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============6528777687019789921==
-Content-Type: text/plain
-
-flight 118091 qemu-mainline real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118091/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-arm64                   6 xen-build                fail REGR. vs. 117930
- test-armhf-armhf-xl-credit2 16 guest-start/debian.repeat fail REGR. vs. 117930
-
-Tests which did not succeed, but are not blocking:
- build-arm64-libvirt           1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl           1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-credit2   1 build-check(1)               blocked  n/a
- test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 117930
- test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 117930
- test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 117930
- test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 117930
- test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 117930
- test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 117930
- test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
- test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
- test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
- test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
- test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
- test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
- test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
- test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop              fail never pass
- test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
- test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
-
-version targeted for testing:
- qemuu                f521eeee3bd060b460c99e605472b7e03967db43
-baseline version:
- qemuu                7398166ddf7c6dbbc9cae6ac69bb2feda14b40ac
-
-Last test of basis   117930  2018-01-12 23:48:34 Z    3 days
-Failing since        118034  2018-01-15 10:18:58 Z    1 days    2 attempts
-Testing same since   118091  2018-01-16 05:03:58 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Alexey Perevalov <a.perevalov@samsung.com>
-  Daniel P. Berrange <berrange@redhat.com>
-  Dr. David Alan Gilbert <dgilbert@redhat.com>
-  Frediano Ziglio <fziglio@redhat.com>
-  Gerd Hoffmann <kraxel@redhat.com>
-  Jindrich Makovicka <makovick@gmail.com>
-  Juan Quintela <quintela@redhat.com>
-  Laurent Vivier <lvivier@redhat.com>
-  linzhecheng <linzhecheng@huawei.com>
-  Peter Maydell <peter.maydell@linaro.org>
-  Peter Xu <peterx@redhat.com>
-  Philippe Mathieu-Daudé <f4bug@amsat.org>
-  Samuel Thibault <samuel.thibault@ens-lyon.org>
-  Thomas Huth <thuth@redhat.com>
-  Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-armhf-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  fail    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          blocked 
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl                                          pass    
- test-arm64-arm64-xl                                          blocked 
- test-armhf-armhf-xl                                          pass    
- test-amd64-i386-xl                                           pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 blocked 
- test-armhf-armhf-libvirt-xsm                                 pass    
- test-amd64-i386-libvirt-xsm                                  pass    
- test-amd64-amd64-xl-xsm                                      pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-armhf-armhf-xl-xsm                                      pass    
- test-amd64-i386-xl-xsm                                       pass    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-amd64-xl-pvhv2-amd                                fail    
- test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
- test-amd64-i386-freebsd10-amd64                              pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-i386-xl-qemuu-win7-amd64                          fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
- test-armhf-armhf-xl-arndale                                  pass    
- test-amd64-amd64-xl-credit2                                  pass    
- test-arm64-arm64-xl-credit2                                  blocked 
- test-armhf-armhf-xl-credit2                                  fail    
- test-armhf-armhf-xl-cubietruck                               pass    
- test-amd64-i386-freebsd10-i386                               pass    
- test-amd64-amd64-xl-qemuu-win10-i386                         fail    
- test-amd64-i386-xl-qemuu-win10-i386                          fail    
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-amd64-xl-pvhv2-intel                              fail    
- test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
- test-amd64-amd64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-xl-multivcpu                                pass    
- test-armhf-armhf-xl-multivcpu                                pass    
- test-amd64-amd64-pair                                        pass    
- test-amd64-i386-pair                                         pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-amd64-amd64-amd64-pvgrub                                pass    
- test-amd64-amd64-i386-pvgrub                                 pass    
- test-amd64-amd64-pygrub                                      pass    
- test-amd64-amd64-xl-qcow2                                    pass    
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-i386-xl-raw                                       pass    
- test-amd64-amd64-xl-rtds                                     pass    
- test-armhf-armhf-xl-rtds                                     pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
- test-armhf-armhf-xl-vhd                                      pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 745 lines long.)
-
-
---===============6528777687019789921==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6528777687019789921==--
+T24gMTYvMDEvMTggMDc6NDYsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDE1LjAxLjE4IGF0
+IDE5OjIzLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IE9uIDE1LzAxLzE4
+IDExOjA2LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+IC0tLSBhL3hlbi9hcmNoL3g4Ni94ODZfNjQv
+Y29tcGF0L2VudHJ5LlMKPj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni94ODZfNjQvY29tcGF0L2VudHJ5
+LlMKPj4+IEBAIC0xOTksNiArMTk5LDE3IEBAIEVOVFJZKGNzdGFyX2VudGVyKQo+Pj4gICAgICAg
+ICAgcHVzaHEgJDAKPj4+ICAgICAgICAgIG1vdmwgICRUUkFQX3N5c2NhbGwsIDQoJXJzcCkKPj4+
+ICAgICAgICAgIFNBVkVfQUxMCj4+PiArCj4+PiArICAgICAgICBHRVRfU1RBQ0tfRU5EKGJ4KQo+
+Pj4gKyAgICAgICAgbW92ICAgU1RBQ0tfQ1BVSU5GT19GSUVMRCh4ZW5fY3IzKSglcmJ4KSwgJXJj
+eAo+Pj4gKyAgICAgICAgbmVnICAgJXJjeAo+Pj4gK1VOTElLRUxZX1NUQVJUKG56LCBjc3Rhcl9j
+cjMpCj4+PiArICAgICAgICBtb3YgICAlcmN4LCBTVEFDS19DUFVJTkZPX0ZJRUxEKHhlbl9jcjMp
+KCVyYngpCj4+PiArICAgICAgICBuZWcgICAlcmN4Cj4+PiArICAgICAgICB3cml0ZV9jcjMgcmN4
+LCByZGksIHJzaQo+Pj4gKyAgICAgICAgbW92cSAgJDAsIFNUQUNLX0NQVUlORk9fRklFTEQoeGVu
+X2NyMykoJXJieCkKPj4+ICtVTkxJS0VMWV9FTkQoY3N0YXJfY3IzKQo+PiBUaGVzZSBVTkxJS0VM
+WSgpcyBhcmVuJ3QgY29ycmVjdC4gIEl0IHdpbGwgZGVwZW5kIG9uIGhhcmR3YXJlIGFuZAo+PiBj
+b21tYW5kIGxpbmUgc2V0dGluZyBhcyB0byB3aGV0aGVyIHdlIGV4cGVjdCB0byB1cGRhdGUgY3Iz
+Lgo+IFdoeSBhcmUgdGhleSBub3QgY29ycmVjdD8gV2hhdCA2NC1iaXQga2VybmVscyBkbyB5b3Ug
+a25vdyB0aGF0Cj4gdXNlIHRoZSBDU1RBUiBlbnRyeSBtZXRob2QgaW4gUFYgbW9kZT8KCk5vbmUs
+IGJ1dCBJIGFsc28gZG9uJ3Qgc2VlIHlvdSBleGNsdWRpbmcgMzJiaXQgUFYgZ3Vlc3RzLCB3aGlj
+aCBtZWFucyB3ZQpkbyB0YWtlIHRoZSB1bmxpa2VseSBwYXRoIGFsbCB0aGUgdGltZSBpbiBnZW5l
+cmFsLgoKPiAgQWZhaWsgdGhpcyB3YXMgaW4KPiBleGlzdGVuY2UgZm9yIGEgcmFuZ2Ugb2Yga2Vy
+bmVsIHZlcnNpb25zIG9ubHkgaW4gb3VyIGZvcndhcmQgcG9ydC4KPiBUaGUgSU5UODAgcGF0aCBp
+cyBwZXJoYXBzIGluZGVlZCBtb3JlIHF1ZXN0aW9uYWJsZSBpbiB0aGlzIHJlZ2FyZC4KPgo+PiBG
+dXJ0aGVybW9yZSwgdGhleSB3aWxsIGNvbXBsaWNhdGUgc3BsaXR0aW5nIHRoZSBlYXJseSBlbnRy
+eSBjb2RlIGF3YXkKPj4gZnJvbSB0aGUgbWFpbiAudGV4dCBzZWN0aW9uIGZvciBhIGZ1bGwgaXNv
+bGF0aW9uIGltcGxlbWVudGF0aW9uLgo+Pgo+PiBGb3Igbm93LCBJJ2QgZHJvcCB0aGVtIGFuZCBo
+YXZlIGEgc2ltcGxlIGp6IC5Mc2tpcC4KPiBJIHdpbGwgcmVwbGFjZSB0aGVtIChvbiB0aGUgZW50
+cnkgcGF0aHM7IEkgdGhpbmsgdGhlIG9uZSBvbiB0aGUgZXhpdC0KPiB0by1YZW4gcGF0aCBpcyB2
+YWxpZCkgdG8gcGxlYXNlIHlvdSBhbmQgaW4gdGhlIGludGVyZXN0IG9mIGZvcndhcmQKPiBwcm9n
+cmVzczsgbWF5YmUgdGhpcyB3aWxsIGV2ZW4gc2xpZ2h0bHkgaGVscCBiYWNrcG9ydGluZyB0byBy
+ZWFsbHkgb2xkCj4gWGVuIHZlcnNpb25zLCB3aGVyZSB0aGUgVU5MSUtFTFkqIGNvbnN0cnVjdHMg
+ZG9uJ3QgZXhpc3QgeWV0Lgo+Cj4+IEFsc28sIGNhbiB3ZSBjb2xsZWN0IHRoZXNlIHRvZ2V0aGVy
+IGludG8gbWFjcm9zLCByYXRoZXIgdGhhbgo+PiBvcGVuY29kaW5nPyAgV2Ugc2VlbSB0byBoYXZl
+IDMgZGlzdGluY3QgdmFyaWF0aW9ucy4KPiBJIGhhZCBjb25zaWRlcmVkIHRoYXQgKGZvbGxvd2lu
+ZyB0aGUgbW9kZWwgeW91IHVzZSBpbiB0aGUgU1AyCj4gc2VyaWVzKSwgYnV0IGRlY2lkZWQgYWdh
+aW5zdCBpdCBub3QgdGhlIGxlYXN0IGJlY2F1c2Ugb2YgdGhlCj4gZGVwZW5kZW50IGJ1dCBwbGFj
+ZW1lbnQtd2lzZSBzZXBhcmF0ZWQgY29kZSBhZGRpdGlvbnMgdG8KPiByZXN0b3JlIG9yaWdpbmFs
+IHZhbHVlcy4gUGx1cyBhZ2FpbiB0aGlzIG1pZ2h0IGJlIGEgaGluZHJhbmNlIG9mCj4gYmFja3Bv
+cnRpbmcgdG8gcmVhbGx5IG9sZCBYZW4gKHdoaWNoIHRoZW4gdHlwaWNhbGx5IHdpbGwgYWxzbyBi
+ZQo+IGJ1aWx0IG9uIHJlYWxseSBvbGQgdG9vbCBjaGFpbnMpIC0gYXMgeW91IGNlcnRhaW5seSBy
+ZWNhbGwgb2xkIGdhcwo+IGhhZCBxdWl0ZSBhIGZldyBpc3N1ZXMgd2l0aCBtYWNybyBoYW5kbGlu
+Zy4KClRoZXJlIGlzIG5vdGhpbmcgc3BlY2lhbCBpbiB0aGVzZSBtYWNyb3MgdGhvdWdoP8KgIEkg
+Zm91bmQgdGhlIFNQMi1zdHlsZQpmYXIgZWFzaWVyIHRvIGJhY2twb3J0IGJlY2F1c2UgdGhleSBh
+cmUgYSBzaW5nbGUgc2xvdC1pbiBsaW5lLgoKQW55d2F5LCBJJ20gbm90IG92ZXJseSBmdXNzZWQs
+IGJ1dCBJIGhhdmUgYQoKPgo+Pj4gLS0tIGEveGVuL2FyY2gveDg2L3g4Nl82NC9lbnRyeS5TCj4+
+PiArKysgYi94ZW4vYXJjaC94ODYveDg2XzY0L2VudHJ5LlMKPj4+IEBAIC0zNyw2ICszNywzMiBA
+QCBFTlRSWShzd2l0Y2hfdG9fa2VybmVsKQo+Pj4gIC8qICVyYng6IHN0cnVjdCB2Y3B1LCBpbnRl
+cnJ1cHRzIGRpc2FibGVkICovCj4+PiAgcmVzdG9yZV9hbGxfZ3Vlc3Q6Cj4+PiAgICAgICAgICBB
+U1NFUlRfSU5URVJSVVBUU19ESVNBQkxFRAo+Pj4gKwo+Pj4gKyAgICAgICAgLyogQ29weSBndWVz
+dCBtYXBwaW5ncyBhbmQgc3dpdGNoIHRvIHBlci1DUFUgcm9vdCBwYWdlIHRhYmxlLiAqLwo+Pj4g
+KyAgICAgICAgbW92ICAgJWNyMywgJXI5Cj4+PiArICAgICAgICBHRVRfU1RBQ0tfRU5EKGR4KQo+
+Pj4gKyAgICAgICAgbW92ICAgU1RBQ0tfQ1BVSU5GT19GSUVMRChwdl9jcjMpKCVyZHgpLCAlcmRp
+Cj4+PiArICAgICAgICBtb3ZhYnMgJFBBRERSX01BU0sgJiBQQUdFX01BU0ssICVyc2kKPj4+ICsg
+ICAgICAgIG1vdmFicyAkRElSRUNUTUFQX1ZJUlRfU1RBUlQsICVyY3gKPj4+ICsgICAgICAgIG1v
+diAgICVyZGksICVyYXgKPj4+ICsgICAgICAgIGFuZCAgICVyc2ksICVyZGkKPj4+ICsgICAgICAg
+IGFuZCAgICVyOSwgJXJzaQo+Pj4gKyAgICAgICAgYWRkICAgJXJjeCwgJXJkaQo+Pj4gKyAgICAg
+ICAgYWRkICAgJXJjeCwgJXJzaQo+Pj4gKyAgICAgICAgbW92ICAgJFJPT1RfUEFHRVRBQkxFX0ZJ
+UlNUX1hFTl9TTE9ULCAlZWN4Cj4+PiArICAgICAgICBtb3YgICByb290X3RhYmxlX29mZnNldChT
+SF9MSU5FQVJfUFRfVklSVF9TVEFSVCkqOCglcnNpKSwgJXI4Cj4+PiArICAgICAgICBtb3YgICAl
+cjgsIHJvb3RfdGFibGVfb2Zmc2V0KFNIX0xJTkVBUl9QVF9WSVJUX1NUQVJUKSo4KCVyZGkpCj4+
+PiArICAgICAgICByZXAgbW92c3EKPj4+ICsgICAgICAgIG1vdiAgICRST09UX1BBR0VUQUJMRV9F
+TlRSSUVTIC0gXAo+Pj4gKyAgICAgICAgICAgICAgIFJPT1RfUEFHRVRBQkxFX0xBU1RfWEVOX1NM
+T1QgLSAxLCAlZWN4Cj4+PiArICAgICAgICBzdWIgICAkKFJPT1RfUEFHRVRBQkxFX0ZJUlNUX1hF
+Tl9TTE9UIC0gXAo+Pj4gKyAgICAgICAgICAgICAgICBST09UX1BBR0VUQUJMRV9MQVNUX1hFTl9T
+TE9UIC0gMSkgKiA4LCAlcnNpCj4+PiArICAgICAgICBzdWIgICAkKFJPT1RfUEFHRVRBQkxFX0ZJ
+UlNUX1hFTl9TTE9UIC0gXAo+Pj4gKyAgICAgICAgICAgICAgICBST09UX1BBR0VUQUJMRV9MQVNU
+X1hFTl9TTE9UIC0gMSkgKiA4LCAlcmRpCj4+PiArICAgICAgICByZXAgbW92c3EKPj4+ICsgICAg
+ICAgIG1vdiAgICVyOSwgU1RBQ0tfQ1BVSU5GT19GSUVMRCh4ZW5fY3IzKSglcmR4KQo+Pj4gKyAg
+ICAgICAgd3JpdGVfY3IzIHJheCwgcmRpLCByc2kKPj4+ICsKPj4gQ2FuIHdlIHBvc3NpYmx5IG1v
+dmUgdGhpcyB1cCBpbnRvIEM/ICBGb3IgdGhpcyBzaW1wbGlzdGljIGFsZ29yaXRobSBpdAo+PiBp
+cyBvayBpbiBBU00sIGJ1dCBpZiB3ZSB3YW50IHRvIGRvIGFueSBvcHRpbWlzYXRpb25zIHRvIGF2
+b2lkIHRoZSA0awo+PiBtZW1jcHkgKGdlbmVyYXRpb24gY291bnQgaGlkZGVuIHNvbWV3aGVyZSBp
+biBwYWdlX2luZm8/KSwgQVNNIGlzIGdvaW5nCj4+IHF1aWNrbHkgYmVjb21lIHVud2llbGR5Lgo+
+IEknZCBwcmVmZXIgdG8gbW92ZSBpdCBpbnRvIEMgd2hlbiBpdCByZWFsbHkgYmVjb21lcyBuZWNl
+c3NhcnkuIEFsc28KPiB5b3UgZG9uJ3QgcHJvcGVybHkgcXVhbGlmeSAidGhpcyIgLSBmb3IgZXhh
+bXBsZSwgSSdkIHJhdGhlciBub3QgbW92ZQo+IHRoZSB3cml0ZV9jcjMgaW52b2NhdGlvbiBpbnRv
+IEMsIHlldCB0aGUgcGxhY2VtZW50IG9mIHlvdXIgY29tbWVudAo+IHN1Z2dlc3RzIHRvIGRvIHNv
+LgoKSSBtZWFudCB0aGUgd2hvbGUgaHVuaywgbm90IHdyaXRlX2NyMyBpdHNlbGYuCgo+Cj4+IEFu
+b3RoZXIgb3B0aW1pc2F0aW9uIEkgZm91bmQgbWFkZSBhIG1hc3NpdmUgZGlmZmVyZW5jZSBmb3Ig
+dGhlIEtBSVNFUgo+PiBzZXJpZXMgd2FzIHRvIGhhdmUgYW4gTVJVIGNhY2hlIG9mIDQgcGFnZXRh
+Ymxlcywgc28gaW4tZ3Vlc3Qgc3lzY2FsbHMKPj4gZG9uJ3QgcmVzdWx0IGluIGFueSBjb3B5aW5n
+IGFzIHdlIHBhc3MgaW4gYW5kIG91dCBvZiBYZW4uCj4gQXMgc2FpZCBlbHNld2hlcmUgLSBvcHRp
+bWl6YXRpb24gY2FuIGNvbWUgbGF0ZXIuIFBsdXMgLSBpcyBhdm9pZGluZyB0aGUKPiBjb3B5aW5n
+IGF0IF9hbnlfIHRpbWUgYWN0dWFsbHkgY29ycmVjdCwgY29uc2lkZXJpbmcgcG9zc2libGUgcmFj
+aW5nCj4gTDQgZW50cnkgdXBkYXRlcyBvbiBhbm90aGVyIHZDUFU/CgpsYXRlcj4gaW5kZWVkLgoK
+VGhlIGNvbW1vbiBiZWhhdmlvdXIgaXMgdGhhdCBMNCdzIGRvbid0IHJlYWxseSBjaGFuZ2UgYWZ0
+ZXIgZm9yaygpLCBzbwpoYXZpbmcgYSBnZW5lcmF0aW9uIGNvdW50IG9uIHRoZW0gd2lsbCBhbGxv
+dyBza2lwcGluZyBvZiB0aGUgbWVtY3B5KCkgaW4KbW9zdCBjYXNlcy4KCllvdSBjYW4ndCBza2lw
+IHRoZSBjaGVjaywgYnV0IHRoZSBhbW91bnQgb2YgbG9naWMgdXNlZCB0byBhdm9pZCBhIDRrCm1l
+bWNweSBjYW4gYmUgcXVpdGUgc3Vic3RhbnRpYWwgYW5kIHN0aWxsIGJlIGEgcGVyZm9ybWFuY2Ug
+d2luLgoKPgo+Pj4gQEAgLTcxLDYgKzk3LDE4IEBAIGlyZXRfZXhpdF90b19ndWVzdDoKPj4+ICAg
+ICAgICAgIEFMSUdOCj4+PiAgLyogTm8gc3BlY2lhbCByZWdpc3RlciBhc3N1bXB0aW9ucy4gKi8K
+Pj4+ICByZXN0b3JlX2FsbF94ZW46Cj4+PiArICAgICAgICAvKgo+Pj4gKyAgICAgICAgICogQ2hl
+Y2sgd2hldGhlciB3ZSBuZWVkIHRvIHN3aXRjaCB0byB0aGUgcGVyLUNQVSBwYWdlIHRhYmxlcywg
+aW4KPj4+ICsgICAgICAgICAqIGNhc2Ugd2UgcmV0dXJuIHRvIGxhdGUgUFYgZXhpdCBjb2RlIChm
+cm9tIGFuIE5NSSBvciAjTUMpLgo+Pj4gKyAgICAgICAgICovCj4+PiArICAgICAgICBHRVRfU1RB
+Q0tfRU5EKGF4KQo+Pj4gKyAgICAgICAgbW92ICAgU1RBQ0tfQ1BVSU5GT19GSUVMRCh4ZW5fY3Iz
+KSglcmF4KSwgJXJkeAo+Pj4gKyAgICAgICAgbW92ICAgU1RBQ0tfQ1BVSU5GT19GSUVMRChwdl9j
+cjMpKCVyYXgpLCAlcmF4Cj4+PiArICAgICAgICB0ZXN0ICAlcmR4LCAlcmR4Cj4+PiArVU5MSUtF
+TFlfU1RBUlQoZywgZXhpdF9jcjMpCj4+IGNtcCBvciBuZSA/Cj4gIm5lIiAob3IgcmVhbGx5ICJu
+eiIgd2hlbiB1c2VkIHdpdGggInRlc3QiKSBpcyBvdXRyaWdodCB3cm9uZyAtIHdlCj4gd2FudCB0
+byBza2lwIHRoZSByZXN0b3JlIHdoZW4gdGhlIHZhbHVlIGlzIHplcm8gX29yXyBuZWdhdGl2ZS4K
+PiBXaGF0J3Mgd3Jvbmcgd2l0aCAiamciIGFuZCAidGVzdCIgaW4gY29tYmluYXRpb24/IFRoZXJl
+IHNpbXBseSBpcwo+IG5vICJqbnN6IiAob3RoZXIgdGhhbiBlLmcuICJqbmJlIikuICJjbXAiIGFn
+YWluc3QgemVybyBjb3VsZCBiZQo+IHVzZWQgaGVyZSwgYnV0IHdoeSB3b3VsZCBJIHVzZSB0aGUg
+bGFyZ2VyIGluc3RydWN0aW9uIHdoZW4gInRlc3QiCj4gZG9lcz8KCmdyZWF0ZXIgb3IgbGVzcyB0
+aGFuIGlzIG5vdCBjb21tb25seSByZWxhdGVkIHRvIHRoZSB0ZXN0IGluc3RydWN0aW9uLAp3aGlj
+aCBpcyB3aHkgdGhpcyBsb29rcyB3cm9uZyB0byBhIHJldmlld2VyLgoKQSBjb21tZW50IG9mIC8q
+IElkZWFsbHkgam5zeiwgYnV0IGpnIHdpbGwgaGF2ZSB0byBkbyAqLyB3b3VsZCBnbyBhIHZlcnkK
+bG9uZyB3YXkuCgpJJ3ZlIGRvdWJsZSBjaGVja2VkIHRoZSBsb2dpYyBhbmQgSSBhZ3JlZSB3aXRo
+IHlvdXIgY29uY2x1c2lvbnMsIGJ1dCB0aGUKb25seSByZWFzb24gdGhpcyB3b3JrcyBpcyBiZWNh
+dXNlIHRlc3QgdW5jb25kaXRpb25hbGx5IHplcm9lcyB0aGUKb3ZlcmZsb3cgZmxhZy4KCj4KPj4+
+IEBAIC01ODUsNiArNjkyLDE3IEBAIEVOVFJZKGRvdWJsZV9mYXVsdCkKPj4+ICAgICAgICAgIG1v
+dmwgICRUUkFQX2RvdWJsZV9mYXVsdCw0KCVyc3ApCj4+PiAgICAgICAgICAvKiBTZXQgQUMgdG8g
+cmVkdWNlIGNoYW5jZSBvZiBmdXJ0aGVyIFNNQVAgZmF1bHRzICovCj4+PiAgICAgICAgICBTQVZF
+X0FMTCBTVEFDCj4+PiArCj4+PiArICAgICAgICBHRVRfU1RBQ0tfRU5EKGJ4KQo+Pj4gKyAgICAg
+ICAgbW92ICAgU1RBQ0tfQ1BVSU5GT19GSUVMRCh4ZW5fY3IzKSglcmJ4KSwgJXJieAo+Pj4gKyAg
+ICAgICAgdGVzdCAgJXJieCwgJXJieAo+Pj4gKyAgICAgICAganogICAgLkxkYmxmX2NyM19va2F5
+Cj4+PiArICAgICAgICBqbnMgICAuTGRibGZfY3IzX2xvYWQKPj4+ICsgICAgICAgIG5lZyAgICVy
+YngKPj4+ICsuTGRibGZfY3IzX2xvYWQ6Cj4+PiArICAgICAgICB3cml0ZV9jcjMgcmJ4LCByZGks
+IHJzaQo+Pj4gKy5MZGJsZl9jcjNfb2theToKPj4+ICsKPj4gSXQgaXMgbW9kZXJhdGVseSBjb21t
+b24gZm9yIHRoZXJlIHRvIGJlIGNhc2NhZGUgZmF1bHRzIGluICNERi4gIFRoaXMKPj4gd291bGQg
+YmUgYmV0dGVyIGlmIGl0IHdlcmUgdGhlIGdlbmVyYWwgSVNUIHN3aXRjaC4KPiBCYXNlZCBvbiB0
+aGUgaXNzdWVzIEkgaGFkIHdpdGggI0RGIG9jY3VycmluZyB3aGlsZSBkZWJ1Z2dpbmcgdGhpcywK
+PiBJJ3ZlIGRlY2lkZWQgdG8ga2VlcCB0aGUgY29kZSBoZXJlIGFzIHNpbXBsZSBhcyBwb3NzaWJs
+ZSB3aXRob3V0Cj4gYmVpbmcgaW5jb3JyZWN0OiBUaGVyZSdzIG5vIHBvaW50IGxvb2tpbmcgYXQg
+dGhlIGluY29taW5nIENSMy4KPiBUaGVyZSdzIG5vIHBvaW50IGluIHRyeWluZyB0byBhdm9pZCBu
+ZXN0ZWQgZmF1bHRzIChpbmNsdWRpbmcKPiBzdWJzZXF1ZW50ICNERikgcmVzdG9yaW5nIENSMy4g
+VGhlcmUncyBhbHNvIG5vIHBvaW50IGluIHJldGFpbmluZwo+IHRoZSB2YWx1ZSBmb3IgbGF0ZXIg
+cmVzdG9yaW5nIGhlcmUsIGFzIHdlIG5ldmVyIHJldHVybi4gSW4gZmFjdCwgYXMKPiBtZW50aW9u
+ZWQgZWxzZXdoZXJlLCB3ZSBzaG91bGQgaW1vIGluZGVlZCBjb25zaWRlciB1bmlsYXRlcmFsbHkK
+PiBzd2l0Y2hpbmcgdG8gaWRsZV9wZ190YWJsZVtdIGhlcmUuCgpPay4KCn5BbmRyZXcKCj4KPiBK
+YW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
