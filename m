@@ -1,18 +1,17 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v8 13/17] x86/boot: Calculate the most
- appropriate BTI mitigation to use
-Date: Tue, 16 Jan 2018 09:25:14 -0500
-Message-ID: <7a2cb3f0-bd3e-5785-43fb-59bbd4fd446f@oracle.com>
-References: <1515780067-31735-1-git-send-email-andrew.cooper3@citrix.com>
- <1515780067-31735-14-git-send-email-andrew.cooper3@citrix.com>
- <9b0f7bd2-ff44-43ec-5f5d-9eff1cd7a32c@oracle.com>
- <aea3d46f-2577-eada-efd9-a131518187d8@citrix.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: Access I2C bus from guest/DomU on ARM board
+Date: Tue, 16 Jan 2018 14:46:19 +0000
+Message-ID: <A278B0A4-A1E3-43C9-8BC7-DCD08F7E4FC8@gmail.com>
+References: <CAONE6OA9h6omWptvGQE6EdD+s0geCbUcGUwX1NKPj16PF7_TNA@mail.gmail.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.2 \(3445.5.20\))
+Content-Type: multipart/mixed; boundary="===============6122776284479495232=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <aea3d46f-2577-eada-efd9-a131518187d8@citrix.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=s5io=el=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1ebSVM-0004W6-Fu
+ for xen-devel@lists.xenproject.org; Tue, 16 Jan 2018 14:46:24 +0000
+In-Reply-To: <CAONE6OA9h6omWptvGQE6EdD+s0geCbUcGUwX1NKPj16PF7_TNA@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,31 +20,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Saumya Rajesh <saumyarajesh93@gmail.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, embedded-pv-devel@lists.xenproject.org, xen-users@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMTYvMjAxOCAwOToxMyBBTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAxNi8wMS8x
-OCAxNDoxMCwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+PiBPbiAwMS8xMi8yMDE4IDAxOjAxIFBN
-LCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+Pj4gIAo+Pj4gKyAgICBpZiAoIGJvb3RfY3B1X2hhcyhY
-ODZfRkVBVFVSRV9JQlJTQikgKQo+Pj4gKyAgICB7Cj4+PiArICAgICAgICAvKgo+Pj4gKyAgICAg
-ICAgICogRXZlbiBpZiB3ZSd2ZSBjaG9zZW4gdG8gbm90IGhhdmUgSUJSUyBzZXQgaW4gWGVuIGNv
-bnRleHQsIHdlIHN0aWxsCj4+PiArICAgICAgICAgKiBuZWVkIHRoZSBJQlJTIGVudHJ5L2V4aXQg
-bG9naWMgdG8gdmlydHVhbGlzZSBJQlJTIHN1cHBvcnQgZm9yCj4+PiArICAgICAgICAgKiBndWVz
-dHMuCj4+PiArICAgICAgICAgKi8KPj4+ICsgICAgICAgIGlmICggaWJycyApCj4+PiArICAgICAg
-ICAgICAgc2V0dXBfZm9yY2VfY3B1X2NhcChYODZfRkVBVFVSRV9YRU5fSUJSU19TRVQpOwo+Pj4g
-KyAgICAgICAgZWxzZQo+Pj4gKyAgICAgICAgICAgIHNldHVwX2ZvcmNlX2NwdV9jYXAoWDg2X0ZF
-QVRVUkVfWEVOX0lCUlNfQ0xFQVIpOwo+Pj4gKyAgICB9Cj4+Pgo+PiBBcmUgeW91IGdvaW5nIHRv
-IGFkZCBzdXBwb3J0IGZvciBJbnRlbCdzICJFbmhhbmNlZCBJQlJTIiAoSSB0aGluayB0aGF0J3MK
-Pj4gd2hhdCB0aGV5IGNhbGwgdGhlICJhbHdheXMgb24iIG1vZGUiKT8KPiBJJ20gbm90IGdvaW5n
-IHRvIHRvdWNoIElCUlNfQVRUIG1vZGUgdW50aWwgSSd2ZSBnb3QgYW4gU0RQIHRvIGRldmVsb3AK
-PiBhZ2FpbnN0Lgo+Cj4gR2l2ZW4gaG93IG1hbnkgdGltZXMgdGhlIElCUlNfQVRUIHNwZWMgaGFz
-IGNoYW5nZWQgYWxyZWFkeSwgSSBoYXZlCj4gbGl0dGxlIGNvbmZpZGVuY2UgdGhhdCBpdCB3aWxs
-IHJlbWFpbiB1bmNoYW5nZWQgcmlnaHQgdG8gdGhlIGV2ZW50dWFsCj4gaGFyZHdhcmUgYXJyaXZl
-cy4KCkkgZG9uJ3Qga25vdyBpZiB5b3UgYXJlIGF3YXJlIG9mIGl0IChJIGxlYXJuZWQgYWJvdXQg
-dGhpcyBkb2Mgb24gU3VuZGF5KSBidXQKCmh0dHBzOi8vc29mdHdhcmUuaW50ZWwuY29tL3NpdGVz
-L2RlZmF1bHQvZmlsZXMvbWFuYWdlZC9jNS82My8zMzY5OTYtU3BlY3VsYXRpdmUtRXhlY3V0aW9u
-LVNpZGUtQ2hhbm5lbC1NaXRpZ2F0aW9ucy5wZGYKCihOb3QgcGFydCBvZiB0aGUgU0RNIGJ1dCBz
-dGlsbCwgYW4gb2ZmaWNpYWwgc3BlY2lmaWNhdGlvbi4gRm9yIGEgY2hhbmdlLikKCi1ib3JpcwoK
-LWJvcmlzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============6122776284479495232==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_3379ACE9-6F36-4F83-93F9-99801B2EC6F2"
+
+
+--Apple-Mail=_3379ACE9-6F36-4F83-93F9-99801B2EC6F2
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+Added embedded-pv-devel@lists.xenproject.org
+
+> On 16 Jan 2018, at 13:39, Saumya Rajesh <saumyarajesh93@gmail.com> =
+wrote:
+>=20
+> Hi Xen community
+>=20
+> I have built and brought up Xen 4.8 on Renesas RCar H3. For a specific =
+requirement, I need to use the I2C bus of the board from Domain U. Is =
+there a way to use the I2C bus from the guest?
+> I have looked into para-virtualization and passthrough [1][2] but =
+there isn't enough support or resources related to I2C bus sharing on =
+ARM. Any possible idea would be appreciated.
+>=20
+> Regards
+> Saumya
+>=20
+> [1] =
+https://lists.xenproject.org/archives/html/xen-users/2017-10/msg00019.html=
+ =
+<https://lists.xenproject.org/archives/html/xen-users/2017-10/msg00019.htm=
+l>
+> [2] https://wiki.xenproject.org/wiki/File:DriverDomainonARM01.pdf =
+<https://wiki.xenproject.org/wiki/File:DriverDomainonARM01.pdf>
+>=20
+>=20
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+
+--Apple-Mail=_3379ACE9-6F36-4F83-93F9-99801B2EC6F2
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" =
+class=3D"">Added&nbsp;<a =
+href=3D"mailto:embedded-pv-devel@lists.xenproject.org" =
+class=3D"">embedded-pv-devel@lists.xenproject.org</a><br =
+class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 16 Jan 2018, at 13:39, Saumya Rajesh &lt;<a =
+href=3D"mailto:saumyarajesh93@gmail.com" =
+class=3D"">saumyarajesh93@gmail.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><div dir=3D"ltr" =
+class=3D""><div style=3D"margin-top: 0px; margin-bottom: 0px; =
+font-family: Calibri, Helvetica, sans-serif, EmojiFont, &quot;Apple =
+Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, NotoColorEmoji, =
+&quot;Segoe UI Symbol&quot;, &quot;Android Emoji&quot;, EmojiSymbols; =
+font-size: 14.6667px;" class=3D""><span style=3D"font-size:11pt" =
+class=3D"">Hi Xen community</span><br class=3D""></div><p =
+style=3D"margin-top: 0px; margin-bottom: 0px; font-family: Calibri, =
+Helvetica, sans-serif, EmojiFont, &quot;Apple Color Emoji&quot;, =
+&quot;Segoe UI Emoji&quot;, NotoColorEmoji, &quot;Segoe UI Symbol&quot;, =
+&quot;Android Emoji&quot;, EmojiSymbols; font-size: 14.6667px;" =
+class=3D""></p><div style=3D"font-family: Calibri, Helvetica, =
+sans-serif, EmojiFont, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, NotoColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android =
+Emoji&quot;, EmojiSymbols; font-size: 14.6667px;" class=3D""><br =
+class=3D""></div><div style=3D"font-family: Calibri, Helvetica, =
+sans-serif, EmojiFont, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, NotoColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android =
+Emoji&quot;, EmojiSymbols; font-size: 14.6667px;" class=3D"">I have =
+built and brought up Xen 4.8 on Renesas RCar H3. For a specific =
+requirement, I need to use the I2C bus of the board from Domain U. Is =
+there a way to use the I2C bus from the guest?</div><div =
+style=3D"font-family: Calibri, Helvetica, sans-serif, EmojiFont, =
+&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, =
+NotoColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android Emoji&quot;, =
+EmojiSymbols; font-size: 14.6667px;" class=3D"">I have looked into =
+para-virtualization and passthrough&nbsp;[1][2] but there =
+isn't&nbsp;enough support or resources related to I2C bus sharing on =
+ARM.&nbsp;<span style=3D"font-size:11pt" class=3D"">Any =
+possible&nbsp;idea would be appreciated.</span></div><div =
+style=3D"font-family: Calibri, Helvetica, sans-serif, EmojiFont, =
+&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, =
+NotoColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android Emoji&quot;, =
+EmojiSymbols; font-size: 14.6667px;" class=3D""><br class=3D""></div><div =
+style=3D"font-family: Calibri, Helvetica, sans-serif, EmojiFont, =
+&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, =
+NotoColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android Emoji&quot;, =
+EmojiSymbols; font-size: 14.6667px;" class=3D"">Regards</div><div =
+style=3D"font-family: Calibri, Helvetica, sans-serif, EmojiFont, =
+&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, =
+NotoColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android Emoji&quot;, =
+EmojiSymbols; font-size: 14.6667px;" class=3D"">Saumya</div><div =
+style=3D"font-family: Calibri, Helvetica, sans-serif, EmojiFont, =
+&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, =
+NotoColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android Emoji&quot;, =
+EmojiSymbols; font-size: 14.6667px;" class=3D""><br class=3D""></div><div =
+style=3D"font-family: Calibri, Helvetica, sans-serif, EmojiFont, =
+&quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, =
+NotoColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android Emoji&quot;, =
+EmojiSymbols; font-size: 14.6667px;" class=3D"">[1]&nbsp;<a =
+href=3D"https://lists.xenproject.org/archives/html/xen-users/2017-10/msg00=
+019.html" =
+class=3D"gmail-OWAAutoLink">https://lists.xenproject.org/archives/html/xen=
+-users/2017-10/msg00019.html</a></div><div style=3D"font-family: =
+Calibri, Helvetica, sans-serif, EmojiFont, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, NotoColorEmoji, &quot;Segoe UI =
+Symbol&quot;, &quot;Android Emoji&quot;, EmojiSymbols; font-size: =
+14.6667px;" class=3D"">[2]&nbsp;<a =
+href=3D"https://wiki.xenproject.org/wiki/File:DriverDomainonARM01.pdf" =
+class=3D"gmail-OWAAutoLink">https://wiki.xenproject.org/wiki/File:DriverDo=
+mainonARM01.pdf</a></div><div style=3D"font-family: Calibri, Helvetica, =
+sans-serif, EmojiFont, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, NotoColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android =
+Emoji&quot;, EmojiSymbols; font-size: 14.6667px;" class=3D""><br =
+class=3D""></div><div style=3D"font-family: Calibri, Helvetica, =
+sans-serif, EmojiFont, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, NotoColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android =
+Emoji&quot;, EmojiSymbols; font-size: 14.6667px;" class=3D""><br =
+class=3D""></div></div>
+_______________________________________________<br class=3D"">Xen-devel =
+mailing list<br class=3D""><a =
+href=3D"mailto:Xen-devel@lists.xenproject.org" =
+class=3D"">Xen-devel@lists.xenproject.org</a><br =
+class=3D"">https://lists.xenproject.org/mailman/listinfo/xen-devel</div></=
+blockquote></div><br class=3D""></body></html>=
+
+--Apple-Mail=_3379ACE9-6F36-4F83-93F9-99801B2EC6F2--
+
+
+--===============6122776284479495232==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6122776284479495232==--
