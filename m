@@ -1,19 +1,10 @@
-From: Julien Grall <julien.grall@linaro.org>
-Subject: Re: [PATCH 1/5] xen/arm: Introduce enable callback to
- enable a capabilities on each online CPU
-Date: Wed, 17 Jan 2018 12:31:51 +0000
-Message-ID: <fbca8a32-b800-dfdc-d3cf-27740d98c9cf@linaro.org>
-References: <20180116142337.24942-1-julien.grall@linaro.org>
- <20180116142337.24942-2-julien.grall@linaro.org>
- <alpine.DEB.2.10.1801161554390.6440@sstabellini-ThinkPad-X260>
- <3f287ea5-f122-b375-4d98-e33733516816@linaro.org>
- <7F2FA84A-2CBA-45EC-9073-7FC86205BE5A@gmail.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118158: regressions - FAIL
+Date: Wed, 17 Jan 2018 12:34:00 +0000
+Message-ID: <osstest-118158-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0509916564456771132=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <7F2FA84A-2CBA-45EC-9073-7FC86205BE5A@gmail.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,49 +13,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth.xen@gmail.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@linaro.org, xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgTGFycywKCk9uIDE3LzAxLzE4IDEyOjIzLCBMYXJzIEt1cnRoIHdyb3RlOgo+IAo+IAo+PiBP
-biAxNyBKYW4gMjAxOCwgYXQgMTA6MzEsIEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGxpbmFy
-by5vcmcgCj4+IDxtYWlsdG86anVsaWVuLmdyYWxsQGxpbmFyby5vcmc+PiB3cm90ZToKPj4KPj4g
-SGkgU3RlZmFubywKPj4KPj4gT24gMTYvMDEvMTggMjM6NTUsIFN0ZWZhbm8gU3RhYmVsbGluaSB3
-cm90ZToKPj4+IE9uIFR1ZSwgMTYgSmFuIDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4+PiBP
-bmNlIFhlbiBrbm93cyB3aGF0IGZlYXR1cmVzL3dvcmthcm91bmRzIHByZXNlbnQgb24gdGhlIHBs
-YXRmb3JtLCBpdAo+Pj4+IG1pZ2h0IGJlIG5lY2Vzc2FyeSB0byBjb25maWd1cmUgZWFjaCBvbmxp
-bmUgQ1BVLgo+Pj4+Cj4+Pj4gSW50cm9kdWNlIGEgbmV3IGNhbGxiYWNrICJlbmFibGUiIHRoYXQg
-d2lsbCBiZSBjYWxsZWQgb24gZWFjaCBvbmxpbmUgCj4+Pj4gQ1BVIHRvCj4+Pj4gY29uZmlndXJl
-IHRoZSAiY2FwYWJpbGl0eSIuCj4+Pj4KPj4+PiBUaGUgY29kZSBpcyBiYXNlZCBvbiBMaW51eCB2
-NC4xNCAod2hlcmUgY3B1ZmVhdHVyZS5jIGNvbWVzIGZyb20pLCB0aGUKPj4+PiBleHBsYW5hdGlv
-biBvZiB3aHkgdXNpbmcgc3RvcF9tYWNoaW5lX3J1biBpcyBrZXB0IGFzIHdlIGhhdmUgc2ltaWxh
-cgo+Pj4+IHByb2JsZW0gaW4gdGhlIGZ1dHVyZS4KPj4+Pgo+Pj4+IExhc3RseSBpbnRyb2R1Y2Ug
-ZW5hYmxlX2VycmF0YV93b3JrYXJvdW5kIHRoYXQgd2lsbCBiZSBjYWxsZWQgb25jZSBDUFVzCj4+
-Pj4gaGF2ZSBib290ZWQgYW5kIGJlZm9yZSB0aGUgaGFyZHdhcmUgZG9tYWluIGlzIGNyZWF0ZWQu
-Cj4+Pj4KPj4+PiBUaGlzIGlzIHBhcnQgb2YgWFNBLTI1NC4KPj4+Pgo+Pj4+IFNpZ25lZC1vZi1i
-eTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAbGluYXJvLm9yZyAKPj4+PiA8bWFpbHRvOmp1
-bGllbi5ncmFsbEBsaW5hcm8ub3JnPj4KPj4+IElmIHlvdSB0b29rIHRoZSBjb2RlIGZyb20gTGlu
-dXgsIHlvdSBuZWVkIHRvIGFkZCB0aGUgb3JpZ2luYWwKPj4+IFNpZ25lZC1vZmYtYnkgZnJvbSB0
-aGUgTGludXggY29tbWl0LiBBc2lkZSBmcm9tIHRoYXQ6Cj4+Cj4+IFRoZXJlIGFyZSBtdWx0aXBs
-ZSBjb21taXRzIHRvdWNoaW5nIHRoaXMgZnVuY3Rpb24uIFNvIEkgZm9sbG93ZWQgd2hhdCAKPj4g
-d2UgZGlkIGluIHNpbWlsYXIgc2l0dWF0aW9uLiBCeSB0aGF0IEkgbWVhbiwgbWVudGlvbmluZyB0
-aGUgY29kZSB3YXMgCj4+IHRha2VuIGZyb20gTGludXggYW5kIG5vdCBnYXRoZXJlZCB0aGUgc2ln
-bmVkLW9mZi1ieS4KPj4KPj4gSWYgeW91IHJlYWxseSB3YW50LCBJIGNhbiBnYXRoZXIgYWxsIHRo
-ZSBzaWduZWQtb2ZmLWJ5IG9mIHRoZSBjb21taXQgCj4+IHRvdWNoaW5nIHRoaXMgZnVuY3Rpb24u
-Cj4gCj4gSWYgdGhlcmUgYXJlIGEgbG90IG9mIHRoZW4sIHlvdSBtYXkgd2FudCB0byBjb25zaWRl
-ciBhZGRpbmcgCj4gYcKgUkVBRE1FLnNvdXJjZSBmaWxlIGluc3RlYWQuIFRoZXJlIGFyZSBhIGZl
-dyBleGFtcGxlcyBpbiB0cmVlIGFuZCB0aGV5IAo+IGFyZSBhbHNvIG1lbnRpb25lZCBpbsKgQ09O
-VFJJQlVUSU5HIGZpbGVzCgpJIGFtIG5vdCBzdXJlIHRvIHVuZGVyc3RhbmQgeW91ciBzdWdnZXN0
-aW9uIGhlcmUuIEkgc3BvdHRlZCBvbmx5IG9uZSAKQ09OVFJJQlVUSU5HIGZpbGUgYW5kIGl0IG9u
-bHkgbGlzdCB0aGUgbGljZW5zZS4KClJlZ2FyZGluZyBSRUFETUUuc291cmNlLCB0aGlzIGlzIGNv
-dmVyaW5nIGZpbGUgYW5kIGNvbnRhaW4gdGhlIHNhbWUgCm1lbnRpb24gYXMgaW4gdGhlIGNvbW1p
-dCBtZXNzYWdlLiBBcyB0aGlzIGlzIGEgc2luZ2xlIGZ1bmN0aW9uLiBJc24ndCAKdGhlIGNvbW1p
-dCBtZXNzYWdlIGVub3VnaD8KCkxhc3RseSwgd2UgZG8gaGF2ZSBxdWl0ZSBhIGJpdCBvZiBjb2Rl
-IGluIFhlbiBjb21pbmcgZnJvbSBMaW51eCAob3IgCm90aGVyIHByb2plY3QpLiBBIGxvdCBvZiB0
-aGVtIGFyZSBub3QgbGlzdGVkIGluIApSRUFETUUuc291cmNlL0NPTlRSSUJVVElORy4gQnV0IG9u
-bHkgbWVudGlvbiBpbiB0aGUgY29tbWl0IG1lc3NhZ2UgKG5vdCAKbmVjZXNzYXJpbHkgd2l0aCBT
-aWduZWQtb2ZmLWJ5IHRhZykuCgpTbyBJIGFtIHF1aXRlIGludGVyZXN0ZWQgdG8ga25vdyB3aGF0
-IGlzIHRoZSBub3JtYWwgcHJvY2VkdXJlIGhlcmUuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxs
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============0509916564456771132==
+Content-Type: text/plain
+
+flight 118158 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118158/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 118105
+ build-armhf                   6 xen-build                fail REGR. vs. 118105
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ xen                  36c560e7f38130f12a36e8b66b0785fb655fe893
+baseline version:
+ xen                  e871e80c38547d9faefc6604532ba3e985e65873
+
+Last test of basis   118105  2018-01-16 17:04:09 Z    0 days
+Testing same since   118110  2018-01-16 19:02:12 Z    0 days    9 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Anthony Liguori <aliguori@amazon.com>
+  Bob Moore <robert.moore@intel.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Ian Jackson <Ian.Jackson@eu.citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Jon Ludlam <jonathan.ludlam@citrix.com>
+  Jonathan Ludlam <jonathan.ludlam@citrix.com>
+  Lv Zheng <lv.zheng@intel.com>
+  Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Sergey Dyasli <sergey.dyasli@citrix.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 894 lines long.)
+
+
+--===============0509916564456771132==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0509916564456771132==--
