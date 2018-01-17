@@ -1,16 +1,22 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: [PATCH 1/5] xen/arm: Introduce enable callback to
- enable a capabilities on each online CPU
-Date: Wed, 17 Jan 2018 12:23:33 +0000
-Message-ID: <7F2FA84A-2CBA-45EC-9073-7FC86205BE5A@gmail.com>
-References: <20180116142337.24942-1-julien.grall@linaro.org>
- <20180116142337.24942-2-julien.grall@linaro.org>
- <alpine.DEB.2.10.1801161554390.6440@sstabellini-ThinkPad-X260>
- <3f287ea5-f122-b375-4d98-e33733516816@linaro.org>
-Mime-Version: 1.0 (Mac OS X Mail 11.2 \(3445.5.20\))
-Content-Type: multipart/mixed; boundary="===============2619264010388236959=="
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86/efi: fix build with linkers that
+ support both coff-x86-64 and pe-x86-64
+Date: Wed, 17 Jan 2018 05:24:23 -0700
+Message-ID: <5A5F4E87020000780019F7B8@prv-mh.provo.novell.com>
+References: <20180105164346.15068-1-roger.pau@citrix.com>
+ <5A5351D9020000780019C055@prv-mh.provo.novell.com>
+ <20180117112148.y3opa3tbrphhfezx@MacBook-Pro-de-Roger.local>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <3f287ea5-f122-b375-4d98-e33733516816@linaro.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=dqeo=em=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1ebmlc-0004Jw-EE
+ for xen-devel@lists.xenproject.org; Wed, 17 Jan 2018 12:24:32 +0000
+In-Reply-To: <20180117112148.y3opa3tbrphhfezx@MacBook-Pro-de-Roger.local>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,174 +25,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@linaro.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@linaro.org, xen-devel <xen-devel@lists.xen.org>
+To: =?UTF-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2619264010388236959==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_B66324FC-9B36-4557-B9E1-47A20503A4A1"
-
-
---Apple-Mail=_B66324FC-9B36-4557-B9E1-47A20503A4A1
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-
-
-> On 17 Jan 2018, at 10:31, Julien Grall <julien.grall@linaro.org> =
-wrote:
->=20
-> Hi Stefano,
->=20
-> On 16/01/18 23:55, Stefano Stabellini wrote:
->> On Tue, 16 Jan 2018, Julien Grall wrote:
->>> Once Xen knows what features/workarounds present on the platform, it
->>> might be necessary to configure each online CPU.
->>>=20
->>> Introduce a new callback "enable" that will be called on each online =
-CPU to
->>> configure the "capability".
->>>=20
->>> The code is based on Linux v4.14 (where cpufeature.c comes from), =
-the
->>> explanation of why using stop_machine_run is kept as we have similar
->>> problem in the future.
->>>=20
->>> Lastly introduce enable_errata_workaround that will be called once =
-CPUs
->>> have booted and before the hardware domain is created.
->>>=20
->>> This is part of XSA-254.
->>>=20
->>> Signed-of-by: Julien Grall <julien.grall@linaro.org>
->> If you took the code from Linux, you need to add the original
->> Signed-off-by from the Linux commit. Aside from that:
->=20
-> There are multiple commits touching this function. So I followed what =
-we did in similar situation. By that I mean, mentioning the code was =
-taken from Linux and not gathered the signed-off-by.
->=20
-> If you really want, I can gather all the signed-off-by of the commit =
-touching this function.
-
-If there are a lot of then, you may want to consider adding a =
-README.source file instead. There are a few examples in tree and they =
-are also mentioned in CONTRIBUTING files
-Lars
-
-
---Apple-Mail=_B66324FC-9B36-4557-B9E1-47A20503A4A1
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
-class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
-class=3D"">On 17 Jan 2018, at 10:31, Julien Grall &lt;<a =
-href=3D"mailto:julien.grall@linaro.org" =
-class=3D"">julien.grall@linaro.org</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><span =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-float: none; display: inline !important;" class=3D"">Hi =
-Stefano,</span><br style=3D"font-family: Menlo-Regular; font-size: 11px; =
-font-style: normal; font-variant-caps: normal; font-weight: normal; =
-letter-spacing: normal; text-align: start; text-indent: 0px; =
-text-transform: none; white-space: normal; word-spacing: 0px; =
--webkit-text-stroke-width: 0px;" class=3D""><br style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><span =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-float: none; display: inline !important;" class=3D"">On 16/01/18 23:55, =
-Stefano Stabellini wrote:</span><br style=3D"font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><blockquote=
- type=3D"cite" style=3D"font-family: Menlo-Regular; font-size: 11px; =
-font-style: normal; font-variant-caps: normal; font-weight: normal; =
-letter-spacing: normal; orphans: auto; text-align: start; text-indent: =
-0px; text-transform: none; white-space: normal; widows: auto; =
-word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px;" class=3D"">On Tue, 16 Jan 2018, Julien =
-Grall wrote:<br class=3D""><blockquote type=3D"cite" class=3D"">Once Xen =
-knows what features/workarounds present on the platform, it<br =
-class=3D"">might be necessary to configure each online CPU.<br =
-class=3D""><br class=3D"">Introduce a new callback "enable" that will be =
-called on each online CPU to<br class=3D"">configure the =
-"capability".<br class=3D""><br class=3D"">The code is based on Linux =
-v4.14 (where cpufeature.c comes from), the<br class=3D"">explanation of =
-why using stop_machine_run is kept as we have similar<br =
-class=3D"">problem in the future.<br class=3D""><br class=3D"">Lastly =
-introduce enable_errata_workaround that will be called once CPUs<br =
-class=3D"">have booted and before the hardware domain is created.<br =
-class=3D""><br class=3D"">This is part of XSA-254.<br class=3D""><br =
-class=3D"">Signed-of-by: Julien Grall &lt;<a =
-href=3D"mailto:julien.grall@linaro.org" =
-class=3D"">julien.grall@linaro.org</a>&gt;<br class=3D""></blockquote>If =
-you took the code from Linux, you need to add the original<br =
-class=3D"">Signed-off-by from the Linux commit. Aside from that:<br =
-class=3D""></blockquote><br style=3D"font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><span =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-float: none; display: inline !important;" class=3D"">There are multiple =
-commits touching this function. So I followed what we did in similar =
-situation. By that I mean, mentioning the code was taken from Linux and =
-not gathered the signed-off-by.</span><br style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><br =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;" =
-class=3D""><span style=3D"font-family: Menlo-Regular; font-size: 11px; =
-font-style: normal; font-variant-caps: normal; font-weight: normal; =
-letter-spacing: normal; text-align: start; text-indent: 0px; =
-text-transform: none; white-space: normal; word-spacing: 0px; =
--webkit-text-stroke-width: 0px; float: none; display: inline =
-!important;" class=3D"">If you really want, I can gather all the =
-signed-off-by of the commit touching this function.</span><br =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;" =
-class=3D""></div></blockquote><br class=3D""></div><div>If there are a =
-lot of then, you may want to consider adding a&nbsp;README.source file =
-instead. There are a few examples in tree and they are also mentioned =
-in&nbsp;CONTRIBUTING files</div><div>Lars</div><br =
-class=3D""></body></html>=
-
---Apple-Mail=_B66324FC-9B36-4557-B9E1-47A20503A4A1--
-
-
---===============2619264010388236959==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2619264010388236959==--
+Pj4+IE9uIDE3LjAxLjE4IGF0IDEyOjIxLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
+IE9uIE1vbiwgSmFuIDA4LCAyMDE4IGF0IDAzOjExOjIxQU0gLTA3MDAsIEphbiBCZXVsaWNoIHdy
+b3RlOgo+PiA+Pj4gT24gMDUuMDEuMTggYXQgMTc6NDMsIDxyb2dlci5wYXVAY2l0cml4LmNvbT4g
+d3JvdGU6Cj4+ID4gLS0tIGEveGVuL2FyY2gveDg2L01ha2VmaWxlCj4+ID4gKysrIGIveGVuL2Fy
+Y2gveDg2L01ha2VmaWxlCj4+ID4gQEAgLTE4OCwyMCArMTg4LDIwIEBAIGVuZGlmCj4+ID4gICQo
+VEFSR0VUKS5lZmk6IHByZWxpbmstZWZpLm8gJChub3RlX2ZpbGUpIGVmaS5sZHMgZWZpL3JlbG9j
+cy1kdW1teS5vICQoQkFTRURJUikvY29tbW9uL3N5bWJvbHMtZHVtbXkubyBlZmkvbWtyZWxvYwo+
+PiA+ICAJJChmb3JlYWNoIGJhc2UsICQoVklSVF9CQVNFKSAkKEFMVF9CQVNFKSwgXAo+PiA+ICAJ
+ICAgICAgICAgICQoZ3VhcmQpICQoTEQpICQoY2FsbCBFRklfTERGTEFHUywkKGJhc2UpKSAtVCBl
+ZmkubGRzIC1OICQ8IGVmaS9yZWxvY3MtZHVtbXkubyBcCj4+ID4gLQkgICAgICAgICAgICAgICAg
+JChCQVNFRElSKS9jb21tb24vc3ltYm9scy1kdW1teS5vICQobm90ZV9maWxlKSAtbyAkKEBEKS8u
+JChARikuJChiYXNlKS4wICYmKSA6Cj4+ID4gKwkgICAgICAgICAgICAgICAgJChCQVNFRElSKS9j
+b21tb24vc3ltYm9scy1kdW1teS5vIC1iIHBlLXg4Ni02NCAkKG5vdGVfZmlsZSkgLW8gJChARCkv
+LiQoQEYpLiQoYmFzZSkuMCAmJikgOgo+PiAKPj4gSSB3b25kZXIgd2hldGhlciBpbnRyb2R1Y2lu
+ZyBlLmcKPj4gCj4+IG5vdGVfZmlsZV9vcHRpb25zIDo9IC1iIHBlLXg4Ni02NCAkKG5vdGVfZmls
+ZSkKPj4gCj4+IHdvdWxkbid0IGJlIGJldHRlciB0aGFuIHJlcGVhdGluZyB0aGUgc2FtZSB0aGlu
+ZyB0aHJlZSB0aW1lcy4KPj4gT2YgY291cnNlIGl0IHdvdWxkIG5lZWQgdG8gYmUgY2xlYXJseSBz
+cGVsbGVkIG91dCB0aGF0IHRoaXMKPj4gbmVlZHMgdG8gY29tZSBsYXN0IChvciBhbm90aGVyIC1i
+IHdvdWxkIG5lZWQgdG8gZm9sbG93KS4gVGhpcwo+PiB3b3VsZCBhZGRpdGlvbmFsbHkgZGVhbCB3
+aXRoIHRoZSBjYXNlIHdoZXJlIG5vdGUubyBpbnN0ZWFkIG9mCj4+IGVmaS9idWlsZGlkLm8gaXMg
+YmVpbmcgbGlua2VkIGluICh5b3UgZG9uJ3Qgd2FudCAtYiBwZS14ODYtNjQKPj4gd2l0aCB0aGF0
+IG9uZSwgSSBzdXBwb3NlKSwgb3Igd2hlbiBidWlsZCBJRCBzdXBwb3J0IGlzbid0Cj4+IGF2YWls
+YWJsZSBhdCBhbGwgKHRoZSBuZXcgb3B0aW9uIHdvdWxkIHRoZW4gYmUgc3RyYXkgYW5kIG1pZ2h0
+Cj4+IGJlIHdhcm5lZCBhYm91dCkuCj4gCj4gV2hhdCBhYm91dCBkb2luZyBzb21ldGhpbmcgbGlr
+ZToKPiAKPiBpZm5lcSAoJChidWlsZF9pZF9saW5rZXIpLCkKPiBpZmVxICgkKGNhbGwgbGQtdmVy
+LWJ1aWxkLWlkLCQoTEQpICQoZmlsdGVyIC1tJSwkKEVGSV9MREZMQUdTKSkpLHkpCj4gQ0ZMQUdT
+ICs9IC1EQlVJTERfSURfRUZJCj4gRUZJX0xERkxBR1MgKz0gJChidWlsZF9pZF9saW5rZXIpCj4g
+IyBOb3RlIHRoYXQgdGhpcyBtdXN0IGJlIHRoZSBsYXN0IGlucHV0IGluIHRoZSBsZCBjYWxsLCBi
+ZWNhdXNlCj4gIyBpbnB1dHMgZm9sbG93aW5nIHRoZSAtYiBvcHRpb24gd2lsbCBhbGwgYmUgdHJl
+YXRlZCBhcyBiZWluZyBpbiB0aGUKPiAjIHNwZWNpZmllZCBmb3JtYXQuCj4gbm90ZV9maWxlIDo9
+IC1iIHBlLXg4Ni02NCBlZmkvYnVpbGRpZC5vCgpJJ20gYWZyYWlkIHRoaXMgd2lsbCBub3Qgd29y
+ayB3aXRoIHRoZSB1c2Ugb2YgJChub3RlX2ZpbGUpIGFzIGEKZGVwZW5kZW5jeSBvZiB4ZW4uZWZp
+IChpbmRlZWQgSSBmaXJzdCB0b28gaGFkIGJlZW4gY29uc2lkZXJpbmcKc2ltcGx5IGV4dGVuZGlu
+ZyB0aGlzIHZhcmlhYmxlKS4KCkphbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
