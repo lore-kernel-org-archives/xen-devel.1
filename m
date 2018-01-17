@@ -1,10 +1,21 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 118160: regressions - FAIL
-Date: Wed, 17 Jan 2018 14:49:51 +0000
-Message-ID: <osstest-118160-mainreport@xen.org>
+From: Andrii Anisov <andrii_anisov@epam.com>
+Subject: Re: [Embedded-pv-devel] Xen on RCarH3 Starter Kit
+Date: Wed, 17 Jan 2018 17:18:33 +0200
+Message-ID: <76e88500-6baf-c287-53d4-51a398e754ca@epam.com>
+References: <HK2PR04MB162076BDCBFCBC19FA68CFD1CAEA0@HK2PR04MB1620.apcprd04.prod.outlook.com>
+ <CAC1Wxdj=zoCpOHntfZ2Rp1mF8Oqx846etCE0L8R1MG5=qNOzKw@mail.gmail.com>
+ <SG2PR04MB16314D8A3CB695C0747A0B5ACAE90@SG2PR04MB1631.apcprd04.prod.outlook.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7081727146800751192=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=0wfz=em=epam.com=andrii_anisov@srs-us1.protection.inumbo.net>)
+ id 1ebpUD-00024Z-Qp
+ for xen-devel@lists.xenproject.org; Wed, 17 Jan 2018 15:18:45 +0000
+In-Reply-To: <SG2PR04MB16314D8A3CB695C0747A0B5ACAE90@SG2PR04MB1631.apcprd04.prod.outlook.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,92 +24,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: Ganesh H <ganesh.h@tataelxsi.co.in>, Andrii Anisov <andrii.anisov@gmail.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "embedded-pv-devel@lists.xenproject.org" <embedded-pv-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7081727146800751192==
-Content-Type: text/plain
-
-flight 118160 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118160/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-arm64-arm64-xl-xsm      12 guest-start              fail REGR. vs. 118105
- build-armhf                   6 xen-build                fail REGR. vs. 118105
-
-Tests which did not succeed, but are not blocking:
- test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
-
-version targeted for testing:
- xen                  db3ae8becc2b4f9f544eafa06a7c858c7cc9f029
-baseline version:
- xen                  e871e80c38547d9faefc6604532ba3e985e65873
-
-Last test of basis   118105  2018-01-16 17:04:09 Z    0 days
-Failing since        118110  2018-01-16 19:02:12 Z    0 days   10 attempts
-Testing same since   118160  2018-01-17 13:01:46 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Anthony Liguori <aliguori@amazon.com>
-  Bob Moore <robert.moore@intel.com>
-  George Dunlap <george.dunlap@citrix.com>
-  Ian Jackson <Ian.Jackson@eu.citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Jon Ludlam <jonathan.ludlam@citrix.com>
-  Jonathan Ludlam <jonathan.ludlam@citrix.com>
-  Lv Zheng <lv.zheng@intel.com>
-  Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Sergey Dyasli <sergey.dyasli@citrix.com>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  fail    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          blocked 
- test-arm64-arm64-xl-xsm                                      fail    
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 905 lines long.)
-
-
---===============7081727146800751192==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7081727146800751192==--
+SGVsbG8gR2FuZXNoCgpPbiAxNy4wMS4xOCAxNTozMywgR2FuZXNoIEggd3JvdGU6Cj4gRGVhciBB
+bmRyaWksCj4KPiBTb3JyeSBmb3IgdGhlIGNvbmZ1c2lvbi4gSSBhbSBoYXZpbmcgYW4gUkNhckgz
+IHN0YXJ0ZXIga2l0LiBJcyB0aGVyZSBhIFhlbiBwb3J0IGF2YWlsYWJsZSBmb3IgUkNhckgzIHN0
+YXJ0ZXIga2l0IHJpZ2h0IG5vdz8KV2UgZGlkIG5vdCBydW4gWEVOIG9uIGgzdWxjYi4gQnV0IGl0
+IGNhbiBiZSBkb25lIHdpdGggbWluaW1hbCBlZmZvcnRzIElNSE8uCgo+IElmIG5vdCB3aGF0IGFy
+ZSB0aGUgc3RlcHMgdG8gY3JlYXRlIG9uZT8KClN0ZXBzIHNob3VsZCBiZSBhcyBlYXN5IGFzIEkn
+dmUgYWxyZWFkeSBsaXN0ZWQgOgoKPiBBZGQgYSBoM3VsY2IgZGV2aWNlIHRyZWUgdG8gWzNdLCB1
+cGRhdGUgcmVjaXBlIFsyXS4KPiBEbyBub3QgZm9yZ2V0IHRvIFBSIHRoZSBzdHVmZiB0byBvdXIg
+bWV0YS1kZW1vLgo+Cj4gWzJdIC0gaHR0cHM6Ly9naXRodWIuY29tL3hlbi10cm9vcHMvbWV0YS1k
+ZW1vL2Jsb2IvbWFzdGVyL21ldGEtcmNhci1nZW4zLXhlbi9yZWNpcGVzLWV4dGVuZGVkL3hlbi94
+ZW5fZ2l0LmJiYXBwZW5kI0wxNwo+Cj4gWzNdIC0gaHR0cHM6Ly9naXRodWIuY29tL3hlbi10cm9v
+cHMvbWV0YS1kZW1vL3RyZWUvbWFzdGVyL21ldGEtcmNhci1nZW4zLXhlbi9yZWNpcGVzLWtlcm5l
+bC9saW51eC9saW51eC1yZW5lc2FzCgotLSAKCipBbmRyaWkgQW5pc292KgoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
