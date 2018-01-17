@@ -1,21 +1,10 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 1/5] xen/arm: Introduce enable callback to
- enable a capabilities on each online CPU
-Date: Wed, 17 Jan 2018 13:47:02 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1801171341370.6440@sstabellini-ThinkPad-X260>
-References: <20180116142337.24942-1-julien.grall@linaro.org>
- <20180116142337.24942-2-julien.grall@linaro.org>
- <alpine.DEB.2.10.1801161554390.6440@sstabellini-ThinkPad-X260>
- <3f287ea5-f122-b375-4d98-e33733516816@linaro.org>
- <7F2FA84A-2CBA-45EC-9073-7FC86205BE5A@gmail.com>
- <fbca8a32-b800-dfdc-d3cf-27740d98c9cf@linaro.org>
- <D1C765BC-DE91-439E-B7DE-27EEA33EBD12@gmail.com>
- <alpine.DEB.2.10.1801170914190.6440@sstabellini-ThinkPad-X260>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118187: regressions - FAIL
+Date: Wed, 17 Jan 2018 23:50:20 +0000
+Message-ID: <osstest-118187-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-820927268-1516225349=:6440"
+Content-Type: multipart/mixed; boundary="===============0956310042756754287=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1801170914190.6440@sstabellini-ThinkPad-X260>
-Content-ID: <alpine.DEB.2.10.1801171346330.6440@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,42 +13,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Lars Kurth <lars.kurth.xen@gmail.com>, Julien Grall <julien.grall@linaro.org>, andre.przywara@linaro.org, xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+--===============0956310042756754287==
+Content-Type: text/plain
 
---8323329-820927268-1516225349=:6440
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1801171346331.6440@sstabellini-ThinkPad-X260>
+flight 118187 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118187/
 
-On Wed, 17 Jan 2018, Stefano Stabellini wrote:
-> On Wed, 17 Jan 2018, Lars Kurth wrote:
-> >       Regarding README.source, this is covering file and contain the same mention as in the commit message. As this is a single function. Isn't the commit message
-> >       enough?
-> > 
-> > 
-> > From a legal viewpoint it is enough.
-> 
-> If that is enough from a legal viewpoint, then it is enough for me.
-> 
-> However, from a legal viewpoint, I thought we needed to explicitly
-> mention all the original signed-off-bys because Julien is not actually
-> the copyright holder for that function, hence, we need to add the
-> signed-off-bys of all the missing copyright holders.
+Regressions :-(
 
-Actually, reading again the Developer’s Certificate of Origin, it
-states:
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-armhf                   6 xen-build                fail REGR. vs. 118105
 
-"The contribution is based upon previous work that, to the best of my knowledge, is covered under an appropriate open source license and I have the right under that license to submit that work with modifications, whether created in whole or in part by me, under the same open source license (unless I am permitted to submit under a different license), as indicated in the file"
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
 
-so I think Lars is right. In that case, there is no need to resubmit
-this series, I'll commit to staging as is. If tests go well, I'll
-backport it to the stable trees.
---8323329-820927268-1516225349=:6440
+version targeted for testing:
+ xen                  8d2983ec793362e8bcbe1a9a36d3eee61bc187f0
+baseline version:
+ xen                  e871e80c38547d9faefc6604532ba3e985e65873
+
+Last test of basis   118105  2018-01-16 17:04:09 Z    1 days
+Failing since        118110  2018-01-16 19:02:12 Z    1 days   14 attempts
+Testing same since   118162  2018-01-17 15:01:29 Z    0 days    4 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Anthony Liguori <aliguori@amazon.com>
+  Bob Moore <robert.moore@intel.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Ian Jackson <Ian.Jackson@eu.citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Jon Ludlam <jonathan.ludlam@citrix.com>
+  Jonathan Ludlam <jonathan.ludlam@citrix.com>
+  Lv Zheng <lv.zheng@intel.com>
+  Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Sergey Dyasli <sergey.dyasli@citrix.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 921 lines long.)
+
+
+--===============0956310042756754287==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -69,4 +102,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---8323329-820927268-1516225349=:6440--
+--===============0956310042756754287==--
