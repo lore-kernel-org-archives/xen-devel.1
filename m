@@ -1,11 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-4.6-testing test] 118166: tolerable FAIL - PUSHED
-Date: Thu, 18 Jan 2018 17:21:01 +0000
-Message-ID: <osstest-118166-mainreport@xen.org>
+From: Manish Jaggi <mjaggi@caviumnetworks.com>
+Subject: Re: [RFC PATCH] arm64: vgic-v3: Add ITS doorbell region
+ in Dom0 stage-2
+Date: Thu, 18 Jan 2018 22:55:28 +0530
+Message-ID: <a9db3e65-7aed-6253-45b8-3aa32ae2bf52@caviumnetworks.com>
+References: <20180118061537.27323-1-mjaggi@caviumnetworks.com>
+ <a1db662b-24a8-a226-12ef-a64fd138fa11@linaro.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3351010798444747186=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=cf4u=en=cavium.com=manish.jaggi@srs-us1.protection.inumbo.net>)
+ id 1ecDwn-00006R-Bm
+ for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 17:25:53 +0000
+In-Reply-To: <a1db662b-24a8-a226-12ef-a64fd138fa11@linaro.org>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,213 +23,440 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: Julien Grall <julien.grall@linaro.org>, xen-devel@lists.xenproject.org, sameer.goel@linaro.org, andre.przywara@linaro.org
+Cc: manish.jaggi@cavium.com
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDExODE2NiB4ZW4tNC42LXRlc3RpbmcgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVz
-dC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzExODE2Ni8KCkZhaWx1cmVzIDotLyBi
-dXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUg
-bm90IGJsb2NraW5nOgogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAxNCBzYXZlcmVzdG9y
-ZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTE3MTE2CiB0ZXN0LWFybWhmLWFybWhmLWxp
-YnZpcnQtcmF3IDEzIHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgbGlrZSAxMTcx
-MTYKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAg
-ICAgICAgICAgZmFpbCBsaWtlIDExNzExNgogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAx
-NCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTE3MTE2CiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZh
-aWwgbGlrZSAxMTcxMTYKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBn
-dWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDExNzExNgogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTE3
-MTE2CiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMgICAgIDEyIGd1ZXN0LXN0YXJ0ICAgICAgICAg
-ICAgICAgICAgZmFpbCAgbGlrZSAxMTcxMTYKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13czE2
-LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDExNzExNgogdGVzdC14
-dGYtYW1kNjQtYW1kNjQtMSAgICAgICA3MyB4dGYvdGVzdC1wdjMycGFlLXhzYS0xOTQgICAgIGZh
-aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1pZ3JhdGUt
-c3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QteHRmLWFtZDY0LWFt
-ZDY0LTIgICAgICAgNzMgeHRmL3Rlc3QtcHYzMnBhZS14c2EtMTk0ICAgICBmYWlsICAgbmV2ZXIg
-cGFzcwogdGVzdC14dGYtYW1kNjQtYW1kNjQtNCAgICAgICA3MyB4dGYvdGVzdC1wdjMycGFlLXhz
-YS0xOTQgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAg
-IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-eHRmLWFtZDY0LWFtZDY0LTMgICAgICAgNzMgeHRmL3Rlc3QtcHYzMnBhZS14c2EtMTk0ICAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LXh0Zi1hbWQ2NC1h
-bWQ2NC01ICAgICAgIDczIHh0Zi90ZXN0LXB2MzJwYWUteHNhLTE5NCAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNo
-ZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFl
-bXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2
-ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhz
-bSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLWFybmRhbGUgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgMTQgc2F2ZXJlc3RvcmUtc3Vw
-cG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVk
-aXQyICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
-ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwteHNtICAgICAgMTMgbWln
-cmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
-cm1oZi14bC14c20gICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBu
-ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9y
-dC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmly
-dC12aGQgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwog
-dGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRlYmlhbi1odm0taW5zdGFsbC9s
-MS9sMiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3IDEyIG1p
-Z3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYt
-YXJtaGYteGwtY3ViaWV0cnVjayAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwg
-bmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrIDE0IHNhdmVyZXN0b3Jl
-LXN1cHBvcnQtY2hlY2sgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAg
-ICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MK
-IHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVj
-ayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgMTMg
-bWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICBuZXZlciBwYXNzCiB0ZXN0LWFybWhm
-LWFybWhmLXhsLW11bHRpdmNwdSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwg
-IG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBw
-b3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC12
-aGQgICAgICAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNz
-CiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEzIHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hl
-Y2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13czE2LWFt
-ZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFp
-bCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vl
-c3Qtc3RvcCAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dC13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgIGZhaWwgbmV2ZXIgcGFz
-cwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFs
-bCAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luMTAt
-aTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZh
-aWwgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAg
-ICAgICAgICAgIDQ0YWQ3ZjY4OTVkYTk4NjEwNDJkN2E0MWU2MzVkNDJkODNjYjI2NjAKYmFzZWxp
-bmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIGY5NGMxMWQyZmYzMjE5YjU3MWM4YjBj
-NjE5N2RjY2YyMWNiNDUzN2IKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDExNzExNiAgMjAxNy0xMi0x
-MyAxODoxMToxNSBaICAgMzUgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMTgxNjYgIDIwMTgt
-MDEtMTcgMTY6NDk6NTkgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8g
-dG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29v
-cGVyM0BjaXRyaXguY29tPgogIEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCmpvYnM6
-CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC14
-dGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxp
-YnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtYXJtaGYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXByZXYgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wcmV2
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1ydW1w
-cnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtMSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC0yICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QteHRmLWFtZDY0LWFt
-ZDY0LTMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC14dGYtYW1kNjQtYW1kNjQtNCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC01ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14
-bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWkzODYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0LXhzbSAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LWRlYmlhbmh2
-bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxp
-YnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZt
-LWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-cWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1pMzg2LXhsLXFlbXV0LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZp
-cnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXhzbSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1
-LW5lc3RlZC1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
-NjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11
-dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1kNjQgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43LWFtZDY0ICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQt
-d2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgICAg
-ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13
-czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
-CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1jcmVkaXQy
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWZyZWVic2QxMC1pMzg2ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcnVtcHJ1bi1pMzg2
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAg
-ICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW4x
-MC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC1xZW11dS1uZXN0ZWQtaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1pbnRlbCAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhm
-LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1taWdydXBncmFkZSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbWlncnVwZ3JhZGUgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-eGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1s
-aWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWkzODYtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZncnViICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXB5
-Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtcWNvdzIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcmF3ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-cnRkcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-cm1oZi1hcm1oZi14bC1ydGRzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0
-IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dz
-CmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUg
-YXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0
-ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGlu
-IGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0
-ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0
-cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVy
-CgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhl
-bi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6
-CgpUbyB4ZW5iaXRzLnhlbi5vcmc6L2hvbWUveGVuL2dpdC94ZW4uZ2l0CiAgIGY5NGMxMWQyZmYu
-LjQ0YWQ3ZjY4OTUgIDQ0YWQ3ZjY4OTVkYTk4NjEwNDJkN2E0MWU2MzVkNDJkODNjYjI2NjAgLT4g
-c3RhYmxlLTQuNgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+This is a multi-part message in MIME format.
+--===============3351010798444747186==
+Content-Type: multipart/alternative;
+ boundary="------------BFB03FD7D4F1E84167897410"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------BFB03FD7D4F1E84167897410
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+
+On 01/18/2018 10:22 PM, Julien Grall wrote:
+> Hi Manish,
+Hi Julien,
+>
+> On 18/01/18 06:15, mjaggi@caviumnetworks.com wrote:
+>> From: Manish Jaggi <mjaggi@caviumnetworks.com>
+>>
+>> This patch introduces a function vgic_map_translation_space for mapping
+>> ITS 64K translater space for doorbells in dom0 stage-2.
+>> It is required as dom0 PCI devices behined SMMU  wont be able to 
+>> write MSIs.
+>
+> s/behined/behind/
+>
+> also there a two spaces after SMMU. One should be enough.
+>
+ok
+>>
+>> This function is called from vgic_v3_its_init_domain only for 
+>> hardware domain.
+>
+> This is really confusing. You mix dom0 and hardware domain in the same 
+> commit. Please use only "hardware domain".
+I stressed this here as this function is only called for hardware 
+domain, if you see line 1550
+
+|if ( is_hardware_domain(d) ) is checked.|
+
+>
+>>
+>> This patch is also required for testing
+>> [RFC 00/11] acpi: arm: IORT Support for Xen [1]
+>> + [2]  [RFC v4 0/8] SMMUv3 driver
+>>   [1] 
+>> https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg00007.html
+>> [2] https://lists.xen.org/archives/html/xen-devel/2017-12/msg01294.html
+>
+> Anything after "This patch..." does not seem to be relevant in the 
+> commit. You might want to add that after --- so it get stripped after 
+> committing.
+ok
+>
+>>
+>> Signed-off-by: Manish Jaggi <manish.jaggi@cavium.com>
+>> ---
+>>   xen/arch/arm/vgic-v3-its.c | 26 ++++++++++++++++++++++++++
+>>   1 file changed, 26 insertions(+)
+>>
+>> diff --git a/xen/arch/arm/vgic-v3-its.c b/xen/arch/arm/vgic-v3-its.c
+>> index 72a5c70656..a8f8079149 100644
+>> --- a/xen/arch/arm/vgic-v3-its.c
+>> +++ b/xen/arch/arm/vgic-v3-its.c
+>> @@ -1511,6 +1511,30 @@ unsigned int vgic_v3_its_count(const struct 
+>> domain *d)
+>>       return ret;
+>>   }
+>>   +static int vgic_map_translation_space(struct domain *d, paddr_t 
+>> guest_addr)
+>
+> This function is quite confusing. What is guest_addr? It looks like it 
+> is the base address of the ITS but it is not very clear here.
+ok I will change the name.
+>
+>> +{
+>> +    u64 addr, size;
+>
+> This should be paddr_t.
+>
+>> +    int ret;
+>
+> Newline here please.
+>
+>> +    addr = guest_addr + SZ_64K;
+>> +    size = SZ_64K;
+>> +
+>> +    ret = map_mmio_regions(d,
+>> +                           paddr_to_pfn(addr & PAGE_MASK),
+>> +                           DIV_ROUND_UP(size, PAGE_SIZE),
+>> +                           paddr_to_pfn(addr & PAGE_MASK));
+>
+> You are assuming a 1:1 mapping in the domain. Nowhere you explain that 
+> assumption nor that it will not work for guest. At least you need an 
+> ASSERT(is_domain_direct_mapped(d)).
+>
+> Furthermore, as we discussed yesterday I would expect a big fat 
+> comment that this need to be revisited when DomU support will be added 
+> as it may not be safe to map the Doorbell in page-tables used by the 
+> processor.
+I think you didnt read the commit log properly, this function is *only* 
+called for hardware domain. So there is no question of DomU.
+Request you to please see the code again.
+
+|int vgic_v3_its_init_domain(struct domain *d) { ... if ( 
+is_hardware_domain(d) ) { struct host_its *hw_its; 
+list_for_each_entry(hw_its, &host_its_list, entry) { ... 
+vgic_map_translation_space(d, hw_its->addr); } } ... } |
+
+
+
+>
+>> +
+>> +    if ( ret )
+>> +    {
+>> +        printk(XENLOG_ERR "Unable to map to dom%d access to"
+>> +               " 0x%"PRIx64" - 0x%"PRIx64"\n",
+>> +               d->domain_id,
+>> +               addr & PAGE_MASK, PAGE_ALIGN(addr + size) - 1);
+>> +    }
+>> +
+>> +    return ret;
+>> +
+>> +}
+>> +
+>>   /*
+>>    * For a hardware domain, this will iterate over the host ITSes
+>>    * and map one virtual ITS per host ITS at the same address.
+>> @@ -1541,6 +1565,8 @@ int vgic_v3_its_init_domain(struct domain *d)
+>>                   return ret;
+>>               else
+>>                   d->arch.vgic.has_its = true;
+>> +
+>> +            vgic_map_translation_space(d, hw_its->addr);
+> Your new function may return an error. Therefore you should test it.
+yes, I thought we will focus more is this is the right place to add this 
+test code.
+>
+>>           }
+>>       }
+>>
+>
+> Cheers,
+>
+
+
+--------------BFB03FD7D4F1E84167897410
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <p><br>
+    </p>
+    <br>
+    <div class="moz-cite-prefix">On 01/18/2018 10:22 PM, Julien Grall
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:a1db662b-24a8-a226-12ef-a64fd138fa11@linaro.org">Hi
+      Manish,
+      <br>
+    </blockquote>
+    Hi Julien,<br>
+    <blockquote type="cite"
+      cite="mid:a1db662b-24a8-a226-12ef-a64fd138fa11@linaro.org">
+      <br>
+      On 18/01/18 06:15, <a class="moz-txt-link-abbreviated" href="mailto:mjaggi@caviumnetworks.com">mjaggi@caviumnetworks.com</a> wrote:
+      <br>
+      <blockquote type="cite">From: Manish Jaggi
+        <a class="moz-txt-link-rfc2396E" href="mailto:mjaggi@caviumnetworks.com">&lt;mjaggi@caviumnetworks.com&gt;</a>
+        <br>
+        <br>
+        This patch introduces a function vgic_map_translation_space for
+        mapping
+        <br>
+        ITS 64K translater space for doorbells in dom0 stage-2.
+        <br>
+        It is required as dom0 PCI devices behined SMMU  wont be able to
+        write MSIs.
+        <br>
+      </blockquote>
+      <br>
+      s/behined/behind/
+      <br>
+      <br>
+      also there a two spaces after SMMU. One should be enough.
+      <br>
+      <br>
+    </blockquote>
+    ok<br>
+    <blockquote type="cite"
+      cite="mid:a1db662b-24a8-a226-12ef-a64fd138fa11@linaro.org">
+      <blockquote type="cite">
+        <br>
+        This function is called from vgic_v3_its_init_domain only for
+        hardware domain.
+        <br>
+      </blockquote>
+      <br>
+      This is really confusing. You mix dom0 and hardware domain in the
+      same commit. Please use only "hardware domain".
+      <br>
+    </blockquote>
+    I stressed this here as this function is only called for hardware
+    domain, if you see line 1550<br>
+    <pre style="padding: 0px; margin: 0px; color: rgb(0, 0, 0); font-size: 13.3333px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><code>if ( is_hardware_domain(d) ) is checked.</code></pre>
+    <blockquote type="cite"
+      cite="mid:a1db662b-24a8-a226-12ef-a64fd138fa11@linaro.org">
+      <br>
+      <blockquote type="cite">
+        <br>
+        This patch is also required for testing
+        <br>
+        [RFC 00/11] acpi: arm: IORT Support for Xen [1]
+        <br>
+        + [2]  [RFC v4 0/8] SMMUv3 driver
+        <br>
+          [1]
+<a class="moz-txt-link-freetext" href="https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg00007.html">https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg00007.html</a><br>
+        [2]
+        <a class="moz-txt-link-freetext" href="https://lists.xen.org/archives/html/xen-devel/2017-12/msg01294.html">https://lists.xen.org/archives/html/xen-devel/2017-12/msg01294.html</a>
+        <br>
+      </blockquote>
+      <br>
+      Anything after "This patch..." does not seem to be relevant in the
+      commit. You might want to add that after --- so it get stripped
+      after committing.
+      <br>
+    </blockquote>
+    ok<br>
+    <blockquote type="cite"
+      cite="mid:a1db662b-24a8-a226-12ef-a64fd138fa11@linaro.org">
+      <br>
+      <blockquote type="cite">
+        <br>
+        Signed-off-by: Manish Jaggi <a class="moz-txt-link-rfc2396E" href="mailto:manish.jaggi@cavium.com">&lt;manish.jaggi@cavium.com&gt;</a>
+        <br>
+        ---
+        <br>
+          xen/arch/arm/vgic-v3-its.c | 26 ++++++++++++++++++++++++++
+        <br>
+          1 file changed, 26 insertions(+)
+        <br>
+        <br>
+        diff --git a/xen/arch/arm/vgic-v3-its.c
+        b/xen/arch/arm/vgic-v3-its.c
+        <br>
+        index 72a5c70656..a8f8079149 100644
+        <br>
+        --- a/xen/arch/arm/vgic-v3-its.c
+        <br>
+        +++ b/xen/arch/arm/vgic-v3-its.c
+        <br>
+        @@ -1511,6 +1511,30 @@ unsigned int vgic_v3_its_count(const
+        struct domain *d)
+        <br>
+              return ret;
+        <br>
+          }
+        <br>
+          +static int vgic_map_translation_space(struct domain *d,
+        paddr_t guest_addr)
+        <br>
+      </blockquote>
+      <br>
+      This function is quite confusing. What is guest_addr? It looks
+      like it is the base address of the ITS but it is not very clear
+      here.
+      <br>
+    </blockquote>
+    ok I will change the name.<br>
+    <blockquote type="cite"
+      cite="mid:a1db662b-24a8-a226-12ef-a64fd138fa11@linaro.org">
+      <br>
+      <blockquote type="cite">+{
+        <br>
+        +    u64 addr, size;
+        <br>
+      </blockquote>
+      <br>
+      This should be paddr_t.
+      <br>
+      <br>
+      <blockquote type="cite">+    int ret;
+        <br>
+      </blockquote>
+      <br>
+      Newline here please.
+      <br>
+      <br>
+      <blockquote type="cite">+    addr = guest_addr + SZ_64K;
+        <br>
+        +    size = SZ_64K;
+        <br>
+        +
+        <br>
+        +    ret = map_mmio_regions(d,
+        <br>
+        +                           paddr_to_pfn(addr &amp; PAGE_MASK),
+        <br>
+        +                           DIV_ROUND_UP(size, PAGE_SIZE),
+        <br>
+        +                           paddr_to_pfn(addr &amp; PAGE_MASK));
+        <br>
+      </blockquote>
+      <br>
+      You are assuming a 1:1 mapping in the domain. Nowhere you explain
+      that assumption nor that it will not work for guest. At least you
+      need an ASSERT(is_domain_direct_mapped(d)).
+      <br>
+      <br>
+      Furthermore, as we discussed yesterday I would expect a big fat
+      comment that this need to be revisited when DomU support will be
+      added as it may not be safe to map the Doorbell in page-tables
+      used by the processor.
+      <br>
+    </blockquote>
+    I think you didnt read the commit log properly, this function is
+    *only* called for hardware domain. So there is no question of DomU.<br>
+    Request you to please see the code again.<br>
+    <br>
+    <pre style="padding: 0px; margin: 0px; color: rgb(0, 0, 0); font-size: 13.3333px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><code>int vgic_v3_its_init_domain(struct domain *d)
+{
+ ...
+    if ( is_hardware_domain(d) )
+    {
+        struct host_its *hw_its;
+
+        list_for_each_entry(hw_its, &amp;host_its_list, entry)
+        {
+ 	   ...
+            vgic_map_translation_space(d, hw_its-&gt;addr);
+        }
+    }
+...
+}
+</code></pre>
+    <br>
+    <br>
+    <blockquote type="cite"
+      cite="mid:a1db662b-24a8-a226-12ef-a64fd138fa11@linaro.org">
+      <br>
+      <blockquote type="cite">+
+        <br>
+        +    if ( ret )
+        <br>
+        +    {
+        <br>
+        +        printk(XENLOG_ERR "Unable to map to dom%d access to"
+        <br>
+        +               " 0x%"PRIx64" - 0x%"PRIx64"\n",
+        <br>
+        +               d-&gt;domain_id,
+        <br>
+        +               addr &amp; PAGE_MASK, PAGE_ALIGN(addr + size) -
+        1);
+        <br>
+        +    }
+        <br>
+        +
+        <br>
+        +    return ret;
+        <br>
+        +
+        <br>
+        +}
+        <br>
+        +
+        <br>
+          /*
+        <br>
+           * For a hardware domain, this will iterate over the host
+        ITSes
+        <br>
+           * and map one virtual ITS per host ITS at the same address.
+        <br>
+        @@ -1541,6 +1565,8 @@ int vgic_v3_its_init_domain(struct domain
+        *d)
+        <br>
+                          return ret;
+        <br>
+                      else
+        <br>
+                          d-&gt;arch.vgic.has_its = true;
+        <br>
+        +
+        <br>
+        +            vgic_map_translation_space(d, hw_its-&gt;addr);
+        <br>
+      </blockquote>
+      Your new function may return an error. Therefore you should test
+      it.
+      <br>
+    </blockquote>
+    yes, I thought we will focus more is this is the right place to add
+    this test code.<br>
+    <blockquote type="cite"
+      cite="mid:a1db662b-24a8-a226-12ef-a64fd138fa11@linaro.org">
+      <br>
+      <blockquote type="cite">          }
+        <br>
+              }
+        <br>
+          <br>
+      </blockquote>
+      <br>
+      Cheers,
+      <br>
+      <br>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------BFB03FD7D4F1E84167897410--
+
+
+--===============3351010798444747186==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3351010798444747186==--
