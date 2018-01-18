@@ -1,21 +1,11 @@
-From: Christian Lindig <christian.lindig@citrix.com>
-Subject: Re: [PATCH] ocaml: fix arm build
-Date: Thu, 18 Jan 2018 13:56:41 +0000
-Message-ID: <C2279A56-3999-49E1-94AE-DD23227920F8@citrix.com>
-References: <20180117164354.9964-1-wei.liu2@citrix.com>
- <20180117170045.5yj3hv63rmo7kb7k@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118210: tolerable all pass -
+	PUSHED
+Date: Thu, 18 Jan 2018 14:01:41 +0000
+Message-ID: <osstest-118210-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5372583232323408575=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=j5ii=en=citrix.com=prvs=5493e1b52=christian.lindig@srs-us1.protection.inumbo.net>)
- id 1ecAgU-0005Vc-TV
- for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 13:56:50 +0000
-In-Reply-To: <20180117170045.5yj3hv63rmo7kb7k@citrix.com>
-Content-Language: en-US
-Content-ID: <FFDB95271329AD4C9B3AC6643515DF26@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,43 +14,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Julien Grall <julien.grall@arm.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Jonathan Ludlam <Jonathan.Ludlam@citrix.com>, Ian Jackson <Ian.Jackson@citrix.com>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBsb29rcyBnb29kIHRvIG1lLiBJIGRvbid0IHRoaW5rIGNvbmRpdGlvbmFsIGNvbXBpbGF0
-aW9uIGNhbiBiZSBhdm9pZGVkIGhlcmUuCgotLSBDaHJpc3RpYW4KCj4gT24gMTcuIEphbiAyMDE4
-LCBhdCAxNzowMCwgV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4gCj4gQ0Mg
-T2NhbWwgZXhwZXJ0cwo+IAo+IE9uIFdlZCwgSmFuIDE3LCAyMDE4IGF0IDA0OjQzOjU0UE0gKzAw
-MDAsIFdlaSBMaXUgd3JvdGU6Cj4+IEFSTSBkb2Vzbid0IGhhdmUgZW11bGF0aW9uX2ZsYWdzIGlu
-IHRoZSBhcmNoX2RvbWFpbmNvbmZpZy4KPj4gCj4+IFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdl
-aS5saXUyQGNpdHJpeC5jb20+Cj4+IC0tLQo+PiBDYzogSWFuIEphY2tzb24gPGlhbi5qYWNrc29u
-QGV1LmNpdHJpeC5jb20+Cj4+IENjOiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29t
-Pgo+PiBDYzogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPj4gLS0t
-Cj4+IHRvb2xzL29jYW1sL2xpYnMveGMveGVuY3RybF9zdHVicy5jIHwgNiArKysrKysKPj4gMSBm
-aWxlIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKQo+PiAKPj4gZGlmZiAtLWdpdCBhL3Rvb2xzL29j
-YW1sL2xpYnMveGMveGVuY3RybF9zdHVicy5jIGIvdG9vbHMvb2NhbWwvbGlicy94Yy94ZW5jdHJs
-X3N0dWJzLmMKPj4gaW5kZXggMGI1YTIzNjFjMC4uZmQxMjg3NzhiMyAxMDA2NDQKPj4gLS0tIGEv
-dG9vbHMvb2NhbWwvbGlicy94Yy94ZW5jdHJsX3N0dWJzLmMKPj4gKysrIGIvdG9vbHMvb2NhbWwv
-bGlicy94Yy94ZW5jdHJsX3N0dWJzLmMKPj4gQEAgLTE3NSwxMSArMTc1LDE1IEBAIENBTUxwcmlt
-IHZhbHVlIHN0dWJfeGNfZG9tYWluX2NyZWF0ZSh2YWx1ZSB4Y2gsIHZhbHVlIHNzaWRyZWYsCj4+
-IAkJY2FtbF9mYWlsd2l0aCgiVW5oYW5kbGVkOiBBUk0iKTsKPj4gCQlicmVhazsKPj4gCj4+ICsj
-aWYgZGVmaW5lZChfX2kzODZfXykgfHwgZGVmaW5lZChfX3g4Nl82NF9fKQo+PiAJY2FzZSAxOiAv
-KiBYODYgLSBlbXVsYXRpb24gZmxhZ3MgaW4gdGhlIGJsb2NrICovCj4+IAkJZm9yIChsID0gRmll
-bGQoRmllbGQoZG9tY29uZmlnLCAwKSwgMCk7Cj4+IAkJICAgICBsICE9IFZhbF9ub25lOwo+PiAJ
-CSAgICAgbCA9IEZpZWxkKGwsIDEpKQo+PiAJCQljb25maWcuZW11bGF0aW9uX2ZsYWdzIHw9IDF1
-IDw8IEludF92YWwoRmllbGQobCwgMCkpOwo+PiArI2Vsc2UKPj4gKwkJY2FtbF9mYWlsd2l0aCgi
-VW5oYW5kbGVkOiB4ODYiKTsKPj4gKyNlbmRpZgo+PiAJCWJyZWFrOwo+PiAKPj4gCWRlZmF1bHQ6
-Cj4+IEBAIC0zMjAsNiArMzI0LDcgQEAgc3RhdGljIHZhbHVlIGFsbG9jX2RvbWFpbmluZm8oeGNf
-ZG9tYWluaW5mb190ICogaW5mbykKPj4gCj4+IAlTdG9yZV9maWVsZChyZXN1bHQsIDE1LCB0bXAp
-Owo+PiAKPj4gKyNpZiBkZWZpbmVkKF9faTM4Nl9fKSB8fCBkZWZpbmVkKF9feDg2XzY0X18pCj4+
-IAkvKiBlbXVsYXRpb25fZmxhZ3M6IHg4Nl9hcmNoX2VtdWxhdGlvbl9mbGFncyBsaXN0OyAqLwo+
-PiAJdG1wID0gZW11bF9saXN0ID0gVmFsX2VtcHR5bGlzdDsKPj4gCWZvciAoaSA9IDA7IGkgPCAx
-MDsgaSsrKSB7Cj4+IEBAIC0zNDEsNiArMzQ2LDcgQEAgc3RhdGljIHZhbHVlIGFsbG9jX2RvbWFp
-bmluZm8oeGNfZG9tYWluaW5mb190ICogaW5mbykKPj4gCVN0b3JlX2ZpZWxkKGFyY2hfY29uZmln
-LCAwLCB4ODZfYXJjaF9jb25maWcpOwo+PiAKPj4gCVN0b3JlX2ZpZWxkKHJlc3VsdCwgMTYsIGFy
-Y2hfY29uZmlnKTsKPj4gKyNlbmRpZgo+PiAKPj4gCUNBTUxyZXR1cm4ocmVzdWx0KTsKPj4gfQo+
-PiAtLSAKPj4gMi4xMS4wCj4+IAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+--===============5372583232323408575==
+Content-Type: text/plain
+
+flight 118210 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118210/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  380c152033d2a58fe7dc43bf26c3c8b56bfa5d43
+baseline version:
+ xen                  e871e80c38547d9faefc6604532ba3e985e65873
+
+Last test of basis   118105  2018-01-16 17:04:09 Z    1 days
+Failing since        118110  2018-01-16 19:02:12 Z    1 days   20 attempts
+Testing same since   118210  2018-01-18 12:01:06 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Anthony Liguori <aliguori@amazon.com>
+  Bob Moore <robert.moore@intel.com>
+  David Scott <dave@recoil.org>
+  Doug Goldstein <cardoe@cardoe.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Ian Jackson <Ian.Jackson@eu.citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Jon Ludlam <jonathan.ludlam@citrix.com>
+  Jonathan Ludlam <jonathan.ludlam@citrix.com>
+  Juergen Gross <jgross@suse.com>
+  Julien Grall <julien.grall@linaro.org>
+  Lv Zheng <lv.zheng@intel.com>
+  Michael Young <m.a.young@durham.ac.uk>
+  Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Sergey Dyasli <sergey.dyasli@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Wei Liu <wei.liu2@citrix.com>
+  Yi Sun <yi.y.sun@linux.intel.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   e871e80c38..380c152033  380c152033d2a58fe7dc43bf26c3c8b56bfa5d43 -> smoke
+
+
+--===============5372583232323408575==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5372583232323408575==--
