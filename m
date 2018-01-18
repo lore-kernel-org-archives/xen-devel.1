@@ -1,16 +1,18 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v9 05/11] x86/hvm: Permit guests direct
- access to MSR_{SPEC_CTRL, PRED_CMD}
-Date: Thu, 18 Jan 2018 13:04:01 -0500
-Message-ID: <d2f22673-7545-7c1b-cf81-2dc1c2998732@oracle.com>
-References: <1516290370-14958-1-git-send-email-andrew.cooper3@citrix.com>
- <1516290370-14958-6-git-send-email-andrew.cooper3@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: [PATCH 1/9] Update shim.config
+Date: Thu, 18 Jan 2018 18:16:44 +0000
+Message-ID: <20180118181652.26397-2-wei.liu2@citrix.com>
+References: <20180118181652.26397-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1516290370-14958-6-git-send-email-andrew.cooper3@citrix.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=w6dq=en=citrix.com=prvs=5494ca295=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1ecEkI-0004VW-1h
+ for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 18:17:02 +0000
+In-Reply-To: <20180118181652.26397-1-wei.liu2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,21 +21,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>, Jan Beulich <JBeulich@suse.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMTgvMjAxOCAxMDo0NiBBTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBGb3IgcGVyZm9y
-bWFuY2UgcmVhc29ucywgSFZNIGd1ZXN0cyBzaG91bGQgaGF2ZSBkaXJlY3QgYWNjZXNzIHRvIHRo
-ZXNlIE1TUnMKPiB3aGVuIHBvc3NpYmxlLgo+Cj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3Bl
-ciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPiAtLS0KPiBDQzogSmFuIEJldWxpY2ggPEpC
-ZXVsaWNoQHN1c2UuY29tPgo+IENDOiBKdW4gTmFrYWppbWEgPGp1bi5uYWthamltYUBpbnRlbC5j
-b20+Cj4gQ0M6IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgo+IENDOiBCb3JpcyBP
-c3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgo+IENDOiBTdXJhdmVlIFN1dGhp
-a3VscGFuaXQgPHN1cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPgo+Cj4gdjc6Cj4gICogRHJv
-cCBleGNlc3MgYnJhY2tldHMKPiB2OToKPiAgKiBSZS1pbXBsZW1lbnQgaXQgbGlnaHQgb2YgSW50
-ZWxzIG5ldyBzcGVjLiAgRHJvcCBSLWJ5J3MuCj4gICogU3BlbGxpbmcgZml4ZXMKClJldmlld2Vk
-LWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+VG8gYXZvaWQgaGF2aW5nIGl0IGNoYW5nZWQgZXZlcnkgdGltZSB0aGUgc2hpbSBpcyBidWlsdC4K
+ClNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Ci0tLQpDYzogSmFu
+IEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpDYzogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
+b3BlcjNAY2l0cml4LmNvbT4KLS0tCiB0b29scy9maXJtd2FyZS94ZW4tZGlyL3NoaW0uY29uZmln
+IHwgMSAtCiAxIGZpbGUgY2hhbmdlZCwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL3Rvb2xz
+L2Zpcm13YXJlL3hlbi1kaXIvc2hpbS5jb25maWcgYi90b29scy9maXJtd2FyZS94ZW4tZGlyL3No
+aW0uY29uZmlnCmluZGV4IDc4Yjk2NWY0YzcuLmQ1YmQ1MTY2MzIgMTAwNjQ0Ci0tLSBhL3Rvb2xz
+L2Zpcm13YXJlL3hlbi1kaXIvc2hpbS5jb25maWcKKysrIGIvdG9vbHMvZmlybXdhcmUveGVuLWRp
+ci9zaGltLmNvbmZpZwpAQCAtNjgsNyArNjgsNiBAQCBDT05GSUdfSEFTX0VIQ0k9eQogQ09ORklH
+X0hBU19DUFVGUkVRPXkKIENPTkZJR19IQVNfUEFTU1RIUk9VR0g9eQogQ09ORklHX0hBU19QQ0k9
+eQotIyBDT05GSUdfVkdBIGlzIG5vdCBzZXQKIENPTkZJR19ERUZDT05GSUdfTElTVD0iJEFSQ0hf
+REVGQ09ORklHIgogQ09ORklHX0FSQ0hfU1VQUE9SVFNfSU5UMTI4PXkKIAotLSAKMi4xMS4wCgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
