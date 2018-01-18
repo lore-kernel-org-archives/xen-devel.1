@@ -1,26 +1,10 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v10 00/11] Enable Memory Bandwidth
-	Allocation in Xen
-Date: Thu, 18 Jan 2018 11:50:03 +0000
-Message-ID: <20180118115003.646vmsbqv7vgpne2@citrix.com>
-References: <1513644142-50972-1-git-send-email-yi.y.sun@linux.intel.com>
- <5A3A37540200007800198C59@prv-mh.provo.novell.com>
- <20180108042858.GA31347@yi.y.sun>
- <20180108122502.pqm4yljz5zd7m4cp@citrix.com>
- <20180109003152.GB31347@yi.y.sun>
- <20180118111050.ihscgkgz6qd2v3hj@citrix.com>
- <20180118113151.sdcxo4rpcg7ug5up@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118206: regressions - FAIL
+Date: Thu, 18 Jan 2018 11:51:45 +0000
+Message-ID: <osstest-118206-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8915807945793128899=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=w6dq=en=citrix.com=prvs=5494ca295=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1ec8hr-0003qv-Td
- for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 11:50:07 +0000
-Content-Disposition: inline
-In-Reply-To: <20180118113151.sdcxo4rpcg7ug5up@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,44 +13,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Yi Sun <yi.y.sun@linux.intel.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xenproject.org, Chao Peng <chao.p.peng@linux.intel.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, Roger Pau =?utf-8?B?TW9ubu+/vQ==?= <roger.pau@citrix.com>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBKYW4gMTgsIDIwMTggYXQgMTE6MzE6NTFBTSArMDAwMCwgV2VpIExpdSB3cm90ZToK
-PiBPbiBUaHUsIEphbiAxOCwgMjAxOCBhdCAxMToxMDo1MEFNICswMDAwLCBXZWkgTGl1IHdyb3Rl
-Ogo+ID4gT24gVHVlLCBKYW4gMDksIDIwMTggYXQgMDg6MzE6NTJBTSArMDgwMCwgWWkgU3VuIHdy
-b3RlOgo+ID4gPiBPbiAxOC0wMS0wOCAxMjoyNTowMiwgV2VpIExpdSB3cm90ZToKPiA+ID4gPiBP
-biBNb24sIEphbiAwOCwgMjAxOCBhdCAxMjoyODo1OFBNICswODAwLCBZaSBTdW4gd3JvdGU6Cj4g
-PiA+ID4gPiBPbiAxNy0xMi0yMCAwMjoxMTozMiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gPiA+ID4g
-PiA+ID4+PiBPbiAxOS4xMi4xNyBhdCAwMTo0MiwgPHlpLnkuc3VuQGxpbnV4LmludGVsLmNvbT4g
-d3JvdGU6Cj4gPiA+ID4gPiA+ID4gV2UgcGxhbiB0byBicmluZyBhIG5ldyBQU1IgKFBsYXRmb3Jt
-IFNoYXJlZCBSZXNvdXJjZSkgZmVhdHVyZSBjYWxsZWQKPiA+ID4gPiA+ID4gPiBJbnRlbCBNZW1v
-cnkgQmFuZHdpZHRoIEFsbG9jYXRpb24gKE1CQSkgdG8gWGVuLgo+ID4gPiA+ID4gPiA+IAo+ID4g
-PiA+ID4gPiA+IEJlc2lkZXMgdGhlIE1CQSBlbmFibGluZywgd2UgY2hhbmdlIHNvbWUgaW50ZXJm
-YWNlcyB0byBtYWtlIHRoZW0gbW9yZQo+ID4gPiA+ID4gPiA+IGdlbmVyYWwgYnV0IG5vdCBvbmx5
-IGZvciBDQVQuCj4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gVGhlIGZpcnN0IDUgcGF0Y2hl
-cyBvZiBWOSBoYXZlbiBiZWVuIG1lcmdlZC4gVG8gZml4IGEgZmV3IGlzc3VlcywgdGhlCj4gPiA+
-ID4gPiA+ID4gVjEwIGlzIHN1Ym1pdHRlZC4KPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+IEkndmUg
-Y29tbWl0dGVkIHRoZSB0aHJlZSBoeXBlcnZpc29yIHBhdGNoZXM7IEkndmUgbm90IGRvbmUgYW55
-dGhpbmcKPiA+ID4gPiA+ID4gd2l0aCB0aGUgZWlnaHQgdG9vbHMgb25lcywgYXMgb25lIG9mIHRo
-ZW0gbmVlZHMgdG8gYmUgKHJlLSlhY2tlZC4gSSdsbAo+ID4gPiA+ID4gPiBsZWF2ZSB0aGF0IHBh
-cnQgdG8gb25lIG9mIHlvdS4KPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+IEphbgo+ID4gPiA+ID4g
-Cj4gPiA+ID4gPiBIaSwgSWFuIGFuZCBXZWksCj4gPiA+ID4gPiAKPiA+ID4gPiA+IENvdWxkIHlv
-dSBwbGVhc2UgaGVscCB0byBjaGVjayB0b29scy8gcGF0Y2hlcz8gVGhhbmtzIQo+ID4gPiA+ID4g
-Cj4gPiA+ID4gCj4gPiA+ID4gSSBqdXN0IGFja2VkIHRoZSBvbmUgcGF0Y2ggdGhhdCBtaXNzZWQg
-YW4gYWNrLiBJIHdpbGwgdHJ5IHRvIGdldCBhcm91bmQKPiA+ID4gPiB0byBjb21taXQgdGhlbSBs
-YXRlciB0aGlzIHdlZWsuCj4gPiA+ID4gCj4gPiA+IFRoYW5rIHlvdSEgOikKPiA+IAo+ID4gSGkg
-WWkKPiA+IAo+ID4gSSB0cmllZCB0byBhcHBseSBwYXRjaCA0IHRvIDExIHRvZGF5IGJ1dCB0aGVy
-ZSB3ZXJlIGNvbmZsaWN0cy4gQ2FuIHlvdQo+ID4gcmViYXNlIHlvdXIgc2VyaWVzIG9uIHRvcCBv
-ZiBzdGFnaW5nPwo+ID4gCj4gPiBTb3JyeSBmb3IgdGhlIGluY29udmVuaWVuY2UuIFdlJ3ZlIG1v
-c3RseSBiZWVuIGRlYWxpbmcgd2l0aCBzZWN1cml0eQo+ID4gaXNzdWVzIGFuZCB0aGUgdHJlZSBz
-ZWVtZWQgdG8gaGF2ZSBjaGFuZ2VkIGEgYml0IHdpdGggYWxsIHRoZSByZWNlbnQKPiA+IGZpeGVz
-IGFwcGxpZWQuCj4gPiAKPiAKPiBBY3R1YWxseSwgYmVmb3JlIHlvdSBzZXQgb2ZmIHRvIGRvIGFu
-eXRoaW5nLCBsZXQgbWUgdHJ5IGFnYWluLiBUaGVyZQo+IGNvdWxkIGEgcHJvYmxlbSB3aXRoIG15
-IGVtYWlsIGNsaWVudC4gSSB3aWxsIGxldCB5b3Uga25vdyB0aGUgcmVzdWx0LgoKQWxyaWdodCwg
-aXQgaXMgZG9uZS4gWW91ciBwYXRjaGVzIGFyZSBub3cgaW4gc3RhZ2luZy4gUGxlYXNlIGxldCBt
-ZSBrbm93CmlmIHRoZXJlIGlzIGFueSBwcm9ibGVtLgoKV2VpLgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============8915807945793128899==
+Content-Type: text/plain
+
+flight 118206 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118206/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-armhf                   6 xen-build                fail REGR. vs. 118105
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  e730f8e41e8537f1db9770b9464f9523c28857b9
+baseline version:
+ xen                  e871e80c38547d9faefc6604532ba3e985e65873
+
+Last test of basis   118105  2018-01-16 17:04:09 Z    1 days
+Failing since        118110  2018-01-16 19:02:12 Z    1 days   19 attempts
+Testing same since   118194  2018-01-18 00:01:12 Z    0 days    5 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Anthony Liguori <aliguori@amazon.com>
+  Bob Moore <robert.moore@intel.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Ian Jackson <Ian.Jackson@eu.citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Jon Ludlam <jonathan.ludlam@citrix.com>
+  Jonathan Ludlam <jonathan.ludlam@citrix.com>
+  Julien Grall <julien.grall@linaro.org>
+  Lv Zheng <lv.zheng@intel.com>
+  Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Sergey Dyasli <sergey.dyasli@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 1042 lines long.)
+
+
+--===============8915807945793128899==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8915807945793128899==--
