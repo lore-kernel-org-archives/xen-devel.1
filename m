@@ -1,20 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 5/6] xen/pvshim: fix coding style issues
-Date: Thu, 18 Jan 2018 01:53:22 -0700
-Message-ID: <5A606E92020000780019FBC1@prv-mh.provo.novell.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 4/6] xen/pvshim: simplify replace_va_mapping
+	code
+Date: Thu, 18 Jan 2018 08:56:24 +0000
+Message-ID: <1d1b07c9-2198-82c4-b84a-7103be63d936@citrix.com>
 References: <20180117094814.32772-1-roger.pau@citrix.com>
- <20180117094814.32772-6-roger.pau@citrix.com>
+ <20180117094814.32772-5-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=udw+=en=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ec5wv-0001jS-Cg
- for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 08:53:29 +0000
-In-Reply-To: <20180117094814.32772-6-roger.pau@citrix.com>
-Content-Disposition: inline
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=1km+=en=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
+ id 1ec5zr-0001tQ-BE
+ for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 08:56:31 +0000
+In-Reply-To: <20180117094814.32772-5-roger.pau@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,22 +24,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE3LjAxLjE4IGF0IDEwOjQ4LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IC0tLSBhL3hlbi9hcmNoL3g4Ni9wdi9zaGltLmMKPiArKysgYi94ZW4vYXJjaC94ODYvcHYvc2hp
-bS5jCj4gQEAgLTI2NCwxNCArMjY0LDE0IEBAIGludCBwdl9zaGltX3NodXRkb3duKHVpbnQ4X3Qg
-cmVhc29uKQo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJm9s
-ZF9jb25zb2xlX3BmbikpOwo+ICAKPiAgICAgIC8qIFBhdXNlIHRoZSBvdGhlciB2Y3B1cyBiZWZv
-cmUgc3RhcnRpbmcgdGhlIG1pZ3JhdGlvbi4gKi8KPiAtICAgIGZvcl9lYWNoX3ZjcHUoZCwgdikK
-PiArICAgIGZvcl9lYWNoX3ZjcHUgKCBkLCB2ICkKClRoZXNlIGFyZW4ndCBzdHlsZSB2aW9sYXRp
-b25zIC0gZWl0aGVyIHN0eWxlIGlzIGZpbmUsIGFzIGl0IGlzIGFtYmlndW91cwp3aGV0aGVyIGZv
-cl9lYWNoX3ZjcHUgaXMgdG8gYmUgdHJlYXRlZCBsaWtlIGEga2V5d29yZC4KCkFsbCB0aGUgb3Ro
-ZXIgY2hhbmdlcyBhcHBlYXIgdG8gYmUgaW5kZW50YXRpb24gb25lcywgd2hpY2ggaXMgYQpsaXR0
-bGUgaGFyZCB0byBzZWUgaW4gYSBtYWlsIHZpZXdlciBub3QgdXNpbmcgbW9uby1zcGFjZWQgZm9u
-dHMuCkFueXdheQpBY2tlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKSmFu
-CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMTcvMDEvMjAxOCAwOTo0OCwgUm9nZXIgUGF1IE1vbm5lIHdyb3RlOgo+IE5vIGZ1bmN0aW9u
+YWwgY2hhbmdlLgo+Cj4gU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1
+QGNpdHJpeC5jb20+Cj4gLS0tCj4gQ2M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4K
+PiBDYzogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPiAtLS0KPiAg
+eGVuL2FyY2gveDg2L3B2L3NoaW0uYyB8IDIxICsrKysrKy0tLS0tLS0tLS0tLS0tLQo+ICAxIGZp
+bGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCAxNSBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1n
+aXQgYS94ZW4vYXJjaC94ODYvcHYvc2hpbS5jIGIveGVuL2FyY2gveDg2L3B2L3NoaW0uYwo+IGlu
+ZGV4IDcwMjI0OTcxOWUuLjRmOTQwNDc2OTUgMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gveDg2L3B2
+L3NoaW0uYwo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9wdi9zaGltLmMKPiBAQCAtMTE3LDIxICsxMTcs
+MTIgQEAgdWludDY0X3QgcHZfc2hpbV9tZW0odWludDY0X3QgYXZhaWwpCj4gIHN0YXRpYyB2b2lk
+IF9faW5pdCByZXBsYWNlX3ZhX21hcHBpbmcoc3RydWN0IGRvbWFpbiAqZCwgbDRfcGdlbnRyeV90
+ICpsNHN0YXJ0LAo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2ln
+bmVkIGxvbmcgdmEsIHVuc2lnbmVkIGxvbmcgbWZuKQo+ICB7Cj4gLSAgICBzdHJ1Y3QgcGFnZV9p
+bmZvICpwYWdlOwo+IC0gICAgbDRfcGdlbnRyeV90ICpwbDRlOwo+IC0gICAgbDNfcGdlbnRyeV90
+ICpwbDNlOwo+IC0gICAgbDJfcGdlbnRyeV90ICpwbDJlOwo+IC0gICAgbDFfcGdlbnRyeV90ICpw
+bDFlOwo+IC0KPiAtICAgIHBsNGUgPSBsNHN0YXJ0ICsgbDRfdGFibGVfb2Zmc2V0KHZhKTsKPiAt
+ICAgIHBsM2UgPSBsNGVfdG9fbDNlKCpwbDRlKTsKPiAtICAgIHBsM2UgKz0gbDNfdGFibGVfb2Zm
+c2V0KHZhKTsKPiAtICAgIHBsMmUgPSBsM2VfdG9fbDJlKCpwbDNlKTsKPiAtICAgIHBsMmUgKz0g
+bDJfdGFibGVfb2Zmc2V0KHZhKTsKPiAtICAgIHBsMWUgPSBsMmVfdG9fbDFlKCpwbDJlKTsKPiAt
+ICAgIHBsMWUgKz0gbDFfdGFibGVfb2Zmc2V0KHZhKTsKPiAtCj4gLSAgICBwYWdlID0gbWZuX3Rv
+X3BhZ2UobDFlX2dldF9wZm4oKnBsMWUpKTsKPiArICAgIGw0X3BnZW50cnlfdCAqcGw0ZSA9IGw0
+c3RhcnQgKyBsNF90YWJsZV9vZmZzZXQodmEpOwo+ICsgICAgbDNfcGdlbnRyeV90ICpwbDNlID0g
+bDRlX3RvX2wzZSgqcGw0ZSkgKyBsM190YWJsZV9vZmZzZXQodmEpOwo+ICsgICAgbDJfcGdlbnRy
+eV90ICpwbDJlID0gbDNlX3RvX2wyZSgqcGwzZSkgKyBsMl90YWJsZV9vZmZzZXQodmEpOwo+ICsg
+ICAgbDFfcGdlbnRyeV90ICpwbDFlID0gbDJlX3RvX2wxZSgqcGwyZSkgKyBsMV90YWJsZV9vZmZz
+ZXQodmEpOwo+ICsgICAgc3RydWN0IHBhZ2VfaW5mbyAqcGFnZSA9ICBtZm5fdG9fcGFnZShsMWVf
+Z2V0X3BmbigqcGwxZSkpOzsKCkRvdWJsZSA7O8KgIChDYW4gYmUgZml4ZWQgb24gY29tbWl0KQoK
+SG93IGFib3V0IHN3aXRjaGluZyB0byB1c2luZyB0aGUgdHlwZXNhZmUgbWZuX3RvX3BhZ2UoKSBi
+ZWZvcmUgd2UgZ2Fpbgptb3JlIGNvZGUgdGhhdCB3ZSBleHBlY3QgdG8gY2hhbmdlIGluIHRoZSBm
+dXR1cmU/wqAgSWYgaXRzIG9ubHkgaGVyZSB0aGVuCml0IGlzIHByb2JhYmx5IHdvcnRoIGZvbGRp
+bmcgaW50byB0aGlzIGNvbW1pdC7CoCBJZiBub3QsIGl0IHNob3VsZCBiZSBhCnNlcGFyYXRlIHBh
+dGNoLgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
