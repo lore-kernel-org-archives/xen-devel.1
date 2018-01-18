@@ -1,17 +1,10 @@
-From: mjaggi@caviumnetworks.com
-Subject: [RFC PATCH] arm64: vgic-v3: Add ITS doorbell region in
-	Dom0 stage-2
-Date: Thu, 18 Jan 2018 11:45:37 +0530
-Message-ID: <20180118061537.27323-1-mjaggi@caviumnetworks.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118199: regressions - FAIL
+Date: Thu, 18 Jan 2018 06:24:48 +0000
+Message-ID: <osstest-118199-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5950232715737612604=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=cf4u=en=cavium.com=manish.jaggi@srs-us1.protection.inumbo.net>)
- id 1ec3Um-0005g7-Ko
- for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 06:16:16 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,47 +13,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, julien.grall@linaro.org, sameer.goel@linaro.org, andre.przywara@linaro.org
-Cc: Manish Jaggi <mjaggi@caviumnetworks.com>, manish.jaggi@cavium.com
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogTWFuaXNoIEphZ2dpIDxtamFnZ2lAY2F2aXVtbmV0d29ya3MuY29tPgoKVGhpcyBwYXRj
-aCBpbnRyb2R1Y2VzIGEgZnVuY3Rpb24gdmdpY19tYXBfdHJhbnNsYXRpb25fc3BhY2UgZm9yIG1h
-cHBpbmcKSVRTIDY0SyB0cmFuc2xhdGVyIHNwYWNlIGZvciBkb29yYmVsbHMgaW4gZG9tMCBzdGFn
-ZS0yLgpJdCBpcyByZXF1aXJlZCBhcyBkb20wIFBDSSBkZXZpY2VzIGJlaGluZWQgU01NVSAgd29u
-dCBiZSBhYmxlIHRvIHdyaXRlIE1TSXMuCgpUaGlzIGZ1bmN0aW9uIGlzIGNhbGxlZCBmcm9tIHZn
-aWNfdjNfaXRzX2luaXRfZG9tYWluIG9ubHkgZm9yIGhhcmR3YXJlIGRvbWFpbi4gCgpUaGlzIHBh
-dGNoIGlzIGFsc28gcmVxdWlyZWQgZm9yIHRlc3RpbmcgCltSRkMgMDAvMTFdIGFjcGk6IGFybTog
-SU9SVCBTdXBwb3J0IGZvciBYZW4gWzFdIAorIFsyXSAgW1JGQyB2NCAwLzhdIFNNTVV2MyBkcml2
-ZXIKIApbMV0gaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1k
-ZXZlbC8yMDE4LTAxL21zZzAwMDA3Lmh0bWwKWzJdIGh0dHBzOi8vbGlzdHMueGVuLm9yZy9hcmNo
-aXZlcy9odG1sL3hlbi1kZXZlbC8yMDE3LTEyL21zZzAxMjk0Lmh0bWwKClNpZ25lZC1vZmYtYnk6
-IE1hbmlzaCBKYWdnaSA8bWFuaXNoLmphZ2dpQGNhdml1bS5jb20+Ci0tLQogeGVuL2FyY2gvYXJt
-L3ZnaWMtdjMtaXRzLmMgfCAyNiArKysrKysrKysrKysrKysrKysrKysrKysrKwogMSBmaWxlIGNo
-YW5nZWQsIDI2IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vdmdpYy12
-My1pdHMuYyBiL3hlbi9hcmNoL2FybS92Z2ljLXYzLWl0cy5jCmluZGV4IDcyYTVjNzA2NTYuLmE4
-ZjgwNzkxNDkgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL2FybS92Z2ljLXYzLWl0cy5jCisrKyBiL3hl
-bi9hcmNoL2FybS92Z2ljLXYzLWl0cy5jCkBAIC0xNTExLDYgKzE1MTEsMzAgQEAgdW5zaWduZWQg
-aW50IHZnaWNfdjNfaXRzX2NvdW50KGNvbnN0IHN0cnVjdCBkb21haW4gKmQpCiAgICAgcmV0dXJu
-IHJldDsKIH0KIAorc3RhdGljIGludCB2Z2ljX21hcF90cmFuc2xhdGlvbl9zcGFjZShzdHJ1Y3Qg
-ZG9tYWluICpkLCBwYWRkcl90IGd1ZXN0X2FkZHIpCit7CisgICAgdTY0IGFkZHIsIHNpemU7Cisg
-ICAgaW50IHJldDsKKyAgICBhZGRyID0gZ3Vlc3RfYWRkciArIFNaXzY0SzsKKyAgICBzaXplID0g
-U1pfNjRLOworCisgICAgcmV0ID0gbWFwX21taW9fcmVnaW9ucyhkLAorICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFkZHJfdG9fcGZuKGFkZHIgJiBQQUdFX01BU0spLAorICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgRElWX1JPVU5EX1VQKHNpemUsIFBBR0VfU0laRSksCisgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYWRkcl90b19wZm4oYWRkciAmIFBBR0VfTUFTSykpOworCisgICAg
-aWYgKCByZXQgKQorICAgIHsKKyAgICAgICAgcHJpbnRrKFhFTkxPR19FUlIgIlVuYWJsZSB0byBt
-YXAgdG8gZG9tJWQgYWNjZXNzIHRvIgorICAgICAgICAgICAgICAgIiAweCUiUFJJeDY0IiAtIDB4
-JSJQUkl4NjQiXG4iLAorICAgICAgICAgICAgICAgZC0+ZG9tYWluX2lkLAorICAgICAgICAgICAg
-ICAgYWRkciAmIFBBR0VfTUFTSywgUEFHRV9BTElHTihhZGRyICsgc2l6ZSkgLSAxKTsKKyAgICB9
-CisKKyAgICByZXR1cm4gcmV0OworCit9CisKIC8qCiAgKiBGb3IgYSBoYXJkd2FyZSBkb21haW4s
-IHRoaXMgd2lsbCBpdGVyYXRlIG92ZXIgdGhlIGhvc3QgSVRTZXMKICAqIGFuZCBtYXAgb25lIHZp
-cnR1YWwgSVRTIHBlciBob3N0IElUUyBhdCB0aGUgc2FtZSBhZGRyZXNzLgpAQCAtMTU0MSw2ICsx
-NTY1LDggQEAgaW50IHZnaWNfdjNfaXRzX2luaXRfZG9tYWluKHN0cnVjdCBkb21haW4gKmQpCiAg
-ICAgICAgICAgICAgICAgcmV0dXJuIHJldDsKICAgICAgICAgICAgIGVsc2UKICAgICAgICAgICAg
-ICAgICBkLT5hcmNoLnZnaWMuaGFzX2l0cyA9IHRydWU7CisgICAgICAgICAgICAKKyAgICAgICAg
-ICAgIHZnaWNfbWFwX3RyYW5zbGF0aW9uX3NwYWNlKGQsIGh3X2l0cy0+YWRkcik7CiAgICAgICAg
-IH0KICAgICB9CiAKLS0gCjIuMTQuMQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+--===============5950232715737612604==
+Content-Type: text/plain
+
+flight 118199 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118199/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-armhf                   6 xen-build                fail REGR. vs. 118105
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  e730f8e41e8537f1db9770b9464f9523c28857b9
+baseline version:
+ xen                  e871e80c38547d9faefc6604532ba3e985e65873
+
+Last test of basis   118105  2018-01-16 17:04:09 Z    1 days
+Failing since        118110  2018-01-16 19:02:12 Z    1 days   17 attempts
+Testing same since   118194  2018-01-18 00:01:12 Z    0 days    3 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Anthony Liguori <aliguori@amazon.com>
+  Bob Moore <robert.moore@intel.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Ian Jackson <Ian.Jackson@eu.citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Jon Ludlam <jonathan.ludlam@citrix.com>
+  Jonathan Ludlam <jonathan.ludlam@citrix.com>
+  Julien Grall <julien.grall@linaro.org>
+  Lv Zheng <lv.zheng@intel.com>
+  Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Sergey Dyasli <sergey.dyasli@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 1042 lines long.)
+
+
+--===============5950232715737612604==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5950232715737612604==--
