@@ -1,24 +1,22 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v10 00/11] Enable Memory Bandwidth
-	Allocation in Xen
-Date: Thu, 18 Jan 2018 11:10:50 +0000
-Message-ID: <20180118111050.ihscgkgz6qd2v3hj@citrix.com>
-References: <1513644142-50972-1-git-send-email-yi.y.sun@linux.intel.com>
- <5A3A37540200007800198C59@prv-mh.provo.novell.com>
- <20180108042858.GA31347@yi.y.sun>
- <20180108122502.pqm4yljz5zd7m4cp@citrix.com>
- <20180109003152.GB31347@yi.y.sun>
+From: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: Re: [PATCH v2 3/6] xen/pvshim: identity pin shim vCPUs
+ to pCPUs
+Date: Thu, 18 Jan 2018 11:11:41 +0000
+Message-ID: <23136.33005.376232.629418@mariner.uk.xensource.com>
+References: <20180117111609.hlur2q5r34ld6ujf@citrix.com>
+ <20180117162907.37974-1-roger.pau@citrix.com>
+ <5A5F79EC020000E70331C076@prv-mh.provo.novell.com>
+ <5A606D56020000780019FBB8@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=w6dq=en=citrix.com=prvs=5494ca295=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1ec85t-0007hf-T3
- for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 11:10:53 +0000
-Content-Disposition: inline
-In-Reply-To: <20180109003152.GB31347@yi.y.sun>
+ <srs0=vw+9=en=citrix.com=prvs=549f7cad3=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1ec86r-0007q3-65
+ for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 11:11:53 +0000
+In-Reply-To: <5A606D56020000780019FBB8@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,35 +25,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Yi Sun <yi.y.sun@linux.intel.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xenproject.org, Chao Peng <chao.p.peng@linux.intel.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, Roger Pau =?utf-8?B?TW9ubu+/vQ==?= <roger.pau@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBKYW4gMDksIDIwMTggYXQgMDg6MzE6NTJBTSArMDgwMCwgWWkgU3VuIHdyb3RlOgo+
-IE9uIDE4LTAxLTA4IDEyOjI1OjAyLCBXZWkgTGl1IHdyb3RlOgo+ID4gT24gTW9uLCBKYW4gMDgs
-IDIwMTggYXQgMTI6Mjg6NThQTSArMDgwMCwgWWkgU3VuIHdyb3RlOgo+ID4gPiBPbiAxNy0xMi0y
-MCAwMjoxMTozMiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gPiA+ID4gPj4+IE9uIDE5LjEyLjE3IGF0
-IDAxOjQyLCA8eWkueS5zdW5AbGludXguaW50ZWwuY29tPiB3cm90ZToKPiA+ID4gPiA+IFdlIHBs
-YW4gdG8gYnJpbmcgYSBuZXcgUFNSIChQbGF0Zm9ybSBTaGFyZWQgUmVzb3VyY2UpIGZlYXR1cmUg
-Y2FsbGVkCj4gPiA+ID4gPiBJbnRlbCBNZW1vcnkgQmFuZHdpZHRoIEFsbG9jYXRpb24gKE1CQSkg
-dG8gWGVuLgo+ID4gPiA+ID4gCj4gPiA+ID4gPiBCZXNpZGVzIHRoZSBNQkEgZW5hYmxpbmcsIHdl
-IGNoYW5nZSBzb21lIGludGVyZmFjZXMgdG8gbWFrZSB0aGVtIG1vcmUKPiA+ID4gPiA+IGdlbmVy
-YWwgYnV0IG5vdCBvbmx5IGZvciBDQVQuCj4gPiA+ID4gPiAKPiA+ID4gPiA+IFRoZSBmaXJzdCA1
-IHBhdGNoZXMgb2YgVjkgaGF2ZW4gYmVlbiBtZXJnZWQuIFRvIGZpeCBhIGZldyBpc3N1ZXMsIHRo
-ZQo+ID4gPiA+ID4gVjEwIGlzIHN1Ym1pdHRlZC4KPiA+ID4gPiAKPiA+ID4gPiBJJ3ZlIGNvbW1p
-dHRlZCB0aGUgdGhyZWUgaHlwZXJ2aXNvciBwYXRjaGVzOyBJJ3ZlIG5vdCBkb25lIGFueXRoaW5n
-Cj4gPiA+ID4gd2l0aCB0aGUgZWlnaHQgdG9vbHMgb25lcywgYXMgb25lIG9mIHRoZW0gbmVlZHMg
-dG8gYmUgKHJlLSlhY2tlZC4gSSdsbAo+ID4gPiA+IGxlYXZlIHRoYXQgcGFydCB0byBvbmUgb2Yg
-eW91Lgo+ID4gPiA+IAo+ID4gPiA+IEphbgo+ID4gPiAKPiA+ID4gSGksIElhbiBhbmQgV2VpLAo+
-ID4gPiAKPiA+ID4gQ291bGQgeW91IHBsZWFzZSBoZWxwIHRvIGNoZWNrIHRvb2xzLyBwYXRjaGVz
-PyBUaGFua3MhCj4gPiA+IAo+ID4gCj4gPiBJIGp1c3QgYWNrZWQgdGhlIG9uZSBwYXRjaCB0aGF0
-IG1pc3NlZCBhbiBhY2suIEkgd2lsbCB0cnkgdG8gZ2V0IGFyb3VuZAo+ID4gdG8gY29tbWl0IHRo
-ZW0gbGF0ZXIgdGhpcyB3ZWVrLgo+ID4gCj4gVGhhbmsgeW91ISA6KQoKSGkgWWkKCkkgdHJpZWQg
-dG8gYXBwbHkgcGF0Y2ggNCB0byAxMSB0b2RheSBidXQgdGhlcmUgd2VyZSBjb25mbGljdHMuIENh
-biB5b3UKcmViYXNlIHlvdXIgc2VyaWVzIG9uIHRvcCBvZiBzdGFnaW5nPwoKU29ycnkgZm9yIHRo
-ZSBpbmNvbnZlbmllbmNlLiBXZSd2ZSBtb3N0bHkgYmVlbiBkZWFsaW5nIHdpdGggc2VjdXJpdHkK
-aXNzdWVzIGFuZCB0aGUgdHJlZSBzZWVtZWQgdG8gaGF2ZSBjaGFuZ2VkIGEgYml0IHdpdGggYWxs
-IHRoZSByZWNlbnQKZml4ZXMgYXBwbGllZC4KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+SmFuIEJldWxpY2ggd3JpdGVzICgiUmU6IFtQQVRDSCB2MiAzLzZdIHhlbi9wdnNoaW06IGlkZW50
+aXR5IHBpbiBzaGltIHZDUFVzIHRvIHBDUFVzIik6Cj4gT24gMTcuMDEuMTggYXQgMTc6MjksIDxy
+b2dlci5wYXVAY2l0cml4LmNvbT4gd3JvdGU6Cj4gPiBTaW5jZSBWQ1BVT1Bfe3VwL2Rvd259IGFs
+cmVhZHkgaWRlbnRpdHkgbWFwcyB2Q1BVIGhvdHBsdWcgdG8gcENQVQo+ID4gaG90cGx1ZyBhbHNv
+IGlkZW50aXR5IHBpbiB0aGUgdkNQVXMgdG8gdGhlIHBDUFVzIGluIHRoZSBzY2hlZHVsZXIuCj4g
+PiBUaGlzIHByZXZlbnRzIHZDUFUgbWlncmF0aW9uIGFuZCBzaG91bGQgaW1wcm92ZSBwZXJmb3Jt
+YW5jZS4KPiA+IAo+ID4gV2hpbGUgdGhlcmUgYWxzbyB1c2UgX19jcHVtYXNrX3NldF9jcHUgaW5z
+dGVhZCBvZiBjcHVtYXNrX3NldF9jcHUsCj4gPiB0aGVyZSdzIG5vIG5lZWQgdG8gdXNlIHRoZSBs
+b2NrZWQgdmFyaWFudC4KPiA+IAo+ID4gU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8
+cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4gPiBSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJA
+Y2l0cml4LmNvbT4KPiAKPiBBY2tlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29t
+PgoKU2hvdWxkIHRoaXMgYmUgaW4gdGhlIHNlY3VyaXR5IHJlc3BvbnNlIGNvbWV0IGJyYW5jaCA/
+CgpJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
