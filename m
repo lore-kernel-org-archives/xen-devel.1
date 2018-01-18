@@ -1,20 +1,20 @@
-From: Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH v2] x86/efi: fix build with linkers that
- support both coff-x86-64 and pe-x86-64
-Date: Thu, 18 Jan 2018 10:21:12 -0600
-Message-ID: <63395d03-fab6-055c-d5ef-e3a848971f33@cardoe.com>
-References: <20180117125641.35927-1-roger.pau@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2] x86/hvm: re-work viridian APIC assist
+	code
+Date: Thu, 18 Jan 2018 09:21:18 -0700
+Message-ID: <5A60D78E02000078001A0051@prv-mh.provo.novell.com>
+References: <20180118151059.1336-1-paul.durrant@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5842530774962316506=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=zhje=en=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
- id 1ecCwN-0002gF-AH
- for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 16:21:23 +0000
-Received: by mail-yw0-x234.google.com with SMTP id q26so11664957ywa.6
- for <xen-devel@lists.xenproject.org>; Thu, 18 Jan 2018 08:21:21 -0800 (PST)
-In-Reply-To: <20180117125641.35927-1-roger.pau@citrix.com>
+ (envelope-from <srs0=udw+=en=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1ecCwQ-0002fV-5D
+ for xen-devel@lists.xenproject.org; Thu, 18 Jan 2018 16:21:26 +0000
+In-Reply-To: <20180118151059.1336-1-paul.durrant@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,88 +23,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5842530774962316506==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="FjwvDrPuIs5wDi5vSM0uobRjxK6xJI8kC"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---FjwvDrPuIs5wDi5vSM0uobRjxK6xJI8kC
-Content-Type: multipart/mixed; boundary="DCEFn12TSwU2s5IcbS7z6vHSGunTjvOOn";
- protected-headers="v1"
-From: Doug Goldstein <cardoe@cardoe.com>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <63395d03-fab6-055c-d5ef-e3a848971f33@cardoe.com>
-Subject: Re: [PATCH v2] x86/efi: fix build with linkers that support both
- coff-x86-64 and pe-x86-64
-References: <20180117125641.35927-1-roger.pau@citrix.com>
-In-Reply-To: <20180117125641.35927-1-roger.pau@citrix.com>
-
---DCEFn12TSwU2s5IcbS7z6vHSGunTjvOOn
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 1/17/18 6:56 AM, Roger Pau Monne wrote:
-> When using a linker that supports both formats the following error
-> will be triggered:
->=20
-> efi/buildid.o: file not recognized: File format is ambiguous
-> efi/buildid.o: matching formats: coff-x86-64 pe-x86-64
->=20
-> Solve this by specifying the efi/buildid.o format to pe-x86-64.
->=20
-> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
-> ---
-
-Reviewed-by: Doug Goldstein <cardoe@cardoe.com>
---=20
-Doug Goldstein
-
-
---DCEFn12TSwU2s5IcbS7z6vHSGunTjvOOn--
-
---FjwvDrPuIs5wDi5vSM0uobRjxK6xJI8kC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlpgyXhfFIAAAAAALgAo
-aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
-MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
-Nl3YKRAAvVHkCTMqsFcihUao/YcJK5Yzqqgd5nUpvbvt+hfArJDimBuNwI4t57M5
-U/TkvtyDZ13iTleAQ/pitnkWBTieZvswt6ccli9/F4y3pSGRpMf8sADbRxqV+ZC1
-qwkH93itVq7QepNND0dhZWXjwhbUiqXa0/OXrhOihLH8YPP9xnHsB8DngEUI3rJs
-ONmgZZ3n3qD8lZ6FN5lEZThnI+PehVz8zbWAhyeSAJx0P0MaG3UTvNHft3UgGSWO
-TIzts4OYTayPfIBH8P8LaKWDMkpUxLQXBW0Y78Lkjt9EkolulR6kClkJwRf9M3Qh
-WYjZH8+W2HEdZSUxA0NLXICE0b1msoqUppHvvpdlcmh6OPF/eSCq6Hm8TONgVDeh
-KosMu63pirbMjlH346/lrB2ixnfcR6UBy7QdKUcy6Zx+sQ4ml85s/fhNwgzH8EVB
-WSVhT8Xgr3OLe4kVGXhAFFWQlUebA85zW7RE9zKWVJmEbS8GCfA3vUdKefHQELz/
-SZYEbkkKUQU37yLk1gFYTfRUEVUongtXxQkGyDmgGAHIlCfjygf6fwTvJoNuJtv4
-prCVY1LZ4wTp/q5+gEYGTUoazrUjzvHuHIqh1F2R3EADdUXfGhKDvwLMZwztKZjG
-x6L3p1wVhMO2jo73Q/yjeAqWXhkyjqvkH+fGLn0enF1t+LrHwRA=
-=GpIk
------END PGP SIGNATURE-----
-
---FjwvDrPuIs5wDi5vSM0uobRjxK6xJI8kC--
-
-
---===============5842530774962316506==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5842530774962316506==--
+Pj4+IE9uIDE4LjAxLjE4IGF0IDE2OjEwLCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
+Ogo+IC1pbnQgdmlyaWRpYW5fY29tcGxldGVfYXBpY19hc3Npc3Qoc3RydWN0IHZjcHUgKnYpCj4g
+K2Jvb2wgdmlyaWRpYW5fYXBpY19hc3Npc3RfY29tcGxldGVkKHN0cnVjdCB2Y3B1ICp2KQo+ICB7
+Cj4gICAgICB1aW50MzJfdCAqdmEgPSB2LT5hcmNoLmh2bV92Y3B1LnZpcmlkaWFuLnZwX2Fzc2lz
+dC52YTsKPiAtICAgIGludCB2ZWN0b3I7Cj4gIAo+ICAgICAgaWYgKCAhdmEgKQo+IC0gICAgICAg
+IHJldHVybiAwOwo+ICsgICAgICAgIHJldHVybiBmYWxzZTsKPiAgCj4gLSAgICBpZiAoICp2YSAm
+IDF1ICkKPiAtICAgICAgICByZXR1cm4gMDsgLyogSW50ZXJydXB0IG5vdCB5ZXQgcHJvY2Vzc2Vk
+IGJ5IHRoZSBndWVzdC4gKi8KPiAtCj4gLSAgICB2ZWN0b3IgPSB2LT5hcmNoLmh2bV92Y3B1LnZp
+cmlkaWFuLnZwX2Fzc2lzdC52ZWN0b3I7Cj4gLSAgICB2LT5hcmNoLmh2bV92Y3B1LnZpcmlkaWFu
+LnZwX2Fzc2lzdC52ZWN0b3IgPSAwOwo+ICsgICAgaWYgKCB2LT5hcmNoLmh2bV92Y3B1LnZpcmlk
+aWFuLnZwX2Fzc2lzdC5wZW5kaW5nICYmCj4gKyAgICAgICAgICEoKnZhICYgMXUpICkKPiArICAg
+IHsKPiArICAgICAgICAvKiBBbiBFT0kgaGFzIGJlZW4gYXZvaWRlZCAqLwo+ICsgICAgICAgIHYt
+PmFyY2guaHZtX3ZjcHUudmlyaWRpYW4udnBfYXNzaXN0LnBlbmRpbmcgPSBmYWxzZTsKPiArICAg
+ICAgICByZXR1cm4gdHJ1ZTsKPiArICAgIH0KCkVzcGVjaWFsbHkgd2l0aCBzdWNoIGEgbm9uLWF0
+b21pYyB1cGRhdGUsIHBsZWFzZSByZW1pbmQgbWU6IERlc3BpdGUKdGhlbSBoYXZpbmcgc3RydWN0
+IHZjcHUgKiBwYXJhbWV0ZXJzLCB0aGVzZSBmdW5jdGlvbnMgYXJlIGFsbCBvbmx5CmV2ZXIgY2Fs
+bGVkIHdpdGggdiA9PSBjdXJyZW50PyBJZiB0aGUgYW5zd2VyIGlzIHllcywgdGhlbgpSZXZpZXdl
+ZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgp3aXRoIG9uZSBtb3JlIGNvc21l
+dGljIHJlbWFyazoKCj4gQEAgLTEyMCw5ICsxMjAsOSBAQCB2b2lkIHZpcmlkaWFuX3RpbWVfcmVm
+X2NvdW50X3RoYXcoc3RydWN0IGRvbWFpbiAqZCk7Cj4gIHZvaWQgdmlyaWRpYW5fdmNwdV9kZWlu
+aXQoc3RydWN0IHZjcHUgKnYpOwo+ICB2b2lkIHZpcmlkaWFuX2RvbWFpbl9kZWluaXQoc3RydWN0
+IGRvbWFpbiAqZCk7Cj4gIAo+IC12b2lkIHZpcmlkaWFuX3N0YXJ0X2FwaWNfYXNzaXN0KHN0cnVj
+dCB2Y3B1ICp2LCBpbnQgdmVjdG9yKTsKPiAtaW50IHZpcmlkaWFuX2NvbXBsZXRlX2FwaWNfYXNz
+aXN0KHN0cnVjdCB2Y3B1ICp2KTsKPiAtdm9pZCB2aXJpZGlhbl9hYm9ydF9hcGljX2Fzc2lzdChz
+dHJ1Y3QgdmNwdSAqdik7Cj4gK3ZvaWQgdmlyaWRpYW5fc2V0X2FwaWNfYXNzaXN0KHN0cnVjdCB2
+Y3B1ICp2KTsKPiArYm9vbCB2aXJpZGlhbl9hcGljX2Fzc2lzdF9jb21wbGV0ZWQoc3RydWN0IHZj
+cHUgKnYpOwo+ICt2b2lkIHZpcmlkaWFuX2NsZWFyX2FwaWNfYXNzaXN0KHN0cnVjdCB2Y3B1ICp2
+KTsKCkNvdWxkIEkgdGFsayB5b3UgaW50byBuYW1pbmcgdGhlbSBhbGwgdmlyaWRpYW5fYXBpY19h
+c3Npc3RfLi4uKCk/CgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
