@@ -1,9 +1,9 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 118187: regressions - FAIL
-Date: Wed, 17 Jan 2018 23:50:20 +0000
-Message-ID: <osstest-118187-mainreport@xen.org>
+Subject: [xen-unstable-smoke test] 118194: regressions - FAIL
+Date: Thu, 18 Jan 2018 01:49:37 +0000
+Message-ID: <osstest-118194-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0956310042756754287=="
+Content-Type: multipart/mixed; boundary="===============3879966193862866905=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -16,11 +16,11 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0956310042756754287==
+--===============3879966193862866905==
 Content-Type: text/plain
 
-flight 118187 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118187/
+flight 118194 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118194/
 
 Regressions :-(
 
@@ -35,13 +35,13 @@ Tests which did not succeed, but are not blocking:
  test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
 
 version targeted for testing:
- xen                  8d2983ec793362e8bcbe1a9a36d3eee61bc187f0
+ xen                  e730f8e41e8537f1db9770b9464f9523c28857b9
 baseline version:
  xen                  e871e80c38547d9faefc6604532ba3e985e65873
 
 Last test of basis   118105  2018-01-16 17:04:09 Z    1 days
-Failing since        118110  2018-01-16 19:02:12 Z    1 days   14 attempts
-Testing same since   118162  2018-01-17 15:01:29 Z    0 days    4 attempts
+Failing since        118110  2018-01-16 19:02:12 Z    1 days   15 attempts
+Testing same since   118194  2018-01-18 00:01:12 Z    0 days    1 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
@@ -53,11 +53,13 @@ People who touched revisions under test:
   Jan Beulich <jbeulich@suse.com>
   Jon Ludlam <jonathan.ludlam@citrix.com>
   Jonathan Ludlam <jonathan.ludlam@citrix.com>
+  Julien Grall <julien.grall@linaro.org>
   Lv Zheng <lv.zheng@intel.com>
   Rafael J. Wysocki <rafael.j.wysocki@intel.com>
   Roger Pau Monne <roger.pau@citrix.com>
   Roger Pau Monné <roger.pau@citrix.com>
   Sergey Dyasli <sergey.dyasli@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
   Wei Liu <wei.liu2@citrix.com>
 
 jobs:
@@ -89,10 +91,10 @@ Test harness code can be found at
 
 Not pushing.
 
-(No revision log; it would be 921 lines long.)
+(No revision log; it would be 1042 lines long.)
 
 
---===============0956310042756754287==
+--===============3879966193862866905==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -102,4 +104,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============0956310042756754287==--
+--===============3879966193862866905==--
