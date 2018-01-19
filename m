@@ -1,10 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 118226: regressions - FAIL
-Date: Fri, 19 Jan 2018 13:35:14 +0000
-Message-ID: <osstest-118226-mainreport@xen.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v9 06/11] x86/entry: Organise the use of
+ MSR_SPEC_CTRL at each entry/exit point
+Date: Fri, 19 Jan 2018 13:36:17 +0000
+Message-ID: <1fe16c0c-7c91-f43f-c3b6-47e82dcd2909@citrix.com>
+References: <1516290370-14958-1-git-send-email-andrew.cooper3@citrix.com>
+ <1516290370-14958-7-git-send-email-andrew.cooper3@citrix.com>
+ <5A61E7E702000078001A0553@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8189168930618671913=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <5A61E7E702000078001A0553@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,260 +20,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============8189168930618671913==
-Content-Type: text/plain
-
-flight 118226 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118226/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-amd64                   6 xen-build                fail REGR. vs. 118219
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-debianhvm-i386  1 build-check(1)         blocked n/a
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  66bf4ef04869548128b70d8d371ec992189a6a1c
-baseline version:
- xen                  56498d2cf9d3c5f7d3d894a89f7d66ed81548e01
-
-Last test of basis   118219  2018-01-19 01:01:22 Z    0 days
-Testing same since   118226  2018-01-19 11:02:00 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  George Dunlap <george.dunlap@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Julien Grall <julien.grall@linaro.org>
-  Paul Durrant <paul.durrant@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Tim Deegan <tim@xen.org>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  fail    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          blocked 
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     blocked 
- test-amd64-amd64-libvirt                                     blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit 66bf4ef04869548128b70d8d371ec992189a6a1c
-Author: Paul Durrant <paul.durrant@citrix.com>
-Date:   Fri Jan 19 11:17:30 2018 +0100
-
-    x86/hvm: re-work viridian APIC assist code
-    
-    It appears there is a case where Windows enables the APIC assist
-    enlightenment[1] but does not use it. This scenario is perfectly valid
-    according to the documentation, but causes the state machine in Xen to
-    become confused leading to a domain_crash() such as the following:
-    
-    (XEN) d4: VIRIDIAN GUEST_OS_ID: vendor: 1 os: 4 major: 6 minor: 1 sp: 0
-          build: 1db0
-    (XEN) d4: VIRIDIAN HYPERCALL: enabled: 1 pfn: 3ffff
-    (XEN) d4v0: VIRIDIAN VP_ASSIST_PAGE: enabled: 1 pfn: 3fffe
-    (XEN) domain_crash called from viridian.c:452
-    (XEN) Domain 4 (vcpu#0) crashed on cpu#1:
-    
-    The following sequence of events is an example of how this can happen:
-    
-     - On return to guest vlapic_has_pending_irq() finds a bit set in the IRR.
-     - vlapic_ack_pending_irq() calls viridian_start_apic_assist() which latches
-       the vector, sets the bit in the ISR and clears it from the IRR.
-     - The guest then processes the interrupt but EOIs it normally, therefore
-       clearing the bit in the ISR.
-     - On next return to guest vlapic_has_pending_irq() calls
-       viridian_complete_apic_assist(), which discovers the assist bit still set
-       in the shared page and therefore leaves the latched vector in place, but
-       also finds another bit set in the IRR.
-     - vlapic_ack_pending_irq() is then called but, because the ISR is was
-       cleared by the EOI, another call is made to viridian_start_apic_assist()
-       and this then calls domain_crash() because it finds the latched vector
-       has not been cleared.
-    
-    Having re-visited the code I also conclude that Xen's implementation of the
-    enlightenment is currently wrong and we are not properly following the
-    specification.
-    
-    The specification says:
-    
-    "The hypervisor sets the No EOI required bit when it injects a virtual
-     interrupt if the following conditions are satisfied:
-    
-     - The virtual interrupt is edge-triggered, and
-     - There are no lower priority interrupts pending.
-    
-     If, at a later time, a lower priority interrupt is requested, the
-     hypervisor clears the No EOI required such that a subsequent EOI causes
-     an intercept.
-     In case of nested interrupts, the EOI intercept is avoided only for the
-     highest priority interrupt. This is necessary since no count is maintained
-     for the number of EOIs performed by the OS. Therefore only the first EOI
-     can be avoided and since the first EOI clears the No EOI Required bit,
-     the next EOI generates an intercept."
-    
-    Thus it is quite legitimate to set the "No EOI required" bit and then
-    subsequently take a higher priority interrupt without clearing the bit.
-    Thus the avoided EOI will then relate to that subsequent interrupt rather
-    than the highest priority interrupt when the bit was set. Hence latching
-    the vector when setting the bit is not entirely useful and somewhat
-    misleading.
-    
-    This patch re-works the APIC assist code to simply track when the "No EOI
-    required" bit is set and test if it has been cleared by the guest (i.e.
-    'completing' the APIC assist), thus indicating a 'missed EOI'. Missed EOIs
-    need to be dealt with in two places:
-    
-     - In vlapic_has_pending_irq(), to avoid comparing the IRR against a stale
-       ISR, and
-     - In vlapic_EOI_set() because a missed EOI for a higher priority vector
-       should be dealt with before the actual EOI for the lower priority
-       vector.
-    
-    Furthermore, because the guest is at liberty to ignore the "No EOI required"
-    bit (which lead the crash detailed above) vlapic_EOI_set() must also make
-    sure the bit is cleared to avoid confusing the state machine.
-    
-    Lastly the previous code did not properly emulate an EOI if a missed EOI
-    was discovered in vlapic_has_pending_irq(); it merely cleared the bit in
-    the ISR. The new code instead calls vlapic_EOI_set().
-    
-    [1] See section 10.3.5 of Microsoft's "Hypervisor Top Level Functional
-        Specification v5.0b".
-    
-    NOTE: The changes to the save/restore code are safe because the layout
-          of struct hvm_viridian_vcpu_context is unchanged and the new
-          interpretation of the (previously so named) vp_assist_vector field
-          as the boolean pending flag maintains the correct semantics.
-    
-    Signed-off-by: Paul Durrant <paul.durrant@citrix.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-commit 48a933ee590e2fdfa240484ebda4f76096277d7e
-Author: Roger Pau Monné <roger.pau@citrix.com>
-Date:   Fri Jan 19 11:16:58 2018 +0100
-
-    x86/efi: fix build with linkers that support both coff-x86-64 and pe-x86-64
-    
-    When using a linker that supports both formats the following error
-    will be triggered:
-    
-    efi/buildid.o: file not recognized: File format is ambiguous
-    efi/buildid.o: matching formats: coff-x86-64 pe-x86-64
-    
-    Solve this by specifying the efi/buildid.o format to pe-x86-64.
-    
-    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Doug Goldstein <cardoe@cardoe.com>
-
-commit 97207ddd3b2bbbf6e723d8c5f2a93592a1cf5d81
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Jan 19 11:16:10 2018 +0100
-
-    x86/shadow: widen reference count
-    
-    Utilize as many of the bits available in the union as possible, without
-    (just to be on the safe side) colliding with any of the bits outside of
-    PGT_type_mask.
-    
-    Note that the first and last hunks of the xen/include/asm-x86/mm.h
-    change are merely code motion.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Tim Deegan <tim@xen.org>
-    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-commit 7867181b2ad63f0d2f1ba97598e577538b83882f
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Jan 19 11:14:42 2018 +0100
-
-    x86/PoD: correctly handle non-order-0 decrease-reservation requests
-    
-    p2m_pod_decrease_reservation() at the moment only returns a boolean
-    value: true for "nothing more to do", false for "something more to do".
-    If it returns false, decrease_reservation() will loop over the entire
-    range, calling guest_remove_page() for each page.
-    
-    Unfortunately, in the case p2m_pod_decrease_reservation() succeeds
-    partially, some of the memory in the range will be not-present; at which
-    point guest_remove_page() will return an error, and the entire operation
-    will fail.
-    
-    Fix this by:
-    1. Having p2m_pod_decrease_reservation() return exactly the number of
-       gpfn pages it has handled (i.e., replaced with 'not present').
-    2. Making guest_remove_page() return -ENOENT in the case that the gpfn
-       in question was already empty (and in no other cases).
-    3. When looping over guest_remove_page(), expect the number of -ENOENT
-       failures to be no larger than the number of pages
-       p2m_pod_decrease_reservation() removed.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Signed-off-by: George Dunlap <george.dunlap@citrix.com>
-    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Julien Grall <julien.grall@linaro.org>
-
-commit 75c47ae9b63483ac404ea7e4a28cb5fb1d989ef8
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Fri Jan 19 11:09:55 2018 +0100
-
-    x86/HVM: make explicit that hvm_print_line() does output only
-    
-    On input "c" being 0xff should already have the effect of bailing early
-    (due to the isprint()), but let's rather make this explicit. Also
-    convert the BUG_ON() to an ASSERT() (nothing fatal happens in the
-    function if this is violated), at the same time extending what is being
-    checked.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-(qemu changes not included)
-
-
---===============8189168930618671913==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8189168930618671913==--
+T24gMTkvMDEvMTggMTE6NDMsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDE4LjAxLjE4IGF0
+IDE2OjQ2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IFdlIG5lZWQgdG8g
+YmUgYWJsZSB0byBlaXRoZXIgc2V0IG9yIGNsZWFyIElCUlMgaW4gWGVuIGNvbnRleHQsIGFzIHdl
+bGwgYXMKPj4gcmVzdG9yZSBhcHByb3ByaWF0ZSBndWVzdCB2YWx1ZXMgaW4gZ3Vlc3QgY29udGV4
+dC4gIFNlZSB0aGUgZG9jdW1lbnRhdGlvbiBpbgo+PiBhc20teDg2L3NwZWNfY3RybF9hc20uaCBm
+b3IgZGV0YWlscy4KPj4KPj4gV3JpdGVzIHRvICVjcjMgYXJlIHNsb3dlciB3aGVuIFNQRUNfQ1RS
+TC5JQlJTIGlzIHNldCwgc28gdGhlCj4+IFNQRUNfQ1RSTF97RU5UUlkvRVhJVH0qIHBvc2l0aW9u
+aW5nIGlzIGltcG9ydGFudCwgYW5kIG9wdGltaXNlZCBmb3IgdGhlCj4+IGV4cGVjdGVkIGNvbW1v
+biBjYXNlIG9mIFhlbiBub3QgdXNpbmcgSUJSUyBpdHNlbGYuCj4gQW5kIHRoaXMgZXhwZWN0YXRp
+b24gaXMgYmVjYXVzZSBvbiBwcmUtU2t5bGFrZSB3ZSdyZSBmaW5lIHVzaW5nIGp1c3QKPiByZXRw
+b2xpbmUsIGFuZCB3ZSBleHBlY3QgcG9zdC1Ta3lsYWtlIHRvIG5vdCBoYXZlIHRoZSBpc3N1ZSBh
+bnltb3JlPwo+IFN1Y2ggcmVhc29uaW5nIHdvdWxkIGhlbHAgYmVpbmcgc3BlbGxlZCBvdXQgaGVy
+ZS4KCkthYnkgTGFrZSBpcyBpbiB0aGUgc2FtZSBidWNrZXQgYXMgU2t5bGFrZS7CoCBDb2ZmZWUg
+TGFrZSBhbmQgQ2Fubm9uIExha2UKYXJlIHVua25vd24gcXVhbnRpdGllcy4KCkludGVsIGhhdmUg
+c3RhdGVkIHRoYXQgdGhlIGV4cGVjdCB0aGVzZSBpc3N1ZXMgdG8gYmUgcmVzb2x2ZWQgb24gdGhl
+CnNhbWUgaGFyZHdhcmUgYXMgQ0VULCBhcyByZXRwb2xpbmUgaXMgYSBkZWxpYmVyYXRlIFJPUC1n
+YWRnZXQgYW5kIHdvbid0CmZ1bmN0aW9uIHdpdGggQ29udHJvbGZsb3cgRW5mb3JjZW1lbnQgVGVj
+aG5vbG9neSBlbmFibGVkLgoKQXMgZmFyIGFzIEknbSBhd2FyZSwgQ0VUIGlzIGV4cGVjdGVkIGlu
+IEljZSBMYWtlLCBidXQgd2hvIGtub3dzIHdoYXQKdGhpcyBpc3N1ZSBoYXMgZG9uZSB0byBJbnRl
+bCdzIHJlbGVhc2Ugc2NoZWR1bGUuCgo+IEFzIHRvIHRoZSBiZWhhdmlvciBvZiBDUjMgd3JpdGVz
+IC0gaXMgdGhpcyB3cml0dGVuIGRvd24gYW55d2hlcmUgaW4KPiBJbnRlbCdzIGFuZC9vciBBTUQn
+cyBkb2NzPyBPciBlbHNlLCBob3cgZG8geW91IGtub3cgdGhpcyBpcyB1bmlmb3JtbHkKPiB0aGUg
+Y2FzZSBvbiBhbGwgcGFzdCwgY3VycmVudCwgYW5kIGZ1dHVyZSBoYXJkd2FyZT8KCkFNRCBkb24n
+dCBpbXBsZW1lbnQgSUJSUywgc28gdGhpcyBpc24ndCBhcHBsaWNhYmxlIHRvIHRoZW0uCgpJJ20g
+bm90IHN1cmUgaWYgdGhpcyBpcyBzdGF0ZWQgaW4gYW55IHB1YmxpYyBkb2N1bWVudGF0aW9uLsKg
+IEknbGwgc2VlCmFib3V0IHBva2luZyBwZW9wbGUuLi4KCklycmVzcGVjdGl2ZSwgaXQgY2FuIGJl
+IGRlbW9uc3RyYXRlZCB0cml2aWFsbHkgd2l0aCBzb21lIHRpbWluZyBhbmFseXNpcy4KCj4+IEBA
+IC05OSw2ICsxMDYsMTAgQEAgVU5MSUtFTFlfRU5EKHJlYWxtb2RlKQo+PiAgLkx2bXhfdm1lbnRy
+eV9mYWlsOgo+PiAgICAgICAgICBzdGkKPj4gICAgICAgICAgU0FWRV9BTEwKPj4gKwo+PiArICAg
+ICAgICBTUEVDX0NUUkxfRU5UUllfRlJPTV9QViAvKiBSZXE6ICVyc3A9cmVncy9jcHVpbmZvIENs
+b2I6IGFjZCAqLwo+IEkgdGhpbmsgdGhlIHVzZSBvZiB0aGUgUFYgdmFyaWFudCBoZXJlIHJlcXVp
+cmVzIGEgY29tbWVudC4KCk9oLsKgIEl0IHVzZWQgdG8gaGF2ZSBvbmUuLi7CoCBJJ2xsIHRyeSB0
+byBmaW5kIGl0LgoKPgo+PiBAQCAtMTQyLDYgKzE0NiwxMyBAQCBFTlRSWShjb21wYXRfcmVzdG9y
+ZV9hbGxfZ3Vlc3QpCj4+ICAgICAgICAgIC5wb3BzZWN0aW9uCj4+ICAgICAgICAgIG9yICAgICRY
+ODZfRUZMQUdTX0lGLCVyMTEKPj4gICAgICAgICAgbW92ICAgJXIxMWQsVVJFR1NfZWZsYWdzKCVy
+c3ApCj4+ICsKPj4gKyAgICAgICAgbW92IFZDUFVfYXJjaF9tc3IoJXJieCksICVyYXgKPj4gKyAg
+ICAgICAgbW92IFZDUFVNU1Jfc3BlY19jdHJsX3JhdyglcmF4KSwgJWVheAo+IEkgdW5kZXJzdGFu
+ZCB0aGF0IGl0J3MgY29kZSBsaWtlIHRoaXMgd2hpY2ggaXMgbWlzc2luZyBmcm9tIHRoZSBTVk0K
+PiBhbmQgVk1YIGV4aXQgcGF0aHMuCgpDb3JyZWN0LgoKPgo+PiBAQCAtNzI5LDYgKzc2MCw5IEBA
+IEVOVFJZKG5taSkKPj4gIGhhbmRsZV9pc3RfZXhjZXB0aW9uOgo+PiAgICAgICAgICBTQVZFX0FM
+TCBDTEFDCj4+ICAKPj4gKyAgICAgICAgU1BFQ19DVFJMX0VOVFJZX0ZST01fSU5UUiAvKiBSZXE6
+ICVyc3A9cmVncywgQ2xvYjogYWNkICovCj4+ICsgICAgICAgIC8qIFdBUk5JTkchIGByZXRgLCBg
+Y2FsbCAqYCwgYGptcCAqYCBub3Qgc2FmZSBiZWZvcmUgdGhpcyBwb2ludC4gKi8KPiBGb2xsb3dp
+bmcgbXkgY29uc2lkZXJhdGlvbnMgdG93YXJkcyBhbHRlcm5hdGl2ZSBwYXRjaGluZyB0bwo+IGVs
+aW1pbmF0ZSBhcyBtdWNoIG92ZXJoZWFkIGFzIHBvc3NpYmxlIGZyb20gdGhlIE1lbHRkb3duCj4g
+YmFuZC1haWQgaW4gY2FzZSBpdCBpcyBiZWluZyBkaXNhYmxlZCwgSSdtIHJhdGhlciBoZXNpdGFu
+dCB0byBzZWUgYW55Cj4gcGF0Y2hhYmxlIGNvZGUgYmVpbmcgaW50cm9kdWNlZCBpbnRvIHRoZSBO
+TUkvI01DIGVudHJ5IHBhdGhzCj4gd2l0aG91dCB0aGUgcGF0Y2hpbmcgbG9naWMgZmlyc3QgYmVp
+bmcgbWFkZSBzYWZlIGluIHRoaXMgcmVnYXJkLgo+IEV4Y2VwdGlvbnMgY29taW5nIGhlcmUgYXJl
+bid0IHZlcnkgZnJlcXVlbnQgKGV4Y2VwdCBwZXJoYXBzIG9uCj4gaGFyZHdhcmUgYWJvdXQgdG8g
+ZGllKSwgc28gdGhlIHBhdGggaXNuJ3QgcGVyZm9ybWFuY2UgY3JpdGljYWwuCj4gVGhlcmVmb3Jl
+IEkgdGhpbmsgd2Ugc2hvdWxkIHRyeSB0byBhdm9pZCBhbnkgcGF0Y2hpbmcgaGVyZSwgYW5kCj4g
+anVzdCBjb25kaXRpb25hbHMgaW5zdGVhZC4gVGhpcyBpbiBmYWN0IGlzIG9uZSBvZiB0aGUgcmVh
+c29ucyB3aHkgSQo+IGRpZG4ndCB3YW50IHRvIG1hY3JvLWl6ZSB0aGUgYXNzZW1ibHkgYWRkaXRp
+b25zIGRvbmUgaW4gdGhlCj4gTWVsdGRvd24gYmFuZC1haWQuCj4KPiBJIGRvIHJlYWxpemUgdGhh
+dCB0aGlzIHRoZW4gYWxzbyBhZmZlY3RzIHRoZSBleGl0LXRvLVhlbiBwYXRoLAo+IHdoaWNoIEkg
+YWdyZWUgaXMgbGVzcyBkZXNpcmFibGUgdG8gdXNlIGNvbmRpdGlvbmFscyBvbi4KCldoaWxlIEkg
+YWdyZWUgdGhhdCBvdXIgbGFjayBvZiBJU1Qtc2FmZSBwYXRjaGluZyBpcyBhIHByb2JsZW0sIHRo
+ZXNlCmFsdGVybmF0aXZlIHBvaW50cyBhcmUgYWxyZWFkeSBwcmVzZW50IG9uIHRoZSBOTUkgYW5k
+IE1DRSBwYXRocywgYW5kCm5lZWQgdG8gYmUuwqAgQXMgYSByZXN1bHQsIHRoZSBERiBoYW5kbGVy
+IGlzIGluIG5vIHdvcnNlIG9mIGEgcG9zaXRpb24uwqAKQXMgYSBwZXJmZWN0IGV4YW1wbGUsIG9i
+c2VydmUgdGhlIENMQUMgaW4gY29udGV4dC4KCkkgY291bGQgcGVyaGFwcyBiZSB0YWxrZWQgaW50
+byBtYWtpbmcgYSBTUEVDX0NUUkxfRU5UUllfRlJPTV9JU1QgdmFyaWFudAp3aGljaCBkb2Vzbid0
+IHVzZSBhbHRlcm5hdGl2ZXMgKGJ1dCBJTU8gdGhpcyBpcyBwb2ludGxlc3MgaW4gdGhlCnByZXNl
+bmNlIG9mIENMQUMpLCBidXQgc3RpbGwgZG9uJ3QgdGhpbmsgaXQgaXMgcmVhc29uYWJsZSB0byB0
+cmVhdCBERgpkaWZmZXJlbnRseSB0byBOTUkvTUNFLgoKPgo+PiAtLS0gL2Rldi9udWxsCj4+ICsr
+KyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvc3BlY19jdHJsX2FzbS5oCj4+IEBAIC0wLDAgKzEsMjI3
+IEBACj4+ICsvKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqCj4+ICsgKiBpbmNsdWRlL2FzbS14ODYvc3Bl
+Y19jdHJsLmgKPj4gKyAqCj4+ICsgKiBUaGlzIHByb2dyYW0gaXMgZnJlZSBzb2Z0d2FyZTsgeW91
+IGNhbiByZWRpc3RyaWJ1dGUgaXQgYW5kL29yIG1vZGlmeQo+PiArICogaXQgdW5kZXIgdGhlIHRl
+cm1zIG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBhcyBwdWJsaXNoZWQgYnkKPj4g
+KyAqIHRoZSBGcmVlIFNvZnR3YXJlIEZvdW5kYXRpb247IGVpdGhlciB2ZXJzaW9uIDIgb2YgdGhl
+IExpY2Vuc2UsIG9yCj4+ICsgKiAoYXQgeW91ciBvcHRpb24pIGFueSBsYXRlciB2ZXJzaW9uLgo+
+PiArICoKPj4gKyAqIFRoaXMgcHJvZ3JhbSBpcyBkaXN0cmlidXRlZCBpbiB0aGUgaG9wZSB0aGF0
+IGl0IHdpbGwgYmUgdXNlZnVsLAo+PiArICogYnV0IFdJVEhPVVQgQU5ZIFdBUlJBTlRZOyB3aXRo
+b3V0IGV2ZW4gdGhlIGltcGxpZWQgd2FycmFudHkgb2YKPj4gKyAqIE1FUkNIQU5UQUJJTElUWSBv
+ciBGSVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRS4gIFNlZSB0aGUKPj4gKyAqIEdOVSBH
+ZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGZvciBtb3JlIGRldGFpbHMuCj4+ICsgKgo+PiArICogWW91
+IHNob3VsZCBoYXZlIHJlY2VpdmVkIGEgY29weSBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExp
+Y2Vuc2UKPj4gKyAqIGFsb25nIHdpdGggdGhpcyBwcm9ncmFtOyBJZiBub3QsIHNlZSA8aHR0cDov
+L3d3dy5nbnUub3JnL2xpY2Vuc2VzLz4uCj4+ICsgKgo+PiArICogQ29weXJpZ2h0IChjKSAyMDE3
+LTIwMTggQ2l0cml4IFN5c3RlbXMgTHRkLgo+PiArICovCj4+ICsKPj4gKyNpZm5kZWYgX19YODZf
+U1BFQ19DVFJMX0FTTV9IX18KPj4gKyNkZWZpbmUgX19YODZfU1BFQ19DVFJMX0FTTV9IX18KPj4g
+Kwo+PiArI2lmZGVmIF9fQVNTRU1CTFlfXwo+PiArI2luY2x1ZGUgPGFzbS9tc3IuaD4KPj4gKwo+
+PiArLyoKPj4gKyAqIFNhdmluZyBhbmQgcmVzdG9yaW5nIE1TUl9TUEVDX0NUUkwgc3RhdGUgaXMg
+YSBsaXR0bGUgdHJpY2t5Lgo+PiArICoKPj4gKyAqIFdlIHdhbnQgdGhlIGd1ZXN0cyBjaG9pY2Ug
+b2YgU1BFQ19DVFJMIHdoaWxlIGluIGd1ZXN0IGNvbnRleHQsIGFuZCBJQlJTCj4+ICsgKiAoc2V0
+IG9yIGNsZWFyLCBkZXBlbmRpbmcgb24gdGhlIGhhcmR3YXJlKSB3aGlsZSBydW5uaW5nIGluIFhl
+biBjb250ZXh0Lgo+IFRvIG1lIHRoaXMgY29udGludWVzIHRvIGJlIHNvbWV3aGF0IHN0cmFuZ2Ug
+dG8gcmVhZC4gT25lIHBvc3NpYmlsaXR5Cj4gdG8gaW1wcm92ZSBpdCB3b3VsZCBiZSB0byBtb3Zl
+IHRoZSBvcGVuaW5nIHBhcmVudGhlc2lzIGFmdGVyICJzZXQgb3IKPiBjbGVhciIsIGFub3RoZXIg
+d291bGQgYmUgdG8gc2F5ICIuLi4sIGFuZCBYZW4ncyBjaG9pY2UgKHNldCBvciAuLi4iLgo+IEJ1
+dCB5b3UncmUgdGhlIG5hdGl2ZSBzcGVha2VyLCBzbyBJJ20gb3BlbiB0byBvdGhlciBhbHRlcm5h
+dGl2ZXMgeW91Cj4gbWF5IGNvbnNpZGVyIGV2ZW4gYmV0dGVyLgoKWW91ciBzdWdnZXN0aW9uIGlz
+IGNsZWFyZXIuwqAgSSdsbCBib3Jyb3cgdGhhdC4KCj4+ICsgKiBUaGVyZWZvcmUsIGEgc2ltcGxp
+c3RpYyBhbGdvcml0aG0gaXM6Cj4+ICsgKgo+PiArICogIC0gU2V0L2NsZWFyIElCUlMgb24gZW50
+cnkgdG8gWGVuCj4+ICsgKiAgLSBTZXQgdGhlIGd1ZXN0cycgY2hvaWNlIG9uIGV4aXQgdG8gZ3Vl
+c3QKPj4gKyAqICAtIExlYXZlIFNQRUNfQ1RSTCB1bmNoYW5nZWQgb24gZXhpdCB0byB4ZW4KPj4g
+KyAqCj4+ICsgKiBUaGVyZSBhcmUgdHdvIGNvbXBsaWNhdGluZyBmYWN0b3JzOgo+PiArICogIDEp
+IEhWTSBndWVzdHMgY2FuIGhhdmUgZGlyZWN0IGFjY2VzcyB0byB0aGUgTVNSLCBzbyBpdCBjYW4g
+Y2hhbmdlCj4+ICsgKiAgICAgYmVoaW5kIFhlbidzIGJhY2suCj4+ICsgKiAgMikgQW4gTk1JIG9y
+IE1DRSBjYW4gaW50ZXJydXB0IGF0IGFueSBwb2ludCwgaW5jbHVkaW5nIGVhcmx5IGluIHRoZSBl
+bnRyeQo+PiArICogICAgIHBhdGgsIG9yIGxhdGUgaW4gdGhlIGV4aXQgcGF0aCBhZnRlciByZXN0
+b3JpbmcgdGhlIGd1ZXN0IHZhbHVlLiAgVGhpcwo+PiArICogICAgIHdpbGwgY29ycnVwdCB0aGUg
+Z3Vlc3QgdmFsdWUuCj4+ICsgKgo+PiArICogRmFjdG9yIDEgaXMgZGVhbHQgd2l0aCBieSByZWx5
+aW5nIG9uIE5NSXMvTUNFcyBiZWluZyBibG9ja2VkIGltbWVkaWF0ZWx5Cj4+ICsgKiBhZnRlciBW
+TUVYSVQuICBUaGUgVk1FWElULXNwZWNpZmljIGNvZGUgcmVhZHMgTVNSX1NQRUNfQ1RSTCBhbmQg
+dXBkYXRlcwo+PiArICogY3VycmVudCBiZWZvcmUgbG9hZGluZyBYZW4ncyBNU1JfU1BFQ19DVFJM
+IHNldHRpbmcuCj4+ICsgKgo+PiArICogRmFjdG9yIDIgaXMgaGFyZGVyLiAgV2UgbWFpbnRhaW4g
+YSBzaGFkb3dfc3BlY19jdHJsIHZhbHVlLCBhbmQKPj4gKyAqIHVzZV9zaGFkb3dfc3BlY19jdHJs
+IGJvb2xlYW4gcGVyIGNwdS4gIFRoZSBzeW5jaHJvbm91cyB1c2UgaXM6Cj4+ICsgKgo+PiArICog
+IDEpIFN0b3JlIGd1ZXN0IHZhbHVlIGluIHNoYWRvd19zcGVjX2N0cmwKPj4gKyAqICAyKSBTZXQg
+dXNlX3NoYWRvd19zcGVjX2N0cmwgYm9vbGVhbgo+PiArICogIDMpIExvYWQgZ3Vlc3QgdmFsdWUg
+aW50byBNU1JfU1BFQ19DVFJMCj4+ICsgKiAgNCkgRXhpdCB0byBndWVzdAo+PiArICogIDUpIEVu
+dHJ5IGZyb20gZ3Vlc3QKPj4gKyAqICA2KSBDbGVhciB1c2Vfc2hhZG93X3NwZWNfY3RybCBib29s
+ZWFuCj4gNykgTG9hZCBYZW4gdmFsdWUgaW50byBNU1JfU1BFQ19DVFJMCj4KPiAoSXQgaXMgaW1w
+b3J0YW50IHRvIHNwZWxsIG91dCB0aGF0IHRoZSBNU1Igd3JpdGUgaW4gX2JvdGhfIGNhc2VzCj4g
+bmVlZHMgdG8gY29tZSBhZnRlciB0aGUgd3JpdGUgb2YgdGhlIGJvb2xlYW4uKQoKT2suCgo+Cj4+
+ICsubWFjcm8gRE9fU1BFQ19DVFJMX0VOVFJZX0ZST01fVk1FWElUIGlicnNfdmFsOnJlcQo+PiAr
+LyoKPj4gKyAqIFJlcXVpcmVzICVyYng9Y3VycmVudCwgJXJzcD1yZWdzL2NwdWluZm8KPj4gKyAq
+IENsb2JiZXJzICVyYXgsICVyY3gsICVyZHgKPj4gKyAqCj4+ICsgKiBUaGUgY29tbW9uIGNhc2Ug
+aXMgdGhhdCBhIGd1ZXN0IGhhcyBkaXJlY3QgYWNjZXNzIHRvIE1TUl9TUEVDX0NUUkwsIGF0Cj4+
+ICsgKiB3aGljaCBwb2ludCB3ZSBuZWVkIHRvIHNhdmUgdGhlIGd1ZXN0IHZhbHVlIGJlZm9yZSBz
+ZXR0aW5nIElCUlMgZm9yIFhlbi4KPj4gKyAqIFVuaWxhdGVyYWxseSBzYXZpbmcgdGhlIGd1ZXN0
+IHZhbHVlIGlzIHNob3J0ZXIgYW5kIGZhc3RlciB0aGFuIGNoZWNraW5nLgo+PiArICovCj4+ICsg
+ICAgbW92ICRNU1JfU1BFQ19DVFJMLCAlZWN4Cj4+ICsgICAgcmRtc3IKPj4gKwo+PiArICAgIC8q
+IFN0YXNoIHRoZSB2YWx1ZSBmcm9tIGhhcmR3YXJlLiAqLwo+PiArICAgIG1vdiBWQ1BVX2FyY2hf
+bXNyKCVyYngpLCAlcmR4Cj4+ICsgICAgbW92ICVhbCwgVkNQVU1TUl9zcGVjX2N0cmxfcmF3KCVy
+ZHgpCj4gUGF0Y2ggMyBtYWtlcyB0aGlzIGEgMzItYml0IGZpZWxkIG5vdyAtIHdoeSBzdGlsbCAl
+YWw/CgpPdmVyc2lnaHQuCgo+Cj4+ICsubWFjcm8gRE9fU1BFQ19DVFJMX0VOVFJZIG1heWJleGVu
+OnJlcSBpYnJzX3ZhbDpyZXEKPj4gKy8qCj4+ICsgKiBSZXF1aXJlcyAlcnNwPXJlZ3MgKGFsc28g
+Y3B1aW5mbyBpZiAhbWF5YmV4ZW4pCj4+ICsgKiBDbG9iYmVycyAlcmF4LCAlcmN4LCAlcmR4Cj4+
+ICsgKgo+PiArICogUFYgZ3Vlc3RzIGNhbid0IHVwZGF0ZSBNU1JfU1BFQ19DVFJMIGJlaGluZCBY
+ZW4ncyBiYWNrLCBzbyBubyBuZWVkIHRvIHJlYWQKPj4gKyAqIGl0IGJhY2suICBFbnRyaWVzIGZy
+b20gZ3Vlc3QgY29udGV4dCBuZWVkIHRvIGNsZWFyIFNQRUNfQ1RSTCBzaGFkb3dpbmcsCj4+ICsg
+KiB3aGlsZSBlbnRyaWVzIGZyb20gWGVuIG11c3QgbGVhdmUgc2hhZG93aW5nIGluIGl0cyBjdXJy
+ZW50IHN0YXRlLgo+PiArICovCj4+ICsgICAgbW92ICRNU1JfU1BFQ19DVFJMLCAlZWN4Cj4+ICsK
+Pj4gKyAgICAuaWYgXG1heWJleGVuCj4+ICsgICAgICAgIHRlc3RiICQzLCBVUkVHU19jcyglcnNw
+KQo+PiArICAgICAgICBqeiAuTFxAX2VudHJ5X2Zyb21feGVuCj4+ICsgICAgLmVuZGlmCj4+ICsK
+Pj4gKyAgICAvKgo+PiArICAgICAqIENsZWFyIFNQRUNfQ1RSTCBzaGFkb3dpbmcgKmJlZm9yZSog
+bG9hZGluZyBYZW4ncyB2YWx1ZS4gIElmIGVudGVyaW5nCj4+ICsgICAgICogZnJvbSBhIHBvc3Np
+Ymx5LXhlbiBjb250ZXh0LCAlcnNwIGRvZXNuJ3QgbmVjZXNzYXJpbHkgYWxpYXMgdGhlIGNwdWlu
+Zm8KPj4gKyAgICAgKiBibG9jayBzbyBjYWxjdWxhdGUgdGhlIHBvc2l0aW9uIGRpcmVjdGx5Lgo+
+PiArICAgICAqLwo+PiArICAgIC5pZiBcbWF5YmV4ZW4KPj4gKyAgICAgICAgR0VUX1NUQUNLX0VO
+RChkeCkKPiBJbiBhbG1vc3QgYWxsIGNhc2VzIChhbmQgcGVyaGFwcyBpbiBhbGwgb25lcyB3aXRo
+IG1heWJleGVuIHNldCkgdGhlCj4gbWFjcm8gaW52b2NhdGlvbiBzaXRzIHJpZ2h0IGFoZWFkIG9m
+IGEgR0VUX1NUQUNLX0JBU0UoKS4gSWYgeW91Cj4gc3dhcHBlZCB0aGVtIGFuZCBhbGxvd2VkIHRo
+ZSByZWdpc3RlciB0byBiZSBwYXNzZWQgaW4sIHlvdSBjb3VsZAo+IGF2b2lkIHRoaXMgbG9hZC4K
+Ckkgc2VlbSB0byByZWNhbGwgdGhpcyBiZWluZyBwcm9ibGVtYXRpYy7CoCBJJ2xsIHJlY2hlY2su
+Cgo+Cj4+ICsubWFjcm8gRE9fU1BFQ19DVFJMX0VYSVRfVE9fR1VFU1QKPj4gKy8qCj4+ICsgKiBS
+ZXF1aXJlcyAlZWF4PXNwZWNfY3RybCwgJXJzcD1yZWdzL2NwdWluZm8KPj4gKyAqIENsb2JiZXJz
+ICVyYXgsICVyY3gsICVyZHgKPiAlcmF4IGlzbid0IHJlYWxseSBiZWluZyBjbG9iYmVyZWQgYW55
+bW9yZS4gVGhlIGNsb2JiZXIgYW5ub3RhdGlvbnMKPiBvbiBhbGwgdXNlIHNpdGVzIGFwcGVhciB0
+byBiZSBzaW1pbGFybHkgc3RhbGUuCgpUcnVlLgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
