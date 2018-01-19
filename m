@@ -1,17 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v9 07/11] x86/boot: Calculate the most
- appropriate BTI mitigation to use
-Date: Fri, 19 Jan 2018 13:48:12 +0000
-Message-ID: <0ed9c590-9bdf-f327-eed3-9768a4969901@citrix.com>
-References: <1516290370-14958-1-git-send-email-andrew.cooper3@citrix.com>
- <1516290370-14958-8-git-send-email-andrew.cooper3@citrix.com>
- <5A61ED6002000078001A0584@prv-mh.provo.novell.com>
+From: Paul Durrant <Paul.Durrant@citrix.com>
+Subject: Re: [xen-unstable-smoke test] 118226: regressions - FAIL
+Date: Fri, 19 Jan 2018 13:50:46 +0000
+Message-ID: <53278d35f80a4e048f356941df1bcf34@AMSPEX02CL03.citrite.net>
+References: <osstest-118226-mainreport@xen.org>
+ <5A62042902000078001A0632@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A61ED6002000078001A0584@prv-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=+zjb=eo=citrix.com=prvs=55023bea9=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1ecX4H-0001Yx-PJ
+ for xen-devel@lists.xenproject.org; Fri, 19 Jan 2018 13:50:53 +0000
+In-Reply-To: <5A62042902000078001A0632@prv-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,32 +23,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>
+To: 'Jan Beulich' <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, osstest service owner <osstest-admin@xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTkvMDEvMTggMTI6MDYsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDE4LjAxLjE4IGF0
-IDE2OjQ2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IEBAIC0xMjQsNyAr
-MTg2LDIxIEBAIHZvaWQgX19pbml0IGluaXRfc3BlY3VsYXRpb25fbWl0aWdhdGlvbnModm9pZCkK
-Pj4gICAgICAgICAgICAgICAqLwo+PiAgICAgICAgICAgICAgaWYgKCBjcHVfaGFzX2xmZW5jZV9k
-aXNwYXRjaCApCj4+ICAgICAgICAgICAgICAgICAgdGh1bmsgPSBUSFVOS19MRkVOQ0U7Cj4+ICsg
-ICAgICAgICAgICAvKgo+PiArICAgICAgICAgICAgICogT24gSW50ZWwgaGFyZHdhcmUsIHdlJ2Qg
-bGlrZSB0byB1c2UgcmV0cG9saW5lIGluIHByZWZlcmVuY2UgdG8KPj4gKyAgICAgICAgICAgICAq
-IElCUlMsIGJ1dCBvbmx5IGlmIGl0IGlzIHNhZmUgb24gdGhpcyBoYXJkd2FyZS4KPj4gKyAgICAg
-ICAgICAgICAqLwo+PiArICAgICAgICAgICAgZWxzZSBpZiAoIGJvb3RfY3B1X2hhcyhYODZfRkVB
-VFVSRV9JQlJTQikgKQo+PiArICAgICAgICAgICAgewo+PiArICAgICAgICAgICAgICAgIGlmICgg
-cmV0cG9saW5lX3NhZmUoKSApCj4+ICsgICAgICAgICAgICAgICAgICAgIHRodW5rID0gVEhVTktf
-UkVUUE9MSU5FOwo+PiArICAgICAgICAgICAgICAgIGVsc2UKPj4gKyAgICAgICAgICAgICAgICAg
-ICAgaWJycyA9IHRydWU7Cj4+ICsgICAgICAgICAgICB9Cj4gSSB0aGluayBJIGhhZCBhc2tlZCBh
-Ym91dCB0aGlzIHBpZWNlIG9mIGNvZGUgYmVmb3JlLCBidXQgbWF5YmUgbm90Cj4gdGhlIHNhbWUg
-SSdtIG5vdGljaW5nIG5vdzogV2h5IGlzIHVzaW5nIHJldHBvbGluZSBkZXBlbmRlbnQgdXBvbgo+
-IElCUlNCPyBJLmUuIHdoeSBub3QKPgo+ICAgICAgICAgICAgIGVsc2UgaWYgKCByZXRwb2xpbmVf
-c2FmZSgpICkKPiAgICAgICAgICAgICAgICAgdGh1bmsgPSBUSFVOS19SRVRQT0xJTkU7Cj4gICAg
-ICAgICAgICAgZWxzZSBpZiAoIGJvb3RfY3B1X2hhcyhYODZfRkVBVFVSRV9JQlJTQikgKQo+ICAg
-ICAgICAgICAgICAgICBpYnJzID0gdHJ1ZTsKPgo+ID8KClByb2JhYmx5IGJlY2F1c2UgdGhhdCB3
-YXMgbXkgdHJhaW4gb2YgdGhvdWdoIHdoZW4gcHV0dGluZyB0aGlzCnRvZ2V0aGVyLsKgIEl0IG1h
-ZGUgbW9yZSBvZiBhIGRpZmZlcmVudCBpbiBwcmV2aW91cyBpdGVyYXRpb25zIHdoZW4gdGhlCklC
-UlNfU0VUL0NMRUFSIGRlY2lzaW9uIHdhcyB0YWtlbiBoZXJlLgoKfkFuZHJldwoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IEphbiBCZXVsaWNoIFttYWlsdG86
+SkJldWxpY2hAc3VzZS5jb21dCj4gU2VudDogMTkgSmFudWFyeSAyMDE4IDEzOjQ0Cj4gVG86IFBh
+dWwgRHVycmFudCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+Cj4gQ2M6IHhlbi1kZXZlbCA8eGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnPjsgb3NzdGVzdCBzZXJ2aWNlIG93bmVyCj4gPG9z
+c3Rlc3QtYWRtaW5AeGVucHJvamVjdC5vcmc+Cj4gU3ViamVjdDogUmU6IFtYZW4tZGV2ZWxdIFt4
+ZW4tdW5zdGFibGUtc21va2UgdGVzdF0gMTE4MjI2OiByZWdyZXNzaW9ucyAtCj4gRkFJTAo+IAo+
+ID4+PiBPbiAxOS4wMS4xOCBhdCAxNDozNSwgPG9zc3Rlc3QtYWRtaW5AeGVucHJvamVjdC5vcmc+
+IHdyb3RlOgo+ID4gZmxpZ2h0IDExODIyNiB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0K
+PiA+IGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMTgy
+MjYvCj4gPgo+ID4gUmVncmVzc2lvbnMgOi0oCj4gPgo+ID4gVGVzdHMgd2hpY2ggZGlkIG5vdCBz
+dWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCj4gPiBpbmNsdWRpbmcgdGVzdHMgd2hpY2ggY291bGQg
+bm90IGJlIHJ1bjoKPiA+ICBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICA2IHhlbi1idWls
+ZCAgICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMTgyMTkKPiAKPiB4ZW4taHZtY3R4LmM6
+IEluIGZ1bmN0aW9uICdkdW1wX3ZpcmlkaWFuX3ZjcHUnOgo+IHhlbi1odm1jdHguYzozODQ6Njog
+ZXJyb3I6ICdzdHJ1Y3QgaHZtX3ZpcmlkaWFuX3ZjcHVfY29udGV4dCcgaGFzIG5vCj4gbWVtYmVy
+IG5hbWVkICd2cF9hc3Npc3RfdmVjdG9yJwo+ICAgICAgcC52cF9hc3Npc3RfdmVjdG9yKTsKPiAg
+ICAgICBeCj4gL2hvbWUvb3NzdGVzdC9idWlsZC4xMTgyMjYuYnVpbGQtCj4gYW1kNjQveGVuL3Rv
+b2xzL21pc2MvLi4vLi4vdG9vbHMvUnVsZXMubWs6MjIyOiByZWNpcGUgZm9yIHRhcmdldCAneGVu
+LQo+IGh2bWN0eC5vJyBmYWlsZWQKPiBtYWtlWzRdOiBMZWF2aW5nIGRpcmVjdG9yeSAnL2hvbWUv
+b3NzdGVzdC9idWlsZC4xMTgyMjYuYnVpbGQtCj4gYW1kNjQveGVuL3Rvb2xzL21pc2MnCj4gbWFr
+ZVs0XTogKioqIFt4ZW4taHZtY3R4Lm9dIEVycm9yIDEKPiAKPiBJJ20gc29ycnkgUGF1bCwgYnV0
+IGFub3RoZXIgcGF0Y2ggd2lsbCBiZSBuZWVkZWQgYXMgaXQgc2VlbXMuCj4gCgpEYW1uLiBJIHRo
+b3VnaHQgSSdkIGRvbmUgYSBjbGVhbiB0b29scyBidWlsZC4gUGF0Y2ggY29taW5nIHVwLi4uCgog
+IFBhdWwKCj4gSmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
