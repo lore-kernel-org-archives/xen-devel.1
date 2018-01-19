@@ -1,19 +1,10 @@
-From: HW42 <hw42@ipsumj.de>
-Subject: Re: [PATCH for-4.10 1/3] libxc: panic when trying to
- create a PVH guest without kernel support
-Date: Fri, 19 Jan 2018 06:11:00 +0000
-Message-ID: <6abbd413-11e7-5d49-a711-d44fa8fd939d@ipsumj.de>
-References: <20171006135201.97534-1-roger.pau@citrix.com>
- <20171006135201.97534-2-roger.pau@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-4.9-testing test] 118167: regressions - FAIL
+Date: Fri, 19 Jan 2018 06:50:58 +0000
+Message-ID: <osstest-118167-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1508011484081143177=="
+Content-Type: multipart/mixed; boundary="===============6351246242103480630=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=spwj=ad=ipsumj.de=hw42@srs-us1.protection.inumbo.net>)
- id 1ecPu2-0006wX-HC
- for xen-devel@lists.xenproject.org; Fri, 19 Jan 2018 06:11:50 +0000
-In-Reply-To: <20171006135201.97534-2-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,143 +13,378 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1508011484081143177==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="sWXmy0lMa6qP4aRCpUqU5lAME66ia124M"
+--===============6351246242103480630==
+Content-Type: text/plain
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---sWXmy0lMa6qP4aRCpUqU5lAME66ia124M
-Content-Type: multipart/mixed; boundary="2jAZNxQrManw2W86GZItHFBzvIGJuF1x7";
- protected-headers="v1"
-From: HW42 <hw42@ipsumj.de>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
-Message-ID: <6abbd413-11e7-5d49-a711-d44fa8fd939d@ipsumj.de>
-Subject: Re: [Xen-devel] [PATCH for-4.10 1/3] libxc: panic when trying to
- create a PVH guest without kernel support
-References: <20171006135201.97534-1-roger.pau@citrix.com>
- <20171006135201.97534-2-roger.pau@citrix.com>
-In-Reply-To: <20171006135201.97534-2-roger.pau@citrix.com>
+flight 118167 xen-4.9-testing real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118167/
 
---2jAZNxQrManw2W86GZItHFBzvIGJuF1x7
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Regressions :-(
 
-Roger Pau Monne:
-> Previously when trying to boot a PV capable but not PVH capable kernel
-> inside of a PVH container xc_dom_guest_type would succeed and return a
-> PV guest type, which would lead to failures later on in the build
-> process.
->=20
-> Instead provide a clear error message when trying to create a PVH
-> guest using a kernel that doesn't support PVH.
->=20
-> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
-> ---
-> Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-> Cc: Wei Liu <wei.liu2@citrix.com>
-> ---
->  tools/libxc/xc_dom_elfloader.c | 7 +++++++
->  1 file changed, 7 insertions(+)
->=20
-> diff --git a/tools/libxc/xc_dom_elfloader.c b/tools/libxc/xc_dom_elfloa=
-der.c
-> index 62d421a5e3..568d7f370c 100644
-> --- a/tools/libxc/xc_dom_elfloader.c
-> +++ b/tools/libxc/xc_dom_elfloader.c
-> @@ -59,6 +59,13 @@ static char *xc_dom_guest_type(struct xc_dom_image *=
-dom,
->      if ( dom->container_type =3D=3D XC_DOM_HVM_CONTAINER &&
->           dom->parms.phys_entry !=3D UNSET_ADDR32 )
->          return "hvm-3.0-x86_32";
-> +    if ( dom->container_type =3D=3D XC_DOM_HVM_CONTAINER )
-> +    {
-> +        xc_dom_panic(dom->xch, XC_INVALID_KERNEL,
-> +                     "%s: image not capable of booting inside a HVM co=
-ntainer",
-> +                     __FUNCTION__);
-> +        return "xen-3.0-unknown";
-> +    }
-> =20
->      switch ( machine )
->      {
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-armhf-armhf-libvirt-raw  7 xen-boot                 fail REGR. vs. 117931
+ test-amd64-amd64-xl-qemut-win7-amd64 16 guest-localmigrate/x10 fail REGR. vs. 117931
 
-With this xc_dom_parse_elf_kernel() still returns success and the domain
-build fails only later because of the "xen-3.0-unknown" type. Why not
-fail directly in xc_dom_parse_elf_kernel() like for elf files which miss
-the DomU feature?
+Tests which did not succeed, but are not blocking:
+ test-amd64-i386-xl-qemut-win7-amd64 17 guest-stop       fail blocked in 117931
+ test-amd64-i386-xl-qemuu-ws16-amd64 18 guest-start/win.repeat fail blocked in 117931
+ test-amd64-amd64-xl-qemuu-ws16-amd64 16 guest-localmigrate/x10 fail like 117868
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 117868
+ test-amd64-i386-xl-qemut-ws16-amd64 17 guest-stop             fail like 117868
+ test-armhf-armhf-xl-rtds     16 guest-start/debian.repeat    fail  like 117931
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 117931
+ test-amd64-amd64-xl-qemut-ws16-amd64 17 guest-stop            fail like 117931
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
+ test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-xl-qemut-win10-i386 10 windows-install        fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+ test-amd64-i386-xl-qemut-win10-i386 10 windows-install         fail never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
 
-And while we are at it: libxl__build_dom() expects that
-xc_dom_parse_elf_kernel() sets an errno. Currently this can contain an
-unrelated error since it does not get set when returning -EINVAL.
+version targeted for testing:
+ xen                  dc7d46580d9c633a59be1c3776f79c01dd0cb98b
+baseline version:
+ xen                  0c3d52410094c2504ede126eaa05a80e99c4b4c7
 
-The following seems to work fine for me:
+Last test of basis   117931  2018-01-13 05:25:04 Z    6 days
+Testing same since   118167  2018-01-17 16:50:01 Z    1 days    1 attempts
 
-diff --git a/tools/libxc/xc_dom_elfloader.c b/tools/libxc/xc_dom_elfloade=
-r.c
-index 568d7f370c..b67b95eb19 100644
---- a/tools/libxc/xc_dom_elfloader.c
-+++ b/tools/libxc/xc_dom_elfloader.c
-@@ -64,7 +64,8 @@ static char *xc_dom_guest_type(struct xc_dom_image *dom=
-,
-         xc_dom_panic(dom->xch, XC_INVALID_KERNEL,
-                      "%s: image not capable of booting inside a HVM cont=
-ainer",
-                      __FUNCTION__);
--        return "xen-3.0-unknown";
-+        errno =3D EINVAL;
-+        return NULL;
-     }
-=20
-     switch ( machine )
-@@ -195,6 +196,8 @@ static elf_errorstatus xc_dom_parse_elf_kernel(struct=
- xc_dom_image *dom)
-     dom->kernel_seg.vend   =3D dom->parms.virt_kend;
-=20
-     dom->guest_type =3D xc_dom_guest_type(dom, elf);
-+    if (dom->guest_type =3D=3D NULL)
-+        return -EINVAL;
-     DOMPRINTF("%s: %s: 0x%" PRIx64 " -> 0x%" PRIx64 "",
-               __FUNCTION__, dom->guest_type,
-               dom->kernel_seg.vstart, dom->kernel_seg.vend);
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Jan H. Schönherr <jschoenh@amazon.de>
+  Roger Pau Monné <roger.pau@citrix.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64-xtf                                              pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-prev                                             pass    
+ build-i386-prev                                              pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ build-amd64-rumprun                                          pass    
+ build-i386-rumprun                                           pass    
+ test-xtf-amd64-amd64-1                                       pass    
+ test-xtf-amd64-amd64-2                                       pass    
+ test-xtf-amd64-amd64-3                                       pass    
+ test-xtf-amd64-amd64-4                                       pass    
+ test-xtf-amd64-amd64-5                                       pass    
+ test-amd64-amd64-xl                                          pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-i386-qemut-rhel6hvm-amd                           pass    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64                     pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-rumprun-amd64                               pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-i386-xl-qemut-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemut-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-i386-rumprun-i386                                 pass    
+ test-amd64-amd64-xl-qemut-win10-i386                         fail    
+ test-amd64-i386-xl-qemut-win10-i386                          fail    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-i386-qemut-rhel6hvm-intel                         pass    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-livepatch                                   pass    
+ test-amd64-i386-livepatch                                    pass    
+ test-amd64-amd64-migrupgrade                                 pass    
+ test-amd64-i386-migrupgrade                                  pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 fail    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     fail    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
 
---2jAZNxQrManw2W86GZItHFBzvIGJuF1x7--
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
---sWXmy0lMa6qP4aRCpUqU5lAME66ia124M
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
------BEGIN PGP SIGNATURE-----
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-iQJDBAEBCgAtFiEEqieyzvOmi9FGaQcT5KzJJ4pkaBYFAlphjCoPHGh3NDJAaXBz
-dW1qLmRlAAoJEOSsySeKZGgW/CkP/iqCrpWJ5hWpWN+6oP7oq6Dad1/R580j7PFf
-k9uGq+pVd/h2ykWKTHcPz5p6bb3VN45rGUueCj53DfuUqVYNNT2xo0YMBkponH84
-xDeChFy4WhS8OUH/yQuVaSUZd0NMLaXAGukilGqbmy5kFvnW6JR85wzO4aVBy3Z5
-B6M1BjE0FWuT937uun+M+DWlyoOqap6TQ2llVrewQfna8UO4GTmQ4jqQ5jQHQJ/Q
-JciKfppVwnY6CSYQilJF0aZ0UhZUeOAqyH1dC53Zo3qIwOulwGLdljpp2w8qgYdf
-1M5eZr7M2zNdoncJ8LbzhDLjOGmMiDGMqA3d2MToMKL7zTzRwTU0dz3C41p8G+wa
-IkxYTf/mM0dQGANYYgcy/zxhPaKiPEm4UDawtH1wozJbuOUklhZFgtJ7vJHwUPor
-mBmDvHnvMtx/B5mBrGWuNP1d8dB1gdT3MiOR63+z1X+tB7C0xLE/ROMMpiybCBUa
-cXTa2zLB6DMmJaujKtnG5aAjamqcMB6suZGuQqBplqCRqh5Sgdi3woT6vx+xXaVc
-SlMSod+LXGn9t0eLBIKRPXEERYdHpaW10/HFilFTpCmwxV3ITxr8NiAu7y0ljzjd
-BwVm2IKQf0PgExxudlvuDgY4SLKViVAcCv1y/zpOmseEm9vrF2yV5lZeywBy+nOM
-VZlUnyRq
-=NArj
------END PGP SIGNATURE-----
-
---sWXmy0lMa6qP4aRCpUqU5lAME66ia124M--
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
---===============1508011484081143177==
+Not pushing.
+
+------------------------------------------------------------
+commit dc7d46580d9c633a59be1c3776f79c01dd0cb98b
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Wed Jan 17 17:08:25 2018 +0100
+
+    x86: allow Meltdown band-aid to be disabled
+    
+    First of all we don't need it on AMD systems. Additionally allow its use
+    to be controlled by command line option. For best backportability, this
+    intentionally doesn't use alternative instruction patching to achieve
+    the intended effect - while we likely want it, this will be later
+    follow-up.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    master commit: e871e80c38547d9faefc6604532ba3e985e65873
+    master date: 2018-01-16 17:50:59 +0100
+
+commit 1e0974638d65d9b8acf9ac7511d747188f38bcc3
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Wed Jan 17 17:07:33 2018 +0100
+
+    x86: Meltdown band-aid against malicious 64-bit PV guests
+    
+    This is a very simplistic change limiting the amount of memory a running
+    64-bit PV guest has mapped (and hence available for attacking): Only the
+    mappings of stack, IDT, and TSS are being cloned from the direct map
+    into per-CPU page tables. Guest controlled parts of the page tables are
+    being copied into those per-CPU page tables upon entry into the guest.
+    Cross-vCPU synchronization of top level page table entry changes is
+    being effected by forcing other active vCPU-s of the guest into the
+    hypervisor.
+    
+    The change to context_switch() isn't strictly necessary, but there's no
+    reason to keep switching page tables once a PV guest is being scheduled
+    out.
+    
+    This isn't providing full isolation yet, but it should be covering all
+    pieces of information exposure of which would otherwise require an XSA.
+    
+    There is certainly much room for improvement, especially of performance,
+    here - first and foremost suppressing all the negative effects on AMD
+    systems. But in the interest of backportability (including to really old
+    hypervisors, which may not even have alternative patching) any such is
+    being left out here.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    master commit: 5784de3e2067ed73efc2fe42e62831e8ae7f46c4
+    master date: 2018-01-16 17:49:03 +0100
+
+commit 87ea7816247090e8e5bc5653b16c412943a058b5
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Wed Jan 17 17:04:59 2018 +0100
+
+    x86/mm: Always set _PAGE_ACCESSED on L4e updates
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+    master commit: bd61fe94bee0556bc2f64999a4a8315b93f90f21
+    master date: 2018-01-15 13:53:16 +0000
+
+commit 96990e27b00702ee5a803fdc16f58fd6e325061d
+Author: Jan H. Schönherr <jschoenh@amazon.de>
+Date:   Wed Jan 17 17:04:30 2018 +0100
+
+    x86: Don't use potentially incorrect CPUID values for topology information
+    
+    Intel says for CPUID leaf 0Bh:
+    
+      "Software must not use EBX[15:0] to enumerate processor
+       topology of the system. This value in this field
+       (EBX[15:0]) is only intended for display/diagnostic
+       purposes. The actual number of logical processors
+       available to BIOS/OS/Applications may be different from
+       the value of EBX[15:0], depending on software and platform
+       hardware configurations."
+    
+    And yet, we're using them to derive the number cores in a package
+    and the number of siblings in a core.
+    
+    Derive the number of siblings and cores from EAX instead, which is
+    intended for that.
+    
+    Signed-off-by: Jan H. Schönherr <jschoenh@amazon.de>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    master commit: d51baf310e530659f73e714acf575555bdc46303
+    master date: 2018-01-08 10:48:24 +0000
+
+commit 2213ffe1a2d82c3c9c4a154ea6ee252395aa8693
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Wed Jan 17 17:03:51 2018 +0100
+
+    x86/entry: Remove support for partial cpu_user_regs frames
+    
+    Save all GPRs on entry to Xen.
+    
+    The entry_int82() path is via a DPL1 gate, only usable by 32bit PV guests, so
+    can get away with only saving the 32bit registers.  All other entrypoints can
+    be reached from 32 or 64bit contexts.
+    
+    This is part of XSA-254.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    master commit: f9eb74789af77e985ae653193f3622263499f674
+    master date: 2018-01-05 19:57:07 +0000
+
+commit c3774d13ee159fa651797d4230c1ca29301e03d8
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Wed Jan 17 17:03:17 2018 +0100
+
+    x86/upcall: inject a spurious event after setting upcall vector
+    
+    In case the vCPU has pending events to inject. This fixes a bug that
+    happened if the guest mapped the vcpu info area using
+    VCPUOP_register_vcpu_info without having setup the event channel
+    upcall, and then setup the upcall vector.
+    
+    In this scenario the guest would not receive any upcalls, because the
+    call to VCPUOP_register_vcpu_info would have marked the vCPU as having
+    pending events, but the vector could not be injected because it was
+    not yet setup.
+    
+    This has not caused issues so far because all the consumers first
+    setup the vector callback and then map the vcpu info page, but there's
+    no limitation that prevents doing it in the inverse order.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+    master commit: 7b5b8ca7dffde866d851f0b87b994e0b13e5b867
+    master date: 2018-01-04 14:29:16 +0100
+
+commit f559d506f321ba6b6464a42881cf8fb516daebe1
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Wed Jan 17 17:02:43 2018 +0100
+
+    x86/E820: don't overrun array
+    
+    The bounds check needs to be done after the increment, not before, or
+    else it needs to use a one lower immediate. Also use word operations
+    rather than byte ones for both the increment and the compare (allowing
+    E820_BIOS_MAX to be more easily bumped, should the need ever arise).
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    master commit: 0036c9dbcd8b52316aeebb475929d3a36cf5e514
+    master date: 2018-01-03 11:03:56 +0100
+
+commit f877aab480e37c866bd4fa82376a36c913b7e1ed
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Wed Jan 17 17:01:26 2018 +0100
+
+    x86/IRQ: conditionally preserve access permission on map error paths
+    
+    Permissions that had been granted before should not be revoked when
+    handling unrelated errors.
+    
+    Reported-by: HW42 <hw42@ipsumj.de>
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    master commit: 3443e68a778572a6e082d7dfcf9ce794eca62f5f
+    master date: 2018-01-03 11:03:10 +0100
+(qemu changes not included)
+
+
+--===============6351246242103480630==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -168,4 +394,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============1508011484081143177==--
+--===============6351246242103480630==--
