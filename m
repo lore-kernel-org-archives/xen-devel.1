@@ -1,21 +1,11 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH 4/6] replace vCPU's dirty CPU mask by
-	numeric ID
-Date: Fri, 19 Jan 2018 17:41:33 +0000
-Message-ID: <6671cfce-e342-6305-5a3e-4b1d75ed8d90@citrix.com>
-References: <5A62238B02000078001A0768@prv-mh.provo.novell.com>
- <5A62257A02000078001A0791@prv-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118231: tolerable all pass -
+	PUSHED
+Date: Fri, 19 Jan 2018 17:50:13 +0000
+Message-ID: <osstest-118231-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2825925484017473499=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=xqzm=eo=citrix.com=prvs=55088e0a4=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1ecafe-0007U7-5Z
- for xen-devel@lists.xenproject.org; Fri, 19 Jan 2018 17:41:42 +0000
-In-Reply-To: <5A62257A02000078001A0791@prv-mh.provo.novell.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +14,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMTkvMjAxOCAwNDowNiBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gQXQgbW9zdCBvbmUg
-Yml0IGNhbiBiZSBzZXQgaW4gdGhlIG1hc2tzLCBzbyBlc3BlY2lhbGx5IG9uIGxhcmdlciBzeXN0
-ZW1zCj4gaXQncyBxdWl0ZSBhIGJpdCBvZiB1bm5lY2Vzc2FyeSBtZW1vcnkgYW5kIHByb2Nlc3Np
-bmcgb3ZlcmhlYWQgdG8gdHJhY2sKPiB0aGUgaW5mb3JtYXRpb24gYXMgYSBtYXNrLiBTdG9yZSB0
-aGUgbnVtZXJpYyBJRCBvZiB0aGUgcmVzcGVjdGl2ZSBDUFUKPiBpbnN0ZWFkLCBvciBOUl9DUFVT
-IGlmIG5vIGRpcnR5IHN0YXRlIGV4aXN0cy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGlj
-aCA8amJldWxpY2hAc3VzZS5jb20+CgpJIGxpa2UgaXQ6CgpSZXZpZXdlZC1ieTogR2VvcmdlIER1
-bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============2825925484017473499==
+Content-Type: text/plain
+
+flight 118231 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118231/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  5e0e28d9cee41eab41e5f11489d93247c0a4a789
+baseline version:
+ xen                  56498d2cf9d3c5f7d3d894a89f7d66ed81548e01
+
+Last test of basis   118219  2018-01-19 01:01:22 Z    0 days
+Failing since        118226  2018-01-19 11:02:00 Z    0 days    3 attempts
+Testing same since   118231  2018-01-19 16:02:40 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Julien Grall <julien.grall@linaro.org>
+  Paul Durrant <paul.durrant@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Tim Deegan <tim@xen.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   56498d2cf9..5e0e28d9ce  5e0e28d9cee41eab41e5f11489d93247c0a4a789 -> smoke
+
+
+--===============2825925484017473499==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2825925484017473499==--
