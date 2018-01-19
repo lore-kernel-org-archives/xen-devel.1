@@ -1,22 +1,19 @@
-From: Manish Jaggi <mjaggi@caviumnetworks.com>
-Subject: Re: [RFC 02/11] acpi: arm: API to query estimated size
- of hardware domain's IORT
-Date: Fri, 19 Jan 2018 11:40:47 +0530
-Message-ID: <89566241-d529-7698-6114-63f03f7314eb@caviumnetworks.com>
-References: <20180102092809.1841-1-manish.jaggi@linaro.org>
- <20180102092809.1841-3-manish.jaggi@linaro.org>
- <0c782810-5bd3-c937-5d1b-38094b222f69@linaro.org>
+From: HW42 <hw42@ipsumj.de>
+Subject: Re: [PATCH for-4.10 1/3] libxc: panic when trying to
+ create a PVH guest without kernel support
+Date: Fri, 19 Jan 2018 06:11:00 +0000
+Message-ID: <6abbd413-11e7-5d49-a711-d44fa8fd939d@ipsumj.de>
+References: <20171006135201.97534-1-roger.pau@citrix.com>
+ <20171006135201.97534-2-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1508011484081143177=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=cv8c=ad=cavium.com=manish.jaggi@srs-us1.protection.inumbo.net>)
- id 1ecPtT-0006rt-Ta
- for xen-devel@lists.xenproject.org; Fri, 19 Jan 2018 06:11:15 +0000
-In-Reply-To: <0c782810-5bd3-c937-5d1b-38094b222f69@linaro.org>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=spwj=ad=ipsumj.de=hw42@srs-us1.protection.inumbo.net>)
+ id 1ecPu2-0006wX-HC
+ for xen-devel@lists.xenproject.org; Fri, 19 Jan 2018 06:11:50 +0000
+In-Reply-To: <20171006135201.97534-2-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,155 +22,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@linaro.org>, manish.jaggi@linaro.org, xen-devel@lists.xenproject.org, sameer.goel@linaro.org, andre.przywara@linaro.org
-Cc: manish.jaggi@cavium.com
+To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwMS8xNy8yMDE4IDEyOjIyIEFNLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gSGkgTWFuaXNo
-LAo+CkhpIEp1bGllbiwKVGhhbmtzIGZvciByZXZpZXdpbmcgdGhpcyBwYXRjaC4KPiBPbiAwMi8w
-MS8xOCAwOToyOCwgbWFuaXNoLmphZ2dpQGxpbmFyby5vcmcgd3JvdGU6Cj4+IEZyb206IE1hbmlz
-aCBKYWdnaSA8bWFuaXNoLmphZ2dpQGxpbmFyby5vcmc+Cj4+Cj4+IMKgIENvZGUgdG8gcXVlcnkg
-ZXN0aW1hdGVkIElPUlQgc2l6ZSBmb3IgaGFyZHdhcmUgZG9tYWluLgo+Cj4gUGxlYXNlIGF2b2lk
-IGluZGVudGluZyB0aGUgY29tbWl0IG1lc3NhZ2UuCm9rLgo+Cj4+IMKgIElPUlQgZm9yIGhhcmR3
-YXJlIGRvbWFpbiBpcyBnZW5lcmF0ZWQgdXNpbmcgdGhlIHJlcXVlc3RlcklkIGFuZCAKPj4gZGV2
-aWNlSWQgbWFwLgo+Pgo+PiDCoCBTaWduZWQtb2ZmLWJ5OiBNYW5pc2ggSmFnZ2kgPG1hbmlzaC5q
-YWdnaUBsaW5hcm8uY29tPgo+PiAtLS0KPj4gwqAgeGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5j
-wqDCoMKgwqAgfMKgIDEyICsrKystCj4+IMKgIHhlbi9kcml2ZXJzL2FjcGkvYXJtL01ha2VmaWxl
-wqDCoCB8wqDCoCAxICsKPj4gwqAgeGVuL2RyaXZlcnMvYWNwaS9hcm0vZ2VuLWlvcnQuYyB8IDEw
-MSAKPj4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+PiDCoCB4ZW4v
-aW5jbHVkZS9hY3BpL2dlbi1pb3J0LmjCoMKgwqDCoCB8wqDCoCA2ICsrKwo+PiDCoCA0IGZpbGVz
-IGNoYW5nZWQsIDExOSBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCj4+Cj4+IGRpZmYgLS1n
-aXQgYS94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMgYi94ZW4vYXJjaC9hcm0vZG9tYWluX2J1
-aWxkLmMKPj4gaW5kZXggYzc0ZjRkZDY5ZC4uZjVkNWUzZDI3MSAxMDA2NDQKPj4gLS0tIGEveGVu
-L2FyY2gvYXJtL2RvbWFpbl9idWlsZC5jCj4+ICsrKyBiL3hlbi9hcmNoL2FybS9kb21haW5fYnVp
-bGQuYwo+PiBAQCAtMTQsNiArMTQsNyBAQAo+PiDCoCAjaW5jbHVkZSA8eGVuL2FjcGkuaD4KPj4g
-wqAgI2luY2x1ZGUgPHhlbi93YXJuaW5nLmg+Cj4+IMKgICNpbmNsdWRlIDxhY3BpL2FjdGFibGVz
-Lmg+Cj4+ICsjaW5jbHVkZSA8YWNwaS9nZW4taW9ydC5oPgo+PiDCoCAjaW5jbHVkZSA8YXNtL2Rl
-dmljZS5oPgo+PiDCoCAjaW5jbHVkZSA8YXNtL3NldHVwLmg+Cj4+IMKgICNpbmNsdWRlIDxhc20v
-cGxhdGZvcm0uaD4KPj4gQEAgLTE3OTksNyArMTgwMCw3IEBAIHN0YXRpYyBpbnQgYWNwaV9jcmVh
-dGVfZmFkdChzdHJ1Y3QgZG9tYWluICpkLCAKPj4gc3RydWN0IG1lbWJhbmsgdGJsX2FkZFtdKQo+
-PiDCoCDCoCBzdGF0aWMgaW50IGVzdGltYXRlX2FjcGlfZWZpX3NpemUoc3RydWN0IGRvbWFpbiAq
-ZCwgc3RydWN0IAo+PiBrZXJuZWxfaW5mbyAqa2luZm8pCj4+IMKgIHsKPj4gLcKgwqDCoCBzaXpl
-X3QgZWZpX3NpemUsIGFjcGlfc2l6ZSwgbWFkdF9zaXplOwo+PiArwqDCoMKgIHNpemVfdCBlZmlf
-c2l6ZSwgYWNwaV9zaXplLCBtYWR0X3NpemUsIGlvcnRfc2l6ZTsKPgo+IFJhdGhlciB0aGFuIGlu
-dHJvZHVjZSBhIHZhcmlhYmxlIGZvciAxMCBpbnN0cnVjdGlvbnMsIHlvdSBjYW4gcmVuYW1lIAo+
-IG1hZHRfc2l6ZSBzbyBpdCBjYW4gYmUgcmUtdXNlZC4gSSB3b3VsZCBiZSBvayBmb3IgdGhpcyB0
-byBiZSBpbiB0aGUgCj4gc2FtZSBwYXRjaCAocHJvdmlkaW5nIGEgcHJvcGVyIGNvbW1pdCBtZXNz
-YWdlKS4KV2h5IHdvdWxkIHlvdSB3YW50IHRvIHJlcGxhY2UgaW9ydF9zaXplIHdpdGggbWFkdF9z
-aXplID8KV2hhdCBpcyB0aGUgaGFybSBpZiBhZGRpbmcgYSB2YXJpYWJsZSBtYWtlcyB0aGUgY29k
-ZSBtb3JlIHZlcmJvc2UuCkkgYW0gbm90IGFibGUgdG8gYXBwcmVjaWF0ZSB5b3VyIHBvaW50IGhl
-cmUuCj4KPj4gwqDCoMKgwqDCoCB1NjQgYWRkcjsKPj4gwqDCoMKgwqDCoCBzdHJ1Y3QgYWNwaV90
-YWJsZV9yc2RwICpyc2RwX3RibDsKPj4gwqDCoMKgwqDCoCBzdHJ1Y3QgYWNwaV90YWJsZV9oZWFk
-ZXIgKnRhYmxlOwo+PiBAQCAtMTg0MCw2ICsxODQxLDE1IEBAIHN0YXRpYyBpbnQgZXN0aW1hdGVf
-YWNwaV9lZmlfc2l6ZShzdHJ1Y3QgCj4+IGRvbWFpbiAqZCwgc3RydWN0IGtlcm5lbF9pbmZvICpr
-aW5mbykKPj4gwqDCoMKgwqDCoCBhY3BpX29zX3VubWFwX21lbW9yeSh0YWJsZSwgc2l6ZW9mKHN0
-cnVjdCBhY3BpX3RhYmxlX2hlYWRlcikpOwo+PiDCoCDCoMKgwqDCoMKgIGFjcGlfc2l6ZSArPSBS
-T1VORFVQKHNpemVvZihzdHJ1Y3QgYWNwaV90YWJsZV9yc2RwKSwgOCk7Cj4+ICsKPj4gK8KgwqDC
-oCBpZiggZXN0aW1hdGVfaW9ydF9zaXplKCZpb3J0X3NpemUpICkKPgo+IENvZGluZyBzdHlsZS4K
-Pgo+PiArwqDCoMKgIHsKPj4gK8KgwqDCoMKgwqDCoMKgIHByaW50aygiVW5hYmxlIHRvIGdldCBo
-d2RvbSBpb3J0IHNpemVcbiIpOwo+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FSU5WQUw7Cj4+
-ICvCoMKgwqAgfQo+PiArCj4+ICvCoMKgwqAgYWNwaV9zaXplICs9IFJPVU5EVVAoaW9ydF9zaXpl
-LCA4KTsKPj4gKwo+PiDCoMKgwqDCoMKgIGQtPmFyY2guZWZpX2FjcGlfbGVuID0gUEFHRV9BTElH
-TihST1VORFVQKGVmaV9zaXplLCA4KQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgKyBST1VORFVQ
-KGFjcGlfc2l6ZSwgOCkpOwo+PiDCoCBkaWZmIC0tZ2l0IGEveGVuL2RyaXZlcnMvYWNwaS9hcm0v
-TWFrZWZpbGUgCj4+IGIveGVuL2RyaXZlcnMvYWNwaS9hcm0vTWFrZWZpbGUKPj4gaW5kZXggMDQ2
-ZmFkNWUzZC4uMTNmMWE5MTU5ZiAxMDA2NDQKPj4gLS0tIGEveGVuL2RyaXZlcnMvYWNwaS9hcm0v
-TWFrZWZpbGUKPj4gKysrIGIveGVuL2RyaXZlcnMvYWNwaS9hcm0vTWFrZWZpbGUKPj4gQEAgLTEg
-KzEsMiBAQAo+PiDCoCBvYmoteSA9IHJpZG1hcC5vCj4+ICtvYmoteSArPSBnZW4taW9ydC5vCj4+
-IGRpZmYgLS1naXQgYS94ZW4vZHJpdmVycy9hY3BpL2FybS9nZW4taW9ydC5jIAo+PiBiL3hlbi9k
-cml2ZXJzL2FjcGkvYXJtL2dlbi1pb3J0LmMKPj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPj4gaW5k
-ZXggMDAwMDAwMDAwMC4uM2ZjMzI5NTljNgo+PiAtLS0gL2Rldi9udWxsCj4+ICsrKyBiL3hlbi9k
-cml2ZXJzL2FjcGkvYXJtL2dlbi1pb3J0LmMKPj4gQEAgLTAsMCArMSwxMDEgQEAKPj4gKy8qCj4+
-ICsgKiB4ZW4vZHJpdmVycy9hY3BpL2FybS9nZW4taW9ydC5jCj4+ICsgKgo+PiArICogQ29kZSB0
-byBnZW5lcmF0ZSBJT1JUIGZvciBoYXJkd2FyZSBkb21haW4gdXNpbmcgdGhlIHJlcXVlc3Rlcklk
-Cj4+ICsgKiBhbmQgZGV2aWNlSWQgbWFwLgo+PiArICoKPj4gKyAqIE1hbmlzaCBKYWdnaSA8bWFu
-aXNoLmphZ2dpQGxpbmFyby5jb20+Cj4+ICsgKiBDb3B5cmlnaHQgKGMpIDIwMTggTGluYXJvLgo+
-PiArICoKPj4gKyAqIFRoaXMgcHJvZ3JhbSBpcyBmcmVlIHNvZnR3YXJlOyB5b3UgY2FuIHJlZGlz
-dHJpYnV0ZSBpdCBhbmQvb3IgbW9kaWZ5Cj4+ICsgKiBpdCB1bmRlciB0aGUgdGVybXMgb2YgdGhl
-IEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGFzIHB1Ymxpc2hlZCBieQo+PiArICogdGhlIEZy
-ZWUgU29mdHdhcmUgRm91bmRhdGlvbjsgZWl0aGVyIHZlcnNpb24gMiBvZiB0aGUgTGljZW5zZSwg
-b3IKPj4gKyAqIChhdCB5b3VyIG9wdGlvbikgYW55IGxhdGVyIHZlcnNpb24uCj4KPiBUaGUgbGlj
-ZW5zZSBpcyB3cm9uZyAoc2VlIHBhdGNoICMxKS4KUGxlYXNlIHNlZSBteSBjb21tZW50IGluIHBh
-dGNoICMxLgpUaGlzIGxpY2Vuc2UgaXMgdXNlZCBmcm9tIGFuIGV4aXN0aW5nIGZpbGUgaW4geGVu
-LgpTbyB0aGVyZSBhcmUgYSBsb3Qgb2Ygd3JvbmcgbGljZW5zZXMgaW4geGVuIGNvZGUuCj4KPj4g
-KyAqCj4+ICsgKiBUaGlzIHByb2dyYW0gaXMgZGlzdHJpYnV0ZWQgaW4gdGhlIGhvcGUgdGhhdCBp
-dCB3aWxsIGJlIHVzZWZ1bCwKPj4gKyAqIGJ1dCBXSVRIT1VUIEFOWSBXQVJSQU5UWTsgd2l0aG91
-dCBldmVuIHRoZSBpbXBsaWVkIHdhcnJhbnR5IG9mCj4+ICsgKiBNRVJDSEFOVEFCSUxJVFkgb3Ig
-RklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuwqAgU2VlIHRoZQo+PiArICogR05VIEdl
-bmVyYWwgUHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4KPj4gKyAqLwo+PiArCj4+ICsj
-aW5jbHVkZSA8YWNwaS9yaWRtYXAuaD4KPj4gKyNpbmNsdWRlIDx4ZW4vYWNwaS5oPgo+PiArCj4+
-ICsvKgo+PiArICogU2l6ZSBvZiBoYXJkd2FyZSBkb21haW5zIGlvcnQgaXMgY2FsdWxjYXRlZCBi
-YXNlZCBvbiB0aGUgbnVtYmVyIG9mCj4KPiBzL2lvcnQvSU9SVC8KPiBzL2NhbHVsY2F0ZWQvY2Fs
-Y3VsYXRlZC8KVGhhbmtzLgo+Cj4+ICsgKiBtYXBwaW5ncyBpbiB0aGUgcmVxdWVzdGVySWQgLSBk
-ZXZpY2VJZCBtYXBwaW5nIGxpc3QuCj4+ICsgKi8KPj4gK2ludCBlc3RpbWF0ZV9pb3J0X3NpemUo
-c2l6ZV90ICppb3J0X3NpemUpCj4+ICt7Cj4+ICvCoMKgwqAgaW50IGNvdW50ID0gMDsKPj4gK8Kg
-wqDCoCBpbnQgcGNpcmNfY291bnQgPSAwOwo+PiArwqDCoMKgIGludCBpdHNnX2NvdW50ID0gMDsK
-Pj4gK8KgwqDCoCB1aW50NjRfdCAqcGNpcmNfYXJyYXk7Cj4+ICvCoMKgwqAgdWludDY0X3QgKml0
-c2dfYXJyYXk7Cj4KPiBXaGF0IGlzIHRoZSByYXRpb25hbGUgdG8gc3RvcmUgdGhlIGFkZHJlc3Mg
-ZGlyZWN0bHkgcmF0aGVyIHRoYW4gInZvaWQgCj4gKiI/IFRoaXMgd291bGQgYXZvaWQgdGhlIGNh
-c3QgaW4gdGhlIGNvZGUuCj4KPj4gK8KgwqDCoCBzdHJ1Y3QgcmlkX2RldmljZWlkX21hcCAqcm1h
-cDsKPj4gKwo+Cj4gQSBiaXQgbW9yZSBkb2N1bWVudGlvbiBvZiB0aGlzIGZ1bmN0aW9uIHdvdWxk
-IGJlIGFwcHJlY2lhdGVkLiBGb3IgCj4gaW5zdGFuY2UsIHRoZSByYXRpb25hbGUgYmV0d2VlbiBi
-cm93c2luZyB0aGUgbGlzdCB0d2ljZSBmb3IgYWxsb2NhdGlvbi4KPgo+IEkgYWN0dWFsbHkgZG8g
-dGhpbmsgdGhpcyBtaWdodCBiZSBhdm9pZGFibGUgYnkgc3RvcmluZyBhIGJpdCBtb3JlIAo+IGlu
-Zm9ybWF0aW9uIGZyb20gdGhlIElPUlQuIEZyb20gdGhlIHRhYmxlIHlvdSBjYW4gZWFzaWx5IGRl
-ZHVjZWQgdGhlIAo+IG51bWJlciBvZiByb290IGNvbXBsZXggYW5kIElUUyBncm91cC4gVGhleSBj
-b3VsZCBiZSBzdG9yZSB3aXRoIHRoZSAKPiByZXN0IG9mIGluZm9ybWF0aW9uLgo+Ckkgd2lsbCBh
-ZGQgbW9yZSBkb2N1bWVudGF0aW9uIHRoYXQgd2lsbCBleHBsYWluIHdoeSBpdCBpcyB1c2VkIHRo
-aXMgd2F5Lgo+IEZvciB0aGUgcmVzdCBvZiB0aGUgZnVuY3Rpb24sIHBsZWFzZSBiZSBjYXJlZnVs
-IG9uIHRoZSBjb2Rpbmcgc3R5bGUuIEkgCj4gYW0gbm90IGdvaW5nIHRvIHBvaW50IHRoZW0gYWxs
-LCBidXQgSSBleHBlY3QgeW91IHRvIGZpeCB0aGVtLgo+Cj4+ICvCoMKgwqAgbGlzdF9mb3JfZWFj
-aF9lbnRyeShybWFwLCAmcmlkX2RldmljZWlkX21hcF9saXN0LCBlbnRyeSkKPj4gK8KgwqDCoMKg
-wqDCoMKgIGNvdW50Kys7Cj4+ICsKPj4gK8KgwqDCoCBwY2lyY19hcnJheSA9IHh6YWxsb2NfYnl0
-ZXMoc2l6ZW9mKHVpbnQ2NF90KSpjb3VudCk7Cj4+ICvCoMKgwqAgaWYgKCAhcGNpcmNfYXJyYXkg
-KQo+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FTk9NRU07Cj4+ICsKPj4gK8KgwqDCoCBpdHNn
-X2FycmF5ID0geHphbGxvY19ieXRlcyhzaXplb2YodWludDY0X3QpKmNvdW50KTsKPj4gK8KgwqDC
-oCBpZiAoICFpdHNnX2FycmF5ICkKPj4gK8KgwqDCoMKgwqDCoMKgIHJldHVybiAtRU5PTUVNOwo+
-PiArCj4+ICvCoMKgwqAgbGlzdF9mb3JfZWFjaF9lbnRyeShybWFwLCAmcmlkX2RldmljZWlkX21h
-cF9saXN0LCBlbnRyeSkKPj4gK8KgwqDCoCB7Cj4+ICvCoMKgwqDCoMKgwqDCoCBpbnQgaSA9IDA7
-Cj4+ICsKPj4gK8KgwqDCoMKgwqDCoMKgIGZvciAoaT0wOyBpIDw9IHBjaXJjX2NvdW50OyBpKysp
-Cj4+ICvCoMKgwqDCoMKgwqDCoCB7Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmICggcGNp
-cmNfYXJyYXlbaV0gPT0gKHVpbnQ2NF90KXJtYXAtPnBjaXJjX25vZGUgKQo+PiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJyZWFrOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBp
-ZiAoIGkgPT0gcGNpcmNfY291bnQgKQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB7Cj4+ICvC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcGNpcmNfYXJyYXlbaV0gPSAodWludDY0X3Qp
-cm1hcC0+cGNpcmNfbm9kZTsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwY2ly
-Y19jb3VudCsrOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJyZWFrOwo+PiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4+ICvCoMKgwqDCoMKgwqDCoCB9Cj4+ICsKPj4gK8Kg
-wqDCoMKgwqDCoMKgIGZvciAoIGk9MDsgaSA8PSBpdHNnX2NvdW50OyBpKysgKQo+PiArwqDCoMKg
-wqDCoMKgwqAgewo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoIGl0c2dfYXJyYXlbaV0g
-PT0gKHVpbnQ2NF90KSBybWFwLT5pdHNfbm9kZSApCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgYnJlYWs7Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmICggaSA9PSBpdHNn
-X2NvdW50ICkKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgewo+PiArwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIGl0c2dfYXJyYXlbaV0gPSAodWludDY0X3Qpcm1hcC0+aXRzX25vZGU7
-Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaXRzZ19jb3VudCsrOwo+PiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJyZWFrOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCB9Cj4+ICvCoMKgwqDCoMKgwqDCoCB9Cj4+ICvCoMKgwqAgfQo+PiArCj4+ICvCoMKgwqAg
-LyogU2l6ZSBvZiBJT1JUCj4+ICvCoMKgwqDCoCAqID0gU2l6ZSBvZiBJT1JUIFRhYmxlIEhlYWRl
-ciArIFNpemUgb2YgUENJUkMgSGVhZGVyIE5vZGVzICsKPj4gK8KgwqDCoMKgICrCoMKgIFNpemUg
-b2YgUENJUkMgbm9kZXMgKyBTaXplIG9mIElUUyBIZWFkZXIgbm9kZXMgKyBTaXplIG9mIAo+PiBJ
-VFMgTm9kZXMKPj4gK8KgwqDCoMKgICrCoMKgICsgU2l6ZSBvZiBJZG1hcCBub2Rlcwo+PiArwqDC
-oMKgwqAgKi8KPj4gK8KgwqDCoCAqaW9ydF9zaXplID0gc2l6ZW9mKHN0cnVjdCBhY3BpX3RhYmxl
-X2lvcnQpICsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHBjaXJjX2NvdW50
-KiggKHNpemVvZihzdHJ1Y3QgYWNwaV9pb3J0X25vZGUpIC0xKSArCj4+ICvCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2l6ZW9mKHN0
-cnVjdCBhY3BpX2lvcnRfcm9vdF9jb21wbGV4KSAKPj4gKSArCj4+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBpdHNnX2NvdW50KiggKHNpemVvZihzdHJ1Y3QgYWNwaV9pb3J0X25v
-ZGUpIC0xKSArCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgc2l6ZW9mKHN0cnVjdCBhY3BpX2lvcnRfaXRzX2dyb3VwKSApICsK
-Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvdW50Kiggc2l6ZW9mKHN0cnVj
-dCBhY3BpX2lvcnRfaWRfbWFwcGluZykgKTsKPj4gKwo+PiArwqDCoMKgIHhmcmVlKGl0c2dfYXJy
-YXkpOwo+PiArwqDCoMKgIHhmcmVlKHBjaXJjX2FycmF5KTsKPj4gKwo+PiArwqDCoMKgIHJldHVy
-biAwOwo+PiArfQo+PiArLyoKPj4gKyAqIExvY2FsIHZhcmlhYmxlczoKPj4gKyAqIG1vZGU6IEMK
-Pj4gKyAqIGMtZmlsZS1zdHlsZTogIkJTRCIKPj4gKyAqIGMtYmFzaWMtb2Zmc2V0OiA0Cj4+ICsg
-KiBpbmRlbnQtdGFicy1tb2RlOiBuaWwKPj4gKyAqIEVuZDoKPj4gKyAqLwo+PiBkaWZmIC0tZ2l0
-IGEveGVuL2luY2x1ZGUvYWNwaS9nZW4taW9ydC5oIGIveGVuL2luY2x1ZGUvYWNwaS9nZW4taW9y
-dC5oCj4+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj4+IGluZGV4IDAwMDAwMDAwMDAuLjY4ZTY2NmZk
-Y2UKPj4gLS0tIC9kZXYvbnVsbAo+PiArKysgYi94ZW4vaW5jbHVkZS9hY3BpL2dlbi1pb3J0LmgK
-Pj4gQEAgLTAsMCArMSw2IEBACj4+ICsjaWZuZGVmIF9HRU5fSU9SVF9ICj4+ICsjZGVmaW5lIF9H
-RU5fSU9SVF9ICj4+ICsKPj4gK2ludCBlc3RpbWF0ZV9pb3J0X3NpemUoc2l6ZV90ICppb3J0X3Np
-emUpOwo+PiArCj4+ICsjZW5kaWYKPgo+IE1pc3NpbmcgZW1hY3MgbWFnaWMuCj4KPj4KPgo+IENo
-ZWVycywKPgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1508011484081143177==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="sWXmy0lMa6qP4aRCpUqU5lAME66ia124M"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--sWXmy0lMa6qP4aRCpUqU5lAME66ia124M
+Content-Type: multipart/mixed; boundary="2jAZNxQrManw2W86GZItHFBzvIGJuF1x7";
+ protected-headers="v1"
+From: HW42 <hw42@ipsumj.de>
+To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
+Message-ID: <6abbd413-11e7-5d49-a711-d44fa8fd939d@ipsumj.de>
+Subject: Re: [Xen-devel] [PATCH for-4.10 1/3] libxc: panic when trying to
+ create a PVH guest without kernel support
+References: <20171006135201.97534-1-roger.pau@citrix.com>
+ <20171006135201.97534-2-roger.pau@citrix.com>
+In-Reply-To: <20171006135201.97534-2-roger.pau@citrix.com>
+
+--2jAZNxQrManw2W86GZItHFBzvIGJuF1x7
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Roger Pau Monne:
+> Previously when trying to boot a PV capable but not PVH capable kernel
+> inside of a PVH container xc_dom_guest_type would succeed and return a
+> PV guest type, which would lead to failures later on in the build
+> process.
+>=20
+> Instead provide a clear error message when trying to create a PVH
+> guest using a kernel that doesn't support PVH.
+>=20
+> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> ---
+> Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+> Cc: Wei Liu <wei.liu2@citrix.com>
+> ---
+>  tools/libxc/xc_dom_elfloader.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>=20
+> diff --git a/tools/libxc/xc_dom_elfloader.c b/tools/libxc/xc_dom_elfloa=
+der.c
+> index 62d421a5e3..568d7f370c 100644
+> --- a/tools/libxc/xc_dom_elfloader.c
+> +++ b/tools/libxc/xc_dom_elfloader.c
+> @@ -59,6 +59,13 @@ static char *xc_dom_guest_type(struct xc_dom_image *=
+dom,
+>      if ( dom->container_type =3D=3D XC_DOM_HVM_CONTAINER &&
+>           dom->parms.phys_entry !=3D UNSET_ADDR32 )
+>          return "hvm-3.0-x86_32";
+> +    if ( dom->container_type =3D=3D XC_DOM_HVM_CONTAINER )
+> +    {
+> +        xc_dom_panic(dom->xch, XC_INVALID_KERNEL,
+> +                     "%s: image not capable of booting inside a HVM co=
+ntainer",
+> +                     __FUNCTION__);
+> +        return "xen-3.0-unknown";
+> +    }
+> =20
+>      switch ( machine )
+>      {
+
+With this xc_dom_parse_elf_kernel() still returns success and the domain
+build fails only later because of the "xen-3.0-unknown" type. Why not
+fail directly in xc_dom_parse_elf_kernel() like for elf files which miss
+the DomU feature?
+
+And while we are at it: libxl__build_dom() expects that
+xc_dom_parse_elf_kernel() sets an errno. Currently this can contain an
+unrelated error since it does not get set when returning -EINVAL.
+
+The following seems to work fine for me:
+
+diff --git a/tools/libxc/xc_dom_elfloader.c b/tools/libxc/xc_dom_elfloade=
+r.c
+index 568d7f370c..b67b95eb19 100644
+--- a/tools/libxc/xc_dom_elfloader.c
++++ b/tools/libxc/xc_dom_elfloader.c
+@@ -64,7 +64,8 @@ static char *xc_dom_guest_type(struct xc_dom_image *dom=
+,
+         xc_dom_panic(dom->xch, XC_INVALID_KERNEL,
+                      "%s: image not capable of booting inside a HVM cont=
+ainer",
+                      __FUNCTION__);
+-        return "xen-3.0-unknown";
++        errno =3D EINVAL;
++        return NULL;
+     }
+=20
+     switch ( machine )
+@@ -195,6 +196,8 @@ static elf_errorstatus xc_dom_parse_elf_kernel(struct=
+ xc_dom_image *dom)
+     dom->kernel_seg.vend   =3D dom->parms.virt_kend;
+=20
+     dom->guest_type =3D xc_dom_guest_type(dom, elf);
++    if (dom->guest_type =3D=3D NULL)
++        return -EINVAL;
+     DOMPRINTF("%s: %s: 0x%" PRIx64 " -> 0x%" PRIx64 "",
+               __FUNCTION__, dom->guest_type,
+               dom->kernel_seg.vstart, dom->kernel_seg.vend);
+
+
+--2jAZNxQrManw2W86GZItHFBzvIGJuF1x7--
+
+--sWXmy0lMa6qP4aRCpUqU5lAME66ia124M
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQJDBAEBCgAtFiEEqieyzvOmi9FGaQcT5KzJJ4pkaBYFAlphjCoPHGh3NDJAaXBz
+dW1qLmRlAAoJEOSsySeKZGgW/CkP/iqCrpWJ5hWpWN+6oP7oq6Dad1/R580j7PFf
+k9uGq+pVd/h2ykWKTHcPz5p6bb3VN45rGUueCj53DfuUqVYNNT2xo0YMBkponH84
+xDeChFy4WhS8OUH/yQuVaSUZd0NMLaXAGukilGqbmy5kFvnW6JR85wzO4aVBy3Z5
+B6M1BjE0FWuT937uun+M+DWlyoOqap6TQ2llVrewQfna8UO4GTmQ4jqQ5jQHQJ/Q
+JciKfppVwnY6CSYQilJF0aZ0UhZUeOAqyH1dC53Zo3qIwOulwGLdljpp2w8qgYdf
+1M5eZr7M2zNdoncJ8LbzhDLjOGmMiDGMqA3d2MToMKL7zTzRwTU0dz3C41p8G+wa
+IkxYTf/mM0dQGANYYgcy/zxhPaKiPEm4UDawtH1wozJbuOUklhZFgtJ7vJHwUPor
+mBmDvHnvMtx/B5mBrGWuNP1d8dB1gdT3MiOR63+z1X+tB7C0xLE/ROMMpiybCBUa
+cXTa2zLB6DMmJaujKtnG5aAjamqcMB6suZGuQqBplqCRqh5Sgdi3woT6vx+xXaVc
+SlMSod+LXGn9t0eLBIKRPXEERYdHpaW10/HFilFTpCmwxV3ITxr8NiAu7y0ljzjd
+BwVm2IKQf0PgExxudlvuDgY4SLKViVAcCv1y/zpOmseEm9vrF2yV5lZeywBy+nOM
+VZlUnyRq
+=NArj
+-----END PGP SIGNATURE-----
+
+--sWXmy0lMa6qP4aRCpUqU5lAME66ia124M--
+
+
+--===============1508011484081143177==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1508011484081143177==--
