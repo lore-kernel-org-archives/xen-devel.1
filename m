@@ -1,18 +1,13 @@
-From: Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCHv3] xen: Add EFI_LOAD_OPTION support
-Date: Mon, 22 Jan 2018 17:21:04 -0700
-Message-ID: <20180123002104.1674-1-tamas@tklengyel.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: Xen fails to boot inside QEMU on x86, no VMX
+Date: Mon, 22 Jan 2018 16:38:07 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1801221637010.6440@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1801221544060.6440@sstabellini-ThinkPad-X260>
+ <31744ea0-7d08-5db8-8aaa-db27dfd49b73@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-526499601-1516667888=:6440"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=gkt7=es=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1edmMO-0005Xx-VI
- for xen-devel@lists.xenproject.org; Tue, 23 Jan 2018 00:22:45 +0000
-Received: by mail-io0-f195.google.com with SMTP id n7so11418669iob.0
- for <xen-devel@lists.xenproject.org>; Mon, 22 Jan 2018 16:22:43 -0800 (PST)
+In-Reply-To: <31744ea0-7d08-5db8-8aaa-db27dfd49b73@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,90 +16,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: openxt@googlegroups.com, Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>, Tamas K Lengyel <lengyelt@ainfosec.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, jbeulich@suse.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-V2hlbiBib290aW5nIFhlbiB2aWEgVUVGSSB0aGUgWGVuIGNvbmZpZyBmaWxlIGNhbiBjb250YWlu
-IG11bHRpcGxlIHNlY3Rpb25zCmVhY2ggZGVzY3JpYmluZyBkaWZmZXJlbnQgYm9vdCBvcHRpb25z
-LiBJdCBpcyBjdXJyZW50bHkgb25seSBwb3NzaWJsZSB0byBjaG9vc2UKd2hpY2ggc2VjdGlvbiB0
-byBib290IHdpdGggaWYgdGhlIGJ1ZmZlciBjb250YWlucyBhIHN0cmluZy4gVUVGSSBwcm92aWRl
-cyBhCmRpZmZlcmVudCBzdGFuZGFyZCB0byBwYXNzIG9wdGlvbmFsIGFyZ3VtZW50cyB0byBhbiBh
-cHBsaWNhdGlvbiwgYW5kIGluIHRoaXMKcGF0Y2ggd2UgbWFrZSBYZW4gcHJvcGVybHkgcGFyc2Ug
-dGhpcyBidWZmZXIsIHRodXMgbWFraW5nIGl0IHBvc3NpYmxlIHRvIGhhdmUKc2VwYXJhdGUgRUZJ
-IGJvb3Qgb3B0aW9ucyBwcmVzZW50IGZvciB0aGUgZGlmZmVyZW50IGNvbmZpZyBzZWN0aW9ucy4K
-ClNpZ25lZC1vZmYtYnk6IFRhbWFzIEsgTGVuZ3llbCA8bGVuZ3llbHRAYWluZm9zZWMuY29tPgot
-LS0KQ2M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KQ2M6IG9wZW54dEBnb29nbGVn
-cm91cHMuY29tCgp2Mzogc2ltcGxpZnkgc2FuaXR5IGNoZWNraW5nIGxvZ2ljCnYyOiBtb3ZlIEVG
-SV9MT0FEX09QVElPTiBkZWZpbml0aW9uIGludG8gZmlsZSB0aGF0IHVzZXMgaXQKICAgIGFkZCBt
-b3JlIHNhbml0eSBjaGVja3MgdG8gdmFsaWRhdGUgdGhlIGJ1ZmZlcgotLS0KIHhlbi9jb21tb24v
-ZWZpL2Jvb3QuYyB8IDQ5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KystLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCA0MyBpbnNlcnRpb25zKCspLCA2IGRlbGV0aW9ucygt
-KQoKZGlmZiAtLWdpdCBhL3hlbi9jb21tb24vZWZpL2Jvb3QuYyBiL3hlbi9jb21tb24vZWZpL2Jv
-b3QuYwppbmRleCA0NjliZjk4MGNjLi4zNTM3ZmU5NTg4IDEwMDY0NAotLS0gYS94ZW4vY29tbW9u
-L2VmaS9ib290LmMKKysrIGIveGVuL2NvbW1vbi9lZmkvYm9vdC5jCkBAIC04OCw2ICs4OCwxNiBA
-QCB0eXBlZGVmIHN0cnVjdCBfRUZJX0FQUExFX1BST1BFUlRJRVMgewogICAgIEVGSV9BUFBMRV9Q
-Uk9QRVJUSUVTX0dFVEFMTCBHZXRBbGw7CiB9IEVGSV9BUFBMRV9QUk9QRVJUSUVTOwogCit0eXBl
-ZGVmIHN0cnVjdCBfRUZJX0xPQURfT1BUSU9OIHsKKyAgICBVSU5UMzIgQXR0cmlidXRlczsKKyAg
-ICBVSU5UMTYgRmlsZVBhdGhMaXN0TGVuZ3RoOworICAgIENIQVIxNiBEZXNjcmlwdGlvbltdOwor
-fSBFRklfTE9BRF9PUFRJT047CisKKyNkZWZpbmUgTE9BRF9PUFRJT05fQUNUSVZFICAgICAgICAg
-ICAgICAweDAwMDAwMDAxCisjZGVmaW5lIExPQURfT1BUSU9OX0ZPUkNFX1JFQ09OTkVDVCAgICAg
-MHgwMDAwMDAwMgorI2RlZmluZSBMT0FEX09QVElPTl9ISURERU4gICAgICAgICAgICAgIDB4MDAw
-MDAwMDgKKwogdW5pb24gc3RyaW5nIHsKICAgICBDSEFSMTYgKnc7CiAgICAgY2hhciAqczsKQEAg
-LTM3NSwxMiArMzg1LDM5IEBAIHN0YXRpYyB2b2lkIF9faW5pdCBQcmludEVyck1lc2coY29uc3Qg
-Q0hBUjE2ICptZXNnLCBFRklfU1RBVFVTIEVyckNvZGUpCiAKIHN0YXRpYyB1bnNpZ25lZCBpbnQg
-X19pbml0IGdldF9hcmd2KHVuc2lnbmVkIGludCBhcmdjLCBDSEFSMTYgKiphcmd2LAogICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQ0hBUjE2ICpjbWRsaW5lLCBVSU5UTiBjbWRz
-aXplLAotICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQ0hBUjE2ICoqb3B0aW9u
-cykKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIENIQVIxNiAqKm9wdGlvbnMs
-IGJvb2wgKmVsb19hY3RpdmUpCiB7CiAgICAgQ0hBUjE2ICpwdHIgPSAoQ0hBUjE2ICopKGFyZ3Yg
-KyBhcmdjICsgMSksICpwcmV2ID0gTlVMTDsKICAgICBib29sIHByZXZfc2VwID0gdHJ1ZTsKIAot
-ICAgIGZvciAoIDsgY21kc2l6ZSA+IHNpemVvZigqY21kbGluZSkgJiYgKmNtZGxpbmU7CisgICAg
-aWYgKCBjbWRzaXplID4gc2l6ZW9mKEVGSV9MT0FEX09QVElPTikgJiYKKyAgICAgICAgICooQ0hB
-UjE2ICopKCh2b2lkICopY21kbGluZSArIGNtZHNpemUgLSBzaXplb2YoKmNtZGxpbmUpKSAhPSBM
-J1wwJyApCisgICAgeworICAgICAgICBjb25zdCBFRklfTE9BRF9PUFRJT04gKmVsbyA9IChjb25z
-dCBFRklfTE9BRF9PUFRJT04gKiljbWRsaW5lOworCisgICAgICAgIC8qIFRoZSBhYnNvbHV0ZSBt
-aW5pbXVtIHRoZSBzaXplIG9mIHRoZSBidWZmZXIgaXQgbmVlZHMgdG8gYmUgKi8KKyAgICAgICAg
-c2l6ZV90IHNpemVfY2hlY2sgPSBvZmZzZXRvZihFRklfTE9BRF9PUFRJT04sIERlc2NyaXB0aW9u
-WzFdKSArCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgZWxvLT5GaWxlUGF0aExpc3RMZW5n
-dGg7CisKKyAgICAgICAgaWYgKCAoZWxvLT5BdHRyaWJ1dGVzICYgTE9BRF9PUFRJT05fQUNUSVZF
-KSAmJiBzaXplX2NoZWNrIDwgY21kc2l6ZSApCisgICAgICAgIHsKKyAgICAgICAgICAgIGNvbnN0
-IENIQVIxNiAqZGVzYyA9IGVsby0+RGVzY3JpcHRpb247CisgICAgICAgICAgICBzaXplX3QgZGVz
-Y19sZW5ndGggPSAwOworCisgICAgICAgICAgICAvKiBGaW5kIERlc2NyaXB0aW9uIHN0cmluZyBs
-ZW5ndGggaW4gaXRzIHBvc3NpYmxlIHNwYWNlICovCisgICAgICAgICAgICB3aGlsZSAoIGRlc2Nf
-bGVuZ3RoIDwgY21kc2l6ZSAtIHNpemVfY2hlY2sgJiYgKmRlc2MrKyAhPSBMJ1wwJykKKyAgICAg
-ICAgICAgICAgICBkZXNjX2xlbmd0aCArPSBzaXplb2YoKmRlc2MpOworCisgICAgICAgICAgICBp
-ZiAoIHNpemVfY2hlY2sgKyBkZXNjX2xlbmd0aCA8IGNtZHNpemUgKQorICAgICAgICAgICAgewor
-ICAgICAgICAgICAgICAgICplbG9fYWN0aXZlID0gdHJ1ZTsKKyAgICAgICAgICAgICAgICBjbWRs
-aW5lID0gKHZvaWQgKiljbWRsaW5lICsgc2l6ZV9jaGVjayArIGRlc2NfbGVuZ3RoOworICAgICAg
-ICAgICAgICAgIGNtZHNpemUgPSBjbWRzaXplIC0gc2l6ZV9jaGVjayAtIGRlc2NfbGVuZ3RoOwor
-ICAgICAgICAgICAgfQorICAgICAgICB9CisgICAgfQorCisgICAgZm9yICggOyBjbWRzaXplID49
-IHNpemVvZigqY21kbGluZSkgJiYgKmNtZGxpbmU7CiAgICAgICAgICAgICBjbWRzaXplIC09IHNp
-emVvZigqY21kbGluZSksICsrY21kbGluZSApCiAgICAgewogICAgICAgICBib29sIGN1cl9zZXAg
-PSAqY21kbGluZSA9PSBMJyAnIHx8ICpjbWRsaW5lID09IEwnXHQnOwpAQCAtMTA3MSw3ICsxMTA4
-LDcgQEAgZWZpX3N0YXJ0KEVGSV9IQU5ETEUgSW1hZ2VIYW5kbGUsIEVGSV9TWVNURU1fVEFCTEUg
-KlN5c3RlbVRhYmxlKQogICAgIEVGSV9TSElNX0xPQ0tfUFJPVE9DT0wgKnNoaW1fbG9jazsKICAg
-ICBFRklfR1JBUEhJQ1NfT1VUUFVUX1BST1RPQ09MICpnb3AgPSBOVUxMOwogICAgIHVuaW9uIHN0
-cmluZyBzZWN0aW9uID0geyBOVUxMIH0sIG5hbWU7Ci0gICAgYm9vbCBiYXNlX3ZpZGVvID0gZmFs
-c2U7CisgICAgYm9vbCBiYXNlX3ZpZGVvID0gZmFsc2UsIGVsb19hY3RpdmUgPSBmYWxzZTsKICAg
-ICBjaGFyICpvcHRpb25fc3RyOwogICAgIGJvb2wgdXNlX2NmZ19maWxlOwogCkBAIC0xMDk2LDE3
-ICsxMTMzLDE3IEBAIGVmaV9zdGFydChFRklfSEFORExFIEltYWdlSGFuZGxlLCBFRklfU1lTVEVN
-X1RBQkxFICpTeXN0ZW1UYWJsZSkKICAgICBpZiAoIHVzZV9jZmdfZmlsZSApCiAgICAgewogICAg
-ICAgICBhcmdjID0gZ2V0X2FyZ3YoMCwgTlVMTCwgbG9hZGVkX2ltYWdlLT5Mb2FkT3B0aW9ucywK
-LSAgICAgICAgICAgICAgICAgICAgICAgIGxvYWRlZF9pbWFnZS0+TG9hZE9wdGlvbnNTaXplLCBO
-VUxMKTsKKyAgICAgICAgICAgICAgICAgICAgICAgIGxvYWRlZF9pbWFnZS0+TG9hZE9wdGlvbnNT
-aXplLCBOVUxMLCAmZWxvX2FjdGl2ZSk7CiAgICAgICAgIGlmICggYXJnYyA+IDAgJiYKICAgICAg
-ICAgICAgICBlZmlfYnMtPkFsbG9jYXRlUG9vbChFZmlMb2FkZXJEYXRhLAogICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIChhcmdjICsgMSkgKiBzaXplb2YoKmFyZ3YpICsKICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbG9hZGVkX2ltYWdlLT5Mb2FkT3B0aW9u
-c1NpemUsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKHZvaWQgKiopJmFyZ3Yp
-ID09IEVGSV9TVUNDRVNTICkKICAgICAgICAgICAgIGdldF9hcmd2KGFyZ2MsIGFyZ3YsIGxvYWRl
-ZF9pbWFnZS0+TG9hZE9wdGlvbnMsCi0gICAgICAgICAgICAgICAgICAgICBsb2FkZWRfaW1hZ2Ut
-PkxvYWRPcHRpb25zU2l6ZSwgJm9wdGlvbnMpOworICAgICAgICAgICAgICAgICAgICAgbG9hZGVk
-X2ltYWdlLT5Mb2FkT3B0aW9uc1NpemUsICZvcHRpb25zLCAmZWxvX2FjdGl2ZSk7CiAgICAgICAg
-IGVsc2UKICAgICAgICAgICAgIGFyZ2MgPSAwOwotICAgICAgICBmb3IgKCBpID0gMTsgaSA8IGFy
-Z2M7ICsraSApCisgICAgICAgIGZvciAoIGkgPSAhZWxvX2FjdGl2ZTsgaSA8IGFyZ2M7ICsraSAp
-CiAgICAgICAgIHsKICAgICAgICAgICAgIENIQVIxNiAqcHRyID0gYXJndltpXTsKIAotLSAKMi4x
-MS4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-526499601-1516667888=:6440
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Tue, 23 Jan 2018, Andrew Cooper wrote:
+> On 22/01/2018 23:48, Stefano Stabellini wrote:
+> > Hi all,
+> >
+> > Running Xen inside QEMU x86 without KVM acceleartion and without VMX
+> > emulation leads to the failure appended below.
+> >
+> > This trivial workaround "fixes" the problem:
+> >
+> > diff --git a/xen/arch/x86/extable.c b/xen/arch/x86/extable.c
+> > index 72f30d9..a67d6c1 100644
+> > --- a/xen/arch/x86/extable.c
+> > +++ b/xen/arch/x86/extable.c
+> > @@ -168,7 +168,6 @@ static int __init stub_selftest(void)
+> >                         _ASM_EXTABLE(.Lret%=, .Lfix%=)
+> >                         : [exn] "+m" (res)
+> >                         : [stb] "r" (addr), "a" (tests[i].rax));
+> > -        ASSERT(res == tests[i].res.raw);
+> >      }
+> >  
+> >      return 0;
+> >
+> >
+> > Any suggestions?
+> 
+> Which i failed?  This will probably be an emulation bug in Qemu.
+
+i=2 is the culprit
+--8323329-526499601-1516667888=:6440
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-526499601-1516667888=:6440--
