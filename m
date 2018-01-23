@@ -1,14 +1,18 @@
-From: Simon Gaiser <simon@invisiblethingslab.com>
-Subject: Re: PVH backports to 4.9 and 4.8
-Date: Tue, 23 Jan 2018 14:47:00 +0000
-Message-ID: <e89157a7-ec0b-6794-a805-77b2562a2e75@invisiblethingslab.com>
-References: <d06762c0-049e-0f9a-c674-e9bee70ec5c6@citrix.com>
- <9251050a-48ef-f8af-22da-a789a3afcbc5@invisiblethingslab.com>
- <6e0be7fa-0129-0a9d-485a-fdfed4f7d330@citrix.com>
+From: Roger Pau Monne <roger.pau@citrix.com>
+Subject: [PATCH v8 06/11] xen: introduce rangeset_consume_ranges
+Date: Tue, 23 Jan 2018 15:07:30 +0000
+Message-ID: <20180123150735.74779-7-roger.pau@citrix.com>
+References: <20180123150735.74779-1-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============9067819816106340740=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <6e0be7fa-0129-0a9d-485a-fdfed4f7d330@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=mf4d=es=citrix.com=prvs=55426a86e=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1ee0Bl-0003gN-Mp
+ for xen-devel@lists.xenproject.org; Tue, 23 Jan 2018 15:08:41 +0000
+In-Reply-To: <20180123150735.74779-1-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,116 +21,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============9067819816106340740==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="zbb1jwCyBaTVKZTU63oDsPQIQcnOtEuo7"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---zbb1jwCyBaTVKZTU63oDsPQIQcnOtEuo7
-Content-Type: multipart/mixed; boundary="HHrzlqZtvlFJLJTOvKyavKujVrXruV1oZ";
- protected-headers="v1"
-From: Simon Gaiser <simon@invisiblethingslab.com>
-To: George Dunlap <george.dunlap@citrix.com>,
- "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
-Message-ID: <e89157a7-ec0b-6794-a805-77b2562a2e75@invisiblethingslab.com>
-Subject: Re: [Xen-devel] PVH backports to 4.9 and 4.8
-References: <d06762c0-049e-0f9a-c674-e9bee70ec5c6@citrix.com>
- <9251050a-48ef-f8af-22da-a789a3afcbc5@invisiblethingslab.com>
- <6e0be7fa-0129-0a9d-485a-fdfed4f7d330@citrix.com>
-In-Reply-To: <6e0be7fa-0129-0a9d-485a-fdfed4f7d330@citrix.com>
-
---HHrzlqZtvlFJLJTOvKyavKujVrXruV1oZ
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-George Dunlap:
-> On 01/23/2018 04:06 AM, Simon Gaiser wrote:
->> George Dunlap:
->>> Part of our solution to XSA-254 SP3 (aka "Meltdown") is to backport
->>> the PVH mode from 4.10 to 4.9 and 4.8.  This will first allow people
->>> able to run PVH kernels to switch their PV guests directly to PVH
->>> guests; and second, eventually enable the backport of patches which
->>> will enable transparent changing of PV guests into PVH guests.
->>>
->>> All of the hypervisor support seems to have existed already in 4.8, s=
-o
->>> the only backports involve toolstack patches.
->>>
->>> I've put up two trees for a first-cut backport of the PVH
->>> functionality, to 4.9 and 4.8 here:
->>>
->>> git://xenbits.xen.org/people/gdunlap/xen.git
->>>
->>> Branches out/pvh-backport/4.8/v1 and out/pvh-backport/4.9/v1
->>>
->>> Below are the patches backported from 4.10 to 4.9 (23 patches total):=
-
->> [...]
->>
->> So future 4.8 releases will include the backports, right? Asking becau=
-se
->> the AFAICS the 4.8.3-pre-shim-comet branch include them but staging-4.=
-8
->> does not.
->=20
-> Some of us have had informal conversations about backporting PVH and
-> Comet host/toolstack patches to 4.8, and a number of us think it's a
-> good idea, but we haven't had an official discussion with all the
-> stakeholders yet.  We'll come back to it once more of the fires have
-> been put out.
->=20
-> Feel free to remind us in a month or so if you still haven't seen any
-> patches in the stable-4.8 branch. :-)
-
-Ok, thank you for the quick reply. In Qubes we are using PVH with 4.8
-using the old device_model_version=3Dnone config option. And changing thi=
-s
-would be much easier before release (So the change should be in our rc
-now). Anyway if it's not decided yet, we will have to guess what ends up
-in future 4.8.z releases.
-
-
---HHrzlqZtvlFJLJTOvKyavKujVrXruV1oZ--
-
---zbb1jwCyBaTVKZTU63oDsPQIQcnOtEuo7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlpnSu4ACgkQkO9xfO/x
-ly+MKw//TJTyUC6213KAwC4Agi4HyPdvY3uggBgFa3EmmJ71bysZEbtXEzulcYir
-0jFaByBdCoAYfPBVoocFI3YwolSpFwGJt9C1cPplmgfy2h3LkWSIwJDRJ8Ca7XaW
-X/th5syWk+Q21sujuE5Ca8dfbbrugAhJsXJFTaPoGpcNAPnamU81oAcKsIpj2eAp
-cjxTwJTyREDOZ+ePTRKmghKuvHenai1cD6lav3rNzG7xb6+S/LF0l9SRNVFz9JJE
-3K46arvSRZgEKL3leOu5GUCRDkPfh8Xik40/0Bmit771LQzE3p8YMf4yH5y8t2Tc
-T4ot7UKNnZypgTi5Rcik92IAlsNarRqYclGil3g/De41O5issSadr7Ima8eFaF6q
-+/i7Uu6ifiarD9qfBrv01PUFxkDhD0w57bY8cWjqct4wJFEyz2bLgBIa5z+zrsE8
-Y9QbZkAnQeWcyDiqELZJ7BxDOFhxtRo60RN5+oTZ2pBgXNxXen7ytayEq2LDWs7m
-QZToucfwWemHNS8bYoCen/1nnt0VGWlHbDMZHZBPky6owLdB0AAiyzoxnDL2YLz+
-30NLIT/rnYcAKf4vt0yROISM+WEe3tDBxZQqmA7j+voDSwzBN+FcLCGdbkjFiG5Y
-khkecLxakOvpX5LWeaezHy8awxkZxqztbwoUw5KAuRTfz8qvTrE=
-=ZqMb
------END PGP SIGNATURE-----
-
---zbb1jwCyBaTVKZTU63oDsPQIQcnOtEuo7--
-
-
---===============9067819816106340740==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============9067819816106340740==--
+VGhpcyBmdW5jdGlvbiBhbGxvd3MgdG8gaXRlcmF0ZSBvdmVyIGEgcmFuZ2VzZXQgd2hpbGUgcmVt
+b3ZpbmcgdGhlCnByb2Nlc3NlZCByZWdpb25zLgoKVGhpcyB3aWxsIGJlIHVzZWQgaW4gb3JkZXIg
+dG8gc3BsaXQgcHJvY2Vzc2luZyBvZiBsYXJnZSBtZW1vcnkgYXJlYXMKd2hlbiBtYXBwaW5nIHRo
+ZW0gaW50byB0aGUgZ3Vlc3QgcDJtLgoKU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8
+cm9nZXIucGF1QGNpdHJpeC5jb20+ClJldmlld2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRy
+aXguY29tPgotLS0KQ2M6IEdlb3JnZSBEdW5sYXAgPEdlb3JnZS5EdW5sYXBAZXUuY2l0cml4LmNv
+bT4KQ2M6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgpDYzogSmFuIEJl
+dWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpDYzogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25y
+YWQud2lsa0BvcmFjbGUuY29tPgpDYzogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBr
+ZXJuZWwub3JnPgpDYzogVGltIERlZWdhbiA8dGltQHhlbi5vcmc+CkNjOiBXZWkgTGl1IDx3ZWku
+bGl1MkBjaXRyaXguY29tPgotLS0KQ2hhbmdlcyBzaW5jZSB2NjoKIC0gRXhwYW5kIGNvbW1pdCBt
+ZXNzYWdlLgogLSBBZGQgYSBjb21tZW50IHRvIGRlc2NyaWJlIHRoZSBleHBlY3RlZCBmdW5jdGlv
+biBiZWhhdmlvci4KIC0gRml4IGluZGVudGF0aW9uLgoKQ2hhbmdlcyBzaW5jZSB2NToKIC0gTmV3
+IGluIHRoaXMgdmVyc2lvbi4KLS0tCiB4ZW4vY29tbW9uL3Jhbmdlc2V0LmMgICAgICB8IDI4ICsr
+KysrKysrKysrKysrKysrKysrKysrKysrKysKIHhlbi9pbmNsdWRlL3hlbi9yYW5nZXNldC5oIHwg
+MTAgKysrKysrKysrKwogMiBmaWxlcyBjaGFuZ2VkLCAzOCBpbnNlcnRpb25zKCspCgpkaWZmIC0t
+Z2l0IGEveGVuL2NvbW1vbi9yYW5nZXNldC5jIGIveGVuL2NvbW1vbi9yYW5nZXNldC5jCmluZGV4
+IGFkZTM0ZjZhNTAuLmJiNjhjZTYyZTQgMTAwNjQ0Ci0tLSBhL3hlbi9jb21tb24vcmFuZ2VzZXQu
+YworKysgYi94ZW4vY29tbW9uL3Jhbmdlc2V0LmMKQEAgLTM1MCw2ICszNTAsMzQgQEAgaW50IHJh
+bmdlc2V0X2NsYWltX3JhbmdlKHN0cnVjdCByYW5nZXNldCAqciwgdW5zaWduZWQgbG9uZyBzaXpl
+LAogICAgIHJldHVybiAwOwogfQogCitpbnQgcmFuZ2VzZXRfY29uc3VtZV9yYW5nZXMoc3RydWN0
+IHJhbmdlc2V0ICpyLAorICAgICAgICAgICAgICAgICAgICAgICAgICAgIGludCAoKmNiKSh1bnNp
+Z25lZCBsb25nIHMsIHVuc2lnbmVkIGxvbmcgZSwgdm9pZCAqLAorICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBsb25nICpjKSwKKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB2b2lkICpjdHh0KQoreworICAgIGludCByYyA9IDA7CisKKyAgICB3cml0ZV9s
+b2NrKCZyLT5sb2NrKTsKKyAgICB3aGlsZSAoICFyYW5nZXNldF9pc19lbXB0eShyKSApCisgICAg
+eworICAgICAgICB1bnNpZ25lZCBsb25nIGNvbnN1bWVkID0gMDsKKyAgICAgICAgc3RydWN0IHJh
+bmdlICp4ID0gZmlyc3RfcmFuZ2Uocik7CisKKyAgICAgICAgcmMgPSBjYih4LT5zLCB4LT5lLCBj
+dHh0LCAmY29uc3VtZWQpOworCisgICAgICAgIEFTU0VSVChjb25zdW1lZCA8PSB4LT5lIC0geC0+
+cyArIDEpOworICAgICAgICB4LT5zICs9IGNvbnN1bWVkOworICAgICAgICBpZiAoIHgtPnMgPiB4
+LT5lICkKKyAgICAgICAgICAgIGRlc3Ryb3lfcmFuZ2UociwgeCk7CisKKyAgICAgICAgaWYgKCBy
+YyApCisgICAgICAgICAgICBicmVhazsKKyAgICB9CisgICAgd3JpdGVfdW5sb2NrKCZyLT5sb2Nr
+KTsKKworICAgIHJldHVybiByYzsKK30KKwogaW50IHJhbmdlc2V0X2FkZF9zaW5nbGV0b24oCiAg
+ICAgc3RydWN0IHJhbmdlc2V0ICpyLCB1bnNpZ25lZCBsb25nIHMpCiB7CmRpZmYgLS1naXQgYS94
+ZW4vaW5jbHVkZS94ZW4vcmFuZ2VzZXQuaCBiL3hlbi9pbmNsdWRlL3hlbi9yYW5nZXNldC5oCmlu
+ZGV4IDFmODNiMWY0NGIuLjU4M2I3MmJiMGMgMTAwNjQ0Ci0tLSBhL3hlbi9pbmNsdWRlL3hlbi9y
+YW5nZXNldC5oCisrKyBiL3hlbi9pbmNsdWRlL3hlbi9yYW5nZXNldC5oCkBAIC03MCw2ICs3MCwx
+NiBAQCBpbnQgcmFuZ2VzZXRfcmVwb3J0X3JhbmdlcygKICAgICBzdHJ1Y3QgcmFuZ2VzZXQgKnIs
+IHVuc2lnbmVkIGxvbmcgcywgdW5zaWduZWQgbG9uZyBlLAogICAgIGludCAoKmNiKSh1bnNpZ25l
+ZCBsb25nIHMsIHVuc2lnbmVkIGxvbmcgZSwgdm9pZCAqKSwgdm9pZCAqY3R4dCk7CiAKKy8qCisg
+KiBOb3RlIHRoYXQgdGhlIGNvbnN1bWUgZnVuY3Rpb24gY2FuIHJldHVybiBhbiBlcnJvciB2YWx1
+ZSBhcGFydCBmcm9tCisgKiAtRVJFU1RBUlQsIGFuZCB0aGF0IG5vIGNsZWFudXAgaXMgcGVyZm9y
+bWVkIChpZTogdGhlIHVzZXIgc2hvdWxkIGNhbGwKKyAqIHJhbmdlc2V0X2Rlc3Ryb3kgaWYgbmVl
+ZGVkKS4KKyAqLworaW50IHJhbmdlc2V0X2NvbnN1bWVfcmFuZ2VzKHN0cnVjdCByYW5nZXNldCAq
+ciwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbnQgKCpjYikodW5zaWduZWQgbG9uZyBz
+LCB1bnNpZ25lZCBsb25nIGUsCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHZvaWQgKiwgdW5zaWduZWQgbG9uZyAqYyksCisgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+dm9pZCAqY3R4dCk7CisKIC8qIEFkZC9yZW1vdmUvcXVlcnkgYSBzaW5nbGUgbnVtYmVyLiAqLwog
+aW50IF9fbXVzdF9jaGVjayByYW5nZXNldF9hZGRfc2luZ2xldG9uKAogICAgIHN0cnVjdCByYW5n
+ZXNldCAqciwgdW5zaWduZWQgbG9uZyBzKTsKLS0gCjIuMTUuMQoKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
