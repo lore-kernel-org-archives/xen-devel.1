@@ -1,13 +1,16 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
 Subject: Re: Xen fails to boot inside QEMU on x86, no VMX
-Date: Mon, 22 Jan 2018 16:38:07 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1801221637010.6440@sstabellini-ThinkPad-X260>
+Date: Tue, 23 Jan 2018 00:41:05 +0000
+Message-ID: <fb87196c-1a48-6c7b-fe44-d560bd17db07@citrix.com>
 References: <alpine.DEB.2.10.1801221544060.6440@sstabellini-ThinkPad-X260>
  <31744ea0-7d08-5db8-8aaa-db27dfd49b73@citrix.com>
+ <alpine.DEB.2.10.1801221637010.6440@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-526499601-1516667888=:6440"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <31744ea0-7d08-5db8-8aaa-db27dfd49b73@citrix.com>
+In-Reply-To: <alpine.DEB.2.10.1801221637010.6440@sstabellini-ThinkPad-X260>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,53 +19,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, jbeulich@suse.com, xen-devel@lists.xen.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: jbeulich@suse.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-526499601-1516667888=:6440
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Tue, 23 Jan 2018, Andrew Cooper wrote:
-> On 22/01/2018 23:48, Stefano Stabellini wrote:
-> > Hi all,
-> >
-> > Running Xen inside QEMU x86 without KVM acceleartion and without VMX
-> > emulation leads to the failure appended below.
-> >
-> > This trivial workaround "fixes" the problem:
-> >
-> > diff --git a/xen/arch/x86/extable.c b/xen/arch/x86/extable.c
-> > index 72f30d9..a67d6c1 100644
-> > --- a/xen/arch/x86/extable.c
-> > +++ b/xen/arch/x86/extable.c
-> > @@ -168,7 +168,6 @@ static int __init stub_selftest(void)
-> >                         _ASM_EXTABLE(.Lret%=, .Lfix%=)
-> >                         : [exn] "+m" (res)
-> >                         : [stb] "r" (addr), "a" (tests[i].rax));
-> > -        ASSERT(res == tests[i].res.raw);
-> >      }
-> >  
-> >      return 0;
-> >
-> >
-> > Any suggestions?
-> 
-> Which i failed?  This will probably be an emulation bug in Qemu.
-
-i=2 is the culprit
---8323329-526499601-1516667888=:6440
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-526499601-1516667888=:6440--
+T24gMjMvMDEvMjAxOCAwMDozOCwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+IE9uIFR1ZSwg
+MjMgSmFuIDIwMTgsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4+IE9uIDIyLzAxLzIwMTggMjM6NDgs
+IFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPj4+IEhpIGFsbCwKPj4+Cj4+PiBSdW5uaW5nIFhl
+biBpbnNpZGUgUUVNVSB4ODYgd2l0aG91dCBLVk0gYWNjZWxlYXJ0aW9uIGFuZCB3aXRob3V0IFZN
+WAo+Pj4gZW11bGF0aW9uIGxlYWRzIHRvIHRoZSBmYWlsdXJlIGFwcGVuZGVkIGJlbG93Lgo+Pj4K
+Pj4+IFRoaXMgdHJpdmlhbCB3b3JrYXJvdW5kICJmaXhlcyIgdGhlIHByb2JsZW06Cj4+Pgo+Pj4g
+ZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9leHRhYmxlLmMgYi94ZW4vYXJjaC94ODYvZXh0YWJs
+ZS5jCj4+PiBpbmRleCA3MmYzMGQ5Li5hNjdkNmMxIDEwMDY0NAo+Pj4gLS0tIGEveGVuL2FyY2gv
+eDg2L2V4dGFibGUuYwo+Pj4gKysrIGIveGVuL2FyY2gveDg2L2V4dGFibGUuYwo+Pj4gQEAgLTE2
+OCw3ICsxNjgsNiBAQCBzdGF0aWMgaW50IF9faW5pdCBzdHViX3NlbGZ0ZXN0KHZvaWQpCj4+PiAg
+ICAgICAgICAgICAgICAgICAgICAgICBfQVNNX0VYVEFCTEUoLkxyZXQlPSwgLkxmaXglPSkKPj4+
+ICAgICAgICAgICAgICAgICAgICAgICAgIDogW2V4bl0gIittIiAocmVzKQo+Pj4gICAgICAgICAg
+ICAgICAgICAgICAgICAgOiBbc3RiXSAiciIgKGFkZHIpLCAiYSIgKHRlc3RzW2ldLnJheCkpOwo+
+Pj4gLSAgICAgICAgQVNTRVJUKHJlcyA9PSB0ZXN0c1tpXS5yZXMucmF3KTsKPj4+ICAgICAgfQo+
+Pj4gIAo+Pj4gICAgICByZXR1cm4gMDsKPj4+Cj4+Pgo+Pj4gQW55IHN1Z2dlc3Rpb25zPwo+PiBX
+aGljaCBpIGZhaWxlZD/CoCBUaGlzIHdpbGwgcHJvYmFibHkgYmUgYW4gZW11bGF0aW9uIGJ1ZyBp
+biBRZW11Lgo+IGk9MiBpcyB0aGUgY3VscHJpdAoKUWVtdSBkb2Vzbid0IGVtdWxhdGUgJXJzcC1i
+YXNlZCBtZW1vcnkgYWNjZXNzZXMgcHJvcGVybHkuwqAgSXQgc2hvdWxkCnJhaXNlICNTU1swXSwg
+YW5kIGlzIHByZXN1bWFibHkgcmFpc2luZyAjR1BbMF0gaW5zdGVhZC4KCn5BbmRyZXcKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
