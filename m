@@ -1,20 +1,21 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v5] x86: relocate pvh_info
-Date: Tue, 23 Jan 2018 15:51:21 +0000
-Message-ID: <20180123155121.ltpv5sha774gcl6v@citrix.com>
-References: <20180123151314.8320-1-wei.liu2@citrix.com>
- <9a32904c-9f8c-70eb-034d-7066741ba209@citrix.com>
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: Re: [PATCH] x86/shutdown: Use ACPI reboot method for
+ Dell PowerEdge R740
+Date: Tue, 23 Jan 2018 16:05:06 +0000
+Message-ID: <fe725c6f-5ea3-568f-1c8c-95f310338991@citrix.com>
+References: <20180119165711.16615-1-ross.lagerwall@citrix.com>
+ <5A65E74E02000078001A1062@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=4kka=es=citrix.com=prvs=55463bd4c=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1ee0rk-0001rw-Vq
- for xen-devel@lists.xenproject.org; Tue, 23 Jan 2018 15:52:05 +0000
-Content-Disposition: inline
-In-Reply-To: <9a32904c-9f8c-70eb-034d-7066741ba209@citrix.com>
+ <srs0=3fqo=es=citrix.com=prvs=55476ae8b=ross.lagerwall@srs-us1.protection.inumbo.net>)
+ id 1ee155-0003CQ-2I
+ for xen-devel@lists.xenproject.org; Tue, 23 Jan 2018 16:05:51 +0000
+In-Reply-To: <5A65E74E02000078001A1062@prv-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,20 +24,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBKYW4gMjMsIDIwMTggYXQgMDM6MTg6MjJQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBPbiAyMy8wMS8xOCAxNToxMywgV2VpIExpdSB3cm90ZToKPiA+IEBAIC0yMjYsMTQg
-KzI1OSwyNyBAQCBzdGF0aWMgbXVsdGlib290X2luZm9fdCAqbWJpMl9yZWxvYyh1MzIgbWJpX2lu
-KQo+ID4gICAgICByZXR1cm4gbWJpX291dDsKPiA+ICB9Cj4gPiAgCj4gPiAtbXVsdGlib290X2lu
-Zm9fdCBfX3N0ZGNhbGwgKnJlbG9jKHUzMiBtYl9tYWdpYywgdTMyIG1iaV9pbiwgdTMyIHRyYW1w
-b2xpbmUpCj4gPiArdm9pZCBfX3N0ZGNhbGwgKnJlbG9jKHUzMiBtYWdpYywgdTMyIGluLCB1MzIg
-dHJhbXBvbGluZSkKPiAKPiBBcyBhbiBmaW5hbCBvYnNlcnZhdGlvbiwgdm9pZCAqIF9fc3RkY2Fs
-bCByZWxvYygpIHNvIHRoZSBfX3N0ZGNhbGwgaXNuJ3QKPiBpbiB0aGUgbWlkZGxlIG9mIHRoZSBy
-ZXR1cm4gdHlwZSAoQ2FuIGJlIGZpeGVkIG9uIGNvbW1pdCkuCgpTdXJlLgoKPiAKPiBPdGhlcndp
-c2UsIFJldmlld2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
-PgoKVGhhbmtzLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMDEvMjIvMjAxOCAxMjoyOSBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMTkuMDEu
+MTggYXQgMTc6NTcsIDxyb3NzLmxhZ2Vyd2FsbEBjaXRyaXguY29tPiB3cm90ZToKPj4gLS0tIGEv
+eGVuL2FyY2gveDg2L3NodXRkb3duLmMKPj4gKysrIGIveGVuL2FyY2gveDg2L3NodXRkb3duLmMK
+Pj4gQEAgLTUxMSw2ICs1MTEsMTUgQEAgc3RhdGljIHN0cnVjdCBkbWlfc3lzdGVtX2lkIF9faW5p
+dGRhdGEgcmVib290X2RtaV90YWJsZVtdID0gewo+PiAgICAgICAgICAgICAgIERNSV9NQVRDSChE
+TUlfUFJPRFVDVF9OQU1FLCAiTGF0aXR1ZGUgRTY1MjAiKSwKPj4gICAgICAgICAgIH0sCj4+ICAg
+ICAgIH0sCj4+ICsgICAgeyAgICAvKiBIYW5kbGUgcHJvYmxlbXMgd2l0aCByZWJvb3Rpbmcgb24g
+RGVsbCBQb3dlckVkZ2UgUjc0MC4gKi8KPj4gKyAgICAgICAgLmNhbGxiYWNrID0gb3ZlcnJpZGVf
+cmVib290LAo+PiArICAgICAgICAuZHJpdmVyX2RhdGEgPSAodm9pZCAqKShsb25nKUJPT1RfQUNQ
+SSwKPj4gKyAgICAgICAgLmlkZW50ID0gIkRlbGwgUG93ZXJFZGdlIFI3NDAiLAo+PiArICAgICAg
+ICAubWF0Y2hlcyA9IHsKPj4gKyAgICAgICAgICAgIERNSV9NQVRDSChETUlfU1lTX1ZFTkRPUiwg
+IkRlbGwgSW5jLiIpLAo+PiArICAgICAgICAgICAgRE1JX01BVENIKERNSV9QUk9EVUNUX05BTUUs
+ICJQb3dlckVkZ2UgUjc0MCIpLAo+PiArICAgICAgICB9LAo+PiArICAgIH0sCj4gCj4gSnVkZ2lu
+ZyBmcm9tIHRoZSBkZXNjcmlwdGlvbiB5b3UgZG9uJ3QgcmVhbGx5IHdhbnQgb3IgbmVlZCB0bwo+
+IG92ZXJyaWRlIHRoZSByZWJvb3QgbWV0aG9kIGlmIG5vdCBydW5uaW5nIHVuZGVyIEVGSSwgb3Ig
+aWYgdGhlcmUKPiB3YXMgYW4gb3ZlcnJpZGUgb24gdGhlIGNvbW1hbmQgbGluZSBhbHJlYWR5LiBv
+dmVycmlkZV9yZWJvb3QoKSwKPiBob3dldmVyLCBvdmVycmlkZXMgZXZlcnl0aGluZyBhbmQgdW5k
+ZXIgYWxsIGNpcmN1bXN0YW5jZXMuIEkKPiB0aGVyZWZvcmUgdGhpbmsgeW91IG1heSB3YW50IHRv
+IGludHJvZHVjZSBhIG5ldyBjYWxsYmFjawo+IGZ1bmN0aW9uLgoKQWdyZWVkLCBpdCBzaG91bGQg
+b25seSBhcHBseSB3aGVuIHJ1bm5pbmcgdW5kZXIgRUZJLiBOb3RlIHRoYXQgdGhlIApjb21tYW5k
+LWxpbmUgdGFrZXMgcHJpb3JpdHkgb3ZlciBvdmVycmlkZV9yZWJvb3QoKSAtLSBzZWUgdGhlIG5v
+dGUgYXQgCnRoZSBzdGFydCBvZiByZWJvb3RfaW5pdCgpLgoKPiAKPiBBcyBhbiBhc2lkZSAtIGhv
+dyBjb21lIHRoZSBwYWdlIGF0IGFkZHJlc3MgemVybyBpcyBhY3R1YWxseQo+IG1hcHBlZCBhdCB0
+aGUgdGltZSBvZiB0aGUgcmVib290IGF0dGVtcHQ/Cj4gCgpObyBpZGVhLi4uCgotLSAKUm9zcyBM
+YWdlcndhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
