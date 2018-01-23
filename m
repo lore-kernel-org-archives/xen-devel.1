@@ -1,12 +1,27 @@
-From: Simon Gaiser <simon@invisiblethingslab.com>
-Subject: Re: PVH backports to 4.9 and 4.8
-Date: Tue, 23 Jan 2018 04:06:00 +0000
-Message-ID: <9251050a-48ef-f8af-22da-a789a3afcbc5@invisiblethingslab.com>
-References: <d06762c0-049e-0f9a-c674-e9bee70ec5c6@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH RFC v2 00/12] xen/x86: use per-vcpu stacks
+ for 64 bit pv domains
+Date: Tue, 23 Jan 2018 06:50:40 +0100
+Message-ID: <d4487ca6-ddaa-5053-1df7-37e6b2f6c5e2@suse.com>
+References: <20180122123256.1431-1-jgross@suse.com>
+ <5A65EC0A02000078001A1118@suse.com>
+ <068bc63f-f79c-627c-4f48-ca8cdef166d9@suse.com>
+ <5A6601D302000078001A1230@suse.com>
+ <1a670986-d36b-3530-3b12-15ac2faa302e@suse.com>
+ <5A6607DB02000078001A127B@suse.com>
+ <ad9fe5e8-76b1-3a61-4696-f6d3708cd404@suse.com>
+ <5A6624A602000078001A1375@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6645873155136015617=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <d06762c0-049e-0f9a-c674-e9bee70ec5c6@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=bxvh=es=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1edrTt-0000pS-OV
+ for xen-devel@lists.xenproject.org; Tue, 23 Jan 2018 05:50:49 +0000
+In-Reply-To: <5A6624A602000078001A1375@suse.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,94 +30,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: wei.liu2@citrix.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, Dario Faggioli <dfaggioli@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============6645873155136015617==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="pKuKjxoRm1xBtcj5Dq9TRZw76TeE9wUsY"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---pKuKjxoRm1xBtcj5Dq9TRZw76TeE9wUsY
-Content-Type: multipart/mixed; boundary="fUUl9WHFOaBCzUk3lbqMEPX2rvKtuzfsl";
- protected-headers="v1"
-From: Simon Gaiser <simon@invisiblethingslab.com>
-To: George Dunlap <george.dunlap@citrix.com>,
- "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
-Message-ID: <9251050a-48ef-f8af-22da-a789a3afcbc5@invisiblethingslab.com>
-Subject: Re: [Xen-devel] PVH backports to 4.9 and 4.8
-References: <d06762c0-049e-0f9a-c674-e9bee70ec5c6@citrix.com>
-In-Reply-To: <d06762c0-049e-0f9a-c674-e9bee70ec5c6@citrix.com>
-
---fUUl9WHFOaBCzUk3lbqMEPX2rvKtuzfsl
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-George Dunlap:
-> Part of our solution to XSA-254 SP3 (aka "Meltdown") is to backport
-> the PVH mode from 4.10 to 4.9 and 4.8.  This will first allow people
-> able to run PVH kernels to switch their PV guests directly to PVH
-> guests; and second, eventually enable the backport of patches which
-> will enable transparent changing of PV guests into PVH guests.
->=20
-> All of the hypervisor support seems to have existed already in 4.8, so
-> the only backports involve toolstack patches.
->=20
-> I've put up two trees for a first-cut backport of the PVH
-> functionality, to 4.9 and 4.8 here:
->=20
-> git://xenbits.xen.org/people/gdunlap/xen.git
->=20
-> Branches out/pvh-backport/4.8/v1 and out/pvh-backport/4.9/v1
->=20
-> Below are the patches backported from 4.10 to 4.9 (23 patches total):
-[...]
-
-So future 4.8 releases will include the backports, right? Asking because
-the AFAICS the 4.8.3-pre-shim-comet branch include them but staging-4.8
-does not.
-
-Simon
-
-
---fUUl9WHFOaBCzUk3lbqMEPX2rvKtuzfsl--
-
---pKuKjxoRm1xBtcj5Dq9TRZw76TeE9wUsY
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlpmtLkACgkQkO9xfO/x
-ly9RIhAAjLPGTPSq5YPrtqZIof/IbnLh4iiWcw+vMWUKAWtbpvc7sknrw6y0jQqU
-5lJOA6lV7EyabagH3EugPbrJ428NKQdQhuy/YHq6sPVts8WY5HvHSMjFzKntoOuZ
-+Ox2UGQaalFvaL9jlr7ETruaisvA4MQGA1VuAi3BtUKkC6fzoOEK0w74/NyeBt3U
-U73htdxDY+LAq3DuEXwk39np3iUeNS+OTkaAzTQtlrNA1o5BD2ndPoIrb1BYMtI7
-VsY/6fGUAWPMehhTyA5gBSvhPhKh3D3H+tmA0bzD/0+nxkLC1XuH40oQ+f/DKJaM
-u/BG2+IS/NWFfeiYdqpD88GKQe+jgEOTyBmsgs6P9a/DKG6DBRlBat73OFJCzxhE
-YxO0yNLPAJ9nxgrEnuJKPmJEqhD9L/cSE7ijyUgF+cMc62YOZLale7tDq2ZcQc1c
-W4pfkkz2kJgPP0Dd8LaM1N8497jb1jP0kEuw4di0lwrbootz/B2PpHOb47PNzcnz
-aNtqT6dCdDtnGf9hfPY/PHzFEmzlaCug7ux+XjFj35D1vqxFhKMLHWRxtfE8q1Wc
-o3J4ioCJYF3ahCWGBO2GfIkyr3QxO6hpQFHV75aKWJ6JkRpZf4HEaPyCnNkvWtdA
-lIoqXzPP+Q5aB8uEDUlmUB6ZPLXsLB+wPmxr3BUDwAlEArwfnhE=
-=ioXX
------END PGP SIGNATURE-----
-
---pKuKjxoRm1xBtcj5Dq9TRZw76TeE9wUsY--
-
-
---===============6645873155136015617==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6645873155136015617==--
+T24gMjIvMDEvMTggMTc6NTEsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDIyLjAxLjE4IGF0
+IDE2OjAwLCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4gT24gMjIvMDEvMTggMTU6NDgsIEph
+biBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4gT24gMjIuMDEuMTggYXQgMTU6MzgsIDxqZ3Jvc3NAc3Vz
+ZS5jb20+IHdyb3RlOgo+Pj4+IE9uIDIyLzAxLzE4IDE1OjIyLCBKYW4gQmV1bGljaCB3cm90ZToK
+Pj4+Pj4+Pj4gT24gMjIuMDEuMTggYXQgMTU6MTgsIDxqZ3Jvc3NAc3VzZS5jb20+IHdyb3RlOgo+
+Pj4+Pj4gT24gMjIvMDEvMTggMTM6NTAsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4+Pj4+IE9u
+IDIyLjAxLjE4IGF0IDEzOjMyLCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4+Pj4+Pj4gQXMg
+YSBwcmVwYXJhdGlvbiBmb3IgZG9pbmcgcGFnZSB0YWJsZSBpc29sYXRpb24gaW4gdGhlIFhlbiBo
+eXBlcnZpc29yCj4+Pj4+Pj4+IGluIG9yZGVyIHRvIG1pdGlnYXRlICJNZWx0ZG93biIgdXNlIGRl
+ZGljYXRlZCBzdGFja3MsIEdEVCBhbmQgVFNTIGZvcgo+Pj4+Pj4+PiA2NCBiaXQgUFYgZG9tYWlu
+cyBtYXBwZWQgdG8gdGhlIHBlci1kb21haW4gdmlydHVhbCBhcmVhLgo+Pj4+Pj4+Pgo+Pj4+Pj4+
+PiBUaGUgcGVyLXZjcHUgc3RhY2tzIGFyZSB1c2VkIGZvciBlYXJseSBpbnRlcnJ1cHQgaGFuZGxp
+bmcgb25seS4gQWZ0ZXIKPj4+Pj4+Pj4gc2F2aW5nIHRoZSBkb21haW4ncyByZWdpc3RlcnMgc3Rh
+Y2tzIGFyZSBzd2l0Y2hlZCBiYWNrIHRvIHRoZSBub3JtYWwKPj4+Pj4+Pj4gcGVyIHBoeXNpY2Fs
+IGNwdSBvbmVzIGluIG9yZGVyIHRvIGJlIGFibGUgdG8gYWRkcmVzcyBvbi1zdGFjayBkYXRhCj4+
+Pj4+Pj4+IGZyb20gb3RoZXIgY3B1cyBlLmcuIHdoaWxlIGhhbmRsaW5nIElQSXMuCj4+Pj4+Pj4+
+Cj4+Pj4+Pj4+IEFkZGluZyAlY3IzIHN3aXRjaGluZyBiZXR3ZWVuIHNhdmluZyBvZiB0aGUgcmVn
+aXN0ZXJzIGFuZCBzd2l0Y2hpbmcKPj4+Pj4+Pj4gdGhlIHN0YWNrcyB3aWxsIGVuYWJsZSB0aGUg
+cG9zc2liaWxpdHkgdG8gcnVuIGd1ZXN0IGNvZGUgd2l0aG91dCBhbnkKPj4+Pj4+Pj4gcGVyIHBo
+eXNpY2FsIGNwdSBtYXBwaW5nLCBpLmUuIGF2b2lkaW5nIHRoZSB0aHJlYXQgb2YgYSBndWVzdCBi
+ZWluZwo+Pj4+Pj4+PiBhYmxlIHRvIGFjY2VzcyBvdGhlciBkb21haW5zIGRhdGEuCj4+Pj4+Pj4+
+Cj4+Pj4+Pj4+IFdpdGhvdXQgYW55IGZ1cnRoZXIgbWVhc3VyZXMgaXQgd2lsbCBzdGlsbCBiZSBw
+b3NzaWJsZSBmb3IgZS5nLiBhCj4+Pj4+Pj4+IGd1ZXN0J3MgdXNlciBwcm9ncmFtIHRvIHJlYWQg
+c3RhY2sgZGF0YSBvZiBhbm90aGVyIHZjcHUgb2YgdGhlIHNhbWUKPj4+Pj4+Pj4gZG9tYWluLCBi
+dXQgdGhpcyBjYW4gYmUgZWFzaWx5IGF2b2lkZWQgYnkgYSBsaXR0bGUgUFYtQUJJIG1vZGlmaWNh
+dGlvbgo+Pj4+Pj4+PiBpbnRyb2R1Y2luZyBwZXItY3B1IHVzZXIgYWRkcmVzcyBzcGFjZXMuCj4+
+Pj4+Pj4+Cj4+Pj4+Pj4+IFRoaXMgc2VyaWVzIGlzIG1lYW50IGFzIGEgcmVwbGFjZW1lbnQgZm9y
+IEFuZHJldydzIHBhdGNoIHNlcmllczoKPj4+Pj4+Pj4gIng4NjogUHJlcmVxdWlzaXRlIHdvcmsg
+Zm9yIGEgWGVuIEtBSVNFUiBzb2x1dGlvbiIuCj4+Pj4+Pj4KPj4+Pj4+PiBDb25zaWRlcmluZyBp
+biBwYXJ0aWN1bGFyIHRoZSB0d28gcmV2ZXJ0cywgd2hhdCBJJ20gbWlzc2luZyBoZXJlCj4+Pj4+
+Pj4gaXMgYSBjbGVhciBkZXNjcmlwdGlvbiBvZiB0aGUgbWVhbmluZ2Z1bCBhZGRpdGlvbmFsIHBy
+b3RlY3Rpb24gdGhpcwo+Pj4+Pj4+IGFwcHJvYWNoIHByb3ZpZGVzIG92ZXIgdGhlIGJhbmQtYWlk
+LiBGb3IgY29udGV4dCBzZWUgYWxzbwo+Pj4+Pj4+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOC0wMS9tc2cwMTczNS5odG1sIAo+Pj4+Pj4K
+Pj4+Pj4+IE15IGFwcHJvYWNoIHN1cHBvcnRzIG1hcHBpbmcgb25seSB0aGUgZm9sbG93aW5nIGRh
+dGEgd2hpbGUgdGhlIGd1ZXN0IGlzCj4+Pj4+PiBydW5uaW5nIChhcGFydCBmb3JtIHRoZSBndWVz
+dCdzIG93biBkYXRhLCBvZiBjb3Vyc2UpOgo+Pj4+Pj4KPj4+Pj4+IC0gdGhlIHBlci12Y3B1IGVu
+dHJ5IHN0YWNrcyBvZiB0aGUgZG9tYWluIHdoaWNoIHdpbGwgY29udGFpbiBvbmx5IHRoZQo+Pj4+
+Pj4gICBndWVzdCdzIHJlZ2lzdGVycyBzYXZlZCB3aGVuIGFuIGludGVycnVwdCBvY2N1cnMKPj4+
+Pj4+IC0gdGhlIHBlci12Y3B1IEdEVHMgYW5kIFRTU3Mgb2YgdGhlIGRvbWFpbgo+Pj4+Pj4gLSB0
+aGUgSURUCj4+Pj4+PiAtIHRoZSBpbnRlcnJ1cHQgaGFuZGxlciBjb2RlIChhcmNoL3g4Ni94ODZf
+NjQvW2NvbXBhdC9dZW50cnkuUwo+Pj4+Pj4KPj4+Pj4+IEFsbCBvdGhlciBoeXBlcnZpc29yIGRh
+dGEgYW5kIGNvZGUgY2FuIGJlIGNvbXBsZXRlbHkgaGlkZGVuIGZyb20gdGhlCj4+Pj4+PiBndWVz
+dHMuCj4+Pj4+Cj4+Pj4+IEkgdW5kZXJzdGFuZCB0aGF0LiBXaGF0IEknbSBub3QgY2xlYXIgYWJv
+dXQgaXM6IFdoaWNoIHBhcnRzIG9mCj4+Pj4+IHRoZSBhZGRpdGlvbmFsbHkgaGlkZGVuIGRhdGEg
+YXJlIGFjdHVhbGx5IG5lY2Vzc2FyeSAob3IgYXQgbGVhc3QKPj4+Pj4gdmVyeSBkZXNpcmFibGUp
+IHRvIGhpZGU/Cj4+Pj4KPj4+PiBOZWNlc3Nhcnk6Cj4+Pj4gLSBvdGhlciBndWVzdHMnIG1lbW9y
+eSAoZS5nLiBwaHlzaWNhbCBtZW1vcnkgMToxIG1hcHBpbmcpCj4+Pj4gLSBkYXRhIGZyb20gb3Ro
+ZXIgZ3Vlc3RzIGUuZy5pbiBzdGFjayBwYWdlcywgZGVidWcgYnVmZmVycywgSS9PIGJ1ZmZlcnMs
+Cj4+Pj4gICBjb2RlIGVtdWxhdG9yIGJ1ZmZlcnMKPj4+PiAtIG90aGVyIGd1ZXN0cycgcmVnaXN0
+ZXIgdmFsdWVzIGUuZy4gaW4gdmNwdSBzdHJ1Y3R1cmUKPj4+Cj4+PiBBbGwgb2YgdGhpcyBpcyBh
+bHJlYWR5IGJlaW5nIG1hZGUgaW52aXNpYmxlIGJ5IHRoZSBiYW5kLWFpZCAod2l0aCB0aGUKPj4+
+IGV4Y2VwdGlvbiBvZiBsZWZ0b3ZlcnMgb24gdGhlIGh5cGVydmlzb3Igc3RhY2tzIGFjcm9zcyBj
+b250ZXh0Cj4+PiBzd2l0Y2hlcywgd2hpY2ggd2UndmUgYWxyZWFkeSBzYWlkIGNvdWxkIGJlIHRh
+a2VuIGNhcmUgb2YgYnkKPj4+IG1lbXNldCgpaW5nIHRoYXQgYXJlYSkuIEknbSBhc2tpbmcgYWJv
+dXQgdGhlIF9hZGRpdGlvbmFsXyBiZW5lZml0cwo+Pj4gb2YgeW91ciBhcHByb2FjaC4KPj4KPj4g
+SSdtIHF1aXRlIHN1cmUgdGhlIHBlcmZvcm1hbmNlIHdpbGwgYmUgbXVjaCBiZXR0ZXIgYXMgaXQg
+ZG9lc24ndCByZXF1aXJlCj4+IHBlciBwaHlzaWNhbCBjcHUgTDQgcGFnZSB0YWJsZXMsIGJ1dCBq
+dXN0IGEgc2hhZG93IEw0IHRhYmxlIGZvciBlYWNoCj4+IGd1ZXN0IEw0IHRhYmxlLCBzaW1pbGFy
+IHRvIHRoZSBMaW51eCBrZXJuZWwgS1BUSSBhcHByb2FjaC4KPiAKPiBCdXQgaXNuJ3QgdGhhdCBt
+b2RlbCBoYXZpbmcgdGhlIHNhbWUgc3luY2hyb25pemF0aW9uIGlzc3VlcyB1cG9uCj4gZ3Vlc3Qg
+TDQgdXBkYXRlcyB3aGljaCBBbmRyZXcgd2FzIGZpZ2h0aW5nIHdpdGg/CgpJIGRvbid0IHRoaW5r
+IHNvLCBhcyB0aGUgbnVtYmVyIG9mIHNoYWRvd3Mgd2lsbCBhbHdheXMgb25seSBiZSBtYXguIDEK
+d2l0aCBteSBhcHByb2FjaC4KCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
