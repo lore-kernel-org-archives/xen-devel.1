@@ -1,25 +1,20 @@
-From: Julien Grall <julien.grall@linaro.org>
-Subject: Re: [PATCH 2/7] ARM: vGICv3: drop
-	GUEST_GICV3_RDIST_REGIONS symbol
-Date: Wed, 24 Jan 2018 17:01:10 +0000
-Message-ID: <d08eeb7b-5415-ef02-e0c6-642600f1cd11@linaro.org>
-References: <20180124143517.18469-1-andre.przywara@linaro.org>
- <20180124143517.18469-3-andre.przywara@linaro.org>
- <74c3f80d-69fc-60dc-da93-449ea88b0e74@linaro.org>
- <c108ff3c-021f-de87-4788-1c48fb182fa9@linaro.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: [PATCH 1/5] xen/arm: Introduce enable callback to
+ enable a capabilities on each online CPU
+Date: Wed, 24 Jan 2018 17:05:32 +0000
+Message-ID: <24B6C00C-5114-48D8-A21A-C7FE1E11328F@gmail.com>
+References: <20180116142337.24942-1-julien.grall@linaro.org>
+ <20180116142337.24942-2-julien.grall@linaro.org>
+ <alpine.DEB.2.10.1801161554390.6440@sstabellini-ThinkPad-X260>
+ <3f287ea5-f122-b375-4d98-e33733516816@linaro.org>
+ <7F2FA84A-2CBA-45EC-9073-7FC86205BE5A@gmail.com>
+ <fbca8a32-b800-dfdc-d3cf-27740d98c9cf@linaro.org>
+ <D1C765BC-DE91-439E-B7DE-27EEA33EBD12@gmail.com>
+ <ea0f07b2-c4b1-b2c1-0566-cb1b4154680e@linaro.org>
+Mime-Version: 1.0 (Mac OS X Mail 11.2 \(3445.5.20\))
+Content-Type: multipart/mixed; boundary="===============4218876180508032089=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=szm7=et=linaro.org=julien.grall@srs-us1.protection.inumbo.net>)
- id 1eeOQF-0000H1-Hp
- for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 17:01:15 +0000
-Received: by mail-wr0-x243.google.com with SMTP id 36so4797985wrh.1
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jan 2018 09:01:13 -0800 (PST)
-In-Reply-To: <c108ff3c-021f-de87-4788-1c48fb182fa9@linaro.org>
-Content-Language: en-US
+In-Reply-To: <ea0f07b2-c4b1-b2c1-0566-cb1b4154680e@linaro.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,48 +23,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andre Przywara <andre.przywara@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
+To: Julien Grall <julien.grall@linaro.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@linaro.org, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgQW5kcmUsCgpPbiAyNC8wMS8xOCAxNjo1OCwgQW5kcmUgUHJ6eXdhcmEgd3JvdGU6Cj4gT24g
-MjQvMDEvMTggMTY6MTMsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4gSGkgQW5kcmUsCj4+Cj4+IE9u
-IDI0LzAxLzE4IDE0OjM1LCBBbmRyZSBQcnp5d2FyYSB3cm90ZToKPj4+IEFyY2hpdGVjdHVyYWxs
-eSB0aGVyZSBpcyBvbmx5IG9uZSBHSUN2MyByZWRpc3RyaWJ1dG9yIHJlZ2lvbi4KPj4+IERyb3Ag
-dGhlIHN5bWJvbCB3aGljaCBzdWdnZXN0ZWQgdGhhdCB3YXMgYSBkZWxpYmFyYXRlIGNob2ljZSBm
-b3IgWGVuCj4+PiBndWVzdHMsIGluc3RlYWQgaGFyZCBjb2RlIHRoZSAiMSIgaW4gdGhlIGFwcHJv
-cHJpYXRlIHBsYWNlcywgYWxvbmcgd2l0aAo+Pj4gYSBjb21tZW50IHRvIGV4cGxhaW4gdGhlIHJl
-YXNvbnMuCj4+Pgo+Pj4gU2lnbmVkLW9mZi1ieTogQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnByenl3
-YXJhQGxpbmFyby5vcmc+Cj4+PiAtLS0KPj4+ICDCoCB4ZW4vYXJjaC9hcm0vdmdpYy12My5jwqDC
-oMKgwqDCoMKgwqAgfCAxNyArKysrKysrKysrKystLS0tLQo+Pj4gIMKgIHhlbi9pbmNsdWRlL3B1
-YmxpYy9hcmNoLWFybS5oIHzCoCAxIC0KPj4+ICDCoCAyIGZpbGVzIGNoYW5nZWQsIDEyIGluc2Vy
-dGlvbnMoKyksIDYgZGVsZXRpb25zKC0pCj4+Pgo+Pj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2Fy
-bS92Z2ljLXYzLmMgYi94ZW4vYXJjaC9hcm0vdmdpYy12My5jCj4+PiBpbmRleCBhZjE2ZGZkMDA1
-Li43ZDNlYTE3MWI0IDEwMDY0NAo+Pj4gLS0tIGEveGVuL2FyY2gvYXJtL3ZnaWMtdjMuYwo+Pj4g
-KysrIGIveGVuL2FyY2gvYXJtL3ZnaWMtdjMuYwo+Pj4gQEAgLTE2NDAsOCArMTY0MCwxOCBAQCBz
-dGF0aWMgaW50IHZnaWNfdjNfdmNwdV9pbml0KHN0cnVjdCB2Y3B1ICp2KQo+Pj4gIMKgIMKgIHN0
-YXRpYyBpbmxpbmUgdW5zaWduZWQgaW50IHZnaWNfdjNfcmRpc3RfY291bnQoc3RydWN0IGRvbWFp
-biAqZCkKPj4+ICDCoCB7Cj4+PiAtwqDCoMKgIHJldHVybiBpc19oYXJkd2FyZV9kb21haW4oZCkg
-PyB2Z2ljX3YzX2h3Lm5yX3JkaXN0X3JlZ2lvbnMgOgo+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgR1VFU1RfR0lDVjNfUkRJU1RfUkVHSU9OUzsKPj4+ICvCoMKgwqAgLyoKPj4+ICvC
-oMKgwqDCoCAqIEFyY2hpdGVjdHVyYWxseSB0aGVyZSBpcyBvbmx5IG9uZSBHSUN2MyByZWRpc3Ry
-aWJ1dG9yIHJlZ2lvbi4KPj4+ICvCoMKgwqDCoCAqIFRoZSBHSUN2MyBEVCBiaW5kaW5nIHByb3Zp
-c2lvbnMgZm9yIG11bHRpcGxlIHJlZ2lvbnMsIHNpbmNlCj4+PiB0aGVyZSBhcmUKPj4+ICvCoMKg
-wqDCoCAqIHBsYXRmb3JtcyBvdXQgdGhlcmUgd2hpY2ggYnJlYWsgdGhpcyBhcmNoaXRlY3R1cmFs
-IGFzc3VtcHRpb24uCj4+PiArwqDCoMKgwqAgKiBBQ1BJIGRvZXMgbm90IHN1cHBvcnQgdGhpcyB3
-b3JrYXJvdW5kIGF0IGFsbC4KPj4KPj4gVGhpcyBpcyBub3QgdHJ1ZS4gVGhlIEFDUEkgc3BlYyBz
-dXBwb3J0cyBtdWx0aXBsZSByZWdpb25zIG9mCj4+IHJlZGlzdHJpYnV0b3JzLiBXaGF0IEFDUEkg
-ZG9lcyBub3Qgc3VwcG9ydCBpcyBhIGRpZmZlcmVudCBzdHJpZGUuCj4gCj4gQWgsIHRoYXQncyB0
-cnVlLiBTb3JyeSBmb3IgdGhhdCwgSSB3YXMgYSBiaXQgdG9vIGVudGh1c2lhc3RpYyBoZXJlIDst
-KQo+IFdpbGwgY2hhbmdlIHRoZSBjb21tZW50LCBkZWZpbml0ZWx5Lgo+IEhvd2V2ZXIgSSB3b3Vs
-ZCBzdGlsbCBiZSBpbnRlcmVzdGVkIGluIGRyb3BwaW5nIHRoZQo+IEdVRVNUX0dJQ1YzX1JESVNU
-X1JFR0lPTlMgc3ltYm9sLCBwb3NzaWJseSByZXBsYWNpbmcgaXQgd2l0aAo+IERFRkFVTFRfR0lD
-VjNfUkRJU1RfUkVHSU9OUywgYXZvaWRpbmcgdGhlIG1pc2xlYWRpbmcgR1VFU1RfIHByZWZpeC4K
-CldoeSBHVUVTVF8gaXMgbWlzbGVhZGluZz8KCkJlYXIgaW4gbWluZCB0aGF0IHRoZSB0b29sc3Rh
-Y2sgaXMgaW4gY2hhcmdlIG9mIHRoZSBtZW1vcnkgbWFwLiBOb3QgdGhlIApoeXBlcnZpc29yLgoK
-VG9kYXksIHRoZSBtZW1vcnkgbWFwIGlzIHN0YXRpYyBhbmQgc28gcmF0aGVyIHRoYW4gaW1wbGVt
-ZW50aW5nIGEgYnVuY2ggCm9mIGh5cGVyY2FsbHMgdGhlIGh5cGVydmlzb3IgaXMgZGlyZWN0bHkg
-dXNpbmcgdGhlIHZhbHVlLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4218876180508032089==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_3E584181-A7C2-4ED2-8738-F20DFCD3344A"
+
+
+--Apple-Mail=_3E584181-A7C2-4ED2-8738-F20DFCD3344A
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+Hi Julien,
+
+> On 18 Jan 2018, at 10:56, Julien Grall <julien.grall@linaro.org> =
+wrote:
+>=20
+> On 17/01/18 14:31, Lars Kurth wrote:
+>> Hi Julien,
+>=20
+> Hi Lars,
+>=20
+...=20
+>> Normally this isn't a problem: only if we ever have to relicense the =
+code or if someone does code archeology
+>> When we relicensed the ACPI builder, it created all sorts of problems =
+as outlined in =
+https://www.slideshare.net/xen_com_mgr/ossa17-mixed-license-foss-projects =
+<https://www.slideshare.net/xen_com_mgr/ossa17-mixed-license-foss-projects=
+>
+>>> Lastly, we do have quite a bit of code in Xen coming from Linux (or =
+other project). A lot of them are not listed in =
+README.source/CONTRIBUTING. But only mention in the commit message (not =
+necessarily with Signed-off-by tag).
+>> That is true: which is why I have started fixing these, whenever I =
+found them and moved such information to README.source.
+>>> So I am quite interested to know what is the normal procedure here.
+>> I think:
+>> * Doing this via Signed-off-by tag is sufficient for a one-off-import
+>> * I would prefer if people added import related info README.source =
+files (and also in the commit message)
+>> Does this make sense?
+>=20
+> I think it makes sense. Do you expect to see the README.source =
+per-directory? Or one at top level?
+
+I think one somewhere at the top level of the ARM tree is sufficient. It =
+depends on how often you import code. It shouldn't block the series. =
+Just something to do at some point
+Lars
+
+
+--Apple-Mail=_3E584181-A7C2-4ED2-8738-F20DFCD3344A
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">Hi =
+Julien,<br class=3D""><div><br class=3D""><blockquote type=3D"cite" =
+class=3D""><div class=3D"">On 18 Jan 2018, at 10:56, Julien Grall &lt;<a =
+href=3D"mailto:julien.grall@linaro.org" =
+class=3D"">julien.grall@linaro.org</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><span =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; =
+white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+float: none; display: inline !important;" class=3D"">On 17/01/18 14:31, =
+Lars Kurth wrote:</span><br style=3D"font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><blockquote=
+ type=3D"cite" style=3D"font-family: Menlo-Regular; font-size: 11px; =
+font-style: normal; font-variant-caps: normal; font-weight: normal; =
+letter-spacing: normal; orphans: auto; text-align: start; text-indent: =
+0px; text-transform: none; white-space: normal; widows: auto; =
+word-spacing: 0px; -webkit-text-size-adjust: auto; =
+-webkit-text-stroke-width: 0px;" class=3D"">Hi Julien,<br =
+class=3D""></blockquote><br style=3D"font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><span =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; =
+white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+float: none; display: inline !important;" class=3D"">Hi Lars,</span><br =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; =
+white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;" =
+class=3D""><br style=3D"font-family: Menlo-Regular; font-size: 11px; =
+font-style: normal; font-variant-caps: normal; font-weight: normal; =
+letter-spacing: normal; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; word-spacing: 0px; =
+-webkit-text-stroke-width: 0px;" =
+class=3D""></div></blockquote>...&nbsp;<br class=3D""><blockquote =
+type=3D"cite" class=3D""><div class=3D""><blockquote type=3D"cite" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; orphans: auto; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; widows: auto; word-spacing: =
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" =
+class=3D"">Normally this isn't a problem: only if we ever have to =
+relicense the code or if someone does code archeology<br class=3D"">When =
+we relicensed the ACPI builder, it created all sorts of problems as =
+outlined in<span class=3D"Apple-converted-space">&nbsp;</span><a =
+href=3D"https://www.slideshare.net/xen_com_mgr/ossa17-mixed-license-foss-p=
+rojects" =
+class=3D"">https://www.slideshare.net/xen_com_mgr/ossa17-mixed-license-fos=
+s-projects</a><br class=3D""><blockquote type=3D"cite" class=3D"">Lastly, =
+we do have quite a bit of code in Xen coming from Linux (or other =
+project). A lot of them are not listed in README.source/CONTRIBUTING. =
+But only mention in the commit message (not necessarily with =
+Signed-off-by tag).<br class=3D""></blockquote>That is true: which is =
+why I have started fixing these, whenever I found them and moved such =
+information to&nbsp;README.source.<br class=3D""><blockquote type=3D"cite"=
+ class=3D"">So I am quite interested to know what is the normal =
+procedure here.<br class=3D""></blockquote>I think:<br class=3D"">* =
+Doing this via Signed-off-by tag is sufficient for a one-off-import<br =
+class=3D"">* I would prefer if people added import related info =
+README.source files (and also in the commit message)<br class=3D"">Does =
+this make sense?<br class=3D""></blockquote><br style=3D"font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><span =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; =
+white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+float: none; display: inline !important;" class=3D"">I think it makes =
+sense. Do you expect to see the README.source per-directory? Or one at =
+top level?</span><br style=3D"font-family: Menlo-Regular; font-size: =
+11px; font-style: normal; font-variant-caps: normal; font-weight: =
+normal; letter-spacing: normal; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; word-spacing: 0px; =
+-webkit-text-stroke-width: 0px;" class=3D""></div></blockquote><br =
+class=3D""></div><div>I think one somewhere at the top level of the ARM =
+tree is sufficient. It depends on how often you import code. It =
+shouldn't block the series. Just something to do at some =
+point</div><div>Lars</div><br class=3D""></body></html>=
+
+--Apple-Mail=_3E584181-A7C2-4ED2-8738-F20DFCD3344A--
+
+
+--===============4218876180508032089==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4218876180508032089==--
