@@ -1,19 +1,15 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: pvscsi is not supported by xl command
-Date: Wed, 24 Jan 2018 13:59:25 +0100
-Message-ID: <71831361-99bd-9ef8-218a-31db55d31f50@suse.com>
-References: <f784ecce-dc58-c841-5c00-8fc95f2017e2@oracle.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86/pv: Export pv_hypercall_table[] rather
+ than working around it in several ways
+Date: Wed, 24 Jan 2018 06:03:11 -0700
+Message-ID: <5A68921F02000078001A1F4B@prv-mh.provo.novell.com>
+References: <1516796169-30160-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=zlmm=et=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1eeKeL-0008Lq-Q0
- for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 12:59:33 +0000
-In-Reply-To: <f784ecce-dc58-c841-5c00-8fc95f2017e2@oracle.com>
-Content-Language: de-DE
+In-Reply-To: <1516796169-30160-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,23 +18,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dongli Zhang <dongli.zhang@oracle.com>, xen-devel@lists.xenproject.org
-Cc: Olaf Hering <olaf@aepfle.de>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, =?UTF-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjQvMDEvMTggMDY6MDgsIERvbmdsaSBaaGFuZyB3cm90ZToKPiBIaSBKdWVyZ2VuLAo+IAo+
-IFdvdWxkIHlvdSBwbGVhc2UgbGV0IG1lIGtub3cgaWYgcHZzY3NpIGlzIHN0aWxsIHN1cHBvcnRl
-ZCBieSB0aGUgbW9zdCByZWNlbnQKPiB4ZW4sIGFzICd2c2NzaScgaXMgbm90IHN1cHBvcnRlZCBp
-biBkb21VIGNvbmZpZyBmaWxlIGFuZCBzY3NpLWF0dGFjaC9zY3NpLWRldGFjaAo+IGFyZSBub3Qg
-c3VwcG9ydGVkIGJ5IHhsIGNvbW1hbmQuCj4gCj4gQXJlIHNjc2ktYXR0YWNoL3Njc2ktZGV0YWNo
-IHN0aWxsIG9uIHRoZSByb2FkbWFwIGFuZCB3aWxsIGJlIGFkZGVkIHRvIHhsIGluIHRoZQo+IGZ1
-dHVyZSwgb3IgdGhpcyBpcyBkZXByZWNhdGVkPwoKU2VlIGh0dHBzOi8vbGlzdHMueGVuLm9yZy9h
-cmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE3LTAyL21zZzAyMTYzLmh0bWwKCk5vIHVwZGF0ZSBz
-aW5jZSB0aGVuLgoKPiAKPiBJIGFzc3VtZSB0aGUgZm9sbG93aW5nIGxpbmsgaXMgZGVwcmVjYXRl
-ZCBhcyAndnNjc2knIGlzIG5vdCBzdXBwb3J0ZWQgYnkgeGwKPiBjb21tYW5kIGluIGNvbmZpZyBm
-aWxlOgo+IAo+IGh0dHBzOi8vd2lraS54ZW5wcm9qZWN0Lm9yZy93aWtpL1BhcmF2aXJ0dWFsaXpl
-ZF9TQ1NJCgpDdXJyZW50bHkgeWVzLiBTaG91bGQgYmUgdXBkYXRlZCB3aGVuZXZlciBhYm92ZSBw
-YXRjaGVzIG1ha2UgaXQgaW50bwpYZW4uCgoKSnVlcmdlbgoKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDI0LjAxLjE4IGF0IDEzOjE2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gVGhlIGZ1bmN0aW9ucyBpbiBjb21wYXQuYyBhcmUgdGhpbmcgd3JhcHBlcnMgYXJvdW5k
+IHRoZSBtYWluIGh5cGVyY2FsbHMsCj4gbWFzc2FnaW5nIGNlcnRhaW4gcGFyYW1ldGVycy4gIEhv
+d2V2ZXIsIHRoZXkgc2Vjb25kLWd1ZXNzIHRoZSBjb250ZW50IG9mCj4gcHZfaHlwZXJjYWxsX3Rh
+YmxlW10sIHdoaWNoIGlzIHByb2JsZW1hdGljIGZvciB0aGUgc2hpbSBjYXNlLiAgSW5zdGVhZCwK
+PiBhcnJhbmdlIGZvciB0aGVtIHRvIGNhbGwgdmlhIGZ1bmN0aW9uIHBvaW50ZXIsIHdoaWNoIHJl
+bW92ZXMgdGhlIG5lZWQgZm9yCj4gcHZfZ2V0X2h5cGVyY2FsbF9oYW5kbGVyKCkuCj4gCj4gV2l0
+aCBwdl9oeXBlcmNhbGxfdGFibGVbXSBleHBvcnRlZCwgdGhlcmUgaXMgbm8gbmVlZCBmb3IKPiBw
+dl9oeXBlcmNhbGxfdGFibGVfcmVwbGFjZSgpLCBzbyBpdHMgc2luZ2xlIGNhbGxzaXRlIGdldHMg
+bW9kaWZpZWQgdG8gY29wZS4KPiBUaGUgYmFja2luZyBjb2RlIGJlaGluZCBfX3ZhKF9fcGEoKSkg
+aXMgc3Vic3RhbnRpYWwsIGFuZCB0aGVyZSBpcyBubyBuZWVkIHRvCj4gY2FsY3VsYXRlIGl0IHJl
+cGVhdGVkbHkgKFhlbidzIC5yb2RhdGEgaXMgYWxzbyBjb250aWd1b3VzIGluIHRoZSBkaXJlY3Rt
+YXApLgo+IAo+IFdoaWxlIGFkanVzdGluZyB0aGUgZGVjbGFyYXRpb25zLCBndWFyZCBjb250ZW50
+IGluIGFyY2gveDg2L3B2IHdpdGggCj4gQ09ORklHX1BWLgo+IAo+IFRoZSBuZXQgZGlmZmVyZW5j
+ZSBpczoKPiAgIGFkZC9yZW1vdmU6IDAvMiBncm93L3NocmluazogNC8xIHVwL2Rvd246IDE3Ni8t
+MzIxICgtMTQ1KQo+ICAgZnVuY3Rpb24gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgb2xkICAgICBuZXcgICBkZWx0YQo+ICAgcHZfc2hpbV9zZXR1cF9kb20gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAxMTMwICAgIDEyNjYgICAgKzEzNgo+ICAgZG9fc2NoZWRfb3BfY29tcGF0
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgMTc2ICAgICAxOTIgICAgICsxNgo+ICAgY29tcGF0
+X3BoeXNkZXZfb3BfY29tcGF0ICAgICAgICAgICAgICAgICAgICAgIDkwICAgICAxMDYgICAgICsx
+Ngo+ICAgZG9fcGh5c2Rldl9vcF9jb21wYXQgICAgICAgICAgICAgICAgICAgICAgICAgIDk4ICAg
+ICAxMDYgICAgICArOAo+ICAgZG9fZXZlbnRfY2hhbm5lbF9vcF9jb21wYXQgICAgICAgICAgICAg
+ICAgICAgMTQ1ICAgICAxMjMgICAgIC0yMgo+ICAgcHZfZ2V0X2h5cGVyY2FsbF9oYW5kbGVyICAg
+ICAgICAgICAgICAgICAgICAgIDI4ICAgICAgIC0gICAgIC0yOAo+ICAgcHZfaHlwZXJjYWxsX3Rh
+YmxlX3JlcGxhY2UgICAgICAgICAgICAgICAgICAgMjcxICAgICAgIC0gICAgLTI3MQo+IAo+IFNp
+Z25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpS
+ZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
