@@ -1,24 +1,18 @@
-From: Andre Przywara <andre.przywara@linaro.org>
-Subject: Re: [PATCH v2 04/10] ARM: VGIC: streamline
-	gic_restore_pending_irqs()
-Date: Wed, 24 Jan 2018 17:43:17 +0000
-Message-ID: <86f68df2-3c7e-f01f-e1aa-e290db810925@linaro.org>
-References: <20171207161415.20380-1-andre.przywara@linaro.org>
- <20171207161415.20380-5-andre.przywara@linaro.org>
- <alpine.DEB.2.10.1712081334440.8052@sstabellini-ThinkPad-X260>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: Xen fails to boot inside QEMU on x86, no VMX:
+Date: Wed, 24 Jan 2018 09:46:06 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1801240945020.6440@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1801221544060.6440@sstabellini-ThinkPad-X260>
+ <31744ea0-7d08-5db8-8aaa-db27dfd49b73@citrix.com>
+ <alpine.DEB.2.10.1801221637010.6440@sstabellini-ThinkPad-X260>
+ <fb87196c-1a48-6c7b-fe44-d560bd17db07@citrix.com>
+ <5A670C1002000078001A16A3@prv-mh.provo.novell.com>
+ <alpine.DEB.2.10.1801231252311.6440@sstabellini-ThinkPad-X260>
+ <20180124091732.p2phuhrd5sktgz5f@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-2093169349-1516815967=:6440"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=5dpo=et=linaro.org=andre.przywara@srs-us1.protection.inumbo.net>)
- id 1eeP4w-0004Qt-LW
- for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 17:43:18 +0000
-Received: by mail-wm0-x243.google.com with SMTP id f3so10212879wmc.1
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jan 2018 09:43:14 -0800 (PST)
-In-Reply-To: <alpine.DEB.2.10.1712081334440.8052@sstabellini-ThinkPad-X260>
-Content-Language: en-GB
+In-Reply-To: <20180124091732.p2phuhrd5sktgz5f@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,86 +21,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@linaro.org>
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpzb3JyeSBmb3IgdGhlIGRlbGF5IG9uIHRoaXMsIEkganVzdCBmb3VuZCB0aGlzIGluIHBy
-ZXBhcmF0aW9uIGZvciBhIHJlcG9zdC4KCk9uIDA4LzEyLzE3IDIxOjQwLCBTdGVmYW5vIFN0YWJl
-bGxpbmkgd3JvdGU6Cj4gT24gVGh1LCA3IERlYyAyMDE3LCBBbmRyZSBQcnp5d2FyYSB3cm90ZToK
-Pj4gSW4gZ2ljX3Jlc3RvcmVfcGVuZGluZ19pcnFzKCkgd2UgcHVzaCBvdXIgcGVuZGluZyB2aXJ0
-dWFsIElSUXMgaW50byB0aGUKPj4gbGlzdCByZWdpc3RlcnMuIFRoaXMgZnVuY3Rpb24gaXMgY2Fs
-bGVkIG9uY2UgZnJvbSBhIEdJQyBjb250ZXh0IGFuZCBvbmNlCj4+IGZyb20gYSBWR0lDIGNvbnRl
-eHQuIFJlZmFjdG9yIHRoZSBjYWxscyBzbyB0aGF0IHdlIGhhdmUgb25seSBvbmUgY2FsbHNpdGUK
-Pj4gZnJvbSB0aGUgVkdJQyBjb250ZXh0LiBUaGlzIHdpbGwgaGVscCBzZXBhcmF0aW5nIHRoZSB0
-d28gd29ybGRzIGxhdGVyLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBBbmRyZSBQcnp5d2FyYSA8YW5k
-cmUucHJ6eXdhcmFAbGluYXJvLm9yZz4KPj4gLS0tCj4+ICB4ZW4vYXJjaC9hcm0vZG9tYWluLmMg
-ICAgIHwgIDEgKwo+PiAgeGVuL2FyY2gvYXJtL2dpYy5jICAgICAgICB8IDExICsrKysrLS0tLS0t
-Cj4+ICB4ZW4vYXJjaC9hcm0vdHJhcHMuYyAgICAgIHwgIDIgKy0KPj4gIHhlbi9pbmNsdWRlL2Fz
-bS1hcm0vZ2ljLmggfCAgMiArLQo+PiAgNCBmaWxlcyBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyks
-IDggZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vZG9tYWluLmMg
-Yi94ZW4vYXJjaC9hcm0vZG9tYWluLmMKPj4gaW5kZXggYTc0ZmYxYzA3Yy4uNzNmNGQ0YjJiMiAx
-MDA2NDQKPj4gLS0tIGEveGVuL2FyY2gvYXJtL2RvbWFpbi5jCj4+ICsrKyBiL3hlbi9hcmNoL2Fy
-bS9kb21haW4uYwo+PiBAQCAtMTg1LDYgKzE4NSw3IEBAIHN0YXRpYyB2b2lkIGN0eHRfc3dpdGNo
-X3RvKHN0cnVjdCB2Y3B1ICpuKQo+PiAgCj4+ICAgICAgLyogVkdJQyAqLwo+PiAgICAgIGdpY19y
-ZXN0b3JlX3N0YXRlKG4pOwo+PiArICAgIGdpY19pbmplY3Qobik7Cj4+ICAKPj4gICAgICAvKiBW
-RlAgKi8KPj4gICAgICB2ZnBfcmVzdG9yZV9zdGF0ZShuKTsKPj4gZGlmZiAtLWdpdCBhL3hlbi9h
-cmNoL2FybS9naWMuYyBiL3hlbi9hcmNoL2FybS9naWMuYwo+PiBpbmRleCBiYWM4YWRhMmJiLi4x
-ZjAwNjU0ZWY1IDEwMDY0NAo+PiAtLS0gYS94ZW4vYXJjaC9hcm0vZ2ljLmMKPj4gKysrIGIveGVu
-L2FyY2gvYXJtL2dpYy5jCj4+IEBAIC0zNiw4ICszNiw2IEBACj4+ICAjaW5jbHVkZSA8YXNtL3Zn
-aWMuaD4KPj4gICNpbmNsdWRlIDxhc20vYWNwaS5oPgo+PiAgCj4+IC1zdGF0aWMgdm9pZCBnaWNf
-cmVzdG9yZV9wZW5kaW5nX2lycXMoc3RydWN0IHZjcHUgKnYpOwo+PiAtCj4+ICBzdGF0aWMgREVG
-SU5FX1BFUl9DUFUodWludDY0X3QsIGxyX21hc2spOwo+PiAgCj4+ICAjZGVmaW5lIGxyX2FsbF9m
-dWxsKCkgKHRoaXNfY3B1KGxyX21hc2spID09ICgoMSA8PCBnaWNfaHdfb3BzLT5pbmZvLT5ucl9s
-cnMpIC0gMSkpCj4+IEBAIC05MSw4ICs4OSw2IEBAIHZvaWQgZ2ljX3Jlc3RvcmVfc3RhdGUoc3Ry
-dWN0IHZjcHUgKnYpCj4+ICAgICAgZ2ljX2h3X29wcy0+cmVzdG9yZV9zdGF0ZSh2KTsKPj4gIAo+
-PiAgICAgIGlzYigpOwo+PiAtCj4+IC0gICAgZ2ljX3Jlc3RvcmVfcGVuZGluZ19pcnFzKHYpOwo+
-PiAgfQo+PiAgCj4+ICAvKiBkZXNjLT5pcnEgbmVlZHMgdG8gYmUgZGlzYWJsZWQgYmVmb3JlIGNh
-bGxpbmcgdGhpcyBmdW5jdGlvbiAqLwo+PiBAQCAtNzE1LDExICs3MTEsMTQgQEAgb3V0Ogo+PiAg
-ICAgIHJldHVybiByYzsKPj4gIH0KPj4gIAo+PiAtdm9pZCBnaWNfaW5qZWN0KHZvaWQpCj4+ICt2
-b2lkIGdpY19pbmplY3Qoc3RydWN0IHZjcHUgKnYpCj4+ICB7Cj4+ICAgICAgQVNTRVJUKCFsb2Nh
-bF9pcnFfaXNfZW5hYmxlZCgpKTsKPj4gIAo+PiAtICAgIGdpY19yZXN0b3JlX3BlbmRpbmdfaXJx
-cyhjdXJyZW50KTsKPj4gKyAgICBnaWNfcmVzdG9yZV9wZW5kaW5nX2lycXModik7Cj4gCj4gVGhp
-cyBsb29rcyBzdXNwaWNpb3VzIHRvIG1lOiBnaWNfcmVzdG9yZV9wZW5kaW5nX2lycXMgY2FsbHMg
-Z2ljX3NldF9sci4KPiBJdCBkb2Vzbid0IGxvb2sgbGlrZSBnaWNfcmVzdG9yZV9wZW5kaW5nX2ly
-cXMgY2FuIGFjdHVhbGx5IGJlIGNhbGxlZCBmb3IKPiB2ICE9IGN1cnJlbnQuCgpHb29kIHBvaW50
-IQoKPiBIb3dldmVyLCBJIHRoaW5rIHRoYXQgd2UgY291bGQgcmVtb3ZlIHRoZSBjYWxsIHRvCj4g
-Z2ljX3Jlc3RvcmVfcGVuZGluZ19pcnFzIGZyb20gZ2ljX3Jlc3RvcmVfc3RhdGUgc2FmZWx5LCBi
-ZWNhdXNlIHdlIGNhbgo+IHN0aWxsIHJlbHkgb24gZ2ljX2luamVjdCBiZWluZyBjYWxsZWQgYmVm
-b3JlIGVudGVyaW5nIHRoZSBndWVzdC4KClllcywgSSBiZWxpZXZlIHNvIGFzIHdlbGwsIGFjdHVh
-bGx5IGZvdW5kIHRoaXMgd2hlbiBkZWJ1Z2dpbmcgdGhlIG5ldwpWR0lDLiBEZWJ1ZyBwcmludGtz
-IHNob3dlZCBMUiBpbmplY3Rpb25zIGhhcHBlbmluZyB0d2ljZSwgd2hpY2ggaXMKYWN0dWFsbHkg
-aGFybWZ1bCB3aXRoIHRoZSBuZXcgVkdJQyAoYmVjYXVzZSBpdCBzb21ldGltZXMgY2hhbmdlcyB0
-aGUKc3RhdGUgb2YgdGhlIHZpcnR1YWwgSVJRKS4KCj4gVGhlcmUgaXMgbm8gbmVlZCB0byBhZGQg
-YSBjYWxsIHRvIGdpY19pbmplY3QgaW4gY3R4dF9zd2l0Y2hfdG8sIEkgdGhpbmsuCgpZZXMsIEkg
-YWdyZWUuCgpTbyB0aGlzIHNpbXBsaWZpZXMgdGhpcyBwYXRjaCBxdWl0ZSBhIGxvdCwgYWN0dWFs
-bHkgdG8ganVzdCByZW1vdmluZyB0aGUKY2FsbCBvZiBnaWNfcmVzdG9yZV9wZW5kaW5nX2lycXMo
-KSwgYW5kIHRoZSBmb3J3YXJkIGRlY2xhcmF0aW9uLgpCdXQgaW4gY29udHJhc3QgdG8gdGhpcyB2
-MiBwYXRjaCBoZXJlICh3aGljaCB3YXMgcmVhbGx5IGp1c3QKcmVmYWN0b3JpbmcpIHRoaXMgY2hh
-bmdlcyBiZWhhdmlvdXIgbm93LCBzbyBuZWVkcyBzb21lIHRlc3RpbmcgKHdvcmtzCmZvciBtZSAo
-dG0pLCB0aG91Z2gpCgpDaGVlcnMsCkFuZHJlLgoKPj4gKyAgICBpZiAoIHYgIT0gY3VycmVudCAp
-Cj4+ICsgICAgICAgIHJldHVybjsKPj4gIAo+PiAgICAgIGlmICggIWxpc3RfZW1wdHkoJmN1cnJl
-bnQtPmFyY2gudmdpYy5scl9wZW5kaW5nKSAmJiBscl9hbGxfZnVsbCgpICkKPj4gICAgICAgICAg
-Z2ljX2h3X29wcy0+dXBkYXRlX2hjcl9zdGF0dXMoR0lDSF9IQ1JfVUlFLCB0cnVlKTsKPj4gZGlm
-ZiAtLWdpdCBhL3hlbi9hcmNoL2FybS90cmFwcy5jIGIveGVuL2FyY2gvYXJtL3RyYXBzLmMKPj4g
-aW5kZXggZmYzZDZmZjJhYS4uN2ZkNjc2ZWQ5ZCAxMDA2NDQKPj4gLS0tIGEveGVuL2FyY2gvYXJt
-L3RyYXBzLmMKPj4gKysrIGIveGVuL2FyY2gvYXJtL3RyYXBzLmMKPj4gQEAgLTIyOTgsNyArMjI5
-OCw3IEBAIHZvaWQgbGVhdmVfaHlwZXJ2aXNvcl90YWlsKHZvaWQpCj4+ICAgICAgewo+PiAgICAg
-ICAgICBsb2NhbF9pcnFfZGlzYWJsZSgpOwo+PiAgICAgICAgICBpZiAoIXNvZnRpcnFfcGVuZGlu
-ZyhzbXBfcHJvY2Vzc29yX2lkKCkpKSB7Cj4+IC0gICAgICAgICAgICBnaWNfaW5qZWN0KCk7Cj4+
-ICsgICAgICAgICAgICBnaWNfaW5qZWN0KGN1cnJlbnQpOwo+PiAgCj4+ICAgICAgICAgICAgICAv
-Kgo+PiAgICAgICAgICAgICAgICogSWYgdGhlIFNFcnJvcnMgaGFuZGxlIG9wdGlvbiBpcyAiRElW
-RVJTRSIsIHdlIGhhdmUgdG8gcHJldmVudAo+PiBkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvYXNt
-LWFybS9naWMuaCBiL3hlbi9pbmNsdWRlL2FzbS1hcm0vZ2ljLmgKPj4gaW5kZXggNTg3YTE0Zjhi
-OS4uMjhjZjE2NjU0YSAxMDA2NDQKPj4gLS0tIGEveGVuL2luY2x1ZGUvYXNtLWFybS9naWMuaAo+
-PiArKysgYi94ZW4vaW5jbHVkZS9hc20tYXJtL2dpYy5oCj4+IEBAIC0yMzUsNyArMjM1LDcgQEAg
-ZXh0ZXJuIGludCBnaWNfcm91dGVfaXJxX3RvX2d1ZXN0KHN0cnVjdCBkb21haW4gKiwgdW5zaWdu
-ZWQgaW50IHZpcnEsCj4+ICBpbnQgZ2ljX3JlbW92ZV9pcnFfZnJvbV9ndWVzdChzdHJ1Y3QgZG9t
-YWluICpkLCB1bnNpZ25lZCBpbnQgdmlycSwKPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHN0cnVjdCBpcnFfZGVzYyAqZGVzYyk7Cj4+ICAKPj4gLWV4dGVybiB2b2lkIGdpY19pbmpl
-Y3Qodm9pZCk7Cj4+ICtleHRlcm4gdm9pZCBnaWNfaW5qZWN0KHN0cnVjdCB2Y3B1ICp2KTsKPj4g
-IGV4dGVybiB2b2lkIGdpY19jbGVhcl9wZW5kaW5nX2lycXMoc3RydWN0IHZjcHUgKnYpOwo+PiAg
-ZXh0ZXJuIGludCBnaWNfZXZlbnRzX25lZWRfZGVsaXZlcnkodm9pZCk7CgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-2093169349-1516815967=:6440
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Wed, 24 Jan 2018, Roger Pau Monné wrote:
+> On Tue, Jan 23, 2018 at 04:47:51PM -0800, Stefano Stabellini wrote:
+> > On Tue, 23 Jan 2018, Jan Beulich wrote:
+> > > >>> On 23.01.18 at 01:41, <andrew.cooper3@citrix.com> wrote:
+> > > > On 23/01/2018 00:38, Stefano Stabellini wrote:
+> > > >> On Tue, 23 Jan 2018, Andrew Cooper wrote:
+> > > >>> On 22/01/2018 23:48, Stefano Stabellini wrote:
+> > > >>>> Hi all,
+> > > >>>>
+> > > >>>> Running Xen inside QEMU x86 without KVM acceleartion and without VMX
+> > > >>>> emulation leads to the failure appended below.
+> > > >>>>
+> > > >>>> This trivial workaround "fixes" the problem:
+> > > >>>>
+> > > >>>> diff --git a/xen/arch/x86/extable.c b/xen/arch/x86/extable.c
+> > > >>>> index 72f30d9..a67d6c1 100644
+> > > >>>> --- a/xen/arch/x86/extable.c
+> > > >>>> +++ b/xen/arch/x86/extable.c
+> > > >>>> @@ -168,7 +168,6 @@ static int __init stub_selftest(void)
+> > > >>>>                         _ASM_EXTABLE(.Lret%=, .Lfix%=)
+> > > >>>>                         : [exn] "+m" (res)
+> > > >>>>                         : [stb] "r" (addr), "a" (tests[i].rax));
+> > > >>>> -        ASSERT(res == tests[i].res.raw);
+> > > >>>>      }
+> > > >>>>  
+> > > >>>>      return 0;
+> > > >>>>
+> > > >>>>
+> > > >>>> Any suggestions?
+> > > >>> Which i failed?  This will probably be an emulation bug in Qemu.
+> > > >> i=2 is the culprit
+> > > > 
+> > > > Qemu doesn't emulate %rsp-based memory accesses properly.  It should
+> > > > raise #SS[0], and is presumably raising #GP[0] instead.
+> > > 
+> > > Right, the value on %rax supports that suspicion. Dropping the
+> > > ASSERT() is no option, of course. If we were able to reliably
+> > > detect that we're running under qemu, we could cater for this
+> > > special case, but I can't seem to be able to think of other options
+> > > besides adding a command line option allowing to bypass the self
+> > > test.
+> > 
+> > I am going to give a look at the QEMU side of things. However, even if I
+> > fix the bug in QEMU, it won't solve the problem for all the QEMU
+> > instances already out there, shipped by distros, etc.
+> > 
+> > So, I think that regardless of the QEMU fix, we also need to add a
+> > workaround in Xen. We can detect QEMU from the cpuid string, which is
+> > going to be TCGTCGTCGTCG.
+> > 
+> > What do you think of something like below?
+> 
+> The shim code added a probe_hypervisor call into __start_xen, do you
+> think you could hook this test there?
+> 
+> It might make sense to have something like:
+> 
+> enum guest_type {
+>     NONE,
+>     XEN,
+>     QEMU,
+> };
+> enum guest_type guest;
+> 
+> As a global variable that would replace xen_guest.
+
+I could hook the test there, but then the QEMU workaround would be tied
+to CONFIG_XEN_GUEST, when actually it doesn't have anything to do with
+it.
+
+Unless you are also suggesting to move probe_hypervisor out of
+xen/arch/x86/guest?
+--8323329-2093169349-1516815967=:6440
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-2093169349-1516815967=:6440--
