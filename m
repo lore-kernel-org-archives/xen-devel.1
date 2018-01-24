@@ -1,20 +1,20 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v3 2/7] gcov: introduce hooks for the sysctl
-Date: Wed, 24 Jan 2018 11:13:49 +0000
-Message-ID: <20180124111349.45zh4lufqxix4au2@citrix.com>
+Subject: Re: [PATCH v3 3/7] coverage: introduce generic file
+Date: Wed, 24 Jan 2018 11:14:21 +0000
+Message-ID: <20180124111421.y73c7euuln2yjosp@citrix.com>
 References: <20180124100125.80443-1-roger.pau@citrix.com>
- <20180124100125.80443-3-roger.pau@citrix.com>
+ <20180124100125.80443-4-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=vftr=et=citrix.com=prvs=555ec31fe=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1eeJ09-0006rR-4o
- for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 11:13:57 +0000
+ id 1eeJ10-00070n-Op
+ for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 11:14:50 +0000
 Content-Disposition: inline
-In-Reply-To: <20180124100125.80443-3-roger.pau@citrix.com>
+In-Reply-To: <20180124100125.80443-4-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,11 +27,13 @@ To: Roger Pau Monne <roger.pau@citrix.com>
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKYW4gMjQsIDIwMTggYXQgMTA6MDE6MjBBTSArMDAwMCwgUm9nZXIgUGF1IE1vbm5l
-IHdyb3RlOgo+IFNvIHRoYXQgb3RoZXIgaW1wbGVtZW50YXRpb25zIG9mIHRoZSBzeXNjdGwgY2Fu
-IGJlIGFkZGVkLgo+IAo+IFNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBh
-dUBjaXRyaXguY29tPgo+IEFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+
-CgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBKYW4gMjQsIDIwMTggYXQgMTA6MDE6MjFBTSArMDAwMCwgUm9nZXIgUGF1IE1vbm5l
+IHdyb3RlOgo+IEl0IHdpbGwgY29udGFpbiB0aGUgZ2VuZXJpYyBpbXBsZW1lbnRhdGlvbiBvZiBz
+eXNjdGxfY292X29wLCB3aGljaAo+IHdpbGwgYmUgc2hhcmVkIGJldHdlZW4gYWxsIHRoZSBjb3Zl
+cmFnZSBpbXBsZW1lbnRhdGlvbnMuCj4gCj4gU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7D
+qSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4gUmV2aWV3ZWQtYnk6IEtvbnJhZCBSemVzenV0ZWsg
+V2lsayA8a29ucmFkLndpbGtAb3JhY2xlLmNvbT4KCkFja2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1
+MkBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
