@@ -1,20 +1,22 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: [PATCH 1/5] xen/arm: Introduce enable callback to
- enable a capabilities on each online CPU
-Date: Wed, 24 Jan 2018 17:05:32 +0000
-Message-ID: <24B6C00C-5114-48D8-A21A-C7FE1E11328F@gmail.com>
-References: <20180116142337.24942-1-julien.grall@linaro.org>
- <20180116142337.24942-2-julien.grall@linaro.org>
- <alpine.DEB.2.10.1801161554390.6440@sstabellini-ThinkPad-X260>
- <3f287ea5-f122-b375-4d98-e33733516816@linaro.org>
- <7F2FA84A-2CBA-45EC-9073-7FC86205BE5A@gmail.com>
- <fbca8a32-b800-dfdc-d3cf-27740d98c9cf@linaro.org>
- <D1C765BC-DE91-439E-B7DE-27EEA33EBD12@gmail.com>
- <ea0f07b2-c4b1-b2c1-0566-cb1b4154680e@linaro.org>
-Mime-Version: 1.0 (Mac OS X Mail 11.2 \(3445.5.20\))
-Content-Type: multipart/mixed; boundary="===============4218876180508032089=="
+From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Subject: Re: [PATCH 1/2] x86/clang: fix build with indirect
+	thunks
+Date: Wed, 24 Jan 2018 17:06:25 +0000
+Message-ID: <20180124170625.t6fsnfenzp3bqjme@MacBook-Pro-de-Roger.local>
+References: <20180124154849.84889-1-roger.pau@citrix.com>
+ <20180124154849.84889-2-roger.pau@citrix.com>
+ <5A68C51802000078001A2121@prv-mh.provo.novell.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <ea0f07b2-c4b1-b2c1-0566-cb1b4154680e@linaro.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=rcjb=et=citrix.com=prvs=555701784=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1eeOXp-0000f9-VH
+ for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 17:09:05 +0000
+Content-Disposition: inline
+In-Reply-To: <5A68C51802000078001A2121@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,167 +25,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@linaro.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@linaro.org, xen-devel <xen-devel@lists.xen.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, IanJackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4218876180508032089==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_3E584181-A7C2-4ED2-8738-F20DFCD3344A"
-
-
---Apple-Mail=_3E584181-A7C2-4ED2-8738-F20DFCD3344A
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-Hi Julien,
-
-> On 18 Jan 2018, at 10:56, Julien Grall <julien.grall@linaro.org> =
-wrote:
->=20
-> On 17/01/18 14:31, Lars Kurth wrote:
->> Hi Julien,
->=20
-> Hi Lars,
->=20
-...=20
->> Normally this isn't a problem: only if we ever have to relicense the =
-code or if someone does code archeology
->> When we relicensed the ACPI builder, it created all sorts of problems =
-as outlined in =
-https://www.slideshare.net/xen_com_mgr/ossa17-mixed-license-foss-projects =
-<https://www.slideshare.net/xen_com_mgr/ossa17-mixed-license-foss-projects=
->
->>> Lastly, we do have quite a bit of code in Xen coming from Linux (or =
-other project). A lot of them are not listed in =
-README.source/CONTRIBUTING. But only mention in the commit message (not =
-necessarily with Signed-off-by tag).
->> That is true: which is why I have started fixing these, whenever I =
-found them and moved such information to README.source.
->>> So I am quite interested to know what is the normal procedure here.
->> I think:
->> * Doing this via Signed-off-by tag is sufficient for a one-off-import
->> * I would prefer if people added import related info README.source =
-files (and also in the commit message)
->> Does this make sense?
->=20
-> I think it makes sense. Do you expect to see the README.source =
-per-directory? Or one at top level?
-
-I think one somewhere at the top level of the ARM tree is sufficient. It =
-depends on how often you import code. It shouldn't block the series. =
-Just something to do at some point
-Lars
-
-
---Apple-Mail=_3E584181-A7C2-4ED2-8738-F20DFCD3344A
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">Hi =
-Julien,<br class=3D""><div><br class=3D""><blockquote type=3D"cite" =
-class=3D""><div class=3D"">On 18 Jan 2018, at 10:56, Julien Grall &lt;<a =
-href=3D"mailto:julien.grall@linaro.org" =
-class=3D"">julien.grall@linaro.org</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><span =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-float: none; display: inline !important;" class=3D"">On 17/01/18 14:31, =
-Lars Kurth wrote:</span><br style=3D"font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><blockquote=
- type=3D"cite" style=3D"font-family: Menlo-Regular; font-size: 11px; =
-font-style: normal; font-variant-caps: normal; font-weight: normal; =
-letter-spacing: normal; orphans: auto; text-align: start; text-indent: =
-0px; text-transform: none; white-space: normal; widows: auto; =
-word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px;" class=3D"">Hi Julien,<br =
-class=3D""></blockquote><br style=3D"font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><span =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-float: none; display: inline !important;" class=3D"">Hi Lars,</span><br =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;" =
-class=3D""><br style=3D"font-family: Menlo-Regular; font-size: 11px; =
-font-style: normal; font-variant-caps: normal; font-weight: normal; =
-letter-spacing: normal; text-align: start; text-indent: 0px; =
-text-transform: none; white-space: normal; word-spacing: 0px; =
--webkit-text-stroke-width: 0px;" =
-class=3D""></div></blockquote>...&nbsp;<br class=3D""><blockquote =
-type=3D"cite" class=3D""><div class=3D""><blockquote type=3D"cite" =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; orphans: auto; text-align: start; text-indent: 0px; =
-text-transform: none; white-space: normal; widows: auto; word-spacing: =
-0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" =
-class=3D"">Normally this isn't a problem: only if we ever have to =
-relicense the code or if someone does code archeology<br class=3D"">When =
-we relicensed the ACPI builder, it created all sorts of problems as =
-outlined in<span class=3D"Apple-converted-space">&nbsp;</span><a =
-href=3D"https://www.slideshare.net/xen_com_mgr/ossa17-mixed-license-foss-p=
-rojects" =
-class=3D"">https://www.slideshare.net/xen_com_mgr/ossa17-mixed-license-fos=
-s-projects</a><br class=3D""><blockquote type=3D"cite" class=3D"">Lastly, =
-we do have quite a bit of code in Xen coming from Linux (or other =
-project). A lot of them are not listed in README.source/CONTRIBUTING. =
-But only mention in the commit message (not necessarily with =
-Signed-off-by tag).<br class=3D""></blockquote>That is true: which is =
-why I have started fixing these, whenever I found them and moved such =
-information to&nbsp;README.source.<br class=3D""><blockquote type=3D"cite"=
- class=3D"">So I am quite interested to know what is the normal =
-procedure here.<br class=3D""></blockquote>I think:<br class=3D"">* =
-Doing this via Signed-off-by tag is sufficient for a one-off-import<br =
-class=3D"">* I would prefer if people added import related info =
-README.source files (and also in the commit message)<br class=3D"">Does =
-this make sense?<br class=3D""></blockquote><br style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><span =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-float: none; display: inline !important;" class=3D"">I think it makes =
-sense. Do you expect to see the README.source per-directory? Or one at =
-top level?</span><br style=3D"font-family: Menlo-Regular; font-size: =
-11px; font-style: normal; font-variant-caps: normal; font-weight: =
-normal; letter-spacing: normal; text-align: start; text-indent: 0px; =
-text-transform: none; white-space: normal; word-spacing: 0px; =
--webkit-text-stroke-width: 0px;" class=3D""></div></blockquote><br =
-class=3D""></div><div>I think one somewhere at the top level of the ARM =
-tree is sufficient. It depends on how often you import code. It =
-shouldn't block the series. Just something to do at some =
-point</div><div>Lars</div><br class=3D""></body></html>=
-
---Apple-Mail=_3E584181-A7C2-4ED2-8738-F20DFCD3344A--
-
-
---===============4218876180508032089==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4218876180508032089==--
+T24gV2VkLCBKYW4gMjQsIDIwMTggYXQgMDk6NDA6NDBBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDI0LjAxLjE4IGF0IDE2OjQ4LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdy
+b3RlOgo+ID4gVGhlIGJ1aWxkIHdpdGggY2xhbmcgaXMgY3VycmVudGx5IGJyb2tlbiBiZWNhdXNl
+IGNsYW5nIHJlcXVpcmVzIGFzbQo+ID4gbWFjcm9zIHRvIGJlIGRlY2xhcmVkIGluc2lkZSB0aGUg
+c2FtZSBpbmxpbmUgYXNtIGRlY2xhcmF0aW9uIHdoZXJlCj4gPiB0aGV5IGFyZSB1c2VkLgo+IAo+
+IEkgZG9uJ3QgdW5kZXJzdGFuZCB0aGlzOiBXaGF0IGlmIEkgaGF2ZSB0d28gYXNtKCktcyBuZWVk
+aW5nIGl0PyBEb2VzCj4gdGhpcyBuZWVkIHRvIGJlIGRvbmUgaW4gZWFjaCBvbmU/IEknZCBleHBl
+Y3QgdGhpcyB0byByZXN1bHQgaW4gZHVwbGljYXRlCj4gZGVmaW5pdGlvbnMgb24gZ2FzIHRoZW4g
+KHdoaWNoIG1heSBvciBtYXkgbm90IGJlIGJlbmlnbikuCgpJdCdzIHF1aXRlIGZ1biwgdGhpcyBh
+cHByb2FjaCB3b3JrcyBmaW5lIHdpdGggY2xhbmcgcmVnYXJkbGVzcyBvZiB0aGUKbnVtYmVyIG9m
+IGFzbSgpLXMgbmVlZGluZyBpdC4gSXQgZG9lc24ndCBjb21wbGFpbiBhYm91dCBkdXBsaWNhdGUK
+bWFjcm9zIG9yIGFueXRoaW5nLiBPVE9IIGdjYyBjb21wbGFpbnMgd2l0aCAiRXJyb3I6IE1hY3Jv
+IGBmb28nIHdhcwphbHJlYWR5IGRlZmluZWQiLgoKT25lIG9wdGlvbiBtaWdodCBiZSB0byBndWFy
+ZCBpbmRpcmVjdF90aHVua19hc20uaCB3aXRoOgoKLmlmbmRlZiBJTkRJUkVDVF9USFVOS19BU00K
+LmVxdSBJTkRJUkVDVF9USFVOS19BU00sIDEKCi4uLgoKLmVuZGlmCgpOb3QgdGhlIGJlc3QsIGJ1
+dCBzaG91bGQgZG8gdGhlIHRyaWNrIEkgZ3Vlc3MuLi4KCj4gPiAtLS0gYS94ZW4vUnVsZXMubWsK
+PiA+ICsrKyBiL3hlbi9SdWxlcy5tawo+ID4gQEAgLTY2LDggKzY2LDEwIEBAIGVuZGlmCj4gPiAg
+Cj4gPiAgQUZMQUdTLXkgICAgICAgICAgICAgICAgKz0gLURfX0FTU0VNQkxZX18KPiA+ICAKPiA+
+IC0jIENsYW5nJ3MgYnVpbHQtaW4gYXNzZW1ibGVyIGNhbid0IGhhbmRsZSBlbWJlZGRlZCAuaW5j
+bHVkZSdzCj4gPiAtQ0ZMQUdTLSQoY2xhbmcpICAgICAgICAgKz0gLW5vLWludGVncmF0ZWQtYXMK
+PiA+ICsjIENsYW5nJ3MgYnVpbHQtaW4gYXNzZW1ibGVyIGRvZXNuJ3QgdW5kZXJzdGFuZCBhc3Nl
+bWJsZXIgZGlyZWN0aXZlcyB3aXRob3V0Cj4gPiArIyBhbiBhYnNvbHV0ZSB2YWx1ZToKPiA+ICsj
+IGh0dHBzOi8vYnVncy5sbHZtLm9yZy9zaG93X2J1Zy5jZ2k/aWQ9MjczNjkgCj4gPiArQUZMQUdT
+LSQoY2xhbmcpICAgICAgICAgKz0gLW5vLWludGVncmF0ZWQtYXMKPiAKPiBJIGFsc28gZG9uJ3Qg
+dW5kZXJzdGFuZCB0aGlzIC0gd2hlbiB5b3Ugc3dpdGNoIChiYWNrKSB0byBBRkxBR1MsIHlvdQo+
+IGRvbid0IGFmZmVjdCBDIGZpbGVzLgoKWWVzLCBpdCBhZmZlY3RzIEMgZmlsZXMgYmVjYXVzZSBu
+b3cgdGhleSBhcmUgYXNzZW1ibGVkIHVzaW5nIHRoZQppbnRlZ3JhdGVkIGFzLCBub3QgdGhlIGV4
+dGVybmFsIG9uZS4KCj4gRnVydGhlcm1vcmUgd2l0aG91dCB1c2luZyBpdHMgaW50ZWdyYXRlZCBh
+c3NlbWJsZXIKPiBmb3IgQyBmaWxlcyBhdCBwcmVzZW50IC0gaG93IGlzIHRoZSBidWlsZCBicm9r
+ZW4/CgpOb3QgdXNpbmcgdGhlIGludGVncmF0ZWQgYXMgaXMgYSB3b3JrYXJvdW5kIGZvciB1c2lu
+ZyB0aGUgaW5kaXJlY3QKdGh1bmsuIElmIHdlIGNhbiBtYW5hZ2UgdG8gZ2V0IHRoZSBpbmRpcmVj
+dCB0aHVuayB0byB3b3JrIHdpdGggdGhlCmludGVncmF0ZWQgYXMgdGhlcmUncyBubyBuZWVkIHRv
+IHVzZSB0aGUgZXh0ZXJuYWwgb25lIGZvciBDIGZpbGVzLgoKPiBJcyB0aGUgZGVzY3JpcHRpb24g
+b2YKPiB0aGUgY2hhbmdlIHBlcmhhcHMgaW4gbmVlZCBvZiBzb21lIHJlLXdvcmsgKGFuZCBtYXli
+ZSB0aGUgdGl0bGUgYXMKPiB3ZWxsKT8KPiAKPiBOb3IgYW0gSSBvZiB0aGUgb3BpbmlvbiB0aGF0
+IHRoZSBjb21tZW50IGFib3ZlIGlzIHJlYWxseSBjb3JyZWN0IC0KPiBJJ20gc3VyZSB0aGVyZSBh
+cmUgZGlyZWN0aXZlcyB3aGVyZSB0aGVpciBhc3NlbWJsZXIgc3VwcG9ydHMgbm9uLQo+IGNvbnN0
+YW50IHZhbHVlcyAoLmluY2x1ZGUgYmVpbmcgdGhlIG9idmlvdXMgZmlyc3QgY2FzZSBpbiB0aGUg
+Y29udGV4dAo+IGhlcmUpLgoKUmlnaHQsIGNsYW5nIG9ubHkgYWNjZXB0cyBjb25zdGFudCB2YWx1
+ZXMgZm9yIGFzc2VtYmxlciBkaXJlY3RpdmVzCmxpa2UgLnJlcHQgYW5kIC5za2lwLgoKPiBBbmQg
+ZmluYWxseSwgaWYgeW91IHN3aXRjaCBiYWNrIHRvIHVzZSBBRkxBR1MgaGVyZSwgeW91IHNob3Vs
+ZAo+IGVpdGhlciByZXN0b3JlIHRoZSBvcmlnaW5hbCBjb21tZW50IGFzIHdlbGwsIG9yIGV4cGxh
+aW4gaW4gdGhlCj4gZGVzY3JpcHRpb24gd2h5IGl0IGlzbid0IGFwcGxpY2FibGUgYW55bW9yZS4K
+Ckkgd2lsbCBjaGVjaywgYnV0IEknbSBmYWlybHkgc3VyZSB0aGF0IGFsbCB0aGUgY2xhbmcgdmVy
+c2lvbnMgdGhhdCBYZW4Kc3VwcG9ydHMgKD49IDMuNSkgc3VwcG9ydCAuY29kZTE2Ly5jb2RlMzIv
+LmNvZGU2NC4KCj4gPiAtLS0gYS94ZW4vYXJjaC94ODYvZXh0YWJsZS5jCj4gPiArKysgYi94ZW4v
+YXJjaC94ODYvZXh0YWJsZS5jCj4gPiBAQCAtMTU4LDcgKzE1OCw4IEBAIHN0YXRpYyBpbnQgX19p
+bml0IHN0dWJfc2VsZnRlc3Qodm9pZCkKPiA+ICAgICAgICAgIG1lbWNweShwdHIsIHRlc3RzW2ld
+Lm9wYywgQVJSQVlfU0laRSh0ZXN0c1tpXS5vcGMpKTsKPiA+ICAgICAgICAgIHVubWFwX2RvbWFp
+bl9wYWdlKHB0cik7Cj4gPiAgCj4gPiAtICAgICAgICBhc20gdm9sYXRpbGUgKCAiSU5ESVJFQ1Rf
+Q0FMTCAlW3N0Yl1cbiIKPiA+ICsgICAgICAgIGFzbSB2b2xhdGlsZSAoIElOQ0xVREVfSU5ESVJF
+Q1RfVEhVTksKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICJJTkRJUkVDVF9DQUxMICVbc3Ri
+XVxuIgo+IAo+IEJlc2lkZXMgdGhpcyBiZWluZyBzb21ld2hhdCB1Z2x5LCBoYXZpbmcgdG8gcmVt
+ZW1iZXIgdG8gYWRkCj4gdGhpcyBnb2luZyBmb3J3YXJkLCBzaG91bGQgYW55IG5ldyBpbmRpcmVj
+dCBjYWxscyBiZSBhZGRlZCwgaXMKPiBzdXJlbHkgcHJvbmUgdG8gYmUgZm9yZ290dGVuLgoKSSBk
+b24ndCBoYXZlIGEgYmV0dGVyIHNvbHV0aW9uIEFUTSBJJ20gYWZyYWlkLgoKUm9nZXIuCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
