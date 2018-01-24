@@ -1,23 +1,21 @@
-From: Julien Grall <julien.grall@linaro.org>
-Subject: Re: [PATCH 1/2] xen/arm: GICv3: Parse ITS information
- from the firmware tables later on
-Date: Wed, 24 Jan 2018 18:03:07 +0000
-Message-ID: <fa556e38-2e8c-3c9d-27a8-0f772b12caf4@linaro.org>
-References: <20180122182247.18490-1-julien.grall@linaro.org>
- <20180122182247.18490-2-julien.grall@linaro.org>
+From: George Dunlap <dunlapg@umich.edu>
+Subject: Re: [PATCH 3/6] xen/pvshim: identity pin shim vCPUs to
+	pCPUs
+Date: Wed, 24 Jan 2018 18:03:28 +0000
+Message-ID: <CAFLBxZaU48jzDX91CByN4jBShmB_fAXi=rYVLWsm3cwz8=6uHQ@mail.gmail.com>
+References: <20180117094814.32772-1-roger.pau@citrix.com>
+ <20180117094814.32772-4-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="001a114b4eda1141c00563897b7b"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=szm7=et=linaro.org=julien.grall@srs-us1.protection.inumbo.net>)
- id 1eePOC-00069l-JK
- for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 18:03:12 +0000
-Received: by mail-wm0-x241.google.com with SMTP id 143so10045472wma.5
- for <xen-devel@lists.xenproject.org>; Wed, 24 Jan 2018 10:03:10 -0800 (PST)
-In-Reply-To: <20180122182247.18490-2-julien.grall@linaro.org>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=kyrb=et=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
+ id 1eePOV-0006B2-V6
+ for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 18:03:32 +0000
+Received: by mail-qt0-x22b.google.com with SMTP id d54so12619289qtd.4
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Jan 2018 10:03:30 -0800 (PST)
+In-Reply-To: <20180117094814.32772-4-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,73 +24,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, andre.przywara@linaro.org
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAyMi8wMS8xOCAxODoyMiwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFRoZXJlIGFyZSBE
-ZXZpY2UgVHJlZSAoZS5nIGZvciB0aGUgRm91bmRhdGlvbiBNb2RlbCkgb3V0IHRoYXQgZGVzY3Jp
-YmVzIHRoZQo+IElUUyBidXQgTFBJcyBpcyBub3Qgc3VwcG9ydGVkIGJ5IHRoZSBwbGF0Zm9ybS4g
-Qm9vdGluZyB3aXRoIHN1Y2ggRFQgd2lsbAo+IHJlc3VsdCB0byBhbiBlYXJseSBEYXRhIEFib3J0
-LiBUaGUgc2FtZSBEVCBpcyBib290aW5nIGZpbmUgd2l0aCBhCj4gYmFyZW1ldGFsICBMaW51eCBi
-ZWNhdXNlIElUUyB3aWxsIGJlIGluaXRpYWxpemVkIG9ubHkgd2hlbiBMUElzIGlzCj4gc3VwcG9y
-dGVkLgo+IAo+IFdoaWxlIHRoaXMgaXMgYSBidWcgaW4gdGhlIERULCBJIHRoaW5rIFhlbiBzaG91
-bGQgYmUgYm9vdCB3aXRoIHRoZSBzYW1lCj4gaGFyZHdhcmUgbGV2ZWwgc3VwcG9ydCAoZS5nIElU
-UyB3aWxsIG5vdCBiZSB1c2VkKSBhcyB3aXRoIGEgYmFyZW1ldGFsCj4gTGludXguCj4gCj4gVGhl
-IHNsaWdodCBwcm9ibGVtIGlzIFhlbiBpcyByZWx5aW5nIG9uIGdpY3YzX2l0c19ob3N0X2hhc19p
-dHMoKSB0byBrbm93Cj4gaWYgSVRTIGNhbiBiZSB1c2VkLiBUaGUgbGlzdCBpcyBwb3B1bGF0ZWQg
-YnkgZ2ljdjNfaXRzX3tkdCxhY3BpfV9pbml0KCkuCj4gSXQgd291bGQgdGhlb3JpdGljYWwgYmUg
-cG9zc2libGUgdG8gZ2F0ZSB0aG9zZSB3aXRoIGEgY2hlY2sgb2YKPiBHSUNEX1RZUEVSLkxQSVMg
-YmVjYXVzZSB3ZSBkb24ndCBrbm93IHlldCB3aGV0aGVyIHRoZSBIVyBpcyBhbiBhY3R1YWwKPiBH
-SUN2My9HSUN2NC4KPiAKPiBMb29raW5nIGF0IHRoZSBjYWxsZXJzIG9mIGdpY3YzX2l0c19ob3N0
-X2hhc19pdHMoKSwgdGhleSB3aWxsIG9ubHkgYmUKPiBkb25lIGFmdGVyIGdpY3YzX2l0c19pbml0
-KCkgaXMgY2FsbGVkLiBUaGVyZWZvcmUgbW92ZSB0aGUgcGFyc2luZyBvZiBJVFMKPiBpbmZvcm1h
-dGlvbiBmcm9tIGZpcm13YXJlIHRhYmxlcyBsYXRlciBvbi4KPiAKPiBOb3RlIHRoYXQgZ2ljdjNf
-aXRzX2luaXQoKSBoYXMgYmVlbiBtb3ZlZCBhdCB0aGUgZW5kIG9mIHRoZSBmaWxlIHRvCj4gYXZv
-aWQgZm9yd2FyZCBkZWNsYXJhdGlvbi4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKdWxpZW4gR3JhbGwg
-PGp1bGllbi5ncmFsbEBsaW5hcm8ub3JnPgo+IAo+IC0tLQo+IAo+IEkgY2FuIG1vdmUgdGhlIGNv
-ZGUgbW92ZW1lbnQgaW4gYSBzZXBhcmF0ZSBwYXRjaCBpZiBuZWNlc3NhcnkuIEl0IHdhcwo+IHNt
-YWxsIGVub3VnaCB0aGF0IEkgdGhvdWdodCBpdCB3b3VsZCBub3QgYmUgd29ydGguCj4gLS0tCj4g
-ICB4ZW4vYXJjaC9hcm0vZ2ljLXYzLWl0cy5jICAgICAgICB8IDQ3ICsrKysrKysrKysrKysrKysr
-KysrKysrKystLS0tLS0tLS0tLS0tLS0KPiAgIHhlbi9hcmNoL2FybS9naWMtdjMuYyAgICAgICAg
-ICAgIHwgIDUgLS0tLS0KPiAgIHhlbi9pbmNsdWRlL2FzbS1hcm0vZ2ljX3YzX2l0cy5oIHwgMTIg
-LS0tLS0tLS0tLQo+ICAgMyBmaWxlcyBjaGFuZ2VkLCAzMCBpbnNlcnRpb25zKCspLCAzNCBkZWxl
-dGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2dpYy12My1pdHMuYyBiL3hl
-bi9hcmNoL2FybS9naWMtdjMtaXRzLmMKPiBpbmRleCBlNTdhZTA1NzcxLi5iMDFhMGQ5ZWI1IDEw
-MDY0NAo+IC0tLSBhL3hlbi9hcmNoL2FybS9naWMtdjMtaXRzLmMKPiArKysgYi94ZW4vYXJjaC9h
-cm0vZ2ljLXYzLWl0cy5jCj4gQEAgLTUxNSwyMSArNTE1LDYgQEAgc3RhdGljIGludCBnaWN2M19p
-dHNfaW5pdF9zaW5nbGVfaXRzKHN0cnVjdCBob3N0X2l0cyAqaHdfaXRzKQo+ICAgICAgIHJldHVy
-biAwOwo+ICAgfQo+ICAgCj4gLWludCBnaWN2M19pdHNfaW5pdCh2b2lkKQo+IC17Cj4gLSAgICBz
-dHJ1Y3QgaG9zdF9pdHMgKmh3X2l0czsKPiAtICAgIGludCByZXQ7Cj4gLQo+IC0gICAgbGlzdF9m
-b3JfZWFjaF9lbnRyeShod19pdHMsICZob3N0X2l0c19saXN0LCBlbnRyeSkKPiAtICAgIHsKPiAt
-ICAgICAgICByZXQgPSBnaWN2M19pdHNfaW5pdF9zaW5nbGVfaXRzKGh3X2l0cyk7Cj4gLSAgICAg
-ICAgaWYgKCByZXQgKQo+IC0gICAgICAgICAgICByZXR1cm4gcmV0Owo+IC0gICAgfQo+IC0KPiAt
-ICAgIHJldHVybiAwOwo+IC19Cj4gLQo+ICAgLyoKPiAgICAqIFRPRE86IEludmVzdGlnYXRlIHRo
-ZSBpbnRlcmFjdGlvbiB3aGVuIGEgZ3Vlc3QgcmVtb3ZlcyBhIGRldmljZSB3aGlsZQo+ICAgICog
-c29tZSBMUElzIGFyZSBzdGlsbCBpbiBmbGlnaHQuCj4gQEAgLTEwMTksNyArMTAwNCw3IEBAIHN0
-YXRpYyB2b2lkIGFkZF90b19ob3N0X2l0c19saXN0KHBhZGRyX3QgYWRkciwgcGFkZHJfdCBzaXpl
-LAo+ICAgfQo+ICAgCj4gICAvKiBTY2FuIHRoZSBEVCBmb3IgYW55IElUUyBub2RlcyBhbmQgY3Jl
-YXRlIGEgbGlzdCBvZiBob3N0IElUU2VzIG91dCBvZiBpdC4gKi8KPiAtdm9pZCBnaWN2M19pdHNf
-ZHRfaW5pdChjb25zdCBzdHJ1Y3QgZHRfZGV2aWNlX25vZGUgKm5vZGUpCj4gK3N0YXRpYyB2b2lk
-IGdpY3YzX2l0c19kdF9pbml0KGNvbnN0IHN0cnVjdCBkdF9kZXZpY2Vfbm9kZSAqbm9kZSkKPiAg
-IHsKPiAgICAgICBjb25zdCBzdHJ1Y3QgZHRfZGV2aWNlX25vZGUgKml0cyA9IE5VTEw7Cj4gICAK
-PiBAQCAtMTA1Niw3ICsxMDQxLDcgQEAgc3RhdGljIGludCBnaWN2M19pdHNfYWNwaV9wcm9iZShz
-dHJ1Y3QgYWNwaV9zdWJ0YWJsZV9oZWFkZXIgKmhlYWRlciwKPiAgICAgICByZXR1cm4gMDsKPiAg
-IH0KPiAgIAo+IC12b2lkIGdpY3YzX2l0c19hY3BpX2luaXQodm9pZCkKPiArc3RhdGljIHZvaWQg
-Z2ljdjNfaXRzX2FjcGlfaW5pdCh2b2lkKQo+ICAgewo+ICAgICAgIC8qIFBhcnNlIElUUyBpbmZv
-cm1hdGlvbiAqLwo+ICAgICAgIGFjcGlfdGFibGVfcGFyc2VfbWFkdChBQ1BJX01BRFRfVFlQRV9H
-RU5FUklDX1RSQU5TTEFUT1IsCj4gQEAgLTEwODEsOCArMTA2NiwzNiBAQCB1bnNpZ25lZCBsb25n
-IGdpY3YzX2l0c19tYWtlX2h3ZG9tX21hZHQoY29uc3Qgc3RydWN0IGRvbWFpbiAqZCwgdm9pZCAq
-YmFzZV9wdHIpCj4gICAKPiAgICAgICByZXR1cm4gc2l6ZW9mKHN0cnVjdCBhY3BpX21hZHRfZ2Vu
-ZXJpY190cmFuc2xhdG9yKSAqIHZnaWNfdjNfaXRzX2NvdW50KGQpOwo+ICAgfQo+ICsjZWxzZSAv
-KiAhQ09ORklHX0FDUEkgKi8KPiArCj4gK3N0YXRpYyB2b2lkIGdpY3YzX2l0c19hY3BpX2luaXQo
-dm9pZCkKPiArewo+ICsgICAgQVNTRVJUX1VOUkVBQ0hBQkxFKCk7Cj4gK30KPiArCj4gICAjZW5k
-aWYKPiAgIAo+ICtpbnQgZ2ljdjNfaXRzX2luaXQodm9pZCkKPiArewo+ICsgICAgc3RydWN0IGhv
-c3RfaXRzICpod19pdHM7Cj4gKyAgICBpbnQgcmV0Owo+ICsKPiArICAgIGlmICggYWNwaV9kaXNh
-YmxlZCApCj4gKyAgICAgICAgZ2ljdjNfaXRzX2R0X2luaXQoKTsKCkhtbW0gSSBhbSBub3Qgc3Vy
-ZSBob3cgSSB0ZXN0ZWQgdGhpcyBjb2RlLiBnaWN2M19pdHNfZHRfaW5pdCByZXF1aXJlIHRoZSAK
-RFQgbm9kZSBpbiBwYXJhbWV0ZXIuCgpJIHdpbGwgc2VuZCBhIG5ldyB2ZXJzaW9uLgoKQ2hlZXJz
-LAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+--001a114b4eda1141c00563897b7b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Jan 17, 2018 at 9:48 AM, Roger Pau Monne <roger.pau@citrix.com> wro=
+te:
+> Since VCPUOP_{up/down} already identity pins vCPU hotplug to pCPU
+> hotplug also pin the vCPUs to the pCPUs in the scheduler. This prevent
+> vCPU migration and should improve performance.
+>
+> While there also use __cpumask_set_cpu instead of cpumask_set_cpu,
+> there's no need to use the locked variant.
+>
+> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+
+Sorry, I just realized this -- we already have a way to pin a VM 1:1
+-- d->is_pinned should do what you want here without having to
+special-case the pvshim.
+
+It seems like something like the attached might be better (compile-tested o=
+nly).
+
+ -George
+
+--001a114b4eda1141c00563897b7b
+Content-Type: text/x-patch; charset="US-ASCII";
+	name="0001-x86-shim-Use-d-is_pinned-to-pin-the-shim.patch"
+Content-Disposition: attachment;
+	filename="0001-x86-shim-Use-d-is_pinned-to-pin-the-shim.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_jctdof910
+
+RnJvbSBlNjA5NGI5ZDYxYjk5YTNmZGJkNjQ4ZDljZWZiNzE5NDM2OTcyZjg4IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5j
+b20+CkRhdGU6IFdlZCwgMjQgSmFuIDIwMTggMTc6NTg6MzkgKzAwMDAKU3ViamVjdDogW1BBVENI
+XSB4ODYvc2hpbTogVXNlIGQtPmlzX3Bpbm5lZCB0byBwaW4gdGhlIHNoaW0KClJhdGhlciB0aGFu
+IHNwZWNpYWwtY2FzaW5nIGl0IGluc2lkZSBkb20wX3NldHVwX3ZjcHUoKQoKU2lnbmVkLW9mZi1i
+eTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgotLS0KIHhlbi9hcmNo
+L3g4Ni9kb20wX2J1aWxkLmMgfCAxNCArKystLS0tLS0tLS0tLQogeGVuL2NvbW1vbi9kb21haW4u
+YyAgICAgICB8ICA2ICsrKysrLQogMiBmaWxlcyBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDEy
+IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9kb20wX2J1aWxkLmMgYi94
+ZW4vYXJjaC94ODYvZG9tMF9idWlsZC5jCmluZGV4IDU1NTY2MGI4NTMuLjQ4M2NiNmNlZTkgMTAw
+NjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9kb20wX2J1aWxkLmMKKysrIGIveGVuL2FyY2gveDg2L2Rv
+bTBfYnVpbGQuYwpAQCAtMTM4LDE3ICsxMzgsOSBAQCBzdHJ1Y3QgdmNwdSAqX19pbml0IGRvbTBf
+c2V0dXBfdmNwdShzdHJ1Y3QgZG9tYWluICpkLAogCiAgICAgaWYgKCB2ICkKICAgICB7Ci0gICAg
+ICAgIGlmICggcHZfc2hpbSApCi0gICAgICAgIHsKLSAgICAgICAgICAgIF9fY3B1bWFza19zZXRf
+Y3B1KHZjcHVfaWQsIHYtPmNwdV9oYXJkX2FmZmluaXR5KTsKLSAgICAgICAgICAgIF9fY3B1bWFz
+a19zZXRfY3B1KHZjcHVfaWQsIHYtPmNwdV9zb2Z0X2FmZmluaXR5KTsKLSAgICAgICAgfQotICAg
+ICAgICBlbHNlCi0gICAgICAgIHsKLSAgICAgICAgICAgIGlmICggIWQtPmlzX3Bpbm5lZCAmJiAh
+ZG9tMF9hZmZpbml0eV9yZWxheGVkICkKLSAgICAgICAgICAgICAgICBjcHVtYXNrX2NvcHkodi0+
+Y3B1X2hhcmRfYWZmaW5pdHksICZkb20wX2NwdXMpOwotICAgICAgICAgICAgY3B1bWFza19jb3B5
+KHYtPmNwdV9zb2Z0X2FmZmluaXR5LCAmZG9tMF9jcHVzKTsKLSAgICAgICAgfQorICAgICAgICBp
+ZiAoICFkLT5pc19waW5uZWQgJiYgIWRvbTBfYWZmaW5pdHlfcmVsYXhlZCApCisgICAgICAgICAg
+ICBjcHVtYXNrX2NvcHkodi0+Y3B1X2hhcmRfYWZmaW5pdHksICZkb20wX2NwdXMpOworICAgICAg
+ICBjcHVtYXNrX2NvcHkodi0+Y3B1X3NvZnRfYWZmaW5pdHksICZkb20wX2NwdXMpOwogICAgIH0K
+IAogICAgIHJldHVybiB2OwpkaWZmIC0tZ2l0IGEveGVuL2NvbW1vbi9kb21haW4uYyBiL3hlbi9j
+b21tb24vZG9tYWluLmMKaW5kZXggNTU4MzE4ZTg1Mi4uNGNlNzk4MDU1MCAxMDA2NDQKLS0tIGEv
+eGVuL2NvbW1vbi9kb21haW4uYworKysgYi94ZW4vY29tbW9uL2RvbWFpbi5jCkBAIC0zMTgsNyAr
+MzE4LDExIEBAIHN0cnVjdCBkb21haW4gKmRvbWFpbl9jcmVhdGUoZG9taWRfdCBkb21pZCwgdW5z
+aWduZWQgaW50IGRvbWNyX2ZsYWdzLAogICAgIHsKICAgICAgICAgaWYgKCBoYXJkd2FyZV9kb21p
+ZCA8IDAgfHwgaGFyZHdhcmVfZG9taWQgPj0gRE9NSURfRklSU1RfUkVTRVJWRUQgKQogICAgICAg
+ICAgICAgcGFuaWMoIlRoZSB2YWx1ZSBvZiBoYXJkd2FyZV9kb20gbXVzdCBiZSBhIHZhbGlkIGRv
+bWFpbiBJRCIpOwotICAgICAgICBkLT5pc19waW5uZWQgPSBvcHRfZG9tMF92Y3B1c19waW47Cisg
+ICAgICAgIGQtPmlzX3Bpbm5lZCA9CisjaWZkZWYgQ09ORklHX1g4NgorICAgICAgICAgICAgcHZf
+c2hpbSA/IHRydWUgOgorI2VuZGlmCisgICAgICAgICAgICBvcHRfZG9tMF92Y3B1c19waW47CiAg
+ICAgICAgIGQtPmRpc2FibGVfbWlncmF0ZSA9IDE7CiAgICAgICAgIG9sZF9od2RvbSA9IGhhcmR3
+YXJlX2RvbWFpbjsKICAgICAgICAgaGFyZHdhcmVfZG9tYWluID0gZDsKLS0gCjIuMTUuMQoK
+--001a114b4eda1141c00563897b7b
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--001a114b4eda1141c00563897b7b--
