@@ -1,24 +1,15 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: XSA-254 SP2 for ARM (was Re: [PATCH 1/5] xen/arm:
- Introduce enable callback to enable a capabilities on each online CPU)
-Date: Wed, 24 Jan 2018 14:43:21 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1801241441010.6440@sstabellini-ThinkPad-X260>
-References: <20180116142337.24942-1-julien.grall@linaro.org>
- <20180116142337.24942-2-julien.grall@linaro.org>
- <alpine.DEB.2.10.1801161554390.6440@sstabellini-ThinkPad-X260>
- <3f287ea5-f122-b375-4d98-e33733516816@linaro.org>
- <7F2FA84A-2CBA-45EC-9073-7FC86205BE5A@gmail.com>
- <fbca8a32-b800-dfdc-d3cf-27740d98c9cf@linaro.org>
- <D1C765BC-DE91-439E-B7DE-27EEA33EBD12@gmail.com>
- <alpine.DEB.2.10.1801170914190.6440@sstabellini-ThinkPad-X260>
- <alpine.DEB.2.10.1801171341370.6440@sstabellini-ThinkPad-X260>
- <282e06f6-4c31-9062-05c8-13c084218302@linaro.org>
- <alpine.DEB.2.10.1801241410580.6440@sstabellini-ThinkPad-X260>
- <CAEC2CxpHiEu1fdriiV-gJj=rS+cOp3WHRCwHhsGUGSFShsSiNw@mail.gmail.com>
+Subject: Re: [PATCH 1/7] xen/arm32: entry: Consolidate
+ DEFINE_TRAP_ENTRY_* macros
+Date: Wed, 24 Jan 2018 15:03:05 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1801241502580.6440@sstabellini-ThinkPad-X260>
+References: <20180119134103.3390-1-julien.grall@linaro.org>
+ <20180119134103.3390-2-julien.grall@linaro.org>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1788972034-1516833802=:6440"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAEC2CxpHiEu1fdriiV-gJj=rS+cOp3WHRCwHhsGUGSFShsSiNw@mail.gmail.com>
+In-Reply-To: <20180119134103.3390-2-julien.grall@linaro.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,135 +19,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@linaro.org>
-Cc: Lars Kurth <lars.kurth.xen@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>, "security@xenproject.org" <security@xenproject.org>, Andre Przywara <andre.przywara@linaro.org>, xen-devel <xen-devel@lists.xen.org>
+Cc: sstabellini@kernel.org, andre.przywara@linaro.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1788972034-1516833802=:6440
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Wed, 24 Jan 2018, Julien Grall wrote:
-> Hi Stefano,
-> 
-> On 24 January 2018 at 22:14, Stefano Stabellini <sstabellini@kernel.org> wrote:
-> > On Thu, 18 Jan 2018, Julien Grall wrote:
-> >> (+ Security team)
-> >>
-> >> Hi Stefano,
-> >>
-> >> On 17/01/18 21:47, Stefano Stabellini wrote:
-> >> > On Wed, 17 Jan 2018, Stefano Stabellini wrote:
-> >> > > On Wed, 17 Jan 2018, Lars Kurth wrote:
-> >> > > >        Regarding README.source, this is covering file and contain the
-> >> > > > same mention as in the commit message. As this is a single function.
-> >> > > > Isn't the commit message
-> >> > > >        enough?
-> >> > > >
-> >> > > >
-> >> > > >  From a legal viewpoint it is enough.
-> >> > >
-> >> > > If that is enough from a legal viewpoint, then it is enough for me.
-> >> > >
-> >> > > However, from a legal viewpoint, I thought we needed to explicitly
-> >> > > mention all the original signed-off-bys because Julien is not actually
-> >> > > the copyright holder for that function, hence, we need to add the
-> >> > > signed-off-bys of all the missing copyright holders.
-> >> >
-> >> > Actually, reading again the Developer’s Certificate of Origin, it
-> >> > states:
-> >> >
-> >> > "The contribution is based upon previous work that, to the best of my
-> >> > knowledge, is covered under an appropriate open source license and I have
-> >> > the right under that license to submit that work with modifications, whether
-> >> > created in whole or in part by me, under the same open source license
-> >> > (unless I am permitted to submit under a different license), as indicated in
-> >> > the file"
-> >> >
-> >> > so I think Lars is right. In that case, there is no need to resubmit
-> >> > this series, I'll commit to staging as is. If tests go well, I'll
-> >> > backport it to the stable trees.
-> >> Thank you! I have created branches with patches backported up to Xen 4.8. With
-> >> minor changes:
-> >>
-> >>    - Xen 4.10: No changes
-> >>    - Xen 4.9:
-> >>       * minor conflict in some files
-> >>       * compilation failure in cpuerrata.c (__virt_to_mfn does not exist)
-> >>    - Xen 4.8:
-> >>       * conflict in some files (one medium as the number of "features" is
-> >> different)
-> >>       * compilation failure in cpuerrata.c (__virt_to_mfn does not exist)
-> >>
-> >> The branches can be found on xenbits [1] : xsa-254-sp2-X.XX where X.XX is the
-> >> version of Xen.
-> >>
-> >> Xen 4.7 and earlier does not have cpufeature/cpuerrata infrastructure and will
-> >> require backport. The only difficulty here should be finding the list of
-> >> commits required.
-> >>
-> >> Also, we probably want to update the XSA pointing to the patches. So if
-> >> someone wants to backport to Xen 4.7 (or earlier) they can. Any opinions?
-> >
-> > These are the commits for the XSA 254 mitigation for the arm64
-> > architecture:
-> >
-> > staging-4.10
-> > b829d42829c1ff626a02756acae4dd482fc20c9a
-> > 0f7a4faafb2d79920cc63457cfca3e03990af4cc
-> > d1f4283a1d8405a480b4121e1efcfaec8bbdbffa
-> > cae6e1572f39a1906be0fc3bdaf49fe514c6a9c0
-> > 928112900e5b4a92ccebb2eea11665fd76aa0f0d
-> > 728fadb586a2a14a244dabd70463bcc1654ecc85
-> >
-> > staging-4.9
-> > 2ec7ccbffc6b788f65e55498e4347c1ee3a44b01
-> > 50450c1f33dc72f2138a671d738934f796be3318
-> > 3790833ef16b95653424ec9b145e460ec1a56d16
-> > fba48eff18c02d716c95b92df804a755620be82e
-> > 9f79e8d846e8413c828f5fc7cc6ac733728dff00
-> > a2567d6b54b7b187ecc0165021b6dd07dafaf06a
-> >
-> > staging-4.8
-> > 946dd2eefae2faeecbeb9662e66935c8070f64f5
-> > 85990bf53addcdb0ce8e458a3d8fad199710ac59
-> > cf0b584c8c5030588bc47a3614ad860af7482c53
-> > 44139fed7c794eb4e47a9bb93061e325bd57fe8c
-> > 6f6786ef0d7f7025860d360f6b1267193ffd1b27
-> 
-> Something looks quite odd. The commit message have two cherry-pick commit ID.
-> 
-> Why didn't you just merged the branches I provided?
-
-Basically I did the backports on my own, then I double-checked that they
-matched your own version of the backports. I did it for safety: this way
-we can be quite sure that the backports are good, or both of us did
-exactly the same mistakes :-)
-It was very helpful to have branches to compare against, thank you for
-that.
-
-
-> >
-> > For staging-4.7, I made the backports and tested them as well. They look
-> > correct. However, given that it was more complex than initially though,
-> > I would appreciate if you could give it a look as well (I haven't pushed
-> > it staging-4.7 yet):
-> >
-> >   git://xenbits.xen.org/people/sstabellini/xen-unstable.git staging-4.7-xsa254
-> 
-> I will have a look.
-
-Thanks again!
---8323329-1788972034-1516833802=:6440
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1788972034-1516833802=:6440--
+T24gRnJpLCAxOSBKYW4gMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFRoZSBvbmx5IGRpZmZl
+cmVuY2UgYmV0d2VlbiBhbGwgdGhlIERFRklORV9UUkFQX0VOVFJZXyogbWFjcm9zICBhcmUgdGhl
+Cj4gaW50ZXJydXB0cyAoQXN5bmNocm9ub3VzIEFib3J0LCBJUlEsIEZJUSkgdW5tYXNrZWQuCj4g
+Cj4gUmF0aGVyIHRoYW4gZHVwbGljYXRpbmcgdGhlIGNvZGUsIGludHJvZHVjZSBfX0RFRklORV9U
+UkFQX0VOVFJZIG1hY3JvCj4gdGhhdCB3aWxsIHRha2UgdGhlIGxpc3Qgb2YgaW50ZXJydXB0cyB0
+byB1bm1hc2suCj4gCj4gVGhpcyBpcyBwYXJ0IG9mIFhTQS0yNTQuCj4gCj4gU2lnbmVkLW9mZi1i
+eTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAbGluYXJvLm9yZz4KClJldmlld2VkLWJ5OiBT
+dGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CgoKPiAtLS0KPiAgeGVu
+L2FyY2gvYXJtL2FybTMyL2VudHJ5LlMgfCAzNiArKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0KPiAgMSBmaWxlIGNoYW5nZWQsIDEzIGluc2VydGlvbnMoKyksIDIzIGRlbGV0aW9u
+cygtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vYXJtMzIvZW50cnkuUyBiL3hlbi9h
+cmNoL2FybS9hcm0zMi9lbnRyeS5TCj4gaW5kZXggMTIwOTIyZTY0ZS4uYzY0OTBkMjg0NyAxMDA2
+NDQKPiAtLS0gYS94ZW4vYXJjaC9hcm0vYXJtMzIvZW50cnkuUwo+ICsrKyBiL3hlbi9hcmNoL2Fy
+bS9hcm0zMi9lbnRyeS5TCj4gQEAgLTExMSwzOSArMTExLDI5IEBAIGFib3J0X2d1ZXN0X2V4aXRf
+ZW5kOgo+ICBza2lwX2NoZWNrOgo+ICAgICAgICAgIG1vdiBwYywgbHIKPiAgCj4gLSNkZWZpbmUg
+REVGSU5FX1RSQVBfRU5UUlkodHJhcCkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIFwKPiArLyoKPiArICogTWFjcm8gdG8gZGVmaW5lIHRyYXAgZW50cnkuIFRoZSBpZmxh
+Z3MgY29ycmVzcG9uZHMgdG8gdGhlIGxpc3Qgb2YKPiArICogaW50ZXJydXB0cyAoQXN5bmNocm9u
+b3VzIEFib3J0LCBJUlEsIEZJUSkgdG8gdW5tYXNrLgo+ICsgKi8KPiArI2RlZmluZSBfX0RFRklO
+RV9UUkFQX0VOVFJZKHRyYXAsIGlmbGFncykgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+XAo+ICAgICAgICAgIEFMSUdOOyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBcCj4gIHRyYXBfIyN0cmFwOiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKPiAgICAgICAgICBTQVZF
+X0FMTDsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgXAo+IC0gICAgICAgIGNwc2llIGk7ICAgICAgICAvKiBsb2NhbF9pcnFfZW5hYmxlICovICAg
+ICAgICAgICAgICAgICAgICAgICAgICBcCj4gLSAgICAgICAgY3BzaWUgYTsgICAgICAgIC8qIGFz
+eW5jaHJvbm91cyBhYm9ydCBlbmFibGUgKi8gICAgICAgICAgICAgICAgIFwKPiArICAgICAgICBj
+cHNpZSBpZmxhZ3M7ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgXAo+ICAgICAgICAgIGFkciBsciwgcmV0dXJuX2Zyb21fdHJhcDsgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gICAgICAgICAgbW92IHIwLCBzcDsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKPiAgICAgICAg
+ICBtb3YgcjExLCBzcDsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgXAo+ICAgICAgICAgIGJpYyBzcCwgIzc7IC8qIEFsaWduIHRoZSBzdGFjayBwb2lu
+dGVyIChub29wIG9uIGd1ZXN0IHRyYXApICovICBcCj4gICAgICAgICAgYiBkb190cmFwXyMjdHJh
+cAo+ICAKPiAtI2RlZmluZSBERUZJTkVfVFJBUF9FTlRSWV9OT0lSUSh0cmFwKSAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgXAo+IC0gICAgICAgIEFMSUdOOyAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gLXRyYXBfIyN0
+cmFwOiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIFwKPiAtICAgICAgICBTQVZFX0FMTDsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+IC0gICAgICAgIGNwc2llIGE7ICAgICAgICAv
+KiBhc3luY2hyb25vdXMgYWJvcnQgZW5hYmxlICovICAgICAgICAgICAgICAgICBcCj4gLSAgICAg
+ICAgYWRyIGxyLCByZXR1cm5fZnJvbV90cmFwOyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIFwKPiAtICAgICAgICBtb3YgcjAsIHNwOyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+IC0gICAgICAgIG1vdiByMTEsIHNwOyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gLSAg
+ICAgICAgYmljIHNwLCAjNzsgLyogQWxpZ24gdGhlIHN0YWNrIHBvaW50ZXIgKG5vb3Agb24gZ3Vl
+c3QgdHJhcCkgKi8gIFwKPiAtICAgICAgICBiIGRvX3RyYXBfIyN0cmFwCj4gKy8qIFRyYXAgaGFu
+ZGxlciB3aGljaCB1bm1hc2sgSVJRL0Fib3J0LCBrZWVwIEZJUSBtYXNrZWQgKi8KPiArI2RlZmlu
+ZSBERUZJTkVfVFJBUF9FTlRSWSh0cmFwKSBfX0RFRklORV9UUkFQX0VOVFJZKHRyYXAsIGFpKQo+
+ICAKPiAtI2RlZmluZSBERUZJTkVfVFJBUF9FTlRSWV9OT0FCT1JUKHRyYXApICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgXAo+IC0gICAgICAgIEFMSUdOOyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gLXRyYXBfIyN0cmFw
+OiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIFwKPiAtICAgICAgICBTQVZFX0FMTDsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgXAo+IC0gICAgICAgIGNwc2llIGk7ICAgICAgICAvKiBs
+b2NhbF9pcnFfZW5hYmxlICovICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gLSAgICAgICAg
+YWRyIGxyLCByZXR1cm5fZnJvbV90cmFwOyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIFwKPiAtICAgICAgICBtb3YgcjAsIHNwOyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+IC0gICAgICAgIG1vdiByMTEsIHNwOyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gLSAgICAg
+ICAgYmljIHNwLCAjNzsgLyogQWxpZ24gdGhlIHN0YWNrIHBvaW50ZXIgKG5vb3Agb24gZ3Vlc3Qg
+dHJhcCkgKi8gIFwKPiAtICAgICAgICBiIGRvX3RyYXBfIyN0cmFwCj4gKy8qIFRyYXAgaGFuZGxl
+ciB3aGljaCB1bm1hc2sgQWJvcnQsIGtlZXAgSVJRL0ZJUSBtYXNrZWQgKi8KPiArI2RlZmluZSBE
+RUZJTkVfVFJBUF9FTlRSWV9OT0lSUSh0cmFwKSBfX0RFRklORV9UUkFQX0VOVFJZKHRyYXAsIGEp
+Cj4gKwo+ICsvKiBUcmFwIGhhbmRsZXIgd2hpY2ggdW5tYXNrIElSUSwga2VlcCBBYm9ydC9GSVEg
+bWFza2VkICovCj4gKyNkZWZpbmUgREVGSU5FX1RSQVBfRU5UUllfTk9BQk9SVCh0cmFwKSBfX0RF
+RklORV9UUkFQX0VOVFJZKHRyYXAsIGkpCj4gIAo+ICAgICAgICAgIC5hbGlnbiA1Cj4gIEdMT0JB
+TChoeXBfdHJhcHNfdmVjdG9yKQo+IC0tIAo+IDIuMTEuMAo+IAoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
