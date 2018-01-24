@@ -1,19 +1,18 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86/acpi: process softirqs while printing
-	CPU ACPI data
-Date: Wed, 24 Jan 2018 10:48:37 +0000
-Message-ID: <9e2bf0a9-913d-c94b-5961-a7e148c50f0c@citrix.com>
-References: <20180124101440.80750-1-roger.pau@citrix.com>
+Subject: Re: Xen fails to boot inside QEMU on x86, no VMX:
+Date: Wed, 24 Jan 2018 10:51:58 +0000
+Message-ID: <40107645-7fd6-feae-2277-5f569102a18f@citrix.com>
+References: <alpine.DEB.2.10.1801221544060.6440@sstabellini-ThinkPad-X260>
+ <31744ea0-7d08-5db8-8aaa-db27dfd49b73@citrix.com>
+ <alpine.DEB.2.10.1801221637010.6440@sstabellini-ThinkPad-X260>
+ <fb87196c-1a48-6c7b-fe44-d560bd17db07@citrix.com>
+ <5A670C1002000078001A16A3@prv-mh.provo.novell.com>
+ <alpine.DEB.2.10.1801231252311.6440@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=jv/h=et=citrix.com=prvs=555f7260a=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1eeIbm-0003s4-JM
- for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 10:48:46 +0000
-In-Reply-To: <20180124101440.80750-1-roger.pau@citrix.com>
+In-Reply-To: <alpine.DEB.2.10.1801231252311.6440@sstabellini-ThinkPad-X260>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,15 +22,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>
+To: Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjQvMDEvMTggMTA6MTQsIFJvZ2VyIFBhdSBNb25uZSB3cm90ZToKPiBPciBlbHNlIHRoZSB3
-YXRjaGRvZyB0cmlnZ2VycyBvbiBib3hlcyB3aXRoIGEgaHVnZSBudW1iZXIgb2YgQ1BVcwo+Cj4g
-U2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4g
-UmVwb3J0ZWQtYnk6IFNpbW9uIENyb3dlIDxzaW1vbi5jcm93ZUBjaXRyaXguY29tPgoKQWNrZWQt
-Ynk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMjQvMDEvMTggMDA6NDcsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiBPbiBUdWUsIDIz
+IEphbiAyMDE4LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4gT24gMjMuMDEuMTggYXQgMDE6NDEs
+IDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToKPj4+IE9uIDIzLzAxLzIwMTggMDA6
+MzgsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPj4+PiBPbiBUdWUsIDIzIEphbiAyMDE4LCBB
+bmRyZXcgQ29vcGVyIHdyb3RlOgo+Pj4+PiBPbiAyMi8wMS8yMDE4IDIzOjQ4LCBTdGVmYW5vIFN0
+YWJlbGxpbmkgd3JvdGU6Cj4+Pj4+PiBIaSBhbGwsCj4+Pj4+Pgo+Pj4+Pj4gUnVubmluZyBYZW4g
+aW5zaWRlIFFFTVUgeDg2IHdpdGhvdXQgS1ZNIGFjY2VsZWFydGlvbiBhbmQgd2l0aG91dCBWTVgK
+Pj4+Pj4+IGVtdWxhdGlvbiBsZWFkcyB0byB0aGUgZmFpbHVyZSBhcHBlbmRlZCBiZWxvdy4KPj4+
+Pj4+Cj4+Pj4+PiBUaGlzIHRyaXZpYWwgd29ya2Fyb3VuZCAiZml4ZXMiIHRoZSBwcm9ibGVtOgo+
+Pj4+Pj4KPj4+Pj4+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvZXh0YWJsZS5jIGIveGVuL2Fy
+Y2gveDg2L2V4dGFibGUuYwo+Pj4+Pj4gaW5kZXggNzJmMzBkOS4uYTY3ZDZjMSAxMDA2NDQKPj4+
+Pj4+IC0tLSBhL3hlbi9hcmNoL3g4Ni9leHRhYmxlLmMKPj4+Pj4+ICsrKyBiL3hlbi9hcmNoL3g4
+Ni9leHRhYmxlLmMKPj4+Pj4+IEBAIC0xNjgsNyArMTY4LDYgQEAgc3RhdGljIGludCBfX2luaXQg
+c3R1Yl9zZWxmdGVzdCh2b2lkKQo+Pj4+Pj4gICAgICAgICAgICAgICAgICAgICAgICAgX0FTTV9F
+WFRBQkxFKC5McmV0JT0sIC5MZml4JT0pCj4+Pj4+PiAgICAgICAgICAgICAgICAgICAgICAgICA6
+IFtleG5dICIrbSIgKHJlcykKPj4+Pj4+ICAgICAgICAgICAgICAgICAgICAgICAgIDogW3N0Yl0g
+InIiIChhZGRyKSwgImEiICh0ZXN0c1tpXS5yYXgpKTsKPj4+Pj4+IC0gICAgICAgIEFTU0VSVChy
+ZXMgPT0gdGVzdHNbaV0ucmVzLnJhdyk7Cj4+Pj4+PiAgICAgIH0KPj4+Pj4+ICAKPj4+Pj4+ICAg
+ICAgcmV0dXJuIDA7Cj4+Pj4+Pgo+Pj4+Pj4KPj4+Pj4+IEFueSBzdWdnZXN0aW9ucz8KPj4+Pj4g
+V2hpY2ggaSBmYWlsZWQ/ICBUaGlzIHdpbGwgcHJvYmFibHkgYmUgYW4gZW11bGF0aW9uIGJ1ZyBp
+biBRZW11Lgo+Pj4+IGk9MiBpcyB0aGUgY3VscHJpdAo+Pj4gUWVtdSBkb2Vzbid0IGVtdWxhdGUg
+JXJzcC1iYXNlZCBtZW1vcnkgYWNjZXNzZXMgcHJvcGVybHkuICBJdCBzaG91bGQKPj4+IHJhaXNl
+ICNTU1swXSwgYW5kIGlzIHByZXN1bWFibHkgcmFpc2luZyAjR1BbMF0gaW5zdGVhZC4KPj4gUmln
+aHQsIHRoZSB2YWx1ZSBvbiAlcmF4IHN1cHBvcnRzIHRoYXQgc3VzcGljaW9uLiBEcm9wcGluZyB0
+aGUKPj4gQVNTRVJUKCkgaXMgbm8gb3B0aW9uLCBvZiBjb3Vyc2UuIElmIHdlIHdlcmUgYWJsZSB0
+byByZWxpYWJseQo+PiBkZXRlY3QgdGhhdCB3ZSdyZSBydW5uaW5nIHVuZGVyIHFlbXUsIHdlIGNv
+dWxkIGNhdGVyIGZvciB0aGlzCj4+IHNwZWNpYWwgY2FzZSwgYnV0IEkgY2FuJ3Qgc2VlbSB0byBi
+ZSBhYmxlIHRvIHRoaW5rIG9mIG90aGVyIG9wdGlvbnMKPj4gYmVzaWRlcyBhZGRpbmcgYSBjb21t
+YW5kIGxpbmUgb3B0aW9uIGFsbG93aW5nIHRvIGJ5cGFzcyB0aGUgc2VsZgo+PiB0ZXN0Lgo+IEkg
+YW0gZ29pbmcgdG8gZ2l2ZSBhIGxvb2sgYXQgdGhlIFFFTVUgc2lkZSBvZiB0aGluZ3MuIEhvd2V2
+ZXIsIGV2ZW4gaWYgSQo+IGZpeCB0aGUgYnVnIGluIFFFTVUsIGl0IHdvbid0IHNvbHZlIHRoZSBw
+cm9ibGVtIGZvciBhbGwgdGhlIFFFTVUKPiBpbnN0YW5jZXMgYWxyZWFkeSBvdXQgdGhlcmUsIHNo
+aXBwZWQgYnkgZGlzdHJvcywgZXRjLgo+Cj4gU28sIEkgdGhpbmsgdGhhdCByZWdhcmRsZXNzIG9m
+IHRoZSBRRU1VIGZpeCwgd2UgYWxzbyBuZWVkIHRvIGFkZCBhCj4gd29ya2Fyb3VuZCBpbiBYZW4u
+IFdlIGNhbiBkZXRlY3QgUUVNVSBmcm9tIHRoZSBjcHVpZCBzdHJpbmcsIHdoaWNoIGlzCj4gZ29p
+bmcgdG8gYmUgVENHVENHVENHVENHLgo+Cj4gV2hhdCBkbyB5b3UgdGhpbmsgb2Ygc29tZXRoaW5n
+IGxpa2UgYmVsb3c/CgpUaGlzIGlzIHF1aXRlIHVucGxlYXNhbnQuCgpXaGF0IGlzIHlvdXIgdXNl
+Y2FzZSBoZXJlPyBUaGUgYXNzZXJ0aW9uIGhpdCBkZW1vbnN0cmF0ZXMgUWVtdSBkb2Vzbid0CmZ1
+bmN0aW9uIHJlYXNvbmFibHkgZm9yIGEgY29yZSBwaWVjZSBvZiB4ODYgYXJjaGl0ZWN0dXJlLsKg
+IEdpdmVuIHRoZQpmYWN0IHRoYXQgdGhlIGNhbGN1bGF0aW9uIHllaWxkcyAwLCBJIGV4cGVjdCBh
+IGd1ZXN0IGNhbiBwcm9iYWJseQooYWIpdXNlIHRoaXMgdG8gZXNjYWxhdGUgcHJpdmlsZWdlLgoK
+fkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
