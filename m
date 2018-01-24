@@ -1,19 +1,19 @@
 From: Simon Kuenzer <simon.kuenzer@neclab.eu>
 Subject: Re: [Minios-devel] Preparing for GSoC and Outreachy :
  getting Outreach Program Projects into good shape
-Date: Wed, 24 Jan 2018 10:40:04 +0100
-Message-ID: <ff4d5372-c4ca-0dd8-b596-26a6f776a26d@neclab.eu>
+Date: Wed, 24 Jan 2018 10:40:34 +0100
+Message-ID: <8cea3e1b-f3e0-b6bb-e7f2-f2e7392387db__17778.5170417794$1516786834$gmane$org@neclab.eu>
 References: <219B4CE4-9E0A-47CC-BD7B-261BE9FA6F91@gmail.com>
  <7B17E6EE-A4B3-44F9-BC41-3B63C6DEACD4@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=/bwp=et=neclab.eu=simon.kuenzer@srs-us1.protection.inumbo.net>)
- id 1eeHY0-0006RJ-MF
- for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 09:40:48 +0000
+ id 1eeHYc-0006VY-6r
+ for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 09:41:26 +0000
 In-Reply-To: <7B17E6EE-A4B3-44F9-BC41-3B63C6DEACD4@gmail.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -102,15 +102,7 @@ YXMgYW4gb3B0aW9uOiBJIGFtIG5vdCBwYXJ0aWN1bGFybHkgd2VkZGVkIHRvIHVzaW5nIHRoZSB3
 aWtpLgo+Pgo+IAo+IAo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
 X19fX19fCj4gTWluaW9zLWRldmVsIG1haWxpbmcgbGlzdAo+IE1pbmlvcy1kZXZlbEBsaXN0cy54
 ZW5wcm9qZWN0Lm9yZwo+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby9taW5pb3MtZGV2ZWwKPiAKCi0tIAo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KU2ltb24gS3Vlbnplcgrjgrfjg6Ljg7Mg44Kv
-44Kl44Oz44OE44Kh44O8ClJlc2VhcmNoIFNjaWVudGlzdApTeXN0ZW1zIGFuZCBNYWNoaW5lIExl
-YXJuaW5nIEdyb3VwIChTTUwpCkRhdGEgU2NpZW5jZSBhbmQgU3lzdGVtIFBsYXRmb3JtIERpdmlz
-aW9uCk5FQyBMYWJvcmF0b3JpZXMgRXVyb3BlIEdtYkgKS3VyZnVlcnN0ZW4tQW5sYWdlIDM2LCA2
-OTExNSBIZWlkZWxiZXJnLCBHZXJtYW55ClRlbC4gICAgICs0OSAoMCk2MjIxIDQzNDItMjY0CkZh
-eDogICAgICs0OSAoMCk2MjIxIDQzNDItNTI2NApFLU1haWw6ICBzaW1vbi5rdWVuemVyQG5lY2xh
-Yi5ldQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT0KUmVnaXN0ZXJlZCBhdCBBbXRzZ2VyaWNodCBNYW5uaGVpbSwgR2VybWFueSwgSFJC
-NzI4NTU4CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+aW5mby9taW5pb3MtZGV2ZWwKPiAKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
