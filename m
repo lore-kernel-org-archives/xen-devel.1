@@ -1,21 +1,18 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v1 1/4] libxl: use libxl__device_kind to get
- device XS entry
-Date: Wed, 24 Jan 2018 17:33:31 +0000
-Message-ID: <20180124173331.3nqs6uwqfjbv4nzg@citrix.com>
-References: <1516814399-8597-1-git-send-email-al1img@gmail.com>
- <1516814399-8597-2-git-send-email-al1img@gmail.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: Xen fails to boot inside QEMU on x86, no VMX:
+Date: Wed, 24 Jan 2018 09:34:14 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1801240931440.6440@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1801221544060.6440@sstabellini-ThinkPad-X260>
+ <31744ea0-7d08-5db8-8aaa-db27dfd49b73@citrix.com>
+ <alpine.DEB.2.10.1801221637010.6440@sstabellini-ThinkPad-X260>
+ <fb87196c-1a48-6c7b-fe44-d560bd17db07@citrix.com>
+ <5A670C1002000078001A16A3@prv-mh.provo.novell.com>
+ <alpine.DEB.2.10.1801231252311.6440@sstabellini-ThinkPad-X260>
+ <40107645-7fd6-feae-2277-5f569102a18f@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1633026579-1516815256=:6440"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=vftr=et=citrix.com=prvs=555ec31fe=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1eeOvb-0003R7-Eq
- for xen-devel@lists.xenproject.org; Wed, 24 Jan 2018 17:33:39 +0000
-Content-Disposition: inline
-In-Reply-To: <1516814399-8597-2-git-send-email-al1img@gmail.com>
+In-Reply-To: <40107645-7fd6-feae-2277-5f569102a18f@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +21,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr Grytsov <al1img@gmail.com>
-Cc: xen-devel@lists.xenproject.org, wei.liu2@citrix.com, ian.jackson@eu.citrix.com, Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKYW4gMjQsIDIwMTggYXQgMDc6MTk6NTZQTSArMDIwMCwgT2xla3NhbmRyIEdyeXRz
-b3Ygd3JvdGU6Cj4gRnJvbTogT2xla3NhbmRyIEdyeXRzb3YgPG9sZWtzYW5kcl9ncnl0c292QGVw
-YW0uY29tPgo+IAo+IE9uIGFkZGluZyB0byBYUyBuYW1lIG9mIGRldmljZSBpcyB0YWtlbiBmcm9t
-Cj4gbGlieGxfX2RldmljZV9raW5kIGVudW0uIE9uIGdldHRpbmcgZGV2aWNlIGZyb20gWFMKPiB0
-aGUgbmFtZSBpcyBoYXJkY29kZWQuIEl0IGxlYWRzIHRvIHBvdGVudGlhbAo+IG1pc3RtYXRjaCBl
-cnJvcnMuIFRoZSBwYXRjaCBpcyB1c2luZyBsaWJ4bF9fZGV2aWNlX2tpbmQKPiBldmVyeXdlcmUg
-dG8gaGF2ZSBvbmUgc291cmNlIG9mIGRldmljZSBuYW1lLgo+IAo+IFNpZ25lZC1vZmYtYnk6IE9s
-ZWtzYW5kciBHcnl0c292IDxvbGVrc2FuZHJfZ3J5dHNvdkBlcGFtLmNvbT4KCkFja2VkLWJ5OiBX
-ZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKVGhhbmtzIGZvciB0aGUgcXVpY2sgdHVybmFy
-b3VuZC4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1633026579-1516815256=:6440
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Wed, 24 Jan 2018, Andrew Cooper wrote:
+> On 24/01/18 00:47, Stefano Stabellini wrote:
+> > On Tue, 23 Jan 2018, Jan Beulich wrote:
+> >>>>> On 23.01.18 at 01:41, <andrew.cooper3@citrix.com> wrote:
+> >>> On 23/01/2018 00:38, Stefano Stabellini wrote:
+> >>>> On Tue, 23 Jan 2018, Andrew Cooper wrote:
+> >>>>> On 22/01/2018 23:48, Stefano Stabellini wrote:
+> >>>>>> Hi all,
+> >>>>>>
+> >>>>>> Running Xen inside QEMU x86 without KVM acceleartion and without VMX
+> >>>>>> emulation leads to the failure appended below.
+> >>>>>>
+> >>>>>> This trivial workaround "fixes" the problem:
+> >>>>>>
+> >>>>>> diff --git a/xen/arch/x86/extable.c b/xen/arch/x86/extable.c
+> >>>>>> index 72f30d9..a67d6c1 100644
+> >>>>>> --- a/xen/arch/x86/extable.c
+> >>>>>> +++ b/xen/arch/x86/extable.c
+> >>>>>> @@ -168,7 +168,6 @@ static int __init stub_selftest(void)
+> >>>>>>                         _ASM_EXTABLE(.Lret%=, .Lfix%=)
+> >>>>>>                         : [exn] "+m" (res)
+> >>>>>>                         : [stb] "r" (addr), "a" (tests[i].rax));
+> >>>>>> -        ASSERT(res == tests[i].res.raw);
+> >>>>>>      }
+> >>>>>>  
+> >>>>>>      return 0;
+> >>>>>>
+> >>>>>>
+> >>>>>> Any suggestions?
+> >>>>> Which i failed?  This will probably be an emulation bug in Qemu.
+> >>>> i=2 is the culprit
+> >>> Qemu doesn't emulate %rsp-based memory accesses properly.  It should
+> >>> raise #SS[0], and is presumably raising #GP[0] instead.
+> >> Right, the value on %rax supports that suspicion. Dropping the
+> >> ASSERT() is no option, of course. If we were able to reliably
+> >> detect that we're running under qemu, we could cater for this
+> >> special case, but I can't seem to be able to think of other options
+> >> besides adding a command line option allowing to bypass the self
+> >> test.
+> > I am going to give a look at the QEMU side of things. However, even if I
+> > fix the bug in QEMU, it won't solve the problem for all the QEMU
+> > instances already out there, shipped by distros, etc.
+> >
+> > So, I think that regardless of the QEMU fix, we also need to add a
+> > workaround in Xen. We can detect QEMU from the cpuid string, which is
+> > going to be TCGTCGTCGTCG.
+> >
+> > What do you think of something like below?
+> 
+> This is quite unpleasant.
+> 
+> What is your usecase here? The assertion hit demonstrates Qemu doesn't
+> function reasonably for a core piece of x86 architecture.  Given the
+> fact that the calculation yeilds 0, I expect a guest can probably
+> (ab)use this to escalate privilege.
+
+My use case is test automation: testing Xen changes and verifying that
+Xen boots. But I'll follow up on the QEMU side of things as well to fix
+the issue.
+--8323329-1633026579-1516815256=:6440
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1633026579-1516815256=:6440--
