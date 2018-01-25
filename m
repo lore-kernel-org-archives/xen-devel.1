@@ -1,25 +1,14 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [Xen EFI] Impossible to limit the dom0 memory
-Date: Thu, 25 Jan 2018 04:21:52 -0700
-Message-ID: <5A69CBE002000078001A251F@prv-mh.provo.novell.com>
-References: <54c84622-01da-6cbd-1c3e-3cbbb66ad44d@msd.im>
- <5A67493902000078001A1924@prv-mh.provo.novell.com>
- <5fe79d73-8b29-5ad6-831d-a509bccf6970@msd.im>
- <5A68472302000078001A1C8C@prv-mh.provo.novell.com>
- <864eea58-74a5-f005-60a4-5549805df3eb@msd.im>
- <5A69C21602000078001A24A3@prv-mh.provo.novell.com>
- <0f6fc9a5-4bbf-3ad8-6f87-99723b445246@suse.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [xen-unstable test] 118296: regressions - FAIL
+Date: Thu, 25 Jan 2018 11:24:08 +0000
+Message-ID: <20180125112408.rq42r2vawbko6ehu@citrix.com>
+References: <osstest-118296-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=vltw=eu=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1eefbW-0000e0-IU
- for xen-devel@lists.xenproject.org; Thu, 25 Jan 2018 11:22:02 +0000
-In-Reply-To: <0f6fc9a5-4bbf-3ad8-6f87-99723b445246@suse.com>
 Content-Disposition: inline
+In-Reply-To: <osstest-118296-mainreport@xen.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,19 +17,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "msd+xen-devel@msd.im" <msd+xen-devel@msd.im>, Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org
+To: osstest service owner <osstest-admin@xenproject.org>
+Cc: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xensource.com, Wei Liu <wei.liu2@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI1LjAxLjE4IGF0IDEyOjE2LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBPbiAy
-NS8wMS8xOCAxMTo0MCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+IFRoaXMgdGVsbHMgdXMgKHRvZ2V0
-aGVyIHdpdGggdGhlIHBhZ2UgZmF1bHQgZXJyb3IgY29kZSkgdGhhdCB0aGUKPj4gRG9tMCBrZXJu
-ZWwgdHJpZWQgdG8gcHJvdmlkZSBtZW1vcnkgYXMga2VybmVsIHN0YWNrIHdoaWNoCj4+IGNhbid0
-IGJlIHdyaXR0ZW4uIFRoaXMgbWF5IGJlIGEgRG9tMCBrZXJuZWwgc3RhY2sgb3ZlcmZsb3csCj4g
-Cj4gUmVhbGx5PyBXaHkgZG8geW91IHRoaW5rIHRoaXMgaXMgcmVsYXRlZCB0byB0aGUgc3RhY2s/
-CgpPaCwgSSBkaWRuJ3QgbG9vayB2ZXJ5IGNsb3NlbHkuIEl0J3MganVzdCBhIGNvbW1vbiBwYXR0
-ZXJuIG9mIHN0YWNrCm92ZXJydW5zLiBJbiBhbnkgZXZlbnQgSSd2ZSBzYWlkICJtYXkiIGZvciBh
-IHJlYXNvbi4KCkphbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+T24gVGh1LCBKYW4gMjUsIDIwMTggYXQgMDI6NTE6MzRBTSArMDAwMCwgb3NzdGVzdCBzZXJ2aWNl
+IG93bmVyIHdyb3RlOgo+IGZsaWdodCAxMTgyOTYgeGVuLXVuc3RhYmxlIHJlYWwgW3JlYWxdCj4g
+aHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzExODI5Ni8K
+PiAKPiBSZWdyZXNzaW9ucyA6LSgKPiAKPiBUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5k
+IGFyZSBibG9ja2luZywKPiBpbmNsdWRpbmcgdGVzdHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoK
+PiAgdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQyIDE2IGd1ZXN0LXN0YXJ0L2RlYmlhbi5yZXBl
+YXQgZmFpbCBSRUdSLiB2cy4gMTE4MTc0CgpUaGVyZSBzZWVtcyB0byBiZSBhIGdlbnVpbmUgYnVn
+LgoKaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzExODI5
+Ni90ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIvc2VyaWFsLWN1YmlldHJ1Y2stYnJhcXVlLmxv
+ZwoKSmFuIDI0IDA5OjE4OjQ4Ljg1OTM1NiAoWEVOKSB0cmFwcy5jOjIwMzM6ZDl2MCBIU1I9MHg4
+MDAwMDAwNiBwYz0weGMgZ3ZhPTB4YyBncGE9MHgwMDAwMDAwMDAwMDAwYwpKYW4gMjQgMDk6MTg6
+NDguODY1OTgxIChYRU4pIChYRU4pIHRyYXBzLmM6MjAzMzpkOXYwIEhTUj0weDgwMDAwMDA2IHBj
+PTB4YyBndmE9MHhjIGdwYT0weDAwMDAwMDAwMDAwMDBjCkphbiAyNCAwOToxODo0OC44NzMxMDcg
+KFhFTikgdHJhcHMuYzoyMDMzOmQ5djAgSFNSPTB4ODAwMDAwMDYgcGM9MHhjIGd2YT0weGMgZ3Bh
+PTB4MDAwMDAwMDAwMDAwMGMKSmFuIDI0IDA5OjE4OjQ4Ljg3OTczMiAoWEVOKSB0cmFwcy5jOjIw
+MzM6ZDl2MCBIU1I9MHg4MDAwMDAwNiBwYz0weGMgZ3ZhPTB4YyBncGE9MHgwMDAwMDAwMDAwMDAw
+YwoKPiAgdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0IDE2IGd1ZXN0LWxvY2Fs
+bWlncmF0ZS94MTAgZmFpbCBSRUdSLiB2cy4gMTE4MTc0CgpsaWJ4bC1zYXZlLWhlbHBlcjogZGVi
+dWc6IHN0YXJ0aW5nIHJlc3RvcmU6IFN1Y2Nlc3MKeGM6IGRldGFpbDogZmQgOCwgZG9tIDE4LCBo
+dm0gMCwgcGFlIDAsIHN0cmVhbV90eXBlIDAKeGM6IGluZm86IEZvdW5kIHg4NiBIVk0gZG9tYWlu
+IGZyb20gWGVuIDQuMTEKeGM6IGluZm86IFJlc3RvcmluZyBkb21haW4KeGM6IGVycm9yOiBGYWls
+ZWQgdG8gZ2V0IHR5cGVzIGZvciBwZm4gYmF0Y2ggKDE0ID0gQmFkIGFkZHJlc3MpOiBJbnRlcm5h
+bCBlcnJvcgp4YzogZXJyb3I6IFNhdmUgZmFpbGVkICgxNCA9IEJhZCBhZGRyZXNzKTogSW50ZXJu
+YWwgZXJyb3IKClRoaXMgbG9va3MgZmFtaWxpYXIgdG8gdGhlIGtub3duIGlzc3VlIGZvciBXaW5k
+b3dzIG1pZ3JhdGlvbiB0ZXN0LgoKV2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
