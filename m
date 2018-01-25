@@ -1,19 +1,14 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 4/7] xen/arm32: Add skeleton to harden
- branch predictor aliasing attacks
-Date: Thu, 25 Jan 2018 11:37:05 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1801251136070.11958@sstabellini-ThinkPad-X260>
-References: <20180119134103.3390-1-julien.grall@linaro.org>
- <20180119134103.3390-5-julien.grall@linaro.org>
- <alpine.DEB.2.10.1801241545580.6440@sstabellini-ThinkPad-X260>
- <bc492613-35a6-57ad-41e4-b024429549eb@linaro.org>
- <alpine.DEB.2.10.1801251042590.11958@sstabellini-ThinkPad-X260>
- <be044a8e-aa82-ffbe-3b6e-386ce5d91177@linaro.org>
+Subject: Re: [PATCH] xen,x86: introduce tcg_errata
+Date: Thu, 25 Jan 2018 11:43:21 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1801251057591.11958@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1801251035430.11958@sstabellini-ThinkPad-X260>
+ <62646f15-19de-e626-4a65-4e8dc2fc0025@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1952522604-1516906886=:11958"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <be044a8e-aa82-ffbe-3b6e-386ce5d91177@linaro.org>
+In-Reply-To: <62646f15-19de-e626-4a65-4e8dc2fc0025@citrix.com>
+Content-ID: <alpine.DEB.2.10.1801251137230.11958@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,114 +17,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@linaro.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@linaro.org, xen-devel@lists.xen.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCAyNSBKYW4gMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpLAo+IAo+IE9uIDI1
-LzAxLzE4IDE4OjQ1LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiBPbiBUaHUsIDI1IEph
-biAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gPiA+IEhpIFN0ZWZhbm8sCj4gPiA+IAo+ID4g
-PiBPbiAyNC8wMS8xOCAyMzo1NCwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4gPiA+IE9u
-IEZyaSwgMTkgSmFuIDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gPiA+IEFsaWFzaW5n
-IGF0dGFja2VkIGFnYWluc3QgQ1BVIGJyYW5jaCBwcmVkaWN0b3JzIGNhbiBhbGxvdyBhbiBhdHRh
-Y2tlcgo+ID4gPiA+ID4gdG8KPiA+ID4gPiA+IHJlZGlyZWN0IHNwZWN1bGF0aXZlIGNvbnRyb2wg
-ZmxvdyBvbiBzb21lIENQVXMgYW5kIHBvdGVudGlhbGx5IGRpdnVsZ2UKPiA+ID4gPiA+IGluZm9y
-bWF0aW9uIGZyb20gb25lIGNvbnRleHQgdG8gYW5vdGhlci4KPiA+ID4gPiA+IAo+ID4gPiA+ID4g
-VGhpcyBwYXRjaCBhZGRzIGluaXRpYXRpYWwgc2tlbGV0b24gY29kZSBiZWhpbmQgYSBuZXcgS2Nv
-bmZpZyBvcHRpb24KPiA+ID4gPiA+IHRvIGVuYWJsZSBpbXBsZW1lbnRhdGlvbi1zcGVjaWZpYyBt
-aXRpZ2F0aW9ucyBhZ2FpbnN0IHRoZXNlIGF0dGFja3MKPiA+ID4gPiA+IGZvciBDUFVzIHRoYXQg
-YXJlIGFmZmVjdGVkLgo+ID4gPiA+ID4gCj4gPiA+ID4gPiBNb3N0IG9mIG1pdGlnYXRpb25zIHdp
-bGwgaGF2ZSB0byBiZSBhcHBsaWVkIHdoZW4gZW50ZXJpbmcgdG8gdGhlCj4gPiA+ID4gPiBoeXBl
-cnZpc29yIGZyb20gdGhlIGd1ZXN0IGNvbnRleHQuCj4gPiA+ID4gPiAKPiA+ID4gPiA+IEJlY2F1
-c2UgdGhlIGF0dGFjayBpcyBhZ2FpbnN0IGJyYW5jaCBwcmVkaWN0b3IsIGl0IGlzIG5vdCBwb3Nz
-aWJsZSB0bwo+ID4gPiA+ID4gc2FmZWx5IHVzZSBicmFuY2ggaW5zdHJ1Y3Rpb24gYmVmb3JlIHRo
-ZSBtaXRpZ2F0aW9uIGlzIGFwcGxpZWQuCj4gPiA+ID4gPiBUaGVyZWZvcmUgdGhpcyBoYXMgdG8g
-YmUgZG9uZSBpbiB0aGUgdmVjdG9yIGVudHJ5IGJlZm9yZSBqdW1wIHRvIHRoZQo+ID4gPiA+ID4g
-aGVscGVyIGhhbmRsaW5nIGEgZ2l2ZW4gZXhjZXB0aW9uLgo+ID4gPiA+ID4gCj4gPiA+ID4gPiBI
-b3dldmVyLCBvbiBhcm0zMiwgZWFjaCB2ZWN0b3IgY29udGFpbiBhIHNpbmdsZSBpbnN0cnVjdGlv
-bi4gVGhpcwo+ID4gPiA+ID4gbWVhbnMKPiA+ID4gPiA+IHRoYXQgdGhlIGhhcmRlbmVkIHZlY3Rv
-ciB0YWJsZXMgbWF5IHJlbHkgb24gdGhlIHN0YXRlIG9mIHJlZ2lzdGVycwo+ID4gPiA+ID4gdGhh
-dAo+ID4gPiA+ID4gZG9lcyBub3QgaG9sZCB3aGVuIGluIHRoZSBoeXBlcnZpc29yIChlLmcgU1Ag
-aXMgOCBieXRlcyBhbGlnbmVkKS4KPiA+ID4gPiA+IFRoZXJlZm9yZSBoeXBlcnZpc29yIGNvZGUg
-cnVubmluZyB3aXRoIGd1ZXN0IHZlY3RvcnMgdGFibGUgc2hvdWxkIGJlCj4gPiA+ID4gPiBtaW5p
-bWl6ZWQgYW5kIGFsd2F5cyBoYXZlIGludGVycnVwdHMgbWFza2VkIHRvIHJlZHVjZSB0aGUgcmlz
-ayB0byB1c2UKPiA+ID4gPiA+IHRoZW0uCj4gPiA+ID4gPiAKPiA+ID4gPiA+IFRoaXMgcGF0Y2gg
-cHJvdmlkZXMgYW4gaW5mcmFzdHJ1Y3R1cmUgdG8gc3dpdGNoIHZlY3RvciB0YWJsZXMgYmVmb3Jl
-Cj4gPiA+ID4gPiBlbnRlcmluZyB0byB0aGUgZ3Vlc3QgYW5kIHdoZW4gbGVhdmluZyBpdC4KPiA+
-ID4gPiA+IAo+ID4gPiA+ID4gTm90ZSB0aGF0IGFsdGVybmF0aXZlIGNvdWxkIGhhdmUgYmVlbiB1
-c2VkLCBidXQgb2xkZXIgWGVuICg0Ljggb3IKPiA+ID4gPiA+IGVhcmxpZXIpIGRvZXNuJ3QgaGF2
-ZSBzdXBwb3J0LiBTbyBhdm9pZCB1c2luZyBhbHRlcm5hdGl2ZSB0byBlYXNlCj4gPiA+ID4gPiBi
-YWNrcG9ydGluZy4KPiA+ID4gPiA+IAo+ID4gPiA+ID4gVGhpcyBpcyBwYXJ0IG9mIFhTQS0yNTQu
-Cj4gPiA+ID4gPiAKPiA+ID4gPiA+IFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVu
-LmdyYWxsQGxpbmFyby5vcmc+Cj4gPiA+ID4gCj4gPiA+ID4gSSBvbmx5IGhhdmUgYSBjb3VwbGUg
-b2YgcXVlc3Rpb25zLiBJdCBsb29rcyBnb29kLgo+ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiA+ID4g
-LS0tCj4gPiA+ID4gPiAgICB4ZW4vYXJjaC9hcm0vS2NvbmZpZyAgICAgICB8ICAzICsrKwo+ID4g
-PiA+ID4gICAgeGVuL2FyY2gvYXJtL2FybTMyL2VudHJ5LlMgfCA0MQo+ID4gPiA+ID4gKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0KPiA+ID4gPiA+ICAgIHhlbi9hcmNo
-L2FybS9jcHVlcnJhdGEuYyAgIHwgMzAgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4g
-PiA+ID4gPiAgICAzIGZpbGVzIGNoYW5nZWQsIDczIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24o
-LSkKPiA+ID4gPiA+IAo+ID4gPiA+ID4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9LY29uZmln
-IGIveGVuL2FyY2gvYXJtL0tjb25maWcKPiA+ID4gPiA+IGluZGV4IDA2ZmQ4NWNjNzcuLjI3ODJl
-ZTY1ODkgMTAwNjQ0Cj4gPiA+ID4gPiAtLS0gYS94ZW4vYXJjaC9hcm0vS2NvbmZpZwo+ID4gPiA+
-ID4gKysrIGIveGVuL2FyY2gvYXJtL0tjb25maWcKPiA+ID4gPiA+IEBAIC0xOTEsNiArMTkxLDkg
-QEAgY29uZmlnIEhBUkRFTl9CUkFOQ0hfUFJFRElDVE9SCj4gPiA+ID4gPiAgICBjb25maWcgQVJN
-NjRfSEFSREVOX0JSQU5DSF9QUkVESUNUT1IKPiA+ID4gPiA+ICAgICAgICBkZWZfYm9vbCB5IGlm
-IEFSTV82NCAmJiBIQVJERU5fQlJBTkNIX1BSRURJQ1RPUgo+ID4gPiA+ID4gICAgK2NvbmZpZyBB
-Uk0zMl9IQVJERU5fQlJBTkNIX1BSRURJQ1RPUgo+ID4gPiA+ID4gKyAgICBkZWZfYm9vbCB5IGlm
-IEFSTV8zMiAmJiBIQVJERU5fQlJBTkNIX1BSRURJQ1RPUgo+ID4gPiA+ID4gKwo+ID4gPiA+ID4g
-ICAgc291cmNlICJjb21tb24vS2NvbmZpZyIKPiA+ID4gPiA+ICAgICAgc291cmNlICJkcml2ZXJz
-L0tjb25maWciCj4gPiA+ID4gPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2FybTMyL2VudHJ5
-LlMgYi94ZW4vYXJjaC9hcm0vYXJtMzIvZW50cnkuUwo+ID4gPiA+ID4gaW5kZXggYzJmYWQ1ZmU5
-Yi4uNTRhMTczM2Y4NyAxMDA2NDQKPiA+ID4gPiA+IC0tLSBhL3hlbi9hcmNoL2FybS9hcm0zMi9l
-bnRyeS5TCj4gPiA+ID4gPiArKysgYi94ZW4vYXJjaC9hcm0vYXJtMzIvZW50cnkuUwo+ID4gPiA+
-ID4gQEAgLTM0LDYgKzM0LDIwIEBACj4gPiA+ID4gPiAgICAgICAgICAgIGJsbmUgc2F2ZV9ndWVz
-dF9yZWdzCj4gPiA+ID4gPiAgICAgIHNhdmVfZ3Vlc3RfcmVnczoKPiA+ID4gPiA+ICsjaWZkZWYg
-Q09ORklHX0FSTTMyX0hBUkRFTl9CUkFOQ0hfUFJFRElDVE9SCj4gPiA+ID4gPiArICAgICAgICAv
-Kgo+ID4gPiA+ID4gKyAgICAgICAgICogUmVzdG9yZSB2ZWN0b3JzIHRhYmxlIHRvIHRoZSBkZWZh
-dWx0IGFzIGl0IG1heSBoYXZlIGJlZW4KPiA+ID4gPiA+ICsgICAgICAgICAqIGNoYW5nZWQgd2hl
-biByZXR1cm5pbmcgdG8gdGhlIGd1ZXN0IChzZWUKPiA+ID4gPiA+ICsgICAgICAgICAqIHJldHVy
-bl90b19oeXBlcnZpc29yKS4gV2UgbmVlZCB0byBkbyB0aGF0IGVhcmx5IChlLmcKPiA+ID4gPiA+
-IGJlZm9yZQo+ID4gPiA+ID4gKyAgICAgICAgICogYW55IGludGVycnVwdHMgYXJlIHVubWFza2Vk
-KSBiZWNhdXNlIGhhcmRlbmVkIHZlY3RvcnMKPiA+ID4gPiA+IHJlcXVpcmVzCj4gPiA+ID4gPiAr
-ICAgICAgICAgKiBTUCB0byBiZSA4IGJ5dGVzIGFsaWduZWQuIFRoaXMgZG9lcyBub3QgaG9sZCB3
-aGVuIHJ1bm5pbmcKPiA+ID4gPiA+IGluCj4gPiA+ID4gPiArICAgICAgICAgKiB0aGUgaHlwZXJ2
-aXNvci4KPiA+ID4gPiA+ICsgICAgICAgICAqLwo+ID4gPiA+ID4gKyAgICAgICAgbGRyIHIxLCA9
-aHlwX3RyYXBzX3ZlY3Rvcgo+ID4gPiA+ID4gKyAgICAgICAgbWNyIHAxNSwgNCwgcjEsIGMxMiwg
-YzAsIDAKPiA+ID4gPiA+ICsgICAgICAgIGlzYgo+ID4gPiA+ID4gKyNlbmRpZgo+ID4gPiA+ID4g
-Kwo+ID4gPiA+ID4gICAgICAgICAgICBsZHIgcjExLCA9MHhmZmZmZmZmZiAgLyogQ2xvYmJlciBT
-UCB3aGljaCBpcyBvbmx5IHZhbGlkIGZvcgo+ID4gPiA+ID4gaHlwZXJ2aXNvciBmcmFtZXMuICov
-Cj4gPiA+ID4gPiAgICAgICAgICAgIHN0ciByMTEsIFtzcCwgI1VSRUdTX3NwXQo+ID4gPiA+ID4g
-ICAgICAgICAgICBTQVZFX09ORV9CQU5LRUQoU1BfdXNyKQo+ID4gPiA+ID4gQEAgLTE3OSwxMiAr
-MTkzLDM3IEBAIHJldHVybl90b19ndWVzdDoKPiA+ID4gPiA+ICAgICAgICAgICAgUkVTVE9SRV9P
-TkVfQkFOS0VEKFIxMV9maXEpOyBSRVNUT1JFX09ORV9CQU5LRUQoUjEyX2ZpcSk7Cj4gPiA+ID4g
-PiAgICAgICAgICAgIC8qIEZhbGwgdGhydSAqLwo+ID4gPiA+ID4gICAgcmV0dXJuX3RvX2h5cGVy
-dmlzb3I6Cj4gPiA+ID4gPiAtICAgICAgICBjcHNpZCBpCj4gPiA+ID4gPiArICAgICAgICBjcHNp
-ZCBhaQo+ID4gPiA+IAo+ID4gPiA+IFdoeT8KPiA+ID4gCj4gPiA+IEFzeW5jaHJvbm91cyBhYm9y
-dCBpcyBhIGtpbmQgb2YgaW50ZXJydXB0LCBhcyB3ZSBhcmUgZ29pbmcgdG8gc3dpdGNoIHRvCj4g
-PiA+IHRoZQo+ID4gPiBoYXJkZW5lZCB2ZWN0b3IgdGFibGVzIHlvdSBkb24ndCB3YW50IGFuIGlu
-dGVycnVwdCB0byBjb21lIHVwLgo+ID4gPiAKPiA+ID4gVGhpcyBpcyBiZWNhdXNlIHRoZSBoYXJk
-ZW5lZCB2ZWN0b3IgdGFibGVzIHJlcXVpcmVzIFNQIHRvIGJlIDggYnl0ZXMKPiA+ID4gYWxpZ25l
-ZC4KPiA+ID4gV2hlbiBpbiB0aGUgaHlwZXJ2aXNvciwgYW5kIHBhcnRpY3VsYXJseSB3aGVuIHJl
-c3RvcmluZyB0aGUgcmVnaXN0ZXIgKGFzCj4gPiA+IGJlbG93KSwgdGhpcyBhc3N1bXB0aW9uIGRv
-ZXMgbm90IGhvbGQuCj4gPiA+IAo+ID4gPiBTbyBtYXNraW5nIGFsbCBpbnRlcnJ1cHRzIChhcyBt
-ZW50aW9uZWQgYSBmZXcgdGltZSB3aXRoaW4gdGhlIHBhdGNoIGFuZAo+ID4gPiB0aGUKPiA+ID4g
-Y29tbWl0IG1lc3NhZ2UpIHdpbGwgcmVkdWNlIHRoZSByaXNrIHRvIHVzZSB0aGUgaGFyZGVuZWQg
-dmVjdG9ycy4gSSBzYXkKPiA+ID4gcmVkdWNlCj4gPiA+IGJlY2F1c2UgeW91IG1heSBoYXZlIHJl
-Y2VpdmUgZGF0YSBhYm9ydCAoaW1hZ2luZSBhbiB1bmxpa2VseSBlcnJvciBpbiB0aGUKPiA+ID4g
-ZmV3Cj4gPiA+IGluc3RydWN0aW9ucyB0byByZXN0b3JlIHN0YXRlKS4KPiA+ID4gCj4gPiA+IEl0
-IGlzIGFsc28gd2h5IHN3aXRjaGluZyB2ZWN0b3IgdGFibGVzIGFyZSBkb25lIHZlcnkgZWFybHkg
-aW4gZW50cnkgcGF0aAo+ID4gPiBhbmQKPiA+ID4gdmVyeSBsYXRlIGluIHRoZSBleGl0IHBhdGgu
-Cj4gPiAKPiA+IEFsbCByaWdodCwgdGhhbmtzIGZvciB0aGUgZXhwbGFuYXRpb24uIFBsZWFzZSBh
-ZGQgImFuZCBtYXNrIGFzeW5jaHJvbm91cwo+ID4gYWJvcnRzIiBpbiB0aGUgY29tbWl0IG1lc3Nh
-Z2UuCj4gCj4gSSBhbSBub3Qgc3VyZWx5IHdoYXQgeW91IGV4YWN0bHkgc3VnZ2VzdCBoZXJlLiBU
-aGUgY29tbWl0IG1lc3NhZ2UgY3VycmVudGx5Cj4gY29udGFpbnM6Cj4gCj4gIlRoZXJlZm9yZSBo
-eXBlcnZpc29yIGNvZGUgcnVubmluZyB3aXRoIGd1ZXN0IHZlY3RvcnMgdGFibGUgc2hvdWxkIGJl
-Cj4gbWluaW1pemVkIGFuZCBhbHdheXMgaGF2ZSBpbnRlcnJ1cHRzIG1hc2tlZCB0byByZWR1Y2Ug
-dGhlIHJpc2sgdG8gdXNlCj4gdGhlbS4iCj4gCj4gV2hhdCBhcmUgeW91IHN1Z2dlc3Rpbmc/Cgoi
-VGhlcmVmb3JlIGh5cGVydmlzb3IgY29kZSBydW5uaW5nIHdpdGggZ3Vlc3QgdmVjdG9ycyB0YWJs
-ZSBzaG91bGQgYmUKbWluaW1pemVkIGFuZCBhbHdheXMgaGF2ZSBpbnRlcnJ1cHRzIGFuZCBhc3lu
-YyBhYm9ydHMgbWFza2VkIHRvIHJlZHVjZQp0aGUgcmlzayB0byB1c2UgdGhlbS4iCgpEbyB5b3Ug
-dGhpbmsgdGhhdCBpdCBpcyBjbGVhcmVyPwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1952522604-1516906886=:11958
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1801251137231.11958@sstabellini-ThinkPad-X260>
+
+On Thu, 25 Jan 2018, Andrew Cooper wrote:
+> On 25/01/18 18:37, Stefano Stabellini wrote:
+> > The TCG emulator in QEMU is not good enough to pass the the tests in
+> > stub_selftest. Detect if Xen is running on TCG early, then drop the
+> > tests if it is the case.
+> >
+> > Signed-off-by: Stefano Stabellini <sstabellini@kernel.org>
+> 
+> I'm still opposed to this change.  The selftests demonstrate that TCG
+> doesn't work for an architectural area we depend, and simply pretending
+> its not buggy isn't ok.  If this were a piece of real hardware, it would
+> be blacklisted in a similar fashion to XSA-9.
+
+> I still haven't seen a convincing enough usecase to cause Xen to
+> proactively look for Qemu in all cases including release builds on real
+> hardware.
+
+Testing is a very good use case. It doesn't have to replace testing on
+real hardware, it can complement it. You can try it yourself, it might
+become your new favorite test environment :-) Just launch
+qemu-system-x86_64 with -cpu qemu64,+svm. FYI this is my full command
+line:
+
+qemu-system-x86_64 -m 4G -smp 2 -cpu qemu64,+svm \
+    -nographic -serial stdio -monitor none \
+    --bios /usr/share/ovmf/OVMF.fd \
+    -netdev user,id=hostnet0 -device virtio-net-pci,netdev=hostnet0,bus=pci.0,addr=0x3 \
+    -device virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x6 \
+    -drive file=$DISK,if=none,id=drive-virtio-disk0,format=raw,cache=none \
+    -device virtio-blk-pci,bus=pci.0,addr=0x4,drive=drive-virtio-disk0,id=virtio-disk0,bootindex=1 \
+    -device virtio-rng-pci
+
+
+I haven't investigated yet the QEMU side of the problem. I can dig
+deeper there, then, once we understand the full extent of the issue,
+we could decide what to do with this patch. However, I performed a few
+tests so far and I haven't seen any other issues. I can start HVM and
+PVH guests without issues.
+--8323329-1952522604-1516906886=:11958
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1952522604-1516906886=:11958--
