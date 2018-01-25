@@ -1,14 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v11 7/11] x86/entry: Avoid using alternatives in
-	NMI/#MC paths
-Date: Thu, 25 Jan 2018 17:21:20 +0000
-Message-ID: <1516900880-26729-1-git-send-email-andrew.cooper3@citrix.com>
-References: <1516799535-5778-8-git-send-email-andrew.cooper3@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: Xen fails to boot inside QEMU on x86, no VMX:
+Date: Thu, 25 Jan 2018 09:21:20 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1801250921040.11958@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1801221544060.6440@sstabellini-ThinkPad-X260>
+ <31744ea0-7d08-5db8-8aaa-db27dfd49b73@citrix.com>
+ <alpine.DEB.2.10.1801221637010.6440@sstabellini-ThinkPad-X260>
+ <fb87196c-1a48-6c7b-fe44-d560bd17db07@citrix.com>
+ <5A670C1002000078001A16A3@prv-mh.provo.novell.com>
+ <alpine.DEB.2.10.1801231252311.6440@sstabellini-ThinkPad-X260>
+ <20180124091732.p2phuhrd5sktgz5f@MacBook-Pro-de-Roger.local>
+ <alpine.DEB.2.10.1801240945020.6440@sstabellini-ThinkPad-X260>
+ <20180125101911.sx3peqx4xbivbr7a@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-270637848-1516900888=:11958"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1516799535-5778-8-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <20180125101911.sx3peqx4xbivbr7a@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,139 +23,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBwYXRjaCBpcyBkZWxpYmVyYXRlbHkgYXJyYW5nZWQgdG8gYmUgZWFzeSB0byByZXZlcnQg
-aWYvd2hlbiBhbHRlcm5hdGl2ZXMKcGF0Y2hpbmcgYmVjb21lcyBOTUkvI01DIHNhZmUuCgpGb3Ig
-c2FmZXR5LCB0aGVyZSBtdXN0IGJlIGEgZGlzcGF0Y2ggc2VyaWFsaXNpbmcgaW5zdHJ1Y3Rpb24g
-aW4gKHdoYXQgaXMKbG9naWNhbGx5KSBET19TUEVDX0NUUkxfRU5UUlkgc28gdGhhdCwgaW4gdGhl
-IGNhc2UgdGhhdCBYZW4gbmVlZHMgSUJSUyBzZXQgaW4KY29udGV4dCwgYW4gYXR0YWNrZXIgY2Fu
-J3Qgc3BlY3VsYXRlIGFyb3VuZCB0aGUgV1JNU1IgYW5kIHJlYWNoIGFuIGluZGlyZWN0CmJyYW5j
-aCB3aXRoaW4gdGhlIHNwZWN1bGF0aW9uIHdpbmRvdy4KClVzaW5nIGNvbmRpdGlvbmFscyBvcGVu
-cyB0aGlzIGF0dGFjayB2ZWN0b3IgdXAsIHNvIHRoZSBlbHNlIGNsYXVzZSBnZXRzIGFuCkxGRU5D
-RSB0byBmb3JjZSB0aGUgcGlwZWxpbmUgdG8gY2F0Y2ggdXAgYmVmb3JlIGNvbnRpbnVpbmcuICBU
-aGlzIGFsc28gY292ZXJzCnRoZSBzYWZldHkgb2YgUlNCIGNvbmRpdGlvbmFsLCBhcyBleGVjdXRp
-b24gaXQgaXMgZ3VhcmFudGVlZCB0byBlaXRoZXIgaGl0IHRoZQpXUk1TUiBvciBMRkVOQ0UuCgpP
-bmUgZG93bnNpZGUgb2Ygbm90IHVzaW5nIGFsdGVybmF0aXZlcyBpcyB0aGF0IHRoZXJlIHVuY29u
-ZGl0aW9uYWxseSBhbiBMRkVOQ0UKaW4gdGhlIElTVCBwYXRoIGluIGNhc2VzIHdoZXJlIHdlIGFy
-ZSBub3QgdXNpbmcgdGhlIGZlYXR1cmVzIGZyb20gSUJSUy1jYXBhYmxlCm1pY3JvY29kZS4KClNp
-Z25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+ClJl
-dmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Ci0tLQp2MTA6CiAqIE5l
-dwp2MTE6CiAqIENsZWFyIGJ0aV9pc3RfaW5mbyBpbiBpbml0X3NoYWRvd19zcGVjX2N0cmxfc3Rh
-dGUoKSBmb3IgYmlzZWN0aWJsaXR5CiAqIEludHJvZHVjZSBhIEJVSUxEX0JVR19PTigpIHRvIGNo
-ZWNrIHRoZSBCVElfSVNUX0lCUlMgPT0gU1BFQ19DVFJMX0lCUlMgYWxpYXMKICogVXNlIFVOTElL
-RUxZX0RJU1BBVENIX0xBQkVMKCkgaW4gdGhlIG9wZW5jb2RlZCBVTkxJS0VMWV9TVEFSVCgpCi0t
-LQogeGVuL2FyY2gveDg2L3NwZWNfY3RybC5jICAgICAgICAgICAgfCAgOCArKysrKwogeGVuL2Fy
-Y2gveDg2L3g4Nl82NC9hc20tb2Zmc2V0cy5jICAgfCAgMSArCiB4ZW4vYXJjaC94ODYveDg2XzY0
-L2VudHJ5LlMgICAgICAgICB8ICA2ICsrLS0KIHhlbi9pbmNsdWRlL2FzbS14ODYvY3VycmVudC5o
-ICAgICAgIHwgIDEgKwogeGVuL2luY2x1ZGUvYXNtLXg4Ni9zcGVjX2N0cmwuaCAgICAgfCAgMSAr
-CiB4ZW4vaW5jbHVkZS9hc20teDg2L3NwZWNfY3RybF9hc20uaCB8IDY4ICsrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysKIDYgZmlsZXMgY2hhbmdlZCwgODIgaW5zZXJ0aW9ucygr
-KSwgMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvc3BlY19jdHJsLmMg
-Yi94ZW4vYXJjaC94ODYvc3BlY19jdHJsLmMKaW5kZXggODllNzI4Ny4uY2MxYzk3MiAxMDA2NDQK
-LS0tIGEveGVuL2FyY2gveDg2L3NwZWNfY3RybC5jCisrKyBiL3hlbi9hcmNoL3g4Ni9zcGVjX2N0
-cmwuYwpAQCAtMjAsOCArMjAsMTAgQEAKICNpbmNsdWRlIDx4ZW4vaW5pdC5oPgogI2luY2x1ZGUg
-PHhlbi9saWIuaD4KIAorI2luY2x1ZGUgPGFzbS9tc3ItaW5kZXguaD4KICNpbmNsdWRlIDxhc20v
-cHJvY2Vzc29yLmg+CiAjaW5jbHVkZSA8YXNtL3NwZWNfY3RybC5oPgorI2luY2x1ZGUgPGFzbS9z
-cGVjX2N0cmxfYXNtLmg+CiAKIHN0YXRpYyBlbnVtIGluZF90aHVuayB7CiAgICAgVEhVTktfREVG
-QVVMVCwgLyogRGVjaWRlIHdoaWNoIHRodW5rIHRvIHVzZSBhdCBib290IHRpbWUuICovCkBAIC0x
-NTAsNiArMTUyLDEyIEBAIHZvaWQgX19pbml0IGluaXRfc3BlY3VsYXRpb25fbWl0aWdhdGlvbnMo
-dm9pZCkKICAgICBwcmludF9kZXRhaWxzKHRodW5rKTsKIH0KIAorc3RhdGljIHZvaWQgX19pbml0
-IF9fbWF5YmVfdW51c2VkIGJ1aWxkX2Fzc2VydGlvbnModm9pZCkKK3sKKyAgICAvKiBUaGUgb3B0
-aW1pc2VkIGFzc2VtYmx5IHJlbGllcyBvbiB0aGlzIGFsaWFzLiAqLworICAgIEJVSUxEX0JVR19P
-TihCVElfSVNUX0lCUlMgIT0gU1BFQ19DVFJMX0lCUlMpOworfQorCiAvKgogICogTG9jYWwgdmFy
-aWFibGVzOgogICogbW9kZTogQwpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L3g4Nl82NC9hc20t
-b2Zmc2V0cy5jIGIveGVuL2FyY2gveDg2L3g4Nl82NC9hc20tb2Zmc2V0cy5jCmluZGV4IDE3ZjFk
-NzcuLjUxYmU1MjggMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni94ODZfNjQvYXNtLW9mZnNldHMu
-YworKysgYi94ZW4vYXJjaC94ODYveDg2XzY0L2FzbS1vZmZzZXRzLmMKQEAgLTE0Miw2ICsxNDIs
-NyBAQCB2b2lkIF9fZHVtbXlfXyh2b2lkKQogICAgIE9GRlNFVChDUFVJTkZPX3B2X2NyMywgc3Ry
-dWN0IGNwdV9pbmZvLCBwdl9jcjMpOwogICAgIE9GRlNFVChDUFVJTkZPX3NoYWRvd19zcGVjX2N0
-cmwsIHN0cnVjdCBjcHVfaW5mbywgc2hhZG93X3NwZWNfY3RybCk7CiAgICAgT0ZGU0VUKENQVUlO
-Rk9fdXNlX3NoYWRvd19zcGVjX2N0cmwsIHN0cnVjdCBjcHVfaW5mbywgdXNlX3NoYWRvd19zcGVj
-X2N0cmwpOworICAgIE9GRlNFVChDUFVJTkZPX2J0aV9pc3RfaW5mbywgc3RydWN0IGNwdV9pbmZv
-LCBidGlfaXN0X2luZm8pOwogICAgIERFRklORShDUFVJTkZPX3NpemVvZiwgc2l6ZW9mKHN0cnVj
-dCBjcHVfaW5mbykpOwogICAgIEJMQU5LKCk7CiAKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni94
-ODZfNjQvZW50cnkuUyBiL3hlbi9hcmNoL3g4Ni94ODZfNjQvZW50cnkuUwppbmRleCA3M2JkN2Nh
-Li5hNWE2NzAyIDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYveDg2XzY0L2VudHJ5LlMKKysrIGIv
-eGVuL2FyY2gveDg2L3g4Nl82NC9lbnRyeS5TCkBAIC0xMjYsNyArMTI2LDcgQEAgVU5MSUtFTFlf
-U1RBUlQoZywgZXhpdF9jcjMpCiBVTkxJS0VMWV9FTkQoZXhpdF9jcjMpCiAKICAgICAgICAgLyog
-V0FSTklORyEgYHJldGAsIGBjYWxsICpgLCBgam1wICpgIG5vdCBzYWZlIGJleW9uZCB0aGlzIHBv
-aW50LiAqLwotICAgICAgICBTUEVDX0NUUkxfRVhJVF9UT19YRU4gLyogUmVxOiAlcmJ4PWVuZCwg
-Q2xvYjogYWNkICovCisgICAgICAgIFNQRUNfQ1RSTF9FWElUX1RPX1hFTl9JU1QgLyogUmVxOiAl
-cmJ4PWVuZCwgQ2xvYjogYWNkICovCiAKICAgICAgICAgUkVTVE9SRV9BTEwgYWRqPTgKICAgICAg
-ICAgaXJldHEKQEAgLTczMiw3ICs3MzIsNyBAQCBFTlRSWShkb3VibGVfZmF1bHQpCiAKICAgICAg
-ICAgR0VUX1NUQUNLX0VORCgxNCkKIAotICAgICAgICBTUEVDX0NUUkxfRU5UUllfRlJPTV9JTlRS
-IC8qIFJlcTogJXJzcD1yZWdzLCAlcjE0PWVuZCwgQ2xvYjogYWNkICovCisgICAgICAgIFNQRUNf
-Q1RSTF9FTlRSWV9GUk9NX0lOVFJfSVNUIC8qIFJlcTogJXJzcD1yZWdzLCAlcjE0PWVuZCwgQ2xv
-YjogYWNkICovCiAgICAgICAgIC8qIFdBUk5JTkchIGByZXRgLCBgY2FsbCAqYCwgYGptcCAqYCBu
-b3Qgc2FmZSBiZWZvcmUgdGhpcyBwb2ludC4gKi8KIAogICAgICAgICBtb3YgICBTVEFDS19DUFVJ
-TkZPX0ZJRUxEKHhlbl9jcjMpKCVyMTQpLCAlcmJ4CkBAIC03NjUsNyArNzY1LDcgQEAgaGFuZGxl
-X2lzdF9leGNlcHRpb246CiAKICAgICAgICAgR0VUX1NUQUNLX0VORCgxNCkKIAotICAgICAgICBT
-UEVDX0NUUkxfRU5UUllfRlJPTV9JTlRSIC8qIFJlcTogJXJzcD1yZWdzLCAlcjE0PWVuZCwgQ2xv
-YjogYWNkICovCisgICAgICAgIFNQRUNfQ1RSTF9FTlRSWV9GUk9NX0lOVFJfSVNUIC8qIFJlcTog
-JXJzcD1yZWdzLCAlcjE0PWVuZCwgQ2xvYjogYWNkICovCiAgICAgICAgIC8qIFdBUk5JTkchIGBy
-ZXRgLCBgY2FsbCAqYCwgYGptcCAqYCBub3Qgc2FmZSBiZWZvcmUgdGhpcyBwb2ludC4gKi8KIAog
-ICAgICAgICBtb3YgICBTVEFDS19DUFVJTkZPX0ZJRUxEKHhlbl9jcjMpKCVyMTQpLCAlcmN4CmRp
-ZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L2N1cnJlbnQuaCBiL3hlbi9pbmNsdWRlL2Fz
-bS14ODYvY3VycmVudC5oCmluZGV4IDEwMDlkMDUuLjQ2NzhhMGYgMTAwNjQ0Ci0tLSBhL3hlbi9p
-bmNsdWRlL2FzbS14ODYvY3VycmVudC5oCisrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvY3VycmVu
-dC5oCkBAIC01Nyw2ICs1Nyw3IEBAIHN0cnVjdCBjcHVfaW5mbyB7CiAgICAgLyogU2VlIGFzbS14
-ODYvc3BlY19jdHJsX2FzbS5oIGZvciB1c2FnZS4gKi8KICAgICB1bnNpZ25lZCBpbnQgc2hhZG93
-X3NwZWNfY3RybDsKICAgICBib29sICAgICAgICAgdXNlX3NoYWRvd19zcGVjX2N0cmw7CisgICAg
-dWludDhfdCAgICAgIGJ0aV9pc3RfaW5mbzsKIAogICAgIHVuc2lnbmVkIGxvbmcgX19wYWQ7CiAg
-ICAgLyogZ2V0X3N0YWNrX2JvdHRvbSgpIG11c3QgYmUgMTYtYnl0ZSBhbGlnbmVkICovCmRpZmYg
-LS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L3NwZWNfY3RybC5oIGIveGVuL2luY2x1ZGUvYXNt
-LXg4Ni9zcGVjX2N0cmwuaAppbmRleCBiNDUxMjUwLi5jNDU0YjAyIDEwMDY0NAotLS0gYS94ZW4v
-aW5jbHVkZS9hc20teDg2L3NwZWNfY3RybC5oCisrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvc3Bl
-Y19jdHJsLmgKQEAgLTI5LDYgKzI5LDcgQEAgc3RhdGljIGlubGluZSB2b2lkIGluaXRfc2hhZG93
-X3NwZWNfY3RybF9zdGF0ZSh2b2lkKQogICAgIHN0cnVjdCBjcHVfaW5mbyAqaW5mbyA9IGdldF9j
-cHVfaW5mbygpOwogCiAgICAgaW5mby0+c2hhZG93X3NwZWNfY3RybCA9IGluZm8tPnVzZV9zaGFk
-b3dfc3BlY19jdHJsID0gMDsKKyAgICBpbmZvLT5idGlfaXN0X2luZm8gPSAwOwogfQogCiAjZW5k
-aWYgLyogIV9fWDg2X1NQRUNfQ1RSTF9IX18gKi8KZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2Fz
-bS14ODYvc3BlY19jdHJsX2FzbS5oIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9zcGVjX2N0cmxfYXNt
-LmgKaW5kZXggZTI3ZWEyYi4uMjVmOTRmMyAxMDA2NDQKLS0tIGEveGVuL2luY2x1ZGUvYXNtLXg4
-Ni9zcGVjX2N0cmxfYXNtLmgKKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9zcGVjX2N0cmxfYXNt
-LmgKQEAgLTIwLDYgKzIwLDExIEBACiAjaWZuZGVmIF9fWDg2X1NQRUNfQ1RSTF9BU01fSF9fCiAj
-ZGVmaW5lIF9fWDg2X1NQRUNfQ1RSTF9BU01fSF9fCiAKKy8qIEVuY29kaW5nIG9mIHRoZSBib3R0
-b20gYml0cyBpbiBjcHVpbmZvLmJ0aV9pc3RfaW5mbyAqLworI2RlZmluZSBCVElfSVNUX0lCUlMg
-ICgxIDw8IDApCisjZGVmaW5lIEJUSV9JU1RfV1JNU1IgKDEgPDwgMSkKKyNkZWZpbmUgQlRJX0lT
-VF9SU0IgICAoMSA8PCAyKQorCiAjaWZkZWYgX19BU1NFTUJMWV9fCiAjaW5jbHVkZSA8YXNtL21z
-ci1pbmRleC5oPgogCkBAIC0yNTUsNiArMjYwLDY5IEBACiAgICAgICAgIERPX1NQRUNfQ1RSTF9F
-WElUX1RPX0dVRVNULCBYODZfRkVBVFVSRV9YRU5fSUJSU19TRVQsICAgICAgICAgICBcCiAgICAg
-ICAgIERPX1NQRUNfQ1RSTF9FWElUX1RPX0dVRVNULCBYODZfRkVBVFVSRV9YRU5fSUJSU19DTEVB
-UgogCisvKiBUT0RPOiBEcm9wIHRoZXNlIHdoZW4gdGhlIGFsdGVybmF0aXZlcyBpbmZyYXN0cnVj
-dHVyZSBpcyBOTUkvI01DIHNhZmUuICovCisubWFjcm8gU1BFQ19DVFJMX0VOVFJZX0ZST01fSU5U
-Ul9JU1QKKy8qCisgKiBSZXF1aXJlcyAlcnNwPXJlZ3MsICVyMTQ9c3RhY2tfZW5kCisgKiBDbG9i
-YmVycyAlcmF4LCAlcmN4LCAlcmR4CisgKgorICogVGhpcyBpcyBsb2dpY2FsIG1lcmdlIG9mIERP
-X09WRVJXUklURV9SU0IgYW5kIERPX1NQRUNfQ1RSTF9FTlRSWQorICogbWF5YmV4ZW49MSwgYnV0
-IHdpdGggY29uZGl0aW9uYWxzIHJhdGhlciB0aGFuIGFsdGVybmF0aXZlcy4KKyAqLworICAgIG1v
-dnpibCBTVEFDS19DUFVJTkZPX0ZJRUxEKGJ0aV9pc3RfaW5mbykoJXIxNCksICVlYXgKKworICAg
-IHRlc3RiICRCVElfSVNUX1JTQiwgJWFsCisgICAganogLkxcQF9za2lwX3JzYgorCisgICAgRE9f
-T1ZFUldSSVRFX1JTQgorCisuTFxAX3NraXBfcnNiOgorCisgICAgdGVzdGIgJEJUSV9JU1RfV1JN
-U1IsICVhbAorICAgIGp6IC5MXEBfc2tpcF93cm1zcgorCisgICAgdGVzdGIgJDMsIFVSRUdTX2Nz
-KCVyc3ApCisgICAganogLkxcQF9lbnRyeV9mcm9tX3hlbgorCisgICAgbW92YiAkMCwgU1RBQ0tf
-Q1BVSU5GT19GSUVMRCh1c2Vfc2hhZG93X3NwZWNfY3RybCkoJXIxNCkKKworLkxcQF9lbnRyeV9m
-cm9tX3hlbjoKKyAgICAvKgorICAgICAqIExvYWQgWGVuJ3MgaW50ZW5kZWQgdmFsdWUuICBTUEVD
-X0NUUkxfSUJSUyB2cyAwIGlzIGVuY29kZWQgaW4gdGhlCisgICAgICogYm90dG9tIGJpdCBvZiBi
-dGlfaXN0X2luZm8sIHZpYSBhIGRlbGliZXJhdGUgYWxpYXMgd2l0aCBCVElfSVNUX0lCUlMuCisg
-ICAgICovCisgICAgbW92ICRNU1JfU1BFQ19DVFJMLCAlZWN4CisgICAgYW5kICRCVElfSVNUX0lC
-UlMsICVlYXgKKyAgICB4b3IgJWVkeCwgJWVkeAorICAgIHdybXNyCisKKyAgICAvKiBPcGVuY29k
-ZWQgVU5MSUtFTFlfU1RBUlQoKSB3aXRoIG5vIGNvbmRpdGlvbi4gKi8KK1VOTElLRUxZX0RJU1BB
-VENIX0xBQkVMKFxAX3NlcmlhbGlzZSk6CisgICAgLnN1YnNlY3Rpb24gMQorICAgIC8qCisgICAg
-ICogSW4gdGhlIGNhc2UgdGhhdCB3ZSBtaWdodCBuZWVkIHRvIHNldCBTUEVDX0NUUkwuSUJSUyBm
-b3Igc2FmZXR5LCB3ZQorICAgICAqIG5lZWQgdG8gZW5zdXJlIHRoYXQgYW4gYXR0YWNrZXIgY2Fu
-J3QgcG9pc29uIHRoZSBganogLkxcQF9za2lwX3dybXNyYAorICAgICAqIHRvIHNwZWN1bGF0ZSBh
-cm91bmQgdGhlIFdSTVNSLiAgQXMgYSByZXN1bHQsIHdlIG5lZWQgYSBkaXNwYXRjaAorICAgICAq
-IHNlcmlhbGlzaW5nIGluc3RydWN0aW9uIGluIHRoZSBlbHNlIGNsYXVzZS4KKyAgICAgKi8KKy5M
-XEBfc2tpcF93cm1zcjoKKyAgICBsZmVuY2UKKyAgICBVTkxJS0VMWV9FTkQoXEBfc2VyaWFsaXNl
-KQorLmVuZG0KKworLm1hY3JvIFNQRUNfQ1RSTF9FWElUX1RPX1hFTl9JU1QKKy8qCisgKiBSZXF1
-aXJlcyAlcmJ4PXN0YWNrX2VuZAorICogQ2xvYmJlcnMgJXJheCwgJXJjeCwgJXJkeAorICovCisg
-ICAgdGVzdGIgJEJUSV9JU1RfV1JNU1IsIFNUQUNLX0NQVUlORk9fRklFTEQoYnRpX2lzdF9pbmZv
-KSglcmJ4KQorICAgIGp6IC5MXEBfc2tpcAorCisgICAgRE9fU1BFQ19DVFJMX0VYSVRfVE9fWEVO
-CisKKy5MXEBfc2tpcDoKKy5lbmRtCisKICNlbmRpZiAvKiBfX0FTU0VNQkxZX18gKi8KICNlbmRp
-ZiAvKiAhX19YODZfU1BFQ19DVFJMX0FTTV9IX18gKi8KIAotLSAKMi4xLjQKCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-270637848-1516900888=:11958
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Thu, 25 Jan 2018, Roger Pau Monné wrote:
+> On Wed, Jan 24, 2018 at 09:46:06AM -0800, Stefano Stabellini wrote:
+> > On Wed, 24 Jan 2018, Roger Pau Monné wrote:
+> > > On Tue, Jan 23, 2018 at 04:47:51PM -0800, Stefano Stabellini wrote:
+> > > > On Tue, 23 Jan 2018, Jan Beulich wrote:
+> > > > > >>> On 23.01.18 at 01:41, <andrew.cooper3@citrix.com> wrote:
+> > > > > > On 23/01/2018 00:38, Stefano Stabellini wrote:
+> > > > > >> On Tue, 23 Jan 2018, Andrew Cooper wrote:
+> > > > > >>> On 22/01/2018 23:48, Stefano Stabellini wrote:
+> > > > > >>>> Hi all,
+> > > > > >>>>
+> > > > > >>>> Running Xen inside QEMU x86 without KVM acceleartion and without VMX
+> > > > > >>>> emulation leads to the failure appended below.
+> > > > > >>>>
+> > > > > >>>> This trivial workaround "fixes" the problem:
+> > > > > >>>>
+> > > > > >>>> diff --git a/xen/arch/x86/extable.c b/xen/arch/x86/extable.c
+> > > > > >>>> index 72f30d9..a67d6c1 100644
+> > > > > >>>> --- a/xen/arch/x86/extable.c
+> > > > > >>>> +++ b/xen/arch/x86/extable.c
+> > > > > >>>> @@ -168,7 +168,6 @@ static int __init stub_selftest(void)
+> > > > > >>>>                         _ASM_EXTABLE(.Lret%=, .Lfix%=)
+> > > > > >>>>                         : [exn] "+m" (res)
+> > > > > >>>>                         : [stb] "r" (addr), "a" (tests[i].rax));
+> > > > > >>>> -        ASSERT(res == tests[i].res.raw);
+> > > > > >>>>      }
+> > > > > >>>>  
+> > > > > >>>>      return 0;
+> > > > > >>>>
+> > > > > >>>>
+> > > > > >>>> Any suggestions?
+> > > > > >>> Which i failed?  This will probably be an emulation bug in Qemu.
+> > > > > >> i=2 is the culprit
+> > > > > > 
+> > > > > > Qemu doesn't emulate %rsp-based memory accesses properly.  It should
+> > > > > > raise #SS[0], and is presumably raising #GP[0] instead.
+> > > > > 
+> > > > > Right, the value on %rax supports that suspicion. Dropping the
+> > > > > ASSERT() is no option, of course. If we were able to reliably
+> > > > > detect that we're running under qemu, we could cater for this
+> > > > > special case, but I can't seem to be able to think of other options
+> > > > > besides adding a command line option allowing to bypass the self
+> > > > > test.
+> > > > 
+> > > > I am going to give a look at the QEMU side of things. However, even if I
+> > > > fix the bug in QEMU, it won't solve the problem for all the QEMU
+> > > > instances already out there, shipped by distros, etc.
+> > > > 
+> > > > So, I think that regardless of the QEMU fix, we also need to add a
+> > > > workaround in Xen. We can detect QEMU from the cpuid string, which is
+> > > > going to be TCGTCGTCGTCG.
+> > > > 
+> > > > What do you think of something like below?
+> > > 
+> > > The shim code added a probe_hypervisor call into __start_xen, do you
+> > > think you could hook this test there?
+> > > 
+> > > It might make sense to have something like:
+> > > 
+> > > enum guest_type {
+> > >     NONE,
+> > >     XEN,
+> > >     QEMU,
+> > > };
+> > > enum guest_type guest;
+> > > 
+> > > As a global variable that would replace xen_guest.
+> > 
+> > I could hook the test there, but then the QEMU workaround would be tied
+> > to CONFIG_XEN_GUEST, when actually it doesn't have anything to do with
+> > it.
+> > 
+> > Unless you are also suggesting to move probe_hypervisor out of
+> > xen/arch/x86/guest?
+> 
+> Yes, it should be moved somewhere else if also used by other
+> hypervisor detection, but given the nature of your issue I would
+> rather treat this as a CPU errata rather than a 'guest type'.
+> 
+> Treating QEMU as a guest type just for this seems overkill.
+
+I agree. I'll submit something along the lines of my original dirty
+patch.
+--8323329-270637848-1516900888=:11958
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-270637848-1516900888=:11958--
