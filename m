@@ -1,19 +1,10 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v10 07/11] x86/entry: Avoid using
- alternatives in NMI/#MC paths
-Date: Thu, 25 Jan 2018 15:19:45 +0000
-Message-ID: <ad7e132e-60f0-afa2-4111-3eff9cfd8f85@citrix.com>
-References: <1516799535-5778-1-git-send-email-andrew.cooper3@citrix.com>
- <1516799535-5778-8-git-send-email-andrew.cooper3@citrix.com>
- <5A69ED2002000078001A2610@prv-mh.provo.novell.com>
- <a73e368f-7b21-0d75-9741-977f3d452ae1@citrix.com>
- <5A6A027002000078001A2723@prv-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118327: regressions - FAIL
+Date: Thu, 25 Jan 2018 15:25:09 +0000
+Message-ID: <osstest-118327-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3290096820803708869=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A6A027002000078001A2723@prv-mh.provo.novell.com>
-Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,66 +13,265 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjUvMDEvMTggMTU6MTQsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDI1LjAxLjE4IGF0
-IDE2OjA0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IE9uIDI1LzAxLzE4
-IDEzOjQzLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4+IE9uIDI0LjAxLjE4IGF0IDE0OjEyLCA8
-YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+Pj4gQEAgLTI1Niw2ICsyNjEsNjkg
-QEAKPj4+PiAgICAgICAgICBET19TUEVDX0NUUkxfRVhJVF9UT19HVUVTVCwgWDg2X0ZFQVRVUkVf
-WEVOX0lCUlNfU0VULCAgICAgICAgICAgXAo+Pj4+ICAgICAgICAgIERPX1NQRUNfQ1RSTF9FWElU
-X1RPX0dVRVNULCBYODZfRkVBVFVSRV9YRU5fSUJSU19DTEVBUgo+Pj4+ICAKPj4+PiArLyogVE9E
-TzogRHJvcCB0aGVzZSB3aGVuIHRoZSBhbHRlcm5hdGl2ZXMgaW5mcmFzdHJ1Y3R1cmUgaXMgTk1J
-LyNNQyBzYWZlLiAqLwo+Pj4+ICsubWFjcm8gU1BFQ19DVFJMX0VOVFJZX0ZST01fSU5UUl9JU1QK
-Pj4+PiArLyoKPj4+PiArICogUmVxdWlyZXMgJXJzcD1yZWdzLCAlcjE0PXN0YWNrX2VuZAo+Pj4+
-ICsgKiBDbG9iYmVycyAlcmF4LCAlcmN4LCAlcmR4Cj4+Pj4gKyAqCj4+Pj4gKyAqIFRoaXMgaXMg
-bG9naWNhbCBtZXJnZSBvZiBET19PVkVSV1JJVEVfUlNCIGFuZCBET19TUEVDX0NUUkxfRU5UUlkK
-Pj4+PiArICogbWF5YmV4ZW49MSwgYnV0IHdpdGggY29uZGl0aW9uYWxzIHJhdGhlciB0aGFuIGFs
-dGVybmF0aXZlcy4KPj4+PiArICovCj4+Pj4gKyAgICBtb3Z6YmwgU1RBQ0tfQ1BVSU5GT19GSUVM
-RChidGlfaXN0X2luZm8pKCVyMTQpLCAlZWF4Cj4+Pj4gKwo+Pj4+ICsgICAgdGVzdGIgJEJUSV9J
-U1RfUlNCLCAlYWwKPj4+PiArICAgIGp6IC5MXEBfc2tpcF9yc2IKPj4+PiArCj4+Pj4gKyAgICBE
-T19PVkVSV1JJVEVfUlNCCj4+Pj4gKwo+Pj4+ICsuTFxAX3NraXBfcnNiOgo+Pj4+ICsKPj4+PiAr
-ICAgIHRlc3RiICRCVElfSVNUX1dSTVNSLCAlYWwKPj4+PiArICAgIGp6IC5MXEBfc2tpcF93cm1z
-cgo+Pj4+ICsKPj4+PiArICAgIHRlc3RiICQzLCBVUkVHU19jcyglcnNwKQo+Pj4+ICsgICAganog
-LkxcQF9lbnRyeV9mcm9tX3hlbgo+Pj4+ICsKPj4+PiArICAgIG1vdmIgJDAsIFNUQUNLX0NQVUlO
-Rk9fRklFTEQodXNlX3NoYWRvd19zcGVjX2N0cmwpKCVyMTQpCj4+Pj4gKwo+Pj4+ICsuTFxAX2Vu
-dHJ5X2Zyb21feGVuOgo+Pj4+ICsgICAgLyoKPj4+PiArICAgICAqIExvYWQgWGVuJ3MgaW50ZW5k
-ZWQgdmFsdWUuICBTUEVDX0NUUkxfSUJSUyB2cyAwIGlzIGVuY29kZWQgaW4gdGhlCj4+Pj4gKyAg
-ICAgKiBib3R0b20gYml0IG9mIGJ0aV9pc3RfaW5mbywgdmlhIGEgZGVsaWJlcmF0ZSBhbGlhcyB3
-aXRoIEJUSV9JU1RfSUJSUy4KPj4+PiArICAgICAqLwo+Pj4+ICsgICAgbW92ICRNU1JfU1BFQ19D
-VFJMLCAlZWN4Cj4+Pj4gKyAgICBhbmQgJEJUSV9JU1RfSUJSUywgJWVheAo+Pj4+ICsgICAgeG9y
-ICVlZHgsICVlZHgKPj4+PiArICAgIHdybXNyCj4+Pj4gKwo+Pj4+ICsgICAgLyogT3BlbmNvZGVk
-IFVOTElLRUxZX1NUQVJUKCkgd2l0aCBubyBjb25kaXRpb24uICovCj4+Pj4gKy5MZGlzcGF0Y2gu
-XEBfc2VyaWFsaXNlOgo+Pj4+ICsgICAgLnN1YnNlY3Rpb24gMQo+Pj4gSG93IGFib3V0IGFkZGlu
-ZyAuaWZuYiB0byBVTkxJS0VMWV9TVEFSVCgpLCBpbnN0ZWFkIG9mIG9wZW4gY29kaW5nPwo+Pj4g
-T3Igd2FpdCAtIHdoeSBjYW4ndCB5b3UgdXNlIGl0IGFzLWlzIGFib3ZlIChpbnN0ZWFkIG9mIHRo
-ZQo+Pj4gImp6IC5MXEBfc2tpcF93cm1zciIpPwo+PiBCZWNhdXNlIHRoZW4gdGhlIGVuZCBsYWJl
-bCBpcyB3cm9uZy4gIE9uZSB3YXkgb2YgYW5vdGhlciwgd2UgZWl0aGVyIG5lZWQKPj4gdG8gb3Bl
-bmNvZGUgc29tZXRoaW5nLCBvciBpbXBsZW1lbnQgVU5MSUtFTFlfRUxTRSgpIHdoaWNoIGlzIGFj
-dHVhbGx5Cj4+IHRoZSBsaWtlbHkgY2FzZSwgYW5kIHRoaXMgaXMgYSBzdWJzdGFudGlhbGx5IGxh
-cmdlciBjYW4gb2Ygd29ybXMuCj4gSSdtIHdpbGxpbmcgdG8gdHJ1c3QgeW91IGZvciBub3cgKHVu
-dGlsIEkgZ2V0IGFyb3VuZCB0byBwbGF5IHdpdGggdGhpcwo+IG15c2VsZiksIGJ1dCBJIGRvbid0
-IGZvbGxvdzogSW4gYW4gVU5MSUtFTFlfU1RBUlQoKSAvCj4gVU5MSUtFTFlfRU5EKCkgcGFpciwg
-aG93IGNvdWxkIHRoZSBsYWJlbHMgYmUgd3JvbmcgaWYgYm90aCBzcGVjaWZ5Cj4gdGhlIHNhbWUg
-dGFnPwoKVGhlIHByb2JsZW0gaXMgdGhhdCBleGVjdXRpb24gbmVlZHMgdG8gam1wIHRvIGFmdGVy
-IHRoZSB3cm1zciwgcmF0aGVyCnRoYW4gYmVmb3JlIHRoZSB0ZXN0YiAkMywgVVJFR1NfY3MoJXJz
-cCksIHdoaWNoIGlzIHdoZXJlIFVOTElLRUxZX0VORCgpCndvdWxkIGN1cnJlbnRseSBsZWF2ZSBp
-dC4KCldlIGRvIG5vdCBoYXZlIHN1aXRhYmxlIFVOTElLRUxZKCkgaW5mcmFzdHJ1Y3R1cmUgdG8g
-ZXhwcmVzcyBhIG5vbi1lbXB0eQpsaWtlbHkgYmFzaWMgYmxvY2suCgo+Cj4+PiBBbmQgdGhlbiwg
-aGF2aW5nIHJlYWNoZWQgdGhlIGVuZCBvZiB0aGUgcGF0Y2ggLSB3aGVyZSBpcyB0aGUKPj4+IG5l
-dyBzdHJ1Y3QgY3B1X2luZm8gZmllbGQgd3JpdHRlbj8gT3IgaXMgdGhpcyBhZ2FpbiBoYXBwZW5p
-bmcgb25seSBpbgo+Pj4gbGF0ZXIgcGF0Y2hlcywgd2l0aCB0aGUgb25lIGhlcmUganVzdCBzZXR0
-aW5nIHRoZSBzdGFnZT8gSWYgc28sCj4+PiBzaG91bGRuJ3QgeW91IGF0IGxlYXN0IHplcm8gdGhl
-IGZpZWxkIGluIGluaXRfc2hhZG93X3NwZWNfY3RybF9zdGF0ZSgpPwo+PiBIbW0gLSBJIHNob3Vs
-ZCBzZXQgMCBpbiBpbml0X3NoYWRvd19zcGVjX2N0cmxfc3RhdGUoKS4KPj4KPj4gQWxsIHRoZSBv
-dGhlciBjYWxjdWxhdGlvbiBsb2dpYyBuZWVkcyB0byBiZSBkZWZlcnJlZCB0byB0aGUgc3Vic2Vx
-dWVudAo+PiBwYXRjaCBmb3IgYmlzZWN0aWJsYXR5Lgo+IE9mIGNvdXJzZS4gV2l0aCB0aGlzIGlu
-aXRpYWxpemF0aW9uIGZpeGVkIGFuZCB0aGUgY29ubmVjdGlvbiBtYWRlCj4gYmV0d2VlbiBCVElf
-SVNUX0lCUlMgYW5kIHRoZSBNU1IgYml0IGF0IHRoZSBkZWZpbml0aW9uIHBvaW50IG9mCj4gdGhl
-IGZvcm1lciwKPiBSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoK
-VGhhbmtzLAoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+--===============3290096820803708869==
+Content-Type: text/plain
+
+flight 118327 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118327/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 118326
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  5b6b15acebfc6ef3dcb72385f328c985526a33e3
+baseline version:
+ xen                  2375832c7e51b67f076e6b07854c4a541cb4bdc3
+
+Last test of basis   118326  2018-01-25 11:01:28 Z    0 days
+Testing same since   118327  2018-01-25 13:01:30 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Daniel De Graaf <dgdegra@tycho.nsa.gov>
+  Ian Jackson <ian.jackson@eu.citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Ross Lagerwall <ross.lagerwall@citrix.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit 5b6b15acebfc6ef3dcb72385f328c985526a33e3
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:59 2018 +0200
+
+    libxl: move ibxl_devid_to_device_... to LIBXL_DEFINE_DEVID_TO_DEVICE
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 32e31182ea3178ab04c8f66ee3b1465f0fc9b255
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:58 2018 +0200
+
+    libxl: move libxl__device_from_ to LIBXL_DEFINE_DEVICE_FROM_TYPE
+    
+    LIBXL_DEFINE_DEVICE_FROM_TYPE uses libxl__..._devtype.type to
+    be assigned as device and backend type.
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 4b3dd5439e24cc85c54cae01815bdb3e57234955
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:57 2018 +0200
+
+    libxl: use libxl__device_kind in LIBXL_DEFINE_UPDATE_DEVID
+    
+    Use libxl__..._devtype.type to update device id.
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 43a858403e9d0ce8c8282e3baade4b8e29c03b54
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:56 2018 +0200
+
+    libxl: use libxl__device_kind to get device XS entry
+    
+    On adding to XS name of device is taken from
+    libxl__device_kind enum. On getting device from XS
+    the name is hardcoded. It leads to potential
+    mistmatch errors. The patch is using libxl__device_kind
+    everywere to have one source of device name.
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 8155476765a5bdecea1534b46562cf28e0113a9a
+Author: Wei Liu <wei.liu2@citrix.com>
+Date:   Wed Jan 24 20:26:26 2018 +0000
+
+    x86: fix GET_STACK_END
+    
+    AIUI the purpose of having the .if directive is to make GET_STACK_END
+    work with any general purpose registers. The code as-is would produce
+    the wrong result for r8. Fix it.
+    
+    Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 6d53d4ce621ee80e732152a545a55ab6762a830b
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Jan 25 12:30:01 2018 +0100
+
+    coverage: introduce generic file
+    
+    It will contain the generic implementation of sysctl_cov_op, which
+    will be shared between all the coverage implementations.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit e6c271a6625277117aece29a061fd522f02a5588
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Jan 25 12:28:47 2018 +0100
+
+    gcov: introduce hooks for the sysctl
+    
+    So that other implementations of the sysctl can be added.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit e8d461497d9e23b01f9f6aeb9ddf92ff2693a2c1
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Jan 25 12:27:44 2018 +0100
+
+    gcov: rename sysctl and functions
+    
+    Change gcov to cov (for internal interfaces) or coverage (for the
+    public ones).
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 7f76b3a06aefc1f201f6bfcb593b5d0b3dc68bff
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:26:55 2018 +0100
+
+    x86/domctl: remove XEN_DOMCTL_pin_mem_cacheattr
+    
+    Remove the implementation of XEN_DOMCTL_pin_mem_cacheattr since it has
+    been replaced by a dmop. Change xc_domain_pin_memory_cacheattr() so
+    that it is only defined when XC_WANT_COMPAT_DEVICEMODEL_API is set and
+    have it call the new dmop.  Leave the definitions of
+    XEN_DOMCTL_MEM_CACHEATTR_* since they are still used by QEMU.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Acked-by: Daniel De Graaf <dgdegra@tycho.nsa.gov>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit af2a20e40e92da6c5383b66bc507bdb7d15ff829
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:26:36 2018 +0100
+
+    libxendevicemodel: provide xendevicemodel_pin_memory_cacheattr
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+
+commit 704538a4741173f4d339650700be681b85722785
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:26:23 2018 +0100
+
+    libxendevicemodel: provide xendevicemodel_relocate_memory
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+
+commit 642123c5123ff48d76d7ee376219ab50336636b9
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:25:22 2018 +0100
+
+    x86/hvm: provide XEN_DMOP_pin_memory_cacheattr
+    
+    Provide XEN_DMOP_pin_memory_cacheattr to allow a deprivileged QEMU to
+    pin the caching type of RAM after moving the VRAM. It is equivalent to
+    XEN_DOMCTL_pin_memory_cacheattr.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 6606cf3e2af0962b12a8802d9a5bf2cef6eaf005
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:24:14 2018 +0100
+
+    x86/hvm: provide XEN_DMOP_relocate_memory
+    
+    Provide XEN_DMOP_relocate_memory, a limited version of
+    XENMEM_add_to_physmap to allow a deprivileged QEMU to move VRAM when a
+    guest programs its BAR. It is equivalent to XENMEM_add_to_physmap with
+    space == XENMAPSPACE_gmfn_range.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 34ae3fce896c7225c27b10c438f5b9a6af773669
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:23:35 2018 +0100
+
+    mm: make xenmem_add_to_physmap global
+    
+    Make it global in preparation to be called by a new dmop.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+(qemu changes not included)
+
+
+--===============3290096820803708869==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3290096820803708869==--
