@@ -1,18 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v10 05/11] x86/entry: Organise the use of
- MSR_SPEC_CTRL at each entry/exit point
-Date: Thu, 25 Jan 2018 07:36:49 -0700
-Message-ID: <5A69F99102000078001A2685@prv-mh.provo.novell.com>
-References: <1516799535-5778-1-git-send-email-andrew.cooper3@citrix.com>
- <1516799535-5778-6-git-send-email-andrew.cooper3@citrix.com>
- <5A69E4CA02000078001A25D4@prv-mh.provo.novell.com>
- <7b4f1324-d60b-8fba-35dc-8f6db949b5df@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: [PATCH v2 1/2] x86/acpi: add retrieval function for
+	rsdp address
+Date: Thu, 25 Jan 2018 15:36:38 +0100
+Message-ID: <20180125143639.9969-2-jgross__16031.8726012067$1516890949$gmane$org@suse.com>
+References: <20180125143639.9969-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <7b4f1324-d60b-8fba-35dc-8f6db949b5df@citrix.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=5epa=eu=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1eeie2-00041F-0y
+ for xen-devel@lists.xenproject.org; Thu, 25 Jan 2018 14:36:50 +0000
+In-Reply-To: <20180125143639.9969-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,20 +22,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>
+To: linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org, xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, rafael.j.wysocki@intel.com, stable@vger.kernel.org, mingo@redhat.com, boris.ostrovsky@oracle.com, lenb@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI1LjAxLjE4IGF0IDE1OjEyLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMjUvMDEvMTggMTM6MDgsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBJdCBtYXkgYWxz
-byBiZSB3b3J0aHdoaWxlIGFnYWluIHRvIHB1bGwgdXAgdGhlIHplcm9pbmcgb2YgJWVkeCwKPj4g
-dXNpbmcgJWRsIGluc3RlYWQgb2YgJDAgaW4gdGhlIG1vdmIgKGFuZCBtYXliZSB0aGVuIGFsc28K
-Pj4gc2ltaWxhcmx5IGluIERPX1NQRUNfQ1RSTF9FWElUX1RPX1hFTiwgYnV0IHRoZXJlIEknbSBs
-ZXNzCj4+IGNlcnRhaW4gaXQgY291bGRuJ3QgaGF2ZSBhIG5lZ2F0aXZlIGVmZmVjdCkuCj4gCj4g
-V2hhdCBuZWdhdGl2ZSBlZmZlY3RzIGFyZSB5b3Ugd29ycmllZCBhYm91dD8gIFRoZXNlIG1hY3Jv
-cyBhcmUgc2VsZgo+IGNvbnRhaW5lZC4KClRoZSByZXN1bHQgb2YgdGhlIHhvciB0aGVuIGlzIGFu
-IGlucHV0IHRvIHRoZSBjbXAsIHdoaWNoIG1heSBiZQpvbmUgY3ljbGUgbW9yZSBsYXRlbmN5IHRo
-YW4gd2l0aCB0aGUgaW1tZWRpYXRlIHplcm8uCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+QWRkIGEgZnVuY3Rpb24gdG8gZ2V0IHRoZSBhZGRyZXNzIG9mIHRoZSBSU0RQIHRhYmxlLiBQZXIg
+ZGVmYXVsdCB1c2UgYQpfX3dlYWsgYW5ub3RhdGVkIGZ1bmN0aW9uIGJlaW5nIGEgbm9wLgoKQ2M6
+IDxzdGFibGVAdmdlci5rZXJuZWwub3JnPiAjIDQuMTEKU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBH
+cm9zcyA8amdyb3NzQHN1c2UuY29tPgotLS0KIGRyaXZlcnMvYWNwaS9vc2wuYyAgIHwgMTAgKysr
+KysrKysrLQogaW5jbHVkZS9saW51eC9hY3BpLmggfCAgMiArKwogMiBmaWxlcyBjaGFuZ2VkLCAx
+MSBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9hY3Bp
+L29zbC5jIGIvZHJpdmVycy9hY3BpL29zbC5jCmluZGV4IDNiYjQ2Y2IyNGE5OS4uMmI3N2RiOTE0
+NzUyIDEwMDY0NAotLS0gYS9kcml2ZXJzL2FjcGkvb3NsLmMKKysrIGIvZHJpdmVycy9hY3BpL29z
+bC5jCkBAIC0xNzgsNiArMTc4LDExIEBAIHZvaWQgYWNwaV9vc192cHJpbnRmKGNvbnN0IGNoYXIg
+KmZtdCwgdmFfbGlzdCBhcmdzKQogI2VuZGlmCiB9CiAKK19fd2VhayBhY3BpX3BoeXNpY2FsX2Fk
+ZHJlc3MgYWNwaV9hcmNoX2dldF9yb290X3BvaW50ZXIodm9pZCkKK3sKKwlyZXR1cm4gMDsKK30K
+KwogI2lmZGVmIENPTkZJR19LRVhFQwogc3RhdGljIHVuc2lnbmVkIGxvbmcgYWNwaV9yc2RwOwog
+c3RhdGljIGludCBfX2luaXQgc2V0dXBfYWNwaV9yc2RwKGNoYXIgKmFyZykKQEAgLTE4OSwxMiAr
+MTk0LDE1IEBAIGVhcmx5X3BhcmFtKCJhY3BpX3JzZHAiLCBzZXR1cF9hY3BpX3JzZHApOwogCiBh
+Y3BpX3BoeXNpY2FsX2FkZHJlc3MgX19pbml0IGFjcGlfb3NfZ2V0X3Jvb3RfcG9pbnRlcih2b2lk
+KQogewotCWFjcGlfcGh5c2ljYWxfYWRkcmVzcyBwYSA9IDA7CisJYWNwaV9waHlzaWNhbF9hZGRy
+ZXNzIHBhOwogCiAjaWZkZWYgQ09ORklHX0tFWEVDCiAJaWYgKGFjcGlfcnNkcCkKIAkJcmV0dXJu
+IGFjcGlfcnNkcDsKICNlbmRpZgorCXBhID0gYWNwaV9hcmNoX2dldF9yb290X3BvaW50ZXIoKTsK
+KwlpZiAocGEpCisJCXJldHVybiBwYTsKIAogCWlmIChlZmlfZW5hYmxlZChFRklfQ09ORklHX1RB
+QkxFUykpIHsKIAkJaWYgKGVmaS5hY3BpMjAgIT0gRUZJX0lOVkFMSURfVEFCTEVfQUREUikKZGlm
+ZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvYWNwaS5oIGIvaW5jbHVkZS9saW51eC9hY3BpLmgKaW5k
+ZXggZGMxZWJmZWViNWVjLi5hYTYwM2NjNWFkMzAgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUvbGludXgv
+YWNwaS5oCisrKyBiL2luY2x1ZGUvbGludXgvYWNwaS5oCkBAIC0xMjY2LDQgKzEyNjYsNiBAQCBz
+dGF0aWMgaW5saW5lIGludCBscGl0X3JlYWRfcmVzaWRlbmN5X2NvdW50X2FkZHJlc3ModTY0ICph
+ZGRyZXNzKQogfQogI2VuZGlmCiAKK2FjcGlfcGh5c2ljYWxfYWRkcmVzcyBhY3BpX2FyY2hfZ2V0
+X3Jvb3RfcG9pbnRlcih2b2lkKTsKKwogI2VuZGlmCS8qX0xJTlVYX0FDUElfSCovCi0tIAoyLjEz
+LjYKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
