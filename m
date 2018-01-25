@@ -1,17 +1,21 @@
-From: Julien Grall <julien.grall@linaro.org>
-Subject: Re: [PATCH 3/7] xen/arm32: entry: Add missing
-	trap_reset entry
-Date: Thu, 25 Jan 2018 11:24:05 +0000
-Message-ID: <8a8cc3da-ca65-1bd1-e378-1fddd56e45b1@linaro.org>
-References: <20180119134103.3390-1-julien.grall@linaro.org>
- <20180119134103.3390-4-julien.grall@linaro.org>
- <alpine.DEB.2.10.1801241510070.6440@sstabellini-ThinkPad-X260>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [Xen-users] xen_pt_region_update: Error: create new
+ mem mapping failed! (err: 22)
+Date: Thu, 25 Jan 2018 11:29:37 +0000
+Message-ID: <20180125112937.GB2183@perard.uk.xensource.com>
+References: <e448ae30-b6fc-1871-a168-89e804113b19@alstadheim.priv.no>
+ <CAFLBxZb4feAU79Y1xyryfZcmpsidJ9sbn4yfro+2kdVwt0fCcQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1801241510070.6440@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=gqmg=eu=citrix.com=prvs=556372074=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1eefiu-0001Ct-LU
+ for xen-devel@lists.xenproject.org; Thu, 25 Jan 2018 11:29:40 +0000
+Content-Disposition: inline
+In-Reply-To: <CAFLBxZb4feAU79Y1xyryfZcmpsidJ9sbn4yfro+2kdVwt0fCcQ@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,32 +24,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: andre.przywara@linaro.org, xen-devel@lists.xen.org
+To: George Dunlap <dunlapg@umich.edu>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, =?iso-8859-1?Q?H=E5kon?= Alstadheim <hakon@alstadheim.priv.no>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgU3RlZmFubywKCk9uIDI0LzAxLzE4IDIzOjE0LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6
-Cj4gT24gRnJpLCAxOSBKYW4gMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+PiBBdCB0aGUgbW9t
-ZW50LCB0aGUgcmVzZXQgdmVjdG9yIGlzIGRlZmluZWQgYXMgLndvcmQgMCAoZS5nIGFuZGVxIHIw
-LCByMCwKPj4gcjApLgo+Pgo+PiBUaGlzIGlzIHJhdGhlciB1bmludHVpdGl2ZSBhbmQgd2lsbCBy
-ZXN1bHQgdG8gZXhlY3V0ZSB0aGUgdHJhcAo+PiB1bmRlZmluZWQuIEluc3RlYWQgaW50cm9kdWNl
-IHRyYXAgaGVscGVycyBmb3IgcmVzZXQgYW5kIHdpbGwgZ2VuZXJhdGUgYW4KPj4gZXJyb3IgbWVz
-c2FnZSBpbiB0aGUgdW5saWtlbHkgY2FzZSB0aGF0IHJlc2V0IHdpbGwgYmUgY2FsbGVkLgo+Pgo+
-PiBUaGlzIGlzIHBhcnQgb2YgWFNBLTI1NC4KPj4KPj4gU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdy
-YWxsIDxqdWxpZW4uZ3JhbGxAbGluYXJvLm9yZz4KPj4gLS0tCj4+ICAgeGVuL2FyY2gvYXJtL2Fy
-bTMyL2VudHJ5LlMgfCAxICsKPj4gICB4ZW4vYXJjaC9hcm0vYXJtMzIvdHJhcHMuYyB8IDUgKysr
-KysKPj4gICAyIGZpbGVzIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKQo+Pgo+PiBkaWZmIC0tZ2l0
-IGEveGVuL2FyY2gvYXJtL2FybTMyL2VudHJ5LlMgYi94ZW4vYXJjaC9hcm0vYXJtMzIvZW50cnku
-Uwo+PiBpbmRleCBjNjQ5MGQyODQ3Li5jMmZhZDVmZTliIDEwMDY0NAo+PiAtLS0gYS94ZW4vYXJj
-aC9hcm0vYXJtMzIvZW50cnkuUwo+PiArKysgYi94ZW4vYXJjaC9hcm0vYXJtMzIvZW50cnkuUwo+
-PiBAQCAtMTQ2LDYgKzE0Niw3IEBAIEdMT0JBTChoeXBfdHJhcHNfdmVjdG9yKQo+PiAgICAgICAg
-ICAgYiB0cmFwX2lycSAgICAgICAgICAgICAgICAgICAgICAvKiAweDE4IC0gSVJRICovCj4+ICAg
-ICAgICAgICBiIHRyYXBfZmlxICAgICAgICAgICAgICAgICAgICAgIC8qIDB4MWMgLSBGSVEgKi8K
-Pj4gICAKPj4gK0RFRklORV9UUkFQX0VOVFJZKHJlc2V0KQo+IAo+IFRoaXMgaXMgT0ssIGJ1dCBz
-aG91bGRuJ3Qgd2UgYWxzbyBjaGFuZ2UgdGhlIGVudHJ5IHVuZGVyCj4gR0xPQkFMKGh5cF90cmFw
-c192ZWN0b3IpLCBmcm9tICIud29yZCAwIiB0byAiYiB0cmFwX3Jlc2V0IiA/CgpUaGF0IHdhcyBt
-eSBwbGFuIGJ1dCBmb3Jnb3QgdG8gZG8gaXQgOi8gSSB3aWxsIHVwZGF0ZSB0aGUgcGF0Y2ggYW5k
-IApyZXNlbmQgaXQuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVGh1LCBKYW4gMjUsIDIwMTggYXQgMTA6Mjg6MTRBTSArMDAwMCwgR2VvcmdlIER1bmxhcCB3
+cm90ZToKPiBPbiBXZWQsIEphbiAyNCwgMjAxOCBhdCA5OjU5IFBNLCBIw6Vrb24gQWxzdGFkaGVp
+bQo+IDxoYWtvbkBhbHN0YWRoZWltLnByaXYubm8+IHdyb3RlOgo+ID4gSSdtIHRyeWluZywgYW5k
+IGZhaWxpbmcsIHRvIGxhdW5jaCBhIHZtIHdpdGggYmlvcyA9ICdvdm1mJyB1bmRlciB4ZW4gNC4x
+MC4KPiA+Cj4gPiBUaGUgZG9tYWluIGxhdW5jaGVzIE9LIGFzIGxvbmcgYXMgSSBkbyBub3QgcGFz
+cyBhbnkgcGNpIGRldmljZXMgdGhyb3VnaCwKPiA+IGJ1dCB3aXRoIHBjaSBkZXZpY2VzIHBhc3Nl
+ZCB0aHJvdWdoLAo+IAo+IEFudGhvbnksCj4gCj4gRG9lcyBPVk1GIHN1cHBvcnQgUENJIHBhc3Mt
+dGhyb3VnaCB5ZXQ/CgpJIGRvbid0IHRoaW5rIE9WTUYgY2FyZXMgaWYgYSBQQ0kgZGV2aWNlIGlz
+IHBhc3MtdGhyb3VnaCBvciBub3QuIERvZXMKdGhlIFZNIHdvcmtzIHdpdGggYmlvcz1zZWFiaW9z
+ID8KClRoZXJlIGlzIG1heWJlIHNvbWV0aGluZ3Mgd3Jvbmcgd2l0aCB0aGUgd2F5IE9WTUYgaGFu
+ZGxlcyBQQ0kgZGV2aWNlcwp0aGF0IGRvZXNuJ3Qgd29yayB3aXRoIHBhc3MtdGhyb3VnaC4KCkjD
+pWtvbiwgY291bGQgeW91IGFkZCB0aGUgZm9sbG93aW5nIGluIHRoZSBWTSBjb25maWc/IFdpdGgg
+dGhhdCwgd2UgY291bGQKZ2V0IHNvbWUgbG9ncyBmcm9tIE9WTUY6CmRldmljZV9tb2RlbF9hcmdz
+X2h2bSA9IFsKICAnLWNoYXJkZXYnLCAnZmlsZSxpZD1kZWJ1Z2NvbixtdXg9b24scGF0aD0vdG1w
+L09WTUYubG9ncywnLAogICctZGV2aWNlJywgJ2lzYS1kZWJ1Z2Nvbixpb2Jhc2U9MHg0MDIsY2hh
+cmRldj1kZWJ1Z2NvbicsCl0KKEZlZWwgZnJlZSB0byBjaGFuZ2UgdGhlIHBhdGguKQoKVGhhbmtz
+LAoKLS0gCkFudGhvbnkgUEVSQVJECgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
