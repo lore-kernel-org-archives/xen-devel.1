@@ -1,10 +1,9 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [libvirt test] 118319: regressions - FAIL
-Date: Fri, 26 Jan 2018 11:03:33 +0000
-Message-ID: <osstest-118319-mainreport@xen.org>
+Subject: [xen-unstable-smoke test] 118354: regressions - FAIL
+Date: Fri, 26 Jan 2018 11:04:01 +0000
+Message-ID: <osstest-118354-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7211911511084109242=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -17,148 +16,276 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDExODMxOSBsaWJ2aXJ0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMTgzMTkvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3Rz
-IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMg
-d2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgIDYg
-eGVuLWluc3RhbGwgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDExODI3OAoKVGVzdHMgd2hp
-Y2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYXJtaGYtYXJt
-aGYtbGlidmlydC14c20gMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICBsaWtl
-IDExODI3OAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAxMyBzYXZlcmVzdG9yZS1zdXBw
-b3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTE4Mjc4CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQg
-ICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
-c3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAxMyBtaWdy
-YXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFy
-bTY0LWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0
-LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0
-LXhzbSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
-ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydCAgICAgMTQgc2F2
-ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1h
-cm02NC1saWJ2aXJ0LXFjb3cyIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCBu
-ZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQtcWNvdzIgMTMgc2F2ZXJlc3RvcmUt
-c3VwcG9ydC1jaGVjayAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmly
-dC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWls
-IG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2
-NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2
-NC1hbWQ2NC1saWJ2aXJ0LXZoZCAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwg
-ICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUtc3Vw
-cG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGli
-dmlydC1yYXcgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFz
-cwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIGxpYnZpcnQgICAgICAgICAgICAgIDcx
-OGExZjU0MzdhMzVmNDEwNzY3NjNmZjU3ODBmYTc3MWZkN2FlMDQKYmFzZWxpbmUgdmVyc2lvbjoK
-IGxpYnZpcnQgICAgICAgICAgICAgIDlkMzRhZjFhNmI2NzFhNGRmMWM3M2VlYTQ2MDcyYmRkZjZi
-MjZiNWYKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDExODI3OCAgMjAxOC0wMS0yMyAwNDoyMDowOCBa
-ICAgIDMgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMTgzMTkgIDIwMTgtMDEtMjUgMDQ6MTk6
-NTYgWiAgICAxIGRheXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZp
-c2lvbnMgdW5kZXIgdGVzdDoKICBNaWNoYWwgUHJpdm96bmlrIDxtcHJpdm96bkByZWRoYXQuY29t
-PgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi14c20gICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWkzODYteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-aTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LWxpYnZpcnQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYtbGlidmlydCAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1p
-Mzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtcHZvcHMgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1wdm9wcyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
-ODYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20g
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5o
-dm0tYW1kNjQteHNtICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmly
-dC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02
-NC1hcm02NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhzbSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0
-LWFybTY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQt
-cGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXFjb3cyICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC12
-aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBv
-cnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUv
-bG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywg
-ZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0
-Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBv
-c3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdl
-Yi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRw
-Oi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7
-aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94
-ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKTm90IHB1c2hp
-bmcuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0KY29tbWl0IDcxOGExZjU0MzdhMzVmNDEwNzY3NjNmZjU3ODBmYTc3MWZkN2FlMDQK
-QXV0aG9yOiBNaWNoYWwgUHJpdm96bmlrIDxtcHJpdm96bkByZWRoYXQuY29tPgpEYXRlOiAgIEZy
-aSBKYW4gMTIgMTY6Mjc6MzkgMjAxOCArMDEwMAoKICAgIGRvY3M6IE1lbnRpb24ganVzdCBpbXBs
-ZW1lbnRlZCBjb21wbGV0ZXJzCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IE1pY2hhbCBQcml2b3pu
-aWsgPG1wcml2b3puQHJlZGhhdC5jb20+CiAgICBSZXZpZXdlZC1ieTogSm9obiBGZXJsYW4gPGpm
-ZXJsYW5AcmVkaGF0LmNvbT4KCmNvbW1pdCA0Y2I0YjY0OWMzZTAzYWQ0MzAxZDM0YTJlYWZiZTMw
-ZTZlM2EyNjM1CkF1dGhvcjogTWljaGFsIFByaXZvem5payA8bXByaXZvem5AcmVkaGF0LmNvbT4K
-RGF0ZTogICBGcmkgSmFuIDEyIDE1OjI4OjMwIDIwMTggKzAxMDAKCiAgICB2aXJzaDogSW50cm9k
-dWNlIHZpcnNoU25hcHNob3ROYW1lQ29tcGxldGVyCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IE1p
-Y2hhbCBQcml2b3puaWsgPG1wcml2b3puQHJlZGhhdC5jb20+CiAgICBSZXZpZXdlZC1ieTogSm9o
-biBGZXJsYW4gPGpmZXJsYW5AcmVkaGF0LmNvbT4KCmNvbW1pdCBiYWI1MjFkODM3Yjg2ZmYyOTgx
-ZTQ3MmYzZmUzMzc2YTI2MTAxZWQ0CkF1dGhvcjogTWljaGFsIFByaXZvem5payA8bXByaXZvem5A
-cmVkaGF0LmNvbT4KRGF0ZTogICBGcmkgSmFuIDEyIDE1OjAwOjQwIDIwMTggKzAxMDAKCiAgICB2
-aXJzaDogSW50cm9kdWNlIHZpcnNoU2VjcmV0VVVJRENvbXBsZXRlcgogICAgCiAgICBUaGlzIGlz
-IGEgc2xpZ2h0IGNoYW5nZSBmcm9tIHByZXZpb3VzIHBhdGNoZXMgc2luY2UgdmlyU2VjcmV0CiAg
-ICBkb2VzIG5vdCBoYXZlIGEgbmFtZSBvbmx5IFVVSUQgc3RyaW5ncy4KICAgIAogICAgU2lnbmVk
-LW9mZi1ieTogTWljaGFsIFByaXZvem5payA8bXByaXZvem5AcmVkaGF0LmNvbT4KICAgIFJldmll
-d2VkLWJ5OiBKb2huIEZlcmxhbiA8amZlcmxhbkByZWRoYXQuY29tPgoKY29tbWl0IDJiYTc2ZTVj
-Yzc1Y2VmZTUzNTJjYjRjYzVhODA4ODQ5OWIyOWI1OTEKQXV0aG9yOiBNaWNoYWwgUHJpdm96bmlr
-IDxtcHJpdm96bkByZWRoYXQuY29tPgpEYXRlOiAgIEZyaSBKYW4gMTIgMTQ6NTE6MzQgMjAxOCAr
-MDEwMAoKICAgIHZpcnNoOiBJbnRyb2R1Y2Ugdmlyc2hOV0ZpbHRlck5hbWVDb21wbGV0ZXIKICAg
-IAogICAgVGhlIHZpckNvbm5lY3RMaXN0QWxsTldGaWx0ZXJzKCkgaGFzIG5vIGV4dHJhIGZsYWdz
-IHlldCwgd2hpY2gKICAgIHNpbXBsaWZpZXMgdGhpbmdzIGEgYml0LgogICAgCiAgICBTaWduZWQt
-b2ZmLWJ5OiBNaWNoYWwgUHJpdm96bmlrIDxtcHJpdm96bkByZWRoYXQuY29tPgogICAgUmV2aWV3
-ZWQtYnk6IEpvaG4gRmVybGFuIDxqZmVybGFuQHJlZGhhdC5jb20+Cgpjb21taXQgNGNkY2UyNDM0
-ODRlMDZlYWFlNGZkODAyZDFkMWIxZmIxMjYwNTBkNQpBdXRob3I6IE1pY2hhbCBQcml2b3puaWsg
-PG1wcml2b3puQHJlZGhhdC5jb20+CkRhdGU6ICAgRnJpIEphbiAxMiAxNDo0NDozNyAyMDE4ICsw
-MTAwCgogICAgdmlyc2g6IEludHJvZHVjZSB2aXJzaE5vZGVEZXZpY2VOYW1lQ29tcGxldGVyCiAg
-ICAKICAgIFlldCBhZ2Fpbiwgd2UgZG9uJ3QgbmVlZCBsaXN0aW5nIGJ5IGRldmljZSBjYXBhYmls
-aXRpZXMsIHNvIGZsYWdzCiAgICBhcmUgdW51c2VkLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBN
-aWNoYWwgUHJpdm96bmlrIDxtcHJpdm96bkByZWRoYXQuY29tPgogICAgUmV2aWV3ZWQtYnk6IEpv
-aG4gRmVybGFuIDxqZmVybGFuQHJlZGhhdC5jb20+Cgpjb21taXQgN2JlZDFhNWI2MTFhYjU5NGM4
-MWExZTc1NTgwYzlkYjc2MTBiMjBiOQpBdXRob3I6IE1pY2hhbCBQcml2b3puaWsgPG1wcml2b3pu
-QHJlZGhhdC5jb20+CkRhdGU6ICAgRnJpIEphbiAxMiAxNDozNTo0MCAyMDE4ICswMTAwCgogICAg
-dmlyc2g6IEludHJvZHVjZSB2aXJzaE5ldHdvcmtOYW1lQ29tcGxldGVyCiAgICAKICAgIFNpZ25l
-ZC1vZmYtYnk6IE1pY2hhbCBQcml2b3puaWsgPG1wcml2b3puQHJlZGhhdC5jb20+CiAgICBSZXZp
-ZXdlZC1ieTogSm9obiBGZXJsYW4gPGpmZXJsYW5AcmVkaGF0LmNvbT4KCmNvbW1pdCA0ZjQyZTJj
-NGQzNDM5YzFjYjQ5MGQ4MzQ2YzVlZjA1OGNkMDEwODYwCkF1dGhvcjogTWljaGFsIFByaXZvem5p
-ayA8bXByaXZvem5AcmVkaGF0LmNvbT4KRGF0ZTogICBGcmkgSmFuIDEyIDE0OjI2OjM1IDIwMTgg
-KzAxMDAKCiAgICB2aXJzaDogSW50cm9kdWNlIHZpcnNoSW50ZXJmYWNlTmFtZUNvbXBsZXRlcgog
-ICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBNaWNoYWwgUHJpdm96bmlrIDxtcHJpdm96bkByZWRoYXQu
-Y29tPgogICAgUmV2aWV3ZWQtYnk6IEpvaG4gRmVybGFuIDxqZmVybGFuQHJlZGhhdC5jb20+Cgpj
-b21taXQgZjgxZjhiNjJiZDE3ZDRiNWU5MWE1Y2M3NzBlMmI5MzMzOGIwZDE1MApBdXRob3I6IE1p
-Y2hhbCBQcml2b3puaWsgPG1wcml2b3puQHJlZGhhdC5jb20+CkRhdGU6ICAgRnJpIEphbiAxMiAx
-NDoxNToxMSAyMDE4ICswMTAwCgogICAgdmlyc2g6IEludHJvZHVjZSB2aXJzaFN0b3JhZ2VWb2xO
-YW1lQ29tcGxldGVyCiAgICAKICAgIFRoaXMgb25lIGlzIGEgYml0IHNpbXBsZXIgc2luY2Ugdmly
-U3RvcmFnZVBvb2xMaXN0QWxsVm9sdW1lcygpCiAgICBoYXMgbm8gZmxhZ3MgeWV0LgogICAgCiAg
-ICBTaWduZWQtb2ZmLWJ5OiBNaWNoYWwgUHJpdm96bmlrIDxtcHJpdm96bkByZWRoYXQuY29tPgog
-ICAgUmV2aWV3ZWQtYnk6IEpvaG4gRmVybGFuIDxqZmVybGFuQHJlZGhhdC5jb20+Cgpjb21taXQg
-NjkwMjZmYzI3MDI1YzAzMWJhMjU0YmE5OTNiOWUyZjgwYjg5NDIxYgpBdXRob3I6IE1pY2hhbCBQ
-cml2b3puaWsgPG1wcml2b3puQHJlZGhhdC5jb20+CkRhdGU6ICAgRnJpIEphbiAxMiAxNDowMToz
-MyAyMDE4ICswMTAwCgogICAgdmlyc2g6IEludHJvZHVjZSB2aXJzaFN0b3JhZ2VQb29sTmFtZUNv
-bXBsZXRlcgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBNaWNoYWwgUHJpdm96bmlrIDxtcHJpdm96
-bkByZWRoYXQuY29tPgogICAgUmV2aWV3ZWQtYnk6IEpvaG4gRmVybGFuIDxqZmVybGFuQHJlZGhh
-dC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7211911511084109242==
+Content-Type: text/plain
+
+flight 118354 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118354/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 118326
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  bb5400b20a0c2c2dce114075b09063038ad373db
+baseline version:
+ xen                  2375832c7e51b67f076e6b07854c4a541cb4bdc3
+
+Last test of basis   118326  2018-01-25 11:01:28 Z    0 days
+Failing since        118327  2018-01-25 13:01:30 Z    0 days   10 attempts
+Testing same since   118344  2018-01-25 20:01:07 Z    0 days    7 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Daniel De Graaf <dgdegra@tycho.nsa.gov>
+  George Dunlap <george.dunlap@citrix.com>
+  Ian Jackson <ian.jackson@eu.citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Ross Lagerwall <ross.lagerwall@citrix.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit bb5400b20a0c2c2dce114075b09063038ad373db
+Author: George Dunlap <george.dunlap@citrix.com>
+Date:   Mon Jan 8 15:50:53 2018 +0000
+
+    xl: Don't warn on using 'deprecated' mode selection
+    
+    We generally support old config formats indefinintely (see the disk
+    format) without emitting warnings.
+    
+    Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+
+commit 5b6b15acebfc6ef3dcb72385f328c985526a33e3
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:59 2018 +0200
+
+    libxl: move ibxl_devid_to_device_... to LIBXL_DEFINE_DEVID_TO_DEVICE
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 32e31182ea3178ab04c8f66ee3b1465f0fc9b255
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:58 2018 +0200
+
+    libxl: move libxl__device_from_ to LIBXL_DEFINE_DEVICE_FROM_TYPE
+    
+    LIBXL_DEFINE_DEVICE_FROM_TYPE uses libxl__..._devtype.type to
+    be assigned as device and backend type.
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 4b3dd5439e24cc85c54cae01815bdb3e57234955
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:57 2018 +0200
+
+    libxl: use libxl__device_kind in LIBXL_DEFINE_UPDATE_DEVID
+    
+    Use libxl__..._devtype.type to update device id.
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 43a858403e9d0ce8c8282e3baade4b8e29c03b54
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:56 2018 +0200
+
+    libxl: use libxl__device_kind to get device XS entry
+    
+    On adding to XS name of device is taken from
+    libxl__device_kind enum. On getting device from XS
+    the name is hardcoded. It leads to potential
+    mistmatch errors. The patch is using libxl__device_kind
+    everywere to have one source of device name.
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 8155476765a5bdecea1534b46562cf28e0113a9a
+Author: Wei Liu <wei.liu2@citrix.com>
+Date:   Wed Jan 24 20:26:26 2018 +0000
+
+    x86: fix GET_STACK_END
+    
+    AIUI the purpose of having the .if directive is to make GET_STACK_END
+    work with any general purpose registers. The code as-is would produce
+    the wrong result for r8. Fix it.
+    
+    Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 6d53d4ce621ee80e732152a545a55ab6762a830b
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Jan 25 12:30:01 2018 +0100
+
+    coverage: introduce generic file
+    
+    It will contain the generic implementation of sysctl_cov_op, which
+    will be shared between all the coverage implementations.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit e6c271a6625277117aece29a061fd522f02a5588
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Jan 25 12:28:47 2018 +0100
+
+    gcov: introduce hooks for the sysctl
+    
+    So that other implementations of the sysctl can be added.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit e8d461497d9e23b01f9f6aeb9ddf92ff2693a2c1
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Jan 25 12:27:44 2018 +0100
+
+    gcov: rename sysctl and functions
+    
+    Change gcov to cov (for internal interfaces) or coverage (for the
+    public ones).
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 7f76b3a06aefc1f201f6bfcb593b5d0b3dc68bff
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:26:55 2018 +0100
+
+    x86/domctl: remove XEN_DOMCTL_pin_mem_cacheattr
+    
+    Remove the implementation of XEN_DOMCTL_pin_mem_cacheattr since it has
+    been replaced by a dmop. Change xc_domain_pin_memory_cacheattr() so
+    that it is only defined when XC_WANT_COMPAT_DEVICEMODEL_API is set and
+    have it call the new dmop.  Leave the definitions of
+    XEN_DOMCTL_MEM_CACHEATTR_* since they are still used by QEMU.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Acked-by: Daniel De Graaf <dgdegra@tycho.nsa.gov>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit af2a20e40e92da6c5383b66bc507bdb7d15ff829
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:26:36 2018 +0100
+
+    libxendevicemodel: provide xendevicemodel_pin_memory_cacheattr
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+
+commit 704538a4741173f4d339650700be681b85722785
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:26:23 2018 +0100
+
+    libxendevicemodel: provide xendevicemodel_relocate_memory
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+
+commit 642123c5123ff48d76d7ee376219ab50336636b9
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:25:22 2018 +0100
+
+    x86/hvm: provide XEN_DMOP_pin_memory_cacheattr
+    
+    Provide XEN_DMOP_pin_memory_cacheattr to allow a deprivileged QEMU to
+    pin the caching type of RAM after moving the VRAM. It is equivalent to
+    XEN_DOMCTL_pin_memory_cacheattr.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 6606cf3e2af0962b12a8802d9a5bf2cef6eaf005
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:24:14 2018 +0100
+
+    x86/hvm: provide XEN_DMOP_relocate_memory
+    
+    Provide XEN_DMOP_relocate_memory, a limited version of
+    XENMEM_add_to_physmap to allow a deprivileged QEMU to move VRAM when a
+    guest programs its BAR. It is equivalent to XENMEM_add_to_physmap with
+    space == XENMAPSPACE_gmfn_range.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 34ae3fce896c7225c27b10c438f5b9a6af773669
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:23:35 2018 +0100
+
+    mm: make xenmem_add_to_physmap global
+    
+    Make it global in preparation to be called by a new dmop.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+(qemu changes not included)
+
+
+--===============7211911511084109242==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7211911511084109242==--
