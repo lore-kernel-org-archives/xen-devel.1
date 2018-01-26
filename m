@@ -1,18 +1,11 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86/hvm: fix domain crash when CR3 has the
- noflush bit set
-Date: Fri, 26 Jan 2018 13:27:51 +0000
-Message-ID: <a56aba26-a90e-3405-89a6-bb53cdcc0a06@citrix.com>
-References: <1516959576-5617-1-git-send-email-rcojocaru@bitdefender.com>
- <5A6B109802000078001A2AA9@prv-mh.provo.novell.com>
- <e31eb4c2-4daf-58fa-969e-22b799fdf865@bitdefender.com>
- <5A6B17CE02000078001A2B08@prv-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118359: tolerable all pass -
+	PUSHED
+Date: Fri, 26 Jan 2018 13:38:25 +0000
+Message-ID: <osstest-118359-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1694923596511491593=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A6B17CE02000078001A2B08@prv-mh.provo.novell.com>
-Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,54 +14,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: bitweasil@cryptohaze.com, tamas@tklengyel.com, xen-devel@lists.xen.org
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjYvMDEvMTggMTA6NTgsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDI2LjAxLjE4IGF0
-IDExOjQ5LCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4+IE9uIDAxLzI2LzIw
-MTggMTI6MjcgUE0sIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4gT24gMjYuMDEuMTggYXQgMTA6
-MzksIDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29tPiB3cm90ZToKPj4+PiAtLS0gYS94ZW4vYXJj
-aC94ODYvaHZtL21vbml0b3IuYwo+Pj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vbW9uaXRvci5j
-Cj4+Pj4gQEAgLTM2LDYgKzM2LDEyIEBAIGJvb2wgaHZtX21vbml0b3JfY3IodW5zaWduZWQgaW50
-IGluZGV4LCB1bnNpZ25lZCBsb25nIHZhbHVlLCB1bnNpZ25lZCBsb25nIG9sZCkKPj4+PiAgICAg
-IHN0cnVjdCBhcmNoX2RvbWFpbiAqYWQgPSAmY3Vyci0+ZG9tYWluLT5hcmNoOwo+Pj4+ICAgICAg
-dW5zaWduZWQgaW50IGN0cmxyZWdfYml0bWFzayA9IG1vbml0b3JfY3RybHJlZ19iaXRtYXNrKGlu
-ZGV4KTsKPj4+PiAgCj4+Pj4gKyAgICBpZiAoIGluZGV4ID09IDMgJiYgaHZtX3BjaWRfZW5hYmxl
-ZChjdXJyKSApIC8qIENsZWFyIHRoZSBub2ZsdXNoIGJpdC4gKi8KPj4+PiArICAgIHsKPj4+PiAr
-ICAgICAgICB2YWx1ZSAmPSAoKDF1bGwgPDwgNjMpIC0gMSk7Cj4+Pj4gKyAgICAgICAgb2xkICY9
-ICgoMXVsbCA8PCA2MykgLSAxKTsKPj4+IFdoeSB3b3VsZCAib2xkIiBuZWVkIGNsZWFyaW5nIHRo
-ZSBiaXQ/IEl0IGJlaW5nIHNldCBkdXJpbmcgd3JpdGUKPj4+IGRvZXNuJ3QgYWN0dWFsbHkgZ2V0
-IHN0b3JlZCBpbnRvIHRoZSByZWdpc3RlciwgYWl1aS4KPj4gdi0+YXJjaC5odm1fdmNwdS5ndWVz
-dF9jclszXSAod2hpY2ggaXMgdXNlZCBmb3IgIm9sZCIpIGRvZXMgZ2V0IHNldCBpbiBhCj4+IG51
-bWJlciBvZiBwbGFjZXM6Cj4+Cj4+ICQgZ3JlcCAtSVJuICJodm1fdmNwdS5ndWVzdF9jclxbM1xd
-ID0iCj4+IGFyY2gveDg2L2h2bS9odm0uYzoyMzQzOiAgICB2LT5hcmNoLmh2bV92Y3B1Lmd1ZXN0
-X2NyWzNdID0gdmFsdWU7Cj4+IGFyY2gveDg2L2h2bS9odm0uYzozOTE0OiAgICB2LT5hcmNoLmh2
-bV92Y3B1Lmd1ZXN0X2NyWzNdID0gMDsKPj4gYXJjaC94ODYvaHZtL3ZteC92bXguYzo3OTA6ICAg
-IHYtPmFyY2guaHZtX3ZjcHUuZ3Vlc3RfY3JbM10gPSBjcjM7Cj4+IGFyY2gveDg2L2h2bS92bXgv
-dm14LmM6MzUyMjogICAgICAgICAgICB2LT5hcmNoLmh2bV92Y3B1Lmd1ZXN0X2NyWzNdID0KPj4g
-di0+YXJjaC5odm1fdmNwdS5od19jclszXTsKPj4gYXJjaC94ODYvaHZtL2RvbWFpbi5jOjIwNzog
-ICAgICAgIHYtPmFyY2guaHZtX3ZjcHUuZ3Vlc3RfY3JbM10gPSByZWdzLT5jcjM7Cj4+IGFyY2gv
-eDg2L2h2bS9kb21haW4uYzoyNTg6ICAgICAgICB2LT5hcmNoLmh2bV92Y3B1Lmd1ZXN0X2NyWzNd
-ID0gcmVncy0+Y3IzOwo+PiBhcmNoL3g4Ni9odm0vc3ZtL3N2bS5jOjMxNjogICAgdi0+YXJjaC5o
-dm1fdmNwdS5ndWVzdF9jclszXSA9IGMtPmNyMzsKPj4gYXJjaC94ODYvaHZtL3N2bS9zdm0uYzoy
-NDc2OiAgICAgICAgdi0+YXJjaC5odm1fdmNwdS5ndWVzdF9jclszXSA9Cj4+IHYtPmFyY2guaHZt
-X3ZjcHUuaHdfY3JbM10gPQo+Pgo+PiBhbmQgSSB0aG91Z2h0IGl0J3MgYmV0dGVyIHRvIGJlIHNh
-ZmUgdGhhbiBzb3JyeS4KPiBBcyBjYW4gYmUgaW1wbGllZCBmcm9tIHRoZSBiaXQgbm90IGJlaW5n
-IHN0b3JlZCBpbnRvIHRoZSBhY3R1YWwKPiByZWdpc3Rlciwgd2Ugc2hvdWxkIGVpdGhlciBjb25z
-aXN0ZW50bHkgc3RvcmUgdGhlIGJpdCBhbmQgbWFzawo+IGl0IHdoZXJlIG5lZWRlZCBvciAtIGZv
-bGxvd2luZyB5b3VyIHBhdGNoIC0gbWFzayB0aGUgYml0IGJlZm9yZQo+IHN0b3JpbmcgYSB2YWx1
-ZS4gVGhpcyBsYXR0ZXIgYXBwcm9hY2ggYWxzbyBoYXMgdGhlIGFkdmFudGFnZQo+IG9mIHByb3Bl
-cmx5IGNhdXNpbmcgZmFpbHVyZSB3aGVuIGUuZy4gdGhlIGluY29taW5nIG1pZ3JhdGlvbgo+IHN0
-cmVhbSBoYXMgdGhlIGJpdCBzZXQuCgpMdWNraWx5LCB3ZSB3b24ndCBldmVyIHNlZSB0aGlzIGJp
-dCBzZXQgaW4gbWlncmF0aW9uLsKgIEludHJvc3BlY3Rpb24KY3VycmVudGx5IG5lZWRzIHRvIGRl
-dGFjaCBmcm9tIHRoZSBkb21haW4gYXJvdW5kIG1pZ3JhdGlvbiwgd2hpY2ggbWVhbnMKd2Ugd2ls
-bCBuZXZlciBlbmQgdXAgaGF2aW5nIGEgdmNwdSBwYXVzZWQgb24gaXRzIGludHJvc3BlY3Rpb24t
-Y3IzIGV4aXQKd2l0aCB0aGUgYml0IHNldC4KCldoYXQgaXMgaG93ZXZlciBhIHByb2JsZW0gZm9y
-IG1pZ3JhdGlvbiBpcyB0aGF0IHdlIGRvbid0IGtub3cgdGhhdCB0aGUKaW5jb21pbmcgZG9tYWlu
-IGhhcyBQQ0lEIGF2YWlsYWJsZSB3aGVuIGF1ZGl0aW5nICVjcjMncyBjb250ZW50LCBhbmQKdGhl
-cmUgaXMgc3RpbGwgYSBsYXJnZSBxdWFudGl0eSBvZiB3b3JrIHJlcXVpcmVkIHVudGlsIHdlIGNh
-biBmaXggdGhpcy4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+--===============1694923596511491593==
+Content-Type: text/plain
+
+flight 118359 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118359/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  76dcdb75b7cc9e7e8470e711db14bbbd3ae92415
+baseline version:
+ xen                  2375832c7e51b67f076e6b07854c4a541cb4bdc3
+
+Last test of basis   118326  2018-01-25 11:01:28 Z    1 days
+Failing since        118327  2018-01-25 13:01:30 Z    1 days   11 attempts
+Testing same since   118359  2018-01-26 12:01:28 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Daniel De Graaf <dgdegra@tycho.nsa.gov>
+  George Dunlap <george.dunlap@citrix.com>
+  Ian Jackson <ian.jackson@eu.citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Ross Lagerwall <ross.lagerwall@citrix.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   2375832c7e..76dcdb75b7  76dcdb75b7cc9e7e8470e711db14bbbd3ae92415 -> smoke
+
+
+--===============1694923596511491593==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1694923596511491593==--
