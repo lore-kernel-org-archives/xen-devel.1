@@ -1,19 +1,21 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: Xen Introspection, KPTI,
- and CR3 bit 63 leads to guest VMENTRY failures during introspection
-Date: Fri, 26 Jan 2018 09:39:32 +0200
-Message-ID: <a188f71a-7e0b-47b4-3e07-dee9e87aea83@bitdefender.com>
-References: <CALn24pArgwLSBy7TO0j4gcqXdzJ5pqmW_koKP7-Lfg8FXrOZEQ@mail.gmail.com>
- <0052b33d-f0fe-ee91-892d-a63c8001c567@bitdefender.com>
- <CALn24pBf1UGbrqsSD_=abdM1U7X+vMuPd0q4KgYYH_tmd7mkAw@mail.gmail.com>
- <cf9bfa43-6ca5-e260-c509-040b927390fa@bitdefender.com>
- <CALn24pDDFmh9+SkE-gyyK2xzhemX7=JBYzt2SQjFGnp4gy-yyQ@mail.gmail.com>
+From: Christoph Hellwig <hch@lst.de>
+Subject: Re: [PATCH] MAINTAINERS: add the iommu list for swiotlb
+	and	xen-swiotlb
+Date: Fri, 26 Jan 2018 08:51:53 +0100
+Message-ID: <20180126075153.GA2356__45896.012945059$1516953062$gmane$org@lst.de>
+References: <20180116075624.5191-1-hch@lst.de>
+ <20180125142618.GB25449@char.us.oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CALn24pDDFmh9+SkE-gyyK2xzhemX7=JBYzt2SQjFGnp4gy-yyQ@mail.gmail.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=/ltq=ev=lst.de=hch@srs-us1.protection.inumbo.net>)
+ id 1eeynr-0006Y2-2u
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2018 07:52:03 +0000
+Content-Disposition: inline
+In-Reply-To: <20180125142618.GB25449@char.us.oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,40 +24,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Bitweasil ." <bitweasil@cryptohaze.com>
-Cc: andrew.cooper3@citrix.com, tamas@tklengyel.com, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
+To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: xen-devel@lists.xenproject.org, iommu@lists.linux-foundation.org, Christoph Hellwig <hch@lst.de>, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMjYvMjAxOCAwMjowMiBBTSwgQml0d2Vhc2lsIC4gd3JvdGU6Cj4gVGhpcyBhbHNvIGlt
-cGFjdHMgdGhlICJvbiBjaGFuZ2Ugb25seSIgY29udHJvbCBzZXR0aW5nIGNvZGUuCj4gCj4gRnJv
-bSBzb21lIGRlYnVnZ2luZyBjb2RlOiBodm1fZXZlbnRfY3IsIHZhbHVlOiA4MDAwMDAwMDFhYWQw
-MDAwLCBvbGQ6Cj4gMWFhZDAwMDAKPiAKPiBUaGlzIHNob3VsZCBub3QgY291bnQgYXMgYSBjaGFu
-Z2VkIENSMyB2YWx1ZSBmb3IgcmVwb3J0aW5nIHB1cnBvc2VzLgo+IAo+IFRoZSBmb2xsb3dpbmcg
-cGF0Y2ggcmVzb2x2ZXMgdGhpcyByZWFzb25hYmx5LCBmb3IgYSBzYW5lIHZhbHVlIG9mCj4gImNo
-YW5nZSBvbmx5IiByZXBvcnRpbmcuwqAgQXBvbG9naWVzIGZvciB0aGUgb2xkIFhlbiB2ZXJzaW9u
-LCBidXQgSQo+IGFzc3VtZSB0aGlzIGlzIHN0aWxsIGFuIGlzc3VlIGlmIHRoZSBvdGhlciBpc3N1
-ZSB3YXMgbm90IHJlc29sdmVkIGluCj4gc3RhZ2luZy4KPiAKPiAKPiAKPiAtLS0geGVuc2VydmVy
-LTQuNy4xLWNsZWFuL3hlbi9hcmNoL3g4Ni9odm0vZXZlbnQuY8KgwqDCoCAyMDE3LTA1LTEwCj4g
-MTE6Mjk6MTQuMTM1MzMyOTY0IC0wNjAwCj4gKysrIHhlbnNlcnZlci00LjcuMS94ZW4vYXJjaC94
-ODYvaHZtL2V2ZW50LmPCoMKgwqAgMjAxOC0wMS0yNQo+IDE2OjUyOjA1LjkzODI1MTAwMCAtMDcw
-MAo+IEBAIC0zMyw2ICszMywxMSBAQAo+IMKgwqDCoMKgIHN0cnVjdCBhcmNoX2RvbWFpbiAqYWQg
-PSAmY3Vyci0+ZG9tYWluLT5hcmNoOwo+IMKgwqDCoMKgIHVuc2lnbmVkIGludCBjdHJscmVnX2Jp
-dG1hc2sgPSBtb25pdG9yX2N0cmxyZWdfYml0bWFzayhpbmRleCk7Cj4gwqAKPiArCj4gK8KgwqDC
-oCAvLyBQYXRjaCBpbiB3b3JrIGZyb20gUmF6dmFuCj4gK8KgwqDCoCBpZiAoIGh2bV9wY2lkX2Vu
-YWJsZWQoY3VycikgKQo+ICvCoMKgwqDCoMKgwqDCoCB2YWx1ZSAmPSAoKDF1bGwgPDwgNjMpIC0g
-MSk7Cj4gKwo+IMKgwqDCoMKgIGlmICggKGFkLT5tb25pdG9yLndyaXRlX2N0cmxyZWdfZW5hYmxl
-ZCAmIGN0cmxyZWdfYml0bWFzaykgJiYKPiDCoMKgwqDCoMKgwqDCoMKgwqAgKCEoYWQtPm1vbml0
-b3Iud3JpdGVfY3RybHJlZ19vbmNoYW5nZW9ubHkgJiBjdHJscmVnX2JpdG1hc2spIHx8Cj4gwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgdmFsdWUgIT0gb2xkKSApCgpUaGFua3MsIHRoYXQncyByaWdodC4g
-QnV0IEkga2VlcCB0aGlua2luZyB0aGF0IHRoZSBwcm9wb3NlZCBjaGFuZ2VzCndvdWxkIG5vdyBp
-bmN1ciB0aGUgZmx1c2ggZXZlbiBvbiBub24taW50cm9zcGVjdGlvbiBwYXRocyAod2hpY2ggZm9y
-CnNvbWUgcmVhc29uIHNlZW0gdG8gd29yayBmaW5lIHdpdGggdGhlIG5vZmx1c2ggYml0IHNldCku
-CgpTbyBJIHRoaW5rIHRoaXMgcGF0Y2ggd2lsbCBhZmZlY3QgYWxsIENSMyB3cml0ZXMsIHNpbmNl
-IHRoZSBvbmx5CmRpZmZlcmVuY2UgYmV0d2VlbiBpbnRyb3NwZWN0aW9uIGFuZCBubyBpbnRyb3Nw
-ZWN0aW9uIGlzIHRoYXQKaHZtX3NldF9jcjMoKSBpcyBjYWxsZWQgd2l0aCBtYXlfZGVmZXIgPT0g
-dHJ1ZSBpbiB0aGUgZmlyc3QgY2FzZSwgYW5kCmZhbHNlIGluIHRoZSBzZWNvbmQsIGFuZCBib3Ro
-IGNhc2VzIGV2ZW50dWFsbHkgZW5kIHVwIGNsZWFyaW5nIG5vZmx1c2guCgpJIHRoaXMgYWNjZXB0
-YWJsZSB0byBldmVyeW9uZSwgb3IgZG8gd2UgbWFrZSB0aGlzIHNtYXJ0ZXI/CgoKVGhhbmtzLApS
-YXp2YW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVGh1LCBKYW4gMjUsIDIwMTggYXQgMDk6MjY6MThBTSAtMDUwMCwgS29ucmFkIFJ6ZXN6dXRl
+ayBXaWxrIHdyb3RlOgo+IE9uIFR1ZSwgSmFuIDE2LCAyMDE4IGF0IDA4OjU2OjI0QU0gKzAxMDAs
+IENocmlzdG9waCBIZWxsd2lnIHdyb3RlOgo+ID4gQWxsIG90aGVyIGRpc2N1c3Npb25zIHJlbGF0
+ZWQgdG8gdGhlIGRtYSBtYXBwaW5nIGludGVyZmFjZXMgYXJlIG9uIHRoZQo+ID4gaW9tbXUgbGlz
+dCwgc28gbGV0J3MgbWFrZSBpdCB0aGUgb2ZmaWNpYWwgbGlzdCBmb3Igc3dpb3RsYiBhbmQgdGhl
+Cj4gPiBzZWNvbmQgbGlzdCBmb3IgeGVuLXN3aW90bGIuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6
+IENocmlzdG9waCBIZWxsd2lnIDxoY2hAbHN0LmRlPgo+IAo+IEkgYW0gc28gYmVoaW5kIGVtYWls
+cy4uIEkgYW0gbm90IHN1cmUgaWYgSSBoYWQgcmVwbGllZCB0byB0aGlzLCBidXQganVzdAo+IGlu
+IGNhc2UgSSBoYWRuJ3Q6Cj4gCj4gQWNrZWQtYnk6IEtvbnJhZCBSemVzenV0ZWsgV2lsayA8a29u
+cmFkLndpbGtAb3JhY2xlLmNvbT4KClRoYW5rcywgSSd2ZSBhZGRlZCB0aGlzIHBhdGNoIHRvIHRo
+ZSBkbWEtbWFwcGluZyB0cmVlLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
