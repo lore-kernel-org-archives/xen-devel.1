@@ -1,20 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] xen/pvshim: fix GNTTABOP_query_size
- hypercall forwarding with SMAP
-Date: Fri, 26 Jan 2018 15:31:23 +0000
-Message-ID: <5612b27a-cff7-93e5-2c84-546e740354a4@citrix.com>
-References: <20180126152910.4320-1-roger.pau@citrix.com>
+From: Julien Grall <julien.grall@linaro.org>
+Subject: Re: [RFC v2] xen/arm: Suspend to RAM Support in Xen for
+ ARM
+Date: Fri, 26 Jan 2018 15:37:49 +0000
+Message-ID: <400ce04f-2c3b-5020-00af-d44a148a23c0@linaro.org>
+References: <20171222174137.30076-1-mirela.simonovic@aggios.com>
+ <f2c7c2c2-0498-4135-3031-853b04c64be6@linaro.org>
+ <CAPD2p-n8wE5HPgjBPDX9fGGx=7SNS+gcNy3uqEaFKzwAWm09HA@mail.gmail.com>
+ <20180123115857.GB1706@toto>
+ <ec2de564-f4e7-eeef-8426-d8858dcdac41@aggios.com>
+ <20180125141544.GD1706@toto>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=iudn=ev=citrix.com=prvs=557142d6a=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ef5z8-00018A-5E
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2018 15:32:10 +0000
-In-Reply-To: <20180126152910.4320-1-roger.pau@citrix.com>
-Content-Language: en-GB
+In-Reply-To: <20180125141544.GD1706@toto>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,17 +23,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>
+To: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Mirela Simonovic <mirela.simonovic@aggios.com>
+Cc: Oleksandr Tyshchenko <olekstysh@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen Devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjYvMDEvMTggMTU6MjksIFJvZ2VyIFBhdSBNb25uZSB3cm90ZToKPiBEaXNhYmxlIFNNQVAg
-aW4gdGhlIHNoaW0gYmVmb3JlIGJvdW5jaW5nIHRoZSBoeXBlcmNhbGwsIG9yIGVsc2UgTDAKPiB3
-aWxsIGZhaWwgdG8gZ2V0IHRoZSBoeXBlcmNhbGwgYnVmZmVyLgo+Cj4gU2lnbmVkLW9mZi1ieTog
-Um9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4gUmVwb3J0ZWQtYnk6IEZh
-dGloIEFjYXIgPGZhdGloLmFjYXJAZ2FuZGkubmV0PgoKUmV2aWV3ZWQtYnk6IEFuZHJldyBDb29w
-ZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpEbyB3ZSBoYXZlIGFueSBvdGhlciBleGFt
-cGxlcyBvZiB0aGlzP8KgIEkgZXhwZWN0IGl0IG1pZ2h0IGJlIGEgY29tbW9uCnNoaW0gcGF0dGVy
-bi4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+SGkgRWRnYXIsCgpPbiAyNS8wMS8xOCAxNDoxNSwgRWRnYXIgRS4gSWdsZXNpYXMgd3JvdGU6Cj4g
+T24gV2VkLCBKYW4gMjQsIDIwMTggYXQgMDc6MDQ6MzVQTSArMDEwMCwgTWlyZWxhIFNpbW9ub3Zp
+YyB3cm90ZToKPj4gSGkgT2xla3NhbmRyLCBFZGdhciwKPj4KPj4KPj4gVGhhbmtzLCB5b3UncmUg
+cmlnaHQuCj4+Cj4+Cj4+IE9uIDAxLzIzLzIwMTggMTI6NTggUE0sIEVkZ2FyIEUuIElnbGVzaWFz
+IHdyb3RlOgo+Pj4gT24gVHVlLCBKYW4gMjMsIDIwMTggYXQgMDE6NTI6NTBQTSArMDIwMCwgT2xl
+a3NhbmRyIFR5c2hjaGVua28gd3JvdGU6Cj4+Pj4gSGkgTWlyZWxhLAo+Pj4+Cj4+Pj4gSnVzdCBz
+b21lIHJlbWFya3MgcmVnYXJkaW5nIHRoZSBzY29wZSBvZiB3b3JrOgo+Pj4+Cj4+Pj4gK0luIGFk
+ZGl0aW9uLCB0aGUgZm9sbG93aW5nIGhhdmUgdG8gYmUgaW1wbGVtZW50ZWQ6Cj4+Pj4gKyogU3Vz
+cGVuZC9yZXN1bWUgdkNQVSAodHJpZ2dlcmVkIGJ5IHZTWVNURU1fU1VTUEVORCBjYWxsKQo+Pj4+
+ICsqIFN1c3BlbmQvcmVzdW1lIFhlbiAodHJpZ2dlcmVkIGJ5IHZTWVNURU1fU1VTUEVORCBjYWxs
+ZWQgYnkgRG9tMCksIGluY2x1ZGluZzoKPj4+PiArICAgICAgICogRGlzYWJsZSB3YXRoZG9nIG9u
+IHN1c3BlbmQsIGVuYWJsZSBpdCBvbiByZXN1bWUKPj4+PiArICAgICAgICogUGF1c2UgZG9tYWlu
+cyBvbiBzdXNwZW5kLCB1bnBhdXNlIHRoZW0gb24gcmVzdW1lCj4+Pj4gKyAgICAgICAqIERpc2Fi
+bGUgbm9uLWJvb3QgcENQVXMgb24gc3VzcGVuZCwgZW5hYmxlIHRoZW0gb24gcmVzdW1lCj4+Pj4g
+KyAgICAgICAqIFNhdmUvcmVzdG9yZSBvZiBHSUMgY29uZmlndXJhdGlvbgo+Pj4+ICsgICAgICAg
+KiBTdXNwZW5kL3Jlc3VtZSB0aW1lcgo+Pj4+ICsgICAgICAgKiBTYXZlL3Jlc3RvcmUgb2YgRUwy
+IGNvbnRleHQKPj4+PiArICAgICAgICogSW1wbGVtZW50IHJlc3VtZSBlbnRyeSBwb2ludCBpbiBY
+ZW4sIGluY2x1ZGluZyBNTVUgY29uZmlndXJhdGlvbgo+Pj4+Cj4+Pj4gSSB0aGluayB0aGF0IHNh
+dmluZy9yZXN0b3JpbmcgSU9NTVUgcmVnaXN0ZXJzL2NvbnRleHQgc2hvdWxkIGJlCj4+Pj4gaW1w
+bGVtZW50ZWQgYXMgd2VsbC4KPj4+IFllcywgZ29vZCBwb2ludC4KPj4+IE1pcmVsYSwgSSB0aGlu
+ayB0aGF0IGluIHRoZSBaVSsgY2FzZSB0aGUgSU9NTVUgYWN0dWFsbHkgZ2V0cyBwb3dlcmVkIGRv
+d24KPj4+IHdpdGggdGhlIEZQRC4KPj4KPj4gWWVzLCBpdCBpcyBpbiBGUEQuCj4gCj4gSGF2aW5n
+IHNhaWQgdGhhdCBpdCBtYXkgc3RpbGwgYmUgdXNlZnVsIGZyb20gYSBwYXRjaCByZXZpZXcgcGVy
+c3BlY3RpdmUKPiB0byBpbmNyZW1lbnRhbGx5IGFkZCB0aGluZ3MuIFBlcmhhcHMgdGhlIElPTU1V
+IHN1c3BlbmRpbmcgc3VwcG9ydCBjb3VsZAo+IGNvbWUgaW4gZm9sbG93LXVwIHBhdGNoIHNlcmll
+cyBpZiBvdGhlcnMgYWdyZWUuCgorMSA6KS4gSSBzdXNwZWN0IHRoZSBzdXNwZW5kL3Jlc3VtZSBw
+YXRjaCBzZXQgd2lsbCBiZSBxdWl0ZSBiaWcuIFNvIAphbnl0aGluZyB0aGF0IGNhbiBoZWxwIHRo
+ZSByZXZpZXcgKGUuZyBzcGxpdHRpbmcgcGF0Y2ggc2VyaWVzLCBtb3ZpbmcgCm91dCBzb21lIHBh
+cnRzIG9mIHRoZSBpbml0aWFsIHdvcmsuLi4pIHdvdWxkIGJlIGdyZWF0bHkgYXBwcmVjaWF0ZWQu
+CgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
