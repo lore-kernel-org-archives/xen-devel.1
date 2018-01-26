@@ -1,17 +1,18 @@
-From: Julien Grall <julien.grall@linaro.org>
-Subject: Re: [RFC v2] xen/arm: Suspend to RAM Support in Xen for
-	ARM
-Date: Fri, 26 Jan 2018 16:08:40 +0000
-Message-ID: <f80f10bb-0221-745d-5c1c-789e573d38ef@linaro.org>
-References: <20171222174137.30076-1-mirela.simonovic@aggios.com>
- <f2c7c2c2-0498-4135-3031-853b04c64be6@linaro.org>
- <1e7b29a9-80d4-f2b4-54a3-aa7a249924c2@aggios.com>
+From: "Bitweasil ." <bitweasil@cryptohaze.com>
+Subject: Re: Xen Introspection, KPTI,
+ and CR3 bit 63 leads to guest VMENTRY failures during introspection
+Date: Fri, 26 Jan 2018 16:17:20 +0000
+Message-ID: <CALn24pC=62oFKNOasbu7n-qMj4B6r5EoBYAHG1Tg-Y+WWyEDwg@mail.gmail.com>
+References: <CALn24pArgwLSBy7TO0j4gcqXdzJ5pqmW_koKP7-Lfg8FXrOZEQ@mail.gmail.com>
+ <0052b33d-f0fe-ee91-892d-a63c8001c567@bitdefender.com>
+ <CALn24pBf1UGbrqsSD_=abdM1U7X+vMuPd0q4KgYYH_tmd7mkAw@mail.gmail.com>
+ <cf9bfa43-6ca5-e260-c509-040b927390fa@bitdefender.com>
+ <CALn24pDDFmh9+SkE-gyyK2xzhemX7=JBYzt2SQjFGnp4gy-yyQ@mail.gmail.com>
+ <a188f71a-7e0b-47b4-3e07-dee9e87aea83@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8736297296700859446=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1e7b29a9-80d4-f2b4-54a3-aa7a249924c2@aggios.com>
-Content-Language: en-US
+In-Reply-To: <a188f71a-7e0b-47b4-3e07-dee9e87aea83@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,111 +21,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>, xen-devel@lists.xen.org
-Cc: edgar.iglesias@xilinx.com, sstabellini@kernel.org
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: andrew.cooper3@citrix.com, tamas@tklengyel.com, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAyNC8wMS8xOCAxNzo1NSwgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPiBIaSBKdWxpZW4s
-IFN0ZWZhbm8sCgpIaSBNaXJlbGEsCgo+IAo+IFRoYW5rIHlvdSB2ZXJ5IG11Y2ggZm9yIHRoZSBm
-ZWVkYmFjayEKPiAKPiAKPiBPbiAwMS8xMS8yMDE4IDAzOjAwIFBNLCBKdWxpZW4gR3JhbGwgd3Jv
-dGU6Cj4+IEhpIE1pcmVsYSwKPj4KPj4gVGhhbmsgeW91IGZvciB0aGUgc2VuZGluZyB0aGUgZGVz
-aWduIGRvY3VtZW50LiBUaGUgZ2VuZXJhbCBkZXNpZ24gCj4+IGxvb2tzIGdvb2QgdG8gbWUuIEkg
-aGF2ZSBzb21lIGNvbW1lbnRzIGJlbG93LCBidXQgdGhleSBhcmUgbW9yZSAKPj4gcmVsYXRlZCB0
-byB0aGUgaW1wbGVtZW50YXRpb24gb2YgQ1BVIG9uL29mZiBpbiBYZW4uCj4+Cj4+IE9uIDIyLzEy
-LzE3IDE3OjQxLCBNaXJlbGEgU2ltb25vdmljIHdyb3RlOgo+Pgo+PiBbLi4uXQo+Pgo+Pj4gKy0t
-LS0tLS0tLS0tLS0tLQo+Pj4gK1Jlc3VtaW5nIEd1ZXN0cwo+Pj4gKy0tLS0tLS0tLS0tLS0tLQo+
-Pj4gKwo+Pj4gK1Jlc3VtZSBvZiB0aGUgcHJpdmlsZWdlZCBndWVzdCAoRG9tMCkgaXMgYWx3YXlz
-IGZvbGxvd2luZyB0aGUgWGVuIAo+Pj4gcmVzdW1lLgo+Pj4gKwo+Pj4gK0FuIHVucHJpdmlsZWdl
-ZCBndWVzdCBzaGFsbCByZXN1bWUgb25jZSBhIGRldmljZSBpdCBvd25zIHRyaWdnZXJzIGEgCj4+
-PiB3YWtlLXVwCj4+PiAraW50ZXJydXB0LCByZWdhcmRsZXNzIG9mIHdoZXRoZXIgWGVuIHdhcyBz
-dXNwZW5kZWQgd2hlbiB0aGUgd2FrZS11cCAKPj4+IGludGVycnVwdAo+Pj4gK3dhcyB0cmlnZ2Vy
-ZWQuIElmIFhlbiB3YXMgc3VzcGVuZGVkLCBpdCBpcyBhc3N1bWVkIHRoYXQgRG9tMCB3aWxsIGJl
-IAo+Pj4gcnVubmluZwo+Pj4gK2JlZm9yZSB0aGUgRG9tVSBndWVzdCBzdGFydHMgdG8gcmVzdW1l
-LiBUaGUgc3luY2hyb25pemF0aW9uIAo+Pj4gbWVjaGFuaXNtIHRvCj4+PiArZW5mb3JjZSB0aGUg
-YXNzdW1lZCBjb25kaXRpb24gaXMgVEJELgo+Pgo+PiBHaXZlbiB0aGF0IGFsbCBidXQgdGhlIG5v
-bi1ib290IENQVSB3aWxsIGJlIG9mZmxpbmVkLiBEb2VzIHRoZSB3YWtlLXVwIAo+PiBpbnRlcnJ1
-cHQgYWx3YXlzIG5lZWQgdG8gdGFyZ2V0IHRoZSBub24tYm9vdCBDUFU/Cj4gCj4gV2FrZS11cCBp
-bnRlcnJ1cHQgbmVlZHMgdG8gYmUgdGFyZ2V0ZWQgdG8gdGhlIGJvb3QgcENQVSwgYW5kIHRoZSBy
-ZXN1bWUgCj4gc2VxdWVuY2UgaGFzIHRvIHN0YXJ0IGZyb20gdGhlIGJvb3QgcENQVS4KCkkgYXNz
-dW1lIHRoYXQgd2FrZS11cCBpbnRlcnJ1cHRzIGNvdWxkIGJlbG9uZyB0byBhIGd1ZXN0LgpJbiB0
-aGF0IGNhc2UsIHRoZSB3YWtlLXVwIGludGVycnVwdHMgd2lsbCBuZWVkIHRvIGJlIG1vdmVkIHRv
-IHRoZSBib290IApwQ1BVIG9uIHN1c3BlbmQuCgpbLi4uXQoKPj4KPj4gRm9yIGluc3RhbmNlLCB5
-b3UgbGlrZWx5IG5lZWQgdG8gbWlncmF0ZSBpbnRlcnJ1cHRzIHRoYXQgd2FzIGFzc2lnbmVkIAo+
-PiB0byB0aGUgcGh5c2ljYWwgQ1BVIChlaXRoZXIgZ3Vlc3Qgb25lIG9yIFhlbiBvbmUpLiBUaG91
-Z2ggWGVuIG9uZXMgCj4+IG1pZ2h0IGJlIGxlc3MgYSBjb25jZXJuIGJlY2F1c2UgSSB0aGluayB0
-aGV5IGFyZSBhbHdheXMgYXNzaWduZWQgdG8gCj4+IENQVTAgYXQgdGhlIG1vbWVudC4KPiAKPiBJ
-IHdvdWxkIHZlcnkgYXBwcmVjaWF0ZSBtb3JlIGluZm9ybWF0aW9uIG9uIHRoaXMuIFRoZXNlIGtp
-bmQgb2YgCj4gc2NlbmFyaW9zIGNhbiBiZSBlYXNpbHkgb3Zlcmxvb2tlZCBhbmQgSSdtIG5vdCB0
-aGF0IG11Y2ggZXhwZXJpZW5jZWQgCj4gd2l0aCBwaW5uaW5nIGFuZCBpdHMgc2lkZSBlZmZlY3Rz
-Lgo+IExldHMgYXNzdW1lIGEgdkNQVSBpcyBwaW5uZWQgdG8gdGhlIG5vbi1ib290IENQVSMxLiBX
-aGVuIHRoZSBndWVzdCAKPiBlbmFibGVzIGFuIGludGVycnVwdCAoaW50ZXJydXB0IGlzIHRhcmdl
-dGVkIHRvIHRoZSB2Q1BVKSwgd291bGQgWGVuIAo+IHRhcmdldCBwaHlzaWNhbCBpbnRlcnJ1cHQg
-dG8gdGhlIEdJQyBDUFUgaW50ZXJmYWNlIG9mIHBDUFUjMSBvciBwQ1BVIzAgCj4gb3IgYWxsIHBD
-UFVzPwoKSW4geW91ciBleGFtcGxlLCB0aGUgaW50ZXJydXB0cyB3aWxsIHRhcmdldCBwQ1BVIzEg
-b25seS4KCj4gCj4+Cj4+IEZ1cnRoZXJtb3JlLCBQUEkgaGFuZGxlcnMgYXJlIG5vdCByZW1vdmVk
-LiBTYW1lIGZvciBhbnkgbWVtb3J5IAo+PiBhbGxvY2F0ZWQgKHlvdSBtYXkgbG9vc2UgcmVmZXJl
-bmNlIHRvIGl0IGJlY2F1c2UgcGVyY3B1IGFyZWEgZm9yIHRoYXQgCj4+IENQVSB3aWxsIGdldCBm
-cmVlZCkuIEkgYmVsaWV2ZSBnZXQgaW50byB0cm91YmxlIHdoZW4gdGhlIENQVSBpcyBiYWNrIAo+
-PiBvbmxpbmU/Cj4gCj4gWWVzLCBJIG5lZWRlZCB0byBhZGQgZmV3IGZpeGVzIGludG8gZXhpc3Rp
-bmcgY29kZSB0byBlbmFibGUgcENQVSB0byBjb21lIAo+IGJhY2sgb25saW5lLiBJJ2xsIHN1Ym1p
-dCBSRkMgc29vbi4KClRoYW5rIHlvdSEKClsuLi5dCgo+Pgo+PiBJIG1heSBoYXZlIG1pc3Mgb3Ro
-ZXIgYml0cywgc28gSSB3b3VsZCBoaWdobHkgcmVjb21tZW5kIHRvIGdvIHRocm91Z2ggCj4+IHRo
-ZSBib290IGNvZGUgYW5kIHNlZSB3aGF0IGNvdWxkIGdvIHdyb25nLgo+Pgo+PiBbLi5dCj4+Cj4+
-PiArUmVzdW1lIEZsb3cKPj4+ICstLS0tLS0tLS0tLS0KPj4+ICtUaGUgcmVzdW1lIGVudHJ5IHBv
-aW50IHNoYWxsIGJlIGltcGxlbWVudGVkIGluCj4+PiArKiBoeXBfcmVzdW1lKCkgaW4gYXJjaC9h
-cm0vYXJtNjQvZW50cnkuUwo+Pj4gK1RoZSB2ZXJ5IGJlZ2lubmluZyBvZiB0aGUgcmVzdW1lIHBy
-b2NlZHVyZSBoYXMgdG8gYmUgaW1wbGVtZW50ZWQgaW4gCj4+PiBhc3NlbWJseS4KPj4+ICtJdCBz
-aGFsbCBjb250YWluIHRoZSBmb2xsb3dpbmc6Cj4+PiArKiBFbmFibGUgdGhlIE1NVSBzbyB0aGF0
-IHRoZSBzdHJ1Y3R1cmUgY29udGFpbmluZyBDUFUgY29udGV4dCB3aGljaCAKPj4+IHdhcyBzYXZl
-ZCBvbgo+Pj4gK3N1c3BlbmQgY2FuIGJlIGFjY2Vzc2VkCj4+PiArKiBSZXN0b3JlIENQVSBjb250
-ZXh0ICh0byBtYXRjaCB0aGUgdmFsdWVzIHNhdmVkIG9uIHN1c3BlbmQpIGFuZCAKPj4+IHJldHVy
-biBpbnRvIEMKPj4+ICsqIFNldCB0aGUgc3lzdGVtX3N0YXRlIHZhcmlhYmxlIHRvIFNZU19TVEFU
-RV9yZXN1bWUKPj4+ICsqIFJlc3RvcmUgR0lDIGNvbnRleHQKPj4+ICsqIFJlc3VtZSB0aW1lcgo+
-Pj4gKyogRW5hYmxlIGludGVycnVwdHMKPj4+ICsqIEVuYWJsZSBub24tYm9vdCBDUFVzIGJ5IGNh
-bGxpbmcgZW5hYmxlX25vbmJvb3RfY3B1cygpCj4+Cj4+IFlvdSB3b3VsZCBoYXZlIHRvIGJlIGNh
-cmVmdWwgb24gcmUtZW5hYmxpbmcgdGhlIG5vbi1DUFUuIAo+PiBzdGFydF9zZWNvbmRhcnkgaXMg
-aW1wbGVtZW50ZWQgYmFzZWQgb24gdGhlIGFzc3VtcHRpb24gdGhhdCBpdCB3aWxsIAo+PiBvbmx5
-IGJlIGNhbGxlZCBkdXJpbmcgWGVuIGJvb3QuIFNvbWUgb2YgdGhlIGNvZGUgbWF5IGJlIHBhcnQg
-b2YgX19pbml0IAo+PiAoc2VlIGNwdV91cF9zZW5kX3NnaSkgb3Igc2hvdWxkIG5vdCBiZSBjYWxs
-ZWQgYXMgaXQgaXMgYWZ0ZXIgYm9vdCAoZS5nIAo+PiBjaGVja19sb2NhbF9jcHVfZXJyYXRhKS4K
-Pj4KPj4gQW5vdGhlciBJIGhhdmUgaW4gbWluZCBpcyB0aGUgd2F5IFZUQ1JfRUwyIGlzIHNldCB0
-b2RheSAoc2VlIAo+PiBzZXR1cF92aXJ0X3BhZ2luZykuIEl0IGlzIGRvbmUgYXQgYm9vdCB0aW1l
-LCBzbyBpZiB5b3Ugb25saW5lIGEgQ1BVIAo+PiBhZnRlcndhcmRzLCBWVENSX0VMMiB3aWxsIG5v
-dCBiZSBzZXQgY29ycmVjdGx5Lgo+IAo+IFdhcyB0aGVyZSBhbnkgcmVhc29uIHRvIGNvbmZpZ3Vy
-ZSBWVENSX0VMMiBhZnRlciBhbGwgQ1BVcyBiZWNvbWUgb25saW5lPwo+IAo+IEkgZml4ZWQgdGhp
-cyBhcyBmb2xsb3dzOiBpbiBzdGFydF94ZW4oKSwgdGhlIGJvb3QgQ1BVIGNhbGxzIAo+IHNldHVw
-X3ZpcnRfcGFnaW5nKCkgcHJpb3IgdG8gZW5hYmxpbmcgbm9uLWJvb3QgQ1BVcy4gc2V0dXBfdmly
-dF9wYWdpbmcoKSAKPiBjb25maWd1cmVzIFZUQ1JfRUwyIG9ubHkgZm9yIHRoZSBib290IENQVS4K
-PiBOb24tYm9vdCBDUFVzIGNhbGwgc2V0dXBfdmlydF9wYWdpbmdfb25lKCkgbGF0ZXIsIGZyb20g
-Cj4gc3RhcnRfc2Vjb25kYXJ5KCkuIEFsc28sIG9ubHkgdGhlIGJvb3QgQ1BVIHBlcmZvcm1zIHRo
-ZSBjYWxjdWxhdGlvbiBmb3IgCj4gaG93IHRvIGNvbmZpZ3VyZSBWVENSX0VMMiwgbm9uLWJvb3Qg
-Q1BVcyByZWx5IG9uIHRoZSBjYWxjdWxhdGVkIHZhbHVlLgpUaGlzIHdvdWxkIG5vdCBiZSBjb3Jy
-ZWN0LiBJbWFnaW5lIGEgcGxhdGZvcm0gd2l0aCBoZXRlcm9nZW5lb3VzIApwcm9jZXNzb3JzIChz
-dWNoIGFzIGJpZy5MSVRUTEUpLCBlYWNoIHByb2Nlc3NvcnMgbWF5IGhhdmUgZGlmZmVyZW50IHNl
-dCAKb2YgImZlYXR1cmVzIiAoZS5nIG1heCBJUEEgc2l6ZSBzdXBwb3J0ZWQpLiBZb3Ugd2FudCBY
-ZW4gdG8gdXNlIGEgY29tbW9uIApzZXQgb2YgImZlYXR1cmVzIiB0aGF0IHdvdWxkIHdvcmsgb24g
-YWxsIENQVXMuCgpUbyBnaXZlIGFuIGV4YW1wbGUsIHlvdXIgYm9vdCBDUFUgbWF5IHN1cHBvcnQg
-bWF4aW11bSA0OC1iaXQgSVBBIHdoaWxlIAphbGwgdGhlIG90aGVyIENQVXMgd291bGQgc3VwcG9y
-dCBtYXhpbXVtIDQwLWJpdCBJUEEuIElmIFhlbiBkZWNpZGVzIHRvIAp1c2UgbWF4aW11bSA0OC1i
-aXQgSVBBLCB0aGVuIHBhZ2UtdGFibGVzIHdvdWxkIG5vdCB3b3JrIG9uIG90aGVyIENQVXMuCgpJ
-biBvcmRlciB0byB0YWtlIHRoZSBkZWNpc2lvbiwgeW91IG5lZWQgdG8gd2FpdCBhbGwgQ1BVcyB0
-byBjb21lIHVwIGFuZCAKbG9vayBhdCB0aGVpciBJRCByZWdpc3RlcnMuIE9uY2UgdGhlIGRlY2lz
-aW9uIGlzIG1hZGUsIHRoZW4geW91IGNhbiAKY29uZmlndXJlIGNvcnJlY3RseSBWVENSX0VMMi4K
-ClRoaXMgaXMgd2h5IHNldHVwX3ZpcnRfcGFnaW5nKCkgaXMgY2FsbGVkIGFmdGVyIGFsbCB0aGUg
-Q1BVcyBoYXZlIGJvb3RlZC4KCk9idmlvdXNseSwgdGhpcyBkb2VzIG5vdCB3b3JrIGZvciBDUFVz
-IGJyb3VnaHQgdXAgYWZ0ZXJ3YXJkcyAoZS5nIHJlc3VtZSAKY2FzZSkuIEZvciB0aG9zZSBDUFVz
-IHdlIHNob3VsZCBjYWxsIHNldHVwX3ZpcnRfcGFnaW5nX29uZSBkaXJlY3RseSBhbmQgCmNoZWNr
-IHRoYXQgdGhlIHZhbHVlIGNob3NlbiBieSBYZW4gY2FuIGJlIGhhbmRsZWQgYnkgdGhlIHByb2Nl
-c3Nvci4gSWYgCm5vdCwgdGhpcyBDUFUgc2hvdWxkIGJlIHBhcmtlZC4KCkkgdGhpbmsgeW91IGNh
-biB1c2UgKHN5c3RlbV9zdGF0ZSA+IFNZU19TVEFURV9hY3RpdmUpIHRvIGRpZmZlcmVudGlhdGUg
-CmJldHdlZW4gQ1BVcyBicm91Z2h0IGR1cmluZyBYZW4gYm9vdCBmcm9tIHRoZSBvbmUgYWZ0ZXJ3
-YXJkcy4KCk5vdGUgdGhhdCB0aGlzIGlzIHByb2JhYmx5IHRoZSBvbmx5IHBsYWNlIHdoZXJlIHBs
-YXRmb3JtIHdpdGggCmhldGVyb2dlbmVvdXMgcHJvY2Vzc29ycyBhcmUgcHJvcGVybHkgc3VwcG9y
-dGVkIG9uIFhlbi4gSW4gdGhlIGZ1dHVyZSwgCndlIHNob3VsZCBkbyB0aGF0IGZvciBhbGwgImZl
-YXR1cmVzIiBhbmQgcGFyayBDUFUgYnJvdWdodCBhZnRlciBib290IGlmIAp0aGV5IGRvZXMgbm90
-IHN1cHBvcnQgdGhlIG9uZXMgdXNlZCBieSBYZW4uIE1heWJlIGJ5IGhhdmluZyBhIGZyYW1ld29y
-ayAKdmVyeSBzaW1pbGFyIHRvIExpbnV4IChzZWUgYXJjaC9hcm02NC9rZXJuZWwvY3B1ZmVhdHVy
-ZS5jKS4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============8736297296700859446==
+Content-Type: multipart/alternative; boundary="001a114cb0d2b1ca970563b03b9a"
+
+--001a114cb0d2b1ca970563b03b9a
+Content-Type: text/plain; charset="UTF-8"
+
+Razvan -
+
+The proposed changes would only have an impact if CR3 exiting is enabled,
+which implies a pair of world switches and other code execution in a
+different region of memory and with different page tables anyway.
+
+Under normal operation, CR3 exiting is not turned on, so this will have no
+impact on operation.
+
+Are there any non-introspection cases in which CR3 exiting will be enabled
+for hardware virtualized guests?  Given the time cost of a pair of world
+switches and handling the associated code, I question if one could even
+measure the difference of the TLB flush or not.  The CR3 reporting
+performance hit under KPTI is quite catastrophic anyway, though I expect
+one could mitigate that somewhat with CR3-targets, if one wanted to.
+
+On Fri, Jan 26, 2018 at 12:39 AM Razvan Cojocaru <rcojocaru@bitdefender.com>
+wrote:
+
+> On 01/26/2018 02:02 AM, Bitweasil . wrote:
+> > This also impacts the "on change only" control setting code.
+> >
+> > From some debugging code: hvm_event_cr, value: 800000001aad0000, old:
+> > 1aad0000
+> >
+> > This should not count as a changed CR3 value for reporting purposes.
+> >
+> > The following patch resolves this reasonably, for a sane value of
+> > "change only" reporting.  Apologies for the old Xen version, but I
+> > assume this is still an issue if the other issue was not resolved in
+> > staging.
+> >
+> >
+> >
+> > --- xenserver-4.7.1-clean/xen/arch/x86/hvm/event.c    2017-05-10
+> > 11:29:14.135332964 -0600
+> > +++ xenserver-4.7.1/xen/arch/x86/hvm/event.c    2018-01-25
+> > 16:52:05.938251000 -0700
+> > @@ -33,6 +33,11 @@
+> >      struct arch_domain *ad = &curr->domain->arch;
+> >      unsigned int ctrlreg_bitmask = monitor_ctrlreg_bitmask(index);
+> >
+> > +
+> > +    // Patch in work from Razvan
+> > +    if ( hvm_pcid_enabled(curr) )
+> > +        value &= ((1ull << 63) - 1);
+> > +
+> >      if ( (ad->monitor.write_ctrlreg_enabled & ctrlreg_bitmask) &&
+> >           (!(ad->monitor.write_ctrlreg_onchangeonly & ctrlreg_bitmask) ||
+> >            value != old) )
+>
+> Thanks, that's right. But I keep thinking that the proposed changes
+> would now incur the flush even on non-introspection paths (which for
+> some reason seem to work fine with the noflush bit set).
+>
+> So I think this patch will affect all CR3 writes, since the only
+> difference between introspection and no introspection is that
+> hvm_set_cr3() is called with may_defer == true in the first case, and
+> false in the second, and both cases eventually end up clearing noflush.
+>
+> I this acceptable to everyone, or do we make this smarter?
+>
+>
+> Thanks,
+> Razvan
+>
+
+--001a114cb0d2b1ca970563b03b9a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Razvan -<div><br></div><div>The proposed changes would onl=
+y have an impact if CR3 exiting is enabled, which implies a pair of world s=
+witches and other code execution in a different region of memory and with d=
+ifferent page tables anyway.<br><br>Under normal operation, CR3 exiting is =
+not turned on, so this will have no impact on operation.</div><div><br></di=
+v><div>Are there any non-introspection cases in which CR3 exiting will be e=
+nabled for hardware virtualized guests?=C2=A0 Given the time cost of a pair=
+ of world switches and handling the associated code, I question if one coul=
+d even measure the difference of the TLB flush or not.=C2=A0 The CR3 report=
+ing performance hit under KPTI is quite catastrophic anyway, though I expec=
+t one could mitigate that somewhat with CR3-targets, if one wanted to.</div=
+></div><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Fri, Jan 26, 2018=
+ at 12:39 AM Razvan Cojocaru &lt;<a href=3D"mailto:rcojocaru@bitdefender.co=
+m">rcojocaru@bitdefender.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-l=
+eft:1ex">On 01/26/2018 02:02 AM, Bitweasil . wrote:<br>
+&gt; This also impacts the &quot;on change only&quot; control setting code.=
+<br>
+&gt;<br>
+&gt; From some debugging code: hvm_event_cr, value: 800000001aad0000, old:<=
+br>
+&gt; 1aad0000<br>
+&gt;<br>
+&gt; This should not count as a changed CR3 value for reporting purposes.<b=
+r>
+&gt;<br>
+&gt; The following patch resolves this reasonably, for a sane value of<br>
+&gt; &quot;change only&quot; reporting.=C2=A0 Apologies for the old Xen ver=
+sion, but I<br>
+&gt; assume this is still an issue if the other issue was not resolved in<b=
+r>
+&gt; staging.<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt; --- xenserver-4.7.1-clean/xen/arch/x86/hvm/event.c=C2=A0=C2=A0=C2=A0 2=
+017-05-10<br>
+&gt; 11:29:14.135332964 -0600<br>
+&gt; +++ xenserver-4.7.1/xen/arch/x86/hvm/event.c=C2=A0=C2=A0=C2=A0 2018-01=
+-25<br>
+&gt; 16:52:05.938251000 -0700<br>
+&gt; @@ -33,6 +33,11 @@<br>
+&gt; =C2=A0=C2=A0=C2=A0=C2=A0 struct arch_domain *ad =3D &amp;curr-&gt;doma=
+in-&gt;arch;<br>
+&gt; =C2=A0=C2=A0=C2=A0=C2=A0 unsigned int ctrlreg_bitmask =3D monitor_ctrl=
+reg_bitmask(index);<br>
+&gt; =C2=A0<br>
+&gt; +<br>
+&gt; +=C2=A0=C2=A0=C2=A0 // Patch in work from Razvan<br>
+&gt; +=C2=A0=C2=A0=C2=A0 if ( hvm_pcid_enabled(curr) )<br>
+&gt; +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value &amp;=3D ((1ull &lt;=
+&lt; 63) - 1);<br>
+&gt; +<br>
+&gt; =C2=A0=C2=A0=C2=A0=C2=A0 if ( (ad-&gt;monitor.write_ctrlreg_enabled &a=
+mp; ctrlreg_bitmask) &amp;&amp;<br>
+&gt; =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (!(ad-&gt;monit=
+or.write_ctrlreg_onchangeonly &amp; ctrlreg_bitmask) ||<br>
+&gt; =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value !=
+=3D old) )<br>
+<br>
+Thanks, that&#39;s right. But I keep thinking that the proposed changes<br>
+would now incur the flush even on non-introspection paths (which for<br>
+some reason seem to work fine with the noflush bit set).<br>
+<br>
+So I think this patch will affect all CR3 writes, since the only<br>
+difference between introspection and no introspection is that<br>
+hvm_set_cr3() is called with may_defer =3D=3D true in the first case, and<b=
+r>
+false in the second, and both cases eventually end up clearing noflush.<br>
+<br>
+I this acceptable to everyone, or do we make this smarter?<br>
+<br>
+<br>
+Thanks,<br>
+Razvan<br>
+</blockquote></div>
+
+--001a114cb0d2b1ca970563b03b9a--
+
+
+--===============8736297296700859446==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8736297296700859446==--
