@@ -1,23 +1,10 @@
-From: Sameer Goel <sameer.goel@linaro.org>
-Subject: Re: [RFC v4 1/8] Port WARN_ON_ONCE() from Linux
-Date: Thu, 25 Jan 2018 18:45:12 -0700
-Message-ID: <5690d0d2-a7c6-b681-8763-d939158d9747@linaro.org>
-References: <20171219031703.23420-1-sameer.goel@linaro.org>
- <20171219031703.23420-2-sameer.goel@linaro.org>
- <20180123161342.ev32hdjtjrcxpgsj@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118348: regressions - FAIL
+Date: Fri, 26 Jan 2018 02:35:28 +0000
+Message-ID: <osstest-118348-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0136079072255035928=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=3cms=ev=linaro.org=sameer.goel@srs-us1.protection.inumbo.net>)
- id 1eet4w-0006cs-5a
- for xen-devel@lists.xenproject.org; Fri, 26 Jan 2018 01:45:18 +0000
-Received: by mail-pg0-x241.google.com with SMTP id w17so6260982pgv.6
- for <xen-devel@lists.xenproject.org>; Thu, 25 Jan 2018 17:45:16 -0800 (PST)
-In-Reply-To: <20180123161342.ev32hdjtjrcxpgsj@citrix.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,41 +13,279 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: sstabellini@kernel.org, mjaggi@caviumnetworks.com, george.dunlap@eu.citrix.com, Andrew.Cooper3@citrix.com, andre.przywara@linaro.org, julien.grall@arm.com, jbeulich@suse.com, xen-devel@lists.xenproject.org, Ian.Jackson@citrix.com, nd@arm.com, shankerd@codeaurora.org
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAxLzIzLzIwMTggOToxMyBBTSwgV2VpIExpdSB3cm90ZToKPiBPbiBNb24sIERlYyAxOCwg
-MjAxNyBhdCAwODoxNjo1NlBNIC0wNzAwLCBTYW1lZXIgR29lbCB3cm90ZToKPj4gUG9ydCBXQVJO
-X09OX09OQ0UgbWFjcm8gZnJvbSBMaW51eC4KPj4KPj4gU2lnbmVkLW9mZi1ieTogU2FtZWVyIEdv
-ZWwgPHNhbWVlci5nb2VsQGxpbmFyby5vcmc+Cj4+IC0tLQo+PiAgeGVuL2luY2x1ZGUveGVuL2xp
-Yi5oIHwgMTEgKysrKysrKysrKysKPj4gIDEgZmlsZSBjaGFuZ2VkLCAxMSBpbnNlcnRpb25zKCsp
-Cj4+Cj4+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS94ZW4vbGliLmggYi94ZW4vaW5jbHVkZS94
-ZW4vbGliLmgKPj4gaW5kZXggZWQwMGFlMTM3OS4uODMyMDZjMDg0OCAxMDA2NDQKPj4gLS0tIGEv
-eGVuL2luY2x1ZGUveGVuL2xpYi5oCj4+ICsrKyBiL3hlbi9pbmNsdWRlL3hlbi9saWIuaAo+PiBA
-QCAtMTEsNiArMTEsMTcgQEAKPj4gICNkZWZpbmUgQlVHX09OKHApICBkbyB7IGlmICh1bmxpa2Vs
-eShwKSkgQlVHKCk7ICB9IHdoaWxlICgwKQo+PiAgI2RlZmluZSBXQVJOX09OKHApIGRvIHsgaWYg
-KHVubGlrZWx5KHApKSBXQVJOKCk7IH0gd2hpbGUgKDApCj4+ICAKPj4gKyNkZWZpbmUgV0FSTl9P
-Tl9PTkNFKHApCSh7ICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4+ICsgICAgc3RhdGljIGJv
-b2wgX19zZWN0aW9uKCIuZGF0YS51bmxpa2VseSIpIF9fd2FybmVkOyBcCj4gWW91IGludHJvZHVj
-ZWQgYSBuZXcgc2VjdGlvbiB3aXRob3V0IGNvcnJlc3BvbmRpbmcgY2hhbmdlcyB0bwo+IHthcm0s
-eDg2fS94ZW4ubGRzLlMKSSB3aWxsIGZpeCB0aGlzLgo+Cj4+ICsgICAgaW50IF9fcmV0X3dhcm5f
-b25jZSA9ICEhKHApOyAgICAgICAgICAgICAgICAgICAgXAo+PiArICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKPj4gKyAgICBpZiAodW5saWtlbHko
-X19yZXRfd2Fybl9vbmNlICYmICFfX3dhcm5lZCkpIHsgICBcCj4+ICsgICAgICAgIF9fd2FybmVk
-ID0gdHJ1ZTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+PiArICAgICAgICBXQVJOX09O
-KDEpOyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKPiBUaGlzIGlzbid0IHJlYWxs
-eSBhIGRpcmVjdCBwb3J0IGZyb20gTGludXguIEF0IHRoaXMgcG9pbnQgSSB3b25kZXIgd2h5Cj4g
-eW91IGRpZG4ndCB1c2UgV0FSTigpIGRpcmVjdGx5Pwo+Cj4gV2VpLgo+Cj4+ICsgICAgfSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+PiArICAgIHVubGlr
-ZWx5KF9fcmV0X3dhcm5fb25jZSk7ICAgICAgICAgICAgICAgICAgICAgIFwKPj4gK30pCj4+ICsK
-Pj4gICNpZiBfX0dOVUNfXyA+IDQgfHwgKF9fR05VQ19fID09IDQgJiYgX19HTlVDX01JTk9SX18g
-Pj0gNikKPj4gIC8qIEZvcmNlIGEgY29tcGlsYXRpb24gZXJyb3IgaWYgY29uZGl0aW9uIGlzIHRy
-dWUgKi8KPj4gICNkZWZpbmUgQlVJTERfQlVHX09OKGNvbmQpICh7IF9TdGF0aWNfYXNzZXJ0KCEo
-Y29uZCksICIhKCIgI2NvbmQgIikiKTsgfSkKPj4gLS0gCj4+IDIuMTQuMQo+Pgo+IF9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gWGVuLWRldmVsIG1haWxp
-bmcgbGlzdAo+IFhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwo+IGh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWwKCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============0136079072255035928==
+Content-Type: text/plain
+
+flight 118348 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118348/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 118326
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  bb5400b20a0c2c2dce114075b09063038ad373db
+baseline version:
+ xen                  2375832c7e51b67f076e6b07854c4a541cb4bdc3
+
+Last test of basis   118326  2018-01-25 11:01:28 Z    0 days
+Failing since        118327  2018-01-25 13:01:30 Z    0 days    6 attempts
+Testing same since   118344  2018-01-25 20:01:07 Z    0 days    3 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Daniel De Graaf <dgdegra@tycho.nsa.gov>
+  George Dunlap <george.dunlap@citrix.com>
+  Ian Jackson <ian.jackson@eu.citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Ross Lagerwall <ross.lagerwall@citrix.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit bb5400b20a0c2c2dce114075b09063038ad373db
+Author: George Dunlap <george.dunlap@citrix.com>
+Date:   Mon Jan 8 15:50:53 2018 +0000
+
+    xl: Don't warn on using 'deprecated' mode selection
+    
+    We generally support old config formats indefinintely (see the disk
+    format) without emitting warnings.
+    
+    Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+
+commit 5b6b15acebfc6ef3dcb72385f328c985526a33e3
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:59 2018 +0200
+
+    libxl: move ibxl_devid_to_device_... to LIBXL_DEFINE_DEVID_TO_DEVICE
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 32e31182ea3178ab04c8f66ee3b1465f0fc9b255
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:58 2018 +0200
+
+    libxl: move libxl__device_from_ to LIBXL_DEFINE_DEVICE_FROM_TYPE
+    
+    LIBXL_DEFINE_DEVICE_FROM_TYPE uses libxl__..._devtype.type to
+    be assigned as device and backend type.
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 4b3dd5439e24cc85c54cae01815bdb3e57234955
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:57 2018 +0200
+
+    libxl: use libxl__device_kind in LIBXL_DEFINE_UPDATE_DEVID
+    
+    Use libxl__..._devtype.type to update device id.
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 43a858403e9d0ce8c8282e3baade4b8e29c03b54
+Author: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+Date:   Wed Jan 24 19:19:56 2018 +0200
+
+    libxl: use libxl__device_kind to get device XS entry
+    
+    On adding to XS name of device is taken from
+    libxl__device_kind enum. On getting device from XS
+    the name is hardcoded. It leads to potential
+    mistmatch errors. The patch is using libxl__device_kind
+    everywere to have one source of device name.
+    
+    Signed-off-by: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 8155476765a5bdecea1534b46562cf28e0113a9a
+Author: Wei Liu <wei.liu2@citrix.com>
+Date:   Wed Jan 24 20:26:26 2018 +0000
+
+    x86: fix GET_STACK_END
+    
+    AIUI the purpose of having the .if directive is to make GET_STACK_END
+    work with any general purpose registers. The code as-is would produce
+    the wrong result for r8. Fix it.
+    
+    Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 6d53d4ce621ee80e732152a545a55ab6762a830b
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Jan 25 12:30:01 2018 +0100
+
+    coverage: introduce generic file
+    
+    It will contain the generic implementation of sysctl_cov_op, which
+    will be shared between all the coverage implementations.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit e6c271a6625277117aece29a061fd522f02a5588
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Jan 25 12:28:47 2018 +0100
+
+    gcov: introduce hooks for the sysctl
+    
+    So that other implementations of the sysctl can be added.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit e8d461497d9e23b01f9f6aeb9ddf92ff2693a2c1
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Jan 25 12:27:44 2018 +0100
+
+    gcov: rename sysctl and functions
+    
+    Change gcov to cov (for internal interfaces) or coverage (for the
+    public ones).
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 7f76b3a06aefc1f201f6bfcb593b5d0b3dc68bff
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:26:55 2018 +0100
+
+    x86/domctl: remove XEN_DOMCTL_pin_mem_cacheattr
+    
+    Remove the implementation of XEN_DOMCTL_pin_mem_cacheattr since it has
+    been replaced by a dmop. Change xc_domain_pin_memory_cacheattr() so
+    that it is only defined when XC_WANT_COMPAT_DEVICEMODEL_API is set and
+    have it call the new dmop.  Leave the definitions of
+    XEN_DOMCTL_MEM_CACHEATTR_* since they are still used by QEMU.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Acked-by: Daniel De Graaf <dgdegra@tycho.nsa.gov>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit af2a20e40e92da6c5383b66bc507bdb7d15ff829
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:26:36 2018 +0100
+
+    libxendevicemodel: provide xendevicemodel_pin_memory_cacheattr
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+
+commit 704538a4741173f4d339650700be681b85722785
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:26:23 2018 +0100
+
+    libxendevicemodel: provide xendevicemodel_relocate_memory
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+
+commit 642123c5123ff48d76d7ee376219ab50336636b9
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:25:22 2018 +0100
+
+    x86/hvm: provide XEN_DMOP_pin_memory_cacheattr
+    
+    Provide XEN_DMOP_pin_memory_cacheattr to allow a deprivileged QEMU to
+    pin the caching type of RAM after moving the VRAM. It is equivalent to
+    XEN_DOMCTL_pin_memory_cacheattr.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 6606cf3e2af0962b12a8802d9a5bf2cef6eaf005
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:24:14 2018 +0100
+
+    x86/hvm: provide XEN_DMOP_relocate_memory
+    
+    Provide XEN_DMOP_relocate_memory, a limited version of
+    XENMEM_add_to_physmap to allow a deprivileged QEMU to move VRAM when a
+    guest programs its BAR. It is equivalent to XENMEM_add_to_physmap with
+    space == XENMAPSPACE_gmfn_range.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 34ae3fce896c7225c27b10c438f5b9a6af773669
+Author: Ross Lagerwall <ross.lagerwall@citrix.com>
+Date:   Thu Jan 25 12:23:35 2018 +0100
+
+    mm: make xenmem_add_to_physmap global
+    
+    Make it global in preparation to be called by a new dmop.
+    
+    Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+    Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+(qemu changes not included)
+
+
+--===============0136079072255035928==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0136079072255035928==--
