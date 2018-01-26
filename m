@@ -1,9 +1,9 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 118349: regressions - FAIL
-Date: Fri, 26 Jan 2018 04:38:33 +0000
-Message-ID: <osstest-118349-mainreport@xen.org>
+Subject: [xen-unstable-smoke test] 118350: regressions - FAIL
+Date: Fri, 26 Jan 2018 06:42:10 +0000
+Message-ID: <osstest-118350-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2776009431242180205=="
+Content-Type: multipart/mixed; boundary="===============1862747397795788214=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -16,11 +16,11 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============2776009431242180205==
+--===============1862747397795788214==
 Content-Type: text/plain
 
-flight 118349 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118349/
+flight 118350 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118350/
 
 Regressions :-(
 
@@ -28,11 +28,14 @@ Tests which did not succeed and are blocking,
 including tests which could not be run:
  build-arm64-xsm               6 xen-build                fail REGR. vs. 118326
 
+Tests which are failing intermittently (not blocking):
+ test-armhf-armhf-xl           7 xen-boot                   fail pass in 118349
+
 Tests which did not succeed, but are not blocking:
  test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl         13 migrate-support-check fail in 118349 never pass
+ test-armhf-armhf-xl     14 saverestore-support-check fail in 118349 never pass
  test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
 
 version targeted for testing:
  xen                  bb5400b20a0c2c2dce114075b09063038ad373db
@@ -40,8 +43,8 @@ baseline version:
  xen                  2375832c7e51b67f076e6b07854c4a541cb4bdc3
 
 Last test of basis   118326  2018-01-25 11:01:28 Z    0 days
-Failing since        118327  2018-01-25 13:01:30 Z    0 days    7 attempts
-Testing same since   118344  2018-01-25 20:01:07 Z    0 days    4 attempts
+Failing since        118327  2018-01-25 13:01:30 Z    0 days    8 attempts
+Testing same since   118344  2018-01-25 20:01:07 Z    0 days    5 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
@@ -60,7 +63,7 @@ jobs:
  build-amd64                                                  pass    
  build-armhf                                                  pass    
  build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
+ test-armhf-armhf-xl                                          fail    
  test-arm64-arm64-xl-xsm                                      blocked 
  test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
  test-amd64-amd64-libvirt                                     pass    
@@ -278,7 +281,7 @@ Date:   Thu Jan 25 12:23:35 2018 +0100
 (qemu changes not included)
 
 
---===============2776009431242180205==
+--===============1862747397795788214==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -288,4 +291,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============2776009431242180205==--
+--===============1862747397795788214==--
