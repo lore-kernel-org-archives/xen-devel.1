@@ -1,17 +1,23 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH v10 09/11] x86/ctxt: Issue a speculation
- barrier between vcpu contexts
-Date: Fri, 26 Jan 2018 02:08:05 +0100
-Message-ID: <1516928885.15341.72.camel@suse.com>
-References: <1516799535-5778-1-git-send-email-andrew.cooper3@citrix.com>
- <1516799535-5778-10-git-send-email-andrew.cooper3@citrix.com>
- <5A6A0C7A02000078001A275A@prv-mh.provo.novell.com>
- <345bd2ef-1319-d9a6-522c-31e42bcd2c2e@citrix.com>
- <1516906149.15341.66.camel@suse.com>
+From: Sameer Goel <sameer.goel@linaro.org>
+Subject: Re: [RFC v4 1/8] Port WARN_ON_ONCE() from Linux
+Date: Thu, 25 Jan 2018 18:45:12 -0700
+Message-ID: <5690d0d2-a7c6-b681-8763-d939158d9747@linaro.org>
+References: <20171219031703.23420-1-sameer.goel@linaro.org>
+ <20171219031703.23420-2-sameer.goel@linaro.org>
+ <20180123161342.ev32hdjtjrcxpgsj@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3096193069869434590=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1516906149.15341.66.camel@suse.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=3cms=ev=linaro.org=sameer.goel@srs-us1.protection.inumbo.net>)
+ id 1eet4w-0006cs-5a
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2018 01:45:18 +0000
+Received: by mail-pg0-x241.google.com with SMTP id w17so6260982pgv.6
+ for <xen-devel@lists.xenproject.org>; Thu, 25 Jan 2018 17:45:16 -0800 (PST)
+In-Reply-To: <20180123161342.ev32hdjtjrcxpgsj@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,99 +26,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Dario Faggioli <dario.faggioli@citrix.com>, David Woodhouse <dwmw@amazon.co.uk>, Xen-devel <xen-devel@lists.xen.org>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: sstabellini@kernel.org, mjaggi@caviumnetworks.com, george.dunlap@eu.citrix.com, Andrew.Cooper3@citrix.com, andre.przywara@linaro.org, julien.grall@arm.com, jbeulich@suse.com, xen-devel@lists.xenproject.org, Ian.Jackson@citrix.com, nd@arm.com, shankerd@codeaurora.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3096193069869434590==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-tSXY/M90tX7raWgZMUYb"
-
-
---=-tSXY/M90tX7raWgZMUYb
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2018-01-25 at 19:49 +0100, Dario Faggioli wrote:
-> On Thu, 2018-01-25 at 16:09 +0000, Andrew Cooper wrote:
-> > On 25/01/18 15:57, Jan Beulich wrote:
-> > >
-> > > For the record, the overwhelming majority of calls to
-> > > __sync_local_execstate() being responsible for the behavior
-> > > come from invalidate_interrupt(), which suggests to me that
-> > > there's a meaningful number of cases where a vCPU is migrated
-> > > to another CPU and then back, without another vCPU having
-> > > run on the original CPU in between. If I'm not wrong with this,
-> > > I have to question why the vCPU is migrated then in the first
-> > > place.
-> >=20
-> > Dario made a different fix to Credit1 upstream which was supposed
-> > to
-> > resolve this behaviour (although I can't locate the patch by a list
-> > of
-> > titles), but based on these observations, I'd say the misfeature
-> > hasn't
-> > been fixed.
-> >=20
-> Yes, it's 341450eaf753 ("xen: credit1: increase efficiency and
-> scalability of load balancing."), and that commit and the XenServer
-> patch are functionally equivalent.
->=20
-> So, I'm not convinced about that being the actual cause of the
-> described behaviour. Tracing would be the way to tell (hopefully) for
-> sure.
->=20
-And in order to go and investigate this a bit further, Jan, what is it
-that you were doing when you saw what you described above? AFAIUI,
-that's booting an HVM guest, isn't it?
-
-How many vCPUs on how many pCPUs? Basically, I would just need a
-confirmation that the system was not oversubscribed, but if, while
-we're here, you can tell me the details, I'll put together an as much
-as possible similar scenario.
-
-Thanks,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-tSXY/M90tX7raWgZMUYb
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlpqf3YACgkQFkJ4iaW4
-c+5MLQ/9F34jxkgSA7NnwAlbsOwXJEN30/M+G8zol2PBgU85zfRRIFyYdzVKZvhK
-il2ahtQEd567Cy9ljeo7cZ8CRS6wlfRowrfXe0au+mxos7b+0PsZscfR9Ie9ni64
-iUtBWce3SMSjg5qRdR9plQhbPoKAZnu8ezWxD33EERSuopTZUmTNAUHNRGu/PIc5
-k8BCD3h0QvhpFacMVEnDYnttiS1zz4JQUMbOhYc9Zny35SbD6VPLuMvH2OYELZj+
-DcH58Cb7mJDRszTkYvnASI14Vsp+N89daKII41+VJKSH95EKS3iOKEwfVpfqmfw5
-pqTfiJAe80SA19y0ZezidnLZQd5V5RLceeV/ffvbjxCpraftAdGsTLVabHvT9HPY
-8BB8tWoUUrxRriZZtD7UrC053q9/MPw68pIhL5xFSiF/j/N5o+wNJibcZecrZnGQ
-TPke8HkYAeR3tGTA5lhuNdl9OUZlAjTNE0xn1HTpKNvR6sUglBGtp3yHeE8WvHw6
-XW2HTNwL3liMPNplM2rcPOtVHu7w6lbSCBj43WHbIcaHsoNg861u+xuow8zdOm8/
-NcKKkiNJZk+OGHLtWRu0zDrFMuMAmaz68wHbyhG4JeY15Pri8I6IVlHeREvr5B6C
-mJmjxR1VTtRFKrOYbdY/MMljMVosrhxA88Qze6eAxxd9P9YCLKg=
-=r7xo
------END PGP SIGNATURE-----
-
---=-tSXY/M90tX7raWgZMUYb--
-
-
-
---===============3096193069869434590==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3096193069869434590==--
+CgpPbiAxLzIzLzIwMTggOToxMyBBTSwgV2VpIExpdSB3cm90ZToKPiBPbiBNb24sIERlYyAxOCwg
+MjAxNyBhdCAwODoxNjo1NlBNIC0wNzAwLCBTYW1lZXIgR29lbCB3cm90ZToKPj4gUG9ydCBXQVJO
+X09OX09OQ0UgbWFjcm8gZnJvbSBMaW51eC4KPj4KPj4gU2lnbmVkLW9mZi1ieTogU2FtZWVyIEdv
+ZWwgPHNhbWVlci5nb2VsQGxpbmFyby5vcmc+Cj4+IC0tLQo+PiAgeGVuL2luY2x1ZGUveGVuL2xp
+Yi5oIHwgMTEgKysrKysrKysrKysKPj4gIDEgZmlsZSBjaGFuZ2VkLCAxMSBpbnNlcnRpb25zKCsp
+Cj4+Cj4+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS94ZW4vbGliLmggYi94ZW4vaW5jbHVkZS94
+ZW4vbGliLmgKPj4gaW5kZXggZWQwMGFlMTM3OS4uODMyMDZjMDg0OCAxMDA2NDQKPj4gLS0tIGEv
+eGVuL2luY2x1ZGUveGVuL2xpYi5oCj4+ICsrKyBiL3hlbi9pbmNsdWRlL3hlbi9saWIuaAo+PiBA
+QCAtMTEsNiArMTEsMTcgQEAKPj4gICNkZWZpbmUgQlVHX09OKHApICBkbyB7IGlmICh1bmxpa2Vs
+eShwKSkgQlVHKCk7ICB9IHdoaWxlICgwKQo+PiAgI2RlZmluZSBXQVJOX09OKHApIGRvIHsgaWYg
+KHVubGlrZWx5KHApKSBXQVJOKCk7IH0gd2hpbGUgKDApCj4+ICAKPj4gKyNkZWZpbmUgV0FSTl9P
+Tl9PTkNFKHApCSh7ICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4+ICsgICAgc3RhdGljIGJv
+b2wgX19zZWN0aW9uKCIuZGF0YS51bmxpa2VseSIpIF9fd2FybmVkOyBcCj4gWW91IGludHJvZHVj
+ZWQgYSBuZXcgc2VjdGlvbiB3aXRob3V0IGNvcnJlc3BvbmRpbmcgY2hhbmdlcyB0bwo+IHthcm0s
+eDg2fS94ZW4ubGRzLlMKSSB3aWxsIGZpeCB0aGlzLgo+Cj4+ICsgICAgaW50IF9fcmV0X3dhcm5f
+b25jZSA9ICEhKHApOyAgICAgICAgICAgICAgICAgICAgXAo+PiArICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKPj4gKyAgICBpZiAodW5saWtlbHko
+X19yZXRfd2Fybl9vbmNlICYmICFfX3dhcm5lZCkpIHsgICBcCj4+ICsgICAgICAgIF9fd2FybmVk
+ID0gdHJ1ZTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+PiArICAgICAgICBXQVJOX09O
+KDEpOyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKPiBUaGlzIGlzbid0IHJlYWxs
+eSBhIGRpcmVjdCBwb3J0IGZyb20gTGludXguIEF0IHRoaXMgcG9pbnQgSSB3b25kZXIgd2h5Cj4g
+eW91IGRpZG4ndCB1c2UgV0FSTigpIGRpcmVjdGx5Pwo+Cj4gV2VpLgo+Cj4+ICsgICAgfSAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+PiArICAgIHVubGlr
+ZWx5KF9fcmV0X3dhcm5fb25jZSk7ICAgICAgICAgICAgICAgICAgICAgIFwKPj4gK30pCj4+ICsK
+Pj4gICNpZiBfX0dOVUNfXyA+IDQgfHwgKF9fR05VQ19fID09IDQgJiYgX19HTlVDX01JTk9SX18g
+Pj0gNikKPj4gIC8qIEZvcmNlIGEgY29tcGlsYXRpb24gZXJyb3IgaWYgY29uZGl0aW9uIGlzIHRy
+dWUgKi8KPj4gICNkZWZpbmUgQlVJTERfQlVHX09OKGNvbmQpICh7IF9TdGF0aWNfYXNzZXJ0KCEo
+Y29uZCksICIhKCIgI2NvbmQgIikiKTsgfSkKPj4gLS0gCj4+IDIuMTQuMQo+Pgo+IF9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gWGVuLWRldmVsIG1haWxp
+bmcgbGlzdAo+IFhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwo+IGh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWwKCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
