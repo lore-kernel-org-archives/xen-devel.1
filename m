@@ -1,16 +1,20 @@
-From: "Bitweasil ." <bitweasil@cryptohaze.com>
-Subject: Re: Xen Introspection, KPTI,
- and CR3 bit 63 leads to guest VMENTRY failures during introspection
-Date: Thu, 25 Jan 2018 17:02:02 -0700
-Message-ID: <CALn24pDDFmh9+SkE-gyyK2xzhemX7=JBYzt2SQjFGnp4gy-yyQ@mail.gmail.com>
-References: <CALn24pArgwLSBy7TO0j4gcqXdzJ5pqmW_koKP7-Lfg8FXrOZEQ@mail.gmail.com>
- <0052b33d-f0fe-ee91-892d-a63c8001c567@bitdefender.com>
- <CALn24pBf1UGbrqsSD_=abdM1U7X+vMuPd0q4KgYYH_tmd7mkAw@mail.gmail.com>
- <cf9bfa43-6ca5-e260-c509-040b927390fa@bitdefender.com>
+From: Martin Kelly <mkelly@xevo.com>
+Subject: Re: GPU passthrough on ARM
+Date: Thu, 25 Jan 2018 16:29:39 -0800
+Message-ID: <366c2b28-fecc-4725-5fa9-fd563010f64f@xevo.com>
+References: <7a4b5e6c-c66d-115f-d6c7-e30d7b36c3ef@xevo.com>
+ <5fae3c3b-41e5-1930-3abc-a3d1f051aa05@linaro.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============9153929156494084728=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <cf9bfa43-6ca5-e260-c509-040b927390fa@bitdefender.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=xpms=ev=xevo.com=mkelly@srs-us1.protection.inumbo.net>)
+ id 1eertx-0003NZ-W3
+ for xen-devel@lists.xenproject.org; Fri, 26 Jan 2018 00:29:54 +0000
+In-Reply-To: <5fae3c3b-41e5-1930-3abc-a3d1f051aa05@linaro.org>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,146 +23,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: andrew.cooper3@citrix.com, tamas@tklengyel.com, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
+To: Julien Grall <julien.grall@linaro.org>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============9153929156494084728==
-Content-Type: multipart/alternative; boundary="f403045f8b303339fb0563a29bb8"
-
---f403045f8b303339fb0563a29bb8
-Content-Type: text/plain; charset="UTF-8"
-
-This also impacts the "on change only" control setting code.
-
->From some debugging code: hvm_event_cr, value: 800000001aad0000, old:
-1aad0000
-
-This should not count as a changed CR3 value for reporting purposes.
-
-The following patch resolves this reasonably, for a sane value of "change
-only" reporting.  Apologies for the old Xen version, but I assume this is
-still an issue if the other issue was not resolved in staging.
-
-
-
---- xenserver-4.7.1-clean/xen/arch/x86/hvm/event.c    2017-05-10
-11:29:14.135332964 -0600
-+++ xenserver-4.7.1/xen/arch/x86/hvm/event.c    2018-01-25
-16:52:05.938251000 -0700
-@@ -33,6 +33,11 @@
-     struct arch_domain *ad = &curr->domain->arch;
-     unsigned int ctrlreg_bitmask = monitor_ctrlreg_bitmask(index);
-
-+
-+    // Patch in work from Razvan
-+    if ( hvm_pcid_enabled(curr) )
-+        value &= ((1ull << 63) - 1);
-+
-     if ( (ad->monitor.write_ctrlreg_enabled & ctrlreg_bitmask) &&
-          (!(ad->monitor.write_ctrlreg_onchangeonly & ctrlreg_bitmask) ||
-           value != old) )
-
-
-On Thu, Jan 25, 2018 at 4:03 PM, Razvan Cojocaru <rcojocaru@bitdefender.com>
-wrote:
-
-> On 01/26/2018 12:17 AM, Bitweasil . wrote:
-> > Razvan -
-> >
-> > Yes, that patch resolves the issues.  Performance is abysmal (as
-> > expected with a CR3 switch on every syscall), but things behave
-> properly.>
-> > Jan -
-> >
-> > It turns out that unrelated code in my livepatch was causing the
-> > crashing when I filtered the high bit - I was not properly gating some
-> > other CR3 processing code in the livepatch, and that was causing the
-> > invalid opcode errors, not the filtered CR3 value.  You are correct that
-> > masking the bit should not cause any correctness issues, only
-> > performance issues.
-> >
-> > Will one of you take up submitting this patch into the proper places?
-> > I'm afraid I'm not very familiar with the Xen patch submission process.
->
-> Yes, I'll send a proper patch.
->
->
-> Thanks for pointing the issue out,
-> Razvan
->
-
---f403045f8b303339fb0563a29bb8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><div>This also impacts the &quot;on change only&quot;=
- control setting code.<br><br>From some debugging code: hvm_event_cr, value=
-: 800000001aad0000, old: 1aad0000<br><br></div>This should not count as a c=
-hanged CR3 value for reporting purposes.<br><br></div>The following patch r=
-esolves this reasonably, for a sane value of &quot;change only&quot; report=
-ing.=C2=A0 Apologies for the old Xen version, but I assume this is still an=
- issue if the other issue was not resolved in staging.<br><div><br></div><d=
-iv><br></div><div><br>--- xenserver-4.7.1-clean/xen/arch/x86/hvm/event.c=C2=
-=A0=C2=A0=C2=A0 2017-05-10 11:29:14.135332964 -0600<br>+++ xenserver-4.7.1/=
-xen/arch/x86/hvm/event.c=C2=A0=C2=A0=C2=A0 2018-01-25 16:52:05.938251000 -0=
-700<br>@@ -33,6 +33,11 @@<br>=C2=A0=C2=A0=C2=A0=C2=A0 struct arch_domain *a=
-d =3D &amp;curr-&gt;domain-&gt;arch;<br>=C2=A0=C2=A0=C2=A0=C2=A0 unsigned i=
-nt ctrlreg_bitmask =3D monitor_ctrlreg_bitmask(index);<br>=C2=A0<br>+<br>+=
-=C2=A0=C2=A0=C2=A0 // Patch in work from Razvan<br>+=C2=A0=C2=A0=C2=A0 if (=
- hvm_pcid_enabled(curr) )<br>+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 va=
-lue &amp;=3D ((1ull &lt;&lt; 63) - 1);<br>+<br>=C2=A0=C2=A0=C2=A0=C2=A0 if =
-( (ad-&gt;monitor.write_ctrlreg_enabled &amp; ctrlreg_bitmask) &amp;&amp;<b=
-r>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (!(ad-&gt;monitor.=
-write_ctrlreg_onchangeonly &amp; ctrlreg_bitmask) ||<br>=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 value !=3D old) )<br><br></div><=
-/div><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">On Thu, Jan =
-25, 2018 at 4:03 PM, Razvan Cojocaru <span dir=3D"ltr">&lt;<a href=3D"mailt=
-o:rcojocaru@bitdefender.com" target=3D"_blank">rcojocaru@bitdefender.com</a=
->&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 =
-0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><span class=3D"">On 0=
-1/26/2018 12:17 AM, Bitweasil . wrote:<br>
-&gt; Razvan -<br>
-&gt;<br>
-&gt; Yes, that patch resolves the issues.=C2=A0 Performance is abysmal (as<=
-br>
-&gt; expected with a CR3 switch on every syscall), but things behave proper=
-ly.&gt;<br>
-&gt; Jan -<br>
-&gt;<br>
-&gt; It turns out that unrelated code in my livepatch was causing the<br>
-&gt; crashing when I filtered the high bit - I was not properly gating some=
-<br>
-&gt; other CR3 processing code in the livepatch, and that was causing the<b=
-r>
-&gt; invalid opcode errors, not the filtered CR3 value.=C2=A0 You are corre=
-ct that<br>
-&gt; masking the bit should not cause any correctness issues, only<br>
-&gt; performance issues.<br>
-&gt;<br>
-&gt; Will one of you take up submitting this patch into the proper places?=
-=C2=A0<br>
-&gt; I&#39;m afraid I&#39;m not very familiar with the Xen patch submission=
- process.<br>
-<br>
-</span>Yes, I&#39;ll send a proper patch.<br>
-<br>
-<br>
-Thanks for pointing the issue out,<br>
-Razvan<br>
-</blockquote></div><br></div>
-
---f403045f8b303339fb0563a29bb8--
-
-
---===============9153929156494084728==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============9153929156494084728==--
+T24gMDEvMjUvMjAxOCAwNDoxNyBBTSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IAo+IAo+IE9uIDI0
+LzAxLzE4IDIyOjEwLCBNYXJ0aW4gS2VsbHkgd3JvdGU6Cj4+IEhpLAo+IAo+IEhlbGxvLAo+IAo+
+PiBEb2VzIGFueW9uZSBrbm93IGlmIEdQVSBwYXNzdGhyb3VnaCBpcyBzdXBwb3J0ZWQgb24gQVJN
+PyAoZS5nLiBmb3IgYSAKPj4gR1BVIGludGVncmF0ZWQgaW50byBhbiBBUk0gU29DKS4gSSBjaGVj
+a2VkIGRvY3VtZW50YXRpb24gYW5kIHRoZSBjb2RlLCAKPj4gYnV0IEkgY291bGRuJ3QgdGVsbCBm
+b3Igc3VyZS4KPj4KPj4gSWYgc28sIHdoYXQgYXJlIHRoZSBoYXJkd2FyZSByZXF1aXJlbWVudHMg
+Zm9yIGl0PyBJZiBub3QsIGlzIGl0IAo+PiBmZWFzaWJsZSB0byBkbyBpbiB0aGUgZnV0dXJlPwo+
+IAo+IFhlbiBBcm0gc3VwcG9ydHMgZGV2aWNlIGludGVncmF0ZWQgaW50byBhbiBBUk0gU29DLiBJ
+biBnZW5lcmFsIHdlIGhpZ2hseSAKPiByZWNvbW1lbmQgdG8gaGF2ZSB0aGUgR1BVIGJlaGluZCBh
+biBJT01NVS4gU28gcGFzc3Rocm91Z2ggd291bGQgYmUgZnVsbHkgCj4gc2VjdXJlLgo+IAo+IERv
+ZXMgeW91ciBwbGF0Zm9ybSBoYXMgYW4gSU9NTVU/IElmIHNvIHdoaWNoIG9uZT8gRG8geW91IGtu
+b3cgaWYgdGhlIEdQVSAKPiBpcyBiZWhpbmQgaXQ/Cj4gCj4gSXQgd291bGQgYmUgcG9zc2libGUg
+dG8gZG8gcGFzc3Rocm91Z2ggd2l0aG91dCBJT01NVSwgYnV0IHRoYXQncyBtb3JlIAo+IGNvbXBs
+ZXggYW5kIHdvdWxkIHJlcXVpcmUgc29tZSBoYWNrIGluIFhlbiB0byBtYWtlIHN1cmUgdGhlIGd1
+ZXN0IG1lbW9yeSAKPiBpcyBkaXJlY3QgbWFwcGVkIChlLmcgZ3Vlc3QgcGh5c2ljYWwgYWRkcmVz
+cyA9IGhvc3QgcGh5c2ljYWwgYWRkcmVzcykuCj4gCj4gRm9yIG1vcmUgZG9jdW1lbnRhdGlvbiBv
+biBob3cgdG8gZG8gaXQgKHNlZSBbMV0gYW5kIFsyXSkuCj4gCj4gQ2hlZXJzLAo+IAo+IFsxXSAK
+PiBodHRwczovL2V2ZW50cy5zdGF0aWMubGludXhmb3VuZC5vcmcvc2l0ZXMvZXZlbnRzL2ZpbGVz
+L3NsaWRlcy90YWxrXzUucGRmCj4gWzJdIGh0dHBzOi8vd2lraS54ZW4ub3JnL2ltYWdlcy8xLzE3
+L0RldmljZV9wYXNzdGhyb3VnaF94ZW4ucGRmCj4gCgpIaSBKdWxpZW4sCgpUaGFua3MgdmVyeSBt
+dWNoIGZvciB0aGUgaW5mb3JtYXRpb24uIEknbSBsb29raW5nIGF0IHRoZSBSZW5lc2FzIFItQ2Fy
+IApIMyBSOEE3Nzk1LCB3aGljaCBoYXMgYW4gSU9NTVUgKHVzaW5nIHRoZSBMaW51eCBpcG1tdS12
+bXNhIGRyaXZlciBpbiAKZHJpdmVycy9pb21tdS9pcG1tdS12bXNhLmMpLiBMb29raW5nIGF0IHRo
+ZSBkZXZpY2UgdHJlZSBmb3IgaXQgCihyOGE3Nzk1LmR0c2kpLCBpdCBhcHBlYXJzIHlvdSBjb3Vs
+ZCBwYXNzIHRocm91Z2ggdGhlIGRpc3BsYXlAZmViMDAwMDAgCm5vZGUgZm9yIHRoZSBEUk0gZHJp
+dmVyLgoKSSBkaWQgbm90aWNlIHRoaXMgcGF0Y2ggc2VyaWVzLCB3aGljaCBkaWRuJ3QgZ2V0IG1l
+cmdlZDoKCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2
+ZWwvMjAxNy0wNy9tc2cwMjY3OS5odG1sCgpQcmVzdW1hYmx5IHRoYXQgZHJpdmVyIHdvdWxkIGJl
+IG5lZWRlZCBpbiBYZW4uCgpBcmUgdGhlcmUgYW55IGdvdGNoYXMgSSdtIG1pc3Npbmc/IElzIEdQ
+VSBwYXNzdGhyb3VnaCBvbiBBUk0gc29tZXRoaW5nIAp0aGF0IGlzICJ0aGVvcmV0aWNhbGx5IGRv
+YWJsZSIgb3Igc29tZXRoaW5nIHRoYXQgaGFzIGJlZW4gZG9uZSBhbHJlYWR5IAphbmQgc2hvd24g
+dG8gYmUgcGVyZm9ybWFudD8KClRoYW5rcyBhZ2FpbiwKTWFydGluCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
