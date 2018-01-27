@@ -1,24 +1,10 @@
-From: Martin Kelly <mkelly@xevo.com>
-Subject: Re: GPU passthrough on ARM
-Date: Fri, 26 Jan 2018 16:41:28 -0800
-Message-ID: <ec3f44df-2a4e-f418-f15e-610891cbcb24@xevo.com>
-References: <7a4b5e6c-c66d-115f-d6c7-e30d7b36c3ef@xevo.com>
- <5fae3c3b-41e5-1930-3abc-a3d1f051aa05@linaro.org>
- <366c2b28-fecc-4725-5fa9-fd563010f64f@xevo.com>
- <808e9d86-82c9-9eed-8752-3294c1df74f2@linaro.org>
- <CAPD2p-=aFOY24NpZuwfnq=xS0r9BPFrZry=h8buc5UCXuHtZ0Q@mail.gmail.com>
- <CAPD2p-nYe305YPenOFTQfptVHnNQ2ms=UJ0O7cb4pJHUkeXFrw@mail.gmail.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118372: regressions - FAIL
+Date: Sat, 27 Jan 2018 00:46:53 +0000
+Message-ID: <osstest-118372-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2543858114745100973=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=duyx=ew=xevo.com=mkelly@srs-us1.protection.inumbo.net>)
- id 1efEYw-0002lE-H1
- for xen-devel@lists.xenproject.org; Sat, 27 Jan 2018 00:41:42 +0000
-In-Reply-To: <CAPD2p-nYe305YPenOFTQfptVHnNQ2ms=UJ0O7cb4pJHUkeXFrw@mail.gmail.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,130 +13,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr Tyshchenko <olekstysh@gmail.com>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@linaro.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMjYvMjAxOCAxMDoxMyBBTSwgT2xla3NhbmRyIFR5c2hjaGVua28gd3JvdGU6Cj4gSGks
-IE1hcnRpbgo+IAo+IE9uIEZyaSwgSmFuIDI2LCAyMDE4IGF0IDg6MDUgUE0sIE9sZWtzYW5kciBU
-eXNoY2hlbmtvCj4gPG9sZWtzdHlzaEBnbWFpbC5jb20+IHdyb3RlOgo+PiBPbiBGcmksIEphbiAy
-NiwgMjAxOCBhdCAzOjQ5IFBNLCBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBsaW5hcm8ub3Jn
-PiB3cm90ZToKPj4+IEhpLAo+Pj4KPj4+IEkgYW0gQ0NpbmcgT2xla3NhbmRyLiBIZSBrbm93cyBi
-ZXR0ZXIgdGhhbiBtZSB0aGlzIHBsYXRmb3JtLgo+Pgo+PiBIaSwgSnVsaWVuLgo+Pgo+PiBPSywg
-dGhhbmsgeW91LCBJIHdpbGwgdHJ5IHRvIHByb3ZpZGUgc29tZSBwb2ludGVycy4KPj4KPj4+Cj4+
-PiBDaGVlcnMsCj4+Pgo+Pj4gT24gMjYvMDEvMTggMDA6MjksIE1hcnRpbiBLZWxseSB3cm90ZToK
-Pj4+Pgo+Pj4+IE9uIDAxLzI1LzIwMTggMDQ6MTcgQU0sIEp1bGllbiBHcmFsbCB3cm90ZToKPj4+
-Pj4KPj4+Pj4KPj4+Pj4KPj4+Pj4gT24gMjQvMDEvMTggMjI6MTAsIE1hcnRpbiBLZWxseSB3cm90
-ZToKPj4+Pj4+Cj4+Pj4+PiBIaSwKPj4+Pj4KPj4+Pj4KPj4+Pj4gSGVsbG8sCj4+Pj4+Cj4+Pj4+
-PiBEb2VzIGFueW9uZSBrbm93IGlmIEdQVSBwYXNzdGhyb3VnaCBpcyBzdXBwb3J0ZWQgb24gQVJN
-PyAoZS5nLiBmb3IgYSBHUFUKPj4+Pj4+IGludGVncmF0ZWQgaW50byBhbiBBUk0gU29DKS4gSSBj
-aGVja2VkIGRvY3VtZW50YXRpb24gYW5kIHRoZSBjb2RlLCBidXQgSQo+Pj4+Pj4gY291bGRuJ3Qg
-dGVsbCBmb3Igc3VyZS4KPj4+Pj4+Cj4+Pj4+PiBJZiBzbywgd2hhdCBhcmUgdGhlIGhhcmR3YXJl
-IHJlcXVpcmVtZW50cyBmb3IgaXQ/IElmIG5vdCwgaXMgaXQgZmVhc2libGUKPj4+Pj4+IHRvIGRv
-IGluIHRoZSBmdXR1cmU/Cj4+Pj4+Cj4+Pj4+Cj4+Pj4+IFhlbiBBcm0gc3VwcG9ydHMgZGV2aWNl
-IGludGVncmF0ZWQgaW50byBhbiBBUk0gU29DLiBJbiBnZW5lcmFsIHdlIGhpZ2hseQo+Pj4+PiBy
-ZWNvbW1lbmQgdG8gaGF2ZSB0aGUgR1BVIGJlaGluZCBhbiBJT01NVS4gU28gcGFzc3Rocm91Z2gg
-d291bGQgYmUgZnVsbHkKPj4+Pj4gc2VjdXJlLgo+Pj4+Pgo+Pj4+PiBEb2VzIHlvdXIgcGxhdGZv
-cm0gaGFzIGFuIElPTU1VPyBJZiBzbyB3aGljaCBvbmU/IERvIHlvdSBrbm93IGlmIHRoZSBHUFUK
-Pj4+Pj4gaXMgYmVoaW5kIGl0Pwo+Pj4+Pgo+Pj4+PiBJdCB3b3VsZCBiZSBwb3NzaWJsZSB0byBk
-byBwYXNzdGhyb3VnaCB3aXRob3V0IElPTU1VLCBidXQgdGhhdCdzIG1vcmUKPj4+Pj4gY29tcGxl
-eCBhbmQgd291bGQgcmVxdWlyZSBzb21lIGhhY2sgaW4gWGVuIHRvIG1ha2Ugc3VyZSB0aGUgZ3Vl
-c3QgbWVtb3J5IGlzCj4+Pj4+IGRpcmVjdCBtYXBwZWQgKGUuZyBndWVzdCBwaHlzaWNhbCBhZGRy
-ZXNzID0gaG9zdCBwaHlzaWNhbCBhZGRyZXNzKS4KPj4+Pj4KPj4+Pj4gRm9yIG1vcmUgZG9jdW1l
-bnRhdGlvbiBvbiBob3cgdG8gZG8gaXQgKHNlZSBbMV0gYW5kIFsyXSkuCj4+Pj4+Cj4+Pj4+IENo
-ZWVycywKPj4+Pj4KPj4+Pj4gWzFdCj4+Pj4+IGh0dHBzOi8vZXZlbnRzLnN0YXRpYy5saW51eGZv
-dW5kLm9yZy9zaXRlcy9ldmVudHMvZmlsZXMvc2xpZGVzL3RhbGtfNS5wZGYKPj4+Pj4gWzJdIGh0
-dHBzOi8vd2lraS54ZW4ub3JnL2ltYWdlcy8xLzE3L0RldmljZV9wYXNzdGhyb3VnaF94ZW4ucGRm
-Cj4+Pj4+Cj4+Pj4KPj4+PiBIaSBKdWxpZW4sCj4+Pj4KPj4+PiBUaGFua3MgdmVyeSBtdWNoIGZv
-ciB0aGUgaW5mb3JtYXRpb24uIEknbSBsb29raW5nIGF0IHRoZSBSZW5lc2FzIFItQ2FyIEgzCj4+
-Pj4gUjhBNzc5NSwgd2hpY2ggaGFzIGFuIElPTU1VICh1c2luZyB0aGUgTGludXggaXBtbXUtdm1z
-YSBkcml2ZXIgaW4KPj4+PiBkcml2ZXJzL2lvbW11L2lwbW11LXZtc2EuYykuIExvb2tpbmcgYXQg
-dGhlIGRldmljZSB0cmVlIGZvciBpdAo+Pj4+IChyOGE3Nzk1LmR0c2kpLCBpdCBhcHBlYXJzIHlv
-dSBjb3VsZCBwYXNzIHRocm91Z2ggdGhlIGRpc3BsYXlAZmViMDAwMDAgbm9kZQo+Pj4+IGZvciB0
-aGUgRFJNIGRyaXZlci4KPj4+Pgo+Pj4+IEkgZGlkIG5vdGljZSB0aGlzIHBhdGNoIHNlcmllcywg
-d2hpY2ggZGlkbid0IGdldCBtZXJnZWQ6Cj4+Pj4KPj4+PiBodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMTctMDcvbXNnMDI2NzkuaHRtbAo+Pj4+
-Cj4+Pj4gUHJlc3VtYWJseSB0aGF0IGRyaXZlciB3b3VsZCBiZSBuZWVkZWQgaW4gWGVuLgo+Pj4+
-Cj4+Pj4gQXJlIHRoZXJlIGFueSBnb3RjaGFzIEknbSBtaXNzaW5nPyBJcyBHUFUgcGFzc3Rocm91
-Z2ggb24gQVJNIHNvbWV0aGluZwo+Pj4+IHRoYXQgaXMgInRoZW9yZXRpY2FsbHkgZG9hYmxlIiBv
-ciBzb21ldGhpbmcgdGhhdCBoYXMgYmVlbiBkb25lIGFscmVhZHkgYW5kCj4+Pj4gc2hvd24gdG8g
-YmUgcGVyZm9ybWFudD8KPiAKPiBJIGFzc3VtZSB0aGUgSDMgU29DIHZlcnNpb24geW91IGFyZSB1
-c2luZyBpcyBFUzIuMCwgYmVjYXVzZSBvZiByOGE3Nzk1LmR0c2kuCj4gCj4gQlRXLCB3aGF0IEJT
-UCB2ZXJzaW9uIGFyZSB5b3UgdXNpbmc/IEkgYW0gd29uZGVyaW5nIHdoYXQgaXMgeW91ciB1c2Ut
-Y2FzZT8KPiBJZiB5b3Ugd2FudCB0byBrZWVwIEdQVSBpbiBzb21lIGRlZGljYXRlZCBkb21haW4g
-d2l0aG91dCBubyBoYXJkd2FyZQo+IGF0IGFsbCwgeW91IGhhdmUgdG8gdXNlIHNvbWV0aGluZyBs
-aWtlIFBWIERSTSBmcm9udGVuZCBydW5uaW5nIGhlcmUKPiBhbmQgUFYgRFJNIGJhY2tlbmQgaW4g
-dGhlIGhhcmR3YXJlL2RyaXZlciBkb21haW4uCj4gVGhlIHRoaW5ncyBhcmUgZ29pbmcgdG8gYmUg
-bXVjaCBzaW1wbGUgaWYgeW91IHBhc3MgdGhyb3VnaCBhbGwKPiByZXF1aXJlZCBkaXNwbGF5IHN1
-Yi1jb21wb25lbnRzIGFzIHdlbGwsIGZvciB0aGUgInJjYXItZHUiIERSTSB0byBiZQo+IGZ1bmN0
-aW9uYWwuCj4gV2hpY2ggd2F5IGFyZSB5b3UgbG9va2luZyBmb3I/CgpNeSBCU1AgYW5kIGtlcm5l
-bCB2ZXJzaW9uIGlzIGZsZXhpYmxlLCBhbmQgSSdkIGJlIGhhcHB5IHRvIHVzZSB3aGF0ZXZlciAK
-d29ya3MgYmVzdC4gVGhlIHVzZS1jYXNlIGlzIHVzaW5nIE9wZW5DTCBpbnNpZGUgYSBWTSBmb3Ig
-CmhpZ2gtcGVyZm9ybWFuY2UgR1BHUFUuIFRoaXMgbWVhbnMgdGhhdCBwZXJmb3JtYW5jZSBpcyBj
-cml0aWNhbCwgYW5kIEkgCndvdWxkIGdvIHdpdGggd2hhdGV2ZXIgc29sdXRpb24gb2ZmZXJzIHRo
-ZSBiZXN0IHBlcmZvcm1hbmNlLgoKPiAKPiBBbnl3YXksIGluIGJvdGggY2FzZXMgeW91IGhhdmUg
-dG8gcGFzcyB0aHJvdWdoIEdQVS4gRm9yIHRoYXQgc29tZQo+IGFjdGl2aXRpZXMgc2hvdWxkIGJl
-IGRvbmU6Cj4gCj4gMS4gWGVuIHNpZGU6Cj4gCj4gQXMgZm9yIHRoZSBwYXRjaCBzZXJpZXMsIHlv
-dSBhcmUgcmlnaHQsIHlvdSBoYXZlIHRvIGJhc2Ugb24gaXQuIFRoZXJlCj4gYXJlIHR3byBzZXBh
-cmF0ZSBwYXRjaCBzZXJpZXMgd2hpY2ggaGF2ZW4ndCB1cHN0cmVhbWVkIHlldCwKPiBidXQgbmVl
-ZGVkIGZvciB0aGUgcGFzc3Rocm91Z2ggZmVhdHVyZSB0byB3b3JrIG9uIFItQ2FyIEdlbjMgU29D
-cyAoTTMsIEgzKS4KPiAKPiBodHRwczovL3d3dy5tYWlsLWFyY2hpdmUuY29tL3hlbi1kZXZlbEBs
-aXN0cy54ZW4ub3JnL21zZzExNTkwMS5odG1sCj4gaHR0cHM6Ly93d3cubWFpbC1hcmNoaXZlLmNv
-bS94ZW4tZGV2ZWxAbGlzdHMueGVuLm9yZy9tc2cxMTYwMzguaHRtbAo+IAo+IEFsc28gYWRkaXRp
-b25hbCBwYXRjaCBpcyBuZWVkZWQgdG8gdGVhY2ggSVBNTVUtVk1TQSBkcml2ZXIgdG8gaGFuZGxl
-Cj4gZGV2aWNlcyB3aGljaCBhcmUgaG9va2VkIHVwIHRvIG11bHRpcGxlIElQTU1VIGNhY2hlcy4K
-PiBTaW5jZSB0aGUgR1BVIG9uIEgzIFNvQyBpcyBjb25uZWN0ZWQgdG8gbXVsdGlwbGUgSVBNTVUg
-Y2FjaGVzOiBQVjAgLSBQVjMuCj4gCj4gSSBoYXZlIGNyZWF0ZWQgbmV3IGJyYW5jaCB5b3UgY2Fu
-IHNpbXBseSBiYXNlIG9uIHRvIGdldCByZXF1aXJlZAo+IHN1cHBvcnQgaW4gaGFuZC4KPiByZXBv
-OiBodHRwczovL2dpdGh1Yi5jb20vb3R5c2hjaGVua28xL3hlbi5naXQgYnJhbmNoOiBpcG1tdV9u
-ZXh0Cj4gCj4gMi4gRGV2aWNlIHRyZWVzIGFuZCBndWVzdCBjb25maWcgZmlsZToKPiAKPiAyLjEu
-IFlvdSBoYXZlIHRvIGFkZCBmb2xsb3dpbmcgdG8gdGhlIGRvbWFpbiAwIGRldmljZSB0cmVlOgo+
-IAo+IFRoZXJlIGlzIG5vIG1hZ2ljIGhlcmUuIFRoaXMgaXMganVzdCB0byBlbmFibGUgY29ycmVz
-cG9uZGluZyBJUE1NVXMsCj4gaG9va2VkIHVwIEdQVSB0byB0aGVtIGFuZCBub3RpZnkgWGVuCj4g
-dGhhdCBkZXZpY2UgaXMgZ29pbmcgdG8gYmUgcGFzcyB0aHJvdWdoZWQuCj4gCj4gJmdzeCB7Cj4g
-ICAgICB4ZW4scGFzc3Rocm91Z2g7Cj4gCj4gICAgICBpb21tdXMgPSA8JmlwbW11X3B2MCAwPiwg
-PCZpcG1tdV9wdjAgMT4sCj4gICAgICA8JmlwbW11X3B2MCAyPiwgPCZpcG1tdV9wdjAgMz4sCj4g
-ICAgICA8JmlwbW11X3B2MCA0PiwgPCZpcG1tdV9wdjAgNT4sCj4gICAgICA8JmlwbW11X3B2MCA2
-PiwgPCZpcG1tdV9wdjAgNz4sCj4gICAgICA8JmlwbW11X3B2MSAwPiwgPCZpcG1tdV9wdjEgMT4s
-Cj4gICAgICA8JmlwbW11X3B2MSAyPiwgPCZpcG1tdV9wdjEgMz4sCj4gICAgICA8JmlwbW11X3B2
-MSA0PiwgPCZpcG1tdV9wdjEgNT4sCj4gICAgICA8JmlwbW11X3B2MSA2PiwgPCZpcG1tdV9wdjEg
-Nz4sCj4gICAgICA8JmlwbW11X3B2MiAwPiwgPCZpcG1tdV9wdjIgMT4sCj4gICAgICA8JmlwbW11
-X3B2MiAyPiwgPCZpcG1tdV9wdjIgMz4sCj4gICAgICA8JmlwbW11X3B2MiA0PiwgPCZpcG1tdV9w
-djIgNT4sCj4gICAgICA8JmlwbW11X3B2MiA2PiwgPCZpcG1tdV9wdjIgNz4sCj4gICAgICA8Jmlw
-bW11X3B2MyAwPiwgPCZpcG1tdV9wdjMgMT4sCj4gICAgICA8JmlwbW11X3B2MyAyPiwgPCZpcG1t
-dV9wdjMgMz4sCj4gICAgICA8JmlwbW11X3B2MyA0PiwgPCZpcG1tdV9wdjMgNT4sCj4gICAgICA8
-JmlwbW11X3B2MyA2PiwgPCZpcG1tdV9wdjMgNz47Cj4gfTsKPiAKPiAgICZpcG1tdV9wdjAgewo+
-ICAgICAgIHN0YXR1cyA9ICJva2F5IjsKPiAgIH07Cj4gCj4gICAmaXBtbXVfcHYxIHsKPiAgICAg
-ICBzdGF0dXMgPSAib2theSI7Cj4gICB9Owo+IAo+ICAgJmlwbW11X3B2MiB7Cj4gICAgICAgc3Rh
-dHVzID0gIm9rYXkiOwo+ICAgfTsKPiAKPiAgICZpcG1tdV9wdjMgewo+ICAgICAgIHN0YXR1cyA9
-ICJva2F5IjsKPiAgIH07Cj4gCj4gICAmaXBtbXVfbW0gewo+ICAgICAgIHN0YXR1cyA9ICJva2F5
-IjsKPiAgIH07Cj4gCj4gMi4yLiBZb3UgaGF2ZSB0byBhZGQgZm9sbG93aW5nIHRvIHRoZSBndWVz
-dCBjb25maWcgZmlsZToKPiAKPiBJIG1pZ2h0IG1pc3Rha2UgaGVyZSwgcGxlYXNlIHVzZSBleGlz
-dGluZyBkb2N1bWVudGF0aW9uIHRvIHNlZSBob3cgYQo+IGd1ZXN0IGNvbmZpZyBmaWxlCj4gc2hv
-dWxkIGJlIHByb3Blcmx5IG1vZGlmaWVkLiBGb3IgZXhhbXBsZQo+IGh0dHBzOi8vZXZlbnRzLnN0
-YXRpYy5saW51eGZvdW5kLm9yZy9zaXRlcy9ldmVudHMvZmlsZXMvc2xpZGVzL3RhbGtfNS5wZGYK
-PiAKPiBkdGRldiA9IFsgIi9zb2MvZ3N4QGZkMDAwMDAwIiBdCj4gCj4gaXJxcyA9IFsgMTUxIF0K
-PiAKPiBpb21lbSA9IFsgImZkMDAwLDQwIiBdCj4gCj4gZGV2aWNlX3RyZWUgPSAiZG9tVS5kdGIi
-IDwtIFRoaXMgaXMgdGhlIGd1ZXN0IHBhcnRpYWwgZGV2aWNlIHRyZWUuCj4gCj4gMi4zIEFjdHVh
-bGx5IHRoZSBndWVzdCBwYXJ0aWFsIGRldmljZSB0cmVlIEkgaGF2ZSB1c2VkIGlzOgo+IAo+IC9k
-dHMtdjEvOwo+IAo+ICNpbmNsdWRlIDxkdC1iaW5kaW5ncy9pbnRlcnJ1cHQtY29udHJvbGxlci9h
-cm0tZ2ljLmg+Cj4gCj4gLyB7Cj4gICAgICAjYWRkcmVzcy1jZWxscyA9IDwyPjsKPiAgICAgICNz
-aXplLWNlbGxzID0gPDI+Owo+IAo+ICAgICAgcGFzc3Rocm91Z2ggewo+ICAgICAgICAgIGNvbXBh
-dGlibGUgPSAic2ltcGxlLWJ1cyI7Cj4gICAgICAgICAgcmFuZ2VzOwo+IAo+ICAgICAgICAgICNh
-ZGRyZXNzLWNlbGxzID0gPDI+Owo+ICAgICAgICAgICNzaXplLWNlbGxzID0gPDI+Owo+IAo+ICAg
-ICAgICAgIGdzeDogZ3N4QGZkMDAwMDAwIHsKPiAgICAgICAgICAgICAgY29tcGF0aWJsZSA9ICJy
-ZW5lc2FzLGdzeCI7Cj4gICAgICAgICAgICAgIHJlZyA9IDwwIDB4ZmQwMDAwMDAgMCAweDNmZmZm
-PjsKPiAgICAgICAgICAgICAgaW50ZXJydXB0cyA9IDxHSUNfU1BJIDExOSBJUlFfVFlQRV9MRVZF
-TF9ISUdIPjsKPiAgICAgICAgICAgICAgLypjbG9ja3MgPSA8JmNwZyBDUEdfTU9EIDExMj47Ki8K
-PiAgICAgICAgICAgICAgLypwb3dlci1kb21haW5zID0gPCZzeXNjIFI4QTc3OTVfUERfM0RHX0U+
-OyovCj4gICAgICAgICAgfTsKPiAgICAgIH07Cj4gfTsKPiAKPiBIb3BlIHRoaXMgaGVscHMuCj4g
-CgpZZXMsIHRoaXMgaXMgY2VydGFpbmx5IHZlcnkgaGVscGZ1bCwgdGhhbmsgeW91LgoKSnVzdCB0
-byB2ZXJpZnksIGl0IHNvdW5kcyBsaWtlIHRoaXMgd291bGQgYmUgSFZNIG1vZGUgd2l0aCB0aGUg
-CnBhc3N0aHJvdWdoIGJlaW5nIHRyYW5zcGFyZW50IHRvIHRoZSBndWVzdDsgaXMgdGhhdCBjb3Jy
-ZWN0PwoKQWxzbywgZG8geW91IGtub3cgaWYgaXQgd291bGQgYmUgcG9zc2libGUgdG8gc2hhcmUg
-dGhlIEdQVSBhY3Jvc3MgCm11bHRpcGxlIFZNcywgb3Igd291bGQgaXQgYmUgZXhjbHVzaXZlIHRv
-IGEgVk0/IEknbSBub3Qgc3VyZSB3aGV0aGVyIHRoZSAKSU9NTVUgc3VwcG9ydHMgdGhpcywgb3Ig
-d2hldGhlciB0aGUgRFJNIGRyaXZlciBzdXBwb3J0cyBpdC4KCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============2543858114745100973==
+Content-Type: text/plain
+
+flight 118372 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118372/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 118363
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  b03e568ea9eb609f85a0a496c83a5f27ce18498e
+baseline version:
+ xen                  4c7e478d597b0346eef3a256cfd6794ac778b608
+
+Last test of basis   118363  2018-01-26 17:01:14 Z    0 days
+Testing same since   118366  2018-01-26 20:01:43 Z    0 days    2 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Christian Lindig <christian.lindig@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit b03e568ea9eb609f85a0a496c83a5f27ce18498e
+Author: Stefano Stabellini <sstabellini@kernel.org>
+Date:   Fri Jan 26 09:19:31 2018 -0800
+
+    x86/boot: turn the selftests ASSERT into a warning
+    
+    On selftests failure, print a very visible warning instead of crashing
+    over an ASSERT.
+    
+    Signed-off-by: Stefano Stabellini <sstabellini@kernel.org>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    
+    Adjust to print extra information in the case of a failure
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 510414bd5a65a239912c12482102073ca8cf7424
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Jan 26 15:59:51 2018 +0000
+
+    x86/boot: Make the "Building Dom0" messages consistent
+    
+    Switch the PV message to match the wording of the PVH side, use the same
+    number of ***'s, explicitly identify PV vs PVH, set the log level at INFO, and
+    print the real domid (which won't be 0 in pv-shim mode).
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit 94450e36bfbb1cac447fb4009476e6d54bf68678
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Mon Jan 15 10:00:51 2018 +0000
+
+    xen: Drop DOMCTL_getmemlist and xc_get_pfn_list()
+    
+    c/s 4ddf474e2 "tools/xen-mceinj: Pass in GPA when injecting through
+    MSR_MCI_ADDR" removed the remaining user of hypercall.
+    
+    It has been listed as broken, deprecated and wont-fix since XSA-74, so take
+    this opportunity to remove it completely.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit d933f1a53c06002351c1e36d40615e40bd4bf6af
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Jan 19 18:04:27 2018 +0000
+
+    tools/ocaml: Drop coredump infrastructure
+    
+    It is unused, and uses an obsolete hypercall which has never ever functioned
+    for HVM guests.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+
+commit 1124a9a26f05439a3aa31eaea227285e50dc94c0
+Author: Roger Pau Monne <roger.pau@citrix.com>
+Date:   Fri Jan 26 15:29:10 2018 +0000
+
+    xen/pvshim: fix GNTTABOP_query_size hypercall forwarding with SMAP
+    
+    Disable SMAP in the shim before bouncing the hypercall, or else L0
+    will fail to get the hypercall buffer.
+    
+    Reported-by: Fatih Acar <fatih.acar@gandi.net>
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+(qemu changes not included)
+
+
+--===============2543858114745100973==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2543858114745100973==--
