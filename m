@@ -1,9 +1,9 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [libvirt test] 118357: tolerable all pass - PUSHED
-Date: Sat, 27 Jan 2018 18:30:54 +0000
-Message-ID: <osstest-118357-mainreport@xen.org>
+Subject: [xen-unstable-smoke test] 118391: regressions - FAIL
+Date: Sat, 27 Jan 2018 18:41:56 +0000
+Message-ID: <osstest-118391-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3172319168676900039=="
+Content-Type: multipart/mixed; boundary="===============7725606486001474146=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -16,87 +16,51 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============3172319168676900039==
+--===============7725606486001474146==
 Content-Type: text/plain
 
-flight 118357 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118357/
+flight 118391 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118391/
 
-Failures :-/ but no regressions.
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 118363
 
 Tests which did not succeed, but are not blocking:
- test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 118278
- test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 118278
- test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 118278
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
  test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt     14 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt-qcow2 12 migrate-support-check        fail never pass
- test-arm64-arm64-libvirt-qcow2 13 saverestore-support-check    fail never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
 
 version targeted for testing:
- libvirt              6aba0715604c11b394ac5d6590a5fdd17c8f7b10
+ xen                  b03e568ea9eb609f85a0a496c83a5f27ce18498e
 baseline version:
- libvirt              9d34af1a6b671a4df1c73eea46072bddf6b26b5f
+ xen                  4c7e478d597b0346eef3a256cfd6794ac778b608
 
-Last test of basis   118278  2018-01-23 04:20:08 Z    4 days
-Failing since        118319  2018-01-25 04:19:56 Z    2 days    2 attempts
-Testing same since   118357  2018-01-26 11:06:46 Z    1 days    1 attempts
+Last test of basis   118363  2018-01-26 17:01:14 Z    1 days
+Testing same since   118366  2018-01-26 20:01:43 Z    0 days   10 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
-  Daniel P. Berrange <berrange@redhat.com>
-  Daniel P. Berrangé <berrange@redhat.com>
-  Erik Skultety <eskultet@redhat.com>
-  Jim Fehlig <jfehlig@suse.com>
-  John Ferlan <jferlan@redhat.com>
-  Martin Kletzander <mkletzan@redhat.com>
-  Michal Privoznik <mprivozn@redhat.com>
-  Shaohe Feng <shaohe.feng@intel.com>
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Christian Lindig <christian.lindig@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Wei Liu <wei.liu2@citrix.com>
 
 jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-armhf-xsm                                              pass    
- build-i386-xsm                                               pass    
+ build-arm64-xsm                                              fail    
  build-amd64                                                  pass    
- build-arm64                                                  pass    
  build-armhf                                                  pass    
- build-i386                                                   pass    
  build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-armhf-armhf-libvirt-xsm                                 pass    
- test-amd64-i386-libvirt-xsm                                  pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
  test-amd64-amd64-libvirt                                     pass    
- test-arm64-arm64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-arm64-arm64-libvirt-qcow2                               pass    
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
 
 
 ------------------------------------------------------------
@@ -115,13 +79,86 @@ Test harness code can be found at
     http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
-Pushing revision :
+Not pushing.
 
-To xenbits.xen.org:/home/xen/git/libvirt.git
-   9d34af1a6b..6aba071560  6aba0715604c11b394ac5d6590a5fdd17c8f7b10 -> xen-tested-master
+------------------------------------------------------------
+commit b03e568ea9eb609f85a0a496c83a5f27ce18498e
+Author: Stefano Stabellini <sstabellini@kernel.org>
+Date:   Fri Jan 26 09:19:31 2018 -0800
+
+    x86/boot: turn the selftests ASSERT into a warning
+    
+    On selftests failure, print a very visible warning instead of crashing
+    over an ASSERT.
+    
+    Signed-off-by: Stefano Stabellini <sstabellini@kernel.org>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    
+    Adjust to print extra information in the case of a failure
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 510414bd5a65a239912c12482102073ca8cf7424
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Jan 26 15:59:51 2018 +0000
+
+    x86/boot: Make the "Building Dom0" messages consistent
+    
+    Switch the PV message to match the wording of the PVH side, use the same
+    number of ***'s, explicitly identify PV vs PVH, set the log level at INFO, and
+    print the real domid (which won't be 0 in pv-shim mode).
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit 94450e36bfbb1cac447fb4009476e6d54bf68678
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Mon Jan 15 10:00:51 2018 +0000
+
+    xen: Drop DOMCTL_getmemlist and xc_get_pfn_list()
+    
+    c/s 4ddf474e2 "tools/xen-mceinj: Pass in GPA when injecting through
+    MSR_MCI_ADDR" removed the remaining user of hypercall.
+    
+    It has been listed as broken, deprecated and wont-fix since XSA-74, so take
+    this opportunity to remove it completely.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit d933f1a53c06002351c1e36d40615e40bd4bf6af
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Jan 19 18:04:27 2018 +0000
+
+    tools/ocaml: Drop coredump infrastructure
+    
+    It is unused, and uses an obsolete hypercall which has never ever functioned
+    for HVM guests.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+
+commit 1124a9a26f05439a3aa31eaea227285e50dc94c0
+Author: Roger Pau Monne <roger.pau@citrix.com>
+Date:   Fri Jan 26 15:29:10 2018 +0000
+
+    xen/pvshim: fix GNTTABOP_query_size hypercall forwarding with SMAP
+    
+    Disable SMAP in the shim before bouncing the hypercall, or else L0
+    will fail to get the hypercall buffer.
+    
+    Reported-by: Fatih Acar <fatih.acar@gandi.net>
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+(qemu changes not included)
 
 
---===============3172319168676900039==
+--===============7725606486001474146==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -131,4 +168,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============3172319168676900039==--
+--===============7725606486001474146==--
