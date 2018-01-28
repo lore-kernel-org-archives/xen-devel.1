@@ -1,9 +1,9 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 118425: regressions - FAIL
-Date: Sun, 28 Jan 2018 20:32:05 +0000
-Message-ID: <osstest-118425-mainreport@xen.org>
+Subject: [xen-unstable-smoke test] 118426: regressions - FAIL
+Date: Sun, 28 Jan 2018 22:43:49 +0000
+Message-ID: <osstest-118426-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4723446422715306492=="
+Content-Type: multipart/mixed; boundary="===============8680072522401752680=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -16,11 +16,11 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============4723446422715306492==
+--===============8680072522401752680==
 Content-Type: text/plain
 
-flight 118425 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118425/
+flight 118426 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118426/
 
 Regressions :-(
 
@@ -40,7 +40,7 @@ baseline version:
  xen                  4c7e478d597b0346eef3a256cfd6794ac778b608
 
 Last test of basis   118363  2018-01-26 17:01:14 Z    2 days
-Testing same since   118366  2018-01-26 20:01:43 Z    2 days   23 attempts
+Testing same since   118366  2018-01-26 20:01:43 Z    2 days   24 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
@@ -158,7 +158,7 @@ Date:   Fri Jan 26 15:29:10 2018 +0000
 (qemu changes not included)
 
 
---===============4723446422715306492==
+--===============8680072522401752680==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -168,4 +168,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============4723446422715306492==--
+--===============8680072522401752680==--
