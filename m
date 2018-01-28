@@ -1,10 +1,24 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 118419: regressions - FAIL
-Date: Sun, 28 Jan 2018 14:35:48 +0000
-Message-ID: <osstest-118419-mainreport@xen.org>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Subject: Re: [PATCH v2 1/2] x86/acpi: add retrieval function for
+	rsdp address
+Date: Sun, 28 Jan 2018 17:04:53 +0200
+Message-ID: <CAHp75VdUO2Rq7geYD9xxY3nnzGAhO46+w+rQx44=MgJ6obRcEA__18362.2654098601$1517151862$gmane$org@mail.gmail.com>
+References: <20180125143639.9969-1-jgross@suse.com>
+ <20180125143639.9969-2-jgross@suse.com>
+ <CAHp75VdgdQXH-d9+Fo1DwGdfV1pB0jADMmwAK1BU7oN6dgQs8Q@mail.gmail.com>
+ <a33e605a-73d7-83b7-4472-14f66b6738be@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5815649134341208467=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=36+n=ex=gmail.com=andy.shevchenko@srs-us1.protection.inumbo.net>)
+ id 1efoVr-0000UN-Oc
+ for xen-devel@lists.xenproject.org; Sun, 28 Jan 2018 15:04:56 +0000
+Received: by mail-qt0-x244.google.com with SMTP id d54so9756749qtd.4
+ for <xen-devel@lists.xenproject.org>; Sun, 28 Jan 2018 07:04:54 -0800 (PST)
+In-Reply-To: <a33e605a-73d7-83b7-4472-14f66b6738be@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,159 +27,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: Juergen Gross <jgross@suse.com>
+Cc: "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, stable@vger.kernel.org, ACPI Devel Maling List <linux-acpi@vger.kernel.org>, Ingo Molnar <mingo@redhat.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Len Brown <lenb@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5815649134341208467==
-Content-Type: text/plain
-
-flight 118419 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118419/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-arm64-xsm               6 xen-build                fail REGR. vs. 118363
-
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  b03e568ea9eb609f85a0a496c83a5f27ce18498e
-baseline version:
- xen                  4c7e478d597b0346eef3a256cfd6794ac778b608
-
-Last test of basis   118363  2018-01-26 17:01:14 Z    1 days
-Testing same since   118366  2018-01-26 20:01:43 Z    1 days   20 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Christian Lindig <christian.lindig@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- build-arm64-xsm                                              fail    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      blocked 
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit b03e568ea9eb609f85a0a496c83a5f27ce18498e
-Author: Stefano Stabellini <sstabellini@kernel.org>
-Date:   Fri Jan 26 09:19:31 2018 -0800
-
-    x86/boot: turn the selftests ASSERT into a warning
-    
-    On selftests failure, print a very visible warning instead of crashing
-    over an ASSERT.
-    
-    Signed-off-by: Stefano Stabellini <sstabellini@kernel.org>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    
-    Adjust to print extra information in the case of a failure
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-commit 510414bd5a65a239912c12482102073ca8cf7424
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Fri Jan 26 15:59:51 2018 +0000
-
-    x86/boot: Make the "Building Dom0" messages consistent
-    
-    Switch the PV message to match the wording of the PVH side, use the same
-    number of ***'s, explicitly identify PV vs PVH, set the log level at INFO, and
-    print the real domid (which won't be 0 in pv-shim mode).
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Acked-by: Jan Beulich <jbeulich@suse.com>
-
-commit 94450e36bfbb1cac447fb4009476e6d54bf68678
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Mon Jan 15 10:00:51 2018 +0000
-
-    xen: Drop DOMCTL_getmemlist and xc_get_pfn_list()
-    
-    c/s 4ddf474e2 "tools/xen-mceinj: Pass in GPA when injecting through
-    MSR_MCI_ADDR" removed the remaining user of hypercall.
-    
-    It has been listed as broken, deprecated and wont-fix since XSA-74, so take
-    this opportunity to remove it completely.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Christian Lindig <christian.lindig@citrix.com>
-    Acked-by: Wei Liu <wei.liu2@citrix.com>
-
-commit d933f1a53c06002351c1e36d40615e40bd4bf6af
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Fri Jan 19 18:04:27 2018 +0000
-
-    tools/ocaml: Drop coredump infrastructure
-    
-    It is unused, and uses an obsolete hypercall which has never ever functioned
-    for HVM guests.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Christian Lindig <christian.lindig@citrix.com>
-
-commit 1124a9a26f05439a3aa31eaea227285e50dc94c0
-Author: Roger Pau Monne <roger.pau@citrix.com>
-Date:   Fri Jan 26 15:29:10 2018 +0000
-
-    xen/pvshim: fix GNTTABOP_query_size hypercall forwarding with SMAP
-    
-    Disable SMAP in the shim before bouncing the hypercall, or else L0
-    will fail to get the hypercall buffer.
-    
-    Reported-by: Fatih Acar <fatih.acar@gandi.net>
-    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
-(qemu changes not included)
-
-
---===============5815649134341208467==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5815649134341208467==--
+T24gRnJpLCBKYW4gMjYsIDIwMTggYXQgODoyMSBQTSwgSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1
+c2UuY29tPiB3cm90ZToKPiBPbiAyNi8wMS8xOCAxOTowOCwgQW5keSBTaGV2Y2hlbmtvIHdyb3Rl
+Ogo+PiBPbiBUaHUsIEphbiAyNSwgMjAxOCBhdCA0OjM2IFBNLCBKdWVyZ2VuIEdyb3NzIDxqZ3Jv
+c3NAc3VzZS5jb20+IHdyb3RlOgo+Pj4gQWRkIGEgZnVuY3Rpb24gdG8gZ2V0IHRoZSBhZGRyZXNz
+IG9mIHRoZSBSU0RQIHRhYmxlLiBQZXIgZGVmYXVsdCB1c2UgYQo+Pj4gX193ZWFrIGFubm90YXRl
+ZCBmdW5jdGlvbiBiZWluZyBhIG5vcC4KPj4KPj4gVGhlIHByb2JsZW0gd2l0aCB3ZWFrIGZ1bmN0
+aW9ucyB0aGF0IHdlIGNhbid0IGhhdmUgbW9yZSB0aGFuIG9uZQo+PiBpbXBsZW1lbnRhdGlvbiBw
+ZXIga2VybmVsIHdoaWxlIHdlIHdvdWxkIGxpa2UgdG8gYnVpbHQgc2V2ZXJhbCBjb2RlCj4+IHBh
+dGhzLgo+Pgo+PiBJIGhhdmUgc3R1bWJsZWQgb24gdGhlIHNpbWlsYXIgc3R1ZmYgYW5kIHJlYWxp
+emUgdGhhdC4KPj4KPj4gUGVyaGFwcywgb25lIG9mIHRoZSBzb2x1dGlvbiBpcyB0byBoYXZlIGFu
+IGFkZGl0aW9uYWwgc3RydWN0IHVuZGVyCj4+IHg4Nl9pbml0IHRvIGFsdGVybmF0ZSBBQ1BJIHJl
+bGF0ZWQgc3R1ZmYuCj4KPiBJIHRoaW5rIHdlIGNhbiBnbyB0aGF0IHJvdXRlIHdoZW4gYW5vdGhl
+ciB1c2VyIG9mIHRoYXQgaW50ZXJmYWNlIGlzCj4gYXBwZWFyaW5nLgoKV2h5IG5vdCB0byBlc3Rh
+Ymxpc2ggdGhlIHN0cnVjdD8gQXQgbGVhc3QgdGhpcyByb3V0ZSBJIHdvdWxkIGxpa2UgdG8KZ28g
+d2l0aCBbMV0uCgpbMV06IGh0dHBzOi8vbGttbC5vcmcvbGttbC8yMDE4LzEvMTcvODM0CgotLSAK
+V2l0aCBCZXN0IFJlZ2FyZHMsCkFuZHkgU2hldmNoZW5rbwoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
