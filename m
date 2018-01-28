@@ -1,11 +1,25 @@
-From: "Zhang, Xiong Y" <xiong.y.zhang@intel.com>
-Subject: [bug]xen 4.10 + dom0 4.15 couldn't boot up
-Date: Mon, 29 Jan 2018 05:28:14 +0000
-Message-ID: <8082FF9BCB2B054996454E47167FF4EC1C703026@SHSMSX104.ccr.corp.intel.com>
+From: Pieter Dewachter <pieter.dewachter@student.kuleuven.be>
+Subject: Supported hardware
+Date: Sun, 28 Jan 2018 11:10:33 +0000
+Message-ID: <1517137831941.78119@student.kuleuven.be>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2728838183652548689=="
+Content-Type: multipart/mixed; boundary="===============0578406473019482759=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=uege=ex=student.kuleuven.be=pieter.dewachter@srs-us1.protection.inumbo.net>)
+ id 1efkrB-0002Pf-9B
+ for xen-devel@lists.xenproject.org; Sun, 28 Jan 2018 11:10:41 +0000
+Received: from icts-p-smtps-1.cc.kuleuven.be
+ (icts-p-smtps-1e.kulnet.kuleuven.be [134.58.240.33])
+ by rhcavuit01.kulnet.kuleuven.be (Postfix) with ESMTP id 9E643120322
+ for <xen-devel@lists.xenproject.org>; Sun, 28 Jan 2018 12:10:33 +0100 (CET)
+Received: from ICTS-S-EXMBX6.luna.kuleuven.be (icts-s-exmbx6.luna.kuleuven.be
+ [10.112.11.14]) (using TLSv1.2 with cipher AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by icts-p-smtps-1.cc.kuleuven.be (Postfix) with ESMTPS id 9C2C2403B
+ for <xen-devel@lists.xenproject.org>; Sun, 28 Jan 2018 12:10:33 +0100 (CET)
+Content-Language: nl-NL
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,310 +28,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: "Zhang, Xiong Y" <xiong.y.zhang@intel.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2728838183652548689==
-Content-Language: en-US
+--===============0578406473019482759==
+Content-Language: nl-NL
 Content-Type: multipart/alternative;
-	boundary="_000_8082FF9BCB2B054996454E47167FF4EC1C703026SHSMSX104ccrcor_"
+	boundary="_000_151713783194178119studentkuleuvenbe_"
 
---_000_8082FF9BCB2B054996454E47167FF4EC1C703026SHSMSX104ccrcor_
-Content-Type: text/plain; charset="us-ascii"
+--_000_151713783194178119studentkuleuvenbe_
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Today I found xen 4.10 (or staging branch) with dom0 4.15 kernel, dom0 coul=
-dn't boot up and it print the following error, is it a known issue ?
-(XEN) ..................................done.
-(XEN) Std. Loglevel: All
-(XEN) Guest Loglevel: All
-(XEN) Xen is relinquishing VGA console.
-(XEN) *** Serial input -> DOM0 (type 'CTRL-a' three times to switch input t=
-o Xen)
-(XEN) Freed 460kB init memory
-(XEN) d0v0 Unhandled page fault fault/trap [#14, ec=3D0000]
-(XEN) Pagetable walk from 0000000000000028:
-(XEN)  L4[0x000] =3D 0000000000000000 ffffffffffffffff
-(XEN) domain_crash_sync called from entry.S: fault at ffff82d0803530e4 x86_=
-64/entry.S#create_bounce_frame+0x135/0x151
-(XEN) Domain 0 (vcpu#0) crashed on cpu#0:
-(XEN) ----[ Xen-4.11-unstable  x86_64  debug=3Dn   Not tainted ]----
-(XEN) CPU:    0
-(XEN) RIP:    e033:[<ffffffff8103f78b>]
-(XEN) RFLAGS: 0000000000000292   EM: 1   CONTEXT: pv guest (d0v0)
-(XEN) rax: 0000000000000000   rbx: ffffffff81e06020   rcx: 0000000000000000
-(XEN) rdx: 0000000000000000   rsi: ffffffff82403e90   rdi: ffffffff82403e8c
-(XEN) rbp: ffffffff82403ec8   rsp: ffffffff82403e10   r8:  ffffffff82403f00
-(XEN) r9:  00000000ffffffff   r10: ffffffff82403f04   r11: 0000000000000000
-(XEN) r12: ffffffff82403e88   r13: ffffffff82403e78   r14: ffffffff82403e80
-(XEN) r15: ffffffff82403e84   cr0: 000000008005003b   cr4: 00000000003526e0
-(XEN) cr3: 000000040eb66000   cr2: 0000000000000028
-(XEN) fsb: 0000000000000000   gsb: 0000000000000000   gss: 0000000000000000
-(XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: e02b   cs: e033
-(XEN) Guest stack trace from rsp=3Dffffffff82403e10:
-(XEN)    0000000000000000 0000000000000000 0000000000000000 ffffffff8103f78=
-b
-(XEN)    000000010000e030 0000000000010092 ffffffff82403e58 000000000000e02=
-b
-(XEN)    0000000000000000 ffffffff826591e0 0000000000000000 000000000000000=
-0
-(XEN)    0000000000000000 0000000000000000 0000000000000000 000000000000000=
-0
-(XEN)    0000000000000000 0000000000000000 ffffffff826591e0 ffffffff82403f0=
-4
-(XEN)    ffffffff82403f00 ffffffff82403efc ffffffff82403ef8 ffffffff82403f4=
-0
-(XEN)    ffffffff81040343 ffffffff82403f14 ffffffff82403f10 ffffffff82403f0=
-c
-(XEN)    ffffffff82403f08 0000000000003027 0000000000000000 000000008000000=
-8
-(XEN)    0000000000000000 ffffffff81032100 0000000000000000 000000000000000=
-0
-(XEN)    0000000000000000 0000000000000000 ffffffff82403ff8 ffffffff826ac35=
-d
-(XEN)    0000000000000000 0000000000000000 0000000000000000 000000000000000=
-0
-(XEN)    0000000000000000 0000000000000000 0000000000000000 000000000000000=
-0
-(XEN)    0000000000000000 0000000000000000 0000000000000000 000000000000000=
-0
-(XEN)    0000000000000000 0000000000000000 0000000000000000 000000000000000=
-0
-(XEN)    0000000000000000 0000000000000000 0000000000000000 000000000000000=
-0
-(XEN)    0000000000000000 0000000000000000 0f00000060c0c748 ccccccccccccc30=
-5
-(XEN)    cccccccccccccccc cccccccccccccccc cccccccccccccccc ccccccccccccccc=
-c
-(XEN)    cccccccccccccccc cccccccccccccccc cccccccccccccccc ccccccccccccccc=
-c
-(XEN)    cccccccccccccccc cccccccccccccccc cccccccccccccccc ccccccccccccccc=
-c
-(XEN)    cccccccccccccccc cccccccccccccccc cccccccccccccccc ccccccccccccccc=
-c
-(XEN) Hardware Dom0 crashed: rebooting machine in 5 seconds.
-(XEN) APIC error on CPU0: 40(00)
-(XEN) Resetting with ACPI MEMORY or I/O RESET_REG.
+Dear developers,
 
-Xen 4.9 + dom0 4.15 is OK.
-Xen 4.10 + dom0 4.14 is also OK.
-Only Xen 4.10 + dom0 4.15 has such issue.
 
-thanks
+?I'm doing my master thesis this year and I will be using the Xen hyperviso=
+r for it. The domain for my thesis is more about the automotive sector, but=
+ unfortunately the hardware is too expensive to actually use the automotive=
+ drivers for Xen.
 
---_000_8082FF9BCB2B054996454E47167FF4EC1C703026SHSMSX104ccrcor_
-Content-Type: text/html; charset="us-ascii"
+
+The goal is to set up a failover cluster by using two different processors,=
+ but the first goal is to actually run Xen on them. Due to the limited budg=
+et, we were looking at this development board specifically:
+
+https://www.mouser.be/productdetail/nxp-freescale/frdm-ls1012a-pa?qs=3DsGAE=
+piMZZMtw0nEwywcFgPq18vRUkOhrFGI4%252bz5xG70HM4YISmdecw=3D=3D<https://www.mo=
+user.be/productdetail/nxp-freescale/frdm-ls1012a-pa?qs=3DsGAEpiMZZMtw0nEwyw=
+cFgPq18vRUkOhrFGI4%252bz5xG70HM4YISmdecw>
+
+
+This is a board based on a single Cortex A53 implemented by NXP, more detai=
+ls can be found here:
+
+https://www.nxp.com/products/processors-and-microcontrollers/arm-based-proc=
+essors-and-mcus/qoriq-layerscape-arm-processors/qoriq-layerscape-1012a-low-=
+power-communication-processor:LS1012A?
+
+
+Now I have heard the biggest problem is generally the GIC interrupt control=
+ler, so I was wondering if it is possible to run Xen on these boards? Once =
+I have confirmation I can make the purchase to continue my thesis. It would=
+ be a shame to buy unsupported hardware to start with.
+
+
+Many thanks in advance!
+
+
+Pieter Dewachter
+
+--_000_151713783194178119studentkuleuvenbe_
+Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
+<html>
 <head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:SimSun;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-@font-face
-	{font-family:"\@SimSun";
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	text-align:justify;
-	text-justify:inter-ideograph;
-	font-size:10.5pt;
-	font-family:"Calibri",sans-serif;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:#0563C1;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:#954F72;
-	text-decoration:underline;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri",sans-serif;
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-family:"Calibri",sans-serif;}
-/* Page Definitions */
-@page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none"><!-- p { margin-top: 0px; m=
+argin-bottom: 0px; }--></style>
 </head>
-<body lang=3D"ZH-CN" link=3D"#0563C1" vlink=3D"#954F72" style=3D"text-justi=
-fy-trim:punctuation">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal"><span lang=3D"EN-US">Today I found xen 4.10 (or stag=
-ing branch) with dom0 4.15 kernel, dom0 couldn&#8217;t boot up and it print=
- the following error, is it a known issue ?<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) .........................=
-.........done.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) Std. Loglevel: All<o:p></=
-o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) Guest Loglevel: All<o:p><=
-/o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) Xen is relinquishing VGA =
-console.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) *** Serial input -&gt; DO=
-M0 (type 'CTRL-a' three times to switch input to Xen)<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) Freed 460kB init memory<o=
-:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) d0v0 Unhandled page fault=
- fault/trap [#14, ec=3D0000]<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) Pagetable walk from 00000=
-00000000028:<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp; L4[0x000] =3D 00000=
-00000000000 ffffffffffffffff<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) domain_crash_sync called =
-from entry.S: fault at ffff82d0803530e4 x86_64/entry.S#create_bounce_frame&=
-#43;0x135/0x151<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) Domain 0 (vcpu#0) crashed=
- on cpu#0:<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) ----[ Xen-4.11-unstable&n=
-bsp; x86_64&nbsp; debug=3Dn&nbsp;&nbsp; Not tainted ]----<o:p></o:p></span>=
+<body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
+FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
+<p>Dear developers,</p>
+<p><br>
 </p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) CPU:&nbsp;&nbsp;&nbsp; 0<=
-o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) RIP:&nbsp;&nbsp;&nbsp; e0=
-33:[&lt;ffffffff8103f78b&gt;]<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) RFLAGS: 0000000000000292&=
-nbsp;&nbsp; EM: 1&nbsp;&nbsp; CONTEXT: pv guest (d0v0)<o:p></o:p></span></p=
->
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) rax: 0000000000000000&nbs=
-p;&nbsp; rbx: ffffffff81e06020&nbsp;&nbsp; rcx: 0000000000000000<o:p></o:p>=
+<p>&#8203;I'm doing my master thesis this year and I will be using the Xen =
+hypervisor for it.&nbsp;<span style=3D"font-size: 12pt;">The domain for my =
+thesis is more about the automotive sector, but unfortunately the hardware =
+is too expensive to actually use the automotive
+ drivers for Xen.</span></p>
+<p><span style=3D"font-size: 12pt;"><br>
 </span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) rdx: 0000000000000000&nbs=
-p;&nbsp; rsi: ffffffff82403e90&nbsp;&nbsp; rdi: ffffffff82403e8c<o:p></o:p>=
+<p><span style=3D"font-size: 12pt;">The goal is to set up a failover cluste=
+r&nbsp;by using two different processors, but the first goal is to actually=
+ run Xen on them. Due to the limited budget, we were looking at this develo=
+pment board specifically:</span></p>
+<p><span style=3D"font-size: 12pt;"><a href=3D"https://www.mouser.be/produc=
+tdetail/nxp-freescale/frdm-ls1012a-pa?qs=3DsGAEpiMZZMtw0nEwywcFgPq18vRUkOhr=
+FGI4%252bz5xG70HM4YISmdecw">https://www.mouser.be/productdetail/nxp-freesca=
+le/frdm-ls1012a-pa?qs=3DsGAEpiMZZMtw0nEwywcFgPq18vRUkOhrFGI4%252bz5xG70HM4Y=
+ISmdecw=3D=3D</a><br>
 </span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) rbp: ffffffff82403ec8&nbs=
-p;&nbsp; rsp: ffffffff82403e10&nbsp;&nbsp; r8:&nbsp; ffffffff82403f00<o:p><=
-/o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) r9:&nbsp; 00000000fffffff=
-f&nbsp;&nbsp; r10: ffffffff82403f04&nbsp;&nbsp; r11: 0000000000000000<o:p><=
-/o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) r12: ffffffff82403e88&nbs=
-p;&nbsp; r13: ffffffff82403e78&nbsp;&nbsp; r14: ffffffff82403e80<o:p></o:p>=
+<p><span style=3D"font-size: 12pt;"><br>
 </span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) r15: ffffffff82403e84&nbs=
-p;&nbsp; cr0: 000000008005003b&nbsp;&nbsp; cr4: 00000000003526e0<o:p></o:p>=
+<p><span style=3D"font-size: 12pt;">This is a board based on a single&nbsp;=
+Cortex&nbsp;A53 implemented by NXP, more details can be found here:</span><=
+/p>
+<p><span style=3D"font-size: 12pt;"><a href=3D"https://www.nxp.com/products=
+/processors-and-microcontrollers/arm-based-processors-and-mcus/qoriq-layers=
+cape-arm-processors/qoriq-layerscape-1012a-low-power-communication-processo=
+r:LS1012A">https://www.nxp.com/products/processors-and-microcontrollers/arm=
+-based-processors-and-mcus/qoriq-layerscape-arm-processors/qoriq-layerscape=
+-1012a-low-power-communication-processor:LS1012A</a>&#8203;<br>
 </span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) cr3: 000000040eb66000&nbs=
-p;&nbsp; cr2: 0000000000000028<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) fsb: 0000000000000000&nbs=
-p;&nbsp; gsb: 0000000000000000&nbsp;&nbsp; gss: 0000000000000000<o:p></o:p>=
+<p><span style=3D"font-size: 12pt;"><br>
 </span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) ds: 0000&nbsp;&nbsp; es: =
-0000&nbsp;&nbsp; fs: 0000&nbsp;&nbsp; gs: 0000&nbsp;&nbsp; ss: e02b&nbsp;&n=
-bsp; cs: e033<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) Guest stack trace from rs=
-p=3Dffffffff82403e10:<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 0000000000000000 0000000000000000 ffffffff8103f78b<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-10000e030 0000000000010092 ffffffff82403e58 000000000000e02b<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 ffffffff826591e0 0000000000000000 0000000000000000<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 0000000000000000 0000000000000000 0000000000000000<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 0000000000000000 ffffffff826591e0 ffffffff82403f04<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) &nbsp;&nbsp;&nbsp;fffffff=
-f82403f00 ffffffff82403efc ffffffff82403ef8 ffffffff82403f40<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; fffffff=
-f81040343 ffffffff82403f14 ffffffff82403f10 ffffffff82403f0c<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; fffffff=
-f82403f08 0000000000003027 0000000000000000 0000000080000008<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 ffffffff81032100 0000000000000000 0000000000000000<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 0000000000000000 ffffffff82403ff8 ffffffff826ac35d<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 0000000000000000 0000000000000000 0000000000000000<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 0000000000000000 0000000000000000 0000000000000000<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 0000000000000000 0000000000000000 0000000000000000<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 0000000000000000 0000000000000000 0000000000000000<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 0000000000000000 0000000000000000 0000000000000000<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; 0000000=
-000000000 0000000000000000 0f00000060c0c748 ccccccccccccc305<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; ccccccc=
-ccccccccc cccccccccccccccc cccccccccccccccc cccccccccccccccc<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; ccccccc=
-ccccccccc cccccccccccccccc cccccccccccccccc cccccccccccccccc<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; ccccccc=
-ccccccccc cccccccccccccccc cccccccccccccccc cccccccccccccccc<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN)&nbsp;&nbsp;&nbsp; ccccccc=
-ccccccccc cccccccccccccccc cccccccccccccccc cccccccccccccccc<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) Hardware Dom0 crashed: re=
-booting machine in 5 seconds.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) APIC error on CPU0: 40(00=
-)<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">(XEN) Resetting with ACPI MEMOR=
-Y or I/O RESET_REG.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">Xen 4.9 &#43; dom0 4.15 is OK.<=
-o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">Xen 4.10 &#43; dom0 4.14 is als=
-o OK.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">Only Xen 4.10 &#43; dom0 4.15 h=
-as such issue.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">thanks<o:p></o:p></span></p>
-</div>
+<p><span style=3D"font-size: 12pt;">Now I have heard the biggest problem is=
+ generally the GIC interrupt controller, so I was wondering if it is possib=
+le to run Xen on these boards? Once I have confirmation I can make the purc=
+hase to continue my thesis. It would
+ be a shame to buy unsupported hardware to start with.</span></p>
+<p><span style=3D"font-size: 12pt;"><br>
+</span></p>
+<p><span style=3D"font-size: 12pt;">Many thanks in advance!</span></p>
+<p><span style=3D"font-size: 12pt;"><br>
+</span></p>
+<p><span style=3D"font-size: 12pt;">Pieter Dewachter</span></p>
 </body>
 </html>
 
---_000_8082FF9BCB2B054996454E47167FF4EC1C703026SHSMSX104ccrcor_--
+--_000_151713783194178119studentkuleuvenbe_--
 
 
---===============2728838183652548689==
+--===============0578406473019482759==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -327,4 +152,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============2728838183652548689==--
+--===============0578406473019482759==--
