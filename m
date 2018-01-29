@@ -1,14 +1,14 @@
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: [PATCH 4.4 01/74] x86/asm/32: Make sync_core() handle
+Subject: [PATCH 4.9 01/66] x86/asm/32: Make sync_core() handle
 	missing CPUID on all 32-bit kernels
-Date: Mon, 29 Jan 2018 13:56:06 +0100
-Message-ID: <20180129123847.578496255__32919.1918870949$1517256253$gmane$org@linuxfoundation.org>
-References: <20180129123847.507563674@linuxfoundation.org>
+Date: Mon, 29 Jan 2018 13:56:25 +0100
+Message-ID: <20180129123839.913605720__42517.7213656299$1517256314$gmane$org@linuxfoundation.org>
+References: <20180129123839.842860149@linuxfoundation.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180129123847.507563674@linuxfoundation.org>
+In-Reply-To: <20180129123839.842860149@linuxfoundation.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,7 +22,7 @@ Cc: Juergen Gross <jgross@suse.com>, One Thousand Gnomes <gnomes@lxorguk.ukuu.or
  Ning A" <ning.a.zhang@intel.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>, Brian Gerst <brgerst@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel <Xen-devel@lists.xen.org>, Thomas Gleixner <tglx@linutronix.de>
 List-Id: xen-devel@lists.xenproject.org
 
-NC40LXN0YWJsZSByZXZpZXcgcGF0Y2guICBJZiBhbnlvbmUgaGFzIGFueSBvYmplY3Rpb25zLCBw
+NC45LXN0YWJsZSByZXZpZXcgcGF0Y2guICBJZiBhbnlvbmUgaGFzIGFueSBvYmplY3Rpb25zLCBw
 bGVhc2UgbGV0IG1lIGtub3cuCgotLS0tLS0tLS0tLS0tLS0tLS0KCkZyb206IEFuZHkgTHV0b21p
 cnNraSA8bHV0b0BrZXJuZWwub3JnPgoKY29tbWl0IDFjNTJkODU5Y2IyZDQxN2U3MjE2ZDNlNTZi
 YjdmZWE4ODQ0NGNlYzkgdXBzdHJlYW0uCgpXZSBzdXBwb3J0IHZhcmlvdXMgbm9uLUludGVsIENQ
@@ -44,8 +44,8 @@ WmhhbmcsIE5pbmcgQSIgPG5pbmcuYS56aGFuZ0BpbnRlbC5jb20+ClNpZ25lZC1vZmYtYnk6IEdy
 ZWcgS3JvYWgtSGFydG1hbiA8Z3JlZ2toQGxpbnV4Zm91bmRhdGlvbi5vcmc+CgotLS0KIGFyY2gv
 eDg2L2luY2x1ZGUvYXNtL3Byb2Nlc3Nvci5oIHwgICAgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEg
 aW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgotLS0gYS9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9w
-cm9jZXNzb3IuaAorKysgYi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9wcm9jZXNzb3IuaApAQCAtNTc0
-LDcgKzU3NCw3IEBAIHN0YXRpYyBpbmxpbmUgdm9pZCBzeW5jX2NvcmUodm9pZCkKIHsKIAlpbnQg
+cm9jZXNzb3IuaAorKysgYi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9wcm9jZXNzb3IuaApAQCAtNTk2
+LDcgKzU5Niw3IEBAIHN0YXRpYyBpbmxpbmUgdm9pZCBzeW5jX2NvcmUodm9pZCkKIHsKIAlpbnQg
 dG1wOwogCi0jaWZkZWYgQ09ORklHX000ODYKKyNpZmRlZiBDT05GSUdfWDg2XzMyCiAJLyoKIAkg
 KiBEbyBhIENQVUlEIGlmIGF2YWlsYWJsZSwgb3RoZXJ3aXNlIGRvIGEganVtcC4gIFRoZSBqdW1w
 CiAJICogY2FuIGNvbnZlbmllbnRseSBlbm91Z2ggYmUgdGhlIGp1bXAgYXJvdW5kIENQVUlELgoK
