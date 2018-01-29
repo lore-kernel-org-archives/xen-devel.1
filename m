@@ -1,16 +1,14 @@
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 1/2] mg-force-push: unshift . onto @INC
-Date: Mon, 29 Jan 2018 17:29:06 +0000
-Message-ID: <1517246947-24154-1-git-send-email-ian.jackson@eu.citrix.com>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Subject: Re: [PATCH] tests/xen-access: disable CR4 write events
+	on application exit
+Date: Mon, 29 Jan 2018 10:58:52 -0700
+Message-ID: <CABfawh=JLdfEHfB9mPREsfgjiZiRTZeZNiZKcRf-ezidH_SvZw@mail.gmail.com>
+References: <1517245811-6210-1-git-send-email-rcojocaru@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=ept7=ey=citrix.com=prvs=56019719f=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1egDFQ-0003Wq-IL
- for xen-devel@lists.xenproject.org; Mon, 29 Jan 2018 17:29:36 +0000
+In-Reply-To: <1517245811-6210-1-git-send-email-rcojocaru@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,18 +17,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: wei.liu2@citrix.com, Ian Jackson <ian.jackson@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBzY3JpcHQgc2VlbXMgdG8gaGF2ZSBtaXNzZWQgb3V0IG9uIHRoZSBidWxrIGNvbW1pdCBm
-aXhpbmcgdGhpcwpwcm9ibGVtLgoKU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPElhbi5KYWNr
-c29uQGV1LmNpdHJpeC5jb20+Ci0tLQogbWctZm9yY2UtcHVzaCB8IDEgKwogMSBmaWxlIGNoYW5n
-ZWQsIDEgaW5zZXJ0aW9uKCspCgpkaWZmIC0tZ2l0IGEvbWctZm9yY2UtcHVzaCBiL21nLWZvcmNl
-LXB1c2gKaW5kZXggNGE4ZjBhMi4uMDljMTg5NCAxMDA3NTUKLS0tIGEvbWctZm9yY2UtcHVzaAor
-KysgYi9tZy1mb3JjZS1wdXNoCkBAIC0xMCw2ICsxMCw3IEBACiB1c2Ugc3RyaWN0OwogdXNlIHdh
-cm5pbmdzOwogCitCRUdJTiB7IHVuc2hpZnQgQElOQywgcXcoLik7IH0KIHVzZSBPc3N0ZXN0Owog
-CiBteSBAZHJ5cnVuOwotLSAKMi4xLjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+T24gTW9uLCBKYW4gMjksIDIwMTggYXQgMTA6MTAgQU0sIFJhenZhbiBDb2pvY2FydQo8cmNvam9j
+YXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4gT24gZXhpdCwgeGVuLWFjY2VzcyBkaWQgbm90
+IHVuc3Vic2NyaWJlIGZyb20gQ1I0IHdyaXRlIHZtX2V2ZW50cywKPiBwb3RlbnRpYWxseSBsZWF2
+aW5nIHRoZSBndWVzdCBzdHVjay4KPgo+IFNpZ25lZC1vZmYtYnk6IFJhenZhbiBDb2pvY2FydSA8
+cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4KPiAtLS0KPiAgdG9vbHMvdGVzdHMveGVuLWFjY2Vz
+cy94ZW4tYWNjZXNzLmMgfCAyICsrCj4gIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykK
+Pgo+IGRpZmYgLS1naXQgYS90b29scy90ZXN0cy94ZW4tYWNjZXNzL3hlbi1hY2Nlc3MuYyBiL3Rv
+b2xzL3Rlc3RzL3hlbi1hY2Nlc3MveGVuLWFjY2Vzcy5jCj4gaW5kZXggOWQ5NjBlMi4uYzU3MjU1
+MCAxMDA2NDQKPiAtLS0gYS90b29scy90ZXN0cy94ZW4tYWNjZXNzL3hlbi1hY2Nlc3MuYwo+ICsr
+KyBiL3Rvb2xzL3Rlc3RzL3hlbi1hY2Nlc3MveGVuLWFjY2Vzcy5jCj4gQEAgLTY1NCw2ICs2NTQs
+OCBAQCBpbnQgbWFpbihpbnQgYXJnYywgY2hhciAqYXJndltdKQo+ICAgICAgICAgICAgICAgICAg
+cmMgPSB4Y19tb25pdG9yX2NwdWlkKHhjaCwgZG9tYWluX2lkLCAwKTsKPiAgICAgICAgICAgICAg
+aWYgKCBkZXNjX2FjY2VzcyApCj4gICAgICAgICAgICAgICAgICByYyA9IHhjX21vbml0b3JfZGVz
+Y3JpcHRvcl9hY2Nlc3MoeGNoLCBkb21haW5faWQsIDApOwo+ICsgICAgICAgICAgICBpZiAoIHdy
+aXRlX2N0cmxyZWdfY3I0ICkKPiArICAgICAgICAgICAgICAgIHJjID0geGNfbW9uaXRvcl93cml0
+ZV9jdHJscmVnKHhjaCwgZG9tYWluX2lkLCBWTV9FVkVOVF9YODZfQ1I0LCAwLCAxLCAwLCAxKTsK
+CkFueSByZWFzb24gZm9yIHRoZSBzeW5jIGFuZCBvbmNoYW5nZW9ubHkgcGFydHMgdG8gYmUgc2V0
+IHRvIDEgaGVyZT8gSQpkb24ndCB0aGluayBpdCBoYXMgYW55IGVmZmVjdCB3aGVuIHlvdSBhcmUg
+ZGlzYWJsaW5nIGFuIGV2ZW50LgoKVGFtYXMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
