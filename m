@@ -1,16 +1,10 @@
-From: "Tian, Kevin" <kevin.tian@intel.com>
-Subject: Re: [PATCH 2/3] x86/hvm: Improvements to external users
- of decode_register()
-Date: Mon, 29 Jan 2018 03:11:56 +0000
-Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D190F068D4@SHSMSX101.ccr.corp.intel.com>
-References: <1516972600-26262-1-git-send-email-andrew.cooper3@citrix.com>
- <1516972600-26262-3-git-send-email-andrew.cooper3@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118432: regressions - FAIL
+Date: Mon, 29 Jan 2018 05:25:22 +0000
+Message-ID: <osstest-118432-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0521191171783546934=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1516972600-26262-3-git-send-email-andrew.cooper3@citrix.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,22 +13,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: "Nakajima, Jun" <jun.nakajima@intel.com>, Jan Beulich <JBeulich@suse.com>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-PiBGcm9tOiBBbmRyZXcgQ29vcGVyIFttYWlsdG86YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbV0K
-PiBTZW50OiBGcmlkYXksIEphbnVhcnkgMjYsIDIwMTggOToxNyBQTQo+IAo+ICAqIFJlbmFtZSB0
-byBkZWNvZGVfZ3ByKCkgdG8gYmUgbW9yZSBzcGVjaWZpYyBhcyB0byBpdHMgcHVycG9zZQo+ICAq
-IERyb3AgdGhlIGhpZ2hieXRlIGVuY29kaW5nIGhhbmRsaW5nLCBhcyB1c2VycyBjYXJlLCBhbmQg
-aXQgdW5saWtlbHkgdGhhdAo+ICAgIGZ1dHVyZSB1c2VycyB3b3VsZCBjYXJlLgo+ICAqIENoYW5n
-ZSB0byBhIHN0YXRpYyBpbmxpbmUsIHJldHVybmluZyBhbiB1bnNpZ25lZCBsb25nIHBvaW50ZXIu
-Cj4gCj4gRG9pbmcgc28gaGlnaGxpZ2h0cyB0aGF0IHRoZSAiaW52YWxpZCBncHIiIHBhdGhzIGlu
-IGh2bV9tb3Zfe3RvLGZyb219X2NyKCkKPiB3ZXJlIGFjdHVhbGx5IHVucmVhY2hhYmxlLiAgQWxs
-IGNhbGxlcnMgYWxyZWFkeSBwYXNzZWQgaW4tcmFuZ2UgZ3Bycywgd2hpY2gKPiB3b3VsZCBoYXZl
-IGhpdCBhIEJVRygpIHByZXZpb3VzbHkuCj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3Bl
-ciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KClJldmlld2VkLWJ5OiBLZXZpbiBUaWFuIDxr
-ZXZpbi50aWFuQGludGVsLmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+--===============0521191171783546934==
+Content-Type: text/plain
+
+flight 118432 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118432/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 118363
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  b03e568ea9eb609f85a0a496c83a5f27ce18498e
+baseline version:
+ xen                  4c7e478d597b0346eef3a256cfd6794ac778b608
+
+Last test of basis   118363  2018-01-26 17:01:14 Z    2 days
+Testing same since   118366  2018-01-26 20:01:43 Z    2 days   27 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Christian Lindig <christian.lindig@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit b03e568ea9eb609f85a0a496c83a5f27ce18498e
+Author: Stefano Stabellini <sstabellini@kernel.org>
+Date:   Fri Jan 26 09:19:31 2018 -0800
+
+    x86/boot: turn the selftests ASSERT into a warning
+    
+    On selftests failure, print a very visible warning instead of crashing
+    over an ASSERT.
+    
+    Signed-off-by: Stefano Stabellini <sstabellini@kernel.org>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    
+    Adjust to print extra information in the case of a failure
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 510414bd5a65a239912c12482102073ca8cf7424
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Jan 26 15:59:51 2018 +0000
+
+    x86/boot: Make the "Building Dom0" messages consistent
+    
+    Switch the PV message to match the wording of the PVH side, use the same
+    number of ***'s, explicitly identify PV vs PVH, set the log level at INFO, and
+    print the real domid (which won't be 0 in pv-shim mode).
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit 94450e36bfbb1cac447fb4009476e6d54bf68678
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Mon Jan 15 10:00:51 2018 +0000
+
+    xen: Drop DOMCTL_getmemlist and xc_get_pfn_list()
+    
+    c/s 4ddf474e2 "tools/xen-mceinj: Pass in GPA when injecting through
+    MSR_MCI_ADDR" removed the remaining user of hypercall.
+    
+    It has been listed as broken, deprecated and wont-fix since XSA-74, so take
+    this opportunity to remove it completely.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit d933f1a53c06002351c1e36d40615e40bd4bf6af
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Jan 19 18:04:27 2018 +0000
+
+    tools/ocaml: Drop coredump infrastructure
+    
+    It is unused, and uses an obsolete hypercall which has never ever functioned
+    for HVM guests.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+
+commit 1124a9a26f05439a3aa31eaea227285e50dc94c0
+Author: Roger Pau Monne <roger.pau@citrix.com>
+Date:   Fri Jan 26 15:29:10 2018 +0000
+
+    xen/pvshim: fix GNTTABOP_query_size hypercall forwarding with SMAP
+    
+    Disable SMAP in the shim before bouncing the hypercall, or else L0
+    will fail to get the hypercall buffer.
+    
+    Reported-by: Fatih Acar <fatih.acar@gandi.net>
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+(qemu changes not included)
+
+
+--===============0521191171783546934==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0521191171783546934==--
