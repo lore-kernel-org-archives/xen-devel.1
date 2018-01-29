@@ -1,11 +1,14 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 118442: tolerable all pass -
-	PUSHED
-Date: Mon, 29 Jan 2018 18:58:29 +0000
-Message-ID: <osstest-118442-mainreport@xen.org>
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Subject: [PATCH 3.18 20/52] x86/asm/32: Make sync_core() handle
+	missing CPUID on all 32-bit kernels
+Date: Mon, 29 Jan 2018 13:56:38 +0100
+Message-ID: <20180129123629.080490214@linuxfoundation.org>
+References: <20180129123628.168904217@linuxfoundation.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4660381280050650720=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <20180129123628.168904217@linuxfoundation.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,86 +17,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>, One Thousand Gnomes <gnomes@lxorguk.ukuu.org.uk>, Henrique de Moraes Holschuh <hmh@hmh.eng.br>, Peter Zijlstra <peterz@infradead.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org, Matthew Whitehead <tedheadster@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>, Brian Gerst <brgerst@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel <Xen-devel@lists.xen.org>, Thomas Gleixner <tglx@linutronix.de>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4660381280050650720==
-Content-Type: text/plain
-
-flight 118442 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118442/
-
-Failures :-/ but no regressions.
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  43cc31b4778ed8313c4324547da1f46037132c52
-baseline version:
- xen                  4c7e478d597b0346eef3a256cfd6794ac778b608
-
-Last test of basis   118363  2018-01-26 17:01:14 Z    3 days
-Failing since        118366  2018-01-26 20:01:43 Z    2 days   32 attempts
-Testing same since   118442  2018-01-29 17:01:09 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Christian Lindig <christian.lindig@citrix.com>
-  Daniel De Graaf <dgdegra@tycho.nsa.gov>
-  Ian Jackson <ian.jackson@eu.citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   4c7e478d59..43cc31b477  43cc31b4778ed8313c4324547da1f46037132c52 -> smoke
-
-
---===============4660381280050650720==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4660381280050650720==--
+My4xOC1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
+cGxlYXNlIGxldCBtZSBrbm93LgoKLS0tLS0tLS0tLS0tLS0tLS0tCgpGcm9tOiBBbmR5IEx1dG9t
+aXJza2kgPGx1dG9Aa2VybmVsLm9yZz4KCmNvbW1pdCAxYzUyZDg1OWNiMmQ0MTdlNzIxNmQzZTU2
+YmI3ZmVhODg0NDRjZWM5IHVwc3RyZWFtLgoKV2Ugc3VwcG9ydCB2YXJpb3VzIG5vbi1JbnRlbCBD
+UFVzIHRoYXQgZG9uJ3QgaGF2ZSB0aGUgQ1BVSUQKaW5zdHJ1Y3Rpb24sIHNvIHRoZSBNNDg2IHRl
+c3Qgd2FzIHdyb25nLiAgRm9yIG5vdywgZml4IGl0IHdpdGggYSBiaWcKaGFtbWVyOiBoYW5kbGUg
+bWlzc2luZyBDUFVJRCBvbiBhbGwgMzItYml0IENQVXMuCgpSZXBvcnRlZC1ieTogT25lIFRob3Vz
+YW5kIEdub21lcyA8Z25vbWVzQGx4b3JndWsudWt1dS5vcmcudWs+ClNpZ25lZC1vZmYtYnk6IEFu
+ZHkgTHV0b21pcnNraSA8bHV0b0BrZXJuZWwub3JnPgpDYzogSnVlcmdlbiBHcm9zcyA8amdyb3Nz
+QHN1c2UuY29tPgpDYzogUGV0ZXIgWmlqbHN0cmEgPHBldGVyekBpbmZyYWRlYWQub3JnPgpDYzog
+QnJpYW4gR2Vyc3QgPGJyZ2Vyc3RAZ21haWwuY29tPgpDYzogTWF0dGhldyBXaGl0ZWhlYWQgPHRl
+ZGhlYWRzdGVyQGdtYWlsLmNvbT4KQ2M6IEJvcmlzbGF2IFBldGtvdiA8YnBAYWxpZW44LmRlPgpD
+YzogSGVucmlxdWUgZGUgTW9yYWVzIEhvbHNjaHVoIDxobWhAaG1oLmVuZy5icj4KQ2M6IEFuZHJl
+dyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkNjOiBCb3JpcyBPc3Ryb3Zza3kg
+PGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgpDYzogeGVuLWRldmVsIDxYZW4tZGV2ZWxAbGlz
+dHMueGVuLm9yZz4KTGluazogaHR0cDovL2xrbWwua2VybmVsLm9yZy9yLzY4NWJkMDgzYTdjMDM2
+Zjc3Njk1MTBiNjg0NjMxNWIxN2Q2YmE3MWYuMTQ4MTMwNzc2OS5naXQubHV0b0BrZXJuZWwub3Jn
+ClNpZ25lZC1vZmYtYnk6IFRob21hcyBHbGVpeG5lciA8dGdseEBsaW51dHJvbml4LmRlPgpTaWdu
+ZWQtb2ZmLWJ5OiBHcmVnIEtyb2FoLUhhcnRtYW4gPGdyZWdraEBsaW51eGZvdW5kYXRpb24ub3Jn
+PgoKLS0tCiBhcmNoL3g4Ni9pbmNsdWRlL2FzbS9wcm9jZXNzb3IuaCB8ICAgIDIgKy0KIDEgZmls
+ZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKLS0tIGEvYXJjaC94ODYv
+aW5jbHVkZS9hc20vcHJvY2Vzc29yLmgKKysrIGIvYXJjaC94ODYvaW5jbHVkZS9hc20vcHJvY2Vz
+c29yLmgKQEAgLTY2OSw3ICs2NjksNyBAQCBzdGF0aWMgaW5saW5lIHZvaWQgc3luY19jb3JlKHZv
+aWQpCiB7CiAJaW50IHRtcDsKIAotI2lmZGVmIENPTkZJR19NNDg2CisjaWZkZWYgQ09ORklHX1g4
+Nl8zMgogCS8qCiAJICogRG8gYSBDUFVJRCBpZiBhdmFpbGFibGUsIG90aGVyd2lzZSBkbyBhIGp1
+bXAuICBUaGUganVtcAogCSAqIGNhbiBjb252ZW5pZW50bHkgZW5vdWdoIGJlIHRoZSBqdW1wIGFy
+b3VuZCBDUFVJRC4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
