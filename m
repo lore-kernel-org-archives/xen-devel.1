@@ -1,19 +1,15 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: Supported hardware
-Date: Mon, 29 Jan 2018 12:16:41 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1801291154340.11958@sstabellini-ThinkPad-X260>
-References: <1517137831941.78119@student.kuleuven.be>
- <a8060d2d-af2b-1014-c933-e5ede90613eb@arm.com>
+Subject: Re: [PATCH 1/5] arm/alternatives: Fix
+	apply_alternatives() API
+Date: Mon, 29 Jan 2018 12:23:12 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1801291221010.11958@sstabellini-ThinkPad-X260>
+References: <1517240291-32409-1-git-send-email-andrew.cooper3@citrix.com>
+ <1517240291-32409-2-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-569801765-1517255721=:11958"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=hmm/=ey=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1egFrB-0007hr-Gf
- for xen-devel@lists.xenproject.org; Mon, 29 Jan 2018 20:16:45 +0000
-In-Reply-To: <a8060d2d-af2b-1014-c933-e5ede90613eb@arm.com>
-Content-ID: <alpine.DEB.2.10.1801291202360.11958@sstabellini-ThinkPad-X260>
+In-Reply-To: <1517240291-32409-2-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,88 +18,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Stefano Stabellini <sstabellini@kernel.org>, Pieter Dewachter <pieter.dewachter@student.kuleuven.be>, Andre Przywara <andre.przywara@arm.com>, Stewart.Hildebrand@dornerworks.com, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Xen-devel <xen-devel@lists.xen.org>, Ross Lagerwall <ross.lagerwall@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-569801765-1517255721=:11958
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1801291202361.11958@sstabellini-ThinkPad-X260>
-
-On Mon, 29 Jan 2018, Julien Grall wrote:
-> Hello,
-> 
-> On 28/01/18 11:10, Pieter Dewachter wrote:
-> > Dear developers,
-> 
-> Hi Pieter,
-> 
-> Thank you for your interest on Xen.
-> 
-> > 
-> > 
-> > ​I'm doing my master thesis this year and I will be using the Xen hypervisor
-> > for it. The domain for my thesis is more about the automotive sector, but
-> > unfortunately the hardware is too expensive to actually use  > the
-> > automotive drivers for Xen.
-> > 
-> > 
-> > The goal is to set up a failover cluster by using two different processors,
-> > but the first goal is to actually run Xen on them. Due to the limited
-> > budget, we were looking at this development board specifically:
-> > 
-> > https://www.mouser.be/productdetail/nxp-freescale/frdm-ls1012a-pa?qs=sGAEpiMZZMtw0nEwywcFgPq18vRUkOhrFGI4%252bz5xG70HM4YISmdecw==
-> > <https://www.mouser.be/productdetail/nxp-freescale/frdm-ls1012a-pa?qs=sGAEpiMZZMtw0nEwywcFgPq18vRUkOhrFGI4%252bz5xG70HM4YISmdecw>
-> > 
-> > 
-> > This is a board based on a single Cortex A53 implemented by NXP, more
-> > details can be found here:
-> > 
-> > https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/qoriq-layerscape-arm-processors/qoriq-layerscape-1012a-low-power-communication-processor:LS1012A
-> > 
-> > 
-> > 
-> > Now I have heard the biggest problem is generally the GIC interrupt
-> > controller, so I was wondering if it is possible to run Xen on these boards?
-> 
-> I would not consider the GIC as the main problem. Xen supports GICv2 and GICv3
-> and nothing should be necessary if the platform has one (this is assuming no
-> workaround is required). However, if the platform has a second interrupt
-> controller (such as on Tegra) you may need to add some logic in Xen to get the
-> interrupt routed to a Dom0/DomU.
-> 
-> > Once I have confirmation I can make the purchase to continue my thesis. It
-> > would be a shame to buy unsupported hardware to start with.
-> 
-> I am not aware of anyone booting Xen on that platform. From the spec, it looks
-> pretty standard. It looks like the UART driver in Xen may need some update to
-> be usable. Other than that, I believe it would not be too much trouble.
-> 
-> However, I don't see an IOMMU. This might make more difficult to assign a
-> device to a domain if that what you are aiming.
-> 
-> I have CCed few more person to get more feedback.
-
-CC'ing some more people that might have experience with it.
-
-Julien's right, the board looks good and the GIC shouldn't be an issue.
-If you are interested in an IOMMU you might want to have a look at the
-LS1043A:
-
-https://www.nxp.com/products/processors-and-microcontrollers/arm-based-processors-and-mcus/qoriq-layerscape-arm-processors/qoriq-layerscape-1043a-and-1023a-multicore-communications-processors:LS1043A
-
---8323329-569801765-1517255721=:11958
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-569801765-1517255721=:11958--
+T24gTW9uLCAyOSBKYW4gMjAxOCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBUaGUgIUhBU19BTFRF
+Uk5BVElWRSBjYXNlIGhhcyBiaXQtcm90dGVuIGFuZCB3b24ndCBldmVuIGNvbXBpbGUuCj4gCj4g
+VGhlIHg4NiBzaWRlIG9mIGFwcGx5X2FsdGVybmF0aXZlcygpIGlzIHZvaWQsIHdoaWxlIHRoZSBB
+Uk0gc2lkZSByZXR1cm5zIGludC4KPiBIb3dldmVyLCB0aGUgZnVuY3Rpb25zIGNhbid0IGZhaWwg
+YW5kIG5vIHJldHVybiB2YWx1ZXMgYXJlIGNoZWNrZWQuICBTd2l0Y2gKPiB0aGUgQVJNIHNpZGUg
+dG8gYmUgdm9pZCBhcyB3ZWxsLgo+IAo+IE9uZSBvYnNlcnZhdGlvbiBpcyB0aGF0IF9fYXBwbHlf
+YWx0ZXJuYXRpdmVzX211bHRpX3N0b3AoKSBpcyBvbmx5IHVzZWQgYXQgYm9vdAo+IHRpbWUsIHNv
+IGNhbiBiZWNvbWUgX19pbml0IGFuZCBpdHMgc3RhdGljIGRhdGEgY2FuIGJlY29tZSBfX2luaXRk
+YXRhCj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0
+cml4LmNvbT4KCkFja2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5l
+bC5vcmc+CgoKPiAtLS0KPiBDQzogSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1c2UuY29tPgo+IEND
+OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+Cj4gQ0M6IEp1bGll
+biBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4gQ0M6IEtvbnJhZCBSemVzenV0ZWsgV2ls
+ayA8a29ucmFkLndpbGtAb3JhY2xlLmNvbT4KPiBDQzogUm9zcyBMYWdlcndhbGwgPHJvc3MubGFn
+ZXJ3YWxsQGNpdHJpeC5jb20+Cj4gCj4gVE9ETzogRHJvcCB0aGUgIUhBU19BTFRFUk5BVElWRSBj
+YXNlIG9uIEFSTT8KClllYWgsIHdlIGNvdWxkIGRvLiBKdWxpZW4sIHdoYXQgZG8geW91IHRoaW5r
+PwoKCj4gLS0tCj4gIHhlbi9hcmNoL2FybS9hbHRlcm5hdGl2ZS5jICAgICAgICB8IDE4ICsrKysr
+KystLS0tLS0tLS0tLQo+ICB4ZW4vaW5jbHVkZS9hc20tYXJtL2FsdGVybmF0aXZlLmggfCAgNyAr
+KysrLS0tCj4gIDIgZmlsZXMgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygrKSwgMTQgZGVsZXRpb25z
+KC0pCj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9hbHRlcm5hdGl2ZS5jIGIveGVuL2Fy
+Y2gvYXJtL2FsdGVybmF0aXZlLmMKPiBpbmRleCA5ZmZkYzQ3Li45OTExMmUxIDEwMDY0NAo+IC0t
+LSBhL3hlbi9hcmNoL2FybS9hbHRlcm5hdGl2ZS5jCj4gKysrIGIveGVuL2FyY2gvYXJtL2FsdGVy
+bmF0aXZlLmMKPiBAQCAtOTgsNyArOTgsNyBAQCBzdGF0aWMgdTMyIGdldF9hbHRfaW5zbihjb25z
+dCBzdHJ1Y3QgYWx0X2luc3RyICphbHQsCj4gICAqIFRoZSByZWdpb24gcGF0Y2hlZCBzaG91bGQg
+YmUgcmVhZC13cml0ZSB0byBhbGxvdyBfX2FwcGx5X2FsdGVybmF0aXZlcwo+ICAgKiB0byByZXBs
+YWNpbmcgdGhlIGluc3RydWN0aW9ucyB3aGVuIG5lY2Vzc2FyeS4KPiAgICovCj4gLXN0YXRpYyBp
+bnQgX19hcHBseV9hbHRlcm5hdGl2ZXMoY29uc3Qgc3RydWN0IGFsdF9yZWdpb24gKnJlZ2lvbikK
+PiArc3RhdGljIHZvaWQgX19hcHBseV9hbHRlcm5hdGl2ZXMoY29uc3Qgc3RydWN0IGFsdF9yZWdp
+b24gKnJlZ2lvbikKPiAgewo+ICAgICAgY29uc3Qgc3RydWN0IGFsdF9pbnN0ciAqYWx0Owo+ICAg
+ICAgY29uc3QgdTMyICpyZXBscHRyOwo+IEBAIC0xMzUsMTcgKzEzNSwxNSBAQCBzdGF0aWMgaW50
+IF9fYXBwbHlfYWx0ZXJuYXRpdmVzKGNvbnN0IHN0cnVjdCBhbHRfcmVnaW9uICpyZWdpb24pCj4g
+IAo+ICAgICAgLyogTnVrZSB0aGUgaW5zdHJ1Y3Rpb24gY2FjaGUgKi8KPiAgICAgIGludmFsaWRh
+dGVfaWNhY2hlKCk7Cj4gLQo+IC0gICAgcmV0dXJuIDA7Cj4gIH0KPiAgCj4gIC8qCj4gICAqIFdl
+IG1pZ2h0IGJlIHBhdGNoaW5nIHRoZSBzdG9wX21hY2hpbmUgc3RhdGUgbWFjaGluZSwgc28gaW1w
+bGVtZW50IGEKPiAgICogcmVhbGx5IHNpbXBsZSBwb2xsaW5nIHByb3RvY29sIGhlcmUuCj4gICAq
+Lwo+IC1zdGF0aWMgaW50IF9fYXBwbHlfYWx0ZXJuYXRpdmVzX211bHRpX3N0b3Aodm9pZCAqdW51
+c2VkKQo+ICtzdGF0aWMgaW50IF9faW5pdCBfX2FwcGx5X2FsdGVybmF0aXZlc19tdWx0aV9zdG9w
+KHZvaWQgKnVudXNlZCkKPiAgewo+IC0gICAgc3RhdGljIGludCBwYXRjaGVkID0gMDsKPiArICAg
+IHN0YXRpYyBpbnQgX19pbml0ZGF0YSBwYXRjaGVkID0gMDsKPiAgCj4gICAgICAvKiBXZSBhbHdh
+eXMgaGF2ZSBhIENQVSAwIGF0IHRoaXMgcG9pbnQgKF9faW5pdCkgKi8KPiAgICAgIGlmICggc21w
+X3Byb2Nlc3Nvcl9pZCgpICkKPiBAQCAtMTU2LDcgKzE1NCw2IEBAIHN0YXRpYyBpbnQgX19hcHBs
+eV9hbHRlcm5hdGl2ZXNfbXVsdGlfc3RvcCh2b2lkICp1bnVzZWQpCj4gICAgICB9Cj4gICAgICBl
+bHNlCj4gICAgICB7Cj4gLSAgICAgICAgaW50IHJldDsKPiAgICAgICAgICBzdHJ1Y3QgYWx0X3Jl
+Z2lvbiByZWdpb247Cj4gICAgICAgICAgbWZuX3QgeGVuX21mbiA9IHZpcnRfdG9fbWZuKF9zdGFy
+dCk7Cj4gICAgICAgICAgcGFkZHJfdCB4ZW5fc2l6ZSA9IF9lbmQgLSBfc3RhcnQ7Cj4gQEAgLTE5
+Niw5ICsxOTMsNyBAQCBzdGF0aWMgaW50IF9fYXBwbHlfYWx0ZXJuYXRpdmVzX211bHRpX3N0b3Ao
+dm9pZCAqdW51c2VkKQo+ICAgICAgICAgIHJlZ2lvbi5iZWdpbiA9ICh2b2lkICopX19hbHRfaW5z
+dHJ1Y3Rpb25zIC0gKHZvaWQgKilfc3RhcnQgKyB4ZW5tYXA7Cj4gICAgICAgICAgcmVnaW9uLmVu
+ZCA9ICh2b2lkICopX19hbHRfaW5zdHJ1Y3Rpb25zX2VuZCAtICh2b2lkICopX3N0YXJ0ICsgeGVu
+bWFwOwo+ICAKPiAtICAgICAgICByZXQgPSBfX2FwcGx5X2FsdGVybmF0aXZlcygmcmVnaW9uKTsK
+PiAtICAgICAgICAvKiBUaGUgcGF0Y2hpbmcgaXMgbm90IGV4cGVjdGVkIHRvIGZhaWwgZHVyaW5n
+IGJvb3QuICovCj4gLSAgICAgICAgQlVHX09OKHJldCAhPSAwKTsKPiArICAgICAgICBfX2FwcGx5
+X2FsdGVybmF0aXZlcygmcmVnaW9uKTsKPiAgCj4gICAgICAgICAgdW5yZWdpc3Rlcl92aXJ0dWFs
+X3JlZ2lvbigmcGF0Y2hfcmVnaW9uKTsKPiAgCj4gQEAgLTIyOCwxNCArMjIzLDE1IEBAIHZvaWQg
+X19pbml0IGFwcGx5X2FsdGVybmF0aXZlc19hbGwodm9pZCkKPiAgICAgIEJVR19PTihyZXQpOwo+
+ICB9Cj4gIAo+IC1pbnQgYXBwbHlfYWx0ZXJuYXRpdmVzKGNvbnN0IHN0cnVjdCBhbHRfaW5zdHIg
+KnN0YXJ0LCBjb25zdCBzdHJ1Y3QgYWx0X2luc3RyICplbmQpCj4gK3ZvaWQgYXBwbHlfYWx0ZXJu
+YXRpdmVzKGNvbnN0IHN0cnVjdCBhbHRfaW5zdHIgKnN0YXJ0LAo+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICBjb25zdCBzdHJ1Y3QgYWx0X2luc3RyICplbmQpCj4gIHsKPiAgICAgIGNvbnN0IHN0
+cnVjdCBhbHRfcmVnaW9uIHJlZ2lvbiA9IHsKPiAgICAgICAgICAuYmVnaW4gPSBzdGFydCwKPiAg
+ICAgICAgICAuZW5kID0gZW5kLAo+ICAgICAgfTsKPiAgCj4gLSAgICByZXR1cm4gX19hcHBseV9h
+bHRlcm5hdGl2ZXMoJnJlZ2lvbik7Cj4gKyAgICBfX2FwcGx5X2FsdGVybmF0aXZlcygmcmVnaW9u
+KTsKPiAgfQo+ICAKPiAgLyoKPiBkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvYXNtLWFybS9hbHRl
+cm5hdGl2ZS5oIGIveGVuL2luY2x1ZGUvYXNtLWFybS9hbHRlcm5hdGl2ZS5oCj4gaW5kZXggNmNj
+OWQwZC4uNDlhMDU1ZSAxMDA2NDQKPiAtLS0gYS94ZW4vaW5jbHVkZS9hc20tYXJtL2FsdGVybmF0
+aXZlLmgKPiArKysgYi94ZW4vaW5jbHVkZS9hc20tYXJtL2FsdGVybmF0aXZlLmgKPiBAQCAtMjUs
+NyArMjUsOCBAQCBzdHJ1Y3QgYWx0X2luc3RyIHsKPiAgI2RlZmluZSBBTFRfUkVQTF9QVFIoYSkJ
+CV9fQUxUX1BUUihhLCBhbHRfb2Zmc2V0KQo+ICAKPiAgdm9pZCBfX2luaXQgYXBwbHlfYWx0ZXJu
+YXRpdmVzX2FsbCh2b2lkKTsKPiAtaW50IGFwcGx5X2FsdGVybmF0aXZlcyhjb25zdCBzdHJ1Y3Qg
+YWx0X2luc3RyICpzdGFydCwgY29uc3Qgc3RydWN0IGFsdF9pbnN0ciAqZW5kKTsKPiArdm9pZCBh
+cHBseV9hbHRlcm5hdGl2ZXMoY29uc3Qgc3RydWN0IGFsdF9pbnN0ciAqc3RhcnQsCj4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCBhbHRfaW5zdHIgKmVuZCk7Cj4gIAo+ICAj
+ZGVmaW5lIEFMVElOU1RSX0VOVFJZKGZlYXR1cmUpCQkJCQkJICAgICAgXAo+ICAJIiAud29yZCA2
+NjFiIC0gLlxuIgkJCQkvKiBsYWJlbCAgICAgICAgICAgKi8gXAo+IEBAIC0xNTgsOSArMTU5LDkg
+QEAgc3RhdGljIGlubGluZSB2b2lkIGFwcGx5X2FsdGVybmF0aXZlc19hbGwodm9pZCkKPiAgewo+
+ICB9Cj4gIAo+IC1zdGF0aWMgaW5saW5lIGludCBhcHBseV9hbHRlcm5hdGl2ZXModm9pZCAqc3Rh
+cnQsIHNpemVfdCBsZW5ndGgpCj4gK3N0YXRpYyBpbmxpbmUgdm9pZCBhcHBseV9hbHRlcm5hdGl2
+ZXMoY29uc3Qgc3RydWN0IGFsdF9pbnN0ciAqc3RhcnQsCj4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgY29uc3Qgc3RydWN0IGFsdF9pbnN0ciAqZW5kKQo+ICB7Cj4gLSAg
+ICByZXR1cm4gMDsKPiAgfQo+ICAKPiAgI2VuZGlmCj4gLS0gCj4gMi4xLjQKPiAKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
