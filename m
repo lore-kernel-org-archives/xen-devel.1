@@ -1,23 +1,10 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v3 5/5] x86: remove usage of .skip with
- non-absolute expressions
-Date: Mon, 29 Jan 2018 13:05:36 +0000
-Message-ID: <bcb8aa9b-9e41-01b4-b0a6-31cff3c18bb0@citrix.com>
-References: <20180129122643.13008-1-roger.pau@citrix.com>
- <20180129122643.13008-6-roger.pau@citrix.com>
- <20180129124310.whaq7z37t7kvlsxg@citrix.com>
- <5A6F296002000078001A3610@prv-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118437: regressions - FAIL
+Date: Mon, 29 Jan 2018 13:32:06 +0000
+Message-ID: <osstest-118437-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3233042830122592038=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=ldhx=ey=citrix.com=prvs=560163be1=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1eg989-0006Lb-OI
- for xen-devel@lists.xenproject.org; Mon, 29 Jan 2018 13:05:49 +0000
-In-Reply-To: <5A6F296002000078001A3610@prv-mh.provo.novell.com>
-Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,33 +13,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <George.Dunlap@eu.citrix.com>, IanJackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjkvMDEvMTggMTM6MDIsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDI5LjAxLjE4IGF0
-IDEzOjQzLCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IE9uIE1vbiwgSmFuIDI5LCAy
-MDE4IGF0IDEyOjI2OjQzUE0gKzAwMDAsIFJvZ2VyIFBhdSBNb25uZSB3cm90ZToKPj4+IENsYW5n
-IGFzc2VtYmxlciBkb2Vzbid0IHN1cHBvcnQgdXNpbmcgLnNraXAgd2l0aCBub24tYWJzb2x1dGUK
-Pj4+IGV4cHJlc3Npb25zOgo+Pj4KPj4gQnV0IHNvIGlzIEdOVSBhcy4gRnJvbSBpdHMgbWFudWFs
-IGZvciAuc2tpcDoKPj4KPj4gIlRoaXMgZGlyZWN0aXZlIGVtaXRzIHNpemUgYnl0ZXMsIGVhY2gg
-b2YgdmFsdWUgZmlsbC4gQm90aCBzaXplIGFuZCBmaWxsCj4+IGFyZSBhYnNvbHV0ZSBleHByZXNz
-aW9ucy4iCj4+Cj4+PiBlbnRyeS5TOjEwOToxNTogZXJyb3I6IGV4cGVjdGVkIGFic29sdXRlIGV4
-cHJlc3Npb24KPj4+ICAgICAgICAgLnNraXAgLkxjcjRfYWx0X2VuZCAtIC5MY3I0X2FsdCwgMHg5
-MAo+Pj4gICAgICAgICAgICAgICBeCj4+Pgo+PiBPT0kgd2hhdCBtYWtlcyAuTGNyNF9hbHRfZW5k
-IC0gLkxjcjRfYWx0IG5vbi1hYnNvbHV0ZT8KPiBJIGd1ZXNzIHRoZXkgZXhwZWN0IHRvIGJlIGFi
-bGUgdG8gY2FsY3VsYXRlIHRoZSB2YWx1ZSByaWdodCBhdCB0aGUKPiBwb2ludCB0aGV5IGV2YWx1
-YXRlIC5za2lwJ3MgYXJndW1lbnRzLiBXaGVyZWFzIGdhcyBlaXRoZXIgcmVjb3Jkcwo+IGEgZnJh
-Z21lbnQgd2l0aCB2YXJpYWJsZSBzaXplLCBvciAobGVzcyBsaWtlbHksIGFzIHRoYXQgY291bGQg
-ZW5kIHVwCj4gd3JvbmcpIGV2YWx1YXRlcyB0aGUgZXhwcmVzc2lvbiByaWdodCBhd2F5IChpaXJj
-IHRoZSAuc2tpcCBzaXRzIGFmdGVyCj4gdGhlIGRlZmluaXRpb24gb2YgYm90aCBzeW1ib2xzLCBh
-bmQgaWlyYyBmdXJ0aGVyIGdhcyBbYXQgbGVhc3Qgc29tZQo+IHZlcnNpb25zXSBoYXMgcHJvYmxl
-bXMgaWYgdGhhdCB3YXNuJ3QgdGhlIGNhc2UpLgoKT25lIHRoaW5nIEkndmUgYmVlbiBleHBlcmlt
-ZW50aW5nIHdpdGgsIGFsb25nIHdpdGggdHJ5aW5nIHRvIG9yZ2FuaXNlCnRoZSBhbHRlcm5hdGl2
-ZXMgaW50byBhIG1lcmdlYWJsZSBzZWN0aW9uLCBpcyB0byBmaXJzdCB3cml0ZSB0aGUKYWx0ZXJu
-YXRpdmVzIGludG8gLmRpc2NhcmQgc2VjdGlvbiwgd2hpY2ggYWxsb3dzIGNhbGN1bGF0aW9ucyBs
-aWtlIHRoaXMKdG8gYmUgY29tcGxldGVkIGltbWVkaWF0ZWx5LCByYXRoZXIgdGhhbiBiZWluZyBk
-ZWZlcnJlZC4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+--===============3233042830122592038==
+Content-Type: text/plain
+
+flight 118437 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118437/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 118363
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  b03e568ea9eb609f85a0a496c83a5f27ce18498e
+baseline version:
+ xen                  4c7e478d597b0346eef3a256cfd6794ac778b608
+
+Last test of basis   118363  2018-01-26 17:01:14 Z    2 days
+Testing same since   118366  2018-01-26 20:01:43 Z    2 days   30 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Christian Lindig <christian.lindig@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit b03e568ea9eb609f85a0a496c83a5f27ce18498e
+Author: Stefano Stabellini <sstabellini@kernel.org>
+Date:   Fri Jan 26 09:19:31 2018 -0800
+
+    x86/boot: turn the selftests ASSERT into a warning
+    
+    On selftests failure, print a very visible warning instead of crashing
+    over an ASSERT.
+    
+    Signed-off-by: Stefano Stabellini <sstabellini@kernel.org>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    
+    Adjust to print extra information in the case of a failure
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 510414bd5a65a239912c12482102073ca8cf7424
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Jan 26 15:59:51 2018 +0000
+
+    x86/boot: Make the "Building Dom0" messages consistent
+    
+    Switch the PV message to match the wording of the PVH side, use the same
+    number of ***'s, explicitly identify PV vs PVH, set the log level at INFO, and
+    print the real domid (which won't be 0 in pv-shim mode).
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit 94450e36bfbb1cac447fb4009476e6d54bf68678
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Mon Jan 15 10:00:51 2018 +0000
+
+    xen: Drop DOMCTL_getmemlist and xc_get_pfn_list()
+    
+    c/s 4ddf474e2 "tools/xen-mceinj: Pass in GPA when injecting through
+    MSR_MCI_ADDR" removed the remaining user of hypercall.
+    
+    It has been listed as broken, deprecated and wont-fix since XSA-74, so take
+    this opportunity to remove it completely.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit d933f1a53c06002351c1e36d40615e40bd4bf6af
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Jan 19 18:04:27 2018 +0000
+
+    tools/ocaml: Drop coredump infrastructure
+    
+    It is unused, and uses an obsolete hypercall which has never ever functioned
+    for HVM guests.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Christian Lindig <christian.lindig@citrix.com>
+
+commit 1124a9a26f05439a3aa31eaea227285e50dc94c0
+Author: Roger Pau Monne <roger.pau@citrix.com>
+Date:   Fri Jan 26 15:29:10 2018 +0000
+
+    xen/pvshim: fix GNTTABOP_query_size hypercall forwarding with SMAP
+    
+    Disable SMAP in the shim before bouncing the hypercall, or else L0
+    will fail to get the hypercall buffer.
+    
+    Reported-by: Fatih Acar <fatih.acar@gandi.net>
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+(qemu changes not included)
+
+
+--===============3233042830122592038==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3233042830122592038==--
