@@ -1,25 +1,10 @@
-From: Pieter Dewachter <pieter.dewachter@student.kuleuven.be>
-Subject: Supported hardware
-Date: Sun, 28 Jan 2018 11:10:33 +0000
-Message-ID: <1517137831941.78119@student.kuleuven.be>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [qemu-mainline test] 118411: tolerable FAIL - PUSHED
+Date: Mon, 29 Jan 2018 06:49:17 +0000
+Message-ID: <osstest-118411-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0578406473019482759=="
+Content-Type: multipart/mixed; boundary="===============2177040118272285256=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=uege=ex=student.kuleuven.be=pieter.dewachter@srs-us1.protection.inumbo.net>)
- id 1efkrB-0002Pf-9B
- for xen-devel@lists.xenproject.org; Sun, 28 Jan 2018 11:10:41 +0000
-Received: from icts-p-smtps-1.cc.kuleuven.be
- (icts-p-smtps-1e.kulnet.kuleuven.be [134.58.240.33])
- by rhcavuit01.kulnet.kuleuven.be (Postfix) with ESMTP id 9E643120322
- for <xen-devel@lists.xenproject.org>; Sun, 28 Jan 2018 12:10:33 +0100 (CET)
-Received: from ICTS-S-EXMBX6.luna.kuleuven.be (icts-s-exmbx6.luna.kuleuven.be
- [10.112.11.14]) (using TLSv1.2 with cipher AES256-SHA (256/256 bits))
- (No client certificate requested)
- by icts-p-smtps-1.cc.kuleuven.be (Postfix) with ESMTPS id 9C2C2403B
- for <xen-devel@lists.xenproject.org>; Sun, 28 Jan 2018 12:10:33 +0100 (CET)
-Content-Language: nl-NL
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,121 +13,220 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0578406473019482759==
-Content-Language: nl-NL
-Content-Type: multipart/alternative;
-	boundary="_000_151713783194178119studentkuleuvenbe_"
+--===============2177040118272285256==
+Content-Type: text/plain
 
---_000_151713783194178119studentkuleuvenbe_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+flight 118411 qemu-mainline real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118411/
 
-Dear developers,
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 118287
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 118287
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 118287
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 118287
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 118287
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 118287
+ test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
+ test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop              fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+
+version targeted for testing:
+ qemuu                e607bbee553cfe73072870cef458cfa4e78133e2
+baseline version:
+ qemuu                52483b067cce4a88ffbf8fbeea26de7549d2ad23
+
+Last test of basis   118287  2018-01-23 16:14:02 Z    5 days
+Failing since        118308  2018-01-24 15:44:37 Z    4 days    4 attempts
+Testing same since   118384  2018-01-27 06:47:21 Z    1 days    2 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Alistair Francis <alistair.francis@xilinx.com>
+  Andreas Schwab <schwab@suse.de>
+  Andrey Smirnov <andrew.smirnov@gmail.com>
+  Ard Biesheuvel <ard.biesheuvel@linaro.org>
+  Artyom Tarasenko <atar4qemu@gmail.com>
+  Cao jin <caoj.fnst@cn.fujitsu.com>
+  Christian Borntraeger <borntraeger@de.ibm.com>
+  Claudio Imbrenda <imbrenda@linux.vnet.ibm.com>
+  Cornelia Huck <cohuck@redhat.com>
+  Daniel Henrique Barboza <danielhb@linux.vnet.ibm.com>
+  Daniel P. Berrange <berrange@redhat.com>
+  David Hildenbrand <david@redhat.com>
+  Denis V. Lunev <den@openvz.org>
+  Edgar E. Iglesias <edgar.iglesias@xilinx.com>
+  Edgar Kaziakhmedov <edgar.kaziakhmedov@virtuozzo.com>
+  Eric Blake <eblake@redhat.com>
+  Fam Zheng <famz@redhat.com>
+  Francisco Iglesias <frasse.iglesias@gmail.com>
+  Fyleo  <fyleo45@gmail.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Hikaru Nishida <hikarupsp@gmail.com>
+  Jean-Christophe Dubois <jcd@tribudubois.net>
+  Kevin Wolf <kwolf@redhat.com>
+  Klim Kireev <klim.kireev@virtuozzo.com>
+  Laurent Vivier <laurent@vivier.eu>
+  Linus Walleij <linus.walleij@linaro.org>
+  linzhecheng <linzhecheng@huawei.com>
+  Luc MICHEL <luc.michel@git.antfield.fr>
+  Mao Zhongyi <maozy.fnst@cn.fujitsu.com>
+  Marco A L Barbosa <malbarbo@gmail.com>
+  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+  Max Filippov <jcmvbkbc@gmail.com>
+  Max Reitz <mreitz@redhat.com>
+  Maximilian Riemensberger <riemensberger@cadami.net>
+  Michael S. Tsirkin <mst@redhat.com>
+  Paolo Bonzini <pbonzini@redhat.com>
+  Peter Maydell <peter.maydell@linaro.org>
+  Philippe Mathieu-Daudé <f4bug@amsat.org>
+  Richard Henderson <richard.henderson@linaro.org>
+  Samuel Thibault <samuel.thibault@ens-lyon.org>
+  Stefan Hajnoczi <stefanha@redhat.com>
+  Thomas Huth <thuth@redhat.com>
+  Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
 
-?I'm doing my master thesis this year and I will be using the Xen hyperviso=
-r for it. The domain for my thesis is more about the automotive sector, but=
- unfortunately the hardware is too expensive to actually use the automotive=
- drivers for Xen.
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
-The goal is to set up a failover cluster by using two different processors,=
- but the first goal is to actually run Xen on them. Due to the limited budg=
-et, we were looking at this development board specifically:
+Pushing revision :
 
-https://www.mouser.be/productdetail/nxp-freescale/frdm-ls1012a-pa?qs=3DsGAE=
-piMZZMtw0nEwywcFgPq18vRUkOhrFGI4%252bz5xG70HM4YISmdecw=3D=3D<https://www.mo=
-user.be/productdetail/nxp-freescale/frdm-ls1012a-pa?qs=3DsGAEpiMZZMtw0nEwyw=
-cFgPq18vRUkOhrFGI4%252bz5xG70HM4YISmdecw>
+To xenbits.xen.org:/home/xen/git/qemu-xen.git
+   52483b067c..e607bbee55  e607bbee553cfe73072870cef458cfa4e78133e2 -> upstream-tested
 
 
-This is a board based on a single Cortex A53 implemented by NXP, more detai=
-ls can be found here:
-
-https://www.nxp.com/products/processors-and-microcontrollers/arm-based-proc=
-essors-and-mcus/qoriq-layerscape-arm-processors/qoriq-layerscape-1012a-low-=
-power-communication-processor:LS1012A?
-
-
-Now I have heard the biggest problem is generally the GIC interrupt control=
-ler, so I was wondering if it is possible to run Xen on these boards? Once =
-I have confirmation I can make the purchase to continue my thesis. It would=
- be a shame to buy unsupported hardware to start with.
-
-
-Many thanks in advance!
-
-
-Pieter Dewachter
-
---_000_151713783194178119studentkuleuvenbe_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none"><!-- p { margin-top: 0px; m=
-argin-bottom: 0px; }--></style>
-</head>
-<body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
-FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
-<p>Dear developers,</p>
-<p><br>
-</p>
-<p>&#8203;I'm doing my master thesis this year and I will be using the Xen =
-hypervisor for it.&nbsp;<span style=3D"font-size: 12pt;">The domain for my =
-thesis is more about the automotive sector, but unfortunately the hardware =
-is too expensive to actually use the automotive
- drivers for Xen.</span></p>
-<p><span style=3D"font-size: 12pt;"><br>
-</span></p>
-<p><span style=3D"font-size: 12pt;">The goal is to set up a failover cluste=
-r&nbsp;by using two different processors, but the first goal is to actually=
- run Xen on them. Due to the limited budget, we were looking at this develo=
-pment board specifically:</span></p>
-<p><span style=3D"font-size: 12pt;"><a href=3D"https://www.mouser.be/produc=
-tdetail/nxp-freescale/frdm-ls1012a-pa?qs=3DsGAEpiMZZMtw0nEwywcFgPq18vRUkOhr=
-FGI4%252bz5xG70HM4YISmdecw">https://www.mouser.be/productdetail/nxp-freesca=
-le/frdm-ls1012a-pa?qs=3DsGAEpiMZZMtw0nEwywcFgPq18vRUkOhrFGI4%252bz5xG70HM4Y=
-ISmdecw=3D=3D</a><br>
-</span></p>
-<p><span style=3D"font-size: 12pt;"><br>
-</span></p>
-<p><span style=3D"font-size: 12pt;">This is a board based on a single&nbsp;=
-Cortex&nbsp;A53 implemented by NXP, more details can be found here:</span><=
-/p>
-<p><span style=3D"font-size: 12pt;"><a href=3D"https://www.nxp.com/products=
-/processors-and-microcontrollers/arm-based-processors-and-mcus/qoriq-layers=
-cape-arm-processors/qoriq-layerscape-1012a-low-power-communication-processo=
-r:LS1012A">https://www.nxp.com/products/processors-and-microcontrollers/arm=
--based-processors-and-mcus/qoriq-layerscape-arm-processors/qoriq-layerscape=
--1012a-low-power-communication-processor:LS1012A</a>&#8203;<br>
-</span></p>
-<p><span style=3D"font-size: 12pt;"><br>
-</span></p>
-<p><span style=3D"font-size: 12pt;">Now I have heard the biggest problem is=
- generally the GIC interrupt controller, so I was wondering if it is possib=
-le to run Xen on these boards? Once I have confirmation I can make the purc=
-hase to continue my thesis. It would
- be a shame to buy unsupported hardware to start with.</span></p>
-<p><span style=3D"font-size: 12pt;"><br>
-</span></p>
-<p><span style=3D"font-size: 12pt;">Many thanks in advance!</span></p>
-<p><span style=3D"font-size: 12pt;"><br>
-</span></p>
-<p><span style=3D"font-size: 12pt;">Pieter Dewachter</span></p>
-</body>
-</html>
-
---_000_151713783194178119studentkuleuvenbe_--
-
-
---===============0578406473019482759==
+--===============2177040118272285256==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -152,4 +236,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============0578406473019482759==--
+--===============2177040118272285256==--
