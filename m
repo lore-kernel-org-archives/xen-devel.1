@@ -1,18 +1,20 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
 Subject: Re: [PATCH 0/3] xen/arm: Inject an exception to the
  guest rather than crashing it
-Date: Tue, 30 Jan 2018 11:21:01 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1801301110180.11958@sstabellini-ThinkPad-X260>
+Date: Tue, 30 Jan 2018 19:23:56 +0000
+Message-ID: <623e02e3-bfeb-7c42-bf09-af683ce99cc6@citrix.com>
 References: <20180130161433.6910-1-julien.grall@arm.com>
  <d948cb7b-6c0b-ef3f-b95a-5e0c9c8f7065@citrix.com>
  <864d6a7f-00c7-5ef5-51f0-e7f74b35ca70@arm.com>
  <b6abd6f2-92cf-8bb4-2d96-681a198fb375@citrix.com>
  <381dfde4-bf8e-0008-3c41-a7f8b143b721@arm.com>
+ <alpine.DEB.2.10.1801301110180.11958@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-253457304-1517339557=:11958"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <381dfde4-bf8e-0008-3c41-a7f8b143b721@arm.com>
-Content-ID: <alpine.DEB.2.10.1801301113181.11958@sstabellini-ThinkPad-X260>
+In-Reply-To: <alpine.DEB.2.10.1801301110180.11958@sstabellini-ThinkPad-X260>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,108 +23,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, sstabellini@kernel.org, andre.przywara@linaro.org, xen-devel@lists.xen.org
+To: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien.grall@arm.com>
+Cc: andre.przywara@linaro.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-253457304-1517339557=:11958
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1801301113182.11958@sstabellini-ThinkPad-X260>
-
-On Tue, 30 Jan 2018, Julien Grall wrote:
-> Hi,
-> 
-> On 30/01/18 18:29, Andrew Cooper wrote:
-> > On 30/01/18 17:00, Julien Grall wrote:
-> > > 
-> > > 
-> > > On 30/01/18 16:38, Andrew Cooper wrote:
-> > > > On 30/01/18 16:14, Julien Grall wrote:
-> > > > > Hi all,
-> > > > > 
-> > > > > This small series replaces all call to domain_crash_synchronous by
-> > > > > injecting
-> > > > > an exception to the guest.
-> > > > > 
-> > > > > This will result to a nicer trace from the guest (no need to
-> > > > > manually walk
-> > > > > the stack) and give a chance to the guest to give a bit more
-> > > > > information on
-> > > > > what it was doing.
-> > > > > 
-> > > > > Cheers,
-> > > > > 
-> > > > > Julien Grall (3):
-> > > > >     xen/arm: io: Distinguish unhandled IO from aborted one
-> > > > >     xen/arm: Don't crash domain on bad MMIO emulation
-> > > > >     xen/arm: Don't crash the domain on invalid HVC immediate
-> > > > 
-> > > > Thanks.
-> > > > 
-> > > > I don't feel qualified to review these, but some notes.
-> > > > 
-> > > > Patch 1.  s/avodi/avoid/ in the commit message
-> > > > 
-> > > > Patches 2 and 3.  You probably want to convert the printks to
-> > > > gdprintk()s, otherwise guests can choke up the ratelimited log.  Doing
-> > > > so will also mean that the vcpu will be identified consistently, which
-> > > > it isn't currently.
-> > > We didn't use g*printk because it would be more confusing to print the
-> > > current vCPU in some cases (e.g when accessing the re-distributor of
-> > > another vCPU) or does not matter (e.g for ITS).
-> > 
-> > In the former case, you'd want to print both current, and the target
-> > vcpu.  The latter still matters what current is if something goes wrong.
-> > 
-> > We have plenty of similar cases in x86, but at the point you are
-> > printing an diagnostic message, ignoring current is almost always the
-> > wrong think to do.
-> 
-> I will look at it on another series.
-> 
-> > 
-> > > 
-> > > The problem with the debug version is those information are actually
-> > > quite useful in non-debug build. We found quite a few issues thanks to
-> > > them.
-> > > 
-> > > I think it would make more sense for Xen to provide per-guest
-> > > ratelimited than hiding those messages in non-debug build.
-> > 
-> > Per guest is quite a lot more complicated than global, and would still
-> > require a global limit to prevent a concerted attack from multiple
-> > guests to avoid DoSing the system.
-> > 
-> > Debug vs unilateral is your prerogative as a maintainer, but as you've
-> > said yourself, the are used for debugging purposes, which proves my point.
-> 
-> So on x86, you always request the user to reproduce it with debug build
-> enable?
-> 
-> Stefano, what's your opinion here?
-
-I think it would be great to have per-guest rate limiting.
-
-On ARM, it would be impossible to ask users to repro with debug enabled,
-given that many deployments are embedded (set-top boxes, etc).
-
-I think it is OK to keep the XENLOG_DEBUG, they should be filtered out
-by loglvl. But we need to be careful about the others. We might want to
-convert the XENLOG_WARNING in traps.c to XENLOG_DEBUG: they are warning
-about guests misbehaving, but from the hypervisor point of view, it's not
-a problem, guests can shoot themselves if they want to; it's OK.
---8323329-253457304-1517339557=:11958
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-253457304-1517339557=:11958--
+T24gMzAvMDEvMTggMTk6MjEsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiBPbiBUdWUsIDMw
+IEphbiAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+IEhpLAo+Pgo+PiBPbiAzMC8wMS8xOCAx
+ODoyOSwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4+IE9uIDMwLzAxLzE4IDE3OjAwLCBKdWxpZW4g
+R3JhbGwgd3JvdGU6Cj4+Pj4KPj4+PiBPbiAzMC8wMS8xOCAxNjozOCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPj4+Pj4gT24gMzAvMDEvMTggMTY6MTQsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4+Pj4+
+IEhpIGFsbCwKPj4+Pj4+Cj4+Pj4+PiBUaGlzIHNtYWxsIHNlcmllcyByZXBsYWNlcyBhbGwgY2Fs
+bCB0byBkb21haW5fY3Jhc2hfc3luY2hyb25vdXMgYnkKPj4+Pj4+IGluamVjdGluZwo+Pj4+Pj4g
+YW4gZXhjZXB0aW9uIHRvIHRoZSBndWVzdC4KPj4+Pj4+Cj4+Pj4+PiBUaGlzIHdpbGwgcmVzdWx0
+IHRvIGEgbmljZXIgdHJhY2UgZnJvbSB0aGUgZ3Vlc3QgKG5vIG5lZWQgdG8KPj4+Pj4+IG1hbnVh
+bGx5IHdhbGsKPj4+Pj4+IHRoZSBzdGFjaykgYW5kIGdpdmUgYSBjaGFuY2UgdG8gdGhlIGd1ZXN0
+IHRvIGdpdmUgYSBiaXQgbW9yZQo+Pj4+Pj4gaW5mb3JtYXRpb24gb24KPj4+Pj4+IHdoYXQgaXQg
+d2FzIGRvaW5nLgo+Pj4+Pj4KPj4+Pj4+IENoZWVycywKPj4+Pj4+Cj4+Pj4+PiBKdWxpZW4gR3Jh
+bGwgKDMpOgo+Pj4+Pj4gIMKgwqAgeGVuL2FybTogaW86IERpc3Rpbmd1aXNoIHVuaGFuZGxlZCBJ
+TyBmcm9tIGFib3J0ZWQgb25lCj4+Pj4+PiAgwqDCoCB4ZW4vYXJtOiBEb24ndCBjcmFzaCBkb21h
+aW4gb24gYmFkIE1NSU8gZW11bGF0aW9uCj4+Pj4+PiAgwqDCoCB4ZW4vYXJtOiBEb24ndCBjcmFz
+aCB0aGUgZG9tYWluIG9uIGludmFsaWQgSFZDIGltbWVkaWF0ZQo+Pj4+PiBUaGFua3MuCj4+Pj4+
+Cj4+Pj4+IEkgZG9uJ3QgZmVlbCBxdWFsaWZpZWQgdG8gcmV2aWV3IHRoZXNlLCBidXQgc29tZSBu
+b3Rlcy4KPj4+Pj4KPj4+Pj4gUGF0Y2ggMS7CoCBzL2F2b2RpL2F2b2lkLyBpbiB0aGUgY29tbWl0
+IG1lc3NhZ2UKPj4+Pj4KPj4+Pj4gUGF0Y2hlcyAyIGFuZCAzLsKgIFlvdSBwcm9iYWJseSB3YW50
+IHRvIGNvbnZlcnQgdGhlIHByaW50a3MgdG8KPj4+Pj4gZ2RwcmludGsoKXMsIG90aGVyd2lzZSBn
+dWVzdHMgY2FuIGNob2tlIHVwIHRoZSByYXRlbGltaXRlZCBsb2cuwqAgRG9pbmcKPj4+Pj4gc28g
+d2lsbCBhbHNvIG1lYW4gdGhhdCB0aGUgdmNwdSB3aWxsIGJlIGlkZW50aWZpZWQgY29uc2lzdGVu
+dGx5LCB3aGljaAo+Pj4+PiBpdCBpc24ndCBjdXJyZW50bHkuCj4+Pj4gV2UgZGlkbid0IHVzZSBn
+KnByaW50ayBiZWNhdXNlIGl0IHdvdWxkIGJlIG1vcmUgY29uZnVzaW5nIHRvIHByaW50IHRoZQo+
+Pj4+IGN1cnJlbnQgdkNQVSBpbiBzb21lIGNhc2VzIChlLmcgd2hlbiBhY2Nlc3NpbmcgdGhlIHJl
+LWRpc3RyaWJ1dG9yIG9mCj4+Pj4gYW5vdGhlciB2Q1BVKSBvciBkb2VzIG5vdCBtYXR0ZXIgKGUu
+ZyBmb3IgSVRTKS4KPj4+IEluIHRoZSBmb3JtZXIgY2FzZSwgeW91J2Qgd2FudCB0byBwcmludCBi
+b3RoIGN1cnJlbnQsIGFuZCB0aGUgdGFyZ2V0Cj4+PiB2Y3B1LsKgIFRoZSBsYXR0ZXIgc3RpbGwg
+bWF0dGVycyB3aGF0IGN1cnJlbnQgaXMgaWYgc29tZXRoaW5nIGdvZXMgd3JvbmcuCj4+Pgo+Pj4g
+V2UgaGF2ZSBwbGVudHkgb2Ygc2ltaWxhciBjYXNlcyBpbiB4ODYsIGJ1dCBhdCB0aGUgcG9pbnQg
+eW91IGFyZQo+Pj4gcHJpbnRpbmcgYW4gZGlhZ25vc3RpYyBtZXNzYWdlLCBpZ25vcmluZyBjdXJy
+ZW50IGlzIGFsbW9zdCBhbHdheXMgdGhlCj4+PiB3cm9uZyB0aGluayB0byBkby4KPj4gSSB3aWxs
+IGxvb2sgYXQgaXQgb24gYW5vdGhlciBzZXJpZXMuCj4+Cj4+Pj4gVGhlIHByb2JsZW0gd2l0aCB0
+aGUgZGVidWcgdmVyc2lvbiBpcyB0aG9zZSBpbmZvcm1hdGlvbiBhcmUgYWN0dWFsbHkKPj4+PiBx
+dWl0ZSB1c2VmdWwgaW4gbm9uLWRlYnVnIGJ1aWxkLiBXZSBmb3VuZCBxdWl0ZSBhIGZldyBpc3N1
+ZXMgdGhhbmtzIHRvCj4+Pj4gdGhlbS4KPj4+Pgo+Pj4+IEkgdGhpbmsgaXQgd291bGQgbWFrZSBt
+b3JlIHNlbnNlIGZvciBYZW4gdG8gcHJvdmlkZSBwZXItZ3Vlc3QKPj4+PiByYXRlbGltaXRlZCB0
+aGFuIGhpZGluZyB0aG9zZSBtZXNzYWdlcyBpbiBub24tZGVidWcgYnVpbGQuCj4+PiBQZXIgZ3Vl
+c3QgaXMgcXVpdGUgYSBsb3QgbW9yZSBjb21wbGljYXRlZCB0aGFuIGdsb2JhbCwgYW5kIHdvdWxk
+IHN0aWxsCj4+PiByZXF1aXJlIGEgZ2xvYmFsIGxpbWl0IHRvIHByZXZlbnQgYSBjb25jZXJ0ZWQg
+YXR0YWNrIGZyb20gbXVsdGlwbGUKPj4+IGd1ZXN0cyB0byBhdm9pZCBEb1NpbmcgdGhlIHN5c3Rl
+bS4KPj4+Cj4+PiBEZWJ1ZyB2cyB1bmlsYXRlcmFsIGlzIHlvdXIgcHJlcm9nYXRpdmUgYXMgYSBt
+YWludGFpbmVyLCBidXQgYXMgeW91J3ZlCj4+PiBzYWlkIHlvdXJzZWxmLCB0aGUgYXJlIHVzZWQg
+Zm9yIGRlYnVnZ2luZyBwdXJwb3Nlcywgd2hpY2ggcHJvdmVzIG15IHBvaW50Lgo+PiBTbyBvbiB4
+ODYsIHlvdSBhbHdheXMgcmVxdWVzdCB0aGUgdXNlciB0byByZXByb2R1Y2UgaXQgd2l0aCBkZWJ1
+ZyBidWlsZAo+PiBlbmFibGU/Cj4+Cj4+IFN0ZWZhbm8sIHdoYXQncyB5b3VyIG9waW5pb24gaGVy
+ZT8KPiBJIHRoaW5rIGl0IHdvdWxkIGJlIGdyZWF0IHRvIGhhdmUgcGVyLWd1ZXN0IHJhdGUgbGlt
+aXRpbmcuCj4KPiBPbiBBUk0sIGl0IHdvdWxkIGJlIGltcG9zc2libGUgdG8gYXNrIHVzZXJzIHRv
+IHJlcHJvIHdpdGggZGVidWcgZW5hYmxlZCwKPiBnaXZlbiB0aGF0IG1hbnkgZGVwbG95bWVudHMg
+YXJlIGVtYmVkZGVkIChzZXQtdG9wIGJveGVzLCBldGMpLgo+Cj4gSSB0aGluayBpdCBpcyBPSyB0
+byBrZWVwIHRoZSBYRU5MT0dfREVCVUcsIHRoZXkgc2hvdWxkIGJlIGZpbHRlcmVkIG91dAo+IGJ5
+IGxvZ2x2bC4gQnV0IHdlIG5lZWQgdG8gYmUgY2FyZWZ1bCBhYm91dCB0aGUgb3RoZXJzLiBXZSBt
+aWdodCB3YW50IHRvCj4gY29udmVydCB0aGUgWEVOTE9HX1dBUk5JTkcgaW4gdHJhcHMuYyB0byBY
+RU5MT0dfREVCVUc6IHRoZXkgYXJlIHdhcm5pbmcKPiBhYm91dCBndWVzdHMgbWlzYmVoYXZpbmcs
+IGJ1dCBmcm9tIHRoZSBoeXBlcnZpc29yIHBvaW50IG9mIHZpZXcsIGl0J3Mgbm90Cj4gYSBwcm9i
+bGVtLCBndWVzdHMgY2FuIHNob290IHRoZW1zZWx2ZXMgaWYgdGhleSB3YW50IHRvOyBpdCdzIE9L
+LgoKVGhpcyBpcyBhIHZhbGlkIGFyZ3VtZW50LCBidXQgdG8gZG8gaXQgY29uc2lzdGVudGx5LCB5
+b3UnbGwgd2FudCB0bwpwcm92aWRlIGFuIGFyY2gtc3BlY2lmaWMgdmVyc2lvbiBvZiBnZHByaW50
+aygpIHNvIHRoYXQgdGhlIGNvbW1vbiBjb2RlCnByaW50aygpcyBkb24ndCBldmFwb3JhdGUgaW50
+byAvZGV2L251bGwuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
