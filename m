@@ -1,18 +1,12 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: pvscsi is not supported by xl command
-Date: Tue, 30 Jan 2018 09:51:07 +0100
-Message-ID: <20180130095107.4ce8dfcd.olaf@aepfle.de>
-References: <f784ecce-dc58-c841-5c00-8fc95f2017e2@oracle.com>
- <71831361-99bd-9ef8-218a-31db55d31f50@suse.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: [PATCH V2 1/2] tests/xen-access: disable CR4 write
+	events on application exit
+Date: Tue, 30 Jan 2018 11:16:16 +0200
+Message-ID: <1517303777-10633-1-git-send-email-rcojocaru@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2029308853792544848=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=oldl=ez=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1egRdP-00070L-HZ
- for xen-devel@lists.xenproject.org; Tue, 30 Jan 2018 08:51:20 +0000
-In-Reply-To: <71831361-99bd-9ef8-218a-31db55d31f50@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,55 +15,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dongli Zhang <dongli.zhang@oracle.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xen.org
+Cc: andrew.cooper3@citrix.com, bitweasil@cryptohaze.com, tamas@tklengyel.com, Razvan Cojocaru <rcojocaru@bitdefender.com>, jbeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============2029308853792544848==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/BpeO755AboGDzKZmOveiX=f"; protocol="application/pgp-signature"
-
---Sig_/BpeO755AboGDzKZmOveiX=f
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-On 24/01/18 06:08, Dongli Zhang wrote:
-> > Are scsi-attach/scsi-detach still on the roadmap and will be added to x=
-l in the
-> > future, or this is deprecated? =20
-
-libxl never knew about pvscsi, so in this sense it is not depreciated.
-
-The plan is still to upstream it one day. Unfortunately I developed my vari=
-ant towards a dead-end, it handles migration poorly. Once I get the chance =
-to revisit this part I will resubmit. Until then, a variant of the livxl.pv=
-scsi.patch for 4.10 can be found here:
-https://build.opensuse.org/package/show/Virtualization/xen
-
-Olaf
-
---Sig_/BpeO755AboGDzKZmOveiX=f
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWnAx+wAKCRBdQqD6ppg2
-frebAJ9gBRelWLEMrQR2Xvt0Vs12+grRYACgvucimgpyvXPdhPTRAbYLtyFqVCc=
-=dnrw
------END PGP SIGNATURE-----
-
---Sig_/BpeO755AboGDzKZmOveiX=f--
-
-
---===============2029308853792544848==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2029308853792544848==--
+T24gZXhpdCwgeGVuLWFjY2VzcyBkaWQgbm90IHVuc3Vic2NyaWJlIGZyb20gQ1I0IHdyaXRlIHZt
+X2V2ZW50cywKcG90ZW50aWFsbHkgbGVhdmluZyB0aGUgZ3Vlc3Qgc3R1Y2suCgpTaWduZWQtb2Zm
+LWJ5OiBSYXp2YW4gQ29qb2NhcnUgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+Ci0tLQogdG9v
+bHMvdGVzdHMveGVuLWFjY2Vzcy94ZW4tYWNjZXNzLmMgfCAyICsrCiAxIGZpbGUgY2hhbmdlZCwg
+MiBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvdG9vbHMvdGVzdHMveGVuLWFjY2Vzcy94ZW4t
+YWNjZXNzLmMgYi90b29scy90ZXN0cy94ZW4tYWNjZXNzL3hlbi1hY2Nlc3MuYwppbmRleCA5ZDk2
+MGUyLi5jNTcyNTUwIDEwMDY0NAotLS0gYS90b29scy90ZXN0cy94ZW4tYWNjZXNzL3hlbi1hY2Nl
+c3MuYworKysgYi90b29scy90ZXN0cy94ZW4tYWNjZXNzL3hlbi1hY2Nlc3MuYwpAQCAtNjU0LDYg
+KzY1NCw4IEBAIGludCBtYWluKGludCBhcmdjLCBjaGFyICphcmd2W10pCiAgICAgICAgICAgICAg
+ICAgcmMgPSB4Y19tb25pdG9yX2NwdWlkKHhjaCwgZG9tYWluX2lkLCAwKTsKICAgICAgICAgICAg
+IGlmICggZGVzY19hY2Nlc3MgKQogICAgICAgICAgICAgICAgIHJjID0geGNfbW9uaXRvcl9kZXNj
+cmlwdG9yX2FjY2Vzcyh4Y2gsIGRvbWFpbl9pZCwgMCk7CisgICAgICAgICAgICBpZiAoIHdyaXRl
+X2N0cmxyZWdfY3I0ICkKKyAgICAgICAgICAgICAgICByYyA9IHhjX21vbml0b3Jfd3JpdGVfY3Ry
+bHJlZyh4Y2gsIGRvbWFpbl9pZCwgVk1fRVZFTlRfWDg2X0NSNCwgMCwgMSwgMCwgMSk7CiAKICAg
+ICAgICAgICAgIGlmICggcHJpdmNhbGwgKQogICAgICAgICAgICAgICAgIHJjID0geGNfbW9uaXRv
+cl9wcml2aWxlZ2VkX2NhbGwoeGNoLCBkb21haW5faWQsIDApOwotLSAKMi43LjQKCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
