@@ -1,14 +1,18 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 4/4] x86/emul: Improvements to internal users
-	of decode_register()
-Date: Tue, 30 Jan 2018 15:56:12 +0000
-Message-ID: <1517327772-22297-4-git-send-email-andrew.cooper3@citrix.com>
-References: <1517327772-22297-1-git-send-email-andrew.cooper3@citrix.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Changes to Outreachy program : need URGENT input from
+ mentors (was Re: Preparing for GSoC and Outreachy )
+Date: Tue, 30 Jan 2018 16:00:57 +0000
+Message-ID: <BDD49C8F-CBF3-4C00-B8CF-710D431EB9AA__45571.5081225664$1517328012$gmane$org@gmail.com>
+References: <219B4CE4-9E0A-47CC-BD7B-261BE9FA6F91@gmail.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.2 \(3445.5.20\))
+Content-Type: multipart/mixed; boundary="===============7930060357592759717=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1517327772-22297-1-git-send-email-andrew.cooper3@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=akh8=ez=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1egYLH-0007FO-AV
+ for xen-devel@lists.xenproject.org; Tue, 30 Jan 2018 16:01:03 +0000
+In-Reply-To: <219B4CE4-9E0A-47CC-BD7B-261BE9FA6F91@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,186 +21,273 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: xen-devel <xen-devel@lists.xenproject.org>, minios-devel@lists.xenproject.org, xapi-devel@lists.xenproject.org, mirageos-devel@lists.xenproject.org, win-pv-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Doug Goldstein <cardoe@cardoe.com>, George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien.grall@arm.com>, paul.durrant@citrix.com, Simon Kuenzer <simon.kuenzer@neclab.eu>, mindy@somerandomidiot.com, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-TW9zdCB1c2VycyBvZiBkZWNvZGVfcmVnaXN0ZXIoKSBjYW4gYmUgcmVwbGFjZWQgd2l0aCBkZWNv
-ZGVfZ3ByKCkgcmlnaHQgYXdheS4KCkZvciB0aGUgZmV3IHNpdGVzIHdoaWNoIGRvIGNhcmUgYWJv
-dXQgcG9zc2libHkgdXNpbmcgdGhlIGxlZ2FjeSBieXRlb3AKZW5jb2RpbmcsIHJlbmFtZSBkZWNv
-ZGVfcmVnaXN0ZXIoKSB0byBkZWNvZGVfZ3ByX2J5dGVvcCgpLCBhbmQgYWRqdXN0IGl0cyAnaW50
-CmhpZ2hieXRlX3JlZ3MnIHBhcmFtZXRlciB0byB0aGUgbW9yZSBjb3JyZWN0ICdib29sIGxlZ2Fj
-eV9ieXRlb3AnLgoKU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNA
-Y2l0cml4LmNvbT4KLS0tCkNDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+Cgp2MjoK
-ICogcy9oaWdoYnl0ZS9sZWdhY3lfYnl0ZW9wLyBhY3Jvc3MgdGhlIHBhdGNoCiAqIEtlZXAgZGVj
-b2RlX2dwcl9ieXRlb3AoKSByZXR1cm5pbmcgdm9pZC4gIEl0IGRvZXNuJ3QgYWZmZWN0IGFueSB1
-c2VjYXNlcwotLS0KIHhlbi9hcmNoL3g4Ni94ODZfZW11bGF0ZS94ODZfZW11bGF0ZS5jIHwgNjkg
-KysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDMwIGlu
-c2VydGlvbnMoKyksIDM5IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni94
-ODZfZW11bGF0ZS94ODZfZW11bGF0ZS5jIGIveGVuL2FyY2gveDg2L3g4Nl9lbXVsYXRlL3g4Nl9l
-bXVsYXRlLmMKaW5kZXggMzc2NmI3YS4uMjQ0NDQxNyAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2
-L3g4Nl9lbXVsYXRlL3g4Nl9lbXVsYXRlLmMKKysrIGIveGVuL2FyY2gveDg2L3g4Nl9lbXVsYXRl
-L3g4Nl9lbXVsYXRlLmMKQEAgLTE5NTcsOSArMTk1Nyw4IEBAIGNvbnN0IHVpbnQ4X3QgY3B1X3Vz
-ZXJfcmVnc19ncHJfb2Zmc2V0c1tdID0gewogI2VuZGlmCiB9OwogCi12b2lkICoKLWRlY29kZV9y
-ZWdpc3RlcigKLSAgICB1aW50OF90IG1vZHJtX3JlZywgc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJl
-Z3MsIGludCBoaWdoYnl0ZV9yZWdzKQorc3RhdGljIHZvaWQgKmRlY29kZV9ncHJfYnl0ZW9wKAor
-ICAgIHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzLCB1bnNpZ25lZCBpbnQgbW9kcm1fcmVnLCBi
-b29sIGxlZ2FjeV9ieXRlb3ApCiB7CiAgICAgc3RhdGljIGNvbnN0IHVpbnQ4X3QgYnl0ZW9wX29m
-ZnNldHNbXSA9IHsKICAgICAgICAgb2Zmc2V0b2Yoc3RydWN0IGNwdV91c2VyX3JlZ3MsIGFsKSwK
-QEAgLTE5NzIsNyArMTk3MSw3IEBAIGRlY29kZV9yZWdpc3RlcigKICAgICAgICAgb2Zmc2V0b2Yo
-c3RydWN0IGNwdV91c2VyX3JlZ3MsIGJoKSwKICAgICB9OwogCi0gICAgaWYgKCAhaGlnaGJ5dGVf
-cmVncyApCisgICAgaWYgKCAhbGVnYWN5X2J5dGVvcCApCiAgICAgICAgIHJldHVybiBkZWNvZGVf
-Z3ByKHJlZ3MsIG1vZHJtX3JlZyk7CiAKICAgICAvKiBDaGVjayB0aGF0IHRoZSBhcnJheSBpcyBh
-IHBvd2VyIG9mIHR3by4gKi8KQEAgLTE5ODcsMTAgKzE5ODYsMTEgQEAgZGVjb2RlX3JlZ2lzdGVy
-KAogICAgIHJldHVybiAodm9pZCAqKXJlZ3MgKyBieXRlb3Bfb2Zmc2V0c1ttb2RybV9yZWddOwog
-fQogCi1zdGF0aWMgdm9pZCAqZGVjb2RlX3ZleF9ncHIodW5zaWduZWQgaW50IHZleF9yZWcsIHN0
-cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzLAotICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNv
-bnN0IHN0cnVjdCB4ODZfZW11bGF0ZV9jdHh0ICpjdHh0KQorc3RhdGljIHVuc2lnbmVkIGxvbmcg
-KmRlY29kZV92ZXhfZ3ByKAorICAgIHVuc2lnbmVkIGludCB2ZXhfcmVnLCBzdHJ1Y3QgY3B1X3Vz
-ZXJfcmVncyAqcmVncywKKyAgICBjb25zdCBzdHJ1Y3QgeDg2X2VtdWxhdGVfY3R4dCAqY3R4dCkK
-IHsKLSAgICByZXR1cm4gZGVjb2RlX3JlZ2lzdGVyKH52ZXhfcmVnICYgKG1vZGVfNjRiaXQoKSA/
-IDB4ZiA6IDcpLCByZWdzLCAwKTsKKyAgICByZXR1cm4gZGVjb2RlX2dwcihyZWdzLCB+dmV4X3Jl
-ZyAmIChtb2RlXzY0Yml0KCkgPyAweGYgOiA3KSk7CiB9CiAKIHN0YXRpYyBib29sIGlzX2FsaWdu
-ZWQoZW51bSB4ODZfc2VnbWVudCBzZWcsIHVuc2lnbmVkIGxvbmcgb2ZmcywKQEAgLTI3OTksOCAr
-Mjc5OSw3IEBAIHg4Nl9kZWNvZGUoCiAgICAgICAgICAgICAgICAgc2liX2luZGV4ID0gKChzaWIg
-Pj4gMykgJiA3KSB8ICgocmV4X3ByZWZpeCA8PCAyKSAmIDgpOwogICAgICAgICAgICAgICAgIHNp
-Yl9iYXNlICA9IChzaWIgJiA3KSB8ICgocmV4X3ByZWZpeCA8PCAzKSAmIDgpOwogICAgICAgICAg
-ICAgICAgIGlmICggc2liX2luZGV4ICE9IDQgJiYgIShkICYgdlNJQikgKQotICAgICAgICAgICAg
-ICAgICAgICBlYS5tZW0ub2ZmID0gKihsb25nICopZGVjb2RlX3JlZ2lzdGVyKHNpYl9pbmRleCwK
-LSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBzdGF0ZS0+cmVncywgMCk7CisgICAgICAgICAgICAgICAgICAgIGVhLm1lbS5vZmYgPSAqZGVj
-b2RlX2dwcihzdGF0ZS0+cmVncywgc2liX2luZGV4KTsKICAgICAgICAgICAgICAgICBlYS5tZW0u
-b2ZmIDw8PSAoc2liID4+IDYpICYgMzsKICAgICAgICAgICAgICAgICBpZiAoIChtb2RybV9tb2Qg
-PT0gMCkgJiYgKChzaWJfYmFzZSAmIDcpID09IDUpICkKICAgICAgICAgICAgICAgICAgICAgZWEu
-bWVtLm9mZiArPSBpbnNuX2ZldGNoX3R5cGUoaW50MzJfdCk7CkBAIC0yODE5LDE1ICsyODE4LDEz
-IEBAIHg4Nl9kZWNvZGUoCiAgICAgICAgICAgICAgICAgICAgIGVhLm1lbS5vZmYgKz0gc3RhdGUt
-PnJlZ3MtPnIoYnApOwogICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICBlbHNlCi0g
-ICAgICAgICAgICAgICAgICAgIGVhLm1lbS5vZmYgKz0gKihsb25nICopZGVjb2RlX3JlZ2lzdGVy
-KHNpYl9iYXNlLAotICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBzdGF0ZS0+cmVncywgMCk7CisgICAgICAgICAgICAgICAgICAgIGVhLm1l
-bS5vZmYgKz0gKmRlY29kZV9ncHIoc3RhdGUtPnJlZ3MsIHNpYl9iYXNlKTsKICAgICAgICAgICAg
-IH0KICAgICAgICAgICAgIGVsc2UKICAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgICBnZW5l
-cmF0ZV9leGNlcHRpb25faWYoZCAmIHZTSUIsIEVYQ19VRCk7CiAgICAgICAgICAgICAgICAgbW9k
-cm1fcm0gfD0gKHJleF9wcmVmaXggJiAxKSA8PCAzOwotICAgICAgICAgICAgICAgIGVhLm1lbS5v
-ZmYgPSAqKGxvbmcgKilkZWNvZGVfcmVnaXN0ZXIobW9kcm1fcm0sCi0gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdGF0ZS0+cmVncywgMCk7Cisg
-ICAgICAgICAgICAgICAgZWEubWVtLm9mZiA9ICpkZWNvZGVfZ3ByKHN0YXRlLT5yZWdzLCBtb2Ry
-bV9ybSk7CiAgICAgICAgICAgICAgICAgaWYgKCAobW9kcm1fcm0gPT0gNSkgJiYgKG1vZHJtX21v
-ZCAhPSAwKSApCiAgICAgICAgICAgICAgICAgICAgIGVhLm1lbS5zZWcgPSB4ODZfc2VnX3NzOwog
-ICAgICAgICAgICAgfQpAQCAtMzA1Miw4ICszMDQ5LDcgQEAgeDg2X2VtdWxhdGUoCiAgICAgZ2Vu
-ZXJhdGVfZXhjZXB0aW9uX2lmKHN0YXRlLT5ub3RfNjRiaXQgJiYgbW9kZV82NGJpdCgpLCBFWENf
-VUQpOwogCiAgICAgaWYgKCBlYS50eXBlID09IE9QX1JFRyApCi0gICAgICAgIGVhLnJlZyA9IGRl
-Y29kZV9yZWdpc3Rlcihtb2RybV9ybSwgJl9yZWdzLAotICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgKGQgJiBCeXRlT3ApICYmICFyZXhfcHJlZml4KTsKKyAgICAgICAgZWEucmVnID0g
-ZGVjb2RlX2dwcl9ieXRlb3AoJl9yZWdzLCBtb2RybV9ybSwgKGQgJiBCeXRlT3ApICYmICFyZXhf
-cHJlZml4KTsKIAogICAgIG1lbXNldChtbXZhbHAsIDB4YWEgLyogYXJiaXRyYXJ5ICovLCBzaXpl
-b2YoKm1tdmFscCkpOwogCkBAIC0zMDY3LDEzICszMDYzLDEzIEBAIHg4Nl9lbXVsYXRlKAogICAg
-ICAgICBzcmMudHlwZSA9IE9QX1JFRzsKICAgICAgICAgaWYgKCBkICYgQnl0ZU9wICkKICAgICAg
-ICAgewotICAgICAgICAgICAgc3JjLnJlZyA9IGRlY29kZV9yZWdpc3Rlcihtb2RybV9yZWcsICZf
-cmVncywgKHJleF9wcmVmaXggPT0gMCkpOworICAgICAgICAgICAgc3JjLnJlZyA9IGRlY29kZV9n
-cHJfYnl0ZW9wKCZfcmVncywgbW9kcm1fcmVnLCAhcmV4X3ByZWZpeCk7CiAgICAgICAgICAgICBz
-cmMudmFsID0gKih1aW50OF90ICopc3JjLnJlZzsKICAgICAgICAgICAgIHNyYy5ieXRlcyA9IDE7
-CiAgICAgICAgIH0KICAgICAgICAgZWxzZQogICAgICAgICB7Ci0gICAgICAgICAgICBzcmMucmVn
-ID0gZGVjb2RlX3JlZ2lzdGVyKG1vZHJtX3JlZywgJl9yZWdzLCAwKTsKKyAgICAgICAgICAgIHNy
-Yy5yZWcgPSBkZWNvZGVfZ3ByKCZfcmVncywgbW9kcm1fcmVnKTsKICAgICAgICAgICAgIHN3aXRj
-aCAoIChzcmMuYnl0ZXMgPSBvcF9ieXRlcykgKQogICAgICAgICAgICAgewogICAgICAgICAgICAg
-Y2FzZSAyOiBzcmMudmFsID0gKih1aW50MTZfdCAqKXNyYy5yZWc7IGJyZWFrOwpAQCAtMzE0Mywx
-MyArMzEzOSwxMyBAQCB4ODZfZW11bGF0ZSgKICAgICAgICAgZHN0LnR5cGUgPSBPUF9SRUc7CiAg
-ICAgICAgIGlmICggZCAmIEJ5dGVPcCApCiAgICAgICAgIHsKLSAgICAgICAgICAgIGRzdC5yZWcg
-PSBkZWNvZGVfcmVnaXN0ZXIobW9kcm1fcmVnLCAmX3JlZ3MsIChyZXhfcHJlZml4ID09IDApKTsK
-KyAgICAgICAgICAgIGRzdC5yZWcgPSBkZWNvZGVfZ3ByX2J5dGVvcCgmX3JlZ3MsIG1vZHJtX3Jl
-ZywgIXJleF9wcmVmaXgpOwogICAgICAgICAgICAgZHN0LnZhbCA9ICoodWludDhfdCAqKWRzdC5y
-ZWc7CiAgICAgICAgICAgICBkc3QuYnl0ZXMgPSAxOwogICAgICAgICB9CiAgICAgICAgIGVsc2UK
-ICAgICAgICAgewotICAgICAgICAgICAgZHN0LnJlZyA9IGRlY29kZV9yZWdpc3Rlcihtb2RybV9y
-ZWcsICZfcmVncywgMCk7CisgICAgICAgICAgICBkc3QucmVnID0gZGVjb2RlX2dwcigmX3JlZ3Ms
-IG1vZHJtX3JlZyk7CiAgICAgICAgICAgICBzd2l0Y2ggKCAoZHN0LmJ5dGVzID0gb3BfYnl0ZXMp
-ICkKICAgICAgICAgICAgIHsKICAgICAgICAgICAgIGNhc2UgMjogZHN0LnZhbCA9ICoodWludDE2
-X3QgKilkc3QucmVnOyBicmVhazsKQEAgLTMzMzksNyArMzMzNSw3IEBAIHg4Nl9lbXVsYXRlKAog
-CiAgICAgY2FzZSAweDQwIC4uLiAweDRmOiAvKiBpbmMvZGVjIHJlZyAqLwogICAgICAgICBkc3Qu
-dHlwZSAgPSBPUF9SRUc7Ci0gICAgICAgIGRzdC5yZWcgICA9IGRlY29kZV9yZWdpc3RlcihiICYg
-NywgJl9yZWdzLCAwKTsKKyAgICAgICAgZHN0LnJlZyAgID0gZGVjb2RlX2dwcigmX3JlZ3MsIGIg
-JiA3KTsKICAgICAgICAgZHN0LmJ5dGVzID0gb3BfYnl0ZXM7CiAgICAgICAgIGRzdC52YWwgICA9
-ICpkc3QucmVnOwogICAgICAgICBpZiAoIGIgJiA4ICkKQEAgLTMzNDksMTQgKzMzNDUsMTIgQEAg
-eDg2X2VtdWxhdGUoCiAgICAgICAgIGJyZWFrOwogCiAgICAgY2FzZSAweDUwIC4uLiAweDU3OiAv
-KiBwdXNoIHJlZyAqLwotICAgICAgICBzcmMudmFsID0gKih1bnNpZ25lZCBsb25nICopZGVjb2Rl
-X3JlZ2lzdGVyKAotICAgICAgICAgICAgKGIgJiA3KSB8ICgocmV4X3ByZWZpeCAmIDEpIDw8IDMp
-LCAmX3JlZ3MsIDApOworICAgICAgICBzcmMudmFsID0gKmRlY29kZV9ncHIoJl9yZWdzLCAoYiAm
-IDcpIHwgKChyZXhfcHJlZml4ICYgMSkgPDwgMykpOwogICAgICAgICBnb3RvIHB1c2g7CiAKICAg
-ICBjYXNlIDB4NTggLi4uIDB4NWY6IC8qIHBvcCByZWcgKi8KICAgICAgICAgZHN0LnR5cGUgID0g
-T1BfUkVHOwotICAgICAgICBkc3QucmVnICAgPSBkZWNvZGVfcmVnaXN0ZXIoCi0gICAgICAgICAg
-ICAoYiAmIDcpIHwgKChyZXhfcHJlZml4ICYgMSkgPDwgMyksICZfcmVncywgMCk7CisgICAgICAg
-IGRzdC5yZWcgICA9IGRlY29kZV9ncHIoJl9yZWdzLCAoYiAmIDcpIHwgKChyZXhfcHJlZml4ICYg
-MSkgPDwgMykpOwogICAgICAgICBkc3QuYnl0ZXMgPSBvcF9ieXRlczsKICAgICAgICAgaWYgKCBt
-b2RlXzY0Yml0KCkgJiYgKGRzdC5ieXRlcyA9PSA0KSApCiAgICAgICAgICAgICBkc3QuYnl0ZXMg
-PSA4OwpAQCAtMzM3MCw3ICszMzY0LDcgQEAgeDg2X2VtdWxhdGUoCiAgICAgICAgIGVhLnZhbCA9
-IF9yZWdzLmVzcDsKICAgICAgICAgZm9yICggaSA9IDA7IGkgPCA4OyBpKysgKQogICAgICAgICB7
-Ci0gICAgICAgICAgICB2b2lkICpyZWcgPSBkZWNvZGVfcmVnaXN0ZXIoaSwgJl9yZWdzLCAwKTsK
-KyAgICAgICAgICAgIHZvaWQgKnJlZyA9IGRlY29kZV9ncHIoJl9yZWdzLCBpKTsKIAogICAgICAg
-ICAgICAgaWYgKCAocmMgPSBvcHMtPndyaXRlKHg4Nl9zZWdfc3MsIHNwX3ByZV9kZWMob3BfYnl0
-ZXMpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlZyAhPSAmX3JlZ3MuZXNw
-ID8gcmVnIDogJmVhLnZhbCwKQEAgLTMzODIsNyArMzM3Niw3IEBAIHg4Nl9lbXVsYXRlKAogICAg
-IGNhc2UgMHg2MTogLyogcG9wYSAqLwogICAgICAgICBmb3IgKCBpID0gMDsgaSA8IDg7IGkrKyAp
-CiAgICAgICAgIHsKLSAgICAgICAgICAgIHZvaWQgKnJlZyA9IGRlY29kZV9yZWdpc3Rlcig3IC0g
-aSwgJl9yZWdzLCAwKTsKKyAgICAgICAgICAgIHZvaWQgKnJlZyA9IGRlY29kZV9ncHIoJl9yZWdz
-LCA3IC0gaSk7CiAKICAgICAgICAgICAgIGlmICggKHJjID0gcmVhZF91bG9uZyh4ODZfc2VnX3Nz
-LCBzcF9wb3N0X2luYyhvcF9ieXRlcyksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgJmRzdC52YWwsIG9wX2J5dGVzLCBjdHh0LCBvcHMpKSAhPSAwICkKQEAgLTM2NjIsOCArMzY1
-Niw3IEBAIHg4Nl9lbXVsYXRlKAogICAgIGNhc2UgMHg5MSAuLi4gMHg5NzogLyogeGNoZyByZWcs
-JSVyYXggKi8KICAgICAgICAgZHN0LnR5cGUgPSBPUF9SRUc7CiAgICAgICAgIGRzdC5ieXRlcyA9
-IG9wX2J5dGVzOwotICAgICAgICBkc3QucmVnICA9IGRlY29kZV9yZWdpc3RlcigKLSAgICAgICAg
-ICAgIChiICYgNykgfCAoKHJleF9wcmVmaXggJiAxKSA8PCAzKSwgJl9yZWdzLCAwKTsKKyAgICAg
-ICAgZHN0LnJlZyAgPSBkZWNvZGVfZ3ByKCZfcmVncywgKGIgJiA3KSB8ICgocmV4X3ByZWZpeCAm
-IDEpIDw8IDMpKTsKICAgICAgICAgZHN0LnZhbCAgPSAqZHN0LnJlZzsKICAgICAgICAgZ290byB4
-Y2hnOwogCkBAIC0zODk1LDE0ICszODg4LDEzIEBAIHg4Nl9lbXVsYXRlKAogICAgIH0KIAogICAg
-IGNhc2UgMHhiMCAuLi4gMHhiNzogLyogbW92IGltbTgscjggKi8KLSAgICAgICAgZHN0LnJlZyA9
-IGRlY29kZV9yZWdpc3RlcigKLSAgICAgICAgICAgIChiICYgNykgfCAoKHJleF9wcmVmaXggJiAx
-KSA8PCAzKSwgJl9yZWdzLCAocmV4X3ByZWZpeCA9PSAwKSk7CisgICAgICAgIGRzdC5yZWcgPSBk
-ZWNvZGVfZ3ByX2J5dGVvcCgmX3JlZ3MsIChiICYgNykgfCAoKHJleF9wcmVmaXggJiAxKSA8PCAz
-KSwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICFyZXhfcHJlZml4KTsKICAg
-ICAgICAgZHN0LnZhbCA9IHNyYy52YWw7CiAgICAgICAgIGJyZWFrOwogCiAgICAgY2FzZSAweGI4
-IC4uLiAweGJmOiAvKiBtb3YgaW1tezE2LDMyLDY0fSxyezE2LDMyLDY0fSAqLwotICAgICAgICBk
-c3QucmVnID0gZGVjb2RlX3JlZ2lzdGVyKAotICAgICAgICAgICAgKGIgJiA3KSB8ICgocmV4X3By
-ZWZpeCAmIDEpIDw8IDMpLCAmX3JlZ3MsIDApOworICAgICAgICBkc3QucmVnID0gZGVjb2RlX2dw
-cigmX3JlZ3MsIChiICYgNykgfCAoKHJleF9wcmVmaXggJiAxKSA8PCAzKSk7CiAgICAgICAgIGRz
-dC52YWwgPSBzcmMudmFsOwogICAgICAgICBicmVhazsKIApAQCAtNTY4NCw3ICs1Njc2LDcgQEAg
-eDg2X2VtdWxhdGUoCiAgICAgICAgIG9wY1syXSA9IDB4YzM7CiAKICAgICAgICAgY29weV9SRVhf
-VkVYKG9wYywgcmV4X3ByZWZpeCwgdmV4KTsKLSAgICAgICAgZWEucmVnID0gZGVjb2RlX3JlZ2lz
-dGVyKG1vZHJtX3JlZywgJl9yZWdzLCAwKTsKKyAgICAgICAgZWEucmVnID0gZGVjb2RlX2dwcigm
-X3JlZ3MsIG1vZHJtX3JlZyk7CiAgICAgICAgIGludm9rZV9zdHViKCIiLCAiIiwgIj1hIiAoKmVh
-LnJlZyksICIrbSIgKGZpYy5leG5fcmFpc2VkKQogICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IDogImMiIChtbXZhbHApLCAibSIgKCptbXZhbHApKTsKIApAQCAtNjQ2MSw3ICs2NDUzLDcgQEAg
-eDg2X2VtdWxhdGUoCiAgICAgICAgIGVsc2UKICAgICAgICAgewogICAgICAgICAgICAgc2hpZnQg
-PSBzcmMudmFsOwotICAgICAgICAgICAgc3JjLnJlZyA9IGRlY29kZV9yZWdpc3Rlcihtb2RybV9y
-ZWcsICZfcmVncywgMCk7CisgICAgICAgICAgICBzcmMucmVnID0gZGVjb2RlX2dwcigmX3JlZ3Ms
-IG1vZHJtX3JlZyk7CiAgICAgICAgICAgICBzcmMudmFsID0gdHJ1bmNhdGVfd29yZCgqc3JjLnJl
-ZywgZHN0LmJ5dGVzKTsKICAgICAgICAgfQogICAgICAgICBpZiAoIChzaGlmdCAmPSB3aWR0aCAt
-IDEpID09IDAgKQpAQCAtNjU4MCw3ICs2NTcyLDcgQEAgeDg2X2VtdWxhdGUoCiAgICAgICAgIGZh
-aWxfaWYoIW9wcy0+cmVhZF9zZWdtZW50KTsKICAgICAgICAgaWYgKCAocmMgPSBvcHMtPnJlYWRf
-c2VnbWVudChzZWcsICZzcmVnLCBjdHh0KSkgIT0gWDg2RU1VTF9PS0FZICkKICAgICAgICAgICAg
-IGdvdG8gZG9uZTsKLSAgICAgICAgZHN0LnJlZyA9IGRlY29kZV9yZWdpc3Rlcihtb2RybV9ybSwg
-Jl9yZWdzLCAwKTsKKyAgICAgICAgZHN0LnJlZyA9IGRlY29kZV9ncHIoJl9yZWdzLCBtb2RybV9y
-bSk7CiAgICAgICAgIGlmICggIShtb2RybV9yZWcgJiAyKSApCiAgICAgICAgIHsKICAgICAgICAg
-ICAgIC8qIHJke2YsZ31zYmFzZSAqLwpAQCAtNjY0MCw3ICs2NjMyLDcgQEAgeDg2X2VtdWxhdGUo
-CiAKICAgICBjYXNlIFg4NkVNVUxfT1BDKDB4MGYsIDB4YjYpOiAvKiBtb3Z6eCBybTgscnsxNiwz
-Miw2NH0gKi8KICAgICAgICAgLyogUmVjb21wdXRlIERzdFJlZyBhcyB3ZSBtYXkgaGF2ZSBkZWNv
-ZGVkIEFIL0JIL0NIL0RILiAqLwotICAgICAgICBkc3QucmVnICAgPSBkZWNvZGVfcmVnaXN0ZXIo
-bW9kcm1fcmVnLCAmX3JlZ3MsIDApOworICAgICAgICBkc3QucmVnICAgPSBkZWNvZGVfZ3ByKCZf
-cmVncywgbW9kcm1fcmVnKTsKICAgICAgICAgZHN0LmJ5dGVzID0gb3BfYnl0ZXM7CiAgICAgICAg
-IGRzdC52YWwgICA9ICh1aW50OF90KXNyYy52YWw7CiAgICAgICAgIGJyZWFrOwpAQCAtNjczMiw3
-ICs2NzI0LDcgQEAgeDg2X2VtdWxhdGUoCiAKICAgICBjYXNlIFg4NkVNVUxfT1BDKDB4MGYsIDB4
-YmUpOiAvKiBtb3ZzeCBybTgscnsxNiwzMiw2NH0gKi8KICAgICAgICAgLyogUmVjb21wdXRlIERz
-dFJlZyBhcyB3ZSBtYXkgaGF2ZSBkZWNvZGVkIEFIL0JIL0NIL0RILiAqLwotICAgICAgICBkc3Qu
-cmVnICAgPSBkZWNvZGVfcmVnaXN0ZXIobW9kcm1fcmVnLCAmX3JlZ3MsIDApOworICAgICAgICBk
-c3QucmVnICAgPSBkZWNvZGVfZ3ByKCZfcmVncywgbW9kcm1fcmVnKTsKICAgICAgICAgZHN0LmJ5
-dGVzID0gb3BfYnl0ZXM7CiAgICAgICAgIGRzdC52YWwgICA9IChpbnQ4X3Qpc3JjLnZhbDsKICAg
-ICAgICAgYnJlYWs7CkBAIC02OTU3LDggKzY5NDksNyBAQCB4ODZfZW11bGF0ZSgKIAogICAgIGNh
-c2UgWDg2RU1VTF9PUEMoMHgwZiwgMHhjOCkgLi4uIFg4NkVNVUxfT1BDKDB4MGYsIDB4Y2YpOiAv
-KiBic3dhcCAqLwogICAgICAgICBkc3QudHlwZSA9IE9QX1JFRzsKLSAgICAgICAgZHN0LnJlZyAg
-PSBkZWNvZGVfcmVnaXN0ZXIoCi0gICAgICAgICAgICAoYiAmIDcpIHwgKChyZXhfcHJlZml4ICYg
-MSkgPDwgMyksICZfcmVncywgMCk7CisgICAgICAgIGRzdC5yZWcgID0gZGVjb2RlX2dwcigmX3Jl
-Z3MsIChiICYgNykgfCAoKHJleF9wcmVmaXggJiAxKSA8PCAzKSk7CiAgICAgICAgIHN3aXRjaCAo
-IGRzdC5ieXRlcyA9IG9wX2J5dGVzICkKICAgICAgICAgewogICAgICAgICBkZWZhdWx0OiAvKiBj
-YXNlIDI6ICovCi0tIAoyLjEuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+
+--===============7930060357592759717==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_E36FB8A2-C921-4A4D-92A2-B6D9A2927A6C"
+
+
+--Apple-Mail=_E36FB8A2-C921-4A4D-92A2-B6D9A2927A6C
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+Hi all, (mentors on CC list)
+
+a quick note that there are significant changes to Outreachy this year, =
+which in my view will make it a little harder to participate.
+
+Namely
+* This round, instead of having communities create landing pages on =
+their own websites or wikis coordinators and mentors will create =
+accounts on the Outreachy website
+* This means we would have to copy projects from our wiki to =
+https://www.outreachy.org <https://www.outreachy.org/> - I don't know =
+what the template is yet, but this may create some extra work for =
+mentors=20
+* The Outreachy application period opens in two weeks, on February 12.
+* Apart from this, there is fairly little information on the timeline =
+and process for this round and Outreachy mail ended up in my spam =
+folder: I was polling the website for info and there was not much=20
+
+Current status:
+* I have claimed the Xen Project page on https://www.outreachy =
+<https://www.outreachy/> - waiting for it to be approved (I tried with =
+an xenproject.org <http://xenproject.org/> alias which did not work)
+* We have funding for one intern (maybe more) and thus qualify. Whether =
+I can find more funds, depends on the cost of the developer summit. =
+Hopefully I will know more this week (I expect concrete developer summit =
+proposal this week)
+
+Need input:
+* For us too participate I need at least 3-4 mentors and projects to be =
+added to https://www.outreachy.org <https://www.outreachy.org/>=20
+* If you are willing to do this, please raise your hand now by replying =
+to this thread or contacting me privately and I will help=20
+
+Best Regards
+Lars
+
+> On 8 Jan 2018, at 15:19, Lars Kurth <lars.kurth.xen@gmail.com> wrote:
+>=20
+> Hi All,
+>=20
+> it's this time of the year again to prepare for GSoC/Outreachy! The =
+application deadline for orgs is January 23 - February 11: ideally we =
+will have a good updated lists of projects by then as Google will look =
+at the quality of the project list. I will also need co-org admins: =
+@Mindy are you willing to do this again? Maybe also someone from the =
+Unikraft project. That helps ensure that we have reps from various =
+subproject that ensure that we don't miss deadlines.
+>=20
+>=20
+> Best Regards
+> Lars
+>=20
+> Existing Projects (for people on the CC list)
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> If you are CC'ed you have one or several projects listed on =
+https://wiki.xenproject.org/wiki/Outreach_Program_Projects ... What I =
+need you to do is to
+>=20
+> a) Weed out any projects that have been completed or are not relevant =
+any more
+>   @Mindy: For MirageOS folks, please check and update =
+https://github.com/mirage/mirage-www/wiki/Pioneer-Projects and do the =
+same
+>=20
+> b) Decide whether you still want to mentor:
+>   This requires some of your bandwidth from mid-Feb to March 2018 to =
+work on small projects
+>   The actual work happens from May 14 - Aug 14
+>=20
+>   If not, please reply and list projects affected
+>   If yes, please also do so and I will update the Verified field =
+accordingly
+>=20
+> c) Add any new information to existing projects as relevant.=20
+>=20
+>=20
+> New Projects
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Feel free to add new projects to the list, but if you do so please let =
+the list know. We are not going to be very strict with =
+https://wiki.xenproject.org/wiki/Outreach_Program_Projects#Conventions_for=
+_Projects_and_Project_Mentors, but getting someone else to review your =
+proposal is a good idea.=20
+>=20
+> Unikraft
+> --------
+> I created a place-holder for Unikraft at =
+https://wiki.xenproject.org/wiki/Outreach_Program_Projects#Unikraft as =
+Unikraft project members indicated they want to participate.
+> You probably do want to set expectations with regards to start-up =
+tasks and come up with a set of tasks to act as a filter for applicants =
+(e.g. showing that they set up the environment, etc.)=20
+>=20
+>=20
+> Specific Improvements to the project documentation
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+>=20
+> Hypervisor start-up tasks
+> -------------------------
+> https://wiki.xenproject.org/wiki/Xen_Project_Development_Projects =
+contains: "An easy way to get started (and show that you can set up the =
+Xen Development Environment, fix an issue, build and test Xen, submit a =
+patch, etc.) is to address a suitable number of Coverity Scan issues. =
+Ask on xen-devel@ for a set of suitable Coverity issues. Note that this =
+does not require any access to the Coverity scan results. Open bugs to =
+fix under the Small Code Contribution Requirement can also be found on =
+bugs.xenproject.org"
+>=20
+> Do we want to change this? Finding small get started projects is =
+always a little bit of a problem. Maybe we can prepare a better list =
+somewhere.
+>=20
+> In-tree vs. Wiki based projects
+> -------------------------------
+> We could also decide to move Hypervisor related ideas in-tree =
+somewhere and generate a list if that makes things easier. But this is =
+not necessary, in particular given with everything that is going on. I =
+just wanted to raise this as an option: I am not particularly wedded to =
+using the wiki.
+>=20
+
+
+--Apple-Mail=_E36FB8A2-C921-4A4D-92A2-B6D9A2927A6C
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">Hi =
+all, (mentors on CC list)<div class=3D""><br class=3D""><div class=3D"">a =
+quick note that there are significant changes to Outreachy this year, =
+which in my view will make it a little harder to participate.</div><div =
+class=3D""><br class=3D""></div><div class=3D"">Namely</div><div =
+class=3D"">* This round, instead of having communities create landing =
+pages on their own websites or wikis coordinators and mentors will =
+create accounts on the Outreachy website</div><div class=3D"">* This =
+means we would have to copy projects from our wiki to <a =
+href=3D"https://www.outreachy.org" =
+class=3D"">https://www.outreachy.org</a>&nbsp;- I don't know what the =
+template is yet, but this may create some extra work for =
+mentors&nbsp;</div><div class=3D"">* The Outreachy application period =
+opens in two weeks, on February 12.</div><div class=3D"">* Apart from =
+this, there is fairly little information on the timeline and process for =
+this round and Outreachy mail ended up in my spam folder: I was polling =
+the website for info and there was not much&nbsp;<br class=3D""><div><br =
+class=3D""></div><div>Current status:</div><div>* I have claimed the Xen =
+Project page on <a href=3D"https://www.outreachy" =
+class=3D"">https://www.outreachy</a>&nbsp;- waiting for it to be =
+approved (I tried with an&nbsp;<a href=3D"http://xenproject.org" =
+class=3D"">xenproject.org</a>&nbsp;alias which did not work)</div><div>* =
+We have funding for one intern (maybe more) and thus qualify. Whether I =
+can find more funds, depends on the cost of the developer summit. =
+Hopefully I will know more this week (I expect concrete developer summit =
+proposal this week)</div><div><br class=3D""></div><div>Need =
+input:</div><div>* For us too participate I need at least 3-4 mentors =
+and projects to be added to&nbsp;<a href=3D"https://www.outreachy.org" =
+class=3D"">https://www.outreachy.org</a>&nbsp;</div><div>* If you are =
+willing to do this, please raise your hand now by replying to this =
+thread or contacting me privately and I will help&nbsp;</div><div><br =
+class=3D""></div><div>Best Regards</div><div>Lars</div><div><br =
+class=3D""><blockquote type=3D"cite" class=3D""><div class=3D"">On 8 Jan =
+2018, at 15:19, Lars Kurth &lt;<a href=3D"mailto:lars.kurth.xen@gmail.com"=
+ class=3D"">lars.kurth.xen@gmail.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><div class=3D"">Hi =
+All,<br class=3D""><br class=3D"">it's this time of the year again to =
+prepare for GSoC/Outreachy! The application deadline for orgs is January =
+23 - February 11: ideally we will have a good updated lists of projects =
+by then as Google will look at the quality of the project list. I will =
+also need co-org admins: @Mindy are you willing to do this again? Maybe =
+also someone from the Unikraft project. That helps ensure that we have =
+reps from various subproject that ensure that we don't miss =
+deadlines.<br class=3D""><br class=3D""><br class=3D"">Best Regards<br =
+class=3D"">Lars<br class=3D""><br class=3D"">Existing Projects (for =
+people on the CC list)<br class=3D"">=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D<br class=3D"">If you are CC'ed you have one or several =
+projects listed on <a =
+href=3D"https://wiki.xenproject.org/wiki/Outreach_Program_Projects" =
+class=3D"">https://wiki.xenproject.org/wiki/Outreach_Program_Projects</a> =
+... What I need you to do is to<br class=3D""><br class=3D"">a) Weed out =
+any projects that have been completed or are not relevant any more<br =
+class=3D""> &nbsp;&nbsp;@Mindy: For MirageOS folks, please check and =
+update <a =
+href=3D"https://github.com/mirage/mirage-www/wiki/Pioneer-Projects" =
+class=3D"">https://github.com/mirage/mirage-www/wiki/Pioneer-Projects</a> =
+and do the same<br class=3D""><br class=3D"">b) Decide whether you still =
+want to mentor:<br class=3D""> &nbsp;&nbsp;This requires some of your =
+bandwidth from mid-Feb to March 2018 to work on small projects<br =
+class=3D""> &nbsp;&nbsp;The actual work happens from May 14 - Aug 14<br =
+class=3D""><br class=3D""> &nbsp;&nbsp;If not, please reply and list =
+projects affected<br class=3D""> &nbsp;&nbsp;If yes, please also do so =
+and I will update the Verified field accordingly<br class=3D""><br =
+class=3D"">c) Add any new information to existing projects as relevant. =
+<br class=3D""><br class=3D""><br class=3D"">New Projects<br =
+class=3D"">=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br class=3D"">Feel free =
+to add new projects to the list, but if you do so please let the list =
+know. We are not going to be very strict with <a =
+href=3D"https://wiki.xenproject.org/wiki/Outreach_Program_Projects#Convent=
+ions_for_Projects_and_Project_Mentors" =
+class=3D"">https://wiki.xenproject.org/wiki/Outreach_Program_Projects#Conv=
+entions_for_Projects_and_Project_Mentors</a>, but getting someone else =
+to review your proposal is a good idea. <br class=3D""><br =
+class=3D"">Unikraft<br class=3D"">--------<br class=3D"">I created a =
+place-holder for Unikraft at <a =
+href=3D"https://wiki.xenproject.org/wiki/Outreach_Program_Projects#Unikraf=
+t" =
+class=3D"">https://wiki.xenproject.org/wiki/Outreach_Program_Projects#Unik=
+raft</a> as Unikraft project members indicated they want to =
+participate.<br class=3D"">You probably do want to set expectations with =
+regards to start-up tasks and come up with a set of tasks to act as a =
+filter for applicants (e.g. showing that they set up the environment, =
+etc.) <br class=3D""><br class=3D""><br class=3D"">Specific Improvements =
+to the project documentation<br =
+class=3D"">=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D<br class=3D""><br class=3D"">Hypervisor start-up tasks<br =
+class=3D"">-------------------------<br class=3D""><a =
+href=3D"https://wiki.xenproject.org/wiki/Xen_Project_Development_Projects"=
+ =
+class=3D"">https://wiki.xenproject.org/wiki/Xen_Project_Development_Projec=
+ts</a> contains: "An easy way to get started (and show that you can set =
+up the Xen Development Environment, fix an issue, build and test Xen, =
+submit a patch, etc.) is to address a suitable number of Coverity Scan =
+issues. Ask on xen-devel@ for a set of suitable Coverity issues. Note =
+that this does not require any access to the Coverity scan results. Open =
+bugs to fix under the Small Code Contribution Requirement can also be =
+found on <a href=3D"http://bugs.xenproject.org" =
+class=3D"">bugs.xenproject.org</a>"<br class=3D""><br class=3D"">Do we =
+want to change this? Finding small get started projects is always a =
+little bit of a problem. Maybe we can prepare a better list =
+somewhere.<br class=3D""><br class=3D"">In-tree vs. Wiki based =
+projects<br class=3D"">-------------------------------<br class=3D"">We =
+could also decide to move Hypervisor related ideas in-tree somewhere and =
+generate a list if that makes things easier. But this is not necessary, =
+in particular given with everything that is going on. I just wanted to =
+raise this as an option: I am not particularly wedded to using the =
+wiki.<br class=3D""><br class=3D""></div></div></blockquote></div><br =
+class=3D""></div></div></body></html>=
+
+--Apple-Mail=_E36FB8A2-C921-4A4D-92A2-B6D9A2927A6C--
+
+
+--===============7930060357592759717==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7930060357592759717==--
