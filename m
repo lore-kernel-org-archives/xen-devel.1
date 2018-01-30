@@ -1,19 +1,18 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
 Subject: Re: [PATCH 0/3] xen/arm: Inject an exception to the
  guest rather than crashing it
-Date: Tue, 30 Jan 2018 19:09:54 +0000
-Message-ID: <a4fee978-ab9a-ea1c-339b-b9e70f1f9f8b@citrix.com>
+Date: Tue, 30 Jan 2018 11:21:01 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1801301110180.11958@sstabellini-ThinkPad-X260>
 References: <20180130161433.6910-1-julien.grall@arm.com>
  <d948cb7b-6c0b-ef3f-b95a-5e0c9c8f7065@citrix.com>
  <864d6a7f-00c7-5ef5-51f0-e7f74b35ca70@arm.com>
  <b6abd6f2-92cf-8bb4-2d96-681a198fb375@citrix.com>
  <381dfde4-bf8e-0008-3c41-a7f8b143b721@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-253457304-1517339557=:11958"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 In-Reply-To: <381dfde4-bf8e-0008-3c41-a7f8b143b721@arm.com>
-Content-Language: en-GB
+Content-ID: <alpine.DEB.2.10.1801301113181.11958@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,69 +21,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org
-Cc: sstabellini@kernel.org, andre.przywara@linaro.org
+To: Julien Grall <julien.grall@arm.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, sstabellini@kernel.org, andre.przywara@linaro.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMzAvMDEvMTggMTg6NDYsIEp1bGllbiBHcmFsbCB3cm90ZToKPiBIaSwKPgo+IE9uIDMwLzAx
-LzE4IDE4OjI5LCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+PiBPbiAzMC8wMS8xOCAxNzowMCwgSnVs
-aWVuIEdyYWxsIHdyb3RlOgo+Pj4KPj4+Cj4+PiBPbiAzMC8wMS8xOCAxNjozOCwgQW5kcmV3IENv
-b3BlciB3cm90ZToKPj4+PiBPbiAzMC8wMS8xOCAxNjoxNCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+
-Pj4+PiBIaSBhbGwsCj4+Pj4+Cj4+Pj4+IFRoaXMgc21hbGwgc2VyaWVzIHJlcGxhY2VzIGFsbCBj
-YWxsIHRvIGRvbWFpbl9jcmFzaF9zeW5jaHJvbm91cyBieQo+Pj4+PiBpbmplY3RpbmcKPj4+Pj4g
-YW4gZXhjZXB0aW9uIHRvIHRoZSBndWVzdC4KPj4+Pj4KPj4+Pj4gVGhpcyB3aWxsIHJlc3VsdCB0
-byBhIG5pY2VyIHRyYWNlIGZyb20gdGhlIGd1ZXN0IChubyBuZWVkIHRvCj4+Pj4+IG1hbnVhbGx5
-IHdhbGsKPj4+Pj4gdGhlIHN0YWNrKSBhbmQgZ2l2ZSBhIGNoYW5jZSB0byB0aGUgZ3Vlc3QgdG8g
-Z2l2ZSBhIGJpdCBtb3JlCj4+Pj4+IGluZm9ybWF0aW9uIG9uCj4+Pj4+IHdoYXQgaXQgd2FzIGRv
-aW5nLgo+Pj4+Pgo+Pj4+PiBDaGVlcnMsCj4+Pj4+Cj4+Pj4+IEp1bGllbiBHcmFsbCAoMyk6Cj4+
-Pj4+IMKgwqDCoCB4ZW4vYXJtOiBpbzogRGlzdGluZ3Vpc2ggdW5oYW5kbGVkIElPIGZyb20gYWJv
-cnRlZCBvbmUKPj4+Pj4gwqDCoMKgIHhlbi9hcm06IERvbid0IGNyYXNoIGRvbWFpbiBvbiBiYWQg
-TU1JTyBlbXVsYXRpb24KPj4+Pj4gwqDCoMKgIHhlbi9hcm06IERvbid0IGNyYXNoIHRoZSBkb21h
-aW4gb24gaW52YWxpZCBIVkMgaW1tZWRpYXRlCj4+Pj4KPj4+PiBUaGFua3MuCj4+Pj4KPj4+PiBJ
-IGRvbid0IGZlZWwgcXVhbGlmaWVkIHRvIHJldmlldyB0aGVzZSwgYnV0IHNvbWUgbm90ZXMuCj4+
-Pj4KPj4+PiBQYXRjaCAxLsKgIHMvYXZvZGkvYXZvaWQvIGluIHRoZSBjb21taXQgbWVzc2FnZQo+
-Pj4+Cj4+Pj4gUGF0Y2hlcyAyIGFuZCAzLsKgIFlvdSBwcm9iYWJseSB3YW50IHRvIGNvbnZlcnQg
-dGhlIHByaW50a3MgdG8KPj4+PiBnZHByaW50aygpcywgb3RoZXJ3aXNlIGd1ZXN0cyBjYW4gY2hv
-a2UgdXAgdGhlIHJhdGVsaW1pdGVkIGxvZy7CoCBEb2luZwo+Pj4+IHNvIHdpbGwgYWxzbyBtZWFu
-IHRoYXQgdGhlIHZjcHUgd2lsbCBiZSBpZGVudGlmaWVkIGNvbnNpc3RlbnRseSwgd2hpY2gKPj4+
-PiBpdCBpc24ndCBjdXJyZW50bHkuCj4+PiBXZSBkaWRuJ3QgdXNlIGcqcHJpbnRrIGJlY2F1c2Ug
-aXQgd291bGQgYmUgbW9yZSBjb25mdXNpbmcgdG8gcHJpbnQgdGhlCj4+PiBjdXJyZW50IHZDUFUg
-aW4gc29tZSBjYXNlcyAoZS5nIHdoZW4gYWNjZXNzaW5nIHRoZSByZS1kaXN0cmlidXRvciBvZgo+
-Pj4gYW5vdGhlciB2Q1BVKSBvciBkb2VzIG5vdCBtYXR0ZXIgKGUuZyBmb3IgSVRTKS4KPj4KPj4g
-SW4gdGhlIGZvcm1lciBjYXNlLCB5b3UnZCB3YW50IHRvIHByaW50IGJvdGggY3VycmVudCwgYW5k
-IHRoZSB0YXJnZXQKPj4gdmNwdS7CoCBUaGUgbGF0dGVyIHN0aWxsIG1hdHRlcnMgd2hhdCBjdXJy
-ZW50IGlzIGlmIHNvbWV0aGluZyBnb2VzIHdyb25nLgo+Pgo+PiBXZSBoYXZlIHBsZW50eSBvZiBz
-aW1pbGFyIGNhc2VzIGluIHg4NiwgYnV0IGF0IHRoZSBwb2ludCB5b3UgYXJlCj4+IHByaW50aW5n
-IGFuIGRpYWdub3N0aWMgbWVzc2FnZSwgaWdub3JpbmcgY3VycmVudCBpcyBhbG1vc3QgYWx3YXlz
-IHRoZQo+PiB3cm9uZyB0aGluayB0byBkby4KPgo+IEkgd2lsbCBsb29rIGF0IGl0IG9uIGFub3Ro
-ZXIgc2VyaWVzLgoKRmFpciBlbm91Z2guCgo+Cj4+Cj4+Pgo+Pj4gVGhlIHByb2JsZW0gd2l0aCB0
-aGUgZGVidWcgdmVyc2lvbiBpcyB0aG9zZSBpbmZvcm1hdGlvbiBhcmUgYWN0dWFsbHkKPj4+IHF1
-aXRlIHVzZWZ1bCBpbiBub24tZGVidWcgYnVpbGQuIFdlIGZvdW5kIHF1aXRlIGEgZmV3IGlzc3Vl
-cyB0aGFua3MgdG8KPj4+IHRoZW0uCj4+Pgo+Pj4gSSB0aGluayBpdCB3b3VsZCBtYWtlIG1vcmUg
-c2Vuc2UgZm9yIFhlbiB0byBwcm92aWRlIHBlci1ndWVzdAo+Pj4gcmF0ZWxpbWl0ZWQgdGhhbiBo
-aWRpbmcgdGhvc2UgbWVzc2FnZXMgaW4gbm9uLWRlYnVnIGJ1aWxkLgo+Pgo+PiBQZXIgZ3Vlc3Qg
-aXMgcXVpdGUgYSBsb3QgbW9yZSBjb21wbGljYXRlZCB0aGFuIGdsb2JhbCwgYW5kIHdvdWxkIHN0
-aWxsCj4+IHJlcXVpcmUgYSBnbG9iYWwgbGltaXQgdG8gcHJldmVudCBhIGNvbmNlcnRlZCBhdHRh
-Y2sgZnJvbSBtdWx0aXBsZQo+PiBndWVzdHMgdG8gYXZvaWQgRG9TaW5nIHRoZSBzeXN0ZW0uCj4+
-Cj4+IERlYnVnIHZzIHVuaWxhdGVyYWwgaXMgeW91ciBwcmVyb2dhdGl2ZSBhcyBhIG1haW50YWlu
-ZXIsIGJ1dCBhcyB5b3UndmUKPj4gc2FpZCB5b3Vyc2VsZiwgdGhlIGFyZSB1c2VkIGZvciBkZWJ1
-Z2dpbmcgcHVycG9zZXMsIHdoaWNoIHByb3ZlcyBteQo+PiBwb2ludC4KPgo+IFNvIG9uIHg4Niwg
-eW91IGFsd2F5cyByZXF1ZXN0IHRoZSB1c2VyIHRvIHJlcHJvZHVjZSBpdCB3aXRoIGRlYnVnCj4g
-YnVpbGQgZW5hYmxlPwoKVGhhdCBpcyB2ZXJ5IHNwZWNpZmljIHRvIHdoYXQgZ29lcyB3cm9uZywg
-YnV0IG5vLCB3ZSBnZW5lcmFsbHkgZG9uJ3QKaGF2ZSByZWxlYXNlLWJ1aWxkIG1lc3NhZ2VzIGZv
-ciAidGhlIGd1ZXN0IHNjcmV3ZWQgdXAgYW5kIHdlIGhpdCBpdApleHBlY3RlZCB3YXkgZm9yIGRv
-aW5nIHNvIi7CoCBXZSBkbyAod2VsbCAtIGFyZSB0cnlpbmcgdG8sIHdoaWNoIGlzIGhvdyBJCmZv
-dW5kIHRoaXMgZG9tYWluX2NyYXNoX3N5bmMgaXNzdWUgaW4gdGhlIGZpcnN0IHBsYWNlKSBnZXQg
-Y29uc2lzdGVudCBhdApwcmludGluZyB1c2VmdWwgcmVsZWFzZS1idWlsZCBtZXNzYWdlcyBmb3Ig
-YWJub3JtYWwgdGVybWluYXRpb24gb2YgdGhlCmd1ZXN0LgoKSW4gdGVybXMgb2YgbWFraW5nIGl0
-IGVhc2llciB0byBkZWJ1ZywgWGVuU2VydmVyIGFsd2F5cyBzaGlwcyB3aXRoIGEKcmVsZWFzZSBh
-bmQgZGVidWcgaHlwZXJ2aXNvciBidWlsdCBmcm9tIHRoZSBzYW1lIHNvdXJjZSBzbyBjdXN0b21l
-cnMgY2FuCnRyaXZpYWxseSBzd2l0Y2ggaW50byB0aGUgZGVidWcgdmVyc2lvbiBhbmQgY29sbGVj
-dCBsb2dzIGlmIHdlIHRoaW5rCnRoYXQgaXMgYSB1c2VmdWwgdGhpbmcgdG8gZG8sIGJ1dCB0aGlz
-IGlzIG9ubHkgdXNlZCBpbiBhIGZyYWN0aW9uIG9mCmNhc2VzIGluIHRoZSBmaXJzdCBwbGFjZS4K
-CkFueXRoaW5nIG1vcmUgY29tcGxpY2F0ZWQgaXMgZGVmaW5pdGVseSBnb2luZyB0byByZXF1aXJl
-IGFuIGV4cGVyaWVuY2VkCmh1bWFuIHRvIGludmVzdGlnYXRlLCBhdCB3aGljaCBwb2ludCB0aGV5
-IGNhbiBkbyB3aGF0ZXZlciB0aGV5IHdhbnQuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-253457304-1517339557=:11958
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1801301113182.11958@sstabellini-ThinkPad-X260>
+
+On Tue, 30 Jan 2018, Julien Grall wrote:
+> Hi,
+> 
+> On 30/01/18 18:29, Andrew Cooper wrote:
+> > On 30/01/18 17:00, Julien Grall wrote:
+> > > 
+> > > 
+> > > On 30/01/18 16:38, Andrew Cooper wrote:
+> > > > On 30/01/18 16:14, Julien Grall wrote:
+> > > > > Hi all,
+> > > > > 
+> > > > > This small series replaces all call to domain_crash_synchronous by
+> > > > > injecting
+> > > > > an exception to the guest.
+> > > > > 
+> > > > > This will result to a nicer trace from the guest (no need to
+> > > > > manually walk
+> > > > > the stack) and give a chance to the guest to give a bit more
+> > > > > information on
+> > > > > what it was doing.
+> > > > > 
+> > > > > Cheers,
+> > > > > 
+> > > > > Julien Grall (3):
+> > > > >     xen/arm: io: Distinguish unhandled IO from aborted one
+> > > > >     xen/arm: Don't crash domain on bad MMIO emulation
+> > > > >     xen/arm: Don't crash the domain on invalid HVC immediate
+> > > > 
+> > > > Thanks.
+> > > > 
+> > > > I don't feel qualified to review these, but some notes.
+> > > > 
+> > > > Patch 1.  s/avodi/avoid/ in the commit message
+> > > > 
+> > > > Patches 2 and 3.  You probably want to convert the printks to
+> > > > gdprintk()s, otherwise guests can choke up the ratelimited log.  Doing
+> > > > so will also mean that the vcpu will be identified consistently, which
+> > > > it isn't currently.
+> > > We didn't use g*printk because it would be more confusing to print the
+> > > current vCPU in some cases (e.g when accessing the re-distributor of
+> > > another vCPU) or does not matter (e.g for ITS).
+> > 
+> > In the former case, you'd want to print both current, and the target
+> > vcpu.  The latter still matters what current is if something goes wrong.
+> > 
+> > We have plenty of similar cases in x86, but at the point you are
+> > printing an diagnostic message, ignoring current is almost always the
+> > wrong think to do.
+> 
+> I will look at it on another series.
+> 
+> > 
+> > > 
+> > > The problem with the debug version is those information are actually
+> > > quite useful in non-debug build. We found quite a few issues thanks to
+> > > them.
+> > > 
+> > > I think it would make more sense for Xen to provide per-guest
+> > > ratelimited than hiding those messages in non-debug build.
+> > 
+> > Per guest is quite a lot more complicated than global, and would still
+> > require a global limit to prevent a concerted attack from multiple
+> > guests to avoid DoSing the system.
+> > 
+> > Debug vs unilateral is your prerogative as a maintainer, but as you've
+> > said yourself, the are used for debugging purposes, which proves my point.
+> 
+> So on x86, you always request the user to reproduce it with debug build
+> enable?
+> 
+> Stefano, what's your opinion here?
+
+I think it would be great to have per-guest rate limiting.
+
+On ARM, it would be impossible to ask users to repro with debug enabled,
+given that many deployments are embedded (set-top boxes, etc).
+
+I think it is OK to keep the XENLOG_DEBUG, they should be filtered out
+by loglvl. But we need to be careful about the others. We might want to
+convert the XENLOG_WARNING in traps.c to XENLOG_DEBUG: they are warning
+about guests misbehaving, but from the hypervisor point of view, it's not
+a problem, guests can shoot themselves if they want to; it's OK.
+--8323329-253457304-1517339557=:11958
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-253457304-1517339557=:11958--
