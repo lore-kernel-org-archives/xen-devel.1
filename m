@@ -1,21 +1,18 @@
 From: Julien Grall <julien.grall@linaro.org>
-Subject: Re: [PATCH 4/7] xen/arm32: Add skeleton to harden
- branch predictor aliasing attacks
-Date: Wed, 31 Jan 2018 15:29:30 +0000
-Message-ID: <e146fe16-5998-82e8-0722-952e4823582c@linaro.org>
+Subject: Re: [PATCH 5/7] xen/arm32: Invalidate BTB on guest exit
+ for Cortex A17 and 12
+Date: Wed, 31 Jan 2018 15:31:27 +0000
+Message-ID: <96795592-24af-f0fa-d13c-15fb69c656cb@linaro.org>
 References: <20180119134103.3390-1-julien.grall@linaro.org>
- <20180119134103.3390-5-julien.grall@linaro.org>
- <alpine.DEB.2.10.1801241545580.6440@sstabellini-ThinkPad-X260>
- <bc492613-35a6-57ad-41e4-b024429549eb@linaro.org>
- <alpine.DEB.2.10.1801251042590.11958@sstabellini-ThinkPad-X260>
- <be044a8e-aa82-ffbe-3b6e-386ce5d91177@linaro.org>
- <alpine.DEB.2.10.1801251136070.11958@sstabellini-ThinkPad-X260>
- <ec7f0351-372f-cbfc-1a9b-7b203d5eb0e0@linaro.org>
+ <20180119134103.3390-6-julien.grall@linaro.org>
+ <alpine.DEB.2.10.1801241559160.6440@sstabellini-ThinkPad-X260>
+ <f30b7ab4-bcbf-26bd-f874-693fd6f2cd67@linaro.org>
+ <alpine.DEB.2.10.1801251135170.11958@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <ec7f0351-372f-cbfc-1a9b-7b203d5eb0e0@linaro.org>
+In-Reply-To: <alpine.DEB.2.10.1801251135170.11958@sstabellini-ThinkPad-X260>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -29,20 +26,14 @@ To: Stefano Stabellini <sstabellini@kernel.org>
 Cc: andre.przywara@linaro.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAyNi8wMS8xOCAxNjoyMSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+PiAiVGhlcmVmb3JlIGh5
-cGVydmlzb3IgY29kZSBydW5uaW5nIHdpdGggZ3Vlc3QgdmVjdG9ycyB0YWJsZSBzaG91bGQgYmUK
-Pj4gbWluaW1pemVkIGFuZCBhbHdheXMgaGF2ZSBpbnRlcnJ1cHRzIGFuZCBhc3luYyBhYm9ydHMg
-bWFza2VkIHRvIHJlZHVjZQo+PiB0aGUgcmlzayB0byB1c2UgdGhlbS4iCj4+Cj4+IERvIHlvdSB0
-aGluayB0aGF0IGl0IGlzIGNsZWFyZXI/Cj4gCj4gV2VsbCwgdGhhdCB3YXMgY292ZXJlZCBieSAi
-aW50ZXJydXB0cyIuIElmIHlvdSBsb29rIGF0IHRoZSBBcm0gQXJtLCBBLCAKPiBJLCBGIGFyZSBj
-b25zaWRlcmVkIGFsbCBpbnRlcnJ1cHRzLgoKSSByZXdvcmtlZCB0aGUgcGFyYWdyYXBoIGFuZCBp
-dCBpcyBub3c6CgoiSG93ZXZlciwgb24gYXJtMzIsIGVhY2ggdmVjdG9yIGNvbnRhaW4gYSBzaW5n
-bGUgaW5zdHJ1Y3Rpb24uIFRoaXMgbWVhbnMgCnRoYXQgdGhlIGhhcmRlbmVkIHZlY3RvciB0YWJs
-ZXMgbWF5IHJlbHkgb24gdGhlIHN0YXRlIG9mIHJlZ2lzdGVycyB0aGF0IApkb2VzIG5vdCBob2xk
-IHdoZW4gaW4gdGhlIGh5cGVydmlzb3IgKGUuZyBTUCBpcyA4IGJ5dGVzIGFsaWduZWQpLiAKVGhl
-cmVmb3JlIGh5cGVydmlzb3IgY29kZSBydW5uaW5nIHdpdGggZ3Vlc3QgdmVjdG9ycyB0YWJsZSBz
-aG91bGQgYmUKbWluaW1pemVkIGFuZCBhbHdheXMgaGF2ZSBJUlEgYW5kIFNFcnJvciBtYXNrZWQg
-dG8gcmVkdWNlIHRoZSByaXNrIHRvIAp1c2UgdGhlbS4iCgpDaGVlcnMsCgoKLS0gCkp1bGllbiBH
-cmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGkgU3RlZmFubywKCk9uIDI1LzAxLzE4IDE5OjM1LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6
+Cj4+IFRoaXMgbWVhbnMgdGhhdCBibmUgd2lsbCBicmFuY2ggb25seSB3aGVuIGJpdCAyIGlzIHNl
+dC4gU28gdGhlIG9ubHkgd2F5IHRvIGVuZAo+PiBoZXJlIGlzIGJlY2F1c2UgdGhlIGZpcnN0IDMt
+Yml0IGFyZSBlcXVhbCB0byAweDAwWC4gVGhpcyBjb3JyZXNwb25kcyB0bwo+PiBJUlEvRklRIHZl
+Y3Rvci4KPiAKPiBJIGdvdCBpdCB0aGUgb3RoZXIgd2F5IGFyb3VuZCwgdGhhbmtzIGZvciB0aGUg
+ZXhwbGFuYXRpb24gOi0pCj4gCj4gU2lnbmVkLW9mZi1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxz
+c3RhYmVsbGluaUBrZXJuZWwub3JnPgoKRGlkIHlvdSBtZWFuIFJldmlld2VkLWJ5IG9yIEFja2Vk
+LWJ5PwoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
