@@ -1,19 +1,19 @@
-From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
 Subject: Re: Xen 4.11 Development Update
-Date: Wed, 31 Jan 2018 09:17:49 +0000
-Message-ID: <20180131091749.2chb53i3wpe2kadl@MacBook-Pro-de-Roger.local>
+Date: Wed, 31 Jan 2018 09:18:22 +0000
+Message-ID: <541db1ff-90cd-d925-d630-dba5cbf3ea51@citrix.com>
 References: <20180131065751.30204-1-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=orvy=e2=citrix.com=prvs=56287adec=roger.pau@srs-us1.protection.inumbo.net>)
- id 1egoWl-0008Hg-5P
- for xen-devel@lists.xenproject.org; Wed, 31 Jan 2018 09:17:59 +0000
-Content-Disposition: inline
+ <srs0=y0vh=e2=citrix.com=prvs=562ead7b8=ross.lagerwall@srs-us1.protection.inumbo.net>)
+ id 1egoXH-0008JH-0H
+ for xen-devel@lists.xenproject.org; Wed, 31 Jan 2018 09:18:31 +0000
 In-Reply-To: <20180131065751.30204-1-jgross@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,11 +26,16 @@ To: Juergen Gross <jgross@suse.com>
 Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKYW4gMzEsIDIwMTggYXQgMDc6NTc6NTFBTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3
-cm90ZToKPiA9PT0geDg2ID09PSAKCiogIFBDSSBjb25maWcgc3BhY2UgZW11bGF0aW9uIGluIFhl
-biBmb3IgUFZIIERvbTAgKHY4KQogICAgLSAgUm9nZXIgUGF1IE1vbm7DqQoKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE4LTAxL21zZzAyMDQy
-Lmh0bWwKClRoYW5rcywgUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+T24gMDEvMzEvMjAxOCAwNjo1NyBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBUaGlzIGVtYWls
+IG9ubHkgdHJhY2tzIGJpZyBpdGVtcyBmb3IgeGVuLmdpdCB0cmVlLiBQbGVhc2UgcmVwbHkgZm9y
+IGl0ZW1zIHlvdQo+IHdvdWxkIGxpa2UgdG8gc2VlIGluIDQuMTEgc28gdGhhdCBwZW9wbGUgaGF2
+ZSBhbiBpZGVhIHdoYXQgaXMgZ29pbmcgb24gYW5kCj4gcHJpb3JpdGlzZSBhY2NvcmRpbmdseS4K
+PiAKc25pcD4KPiAqICBNaXRpZ2F0aW9ucyBmb3IgU1AyL0NWRS0yMDE3LTU3MTUvQnJhbmNoIFRh
+cmdldCBJbmplY3Rpb24gKHY3KQo+ICAgIC0gIEFuZHJldyBDb29wZXIKPiAKPiAqICBWaXhlbjog
+QSBQVi1pbi1IVk0gc2hpbSAodjMpCj4gICAgLSAgQW50aG9ueSBMaWd1b3JpCj4gCj4gKiAgQWRk
+IGRtb3BzIHRvIGFsbG93IHVzZSBvZiBWR0Egd2l0aCByZXN0cmljdGVkIFFFTVUgKHYzKQo+ICAg
+IC0gIFJvc3MgTGFnZXJ3YWxsCgp2NCBoYXMgYmVlbiBzZW50IGFuZCBjb21taXR0ZWQuCgpUaGFu
+a3MsCi0tIApSb3NzIExhZ2Vyd2FsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
