@@ -1,15 +1,22 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 118472: all pass - PUSHED
-Date: Wed, 31 Jan 2018 10:13:11 +0000
-Message-ID: <osstest-118472-mainreport@xen.org>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 4/4] x86: avoid double CR3 reload when
+ switching to guest user mode
+Date: Wed, 31 Jan 2018 03:12:59 -0700
+Message-ID: <5A71A4BB02000078001A3F1B@prv-mh.provo.novell.com>
+References: <5A671D6D02000078001A17B7@prv-mh.provo.novell.com>
+ <5A671ECC02000078001A17CA@prv-mh.provo.novell.com>
+ <ca473293-3e58-dc3e-8217-5621d3525870@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7899575583754182508=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=emza=e2=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1egpOK-0004Vy-8W
- for xen-devel@lists.xenproject.org; Wed, 31 Jan 2018 10:13:20 +0000
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=xytx=e2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1egpO3-0004Tt-5V
+ for xen-devel@lists.xenproject.org; Wed, 31 Jan 2018 10:13:03 +0000
+In-Reply-To: <ca473293-3e58-dc3e-8217-5621d3525870@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,73 +25,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7899575583754182508==
-Content-Type: text/plain
-
-flight 118472 xen-unstable-coverity real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118472/
-
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xen                  16a31ca735165e63d67e86f60996f2b6a31cc0ee
-baseline version:
- xen                  4c7e478d597b0346eef3a256cfd6794ac778b608
-
-Last test of basis   118414  2018-01-28 09:18:47 Z    3 days
-Testing same since   118472  2018-01-31 09:19:44 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andre Przywara <andre.przywara@arm.com>
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Christian Lindig <christian.lindig@citrix.com>
-  Daniel De Graaf <dgdegra@tycho.nsa.gov>
-  Ian Jackson <ian.jackson@eu.citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Julien Grall <julien.grall@linaro.org>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- coverity-amd64                                               pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   4c7e478d59..16a31ca735  16a31ca735165e63d67e86f60996f2b6a31cc0ee -> coverity-tested/smoke
-
-
---===============7899575583754182508==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7899575583754182508==--
+Pj4+IE9uIDMwLjAxLjE4IGF0IDE1OjI5LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMjMvMDEvMTggMTA6MzgsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBXaGVuIFhQVEkg
+aXMgYWN0aXZlLCB0aGUgQ1IzIGxvYWQgaW4gcmVzdG9yZV9hbGxfZ3Vlc3QgaXMgc3VmZmljaWVu
+dAo+PiB3aGVuIHN3aXRjaGluZyB0byB1c2VyIG1vZGUsIGltcHJvdmluZyBpbiBwYXJ0aWN1bGFy
+IHN5c3RlbSBjYWxsIGFuZAo+PiBwYWdlIGZhdWx0IGV4aXQgcGF0aHMgZm9yIHRoZSBndWVzdC4K
+Pj4KPj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+IAo+
+IFdoaWxlIEkgY2FuIHNlZSB0aGUgdXRpbGl0eSBvZiB0aGlzLCB3ZSBhcmUgc3RhcnRpbmcgdG8g
+Z2V0IGludG8KPiBjb21wbGljYXRlZCB0ZXJyaXRvcnkgYXMgdG8gd2hpY2ggY3IzIGlzIGxvYWRl
+ZC4gIEFsc28sIHRoZSBuYW1lCj4gInRvZ2dsZSIgaXMgbm8gbG9uZ2VyIHN0cmljdGx5IGFjY3Vy
+YXRlLgoKWWVzLCB0aGUgIndoaWNoIENSMyBpcyBsb2FkZWQiIGlzIG5vdCB2ZXJ5IG5pY2UgYSBz
+aXR1YXRpb24uIEkKd291bGRuJ3QgbWluZCB0aGlzIGJlaW5nIGRyb3BwZWQgdW5sZXNzIGl0IGNh
+biBiZSBwcm92ZW4gYnkKc29tZW9uZSBlbHNlIHRvIGhhdmUgbW9yZSB0aGFuIGp1c3QgYSBwcmV0
+dHkgbWFyZ2luYWwgZWZmZWN0LgpUaGUgb25lIHBhdGNoIGZyb20gdGhpcyBzZXJpZXMgSSBjZXJ0
+YWlubHkgd2FudCB0byBzZWUgZ28gaW4gaXMKcGF0Y2ggMiAod2l0aCB3aGF0ZXZlciBhZGp1c3Rt
+ZW50cyBhcmUgbmVjZXNzYXJ5KTsgYWxsIHRoZQpvdGhlcnMgYXJlIG1vcmUgb3IgbGVzcyBvcHRp
+b25hbCwgYnV0IEkgc3RpbGwgd2FudGVkIHRvIHBvc3QKdGhlbS4KCkFzIHRvICJ0b2dnbGUiIGlu
+IHRoZSBuYW1lIC0gdGhlIGZ1bmN0aW9uIHN0aWxsIHRvZ2dsZXMgcGFnZQp0YWJsZXMgaW4gYWxs
+IGNhc2VzIChpbiB0aGUgc2Vuc2Ugb2Ygd2hhdCdzIHN0b3JlZCBpbiB2LT5hcmNoLmNyMyk7Cml0
+IGp1c3QgZG9lc24ndCBuZWNlc3NhcmlseSBhbHNvIGxvYWQgdGhhdCB2YWx1ZSBpbnRvIENSMy4K
+Cj4gVGhhdCBiZWluZyBzYWlkLCBhbGwgb2YgdGhlc2UgaGVscGVycyBhcmUgb25seSB1c2VkIGlu
+IHN5bmNocm9ub3VzCj4gY29udGV4dHMgYXMgZmFyIGFzIEkgY2FuIHRlbGwsIHNvIHNvbWUgQVNT
+RVJUKCFpbl9pcnEoKSkgd291bGQgcHJvYmFibHkKPiBnbyBhIGxvbmcgd2F5LgoKSSBjYW4gY2Vy
+dGFpbmx5IGRvIHRoYXQuCgo+PiAtLS0gYS94ZW4vYXJjaC94ODYvcHYvZG9tYWluLmMKPj4gKysr
+IGIveGVuL2FyY2gveDg2L3B2L2RvbWFpbi5jCj4+IEBAIC0yMjAsMTAgKzIyMCwyMCBAQCBpbnQg
+cHZfZG9tYWluX2luaXRpYWxpc2Uoc3RydWN0IGRvbWFpbiAqCj4+ICAgICAgcmV0dXJuIHJjOwo+
+PiAgfQo+PiAgCj4+IC1zdGF0aWMgdm9pZCBfdG9nZ2xlX2d1ZXN0X3B0KHN0cnVjdCB2Y3B1ICp2
+KQo+PiArc3RhdGljIHZvaWQgX3RvZ2dsZV9ndWVzdF9wdChzdHJ1Y3QgdmNwdSAqdiwgYm9vbCBm
+b3JjZV9jcjMpCj4+ICB7Cj4+ICAgICAgdi0+YXJjaC5mbGFncyBePSBURl9rZXJuZWxfbW9kZTsK
+Pj4gICAgICB1cGRhdGVfY3IzKHYpOwo+PiArCj4+ICsgICAgLyoKPj4gKyAgICAgKiBUaGVyZSdz
+IG5vIG5lZWQgdG8gbG9hZCBDUjMgaGVyZSB3aGVuIGl0IGlzIGdvaW5nIHRvIGJlIGxvYWRlZCBv
+biB0aGUKPj4gKyAgICAgKiB3YXkgb3V0IHRvIGd1ZXN0IG1vZGUgYWdhaW4gYW55d2F5LCBhbmQg
+d2hlbiB0aGUgcGFnZSB0YWJsZXMgd2UncmUKPj4gKyAgICAgKiBjdXJyZW50bHkgb24gYXJlIHRo
+ZSBrZXJuZWwgb25lcyAod2hlcmVhcyB3aGVuIHN3aXRjaGluZyB0byBrZXJuZWwKPj4gKyAgICAg
+KiBtb2RlIHdlIG5lZWQgdG8gYmUgYWJsZSB0byB3cml0ZSBhIGJvdW5jZSBmcmFtZSBvbnRvIHRo
+ZSBrZXJuZWwgc3RhY2spLgo+PiArICAgICAqLwo+PiArICAgIGlmICggIWZvcmNlX2NyMyAmJiAh
+KHYtPmFyY2guZmxhZ3MgJiBURl9rZXJuZWxfbW9kZSkgKQo+PiArICAgICAgICByZXR1cm47Cj4+
+ICsKPj4gICAgICAvKiBEb24ndCBmbHVzaCB1c2VyIGdsb2JhbCBtYXBwaW5ncyBmcm9tIHRoZSBU
+TEIuIERvbid0IHRpY2sgVExCIGNsb2NrLiAqLwo+PiAgICAgIGFzbSB2b2xhdGlsZSAoICJtb3Yg
+JTAsICUlY3IzIiA6IDogInIiICh2LT5hcmNoLmNyMykgOiAibWVtb3J5IiApOwo+PiAgCj4+IEBA
+IC0yNTMsMTMgKzI2MywxMyBAQCB2b2lkIHRvZ2dsZV9ndWVzdF9tb2RlKHN0cnVjdCB2Y3B1ICp2
+KQo+PiAgICAgIH0KPj4gICAgICBhc20gdm9sYXRpbGUgKCAic3dhcGdzIiApOwo+PiAgCj4+IC0g
+ICAgX3RvZ2dsZV9ndWVzdF9wdCh2KTsKPj4gKyAgICBfdG9nZ2xlX2d1ZXN0X3B0KHYsIGNwdV9o
+YXNfbm9feHB0aSk7Cj4+ICB9Cj4+ICAKPj4gIHZvaWQgdG9nZ2xlX2d1ZXN0X3B0KHN0cnVjdCB2
+Y3B1ICp2KQo+PiAgewo+PiAgICAgIGlmICggIWlzX3B2XzMyYml0X3ZjcHUodikgKQo+PiAtICAg
+ICAgICBfdG9nZ2xlX2d1ZXN0X3B0KHYpOwo+PiArICAgICAgICBfdG9nZ2xlX2d1ZXN0X3B0KHYs
+IHRydWUpOwo+IAo+IFRoaXMgY2FuIGJlIGNvbnZlcnRlZCBhcyB3ZWxsLiAgVGhlIG9ubHkgY2Fs
+bGVycyBhcmUgdGhlIExEVC1mYXVsdCBhbmQKPiBJL08gcGVybSBjaGVjaywgYm90aCB3aGVuIHdl
+IGFyZSBjdXJyZW50bHkgb24gdXNlciBwYWdldGFibGVzLCBuZWVkaW5nCj4gdG8gc3dpdGNoIHRv
+IGtlcm5lbCBicmllZmx5LCB0aGVuIGJhY2sgdG8gdXNlci4KCkNvbnZlcnRlZCB0byB3aGF0PyBU
+aG9zZSBjb2RlIHBhdGhzIGNlcnRhaW5seSBuZWVkIENSMyB0byBiZQp3cml0dGVuLCBvciBlbHNl
+IHRoZSBhY3R1YWwgbWVtb3J5IGFjY2Vzc2VzIHdpbGwgZmFpbC4KCj4gSG93ZXZlciwgaXQgd291
+bGQgYmUgYmV0dGVyIHRvIGRyb3AgdGhlIHBhcmFtZXRlciBhbmQgZmVlZAo+IGNwdV9oYXNfbm9f
+eHB0aSBpbnRvIHRoZSBjb25kaXRpb25hbCBhYm92ZSB3aGljaCBleHBsYWlucyB3aHkgaXQgaXMg
+c2FmZQo+IHRvIGRvLgoKQXMgYSByZXN1bHQsIEkgYWxzbyBkb24ndCB1bmRlcnN0YW5kIHRoaXMg
+cGFydC4KCkphbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
