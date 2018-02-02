@@ -1,21 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v3 19/25] x86emul: tell cmpxchg hook whether
- LOCK is in effect
-Date: Fri, 2 Feb 2018 14:13:46 +0000
-Message-ID: <55838748-9d9a-1478-fc8a-445cda40096c@citrix.com>
-References: <5A29550C020000780019585B@prv-mh.provo.novell.com>
- <5A295ACD0200007800195985@prv-mh.provo.novell.com>
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
+Subject: Re: Compatible string for psci node: v1.0?
+Date: Fri, 2 Feb 2018 15:15:16 +0100
+Message-ID: <CAKPH-NikaLTu3nKuwoVpPdm5YtWkyDWhn+vAccsXn77kPy9=_g@mail.gmail.com>
+References: <a4f01561-a2b9-abcd-c996-c04d762d3e72@aggios.com>
+ <0e2aff9a-82c4-8c6c-c05b-5a4fc274640f@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8976314890134116735=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=g0dj=e4=citrix.com=prvs=564f8cbd0=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ehc6D-0007gQ-T2
- for xen-devel@lists.xenproject.org; Fri, 02 Feb 2018 14:13:53 +0000
-In-Reply-To: <5A295ACD0200007800195985@prv-mh.provo.novell.com>
-Content-Language: en-GB
+ <srs0=tqnm=e4=aggios.com=mirela.simonovic@srs-us1.protection.inumbo.net>)
+ id 1ehc7c-0007qp-6P
+ for xen-devel@lists.xenproject.org; Fri, 02 Feb 2018 14:15:20 +0000
+Received: by mail-qt0-x231.google.com with SMTP id z10so31046351qti.5
+ for <xen-devel@lists.xenproject.org>; Fri, 02 Feb 2018 06:15:18 -0800 (PST)
+In-Reply-To: <0e2aff9a-82c4-8c6c-c05b-5a4fc274640f@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,14 +23,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Tim Deegan <tim@xen.org>
+To: Julien Grall <julien.grall@arm.com>
+Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, xen-devel <xen-devel@lists.xenproject.org>, Davorin Mista <davorin.mista@aggios.com>, Stefano Stabellini <sstabellini@kernel.org>, parth.dixit@linaro.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDcvMTIvMTcgMTQ6MTQsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFRoaXMgaXMgbmVjZXNzYXJ5
-IGZvciB0aGUgaG9vayB0byBjb3JyZWN0bHkgcGVyZm9ybSB0aGUgb3BlcmF0aW9uLgo+Cj4gU2ln
-bmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKUmV2aWV3ZWQtYnk6
-IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============8976314890134116735==
+Content-Type: multipart/alternative; boundary="f4f5e80afa4880d00605643b575f"
+
+--f4f5e80afa4880d00605643b575f
+Content-Type: text/plain; charset="UTF-8"
+
+Hi Julien,
+
+Thanks, it looks like the issue was with the way I verified this - cat on
+/sys/firmware/devicetree/base/psci/compatible from dom0's console returns
+only the first compatible string set by Xen no matter what.
+I have verified by debugging that linux finds the right compatible string
+in psci_dt_init().
+
+Thanks,
+Mirela
+
+On Thu, Feb 1, 2018 at 8:12 PM, Julien Grall <julien.grall@arm.com> wrote:
+
+> On 01/02/18 19:00, Mirela Simonovic wrote:
+>
+>> Hi,
+>>
+>
+> Hi Mirela,
+>
+>
+>>
+>> I'm working on switching to PSCI v1.0 in Xen (needed to support suspend
+>> > to RAM).
+>>
+>
+> I am about to send a series to add support for PSCI 1.1 (I need it for the
+> spectre mitigation). I can send you a temporary branch if you want to see
+> whether I missed anything.
+>
+>
+>> In addition to updates in PSCI implementation, we assumed that compatible
+>> property in psci device tree node should be extended with "arm,psci-1.0"
+>> (not a must since this doesn't affect Dom0's functionality today, but I
+>> would add it if possible).
+>>
+>> Could you please let me know how to add "arm,psci-1.0" to compatible
+>> property?
+>>
+>> I assumed that in domain_build.c in make_psci_node() function I need to
+>> add "arm,psci-1.0""\0" at the beginning of 'compat' string (although I
+>> don't understand the "\0"). That doesn't seem to work. Only "arm,psci-1.0"
+>> ends up in compatible property and we need strings for older versions as
+>> well.
+>> I also noticed that even "arm,psci" doesn't appear to be added into the
+>> compatible property (without any code modifications from my side). I
+>> checked what is generated by debugging and by 'cat' on
+>> /sys/firmware/devicetree/base/psci/compatible from Dom0's console.
+>>
+>
+> From the DT specification, each compatible string should be separated by
+> '\0'. Doing a hexdump -C in the hardware domain I can see that both
+> arm,psci and arm,psci-0.2 are present on latest Xen. So I am not sure why
+> it would not be present on your side.
+>
+> BTW, if you use printk, only the first compatible will be printed (printk
+> stop at the '\0').
+>
+> Cheers,
+>
+> --
+> Julien Grall
+>
+
+--f4f5e80afa4880d00605643b575f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi Julien,<div><br></div><div>Thanks, it looks like the is=
+sue was with the way I verified this - cat on /sys/firmware/devicetree/base=
+/psci/compatible from dom0&#39;s console returns only the first compatible =
+string set by Xen no matter what.</div><div>I have verified by debugging th=
+at linux finds the right compatible string in psci_dt_init().</div><div><br=
+></div><div>Thanks,</div><div>Mirela</div></div><div class=3D"gmail_extra">=
+<br><div class=3D"gmail_quote">On Thu, Feb 1, 2018 at 8:12 PM, Julien Grall=
+ <span dir=3D"ltr">&lt;<a href=3D"mailto:julien.grall@arm.com" target=3D"_b=
+lank">julien.grall@arm.com</a>&gt;</span> wrote:<br><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-le=
+ft:1ex">On 01/02/18 19:00, Mirela Simonovic wrote:<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex">
+Hi,<br>
+</blockquote>
+<br>
+Hi Mirela,<span class=3D""><br>
+<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex">
+<br>
+<br>
+I&#39;m working on switching to PSCI v1.0 in Xen (needed to support suspend=
+=C2=A0 &gt; to RAM).<br>
+</blockquote>
+<br></span>
+I am about to send a series to add support for PSCI 1.1 (I need it for the =
+spectre mitigation). I can send you a temporary branch if you want to see w=
+hether I missed anything.<span class=3D""><br>
+<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex">
+<br>
+In addition to updates in PSCI implementation, we assumed that compatible p=
+roperty in psci device tree node should be extended with &quot;arm,psci-1.0=
+&quot; (not a must since this doesn&#39;t affect Dom0&#39;s functionality t=
+oday, but I would add it if possible).<br>
+<br>
+Could you please let me know how to add &quot;arm,psci-1.0&quot; to compati=
+ble property?<br>
+<br>
+I assumed that in domain_build.c in make_psci_node() function I need to add=
+ &quot;arm,psci-1.0&quot;&quot;\0&quot; at the beginning of &#39;compat&#39=
+; string (although I don&#39;t understand the &quot;\0&quot;). That doesn&#=
+39;t seem to work. Only &quot;arm,psci-1.0&quot; ends up in compatible prop=
+erty and we need strings for older versions as well.<br>
+I also noticed that even &quot;arm,psci&quot; doesn&#39;t appear to be adde=
+d into the compatible property (without any code modifications from my side=
+). I checked what is generated by debugging and by &#39;cat&#39; on /sys/fi=
+rmware/devicetree/base/<wbr>psci/compatible from Dom0&#39;s console.<br>
+</blockquote>
+<br></span>
+>From the DT specification, each compatible string should be separated by &#=
+39;\0&#39;. Doing a hexdump -C in the hardware domain I can see that both a=
+rm,psci and arm,psci-0.2 are present on latest Xen. So I am not sure why it=
+ would not be present on your side.<br>
+<br>
+BTW, if you use printk, only the first compatible will be printed (printk s=
+top at the &#39;\0&#39;).<br>
+<br>
+Cheers,<span class=3D"HOEnZb"><font color=3D"#888888"><br>
+<br>
+-- <br>
+Julien Grall<br>
+</font></span></blockquote></div><br></div>
+
+--f4f5e80afa4880d00605643b575f--
+
+
+--===============8976314890134116735==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8976314890134116735==--
