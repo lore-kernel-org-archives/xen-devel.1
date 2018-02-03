@@ -1,17 +1,18 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Subject: Re: [PATCH 3/3] x86/svm: correct EFER.SVME intercept
 	checks
-Date: Sat, 3 Feb 2018 17:10:14 +0000
-Message-ID: <b79c8792-0b4a-8ad4-52cd-ea0b7e4c23c7@citrix.com>
+Date: Sat, 3 Feb 2018 12:15:42 -0500
+Message-ID: <a3fbe0dd-0038-eecd-3fd9-0198f61066f4@oracle.com>
 References: <20180131203525.21660-1-brian.woods@amd.com>
  <20180131203525.21660-4-brian.woods@amd.com>
  <3afd1271-ae0c-7d44-0afe-0474c86b568c@oracle.com>
+ <b79c8792-0b4a-8ad4-52cd-ea0b7e4c23c7@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <3afd1271-ae0c-7d44-0afe-0474c86b568c@oracle.com>
-Content-Language: en-GB
+In-Reply-To: <b79c8792-0b4a-8ad4-52cd-ea0b7e4c23c7@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,18 +21,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, xen-devel@lists.xen.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Brian Woods <brian.woods@amd.com>, xen-devel@lists.xen.org
 Cc: Jan Beulich <jbeulich@suse.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDMvMDIvMTggMTc6MDMsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPgo+Cj4gT24gMDEvMzEv
-MjAxOCAwMzozNSBQTSwgQnJpYW4gV29vZHMgd3JvdGU6Cj4+IENvcnJlY3RzIHNvbWUgRUZFUi5T
-Vk1FIGNoZWNrcyBpbiBpbnRlcmNlcHRzLsKgIFNlZSBBTUQgQVBNIHZvbDIgc2VjdGlvbgo+PiAx
-NS40IGZvciBtb3JlIGRldGFpbHMuwqAgVk1NQ0FMTCBpc24ndCBjaGVja2VkIGR1ZSB0byBndWVz
-dHMgbmVlZGluZyBpdAo+PiB0byBib290Lgo+Pgo+Cj4gRG9uJ3QgeW91IG5lZWQgU1ZNRSBiZSBv
-biBmb3IgVk1NQ0FMTD8KCkluIHJlYWwgaGFyZHdhcmUsIHllcy4KCkhvd2V2ZXIsIGl0J3MgcXVp
-dGUgdW5yZWFzb25hYmxlIHRvIHJlcXVpcmUgdGhlIGd1ZXN0IHRvIGhhdmUgYWN0aXZhdGVkCml0
-cyBpZGVhIG9mIEVGRVIuU1ZNRSBiZWZvcmUgaXQgY2FuIG1ha2UgaHlwZXJjYWxscyA6KQoKfkFu
-ZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+CgpPbiAwMi8wMy8yMDE4IDEyOjEwIFBNLCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+IE9uIDAzLzAy
+LzE4IDE3OjAzLCBCb3JpcyBPc3Ryb3Zza3kgd3JvdGU6Cj4+Cj4+Cj4+IE9uIDAxLzMxLzIwMTgg
+MDM6MzUgUE0sIEJyaWFuIFdvb2RzIHdyb3RlOgo+Pj4gQ29ycmVjdHMgc29tZSBFRkVSLlNWTUUg
+Y2hlY2tzIGluIGludGVyY2VwdHMuwqAgU2VlIEFNRCBBUE0gdm9sMiBzZWN0aW9uCj4+PiAxNS40
+IGZvciBtb3JlIGRldGFpbHMuwqAgVk1NQ0FMTCBpc24ndCBjaGVja2VkIGR1ZSB0byBndWVzdHMg
+bmVlZGluZyBpdAo+Pj4gdG8gYm9vdC4KPj4+Cj4+Cj4+IERvbid0IHlvdSBuZWVkIFNWTUUgYmUg
+b24gZm9yIFZNTUNBTEw/Cj4gCj4gSW4gcmVhbCBoYXJkd2FyZSwgeWVzLgo+IAo+IEhvd2V2ZXIs
+IGl0J3MgcXVpdGUgdW5yZWFzb25hYmxlIHRvIHJlcXVpcmUgdGhlIGd1ZXN0IHRvIGhhdmUgYWN0
+aXZhdGVkCj4gaXRzIGlkZWEgb2YgRUZFUi5TVk1FIGJlZm9yZSBpdCBjYW4gbWFrZSBoeXBlcmNh
+bGxzIDopCgoKClJldmlld2VkLWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBv
+cmFjbGUuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
