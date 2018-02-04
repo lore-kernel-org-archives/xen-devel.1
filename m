@@ -1,8 +1,9 @@
 From: Denis Obrezkov <denisobrezkov@gmail.com>
-Subject: [GSOC] Xen on ARM: create multiple guests from device
-	tree
-Date: Sun, 4 Feb 2018 09:53:15 +0300
-Message-ID: <CAGPpAzWPXbCkAeDr=ktzq6B8CgQs8ftP8hqq=wuk8vxAwCu3Mg@mail.gmail.com>
+Subject: Re: [GSOC] Xen on ARM: create multiple guests from
+	device tree
+Date: Sun, 4 Feb 2018 10:25:15 +0300
+Message-ID: <CAGPpAzUChDHnVjjN+Rj=Ea0Ran2=my1Qm=L8FpkeSi16YFNORA@mail.gmail.com>
+References: <CAGPpAzWPXbCkAeDr=ktzq6B8CgQs8ftP8hqq=wuk8vxAwCu3Mg@mail.gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -10,10 +11,11 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=1epz=e6=gmail.com=denisobrezkov@srs-us1.protection.inumbo.net>)
- id 1eiEAw-00066l-G6
- for xen-devel@lists.xenproject.org; Sun, 04 Feb 2018 06:53:18 +0000
-Received: by mail-vk0-x236.google.com with SMTP id g83so15909011vki.4
- for <xen-devel@lists.xenproject.org>; Sat, 03 Feb 2018 22:53:16 -0800 (PST)
+ id 1eiEft-0008Ei-OW
+ for xen-devel@lists.xenproject.org; Sun, 04 Feb 2018 07:25:17 +0000
+Received: by mail-ua0-x235.google.com with SMTP id z3so16790544uae.12
+ for <xen-devel@lists.xenproject.org>; Sat, 03 Feb 2018 23:25:16 -0800 (PST)
+In-Reply-To: <CAGPpAzWPXbCkAeDr=ktzq6B8CgQs8ftP8hqq=wuk8vxAwCu3Mg@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,13 +27,16 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: sstabellini@kernel.org, julien.grall@arm.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8gYWxsLAoKSSB3b3VsZCBsaWtlIHRvIHBhcnRpY2lwYXRlIGluIEdTb0MgMjAxOCB3aXRo
-IHRoZSBwcm9qZWN0IFhlbiBvbiBBUk0KcmVsYXRlZCBwcm9qZWN0LiBJIGhhdmUgc29tZSBwcmV2
-aW91cyBleHBlcmllbmNlIHdpdGggR1NvQzoKaHR0cHM6Ly9zdW1tZXJvZmNvZGUud2l0aGdvb2ds
-ZS5jb20vYXJjaGl2ZS8yMDE3L3Byb2plY3RzLzQ3ODA2MjQ3NDk1MjcwNDAvCgpDb3VsZCB5b3Ug
-Z2l2ZSBtZSBtb3JlIGRldGFpbHMgb24gdGhlIHByb2plY3Q/CgpJIGhhdmUgUlBpMyBhbmQgQkJC
-IGJvYXJkcywgb3Igc2hvdWxkIHRoaXMgd29yayBiZSBkb25lIGluIGVtdWxhdG9yPwoKLS0gClJl
-Z2FyZHMsIERlbmlzIE9icmV6a292CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+MjAxOC0wMi0wNCA5OjUzIEdNVCswMzowMCBEZW5pcyBPYnJlemtvdiA8ZGVuaXNvYnJlemtvdkBn
+bWFpbC5jb20+Ogo+IEhlbGxvIGFsbCwKPgo+IEkgd291bGQgbGlrZSB0byBwYXJ0aWNpcGF0ZSBp
+biBHU29DIDIwMTggd2l0aCB0aGUgcHJvamVjdCBYZW4gb24gQVJNCj4gcmVsYXRlZCBwcm9qZWN0
+LiBJIGhhdmUgc29tZSBwcmV2aW91cyBleHBlcmllbmNlIHdpdGggR1NvQzoKPiBodHRwczovL3N1
+bW1lcm9mY29kZS53aXRoZ29vZ2xlLmNvbS9hcmNoaXZlLzIwMTcvcHJvamVjdHMvNDc4MDYyNDc0
+OTUyNzA0MC8KPgo+IENvdWxkIHlvdSBnaXZlIG1lIG1vcmUgZGV0YWlscyBvbiB0aGUgcHJvamVj
+dD8KPgo+IEkgaGF2ZSBSUGkzIGFuZCBCQkIgYm9hcmRzLCBvciBzaG91bGQgdGhpcyB3b3JrIGJl
+IGRvbmUgaW4gZW11bGF0b3I/Cj4KPiAtLQo+IFJlZ2FyZHMsIERlbmlzIE9icmV6a292CkkgYW0g
+YWxzbyB2ZXJ5IGludGVyZXN0ZWQgaW4gR1BVIHZpcnR1YWxpemF0aW9uIG9uIEFSTSBkZXZpY2Vz
+LgoKCi0tIApSZWdhcmRzLCBEZW5pcyBPYnJlemtvdgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
