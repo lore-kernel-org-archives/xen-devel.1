@@ -1,19 +1,17 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH] pvcalls-back: do not return error on
- inet_accept EAGAIN
-Date: Mon, 5 Feb 2018 10:01:32 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1802050953570.10160__47253.1923129738$1517853644$gmane$org@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1802021728420.10160@sstabellini-ThinkPad-X260>
- <936e4d18-3f0d-3fc5-2272-c1ad9a5c7022@oracle.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/boot: Make alternative patching NMI-safe
+Date: Mon, 5 Feb 2018 18:04:38 +0000
+Message-ID: <b4d97216-69b7-18cc-3e6c-17dc40b9cb0e@citrix.com>
+References: <1517826298-5607-1-git-send-email-andrew.cooper3@citrix.com>
+ <5A7873A402000078001A543F@prv-mh.provo.novell.com>
+ <511f8443-2f21-c288-defe-9a7dbfa91f48@citrix.com>
+ <5A78925C02000078001A55A9@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1047736138-1517853694=:10160"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=gefk=e7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1eil5E-0000q1-2E
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2018 18:01:36 +0000
-In-Reply-To: <936e4d18-3f0d-3fc5-2272-c1ad9a5c7022@oracle.com>
+In-Reply-To: <5A78925C02000078001A55A9@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,63 +20,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: jgross@suse.com, xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1047736138-1517853694=:10160
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Sun, 4 Feb 2018, Boris Ostrovsky wrote:
-> On 02/02/2018 08:34 PM, Stefano Stabellini wrote:
-> > When the client sends a regular blocking accept request, the backend is
-> > expected to return only when the accept is completed, simulating a
-> > blocking behavior, or return an error.
-> > 
-> > Specifically, on EAGAIN from inet_accept, the backend shouldn't return
-> > "EAGAIN" to the client. Instead, it should simply continue the wait.
-> > Otherwise, the client will send another accept request, which will cause
-> > another EAGAIN to be sent back, which is a waste of resources and not
-> > conforming to the expected behavior. Change the behavior by turning the
-> > "goto error" into a return.
-> > 
-> > Signed-off-by: Stefano Stabellini <stefano@aporeto.com>
-> 
-> 
-> I am looking at SYSCALL_DEFINE4(accept4) and sock->ops->accept (which *I
-> think* is inet_accept, at least in some cases) passes all errors (including
-> EAGAIN)  back to the caller. Is this a different case?
-
-Hi Boris,
-
-I didn't explain myself well. You are right that inet_accept passes all
-errors back to the caller, but this is different: not only it would be a
-waste of resources to do so, but the different behavior is specified in
-the PVCalls spec:
-
-"The backend will reply to the request only when a new connection is
-successfully accepted, i.e. the backend does not return EAGAIN or
-EWOULDBLOCK."
-
-https://xenbits.xen.org/docs/unstable/misc/pvcalls.html
-
-Look under the "Accept" sub-chapter.
-
-Cheers,
-
-Stefano
---8323329-1047736138-1517853694=:10160
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1047736138-1517853694=:10160--
+T24gMDUvMDIvMTggMTY6MjAsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDA1LjAyLjE4IGF0
+IDE2OjE2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IE9uIDA1LzAyLzE4
+IDE0OjA5LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4+IE9uIDA1LjAyLjE4IGF0IDExOjI0LCA8
+YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+Pj4gRHVyaW5nIHBhdGNoaW5nLCB0
+aGVyZSBpcyBhIHZlcnkgc2xpbSByaXNrIHRoYXQgYW4gTk1JIG9yIE1DRSBpbnRlcnJ1cHQgaW4g
+dGhlCj4+Pj4gbWlkZGxlIG9mIGFsdGVyaW5nIHRoZSBjb2RlIGluIHRoZSBOTUkvTUNFIHBhdGhz
+LCBpbiB3aGljaCBjYXNlIGJhZCB0aGluZ3MKPj4+PiB3aWxsIGhhcHBlbi4KPj4+Pgo+Pj4+IFRo
+ZSBOTUkgcmlzayBjYW4gYmUgZWxpbWluYXRlZCBieSBydW5uaW5nIHRoZSBwYXRjaGluZyBsb29w
+IGluIE5NSSBjb250ZXh0LCBhdAo+Pj4+IHdoaWNoIHBvaW50IHRoZSBDUFUgd2lsbCBkZWZlciBm
+dXJ0aGVyIE5NSXMgdW50aWwgcGF0Y2hpbmcgaXMgY29tcGxldGUuCj4+Pj4KPj4+PiBTaWduZWQt
+b2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgo+Pj4gU28g
+eW91IGNvbnRpbnVlIHRvIHRoaW5rIHRoYXQgdGhlIHJpc2sgb2YgaGl0dGluZyBhbiAjTUMgaGVy
+ZSBpcwo+Pj4gYWNjZXB0YWJsZSwgZGVzcGl0ZSB0aGVyZSBiZWluZyBhIHNvbHV0aW9uIHRvIHRo
+ZSBwcm9ibGVtLiBUbyBiZQo+Pj4gaG9uZXN0LCBJIGZpbmQgdGhpcyBhIGxpdHRsZSBzdHJhbmdl
+LiAoSSBkbyBhZ3JlZSB0aGF0IHRoZXJlJ3Mgbm8KPj4+IGdvb2Qgc29sdXRpb24gdG8gdGhlIHNp
+bWlsYXIgbGl2ZSBwYXRjaGluZyBwcm9ibGVtLikKPj4gVGhlIHJpc2sgaXMgYWxyZWFkeSBzdWZm
+aWNpZW50bHkgdGlueSB0aGF0IGluIDMgeWVhcnMsIGl0IGhhc24ndCBiZWVuCj4+IG9ic2VydmVk
+LCBub3IgZG8gSSB0aGluayBpdCBpcyBsaWtlbHkgdG8gYmUgb2JzZXJ2ZWQgaW4gdGhlIGZ1dHVy
+ZS4gIEF0Cj4+IHRoaXMgcG9pbnQgb24gYm9vdCwgdGhlcmUgaXMgbm90aGluZyBpbnRlcmVzdGlu
+ZyBzZXQgdXAsIHdoaWNoIGZ1cnRoZXIKPj4gcmVkdWNlcyB0aGUgcmlzayBvZiBhbiBNQ0UuCj4+
+Cj4+IEZ1cnRoZXJtb3JlLCB3aGV0aGVyIG9yIG5vdCBYZW4gc3Vydml2ZXMgdGhlIE1DRSAoYW5k
+IGRvbid0IGJlbGlldmUgSSd2ZQo+PiBldmVyIHNlZW4gWGVuIHN1Y2Nlc3NmdWxseSByZWNvdmVy
+IGZyb20gYW4gTUNFKSwgdGhlIGhhcmR3YXJlIGlzIGZhdWx0eQo+PiBhbmQgbmVlZHMgcmVwbGFj
+aW5nIChtb2R1bG8gY29zbWljIHJheXMsIGJ1dCB0aGUgY2hhbmNlcyBvZiB0aG9zZSByZWFsbHkK
+Pj4gYXJlIGFzdHJvbm9taWNhbCkuCj4+Cj4+IElycmVzcGVjdGl2ZSBvZiB0aGF0LCB0aGVyZSBp
+cyBubyB3YXkgSSdtIGF3YXJlIG9mIGZvciBnZW5lcmF0aW5nIE1DRXMKPj4gb24gZGVtYW5kLCBh
+bmQgdGhlcmVmb3JlLCBubyB3YXkgb2YgdGVzdGluZyB0aGUgbG9naWMuICBGb3IgdGhhdCByZWFz
+b24KPj4gYWxvbmUsIEkgZG9uJ3QgdGhpbmsgaXQgaXMgd2lzZSB0byBiZSB0YWtpbmcgY29tcGxp
+Y2F0ZWQgaW52YXNpdmUgbG9naWMuCj4gWW91ciBmaXJzdCBhdHRlbXB0LCBtaW51cyB0aGUgbGl2
+ZSBwYXRjaGluZyBwYXJ0cywgd2Fzbid0IGFsbCB0aGF0Cj4gaW52YXNpdmUsIGFuZCB0aGUgY29k
+ZSB3b3VsZCBoYXZlIGJlZW4gdGhlIHNhbWUgZm9yIE5NSSBhbmQKPiAjTUMgKHNvIHRoZSB0ZXN0
+aW5nIGFyZ3VtZW50IGFsc28gZG9lc24ndCBhcHBseSwgYXMgTk1JcyBhcmUKPiBub3QgdW5jb21t
+b24pLgoKQnV0IGFzIHlvdSBjb3JyZWN0bHkgcG9pbnRlZCBvdXQsIGl0IHdhcyBhIHZlcnkgbG9u
+ZyB3YXkgZnJvbSBiZWluZwpjb21wbGV0ZS7CoCBXZSBjdXJyZW50bHkgaGF2ZSBubyBpZGVhIHdo
+ZXRoZXIgd2UgYXJlIGluIE5NSSBjb250ZXh0LCBzbwphcnJhbmdpbmcgbm90IHRvIG5vdCBleGVj
+dXRlIGFuIGlyZXQgaXMgaGFyZC4KCkluIHNvbWUgY29waW91cyBmcmVlIHRpbWUsIEkgc2hvdWxk
+IHRyeSB0byBwb3J0IExpbnV4J3MgcmUtZW50cmFudCBOTUkKbG9naWMgYWdhaW4uwqAgSSB0cmll
+ZCBvbmNlIGJlZm9yZSBhbmQgdGhhdCBhbGwgYmVjYW1lIHVuc3R1Y2sgYmVjYXVzZSBvZgppbnRl
+cm1peGVkIE5NSSBhbmQgTUNFcy4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
