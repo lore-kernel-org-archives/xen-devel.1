@@ -1,22 +1,11 @@
-From: Oleksandr Grytsov <al1img@gmail.com>
-Subject: Re: [PATCH v1 0/5] libxl: add PV sound device
-Date: Mon, 5 Feb 2018 13:04:53 +0200
-Message-ID: <CACvf2oXt=A3xwsG4r+1=iVdNO9WFE2V1ib7Zt8K3kSx+NtQiqw@mail.gmail.com>
-References: <1509548687-6071-1-git-send-email-al1img@gmail.com>
- <CACvf2oW8ys6p_Nape3S=VyjNP=GcOfQAxkdnwNAb_qm4c463_w@mail.gmail.com>
- <CACvf2oVw=154E+=Xic67FWnFFyHN99FWouiqZVSAQi68e-kpYg@mail.gmail.com>
- <CACvf2oXMK8NLjv7ocok=1m5v_oB1o9AfJsCnr+t4mtUv9zgN6w@mail.gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH] xen: Improvements to domain_crash_sync()
+Date: Mon, 5 Feb 2018 11:16:55 +0000
+Message-ID: <1517829415-19820-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5560050492680069891=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=nht/=e7=gmail.com=al1img@srs-us1.protection.inumbo.net>)
- id 1eiea0-0003u0-D8
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2018 11:04:56 +0000
-Received: by mail-io0-x22d.google.com with SMTP id f4so29843806ioh.8
- for <xen-devel@lists.xenproject.org>; Mon, 05 Feb 2018 03:04:54 -0800 (PST)
-In-Reply-To: <CACvf2oXMK8NLjv7ocok=1m5v_oB1o9AfJsCnr+t4mtUv9zgN6w@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,218 +14,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
-Cc: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+To: Xen-devel <xen-devel@lists.xen.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5560050492680069891==
-Content-Type: multipart/alternative; boundary="94eb2c059b36235a9c056475083f"
-
---94eb2c059b36235a9c056475083f
-Content-Type: text/plain; charset="UTF-8"
-
-On Tue, Jan 9, 2018 at 1:30 PM, Oleksandr Grytsov <al1img@gmail.com> wrote:
-
-> On Mon, Nov 20, 2017 at 3:44 PM, Oleksandr Grytsov <al1img@gmail.com>
-> wrote:
->
->> On Tue, Nov 14, 2017 at 2:38 PM, Oleksandr Grytsov <al1img@gmail.com>
->> wrote:
->>
->>> On Wed, Nov 1, 2017 at 5:04 PM, Oleksandr Grytsov <al1img@gmail.com>
->>> wrote:
->>>
->>>> From: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
->>>>
->>>> This patch set adds PV sound device support to xl.cfg and xl.
->>>> See sndif.h for protocol implementation details.
->>>>
->>>> Changes since initial:
->>>>  * fix code style
->>>>  * change unique-id from int to string (to make id more user readable)
->>>>
->>>> Oleksandr Grytsov (5):
->>>>   libxl: add PV sound device
->>>>   libxl: add vsnd list and info
->>>>   xl: add PV sound condif parser
->>>>   xl: add vsnd CLI commands
->>>>   docs: add PV sound device config
->>>>
->>>>  docs/man/xl.cfg.pod.5.in             | 150 ++++++++
->>>>  docs/man/xl.pod.1.in                 |  30 ++
->>>>  tools/libxl/Makefile                 |   2 +-
->>>>  tools/libxl/libxl.h                  |  24 ++
->>>>  tools/libxl/libxl_create.c           |   1 +
->>>>  tools/libxl/libxl_internal.h         |   1 +
->>>>  tools/libxl/libxl_types.idl          |  83 +++++
->>>>  tools/libxl/libxl_types_internal.idl |   1 +
->>>>  tools/libxl/libxl_utils.h            |   3 +
->>>>  tools/libxl/libxl_vsnd.c             | 699
->>>> +++++++++++++++++++++++++++++++++++
->>>>  tools/xl/Makefile                    |   2 +-
->>>>  tools/xl/xl.h                        |   3 +
->>>>  tools/xl/xl_cmdtable.c               |  15 +
->>>>  tools/xl/xl_parse.c                  | 246 ++++++++++++
->>>>  tools/xl/xl_parse.h                  |   1 +
->>>>  tools/xl/xl_vsnd.c                   | 203 ++++++++++
->>>>  16 files changed, 1462 insertions(+), 2 deletions(-)
->>>>  create mode 100644 tools/libxl/libxl_vsnd.c
->>>>  create mode 100644 tools/xl/xl_vsnd.c
->>>>
->>>> --
->>>> 2.7.4
->>>>
->>>>
->>> ping
->>>
->>> --
->>> Best Regards,
->>> Oleksandr Grytsov.
->>>
->>
->> ping
->>
->> --
->> Best Regards,
->> Oleksandr Grytsov.
->>
->
-> Ian, Wei,
->
-> Could you review this patch set?
->
-> --
-> Best Regards,
-> Oleksandr Grytsov.
->
-
-ping
-
--- 
-Best Regards,
-Oleksandr Grytsov.
-
---94eb2c059b36235a9c056475083f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On T=
-ue, Jan 9, 2018 at 1:30 PM, Oleksandr Grytsov <span dir=3D"ltr">&lt;<a href=
-=3D"mailto:al1img@gmail.com" target=3D"_blank">al1img@gmail.com</a>&gt;</sp=
-an> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;=
-border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"ltr"><div><div cla=
-ss=3D"h5"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On Mon, Nov=
- 20, 2017 at 3:44 PM, Oleksandr Grytsov <span dir=3D"ltr">&lt;<a href=3D"ma=
-ilto:al1img@gmail.com" target=3D"_blank">al1img@gmail.com</a>&gt;</span> wr=
-ote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border=
--left:1px #ccc solid;padding-left:1ex"><div class=3D"m_5746210956719363149H=
-OEnZb"><div class=3D"m_5746210956719363149h5"><div dir=3D"ltr"><div class=
-=3D"gmail_extra"><div class=3D"gmail_quote">On Tue, Nov 14, 2017 at 2:38 PM=
-, Oleksandr Grytsov <span dir=3D"ltr">&lt;<a href=3D"mailto:al1img@gmail.co=
-m" target=3D"_blank">al1img@gmail.com</a>&gt;</span> wrote:<br><blockquote =
-class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid=
-;padding-left:1ex"><div dir=3D"ltr"><div><div class=3D"m_574621095671936314=
-9m_7361427090113817149h5"><div class=3D"gmail_extra"><div class=3D"gmail_qu=
-ote">On Wed, Nov 1, 2017 at 5:04 PM, Oleksandr Grytsov <span dir=3D"ltr">&l=
-t;<a href=3D"mailto:al1img@gmail.com" target=3D"_blank">al1img@gmail.com</a=
->&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 =
-0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">From: Oleksandr Gryts=
-ov &lt;<a href=3D"mailto:oleksandr_grytsov@epam.com" target=3D"_blank">olek=
-sandr_grytsov@epam.com</a>&gt;<br>
-<br>
-This patch set adds PV sound device support to xl.cfg and xl.<br>
-See sndif.h for protocol implementation details.<br>
-<br>
-Changes since initial:<br>
-=C2=A0* fix code style<br>
-=C2=A0* change unique-id from int to string (to make id more user readable)=
-<br>
-<br>
-Oleksandr Grytsov (5):<br>
-=C2=A0 libxl: add PV sound device<br>
-=C2=A0 libxl: add vsnd list and info<br>
-=C2=A0 xl: add PV sound condif parser<br>
-=C2=A0 xl: add vsnd CLI commands<br>
-=C2=A0 docs: add PV sound device config<br>
-<br>
-=C2=A0docs/man/<a href=3D"http://xl.cfg.pod.5.in" rel=3D"noreferrer" target=
-=3D"_blank">xl.cfg.pod.5.in</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0| 150 ++++++++<br>
-=C2=A0docs/man/<a href=3D"http://xl.pod.1.in" rel=3D"noreferrer" target=3D"=
-_blank">xl.pod.1.in</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0|=C2=A0 30 ++<br>
-=C2=A0tools/libxl/Makefile=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0tools/libxl/libxl.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 24 ++<br>
-=C2=A0tools/libxl/libxl_create.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 =C2=A01 +<br>
-=C2=A0tools/libxl/libxl_internal.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0=
- =C2=A01 +<br>
-=C2=A0tools/libxl/libxl_types.idl=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0=
- 83 +++++<br>
-=C2=A0tools/libxl/libxl_types_inter<wbr>nal.idl |=C2=A0 =C2=A01 +<br>
-=C2=A0tools/libxl/libxl_utils.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 =C2=A03 +<br>
-=C2=A0tools/libxl/libxl_vsnd.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0| 699 ++++++++++++++++++++++++++++++<wbr>+++++<br>
-=C2=A0tools/xl/Makefile=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +-<br>
-=C2=A0tools/xl/xl.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A03 +<br>
-=C2=A0tools/xl/xl_cmdtable.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0|=C2=A0 15 +<br>
-=C2=A0tools/xl/xl_parse.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 | 246 ++++++++++++<br>
-=C2=A0tools/xl/xl_parse.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
-=C2=A0tools/xl/xl_vsnd.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0| 203 ++++++++++<br>
-=C2=A016 files changed, 1462 insertions(+), 2 deletions(-)<br>
-=C2=A0create mode 100644 tools/libxl/libxl_vsnd.c<br>
-=C2=A0create mode 100644 tools/xl/xl_vsnd.c<br>
-<span class=3D"m_5746210956719363149m_7361427090113817149m_-489556295673204=
-0766HOEnZb"><font color=3D"#888888"><br>
---<br>
-2.7.4<br>
-<br>
-</font></span></blockquote></div><br></div></div></div><div class=3D"gmail_=
-extra">ping<span class=3D"m_5746210956719363149m_7361427090113817149HOEnZb"=
-><font color=3D"#888888"><br clear=3D"all"></font></span></div><span class=
-=3D"m_5746210956719363149m_7361427090113817149HOEnZb"><font color=3D"#88888=
-8"><div class=3D"gmail_extra"><br>-- <br><div class=3D"m_574621095671936314=
-9m_7361427090113817149m_-4895562956732040766gmail_signature" data-smartmail=
-=3D"gmail_signature">Best Regards,<br>Oleksandr Grytsov.</div>
-</div></font></span></div>
-</blockquote></div><br></div><div class=3D"gmail_extra">ping<br clear=3D"al=
-l"></div><div class=3D"gmail_extra"><br>-- <br><div class=3D"m_574621095671=
-9363149m_7361427090113817149gmail_signature" data-smartmail=3D"gmail_signat=
-ure">Best Regards,<br>Oleksandr Grytsov.</div>
-</div></div>
-</div></div></blockquote></div><br></div></div></div><div class=3D"gmail_ex=
-tra">Ian, Wei,</div><div class=3D"gmail_extra"><br></div><div class=3D"gmai=
-l_extra">Could you review this patch set?<br clear=3D"all"></div><span clas=
-s=3D""><div class=3D"gmail_extra"><br>-- <br><div class=3D"m_57462109567193=
-63149gmail_signature" data-smartmail=3D"gmail_signature">Best Regards,<br>O=
-leksandr Grytsov.</div>
-</div></span></div>
-</blockquote></div><br></div><div class=3D"gmail_extra">ping<br clear=3D"al=
-l"></div><div class=3D"gmail_extra"><br>-- <br><div class=3D"gmail_signatur=
-e" data-smartmail=3D"gmail_signature">Best Regards,<br>Oleksandr Grytsov.</=
-div>
-</div></div>
-
---94eb2c059b36235a9c056475083f--
-
-
---===============5560050492680069891==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5560050492680069891==--
+VGhlIHVzZSBvZiBfX0xJTkVfXyBpbiBhIHByaW50aygpIGlzIHByb2JsZW1hdGljIGZvciBsaXZl
+cGF0Y2hpbmcsIGFzIGl0CmNhdXNlcyB1bm5lY2Vzc2FyeSBiaW5hcnkgZGlmZmVyZW5jZXMuCgpG
+dXJ0aGVybW9yZSwgZGlhZ25vc3RpYyBpbmZvcm1hdGlvbiBhcm91bmQgY2FsbHMgaXMgaW5jb25z
+aXN0ZW50IGFuZApvY2Nhc2lvbmFsbHkgdW5oZWxwZnVsLiAgKGUuZy4gZGlhZ25vc2luZyBsb2dz
+IGZyb20gdGhlIGZpZWxkIHdoaWNoIG1pZ2h0IGJlCnJlbGVhc2UgYnVpbGRzLCBvciBsaWtlbHkg
+d2l0aG91dCBleGFjdCBzb3VyY2UgY29kZSkuCgpUYWtlIHRoZSBvcHBvcnR1bml0eSB0byBpbXBy
+b3ZlIHRoaW5ncy4gIFNob3J0ZW4gdGhlIG5hbWUgdG8KZG9tYWluX2NyYXNoX3N5bmMoKSBhbmQg
+cmVxdWlyZSB0aGUgdXNlciB0byBwYXNzIGEgcHJpbnQgbWVzc2FnZSBpbi4KCkludGVybmFsbHks
+IHRoZSBjYWxsaW5nIGZ1bmN0aW9uIGlzIGlkZW50aWZpZWQsIGFuZCB0aGUgbWVzc2FnZSBpcyBl
+bWl0dGVkIGFzCmEgbm9uLWRlYnVnIGd1ZXN0IGVycm9yLgoKU2lnbmVkLW9mZi1ieTogQW5kcmV3
+IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KLS0tCkNDOiBKYW4gQmV1bGljaCA8
+SkJldWxpY2hAc3VzZS5jb20+CkNDOiBKdW4gTmFrYWppbWEgPGp1bi5uYWthamltYUBpbnRlbC5j
+b20+CkNDOiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KLS0tCiB4ZW4vYXJjaC94
+ODYvaHZtL3ZteC92bWNzLmMgfCAgMiArLQogeGVuL2FyY2gveDg2L3RyYXBzLmMgICAgICAgIHwg
+IDUgKy0tLS0KIHhlbi9jb21tb24vZG9tYWluLmMgICAgICAgICB8ICAyICstCiB4ZW4vY29tbW9u
+L3dhaXQuYyAgICAgICAgICAgfCAxNiArKysrLS0tLS0tLS0tLS0tCiB4ZW4vaW5jbHVkZS94ZW4v
+c2NoZWQuaCAgICAgfCAxMSArKysrKystLS0tLQogNSBmaWxlcyBjaGFuZ2VkLCAxMyBpbnNlcnRp
+b25zKCspLCAyMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvaHZtL3Zt
+eC92bWNzLmMgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92bWNzLmMKaW5kZXggZTc4MThjYS4uNTM3
+MGZmYSAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L2h2bS92bXgvdm1jcy5jCisrKyBiL3hlbi9h
+cmNoL3g4Ni9odm0vdm14L3ZtY3MuYwpAQCAtMTY2OSw3ICsxNjY5LDcgQEAgdm9pZCB2bXhfdm1l
+bnRyeV9mYWlsdXJlKHZvaWQpCiAgICAgICAgICBlcnJvciA9PSBWTVhfSU5TTl9JTlZBTElEX0hP
+U1RfU1RBVEUgKQogICAgICAgICB2bWNzX2R1bXBfdmNwdShjdXJyKTsKIAotICAgIGRvbWFpbl9j
+cmFzaF9zeW5jaHJvbm91cygpOworICAgIGRvbWFpbl9jcmFzaF9zeW5jKCJcbiIpOyAvKiBOb3Ro
+aW5nIGZ1cnRoZXIgaW50ZXJlc3RpbmcgdG8gcHJpbnQuICovCiB9CiAKIHZvaWQgdm14X2RvX3Jl
+c3VtZShzdHJ1Y3QgdmNwdSAqdikKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni90cmFwcy5jIGIv
+eGVuL2FyY2gveDg2L3RyYXBzLmMKaW5kZXggMTE4N2ZkOS4uM2MxMTU4MiAxMDA2NDQKLS0tIGEv
+eGVuL2FyY2gveDg2L3RyYXBzLmMKKysrIGIveGVuL2FyY2gveDg2L3RyYXBzLmMKQEAgLTIxMTEs
+MTAgKzIxMTEsNyBAQCB2b2lkIGFzbV9kb21haW5fY3Jhc2hfc3luY2hyb25vdXModW5zaWduZWQg
+bG9uZyBhZGRyKQogICAgIGlmICggYWRkciA9PSAwICkKICAgICAgICAgYWRkciA9IHRoaXNfY3B1
+KGxhc3RfZXh0YWJsZV9hZGRyKTsKIAotICAgIHByaW50aygiZG9tYWluX2NyYXNoX3N5bmMgY2Fs
+bGVkIGZyb20gZW50cnkuUzogZmF1bHQgYXQgJXAgJXBTXG4iLAotICAgICAgICAgICBfcChhZGRy
+KSwgX3AoYWRkcikpOwotCi0gICAgX19kb21haW5fY3Jhc2hfc3luY2hyb25vdXMoKTsKKyAgICBk
+b21haW5fY3Jhc2hfc3luYygiZW50cnkuUyBmYXVsdCBhdCAlcFMgWyVwXVxuIiwgX3AoYWRkciks
+IF9wKGFkZHIpKTsKIH0KIAogLyoKZGlmZiAtLWdpdCBhL3hlbi9jb21tb24vZG9tYWluLmMgYi94
+ZW4vY29tbW9uL2RvbWFpbi5jCmluZGV4IDQ1Njc3NzMuLmQzYmEyYzIgMTAwNjQ0Ci0tLSBhL3hl
+bi9jb21tb24vZG9tYWluLmMKKysrIGIveGVuL2NvbW1vbi9kb21haW4uYwpAQCAtNjg1LDcgKzY4
+NSw3IEBAIHZvaWQgX19kb21haW5fY3Jhc2goc3RydWN0IGRvbWFpbiAqZCkKIH0KIAogCi12b2lk
+IF9fZG9tYWluX2NyYXNoX3N5bmNocm9ub3VzKHZvaWQpCit2b2lkIF9fZG9tYWluX2NyYXNoX3N5
+bmModm9pZCkKIHsKICAgICBfX2RvbWFpbl9jcmFzaChjdXJyZW50LT5kb21haW4pOwogCmRpZmYg
+LS1naXQgYS94ZW4vY29tbW9uL3dhaXQuYyBiL3hlbi9jb21tb24vd2FpdC5jCmluZGV4IGE1N2Jj
+MTAuLjE1M2E1OWUgMTAwNjQ0Ci0tLSBhL3hlbi9jb21tb24vd2FpdC5jCisrKyBiL3hlbi9jb21t
+b24vd2FpdC5jCkBAIC0xMzMsMTAgKzEzMyw3IEBAIHN0YXRpYyB2b2lkIF9fcHJlcGFyZV90b193
+YWl0KHN0cnVjdCB3YWl0cXVldWVfdmNwdSAqd3F2KQogICAgIHdxdi0+d2FrZXVwX2NwdSA9IHNt
+cF9wcm9jZXNzb3JfaWQoKTsKICAgICBjcHVtYXNrX2NvcHkoJndxdi0+c2F2ZWRfYWZmaW5pdHks
+IGN1cnItPmNwdV9oYXJkX2FmZmluaXR5KTsKICAgICBpZiAoIHZjcHVfc2V0X2hhcmRfYWZmaW5p
+dHkoY3VyciwgY3B1bWFza19vZih3cXYtPndha2V1cF9jcHUpKSApCi0gICAgewotICAgICAgICBn
+ZHByaW50ayhYRU5MT0dfRVJSLCAiVW5hYmxlIHRvIHNldCB2Y3B1IGFmZmluaXR5XG4iKTsKLSAg
+ICAgICAgZG9tYWluX2NyYXNoX3N5bmNocm9ub3VzKCk7Ci0gICAgfQorICAgICAgICBkb21haW5f
+Y3Jhc2hfc3luYygiVW5hYmxlIHRvIHNldCB2Y3B1IGFmZmluaXR5XG4iKTsKIAogICAgIC8qIEhh
+bmQtcm9sbGVkIHNldGptcCgpLiAqLwogICAgIGFzbSB2b2xhdGlsZSAoCkBAIC0xNjQsMTAgKzE2
+MSw3IEBAIHN0YXRpYyB2b2lkIF9fcHJlcGFyZV90b193YWl0KHN0cnVjdCB3YWl0cXVldWVfdmNw
+dSAqd3F2KQogICAgICAgICA6ICJtZW1vcnkiICk7CiAKICAgICBpZiAoIHVubGlrZWx5KHdxdi0+
+ZXNwID09IDApICkKLSAgICB7Ci0gICAgICAgIGdkcHJpbnRrKFhFTkxPR19FUlIsICJTdGFjayB0
+b28gbGFyZ2UgaW4gJXNcbiIsIF9fZnVuY19fKTsKLSAgICAgICAgZG9tYWluX2NyYXNoX3N5bmNo
+cm9ub3VzKCk7Ci0gICAgfQorICAgICAgICBkb21haW5fY3Jhc2hfc3luYygiU3RhY2sgdG9vIGxh
+cmdlXG4iKTsKIAogICAgIGNwdV9pbmZvLT5ndWVzdF9jcHVfdXNlcl9yZWdzLmVudHJ5X3ZlY3Rv
+ciA9IGVudHJ5X3ZlY3RvcjsKIH0KQEAgLTE5NCwxMCArMTg4LDggQEAgdm9pZCBjaGVja193YWtl
+dXBfZnJvbV93YWl0KHZvaWQpCiAgICAgICAgIHN0cnVjdCB2Y3B1ICpjdXJyID0gY3VycmVudDsK
+ICAgICAgICAgY3B1bWFza19jb3B5KCZ3cXYtPnNhdmVkX2FmZmluaXR5LCBjdXJyLT5jcHVfaGFy
+ZF9hZmZpbml0eSk7CiAgICAgICAgIGlmICggdmNwdV9zZXRfaGFyZF9hZmZpbml0eShjdXJyLCBj
+cHVtYXNrX29mKHdxdi0+d2FrZXVwX2NwdSkpICkKLSAgICAgICAgewotICAgICAgICAgICAgZ2Rw
+cmludGsoWEVOTE9HX0VSUiwgIlVuYWJsZSB0byBzZXQgdmNwdSBhZmZpbml0eVxuIik7Ci0gICAg
+ICAgICAgICBkb21haW5fY3Jhc2hfc3luY2hyb25vdXMoKTsKLSAgICAgICAgfQorICAgICAgICAg
+ICAgZG9tYWluX2NyYXNoX3N5bmMoIlVuYWJsZSB0byBzZXQgdmNwdSBhZmZpbml0eVxuIik7CisK
+ICAgICAgICAgd2FpdCgpOyAvKiB0YWtlcyB1cyBiYWNrIGludG8gdGhlIHNjaGVkdWxlciAqLwog
+ICAgIH0KIApkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUveGVuL3NjaGVkLmggYi94ZW4vaW5jbHVk
+ZS94ZW4vc2NoZWQuaAppbmRleCAzOWY5Mzg2Li4xZGE5M2FhIDEwMDY0NAotLS0gYS94ZW4vaW5j
+bHVkZS94ZW4vc2NoZWQuaAorKysgYi94ZW4vaW5jbHVkZS94ZW4vc2NoZWQuaApAQCAtNjI3LDEx
+ICs2MjcsMTIgQEAgdm9pZCBfX2RvbWFpbl9jcmFzaChzdHJ1Y3QgZG9tYWluICpkKTsKICAqIE1h
+cmsgY3VycmVudCBkb21haW4gYXMgY3Jhc2hlZCBhbmQgc3luY2hyb25vdXNseSBkZXNjaGVkdWxl
+IGZyb20gdGhlIGxvY2FsCiAgKiBwcm9jZXNzb3IuIFRoaXMgZnVuY3Rpb24gbmV2ZXIgcmV0dXJu
+cy4KICAqLwotdm9pZCBub3JldHVybiBfX2RvbWFpbl9jcmFzaF9zeW5jaHJvbm91cyh2b2lkKTsK
+LSNkZWZpbmUgZG9tYWluX2NyYXNoX3N5bmNocm9ub3VzKCkgZG8geyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgXAotICAgIHByaW50aygiZG9tYWluX2NyYXNoX3N5bmMgY2FsbGVk
+IGZyb20gJXM6JWRcbiIsIF9fRklMRV9fLCBfX0xJTkVfXyk7ICBcCi0gICAgX19kb21haW5fY3Jh
+c2hfc3luY2hyb25vdXMoKTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IFwKLX0gd2hpbGUgKDApCit2b2lkIG5vcmV0dXJuIF9fZG9tYWluX2NyYXNoX3N5bmModm9pZCk7
+CisjZGVmaW5lIGRvbWFpbl9jcmFzaF9zeW5jKGZtdCwgYXJncy4uLikgZG8geyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBcCisgICAgICAgIHByaW50ayhYRU5MT0dfR19FUlIgImRvbWFpbl9j
+cmFzaF9zeW5jIGNhbGxlZCBmcm9tICVzOiAiIGZtdCwgICBcCisgICAgICAgICAgICAgICBfX2Z1
+bmNfXywgIyMgYXJncyk7ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCisg
+ICAgICAgIF9fZG9tYWluX2NyYXNoX3N5bmMoKTsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBcCisgICAgfSB3aGlsZSAoMCkKIAogLyoKICAqIENhbGxlZCBmcm9tIGFz
+c2VtYmx5IGNvZGUsIHdpdGggYW4gb3B0aW9uYWwgYWRkcmVzcyB0byBoZWxwIGluZGljYXRlIHdo
+eQotLSAKMi4xLjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
