@@ -1,16 +1,23 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Save the date: Xen Project Developer Summit, Nanjing,
- China, June 20-22 (Wednesday - Friday)
-Date: Mon, 5 Feb 2018 14:52:15 +0000
-Message-ID: <7B105F1A-A54A-4613-8108-91D96DEB9708__38520.7464489669$1517842339$gmane$org@gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.2 \(3445.5.20\))
-Content-Type: multipart/mixed; boundary="===============4390362877369117219=="
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v3 21/25] x86emul: add read-modify-write hook
+Date: Mon, 05 Feb 2018 07:56:22 -0700
+Message-ID: <5A787EA602000078001A54DE@prv-mh.provo.novell.com>
+References: <5A29550C020000780019585B@prv-mh.provo.novell.com>
+ <5A295B3D020000780019598B@prv-mh.provo.novell.com>
+ <ac8627d4-84b1-3785-dda8-b40e48426ee2@citrix.com>
+ <5A78226202000078001A511C@prv-mh.provo.novell.com>
+ <04f9e690-37ec-41af-5c6a-d9c25686af2a@citrix.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=fgnt=e7=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1eii96-0008Mn-Aq
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2018 14:53:24 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=do0y=e7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1eiiC9-00006Y-BO
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2018 14:56:33 +0000
+In-Reply-To: <04f9e690-37ec-41af-5c6a-d9c25686af2a@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,100 +26,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>, mirageos-devel@lists.xenproject.org, unikraft-devel@lists.xenproject.org, win-pv-devel@lists.xenproject.org, embedded-pv-devel@lists.xenproject.org, xapi@lists.xenproject.org
-Cc: advisory-board@lists.xenproject.org, committers@xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4390362877369117219==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_A54FEB5F-42FA-4310-9976-DC4F85AF75EC"
-
-
---Apple-Mail=_A54FEB5F-42FA-4310-9976-DC4F85AF75EC
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-Dear Community members,
-
-we finalized the Xen Project Developer Summit proposal with the event =
-hotel. Apologies this has taken so long.
-
-The event will be held at the Crowne Plaza Nanjing Jiangning =
-<https://www.ihg.com/crowneplaza/hotels/us/en/nanjing/nkgnj/hoteldetail/ev=
-ents-facilities#scmisc=3Dnav_events-facilities_cp>. I am still waiting =
-for the schedule to put registration and the website into place, as well =
-as CfP time-table, but this should all be done within a couple of weeks =
-or so.
-The cost per hotel room is $135/night + taxes.
-The dates for the summit are June 20-22 (Wednesday - Friday), allowing =
-attendees to travel to Beijing and attend LinuxCon China the following =
-Monday. =20
-
-For those, who want to attend LinuxCon as well as the Dev Summit, the =
-LinuxCon CfP is still open until March 4th (see =
-https://www.lfasiallc.com/linuxcon-containercon-cloudopen-china/cfp =
-<https://www.lfasiallc.com/linuxcon-containercon-cloudopen-china/cfp>)
-=20
-I will provide more information on travel logistics, etc. a little later
-
-Best Regards
-Lars=
-
---Apple-Mail=_A54FEB5F-42FA-4310-9976-DC4F85AF75EC
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">Dear =
-Community members,<div class=3D""><br class=3D""></div><div =
-class=3D""><div class=3D""><div style=3D"margin: 0cm 0cm 0.0001pt;" =
-class=3D"">we finalized the Xen Project Developer Summit proposal with =
-the event hotel. Apologies this has taken so long.</div><div =
-style=3D"margin: 0cm 0cm 0.0001pt;" class=3D""><br class=3D""></div><div =
-style=3D"margin: 0cm 0cm 0.0001pt;" class=3D"">The event will be held at =
-the&nbsp;<a =
-href=3D"https://www.ihg.com/crowneplaza/hotels/us/en/nanjing/nkgnj/hotelde=
-tail/events-facilities#scmisc=3Dnav_events-facilities_cp" style=3D"color: =
-purple;" class=3D"">Crowne Plaza Nanjing Jiangning</a>. I am still =
-waiting for the schedule to put registration and the website into place, =
-as well as CfP time-table, but this should all be done within a couple =
-of weeks or so.<o:p class=3D""></o:p></div></div><div style=3D"margin: =
-0cm 0cm 0.0001pt;" class=3D"">The cost per hotel room is $135/night + =
-taxes.</div><div style=3D"margin: 0cm 0cm 0.0001pt;" class=3D"">The =
-dates for the summit are June 20-22 (Wednesday - Friday), allowing =
-attendees to travel to Beijing and attend LinuxCon China the following =
-Monday. &nbsp;</div><div class=3D""><div style=3D"margin: 0cm 0cm =
-0.0001pt;" class=3D""><o:p class=3D""></o:p></div></div><div =
-class=3D""><div style=3D"margin: 0cm 0cm 0.0001pt;" class=3D""><br =
-class=3D""></div><div style=3D"margin: 0cm 0cm 0.0001pt;" class=3D"">For =
-those, who want to attend LinuxCon as well as the Dev Summit, the =
-LinuxCon CfP is still open until March 4th (see&nbsp;<a =
-href=3D"https://www.lfasiallc.com/linuxcon-containercon-cloudopen-china/cf=
-p" =
-class=3D"">https://www.lfasiallc.com/linuxcon-containercon-cloudopen-china=
-/cfp</a>)</div><div style=3D"margin: 0cm 0cm 0.0001pt;" =
-class=3D"">&nbsp;</div></div><div class=3D""><div style=3D"margin: 0cm =
-0cm 0.0001pt;" class=3D"">I will provide more information on travel =
-logistics, etc. a little later</div></div></div><div style=3D"margin: =
-0cm 0cm 0.0001pt;" class=3D""><br class=3D""></div><div style=3D"margin: =
-0cm 0cm 0.0001pt;" class=3D"">Best Regards</div><div style=3D"margin: =
-0cm 0cm 0.0001pt;" class=3D"">Lars</div></body></html>=
-
---Apple-Mail=_A54FEB5F-42FA-4310-9976-DC4F85AF75EC--
-
-
---===============4390362877369117219==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4390362877369117219==--
+Pj4+IE9uIDA1LjAyLjE4IGF0IDE1OjIxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMDUvMDIvMTggMDg6MjIsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAwMi4w
+Mi4xOCBhdCAxNzoxMywgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gT24g
+MDcvMTIvMTcgMTQ6MTYsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IEluIG9yZGVyIHRvIGNvcnJl
+Y3RseSBlbXVsYXRlIHJlYWQtbW9kaWZ5LXdyaXRlIGluc25zLCBlc3BlY2lhbGx5Cj4+Pj4gTE9D
+S2VkIG9uZXMsIHdlIHNob3VsZCBub3QgaXNzdWUgcmVhZHMgYW5kIHdyaXRlcyBzZXBhcmF0ZWx5
+LiBVc2UgYQo+Pj4+IG5ldyBob29rIHRvIGNvbWJpbmUgYm90aCwgYW5kIGRvbid0IHVuaWZvcm1s
+eSByZWFkIHRoZSBtZW1vcnkKPj4+PiBkZXN0aW5hdGlvbiBhbnltb3JlLiBJbnN0ZWFkLCBEc3RN
+ZW0gb3Bjb2RlcyB3aXRob3V0IE1vdiBub3cgbmVlZCB0bwo+Pj4+IGhhdmUgZG9uZSBzbyBpbiB0
+aGVpciByZXNwZWN0aXZlIGNhc2UgYmxvY2tzLgo+Pj4+Cj4+Pj4gQWxzbyBzdHJpcCBib2d1cyBf
+IHByZWZpeGVzIGZyb20gbWFjcm8gcGFyYW1ldGVycyB3aGVuIHRoaXMgb25seSBhZmZlY3RzCj4+
+Pj4gbGluZXMgd2hpY2ggYXJlIGJlaW5nIGNoYW5nZWQgYW55d2F5Lgo+Pj4+Cj4+Pj4gSW4gdGhl
+IHRlc3QgaGFybmVzcywgYmVzaWRlcyBzb21lIHJlLW9yZGVyaW5nIHRvIGZhY2lsaXRhdGUgcnVu
+bmluZyBhCj4+Pj4gZmV3IHRlc3RzIHR3aWNlIChvbmUgd2l0aG91dCBhbmQgYSBzZWNvbmQgdGlt
+ZSB3aXRoIHRoZSAucm13IGhvb2sgaW4KPj4+PiBwbGFjZSksIHRpZ2h0ZW4gYSBmZXcgRUZMQUdT
+IGNoZWNrcyBhbmQgYWRkIGEgdGVzdCBmb3IgTk9UIHdpdGggbWVtb3J5Cj4+Pj4gb3BlcmFuZCAo
+aW4gcGFydGljdWxhciB0byB2ZXJpZnkgRUZMQUdTIGRvbid0IGdldCBhbHRlcmVkIHRoZXJlKS4K
+Pj4+Pgo+Pj4+IEZvciBub3cgbWFrZSB1c2Ugb2YgdGhlIGhvb2sgb3B0aW9uYWwgZm9yIGNhbGxl
+cnM7IGV2ZW50dWFsbHkgd2UgbWF5Cj4+Pj4gd2FudCB0byBjb25zaWRlciBtYWtpbmcgdGhpcyBt
+YW5kYXRvcnkuCj4+Pj4KPj4+PiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hA
+c3VzZS5jb20+Cj4+Pj4gLS0tCj4+Pj4gdjM6IE5ldy4KPj4+PiAtLS0KPj4+PiBUQkQ6IERvIHdl
+IHdhbnQgdG8gYWxzbyBzdXBwb3J0IG5vbi1sb2NrYWJsZSBSTVcgaW5zbnMgaW4gdGhlIG5ldyBo
+b29rCj4+Pj4gICAgICBhbmQgaGVscGVyIChTSEwgJiBmcmllbmRzLCBTSExELCBTSFJEKT8KPj4+
+IFdoYXQgd291bGQgdGhpcyBhY2hpZXZlPyAgSSBzdXBwb3NlIGl0IHdvdWxkIGF2b2lkIGEgZG91
+YmxlIHBhZ2V3YWxrLgo+PiBXZWxsIC0gaXQncyBtb3N0bHkgdGhlIGltcGxpY2F0aW9uIGZyb20g
+dGhpcyBkb3VibGUgd2FsayB3aGljaCBJJ20KPj4gY29uY2VybmVkIGFib3V0OiBUaGUgZmlyc3Qg
+d2FsayBpcyBvbmUgZm9yIGEgcmVhZCwgd2hpY2ggbWlnaHQKPj4gc3VjY2VlZCB3aGVuIHRoZSBz
+ZWNvbmQgKHdyaXRlKSB3YWxrIGZhaWxzLiBXZSdkIHRoZW4gaGF2ZSBkb25lCj4+IGEgcmVhZCB3
+aGljaCBzaG91bGQgaGF2ZSBuZXZlciBvY2N1cnJlZC4gQnV0IGFueXdheSB0aGlzIHdvdWxkCj4+
+IGJlIGZvbGxvdy11cCB3b3JrIG9ubHksIG5vdGhpbmcgdG8gYmUgYWRkZWQgdG8gdGhlIHBhdGNo
+IGhlcmUuCj4gCj4gSW4gc29tZSBjb3Bpb3VzIG5ldyBmdXR1cmUgd2l0aCB0aGUgZW11bGF0aW9u
+IGNoYW5nZXMgZGlzY3Vzc2VkIGF0Cj4gc3VtbWl0LCB3ZSdkIHdhbnQgdG8gaXNzdWUgYSBzaW5n
+bGUgd3JpdGVhYmxlIHRyYW5zbGF0aW9uIHJlcXVlc3QuCj4gCj4gT24gdGhhdCBiYXNpcyB0aGVu
+LCB3ZSBzaG91bGQgZXh0ZW5kIHRoZSB1c2Ugb2YgdGhpcyBob29rIHRvIGFsbCBSTVcKPiBpbnN0
+cnVjdGlvbiwgaXJyZXNwZWN0aXZlIG9mIGxvY2tpbmcuCgpBZGRlZCB0byBteSB0b2RvIGxpc3Qu
+IEJlZm9yZSBwdXR0aW5nIHRvZ2V0aGVyIHRoZSBwYXRjaCBoZXJlIEkKaGFkIGFjdHVhbGx5IGNv
+bnNpZGVyZWQgdGhlIGludHJvZHVjdGlvbiBvZiBtYXAvdW5tYXAgaG9va3MsCmJ1dCBJIGRpZCBj
+b25jbHVkZSB0aGF0IHRoaXMgd291bGQgYmUgcXVpdGUgYSBiaXQgbW9yZSBpbnRydXNpdmUuCgo+
+Pj4+IC0gICAgY2FzZSAweDM4IC4uLiAweDNkOiBjbXA6IC8qIGNtcCAqLwo+Pj4+ICsgICAgY2Fz
+ZSAweDM4OiBjYXNlIDB4Mzk6IGNtcDogLyogY21wIHJlZyxtZW0gKi8KPj4+PiArICAgICAgICBp
+ZiAoIG9wcy0+cm13ICYmIGRzdC50eXBlID09IE9QX01FTSAmJgo+Pj4+ICsgICAgICAgICAgICAg
+KHJjID0gcmVhZF91bG9uZyhkc3QubWVtLnNlZywgZHN0Lm1lbS5vZmYsICZkc3QudmFsLAo+Pj4+
+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBkc3QuYnl0ZXMsIGN0eHQsIG9wcykpICE9
+IFg4NkVNVUxfT0tBWSApCj4+PiBXaHkgZG9lcyBybXcgbWF0dGVyIGhlcmU/IGNtcCBkb2Vzbid0
+IHdyaXRlIHRvIGl0cyBvcGVyYW5kcy4KPj4gVGhlIHJlYWQgb2YgdGhlICJkZXN0aW5hdGlvbiIg
+b3BlcmFuZCB3YXMgc2tpcHBlZCBpbiBjYXNlIHRoZXJlCj4+IGlzIGEgLT5ybXcgaG9vayAoc2Vl
+IHRoZSBjaGFuZ2UgdG8gZ2VuZXJpYyBkZXN0aW5hdGlvbiBvcGVyYW5kCj4+IHByb2Nlc3Npbmcg
+YWhlYWQgb2YgdGhlIG1haW4gc3dpdGNoKCkpLiBUaGlzIG5lZWRzIHRvIGJlIGNhcnJpZWQKPj4g
+b3V0IGhlcmUgbm93IChhbmQgZWxzZXdoZXJlIHdoZW4gd2hhdCBpcyBub21pbmFsbHkgdGhlCj4+
+IGRlc3RpbmF0aW9uIG9wZXJhbmQgcmVhbGx5IGlzIGEgc2Vjb25kIHNvdXJjZSBvbmUpLgo+IAo+
+IE9oLCByaWdodC4gIEkgdGhpbmsgdGhpcyBuZWVkcyB0byBiZSBjbGVhcmVyLiAgSGF2aW5nIHR3
+byBkaWZmZXJlbnQKPiBiZWhhdmlvdXJzIGRlcGVuZGluZyBvbiB3aGV0aGVyIHRoZSBjYWxsZXIg
+cHJvdmlkZXMgYW4gcm13IGhvb2sgaXMgdmVyeQo+IHN1YnRsZS4KCldlbGwsIGlmIHlvdSBoYXZl
+IHN1Z2dlc3Rpb25zIGFzIHRvIGhvdyB0byBtYWtlIHRoaXMgbW9yZSBjbGVhciwKSSdtIGFsbCBl
+YXJzLgoKPiBUaGUgcGFydGljdWxhcmx5IGNvbmZ1c2luZyB0aGluZyBoZXJlIGlzIHRoYXQgY21w
+IGlzbid0IGFuIHJtdwo+IGluc3RydWN0aW9uLiAgSSBwcmVzdW1lIHRoZSBvZGRpdHkgY29tZXMg
+YWJvdXQgYmVjYXVzZSBjbXAgZW5jb2RlcyB0aGUKPiBtZW1vcnkgb3BlcmFuZCBpbiBkc3QsIGV2
+ZW4gdGhvdWdoIHRoZSBvcGVyYW5kIGRvZXNuJ3QgZ2V0IHdyaXR0ZW4gdG8/CgpTb3J0IG9mIChm
+b3JtYWxseSBzb3VyY2UgYW5kIGRlc3RpbmF0aW9uIGFyZW4ndCBzcGVsbGVkIG91dCBhdAp0aGUg
+TW9kUi9NIGJ5dGUgbGV2ZWwpOiBJdCdzIHJlYWxseSBvdXIgb3BlcmFuZCBlbmNvZGluZyBzY2hl
+bWUKd2hpY2ggcHV0cyB1cyBpbnRvIHRoaXMgc2l0dWF0aW9uOiBXZSBjYW4ndCBlbmNvZGUgbW9y
+ZSB0aGFuIG9uZQpzb3VyY2Ugb3BlcmFuZC4gQW5kIGZvciB0aGUgaW5zbiBmbGF2b3JzIHdpdGgg
+TW9kUi9NIGFuZAppbW1lZGlhdGUgdGhlIHRhYmxlIGVudHJpZXMgYXJlIGV2ZW4gc2hhcmVkIGJl
+dHdlZW4gQ01QIGFuZAp0aGUgNyBvdGhlciBvcGNvZGVzIGFsbCB3cml0aW5nIHRvIHRoZSByZWdp
+c3RlciBvciBtZW1vcnkuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
