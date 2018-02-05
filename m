@@ -1,20 +1,19 @@
 From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 3/3] xen: Disable ARINC653 scheduler by
- default for non-DEBUG builds
-Date: Mon, 05 Feb 2018 15:42:01 +0100
-Message-ID: <1517841721.8082.1.camel@suse.com>
+Subject: Re: [PATCH 2/3] xen: Fix credit1 Kconfig entry
+Date: Mon, 05 Feb 2018 15:43:51 +0100
+Message-ID: <1517841831.8082.2.camel@suse.com>
 References: <20180205113642.3174-1-george.dunlap@citrix.com>
- <20180205113642.3174-3-george.dunlap@citrix.com>
- <5A786BD402000078001A53CA@prv-mh.provo.novell.com>
+ <20180205113642.3174-2-george.dunlap@citrix.com>
+ <5A786B9802000078001A53C7@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3941560595666776700=="
+Content-Type: multipart/mixed; boundary="===============0479827831674011918=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=jhda=e7=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1eihyz-0007KJ-65
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2018 14:42:57 +0000
-In-Reply-To: <5A786BD402000078001A53CA@prv-mh.provo.novell.com>
+ id 1eii0U-0007Px-TB
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2018 14:44:30 +0000
+In-Reply-To: <5A786B9802000078001A53C7@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,29 +23,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>, George Dunlap <george.dunlap@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Robert VanVossen <robert.vanvossen@dornerworks.com>, Josh Whitehead <josh.whitehead@dornerworks.com>, Ian Jackson <ian.jackson@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============3941560595666776700==
+--===============0479827831674011918==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-ta83OIz5pCIcRpIqzCQM"
+	protocol="application/pgp-signature"; boundary="=-iPjLG8nmGZFvnX1rNsfz"
 
 
---=-ta83OIz5pCIcRpIqzCQM
+--=-iPjLG8nmGZFvnX1rNsfz
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2018-02-05 at 06:36 -0700, Jan Beulich wrote:
+On Mon, 2018-02-05 at 06:35 -0700, Jan Beulich wrote:
 > > > > On 05.02.18 at 12:36, <george.dunlap@citrix.com> wrote:
 > >=20
-> > The ARINC653 scheduler is targeted at a very specific niche;
-> > typical
-> > users cannot benefit from using it.  Disable it by default for
-> > non-DEBUG builds.
->=20
-> The more that its prompt says "(EXPERIMENTAL)".
->=20
+> > ...so that it shows up in the menu and can be disabled.
+> >=20
 > > Signed-off-by: George Dunlap <george.dunlap@citrix.com>
 >=20
 > Acked-by: Jan Beulich <jbeulich@suse.com>
@@ -60,33 +54,33 @@ Dario
 -----------------------------------------------------------------
 Dario Faggioli, Ph.D, http://about.me/dario.faggioli
 Software Engineer @ SUSE https://www.suse.com/
---=-ta83OIz5pCIcRpIqzCQM
+--=-iPjLG8nmGZFvnX1rNsfz
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlp4bTkACgkQFkJ4iaW4
-c+5lkw//S/ZxCqhqHGGksvS5QHCeZ3+GINDBfUbw7Vjcjm7E3fYCYW7Q4obKpaVu
-J04jVFCrhuEk9d2VTIQxqQue+iHN2s/6lGqboFAOahTzW4/VYyUbPyUfmnZ3I95l
-Uwi+pypbhoBBoWgjh7T/7420jqKtVQAoAx5xTiznZg9SBxwsqLsx13lgQsrI5YbN
-WYtaiFxQh3kNb4OTJVvNbnDE2HQ1WOxzrMzV2ws/H30LoWIABuyLBSenVgNtoYUE
-N9DOor2hyvxWHxEbdp/Mx+IRA58U4zsqym7DI47fgv46lU6JxhpxNfRms2W0lUW5
-2PPYuVIsRZSHHPrI9b+Pl8EMGesvc789O5PHwDfy4JgrHV4Fjigwlv8scJaRJ291
-fc6L7L4TJynj0x4jJg+dgFchgulace3VCyQSZBr1a+Zagax807zA6EQmXXucjSzy
-3xc9C3ueBZIKkGrldyM2ykAvrRJeho74jj+iM//sFTTakjjSEmf7LcWI6ILHWjzD
-o789ez6PhPp6ZWpm7gv8ff2Pv2u5PDoBBhrkJYewqdX9VCOCbZzzxBr0ZJfpw6HY
-xh5U++HpLenWtcRK6fSHZMHoGVEC5LByGSwXN1CVyUghrN+amSWDvc5RNc1A7Hd5
-h+D+aI8pqfAwPnL01HSWVeR66wVeYgef+mBXuQqpsK60qxjNQHg=
-=yg/2
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlp4bacACgkQFkJ4iaW4
+c+6n2RAAnYykfI8ow7XXOQnFtdND55T6WIonUsySR6wDdNZJo3Zdyq02cJbLtkbC
+0Ku/fl6T2/DlfAepgWiMYHW+o0FuutgRfP6IXC4PcBaTBDNIipicZzBmcTiZPaVJ
+8cjuIvU9IF4dzcNilaYK4w9jdsoTWqSmf6ff8JdP5u3O1pvdjeaEyiRmQkXHVBF9
+EJRU80Vn/sKDl3NaUBJrURRbiehloCbDTZWKbuxS9+Mlge2FkCCIq9t9Dg3JK9xF
+YXIAUHXh96DlZp5m8qba000I8IK3uUyJy2YORdUhhg8pD/Eod7cKytYCvkENj1H0
+YK+MPDTDPHrpQ8i4KopNLhZYZr/JECKwqP+MNqUens7ZGzfQN/RvwdhYCnUSLQcL
+49EDRJkjIgLftiIENH9mAu+k+xdv6JyoNxX2pJ+lTkZFD71HS8oZ8clPDFRMlPLR
+AMZ6Um0WpTx+GGie5QAp36e/SpQq4u4oVwj3Yy5+YUlc7K4jySi8iwPRzx29X9P7
+iLThzwfqv75Q/Wg+jhPdzhcw/eSI1+8+FyjaF6DX1y6SgsvAh6YuO3bfUIwptikX
+r905pc3X0winV4z1DcCM+KTSqutSD8JGK1uad9ygdW1Qu3jMKLg11qrbxDsbbzhS
+aPnzbmA3CrKwf4o8MihwC21sZibKiqi7ZnatRl0zzxV1ELboO68=
+=7V60
 -----END PGP SIGNATURE-----
 
---=-ta83OIz5pCIcRpIqzCQM--
+--=-iPjLG8nmGZFvnX1rNsfz--
 
 
 
---===============3941560595666776700==
+--===============0479827831674011918==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -96,4 +90,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============3941560595666776700==--
+--===============0479827831674011918==--
