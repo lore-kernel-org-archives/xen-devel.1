@@ -1,14 +1,13 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86/pv: Rename pv/ro-page-fault.c to
- pv/emul-ro-page-fault.c
-Date: Mon, 05 Feb 2018 01:57:42 -0700
-Message-ID: <5A782A9602000078001A5180@prv-mh.provo.novell.com>
-References: <1517590727-13443-1-git-send-email-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/emul: Misc non-functional improvements
+Date: Mon, 05 Feb 2018 02:01:08 -0700
+Message-ID: <5A782B6402000078001A518D@prv-mh.provo.novell.com>
+References: <1517590495-28340-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1517590727-13443-1-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1517590495-28340-1-git-send-email-andrew.cooper3@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,19 +21,12 @@ To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDAyLjAyLjE4IGF0IDE3OjU4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gVG8gbWF0Y2ggYWxsIG91ciBvdGhlciBlbXVsYXRpb24gaGFuZGxpbmcuCj4gCj4gTm8g
-ZnVuY3Rpb25hbCBjaGFuZ2UuCj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5k
-cmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPiAtLS0KPiBDQzogSmFuIEJldWxpY2ggPEpCZXVsaWNo
-QHN1c2UuY29tPgo+IC0tLQo+ICB4ZW4vYXJjaC94ODYvcHYvTWFrZWZpbGUgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgfCAyICstCj4gIHhlbi9hcmNoL3g4Ni9wdi97cm8tcGFnZS1m
-YXVsdC5jID0+IGVtdWwtcm8tcGFnZS1mYXVsdC5jfSB8IDIgKy0KPiAgMiBmaWxlcyBjaGFuZ2Vk
-LCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCj4gIHJlbmFtZSB4ZW4vYXJjaC94ODYv
-cHYve3JvLXBhZ2UtZmF1bHQuYyA9PiBlbXVsLXJvLXBhZ2UtZmF1bHQuY30gKDk5JSkKCldoZW4g
-dGhpcyBmaWxlIHdhcyBpbnRyb2R1Y2VkLCBpaXJjIEkgaGFkIHNwZWNpZmljYWxseSBhc2tlZCB0
-byBkcm9wCnRoZSBwb2ludGxlc3MgZW11bC0gcHJlZml4LiBJZiB5b3Ugd2FudCB0byBtYWtlIHRo
-aW5ncyBjb25zaXN0ZW50CmFnYWluLCBwbGVhc2UgaW5zdGVhZCBkcm9wIHRoZSBlbXVsLSBwcmVm
-aXhlcyBvZiB0aGUgb3RoZXIgZmlsZXMuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+ID4+PiBPbiAwMi4wMi4xOCBhdCAxNzo1NCwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdy
+b3RlOgo+ICogRHJvcCB0cmFpbGluZyB3aGl0ZXNwYWNlCj4gICogVXNlIEFSUkFZX1NJWkUoKSBy
+YXRoZXIgdGhhbiBvcGVuY29kaW5nIGl0CgpBcHBhcmVudGx5IGEgbGVmdC1vdmVyIGZyb20gd2hl
+biB0aGUgdGVzdCBoYXJuZXNzIGRpZG4ndCBoYXZlIGEKc3VpdGFibGUgI2RlZmluZSB5ZXQuCgo+
+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+
+CgpSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKSmFuCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
