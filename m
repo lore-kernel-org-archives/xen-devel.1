@@ -1,19 +1,25 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 1/3] Make credit2 the default scheduler
-Date: Mon, 05 Feb 2018 17:53:21 +0100
-Message-ID: <1517849601.8082.10.camel@suse.com>
-References: <20180205113642.3174-1-george.dunlap@citrix.com>
- <edf342de-0dee-69c0-d239-75f928960bd4@citrix.com>
- <d9a9e4c9-1a78-ac26-0bda-cea8e842e05d@citrix.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v3 22/25] x86/HVM: do actual CMPXCHG in
+	hvmemul_cmpxchg()
+Date: Mon, 5 Feb 2018 16:57:21 +0000
+Message-ID: <e5d332cd-da63-e2c3-392b-0152799c4b29@citrix.com>
+References: <5A29550C020000780019585B@prv-mh.provo.novell.com>
+ <5A295B67020000780019598E@prv-mh.provo.novell.com>
+ <86b26aaf-4f2d-2759-547e-397e3b7db753@citrix.com>
+ <5A7824B202000078001A5137@prv-mh.provo.novell.com>
+ <83da3e62-3156-0759-21ea-f6a5351f05b5@citrix.com>
+ <5A78992002000078001A563E@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8995976920671066494=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=jhda=e7=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1eik1r-0003iL-55
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2018 16:54:03 +0000
-In-Reply-To: <d9a9e4c9-1a78-ac26-0bda-cea8e842e05d@citrix.com>
+ <srs0=xio2=e7=citrix.com=prvs=567de97ac=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1eik5B-0003rf-Vd
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2018 16:57:30 +0000
+In-Reply-To: <5A78992002000078001A563E@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,106 +28,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8995976920671066494==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-YVsgBTyAE9yuFZqCXasF"
-
-
---=-YVsgBTyAE9yuFZqCXasF
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 2018-02-05 at 13:01 +0000, George Dunlap wrote:
-> On 02/05/2018 11:45 AM, Andrew Cooper wrote:
-> >=20
-> Here is a summary of data from an intern e-mail Dario sent about 6
-> months ago:
->=20
-> * DVDbench: On underloaded systems, credit2 outperformed credit1 by
-> about 4%.  On overloaded systems, credit2 underperformed by about 3%.
->=20
-> * On a range of tests (unixbench, lmbench, &c), credit and credit2
-> perform within 5% of each other (up and down).
->=20
-> * Credit2 fairly consistently beats credit for TCP-style workloads.
->=20
-> * Credit2 is sometimes equal to, sometimes 5-15% worse than, credit
-> for
-> synthetic CPU workloads (e.g., Dhrystone).
->=20
-> * On LoginVSI, credit2 fairly consistently outperforms credit by
-> about 10%.
->=20
-Thanks George for summing this up!
-
-> Credit2, like credit, has a number of workloads / setups for which
-> performance could be improved.  Personally I think networking and
-> partially-loaded systems is going to be more representative of what
-> Xen
-> is actually used for; so I think credit2 is on the whole the better
-> scheduler to use by default. =20
->
-I'm sure this will sound no surprise for anyone, but allow me to say it
-anyway: I agree with George. :-D
-
-> And in any case, making those improvements
-> on credit2 will be easier than on credit.
->=20
-And, if possible, I agree with George on this even more!
-
-One thing I think we should consider, though, is that we've often said
-we would switch at the very beginning of a dev cycle, to get as much as
-osstest and day-by-day testing from developer as possible.
-
-Considering we're releasing in June, but freezing in March, do we think
- it is still early enough?
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-YVsgBTyAE9yuFZqCXasF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlp4jAEACgkQFkJ4iaW4
-c+520xAAjaozxFOmQ0C15NedZ7ERAZeXJ3SiCmhxh5qb8ptqR6n4URD+aqpXbWu1
-yLKjAT8NaooLDateRMHjBsnKUBtI0N+yews9STQCWXu61cnllTZNN2X50zeX8WL4
-abRUh1Lj9Ns/z157r1LSpz3EF0cabPWSO+CBTDVC2DcfpNWM5IhWcR2RlKdiHIfp
-V0hjrXqhrbBGUYdLTgxL//GO89hUgSAKIuQv9uxCqJsLZNqnSY5gQx7/9lJPD8up
-NpZCHXID3XBZQvYcB2eeeup32rB59EKRCKkRltbf6PTg69DKL1rYiq6VgX/0yOQg
-pvdapk/JhfLeqS9/E0huwxLlx9xmYkhOWrz7+hq/Oq5VDT24FwLxZezkxxzPg5kf
-5KhgmA3lmOLTtA8EmxsMuS4vymyxRuBJNf+m+EvWo0tx/8yYAB7Q705mPhd8CLoy
-/HRCKi2fbP4+clxHSwqj8NOPaGRloRsG8sgW6rbokXGHu77JzVoQNX+c2EUoC5MN
-a+U5v3vHCgZlyiFm2xL/eiSili0kHwSSzO6Q4USBQfEo7VGGyzgPZTXQ47U6HEyb
-IJFHsDvS02qjORgXTs5WBkBNKTu8/1WHyMbncvAVNqqhoiexnjQhQt9N+xyHa9U0
-PNemnxEeuEdHldAHygp553WVII5UWiyC30IvFgVDglyFyqVBXrs=
-=MLEf
------END PGP SIGNATURE-----
-
---=-YVsgBTyAE9yuFZqCXasF--
-
-
-
---===============8995976920671066494==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8995976920671066494==--
+T24gMDUvMDIvMTggMTY6NDksIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDA1LjAyLjE4IGF0
+IDE3OjA5LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IE9uIDA1LzAyLzE4
+IDA4OjMyLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4+IE9uIDAyLjAyLjE4IGF0IDE3OjM2LCA8
+YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+Pj4gT24gMDcvMTIvMTcgMTQ6MTYs
+IEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiArICAgIGNhc2UgMTY6Cj4+Pj4+ICsgICAgICAgIGlm
+ICggY3B1X2hhc19jeDE2ICkKPj4+Pj4gKyAgICAgICAgewo+Pj4+PiArICAgICAgICAgICAgX191
+aW50MTI4X3QgKm9sZCA9IHBfb2xkLCBjdXI7Cj4+Pj4+ICsKPj4+Pj4gKyAgICAgICAgICAgIGlm
+ICggbG9jayApCj4+Pj4+ICsgICAgICAgICAgICAgICAgY3VyID0gX19jbXB4Y2hnMTZiKG1hcHBp
+bmcsIG9sZCwgcF9uZXcpOwo+Pj4+PiArICAgICAgICAgICAgZWxzZQo+Pj4+PiArICAgICAgICAg
+ICAgICAgIGN1ciA9IGNtcHhjaGcxNmJfbG9jYWxfKG1hcHBpbmcsIG9sZCwgcF9uZXcpOwo+Pj4+
+PiArICAgICAgICAgICAgaWYgKCBjdXIgIT0gKm9sZCApCj4+Pj4+ICsgICAgICAgICAgICB7Cj4+
+Pj4+ICsgICAgICAgICAgICAgICAgKm9sZCA9IGN1cjsKPj4+Pj4gKyAgICAgICAgICAgICAgICBy
+YyA9IFg4NkVNVUxfQ01QWENIR19GQUlMRUQ7Cj4+Pj4+ICsgICAgICAgICAgICB9Cj4+Pj4+ICsg
+ICAgICAgICAgICBicmVhazsKPj4+Pj4gKyAgICAgICAgfQo+Pj4+PiArICAgICAgICAvKiBmYWxs
+IHRocm91Z2ggKi8KPj4+Pj4gKyAgICBkZWZhdWx0Ogo+Pj4+IEFTU0VSVF9VTlJFQUNIQUJMRSgp
+ID8KPj4+Pgo+Pj4+PiArICAgICAgICByYyA9IFg4NkVNVUxfVU5IQU5ETEVBQkxFOwo+Pj4+PiAr
+ICAgICAgICBicmVhazsKPj4+Pj4gKyAgICB9Cj4+PiBJJ20gbm90IHN1cmUgLSBmcm9tIGFuIGFi
+c3RyYWN0IFBPViBjcHVfaGFzX2N4MTYgYW5kIHRoZSBndWVzdAo+Pj4gc2VlaW5nIHRoZSBmZWF0
+dXJlIGF2YWlsYWJsZSBpbiBpdHMgQ1BVSUQgcG9saWN5IGNvdWxkIGRpZmZlci4gR3JhbnRlZAo+
+Pj4gd2UncmUgdW5saWtlbHkgdG8gd2FudCB0byB0cnkgdG8gZW11bGF0ZSBDTVBYQ0hHMTZCIHdp
+dGhvdXQgaGF2aW5nCj4+PiB0aGUgaW5zdHJ1Y3Rpb24gYXZhaWxhYmxlIG91cnNlbHZlcywgYnV0
+IGl0IHN0aWxsIHdvdWxkbid0IHNlZW0gZW50aXJlbHkKPj4+IGNvcnJlY3QgdG8gYXNzZXJ0IGhl
+cmUuIEkgY291bGQgcmVtb3ZlIHRoZSBmYWxsLXRocm91Z2ggYW5kIF90aGVuXwo+Pj4gYXNzZXJ0
+IGluIHRoZSBkZWZhdWx0IGNhc2Ugb25seS4gTGV0IG1lIGtub3cuCj4+IFRoZSBwb2ludCB3YXMg
+dG8gY2F0Y2ggYmFkIHNpemVzIGZyb20gYmVpbmcgcGFzc2VkIGluLiAgVGhlcmUgaXMgb25seSBh
+Cj4+IHNpbmdsZSBhbmNpZW50IHJhbmdlIG9mIDY0Yml0IHByb2Nlc3NvcnMgd2hpY2ggZG9uJ3Qg
+aGF2ZSBDWDE2LCBidXQgSSdkCj4+IHN0aWxsIGFyZ3VlIHRoYXQgaXQgd291bGQgYmUgYSBidWcg
+Zm9yIHRoZSBlbXVsYXRvciB0byBwYXNzIDE2IGRvd24gaW4KPj4gc3VjaCBjYXNlcy4KPiBTbyAt
+IGFyZSB5b3UgZmluZSB0aGVuIHdpdGggbXkgZWFybGllciBzdWdnZXN0aW9uIHRvd2FyZHMgYW4g
+YWN0dWFsCj4gY2hhbmdlIHRvIG1ha2UgaGVyZT8KCk9rLgoKPgo+Pj4+PiAtLS0gYS94ZW4vaW5j
+bHVkZS9hc20teDg2L3N5c3RlbS5oCj4+Pj4+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvc3lz
+dGVtLmgKPj4+Pj4gQEAgLTExMCw2ICsxMTAsMzggQEAgc3RhdGljIGFsd2F5c19pbmxpbmUgdW5z
+aWduZWQgbG9uZyBfX2NtcAo+Pj4+PiAgICAgIHJldHVybiBvbGQ7Cj4+Pj4+ICB9Cj4+Pj4+ICAK
+Pj4+Pj4gK3N0YXRpYyBhbHdheXNfaW5saW5lIHVuc2lnbmVkIGxvbmcgY21weGNoZ19sb2NhbF8o
+Cj4+Pj4gdW5sb2NrZWRfY21weGNoZygpID8KPj4+IE5vdCBpbiBsaW5lIHdpdGggb3VyIGN1cnJl
+bnQgbmFtaW5nIHNjaGVtZS4KPj4gSXRzIHJhdGhlciBtb3JlIGluIGxpbmUgdGhhbiBpbnRyb2R1
+Y2luZyBhIGxvY2FsXyBzdWZmaXguICBUcmFpbGluZwo+PiB1bmRlcnNjb3JlcyBhcmUgYWxtb3N0
+IG5vbi1leGlzdGFudCwgYW5kIGFzIGZhciBhcyBJIGNhbiB0ZWxsLCB1c2VkCj4+IGV4Y2x1c2l2
+ZWx5IGluIHRoZSBpbnRlcm5hbHMgb2YgdGhlIGNvbXBhdCBjb2RlLgo+IFdlbGwsIHRoZSBuYW1l
+IGNob2ljZSBzdGFydGVkIGZyb20gTGludXgnZXMgY21weGNoZ19sb2NhbCgpLCBvZgo+IHdoaWNo
+IHRoZSBmdW5jdGlvbiBpbnRyb2R1Y2VkIGhlcmUgd291bGQgYmUgYSBoZWxwZXIuIEknZCBsaWtl
+IHRvCj4gc3RpY2sgdG8gdGhlIExpbnV4IGluaGVyaXRlZCBuYW1pbmcgc2NoZW1lIChyZWFkOiBJ
+IHdhbnQgdG8ga2VlcAo+IHRoZSAiY21weGNoZ19sb2NhbCIgcGFydCksIGJ1dCBJIGRvbid0IGlu
+c2lzdCBvbiB0aGUgdHJhaWxpbmcKPiB1bmRlcnNjb3JlICh3aGljaCBJIG9ubHkgdXNlIGhlcmUg
+W2FuZCBlbHNld2hlcmVdIGluIHByZWZlcmVuY2UKPiBvZiBuYW1lIHNwYWNlIHZpb2xhdGluZyBs
+ZWFkaW5nIG9uZXMpLiBJJ2QganVzdCBuZWVkIGEgc3VnZ2VzdGlvbgo+IHRvd2FyZHMgYW4gYWx0
+ZXJuYXRpdmUgeW91IGNvdWxkIGxpdmUgd2l0aCwgYW5kIGZpdHRpbmcgdGhlIG91dGxpbmVkCj4g
+Y3JpdGVyaWEuCgpjbXB4Y2hnX2xvY2FsKCkgd291bGQgYmUgYmV0dGVyIHRoYW4gd2l0aCBhIHRy
+YWlsaW5nIHVuZGVyc2NvcmUuCgpTZWVpbmcgYXMgaXQgbWF0Y2hlcyB0aGUgTGludXggbmFtaW5n
+IHNjaGVtZSwgdXNpbmcgZXhhY3RseQpjbXB4Y2hnX2xvY2FsKCkgd291bGQgYmUgdGhlIGxvZ2lj
+YWwgbW92ZS4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
