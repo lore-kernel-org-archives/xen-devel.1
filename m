@@ -1,18 +1,15 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 1/3] Make credit2 the default scheduler
-Date: Mon, 5 Feb 2018 11:45:50 +0000
-Message-ID: <edf342de-0dee-69c0-d239-75f928960bd4@citrix.com>
-References: <20180205113642.3174-1-george.dunlap@citrix.com>
+Subject: Re: [PATCH] common/gnttab: Introduce command line
+	feature controls
+Date: Mon, 5 Feb 2018 11:55:27 +0000
+Message-ID: <c38539c0-616a-f2b9-af91-78a34b5815ec@citrix.com>
+References: <1517495926-19425-1-git-send-email-andrew.cooper3@citrix.com>
+ <5A7434AE02000078001A479D@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=xio2=e7=citrix.com=prvs=567de97ac=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1eifDl-0007Q1-6M
- for xen-devel@lists.xenproject.org; Mon, 05 Feb 2018 11:46:01 +0000
-In-Reply-To: <20180205113642.3174-1-george.dunlap@citrix.com>
+In-Reply-To: <5A7434AE02000078001A479D@prv-mh.provo.novell.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,23 +19,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Tim Deegan <tim@xen.org>, Dario Faggioli <dfaggioli@suse.com>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDUvMDIvMTggMTE6MzYsIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4gQ3JlZGl0MiB3YXMgZGVj
-bGFyZWQgInN1cHBvcnRlZCIgaW4gNC44LCBhbmQgYXMgb2YgNC4xMCBoYWQgdHdvIG90aGVyCj4g
-Y3JpdGljYWwgZmVhdHVyZXMgaW1wbGVtZW50ZWQgKHNvZnQgYWZmaW5pdHkgLyBOVU1BIGFuZCBj
-YXBzKS4KPgo+IFNpZ25lZC1vZmYtYnk6IEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0
-cml4LmNvbT4KCk9uIHdoYXQganVzdGlmaWNhdGlvbj8KClN3aXRjaGluZyB0aGUgZGVmYXVsdCBp
-bnZvbHZlcyBkZW1vbnN0cmF0aW5nIHRoYXQgdGhlIG5ldyBkZWZhdWx0IGlzCmJldHRlciB0aGFu
-IHRoZSBvbGQgb25lLCBhbmQgc2ltcGx5ICJ3ZSd2ZSBpbXBsZW1lbnRlZCBtb3JlIGZlYXR1cmVz
-Igppc24ndCBnb29kIGVub3VnaCBJTU8uCgpUaGUgbGFzdCBzZXQgb2YgbWVhc3VyZW1lbnRzIEkg
-cmVjYWxsIHNlZWluZyBzYWlkIHRoYXQgY3JlZGl0MSBhbmQKY3JlZGl0MiB3ZXJlIG1vc3RseSBr
-bmVjay1hbmQta25lY2ssIGJ1dCB0aGVyZSB3YXMgc3RpbGwgYSBub3RpY2VhYmxlCmRpZmZlcmVu
-Y2UgaW4gY3JlZGl0MSdzIGZhdm91ciB3aGVuIGl0IGNhbWUgdG8gYWdncmVnYXRlIHNtYWxsLXBh
-Y2tldApUQ1AgdGhyb3VnaHB1dCwgYW5kIG5vIGJlbmNobWFyayB3aGVyZSBjcmVkaXQyIHdhcyBj
-bGVhcmx5IGEgd2lubmVyLgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+T24gMDIvMDIvMTggMDg6NTEsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDAxLjAyLjE4IGF0
+IDE1OjM4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IC0tLSBhL2RvY3Mv
+bWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3duCj4+ICsrKyBiL2RvY3MvbWlzYy94ZW4tY29t
+bWFuZC1saW5lLm1hcmtkb3duCj4+IEBAIC05MTYsNiArOTE2LDE5IEBAIENvbnRyb2xzIEVQVCBy
+ZWxhdGVkIGZlYXR1cmVzLgo+PiAgCj4+ICBTcGVjaWZ5IHdoaWNoIGNvbnNvbGUgZ2Ric3R1YiBz
+aG91bGQgdXNlLiBTZWUgKipjb25zb2xlKiouCj4+ICAKPj4gKyMjIyBnbnR0YWIKPj4gKz4gYD0g
+TGlzdCBvZiBbIG1heF92ZXI6PGludGVnZXI+LCB0cmFuc2l0aXZlPTxib29sPiBdYAo+IEkgcmVh
+bGl6ZSB5b3UgZG9uJ3Qgd2FudCB0byBjaGFuZ2UgdGhpcyBhcyBwZW9wbGUgYWxyZWFkeSB1c2Ug
+aXQsIGJ1dAo+IEknZCBzdGlsbCBsaWtlIHRvIGdpdmUgbXkgdXN1YWwgY29tbWVudDogSSdkIHBy
+ZWZlciBpZiB3ZSBjb3VsZCBhdm9pZAo+IGludHJvZHVjaW5nIGZ1cnRoZXIgdW5kZXJzY29yZS1j
+b250YWluaW5nIChzdWIpb3B0aW9ucy4gSSByZWFsbHkgZG9uJ3QKPiB1bmRlcnN0YW5kIHdoeSBl
+dmVyeW9uZSBkb2VzIHRoaXM6IERhc2hlcyBhcmUgZWFzaWVyIHRvIHR5cGUgb24KPiBhbGwga2V5
+Ym9hcmRzIEknbSBhd2FyZSBvZiwgYW5kIHRoZXJlJ3Mgbm8gbmVlZCB0byBtaW1pYyBDIGlkZW50
+aWZpZXIKPiBuYW1lcyBmb3IgY29tbWFuZCBsaW5lIG9wdGlvbnMuCgpJIGNhbiBpbnRyb2R1Y2Ug
+YSBtYXgtdmVyIGFsaWFzIGlmIHlvdSBpbnNpc3QsIGJ1dCBkcm9wcGluZyBtYXhfdmVyIGhlcmUK
+aXMgZ29pbmcgdG8gYnJlYWsgdXNlcnMgd2hvIHRvb2sgdGhpcyBwYXRjaCBmb3IgWFNBLTIyNi4K
+Cn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
