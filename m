@@ -1,14 +1,19 @@
-From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-Subject: Re: [PATCH] xen: Improvements to domain_crash_sync()
-Date: Mon, 5 Feb 2018 13:01:09 -0500
-Message-ID: <20180205180109.GZ26220@char.us.oracle.com>
-References: <1517829415-19820-1-git-send-email-andrew.cooper3@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] pvcalls-back: do not return error on
+ inet_accept EAGAIN
+Date: Mon, 5 Feb 2018 10:01:32 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1802050953570.10160__47253.1923129738$1517853644$gmane$org@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1802021728420.10160@sstabellini-ThinkPad-X260>
+ <936e4d18-3f0d-3fc5-2272-c1ad9a5c7022@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1047736138-1517853694=:10160"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <1517829415-19820-1-git-send-email-andrew.cooper3@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=gefk=e7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1eil5E-0000q1-2E
+ for xen-devel@lists.xenproject.org; Mon, 05 Feb 2018 18:01:36 +0000
+In-Reply-To: <936e4d18-3f0d-3fc5-2272-c1ad9a5c7022@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,105 +22,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Jan Beulich <JBeulich@suse.com>, Jun Nakajima <jun.nakajima@intel.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: jgross@suse.com, xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBGZWIgMDUsIDIwMTggYXQgMTE6MTY6NTVBTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBUaGUgdXNlIG9mIF9fTElORV9fIGluIGEgcHJpbnRrKCkgaXMgcHJvYmxlbWF0aWMg
-Zm9yIGxpdmVwYXRjaGluZywgYXMgaXQKPiBjYXVzZXMgdW5uZWNlc3NhcnkgYmluYXJ5IGRpZmZl
-cmVuY2VzLgo+IAo+IEZ1cnRoZXJtb3JlLCBkaWFnbm9zdGljIGluZm9ybWF0aW9uIGFyb3VuZCBj
-YWxscyBpcyBpbmNvbnNpc3RlbnQgYW5kCj4gb2NjYXNpb25hbGx5IHVuaGVscGZ1bC4gIChlLmcu
-IGRpYWdub3NpbmcgbG9ncyBmcm9tIHRoZSBmaWVsZCB3aGljaCBtaWdodCBiZQo+IHJlbGVhc2Ug
-YnVpbGRzLCBvciBsaWtlbHkgd2l0aG91dCBleGFjdCBzb3VyY2UgY29kZSkuCj4gCj4gVGFrZSB0
-aGUgb3Bwb3J0dW5pdHkgdG8gaW1wcm92ZSB0aGluZ3MuICBTaG9ydGVuIHRoZSBuYW1lIHRvCj4g
-ZG9tYWluX2NyYXNoX3N5bmMoKSBhbmQgcmVxdWlyZSB0aGUgdXNlciB0byBwYXNzIGEgcHJpbnQg
-bWVzc2FnZSBpbi4KPiAKPiBJbnRlcm5hbGx5LCB0aGUgY2FsbGluZyBmdW5jdGlvbiBpcyBpZGVu
-dGlmaWVkLCBhbmQgdGhlIG1lc3NhZ2UgaXMgZW1pdHRlZCBhcwo+IGEgbm9uLWRlYnVnIGd1ZXN0
-IGVycm9yLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIz
-QGNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQu
-d2lsa0BvcmFjbGUuY29tPgo+IC0tLQo+IENDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5j
-b20+Cj4gQ0M6IEp1biBOYWthamltYSA8anVuLm5ha2FqaW1hQGludGVsLmNvbT4KPiBDQzogS2V2
-aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+Cj4gLS0tCj4gIHhlbi9hcmNoL3g4Ni9odm0v
-dm14L3ZtY3MuYyB8ICAyICstCj4gIHhlbi9hcmNoL3g4Ni90cmFwcy5jICAgICAgICB8ICA1ICst
-LS0tCj4gIHhlbi9jb21tb24vZG9tYWluLmMgICAgICAgICB8ICAyICstCj4gIHhlbi9jb21tb24v
-d2FpdC5jICAgICAgICAgICB8IDE2ICsrKystLS0tLS0tLS0tLS0KPiAgeGVuL2luY2x1ZGUveGVu
-L3NjaGVkLmggICAgIHwgMTEgKysrKysrLS0tLS0KPiAgNSBmaWxlcyBjaGFuZ2VkLCAxMyBpbnNl
-cnRpb25zKCspLCAyMyBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2
-L2h2bS92bXgvdm1jcy5jIGIveGVuL2FyY2gveDg2L2h2bS92bXgvdm1jcy5jCj4gaW5kZXggZTc4
-MThjYS4uNTM3MGZmYSAxMDA2NDQKPiAtLS0gYS94ZW4vYXJjaC94ODYvaHZtL3ZteC92bWNzLmMK
-PiArKysgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92bWNzLmMKPiBAQCAtMTY2OSw3ICsxNjY5LDcg
-QEAgdm9pZCB2bXhfdm1lbnRyeV9mYWlsdXJlKHZvaWQpCj4gICAgICAgICAgIGVycm9yID09IFZN
-WF9JTlNOX0lOVkFMSURfSE9TVF9TVEFURSApCj4gICAgICAgICAgdm1jc19kdW1wX3ZjcHUoY3Vy
-cik7Cj4gIAo+IC0gICAgZG9tYWluX2NyYXNoX3N5bmNocm9ub3VzKCk7Cj4gKyAgICBkb21haW5f
-Y3Jhc2hfc3luYygiXG4iKTsgLyogTm90aGluZyBmdXJ0aGVyIGludGVyZXN0aW5nIHRvIHByaW50
-LiAqLwo+ICB9Cj4gIAo+ICB2b2lkIHZteF9kb19yZXN1bWUoc3RydWN0IHZjcHUgKnYpCj4gZGlm
-ZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni90cmFwcy5jIGIveGVuL2FyY2gveDg2L3RyYXBzLmMKPiBp
-bmRleCAxMTg3ZmQ5Li4zYzExNTgyIDEwMDY0NAo+IC0tLSBhL3hlbi9hcmNoL3g4Ni90cmFwcy5j
-Cj4gKysrIGIveGVuL2FyY2gveDg2L3RyYXBzLmMKPiBAQCAtMjExMSwxMCArMjExMSw3IEBAIHZv
-aWQgYXNtX2RvbWFpbl9jcmFzaF9zeW5jaHJvbm91cyh1bnNpZ25lZCBsb25nIGFkZHIpCj4gICAg
-ICBpZiAoIGFkZHIgPT0gMCApCj4gICAgICAgICAgYWRkciA9IHRoaXNfY3B1KGxhc3RfZXh0YWJs
-ZV9hZGRyKTsKPiAgCj4gLSAgICBwcmludGsoImRvbWFpbl9jcmFzaF9zeW5jIGNhbGxlZCBmcm9t
-IGVudHJ5LlM6IGZhdWx0IGF0ICVwICVwU1xuIiwKPiAtICAgICAgICAgICBfcChhZGRyKSwgX3Ao
-YWRkcikpOwo+IC0KPiAtICAgIF9fZG9tYWluX2NyYXNoX3N5bmNocm9ub3VzKCk7Cj4gKyAgICBk
-b21haW5fY3Jhc2hfc3luYygiZW50cnkuUyBmYXVsdCBhdCAlcFMgWyVwXVxuIiwgX3AoYWRkciks
-IF9wKGFkZHIpKTsKPiAgfQo+ICAKPiAgLyoKPiBkaWZmIC0tZ2l0IGEveGVuL2NvbW1vbi9kb21h
-aW4uYyBiL3hlbi9jb21tb24vZG9tYWluLmMKPiBpbmRleCA0NTY3NzczLi5kM2JhMmMyIDEwMDY0
-NAo+IC0tLSBhL3hlbi9jb21tb24vZG9tYWluLmMKPiArKysgYi94ZW4vY29tbW9uL2RvbWFpbi5j
-Cj4gQEAgLTY4NSw3ICs2ODUsNyBAQCB2b2lkIF9fZG9tYWluX2NyYXNoKHN0cnVjdCBkb21haW4g
-KmQpCj4gIH0KPiAgCj4gIAo+IC12b2lkIF9fZG9tYWluX2NyYXNoX3N5bmNocm9ub3VzKHZvaWQp
-Cj4gK3ZvaWQgX19kb21haW5fY3Jhc2hfc3luYyh2b2lkKQo+ICB7Cj4gICAgICBfX2RvbWFpbl9j
-cmFzaChjdXJyZW50LT5kb21haW4pOwo+ICAKPiBkaWZmIC0tZ2l0IGEveGVuL2NvbW1vbi93YWl0
-LmMgYi94ZW4vY29tbW9uL3dhaXQuYwo+IGluZGV4IGE1N2JjMTAuLjE1M2E1OWUgMTAwNjQ0Cj4g
-LS0tIGEveGVuL2NvbW1vbi93YWl0LmMKPiArKysgYi94ZW4vY29tbW9uL3dhaXQuYwo+IEBAIC0x
-MzMsMTAgKzEzMyw3IEBAIHN0YXRpYyB2b2lkIF9fcHJlcGFyZV90b193YWl0KHN0cnVjdCB3YWl0
-cXVldWVfdmNwdSAqd3F2KQo+ICAgICAgd3F2LT53YWtldXBfY3B1ID0gc21wX3Byb2Nlc3Nvcl9p
-ZCgpOwo+ICAgICAgY3B1bWFza19jb3B5KCZ3cXYtPnNhdmVkX2FmZmluaXR5LCBjdXJyLT5jcHVf
-aGFyZF9hZmZpbml0eSk7Cj4gICAgICBpZiAoIHZjcHVfc2V0X2hhcmRfYWZmaW5pdHkoY3Vyciwg
-Y3B1bWFza19vZih3cXYtPndha2V1cF9jcHUpKSApCj4gLSAgICB7Cj4gLSAgICAgICAgZ2Rwcmlu
-dGsoWEVOTE9HX0VSUiwgIlVuYWJsZSB0byBzZXQgdmNwdSBhZmZpbml0eVxuIik7Cj4gLSAgICAg
-ICAgZG9tYWluX2NyYXNoX3N5bmNocm9ub3VzKCk7Cj4gLSAgICB9Cj4gKyAgICAgICAgZG9tYWlu
-X2NyYXNoX3N5bmMoIlVuYWJsZSB0byBzZXQgdmNwdSBhZmZpbml0eVxuIik7Cj4gIAo+ICAgICAg
-LyogSGFuZC1yb2xsZWQgc2V0am1wKCkuICovCj4gICAgICBhc20gdm9sYXRpbGUgKAo+IEBAIC0x
-NjQsMTAgKzE2MSw3IEBAIHN0YXRpYyB2b2lkIF9fcHJlcGFyZV90b193YWl0KHN0cnVjdCB3YWl0
-cXVldWVfdmNwdSAqd3F2KQo+ICAgICAgICAgIDogIm1lbW9yeSIgKTsKPiAgCj4gICAgICBpZiAo
-IHVubGlrZWx5KHdxdi0+ZXNwID09IDApICkKPiAtICAgIHsKPiAtICAgICAgICBnZHByaW50ayhY
-RU5MT0dfRVJSLCAiU3RhY2sgdG9vIGxhcmdlIGluICVzXG4iLCBfX2Z1bmNfXyk7Cj4gLSAgICAg
-ICAgZG9tYWluX2NyYXNoX3N5bmNocm9ub3VzKCk7Cj4gLSAgICB9Cj4gKyAgICAgICAgZG9tYWlu
-X2NyYXNoX3N5bmMoIlN0YWNrIHRvbyBsYXJnZVxuIik7Cj4gIAo+ICAgICAgY3B1X2luZm8tPmd1
-ZXN0X2NwdV91c2VyX3JlZ3MuZW50cnlfdmVjdG9yID0gZW50cnlfdmVjdG9yOwo+ICB9Cj4gQEAg
-LTE5NCwxMCArMTg4LDggQEAgdm9pZCBjaGVja193YWtldXBfZnJvbV93YWl0KHZvaWQpCj4gICAg
-ICAgICAgc3RydWN0IHZjcHUgKmN1cnIgPSBjdXJyZW50Owo+ICAgICAgICAgIGNwdW1hc2tfY29w
-eSgmd3F2LT5zYXZlZF9hZmZpbml0eSwgY3Vyci0+Y3B1X2hhcmRfYWZmaW5pdHkpOwo+ICAgICAg
-ICAgIGlmICggdmNwdV9zZXRfaGFyZF9hZmZpbml0eShjdXJyLCBjcHVtYXNrX29mKHdxdi0+d2Fr
-ZXVwX2NwdSkpICkKPiAtICAgICAgICB7Cj4gLSAgICAgICAgICAgIGdkcHJpbnRrKFhFTkxPR19F
-UlIsICJVbmFibGUgdG8gc2V0IHZjcHUgYWZmaW5pdHlcbiIpOwo+IC0gICAgICAgICAgICBkb21h
-aW5fY3Jhc2hfc3luY2hyb25vdXMoKTsKPiAtICAgICAgICB9Cj4gKyAgICAgICAgICAgIGRvbWFp
-bl9jcmFzaF9zeW5jKCJVbmFibGUgdG8gc2V0IHZjcHUgYWZmaW5pdHlcbiIpOwo+ICsKPiAgICAg
-ICAgICB3YWl0KCk7IC8qIHRha2VzIHVzIGJhY2sgaW50byB0aGUgc2NoZWR1bGVyICovCj4gICAg
-ICB9Cj4gIAo+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS94ZW4vc2NoZWQuaCBiL3hlbi9pbmNs
-dWRlL3hlbi9zY2hlZC5oCj4gaW5kZXggMzlmOTM4Ni4uMWRhOTNhYSAxMDA2NDQKPiAtLS0gYS94
-ZW4vaW5jbHVkZS94ZW4vc2NoZWQuaAo+ICsrKyBiL3hlbi9pbmNsdWRlL3hlbi9zY2hlZC5oCj4g
-QEAgLTYyNywxMSArNjI3LDEyIEBAIHZvaWQgX19kb21haW5fY3Jhc2goc3RydWN0IGRvbWFpbiAq
-ZCk7Cj4gICAqIE1hcmsgY3VycmVudCBkb21haW4gYXMgY3Jhc2hlZCBhbmQgc3luY2hyb25vdXNs
-eSBkZXNjaGVkdWxlIGZyb20gdGhlIGxvY2FsCj4gICAqIHByb2Nlc3Nvci4gVGhpcyBmdW5jdGlv
-biBuZXZlciByZXR1cm5zLgo+ICAgKi8KPiAtdm9pZCBub3JldHVybiBfX2RvbWFpbl9jcmFzaF9z
-eW5jaHJvbm91cyh2b2lkKTsKPiAtI2RlZmluZSBkb21haW5fY3Jhc2hfc3luY2hyb25vdXMoKSBk
-byB7ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gLSAgICBwcmludGsoImRv
-bWFpbl9jcmFzaF9zeW5jIGNhbGxlZCBmcm9tICVzOiVkXG4iLCBfX0ZJTEVfXywgX19MSU5FX18p
-OyAgXAo+IC0gICAgX19kb21haW5fY3Jhc2hfc3luY2hyb25vdXMoKTsgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIFwKPiAtfSB3aGlsZSAoMCkKPiArdm9pZCBub3JldHVy
-biBfX2RvbWFpbl9jcmFzaF9zeW5jKHZvaWQpOwo+ICsjZGVmaW5lIGRvbWFpbl9jcmFzaF9zeW5j
-KGZtdCwgYXJncy4uLikgZG8geyAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gKyAgICAg
-ICAgcHJpbnRrKFhFTkxPR19HX0VSUiAiZG9tYWluX2NyYXNoX3N5bmMgY2FsbGVkIGZyb20gJXM6
-ICIgZm10LCAgIFwKPiArICAgICAgICAgICAgICAgX19mdW5jX18sICMjIGFyZ3MpOyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+ICsgICAgICAgIF9fZG9tYWluX2NyYXNo
-X3N5bmMoKTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gKyAg
-ICB9IHdoaWxlICgwKQo+ICAKPiAgLyoKPiAgICogQ2FsbGVkIGZyb20gYXNzZW1ibHkgY29kZSwg
-d2l0aCBhbiBvcHRpb25hbCBhZGRyZXNzIHRvIGhlbHAgaW5kaWNhdGUgd2h5Cj4gLS0gCj4gMi4x
-LjQKPiAKPiAKPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Xwo+IFhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKPiBYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKPiBodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1047736138-1517853694=:10160
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Sun, 4 Feb 2018, Boris Ostrovsky wrote:
+> On 02/02/2018 08:34 PM, Stefano Stabellini wrote:
+> > When the client sends a regular blocking accept request, the backend is
+> > expected to return only when the accept is completed, simulating a
+> > blocking behavior, or return an error.
+> > 
+> > Specifically, on EAGAIN from inet_accept, the backend shouldn't return
+> > "EAGAIN" to the client. Instead, it should simply continue the wait.
+> > Otherwise, the client will send another accept request, which will cause
+> > another EAGAIN to be sent back, which is a waste of resources and not
+> > conforming to the expected behavior. Change the behavior by turning the
+> > "goto error" into a return.
+> > 
+> > Signed-off-by: Stefano Stabellini <stefano@aporeto.com>
+> 
+> 
+> I am looking at SYSCALL_DEFINE4(accept4) and sock->ops->accept (which *I
+> think* is inet_accept, at least in some cases) passes all errors (including
+> EAGAIN)  back to the caller. Is this a different case?
+
+Hi Boris,
+
+I didn't explain myself well. You are right that inet_accept passes all
+errors back to the caller, but this is different: not only it would be a
+waste of resources to do so, but the different behavior is specified in
+the PVCalls spec:
+
+"The backend will reply to the request only when a new connection is
+successfully accepted, i.e. the backend does not return EAGAIN or
+EWOULDBLOCK."
+
+https://xenbits.xen.org/docs/unstable/misc/pvcalls.html
+
+Look under the "Accept" sub-chapter.
+
+Cheers,
+
+Stefano
+--8323329-1047736138-1517853694=:10160
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1047736138-1517853694=:10160--
