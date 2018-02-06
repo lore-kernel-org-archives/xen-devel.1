@@ -1,19 +1,19 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 0/2] Fix a couple of crashes in netfront
-Date: Tue, 6 Feb 2018 15:52:56 +0100
-Message-ID: <71df329e-305a-45d8-6e47-4505bd45e560__24691.7376215153$1517928748$gmane$org@suse.com>
-References: <20180111093638.28937-1-ross.lagerwall@citrix.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Rich Persaud <persaur@gmail.com>
+Subject: Re: Xen Project Spectre / Meltdown FAQ (Jan 22 Update)
+Date: Tue, 6 Feb 2018 09:53:24 -0500
+Message-ID: <F4F2FF5E-F8FA-4D2F-A203-67AAFFC50925@gmail.com>
+References: <7334F470-8FE2-4287-8151-75D8235675A6@gmail.com>
+Mime-Version: 1.0 (1.0)
+Content-Type: multipart/mixed; boundary="===============2863511941310670538=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=ywto=fa=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1ej4cL-0006SN-9a
- for xen-devel@lists.xenproject.org; Tue, 06 Feb 2018 14:53:05 +0000
-In-Reply-To: <20180111093638.28937-1-ross.lagerwall@citrix.com>
-Content-Language: de-DE
+ (envelope-from <srs0=eeqy=fa=gmail.com=persaur@srs-us1.protection.inumbo.net>)
+ id 1ej4ch-0006X8-8w
+ for xen-devel@lists.xenproject.org; Tue, 06 Feb 2018 14:53:27 +0000
+Received: by mail-it0-x244.google.com with SMTP id p139so2827988itb.1
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Feb 2018 06:53:26 -0800 (PST)
+In-Reply-To: <7334F470-8FE2-4287-8151-75D8235675A6@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,19 +22,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org
+To: Lars Kurth <lars.kurth.xen@gmail.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Christopher Clark <christopher.w.clark@gmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvMDEvMTggMTA6MzYsIFJvc3MgTGFnZXJ3YWxsIHdyb3RlOgo+IEhlcmUgYXJlIGEgY291
-cGxlIG9mIHBhdGNoZXMgdG8gZml4IHR3byBjcmFzaGVzIGluIG5ldGZyb250Lgo+IAo+IFJvc3Mg
-TGFnZXJ3YWxsICgyKToKPiAgIHhlbi9ncmFudC10YWJsZTogVXNlIHB1dF9wYWdlIGluc3RlYWQg
-b2YgZnJlZV9wYWdlCj4gICB4ZW4tbmV0ZnJvbnQ6IEZpeCByYWNlIGJldHdlZW4gZGV2aWNlIHNl
-dHVwIGFuZCBvcGVuCj4gCj4gIGRyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jIHwgNDYgKysrKysr
-KysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ICBkcml2ZXJzL3hlbi9n
-cmFudC10YWJsZS5jICB8ICA0ICsrLS0KPiAgMiBmaWxlcyBjaGFuZ2VkLCAyNiBpbnNlcnRpb25z
-KCspLCAyNCBkZWxldGlvbnMoLSkKPiAKCkJvdGggY29tbWl0dGVkIHRvIHhlbi50aXAgZm9yLWxp
-bnVzLTQuMTYKCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+
+--===============2863511941310670538==
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-8362FD75-050E-4D50-8657-A4A367726D45
+Content-Transfer-Encoding: 7bit
+
+
+--Apple-Mail-8362FD75-050E-4D50-8657-A4A367726D45
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+> On Jan 22, 2018, at 11:18, Lars Kurth <lars.kurth.xen@gmail.com> wrote:
+>=20
+> Hi all,
+> I will post the following new version of the FAQ on https://blog.xenprojec=
+t.org/ in a moment. As there are tables in it, I will post as PDF rather tha=
+n text. This thread is primarily a placeholder to post further questions abo=
+ut these vulnerabilities.
+
+
+I've added a link to the Technical FAQ, with a spreadsheet titled, "Meltdown=
+ and Spectre Analysis: Xen, Linux & Windows".  This was created for OpenXT, i=
+t may be useful to others.  It includes guest configurations, mitigations, X=
+en feature impact and x86 hardware features.  Revisions welcome.
+
+https://wiki.xenproject.org/wiki/Xen_Project_Meltdown_and_Spectre_Technical_=
+FAQ
+
+Rich=
+
+--Apple-Mail-8362FD75-050E-4D50-8657-A4A367726D45
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><div><span></span></div><div><div></div><di=
+v>On Jan 22, 2018, at 11:18, Lars Kurth &lt;<a href=3D"mailto:lars.kurth.xen=
+@gmail.com">lars.kurth.xen@gmail.com</a>&gt; wrote:<br><br></div><blockquote=
+ type=3D"cite"><span>Hi all,</span><br><span>I will post the following new v=
+ersion of the FAQ on <a href=3D"https://blog.xenproject.org/">https://blog.x=
+enproject.org/</a> in a moment. As there are tables in it, I will post as PD=
+F rather than text. This thread is primarily a placeholder to post further q=
+uestions about these vulnerabilities.</span><br></blockquote></div><div><br>=
+</div><div><div><span style=3D"background-color: rgba(255, 255, 255, 0);">I'=
+ve added a link to the Technical FAQ, with a spreadsheet titled, "Meltdown a=
+nd Spectre Analysis: Xen, Linux &amp; Windows". &nbsp;This was created for O=
+penXT, it may be useful to others. &nbsp;It includes guest configurations, m=
+itigations, Xen feature impact and x86 hardware features. &nbsp;Revisions we=
+lcome.</span></div><div><span style=3D"background-color: rgba(255, 255, 255,=
+ 0);"><br></span></div><div><a href=3D"https://wiki.xenproject.org/wiki/Xen_=
+Project_Meltdown_and_Spectre_Technical_FAQ" style=3D"background-color: rgba(=
+255, 255, 255, 0);"><font color=3D"#000000">https://wiki.xenproject.org/wiki=
+/Xen_Project_Meltdown_and_Spectre_Technical_FAQ</font></a></div><div><span s=
+tyle=3D"background-color: rgba(255, 255, 255, 0);"><br></span></div><div><sp=
+an style=3D"background-color: rgba(255, 255, 255, 0);">Rich</span></div></di=
+v></body></html>=
+
+--Apple-Mail-8362FD75-050E-4D50-8657-A4A367726D45--
+
+
+--===============2863511941310670538==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2863511941310670538==--
