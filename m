@@ -1,20 +1,18 @@
-From: Oleksandr Grytsov <al1img@gmail.com>
-Subject: Re: [PATCH] libxl: add libxl__is_driver_domain function
-Date: Tue, 6 Feb 2018 15:08:45 +0200
-Message-ID: <CACvf2oV9sJPJ9cK6HsstthSmpuh6SC-y058qmV6_=zExRRgd5A@mail.gmail.com>
-References: <1513260853-3450-1-git-send-email-al1img@gmail.com>
- <20180206123635.xqjoqsq4dfgve73d@citrix.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: =?utf-8?b?5Zue5aSNOiBSZTogW1BBVENIXSBDaG9vc2UgcmV0?=
+ =?utf-8?q?poline_only_when_it_is_safe_to_use?=
+Date: Tue, 6 Feb 2018 13:23:36 +0000
+Message-ID: <e877415b-90a5-151b-c670-6a26e9cf36d4@citrix.com>
+References: <a8vim4q7puma7targvkbpbri.1517912981288@email.android.com>
+ <a35d9cfe-0feb-bcc7-aaf4-e719943c539f@citrix.com>
+ <dabdf330-334a-4ea1-bc32-4143c93557eb@oracle.com>
+ <9de36cbb-11b1-4aa4-0ae2-1ca6dcfe6bff@citrix.com>
+ <311afa67-4f0a-a9b9-8117-1efae269856a@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2653124852284160343=="
+Content-Type: multipart/mixed; boundary="===============4716936084644184871=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=axhc=fa=gmail.com=al1img@srs-us1.protection.inumbo.net>)
- id 1ej2zP-00054u-Q8
- for xen-devel@lists.xenproject.org; Tue, 06 Feb 2018 13:08:47 +0000
-Received: by mail-it0-x234.google.com with SMTP id b66so2417135itd.5
- for <xen-devel@lists.xenproject.org>; Tue, 06 Feb 2018 05:08:46 -0800 (PST)
-In-Reply-To: <20180206123635.xqjoqsq4dfgve73d@citrix.com>
+In-Reply-To: <311afa67-4f0a-a9b9-8117-1efae269856a@oracle.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,169 +21,263 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+To: zhenzhong.duan@oracle.com
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen-Devel <xen-devel@lists.xen.org>, JBeulich@suse.com, Srinivas REDDY Eeda <srinivas.eeda@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2653124852284160343==
-Content-Type: multipart/alternative; boundary="001a11c15188f430b805648ae0ad"
+--===============4716936084644184871==
+Content-Type: multipart/alternative;
+	boundary="------------009BC9D23335B5FE856871F7"
+Content-Language: en-GB
 
---001a11c15188f430b805648ae0ad
-Content-Type: text/plain; charset="UTF-8"
+--------------009BC9D23335B5FE856871F7
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On Tue, Feb 6, 2018 at 2:36 PM, Wei Liu <wei.liu2@citrix.com> wrote:
-
-> On Thu, Dec 14, 2017 at 04:14:12PM +0200, Oleksandr Grytsov wrote:
-> > From: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
-> >
-> > We have following arm-based setup:
-> >
-> > - Dom0 with xen and xen tools;
-> > - Dom1 with device backends (but it is not the driver domain);
+On 06/02/18 12:30, Zhenzhong Duan wrote:
+> 在 2018/2/6 19:56, Andrew Cooper 写道:
+>> On 06/02/18 11:41, Zhenzhong Duan wrote:
+>>> On 2018/2/6 18:50, Andrew Cooper wrote:
+>>>> On 06/02/18 10:29, zhenzhong.duan wrote:
+>>>>>
+>>>>>
+>>>>> 2018年2月6日 17:20于 Andrew Cooper <andrew.cooper3@citrix.com
+>>>>> <mailto:andrew.cooper3@citrix.com>>写道：
+>>>>> >
+>>>>> > On 06/02/2018 09:13, Zhenzhong Duan wrote:
+>>>>> > > 在 2018/2/6 16:59, Andrew Cooper 写道:
+>>>>> > >> On 06/02/2018 08:43, Zhenzhong Duan wrote:
+>>>>> > >>> When ( ibrs && thunk == THUNK_DEFAULT && !retpoline_safe() )
+>>>>> is true,
+>>>>> > >>> thunk is set to THUNK_JMP rather than THUNK_RETPOLINE.
+>>>>> > >>>
+>>>>> > >>> When (!ibrs && thunk == THUNK_DEFAULT && !retpoline_safe() )
+>>>>> is true,
+>>>>> > >>> we should do the same.
+>>>>> > >>>
+>>>>> > >>> Signed-off-by: Zhenzhong Duan <zhenzhong.duan@oracle.com
+>>>>> <mailto:zhenzhong.duan@oracle.com>>
+>>>>> > >> Why?  What improvement is this intended to give?
+>>>>> > > No improvement, I just feel if retpoline isn't safe, THUNK_JMP is
+>>>>> > > better and safer.
+>>>>> > > Above first check is working that way.
+>>>>> >
+>>>>> > If your only two choices are unsafe repoline or plain jumps,
+>>>>> then unsafe
+>>>>> > repoline is far far far safer.
+>>>>> >
+>>>>> > Its unsafe properties only kick in on an RSB underflow, and an
+>>>>> attacker
+>>>>> > would have to do call-depths analysis of the running binary to
+>>>>> identify
+>>>>> > which rets to attempt to poison.
+>>>>> >
+>>>>> Thanks for explaining.
+>>>>> So, for a retpoline safe processor, it just stop using RSB when
+>>>>> it's empty to avoid underflow?
+>>>>>
+>>>>
+>>>> The qualification of whether a processor is retpoline-safe or not
+>>>> is whether an RSB underflow causes a BTB lookup (unsafe) or not (safe).
+>>>>
+>>>> RSB underflows will always occur; you cannot get rid of them, but
+>>>> in most cases (i.e. pre-Skylake) they don't fall back to using a
+>>>> prediction source which can be poisoned by an attacker.
+>>> Understood.
+>>>>
+>>>>> Another question:
+>>>>>
+>>>>> if (opt_thunk == THUNK_DEFAULT && opt_ibrs == -1 &&
+>>>>> CONFIG_INDIRECT_THUNK && !cpu_has_lfence_dispatch &&
+>>>>> !retpoline_safe())
+>>>>> results in "thunk = THUNK_JMP" regardless of the value of
+>>>>> "boot_cpu_has(X86_FEATURE_IBRSB)"
+>>>>>
+>>>>
+>>>> Your formatting is hard to follow,
+>>> Sorry, sent from mobile.
+>>>> but cpu_has_lfence_dispatch can only be false when virtualised
+>>>> under an SP2-unaware hypervisor on AMD hardware, at which point
+>>>> retpoline_safe() will return true.  Also, AMD don't have IBRS in
+>>>> microcode and their future plans don't appear to involve using that
+>>>> particular CPUID bit.
+>>> That does make sense for AMD. But what about Intel hardware which
+>>> has (!cpu_has_lfence_dispatch && !retpoline_safe() &&
+>>> !boot_cpu_has(X86_FEATURE_IBRSB)), should we  prefer THUNK_RETPOLINE? 
+>>
+>> Yes, and we do end up choosing RETPOLINE in those circumstances, as
+>> we hit the default case you originally tried to patch.
 >
-> What is your definition of a "driver domain"? What does it do in this
-> case?
+> If that's the case, I think we need another patch like below.
 >
-> I seem to have seen people use this term in different contexts to mean
-> slightly different things. I need to figure out what you actually mean
-> first.
+> @@ -223,7 +223,7 @@ void __init init_speculation_mitigations(void)
+>               */
+>              else if ( retpoline_safe() )
+>                  thunk = THUNK_RETPOLINE;
+> -            else
+> +            else if ( boot_cpu_has(X86_FEATURE_IBRSB) )
+>                  ibrs = true;
+>          }
+>          /* Without compiler thunk support, use IBRS if available. */
 >
->
-I see in the libxl/xl sources that closing PV devices is done differently
-in case backends are in Dom0 and are in other domain. It is called as
-driver domain in the sources. So, I don't have clear understanding
-what does it mean. In our setup backends are in Dom1 and xl is in Dom0.
-And I see that xl dosn't close PV device on domain reboot or shutdown.
+> As ibrs was set to true when !boot_cpu_has(X86_FEATURE_IBRSB) with
+> current code, then thunk was set to THUNK_JMP rather than THUNK_RETPOLINE.
+
+You are correct.  This is a side effect of an optimisation which was
+requested during review.  I'll draft a patch.
+
+~Andrew
+
+--------------009BC9D23335B5FE856871F7
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">On 06/02/18 12:30, Zhenzhong Duan
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:311afa67-4f0a-a9b9-8117-1efae269856a@oracle.com">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <div class="moz-cite-prefix">在 2018/2/6 19:56, Andrew Cooper 写道:<br>
+      </div>
+      <blockquote type="cite"
+        cite="mid:9de36cbb-11b1-4aa4-0ae2-1ca6dcfe6bff@citrix.com">
+        <div class="moz-cite-prefix">On 06/02/18 11:41, Zhenzhong Duan
+          wrote:<br>
+        </div>
+        <blockquote type="cite"
+          cite="mid:dabdf330-334a-4ea1-bc32-4143c93557eb@oracle.com">
+          <div class="moz-cite-prefix">On 2018/2/6 18:50, Andrew Cooper
+            wrote:<br>
+          </div>
+          <blockquote type="cite"
+            cite="mid:a35d9cfe-0feb-bcc7-aaf4-e719943c539f@citrix.com">
+            <div class="moz-cite-prefix">On 06/02/18 10:29,
+              zhenzhong.duan wrote:<br>
+            </div>
+            <blockquote type="cite"
+              cite="mid:a8vim4q7puma7targvkbpbri.1517912981288@email.android.com">
+              <p dir="ltr"><br>
+                2018年2月6日 17:20于 Andrew Cooper &lt;<a
+                  href="mailto:andrew.cooper3@citrix.com"
+                  moz-do-not-send="true">andrew.cooper3@citrix.com</a>&gt;写道：<br>
+                &gt;<br>
+                &gt; On 06/02/2018 09:13, Zhenzhong Duan wrote: <br>
+                &gt; &gt; 在 2018/2/6 16:59, Andrew Cooper 写道: <br>
+                &gt; &gt;&gt; On 06/02/2018 08:43, Zhenzhong Duan wrote:
+                <br>
+                &gt; &gt;&gt;&gt; When ( ibrs &amp;&amp; thunk ==
+                THUNK_DEFAULT &amp;&amp; !retpoline_safe() ) is true, <br>
+                &gt; &gt;&gt;&gt; thunk is set to THUNK_JMP rather than
+                THUNK_RETPOLINE. <br>
+                &gt; &gt;&gt;&gt; <br>
+                &gt; &gt;&gt;&gt; When (!ibrs &amp;&amp; thunk ==
+                THUNK_DEFAULT &amp;&amp; !retpoline_safe() ) is true, <br>
+                &gt; &gt;&gt;&gt; we should do the same. <br>
+                &gt; &gt;&gt;&gt; <br>
+                &gt; &gt;&gt;&gt; Signed-off-by: Zhenzhong Duan &lt;<a
+                  href="mailto:zhenzhong.duan@oracle.com"
+                  moz-do-not-send="true">zhenzhong.duan@oracle.com</a>&gt;
+                <br>
+                &gt; &gt;&gt; Why?  What improvement is this intended to
+                give? <br>
+                &gt; &gt; No improvement, I just feel if retpoline isn't
+                safe, THUNK_JMP is <br>
+                &gt; &gt; better and safer. <br>
+                &gt; &gt; Above first check is working that way. <br>
+                &gt;<br>
+                &gt; If your only two choices are unsafe repoline or
+                plain jumps, then unsafe <br>
+                &gt; repoline is far far far safer. <br>
+                &gt;<br>
+                &gt; Its unsafe properties only kick in on an RSB
+                underflow, and an attacker <br>
+                &gt; would have to do call-depths analysis of the
+                running binary to identify <br>
+                &gt; which rets to attempt to poison. <br>
+                &gt;<br>
+                Thanks for explaining.<br>
+                So, for a retpoline safe processor, it just stop using
+                RSB when it's empty to avoid underflow?</p>
+            </blockquote>
+            <br>
+            The qualification of whether a processor is retpoline-safe
+            or not is whether an RSB underflow causes a BTB lookup
+            (unsafe) or not (safe).<br>
+            <br>
+            RSB underflows will always occur; you cannot get rid of
+            them, but in most cases (i.e. pre-Skylake) they don't fall
+            back to using a prediction source which can be poisoned by
+            an attacker.<br>
+          </blockquote>
+          Understood.<br>
+          <blockquote type="cite"
+            cite="mid:a35d9cfe-0feb-bcc7-aaf4-e719943c539f@citrix.com">
+            <br>
+            <blockquote type="cite"
+              cite="mid:a8vim4q7puma7targvkbpbri.1517912981288@email.android.com">
+              <p dir="ltr">Another question:</p>
+              <p dir="ltr">if (opt_thunk == THUNK_DEFAULT &amp;&amp;
+                opt_ibrs == -1 &amp;&amp; <br>
+                CONFIG_INDIRECT_THUNK &amp;&amp;
+                !cpu_has_lfence_dispatch &amp;&amp; !retpoline_safe()) <br>
+                results in "thunk = THUNK_JMP" regardless of the value
+                of "boot_cpu_has(X86_FEATURE_IBRSB)" </p>
+            </blockquote>
+            <br>
+            Your formatting is hard to follow,</blockquote>
+          Sorry, sent from mobile.<br>
+          <blockquote type="cite"
+            cite="mid:a35d9cfe-0feb-bcc7-aaf4-e719943c539f@citrix.com">
+            but cpu_has_lfence_dispatch can only be false when
+            virtualised under an SP2-unaware hypervisor on AMD hardware,
+            at which point retpoline_safe() will return true.  Also, AMD
+            don't have IBRS in microcode and their future plans don't
+            appear to involve using that particular CPUID bit.<br>
+          </blockquote>
+          That does make sense for AMD. But what about Intel hardware
+          which has (!cpu_has_lfence_dispatch &amp;&amp;
+          !retpoline_safe() &amp;&amp;
+          !boot_cpu_has(X86_FEATURE_IBRSB)), should we  prefer
+          THUNK_RETPOLINE? </blockquote>
+        <br>
+        Yes, and we do end up choosing RETPOLINE in those circumstances,
+        as we hit the default case you originally tried to patch.</blockquote>
+      <br>
+      If that's the case, I think we need another patch like below.<br>
+      <br>
+      @@ -223,7 +223,7 @@ void __init init_speculation_mitigations(void)<br>
+                    */<br>
+                   else if ( retpoline_safe() )<br>
+                       thunk = THUNK_RETPOLINE;<br>
+      -            else<br>
+      +            else if ( boot_cpu_has(X86_FEATURE_IBRSB) )<br>
+                       ibrs = true;<br>
+               }<br>
+               /* Without compiler thunk support, use IBRS if available.
+      */<br>
+      <br>
+      As ibrs was set to true when !boot_cpu_has(X86_FEATURE_IBRSB) with
+      current code, then thunk was set to THUNK_JMP rather than
+      THUNK_RETPOLINE.<br>
+    </blockquote>
+    <br>
+    You are correct.  This is a side effect of an optimisation which was
+    requested during review.  I'll draft a patch.<br>
+    <br>
+    ~Andrew<br>
+  </body>
+</html>
+
+--------------009BC9D23335B5FE856871F7--
 
 
-> > - Dom2 with device frontend;
-> >
-> > On Dom2 destroying we have timeout error. Because xl treats our
-> > Dom1 as driver domain and waits for backend path to be cleared
-> > by the driver domain which is not our case.
-> >
-> > According to libxl__domain_make in case of driver domain it has
-> > "libxl" xen store entry:
-> >
-> >     if (libxl_defbool_val(info->driver_domain)) {
-> >         /*
-> >          * Create a local "libxl" directory for each guest, since we
-> might want
-> >          * to use libxl from inside the guest
-> >          */
-> >         libxl__xs_mknod(gc, t, GCSPRINTF("%s/libxl", dom_path), rwperm,
-> >                         ARRAY_SIZE(rwperm));
-> >
-> > This patch introduces libxl__is_driver_domain which determines the driver
-> > domain by checking if "libxl" entry is present and uses this function on
-> > device destroy to check by whom domain path should be cleaned up (libxl
-> > or the driver domain).
-> >
-> > Oleksandr Grytsov (1):
-> >   libxl: add libxl__is_driver_domain function
-> >
-> >  tools/libxl/libxl_device.c   | 17 ++++++++++-------
-> >  tools/libxl/libxl_internal.c | 16 ++++++++++++++++
-> >  tools/libxl/libxl_internal.h |  4 ++++
-> >  3 files changed, 30 insertions(+), 7 deletions(-)
-> >
-> > --
-> > 2.7.4
-> >
->
-
-
-
--- 
-Best Regards,
-Oleksandr Grytsov.
-
---001a11c15188f430b805648ae0ad
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
-On Tue, Feb 6, 2018 at 2:36 PM, Wei Liu <span dir=3D"ltr">&lt;<a href=3D"ma=
-ilto:wei.liu2@citrix.com" target=3D"_blank">wei.liu2@citrix.com</a>&gt;</sp=
-an> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;=
-border-left:1px #ccc solid;padding-left:1ex"><span class=3D"">On Thu, Dec 1=
-4, 2017 at 04:14:12PM +0200, Oleksandr Grytsov wrote:<br>
-&gt; From: Oleksandr Grytsov &lt;<a href=3D"mailto:oleksandr_grytsov@epam.c=
-om">oleksandr_grytsov@epam.com</a>&gt;<br>
-&gt;<br>
-&gt; We have following arm-based setup:<br>
-&gt;<br>
-&gt; - Dom0 with xen and xen tools;<br>
-&gt; - Dom1 with device backends (but it is not the driver domain);<br>
-<br>
-</span>What is your definition of a &quot;driver domain&quot;? What does it=
- do in this<br>
-case?<br>
-<br>
-I seem to have seen people use this term in different contexts to mean<br>
-slightly different things. I need to figure out what you actually mean<br>
-first.<br>
-<div class=3D"HOEnZb"><div class=3D"h5"><br></div></div></blockquote><div><=
-br></div><div>I see in the libxl/xl sources that closing PV devices is done=
- differently<br></div><div>in case backends are in Dom0 and are in other do=
-main. It is called as<br></div><div>driver domain in the sources. So, I don=
-&#39;t have clear understanding<br></div><div>what does it mean. In our set=
-up backends are in Dom1 and xl is in Dom0.<br></div><div>And I see that xl =
-dosn&#39;t close PV device on domain reboot or shutdown.<br></div><div>=C2=
-=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;borde=
-r-left:1px #ccc solid;padding-left:1ex"><div class=3D"HOEnZb"><div class=3D=
-"h5">
-&gt; - Dom2 with device frontend;<br>
-&gt;<br>
-&gt; On Dom2 destroying we have timeout error. Because xl treats our<br>
-&gt; Dom1 as driver domain and waits for backend path to be cleared<br>
-&gt; by the driver domain which is not our case.<br>
-&gt;<br>
-&gt; According to libxl__domain_make in case of driver domain it has<br>
-&gt; &quot;libxl&quot; xen store entry:<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0if (libxl_defbool_val(info-&gt;<wbr>driver_domain))=
- {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/*<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * Create a local &quot;libxl&quot; d=
-irectory for each guest, since we might want<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * to use libxl from inside the guest=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0libxl__xs_mknod(gc, t, GCSPRINTF(&quo=
-t;%s/libxl&quot;, dom_path), rwperm,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0ARRAY_SIZE(rwperm));<br>
-&gt;<br>
-&gt; This patch introduces libxl__is_driver_domain which determines the dri=
-ver<br>
-&gt; domain by checking if &quot;libxl&quot; entry is present and uses this=
- function on<br>
-&gt; device destroy to check by whom domain path should be cleaned up (libx=
-l<br>
-&gt; or the driver domain).<br>
-&gt;<br>
-&gt; Oleksandr Grytsov (1):<br>
-&gt;=C2=A0 =C2=A0libxl: add libxl__is_driver_domain function<br>
-&gt;<br>
-&gt;=C2=A0 tools/libxl/libxl_device.c=C2=A0 =C2=A0| 17 ++++++++++-------<br=
->
-&gt;=C2=A0 tools/libxl/libxl_internal.c | 16 ++++++++++++++++<br>
-&gt;=C2=A0 tools/libxl/libxl_internal.h |=C2=A0 4 ++++<br>
-&gt;=C2=A0 3 files changed, 30 insertions(+), 7 deletions(-)<br>
-&gt;<br>
-&gt; --<br>
-&gt; 2.7.4<br>
-&gt;<br>
-</div></div></blockquote></div><br><br clear=3D"all"><br>-- <br><div class=
-=3D"gmail_signature" data-smartmail=3D"gmail_signature">Best Regards,<br>Ol=
-eksandr Grytsov.</div>
-</div></div>
-
---001a11c15188f430b805648ae0ad--
-
-
---===============2653124852284160343==
+--===============4716936084644184871==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -195,4 +287,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============2653124852284160343==--
+--===============4716936084644184871==--
