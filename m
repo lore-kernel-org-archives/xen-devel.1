@@ -1,16 +1,14 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Xen ARM community call Tuesday 13th February 5PM UTC
-Date: Tue, 6 Feb 2018 10:11:37 +0000
-Message-ID: <1cd12995-d888-9de8-e273-5adaf562156f@arm.com>
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: Re: [PATCH] xen/livepatch: Drop stray tabs and fix
+	indentation
+Date: Tue, 6 Feb 2018 10:17:32 +0000
+Message-ID: <64a057fe-6ad0-c503-1132-1583f5048d8e@citrix.com>
+References: <1517828641-18797-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=xglg=fa=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1ej0E9-0007uB-02
- for xen-devel@lists.xenproject.org; Tue, 06 Feb 2018 10:11:49 +0000
+In-Reply-To: <1517828641-18797-1-git-send-email-andrew.cooper3@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -20,13 +18,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, xen-devel <xen-devel@lists.xenproject.org>, Lars Kurth <lars.kurth@citrix.com>, "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, anastassios.nanos@onapp.com, vfachin@de.adit-jv.com, Jarvis Roach <Jarvis.Roach@dornerworks.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Artem Mygaiev <Artem_Mygaiev@epam.com>, mirela.simonovic@aggios.com, davorin.mista@aggios.com, robin.randhawa@arm.com
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgYWxsLAoKSSB3b3VsZCBzdWdnZXN0IHRvIGhhdmUgdGhlIG5leHQgY29tbXVuaXR5IGNhbGwg
-b24gVHVlc2RheSAxM3RoIEZlYnJ1YXJ5IAo1cG0gR01ULiBEb2VzIGl0IHNvdW5kIGdvb2Q/CgpE
-byB5b3UgaGF2ZSBhbnkgc3BlY2lmaWMgdG9waWMgeW91IHdvdWxkIGxpa2UgdG8gZGlzY3Vzcz8K
-CkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+T24gMDIvMDUvMjAxOCAxMTowNCBBTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBTaWduZWQtb2Zm
+LWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgo+IC0tLQo+IEND
+OiBLb25yYWQgUnplc3p1dGVrIFdpbGsgPGtvbnJhZC53aWxrQG9yYWNsZS5jb20+Cj4gQ0M6IFJv
+c3MgTGFnZXJ3YWxsIDxyb3NzLmxhZ2Vyd2FsbEBjaXRyaXguY29tPgo+IC0tLQo+ICAgeGVuL2Nv
+bW1vbi9saXZlcGF0Y2guYyB8IDYgKysrLS0tCj4gICAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRp
+b25zKCspLCAzIGRlbGV0aW9ucygtKQo+IAoKUmV2aWV3ZWQtYnk6IFJvc3MgTGFnZXJ3YWxsIDxy
+b3NzLmxhZ2Vyd2FsbEBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
