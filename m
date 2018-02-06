@@ -1,16 +1,14 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [libvirt test] 118605: tolerable all pass - PUSHED
-Date: Tue, 06 Feb 2018 10:49:13 +0000
-Message-ID: <osstest-118605-mainreport@xen.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: =?utf-8?b?5Zue5aSNOiBSZTogW1BBVENIXSBDaG9vc2UgcmV0?=
+ =?utf-8?q?poline_only_when_it_is_safe_to_use?=
+Date: Tue, 6 Feb 2018 10:50:41 +0000
+Message-ID: <a35d9cfe-0feb-bcc7-aaf4-e719943c539f@citrix.com>
+References: <a8vim4q7puma7targvkbpbri.1517912981288@email.android.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1909951201763072465=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=uvdq=fa=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1ej0oT-0002Bs-Fk
- for xen-devel@lists.xenproject.org; Tue, 06 Feb 2018 10:49:21 +0000
+In-Reply-To: <a8vim4q7puma7targvkbpbri.1517912981288@email.android.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,102 +17,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: "zhenzhong.duan" <zhenzhong.duan@oracle.com>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen-Devel <xen-devel@lists.xen.org>, JBeulich@suse.com, Srinivas REDDY Eeda <srinivas.eeda@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDExODYwNSBsaWJ2aXJ0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMTg2MDUvCgpGYWlsdXJlcyA6LS8gYnV0IG5vIHJl
-Z3Jlc3Npb25zLgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9j
-a2luZzoKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICBsaWtlIDExODU1NwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhz
-bSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTE4NTU3CiB0ZXN0
-LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3IDEzIHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgbGlrZSAxMTg1NTcKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14c20gMTMgbWlncmF0
-ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2
-NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZl
-ciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAg
-ICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hcm02NC1hcm02NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQgICAgIDE0IHNhdmVy
-ZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJt
-NjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAxNCBzYXZlcmVzdG9yZS1zdXBw
-b3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQt
-cWNvdzIgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtNjQtYXJtNjQtbGlidmlydC1xY293MiAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNr
-ICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlh
-bmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwog
-dGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdy
-YXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZp
-cnQtdmhkIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MK
-IHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAg
-ICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAxMyBt
-aWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhm
-LWFybWhmLWxpYnZpcnQtcmF3IDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAg
-IG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiBsaWJ2aXJ0ICAgICAg
-ICAgICAgICBjYjc3NWE1MWEwZWI5NTM2MzVjOGUzNTY4OWI4YjFmM2NjZTBkMzgxCmJhc2VsaW5l
-IHZlcnNpb246CiBsaWJ2aXJ0ICAgICAgICAgICAgICBhOGVmN2I2OWRjMTY1MmE0NjY3MWMzZDNj
-N2U4NDdiZjZlZjM2MGZjCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMTg1NTcgIDIwMTgtMDItMDMg
-MjI6NDk6NDUgWiAgICAyIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTE4NjA1ICAyMDE4LTAy
-LTA2IDA0OjIwOjEwIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRv
-dWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQmpvZXJuIFdhbGsgPGJ3YWxrQGxpbnV4LnZu
-ZXQuaWJtLmNvbT4KICBNYXJjIEhhcnRtYXllciA8bWhhcnRtYXlAbGludXgudm5ldC5pYm0uY29t
-PgogIE1hcnRpbiBLbGV0emFuZGVyIDxta2xldHphbkByZWRoYXQuY29tPgogIE1pY2hhbCBQcml2
-b3puaWsgPG1wcml2b3puQHJlZGhhdC5jb20+CiAgUGV0ZXIgS3JlbXBhIDxwa3JlbXBhQHJlZGhh
-dC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXhz
-bSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtbGlidmlydCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1saWJ2
-aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3Bz
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
-bGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0
-LXhzbSAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRl
-Ymlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1s
-aWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFybTY0LWFybTY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxp
-YnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YXJtNjQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGli
-dmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1pMzg2LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQtcWNvdzIgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2
-aXJ0LXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNn
-LXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAv
-aG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZp
-bGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5k
-IG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcv
-Z2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAg
-IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJF
-QURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0
-cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNo
-aW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94ZW4vZ2l0L2xpYnZpcnQu
-Z2l0CiAgIGE4ZWY3YjY5ZGMuLmNiNzc1YTUxYTAgIGNiNzc1YTUxYTBlYjk1MzYzNWM4ZTM1Njg5
-YjhiMWYzY2NlMGQzODEgLT4geGVuLXRlc3RlZC1tYXN0ZXIKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============1909951201763072465==
+Content-Type: multipart/alternative;
+	boundary="------------7CDC6FE52116FEFF21439088"
+Content-Language: en-GB
+
+--------------7CDC6FE52116FEFF21439088
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+On 06/02/18 10:29, zhenzhong.duan wrote:
+>
+>
+> 2018年2月6日 17:20于 Andrew Cooper <andrew.cooper3@citrix.com
+> <mailto:andrew.cooper3@citrix.com>>写道：
+> >
+> > On 06/02/2018 09:13, Zhenzhong Duan wrote:
+> > > 在 2018/2/6 16:59, Andrew Cooper 写道:
+> > >> On 06/02/2018 08:43, Zhenzhong Duan wrote:
+> > >>> When ( ibrs && thunk == THUNK_DEFAULT && !retpoline_safe() ) is
+> true,
+> > >>> thunk is set to THUNK_JMP rather than THUNK_RETPOLINE.
+> > >>>
+> > >>> When (!ibrs && thunk == THUNK_DEFAULT && !retpoline_safe() ) is
+> true,
+> > >>> we should do the same.
+> > >>>
+> > >>> Signed-off-by: Zhenzhong Duan <zhenzhong.duan@oracle.com
+> <mailto:zhenzhong.duan@oracle.com>>
+> > >> Why?  What improvement is this intended to give?
+> > > No improvement, I just feel if retpoline isn't safe, THUNK_JMP is
+> > > better and safer.
+> > > Above first check is working that way.
+> >
+> > If your only two choices are unsafe repoline or plain jumps, then
+> unsafe
+> > repoline is far far far safer.
+> >
+> > Its unsafe properties only kick in on an RSB underflow, and an attacker
+> > would have to do call-depths analysis of the running binary to identify
+> > which rets to attempt to poison.
+> >
+> Thanks for explaining.
+> So, for a retpoline safe processor, it just stop using RSB when it's
+> empty to avoid underflow?
+>
+
+The qualification of whether a processor is retpoline-safe or not is
+whether an RSB underflow causes a BTB lookup (unsafe) or not (safe).
+
+RSB underflows will always occur; you cannot get rid of them, but in
+most cases (i.e. pre-Skylake) they don't fall back to using a prediction
+source which can be poisoned by an attacker.
+
+> Another question:
+>
+> if (opt_thunk == THUNK_DEFAULT && opt_ibrs == -1 &&
+> CONFIG_INDIRECT_THUNK && !cpu_has_lfence_dispatch && !retpoline_safe())
+> results in "thunk = THUNK_JMP" regardless of the value of
+> "boot_cpu_has(X86_FEATURE_IBRSB)"
+>
+
+Your formatting is hard to follow, but cpu_has_lfence_dispatch can only
+be false when virtualised under an SP2-unaware hypervisor on AMD
+hardware, at which point retpoline_safe() will return true.  Also, AMD
+don't have IBRS in microcode and their future plans don't appear to
+involve using that particular CPUID bit.
+
+~Andrew
+
+--------------7CDC6FE52116FEFF21439088
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">On 06/02/18 10:29, zhenzhong.duan
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:a8vim4q7puma7targvkbpbri.1517912981288@email.android.com">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <p dir="ltr"><br>
+        2018年2月6日 17:20于 Andrew Cooper &lt;<a
+          href="mailto:andrew.cooper3@citrix.com" moz-do-not-send="true">andrew.cooper3@citrix.com</a>&gt;写道：<br>
+        &gt;<br>
+        &gt; On 06/02/2018 09:13, Zhenzhong Duan wrote: <br>
+        &gt; &gt; 在 2018/2/6 16:59, Andrew Cooper 写道: <br>
+        &gt; &gt;&gt; On 06/02/2018 08:43, Zhenzhong Duan wrote: <br>
+        &gt; &gt;&gt;&gt; When ( ibrs &amp;&amp; thunk == THUNK_DEFAULT
+        &amp;&amp; !retpoline_safe() ) is true, <br>
+        &gt; &gt;&gt;&gt; thunk is set to THUNK_JMP rather than
+        THUNK_RETPOLINE. <br>
+        &gt; &gt;&gt;&gt; <br>
+        &gt; &gt;&gt;&gt; When (!ibrs &amp;&amp; thunk == THUNK_DEFAULT
+        &amp;&amp; !retpoline_safe() ) is true, <br>
+        &gt; &gt;&gt;&gt; we should do the same. <br>
+        &gt; &gt;&gt;&gt; <br>
+        &gt; &gt;&gt;&gt; Signed-off-by: Zhenzhong Duan &lt;<a
+          href="mailto:zhenzhong.duan@oracle.com" moz-do-not-send="true">zhenzhong.duan@oracle.com</a>&gt;
+        <br>
+        &gt; &gt;&gt; Why?  What improvement is this intended to give? <br>
+        &gt; &gt; No improvement, I just feel if retpoline isn't safe,
+        THUNK_JMP is <br>
+        &gt; &gt; better and safer. <br>
+        &gt; &gt; Above first check is working that way. <br>
+        &gt;<br>
+        &gt; If your only two choices are unsafe repoline or plain
+        jumps, then unsafe <br>
+        &gt; repoline is far far far safer. <br>
+        &gt;<br>
+        &gt; Its unsafe properties only kick in on an RSB underflow, and
+        an attacker <br>
+        &gt; would have to do call-depths analysis of the running binary
+        to identify <br>
+        &gt; which rets to attempt to poison. <br>
+        &gt;<br>
+        Thanks for explaining.<br>
+        So, for a retpoline safe processor, it just stop using RSB when
+        it's empty to avoid underflow?</p>
+    </blockquote>
+    <br>
+    The qualification of whether a processor is retpoline-safe or not is
+    whether an RSB underflow causes a BTB lookup (unsafe) or not (safe).<br>
+    <br>
+    RSB underflows will always occur; you cannot get rid of them, but in
+    most cases (i.e. pre-Skylake) they don't fall back to using a
+    prediction source which can be poisoned by an attacker.<br>
+    <br>
+    <blockquote type="cite"
+      cite="mid:a8vim4q7puma7targvkbpbri.1517912981288@email.android.com">
+      <p dir="ltr">Another question:</p>
+      <p dir="ltr">if (opt_thunk == THUNK_DEFAULT &amp;&amp; opt_ibrs ==
+        -1 &amp;&amp; <br>
+        CONFIG_INDIRECT_THUNK &amp;&amp; !cpu_has_lfence_dispatch
+        &amp;&amp; !retpoline_safe())
+        <br>
+        results in "thunk = THUNK_JMP" regardless of the value of
+        "boot_cpu_has(X86_FEATURE_IBRSB)"
+      </p>
+    </blockquote>
+    <br>
+    Your formatting is hard to follow, but cpu_has_lfence_dispatch can
+    only be false when virtualised under an SP2-unaware hypervisor on
+    AMD hardware, at which point retpoline_safe() will return true. 
+    Also, AMD don't have IBRS in microcode and their future plans don't
+    appear to involve using that particular CPUID bit.<br>
+    <br>
+    ~Andrew<br>
+  </body>
+</html>
+
+--------------7CDC6FE52116FEFF21439088--
+
+
+--===============1909951201763072465==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1909951201763072465==--
