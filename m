@@ -1,22 +1,20 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v4 5/8] ARM: VGIC: factor out
-	vgic_connect_hw_irq()
-Date: Tue, 6 Feb 2018 14:38:30 +0000
-Message-ID: <1564ec34-cec9-43a6-f7dd-0bece725e918@arm.com>
-References: <20180205161925.11054-1-andre.przywara@arm.com>
- <20180205161925.11054-6-andre.przywara@arm.com>
- <f736d6ad-c2d3-1103-128c-67732a2aea3f@arm.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v1 3/5] xl: add PV sound condif parser
+Date: Tue, 6 Feb 2018 14:43:23 +0000
+Message-ID: <20180206144323.m6gqtxjpjuctrfrr@citrix.com>
+References: <1509548687-6071-1-git-send-email-al1img@gmail.com>
+ <1509548687-6071-4-git-send-email-al1img@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=xglg=fa=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1ej4OO-0004Xc-NV
- for xen-devel@lists.xenproject.org; Tue, 06 Feb 2018 14:38:40 +0000
-In-Reply-To: <f736d6ad-c2d3-1103-128c-67732a2aea3f@arm.com>
-Content-Language: en-US
+ <srs0=y0p4=fa=citrix.com=prvs=56821041b=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1ej4T1-0005E7-7P
+ for xen-devel@lists.xenproject.org; Tue, 06 Feb 2018 14:43:27 +0000
+Content-Disposition: inline
+In-Reply-To: <1509548687-6071-4-git-send-email-al1img@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,26 +23,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andre Przywara <andre.przywara@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
+To: Oleksandr Grytsov <al1img@gmail.com>
+Cc: xen-devel@lists.xenproject.org, wei.liu2@citrix.com, ian.jackson@eu.citrix.com, Oleksandr Grytsov <oleksandr_grytsov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDIvMDYvMjAxOCAwMjoyMSBQTSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIEFuZHJlLAo+
-IAo+IE9uIDAyLzA1LzIwMTggMDQ6MTkgUE0sIEFuZHJlIFByenl3YXJhIHdyb3RlOgo+PiBBdCB0
-aGUgbW9tZW50IHdlIGhhcHBpbHkgYWNjZXNzIFZHSUMgaW50ZXJuYWwgZGF0YSBzdHJ1Y3R1cmVz
-IGxpa2UKPj4gdGhlIHJhbmsgYW5kIHN0cnVjdCBwZW5kaW5nX2lycSBpbiBnaWMuYywgd2hpY2gg
-c2hvdWxkIGJlIFZHSUMgYWdub3N0aWMuCj4+Cj4+IEZhY3RvciBvdXQgYSBuZXcgZnVuY3Rpb24g
-dmdpY19jb25uZWN0X2h3X2lycSgpLCB3aGljaCBhbGxvd3MgYSB2aXJ0dWFsCj4+IElSUSB0byBi
-ZSBjb25uZWN0ZWQgdG8gYSBoYXJkd2FyZSBJUlEgKHVzaW5nIHRoZSBodyBiaXQgaW4gdGhlIExS
-KS4KPj4KPj4gVGhpcyByZW1vdmVzIHNhaWQgYWNjZXNzZXMgdG8gVkdJQyBkYXRhIHN0cnVjdHVy
-ZXMgYW5kIGltcHJvdmVzIAo+PiBhYnN0cmFjdGlvbi4KPiAKPiBJIHdhcyBleHBlY3Rpbmcgc29t
-ZSBleHBsYW5hdGlvbiByZWdhcmRpbmcgdGhlIG5ldyBsb2NraW5nIG9yZGVyIGluIHRoZSAKPiBj
-b21taXQgbWVzc2FnZS4KCiBGcm9tIGEgcXVpY2sgY2hhdCB3aXRoIEFuZHJlIG9uIElSQywgaXQg
-bG9va3MgbGlrZSBmaWd1cmluZyBvdXQgdGhlIApjdXJyZW50IGxvY2tpbmcgbWlnaHQgYmUgdHJp
-Y2t5LiBTbyBJIHdvdWxkIGJlIGhhcHB5IGlmIHdlIG9ubHkgcG9pbnQgCm91dCB0aGUgY2hhbmdl
-IG9mIGxvY2tpbmcgKCsgYSB3b3JkIG9uIHRoZSBuZXcgbG9ja2luZykgaW4gdGhlIGNvbW1pdCAK
-bWVzc2FnZS4KClRoaXMgd291bGQgaGVscCBpbiBjYXNlIHdlIGZpbmQgYSByZWdyZXNzaW9uIGxh
-dGVyIG9uLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gV2VkLCBOb3YgMDEsIDIwMTcgYXQgMDU6MDQ6NDVQTSArMDIwMCwgT2xla3NhbmRyIEdyeXRz
+b3Ygd3JvdGU6Cj4gRnJvbTogT2xla3NhbmRyIEdyeXRzb3YgPG9sZWtzYW5kcl9ncnl0c292QGVw
+YW0uY29tPgo+IAo+IEFkZCBjb25maWcgcGFyc2VyIGZvciB2aXJ0dWFsIHNvdW5kIGRldmljZXMK
+PiAKPiBTaWduZWQtb2ZmLWJ5OiBPbGVrc2FuZHIgR3J5dHNvdiA8b2xla3NhbmRyX2dyeXRzb3ZA
+ZXBhbS5jb20+Cj4gKwo+ICtpbnQgcGFyc2VfdnNuZF9pdGVtKGxpYnhsX2RldmljZV92c25kICp2
+c25kLCBjb25zdCBjaGFyICpzcGVjKQo+ICt7Cj4gKyAgICBjaGFyICpidWYgPSBzdHJkdXAoc3Bl
+Yyk7Cj4gKyAgICBjaGFyICp0b2tlbiA9IHN0cnRvayhidWYsICIsIik7Cj4gKyAgICBjaGFyICpr
+ZXkgPSBOVUxMOwo+ICsgICAgaW50IHJldDsKPiArCj4gKyAgICB3aGlsZSh0b2tlbikgewoKQWRk
+IHNwYWNlIHBsZWFzZS4KCk90aGVyd2lzZToKCkFja2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBj
+aXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
