@@ -1,14 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: =?utf-8?b?5Zue5aSNOiBSZTogW1BBVENIXSBDaG9vc2UgcmV0?=
- =?utf-8?q?poline_only_when_it_is_safe_to_use?=
-Date: Tue, 6 Feb 2018 10:50:41 +0000
-Message-ID: <a35d9cfe-0feb-bcc7-aaf4-e719943c539f@citrix.com>
-References: <a8vim4q7puma7targvkbpbri.1517912981288@email.android.com>
+From: Robin Randhawa <robin.randhawa@arm.com>
+Subject: Re: Xen ARM community call Tuesday 13th February 5PM UTC
+Date: Tue, 06 Feb 2018 10:25:57 +0000
+Message-ID: <0944dbb7476e52f70a037a7c95444e680b9dcbd9.camel@arm.com>
+References: <1cd12995-d888-9de8-e273-5adaf562156f@arm.com>
+Reply-To: robin.randhawa@arm.com
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1909951201763072465=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <a8vim4q7puma7targvkbpbri.1517912981288@email.android.com>
-Content-Language: en-GB
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=zc38=fa=arm.com=robin.randhawa@srs-us1.protection.inumbo.net>)
+ id 1ej0S4-0000QL-4Q
+ for xen-devel@lists.xenproject.org; Tue, 06 Feb 2018 10:26:12 +0000
+In-Reply-To: <1cd12995-d888-9de8-e273-5adaf562156f@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,175 +22,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "zhenzhong.duan" <zhenzhong.duan@oracle.com>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen-Devel <xen-devel@lists.xen.org>, JBeulich@suse.com, Srinivas REDDY Eeda <srinivas.eeda@oracle.com>
+To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel <xen-devel@lists.xenproject.org>, Lars Kurth <lars.kurth@citrix.com>, "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, anastassios.nanos@onapp.com, vfachin@de.adit-jv.com, Jarvis Roach <Jarvis.Roach@dornerworks.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Artem Mygaiev <Artem_Mygaiev@epam.com>, mirela.simonovic@aggios.com, davorin.mista@aggios.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============1909951201763072465==
-Content-Type: multipart/alternative;
-	boundary="------------7CDC6FE52116FEFF21439088"
-Content-Language: en-GB
-
---------------7CDC6FE52116FEFF21439088
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 06/02/18 10:29, zhenzhong.duan wrote:
->
->
-> 2018年2月6日 17:20于 Andrew Cooper <andrew.cooper3@citrix.com
-> <mailto:andrew.cooper3@citrix.com>>写道：
-> >
-> > On 06/02/2018 09:13, Zhenzhong Duan wrote:
-> > > 在 2018/2/6 16:59, Andrew Cooper 写道:
-> > >> On 06/02/2018 08:43, Zhenzhong Duan wrote:
-> > >>> When ( ibrs && thunk == THUNK_DEFAULT && !retpoline_safe() ) is
-> true,
-> > >>> thunk is set to THUNK_JMP rather than THUNK_RETPOLINE.
-> > >>>
-> > >>> When (!ibrs && thunk == THUNK_DEFAULT && !retpoline_safe() ) is
-> true,
-> > >>> we should do the same.
-> > >>>
-> > >>> Signed-off-by: Zhenzhong Duan <zhenzhong.duan@oracle.com
-> <mailto:zhenzhong.duan@oracle.com>>
-> > >> Why?  What improvement is this intended to give?
-> > > No improvement, I just feel if retpoline isn't safe, THUNK_JMP is
-> > > better and safer.
-> > > Above first check is working that way.
-> >
-> > If your only two choices are unsafe repoline or plain jumps, then
-> unsafe
-> > repoline is far far far safer.
-> >
-> > Its unsafe properties only kick in on an RSB underflow, and an attacker
-> > would have to do call-depths analysis of the running binary to identify
-> > which rets to attempt to poison.
-> >
-> Thanks for explaining.
-> So, for a retpoline safe processor, it just stop using RSB when it's
-> empty to avoid underflow?
->
-
-The qualification of whether a processor is retpoline-safe or not is
-whether an RSB underflow causes a BTB lookup (unsafe) or not (safe).
-
-RSB underflows will always occur; you cannot get rid of them, but in
-most cases (i.e. pre-Skylake) they don't fall back to using a prediction
-source which can be poisoned by an attacker.
-
-> Another question:
->
-> if (opt_thunk == THUNK_DEFAULT && opt_ibrs == -1 &&
-> CONFIG_INDIRECT_THUNK && !cpu_has_lfence_dispatch && !retpoline_safe())
-> results in "thunk = THUNK_JMP" regardless of the value of
-> "boot_cpu_has(X86_FEATURE_IBRSB)"
->
-
-Your formatting is hard to follow, but cpu_has_lfence_dispatch can only
-be false when virtualised under an SP2-unaware hypervisor on AMD
-hardware, at which point retpoline_safe() will return true.  Also, AMD
-don't have IBRS in microcode and their future plans don't appear to
-involve using that particular CPUID bit.
-
-~Andrew
-
---------------7CDC6FE52116FEFF21439088
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 06/02/18 10:29, zhenzhong.duan
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:a8vim4q7puma7targvkbpbri.1517912981288@email.android.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <p dir="ltr"><br>
-        2018年2月6日 17:20于 Andrew Cooper &lt;<a
-          href="mailto:andrew.cooper3@citrix.com" moz-do-not-send="true">andrew.cooper3@citrix.com</a>&gt;写道：<br>
-        &gt;<br>
-        &gt; On 06/02/2018 09:13, Zhenzhong Duan wrote: <br>
-        &gt; &gt; 在 2018/2/6 16:59, Andrew Cooper 写道: <br>
-        &gt; &gt;&gt; On 06/02/2018 08:43, Zhenzhong Duan wrote: <br>
-        &gt; &gt;&gt;&gt; When ( ibrs &amp;&amp; thunk == THUNK_DEFAULT
-        &amp;&amp; !retpoline_safe() ) is true, <br>
-        &gt; &gt;&gt;&gt; thunk is set to THUNK_JMP rather than
-        THUNK_RETPOLINE. <br>
-        &gt; &gt;&gt;&gt; <br>
-        &gt; &gt;&gt;&gt; When (!ibrs &amp;&amp; thunk == THUNK_DEFAULT
-        &amp;&amp; !retpoline_safe() ) is true, <br>
-        &gt; &gt;&gt;&gt; we should do the same. <br>
-        &gt; &gt;&gt;&gt; <br>
-        &gt; &gt;&gt;&gt; Signed-off-by: Zhenzhong Duan &lt;<a
-          href="mailto:zhenzhong.duan@oracle.com" moz-do-not-send="true">zhenzhong.duan@oracle.com</a>&gt;
-        <br>
-        &gt; &gt;&gt; Why?  What improvement is this intended to give? <br>
-        &gt; &gt; No improvement, I just feel if retpoline isn't safe,
-        THUNK_JMP is <br>
-        &gt; &gt; better and safer. <br>
-        &gt; &gt; Above first check is working that way. <br>
-        &gt;<br>
-        &gt; If your only two choices are unsafe repoline or plain
-        jumps, then unsafe <br>
-        &gt; repoline is far far far safer. <br>
-        &gt;<br>
-        &gt; Its unsafe properties only kick in on an RSB underflow, and
-        an attacker <br>
-        &gt; would have to do call-depths analysis of the running binary
-        to identify <br>
-        &gt; which rets to attempt to poison. <br>
-        &gt;<br>
-        Thanks for explaining.<br>
-        So, for a retpoline safe processor, it just stop using RSB when
-        it's empty to avoid underflow?</p>
-    </blockquote>
-    <br>
-    The qualification of whether a processor is retpoline-safe or not is
-    whether an RSB underflow causes a BTB lookup (unsafe) or not (safe).<br>
-    <br>
-    RSB underflows will always occur; you cannot get rid of them, but in
-    most cases (i.e. pre-Skylake) they don't fall back to using a
-    prediction source which can be poisoned by an attacker.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:a8vim4q7puma7targvkbpbri.1517912981288@email.android.com">
-      <p dir="ltr">Another question:</p>
-      <p dir="ltr">if (opt_thunk == THUNK_DEFAULT &amp;&amp; opt_ibrs ==
-        -1 &amp;&amp; <br>
-        CONFIG_INDIRECT_THUNK &amp;&amp; !cpu_has_lfence_dispatch
-        &amp;&amp; !retpoline_safe())
-        <br>
-        results in "thunk = THUNK_JMP" regardless of the value of
-        "boot_cpu_has(X86_FEATURE_IBRSB)"
-      </p>
-    </blockquote>
-    <br>
-    Your formatting is hard to follow, but cpu_has_lfence_dispatch can
-    only be false when virtualised under an SP2-unaware hypervisor on
-    AMD hardware, at which point retpoline_safe() will return true. 
-    Also, AMD don't have IBRS in microcode and their future plans don't
-    appear to involve using that particular CPUID bit.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------7CDC6FE52116FEFF21439088--
-
-
---===============1909951201763072465==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1909951201763072465==--
+SGkgSnVsaWVuLgoKVGhhbmtzIGZvciBsb29waW5nIG1lIGluLgoKT24gVHVlLCAyMDE4LTAyLTA2
+IGF0IDEwOjExICswMDAwLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gSGkgYWxsLAo+Cj4gSSB3b3Vs
+ZCBzdWdnZXN0IHRvIGhhdmUgdGhlIG5leHQgY29tbXVuaXR5IGNhbGwgb24gVHVlc2RheSAxM3Ro
+Cj4gRmVicnVhcnkKPiA1cG0gR01ULiBEb2VzIGl0IHNvdW5kIGdvb2Q/CgpJJ20gb3V0IG9mIG9m
+ZmljZSBmcm9tIHRoZSA4dGggdG8gdGhlIDE2dGggdW5mb3J0dW5hdGVseS4KCj4gRG8geW91IGhh
+dmUgYW55IHNwZWNpZmljIHRvcGljIHlvdSB3b3VsZCBsaWtlIHRvIGRpc2N1c3M/CgpGcm9tIG15
+IHNpZGU6CgpJJ3ZlIHNwb2tlbiB0byBhIGZhaXIgbnVtYmVyIG9mIGZvbGtzIG9uIHRoZSBUbyBs
+aXN0IGhlcmUgaW4gMS0xCmRpc2N1c3Npb25zIGFib3V0IHRoaXMuCgpJIHRoaW5rIGl0IHdvdWxk
+IGJlIGh1Z2VseSBiZW5lZmljaWFsIGlmIHRoZXJlIGNvdWxkIGJlIGFuIG9wZW4KcmVwb3NpdG9y
+eSBvZiBpbmZvcm1hdGlvbiB0aGF0IGRlc2NyaWJlcyBpbiBjbGVhciB0ZXJtcyB3aGF0IHRoZQpz
+cGVjaWZpYyBlbmdpbmVlcmluZyBpdGVtcyBhcmUgd2hpY2ggYXJlIG5lZWRlZCB0byBtYWtlIFhl
+biB2aWFibGUgZm9yCmFzc2Vzc21lbnQgdG93YXJkcyBzYWZldHkgY2VydGlmaWNhdGlvbi4KCkkn
+bSBub3QgYSBYZW4gZXhwZXJ0IGJ5IGFueSBtZWFzdXJlIGJ1dCBvZmYgdGhlIHRvcCBJIHJlY2Fs
+bCB0aGF0IG9uZQppdGVtIHdhcyB0aGUgdGFzayBvZiByZW1vdmluZyB0aGUgcmVsaWFuY2Ugb24g
+dGhlIExpbnV4IGtlcm5lbCBmb3IKRG9tMC4KCkkgYW0gY2VydGFpbiB0aGVyZSBhcmUgbW9yZS4K
+ClRoZSBtb3RpdmF0aW9uIGJlaGluZCB0aGlzIGlzIHRvIHNwdXIgZm9sa3MgaW50byBhY2tub3ds
+ZWRnaW5nIHRoZQp0ZWNobmljYWwgd29yayB0aGF0IHJlbWFpbnMgdG8gYmUgZG9uZS4gV2hldGhl
+ciB0aGF0IHdvcmsgdGhlbiBoYXBwZW5zCmJlaGluZCBjbG9zZWQgcHJvcHJpZXRhcnkgZG9vcnMg
+dG8gZ2VuZXJhdGUgdmFsdWUgb3IgaW4gdGhlIG9wZW4gaXMgYW4KaW1wbGVtZW50YXRpb24gZGV0
+YWlsLgoKSWYgbm90aGluZyBlbHNlIC0gaXQgd291bGQgZGVmaW5pdGVseSBhY3QgYXMgYW4gYWNj
+ZWxlcmF0b3IuCgpQZXJzb25hbGx5LCBJIHdvdWxkIGJlIHRocmlsbGVkIGlmIHRoZXJlIHdhcyBl
+bm91Z2ggbW9tZW50dW0gdG8gb3Blbmx5Cm1hc3NhZ2UgWGVuIGludG8gdGhlIHNoYXBlIHRoYXQg
+SSBhbGx1ZGUgdG8uIElmIHRoYXQgdGFrZXMgdGhpbmdzIDcwJQphaGVhZCB3aXRoIHRoZSByZW1h
+aW5pbmcgMzAlIGRvbmUgYnkgbWlzYyBYZW4gY29tbWVyY2lhbCBlbnRpdGllcyBhcwp0aGVpciBk
+aWZmZXJlbnRpYXRpb24gdmFsdWUgYWRkIC0gdGhhdCdzIGEgaHVnZSBib251cyBmb3IgdGhlIGVj
+b3N5c3RlbQphbmQgZm9yIHRoZSBmdXR1cmUgb2YgWGVuLgoKVGhhbmtzIQpSb2JpbgoKCklNUE9S
+VEFOVCBOT1RJQ0U6IFRoZSBjb250ZW50cyBvZiB0aGlzIGVtYWlsIGFuZCBhbnkgYXR0YWNobWVu
+dHMgYXJlIGNvbmZpZGVudGlhbCBhbmQgbWF5IGFsc28gYmUgcHJpdmlsZWdlZC4gSWYgeW91IGFy
+ZSBub3QgdGhlIGludGVuZGVkIHJlY2lwaWVudCwgcGxlYXNlIG5vdGlmeSB0aGUgc2VuZGVyIGlt
+bWVkaWF0ZWx5IGFuZCBkbyBub3QgZGlzY2xvc2UgdGhlIGNvbnRlbnRzIHRvIGFueSBvdGhlciBw
+ZXJzb24sIHVzZSBpdCBmb3IgYW55IHB1cnBvc2UsIG9yIHN0b3JlIG9yIGNvcHkgdGhlIGluZm9y
+bWF0aW9uIGluIGFueSBtZWRpdW0uIFRoYW5rIHlvdS4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
