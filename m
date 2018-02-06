@@ -1,18 +1,16 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: =?utf-8?b?5Zue5aSNOiBSZTogW1BBVENIXSBDaG9vc2UgcmV0?=
- =?utf-8?q?poline_only_when_it_is_safe_to_use?=
-Date: Tue, 6 Feb 2018 13:23:36 +0000
-Message-ID: <e877415b-90a5-151b-c670-6a26e9cf36d4@citrix.com>
-References: <a8vim4q7puma7targvkbpbri.1517912981288@email.android.com>
- <a35d9cfe-0feb-bcc7-aaf4-e719943c539f@citrix.com>
- <dabdf330-334a-4ea1-bc32-4143c93557eb@oracle.com>
- <9de36cbb-11b1-4aa4-0ae2-1ca6dcfe6bff@citrix.com>
- <311afa67-4f0a-a9b9-8117-1efae269856a@oracle.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v4 5/7] libxl: support unmapping static
+ shared memory areas during domain destruction
+Date: Tue, 6 Feb 2018 13:24:30 +0000
+Message-ID: <ab02231f-e116-ac7a-57c9-676a4981dfab@arm.com>
+References: <20180130175024.26921-1-blackskygg@gmail.com>
+ <20180130175024.26921-6-blackskygg@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4716936084644184871=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <311afa67-4f0a-a9b9-8117-1efae269856a@oracle.com>
-Content-Language: en-GB
+In-Reply-To: <20180130175024.26921-6-blackskygg@gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,270 +19,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: zhenzhong.duan@oracle.com
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen-Devel <xen-devel@lists.xen.org>, JBeulich@suse.com, Srinivas REDDY Eeda <srinivas.eeda@oracle.com>
+To: Zhongze Liu <blackskygg@gmail.com>, xen-devel@lists.xen.org
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4716936084644184871==
-Content-Type: multipart/alternative;
-	boundary="------------009BC9D23335B5FE856871F7"
-Content-Language: en-GB
-
---------------009BC9D23335B5FE856871F7
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 06/02/18 12:30, Zhenzhong Duan wrote:
-> 在 2018/2/6 19:56, Andrew Cooper 写道:
->> On 06/02/18 11:41, Zhenzhong Duan wrote:
->>> On 2018/2/6 18:50, Andrew Cooper wrote:
->>>> On 06/02/18 10:29, zhenzhong.duan wrote:
->>>>>
->>>>>
->>>>> 2018年2月6日 17:20于 Andrew Cooper <andrew.cooper3@citrix.com
->>>>> <mailto:andrew.cooper3@citrix.com>>写道：
->>>>> >
->>>>> > On 06/02/2018 09:13, Zhenzhong Duan wrote:
->>>>> > > 在 2018/2/6 16:59, Andrew Cooper 写道:
->>>>> > >> On 06/02/2018 08:43, Zhenzhong Duan wrote:
->>>>> > >>> When ( ibrs && thunk == THUNK_DEFAULT && !retpoline_safe() )
->>>>> is true,
->>>>> > >>> thunk is set to THUNK_JMP rather than THUNK_RETPOLINE.
->>>>> > >>>
->>>>> > >>> When (!ibrs && thunk == THUNK_DEFAULT && !retpoline_safe() )
->>>>> is true,
->>>>> > >>> we should do the same.
->>>>> > >>>
->>>>> > >>> Signed-off-by: Zhenzhong Duan <zhenzhong.duan@oracle.com
->>>>> <mailto:zhenzhong.duan@oracle.com>>
->>>>> > >> Why?  What improvement is this intended to give?
->>>>> > > No improvement, I just feel if retpoline isn't safe, THUNK_JMP is
->>>>> > > better and safer.
->>>>> > > Above first check is working that way.
->>>>> >
->>>>> > If your only two choices are unsafe repoline or plain jumps,
->>>>> then unsafe
->>>>> > repoline is far far far safer.
->>>>> >
->>>>> > Its unsafe properties only kick in on an RSB underflow, and an
->>>>> attacker
->>>>> > would have to do call-depths analysis of the running binary to
->>>>> identify
->>>>> > which rets to attempt to poison.
->>>>> >
->>>>> Thanks for explaining.
->>>>> So, for a retpoline safe processor, it just stop using RSB when
->>>>> it's empty to avoid underflow?
->>>>>
->>>>
->>>> The qualification of whether a processor is retpoline-safe or not
->>>> is whether an RSB underflow causes a BTB lookup (unsafe) or not (safe).
->>>>
->>>> RSB underflows will always occur; you cannot get rid of them, but
->>>> in most cases (i.e. pre-Skylake) they don't fall back to using a
->>>> prediction source which can be poisoned by an attacker.
->>> Understood.
->>>>
->>>>> Another question:
->>>>>
->>>>> if (opt_thunk == THUNK_DEFAULT && opt_ibrs == -1 &&
->>>>> CONFIG_INDIRECT_THUNK && !cpu_has_lfence_dispatch &&
->>>>> !retpoline_safe())
->>>>> results in "thunk = THUNK_JMP" regardless of the value of
->>>>> "boot_cpu_has(X86_FEATURE_IBRSB)"
->>>>>
->>>>
->>>> Your formatting is hard to follow,
->>> Sorry, sent from mobile.
->>>> but cpu_has_lfence_dispatch can only be false when virtualised
->>>> under an SP2-unaware hypervisor on AMD hardware, at which point
->>>> retpoline_safe() will return true.  Also, AMD don't have IBRS in
->>>> microcode and their future plans don't appear to involve using that
->>>> particular CPUID bit.
->>> That does make sense for AMD. But what about Intel hardware which
->>> has (!cpu_has_lfence_dispatch && !retpoline_safe() &&
->>> !boot_cpu_has(X86_FEATURE_IBRSB)), should we  prefer THUNK_RETPOLINE? 
->>
->> Yes, and we do end up choosing RETPOLINE in those circumstances, as
->> we hit the default case you originally tried to patch.
->
-> If that's the case, I think we need another patch like below.
->
-> @@ -223,7 +223,7 @@ void __init init_speculation_mitigations(void)
->               */
->              else if ( retpoline_safe() )
->                  thunk = THUNK_RETPOLINE;
-> -            else
-> +            else if ( boot_cpu_has(X86_FEATURE_IBRSB) )
->                  ibrs = true;
->          }
->          /* Without compiler thunk support, use IBRS if available. */
->
-> As ibrs was set to true when !boot_cpu_has(X86_FEATURE_IBRSB) with
-> current code, then thunk was set to THUNK_JMP rather than THUNK_RETPOLINE.
-
-You are correct.  This is a side effect of an optimisation which was
-requested during review.  I'll draft a patch.
-
-~Andrew
-
---------------009BC9D23335B5FE856871F7
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 06/02/18 12:30, Zhenzhong Duan
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:311afa67-4f0a-a9b9-8117-1efae269856a@oracle.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <div class="moz-cite-prefix">在 2018/2/6 19:56, Andrew Cooper 写道:<br>
-      </div>
-      <blockquote type="cite"
-        cite="mid:9de36cbb-11b1-4aa4-0ae2-1ca6dcfe6bff@citrix.com">
-        <div class="moz-cite-prefix">On 06/02/18 11:41, Zhenzhong Duan
-          wrote:<br>
-        </div>
-        <blockquote type="cite"
-          cite="mid:dabdf330-334a-4ea1-bc32-4143c93557eb@oracle.com">
-          <div class="moz-cite-prefix">On 2018/2/6 18:50, Andrew Cooper
-            wrote:<br>
-          </div>
-          <blockquote type="cite"
-            cite="mid:a35d9cfe-0feb-bcc7-aaf4-e719943c539f@citrix.com">
-            <div class="moz-cite-prefix">On 06/02/18 10:29,
-              zhenzhong.duan wrote:<br>
-            </div>
-            <blockquote type="cite"
-              cite="mid:a8vim4q7puma7targvkbpbri.1517912981288@email.android.com">
-              <p dir="ltr"><br>
-                2018年2月6日 17:20于 Andrew Cooper &lt;<a
-                  href="mailto:andrew.cooper3@citrix.com"
-                  moz-do-not-send="true">andrew.cooper3@citrix.com</a>&gt;写道：<br>
-                &gt;<br>
-                &gt; On 06/02/2018 09:13, Zhenzhong Duan wrote: <br>
-                &gt; &gt; 在 2018/2/6 16:59, Andrew Cooper 写道: <br>
-                &gt; &gt;&gt; On 06/02/2018 08:43, Zhenzhong Duan wrote:
-                <br>
-                &gt; &gt;&gt;&gt; When ( ibrs &amp;&amp; thunk ==
-                THUNK_DEFAULT &amp;&amp; !retpoline_safe() ) is true, <br>
-                &gt; &gt;&gt;&gt; thunk is set to THUNK_JMP rather than
-                THUNK_RETPOLINE. <br>
-                &gt; &gt;&gt;&gt; <br>
-                &gt; &gt;&gt;&gt; When (!ibrs &amp;&amp; thunk ==
-                THUNK_DEFAULT &amp;&amp; !retpoline_safe() ) is true, <br>
-                &gt; &gt;&gt;&gt; we should do the same. <br>
-                &gt; &gt;&gt;&gt; <br>
-                &gt; &gt;&gt;&gt; Signed-off-by: Zhenzhong Duan &lt;<a
-                  href="mailto:zhenzhong.duan@oracle.com"
-                  moz-do-not-send="true">zhenzhong.duan@oracle.com</a>&gt;
-                <br>
-                &gt; &gt;&gt; Why?  What improvement is this intended to
-                give? <br>
-                &gt; &gt; No improvement, I just feel if retpoline isn't
-                safe, THUNK_JMP is <br>
-                &gt; &gt; better and safer. <br>
-                &gt; &gt; Above first check is working that way. <br>
-                &gt;<br>
-                &gt; If your only two choices are unsafe repoline or
-                plain jumps, then unsafe <br>
-                &gt; repoline is far far far safer. <br>
-                &gt;<br>
-                &gt; Its unsafe properties only kick in on an RSB
-                underflow, and an attacker <br>
-                &gt; would have to do call-depths analysis of the
-                running binary to identify <br>
-                &gt; which rets to attempt to poison. <br>
-                &gt;<br>
-                Thanks for explaining.<br>
-                So, for a retpoline safe processor, it just stop using
-                RSB when it's empty to avoid underflow?</p>
-            </blockquote>
-            <br>
-            The qualification of whether a processor is retpoline-safe
-            or not is whether an RSB underflow causes a BTB lookup
-            (unsafe) or not (safe).<br>
-            <br>
-            RSB underflows will always occur; you cannot get rid of
-            them, but in most cases (i.e. pre-Skylake) they don't fall
-            back to using a prediction source which can be poisoned by
-            an attacker.<br>
-          </blockquote>
-          Understood.<br>
-          <blockquote type="cite"
-            cite="mid:a35d9cfe-0feb-bcc7-aaf4-e719943c539f@citrix.com">
-            <br>
-            <blockquote type="cite"
-              cite="mid:a8vim4q7puma7targvkbpbri.1517912981288@email.android.com">
-              <p dir="ltr">Another question:</p>
-              <p dir="ltr">if (opt_thunk == THUNK_DEFAULT &amp;&amp;
-                opt_ibrs == -1 &amp;&amp; <br>
-                CONFIG_INDIRECT_THUNK &amp;&amp;
-                !cpu_has_lfence_dispatch &amp;&amp; !retpoline_safe()) <br>
-                results in "thunk = THUNK_JMP" regardless of the value
-                of "boot_cpu_has(X86_FEATURE_IBRSB)" </p>
-            </blockquote>
-            <br>
-            Your formatting is hard to follow,</blockquote>
-          Sorry, sent from mobile.<br>
-          <blockquote type="cite"
-            cite="mid:a35d9cfe-0feb-bcc7-aaf4-e719943c539f@citrix.com">
-            but cpu_has_lfence_dispatch can only be false when
-            virtualised under an SP2-unaware hypervisor on AMD hardware,
-            at which point retpoline_safe() will return true.  Also, AMD
-            don't have IBRS in microcode and their future plans don't
-            appear to involve using that particular CPUID bit.<br>
-          </blockquote>
-          That does make sense for AMD. But what about Intel hardware
-          which has (!cpu_has_lfence_dispatch &amp;&amp;
-          !retpoline_safe() &amp;&amp;
-          !boot_cpu_has(X86_FEATURE_IBRSB)), should we  prefer
-          THUNK_RETPOLINE? </blockquote>
-        <br>
-        Yes, and we do end up choosing RETPOLINE in those circumstances,
-        as we hit the default case you originally tried to patch.</blockquote>
-      <br>
-      If that's the case, I think we need another patch like below.<br>
-      <br>
-      @@ -223,7 +223,7 @@ void __init init_speculation_mitigations(void)<br>
-                    */<br>
-                   else if ( retpoline_safe() )<br>
-                       thunk = THUNK_RETPOLINE;<br>
-      -            else<br>
-      +            else if ( boot_cpu_has(X86_FEATURE_IBRSB) )<br>
-                       ibrs = true;<br>
-               }<br>
-               /* Without compiler thunk support, use IBRS if available.
-      */<br>
-      <br>
-      As ibrs was set to true when !boot_cpu_has(X86_FEATURE_IBRSB) with
-      current code, then thunk was set to THUNK_JMP rather than
-      THUNK_RETPOLINE.<br>
-    </blockquote>
-    <br>
-    You are correct.  This is a side effect of an optimisation which was
-    requested during review.  I'll draft a patch.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------009BC9D23335B5FE856871F7--
-
-
---===============4716936084644184871==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+SGksCgpPbiAwMS8zMC8yMDE4IDA1OjUwIFBNLCBaaG9uZ3plIExpdSB3cm90ZToKPiBBZGQgbGli
+eGxfX3NzaG1fZGVsIHRvIHVubWFwIHN0YXRpYyBzaGFyZWQgbWVtb3J5IGFyZWFzIG1hcHBlZCBi
+eQo+IGxpYnhsX19zc2htX2FkZCBkdXJpbmcgZG9tYWluIGNyZWF0aW9uLiBUaGUgdW5tYXBwaW5n
+IHByb2Nlc3MgaXM6Cj4gCj4gKiBGb3IgYSBtYXN0ZXI6IGRlY3JlYXNlIHRoZSByZWZjb3VudCBv
+ZiB0aGUgc3NobSByZWdpb24sIGlmIHRoZSByZWZjb3VudAo+ICAgIHJlYWNoZXMgMCwgY2xlYW51
+cCB0aGUgd2hvbGUgc3NobSBwYXRoLgo+ICogRm9yIGEgc2xhdmU6IDEpIHVubWFwIHRoZSBzaGFy
+ZWQgcGFnZXMsIGFuZCBjbGVhbnVwIHJlbGF0ZWQgeHMgZW50cmllcy4gSWYKPiAgICB0aGUgc3lz
+dGVtIHdvcmtzIG5vcm1hbGx5LCBhbGwgdGhlIHNoYXJlZCBwYWdlcyB3aWxsIGJlIHVubWFwcGVk
+LCBzbyB0aGVyZQo+ICAgIHdvbid0IGJlIHBhZ2UgbGVha3MuIEluIGNhc2Ugb2YgZXJyb3JzLCB0
+aGUgdW5tYXBwaW5nIHByb2Nlc3Mgd2lsbCBnbyBvbiBhbmQKPiAgICB1bm1hcCBhbGwgdGhlIG90
+aGVyIHBhZ2VzIHRoYXQgY2FuIGJlIHVubWFwcGVkLCBzbyB0aGUgb3RoZXIgcGFnZXMgd29uJ3QK
+PiAgICBiZSBsZWFrZWQsIGVpdGhlci4gMikgRGVjcmVhc2UgdGhlIHJlZmNvdW50IG9mIHRoZSBz
+c2htIHJlZ2lvbiwgaWYgdGhlCj4gICAgcmVmY291bnQgcmVhY2hlcyAwLCBjbGVhbnVwIHRoZSB3
+aG9sZSBzc2htIHBhdGguCgpNYXkgSSBhc2sgdG8gYWRkIGEgbmV3bGluZSBsaW5lIDEpIGFuZCAy
+KS4gVGhpcyB3b3VsZCBtYWtlIGNsZWFyZXIgdGhlIDIgCnN0ZXBzLgoKPiAKPiBUaGlzIGlzIGZv
+ciB0aGUgcHJvcG9zYWwgIkFsbG93IHNldHRpbmcgdXAgc2hhcmVkIG1lbW9yeSBhcmVhcyBiZXR3
+ZWVuIFZNcwo+IGZyb20geGwgY29uZmlnIGZpbGUiIChzZWUgWzFdKS4KPiAKPiBbMV0gaHR0cHM6
+Ly9saXN0cy54ZW4ub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMTctMDgvbXNnMDMyNDIu
+aHRtbAo+IAo+IFNpZ25lZC1vZmYtYnk6IFpob25nemUgTGl1IDxibGFja3NreWdnQGdtYWlsLmNv
+bT4KPiAKPiBDYzogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+Cj4gQ2M6
+IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4gQ2M6IFN0ZWZhbm8gU3RhYmVsbGluaSA8
+c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KPiBDYzogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxA
+YXJtLmNvbT4KPiBDYzogeGVuLWRldmVsQGxpc3RzLnhlbi5vcmcKPiAtLS0KPiAgIHRvb2xzL2xp
+YnhsL2xpYnhsX2RvbWFpbi5jICAgfCAgIDUgKysKPiAgIHRvb2xzL2xpYnhsL2xpYnhsX2ludGVy
+bmFsLmggfCAgIDIgKwo+ICAgdG9vbHMvbGlieGwvbGlieGxfc3NobS5jICAgICB8IDEwNiArKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gICAzIGZpbGVzIGNoYW5n
+ZWQsIDExMyBpbnNlcnRpb25zKCspCj4gCj4gZGlmZiAtLWdpdCBhL3Rvb2xzL2xpYnhsL2xpYnhs
+X2RvbWFpbi5jIGIvdG9vbHMvbGlieGwvbGlieGxfZG9tYWluLmMKPiBpbmRleCAxM2IxYzczZDQw
+Li4zN2YwMDE1NTRiIDEwMDY0NAo+IC0tLSBhL3Rvb2xzL2xpYnhsL2xpYnhsX2RvbWFpbi5jCj4g
+KysrIGIvdG9vbHMvbGlieGwvbGlieGxfZG9tYWluLmMKPiBAQCAtMTAyNiw2ICsxMDI2LDExIEBA
+IHZvaWQgbGlieGxfX2Rlc3Ryb3lfZG9taWQobGlieGxfX2VnYyAqZWdjLCBsaWJ4bF9fZGVzdHJv
+eV9kb21pZF9zdGF0ZSAqZGlzKQo+ICAgICAgICAgICBnb3RvIG91dDsKPiAgICAgICB9Cj4gICAK
+PiArICAgIHJjID0gbGlieGxfX3NzaG1fZGVsKGdjLCBkb21pZCk7Cj4gKyAgICBpZiAocmMpIHsK
+PiArICAgICAgICBMT0dEKEVSUk9SLCBkb21pZCwgIkRlbGV0aW5nIHN0YXRpYyBzaG0gZmFpbGVk
+LiIpOwo+ICsgICAgfQo+ICsKPiAgICAgICBpZiAobGlieGxfX2RldmljZV9wY2lfZGVzdHJveV9h
+bGwoZ2MsIGRvbWlkKSA8IDApCj4gICAgICAgICAgIExPR0QoRVJST1IsIGRvbWlkLCAiUGNpIHNo
+dXRkb3duIGZhaWxlZCIpOwo+ICAgICAgIHJjID0geGNfZG9tYWluX3BhdXNlKGN0eC0+eGNoLCBk
+b21pZCk7Cj4gZGlmZiAtLWdpdCBhL3Rvb2xzL2xpYnhsL2xpYnhsX2ludGVybmFsLmggYi90b29s
+cy9saWJ4bC9saWJ4bF9pbnRlcm5hbC5oCj4gaW5kZXggMmNmZTRjMDhhNy4uYzM5OGI2YTZiOCAx
+MDA2NDQKPiAtLS0gYS90b29scy9saWJ4bC9saWJ4bF9pbnRlcm5hbC5oCj4gKysrIGIvdG9vbHMv
+bGlieGwvbGlieGxfaW50ZXJuYWwuaAo+IEBAIC00NDI0LDYgKzQ0MjQsOCBAQCBzdGF0aWMgaW5s
+aW5lIGJvb2wgbGlieGxfX3N0cmluZ19pc19kZWZhdWx0KGNoYXIgKipzKQo+ICAgX2hpZGRlbiBp
+bnQgbGlieGxfX3NzaG1fYWRkKGxpYnhsX19nYyAqZ2MsIHVpbnQzMl90IGRvbWlkLAo+ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIGxpYnhsX3N0YXRpY19zaG0gKnNzaG0sIGludCBsZW4p
+Owo+ICAgCj4gK19oaWRkZW4gaW50IGxpYnhsX19zc2htX2RlbChsaWJ4bF9fZ2MgKmdjLCB1aW50
+MzJfdCBkb21pZCk7Cj4gKwo+ICAgX2hpZGRlbiBpbnQgbGlieGxfX3NzaG1fY2hlY2tfb3Zlcmxh
+cChsaWJ4bF9fZ2MgKmdjLCB1aW50MzJfdCBkb21pZCwKPiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgbGlieGxfc3RhdGljX3NobSAqc3NobXMsIGludCBsZW4pOwo+ICAg
+X2hpZGRlbiBpbnQgbGlieGxfX3NzaG1fc2V0ZGVmYXVsdChsaWJ4bF9fZ2MgKmdjLCB1aW50MzJf
+dCBkb21pZCwKPiBkaWZmIC0tZ2l0IGEvdG9vbHMvbGlieGwvbGlieGxfc3NobS5jIGIvdG9vbHMv
+bGlieGwvbGlieGxfc3NobS5jCj4gaW5kZXggNTYyZjQ2ZjI5OS4uMWJmNGQ0YzJkYyAxMDA2NDQK
+PiAtLS0gYS90b29scy9saWJ4bC9saWJ4bF9zc2htLmMKPiArKysgYi90b29scy9saWJ4bC9saWJ4
+bF9zc2htLmMKPiBAQCAtODYsNiArODYsMTEyIEBAIGludCBsaWJ4bF9fc3NobV9jaGVja19vdmVy
+bGFwKGxpYnhsX19nYyAqZ2MsIHVpbnQzMl90IGRvbWlkLAo+ICAgICAgIHJldHVybiAwOwo+ICAg
+fQo+ICAgCj4gKy8qIERlY3JlYXNlIHRoZSByZWZjb3VudCBvZiBhbiBzc2htLiBXaGVuIHJlZmNv
+dW50IHJlYWNoZXMgMCwKCk5JVDogTGlieGwgY29kaW5nIHN0eWxlIHJlZ2FyZGluZyB0aGUgY29t
+bWVudCBzZWVtcyB0byBiZSB1bmNsZWFyZWQgCihJYW4sIFdlaT8pLiBCdXQgSSBmZWVsIGtlZXAg
+LyogYW5kICovIGluIHNlcGFyYXRlIGxpbmUgaXMgbmljZXIuCgo+ICsgKiBjbGVhbiB1cCB0aGUg
+d2hvbGUgc3NobSBwYXRoLgo+ICsgKi8KPiArc3RhdGljIHZvaWQgbGlieGxfX3NzaG1fZGVjcmVm
+KGxpYnhsX19nYyAqZ2MsIHhzX3RyYW5zYWN0aW9uX3QgeHQsCj4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBjb25zdCBjaGFyICpzc2htX3BhdGgpCj4gK3sKPiArICAgIGludCBjb3Vu
+dDsKPiArICAgIGNvbnN0IGNoYXIgKmNvdW50X3BhdGgsICpjb3VudF9zdHJpbmc7Cj4gKwo+ICsg
+ICAgY291bnRfcGF0aCA9IEdDU1BSSU5URigiJXMvdXNlcmNudCIsIHNzaG1fcGF0aCk7Cj4gKyAg
+ICBpZiAobGlieGxfX3hzX3JlYWRfY2hlY2tlZChnYywgeHQsIGNvdW50X3BhdGgsICZjb3VudF9z
+dHJpbmcpKQo+ICsgICAgICAgIHJldHVybjsKPiArICAgIGNvdW50ID0gYXRvaShjb3VudF9zdHJp
+bmcpOwo+ICsKPiArICAgIGlmICgtLWNvdW50ID09IDApIHsKPiArICAgICAgICBsaWJ4bF9feHNf
+cGF0aF9jbGVhbnVwKGdjLCB4dCwgc3NobV9wYXRoKTsKPiArICAgICAgICByZXR1cm47Cj4gKyAg
+ICB9Cj4gKwo+ICsgICAgY291bnRfc3RyaW5nID0gR0NTUFJJTlRGKCIlZCIsIGNvdW50KTsKPiAr
+ICAgIGxpYnhsX194c193cml0ZV9jaGVja2VkKGdjLCB4dCwgY291bnRfcGF0aCwgY291bnRfc3Ry
+aW5nKTsKClNlZSBteSBjb21tZW50IGFib3V0IGluY3JlZiBpbiBhIHBhdGNoICM0LgoKPiArCj4g
+KyAgICByZXR1cm47Cj4gK30KPiArCj4gK3N0YXRpYyB2b2lkIGxpYnhsX19zc2htX2RvX3VubWFw
+KGxpYnhsX19nYyAqZ2MsIHVpbnQzMl90IGRvbWlkLCBjb25zdCBjaGFyICppZCwKPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDY0X3QgYmVnaW4sIHVpbnQ2NF90IGVuZCkK
+PiArewo+ICsgICAgYmVnaW4gPj49IFhDX1BBR0VfU0hJRlQ7Cj4gKyAgICBlbmQgPj49IFhDX1BB
+R0VfU0hJRlQ7Cj4gKyAgICBmb3IgKDsgYmVnaW4gPCBlbmQ7ICsrYmVnaW4pIHsKPiArICAgICAg
+ICBpZiAoeGNfZG9tYWluX3JlbW92ZV9mcm9tX3BoeXNtYXAoQ1RYLT54Y2gsIGRvbWlkLCBiZWdp
+bikpIHsKPiArICAgICAgICAgICAgU1NITV9FUlJPUihkb21pZCwgaWQsCj4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgInVuYWJsZSB0byB1bm1hcCBzaGFyZWQgcGFnZSBhdCAweCUiUFJJeDY0Ii4i
+LAo+ICsgICAgICAgICAgICAgICAgICAgICAgIGJlZ2luKTsKPiArICAgICAgICB9Cj4gKyAgICB9
+Cj4gK30KPiArCj4gK3N0YXRpYyB2b2lkIGxpYnhsX19zc2htX2RlbF9zbGF2ZShsaWJ4bF9fZ2Mg
+KmdjLCB4c190cmFuc2FjdGlvbl90IHh0LAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgdWludDMyX3QgZG9taWQsIGNvbnN0IGNoYXIgKmlkLCBib29sIGlzcmV0cnkpCj4gK3sK
+PiArICAgIGNvbnN0IGNoYXIgKnNsYXZlX3BhdGgsICpiZWdpbl9zdHIsICplbmRfc3RyOwo+ICsg
+ICAgdWludDY0X3QgYmVnaW4sIGVuZDsKPiArCj4gKyAgICBzbGF2ZV9wYXRoID0gR0NTUFJJTlRG
+KCIlcy9zbGF2ZXMvJSJQUkl1MzIsIFNTSE1fUEFUSChpZCksIGRvbWlkKTsKPiArCj4gKyAgICBi
+ZWdpbl9zdHIgPSBsaWJ4bF9feHNfcmVhZChnYywgeHQsIEdDU1BSSU5URigiJXMvYmVnaW4iLCBz
+bGF2ZV9wYXRoKSk7Cj4gKyAgICBlbmRfc3RyID0gbGlieGxfX3hzX3JlYWQoZ2MsIHh0LCBHQ1NQ
+UklOVEYoIiVzL2VuZCIsIHNsYXZlX3BhdGgpKTsKPiArICAgIGJlZ2luID0gc3RydG91bGwoYmVn
+aW5fc3RyLCBOVUxMLCAxNik7Cj4gKyAgICBlbmQgPSBzdHJ0b3VsbChlbmRfc3RyLCBOVUxMLCAx
+Nik7Cj4gKwo+ICsgICAgLyogQXZvaWQgY2FsbGluZyBkb191bm1hcCBtYW55IHRpbWVzIGluIGNh
+c2Ugb2YgeHMgdHJhbnNhY3Rpb24gcmV0cnkgKi8KPiArICAgIGlmICghaXNyZXRyeSkKPiArICAg
+ICAgICBsaWJ4bF9fc3NobV9kb191bm1hcChnYywgZG9taWQsIGlkLCBiZWdpbiwgZW5kKTsKCklI
+TU8sIGJ5IHVubWFwcGluZyB0aGUgcmVnaW9ucyBpbiBtaWRkbGUgb2YgdGhlIHRyYW5zYWN0aW9u
+LCB5b3UgCmluY3JlYXNlIHRoZSBwb3RlbnRpYWwgZmFpbHVyZSBvZiBpdC4gSSB3b3VsZCBtb3Zl
+IHRoYXQgb3V0IG9mIHRoZSAKdHJhbnNhY3Rpb24gcGF0aC4KCkkgd291bGQgYmUgaW50ZXJlc3Rl
+ZCB0byBoZWFyIHRoZSBvcGluaW9uIG9mIHRoZSB0b29scyBtYWludGFpbmVycyBoZXJlLgoKPiAr
+Cj4gKyAgICBsaWJ4bF9feHNfcGF0aF9jbGVhbnVwKGdjLCB4dCwgc2xhdmVfcGF0aCk7Cj4gK30K
+PiArCj4gKy8qIERlbGV0ZSBzdGF0aWNfc2htIGVudHJpZXMgaW4gdGhlIHhlbnNvdHJlLiAqLwo+
+ICtpbnQgbGlieGxfX3NzaG1fZGVsKGxpYnhsX19nYyAqZ2MsICB1aW50MzJfdCBkb21pZCkKPiAr
+ewo+ICsgICAgaW50IHJjLCBpOwo+ICsgICAgYm9vbCBpc3JldHJ5Owo+ICsgICAgeHNfdHJhbnNh
+Y3Rpb25fdCB4dCA9IFhCVF9OVUxMOwo+ICsgICAgY29uc3QgY2hhciAqZG9tX3BhdGgsICpkb21f
+c3NobV9wYXRoLCAqcm9sZTsKPiArICAgIGNoYXIgKipzc2htX2VudHM7Cj4gKyAgICB1bnNpZ25l
+ZCBpbnQgc3NobV9udW07Cj4gKwo+ICsgICAgZG9tX3BhdGggPSBsaWJ4bF9feHNfZ2V0X2RvbXBh
+dGgoZ2MsIGRvbWlkKTsKPiArICAgIGRvbV9zc2htX3BhdGggPSBHQ1NQUklOVEYoIiVzL3N0YXRp
+Y19zaG0iLCBkb21fcGF0aCk7Cj4gKwo+ICsgICAgaXNyZXRyeSA9IGZhbHNlOwo+ICsgICAgZm9y
+ICg7Oykgewo+ICsgICAgICAgIHJjID0gbGlieGxfX3hzX3RyYW5zYWN0aW9uX3N0YXJ0KGdjLCAm
+eHQpOwo+ICsgICAgICAgIGlmIChyYykgZ290byBvdXQ7Cj4gKwo+ICsgICAgICAgIGlmIChsaWJ4
+bF9feHNfcmVhZChnYywgeHQsIGRvbV9zc2htX3BhdGgpKSB7Cj4gKyAgICAgICAgICAgIHNzaG1f
+ZW50cyA9IGxpYnhsX194c19kaXJlY3RvcnkoZ2MsIHh0LCBkb21fc3NobV9wYXRoLCAmc3NobV9u
+dW0pOwo+ICsgICAgICAgICAgICBpZiAoIXNzaG1fZW50cykgY29udGludWU7Cj4gKwo+ICsgICAg
+ICAgICAgICBmb3IgKGkgPSAwOyBpIDwgc3NobV9udW07ICsraSkgewoKU2ltaWxhciBjb21tZW50
+IGhlcmUuIFlvdSBpbmNyZWFzZSB0aGUgY2hhbmNlIG9mIHRoZSB0cmFuc2FjdGlvbiBmYWlsaW5n
+IApieSB0cnlpbmcgdG8gZGVsIG11bHRpcGxlIHNoYXJlZCBtZW1vcnkgcmVnaW9ucyBhdCB0aGUg
+c2FtZSB0aW1lLiBJIGFtIAptb3N0bHkgdGhpbmtpbmcgb24gdGhlIGxpYnhsX19zc2htX2RlY3Jl
+ZiBiaXQuCgo+ICsgICAgICAgICAgICAgICAgcm9sZSA9IGxpYnhsX194c19yZWFkKGdjLCB4dCwK
+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBHQ1NQUklOVEYoIiVzLyVz
+L3JvbGUiLAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBkb21fc3NobV9wYXRoLAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBzc2htX2VudHNbaV0pKTsKPiArICAgICAgICAgICAgICAgIGFzc2VydChyb2xl
+KTsKPiArICAgICAgICAgICAgICAgIGlmICghc3RybmNtcChyb2xlLCAic2xhdmUiLCA1KSkKPiAr
+ICAgICAgICAgICAgICAgICAgICBsaWJ4bF9fc3NobV9kZWxfc2xhdmUoZ2MsIHh0LCBkb21pZCwg
+c3NobV9lbnRzW2ldLCBpc3JldHJ5KTsKPiArCj4gKyAgICAgICAgICAgICAgICBsaWJ4bF9fc3No
+bV9kZWNyZWYoZ2MsIHh0LCBTU0hNX1BBVEgoc3NobV9lbnRzW2ldKSk7Cj4gKyAgICAgICAgICAg
+IH0KPiArICAgICAgICB9Cj4gKwo+ICsgICAgICAgIHJjID0gbGlieGxfX3hzX3RyYW5zYWN0aW9u
+X2NvbW1pdChnYywgJnh0KTsKPiArICAgICAgICBpZiAoIXJjKSBicmVhazsKPiArICAgICAgICBp
+ZiAocmMgPCAwKSBnb3RvIG91dDsKPiArICAgICAgICBpc3JldHJ5ID0gdHJ1ZTsKPiArICAgIH0K
+PiArCj4gKyAgICByYyA9IDA7Cj4gK291dDoKPiArICAgIGxpYnhsX194c190cmFuc2FjdGlvbl9h
+Ym9ydChnYywgJnh0KTsKPiArICAgIHJldHVybiByYzsKPiArfQo+ICsKPiAgIC8qICAgbGlieGxf
+X3NzaG1fZG9fbWFwIC0tIG1hcCBwYWdlcyBpbnRvIHNsYXZlJ3MgcGh5c21hcAo+ICAgICoKPiAg
+ICAqICAgVGhpcyBmdW5jdGlvbnMgbWFwcwo+IAoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4716936084644184871==--
