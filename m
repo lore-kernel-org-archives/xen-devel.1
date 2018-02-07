@@ -1,10 +1,10 @@
 From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 2/4] firmware/shim: better filtering of
- dependency files during Xen tree setup
-Date: Wed, 7 Feb 2018 16:05:18 +0000
-Message-ID: <20180207160518.lhp4xibwcncje2c2@MacBook-Pro-de-Roger.local>
+Subject: Re: [PATCH 1/4] firmware/shim: correctly handle errors
+ during Xen tree setup
+Date: Wed, 7 Feb 2018 16:06:34 +0000
+Message-ID: <20180207160634.mcnh4nmhgipoikex@MacBook-Pro-de-Roger.local>
 References: <5A7B21F202000078001A6124@prv-mh.provo.novell.com>
- <5A7B244C02000078001A6145@prv-mh.provo.novell.com>
+ <5A7B242502000078001A6142@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,10 +12,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=kfjv=fb=citrix.com=prvs=569e52e77=roger.pau@srs-us1.protection.inumbo.net>)
- id 1ejSHY-00066N-DF
- for xen-devel@lists.xenproject.org; Wed, 07 Feb 2018 16:09:12 +0000
+ id 1ejSIv-0006g0-Bv
+ for xen-devel@lists.xenproject.org; Wed, 07 Feb 2018 16:10:37 +0000
 Content-Disposition: inline
-In-Reply-To: <5A7B244C02000078001A6145@prv-mh.provo.novell.com>
+In-Reply-To: <5A7B242502000078001A6142@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,22 +28,12 @@ To: Jan Beulich <JBeulich@suse.com>
 Cc: xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBGZWIgMDcsIDIwMTggYXQgMDg6MDc6NDBBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gSSBoYXZlIG5vIGlkZWEgd2hhdCAqLmQxIGlzIHN1cHBvc2VkIHRvIHJlZmVyIHRvIC0g
-d2Ugb25seSBoYXZlIC4qLmQKPiBhbmQgLiouZDIgZmlsZXMgKG5vdGUgYWxzbyB0aGUgbGVhZGlu
-ZyBkb3QpLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNv
-bT4KPiAKPiAtLS0gYS90b29scy9maXJtd2FyZS94ZW4tZGlyL01ha2VmaWxlCj4gKysrIGIvdG9v
-bHMvZmlybXdhcmUveGVuLWRpci9NYWtlZmlsZQo+IEBAIC0yNiw3ICsyNiw3IEBAIGxpbmtmYXJt
-LnN0YW1wOiAkKERFUF9ESVJTKSAkKERFUF9GSUxFUykKPiAgCSQoZm9yZWFjaCBkLCAkKExJTktf
-RElSUyksIFwKPiAgCQkoY2QgJChYRU5fUk9PVCk7IFwKPiAgCQkgZmluZCAkKGQpICEgLXR5cGUg
-bCAtdHlwZSBmIFwKPiAtCQkgJChhZGRwcmVmaXggISAtcGF0aCAsICcqLltvZGExXScgJyouZFsx
-Ml0nKSkgXAo+ICsJCSAkKGFkZHByZWZpeCAhIC1wYXRoICwgJyouW29hMV0nICcuKi5kJyAnLiou
-ZDInKSkgXAoKRG9uJ3QgeW91IHdhbnQgLW5hbWUgaGVyZSBpbnN0ZWFkIG9mIC1wYXRoPwoKQUZB
-SUNUIHVzaW5nICcuKi5kJyBpcyBub3QgZ29pbmcgdG8gd29yayB3aXRoIHBhdGgsIGJlY2F1c2Ug
-dGhhdCdzIHRoZQpmdWxsIHBhdGgsIG5vdCB0aGUgbmFtZSBvZiB0aGUgZmlsZS4gVGhpcyB1c2Vk
-IHRvIHdvcmsgYmVmb3JlIGJlY2F1c2UKdGhlIHBhdHRlcm5zIHN0YXJ0ZWQgd2l0aCAnKicuCgpB
-bHNvIEkgY2Fubm90IGZpbmQgYW55IC5hIG9yIC4xIGZpbGVzLCBidXQgbWF5YmUgdGhhdCdzIGp1
-c3QgYmVjYXVzZQpvZiBteSBidWlsZCBzeXN0ZW0gKEkgZG9uJ3QgYnVpbGQgRUZJKS4KClRoYW5r
-cywgUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gV2VkLCBGZWIgMDcsIDIwMTggYXQgMDg6MDc6MDFBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gInNldCAtZSIgb24gYSBzZXBhcmF0ZSBNYWtlZmlsZSBsaW5lIGlzIG1lYW5pbmdsZXNz
+LiBHbHVlIHRvZ2V0aGVyIGFsbAo+IHRoZSBsaW5lcyB0aGF0IHRoaXMgaXMgc3VwcG9zZWQgdG8g
+Y292ZXIuCj4gCj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29t
+PgoKUmV2aWV3ZWQtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoK
+VGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
