@@ -1,14 +1,17 @@
-From: Olaf Hering <olaf@aepfle.de>
+From: "Jan Beulich" <JBeulich@suse.com>
 Subject: Re: qemu-xen fails to build in staging
-Date: Wed, 7 Feb 2018 13:40:04 +0100
-Message-ID: <20180207134004.586789b5.olaf@aepfle.de>
+Date: Wed, 07 Feb 2018 05:46:41 -0700
+Message-ID: <5A7B034102000078001A6042@prv-mh.provo.novell.com>
 References: <20180207081808.GA28102@aepfle.de>
  <5A7ADB7702000078001A5F4B@prv-mh.provo.novell.com>
  <20180207111322.48639c54.olaf@aepfle.de>
+ <20180207134004.586789b5.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6121707228232092373=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180207111322.48639c54.olaf@aepfle.de>
+In-Reply-To: <20180207134004.586789b5.olaf@aepfle.de>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,54 +20,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Olaf Hering <olaf@aepfle.de>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============6121707228232092373==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/hr3SPf0jR/P_HQtZkCsQrSN"; protocol="application/pgp-signature"
-
---Sig_/hr3SPf0jR/P_HQtZkCsQrSN
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Wed, 7 Feb 2018 11:13:22 +0100
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> Yes, it looks like qemu has now submodules which are required for build.
-
-How is the required state of the submodules tracked? When I did a local bui=
-ld I got 10739aa from qemu.org, and building xen.git#staging succeeds. Afte=
-r that I updated my packaging, created a new tar from keycodemapdb.git#mast=
-er and got a non-working build. It turned out that 044f21d was packaged.
-
-Does the build of xen.git#staging now depend on random state at git.qemu.or=
-g?
-
-Olaf
-
---Sig_/hr3SPf0jR/P_HQtZkCsQrSN
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWnrzpAAKCRBdQqD6ppg2
-floHAKDZQT/DQsTGgTtLEeDVx8khjJ1H4QCgigwc621aUAnejspdUsaLu1H7DzM=
-=3i1C
------END PGP SIGNATURE-----
-
---Sig_/hr3SPf0jR/P_HQtZkCsQrSN--
-
-
---===============6121707228232092373==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6121707228232092373==--
+Pj4+IE9uIDA3LjAyLjE4IGF0IDEzOjQwLCA8b2xhZkBhZXBmbGUuZGU+IHdyb3RlOgo+IEFtIFdl
+ZCwgNyBGZWIgMjAxOCAxMToxMzoyMiArMDEwMAo+IHNjaHJpZWIgT2xhZiBIZXJpbmcgPG9sYWZA
+YWVwZmxlLmRlPjoKPiAKPj4gWWVzLCBpdCBsb29rcyBsaWtlIHFlbXUgaGFzIG5vdyBzdWJtb2R1
+bGVzIHdoaWNoIGFyZSByZXF1aXJlZCBmb3IgYnVpbGQuCj4gCj4gSG93IGlzIHRoZSByZXF1aXJl
+ZCBzdGF0ZSBvZiB0aGUgc3VibW9kdWxlcyB0cmFja2VkPyBXaGVuIEkgZGlkIGEgbG9jYWwgCj4g
+YnVpbGQgSSBnb3QgMTA3MzlhYSBmcm9tIHFlbXUub3JnLCBhbmQgYnVpbGRpbmcgeGVuLmdpdCNz
+dGFnaW5nIHN1Y2NlZWRzLiAKPiBBZnRlciB0aGF0IEkgdXBkYXRlZCBteSBwYWNrYWdpbmcsIGNy
+ZWF0ZWQgYSBuZXcgdGFyIGZyb20gCj4ga2V5Y29kZW1hcGRiLmdpdCNtYXN0ZXIgYW5kIGdvdCBh
+IG5vbi13b3JraW5nIGJ1aWxkLiBJdCB0dXJuZWQgb3V0IHRoYXQgCj4gMDQ0ZjIxZCB3YXMgcGFj
+a2FnZWQuCj4gCj4gRG9lcyB0aGUgYnVpbGQgb2YgeGVuLmdpdCNzdGFnaW5nIG5vdyBkZXBlbmQg
+b24gcmFuZG9tIHN0YXRlIGF0IAo+IGdpdC5xZW11Lm9yZz8KCk5vIC0gdGhlIGdpdCB0cmVlIGNv
+bnRhaW5pbmcgdGhlIHN1Ym1vZHVsZSB0cmFja3MgdGhlIGludGVuZGVkCmNvbW1pdCBhdCB3aGlj
+aCB0aGUgc3VibW9kdWxlIGlzIHRvIGJlIHVzZWQuIFlvdSBuZWVkIHRvIGZpc2gKb3V0IHRoYXQg
+aGFzaCBpbnN0ZWFkIG9mIHVzaW5nIHBsYWluIG1hc3RlciBmcm9tIHRoZSBvdGhlciByZXBvLgoi
+Z2l0IHN1Ym1vZHVsZSBzdGF0dXMiIHNob3VsZCB0ZWxsIHlvdSwgSSB0aGluay4KCkphbgoKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
