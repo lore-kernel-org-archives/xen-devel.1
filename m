@@ -1,13 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: qemu-xen fails to build in staging
-Date: Wed, 7 Feb 2018 11:13:22 +0100
-Message-ID: <20180207111322.48639c54.olaf@aepfle.de>
-References: <20180207081808.GA28102@aepfle.de>
- <5A7ADB7702000078001A5F4B@prv-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-coverity test] 118635: all pass - PUSHED
+Date: Wed, 07 Feb 2018 10:16:39 +0000
+Message-ID: <osstest-118635-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0182584530179019217=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A7ADB7702000078001A5F4B@prv-mh.provo.novell.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=qndg=fb=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1ejMma-0008H1-KI
+ for xen-devel@lists.xenproject.org; Wed, 07 Feb 2018 10:16:52 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,61 +19,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0182584530179019217==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/NeyW3N+b25YHJ_adpAh_9cS"; protocol="application/pgp-signature"
-
---Sig_/NeyW3N+b25YHJ_adpAh_9cS
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Wed, 07 Feb 2018 02:56:55 -0700
-schrieb "Jan Beulich" <JBeulich@suse.com>:
-
-> I think I had seen this too, and only then I realized that now I need
-> to set up the respective submodule in the qemu tree.
-
-Yes, it looks like qemu has now submodules which are required for build. Ne=
-ither configure nor 'git archive' does not take that into account, as a res=
-ult the "checkout" is incomplete. Great...
-
-/xen-staging $ find -name .git
-./.git
-./tools/firmware/seabios-dir-remote/.git
-./tools/qemu-xen-traditional-dir-remote/.git
-./tools/qemu-xen-dir-remote/.git
-./tools/qemu-xen-dir-remote/capstone/.git
-./tools/qemu-xen-dir-remote/dtc/.git
-./tools/qemu-xen-dir-remote/ui/keycodemapdb/.git
-
-Olaf
-
---Sig_/NeyW3N+b25YHJ_adpAh_9cS
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWnrRQgAKCRBdQqD6ppg2
-foArAKD159NfgguzC+h2NVAfjIZHB0OJ3ACgvvJAYaN1OFfkIAkoKc7ZRrQ2+N4=
-=68Vm
------END PGP SIGNATURE-----
-
---Sig_/NeyW3N+b25YHJ_adpAh_9cS--
-
-
---===============0182584530179019217==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0182584530179019217==--
+ZmxpZ2h0IDExODYzNSB4ZW4tdW5zdGFibGUtY292ZXJpdHkgcmVhbCBbcmVhbF0KaHR0cDovL2xv
+Z3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzExODYzNS8KClBlcmZlY3Qg
+Oi0pCkFsbCB0ZXN0cyBpbiB0aGlzIGZsaWdodCBwYXNzZWQgYXMgcmVxdWlyZWQKdmVyc2lvbiB0
+YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIDMwY2JkMGM4M2VmM2Qw
+ZWRhYzJkNWJjYzQxYTlhMmI3YTg0M2FlNTgKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAg
+ICAgICAgICAgIDk5ZDlkN2EzM2I3ODFiYzlhOTE0MTZmMWUwNGM4ZTUwZTQwZmE0ZWYKCkxhc3Qg
+dGVzdCBvZiBiYXNpcyAgIDExODU2NCAgMjAxOC0wMi0wNCAwOToxODo0NCBaICAgIDMgZGF5cwpU
+ZXN0aW5nIHNhbWUgc2luY2UgICAxMTg2MzUgIDIwMTgtMDItMDcgMDk6MjA6MjUgWiAgICAwIGRh
+eXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIg
+dGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEJyaWFu
+IFdvb2RzIDxicmlhbi53b29kc0BhbWQuY29tPgogIEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNl
+LmNvbT4KICBSYXp2YW4gQ29qb2NhcnUgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+CiAgVGFt
+YXMgSyBMZW5neWVsIDx0YW1hc0B0a2xlbmd5ZWwuY29tPgogIFdlaSBMaXUgPHdlaS5saXUyQGNp
+dHJpeC5jb20+CiAgWmhvbmd6ZSBMaXUgPGJsYWNrc2t5Z2dAZ21haWwuY29tPgoKam9iczoKIGNv
+dmVyaXR5LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVu
+cHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFn
+ZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8v
+bG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9m
+IHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRw
+Oi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUu
+ZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0
+ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4g
+YmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5n
+aXQ7YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhlbi5vcmc6L2hv
+bWUveGVuL2dpdC94ZW4uZ2l0CiAgIDk5ZDlkN2EzM2IuLjMwY2JkMGM4M2UgIDMwY2JkMGM4M2Vm
+M2QwZWRhYzJkNWJjYzQxYTlhMmI3YTg0M2FlNTggLT4gY292ZXJpdHktdGVzdGVkL3Ntb2tlCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
