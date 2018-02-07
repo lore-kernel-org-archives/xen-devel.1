@@ -1,11 +1,15 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: [PATCH] stubdom: install firmware files as data
-Date: Wed,  7 Feb 2018 16:11:17 +0100
-Message-ID: <20180207151117.27180-1-olaf@aepfle.de>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86/emul: Fix the decoding of segment
+ overrides in 64bit mode
+Date: Wed, 07 Feb 2018 08:21:48 -0700
+Message-ID: <5A7B279C02000078001A61A0@prv-mh.provo.novell.com>
+References: <1518014461-16289-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <1518014461-16289-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,28 +18,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Samuel Thibault <samuel.thibault@ens-lyon.org>, xen-devel@lists.xen.org
-Cc: Olaf Hering <olaf@aepfle.de>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-UmVtb3ZlIHRoZSBleGVjdXRhYmxlIGJpdHMgb2YgdnRwbSBmaWxlcyBieSB1c2luZyBfREFUQSBp
-bnN0ZWFkIG9mIF9QUk9HLgoKU2lnbmVkLW9mZi1ieTogT2xhZiBIZXJpbmcgPG9sYWZAYWVwZmxl
-LmRlPgotLS0KIHN0dWJkb20vTWFrZWZpbGUgfCA0ICsrLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGlu
-c2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvc3R1YmRvbS9NYWtlZmls
-ZSBiL3N0dWJkb20vTWFrZWZpbGUKaW5kZXggZjQ1ZWVhYmQ4Yi4uN2NiNjJlNmMzNiAxMDA2NDQK
-LS0tIGEvc3R1YmRvbS9NYWtlZmlsZQorKysgYi9zdHViZG9tL01ha2VmaWxlCkBAIC02MTIsMTEg
-KzYxMiwxMSBAQCBpbnN0YWxsLXhlbnN0b3JlOiB4ZW5zdG9yZS1zdHViZG9tCiAKIGluc3RhbGwt
-dnRwbTogdnRwbS1zdHViZG9tCiAJJChJTlNUQUxMX0RJUikgIiQoREVTVERJUikkKFhFTkZJUk1X
-QVJFRElSKSIKLQkkKElOU1RBTExfUFJPRykgbWluaS1vcy0kKFhFTl9UQVJHRVRfQVJDSCktdnRw
-bS9taW5pLW9zLmd6ICIkKERFU1RESVIpJChYRU5GSVJNV0FSRURJUikvdnRwbS1zdHViZG9tLmd6
-IgorCSQoSU5TVEFMTF9EQVRBKSBtaW5pLW9zLSQoWEVOX1RBUkdFVF9BUkNIKS12dHBtL21pbmkt
-b3MuZ3ogIiQoREVTVERJUikkKFhFTkZJUk1XQVJFRElSKS92dHBtLXN0dWJkb20uZ3oiCiAKIGlu
-c3RhbGwtdnRwbW1ncjogdnRwbW1nci1zdHViZG9tCiAJJChJTlNUQUxMX0RJUikgIiQoREVTVERJ
-UikkKFhFTkZJUk1XQVJFRElSKSIKLQkkKElOU1RBTExfUFJPRykgbWluaS1vcy0kKFhFTl9UQVJH
-RVRfQVJDSCktdnRwbW1nci9taW5pLW9zLmd6ICIkKERFU1RESVIpJChYRU5GSVJNV0FSRURJUikv
-dnRwbW1nci1zdHViZG9tLmd6IgorCSQoSU5TVEFMTF9EQVRBKSBtaW5pLW9zLSQoWEVOX1RBUkdF
-VF9BUkNIKS12dHBtbWdyL21pbmktb3MuZ3ogIiQoREVTVERJUikkKFhFTkZJUk1XQVJFRElSKS92
-dHBtbWdyLXN0dWJkb20uZ3oiCiAKICMjIyMjIyMjIyMjCiAjIHVuaW5zdGFsbAoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDA3LjAyLjE4IGF0IDE1OjQxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gRXhwbGljaXQgc2VnbWVudCBvdmVyaWRlcyBvdGhlciB0aGFuICVmcyBhbmQgJWdzIGFy
+ZSBkb2N1bWVudGVkIGFzIGlnbm9yZWQgYnkKPiBib3RoIEludGVsIGFuZCBBTUQuCj4gCj4gSW4g
+cHJhY3RpY2UsIHRoaXMgbWVhbnMgdGhhdDoKPiAKPiAgKiBFeHBsaWNpdCB1c2VzIG9mICVzcyBk
+b24ndCBhY3R1YWxseSB5aWVsZCAjU1NbMF0gZm9yIG5vbi1jYW5vbmljYWwKPiAgICBtZW1vcnkg
+cmVmZXJlbmNlcy4KPiAgKiBFeHBsaWNpdCB1c2VzIG9mICV7ZSxjLGR9cyBkb24ndCBvdmVycmlk
+ZSAlcmJwLyVyc3AtYmFzZWQgbWVtb3J5IHJlZmVyZW5jZXMKPiAgICB0byB5aWVsZCAjR1BbMF0g
+Zm9yIG5vbi1jYW5vbmljYWwgbWVtb3J5IHJlZmVyZW5jZXMuCj4gCj4gU2lnbmVkLW9mZi1ieTog
+QW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KClJldmlld2VkLWJ5OiBK
+YW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
