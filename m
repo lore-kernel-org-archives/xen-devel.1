@@ -1,15 +1,14 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 2/2] xen/arm: Blacklist SMMU on Thunder-X
-Date: Wed, 7 Feb 2018 12:34:11 +0000
-Message-ID: <f23289ae-bc7f-305d-cd27-9107865a352d@arm.com>
-References: <20180206195655.7097-1-julien.grall@arm.com>
- <20180206195655.7097-3-julien.grall@arm.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: qemu-xen fails to build in staging
+Date: Wed, 7 Feb 2018 13:40:04 +0100
+Message-ID: <20180207134004.586789b5.olaf@aepfle.de>
+References: <20180207081808.GA28102@aepfle.de>
+ <5A7ADB7702000078001A5F4B@prv-mh.provo.novell.com>
+ <20180207111322.48639c54.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6121707228232092373=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180206195655.7097-3-julien.grall@arm.com>
-Content-Language: en-US
+In-Reply-To: <20180207111322.48639c54.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,54 +18,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xen.org
-Cc: andre.przywara@arm.com, sstabellini@kernel.org, ian.jackson@eu.citrix.com, mjaggi@caviumnetworks.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAwNi8wMi8xOCAxOTo1NiwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFhlbiBkb2VzIG5v
-dCB5ZXQgc3VwcG9ydCBDYXZpdW0gU01NVSBiZWNhdXNlIGl0IHJlcXVpcmVzIHNvbWUKPiB3b3Jr
-YXJvdW5kLiBGb3IgdGhlIHRpbWUgYmVpbmcsIGJsYWNrbGlzdCB0aGVtLgo+IAo+IFNpZ25lZC1v
-ZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4gLS0tCj4gICB4ZW4v
-YXJjaC9hcm0vcGxhdGZvcm1zL01ha2VmaWxlICAgfCAgMSArCj4gICB4ZW4vYXJjaC9hcm0vcGxh
-dGZvcm1zL3RodW5kZXJ4LmMgfCAzOSArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysKPiAgIDIgZmlsZXMgY2hhbmdlZCwgNDAgaW5zZXJ0aW9ucygrKQo+ICAgY3JlYXRlIG1v
-ZGUgMTAwNjQ0IHhlbi9hcmNoL2FybS9wbGF0Zm9ybXMvdGh1bmRlcnguYwo+IAo+IGRpZmYgLS1n
-aXQgYS94ZW4vYXJjaC9hcm0vcGxhdGZvcm1zL01ha2VmaWxlIGIveGVuL2FyY2gvYXJtL3BsYXRm
-b3Jtcy9NYWtlZmlsZQo+IGluZGV4IDUzYTQ3ZTQ4ZDIuLjgwZTU1NWNjMTQgMTAwNjQ0Cj4gLS0t
-IGEveGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9NYWtlZmlsZQo+ICsrKyBiL3hlbi9hcmNoL2FybS9w
-bGF0Zm9ybXMvTWFrZWZpbGUKPiBAQCAtNiw1ICs2LDYgQEAgb2JqLSQoQ09ORklHX0FSTV8zMikg
-Kz0gb21hcDUubwo+ICAgb2JqLSQoQ09ORklHX0FSTV8zMikgKz0gcmNhcjIubwo+ICAgb2JqLSQo
-Q09ORklHX0FSTV82NCkgKz0gc2VhdHRsZS5vCj4gICBvYmoteSArPSBzdW54aS5vCj4gK29iai0k
-KENPTkZJR19BUk1fNjQpICs9IHRodW5kZXJ4Lm8KPiAgIG9iai0kKENPTkZJR19BUk1fNjQpICs9
-IHhnZW5lLXN0b3JtLm8KPiAgIG9iai0kKENPTkZJR19BUk1fNjQpICs9IHhpbGlueC16eW5xbXAu
-bwo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vcGxhdGZvcm1zL3RodW5kZXJ4LmMgYi94ZW4v
-YXJjaC9hcm0vcGxhdGZvcm1zL3RodW5kZXJ4LmMKPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+IGlu
-ZGV4IDAwMDAwMDAwMDAuLmY1ZDcwNDQyOTYKPiAtLS0gL2Rldi9udWxsCj4gKysrIGIveGVuL2Fy
-Y2gvYXJtL3BsYXRmb3Jtcy90aHVuZGVyeC5jCj4gQEAgLTAsMCArMSwzOSBAQAo+ICsvKgo+ICsg
-KiB4ZW4vYXJjaC9hcm0vcGxhdGZvcm1zL3RodW5kZXJ4LmMKPiArICoKPiArICogQ2F2aXVtIFRo
-dW5kZXItWCBzcGVjaWZpYyBzZXR0aW5ncwo+ICsgKgo+ICsgKiBDb3B5cmlnaHQgKGMpIDIwMTgg
-QVJNIEx0ZC4KPiArICoKPiArICogVGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBj
-YW4gcmVkaXN0cmlidXRlIGl0IGFuZC9vciBtb2RpZnkKPiArICogaXQgdW5kZXIgdGhlIHRlcm1z
-IG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBhcyBwdWJsaXNoZWQgYnkKPiArICog
-dGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbjsgdW5kZXIgdmVyc2lvbiAyIG9mIHRoZSBMaWNl
-bnNlLgo+ICsgKgo+ICsgKiBUaGlzIHByb2dyYW0gaXMgZGlzdHJpYnV0ZWQgaW4gdGhlIGhvcGUg
-dGhhdCBpdCB3aWxsIGJlIHVzZWZ1bCwKPiArICogYnV0IFdJVEhPVVQgQU5ZIFdBUlJBTlRZOyB3
-aXRob3V0IGV2ZW4gdGhlIGltcGxpZWQgd2FycmFudHkgb2YKPiArICogTUVSQ0hBTlRBQklMSVRZ
-IG9yIEZJVE5FU1MgRk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFLiAgU2VlIHRoZQo+ICsgKiBHTlUg
-R2VuZXJhbCBQdWJsaWMgTGljZW5zZSBmb3IgbW9yZSBkZXRhaWxzLgo+ICsgKgo+ICsgKiBZb3Ug
-c2hvdWxkIGhhdmUgcmVjZWl2ZWQgYSBjb3B5IG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJsaWMgTGlj
-ZW5zZQo+ICsgKiBhbG9uZyB3aXRoIHRoaXMgcHJvZ3JhbTsgSWYgbm90LCBzZWUgPGh0dHA6Ly93
-d3cuZ251Lm9yZy9saWNlbnNlcy8+Lgo+ICsgKi8KPiArCj4gKyNpbmNsdWRlIDxhc20vcGxhdGZv
-cm0uaD4KPiArCj4gK3N0YXRpYyBjb25zdCBjaGFyICogY29uc3QgdGh1bmRlcnhfZHRfY29tcGF0
-W10gX19pbml0Y29uc3QgPQo+ICt7Cj4gKyAgICAiY2F2aXVtLHRodW5kZXItODh4IiwKClRoZSBj
-b21wYXRpYmxlIGlzIHdyb25nIGhlcmUsIGl0IHNob3VsZCBiZSBjYXZpdW0sdGh1bmRlci04OHh4
-LiBJIHdpbGwgCnJlc2VuZCB0aGUgc2VyaWVzLgoKQ2hlZXJzLAoKPiArICAgIE5VTEwKPiArfTsK
-PiArCj4gK3N0YXRpYyBjb25zdCBzdHJ1Y3QgZHRfZGV2aWNlX21hdGNoIHRodW5kZXJ4X2JsYWNr
-bGlzdF9kZXZbXSBfX2luaXRjb25zdCA9Cj4gK3sKPiArICAgIC8qIENhdml1bSBoYXMgaXRzIG93
-biBTTU1VIHdoaWNoIGlzIG5vdCB5ZXQgc3VwcG9ydGVkLiAqLwo+ICsgICAgRFRfTUFUQ0hfQ09N
-UEFUSUJMRSgiY2F2aXVtLHNtbXUtdjIiKSwKPiArICAgIHsgLyogc2VudGluZWwgKi8gfSwKPiAr
-fTsKPiArCj4gK1BMQVRGT1JNX1NUQVJUKHRodW5kZXJ4LCAiVEhVTkRFUlgiKQo+ICsgICAgLmNv
-bXBhdGlibGUgPSB0aHVuZGVyeF9kdF9jb21wYXQsCj4gKyAgICAuYmxhY2tsaXN0X2RldiA9IHRo
-dW5kZXJ4X2JsYWNrbGlzdF9kZXYsCj4gK1BMQVRGT1JNX0VORAo+IAoKLS0gCkp1bGllbiBHcmFs
-bAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============6121707228232092373==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/hr3SPf0jR/P_HQtZkCsQrSN"; protocol="application/pgp-signature"
+
+--Sig_/hr3SPf0jR/P_HQtZkCsQrSN
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 7 Feb 2018 11:13:22 +0100
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> Yes, it looks like qemu has now submodules which are required for build.
+
+How is the required state of the submodules tracked? When I did a local bui=
+ld I got 10739aa from qemu.org, and building xen.git#staging succeeds. Afte=
+r that I updated my packaging, created a new tar from keycodemapdb.git#mast=
+er and got a non-working build. It turned out that 044f21d was packaged.
+
+Does the build of xen.git#staging now depend on random state at git.qemu.or=
+g?
+
+Olaf
+
+--Sig_/hr3SPf0jR/P_HQtZkCsQrSN
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWnrzpAAKCRBdQqD6ppg2
+floHAKDZQT/DQsTGgTtLEeDVx8khjJ1H4QCgigwc621aUAnejspdUsaLu1H7DzM=
+=3i1C
+-----END PGP SIGNATURE-----
+
+--Sig_/hr3SPf0jR/P_HQtZkCsQrSN--
+
+
+--===============6121707228232092373==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6121707228232092373==--
