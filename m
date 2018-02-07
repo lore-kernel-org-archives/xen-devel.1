@@ -1,11 +1,16 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: update on the status of SP2 mitigations for Xen on Arm
-Date: Wed, 7 Feb 2018 12:14:08 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1802071200020.4960@sstabellini-ThinkPad-X260>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 118660: tolerable all pass -
+	PUSHED
+Date: Wed, 07 Feb 2018 20:20:42 +0000
+Message-ID: <osstest-118660-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6803939280868554832=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=qndg=fb=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1ejWDA-0001YO-Dx
+ for xen-devel@lists.xenproject.org; Wed, 07 Feb 2018 20:20:56 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,62 +19,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: security@xenproject.org
-Cc: lars.kurth.xen@gmail.com, julien.grall@linaro.org, sstabellini@kernel.org, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgYWxsLAoKVGhpcyBpcyB0aGUgbGF0ZXN0IHN0YXR1cyBvZiB0aGUgU1AyIG1pdGlnYXRpb25z
-IGZvciBYZW4gb24gQXJtLiBQbGVhc2UKbm90ZSB0aGF0IGFybTMyIGFuZCBhcm02NCByZXF1aXJl
-IGRpZmZlcmVudCBtaXRpZ2F0aW9ucy4KCkkgaGF2ZSBqdXN0IGJhY2twb3J0ZWQgdGhlIGFybTMy
-IG1pdGlnYXRpb24gdG8gNC4xMCwgNC45LCA0LjggYW5kIDQuNzoKCi0gNC4xMApiYmQwOTNjIHhl
-bi9hcm0zMjogZW50cnk6IERvY3VtZW50IHRoZSBwdXJwb3NlIG9mIHIxMSBpbiB0aGUgdHJhcHMg
-aGFuZGxlcgphNjlhOGI1IHhlbi9hcm0zMjogSW52YWxpZGF0ZSBpY2FjaGUgb24gZ3Vlc3QgZXhp
-c3QgZm9yIENvcnRleC1BMTUKZjE2N2ViZiB4ZW4vYXJtMzI6IEludmFsaWRhdGUgQlRCIG9uIGd1
-ZXN0IGV4aXQgZm9yIENvcnRleCBBMTcgYW5kIDEyCmM0YzAxODcgeGVuL2FybTMyOiBBZGQgc2tl
-bGV0b24gdG8gaGFyZGVuIGJyYW5jaCBwcmVkaWN0b3IgYWxpYXNpbmcgYXR0YWNrcwoxOWFkOGE3
-IHhlbi9hcm0zMjogZW50cnk6IEFkZCBtaXNzaW5nIHRyYXBfcmVzZXQgZW50cnkKM2NhZjMyYyB4
-ZW4vYXJtMzI6IEFkZCBtaXNzaW5nIE1JRFIgdmFsdWVzIGZvciBDb3J0ZXgtQTE3IGFuZCBBMTIK
-ZGY3YmU5NCB4ZW4vYXJtMzI6IGVudHJ5OiBDb25zb2xpZGF0ZSBERUZJTkVfVFJBUF9FTlRSWV8q
-IG1hY3JvcwoKLSA0LjkKNGQwMWRiYyB4ZW4vYXJtMzI6IGVudHJ5OiBEb2N1bWVudCB0aGUgcHVy
-cG9zZSBvZiByMTEgaW4gdGhlIHRyYXBzIGhhbmRsZXIKMjIzNzliNiB4ZW4vYXJtMzI6IEludmFs
-aWRhdGUgaWNhY2hlIG9uIGd1ZXN0IGV4aXN0IGZvciBDb3J0ZXgtQTE1CjZlMTNhZDcgeGVuL2Fy
-bTMyOiBJbnZhbGlkYXRlIEJUQiBvbiBndWVzdCBleGl0IGZvciBDb3J0ZXggQTE3IGFuZCAxMgow
-ZDMyMjM3IHhlbi9hcm0zMjogQWRkIHNrZWxldG9uIHRvIGhhcmRlbiBicmFuY2ggcHJlZGljdG9y
-IGFsaWFzaW5nIGF0dGFja3MKNGJhNTliZCB4ZW4vYXJtMzI6IGVudHJ5OiBBZGQgbWlzc2luZyB0
-cmFwX3Jlc2V0IGVudHJ5CjI5OTdjNWUgeGVuL2FybTMyOiBBZGQgbWlzc2luZyBNSURSIHZhbHVl
-cyBmb3IgQ29ydGV4LUExNyBhbmQgQTEyCjc1MWM4NzkgeGVuL2FybTMyOiBlbnRyeTogQ29uc29s
-aWRhdGUgREVGSU5FX1RSQVBfRU5UUllfKiBtYWNyb3MKCi0gNC44CjExODc1YjcgeGVuL2FybTMy
-OiBlbnRyeTogRG9jdW1lbnQgdGhlIHB1cnBvc2Ugb2YgcjExIGluIHRoZSB0cmFwcyBoYW5kbGVy
-CjExMDVmM2EgeGVuL2FybTMyOiBJbnZhbGlkYXRlIGljYWNoZSBvbiBndWVzdCBleGlzdCBmb3Ig
-Q29ydGV4LUExNQo3NTQzNDVjIHhlbi9hcm0zMjogSW52YWxpZGF0ZSBCVEIgb24gZ3Vlc3QgZXhp
-dCBmb3IgQ29ydGV4IEExNyBhbmQgMTIKNzMzNmQwZCB4ZW4vYXJtMzI6IEFkZCBza2VsZXRvbiB0
-byBoYXJkZW4gYnJhbmNoIHByZWRpY3RvciBhbGlhc2luZyBhdHRhY2tzCmNmOTViYmEgeGVuL2Fy
-bTMyOiBlbnRyeTogQWRkIG1pc3NpbmcgdHJhcF9yZXNldCBlbnRyeQphNTg2Y2JkIHhlbi9hcm0z
-MjogQWRkIG1pc3NpbmcgTUlEUiB2YWx1ZXMgZm9yIENvcnRleC1BMTcgYW5kIEExMgo2MDgyZTNi
-IHhlbi9hcm0zMjogZW50cnk6IENvbnNvbGlkYXRlIERFRklORV9UUkFQX0VOVFJZXyogbWFjcm9z
-CgotIDQuNwpmNTBlYTg0IHhlbi9hcm0zMjogZW50cnk6IERvY3VtZW50IHRoZSBwdXJwb3NlIG9m
-IHIxMSBpbiB0aGUgdHJhcHMgaGFuZGxlcgpkZTNiZGFhIHhlbi9hcm0zMjogSW52YWxpZGF0ZSBp
-Y2FjaGUgb24gZ3Vlc3QgZXhpc3QgZm9yIENvcnRleC1BMTUKNzY2OTkwYiB4ZW4vYXJtMzI6IElu
-dmFsaWRhdGUgQlRCIG9uIGd1ZXN0IGV4aXQgZm9yIENvcnRleCBBMTcgYW5kIDEyCjRhYzAyMjkg
-eGVuL2FybTMyOiBBZGQgc2tlbGV0b24gdG8gaGFyZGVuIGJyYW5jaCBwcmVkaWN0b3IgYWxpYXNp
-bmcgYXR0YWNrcwpiYWZkNjNmIHhlbi9hcm0zMjogZW50cnk6IEFkZCBtaXNzaW5nIHRyYXBfcmVz
-ZXQgZW50cnkKZDViYjQyNSB4ZW4vYXJtMzI6IEFkZCBtaXNzaW5nIE1JRFIgdmFsdWVzIGZvciBD
-b3J0ZXgtQTE3IGFuZCBBMTIKMDAzZWMzZSB4ZW4vYXJtMzI6IGVudHJ5OiBDb25zb2xpZGF0ZSBE
-RUZJTkVfVFJBUF9FTlRSWV8qIG1hY3JvcwoKClRoZSBhcm02NCBiYWNrcG9ydHMgaGF2ZSBiZWVu
-IGluIHRoZSBzdGFnaW5nIHRyZWVzIGZvciBhIHdoaWxlLCBzZWU6Cmh0dHBzOi8vbWFyYy5pbmZv
-Lz9sPXhlbi1kZXZlbCZtPTE1MTY5MDEwNTYyMzU3OQoKSnVsaWVuIHBvc3RlZCBhbm90aGVyIHNl
-cmllcyB0byBpbXByb3ZlIHRoZSBTUDIgbWl0aWdhdGlvbiBmb3IgYXJtNjQ6Cmh0dHBzOi8vbWFy
-Yy5pbmZvLz9sPXhlbi1kZXZlbCZtPTE1MTc4MzY4ODQyMDAzOApJdCBpcyBub3QgeWV0IHJldmll
-d2VkLiBUaGlzIHNlY29uZCBzZXJpZXMgaXMgaGlnaGx5IGRlc2lyYWJsZSwgYXMgaXQKdXNlcyBi
-ZXR0ZXIgZmlybXdhcmUgaW50ZXJmYWNlcyBmb3IgdGhlIG1pdGlnYXRpb24uCgpBdCBwcmVzZW50
-LCBYZW4gaXMgdXNpbmcgYSBQU0NJIGdldF92ZXJzaW9uIGNhbGwgKGl0IGlzIGEgY2FsbCB0byB0
-aGUKUFNDSSBmaXJtd2FyZSkgZm9yIHRoZSBtaXRpZ2F0aW9uLiBJdCByZWxpZXMgb24gdGhlIGZp
-cm13YXJlIGNsZWFuaW5nCnRoZSBicmFuY2ggcHJlZGljdG9yIGNhY2hlIGluIHRoZSBpbXBsZW1l
-bnRhdGlvbiBvZiB0aGUgZ2V0X3ZlcnNpb24KY2FsbC4gSG93ZXZlciwgaXQgYXBwZXJzIHRoYXQg
-Z2V0X3ZlcnNpb24gZG9lc24ndCBhY3R1YWxseSBkbyB0aGUKZXhwZWN0ZWQgdGFzayBvbiBtb3N0
-IGFybTY0IHBsYXRmb3Jtcy4gSGVuY2UsIHRoZSBuZWVkIGZvciBhIG5ldyBzZXJpZXMKYW5kIGEg
-YmV0dGVyIGZpcm13YXJlIGNhbGwuIEp1bGllbiwgZmVlbCBmcmVlIHRvIGFkZCBtb3JlIGRldGFp
-bHMgaGVyZS4KCkNoZWVycywKClN0ZWZhbm8KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+--===============6803939280868554832==
+Content-Type: text/plain
+
+flight 118660 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118660/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  6222e7cbaa1ed75dd8f9d90cfa394a49fed0be2c
+baseline version:
+ xen                  66c4f0c47fd80d1133c24865f95d4f0c59ef9bce
+
+Last test of basis   118650  2018-02-07 15:01:17 Z    0 days
+Testing same since   118660  2018-02-07 18:01:41 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   66c4f0c47f..6222e7cbaa  6222e7cbaa1ed75dd8f9d90cfa394a49fed0be2c -> smoke
+
+
+--===============6803939280868554832==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6803939280868554832==--
