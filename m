@@ -1,20 +1,10 @@
-From: Alexey G <x1917x@gmail.com>
-Subject: Re: [PATCH] x86/nmi: lower initial watchdog frequency
- to avoid boot hangs
-Date: Wed, 7 Feb 2018 16:35:10 +1000
-Message-ID: <20180207163510.0000762b@gmail.com>
-References: <1517865522-3248-1-git-send-email-igor.druzhinin@citrix.com>
- <20180206131026.00007e4b@gmail.com>
- <7b01487b-d7a3-eb2a-6a5b-023f33aaa974@citrix.com>
- <20180207030843.00007458@gmail.com>
- <af6cf4c2-401f-4265-a8a6-1ebe28d45a19@citrix.com>
- <20180207041750.00000668@gmail.com>
- <b64a75a4-c234-6729-acf2-e2989dbae2ab@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: qemu-xen fails to build in staging
+Date: Wed, 7 Feb 2018 09:18:16 +0100
+Message-ID: <20180207081808.GA28102@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0365182622932201033=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <b64a75a4-c234-6729-acf2-e2989dbae2ab@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,79 +13,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Igor Druzhinin <igor.druzhinin@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, jbeulich@suse.com, xen-devel@lists.xen.org
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Cj4+Pj4gSWYgdGhlIGFjdHVhbCBTTUkgc291cmNlIGlzIG5vdCByZWxhdGVkIHRvIHNvbWUgcGxh
-Y2UgaW4gdGhlIE5NSQo+Pj4+IGhhbmRsZXIgY29kZSBidXQgd2FzIGVnLiBkdWUgdG8gc29tZSBT
-TUkgdGltZXIsIGxvd2VyaW5nIE5NSQo+Pj4+IHdhdGNoZG9nIGZyZXF1ZW5jeSBtaWdodCBub3Qg
-Zml4IHRoZSBpc3N1ZSBjb21wbGV0ZWx5LCBidXQgbG93ZXIKPj4+PiBpdHMgcmVwcm9kdWNpYmls
-aXR5IChwZXJoYXBzIHRvIHNvbWUgdmVyeSByYXJlIG9jY3VycmVuY2VzKS4gU28KPj4+PiBpdCdz
-IGJldHRlciBiZSBzdXJlIHdoYXQgd2FzIHRoZSByZWFsIHNvdXJjZSBvZiBTTUkuCj4+Pj4gICAg
-IAo+Pj4KPj4+IFRoaXMgKmlzKiByZWxhdGVkIHRvIHRoaXMgaW5zdHJ1Y3Rpb24gLSBpdCB3YXMg
-Y29uZmlybWVkCj4+PiBlbXBpcmljYWxseS4gUmVtb3ZpbmcgdGhpcyBpbnN0cnVjdGlvbiBzdG9w
-cyBTTUlzIGZyb20gb2NjdXJyaW5nCj4+PiBhbmQgZWZmZWN0aXZlbHkgcmVtb3ZlcyB0aGUgaXNz
-dWUgbGVhdmluZyB0aGUgZnJlcXVlbmN5IHVuY2hhbmdlZC4gIAo+PiAKPj4gSG1tLCBpdCB3b3Vs
-ZCBiZSBpbnRlcmVzdGluZyB0byBrbm93IGZvciB3aGF0IGV2aWwgcHVycG9zZSBkb2VzIGl0Cj4+
-IG5lZWQgdG8gdHJhcCBJL08gcG9ydCA2MWguCj4+IEJUVywgb24gd2hpY2ggbW90aGVyYm9hcmQg
-bW9kZWwgdGhlIGlzc3VlIHdhcyByZXByb2R1Y2VkPwo+PiAgIAo+Cj5UaGUgaXNzdWUgaGFzIGJl
-ZW4gcmVwb3J0ZWQgZm9yIHNvbWUgRGVsbC9IdWF3ZWkgU2t5bGFrZSBwbGF0Zm9ybXMgKG9uZQo+
-b2YgdGhlbSBQb3dlckVkZ2UgUjc0MCB0byBiZSBwcmVjaXNlKSBidXQgSSBkb24ndCB0aGluayB0
-aGUgb3RoZXJzIGFyZQo+dW5hZmZlY3RlZCAodGhlIGlzc3VlIHN1cHBvc2VkbHkgb3JpZ2luYXRl
-cyBmcm9tIEludGVsJ3MgcmVmZXJlbmNlCj5jb2RlKQo+LSB0aGUgZGVmYXVsdCBCSU9TIHNldHVw
-IGluZGVlZCBtYXR0ZXJzLgoKSGVyZSBpcyBhIGJpdCBvZiBpbmZvIHlvdSBtaWdodCBmaW5kIHVz
-ZWZ1bC4gSSBkaWQgYSBxdWljayByZXNlYXJjaCBvbgpteSB0ZXN0IHN5c3RlbSAoR2lnYWJ5dGUg
-R0EtSDI3ME0tRDNIKSBpbiBvcmRlciB0byBjb25maXJtIGlmIEJJT1MgdHJhcHMKSS9PIHBvcnQg
-NjFoIChOTUkgc3RhdHVzKSBhbmQgZm9yIHdoYXQgcHVycG9zZXMuCgpXZWxsLCB0dXJucyBvdXQg
-aXQgcmVhbGx5IGRvZXMuCk1vcmVvdmVyLCBpdCdzIGFjdHVhbGx5IHRoZSBvbmx5IGZpeGVkIEkv
-TyBwb3J0IGxvY2F0aW9uIHRyYXBwZWQgYnkgU01JCkkvTyB0cmFwcyBvbiB0aGlzIHN5c3RlbS4g
-RmV3IG90aGVycyBhcmUgc2ltcGx5ICdhbGxvY2F0ZWQnIG9uZXMsCm1lYW5pbmcgdGhlIHJlYWwg
-SS9PIHBvcnQgYWRkcmVzcyBiZWluZyB0cmFwcGVkIGlzIGNob3NlbiBkeW5hbWljYWxseSBieQpz
-dXBwbHlpbmcgQWRkcmVzcz0wIHRvIGEgY29ycmVzcG9uZGluZyBjYWxsIHRvIEVGSSBJL08gVHJh
-cCBpbnRlcmZhY2UKZnVuY3Rpb24gLS0gc3VjaCBJL08gdHJhcHMgbWF5IGJlIHVzZWQgYXMgaW50
-ZXJmYWNlcyB3aXRoIGEgU01JIGhhbmRsZXIKaW4gYSBtYW5uZXIgc2ltaWxhciB0byB0aGUgU1cg
-U01JIGludGVyZmFjZS4KClRoZSBFRkkgbW9kdWxlIHJlc3BvbnNpYmxlIGZvciBpbnN0YWxsaW5n
-IHBvcnQgNjFoIFNNSSBJL08gVHJhcCBpcwpQY2hJbml0U21tIGluIG15IGNhc2UuIFRoZSByZWxh
-dGVkIGNvZGUgaXM6CiAgICAuLi4KICAgIG1vdiAgICAgZWF4LCA2MWgKICAgIGxlYSAgICAgcjks
-IHF3b3JkXzU3NzgKICAgIG1vdiAgICAgW3JzcCs5OGgraW9fdHJhcF9jdHguaW9fYWRkcmVzc10s
-IGF4CiAgICBtb3YgICAgIHJheCwgY3M6cElvVHJhcElGCiAgICBsZWEgICAgIHI4LCBbcnNwKzk4
-aCtpb190cmFwX2N0eF0KICAgIGxlYSAgICAgcmR4LCBQb3J0NjFoX0lvVHJhcEhhbmRsZXIKICAg
-IG1vdiAgICAgcmN4LCByYXgKICAgIG1vdiAgICAgW3JzcCs5OGgraW9fdHJhcF9jdHgudHJhcF90
-eXBlXSwgZWJwICA7IHRyYXAgcmVhZHMKICAgIG1vdiAgICAgW3JzcCs5OGgraW9fdHJhcF9jdHgu
-aW9fbGVuXSwgYnAJICA7IGVicD0xCiAgICBjYWxsICAgIHF3b3JkIHB0ciBbcmF4XQogICAgLi4u
-CgpUaGUgYWN0dWFsIGhhbmRsZXIgKG5hbWVkIFBvcnQ2MWhfSW9UcmFwSGFuZGxlciBpbiB0aGUg
-YWJvdmUgY29kZSkgaXMKZmFpcmx5IGxpZ2h0d2VpZ2h0IGFuZCBkb2VzIGEgYml0IG9mIHVzZWxl
-c3MgYmxhY2sgbWFnaWMuCgpGaXJzdCwgdGhlcmUgaXMgYSBsb29wIGZvciBhbGwgQ1BVcyB3aGlj
-aCBmaW5kcyB3aGljaCBDUFUgYWN0dWFsbHkKY2F1c2VkIHRyYXBwZWQgSS9PIG9wZXJhdGlvbiBi
-eSByZWFkaW5nIE5NSSBzdGF0dXMgcG9ydC4KClRoZW4gaXQgcmVhZHMgdGhlIG9yaWdpbmFsIHBv
-cnQgNjFoIHZhbHVlIGFuZCBzZXQgTk1JX1NDIGJpdDQgdG8gaXRzCmludmVydGVkIHByZXZpb3Vz
-IHN0YXRlIGZvciB0aGUgc2VsZWN0ZWQgQ1BVJyBiaXQuIEFuZCB0aGVuIHVwZGF0ZWQgQUwKcmVn
-aXN0ZXIgdmFsdWUgaXMgcmV0dXJuZWQgdG8gdGhlIE5NSV9TQy1yZWFkaW5nIHVzZXIgY29kZSAo
-dmlhCnBhdGNoaW5nIFJBWCByZWdpc3RlciB2YWx1ZSBpbiBTTVJBTSBzYXZlZCBzdGF0ZSk6Cgog
-ICAgOyBlYnAgPSA2MWgsIHJieCA9IENQVSBpbmRleAogICAgLi4uCiAgICBtb3YgICAgIGVkeCwg
-ZWJwCiAgICBpbiAgICAgIGFsLCBkeAoKICAgIG1vdiAgICAgcjgsIGNzOmJtTm1pUmVmVG9nZ2xl
-c0ZvckNwdXMKICAgIG1vdiAgICAgcmN4LCByYngKICAgIG1vdiAgICAgZWR4LCAxCiAgICBzaGwg
-ICAgIGVkeCwgY2wKICAgIG1vdiAgICAgcjksIHJieAogICAgbW92c3hkICByY3gsIGVkeAogICAg
-bW92ICAgICBkbCwgYWwKICAgIGFuZCAgICAgYWwsIDBFRmgKICAgIHhvciAgICAgcjgsIHJjeAog
-ICAgb3IgICAgICBkbCwgMTBoCiAgICBtb3YgICAgIGNzOmJtTm1pUmVmVG9nZ2xlc0ZvckNwdXMs
-IHI4CiAgICBhbmQgICAgIHI4LCByY3gKICAgIG1vdnp4ICAgZWN4LCBhbAogICAgbW92enggICBl
-YXgsIGRsCiAgICB0ZXN0ICAgIHI4LCByOAogICAgbW92ICAgICBlZHgsIDEKICAgIGNtb3ZueiAg
-ZWN4LCBlYXgKICAgIGxlYSAgICAgcmF4LCBbcnNwKzU4aCthbF90b19yZXR1cm5dCiAgICBsZWEg
-ICAgIHI4ZCwgW3JkeCsyNWhdICA7IEVGSV9TTU1fU0FWRV9TVEFURV9SRUdJU1RFUl9SQVgKICAg
-IG1vdiAgICAgW3JzcCs1OGgrZnVuY19hcmcwXSwgcmF4CiAgICBtb3YgICAgIHJheCwgY3M6cEVG
-SV9TTU1fQ1BVX1BST1RPQ09MX0dVSURfSUYKICAgIG1vdiAgICAgW3JzcCs1OGgrYWxfdG9fcmV0
-dXJuXSwgY2wKICAgIG1vdiAgICAgcmN4LCByYXgKICAgIGNhbGwgICAgcXdvcmQgcHRyIFtyYXgr
-OF0gOyBXcml0ZVNhdmVTdGF0ZQogICAgLi4uCgpTbywgdGhlIG9ubHkgcHVycG9zZSBvZiB0aGlz
-IHN0dWZmIGlzIGVtdWxhdGluZyBSRUZfVE9HR0xFIGJpdCB0b2dnbGluZwpsb2dpYyAoc2ltcGx5
-IGJ5IGFsdGVybmF0aW5nIG9uZXMgYW5kIHplcm9zIG9uIGVhY2ggTk1JX1NDIHJlYWQpLApub3Ro
-aW5nIG1vcmUuIFNvcnQgb2Ygd29ya2Fyb3VuZCBmb3Igc29tZSBsZWdhY3kgY29kZSB3aGljaCBk
-ZXBlbmRzIG9uClJFRl9UT0dHTEUgcm9sbGluZyAod2hpY2ggaXMgbm93IGJlaW5nIG1hcmtlZCBS
-ZXNlcnZlZCBpbiBkb2NzKS4KCk9uIHRoaXMgcGFydGljdWxhciBzeXN0ZW0gU01JIEkvTyB0cmFw
-IGZvciBwb3J0IDYxaCBuZWl0aGVyIGRvIGFueXRoaW5nCnRpbWUtY29uc3VtaW5nIG5vciBhbnl0
-aGluZyByZWFsbHkgdXNlZnVsLiBUaGF0IERlbGwgc3lzdGVtIG11c3QgaGF2ZQpzb21ldGhpbmcg
-c2ltaWxhciAodGhhbmtzIHRvIGNvbW1vbiBFRkkgcmVmIGNvZGUgZnJvbSBJbnRlbCBJZ29yCm1l
-bnRpb25lZCksIGxlYXZpbmcgdGhlIHF1ZXN0aW9uIHdoeSBwb3J0IDYxaCByZWFkaW5nIGlzIHNv
-IHNsb3cgdGhlcmUuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============0365182622932201033==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="r5Pyd7+fXNt84Ff3"
+Content-Disposition: inline
+
+
+--r5Pyd7+fXNt84Ff3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+With current staging, qemu-xen fails to build. It looks like a ordering
+issue, I assume ui/input-keymap-linux-to-qcode.c is a generated file.
+It is (as always) a fresh clean checkout in a clean chroot.
+
+[  505s] /home/abuild/rpmbuild/BUILD/xen-4.11.20180206T183258.30cbd0c83e/non-dbg/tools/qemu-xen-dir/ui/input-keymap.c:8:44: fatal error: ui/input-keymap-linux-to-qcode.c: No such file or directory
+[  505s]  #include "ui/input-keymap-linux-to-qcode.c"
+[  505s]                                             ^
+[  505s] compilation terminated.
+[  505s] /home/abuild/rpmbuild/BUILD/xen-4.11.20180206T183258.30cbd0c83e/non-dbg/tools/qemu-xen-dir/rules.mak:66: recipe for target 'ui/input-keymap.o' failed
+[  505s] make: *** [ui/input-keymap.o] Error 1
+
+The previous snapshot did not have this issue:
+xen_commit b6c2c7f48ab8bd5566759cb404afd80fd0df2dfe Wed Jan 10 10:33:26 UTC 2018
+seabios_tag 5f4c7b13cdf9c450eb55645f4362ea58fa61b79b Fri Feb 24 14:01:20 UTC 2017
+minios_tag 0b4b7897e08b967a09bed2028a79fabff82342dd Fri Oct 20 10:50:35 UTC 2017
+ipxe_tag 356f6c1b64d7a97746d1816cef8ca22bdd8d0b5d Tue May 23 17:48:06 UTC 2017
+ovmf_tag 947f3737abf65fda63f3ffd97fddfa6986986868 Wed Sep 20 18:25:19 UTC 2017
+qemu_xen_traditional_tag c8ea0457495342c417c3dc033bba25148b279f60 Fri Sep 15 18:37:27 UTC 2017
+qemu_xen_upstream_tag b79708a8ed1b3d18bee67baeaf33b3fa529493e2 Thu Nov  9 15:46:00 UTC 2017
+
+Olaf
+
+--r5Pyd7+fXNt84Ff3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWnq2PQAKCRBdQqD6ppg2
+fs4yAKCfyMZ+1W+M5zb32vsfMNhtEblUowCdE6N9y7kIwhgCu3QwsanuVBwsW/8=
+=RVrV
+-----END PGP SIGNATURE-----
+
+--r5Pyd7+fXNt84Ff3--
+
+
+--===============0365182622932201033==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0365182622932201033==--
