@@ -1,21 +1,17 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 1/7] x86: slightly reduce Meltdown
- band-aid overhead
-Date: Thu, 08 Feb 2018 02:20:42 -0700
-Message-ID: <5A7C247A02000078001A64AC@prv-mh.provo.novell.com>
-References: <5A7B31DF02000078001A61F9@prv-mh.provo.novell.com>
- <5A7B336F02000078001A621F@prv-mh.provo.novell.com>
- <5010def0-594c-2f60-4f23-5a4b0131654e@citrix.com>
+Subject: Re: [PATCH V3] x86/hvm: fix domain crash when CR3 has
+ the noflush bit set
+Date: Thu, 08 Feb 2018 02:22:43 -0700
+Message-ID: <5A7C24F302000078001A64B1@prv-mh.provo.novell.com>
+References: <1517559257-2846-1-git-send-email-rcojocaru@bitdefender.com>
+ <5A7B3EFF02000078001A62B5@prv-mh.provo.novell.com>
+ <8d940984-173d-6be8-6e0c-503dbc2c133b@bitdefender.com>
+ <b5d0962a-e9fa-65d8-b90e-fa62058ab37a@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=q4jh=fc=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ejiNp-0002NI-2t
- for xen-devel@lists.xenproject.org; Thu, 08 Feb 2018 09:20:45 +0000
-In-Reply-To: <5010def0-594c-2f60-4f23-5a4b0131654e@citrix.com>
+In-Reply-To: <b5d0962a-e9fa-65d8-b90e-fa62058ab37a@bitdefender.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,40 +21,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: andrew.cooper3@citrix.com, bitweasil@cryptohaze.com, tamas@tklengyel.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA3LjAyLjE4IGF0IDIwOjM1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMDcvMDIvMTggMTY6MTIsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBJJ20gbm90IHN1
-cmUgd2h5IEkgZGlkbid0IGRvIHRoaXMgcmlnaHQgYXdheTogQnkgYXZvaWRpbmcgdGhlIHVzZSBv
-Zgo+PiBnbG9iYWwgUFRFcyBpbiB0aGUgY2xvbmVkIGRpcmVjdG1hcCwgdGhlcmUncyBubyBuZWVk
-IHRvIGZpZGRsZSB3aXRoCj4+IENSNC5QR0Ugb24gYW55IG9mIHRoZSBlbnRyeSBwYXRocy4gT25s
-eSB0aGUgZXhpdCBwYXRocyBuZWVkIHRvIGZsdXNoCj4+IGdsb2JhbCBtYXBwaW5ncy4KPj4KPj4g
-VGhlIHJlZHVjZWQgZmx1c2hpbmcsIGhvd2V2ZXIsIGltcGxpZXMgdGhhdCB3ZSBub3cgbmVlZCB0
-byBoYXZlCj4+IGludGVycnVwdHMgb2ZmIG9uIGFsbCBlbnRyeSBwYXRocyB1bnRpbCBhZnRlciB0
-aGUgcGFnZSB0YWJsZSBzd2l0Y2gsIHNvCj4+IHRoYXQgZmx1c2ggSVBJcyBjYW4ndCBhcnJpdmUg
-d2l0aCB0aGUgcmVzdHJpY3RlZCBwYWdlIHRhYmxlcyBzdGlsbAo+PiBhY3RpdmUsIGJ1dCBvbmx5
-IGEgbm9uLWdsb2JhbCBmbHVzaCBoYXBwZW5pbmcgd2l0aCB0aGUgQ1IzIGxvYWRzLiBBbG9uZwo+
-PiB0aG9zZSBsaW5lcyB0aGUgInN5bmMiIElQSSBhZnRlciBMNCBlbnRyeSB1cGRhdGVzIG5vdyBu
-ZWVkcyB0byBiZWNvbWUgYQo+PiByZWFsIChhbmQgZ2xvYmFsKSBmbHVzaCBJUEksIHNvIHRoYXQg
-aW5zaWRlIFhlbiB3ZSdsbCBhbHNvIHBpY2sgdXAgc3VjaAo+PiBjaGFuZ2VzLgo+IAo+IEFjdHVh
-bGx5LCBvbiBzZWNvbmQgY29uc2lkZXJhdGlvbiwgd2h5IGRvZXMgcmVlbmFibGluZyBpbnRlcnJ1
-cHRzIG5lZWQKPiB0byBiZSBkZWZlcnJlZD8KPiAKPiBUaGUgc2FmZXR5IG9mIHRoZSBzeW5jX2d1
-ZXN0IHBhdGggKHdoaWNoIHByZXZpb3VzbHkgZW50ZXJlZCBYZW4sIGRpZAo+IG5vdGhpbmcsIGFu
-ZCBleGl0ZWQgYWdhaW4pIHJlbGllZCBvbiB0aGUgZW50cnkgcGFydCBmbHVzaGluZyBnbG9iYWwK
-PiBtYXBwaW5ncyBmb3Igc2FmZXR5LCBhcyB0aGUgcmV0dXJuLXRvLXhlbiBwYXRoIGRvZXNuJ3Qg
-bmVjZXNzYXJpbHkKPiBzd2l0Y2ggbWFwcGluZ3MuCj4gCj4gSG93ZXZlciwgdGhlIGZpcnN0IGh1
-bmsgdXBncmFkaW5nIHRoZSAiZG8gbm90aGluZyIgdG8gYSBwcm9wZXIgZ2xvYmFsCj4gZmx1c2gs
-IGNvdmVycyB0aGF0IGNhc2UuCj4gCj4gSSBkb24ndCBzZWUgYW55dGhpbmcgZWxzZSB3aGljaCBh
-ZmZlY3RzIHRoZSBzYWZldHkgb2YgdGFraW5nIFRMQiBmbHVzaAo+IElQSXMgZWFybHkgaW4gdGhl
-IGVudHJ5LWZyb20tZ3Vlc3QgcGF0aC4gIFdoYXQgYW0gSSBtaXNzaW5nPwoKSWYgYSBzeW5jIElQ
-SSBhcnJpdmVzIGJlZm9yZSB3ZSBzd2l0Y2ggYXdheSBmcm9tIHRoZSByZXN0cmljdGVkIHBhZ2UK
-dGFibGVzLCB0aGUgcHJvY2Vzc29yIG1heSByZS1mZXRjaCBhIGdsb2JhbCBlbnRyeSBmcm9tIHRo
-b3NlIHRhYmxlcwp0aHJvdWdoIGFuIEw0IHdpdGggdGhlIHN5bmMgSVBJIGlzIHN1cHBvc2VkIHRv
-IHRlbGwgdGhlIHByb2Nlc3NvciB0bwpnZXQgcmlkIG9mIChvciBtb2RpZnkpLiBUaGUgc3Vic2Vx
-dWVudCBDUjMgd3JpdGUgd29uJ3QgaW52YWxpZGF0ZSBzdWNoCmEgVExCIGVudHJ5LCBhbmQgaGVu
-Y2Ugd2hhdGV2ZXIgd2UgZG8gaW50ZXJuYWxseSBtYXkgcmVmZXJlbmNlIGEKc3RhbGUgbWFwcGlu
-Zy4KCkphbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDA4LjAyLjE4IGF0IDA5OjUxLCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3Jv
+dGU6Cj4gT24gMDIvMDcvMjAxOCAwNzo0MiBQTSwgUmF6dmFuIENvam9jYXJ1IHdyb3RlOgo+PiBP
+biAwMi8wNy8yMDE4IDA3OjAxIFBNLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+PiAtLS0gYS94ZW4v
+aW5jbHVkZS9hc20teDg2L2h2bS9odm0uaAo+Pj4+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYv
+aHZtL2h2bS5oCj4+Pj4gQEAgLTM0LDYgKzM0LDkgQEAgZXh0ZXJuIGJvb2xfdCBvcHRfaHZtX2Zl
+cDsKPj4+PiAgI2RlZmluZSBvcHRfaHZtX2ZlcCAwCj4+Pj4gICNlbmRpZgo+Pj4+ICAKPj4+PiAr
+I2RlZmluZSBYODZfQ1IzX05PRkxVU0ggKDF1bGwgPDwgNjMpCj4+Pgo+Pj4gVGhpcyBiZWxvbmdz
+IGluIHg4Ni1kZWZzLmgKPiAKPiBTb3JyeSwgZG8geW91IG1lYW4geGVuL2FyY2gveDg2L2Jvb3Qv
+ZGVmcy5oPyBPciB0aGF0IEkgc2hvdWxkIGFkZCBhIG5ldwo+IGhlYWRlciBmb3IgdGhpcz8KPiAK
+PiAnZmluZCAuIC1uYW1lIHg4Ni1kZWZzLmgnIGNvbWVzIHVwIGVtcHR5LWhhbmRlZC4KCk9oLCBz
+b3JyeSAtIHhlbi9pbmNsdWRlL2FzbS14ODYveDg2LWRlZm5zLmggKHlvdSBjb3VsZCBzaW1wbHkK
+aGF2ZSBsb29rZWQgZm9yIHdoZXJlIHRoZSBDUjAgYW5kIENSNCBkZWZpbml0aW9ucyBhbGwgbGl2
+ZSkuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
