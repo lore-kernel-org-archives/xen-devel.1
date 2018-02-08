@@ -1,18 +1,21 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Slow HVM boot time, was "HVM boot time optimization"
-Date: Thu, 8 Feb 2018 08:31:40 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1802080826470.15787@sstabellini-ThinkPad-X260>
+From: George Dunlap <dunlapg@umich.edu>
+Subject: Re: Slow HVM boot time, was "HVM boot time optimization"
+Date: Thu, 8 Feb 2018 16:38:50 +0000
+Message-ID: <CAFLBxZaRAZSXA794snkRWCkt_7vO2ap9pW09Q=mR34dQR8yyGg@mail.gmail.com>
 References: <CABLtV0BqS_Y6oMt8TyCx55Nf9mB=-L7To+xY2on76p+1KDyXSQ@mail.gmail.com>
+ <alpine.DEB.2.10.1802080826470.15787@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1892710487-1518107216=:15787"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=tjqy=fc=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1ejp6t-0001fV-2h
- for xen-devel@lists.xenproject.org; Thu, 08 Feb 2018 16:31:43 +0000
-In-Reply-To: <CABLtV0BqS_Y6oMt8TyCx55Nf9mB=-L7To+xY2on76p+1KDyXSQ@mail.gmail.com>
-Content-ID: <alpine.DEB.2.10.1802080827420.15787@sstabellini-ThinkPad-X260>
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=ilwf=fc=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
+ id 1ejpDp-0001tB-AW
+ for xen-devel@lists.xenproject.org; Thu, 08 Feb 2018 16:38:53 +0000
+Received: by mail-qt0-x243.google.com with SMTP id s39so6951523qth.7
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Feb 2018 08:38:51 -0800 (PST)
+In-Reply-To: <alpine.DEB.2.10.1802080826470.15787@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,77 +24,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Yessine Daoud <da.yessine@gmail.com>
-Cc: anthony.perard@citrix.com, xen-devel@lists.xenproject.org, sstabellini@kernel.org, wei.liu2@citrix.com, ian.jackson@eu.citrix.com
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Anthony Perard <anthony.perard@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Yessine Daoud <da.yessine@gmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1892710487-1518107216=:15787
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1802080827421.15787@sstabellini-ThinkPad-X260>
-
-CC'ing xen-devel and a few relevant people
-
-On Thu, 8 Feb 2018, Yessine Daoud wrote:
-> Dear Sir,
-> I need your help please.
-> 
-> I am using a direct kernel boot (HVM guest) with kernel + ramdisk.
-> At boot, seabios is bloqued about 20 seconds (or more) at the following state:
-> 
-> (d4) RamSizeOver4G: 0x0000000000000000 [cmos]
-> (d4) boot order:
-> (d4) 1: /rom@genroms/linuxboot.bin
-> (d4) Found 4 PCI devices (max PCI bus is 00)
-> (d4) Allocated Xen hypercall page at ffff000
-> (d4) Detected Xen v4.9-unstable
-> (d4) xen: copy BIOS tables...
-> (d4) Copying SMBIOS entry point from 0x00010020 to 0x000f69b0
-> (d4) Copying MPTABLE from 0xfc001170/fc001180 to 0x000f68b0
-> (d4) Copying PIR from 0x00010040 to 0x000f6830
-> (d4) CPU Mhz=1335
-> (d4) Scan for VGA option rom
-> (d4) ATA controller 1 at 1f0/3f4/c100 (irq 14 dev 9)
-> (d4) ATA controller 2 at 170/374/c108 (irq 15 dev 9)
-> (d4) Found 0 lpt ports
-> (d4) Found 1 serial ports
-> (d4) PS2 keyboard initialized
-> (d4) All threads complete.
-> (d4) Scan for option roms
-> (d4) Running option rom at c000:0003
-> (d4) Searching bootorder for: /rom@genroms/linuxboot.bin
-> (d4) Searching bootorder for: HALT
-> (d4) Space available for UMB: c0800-ec800, f61d0-f67f0
-> (d4) Returned 258048 bytes of ZoneHigh
-> (d4) e820 map has 6 items:
-> (d4)   0: 0000000000000000 - 000000000009fc00 = 1 RAM
-> (d4)   1: 000000000009fc00 - 00000000000a0000 = 2 RESERVED
-> (d4)   2: 00000000000f0000 - 0000000000100000 = 2 RESERVED
-> (d4)   3: 0000000000100000 - 000000000ffff000 = 1 RAM
-> (d4)   4: 000000000ffff000 - 0000000010000000 = 2 RESERVED
-> (d4)   5: 00000000fc000000 - 0000000100000000 = 2 RESERVED
-> (d4) enter handle_19:
-> (d4)   NULL
-> (d4) Booting from ROM...
-> (d4) Booting from c000:00
-> 
-> 
-> Then (after 20 seconds) the kernel starts booting.
-> Any idea about this behavior?
-
-I am guessing one of the ROMs take a long time to run. It might be
-waiting for a timeout, like ipxe. Does anybody know about this issue?
---8323329-1892710487-1518107216=:15787
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1892710487-1518107216=:15787--
+T24gVGh1LCBGZWIgOCwgMjAxOCBhdCA0OjMxIFBNLCBTdGVmYW5vIFN0YWJlbGxpbmkKPHNzdGFi
+ZWxsaW5pQGtlcm5lbC5vcmc+IHdyb3RlOgo+IENDJ2luZyB4ZW4tZGV2ZWwgYW5kIGEgZmV3IHJl
+bGV2YW50IHBlb3BsZQo+Cj4gT24gVGh1LCA4IEZlYiAyMDE4LCBZZXNzaW5lIERhb3VkIHdyb3Rl
+Ogo+PiBEZWFyIFNpciwKPj4gSSBuZWVkIHlvdXIgaGVscCBwbGVhc2UuCj4+Cj4+IEkgYW0gdXNp
+bmcgYSBkaXJlY3Qga2VybmVsIGJvb3QgKEhWTSBndWVzdCkgd2l0aCBrZXJuZWwgKyByYW1kaXNr
+Lgo+PiBBdCBib290LCBzZWFiaW9zIGlzIGJsb3F1ZWQgYWJvdXQgMjAgc2Vjb25kcyAob3IgbW9y
+ZSkgYXQgdGhlIGZvbGxvd2luZyBzdGF0ZToKPj4KPj4gKGQ0KSBSYW1TaXplT3ZlcjRHOiAweDAw
+MDAwMDAwMDAwMDAwMDAgW2Ntb3NdCj4+IChkNCkgYm9vdCBvcmRlcjoKPj4gKGQ0KSAxOiAvcm9t
+QGdlbnJvbXMvbGludXhib290LmJpbgo+PiAoZDQpIEZvdW5kIDQgUENJIGRldmljZXMgKG1heCBQ
+Q0kgYnVzIGlzIDAwKQo+PiAoZDQpIEFsbG9jYXRlZCBYZW4gaHlwZXJjYWxsIHBhZ2UgYXQgZmZm
+ZjAwMAo+PiAoZDQpIERldGVjdGVkIFhlbiB2NC45LXVuc3RhYmxlCj4+IChkNCkgeGVuOiBjb3B5
+IEJJT1MgdGFibGVzLi4uCj4+IChkNCkgQ29weWluZyBTTUJJT1MgZW50cnkgcG9pbnQgZnJvbSAw
+eDAwMDEwMDIwIHRvIDB4MDAwZjY5YjAKPj4gKGQ0KSBDb3B5aW5nIE1QVEFCTEUgZnJvbSAweGZj
+MDAxMTcwL2ZjMDAxMTgwIHRvIDB4MDAwZjY4YjAKPj4gKGQ0KSBDb3B5aW5nIFBJUiBmcm9tIDB4
+MDAwMTAwNDAgdG8gMHgwMDBmNjgzMAo+PiAoZDQpIENQVSBNaHo9MTMzNQo+PiAoZDQpIFNjYW4g
+Zm9yIFZHQSBvcHRpb24gcm9tCj4+IChkNCkgQVRBIGNvbnRyb2xsZXIgMSBhdCAxZjAvM2Y0L2Mx
+MDAgKGlycSAxNCBkZXYgOSkKPj4gKGQ0KSBBVEEgY29udHJvbGxlciAyIGF0IDE3MC8zNzQvYzEw
+OCAoaXJxIDE1IGRldiA5KQo+PiAoZDQpIEZvdW5kIDAgbHB0IHBvcnRzCj4+IChkNCkgRm91bmQg
+MSBzZXJpYWwgcG9ydHMKPj4gKGQ0KSBQUzIga2V5Ym9hcmQgaW5pdGlhbGl6ZWQKPj4gKGQ0KSBB
+bGwgdGhyZWFkcyBjb21wbGV0ZS4KPj4gKGQ0KSBTY2FuIGZvciBvcHRpb24gcm9tcwo+PiAoZDQp
+IFJ1bm5pbmcgb3B0aW9uIHJvbSBhdCBjMDAwOjAwMDMKPj4gKGQ0KSBTZWFyY2hpbmcgYm9vdG9y
+ZGVyIGZvcjogL3JvbUBnZW5yb21zL2xpbnV4Ym9vdC5iaW4KPj4gKGQ0KSBTZWFyY2hpbmcgYm9v
+dG9yZGVyIGZvcjogSEFMVAo+PiAoZDQpIFNwYWNlIGF2YWlsYWJsZSBmb3IgVU1COiBjMDgwMC1l
+YzgwMCwgZjYxZDAtZjY3ZjAKPj4gKGQ0KSBSZXR1cm5lZCAyNTgwNDggYnl0ZXMgb2YgWm9uZUhp
+Z2gKPj4gKGQ0KSBlODIwIG1hcCBoYXMgNiBpdGVtczoKPj4gKGQ0KSAgIDA6IDAwMDAwMDAwMDAw
+MDAwMDAgLSAwMDAwMDAwMDAwMDlmYzAwID0gMSBSQU0KPj4gKGQ0KSAgIDE6IDAwMDAwMDAwMDAw
+OWZjMDAgLSAwMDAwMDAwMDAwMGEwMDAwID0gMiBSRVNFUlZFRAo+PiAoZDQpICAgMjogMDAwMDAw
+MDAwMDBmMDAwMCAtIDAwMDAwMDAwMDAxMDAwMDAgPSAyIFJFU0VSVkVECj4+IChkNCkgICAzOiAw
+MDAwMDAwMDAwMTAwMDAwIC0gMDAwMDAwMDAwZmZmZjAwMCA9IDEgUkFNCj4+IChkNCkgICA0OiAw
+MDAwMDAwMDBmZmZmMDAwIC0gMDAwMDAwMDAxMDAwMDAwMCA9IDIgUkVTRVJWRUQKPj4gKGQ0KSAg
+IDU6IDAwMDAwMDAwZmMwMDAwMDAgLSAwMDAwMDAwMTAwMDAwMDAwID0gMiBSRVNFUlZFRAo+PiAo
+ZDQpIGVudGVyIGhhbmRsZV8xOToKPj4gKGQ0KSAgIE5VTEwKPj4gKGQ0KSBCb290aW5nIGZyb20g
+Uk9NLi4uCj4+IChkNCkgQm9vdGluZyBmcm9tIGMwMDA6MDAKPj4KPj4KPj4gVGhlbiAoYWZ0ZXIg
+MjAgc2Vjb25kcykgdGhlIGtlcm5lbCBzdGFydHMgYm9vdGluZy4KPj4gQW55IGlkZWEgYWJvdXQg
+dGhpcyBiZWhhdmlvcj8KPgo+IEkgYW0gZ3Vlc3Npbmcgb25lIG9mIHRoZSBST01zIHRha2UgYSBs
+b25nIHRpbWUgdG8gcnVuLiBJdCBtaWdodCBiZQo+IHdhaXRpbmcgZm9yIGEgdGltZW91dCwgbGlr
+ZSBpcHhlLiBEb2VzIGFueWJvZHkga25vdyBhYm91dCB0aGlzIGlzc3VlPwoKVGhlIGlweGUgcm9t
+cyBzaG91bGQgb25seSBiZSBsb2FkZWQgaWYgc3BlY2lmaWVkIGluIHRoZSBWTSBjb25maWcKZmls
+ZSwgcmlnaHQ/ICBXaHkgd291bGQgeW91IHNwZWNpZnkgaXB4ZSBpZiB5b3UncmUgZ29pbmcgdG8g
+YmUKZGlyZWN0LWJvb3RpbmcgYW55d2F5PwoKIC1HZW9yZ2UKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
