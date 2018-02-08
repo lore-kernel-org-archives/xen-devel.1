@@ -1,16 +1,18 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 0/7] xen/arm: PSCI 1.1 and SMCCC-1.1 support
- and XSA-254 variant 2 update
-Date: Thu, 8 Feb 2018 16:28:15 +0000
-Message-ID: <428d49ab-dc3c-84d3-90aa-2a612b570420@arm.com>
-References: <20180205132011.27996-1-julien.grall@arm.com>
- <68eee282-c738-4345-0de6-8a3e105cfb29@caviumnetworks.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Slow HVM boot time, was "HVM boot time optimization"
+Date: Thu, 8 Feb 2018 08:31:40 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1802080826470.15787@sstabellini-ThinkPad-X260>
+References: <CABLtV0BqS_Y6oMt8TyCx55Nf9mB=-L7To+xY2on76p+1KDyXSQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1892710487-1518107216=:15787"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <68eee282-c738-4345-0de6-8a3e105cfb29@caviumnetworks.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=tjqy=fc=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1ejp6t-0001fV-2h
+ for xen-devel@lists.xenproject.org; Thu, 08 Feb 2018 16:31:43 +0000
+In-Reply-To: <CABLtV0BqS_Y6oMt8TyCx55Nf9mB=-L7To+xY2on76p+1KDyXSQ@mail.gmail.com>
+Content-ID: <alpine.DEB.2.10.1802080827420.15787@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,39 +21,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Manish Jaggi <mjaggi@caviumnetworks.com>, xen-devel@lists.xen.org
-Cc: sstabellini@kernel.org, andre.przywara@linaro.org
+To: Yessine Daoud <da.yessine@gmail.com>
+Cc: anthony.perard@citrix.com, xen-devel@lists.xenproject.org, sstabellini@kernel.org, wei.liu2@citrix.com, ian.jackson@eu.citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwOC8wMi8xOCAxNjoyNiwgTWFuaXNoIEphZ2dpIHdyb3RlOgo+IE9uIDAyLzA1LzIwMTgg
-MDY6NTAgUE0sIEp1bGllbiBHcmFsbCB3cm90ZToKPj4gSGkgYWxsLAo+Pgo+PiBBcm0gaGFzIHJl
-Y2VudGx5IHB1Ymxpc2hlZCBhIFNNQyBDYWxsaW5nIENvbnZlbnRpb24gKFNNQ0NDKQo+PiBzcGVj
-aWZpY2F0aW9uIHVwZGF0ZSBbMV0gdGhhdCBwcm92aWRlcyBhbiBvcHRpbWlzZWQgY2FsbGluZyBj
-b252ZW50aW9uCj4+IGFuZCBvcHRpb25hbCwgZGlzY292ZXJhYmxlIHN1cHBvcnQgZm9yIG1pdGln
-YXRpbmcgQ1ZFLTIwMTctNTcxNSAoWFNBLTI1NAo+PiB2YXJpYW50IDIpLiBBUk0gVHJ1c3RlZCBG
-aXJtd2FyZSAoQVRGKSBoYXMgYWxyZWFkeSBnYWluZWQgc3VjaCBhbgo+PiBpbXBsZW1lbnRhdGlv
-blsyXS4KPj4KPj4gVGhpcyBzZXJpZXMgYWRkcmVzc2VzIGEgZmV3IHRoaW5nczoKPj4KPj4gwqDC
-oMKgwqAgLSBJdCBwcm92aWRlcyBhIFhlbiBpbXBsZW1lbnRhdGlvbiBvZiBQU0NJIHYxLjAsIHdo
-aWNoIGlzIGEgCj4+IHByZXJlcXVpc2l0ZQo+PiDCoMKgwqDCoMKgwqAgZm9yIGJlaW5nIGFibGUg
-dG8gZGlzY292ZXIgU01DQ0MgdjEuMS4KPj4gwqDCoMKgwqAgLSBJdCBhbGxvd3MgWGVuIHRvIGFk
-dmVydGlzZSBTTUNDQyB2MS4xCj4+IMKgwqDCoMKgIC0gSXQgaW1wbGVtZW50cyBYZW4gc3VwcG9y
-dCBmb3IgdGhlIEFSTV9XT1JLQVJPVU5EXzEgZnVuY3Rpb24gCj4+IHRoYXQgaXMgdXNlZAo+PiDC
-oMKgwqDCoMKgwqAgdG8gbWl0aWdhdGUgQ1ZFLTIwMTctNTcxNSAoaWYgc3VjaCBtaXRpZ2F0aW9u
-IGlzIGF2YWlsYWJsZSBvbiB0aGUKPj4gwqDCoMKgwqDCoMKgIGh5cGVydmlzb3IpLgo+Pgo+PiBU
-aGlzIG1ldGhvZCBpcyBpbnRlbmRlZCB0byBmdWxseSByZXBsYWNlIHRoZSBpbml0aWFsIFBTQ0lf
-R0VUX1ZFUlNJT04KPj4gYXBwcm9hY2guIEFsdGhvdWdoIFBTQ0lfR0VUX1ZFUlNJT04gc3RpbGwg
-d29ya3MsIGl0IGhhcyBhbiBvYnZpb3VzCj4+IG92ZXJoZWFkIGFuZCBpcyBjYWxsZWQgb24gc29t
-ZSBvZiB0aGUgaG90dGVzdCBwYXRocy4gV2UgZXhwZWN0Cj4+IEFSQ0hfV09SS0FST1VORF8xIHRv
-IGJlIG11Y2ggZmFzdGVyLgo+Pgo+PiBBbm90aGVyIHNlcmllcyB3aWxsIGJlIHNlbnQgdG8gYWxs
-b3cgdGhlIGh5cGVydmlzb3IgZGlzY292ZXJpbmcgU01DQ0MgCj4+IDEuMSBhbmQKPj4gdXNlIGl0
-IGZvciB0aGUgbWl0aWdhdGlvbi4KPj4KPj4gVGhpcyBzZXJpZXMgaXMgYmFzZWQgb24gdGhlICJ4
-ZW4vYXJtOiBTTUNDQyBmaXhlcyBhbmQgUFNDSSBjbGVhbi11cCIgCj4+IG9uZSBbM10uCj4+Cj4+
-IENoZWVycywKPj4KPj4gWzFdOiAKPj4gaHR0cHM6Ly9kZXZlbG9wZXIuYXJtLmNvbS8tL21lZGlh
-L2RldmVsb3Blci9wZGYvQVJNJTIwREVOJTIwMDA3MEElMjBGaXJtd2FyZSUyMGludGVyZmFjZXMl
-MjBmb3IlMjBtaXRpZ2F0aW5nJTIwQ1ZFLTIwMTctNTcxNV9WMS4wLnBkZiAKPj4KPiBUaGlzIGxp
-bmsgaXMgbm90IHdvcmtpbmcuCgpCZWNhdXNlIHRoZSBsaW5rIGhhcyBiZWVuIHJlbG9jYXRlZCBz
-aW5jZSB0aGVuLiBZb3UgY2FuIGZpbmQgaXQgYXQ6CgpodHRwczovL2RldmVsb3Blci5hcm0uY29t
-L3N1cHBvcnQvc2VjdXJpdHktdXBkYXRlL2Rvd25sb2FkcwoKQ2hlZXJzLAoKLS0gCkp1bGllbiBH
-cmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1892710487-1518107216=:15787
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1802080827421.15787@sstabellini-ThinkPad-X260>
+
+CC'ing xen-devel and a few relevant people
+
+On Thu, 8 Feb 2018, Yessine Daoud wrote:
+> Dear Sir,
+> I need your help please.
+> 
+> I am using a direct kernel boot (HVM guest) with kernel + ramdisk.
+> At boot, seabios is bloqued about 20 seconds (or more) at the following state:
+> 
+> (d4) RamSizeOver4G: 0x0000000000000000 [cmos]
+> (d4) boot order:
+> (d4) 1: /rom@genroms/linuxboot.bin
+> (d4) Found 4 PCI devices (max PCI bus is 00)
+> (d4) Allocated Xen hypercall page at ffff000
+> (d4) Detected Xen v4.9-unstable
+> (d4) xen: copy BIOS tables...
+> (d4) Copying SMBIOS entry point from 0x00010020 to 0x000f69b0
+> (d4) Copying MPTABLE from 0xfc001170/fc001180 to 0x000f68b0
+> (d4) Copying PIR from 0x00010040 to 0x000f6830
+> (d4) CPU Mhz=1335
+> (d4) Scan for VGA option rom
+> (d4) ATA controller 1 at 1f0/3f4/c100 (irq 14 dev 9)
+> (d4) ATA controller 2 at 170/374/c108 (irq 15 dev 9)
+> (d4) Found 0 lpt ports
+> (d4) Found 1 serial ports
+> (d4) PS2 keyboard initialized
+> (d4) All threads complete.
+> (d4) Scan for option roms
+> (d4) Running option rom at c000:0003
+> (d4) Searching bootorder for: /rom@genroms/linuxboot.bin
+> (d4) Searching bootorder for: HALT
+> (d4) Space available for UMB: c0800-ec800, f61d0-f67f0
+> (d4) Returned 258048 bytes of ZoneHigh
+> (d4) e820 map has 6 items:
+> (d4)   0: 0000000000000000 - 000000000009fc00 = 1 RAM
+> (d4)   1: 000000000009fc00 - 00000000000a0000 = 2 RESERVED
+> (d4)   2: 00000000000f0000 - 0000000000100000 = 2 RESERVED
+> (d4)   3: 0000000000100000 - 000000000ffff000 = 1 RAM
+> (d4)   4: 000000000ffff000 - 0000000010000000 = 2 RESERVED
+> (d4)   5: 00000000fc000000 - 0000000100000000 = 2 RESERVED
+> (d4) enter handle_19:
+> (d4)   NULL
+> (d4) Booting from ROM...
+> (d4) Booting from c000:00
+> 
+> 
+> Then (after 20 seconds) the kernel starts booting.
+> Any idea about this behavior?
+
+I am guessing one of the ROMs take a long time to run. It might be
+waiting for a timeout, like ipxe. Does anybody know about this issue?
+--8323329-1892710487-1518107216=:15787
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1892710487-1518107216=:15787--
