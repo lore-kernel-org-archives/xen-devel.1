@@ -1,17 +1,15 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 1/2] make xen ocaml safe-strings compliant
-Date: Thu, 08 Feb 2018 18:49:58 +0100
-Message-ID: <1518112198.5629.68.camel@suse.com>
-References: <alpine.LFD.2.21.1801302254440.2952@austen3.home>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Subject: Re: [PATCH v2 1/4] asm-x86/monitor: Enable svm monitor
+	events
+Date: Thu, 8 Feb 2018 11:00:02 -0700
+Message-ID: <CABfawhmy4844fPReQvn=5FZLtnQv+JSdnF3dgpXo4vHrE1dtHg@mail.gmail.com>
+References: <1518103552-4836-1-git-send-email-aisaila@bitdefender.com>
+ <1518103552-4836-2-git-send-email-aisaila@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8859196422564786230=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=jcc+=fc=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1ejqL6-0007Tb-B4
- for xen-devel@lists.xenproject.org; Thu, 08 Feb 2018 17:50:28 +0000
-In-Reply-To: <alpine.LFD.2.21.1801302254440.2952@austen3.home>
+In-Reply-To: <1518103552-4836-2-git-send-email-aisaila@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,98 +18,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Michael Young <m.a.young@durham.ac.uk>, xen-devel@lists.xenproject.org
-Cc: Marcello Seri <marcello.seri@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Christian Lindig <christian.lindig@citrix.com>, John Thomson <git@johnthomson.fastmail.com.au>, David Scott <dave@recoil.org>
+To: Alexandru Isaila <aisaila@bitdefender.com>
+Cc: Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Jan Beulich <jbeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8859196422564786230==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-G1OYwaAS7cxEwOjpDM2D"
-
-
---=-G1OYwaAS7cxEwOjpDM2D
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2018-01-30 at 22:55 +0000, Michael Young wrote:
-> Xen built with ocaml 4.06 gives errors such as
-> Error: This expression has type bytes but an expression was
->  	expected of type string
-> as Byte and safe-strings which were introduced in 4.02 are the
-> default in 4.06.
-> This patch which is partly by Richard W.M. Jones of Red Hat
-> from https://bugzilla.redhat.com/show_bug.cgi?id=3D1526703
-> fixes these issues.
->=20
-> Signed-off-by: Michael Young <m.a.young@durham.ac.uk>
-> Reviewed-by: Christian Lindig <christian.lindig@citrix.com>
->
-So, with this patch, oxenstord does not start for me.
-
-Systemd says this (sorry, it's not the full output.. I don't have it
-right now, but can produce it):
-
-systemctl status xenstored
- ...
- Active: failed (Result: protocol) since Thu 2018-02-08 17:47:56 CET; 12min=
- ago
- ...
- Feb 08 17:47:56 Zhaman systemd[1]: xenstored.service: Failed with result '=
-protocol'.
-
-Just running oxenstored from command line seems to exits with 0, but
-there's not an oxenstored process running.
-
-Getting rid of what is now commit "make xen ocaml safe-strings
-compliant" (df1e4c6e7f8892e950433ff33c215df0cd7b30f7), things work
-again for me.
-
-Regards,
-Dario
-
-PS. There has been a v2 of this patch, I think, but I don't have in my
-emails any longer, so I'm replying to this one.
-
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-G1OYwaAS7cxEwOjpDM2D
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlp8jccACgkQFkJ4iaW4
-c+700g//d15oF2WM+XQ5kyky6n2QwVRTYPLi9IWKEkZUbWJY+pBrOPzVAnVgNfGT
-p7/zWsPSoktT6BUD7HBWCn2f/iSnSBMsVnpkL0kk8OeJ+ywNRZNoAGSD3kr0KlWf
-CeKShk569l3SeLvIw1AZ0VyE+Ef3zu5aoMAz/3KiHNjm0RCHA2brb8NtMXh0H1bQ
-C9vC6Qu7TVLbtv+6YJLAjf+rFUZiWO+5A7uz7z46mb3zTvjLB5B/sOjQ7nruYdJs
-4dFPeC6DNHQYlEpzK0K1RLAODJ6H0eZh8V7gGiNO701j0ogBx0y3KdJk+4IKq+eB
-SPv49F7E1vQrLwcrL3rywQLXSlRZzHgRtCzX3Qlz0cOn+6gGoIOFEvMELUYxd3DN
-k8vMYgESP54FmLAF/8orwTMUpgJraqZ1rI5X39MNkofIoMGKrAsQZLitdtOu4rTd
-e6MmPDU0W2+7oGmhMt1Jfmv0IGzHCIydMHm9H91DP9p5ouCUpwvvYkCAPnXbFAIz
-BMciSaWcbliSZicnCP0CvseNlkNMryRHddQnRwqfUnnDvlEZsM3f243J66enukTT
-VphRuDTQZrVaft/95rb7mVktzE5KpaXoeaQt8UY9mOCYYdrIkTo/FgdktGlrDt1+
-stMD93VFCIsFfWn7kDeYx4cjo6nNUsXQLkpLcjnAlEmwerrS3sY=
-=zlOX
------END PGP SIGNATURE-----
-
---=-G1OYwaAS7cxEwOjpDM2D--
-
-
-
---===============8859196422564786230==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8859196422564786230==--
+T24gVGh1LCBGZWIgOCwgMjAxOCBhdCA4OjI1IEFNLCBBbGV4YW5kcnUgSXNhaWxhCjxhaXNhaWxh
+QGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4gVGhpcyBjb21taXQgc2VwYXJhdGVzIHRoZSBzdm0g
+Y2FwcyBmcm9tIHRoZSB2bXggY2Fwcy4KPgo+IFNpZ25lZC1vZmYtYnk6IEFsZXhhbmRydSBJc2Fp
+bGEgPGFpc2FpbGFAYml0ZGVmZW5kZXIuY29tPgo+Cj4gLS0tCj4gQ2hhbmdlcyBzaW5jZSBWMToK
+PiAgICAgICAgIC0gUmVtb3ZlZCB0aGUgaWYgKCBjcHVfaGFzX3N2bSApCj4gLS0tCj4gIHhlbi9p
+bmNsdWRlL2FzbS14ODYvbW9uaXRvci5oIHwgMzQgKysrKysrKysrKysrKysrKysrKy0tLS0tLS0t
+LS0tLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgMTkgaW5zZXJ0aW9ucygrKSwgMTUgZGVsZXRpb25z
+KC0pCj4KPiBkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9tb25pdG9yLmggYi94ZW4v
+aW5jbHVkZS9hc20teDg2L21vbml0b3IuaAo+IGluZGV4IGEwNDQ0ZDEuLmIyYjRlNmEgMTAwNjQ0
+Cj4gLS0tIGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9tb25pdG9yLmgKPiArKysgYi94ZW4vaW5jbHVk
+ZS9hc20teDg2L21vbml0b3IuaAo+IEBAIC03MSwyNCArNzEsMjggQEAgc3RhdGljIGlubGluZSB1
+aW50MzJfdCBhcmNoX21vbml0b3JfZ2V0X2NhcGFiaWxpdGllcyhzdHJ1Y3QgZG9tYWluICpkKQo+
+ICAgICAgdWludDMyX3QgY2FwYWJpbGl0aWVzID0gMDsKPgo+ICAgICAgLyoKPiAtICAgICAqIEF0
+IHRoZSBtb21lbnQgb25seSBJbnRlbCBIVk0gZG9tYWlucyBhcmUgc3VwcG9ydGVkLiBIb3dldmVy
+LCBldmVudAo+IC0gICAgICogZGVsaXZlcnkgY291bGQgYmUgZXh0ZW5kZWQgdG8gQU1EIGFuZCBQ
+ViBkb21haW5zLgo+ICsgICAgICogQXQgdGhlIG1vbWVudCBvbmx5IEludGVsIGFuZCBBTUQgSFZN
+IGRvbWFpbnMgYXJlIHN1cHBvcnRlZC4gSG93ZXZlciwgZXZlbnQKPiArICAgICAqIGRlbGl2ZXJ5
+IGNvdWxkIGJlIGV4dGVuZGVkIHRvIGFuZCBQViBkb21haW5zLgoKInRvIGFuZCBQViBkb21haW5z
+Ij8gUmVtb3ZlIHRoYXQgImFuZCIgZnJvbSB0aGVyZSB0b28uCgo+ICAgICAgICovCj4gLSAgICBp
+ZiAoICFpc19odm1fZG9tYWluKGQpIHx8ICFjcHVfaGFzX3ZteCApCj4gKyAgICBpZiAoICFpc19o
+dm1fZG9tYWluKGQpICkKPiAgICAgICAgICByZXR1cm4gY2FwYWJpbGl0aWVzOwo+Cj4gLSAgICBj
+YXBhYmlsaXRpZXMgPSAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX1dSSVRFX0NUUkxS
+RUcpIHwKPiAtICAgICAgICAgICAgICAgICAgICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZF
+TlRfTU9WX1RPX01TUikgfAo+IC0gICAgICAgICAgICAgICAgICAgKDFVIDw8IFhFTl9ET01DVExf
+TU9OSVRPUl9FVkVOVF9TT0ZUV0FSRV9CUkVBS1BPSU5UKSB8Cj4gLSAgICAgICAgICAgICAgICAg
+ICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0dVRVNUX1JFUVVFU1QpIHwKPiAtICAg
+ICAgICAgICAgICAgICAgICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfREVCVUdfRVhD
+RVBUSU9OKSB8Cj4gLSAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9S
+X0VWRU5UX0NQVUlEKSB8Cj4gLSAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9N
+T05JVE9SX0VWRU5UX0lOVEVSUlVQVCkgfAo+IC0gICAgICAgICAgICAgICAgICAgKDFVIDw8IFhF
+Tl9ET01DVExfTU9OSVRPUl9FVkVOVF9FTVVMX1VOSU1QTEVNRU5URUQpOwo+IC0KPiAtICAgIC8q
+IFNpbmNlIHdlIGtub3cgdGhpcyBpcyBvbiBWTVgsIHdlIGNhbiBqdXN0IGNhbGwgdGhlIGh2bSBm
+dW5jICovCj4gLSAgICBpZiAoIGh2bV9pc19zaW5nbGVzdGVwX3N1cHBvcnRlZCgpICkKPiAtICAg
+ICAgICBjYXBhYmlsaXRpZXMgfD0gKDFVIDw8IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9TSU5H
+TEVTVEVQKTsKPiArICAgIGlmKCBjcHVfaGFzX3ZteCApCj4gKyAgICB7Cj4gKyAgICAgICAgY2Fw
+YWJpbGl0aWVzID0gKDFVIDw8IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9XUklURV9DVFJMUkVH
+KSB8Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgKDFVIDw8IFhFTl9ET01DVExfTU9OSVRPUl9F
+VkVOVF9NT1ZfVE9fTVNSKSB8Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgKDFVIDw8IFhFTl9E
+T01DVExfTU9OSVRPUl9FVkVOVF9TT0ZUV0FSRV9CUkVBS1BPSU5UKSB8Cj4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgKDFVIDw8IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9ERUJVR19FWENFUFRJ
+T04pIHwKPiArICAgICAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9S
+X0VWRU5UX0NQVUlEKSB8Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgKDFVIDw8IFhFTl9ET01D
+VExfTU9OSVRPUl9FVkVOVF9JTlRFUlJVUFQpIHwKPiArICAgICAgICAgICAgICAgICAgICAgICAo
+MVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0VNVUxfVU5JTVBMRU1FTlRFRCk7Cj4gKwo+
+ICsgICAgICAgIC8qIFNpbmNlIHdlIGtub3cgdGhpcyBpcyBvbiBWTVgsIHdlIGNhbiBqdXN0IGNh
+bGwgdGhlIGh2bSBmdW5jICovCj4gKyAgICAgICAgaWYgKCBodm1faXNfc2luZ2xlc3RlcF9zdXBw
+b3J0ZWQoKSApCj4gKyAgICAgICAgICAgIGNhcGFiaWxpdGllcyB8PSAoMVUgPDwgWEVOX0RPTUNU
+TF9NT05JVE9SX0VWRU5UX1NJTkdMRVNURVApOwo+ICsgICAgfQo+ICsKPiArICAgIGNhcGFiaWxp
+dGllcyB8PSAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0dVRVNUX1JFUVVFU1QpOwo+
+Cj4gICAgICBpZiAoIGh2bV9mdW5jcy5zZXRfZGVzY3JpcHRvcl9hY2Nlc3NfZXhpdGluZyApCj4g
+ICAgICAgICAgY2FwYWJpbGl0aWVzIHw9ICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRf
+REVTQ19BQ0NFU1MpOwo+IC0tCj4gMi43LjQKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
