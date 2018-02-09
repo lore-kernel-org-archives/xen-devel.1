@@ -1,20 +1,20 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: Xen ARM community call Tuesday 13th February 5PM UTC
-Date: Fri, 9 Feb 2018 10:14:40 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1802091008350.31919@sstabellini-ThinkPad-X260>
-References: <1cd12995-d888-9de8-e273-5adaf562156f@arm.com>
- <CY1PR02MB20424899229057B0DCFF38D0ABFD0@CY1PR02MB2042.namprd02.prod.outlook.com>,
- <CAKPH-Nht4CUCVVkkoCdC1GFVZr6f++gkmHOyQt4kqxL2xqmpTw@mail.gmail.com>
- <AM4PR03MB1729BB70DCB5F96F35FCF9BDF4F20@AM4PR03MB1729.eurprd03.prod.outlook.com>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Subject: Re: [GIT PULL] xen: fixes for 4.16 rc1
+Date: Fri, 9 Feb 2018 10:48:40 -0800
+Message-ID: <CA+55aFxyEpQUgpZtkRbc1ESbMBw6FcbLgbzB3ioPN_097HpzOg__39619.469914078$1518202074$gmane$org@mail.gmail.com>
+References: <20180209142800.25485-1-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1716121014-1518200082=:31919"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=l6xq=fd=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1ekDCD-0003Ut-OT
- for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 18:14:49 +0000
-In-Reply-To: <AM4PR03MB1729BB70DCB5F96F35FCF9BDF4F20@AM4PR03MB1729.eurprd03.prod.outlook.com>
+ <srs0=16jq=fd=gmail.com=linus971@srs-us1.protection.inumbo.net>)
+ id 1ekDj1-0005iL-4J
+ for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 18:48:43 +0000
+Received: by mail-io0-x236.google.com with SMTP id g14so4501905iob.9
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Feb 2018 10:48:42 -0800 (PST)
+In-Reply-To: <20180209142800.25485-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,115 +23,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Artem Mygaiev <Artem_Mygaiev@epam.com>
-Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, Edgar Iglesias <edgari@xilinx.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, Stewart Hildebrand <stewart.hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Mirela Simonovic <mirela.simonovic@aggios.com>, Jarvis Roach <jarvis.roach@dornerworks.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1716121014-1518200082=:31919
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-Hi Mirela,
-
-We can use my conferencing details this time, so that we can do screen
-sharing easily:
-
-  Join the call: https://www.uberconference.com/stefano-stabellini
-  Optional dial in number: 669-999-0613
-  No PIN needed
-
-I'll also reply to the first email from Julien in this thread with the
-conferencing info.
-
-
-Hi Artem,
-
-We should definitely talk about certification & AGL.  Realistically, one
-hour might not be enough to cover the other topics as well as
-certifications & AGL, but we'll start the discussion.
-
-If we need more time, instead of waiting for 4 weeks before scheduling
-another Xen on ARM meeting, we can have another conf call earlier, for
-example on the week of the 19th of Feb.
-
-
-Cheers,
-
-Stefano
-
-
-On Fri, 9 Feb 2018, Artem Mygaiev wrote:
-> Hi Juilen
-> 
-> Time works for us.
-> Do you think it is worth to discuss certification & AGL stuff?
-> 
-> Best regards,
-> -- Artem Mygaiev
-> 
-> _______________________________________________________________________________________________________________________________________________________________________________
-> From: Mirela Simonovic <mirela.simonovic@aggios.com>
-> Sent: Friday, February 9, 2018 7:53:28 PM
-> To: Edgar Iglesias
-> Cc: Julien Grall; Stefano Stabellini; xen-devel; Lars Kurth; Stewart Hildebrand; anastassios.nanos@onapp.com; vfachin@de.adit-jv.com; Jarvis Roach; Volodymyr Babchuk; Artem
-> Mygaiev; davorin.mista@aggios.com; robin.randhawa@arm.com
-> Subject: Re: Xen ARM community call Tuesday 13th February 5PM UTC  
-> Hi,
-> The proposed time works for me too. We would like to show you a demo, i. e. Xen suspend/resume in action on Xilinx's Zynq US+ MPSoC. I would need ~10 minutes for that.
-> However, I need to screen share, so would it be possible to setup a call with the screen-sharing capability?
-> 
-> Thanks,
-> Mirela
-> 
-> On Tue, Feb 6, 2018 at 7:14 PM, Edgar Iglesias <edgari@xilinx.com> wrote:
->       Hi, this time works for me.
-> 
->       If there's time I'd like to discuss the timing of re-submitting the Xilinx EEMI power-management mediator.
->       Also, there were some questions in the previous review. Some are straight forward but some were around the configuration-less approach so I thought I could explain
->       our approach and get feedback, perhaps someone has better ideas. I'll probably need 10 - 15min for that.
-> 
->       Thanks,
->       Edgar
-> 
->       > -----Original Message-----
->       > From: Julien Grall [mailto:julien.grall@arm.com]
->       > Sent: 06 February 2018 2:12
->       > To: Stefano Stabellini <sstabellini@kernel.org>; xen-devel <xen-
->       > devel@lists.xenproject.org>; Lars Kurth <lars.kurth@citrix.com>; Edgar
->       > Iglesias <edgari@xilinx.com>; Stewart Hildebrand
->       > <Stewart.Hildebrand@dornerworks.com>; anastassios.nanos@onapp.com;
->       > vfachin@de.adit-jv.com; Jarvis Roach <Jarvis.Roach@dornerworks.com>;
->       > Volodymyr Babchuk <volodymyr_babchuk@epam.com>; Artem Mygaiev
->       > <Artem_Mygaiev@epam.com>; mirela.simonovic@aggios.com;
->       > davorin.mista@aggios.com; robin.randhawa@arm.com
->       > Subject: Xen ARM community call Tuesday 13th February 5PM UTC
->       >
->       > Hi all,
->       >
->       > I would suggest to have the next community call on Tuesday 13th February
->       > 5pm GMT. Does it sound good?
->       >
->       > Do you have any specific topic you would like to discuss?
->       >
->       > Cheers,
->       >
->       > --
->       > Julien Grall
-> 
-> 
-> 
-> 
---8323329-1716121014-1518200082=:31919
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1716121014-1518200082=:31919--
+T24gRnJpLCBGZWIgOSwgMjAxOCBhdCA2OjI4IEFNLCBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
+ZS5jb20+IHdyb3RlOgo+Cj4gIGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2Vy
+bmVsL2dpdC94ZW4vdGlwLmdpdCBmb3ItbGludXMtNC4xNi1yYzEtdGFnCgpTbyBJJ3ZlIHB1bGxl
+ZCB0aGlzLCBidXQgdGhlIGJhY2stbWVyZ2VzICpyZWFsbHkqIGFubm95IG1lLgoKU2VyaW91c2x5
+LCBET04nVCBETyBNRVJHRVMgSUYgWU9VIENBTk5PVCBFVkVOIEJFIEJPVEhFUkVEIFRPIFdSSVRF
+IEEKUkVBU09OIEZPUiBUSEVNIQoKVGhlcmUgYXJlIHR3byBiYWNrLW1lcmdlcyBpbiB0aGF0IHRy
+ZWUsIGFuZCB3aGlsZSB0aGV5IGJvdGggbWVyZ2UKcmVhc29uYWJsZSBtZXJnZSBwb2ludHMgKHY0
+LjE0IGFuZCB2NC4xNSByZXNwZWN0aXZlbHkpLCBuZWl0aGVyIG9mCnRoZW0gaGFzICphbnkqIGV4
+cGxhbmF0aW9uIG9mIHdoeSB0aGUgZipjayB0aGUgbWVyZ2Ugd2FzIGRvbmUuIFRoZQp2NC4xNSBt
+ZXJnZSBkb2Vzbid0IGV2ZW4gbWFrZSBpdCBjbGVhciB0aGF0IGl0IG1lcmdlcyB2NC4xNSAtIGl0
+IGp1c3QKc2F5cyAibWFzdGVyIi4KCkhhdmluZyByYW5kb20gY29tbWl0cyB3aXRoIG5vIGV4cGxh
+bmF0aW9uIG9mIHdoYXQgdGhlIGhlbGwgdGhleSBhcmUKZG9pbmcgaXMgTk9UIE9LLiBJdCdzIG5v
+dCBvayB3aGVuIHRoZXkgZG8gcmVhbCBjaGFuZ2VzLCBidXQgaXQncyBFVkVOCk1PUkUgbm90IG9r
+IHdoZW4gdGhleSBhcmUganVzdCByYW5kb20gbWVyZ2VzIHRoYXQgYnJpbmcgaW4Kd2hvLXRoZS1o
+ZWxsLWtub3dzLXdoYXQuCgpNZXJnZSBjb21taXRzIG5lZWQgZXhwbGFuYXRpb25zIG9mIHdoYXQg
+dGhleSBtZXJnZSBhbmQgd2h5IHRoZXkgbWVyZ2UgaXQuIFRoaXM6CgogICAgTWVyZ2UgYnJhbmNo
+ICdtYXN0ZXInIG9mCnNzaDovL2dpdG9saXRlLmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJu
+ZWwvZ2l0L3RvcnZhbGRzL2xpbnV4Cgood2hpY2ggaXMgYWxsIHRoZSBleHBsYW5hdGlvbiB0aGVy
+ZSBpcyBpbiBjb21taXQgZGRiOWUxM2FmM2JiKSBpcwpzaW1wbHkgbm90IGFjY2VwdGFibGUuCgpB
+dCBsZWFzdCB0aGUgb3RoZXIgbWVyZ2UgbWVyZ2VkIHRoZSB2NC4xNCBfdGFnXywgc28ganVzdCBs
+b29raW5nIGF0CnRoZSBtZXJnZSBpdCdzIGF0IGxlYXN0IGNsZWFyIHRoYXQgeW91IG1lcmdlZCBh
+IHJlYWwgcmVsZWFzZS4gSXQgc3RpbGwKZG9lc24ndCBleHBsYWluIF93aHlfIGl0IHdhcyBtZXJn
+ZWQuCgpJZiB5b3UgY2Fubm90IHN0YXRlIGEgZ29vZCByZWFzb24gZm9yIHRoZSBtZXJnZSwgb3Ig
+eW91IGNhbid0IGJlCmJvdGhlcmVkIHRvIHdyaXRlIG9uZSwgRE8gTk9UIERPIFRIRSBNRVJHRS4K
+Ckl0J3MgcmVhbGx5IHRoYXQgc2ltcGxlLgoKICAgICAgICAgIExpbnVzICJncnVtYmxlIiBUb3J2
+YWxkcwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
