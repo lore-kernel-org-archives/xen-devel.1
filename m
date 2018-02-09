@@ -1,16 +1,19 @@
-From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v4 04/28] VIOMMU: Add get irq info callback
- to convert irq remapping request
-Date: Fri, 9 Feb 2018 15:06:07 +0000
-Message-ID: <20180209150607.wlzfxt7fc3ifbmlq@MacBook-Pro-de-Roger.local>
-References: <1510899755-40237-1-git-send-email-chao.gao@intel.com>
- <1510899755-40237-5-git-send-email-chao.gao@intel.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH] libxl: do not fail device removal if
+ backend domain is gone
+Date: Fri, 9 Feb 2018 16:11:06 +0100
+Message-ID: <20180209151105.GO2070@mail-itl>
+References: <20180208232213.4105-1-marmarek@invisiblethingslab.com>
+ <20180209112704.quwohlkqphs5ufrn@MacBook-Pro-de-Roger.local>
+ <20180209114158.GL2070@mail-itl>
+ <20180209121039.5nx4crwkpchrv7m3@MacBook-Pro-de-Roger.local>
+ <20180209130833.GM2070@mail-itl>
+ <20180209143908.sf6lgrmpkpiggchg@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5241022634649147624=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <1510899755-40237-5-git-send-email-chao.gao@intel.com>
+In-Reply-To: <20180209143908.sf6lgrmpkpiggchg@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,69 +22,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Chao Gao <chao.gao@intel.com>
-Cc: Lan Tianyu <tianyu.lan@intel.com>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBOb3YgMTcsIDIwMTcgYXQgMDI6MjI6MTFQTSArMDgwMCwgQ2hhbyBHYW8gd3JvdGU6
-Cj4gRnJvbTogTGFuIFRpYW55dSA8dGlhbnl1LmxhbkBpbnRlbC5jb20+Cj4gCj4gVGhpcyBwYXRj
-aCBpcyB0byBhZGQgZ2V0X2lycV9pbmZvIGNhbGxiYWNrIGZvciBwbGF0Zm9ybSBpbXBsZW1lbnRh
-dGlvbgo+IHRvIGNvbnZlcnQgaXJxIHJlbWFwcGluZyByZXF1ZXN0IHRvIGlycSBpbmZvIChFLEcg
-dmVjdG9yLCBkZXN0LCBkZXN0X21vZGUKPiBhbmQgc28gb24pLgo+IAo+IFNpZ25lZC1vZmYtYnk6
-IExhbiBUaWFueXUgPHRpYW55dS5sYW5AaW50ZWwuY29tPgo+IFNpZ25lZC1vZmYtYnk6IENoYW8g
-R2FvIDxjaGFvLmdhb0BpbnRlbC5jb20+Cj4gLS0tCj4gIHhlbi9jb21tb24vdmlvbW11LmMgICAg
-ICAgICAgfCAxNiArKysrKysrKysrKysrKysrCj4gIHhlbi9pbmNsdWRlL2FzbS14ODYvdmlvbW11
-LmggfCAgOCArKysrKysrKwo+ICB4ZW4vaW5jbHVkZS94ZW4vdmlvbW11LmggICAgIHwgIDYgKysr
-KysrCj4gIDMgZmlsZXMgY2hhbmdlZCwgMzAgaW5zZXJ0aW9ucygrKQo+IAo+IGRpZmYgLS1naXQg
-YS94ZW4vY29tbW9uL3Zpb21tdS5jIGIveGVuL2NvbW1vbi92aW9tbXUuYwo+IGluZGV4IDUzZDRi
-NzAuLjllYWZkZWYgMTAwNjQ0Cj4gLS0tIGEveGVuL2NvbW1vbi92aW9tbXUuYwo+ICsrKyBiL3hl
-bi9jb21tb24vdmlvbW11LmMKPiBAQCAtMTI5LDYgKzEyOSwyMiBAQCBpbnQgdmlvbW11X2hhbmRs
-ZV9pcnFfcmVxdWVzdChjb25zdCBzdHJ1Y3QgZG9tYWluICpkLAo+ICAgICAgcmV0dXJuIHZpb21t
-dS0+b3BzLT5oYW5kbGVfaXJxX3JlcXVlc3QoZCwgcmVxdWVzdCk7Cj4gIH0KPiAgCj4gK2ludCB2
-aW9tbXVfZ2V0X2lycV9pbmZvKGNvbnN0IHN0cnVjdCBkb21haW4gKmQsCj4gKyAgICAgICAgICAg
-ICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCBhcmNoX2lycV9yZW1hcHBpbmdfcmVxdWVzdCAqcmVx
-dWVzdCwKPiArICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IGFyY2hfaXJxX3JlbWFwcGlu
-Z19pbmZvICppcnFfaW5mbykKPiArewo+ICsgICAgY29uc3Qgc3RydWN0IHZpb21tdSAqdmlvbW11
-ID0gZC0+YXJjaC5odm1fZG9tYWluLnZpb21tdTsKPiArCj4gKyAgICBpZiAoICF2aW9tbXUgKQo+
-ICsgICAgICAgIHJldHVybiAtRUlOVkFMOwo+ICsKPiArICAgIEFTU0VSVCh2aW9tbXUtPm9wcyk7
-Cj4gKyAgICBpZiAoICF2aW9tbXUtPm9wcy0+Z2V0X2lycV9pbmZvICkKPiArICAgICAgICByZXR1
-cm4gLUVJTlZBTDsKCkVPUE5PVFNVUFAuCgo+ICsKPiArICAgIHJldHVybiB2aW9tbXUtPm9wcy0+
-Z2V0X2lycV9pbmZvKGQsIHJlcXVlc3QsIGlycV9pbmZvKTsKPiArfQo+ICsKPiAgLyoKPiAgICog
-TG9jYWwgdmFyaWFibGVzOgo+ICAgKiBtb2RlOiBDCj4gZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRl
-L2FzbS14ODYvdmlvbW11LmggYi94ZW4vaW5jbHVkZS9hc20teDg2L3Zpb21tdS5oCj4gaW5kZXgg
-MDFlYzgwZS4uM2Q5OTViYSAxMDA2NDQKPiAtLS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L3Zpb21t
-dS5oCj4gKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni92aW9tbXUuaAo+IEBAIC0yNiw2ICsyNiwx
-NCBAQCBlbnVtIHZpb21tdV9pcnFfcmVxdWVzdF90eXBlIHsKPiAgICAgIFZJT01NVV9SRVFVRVNU
-X0lSUV9BUElDID0gMQo+ICB9Owo+ICAKPiArc3RydWN0IGFyY2hfaXJxX3JlbWFwcGluZ19pbmZv
-Cj4gK3sKPiArICAgIHVpbnQ4X3QgZGVzdF9tb2RlOjE7Cj4gKyAgICB1aW50OF90IGRlbGl2ZXJ5
-X21vZGU6MzsKPiArICAgIHVpbnQ4X3QgIHZlY3RvcjsKICAgICAgICAgICAgICBeIGRvdWJsZSBz
-cGFjZS4KCj4gKyAgICB1aW50MzJfdCBkZXN0Owo+ICt9OwoKVGhlIHNhbWUgaXNzdWUgYWdhaW4s
-IGludHJvZHVjaW5nIHRoaXMgc3RydWN0dXJlIHdpdGhvdXQgdGhlIGNvZGUgaW4KZ2V0X2lycV9p
-bmZvIG1ha2VzIGl0IGltcG9zc2libGUgdG8gcmV2aWV3IElNSE8uCgpBbHNvIHRoaXMgc2hvdWxk
-IGJlIGludHJvZHVjZWQgYmVsb3cgdGhlIGFyY2hfaXJxX3JlbWFwcGluZ19yZXF1ZXN0CnN0cnVj
-dC4KCj4gKwo+ICBzdHJ1Y3QgYXJjaF9pcnFfcmVtYXBwaW5nX3JlcXVlc3QKPiAgewo+ICAgICAg
-dW5pb24gewo+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS94ZW4vdmlvbW11LmggYi94ZW4vaW5j
-bHVkZS94ZW4vdmlvbW11LmgKPiBpbmRleCA2N2UyNWQ1Li43M2I4NTNmIDEwMDY0NAo+IC0tLSBh
-L3hlbi9pbmNsdWRlL3hlbi92aW9tbXUuaAo+ICsrKyBiL3hlbi9pbmNsdWRlL3hlbi92aW9tbXUu
-aAo+IEBAIC0zMiw2ICszMiw5IEBAIHN0cnVjdCB2aW9tbXVfb3BzIHsKPiAgICAgIGludCAoKmRl
-c3Ryb3kpKHN0cnVjdCB2aW9tbXUgKnZpb21tdSk7Cj4gICAgICBpbnQgKCpoYW5kbGVfaXJxX3Jl
-cXVlc3QpKGNvbnN0IHN0cnVjdCBkb21haW4gKmQsCj4gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGNvbnN0IHN0cnVjdCBhcmNoX2lycV9yZW1hcHBpbmdfcmVxdWVzdCAqcmVxdWVzdCk7
-Cj4gKyAgICBpbnQgKCpnZXRfaXJxX2luZm8pKGNvbnN0IHN0cnVjdCBkb21haW4gKmQsCj4gKyAg
-ICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCBhcmNoX2lycV9yZW1hcHBpbmdfcmVx
-dWVzdCAqcmVxdWVzdCwKPiArICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IGFyY2hfaXJx
-X3JlbWFwcGluZ19pbmZvICppbmZvKTsKPiAgfTsKPiAgCj4gIHN0cnVjdCB2aW9tbXUgewo+IEBA
-IC01MCw2ICs1Myw5IEBAIGludCB2aW9tbXVfZGVzdHJveV9kb21haW4oc3RydWN0IGRvbWFpbiAq
-ZCk7Cj4gIGludCB2aW9tbXVfZG9tY3RsKHN0cnVjdCBkb21haW4gKmQsIHN0cnVjdCB4ZW5fZG9t
-Y3RsX3Zpb21tdV9vcCAqb3ApOwo+ICBpbnQgdmlvbW11X2hhbmRsZV9pcnFfcmVxdWVzdChjb25z
-dCBzdHJ1Y3QgZG9tYWluICpkLAo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25z
-dCBzdHJ1Y3QgYXJjaF9pcnFfcmVtYXBwaW5nX3JlcXVlc3QgKnJlcXVlc3QpOwo+ICtpbnQgdmlv
-bW11X2dldF9pcnFfaW5mbyhjb25zdCBzdHJ1Y3QgZG9tYWluICpkLAo+ICsgICAgICAgICAgICAg
-ICAgICAgICAgICBjb25zdCBzdHJ1Y3QgYXJjaF9pcnFfcmVtYXBwaW5nX3JlcXVlc3QgKnJlcXVl
-c3QsCgpXaHkgZG8geW91IG5lZWQgJ3JlcXVlc3QnIGhlcmU/Cgo+ICsgICAgICAgICAgICAgICAg
-ICAgICAgICBzdHJ1Y3QgYXJjaF9pcnFfcmVtYXBwaW5nX2luZm8gKmlycV9pbmZvKTsKPiAgI2Vs
-c2UKPiAgc3RhdGljIGlubGluZSBpbnQgdmlvbW11X2Rlc3Ryb3lfZG9tYWluKHN0cnVjdCBkb21h
-aW4gKmQpCj4gIHsKPiAtLSAKPiAxLjguMy4xCj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+
+--===============5241022634649147624==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="RNRUMt0ZF5Yaq/Aq"
+Content-Disposition: inline
+
+
+--RNRUMt0ZF5Yaq/Aq
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Feb 09, 2018 at 02:39:08PM +0000, Roger Pau Monn=C3=A9 wrote:
+> On Fri, Feb 09, 2018 at 02:08:33PM +0100, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > On Fri, Feb 09, 2018 at 12:10:39PM +0000, Roger Pau Monn=C3=A9 wrote:
+> > > On Fri, Feb 09, 2018 at 12:41:58PM +0100, Marek Marczykowski-G=C3=B3r=
+ecki wrote:
+> > > > On Fri, Feb 09, 2018 at 11:27:04AM +0000, Roger Pau Monn=C3=A9 wrot=
+e:
+> > > > > I'm also wondering, if you jump to 'out' here, you avoid the call=
+ to
+> > > > > libxl__xs_transaction_commit and instead end up calling
+> > > > > libxl__xs_transaction_abort, which means the above call to
+> > > > > libxl__xs_path_cleanup will not be committed to xenstore, is this
+> > > > > really desired?
+> > > > >
+> > > > > It seems to me libxl might leak xenstore frontend entries in that
+> > > > > case.
+> > > >=20
+> > > > That call is only if aodev->force. In other cases cleanup is done in
+> > > > device_hotplug_done()->libxl__device_destroy(), which have its own =
+transaction.
+> > >=20
+> > > Hm, right, but this would still be incorrect in the force case then?
+> > > Or is this simply not needed for the 'force' case?
+> >=20
+> > In that case, the first libxl__xs_path_cleanup will indeed be aborted.
+> > But then it will be cleaned up the same way as in !force case.
+> > Anyway, this is about the case when backend is already gone, so 'force'
+> > doesn't really change anything - it was forcefully removed already, by
+> > shutting down the backend domain (or removing backend using something
+> > else)...
+>=20
+> Are you sure? The libxl__xs_path_cleanup call is not for removing the
+> backend entries but the frontend ones. Ie: the backend entries not
+> being present doesn't imply the frontend entries also not being
+> present.
+
+But libxl__device_destroy do remove frontend entries.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--RNRUMt0ZF5Yaq/Aq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlp+KokACgkQ24/THMrX
+1yxmQgf+KtgIwFfh78hxMuoZW6+6cPxnmxmn57lwEG2zlAxi7IKBJ4X8JY2NfccR
+hSm2NBJfnT1rV8UQHlMBOvp1aPveFNa1n0r0Y2nUZEtj4pOvZIOIX57SBy9m7HeP
+JGae6+vZMFl2YSkamwUBEQbv4XJJbLfZqr0ftWPzLvRDd6Yci6ErUdwdGN3TQREP
+kdxu/Q4fktPh4qKl821indQ683hOlAD5TNOSduC5x3v0yP1VzGyRsXB6fEvshJhD
+v+PPhhqnjguI2tkKcA/vUQqCBncJdzf14gJ40ykcPzx1DLXfxi8ml7fSB5A3DO6f
+UpauR/jTNdUZoCvXPjl8lu9Q01tj+A==
+=L4V2
+-----END PGP SIGNATURE-----
+
+--RNRUMt0ZF5Yaq/Aq--
+
+
+--===============5241022634649147624==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5241022634649147624==--
