@@ -1,20 +1,21 @@
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
-Subject: Re: Xen ARM community call Tuesday 13th February 5PM UTC
-Date: Fri, 9 Feb 2018 18:53:28 +0100
-Message-ID: <CAKPH-Nht4CUCVVkkoCdC1GFVZr6f++gkmHOyQt4kqxL2xqmpTw@mail.gmail.com>
-References: <1cd12995-d888-9de8-e273-5adaf562156f@arm.com>
- <CY1PR02MB20424899229057B0DCFF38D0ABFD0@CY1PR02MB2042.namprd02.prod.outlook.com>
+From: Meng Xu <xumengpanda@gmail.com>
+Subject: Re: RTDS with extra time issue
+Date: Fri, 9 Feb 2018 12:53:37 -0500
+Message-ID: <CAENZ-+kdiGJe9UT8fP-w=T2GzTDm5AQr5zgdMLFUAsKsAFLQiQ@mail.gmail.com>
+References: <762ccb02-b758-1636-fddc-f4e6a3ca19d0@epam.com>
+ <CAENZ-+=O5Xb=sZ2mwvihryWWx6fOVU=0pcSe0j8JAMaK3sXjRQ@mail.gmail.com>
+ <a3d0cbcf-2bee-391f-39de-d19906616fc6@epam.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4830589797984337681=="
+Content-Type: multipart/mixed; boundary="001a113dee74a156080564cb3789"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=gg/f=fd=aggios.com=mirela.simonovic@srs-us1.protection.inumbo.net>)
- id 1ekCra-00012t-NZ
- for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 17:53:30 +0000
-Received: by mail-qk0-x22d.google.com with SMTP id c4so8702947qkm.2
- for <xen-devel@lists.xenproject.org>; Fri, 09 Feb 2018 09:53:29 -0800 (PST)
-In-Reply-To: <CY1PR02MB20424899229057B0DCFF38D0ABFD0@CY1PR02MB2042.namprd02.prod.outlook.com>
+ <srs0=ij1s=fd=gmail.com=xumengpanda@srs-us1.protection.inumbo.net>)
+ id 1ekCsO-00019a-A5
+ for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 17:54:20 +0000
+Received: by mail-io0-x231.google.com with SMTP id m11so10512493iob.2
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Feb 2018 09:54:18 -0800 (PST)
+In-Reply-To: <a3d0cbcf-2bee-391f-39de-d19906616fc6@epam.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,138 +24,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Edgar Iglesias <edgari@xilinx.com>
-Cc: Artem Mygaiev <Artem_Mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, "davorin.mista@aggios.com" <davorin.mista@aggios.com>, Stefano Stabellini <sstabellini@kernel.org>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, Julien Grall <julien.grall@arm.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Jarvis Roach <Jarvis.Roach@dornerworks.com>
+To: Andrii Anisov <andrii_anisov@epam.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Dario Faggioli <dfaggioli@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4830589797984337681==
-Content-Type: multipart/alternative; boundary="94eb2c0454f6b8560c0564cb34cf"
-
---94eb2c0454f6b8560c0564cb34cf
+--001a113dee74a156080564cb3789
 Content-Type: text/plain; charset="UTF-8"
 
-Hi,
-
-The proposed time works for me too. We would like to show you a demo, i. e.
-Xen suspend/resume in action on Xilinx's Zynq US+ MPSoC. I would need ~10
-minutes for that.
-However, I need to screen share, so would it be possible to setup a call
-with the screen-sharing capability?
-
-Thanks,
-Mirela
-
-On Tue, Feb 6, 2018 at 7:14 PM, Edgar Iglesias <edgari@xilinx.com> wrote:
-
-> Hi, this time works for me.
+On Fri, Feb 9, 2018 at 11:04 AM, Andrii Anisov <andrii_anisov@epam.com> wrote:
 >
-> If there's time I'd like to discuss the timing of re-submitting the Xilinx
-> EEMI power-management mediator.
-> Also, there were some questions in the previous review. Some are straight
-> forward but some were around the configuration-less approach so I thought I
-> could explain our approach and get feedback, perhaps someone has better
-> ideas. I'll probably need 10 - 15min for that.
+> On 09.02.18 17:34, Meng Xu wrote:
+>>
+>> If you want to keep the same VCPU parameter, can you try to set task's
+>> period = 100ms and exe time = 40ms?
+>> By theory (I used CARTS to compute), a VCPU (10ms, 5ms) can schedule a
+>> task (100ms, 40ms).
+>> Note that the resource demand of two RT tasks with the same utilization is
+>> different: the task with smaller period has larger demand.
 >
-> Thanks,
-> Edgar
->
-> > -----Original Message-----
-> > From: Julien Grall [mailto:julien.grall@arm.com]
-> > Sent: 06 February 2018 2:12
-> > To: Stefano Stabellini <sstabellini@kernel.org>; xen-devel <xen-
-> > devel@lists.xenproject.org>; Lars Kurth <lars.kurth@citrix.com>; Edgar
-> > Iglesias <edgari@xilinx.com>; Stewart Hildebrand
-> > <Stewart.Hildebrand@dornerworks.com>; anastassios.nanos@onapp.com;
-> > vfachin@de.adit-jv.com; Jarvis Roach <Jarvis.Roach@dornerworks.com>;
-> > Volodymyr Babchuk <volodymyr_babchuk@epam.com>; Artem Mygaiev
-> > <Artem_Mygaiev@epam.com>; mirela.simonovic@aggios.com;
-> > davorin.mista@aggios.com; robin.randhawa@arm.com
-> > Subject: Xen ARM community call Tuesday 13th February 5PM UTC
-> >
-> > Hi all,
-> >
-> > I would suggest to have the next community call on Tuesday 13th February
-> > 5pm GMT. Does it sound good?
-> >
-> > Do you have any specific topic you would like to discuss?
-> >
-> > Cheers,
-> >
-> > --
-> > Julien Grall
+> BTW, could you please share the model xml file to me?
 >
 
---94eb2c0454f6b8560c0564cb34cf
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Sure!
+It's attached.
 
-<div dir=3D"ltr">Hi,<div><br></div><div>The proposed time works for me too.=
- We would like to show you a demo, i. e. Xen suspend/resume in action on Xi=
-linx&#39;s Zynq US+ MPSoC. I would need ~10 minutes for that.</div><div>How=
-ever, I need to screen share, so would it be possible to setup a call with =
-the screen-sharing capability?</div><div><br></div><div>Thanks,</div><div>M=
-irela</div></div><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
-On Tue, Feb 6, 2018 at 7:14 PM, Edgar Iglesias <span dir=3D"ltr">&lt;<a hre=
-f=3D"mailto:edgari@xilinx.com" target=3D"_blank">edgari@xilinx.com</a>&gt;<=
-/span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8=
-ex;border-left:1px #ccc solid;padding-left:1ex">Hi, this time works for me.=
-<br>
-<br>
-If there&#39;s time I&#39;d like to discuss the timing of re-submitting the=
- Xilinx EEMI power-management mediator.<br>
-Also, there were some questions in the previous review. Some are straight f=
-orward but some were around the configuration-less approach so I thought I =
-could explain our approach and get feedback, perhaps someone has better ide=
-as. I&#39;ll probably need 10 - 15min for that.<br>
-<br>
-Thanks,<br>
-Edgar<br>
-<br>
-&gt; -----Original Message-----<br>
-&gt; From: Julien Grall [mailto:<a href=3D"mailto:julien.grall@arm.com">jul=
-ien.grall@arm.com</a>]<br>
-&gt; Sent: 06 February 2018 2:12<br>
-&gt; To: Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org">s=
-stabellini@kernel.org</a>&gt;; xen-devel &lt;xen-<br>
-&gt; <a href=3D"mailto:devel@lists.xenproject.org">devel@lists.xenproject.o=
-rg</a>&gt;; Lars Kurth &lt;<a href=3D"mailto:lars.kurth@citrix.com">lars.ku=
-rth@citrix.com</a>&gt;; Edgar<br>
-&gt; Iglesias &lt;<a href=3D"mailto:edgari@xilinx.com">edgari@xilinx.com</a=
->&gt;; Stewart Hildebrand<br>
-&gt; &lt;<a href=3D"mailto:Stewart.Hildebrand@dornerworks.com">Stewart.Hild=
-ebrand@<wbr>dornerworks.com</a>&gt;; <a href=3D"mailto:anastassios.nanos@on=
-app.com">anastassios.nanos@onapp.com</a>;<br>
-&gt; <a href=3D"mailto:vfachin@de.adit-jv.com">vfachin@de.adit-jv.com</a>; =
-Jarvis Roach &lt;<a href=3D"mailto:Jarvis.Roach@dornerworks.com">Jarvis.Roa=
-ch@dornerworks.com</a>&gt;<wbr>;<br>
-&gt; Volodymyr Babchuk &lt;<a href=3D"mailto:volodymyr_babchuk@epam.com">vo=
-lodymyr_babchuk@epam.com</a>&gt;; Artem Mygaiev<br>
-&gt; &lt;<a href=3D"mailto:Artem_Mygaiev@epam.com">Artem_Mygaiev@epam.com</=
-a>&gt;; <a href=3D"mailto:mirela.simonovic@aggios.com">mirela.simonovic@agg=
-ios.com</a>;<br>
-&gt; <a href=3D"mailto:davorin.mista@aggios.com">davorin.mista@aggios.com</=
-a>; <a href=3D"mailto:robin.randhawa@arm.com">robin.randhawa@arm.com</a><br=
->
-&gt; Subject: Xen ARM community call Tuesday 13th February 5PM UTC<br>
-<div class=3D"HOEnZb"><div class=3D"h5">&gt;<br>
-&gt; Hi all,<br>
-&gt;<br>
-&gt; I would suggest to have the next community call on Tuesday 13th Februa=
-ry<br>
-&gt; 5pm GMT. Does it sound good?<br>
-&gt;<br>
-&gt; Do you have any specific topic you would like to discuss?<br>
-&gt;<br>
-&gt; Cheers,<br>
-&gt;<br>
-&gt; --<br>
-&gt; Julien Grall<br>
-</div></div></blockquote></div><br></div>
+Meng
 
---94eb2c0454f6b8560c0564cb34cf--
+--001a113dee74a156080564cb3789
+Content-Type: text/xml; charset="US-ASCII"; name="example-in.xml"
+Content-Disposition: attachment; filename="example-in.xml"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_jdg8d2dk0
 
+PHN5c3RlbSBvc19zY2hlZHVsZXI9IkVERiIgcGVyaW9kPSIyIj4gDQoJPGNvbXBvbmVudCBuYW1l
+PSJDMCIgc2NoZWR1bGVyPSJFREYiIHBlcmlvZD0iMTAiPiANCgkJIDx0YXNrIG5hbWU9IlQwIiBw
+PSIxMDAiIGQ9IjEwMCIgZT0iNDAiID4gPC90YXNrPg0KCQkgDQoJPC9jb21wb25lbnQ+DQo8L3N5
+c3RlbT4NCg==
+--001a113dee74a156080564cb3789
+Content-Type: text/xml; charset="US-ASCII"; name="example-out.xml"
+Content-Disposition: attachment; filename="example-out.xml"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_jdg8d2du1
 
---===============4830589797984337681==
+PGNvbXBvbmVudCBuYW1lPSJPUyBTY2hlZHVsZXIiIGFsZ29yaXRobT0iUFJNIGludGVyZmFjZSI+
+Cgk8cmVzb3VyY2U+CgkJPG1vZGVsIHBlcmlvZD0iMiIgYmFuZHdpZHRoPSIxIiBkZWFkbGluZT0i
+MiI+IDwvbW9kZWw+Cgk8L3Jlc291cmNlPgoJPHByb2Nlc3NlZF90YXNrPgoJCTxtb2RlbCBwZXJp
+b2Q9IjIiIGV4ZWN1dGlvbl90aW1lPSIyIiBkZWFkbGluZT0iMiI+IDwvbW9kZWw+Cgk8L3Byb2Nl
+c3NlZF90YXNrPgoJPGNvbXBvbmVudCBuYW1lPSJDMCIgYWxnb3JpdGhtPSJQUk0gaW50ZXJmYWNl
+Ij4KCQk8cmVzb3VyY2U+CgkJCTxtb2RlbCBwZXJpb2Q9IjEwIiBiYW5kd2lkdGg9IjAuNSIgZGVh
+ZGxpbmU9IjEwIj4gPC9tb2RlbD4KCQk8L3Jlc291cmNlPgoJCTxwcm9jZXNzZWRfdGFzaz4KCQkJ
+PG1vZGVsIHBlcmlvZD0iMTAiIGV4ZWN1dGlvbl90aW1lPSI1IiBkZWFkbGluZT0iMTAiPiA8L21v
+ZGVsPgoJCTwvcHJvY2Vzc2VkX3Rhc2s+Cgk8L2NvbXBvbmVudD4KPC9jb21wb25lbnQ+Cg==
+--001a113dee74a156080564cb3789
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -164,4 +85,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============4830589797984337681==--
+--001a113dee74a156080564cb3789--
