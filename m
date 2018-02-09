@@ -1,18 +1,21 @@
-From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-Subject: Re: [PATCH v2 02/15] xen/arm: vpsci: Add support for
-	PSCI 1.1
-Date: Fri, 9 Feb 2018 18:30:55 +0200
-Message-ID: <02aa71a6-6d7a-652c-09a2-93cabd1ec167@epam.com>
-References: <20180208192203.9556-1-julien.grall@arm.com>
- <20180208192203.9556-3-julien.grall@arm.com>
- <fc7fa60d-b723-83a4-243f-e2a7a000a332@epam.com>
- <76ed580e-1d80-b4d0-bb2a-02c57cd70f46@arm.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH] libxl: do not fail device removal if
+ backend domain is gone
+Date: Fri, 9 Feb 2018 17:32:47 +0100
+Message-ID: <20180209163247.GQ2070@mail-itl>
+References: <20180208232213.4105-1-marmarek@invisiblethingslab.com>
+ <20180209112704.quwohlkqphs5ufrn@MacBook-Pro-de-Roger.local>
+ <20180209114158.GL2070@mail-itl>
+ <20180209121039.5nx4crwkpchrv7m3@MacBook-Pro-de-Roger.local>
+ <20180209130833.GM2070@mail-itl>
+ <20180209143908.sf6lgrmpkpiggchg@MacBook-Pro-de-Roger.local>
+ <20180209151105.GO2070@mail-itl>
+ <20180209153340.2n6xg7okbgg2umyq@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3152561065779550872=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <76ed580e-1d80-b4d0-bb2a-02c57cd70f46@arm.com>
-Content-Language: en-US
+In-Reply-To: <20180209153340.2n6xg7okbgg2umyq@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,60 +24,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, sstabellini@kernel.org, Wei Liu <wei.liu2@citrix.com>, mirela.simonovic@aggios.com, andre.przywara@linaro.org
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwOS4wMi4xOCAxODoxMywgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IAo+IAo+IE9uIDAyLzA5
-LzIwMTggMDQ6MDcgUE0sIFZvbG9keW15ciBCYWJjaHVrIHdyb3RlOgo+PiBIaSBKdWxpZW4sCj4g
-Cj4gSGkgVm9sb2R5bXlyLAo+IAo+PiBPbiAwOC4wMi4xOCAyMToyMSwgSnVsaWVuIEdyYWxsIHdy
-b3RlOgo+Pj4gQXQgdGhlIG1vbWVudCwgWGVuIHByb3ZpZGVzIHZpcnR1YWwgUFNDSSBpbnRlcmZh
-Y2UgY29tcGxpYW50IHdpdGggMC4xCj4+PiBhbmQgMC4yLiBTaW5jZSB0aGVtLCB0aGUgc3BlY2lm
-aWNhdGlvbiBoYXMgYmVlbiB1cGRhdGVkIGFuZCB0aGUgbGF0ZXN0Cj4+PiB2ZXJzaW9uIGlzIDEu
-MSAoc2VlIEFSTSBERU4gMDAyMkQpLgo+Pj4KPj4+IMKgRnJvbSBhbiBpbXBsZW1lbnRhdGlvbiBw
-b2ludCBvZiB2aWV3LCBvbmx5IFBTQ0lfRkVBVFVSRVMgaXMgbWFuZGF0b3J5Lgo+Pj4gVGhlIHJl
-c3QgaXMgb3B0aW9uYWwgYW5kIGNhbiBiZSBsZWZ0IHVuaW1wbGVtZW50ZWQgZm9yIG5vdy4KPj4+
-Cj4+PiBBdCB0aGUgc2FtZSB0aW1lLCB0aGUgY29tcGF0aWJsZSBmb3IgUFNDSSBub2RlIGhhdmUg
-YmVlbiB1cGRhdGVkIHRvCj4+PiBleHBvc2UgImFybSxwc2NpLTEuMCIuCj4+Pgo+Pj4gU2lnbmVk
-LW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KPj4+IENjOiBXZWkg
-TGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+Pj4gQ2M6IElhbiBKYWNrc29uIDxpYW4uamFja3Nv
-bkBldS5jaXRyaXguY29tPgo+Pj4gQ2M6IG1pcmVsYS5zaW1vbm92aWNAYWdnaW9zLmNvbQpSZXZp
-ZXdlZC1ieTogVm9sb2R5bXlyIEJhYmNodWsgPHZvbG9keW15cl9iYWJjaHVrQGVwYW0uY29tPgoK
-Pj4+IC0tLQo+Pj4gwqDCoMKgwqAgV2UgbWF5IHdhbnQgdG8gcHJvdmlkZSBhIHdheSBmb3IgdGhl
-IHRvb2xzdGFjayB0byBzcGVjaWZ5IGEgUFNDSQo+Pj4gwqDCoMKgwqAgdmVyc2lvbi4gVGhpcyBj
-b3VsZCBiZSB1c2VmdWwgaWYgYSBndWVzdCBpcyBleHBlY3RpbmcgYSBnaXZlbgo+Pj4gwqDCoMKg
-wqAgdmVyc2lvbi4KPj4+Cj4+PiDCoMKgwqDCoCBDaGFuZ2VzIGluIHYyOgo+Pj4gwqDCoMKgwqDC
-oMKgwqDCoCAtIFJldHVybiB2MS4xIG9uIEdFVF9WRVJTSU9OIGNhbGwgYXMgY2xhaW1lZCBieSB0
-aGlzIHBhdGNoCj4+PiDCoMKgwqDCoMKgwqDCoMKgIC0gT3JkZXIgYnkgZnVuY3Rpb24gSUQgdGhl
-IGNhbGxzIGluIEZFQVRVUkVTIGNhbGwKPj4+IC0tLQo+Pj4gwqAgdG9vbHMvbGlieGwvbGlieGxf
-YXJtLmPCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDMgKystCj4+PiDCoCB4ZW4vYXJjaC9hcm0vZG9t
-YWluX2J1aWxkLmPCoMKgwqDCoMKgIHzCoCAxICsKPj4+IMKgIHhlbi9hcmNoL2FybS92cHNjaS5j
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMzkgCj4+PiArKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKy0KPj4+IMKgIHhlbi9pbmNsdWRlL2FzbS1hcm0vcGVyZmNfZGVmbi5o
-IHzCoCAxICsKPj4+IMKgIHhlbi9pbmNsdWRlL2FzbS1hcm0vcHNjaS5owqDCoMKgwqDCoMKgIHzC
-oCAxICsKPj4+IMKgIHhlbi9pbmNsdWRlL2FzbS1hcm0vdnBzY2kuaMKgwqDCoMKgwqAgfMKgIDIg
-Ky0KPj4+IMKgIDYgZmlsZXMgY2hhbmdlZCwgNDQgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMo
-LSkKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEvdG9vbHMvbGlieGwvbGlieGxfYXJtLmMgYi90b29scy9s
-aWJ4bC9saWJ4bF9hcm0uYwo+Pj4gaW5kZXggM2U0NjU1NDMwMS4uODZmNTljMGQ4MCAxMDA2NDQK
-Pj4+IC0tLSBhL3Rvb2xzL2xpYnhsL2xpYnhsX2FybS5jCj4+PiArKysgYi90b29scy9saWJ4bC9s
-aWJ4bF9hcm0uYwo+Pj4gQEAgLTQxMCw3ICs0MTAsOCBAQCBzdGF0aWMgaW50IG1ha2VfcHNjaV9u
-b2RlKGxpYnhsX19nYyAqZ2MsIHZvaWQgKmZkdCkKPj4+IMKgwqDCoMKgwqAgcmVzID0gZmR0X2Jl
-Z2luX25vZGUoZmR0LCAicHNjaSIpOwo+Pj4gwqDCoMKgwqDCoCBpZiAocmVzKSByZXR1cm4gcmVz
-Owo+Pj4gLcKgwqDCoCByZXMgPSBmZHRfcHJvcGVydHlfY29tcGF0KGdjLCBmZHQsIDIsICJhcm0s
-cHNjaS0wLjIiLCJhcm0scHNjaSIpOwo+Pj4gK8KgwqDCoCByZXMgPSBmZHRfcHJvcGVydHlfY29t
-cGF0KGdjLCBmZHQsIDMsICJhcm0scHNjaS0xLjAiLAo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgImFybSxwc2NpLTAuMiIsICJh
-cm0scHNjaSIpOwo+PiBXaGF0IGFib3V0IHRoaXMgcGxhY2U/IFNob3VsZCBpdCBiZSAiYXJtLHBz
-Y2ktMS4xIj8KPiAKPiBhcm0scHNjaS0xLjEgY29tcGF0aWJsZSBzdHJpbmcgZG9lcyBub3QgZXhp
-c3QuIFRlY2huaWNhbGx5IGFmdGVyIDAuMiB5b3UgCj4gc2hvdWxkIGRpc2NvdmVyIHRoZSBQU0NJ
-IHZlcnNpb24gdGhyb3VnaCBHRVRfVkVSU0lPTi4gU28gSSBhbSBub3QgCj4gZW50aXJlbHkgc3Vy
-ZSB3aHkgYXJtLHBzY2ktMS4wIGNvbXBhdGlibGUgd2FzIGFkZGVkLgo+IAo+ICBGcm9tIHRoZSBk
-b2N1bWVudGF0aW9uIAo+IChEb2N1bWVudGF0aW9uL2RldmljZXRyZWUvYmluZGluZ3MvYXJtL3Bz
-Y2kudHh0KSwgdGhlIGNvbXBhdGlibGVzIG1lYW5zIAo+IHRoZSBQU0NJIGltcGxlbWVudGF0aW9u
-IGNvbXBseSB0byBhIGdpdmVuIHZlcnNpb24uIE91ciBpbXBsZW1lbnRhdGlvbiAKPiBjb21wbGll
-cyB0byAwLjEsIDAuMiBhbmQgMS4wLiBTbyBJIGhhdmUgYWRkZWQgMS4wIGp1c3QgaW4gY2FzZSBh
-IGd1ZXN0IAo+IGRlY2lkZXMgdG8gY2hlY2sgdGhlIGNvbXBhdGlibGUuCgpPa2F5LCBtYWtlcyBz
-ZW5zZQoKLS0gClZvbG9keW15ciBCYWJjaHVrCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+
+--===============3152561065779550872==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="xexMVKTdXPhpRiVT"
+Content-Disposition: inline
+
+
+--xexMVKTdXPhpRiVT
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Feb 09, 2018 at 03:33:40PM +0000, Roger Pau Monn=C3=A9 wrote:
+> I'm sorry, I'm a little foggy today. Does this mean the call to
+> libxl__xs_path_cleanup is simply not needed in
+> libxl__initiate_device_generic_remove?
+
+It is, it's an alternative to setting be/state=3DXenbusStateClosing, when
+frontend is unresponsive. To let the backend know that frontend is gone,
+so it can set be/state=3DXenbusStateClosed.
+
+We have various cases (not comprehensive list):
+
+ - both frontend and backend operational: after setting
+   be/state=3DXenbusStateClosing backend wait for frontend confirmation
+   and respond with be/state=3DXenbusStateClosed; then libxl in dom0
+   remove frontend entries and libxl in backend domain (which may be the
+   same) remove backend entries
+ - unresponsive backend/frontend: after a timeout, force=3D1 is used to rem=
+ove
+   frontend entries, instead of just setting
+   be/state=3DXenbusStateClosing; then wait for be/state=3DXenbusStateClose=
+d.
+   If that timeout too, remove both frontend and backend entries
+ - backend gone, with this patch: no place for setting/waiting on
+   be/state - go directly to removing frontend entries, without waiting
+   for be/state=3DXenbusStateClosed (this is the difference vs force=3D1)
+
+Without this patch the end result is similar, both frontend and backend
+entries are removed, but in case of backend gone:
+ - libxl waits for be/state=3DXenbusStateClosed (and obviously timeout)
+ - return value from the function signal an error, which for example
+   confuse libvirt - it thinks the device remove failed, so is still
+   there
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--xexMVKTdXPhpRiVT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlp+Pa8ACgkQ24/THMrX
+1ywVYwf+JGbLaERRwi88i088UpxfplE8bP9zJHS0vaD65UrXJjNO4A5HilYNdYzz
+xoDaFqvT4Nbe/2SfPk8L/AnAZwJOhYXmJxfvIK0pFNAnjNQZTG9OvDHAP1KZVEpn
+bPF41hI8+diT1oYvSh/sSOoi2cOFf5vej37SipvqO9WNNyx75sCdEmKNZ/TK/PwD
+Xgfk3q2rEzeQirMKNdehxeEC4oE+OltVy8DBUJWUmr9U8C2mpON58ro30djyH0yB
+WGHQ+xFdesxDZLy3B7pHC+BUbyrSa+tHEQy3ctk0JXDASd9+WAedKTeVJnzOoMdq
+elqeWUJHZeDbMGOBqi11V2rdu2QKzQ==
+=LPi0
+-----END PGP SIGNATURE-----
+
+--xexMVKTdXPhpRiVT--
+
+
+--===============3152561065779550872==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3152561065779550872==--
