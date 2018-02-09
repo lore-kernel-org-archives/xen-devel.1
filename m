@@ -1,17 +1,17 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH] libxl: do not fail device removal if
- backend domain is gone
-Date: Fri, 9 Feb 2018 14:08:33 +0100
-Message-ID: <20180209130833.GM2070@mail-itl>
-References: <20180208232213.4105-1-marmarek@invisiblethingslab.com>
- <20180209112704.quwohlkqphs5ufrn@MacBook-Pro-de-Roger.local>
- <20180209114158.GL2070@mail-itl>
- <20180209121039.5nx4crwkpchrv7m3@MacBook-Pro-de-Roger.local>
+From: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
+Subject: Re: [PATCH v2 4/4] hvm/svm: Enable CR events
+Date: Fri, 9 Feb 2018 13:10:06 +0000
+Message-ID: <1518181806.4963.8.camel@bitdefender.com>
+References: <1518103552-4836-1-git-send-email-aisaila@bitdefender.com>
+ <1518103552-4836-5-git-send-email-aisaila@bitdefender.com>
+ <CABfawhkTv3-+61+PTB5msrQDy49wx98SSmcp_zyD7PhNf9GTBg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1237036406861511673=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180209121039.5nx4crwkpchrv7m3@MacBook-Pro-de-Roger.local>
+In-Reply-To: <CABfawhkTv3-+61+PTB5msrQDy49wx98SSmcp_zyD7PhNf9GTBg@mail.gmail.com>
+Content-Language: en-US
+Content-ID: <46AF54785694D2439F17A2A3B98C4870@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,82 +20,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: "tamas@tklengyel.com" <tamas@tklengyel.com>
+Cc: "suravee.suthikulpanit@amd.com" <suravee.suthikulpanit@amd.com>, "rcojocaru@bitdefender.com" <rcojocaru@bitdefender.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, "jbeulich@suse.com" <jbeulich@suse.com>, "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1237036406861511673==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="2feizKym29CxAecD"
-Content-Disposition: inline
-
-
---2feizKym29CxAecD
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Feb 09, 2018 at 12:10:39PM +0000, Roger Pau Monn=C3=A9 wrote:
-> On Fri, Feb 09, 2018 at 12:41:58PM +0100, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > On Fri, Feb 09, 2018 at 11:27:04AM +0000, Roger Pau Monn=C3=A9 wrote:
-> > > I'm also wondering, if you jump to 'out' here, you avoid the call to
-> > > libxl__xs_transaction_commit and instead end up calling
-> > > libxl__xs_transaction_abort, which means the above call to
-> > > libxl__xs_path_cleanup will not be committed to xenstore, is this
-> > > really desired?
-> > >
-> > > It seems to me libxl might leak xenstore frontend entries in that
-> > > case.
-> >=20
-> > That call is only if aodev->force. In other cases cleanup is done in
-> > device_hotplug_done()->libxl__device_destroy(), which have its own tran=
-saction.
->=20
-> Hm, right, but this would still be incorrect in the force case then?
-> Or is this simply not needed for the 'force' case?
-
-In that case, the first libxl__xs_path_cleanup will indeed be aborted.
-But then it will be cleaned up the same way as in !force case.
-Anyway, this is about the case when backend is already gone, so 'force'
-doesn't really change anything - it was forcefully removed already, by
-shutting down the backend domain (or removing backend using something
-else)...
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---2feizKym29CxAecD
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlp+DdAACgkQ24/THMrX
-1yx2swf/TPE7wdhbQ/X06UcFS27s7bUsTrftFpBYcunjc3v63rp5qkmsFURtfs4c
-ShlFYKzuJ/KbvMYD4DwYBxHHZ9GAAWaI0NhXsWbZpqw26j0r+XHhKN4ai7I1IM2p
-UwE8ujqYNC54+eaLIHZilYu6OIQh4aTN/Iu8TfMlX14nPsxBNU2ZCvyKV2TuP3PC
-Hw7KBywm1xGkc+NI3LQViDWT2KS65Z/4CCdWcPWq53g5u/M91P7SRxfD94DlSirz
-nH9XZ8urxek2HdmIUGlLPdMA6l1Wj4YoFVcm2kqc7e5eh9R35q8gDWaVGPb9mOa7
-pHF+IlLkaCsZdlq/iJYCJRjnm1SGjQ==
-=t1/7
------END PGP SIGNATURE-----
-
---2feizKym29CxAecD--
-
-
---===============1237036406861511673==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1237036406861511673==--
+T24gSm8sIDIwMTgtMDItMDggYXQgMTE6MDYgLTA3MDAsIFRhbWFzIEsgTGVuZ3llbCB3cm90ZToN
+Cj4gT24gVGh1LCBGZWIgOCwgMjAxOCBhdCA4OjI1IEFNLCBBbGV4YW5kcnUgSXNhaWxhDQo+IDxh
+aXNhaWxhQGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6DQo+ID4NCj4gPiBUaGlzIGNvbW1pdCBlbmFi
+bGVzIGNvbnRyb2xyZWdpc3RlciBldmVudHMgZm9yIHN2bS4NCj4gU28gdGhpcyBwYXRjaCBlbmFi
+bGVzIHRoZSBldmVudCB0byB0cmlnZ2VyIGJ1dCB3aGVyZSBpcyBpdCBiZWluZw0KPiBoYW5kbGVk
+IGFuZCBmb3J3YXJkZWQgdG8gdGhlIG1vbml0b3IgcmluZz8NCkhpIFRhbWFzLA0KDQpJZiBJJ3Zl
+IHVuZGVyc3RhbmQgeW91ciBxdWVzdGlvbiByaWdodCwgdGhpcyBpcyBoYW5kbGVkLCBsaWtlIG9u
+IHRoZQ0Kdm14IHNpZGUsIG9uIGEgc3BlY2lhbCBjYXNlIG9uIENSMC4gSWYgdGhpcyBpcyBub3Qg
+d2hhdCB5b3UgYXJlIGxvb2tpbmcNCmZvciBjYW4geW91IHBsZWFzZSBjbGFyaWZ5IHRoZSBxdWVz
+dGlvbi4NCg0KQWxleA0KPg0KPiA+DQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBBbGV4YW5kcnUg
+SXNhaWxhIDxhaXNhaWxhQGJpdGRlZmVuZGVyLmNvbT4NCj4gPiAtLS0NCj4gPiAgeGVuL2FyY2gv
+eDg2L2h2bS9zdm0vc3ZtLmMgICAgfCAxMSArKysrKysrKysrKw0KPiA+ICB4ZW4vaW5jbHVkZS9h
+c20teDg2L21vbml0b3IuaCB8ICA2ICsrKy0tLQ0KPiA+ICAyIGZpbGVzIGNoYW5nZWQsIDE0IGlu
+c2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEveGVuL2Fy
+Y2gveDg2L2h2bS9zdm0vc3ZtLmMNCj4gPiBiL3hlbi9hcmNoL3g4Ni9odm0vc3ZtL3N2bS5jDQo+
+ID4gaW5kZXggMWVhZGFiNC4uMzExOTAyZiAxMDA2NDQNCj4gPiAtLS0gYS94ZW4vYXJjaC94ODYv
+aHZtL3N2bS9zdm0uYw0KPiA+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vc3ZtL3N2bS5jDQo+ID4g
+QEAgLTYwLDYgKzYwLDcgQEANCj4gPiAgI2luY2x1ZGUgPGFzbS9hcGljLmg+DQo+ID4gICNpbmNs
+dWRlIDxhc20vZGVidWdnZXIuaD4NCj4gPiAgI2luY2x1ZGUgPGFzbS9odm0vbW9uaXRvci5oPg0K
+PiA+ICsjaW5jbHVkZSA8YXNtL21vbml0b3IuaD4NCj4gPiAgI2luY2x1ZGUgPGFzbS94c3RhdGUu
+aD4NCj4gPg0KPiA+ICB2b2lkIHN2bV9hc21fZG9fcmVzdW1lKHZvaWQpOw0KPiA+IEBAIC01NjAs
+NiArNTYxLDE2IEBAIHZvaWQgc3ZtX3VwZGF0ZV9ndWVzdF9jcihzdHJ1Y3QgdmNwdSAqdiwNCj4g
+PiB1bnNpZ25lZCBpbnQgY3IpDQo+ID4gICAgICAgICAgICAgICAgICBzdm1fZnB1X2VudGVyKHYp
+Ow0KPiA+ICAgICAgICAgIH0NCj4gPg0KPiA+ICsgICAgICAgIGlmICggcGFnaW5nX21vZGVfaGFw
+KHYtPmRvbWFpbikgKQ0KPiA+ICsgICAgICAgIHsNCj4gPiArICAgICAgICAgICAgdWludDMyX3Qg
+aW50ZXJjZXB0cyA9IHZtY2JfZ2V0X2NyX2ludGVyY2VwdHModm1jYik7DQo+ID4gKw0KPiA+ICsg
+ICAgICAgICAgICAvKiBUcmFwIENSMyB1cGRhdGVzIGlmIENSMyBtZW1vcnkgZXZlbnRzIGFyZSBl
+bmFibGVkLg0KPiA+ICovDQo+ID4gKyAgICAgICAgICAgIGlmICggdi0+ZG9tYWluLT5hcmNoLm1v
+bml0b3Iud3JpdGVfY3RybHJlZ19lbmFibGVkICYNCj4gPiArICAgICAgICAgICAgICAgICBtb25p
+dG9yX2N0cmxyZWdfYml0bWFzayhWTV9FVkVOVF9YODZfQ1IzKSApDQo+ID4gKyAgICAgICAgICAg
+ICAgIHZtY2Jfc2V0X2NyX2ludGVyY2VwdHModm1jYiwgaW50ZXJjZXB0cyB8DQo+ID4gQ1JfSU5U
+RVJDRVBUX0NSM19XUklURSk7DQo+ID4gKyAgICAgICAgfQ0KPiA+ICsNCj4gPiAgICAgICAgICB2
+YWx1ZSA9IHYtPmFyY2guaHZtX3ZjcHUuZ3Vlc3RfY3JbMF0gfCBod19jcjBfbWFzazsNCj4gPiAg
+ICAgICAgICBpZiAoICFwYWdpbmdfbW9kZV9oYXAodi0+ZG9tYWluKSApDQo+ID4gICAgICAgICAg
+ICAgIHZhbHVlIHw9IFg4Nl9DUjBfUEcgfCBYODZfQ1IwX1dQOw0KPiA+IGRpZmYgLS1naXQgYS94
+ZW4vaW5jbHVkZS9hc20teDg2L21vbml0b3IuaCBiL3hlbi9pbmNsdWRlL2FzbS0NCj4gPiB4ODYv
+bW9uaXRvci5oDQo+ID4gaW5kZXggMTM4YzQ2My4uYjgwZDIxNyAxMDA2NDQNCj4gPiAtLS0gYS94
+ZW4vaW5jbHVkZS9hc20teDg2L21vbml0b3IuaA0KPiA+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14
+ODYvbW9uaXRvci5oDQo+ID4gQEAgLTc5LDggKzc5LDcgQEAgc3RhdGljIGlubGluZSB1aW50MzJf
+dA0KPiA+IGFyY2hfbW9uaXRvcl9nZXRfY2FwYWJpbGl0aWVzKHN0cnVjdCBkb21haW4gKmQpDQo+
+ID4NCj4gPiAgICAgIGlmKCBjcHVfaGFzX3ZteCApDQo+ID4gICAgICB7DQo+ID4gLSAgICAgICAg
+Y2FwYWJpbGl0aWVzID0gKDFVIDw8DQo+ID4gWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX1dSSVRF
+X0NUUkxSRUcpIHwNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAoMVUgPDwNCj4gPiBYRU5f
+RE9NQ1RMX01PTklUT1JfRVZFTlRfREVCVUdfRVhDRVBUSU9OKSB8DQo+ID4gKyAgICAgICAgY2Fw
+YWJpbGl0aWVzID0gKDFVIDw8DQo+ID4gWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0RFQlVHX0VY
+Q0VQVElPTikgfA0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICgxVSA8PCBYRU5fRE9NQ1RM
+X01PTklUT1JfRVZFTlRfQ1BVSUQpIHwNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAoMVUg
+PDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0lOVEVSUlVQVCkNCj4gPiB8DQo+ID4gICAgICAg
+ICAgICAgICAgICAgICAgICAgKDFVIDw8DQo+ID4gWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0VN
+VUxfVU5JTVBMRU1FTlRFRCk7DQo+ID4gQEAgLTkyLDcgKzkxLDggQEAgc3RhdGljIGlubGluZSB1
+aW50MzJfdA0KPiA+IGFyY2hfbW9uaXRvcl9nZXRfY2FwYWJpbGl0aWVzKHN0cnVjdCBkb21haW4g
+KmQpDQo+ID4NCj4gPiAgICAgIGNhcGFiaWxpdGllcyB8PSAoKDFVIDw8DQo+ID4gWEVOX0RPTUNU
+TF9NT05JVE9SX0VWRU5UX0dVRVNUX1JFUVVFU1QpIHwNCj4gPiAgICAgICAgICAgICAgICAgICAg
+ICAoMVUgPDwNCj4gPiBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfU09GVFdBUkVfQlJFQUtQT0lO
+VCkgfA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1Jf
+RVZFTlRfTU9WX1RPX01TUikpOw0KPiA+ICsgICAgICAgICAgICAgICAgICAgICgxVSA8PCBYRU5f
+RE9NQ1RMX01PTklUT1JfRVZFTlRfTU9WX1RPX01TUikgfA0KPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICgxVSA8PA0KPiA+IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9XUklURV9DVFJMUkVHKSk7
+DQo+ID4NCj4gPiAgICAgIGlmICggaHZtX2Z1bmNzLnNldF9kZXNjcmlwdG9yX2FjY2Vzc19leGl0
+aW5nICkNCj4gPiAgICAgICAgICBjYXBhYmlsaXRpZXMgfD0gKDFVIDw8DQo+ID4gWEVOX0RPTUNU
+TF9NT05JVE9SX0VWRU5UX0RFU0NfQUNDRVNTKTsNCj4gPiAtLQ0KPiA+IDIuNy40DQoNCl9fX19f
+X19fX19fX19fX19fX19fX19fXw0KVGhpcyBlbWFpbCB3YXMgc2Nhbm5lZCBieSBCaXRkZWZlbmRl
+cg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
