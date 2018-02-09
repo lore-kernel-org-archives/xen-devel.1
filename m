@@ -1,23 +1,20 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [RFC v4 6/8] xen/iommu: smmu-v3: Add Xen specific
- code to enable the ported driver
-Date: Fri, 9 Feb 2018 18:11:06 +0000
-Message-ID: <9ab1ce4f-16ec-9701-e270-ad11ba687547@arm.com>
-References: <20171219031703.23420-1-sameer.goel@linaro.org>
- <20171219031703.23420-7-sameer.goel@linaro.org>
- <9cafe32b-0c60-32d8-8912-dcf980699a80@linaro.org>
- <a86113dc-ee5d-a3e2-f346-9d6ba52c5a77@linaro.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: Xen ARM community call Tuesday 13th February 5PM UTC
+Date: Fri, 9 Feb 2018 10:14:40 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1802091008350.31919@sstabellini-ThinkPad-X260>
+References: <1cd12995-d888-9de8-e273-5adaf562156f@arm.com>
+ <CY1PR02MB20424899229057B0DCFF38D0ABFD0@CY1PR02MB2042.namprd02.prod.outlook.com>,
+ <CAKPH-Nht4CUCVVkkoCdC1GFVZr6f++gkmHOyQt4kqxL2xqmpTw@mail.gmail.com>
+ <AM4PR03MB1729BB70DCB5F96F35FCF9BDF4F20@AM4PR03MB1729.eurprd03.prod.outlook.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1716121014-1518200082=:31919"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=8+q2=fd=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1ekD8o-0003Jt-E1
- for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 18:11:18 +0000
-In-Reply-To: <a86113dc-ee5d-a3e2-f346-9d6ba52c5a77@linaro.org>
-Content-Language: en-US
+ <srs0=l6xq=fd=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1ekDCD-0003Ut-OT
+ for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 18:14:49 +0000
+In-Reply-To: <AM4PR03MB1729BB70DCB5F96F35FCF9BDF4F20@AM4PR03MB1729.eurprd03.prod.outlook.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,90 +23,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Sameer Goel <sameer.goel@linaro.org>, Julien Grall <julien.grall@linaro.org>, xen-devel@lists.xenproject.org, mjaggi@caviumnetworks.com
-Cc: sstabellini@kernel.org, andre.przywara@linaro.org, shankerd@codeaurora.org
+To: Artem Mygaiev <Artem_Mygaiev@epam.com>
+Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, Edgar Iglesias <edgari@xilinx.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, Stewart Hildebrand <stewart.hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Mirela Simonovic <mirela.simonovic@aggios.com>, Jarvis Roach <jarvis.roach@dornerworks.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpJIGFtIHNsaWdodGx5IGNvbmZ1c2VkLiBJIHJlY2VpdmUgeW91ciBhbnN3ZXIgb24gdGhp
-cyBlLW1haWwgYWZ0ZXIgeW91IApyZXNlbmQgYSB2ZXJzaW9uLiBTbyB3ZXJlIHRoZSBjb21tZW50
-cyBvbiBSRkMgdjQgd2FzIGFkZHJlc3NlZD8KCk9uIDAyLzA5LzIwMTggMDU6NTYgUE0sIFNhbWVl
-ciBHb2VsIHdyb3RlOgo+Pj4gIMKgIMKgwqDCoMKgwqAgLyogUmVxdWVzdCBpbnRlcnJ1cHQgbGlu
-ZXMgKi8KPj4+ICDCoMKgwqDCoMKgIGlycSA9IHNtbXUtPmV2dHEucS5pcnE7Cj4+PiBAQCAtMjMx
-Niw5ICsyNzgyLDEzIEBAIHN0YXRpYyBpbnQgYXJtX3NtbXVfc2V0dXBfaXJxcyhzdHJ1Y3QgYXJt
-X3NtbXVfZGV2aWNlICpzbW11KQo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgICogQ2F2aXVtIFRo
-dW5kZXJYMiBpbXBsZW1lbnRhdGlvbiBkb2Vzbid0IG5vdCBzdXBwb3J0IHVuaXF1ZQo+Pj4gIMKg
-wqDCoMKgwqDCoMKgwqDCoMKgICogaXJxIGxpbmVzLiBVc2Ugc2luZ2xlIGlycSBsaW5lIGZvciBh
-bGwgdGhlIFNNTVV2MyBpbnRlcnJ1cHRzLgo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgICovCj4+
-PiAtwqDCoMKgwqDCoMKgwqAgcmV0ID0gZGV2bV9yZXF1ZXN0X3RocmVhZGVkX2lycShzbW11LT5k
-ZXYsIGlycSwKPj4+ICvCoMKgwqDCoMKgwqDCoCAvKgo+Pj4gK8KgwqDCoMKgwqDCoMKgwqAgKiBY
-ZW46IERvZXMgbm90IHN1cHBvcnQgdGhyZWFkZWQgaXJxcywgc28gc2VyaWFsaXNlIHRoZSBzZXR1
-cC4KPj4+ICvCoMKgwqDCoMKgwqDCoMKgICogVGhpcyBpcyB0aGUgc2FtZSBmb3IgcHJpcyBhbmQg
-ZXZlbnQgaW50ZXJydXB0IGxpbmVzIG9uIG90aGVyCj4+PiArwqDCoMKgwqDCoMKgwqDCoCAqIHN5
-c3RlbXMKPj4+ICvCoMKgwqDCoMKgwqDCoMKgICovCj4+Cj4+IEFib3ZlIHlvdSBkaWQgaW1wbGVt
-ZW50ZWQgYSBkdW1teSBpbXBsZW1lbnRhdGlvbiBvZiBkZXZtX3JlcXVlc3RfdGhyZWFkZWRfaXJx
-KC4uLikuIFNvIHdoeSBkaWQgeW91IHJlcGxhY2UgdGhlIGNvZGUgaGVyZT8KPiBUaGUgcmVwbGFj
-ZW1lbnQgd29ya2VkIHdlbGwgZm9yIG90aGVyIGZ1bmN0aW9ucywgd2hlcmUgdGhlIGhhbmRsZXIg
-d2FzIG5vdCBkZWZpbmVkLiBTbywgdGhlIHdyYXBwZXIgZnVuY3Rpb24gY2FsbHMgZGV2bV9yZXF1
-ZXN0X2lycSB3aXRoIHRoZQo+IGFyZ3VtZW50IHBhc3NlZCBpbiBhcyB0aHJlYWQuIEluIHRoaXMg
-Y2FzZSByZWFsbHkgdGhlIGhhbmRsZXIgaGl0cyBmaXJzdCBhbmQgaXQgY2FsbHMgdGhlIHRocmVh
-ZCBpbiByZXNwb25zZS4gSSBjYW4gbW9kaWZ5IHRoZSBjb2RlIHRvIG1ha2UgdGhpcyBmaXQgaW50
-byB0aGUgYXBpCj4gYnV0IGluIHRoYXQgY2FzZSBJIHdpbGwgbmVlZCB0byBzd2FwIGFyb3VuZCB0
-aGUgZnVuY3Rpb25zIHNvIG51bWJlciBvZiBsaW5lIGNoYW5nZXMgd2lsbCBzdGF5IHRoZSBzYW1l
-LiBUZWxsIG1lIHlvdXIgcHJlZmVyZW5jZS4KCkkgZG9uJ3QgdW5kZXJzdGFuZCB3aGF0IHlvdSBt
-ZWFuIGhlcmUuIFdvdWxkIGl0IGJlIHBvc3NpYmxlIHRvIGdpdmUgYSAKY29uY3JldGUgZXhhbXBs
-ZT8KCj4+Cj4+PiArwqDCoMKgwqDCoMKgwqAgcmV0ID0gZGV2bV9yZXF1ZXN0X2lycShzbW11LT5k
-ZXYsIGlycSwKPj4+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-YXJtX3NtbXVfY29tYmluZWRfaXJxX2hhbmRsZXIsCj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgYXJtX3NtbXVfY29tYmluZWRfaXJxX3RocmVhZCwKPj4+ICDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgSVJRRl9PTkVTSE9ULAo+Pj4g
-IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAiYXJtLXNtbXUtdjMt
-Y29tYmluZWQtaXJxIiwgc21tdSk7Cj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChyZXQgPCAw
-KQo+Pj4gQEAgLTI1NDIsOCArMzAxMiwxNCBAQCBzdGF0aWMgaW50IGFybV9zbW11X2RldmljZV9o
-d19wcm9iZShzdHJ1Y3QgYXJtX3NtbXVfZGV2aWNlICpzbW11KQo+Pj4gIMKgwqDCoMKgwqDCoMKg
-wqDCoCBzbW11LT5mZWF0dXJlcyB8PSBBUk1fU01NVV9GRUFUX1NUQUxMUzsKPj4+ICDCoMKgwqDC
-oMKgIH0KPj4+ICDCoCArLyoKPj4+ICsgKiBYZW46IEJsb2NrIHN0YWdlIDEgdHJhbnNsYXRpb25z
-LiBCeSBkb2luZyB0aGlzIGhlcmUgd2UgZG8gbm90IG5lZWQgdG8gc2V0IHRoZQo+Pj4gKyAqIGRv
-bWFpbi0+c3RhZ2UgZXhwbGljaXRseS4KPj4+ICsgKi8KPj4+ICsjaWYgMAo+Pj4gIMKgwqDCoMKg
-wqAgaWYgKHJlZyAmIElEUjBfUzFQKQo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCBzbW11LT5mZWF0
-dXJlcyB8PSBBUk1fU01NVV9GRUFUX1RSQU5TX1MxOwo+Pj4gKyNlbmRpZgo+Pj4gIMKgIMKgwqDC
-oMKgwqAgaWYgKHJlZyAmIElEUjBfUzJQKQo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCBzbW11LT5m
-ZWF0dXJlcyB8PSBBUk1fU01NVV9GRUFUX1RSQU5TX1MyOwo+Pj4gQEAgLTI2MTYsMTAgKzMwOTIs
-MTIgQEAgc3RhdGljIGludCBhcm1fc21tdV9kZXZpY2VfaHdfcHJvYmUoc3RydWN0IGFybV9zbW11
-X2RldmljZSAqc21tdSkKPj4+ICDCoMKgwqDCoMKgIGlmIChyZWcgJiBJRFI1X0dSQU40SykKPj4+
-ICDCoMKgwqDCoMKgwqDCoMKgwqAgc21tdS0+cGdzaXplX2JpdG1hcCB8PSBTWl80SyB8IFNaXzJN
-IHwgU1pfMUc7Cj4+PiAgwqAgKyNpZiAwIC8qIFhlbjogU01NVSBvcHMgZG8gbm90IGhhdmUgYSBw
-Z3NpemVfYml0bWFwIG1lbWJlciBmb3IgWGVuICovCj4+PiAgwqDCoMKgwqDCoCBpZiAoYXJtX3Nt
-bXVfb3BzLnBnc2l6ZV9iaXRtYXAgPT0gLTFVTCkKPj4+ICDCoMKgwqDCoMKgwqDCoMKgwqAgYXJt
-X3NtbXVfb3BzLnBnc2l6ZV9iaXRtYXAgPSBzbW11LT5wZ3NpemVfYml0bWFwOwo+Pj4gIMKgwqDC
-oMKgwqAgZWxzZQo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCBhcm1fc21tdV9vcHMucGdzaXplX2Jp
-dG1hcCB8PSBzbW11LT5wZ3NpemVfYml0bWFwOwo+Pj4gKyNlbmRpZgo+Pj4gIMKgIMKgwqDCoMKg
-wqAgLyogT3V0cHV0IGFkZHJlc3Mgc2l6ZSAqLwo+Pj4gIMKgwqDCoMKgwqAgc3dpdGNoIChyZWcg
-JiBJRFI1X09BU19NQVNLIDw8IElEUjVfT0FTX1NISUZUKSB7Cj4+PiBAQCAtMjY4MCw3ICszMTU4
-LDggQEAgc3RhdGljIGludCBhcm1fc21tdV9kZXZpY2VfYWNwaV9wcm9iZShzdHJ1Y3QgcGxhdGZv
-cm1fZGV2aWNlICpwZGV2LAo+Pj4gIMKgwqDCoMKgwqAgc3RydWN0IGRldmljZSAqZGV2ID0gc21t
-dS0+ZGV2Owo+Pj4gIMKgwqDCoMKgwqAgc3RydWN0IGFjcGlfaW9ydF9ub2RlICpub2RlOwo+Pj4g
-IMKgIC3CoMKgwqAgbm9kZSA9ICooc3RydWN0IGFjcGlfaW9ydF9ub2RlICoqKWRldl9nZXRfcGxh
-dGRhdGEoZGV2KTsKPj4+ICvCoMKgwqAgLyogWGVuOiBNb2RpZmljYXRpb24gdG8gZ2V0IGlvcnRf
-bm9kZSAqLwo+Pj4gK8KgwqDCoCBub2RlID0gKHN0cnVjdCBhY3BpX2lvcnRfbm9kZSAqKWRldi0+
-YWNwaV9ub2RlOwo+Pj4gIMKgIMKgwqDCoMKgwqAgLyogUmV0cmlldmUgU01NVXYzIHNwZWNpZmlj
-IGRhdGEgKi8KPj4+ICDCoMKgwqDCoMKgIGlvcnRfc21tdSA9IChzdHJ1Y3QgYWNwaV9pb3J0X3Nt
-bXVfdjMgKilub2RlLT5ub2RlX2RhdGE7Cj4+PiBAQCAtMjcwMyw3ICszMTgyLDcgQEAgc3RhdGlj
-IGlubGluZSBpbnQgYXJtX3NtbXVfZGV2aWNlX2FjcGlfcHJvYmUoc3RydWN0IHBsYXRmb3JtX2Rl
-dmljZSAqcGRldiwKPj4+ICDCoCBzdGF0aWMgaW50IGFybV9zbW11X2RldmljZV9kdF9wcm9iZShz
-dHJ1Y3QgcGxhdGZvcm1fZGV2aWNlICpwZGV2LAo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgYXJtX3NtbXVfZGV2aWNlICpzbW11KQo+Pj4gIMKg
-IHsKPj4+IC3CoMKgwqAgc3RydWN0IGRldmljZSAqZGV2ID0gJnBkZXYtPmRldjsKPj4+ICvCoMKg
-wqAgc3RydWN0IGRldmljZSAqZGV2ID0gcGRldjsKPj4+ICDCoMKgwqDCoMKgIHUzMiBjZWxsczsK
-Pj4+ICDCoMKgwqDCoMKgIGludCByZXQgPSAtRUlOVkFMOwo+Pj4gIMKgIEBAIC0yNzE2LDYgKzMx
-OTUsNyBAQCBzdGF0aWMgaW50IGFybV9zbW11X2RldmljZV9kdF9wcm9iZShzdHJ1Y3QgcGxhdGZv
-cm1fZGV2aWNlICpwZGV2LAo+Pj4gIMKgIMKgwqDCoMKgwqAgcGFyc2VfZHJpdmVyX29wdGlvbnMo
-c21tdSk7Cj4+PiAgwqAgK8KgwqDCoCAvKiBYZW46IG9mX2RtYV9pc19jb2hlcmVudCBpcyBhIHN0
-dWIgdGlsbCBkdCBzdXBwb3J0IGlzIGludHJvZHVjZWQgKi8KPj4KPj4gSSB0aGluayB0aGlzIGNv
-bW1lbnQgbWF0dGVycyBtb3JlIG9uIHRvcCBvZiB0aGUgc3R1Yi4gSSB3b3VsZCBhbHNvIGFkZCBh
-biBCVUcoKSBpbiB0aGUgc3R1YiB0byBjYXRjaCBpdC4KPiBJIGhhdmUganVzdCByZXR1cm5lZCBh
-IDAgaGVyZS4gUHV0dGluZyBhIEJVRyBpbiBtaWdodCBub3QgaGF2ZSB0aGUgZGVzaXJlZCBpbXBh
-Y3QsIHNpbmNlLCB0aGlzIHdpbGwgZXhlY3V0ZSBldmVyeSB0aW1lLgoKSG93IGFib3V0IGEgV0FS
-Tl9PTl9PTkNFIGluIHRoZSBpbXBsZW1lbnRhdGlvbj8KCkNoZWVycywKCi0tIApKdWxpZW4gR3Jh
-bGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1716121014-1518200082=:31919
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+Hi Mirela,
+
+We can use my conferencing details this time, so that we can do screen
+sharing easily:
+
+  Join the call: https://www.uberconference.com/stefano-stabellini
+  Optional dial in number: 669-999-0613
+  No PIN needed
+
+I'll also reply to the first email from Julien in this thread with the
+conferencing info.
+
+
+Hi Artem,
+
+We should definitely talk about certification & AGL.  Realistically, one
+hour might not be enough to cover the other topics as well as
+certifications & AGL, but we'll start the discussion.
+
+If we need more time, instead of waiting for 4 weeks before scheduling
+another Xen on ARM meeting, we can have another conf call earlier, for
+example on the week of the 19th of Feb.
+
+
+Cheers,
+
+Stefano
+
+
+On Fri, 9 Feb 2018, Artem Mygaiev wrote:
+> Hi Juilen
+> 
+> Time works for us.
+> Do you think it is worth to discuss certification & AGL stuff?
+> 
+> Best regards,
+> -- Artem Mygaiev
+> 
+> _______________________________________________________________________________________________________________________________________________________________________________
+> From: Mirela Simonovic <mirela.simonovic@aggios.com>
+> Sent: Friday, February 9, 2018 7:53:28 PM
+> To: Edgar Iglesias
+> Cc: Julien Grall; Stefano Stabellini; xen-devel; Lars Kurth; Stewart Hildebrand; anastassios.nanos@onapp.com; vfachin@de.adit-jv.com; Jarvis Roach; Volodymyr Babchuk; Artem
+> Mygaiev; davorin.mista@aggios.com; robin.randhawa@arm.com
+> Subject: Re: Xen ARM community call Tuesday 13th February 5PM UTC  
+> Hi,
+> The proposed time works for me too. We would like to show you a demo, i. e. Xen suspend/resume in action on Xilinx's Zynq US+ MPSoC. I would need ~10 minutes for that.
+> However, I need to screen share, so would it be possible to setup a call with the screen-sharing capability?
+> 
+> Thanks,
+> Mirela
+> 
+> On Tue, Feb 6, 2018 at 7:14 PM, Edgar Iglesias <edgari@xilinx.com> wrote:
+>       Hi, this time works for me.
+> 
+>       If there's time I'd like to discuss the timing of re-submitting the Xilinx EEMI power-management mediator.
+>       Also, there were some questions in the previous review. Some are straight forward but some were around the configuration-less approach so I thought I could explain
+>       our approach and get feedback, perhaps someone has better ideas. I'll probably need 10 - 15min for that.
+> 
+>       Thanks,
+>       Edgar
+> 
+>       > -----Original Message-----
+>       > From: Julien Grall [mailto:julien.grall@arm.com]
+>       > Sent: 06 February 2018 2:12
+>       > To: Stefano Stabellini <sstabellini@kernel.org>; xen-devel <xen-
+>       > devel@lists.xenproject.org>; Lars Kurth <lars.kurth@citrix.com>; Edgar
+>       > Iglesias <edgari@xilinx.com>; Stewart Hildebrand
+>       > <Stewart.Hildebrand@dornerworks.com>; anastassios.nanos@onapp.com;
+>       > vfachin@de.adit-jv.com; Jarvis Roach <Jarvis.Roach@dornerworks.com>;
+>       > Volodymyr Babchuk <volodymyr_babchuk@epam.com>; Artem Mygaiev
+>       > <Artem_Mygaiev@epam.com>; mirela.simonovic@aggios.com;
+>       > davorin.mista@aggios.com; robin.randhawa@arm.com
+>       > Subject: Xen ARM community call Tuesday 13th February 5PM UTC
+>       >
+>       > Hi all,
+>       >
+>       > I would suggest to have the next community call on Tuesday 13th February
+>       > 5pm GMT. Does it sound good?
+>       >
+>       > Do you have any specific topic you would like to discuss?
+>       >
+>       > Cheers,
+>       >
+>       > --
+>       > Julien Grall
+> 
+> 
+> 
+> 
+--8323329-1716121014-1518200082=:31919
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1716121014-1518200082=:31919--
