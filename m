@@ -1,15 +1,15 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: libxl - avoid calling block script
-Date: Fri, 9 Feb 2018 12:35:13 +0100
-Message-ID: <20180209113513.GK2070@mail-itl>
-References: <20180209010242.GA2297@mail-itl>
- <20180209105524.y35zzjwhfqvokswz@MacBook-Pro-de-Roger.local>
- <20180209110355.jgd3vp24nlwledyt@MacBook-Pro-de-Roger.local>
+From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Subject: Re: [PATCH] libxl: allow libxl_domain_suspend to simply
+ suspend a domain, without saving it
+Date: Fri, 9 Feb 2018 11:35:10 +0000
+Message-ID: <20180209113510.zvkz7k5fzhwtfejw@MacBook-Pro-de-Roger.local>
+References: <20180208231404.3857-1-marmarek@invisiblethingslab.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0767176952214191748=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180209110355.jgd3vp24nlwledyt@MacBook-Pro-de-Roger.local>
+Content-Disposition: inline
+In-Reply-To: <20180208231404.3857-1-marmarek@invisiblethingslab.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,78 +18,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xen.org>
+To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Marcus of Wetware Labs <marcus@wetwa.re>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0767176952214191748==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="svExV93C05KqedWb"
-Content-Disposition: inline
-
-
---svExV93C05KqedWb
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Feb 09, 2018 at 11:03:55AM +0000, Roger Pau Monn=C3=A9 wrote:
-> Really adding Ian and Wei.
->=20
-> On Fri, Feb 09, 2018 at 10:55:24AM +0000, Roger Pau Monn=C3=A9 wrote:
-> > So the problem is creation time for domains that have quite a lot of
-> > disks attached. Adding Ian and Wei who know more about the async
-> > dispatch system, but I think (at least from a technical PoV) it
-> > should be possible to parallelize device attachment and thus hotplug
-> > script execution. Devices are independent from each other.
-
-In theory yes, but in practice block script (at least on Linux) takes a
-lock and serialize execution...
-
-> > Also the Linux hotplug scripts in general seem extremely convoluted,
-> > I'm not sure whether we could gain some speed there just by
-> > simplification.
-
-Well, we're comparing a bunch of fork+exec(), including starting bash
-(default /bin/sh on most systems), with just a single stat() call...
-Handling scripts in libxl itself also takes some time (in my case libxl
-live in libvirt, which may or may not have an impact). For a domU with
-4 disks, getting rid of hotplug scripts saved about 2s of startup time.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---svExV93C05KqedWb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlp99/AACgkQ24/THMrX
-1yzsDgf+Ohol8IuZ3AKz+i9sZGV0t09XPOB4DTpHlhSiV4Dq2cWQALFPbjvJyGrB
-pSS4SjnVC3nWjTkYf0wpPll/CNNNOXox9L+9zm2sl3yCadZb7PnNL17i4KyXpJRh
-O756cpsu7KqrYpEaVWfnqYBRZAGQMN9vfTsjtK4aWQ7jNaLS1laddCj+VR5Ajonu
-rKcypnMb5tlTew8cabnFXuo/ei65Id1RSZFuvqthZhVaBioOL1h7m/w+vAjxmUq9
-Jj9IvLU4kQ7AD/wxU+moS82xKufJPI2a+bjI/QWQYIYCHSw1CjxGytVnZo0JhTA0
-ci+ZO12I9jCoBtonEoUejKEUuECnVQ==
-=Z1pF
------END PGP SIGNATURE-----
-
---svExV93C05KqedWb--
-
-
---===============0767176952214191748==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0767176952214191748==--
+T24gRnJpLCBGZWIgMDksIDIwMTggYXQgMTI6MTQ6MDNBTSArMDEwMCwgTWFyZWsgTWFyY3p5a293
+c2tpLUfDs3JlY2tpIHdyb3RlOgo+IFdoZW4gZmQ9LTEsIG5vIHNhdmVmaWxlIHdpbGwgYmUgd3Jp
+dHRlbiwgYnV0IHRoZSBkb21haW4gd2lsbCBzdGlsbCBiZQo+IHN1c3BlbmRlZCAoYnV0IG5vdCBk
+ZXN0cm95ZWQpLiBUaGUgbWFpbiByZWFzb24gZm9yIHRoaXMgZnVuY3Rpb25hbGl0eSBpcwo+IHRv
+IHN1c3BlbmQgdGhlIGhvc3Qgd2hpbGUgc29tZSBkb21haW5zIGFyZSBydW5uaW5nLCBwb3RlbnRp
+YWxseSBob2xkaW5nCj4gUENJIGRldmljZXMuIFRoaXMgd2lsbCBnaXZlIGEgY2hhbmNlIHRvIGEg
+ZHJpdmVyIGluIHN1Y2ggYSBkb21haW4gdG8KPiBwcm9wZXJseSBzdXNwZW5kIGRldmljZS4KPiAK
+PiBJdCB3b3VsZCBiZSBiZXR0ZXIgdG8gaGF2ZSBzZXBhcmF0ZSBmdW5jdGlvbiBmb3IgdGhpcywg
+YnV0IGluIGZhY3QgaXQKPiBzaG91bGQgYmUgbmFtZWQgbGlieGxfZG9tYWluX3N1c3BlbmQsIHRo
+ZW4gdGhlIGN1cnJlbnQgb25lIHJlbmFtZWQgdG8KPiBsaWJ4bF9kb21haW5fc2F2ZS4gU2luY2Ug
+dGhhdCB3b3VsZCBicmVhayBBUEkgY29tcGF0aWJpbGl0eSwga2VlcCBpdCBpbgo+IHRoZSBzYW1l
+IGZ1bmN0aW9uLgo+IAo+IFNpZ25lZC1vZmYtYnk6IE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNr
+aSA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNvbT4KPiBTaWduZWQtb2ZmLWJ5OiBNYXJj
+dXMgb2YgV2V0d2FyZSBMYWJzIDxtYXJjdXNAd2V0d2EucmU+Cj4gLS0tCj4gIHRvb2xzL2xpYnhs
+L2xpYnhsX2RvbWFpbi5jIHwgNTMgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0t
+LS0tLS0tLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgMzggaW5zZXJ0aW9ucygrKSwgMTUgZGVsZXRp
+b25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3Rvb2xzL2xpYnhsL2xpYnhsX2RvbWFpbi5jIGIvdG9v
+bHMvbGlieGwvbGlieGxfZG9tYWluLmMKPiBpbmRleCAxM2IxYzczZDQwLi5jOTVlYWEzMGNhIDEw
+MDY0NAo+IC0tLSBhL3Rvb2xzL2xpYnhsL2xpYnhsX2RvbWFpbi5jCj4gKysrIGIvdG9vbHMvbGli
+eGwvbGlieGxfZG9tYWluLmMKPiBAQCAtNDg2LDYgKzQ4NiwxMyBAQCBzdGF0aWMgdm9pZCBkb21h
+aW5fc3VzcGVuZF9jYihsaWJ4bF9fZWdjICplZ2MsCj4gIAo+ICB9Cj4gIAo+ICtzdGF0aWMgdm9p
+ZCBkb21haW5fc3VzcGVuZF9lbXB0eV9jYihsaWJ4bF9fZWdjICplZ2MsCj4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGxpYnhsX19kb21haW5fc3VzcGVuZF9zdGF0ZSAqZHNzLCBpbnQg
+cmMpCj4gK3sKPiArICAgIFNUQVRFX0FPX0dDKGRzcy0+YW8pOwo+ICsgICAgbGlieGxfX2FvX2Nv
+bXBsZXRlKGVnYyxhbyxyYyk7Cj4gK30KPiArCj4gIGludCBsaWJ4bF9kb21haW5fc3VzcGVuZChs
+aWJ4bF9jdHggKmN0eCwgdWludDMyX3QgZG9taWQsIGludCBmZCwgaW50IGZsYWdzLAo+ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgY29uc3QgbGlieGxfYXN5bmNvcF9ob3cgKmFvX2hvdykKPiAg
+ewo+IEBAIC00OTgsMjUgKzUwNSw0MSBAQCBpbnQgbGlieGxfZG9tYWluX3N1c3BlbmQobGlieGxf
+Y3R4ICpjdHgsIHVpbnQzMl90IGRvbWlkLCBpbnQgZmQsIGludCBmbGFncywKPiAgICAgICAgICBn
+b3RvIG91dF9lcnI7Cj4gICAgICB9Cj4gIAo+IC0gICAgbGlieGxfX2RvbWFpbl9zYXZlX3N0YXRl
+ICpkc3M7Cj4gLSAgICBHQ05FVyhkc3MpOwo+ICsgICAgaWYgKGZkID49IDApIHsKPiArICAgICAg
+ICBsaWJ4bF9fZG9tYWluX3NhdmVfc3RhdGUgKmRzczsKCk5ld2xpbmUuCgo+ICsgICAgICAgIEdD
+TkVXKGRzcyk7Cj4gIAo+IC0gICAgZHNzLT5hbyA9IGFvOwo+IC0gICAgZHNzLT5jYWxsYmFjayA9
+IGRvbWFpbl9zdXNwZW5kX2NiOwo+ICsgICAgICAgIGRzcy0+YW8gPSBhbzsKPiArICAgICAgICBk
+c3MtPmNhbGxiYWNrID0gZG9tYWluX3N1c3BlbmRfY2I7Cj4gIAo+IC0gICAgZHNzLT5kb21pZCA9
+IGRvbWlkOwo+IC0gICAgZHNzLT5mZCA9IGZkOwo+IC0gICAgZHNzLT50eXBlID0gdHlwZTsKPiAt
+ICAgIGRzcy0+bGl2ZSA9IGZsYWdzICYgTElCWExfU1VTUEVORF9MSVZFOwo+IC0gICAgZHNzLT5k
+ZWJ1ZyA9IGZsYWdzICYgTElCWExfU1VTUEVORF9ERUJVRzsKPiAtICAgIGRzcy0+Y2hlY2twb2lu
+dGVkX3N0cmVhbSA9IExJQlhMX0NIRUNLUE9JTlRFRF9TVFJFQU1fTk9ORTsKPiArICAgICAgICBk
+c3MtPmRvbWlkID0gZG9taWQ7Cj4gKyAgICAgICAgZHNzLT5mZCA9IGZkOwo+ICsgICAgICAgIGRz
+cy0+dHlwZSA9IHR5cGU7Cj4gKyAgICAgICAgZHNzLT5saXZlID0gZmxhZ3MgJiBMSUJYTF9TVVNQ
+RU5EX0xJVkU7Cj4gKyAgICAgICAgZHNzLT5kZWJ1ZyA9IGZsYWdzICYgTElCWExfU1VTUEVORF9E
+RUJVRzsKPiArICAgICAgICBkc3MtPmNoZWNrcG9pbnRlZF9zdHJlYW0gPSBMSUJYTF9DSEVDS1BP
+SU5URURfU1RSRUFNX05PTkU7Cj4gIAo+IC0gICAgcmMgPSBsaWJ4bF9fZmRfZmxhZ3NfbW9kaWZ5
+X3NhdmUoZ2MsIGRzcy0+ZmQsCj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICB+KE9fTk9OQkxPQ0t8T19OREVMQVkpLCAwLAo+IC0gICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgJmRzcy0+ZmRmbCk7Cj4gLSAgICBpZiAocmMgPCAwKSBnb3RvIG91dF9lcnI7
+Cj4gKyAgICAgICAgcmMgPSBsaWJ4bF9fZmRfZmxhZ3NfbW9kaWZ5X3NhdmUoZ2MsIGRzcy0+ZmQs
+Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfihPX05PTkJMT0NL
+fE9fTkRFTEFZKSwgMCwKPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAmZHNzLT5mZGZsKTsKPiArICAgICAgICBpZiAocmMgPCAwKSBnb3RvIG91dF9lcnI7Cj4gKwo+
+ICsgICAgICAgIGxpYnhsX19kb21haW5fc2F2ZShlZ2MsIGRzcyk7Cj4gKyAgICB9IGVsc2Ugewo+
+ICsgICAgICAgIGxpYnhsX19kb21haW5fc3VzcGVuZF9zdGF0ZSAqZHNwczsKCk5ld2xpbmUuCgo+
+ICsgICAgICAgIEdDTkVXKGRzcHMpOwo+ICsgICAgICAgIGRzcHMtPmFvID0gYW87Cj4gKyAgICAg
+ICAgZHNwcy0+ZG9taWQgPSBkb21pZDsKPiArICAgICAgICBkc3BzLT50eXBlID0gdHlwZTsKPiAr
+ICAgICAgICBkc3BzLT5ndWVzdF9ldnRjaG4ucG9ydCA9IC0xOwo+ICsgICAgICAgIGRzcHMtPmd1
+ZXN0X2V2dGNobl9sb2NrZmQgPSAtMTsKPiArICAgICAgICBkc3BzLT5ndWVzdF9yZXNwb25kZWQg
+PSAwOwo+ICsgICAgICAgIHJjID0gbGlieGxfX2RvbWFpbl9zdXNwZW5kX2luaXQoZWdjLCBkc3Bz
+LCB0eXBlKTsKCklmIHlvdSBjYWxsIGxpYnhsX19kb21haW5fc3VzcGVuZF9pbml0IGp1c3QgYWZ0
+ZXIgYWxsb2NhdGluZyB0aGUKc3RydWN0IHlvdSBjYW4gYXZvaWQgc2V0dGluZyB0eXBlLCBwb3J0
+LCBndWVzdF9ldnRjaG5fbG9ja2ZkIGFuZApndWVzdF9yZXNwb25kZWQuCgpUaGFua3MsIFJvZ2Vy
+LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
