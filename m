@@ -1,22 +1,17 @@
-From: Arnd Bergmann <arnd@arndb.de>
-Subject: Re: [PATCH] [v2] xen: hypercall: fix out-of-bounds
-	memcpy
-Date: Fri, 9 Feb 2018 13:57:44 +0100
-Message-ID: <CAK8P3a36O-NbrKkt-DEEZE2A2JQ5Gu9GZ98j0BjoFET4kgTaWw__26957.1121353239$1518181009$gmane$org@mail.gmail.com>
-References: <20180205150340.328921-1-arnd@arndb.de>
- <67d8f0f1-0846-876d-d36a-c8a9f9366243@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH] libxl: do not fail device removal if
+ backend domain is gone
+Date: Fri, 9 Feb 2018 14:08:33 +0100
+Message-ID: <20180209130833.GM2070@mail-itl>
+References: <20180208232213.4105-1-marmarek@invisiblethingslab.com>
+ <20180209112704.quwohlkqphs5ufrn@MacBook-Pro-de-Roger.local>
+ <20180209114158.GL2070@mail-itl>
+ <20180209121039.5nx4crwkpchrv7m3@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1237036406861511673=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=jy2v=fd=gmail.com=arndbergmann@srs-us1.protection.inumbo.net>)
- id 1ek8FP-0006an-Jq
- for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 12:57:47 +0000
-Received: by mail-ot0-x243.google.com with SMTP id a2so7655096otf.2
- for <xen-devel@lists.xenproject.org>; Fri, 09 Feb 2018 04:57:46 -0800 (PST)
-In-Reply-To: <67d8f0f1-0846-876d-d36a-c8a9f9366243@citrix.com>
+In-Reply-To: <20180209121039.5nx4crwkpchrv7m3@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,28 +20,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Kees Cook <keescook@chromium.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, David Laight <David.Laight@aculab.com>, David Woodhouse <dwmw@amazon.co.uk>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Dan Williams <dan.j.williams@intel.com>, Dan Carpenter <dan.carpenter@oracle.com>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBGZWIgNSwgMjAxOCBhdCA0OjE0IFBNLCBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29v
-cGVyM0BjaXRyaXguY29tPiB3cm90ZToKPiBPbiAwNS8wMi8xOCAxNTowMywgQXJuZCBCZXJnbWFu
-biB3cm90ZToKPgo+IFNuaXBwaW5nIGRlbGV0ZWQgY29kZSB0byBtYWtlIHRoaW5ncyBjbGVhcmVy
-Ogo+Cj4+ICsgICAgIGlmIChjbWQgPiBBUlJBWV9TSVpFKHBoeXNkZXZvcF9sZW4pKQo+PiArICAg
-ICAgICAgICAgIHJldHVybiAtRU5PU1lTOwo+Pgo+PiArICAgICBsZW4gPSBwaHlzZGV2b3BfbGVu
-W2NtZF07Cj4+ICsgICAgIG1lbWNweSgmb3AudSwgYXJnLCBsZW4pOwo+Cj4gWW91J2xsIHdhbnQg
-YW4gYXJyYXlfbm9zcGVjKCkgb3Igd2hhdGV2ZXIgaXRzIGNhbGxlZCB0aGVzZSBkYXlzLiAgVGhp
-cwo+IGNvZGUgaXMgU1AxLWxlYWt5LgoKTWF5YmUgdGhlIGJlc3Qgc29sdXRpb24gd291bGQgYmUg
-dG8gcmVtb3ZlIHRoZSBmaWxlIGNvbXBsZXRlbHkuIEZyb20KbG9va2luZyBhdCB0aGUgWGVuIGdp
-dCBoaXN0b3J5LCB3ZSBvbmx5IG5lZWQgdGhpcyB0byBydW4gb24gWGVuIDMuMC4yCm9yIGVhcmxp
-ZXIsIHRob3NlIGVhcmx5IFhlbiByZWxlYXNlcyAoYWNjb3JkaW5nIHRvIFdpa2lwZWRpYSkgbmV2
-ZXIKZXZlbiBzdXBwb3J0ZWQgcnVubmluZyBtb2Rlcm4ga2VybmVsIHZlcnNpb25zIGFueXdheSwg
-c28gdGhlIGNvZGUKYXBwZWFycyB0byBiZSBjb21wbGV0ZWx5IHBvaW50bGVzcyBoZXJlLgoKSG93
-ZXZlciwgYXNpZGUgZnJvbSB0aGlzIGRyaXZlciwgSSB3b25kZXIgaWYgd2Ugc2hvdWxkIGJlIHdv
-cnJpZWQgYWJvdXQKU3BlY3RyZSB0eXBlIDEgYXR0YWNrcyBvbiBzaW1pbGFyIGNvZGUsIHdoZW4g
-Z2NjLTggdHVybnMgYSBzd2l0Y2gvY2FzZQpzdGF0ZW1lbnQgaW50byBhbiBhcnJheSBsb29rdXAg
-YmVoaW5kIG91ciBiYWNrLCBlLmcuIGluIGFuIGlvY3RsIGhhbmRsZXIuCkhhcyBhbnlib2R5IGdv
-dCB0aGlzIG9uIHRoZWlyIHJhZGFyPwoKICAgICAgIEFybmQKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============1237036406861511673==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="2feizKym29CxAecD"
+Content-Disposition: inline
+
+
+--2feizKym29CxAecD
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Feb 09, 2018 at 12:10:39PM +0000, Roger Pau Monn=C3=A9 wrote:
+> On Fri, Feb 09, 2018 at 12:41:58PM +0100, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > On Fri, Feb 09, 2018 at 11:27:04AM +0000, Roger Pau Monn=C3=A9 wrote:
+> > > I'm also wondering, if you jump to 'out' here, you avoid the call to
+> > > libxl__xs_transaction_commit and instead end up calling
+> > > libxl__xs_transaction_abort, which means the above call to
+> > > libxl__xs_path_cleanup will not be committed to xenstore, is this
+> > > really desired?
+> > >
+> > > It seems to me libxl might leak xenstore frontend entries in that
+> > > case.
+> >=20
+> > That call is only if aodev->force. In other cases cleanup is done in
+> > device_hotplug_done()->libxl__device_destroy(), which have its own tran=
+saction.
+>=20
+> Hm, right, but this would still be incorrect in the force case then?
+> Or is this simply not needed for the 'force' case?
+
+In that case, the first libxl__xs_path_cleanup will indeed be aborted.
+But then it will be cleaned up the same way as in !force case.
+Anyway, this is about the case when backend is already gone, so 'force'
+doesn't really change anything - it was forcefully removed already, by
+shutting down the backend domain (or removing backend using something
+else)...
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--2feizKym29CxAecD
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlp+DdAACgkQ24/THMrX
+1yx2swf/TPE7wdhbQ/X06UcFS27s7bUsTrftFpBYcunjc3v63rp5qkmsFURtfs4c
+ShlFYKzuJ/KbvMYD4DwYBxHHZ9GAAWaI0NhXsWbZpqw26j0r+XHhKN4ai7I1IM2p
+UwE8ujqYNC54+eaLIHZilYu6OIQh4aTN/Iu8TfMlX14nPsxBNU2ZCvyKV2TuP3PC
+Hw7KBywm1xGkc+NI3LQViDWT2KS65Z/4CCdWcPWq53g5u/M91P7SRxfD94DlSirz
+nH9XZ8urxek2HdmIUGlLPdMA6l1Wj4YoFVcm2kqc7e5eh9R35q8gDWaVGPb9mOa7
+pHF+IlLkaCsZdlq/iJYCJRjnm1SGjQ==
+=t1/7
+-----END PGP SIGNATURE-----
+
+--2feizKym29CxAecD--
+
+
+--===============1237036406861511673==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1237036406861511673==--
