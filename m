@@ -1,15 +1,15 @@
-From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH] libxl: do not fail device removal if
- backend domain is gone
-Date: Fri, 9 Feb 2018 11:27:04 +0000
-Message-ID: <20180209112704.quwohlkqphs5ufrn@MacBook-Pro-de-Roger.local>
-References: <20180208232213.4105-1-marmarek@invisiblethingslab.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: libxl - avoid calling block script
+Date: Fri, 9 Feb 2018 12:35:13 +0100
+Message-ID: <20180209113513.GK2070@mail-itl>
+References: <20180209010242.GA2297@mail-itl>
+ <20180209105524.y35zzjwhfqvokswz@MacBook-Pro-de-Roger.local>
+ <20180209110355.jgd3vp24nlwledyt@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0767176952214191748=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <20180208232213.4105-1-marmarek@invisiblethingslab.com>
+In-Reply-To: <20180209110355.jgd3vp24nlwledyt@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,44 +18,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBGZWIgMDksIDIwMTggYXQgMTI6MjI6MTNBTSArMDEwMCwgTWFyZWsgTWFyY3p5a293
-c2tpLUfDs3JlY2tpIHdyb3RlOgo+IEJhY2tlbmQgZG9tYWluIG1heSBiZSBpbmRlcGVuZGVudGx5
-IGRlc3Ryb3llZCAtIHRoZXJlIGlzIG5vCj4gc3luY2hyb25pemF0aW9uIG9mIGxpYnhsIHN0cnVj
-dHVyZXMgKGluY2x1ZGluZyAvbGlieGwgdHJlZSkgZWxzZXdoZXJlLgo+IEJhY2tlbmQgbWlnaHQg
-YWxzbyByZW1vdmUgdGhlIGRldmljZSBpbmZvIGZyb20gaXRzIGJhY2tlbmQgeGVuc3RvcmUKPiBz
-dWJ0cmVlIG9uIGl0cyBvd24uCj4gSWYgc3VjaCBzaXR1YXRpb24gaXMgZGV0ZWN0ZWQsIGRvIG5v
-dCBmYWlsIHRoZSByZW1vdmFsLCBidXQgZmluaXNoIHRoZQo+IGNsZWFudXAgb2YgdGhlIGZyb250
-ZW5kIHNpZGUuCj4gCj4gVGhpcyBpcyBqdXN0IHdvcmthcm91bmQsIHRoZSByZWFsIGZpeCBzaG91
-bGQgd2F0Y2ggd2hlbiB0aGUgZGV2aWNlCj4gYmFja2VuZCBpcyByZW1vdmVkIChpbmNsdWRpbmcg
-YmFja2VuZCBkb21haW4gZGVzdHJ1Y3Rpb24pIGFuZCByZW1vdmUKPiBmcm9udGVuZCBhdCB0aGF0
-IHRpbWUuIEFuZCByZXBvcnQgc3VjaCBldmVudCB0byBoaWdoZXIgbGF5ZXIgY29kZSwgc28KPiBm
-b3IgZXhhbXBsZSBsaWJ2aXJ0IGNvdWxkIHN5bmNocm9uaXplIGl0cyBzdGF0ZS4KPiAKPiBTaWdu
-ZWQtb2ZmLWJ5OiBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVja2kgPG1hcm1hcmVrQGludmlzaWJs
-ZXRoaW5nc2xhYi5jb20+Cj4gLS0tCj4gIHRvb2xzL2xpYnhsL2xpYnhsX2RldmljZS5jIHwgNyAr
-KysrKysrCj4gIDEgZmlsZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKykKPiAKPiBkaWZmIC0tZ2l0
-IGEvdG9vbHMvbGlieGwvbGlieGxfZGV2aWNlLmMgYi90b29scy9saWJ4bC9saWJ4bF9kZXZpY2Uu
-Ywo+IGluZGV4IDFiNzk2YmQzOTIuLjFmNThhOTlhMjMgMTAwNjQ0Cj4gLS0tIGEvdG9vbHMvbGli
-eGwvbGlieGxfZGV2aWNlLmMKPiArKysgYi90b29scy9saWJ4bC9saWJ4bF9kZXZpY2UuYwo+IEBA
-IC05OTcsNiArOTk3LDEzIEBAIHZvaWQgbGlieGxfX2luaXRpYXRlX2RldmljZV9nZW5lcmljX3Jl
-bW92ZShsaWJ4bF9fZWdjICplZ2MsCj4gICAgICAgICAgICAgIGdvdG8gb3V0Owo+ICAgICAgICAg
-IH0KPiAgCj4gKyAgICAgICAgLyogaWYgc3RhdGVfcGF0aCBpcyBlbXB0eSwgYXNzdW1lIGJhY2tl
-bmQgaXMgZ29uZSAoYmFja2VuZCBkb21haW4KPiArICAgICAgICAgKiBzaHV0ZG93bj8pLCBjbGVh
-bnVwIGZyb250ZW5kIG9ubHk7IHJjPTAgKi8KPiArICAgICAgICBpZiAoIXN0YXRlKSB7Cj4gKyAg
-ICAgICAgICAgIExPRyhXQVJOLCAiYmFja2VuZCAlcyBhbHJlYWR5IHJlbW92ZWQsIGNsZWFudXAg
-ZnJvbnRlbmQgb25seSIsIGJlX3BhdGgpOwo+ICsgICAgICAgICAgICBnb3RvIG91dDsKPiArICAg
-ICAgICB9Cj4gKwoKSSB0aGluayBJTkZPIHNob3VsZCBiZSB1c2VkIGluc3RlYWQgb2YgV0FSTiwg
-c2luY2UgdGhpcyBkb2Vzbid0IGxvb2sKdG8gYmUgYSBjYXVzZSBmb3IgY29uY2VybiBmcm9tIGFu
-IGFkbWluIFBvVi4KCkknbSBhbHNvIHdvbmRlcmluZywgaWYgeW91IGp1bXAgdG8gJ291dCcgaGVy
-ZSwgeW91IGF2b2lkIHRoZSBjYWxsIHRvCmxpYnhsX194c190cmFuc2FjdGlvbl9jb21taXQgYW5k
-IGluc3RlYWQgZW5kIHVwIGNhbGxpbmcKbGlieGxfX3hzX3RyYW5zYWN0aW9uX2Fib3J0LCB3aGlj
-aCBtZWFucyB0aGUgYWJvdmUgY2FsbCB0bwpsaWJ4bF9feHNfcGF0aF9jbGVhbnVwIHdpbGwgbm90
-IGJlIGNvbW1pdHRlZCB0byB4ZW5zdG9yZSwgaXMgdGhpcwpyZWFsbHkgZGVzaXJlZD8KCkl0IHNl
-ZW1zIHRvIG1lIGxpYnhsIG1pZ2h0IGxlYWsgeGVuc3RvcmUgZnJvbnRlbmQgZW50cmllcyBpbiB0
-aGF0CmNhc2UuCgpUaGFua3MsIFJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+
+--===============0767176952214191748==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="svExV93C05KqedWb"
+Content-Disposition: inline
+
+
+--svExV93C05KqedWb
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Feb 09, 2018 at 11:03:55AM +0000, Roger Pau Monn=C3=A9 wrote:
+> Really adding Ian and Wei.
+>=20
+> On Fri, Feb 09, 2018 at 10:55:24AM +0000, Roger Pau Monn=C3=A9 wrote:
+> > So the problem is creation time for domains that have quite a lot of
+> > disks attached. Adding Ian and Wei who know more about the async
+> > dispatch system, but I think (at least from a technical PoV) it
+> > should be possible to parallelize device attachment and thus hotplug
+> > script execution. Devices are independent from each other.
+
+In theory yes, but in practice block script (at least on Linux) takes a
+lock and serialize execution...
+
+> > Also the Linux hotplug scripts in general seem extremely convoluted,
+> > I'm not sure whether we could gain some speed there just by
+> > simplification.
+
+Well, we're comparing a bunch of fork+exec(), including starting bash
+(default /bin/sh on most systems), with just a single stat() call...
+Handling scripts in libxl itself also takes some time (in my case libxl
+live in libvirt, which may or may not have an impact). For a domU with
+4 disks, getting rid of hotplug scripts saved about 2s of startup time.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--svExV93C05KqedWb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlp99/AACgkQ24/THMrX
+1yzsDgf+Ohol8IuZ3AKz+i9sZGV0t09XPOB4DTpHlhSiV4Dq2cWQALFPbjvJyGrB
+pSS4SjnVC3nWjTkYf0wpPll/CNNNOXox9L+9zm2sl3yCadZb7PnNL17i4KyXpJRh
+O756cpsu7KqrYpEaVWfnqYBRZAGQMN9vfTsjtK4aWQ7jNaLS1laddCj+VR5Ajonu
+rKcypnMb5tlTew8cabnFXuo/ei65Id1RSZFuvqthZhVaBioOL1h7m/w+vAjxmUq9
+Jj9IvLU4kQ7AD/wxU+moS82xKufJPI2a+bjI/QWQYIYCHSw1CjxGytVnZo0JhTA0
+ci+ZO12I9jCoBtonEoUejKEUuECnVQ==
+=Z1pF
+-----END PGP SIGNATURE-----
+
+--svExV93C05KqedWb--
+
+
+--===============0767176952214191748==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0767176952214191748==--
