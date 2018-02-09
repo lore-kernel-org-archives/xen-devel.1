@@ -1,15 +1,23 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-4.9-testing test] 118683: regressions - FAIL
-Date: Fri, 09 Feb 2018 19:37:10 +0000
-Message-ID: <osstest-118683-mainreport@xen.org>
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
+Subject: Re: Xen ARM community call Tuesday 13th February 5PM UTC
+Date: Fri, 9 Feb 2018 22:05:47 +0100
+Message-ID: <CAKPH-NgNoa+QLGh+HCBp=C-Gmcz=Ofvf8ehhAc1O48v=rpK7Ww@mail.gmail.com>
+References: <1cd12995-d888-9de8-e273-5adaf562156f@arm.com>
+ <CY1PR02MB20424899229057B0DCFF38D0ABFD0@CY1PR02MB2042.namprd02.prod.outlook.com>
+ <CAKPH-Nht4CUCVVkkoCdC1GFVZr6f++gkmHOyQt4kqxL2xqmpTw@mail.gmail.com>
+ <AM4PR03MB1729BB70DCB5F96F35FCF9BDF4F20@AM4PR03MB1729.eurprd03.prod.outlook.com>
+ <alpine.DEB.2.10.1802091008350.31919@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0654017815848955575=="
+Content-Type: multipart/mixed; boundary="===============2260003665701431054=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=6pq4=fd=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1ekEUA-0001iT-KW
- for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 19:37:26 +0000
+ <srs0=gg/f=fd=aggios.com=mirela.simonovic@srs-us1.protection.inumbo.net>)
+ id 1ekFri-000881-OM
+ for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 21:05:50 +0000
+Received: by mail-qk0-x22e.google.com with SMTP id d72so11677413qkc.6
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Feb 2018 13:05:48 -0800 (PST)
+In-Reply-To: <alpine.DEB.2.10.1802091008350.31919@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,214 +26,276 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Artem Mygaiev <Artem_Mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, Edgar Iglesias <edgari@xilinx.com>, Stewart Hildebrand <stewart.hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Jarvis Roach <jarvis.roach@dornerworks.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============0654017815848955575==
-Content-Type: text/plain
+--===============2260003665701431054==
+Content-Type: multipart/alternative; boundary="94eb2c05e74a7f1b390564cde418"
 
-flight 118683 xen-4.9-testing real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/118683/
+--94eb2c05e74a7f1b390564cde418
+Content-Type: text/plain; charset="UTF-8"
 
-Regressions :-(
+Great, thank you!
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-armhf-armhf-xl-xsm       5 host-ping-check-native   fail REGR. vs. 118524
- test-amd64-amd64-xl-qemut-win7-amd64 16 guest-localmigrate/x10 fail REGR. vs. 118524
- test-armhf-armhf-xl-credit2  12 guest-start              fail REGR. vs. 118524
- test-amd64-amd64-xl-qemut-ws16-amd64 16 guest-localmigrate/x10 fail REGR. vs. 118524
+On Fri, Feb 9, 2018 at 7:14 PM, Stefano Stabellini <sstabellini@kernel.org>
+wrote:
 
-Tests which did not succeed, but are not blocking:
- test-amd64-i386-xl-qemut-win7-amd64 17 guest-stop             fail like 118487
- test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 118524
- test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 118524
- test-amd64-i386-xl-qemut-ws16-amd64 17 guest-stop             fail like 118524
- test-amd64-i386-xl-qemuu-ws16-amd64 16 guest-localmigrate/x10 fail like 118524
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
- test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
- test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
- test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
- test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt     14 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
- test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
- test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail   never pass
- test-amd64-amd64-xl-qemut-win10-i386 10 windows-install        fail never pass
- test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
- test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
- test-amd64-i386-xl-qemut-win10-i386 10 windows-install         fail never pass
+> Hi Mirela,
+>
+> We can use my conferencing details this time, so that we can do screen
+> sharing easily:
+>
+>   Join the call: https://www.uberconference.com/stefano-stabellini
+>   Optional dial in number: 669-999-0613
+>   No PIN needed
+>
+> I'll also reply to the first email from Julien in this thread with the
+> conferencing info.
+>
+>
+> Hi Artem,
+>
+> We should definitely talk about certification & AGL.  Realistically, one
+> hour might not be enough to cover the other topics as well as
+> certifications & AGL, but we'll start the discussion.
+>
+> If we need more time, instead of waiting for 4 weeks before scheduling
+> another Xen on ARM meeting, we can have another conf call earlier, for
+> example on the week of the 19th of Feb.
+>
+>
+> Cheers,
+>
+> Stefano
+>
+>
+> On Fri, 9 Feb 2018, Artem Mygaiev wrote:
+> > Hi Juilen
+> >
+> > Time works for us.
+> > Do you think it is worth to discuss certification & AGL stuff?
+> >
+> > Best regards,
+> > -- Artem Mygaiev
+> >
+> > ____________________________________________________________
+> ____________________________________________________________
+> _______________________________________________________
+> > From: Mirela Simonovic <mirela.simonovic@aggios.com>
+> > Sent: Friday, February 9, 2018 7:53:28 PM
+> > To: Edgar Iglesias
+> > Cc: Julien Grall; Stefano Stabellini; xen-devel; Lars Kurth; Stewart
+> Hildebrand; anastassios.nanos@onapp.com; vfachin@de.adit-jv.com; Jarvis
+> Roach; Volodymyr Babchuk; Artem
+> > Mygaiev; davorin.mista@aggios.com; robin.randhawa@arm.com
+> > Subject: Re: Xen ARM community call Tuesday 13th February 5PM UTC
+> > Hi,
+> > The proposed time works for me too. We would like to show you a demo, i.
+> e. Xen suspend/resume in action on Xilinx's Zynq US+ MPSoC. I would need
+> ~10 minutes for that.
+> > However, I need to screen share, so would it be possible to setup a call
+> with the screen-sharing capability?
+> >
+> > Thanks,
+> > Mirela
+> >
+> > On Tue, Feb 6, 2018 at 7:14 PM, Edgar Iglesias <edgari@xilinx.com>
+> wrote:
+> >       Hi, this time works for me.
+> >
+> >       If there's time I'd like to discuss the timing of re-submitting
+> the Xilinx EEMI power-management mediator.
+> >       Also, there were some questions in the previous review. Some are
+> straight forward but some were around the configuration-less approach so I
+> thought I could explain
+> >       our approach and get feedback, perhaps someone has better ideas.
+> I'll probably need 10 - 15min for that.
+> >
+> >       Thanks,
+> >       Edgar
+> >
+> >       > -----Original Message-----
+> >       > From: Julien Grall [mailto:julien.grall@arm.com]
+> >       > Sent: 06 February 2018 2:12
+> >       > To: Stefano Stabellini <sstabellini@kernel.org>; xen-devel <xen-
+> >       > devel@lists.xenproject.org>; Lars Kurth <lars.kurth@citrix.com>;
+> Edgar
+> >       > Iglesias <edgari@xilinx.com>; Stewart Hildebrand
+> >       > <Stewart.Hildebrand@dornerworks.com>;
+> anastassios.nanos@onapp.com;
+> >       > vfachin@de.adit-jv.com; Jarvis Roach <
+> Jarvis.Roach@dornerworks.com>;
+> >       > Volodymyr Babchuk <volodymyr_babchuk@epam.com>; Artem Mygaiev
+> >       > <Artem_Mygaiev@epam.com>; mirela.simonovic@aggios.com;
+> >       > davorin.mista@aggios.com; robin.randhawa@arm.com
+> >       > Subject: Xen ARM community call Tuesday 13th February 5PM UTC
+> >       >
+> >       > Hi all,
+> >       >
+> >       > I would suggest to have the next community call on Tuesday 13th
+> February
+> >       > 5pm GMT. Does it sound good?
+> >       >
+> >       > Do you have any specific topic you would like to discuss?
+> >       >
+> >       > Cheers,
+> >       >
+> >       > --
+> >       > Julien Grall
+> >
+> >
+> >
+> >
+>
 
-version targeted for testing:
- xen                  7d5f8b36be149c169215b3afe20e1cfba8456170
-baseline version:
- xen                  a2567d6b54b7b187ecc0165021b6dd07dafaf06a
+--94eb2c05e74a7f1b390564cde418
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Last test of basis   118524  2018-02-02 01:00:58 Z    7 days
-Failing since        118658  2018-02-07 17:13:52 Z    2 days    2 attempts
-Testing same since   118683  2018-02-08 14:02:24 Z    1 days    1 attempts
+<div dir=3D"ltr">Great, thank you!</div><div class=3D"gmail_extra"><br><div=
+ class=3D"gmail_quote">On Fri, Feb 9, 2018 at 7:14 PM, Stefano Stabellini <=
+span dir=3D"ltr">&lt;<a href=3D"mailto:sstabellini@kernel.org" target=3D"_b=
+lank">sstabellini@kernel.org</a>&gt;</span> wrote:<br><blockquote class=3D"=
+gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-=
+left:1ex">Hi Mirela,<br>
+<br>
+We can use my conferencing details this time, so that we can do screen<br>
+sharing easily:<br>
+<br>
+=C2=A0 Join the call: <a href=3D"https://www.uberconference.com/stefano-sta=
+bellini" rel=3D"noreferrer" target=3D"_blank">https://www.uberconference.<w=
+br>com/stefano-stabellini</a><br>
+=C2=A0 Optional dial in number: <a href=3D"tel:669-999-0613" value=3D"+1669=
+9990613">669-999-0613</a><br>
+=C2=A0 No PIN needed<br>
+<br>
+I&#39;ll also reply to the first email from Julien in this thread with the<=
+br>
+conferencing info.<br>
+<br>
+<br>
+Hi Artem,<br>
+<br>
+We should definitely talk about certification &amp; AGL.=C2=A0 Realisticall=
+y, one<br>
+hour might not be enough to cover the other topics as well as<br>
+certifications &amp; AGL, but we&#39;ll start the discussion.<br>
+<br>
+If we need more time, instead of waiting for 4 weeks before scheduling<br>
+another Xen on ARM meeting, we can have another conf call earlier, for<br>
+example on the week of the 19th of Feb.<br>
+<br>
+<br>
+Cheers,<br>
+<br>
+Stefano<br>
+<span class=3D""><br>
+<br>
+On Fri, 9 Feb 2018, Artem Mygaiev wrote:<br>
+&gt; Hi Juilen<br>
+&gt;<br>
+&gt; Time works for us.<br>
+&gt; Do you think it is worth to discuss certification &amp; AGL stuff?<br>
+&gt;<br>
+&gt; Best regards,<br>
+&gt; -- Artem Mygaiev<br>
+&gt;<br>
+</span>&gt; ______________________________<wbr>____________________________=
+__<wbr>______________________________<wbr>______________________________<wb=
+r>______________________________<wbr>_________________________<br>
+<div class=3D"HOEnZb"><div class=3D"h5">&gt; From: Mirela Simonovic &lt;<a =
+href=3D"mailto:mirela.simonovic@aggios.com">mirela.simonovic@aggios.com</a>=
+&gt;<br>
+&gt; Sent: Friday, February 9, 2018 7:53:28 PM<br>
+&gt; To: Edgar Iglesias<br>
+&gt; Cc: Julien Grall; Stefano Stabellini; xen-devel; Lars Kurth; Stewart H=
+ildebrand; <a href=3D"mailto:anastassios.nanos@onapp.com">anastassios.nanos=
+@onapp.com</a>; <a href=3D"mailto:vfachin@de.adit-jv.com">vfachin@de.adit-j=
+v.com</a>; Jarvis Roach; Volodymyr Babchuk; Artem<br>
+&gt; Mygaiev; <a href=3D"mailto:davorin.mista@aggios.com">davorin.mista@agg=
+ios.com</a>; <a href=3D"mailto:robin.randhawa@arm.com">robin.randhawa@arm.c=
+om</a><br>
+&gt; Subject: Re: Xen ARM community call Tuesday 13th February 5PM UTC =C2=
+=A0<br>
+&gt; Hi,<br>
+&gt; The proposed time works for me too. We would like to show you a demo, =
+i. e. Xen suspend/resume in action on Xilinx&#39;s Zynq US+ MPSoC. I would =
+need ~10 minutes for that.<br>
+&gt; However, I need to screen share, so would it be possible to setup a ca=
+ll with the screen-sharing capability?<br>
+&gt;<br>
+&gt; Thanks,<br>
+&gt; Mirela<br>
+&gt;<br>
+&gt; On Tue, Feb 6, 2018 at 7:14 PM, Edgar Iglesias &lt;<a href=3D"mailto:e=
+dgari@xilinx.com">edgari@xilinx.com</a>&gt; wrote:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Hi, this time works for me.<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0If there&#39;s time I&#39;d like to discuss =
+the timing of re-submitting the Xilinx EEMI power-management mediator.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Also, there were some questions in the previ=
+ous review. Some are straight forward but some were around the configuratio=
+n-less approach so I thought I could explain<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0our approach and get feedback, perhaps someo=
+ne has better ideas. I&#39;ll probably need 10 - 15min for that.<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Thanks,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Edgar<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; -----Original Message-----<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; From: Julien Grall [mailto:<a href=3D"m=
+ailto:julien.grall@arm.com">julien.grall@arm.com</a>]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Sent: 06 February 2018 2:12<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; To: Stefano Stabellini &lt;<a href=3D"m=
+ailto:sstabellini@kernel.org">sstabellini@kernel.org</a>&gt;; xen-devel &lt=
+;xen-<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; <a href=3D"mailto:devel@lists.xenprojec=
+t.org">devel@lists.xenproject.org</a>&gt;; Lars Kurth &lt;<a href=3D"mailto=
+:lars.kurth@citrix.com">lars.kurth@citrix.com</a>&gt;; Edgar<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Iglesias &lt;<a href=3D"mailto:edgari@x=
+ilinx.com">edgari@xilinx.com</a>&gt;; Stewart Hildebrand<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &lt;<a href=3D"mailto:Stewart.Hildebran=
+d@dornerworks.com">Stewart.Hildebrand@<wbr>dornerworks.com</a>&gt;; <a href=
+=3D"mailto:anastassios.nanos@onapp.com">anastassios.nanos@onapp.com</a>;<br=
+>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; <a href=3D"mailto:vfachin@de.adit-jv.co=
+m">vfachin@de.adit-jv.com</a>; Jarvis Roach &lt;<a href=3D"mailto:Jarvis.Ro=
+ach@dornerworks.com">Jarvis.Roach@dornerworks.com</a>&gt;<wbr>;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Volodymyr Babchuk &lt;<a href=3D"mailto=
+:volodymyr_babchuk@epam.com">volodymyr_babchuk@epam.com</a>&gt;; Artem Myga=
+iev<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &lt;<a href=3D"mailto:Artem_Mygaiev@epa=
+m.com">Artem_Mygaiev@epam.com</a>&gt;; <a href=3D"mailto:mirela.simonovic@a=
+ggios.com">mirela.simonovic@aggios.com</a>;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; <a href=3D"mailto:davorin.mista@aggios.=
+com">davorin.mista@aggios.com</a>; <a href=3D"mailto:robin.randhawa@arm.com=
+">robin.randhawa@arm.com</a><br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Subject: Xen ARM community call Tuesday=
+ 13th February 5PM UTC<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Hi all,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; I would suggest to have the next commun=
+ity call on Tuesday 13th February<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; 5pm GMT. Does it sound good?<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Do you have any specific topic you woul=
+d like to discuss?<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Cheers,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; --<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Julien Grall<br>
+&gt;<br>
+&gt;<br>
+&gt;<br>
+&gt; </div></div></blockquote></div><br></div>
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Julien Grall <julien.grall@linaro.org>
-  Marc Zyngier <marc.zyngier@arm.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-armhf-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64-xtf                                              pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-prev                                             pass    
- build-i386-prev                                              pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- build-amd64-rumprun                                          pass    
- build-i386-rumprun                                           pass    
- test-xtf-amd64-amd64-1                                       pass    
- test-xtf-amd64-amd64-2                                       pass    
- test-xtf-amd64-amd64-3                                       pass    
- test-xtf-amd64-amd64-4                                       pass    
- test-xtf-amd64-amd64-5                                       pass    
- test-amd64-amd64-xl                                          pass    
- test-arm64-arm64-xl                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-amd64-i386-xl                                           pass    
- test-amd64-amd64-xl-qemut-debianhvm-amd64-xsm                pass    
- test-amd64-i386-xl-qemut-debianhvm-amd64-xsm                 pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
- test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
- test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-armhf-armhf-libvirt-xsm                                 pass    
- test-amd64-i386-libvirt-xsm                                  pass    
- test-amd64-amd64-xl-xsm                                      pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-armhf-armhf-xl-xsm                                      fail    
- test-amd64-i386-xl-xsm                                       pass    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-i386-qemut-rhel6hvm-amd                           pass    
- test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
- test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemut-debianhvm-amd64                     pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
- test-amd64-i386-freebsd10-amd64                              pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
- test-amd64-amd64-rumprun-amd64                               pass    
- test-amd64-amd64-xl-qemut-win7-amd64                         fail    
- test-amd64-i386-xl-qemut-win7-amd64                          fail    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-i386-xl-qemuu-win7-amd64                          pass    
- test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
- test-amd64-i386-xl-qemut-ws16-amd64                          fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
- test-armhf-armhf-xl-arndale                                  pass    
- test-amd64-amd64-xl-credit2                                  pass    
- test-arm64-arm64-xl-credit2                                  pass    
- test-armhf-armhf-xl-credit2                                  fail    
- test-armhf-armhf-xl-cubietruck                               pass    
- test-amd64-i386-freebsd10-i386                               pass    
- test-amd64-i386-rumprun-i386                                 pass    
- test-amd64-amd64-xl-qemut-win10-i386                         fail    
- test-amd64-i386-xl-qemut-win10-i386                          fail    
- test-amd64-amd64-xl-qemuu-win10-i386                         fail    
- test-amd64-i386-xl-qemuu-win10-i386                          fail    
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-i386-qemut-rhel6hvm-intel                         pass    
- test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
- test-amd64-amd64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-livepatch                                   pass    
- test-amd64-i386-livepatch                                    pass    
- test-amd64-amd64-migrupgrade                                 pass    
- test-amd64-i386-migrupgrade                                  pass    
- test-amd64-amd64-xl-multivcpu                                pass    
- test-armhf-armhf-xl-multivcpu                                pass    
- test-amd64-amd64-pair                                        pass    
- test-amd64-i386-pair                                         pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-amd64-amd64-amd64-pvgrub                                pass    
- test-amd64-amd64-i386-pvgrub                                 pass    
- test-amd64-amd64-pygrub                                      pass    
- test-amd64-amd64-xl-qcow2                                    pass    
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-i386-xl-raw                                       pass    
- test-amd64-amd64-xl-rtds                                     pass    
- test-armhf-armhf-xl-rtds                                     pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
- test-armhf-armhf-xl-vhd                                      pass    
+--94eb2c05e74a7f1b390564cde418--
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 752 lines long.)
-
-
---===============0654017815848955575==
+--===============2260003665701431054==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -235,4 +305,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============0654017815848955575==--
+--===============2260003665701431054==--
