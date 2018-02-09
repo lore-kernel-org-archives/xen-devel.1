@@ -1,21 +1,17 @@
 From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 2/3] libxl: Improve logging in
-	libxl__build_dom()
-Date: Fri, 9 Feb 2018 12:08:59 +0000
-Message-ID: <20180209120859.audxnlfiincbkn2d@MacBook-Pro-de-Roger.local>
-References: <20180208214910.10699-1-simon@invisiblethingslab.com>
- <20180208214910.10699-3-simon@invisiblethingslab.com>
+Subject: Re: [PATCH] libxl: do not fail device removal if
+ backend domain is gone
+Date: Fri, 9 Feb 2018 12:10:39 +0000
+Message-ID: <20180209121039.5nx4crwkpchrv7m3@MacBook-Pro-de-Roger.local>
+References: <20180208232213.4105-1-marmarek@invisiblethingslab.com>
+ <20180209112704.quwohlkqphs5ufrn@MacBook-Pro-de-Roger.local>
+ <20180209114158.GL2070@mail-itl>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=qs32=fd=citrix.com=prvs=5717decf0=roger.pau@srs-us1.protection.inumbo.net>)
- id 1ek7UQ-0002HK-M8
- for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 12:09:14 +0000
 Content-Disposition: inline
-In-Reply-To: <20180208214910.10699-3-simon@invisiblethingslab.com>
+In-Reply-To: <20180209114158.GL2070@mail-itl>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,17 +20,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Simon Gaiser <simon@invisiblethingslab.com>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBGZWIgMDgsIDIwMTggYXQgMTA6NDk6MDlQTSArMDEwMCwgU2ltb24gR2Fpc2VyIHdy
-b3RlOgo+IHhjX2RvbV9wYXJzZV9pbWFnZSgpIGRvZXMgbm90IHNldCBlcnJubyAoYXQgbGVhc3Qg
-aW4gbWFueSBjb2RlIHBhdGhzKS4KPiBTbyBMT0dFKCkgaXMgbm90IHVzZWZ1bC4KCklJUkMgdGhl
-IGV4cGVjdGF0aW9uIGlzIHRoYXQgbGlieGMgZnVuY3Rpb25zIHdpbGwgcmV0dXJuIC0xIG9uIGZh
-aWx1cmUKYW5kIHNldCBlcnJuby4gVGhpcyBpcyBob3dldmVyIGZhciBmcm9tIHRydWUsIHNvOgoK
-PiBTaWduZWQtb2ZmLWJ5OiBTaW1vbiBHYWlzZXIgPHNpbW9uQGludmlzaWJsZXRoaW5nc2xhYi5j
-b20+CgpSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+
-CgpUaGFua3MuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gRnJpLCBGZWIgMDksIDIwMTggYXQgMTI6NDE6NThQTSArMDEwMCwgTWFyZWsgTWFyY3p5a293
+c2tpLUfDs3JlY2tpIHdyb3RlOgo+IE9uIEZyaSwgRmViIDA5LCAyMDE4IGF0IDExOjI3OjA0QU0g
+KzAwMDAsIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6Cj4gPiBJJ20gYWxzbyB3b25kZXJpbmcsIGlm
+IHlvdSBqdW1wIHRvICdvdXQnIGhlcmUsIHlvdSBhdm9pZCB0aGUgY2FsbCB0bwo+ID4gbGlieGxf
+X3hzX3RyYW5zYWN0aW9uX2NvbW1pdCBhbmQgaW5zdGVhZCBlbmQgdXAgY2FsbGluZwo+ID4gbGli
+eGxfX3hzX3RyYW5zYWN0aW9uX2Fib3J0LCB3aGljaCBtZWFucyB0aGUgYWJvdmUgY2FsbCB0bwo+
+ID4gbGlieGxfX3hzX3BhdGhfY2xlYW51cCB3aWxsIG5vdCBiZSBjb21taXR0ZWQgdG8geGVuc3Rv
+cmUsIGlzIHRoaXMKPiA+IHJlYWxseSBkZXNpcmVkPwo+ID4KPiA+IEl0IHNlZW1zIHRvIG1lIGxp
+YnhsIG1pZ2h0IGxlYWsgeGVuc3RvcmUgZnJvbnRlbmQgZW50cmllcyBpbiB0aGF0Cj4gPiBjYXNl
+Lgo+IAo+IFRoYXQgY2FsbCBpcyBvbmx5IGlmIGFvZGV2LT5mb3JjZS4gSW4gb3RoZXIgY2FzZXMg
+Y2xlYW51cCBpcyBkb25lIGluCj4gZGV2aWNlX2hvdHBsdWdfZG9uZSgpLT5saWJ4bF9fZGV2aWNl
+X2Rlc3Ryb3koKSwgd2hpY2ggaGF2ZSBpdHMgb3duIHRyYW5zYWN0aW9uLgoKSG0sIHJpZ2h0LCBi
+dXQgdGhpcyB3b3VsZCBzdGlsbCBiZSBpbmNvcnJlY3QgaW4gdGhlIGZvcmNlIGNhc2UgdGhlbj8K
+T3IgaXMgdGhpcyBzaW1wbHkgbm90IG5lZWRlZCBmb3IgdGhlICdmb3JjZScgY2FzZT8KClRoYW5r
+cywgUm9nZXIKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
