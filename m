@@ -1,21 +1,17 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH] libxl: do not fail device removal if
- backend domain is gone
-Date: Fri, 9 Feb 2018 17:32:47 +0100
-Message-ID: <20180209163247.GQ2070@mail-itl>
-References: <20180208232213.4105-1-marmarek@invisiblethingslab.com>
- <20180209112704.quwohlkqphs5ufrn@MacBook-Pro-de-Roger.local>
- <20180209114158.GL2070@mail-itl>
- <20180209121039.5nx4crwkpchrv7m3@MacBook-Pro-de-Roger.local>
- <20180209130833.GM2070@mail-itl>
- <20180209143908.sf6lgrmpkpiggchg@MacBook-Pro-de-Roger.local>
- <20180209151105.GO2070@mail-itl>
- <20180209153340.2n6xg7okbgg2umyq@MacBook-Pro-de-Roger.local>
+From: Chao Gao <chao.gao@intel.com>
+Subject: Re: [PATCH v4 04/28] VIOMMU: Add get irq info callback
+ to convert irq remapping request
+Date: Sat, 10 Feb 2018 00:34:14 +0800
+Message-ID: <20180209163414.GD30322@skl-4s-chao.sh.intel.com>
+References: <1510899755-40237-1-git-send-email-chao.gao@intel.com>
+ <1510899755-40237-5-git-send-email-chao.gao@intel.com>
+ <20180209150607.wlzfxt7fc3ifbmlq@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3152561065779550872=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180209153340.2n6xg7okbgg2umyq@MacBook-Pro-de-Roger.local>
+Content-Disposition: inline
+In-Reply-To: <20180209150607.wlzfxt7fc3ifbmlq@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,88 +20,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: Lan Tianyu <tianyu.lan@intel.com>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3152561065779550872==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="xexMVKTdXPhpRiVT"
-Content-Disposition: inline
-
-
---xexMVKTdXPhpRiVT
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Feb 09, 2018 at 03:33:40PM +0000, Roger Pau Monn=C3=A9 wrote:
-> I'm sorry, I'm a little foggy today. Does this mean the call to
-> libxl__xs_path_cleanup is simply not needed in
-> libxl__initiate_device_generic_remove?
-
-It is, it's an alternative to setting be/state=3DXenbusStateClosing, when
-frontend is unresponsive. To let the backend know that frontend is gone,
-so it can set be/state=3DXenbusStateClosed.
-
-We have various cases (not comprehensive list):
-
- - both frontend and backend operational: after setting
-   be/state=3DXenbusStateClosing backend wait for frontend confirmation
-   and respond with be/state=3DXenbusStateClosed; then libxl in dom0
-   remove frontend entries and libxl in backend domain (which may be the
-   same) remove backend entries
- - unresponsive backend/frontend: after a timeout, force=3D1 is used to rem=
-ove
-   frontend entries, instead of just setting
-   be/state=3DXenbusStateClosing; then wait for be/state=3DXenbusStateClose=
-d.
-   If that timeout too, remove both frontend and backend entries
- - backend gone, with this patch: no place for setting/waiting on
-   be/state - go directly to removing frontend entries, without waiting
-   for be/state=3DXenbusStateClosed (this is the difference vs force=3D1)
-
-Without this patch the end result is similar, both frontend and backend
-entries are removed, but in case of backend gone:
- - libxl waits for be/state=3DXenbusStateClosed (and obviously timeout)
- - return value from the function signal an error, which for example
-   confuse libvirt - it thinks the device remove failed, so is still
-   there
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---xexMVKTdXPhpRiVT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlp+Pa8ACgkQ24/THMrX
-1ywVYwf+JGbLaERRwi88i088UpxfplE8bP9zJHS0vaD65UrXJjNO4A5HilYNdYzz
-xoDaFqvT4Nbe/2SfPk8L/AnAZwJOhYXmJxfvIK0pFNAnjNQZTG9OvDHAP1KZVEpn
-bPF41hI8+diT1oYvSh/sSOoi2cOFf5vej37SipvqO9WNNyx75sCdEmKNZ/TK/PwD
-Xgfk3q2rEzeQirMKNdehxeEC4oE+OltVy8DBUJWUmr9U8C2mpON58ro30djyH0yB
-WGHQ+xFdesxDZLy3B7pHC+BUbyrSa+tHEQy3ctk0JXDASd9+WAedKTeVJnzOoMdq
-elqeWUJHZeDbMGOBqi11V2rdu2QKzQ==
-=LPi0
------END PGP SIGNATURE-----
-
---xexMVKTdXPhpRiVT--
-
-
---===============3152561065779550872==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3152561065779550872==--
+T24gRnJpLCBGZWIgMDksIDIwMTggYXQgMDM6MDY6MDdQTSArMDAwMCwgUm9nZXIgUGF1IE1vbm7D
+qSB3cm90ZToKPk9uIEZyaSwgTm92IDE3LCAyMDE3IGF0IDAyOjIyOjExUE0gKzA4MDAsIENoYW8g
+R2FvIHdyb3RlOgo+PiBGcm9tOiBMYW4gVGlhbnl1IDx0aWFueXUubGFuQGludGVsLmNvbT4KPj4g
+Cj4+IFRoaXMgcGF0Y2ggaXMgdG8gYWRkIGdldF9pcnFfaW5mbyBjYWxsYmFjayBmb3IgcGxhdGZv
+cm0gaW1wbGVtZW50YXRpb24KPj4gdG8gY29udmVydCBpcnEgcmVtYXBwaW5nIHJlcXVlc3QgdG8g
+aXJxIGluZm8gKEUsRyB2ZWN0b3IsIGRlc3QsIGRlc3RfbW9kZQo+PiBhbmQgc28gb24pLgo+PiAK
+Pj4gU2lnbmVkLW9mZi1ieTogTGFuIFRpYW55dSA8dGlhbnl1LmxhbkBpbnRlbC5jb20+Cj4+IFNp
+Z25lZC1vZmYtYnk6IENoYW8gR2FvIDxjaGFvLmdhb0BpbnRlbC5jb20+Cj4+IC0tLQo+PiAgeGVu
+L2NvbW1vbi92aW9tbXUuYyAgICAgICAgICB8IDE2ICsrKysrKysrKysrKysrKysKPj4gIHhlbi9p
+bmNsdWRlL2FzbS14ODYvdmlvbW11LmggfCAgOCArKysrKysrKwo+PiAgeGVuL2luY2x1ZGUveGVu
+L3Zpb21tdS5oICAgICB8ICA2ICsrKysrKwo+PiAgMyBmaWxlcyBjaGFuZ2VkLCAzMCBpbnNlcnRp
+b25zKCspCj4+IAo+PiBkaWZmIC0tZ2l0IGEveGVuL2NvbW1vbi92aW9tbXUuYyBiL3hlbi9jb21t
+b24vdmlvbW11LmMKPj4gaW5kZXggNTNkNGI3MC4uOWVhZmRlZiAxMDA2NDQKPj4gLS0tIGEveGVu
+L2NvbW1vbi92aW9tbXUuYwo+PiArKysgYi94ZW4vY29tbW9uL3Zpb21tdS5jCj4+IEBAIC0xMjks
+NiArMTI5LDIyIEBAIGludCB2aW9tbXVfaGFuZGxlX2lycV9yZXF1ZXN0KGNvbnN0IHN0cnVjdCBk
+b21haW4gKmQsCj4+ICAgICAgcmV0dXJuIHZpb21tdS0+b3BzLT5oYW5kbGVfaXJxX3JlcXVlc3Qo
+ZCwgcmVxdWVzdCk7Cj4+ICB9Cj4+ICAKPj4gK2ludCB2aW9tbXVfZ2V0X2lycV9pbmZvKGNvbnN0
+IHN0cnVjdCBkb21haW4gKmQsCj4+ICsgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1
+Y3QgYXJjaF9pcnFfcmVtYXBwaW5nX3JlcXVlc3QgKnJlcXVlc3QsCj4+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICBzdHJ1Y3QgYXJjaF9pcnFfcmVtYXBwaW5nX2luZm8gKmlycV9pbmZvKQo+PiAr
+ewo+PiArICAgIGNvbnN0IHN0cnVjdCB2aW9tbXUgKnZpb21tdSA9IGQtPmFyY2guaHZtX2RvbWFp
+bi52aW9tbXU7Cj4+ICsKPj4gKyAgICBpZiAoICF2aW9tbXUgKQo+PiArICAgICAgICByZXR1cm4g
+LUVJTlZBTDsKPj4gKwo+PiArICAgIEFTU0VSVCh2aW9tbXUtPm9wcyk7Cj4+ICsgICAgaWYgKCAh
+dmlvbW11LT5vcHMtPmdldF9pcnFfaW5mbyApCj4+ICsgICAgICAgIHJldHVybiAtRUlOVkFMOwo+
+Cj5FT1BOT1RTVVBQLgo+Cj4+ICsKPj4gKyAgICByZXR1cm4gdmlvbW11LT5vcHMtPmdldF9pcnFf
+aW5mbyhkLCByZXF1ZXN0LCBpcnFfaW5mbyk7Cj4+ICt9Cj4+ICsKPj4gIC8qCj4+ICAgKiBMb2Nh
+bCB2YXJpYWJsZXM6Cj4+ICAgKiBtb2RlOiBDCj4+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9h
+c20teDg2L3Zpb21tdS5oIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni92aW9tbXUuaAo+PiBpbmRleCAw
+MWVjODBlLi4zZDk5NWJhIDEwMDY0NAo+PiAtLS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L3Zpb21t
+dS5oCj4+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvdmlvbW11LmgKPj4gQEAgLTI2LDYgKzI2
+LDE0IEBAIGVudW0gdmlvbW11X2lycV9yZXF1ZXN0X3R5cGUgewo+PiAgICAgIFZJT01NVV9SRVFV
+RVNUX0lSUV9BUElDID0gMQo+PiAgfTsKPj4gIAo+PiArc3RydWN0IGFyY2hfaXJxX3JlbWFwcGlu
+Z19pbmZvCj4+ICt7Cj4+ICsgICAgdWludDhfdCBkZXN0X21vZGU6MTsKPj4gKyAgICB1aW50OF90
+IGRlbGl2ZXJ5X21vZGU6MzsKPj4gKyAgICB1aW50OF90ICB2ZWN0b3I7Cj4gICAgICAgICAgICAg
+IF4gZG91YmxlIHNwYWNlLgo+Cj4+ICsgICAgdWludDMyX3QgZGVzdDsKPj4gK307Cj4KPlRoZSBz
+YW1lIGlzc3VlIGFnYWluLCBpbnRyb2R1Y2luZyB0aGlzIHN0cnVjdHVyZSB3aXRob3V0IHRoZSBj
+b2RlIGluCj5nZXRfaXJxX2luZm8gbWFrZXMgaXQgaW1wb3NzaWJsZSB0byByZXZpZXcgSU1ITy4K
+Pgo+QWxzbyB0aGlzIHNob3VsZCBiZSBpbnRyb2R1Y2VkIGJlbG93IHRoZSBhcmNoX2lycV9yZW1h
+cHBpbmdfcmVxdWVzdAo+c3RydWN0LgoKV2lsbCBwYXkgYXR0ZW50aW9uIHRvIHRoaXMga2luZCBv
+ZiBpc3N1ZS4KPgo+PiArCj4+ICBzdHJ1Y3QgYXJjaF9pcnFfcmVtYXBwaW5nX3JlcXVlc3QKPj4g
+IHsKPj4gICAgICB1bmlvbiB7Cj4+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS94ZW4vdmlvbW11
+LmggYi94ZW4vaW5jbHVkZS94ZW4vdmlvbW11LmgKPj4gaW5kZXggNjdlMjVkNS4uNzNiODUzZiAx
+MDA2NDQKPj4gLS0tIGEveGVuL2luY2x1ZGUveGVuL3Zpb21tdS5oCj4+ICsrKyBiL3hlbi9pbmNs
+dWRlL3hlbi92aW9tbXUuaAo+PiBAQCAtMzIsNiArMzIsOSBAQCBzdHJ1Y3QgdmlvbW11X29wcyB7
+Cj4+ICAgICAgaW50ICgqZGVzdHJveSkoc3RydWN0IHZpb21tdSAqdmlvbW11KTsKPj4gICAgICBp
+bnQgKCpoYW5kbGVfaXJxX3JlcXVlc3QpKGNvbnN0IHN0cnVjdCBkb21haW4gKmQsCj4+ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgYXJjaF9pcnFfcmVtYXBwaW5n
+X3JlcXVlc3QgKnJlcXVlc3QpOwo+PiArICAgIGludCAoKmdldF9pcnFfaW5mbykoY29uc3Qgc3Ry
+dWN0IGRvbWFpbiAqZCwKPj4gKyAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCBh
+cmNoX2lycV9yZW1hcHBpbmdfcmVxdWVzdCAqcmVxdWVzdCwKPj4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgIHN0cnVjdCBhcmNoX2lycV9yZW1hcHBpbmdfaW5mbyAqaW5mbyk7Cj4+ICB9Owo+PiAg
+Cj4+ICBzdHJ1Y3QgdmlvbW11IHsKPj4gQEAgLTUwLDYgKzUzLDkgQEAgaW50IHZpb21tdV9kZXN0
+cm95X2RvbWFpbihzdHJ1Y3QgZG9tYWluICpkKTsKPj4gIGludCB2aW9tbXVfZG9tY3RsKHN0cnVj
+dCBkb21haW4gKmQsIHN0cnVjdCB4ZW5fZG9tY3RsX3Zpb21tdV9vcCAqb3ApOwo+PiAgaW50IHZp
+b21tdV9oYW5kbGVfaXJxX3JlcXVlc3QoY29uc3Qgc3RydWN0IGRvbWFpbiAqZCwKPj4gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCBhcmNoX2lycV9yZW1hcHBpbmdf
+cmVxdWVzdCAqcmVxdWVzdCk7Cj4+ICtpbnQgdmlvbW11X2dldF9pcnFfaW5mbyhjb25zdCBzdHJ1
+Y3QgZG9tYWluICpkLAo+PiArICAgICAgICAgICAgICAgICAgICAgICAgY29uc3Qgc3RydWN0IGFy
+Y2hfaXJxX3JlbWFwcGluZ19yZXF1ZXN0ICpyZXF1ZXN0LAo+Cj5XaHkgZG8geW91IG5lZWQgJ3Jl
+cXVlc3QnIGhlcmU/Cj4KCkEgcmVxdWVzdCBpcyBhIGFic3RyYWN0IG9mIGxlZ2FjeSBpbnRlcnJ1
+cHQgb3IgcmVtYXBwYWJsZSBpbnRlcnJ1cHQuCnZJT01NVSBjYW4gZGVsaXZlciBhIHJlcXVlc3Qg
+KG9yIGFuIGludGVycnVwdCkgdG8gdmxhcGljLiBJdCBhbHNvCmNhbiB0cmFuc2xhdGUgdGhlIHJl
+cXVlc3QgdG8gaW50ZXJydXB0IGF0dHJpYnV0ZXMgKHZlY3RvciwKZGVzdGluYXRpb24uLi4pIHdp
+dGggdGhlIGhlbHAgb2YgYW4gaW50ZXJydXB0IHJlbWFwcGluZyB0YWJsZS4KVGhpcyBmdW5jdGlv
+biBnZXRzIHRoZSBjb3JyZXNwb25kaW5nIGludGVycnVwdCBhdHRyaWJ1dGVzIG9mIHRoZSByZXF1
+ZXN0LgoKVGhhbmtzCkNoYW8KCj4+ICsgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgYXJj
+aF9pcnFfcmVtYXBwaW5nX2luZm8gKmlycV9pbmZvKTsKPj4gICNlbHNlCj4+ICBzdGF0aWMgaW5s
+aW5lIGludCB2aW9tbXVfZGVzdHJveV9kb21haW4oc3RydWN0IGRvbWFpbiAqZCkKPj4gIHsKPj4g
+LS0gCj4+IDEuOC4zLjEKPj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
