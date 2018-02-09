@@ -1,16 +1,19 @@
-From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v4 06/28] vtd: clean-up and preparation for
-	vvtd
-Date: Fri, 9 Feb 2018 15:17:59 +0000
-Message-ID: <20180209151759.kz6sgwadyhhcnxuq@MacBook-Pro-de-Roger.local>
-References: <1510899755-40237-1-git-send-email-chao.gao@intel.com>
- <1510899755-40237-7-git-send-email-chao.gao@intel.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: RTDS with extra time issue
+Date: Fri, 09 Feb 2018 16:18:47 +0100
+Message-ID: <1518189527.5019.28.camel@suse.com>
+References: <762ccb02-b758-1636-fddc-f4e6a3ca19d0@epam.com>
+ <1518182334.5019.15.camel@suse.com>
+ <39c08b88-c951-2779-34f6-31e4b6c0dd0f@epam.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7634168045984626239=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <1510899755-40237-7-git-send-email-chao.gao@intel.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=54lt=fd=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1ekASB-0000io-1E
+ for xen-devel@lists.xenproject.org; Fri, 09 Feb 2018 15:19:07 +0000
+In-Reply-To: <39c08b88-c951-2779-34f6-31e4b6c0dd0f@epam.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,39 +22,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Chao Gao <chao.gao@intel.com>
-Cc: Lan Tianyu <tianyu.lan@intel.com>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Andrii Anisov <andrii_anisov@epam.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Meng Xu <xumengpanda@gmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBOb3YgMTcsIDIwMTcgYXQgMDI6MjI6MTNQTSArMDgwMCwgQ2hhbyBHYW8gd3JvdGU6
-Cj4gVGhpcyBwYXRjaCBjb250YWlucyBmb2xsb3dpbmcgY2hhbmdlczoKPiAtIGFsaWduIHJlZ2lz
-dGVyIGRlZmluaXRpb25zCj4gLSB1c2UgTUFTS19FWFRSIHRvIGRlZmluZSBzb21lIG1hY3JvcyBh
-Ym91dCBleHRlbmRlZCBjYXBhYmlsaWVzCj4gcmF0aGVyIHRoYW4gb3Blbi1jb2RpbmcgdGhlIG1h
-c2tzCj4gLSBkZWZpbmUgZmllbGRzIG9mIEZFQ1RMIGFuZCBGRVNUUyBhcyB1aW50MzJfdCByYXRo
-ZXIgdGhhbiB1NjQgc2luY2UKPiBGRUNUTCBhbmQgRkVTVFMgYXJlIDMyIGJpdCByZWdpc3RlcnMu
-Cj4gCj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2VzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IENoYW8gR2Fv
-IDxjaGFvLmdhb0BpbnRlbC5jb20+Cj4gU2lnbmVkLW9mZi1ieTogTGFuIFRpYW55dSA8dGlhbnl1
-LmxhbkBpbnRlbC5jb20+CgpSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1
-QGNpdHJpeC5jb20+CgpKdXN0IG9uZSBuaXQuLi4KCj4gCj4gLS0tCj4gdjQ6Cj4gIC0gT25seSBm
-aXggdGhlIGFsaWdubWVudCBhbmQgZGVmZXIgaW50cm9kdWNpbmcgbmV3IGRlZmluaXRpb24gdG8g
-d2hlbgo+ICB0aGV5IGFyZSBuZWVkZWQKPiAgKFN1Z2dlc3RlZC1ieSBSb2dlciBQYXUgTW9ubsOp
-KQo+ICAtIHJlbW92ZSBwYXJ0cyBvZiBvcGVuLWNvZGVkIG1hc2tzCj4gdjM6Cj4gIC0gbmV3Cj4g
-LS0tCj4gIHhlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL3Z0ZC9pb21tdS5oIHwgODYgKysrKysrKysr
-KysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgNDggaW5zZXJ0
-aW9ucygrKSwgMzggZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9kcml2ZXJzL3Bh
-c3N0aHJvdWdoL3Z0ZC9pb21tdS5oIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2lvbW11
-LmgKPiBpbmRleCA3MmMxYTJlLi5kYjgwYjMxIDEwMDY0NAo+IC0tLSBhL3hlbi9kcml2ZXJzL3Bh
-c3N0aHJvdWdoL3Z0ZC9pb21tdS5oCj4gKysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRk
-L2lvbW11LmgKPiArI2RlZmluZSBETUFfRUNBUF9TTlBfQ1RMICAgICAgICAoKHVpbnQ2NF90KTEg
-PDwgNykKPiArI2RlZmluZSBETUFfRUNBUF9QQVNTX1RIUlUgICAgICAoKHVpbnQ2NF90KTEgPDwg
-NikKPiArI2RlZmluZSBETUFfRUNBUF9DQUNIRV9ISU5UUyAgICAoKHVpbnQ2NF90KTEgPDwgNSkK
-PiArI2RlZmluZSBETUFfRUNBUF9FSU0gICAgICAgICAgICAoKHVpbnQ2NF90KTEgPDwgNCkKPiAr
-I2RlZmluZSBETUFfRUNBUF9JTlRSX1JFTUFQICAgICAoKHVpbnQ2NF90KTEgPDwgMykKPiArI2Rl
-ZmluZSBETUFfRUNBUF9ERVZfSU9UTEIgICAgICAoKHVpbnQ2NF90KTEgPDwgMikKPiArI2RlZmlu
-ZSBETUFfRUNBUF9RVUVVRURfSU5WQUwgICAoKHVpbnQ2NF90KTEgPDwgMSkKPiArI2RlZmluZSBE
-TUFfRUNBUF9DT0hFUkVOVCAgICAgICAoKHVpbnQ2NF90KTEgPDwgMCkKCkkgdGhpbmsgdGhlIGdl
-bmVyYWwgcHJhY3RpY2UgaXMgdG8gdXNlIDFVTCAoYmVjYXVzZSBpdCdzIHNob3J0ZXIpLCBvcgox
-VSBmb3IgMzJiaXRzLgoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============7634168045984626239==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-s5SiZt6hSbqNzdXxiKhX"
+
+
+--=-s5SiZt6hSbqNzdXxiKhX
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-02-09 at 17:03 +0200, Andrii Anisov wrote:
+> > If DomR is not able to get its share, then we have an issue/bug in
+> > the
+> > scheduler. If it does, then the scheduler is doing its job, and the
+> > issue may be somewhere else (e.g., something inside the guest may
+> > eat
+> > some of the budget, in such a way that not all of it is available
+> > when
+> > you actually need it).
+>=20
+> The DomR guest is really lean, I already shown processes list in it.
+> I=20
+> really doubt init together with getty on HVC can eat another 10% of
+> CPU=20
+> at any moment.
+>=20
+So, I'm a little bit in a hurry now, and I'll reply better later (or on
+Monday). But for now, just to understand things better, can you enable
+extratime for DomR as well, and report what you see in xentop, and
+whether or not you still see deadline misses?
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-s5SiZt6hSbqNzdXxiKhX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlp9u9cACgkQFkJ4iaW4
+c+6PWQ//ZY8m4iwxwLKsxwgOztUSvxPO5s4+LwWPJtMtJTWMk22lS9YuOUa0B5az
+79eLn05Nmy1CFqVLLSC1/0pX3VnmPTNYcndOeB3mJgPtiwU9mG6DATS43Jl2+QUc
+yWPp/9Yhnoxsql3ZJ3Vg0Ghr3wVq2KnINFyEScD6a1HDZuKRzeKQ7PWEEjVhgF3l
+01nYtBEQfpBpnhi0c2s9cB6+FGhfqQ5Id6NW/xCkgQpahZ2RIOhreAe1H6qC8VsU
+RWY/n7ePQgl33nPLGA1/FB4O7Ur6qczc8yj3UxTyZJsmYEqV1z0dwm5jS+WpmMv2
+lHeXCHdZuTDchHCU8bFitxJccv0nN85SlGYnLtoo8pUR+MEoRNeB8NziMhZLlNt4
+dR4IrgamBb7IKcDyfeecrZONYZjkIuN9SD4YdXGNj1z3prYJohRKrvU0LlW805ga
+bjHqszxPeEU+AsE4HX4ldi0ISHccrvZ9RZB+XpNEK0xFB4j+X8EK347UTOAsV0M9
+kTyuTcJFditrVIr3Fk0TNWpubCqXsOzabKUBAYowkb9IjC27M0qpvriJuD91pFU/
+NF8PO0FqBTZsQyxyjlyRrFpiMT1ill+3Rw5rk/i77g7OHqLkYyrMOyuCQjilRo0D
+p51KS4YirkmaGSV6fmBBPAY6EPuzZHgEDG4xXK+4Nhl7JDT1dbY=
+=0jLx
+-----END PGP SIGNATURE-----
+
+--=-s5SiZt6hSbqNzdXxiKhX--
+
+
+
+--===============7634168045984626239==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7634168045984626239==--
