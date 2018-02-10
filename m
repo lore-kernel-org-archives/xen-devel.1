@@ -1,18 +1,16 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: Excited for Xen Project in Outreachy
-Date: Wed, 14 Feb 2018 14:45:21 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1802141036260.5392@sstabellini-ThinkPad-X260>
-References: <4C7AE15B-6A38-4D0B-8E31-2A13DAD04D71@citrix.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH v2 1/4] asm-x86/monitor: Enable svm monitor
+	events
+Date: Sat, 10 Feb 2018 11:30:16 -0500
+Message-ID: <072c38d6-3b5f-e744-7555-af98b85eb43f@oracle.com>
+References: <1518103552-4836-1-git-send-email-aisaila@bitdefender.com>
+ <1518103552-4836-2-git-send-email-aisaila@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1902870266-1518633483=:5392"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=gnfp=fi=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1em5np-00065f-TT
- for xen-devel@lists.xenproject.org; Wed, 14 Feb 2018 22:45:25 +0000
-In-Reply-To: <4C7AE15B-6A38-4D0B-8E31-2A13DAD04D71@citrix.com>
-Content-ID: <alpine.DEB.2.10.1802141442320.5392@sstabellini-ThinkPad-X260>
+In-Reply-To: <1518103552-4836-2-git-send-email-aisaila@bitdefender.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,106 +19,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, KANIKA SAINI <kanika16047@iiitd.ac.in>, "minios-devel@lists.xenproject.org" <minios-devel@lists.xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Simon Kuenzer <simon.kuenzer@neclab.eu>
+To: Alexandru Isaila <aisaila@bitdefender.com>, xen-devel@lists.xen.org
+Cc: andrew.cooper3@citrix.com, tamas@tklengyel.com, jbeulich@suse.com, suravee.suthikulpanit@amd.com, rcojocaru@bitdefender.com
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1902870266-1518633483=:5392
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1802141442321.5392@sstabellini-ThinkPad-X260>
-
-Hello Kanika,
-
-Thanks for your interest in Xen Project!
-One reply inline below.
-
-On Wed, 14 Feb 2018, Lars Kurth wrote:
-> Hi Kanika,
-> 
-> I CC'ed two lists and the mentors of projects. Thank you for your interest in the project.
-> 
-> > I seek guidance in choosing the suitable sub-project in Xen according to my skill set.
-> We have two sets of projects on https://www.outreachy.org/communities/cfp/xen-project/
-> * 3 around Unikraft (mentor: Simon the technical side, I on the process/people side). We are both based in UTC+1 - IRC is #unikraft
-> * 1 for Xen on ARM (mentors: Stefano & Edgar). Stefano is in UTC-8, Edgar is UTC-7 or 6 (can't quite recall) - IRC is #xendevel
-> 
-> > I wish to begin my contribution as soon as possible. I request you to connect me to the mentors in case IRC is not the best way to get in touch with them.
-> Simon is unfortunately not around this week but will be next week.
-> Stefano and Edgar, are around I believe
-> 
-> For practical reasons:
-> * Please sign up to the minios-devel@lists.xenproject.org or xen-devel@lists.xenproject.org (as appropriate)
->    (see http://lists.xenproject.org for instructions: if you use the "subscribe subject pattern" make sure you send the mail to minios-devel-request@lists.xenproject.org, ...) 
-> * Please double check time requirements: This is because in the past there frequently were issues with Outreachy and University course time requirements in particular with Universities from India. I believe that there will be extra checks later in the application process, which may require letters from your University. We had one case, where an applicant did a small project, but we were not allowed to accept her due to time requirements.
-> * Let us know timezone you are in and when you can hang out on IRC 
-> * Your registered IRC nickname (please register your nick - see https://www.xenproject.org/help/irc.html under Netiquette)
-> 
-> Note that my IRC nick is lars_kurth, Simon's is skuezer, Stefano's is sstabellini, and I am afraid I can't remember Edgar's
-> 
-> If you are interested in Unikraft
-> * Build the hello world unikraft app: see https://wiki.xenproject.org/wiki/Category:Unikraft & http://unikraft.neclab.eu/ and report back
-> * Familiarize yourself with the workflow at https://wiki.xenproject.org/wiki/Submitting_Xen_Project_Patches#How_to_Generate.2C_and_Submit_a_Xen_Project_Patch_to_MiniOS_and_Unikraft (please read the entire document) 
-> 
-> For the ARM project, I will let Stefano and Edgar decide.
-
-For the ARM project, it would be good to get familiar with Xen on ARM,
-to learn how to build it:
-
-https://wiki.xenproject.org/wiki/Xen_ARM_with_Virtualization_Extensions#Building_Xen_on_ARM
-
-and use QEMU to emulate an ARM board to run Xen on it, for testing and
-development:
-
-https://wiki.xenproject.org/wiki/Xen_ARM_with_Virtualization_Extensions/qemu-system-aarch64
-
-Feel free to ask any questions!
-
-
-> Regards
-> Lars
-> 
-> 
-> From: KANIKA SAINI <kanika16047@iiitd.ac.in>
-> Date: Wednesday, 14 February 2018 at 17:25
-> To: Lars Kurth <lars.kurth@citrix.com>
-> Subject: Excited for Xen Project in Outreachy
-> 
-> Greetings, Lars.
-> 
-> I'm Kanika Saini and I'm super excited to begin contributing to Xen!
-> 
-> I seek guidance in choosing the suitable sub-project in Xen according to my skill set. I'm currently pursuing a course in Operating Systems and hence, have been gaining knowledge in kernel programming by short assignments like the implementation of a system call. I'm familiar with assembly programming in MIPS, ARM and x86 as well. 
-> About high-level programming - I have experience with Java and have used it for desktop applications and parallel programming.
-> 
-> There are certain projects listed on the project page and I'm looking for mentors' suggestion on what could be the best for both me and Xen. I have introduced myself on the #unikraft channel and I'm expecting a reply from the community.
-> 
-> I wish to begin my contribution as soon as possible. I request you to connect me to the mentors in case IRC is not the best way to get in touch with them.
-> 
-> Thank you!
-> 
-> 
-> -- 
-> Yours sincerely,
-> Kanika Saini
-> CSE, IIITD Class of 2020
-> 
-> 
-> 
-> ‌
-> 
-> 
---8323329-1902870266-1518633483=:5392
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1902870266-1518633483=:5392--
+CgpPbiAwMi8wOC8yMDE4IDEwOjI1IEFNLCBBbGV4YW5kcnUgSXNhaWxhIHdyb3RlOgo+IFRoaXMg
+Y29tbWl0IHNlcGFyYXRlcyB0aGUgc3ZtIGNhcHMgZnJvbSB0aGUgdm14IGNhcHMuCj4gCj4gU2ln
+bmVkLW9mZi1ieTogQWxleGFuZHJ1IElzYWlsYSA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+Cj4g
+Cj4gLS0tCj4gQ2hhbmdlcyBzaW5jZSBWMToKPiAJLSBSZW1vdmVkIHRoZSBpZiAoIGNwdV9oYXNf
+c3ZtICkKPiAtLS0KPiAgIHhlbi9pbmNsdWRlL2FzbS14ODYvbW9uaXRvci5oIHwgMzQgKysrKysr
+KysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLQo+ICAgMSBmaWxlIGNoYW5nZWQsIDE5IGluc2Vy
+dGlvbnMoKyksIDE1IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9h
+c20teDg2L21vbml0b3IuaCBiL3hlbi9pbmNsdWRlL2FzbS14ODYvbW9uaXRvci5oCj4gaW5kZXgg
+YTA0NDRkMS4uYjJiNGU2YSAxMDA2NDQKPiAtLS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L21vbml0
+b3IuaAo+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvbW9uaXRvci5oCj4gQEAgLTcxLDI0ICs3
+MSwyOCBAQCBzdGF0aWMgaW5saW5lIHVpbnQzMl90IGFyY2hfbW9uaXRvcl9nZXRfY2FwYWJpbGl0
+aWVzKHN0cnVjdCBkb21haW4gKmQpCj4gICAgICAgdWludDMyX3QgY2FwYWJpbGl0aWVzID0gMDsK
+PiAgIAo+ICAgICAgIC8qCj4gLSAgICAgKiBBdCB0aGUgbW9tZW50IG9ubHkgSW50ZWwgSFZNIGRv
+bWFpbnMgYXJlIHN1cHBvcnRlZC4gSG93ZXZlciwgZXZlbnQKPiAtICAgICAqIGRlbGl2ZXJ5IGNv
+dWxkIGJlIGV4dGVuZGVkIHRvIEFNRCBhbmQgUFYgZG9tYWlucy4KPiArICAgICAqIEF0IHRoZSBt
+b21lbnQgb25seSBJbnRlbCBhbmQgQU1EIEhWTSBkb21haW5zIGFyZSBzdXBwb3J0ZWQuIEhvd2V2
+ZXIsIGV2ZW50Cj4gKyAgICAgKiBkZWxpdmVyeSBjb3VsZCBiZSBleHRlbmRlZCB0byBhbmQgUFYg
+ZG9tYWlucy4KPiAgICAgICAgKi8KPiAtICAgIGlmICggIWlzX2h2bV9kb21haW4oZCkgfHwgIWNw
+dV9oYXNfdm14ICkKPiArICAgIGlmICggIWlzX2h2bV9kb21haW4oZCkgKQo+ICAgICAgICAgICBy
+ZXR1cm4gY2FwYWJpbGl0aWVzOwo+ICAgCj4gLSAgICBjYXBhYmlsaXRpZXMgPSAoMVUgPDwgWEVO
+X0RPTUNUTF9NT05JVE9SX0VWRU5UX1dSSVRFX0NUUkxSRUcpIHwKPiAtICAgICAgICAgICAgICAg
+ICAgICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfTU9WX1RPX01TUikgfAo+IC0gICAg
+ICAgICAgICAgICAgICAgKDFVIDw8IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9TT0ZUV0FSRV9C
+UkVBS1BPSU5UKSB8Cj4gLSAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05J
+VE9SX0VWRU5UX0dVRVNUX1JFUVVFU1QpIHwKPiAtICAgICAgICAgICAgICAgICAgICgxVSA8PCBY
+RU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfREVCVUdfRVhDRVBUSU9OKSB8Cj4gLSAgICAgICAgICAg
+ICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0NQVUlEKSB8Cj4gLSAgICAg
+ICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0lOVEVSUlVQVCkg
+fAo+IC0gICAgICAgICAgICAgICAgICAgKDFVIDw8IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9F
+TVVMX1VOSU1QTEVNRU5URUQpOwo+IC0KPiAtICAgIC8qIFNpbmNlIHdlIGtub3cgdGhpcyBpcyBv
+biBWTVgsIHdlIGNhbiBqdXN0IGNhbGwgdGhlIGh2bSBmdW5jICovCj4gLSAgICBpZiAoIGh2bV9p
+c19zaW5nbGVzdGVwX3N1cHBvcnRlZCgpICkKPiAtICAgICAgICBjYXBhYmlsaXRpZXMgfD0gKDFV
+IDw8IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9TSU5HTEVTVEVQKTsKPiArICAgIGlmKCBjcHVf
+aGFzX3ZteCApCj4gKyAgICB7Cj4gKyAgICAgICAgY2FwYWJpbGl0aWVzID0gKDFVIDw8IFhFTl9E
+T01DVExfTU9OSVRPUl9FVkVOVF9XUklURV9DVFJMUkVHKSB8Cj4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgKDFVIDw8IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9NT1ZfVE9fTVNSKSB8Cj4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgKDFVIDw8IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9TT0ZU
+V0FSRV9CUkVBS1BPSU5UKSB8Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgKDFVIDw8IFhFTl9E
+T01DVExfTU9OSVRPUl9FVkVOVF9ERUJVR19FWENFUFRJT04pIHwKPiArICAgICAgICAgICAgICAg
+ICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0NQVUlEKSB8Cj4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgKDFVIDw8IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9JTlRFUlJV
+UFQpIHwKPiArICAgICAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9S
+X0VWRU5UX0VNVUxfVU5JTVBMRU1FTlRFRCk7Cj4gKwo+ICsgICAgICAgIC8qIFNpbmNlIHdlIGtu
+b3cgdGhpcyBpcyBvbiBWTVgsIHdlIGNhbiBqdXN0IGNhbGwgdGhlIGh2bSBmdW5jICovCj4gKyAg
+ICAgICAgaWYgKCBodm1faXNfc2luZ2xlc3RlcF9zdXBwb3J0ZWQoKSApCj4gKyAgICAgICAgICAg
+IGNhcGFiaWxpdGllcyB8PSAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX1NJTkdMRVNU
+RVApOwo+ICsgICAgfQo+ICsKPiArICAgIGNhcGFiaWxpdGllcyB8PSAoMVUgPDwgWEVOX0RPTUNU
+TF9NT05JVE9SX0VWRU5UX0dVRVNUX1JFUVVFU1QpOwoKCkl0J3MgYSBuaXQgYnV0IEknZCBzdGFy
+dCB3aXRoIHNldHRpbmcgY29tbW9uIG9wdGlvbnMgYW5kIHRoZSBPUiBpbiAKYXJjaC1zcGVjaWZp
+YyBvbmVzLiAoaS5lLiBtb3ZlIHRoZSBsaW5lIGFib3ZlIHRvIHJpZ2h0IGFmdGVyIAohaXNfaHZt
+X2RvbWFpbihkKSB0ZXN0KS4KCi1ib3JpcwoJCgoKPiAgIAo+ICAgICAgIGlmICggaHZtX2Z1bmNz
+LnNldF9kZXNjcmlwdG9yX2FjY2Vzc19leGl0aW5nICkKPiAgICAgICAgICAgY2FwYWJpbGl0aWVz
+IHw9ICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfREVTQ19BQ0NFU1MpOwo+IAoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
