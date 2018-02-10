@@ -1,23 +1,15 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: RTDS with extra time issue
-Date: Sat, 10 Feb 2018 01:14:12 +0100
-Message-ID: <1518221652.4261.33.camel@suse.com>
-References: <762ccb02-b758-1636-fddc-f4e6a3ca19d0@epam.com>
- <1518182334.5019.15.camel@suse.com>
- <39c08b88-c951-2779-34f6-31e4b6c0dd0f@epam.com>
- <1518189527.5019.28.camel@suse.com>
- <CAENZ-+n1y24akrJZvmkh1eh5exHhr3NQ+33PgjCvNKcFEb74EA@mail.gmail.com>
- <af089b54-1078-681b-430f-c4b2a1a7779d@epam.com>
- <CAENZ-+k547y9V8TCQ7YdYz4-E=TDQ04omtDfwT+zP6ezv6KL1g@mail.gmail.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable test] 118698: tolerable FAIL - PUSHED
+Date: Sat, 10 Feb 2018 00:33:00 +0000
+Message-ID: <osstest-118698-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5525032811399376183=="
+Content-Type: multipart/mixed; boundary="===============8066516110030702418=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=+mta=fe=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1ekIoS-0005Dw-R9
- for xen-devel@lists.xenproject.org; Sat, 10 Feb 2018 00:14:40 +0000
-In-Reply-To: <CAENZ-+k547y9V8TCQ7YdYz4-E=TDQ04omtDfwT+zP6ezv6KL1g@mail.gmail.com>
+ <srs0=varb=fe=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1ekJ6R-0006hR-0a
+ for xen-devel@lists.xenproject.org; Sat, 10 Feb 2018 00:33:15 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,102 +18,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Meng Xu <xumengpanda@gmail.com>, Andrii Anisov <andrii_anisov@epam.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
+--===============8066516110030702418==
+Content-Type: text/plain
 
---===============5525032811399376183==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-fzPnsdTR2Q73HfCb9YOS"
+flight 118698 xen-unstable real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/118698/
+
+Failures :-/ but no regressions.
+
+Regressions which are regarded as allowable (not blocking):
+ test-armhf-armhf-xl-rtds    16 guest-start/debian.repeat fail REGR. vs. 118607
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 118607
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 118607
+ test-amd64-amd64-xl-qemut-win7-amd64 17 guest-stop            fail like 118607
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 118607
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 118607
+ test-amd64-i386-xl-qemut-win7-amd64 17 guest-stop             fail like 118607
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 118607
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop             fail like 118607
+ test-amd64-amd64-xl-qemut-ws16-amd64 17 guest-stop            fail like 118607
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 118607
+ test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
+ test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
+ test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-amd64-i386-xl-qemut-ws16-amd64 17 guest-stop              fail never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+ test-amd64-amd64-xl-qemut-win10-i386 10 windows-install        fail never pass
+ test-amd64-i386-xl-qemut-win10-i386 10 windows-install         fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+
+version targeted for testing:
+ xen                  c93014ad3aa6aa88dfa5e96f66e8adb561483b8d
+baseline version:
+ xen                  1c3545eeaf4ac6f8d5db5a52c29c112694bcd4f0
+
+Last test of basis   118607  2018-02-06 05:47:11 Z    3 days
+Failing since        118622  2018-02-06 19:15:37 Z    3 days    4 attempts
+Testing same since   118698  2018-02-08 19:23:11 Z    1 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Christian Lindig <christian.lindig@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Michael Young <m.a.young@durham.ac.uk>
+  Olaf Hering <olaf@aepfle.de>
+  Razvan Cojocaru <rcojocaru@bitdefender.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Tamas K Lengyel <tamas@tklengyel.com>
+  Wei Liu <wei.liu2@citrix.com>
+  Zhongze Liu <blackskygg@gmail.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64-xtf                                              pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-prev                                             pass    
+ build-i386-prev                                              pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ build-amd64-rumprun                                          pass    
+ build-i386-rumprun                                           pass    
+ test-xtf-amd64-amd64-1                                       pass    
+ test-xtf-amd64-amd64-2                                       pass    
+ test-xtf-amd64-amd64-3                                       pass    
+ test-xtf-amd64-amd64-4                                       pass    
+ test-xtf-amd64-amd64-5                                       pass    
+ test-amd64-amd64-xl                                          pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-i386-qemut-rhel6hvm-amd                           pass    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64                     pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-rumprun-amd64                               pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-i386-xl-qemut-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemut-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     pass    
+ test-armhf-armhf-examine                                     pass    
+ test-amd64-i386-examine                                      pass    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-i386-rumprun-i386                                 pass    
+ test-amd64-amd64-xl-qemut-win10-i386                         fail    
+ test-amd64-i386-xl-qemut-win10-i386                          fail    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-i386-qemut-rhel6hvm-intel                         pass    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-livepatch                                   pass    
+ test-amd64-i386-livepatch                                    pass    
+ test-amd64-amd64-migrupgrade                                 pass    
+ test-amd64-i386-migrupgrade                                  pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     fail    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
 
---=-fzPnsdTR2Q73HfCb9YOS
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-On Fri, 2018-02-09 at 12:51 -0500, Meng Xu wrote:
-> > On 09.02.18 17:36, Meng Xu wrote:
-> > > Another way to check if there is interference from services in
-> > > domR is
-> > > to set period =3D budget for the domR's VCPUs.
-> >=20
-> > Could you please explain how setting budget equal to period would
-> > help
-> > discover any interferences from services in the domain?
-> >=20
-> Basically, setting period =3D budget is similar to what Dario suggests.
->
-The goal is to figure out where the problem is.
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-It looks like DomR's vCPU does get 50% of CPU time, so it's not that
-other vCPUs are preventing it to exploit all its own reservation. If
-that would have not been the case, there'd be a bug in the scheduler.
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-By giving the vCPU 100% (either via "budget =3D=3D period" or with
-extratime), we will figure out if the real-time applications inside can
-actually meet their deadline. If they can't even with such setup, it
-would mean the problem is somewhere else (virtualization overhead, IRQ
-latency, etc).
-
-If the applications can meet their deadline with 100% CPU time, but not
-with 50%, then there are two possibilities:
-1) they need more than 50%;
-2) you're having "period synchronization" issues, as Meng was
-describing.
-
-Figuring out if you're on 1, should be as easy as trying to five DomR
-55%, then 60%, then 65%, etc. And see when it happens that the deadline
-misses are gone forever and for good.
-
-If you can't get rid of deadline misses, it probably means you are in
-case 2, and you need to find a way to make sure that your real-time
-applications inside the domain are able to actually exploit the
-domain's vCPU's budget when it's there. I.e., you don't want them to
-activate when the budget is about to finish, and hence suffer from the
-"blackout" shown in Meng's diagram.
-
-Unfortunately, that's not really trivial to do. If the workload is
-really periodic, it may be enough to find a way to do some kind of
-"calibration" at the beginning. But I'm not sure how robust this will
-actually be.
-
-Perhaps Meng has some more ideas on this as well. :-)
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-fzPnsdTR2Q73HfCb9YOS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlp+OVQACgkQFkJ4iaW4
-c+7oNA/9EX4ZQwgaPvuRLvBVh4z3yoSMqWJqNPxfIAcfYtNg7aG5zwxwBloVKBJ4
-s3EAvIfJf0MhhF6pLjnjMTssL06UJCP4caxCXuTG956Eh6V4q4tFgiWEuKp8NJMB
-c8gepFal7bug3CtyMItuDJ7hhT3/567ERVO0qAxK+qZke9ix7pQ5HNpp2fzBmI+U
-friIimb4gdLgjpK4Ry/6LNVWh9hsVcsVyGaoSGXJLoECbBFL0hXjizxvfLZIimy6
-OCLK/3lwN6p4knHf2lLijp3hVUjs7PggYsOz/Az/rJsJt9GCyijdsEiDN5Q/NbIS
-lTa4qp6DyB+cqtrD8QbksbQNn8ICdvEoYUhlDU3V6DkFFr4yzyQes/2mqKTl44KI
-4iwmrslQ7/3+j7kCyNqYPQouHHJYP2mhmrQ/T4VCFF05HiPgQtF7Zc7AVntU9lLr
-ZGMulJtzyI/794pOuTr45XAkmVLVBLdKpJc5ROZuYOU/T8gLn96oTEc0LGjHGMLn
-DKap9nowZyFL/lxGC0ZxIJLjaoybeeH3BrKKqBgAfpFOB5BxBk5DfALnsRNn5BIg
-wIKh/ehHAF7P4B8tDKjSb1IHW3MHRILsqTQBXJqcKZAsUizT75No3VQPvovPtlnX
-Yfu49LdnP8eUTz8tyT32qDlR2awGntlwIQZdDIMWnz5CpTOHbJ8=
-=oXqb
------END PGP SIGNATURE-----
-
---=-fzPnsdTR2Q73HfCb9YOS--
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
+Pushing revision :
 
---===============5525032811399376183==
+To xenbits.xen.org:/home/xen/git/xen.git
+   1c3545eeaf..c93014ad3a  c93014ad3aa6aa88dfa5e96f66e8adb561483b8d -> master
+
+
+--===============8066516110030702418==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -131,4 +252,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5525032811399376183==--
+--===============8066516110030702418==--
