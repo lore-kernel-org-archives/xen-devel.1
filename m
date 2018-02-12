@@ -1,16 +1,23 @@
-From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v4 18/28] x86/vioapic: Hook interrupt
-	delivery of vIOAPIC
-Date: Mon, 12 Feb 2018 14:54:02 +0000
-Message-ID: <20180212145402.d4e4ttwb577ezuer@MacBook-Pro-de-Roger.local>
-References: <1510899755-40237-1-git-send-email-chao.gao@intel.com>
- <1510899755-40237-19-git-send-email-chao.gao@intel.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH 1/2] make xen ocaml safe-strings compliant
+Date: Mon, 12 Feb 2018 14:55:19 +0000
+Message-ID: <20180212145519.ovy6zfusvhsd24s7@citrix.com>
+References: <alpine.LFD.2.21.1801302254440.2952@austen3.home>
+ <1518112198.5629.68.camel@suse.com>
+ <20180208180348.moi3fujoq22fkkqg@citrix.com>
+ <20180208182400.g4qlkiaetnvqhuo6@citrix.com>
+ <EAB71B74-BDA5-49CD-9C55-6BB3BCDC3FB1@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=co21=fg=citrix.com=prvs=5740883f0=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1elFVv-0004Cp-3u
+ for xen-devel@lists.xenproject.org; Mon, 12 Feb 2018 14:55:27 +0000
 Content-Disposition: inline
-In-Reply-To: <1510899755-40237-19-git-send-email-chao.gao@intel.com>
+In-Reply-To: <EAB71B74-BDA5-49CD-9C55-6BB3BCDC3FB1@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,43 +26,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Chao Gao <chao.gao@intel.com>
-Cc: Lan Tianyu <tianyu.lan@intel.com>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Christian Lindig <christian.lindig@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, David Scott <dave@recoil.org>, John Thomson <git@johnthomson.fastmail.com.au>, Dario Faggioli <dfaggioli@suse.com>, Marcello Seri <marcello.seri@citrix.com>, Michael Young <m.a.young@durham.ac.uk>, Xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBOb3YgMTcsIDIwMTcgYXQgMDI6MjI6MjVQTSArMDgwMCwgQ2hhbyBHYW8gd3JvdGU6
-Cj4gV2hlbiBpcnEgcmVtYXBwaW5nIGlzIGVuYWJsZWQsIElPQVBJQyBSZWRpcmVjdGlvbiBFbnRy
-eSBtYXkgYmUgaW4gcmVtYXBwaW5nCj4gZm9ybWF0LiBJZiB0aGF0LCBnZW5lcmF0ZSBhbiBpcnFf
-cmVtYXBwaW5nX3JlcXVlc3QgYW5kIGNhbGwgdGhlIGNvbW1vbgoKIklmIHRoYXQncyB0aGUgY2Fz
-ZSwgLi4uIgoKPiBWSU9NTVUgYWJzdHJhY3Rpb24ncyBjYWxsYmFjayB0byBoYW5kbGUgdGhpcyBp
-bnRlcnJ1cHQgcmVxdWVzdC4gRGV2aWNlCj4gbW9kZWwgaXMgcmVzcG9uc2libGUgZm9yIGNoZWNr
-aW5nIHRoZSByZXF1ZXN0J3MgdmFsaWRpdHkuCgpXaGF0IGRvZXMgdGhpcyBleGFjdGx5IG1lYW4/
-IERldmljZSBtb2RlbCBpcyBub3QgaW52b2x2ZWQgaW4gd2hhdCB0aGUKZ3Vlc3Qgd3JpdGVzIHRv
-IHRoZSB2SU9BUElDIFJURSwgc28gaXQncyBpbXBvc3NpYmxlIGZvciB0aGUgZGV2aWNlCm1vZGVs
-IHRvIHZhbGlkYXRlIHRoaXMgaW4gYW55IHdheS4KCj4gU2lnbmVkLW9mZi1ieTogQ2hhbyBHYW8g
-PGNoYW8uZ2FvQGludGVsLmNvbT4KPiBTaWduZWQtb2ZmLWJ5OiBMYW4gVGlhbnl1IDx0aWFueXUu
-bGFuQGludGVsLmNvbT4KPiAKPiAtLS0KPiB2MzoKPiAgLSB1c2UgdGhlIG5ldyBpbnRlcmZhY2Ug
-dG8gY2hlY2sgcmVtYXBwaW5nIGZvcm1hdC4KPiAtLS0KPiAgeGVuL2FyY2gveDg2L2h2bS92aW9h
-cGljLmMgICB8IDkgKysrKysrKysrCj4gIHhlbi9pbmNsdWRlL2FzbS14ODYvdmlvbW11LmggfCA5
-ICsrKysrKysrKwo+ICAyIGZpbGVzIGNoYW5nZWQsIDE4IGluc2VydGlvbnMoKykKPiAKPiBkaWZm
-IC0tZ2l0IGEveGVuL2FyY2gveDg2L2h2bS92aW9hcGljLmMgYi94ZW4vYXJjaC94ODYvaHZtL3Zp
-b2FwaWMuYwo+IGluZGV4IDk3YjQxOWYuLjBmMjBlM2YgMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gv
-eDg2L2h2bS92aW9hcGljLmMKPiArKysgYi94ZW4vYXJjaC94ODYvaHZtL3Zpb2FwaWMuYwo+IEBA
-IC0zMCw2ICszMCw3IEBACj4gICNpbmNsdWRlIDx4ZW4vbGliLmg+Cj4gICNpbmNsdWRlIDx4ZW4v
-ZXJybm8uaD4KPiAgI2luY2x1ZGUgPHhlbi9zY2hlZC5oPgo+ICsjaW5jbHVkZSA8eGVuL3Zpb21t
-dS5oPgo+ICAjaW5jbHVkZSA8cHVibGljL2h2bS9pb3JlcS5oPgo+ICAjaW5jbHVkZSA8YXNtL2h2
-bS9pby5oPgo+ICAjaW5jbHVkZSA8YXNtL2h2bS92cGljLmg+Cj4gQEAgLTM4Nyw5ICszODgsMTcg
-QEAgc3RhdGljIHZvaWQgdmlvYXBpY19kZWxpdmVyKHN0cnVjdCBodm1fdmlvYXBpYyAqdmlvYXBp
-YywgdW5zaWduZWQgaW50IHBpbikKPiAgICAgIHN0cnVjdCB2bGFwaWMgKnRhcmdldDsKPiAgICAg
-IHN0cnVjdCB2Y3B1ICp2Owo+ICAgICAgdW5zaWduZWQgaW50IGlycSA9IHZpb2FwaWMtPmJhc2Vf
-Z3NpICsgcGluOwo+ICsgICAgc3RydWN0IGFyY2hfaXJxX3JlbWFwcGluZ19yZXF1ZXN0IHJlcXVl
-c3Q7Cj4gIAo+ICAgICAgQVNTRVJUKHNwaW5faXNfbG9ja2VkKCZkLT5hcmNoLmh2bV9kb21haW4u
-aXJxX2xvY2spKTsKPiAgCj4gKyAgICBpcnFfcmVxdWVzdF9pb2FwaWNfZmlsbCgmcmVxdWVzdCwg
-dmlvYXBpYy0+aWQsIHZpb2FwaWMtPnJlZGlydGJsW3Bpbl0uYml0cyk7Cj4gKyAgICBpZiAoIHZp
-b21tdV9jaGVja19pcnFfcmVtYXBwaW5nKGQsICZyZXF1ZXN0KSApCj4gKyAgICB7Cj4gKyAgICAg
-ICAgdmlvbW11X2hhbmRsZV9pcnFfcmVxdWVzdChkLCAmcmVxdWVzdCk7Cj4gKyAgICAgICAgcmV0
-dXJuOwo+ICsgICAgfQoKV2lsbCB0aGlzIGNvbXBpbGUgaWYgeW91IGRpc2FibGUgdklPTU1VIGlu
-IEtjb25maWc/CgpSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+T24gRnJpLCBGZWIgMDksIDIwMTggYXQgMDk6MjA6MzNBTSArMDAwMCwgQ2hyaXN0aWFuIExpbmRp
+ZyB3cm90ZToKPiAKPiAKPiA+IE9uIDguIEZlYiAyMDE4LCBhdCAxODoyNCwgV2VpIExpdSA8d2Vp
+LmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4gPiAKPiA+IENocmlzdGlhbiwgZG8geW91IGhhdmUg
+YW55IGlkZWEgd2hlbiB5b3UgY2FuIGxvb2sgaW50byBmaXhpbmcgdGhlCj4gPiBzYWZlLXN0cmlu
+ZyBwYXRjaD8KPiAKPiBTb3JyeSwgSSBjYW7igJl0IG1ha2UgYSBwcm9taXNlIGJlY2F1c2Ugb2Yg
+bXkgb3RoZXIgb2JsaWdhdGlvbnMuIEkgZG8gd29uZGVyLCB0aG91Z2g6IHRoaXMgcGF0Y2ggZGlk
+IG5vdCBjb21lIG91dCBvZiBub3doZXJlIGJ1dCBzdXBwb3NlZGx5IHdhcyB3b3JraW5nIC0gd2hh
+dCBpcyBkaWZmZXJlbnQgaGVyZT8KPiAKCk5vIHdvcnJpZXMuIEkgaGF2ZSByZXZlcnRlZCBzb21l
+IHBhdGNoZXMgaW4geGVuLmdpdCB0byBnZXQgdGhpbmdzIGdvaW5nCmFnYWluLgoKV2VpLgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
