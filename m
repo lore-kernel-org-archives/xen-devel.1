@@ -1,19 +1,16 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: Xen ARM community call Tuesday 13th February 5PM UTC
-Date: Mon, 12 Feb 2018 19:14:51 +0000
-Message-ID: <60143765-a7a4-3984-5f01-338712612a3e@arm.com>
-References: <1cd12995-d888-9de8-e273-5adaf562156f@arm.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xtf test] 119006: all pass - PUSHED
+Date: Mon, 12 Feb 2018 19:39:33 +0000
+Message-ID: <osstest-119006-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=6g8c=fg=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1elJZ4-0003KF-OO
- for xen-devel@lists.xenproject.org; Mon, 12 Feb 2018 19:14:58 +0000
-In-Reply-To: <1cd12995-d888-9de8-e273-5adaf562156f@arm.com>
-Content-Language: en-US
+ <srs0=lzgp=fg=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1elJx6-0004y1-FA
+ for xen-devel@lists.xenproject.org; Mon, 12 Feb 2018 19:39:48 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,19 +19,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel <xen-devel@lists.xenproject.org>, Lars Kurth <lars.kurth@citrix.com>, "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, anastassios.nanos@onapp.com, vfachin@de.adit-jv.com, Jarvis Roach <Jarvis.Roach@dornerworks.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Artem Mygaiev <Artem_Mygaiev@epam.com>, mirela.simonovic@aggios.com, davorin.mista@aggios.com, robin.randhawa@arm.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgYWxsLAoKUXVpY2sgcmVtaW5kZXIsIHRoZSBtZWV0aW5nIHdpbGwgYmUgdG9tb3Jyb3cgKFR1
-ZXNkYXkgMTN0aCBGZWJydWFyeSkgYXQgCjVQTSBVVEMuIFdlIHdpbGwgdXNlIHViZXJjb25mZXJl
-bmNlIGZvciB0aGUgbWVldGluZzoKCiAgIEpvaW4gdGhlIGNhbGw6IGh0dHBzOi8vd3d3LnViZXJj
-b25mZXJlbmNlLmNvbS9zdGVmYW5vLXN0YWJlbGxpbmkKICAgT3B0aW9uYWwgZGlhbCBpbiBudW1i
-ZXI6IDY2OS05OTktMDYxMwogICBObyBQSU4gbmVlZGVkCgpDaGVlcnMsCgpPbiAwNi8wMi8xOCAx
-MDoxMSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIGFsbCwKPiAKPiBJIHdvdWxkIHN1Z2dlc3Qg
-dG8gaGF2ZSB0aGUgbmV4dCBjb21tdW5pdHkgY2FsbCBvbiBUdWVzZGF5IDEzdGggRmVicnVhcnkg
-Cj4gNXBtIEdNVC4gRG9lcyBpdCBzb3VuZCBnb29kPwo+IAo+IERvIHlvdSBoYXZlIGFueSBzcGVj
-aWZpYyB0b3BpYyB5b3Ugd291bGQgbGlrZSB0byBkaXNjdXNzPwo+IAo+IENoZWVycywKPiAKCi0t
-IApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+ZmxpZ2h0IDExOTAwNiB4dGYgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJv
+amVjdC5vcmcvb3NzdGVzdC9sb2dzLzExOTAwNi8KClBlcmZlY3QgOi0pCkFsbCB0ZXN0cyBpbiB0
+aGlzIGZsaWdodCBwYXNzZWQgYXMgcmVxdWlyZWQKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGlu
+ZzoKIHh0ZiAgICAgICAgICAgICAgICAgIGEwOGRmMjI3OGJlMWE4ZDViNjc3ZjBiYTc4ZTEzY2Ey
+MGFlMTQxZjgKYmFzZWxpbmUgdmVyc2lvbjoKIHh0ZiAgICAgICAgICAgICAgICAgIDllZWIyNmYz
+ZmFlYjI1OTI1YzBjZmRlOWVjMTg1NzFmZGJmYmU0ZmEKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEx
+ODQ4NCAgMjAxOC0wMS0zMSAxMjoxODo1MCBaICAgMTIgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2Ug
+ICAxMTkwMDYgIDIwMTgtMDItMTIgMTU6MTU6NTAgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoK
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbmRyZXcgQ29v
+cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXh0ZiAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
+bGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHBhc3MgICAgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTEgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1k
+NjQtMiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
+LXh0Zi1hbWQ2NC1hbWQ2NC0zICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTQgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtNSAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGln
+aHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xv
+Z3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFy
+ZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29z
+c3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3Qg
+aW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9z
+c3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5i
+aXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0
+ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMu
+eGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9u
+IDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94ZW4vZ2l0L3h0Zi5naXQKICAgOWVlYjI2Zi4u
+YTA4ZGYyMiAgYTA4ZGYyMjc4YmUxYThkNWI2NzdmMGJhNzhlMTNjYTIwYWUxNDFmOCAtPiB4ZW4t
+dGVzdGVkLW1hc3RlcgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
