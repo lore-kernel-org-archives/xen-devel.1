@@ -1,24 +1,17 @@
-From: Andre Przywara <andre.przywara@linaro.org>
-Subject: Re: [RFC PATCH 15/49] ARM: GIC: Allow tweaking the
- active state of an IRQ
-Date: Mon, 12 Feb 2018 17:53:48 +0000
-Message-ID: <bf3229cb-f148-f66a-2217-070ade7f5652@linaro.org>
-References: <20180209143937.28866-1-andre.przywara@linaro.org>
- <20180209143937.28866-16-andre.przywara@linaro.org>
- <b883720b-e1e3-f574-72c7-210e0940fb9d@arm.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH v3 00/17] Alternative Meltdown mitigation
+Date: Mon, 12 Feb 2018 18:54:16 +0100
+Message-ID: <1518458056.3682.42.camel@suse.com>
+References: <20180209140151.24714-1-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1768507722525176693=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=kmxx=fg=linaro.org=andre.przywara@srs-us1.protection.inumbo.net>)
- id 1elIIf-0004OU-7G
- for xen-devel@lists.xenproject.org; Mon, 12 Feb 2018 17:53:57 +0000
-Received: by mail-wr0-x22a.google.com with SMTP id 33so2105939wro.2
- for <xen-devel@lists.xenproject.org>; Mon, 12 Feb 2018 09:53:55 -0800 (PST)
-In-Reply-To: <b883720b-e1e3-f574-72c7-210e0940fb9d@arm.com>
-Content-Language: en-GB
+ <srs0=qkv9=fg=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1elIJB-0004UF-L1
+ for xen-devel@lists.xenproject.org; Mon, 12 Feb 2018 17:54:29 +0000
+In-Reply-To: <20180209140151.24714-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,129 +20,236 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com, jbeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAxMi8wMi8xOCAxMzo1NSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIEFuZHJlLAo+
-IAo+IE9uIDA5LzAyLzE4IDE0OjM5LCBBbmRyZSBQcnp5d2FyYSB3cm90ZToKPj4gV2hlbiBwbGF5
-aW5nIGFyb3VuZCB3aXRoIGhhcmR3YXJlIG1hcHBlZCwgbGV2ZWwgdHJpZ2dlcmVkIHZpcnR1YWwg
-SVJRcywKPj4gdGhlcmUgaXMgdGhlIG5lZWQgdG8gZXhwbGljaXRseSBzZXQgdGhlIGFjdGl2ZSBz
-dGF0ZSBvZiBhbiBpbnRlcnJ1cHQgYXQKPj4gc29tZSBwb2ludCBpbiB0aW1lLgo+PiBUbyBwcmVw
-YXJlIHRoZSBHSUMgZm9yIHRoYXQsIHdlIGludHJvZHVjZSBhIHNldF9hY3RpdmVfc3RhdGUoKSBm
-dW5jdGlvbgo+PiB0byBsZXQgdGhlIFZHSUMgbWFuaXB1bGF0ZSB0aGUgc3RhdGUgb2YgYW4gYXNz
-b2NpYXRlZCBoYXJkd2FyZSBJUlEuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IEFuZHJlIFByenl3YXJh
-IDxhbmRyZS5wcnp5d2FyYUBsaW5hcm8ub3JnPgo+PiAtLS0KPj4gwqAgeGVuL2FyY2gvYXJtL2dp
-Yy12Mi5jwqDCoMKgwqAgfMKgIDkgKysrKysrKysrCj4+IMKgIHhlbi9hcmNoL2FybS9naWMtdjMu
-Y8KgwqDCoMKgIHwgMTYgKysrKysrKysrKysrKysrKwo+PiDCoCB4ZW4vYXJjaC9hcm0vZ2ljLmPC
-oMKgwqDCoMKgwqDCoCB8wqAgNSArKysrKwo+PiDCoCB4ZW4vaW5jbHVkZS9hc20tYXJtL2dpYy5o
-IHzCoCA1ICsrKysrCj4+IMKgIDQgZmlsZXMgY2hhbmdlZCwgMzUgaW5zZXJ0aW9ucygrKQo+Pgo+
-PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2dpYy12Mi5jIGIveGVuL2FyY2gvYXJtL2dpYy12
-Mi5jCj4+IGluZGV4IDJlMzU4OTI4ODEuLjUzMzlmNjlmYmMgMTAwNjQ0Cj4+IC0tLSBhL3hlbi9h
-cmNoL2FybS9naWMtdjIuYwo+PiArKysgYi94ZW4vYXJjaC9hcm0vZ2ljLXYyLmMKPj4gQEAgLTIz
-NSw2ICsyMzUsMTQgQEAgc3RhdGljIHVuc2lnbmVkIGludCBnaWN2Ml9yZWFkX2lycSh2b2lkKQo+
-PiDCoMKgwqDCoMKgIHJldHVybiAocmVhZGxfZ2ljYyhHSUNDX0lBUikgJiBHSUNDX0lBX0lSUSk7
-Cj4+IMKgIH0KPj4gwqAgK3N0YXRpYyB2b2lkIGdpY3YyX3NldF9hY3RpdmVfc3RhdGUoaW50IGly
-cSwgYm9vbCBhY3RpdmUpCj4gCj4gSSB3b3VsZCBtdWNoIHByZWZlciB0byBoYXZlIGFuIGlycV9k
-ZXNjIGluIHBhcmFtZXRlci4gVGhpcyBpcyBtYXRjaGluZwo+IHRoZSBvdGhlciBpbnRlcmZhY2Ug
-CgouLi4gYW5kIHRoYXQncyB3aHkgSSBoYWQgaXQganVzdCBsaWtlIHRoaXMgaW4gbXkgZmlyc3Qg
-dmVyc2lvbi4gSG93ZXZlcgp0aGlzIHByb3ZlZCB0byBiZSBuYXN0eSBiZWNhdXNlIEkgbm93IG5l
-ZWQgdG8gZ2V0IHRoaXMgaXJxX2Rlc2MgcG9pbnRlcgpmaXJzdCwgYXMgdGhlIGNhbGxlciBkb2Vz
-bid0IGhhdmUgaXQgYWxyZWFkeS4gU2luY2UgYWxsIHdlIGhhdmUgYW5kIG5lZWQKaXMgdGhlIGFj
-dHVhbCBoYXJkd2FyZSBJUlEgbnVtYmVyLCBJIGZvdW5kIGl0IG1vcmUgc3RyYWlnaHQtZm9yd2Fy
-ZCB0bwpqdXN0IHVzZSB0aGF0IG51bWJlciBkaXJlY3RseSBpbnN0ZWFkIG9mIGdvaW5nIHZpYSB0
-aGUgcG9pbnRlciBhbmQgYmFjawooaC93IGludGlkID0+IGlycV9kZXNjID0+IGlycSkuCgo+IGFu
-ZCB5b3UgY291bGQgdXBkYXRlIHRoZSBmbGFncyBzdWNoIGFzCj4gX0lSUV9JTlBST0dSRVNTIHdo
-aWNoIHlvdSBkb24ndCBkbyBhdCB0aGUgbW9tZW50LgoKTW1oLCBpbnRlcmVzdGluZyBwb2ludC4g
-SSBndWVzcyBJIHNob3VsZCBhbHNvIGNsZWFyIHRoaXMgYml0IGluIHRoZSBuZXcKVkdJQy4gQXQg
-bGVhc3Qgb25jZSBJIHdyYXBwZWQgbXkgaGVhZCBhcm91bmQgd2hhdCB0aGlzIGZsYWcgaXMKKmFj
-dHVhbGx5KiBmb3IgKGluIGNvbmp1bmN0aW9uIHdpdGggX0lSUV9HVUVTVCkuCkFueXdheSBJIGd1
-ZXNzIHRoaXMgYml0IHdvdWxkIHN0aWxsIGJlIHNldCBpbiBvdXIgY2FzZS4KCj4gQWxzbywgd2hv
-IGlzIHByZXZlbnRpbmcgdHdvIENQVXMgdG8gY2xlYXIgdGhlIGFjdGl2ZSBiaXQgYXQgdGhlIHNh
-bWUgdGltZT8KCkEgY2VydGFpbiBoYXJkd2FyZSBJUlEgaXMgYXNzaWduZWQgdG8gb25lIHZpcnR1
-YWwgSVJRIG9uIG9uZSBWQ1BVIGF0IG9uZQp0aW1lIG9ubHkuIEJlc2lkZXMsIEdJQ0RfSUNBQ1RJ
-VkVSbiBoYXMgd2lyZWQgTkFORCBzZW1hbnRpY3MsIHNvIHRoYXQncwpuYXR1cmFsbHkgcmFjZSBm
-cmVlIChhcyBpdCB3YXMgZGVzaWduZWQgdG8gYmUpLgpVbmxlc3MgSSBtaXNzIHNvbWV0aGluZyBo
-ZXJlIChoYXBweSB0byBiZSBwb2ludGVkIHRvIGFuIGV4YW1wbGUgd2hlcmUgaXQKY2F1c2VzIHBy
-b2JsZW1zKS4KCj4+ICt7Cj4+ICvCoMKgwqAgaWYgKGFjdGl2ZSkKPj4gK8KgwqDCoMKgwqDCoMKg
-IHdyaXRlbF9naWNkKDFVIDw8IChpcnEgJSAzMiksIEdJQ0RfSVNBQ1RJVkVSICsgKGlycSAvIDMy
-KSAqIDQpOwo+PiArwqDCoMKgIGVsc2UKPj4gK8KgwqDCoMKgwqDCoMKgIHdyaXRlbF9naWNkKDFV
-IDw8IChpcnEgJSAzMiksIEdJQ0RfSUNBQ1RJVkVSICsgKGlycSAvIDMyKSAqIDQpOwo+IAo+IFlv
-dSB3aWxsIGhhdmUgYSBmZXcgcGxhY2VzIGluIHRoZSBjb2RlIHVzdWFsbHkgc2ltaWxhciBjb25z
-dHJ1Y3QuIEl0Cj4gd291bGQgbWFrZSBzZW5zZSB0byBpbnRyb2R1Y2UgYSBoZWxwZXIgcG9rZSBh
-cyB3ZSBoYXZlIGluIHRoZSBHSUN2MyBjb2RlLgoKU3VyZS4KCj4+ICt9Cj4+ICsKPj4gwqAgc3Rh
-dGljIHZvaWQgZ2ljdjJfc2V0X2lycV90eXBlKHN0cnVjdCBpcnFfZGVzYyAqZGVzYywgdW5zaWdu
-ZWQgaW50Cj4+IHR5cGUpCj4+IMKgIHsKPj4gwqDCoMKgwqDCoCB1aW50MzJfdCBjZmcsIGFjdHVh
-bCwgZWRnZWJpdDsKPj4gQEAgLTEyNDEsNiArMTI0OSw3IEBAIGNvbnN0IHN0YXRpYyBzdHJ1Y3Qg
-Z2ljX2h3X29wZXJhdGlvbnMgZ2ljdjJfb3BzID0gewo+PiDCoMKgwqDCoMKgIC5lb2lfaXJxwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgID0gZ2ljdjJfZW9pX2lycSwKPj4gwqDCoMKgwqDCoCAuZGVh
-Y3RpdmF0ZV9pcnHCoMKgwqDCoMKgID0gZ2ljdjJfZGlyX2lycSwKPj4gwqDCoMKgwqDCoCAucmVh
-ZF9pcnHCoMKgwqDCoMKgwqDCoMKgwqDCoMKgID0gZ2ljdjJfcmVhZF9pcnEsCj4+ICvCoMKgwqAg
-LnNldF9hY3RpdmVfc3RhdGXCoMKgwqAgPSBnaWN2Ml9zZXRfYWN0aXZlX3N0YXRlLAo+PiDCoMKg
-wqDCoMKgIC5zZXRfaXJxX3R5cGXCoMKgwqDCoMKgwqDCoCA9IGdpY3YyX3NldF9pcnFfdHlwZSwK
-Pj4gwqDCoMKgwqDCoCAuc2V0X2lycV9wcmlvcml0ecKgwqDCoCA9IGdpY3YyX3NldF9pcnFfcHJp
-b3JpdHksCj4+IMKgwqDCoMKgwqAgLnNlbmRfU0dJwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA9IGdp
-Y3YyX3NlbmRfU0dJLAo+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2dpYy12My5jIGIveGVu
-L2FyY2gvYXJtL2dpYy12My5jCj4+IGluZGV4IDA4ZDQ3MDM2ODcuLjU5NWVhZWY0M2EgMTAwNjQ0
-Cj4+IC0tLSBhL3hlbi9hcmNoL2FybS9naWMtdjMuYwo+PiArKysgYi94ZW4vYXJjaC9hcm0vZ2lj
-LXYzLmMKPj4gQEAgLTQ3NSw2ICs0NzUsMjEgQEAgc3RhdGljIHVuc2lnbmVkIGludCBnaWN2M19y
-ZWFkX2lycSh2b2lkKQo+PiDCoMKgwqDCoMKgIHJldHVybiBpcnE7Cj4+IMKgIH0KPj4gwqAgK3N0
-YXRpYyB2b2lkIGdpY3YzX3NldF9hY3RpdmVfc3RhdGUoaW50IGlycSwgYm9vbCBhY3RpdmUpCj4+
-ICt7Cj4+ICvCoMKgwqAgdm9pZCBfX2lvbWVtICpiYXNlOwo+PiArCj4+ICvCoMKgwqAgaWYgKCBp
-cnEgPj0gTlJfR0lDX0xPQ0FMX0lSUVMpCj4+ICvCoMKgwqDCoMKgwqDCoCBiYXNlID0gR0lDRCAr
-IChpcnEgLyAzMikgKiA0Owo+PiArwqDCoMKgIGVsc2UKPj4gK8KgwqDCoMKgwqDCoMKgIGJhc2Ug
-PSBHSUNEX1JESVNUX1NHSV9CQVNFOwo+PiArCj4+ICvCoMKgwqAgaWYgKCBhY3RpdmUgKQo+PiAr
-wqDCoMKgwqDCoMKgwqAgd3JpdGVsKDFVIDw8IChpcnEgJSAzMiksIGJhc2UgKyBHSUNEX0lTQUNU
-SVZFUik7Cj4+ICvCoMKgwqAgZWxzZQo+PiArwqDCoMKgwqDCoMKgwqAgd3JpdGVsKDFVIDw8IChp
-cnEgJSAzMiksIGJhc2UgKyBHSUNEX0lDQUNUSVZFUik7Cj4gCj4gU2hvdWxkbid0IHlvdSB3YWl0
-IHVudGlsIFJXUCBiaXRzIGlzIGNsZWFyZWQgaGVyZT8KCkkgZG9uJ3Qgc2VlIHdoeS4gSSB0aGlu
-ayB0aGlzIGFjdGlvbiBoYXMgc29tZSBwb3N0ZWQgc2VtYW50aWNzIGFueXdheSwKc28gbm8gbmVl
-ZCBmb3IgYW55IHN5bmNocm9uaXNhdGlvbi4gQW5kIGFsc28gUldQIGRvZXMgbm90IHRyYWNrCklb
-U0NdQUNUSVZFUiwgb25seSBJQ0VOQUJMRVIgYW5kIHNvbWUgQ1RMUiBiaXRzIChBUk0gSUhJIDAw
-NjlELCA4LjkuNDoKUldQWzMxXSkuCgo+IAo+PiArfQo+IAo+IFdoeSBkb24ndCB5b3UgdXNlIHRo
-ZSBmdW5jdGlvbiBwb2tlPwoKQWgsIEkgZGlkbid0IHNlZSB0aGlzLiBCdXQgdGhlbiB0aGlzIG5v
-dyBkb2VzIHRoaXMgcXVpdGUgY29zdGx5IFJXUApkYW5jZSBub3cuIFdlIGNvdWxkIGFkZCBhIGNo
-ZWNrIGluIHRoZXJlIHRvIG9ubHkgZG8gdGhpcyBpZiB3ZSBjaGFuZ2UKdGhlIGFmZmVjdGVkIHJl
-Z2lzdGVycyBvciBwYXNzIGFuIGV4cGxpY2l0ICJib29sIHdhaXRfZm9yX3J3cCIgaW4gdGhlcmUu
-CgpUaGFua3MgZm9yIHN0YXlpbmcgYXdha2Ugb24gdGhpcyA7LSkKCkNoZWVycywKQW5kcmUuCgo+
-PiArCj4+IMKgIHN0YXRpYyBpbmxpbmUgdWludDY0X3QgZ2ljdjNfbXBpZHJfdG9fYWZmaW5pdHko
-aW50IGNwdSkKPj4gwqAgewo+PiDCoMKgwqDCoMKgwqAgdWludDY0X3QgbXBpZHIgPSBjcHVfbG9n
-aWNhbF9tYXAoY3B1KTsKPj4gQEAgLTE3MjIsNiArMTczNyw3IEBAIHN0YXRpYyBjb25zdCBzdHJ1
-Y3QgZ2ljX2h3X29wZXJhdGlvbnMgZ2ljdjNfb3BzID0gewo+PiDCoMKgwqDCoMKgIC5lb2lfaXJx
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgID0gZ2ljdjNfZW9pX2lycSwKPj4gwqDCoMKgwqDCoCAu
-ZGVhY3RpdmF0ZV9pcnHCoMKgwqDCoMKgID0gZ2ljdjNfZGlyX2lycSwKPj4gwqDCoMKgwqDCoCAu
-cmVhZF9pcnHCoMKgwqDCoMKgwqDCoMKgwqDCoMKgID0gZ2ljdjNfcmVhZF9pcnEsCj4+ICvCoMKg
-wqAgLnNldF9hY3RpdmVfc3RhdGXCoMKgwqAgPSBnaWN2M19zZXRfYWN0aXZlX3N0YXRlLAo+PiDC
-oMKgwqDCoMKgIC5zZXRfaXJxX3R5cGXCoMKgwqDCoMKgwqDCoCA9IGdpY3YzX3NldF9pcnFfdHlw
-ZSwKPj4gwqDCoMKgwqDCoCAuc2V0X2lycV9wcmlvcml0ecKgwqDCoCA9IGdpY3YzX3NldF9pcnFf
-cHJpb3JpdHksCj4+IMKgwqDCoMKgwqAgLnNlbmRfU0dJwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA9
-IGdpY3YzX3NlbmRfc2dpLAo+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2dpYy5jIGIveGVu
-L2FyY2gvYXJtL2dpYy5jCj4+IGluZGV4IDg5ODczYzFkZjQuLmRmYzIxMDhjNGQgMTAwNjQ0Cj4+
-IC0tLSBhL3hlbi9hcmNoL2FybS9naWMuYwo+PiArKysgYi94ZW4vYXJjaC9hcm0vZ2ljLmMKPj4g
-QEAgLTkyLDYgKzkyLDExIEBAIHZvaWQgZ2ljX3Jlc3RvcmVfc3RhdGUoc3RydWN0IHZjcHUgKnYp
-Cj4+IMKgwqDCoMKgwqAgaXNiKCk7Cj4+IMKgIH0KPj4gwqAgK3ZvaWQgZ2ljX3NldF9hY3RpdmVf
-c3RhdGUoaW50IGlycSwgYm9vbCBzdGF0ZSkKPj4gK3sKPj4gK8KgwqDCoCBnaWNfaHdfb3BzLT5z
-ZXRfYWN0aXZlX3N0YXRlKGlycSwgc3RhdGUpOwo+PiArfQo+PiArCj4+IMKgIC8qIGRlc2MtPmly
-cSBuZWVkcyB0byBiZSBkaXNhYmxlZCBiZWZvcmUgY2FsbGluZyB0aGlzIGZ1bmN0aW9uICovCj4+
-IMKgIHZvaWQgZ2ljX3NldF9pcnFfdHlwZShzdHJ1Y3QgaXJxX2Rlc2MgKmRlc2MsIHVuc2lnbmVk
-IGludCB0eXBlKQo+PiDCoCB7Cj4+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20tYXJtL2dp
-Yy5oIGIveGVuL2luY2x1ZGUvYXNtLWFybS9naWMuaAo+PiBpbmRleCBjNGM2OGM3NzcwLi5kMzMw
-ODYwNTgwIDEwMDY0NAo+PiAtLS0gYS94ZW4vaW5jbHVkZS9hc20tYXJtL2dpYy5oCj4+ICsrKyBi
-L3hlbi9pbmNsdWRlL2FzbS1hcm0vZ2ljLmgKPj4gQEAgLTIzOCw2ICsyMzgsOSBAQCBERUNMQVJF
-X1BFUl9DUFUodWludDY0X3QsIGxyX21hc2spOwo+PiDCoCBleHRlcm4gZW51bSBnaWNfdmVyc2lv
-biBnaWNfaHdfdmVyc2lvbih2b2lkKTsKPj4gwqAgZXh0ZXJuIGludCBnaWNfZ2V0X25yX2xycyh2
-b2lkKTsKPj4gwqAgKy8qIEZvcmNlIHRoZSBzdGF0ZSBvZiBhbiBJUlEgdG8gYWN0aXZlLiAqLwo+
-PiArdm9pZCBnaWNfc2V0X2FjdGl2ZV9zdGF0ZShpbnQgaXJxLCBib29sIHN0YXRlKTsKPj4gKwo+
-PiDCoCAvKiBQcm9ncmFtIHRoZSBJUlEgdHlwZSBpbnRvIHRoZSBHSUMgKi8KPj4gwqAgdm9pZCBn
-aWNfc2V0X2lycV90eXBlKHN0cnVjdCBpcnFfZGVzYyAqZGVzYywgdW5zaWduZWQgaW50IHR5cGUp
-Owo+PiDCoCBAQCAtMzQ3LDYgKzM1MCw4IEBAIHN0cnVjdCBnaWNfaHdfb3BlcmF0aW9ucyB7Cj4+
-IMKgwqDCoMKgwqAgdm9pZCAoKmRlYWN0aXZhdGVfaXJxKShzdHJ1Y3QgaXJxX2Rlc2MgKmlycWQp
-Owo+PiDCoMKgwqDCoMKgIC8qIFJlYWQgSVJRIGlkIGFuZCBBY2sgKi8KPj4gwqDCoMKgwqDCoCB1
-bnNpZ25lZCBpbnQgKCpyZWFkX2lycSkodm9pZCk7Cj4+ICvCoMKgwqAgLyogRm9yY2UgdGhlIHN0
-YXRlIG9mIGFuIElSUSB0byBhY3RpdmUgKi8KPj4gK8KgwqDCoCB2b2lkICgqc2V0X2FjdGl2ZV9z
-dGF0ZSkoaW50IGlycSwgYm9vbCBzdGF0ZSk7Cj4+IMKgwqDCoMKgwqAgLyogU2V0IElSUSB0eXBl
-ICovCj4+IMKgwqDCoMKgwqAgdm9pZCAoKnNldF9pcnFfdHlwZSkoc3RydWN0IGlycV9kZXNjICpk
-ZXNjLCB1bnNpZ25lZCBpbnQgdHlwZSk7Cj4+IMKgwqDCoMKgwqAgLyogU2V0IElSUSBwcmlvcml0
-eSAqLwo+Pgo+IAo+IENoZWVycywKPiAKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+
+--===============1768507722525176693==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-bniyCbSuegiJLqSqh6+u"
+
+
+--=-bniyCbSuegiJLqSqh6+u
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-02-09 at 15:01 +0100, Juergen Gross wrote:
+> This series is available via github:
+>=20
+> https://github.com/jgross1/xen.git xpti
+>=20
+> Dario wants to do some performance tests for this series to compare
+> performance with Jan's series with all optimizations posted.
+>=20
+And some of this is indeed ready.
+
+So, this is again on my testbox, with 16 pCPUs and 12GB of RAM, and I
+used a guest with 16 vCPUs and 10GB of RAM.
+
+I benchmarked Jan's patch *plus* all the optimizations and overhead
+mitigation patches he posted on xen-devel (the ones that are already in
+staging, and also the ones that are not yet there). That's "XPTI-Light"=20
+in the table and in the graphs. Booting this with 'xpti=3Dfalse' is
+considered the baseline, while booting with 'xpti=3Dtrue' is the actual
+thing we want to measure. :-)
+
+Then I ran the same benchmarks on Juergen's branch above, enabled at
+boot. That's "XPYI" in the table and graphs (yes, I know, sorry for the
+typo!).
+
+http://openbenchmarking.org/result/1802125-DARI-180211144
+http://openbenchmarking.org/result/1802125-DARI-180211144&obr_hgv=3DXPTI-Li=
+ght+xpti%3Dfalse&obr_nor=3Dy&obr_hgv=3DXPTI-Light+xpti%3Dfalse
+
+As far as the following benchmarks go:
+- [disk] I/O benchmarks (like aio-stress, fio, iozone)
+- compress/uncompress benchmarks
+- sw building benchmarks
+- system benchmarks (pgbench, nginx, most of the stress-ng cases)
+- scheduling latency benchmarks (schbench)
+
+the two approach are very very close. It may be said that 'XPTI-Light
+optimized' has, overall, still a little bit of an edge. But really,
+that varies from test to test, and most of the time is marginal (either
+way).
+
+System-V message passing and semaphores, as well as socket activity
+tests, together with hackbench ones, seems to cause Juergen's XPTI
+serious problems, though.
+
+With Juergen, we decided to dig this a bit more. He hypothesized that,
+currently, (vCPU) context switching costs are high in his solution.
+Therefore, I went and check (roughly) how many context switches occurs
+in Xen, during a few of the benchmarks.
+
+Here's a summary.
+
+******** stress-ng CPU ********
+ =3D=3D XPTI
+  stress-ng: info: cpu               1795.71 bogo ops/s
+  sched: runs through scheduler      29822=20
+  sched: context switches            14391
+ =3D=3D XPTI-Light
+  stress-ng: info: cpu               1821.60 bogo ops/s
+  sched: runs through scheduler      24544=20
+  sched: context switches            9128
+
+******** stress-ng Memory Copying ********
+ =3D=3D XPTI
+  stress-ng: info: memcpy            831.79 bogo ops/s
+  sched: runs through scheduler      22875=20
+  sched: context switches            8230
+ =3D=3D XPTI-Light
+  stress-ng: info: memcpy            827.68
+  sched: runs through scheduler      23142=20
+  sched: context switches            8279
+
+******** schbench ********
+ =3D=3D XPTI
+  Latency percentiles (usec)
+	50.0000th: 36672
+	75.0000th: 79488
+	90.0000th: 124032
+	95.0000th: 154880
+	*99.0000th: 232192
+	99.5000th: 259328
+	99.9000th: 332288
+	min=3D0, max=3D568244
+  sched: runs through scheduler      25736=20
+  sched: context switches            10622=20
+ =3D=3D XPTI-Light
+  Latency percentiles (usec)
+	50.0000th: 37824
+	75.0000th: 81024
+	90.0000th: 127872
+	95.0000th: 156416
+	*99.0000th: 235776
+	99.5000th: 271872
+	99.9000th: 348672
+	min=3D0, max=3D643999
+  sched: runs through scheduler      25604=20
+  sched: context switches            10741
+
+******** hackbench ********
+ =3D=3D XPTI
+  Running with 4*40 (=3D=3D 160) tasks   250.707 s
+  sched: runs through scheduler      1322606=20
+  sched: context switches            1208853
+ =3D=3D XPTI-Light
+  Running with 4*40 (=3D=3D 160) tasks    60.961 s
+  sched: runs through scheduler      1680535=20
+  sched: context switches            1668358
+
+******** stress-ng SysV Msg Passing ********
+ =3D=3D XPTI
+  stress-ng: info: msg                276321.24 bogo ops/s
+  sched: runs through scheduler      25144
+  sched: context switches            10391
+ =3D=3D XPTI-Light
+  stress-ng: info: msg               1775035.18 bogo ops/s
+  sched: runs through scheduler      33453=20
+  sched: context switches            18566
+
+******** schbench -p *********
+ =3D=3D XPTI
+  Latency percentiles (usec)
+	50.0000th: 53
+	75.0000th: 56
+	90.0000th: 103
+	95.0000th: 161
+	*99.0000th: 1326
+	99.5000th: 2172
+	99.9000th: 4760
+	min=3D0, max=3D124594
+  avg worker transfer: 478.63 ops/sec 1.87KB/s
+  sched: runs through scheduler      34161=20
+  sched: context switches            19556
+ =3D=3D XPTI-Light
+  Latency percentiles (usec)
+	50.0000th: 16
+	75.0000th: 17
+	90.0000th: 18
+	95.0000th: 35
+	*99.0000th: 258
+	99.5000th: 424
+	99.9000th: 1005
+	min=3D0, max=3D110505
+  avg worker transfer: 1791.82 ops/sec 7.00KB/s
+  sched: runs through scheduler      41905=20
+  sched: context switches            27013
+
+So, basically, the intuition seems to me to be confirmed. In fact, we
+see that until the number of context switches happening during the
+specific benchmark are limited to ~ below 10k, Juergen's XPTI is fine,
+and on par or better than Jan's XPTI-Light (see stress-ng:cpu, stress-
+ng:memorycopying, schbench).
+
+Above 10k, XPTI begins to suffer; and the more context switches there
+are, the worse (e.g., see how bad it goes in the hackbench case).
+
+Note that, in the stress-ng:sysvmsg case, we see that in the XPTI-Light=20
+case that there are ~20k context switches, and I believe that the fact
+that we only see ~10k of them in the XPTI case, is that, due to context
+switch being slower, the benchmark did less work in its 30s of
+execution.
+
+We can have a confirmation of that by looking at the schedbench-p case,
+where the slowdown is evident by looking at the average data
+transferred by the workers.
+
+So, that's it for now. Thoughts are welcome. :-)
+
+...
+
+Or, actually, that's not it! :-O In fact, right while I was writing
+this report, it came out on IRC that something can be done, on
+Juergen's XPTI series, to mitigate the performance impact a bit.
+
+Juergen sent me a patch already, and I'm re-running the benchmarks with
+that applied. I'll let know how the results ends up looking like.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-bniyCbSuegiJLqSqh6+u
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqB1MgACgkQFkJ4iaW4
+c+425hAAxYTqXCmEZ3CSWrKAQ8+5KKgTgL+rkBFjutHa3M37n7TvCx7saa/WpI8D
+liHoWL0ioGBXhX/GRfjt0b1b5NE7hqr1jMY4hfHKxialXEXBGYfuBhQx2hoZpzGA
+9cabFy+hfFnLdP2vwbKuLaor1Eghtiz+QDTvMSmyJz8fZRl9VGd9UXqVmqj2GIWN
+XFRomHfbv+U/fC9Tfg/e/CkjtiqVEYQpxfZlj4g31pWu4qV0+rJ9dEH/WT12G53j
+RmewYvc5LGWN02Wishkq2Jc24OnH+juR0NJ3G8TztWdJfnDE4nypPW+Bvu30Rgj5
+TrVwpikBmWU9PdVG5qh4tZe5EGFyO/7JYIysGND0HqAIzDrsXEoAYN5v4A+s8OY6
+G1lSuCnfuvqL+bZCKbRDZvCqPsKEUE3wRs4UKFEd/KslqDH3vMN8cfHlKOMyt1bq
+RVCyD6cGS9N0pYmxShAv/AumM7nzqgifZDa4UPMGGhwJbu3BSP05lmUlaSHtIElK
+MIkGIMK/9OWxhYfY6nPkoDBNVE4Ob4/89EbrioxB6ZAWmKxFbExNQL2ZDTQeUEVj
+nmT/aov39rqwVRitlFBk27lbIkaCHcA17eyclcWPBfjlK7z2gVdwPAWyFq+uGtJb
+5aYDdNccK73RD90dUiooiQTPhTzsKg3LEwVL0PDoRwbTOCQR+TU=
+=1dTe
+-----END PGP SIGNATURE-----
+
+--=-bniyCbSuegiJLqSqh6+u--
+
+
+
+--===============1768507722525176693==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1768507722525176693==--
