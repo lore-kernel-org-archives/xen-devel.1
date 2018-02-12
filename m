@@ -1,24 +1,16 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: Slow HVM boot time, was "HVM boot time optimization"
-Date: Mon, 12 Feb 2018 14:42:17 +0000
-Message-ID: <20180212144217.5iwogwdydfl7ehof@citrix.com>
-References: <CABLtV0BqS_Y6oMt8TyCx55Nf9mB=-L7To+xY2on76p+1KDyXSQ@mail.gmail.com>
- <alpine.DEB.2.10.1802080826470.15787@sstabellini-ThinkPad-X260>
- <20180208164810.7h7equv4gfbjyzet@citrix.com>
- <20180208165600.GC1740@perard.uk.xensource.com>
- <20180208173233.6dejumgyqsz3ecjv@citrix.com>
- <CABLtV0Aq4JZfqZSZHYwsOp3PcebPhyQ90kQoqvxJid_2-owwHA@mail.gmail.com>
+Subject: Re: [PATCH v2 02/15] xen/arm: vpsci: Add support for
+	PSCI 1.1
+Date: Mon, 12 Feb 2018 14:43:11 +0000
+Message-ID: <20180212144311.rsdteudxuryulu2w@citrix.com>
+References: <20180208192203.9556-1-julien.grall@arm.com>
+ <20180208192203.9556-3-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=co21=fg=citrix.com=prvs=5740883f0=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1elFJJ-0002MO-T6
- for xen-devel@lists.xenproject.org; Mon, 12 Feb 2018 14:42:25 +0000
 Content-Disposition: inline
-In-Reply-To: <CABLtV0Aq4JZfqZSZHYwsOp3PcebPhyQ90kQoqvxJid_2-owwHA@mail.gmail.com>
+In-Reply-To: <20180208192203.9556-3-julien.grall@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,15 +19,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Yessine Daoud <da.yessine@gmail.com>
-Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, ian.jackson@eu.citrix.com, Wei Liu <wei.liu2@citrix.com>
+To: Julien Grall <julien.grall@arm.com>
+Cc: sstabellini@kernel.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, andre.przywara@linaro.org, xen-devel@lists.xen.org, volodymyr_babchuk@epam.com, mirela.simonovic@aggios.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBGZWIgMTIsIDIwMTggYXQgMDk6Mjc6MjVBTSArMDEwMCwgWWVzc2luZSBEYW91ZCB3
-cm90ZToKPiAgSGVsbG8sCj4gCj4gVGhhbmsgeW91IGZvciB5b3VyIHF1aWNrIHJlc3BvbnNlLgo+
-IEFueSBoaW50cyBob3cgY2FuIEkgImZpeCIgdGhpcyAiaXNzdWUiPyAqQW55IHdvcmthcm91bmQ/
-Cj4gCgpIb25lc3RseSBJIGhhdmUgbm8gaWRlYSB3aHkgaXQgaXMgc2xvdyB1bmxlc3MgdGhlcmUg
-aXMgbW9yZSBsb2dnaW5nCmF2YWlsYWJsZS4KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVGh1LCBGZWIgMDgsIDIwMTggYXQgMDc6MjE6NTBQTSArMDAwMCwgSnVsaWVuIEdyYWxsIHdy
+b3RlOgo+IEF0IHRoZSBtb21lbnQsIFhlbiBwcm92aWRlcyB2aXJ0dWFsIFBTQ0kgaW50ZXJmYWNl
+IGNvbXBsaWFudCB3aXRoIDAuMQo+IGFuZCAwLjIuIFNpbmNlIHRoZW0sIHRoZSBzcGVjaWZpY2F0
+aW9uIGhhcyBiZWVuIHVwZGF0ZWQgYW5kIHRoZSBsYXRlc3QKPiB2ZXJzaW9uIGlzIDEuMSAoc2Vl
+IEFSTSBERU4gMDAyMkQpLgo+IAo+IEZyb20gYW4gaW1wbGVtZW50YXRpb24gcG9pbnQgb2Ygdmll
+dywgb25seSBQU0NJX0ZFQVRVUkVTIGlzIG1hbmRhdG9yeS4KPiBUaGUgcmVzdCBpcyBvcHRpb25h
+bCBhbmQgY2FuIGJlIGxlZnQgdW5pbXBsZW1lbnRlZCBmb3Igbm93Lgo+IAo+IEF0IHRoZSBzYW1l
+IHRpbWUsIHRoZSBjb21wYXRpYmxlIGZvciBQU0NJIG5vZGUgaGF2ZSBiZWVuIHVwZGF0ZWQgdG8K
+PiBleHBvc2UgImFybSxwc2NpLTEuMCIuCj4gCj4gU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxs
+IDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0
+cml4LmNvbT4KCkkgd2lsbCBsZWF2ZSB0aGlzIHBhdGNoIHRvIEFSTSBjb21taXR0ZXJzLgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
