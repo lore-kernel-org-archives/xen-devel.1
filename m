@@ -1,17 +1,15 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 1/7] x86/alt: Drop unused alternative
-	infrastructure
-Date: Mon, 12 Feb 2018 15:58:30 +0000
-Message-ID: <e18719eb-1012-6ea3-7899-4df29c13bf39@citrix.com>
-References: <1518434587-22827-1-git-send-email-andrew.cooper3@citrix.com>
- <1518434587-22827-2-git-send-email-andrew.cooper3@citrix.com>
- <20180212155628.mjqmgp32s4jnnzfc@MacBook-Pro-de-Roger.local>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Subject: Re: [PATCH v3 2/4] hvm/svm: Enable Breakpoint events
+Date: Mon, 12 Feb 2018 09:03:30 -0700
+Message-ID: <CABfawh=V=p9u5Ho-G6o9eQnkx6Y2e9SEwUnO0AD7Woyo-2r_QQ@mail.gmail.com>
+References: <1518448098-6493-1-git-send-email-aisaila@bitdefender.com>
+ <1518448098-6493-3-git-send-email-aisaila@bitdefender.com>
+ <5aba8de5-4cca-9a4b-0f82-ec032eb48b96@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180212155628.mjqmgp32s4jnnzfc@MacBook-Pro-de-Roger.local>
-Content-Language: en-GB
+In-Reply-To: <5aba8de5-4cca-9a4b-0f82-ec032eb48b96@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,24 +18,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Xen-devel <xen-devel@lists.xen.org>, Jan Beulich <jbeulich@suse.com>, Alexandru Isaila <aisaila@bitdefender.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTIvMDIvMTggMTU6NTYsIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6Cj4gT24gTW9uLCBGZWIg
-MTIsIDIwMTggYXQgMTE6MjM6MDFBTSArMDAwMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4gQUxU
-RVJOQVRJVkVfMyBpcyBtb3JlIGNvbXBsaWNhdGVkIHRoYW4gQUxURVJOQVRJVkVfMiB3aGVuIGl0
-IGNvbWVzIHRvCj4+IGNhbGN1bGF0aW5nIGV4dHJhIHBhZGRpbmcgbGVuZ3RoLCBhbmQgd2UgaGF2
-ZSBubyBuZWVkIGZvciB0aGUgY29tcGxleGl0eS4KPj4KPj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3
-IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPiBSZXZpZXdlZC1ieTogUm9nZXIg
-UGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4KPiBJIGd1ZXNzIHlvdSBhbHNvIGRv
-bid0IGZvcmVzZWUgYW55IG5ldyBmZWF0dXJlcyByZXF1aXJpbmcgdGhpcwo+IGZ1bmN0aW9uYWxp
-dHk/Cj4KPiBJIGFzc3VtZSB0aGlzIHdhcyBhZGRlZCBiZWNhdXNlIHRoZSBhbHRlcm5hdGl2ZXMg
-ZnJhbWV3b3JrIHdhcyBwaWNrZWQKPiB3aG9sZXNhbGUgZnJvbSBMaW51eCwgYnV0IHdlIGhhdmUg
-ZGl2ZXJnZWQgZW5vdWdoIHRoYXQgd2UgZG9uJ3QgcGxhbgo+IHRvIHN5bmMgYW55bW9yZSB3aXRo
-IExpbnV4PwoKTGludXggaGFzIGRyb3BwZWQgaXQgYXMgd2VsbC7CoCBJZiB3ZSBmaW5kIGEgdXNl
-Y2FzZSwgd2UgY2FuIHJlaW50cm9kdWNlCml0LCBidXQgc29tZW9uZSBpcyBnb2luZyB0byBoYXZl
-IHNvbWUgImZ1biIgd2l0aCBtYXgoKSBoYW5kbGluZy4KCn5BbmRyZXcKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gTW9uLCBGZWIgMTIsIDIwMTggYXQgODo1NCBBTSwgQW5kcmV3IENvb3Blcgo8YW5kcmV3LmNv
+b3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4gT24gMTIvMDIvMTggMTU6MDgsIEFsZXhhbmRydSBJ
+c2FpbGEgd3JvdGU6Cj4+IEBAIC0yNjE5LDE0ICsyNjM0LDMxIEBAIHZvaWQgc3ZtX3ZtZXhpdF9o
+YW5kbGVyKHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzKQo+PiAgICAgICAgICBicmVhazsKPj4K
+Pj4gICAgICBjYXNlIFZNRVhJVF9FWENFUFRJT05fQlA6Cj4+IC0gICAgICAgIGlmICggIXYtPmRv
+bWFpbi0+ZGVidWdnZXJfYXR0YWNoZWQgKQo+PiAtICAgICAgICAgICAgZ290byB1bmV4cGVjdGVk
+X2V4aXRfdHlwZTsKPj4gLSAgICAgICAgLyogQU1EIFZvbDIsIDE1LjExOiBJTlQzLCBJTlRPLCBC
+T1VORCBpbnRlcmNlcHRzIGRvIG5vdCB1cGRhdGUgUklQLiAqLwo+PiAtICAgICAgICBpZiAoIChp
+bnN0X2xlbiA9IF9fZ2V0X2luc3RydWN0aW9uX2xlbmd0aCh2LCBJTlNUUl9JTlQzKSkgPT0gMCAp
+Cj4+ICsgICAgICAgIGluc3RfbGVuID0gX19nZXRfaW5zdHJ1Y3Rpb25fbGVuZ3RoKHYsIElOU1RS
+X0lOVDMpOwo+Cj4gVGhlcmUgYXJlIG11bHRpcGxlIHdheXMgb2YgZW5kaW5nIHVwIHdpdGggdGhp
+cyB2bWV4aXQsIGFuZCBJTlQzIGlzIG5vdAo+IHRoZSBvbmx5IHdheS4KPgo+IFRoZSBvbGQgY29k
+ZSB3YXMgc29tZXdoYXQgYnJva2VuIChidXQgb25seSBpbiB0aGUgY2FzZSB0aGF0IGEgZGVidWdn
+ZXIKPiB3YXMgYXR0YWNoZWQpLCBidXQgbm93IHdpdGggIHRoaXMgaW50cm9zcGVjdGlvbiBob29r
+IGFjdGl2ZSwgZXhlY3V0aW5nCj4gYDB4Y2QgMHgwM2Agd2lsbCBlbmQgdXAgY3Jhc2hpbmcgdGhl
+IGRvbWFpbiBiZWNhdXNlIG9mIGEgbGVuZ3RoIG1pc21hdGNoCj4gbG9va2luZyBmb3IgMHhjYy4K
+Pgo+IFlvdSBuZWVkIHRvIGluc3BlY3QgRVhJVElOVElORk8gdG8gd29yayBvdXQgd2hhdCB3ZW50
+IG9uIGhlcmUsIGFuZAo+IGRpc3Rpbmd1aXNoIElOVDMgZnJvbSBJTlQgJDMuCj4KPiBDYW4gSSBz
+dWdnZXN0IHRoYXQgeW91IHJ1biB0aGlzIHVuaXQgdGVzdAo+IGh0dHA6Ly94ZW5iaXRzLnhlbi5v
+cmcvZG9jcy94dGYvdGVzdC1zd2ludC1lbXVsYXRpb24uaHRtbCB1bmRlciBkZWJ1Zwo+IGludHJv
+c3BlY3Rpb24gYW4gY2hlY2sgdGhhdCB5b3UgZ2V0IGFsbCBleHBlY3RlZCBldmVudHM/ICBFdmVy
+eSB0aW1lIHdlCj4gdG91Y2ggdGhpcyBjb2RlLCB3ZSBzZWVtIHRvIGJyZWFrIGl0IDooCj4KCisx
+LCB0aGlzIHVzZWQgdG8gYmUgYW4gaXNzdWUgdW5kZXIgdm14IGFzIHdlbGwKClRhbWFzCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
