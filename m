@@ -1,19 +1,20 @@
-From: "Woods, Brian" <Brian.Woods@amd.com>
-Subject: Re: [PATCH v3 2/3] x86/svm: add EFER SVME support for
-	VGIF/VLOAD
-Date: Tue, 13 Feb 2018 18:37:20 +0000
-Message-ID: <CY4PR12MB1830CA7E68C14BB88FF06A24E5F60@CY4PR12MB1830.namprd12.prod.outlook.com>
-References: <20180207210624.119059-1-brian.woods@amd.com>
- <20180208170147.89927-1-brian.woods@amd.com>
- <5A7B6A7C0200003403432E6E@prv-mh.provo.novell.com>
- <5A7C82880200003F043E54B7@prv-mh.provo.novell.com>
- <5A82BE8502000078001A73AE@prv-mh.provo.novell.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Rich Persaud <persaur@gmail.com>
+Subject: Re: [PATCH v2 0/7] x86: Meltdown band-aid overhead
+	reduction
+Date: Tue, 13 Feb 2018 13:39:57 -0500
+Message-ID: <3B6E9308-31CB-4A5E-8987-C686B67E5027@gmail.com>
+References: <5A7B31DF02000078001A61F9@prv-mh.provo.novell.com>
+Mime-Version: 1.0 (1.0)
+Content-Type: multipart/mixed; boundary="===============0493940820998267228=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A82BE8502000078001A73AE@prv-mh.provo.novell.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=chpt=fh=gmail.com=persaur@srs-us1.protection.inumbo.net>)
+ id 1elfUm-0007hG-TK
+ for xen-devel@lists.xenproject.org; Tue, 13 Feb 2018 18:40:00 +0000
+Received: by mail-it0-x232.google.com with SMTP id d10so6059443itj.2
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Feb 2018 10:39:58 -0800 (PST)
+In-Reply-To: <5A7B31DF02000078001A61F9@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,37 +23,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, "Suthikulpanit,
- Suravee" <Suravee.Suthikulpanit@amd.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-UGFyZG9uIGFueSB3ZWlyZCBmb3JtYXR0aW5nLCBJJ20gcmVwbHlpbmcgb24gbXkgcGhvbmUuIAoK
-QmVjYXVzZSB0aGV5IGFyZSB0d28gZGlmZmVyZW50IHRoaW5ncy4gIE9uZSBpcyBhbiBhc3NlcnQg
-dG8gbWFrZSBzdXJlIG5vdGhpbmcgd3JvbmcgaXMgaGFwcGVuaW5nIHdpdGggdGhlIEVGRVIuU1ZN
-RSBiaXQsIGFuZCB0aGUgb3RoZXIgY2hhbmdlcyB3aGF0IGZlYXR1cmVzIGFyZSBlbmFibGVkLiAg
-CgpJSVJDLCBtb3N0IGFzc2VydHMgYXJlIG9uIHRoZWlyIG9uIGlmcyBhbmQgbm90IGluIGEgaWYg
-c3RhdGVtZW50IHdpdGggc29tZXRoaW5nIGVsc2UuICBJIGd1ZXNzIEkgc2hvdWxkIGhhdmUgcHV0
-IHRoZSBhc3NlcnQgaGlnaGVyIGluIHRoZSBmdW5jdGlvbiB0aG91Z2ggYnV0IHRoYXQncyBhIHNt
-YWxsIGRldGFpbC4gIAoKWWVzLCB5b3UgY2FuIHNxdWVlemUgYm90aCBpbiBvbmUgaWYgc3RhdGVt
-ZW50IGJ1dCwgYnV0IGl0IGJlaW5nIGNsZWFuZXIgYW5kIGVhc2llciB0byByZWFkIChhdCBsZWFz
-dCBtb3JlIGxvZ2ljYWwpIGlzIGJldHRlciB0aGFuIGdldHRpbmcgcmlkIG9mIG9uZSBpZiBpbiBt
-eSBvcGluaW9uLiAgUGx1cyBhc3N1bWluZyBhc3NlcnRzIGFyZSBkaXNhYmxlZCBmb3IgcmVsZWFz
-ZSwgSSdkIGFzc3VtZSB0aGUgZXh0cmEgaWYgd291bGQgZ2V0IG9wdGltaXplZCBvdXQgYnkgZ2Nj
-IGFueXdheS4gCgpCcmlhbgoKCk9uIEZlYnJ1YXJ5IDEzLCAyMDE4IDAzOjMxOjQwIEphbiBCZXVs
-aWNoIDxKQmV1bGljaEBzdXNlLmNvbT4gd3JvdGU6Cgo+Pj4+IE9uIDA4LjAyLjE4IGF0IDE4OjAx
-LCA8YnJpYW4ud29vZHNAYW1kLmNvbT4gd3JvdGU6Cj4+IC0tLSBhL3hlbi9hcmNoL3g4Ni9odm0v
-c3ZtL3N2bS5jCj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vc3ZtL3N2bS5jCj4+IEBAIC02MTEs
-NiArNjExLDEyIEBAIHN0YXRpYyB2b2lkIHN2bV91cGRhdGVfZ3Vlc3RfZWZlcihzdHJ1Y3QgdmNw
-dSAqdikKPj4gICAgICBpZiAoIGxtYSApCj4+ICAgICAgICAgIG5ld19lZmVyIHw9IEVGRVJfTE1F
-Owo+PiAgICAgIHZtY2Jfc2V0X2VmZXIodm1jYiwgbmV3X2VmZXIpOwo+PiArCj4+ICsgICAgaWYg
-KCAhbmVzdGVkaHZtX2VuYWJsZWQodi0+ZG9tYWluKSApCj4+ICsgICAgICAgIEFTU0VSVCghKHYt
-PmFyY2guaHZtX3ZjcHUuZ3Vlc3RfZWZlciAmIEVGRVJfU1ZNRSkpOwo+PiArCj4+ICsgICAgaWYg
-KCBuZXN0ZWRodm1fZW5hYmxlZCh2LT5kb21haW4pICkKPj4gKyAgICAgICAgc3ZtX25lc3RlZF9m
-ZWF0dXJlc19vbl9lZmVyX3VwZGF0ZSh2KTsKPj4gIH0KPgo+IFdoeSBub3QKPgo+ICAgICBpZiAo
-IG5lc3RlZGh2bV9lbmFibGVkKHYtPmRvbWFpbikgKQo+ICAgICAgICAgc3ZtX25lc3RlZF9mZWF0
-dXJlc19vbl9lZmVyX3VwZGF0ZSh2KTsKPiAgICAgZWxzZQo+ICAgICAgICAgQVNTRVJUKCEodi0+
-YXJjaC5odm1fdmNwdS5ndWVzdF9lZmVyICYgRUZFUl9TVk1FKSk7Cj4KPiA/Cj4KPiBKYW4KPgo+
-Cj4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============0493940820998267228==
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-FAE24D1C-F218-4BB5-8EC7-5D1FB7537E1D
+Content-Transfer-Encoding: 7bit
+
+
+--Apple-Mail-FAE24D1C-F218-4BB5-8EC7-5D1FB7537E1D
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+On Feb 7, 2018, at 11:05, Jan Beulich <JBeulich@suse.com> wrote:
+>=20
+> 1: slightly reduce Meltdown band-aid overhead
+> 2: remove CR reads from exit-to-guest path
+> 3: introduce altinstruction_nop assembler macro
+> 4: NOP out most XPTI entry/exit code when it's not in use
+> 5: avoid double CR3 reload when switching to guest user mode
+> 6: disable XPTI when RDCL_NO
+> 7: x86: log XPTI enabled status
+
+Since work on XPTI is ongoing, will these improvements to XPTI-stage-1 be pu=
+blished via http://xenbits.xen.org/xsa/xsa254/README.pti?
+
+Rich=
+
+--Apple-Mail-FAE24D1C-F218-4BB5-8EC7-5D1FB7537E1D
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"></head><body dir="auto"><div></div><div>On Feb 7, 2018, at 11:05, Jan Beulich &lt;<a href="mailto:JBeulich@suse.com">JBeulich@suse.com</a>&gt; wrote:</div><div><br></div><blockquote type="cite"><div><span>1: slightly reduce Meltdown band-aid overhead</span><br><span>2: remove CR reads from exit-to-guest path</span><br><span>3: introduce altinstruction_nop assembler macro</span><br><span>4: NOP out most XPTI entry/exit code when it's not in use</span><br><span>5: avoid double CR3 reload when switching to guest user mode</span><br><span>6: disable XPTI when RDCL_NO</span><br><span>7: x86: log XPTI enabled status</span><br></div></blockquote><div><br></div><div>Since work on XPTI is ongoing, will these improvements
+  to XPTI-stage-1 be published via&nbsp;<a href="http://xenbits.xen.org/xsa/xsa254/README.pti">http://xenbits.xen.org/xsa/xsa254/README.pti</a>?</div><div><br></div><div>Rich</div></body></html>
+--Apple-Mail-FAE24D1C-F218-4BB5-8EC7-5D1FB7537E1D--
+
+
+--===============0493940820998267228==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0493940820998267228==--
