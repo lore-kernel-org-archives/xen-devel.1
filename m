@@ -1,22 +1,17 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: xl vcpu-set in HVM domU fails change cpu online count
-Date: Tue, 13 Feb 2018 13:47:42 +0100
-Message-ID: <20180213134742.3f8486c6.olaf@aepfle.de>
+From: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
+Subject: Re: [PATCH v3 2/4] hvm/svm: Enable Breakpoint events
+Date: Tue, 13 Feb 2018 12:48:49 +0000
+Message-ID: <1518526129.4963.14.camel@bitdefender.com>
+References: <1518448098-6493-1-git-send-email-aisaila@bitdefender.com>
+ <1518448098-6493-3-git-send-email-aisaila@bitdefender.com>
+ <5aba8de5-4cca-9a4b-0f82-ec032eb48b96@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1160022042553861235=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=lmmj=fh=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1ela02-0001jf-QW
- for xen-devel@lists.xenproject.org; Tue, 13 Feb 2018 12:47:55 +0000
-Received: from sender ([2001:a62:816:91ff:a572:884d:f51d:1a86])
- by smtp.strato.de (RZmta 42.18 AUTH) with ESMTPSA id i01c70u1DClo7We
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
- 521 ECDH bits, eq. 15360 bits RSA))
- (Client did not present a certificate)
- for <xen-devel@lists.xenproject.org>;
- Tue, 13 Feb 2018 13:47:50 +0100 (CET)
+In-Reply-To: <5aba8de5-4cca-9a4b-0f82-ec032eb48b96@citrix.com>
+Content-Language: en-US
+Content-ID: <51133F12F962EA46BF8D11FBDA3B674E@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,50 +20,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>, "tamas@tklengyel.com" <tamas@tklengyel.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "suravee.suthikulpanit@amd.com" <suravee.suthikulpanit@amd.com>, "rcojocaru@bitdefender.com" <rcojocaru@bitdefender.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1160022042553861235==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/5wc2qL9y9/=J6OhShb6sAuQ"; protocol="application/pgp-signature"
-
---Sig_/5wc2qL9y9/=J6OhShb6sAuQ
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-xl vcpu-set with a HVM domU sends an ACPI event to do hot-add of cpus. But =
-if the vcpu count is decreased the domU does not offline any cpu. So far th=
-e only way to enforce offlining is to process the output of 'xenstore-watch=
- cpu'.
-
-Why is HVM excluded in drivers/xen/cpu_hotplug.c:setup_vcpu_hotplug_event()=
-? I think that would be the place to receive notifications from xenstore ab=
-out cpus being offlined/onlined.
-
-Olaf
-
---Sig_/5wc2qL9y9/=J6OhShb6sAuQ
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWoLebgAKCRBdQqD6ppg2
-fg4LAKDY29ogpOkWtcpEezp6qX3HIMnr7ACgi6H+4Ht1zps9V8ldj29CoQkAUdE=
-=CAT+
------END PGP SIGNATURE-----
-
---Sig_/5wc2qL9y9/=J6OhShb6sAuQ--
-
-
---===============1160022042553861235==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1160022042553861235==--
+T24gTHUsIDIwMTgtMDItMTIgYXQgMTU6NTQgKzAwMDAsIEFuZHJldyBDb29wZXIgd3JvdGU6DQo+
+IE9uIDEyLzAyLzE4IDE1OjA4LCBBbGV4YW5kcnUgSXNhaWxhIHdyb3RlOg0KPiA+DQo+ID4gQEAg
+LTI2MTksMTQgKzI2MzQsMzEgQEAgdm9pZCBzdm1fdm1leGl0X2hhbmRsZXIoc3RydWN0DQo+ID4g
+Y3B1X3VzZXJfcmVncyAqcmVncykNCj4gPiAgICAgICAgICBicmVhazsNCj4gPg0KPiA+ICAgICAg
+Y2FzZSBWTUVYSVRfRVhDRVBUSU9OX0JQOg0KPiA+IC0gICAgICAgIGlmICggIXYtPmRvbWFpbi0+
+ZGVidWdnZXJfYXR0YWNoZWQgKQ0KPiA+IC0gICAgICAgICAgICBnb3RvIHVuZXhwZWN0ZWRfZXhp
+dF90eXBlOw0KPiA+IC0gICAgICAgIC8qIEFNRCBWb2wyLCAxNS4xMTogSU5UMywgSU5UTywgQk9V
+TkQgaW50ZXJjZXB0cyBkbyBub3QNCj4gPiB1cGRhdGUgUklQLiAqLw0KPiA+IC0gICAgICAgIGlm
+ICggKGluc3RfbGVuID0gX19nZXRfaW5zdHJ1Y3Rpb25fbGVuZ3RoKHYsIElOU1RSX0lOVDMpKQ0K
+PiA+ID09IDAgKQ0KPiA+ICsgICAgICAgIGluc3RfbGVuID0gX19nZXRfaW5zdHJ1Y3Rpb25fbGVu
+Z3RoKHYsIElOU1RSX0lOVDMpOw0KPiBUaGVyZSBhcmUgbXVsdGlwbGUgd2F5cyBvZiBlbmRpbmcg
+dXAgd2l0aCB0aGlzIHZtZXhpdCwgYW5kIElOVDMgaXMNCj4gbm90DQo+IHRoZSBvbmx5IHdheS4N
+Cj4NCj4gVGhlIG9sZCBjb2RlIHdhcyBzb21ld2hhdCBicm9rZW4gKGJ1dCBvbmx5IGluIHRoZSBj
+YXNlIHRoYXQgYQ0KPiBkZWJ1Z2dlcg0KPiB3YXMgYXR0YWNoZWQpLCBidXQgbm93IHdpdGggIHRo
+aXMgaW50cm9zcGVjdGlvbiBob29rIGFjdGl2ZSwNCj4gZXhlY3V0aW5nDQo+IGAweGNkIDB4MDNg
+IHdpbGwgZW5kIHVwIGNyYXNoaW5nIHRoZSBkb21haW4gYmVjYXVzZSBvZiBhIGxlbmd0aA0KPiBt
+aXNtYXRjaA0KPiBsb29raW5nIGZvciAweGNjLg0KPg0KPiBZb3UgbmVlZCB0byBpbnNwZWN0IEVY
+SVRJTlRJTkZPIHRvIHdvcmsgb3V0IHdoYXQgd2VudCBvbiBoZXJlLCBhbmQNCj4gZGlzdGluZ3Vp
+c2ggSU5UMyBmcm9tIElOVCAkMy4NCj4NCj4gQ2FuIEkgc3VnZ2VzdCB0aGF0IHlvdSBydW4gdGhp
+cyB1bml0IHRlc3QNCj4gaHR0cDovL3hlbmJpdHMueGVuLm9yZy9kb2NzL3h0Zi90ZXN0LXN3aW50
+LWVtdWxhdGlvbi5odG1sIHVuZGVyIGRlYnVnDQo+IGludHJvc3BlY3Rpb24gYW4gY2hlY2sgdGhh
+dCB5b3UgZ2V0IGFsbCBleHBlY3RlZCBldmVudHM/ICBFdmVyeSB0aW1lDQo+IHdlDQo+IHRvdWNo
+IHRoaXMgY29kZSwgd2Ugc2VlbSB0byBicmVhayBpdCA6KA0KPg0KPiB+QW5kcmV3DQo+DQpIaSBB
+bmRyZXcsDQoNCkkndmUgZXhlY3V0ZWQgdGhlIHRlc3Qtc3dpbnQtZW11bGF0aW9uIGFuZCB0aGUg
+ZG9tYWluIGRpZCBub3QgY3Jhc2guDQpUaGUgcmVzdWx0IGlzIHJpZ2h0IGhlcmU6DQooZDEpIC0t
+LSBYZW4gVGVzdCBGcmFtZXdvcmsgLS0tDQooZDEpIEVudmlyb25tZW50OiBIVk0gNjRiaXQgKExv
+bmcgbW9kZSA0IGxldmVscykNCihkMSkgU29mdHdhcmUgaW50ZXJydXB0IGVtdWxhdGlvbg0KKGQx
+KSBGRVAgc3VwcG9ydCBub3QgZGV0ZWN0ZWQgLSBzb21lIHRlc3RzIHdpbGwgYmUgc2tpcHBlZA0K
+KGQxKSBUZXN0IGNwbDA6IGFsbCBwZXJtcyBvaw0KKGQxKSAgIFRlc3RpbmcgaW50Mw0KKGQxKSAg
+IFRlc3RpbmcgaW50ICQzDQooZDEpICAgVGVzdGluZyBpY2VicA0KKGQxKSAgIFRlc3RpbmcgaW50
+ICQxDQooZDEpICAgVGVzdGluZyBpbnRvDQooZDEpIFRlc3QgY3BsMDogcD0wDQooZDEpICAgVGVz
+dGluZyBpbnQzDQooZDEpICAgVGVzdGluZyBpbnQgJDMNCihkMSkgICBUZXN0aW5nIGljZWJwDQoo
+ZDEpICAgVGVzdGluZyBpbnQgJDENCihkMSkgICBUZXN0aW5nIGludG8NCihkMSkgVGVzdCBjcGwz
+OiBhbGwgcGVybXMgb2sNCihkMSkgICBUZXN0aW5nIGludDMNCihkMSkgICBUZXN0aW5nIGludCAk
+Mw0KKGQxKSAgIFRlc3RpbmcgaWNlYnANCihkMSkgICBUZXN0aW5nIGludCAkMQ0KKGQxKSAgIFRl
+c3RpbmcgaW50bw0KKGQxKSBUZXN0IGNwbDM6IHA9MA0KKGQxKSAgIFRlc3RpbmcgaW50Mw0KKGQx
+KSAgIFRlc3RpbmcgaW50ICQzDQooZDEpICAgVGVzdGluZyBpY2VicA0KKGQxKSAgIFRlc3Rpbmcg
+aW50ICQxDQooZDEpICAgVGVzdGluZyBpbnRvDQooZDEpIFRlc3QgY3BsMzogZHBsPTANCihkMSkg
+ICBUZXN0aW5nIGludDMNCihkMSkgICBUZXN0aW5nIGludCAkMw0KKGQxKSAgIFRlc3RpbmcgaWNl
+YnANCihkMSkgICBUZXN0aW5nIGludCAkMQ0KKGQxKSAgIFRlc3RpbmcgaW50bw0KKGQxKSBUZXN0
+IHJlc3VsdDogU0tJUA0KDQoNCklmIHlvdSB0aGluayB3ZSBuZWVkIHRvIGJlIHNhZmUsIEkgY2Fu
+IGFkZCBhIHRlc3QgbGlrZSBpZiAoDQpleGl0aW50aW5mby50eXBlICE9ICBJTlNUUl9JTlQzKSBi
+cmVhazsNCg0KfkFsZXgNCg0KX19fX19fX19fX19fX19fX19fX19fX19fDQpUaGlzIGVtYWlsIHdh
+cyBzY2FubmVkIGJ5IEJpdGRlZmVuZGVyDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
