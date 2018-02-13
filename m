@@ -1,17 +1,21 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 5/7] x86/alt: Support for automatic padding
-	calculations
-Date: Tue, 13 Feb 2018 10:09:15 +0000
-Message-ID: <f6ef0d0e-5045-3ae1-308e-379cd6568075@citrix.com>
-References: <1518434587-22827-1-git-send-email-andrew.cooper3@citrix.com>
- <1518434587-22827-6-git-send-email-andrew.cooper3@citrix.com>
- <20180213094501.wskahkozzrkfoayo@MacBook-Pro-de-Roger.local>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v3 02/17] x86: do a revert of
+ e871e80c38547d9faefc6604532ba3e985e65873
+Date: Tue, 13 Feb 2018 03:14:25 -0700
+Message-ID: <5A82C89102000078001A744B@prv-mh.provo.novell.com>
+References: <20180209140151.24714-1-jgross@suse.com>
+ <20180209140151.24714-3-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180213094501.wskahkozzrkfoayo@MacBook-Pro-de-Roger.local>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=vshx=fh=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1elXbg-0004EF-1X
+ for xen-devel@lists.xenproject.org; Tue, 13 Feb 2018 10:14:36 +0000
+In-Reply-To: <20180209140151.24714-3-jgross@suse.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,28 +24,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: andrew.cooper3@citrix.com, Dario Faggioli <dfaggioli@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTMvMDIvMjAxOCAwOTo0NSwgUm9nZXIgUGF1IE1vbm7DqSB3cm90ZToKPiBPbiBNb24sIEZl
-YiAxMiwgMjAxOCBhdCAxMToyMzowNUFNICswMDAwLCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+PiAg
-Lm1hY3JvIEFMVEVSTkFUSVZFIG9sZGluc3RyLCBuZXdpbnN0ciwgZmVhdHVyZQo+PiAgLkxcQF9v
-cmlnX3M6Cj4+ICAgICAgXG9sZGluc3RyCj4+ICAuTFxAX29yaWdfZToKPj4gKyAgICAgLnNraXAg
-KC0oKHJlcGxfbGVuKDEpIC0gb3JpZ19sZW4pID4gMCkgKiAocmVwbF9sZW4oMSkgLSBvcmlnX2xl
-bikpLCAweDkwCj4gY2xhbmcgY2hva2VzIG9uIHRoaXMgZXhwcmVzc2lvbiwgYmVjYXVzZSBvZiB0
-aGUgbmVnYXRpb24gYXQgdGhlCj4gYmVnaW5uaW5nIGFuZCBJJ20gYWxzbyBmYWlsaW5nIHRvIHNl
-ZSB3aHkgYXJlIHlvdSBhZGRpbmcgc3VjaAo+IG5lZ2F0aW9uLiBBRkFJQ1QgdXNpbmc6Cj4KPiAu
-c2tpcCAoKChyZXBsX2xlbigxKSAtIG9yaWdfbGVuKSA+IDApICogKHJlcGxfbGVuKDEpIC0gb3Jp
-Z19sZW4pKSwgMHg5MAo+Cj4gSXMgY29ycmVjdDogaXQgYWRkcyB0aGUgcmlnaHQgcGFkZGluZyBp
-ZiB0aGUgYWx0ZXJuYXRpdmUgY29kZSBpcwo+IGJpZ2dlciB0aGFuIHRoZSBvcmlnaW5hbCBvbmUs
-IHdoaWxlIG5vdCBhZGRpbmcgYW55dGhpbmcgaXMgdGhlCj4gb3JpZ2luYWwgY29kZSBpcyBncmVh
-dGVyIHRoYW4gdGhlIGFsdGVybmF0aXZlIG9uZS4KPgo+IFRoZSBuZWdhdGlvbiBqdXN0IHR1cm5z
-IHRoZSAxIHRvIC0xLCB0aHVzIGNvbnZlcnRpbmcgdGhlIHJlc3VsdCBvZiB0aGUKPiB3aG9sZSBl
-eHByZXNzaW9uIGludG8gYSBuZWdhdGl2ZSB2YWx1ZS4KCi9zaWdoIHNvIENsYW5nIGFuZCBHQVMg
-aGF2ZSBkaWZmZXJlbnQgaWRlYXMgb2YgdHJ1ZS4KClRoZSByZWFzb24gZm9yIHRoaXMgbmVnYXRp
-b24gaXMgc3RhdGVkIGluIHRoZSBjb21taXQgbWVzc2FnZS7CoCAieCA+IDAiCmluIEdBUyB5aWVs
-ZHMgMCBvciAtMSwgcmF0aGVyIHRoYW4gdGhlIGV4cGVjdGVkIDEuCgp+QW5kcmV3CgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDA5LjAyLjE4IGF0IDE1OjAxLCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBSZXZl
+cnQgIng4NjogYWxsb3cgTWVsdGRvd24gYmFuZC1haWQgdG8gYmUgZGlzYWJsZWQiIGluIG9yZGVy
+IHRvCj4gcHJlcGFyZSBmb3IgYSBmaW5hbCBNZWx0ZG93biBtaXRpZ2F0aW9uLgoKVGhpcyBubyBh
+bHNvIHJldmVydHMgYTIyMzIwZTMyZGNhMDkxOGVkMjM3OTk1ODNmNDcwYWZlNGMyNDMzMAphZmFp
+Y3QuIEkgdGhpbmsgdGhhdCBpdCB3b3VsZCBiZSBiZXR0ZXIgdG8gcmV2ZXJ0IHRoZSB3aG9sZSB0
+aGluZyBpbiBhCnNpbmdsZSBwYXRjaCBhbnl3YXkgKGkuZS4gYWxzbyBmb2xkIHBhdGNoIDMgaW50
+byBoZXJlKS4KCkphbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
