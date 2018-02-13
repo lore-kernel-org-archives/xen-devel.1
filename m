@@ -1,22 +1,22 @@
-From: Michael Young <m.a.young@durham.ac.uk>
-Subject: Re: [PATCH 1/2] make xen ocaml safe-strings compliant
-Date: Tue, 13 Feb 2018 00:35:18 +0000 (GMT)
-Message-ID: <alpine.LFD.2.21.1802130014001.2835@austen3.home>
-References: <alpine.LFD.2.21.1801302254440.2952@austen3.home>
- <1518112198.5629.68.camel@suse.com>
- <20180208180348.moi3fujoq22fkkqg@citrix.com>
- <20180208182400.g4qlkiaetnvqhuo6@citrix.com>
- <EAB71B74-BDA5-49CD-9C55-6BB3BCDC3FB1@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 2/2] pvcalls-front: wait for other
+ operations to return when release passive sockets
+Date: Mon, 12 Feb 2018 18:07:09 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1802121807030.3704__27624.2776927122$1518487567$gmane$org@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1802051448460.10160@sstabellini-ThinkPad-X260>
+ <1517871107-15349-1-git-send-email-sstabellini@kernel.org>
+ <1517871107-15349-2-git-send-email-sstabellini@kernel.org>
+ <e2d6f037-cb0c-7669-0efc-c1e9bcf69a07@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323328-767733497-1518480999=:2835"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=suqu=fh=durham.ac.uk=m.a.young@srs-us1.protection.inumbo.net>)
- id 1elOZK-0002XJ-BT
- for xen-devel@lists.xenproject.org; Tue, 13 Feb 2018 00:35:34 +0000
-In-Reply-To: <EAB71B74-BDA5-49CD-9C55-6BB3BCDC3FB1@citrix.com>
-Content-ID: <alpine.LFD.2.21.1802130017080.2835@austen3.home>
+ <srs0=0inx=fh=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1elQ07-0007JY-Sy
+ for xen-devel@lists.xenproject.org; Tue, 13 Feb 2018 02:07:19 +0000
+In-Reply-To: <e2d6f037-cb0c-7669-0efc-c1e9bcf69a07@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,43 +25,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Christian Lindig <christian.lindig@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, John Thomson <git@johnthomson.fastmail.com.au>, Dario Faggioli <dfaggioli@suse.com>, Marcello Seri <marcello.seri@citrix.com>, David Scott <dave@recoil.org>, Xen-devel <xen-devel@lists.xenproject.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <stefano@aporeto.com>, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323328-767733497-1518480999=:2835
-Content-Type: text/plain; CHARSET=ISO-8859-7; format=flowed
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.LFD.2.21.1802130017081.2835@austen3.home>
-
-On Fri, 9 Feb 2018, Christian Lindig wrote:
-
-> Sorry, I can¢t make a promise because of my other obligations. I do 
-> wonder, though: this patch did not come out of nowhere but supposedly 
-> was working - what is different here?
-
-The patch was from Fedora and is broken there too! It fixes the build 
-issues but it doesn't look like anyone tested it (I use xenstored).
-
-I have been trying to narrow down where the problem is and I think there 
-are actually two issues;
-one in tools/ocaml/xenstored/utils.ml which I think causes an error like 
-Fatal error: exception Failure("int_of_string")
-and one in tools/ocaml/libs/xb/xb.ml which I think causes an error like
-Fatal error: exception Failure("evtchn bind_interdomain failed")
-
- 	Michael Young
---8323328-767733497-1518480999=:2835
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323328-767733497-1518480999=:2835--
+T24gTW9uLCAxMiBGZWIgMjAxOCwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBPbiAwNS8wMi8xOCAy
+Mzo1MSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4gUGFzc2l2ZSBzb2NrZXRzIGNhbiBo
+YXZlIG9uZ29pbmcgb3BlcmF0aW9ucyBvbiB0aGVtLCBzcGVjaWZpY2FsbHksIHdlCj4gPiBoYXZl
+IHR3byB3YWl0X2V2ZW50X2ludGVycnVwdGFibGUgY2FsbHMgaW4gcHZjYWxsc19mcm9udF9hY2Nl
+cHQuCj4gPiAKPiA+IEFkZCB0d28gd2FrZV91cCBjYWxscyBpbiBwdmNhbGxzX2Zyb250X3JlbGVh
+c2UsIHRoZW4gd2FpdCBmb3IgdGhlCj4gPiBwb3RlbnRpYWwgd2FpdGVycyB0byByZXR1cm4gYW5k
+IHJlbGVhc2UgdGhlIHNvY2tfbWFwcGluZyByZWZjb3VudC4KPiA+IAo+ID4gU2lnbmVkLW9mZi1i
+eTogU3RlZmFubyBTdGFiZWxsaW5pIDxzdGVmYW5vQGFwb3JldG8uY29tPgo+IAo+IEFja2VkLWJ5
+OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CgpUaGFua3MhCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
