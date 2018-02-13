@@ -1,22 +1,15 @@
-From: Oleksandr Grytsov <al1img@gmail.com>
-Subject: Re: [PATCH] libxl: add libxl__is_driver_domain function
-Date: Tue, 13 Feb 2018 15:32:04 +0200
-Message-ID: <CACvf2oWkY6=tHqQ=pYHj6cH+g01FrSrr_iJbu1qPrrnmeXgJYw@mail.gmail.com>
-References: <1513260853-3450-1-git-send-email-al1img@gmail.com>
- <20180206123635.xqjoqsq4dfgve73d@citrix.com>
- <CACvf2oV9sJPJ9cK6HsstthSmpuh6SC-y058qmV6_=zExRRgd5A@mail.gmail.com>
- <20180213120658.bshetw3jommut5nj@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [qemu-mainline test] 119036: tolerable FAIL - PUSHED
+Date: Tue, 13 Feb 2018 13:38:55 +0000
+Message-ID: <osstest-119036-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2510363628688325201=="
+Content-Type: multipart/mixed; boundary="===============6281500209877627083=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=xsgf=fh=gmail.com=al1img@srs-us1.protection.inumbo.net>)
- id 1elago-0005eZ-Jc
- for xen-devel@lists.xenproject.org; Tue, 13 Feb 2018 13:32:06 +0000
-Received: by mail-io0-x22b.google.com with SMTP id d13so21263717iog.5
- for <xen-devel@lists.xenproject.org>; Tue, 13 Feb 2018 05:32:05 -0800 (PST)
-In-Reply-To: <20180213120658.bshetw3jommut5nj@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=sc7k=fh=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1eland-0005wa-7F
+ for xen-devel@lists.xenproject.org; Tue, 13 Feb 2018 13:39:09 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,113 +18,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============2510363628688325201==
-Content-Type: multipart/alternative; boundary="001a113ed2f238de6f056518051a"
+--===============6281500209877627083==
+Content-Type: text/plain
 
---001a113ed2f238de6f056518051a
-Content-Type: text/plain; charset="UTF-8"
+flight 119036 qemu-mainline real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/119036/
 
-On Tue, Feb 13, 2018 at 2:06 PM, Wei Liu <wei.liu2@citrix.com> wrote:
+Failures :-/ but no regressions.
 
-> On Tue, Feb 06, 2018 at 03:08:45PM +0200, Oleksandr Grytsov wrote:
-> > On Tue, Feb 6, 2018 at 2:36 PM, Wei Liu <wei.liu2@citrix.com> wrote:
-> >
-> > > On Thu, Dec 14, 2017 at 04:14:12PM +0200, Oleksandr Grytsov wrote:
-> > > > From: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
-> > > >
-> > > > We have following arm-based setup:
-> > > >
-> > > > - Dom0 with xen and xen tools;
-> > > > - Dom1 with device backends (but it is not the driver domain);
-> > >
-> > > What is your definition of a "driver domain"? What does it do in this
-> > > case?
-> > >
-> > > I seem to have seen people use this term in different contexts to mean
-> > > slightly different things. I need to figure out what you actually mean
-> > > first.
-> > >
-> > >
-> > I see in the libxl/xl sources that closing PV devices is done differently
-> > in case backends are in Dom0 and are in other domain. It is called as
-> > driver domain in the sources. So, I don't have clear understanding
-> > what does it mean. In our setup backends are in Dom1 and xl is in Dom0.
-> > And I see that xl dosn't close PV device on domain reboot or shutdown.
->
-> Do you run xl devd in your backend domain?
->
-> Wei.
->
+Regressions which are regarded as allowable (not blocking):
+ test-armhf-armhf-xl-rtds    16 guest-start/debian.repeat fail REGR. vs. 118942
 
-No I don't
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 118942
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 118942
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 118942
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 118942
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 118942
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 118942
+ test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
+ test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop              fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
 
--- 
-Best Regards,
-Oleksandr Grytsov.
+version targeted for testing:
+ qemuu                7d848450b6e2a3e14a776b4c93704710e7f3d233
+baseline version:
+ qemuu                c7b02d7d032d6022060e4b393827c963c93ce63f
 
---001a113ed2f238de6f056518051a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Last test of basis   118942  2018-02-11 21:18:32 Z    1 days
+Failing since        119000  2018-02-12 13:17:55 Z    0 days    2 attempts
+Testing same since   119036  2018-02-13 00:48:14 Z    0 days    1 attempts
 
-<div dir=3D"ltr"><br><div class=3D"gmail_extra"><br><div class=3D"gmail_quo=
-te">On Tue, Feb 13, 2018 at 2:06 PM, Wei Liu <span dir=3D"ltr">&lt;<a href=
-=3D"mailto:wei.liu2@citrix.com" target=3D"_blank">wei.liu2@citrix.com</a>&g=
-t;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0=
- .8ex;border-left:1px #ccc solid;padding-left:1ex"><span class=3D"">On Tue,=
- Feb 06, 2018 at 03:08:45PM +0200, Oleksandr Grytsov wrote:<br>
-&gt; On Tue, Feb 6, 2018 at 2:36 PM, Wei Liu &lt;<a href=3D"mailto:wei.liu2=
-@citrix.com">wei.liu2@citrix.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; &gt; On Thu, Dec 14, 2017 at 04:14:12PM +0200, Oleksandr Grytsov wrote=
-:<br>
-&gt; &gt; &gt; From: Oleksandr Grytsov &lt;<a href=3D"mailto:oleksandr_gryt=
-sov@epam.com">oleksandr_grytsov@epam.com</a>&gt;<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; We have following arm-based setup:<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; - Dom0 with xen and xen tools;<br>
-&gt; &gt; &gt; - Dom1 with device backends (but it is not the driver domain=
-);<br>
-&gt; &gt;<br>
-&gt; &gt; What is your definition of a &quot;driver domain&quot;? What does=
- it do in this<br>
-&gt; &gt; case?<br>
-&gt; &gt;<br>
-&gt; &gt; I seem to have seen people use this term in different contexts to=
- mean<br>
-&gt; &gt; slightly different things. I need to figure out what you actually=
- mean<br>
-&gt; &gt; first.<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt; I see in the libxl/xl sources that closing PV devices is done differen=
-tly<br>
-&gt; in case backends are in Dom0 and are in other domain. It is called as<=
-br>
-&gt; driver domain in the sources. So, I don&#39;t have clear understanding=
-<br>
-&gt; what does it mean. In our setup backends are in Dom1 and xl is in Dom0=
-.<br>
-&gt; And I see that xl dosn&#39;t close PV device on domain reboot or shutd=
-own.<br>
-<br>
-</span>Do you run xl devd in your backend domain?<br>
-<span class=3D"HOEnZb"><font color=3D"#888888"><br>
-Wei.<br>
-</font></span></blockquote></div><br></div><div class=3D"gmail_extra">No I =
-don&#39;t<br clear=3D"all"></div><div class=3D"gmail_extra"><br>-- <br><div=
- class=3D"gmail_signature" data-smartmail=3D"gmail_signature">Best Regards,=
-<br>Oleksandr Grytsov.</div>
-</div></div>
+------------------------------------------------------------
+People who touched revisions under test:
+  Alexey Kardashevskiy <aik@ozlabs.ru>
+  Andreas Gustafsson <gson@gson.org>
+  Cole Robinson <crobinso@redhat.com>
+  Daniel Henrique Barboza <danielhb@linux.vnet.ibm.com>
+  Daniel P. Berrangé <berrange@redhat.com>
+  David Gibson <david@gibson.dropbear.id.au>
+  Eric Blake <eblake@redhat.com>
+  Greg Kurz <groug@kaod.org>
+  Laurent Vivier <lvivier@redhat.com>
+  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+  Michael Tokarev <mjt@tls.msk.ru>
+  Peter Maydell <peter.maydell@linaro.org>
+  Philippe Mathieu-Daudé <f4bug@amsat.org>
+  Thomas Huth <thuth@redhat.com>
+  Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
 
---001a113ed2f238de6f056518051a--
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     fail    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
 
---===============2510363628688325201==
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/qemu-xen.git
+   c7b02d7d03..7d848450b6  7d848450b6e2a3e14a776b4c93704710e7f3d233 -> upstream-tested
+
+
+--===============6281500209877627083==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -141,4 +216,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============2510363628688325201==--
+--===============6281500209877627083==--
