@@ -1,15 +1,15 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 119108: regressions - FAIL
-Date: Tue, 13 Feb 2018 21:58:06 +0000
-Message-ID: <osstest-119108-mainreport@xen.org>
+Subject: [xen-unstable-smoke test] 119114: regressions - FAIL
+Date: Tue, 13 Feb 2018 23:55:45 +0000
+Message-ID: <osstest-119114-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1025570533381607986=="
+Content-Type: multipart/mixed; boundary="===============5823152142077472339=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=sc7k=fh=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1eliah-0007sP-7L
- for xen-devel@lists.xenproject.org; Tue, 13 Feb 2018 21:58:19 +0000
+ id 1elkQY-0008Kz-WC
+ for xen-devel@lists.xenproject.org; Tue, 13 Feb 2018 23:55:59 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,11 +21,11 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============1025570533381607986==
+--===============5823152142077472339==
 Content-Type: text/plain
 
-flight 119108 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/119108/
+flight 119114 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/119114/
 
 Regressions :-(
 
@@ -34,8 +34,8 @@ including tests which could not be run:
  build-amd64                   6 xen-build                fail REGR. vs. 119098
 
 Tests which did not succeed, but are not blocking:
- test-amd64-amd64-xl-qemuu-debianhvm-i386  1 build-check(1)         blocked n/a
  test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-debianhvm-i386  1 build-check(1)         blocked n/a
  build-amd64-libvirt           1 build-check(1)               blocked  n/a
  test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
  test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
@@ -48,7 +48,7 @@ baseline version:
  xen                  3f491d6873be9caa77f02ad8d98f174f0152b819
 
 Last test of basis   119098  2018-02-13 17:01:30 Z    0 days
-Testing same since   119108  2018-02-13 20:01:33 Z    0 days    1 attempts
+Testing same since   119108  2018-02-13 20:01:33 Z    0 days    2 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
@@ -99,7 +99,7 @@ Date:   Tue Feb 13 18:19:33 2018 +0100
 (qemu changes not included)
 
 
---===============1025570533381607986==
+--===============5823152142077472339==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -109,4 +109,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============1025570533381607986==--
+--===============5823152142077472339==--
