@@ -1,15 +1,24 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: =?utf-8?b?5Zue5aSNOiBSZTog5Zue5aSNOiBbUEFUQ0hdIHg4?=
- =?utf-8?q?6/spec=5Fctrl=3A_Fix_several_bugs_in_SPEC=5FCTRL=5FENTRY=5FFROM?=
- =?utf-8?b?X0lOVFJfSVNU?=
-Date: Wed, 14 Feb 2018 14:28:47 +0000
-Message-ID: <d8a2f7c7-c870-fb0d-67fe-f79d034d6562@citrix.com>
-References: <1mkff9kgs97wdh0wu9bq2ned.1518613466397@email.android.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v4 5/7] libxl: support unmapping static
+ shared memory areas during domain destruction
+Date: Wed, 14 Feb 2018 14:35:19 +0000
+Message-ID: <20180214143519.v73zhjgwkpuns2kv@citrix.com>
+References: <20180130175024.26921-1-blackskygg@gmail.com>
+ <20180130175024.26921-6-blackskygg@gmail.com>
+ <ab02231f-e116-ac7a-57c9-676a4981dfab@arm.com>
+ <20180206180623.ri47skutqiiv437r@citrix.com>
+ <CAHrd_jqU=cK2Okg1kPd5J8R__MSoKqXzDCeptiOhfS=rHfJzfQ@mail.gmail.com>
+ <aa3cf90d-2345-5fa0-5b65-5f7a5fc56b38@arm.com>
+ <CAHrd_jpTGxOnjphH1wk8NJSpiw2FhAMNDGnGL2YYKpJ=wca0BQ@mail.gmail.com>
+ <ebd7c9f4-4a71-365e-cbb6-05c20b9042b7@arm.com>
+ <CAHrd_jpSv_yOBYDvmVOWwue-Q_Gw4+6b=8+WFk0kAJncffZTuA@mail.gmail.com>
+ <01bfbfe7-bd89-0fbe-f94b-ef127584e702@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6776615759599793225=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1mkff9kgs97wdh0wu9bq2ned.1518613466397@email.android.com>
-Content-Language: en-GB
+Content-Disposition: inline
+In-Reply-To: <01bfbfe7-bd89-0fbe-f94b-ef127584e702@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,114 +27,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "zhenzhong.duan" <zhenzhong.duan@oracle.com>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Zhongze Liu <blackskygg@gmail.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============6776615759599793225==
-Content-Type: multipart/alternative;
-	boundary="------------DB3842313F056435F474CE34"
-Content-Language: en-GB
-
---------------DB3842313F056435F474CE34
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 14/02/18 13:04, zhenzhong.duan wrote:
->
-> 2018年2月14日 20:21于 Andrew Cooper <andrew.cooper3@citrix.com
-> <mailto:andrew.cooper3@citrix.com>>写道：
-> >
-> > On 14/02/18 12:08, zhenzhong.duan wrote:
-> > >
-> > > > @@ -286,13 +286,13 @@
-> > > >      setz %dl
-> > > >      and %dl, STACK_CPUINFO_FIELD(use_shadow_spec_ctrl)(%r14)
-> > > Is it safe to remove the 'xor %edx, %edx' above? setz set whole
-> byte 1
-> > > or 0.
-> > >
-> >
-> > It is safe, but it is not a good idea.
-> >
-> > Using setz is an 8bit operation, which will suffer a register merge
-> > stall in the pipeline as we know for certain at this point that the
-> > upper bits of %edx are nonzero at this point.  (An encoding which
-> > allowed setz %eax would have been far more useful in 64bit code.)
-> >
-> Thanks for explain. But just curious does processor has ideas the
-> whole register is zeroed and avoid a merge?
->
-
-Yes.  See the Zeroing Idioms section in the optimisation manual. 
-Tracking which registers are zero helps breaks read-after-write data
-dependences in the pipeline.
-
-~Andrew
-
---------------DB3842313F056435F474CE34
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 14/02/18 13:04, zhenzhong.duan
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:1mkff9kgs97wdh0wu9bq2ned.1518613466397@email.android.com">
-      <p dir="ltr">
-        2018年2月14日 20:21于 Andrew Cooper &lt;<a
-          href="mailto:andrew.cooper3@citrix.com" moz-do-not-send="true">andrew.cooper3@citrix.com</a>&gt;写道：<br>
-        &gt;<br>
-        &gt; On 14/02/18 12:08, zhenzhong.duan wrote: <br>
-        &gt; &gt; <br>
-        &gt; &gt; &gt; @@ -286,13 +286,13 @@ <br>
-        &gt; &gt; &gt;      setz %dl <br>
-        &gt; &gt; &gt;      and %dl,
-        STACK_CPUINFO_FIELD(use_shadow_spec_ctrl)(%r14) <br>
-        &gt; &gt; Is it safe to remove the 'xor %edx, %edx' above? setz
-        set whole byte 1 <br>
-        &gt; &gt; or 0. <br>
-        &gt; &gt; <br>
-        &gt;<br>
-        &gt; It is safe, but it is not a good idea. <br>
-        &gt;<br>
-        &gt; Using setz is an 8bit operation, which will suffer a
-        register merge <br>
-        &gt; stall in the pipeline as we know for certain at this point
-        that the <br>
-        &gt; upper bits of %edx are nonzero at this point.  (An encoding
-        which <br>
-        &gt; allowed setz %eax would have been far more useful in 64bit
-        code.) <br>
-        &gt;<br>
-        Thanks for explain. But just curious does processor has ideas
-        the whole register is zeroed and avoid a merge?</p>
-    </blockquote>
-    <br>
-    Yes.  See the Zeroing Idioms section in the optimisation manual. 
-    Tracking which registers are zero helps breaks read-after-write data
-    dependences in the pipeline.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------DB3842313F056435F474CE34--
-
-
---===============6776615759599793225==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6776615759599793225==--
+T24gTW9uLCBGZWIgMTIsIDIwMTggYXQgMDM6MjQ6MjZQTSArMDAwMCwgSnVsaWVuIEdyYWxsIHdy
+b3RlOgo+IAo+IAo+IE9uIDEyLzAyLzE4IDE1OjE3LCBaaG9uZ3plIExpdSB3cm90ZToKPiA+IEhp
+IEp1bGllbiwKPiAKPiBIaSwKPiAKPiA+IAo+ID4gMjAxOC0wMi0xMiAyMzowOSBHTVQrMDg6MDAg
+SnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT46Cj4gPiA+IEhpLAo+ID4gPiAKPiA+
+ID4gT24gMTIvMDIvMTggMTQ6NTIsIFpob25nemUgTGl1IHdyb3RlOgo+ID4gPiA+IAo+ID4gPiA+
+IDIwMTgtMDItMDggMDo1NCBHTVQrMDg6MDAgSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJt
+LmNvbT46Cj4gPiA+ID4gPiAKPiA+ID4gPiA+IE9uIDA3LzAyLzE4IDE2OjI3LCBaaG9uZ3plIExp
+dSB3cm90ZToKPiA+ID4gPiAKPiA+ID4gPiBJdCBzZWVtcyB0aGF0IEkgbWlzdGFrZW5seSB1c2Ug
+dHJhbnNhY3Rpb24gYXMgYSBnbG9iYWwgbG9jay4gTm93IEkgZG9uJ3QKPiA+ID4gPiBoYXZlCj4g
+PiA+ID4gYW55IHJlYXNvbnMgbm90IHB1dHRpbmcgdGhlIHVubWFwIG91dCBvZiB0aGUgdHJhbnNh
+Y3Rpb24sIGJ1dCB0aGlzIHdpbGwKPiA+ID4gPiBicmVhawo+ID4gPiA+IHRoZSBvcmlnaW5hbCB0
+cmFuc2FjdGlvbiBpbnRvIHR3bywgYW5kIEkgZG8gdGhpbmsgdGhhdCB3ZSBuZWVkIHNvbWUKPiA+
+ID4gPiBleHBsaWNpdAo+ID4gPiA+IGxvY2tpbmcgaGVyZS4KPiA+ID4gCj4gPiA+IAo+ID4gPiBD
+YW4geW91IGV4cGxhaW4gd2h5IHlvdSBuZWVkIHNwZWNpZmljIGxvY2tpbmcgaGVyZT8gV2hhdCBh
+cmUgeW91IHRyeWluZyB0bwo+ID4gPiBwcm90ZWN0PyBBcmUgeW91IHRyeWluZyB0byBwcm90ZWN0
+IGFnYWluc3QgdHdvIHByb2Nlc3MgZG9pbmcgdGhlIHVubWFwPwo+ID4gPiAKPiA+IAo+ID4gWWVz
+Lgo+IAo+IEkgZG9uJ3QgdGhpbmsgeW91IGhhdmUgdG8gd29ycnkgYWJvdXQgdGhlIGxvY2tpbmcg
+aGVyZS4gV2l0aCB0aGUgY3VycmVudAo+IGludGVyZmFjZSwgdGhlIHJlZ2lvbnMgY2Fubm90IGJl
+IG1vZGlmaWVkIGFmdGVyIHRoZSBndWVzdCBoYXMgYm9vdGVkLiBTbyB0aGUKPiBhZGRyZXNzZXMg
+d2lsbCBhbHdheXMgc3RheSB2YWxpZC4KPiAKPiBUaGlzIGNvZGUgcGF0aCBzaG91bGQgbmV2ZXIg
+YmUgY2FsbGVkIGNvbmN1cnJlbnRseSwgYXMgYSBsb3Qgb2YgY29kZSBpbgo+IGxpYnhsLCBzbyBJ
+IHRoaW5rIHNvbWVvbmUgZWxzZSB3aWxsIHRha2UgY2FyZSBhYm91dCB0aGF0IGZvciB5b3UgKEkg
+d2lsbCBsZXQKPiBXZWkgY29uZmlybSBoZXJlKS4KCkkgdGhpbmsgeW91IG1lYW4gImNhbiBiZSBj
+YWxsZWQgY29uY3VycmVudGx5IGJ1dCBsb2NraW5nIGlzIHRha2VuIGNhcmUKb2YiLgoKSWYgdHdv
+IHByb2Nlc3NlcyAvIHRocmVhZHMgd2l0aCBkaWZmZXJlbnQgbGlieGwgY3R4IChub3QganVzdCB4
+bC4geGwgaGFzCmEgZ2xvYmFsIGxvY2spIHRyeSB0byBtYW5pcHVsYXRlIHRoZSBzYW1lIGRvbWFp
+biwgbGlieGwgQVBJcyB1c2UgZmlsZQpsb2Nrcy4gRm9yIHRoZSBzYW1lIHNhbWUgcHJvY2Vzcywg
+bXVsdGlwbGUgdGhyZWFkcyBidXQgc2hhcmluZyBvbmUKbGlieGxfY3R4IHRoZXJlIGlzIHB0aHJl
+YWQgbXV0ZXggaW4gbGlieGxfY3R4LgoKSW4gYSB3YXksICJzb21lb25lIGVsc2UiIChpbiBsaWJ4
+bCBjb2RlKSBoYXMgYWxyZWFkeSB0YWtlbiBjYXJlIG9mIHRoZQpsb2NraW5nLgoKRnVuZGFtZW50
+YWxseSBXZSBuZWVkIHRvIGFzc3VtZSB0aGUgY29kZSBjYW4gYmUgY2FsbGVkIGNvbmN1cnJlbnRs
+eS4gSXQKd291bGQgYmUgZ29vZCB0aGluZyBpZiB0aGlzIGlzIHRha2VuIGludG8gY29uc2lkZXJh
+dGlvbiBpZiBuZXcgY29kZSBpcwphZGRlZC4KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
