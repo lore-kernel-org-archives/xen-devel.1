@@ -1,21 +1,15 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v4 4/7] libxl: support mapping static shared
- memory areas during domain creation
-Date: Wed, 14 Feb 2018 14:26:23 +0000
-Message-ID: <20180214142623.qito7dkxdld35xvy@citrix.com>
-References: <20180130175024.26921-1-blackskygg@gmail.com>
- <20180130175024.26921-5-blackskygg@gmail.com>
- <6eb51518-4e01-1d4a-e345-a0fc91c3594c@arm.com>
- <CAHrd_jrTUaNwD3YEaqFvqSHACouOq=tK19rk3GCTK2GBkd70mw@mail.gmail.com>
- <6250f75c-570a-45d2-6c6c-1e82771abb73@arm.com>
- <20180206174719.b6sa3sxfxhhmw4mc@citrix.com>
- <CAHrd_jq8e7moZ-P84GD6JaybjqA62gDQaO9vwUqxjJrv_+-7WQ@mail.gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: =?utf-8?b?5Zue5aSNOiBSZTog5Zue5aSNOiBbUEFUQ0hdIHg4?=
+ =?utf-8?q?6/spec=5Fctrl=3A_Fix_several_bugs_in_SPEC=5FCTRL=5FENTRY=5FFROM?=
+ =?utf-8?b?X0lOVFJfSVNU?=
+Date: Wed, 14 Feb 2018 14:28:47 +0000
+Message-ID: <d8a2f7c7-c870-fb0d-67fe-f79d034d6562@citrix.com>
+References: <1mkff9kgs97wdh0wu9bq2ned.1518613466397@email.android.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6776615759599793225=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <CAHrd_jq8e7moZ-P84GD6JaybjqA62gDQaO9vwUqxjJrv_+-7WQ@mail.gmail.com>
+In-Reply-To: <1mkff9kgs97wdh0wu9bq2ned.1518613466397@email.android.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,49 +18,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Zhongze Liu <blackskygg@gmail.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: "zhenzhong.duan" <zhenzhong.duan@oracle.com>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBGZWIgMTIsIDIwMTggYXQgMTE6MDg6MDFQTSArMDgwMCwgWmhvbmd6ZSBMaXUgd3Jv
-dGU6Cj4gPj4gPiBbLi4uXQo+ID4+ID4KPiA+PiA+ID4gPiArCj4gPj4gPiA+ID4gKy8qICAgbGli
-eGxfX3NzaG1fZG9fbWFwIC0tIG1hcCBwYWdlcyBpbnRvIHNsYXZlJ3MgcGh5c21hcAo+ID4+ID4g
-PiA+ICsgKgo+ID4+ID4gPiA+ICsgKiAgIFRoaXMgZnVuY3Rpb25zIG1hcHMKPiA+PiA+ID4gPiAr
-ICogICAgIG1hc3RlciBnZm46IFtAbXNzaG0tPmJlZ2luICsgQHNzaG0tPm9mZnNldCwgQG1zc2ht
-LT5lbmQgKwo+ID4+ID4gPiA+IEBzc2htLT5vZmZzZXQpCj4gPj4gPiA+ID4gKyAqICAgaW50bwo+
-ID4+ID4gPiA+ICsgKiAgICAgc2xhdmUgZ2ZuOiBbQHNzaG0tPmJlZ2luLCBAc3NobS0+ZW5kKQo+
-ID4+ID4gPiA+ICsgKgo+ID4+ID4gPiA+ICsgKiAgIFRoZSBnZm5zIG9mIHRoZSBwYWdlcyB0aGF0
-IGFyZSBzdWNjZXNzZnVsbHkgbWFwcGVkIHdpbGwgYmUgc3RvcmVkCj4gPj4gPiA+ID4gKyAqICAg
-aW4gQG1hcHBlZCwgYW5kIHRoZSBudW1iZXIgb2YgdGhlIGdmbnMgd2lsbCBiZSBzdG9yZWQgaW4g
-QG5tYXBwZWQuCj4gPj4gPiA+ID4gKyAqCj4gPj4gPiA+ID4gKyAqICAgVGhlIGNhbGxlciBoYXZl
-IHRvIGd1YXJlbnRlZSB0aGF0IHNzaG0tPmJlZ2luIDwgc3NobS0+ZW5kIGFuZCBhbGwKPiA+PiA+
-ID4gPiB0aGUKPiA+PiA+ID4KPiA+PiA+ID4KPiA+PiA+ID4gcy9oYXZlIHRvL2hhcyB0by8gSSB0
-aGluay4KPiA+PiA+ID4gcy9ndWFyZW50ZWUvZ3VhcmFudGVlLwo+ID4+ID4gPgo+ID4+ID4gPiA+
-ICsgKiAgIHZhbHVlcyBhcmUgcGFnZS1hbGlnbmVkLgo+ID4+ID4gPgo+ID4+ID4gPgo+ID4+ID4g
-PiBIbW1tLCBJIGRvbid0IHNlZSB0aGUgYWxpZ25lbWVudCBjaGVjayBpbiBsaWJ4bC4gU28gZG8g
-eW91IHJlbHkgb24gdGhlCj4gPj4gPiA+IHRvb2xzdGFjayB0byBkbyBpdD8KPiA+PiA+Cj4gPj4g
-PiBZZXMsIFRoaXMgd2FzIGRvbmUgaW4gbGlieGx1X3NzaG0uYy4KPiA+Pgo+ID4+IFNhbWUgcmVt
-YXJrIGFzIGFib3ZlIHJlZ2FyZGluZyBsaWJ4bHUuIE5vdGUgdGhhdCBJIGFtIG1haW50YWluaW5n
-IHRoZSB0b29scy4KPiA+PiBJYW4gYW5kIFdlaSBtYXkgaGF2ZSBhIGRpZmZlcmVudCBvcGluaW9u
-IGhlcmUuCj4gPj4KPiA+Cj4gPiBQbGVhc2UgbW92ZSB0aGUgY2hlY2sgdG8gbGlieGwuCj4gCj4g
-SSBhZ3JlZSB0aGF0IHdlIHNob3VsZCBtb3ZlIHRoZSBhbGlnbm1lbnQgY2hlY2sgdG8gbGlieGwu
-Cj4gCj4gQnV0IEkgc3RpbGwgdGhpbmsgdGhhdCByZS1zcGVjaWZpY2F0aW9uIGNoZWNrcyBjb3Vs
-ZCBvbmx5IGJlIGRvbmUgaW4KPiBsaWJ4bHUsIGJlY2F1c2UKPiB0aGlzIGNvdWxkIG9ubHkgYmUg
-c3BvdHRlZCBpbiB0aGUgcGFyc2luZyBwaGFzZSAtLSBpdCBzaG91bGRuJ3QgYmUKPiBsaWJ4bCdz
-IGpvYi4gRm9yCj4gbGlieGwsIGFuICpfVU5LTk9XTiB2YWx1ZXMganVzdCBpbmRpY2F0ZXMgdGhh
-dCB0aGUgdXNlciBvZiBsaWJ4bAo+IGRpZG4ndCBleHBsaWNpdGx5Cj4gYXNzaWduIGEgdmFsdWUg
-dG8gdGhlIG9wdGlvbiB1cG9uIGNhbGxpbmcgdGhlIGNvbnN0cnVjdG9yIG9mIHRoZSBzc2htIHN0
-cnVjdCwKPiBhbmQgdGhlIGNvZGUgaW4gbGlieGwgd2lsbCBzZXQgdGhlIG9wdGlvbiB0byBpdHMg
-ZGVmYXVsdCB2YWx1ZS4KPiBIb3dldmVyLCBJIGRvIHRoaW5rCj4gSSBmYWlsZWQgdG8gIGhhbmRs
-ZSB0aGUgcG9zc2liaWxpdGllcyB3aGVyZSBhbiBvcHRpb24gdmFsdWUgaXMgbm90Cj4gbm90ICpf
-VU5LTk9XTiBhbmQKPiBub3QgYW55IHZhbGlkIHZhbHVlcywgd2hpY2ggbWlnaHQgb2NjdXIgaWYg
-dGhlIHVzZXIgb2YgbGlieGwgZGlkbid0Cj4gdXNlIHRoZSBjb25zdHJ1Y3Rvcgo+IHRvIGluaXRp
-YWxpemUgdGhlIHNzaG0gc3RydWN0LgoKU28gdGhlcmUgYXJlIHR3byBwcm9ibGVtcyB1bmRlciBk
-aXNjdXNzaW9uLiBPbmUgaXMgcGFyc2luZywgd2hpY2ggc2hvdWxkCmJlIGRvbmUgaW4gdGhlIHBh
-cnNlciBsaWJyYXJ5IChsaWJ4bHUpOyB0aGUgb3RoZXIgaXMgY2hlY2tpbmcgdGhlCnZhbGlkaXR5
-IG9mIHRoZSB2YWx1ZSBpbiB0aGUgc3RydWN0LCB3aGljaCBzaG91bGQgYmUgZG9uZSBpbiBsaWJ4
-bC4gSQpkb24ndCB0aGluayB3ZSBmdW5kYW1lbnRhbGx5IGRpc2FncmVlIHdpdGggZWFjaCBvdGhl
-ci4gU29ycnkgZm9yIG15CnRlcnNlIHJlcGx5IGVhcmxpZXIuCgpXZWkuCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============6776615759599793225==
+Content-Type: multipart/alternative;
+	boundary="------------DB3842313F056435F474CE34"
+Content-Language: en-GB
+
+--------------DB3842313F056435F474CE34
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+On 14/02/18 13:04, zhenzhong.duan wrote:
+>
+> 2018年2月14日 20:21于 Andrew Cooper <andrew.cooper3@citrix.com
+> <mailto:andrew.cooper3@citrix.com>>写道：
+> >
+> > On 14/02/18 12:08, zhenzhong.duan wrote:
+> > >
+> > > > @@ -286,13 +286,13 @@
+> > > >      setz %dl
+> > > >      and %dl, STACK_CPUINFO_FIELD(use_shadow_spec_ctrl)(%r14)
+> > > Is it safe to remove the 'xor %edx, %edx' above? setz set whole
+> byte 1
+> > > or 0.
+> > >
+> >
+> > It is safe, but it is not a good idea.
+> >
+> > Using setz is an 8bit operation, which will suffer a register merge
+> > stall in the pipeline as we know for certain at this point that the
+> > upper bits of %edx are nonzero at this point.  (An encoding which
+> > allowed setz %eax would have been far more useful in 64bit code.)
+> >
+> Thanks for explain. But just curious does processor has ideas the
+> whole register is zeroed and avoid a merge?
+>
+
+Yes.  See the Zeroing Idioms section in the optimisation manual. 
+Tracking which registers are zero helps breaks read-after-write data
+dependences in the pipeline.
+
+~Andrew
+
+--------------DB3842313F056435F474CE34
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">On 14/02/18 13:04, zhenzhong.duan
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:1mkff9kgs97wdh0wu9bq2ned.1518613466397@email.android.com">
+      <p dir="ltr">
+        2018年2月14日 20:21于 Andrew Cooper &lt;<a
+          href="mailto:andrew.cooper3@citrix.com" moz-do-not-send="true">andrew.cooper3@citrix.com</a>&gt;写道：<br>
+        &gt;<br>
+        &gt; On 14/02/18 12:08, zhenzhong.duan wrote: <br>
+        &gt; &gt; <br>
+        &gt; &gt; &gt; @@ -286,13 +286,13 @@ <br>
+        &gt; &gt; &gt;      setz %dl <br>
+        &gt; &gt; &gt;      and %dl,
+        STACK_CPUINFO_FIELD(use_shadow_spec_ctrl)(%r14) <br>
+        &gt; &gt; Is it safe to remove the 'xor %edx, %edx' above? setz
+        set whole byte 1 <br>
+        &gt; &gt; or 0. <br>
+        &gt; &gt; <br>
+        &gt;<br>
+        &gt; It is safe, but it is not a good idea. <br>
+        &gt;<br>
+        &gt; Using setz is an 8bit operation, which will suffer a
+        register merge <br>
+        &gt; stall in the pipeline as we know for certain at this point
+        that the <br>
+        &gt; upper bits of %edx are nonzero at this point.  (An encoding
+        which <br>
+        &gt; allowed setz %eax would have been far more useful in 64bit
+        code.) <br>
+        &gt;<br>
+        Thanks for explain. But just curious does processor has ideas
+        the whole register is zeroed and avoid a merge?</p>
+    </blockquote>
+    <br>
+    Yes.  See the Zeroing Idioms section in the optimisation manual. 
+    Tracking which registers are zero helps breaks read-after-write data
+    dependences in the pipeline.<br>
+    <br>
+    ~Andrew<br>
+  </body>
+</html>
+
+--------------DB3842313F056435F474CE34--
+
+
+--===============6776615759599793225==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6776615759599793225==--
