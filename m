@@ -1,15 +1,19 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 119124: regressions - FAIL
-Date: Wed, 14 Feb 2018 02:25:36 +0000
-Message-ID: <osstest-119124-mainreport@xen.org>
+From: Bruno Alvisio <bruno.alvisio@gmail.com>
+Subject: [PATCH v2 01/17] Save/Restore Support: Refactor
+	HYPERVISOR_suspend hypercall
+Date: Tue, 13 Feb 2018 18:25:45 -0800
+Message-ID: <1518575161-70717-2-git-send-email-bruno.alvisio@gmail.com>
+References: <1518575161-70717-1-git-send-email-bruno.alvisio@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2314213309317399074=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=vkh0=fi=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1elmlc-0002SQ-4D
- for xen-devel@lists.xenproject.org; Wed, 14 Feb 2018 02:25:52 +0000
+ <srs0=cyps=fi=gmail.com=bruno.alvisio@srs-us1.protection.inumbo.net>)
+ id 1elmlv-0002Td-Ol
+ for xen-devel@lists.xenproject.org; Wed, 14 Feb 2018 02:26:11 +0000
+In-Reply-To: <1518575161-70717-1-git-send-email-bruno.alvisio@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,95 +22,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: minios-devel@lists.xenproject.org, xen-devel@lists.xenproject.org
+Cc: jgross@suse.com, samuel.thibault@ens-lyon.org, wei.liu2@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============2314213309317399074==
-Content-Type: text/plain
-
-flight 119124 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/119124/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-amd64                   6 xen-build                fail REGR. vs. 119098
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-xl-qemuu-debianhvm-i386  1 build-check(1)         blocked n/a
- test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  e139d34a1c4b7775d5855458a325e0e4176bdf7e
-baseline version:
- xen                  3f491d6873be9caa77f02ad8d98f174f0152b819
-
-Last test of basis   119098  2018-02-13 17:01:30 Z    0 days
-Testing same since   119108  2018-02-13 20:01:33 Z    0 days    3 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Jan Beulich <jbeulich@suse.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  fail    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          blocked 
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     blocked 
- test-amd64-amd64-libvirt                                     blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit e139d34a1c4b7775d5855458a325e0e4176bdf7e
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Tue Feb 13 18:19:33 2018 +0100
-
-    firmware/shim: correctly handle errors during Xen tree setup
-    
-    "set -e" on a separate Makefile line is meaningless. Glue together all
-    the lines that this is supposed to cover.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
-(qemu changes not included)
-
-
---===============2314213309317399074==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2314213309317399074==--
+RGlyZWN0bHkgdXNpbmcgdGhlIFNIVVRET1dOX3N1c3BlbmQgbWFjcm8gYXMgYSBwYXJhbWV0ZXIg
+Zm9yIHRoZSBzY2hlZG9wCmh5cGVyY2FsbCBjYXVzZXMgYW4gZXJyb3IgaW4gdGhlIFhlbiBoeXBl
+cmNhbGwgaGFuZGxlci4gQWxzbyBmb3IgY29uc2lzdGVuY3ksCnRoZSBTSFVURE9XTl9zdXNwZW5k
+IHBhcmFtIGlzIHdyYXBwZWQgaW4gdGhlIHNjaGVkX3NodXRkb3duIHN0cnVjdC4KClNpZ25lZC1v
+ZmYtYnk6IEJydW5vIEFsdmlzaW8gPGJydW5vLmFsdmlzaW9AZ21haWwuY29tPgpSZXZpZXdlZC1i
+eTogU2FtdWVsIFRoaWJhdWx0IDxzYW11ZWwudGhpYmF1bHRAZW5zLWx5b24ub3JnPgotLS0KIGlu
+Y2x1ZGUveDg2L3g4Nl8zMi9oeXBlcmNhbGwteDg2XzMyLmggfCA0ICsrLS0KIGluY2x1ZGUveDg2
+L3g4Nl82NC9oeXBlcmNhbGwteDg2XzY0LmggfCA0ICsrLS0KIDIgZmlsZXMgY2hhbmdlZCwgNCBp
+bnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2luY2x1ZGUveDg2L3g4
+Nl8zMi9oeXBlcmNhbGwteDg2XzMyLmggYi9pbmNsdWRlL3g4Ni94ODZfMzIvaHlwZXJjYWxsLXg4
+Nl8zMi5oCmluZGV4IDVjOTM0NjQuLjcwNTA1YTQgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUveDg2L3g4
+Nl8zMi9oeXBlcmNhbGwteDg2XzMyLmgKKysrIGIvaW5jbHVkZS94ODYveDg2XzMyL2h5cGVyY2Fs
+bC14ODZfMzIuaApAQCAtMjk4LDggKzI5OCw4IEBAIHN0YXRpYyBpbmxpbmUgaW50CiBIWVBFUlZJ
+U09SX3N1c3BlbmQoCiAJdW5zaWduZWQgbG9uZyBzcmVjKQogewotCXJldHVybiBfaHlwZXJjYWxs
+MyhpbnQsIHNjaGVkX29wLCBTQ0hFRE9QX3NodXRkb3duLAotCQkJICAgU0hVVERPV05fc3VzcGVu
+ZCwgc3JlYyk7CisJc3RydWN0IHNjaGVkX3NodXRkb3duIHNodXRkb3duID0geyAucmVhc29uID0g
+U0hVVERPV05fc3VzcGVuZCB9OworCXJldHVybiBfaHlwZXJjYWxsMyhpbnQsIHNjaGVkX29wLCBT
+Q0hFRE9QX3NodXRkb3duLCAmc2h1dGRvd24sIHNyZWMpOwogfQogCiBzdGF0aWMgaW5saW5lIGlu
+dApkaWZmIC0tZ2l0IGEvaW5jbHVkZS94ODYveDg2XzY0L2h5cGVyY2FsbC14ODZfNjQuaCBiL2lu
+Y2x1ZGUveDg2L3g4Nl82NC9oeXBlcmNhbGwteDg2XzY0LmgKaW5kZXggNjE3MTgxMi4uOTVmOGFk
+ZSAxMDA2NDQKLS0tIGEvaW5jbHVkZS94ODYveDg2XzY0L2h5cGVyY2FsbC14ODZfNjQuaAorKysg
+Yi9pbmNsdWRlL3g4Ni94ODZfNjQvaHlwZXJjYWxsLXg4Nl82NC5oCkBAIC0zMDUsOCArMzA1LDgg
+QEAgc3RhdGljIGlubGluZSBpbnQKIEhZUEVSVklTT1Jfc3VzcGVuZCgKIAl1bnNpZ25lZCBsb25n
+IHNyZWMpCiB7Ci0JcmV0dXJuIF9oeXBlcmNhbGwzKGludCwgc2NoZWRfb3AsIFNDSEVET1Bfc2h1
+dGRvd24sCi0JCQkgICBTSFVURE9XTl9zdXNwZW5kLCBzcmVjKTsKKwlzdHJ1Y3Qgc2NoZWRfc2h1
+dGRvd24gc2h1dGRvd24gPSB7IC5yZWFzb24gPSBTSFVURE9XTl9zdXNwZW5kIH07CisJcmV0dXJu
+IF9oeXBlcmNhbGwzKGludCwgc2NoZWRfb3AsIFNDSEVET1Bfc2h1dGRvd24sICZzaHV0ZG93biwg
+c3JlYyk7CiB9CiAKIHN0YXRpYyBpbmxpbmUgaW50Ci0tIAoyLjMuMiAoQXBwbGUgR2l0LTU1KQoK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
