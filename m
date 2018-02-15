@@ -1,21 +1,15 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v3 1/2] pvcalls-front: introduce a per
- sock_mapping refcount
-Date: Thu, 15 Feb 2018 10:49:26 +0100
-Message-ID: <22b701d1-6ce1-2b15-f5da-9ad2545641ac__4790.36678229949$1518688128$gmane$org@suse.com>
-References: <alpine.DEB.2.10.1802141023400.5392@sstabellini-ThinkPad-X260>
- <1518632904-20267-1-git-send-email-sstabellini@kernel.org>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86/entry: Use 32bit xors rater than 64bit
+ xors for clearing GPRs
+Date: Thu, 15 Feb 2018 02:51:06 -0700
+Message-ID: <5A85661A02000078001A7F65@prv-mh.provo.novell.com>
+References: <1518614076-1615-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=nc0x=fj=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1emGAU-0005uh-M6
- for xen-devel@lists.xenproject.org; Thu, 15 Feb 2018 09:49:30 +0000
-In-Reply-To: <1518632904-20267-1-git-send-email-sstabellini@kernel.org>
-Content-Language: de-DE
+In-Reply-To: <1518614076-1615-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +18,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, boris.ostrovsky@oracle.com
-Cc: Stefano Stabellini <stefano@aporeto.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTQvMDIvMTggMTk6MjgsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiBJbnRyb2R1Y2Ug
-YSBwZXIgc29ja19tYXBwaW5nIHJlZmNvdW50LCBpbiBhZGRpdGlvbiB0byB0aGUgZXhpc3RpbmcK
-PiBnbG9iYWwgcmVmY291bnQuIFRoYW5rcyB0byB0aGUgc29ja19tYXBwaW5nIHJlZmNvdW50LCB3
-ZSBjYW4gc2FmZWx5IHdhaXQKPiBmb3IgaXQgdG8gYmUgMSBpbiBwdmNhbGxzX2Zyb250X3JlbGVh
-c2UgYmVmb3JlIGZyZWVpbmcgYW4gYWN0aXZlIHNvY2tldCwKPiBpbnN0ZWFkIG9mIHdhaXRpbmcg
-Zm9yIHRoZSBnbG9iYWwgcmVmY291bnQgdG8gYmUgMS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBTdGVm
-YW5vIFN0YWJlbGxpbmkgPHN0ZWZhbm9AYXBvcmV0by5jb20+CgpBY2tlZC1ieTogSnVlcmdlbiBH
-cm9zcyA8amdyb3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDE0LjAyLjE4IGF0IDE0OjE0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gSW50ZWwncyBTaWx2ZXJtb250L0tuaWdodHMgTGFuZGluZyBhcmNoaXRlY3R1cmUgdHJl
+YXRzIHRoZW0gYXMgZnVsbCBBTFUKPiBvcGVyYXRpb25zLCByYXRoZXIgdGhhbiB6ZXJvaW5nIGlk
+b21zLgo+IAo+IE5vIGZ1bmN0aW9uYWwgY2hhbmdlLCBhbmQgbm8gY2hhbmdlIGluIGNvZGUgdm9s
+dW1lIChvbmx5IGNoYW5naW5nIHRoZSBiaXQKPiBzZWxlY3Rpb24gaW4gdGhlIFJFWCBwcmVmaXgp
+Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJp
+eC5jb20+Cj4gLS0tCj4gQ0M6IEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT4KPiAKPiBJ
+ZiBhbnlvbmUgaXMgaW50ZXJlc3RlZCwgPDIwMTgwMjExMTA0OTQ5LjEyOTkyLTUtbGludXhAZG9t
+aW5pa2Jyb2Rvd3NraS5uZXQ+Cj4gaXMgdGhlIExLTUwgZGlzY3Vzc29uIG9uIHRoZSBzdWJqZWN0
+LiAgSXQgaXMgbW9zdCBsaWtlbHkgdGhhdCB0aGlzIGlzIGEKPiBkZWxpYmVyYXRlIHNpbXBsaWZp
+Y2F0aW9uIGluIHRoZSBLbmlnaHRzKiBhcmNoaXRlY3R1cmUgYmVjYXVzZSBjb21waWxlcnMKPiBm
+b2xsb3cgb3B0aW1pc2F0aW9uIGluc3RydWN0aW9ucyBvZiAidXNlIHhvcnMgZm9yIHplcm9pbmci
+IGFuZCAidXNlIDMyYml0Cj4gb3BlcmF0aW9ucyBpbiBwcmVmZXJlbmNlIHRvIDY0Yml0IG9uZXMg
+d2hlcmV2ZXIgcG9zc2libGUiLgoKSG1tLCB3ZSBjYW4gb25seSB0cnVzdCB3aGF0IGlzIGJlaW5n
+IHNhaWQgdGhlcmUsIHdoaWNoIGlzIG5vdCB2ZXJ5Cm5pY2UuIE9yIHdhaXQsIG5vLCB0aGUgT1JN
+IGFjdHVhbGx5IHNheXMgc28gZm9yIFNpbHZlcm1vbnQuCgpBY2tlZC1ieTogSmFuIEJldWxpY2gg
+PGpiZXVsaWNoQHN1c2UuY29tPgoKSmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
