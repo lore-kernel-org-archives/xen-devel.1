@@ -1,17 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH V4] x86/hvm: fix domain crash when CR3 has
- the noflush bit set
-Date: Thu, 15 Feb 2018 10:25:16 -0700
-Message-ID: <5A85D08C02000078001A82EE@prv-mh.provo.novell.com>
-References: <1518174113-2567-1-git-send-email-rcojocaru@bitdefender.com>
- <5A85C87802000078001A82AC@prv-mh.provo.novell.com>
- <7dda9477-f998-10f6-e259-ec00d1ec49ff@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v3 0/2] pvcalls-front improvements
+Date: Thu, 15 Feb 2018 18:28:47 +0100
+Message-ID: <320c6565-b003-ad4c-dcb0-f4eda4ed456f__823.478916618292$1518715694$gmane$org@suse.com>
+References: <alpine.DEB.2.10.1802141023400.5392@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <7dda9477-f998-10f6-e259-ec00d1ec49ff@citrix.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=nc0x=fj=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1emNL5-00015U-Nr
+ for xen-devel@lists.xenproject.org; Thu, 15 Feb 2018 17:28:55 +0000
+In-Reply-To: <alpine.DEB.2.10.1802141023400.5392@sstabellini-ThinkPad-X260>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,24 +22,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: bitweasil@cryptohaze.com, tamas@tklengyel.com, xen-devel@lists.xen.org
+To: Stefano Stabellini <sstabellini@kernel.org>, boris.ostrovsky@oracle.com
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE1LjAyLjE4IGF0IDE3OjU3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTUvMDIvMTggMTY6NTAsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4gLS0tIGEveGVu
-L2luY2x1ZGUvYXNtLXg4Ni94ODYtZGVmbnMuaAo+Pj4gKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4
-Ni94ODYtZGVmbnMuaAo+Pj4gQEAgLTQzLDYgKzQzLDExIEBACj4+PiAgI2RlZmluZSBYODZfQ1Iw
-X1BHICAgICAgICAgICAgICAweDgwMDAwMDAwIC8qIFBhZ2luZyAgICAgICAgICAgICAgICAgICAo
-UlcpIAo+IAo+Pj4gKi8KPj4+ICAKPj4+ICAvKgo+Pj4gKyAqIEludGVsIENQVSBmbGFncyBpbiBD
-UjMKPj4+ICsgKi8KPj4+ICsjZGVmaW5lIFg4Nl9DUjNfTk9GTFVTSCAgICAweDgwMDAwMDAwMDAw
-MDAwMDAKPj4gUGxlYXNlIGFkZCB0aGUgVUxMIHN1ZmZpeCwgc28gdGhlIGluc24gZW11bGF0b3Ig
-Y291bGQgZXZlbnR1YWxseQo+PiB1c2UgdGhpcyB3aXRob3V0IGJyZWFraW5nIHRoZSAzMi1iaXQg
-dGVzdCBoYXJuZXNzIGJ1aWxkLgo+IAo+IF9BQyguLi4gLCBVTEwpIHBsZWFzZS4gIElmIFhlbiBk
-b2VzIHN0YXJ0IHVzaW5nIFBDSUQsIHRoZW4gd2Ugd2lsbCBuZWVkCj4gdGhpcyB1c2FibGUgaW4g
-YXNtLgoKT2gsIG9mIGNvdXJzZSAtIGFueSBjb25zdGFudHMgaW4gaGVhZGVycyB1c2FibGUgYnkg
-YXNzZW1ibHkgZmlsZXMKc2hvdWxkIGhhdmUgc3VmZml4ZXMsIGlmIGFueSwgYXR0YWNoZWQgdmlh
-IF9BQygpLgoKSmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+T24gMTQvMDIvMTggMTk6MjYsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiBIaSBhbGwsCj4g
+Cj4gdGhpcyBzbWFsbCBzZXJpZXMgaW50cm9kdWNlcyBhIHBlciBzb2NrZXQgcmVmY291bnQgdG8g
+aW5jcmVhc2UgdGhlCj4gZWZmaWNpZW5jeSBvbiBzb2NrZXQgcmVsZWFzZSBvcGVyYXRpb25zLCBh
+bmQgbWFrZXMgcmVsZWFzaW5nIHBhc3NpdmUKPiBzb2NrZXRzIHNhZmUuCj4gCj4gQ2hlZXJzLAo+
+IAo+IFN0ZWZhbm8KPiAKPiAKPiBDaGFuZ2VzIGluIHYzOgo+IC0gcmVtb3ZlIHBvaW50bGVzcyBp
+bml0aWFsaXplcnMKPiAtIHJlb3JkZXIgcHZjYWxsc19lbnRlcl9zb2NrCj4gCj4gQ2hhbmdlcyBp
+biB2MjoKPiAtIGFkZCBhY2tlZC1ieQo+IC0gZml4IGNoZWNrIGluIHB2Y2FsbHNfZW50ZXJfc29j
+Cj4gLSBmaXggY29kZSBzdHlsZQo+IC0gbmljZXIgY2hlY2tzIGluIHB2Y2FsbHNfZnJvbnRfcmVs
+ZWFzZQo+IAo+IAo+IFN0ZWZhbm8gU3RhYmVsbGluaSAoMik6Cj4gICAgICAgcHZjYWxscy1mcm9u
+dDogaW50cm9kdWNlIGEgcGVyIHNvY2tfbWFwcGluZyByZWZjb3VudAo+ICAgICAgIHB2Y2FsbHMt
+ZnJvbnQ6IHdhaXQgZm9yIG90aGVyIG9wZXJhdGlvbnMgdG8gcmV0dXJuIHdoZW4gcmVsZWFzZSBw
+YXNzaXZlIHNvY2tldHMKCkJvdGggcGF0Y2hlcyBjb21taXR0ZWQgdG8geGVuL3RpcC5naXQgZm9y
+LWxpbnVzLTQuMTYKCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
