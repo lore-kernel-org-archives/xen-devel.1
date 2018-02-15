@@ -1,8 +1,7 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: [PATCH RFC 2/4] x86: report if PCID and INVPCID are
-	supported
-Date: Thu, 15 Feb 2018 12:10:38 +0000
-Message-ID: <20180215121040.20585-3-wei.liu2@citrix.com>
+Subject: [PATCH RFC 1/4] x86: introduce cpu_has_invpcid
+Date: Thu, 15 Feb 2018 12:10:37 +0000
+Message-ID: <20180215121040.20585-2-wei.liu2@citrix.com>
 References: <20180215121040.20585-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +10,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=zbre=fj=citrix.com=prvs=57767c78e=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1emING-0002Vh-8N
- for xen-devel@lists.xenproject.org; Thu, 15 Feb 2018 12:10:50 +0000
+ id 1emINF-0002Vf-8N
+ for xen-devel@lists.xenproject.org; Thu, 15 Feb 2018 12:10:49 +0000
 In-Reply-To: <20180215121040.20585-1-wei.liu2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,21 +25,20 @@ To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-U2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KLS0tCiB4ZW4vYXJj
-aC94ODYvc2V0dXAuYyB8IDcgKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygr
-KQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9zZXR1cC5jIGIveGVuL2FyY2gveDg2L3NldHVw
-LmMKaW5kZXggYWM1MzBlY2UyYy4uODllNDI4NjVhNCAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2
-L3NldHVwLmMKKysrIGIveGVuL2FyY2gveDg2L3NldHVwLmMKQEAgLTE3MDEsNiArMTcwMSwxMyBA
-QCB2b2lkIF9faW5pdCBub3JldHVybiBfX3N0YXJ0X3hlbih1bnNpZ25lZCBsb25nIG1iaV9wKQog
-ICAgICAgICAgICBjcHVfaGFzX254ID8gWEVOTE9HX0lORk8gOiBYRU5MT0dfV0FSTklORyAiV2Fy
-bmluZzogIiwKICAgICAgICAgICAgY3B1X2hhc19ueCA/ICIiIDogIm5vdCAiKTsKIAorCisgICAg
-cHJpbnRrKFhFTkxPR19JTkZPCisgICAgICAgICAgICJQQ0lEIChQcm9jZXNzLUNvbnRleHQgSURl
-bnRpZmllcikgJXNzdXBwb3J0ZWRcbiIsCisgICAgICAgICAgIGNwdV9oYXNfcGNpZCA/ICIiIDog
-Im5vdCAiKTsKKworICAgIHByaW50ayhYRU5MT0dfSU5GTyAiSU5WUENJRCAlc3N1cHBvcnRlZFxu
-IiwgY3B1X2hhc19pbnZwY2lkID8gIiIgOiAibm90ICIpOworCiAgICAgLyoKICAgICAgKiBXZSdy
-ZSBnb2luZyB0byBzZXR1cCBkb21haW4wIHVzaW5nIHRoZSBtb2R1bGUocykgdGhhdCB3ZSBzdGFz
-aGVkIHNhZmVseQogICAgICAqIGFib3ZlIG91ciBoZWFwLiBUaGUgc2Vjb25kIG1vZHVsZSwgaWYg
-cHJlc2VudCwgaXMgYW4gaW5pdHJkIHJhbWRpc2suCi0tIAoyLjExLjAKCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+U2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KLS0tCiB4ZW4vaW5j
+bHVkZS9hc20teDg2L2NwdWZlYXR1cmUuaCB8IDEgKwogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0
+aW9uKCspCgpkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9jcHVmZWF0dXJlLmggYi94
+ZW4vaW5jbHVkZS9hc20teDg2L2NwdWZlYXR1cmUuaAppbmRleCA1NWI2OTZlZDA3Li5kYjgwNzIy
+NzlkIDEwMDY0NAotLS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L2NwdWZlYXR1cmUuaAorKysgYi94
+ZW4vaW5jbHVkZS9hc20teDg2L2NwdWZlYXR1cmUuaApAQCAtOTMsNiArOTMsNyBAQAogI2RlZmlu
+ZSBjcHVfaGFzX2F2eDIgICAgICAgICAgICBib290X2NwdV9oYXMoWDg2X0ZFQVRVUkVfQVZYMikK
+ICNkZWZpbmUgY3B1X2hhc19zbWVwICAgICAgICAgICAgYm9vdF9jcHVfaGFzKFg4Nl9GRUFUVVJF
+X1NNRVApCiAjZGVmaW5lIGNwdV9oYXNfYm1pMiAgICAgICAgICAgIGJvb3RfY3B1X2hhcyhYODZf
+RkVBVFVSRV9CTUkyKQorI2RlZmluZSBjcHVfaGFzX2ludnBjaWQgICAgICAgICBib290X2NwdV9o
+YXMoWDg2X0ZFQVRVUkVfSU5WUENJRCkKICNkZWZpbmUgY3B1X2hhc19ydG0gICAgICAgICAgICAg
+Ym9vdF9jcHVfaGFzKFg4Nl9GRUFUVVJFX1JUTSkKICNkZWZpbmUgY3B1X2hhc19mcHVfc2VsICAg
+ICAgICAgKCFib290X2NwdV9oYXMoWDg2X0ZFQVRVUkVfTk9fRlBVX1NFTCkpCiAjZGVmaW5lIGNw
+dV9oYXNfbXB4ICAgICAgICAgICAgIGJvb3RfY3B1X2hhcyhYODZfRkVBVFVSRV9NUFgpCi0tIAoy
+LjExLjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
