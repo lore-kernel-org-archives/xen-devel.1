@@ -1,15 +1,16 @@
 From: Daniel Kiper <daniel.kiper@oracle.com>
-Subject: Re: [PATCH 1/8] xen: add some xen headers
-Date: Thu, 15 Feb 2018 12:12:46 +0100
-Message-ID: <20180215111246.GT19041@olila.local.net-space.pl>
+Subject: Re: [PATCH 2/8] loader/linux: support passing rsdp
+ address via boot params
+Date: Thu, 15 Feb 2018 12:17:16 +0100
+Message-ID: <20180215111716.GU19041__26895.8804234446$1518693412$gmane$org@olila.local.net-space.pl>
 References: <20171129134650.20102-1-jgross@suse.com>
- <20171129134650.20102-2-jgross@suse.com>
+ <20171129134650.20102-3-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <20171129134650.20102-2-jgross@suse.com>
+In-Reply-To: <20171129134650.20102-3-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,27 +23,13 @@ To: Juergen Gross <jgross@suse.com>
 Cc: grub-devel@gnu.org, phcoder@gmail.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBOb3YgMjksIDIwMTcgYXQgMDI6NDY6NDNQTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3
-cm90ZToKPiBJbiBvcmRlciB0byBzdXBwb3J0IGdydWIyIGluIFhlbiBQVkggZW52aXJvbm1lbnQg
-c29tZSBhZGRpdGlvbmFsIFhlbgo+IGhlYWRlcnMgYXJlIG5lZWRlZC4gQWRkIHRoZW0uCj4KPiBT
-aWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cj4gLS0tCj4gIGlu
-Y2x1ZGUveGVuL2h2bS9odm1fb3AuaCAgICAgfCAyOTYgKysrKysrKysrKysrKysrKysrKwo+ICBp
-bmNsdWRlL3hlbi9odm0vcGFyYW1zLmggICAgIHwgMjg0ICsrKysrKysrKysrKysrKysrKwo+ICBp
-bmNsdWRlL3hlbi9odm0vc3RhcnRfaW5mby5oIHwgIDk4ICsrKysrKysKPiAgaW5jbHVkZS94ZW4v
-bWVtb3J5LmggICAgICAgICB8IDY2NSArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrCj4gIGluY2x1ZGUveGVuL3BoeXNkZXYuaCAgICAgICAgfCAzODcgKysrKysrKysr
-KysrKysrKysrKysrKysrKwo+ICBpbmNsdWRlL3hlbi90cmFjZS5oICAgICAgICAgIHwgMzM5ICsr
-KysrKysrKysrKysrKysrKysrKysKPiAgaW5jbHVkZS94ZW4veGVuLmggICAgICAgICAgICB8IDEw
-NCArKysrKy0tCj4gIDcgZmlsZXMgY2hhbmdlZCwgMjE0MiBpbnNlcnRpb25zKCspLCAzMSBkZWxl
-dGlvbnMoLSkKPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IGluY2x1ZGUveGVuL2h2bS9odm1fb3AuaAo+
-ICBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS94ZW4vaHZtL3BhcmFtcy5oCj4gIGNyZWF0ZSBt
-b2RlIDEwMDY0NCBpbmNsdWRlL3hlbi9odm0vc3RhcnRfaW5mby5oCj4gIGNyZWF0ZSBtb2RlIDEw
-MDY0NCBpbmNsdWRlL3hlbi9tZW1vcnkuaAo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS94
-ZW4vcGh5c2Rldi5oCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBpbmNsdWRlL3hlbi90cmFjZS5oCgpJ
-cyBpdCBzaW1wbGUgY29weSBmcm9tIFhlbiBzb3VyY2U/IElmIHllcyBhbmQgd2UgbmVlZCBhbGwg
-dGhhdCBzdHVmZgoocmVhbGx5PykgSSB3b3VsZCBub3QgbWluZCBpZiB5b3UgbWVudGlvbiBYZW4g
-dmVyc2lvbiBvciBjb21taXQgaWQKaW4gdGhlIGNvbW1pdCBtZXNzYWdlIGZyb20gd2hpY2ggeW91
-IGNvcGllZCBpdC4KCkRhbmllbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+T24gV2VkLCBOb3YgMjksIDIwMTcgYXQgMDI6NDY6NDRQTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBYZW4gUFZIIGd1ZXN0cyB3aWxsIGhhdmUgdGhlIFJTRFAgYXQgYW4gYXJiaXRyYXJ5
+IGFkZHJlc3MuIFN1cHBvcnQgdGhhdAo+IGJ5IHBhc3NpbmcgdGhlIFJTRFAgYWRkcmVzcyB2aWEg
+dGhlIGJvb3QgcGFyYW1ldGVycyB0byBMaW51eC4KPgo+IFNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4g
+R3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCllvdSB0b2xkIG1lIHRoYXQgdGhpcyBwYXRjaCBzaG91
+bGQgYmUgcmV3cml0dGVuIHNvIEkgYW0gc2tpcHBpbmcgaXQKYW5kIGxvb2tpbmcgZm9yd2FyZCB0
+byBuZXcgdmVyc2lvbiBvZiBpdC4KCkRhbmllbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
