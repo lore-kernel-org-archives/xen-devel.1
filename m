@@ -1,19 +1,19 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 4/4] xen/arm: update the docs about
- heterogeneous computing
-Date: Fri, 16 Feb 2018 13:15:23 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1802161309560.5392@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1802151504290.5392@sstabellini-ThinkPad-X260>
- <1518736620-13802-1-git-send-email-sstabellini@kernel.org>
- <1518736620-13802-4-git-send-email-sstabellini@kernel.org>
- <43453493-bd6a-600d-6f48-429e8c683019@arm.com>
- <alpine.DEB.2.10.1802161232050.5392@sstabellini-ThinkPad-X260>
- <b179e31d-1351-afa3-3693-f067a529dd7b@arm.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH] intel_iommu: allow updating FEADDR and
+ FEUADDR with one 64bit write
+Date: Fri, 16 Feb 2018 22:23:01 +0100
+Message-ID: <20180216212301.GL4302__30920.0902157047$1518816162$gmane$org@mail-itl>
+References: <20180124141848.3969-1-marmarek@invisiblethingslab.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0974554275779317661=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <b179e31d-1351-afa3-3693-f067a529dd7b@arm.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=sszu=fk=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1emnTW-0007Wd-Ly
+ for xen-devel@lists.xenproject.org; Fri, 16 Feb 2018 21:23:22 +0000
+In-Reply-To: <20180124141848.3969-1-marmarek@invisiblethingslab.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,83 +22,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, wei.liu2@citrix.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, tim@xen.org, xen-devel@lists.xen.org, jbeulich@suse.com, nd@arm.com, ian.jackson@eu.citrix.com
+To: qemu-devel@nongnu.org
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCAxNiBGZWIgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IE9uIDE2LzAyLzIwMTgg
-MjA6NTAsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IE9uIEZyaSwgMTYgRmViIDIwMTgs
-IEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gSGkgU3RlZmFubywKPiA+ID4gCj4gPiA+IE9uIDE1
-LzAyLzE4IDIzOjE3LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiA+ID4gVXBkYXRlIHRo
-ZSBkb2N1bWVudGF0aW9uIG9mIHRoZSBobXAtdW5zYWZlIG9wdGlvbiB0byBleHBsYWluIGhvdyB0
-byB1c2UKPiA+ID4gPiBpdCBzYWZlbHksIHRvZ2V0aGVyIHdpdGggdGhlIHJpZ2h0IGNwdSBhZmZp
-bml0eSBzZXR0aW5nLCBvbiBiaWcuTElUVExFCj4gPiA+ID4gc3lzdGVtcy4KPiA+ID4gPiAKPiA+
-ID4gPiBBbHNvIHVwZGF0ZSB0aGUgd2FybmluZyBtZXNzYWdlIHRvIHBvaW50IHVzZXJzIHRvIHRo
-ZSBkb2NzLgo+ID4gPiA+IAo+ID4gPiA+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGlu
-aSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KPiA+ID4gPiBDQzogamJldWxpY2hAc3VzZS5jb20K
-PiA+ID4gPiBDQzoga29ucmFkLndpbGtAb3JhY2xlLmNvbQo+ID4gPiA+IENDOiB0aW1AeGVuLm9y
-Zwo+ID4gPiA+IENDOiB3ZWkubGl1MkBjaXRyaXguY29tCj4gPiA+ID4gQ0M6IGFuZHJldy5jb29w
-ZXIzQGNpdHJpeC5jb20KPiA+ID4gPiBDQzogR2VvcmdlLkR1bmxhcEBldS5jaXRyaXguY29tCj4g
-PiA+ID4gQ0M6IGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20KPiA+ID4gPiAKPiA+ID4gPiAtLS0K
-PiA+ID4gPiAgICBkb2NzL21pc2MveGVuLWNvbW1hbmQtbGluZS5tYXJrZG93biB8IDEwICsrKysr
-KysrKy0KPiA+ID4gPiAgICB4ZW4vYXJjaC9hcm0vc21wYm9vdC5jICAgICAgICAgICAgICB8ICA5
-ICsrKysrLS0tLQo+ID4gPiA+ICAgIDIgZmlsZXMgY2hhbmdlZCwgMTQgaW5zZXJ0aW9ucygrKSwg
-NSBkZWxldGlvbnMoLSkKPiA+ID4gPiAKPiA+ID4gPiBkaWZmIC0tZ2l0IGEvZG9jcy9taXNjL3hl
-bi1jb21tYW5kLWxpbmUubWFya2Rvd24KPiA+ID4gPiBiL2RvY3MvbWlzYy94ZW4tY29tbWFuZC1s
-aW5lLm1hcmtkb3duCj4gPiA+ID4gaW5kZXggMjE4NGNiOS4uYTFlYmVlYSAxMDA2NDQKPiA+ID4g
-PiAtLS0gYS9kb2NzL21pc2MveGVuLWNvbW1hbmQtbGluZS5tYXJrZG93bgo+ID4gPiA+ICsrKyBi
-L2RvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3duCj4gPiA+ID4gQEAgLTEwMDcsNyAr
-MTAwNywxNSBAQCBDb250cm9sIFhlbnMgdXNlIG9mIHRoZSBBUEVJIEhhcmR3YXJlIEVycm9yCj4g
-PiA+ID4gU291cmNlCj4gPiA+ID4gVGFibGUsIHNob3VsZCBvbmUgYmUgZm91bmQuCj4gPiA+ID4g
-ICAgICBTYXkgeWVzIGF0IHlvdXIgb3duIHJpc2sgaWYgeW91IHdhbnQgdG8gZW5hYmxlIGhldGVy
-b2dlbm91cwo+ID4gPiA+IGNvbXB1dGluZwo+ID4gPiA+ICAgIChzdWNoIGFzIGJpZy5MSVRUTEUp
-LiBUaGlzIG1heSByZXN1bHQgdG8gYW4gdW5zdGFibGUgYW5kIGluc2VjdXJlCj4gPiA+ID4gLXBs
-YXRmb3JtLiBXaGVuIHRoZSBvcHRpb24gaXMgZGlzYWJsZWQgKGRlZmF1bHQpLCBDUFVzIHRoYXQg
-YXJlIG5vdAo+ID4gPiA+ICtwbGF0Zm9ybSwgdW5sZXNzIHlvdSBtYW51YWxseSBzcGVjaWZ5IHRo
-ZSBjcHUgYWZmaW5pdHkgb2YgYWxsIGRvbWFpbnMKPiA+ID4gPiBzbwo+ID4gPiA+ICt0aGF0IGFs
-bCB2Y3B1cyBhcmUgc2NoZWR1bGVkIG9uIHRoZSBzYW1lIGNsYXNzIG9mIHBjcHVzIChiaWcgb3Ig
-TElUVExFCj4gPiA+ID4gK2J1dCBub3QgYm90aCkuIHZjcHUgbWlncmF0aW9uIGJldHdlZW4gYmln
-IGNvcmVzIGFuZCBMSVRUTEUgY29yZXMgaXMgbm90Cj4gPiA+ID4gK3N1cHBvcnRlZC4gVGh1cywg
-aWYgdGhlIGZpcnN0IDQgcGNwdXMgYXJlIGJpZyBhbmQgdGhlIGxhc3QgNCBhcmUKPiA+ID4gPiBM
-SVRUTEUsCj4gPiA+ID4gK2FsbCBkb21haW5zIG5lZWQgdG8gaGF2ZSBlaXRoZXIgY3B1cyA9ICIw
-LTMiIG9yIGNwdXMgPSAiNC03IiBpbiB0aGVpcgo+ID4gPiA+IFZNCj4gPiA+ID4gK2NvbmZpZy4g
-TW9yZW92ZXIsIGRvbTBfdmNwdXNfcGluIG5lZWRzIHRvIGJlIHBhc3NlZCBvbiB0aGUgWGVuIGNv
-bW1hbmQKPiA+ID4gPiArbGluZS4KPiA+ID4gCj4gPiA+IEluIHlvdXIgZXhhbXBsZSBoZXJlIHlv
-dSBzdWdnZXN0IHRvIGhhdmUgYWxsIHRoZSB2Q1BVcyBvZiBhIGd1ZXN0IHRvCj4gPiA+IGVpdGhl
-ciBvbgo+ID4gPiBiaWcgb3IgTElUVExFIGNvcmVzLiBIb3cgYWJvdXQgZ2l2aW5nIGFuIGV4YW1w
-bGUgd2hlcmUgdGhlIGd1ZXN0IGNhbiBoYXZlCj4gPiA+IDIKPiA+ID4gTElUVExFIHZDUFVzIGFu
-ZCBvbmUgYmlnIHZDUFU/Cj4gPiAKPiA+IEkgd291bGQgcmF0aGVyIGRpc2NvdXJhZ2UgaXQgYXQg
-dGhlIG1vbWVudCwgZ2l2ZW4gdGhhdCBpdCByZXF1aXJlcyBtb3JlCj4gPiBjb21wbGV4IGNwdSBh
-ZmZpbml0eSBzZXR0aW5ncywgb3IgdmNwdSBwaW5uaW5nLiBBbHNvLCBJIGFtIGFmcmFpZCB0aGF0
-Cj4gPiB3aXRob3V0IG1hdGNoaW5nIGNvcnJlc3BvbmRpbmcgdG9wb2xvZ3kgaW5mb3JtYXRpb24g
-b24gdGhlIGd1ZXN0IGRldmljZQo+ID4gdHJlZSwgZ3Vlc3RzIG1pZ2h0IG5vdCB3b3JrIGFzIGV4
-cGVjdGVkIGluIHN1Y2ggYSBzY2VuYXJpby4KPiA+IAo+ID4gV2hhdCBkbyB5b3UgdGhpbms/Cj4g
-Cj4gWW91IGFscmVhZHkga25vdyBteSB2aWV3IG9uIHRoaXMuIEkgd291bGQgcmF0aGVyIHN0cm9u
-Z2x5IGRpc2NvdXJhZ2UgYW55b25lCj4gcGlubmluZyBhbGwgdkNQVXMgb2YgYSBkb21haW4gdG8g
-YmlnIGNvcmVzLiBXZSBzaG91bGQgYXZvaWQgdG8gcHJvdmlkZQo+IHNob3J0Y3V0cyB0byB1c2Ug
-dGhhdCBjb3VsZCBoYXZlIHBvdGVudGlhbGx5IGRhbWFnZWFibGUgaW1wYWN0IG9uIHRoZWlyCj4g
-cGxhdGZvcm0gd2l0aG91dCB0ZWxsaW5nIHRoZW0uCgpEbyB5b3UgaGF2ZSBhIGxpbmsgdG8gYSBk
-b2Mgc29tZXdoZXJlIHRoYXQgcHJvdmlkZXMgbW9yZSBkZXRhaWxzIGFib3V0CnRoaXM/IFdlIGNv
-dWxkIGFkZCBhIGxpbmsgdG8gaXQgaGVyZSB0byBpbmZvcm0gdXNlcnMuIEl0IHdvdWxkIGJlCnVz
-ZWZ1bC4KCgo+ID4gSSBzZWUuIFdoYXQgYWJvdXQ6Cj4gPiAKPiA+ICAgIFNlZSBkb2NzL21pc2Mv
-eGVuLWNvbW1hbmQtbGluZS5tYXJrZG93bjpobXAtdW5zYWZlCj4gPiAKPiA+IE9yOgo+ID4gCj4g
-PiAgICBTZWUgaG1wLXVuc2FmZSB1bmRlcgo+ID4gaHR0cHM6Ly94ZW5iaXRzLnhlbi5vcmcvZG9j
-cy91bnN0YWJsZS9taXNjL3hlbi1jb21tYW5kLWxpbmUuaHRtbAo+IAo+IEkgYmVsaWV2ZSB0aGF0
-IHBlb3BsZSBsb29raW5nIGF0IGJpZy5MSVRUTEUgKGFuZCByZWFsbHkgd2FudCBpdCkgYXJlIHNt
-YXJ0Cj4gZW5vdWdoIHRvIGxvb2sgYXQgdGhlIGRvY3Mgb3IgdGhlIGNvZGUgdGhlbXNlbHZlcy4g
-R2l2ZW4gaG93IGZyYWdpbGUgaXMgeW91cgo+IHNvbHV0aW9uLCBJIHdvdWxkIHJhdGhlciBhdm9p
-ZCB0byBoZWxwIHBlb3BsZSBkb2luZyBiYWQgdGhpbmcuCgpQZW9wbGUgbWlnaHQga25vdyB2ZXJ5
-IHdlbGwgdGhlIGhhcmR3YXJlLCBhbmQgaGF2ZSB2ZXJ5IGRldGFpbGVkCmluZm9ybWF0aW9uIGFi
-b3V0IGJpZy5MSVRUTEUgYW5kIHRoZWlyIHBsYXRmb3JtLCBidXQgbWlnaHQgbm90IGtub3cgdGhh
-dAptdWNoIGFib3V0IFhlbi4KCkkgd291bGQgbGlrZSB0byBpbnRyb2R1Y2UgYSB0aWUgYmV0d2Vl
-biB0aGUgd2FybmluZyBtZXNzYWdlIGFuZCB0aGUKZG9jdW1lbnRhdGlvbiBwcm92aWRlZC4gVGhl
-IHRpZSBkb2Vzbid0IGhhdmUgdG8gYmUgYXJvdW5kIGhtcC11bnNhZmU6CnRoZSBpbnRlbnRpb24g
-d2Fzbid0IHJlYWxseSB0byBwcm92aWRlIGEgc2hvcnRjdXQgdG8gZG8gbW9yZSBkYW1hZ2UsIGJ1
-dApyYXRoZXIgdG8gaW5mb3JtIGFib3V0IHRoZSBzaXR1YXRpb24uIEluIGZhY3QsIEkgZGlkbid0
-IG1lYW4gdG8KcmVjb21tZW5kIHRoZSB1c2FnZSBvZiBobXAtdW5zYWZlLgoKTWF5YmUgd2UgY291
-bGQgc2F5OgoKICBTZWUgYmlnLkxJVFRMRSB1bmRlciBodHRwczovL3hlbmJpdHMueGVuLm9yZy9k
-b2NzL3Vuc3RhYmxlL21pc2MveGVuLWNvbW1hbmQtbGluZS5odG1sCgpvciBjcmVhdGUgZG9jcy9t
-aWNzL2FybS9iaWcuTElUVExFID8KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+
+--===============0974554275779317661==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="tBhgiDt8dP1efIIJ"
+Content-Disposition: inline
+
+
+--tBhgiDt8dP1efIIJ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Jan 24, 2018 at 03:18:48PM +0100, Marek Marczykowski-G=C3=B3recki w=
+rote:
+> Allow updating those two adjacent 32bit fields with one 64bit write.
+> This fixes qemu crash when booting Xen inside.
+>=20
+> See discussion on Xen side of the thing here:
+> http://xen.markmail.org/message/6mrmemrnmhxvaxba
+
+Bump.
+
+> Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingsl=
+ab.com>
+> ---
+>  hw/i386/intel_iommu.c | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/hw/i386/intel_iommu.c b/hw/i386/intel_iommu.c
+> index 2e841cde27..d214dce277 100644
+> --- a/hw/i386/intel_iommu.c
+> +++ b/hw/i386/intel_iommu.c
+> @@ -2129,8 +2129,12 @@ static void vtd_mem_write(void *opaque, hwaddr add=
+r,
+> =20
+>      /* Fault Event Address Register, 32-bit */
+>      case DMAR_FEADDR_REG:
+> -        assert(size =3D=3D 4);
+> -        vtd_set_long(s, addr, val);
+> +        assert(size =3D=3D 4 || size =3D=3D 8);
+> +        if (size =3D=3D 4) {
+> +            vtd_set_long(s, addr, val);
+> +        } else {
+> +            vtd_set_quad(s, addr, val);
+> +        }
+>          break;
+> =20
+>      /* Fault Event Upper Address Register, 32-bit */
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--tBhgiDt8dP1efIIJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlqHS60ACgkQ24/THMrX
+1ywT5wf9FG0sbvRyUsOVYMYyzCMiU8yxaHXoDWhb25+Tyl8u0KZ36v3EB1zcxU0d
+mv46ApyqDd2QjdyA1jul1N9aatssZhPDfsxCkc6ipPgO1dVuSyDgeCme8BX9sr8Z
+dOz+VwuKJ/YdB2TJ3Q5jE4pn717iTmvfgccXerOsau98j1aizs8EWfgf3xzezWK0
+73iWKxrOWsmPxKhJns3s88nbEOHdffz1JxHr64SMUK+KbtW8jxzf5CeL5KlqDuWQ
+prBU47LmK92gaQeZsw28qnFuv8mTEpnKAxsU3T/JMzn9JF8un6BVRaI7GDYj9xAD
+jNS3dTFTUYUkXH0haO92zQ6KkdOkTQ==
+=LJpZ
+-----END PGP SIGNATURE-----
+
+--tBhgiDt8dP1efIIJ--
+
+
+--===============0974554275779317661==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0974554275779317661==--
