@@ -1,10 +1,8 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2 1/2] x86/hvm: introduce cr_mask to store
- trapped bits of CR accesses
-Date: Fri, 16 Feb 2018 12:49:57 +0000
-Message-ID: <8f22586d-523f-c3a2-6b9f-c7a6f2514aed@citrix.com>
-References: <20180216121029.6872-1-roger.pau@citrix.com>
- <20180216121029.6872-2-roger.pau@citrix.com>
+Subject: Re: [PATCH] Propagate microcode update errors
+Date: Fri, 16 Feb 2018 13:25:37 +0000
+Message-ID: <50f113cd-2610-116e-3b2a-ae158d641dc0@citrix.com>
+References: <1518787194-26405-1-git-send-email-lawthers@amazon.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,9 +10,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=bmal=fk=citrix.com=prvs=5781d3f3f=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1emfSn-0006pT-8f
- for xen-devel@lists.xenproject.org; Fri, 16 Feb 2018 12:50:05 +0000
-In-Reply-To: <20180216121029.6872-2-roger.pau@citrix.com>
+ id 1emg1K-00012Z-LM
+ for xen-devel@lists.xenproject.org; Fri, 16 Feb 2018 13:25:46 +0000
+In-Reply-To: <1518787194-26405-1-git-send-email-lawthers@amazon.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,22 +22,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Jan Beulich <jbeulich@suse.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: Peter Lawthers <lawthers@amazon.com>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, Amit Shah <aams@amazon.de>, David Woodhouse <dwmw@amazon.co.uk>, Uwe Dannowski <uwed@amazon.de>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTYvMDIvMTggMTI6MTAsIFJvZ2VyIFBhdSBNb25uZSB3cm90ZToKPiBkaWZmIC0tZ2l0IGEv
-eGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vdmNwdS5oIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0v
-dmNwdS5oCj4gaW5kZXggZDkzMTY2ZmI5Mi4uODExZDRjMTBhZSAxMDA2NDQKPiAtLS0gYS94ZW4v
-aW5jbHVkZS9hc20teDg2L2h2bS92Y3B1LmgKPiArKysgYi94ZW4vaW5jbHVkZS9hc20teDg2L2h2
-bS92Y3B1LmgKPiBAQCAtMTU2LDYgKzE1Niw5IEBAIHN0cnVjdCBodm1fdmNwdSB7Cj4gICAgICAg
-Ki8KPiAgICAgIHVuc2lnbmVkIGxvbmcgICAgICAgaHdfY3JbNV07Cj4gIAo+ICsgICAgLyogQ2Fj
-aGVkIGNvcHkgb2YgdGhlIHRyYXBwZWQgYml0cyBvZiBDUnMuIFVzZWQgZm9yIENSMCBhbmQgQ1I0
-LiAqLwo+ICsgICAgdW5zaWduZWQgbG9uZyAgICAgICBtYXNrX2NyWzVdOwoKV2Ugb25seSBuZWVk
-IG1hc2tzIGZvciBjcjAgYW5kIGNyNCwgYW5kIEkgZG9uJ3QgZXhwZWN0IHRoaXMgdG8gY2hhbmdl
-CmZvciB0aGUgZm9yZXNlZWFibGUgZnV0dXJlIChDUjQgc3RpbGwgaGFzIHBsZW50eSBvZiBhdmFp
-bGFibGUgYml0cyBpbgppdCkuwqAgSSdkIHJlY29tbWVuZDoKCnVuc2lnbmVkIGxvbmcgY3IwX2hv
-c3RfbWFzaywgY3I0X2hvc3RfbWFzazsKCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTYvMDIvMTggMTM6MTksIFBldGVyIExhd3RoZXJzIHdyb3RlOgo+IEZyb206IFV3ZSBEYW5u
+b3dza2kgPHV3ZWRAYW1hem9uLmRlPgo+Cj4gRXJyb3JzIG9uIHVwZGF0aW5nIHRoZSBtaWNyb2Nv
+ZGUgaW4gdGhlIHByb2Nlc3NvciB3ZXJlIHNpbGVudGx5Cj4gZHJvcHBlZCB3aGVuIGludm9rZWQg
+dmlhIHRoZSBtaWNyb2NvZGVfdXBkYXRlIGh5cGVyY2FsbC4gQWxzbywgdGhlIGxvZwo+IG1lc3Nh
+Z2Ugd2FzIG1pc2xlYWRpbmcuCj4KPiBTaWduZWQtb2ZmLWJ5OiBVd2UgRGFubm93c2tpIDx1d2Vk
+QGFtYXpvbi5kZT4KPiBSZXZpZXdlZC1ieTogU3RlZmFuIE51ZXJuYmVyZ2VyIDxzbnVAYW1hem9u
+LmRlPgo+IFJldmlld2VkLWJ5OiBNYXJ0aW4gUG9obGFjayA8bXBvaGxhY2tAYW1hem9uLmRlPgo+
+IENDOiBEYXZpZCBXb29kaG91c2UgPGR3bXdAYW1hem9uLmNvLnVrPgo+IENDOiBBbWl0IFNoYWgg
+PGFhbXNAYW1hem9uLmRlPgo+IENDOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4g
+Q0M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cj4gLS0tCj4gIHhl
+bi9hcmNoL3g4Ni9taWNyb2NvZGVfaW50ZWwuYyB8IDUgKysrLS0KPiAgMSBmaWxlIGNoYW5nZWQs
+IDMgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS94ZW4vYXJj
+aC94ODYvbWljcm9jb2RlX2ludGVsLmMgYi94ZW4vYXJjaC94ODYvbWljcm9jb2RlX2ludGVsLmMK
+PiBpbmRleCBjNmI2N2U0Li5hOWIwZmY5IDEwMDY0NAo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9taWNy
+b2NvZGVfaW50ZWwuYwo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9taWNyb2NvZGVfaW50ZWwuYwo+IEBA
+IC0zMDksNyArMzA5LDggQEAgc3RhdGljIGludCBhcHBseV9taWNyb2NvZGUodW5zaWduZWQgaW50
+IGNwdSkKPiAgICAgIGlmICggdmFsWzFdICE9IHVjaS0+bWMubWNfaW50ZWwtPmhkci5yZXYgKQo+
+ICAgICAgewo+ICAgICAgICAgIHByaW50ayhLRVJOX0VSUiAibWljcm9jb2RlOiBDUFUlZCB1cGRh
+dGUgZnJvbSByZXZpc2lvbiAiCj4gLSAgICAgICAgICAgICAgICIlI3ggdG8gJSN4IGZhaWxlZFxu
+IiwgY3B1X251bSwgdWNpLT5jcHVfc2lnLnJldiwgdmFsWzFdKTsKPiArICAgICAgICAgICAgICAg
+ICIweCV4IHRvIDB4JXggZmFpbGVkLiBSZXN1bHRpbmcgcmV2aXNpb24gaXMgMHgleC5cbiIsIGNw
+dV9udW0sCgoweCV4IGFuZCAlI3ggYXJlIGlkZW50aWNhbCwgZXhjZXB0IHRoZSBsYXR0ZXIgaXMg
+c2hvcnRlci7CoCBBbHNvLCB0aGVyZSdzCnNvbWUgaW5kZW50YXRpb24gaXNzdWUuCgpFaXRoZXIg
+d2F5LCBSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNv
+bT4gYW5kIEkKY2FuIGZpeCB0aGVzZSBpc3N1ZXMgb24gY29tbWl0LgoKPiArICAgICAgICAgICAg
+ICAgIHVjaS0+Y3B1X3NpZy5yZXYsIHVjaS0+bWMubWNfaW50ZWwtPmhkci5yZXYsIHZhbFsxXSk7
+Cj4gICAgICAgICAgcmV0dXJuIC1FSU87Cj4gICAgICB9Cj4gICAgICBwcmludGsoS0VSTl9JTkZP
+ICJtaWNyb2NvZGU6IENQVSVkIHVwZGF0ZWQgZnJvbSByZXZpc2lvbiAiCj4gQEAgLTM4Nyw3ICsz
+ODgsNyBAQCBzdGF0aWMgaW50IGNwdV9yZXF1ZXN0X21pY3JvY29kZSh1bnNpZ25lZCBpbnQgY3B1
+LCBjb25zdCB2b2lkICpidWYsCj4gICAgICAgICAgZXJyb3IgPSBvZmZzZXQ7Cj4gIAo+ICAgICAg
+aWYgKCAhZXJyb3IgJiYgbWF0Y2hpbmdfY291bnQgKQo+IC0gICAgICAgIGFwcGx5X21pY3JvY29k
+ZShjcHUpOwo+ICsgICAgICAgIGVycm9yID0gYXBwbHlfbWljcm9jb2RlKGNwdSk7Cj4gIAo+ICAg
+ICAgcmV0dXJuIGVycm9yOwo+ICB9CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
