@@ -1,15 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: PV guest with PCI passthrough crash on Xen 4.8.3
- inside KVM when booted through OVMF
-Date: Fri, 16 Feb 2018 17:52:50 +0000
-Message-ID: <3b6ce245-626d-a6db-b9fa-77dcf26a4ad6@citrix.com>
-References: <20180216174835.GJ4302@mail-itl>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH] tools: libxenstat: fix format string
+	overflow
+Date: Fri, 16 Feb 2018 18:55:08 +0100
+Message-ID: <1518803708.3813.17.camel@suse.com>
+References: <151880261167.5804.2843218804728106933.stgit@Solace.fritz.box>
+ <20180216174405.z2dut66rkh3x5pnw@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3157453676228396832=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180216174835.GJ4302@mail-itl>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=7zwx=fk=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1emkEJ-0007rY-Gl
+ for xen-devel@lists.xenproject.org; Fri, 16 Feb 2018 17:55:27 +0000
+In-Reply-To: <20180216174405.z2dut66rkh3x5pnw@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,34 +22,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>, xen-devel <xen-devel@lists.xen.org>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTYvMDIvMTggMTc6NDgsIE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSB3cm90ZToKPiBI
-aSwKPgo+IEFzIGluIHRoZSBzdWJqZWN0LCB0aGUgZ3Vlc3QgY3Jhc2hlcyBvbiBib290LCBiZWZv
-cmUga2VybmVsIG91dHB1dAo+IGFueXRoaW5nLiBJJ3ZlIGlzb2xhdGVkIHRoaXMgdG8gdGhlIGNv
-bmRpdGlvbnMgYmVsb3c6Cj4gIC0gUFYgZ3Vlc3QgaGF2ZSBQQ0kgZGV2aWNlIGFzc2lnbmVkIChl
-MTAwMGUgZW11bGF0ZWQgYnkgUUVNVSBpbiB0aGlzIGNhc2UpLAo+ICAgIHdpdGhvdXQgUENJIGRl
-dmljZSBpdCB3b3Jrcwo+ICAtIFhlbiAoaW4gS1ZNKSBpcyBzdGFydGVkIHRocm91Z2ggT1ZNRjsg
-d2l0aCBzZWFiaW9zIGl0IHdvcmtzCj4gIC0gbmVzdGVkIEhWTSBpcyBkaXNhYmxlZCBpbiBLVk0K
-PiAgLSBBTUQgSU9NTVUgZW11bGF0aW9uIGlzIGRpc2FibGVkIGluIEtWTTsgd2hlbiBlbmFibGVk
-IHFlbXUgY3Jhc2hlcyBvbgo+ICAgIGJvb3QgKGxvb2tzIGxpa2UgcWVtdSBidWcsIHVucmVsYXRl
-ZCB0byB0aGlzIG9uZSkKPgo+IFZlcnNpb24gaW5mbzoKPiAgLSBLVk0gaG9zdDogT3BlblNVU0Ug
-NDIuMywgcWVtdSAyLjkuMSwgb3ZtZi0yMDE3K2dpdDE0OTIwNjA1NjAuYjZkMTFkN2M0Ni00LjEs
-IEFNRAo+ICAtIFhlbiBob3N0OiBYZW4gNC44LjMsIGRvbTA6IExpbnV4IDQuMTQuMTMKPiAgLSBY
-ZW4gZG9tVTogTGludXggNC4xNC4xMywgZGlyZWN0IGJvb3QKPgo+IE5vdCBzdXJlIGlmIHJlbGV2
-YW50LCBidXQgaW5pdGlhbGx5IEkndmUgdHJpZWQgYm9vdGluZyB4ZW4uZWZpIC9tYXBicwo+IC9u
-b2V4aXRib290IGFuZCB0aGVuIGRvbTAga2VybmVsIGNyYXNoZWQgc2F5aW5nIHNvbWV0aGluZyBh
-Ym91dCBjb25mbGljdAo+IGJldHdlZW4gZTgyMCBhbmQga2VybmVsIG1hcHBpbmcuIEJ1dCBub3cg
-dGhvc2Ugb3B0aW9ucyBhcmUgZGlzYWJsZWQuCj4KPiBUaGUgY3Jhc2ggbWVzc2FnZToKPiAoWEVO
-KSBkMXYwIFVuaGFuZGxlZCBpbnZhbGlkIG9wY29kZSBmYXVsdC90cmFwIFsjNiwgZWM9MDAwMF0K
-PiAoWEVOKSBkb21haW5fY3Jhc2hfc3luYyBjYWxsZWQgZnJvbSBlbnRyeS5TOiBmYXVsdCBhdCBm
-ZmZmODJkMDgwMjE4NzIwIGVudHJ5Lm8jY3JlYXRlX2JvdW5jZV9mcmFtZSsweDEzNy8weDE0Ngo+
-IChYRU4pIERvbWFpbiAxICh2Y3B1IzApIGNyYXNoZWQgb24gY3B1IzE6Cj4gKFhFTikgLS0tLVsg
-WGVuLTQuOC4zICB4ODZfNjQgIGRlYnVnPW4gICBOb3QgdGFpbnRlZCBdLS0tLQo+IChYRU4pIENQ
-VTogICAgMQo+IChYRU4pIFJJUDogICAgZTAzMzpbPGZmZmZmZmZmODI2ZDkxNTY+XQoKVGhpcyBp
-cyAjVUQsIHdoaWNoIGlzIG1vc3QgcHJvYmFibHkgaGl0dGluZyBhIEJVRygpLsKgIGFkZHIybGlu
-ZSB0aGlzIF4KdG8gZmluZCBzb21lIGNvZGUgdG8gbG9vayBhdC4KCn5BbmRyZXcKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============3157453676228396832==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-oQmgUKHe+tkKXlQkMtWr"
+
+
+--=-oQmgUKHe+tkKXlQkMtWr
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-02-16 at 17:44 +0000, Wei Liu wrote:
+> On Fri, Feb 16, 2018 at 06:36:51PM +0100, Dario Faggioli wrote:
+> >=20
+> > --- a/tools/xenstat/libxenstat/src/xenstat_linux.c
+> > +++ b/tools/xenstat/libxenstat/src/xenstat_linux.c
+> > @@ -69,18 +69,20 @@ void getBridge(char *excludeName, char *result,
+> > size_t resultLen)
+> >  	struct dirent *de;
+> >  	DIR *d;
+> > =20
+> > -	char tmp[256] =3D { 0 };
+> > -
+> >  	d =3D opendir("/sys/class/net");
+> >  	while ((de =3D readdir(d)) !=3D NULL) {
+> >  		if ((strlen(de->d_name) > 0) && (de->d_name[0] !=3D
+> > '.')
+> >  			&& (strstr(de->d_name, excludeName) =3D=3D
+> > NULL)) {
+> > -				sprintf(tmp,
+> > "/sys/class/net/%s/bridge", de->d_name);
+> > +				char *tmp;
+> > +
+> > +				asprintf(&tmp,
+> > "/sys/class/net/%s/bridge", de->d_name);
+>=20
+> Need to check the return value of asprintf.
+>=20
+Right! And what do I do if it fails, 'continue' the while(), I guess?
+
+Thanks and Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-oQmgUKHe+tkKXlQkMtWr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqHGvwACgkQFkJ4iaW4
+c+6kZg//dbX2tb7x3LnahdGLq52/oy9hLP60+mzaWwP8i7b1LQNEbYp0NRMxbUW7
+idvRHU/lNGOse4+3WuXVRsMqpD/BVU/xgsoa+0cEyZEogdzZ/t4/sA2B0kxtiF1e
+Sq6Eq8F8p/pGKuSzuQ/T1AvYWEbdKyB+pjnrEyTdEZswUdBJnUVxo+hOxbPyqt3+
+nHka77U0pFmsm03p041nLQRvnKk0U6F6nZEd98aZ9mG4Wm9AputpOHFAkJajP8tb
+v4CLFvg45fq3EBDOGZ4F//MyFFTh7nGWsOb64aSWRPtxAyvNU2u+rbnvJNNs0/5d
+4AbnUrrUcCDI4YwzBP12zrZqHUnd1IW40vQrf6UHsSEPQMXgRY20MjWVMNe07VUL
+a6InxOCy9zwMIIPcC+bu1EpsYtrbiEVU/sShQmKWCVTLm3VafcxSBhrzGU4TS3Mn
+xJ9BsWbUZcoNlobKq72tQJbkPzc95zj2sxRRQe6pkEcfXDbMPbTxOaG4sOCYsiqN
+rV4B/GX6lwGlOiJSNn0h7BKZxK992mcFR1/1wZaMjVp2PNfvNK9LY67RJnqhYLnp
+TYfpX9Ej08IUKsfV6eFGaikZCLed7aoT7r2u2F8071OA2At/iTWAOM4g1vtCNEYw
+78cimm2CeRqqzEirHV8T0a5n1SBo+9LKpmAulW4aE+ya5JJbVvw=
+=JY6W
+-----END PGP SIGNATURE-----
+
+--=-oQmgUKHe+tkKXlQkMtWr--
+
+
+
+--===============3157453676228396832==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3157453676228396832==--
