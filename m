@@ -1,17 +1,17 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: PV guest with PCI passthrough crash on Xen 4.8.3
- inside KVM when booted through OVMF
-Date: Fri, 16 Feb 2018 20:54:15 +0100
-Message-ID: <20180216195415.GK2084@mail-itl>
-References: <20180216174835.GJ4302@mail-itl>
- <3b6ce245-626d-a6db-b9fa-77dcf26a4ad6@citrix.com>
- <20180216185122.GK4302@mail-itl>
- <b8bb621f-1558-d207-4978-4dca46e350e6@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 3/4] xen/arm: set vpidr on the pcpu where
+ the vcpu will run
+Date: Fri, 16 Feb 2018 12:31:54 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1802161220100.5392@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1802151504290.5392@sstabellini-ThinkPad-X260>
+ <1518736620-13802-1-git-send-email-sstabellini@kernel.org>
+ <1518736620-13802-3-git-send-email-sstabellini@kernel.org>
+ <7e560512-4d82-386c-4e7e-64246f2f026b@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8222464516545064154=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <b8bb621f-1558-d207-4978-4dca46e350e6@citrix.com>
+In-Reply-To: <7e560512-4d82-386c-4e7e-64246f2f026b@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,142 +20,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <JGross@suse.com>, xen-devel <xen-devel@lists.xen.org>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8222464516545064154==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="cDtQGJ/EJIRf/Cpq"
-Content-Disposition: inline
-
-
---cDtQGJ/EJIRf/Cpq
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Feb 16, 2018 at 07:02:39PM +0000, Andrew Cooper wrote:
-> On 16/02/18 18:51, Marek Marczykowski-G=C3=B3recki wrote:
-> > On Fri, Feb 16, 2018 at 05:52:50PM +0000, Andrew Cooper wrote:
-> >> On 16/02/18 17:48, Marek Marczykowski-G=C3=B3recki wrote:
-> >>> Hi,
-> >>>
-> >>> As in the subject, the guest crashes on boot, before kernel output
-> >>> anything. I've isolated this to the conditions below:
-> >>>  - PV guest have PCI device assigned (e1000e emulated by QEMU in this=
- case),
-> >>>    without PCI device it works
-> >>>  - Xen (in KVM) is started through OVMF; with seabios it works
-> >>>  - nested HVM is disabled in KVM
-> >>>  - AMD IOMMU emulation is disabled in KVM; when enabled qemu crashes =
-on
-> >>>    boot (looks like qemu bug, unrelated to this one)
-> >>>
-> >>> Version info:
-> >>>  - KVM host: OpenSUSE 42.3, qemu 2.9.1, ovmf-2017+git1492060560.b6d11=
-d7c46-4.1, AMD
-> >>>  - Xen host: Xen 4.8.3, dom0: Linux 4.14.13
-> >>>  - Xen domU: Linux 4.14.13, direct boot
-> >>>
-> >>> Not sure if relevant, but initially I've tried booting xen.efi /mapbs
-> >>> /noexitboot and then dom0 kernel crashed saying something about confl=
-ict
-> >>> between e820 and kernel mapping. But now those options are disabled.
-> >>>
-> >>> The crash message:
-> >>> (XEN) d1v0 Unhandled invalid opcode fault/trap [#6, ec=3D0000]
-> >>> (XEN) domain_crash_sync called from entry.S: fault at ffff82d08021872=
-0 entry.o#create_bounce_frame+0x137/0x146
-> >>> (XEN) Domain 1 (vcpu#0) crashed on cpu#1:
-> >>> (XEN) ----[ Xen-4.8.3  x86_64  debug=3Dn   Not tainted ]----
-> >>> (XEN) CPU:    1
-> >>> (XEN) RIP:    e033:[<ffffffff826d9156>]
-> >> This is #UD, which is most probably hitting a BUG().=C2=A0 addr2line t=
-his ^
-> >> to find some code to look at.
-> > addr2line failed me
->=20
-> By default, vmlinux is stripped and compressed.=C2=A0 Ideally you want to
-> addr2line the vmlinux artefact in the root of your kernel build, which
-> is the plain elf with debugging symbols.
-
-Yes, I've used it on vmlinux. Still got "??:?".
-
-> Alternatively, use scripts/extract-vmlinux on the binary you actually
-> booted, which might get you somewhere.
-
-Interestingly, that fails too ("Cannot find vmlinux.").
-But I don't care right now.
-
-> > , but System.map says its xen_memory_setup. And it
-> > looks like the BUG() is the same as I had in dom0 before:
-> > "Xen hypervisor allocated kernel memory conflicts with E820 map".
->=20
-> Juergen: Is there anything we can do to try and insert some dummy
-> exception handlers right at PV start, so we could at least print out a
-> oneliner to the host console which is a little more helpful than Xen
-> saying "something unknown went wrong" ?
-
-Just before the BUG(), there is a call to xen_raw_console_write(). But
-apparently it was too early...
-
-> > Disabling e820_host in guest config solved the problem. Thanks!
-> >
-> > Is this some bug in Xen or OVMF, or is it expected behavior and e820_ho=
-st
-> > should be avoided?
->=20
-> I don't really know.=C2=A0 e820_host is a gross hack which shouldn't real=
-ly
-> be present.=C2=A0 The actually problem is that Linux can't cope with the
-> memory layout it was given (and I can't recall if there is anything
-> Linux could potentially to do cope).=C2=A0 OTOH, the toolstack, which knew
-> about e820_host and chose to lay the guest out in an overlapping way is
-> probably also at fault.
-
-Yes, probably. But note that the same happened to dom0, when /mapbs is
-used. Toolstack wasn't involved there. But /mapbs is also a hack.
-
-> IMO, PCI Passthrough is a trainwreck, and it is a miracle it functions
-> at all.
->=20
-> ~Andrew
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---cDtQGJ/EJIRf/Cpq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlqHNt8ACgkQ24/THMrX
-1yys8Qf/T6dHzYBSd3W4Sge+nMdw1ge0idZlT/9XGs7Kaw9+ClVwo+PSFjq+84mL
-yUaIPsk9rrwrL/HUksQ5P+QfYyVHQliSxByZcN/5qf+6x5Xf+sgGFoF9F9tvyfd5
-NlOtOxtpr3ijwncOIxGeaywzhxhkJdjGOrYwiaB6LNJdLJD4uxTukYTpnUsm6IpP
-SmtY5ggU71ZMf1qi+at26wun7YGfNC8JeJfds3M3lpNJulPeD5hebVfEIAkMuchi
-b0N5v7XyXAB2DHFwRYOVlyCYGZgTQtQEH7hfnsjDDG1pLdAJmD6NEcTxFVLSfvWh
-GNZpAjihEzRCsZ1AiUthUq8QJIYp0Q==
-=vr/h
------END PGP SIGNATURE-----
-
---cDtQGJ/EJIRf/Cpq--
-
-
---===============8222464516545064154==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8222464516545064154==--
+T24gRnJpLCAxNiBGZWIgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIFN0ZWZhbm8sCj4g
+Cj4gT24gMTUvMDIvMTggMjM6MTYsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IE9uIGJp
+Zy5MSVRUTEUgc3lzdGVtcyBub3QgYWxsIGNvcmVzIGhhdmUgdGhlIHNhbWUgbWlkci4gSW5zdGVh
+ZCBvZgo+ID4gaW5pdGlhbGl6aW5nIHRoZSB2cGlkciB0byB0aGUgYm9vdCBjcHUgbWlkciwgc2V0
+IGl0IHRvIHRoZSB2YWx1ZSBvZiB0aGUKPiA+IG1pZHIgb2YgdGhlIHBjcHUgd2hlcmUgdGhlIHZj
+cHUgd2lsbCBydW4uCj4gPiAKPiA+IFRoaXMgd2F5LCBhc3N1bWluZyB0aGF0IHRoZSB2Y3B1IGhh
+cyBiZWVuIGNyZWF0ZWQgd2l0aCB0aGUgcmlnaHQgcGNwdQo+ID4gYWZmaW5pdHksIHRoZSBndWVz
+dCB3aWxsIGJlIGFibGUgdG8gcmVhZCB0aGUgcmlnaHQgdnBpZHIgdmFsdWUsIG1hdGNoaW5nCj4g
+PiB0aGUgb25lIG9mIHRoZSBwaHlzaWNhbCBjcHUuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IFN0
+ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KPiA+IC0tLQo+ID4gICB4
+ZW4vYXJjaC9hcm0vZG9tYWluLmMgfCAxOSArKysrKysrKysrKysrKysrLS0tCj4gPiAgIDEgZmls
+ZSBjaGFuZ2VkLCAxNiBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+ID4gCj4gPiBkaWZm
+IC0tZ2l0IGEveGVuL2FyY2gvYXJtL2RvbWFpbi5jIGIveGVuL2FyY2gvYXJtL2RvbWFpbi5jCj4g
+PiBpbmRleCA1MzJlODI0Li4yODAxMjVmIDEwMDY0NAo+ID4gLS0tIGEveGVuL2FyY2gvYXJtL2Rv
+bWFpbi5jCj4gPiArKysgYi94ZW4vYXJjaC9hcm0vZG9tYWluLmMKPiA+IEBAIC0zMTUsNiArMzE1
+LDIyIEBAIHN0YXRpYyB2b2lkIHNjaGVkdWxlX3RhaWwoc3RydWN0IHZjcHUgKnByZXYpCj4gPiAg
+IHN0YXRpYyB2b2lkIGNvbnRpbnVlX25ld192Y3B1KHN0cnVjdCB2Y3B1ICpwcmV2KQo+ID4gICB7
+Cj4gPiAgICAgICBjdXJyZW50LT5hcmNoLmFjdGxyID0gUkVBRF9TWVNSRUczMihBQ1RMUl9FTDEp
+Owo+ID4gKyAgICAvKgo+ID4gKyAgICAgKiBEZWZhdWx0IHRoZSB2aXJ0dWFsIElEIHRvIG1hdGNo
+IHRoZSBwaHlzaWNhbC4KPiA+ICsgICAgICoKPiA+ICsgICAgICogSW4gY2FzZSB0aGUgYmlnLkxJ
+VFRMRSBzeXN0ZW1zLCBhIGd1ZXN0IHNob3VsZCBiZSBjcmVhdGVkIHdpdGgKPiA+ICsgICAgICog
+Y3B1IGFmZmluaXR5IHNldCBzbyB0aGF0IGFsbCB2Y3B1cyBydW4gb24gdGhlIHNhbWUga2luZCBv
+ZiBwY3B1cy4KPiA+ICsgICAgICogV2FybiBpZiBpdCBpcyBub3QgdGhlIGNhc2UuCj4gCj4gY29u
+dGludWVfbmV3X3ZjcHUgaXMgb25seSBjYWxsZWQgb25jZSBhdCBkb21haW4gY3JlYXRpb24uIFNv
+IHRoaXMgbG9va3MKPiBwb2ludGxlc3MgdG8gY2hlY2sgdGhhdCBoZXJlIGFuZCBwcm9iYWJseSBp
+biBjdHh0X3N3aXRjaF90by4KPiAKPiBCdXQgSSBkb24ndCB3YW50IHRvIHNlZSBzdWNoIGNoZWNr
+IGF0IGV2ZXJ5IGNvbnRleHQgc3dpdGNoLiBUaGlzIGlzIGV4cGVuc2l2ZQo+IGFuZCB3ZSBzaG91
+bGQgbm90IGltcGFjdCBhbGwgdGhlIHBsYXRmb3JtcyBmb3IgdGhlIGJlbmVmaXRzIG9mIGFuIHVu
+c2FmZQo+IGNvbmZpZ3VyYXRpb24uCj4gCj4gSWYgeW91IHJlYWxseSB3YW50IHRvIGRvIHRoYXQs
+IHRoZW4gaXQgc2hvdWxkIG9ubHkgYmUgZG9uZSB3aGVuIHRoZSB2Q1BVIGlzCj4gbWlncmF0aW5n
+LiBUaGF0IHdpbGwgcmVkdWNlIGEgbG90IHRoZSBwZXJmb3JtYW5jZSBpbXBhY3QuCgpJIGRvbid0
+IHdhbnQgYSBjaGVjayBmb3IgZXZlcnkgY29udGV4dCBzd2l0Y2ggZWl0aGVyLiBJIGFkZGVkIGl0
+IGhlcmUKYmVjYXVzZSBjb250aW51ZV9uZXdfdmNwdSBpcyBvbmx5IGNhbGxlZCBvbmNlIHBlciB2
+Y3B1IGF0IGRvbWFpbgpjcmVhdGlvbiAtLSBpdCBpcyBhIG9uZSB0aW1lIGNoZWNrLiB2Y3B1cyBh
+cmUgc3VwcG9zZWQgdG8gYmUgcGlubmVkIChvcgpjcHUgYWZmaW5pdHkgc3BlY2lmaWVkKSBhbnl3
+YXksIHNvIEkgdGhvdWdodCBJIHdvdWxkbid0IGFkZCB0aGUgY2hlY2sgaW4KdmNwdV9taWdyYXRl
+IHRvby4gSW4gYW55IGNhc2UsIEkgYW0gYWxzbyBoYXBweSB0byByZW1vdmUgdGhlIGNoZWNrCmNv
+bXBsZXRlbHksIGFzIHdlIGhhdmUgYWxyZWFkeSB3YXJuZWQgdGhlIHVzZXIgZW5vdWdoLgoKCj4g
+PiArICAgICAqLwo+ID4gKyAgICBpZiAoICFjdXJyZW50LT5kb21haW4tPmFyY2gudnBpZHIgKQo+
+ID4gKyAgICAgICAgY3VycmVudC0+ZG9tYWluLT5hcmNoLnZwaWRyID0gY3VycmVudF9jcHVfZGF0
+YS5taWRyLmJpdHM7Cj4gPiArICAgIGVsc2UgaWYgKCBjdXJyZW50LT5kb21haW4tPmFyY2gudnBp
+ZHIgIT0gY3VycmVudF9jcHVfZGF0YS5taWRyLmJpdHMgKQo+ID4gKyAgICB7Cj4gPiArICAgICAg
+ICBnZHByaW50ayhYRU5MT0dfV0FSTklORywKPiA+ICsgICAgICAgICAgICAgICAgICJXQVJOSU5H
+OiBwb3NzaWJsZSBjb3JydXB0aW9ucyEgZCV1diV1IGlzIHJ1bm5pbmcgb24gYQo+ID4gcGNwdSB3
+aXRoIGRpZmZlcmVudCBtaWRyICgleCkgZnJvbSB0aGUgb3RoZXJzICgleClcbiIsCj4gCj4gTklU
+OiBJIHdvdWxkIHByZWZlciBpZiB5b3UgdXNlIHVwcGVyY2FzZSBmb3IgcGNwdSBhbmQgbWlkci4g
+VGhpcyBpcyBlYXNpZXIgdG8KPiByZWFkLgo+IAo+IEFsc28sIGdkcHJpbnRrIGFscmVhZHkgcHJp
+bnQgdGhlIGRvbWFpbiB2Q1BVLiBTbyBpdCBpcyBub3QgbmVjZXNzYXJ5IHRvIGhhdmUKPiBpdCBh
+Z2FpbiBpbiB0aGUgbWVzc2FnZS4KCkknbGwgbWFrZSB0aGUgY2hhbmdlcwoKCj4gCj4gPiArICAg
+ICAgICAgICAgICAgICBjdXJyZW50LT5kb21haW4tPmRvbWFpbl9pZCwgY3VycmVudC0+dmNwdV9p
+ZCwKPiA+ICsgICAgICAgICAgICAgICAgIGN1cnJlbnRfY3B1X2RhdGEubWlkci5iaXRzLCBjdXJy
+ZW50LT5kb21haW4tPmFyY2gudnBpZHIpOwo+ID4gKyAgICB9Cj4gPiAgICAgICAgIHNjaGVkdWxl
+X3RhaWwocHJldik7Cj4gPiAgIEBAIC01OTYsOSArNjEyLDYgQEAgaW50IGFyY2hfZG9tYWluX2Ny
+ZWF0ZShzdHJ1Y3QgZG9tYWluICpkLCB1bnNpZ25lZCBpbnQKPiA+IGRvbWNyX2ZsYWdzLAo+ID4g
+ICAgICAgaWYgKCAoZC0+c2hhcmVkX2luZm8gPSBhbGxvY194ZW5oZWFwX3BhZ2VzKDAsIDApKSA9
+PSBOVUxMICkKPiA+ICAgICAgICAgICBnb3RvIGZhaWw7Cj4gPiAgIC0gICAgLyogRGVmYXVsdCB0
+aGUgdmlydHVhbCBJRCB0byBtYXRjaCB0aGUgcGh5c2ljYWwgKi8KPiA+IC0gICAgZC0+YXJjaC52
+cGlkciA9IGJvb3RfY3B1X2RhdGEubWlkci5iaXRzOwo+ID4gLQo+ID4gICAgICAgY2xlYXJfcGFn
+ZShkLT5zaGFyZWRfaW5mbyk7Cj4gPiAgICAgICBzaGFyZV94ZW5fcGFnZV93aXRoX2d1ZXN0KAo+
+ID4gICAgICAgICAgIHZpcnRfdG9fcGFnZShkLT5zaGFyZWRfaW5mbyksIGQsIFhFTlNIQVJFX3dy
+aXRhYmxlKTsKPiA+IAo+IAo+IENoZWVycywKPiAKPiAtLSAKPiBKdWxpZW4gR3JhbGwKPiAKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
