@@ -1,16 +1,14 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [libvirt test] 119370: regressions - trouble:
-	blocked/broken/pass
-Date: Sat, 17 Feb 2018 03:17:05 +0000
-Message-ID: <osstest-119370-mainreport@xen.org>
+From: Alexey G <x1917x@gmail.com>
+Subject: Re: [PATCH v2] x86/nmi: start NMI watchdog on CPU0
+ after SMP bootstrap
+Date: Sat, 17 Feb 2018 15:20:58 +1000
+Message-ID: <20180217152058.000074ae@gmail.com>
+References: <1518803208-25855-1-git-send-email-igor.druzhinin@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7306591123006099311=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=husu=fl=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1emt00-00063u-Ji
- for xen-devel@lists.xenproject.org; Sat, 17 Feb 2018 03:17:16 +0000
+In-Reply-To: <1518803208-25855-1-git-send-email-igor.druzhinin@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,411 +17,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Igor Druzhinin <igor.druzhinin@citrix.com>
+Cc: andrew.cooper3@citrix.com, jbeulich@suse.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============7306591123006099311==
-Content-Type: text/plain
-
-flight 119370 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/119370/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-armhf-pvops               <job status>                 broken
- build-armhf-pvops             5 host-build-prep          fail REGR. vs. 119049
-
-Tests which did not succeed, but are not blocking:
- test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
- test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
- test-armhf-armhf-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt     14 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-arm64-arm64-libvirt-qcow2 12 migrate-support-check        fail never pass
- test-arm64-arm64-libvirt-qcow2 13 saverestore-support-check    fail never pass
- test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
-
-version targeted for testing:
- libvirt              d70d07eef8001b55a5f6b18a2065da2b528d3679
-baseline version:
- libvirt              554a5edcb46ff972fed45b851d70823b923fec6a
-
-Last test of basis   119049  2018-02-13 04:20:05 Z    3 days
-Failing since        119148  2018-02-14 04:23:35 Z    2 days    3 attempts
-Testing same since   119237  2018-02-15 04:25:30 Z    1 days    2 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrea Bolognani <abologna@redhat.com>
-  Bjoern Walk <bwalk@linux.vnet.ibm.com>
-  Jiri Denemark <jdenemar@redhat.com>
-  Michal Privoznik <mprivozn@redhat.com>
-  Peter Krempa <pkrempa@redhat.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-armhf-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            broken  
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-armhf-armhf-libvirt-xsm                                 blocked 
- test-amd64-i386-libvirt-xsm                                  pass    
- test-amd64-amd64-libvirt                                     pass    
- test-arm64-arm64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     blocked 
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-arm64-arm64-libvirt-qcow2                               pass    
- test-armhf-armhf-libvirt-raw                                 blocked 
- test-amd64-amd64-libvirt-vhd                                 pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-broken-job build-armhf-pvops broken
-
-Not pushing.
-
-------------------------------------------------------------
-commit d70d07eef8001b55a5f6b18a2065da2b528d3679
-Author: Peter Krempa <pkrempa@redhat.com>
-Date:   Mon Feb 12 16:16:42 2018 +0100
-
-    virstoragetest: Add test case for NBD over unix socket with new syntax
-    
-    Use the new syntax which uses the 'UnixSocket' type in qemu.
-    
-    Signed-off-by: Peter Krempa <pkrempa@redhat.com>
-
-commit a3a3de9bc74aea9f56790210948cdb7cf579d84c
-Author: Peter Krempa <pkrempa@redhat.com>
-Date:   Mon Feb 12 15:44:11 2018 +0100
-
-    storage: Fix formatting and parsing of qemu type 'UnixSocketAddress'
-    
-    The documentation for the JSON/qapi type 'UnixSocketAddress' states that
-    the unix socket path field is named 'path'. Unfortunately qemu uses
-    'socket' in case of the gluster driver (despite documented otherwise).
-    
-    Add logic which will format the correct fields while keeping support of
-    the old spelling.
-    
-    Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1544325
-    
-    Signed-off-by: Peter Krempa <pkrempa@redhat.com>
-
-commit bc84bb9fe001fc3ca5436b9b50fbd669e4c489b6
-Author: Jiri Denemark <jdenemar@redhat.com>
-Date:   Wed Feb 14 13:16:52 2018 +0100
-
-    spec: Drop overlapping triggers
-    
-    The postun trigger for libvirt-daemon was defined twice for overlapping
-    ranges of package verions if systemd support was switched off (which
-    happens when building on something ancient, such as RHEL-6).
-    
-    Let's combine the two triggers into the one which is called when
-    libvirt-daemon < 1.3.0 is uninstalled. As a side effect, virtlockd and
-    virtlogd might be reloaded twice after an upgrade from libvirt newer
-    than 1.2.1 and older than 1.3.0 (by postun script from the old libvirt
-    and postun trigger from the new libvirt).
-    
-    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
-    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
-
-commit cf555f92128222f5a392cf80478c0a291bb1a0fe
-Author: Jiri Denemark <jdenemar@redhat.com>
-Date:   Wed Feb 14 12:09:32 2018 +0100
-
-    spec: Fix indentation in daemon's triggerpostun
-    
-    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
-    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
-
-commit b2ab38bfdc765bbcb56b89b55dfee6b406fc8c29
-Author: Jiri Denemark <jdenemar@redhat.com>
-Date:   Fri Feb 9 14:08:45 2018 +0100
-
-    spec: Prepare for future RHEL
-    
-    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
-    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
-
-commit 259b5ca73c13d09b510475e1bb58d31d509193ba
-Author: Jiri Denemark <jdenemar@redhat.com>
-Date:   Fri Feb 9 14:02:00 2018 +0100
-
-    spec: Drop checks for old Fedora releases
-    
-    The oldest Fedora release supported by the spec file is 26. Checking for
-    anything older makes no sense.
-    
-    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
-    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
-
-commit 42188c1c65c34b8e77ad48f4dde8a5f06328f16a
-Author: Jiri Denemark <jdenemar@redhat.com>
-Date:   Wed Feb 14 14:49:28 2018 +0100
-
-    spec: Build virt-login-shell iff LXC driver is enabled
-    
-    Building virt-login-shell doesn't really make any sense without LXC and
-    doing so even breaks "make rpm" since the associated files are installed
-    but unpackaged (the login-shell sub package already depends on LXC).
-    
-    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
-    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
-
-commit 34783a9e6b9c3d8850db878fc323c1ff40703ea6
-Author: Jiri Denemark <jdenemar@redhat.com>
-Date:   Fri Feb 9 13:42:50 2018 +0100
-
-    spec: Enable fuse only if LXC is enabled
-    
-    Enabling fuse without LXC does not make a lot of sense because fuse is
-    used only by LXC.
-    
-    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
-    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
-
-commit b62b8090b2ad4524a5bf9d40d0d1c17a9d57f5a0
-Author: Michal Privoznik <mprivozn@redhat.com>
-Date:   Tue Feb 6 10:21:56 2018 +0100
-
-    qemu: Check for down limit of SLIRP prefix too
-    
-    https://bugzilla.redhat.com/show_bug.cgi?id=1515533
-    
-    We're already checking if IPv4 prefix isn't too long. But we are
-    not checking if it isn't too short. QEMU supports prefixes longer
-    than 4 (including). I haven't find anything similar related to
-    IPv6 in qemu sources.
-    
-    Signed-off-by: Michal Privoznik <mprivozn@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit 9cae9c822be1330fe5c6eec5c61be2be8b70ba64
-Author: Peter Krempa <pkrempa@redhat.com>
-Date:   Mon Feb 12 15:50:12 2018 +0100
-
-    qemu: block: Remove misleading part of comment in qemuBlockStorageSourceBuildJSONSocketAddress
-    
-    The array indexes are formatted if the JSON->commandline translator is
-    translating an array type. It does not at all depend on this function.
-    
-    Signed-off-by: Peter Krempa <pkrempa@redhat.com>
-
-commit 6fc33b6f37af2310fd5bb1246e194eed96741df8
-Author: Bjoern Walk <bwalk@linux.vnet.ibm.com>
-Date:   Thu Feb 8 13:38:25 2018 +0100
-
-    tests: run virshtest independent of current pwd
-    
-    virshtest execves the virsh binary. Make sure that it finds the binary's
-    location independent of the current working directory by specifying the
-    absolute path as determined by the build environment.
-    
-    Reviewed-by: Marc Hartmayer <mhartmay@linux.vnet.ibm.com>
-    Reviewed-by: Boris Fiuczynski <fiuczy@linux.vnet.ibm.com>
-    Signed-off-by: Bjoern Walk <bwalk@linux.vnet.ibm.com>
-
-commit e6f36ae43544576353a8ab1168d749dcd11e7465
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Tue Jan 23 10:50:04 2018 +0100
-
-    tests: Clean up HPT tests
-    
-    Give them better names and remove some redundancy.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit 3dd1eb3b26504f91ec6c8487784c494718d884c1
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Tue Feb 6 14:49:41 2018 +0100
-
-    conf: Improve HPT feature handling
-    
-    Instead of storing separately whether the feature is enabled
-    or not and what resizing policy should be used, store both of
-    them in a single place.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit c5a451ef21293468b64eb7929ada6b9406350bf5
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Tue Feb 6 14:30:40 2018 +0100
-
-    conf: Improve IOAPIC feature handling
-    
-    Instead of storing separately whether the feature is enabled
-    or not and what driver should be used, store both of them in
-    a single place.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit 132548efde76defaca54f90cc9c8a57508a4a86f
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Thu Feb 1 17:52:48 2018 +0100
-
-    qemu: Fix GIC behavior for the default case
-    
-    When no GIC version is specified, we currently default to GIC v2;
-    however, that's not a great default, since guests will fail to
-    start if the hardware only supports GIC v3.
-    
-    Change the behavior so that a sensible default is chosen instead.
-    That basically means using the same algorithm whether the user
-    didn't explicitly enable the GIC feature or they explicitly
-    enabled it but didn't specify any GIC version.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit 7500533c5629c4864ae6cfa6672ff28f36e7010f
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Thu Feb 1 18:17:13 2018 +0100
-
-    tests: Improve GIC tests
-    
-    Account for the fact that the default might change based on what
-    GIC versions are supported by QEMU. That's not the case at the
-    moment, but it will be soon.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit f3b4c98748458fe149ee3d4ad65528a0b3b278b0
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Fri Feb 2 15:55:14 2018 +0100
-
-    conf: Integrate all features ABI checks in the switch
-    
-    There are a few stray checks which still live outside of the
-    switch in virDomainDefFeaturesCheckABIStability() for no good
-    reason. Move them inside the switch, and update the error
-    messages to be consistent while at it.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit 53072064745731e8c887f8ee71092060a4025c62
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Thu Feb 1 12:35:15 2018 +0100
-
-    conf: Validate VIR_DOMAIN_FEATURE_CAPABILITIES properly
-    
-    Unlike most other features, VIR_DOMAIN_FEATURE_CAPABILITIES is
-    of type virDomainCapabilitiesPolicy instead of virTristateSwitch,
-    so we need to handle it separately for the error message to make
-    sense.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit a975c95967e5da43c231601913ccb2077c8434b6
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Thu Feb 1 12:31:57 2018 +0100
-
-    conf: Use switch in virDomainDefFeaturesCheckABIStability()
-    
-    The compiler can make sure we are handling all features.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit f55fcb7e8f997d0f15b344c8653725624c7b37ee
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Fri Feb 2 16:05:51 2018 +0100
-
-    qemu: Move GIC checks to qemuDomainDefValidateFeatures()
-    
-    Keep them along with other arch/machine type checks for
-    features instead of waiting until command line generation
-    time.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit ce24802a6b1c86f13735ce9533acff15346138a3
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Fri Feb 2 16:05:01 2018 +0100
-
-    qemu: Use switch in qemuDomainDefValidateFeatures()
-    
-    The compiler can make sure we are handling all features.
-    
-    While reworking the logic, also change error messages to a more
-    consistent style.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-commit 56ca68c3c8947fb37e97a131af7d0fcd1987e800
-Author: Andrea Bolognani <abologna@redhat.com>
-Date:   Fri Feb 2 10:58:13 2018 +0100
-
-    qemu: Move feature verification from PostParse() to Validate()
-    
-    We want to perform all feature verification in a single spot, but
-    some of it (eg. GIC) is currently being performed at command line
-    generation time, and moving it to PostParse() would cause guests
-    to disappear. Moving verification to Validate() allows us to
-    side-step the issue.
-    
-    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
-    Reviewed-by: John Ferlan <jferlan@redhat.com>
-
-
---===============7306591123006099311==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7306591123006099311==--
+T24gRnJpLCAxNiBGZWIgMjAxOCAxNzo0Njo0OCArMDAwMApJZ29yIERydXpoaW5pbiA8aWdvci5k
+cnV6aGluaW5AY2l0cml4LmNvbT4gd3JvdGU6Cgo+V2UncmUgbm90aWNpbmcgYSByZXByb2R1Y2li
+bGUgc3lzdGVtIGJvb3QgaGFuZyBvbiBjZXJ0YWluCj5wb3N0LVNreWxha2UgcGxhdGZvcm1zIHdo
+ZXJlIHRoZSBCSU9TIGlzIGNvbmZpZ3VyZWQgaW4KPmxlZ2FjeSBib290IG1vZGUgd2l0aCB4MkFQ
+SUMgZGlzYWJsZWQuIFRoZSBzeXN0ZW0gc3RhbGxzCj5pbW1lZGlhdGVseSBhZnRlciB3cml0aW5n
+IHRoZSBmaXJzdCBTTVAgaW5pdGlhbGl6YXRpb24KPnNlcXVlbmNlIGludG8gQVBJQyBJQ1IuCj4K
+PlRoZSBjYXVzZSBvZiB0aGUgcHJvYmxlbSBpcyB3YXRjaGRvZyBOTUkgaGFuZGxlciBleGVjdXRp
+b24gLQo+c29tZXdoZXJlIG5lYXIgdGhlIGVuZCBvZiBOTUkgaGFuZGxpbmcgKGFmdGVyIGl0J3Mg
+YWxyZWFkeQo+cmVzY2hlZHVsZWQgdGhlIG5leHQgTk1JKSBpdCB0cmllcyB0byBhY2Nlc3MgSU8g
+cG9ydCAweDYxCj50byBnZXQgdGhlIGFjdHVhbCBOTUkgcmVhc29uIG9uIENQVTAuIFVuZm9ydHVu
+YXRlbHksIHRoaXMKPnBvcnQgaXMgZW11bGF0ZWQgYnkgQklPUyB1c2luZyBTTUlzIGFuZCB0aGlz
+IGVtdWxhdGlvbiBmb3IKPnNvbWUgcmVhc29uIHRha2VzIG1vcmUgdGltZSB0aGFuIHdlIGV4cGVj
+dCBkdXJpbmcgSU5JVC1TSVBJLVNJUEkKPnNlcXVlbmNlLiBBcyB0aGUgcmVzdWx0LCB0aGUgc3lz
+dGVtIGlzIGNvbnN0YW50bHkgbW92aW5nIGJldHdlZW4KPk5NSSBhbmQgU01JIGhhbmRsZXIgYW5k
+IG5vdCBtYWtpbmcgYW55IHByb2dyZXNzLgo+Cj5UbyBhdm9pZCB0aGlzLCBpbml0aWFsaXplIHRo
+ZSB3YXRjaGRvZyBhZnRlciBTTVAgYm9vdHN0cmFwIG9uCj5DUFUwIGFuZCwgYWRkaXRpb25hbGx5
+LCBwcm90ZWN0IHRoZSBOTUkgaGFuZGxlciBieSBtb3ZpbmcKPklPIHBvcnQgYWNjZXNzIGJlZm9y
+ZSBOTUkgcmUtc2NoZWR1bGluZy4KPgo+U2lnbmVkLW9mZi1ieTogSWdvciBEcnV6aGluaW4gPGln
+b3IuZHJ1emhpbmluQGNpdHJpeC5jb20+CgpUaGlzIGlzIGZhciBiZXR0ZXIgdGhhbiBtZXJlbHkg
+cmVkdWNpbmcgdGhlIE5NSSByYXRlLgoKVGhlIHJlYXNvbiB3aHkgU01JIGV4ZWN1dGlvbiB0YWtl
+cyBzbyBsb25nIGluIHRoZSBNUCBpbml0aWFsaXphdGlvbgpzZXF1ZW5jZSBwYXJ0aWN1bGFybHkg
+aXMgKHZlcnkgbGlrZWx5KSBhIG5lY2Vzc2l0eSB0byB3YWl0IGZvciBvdGhlcgpDUFVzIGluIHRo
+ZSBTTUkgaGFuZGxlci4KClNlbmRpbmcgSU5JVCBjYXVzZXMgdGFyZ2V0IENQVSB0byBiZWNvbWUg
+bnVtYiBmb3IgYSByZWxhdGl2ZWx5IGxvbmcKdGltZSAoU0RNIHByb3Bvc2UgMTBtcyBkZWxheSBp
+biB0aGUgTVAgaW5pdCBzZXEgYWZ0ZXIgaXQpLiBJZiwgcmlnaHQKYWZ0ZXIgc2VuZGluZyB0aGUg
+SU5JVCBJUEksIHdlIGltbWVkaWF0ZWx5IGNhdXNlIFNNSSBJL08gdHJhcCBieSByZWFkaW5nCnBv
+cnQgNjFoIC0tIHRoaXMgbWVhbnMgdGhhdCBhdCB0aGUgYmVnaW5uaW5nIG9mIHRoZSBTTUkgaGFu
+ZGxlcgp0aGUgcHJpbWFyeSBDUFUgd2lsbCBoYXZlIHRvIHdhaXQgKHZpYSBhIHNwaW5sb2NrKSBm
+b3Igb3RoZXIgQ1BVcwppbmNsdWRpbmcgdGhlIG9uZSB3aGljaCBvbmx5IHN0YXJ0ZWQgdG8gY29t
+ZSBvdXQgZnJvbSBJTklUIGNvbWEuCkFGQUlSIGl0IGRvZXNuJ3QgZXZlbiBiZWdpbiBleGVjdXRp
+b24gb2YgU01JIHByb2Nlc3NpbmcgdW50aWwgYWxsIENQVXMKc3luYyB0aGVpciBleGVjdXRpb24g
+aW4gU01NIHZpYSB0aGF0IHNwaW5sb2NrLiBUaHVzIG92ZXJhbGwgbG9uZyBTTUkKcHJvY2Vzc2lu
+ZyB0aW1lLCBlbm91Z2ggZm9yIGEgbmV4dCBOTUkgd2F0Y2hkb2cgdGljayB0byBhcnJpdmUuCgpC
+YXNpY2FsbHksIGl0J3MgYSByYWNlIGJldHdlZW4gc2VuZGluZyBJTklUIHRvIEFQcywgdHJpZ2dl
+cmluZyBTTUkgYnkKcmVhZGluZyB0aGUgcG9ydCA2MWgsIHNwaW4td2FpdGluZyBmb3Igb3RoZXIg
+Q1BVcyBhdCB0aGUgc3RhcnQgb2YgdGhlClNNSSBoYW5kbGVyIGFuZCB0aGUgTk1JIHdhdGNoZG9n
+IHRpbWVyICh3aGljaCBnZW5lcmF0ZXMgZmxvdyBvZiBTTUlzKS4KCklmIHRoaXMgYXNzdW1wdGlv
+bnMgYXJlIGNvcnJlY3QsIGRlbGF5aW5nIHRyaWdnZXJpbmcgU01JcyBkdWUgdG8gYQpOTUkgd2F0
+Y2hkb2cgdW50aWwgTVAgaW5pdGlhbGl6YXRpb24gaXMgY29tcGxldGUgaXMgdGhlIHJpZ2h0CnNv
+bHV0aW9uLgoKPi0tLQo+IHhlbi9hcmNoL3g4Ni9hcGljLmMgICAgfCAyICstCj4geGVuL2FyY2gv
+eDg2L3NtcGJvb3QuYyB8IDMgKysrCj4geGVuL2FyY2gveDg2L3RyYXBzLmMgICB8IDkgKysrKysr
+Ky0tCj4gMyBmaWxlcyBjaGFuZ2VkLCAxMSBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+
+Cj5kaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2FwaWMuYyBiL3hlbi9hcmNoL3g4Ni9hcGljLmMK
+PmluZGV4IDUwMzkxNzMuLmZmYTVhNjkgMTAwNjQ0Cj4tLS0gYS94ZW4vYXJjaC94ODYvYXBpYy5j
+Cj4rKysgYi94ZW4vYXJjaC94ODYvYXBpYy5jCj5AQCAtNjg0LDcgKzY4NCw3IEBAIHZvaWQgc2V0
+dXBfbG9jYWxfQVBJQyh2b2lkKQo+ICAgICAgICAgcHJpbnRrKCJMZWF2aW5nIEVTUiBkaXNhYmxl
+ZC5cbiIpOwo+ICAgICB9Cj4gCj4tICAgIGlmIChubWlfd2F0Y2hkb2cgPT0gTk1JX0xPQ0FMX0FQ
+SUMpCj4rICAgIGlmIChubWlfd2F0Y2hkb2cgPT0gTk1JX0xPQ0FMX0FQSUMgJiYgc21wX3Byb2Nl
+c3Nvcl9pZCgpKQo+ICAgICAgICAgc2V0dXBfYXBpY19ubWlfd2F0Y2hkb2coKTsKPiAgICAgYXBp
+Y19wbV9hY3RpdmF0ZSgpOwo+IH0KPmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvc21wYm9vdC5j
+IGIveGVuL2FyY2gveDg2L3NtcGJvb3QuYwo+aW5kZXggMmViZWYwMy4uMTg0NDExNiAxMDA2NDQK
+Pi0tLSBhL3hlbi9hcmNoL3g4Ni9zbXBib290LmMKPisrKyBiL3hlbi9hcmNoL3g4Ni9zbXBib290
+LmMKPkBAIC0xMjQ4LDcgKzEyNDgsMTAgQEAgaW50IF9fY3B1X3VwKHVuc2lnbmVkIGludCBjcHUp
+Cj4gdm9pZCBfX2luaXQgc21wX2NwdXNfZG9uZSh2b2lkKQo+IHsKPiAgICAgaWYgKCBubWlfd2F0
+Y2hkb2cgPT0gTk1JX0xPQ0FMX0FQSUMgKQo+KyAgICB7Cj4rICAgICAgICBzZXR1cF9hcGljX25t
+aV93YXRjaGRvZygpOwo+ICAgICAgICAgY2hlY2tfbm1pX3dhdGNoZG9nKCk7Cj4rICAgIH0KPiAK
+PiAgICAgc2V0dXBfaW9hcGljX2Rlc3QoKTsKPiAKPmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYv
+dHJhcHMuYyBiL3hlbi9hcmNoL3g4Ni90cmFwcy5jCj5pbmRleCAyZTAyMmIwLi5jMTZmMTQ2IDEw
+MDY0NAo+LS0tIGEveGVuL2FyY2gveDg2L3RyYXBzLmMKPisrKyBiL3hlbi9hcmNoL3g4Ni90cmFw
+cy5jCj5AQCAtMTcwNiw3ICsxNzA2LDcgQEAgc3RhdGljIG5taV9jYWxsYmFja190ICpubWlfY2Fs
+bGJhY2sgPQo+ZHVtbXlfbm1pX2NhbGxiYWNrOwo+IHZvaWQgZG9fbm1pKGNvbnN0IHN0cnVjdCBj
+cHVfdXNlcl9yZWdzICpyZWdzKQo+IHsKPiAgICAgdW5zaWduZWQgaW50IGNwdSA9IHNtcF9wcm9j
+ZXNzb3JfaWQoKTsKPi0gICAgdW5zaWduZWQgY2hhciByZWFzb247Cj4rICAgIHVuc2lnbmVkIGNo
+YXIgcmVhc29uID0gMDsKPiAgICAgYm9vbCBoYW5kbGVfdW5rbm93biA9IGZhbHNlOwo+IAo+ICAg
+ICArK25taV9jb3VudChjcHUpOwo+QEAgLTE3MTQsNiArMTcxNCwxMiBAQCB2b2lkIGRvX25taShj
+b25zdCBzdHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncykKPiAgICAgaWYgKCBubWlfY2FsbGJhY2so
+cmVncywgY3B1KSApCj4gICAgICAgICByZXR1cm47Cj4gCj4rICAgIC8qIFRoaXMgSU8gcG9ydCBh
+Y2Nlc3MgaXMgbGlrZWx5IHRvIHByb2R1Y2UgU01JIHdoaWNoLCBpbiB0dXJuLAo+KyAgICAgKiBt
+YXkgdGFrZSBlbm91Z2ggdGltZSBmb3IgdGhlIG5leHQgTk1JIHRpY2sgdG8gaGFwcGVuLiBUbyBh
+dm9pZAo+aGF2aW5nCj4rICAgICAqIG5lc3RlZCBOTUlzIGFzIHRoZSByZXN1bHQgbGV0J3MgY2Fs
+bCBpdCBiZWZvcmUgd2F0Y2hkb2cKPnJlLXNjaGVkdWxpbmcgKi8KPisgICAgaWYgKCBjcHUgPT0g
+MCApCj4rICAgICAgICByZWFzb24gPSBpbmIoMHg2MSk7Cj4rCj4gICAgIGlmICggKG5taV93YXRj
+aGRvZyA9PSBOTUlfTk9ORSkgfHwKPiAgICAgICAgICAoIW5taV93YXRjaGRvZ190aWNrKHJlZ3Mp
+ICYmIHdhdGNoZG9nX2ZvcmNlKSApCj4gICAgICAgICBoYW5kbGVfdW5rbm93biA9IHRydWU7Cj5A
+QCAtMTcyMSw3ICsxNzI3LDYgQEAgdm9pZCBkb19ubWkoY29uc3Qgc3RydWN0IGNwdV91c2VyX3Jl
+Z3MgKnJlZ3MpCj4gICAgIC8qIE9ubHkgdGhlIEJTUCBnZXRzIGV4dGVybmFsIE5NSXMgZnJvbSB0
+aGUgc3lzdGVtLiAqLwo+ICAgICBpZiAoIGNwdSA9PSAwICkKPiAgICAgewo+LSAgICAgICAgcmVh
+c29uID0gaW5iKDB4NjEpOwo+ICAgICAgICAgaWYgKCByZWFzb24gJiAweDgwICkKPiAgICAgICAg
+ICAgICBwY2lfc2Vycl9lcnJvcihyZWdzKTsKPiAgICAgICAgIGlmICggcmVhc29uICYgMHg0MCAp
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
