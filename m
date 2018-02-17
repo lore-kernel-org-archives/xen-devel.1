@@ -1,17 +1,16 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-linus bisection] complete
-	test-amd64-i386-xl-qemut-win7-amd64
-Date: Sat, 17 Feb 2018 02:47:24 +0000
-Message-ID: <E1emsX6-0005Ji-EG@osstest.test-lab.xenproject.org>
+Subject: [libvirt test] 119370: regressions - trouble:
+	blocked/broken/pass
+Date: Sat, 17 Feb 2018 03:17:05 +0000
+Message-ID: <osstest-119370-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7306591123006099311=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=husu=fl=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1emsXF-0003t7-Pt
- for xen-devel@lists.xenproject.org; Sat, 17 Feb 2018 02:47:33 +0000
+ id 1emt00-00063u-Ji
+ for xen-devel@lists.xenproject.org; Sat, 17 Feb 2018 03:17:16 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,190 +22,408 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-YnJhbmNoIHhlbi11bnN0YWJsZQp4ZW5icmFuY2ggeGVuLXVuc3RhYmxlCmpvYiB0ZXN0LWFtZDY0
-LWkzODYteGwtcWVtdXQtd2luNy1hbWQ2NAp0ZXN0aWQgeGVuLWJvb3QKClRyZWU6IGxpbnV4IGdp
-dDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dpdC90b3J2YWxkcy9saW51
-eC0yLjYuZ2l0ClRyZWU6IGxpbnV4ZmlybXdhcmUgZ2l0Oi8veGVuYml0cy54ZW4ub3JnL29zc3Rl
-c3QvbGludXgtZmlybXdhcmUuZ2l0ClRyZWU6IHFlbXUgZ2l0Oi8veGVuYml0cy54ZW4ub3JnL3Fl
-bXUteGVuLXRyYWRpdGlvbmFsLmdpdApUcmVlOiBxZW11dSBnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcv
-cWVtdS14ZW4uZ2l0ClRyZWU6IHhlbiBnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcveGVuLmdpdAoKKioq
-IEZvdW5kIGFuZCByZXByb2R1Y2VkIHByb2JsZW0gY2hhbmdlc2V0ICoqKgoKICBCdWcgaXMgaW4g
-dHJlZTogIGxpbnV4IGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dp
-dC90b3J2YWxkcy9saW51eC0yLjYuZ2l0CiAgQnVnIGludHJvZHVjZWQ6ICBhMmU1NzkwZDg0MTY1
-ODQ4NWQ2NDIxOTZkYmIwOTI3MzAzZDZjMjJmCiAgQnVnIG5vdCBwcmVzZW50OiBhYjJkOTJhZDg4
-MWRhMTEzMzEyODBhZWRmNjEyZDgyZTYxY2I2ZDQxCiAgTGFzdCBmYWlsIHJlcHJvOiBodHRwOi8v
-bG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTE5NDQ5LwoKCiAgKFJl
-dmlzaW9uIGxvZyB0b28gbG9uZywgb21pdHRlZC4pCgoKRm9yIGJpc2VjdGlvbiByZXZpc2lvbi10
-dXBsZSBncmFwaCBzZWU6CiAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29z
-c3Rlc3QvcmVzdWx0cy9iaXNlY3QvbGludXgtbGludXMvdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
-LXdpbjctYW1kNjQueGVuLWJvb3QuaHRtbApSZXZpc2lvbiBJRHMgaW4gZWFjaCBncmFwaCBub2Rl
-IHJlZmVyLCByZXNwZWN0aXZlbHksIHRvIHRoZSBUcmVlcyBhYm92ZS4KCi0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KUnVubmluZyBjcy1iaXNlY3Rpb24tc3RlcCAtLWdy
-YXBoLW91dD0vaG9tZS9sb2dzL3Jlc3VsdHMvYmlzZWN0L2xpbnV4LWxpbnVzL3Rlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dC13aW43LWFtZDY0Lnhlbi1ib290IC0tc3VtbWFyeS1vdXQ9dG1wLzExOTQ0
-OS5iaXNlY3Rpb24tc3VtbWFyeSAtLWJhc2lzLXRlbXBsYXRlPTExODMyNCAtLWJsZXNzaW5ncz1y
-ZWFsLHJlYWwtYmlzZWN0IGxpbnV4LWxpbnVzIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW43
-LWFtZDY0IHhlbi1ib290ClNlYXJjaGluZyBmb3IgZmFpbHVyZSAvIGJhc2lzIHBhc3M6CiAxMTkz
-NTAgZmFpbCBbaG9zdD1iYXJvcXVlMF0gLyAxMTg2Mjkgb2suCkZhaWx1cmUgLyBiYXNpcyBwYXNz
-IGZsaWdodHM6IDExOTM1MCAvIDExODYyOQoodHJlZSB3aXRoIG5vIHVybDogbWluaW9zKQoodHJl
-ZSB3aXRoIG5vIHVybDogb3ZtZikKKHRyZWUgd2l0aCBubyB1cmw6IHNlYWJpb3MpClRyZWU6IGxp
-bnV4IGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dpdC90b3J2YWxk
-cy9saW51eC0yLjYuZ2l0ClRyZWU6IGxpbnV4ZmlybXdhcmUgZ2l0Oi8veGVuYml0cy54ZW4ub3Jn
-L29zc3Rlc3QvbGludXgtZmlybXdhcmUuZ2l0ClRyZWU6IHFlbXUgZ2l0Oi8veGVuYml0cy54ZW4u
-b3JnL3FlbXUteGVuLXRyYWRpdGlvbmFsLmdpdApUcmVlOiBxZW11dSBnaXQ6Ly94ZW5iaXRzLnhl
-bi5vcmcvcWVtdS14ZW4uZ2l0ClRyZWU6IHhlbiBnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcveGVuLmdp
-dApMYXRlc3QgMTM4OGM4MDQzOGU2OWZjMDFkODNmYmU5OGRhM2NhYzI0YzNjODczMSBjNTMwYTc1
-YzFlNmE0NzJiMGViOTU1ODMxMGI1MThmMGRmY2Q4ODYwIGM4ZWEwNDU3NDk1MzQyYzQxN2MzZGMw
-MzNiYmEyNTE0OGIyNzlmNjAgMmIwMzNlMzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2QxNTc3NTY1NWE5
-NyBjOTMwMTRhZDNhYTZhYTg4ZGZhNWU5NmY2NmU4YWRiNTYxNDgzYjhkCkJhc2lzIHBhc3MgYjQ2
-ZGM4YWUxN2E0MjdjNTBjMDAyNDE4OTg4MzI4MDc1NzZmZDI4YSBjNTMwYTc1YzFlNmE0NzJiMGVi
-OTU1ODMxMGI1MThmMGRmY2Q4ODYwIGM4ZWEwNDU3NDk1MzQyYzQxN2MzZGMwMzNiYmEyNTE0OGIy
-NzlmNjAgMmIwMzNlMzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2QxNTc3NTY1NWE5NyAxYzM1NDVlZWFm
-NGFjNmY4ZDVkYjVhNTJjMjljMTEyNjk0YmNkNGYwCkdlbmVyYXRpbmcgcmV2aXNpb25zIHdpdGgg
-Li9hZGhvYy1yZXZ0dXBsZS1nZW5lcmF0b3IgIGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20v
-bGludXgva2VybmVsL2dpdC90b3J2YWxkcy9saW51eC0yLjYuZ2l0I2I0NmRjOGFlMTdhNDI3YzUw
-YzAwMjQxODk4ODMyODA3NTc2ZmQyOGEtMTM4OGM4MDQzOGU2OWZjMDFkODNmYmU5OGRhM2NhYzI0
-YzNjODczMSBnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcvb3NzdGVzdC9saW51eC1maXJtd2FyZS5naXQj
-YzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgzMTBiNTE4ZjBkZmNkODg2MC1jNTMwYTc1YzFlNmE0NzJi
-MGViOTU1ODMxMGI1MThmMGRmY2Q4ODYwIGdpdDovL3hlbmJpdHMueGVuLm9yZy9xZW11LXhlbi10
-cmFkaXRpb25hbC5naXQjYzhlYTA0NTc0OTUzNDJjNDE3YzNkYzAzM2JiYTI1MTQ4YjI3OWY2MC1j
-OGVhMDQ1NzQ5NTM0MmM0MTdjM2RjMDMzYmJhMjUxNDhiMjc5ZjYwIGdpdDovL3hlbmJpdHMueGVu
-Lm9yZy9xZW11LXhlbi5naXQjMmIwMzNlMzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2QxNTc3NTY1NWE5
-Ny0yYjAzM2UzOTZmNGZhMDk4MWJhZTEyMTNjZGFjZDE1Nzc1NjU1YTk3IGdpdDovL3hlbmJpdHMu
-eGVuLm9yZy94ZW4uZ2l0IzFjMzU0NWVlYWY0YWM2ZjhkNWRiNWE1MmMyOWMxMTI2OTRiY2Q0ZjAt
-YzkzMDE0YWQzYWE2YWE4OGRmYTVlOTZmNjZlOGFkYjU2MTQ4M2I4ZApMb2FkZWQgMTIxMjkxIG5v
-ZGVzIGluIHJldmlzaW9uIGdyYXBoClNlYXJjaGluZyBmb3IgdGVzdCByZXN1bHRzOgogMTE4NjI5
-IHBhc3MgYjQ2ZGM4YWUxN2E0MjdjNTBjMDAyNDE4OTg4MzI4MDc1NzZmZDI4YSBjNTMwYTc1YzFl
-NmE0NzJiMGViOTU1ODMxMGI1MThmMGRmY2Q4ODYwIGM4ZWEwNDU3NDk1MzQyYzQxN2MzZGMwMzNi
-YmEyNTE0OGIyNzlmNjAgMmIwMzNlMzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2QxNTc3NTY1NWE5NyAx
-YzM1NDVlZWFmNGFjNmY4ZDVkYjVhNTJjMjljMTEyNjk0YmNkNGYwCiAxMTg2MzggZmFpbCBpcnJl
-bGV2YW50CiAxMTg2NzIgZmFpbCBpcnJlbGV2YW50CiAxMTg3NzUgZmFpbCBpcnJlbGV2YW50CiAx
-MTg4OTMgZmFpbCBkNDhmY2JkODY0YTAwODgwMmE5MGM1OGE5Y2VkZGQ5NDM2ZDExYTQ5IGM1MzBh
-NzVjMWU2YTQ3MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAgYzhlYTA0NTc0OTUzNDJjNDE3YzNk
-YzAzM2JiYTI1MTQ4YjI3OWY2MCAyYjAzM2UzOTZmNGZhMDk4MWJhZTEyMTNjZGFjZDE1Nzc1NjU1
-YTk3IGM5MzAxNGFkM2FhNmFhODhkZmE1ZTk2ZjY2ZThhZGI1NjE0ODNiOGQKIDExODk2OCBmYWls
-IDc5MjhiMmNiZTU1YjJhNDEwYTBmNWMxZjE1NDYxMDA1OWM1N2IxYjIgYzUzMGE3NWMxZTZhNDcy
-YjBlYjk1NTgzMTBiNTE4ZjBkZmNkODg2MCBjOGVhMDQ1NzQ5NTM0MmM0MTdjM2RjMDMzYmJhMjUx
-NDhiMjc5ZjYwIDJiMDMzZTM5NmY0ZmEwOTgxYmFlMTIxM2NkYWNkMTU3NzU2NTVhOTcgYzkzMDE0
-YWQzYWE2YWE4OGRmYTVlOTZmNjZlOGFkYjU2MTQ4M2I4ZAogMTE5MDY0IGZhaWwgMTc4ZTgzNGM0
-N2IwZDAxMzUyYzQ4NzMwMjM1YWFlNjk4OThmYmMwMiBjNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMx
-MGI1MThmMGRmY2Q4ODYwIGM4ZWEwNDU3NDk1MzQyYzQxN2MzZGMwMzNiYmEyNTE0OGIyNzlmNjAg
-MmIwMzNlMzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2QxNTc3NTY1NWE5NyBjOTMwMTRhZDNhYTZhYTg4
-ZGZhNWU5NmY2NmU4YWRiNTYxNDgzYjhkCiAxMTkxMTcgZmFpbCA2MWYxNGMwMTVmNWJlOTE1MWJh
-MjVlNjM4ZDM0OWY0ZDQwY2I3Y2Q0IGM1MzBhNzVjMWU2YTQ3MmIwZWI5NTU4MzEwYjUxOGYwZGZj
-ZDg4NjAgYzhlYTA0NTc0OTUzNDJjNDE3YzNkYzAzM2JiYTI1MTQ4YjI3OWY2MCAyYjAzM2UzOTZm
-NGZhMDk4MWJhZTEyMTNjZGFjZDE1Nzc1NjU1YTk3IGM5MzAxNGFkM2FhNmFhODhkZmE1ZTk2ZjY2
-ZThhZGI1NjE0ODNiOGQKIDExOTIwMSBmYWlsIDYxZjE0YzAxNWY1YmU5MTUxYmEyNWU2MzhkMzQ5
-ZjRkNDBjYjdjZDQgYzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgzMTBiNTE4ZjBkZmNkODg2MCBjOGVh
-MDQ1NzQ5NTM0MmM0MTdjM2RjMDMzYmJhMjUxNDhiMjc5ZjYwIDJiMDMzZTM5NmY0ZmEwOTgxYmFl
-MTIxM2NkYWNkMTU3NzU2NTVhOTcgYzkzMDE0YWQzYWE2YWE4OGRmYTVlOTZmNjZlOGFkYjU2MTQ4
-M2I4ZAogMTE5NDQ1IHBhc3MgYWIyZDkyYWQ4ODFkYTExMzMxMjgwYWVkZjYxMmQ4MmU2MWNiNmQ0
-MSBjNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThmMGRmY2Q4ODYwIGM4ZWEwNDU3NDk1MzQy
-YzQxN2MzZGMwMzNiYmEyNTE0OGIyNzlmNjAgMmIwMzNlMzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2Qx
-NTc3NTY1NWE5NyAzMGNiZDBjODNlZjNkMGVkYWMyZDViY2M0MWE5YTJiN2E4NDNhZTU4CiAxMTkz
-NTYgcGFzcyBiNDZkYzhhZTE3YTQyN2M1MGMwMDI0MTg5ODgzMjgwNzU3NmZkMjhhIGM1MzBhNzVj
-MWU2YTQ3MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAgYzhlYTA0NTc0OTUzNDJjNDE3YzNkYzAz
-M2JiYTI1MTQ4YjI3OWY2MCAyYjAzM2UzOTZmNGZhMDk4MWJhZTEyMTNjZGFjZDE1Nzc1NjU1YTk3
-IDFjMzU0NWVlYWY0YWM2ZjhkNWRiNWE1MmMyOWMxMTI2OTRiY2Q0ZjAKIDExOTQxOSBmYWlsIGEy
-ZTU3OTBkODQxNjU4NDg1ZDY0MjE5NmRiYjA5MjczMDNkNmMyMmYgYzUzMGE3NWMxZTZhNDcyYjBl
-Yjk1NTgzMTBiNTE4ZjBkZmNkODg2MCBjOGVhMDQ1NzQ5NTM0MmM0MTdjM2RjMDMzYmJhMjUxNDhi
-Mjc5ZjYwIDJiMDMzZTM5NmY0ZmEwOTgxYmFlMTIxM2NkYWNkMTU3NzU2NTVhOTcgMzBjYmQwYzgz
-ZWYzZDBlZGFjMmQ1YmNjNDFhOWEyYjdhODQzYWU1OAogMTE5MzYyIGZhaWwgNjFmMTRjMDE1ZjVi
-ZTkxNTFiYTI1ZTYzOGQzNDlmNGQ0MGNiN2NkNCBjNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1
-MThmMGRmY2Q4ODYwIGM4ZWEwNDU3NDk1MzQyYzQxN2MzZGMwMzNiYmEyNTE0OGIyNzlmNjAgMmIw
-MzNlMzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2QxNTc3NTY1NWE5NyBjOTMwMTRhZDNhYTZhYTg4ZGZh
-NWU5NmY2NmU4YWRiNTYxNDgzYjhkCiAxMTk0MzAgZmFpbCAxMzg4YzgwNDM4ZTY5ZmMwMWQ4M2Zi
-ZTk4ZGEzY2FjMjRjM2M4NzMxIGM1MzBhNzVjMWU2YTQ3MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4
-NjAgYzhlYTA0NTc0OTUzNDJjNDE3YzNkYzAzM2JiYTI1MTQ4YjI3OWY2MCAyYjAzM2UzOTZmNGZh
-MDk4MWJhZTEyMTNjZGFjZDE1Nzc1NjU1YTk3IGM5MzAxNGFkM2FhNmFhODhkZmE1ZTk2ZjY2ZThh
-ZGI1NjE0ODNiOGQKIDExOTM2NyBmYWlsIDFjNWIyMjE2ZmJiOTczYTk0MTBlMGIwNjM4OTc0MGI1
-YzEyODkxNzEgYzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgzMTBiNTE4ZjBkZmNkODg2MCBjOGVhMDQ1
-NzQ5NTM0MmM0MTdjM2RjMDMzYmJhMjUxNDhiMjc5ZjYwIDJiMDMzZTM5NmY0ZmEwOTgxYmFlMTIx
-M2NkYWNkMTU3NzU2NTVhOTcgYzkzMDE0YWQzYWE2YWE4OGRmYTVlOTZmNjZlOGFkYjU2MTQ4M2I4
-ZAogMTE5Mzk1IGZhaWwgYTJlNTc5MGQ4NDE2NTg0ODVkNjQyMTk2ZGJiMDkyNzMwM2Q2YzIyZiBj
-NTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThmMGRmY2Q4ODYwIGM4ZWEwNDU3NDk1MzQyYzQx
-N2MzZGMwMzNiYmEyNTE0OGIyNzlmNjAgMmIwMzNlMzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2QxNTc3
-NTY1NWE5NyBhMjIzMjBlMzJkY2EwOTE4ZWQyMzc5OTU4M2Y0NzBhZmU0YzI0MzMwCiAxMTkzNzYg
-ZmFpbCAxMDI5MTE3MTI3NTQwZmVmNGVkY2Y0ZjA4ODdkYzNlMWY3ZDVhZGIyIGM1MzBhNzVjMWU2
-YTQ3MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAgYzhlYTA0NTc0OTUzNDJjNDE3YzNkYzAzM2Ji
-YTI1MTQ4YjI3OWY2MCAyYjAzM2UzOTZmNGZhMDk4MWJhZTEyMTNjZGFjZDE1Nzc1NjU1YTk3IGM5
-MzAxNGFkM2FhNmFhODhkZmE1ZTk2ZjY2ZThhZGI1NjE0ODNiOGQKIDExOTQyMiBwYXNzIGFiMmQ5
-MmFkODgxZGExMTMzMTI4MGFlZGY2MTJkODJlNjFjYjZkNDEgYzUzMGE3NWMxZTZhNDcyYjBlYjk1
-NTgzMTBiNTE4ZjBkZmNkODg2MCBjOGVhMDQ1NzQ5NTM0MmM0MTdjM2RjMDMzYmJhMjUxNDhiMjc5
-ZjYwIDJiMDMzZTM5NmY0ZmEwOTgxYmFlMTIxM2NkYWNkMTU3NzU2NTVhOTcgMzBjYmQwYzgzZWYz
-ZDBlZGFjMmQ1YmNjNDFhOWEyYjdhODQzYWU1OAogMTE5MzUwIGZhaWwgMTM4OGM4MDQzOGU2OWZj
-MDFkODNmYmU5OGRhM2NhYzI0YzNjODczMSBjNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThm
-MGRmY2Q4ODYwIGM4ZWEwNDU3NDk1MzQyYzQxN2MzZGMwMzNiYmEyNTE0OGIyNzlmNjAgMmIwMzNl
-Mzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2QxNTc3NTY1NWE5NyBjOTMwMTRhZDNhYTZhYTg4ZGZhNWU5
-NmY2NmU4YWRiNTYxNDgzYjhkCiAxMTkzODIgZmFpbCAxYTVlOGUzNTAwMDU3N2NiOTEwMGQyMmRh
-YThiNWViY2ZhMmJlOWIyIGM1MzBhNzVjMWU2YTQ3MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAg
-YzhlYTA0NTc0OTUzNDJjNDE3YzNkYzAzM2JiYTI1MTQ4YjI3OWY2MCAyYjAzM2UzOTZmNGZhMDk4
-MWJhZTEyMTNjZGFjZDE1Nzc1NjU1YTk3IGM5MzAxNGFkM2FhNmFhODhkZmE1ZTk2ZjY2ZThhZGI1
-NjE0ODNiOGQKIDExOTQ0OSBmYWlsIGEyZTU3OTBkODQxNjU4NDg1ZDY0MjE5NmRiYjA5MjczMDNk
-NmMyMmYgYzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgzMTBiNTE4ZjBkZmNkODg2MCBjOGVhMDQ1NzQ5
-NTM0MmM0MTdjM2RjMDMzYmJhMjUxNDhiMjc5ZjYwIDJiMDMzZTM5NmY0ZmEwOTgxYmFlMTIxM2Nk
-YWNkMTU3NzU2NTVhOTcgMzBjYmQwYzgzZWYzZDBlZGFjMmQ1YmNjNDFhOWEyYjdhODQzYWU1OAog
-MTE5NDA2IHBhc3MgNGIwZGRhNGY4NmM1Yzg3Njk4ZjcyMjhhNGY2NWVmODM0ZGM3OTI1MiBjNTMw
-YTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThmMGRmY2Q4ODYwIGM4ZWEwNDU3NDk1MzQyYzQxN2Mz
-ZGMwMzNiYmEyNTE0OGIyNzlmNjAgMmIwMzNlMzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2QxNTc3NTY1
-NWE5NyAzMGNiZDBjODNlZjNkMGVkYWMyZDViY2M0MWE5YTJiN2E4NDNhZTU4CiAxMTk0MzkgcGFz
-cyBhYjJkOTJhZDg4MWRhMTEzMzEyODBhZWRmNjEyZDgyZTYxY2I2ZDQxIGM1MzBhNzVjMWU2YTQ3
-MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAgYzhlYTA0NTc0OTUzNDJjNDE3YzNkYzAzM2JiYTI1
-MTQ4YjI3OWY2MCAyYjAzM2UzOTZmNGZhMDk4MWJhZTEyMTNjZGFjZDE1Nzc1NjU1YTk3IDMwY2Jk
-MGM4M2VmM2QwZWRhYzJkNWJjYzQxYTlhMmI3YTg0M2FlNTgKIDExOTQyNSBmYWlsIGEyZTU3OTBk
-ODQxNjU4NDg1ZDY0MjE5NmRiYjA5MjczMDNkNmMyMmYgYzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgz
-MTBiNTE4ZjBkZmNkODg2MCBjOGVhMDQ1NzQ5NTM0MmM0MTdjM2RjMDMzYmJhMjUxNDhiMjc5ZjYw
-IDJiMDMzZTM5NmY0ZmEwOTgxYmFlMTIxM2NkYWNkMTU3NzU2NTVhOTcgMzBjYmQwYzgzZWYzZDBl
-ZGFjMmQ1YmNjNDFhOWEyYjdhODQzYWU1OAogMTE5NDE2IGJsb2NrZWQgYTJlNTc5MGQ4NDE2NTg0
-ODVkNjQyMTk2ZGJiMDkyNzMwM2Q2YzIyZiBjNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThm
-MGRmY2Q4ODYwIGM4ZWEwNDU3NDk1MzQyYzQxN2MzZGMwMzNiYmEyNTE0OGIyNzlmNjAgMmIwMzNl
-Mzk2ZjRmYTA5ODFiYWUxMjEzY2RhY2QxNTc3NTY1NWE5NyBkZjFlNGM2ZTdmODg5MmU5NTA0MzNm
-ZjMzYzIxNWRmMGNkN2IzMGY3CiAxMTk0NDEgZmFpbCBhMmU1NzkwZDg0MTY1ODQ4NWQ2NDIxOTZk
-YmIwOTI3MzAzZDZjMjJmIGM1MzBhNzVjMWU2YTQ3MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAg
-YzhlYTA0NTc0OTUzNDJjNDE3YzNkYzAzM2JiYTI1MTQ4YjI3OWY2MCAyYjAzM2UzOTZmNGZhMDk4
-MWJhZTEyMTNjZGFjZDE1Nzc1NjU1YTk3IDMwY2JkMGM4M2VmM2QwZWRhYzJkNWJjYzQxYTlhMmI3
-YTg0M2FlNTgKU2VhcmNoaW5nIGZvciBpbnRlcmVzdGluZyB2ZXJzaW9ucwogUmVzdWx0IGZvdW5k
-OiBmbGlnaHQgMTE4NjI5IChwYXNzKSwgZm9yIGJhc2lzIHBhc3MKIFJlc3VsdCBmb3VuZDogZmxp
-Z2h0IDExOTM1MCAoZmFpbCksIGZvciBiYXNpcyBmYWlsdXJlCiBSZXBybyBmb3VuZDogZmxpZ2h0
-IDExOTM1NiAocGFzcyksIGZvciBiYXNpcyBwYXNzCiBSZXBybyBmb3VuZDogZmxpZ2h0IDExOTQz
-MCAoZmFpbCksIGZvciBiYXNpcyBmYWlsdXJlCiAwIHJldmlzaW9ucyBhdCBhYjJkOTJhZDg4MWRh
-MTEzMzEyODBhZWRmNjEyZDgyZTYxY2I2ZDQxIGM1MzBhNzVjMWU2YTQ3MmIwZWI5NTU4MzEwYjUx
-OGYwZGZjZDg4NjAgYzhlYTA0NTc0OTUzNDJjNDE3YzNkYzAzM2JiYTI1MTQ4YjI3OWY2MCAyYjAz
-M2UzOTZmNGZhMDk4MWJhZTEyMTNjZGFjZDE1Nzc1NjU1YTk3IDMwY2JkMGM4M2VmM2QwZWRhYzJk
-NWJjYzQxYTlhMmI3YTg0M2FlNTgKTm8gcmV2aXNpb25zIGxlZnQgdG8gdGVzdCwgY2hlY2tpbmcg
-Z3JhcGggc3RhdGUuCiBSZXN1bHQgZm91bmQ6IGZsaWdodCAxMTk0MjIgKHBhc3MpLCBmb3IgbGFz
-dCBwYXNzCiBSZXN1bHQgZm91bmQ6IGZsaWdodCAxMTk0MjUgKGZhaWwpLCBmb3IgZmlyc3QgZmFp
-bHVyZQogUmVwcm8gZm91bmQ6IGZsaWdodCAxMTk0MzkgKHBhc3MpLCBmb3IgbGFzdCBwYXNzCiBS
-ZXBybyBmb3VuZDogZmxpZ2h0IDExOTQ0MSAoZmFpbCksIGZvciBmaXJzdCBmYWlsdXJlCiBSZXBy
-byBmb3VuZDogZmxpZ2h0IDExOTQ0NSAocGFzcyksIGZvciBsYXN0IHBhc3MKIFJlcHJvIGZvdW5k
-OiBmbGlnaHQgMTE5NDQ5IChmYWlsKSwgZm9yIGZpcnN0IGZhaWx1cmUKCioqKiBGb3VuZCBhbmQg
-cmVwcm9kdWNlZCBwcm9ibGVtIGNoYW5nZXNldCAqKioKCiAgQnVnIGlzIGluIHRyZWU6ICBsaW51
-eCBnaXQ6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvdG9ydmFsZHMv
-bGludXgtMi42LmdpdAogIEJ1ZyBpbnRyb2R1Y2VkOiAgYTJlNTc5MGQ4NDE2NTg0ODVkNjQyMTk2
-ZGJiMDkyNzMwM2Q2YzIyZgogIEJ1ZyBub3QgcHJlc2VudDogYWIyZDkyYWQ4ODFkYTExMzMxMjgw
-YWVkZjYxMmQ4MmU2MWNiNmQ0MQogIExhc3QgZmFpbCByZXBybzogaHR0cDovL2xvZ3MudGVzdC1s
-YWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzExOTQ0OS8KCgogIChSZXZpc2lvbiBsb2cg
-dG9vIGxvbmcsIG9taXR0ZWQuKQoKUmV2aXNpb24gZ3JhcGggbGVmdCBpbiAvaG9tZS9sb2dzL3Jl
-c3VsdHMvYmlzZWN0L2xpbnV4LWxpbnVzL3Rlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW43LWFt
-ZDY0Lnhlbi1ib290Lntkb3QscHMscG5nLGh0bWwsc3ZnfS4KLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLQoxMTk0NDk6IHRvbGVyYWJsZSBBTEwgRkFJTAoKZmxpZ2h0IDEx
-OTQ0OSBsaW51eC1saW51cyByZWFsLWJpc2VjdCBbcmVhbF0KaHR0cDovL2xvZ3MudGVzdC1sYWIu
-eGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzExOTQ0OS8KCkZhaWx1cmVzIDotLyBidXQgbm8g
-cmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsCmluY2x1ZGluZyB0ZXN0
-cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjct
-YW1kNjQgIDcgeGVuLWJvb3QgICAgICAgICBmYWlsIGJhc2VsaW5lIHVudGVzdGVkCgoKam9iczoK
-IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIu
-eGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9p
-bWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRw
-Oi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9u
-IG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBo
-dHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFE
-TUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1v
-c3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBj
-YW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVz
-dC5naXQ7YT1zdW1tYXJ5CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+--===============7306591123006099311==
+Content-Type: text/plain
+
+flight 119370 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/119370/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-armhf-pvops               <job status>                 broken
+ build-armhf-pvops             5 host-build-prep          fail REGR. vs. 119049
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-xsm  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-arm64-arm64-libvirt-qcow2 12 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 13 saverestore-support-check    fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ libvirt              d70d07eef8001b55a5f6b18a2065da2b528d3679
+baseline version:
+ libvirt              554a5edcb46ff972fed45b851d70823b923fec6a
+
+Last test of basis   119049  2018-02-13 04:20:05 Z    3 days
+Failing since        119148  2018-02-14 04:23:35 Z    2 days    3 attempts
+Testing same since   119237  2018-02-15 04:25:30 Z    1 days    2 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrea Bolognani <abologna@redhat.com>
+  Bjoern Walk <bwalk@linux.vnet.ibm.com>
+  Jiri Denemark <jdenemar@redhat.com>
+  Michal Privoznik <mprivozn@redhat.com>
+  Peter Krempa <pkrempa@redhat.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            broken  
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 blocked 
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     blocked 
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-raw                                 blocked 
+ test-amd64-amd64-libvirt-vhd                                 pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job build-armhf-pvops broken
+
+Not pushing.
+
+------------------------------------------------------------
+commit d70d07eef8001b55a5f6b18a2065da2b528d3679
+Author: Peter Krempa <pkrempa@redhat.com>
+Date:   Mon Feb 12 16:16:42 2018 +0100
+
+    virstoragetest: Add test case for NBD over unix socket with new syntax
+    
+    Use the new syntax which uses the 'UnixSocket' type in qemu.
+    
+    Signed-off-by: Peter Krempa <pkrempa@redhat.com>
+
+commit a3a3de9bc74aea9f56790210948cdb7cf579d84c
+Author: Peter Krempa <pkrempa@redhat.com>
+Date:   Mon Feb 12 15:44:11 2018 +0100
+
+    storage: Fix formatting and parsing of qemu type 'UnixSocketAddress'
+    
+    The documentation for the JSON/qapi type 'UnixSocketAddress' states that
+    the unix socket path field is named 'path'. Unfortunately qemu uses
+    'socket' in case of the gluster driver (despite documented otherwise).
+    
+    Add logic which will format the correct fields while keeping support of
+    the old spelling.
+    
+    Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1544325
+    
+    Signed-off-by: Peter Krempa <pkrempa@redhat.com>
+
+commit bc84bb9fe001fc3ca5436b9b50fbd669e4c489b6
+Author: Jiri Denemark <jdenemar@redhat.com>
+Date:   Wed Feb 14 13:16:52 2018 +0100
+
+    spec: Drop overlapping triggers
+    
+    The postun trigger for libvirt-daemon was defined twice for overlapping
+    ranges of package verions if systemd support was switched off (which
+    happens when building on something ancient, such as RHEL-6).
+    
+    Let's combine the two triggers into the one which is called when
+    libvirt-daemon < 1.3.0 is uninstalled. As a side effect, virtlockd and
+    virtlogd might be reloaded twice after an upgrade from libvirt newer
+    than 1.2.1 and older than 1.3.0 (by postun script from the old libvirt
+    and postun trigger from the new libvirt).
+    
+    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
+    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+
+commit cf555f92128222f5a392cf80478c0a291bb1a0fe
+Author: Jiri Denemark <jdenemar@redhat.com>
+Date:   Wed Feb 14 12:09:32 2018 +0100
+
+    spec: Fix indentation in daemon's triggerpostun
+    
+    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
+    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+
+commit b2ab38bfdc765bbcb56b89b55dfee6b406fc8c29
+Author: Jiri Denemark <jdenemar@redhat.com>
+Date:   Fri Feb 9 14:08:45 2018 +0100
+
+    spec: Prepare for future RHEL
+    
+    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
+    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+
+commit 259b5ca73c13d09b510475e1bb58d31d509193ba
+Author: Jiri Denemark <jdenemar@redhat.com>
+Date:   Fri Feb 9 14:02:00 2018 +0100
+
+    spec: Drop checks for old Fedora releases
+    
+    The oldest Fedora release supported by the spec file is 26. Checking for
+    anything older makes no sense.
+    
+    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
+    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+
+commit 42188c1c65c34b8e77ad48f4dde8a5f06328f16a
+Author: Jiri Denemark <jdenemar@redhat.com>
+Date:   Wed Feb 14 14:49:28 2018 +0100
+
+    spec: Build virt-login-shell iff LXC driver is enabled
+    
+    Building virt-login-shell doesn't really make any sense without LXC and
+    doing so even breaks "make rpm" since the associated files are installed
+    but unpackaged (the login-shell sub package already depends on LXC).
+    
+    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
+    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+
+commit 34783a9e6b9c3d8850db878fc323c1ff40703ea6
+Author: Jiri Denemark <jdenemar@redhat.com>
+Date:   Fri Feb 9 13:42:50 2018 +0100
+
+    spec: Enable fuse only if LXC is enabled
+    
+    Enabling fuse without LXC does not make a lot of sense because fuse is
+    used only by LXC.
+    
+    Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
+    Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+
+commit b62b8090b2ad4524a5bf9d40d0d1c17a9d57f5a0
+Author: Michal Privoznik <mprivozn@redhat.com>
+Date:   Tue Feb 6 10:21:56 2018 +0100
+
+    qemu: Check for down limit of SLIRP prefix too
+    
+    https://bugzilla.redhat.com/show_bug.cgi?id=1515533
+    
+    We're already checking if IPv4 prefix isn't too long. But we are
+    not checking if it isn't too short. QEMU supports prefixes longer
+    than 4 (including). I haven't find anything similar related to
+    IPv6 in qemu sources.
+    
+    Signed-off-by: Michal Privoznik <mprivozn@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit 9cae9c822be1330fe5c6eec5c61be2be8b70ba64
+Author: Peter Krempa <pkrempa@redhat.com>
+Date:   Mon Feb 12 15:50:12 2018 +0100
+
+    qemu: block: Remove misleading part of comment in qemuBlockStorageSourceBuildJSONSocketAddress
+    
+    The array indexes are formatted if the JSON->commandline translator is
+    translating an array type. It does not at all depend on this function.
+    
+    Signed-off-by: Peter Krempa <pkrempa@redhat.com>
+
+commit 6fc33b6f37af2310fd5bb1246e194eed96741df8
+Author: Bjoern Walk <bwalk@linux.vnet.ibm.com>
+Date:   Thu Feb 8 13:38:25 2018 +0100
+
+    tests: run virshtest independent of current pwd
+    
+    virshtest execves the virsh binary. Make sure that it finds the binary's
+    location independent of the current working directory by specifying the
+    absolute path as determined by the build environment.
+    
+    Reviewed-by: Marc Hartmayer <mhartmay@linux.vnet.ibm.com>
+    Reviewed-by: Boris Fiuczynski <fiuczy@linux.vnet.ibm.com>
+    Signed-off-by: Bjoern Walk <bwalk@linux.vnet.ibm.com>
+
+commit e6f36ae43544576353a8ab1168d749dcd11e7465
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Tue Jan 23 10:50:04 2018 +0100
+
+    tests: Clean up HPT tests
+    
+    Give them better names and remove some redundancy.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit 3dd1eb3b26504f91ec6c8487784c494718d884c1
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Tue Feb 6 14:49:41 2018 +0100
+
+    conf: Improve HPT feature handling
+    
+    Instead of storing separately whether the feature is enabled
+    or not and what resizing policy should be used, store both of
+    them in a single place.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit c5a451ef21293468b64eb7929ada6b9406350bf5
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Tue Feb 6 14:30:40 2018 +0100
+
+    conf: Improve IOAPIC feature handling
+    
+    Instead of storing separately whether the feature is enabled
+    or not and what driver should be used, store both of them in
+    a single place.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit 132548efde76defaca54f90cc9c8a57508a4a86f
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Thu Feb 1 17:52:48 2018 +0100
+
+    qemu: Fix GIC behavior for the default case
+    
+    When no GIC version is specified, we currently default to GIC v2;
+    however, that's not a great default, since guests will fail to
+    start if the hardware only supports GIC v3.
+    
+    Change the behavior so that a sensible default is chosen instead.
+    That basically means using the same algorithm whether the user
+    didn't explicitly enable the GIC feature or they explicitly
+    enabled it but didn't specify any GIC version.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit 7500533c5629c4864ae6cfa6672ff28f36e7010f
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Thu Feb 1 18:17:13 2018 +0100
+
+    tests: Improve GIC tests
+    
+    Account for the fact that the default might change based on what
+    GIC versions are supported by QEMU. That's not the case at the
+    moment, but it will be soon.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit f3b4c98748458fe149ee3d4ad65528a0b3b278b0
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Fri Feb 2 15:55:14 2018 +0100
+
+    conf: Integrate all features ABI checks in the switch
+    
+    There are a few stray checks which still live outside of the
+    switch in virDomainDefFeaturesCheckABIStability() for no good
+    reason. Move them inside the switch, and update the error
+    messages to be consistent while at it.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit 53072064745731e8c887f8ee71092060a4025c62
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Thu Feb 1 12:35:15 2018 +0100
+
+    conf: Validate VIR_DOMAIN_FEATURE_CAPABILITIES properly
+    
+    Unlike most other features, VIR_DOMAIN_FEATURE_CAPABILITIES is
+    of type virDomainCapabilitiesPolicy instead of virTristateSwitch,
+    so we need to handle it separately for the error message to make
+    sense.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit a975c95967e5da43c231601913ccb2077c8434b6
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Thu Feb 1 12:31:57 2018 +0100
+
+    conf: Use switch in virDomainDefFeaturesCheckABIStability()
+    
+    The compiler can make sure we are handling all features.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit f55fcb7e8f997d0f15b344c8653725624c7b37ee
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Fri Feb 2 16:05:51 2018 +0100
+
+    qemu: Move GIC checks to qemuDomainDefValidateFeatures()
+    
+    Keep them along with other arch/machine type checks for
+    features instead of waiting until command line generation
+    time.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit ce24802a6b1c86f13735ce9533acff15346138a3
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Fri Feb 2 16:05:01 2018 +0100
+
+    qemu: Use switch in qemuDomainDefValidateFeatures()
+    
+    The compiler can make sure we are handling all features.
+    
+    While reworking the logic, also change error messages to a more
+    consistent style.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+commit 56ca68c3c8947fb37e97a131af7d0fcd1987e800
+Author: Andrea Bolognani <abologna@redhat.com>
+Date:   Fri Feb 2 10:58:13 2018 +0100
+
+    qemu: Move feature verification from PostParse() to Validate()
+    
+    We want to perform all feature verification in a single spot, but
+    some of it (eg. GIC) is currently being performed at command line
+    generation time, and moving it to PostParse() would cause guests
+    to disappear. Moving verification to Validate() allows us to
+    side-step the issue.
+    
+    Signed-off-by: Andrea Bolognani <abologna@redhat.com>
+    Reviewed-by: John Ferlan <jferlan@redhat.com>
+
+
+--===============7306591123006099311==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7306591123006099311==--
