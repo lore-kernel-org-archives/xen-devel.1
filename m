@@ -1,15 +1,16 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable test] 119451: regressions - FAIL
-Date: Sat, 17 Feb 2018 22:18:46 +0000
-Message-ID: <osstest-119451-mainreport@xen.org>
+Subject: [xen-unstable test] 119521: regressions - trouble:
+	blocked/broken/fail/pass
+Date: Sun, 18 Feb 2018 17:54:29 +0000
+Message-ID: <osstest-119521-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0343084491241876435=="
+Content-Type: multipart/mixed; boundary="===============5332813923030628246=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=husu=fl=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1enAou-0008EK-VB
- for xen-devel@lists.xenproject.org; Sat, 17 Feb 2018 22:19:01 +0000
+ <srs0=3x04=fm=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1enTAh-0007rW-3U
+ for xen-devel@lists.xenproject.org; Sun, 18 Feb 2018 17:54:43 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,72 +22,89 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0343084491241876435==
+--===============5332813923030628246==
 Content-Type: text/plain
 
-flight 119451 xen-unstable real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/119451/
+flight 119521 xen-unstable real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/119521/
 
 Regressions :-(
 
 Tests which did not succeed and are blocking,
 including tests which could not be run:
- test-amd64-amd64-rumprun-amd64  7 xen-boot               fail REGR. vs. 118698
+ build-armhf-pvops               <job status>                 broken
+ build-armhf-pvops             5 host-build-prep          fail REGR. vs. 118698
+
+Tests which are failing intermittently (not blocking):
+ test-amd64-amd64-rumprun-amd64  7 xen-boot       fail in 119451 pass in 119521
+ test-amd64-amd64-pygrub      10 debian-di-install          fail pass in 119451
 
 Tests which did not succeed, but are not blocking:
- test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 118698
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-rtds      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-credit2   1 build-check(1)               blocked  n/a
+ test-armhf-armhf-examine      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-xsm       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-multivcpu  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-cubietruck  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-arndale   1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-xsm  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-vhd       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check fail in 119451 like 118698
+ test-armhf-armhf-xl-rtds 16 guest-start/debian.repeat fail in 119451 like 118698
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check fail in 119451 like 118698
+ test-armhf-armhf-libvirt 14 saverestore-support-check fail in 119451 like 118698
+ test-armhf-armhf-xl-arndale 13 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-arndale 14 saverestore-support-check fail in 119451 never pass
+ test-armhf-armhf-xl         13 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-xl     14 saverestore-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-rtds    13 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-rtds 14 saverestore-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-credit2 13 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-credit2 14 saverestore-support-check fail in 119451 never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-xsm     13 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-xsm 14 saverestore-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check fail in 119451 never pass
+ test-armhf-armhf-libvirt    13 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-vhd     12 migrate-support-check fail in 119451 never pass
+ test-armhf-armhf-xl-vhd 13 saverestore-support-check fail in 119451 never pass
  test-amd64-amd64-xl-qemut-win7-amd64 17 guest-stop            fail like 118698
- test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 118698
  test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 118698
- test-armhf-armhf-xl-rtds     16 guest-start/debian.repeat    fail  like 118698
- test-amd64-i386-xl-qemut-win7-amd64 17 guest-stop             fail like 118698
- test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 118698
- test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 118698
  test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop             fail like 118698
  test-amd64-amd64-xl-qemut-ws16-amd64 17 guest-stop            fail like 118698
- test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 118698
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 118698
+ test-amd64-i386-xl-qemut-win7-amd64 17 guest-stop             fail like 118698
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 118698
  test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
  test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
  test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
  test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
  test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
  test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
  test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
  test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
  test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
  test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
  test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
  test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
- test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
  test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
- test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
  test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
  test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
  test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
  test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
- test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
- test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
  test-amd64-i386-xl-qemut-ws16-amd64 17 guest-stop              fail never pass
- test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
  test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
  test-amd64-amd64-xl-qemut-win10-i386 10 windows-install        fail never pass
- test-amd64-i386-xl-qemut-win10-i386 10 windows-install         fail never pass
  test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+ test-amd64-i386-xl-qemut-win10-i386 10 windows-install         fail never pass
 
 version targeted for testing:
  xen                  24470b99c1671dca531c2cf5747eda2f8892ecbc
@@ -94,8 +112,8 @@ baseline version:
  xen                  c93014ad3aa6aa88dfa5e96f66e8adb561483b8d
 
 Last test of basis   118698  2018-02-08 19:23:11 Z    9 days
-Failing since        118802  2018-02-10 00:36:18 Z    7 days    9 attempts
-Testing same since   119451  2018-02-17 01:31:36 Z    0 days    1 attempts
+Failing since        118802  2018-02-10 00:36:18 Z    8 days   10 attempts
+Testing same since   119451  2018-02-17 01:31:36 Z    1 days    2 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
@@ -142,7 +160,7 @@ jobs:
  build-i386-prev                                              pass    
  build-amd64-pvops                                            pass    
  build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
+ build-armhf-pvops                                            broken  
  build-i386-pvops                                             pass    
  build-amd64-rumprun                                          pass    
  build-i386-rumprun                                           pass    
@@ -153,7 +171,7 @@ jobs:
  test-xtf-amd64-amd64-5                                       pass    
  test-amd64-amd64-xl                                          pass    
  test-arm64-arm64-xl                                          pass    
- test-armhf-armhf-xl                                          pass    
+ test-armhf-armhf-xl                                          blocked 
  test-amd64-i386-xl                                           pass    
  test-amd64-amd64-xl-qemut-debianhvm-amd64-xsm                pass    
  test-amd64-i386-xl-qemut-debianhvm-amd64-xsm                 pass    
@@ -165,11 +183,11 @@ jobs:
  test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         pass    
  test-amd64-amd64-libvirt-xsm                                 pass    
  test-arm64-arm64-libvirt-xsm                                 pass    
- test-armhf-armhf-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 blocked 
  test-amd64-i386-libvirt-xsm                                  pass    
  test-amd64-amd64-xl-xsm                                      pass    
  test-arm64-arm64-xl-xsm                                      pass    
- test-armhf-armhf-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      blocked 
  test-amd64-i386-xl-xsm                                       pass    
  test-amd64-amd64-qemuu-nested-amd                            fail    
  test-amd64-amd64-xl-pvhv2-amd                                fail    
@@ -182,7 +200,7 @@ jobs:
  test-amd64-i386-freebsd10-amd64                              pass    
  test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
  test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
- test-amd64-amd64-rumprun-amd64                               fail    
+ test-amd64-amd64-rumprun-amd64                               pass    
  test-amd64-amd64-xl-qemut-win7-amd64                         fail    
  test-amd64-i386-xl-qemut-win7-amd64                          fail    
  test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
@@ -191,14 +209,14 @@ jobs:
  test-amd64-i386-xl-qemut-ws16-amd64                          fail    
  test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
  test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
- test-armhf-armhf-xl-arndale                                  pass    
+ test-armhf-armhf-xl-arndale                                  blocked 
  test-amd64-amd64-xl-credit2                                  pass    
  test-arm64-arm64-xl-credit2                                  pass    
- test-armhf-armhf-xl-credit2                                  pass    
- test-armhf-armhf-xl-cubietruck                               pass    
+ test-armhf-armhf-xl-credit2                                  blocked 
+ test-armhf-armhf-xl-cubietruck                               blocked 
  test-amd64-amd64-examine                                     pass    
  test-arm64-arm64-examine                                     pass    
- test-armhf-armhf-examine                                     pass    
+ test-armhf-armhf-examine                                     blocked 
  test-amd64-i386-examine                                      pass    
  test-amd64-i386-freebsd10-i386                               pass    
  test-amd64-i386-rumprun-i386                                 pass    
@@ -211,28 +229,28 @@ jobs:
  test-amd64-i386-qemut-rhel6hvm-intel                         pass    
  test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
  test-amd64-amd64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     blocked 
  test-amd64-i386-libvirt                                      pass    
  test-amd64-amd64-livepatch                                   pass    
  test-amd64-i386-livepatch                                    pass    
  test-amd64-amd64-migrupgrade                                 pass    
  test-amd64-i386-migrupgrade                                  pass    
  test-amd64-amd64-xl-multivcpu                                pass    
- test-armhf-armhf-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                blocked 
  test-amd64-amd64-pair                                        pass    
  test-amd64-i386-pair                                         pass    
  test-amd64-amd64-libvirt-pair                                pass    
  test-amd64-i386-libvirt-pair                                 pass    
  test-amd64-amd64-amd64-pvgrub                                pass    
  test-amd64-amd64-i386-pvgrub                                 pass    
- test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-pygrub                                      fail    
  test-amd64-amd64-xl-qcow2                                    pass    
- test-armhf-armhf-libvirt-raw                                 pass    
+ test-armhf-armhf-libvirt-raw                                 blocked 
  test-amd64-i386-xl-raw                                       pass    
  test-amd64-amd64-xl-rtds                                     pass    
- test-armhf-armhf-xl-rtds                                     fail    
+ test-armhf-armhf-xl-rtds                                     blocked 
  test-amd64-amd64-libvirt-vhd                                 pass    
- test-armhf-armhf-xl-vhd                                      pass    
+ test-armhf-armhf-xl-vhd                                      blocked 
 
 
 ------------------------------------------------------------
@@ -250,13 +268,14 @@ Explanation of these reports, and of osstest in general, is at
 Test harness code can be found at
     http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
+broken-job build-armhf-pvops broken
 
 Not pushing.
 
 (No revision log; it would be 777 lines long.)
 
 
---===============0343084491241876435==
+--===============5332813923030628246==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -266,4 +285,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============0343084491241876435==--
+--===============5332813923030628246==--
