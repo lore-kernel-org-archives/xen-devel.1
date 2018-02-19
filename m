@@ -1,18 +1,19 @@
-From: Juergen Gross <jgross@suse.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
 Subject: Re: PV guest with PCI passthrough crash on Xen 4.8.3
  inside KVM when booted through OVMF
-Date: Mon, 19 Feb 2018 18:30:14 +0100
-Message-ID: <01e7d219-5a2f-58cb-bb30-59f31749f019@suse.com>
+Date: Mon, 19 Feb 2018 18:29:49 +0100
+Message-ID: <20180219172949.GY2084@mail-itl>
 References: <20180216174835.GJ4302@mail-itl>
  <3b6ce245-626d-a6db-b9fa-77dcf26a4ad6@citrix.com>
  <20180216185122.GK4302@mail-itl>
  <b8bb621f-1558-d207-4978-4dca46e350e6@citrix.com>
+ <20180216195415.GK2084@mail-itl>
+ <1f3c44fb-e557-9b5c-6e9f-2ac40a8e0562@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5345725276413107175=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <b8bb621f-1558-d207-4978-4dca46e350e6@citrix.com>
-Content-Language: de-DE
+In-Reply-To: <1f3c44fb-e557-9b5c-6e9f-2ac40a8e0562@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,67 +22,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>
-Cc: xen-devel <xen-devel@lists.xen.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTYvMDIvMTggMjA6MDIsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4gT24gMTYvMDIvMTggMTg6
-NTEsIE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSB3cm90ZToKPj4gT24gRnJpLCBGZWIgMTYs
-IDIwMTggYXQgMDU6NTI6NTBQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4+IE9uIDE2
-LzAyLzE4IDE3OjQ4LCBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVja2kgd3JvdGU6Cj4+Pj4gSGks
-Cj4+Pj4KPj4+PiBBcyBpbiB0aGUgc3ViamVjdCwgdGhlIGd1ZXN0IGNyYXNoZXMgb24gYm9vdCwg
-YmVmb3JlIGtlcm5lbCBvdXRwdXQKPj4+PiBhbnl0aGluZy4gSSd2ZSBpc29sYXRlZCB0aGlzIHRv
-IHRoZSBjb25kaXRpb25zIGJlbG93Ogo+Pj4+ICAtIFBWIGd1ZXN0IGhhdmUgUENJIGRldmljZSBh
-c3NpZ25lZCAoZTEwMDBlIGVtdWxhdGVkIGJ5IFFFTVUgaW4gdGhpcyBjYXNlKSwKPj4+PiAgICB3
-aXRob3V0IFBDSSBkZXZpY2UgaXQgd29ya3MKPj4+PiAgLSBYZW4gKGluIEtWTSkgaXMgc3RhcnRl
-ZCB0aHJvdWdoIE9WTUY7IHdpdGggc2VhYmlvcyBpdCB3b3Jrcwo+Pj4+ICAtIG5lc3RlZCBIVk0g
-aXMgZGlzYWJsZWQgaW4gS1ZNCj4+Pj4gIC0gQU1EIElPTU1VIGVtdWxhdGlvbiBpcyBkaXNhYmxl
-ZCBpbiBLVk07IHdoZW4gZW5hYmxlZCBxZW11IGNyYXNoZXMgb24KPj4+PiAgICBib290IChsb29r
-cyBsaWtlIHFlbXUgYnVnLCB1bnJlbGF0ZWQgdG8gdGhpcyBvbmUpCj4+Pj4KPj4+PiBWZXJzaW9u
-IGluZm86Cj4+Pj4gIC0gS1ZNIGhvc3Q6IE9wZW5TVVNFIDQyLjMsIHFlbXUgMi45LjEsIG92bWYt
-MjAxNytnaXQxNDkyMDYwNTYwLmI2ZDExZDdjNDYtNC4xLCBBTUQKPj4+PiAgLSBYZW4gaG9zdDog
-WGVuIDQuOC4zLCBkb20wOiBMaW51eCA0LjE0LjEzCj4+Pj4gIC0gWGVuIGRvbVU6IExpbnV4IDQu
-MTQuMTMsIGRpcmVjdCBib290Cj4+Pj4KPj4+PiBOb3Qgc3VyZSBpZiByZWxldmFudCwgYnV0IGlu
-aXRpYWxseSBJJ3ZlIHRyaWVkIGJvb3RpbmcgeGVuLmVmaSAvbWFwYnMKPj4+PiAvbm9leGl0Ym9v
-dCBhbmQgdGhlbiBkb20wIGtlcm5lbCBjcmFzaGVkIHNheWluZyBzb21ldGhpbmcgYWJvdXQgY29u
-ZmxpY3QKPj4+PiBiZXR3ZWVuIGU4MjAgYW5kIGtlcm5lbCBtYXBwaW5nLiBCdXQgbm93IHRob3Nl
-IG9wdGlvbnMgYXJlIGRpc2FibGVkLgo+Pj4+Cj4+Pj4gVGhlIGNyYXNoIG1lc3NhZ2U6Cj4+Pj4g
-KFhFTikgZDF2MCBVbmhhbmRsZWQgaW52YWxpZCBvcGNvZGUgZmF1bHQvdHJhcCBbIzYsIGVjPTAw
-MDBdCj4+Pj4gKFhFTikgZG9tYWluX2NyYXNoX3N5bmMgY2FsbGVkIGZyb20gZW50cnkuUzogZmF1
-bHQgYXQgZmZmZjgyZDA4MDIxODcyMCBlbnRyeS5vI2NyZWF0ZV9ib3VuY2VfZnJhbWUrMHgxMzcv
-MHgxNDYKPj4+PiAoWEVOKSBEb21haW4gMSAodmNwdSMwKSBjcmFzaGVkIG9uIGNwdSMxOgo+Pj4+
-IChYRU4pIC0tLS1bIFhlbi00LjguMyAgeDg2XzY0ICBkZWJ1Zz1uICAgTm90IHRhaW50ZWQgXS0t
-LS0KPj4+PiAoWEVOKSBDUFU6ICAgIDEKPj4+PiAoWEVOKSBSSVA6ICAgIGUwMzM6WzxmZmZmZmZm
-ZjgyNmQ5MTU2Pl0KPj4+IFRoaXMgaXMgI1VELCB3aGljaCBpcyBtb3N0IHByb2JhYmx5IGhpdHRp
-bmcgYSBCVUcoKS7CoCBhZGRyMmxpbmUgdGhpcyBeCj4+PiB0byBmaW5kIHNvbWUgY29kZSB0byBs
-b29rIGF0Lgo+PiBhZGRyMmxpbmUgZmFpbGVkIG1lCj4gCj4gQnkgZGVmYXVsdCwgdm1saW51eCBp
-cyBzdHJpcHBlZCBhbmQgY29tcHJlc3NlZC7CoCBJZGVhbGx5IHlvdSB3YW50IHRvCj4gYWRkcjJs
-aW5lIHRoZSB2bWxpbnV4IGFydGVmYWN0IGluIHRoZSByb290IG9mIHlvdXIga2VybmVsIGJ1aWxk
-LCB3aGljaAo+IGlzIHRoZSBwbGFpbiBlbGYgd2l0aCBkZWJ1Z2dpbmcgc3ltYm9scy4KPiAKPiBB
-bHRlcm5hdGl2ZWx5LCB1c2Ugc2NyaXB0cy9leHRyYWN0LXZtbGludXggb24gdGhlIGJpbmFyeSB5
-b3UgYWN0dWFsbHkKPiBib290ZWQsIHdoaWNoIG1pZ2h0IGdldCB5b3Ugc29tZXdoZXJlLgo+IAo+
-PiAsIGJ1dCBTeXN0ZW0ubWFwIHNheXMgaXRzIHhlbl9tZW1vcnlfc2V0dXAuIEFuZCBpdAo+PiBs
-b29rcyBsaWtlIHRoZSBCVUcoKSBpcyB0aGUgc2FtZSBhcyBJIGhhZCBpbiBkb20wIGJlZm9yZToK
-Pj4gIlhlbiBoeXBlcnZpc29yIGFsbG9jYXRlZCBrZXJuZWwgbWVtb3J5IGNvbmZsaWN0cyB3aXRo
-IEU4MjAgbWFwIi4KPiAKPiBKdWVyZ2VuOiBJcyB0aGVyZSBhbnl0aGluZyB3ZSBjYW4gZG8gdG8g
-dHJ5IGFuZCBpbnNlcnQgc29tZSBkdW1teQo+IGV4Y2VwdGlvbiBoYW5kbGVycyByaWdodCBhdCBQ
-ViBzdGFydCwgc28gd2UgY291bGQgYXQgbGVhc3QgcHJpbnQgb3V0IGEKPiBvbmVsaW5lciB0byB0
-aGUgaG9zdCBjb25zb2xlIHdoaWNoIGlzIGEgbGl0dGxlIG1vcmUgaGVscGZ1bCB0aGFuIFhlbgo+
-IHNheWluZyAic29tZXRoaW5nIHVua25vd24gd2VudCB3cm9uZyIgPwoKWW91IG1lYW4gc29tZXRo
-aW5nIGxpa2UgY29tbWl0IDQyYjNhNGNiNTYwOWRlNzU3ZjU0NDVmY2FkMTg5NDViYTkyMzlhMDcK
-YWRkZWQgdG8ga2VybmVsIDQuMTU/Cgo+IAo+Pgo+PiBEaXNhYmxpbmcgZTgyMF9ob3N0IGluIGd1
-ZXN0IGNvbmZpZyBzb2x2ZWQgdGhlIHByb2JsZW0uIFRoYW5rcyEKPj4KPj4gSXMgdGhpcyBzb21l
-IGJ1ZyBpbiBYZW4gb3IgT1ZNRiwgb3IgaXMgaXQgZXhwZWN0ZWQgYmVoYXZpb3IgYW5kIGU4MjBf
-aG9zdAo+PiBzaG91bGQgYmUgYXZvaWRlZD8KPiAKPiBJIGRvbid0IHJlYWxseSBrbm93LsKgIGU4
-MjBfaG9zdCBpcyBhIGdyb3NzIGhhY2sgd2hpY2ggc2hvdWxkbid0IHJlYWxseQo+IGJlIHByZXNl
-bnQuwqAgVGhlIGFjdHVhbGx5IHByb2JsZW0gaXMgdGhhdCBMaW51eCBjYW4ndCBjb3BlIHdpdGgg
-dGhlCj4gbWVtb3J5IGxheW91dCBpdCB3YXMgZ2l2ZW4gKGFuZCBJIGNhbid0IHJlY2FsbCBpZiB0
-aGVyZSBpcyBhbnl0aGluZwo+IExpbnV4IGNvdWxkIHBvdGVudGlhbGx5IHRvIGRvIGNvcGUpLsKg
-IE9UT0gsIHRoZSB0b29sc3RhY2ssIHdoaWNoIGtuZXcKPiBhYm91dCBlODIwX2hvc3QgYW5kIGNo
-b3NlIHRvIGxheSB0aGUgZ3Vlc3Qgb3V0IGluIGFuIG92ZXJsYXBwaW5nIHdheSBpcwo+IHByb2Jh
-Ymx5IGFsc28gYXQgZmF1bHQuCgpUaGUga2VybmVsIGNhbiBjb3BlIHdpdGggbG90cyBvZiBFODIw
-IHNjZW5hcmlvcyAoZS5nLiBieSByZWxvY2F0aW5nCmluaXRyZCBvciB0aGUgcDJtIG1hcCksIGJ1
-dCBtb3ZpbmcgaXRzZWxmIG91dCBvZiB0aGUgd2F5IGlzIG5vdApwb3NzaWJsZS4KCgpKdWVyZ2Vu
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============5345725276413107175==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="MhP8cYafZlTESjGT"
+Content-Disposition: inline
+
+
+--MhP8cYafZlTESjGT
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Feb 19, 2018 at 06:23:40PM +0100, Juergen Gross wrote:
+> On 16/02/18 20:54, Marek Marczykowski-G=C3=B3recki wrote:
+> > Just before the BUG(), there is a call to xen_raw_console_write(). But
+> > apparently it was too early...
+>=20
+> Depends.
+>=20
+> With a debug enabled hypervisor and appropriate log levels set
+> (guest_loglvl=3Dall) you should see the message in the hypervisor log.
+
+I've tried with guest_loglvl=3Dall, but there was nothing. Wouldn't it
+make sense to enable this functionality also in non-debug builds - only
+guarded by guest_loglvl=3Dall option?
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--MhP8cYafZlTESjGT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlqLCYUACgkQ24/THMrX
+1yysjQf+INXGk5jH09uD1RbBoGzCN7wA9fQ+Nsbv+uvcII9LX3poLgQaRV3Nwp1m
+qlgjbKfqBIiJox0fevAp5fE9HoOvKSwMKQNDepoAaIBXWIOXYOhlkUlN7D8DjfrD
+yG385TvJhVPLo6uijbWaM2gergFXA7adQhePLwJKx52hbyaCE5RcTknKN4DvnI34
+mBmXXMzkhbNuXurRyzqYMcWwBKy5aJQp2pWpZa7XF8rq7h93vbKFKUlXsGAvnEvQ
+tQ/YzYdc4JwWFQyePmgyJojk5GieSKb2F2WbCOhpOxke+FSWLNxr5s22HmRhO9lx
+v6/NUs+Rw2MpPLfkrjIDVbc7ioC8cg==
+=J5sx
+-----END PGP SIGNATURE-----
+
+--MhP8cYafZlTESjGT--
+
+
+--===============5345725276413107175==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5345725276413107175==--
