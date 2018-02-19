@@ -1,20 +1,27 @@
-From: Simon Gaiser <simon@invisiblethingslab.com>
-Subject: Re: [PATCH 1/2] xen: xenbus_dev_frontend: Fix
- XS_TRANSACTION_END handling
-Date: Tue, 20 Feb 2018 04:56:00 +0000
-Message-ID: <1d10edc6-8ad6-bc58-432c-d1867f0ab57a@invisiblethingslab.com>
-References: <20180207222236.7434-1-simon@invisiblethingslab.com>
- <ea0630bd-5139-5f79-847c-f88f733b5053@suse.com>
- <1fbf69f9-f835-897e-144f-8c6f8b94cd26@suse.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 4/4] xen/arm: update the docs about
+ heterogeneous computing
+Date: Mon, 19 Feb 2018 13:34:59 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1802191333360.12137@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1802151504290.5392@sstabellini-ThinkPad-X260>
+ <1518736620-13802-1-git-send-email-sstabellini@kernel.org>
+ <1518736620-13802-4-git-send-email-sstabellini@kernel.org>
+ <43453493-bd6a-600d-6f48-429e8c683019@arm.com>
+ <alpine.DEB.2.10.1802161232050.5392@sstabellini-ThinkPad-X260>
+ <b179e31d-1351-afa3-3693-f067a529dd7b@arm.com>
+ <alpine.DEB.2.10.1802161309560.5392@sstabellini-ThinkPad-X260>
+ <1ee75f4f-80f3-f0bc-11df-48e9bde9fc8d@arm.com>
+ <alpine.DEB.2.10.1802161555430.5392@sstabellini-ThinkPad-X260>
+ <99b1cc3a-03bb-d32f-4f9f-bdaf95f470db@arm.com>
+ <alpine.DEB.2.10.1802191215100.12137@sstabellini-ThinkPad-X260>
+ <4bf0a81a-b6ad-7662-4f74-48ff616356a2@arm.com>
+ <alpine.DEB.2.10.1802191253450.12137@sstabellini-ThinkPad-X260>
+ <ef5913ef-55a6-cb29-44ea-ed10e45d7c69@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5744788804730938994=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=ykbs=fo=invisiblethingslab.com=simon@srs-us1.protection.inumbo.net>)
- id 1enzzB-0005y1-Dr
- for xen-devel@lists.xenproject.org; Tue, 20 Feb 2018 04:57:01 +0000
-In-Reply-To: <1fbf69f9-f835-897e-144f-8c6f8b94cd26@suse.com>
+In-Reply-To: <ef5913ef-55a6-cb29-44ea-ed10e45d7c69@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,134 +30,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org, stable@vger.kernel.org
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, wei.liu2@citrix.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, tim@xen.org, xen-devel@lists.xen.org, jbeulich@suse.com, nd@arm.com, ian.jackson@eu.citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5744788804730938994==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="BCNRGoU7u99MhOmENERYQD81uMIzqsj9q"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---BCNRGoU7u99MhOmENERYQD81uMIzqsj9q
-Content-Type: multipart/mixed; boundary="UrcEycLHHCAXawABUXRgY4RJQDH6yYJTM";
- protected-headers="v1"
-From: Simon Gaiser <simon@invisiblethingslab.com>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: stable@vger.kernel.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- linux-kernel@vger.kernel.org
-Message-ID: <1d10edc6-8ad6-bc58-432c-d1867f0ab57a@invisiblethingslab.com>
-Subject: Re: [PATCH 1/2] xen: xenbus_dev_frontend: Fix XS_TRANSACTION_END
- handling
-References: <20180207222236.7434-1-simon@invisiblethingslab.com>
- <ea0630bd-5139-5f79-847c-f88f733b5053@suse.com>
- <1fbf69f9-f835-897e-144f-8c6f8b94cd26@suse.com>
-In-Reply-To: <1fbf69f9-f835-897e-144f-8c6f8b94cd26@suse.com>
-
---UrcEycLHHCAXawABUXRgY4RJQDH6yYJTM
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Juergen Gross:
-> On 07/02/18 23:22, Simon Gaiser wrote:
->> Commit fd8aa9095a95 ("xen: optimize xenbus driver for multiple
->> concurrent xenstore accesses") made a subtle change to the semantic of=
-
->> xenbus_dev_request_and_reply() and xenbus_transaction_end().
->>
->> Before on an error response to XS_TRANSACTION_END
->> xenbus_dev_request_and_reply() would not decrement the active
->> transaction counter. But xenbus_transaction_end() has always counted t=
-he
->> transaction as finished regardless of the response.
->=20
-> Which is correct now. Xenstore will free all transaction related
-> data regardless of the response. A once failed transaction can't
-> be repaired, it has to be repeated completely.
-
-So if xenstore frees the transaction why should we keep it in the list
-with pending transaction in xenbus_dev_frontend? That's exactly what
-this patch fixes by always removing it from the list, not only on a
-successful response (See below for the EINVAL case).
-
-[...]
->> But xenbus_dev_frontend tries to end a transaction on closing of the
->> device if the XS_TRANSACTION_END failed before. Trying to close the
->> transaction twice corrupts the reference count. So fix this by also
->> considering a transaction closed if we have sent XS_TRANSACTION_END on=
-ce
->> regardless of the return code.
->=20
-> A transaction in the list of transactions should not considered to be
-> finished. Either it is not on the list or it is still pending.
-
-With "considering a transaction closed" I mean "take the code path which
-removes the transaction from the list with pending transactions".
-
-=46rom the follow-up mail:
->>> The new behavior is that xenbus_dev_request_and_reply() and
->>> xenbus_transaction_end() will always count the transaction as finishe=
-d
->>> regardless the response code (handled in xs_request_exit()).
->>
->> ENOENT should not decrement the transaction counter, while all
->> other responses to XS_TRANSACTION_END should still do so.
->=20
-> Sorry, I stand corrected: the ENOENT case should never happen, as this
-> case is tested in xenbus_write_transaction(). It doesn't hurt to test
-> for ENOENT, though.
->=20
-> What should be handled is EINVAL: this would happen if a user specified=
-
-> a string different from "T" and "F".
-
-Ok, I will handle those cases in xs_request_exit(). Although I don't
-like that this depends on the internals of xenstore (At least to me it's
-not obvious why it should only return ENOENT or EINVAL in this case).
-
-In the xenbus_write_transaction() case checking the string before
-sending the transaction (like the transaction itself is verified) would
-avoid this problem.
-
-
---UrcEycLHHCAXawABUXRgY4RJQDH6yYJTM--
-
---BCNRGoU7u99MhOmENERYQD81uMIzqsj9q
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlqLqp8ACgkQkO9xfO/x
-ly+XExAApdIgnsM6xkHjK8kBhDK57fz+xLyU6htNsOgamX4c94ZroOG3GhHXVGq0
-zdyy/p/UCMwV/ySUfENZtbzzIj7uY+XJkgDBb5l/h39baok5AXGvBxch7AiFDTVp
-MtgcgPYuBZwgtuIJiwF7HdrHyCQ+DurHQ9MRIxBeDesoJRNYfYHeady7QrPtBk4I
-fZZ0n7SfTepI73h8mpnht8NWkwt8KgGFT6iJxItr7oqjbEC09lFRwvOddtX2zs5e
-BGaDlgUAarrf8lFhy03BBJisGA8iWnlrxLRoLY1mS4WrBZDwyuLLSt1oswLE5J/w
-yVYb3mnyABoEjZMw6nHnVBQmtPKzkyt9i/CSZFc31cqE+sPIvBBtoFZaS08m06Op
-MHueVEaf1Gaa8LWZpen7vUhDd7bbxS/MioHu7Z354L1H7fRBEzLY59zMyvQPlpvw
-5F6WPrFngrb1Q1qzH3FXt81MI8bnzGZj85SJXm5EOqxszMizHvpoF38aEI4p+Dv9
-mRWKlNJC+GK93LAI8Bb6MclDb+F0cxlSWO32d4GDokJGJ45ZjRxJrZ5B9yWWalBp
-3xsszLTBLx8+CH+IK09n2fCSqmUU4G17zSJqNiNciswpbpEmSNt4xyh44l/zHs9X
-nWakkPtyXGuCbsY5ey0DpEk/gp/p8U+mwHrivWjuDI81mkwKBdo=
-=3Gxv
------END PGP SIGNATURE-----
-
---BCNRGoU7u99MhOmENERYQD81uMIzqsj9q--
-
-
---===============5744788804730938994==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5744788804730938994==--
+T24gTW9uLCAxOSBGZWIgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IE9uIDE5LzAyLzIwMTgg
+MjE6MDUsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IE9uIE1vbiwgMTkgRmViIDIwMTgs
+IEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gT24gMTkvMDIvMjAxOCAyMDoyOCwgU3RlZmFubyBT
+dGFiZWxsaW5pIHdyb3RlOgo+ID4gPiA+IE9uIFNhdCwgMTcgRmViIDIwMTgsIEp1bGllbiBHcmFs
+bCB3cm90ZToKPiA+ID4gPiA+IEhpLAo+ID4gPiA+ID4gCj4gPiA+ID4gPiBPbiAxNy8wMi8yMDE4
+IDAwOjMxLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiA+ID4gPiA+IE9uIEZyaSwgMTYg
+RmViIDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gPiA+ID4gPiBPbiAxNi8wMi8yMDE4
+IDIxOjE1LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiA+ID4gPiA+ID4gPiBPbiBGcmks
+IDE2IEZlYiAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gPiA+ID4gPiA+ID4gPiA+IE9uIDE2
+LzAyLzIwMTggMjA6NTAsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+ID4gPiA+ID4gPiA+
+ID4gPiBPbiBGcmksIDE2IEZlYiAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gPiA+ID4gPiA+
+ID4gPiA+ID4gPiBIaSBTdGVmYW5vLAo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+
+ID4gPiA+ID4gPiBPbiAxNS8wMi8xOCAyMzoxNywgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+
+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBVcGRhdGUgdGhlIGRvY3VtZW50YXRpb24gb2YgdGhlIGht
+cC11bnNhZmUgb3B0aW9uIHRvCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IGV4cGxhaW4KPiA+ID4g
+PiA+ID4gPiA+ID4gPiA+ID4gaG93Cj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IHRvCj4gPiA+ID4g
+PiA+ID4gPiA+ID4gPiA+IHVzZQo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBpdCBzYWZlbHksIHRv
+Z2V0aGVyIHdpdGggdGhlIHJpZ2h0IGNwdSBhZmZpbml0eSBzZXR0aW5nLAo+ID4gPiA+ID4gPiA+
+ID4gPiA+ID4gPiBvbgo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBiaWcuTElUVExFCj4gPiA+ID4g
+PiA+ID4gPiA+ID4gPiA+IHN5c3RlbXMuCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+
+ID4gPiA+ID4gPiA+ID4gPiBBbHNvIHVwZGF0ZSB0aGUgd2FybmluZyBtZXNzYWdlIHRvIHBvaW50
+IHVzZXJzIHRvIHRoZQo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBkb2NzLgo+ID4gPiA+ID4gPiA+
+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gU2lnbmVkLW9mZi1ieTogU3RlZmFu
+byBTdGFiZWxsaW5pCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IDxzc3RhYmVsbGluaUBrZXJuZWwu
+b3JnPgo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBDQzogamJldWxpY2hAc3VzZS5jb20KPiA+ID4g
+PiA+ID4gPiA+ID4gPiA+ID4gQ0M6IGtvbnJhZC53aWxrQG9yYWNsZS5jb20KPiA+ID4gPiA+ID4g
+PiA+ID4gPiA+ID4gQ0M6IHRpbUB4ZW4ub3JnCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IENDOiB3
+ZWkubGl1MkBjaXRyaXguY29tCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IENDOiBhbmRyZXcuY29v
+cGVyM0BjaXRyaXguY29tCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IENDOiBHZW9yZ2UuRHVubGFw
+QGV1LmNpdHJpeC5jb20KPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gQ0M6IGlhbi5qYWNrc29uQGV1
+LmNpdHJpeC5jb20KPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiA+ID4g
+PiA+IC0tLQo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiAgICAgICAgZG9jcy9taXNjL3hlbi1jb21t
+YW5kLWxpbmUubWFya2Rvd24gfCAxMAo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiArKysrKysrKyst
+Cj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+ICAgICAgICB4ZW4vYXJjaC9hcm0vc21wYm9vdC5jICAg
+ICAgICAgICAgICB8ICA5Cj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+ICsrKysrLS0tLQo+ID4gPiA+
+ID4gPiA+ID4gPiA+ID4gPiAgICAgICAgMiBmaWxlcyBjaGFuZ2VkLCAxNCBpbnNlcnRpb25zKCsp
+LCA1IGRlbGV0aW9ucygtKQo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+
+ID4gPiA+ID4gZGlmZiAtLWdpdCBhL2RvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3du
+Cj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IGIvZG9jcy9taXNjL3hlbi1jb21tYW5kLWxpbmUubWFy
+a2Rvd24KPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gaW5kZXggMjE4NGNiOS4uYTFlYmVlYSAxMDA2
+NDQKPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gLS0tIGEvZG9jcy9taXNjL3hlbi1jb21tYW5kLWxp
+bmUubWFya2Rvd24KPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gKysrIGIvZG9jcy9taXNjL3hlbi1j
+b21tYW5kLWxpbmUubWFya2Rvd24KPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gQEAgLTEwMDcsNyAr
+MTAwNywxNSBAQCBDb250cm9sIFhlbnMgdXNlIG9mIHRoZSBBUEVJCj4gPiA+ID4gPiA+ID4gPiA+
+ID4gPiA+IEhhcmR3YXJlCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IEVycm9yCj4gPiA+ID4gPiA+
+ID4gPiA+ID4gPiA+IFNvdXJjZQo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBUYWJsZSwgc2hvdWxk
+IG9uZSBiZSBmb3VuZC4KPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gICAgICAgICAgU2F5IHllcyBh
+dCB5b3VyIG93biByaXNrIGlmIHlvdSB3YW50IHRvIGVuYWJsZQo+ID4gPiA+ID4gPiA+ID4gPiA+
+ID4gPiBoZXRlcm9nZW5vdXMKPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gY29tcHV0aW5nCj4gPiA+
+ID4gPiA+ID4gPiA+ID4gPiA+ICAgICAgICAoc3VjaCBhcyBiaWcuTElUVExFKS4gVGhpcyBtYXkg
+cmVzdWx0IHRvIGFuCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IHVuc3RhYmxlCj4gPiA+ID4gPiA+
+ID4gPiA+ID4gPiA+IGFuZAo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBpbnNlY3VyZQo+ID4gPiA+
+ID4gPiA+ID4gPiA+ID4gPiAtcGxhdGZvcm0uIFdoZW4gdGhlIG9wdGlvbiBpcyBkaXNhYmxlZCAo
+ZGVmYXVsdCksIENQVXMKPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gdGhhdAo+ID4gPiA+ID4gPiA+
+ID4gPiA+ID4gPiBhcmUKPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gbm90Cj4gPiA+ID4gPiA+ID4g
+PiA+ID4gPiA+ICtwbGF0Zm9ybSwgdW5sZXNzIHlvdSBtYW51YWxseSBzcGVjaWZ5IHRoZSBjcHUg
+YWZmaW5pdHkKPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gb2YKPiA+ID4gPiA+ID4gPiA+ID4gPiA+
+ID4gYWxsCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IGRvbWFpbnMKPiA+ID4gPiA+ID4gPiA+ID4g
+PiA+ID4gc28KPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gK3RoYXQgYWxsIHZjcHVzIGFyZSBzY2hl
+ZHVsZWQgb24gdGhlIHNhbWUgY2xhc3Mgb2YgcGNwdXMKPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4g
+KGJpZyBvcgo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBMSVRUTEUKPiA+ID4gPiA+ID4gPiA+ID4g
+PiA+ID4gK2J1dCBub3QgYm90aCkuIHZjcHUgbWlncmF0aW9uIGJldHdlZW4gYmlnIGNvcmVzIGFu
+ZAo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBMSVRUTEUKPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4g
+Y29yZXMgaXMKPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gbm90Cj4gPiA+ID4gPiA+ID4gPiA+ID4g
+PiA+ICtzdXBwb3J0ZWQuIFRodXMsIGlmIHRoZSBmaXJzdCA0IHBjcHVzIGFyZSBiaWcgYW5kIHRo
+ZQo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBsYXN0Cj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IDQK
+PiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gYXJlCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IExJVFRM
+RSwKPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gK2FsbCBkb21haW5zIG5lZWQgdG8gaGF2ZSBlaXRo
+ZXIgY3B1cyA9ICIwLTMiIG9yIGNwdXMgPQo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiAiNC03IiBp
+bgo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiB0aGVpcgo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiBW
+TQo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiArY29uZmlnLiBNb3Jlb3ZlciwgZG9tMF92Y3B1c19w
+aW4gbmVlZHMgdG8gYmUgcGFzc2VkIG9uCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiA+IHRoZQo+ID4g
+PiA+ID4gPiA+ID4gPiA+ID4gPiBYZW4KPiA+ID4gPiA+ID4gPiA+ID4gPiA+ID4gY29tbWFuZAo+
+ID4gPiA+ID4gPiA+ID4gPiA+ID4gPiArbGluZS4KPiA+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4g
+PiA+ID4gPiA+ID4gPiA+ID4gSW4geW91ciBleGFtcGxlIGhlcmUgeW91IHN1Z2dlc3QgdG8gaGF2
+ZSBhbGwgdGhlIHZDUFVzIG9mCj4gPiA+ID4gPiA+ID4gPiA+ID4gPiBhCj4gPiA+ID4gPiA+ID4g
+PiA+ID4gPiBndWVzdAo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gdG8KPiA+ID4gPiA+ID4gPiA+ID4g
+PiA+IGVpdGhlciBvbgo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gYmlnIG9yIExJVFRMRSBjb3Jlcy4g
+SG93IGFib3V0IGdpdmluZyBhbiBleGFtcGxlIHdoZXJlIHRoZQo+ID4gPiA+ID4gPiA+ID4gPiA+
+ID4gZ3Vlc3QKPiA+ID4gPiA+ID4gPiA+ID4gPiA+IGNhbgo+ID4gPiA+ID4gPiA+ID4gPiA+ID4g
+aGF2ZQo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gMgo+ID4gPiA+ID4gPiA+ID4gPiA+ID4gTElUVExF
+IHZDUFVzIGFuZCBvbmUgYmlnIHZDUFU/Cj4gPiA+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+
+ID4gPiA+ID4gSSB3b3VsZCByYXRoZXIgZGlzY291cmFnZSBpdCBhdCB0aGUgbW9tZW50LCBnaXZl
+biB0aGF0IGl0Cj4gPiA+ID4gPiA+ID4gPiA+ID4gcmVxdWlyZXMKPiA+ID4gPiA+ID4gPiA+ID4g
+PiBtb3JlCj4gPiA+ID4gPiA+ID4gPiA+ID4gY29tcGxleCBjcHUgYWZmaW5pdHkgc2V0dGluZ3Ms
+IG9yIHZjcHUgcGlubmluZy4gQWxzbywgSSBhbQo+ID4gPiA+ID4gPiA+ID4gPiA+IGFmcmFpZAo+
+ID4gPiA+ID4gPiA+ID4gPiA+IHRoYXQKPiA+ID4gPiA+ID4gPiA+ID4gPiB3aXRob3V0IG1hdGNo
+aW5nIGNvcnJlc3BvbmRpbmcgdG9wb2xvZ3kgaW5mb3JtYXRpb24gb24gdGhlCj4gPiA+ID4gPiA+
+ID4gPiA+ID4gZ3Vlc3QKPiA+ID4gPiA+ID4gPiA+ID4gPiBkZXZpY2UKPiA+ID4gPiA+ID4gPiA+
+ID4gPiB0cmVlLCBndWVzdHMgbWlnaHQgbm90IHdvcmsgYXMgZXhwZWN0ZWQgaW4gc3VjaCBhIHNj
+ZW5hcmlvLgo+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiA+IFdoYXQgZG8g
+eW91IHRoaW5rPwo+ID4gPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4gWW91IGFscmVh
+ZHkga25vdyBteSB2aWV3IG9uIHRoaXMuIEkgd291bGQgcmF0aGVyIHN0cm9uZ2x5Cj4gPiA+ID4g
+PiA+ID4gPiA+IGRpc2NvdXJhZ2UKPiA+ID4gPiA+ID4gPiA+ID4gYW55b25lCj4gPiA+ID4gPiA+
+ID4gPiA+IHBpbm5pbmcgYWxsIHZDUFVzIG9mIGEgZG9tYWluIHRvIGJpZyBjb3Jlcy4gV2Ugc2hv
+dWxkIGF2b2lkIHRvCj4gPiA+ID4gPiA+ID4gPiA+IHByb3ZpZGUKPiA+ID4gPiA+ID4gPiA+ID4g
+c2hvcnRjdXRzIHRvIHVzZSB0aGF0IGNvdWxkIGhhdmUgcG90ZW50aWFsbHkgZGFtYWdlYWJsZSBp
+bXBhY3QKPiA+ID4gPiA+ID4gPiA+ID4gb24KPiA+ID4gPiA+ID4gPiA+ID4gdGhlaXIKPiA+ID4g
+PiA+ID4gPiA+ID4gcGxhdGZvcm0gd2l0aG91dCB0ZWxsaW5nIHRoZW0uCj4gPiA+ID4gPiA+ID4g
+PiAKPiA+ID4gPiA+ID4gPiA+IERvIHlvdSBoYXZlIGEgbGluayB0byBhIGRvYyBzb21ld2hlcmUg
+dGhhdCBwcm92aWRlcyBtb3JlIGRldGFpbHMKPiA+ID4gPiA+ID4gPiA+IGFib3V0Cj4gPiA+ID4g
+PiA+ID4gPiB0aGlzPyBXZSBjb3VsZCBhZGQgYSBsaW5rIHRvIGl0IGhlcmUgdG8gaW5mb3JtIHVz
+ZXJzLiBJdCB3b3VsZAo+ID4gPiA+ID4gPiA+ID4gYmUKPiA+ID4gPiA+ID4gPiA+IHVzZWZ1bC4K
+PiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiBUaGlzIGlzIHF1aXRlIHdlbGwgZGVzY3JpYmVk
+IGluCj4gPiA+ID4gPiA+ID4gaHR0cHM6Ly94ZW5iaXRzLnhlbi5vcmcvZG9jcy91bnN0YWJsZS9t
+YW4veGwuY2ZnLjUuaHRtbCNDUFUtQWxsb2NhdGlvbgo+ID4gPiA+ID4gPiA+IHNlZQo+ID4gPiA+
+ID4gPiA+ICJjcHVzIi4KPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+IE9LLCBJJ2xsIGFkZCB0aGUg
+bGluayBpbiBhIG5ldyBiaWcuTElUVExFIGRvYy4gQWxzbywgZG8geW91IGhhdmUgYW55Cj4gPiA+
+ID4gPiA+IGRvY3VtZW50YXRpb24gb3IgbGluayBhYm91dCBiaWcgY29yZSBiZWluZyBwb3RlbnRp
+YWxseSBkYW1hZ2luZz8gSXQKPiA+ID4gPiA+ID4gd291bGQgYmUgZ29vZCB0byBwcm92aWRlIGlu
+Zm9ybWF0aW9uIGFib3V0IHRoYXQgdG9vIGluIHRoZQo+ID4gPiA+ID4gPiBiaWcuTElUVExFCj4g
+PiA+ID4gPiA+IGRvYy4KPiA+ID4gPiA+IAo+ID4gPiA+ID4gSSBkb24ndCBoYXZlIHNwZWNpZmlj
+IGRvY3VtZW50YXRpb24gdG8gcG9pbnQgb24gaXQgYnV0IEkgd291bGQgcXVpdGUKPiA+ID4gPiA+
+IGludGVyZXN0aW5nIHRvIGtub3cgd2hhdCBpcyB5b3VyIGRvY3VtZW50YXRpb24gcmVnYXJkaW5n
+IHdoeSBhbHdheXMKPiA+ID4gPiA+IHJ1bm5pbmcgb24KPiA+ID4gPiA+IGJpZyBpcyBzYWZlLgo+
+ID4gPiA+IAo+ID4gPiA+IEhpIEp1bGllbiwKPiA+ID4gPiAKPiA+ID4gPiBJZiBJIGdvIG9uIEFt
+YXpvbiwgSSBidXkgYSBiaWcuTElUVExFIGJvYXJkLCB0aGVuIGl0IG92ZXJoZWF0cyBhbmQKPiA+
+ID4gPiBicmVha3MgZHVlIHRvIHRoZSBiaWcgY29yZXMsIEkgd291bGQgY2FsbCB0aGlzIGEgbWFs
+ZnVuY3Rpb24gYW5kIHJldHVybgo+ID4gPiA+IHRoZSBpdGVtIGV4cGVjdGluZyBhIHJlZnVuZC4K
+PiA+ID4gCj4gPiA+IFdoeSB3b3VsZCB0aGV5IHJlZnVuZCB5b3U/IFlvdSBydW4gc29mdHdhcmUg
+dGhhdCBoYXMgbm90IGJlZW4gcHJvb2ZlZCB3aXRoCj4gPiA+IHRoZWlyIGJvYXJkLiBUaGUgdmVu
+ZG9yIHdpbGwgbmljZWx5IHRlbGwgeW91IHRvIGxvb2sgZm9yIGFub3RoZXIgc29mdHdhcmUKPiA+
+ID4gYW5kCj4gPiA+IHdpbGwgbm90IGdpdmUgeW91IHRoZSByZWZ1bmQuCj4gPiAKPiA+IEkgZ3Vl
+c3MgaXQgZGVwZW5kcyBvbiB0aGUgYm9hcmQuIEkgZG9uJ3QgdGhpbmsgbWFueSBkZXYgYm9hcmRz
+IChsaWtlCj4gPiBQaW5lNjQpIHJlcXVpcmUgeW91IHRvIHVzZSBhIHNwZWNpZmljIGtlcm5lbCB2
+ZXJzaW9uIG9yIGh5cGV2aXNvcgo+ID4gdmVyc2lvbiBvbiB0aGVtIChJIGhvcGUhKS4KPiAKPiBU
+aGUgcHJvYmxlbSBJIHNhdyBpcyBzb21lIHZlbmRvciBkZWNpZGVkIHRvIG9mZmxvYWQgc29tZSBm
+aXJtd2FyZSB0YXNrcyB0byB0aGUKPiBPcGVyYXRpbmcgU3lzdGVtLiBUaGlzIG1lYW5zIHRoYXQg
+WGVuIG5lZWRzIHRvIGhhbmRsZSB0aG9zZSBkcml2ZXJzIGluIG9yZGVyCj4gdG8gZ2V0IGZ1bGwg
+c3VwcG9ydCBvZiB0aGUgYm9hcmQuCj4gCj4gPiAKPiA+IAo+ID4gPiA+IFVubGVzcyB0aGUgaGFy
+ZHdhcmUgdmVuZG9yIHN0YXRlcyBleHBsaWNpdGx5IHRoYXQgdGhlIGJpZyBjb3JlcyBjYW5ub3QK
+PiA+ID4gPiBiZSB1c2VkIGFsbCB0aGUgdGltZSwgdGhlbiB0aGlzIHVzZS1jYXNlIGZhbGxzIHdp
+dGhpbiB0aGUgcmVhc29uYWJsZQo+ID4gPiA+IHVzYWdlIG9mIHRoZSBwbGF0Zm9ybS4gSW4gZmFj
+dCwgaXQgaXMgdXNpbmcgYSBwaWVjZSBvZiB0aGUgaGFyZHdhcmUgdGhlCj4gPiA+ID4gd2F5IGl0
+IHdhcyBkZXNpZ25lZCB0byBiZSB1c2VkLiBJZiB0aGUgaGFyZHdhcmUgaXRzZWxmIGlzIHVuc3Rh
+YmxlLCBpdAo+ID4gPiA+IHNob3VsZCBiZSBkb2N1bWVudGVkIGluIHRoZSB2ZW5kb3IncyBkb2Nz
+LCBhbmQgSSB3b3VsZCBsaWtlIHRvIGFkZCBhCj4gPiA+ID4gbGluayB0byBpdCBzbyB0aGF0IHVz
+ZXJzIGFyZSBhcHByb3ByaWF0ZWx5IHdhcm5lZC4KPiA+ID4gSW4gbm9ybWFsIGNpcmN1bXN0YW5j
+ZSwgeW91IGhhdmUgc29mdHdhcmUgY29udHJvbGxpbmcgdGhlIG92ZXJoZWF0LiBCdXQgaW4KPiA+
+ID4gY2FzZSBvZiBYZW4gd2hvIGlzIGdvaW5nIHRvIGRvIHRoYXQgam9iPyBJZiBpdCBpcyB0aGUg
+ZmlybXdhcmUgYW5kCj4gPiA+IGFzc3VtaW5nIGl0Cj4gPiA+IGRvZXMgbm90IG5lZWQgdG8gYmUg
+dGF1Z2h0LCB0aGVuIHRoaXMgaXMgbGlrZWx5IGdvaW5nIHRvIHdvcmsgb3V0LW9mLWJveAo+ID4g
+PiB3aXRoCj4gPiA+IFhlbi4gSWYgaXQgaXMgdGhlIE9TL0h5cGVydmlzb3IsIHRoZW4geW91IGFy
+ZSBnb2luZyB0byBnZXQgaW50byB0cm91YmxlLgo+ID4gPiAKPiA+ID4gQXMgeW91IGNhbiBzZWUg
+d2UgYWxyZWFkeSBoYXZlIGRpZmZlcmVudCBleHBlY3RhdGlvbiBvbiBob3cgdGhlIGhhcmR3YXJl
+Cj4gPiA+IHNob3VsZCBiZWhhdmUuCj4gCj4gSG1tbSBJIHNob3VsZCBoYXZlIGZpbmlzaGVkIHRo
+YXQgcGFyYWdyYXBoLiBJIG1lYW50IHRoYXQgSSB3b3VsZCBjaG9vc2UgdGhlCj4gbW9yZSBjb25z
+ZXJ2YXRpdmUgd2F5IGluIHRoZSBkb2N1bWVudGF0aW9uIGJlY2F1c2UgSSB3b3VsZCBub3QgYXNz
+dW1lIHdlIGhhdmUKPiB0aGUgZnVsbCBzdGFjayB3b3JraW5nIG9uIFhlbiBub3dhZGF5cy4gSWYg
+c29tZW9uZSBrbm93cyBoZXIgcGxhdGZvcm0gaXMgZmluZQo+IHRvIGFsd2F5cyBydW4gb24gYmln
+IGNvcmVzLCB0aGVuIGl0IGNhbiBzdGlsbCBkbyBpdC4KPiAKPiBXaGF0IEkgd2FudCB0byBhdm9p
+ZCBpcyBwcm92aWRpbmcgYSB3YXkgdGhhdCB3ZSBhcmUgbm90IDEwMCUgc3VyZSB3aWxsIHdvcmsg
+b24KPiBhbGwgdGhlIHBsYXRmb3Jtcy4KPiAKPiA+IAo+ID4gSSBhbSBzdGFydGluZyB0byBzZWUg
+eW91ciBwb2ludC4gV2hhdCBpZiB3ZSBhZGQgdGhlIGZvbGxvd2luZyBzdGF0ZW1lbnQsCj4gPiBp
+dCBzaG91bGQgbm9uLWNvbnRyb3ZlcnNpYWwgYW5kIGluZm9ybWF0aXZlOgo+ID4gCj4gPiAiQmln
+IGNvcmVzIGFyZSBtb3JlIHBvd2VyZnVsIHRoYW4gTElUVExFIGNvcmVzLCBidXQgb2Z0ZW4gdXNl
+IG11Y2ggbW9yZQo+ID4gcG93ZXIuIFR5cGljYWxseSwgdGhleSBhcmUgcmVjb21tZW5kZWQgZm9y
+IGJ1cnN0IGFjdGl2aXR5LCBlc3BlY2lhbGx5IGluCj4gPiBiYXR0ZXJ5IHBvd2VyZWQgZW52aXJv
+bm1lbnRzLiBQbGVhc2UgY2hlY2sgeW91ciB2ZW5kb3IncyBiaWcuTElUVExFCj4gPiBhbmQgcG93
+ZXIgbWFuYWdlbWVudCBkb2N1bWVudGF0aW9uLiIKPiAKPiBTb3VuZHMgZ29vZCB0byBtZS4KPiAK
+PiA+IAo+ID4gQXMgSSB3YXMgdGhpbmtpbmcgYWJvdXQgdGhpcywgSSByZWFsaXplZCB0aGF0IHRo
+ZSBzYW1lIGlzc3VlIGNvdWxkIG9jY3VyCj4gPiBldmVuIHdpdGgganVzdCB0aGUgZmlyc3QgcGF0
+Y2gKPiA+IChodHRwczovL21hcmMuaW5mby8/bD14ZW4tZGV2ZWwmbT0xNTE4NzM2NjgyMjM3MjMp
+LiBJZiB0aGUgZmlyc3QgY3B1Cj4gPiB0eXBlIGlzIGJpZywgd2Ugd291bGQgZGVmYXVsdCB0byB1
+c2Ugb25seSBiaWcgY3B1cyBhbGwgdGhlIHRpbWUsIHJpZ2h0Pwo+IAo+IEhtbW0geW91IGFyZSBy
+aWdodC4gSG93ZXZlciB3ZSBoYXZlIG5vIGVhc3kgd2F5IHRvIGtub3cgd2hldGhlciB5b3UgYm9v
+dCBvbgo+IGJpZyBvciBsaXR0bGUgQ1BVcyA6Ly4gU2hhbGwgd2UgdXBkYXRlIHRoZSB3YXJuaW5n
+PwoKWWVzLCBJJ2xsIHBvaW50IHVzZXJzIHRvIGJpZy5MSVRUTEUudHh0LCB3aGVyZSB3ZSBoYXZl
+IHRoZSBzcGFjZSB0bwpleHBsYWluIHRoZSBwcm9ibGVtIHByb3Blcmx5LgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
