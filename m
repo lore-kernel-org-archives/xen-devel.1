@@ -1,16 +1,14 @@
-From: =?UTF-8?Q?Charles_Gon=C3=A7alves?= <charles.fg@gmail.com>
-Subject: Re:
-	=?utf-8?q?Getting_Hypercall_=5Bop_=3D_0x0040001a_=5D_?=
-	=?utf-8?b?b24gdHJhY2Ug77+877+877+877+877+8?=
-Date: Mon, 19 Feb 2018 22:00:58 +0000
-Message-ID: <CAAQRGoCXyiSD68dj-95-kYvMyuo2jynZKR7Sb4TpW1f9NxGWXQ@mail.gmail.com>
-References: <CAAQRGoBHTHkEQTDbQ8X_MbJD2jfc2=AO+Usp8NTo2cXKE7DE1g@mail.gmail.com>
- <20180219171311.5s4dentbjsiu6tlf@citrix.com>
- <20180219173344.n73f5hetwxbgrsuc@MacBook-Pro-de-Roger.local>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 5/6] xen/arm: read cacheline size when needed
+Date: Mon, 19 Feb 2018 13:58:29 -0800
+Message-ID: <1519077510-22405-5-git-send-email-sstabellini@kernel.org>
+References: <alpine.DEB.2.10.1802191253100.12137@sstabellini-ThinkPad-X260>
+ <1519077510-22405-1-git-send-email-sstabellini@kernel.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8347822290100983783=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180219173344.n73f5hetwxbgrsuc@MacBook-Pro-de-Roger.local>
+In-Reply-To: <1519077510-22405-1-git-send-email-sstabellini@kernel.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,106 +17,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: julien.grall@arm.com
+Cc: sstabellini@kernel.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============8347822290100983783==
-Content-Type: multipart/alternative; boundary="000000000000d27a8f056597d4c6"
-
---000000000000d27a8f056597d4c6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Thanks for the clarification.
-
-On Mon, Feb 19, 2018, 17:33 Roger Pau Monn=C3=A9 <roger.pau@citrix.com> wro=
-te:
-
-> On Mon, Feb 19, 2018 at 05:13:11PM +0000, Wei Liu wrote:
-> > On Mon, Feb 19, 2018 at 04:23:33PM +0000, Charles Gon=C3=A7alves wrote:
-> > > Hello,
-> > >
-> > > Im getting this Hypercall [op =3D 0x0040001a ] on xen trace  but can'=
-t
-> figure
-> > > out which operation this is.
-> > >
-> > > Using old Xen 4.4.1.
-> > > Looking at documentation  and also using grep into source code couldn=
-'t
-> > > figure out which hypercall this is.
-> > >
-> > > Can someone help clarify this?
-> >
-> > See public/trace.h for the exact definition of the event.
-> >
-> > I can't seem to be able to find 0x004xxxxx in the latest upstream code
-> > though.
->
-> AFAICT the 0x004xxxxx comes from TRC_PV_HYPERCALL_V2_ARG_32, which is
-> used by __trace_hypercall, for __HYPERVISOR_mmuext_op that would be:
->
-> d.op =3D __HYPERVISOR_mmuext_op | (0x1 << 22);
->
-> Roger.
->
---=20
-Atenciosamente,
-Charles F.'. Gon=C3=A7alves
-
---000000000000d27a8f056597d4c6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks for the clarification.</div><br><div class=3D"gmail=
-_quote"><div dir=3D"ltr">On Mon, Feb 19, 2018, 17:33 Roger Pau Monn=C3=A9 &=
-lt;<a href=3D"mailto:roger.pau@citrix.com">roger.pau@citrix.com</a>&gt; wro=
-te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;b=
-order-left:1px #ccc solid;padding-left:1ex">On Mon, Feb 19, 2018 at 05:13:1=
-1PM +0000, Wei Liu wrote:<br>
-&gt; On Mon, Feb 19, 2018 at 04:23:33PM +0000, Charles Gon=C3=A7alves wrote=
-:<br>
-&gt; &gt; Hello,<br>
-&gt; &gt;<br>
-&gt; &gt; Im getting this Hypercall [op =3D 0x0040001a ] on xen trace=C2=A0=
- but can&#39;t figure<br>
-&gt; &gt; out which operation this is.<br>
-&gt; &gt;<br>
-&gt; &gt; Using old Xen 4.4.1.<br>
-&gt; &gt; Looking at documentation=C2=A0 and also using grep into source co=
-de couldn&#39;t<br>
-&gt; &gt; figure out which hypercall this is.<br>
-&gt; &gt;<br>
-&gt; &gt; Can someone help clarify this?<br>
-&gt;<br>
-&gt; See public/trace.h for the exact definition of the event.<br>
-&gt;<br>
-&gt; I can&#39;t seem to be able to find 0x004xxxxx in the latest upstream =
-code<br>
-&gt; though.<br>
-<br>
-AFAICT the 0x004xxxxx comes from TRC_PV_HYPERCALL_V2_ARG_32, which is<br>
-used by __trace_hypercall, for __HYPERVISOR_mmuext_op that would be:<br>
-<br>
-d.op =3D __HYPERVISOR_mmuext_op | (0x1 &lt;&lt; 22);<br>
-<br>
-Roger.<br>
-</blockquote></div>-- <br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
-martmail=3D"gmail_signature"><div dir=3D"ltr"><div>Atenciosamente,=C2=A0</d=
-iv>Charles F.&#39;. Gon=C3=A7alves</div></div>
-
---000000000000d27a8f056597d4c6--
-
-
---===============8347822290100983783==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8347822290100983783==--
+T24gYmlnLkxJVFRMRSBzeXN0ZW1zIHRoZSBjYWNoZWxpbmUgc2l6ZSBtaWdodCBkaWZmZXIgYmV0
+d2VlbiBiaWcgYW5kCkxJVFRMRSBjb3Jlcy4gSW5zdGVhZCBvZiByZWFkaW5nIHRoZSBjYWNoZWxp
+bmUgc2l6ZSBvbmNlIGF0IGJvb3QsCnJlYWQgaXQgYXMgbmVlZGVkIGZyb20gdGhlIHN5c3RlbSBy
+ZWdpc3RlcnMuCgpTdWdnZXN0ZWQtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5j
+b20+ClNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVs
+Lm9yZz4KLS0tCiB4ZW4vYXJjaC9hcm0vYXJtMzIvaGVhZC5TICB8ICA5ICsrKysrKystLQogeGVu
+L2FyY2gvYXJtL2FybTY0L2hlYWQuUyAgfCAxMCArKysrKysrKy0tCiB4ZW4vYXJjaC9hcm0vc2V0
+dXAuYyAgICAgICB8IDE3IC0tLS0tLS0tLS0tLS0tLS0tCiB4ZW4vaW5jbHVkZS9hc20tYXJtL3Bh
+Z2UuaCB8IDE3ICsrKysrKysrKysrKysrKy0tCiA0IGZpbGVzIGNoYW5nZWQsIDMwIGluc2VydGlv
+bnMoKyksIDIzIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9hcm0zMi9o
+ZWFkLlMgYi94ZW4vYXJjaC9hcm0vYXJtMzIvaGVhZC5TCmluZGV4IDQzMzc0ZTcuLmRiNDcwYWQg
+MTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL2FybS9hcm0zMi9oZWFkLlMKKysrIGIveGVuL2FyY2gvYXJt
+L2FybTMyL2hlYWQuUwpAQCAtNTA0LDggKzUwNCwxMyBAQCBFTlRSWShyZWxvY2F0ZV94ZW4pCiAg
+ICAgICAgIGRzYiAgICAgICAgLyogU28gdGhlIENQVSBpc3N1ZXMgYWxsIHdyaXRlcyB0byB0aGUg
+cmFuZ2UgKi8KIAogICAgICAgICBtb3YgICByNSwgcjQKLSAgICAgICAgbGRyICAgcjYsID1jYWNo
+ZWxpbmVfYnl0ZXMgLyogcjYgOj0gc3RlcCAqLwotICAgICAgICBsZHIgICByNiwgW3I2XQorICAg
+ICAgICBtb3YgICByNiwgIzAKKyAgICAgICAgbWNyICAgQ1AzMihyNiwgQ1NTRUxSX0VMMSkKKyAg
+ICAgICAgbXJjICAgQ1AzMihyNiwgQ1NTRUxSX0VMMSkKKyAgICAgICAgYW5kICAgcjYsIHI2LCAj
+MHg3CisgICAgICAgIGFkZCAgIHI2LCByNiwgIzQKKyAgICAgICAgbW92ICAgcjcsICMxCisgICAg
+ICAgIGxzbCAgIHI2LCByNywgcjYKICAgICAgICAgbW92ICAgcjcsIHIzCiAKIDE6ICAgICAgbWNy
+ICAgQ1AzMihyNywgRENDTVZBQykKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9hcm02NC9oZWFk
+LlMgYi94ZW4vYXJjaC9hcm0vYXJtNjQvaGVhZC5TCmluZGV4IGZhMGVmNzAuLmVkZWEzMDAgMTAw
+NjQ0Ci0tLSBhL3hlbi9hcmNoL2FybS9hcm02NC9oZWFkLlMKKysrIGIveGVuL2FyY2gvYXJtL2Fy
+bTY0L2hlYWQuUwpAQCAtNjMxLDggKzYzMSwxNCBAQCBFTlRSWShyZWxvY2F0ZV94ZW4pCiAgICAg
+ICAgIGRzYiAgIHN5ICAgICAgICAvKiBTbyB0aGUgQ1BVIGlzc3VlcyBhbGwgd3JpdGVzIHRvIHRo
+ZSByYW5nZSAqLwogCiAgICAgICAgIG1vdiAgIHg5LCB4MwotICAgICAgICBsZHIgICB4MTAsID1j
+YWNoZWxpbmVfYnl0ZXMgLyogeDEwIDo9IHN0ZXAgKi8KLSAgICAgICAgbGRyICAgeDEwLCBbeDEw
+XQorCisgICAgICAgIG1vdiAgIHgxMCwgIzAKKyAgICAgICAgbXNyICAgQ1NTRUxSX0VMMSwgeDEw
+CisgICAgICAgIG1ycyAgIHgxMCwgQ1NTRUxSX0VMMQorICAgICAgICBhbmQgICB4MTAsIHgxMCwg
+IzB4NworICAgICAgICBhZGQgICB4MTAsIHgxMCwgIzQKKyAgICAgICAgbW92ICAgeDExLCAjMQor
+ICAgICAgICBsc2wgICB4MTAsIHgxMSwgeDEwCiAgICAgICAgIG1vdiAgIHgxMSwgeDIKIAogMTog
+ICAgICBkYyAgICBjdmFjLCB4MTEKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9zZXR1cC5jIGIv
+eGVuL2FyY2gvYXJtL3NldHVwLmMKaW5kZXggMDMyYTZhOC4uNDc1NGM5NSAxMDA2NDQKLS0tIGEv
+eGVuL2FyY2gvYXJtL3NldHVwLmMKKysrIGIveGVuL2FyY2gvYXJtL3NldHVwLmMKQEAgLTY4MCwy
+MSArNjgwLDYgQEAgc3RhdGljIHZvaWQgX19pbml0IHNldHVwX21tKHVuc2lnbmVkIGxvbmcgZHRi
+X3BhZGRyLCBzaXplX3QgZHRiX3NpemUpCiB9CiAjZW5kaWYKIAotc2l6ZV90IF9fcmVhZF9tb3N0
+bHkgY2FjaGVsaW5lX2J5dGVzOwotCi0vKiBWZXJ5IGVhcmx5IGNoZWNrIG9mIHRoZSBDUFUgY2Fj
+aGUgcHJvcGVydGllcyAqLwotdm9pZCBfX2luaXQgc2V0dXBfY2FjaGUodm9pZCkKLXsKLSAgICB1
+aW50MzJfdCBjY3NpZDsKLQotICAgIC8qIFJlYWQgdGhlIGNhY2hlIHNpemUgSUQgcmVnaXN0ZXIg
+Zm9yIHRoZSBsZXZlbC0wIGRhdGEgY2FjaGUgKi8KLSAgICBXUklURV9TWVNSRUczMigwLCBDU1NF
+TFJfRUwxKTsKLSAgICBjY3NpZCA9IFJFQURfU1lTUkVHMzIoQ0NTSURSX0VMMSk7Ci0KLSAgICAv
+KiBMb3cgMyBiaXRzIGFyZSBsb2cyKGNhY2hlbGluZSBzaXplIGluIHdvcmRzKSAtIDIuICovCi0g
+ICAgY2FjaGVsaW5lX2J5dGVzID0gMVUgPDwgKDQgKyAoY2NzaWQgJiAweDcpKTsKLX0KLQogLyog
+QyBlbnRyeSBwb2ludCBmb3IgYm9vdCBDUFUgKi8KIHZvaWQgX19pbml0IHN0YXJ0X3hlbih1bnNp
+Z25lZCBsb25nIGJvb3RfcGh5c19vZmZzZXQsCiAgICAgICAgICAgICAgICAgICAgICAgdW5zaWdu
+ZWQgbG9uZyBmZHRfcGFkZHIsCkBAIC03MDgsOCArNjkzLDYgQEAgdm9pZCBfX2luaXQgc3RhcnRf
+eGVuKHVuc2lnbmVkIGxvbmcgYm9vdF9waHlzX29mZnNldCwKICAgICBzdHJ1Y3QgZG9tYWluICpk
+b20wOwogICAgIHN0cnVjdCB4ZW5fYXJjaF9kb21haW5jb25maWcgY29uZmlnOwogCi0gICAgc2V0
+dXBfY2FjaGUoKTsKLQogICAgIHBlcmNwdV9pbml0X2FyZWFzKCk7CiAgICAgc2V0X3Byb2Nlc3Nv
+cl9pZCgwKTsgLyogbmVlZGVkIGVhcmx5LCBmb3Igc21wX3Byb2Nlc3Nvcl9pZCgpICovCiAKZGlm
+ZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vcGFnZS5oIGIveGVuL2luY2x1ZGUvYXNtLWFy
+bS9wYWdlLmgKaW5kZXggZDk0ODI1MC4uNzkxZTIyZSAxMDA2NDQKLS0tIGEveGVuL2luY2x1ZGUv
+YXNtLWFybS9wYWdlLmgKKysrIGIveGVuL2luY2x1ZGUvYXNtLWFybS9wYWdlLmgKQEAgLTEzMyw4
+ICsxMzMsNiBAQAogCiAvKiBBcmNoaXRlY3R1cmFsIG1pbmltdW0gY2FjaGVsaW5lIHNpemUgaXMg
+NCAzMi1iaXQgd29yZHMuICovCiAjZGVmaW5lIE1JTl9DQUNIRUxJTkVfQllURVMgMTYKLS8qIEFj
+dHVhbCBjYWNoZWxpbmUgc2l6ZSBvbiB0aGUgYm9vdCBDUFUuICovCi1leHRlcm4gc2l6ZV90IGNh
+Y2hlbGluZV9ieXRlczsKIAogI2RlZmluZSBjb3B5X3BhZ2UoZHAsIHNwKSBtZW1jcHkoZHAsIHNw
+LCBQQUdFX1NJWkUpCiAKQEAgLTE0Miw5ICsxNDAsMjIgQEAgZXh0ZXJuIHNpemVfdCBjYWNoZWxp
+bmVfYnl0ZXM7CiAgKiBpZiAncmFuZ2UnIGlzIGxhcmdlIGVub3VnaCB3ZSBtaWdodCB3YW50IHRv
+IHVzZSBtb2RlbC1zcGVjaWZpYwogICogZnVsbC1jYWNoZSBmbHVzaGVzLiAqLwogCitzdGF0aWMg
+aW5saW5lIHNpemVfdCByZWFkX2NhY2hlbGluZV9zaXplKHZvaWQpCit7CisgICAgdWludDMyX3Qg
+Y2NzaWQ7CisKKyAgICAvKiBSZWFkIHRoZSBjYWNoZSBzaXplIElEIHJlZ2lzdGVyIGZvciB0aGUg
+bGV2ZWwtMCBkYXRhIGNhY2hlICovCisgICAgV1JJVEVfU1lTUkVHMzIoMCwgQ1NTRUxSX0VMMSk7
+CisgICAgY2NzaWQgPSBSRUFEX1NZU1JFRzMyKENDU0lEUl9FTDEpOworCisgICAgLyogTG93IDMg
+Yml0cyBhcmUgbG9nMihjYWNoZWxpbmUgc2l6ZSBpbiB3b3JkcykgLSAyLiAqLworICAgIHJldHVy
+biAoc2l6ZV90KSAoMVUgPDwgKDQgKyAoY2NzaWQgJiAweDcpKSk7Cit9CisKIHN0YXRpYyBpbmxp
+bmUgaW50IGludmFsaWRhdGVfZGNhY2hlX3ZhX3JhbmdlKGNvbnN0IHZvaWQgKnAsIHVuc2lnbmVk
+IGxvbmcgc2l6ZSkKIHsKICAgICBjb25zdCB2b2lkICplbmQgPSBwICsgc2l6ZTsKKyAgICBzaXpl
+X3QgY2FjaGVsaW5lX2J5dGVzID0gcmVhZF9jYWNoZWxpbmVfc2l6ZSgpOwogICAgIHNpemVfdCBj
+YWNoZWxpbmVfbWFzayA9IGNhY2hlbGluZV9ieXRlcyAtIDE7CiAKICAgICBkc2Ioc3kpOyAgICAg
+ICAgICAgLyogU28gdGhlIENQVSBpc3N1ZXMgYWxsIHdyaXRlcyB0byB0aGUgcmFuZ2UgKi8KQEAg
+LTE3MSw2ICsxODIsNyBAQCBzdGF0aWMgaW5saW5lIGludCBpbnZhbGlkYXRlX2RjYWNoZV92YV9y
+YW5nZShjb25zdCB2b2lkICpwLCB1bnNpZ25lZCBsb25nIHNpemUpCiAKIHN0YXRpYyBpbmxpbmUg
+aW50IGNsZWFuX2RjYWNoZV92YV9yYW5nZShjb25zdCB2b2lkICpwLCB1bnNpZ25lZCBsb25nIHNp
+emUpCiB7CisgICAgc2l6ZV90IGNhY2hlbGluZV9ieXRlcyA9IHJlYWRfY2FjaGVsaW5lX3NpemUo
+KTsKICAgICBjb25zdCB2b2lkICplbmQgPSBwICsgc2l6ZTsKICAgICBkc2Ioc3kpOyAgICAgICAg
+ICAgLyogU28gdGhlIENQVSBpc3N1ZXMgYWxsIHdyaXRlcyB0byB0aGUgcmFuZ2UgKi8KICAgICBw
+ID0gKHZvaWQgKikoKHVpbnRwdHJfdClwICYgfihjYWNoZWxpbmVfYnl0ZXMgLSAxKSk7CkBAIC0x
+ODQsNiArMTk2LDcgQEAgc3RhdGljIGlubGluZSBpbnQgY2xlYW5fZGNhY2hlX3ZhX3JhbmdlKGNv
+bnN0IHZvaWQgKnAsIHVuc2lnbmVkIGxvbmcgc2l6ZSkKIHN0YXRpYyBpbmxpbmUgaW50IGNsZWFu
+X2FuZF9pbnZhbGlkYXRlX2RjYWNoZV92YV9yYW5nZQogICAgIChjb25zdCB2b2lkICpwLCB1bnNp
+Z25lZCBsb25nIHNpemUpCiB7CisgICAgc2l6ZV90IGNhY2hlbGluZV9ieXRlcyA9IHJlYWRfY2Fj
+aGVsaW5lX3NpemUoKTsKICAgICBjb25zdCB2b2lkICplbmQgPSBwICsgc2l6ZTsKICAgICBkc2Io
+c3kpOyAgICAgICAgIC8qIFNvIHRoZSBDUFUgaXNzdWVzIGFsbCB3cml0ZXMgdG8gdGhlIHJhbmdl
+ICovCiAgICAgcCA9ICh2b2lkICopKCh1aW50cHRyX3QpcCAmIH4oY2FjaGVsaW5lX2J5dGVzIC0g
+MSkpOwotLSAKMS45LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
