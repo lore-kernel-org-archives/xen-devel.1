@@ -1,11 +1,14 @@
 From: Alexandru Isaila <aisaila@bitdefender.com>
-Subject: [PATCH v1 0/2] hvm/svm: Enable vm events for SVM
-Date: Mon, 19 Feb 2018 15:07:05 +0200
-Message-ID: <1519045627-7771-1-git-send-email-aisaila@bitdefender.com>
+Subject: [PATCH v1 1/2] asm-x86/monitor: Add
+	MONITOR_EVENT_INTERRUPT to common capabilities
+Date: Mon, 19 Feb 2018 15:07:06 +0200
+Message-ID: <1519045627-7771-2-git-send-email-aisaila@bitdefender.com>
+References: <1519045627-7771-1-git-send-email-aisaila@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <1519045627-7771-1-git-send-email-aisaila@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,12 +18,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xen.org
-Cc: tamas@tklengyel.com, suravee.suthikulpanit@amd.com, rcojocaru@bitdefender.com, andrew.cooper3@citrix.com, jbeulich@suse.com, boris.ostrovsky@oracle.com
+Cc: tamas@tklengyel.com, suravee.suthikulpanit@amd.com, rcojocaru@bitdefender.com, andrew.cooper3@citrix.com, jbeulich@suse.com, Alexandru Isaila <aisaila@bitdefender.com>, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgYWxsLAoKVGhpcyBzZXJpZXMgbW9yZSBjYXBhYmlsaXRpZXMgdG8gdGhlIGNvbW1vbiBsaXN0
-LiBJJ3ZlIHRlc3RlZCBhbmQgYWRkZWQgCkNQVUlEIGFuZCBFVkVOVCBJTlRFUlJVUFQgdG8gdGhl
-IGxpc3QuCgpDaGVlcnMsCgpBbGV4YW5kcnUgSXNhaWxhCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+U2lnbmVkLW9mZi1ieTogQWxleGFuZHJ1IElzYWlsYSA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+
+Ci0tLQogeGVuL2luY2x1ZGUvYXNtLXg4Ni9tb25pdG9yLmggfCAyICstCiAxIGZpbGUgY2hhbmdl
+ZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS94ZW4vaW5jbHVk
+ZS9hc20teDg2L21vbml0b3IuaCBiL3hlbi9pbmNsdWRlL2FzbS14ODYvbW9uaXRvci5oCmluZGV4
+IDU5YTI2MTAuLjdhOWUxZTggMTAwNjQ0Ci0tLSBhL3hlbi9pbmNsdWRlL2FzbS14ODYvbW9uaXRv
+ci5oCisrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvbW9uaXRvci5oCkBAIC04MCwxMyArODAsMTMg
+QEAgc3RhdGljIGlubGluZSB1aW50MzJfdCBhcmNoX21vbml0b3JfZ2V0X2NhcGFiaWxpdGllcyhz
+dHJ1Y3QgZG9tYWluICpkKQogICAgIGNhcGFiaWxpdGllcyA9ICgoMVUgPDwgWEVOX0RPTUNUTF9N
+T05JVE9SX0VWRU5UX0dVRVNUX1JFUVVFU1QpIHwKICAgICAgICAgICAgICAgICAgICAgKDFVIDw8
+IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9TT0ZUV0FSRV9CUkVBS1BPSU5UKSB8CiAgICAgICAg
+ICAgICAgICAgICAgICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfTU9WX1RPX01TUikg
+fAorICAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0lO
+VEVSUlVQVCkgfAogICAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9S
+X0VWRU5UX1dSSVRFX0NUUkxSRUcpKTsKIAogICAgIGlmICggY3B1X2hhc192bXggKQogICAgIHsK
+ICAgICAgICAgY2FwYWJpbGl0aWVzIHw9ICgoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5U
+X0RFQlVHX0VYQ0VQVElPTikgfAogICAgICAgICAgICAgICAgICAgICAgICAgICgxVSA8PCBYRU5f
+RE9NQ1RMX01PTklUT1JfRVZFTlRfQ1BVSUQpIHwKLSAgICAgICAgICAgICAgICAgICAgICAgICAo
+MVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0lOVEVSUlVQVCkgfAogICAgICAgICAgICAg
+ICAgICAgICAgICAgICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfRU1VTF9VTklNUExF
+TUVOVEVEKSk7CiAKICAgICAgICAgLyogU2luY2Ugd2Uga25vdyB0aGlzIGlzIG9uIFZNWCwgd2Ug
+Y2FuIGp1c3QgY2FsbCB0aGUgaHZtIGZ1bmMgKi8KLS0gCjIuNy40CgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
