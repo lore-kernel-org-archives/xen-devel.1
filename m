@@ -1,16 +1,20 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v4 2/3] x86/svm: add EFER SVME support for
-	VGIF/VLOAD
-Date: Tue, 20 Feb 2018 17:52:53 -0500
-Message-ID: <3d925c92-3b9f-37d0-19ca-de5de26b72f0@oracle.com>
-References: <20180208170147.89927-1-brian.woods@amd.com>
- <20180220222702.35093-1-brian.woods@amd.com>
+From: Andrew Morton <akpm@linux-foundation.org>
+Subject: Re: [PATCH] mm: don't defer struct page initialization
+ for Xen pv guests
+Date: Tue, 20 Feb 2018 15:21:48 -0800
+Message-ID: <20180220152148.2a3ff03d3c8aa6ade8cbae25@linux-foundation.org>
+References: <20180216133726.30813-1-jgross@suse.com>
+ <201802190217.ctfr9bPI%fengguang.wu@intel.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180220222702.35093-1-brian.woods@amd.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=2wel=fo=linux-foundation.org=akpm@srs-us1.protection.inumbo.net>)
+ id 1eoHEP-0005ay-5F
+ for xen-devel@lists.xenproject.org; Tue, 20 Feb 2018 23:21:53 +0000
+In-Reply-To: <201802190217.ctfr9bPI%fengguang.wu@intel.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,15 +23,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Brian Woods <brian.woods@amd.com>, xen-devel@lists.xen.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: kbuild test robot <lkp@intel.com>
+Cc: Juergen Gross <jgross@suse.com>, mhocko@suse.com, linux-kernel@vger.kernel.org, stable@vger.kernel.org, linux-mm@kvack.org, kbuild-all@01.org, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDIvMjAvMjAxOCAwNToyNyBQTSwgQnJpYW4gV29vZHMgd3JvdGU6Cj4gT25seSBlbmFibGUg
-dmlydHVhbCBWTUxPQUQvU0FWRSBhbmQgVkdJRiBpZiB0aGUgZ3Vlc3QgRUZFUi5TVk1FIGlzIHNl
-dC4KPgo+IFJlcG9ydGVkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXgu
-Y29tPgo+IFNpZ25lZC1vZmYtYnk6IEJyaWFuIFdvb2RzIDxicmlhbi53b29kc0BhbWQuY29tPgoK
-UmV2aWV3ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+
-CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gTW9uLCAxOSBGZWIgMjAxOCAwMjo0NToyNyArMDgwMCBrYnVpbGQgdGVzdCByb2JvdCA8bGtw
+QGludGVsLmNvbT4gd3JvdGU6Cgo+IFthdXRvIGJ1aWxkIHRlc3QgRVJST1Igb24gbW1vdG0vbWFz
+dGVyXQo+IFthbHNvIGJ1aWxkIHRlc3QgRVJST1Igb24gdjQuMTYtcmMxIG5leHQtMjAxODAyMTZd
+Cj4gW2lmIHlvdXIgcGF0Y2ggaXMgYXBwbGllZCB0byB0aGUgd3JvbmcgZ2l0IHRyZWUsIHBsZWFz
+ZSBkcm9wIHVzIGEgbm90ZSB0byBoZWxwIGltcHJvdmUgdGhlIHN5c3RlbV0KPiAKPiB1cmw6ICAg
+IGh0dHBzOi8vZ2l0aHViLmNvbS8wZGF5LWNpL2xpbnV4L2NvbW1pdHMvSnVlcmdlbi1Hcm9zcy9t
+bS1kb24tdC1kZWZlci1zdHJ1Y3QtcGFnZS1pbml0aWFsaXphdGlvbi1mb3ItWGVuLXB2LWd1ZXN0
+cy8yMDE4MDIxOC0yMzM2NTcKPiBiYXNlOiAgIGdpdDovL2dpdC5jbXB4Y2hnLm9yZy9saW51eC1t
+bW90bS5naXQgbWFzdGVyCj4gY29uZmlnOiBpMzg2LXJhbmRjb25maWcteDAxMC0yMDE4MDcgKGF0
+dGFjaGVkIGFzIC5jb25maWcpCj4gY29tcGlsZXI6IGdjYy03IChEZWJpYW4gNy4zLjAtMSkgNy4z
+LjAKPiByZXByb2R1Y2U6Cj4gICAgICAgICAjIHNhdmUgdGhlIGF0dGFjaGVkIC5jb25maWcgdG8g
+bGludXggYnVpbGQgdHJlZQo+ICAgICAgICAgbWFrZSBBUkNIPWkzODYgCj4gCj4gQWxsIGVycm9y
+cyAobmV3IG9uZXMgcHJlZml4ZWQgYnkgPj4pOgo+IAo+ICAgIG1tL3BhZ2VfYWxsb2MuYzogSW4g
+ZnVuY3Rpb24gJ3VwZGF0ZV9kZWZlcl9pbml0JzoKPiA+PiBtbS9wYWdlX2FsbG9jLmM6MzUyOjY6
+IGVycm9yOiBpbXBsaWNpdCBkZWNsYXJhdGlvbiBvZiBmdW5jdGlvbiAneGVuX3B2X2RvbWFpbicg
+Wy1XZXJyb3I9aW1wbGljaXQtZnVuY3Rpb24tZGVjbGFyYXRpb25dCj4gICAgICBpZiAoeGVuX3B2
+X2RvbWFpbigpKQo+ICAgICAgICAgIF5+fn5+fn5+fn5+fn4KCkkgdGhpbmsgSSBhbHJlYWR5IGZp
+eGVkIHRoaXMuCgoKCkZyb206IEFuZHJldyBNb3J0b24gPGFrcG1AbGludXgtZm91bmRhdGlvbi5v
+cmc+ClN1YmplY3Q6IG1tLWRvbnQtZGVmZXItc3RydWN0LXBhZ2UtaW5pdGlhbGl6YXRpb24tZm9y
+LXhlbi1wdi1ndWVzdHMtZml4CgpleHBsaWNpdGx5IGluY2x1ZGUgeGVuLmgKCkNjOiBKdWVyZ2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+ClNpZ25lZC1vZmYtYnk6IEFuZHJldyBNb3J0b24gPGFr
+cG1AbGludXgtZm91bmRhdGlvbi5vcmc+Ci0tLQoKIG1tL3BhZ2VfYWxsb2MuYyB8ICAgIDEgKwog
+MSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspCgpkaWZmIC1wdU4gbW0vcGFnZV9hbGxvYy5j
+fm1tLWRvbnQtZGVmZXItc3RydWN0LXBhZ2UtaW5pdGlhbGl6YXRpb24tZm9yLXhlbi1wdi1ndWVz
+dHMtZml4IG1tL3BhZ2VfYWxsb2MuYwotLS0gYS9tbS9wYWdlX2FsbG9jLmN+bW0tZG9udC1kZWZl
+ci1zdHJ1Y3QtcGFnZS1pbml0aWFsaXphdGlvbi1mb3IteGVuLXB2LWd1ZXN0cy1maXgKKysrIGEv
+bW0vcGFnZV9hbGxvYy5jCkBAIC00Niw2ICs0Niw3IEBACiAjaW5jbHVkZSA8bGludXgvc3RvcF9t
+YWNoaW5lLmg+CiAjaW5jbHVkZSA8bGludXgvc29ydC5oPgogI2luY2x1ZGUgPGxpbnV4L3Bmbi5o
+PgorI2luY2x1ZGUgPHhlbi94ZW4uaD4KICNpbmNsdWRlIDxsaW51eC9iYWNraW5nLWRldi5oPgog
+I2luY2x1ZGUgPGxpbnV4L2ZhdWx0LWluamVjdC5oPgogI2luY2x1ZGUgPGxpbnV4L3BhZ2UtaXNv
+bGF0aW9uLmg+Cl8KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
