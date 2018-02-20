@@ -1,19 +1,16 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v2] build: remove shim related targets
-Date: Tue, 20 Feb 2018 14:43:25 +0000
-Message-ID: <20180220144325.pqpiuq4kfhtzwsr6@citrix.com>
-References: <20180220143754.31260-1-roger.pau@citrix.com>
+From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Subject: Re: [PATCH 1/5] x86/hvm: Don't shadow the domain
+ parameter in hvm_save_cpu_msrs()
+Date: Tue, 20 Feb 2018 14:54:18 +0000
+Message-ID: <20180220145418.ukfjopl6zbe774ak@MacBook-Pro-de-Roger.local>
+References: <1519127923-23539-1-git-send-email-andrew.cooper3@citrix.com>
+ <1519127923-23539-2-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=/hv3=fo=citrix.com=prvs=582e2aa9c=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1eo991-0000kf-Hj
- for xen-devel@lists.xenproject.org; Tue, 20 Feb 2018 14:43:47 +0000
 Content-Disposition: inline
-In-Reply-To: <20180220143754.31260-1-roger.pau@citrix.com>
+In-Reply-To: <1519127923-23539-2-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,19 +19,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBGZWIgMjAsIDIwMTggYXQgMDI6Mzc6NTRQTSArMDAwMCwgUm9nZXIgUGF1IE1vbm5l
-IHdyb3RlOgo+ICB4ZW4tc2hpbTogJChEKSBzaGltLW9sZGRlZmNvbmZpZwo+IC0JJChNQUtFKSAt
-QyAkKEQpL3hlbiBpbnN0YWxsLXNoaW0gXAo+ICsJJChNQUtFKSAtQyAkKEQpL3hlbiBidWlsZCBc
-Cj4gIAkJWEVOX0NPTkZJR19FWFBFUlQ9eSBcCj4gLQkJS0NPTkZJR19DT05GSUc9JChDVVJESVIp
-L3NoaW0uY29uZmlnIFwKPiAtCQlERVNURElSPSQoQ1VSRElSKQo+ICsJCUtDT05GSUdfQ09ORklH
-PSQoQ1VSRElSKS9zaGltLmNvbmZpZwo+ICsJbG4gLXNmICQoRCkveGVuL3hlbiB4ZW4tc2hpbQo+
-ICsJbG4gLXNmICQoRCkveGVuL3hlbi1zeW1zIHhlbi1zaGltLXN5bXMKCkknbSBub3Qgc3VyZSB0
-aGlzIGlzIHJpZ2h0IC0tIGRvIHlvdSBnZXQgdG8gaW5zdGFsbCB0aGUgc2hpbSB0byBERVNURElS
-Cmxpa2UgdGhpcz8KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+T24gVHVlLCBGZWIgMjAsIDIwMTggYXQgMTE6NTg6MzlBTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBjL3MgZDJmODZiZjYwNCB3aGljaCBpbnRyb2R1Y2VkICJzdHJ1Y3QgaHZtX3NhdmVf
+ZGVzY3JpcHRvciAqZCIgYWNjaWRlbnRhbGx5Cj4gZW5kZWQgdXAgc2hhZG93aW5nIHRoZSAic3Ry
+dWN0IGRvbWFpbiAqZCIgZnVuY3Rpb24gcGFyYW1ldGVyLiAgUmVuYW1lIHRoZQo+IGZvcm1lciB0
+byBkZXNjLgo+IAo+IE5vIGZ1bmN0aW9uYWwgY2hhbmdlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFu
+ZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogUm9n
+ZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CgpXb3VsZCBiZSBuaWNlIHRvIGVu
+YWJsZSAtV3NoYWRvdyBidXQgdGhhdCByZXF1aXJlcyBhIGxvdCBtb3JlIG9mIHdvcmsuCgpUaGFu
+a3MsIFJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
