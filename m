@@ -1,20 +1,19 @@
-From: Andrew Morton <akpm@linux-foundation.org>
-Subject: Re: [PATCH] mm: don't defer struct page initialization
- for Xen pv guests
-Date: Tue, 20 Feb 2018 15:21:48 -0800
-Message-ID: <20180220152148.2a3ff03d3c8aa6ade8cbae25@linux-foundation.org>
-References: <20180216133726.30813-1-jgross@suse.com>
- <201802190217.ctfr9bPI%fengguang.wu@intel.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 5/6] xen/arm: read cacheline size when
+	needed
+Date: Tue, 20 Feb 2018 15:28:31 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1802201515190.19448@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1802191253100.12137@sstabellini-ThinkPad-X260>
+ <1519077510-22405-1-git-send-email-sstabellini@kernel.org>
+ <1519077510-22405-5-git-send-email-sstabellini@kernel.org>
+ <10f32edc-2d5d-ace8-40e1-6ed177c96a39@arm.com>
+ <alpine.DEB.2.10.1802201255280.19448@sstabellini-ThinkPad-X260>
+ <295740bc-053e-0ba1-315b-392e0e931d74@arm.com>
+ <024ab473-6d8e-dc95-88a2-ac706be90ff0@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-717504448-1519169312=:19448"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=2wel=fo=linux-foundation.org=akpm@srs-us1.protection.inumbo.net>)
- id 1eoHEP-0005ay-5F
- for xen-devel@lists.xenproject.org; Tue, 20 Feb 2018 23:21:53 +0000
-In-Reply-To: <201802190217.ctfr9bPI%fengguang.wu@intel.com>
+In-Reply-To: <024ab473-6d8e-dc95-88a2-ac706be90ff0@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,41 +22,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: kbuild test robot <lkp@intel.com>
-Cc: Juergen Gross <jgross@suse.com>, mhocko@suse.com, linux-kernel@vger.kernel.org, stable@vger.kernel.org, linux-mm@kvack.org, kbuild-all@01.org, xen-devel@lists.xenproject.org
+To: Julien Grall <julien.grall@arm.com>
+Cc: nd@arm.com, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAxOSBGZWIgMjAxOCAwMjo0NToyNyArMDgwMCBrYnVpbGQgdGVzdCByb2JvdCA8bGtw
-QGludGVsLmNvbT4gd3JvdGU6Cgo+IFthdXRvIGJ1aWxkIHRlc3QgRVJST1Igb24gbW1vdG0vbWFz
-dGVyXQo+IFthbHNvIGJ1aWxkIHRlc3QgRVJST1Igb24gdjQuMTYtcmMxIG5leHQtMjAxODAyMTZd
-Cj4gW2lmIHlvdXIgcGF0Y2ggaXMgYXBwbGllZCB0byB0aGUgd3JvbmcgZ2l0IHRyZWUsIHBsZWFz
-ZSBkcm9wIHVzIGEgbm90ZSB0byBoZWxwIGltcHJvdmUgdGhlIHN5c3RlbV0KPiAKPiB1cmw6ICAg
-IGh0dHBzOi8vZ2l0aHViLmNvbS8wZGF5LWNpL2xpbnV4L2NvbW1pdHMvSnVlcmdlbi1Hcm9zcy9t
-bS1kb24tdC1kZWZlci1zdHJ1Y3QtcGFnZS1pbml0aWFsaXphdGlvbi1mb3ItWGVuLXB2LWd1ZXN0
-cy8yMDE4MDIxOC0yMzM2NTcKPiBiYXNlOiAgIGdpdDovL2dpdC5jbXB4Y2hnLm9yZy9saW51eC1t
-bW90bS5naXQgbWFzdGVyCj4gY29uZmlnOiBpMzg2LXJhbmRjb25maWcteDAxMC0yMDE4MDcgKGF0
-dGFjaGVkIGFzIC5jb25maWcpCj4gY29tcGlsZXI6IGdjYy03IChEZWJpYW4gNy4zLjAtMSkgNy4z
-LjAKPiByZXByb2R1Y2U6Cj4gICAgICAgICAjIHNhdmUgdGhlIGF0dGFjaGVkIC5jb25maWcgdG8g
-bGludXggYnVpbGQgdHJlZQo+ICAgICAgICAgbWFrZSBBUkNIPWkzODYgCj4gCj4gQWxsIGVycm9y
-cyAobmV3IG9uZXMgcHJlZml4ZWQgYnkgPj4pOgo+IAo+ICAgIG1tL3BhZ2VfYWxsb2MuYzogSW4g
-ZnVuY3Rpb24gJ3VwZGF0ZV9kZWZlcl9pbml0JzoKPiA+PiBtbS9wYWdlX2FsbG9jLmM6MzUyOjY6
-IGVycm9yOiBpbXBsaWNpdCBkZWNsYXJhdGlvbiBvZiBmdW5jdGlvbiAneGVuX3B2X2RvbWFpbicg
-Wy1XZXJyb3I9aW1wbGljaXQtZnVuY3Rpb24tZGVjbGFyYXRpb25dCj4gICAgICBpZiAoeGVuX3B2
-X2RvbWFpbigpKQo+ICAgICAgICAgIF5+fn5+fn5+fn5+fn4KCkkgdGhpbmsgSSBhbHJlYWR5IGZp
-eGVkIHRoaXMuCgoKCkZyb206IEFuZHJldyBNb3J0b24gPGFrcG1AbGludXgtZm91bmRhdGlvbi5v
-cmc+ClN1YmplY3Q6IG1tLWRvbnQtZGVmZXItc3RydWN0LXBhZ2UtaW5pdGlhbGl6YXRpb24tZm9y
-LXhlbi1wdi1ndWVzdHMtZml4CgpleHBsaWNpdGx5IGluY2x1ZGUgeGVuLmgKCkNjOiBKdWVyZ2Vu
-IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+ClNpZ25lZC1vZmYtYnk6IEFuZHJldyBNb3J0b24gPGFr
-cG1AbGludXgtZm91bmRhdGlvbi5vcmc+Ci0tLQoKIG1tL3BhZ2VfYWxsb2MuYyB8ICAgIDEgKwog
-MSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspCgpkaWZmIC1wdU4gbW0vcGFnZV9hbGxvYy5j
-fm1tLWRvbnQtZGVmZXItc3RydWN0LXBhZ2UtaW5pdGlhbGl6YXRpb24tZm9yLXhlbi1wdi1ndWVz
-dHMtZml4IG1tL3BhZ2VfYWxsb2MuYwotLS0gYS9tbS9wYWdlX2FsbG9jLmN+bW0tZG9udC1kZWZl
-ci1zdHJ1Y3QtcGFnZS1pbml0aWFsaXphdGlvbi1mb3IteGVuLXB2LWd1ZXN0cy1maXgKKysrIGEv
-bW0vcGFnZV9hbGxvYy5jCkBAIC00Niw2ICs0Niw3IEBACiAjaW5jbHVkZSA8bGludXgvc3RvcF9t
-YWNoaW5lLmg+CiAjaW5jbHVkZSA8bGludXgvc29ydC5oPgogI2luY2x1ZGUgPGxpbnV4L3Bmbi5o
-PgorI2luY2x1ZGUgPHhlbi94ZW4uaD4KICNpbmNsdWRlIDxsaW51eC9iYWNraW5nLWRldi5oPgog
-I2luY2x1ZGUgPGxpbnV4L2ZhdWx0LWluamVjdC5oPgogI2luY2x1ZGUgPGxpbnV4L3BhZ2UtaXNv
-bGF0aW9uLmg+Cl8KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-717504448-1519169312=:19448
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Tue, 20 Feb 2018, Julien Grall wrote:
+> On 20/02/2018 21:16, Julien Grall wrote:
+> > Hi,
+> > 
+> > On 20/02/2018 21:03, Stefano Stabellini wrote:
+> >> On Tue, 20 Feb 2018, Julien Grall wrote:
+> >>> On 19/02/18 21:58, Stefano Stabellini wrote:
+> >>>> +        mrc   CP32(r6, CSSELR_EL1)
+> >>>
+> >>> The size of the cache is read using CSSIDR_EL1. But it looks like the 
+> >>> way we
+> >>> get the cache line size in Xen is fragile.
+> >>>
+> >>> We are retrieving the cache line size of Level 1 and assume this will 
+> >>> be valid
+> >>> for all the other caches. Indeed cache maintenance ops may propagate 
+> >>> to other
+> >>> caches depending the target (Point of Coherency vs Point of 
+> >>> Unification).
+> >>>
+> >>> Looking at the ARM ARM "Cache hierarchy abstraction for address-based
+> >>> operations" (D3-2061 DDI 0487C.a), CTR_EL0/CTR will holds the minimum 
+> >>> line
+> >>> lenght values for the data caches. The value will be the most efficient
+> >>> address stride to use to apply a sequence of VA-based maintenance 
+> >>> instructions
+> >>> to a range of VAs.
+> >>>
+> >>> So it would be best and safer for Xen to use CTR/CTLR_EL0.DminLine.
+> >>
+> >> This is insightful, thank you. Given that this patch is a backport
+> >> candidate, I would prefer to retain the same behavior we had before in
+> >> setup_cache. I can write a separate patch on top of this to make the
+> >> change to use CTR/CTLR_EL0.DminLine. That way, we can make a separate
+> >> decision on each of them on whether we want to backport them (and
+> >> potentially revert them) or not. In other words: this patch as-is is
+> >> suboptimal but is of very little risk. Making changes to the way we
+> >> determine the cacheline size improves the patch but significantly
+> >> increases the risk factor associated with it.
+> >>
+> >> Does it make sense?
+> > 
+> > By this patch you mean big.LITTLE? If so, then I don't consider it as a 
+> > potential backport. big.LITTLE has never been supported on Xen and hence 
+> > should be considered as a new feature. What is backportable is the patch 
+> > #1 that forbid big.LITTLE.
+
+Patch #1 ends up forcing people to use big cores only on many platforms,
+which from what you wrote can be unsafe. I suggest we backport the whole
+series, so that at least users can configure the system to use LITTLE
+cores only, or a mix of the two. The big.LITTLE doc in particular is
+certainly worth backporting but only makes sense with the rest of the
+series.
+
+On support statements: I noticed that big.LITTLE is actually lacking from
+SUPPORT.md.
+
+
+> > Regarding the cache line size, I didn't suggest the change because it is 
+> > more efficient. I suggested the patch because the current code to find 
+> > the cache line size is wrong. Imagine there is a cache in the hierarchy 
+> > that has a smaller cache line than your L1 cache. Then you would not 
+> > clean/invalidate correctly that cache.
+
+I didn't mean to imply that what you are suggesting is not important, or
+less important than the purpose of patch. I just meant to say that this
+patch is about removing the cacheline_bytes variable, it is not about
+fixing the way we read the cacheline size. I like to keep one patch
+doing one thing only.
+
+The fix you are suggesting is important, in fact it is probably more
+important than this series. I am OK writing a patch for it. It is just
+that it is a separate issue, and should be fix separately.
+
+I'll have a look at it and propose it a separate patch.
+
+
+> >>>> +        and   r6, r6, #0x7
+> >>>> +        add   r6, r6, #4
+> >>>> +        mov   r7, #1
+> >>>> +        lsl   r6, r7, r6
+> >>>>            mov   r7, r3
+> >>>>      1:      mcr   CP32(r7, DCCMVAC)
+> >>>> diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
+> >>>> index fa0ef70..edea300 100644
+> >>>> --- a/xen/arch/arm/arm64/head.S
+> >>>> +++ b/xen/arch/arm/arm64/head.S
+> >>>> @@ -631,8 +631,14 @@ ENTRY(relocate_xen)
+> >>>>            dsb   sy        /* So the CPU issues all writes to the 
+> >>>> range */
+> >>>>              mov   x9, x3
+> >>>> -        ldr   x10, =cacheline_bytes /* x10 := step */
+> >>>> -        ldr   x10, [x10]
+> >>>> +
+> >>>> +        mov   x10, #0
+> >>>> +        msr   CSSELR_EL1, x10
+> >>>> +        mrs   x10, CSSELR_EL1
+> >>>> +        and   x10, x10, #0x7
+> >>>> +        add   x10, x10, #4
+> >>>> +        mov   x11, #1
+> >>>> +        lsl   x10, x11, x10
+> >>>
+> >>> Please use dcache_line_size macro (see cache.S).
+> >>
+> >> Similarly, I would prefer to retain the same old behavior here, and
+> >> fix it/improve it in a separate patch.
+> > 
+> > See above, you got the wrong end of the stick about the cache line size.
+> 
+> You might want to look at the following patch in Linux:
+> 
+> commit f91e2c3bd427239c198351f44814dd39db91afe0
+> Author: Catalin Marinas <catalin.marinas@arm.com>
+> Date:   Tue Dec 7 16:52:04 2010 +0100
+> 
+>     ARM: 6527/1: Use CTR instead of CCSIDR for the D-cache line size on ARMv7
+> 
+>     The current implementation of the dcache_line_size macro reads the L1
+>     cache size from the CCSIDR register. This, however, is not guaranteed to
+>     be the smallest cache line in the cache hierarchy. The patch changes to
+>     the macro to use the more architecturally correct CTR register.
+> 
+>     Reported-by: Kevin Sapp <ksapp@quicinc.com>
+>     Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
+>     Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
+
+Thank you for the pointer, I'll give it a look.
+--8323329-717504448-1519169312=:19448
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-717504448-1519169312=:19448--
