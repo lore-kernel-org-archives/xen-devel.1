@@ -1,17 +1,20 @@
-From: Julien Grall <julien.grall@linaro.org>
-Subject: Re: [PATCH v2 2/3] xen/arm: vsmc: Don't implement
- function ID that doesn't exist
-Date: Tue, 6 Feb 2018 14:53:31 +0000
-Message-ID: <5aeb6baa-3ae3-2725-97f3-8d715a155255@linaro.org>
-References: <20180202114150.23817-1-julien.grall@linaro.org>
- <20180202114150.23817-3-julien.grall@linaro.org>
- <297ba112-609a-d20e-a80f-d4eff1a13868@epam.com>
+From: Aishwarya Pant <aishpant@gmail.com>
+Subject: [PATCH] xen/blkback: update sysfs interface
+	documentation
+Date: Tue, 20 Feb 2018 15:23:19 +0530
+Message-ID: <20180220095319.GA29360@mordor.localdomain>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <297ba112-609a-d20e-a80f-d4eff1a13868@epam.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=hcwr=fo=gmail.com=aishpant@srs-us1.protection.inumbo.net>)
+ id 1eo4c3-00035a-UV
+ for xen-devel@lists.xenproject.org; Tue, 20 Feb 2018 09:53:28 +0000
+Received: by mail-io0-x241.google.com with SMTP id e7so14301423ioj.1
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Feb 2018 01:53:26 -0800 (PST)
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,38 +23,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Volodymyr Babchuk <volodymyr_babchuk@epam.com>, xen-devel@lists.xen.org
-Cc: sstabellini@kernel.org, andre.przywara@linaro.org
+To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>, Greg KH <gregkh@linuxfoundation.org>
+Cc: Julia Lawall <julia.lawall@lip6.fr>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgVm9sb2R5bXlyLAoKT24gMDIvMDIvMjAxOCAwMTo0NiBQTSwgVm9sb2R5bXlyIEJhYmNodWsg
-d3JvdGU6Cj4gCj4gCj4gT24gMDIuMDIuMTggMTM6NDEsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4g
-VGhlIGN1cnJlbnQgaW1wbGVtZW50YXRpb24gb2YgU01DQ0MgcmVsaWVzIG9uIHRoZSBmYWN0IG9u
-bHkgZnVuY3Rpb24KPj4gbnVtYmVyIChiaXRzIFsxNTowXSkgaXMgZW5vdWdoIHRvIGlkZW50aWZ5
-IHdoYXQgdG8gaW1wbGVtZW50Lgo+Pgo+PiBIb3dldmVyLCBQU0NJIGNhbGwgYXJlIG9ubHkgYXZh
-aWxhYmxlIGluIHRoZSByYW5nZSAweDg0MDAwMDAwLTB4ODQwMDAwMUYKPj4gYW5kIDB4QzQwMDAw
-MDAtMHhDNDAwMDAxRi4gRnVydGhlcm1vcmUsIG5vdCBhbGwgU01DMzIgZnVuY3Rpb25zIGhhdmUK
-Pj4gZXF1aXZhbGVudCBpbiB0aGUgU01DNjQuIFRoaXMgaXMgdGhlIGNhc2Ugb2Y6Cj4+IMKgwqDC
-oMKgICogUFNDSV9WRVJTSU9OCj4+IMKgwqDCoMKgICogQ1BVX09GRgo+PiDCoMKgwqDCoCAqIE1J
-R1JBVEVfSU5GT19UWVBFCj4+IMKgwqDCoMKgICogU1lTVEVNX09GRgo+PiDCoMKgwqDCoCAqIFNZ
-U1RFTV9SRVNFVAo+Pgo+PiBTaW1pbGFybHkgY2FsbCBjb3VudCwgY2FsbCB1aWQsIHJldmlzaW9u
-IGNhbiBvbmx5IGJlIHF1ZXJ5IHVzaW5nIAo+PiBzbWMzMi9odmMzMgo+PiBmYXN0IGNhbGxzIChT
-ZWUgNi4yIGluIEFSTSBERU4gMDAyOEIpLgo+Pgo+PiBYZW4gc2hvdWxkIG9ubHkgaW1wbGVtZW50
-IGlkZW50aWZpZXIgZXhpc3RpbmcgaW4gdGhlIHNwZWNpZmljYXRpb24gaW4KPj4gb3JkZXIgdG8g
-YXZvaWQgcG90ZW50aWFsIGNsYXNoIHdpdGggbGF0ZXIgcmV2aXNpb24uIFRoZXJlZm9yZSByZXdv
-cmsgdGhlCj4+IHZzbWMgY29kZSB0byB1c2UgdGhlIHdob2xlIGZ1bmN0aW9uIGlkZW50aWZpZXIg
-cmF0aGVyIHRoYW4gb25seSB0aGUKPj4gZnVuY3Rpb24gbnVtYmVyLgo+Pgo+PiBBdCB0aGUgc2Ft
-ZSB0aW1lLCB0aGUgbmV3IG1hY3JvcyBmb3IgY2FsbCBjb3VudCwgY2FsbCB1aWQsIHJldmlzaW9u
-IGFyZQo+PiByZW5hbWVkIHRvIGJldHRlciBzdWl0IHRoZSBzcGVjLgo+Pgo+PiBMYXN0bHksIHVw
-ZGF0ZSBTU1NDX1NNQ0NDX0ZVTkNUSU9OX0NPVU5UIHRvIG1hdGNoIHRoZSBjb3JyZWN0IG51bWJl
-ciBvZgo+PiBmdW50aW9ucy4gTm90ZSB0aGF0IHZlcnNpb24gaXMgbm90IHVwZGF0ZWQgYmVjYXVz
-ZSB0aGUgbnVtYmVyIGhhcyBhbHdheXMKPj4gYmVlbiB3cm9uZywgYW5kIG5vYm9keSBjb3VsZCBw
-cm9wZXJseSB1c2UgaXQuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVu
-LmdyYWxsQGxpbmFyby5vcmc+Cj4gCj4gYFJldmlld2VkLWJ5OiBWb2xvZHlteXIgQmFiY2h1ayA8
-dm9sb2R5bXlyX2JhYmNodWtAZXBhbS5jb20+YAoKVGhhbmsgeW91IGZvciB0aGUgcmV2aWV3ZWQt
-YnkuIEkgbm90aWNlZCB0aGF0IHlvdSBwdXQgYCBhdCB0aGUgYmVnaW5uaW5nIAphbmQgZW5kIG9m
-IHRoZSBsaW5lIGluIHlvdXIgcmV2aWV3ZWQtYnkgdGFnIHNvIGZhci4gSXMgdGhlcmUgYW55IHJl
-YXNvbiAKZm9yIHRoYXQ/CgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+QWRkIGRvY3VtZW50YXRpb24gZm9yIHN0YXRpc3RpYyBhdHRyaWJ1dGUgZHNfcmVxIC0gdGhlIG51
+bWJlciBvZgpkaXNjYXJkZWQgcmVxdWVzdHMuCgpTaWduZWQtb2ZmLWJ5OiBBaXNod2FyeWEgUGFu
+dCA8YWlzaHBhbnRAZ21haWwuY29tPgotLS0KIERvY3VtZW50YXRpb24vQUJJL3N0YWJsZS9zeXNm
+cy1idXMteGVuLWJhY2tlbmQgfCA3ICsrKysrKysKIDEgZmlsZSBjaGFuZ2VkLCA3IGluc2VydGlv
+bnMoKykKCmRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9uL0FCSS9zdGFibGUvc3lzZnMtYnVzLXhl
+bi1iYWNrZW5kIGIvRG9jdW1lbnRhdGlvbi9BQkkvc3RhYmxlL3N5c2ZzLWJ1cy14ZW4tYmFja2Vu
+ZAppbmRleCAzZDU5NTFjOGJmNWYuLjIwZWY4MzU3ODVlYyAxMDA2NDQKLS0tIGEvRG9jdW1lbnRh
+dGlvbi9BQkkvc3RhYmxlL3N5c2ZzLWJ1cy14ZW4tYmFja2VuZAorKysgYi9Eb2N1bWVudGF0aW9u
+L0FCSS9zdGFibGUvc3lzZnMtYnVzLXhlbi1iYWNrZW5kCkBAIC03MywzICs3MywxMCBAQCBLZXJu
+ZWxWZXJzaW9uOgkzLjAKIENvbnRhY3Q6CUtvbnJhZCBSemVzenV0ZWsgV2lsayA8a29ucmFkLndp
+bGtAb3JhY2xlLmNvbT4KIERlc2NyaXB0aW9uOgogICAgICAgICAgICAgICAgIE51bWJlciBvZiBz
+ZWN0b3JzIHdyaXR0ZW4gYnkgdGhlIGZyb250ZW5kLgorCitXaGF0OgkJL3N5cy9idXMveGVuLWJh
+Y2tlbmQvZGV2aWNlcy92YmQtKi9zdGF0aXN0aWNzL2RzX3JlcQorRGF0ZToJCU9jdG9iZXIgMjAx
+MQorS2VybmVsVmVyc2lvbjoJMy4xCitDb250YWN0OglLb25yYWQgUnplc3p1dGVrIFdpbGsgPGtv
+bnJhZC53aWxrQG9yYWNsZS5jb20+CitEZXNjcmlwdGlvbjoKKyAgICAgICAgICAgICAgICBOdW1i
+ZXIgb2YgZGlzY2FyZCByZXF1ZXN0cyBmcm9tIHRoZSBmcm9udGVuZC4KLS0gCjIuMTYuMQoKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
