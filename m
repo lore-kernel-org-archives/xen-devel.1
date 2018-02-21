@@ -1,16 +1,14 @@
-From: "Moger, Babu" <Babu.Moger@amd.com>
-Subject: Re: [PATCH 1/2] x86/svm: add support for pause
-	filtering threshold
-Date: Wed, 21 Feb 2018 17:36:36 +0000
-Message-ID: <CY4PR12MB176875DE0C5345007F37432F95CE0@CY4PR12MB1768.namprd12.prod.outlook.com>
-References: <20180221001233.62644-1-brian.woods@amd.com>
- <20180221001233.62644-2-brian.woods@amd.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH] domctl: revert double increment of domctl
+	version
+Date: Wed, 21 Feb 2018 18:46:34 +0100
+Message-ID: <20180221184634.1cc375eb.olaf@aepfle.de>
+References: <20180221173422.10550-1-olaf@aepfle.de>
+ <20180221173802.4asubsivkejs2ihy@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6215664251738882608=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180221001233.62644-2-brian.woods@amd.com>
-Content-Language: en-US
+In-Reply-To: <20180221173802.4asubsivkejs2ihy@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,80 +17,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Woods, Brian" <Brian.Woods@amd.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Jan Beulich <jbeulich@suse.com>, "Suthikulpanit, Suravee" <Suravee.Suthikulpanit@amd.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-TG9va3MgZ29vZC4gClJldmlld2VkLWJ5OiBCYWJ1IE1vZ2VyIDxiYWJ1Lm1vZ2VyQGFtZC5jb20+
-Cgo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tCj4gRnJvbTogV29vZHMsIEJyaWFuCj4gU2Vu
-dDogVHVlc2RheSwgRmVicnVhcnkgMjAsIDIwMTggNjoxMyBQTQo+IFRvOiB4ZW4tZGV2ZWxAbGlz
-dHMueGVuLm9yZwo+IENjOiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUu
-Y29tPjsgU3V0aGlrdWxwYW5pdCwgU3VyYXZlZQo+IDxTdXJhdmVlLlN1dGhpa3VscGFuaXRAYW1k
-LmNvbT47IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT47Cj4gQW5kcmV3IENvb3BlciA8
-YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT47IFdvb2RzLCBCcmlhbgo+IDxCcmlhbi5Xb29kc0Bh
-bWQuY29tPgo+IFN1YmplY3Q6IFtQQVRDSCAxLzJdIHg4Ni9zdm06IGFkZCBzdXBwb3J0IGZvciBw
-YXVzZSBmaWx0ZXJpbmcgdGhyZXNob2xkCj4gCj4gQWRkIHN1cHBvcnQgZm9yIGVuYWJsaW5nIHRo
-ZSBwYXVzZSBmaWx0ZXJpbmcgdGhyZXNob2xkIGZlYXR1cmUuICBUaGlzCj4gY2F1c2VzIHRoZSBw
-YXVzZSBmaWx0ZXJpbmcgY291bnQgdG8gcmVzZXQgaWYgdGhlcmUncyBwYXVzZSBmaWx0ZXJpbmcK
-PiB0aHJlc2hvbGQgY3ljbGVzIG9yIGdyZWF0ZXIgYmV0d2VlbiBwYXVzZXMuICBTZWUgQU1EIEFQ
-TSBWb2wgMiBTZWN0aW9uCj4gMTUuMTQuNCBmb3IgbW9yZSBkZXRhaWxzLgo+IAo+IFRoZSB2YWx1
-ZXMgb2YgdGhlIHBhdXNlIGZpbHRlcmluZyBjb3VudCBhbmQgdGhyZXNob2xkIHdlcmUgZm91bmQg
-YnkKPiBpdGVyYXRpbmcgb3ZlciBkaWZmZXJlbnQgdmFsdWVzIG9mIHRoZSBjb3VudCBhbmQgdGhy
-ZXNob2xkIHdoaWxlIHJ1bm5pbmcKPiBrZXJuYmVuY2ggYW5kIGEgcGkgc3BpZ290IGFsZ29yaXRo
-bSB3aXRoIHlpZWxkcyBwbGFjZWQgaW4gaXQuICBBCj4gYmFsYW5jZWQgc2V0dGluZyBmb3IgYm90
-aCB2YXJpYWJsZSBwcm92aWRlczoKPiAKPiAoVXNpbmcgYXZlcmFnZWQgZWxhcHNlZCB0aW1lIHdp
-dGgga2VybmJlbmNoKQo+IG9sZCA9IDg1Mi4wCj4gbmV3ID0gODQ4LjgKPiBpbXByb3ZlbWVudCA9
-IC40JQo+IAo+IEZvciBzeXN0ZW0gd2l0aG91dCBwYXVzZSBmaWx0ZXJpbmcgdGhyZXNob2xkLCB0
-aGUgY2hhbmdlLCBmcm9tIDMwMDAgdG8KPiA0MDAwIGZvciB0aGUgY291bnQsIHNob3VsZCBub3Qg
-bmVnYXRpdmVseSBlZmZlY3Qgc3lzdGVtIHBlcmZvcm1hbmNlLgo+IAo+IFNpZ25lZC1vZmYtYnk6
-IEJyaWFuIFdvb2RzIDxicmlhbi53b29kc0BhbWQuY29tPgo+IC0tLQo+ICB4ZW4vaW5jbHVkZS9h
-c20teDg2L2h2bS9zdm0vc3ZtLmggIHwgNSArKysrLQo+ICB4ZW4vaW5jbHVkZS9hc20teDg2L2h2
-bS9zdm0vdm1jYi5oIHwgMyArKy0KPiAgMiBmaWxlcyBjaGFuZ2VkLCA2IGluc2VydGlvbnMoKyks
-IDIgZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS14ODYvaHZt
-L3N2bS9zdm0uaCBiL3hlbi9pbmNsdWRlL2FzbS0KPiB4ODYvaHZtL3N2bS9zdm0uaAo+IGluZGV4
-IDQ2MmNiODliN2MuLjU5MzU0NmZiNTYgMTAwNjQ0Cj4gLS0tIGEveGVuL2luY2x1ZGUvYXNtLXg4
-Ni9odm0vc3ZtL3N2bS5oCj4gKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vc3ZtL3N2bS5o
-Cj4gQEAgLTY0LDYgKzY0LDcgQEAgZXh0ZXJuIHUzMiBzdm1fZmVhdHVyZV9mbGFnczsKPiAgI2Rl
-ZmluZSBTVk1fRkVBVFVSRV9GTFVTSEJZQVNJRCAgICA2IC8qIFRMQiBmbHVzaCBieSBBU0lEIHN1
-cHBvcnQgKi8KPiAgI2RlZmluZSBTVk1fRkVBVFVSRV9ERUNPREVBU1NJU1RTICA3IC8qIERlY29k
-ZSBhc3Npc3RzIHN1cHBvcnQgKi8KPiAgI2RlZmluZSBTVk1fRkVBVFVSRV9QQVVTRUZJTFRFUiAg
-IDEwIC8qIFBhdXNlIGludGVyY2VwdCBmaWx0ZXIgc3VwcG9ydAo+ICovCj4gKyNkZWZpbmUgU1ZN
-X0ZFQVRVUkVfUEFVU0VUSFJFU0ggICAxMiAvKiBQYXVzZSBpbnRlcmNlcHQgZmlsdGVyIHN1cHBv
-cnQKPiAqLwo+ICAjZGVmaW5lIFNWTV9GRUFUVVJFX1ZMT0FEU0FWRSAgICAgMTUgLyogdmlydHVh
-bCB2bWxvYWQvdm1zYXZlICovCj4gICNkZWZpbmUgU1ZNX0ZFQVRVUkVfVkdJRiAgICAgICAgICAx
-NiAvKiBWaXJ0dWFsIEdJRiAqLwo+IAo+IEBAIC03NiwxMCArNzcsMTIgQEAgZXh0ZXJuIHUzMiBz
-dm1fZmVhdHVyZV9mbGFnczsKPiAgI2RlZmluZSBjcHVfaGFzX3N2bV9kZWNvZGUKPiBjcHVfaGFz
-X3N2bV9mZWF0dXJlKFNWTV9GRUFUVVJFX0RFQ09ERUFTU0lTVFMpCj4gICNkZWZpbmUgY3B1X2hh
-c19zdm1fdmdpZiAgICAgIGNwdV9oYXNfc3ZtX2ZlYXR1cmUoU1ZNX0ZFQVRVUkVfVkdJRikKPiAg
-I2RlZmluZSBjcHVfaGFzX3BhdXNlX2ZpbHRlcgo+IGNwdV9oYXNfc3ZtX2ZlYXR1cmUoU1ZNX0ZF
-QVRVUkVfUEFVU0VGSUxURVIpCj4gKyNkZWZpbmUgY3B1X2hhc19wYXVzZV90aHJlc2gKPiBjcHVf
-aGFzX3N2bV9mZWF0dXJlKFNWTV9GRUFUVVJFX1BBVVNFVEhSRVNIKQo+ICAjZGVmaW5lIGNwdV9o
-YXNfdHNjX3JhdGlvCj4gY3B1X2hhc19zdm1fZmVhdHVyZShTVk1fRkVBVFVSRV9UU0NSQVRFTVNS
-KQo+ICAjZGVmaW5lIGNwdV9oYXNfc3ZtX3Zsb2Fkc2F2ZQo+IGNwdV9oYXNfc3ZtX2ZlYXR1cmUo
-U1ZNX0ZFQVRVUkVfVkxPQURTQVZFKQo+IAo+IC0jZGVmaW5lIFNWTV9QQVVTRUZJTFRFUl9JTklU
-ICAgIDMwMDAKPiArI2RlZmluZSBTVk1fUEFVU0VGSUxURVJfSU5JVCAgICA0MDAwCj4gKyNkZWZp
-bmUgU1ZNX1BBVVNFVEhSRVNIX0lOSVQgICAgMTAwMAo+IAo+ICAvKiBUU0MgcmF0ZSAqLwo+ICAj
-ZGVmaW5lIERFRkFVTFRfVFNDX1JBVElPICAgICAgIDB4MDAwMDAwMDEwMDAwMDAwMFVMTAo+IGRp
-ZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9zdm0vdm1jYi5oIGIveGVuL2luY2x1
-ZGUvYXNtLQo+IHg4Ni9odm0vc3ZtL3ZtY2IuaAo+IGluZGV4IDlkNWRmYzU4ZjIuLmRlMDc0Mjlk
-ZmYgMTAwNjQ0Cj4gLS0tIGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vc3ZtL3ZtY2IuaAo+ICsr
-KyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvaHZtL3N2bS92bWNiLmgKPiBAQCAtNDEyLDcgKzQxMiw3
-IEBAIHN0cnVjdCB2bWNiX3N0cnVjdCB7Cj4gICAgICB1NjQgcmVzMDQ7ICAgICAgICAgICAgICAg
-ICAgLyogb2Zmc2V0IDB4MjggKi8KPiAgICAgIHU2NCByZXMwNTsgICAgICAgICAgICAgICAgICAv
-KiBvZmZzZXQgMHgzMCAqLwo+ICAgICAgdTMyIHJlczA2OyAgICAgICAgICAgICAgICAgIC8qIG9m
-ZnNldCAweDM4ICovCj4gLSAgICB1MTYgcmVzMDZhOyAgICAgICAgICAgICAgICAgLyogb2Zmc2V0
-IDB4M0MgKi8KPiArICAgIHUxNiBfcGF1c2VfZmlsdGVyX3RocmVzaDsgICAvKiBvZmZzZXQgMHgz
-QyAtIGNsZWFuYml0IDAgKi8KPiAgICAgIHUxNiBfcGF1c2VfZmlsdGVyX2NvdW50OyAgICAvKiBv
-ZmZzZXQgMHgzRSAtIGNsZWFuYml0IDAgKi8KPiAgICAgIHU2NCBfaW9wbV9iYXNlX3BhOyAgICAg
-ICAgICAvKiBvZmZzZXQgMHg0MCAtIGNsZWFuYml0IDEgKi8KPiAgICAgIHU2NCBfbXNycG1fYmFz
-ZV9wYTsgICAgICAgICAvKiBvZmZzZXQgMHg0OCAtIGNsZWFuYml0IDEgKi8KPiBAQCAtNTY4LDYg
-KzU2OCw3IEBAIFZNQ0JfQUNDRVNTT1JTKGV4Y2VwdGlvbl9pbnRlcmNlcHRzLCBpbnRlcmNlcHRz
-KQo+ICBWTUNCX0FDQ0VTU09SUyhnZW5lcmFsMV9pbnRlcmNlcHRzLCBpbnRlcmNlcHRzKQo+ICBW
-TUNCX0FDQ0VTU09SUyhnZW5lcmFsMl9pbnRlcmNlcHRzLCBpbnRlcmNlcHRzKQo+ICBWTUNCX0FD
-Q0VTU09SUyhwYXVzZV9maWx0ZXJfY291bnQsIGludGVyY2VwdHMpCj4gK1ZNQ0JfQUNDRVNTT1JT
-KHBhdXNlX2ZpbHRlcl90aHJlc2gsIGludGVyY2VwdHMpCj4gIFZNQ0JfQUNDRVNTT1JTKHRzY19v
-ZmZzZXQsIGludGVyY2VwdHMpCj4gIFZNQ0JfQUNDRVNTT1JTKGlvcG1fYmFzZV9wYSwgaW9wbSkK
-PiAgVk1DQl9BQ0NFU1NPUlMobXNycG1fYmFzZV9wYSwgaW9wbSkKPiAtLQo+IDIuMTEuMAoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============6215664251738882608==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/bud+lgFknB/z8BjytNkE1ca"; protocol="application/pgp-signature"
+
+--Sig_/bud+lgFknB/z8BjytNkE1ca
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 21 Feb 2018 17:38:03 +0000
+schrieb Wei Liu <wei.liu2@citrix.com>:
+
+> The reason we bumped the number twice is because we want a dedicated
+> number to denote the recent security fix.
+
+Thanks, that was no clear from the commit messages.
+
+Olaf
+
+--Sig_/bud+lgFknB/z8BjytNkE1ca
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWo2wegAKCRBdQqD6ppg2
+fhL9AJ9FBqwBDhOuooOU4HEbrQ0uBFVfJgCfc3dYErRNNPhVIYLfDOuhP2UBcCg=
+=sFSO
+-----END PGP SIGNATURE-----
+
+--Sig_/bud+lgFknB/z8BjytNkE1ca--
+
+
+--===============6215664251738882608==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6215664251738882608==--
