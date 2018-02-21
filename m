@@ -1,15 +1,13 @@
-From: Andre Przywara <andre.przywara@linaro.org>
-Subject: Re: [PATCH v3 08/17] xen/arm: psci: Detect SMCCC version
-Date: Wed, 21 Feb 2018 14:43:37 +0000
-Message-ID: <2fc06841-fb94-b0be-f349-4232a3565c7b@linaro.org>
-References: <20180215150248.28922-1-julien.grall@arm.com>
- <20180215150248.28922-9-julien.grall@arm.com>
+From: Stefan Bader <stefan.bader@canonical.com>
+Subject: Re: Ability to crash a HVM guest by accessing /dev/hpet
+Date: Wed, 21 Feb 2018 15:57:36 +0100
+Message-ID: <84021af4-c833-4fd6-d715-aac1f4a8acec@canonical.com>
+References: <6d5172da-c4f5-a275-229d-068899b056f6@canonical.com>
+ <20180221144017.ol2zelgknomiehfn@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5155486994560932396=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180215150248.28922-9-julien.grall@arm.com>
-Content-Language: en-GB
+In-Reply-To: <20180221144017.ol2zelgknomiehfn@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,60 +16,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org
-Cc: sstabellini@kernel.org, volodymyr_babchuk@epam.com
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAxNS8wMi8xOCAxNTowMiwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFBTQ0kgMS4wIGFu
-ZCBsYXRlciBhbGxvd3MgdGhlIFNNQ0NDIHZlcnNpb24gdG8gYmUgKGluZGlyZWN0bHkpIHByb2Jl
-ZAo+IHZpYSBQU0NJX0ZFQVRVUkVTLiBJZiB0aGUgUFNDSV9GRUFUVVJFUyBkb2VzIG5vdCBleGlz
-dCAoUFNDSSAwLjIgb3IKPiBlYXJsaWVyKSBhbmQgdGhlIGZ1bmN0aW9uIHJldHVybiBhbiBlcnJv
-ciwgdGhlbiB3ZSBjb25zaWRlcmVkIFNNQ0NDIDEuMAoKICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHJldHVybnMgICAgICAgICAgICAgICAgICBhc3N1bWUKPiBpcyBpbXBsZW1lbnRlZC4KPiAK
-PiBTaWduZWQtb2ZmLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgo+IAo+
-IC0tLQo+ICAgICBDaGFuZ2VzIGluIHYyOgo+ICAgICAgICAgLSBQYXRjaCBhZGRlZAo+IC0tLQo+
-ICB4ZW4vYXJjaC9hcm0vcHNjaS5jICAgICAgICAgfCAzNCArKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKystCj4gIHhlbi9pbmNsdWRlL2FzbS1hcm0vc21jY2MuaCB8ICAyICsrCj4gIDIg
-ZmlsZXMgY2hhbmdlZCwgMzUgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQo+IAo+IGRpZmYg
-LS1naXQgYS94ZW4vYXJjaC9hcm0vcHNjaS5jIGIveGVuL2FyY2gvYXJtL3BzY2kuYwo+IGluZGV4
-IDVkZGEzNWNkN2MuLmJjN2IyMjYwZTggMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gvYXJtL3BzY2ku
-Ywo+ICsrKyBiL3hlbi9hcmNoL2FybS9wc2NpLmMKPiBAQCAtMzcsNiArMzcsNyBAQAo+ICAjZW5k
-aWYKPiAgCj4gIHVpbnQzMl90IHBzY2lfdmVyOwo+ICt1aW50MzJfdCBzbWNjY192ZXI7Cj4gIAo+
-ICBzdGF0aWMgdWludDMyX3QgcHNjaV9jcHVfb25fbnI7Cj4gIAo+IEBAIC01Nyw2ICs1OCwxNCBA
-QCB2b2lkIGNhbGxfcHNjaV9zeXN0ZW1fcmVzZXQodm9pZCkKPiAgICAgICAgICBjYWxsX3NtYyhQ
-U0NJXzBfMl9GTjMyX1NZU1RFTV9SRVNFVCwgMCwgMCwgMCk7Cj4gIH0KPiAgCj4gK3N0YXRpYyBp
-bnQgX19pbml0IHBzY2lfZmVhdHVyZXModWludDMyX3QgcHNjaV9mdW5jX2lkKQo+ICt7Cj4gKyAg
-ICBpZiAoIHBzY2lfdmVyIDwgUFNDSV9WRVJTSU9OKDEsIDApICkKPiArICAgICAgICByZXR1cm4g
-UFNDSV9OT1RfU1VQUE9SVEVEOwo+ICsKPiArICAgIHJldHVybiBjYWxsX3NtYyhQU0NJXzFfMF9G
-TjMyX1BTQ0lfRkVBVFVSRVMsIHBzY2lfZnVuY19pZCwgMCwgMCk7Cj4gK30KPiArCj4gIGludCBf
-X2luaXQgcHNjaV9pc19zbWNfbWV0aG9kKGNvbnN0IHN0cnVjdCBkdF9kZXZpY2Vfbm9kZSAqcHNj
-aSkKPiAgewo+ICAgICAgaW50IHJldDsKPiBAQCAtODIsNiArOTEsMjQgQEAgaW50IF9faW5pdCBw
-c2NpX2lzX3NtY19tZXRob2QoY29uc3Qgc3RydWN0IGR0X2RldmljZV9ub2RlICpwc2NpKQo+ICAg
-ICAgcmV0dXJuIDA7Cj4gIH0KPiAgCj4gK3N0YXRpYyB2b2lkIF9faW5pdCBwc2NpX2luaXRfc21j
-Y2Modm9pZCkKPiArewo+ICsgICAgLyogUFNDSSBpcyB1c2luZyBhdCBsZWFzdCBTTUNDIDEuMCBj
-YWxsaW5nIGNvbnZlbnRpb24uICovCgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBT
-TUNDQwoKT3RoZXIgdGhhbiB0aG9zZSBuaXRzIGl0IGxvb2tzIGdvb2QuCgpSZXZpZXdlZC1ieTog
-QW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnByenl3YXJhQGFybS5jb20+Cgo+ICsgICAgc21jY2NfdmVy
-ID0gQVJNX1NNQ0NDX1ZFUlNJT05fMV8wOwo+ICsKPiArICAgIGlmICggcHNjaV9mZWF0dXJlcyhB
-Uk1fU01DQ0NfVkVSU0lPTl9GSUQpICE9IFBTQ0lfTk9UX1NVUFBPUlRFRCApCj4gKyAgICB7Cj4g
-KyAgICAgICAgdWludDMyX3QgcmV0Owo+ICsKPiArICAgICAgICByZXQgPSBjYWxsX3NtYyhBUk1f
-U01DQ0NfVkVSU0lPTl9GSUQsIDAsIDAsIDApOwo+ICsgICAgICAgIGlmICggcmV0ICE9IEFSTV9T
-TUNDQ19OT1RfU1VQUE9SVEVEICkKPiArICAgICAgICAgICAgc21jY2NfdmVyID0gcmV0Owo+ICsg
-ICAgfQo+ICsKPiArICAgIHByaW50ayhYRU5MT0dfSU5GTyAiVXNpbmcgU01DIENhbGxpbmcgQ29u
-dmVudGlvbiB2JXUuJXVcbiIsCj4gKyAgICAgICAgICAgU01DQ0NfVkVSU0lPTl9NQUpPUihzbWNj
-Y192ZXIpLCBTTUNDQ19WRVJTSU9OX01JTk9SKHNtY2NjX3ZlcikpOwo+ICt9Cj4gKwo+ICBpbnQg
-X19pbml0IHBzY2lfaW5pdF8wXzEodm9pZCkKPiAgewo+ICAgICAgaW50IHJldDsKPiBAQCAtMTcz
-LDcgKzIwMCwxMiBAQCBpbnQgX19pbml0IHBzY2lfaW5pdCh2b2lkKQo+ICAgICAgaWYgKCByZXQg
-KQo+ICAgICAgICAgIHJldCA9IHBzY2lfaW5pdF8wXzEoKTsKPiAgCj4gLSAgICByZXR1cm4gcmV0
-Owo+ICsgICAgaWYgKCByZXQgKQo+ICsgICAgICAgIHJldHVybiByZXQ7Cj4gKwo+ICsgICAgcHNj
-aV9pbml0X3NtY2NjKCk7Cj4gKwo+ICsgICAgcmV0dXJuIDA7Cj4gIH0KPiAgCj4gIC8qCj4gZGlm
-ZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vc21jY2MuaCBiL3hlbi9pbmNsdWRlL2FzbS1h
-cm0vc21jY2MuaAo+IGluZGV4IGQwMjQwZDY0YmYuLmJjMDY3ODkyYzcgMTAwNjQ0Cj4gLS0tIGEv
-eGVuL2luY2x1ZGUvYXNtLWFybS9zbWNjYy5oCj4gKysrIGIveGVuL2luY2x1ZGUvYXNtLWFybS9z
-bWNjYy5oCj4gQEAgLTUyLDYgKzUyLDggQEAKPiAgCj4gICNpZm5kZWYgX19BU1NFTUJMWV9fCj4g
-IAo+ICtleHRlcm4gdWludDMyX3Qgc21jY2NfdmVyOwo+ICsKPiAgLyogQ2hlY2sgaWYgdGhpcyBp
-cyBmYXN0IGNhbGwuICovCj4gIHN0YXRpYyBpbmxpbmUgYm9vbCBzbWNjY19pc19mYXN0X2NhbGwo
-cmVnaXN0ZXJfdCBmdW5jaWQpCj4gIHsKPiAKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============5155486994560932396==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="CXd1wvNIRzS0NQ0x1NtEQMTR1IK90mk7t"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--CXd1wvNIRzS0NQ0x1NtEQMTR1IK90mk7t
+Content-Type: multipart/mixed; boundary="ymrLXconr4lMja9pSOTyXymLUlNSy7YvO";
+ protected-headers="v1"
+From: Stefan Bader <stefan.bader@canonical.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>
+Message-ID: <84021af4-c833-4fd6-d715-aac1f4a8acec@canonical.com>
+Subject: Re: [Xen-devel] Ability to crash a HVM guest by accessing /dev/hpet
+References: <6d5172da-c4f5-a275-229d-068899b056f6@canonical.com>
+ <20180221144017.ol2zelgknomiehfn@MacBook-Pro-de-Roger.local>
+In-Reply-To: <20180221144017.ol2zelgknomiehfn@MacBook-Pro-de-Roger.local>
+
+--ymrLXconr4lMja9pSOTyXymLUlNSy7YvO
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: quoted-printable
+
+On 21.02.2018 15:40, Roger Pau Monn=C3=A9 wrote:
+> On Wed, Feb 21, 2018 at 03:12:15PM +0100, Stefan Bader wrote:
+>> This seems to have been found by us[1] and Citrix[2] recently. To trig=
+ger this
+>> one needs to be root in the guest, so it is not super critical but sti=
+ll it
+>> seems to be a bit harsh that purely opening /dev/hpet read-only is lea=
+ding to a
+>> domain crash via xen/arch/x86/hvm/hpet.c@375(hpet_write):
+>=20
+> I'm quite surprised that Linux writes to the registers if the device
+> is opened read-only.
+
+[dropping Ian as the email address I got seems no longer valid]
+
+Hi Roger,
+
+it seems that this is the way the hpet character driver is done (not sure=
+ that
+is all correct). Opening in write mode actually seem to be forbidden and =
+will
+return -EINVAL.
+This grabs one timer and then calls hpet_timer_set_irq() on that. And thi=
+s
+actually forces level triggered mode...
+
+        timer =3D devp->hd_timer;
+
+        /* we prefer level triggered mode */
+        v =3D readl(&timer->hpet_config);
+        if (!(v & Tn_INT_TYPE_CNF_MASK)) {
+                v |=3D Tn_INT_TYPE_CNF_MASK;
+                writel(v, &timer->hpet_config);
+        }
+        spin_unlock_irq(&hpet_lock);
+
+-Stefan
+>=20
+>>
+>>     case HPET_Tn_CFG(0):
+>>     case HPET_Tn_CFG(1):
+>>     case HPET_Tn_CFG(2):
+>>         tn =3D HPET_TN(CFG, addr);
+>>
+>>         h->hpet.timers[tn].config =3D hpet_fixup_reg(new_val, old_val,=
+ 0x3f4e);
+>>
+>>         if ( timer_level(h, tn) )
+>>         {
+>>             gdprintk(XENLOG_ERR,
+>>                      "HPET: level triggered interrupt not supported no=
+w\n");
+>>             domain_crash(current->domain);
+>>             break;
+>>         }
+>>
+>> The default in Linux seems to be level triggered. I wonder whether the=
+re would
+>> be any possible way to make this return as some error instead of blowi=
+ng up?
+>=20
+> Xen not allowing level-triggered is actually breaking the spec for
+> HPET AFAICT, since level triggered interrupts are not an optional
+> feature of HPET. Options here would be to just ignore or inject a #GP
+> I guess (which will also likely result in the guest crashing).
+>=20
+> The real solution is to implement level triggered interrupts, I can
+> take a stab at this.
+>=20
+> Roger.
+>=20
+
+
+
+--ymrLXconr4lMja9pSOTyXymLUlNSy7YvO--
+
+--CXd1wvNIRzS0NQ0x1NtEQMTR1IK90mk7t
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQIcBAEBCgAGBQJajYjgAAoJEOhnXe7L7s6jARMP/3o6rgQEtV8PPHpOpSJTZDxJ
+9pRHEVMmAnEmzW4Hr8Zq+Sau1JAkocbQKcAOp/hQfFqsduPO+g47OEYihu8jQF+c
+RjnfCPTtGNrhQx3AePDqDZ5jXQtkLUS5A1yk7EP+300OqCGdgl3YXfj49driB/kO
+BKhRYMEwdSH1vl0Xfoa7/8x4ETRwnrRBFPcx9L2GzHbwhn3HsX0u77E8fhy8Dvcr
+JQn/ox22lG6ZaSwLQTyaaoSbkwhnnPeQXjsZa6ghpDyzB4syG3Lqb+ia8QSNTXxQ
+raoNZYOH6x+DAlOmN9AxCkgaMpg5OPhJxiHgQCy0PtFXV8NWNPNc58kxQAbRtVZn
+psqfOBWWiWy7WNlJH7AzL2bpETlJTt7VcNInjxJBCER8OUnKukBHqGiuL2DDf9iL
+Im0tGLfYOMtsEYE7pF7LhO9FStDAHhAG1xoLjlzW94SdhFDny7Jw0LBSU9tlQ9Qo
+Li3cuhQmVi+eF3UNbd6NgxW3nngMd+oZmzhDc6nIpDNGgiLZfNEkwt+lkIxv+soG
+enPM1bROifQ1qKEQXULqIyF0LqFNU+AgPibPw3LhNnQQuyDpeDnHPUWe9TMDdLBi
+XbGjhCzpIlBZDf1sQsA9g2KXUhDEsw9bKPkglM//iZtKAx6cY6Gja/ngBL7I+PMx
+wxYaJqtEGbPyXrytW8O6
+=rFcW
+-----END PGP SIGNATURE-----
+
+--CXd1wvNIRzS0NQ0x1NtEQMTR1IK90mk7t--
+
+
+--===============5155486994560932396==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5155486994560932396==--
