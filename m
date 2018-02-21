@@ -1,10 +1,24 @@
-From: Stefan Bader <stefan.bader@canonical.com>
-Subject: Ability to crash a HVM guest by accessing /dev/hpet
-Date: Wed, 21 Feb 2018 15:12:15 +0100
-Message-ID: <6d5172da-c4f5-a275-229d-068899b056f6@canonical.com>
+From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v3 1/2] x86/hvm: introduce cr{0,
+ 4}_host_mask to store trapped bits of CR accesses
+Date: Wed, 21 Feb 2018 14:18:11 +0000
+Message-ID: <20180221141811.6c4z7ewq7ag37tmn@MacBook-Pro-de-Roger.local>
+References: <20180220085647.25459-1-roger.pau@citrix.com>
+ <20180220085647.25459-2-roger.pau@citrix.com>
+ <9e4a1ca2-c855-8132-825c-f0efbd66d99a@oracle.com>
+ <20180221082707.qhw66eiyo5e3gz2k@MacBook-Pro-de-Roger.local>
+ <333c006c-f764-e9f4-f84c-8cc69287e961@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5445845871187451309=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=e/wr=fp=citrix.com=prvs=583418c1e=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1eoVF0-0007Tn-2F
+ for xen-devel@lists.xenproject.org; Wed, 21 Feb 2018 14:19:26 +0000
+Content-Disposition: inline
+In-Reply-To: <333c006c-f764-e9f4-f84c-8cc69287e961@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,105 +27,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>
-Cc: Ian Campbell <ian.campbell@citrix.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel@lists.xenproject.org, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5445845871187451309==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="MylRbFvm7f3Nf4pFr7houRHpfTRFy8zMo"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---MylRbFvm7f3Nf4pFr7houRHpfTRFy8zMo
-Content-Type: multipart/mixed; boundary="Cl5qDz1yvyAuqbQbvxBJImDy4F2cA6JX2";
- protected-headers="v1"
-From: Stefan Bader <stefan.bader@canonical.com>
-To: "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>
-Cc: Ian Campbell <ian.campbell@citrix.com>
-Message-ID: <6d5172da-c4f5-a275-229d-068899b056f6@canonical.com>
-Subject: Ability to crash a HVM guest by accessing /dev/hpet
-
---Cl5qDz1yvyAuqbQbvxBJImDy4F2cA6JX2
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: quoted-printable
-
-This seems to have been found by us[1] and Citrix[2] recently. To trigger=
- this
-one needs to be root in the guest, so it is not super critical but still =
-it
-seems to be a bit harsh that purely opening /dev/hpet read-only is leadin=
-g to a
-domain crash via xen/arch/x86/hvm/hpet.c@375(hpet_write):
-
-    case HPET_Tn_CFG(0):
-    case HPET_Tn_CFG(1):
-    case HPET_Tn_CFG(2):
-        tn =3D HPET_TN(CFG, addr);
-
-        h->hpet.timers[tn].config =3D hpet_fixup_reg(new_val, old_val, 0x=
-3f4e);
-
-        if ( timer_level(h, tn) )
-        {
-            gdprintk(XENLOG_ERR,
-                     "HPET: level triggered interrupt not supported now\n=
-");
-            domain_crash(current->domain);
-            break;
-        }
-
-The default in Linux seems to be level triggered. I wonder whether there =
-would
-be any possible way to make this return as some error instead of blowing =
-up?
-
--Stefan
-
-[1] https://bugs.launchpad.net/bugs/1741409
-[2]
-https://bugs.xenserver.org/browse/XSO-809?focusedCommentId=3D16484&page=3D=
-com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel
-
-
---Cl5qDz1yvyAuqbQbvxBJImDy4F2cA6JX2--
-
---MylRbFvm7f3Nf4pFr7houRHpfTRFy8zMo
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQIcBAEBCgAGBQJajX4/AAoJEOhnXe7L7s6jZ2UQAKhk0mo0eT5yjFyj1Dm0EgSf
-6984qeH8Zx4MXNt+XBJYrIVm5kYmIeOCsEelvqI+Sf57oa68nl3KyDnfc6Mfn0ff
-6Siz6B5DhTwGuEs1HCx4E/E4VTb+wbHFhCZg9jxuIjqDREtb1bmiyCNnJaZejYQ+
-eQSSRCC/AqoroEJU0Z4h8qfbP1H4oFTYD2gI/S2hSeBPUNI0/vHg7OtvIICSGPTe
-x0PcJOAmGkFFabPHp4B9h5sm7MeB4pCNvTJlTHD8TDpIlaAlPlF0ywbn+UX3jpzP
-4UDSEVDFNMFJgKnj0F/l4xJ26PFZfPSQpMBAFC9Lqd2DtIMdZJ58K0zm4BIyiZpV
-Hn2nokzlH6l1Qs8nqXS7VOM3puE6S4QUQrh90cczYfXoWOzocwdpkV77o9o/Sius
-rSk56yhJWw2x+CBUmUb1FbRGT9CgFZXHvp9LtO3/bhvNdJR6W+PR3/CkV8gvViNM
-6YFKQJKS82vB/96/Cs1in/PDD/Uu9UQPLO5HHTYzuZTs0t61H4x5S2iXEHFhrXCM
-+bRFkHkEdqr+sGpIVJ1CYz6ZYPmhfaFngawXa40x+bdZ974W1YhENrpJvV0Bp2er
-gU41bW9yiSinKPBLg5lUCL8ao0tzr3jDUaUpHvNPmxc9S6VWNrNlxc7hnodjPbU/
-HVXSSu724JjtsLsCJZom
-=CS/Q
------END PGP SIGNATURE-----
-
---MylRbFvm7f3Nf4pFr7houRHpfTRFy8zMo--
-
-
---===============5445845871187451309==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5445845871187451309==--
+T24gV2VkLCBGZWIgMjEsIDIwMTggYXQgMDg6NDg6MjBBTSAtMDUwMCwgQm9yaXMgT3N0cm92c2t5
+IHdyb3RlOgo+IE9uIDAyLzIxLzIwMTggMDM6MjcgQU0sIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6
+Cj4gPiBPbiBUdWUsIEZlYiAyMCwgMjAxOCBhdCAwNzoyMzo0NFBNIC0wNTAwLCBCb3JpcyBPc3Ry
+b3Zza3kgd3JvdGU6Cj4gPj4gT24gMDIvMjAvMjAxOCAwMzo1NiBBTSwgUm9nZXIgUGF1IE1vbm5l
+IHdyb3RlOgo+ID4+PiBBdCB0aGUgbW9tZW50IHRoaXMgaXMgY3VycmVudGx5IHNldCBhdCBWTUN7
+Uy9CfSBjcmVhdGlvbiBhbmQgbm90IGNoYW5nZWQsCj4gPj4+IGJ1dCBmdXJ0aGVyIHBhdGNoZXMg
+YXJlIGdvaW5nIHRvIGNoYW5nZSB0aGUgQ1I0IG1hc2sgYXQgcnVudGltZS4KPiA+Pj4KPiA+Pj4g
+U2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4g
+Pj4+IC0tLQo+ID4+PiBDYzogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xl
+LmNvbT4KPiA+Pj4gQ2M6IFN1cmF2ZWUgU3V0aGlrdWxwYW5pdCA8c3VyYXZlZS5zdXRoaWt1bHBh
+bml0QGFtZC5jb20+Cj4gPj4+IENjOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4g
+Pj4+IENjOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgo+ID4+PiBD
+YzogSnVuIE5ha2FqaW1hIDxqdW4ubmFrYWppbWFAaW50ZWwuY29tPgo+ID4+PiBDYzogS2V2aW4g
+VGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+Cj4gPj4+IC0tLQo+ID4+PiBDaGFuZ2VzIHNpbmNl
+IHYyOgo+ID4+PiAgLSBJbnRyb2R1Y2UgbWFza3Mgb25seSBmb3IgQ1I0IGFuZCBDUjAuCj4gPj4+
+Cj4gPj4+IENoYW5nZXMgc2luY2UgdjE6Cj4gPj4+ICAtIE5ldyBpbiB0aGlzIHZlcnNpb24uCj4g
+Pj4+IC0tLQo+ID4+PiAgeGVuL2FyY2gveDg2L2h2bS9zdm0vdm1jYi5jICAgIHwgMSArCj4gPj4+
+ICB4ZW4vYXJjaC94ODYvaHZtL3ZteC92bWNzLmMgICAgfCAxICsKPiA+Pj4gIHhlbi9pbmNsdWRl
+L2FzbS14ODYvaHZtL3ZjcHUuaCB8IDQgKysrKwo+ID4+PiAgMyBmaWxlcyBjaGFuZ2VkLCA2IGlu
+c2VydGlvbnMoKykKPiA+Pj4KPiA+Pj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9odm0vc3Zt
+L3ZtY2IuYyBiL3hlbi9hcmNoL3g4Ni9odm0vc3ZtL3ZtY2IuYwo+ID4+PiBpbmRleCAwZTZjYmE1
+YjdiLi5iZWVhZmFkMjM1IDEwMDY0NAo+ID4+PiAtLS0gYS94ZW4vYXJjaC94ODYvaHZtL3N2bS92
+bWNiLmMKPiA+Pj4gKysrIGIveGVuL2FyY2gveDg2L2h2bS9zdm0vdm1jYi5jCj4gPj4+IEBAIC0x
+NjksNiArMTY5LDcgQEAgc3RhdGljIGludCBjb25zdHJ1Y3Rfdm1jYihzdHJ1Y3QgdmNwdSAqdikK
+PiA+Pj4gICAgICB2bWNiLT50ci5iYXNlID0gMDsKPiA+Pj4gICAgICB2bWNiLT50ci5saW1pdCA9
+IDB4ZmY7Cj4gPj4+ICAKPiA+Pj4gKyAgICB2LT5hcmNoLmh2bV92Y3B1LmNyMF9ob3N0X21hc2sg
+PSB2LT5hcmNoLmh2bV92Y3B1LmNyNF9ob3N0X21hc2sgPSB+MFVMOwo+ID4+PiAgICAgIHYtPmFy
+Y2guaHZtX3ZjcHUuZ3Vlc3RfY3JbMF0gPSBYODZfQ1IwX1BFIHwgWDg2X0NSMF9FVDsKPiA+Pj4g
+ICAgICBodm1fdXBkYXRlX2d1ZXN0X2NyKHYsIDApOwo+ID4+Cj4gPj4gSXMgdGhlcmUgYSByZWFz
+b24gZm9yIHNldHRpbmcgdGhvc2UgZmllbGRzPyBTVk0gd29uJ3QgdXNlIHRoZW0sIHdpbGwgaXQ/
+Cj4gPiBObywgU1ZNIHdvbid0IHVzZSB0aGVtIGJ1dCBJTUhPIGl0J3MgZ29vZCBmb3IgY29oZXJl
+bmN5IHRvIGFsc28gc2V0Cj4gPiB0aGVtLiBUaGUgaW5pdGlhbCBwbGFuIHdhcyB0byBkbyBzb21l
+dGhpbmcgc2ltaWxhciBmb3IgU1ZNLCBidXQgSQo+ID4gY291bGRuJ3QgZmluZCBob3cgdG8gZG8g
+c2VsZWN0aXZlIENSNCB0cmFwcGluZyBmb3IgU1ZNLgo+ID4KPiA+IEkgY291bGQgbW92ZSB0aGlz
+IGluc2lkZSBvZiBhcmNoX3ZteF9zdHJ1Y3QgaWYgaXQgc2VlbXMgYmV0dGVyLCBidXQgSQo+ID4g
+d2FzIGV4cGVjdGluZyB0byBiZSBhYmxlIHRvIGRvIHNvbWV0aGluZyBzaW1pbGFyIGZvciBTVk0g
+aW4gb3JkZXIgdG8KPiA+IGF2b2lkIG5lZWRsZXNzbHkgdHJhcHBpbmcgQ1I0Lgo+IAo+IEkgZG9u
+J3QgYmVsaWV2ZSBTVk0gaGFzIGEgc2ltaWxhciBmZWF0dXJlLiBUaGUgY2xvc2VzdCBpdCBjb21l
+cyB0byB0aGlzCj4gaXMgY2xlYW4gYml0cywgYnV0IHRoYXQncyBzdGlsbCByYXRoZXIgZGlmZmVy
+ZW50Lgo+IAo+IFNvIGl0IHNlZW1zIHRvIG1lIHlvdSBhcmUgdGFyZ2V0aW5nIHNvbWV0aGluZyB2
+ZXJ5IG11Y2ggVk1YLXNwZWNpZmljIGFuZAo+IHNvIEkgdGhpbmsgaXQgc2hvdWxkIGluZGVlZCBi
+ZSBwYXJ0IG9mIGFyY2hfdm14X3N0cnVjdC4KClRoYW5rcywgd2lsbCBjaGFuZ2UgdGhhdCBhbmQg
+d2FpdCBmb3IgZnVydGhlciBmZWVkYmFjayBiZWZvcmUKcmVzZW5kaW5nLgoKUm9nZXIuCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
