@@ -1,26 +1,16 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH 1/9] drm/xen-front: Introduce Xen
- para-virtualized frontend driver
-Date: Wed, 21 Feb 2018 12:25:18 +0200
-Message-ID: <5f63a82b-10f5-4588-e885-1cba898f5ecf__32227.3180856884$1519208655$gmane$org@gmail.com>
-References: <1519200222-20623-1-git-send-email-andr2000@gmail.com>
- <1519200222-20623-2-git-send-email-andr2000@gmail.com>
- <20180221091751.ebczu3kzv6j7zykp@MacBook-Pro-de-Roger.local>
- <8caebdda-47ac-a1d8-73d2-7b889c997a5a@gmail.com>
- <20180221101948.4rkpgu4p2vqe7dut@MacBook-Pro-de-Roger.local>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-coverity test] 119806: regressions - ALL
+	FAIL
+Date: Wed, 21 Feb 2018 10:25:22 +0000
+Message-ID: <osstest-119806-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1176030737482314769=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=gwr2=fp=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1eoRaV-0004Kb-Bj
- for xen-devel@lists.xenproject.org; Wed, 21 Feb 2018 10:25:23 +0000
-Received: by mail-lf0-x229.google.com with SMTP id y19so1604472lfd.4
- for <xen-devel@lists.xenproject.org>; Wed, 21 Feb 2018 02:25:21 -0800 (PST)
-In-Reply-To: <20180221101948.4rkpgu4p2vqe7dut@MacBook-Pro-de-Roger.local>
-Content-Language: en-US
+ <srs0=foxx=fp=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1eoRah-0004ME-2w
+ for xen-devel@lists.xenproject.org; Wed, 21 Feb 2018 10:25:35 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,73 +19,220 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: jgross@suse.com, airlied@linux.ie, gustavo@padovan.org, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, seanpaul@chromium.org, daniel.vetter@intel.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDIvMjEvMjAxOCAxMjoxOSBQTSwgUm9nZXIgUGF1IE1vbm7DqSB3cm90ZToKPiBPbiBXZWQs
-IEZlYiAyMSwgMjAxOCBhdCAxMTo0MjoyM0FNICswMjAwLCBPbGVrc2FuZHIgQW5kcnVzaGNoZW5r
-byB3cm90ZToKPj4gT24gMDIvMjEvMjAxOCAxMToxNyBBTSwgUm9nZXIgUGF1IE1vbm7DqSB3cm90
-ZToKPj4+IE9uIFdlZCwgRmViIDIxLCAyMDE4IGF0IDEwOjAzOjM0QU0gKzAyMDAsIE9sZWtzYW5k
-ciBBbmRydXNoY2hlbmtvIHdyb3RlOgo+Pj4+IC0tLSAvZGV2L251bGwKPj4+PiArKysgYi9kcml2
-ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnQuYwo+Pj4+IEBAIC0wLDAgKzEsODMgQEAKPj4+
-PiArLyoKPj4+PiArICogIFhlbiBwYXJhLXZpcnR1YWwgRFJNIGRldmljZQo+Pj4+ICsgKgo+Pj4+
-ICsgKiAgIFRoaXMgcHJvZ3JhbSBpcyBmcmVlIHNvZnR3YXJlOyB5b3UgY2FuIHJlZGlzdHJpYnV0
-ZSBpdCBhbmQvb3IgbW9kaWZ5Cj4+Pj4gKyAqICAgaXQgdW5kZXIgdGhlIHRlcm1zIG9mIHRoZSBH
-TlUgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBhcyBwdWJsaXNoZWQgYnkKPj4+PiArICogICB0aGUg
-RnJlZSBTb2Z0d2FyZSBGb3VuZGF0aW9uOyBlaXRoZXIgdmVyc2lvbiAyIG9mIHRoZSBMaWNlbnNl
-LCBvcgo+Pj4+ICsgKiAgIChhdCB5b3VyIG9wdGlvbikgYW55IGxhdGVyIHZlcnNpb24uCj4+Pj4g
-KyAqCj4+Pj4gKyAqICAgVGhpcyBwcm9ncmFtIGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRo
-YXQgaXQgd2lsbCBiZSB1c2VmdWwsCj4+Pj4gKyAqICAgYnV0IFdJVEhPVVQgQU5ZIFdBUlJBTlRZ
-OyB3aXRob3V0IGV2ZW4gdGhlIGltcGxpZWQgd2FycmFudHkgb2YKPj4+PiArICogICBNRVJDSEFO
-VEFCSUxJVFkgb3IgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuICBTZWUgdGhlCj4+
-Pj4gKyAqICAgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4KPj4+
-IE1vc3QgWGVuIGRyaXZlcnMgaW4gTGludXggdXNlIGEgZHVhbCBHUEwvQlNEIGxpY2Vuc2UsIHNv
-IHRoYXQgdGhleSBjYW4KPj4+IGJlIGltcG9ydGVkIGludG8gb3RoZXIgbm9uIEdQTCBPU2VzOgo+
-Pj4KPj4+IFRoaXMgcHJvZ3JhbSBpcyBmcmVlIHNvZnR3YXJlOyB5b3UgY2FuIHJlZGlzdHJpYnV0
-ZSBpdCBhbmQvb3IKPj4+IG1vZGlmeSBpdCB1bmRlciB0aGUgdGVybXMgb2YgdGhlIEdOVSBHZW5l
-cmFsIFB1YmxpYyBMaWNlbnNlIHZlcnNpb24gMgo+Pj4gYXMgcHVibGlzaGVkIGJ5IHRoZSBGcmVl
-IFNvZnR3YXJlIEZvdW5kYXRpb247IG9yLCB3aGVuIGRpc3RyaWJ1dGVkCj4+PiBzZXBhcmF0ZWx5
-IGZyb20gdGhlIExpbnV4IGtlcm5lbCBvciBpbmNvcnBvcmF0ZWQgaW50byBvdGhlcgo+Pj4gc29m
-dHdhcmUgcGFja2FnZXMsIHN1YmplY3QgdG8gdGhlIGZvbGxvd2luZyBsaWNlbnNlOgo+Pj4KPj4+
-IFBlcm1pc3Npb24gaXMgaGVyZWJ5IGdyYW50ZWQsIGZyZWUgb2YgY2hhcmdlLCB0byBhbnkgcGVy
-c29uIG9idGFpbmluZyBhIGNvcHkKPj4+IG9mIHRoaXMgc291cmNlIGZpbGUgKHRoZSAiU29mdHdh
-cmUiKSwgdG8gZGVhbCBpbiB0aGUgU29mdHdhcmUgd2l0aG91dAo+Pj4gcmVzdHJpY3Rpb24sIGlu
-Y2x1ZGluZyB3aXRob3V0IGxpbWl0YXRpb24gdGhlIHJpZ2h0cyB0byB1c2UsIGNvcHksIG1vZGlm
-eSwKPj4+IG1lcmdlLCBwdWJsaXNoLCBkaXN0cmlidXRlLCBzdWJsaWNlbnNlLCBhbmQvb3Igc2Vs
-bCBjb3BpZXMgb2YgdGhlIFNvZnR3YXJlLAo+Pj4gYW5kIHRvIHBlcm1pdCBwZXJzb25zIHRvIHdo
-b20gdGhlIFNvZnR3YXJlIGlzIGZ1cm5pc2hlZCB0byBkbyBzbywgc3ViamVjdCB0bwo+Pj4gdGhl
-IGZvbGxvd2luZyBjb25kaXRpb25zOgo+Pj4KPj4+IFRoZSBhYm92ZSBjb3B5cmlnaHQgbm90aWNl
-IGFuZCB0aGlzIHBlcm1pc3Npb24gbm90aWNlIHNoYWxsIGJlIGluY2x1ZGVkIGluCj4+PiBhbGwg
-Y29waWVzIG9yIHN1YnN0YW50aWFsIHBvcnRpb25zIG9mIHRoZSBTb2Z0d2FyZS4KPj4+Cj4+PiBU
-SEUgU09GVFdBUkUgSVMgUFJPVklERUQgIkFTIElTIiwgV0lUSE9VVCBXQVJSQU5UWSBPRiBBTlkg
-S0lORCwgRVhQUkVTUyBPUgo+Pj4gSU1QTElFRCwgSU5DTFVESU5HIEJVVCBOT1QgTElNSVRFRCBU
-TyBUSEUgV0FSUkFOVElFUyBPRiBNRVJDSEFOVEFCSUxJVFksCj4+PiBGSVRORVNTIEZPUiBBIFBB
-UlRJQ1VMQVIgUFVSUE9TRSBBTkQgTk9OSU5GUklOR0VNRU5ULiBJTiBOTyBFVkVOVCBTSEFMTCBU
-SEUKPj4+IEFVVEhPUlMgT1IgQ09QWVJJR0hUIEhPTERFUlMgQkUgTElBQkxFIEZPUiBBTlkgQ0xB
-SU0sIERBTUFHRVMgT1IgT1RIRVIKPj4+IExJQUJJTElUWSwgV0hFVEhFUiBJTiBBTiBBQ1RJT04g
-T0YgQ09OVFJBQ1QsIFRPUlQgT1IgT1RIRVJXSVNFLCBBUklTSU5HCj4+PiBGUk9NLCBPVVQgT0Yg
-T1IgSU4gQ09OTkVDVElPTiBXSVRIIFRIRSBTT0ZUV0FSRSBPUiBUSEUgVVNFIE9SIE9USEVSIERF
-QUxJTkdTCj4+PiBJTiBUSEUgU09GVFdBUkUuCj4+Pgo+Pj4gSU1PIGl0IHdvdWxkIGJlIGdvb2Qg
-dG8gcmVsZWFzZSB0aGlzIGRyaXZlciB1bmRlciB0aGUgc2FtZSBsaWNlbnNlLCBzbwo+Pj4gaXQg
-Y2FuIGJlIGluY29ycG9yYXRlZCBpbnRvIG90aGVyIE9TZXMuCj4+IEkgYW0gaW4gYW55IHdheSBl
-eHBlcnQgaW4gbGljZW5zaW5nLCBidXQgdGhlIGFib3ZlIHNlZW1zIHRvIGJlCj4+IC8qIFNQRFgt
-TGljZW5zZS1JZGVudGlmaWVyOiAoR1BMLTIuMCBPUiBNSVQpICovCj4+IEF0IGxlYXN0IHRoaXMg
-aXMgd2hhdCBJIHNlZSBhdCBbMV0gZm9yIE1JVC4KPj4gQ291bGQgeW91IHBsZWFzZSB0ZWxsIHdo
-aWNoIGxpY2Vuc2UocykgYXMgbGlzdGVkIGF0IFsxXQo+PiB3b3VsZCBiZSBhcHByb3ByaWF0ZSBm
-b3IgWGVuIGRyaXZlcnMgaW4gdGVybXMgb2YgaG93IGl0IGlzCj4+IGV4cGVjdGVkIHRvIGFwcGVh
-ciBpbiB0aGUga2VybmVsIGNvZGUsIGUuZy4gZXhwZWN0ZWQKPj4gU1BEWC1MaWNlbnNlLUlkZW50
-aWZpZXI/Cj4gSSB3b3VsZCBiZSBmaW5lIHdpdGggYW55dGhpbmcgTUlUL0JTRC0qL0FwYWNoZS0q
-IGxpa2UuIEluIHRoZSBYZW4KPiBjb21tdW5pdHkgd2UgaGF2ZSBnZW5lcmFsbHkgZG9uZSBkdWFs
-IEdQTC0yLjAgTUlULCBzbyB5b3VyIHByb3Bvc2VkCj4gdGFnIGxvb2tzIGZpbmUgSU1PIChJIHdv
-dWxkIGFsc28gcGVyc29uYWxseSBiZSBmaW5lIHdpdGgKPiBNSVQvQlNELSovQXBhY2hlLSogb25s
-eSkuCk9rLCB0aGVuIEkgYW0gYWJvdXQgdG8gdXNlIC8qIFNQRFgtTGljZW5zZS1JZGVudGlmaWVy
-OiAoR1BMLTIuMCBPUiBNSVQpICovCj4KPiBUaGUgcG9pbnQgaXMgdGhhdCBpdCB3b3VsZCBiZSBn
-b29kIHRvIGhhdmUgdGhlIGNvZGUgdW5kZXIgYSBtb3JlCj4gcGVybWlzc2l2ZSBsaWNlbnNlIHNv
-IGl0IGNhbiBiZSBpbnRlZ3JhdGVkIGludG8gbm9uIEdQTCBPU2VzIGluIHRoZQo+IGZ1dHVyZSBp
-ZiBuZWVkZWQsIGFuZCB0aGF0IHlvdXIgY29kZSBjb3VsZCBiZSB1c2VkIGFzIGEgcmVmZXJlbmNl
-IGZvcgo+IHRoYXQuClRoYXQgaXMgY2xlYXIsIG5vIG9iamVjdGlvbnMKPiBUaGFua3MsIFJvZ2Vy
-LgpUaGFuayB5b3UsCk9sZWtzYW5kcgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+--===============1176030737482314769==
+Content-Type: text/plain
+
+flight 119806 xen-unstable-coverity real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/119806/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ coverity-amd64                7 coverity-upload          fail REGR. vs. 119558
+
+version targeted for testing:
+ xen                  23b40df6f098e3bcb2f105a4909860240976e40f
+baseline version:
+ xen                  24470b99c1671dca531c2cf5747eda2f8892ecbc
+
+Last test of basis   119558  2018-02-18 09:47:32 Z    3 days
+Testing same since   119806  2018-02-21 09:29:16 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Alexandru Isaila <aisaila@bitdefender.com>
+  Andrew Cooper <andrew.cooper3@citix.com>
+  Dario Faggioli <dfaggioli@suse.com>
+  Igor Druzhinin <igor.druzhinin@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Julien Grall <julien.grall@arm.com>
+  Razvan Cojocaru <rcojocaru@bitdefender.com>
+  Sergey Dyasli <sergey.dyasli@citrix.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ coverity-amd64                                               fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit 23b40df6f098e3bcb2f105a4909860240976e40f
+Author: Julien Grall <julien.grall@arm.com>
+Date:   Fri Feb 16 14:59:56 2018 +0000
+
+    xen/arm: vgic: Make sure the number of SPIs is a multiple of 32
+    
+    The vGIC relies on having a pending_irq available for every IRQs
+    described in the ranks. As each rank describes 32 interrupts, we need to
+    make sure the number of SPIs is a multiple of 32.
+    
+    Reported-by: Jeff Kubascik <Jeff.Kubascik@dornerworks.com>
+    Signed-off-by: Julien Grall <julien.grall@arm.com>
+    Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+    Cc: Jarvis Roach <Jarvis.Roach@dornerworks.com>
+
+commit 454ae490487659a51d71adc77aa02892d0725235
+Author: Alexandru Isaila <aisaila@bitdefender.com>
+Date:   Mon Feb 19 15:07:06 2018 +0200
+
+    asm-x86/monitor: Add MONITOR_EVENT_INTERRUPT to common capabilities
+    
+    Signed-off-by: Alexandru Isaila <aisaila@bitdefender.com>
+    Acked-by: Razvan Cojocaru <rcojocaru@bitdefender.com>
+
+commit 197fbdb501257fdbbe0cfed35e3a99ef5b166107
+Author: Sergey Dyasli <sergey.dyasli@citrix.com>
+Date:   Mon Feb 19 11:29:26 2018 +0000
+
+    x86/msr: add Raw and Host domain policies
+    
+    Raw policy contains the actual values from H/W MSRs. Add PLATFORM_INFO
+    msr to the policy during probe_cpuid_faulting().
+    
+    Host policy may have certain features disabled if Xen decides not
+    to use them. For now, make Host policy equal to Raw policy with
+    cpuid_faulting availability dependent on X86_FEATURE_CPUID_FAULTING.
+    
+    Finally, derive HVM/PV max domain policies from the Host policy.
+    
+    Signed-off-by: Sergey Dyasli <sergey.dyasli@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit a44f1697968e04fcc6145e3bd51c748b57047240
+Author: Igor Druzhinin <igor.druzhinin@citrix.com>
+Date:   Tue Feb 20 10:16:56 2018 +0100
+
+    x86/nmi: start NMI watchdog on CPU0 after SMP bootstrap
+    
+    We're noticing a reproducible system boot hang on certain
+    Skylake platforms where the BIOS is configured in legacy
+    boot mode with x2APIC disabled. The system stalls immediately
+    after writing the first SMP initialization sequence into APIC ICR.
+    
+    The cause of the problem is watchdog NMI handler execution -
+    somewhere near the end of NMI handling (after it's already
+    rescheduled the next NMI) it tries to access IO port 0x61
+    to get the actual NMI reason on CPU0. Unfortunately, this
+    port is emulated by BIOS using SMIs and this emulation for
+    some reason takes more time than we expect during INIT-SIPI-SIPI
+    sequence. As the result, the system is constantly moving between
+    NMI and SMI handler and not making any progress.
+    
+    To avoid this, initialize the watchdog after SMP bootstrap on
+    CPU0 and, additionally, protect the NMI handler by moving
+    IO port access before NMI re-scheduling. The latter should also
+    help in case of post boot CPU onlining. Although we're running
+    watchdog at much lower frequency at this point, it's neveretheless
+    possible we may trigger the issue anyway.
+    
+    Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 682b13c259e531f6848f535032c256ec8fcaca71
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Tue Feb 20 10:10:59 2018 +0100
+
+    shim: allow building of just the shim with build-ID-incapable linker
+    
+    The ELF note the shim build inserts causes mkelf32 to choke on the
+    second program header. However, the output of mkelf32 isn't really
+    needed when building inside tools/firmware/ - an attempt to build it is
+    made solely because of a wrong dependency.
+    
+    Further changes to the make logic will be needed to also allow building
+    a shim-enabled "normal" xen with such a linker (as it looks the --notes
+    option will need passing not just when the linker support build ID
+    generation).
+    
+    Also drop a stray variable setting from the x86 Makefile.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 8f9ccfe93570ecae18d9cc224931787d0bca9c66
+Author: Dario Faggioli <dfaggioli@suse.com>
+Date:   Fri Feb 16 19:38:48 2018 +0100
+
+    tools: libxenstat: fix format string overflow
+    
+    With gcc 7.3.0, the build fails like this:
+    
+    src/xenstat_linux.c: In function ‘getBridge’
+    src/xenstat_linux.c:78:34: warning: ‘%s’ directive writing up to 255 bytes into a region of size 241 [-Wformat-overflow=]
+         sprintf(tmp, "/sys/class/net/%s/bridge", de->d_name);
+                                      ^~
+    src/xenstat_linux.c:78:5: note: ‘sprintf’ output between 23 and 278 bytes into a destination of size 256
+         sprintf(tmp, "/sys/class/net/%s/bridge", de->d_name);
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    Fix by making the buffer bigger.
+    
+    Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit d3b230fc46ee9853064e167f6cb4da8ea0a08112
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Mon Feb 19 14:00:31 2018 +0100
+
+    shut down domain when last vCPU goes down
+    
+    I've just had to deal with an early boot crash of Linux which occurred
+    so early that even "earlyprintk=xen" did not produce any useful output.
+    Hence the domain appeared to hang, while in fact it had brought down its
+    only vCPU. By translating this to a shutdown, the situation will be
+    better recognizable.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+
+commit 0091daa9d911995327ef92c3ce663c3c569c8c6e
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Mon Feb 19 13:59:37 2018 +0100
+
+    x86/PV: avoid indirect call/thunk in I/O emulation
+    
+    The stub is within reach from the .text section, so there's no point
+    using an indirect call here. This has the added benefit of there no
+    longer being two sufficiently different approaches, breaking one of
+    which people may not even notice.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Andrew Cooper <andrew.cooper3@citix.com>
+(qemu changes not included)
+
+
+--===============1176030737482314769==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1176030737482314769==--
