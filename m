@@ -1,15 +1,14 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH] domctl: revert double increment of domctl
-	version
-Date: Wed, 21 Feb 2018 19:14:50 +0100
-Message-ID: <20180221191450.5a693de1.olaf@aepfle.de>
-References: <20180221173422.10550-1-olaf@aepfle.de>
- <20180221173802.4asubsivkejs2ihy@citrix.com>
- <af2837e6-93dc-4552-ca3c-5e1e50c05cc0@citrix.com>
+From: George Dunlap <dunlapg@umich.edu>
+Subject: Re: [PATCH RFC v2] x86/domctl: Don't pause the whole
+ domain if only getting vcpu state
+Date: Wed, 21 Feb 2018 18:24:55 +0000
+Message-ID: <CAFLBxZYDUJ5PkdByx=Y9RAgWeseGBNiY_6083Pjcu2Z+ugbZkA@mail.gmail.com>
+References: <1507284150-4985-1-git-send-email-aisaila@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7574976692906893081=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <af2837e6-93dc-4552-ca3c-5e1e50c05cc0@citrix.com>
+In-Reply-To: <1507284150-4985-1-git-send-email-aisaila@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,52 +17,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>
+To: Alexandru Isaila <aisaila@bitdefender.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7574976692906893081==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/7kSo28F_=cG=X=JmXyZ=Irp"; protocol="application/pgp-signature"
-
---Sig_/7kSo28F_=cG=X=JmXyZ=Irp
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Wed, 21 Feb 2018 17:53:54 +0000
-schrieb Andrew Cooper <andrew.cooper3@citrix.com>:
-
-> I continue to think that this is a mistake (which is backed up by
-> everyone else being confused about what is going on), and demonstrates
-> the ineffectiveness of the *_INTERFACE_VERSIONS in general.
-
-Well, my change was cosmetic anyway.
-I'm updating valgrind and noticed this small inconsistency in staging.
-
-Olaf
-
---Sig_/7kSo28F_=cG=X=JmXyZ=Irp
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWo23GgAKCRBdQqD6ppg2
-fgNWAKDEi48dP1sSVTmWrMKagWS1yEir9wCfV/b0BWozc3noTP6+BuiwmApFSXM=
-=6+Bc
------END PGP SIGNATURE-----
-
---Sig_/7kSo28F_=cG=X=JmXyZ=Irp--
-
-
---===============7574976692906893081==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+T24gRnJpLCBPY3QgNiwgMjAxNyBhdCAxMTowMiBBTSwgQWxleGFuZHJ1IElzYWlsYQo8YWlzYWls
+YUBiaXRkZWZlbmRlci5jb20+IHdyb3RlOgo+IFRoaXMgcGF0Y2ggYWRkcyB0aGUgaHZtX3NhdmVf
+b25lX2NwdV9jdHh0KCkgZnVuY3Rpb24uCj4gSXQgb3B0aW1pemVzIGJ5IG9ubHkgcGF1c2luZyB0
+aGUgdmNwdSBvbiBhbGwgSFZNU1JfUEVSX1ZDUFUgc2F2ZQo+IGNhbGxiYWNrcyB3aGVyZSBvbmx5
+IGRhdGEgZm9yIG9uZSBWQ1BVIGlzIHJlcXVpcmVkLgoKU29ycnkgaXQncyB0YWtlbiBzbyBsb25n
+IHRvIGdldCBiYWNrIHRvIHlvdSBvbiB0aGlzIG9uZS4KClNvIGZpcnN0IG9mIGFsbCwgYSBiaWcg
+aXNzdWUgd2l0aCB0aGlzIHBhdGNoIGluIGdlbmVyYWwgaXMgdGhhdAp0aGVyZSdzIHdheSB0b28g
+bXVjaCBjb2RlIGR1cGxpY2F0aW9uLiAgRHVwbGljYXRpbmcgdGhlIGNvZGUgaW4gZXZlcnkKY2Fz
+ZSB3aWxsIG5vdCBvbmx5IGluY3JlYXNlIEhWIGNvZGUgc2l6ZSBhbmQgZGVjcmVhc2UgY2FjaGUK
+ZWZmZWN0aXZlbmVzcywgaXQgd2lsbCBhbHNvIGluY3JlYXNlIHRoZSBsaWtlbGlob29kIG9mIHN1
+YnRsZSBidWdzCmNyZWVwaW5nIGluIHdoZW4gdGhlIHR3byBjb3BpZXMgZG9uJ3QgbWF0Y2ggdXAu
+ICBJZiB5b3Ugd2VyZSBnb2luZyB0bwpkbyBpdCB0aGlzIHdheSBJIHRoaW5rIHlvdSdkIGJhc2lj
+YWxseSBoYXZlIHRvIG1ha2UgYSAqX3NhdmVfKl9vbmUoKQpmdW5jdGlvbiBmb3IgZWFjaCBjYWxs
+YmFjay4KClRoZSBvbmx5IG90aGVyIG9wdGlvbiB3b3VsZCBiZSB0byBwYXNzIGEgY3B1bWFzayBp
+bnN0ZWFkLCBhbmQgc2V0CmVpdGhlciBhIHNpbmdsZSBiaXQgb3IgYWxsIHRoZSBiaXRzOyBidXQg
+dGhhdCBzZWVtcyBhIGJpdCB3YXN0ZWZ1bC4KKEphbiwgQW5keSAtLSBpZiB5b3UgZG9uJ3QgbGlr
+ZSB0aGlzIHNvbHV0aW9uLCBub3cgaXMgdGhlIHRpbWUgdG8gc2F5CnNvLikKCkhvd2V2ZXIgLS0g
+d2hvbGUgcGF1c2luZyBvbmx5IG9uZSB2Y3B1IGZvciByZWdpc3RlciBzdGF0ZSBzaG91bGQgYmUK
+ZmluZSwgYXJlIHlvdSBzdXJlIHRoYXQgaXQncyBmaW5lIGZvciBhbGwgdGhlIG90aGVyIGNhbGxi
+YWNrcz8gIEkuZS4sCmFyZSB5b3Ugc3VyZSB0aGF0IHRoZXJlIGFyZSBubyBpbnN0YW5jZXMgd2hl
+cmUgdmNwdSBOIHdpbGwgZGlyZWN0bHkKbW9kaWZ5IHZjcHUgTSdzIGVudHJ5IGluIGEgd2F5IHRo
+YXQgd2lsbCBnaXZlIHlvdSBhbiBpbmNvbnNpc3RlbnQgc2F2ZQpyZWNvcmQ/CgpJZiBzbywgeW91
+IHNob3VsZCBtZW50aW9uIGl0IGluIHRoZSBjb21taXQgbWVzc2FnZTsgb3RoZXJ3aXNlLCBpdApt
+aWdodCBiZSBiZXR0ZXIgdG8gbWFrZSB0aGlzIG9ubHkgZm9yIHRoZSBjcHUgY29udGV4dCAoc2lu
+Y2UgdGhhdApzZWVtcyB0byBiZSB3aGF0IHlvdSdyZSBtb3N0bHkgaW50ZXJlc3RlZCBpbikuCgpG
+dXJ0aGVyIGNvbW1lbnRzIGJlbG93Li4uCgo+IC1zdGF0aWMgaW50IGh2bV9zYXZlX2NwdV9jdHh0
+KHN0cnVjdCBkb21haW4gKmQsIGh2bV9kb21haW5fY29udGV4dF90ICpoKQo+ICt2b2lkIGh2bV9z
+YXZlX29uZV9jcHVfY3R4dChzdHJ1Y3QgdmNwdSAqdiwgc3RydWN0IGh2bV9od19jcHUgKmN0eHQp
+CgpJJ2QgY2FsbCB0aGlzIGh2bV9zYXZlX2NwdV9jdHh0X29uZSgpICAod2l0aCB0aGUgX29uZSBh
+dCB0aGUgZW5kKTsKc2FtZSB3aXRoIGFsbCB0aGUgb3RoZXIgc2luZ2xldG9uIGNhbGxiYWNrcy4K
+Cj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9odm0vc2F2ZS5jIGIveGVuL2FyY2gveDg2L2h2
+bS9zYXZlLmMKPiBpbmRleCA4OTg0YTIzLi45N2I1NmY3IDEwMDY0NAo+IC0tLSBhL3hlbi9hcmNo
+L3g4Ni9odm0vc2F2ZS5jCj4gKysrIGIveGVuL2FyY2gveDg2L2h2bS9zYXZlLmMKPiBAQCAtMTM4
+LDYgKzEzOCw3IEBAIGludCBodm1fc2F2ZV9vbmUoc3RydWN0IGRvbWFpbiAqZCwgdW5zaWduZWQg
+aW50IHR5cGVjb2RlLCB1bnNpZ25lZCBpbnQgaW5zdGFuY2UsCj4gICAgICBpbnQgcnY7Cj4gICAg
+ICBodm1fZG9tYWluX2NvbnRleHRfdCBjdHh0ID0geyB9Owo+ICAgICAgY29uc3Qgc3RydWN0IGh2
+bV9zYXZlX2Rlc2NyaXB0b3IgKmRlc2M7Cj4gKyAgICBib29sIGlzX3NpbmdsZV9pbnN0YW5jZSA9
+IGZhbHNlOwoKQXMgZmFyIGFzIEkgY2FuIHRlbGwgaXMgbW9zdGx5IHVubmVjZXNzYXJ5IC0tIGlm
+IHlvdSBsb29rIGF0IHRoZQpvcmlnaW5hbCBjb2RlLCB0aGUgcmF0aGVyIHdvbmt5IGFsZ29yaXRo
+bSBpczoKCiogUGF1c2UgYWxsIHZjcHVzCiogQ29sbGVjdCBkYXRhIGZvciBhbGwgdmNwdXMKKiBM
+b29wIG92ZXIgdGhpcyBkYXRhIHVudGlsIHdlIGZpbmQgb25lIHdob3NlIGluc3RhbmNlIGlkIG1h
+dGNoZXMgdGhlCm9uZSB3ZSdyZSBsb29raW5nIGZvciwgYW5kIGNvcHkgaXQgb3V0LgoqIFVucGF1
+c2UgYWxsIHZjcHVzCgpJbiBvdGhlciB3b3JkcywgaHZtX3NhdmVfb25lKCksIGFzIHRoZSBuYW1l
+IHN1Z2dlc3RzLCBvbmx5IGNvcGllcyBhCnNpbmdsZSBpbnN0YW5jZSBhbnl3YXkuICBJZiBhbnlv
+bmUgZXZlciBwYXNzZWQgZC0+bWF4X3ZjcHVzLCB0aGVuCm5vdGhpbmcgd291bGQgYmUgY29waWVk
+IChzaW5jZSBub25lIG9mIHRoZSBpbmRpdmlkdWFsIHJlY29yZHMgd291bGQKZXZlciBtYXRjaCB0
+aGF0ICJpbnN0YW5jZSIpLgoKWW91IHdpbGwgbmVlZCB0byBwYXVzZSB0aGUgd2hvbGUgZG9tYWlu
+IGZvciBjYWxsYmFja3Mgbm90IG9mIHR5cGUKSFZNU1JfUEVSX1ZDUFU7IGJ1dCBpbiBhbnkgY2Fz
+ZSB5b3UnbGwgb25seSBldmVyIGhhdmUgdG8gY29weSBhIHNpbmdsZQpyZWNvcmQuICBTbyB5b3Ug
+Y2FuIGp1c3QgcmUtd3JpdGUgdGhpcyBmdW5jdGlvbiB3aXRob3V0IHRoZSBsb29wLCBub3cKdGhh
+dCB3ZSBoYXZlIGEgd2F5IHRvIGFzayB0aGUgaW5kaXZpZHVhbCBjYWxsYmFja3MgZm9yIG9ubHkg
+YSBzaW5nbGUKaW5zdGFuY2UuCgpPbmUgb3RoZXIgbm90ZSBhYm91dCB0aGUgcGF0Y2ggYXMgaXQg
+aXM6IEluIHRoZSBlcnJvciBwYXRoIHlvdSBmb3JnZXQKdG8gdW4tcGF1c2UuCgogLUdlb3JnZQoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7574976692906893081==--
