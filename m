@@ -1,17 +1,10 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Modifying domain creation interface
-Date: Wed, 21 Feb 2018 15:08:23 +0100
-Message-ID: <17c49a56-875c-dac7-857f-9e24f9005731@suse.com>
+From: Stefan Bader <stefan.bader@canonical.com>
+Subject: Ability to crash a HVM guest by accessing /dev/hpet
+Date: Wed, 21 Feb 2018 15:12:15 +0100
+Message-ID: <6d5172da-c4f5-a275-229d-068899b056f6@canonical.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5445845871187451309=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=xuop=fp=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1eoV4T-0006QR-2g
- for xen-devel@lists.xenproject.org; Wed, 21 Feb 2018 14:08:33 +0000
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,47 +13,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>
+Cc: Ian Campbell <ian.campbell@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Q3JlYXRpbmcgYSBuZXcgZG9tYWluIGN1cnJlbnRseSBpcyBhIHNlcXVlbmNlIG9mIGh5cGVyY2Fs
-bHMgd2l0aCBtYW55IG9mCnRob3NlIGJlaW5nIG1hbmRhdG9yeSBhbmQgbmVlZGVkIGluIGEgc3Bl
-Y2lmaWMgc2VxdWVuY2UuIEl0cyBoYXMgYmVlbgpkaXNjdXNzZWQgYmVmb3JlIHRvIGJ1aWxkIGEg
-bmV3IGludGVyZmFjZSBmb3IgZG9tYWluIGNyZWF0aW9uIHdpdGggX2FsbF8KdGhlIG1hbmRhdG9y
-eSBpbmZvcm1hdGlvbiBwYXNzZWQgdG8gdGhlIGh5cGVydmlzb3IgaW4gb25lIGh5cGVyY2FsbC4K
-CkknZCBsaWtlIHRvIHN1Z2dlc3QgdG8gZXh0ZW5kIHRoaXMgaWRlYSBldmVuIG1vcmU6IGluc3Rl
-YWQgb2YgcGFzc2luZwp0aGUgbWFuZGF0b3J5IGRhdGEgb25seSB3ZSBjb3VsZCBldmVuIGFkZCBz
-b21lIG9wdGlvbmFsIGRhdGEgaW4gYQpnZW5lcmljIHdheS4gSW5zdGVhZCBvZiBleHRlbmRpbmcg
-dGhlIGJpbmFyeSBpbnRlcmZhY2UgZWFjaCB0aW1lIGEgbmV3CmNvbmZpZ3VyYWJsZSBwYXJhbWV0
-ZXIgaXMgYWRkZWQgZm9yIGRvbWFpbnMgd2UgY291bGQgdXNlIGEgdGV4dCBiYXNlZAppbnRlcmZh
-Y2UgZm9yIHRoYXQgcHVycG9zZSwgc2ltaWxhciB0byB0aGUgYm9vdCBwYXJhbWV0ZXJzIG9mIHRo
-ZQpoeXBlcnZpc29yIG9yIHRoZSBrZXJuZWwuIFNvIGluc3RlYWQgYWRkaW5nIGUuZy4gYSBuZXcg
-ZmxhZyBmb3IKc3dpdGNoaW5nIHRoZSBNZWx0ZG93biBtaXRpZ2F0aW9uIG9uIG9yIG9mZiBmb3Ig
-YSBzcGVjaWZpYyBkb21haW4gKHRoaXMKZXhhbXBsZSBpcyB0aGUgcmVhc29uIEkgdGhvdWdodCBv
-ZiB0aGUgbmV3IGludGVyZmFjZSkgdG8KeGVuX2RvbWN0bF9jcmVhdGVkb21haW4uZmxhZ3Mgd2Ug
-Y291bGQgcGFzcyBhIHN0cmluZyAieHB0aT1vZmYiIHRvIHRoZQpoeXBlcnZpc29yIGluIHRoZSBk
-b21haW4gY3JlYXRlIGh5cGVyY2FsbCBwYXJhbWV0ZXJzLiBQYXNzaW5nIGFuIGFycmF5Cm9mIHN0
-cmluZ3MgcGx1cyB0aGUgbnVtYmVyIG9mIGFycmF5IGVsZW1lbnRzIHdvdWxkIGFsbG93IHRvIGV4
-dGVuZCB0aGUKaW50ZXJmYWNlIHdpdGhvdXQgaGF2aW5nIHRvIGNoYW5nZSBhbnkgaGVhZGVyIGZp
-bGUuCgpJdCB3b3VsZCBldmVuIGJlIHBvc3NpYmxlIHRvIGhhdmUgc29tZXRoaW5nIGxpa2U6Cgpk
-b21haW5fcGFyYW1zPVsgInhwdGk9b2ZmIiwgInBhcmFtX3h5PWZvbyIgXQoKaW4gdGhlIHhsIGNv
-bmZpZyBmaWxlIG9mIGEgZG9tYWluIGFsbG93aW5nIHRvIHNwZWNpZnkgbmV3IHBhcmFtZXRlcnMK
-d2l0aG91dCBoYXZpbmcgdG8gbW9kaWZ5IHhsL2xpYnhsLiBUaGlzIHdvdWxkIGFsbG93IGJhY2tw
-b3J0cyBvZgpzZWN1cml0eSBwYXRjaGVzIHdoaWNoIG5lZWQgc29tZSBwZXItZG9tYWluIGNvbmZp
-Z3VyYXRpb24gYWlkIChzb21lClNVU0UgY3VzdG9tZXJzIGFscmVhZHkgYXNrZWQgZm9yIGEgd2F5
-IHRvIHN3aXRjaCBNZWx0ZG93biBtaXRpZ2F0aW9uCm9uIGEgcGVyLWRvbWFpbiBiYXNpcyBpbiBv
-bGQgdmVyc2lvbnMpLgoKU2VjdXJpdHkgaXMgYSBwb2ludCB0byBiZSBsb29rZWQgYXQsIG9mIGNv
-dXJzZS4gT1RPSCBpdCBzaG91bGQgYmUgcXVpdGUKZWFzeSB0byB1c2UgYSBmdXp6ZXIgZm9yIHBy
-b3ZpbmcgdGhlIHBhcnNlciB0byBiZSBzZWN1cmUsIGFzIHRoZSBwYXJzZXIKY2FuIGJlIGNvbnN0
-cnVjdGVkIHRvIGJlIHRlc3RhYmxlIGluIHVzZXIgZW52aXJvbm1lbnQgKGxpa2UgZS5nLiB0aGUK
-eDg2IGluc3RydWN0aW9uIGVtdWxhdG9yKS4KClJpZ2h0IG5vdyBJIHdpbGwgYWRkIGEgbmV3IGJp
-bmFyeSBmbGFnIChhZ2FpbiBmb3IgbWFraW5nIGJhY2twb3J0cwplYXNpZXIpLCBidXQgSSB0aGlu
-ayBpZiB3ZSB3YW50IHRvIG1vZGlmeSB0aGUgZG9tYWluIGNyZWF0aW9uCmludGVyZmFjZSBhbnl3
-YXksIHdlIHNob3VsZCBjb25zaWRlciBkb2luZyBpdCBpbiBhbiBlYXN5IGV4dGVuZGFibGUKd2F5
-LiBJIGFtIHRhcmdldGluZyBYZW4gNC4xMiBmb3IgdGhhdCBpZGVhIGluIGNhc2UgaXQgaXMgYWNj
-ZXB0ZWQsIHNvCkkgd2FudGVkIHRvIHN0YXJ0IGRpc2N1c3Npb24gZWFybHkuCgpXaGF0IGRvIHlv
-dSB0aGluaz8KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============5445845871187451309==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="MylRbFvm7f3Nf4pFr7houRHpfTRFy8zMo"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--MylRbFvm7f3Nf4pFr7houRHpfTRFy8zMo
+Content-Type: multipart/mixed; boundary="Cl5qDz1yvyAuqbQbvxBJImDy4F2cA6JX2";
+ protected-headers="v1"
+From: Stefan Bader <stefan.bader@canonical.com>
+To: "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>
+Cc: Ian Campbell <ian.campbell@citrix.com>
+Message-ID: <6d5172da-c4f5-a275-229d-068899b056f6@canonical.com>
+Subject: Ability to crash a HVM guest by accessing /dev/hpet
+
+--Cl5qDz1yvyAuqbQbvxBJImDy4F2cA6JX2
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: quoted-printable
+
+This seems to have been found by us[1] and Citrix[2] recently. To trigger=
+ this
+one needs to be root in the guest, so it is not super critical but still =
+it
+seems to be a bit harsh that purely opening /dev/hpet read-only is leadin=
+g to a
+domain crash via xen/arch/x86/hvm/hpet.c@375(hpet_write):
+
+    case HPET_Tn_CFG(0):
+    case HPET_Tn_CFG(1):
+    case HPET_Tn_CFG(2):
+        tn =3D HPET_TN(CFG, addr);
+
+        h->hpet.timers[tn].config =3D hpet_fixup_reg(new_val, old_val, 0x=
+3f4e);
+
+        if ( timer_level(h, tn) )
+        {
+            gdprintk(XENLOG_ERR,
+                     "HPET: level triggered interrupt not supported now\n=
+");
+            domain_crash(current->domain);
+            break;
+        }
+
+The default in Linux seems to be level triggered. I wonder whether there =
+would
+be any possible way to make this return as some error instead of blowing =
+up?
+
+-Stefan
+
+[1] https://bugs.launchpad.net/bugs/1741409
+[2]
+https://bugs.xenserver.org/browse/XSO-809?focusedCommentId=3D16484&page=3D=
+com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel
+
+
+--Cl5qDz1yvyAuqbQbvxBJImDy4F2cA6JX2--
+
+--MylRbFvm7f3Nf4pFr7houRHpfTRFy8zMo
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQIcBAEBCgAGBQJajX4/AAoJEOhnXe7L7s6jZ2UQAKhk0mo0eT5yjFyj1Dm0EgSf
+6984qeH8Zx4MXNt+XBJYrIVm5kYmIeOCsEelvqI+Sf57oa68nl3KyDnfc6Mfn0ff
+6Siz6B5DhTwGuEs1HCx4E/E4VTb+wbHFhCZg9jxuIjqDREtb1bmiyCNnJaZejYQ+
+eQSSRCC/AqoroEJU0Z4h8qfbP1H4oFTYD2gI/S2hSeBPUNI0/vHg7OtvIICSGPTe
+x0PcJOAmGkFFabPHp4B9h5sm7MeB4pCNvTJlTHD8TDpIlaAlPlF0ywbn+UX3jpzP
+4UDSEVDFNMFJgKnj0F/l4xJ26PFZfPSQpMBAFC9Lqd2DtIMdZJ58K0zm4BIyiZpV
+Hn2nokzlH6l1Qs8nqXS7VOM3puE6S4QUQrh90cczYfXoWOzocwdpkV77o9o/Sius
+rSk56yhJWw2x+CBUmUb1FbRGT9CgFZXHvp9LtO3/bhvNdJR6W+PR3/CkV8gvViNM
+6YFKQJKS82vB/96/Cs1in/PDD/Uu9UQPLO5HHTYzuZTs0t61H4x5S2iXEHFhrXCM
++bRFkHkEdqr+sGpIVJ1CYz6ZYPmhfaFngawXa40x+bdZ974W1YhENrpJvV0Bp2er
+gU41bW9yiSinKPBLg5lUCL8ao0tzr3jDUaUpHvNPmxc9S6VWNrNlxc7hnodjPbU/
+HVXSSu724JjtsLsCJZom
+=CS/Q
+-----END PGP SIGNATURE-----
+
+--MylRbFvm7f3Nf4pFr7houRHpfTRFy8zMo--
+
+
+--===============5445845871187451309==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5445845871187451309==--
