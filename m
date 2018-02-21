@@ -1,16 +1,18 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 119806: regressions - ALL
-	FAIL
-Date: Wed, 21 Feb 2018 10:25:22 +0000
-Message-ID: <osstest-119806-mainreport@xen.org>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH 5/5] x86: Rework MSR_TSC_AUX handling from
+	scratch.
+Date: Wed, 21 Feb 2018 11:08:01 +0000
+Message-ID: <20180221110801.rvbllzg2eq4f2kqr@citrix.com>
+References: <1519127923-23539-1-git-send-email-andrew.cooper3@citrix.com>
+ <1519127923-23539-6-git-send-email-andrew.cooper3@citrix.com>
+ <20180220170344.s5lyrsi5t6yotllv@citrix.com>
+ <03ceb0f6-6a2e-7e4c-b3f0-d10ecf211ece@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1176030737482314769=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=foxx=fp=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1eoRah-0004ME-2w
- for xen-devel@lists.xenproject.org; Wed, 21 Feb 2018 10:25:35 +0000
+Content-Disposition: inline
+In-Reply-To: <03ceb0f6-6a2e-7e4c-b3f0-d10ecf211ece@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,220 +21,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1176030737482314769==
-Content-Type: text/plain
-
-flight 119806 xen-unstable-coverity real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/119806/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- coverity-amd64                7 coverity-upload          fail REGR. vs. 119558
-
-version targeted for testing:
- xen                  23b40df6f098e3bcb2f105a4909860240976e40f
-baseline version:
- xen                  24470b99c1671dca531c2cf5747eda2f8892ecbc
-
-Last test of basis   119558  2018-02-18 09:47:32 Z    3 days
-Testing same since   119806  2018-02-21 09:29:16 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Alexandru Isaila <aisaila@bitdefender.com>
-  Andrew Cooper <andrew.cooper3@citix.com>
-  Dario Faggioli <dfaggioli@suse.com>
-  Igor Druzhinin <igor.druzhinin@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Julien Grall <julien.grall@arm.com>
-  Razvan Cojocaru <rcojocaru@bitdefender.com>
-  Sergey Dyasli <sergey.dyasli@citrix.com>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- coverity-amd64                                               fail    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit 23b40df6f098e3bcb2f105a4909860240976e40f
-Author: Julien Grall <julien.grall@arm.com>
-Date:   Fri Feb 16 14:59:56 2018 +0000
-
-    xen/arm: vgic: Make sure the number of SPIs is a multiple of 32
-    
-    The vGIC relies on having a pending_irq available for every IRQs
-    described in the ranks. As each rank describes 32 interrupts, we need to
-    make sure the number of SPIs is a multiple of 32.
-    
-    Reported-by: Jeff Kubascik <Jeff.Kubascik@dornerworks.com>
-    Signed-off-by: Julien Grall <julien.grall@arm.com>
-    Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-    Cc: Jarvis Roach <Jarvis.Roach@dornerworks.com>
-
-commit 454ae490487659a51d71adc77aa02892d0725235
-Author: Alexandru Isaila <aisaila@bitdefender.com>
-Date:   Mon Feb 19 15:07:06 2018 +0200
-
-    asm-x86/monitor: Add MONITOR_EVENT_INTERRUPT to common capabilities
-    
-    Signed-off-by: Alexandru Isaila <aisaila@bitdefender.com>
-    Acked-by: Razvan Cojocaru <rcojocaru@bitdefender.com>
-
-commit 197fbdb501257fdbbe0cfed35e3a99ef5b166107
-Author: Sergey Dyasli <sergey.dyasli@citrix.com>
-Date:   Mon Feb 19 11:29:26 2018 +0000
-
-    x86/msr: add Raw and Host domain policies
-    
-    Raw policy contains the actual values from H/W MSRs. Add PLATFORM_INFO
-    msr to the policy during probe_cpuid_faulting().
-    
-    Host policy may have certain features disabled if Xen decides not
-    to use them. For now, make Host policy equal to Raw policy with
-    cpuid_faulting availability dependent on X86_FEATURE_CPUID_FAULTING.
-    
-    Finally, derive HVM/PV max domain policies from the Host policy.
-    
-    Signed-off-by: Sergey Dyasli <sergey.dyasli@citrix.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-commit a44f1697968e04fcc6145e3bd51c748b57047240
-Author: Igor Druzhinin <igor.druzhinin@citrix.com>
-Date:   Tue Feb 20 10:16:56 2018 +0100
-
-    x86/nmi: start NMI watchdog on CPU0 after SMP bootstrap
-    
-    We're noticing a reproducible system boot hang on certain
-    Skylake platforms where the BIOS is configured in legacy
-    boot mode with x2APIC disabled. The system stalls immediately
-    after writing the first SMP initialization sequence into APIC ICR.
-    
-    The cause of the problem is watchdog NMI handler execution -
-    somewhere near the end of NMI handling (after it's already
-    rescheduled the next NMI) it tries to access IO port 0x61
-    to get the actual NMI reason on CPU0. Unfortunately, this
-    port is emulated by BIOS using SMIs and this emulation for
-    some reason takes more time than we expect during INIT-SIPI-SIPI
-    sequence. As the result, the system is constantly moving between
-    NMI and SMI handler and not making any progress.
-    
-    To avoid this, initialize the watchdog after SMP bootstrap on
-    CPU0 and, additionally, protect the NMI handler by moving
-    IO port access before NMI re-scheduling. The latter should also
-    help in case of post boot CPU onlining. Although we're running
-    watchdog at much lower frequency at this point, it's neveretheless
-    possible we may trigger the issue anyway.
-    
-    Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-commit 682b13c259e531f6848f535032c256ec8fcaca71
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Tue Feb 20 10:10:59 2018 +0100
-
-    shim: allow building of just the shim with build-ID-incapable linker
-    
-    The ELF note the shim build inserts causes mkelf32 to choke on the
-    second program header. However, the output of mkelf32 isn't really
-    needed when building inside tools/firmware/ - an attempt to build it is
-    made solely because of a wrong dependency.
-    
-    Further changes to the make logic will be needed to also allow building
-    a shim-enabled "normal" xen with such a linker (as it looks the --notes
-    option will need passing not just when the linker support build ID
-    generation).
-    
-    Also drop a stray variable setting from the x86 Makefile.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
-
-commit 8f9ccfe93570ecae18d9cc224931787d0bca9c66
-Author: Dario Faggioli <dfaggioli@suse.com>
-Date:   Fri Feb 16 19:38:48 2018 +0100
-
-    tools: libxenstat: fix format string overflow
-    
-    With gcc 7.3.0, the build fails like this:
-    
-    src/xenstat_linux.c: In function ‘getBridge’
-    src/xenstat_linux.c:78:34: warning: ‘%s’ directive writing up to 255 bytes into a region of size 241 [-Wformat-overflow=]
-         sprintf(tmp, "/sys/class/net/%s/bridge", de->d_name);
-                                      ^~
-    src/xenstat_linux.c:78:5: note: ‘sprintf’ output between 23 and 278 bytes into a destination of size 256
-         sprintf(tmp, "/sys/class/net/%s/bridge", de->d_name);
-         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
-    Fix by making the buffer bigger.
-    
-    Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
-    Acked-by: Wei Liu <wei.liu2@citrix.com>
-
-commit d3b230fc46ee9853064e167f6cb4da8ea0a08112
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Mon Feb 19 14:00:31 2018 +0100
-
-    shut down domain when last vCPU goes down
-    
-    I've just had to deal with an early boot crash of Linux which occurred
-    so early that even "earlyprintk=xen" did not produce any useful output.
-    Hence the domain appeared to hang, while in fact it had brought down its
-    only vCPU. By translating this to a shutdown, the situation will be
-    better recognizable.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-
-commit 0091daa9d911995327ef92c3ce663c3c569c8c6e
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Mon Feb 19 13:59:37 2018 +0100
-
-    x86/PV: avoid indirect call/thunk in I/O emulation
-    
-    The stub is within reach from the .text section, so there's no point
-    using an indirect call here. This has the added benefit of there no
-    longer being two sufficiently different approaches, breaking one of
-    which people may not even notice.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Andrew Cooper <andrew.cooper3@citix.com>
-(qemu changes not included)
-
-
---===============1176030737482314769==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1176030737482314769==--
+T24gVHVlLCBGZWIgMjAsIDIwMTggYXQgMDU6NDI6MDZQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBPbiAyMC8wMi8xOCAxNzowMywgV2VpIExpdSB3cm90ZToKPiA+IE9uIFR1ZSwgRmVi
+IDIwLCAyMDE4IGF0IDExOjU4OjQzQU0gKzAwMDAsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4gPj4g
+VGhlcmUgYXJlIG1hbnkgcHJvYmxlbXMgd2l0aCBNU1JfVFNDX0FVWCBoYW5kbGluZy4KPiA+Pgo+
+ID4+IFRvIGJlaW5nIHdpdGgsIHRoZSBSRFBJRCBpbnN0cnVjdGlvbiByZWFkcyBNU1JfVFNDX0FV
+WCwgYnV0IGl0IGlzIG9ubHkgdGhlCj4gPiAgICAgIF4KPiA+ICAgICAgYmVnaW4KPiA+Cj4gPj4g
+UkRUU0NQIGZlYXR1cmUgd2hpY2ggZW51bWVyYXRlcyB0aGUgTVNSLiAgVGhlcmVmb3JlLCBSRFBJ
+RCBmdW5jdGlvbmFsbHkKPiA+PiBkZXBlbmRzIG9uIFJEVFNDUC4KPiA+Pgo+ID4+IEZvciBQViBn
+dWVzdHMsIHdlIGhpZGUgUkRUU0NQIGJ1dCBhZHZlcnRpc2UgUkRQSUQuICBXZSBhbHNvIHNpbGVu
+dGx5IGRyb3AKPiA+PiB3cml0ZXMgdG8gTVNSX1RTQ19BVVgsIHdoaWNoIGlzIHZlcnkgYW50aXNv
+Y2lhbC4gIFRoZXJlZm9yZSwgZW5hYmxlIFJEVFNDUCBmb3IKPiA+PiBQViBndWVzdHMsIHdoaWNo
+IGluIHR1cm4gYWxsb3dzIFJEUElEIHRvIHdvcmsuCj4gPj4KPiA+PiBUbyBzdXBwb3J0IFJEVFND
+UCBwcm9wZXJseSBmb3IgUFYgZ3Vlc3RzLCB0aGUgTVNSX1RTQ19BVVggaGFuZGxpbmcgaXMgbW92
+ZWQKPiA+PiBpbnRvIHRoZSBnZW5lcmljIE1TUiBwb2xpY3kgaW5mcmFzdHJ1Y3R1cmUsIGFuZCBi
+ZWNvbWVzIGNvbW1vbi4gIE9uZQo+ID4+IGltcHJvdmVtZW50IGlzIHRoYXQgd2Ugd2lsbCBub3cg
+cmVqZWN0IGludmFsaWQgdmFsdWVzLCByYXRoZXIgdGhhbiBzaWxlbnRseQo+ID4+IHRydW5jYXRp
+bmcgYW4gYWNjZXB0aW5nIHRoZW0uICBUaGlzIGFsc28gY2F1c2VzIHRoZSBlbXVsYXRvciB0byBy
+ZWplY3QgUkRUU0NQCj4gPiAgICAgICAgICAgICAgXgo+ID4gICAgICAgICAgICAgIGFuZAo+ID4K
+PiA+PiBmb3IgZ3Vlc3RzIHdpdGhvdXQgdGhlIGZlYXR1cmVzLgo+ID4+Cj4gPj4gIAo+ID4gWy4u
+Ll0KPiA+PiBAQCAtMTI4NCw3ICsxMjg1LDE4IEBAIGxvbmcgYXJjaF9kb19kb21jdGwoCj4gPj4g
+ICAgICAgICAgICAgICAgICBmb3IgKCBqID0gMDsgaiA8IEFSUkFZX1NJWkUobXNyc190b19zZW5k
+KTsgKytqICkKPiA+PiAgICAgICAgICAgICAgICAgIHsKPiA+PiAgICAgICAgICAgICAgICAgICAg
+ICB1aW50NjRfdCB2YWw7Cj4gPj4gLSAgICAgICAgICAgICAgICAgICAgaW50IHJjID0gZ3Vlc3Rf
+cmRtc3IodiwgbXNyc190b19zZW5kW2pdLCAmdmFsKTsKPiA+PiArICAgICAgICAgICAgICAgICAg
+ICBpbnQgcmM7Cj4gPj4gKwo+ID4+ICsgICAgICAgICAgICAgICAgICAgIC8qCj4gPj4gKyAgICAg
+ICAgICAgICAgICAgICAgICogU2tpcCBNU1JfVFNDX0FVWCBpZiB1c2luZyBUU0NfTU9ERV9QVlJE
+VFNDUC4gIEluIHRoaXMKPiA+PiArICAgICAgICAgICAgICAgICAgICAgKiBjYXNlLCB0aGUgTVNS
+IGlzIHJlYWQtb25seSwgYW5kIHNob3VsZCBiZSByZWplY3RlZCBpZgo+ID4+ICsgICAgICAgICAg
+ICAgICAgICAgICAqIHNlZW4gb24gdGhlIHJlc3RvcmUgc2lkZS4KPiA+PiArICAgICAgICAgICAg
+ICAgICAgICAgKi8KPiA+PiArICAgICAgICAgICAgICAgICAgICBpZiAoIG1zcnNfdG9fc2VuZFtq
+XSA9PSBNU1JfVFNDX0FVWCAmJgo+ID4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgZC0+YXJj
+aC50c2NfbW9kZSA9PSBUU0NfTU9ERV9QVlJEVFNDUCApCj4gPj4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgIGNvbnRpbnVlOwo+ID4gU2hvdWxkbid0IHdlIGluY3JlbWVudCBpbmNhcm5hdGlvbiBh
+bmQgc2VuZCBpdCBvdmVyIHRvIHRoZSByZW1vdGUgZW5kPwo+ID4gT3Igc2VuZCB0aGUgb3JpZ2lu
+YWwgdmFsdWUgYW5kIGxldCB0aGUgcmVtb3RlIGluY3JlbWVudHMgaXQ/Cj4gCj4gaW5jYXJuYXRp
+b24sIGFuZCBpdHMgaW5jcmVtZW50cywgaXMgaGFuZGxlZCBpbiB0c2Nfc2V0X2luZm8oKSwgd2hp
+Y2ggaXMKPiBrZXllZCBvZmYgdGhlIFRTQ19JTkZPIHJlY29yZCBpbiB0aGUgbWlncmF0aW9uIHN0
+cmVhbS7CoCBUaGF0IHNpZGUgb2YKPiB0aGluZ3MgImFscmVhZHkgd29ya3MiIChGU1ZPICJ3b3Jr
+cyIpLgo+IAoKT0suIFRoYXQncyBmaW5lIHRoZW4uCgpXZWkuCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
