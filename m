@@ -1,15 +1,14 @@
 From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v4 16/16] xen: Convert page_to_mfn and
- mfn_to_page to use typesafe MFN
-Date: Wed, 21 Feb 2018 18:20:16 -0500
-Message-ID: <9abae25f-897e-19ae-cdb6-5db7b47fa3c4@oracle.com>
-References: <20180221140259.29360-1-julien.grall@arm.com>
- <20180221140259.29360-17-julien.grall@arm.com>
+Subject: Re: [PATCH 0/2] x86/svm: add pause filtering threshold
+	for SVM
+Date: Wed, 21 Feb 2018 18:30:43 -0500
+Message-ID: <a991b7bb-5b9f-f2db-2254-e6556ab1c86c@oracle.com>
+References: <20180221001233.62644-1-brian.woods@amd.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180221140259.29360-17-julien.grall@arm.com>
+In-Reply-To: <20180221001233.62644-1-brian.woods@amd.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -19,24 +18,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org
-Cc: Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>, Shane Wang <shane.wang@intel.com>, Gang Wei <gang.wei@intel.com>, Paul Durrant <paul.durrant@citrix.com>
+To: Brian Woods <brian.woods@amd.com>, xen-devel@lists.xen.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDIvMjEvMjAxOCAwOTowMiBBTSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IE1vc3Qgb2YgdGhl
-IHVzZXJzIG9mIHBhZ2VfdG9fbWZuIGFuZCBtZm5fdG9fcGFnZSBhcmUgZWl0aGVyIG92ZXJyaWRp
-bmcKPiB0aGUgbWFjcm9zIHRvIG1ha2UgdGhlbSB3b3JrIHdpdGggbWZuX3Qgb3IgdXNlIG1mbl94
-L19tZm4gYmVjYXVzZSB0aGUKPiByZXN0IG9mIHRoZSBmdW5jdGlvbiB1c2UgbWZuX3QuCj4KPiBT
-byBtYWtlIHBhZ2VfdG9fbWZuIGFuZCBtZm5fdG9fcGFnZSByZXR1cm4gbWZuX3QgYnkgZGVmYXVs
-dC4gVGhlIF9fKgo+IHZlcnNpb24gYXJlIG5vdyBkcm9wcGVkIGFzIHRoaXMgcGF0Y2ggd2lsbCBj
-b252ZXJ0IGFsbCB0aGUgcmVtYWluaW5nCj4gbm9uLXR5cGVzYWZlIGNhbGxlcnMuCj4KPiBPbmx5
-IHJlYXNvbmFibGUgY2xlYW4tdXBzIGFyZSBkb25lIGluIHRoaXMgcGF0Y2guIFRoZSByZXN0IHdp
-bGwgdXNlCj4gX21mbi9tZm5feCBmb3IgdGhlIHRpbWUgYmVpbmcuCj4KPiBMYXN0bHksIGRvbWFp
-bl9wYWdlX3RvX21mbiBpcyBhbHNvIGNvbnZlcnRlZCB0byB1c2UgbWZuX3QgZ2l2ZW4gdGhhdAo+
-IG1vc3Qgb2YgdGhlIGNhbGxlcnMgYXJlIG5vdyBzd2l0Y2hlZCB0byBfbWZuKGRvbWFpbl9wYWdl
-X3RvX21mbiguLi4pKS4KPgo+IFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdy
-YWxsQGFybS5jb20+CgpSZXZpZXdlZC1ieTogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zz
-a3lAb3JhY2xlLmNvbT4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+T24gMDIvMjAvMjAxOCAwNzoxMiBQTSwgQnJpYW4gV29vZHMgd3JvdGU6Cj4gVGhpcyBwYXRjaCBz
+ZXJpZXMgYWRkcyBzdXBwb3J0IGFuZCBlbmFibGVtZW50IG9mIHRoZSBwYXVzZSBmaWx0ZXJpbmcK
+PiB0aHJlc2hvbGQuICBPbmNlIHRoZXJlJ3MgcGF1c2UgZmlsdGVyaW5nIHRocmVzaG9sZCBhbW91
+bnQgb2YgY3ljbGVzCj4gYmV0d2VlbiBwYXVzZXMsIHRoZSBwYXVzZSBmaWx0ZXJpbmcgY291bnRl
+ciByZXNldHMgdG8gd2hhdCB3YXMgaW4gdGhlCj4gVk1DQi4gIFRoaXMgYWxsb3dzIHRoZSBwYXVz
+ZSBmaWx0ZXJpbmcgY291bnQgdG8gInJlc2V0IiBiZXR3ZWVuIHBhdXNlcwo+IGFuZCBrZWVwcyB0
+aGUgZ3VzZXQgZnJvbSBnZXR0aW5nIGludGVyY2VwdGVkIGJ5IHRoZSBoeXBlcnZpc29yLiAgU2Vl
+IEFNRAo+IEFQTSB2b2wgMiBzZWN0aW9uIDE1LjE0LjQgZm9yIG1vcmUgZGV0YWlscy4KPgo+IElu
+IHJlcGx5IHRvIHRoaXMgd2lsbCBiZSBhbiBlbWFpbCB3aXRoIGdyYXBocyBzaG93aW5nIHNvbWUg
+YmVuY2htYXJrCj4gcmVzdWx0cyBvZiB3aHkgdGhlIHZhbHVlcyBvZiB0aGUgY291bnRlciBhbmQg
+dGhyZXNob2xkIHdlcmUgcGlja2VkLgo+Cj4gQnJpYW4gV29vZHMgKDIpOgo+ICAgeDg2L3N2bTog
+YWRkIHN1cHBvcnQgZm9yIHBhdXNlIGZpbHRlcmluZyB0aHJlc2hvbGQKPiAgIHg4Ni9zdm06IGVu
+YWJsZSBwYXVzZSBmaWx0ZXJpbmcgdGhyZXNob2xkCj4KPiAgeGVuL2FyY2gveDg2L2h2bS9zdm0v
+c3ZtLmMgICAgICAgICB8IDEgKwo+ICB4ZW4vYXJjaC94ODYvaHZtL3N2bS92bWNiLmMgICAgICAg
+IHwgMyArKysKPiAgeGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vc3ZtL3N2bS5oICB8IDUgKysrKy0K
+PiAgeGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vc3ZtL3ZtY2IuaCB8IDMgKystCj4gIDQgZmlsZXMg
+Y2hhbmdlZCwgMTAgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKPgoKSUlSQyBwcmV2aW91
+cyBjb3VudCB2YWx1ZSAgKDMwMDApIHdhcyBzb21ld2hhdCBhcmJpdHJhcnkgc28KClJldmlld2Vk
+LWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
