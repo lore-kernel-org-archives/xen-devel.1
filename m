@@ -1,13 +1,19 @@
-From: Andres Lagar Cavilla <andres@lagarcavilla.org>
-Subject: Re: AD bits in traditional PV mode
-Date: Thu, 22 Feb 2018 11:46:59 -0800
-Message-ID: <CADzFZPtfReAiRanYXEFkNwB8Vc3D53Qu1m=-3L0a22CD_n81Wg@mail.gmail.com>
-References: <CADzFZPuuhrMQa2zCrYimeLghVc2re_3KoB8R0szfV-H1bK=cuA@mail.gmail.com>
- <7bbbac01-2aab-5705-8a48-4d588413eb8a@citrix.com>
+From: xen@randomwebstuff.com
+Subject: Re: pvh+vcpus startup issue
+Date: Fri, 23 Feb 2018 09:38:18 +1300
+Message-ID: <93d38ecb-218f-8277-2f14-a3251ab7c7aa@rimuhosting.com>
+References: <c22ca929-cb20-aaf2-f4ce-a9790759eaff@rimuhosting.com>
+ <5d14aa3c-d52a-0cb9-2384-6b74bfce1d65@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5872394038121484304=="
+Content-Type: multipart/mixed; boundary="------------711AD6F41D1086FA4AF32746"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <7bbbac01-2aab-5705-8a48-4d588413eb8a@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=wvei=fq=rimuhosting.com=peter@srs-us1.protection.inumbo.net>)
+ id 1eoxdR-00033x-OQ
+ for xen-devel@lists.xenproject.org; Thu, 22 Feb 2018 20:38:33 +0000
+In-Reply-To: <5d14aa3c-d52a-0cb9-2384-6b74bfce1d65@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,155 +22,184 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============5872394038121484304==
-Content-Type: multipart/alternative; boundary="f4f5e8079970aa05eb0565d24e8f"
+This is a multi-part message in MIME format.
+--------------711AD6F41D1086FA4AF32746
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
---f4f5e8079970aa05eb0565d24e8f
-Content-Type: text/plain; charset="UTF-8"
 
-Thanks for the clarification, Andrew.
-
-On Tue, Feb 20, 2018 at 5:20 PM, Andrew Cooper <andrew.cooper3@citrix.com>
-wrote:
-
-> On 21/02/2018 00:42, Andres Lagar Cavilla wrote:
-> > Hello everyone,
-> >
-> > I was thinking of the traditional Xen PV mode in which page table
-> > pages are write protected from guest meddling and PTE
-> > modifications are audited by the hypervisor (ptwr_emulated_update()
-> > these days, still?).
+On 22/02/18 6:35 PM, Juergen Gross wrote:
+> On 22/02/18 05:37, xen@randomwebstuff.com wrote:
+>> Hi.  I have a domU.  Its params file has: vcpus = 8.  It will start with
+>> pv, but not type="pvh".  It will not start (on pvh) with vcpus = 7 or 6
+>> or 5.  It does start with vcpus = 4.
+>>
+>> I diffed the xl -v create logs, no difference there on either startup.
+>>
+>> I grabbed the domU console output for a vcpus = 5 start (attached).  It
+>> dies right after:
+>>
+>> [    0.007110] cpu 3 spinlock event irq 23
+>> [    0.007336] installing Xen timer for CPU 4
+> Can you please post the hypervisor log ("xl dmesg")?
 >
-> Something like that, yes.  Alternatively, via explicit hypercall which
-> is faster than the trap&emulate path.
 >
-> > Without software shadows or paging to e.g. an EPT, native PV loads the
-> > actual CR3 pointing to a write protected page table tree.
->
-> Unfortunately, I've lost you here.  There is no such thing as a
-> write-protected pagetable tree in the traditional PV sense.
->
-> > When the cr3 is loaded, the hardware walker will want to set A and D
-> > bits in PTEs -- is this action immune to the write protection in the
-> > page table pages themselves? Or do we take emulation faults on these
-> > updates as well?
->
-> The protection that Xen enforces on PV guests is that an L1 PTE mapping
-> a pagetable frame must never be writeable.  This protection happens at
-> the linear address level.  When the CPU pagewalker tries to set A/D
-> bits, it issues an atomic update to the physical address of the
-> pagetable entry which needs updating.
->
-> As with everything, there are complicating factors.  With EPT/NPT for
-> HVM guests these days, the hypervisor can also apply permissions to
-> guest physical addresses, as part of their translation to host physical
-> addresses.  The hardware pagewalker, when attempting to set an A/D bit
-> of the HVM guests regular pagetables, issues an EPT/NPT write (well -
-> RMW strictly) to set the bits.
->
-> Therefore, if the hypervisor marks an HVM guest's pagetable as
-> read-only, then the hardware pagewalker trying to set A/D bits will
-> vmexit with an EPT/NPT permissions violation.  This is one major
-> performance limiting factor of introspection technology at the moment.
->
+> Juergen
 
-Indeed, this is what I was coming at. In my experience guests will be very
-adversely affected if we just latch the D bits to 1 unilaterally (it's
-legal to do so by the "hardware"), as they will be led to believe file
-cache pages are in constant need of writeback. (and A bits latched to 1
-turn e.g. Linux's vmscan.c into a crapshoot)
+Attached.
 
-So this is currently not too hopeful
-
-Thanks again
-Andres
-
->
-> ~Andrew
->
-
---f4f5e8079970aa05eb0565d24e8f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks for the clarification, Andrew.<div class=3D"gmail_e=
-xtra"><br><div class=3D"gmail_quote">On Tue, Feb 20, 2018 at 5:20 PM, Andre=
-w Cooper <span dir=3D"ltr">&lt;<a href=3D"mailto:andrew.cooper3@citrix.com"=
- target=3D"_blank">andrew.cooper3@citrix.com</a>&gt;</span> wrote:<br><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #cc=
-c solid;padding-left:1ex"><span class=3D"">On 21/02/2018 00:42, Andres Laga=
-r Cavilla wrote:<br>
-&gt; Hello everyone,<br>
-&gt;<br>
-&gt; I was thinking of the traditional Xen PV mode in which page table<br>
-&gt; pages are write protected from guest meddling and PTE<br>
-&gt; modifications=C2=A0are audited by the hypervisor (ptwr_emulated_update=
-()<br>
-&gt; these days, still?).<br>
-<br>
-</span>Something like that, yes.=C2=A0 Alternatively, via explicit hypercal=
-l which<br>
-is faster than the trap&amp;emulate path.<br>
-<span class=3D""><br>
-&gt; Without software shadows or paging to e.g. an EPT, native PV loads the=
-<br>
-&gt; actual CR3 pointing to a write protected page table tree.<br>
-<br>
-</span>Unfortunately, I&#39;ve lost you here.=C2=A0 There is no such thing =
-as a<br>
-write-protected pagetable tree in the traditional PV sense.<br>
-<span class=3D""><br>
-&gt; When the cr3 is loaded, the hardware walker will want to set A and D<b=
-r>
-&gt; bits in PTEs -- is this action immune to the write protection in the<b=
-r>
-&gt; page table pages themselves? Or do we take emulation faults on these<b=
-r>
-&gt; updates as well?<br>
-<br>
-</span>The protection that Xen enforces on PV guests is that an L1 PTE mapp=
-ing<br>
-a pagetable frame must never be writeable.=C2=A0 This protection happens at=
-<br>
-the linear address level.=C2=A0 When the CPU pagewalker tries to set A/D<br=
->
-bits, it issues an atomic update to the physical address of the<br>
-pagetable entry which needs updating.<br>
-<br>
-As with everything, there are complicating factors.=C2=A0 With EPT/NPT for<=
-br>
-HVM guests these days, the hypervisor can also apply permissions to<br>
-guest physical addresses, as part of their translation to host physical<br>
-addresses.=C2=A0 The hardware pagewalker, when attempting to set an A/D bit=
-<br>
-of the HVM guests regular pagetables, issues an EPT/NPT write (well -<br>
-RMW strictly) to set the bits.<br>
-<br>
-Therefore, if the hypervisor marks an HVM guest&#39;s pagetable as<br>
-read-only, then the hardware pagewalker trying to set A/D bits will<br>
-vmexit with an EPT/NPT permissions violation.=C2=A0 This is one major<br>
-performance limiting factor of introspection technology at the moment.<br><=
-/blockquote><div><br></div><div>Indeed, this is what I was coming at. In my=
- experience guests will be very adversely affected if we just latch the D b=
-its to 1 unilaterally (it&#39;s legal to do so by the &quot;hardware&quot;)=
-, as they will be led to believe file cache pages are in constant need of w=
-riteback. (and A bits latched to 1 turn e.g. Linux&#39;s vmscan.c into a cr=
-apshoot)</div><div><br></div><div>So this is currently not too hopeful</div=
-><div><br></div><div>Thanks again</div><div>Andres=C2=A0</div><blockquote c=
-lass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;=
-padding-left:1ex">
-<span class=3D"HOEnZb"><font color=3D"#888888"><br>
-~Andrew<br>
-</font></span></blockquote></div><br></div></div>
-
---f4f5e8079970aa05eb0565d24e8f--
+Regards, Peter
 
 
---===============5872394038121484304==
+--------------711AD6F41D1086FA4AF32746
+Content-Type: text/plain; charset=UTF-8;
+ name="xl-dmesg-vcpu-issue.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="xl-dmesg-vcpu-issue.txt"
+
+IyB4bCBkbWVzZwooWEVOKSBwYXJhbWV0ZXIgImNwdWZyZXEiIGhhcyBpbnZhbGlkIHZhbHVl
+ICJ4ZW4iLCByYz0tMjIhCiBYZW4gNC4xMC4wCihYRU4pIFhlbiB2ZXJzaW9uIDQuMTAuMCAo
+YnVpbGRAci5jb20pIChnY2MgKEdDQykgNC40LjcgMjAxMjAzMTMgKFJlZCBIYXQgNC40Ljct
+MTgpKSBkZWJ1Zz1uICBTdW4gSmFuICA3IDIzOjQ1OjAyIFVUQyAyMDE4CihYRU4pIExhdGVz
+dCBDaGFuZ2VTZXQ6IAooWEVOKSBCb290bG9hZGVyOiBHTlUgR1JVQiAwLjk3CihYRU4pIENv
+bW1hbmQgbGluZTogZG9tMF9tZW09MjA0OE0gY3B1ZnJlcT14ZW4gZG9tMF9tYXhfdmNwdXM9
+MiBkb20wX3ZjcHVzX3BpbiBsb2dsdmw9aW5mbyB2Y3B1X21pZ3JhdGlvbl9kZWxheT0xMDAw
+CihYRU4pIFhlbiBpbWFnZSBsb2FkIGJhc2UgYWRkcmVzczogMAooWEVOKSBWaWRlbyBpbmZv
+cm1hdGlvbjoKKFhFTikgIFZHQSBpcyB0ZXh0IG1vZGUgODB4MjUsIGZvbnQgOHgxNgooWEVO
+KSAgVkJFL0REQyBtZXRob2RzOiBWMjsgRURJRCB0cmFuc2ZlciB0aW1lOiAyIHNlY29uZHMK
+KFhFTikgRGlzYyBpbmZvcm1hdGlvbjoKKFhFTikgIEZvdW5kIDYgTUJSIHNpZ25hdHVyZXMK
+KFhFTikgIEZvdW5kIDYgRUREIGluZm9ybWF0aW9uIHN0cnVjdHVyZXMKKFhFTikgRGlzYWJs
+aW5nIFZpeGVuIGJlY2F1c2Ugd2UgYXJlIG5vdCBydW5uaW5nIHVuZGVyIFhlbgooWEVOKSBY
+ZW4tZTgyMCBSQU0gbWFwOgooWEVOKSAgMDAwMDAwMDAwMDAwMDAwMCAtIDAwMDAwMDAwMDAw
+OWMwMDAgKHVzYWJsZSkKKFhFTikgIDAwMDAwMDAwMDAwOWMwMDAgLSAwMDAwMDAwMDAwMGEw
+MDAwIChyZXNlcnZlZCkKKFhFTikgIDAwMDAwMDAwMDAwY2MwMDAgLSAwMDAwMDAwMDAwMGQw
+MDAwIChyZXNlcnZlZCkKKFhFTikgIDAwMDAwMDAwMDAwZTQwMDAgLSAwMDAwMDAwMDAwMTAw
+MDAwIChyZXNlcnZlZCkKKFhFTikgIDAwMDAwMDAwMDAxMDAwMDAgLSAwMDAwMDAwMGNmZjUw
+MDAwICh1c2FibGUpCihYRU4pICAwMDAwMDAwMGNmZjUwMDAwIC0gMDAwMDAwMDBjZmY2NTAw
+MCAoQUNQSSBkYXRhKQooWEVOKSAgMDAwMDAwMDBjZmY2NTAwMCAtIDAwMDAwMDAwY2ZmODAw
+MDAgKEFDUEkgTlZTKQooWEVOKSAgMDAwMDAwMDBjZmY4MDAwMCAtIDAwMDAwMDAwZDAwMDAw
+MDAgKHJlc2VydmVkKQooWEVOKSAgMDAwMDAwMDBlMDAwMDAwMCAtIDAwMDAwMDAwZjAwMDAw
+MDAgKHJlc2VydmVkKQooWEVOKSAgMDAwMDAwMDBmZWMwMDAwMCAtIDAwMDAwMDAwZmVjMTAw
+MDAgKHJlc2VydmVkKQooWEVOKSAgMDAwMDAwMDBmZWUwMDAwMCAtIDAwMDAwMDAwZmVlMDEw
+MDAgKHJlc2VydmVkKQooWEVOKSAgMDAwMDAwMDBmZjAwMDAwMCAtIDAwMDAwMDAxMDAwMDAw
+MDAgKHJlc2VydmVkKQooWEVOKSAgMDAwMDAwMDEwMDAwMDAwMCAtIDAwMDAwMDEwMDAwMDAw
+MDAgKHVzYWJsZSkKKFhFTikgTmV3IFhlbiBpbWFnZSBiYXNlIGFkZHJlc3M6IDB4Y2Y4MDAw
+MDAKKFhFTikgQUNQSTogUlNEUCAwMDBGNjExMCwgMDAxNCAocjAgUFRMVEQgKQooWEVOKSBB
+Q1BJOiBSU0RUIENGRjVEMDZFLCAwMDYwIChyMSBTTUNJICAgU01DSVNMUDIgIDYwNDAwMDAg
+IExUUCAgICAgICAgMCkKKFhFTikgQUNQSTogRkFDUCBDRkY2NDRDMiwgMDA3NCAocjEgSU5U
+RUwgIFRVTVdBVEVSICA2MDQwMDAwIFBUTCAgICAgICAgIDMpCihYRU4pIEFDUEk6IERTRFQg
+Q0ZGNjAwM0EsIDQ0ODggKHIxICBJbnRlbCBCTEFLRk9SRCAgNjA0MDAwMCBNU0ZUICAxMDAw
+MDBFKQooWEVOKSBBQ1BJOiBGQUNTIENGRjY1RkMwLCAwMDQwCihYRU4pIEFDUEk6IEFQSUMg
+Q0ZGNjQ1MzYsIDAwQzggKHIxIFBUTFREICAJIEFQSUMgICAgNjA0MDAwMCAgTFRQICAgICAg
+ICAwKQooWEVOKSBBQ1BJOiBNQ0ZHIENGRjY0NUZFLCAwMDNDIChyMSBQVExURCAgICBNQ0ZH
+ICAgIDYwNDAwMDAgIExUUCAgICAgICAgMCkKKFhFTikgQUNQSTogQk9PVCBDRkY2NDYzQSwg
+MDAyOCAocjEgUFRMVEQgICRTQkZUQkwkICA2MDQwMDAwICBMVFAgICAgICAgIDEpCihYRU4p
+IEFDUEk6IFNQQ1IgQ0ZGNjQ2NjIsIDAwNTAgKHIxIFBUTFREICAkVUNSVEJMJCAgNjA0MDAw
+MCBQVEwgICAgICAgICAxKQooWEVOKSBBQ1BJOiBTTElDIENGRjY0NkIyLCAwMTc2IChyMSBT
+TUNJICAgU01DSVNMUDIgIDYwNDAwMDAgIExUUCAgICAgICAgMCkKKFhFTikgQUNQSTogU1NE
+VCBDRkY1RTk0MSwgMDI1RiAocjEgIFBtUmVmICBDcHUwVHN0ICAgICAzMDAwIElOVEwgMjAw
+NTAyMjgpCihYRU4pIEFDUEk6IFNTRFQgQ0ZGNUU4OUIsIDAwQTYgKHIxICBQbVJlZiAgQ3B1
+N1RzdCAgICAgMzAwMCBJTlRMIDIwMDUwMjI4KQooWEVOKSBBQ1BJOiBTU0RUIENGRjVFN0Y1
+LCAwMEE2IChyMSAgUG1SZWYgIENwdTZUc3QgICAgIDMwMDAgSU5UTCAyMDA1MDIyOCkKKFhF
+TikgQUNQSTogU1NEVCBDRkY1RTc0RiwgMDBBNiAocjEgIFBtUmVmICBDcHU1VHN0ICAgICAz
+MDAwIElOVEwgMjAwNTAyMjgpCihYRU4pIEFDUEk6IFNTRFQgQ0ZGNUU2QTksIDAwQTYgKHIx
+ICBQbVJlZiAgQ3B1NFRzdCAgICAgMzAwMCBJTlRMIDIwMDUwMjI4KQooWEVOKSBBQ1BJOiBT
+U0RUIENGRjVFNjAzLCAwMEE2IChyMSAgUG1SZWYgIENwdTNUc3QgICAgIDMwMDAgSU5UTCAy
+MDA1MDIyOCkKKFhFTikgQUNQSTogU1NEVCBDRkY1RTU1RCwgMDBBNiAocjEgIFBtUmVmICBD
+cHUyVHN0ICAgICAzMDAwIElOVEwgMjAwNTAyMjgpCihYRU4pIEFDUEk6IFNTRFQgQ0ZGNUU0
+QjcsIDAwQTYgKHIxICBQbVJlZiAgQ3B1MVRzdCAgICAgMzAwMCBJTlRMIDIwMDUwMjI4KQoo
+WEVOKSBBQ1BJOiBTU0RUIENGRjVEMENFLCAxM0U5IChyMSAgUG1SZWYgICAgQ3B1UG0gICAg
+IDMwMDAgSU5UTCAyMDA1MDIyOCkKKFhFTikgU3lzdGVtIFJBTTogNjQ3NjZNQiAoNjYzMjEz
+MjhrQikKKFhFTikgTm8gTlVNQSBjb25maWd1cmF0aW9uIGZvdW5kCihYRU4pIEZha2luZyBh
+IG5vZGUgYXQgMDAwMDAwMDAwMDAwMDAwMC0wMDAwMDAxMDAwMDAwMDAwCihYRU4pIERvbWFp
+biBoZWFwIGluaXRpYWxpc2VkCihYRU4pIENQVSBWZW5kb3I6IEludGVsLCBGYW1pbHkgNiAo
+MHg2KSwgTW9kZWwgMjMgKDB4MTcpLCBTdGVwcGluZyAxMCAocmF3IDAwMDEwNjdhKQooWEVO
+KSBmb3VuZCBTTVAgTVAtdGFibGUgYXQgMDAwZjYxNDAKKFhFTikgRE1JIHByZXNlbnQuCihY
+RU4pIFVzaW5nIEFQSUMgZHJpdmVyIGRlZmF1bHQKKFhFTikgQUNQSTogUE0tVGltZXIgSU8g
+UG9ydDogMHgxMDA4ICgyNCBiaXRzKQooWEVOKSBBQ1BJOiBTTEVFUCBJTkZPOiBwbTF4X2Nu
+dFsxOjEwMDQsMTowXSwgcG0xeF9ldnRbMToxMDAwLDE6MF0KKFhFTikgQUNQSTogICAgICAg
+ICAgICAgd2FrZXVwX3ZlY1tjZmY2NWZjY10sIHZlY19zaXplWzIwXQooWEVOKSBBQ1BJOiBM
+QVBJQyAoYWNwaV9pZFsweDAwXSBsYXBpY19pZFsweDAwXSBlbmFibGVkKQooWEVOKSBBQ1BJ
+OiBMQVBJQyAoYWNwaV9pZFsweDAxXSBsYXBpY19pZFsweDA0XSBlbmFibGVkKQooWEVOKSBB
+Q1BJOiBMQVBJQyAoYWNwaV9pZFsweDAyXSBsYXBpY19pZFsweDAxXSBlbmFibGVkKQooWEVO
+KSBBQ1BJOiBMQVBJQyAoYWNwaV9pZFsweDAzXSBsYXBpY19pZFsweDA1XSBlbmFibGVkKQoo
+WEVOKSBBQ1BJOiBMQVBJQyAoYWNwaV9pZFsweDA0XSBsYXBpY19pZFsweDAyXSBlbmFibGVk
+KQooWEVOKSBBQ1BJOiBMQVBJQyAoYWNwaV9pZFsweDA1XSBsYXBpY19pZFsweDA2XSBlbmFi
+bGVkKQooWEVOKSBBQ1BJOiBMQVBJQyAoYWNwaV9pZFsweDA2XSBsYXBpY19pZFsweDAzXSBl
+bmFibGVkKQooWEVOKSBBQ1BJOiBMQVBJQyAoYWNwaV9pZFsweDA3XSBsYXBpY19pZFsweDA3
+XSBlbmFibGVkKQooWEVOKSBBQ1BJOiBMQVBJQ19OTUkgKGFjcGlfaWRbMHgwMF0gaGlnaCBl
+ZGdlIGxpbnRbMHgxXSkKKFhFTikgQUNQSTogTEFQSUNfTk1JIChhY3BpX2lkWzB4MDFdIGhp
+Z2ggZWRnZSBsaW50WzB4MV0pCihYRU4pIEFDUEk6IExBUElDX05NSSAoYWNwaV9pZFsweDAy
+XSBoaWdoIGVkZ2UgbGludFsweDFdKQooWEVOKSBBQ1BJOiBMQVBJQ19OTUkgKGFjcGlfaWRb
+MHgwM10gaGlnaCBlZGdlIGxpbnRbMHgxXSkKKFhFTikgQUNQSTogTEFQSUNfTk1JIChhY3Bp
+X2lkWzB4MDRdIGhpZ2ggZWRnZSBsaW50WzB4MV0pCihYRU4pIEFDUEk6IExBUElDX05NSSAo
+YWNwaV9pZFsweDA1XSBoaWdoIGVkZ2UgbGludFsweDFdKQooWEVOKSBBQ1BJOiBMQVBJQ19O
+TUkgKGFjcGlfaWRbMHgwNl0gaGlnaCBlZGdlIGxpbnRbMHgxXSkKKFhFTikgQUNQSTogTEFQ
+SUNfTk1JIChhY3BpX2lkWzB4MDddIGhpZ2ggZWRnZSBsaW50WzB4MV0pCihYRU4pIEFDUEk6
+IElPQVBJQyAoaWRbMHgwOF0gYWRkcmVzc1sweGZlYzAwMDAwXSBnc2lfYmFzZVswXSkKKFhF
+TikgSU9BUElDWzBdOiBhcGljX2lkIDgsIHZlcnNpb24gMzIsIGFkZHJlc3MgMHhmZWMwMDAw
+MCwgR1NJIDAtMjMKKFhFTikgQUNQSTogSU9BUElDIChpZFsweDA5XSBhZGRyZXNzWzB4ZmVj
+ODAwMDBdIGdzaV9iYXNlWzI0XSkKKFhFTikgSU9BUElDWzFdOiBhcGljX2lkIDksIHZlcnNp
+b24gMzIsIGFkZHJlc3MgMHhmZWM4MDAwMCwgR1NJIDI0LTQ3CihYRU4pIEFDUEk6IElOVF9T
+UkNfT1ZSIChidXMgMCBidXNfaXJxIDAgZ2xvYmFsX2lycSAyIGhpZ2ggZWRnZSkKKFhFTikg
+QUNQSTogSU5UX1NSQ19PVlIgKGJ1cyAwIGJ1c19pcnEgOSBnbG9iYWxfaXJxIDkgaGlnaCBs
+ZXZlbCkKKFhFTikgRW5hYmxpbmcgQVBJQyBtb2RlOiAgRmxhdC4gIFVzaW5nIDIgSS9PIEFQ
+SUNzCihYRU4pIEVSU1QgdGFibGUgd2FzIG5vdCBmb3VuZAooWEVOKSBVc2luZyBBQ1BJIChN
+QURUKSBmb3IgU01QIGNvbmZpZ3VyYXRpb24gaW5mb3JtYXRpb24KKFhFTikgU01QOiBBbGxv
+d2luZyA4IENQVXMgKDAgaG90cGx1ZyBDUFVzKQooWEVOKSBJUlEgbGltaXRzOiA0OCBHU0ks
+IDE1MDQgTVNJL01TSS1YCihYRU4pIHhzdGF0ZTogc2l6ZTogMHgyNDAgYW5kIHN0YXRlczog
+MHgzCihYRU4pIENQVTA6IEludGVsIG1hY2hpbmUgY2hlY2sgcmVwb3J0aW5nIGVuYWJsZWQK
+KFhFTikgVXNpbmcgc2NoZWR1bGVyOiBTTVAgQ3JlZGl0IFNjaGVkdWxlciAoY3JlZGl0KQoo
+WEVOKSBQbGF0Zm9ybSB0aW1lciBpcyAzLjU3OU1IeiBBQ1BJIFBNIFRpbWVyCihYRU4pIERl
+dGVjdGVkIDI1MDAuMDk5IE1IeiBwcm9jZXNzb3IuCihYRU4pIEluaXRpbmcgbWVtb3J5IHNo
+YXJpbmcuCihYRU4pIGFsdCB0YWJsZSBmZmZmODJkMDgwNDFjN2Q4IC0+IGZmZmY4MmQwODA0
+MWRmNTQKKFhFTikgUENJOiBNQ0ZHIGNvbmZpZ3VyYXRpb24gMDogYmFzZSBlMDAwMDAwMCBz
+ZWdtZW50IDAwMDAgYnVzZXMgMDAgLSAwYQooWEVOKSBQQ0k6IE1DRkcgYXJlYSBhdCBlMDAw
+MDAwMCByZXNlcnZlZCBpbiBFODIwCihYRU4pIFBDSTogVXNpbmcgTUNGRyBmb3Igc2VnbWVu
+dCAwMDAwIGJ1cyAwMC0wYQooWEVOKSBJL08gdmlydHVhbGlzYXRpb24gZGlzYWJsZWQKKFhF
+TikgRU5BQkxJTkcgSU8tQVBJQyBJUlFzCihYRU4pICAtPiBVc2luZyBuZXcgQUNLIG1ldGhv
+ZAooWEVOKSAuLlRJTUVSOiB2ZWN0b3I9MHhGMCBhcGljMT0wIHBpbjE9MiBhcGljMj0tMSBw
+aW4yPS0xCihYRU4pIEFsbG9jYXRlZCBjb25zb2xlIHJpbmcgb2YgMzIgS2lCLgooWEVOKSBW
+TVg6IFN1cHBvcnRlZCBhZHZhbmNlZCBmZWF0dXJlczoKKFhFTikgIC0gQVBJQyBNTUlPIGFj
+Y2VzcyB2aXJ0dWFsaXNhdGlvbgooWEVOKSAgLSBBUElDIFRQUiBzaGFkb3cKKFhFTikgIC0g
+VmlydHVhbCBOTUkKKFhFTikgIC0gTVNSIGRpcmVjdC1hY2Nlc3MgYml0bWFwCihYRU4pIEhW
+TTogQVNJRHMgZGlzYWJsZWQuCihYRU4pIEhWTTogVk1YIGVuYWJsZWQKKFhFTikgSFZNOiBI
+YXJkd2FyZSBBc3Npc3RlZCBQYWdpbmcgKEhBUCkgbm90IGRldGVjdGVkCihYRU4pIEJyb3Vn
+aHQgdXAgOCBDUFVzCihYRU4pIGJ1aWxkLWlkOiBmNjFiMDJjYWMyMTc2NDA5MDliNGMyZDBm
+MDdiYTUwZTBmZTBmM2QxCihYRU4pIENQVUlETEU6IGRpc2FibGVkIGR1ZSB0byBubyBIUEVU
+LiBGb3JjZSBlbmFibGUgd2l0aCAnY3B1aWRsZScuCihYRU4pIEFDUEkgc2xlZXAgbW9kZXM6
+IFMzCihYRU4pIFZQTVU6IGRpc2FibGVkCihYRU4pIG1jaGVja19wb2xsOiBNYWNoaW5lIGNo
+ZWNrIHBvbGxpbmcgdGltZXIgc3RhcnRlZC4KKFhFTikgRG9tMCBoYXMgbWF4aW11bSA0MzIg
+UElSUXMKKFhFTikgTlggKEV4ZWN1dGUgRGlzYWJsZSkgcHJvdGVjdGlvbiBhY3RpdmUKKFhF
+TikgKioqIExPQURJTkcgRE9NQUlOIDAgKioqCihYRU4pICBYZW4gIGtlcm5lbDogNjQtYml0
+LCBsc2IsIGNvbXBhdDMyCihYRU4pICBEb20wIGtlcm5lbDogNjQtYml0LCBQQUUsIGxzYiwg
+cGFkZHIgMHgxMDAwMDAwIC0+IDB4MjZlNTAwMAooWEVOKSBQSFlTSUNBTCBNRU1PUlkgQVJS
+QU5HRU1FTlQ6CihYRU4pICBEb20wIGFsbG9jLjogICAwMDAwMDAwZmNjMDAwMDAwLT4wMDAw
+MDAwZmQwMDAwMDAwICg1MDA2MzAgcGFnZXMgdG8gYmUgYWxsb2NhdGVkKQooWEVOKSAgSW5p
+dC4gcmFtZGlzazogMDAwMDAwMGZmZTM5NjAwMC0+MDAwMDAwMGZmZmZmZmMwMAooWEVOKSBW
+SVJUVUFMIE1FTU9SWSBBUlJBTkdFTUVOVDoKKFhFTikgIExvYWRlZCBrZXJuZWw6IGZmZmZm
+ZmZmODEwMDAwMDAtPmZmZmZmZmZmODI2ZTUwMDAKKFhFTikgIEluaXQuIHJhbWRpc2s6IDAw
+MDAwMDAwMDAwMDAwMDAtPjAwMDAwMDAwMDAwMDAwMDAKKFhFTikgIFBoeXMtTWFjaCBtYXA6
+IDAwMDAwMDgwMDAwMDAwMDAtPjAwMDAwMDgwMDA0MDAwMDAKKFhFTikgIFN0YXJ0IGluZm86
+ICAgIGZmZmZmZmZmODI2ZTUwMDAtPmZmZmZmZmZmODI2ZTYwMDAKKFhFTikgIFBhZ2UgdGFi
+bGVzOiAgIGZmZmZmZmZmODI2ZTYwMDAtPmZmZmZmZmZmODI2ZmQwMDAKKFhFTikgIEJvb3Qg
+c3RhY2s6ICAgIGZmZmZmZmZmODI2ZmQwMDAtPmZmZmZmZmZmODI2ZmUwMDAKKFhFTikgIFRP
+VEFMOiAgICAgICAgIGZmZmZmZmZmODAwMDAwMDAtPmZmZmZmZmZmODI4MDAwMDAKKFhFTikg
+IEVOVFJZIEFERFJFU1M6IGZmZmZmZmZmODIzODcxODAKKFhFTikgRG9tMCBoYXMgbWF4aW11
+bSAyIFZDUFVzCihYRU4pIEluaXRpYWwgbG93IG1lbW9yeSB2aXJxIHRocmVzaG9sZCBzZXQg
+YXQgMHg0MDAwIHBhZ2VzLgooWEVOKSBTY3J1YmJpbmcgRnJlZSBSQU0gb24gMSBub2RlcyB1
+c2luZyA4IENQVXMKKFhFTikgLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4u
+Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLmRvbmUuCihYRU4pIFN0ZC4gTG9nbGV2ZWw6
+IEVycm9ycywgd2FybmluZ3MgYW5kIGluZm8KKFhFTikgR3Vlc3QgTG9nbGV2ZWw6IE5vdGhp
+bmcgKFJhdGUtbGltaXRlZDogRXJyb3JzIGFuZCB3YXJuaW5ncykKKFhFTikgWGVuIGlzIHJl
+bGlucXVpc2hpbmcgVkdBIGNvbnNvbGUuCihYRU4pICoqKiBTZXJpYWwgaW5wdXQgLT4gRE9N
+MCAodHlwZSAnQ1RSTC1hJyB0aHJlZSB0aW1lcyB0byBzd2l0Y2ggaW5wdXQgdG8gWGVuKQoo
+WEVOKSBGcmVlZCA0NjhrQiBpbml0IG1lbW9yeQ==
+--------------711AD6F41D1086FA4AF32746
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -174,4 +209,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5872394038121484304==--
+--------------711AD6F41D1086FA4AF32746--
