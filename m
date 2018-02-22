@@ -1,17 +1,20 @@
-From: Colin King <colin.king@canonical.com>
-Subject: [PATCH] xen/pvcalls: fix null pointer dereference on
-	map->sock
-Date: Thu, 22 Feb 2018 17:22:59 +0000
-Message-ID: <20180222172259.10381-1-colin.king@canonical.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] tools/xenstore: try to get minimum thread
+ stack size for watch thread
+Date: Thu, 22 Feb 2018 17:28:06 +0000
+Message-ID: <20180222172806.exd3h32kcvonuiw3@citrix.com>
+References: <20180222135335.13913-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=bvze=fq=canonical.com=colin.king@srs-us1.protection.inumbo.net>)
- id 1eouaN-0004ng-3F
- for xen-devel@lists.xenproject.org; Thu, 22 Feb 2018 17:23:11 +0000
+ <srs0=69li=fq=citrix.com=prvs=58412377d=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1eoufG-00050G-Fg
+ for xen-devel@lists.xenproject.org; Thu, 22 Feb 2018 17:28:14 +0000
+Content-Disposition: inline
+In-Reply-To: <20180222135335.13913-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,25 +23,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, jfehlig@suse.com, ian.jackson@eu.citrix.com, wei.liu2@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogQ29saW4gSWFuIEtpbmcgPGNvbGluLmtpbmdAY2Fub25pY2FsLmNvbT4KCkN1cnJlbnRs
-eSBpZiBtYXAgaXMgbnVsbCB0aGVuIGEgcG90ZW50aWFsIG51bGwgcG9pbnRlciBkZWZlcmVuY2UK
-b2NjdXJzIHdoZW4gY2FsbGluZyBzb2NrX3JlbGVhc2Ugb24gbWFwLT5zb2NrLiAgSSBiZWxpZXZl
-IHRoZQphY3R1YWwgaW50ZW50aW9uIHdhcyB0byBjYWxsIHNvY2tfcmVsZWFzZSBvbiBzb2NrIGlu
-c3RlYWQuIEZpeAp0aGlzLgoKRml4ZXM6IDVkYjRkMjg2YThlZiAoInhlbi9wdmNhbGxzOiBpbXBs
-ZW1lbnQgY29ubmVjdCBjb21tYW5kIikKU2lnbmVkLW9mZi1ieTogQ29saW4gSWFuIEtpbmcgPGNv
-bGluLmtpbmdAY2Fub25pY2FsLmNvbT4KLS0tCiBkcml2ZXJzL3hlbi9wdmNhbGxzLWJhY2suYyB8
-IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKZGlm
-ZiAtLWdpdCBhL2RyaXZlcnMveGVuL3B2Y2FsbHMtYmFjay5jIGIvZHJpdmVycy94ZW4vcHZjYWxs
-cy1iYWNrLmMKaW5kZXggMTU2ZTVhZWEzNmRiLi5iMTA5MmZiZWZhNjMgMTAwNjQ0Ci0tLSBhL2Ry
-aXZlcnMveGVuL3B2Y2FsbHMtYmFjay5jCisrKyBiL2RyaXZlcnMveGVuL3B2Y2FsbHMtYmFjay5j
-CkBAIC00MTYsNyArNDE2LDcgQEAgc3RhdGljIGludCBwdmNhbGxzX2JhY2tfY29ubmVjdChzdHJ1
-Y3QgeGVuYnVzX2RldmljZSAqZGV2LAogCQkJCQlzb2NrKTsKIAlpZiAoIW1hcCkgewogCQlyZXQg
-PSAtRUZBVUxUOwotCQlzb2NrX3JlbGVhc2UobWFwLT5zb2NrKTsKKwkJc29ja19yZWxlYXNlKHNv
-Y2spOwogCX0KIAogb3V0OgotLSAKMi4xNS4xCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+T24gVGh1LCBGZWIgMjIsIDIwMTggYXQgMDI6NTM6MzVQTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBXaGVuIGNyZWF0aW5nIGEgcHRocmVhZCBpbiB4c193YXRjaCgpIHRyeSB0byBnZXQg
+dGhlIG1pbmltYWwgbmVlZGVkCj4gc2l6ZSBvZiB0aGUgdGhyZWFkIGZyb20gZ2xpYmMgaW5zdGVh
+ZCBvZiB1c2luZyBhIGNvbnN0YW50LiBUaGlzIGF2b2lkcwo+IHByb2JsZW1zIHdoZW4gdGhlIGxp
+YnJhcnkgaXMgdXNlZCBpbiBwcm9ncmFtcyB3aXRoIGxhcmdlIHBlci10aHJlYWQKPiBtZW1vcnku
+Cj4gCj4gVXNlIGRsc3ltKCkgdG8gZ2V0IHRoZSBwb2ludGVyIHRvIF9fcHRocmVhZF9nZXRfbWlu
+c3RhY2soKSBpbiBvcmRlciB0bwo+IGF2b2lkIGxpbmthZ2UgcHJvYmxlbXMgYW5kIGZhbGwgYmFj
+ayB0byB0aGUgY3VycmVudCBjb25zdGFudCBzaXplIGlmCj4gbm90IGZvdW5kLgo+IAo+IFNpZ25l
+ZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KPiAtLS0KPiBPbmx5IGNv
+bXBpbGUgdGVzdGVkLiBKaW0sIGNhbiB5b3UgcGxlYXNlIHZlcmlmeSB0aGlzIHBhdGNoIGlzIHNv
+bHZpbmcKPiB5b3VyIG9yaWdpbmFsIHByb2JsZW0/Cj4gLS0tCj4gIHRvb2xzL3hlbnN0b3JlL01h
+a2VmaWxlIHwgIDQgKysrKwo+ICB0b29scy94ZW5zdG9yZS94cy5jICAgICB8IDE5ICsrKysrKysr
+KysrKysrKysrKy0KPiAgMiBmaWxlcyBjaGFuZ2VkLCAyMiBpbnNlcnRpb25zKCspLCAxIGRlbGV0
+aW9uKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3Rvb2xzL3hlbnN0b3JlL01ha2VmaWxlIGIvdG9vbHMv
+eGVuc3RvcmUvTWFrZWZpbGUKPiBpbmRleCAyYjk5ZDJiYzFiLi5mYjZjNzNlMjk3IDEwMDY0NAo+
+IC0tLSBhL3Rvb2xzL3hlbnN0b3JlL01ha2VmaWxlCj4gKysrIGIvdG9vbHMveGVuc3RvcmUvTWFr
+ZWZpbGUKPiBAQCAtMTAwLDYgKzEwMCwxMCBAQCBsaWJ4ZW5zdG9yZS5zby4kKE1BSk9SKTogbGli
+eGVuc3RvcmUuc28uJChNQUpPUikuJChNSU5PUikKPiAgCWxuIC1zZiAkPCAkQAo+ICAKPiAgeHMu
+b3BpYzogQ0ZMQUdTICs9IC1EVVNFX1BUSFJFQUQKPiAraWZlcSAoJChDT05GSUdfTGludXgpLHkp
+Cj4gK3hzLm9waWM6IENGTEFHUyArPSAtRFVTRV9ETFNZTQo+ICt4cy5vcGljOiBMREZMQUdTICs9
+IC1sZGwKPiArZW5kaWYKPiAgCj4gIGxpYnhlbnN0b3JlLnNvLiQoTUFKT1IpLiQoTUlOT1IpOiB4
+cy5vcGljIHhzX2xpYi5vcGljCj4gIAkkKENDKSAkKExERkxBR1MpICQoUFRIUkVBRF9MREZMQUdT
+KSAtV2wsJChTT05BTUVfTERGTEFHKSAtV2wsbGlieGVuc3RvcmUuc28uJChNQUpPUikgJChTSExJ
+Ql9MREZMQUdTKSAtbyAkQCAkXiAkKExETElCU19saWJ4ZW50b29sY29yZSkgJChTT0NLRVRfTElC
+UykgJChQVEhSRUFEX0xJQlMpICQoQVBQRU5EX0xERkxBR1MpCj4gZGlmZiAtLWdpdCBhL3Rvb2xz
+L3hlbnN0b3JlL3hzLmMgYi90b29scy94ZW5zdG9yZS94cy5jCj4gaW5kZXggYWJmZmQ5Y2Q4MC4u
+ODM3MmY1YjFhNCAxMDA2NDQKPiAtLS0gYS90b29scy94ZW5zdG9yZS94cy5jCj4gKysrIGIvdG9v
+bHMveGVuc3RvcmUveHMuYwo+IEBAIC00Nyw2ICs0NywxMSBAQCBzdHJ1Y3QgeHNfc3RvcmVkX21z
+ZyB7Cj4gIAo+ICAjaW5jbHVkZSA8cHRocmVhZC5oPgo+ICAKPiArI2lmZGVmIFVTRV9ETFNZTQo+
+ICsjZGVmaW5lIF9fVVNFX0dOVQoKV2hlcmUgZG9lcyB0aGlzIGNvbWUgZnJvbT8gRExTWU0oMykg
+c2F5cyBfR05VX1NPVVJDRSAod2hpY2ggd2UgYWxyZWFkeQpoYXZlKS4KCldlaS4KCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
