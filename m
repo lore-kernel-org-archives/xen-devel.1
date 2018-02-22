@@ -1,18 +1,16 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] xen/tools: support Python 2 and Python 3
-Date: Thu, 22 Feb 2018 12:54:27 +0000
-Message-ID: <30c4e0c3-ad4b-82c2-ba75-44fab36d0d49@citrix.com>
-References: <20180222055246.32522-1-cardoe@cardoe.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [seabios test] 119788: regressions - FAIL
+Date: Thu, 22 Feb 2018 12:55:19 +0000
+Message-ID: <osstest-119788-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6725241632052357178=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=i0y4=fq=citrix.com=prvs=5842a8f9a=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1eoqOU-000822-NU
- for xen-devel@lists.xenproject.org; Thu, 22 Feb 2018 12:54:38 +0000
-In-Reply-To: <20180222055246.32522-1-cardoe@cardoe.com>
-Content-Language: en-GB
+ <srs0=lilr=fq=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1eoqPP-000874-Bv
+ for xen-devel@lists.xenproject.org; Thu, 22 Feb 2018 12:55:35 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,254 +19,232 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Doug Goldstein <cardoe@cardoe.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============6725241632052357178==
-Content-Type: multipart/alternative;
-	boundary="------------6B50B927B2AC13ABE8404A8A"
-Content-Language: en-GB
-
---------------6B50B927B2AC13ABE8404A8A
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 22/02/18 05:52, Doug Goldstein wrote:
-> These changes should make it possible to support modern Pythons as well
-> as the oldest Python 2 still supported.
->
-> Signed-off-by: Doug Goldstein <cardoe@cardoe.com>
-
-To the overall effect, this is definitely a good thing.  Some queries
-however...
-
-> ---
-> CC: Andrew Cooper <andrew.cooper3@citrix.com>
-> CC: George Dunlap <George.Dunlap@eu.citrix.com>
-> CC: Ian Jackson <ian.jackson@eu.citrix.com>
-> CC: Jan Beulich <jbeulich@suse.com>
-> CC: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-> CC: Stefano Stabellini <sstabellini@kernel.org>
-> CC: Tim Deegan <tim@xen.org>
-> CC: Wei Liu <wei.liu2@citrix.com>
-> ---
->  xen/tools/compat-build-header.py |  2 +-
->  xen/tools/compat-build-source.py |  2 +-
->  xen/tools/gen-cpuid.py           | 37 +++++++++++++++++++++++++++----------
->  xen/tools/get-fields.sh          |  2 +-
->  4 files changed, 30 insertions(+), 13 deletions(-)
->
-> diff --git a/xen/tools/compat-build-header.py b/xen/tools/compat-build-header.py
-> index 32421b645b..546371225d 100755
-> --- a/xen/tools/compat-build-header.py
-> +++ b/xen/tools/compat-build-header.py
-> @@ -23,4 +23,4 @@ pats = [
->  for line in sys.stdin.readlines():
->      for pat in pats:
->          line = re.subn(pat[0], pat[1], line)[0]
-> -    print line.rstrip()
-> +    sys.stdout.write(line.rstrip() + '\n')
-
-Is there anything wrong with print(line.rstrip()) which is the more
-common way of doing this?
-
-> diff --git a/xen/tools/compat-build-source.py b/xen/tools/compat-build-source.py
-> index 595bc3ff58..8101290ebe 100755
-> --- a/xen/tools/compat-build-source.py
-> +++ b/xen/tools/compat-build-source.py
-> @@ -26,4 +26,4 @@ for pat in pats:
->  for line in sys.stdin.readlines():
->      for pat in pats:
->          line = re.sub(pat[0], pat[1], line)
-> -    print line.rstrip()
-> +    sys.stdout.write(line.rstrip() + '\n')
-> diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
-> index 613b909c3d..d64f257816 100755
-> --- a/xen/tools/gen-cpuid.py
-> +++ b/xen/tools/gen-cpuid.py
-> @@ -3,6 +3,13 @@
->  
->  import sys, os, re
->  
-> +if (sys.version_info > (3, 0)):
-> +    def long(x):
-> +        return x
-
-Strictly speaking, return int(x), however...
-
-> +
-> +    def xrange(x):
-> +        return range(x)
-> +
->  class Fail(Exception):
->      pass
->  
-> @@ -98,13 +105,13 @@ def parse_definitions(state):
->  def featureset_to_uint32s(fs, nr):
->      """ Represent a featureset as a list of C-compatible uint32_t's """
->  
-> -    bitmap = 0L
-> +    bitmap = long(0)
->      for f in fs:
-> -        bitmap |= 1L << f
-> +        bitmap |= long(1) << f
-
-Having tested this out, I think the L suffixes can just be dropped:
-
-Python 2.4.3 (#1, Sep 21 2011, 20:06:00)
-[GCC 4.1.2 20080704 (Red Hat 4.1.2-51)] on linux2
-Type "help", "copyright", "credits" or "license" for more information.
->>> bitmap = 0
->>> type(bitmap)
-<type 'int'>
->>> for x in xrange(80): bitmap |= 1 << x
-...
->>> type(bitmap)
-<type 'long'>
->>>
-
-I don't recall why I wrote it like this, but I don't think its
-necessary.  As a result, you shouldn't need to define long above.
-
-~Andrew
-
---------------6B50B927B2AC13ABE8404A8A
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 22/02/18 05:52, Doug Goldstein
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:20180222055246.32522-1-cardoe@cardoe.com">
-      <pre wrap="">These changes should make it possible to support modern Pythons as well
-as the oldest Python 2 still supported.
-
-Signed-off-by: Doug Goldstein <a class="moz-txt-link-rfc2396E" href="mailto:cardoe@cardoe.com">&lt;cardoe@cardoe.com&gt;</a></pre>
-    </blockquote>
-    <br>
-    To the overall effect, this is definitely a good thing.  Some
-    queries however...<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:20180222055246.32522-1-cardoe@cardoe.com">
-      <pre wrap="">---
-CC: Andrew Cooper <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a>
-CC: George Dunlap <a class="moz-txt-link-rfc2396E" href="mailto:George.Dunlap@eu.citrix.com">&lt;George.Dunlap@eu.citrix.com&gt;</a>
-CC: Ian Jackson <a class="moz-txt-link-rfc2396E" href="mailto:ian.jackson@eu.citrix.com">&lt;ian.jackson@eu.citrix.com&gt;</a>
-CC: Jan Beulich <a class="moz-txt-link-rfc2396E" href="mailto:jbeulich@suse.com">&lt;jbeulich@suse.com&gt;</a>
-CC: Konrad Rzeszutek Wilk <a class="moz-txt-link-rfc2396E" href="mailto:konrad.wilk@oracle.com">&lt;konrad.wilk@oracle.com&gt;</a>
-CC: Stefano Stabellini <a class="moz-txt-link-rfc2396E" href="mailto:sstabellini@kernel.org">&lt;sstabellini@kernel.org&gt;</a>
-CC: Tim Deegan <a class="moz-txt-link-rfc2396E" href="mailto:tim@xen.org">&lt;tim@xen.org&gt;</a>
-CC: Wei Liu <a class="moz-txt-link-rfc2396E" href="mailto:wei.liu2@citrix.com">&lt;wei.liu2@citrix.com&gt;</a>
----
- xen/tools/compat-build-header.py |  2 +-
- xen/tools/compat-build-source.py |  2 +-
- xen/tools/gen-cpuid.py           | 37 +++++++++++++++++++++++++++----------
- xen/tools/get-fields.sh          |  2 +-
- 4 files changed, 30 insertions(+), 13 deletions(-)
-
-diff --git a/xen/tools/compat-build-header.py b/xen/tools/compat-build-header.py
-index 32421b645b..546371225d 100755
---- a/xen/tools/compat-build-header.py
-+++ b/xen/tools/compat-build-header.py
-@@ -23,4 +23,4 @@ pats = [
- for line in sys.stdin.readlines():
-     for pat in pats:
-         line = re.subn(pat[0], pat[1], line)[0]
--    print line.rstrip()
-+    sys.stdout.write(line.rstrip() + '\n')</pre>
-    </blockquote>
-    <br>
-    Is there anything wrong with print(line.rstrip()) which is the more
-    common way of doing this?<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:20180222055246.32522-1-cardoe@cardoe.com">
-      <pre wrap="">diff --git a/xen/tools/compat-build-source.py b/xen/tools/compat-build-source.py
-index 595bc3ff58..8101290ebe 100755
---- a/xen/tools/compat-build-source.py
-+++ b/xen/tools/compat-build-source.py
-@@ -26,4 +26,4 @@ for pat in pats:
- for line in sys.stdin.readlines():
-     for pat in pats:
-         line = re.sub(pat[0], pat[1], line)
--    print line.rstrip()
-+    sys.stdout.write(line.rstrip() + '\n')
-diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
-index 613b909c3d..d64f257816 100755
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -3,6 +3,13 @@
- 
- import sys, os, re
- 
-+if (sys.version_info &gt; (3, 0)):
-+    def long(x):
-+        return x</pre>
-    </blockquote>
-    <br>
-    Strictly speaking, return int(x), however...<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:20180222055246.32522-1-cardoe@cardoe.com">
-      <pre wrap="">+
-+    def xrange(x):
-+        return range(x)
-+
- class Fail(Exception):
-     pass
- 
-@@ -98,13 +105,13 @@ def parse_definitions(state):
- def featureset_to_uint32s(fs, nr):
-     """ Represent a featureset as a list of C-compatible uint32_t's """
- 
--    bitmap = 0L
-+    bitmap = long(0)
-     for f in fs:
--        bitmap |= 1L &lt;&lt; f
-+        bitmap |= long(1) &lt;&lt; f</pre>
-    </blockquote>
-    <br>
-    Having tested this out, I think the L suffixes can just be dropped:<br>
-    <br>
-    Python 2.4.3 (#1, Sep 21 2011, 20:06:00) <br>
-    [GCC 4.1.2 20080704 (Red Hat 4.1.2-51)] on linux2<br>
-    Type "help", "copyright", "credits" or "license" for more
-    information.<br>
-    &gt;&gt;&gt; bitmap = 0<br>
-    &gt;&gt;&gt; type(bitmap)<br>
-    &lt;type 'int'&gt;<br>
-    &gt;&gt;&gt; for x in xrange(80): bitmap |= 1 &lt;&lt; x<br>
-    ... <br>
-    &gt;&gt;&gt; type(bitmap)<br>
-    &lt;type 'long'&gt;<br>
-    &gt;&gt;&gt; <br>
-    <br>
-    I don't recall why I wrote it like this, but I don't think its
-    necessary.  As a result, you shouldn't need to define long above.<br>
-    <br>
-    ~Andrew
-  </body>
-</html>
-
---------------6B50B927B2AC13ABE8404A8A--
-
-
---===============6725241632052357178==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6725241632052357178==--
+ZmxpZ2h0IDExOTc4OCBzZWFiaW9zIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
+bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMTk3ODgvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3Rz
+IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMg
+d2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1h
+bWQ2NCAxNyBndWVzdC1zdG9wICAgICAgIGZhaWwgUkVHUi4gdnMuIDExNTUzOQoKVGVzdHMgd2hp
+Y2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYW1kNjQtaTM4
+Ni14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtl
+IDExNTUzOQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0
+b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTE1NTM5CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUt
+d3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMTU1MzkKIHRl
+c3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0
+ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0
+LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwg
+bmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRlYmlhbi1o
+dm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFl
+bXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICBmYWlsIG5ldmVyIHBhc3MK
+IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAg
+ICAgICAgIGZhaWwgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHNl
+YWJpb3MgICAgICAgICAgICAgIGFmMGRhZWIyNjg3YWQyNTk1NDgyYjhhNzFiMDJhMDgyYTU2NzJj
+ZWIKYmFzZWxpbmUgdmVyc2lvbjoKIHNlYWJpb3MgICAgICAgICAgICAgIDBjYTZkNjI3N2RmYWZj
+NjcxYTViMzcxOGNiZWI1Yzc4ZTJhODg4ZWEKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDExNTUzOSAg
+MjAxNy0xMS0wMyAyMDo0ODo1OCBaICAxMTAgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMTU3
+MzMgIDIwMTctMTEtMTAgMTc6MTk6NTkgWiAgMTAzIGRheXMgIDEzNCBhdHRlbXB0cwpUZXN0aW5n
+IHNhbWUgc2luY2UgICAxMTkyNTggIDIwMTgtMDItMTUgMDk6MTI6NTQgWiAgICA3IGRheXMgICAx
+MiBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoK
+ICBLZXZpbiBPJ0Nvbm5vciA8a2V2aW5Aa29jb25ub3IubmV0PgogIE1hcmNlbCBBcGZlbGJhdW0g
+PG1hcmNlbEByZWRoYXQuY29tPgogIE1pY2hhZWwgUy4gVHNpcmtpbiA8bXN0QHJlZGhhdC5jb20+
+CiAgTmlrb2xheSBOaWtvbG92IDxuaWNreXNuQHVzZXJzLnNvdXJjZWZvcmdlLm5ldD4KICBQYXVs
+IE1lbnplbCA8cG1lbnplbEBtb2xnZW4ubXBnLmRlPgogIFN0ZWZhbiBCZXJnZXIgPHN0ZWZhbmJA
+bGludXgudm5ldC5pYm0uY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20g
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
+dWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LWxpYnZp
+cnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
+aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUt
+ZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1s
+aWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAogdGVz
+dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAg
+IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFt
+ZCAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFl
+bXV1LXJoZWw2aHZtLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
+LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFt
+ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwt
+cWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
+YW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBm
+YWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkz
+ODYgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
+ZW11dS13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1h
+bWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRl
+c3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21l
+L2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAog
+ICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBs
+YW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBh
+dAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9i
+O2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3
+ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNz
+IGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9w
+PW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCBhZjBkYWVi
+MjY4N2FkMjU5NTQ4MmI4YTcxYjAyYTA4MmE1NjcyY2ViCkF1dGhvcjogTmlrb2xheSBOaWtvbG92
+IDxuaWNreXNuQHVzZXJzLnNvdXJjZWZvcmdlLm5ldD4KRGF0ZTogICBTYXQgRmViIDEwIDEzOjUy
+OjE3IDIwMTggKzAyMDAKCiAgICBmbG9wcHk6IFNlbmQgNCBzZW5zZSBpbnRlcnJ1cHQgY29tbWFu
+ZHMgZHVyaW5nIGNvbnRyb2xsZXIgaW5pdGlhbGl6YXRpb24KICAgIAogICAgRHVyaW5nIGluaXRp
+YWxpemF0aW9uLCByZWFsIGZsb3BweSBjb250cm9sbGVycyBuZWVkIDQgc2Vuc2UgaW50ZXJydXB0
+IGNvbW1hbmRzCiAgICB0byBjbGVhciB0aGUgaW50ZXJydXB0IHN0YXR1cyAodGhpcyByZXByZXNl
+bnRzIHRoZSB0cmFuc2l0aW9uIGZyb20gIm5vdCByZWFkeSIKICAgIHRvICJyZWFkeSIgZm9yIGVh
+Y2ggb2YgdGhlIGZvdXIgdmlydHVhbCBmbG9wcHkgZHJpdmVzKSwgaW5zdGVhZCBvZiBqdXN0IG9u
+ZS4KICAgIAogICAgVGhpcyBpcyBkZXNjcmliZWQgaW4gZGV0YWlsIGluIHNlY3Rpb24gNy40IC0g
+RHJpdmUgUG9sbGluZyBvZiB0aGUgSW50ZWwgODIwNzdBQQogICAgZGF0YXNoZWV0LgogICAgCiAg
+ICBTaWduZWQtb2ZmLWJ5OiBOaWtvbGF5IE5pa29sb3YgPG5pY2t5c25AdXNlcnMuc291cmNlZm9y
+Z2UubmV0PgoKY29tbWl0IDI2MTFkYjQ3MmMwZjBiYWQ0OTg3YzIwOTkwYTQ1YzE3NTM0MmZjMjIK
+QXV0aG9yOiBOaWtvbGF5IE5pa29sb3YgPG5pY2t5c25AdXNlcnMuc291cmNlZm9yZ2UubmV0PgpE
+YXRlOiAgIFNhdCBGZWIgMTAgMTM6NTI6MTYgMjAxOCArMDIwMAoKICAgIGZsb3BweTogV2FpdCBm
+b3IgdGhlIGZsb3BweSBtb3RvciB0byByZWFjaCBhIHN0YWJsZSBzcGVlZCwgYWZ0ZXIgc3RhcnRp
+bmcKICAgIAogICAgV2hlbiBzdGFydGluZyB1cCB0aGUgZmxvcHB5IG1vdG9yLCB3YWl0IGZvciBh
+IGNlcnRhaW4gYW1vdW50IG9mIHRpbWUsIHNvCiAgICB0aGF0IGl0IGNhbiBzcGluIHVwIGFuZCBy
+ZWFjaCBhIHN0YWJsZSBzcGVlZC4gVGhpcyBkZWxheSBpcyBza2lwcGVkLCBpZiB0aGUKICAgIG1v
+dG9yIHdhcyBhbHJlYWR5IHJ1bm5pbmcgKHdoaWNoIGNhbiBoYXBwZW4sIHNpbmNlIHRoZSBmbG9w
+cHkgbW90b3IgaXMKICAgIGludGVudGlvbmFsbHkga2VwdCBzcGlubmluZyBmb3IgMiBzZWNvbmRz
+IGFmdGVyIHRoZSBwcmV2aW91cyBmbG9wcHkKICAgIG9wZXJhdGlvbiBjb21wbGV0ZXMpLgogICAg
+CiAgICBTaWduZWQtb2ZmLWJ5OiBOaWtvbGF5IE5pa29sb3YgPG5pY2t5c25AdXNlcnMuc291cmNl
+Zm9yZ2UubmV0PgoKY29tbWl0IDgxZjQ1YTYyZTg2OTJiZDg0Mjc2ZDU3MDgzM2ZlYzJhNzdjMjVj
+OGUKQXV0aG9yOiBOaWtvbGF5IE5pa29sb3YgPG5pY2t5c25AdXNlcnMuc291cmNlZm9yZ2UubmV0
+PgpEYXRlOiAgIFNhdCBGZWIgMTAgMTM6NTI6MTUgMjAxOCArMDIwMAoKICAgIGZsb3BweTogU3Vw
+cG9ydCB1cCB0byA0IGZsb3BweSBkcml2ZXMgd2hlbiB0dXJuaW5nIG9uIHRoZSBmbG9wcHkgbW90
+b3IKICAgIAogICAgVGhlIHByZXZpb3VzIHZlcnNpb24gYWxsb3dlZCBmb3Igb25seSB0d28gZmxv
+cHBpZXMuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IE5pa29sYXkgTmlrb2xvdiA8bmlja3lzbkB1
+c2Vycy5zb3VyY2Vmb3JnZS5uZXQ+Cgpjb21taXQgZjljYzk2OWIzZTY3MDEwNjI3YjNkZTZlOTg5
+NzUyZTAxYjMzM2NlMgpBdXRob3I6IE5pa29sYXkgTmlrb2xvdiA8bmlja3lzbkB1c2Vycy5zb3Vy
+Y2Vmb3JnZS5uZXQ+CkRhdGU6ICAgU2F0IEZlYiAxMCAxMzo1MjoxNCAyMDE4ICswMjAwCgogICAg
+ZmxvcHB5OiBFeGVjdXRlIGEgU1BFQ0lGWSBjb21tYW5kIGFmdGVyIHNlbnNpbmcgdGhlIG1lZGlh
+IHR5cGUKICAgIAogICAgVGhlIFNQRUNJRlkgY29tbWFuZCBzZXRzIHRoZSBTdGVwIFJhdGUgVGlt
+ZSwgSGVhZCBMb2FkIFRpbWUsIEhlYWQgVW5sb2FkIFRpbWUKICAgIGFuZCB0aGUgRE1BIGVuYWJs
+ZS9kaXNhYmxlIGJpdC4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogTmlrb2xheSBOaWtvbG92IDxu
+aWNreXNuQHVzZXJzLnNvdXJjZWZvcmdlLm5ldD4KCmNvbW1pdCBiMDBhMDNhNDllMjhkNTE4NDM1
+ZGVlYjIyZDExOWJiZDk1OWU3OGEzCkF1dGhvcjogTmlrb2xheSBOaWtvbG92IDxuaWNreXNuQHVz
+ZXJzLnNvdXJjZWZvcmdlLm5ldD4KRGF0ZTogICBTYXQgRmViIDEwIDEzOjUyOjEzIDIwMTggKzAy
+MDAKCiAgICBmbG9wcHk6IGhvbGQgdGhlIERPUiByZXNldCBiaXQgbG93IGZvciA0IG1pY3Jvc2Vj
+b25kcywgd2hlbiByZXNldHRpbmcKICAgIAogICAgU2lnbmVkLW9mZi1ieTogTmlrb2xheSBOaWtv
+bG92IDxuaWNreXNuQHVzZXJzLnNvdXJjZWZvcmdlLm5ldD4KCmNvbW1pdCA0YTZkYmNlYTNlNDEy
+ZmUxMmVmZmEyZjgxMmY1MGRkN2VhZTkwOTU1CkF1dGhvcjogTmlrb2xheSBOaWtvbG92IDxuaWNr
+eXNuQHVzZXJzLnNvdXJjZWZvcmdlLm5ldD4KRGF0ZTogICBTdW4gRmViIDQgMTc6Mjc6MDEgMjAx
+OCArMDIwMAoKICAgIGZsb3BweTogVXNlIHRpbWVyX2NoZWNrKCkgaW4gZmxvcHB5X3dhaXRfaXJx
+KCkKICAgIAogICAgVXNlIHRpbWVyX2NoZWNrKCkgaW5zdGVhZCBvZiB1c2luZyBmbG9wcHlfbW90
+b3JfY291bnRlciBpbiBCREEgZm9yIHRoZQogICAgdGltZW91dCBjaGVjayBpbiBmbG9wcHlfd2Fp
+dF9pcnEoKS4KICAgIAogICAgVGhlIHByb2JsZW0gd2l0aCB1c2luZyBmbG9wcHlfbW90b3JfY291
+bnRlciB3YXMgdGhhdCwgYWZ0ZXIgaXQgcmVhY2hlcwogICAgMCwgaXQgaW1tZWRpYXRlbHkgc3Rv
+cHMgdGhlIGZsb3BweSBtb3RvcnMsIHdoaWNoIGlzIG5vdCB3aGF0IGlzCiAgICBzdXBwb3NlZCB0
+byBoYXBwZW4gb24gcmVhbCBoYXJkd2FyZS4gSW5zdGVhZCwgYWZ0ZXIgYSB0aW1lb3V0IChsaWtl
+IGluCiAgICB0aGUgZW5kIG9mIGV2ZXJ5IGZsb3BweSBvcGVyYXRpb24sIHJlZ2FyZGxlc3Mgb2Yg
+dGhlIHJlc3VsdCAtIHN1Y2Nlc3MsCiAgICB0aW1lb3V0IG9yIGVycm9yKSwgdGhlIGZsb3BweSBt
+b3RvcnMgbXVzdCBiZSBrZXB0IHNwaW5uaW5nIGZvcgogICAgYWRkaXRpb25hbCAyIHNlY29uZHMg
+KHRoZSBGTE9QUFlfTU9UT1JfVElDS1MpLiBTbywgbm93IHRoZQogICAgZmxvcHB5X21vdG9yX2Nv
+dW50ZXIgaXMgaW5pdGlhbGl6ZWQgdG8gMjU1ICh0aGUgbWF4IHZhbHVlKSBpbiB0aGUKICAgIGJl
+Z2lubmluZyBvZiB0aGUgZmxvcHB5IG9wZXJhdGlvbi4gRm9yIElSUSB0aW1lb3V0cywgYSBkaWZm
+ZXJlbnQKICAgIHRpbWVvdXQgaXMgdXNlZCwgc3BlY2lmaWVkIGJ5IHRoZSBuZXcgRkxPUFBZX0lS
+UV9USU1FT1VUIGNvbnN0YW50CiAgICAoY3VycmVudGx5IHNldCB0byA1IHNlY29uZHMgLSBhIGZh
+aXJseSBjb25zZXJ2YXRpdmUgdmFsdWUsIGJ1dCBzaG91bGQKICAgIHdvcmsgcmVsaWFibHkgb24g
+bW9zdCBmbG9wcGllcykuCiAgICAKICAgIEFmdGVyIHRoZSBmbG9wcHkgb3BlcmF0aW9uLCBmbG9w
+cHlfZHJpdmVfcGlvKCkgcmVzZXRzIHRoZQogICAgZmxvcHB5X21vdG9yX2NvdW50ZXIgdG8gMiBz
+ZWNvbmRzIChGTE9QUFlfTU9UT1JfVElDS1MpLgogICAgCiAgICBUaGlzIGlzIGFsc28gY29uc2lz
+dGVudCB3aXRoIHdoYXQgb3RoZXIgUEMgQklPU2VzIGRvLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5
+OiBOaWtvbGF5IE5pa29sb3YgPG5pY2t5c25AdXNlcnMuc291cmNlZm9yZ2UubmV0PgoKY29tbWl0
+IDQ4OGVkZTIyOTc0NjFhZjlkNjBkZDIxY2ZmODUzYTQ5YWZkYzJjNzAKQXV0aG9yOiBOaWtvbGF5
+IE5pa29sb3YgPG5pY2t5c25AdXNlcnMuc291cmNlZm9yZ2UubmV0PgpEYXRlOiAgIFN1biBGZWIg
+NCAxNzoyNzowMCAyMDE4ICswMjAwCgogICAgZmxvcHB5OiBSZXNldCB0aGUgZmxvcHB5IG1vdG9y
+IGNvdW50IGluIGZsb3BweV9kcml2ZV9waW8oKQogICAgCiAgICBSZXNldCB0aGUgZmxvcHB5IG1v
+dG9yIGNvdW50LCBzbyB0aGUgbW90b3Iga2VlcHMgc3Bpbm5pbmcgMiBzZWNvbmRzCiAgICBhZnRl
+ciBhIGZsb3BweSBvcGVyYXRpb24sIHBlcmZvcm1lZCBieSBmbG9wcHlfZHJpdmVfcGlvKCkuCiAg
+ICAKICAgIFNpZ25lZC1vZmYtYnk6IE5pa29sYXkgTmlrb2xvdiA8bmlja3lzbkB1c2Vycy5zb3Vy
+Y2Vmb3JnZS5uZXQ+Cgpjb21taXQgNTNkODJmMGVlOGViYTU3MTY4OWY2NGI3NDhiY2E4ZTliYWRk
+YThiMgpBdXRob3I6IE5pa29sYXkgTmlrb2xvdiA8bmlja3lzbkB1c2Vycy5zb3VyY2Vmb3JnZS5u
+ZXQ+CkRhdGU6ICAgU3VuIEZlYiA0IDE3OjI2OjU5IDIwMTggKzAyMDAKCiAgICBmbG9wcHk6IFBy
+ZXNlcnZlIG1vdG9yIGFuZCBkcml2ZSBzZWwgYml0cyB3aGVuIHJlc2V0dGluZyB0aGUgZmxvcHB5
+IGNvbnRyb2xsZXIKICAgIAogICAgSW4gY2FzZSBvZiByZWFkIG9yIHdyaXRlIGVycm9ycywgdGhl
+IGZsb3BweSBzeXN0ZW0gaXMgdXN1YWxseSByZXNldCBhbmQgdGhlCiAgICBvcGVyYXRpb24gaXMg
+cmV0cmllZC4gSW4gdGhhdCBjYXNlLCB0aGUgZmxvcHB5IG1vdG9yIHN0YXRlIG11c3QgYmUgcHJl
+c2VydmVkCiAgICBpbiBvcmRlciB0byBhdm9pZCBjcmVhdGluZyBqaXR0ZXIgYW5kIGtlZXAgdGhl
+IGZsb3BweSBtb3RvciBzcGlubmluZyBzbW9vdGhseQogICAgYXQgYSBjb25zdGFudCBzcGVlZC4g
+QWRkaXRpb25hbGx5LCB0aGUgZHJpdmUgc2VsZWN0IGJpdHMgc2hvdWxkIHByb2JhYmx5IGFsc28K
+ICAgIGJlIHByZXNlcnZlZCwgYmVjYXVzZSBzb21lIHN5c3RlbXMgbWlnaHQgbmVlZCBhIHNtYWxs
+IGRlbGF5IGFmdGVyIHNlbGVjdGluZyBhCiAgICBuZXcgZHJpdmUuIEluIHRoYXQgY2FzZSwgdGhl
+IG9wZXJhdGlvbiB3b3VsZCBiZSByZXRyaWVkLCB3aXRob3V0IGNoYW5naW5nCiAgICB0aGUgY3Vy
+cmVudGx5IHNlbGVjdGVkIGRyaXZlLgogICAgCiAgICBJbiBmbG9wcHlfZW5hYmxlX2NvbnRyb2xs
+ZXIoKSwgdGhlIElSUSBiaXQgaXMgbm93IGVuYWJsZWQgZmlyc3QsIGJlZm9yZSB0aGUKICAgIHJl
+c2V0IGJpdCBpcyBzZXQuIEknbSBub3QgY29tcGxldGVseSBzdXJlIHdoZXRoZXIgdGhpcyBpcyBu
+ZWNlc3NhcnkuIEl0IGlzCiAgICBkb25lIGp1c3QgaW4gY2FzZSBzb21lIGhhcmR3YXJlIGludHJv
+ZHVjZXMgYSBkZWxheSBiZXR3ZWVuIHNldHRpbmcgdGhpcyBiaXQKICAgIGFuZCBhY3R1YWxseSBl
+bmFibGluZyB0aGUgSVJRLCB3aGljaCB3b3VsZCBjYXVzZSB1cyB0byBtaXNzIHRoZSBJUlEsIHNl
+bnQgYnkKICAgIHRoZSBjb250cm9sbGVyIGltbWVkaWF0ZWx5IGFmdGVyIHJlc2V0LgogICAgCiAg
+ICBTaWduZWQtb2ZmLWJ5OiBOaWtvbGF5IE5pa29sb3YgPG5pY2t5c25AdXNlcnMuc291cmNlZm9y
+Z2UubmV0PgoKY29tbWl0IDUzZmM2MzEzMDdiMmM0YTQwM2UxODNhZmNjNWZmZTI3OTg3MzQ5YTYK
+QXV0aG9yOiBOaWtvbGF5IE5pa29sb3YgPG5pY2t5c25AdXNlcnMuc291cmNlZm9yZ2UubmV0PgpE
+YXRlOiAgIFN1biBGZWIgNCAxNzoyNjo1OCAyMDE4ICswMjAwCgogICAgZmxvcHB5OiBJbnRyb2R1
+Y2UgRkxPUFBZX0RPUl9YWFggY29uc3RhbnRzCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IE5pa29s
+YXkgTmlrb2xvdiA8bmlja3lzbkB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQ+Cgpjb21taXQgNTE1N2E3
+ODgyZGU4YjUwYzIzNjVmZDkxNjZjNWQ5MTg2MWE0NzhhMgpBdXRob3I6IE5pa29sYXkgTmlrb2xv
+diA8bmlja3lzbkB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQ+CkRhdGU6ICAgU3VuIEZlYiA0IDE3OjI2
+OjU3IDIwMTggKzAyMDAKCiAgICBmbG9wcHk6IEludHJvZHVjZSBmbG9wcHlfZG9yX21hc2soKQog
+ICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBOaWtvbGF5IE5pa29sb3YgPG5pY2t5c25AdXNlcnMuc291
+cmNlZm9yZ2UubmV0PgoKY29tbWl0IDNkZGI0MmYzOGY1MDU0YWE2ZWVkNzk3MWYxMGRhMGFkYzA3
+NmM3NGUKQXV0aG9yOiBOaWtvbGF5IE5pa29sb3YgPG5pY2t5c25AdXNlcnMuc291cmNlZm9yZ2Uu
+bmV0PgpEYXRlOiAgIFN1biBGZWIgNCAxNzoyNjo1NiAyMDE4ICswMjAwCgogICAgZmxvcHB5OiBJ
+bnRyb2R1Y2UgdGhlIGZsb3BweV9kb3JfcmVhZCgpIGZ1bmN0aW9uCiAgICAKICAgIFNpZ25lZC1v
+ZmYtYnk6IE5pa29sYXkgTmlrb2xvdiA8bmlja3lzbkB1c2Vycy5zb3VyY2Vmb3JnZS5uZXQ+Cgpj
+b21taXQgMTRkOTFjMzUzZTE5YjcwODVmZGJiN2IyZGNjNDNmMzM1NTY2NTY3MApBdXRob3I6IE1h
+cmNlbCBBcGZlbGJhdW0gPG1hcmNlbEByZWRoYXQuY29tPgpEYXRlOiAgIFRodSBKYW4gMTEgMjI6
+MTU6MTIgMjAxOCArMDIwMAoKICAgIHBjaTogZml4ICdpbyBoaW50cycgY2FwYWJpbGl0eSBmb3Ig
+UmVkSGF0IFBDSSBicmlkZ2VzCiAgICAKICAgIENvbW1pdCBlYzZjYjE3ZiAocGNpOiBlbmFibGUg
+UmVkSGF0IFBDSSBicmlkZ2VzIHRvIHJlc2VydmUgYWRkaXRpb25hbAogICAgICAgICAgICAgICAg
+ICAgICByZXNvdXJjZXMgb24gUENJIGluaXQpCiAgICBhZGRlZCBhIG5ldyB2ZW5kb3Igc3BlY2lm
+aWMgUENJIGNhcGFiaWxpdHkgZm9yIFJlZEhhdCBQQ0kgYnJpZGdlcwogICAgYWxsb3dpbmcgdGhl
+bSB0byByZXNlcnZlIGFkZGl0aW9uYWwgYnVzZXMgYW5kL29yIElPL01FTSBzcGFjZS4KICAgIAog
+ICAgV2hlbiBhZGRpbmcgdGhlIElPIGhpbnRzIFBDSSBjYXBhYmlsaXR5IHRvIHRoZSBwY2llLXJv
+b3QtcG9ydAogICAgd2l0aG91dCBzcGVjaWZ5aW5nIGEgdmFsdWUgZm9yIGJ1cyByZXNlcnZhdGlv
+biwgdGhlIHN1Ym9yZGluYXRlIGJ1cwogICAgY29tcHV0YXRpb24gaXMgd3JvbmcgYW5kIHRoZSBn
+dWVzdCBrZXJuZWwgZ2V0cyBtZXNzZWQgdXAuCiAgICAKICAgIEZpeCBpdCBieSByZXR1cm5pbmcg
+dG8gcHJldiBjb2RlIGlmIHRoZSB2YWx1ZSBmb3IgYnVzCiAgICByZXNlcnZhdGlvbiBpcyBub3Qg
+c2V0LgogICAgCiAgICBSZW1vdmVkIGFsc28gYSB3cm9uZyBkZWJ1ZyBwcmludCAiUENJOiBpbnZh
+bGlkIFFFTVUgcmVzb3VyY2UgcmVzZXJ2ZQogICAgY2FwIG9mZnNldCIgd2hpY2ggYXBwZWFycyBp
+ZiB0aGUgJ0lPIGhpbnRzJyBjYXBhYmlsaXR5IGlzIG5vdCBwcmVzZW50LgogICAgCiAgICBBY2tl
+ZC1ieTogTWljaGFlbCBTLiBUc2lya2luIDxtc3RAcmVkaGF0LmNvbT4KICAgIFNpZ25lZC1vZmYt
+Ynk6IE1hcmNlbCBBcGZlbGJhdW0gPG1hcmNlbEByZWRoYXQuY29tPgoKY29tbWl0IDg0NGI4NjQ2
+NGE1Y2JmZmZiNjJiODc4MDg2MzIwMThjYTI1MGQ4NjcKQXV0aG9yOiBQYXVsIE1lbnplbCA8cG1l
+bnplbEBtb2xnZW4ubXBnLmRlPgpEYXRlOiAgIE1vbiBPY3QgMiAwODoxMzoxMyAyMDE3ICswMjAw
+CgogICAgZG9jcy9Eb3dubG9hZDogVXNlIG1vcmUgc2VjdXJlIEhUVFBTIFVSTHMgd2hlcmUgcG9z
+c2libGUKICAgIAogICAgU2lnbmVkLW9mZi1ieTogUGF1bCBNZW56ZWwgPHBtZW56ZWxAbW9sZ2Vu
+Lm1wZy5kZT4KCmNvbW1pdCBkZjQ2ZDEwYzhhN2I4OGViODJmM2NlYjJhYTMxNzgyZGVlMTU1OTNk
+CkF1dGhvcjogU3RlZmFuIEJlcmdlciA8c3RlZmFuYkBsaW51eC52bmV0LmlibS5jb20+CkRhdGU6
+ICAgVHVlIE5vdiAxNCAxNTowMzo0NyAyMDE3IC0wNTAwCgogICAgdHBtOiBBZGQgc3VwcG9ydCBm
+b3IgVFBNMiBBQ1BJIHRhYmxlCiAgICAKICAgIEFkZCBzdXBwb3J0IGZvciB0aGUgVFBNMiBBQ1BJ
+IHRhYmxlLiBJZiB3ZSBmaW5kIGl0IGFuZCBpdHMKICAgIG9mIHRoZSBhcHByb3ByaWF0ZSBzaXpl
+LCB3ZSBjYW4gZ2V0IHRoZSBsb2dfYXJlYV9zdGFydF9hZGRyZXNzCiAgICBhbmQgbG9nX2FyZWFf
+bWluaW11bV9zaXplIGZyb20gaXQuCiAgICAKICAgIFRoZSBsYXRlc3QgdmVyc2lvbiBvZiB0aGUg
+c3BlYyBjYW4gYmUgZm91bmQgaGVyZToKICAgIAogICAgaHR0cHM6Ly90cnVzdGVkY29tcHV0aW5n
+Z3JvdXAub3JnL3RjZy1hY3BpLXNwZWNpZmljYXRpb24vCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6
+IFN0ZWZhbiBCZXJnZXIgPHN0ZWZhbmJAbGludXgudm5ldC5pYm0uY29tPgoKY29tbWl0IDA1NDFm
+MmYwZjI0NmU3N2Q3YzcyNjkyNjk3NjkyMGU4MDcyZDExMTkKQXV0aG9yOiBLZXZpbiBPJ0Nvbm5v
+ciA8a2V2aW5Aa29jb25ub3IubmV0PgpEYXRlOiAgIEZyaSBOb3YgMTAgMTI6MjA6MzUgMjAxNyAt
+MDUwMAoKICAgIHBhcmF2aXJ0OiBPbmx5IGVuYWJsZSBzZXJjb24gaW4gTk9HUkFQSElDIG1vZGUg
+aWYgbm8gb3RoZXIgY29uc29sZSBzcGVjaWZpZWQKICAgIAogICAgU2lnbmVkLW9mZi1ieTogS2V2
+aW4gTydDb25ub3IgPGtldmluQGtvY29ubm9yLm5ldD4KCmNvbW1pdCA5Y2U2Nzc4ZjA4YzYzMmM1
+MmIyNWJjOGY3NTQyOTFlZjE4NzEwZDUzCkF1dGhvcjogS2V2aW4gTydDb25ub3IgPGtldmluQGtv
+Y29ubm9yLm5ldD4KRGF0ZTogICBGcmkgTm92IDEwIDEyOjE2OjM2IDIwMTcgLTA1MDAKCiAgICBk
+b2NzOiBBZGQgc2VyY29uLXBvcnQgdG8gUnVudGltZV9jb25maWcubWQgZG9jdW1lbnRhdGlvbgog
+ICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBLZXZpbiBPJ0Nvbm5vciA8a2V2aW5Aa29jb25ub3IubmV0
+PgoKY29tbWl0IDYzNDUxZmNhMTNjNzU4NzBlMTcwM2ViM2UyMDU4NGQ5MTE3OWFlYmMKQXV0aG9y
+OiBLZXZpbiBPJ0Nvbm5vciA8a2V2aW5Aa29jb25ub3IubmV0PgpEYXRlOiAgIEZyaSBOb3YgMTAg
+MTE6NDk6MTkgMjAxNyAtMDUwMAoKICAgIGRvY3M6IE5vdGUgdjEuMTEuMCByZWxlYXNlCiAgICAK
+ICAgIFNpZ25lZC1vZmYtYnk6IEtldmluIE8nQ29ubm9yIDxrZXZpbkBrb2Nvbm5vci5uZXQ+Cgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
