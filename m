@@ -1,8 +1,8 @@
-From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+From: Wei Liu <wei.liu2@citrix.com>
 Subject: Re: [PATCH v2] xen: append EXTRA_CFLAGS_XEN_CORE to
 	CFLAGS
-Date: Thu, 22 Feb 2018 11:59:59 -0500
-Message-ID: <20180222165959.GN31483@char.us.oracle.com>
+Date: Thu, 22 Feb 2018 17:01:56 +0000
+Message-ID: <20180222170156.m6ffqz7roi5gxill@citrix.com>
 References: <20180222054816.32068-1-cardoe@cardoe.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -10,9 +10,9 @@ Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=vfgg=fq=oracle.com=konrad.wilk@srs-us1.protection.inumbo.net>)
- id 1eouED-0002ng-8X
- for xen-devel@lists.xenproject.org; Thu, 22 Feb 2018 17:00:17 +0000
+ <srs0=69li=fq=citrix.com=prvs=58412377d=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1eouGi-0002vO-TB
+ for xen-devel@lists.xenproject.org; Thu, 22 Feb 2018 17:02:52 +0000
 Content-Disposition: inline
 In-Reply-To: <20180222054816.32068-1-cardoe@cardoe.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -33,8 +33,8 @@ QV9DRkxBR1NfWEVOX0NPUkUKPiBlbnZpcm9ubWVudCB2YXJpYWJsZSBmb3IgaHlwZXJ2aXNvciBi
 dWlsZHMuIFRoaXMgaXMgbm90IGEKPiBjb25maWd1cmF0aW9uIHRoYXQgaXMgc3VwcG9ydGVkIGJ1
 dCBpcyBvbmx5IGFpbWVkIHRvIGhlbHAgc3VwcG9ydAo+IHRlc3RpbmcgYW5kIHRyb3VibGVzaG9v
 dGluZyB3aGVuIHlvdSBuZWVkIHRvIG1ha2UgY2hhbmdlcy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBE
-b3VnIEdvbGRzdGVpbiA8Y2FyZG9lQGNhcmRvZS5jb20+CgpSZXZpZXdlZC1ieTogS29ucmFkIFJ6
-ZXN6dXRlayBXaWxrIDxrb25yYWQud2lsa0BvcmFjbGUuY29tPgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+b3VnIEdvbGRzdGVpbiA8Y2FyZG9lQGNhcmRvZS5jb20+CgpSZXZpZXdlZC1ieTogV2VpIExpdSA8
+d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
