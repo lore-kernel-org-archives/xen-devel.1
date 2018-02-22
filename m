@@ -1,20 +1,21 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 5/5] xen/libxc: suppress direct access to
- Credit1's migration delay
-Date: Thu, 22 Feb 2018 18:39:27 +0100
-Message-ID: <1519321167.5547.79.camel@suse.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH 4/5] tools: xenpm: continue to support {set,
+ get}-vcpu-migration-delay
+Date: Thu, 22 Feb 2018 17:52:27 +0000
+Message-ID: <20180222175227.awemazu5b2xyr3ml@citrix.com>
 References: <151931759370.5408.3600378338263227885.stgit@Solace.fritz.box>
- <151931853231.5408.9342065801393552631.stgit@Solace.fritz.box>
- <20180222173028.muupn7gtdmld72s3@citrix.com>
+ <151931852510.5408.13930153756262535259.stgit@Solace.fritz.box>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2465408041682946183=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=dhkj=fq=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1eouqW-00068U-TE
- for xen-devel@lists.xenproject.org; Thu, 22 Feb 2018 17:39:52 +0000
-In-Reply-To: <20180222173028.muupn7gtdmld72s3@citrix.com>
+ <srs0=69li=fq=citrix.com=prvs=58412377d=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1eov2k-0007PV-9o
+ for xen-devel@lists.xenproject.org; Thu, 22 Feb 2018 17:52:30 +0000
+Content-Disposition: inline
+In-Reply-To: <151931852510.5408.13930153756262535259.stgit@Solace.fritz.box>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,87 +24,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org
+To: Dario Faggioli <dfaggioli@suse.com>
+Cc: George Dunlap <george.dunlap@eu.citrix.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2465408041682946183==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-uIvLpbO9m2owcJIkf5Qq"
-
-
---=-uIvLpbO9m2owcJIkf5Qq
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2018-02-22 at 17:30 +0000, Wei Liu wrote:
-> On Thu, Feb 22, 2018 at 05:55:32PM +0100, Dario Faggioli wrote:
-> > Removes special purpose access to Credit1 vCPU
-> > migration delay parameter.
-> >=20
-> > This fixes a build breakage, occuring when Xen
-> > is configured with SCHED_CREDIT=3Dn.
-> >=20
-> > Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
-> > ---
-> > Ian Jackson <ian.jackson@eu.citrix.com>
-> > Wei Liu <wei.liu2@citrix.com>
-> > Andrew Cooper <andrew.cooper3@citrix.com>
-> > George Dunlap <George.Dunlap@eu.citrix.com>
-> > Jan Beulich <jbeulich@suse.com>
-> > Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-> > Stefano Stabellini <sstabellini@kernel.org>
-> > Tim Deegan <tim@xen.org>
-> > George Dunlap <george.dunlap@eu.citrix.com>
->=20
-> Forgot to prepend "Cc: ". :-)
->
-Indeed! :-/
-
-In this one only... Which I don't know if it's better or worse.
-
-Sorry,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-uIvLpbO9m2owcJIkf5Qq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqPAE8ACgkQFkJ4iaW4
-c+5RJRAAyDvZQzK3IjsMeiYmIEW1QE1vgTj3AisEmUJlscCWUjQMzqTaVTd5b1k4
-j6lYpK3B+pkMMWcXZrE+19pJ2gjpEMZ48Phlmlyag1NJX7L+4JTJuPR97PE3ZrZd
-ALJeuDC5r7M9FnP8AVY1CgCgDI/i/DkJZgozfreW26R2bxj5VF+XMd/ZLMHDGih9
-ndezloZkIonQhkuhgIhvCgxD24JiYAKCKuwzllLMyBroxjWD7/0pEWwuNwMm4wCG
-OQpogp2WEJqiArQuagT3YN3jnwI3josEGYd3WSV4DSFsyx2EPScu+mWhoewC7ULy
-hfe25w+n1LK9opxxy94oQL/YerN+UTK/Q6hOjy730iHcDjOb4M3Uc+dIkds9NuzV
-co1LPB1dZ9EXMPvJKm3hRZjd6kzUhtanRzmrWyIurTZaw90zDqJ/2LDYOLT8dC7v
-H3b6Q/Q2cX9uCo1OG33w0UXG9EJRNjPqWtP1G6DnhHy5KygOXAblvP7HrIxQvCZ2
-1vGBpBKzKKl4m+CEeZcIApm47gV3EOYNMzGF3QnnysA2AMQpuq0c+mPuGeGbrLh6
-czLw1dLTBBbIa2nz/sD2QC9UJiR3JoZowca07KcAukJHVJ6HcKs9anHYLP/lzL3b
-QFkbukvc59Ue1Lu1Cv5gB5ZTwXwPEuGbbmAo/0bPUdkX76OZtyE=
-=JIpG
------END PGP SIGNATURE-----
-
---=-uIvLpbO9m2owcJIkf5Qq--
-
-
-
---===============2465408041682946183==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2465408041682946183==--
+T24gVGh1LCBGZWIgMjIsIDIwMTggYXQgMDU6NTU6MjVQTSArMDEwMCwgRGFyaW8gRmFnZ2lvbGkg
+d3JvdGU6Cj4gTm93IHRoYXQgaXQgaXMgcG9zc2libGUgdG8gZ2V0IGFuZCBzZXQgdGhlIG1pZ3Jh
+dGlvbgo+IGRlbGF5IHZpYSB0aGUgU0NIRURPUCBzeXNjdGwsIHVzZSB0aGF0IGluIHhlbnBtLCBp
+bnN0ZWFkCj4gb2YgdGhlIHNwZWNpYWwgcHVycG9zZSBsaWJ4YyBpbnRlcmZhY2UgKHdoaWNoIHdp
+bGwgYmUKPiByZW1vdmVkIGluIGEgZm9sbG93aW5nIGNvbW1pdCkuCj4gCj4gVGhlIHN5c2N0bCwg
+aG93ZXZlciwgcmVxdWlyZXMgYSBjcHVwb29sLWlkIGFyZ3VtZW50LAo+IGZvciBrbm93aW5nIG9u
+IHdoaWNoIHNjaGVkdWxlciBpdCBpcyBvcGVyYXRpbmcgb24uIEluCj4gdGhpcyBjYXNlLCBzaW5j
+ZSB3ZSBkb24ndCB3YW50IHRvIGFsdGVyIHhlbnBtJ3MgY29tbWFuZAo+IGxpbmUgaW50ZXJmYWNl
+LCB3ZSBhbHdheXMgdXNlICcwJywgd2hpY2ggbWVhbnMgeGVucG0KPiB3aWxsIGFsd2F5cyBhY3Qg
+b24gdGhlIGRlZmF1bHQgY3B1cG9vbCAoJ1Bvb2wtMCcpLgo+IAo+ID5Gcm9tIHRoaXMgY29tbWl0
+IG9uLCBgeGVucG0ge3NldCxnZXR9LXZjcHUtbWlncmF0aW9uLWRlbGF5Jwo+IGNvbW1hbmRzIHdv
+cmsgYWdhaW4uIEJ1dCB0aGF0IGlzIG9ubHkgZm9yIHRoZSBzYWtlIG9mCj4gYmFja3dhcmQgY29t
+cGF0aWJpbGl0eSwgYW5kIHRoZWlyIHVzZSBpcyBkZXByZWNhdGVkLCBpbgo+IGZhdm91ciBvZiAn
+eGwgc2NoZWQtY3JlZGl0IC1zIFstYyA8cG9vbGlkPl0gLW0gPGRlbGF5PicuCj4gCj4gU2lnbmVk
+LW9mZi1ieTogRGFyaW8gRmFnZ2lvbGkgPGRmYWdnaW9saUBzdXNlLmNvbT4KCkFja2VkLWJ5OiBX
+ZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
