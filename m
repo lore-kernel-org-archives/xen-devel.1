@@ -1,15 +1,17 @@
 From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
  <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH] libxl: allow libxl_domain_suspend to simply
- suspend a domain, without saving it
-Date: Fri, 23 Feb 2018 21:03:26 +0100
-Message-ID: <20180223200326.GI2023@mail-itl>
-References: <20180208231404.3857-1-marmarek@invisiblethingslab.com>
- <20180223184757.5iwsch7sf4p5tvcg@citrix.com>
+Subject: Re: libxl - avoid calling block script
+Date: Fri, 23 Feb 2018 21:14:03 +0100
+Message-ID: <20180223201403.GJ2023@mail-itl>
+References: <20180209010242.GA2297@mail-itl>
+ <20180209105524.y35zzjwhfqvokswz@MacBook-Pro-de-Roger.local>
+ <20180209110355.jgd3vp24nlwledyt@MacBook-Pro-de-Roger.local>
+ <20180209113513.GK2070@mail-itl>
+ <20180223182856.5vcmlc2msqvpl7ya@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0049565659784265640=="
+Content-Type: multipart/mixed; boundary="===============1116895485409770960=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180223184757.5iwsch7sf4p5tvcg@citrix.com>
+In-Reply-To: <20180223182856.5vcmlc2msqvpl7ya@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,46 +21,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Wei Liu <wei.liu2@citrix.com>
-Cc: Marcus of Wetware Labs <marcus@wetwa.re>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
+Cc: xen-devel <xen-devel@lists.xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============0049565659784265640==
+--===============1116895485409770960==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="QDd5rp1wjxlDmy9q"
+	protocol="application/pgp-signature"; boundary="a7XSrSxqzVsaECgU"
 Content-Disposition: inline
 
 
---QDd5rp1wjxlDmy9q
+--a7XSrSxqzVsaECgU
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 23, 2018 at 06:47:57PM +0000, Wei Liu wrote:
-> On Fri, Feb 09, 2018 at 12:14:03AM +0100, Marek Marczykowski-G=C3=B3recki=
+On Fri, Feb 23, 2018 at 06:28:56PM +0000, Wei Liu wrote:
+> On Fri, Feb 09, 2018 at 12:35:13PM +0100, Marek Marczykowski-G=C3=B3recki=
  wrote:
-> > When fd=3D-1, no savefile will be written, but the domain will still be
-> > suspended (but not destroyed). The main reason for this functionality is
-> > to suspend the host while some domains are running, potentially holding
-> > PCI devices. This will give a chance to a driver in such a domain to
-> > properly suspend device.
+> > On Fri, Feb 09, 2018 at 11:03:55AM +0000, Roger Pau Monn=C3=A9 wrote:
+> > > Really adding Ian and Wei.
+> > >=20
+> > > On Fri, Feb 09, 2018 at 10:55:24AM +0000, Roger Pau Monn=C3=A9 wrote:
+> > > > So the problem is creation time for domains that have quite a lot of
+> > > > disks attached. Adding Ian and Wei who know more about the async
+> > > > dispatch system, but I think (at least from a technical PoV) it
+> > > > should be possible to parallelize device attachment and thus hotplug
+> > > > script execution. Devices are independent from each other.
 > >=20
-> > It would be better to have separate function for this, but in fact it
-> > should be named libxl_domain_suspend, then the current one renamed to
-> > libxl_domain_save. Since that would break API compatibility, keep it in
-> > the same function.
+> > In theory yes, but in practice block script (at least on Linux) takes a
+> > lock and serialize execution...
 > >=20
-> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
-> > Signed-off-by: Marcus of Wetware Labs <marcus@wetwa.re>
+> > > > Also the Linux hotplug scripts in general seem extremely convoluted,
+> > > > I'm not sure whether we could gain some speed there just by
+> > > > simplification.
+> >=20
+> > Well, we're comparing a bunch of fork+exec(), including starting bash
+> > (default /bin/sh on most systems), with just a single stat() call...
+> > Handling scripts in libxl itself also takes some time (in my case libxl
+> > live in libvirt, which may or may not have an impact). For a domU with
+> > 4 disks, getting rid of hotplug scripts saved about 2s of startup time.
+> >=20
 >=20
-> The basic idea seems sensible.
+> Sorry for the late reply.
 >=20
-> Please add a comment to libxl.h to specify the new semantics.
+> If you really don't want block scripts, can you not specify a script
+> that only does "exit 0"? That seems to be easier than modifying libxl
+> and it is also useable in older versions of Xen.
 
-Hmm, while I'm looking at it, maybe better idea would be to use flags
-for that? I'd call it LIBXL_SUSPEND_SUSPEND, but it looks stupid, any
-better idea?
+But this is only one part of the picture. Something needs to set
+physical-device xenstore entry. Libxl did that before, but it was
+removed (see original message in this thread). I may write alternative
+simplified block script for such case and measure performance of it, but
+this feels overly complex, especially when libxl already have everything
+it needs to quickly fill that xenstore entry.
+
+Anyway, I'll go that way for now.
 
 --=20
 Best Regards,
@@ -67,25 +85,25 @@ Invisible Things Lab
 A: Because it messes up the order in which people normally read text.
 Q: Why is top-posting such a bad thing?
 
---QDd5rp1wjxlDmy9q
+--a7XSrSxqzVsaECgU
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlqQc6cACgkQ24/THMrX
-1ywcBAf+OBuzAznpegjcHyELkC/Gq05ljw1HzYAQSER0xBXFI4mYpeoUAyncVx1o
-FZrwdqjNo8PBIjeeWMoEAYNmSuv3GGsf9KwjiUFGlkW2P+TZBkkUVRT71KaokG0u
-WFXRuuVXNf9lUrJtmxb5z4iJ5GbWLgwxj+vt5QJvDrVEcRNRlxvreqKkMgF0VCAi
-hs8DKC8KU4oZFfIH2L4ZrJXy+vvYrHl7I83PNkejzCmGcpMahVBEsc5FdCFJJdIq
-vi+pxwUZAznZ8D4dy3BZkpf2pu4XQiCi4/un5f5V6m07ZDusDrPONSDMNK4HTtC5
-QAUKQPdukfdSFbPl9YDPxjTtW8nk4g==
-=7Rjh
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlqQdiQACgkQ24/THMrX
+1yz2NQf+Pjh0birS6h3XM9I7+YZ2iYPlhAD4H9qSqbtI+jYpa3IU/P0NtMW7yI2U
+cRkhBtXn6oPbwkEAjN2Y3eoUwQFQJqbJNFp4t4G/Wz4Yk4k9Nm2Q4kSz+sYcF2Zp
+4Xd2Dplwq96G000+nivgMCYYL3FKyFJSEI8r/zpuhZOga187DPLdcniOBTmMjFkS
+YzFz5CjewTb1W1j+w2cYkujs5sLU4k5C/BK3eTl7qvK2Jrmiy2oBJL9v6cnTqdFM
+cmqqZPQAd1NdvPjKmMXPvEETMbH/Rz8odmvaudv70Aqy5fxwdlAIxIE5Lzbz1prj
+Nq7fmCvlIGWeMBbd8/6tkJS/HQUraA==
+=snPy
 -----END PGP SIGNATURE-----
 
---QDd5rp1wjxlDmy9q--
+--a7XSrSxqzVsaECgU--
 
 
---===============0049565659784265640==
+--===============1116895485409770960==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -95,4 +113,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============0049565659784265640==--
+--===============1116895485409770960==--
