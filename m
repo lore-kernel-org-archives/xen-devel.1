@@ -1,16 +1,16 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v4 13/16] xen/grant: Switch {create,
- replace}_grant_p2m_mapping to typesafe MFN
-Date: Fri, 23 Feb 2018 17:29:50 +0000
-Message-ID: <20180223172950.4kxm2klgm6uxfyqx@citrix.com>
+Subject: Re: [PATCH v4 14/16] xen/grant: Switch
+ common/grant_table.c to use typesafe MFN
+Date: Fri, 23 Feb 2018 17:30:58 +0000
+Message-ID: <20180223173058.q7jrzta2szl5butc@citrix.com>
 References: <20180221140259.29360-1-julien.grall@arm.com>
- <20180221140259.29360-14-julien.grall@arm.com>
+ <20180221140259.29360-15-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <20180221140259.29360-14-julien.grall@arm.com>
+In-Reply-To: <20180221140259.29360-15-julien.grall@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,13 +23,10 @@ To: Julien Grall <julien.grall@arm.com>
 Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBGZWIgMjEsIDIwMTggYXQgMDI6MDI6NTZQTSArMDAwMCwgSnVsaWVuIEdyYWxsIHdy
-b3RlOgo+IFRoZSBjdXJyZW50IHByb3RvdHlwZSBpcyBzbGlnaHRseSBjb25mdXNpbmcgYmVjYXVz
-ZSBpdCB0YWtlcyBhIGd1ZXN0Cj4gcGh5c2ljYWwgYWRkcmVzcyBhbmQgYSBtYWNoaW5lIHBoeXNp
-Y2FsIGZyYW1lIChub3QgYWRkcmVzcyEpLiBTd2l0Y2hpbmcgdG8KPiBNRk4gd2lsbCBpbXByb3Zl
-IHNhZmV0eSBhbmQgcmVkdWNlIHRoZSBjaGFuY2UgdG8gbWlzdGFrZW5seSBpbnZlcnQgdGhlCj4g
-MiBwYXJhbWV0ZXJzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEp1bGllbiBncmFsbCA8anVsaWVuLmdy
-YWxsQGFybS5jb20+Cj4gCgpSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNv
-bT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBGZWIgMjEsIDIwMTggYXQgMDI6MDI6NTdQTSArMDAwMCwgSnVsaWVuIEdyYWxsIHdy
+b3RlOgo+IE5vIGZ1bmN0aW9uYWwgY2hhbmdlIGludGVuZGVkLgo+IAo+IFNpZ25lZC1vZmYtYnk6
+IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CgpSZXZpZXdlZC1ieTogV2VpIExp
+dSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
