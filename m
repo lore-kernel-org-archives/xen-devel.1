@@ -1,13 +1,15 @@
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
  <marmarek@invisiblethingslab.com>
-Subject: [PATCH v2] libxl: do not fail device removal if backend
-	domain is gone
-Date: Fri, 23 Feb 2018 21:00:41 +0100
-Message-ID: <20180223200041.7121-1-marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH] libxl: allow libxl_domain_suspend to simply
+ suspend a domain, without saving it
+Date: Fri, 23 Feb 2018 21:03:26 +0100
+Message-ID: <20180223200326.GI2023@mail-itl>
+References: <20180208231404.3857-1-marmarek@invisiblethingslab.com>
+ <20180223184757.5iwsch7sf4p5tvcg@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0049565659784265640=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <20180223184757.5iwsch7sf4p5tvcg@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,57 +18,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
-Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Marcus of Wetware Labs <marcus@wetwa.re>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-QmFja2VuZCBkb21haW4gbWF5IGJlIGluZGVwZW5kZW50bHkgZGVzdHJveWVkIC0gdGhlcmUgaXMg
-bm8Kc3luY2hyb25pemF0aW9uIG9mIGxpYnhsIHN0cnVjdHVyZXMgKGluY2x1ZGluZyAvbGlieGwg
-dHJlZSkgZWxzZXdoZXJlLgpCYWNrZW5kIG1pZ2h0IGFsc28gcmVtb3ZlIHRoZSBkZXZpY2UgaW5m
-byBmcm9tIGl0cyBiYWNrZW5kIHhlbnN0b3JlCnN1YnRyZWUgb24gaXRzIG93bi4KCldlIGhhdmUg
-dmFyaW91cyBjYXNlcyAobm90IGNvbXByZWhlbnNpdmUgbGlzdCk6CgogLSBib3RoIGZyb250ZW5k
-IGFuZCBiYWNrZW5kIG9wZXJhdGlvbmFsOiBhZnRlciBzZXR0aW5nCiAgIGJlL3N0YXRlPVhlbmJ1
-c1N0YXRlQ2xvc2luZyBiYWNrZW5kIHdhaXQgZm9yIGZyb250ZW5kIGNvbmZpcm1hdGlvbgogICBh
-bmQgcmVzcG9uZCB3aXRoIGJlL3N0YXRlPVhlbmJ1c1N0YXRlQ2xvc2VkOyB0aGVuIGxpYnhsIGlu
-IGRvbTAKICAgcmVtb3ZlIGZyb250ZW5kIGVudHJpZXMgYW5kIGxpYnhsIGluIGJhY2tlbmQgZG9t
-YWluICh3aGljaCBtYXkgYmUgdGhlCiAgIHNhbWUpIHJlbW92ZSBiYWNrZW5kIGVudHJpZXMKIC0g
-dW5yZXNwb25zaXZlIGJhY2tlbmQvZnJvbnRlbmQ6IGFmdGVyIGEgdGltZW91dCwgZm9yY2U9MSBp
-cyB1c2VkIHRvIHJlbW92ZQogICBmcm9udGVuZCBlbnRyaWVzLCBpbnN0ZWFkIG9mIGp1c3Qgc2V0
-dGluZwogICBiZS9zdGF0ZT1YZW5idXNTdGF0ZUNsb3Npbmc7IHRoZW4gd2FpdCBmb3IgYmUvc3Rh
-dGU9WGVuYnVzU3RhdGVDbG9zZWQuCiAgIElmIHRoYXQgdGltZW91dCB0b28sIHJlbW92ZSBib3Ro
-IGZyb250ZW5kIGFuZCBiYWNrZW5kIGVudHJpZXMKIC0gYmFja2VuZCBnb25lLCB3aXRoIHRoaXMg
-cGF0Y2g6IG5vIHBsYWNlIGZvciBzZXR0aW5nL3dhaXRpbmcgb24KICAgYmUvc3RhdGUgLSBnbyBk
-aXJlY3RseSB0byByZW1vdmluZyBmcm9udGVuZCBlbnRyaWVzLCB3aXRob3V0IHdhaXRpbmcKICAg
-Zm9yIGJlL3N0YXRlPVhlbmJ1c1N0YXRlQ2xvc2VkICh0aGlzIGlzIHRoZSBkaWZmZXJlbmNlIHZz
-IGZvcmNlPTEpCgpXaXRob3V0IHRoaXMgcGF0Y2ggdGhlIGVuZCByZXN1bHQgaXMgc2ltaWxhciwg
-Ym90aCBmcm9udGVuZCBhbmQgYmFja2VuZAplbnRyaWVzIGFyZSByZW1vdmVkLCBidXQgaW4gY2Fz
-ZSBvZiBiYWNrZW5kIGdvbmU6CiAtIGxpYnhsIHdhaXRzIGZvciBiZS9zdGF0ZT1YZW5idXNTdGF0
-ZUNsb3NlZCAoYW5kIG9idmlvdXNseSB0aW1lb3V0KQogLSByZXR1cm4gdmFsdWUgZnJvbSB0aGUg
-ZnVuY3Rpb24gc2lnbmFsIGFuIGVycm9yLCB3aGljaCBmb3IgZXhhbXBsZQogICBjb25mdXNlIGxp
-YnZpcnQgLSBpdCB0aGlua3MgdGhlIGRldmljZSByZW1vdmUgZmFpbGVkLCBzbyBpcyBzdGlsbAog
-ICB0aGVyZQoKSWYgc3VjaCBzaXR1YXRpb24gaXMgZGV0ZWN0ZWQsIGRvIG5vdCBmYWlsIHRoZSBy
-ZW1vdmFsLCBidXQgZmluaXNoIHRoZQpjbGVhbnVwIG9mIHRoZSBmcm9udGVuZCBzaWRlIGFuZCBy
-ZXR1cm4gMC4KClRoaXMgaXMganVzdCB3b3JrYXJvdW5kLCB0aGUgcmVhbCBmaXggc2hvdWxkIHdh
-dGNoIHdoZW4gdGhlIGRldmljZQpiYWNrZW5kIGlzIHJlbW92ZWQgKGluY2x1ZGluZyBiYWNrZW5k
-IGRvbWFpbiBkZXN0cnVjdGlvbikgYW5kIHJlbW92ZQpmcm9udGVuZCBhdCB0aGF0IHRpbWUuIEFu
-ZCByZXBvcnQgc3VjaCBldmVudCB0byBoaWdoZXIgbGF5ZXIgY29kZSwgc28KZm9yIGV4YW1wbGUg
-bGlidmlydCBjb3VsZCBzeW5jaHJvbml6ZSBpdHMgc3RhdGUuCgpTaWduZWQtb2ZmLWJ5OiBNYXJl
-ayBNYXJjenlrb3dza2ktR8OzcmVja2kgPG1hcm1hcmVrQGludmlzaWJsZXRoaW5nc2xhYi5jb20+
-CgotLS0KQ2hhbmdlcyBpbiB2MjoKIC0gY2hhbmdlIFdBUk4gdG8gSU5GTwogLSBkZXRhaWxlZCBl
-eHBsYW5hdGlvbiBpbiBjb21taXQgbWVzc2FnZQotLS0KIHRvb2xzL2xpYnhsL2xpYnhsX2Rldmlj
-ZS5jIHwgNyArKysrKysrCiAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCspCgpkaWZmIC0t
-Z2l0IGEvdG9vbHMvbGlieGwvbGlieGxfZGV2aWNlLmMgYi90b29scy9saWJ4bC9saWJ4bF9kZXZp
-Y2UuYwppbmRleCAxYjc5NmJkMzkyLi5jNjBjYWZlNzc0IDEwMDY0NAotLS0gYS90b29scy9saWJ4
-bC9saWJ4bF9kZXZpY2UuYworKysgYi90b29scy9saWJ4bC9saWJ4bF9kZXZpY2UuYwpAQCAtOTk3
-LDYgKzk5NywxMyBAQCB2b2lkIGxpYnhsX19pbml0aWF0ZV9kZXZpY2VfZ2VuZXJpY19yZW1vdmUo
-bGlieGxfX2VnYyAqZWdjLAogICAgICAgICAgICAgZ290byBvdXQ7CiAgICAgICAgIH0KIAorICAg
-ICAgICAvKiBpZiBzdGF0ZV9wYXRoIGlzIGVtcHR5LCBhc3N1bWUgYmFja2VuZCBpcyBnb25lIChi
-YWNrZW5kIGRvbWFpbgorICAgICAgICAgKiBzaHV0ZG93bj8pLCBjbGVhbnVwIGZyb250ZW5kIG9u
-bHk7IHJjPTAgKi8KKyAgICAgICAgaWYgKCFzdGF0ZSkgeworICAgICAgICAgICAgTE9HKElORk8s
-ICJiYWNrZW5kICVzIGFscmVhZHkgcmVtb3ZlZCwgY2xlYW51cCBmcm9udGVuZCBvbmx5IiwgYmVf
-cGF0aCk7CisgICAgICAgICAgICBnb3RvIG91dDsKKyAgICAgICAgfQorCiAgICAgICAgIHJjID0g
-bGlieGxfX3hzX3dyaXRlX2NoZWNrZWQoZ2MsIHQsIG9ubGluZV9wYXRoLCAiMCIpOwogICAgICAg
-ICBpZiAocmMpCiAgICAgICAgICAgICBnb3RvIG91dDsKLS0gCjIuMTMuNgoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============0049565659784265640==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="QDd5rp1wjxlDmy9q"
+Content-Disposition: inline
+
+
+--QDd5rp1wjxlDmy9q
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Feb 23, 2018 at 06:47:57PM +0000, Wei Liu wrote:
+> On Fri, Feb 09, 2018 at 12:14:03AM +0100, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > When fd=3D-1, no savefile will be written, but the domain will still be
+> > suspended (but not destroyed). The main reason for this functionality is
+> > to suspend the host while some domains are running, potentially holding
+> > PCI devices. This will give a chance to a driver in such a domain to
+> > properly suspend device.
+> >=20
+> > It would be better to have separate function for this, but in fact it
+> > should be named libxl_domain_suspend, then the current one renamed to
+> > libxl_domain_save. Since that would break API compatibility, keep it in
+> > the same function.
+> >=20
+> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
+slab.com>
+> > Signed-off-by: Marcus of Wetware Labs <marcus@wetwa.re>
+>=20
+> The basic idea seems sensible.
+>=20
+> Please add a comment to libxl.h to specify the new semantics.
+
+Hmm, while I'm looking at it, maybe better idea would be to use flags
+for that? I'd call it LIBXL_SUSPEND_SUSPEND, but it looks stupid, any
+better idea?
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--QDd5rp1wjxlDmy9q
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlqQc6cACgkQ24/THMrX
+1ywcBAf+OBuzAznpegjcHyELkC/Gq05ljw1HzYAQSER0xBXFI4mYpeoUAyncVx1o
+FZrwdqjNo8PBIjeeWMoEAYNmSuv3GGsf9KwjiUFGlkW2P+TZBkkUVRT71KaokG0u
+WFXRuuVXNf9lUrJtmxb5z4iJ5GbWLgwxj+vt5QJvDrVEcRNRlxvreqKkMgF0VCAi
+hs8DKC8KU4oZFfIH2L4ZrJXy+vvYrHl7I83PNkejzCmGcpMahVBEsc5FdCFJJdIq
+vi+pxwUZAznZ8D4dy3BZkpf2pu4XQiCi4/un5f5V6m07ZDusDrPONSDMNK4HTtC5
+QAUKQPdukfdSFbPl9YDPxjTtW8nk4g==
+=7Rjh
+-----END PGP SIGNATURE-----
+
+--QDd5rp1wjxlDmy9q--
+
+
+--===============0049565659784265640==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0049565659784265640==--
