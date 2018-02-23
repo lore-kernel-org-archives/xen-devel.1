@@ -1,20 +1,21 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 5/5] xen/libxc: suppress direct access to
- Credit1's migration delay
-Date: Fri, 23 Feb 2018 10:25:59 +0100
-Message-ID: <1519377959.5547.115.camel@suse.com>
-References: <151931759370.5408.3600378338263227885.stgit@Solace.fritz.box>
- <151931853231.5408.9342065801393552631.stgit@Solace.fritz.box>
- <5A8FE8C802000078001AAC3A@prv-mh.provo.novell.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2] x86/HVM: don't give the wrong impression
+ of WRMSR succeeding
+Date: Fri, 23 Feb 2018 10:07:31 +0000
+Message-ID: <6bbd6b49-6781-4fbb-3d5d-78ce183bda65@citrix.com>
+References: <5A8ED75E02000078001AA6A4@prv-mh.provo.novell.com>
+ <5A8FE09E02000078001AABC6@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4568032265734638659=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=zwdw=fr=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1epA6u-0000aU-P7
- for xen-devel@lists.xenproject.org; Fri, 23 Feb 2018 09:57:48 +0000
-In-Reply-To: <5A8FE8C802000078001AAC3A@prv-mh.provo.novell.com>
+ <srs0=ixqo=fr=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
+ id 1epAGP-0001R8-6K
+ for xen-devel@lists.xenproject.org; Fri, 23 Feb 2018 10:07:37 +0000
+In-Reply-To: <5A8FE09E02000078001AABC6@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,79 +24,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4568032265734638659==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-u6s++3yV98WguhAmkQVm"
-
-
---=-u6s++3yV98WguhAmkQVm
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2018-02-23 at 02:11 -0700, Jan Beulich wrote:
-> > > > On 22.02.18 at 17:55, <dfaggioli@suse.com> wrote:
-> >=20
-> > --- a/xen/include/public/sysctl.h
-> > +++ b/xen/include/public/sysctl.h
-> > @@ -351,8 +351,6 @@ struct xen_sysctl_pm_op {
-> >          uint32_t                    set_sched_opt_smt;
-> >          uint32_t                    get_max_cstate;
-> >          uint32_t                    set_max_cstate;
-> > -        uint32_t                    get_vcpu_migration_delay;
-> > -        uint32_t                    set_vcpu_migration_delay;
-> >      } u;
-> >  };
->=20
-> Such removal imo needs to be accompanied by bumping of the
-> interface version.
->=20
-Right! Sorry, I keep forgetting about that. Will do.
-
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-u6s++3yV98WguhAmkQVm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqP3igACgkQFkJ4iaW4
-c+627xAAleXakg6Ow6y6I+MAKUKWATpsq/lMwab41Atb2nuLJ0JVNS1y3j6PNj1P
-nqAxLguWuYbEX972MIhpvLQh0Ff4ynGriB54JSkmJ5SBah6TwZ3YGm36pgvco6Ly
-cP6T5meMd/HNL9s14opLaZtp+zKX7A1UhNziF9Q/EMjTYS3I2oRaIX1z1VSt2YMN
-cSU2hl3qIUdKryp5K0Og1oduNUAHsszdDDBc8ziRr/eMegifcIpMn7eDD9Dfw7Wf
-YmfaUSiClXDNb8EVnFpwKUlauChOciSjdQ8RP2YZtO0JeuQJgmYsimJHj6mrd4q0
-6is4woQ/Mxb1XiCgPuX2wNLGs6nOKIN8Y6dJNdllQoNvFoTJptPDQo0joRMK5aBB
-dBFEmAkCP/W45n5coCYLH9WWu0R1SjFI0XqZK+216APzKvALc1fnjqw5oLhobRNd
-F+j24mr4wXLr+fuGZAYMEDGbswSGq/6MLpI0DlHCdt/tha01Y7j2BInnHd2Q5S/L
-gUC1JC5UplC1g+nWcXxtpmJxAN30/v9PTv8ozgyfopuvWDMt1BPspV1N4Ni8qUIL
-GyLa4lazQxdmZtAn7BQEhQRBbZCHkvMPKYye5Umer5uLozzsfj5mqZEQp3o3Yzp9
-At4Hs7N9S803DJQ6dozJ/b8/ec1dhvXUMmemOGUjfbKQ41T99XI=
-=oaEY
------END PGP SIGNATURE-----
-
---=-u6s++3yV98WguhAmkQVm--
-
-
-
---===============4568032265734638659==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4568032265734638659==--
+T24gMjMvMDIvMjAxOCAwODozNiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gLi4uIGZvciBub24tZXhp
+c3RlbnQgTVNSczogd3Jtc3JfaHlwZXJ2aXNvcl9yZWdzKCkncyBjb21tZW50IGNsZWFybHkKPiBz
+YXlzIHRoYXQgdGhlIGZ1bmN0aW9uIHJldHVybnMgMCBmb3IgdW5yZWNvZ25pemVkIE1TUnMsIHNv
+Cj4ge3N2bSx2bXh9X21zcl93cml0ZV9pbnRlcmNlcHQoKSBzaG91bGQgbm90IGNvbnZlcnQgdGhp
+cyBpbnRvIHN1Y2Nlc3MuIFdlCj4gZG9uJ3Qgd2FudCB0byB1bmNvbmRpdGlvbmFsbHkgZmFpbCB0
+aGUgYWNjZXNzIHRob3VnaCwgYXMgd2UgY2FuJ3QgYmUKPiBjZXJ0YWluIHRoZSBsaXN0IG9mIGhh
+bmRsZWQgTVNScyBpcyBjb21wbGV0ZSBlbm91Z2ggZm9yIHRoZSBndWVzdCB0eXBlcwo+IHdlIGNh
+cmUgYWJvdXQsIHNvIGluc3RlYWQgbWlycm9yIHdoYXQgd2UgZG8gb24gdGhlIHJlYWQgcGF0aHMg
+YW5kIHByb2JlCj4gdGhlIE1TUiB0byBkZWNpZGUgd2hldGhlciB0byByYWlzZSAjR1AuCj4KPiBT
+aWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpJJ20gbm90IGEg
+ZmFuIG9mIHRoaXMgYXBwcm9hY2gsIGJ1dCBJIGFjY2VwdCB0aGF0IGl0IG1pZ2h0IGJlIHRoZSBs
+ZWFzdApiYWQgb3B0aW9uIGdvaW5nLgoKSG93ZXZlciwgSSdtIHN0cnVnZ2xpbmcgdG8gdW5kZXJz
+dGFuZCBob3cgaXQgcmVzb2x2ZXMgdGhlIGlzc3VlIHlvdQpwcmVzZW50ZWQ/wqAgSW4gdGhlIGV4
+YW1wbGUsIExpbnV4IGRpZCBhIHdybXNyX3NhZmUoKSB0aGVuIGJsZXcgdXAgb24gYQpyZG1zcigp
+LsKgIFdhcyB0aGF0IGluIGZhY3QgcnVubmluZyBvbiBoYXJkd2FyZSBsYWNraW5nIFBTUi9Rb1Mg
+c3VwcG9ydD8KCklycmVzcGVjdGl2ZSwgSSB0aGluayB0aGF0IGVudGlyZSBibG9jayBvZiBNU1Jz
+IHdhbnRzIGJsYWNrbGlzdGluZyBpbgp0aGUgc2hvcnQgdGVybSwgdG8gbWFrZSB0aGVtIGluYWNj
+ZXNzaWJsZS4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
