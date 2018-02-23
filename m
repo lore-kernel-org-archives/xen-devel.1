@@ -1,17 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/5] x86/pv: Avoid leaking other guests'
- MSR_TSC_AUX values into PV context
-Date: Fri, 23 Feb 2018 14:22:40 +0000
-Message-ID: <f373d12c-01f6-9474-3996-9c00788bf4c7@citrix.com>
-References: <1519127923-23539-1-git-send-email-andrew.cooper3@citrix.com>
- <1519127923-23539-3-git-send-email-andrew.cooper3@citrix.com>
- <5A902D8202000078001AAEDD@prv-mh.provo.novell.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 3/5] tools: libxl/xl: allow to get/set
+ Credit1's vcpu_migration_delay
+Date: Fri, 23 Feb 2018 15:26:42 +0100
+Message-ID: <1519396002.5547.121.camel@suse.com>
+References: <151931759370.5408.3600378338263227885.stgit@Solace.fritz.box>
+ <151931851789.5408.6727951847305599062.stgit@Solace.fritz.box>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1985872688559422051=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A902D8202000078001AAEDD@prv-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=zwdw=fr=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1epEJQ-0005IU-2y
+ for xen-devel@lists.xenproject.org; Fri, 23 Feb 2018 14:27:00 +0000
+In-Reply-To: <151931851789.5408.6727951847305599062.stgit@Solace.fritz.box>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,51 +22,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, SuraveeSuthikulpanit <suravee.suthikulpanit@amd.com>, Xen-devel <xen-devel@lists.xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: George Dunlap <george.dunlap@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjMvMDIvMTggMTQ6MDQsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDIwLjAyLjE4IGF0
-IDEyOjU4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IC0tLSBhL3hlbi9h
-cmNoL3g4Ni9kb21haW4uYwo+PiArKysgYi94ZW4vYXJjaC94ODYvZG9tYWluLmMKPj4gQEAgLTE1
-MzMsOSArMTUzMyw5IEBAIHZvaWQgcGFyYXZpcnRfY3R4dF9zd2l0Y2hfdG8oc3RydWN0IHZjcHUg
-KnYpCj4+ICAgICAgaWYgKCB1bmxpa2VseSh2LT5hcmNoLmRlYnVncmVnWzddICYgRFI3X0FDVElW
-RV9NQVNLKSApCj4+ICAgICAgICAgIGFjdGl2YXRlX2RlYnVncmVncyh2KTsKPj4gIAo+PiAtICAg
-IGlmICggKHYtPmRvbWFpbi0+YXJjaC50c2NfbW9kZSA9PSAgVFNDX01PREVfUFZSRFRTQ1ApICYm
-Cj4+IC0gICAgICAgICBib290X2NwdV9oYXMoWDg2X0ZFQVRVUkVfUkRUU0NQKSApCj4+IC0gICAg
-ICAgIHdyaXRlX3JkdHNjcF9hdXgodi0+ZG9tYWluLT5hcmNoLmluY2FybmF0aW9uKTsKPj4gKyAg
-ICBpZiAoIGNwdV9oYXNfcmR0c2NwICkKPj4gKyAgICAgICAgd3Jtc3JfdHNjX2F1eCh2LT5kb21h
-aW4tPmFyY2gudHNjX21vZGUgPT0gVFNDX01PREVfUFZSRFRTQ1AKPj4gKyAgICAgICAgICAgICAg
-ICAgICAgICA/IHYtPmRvbWFpbi0+YXJjaC5pbmNhcm5hdGlvbiA6IDApOwo+IFdvdWxkbid0IHRo
-ZSBjb25kaXRpb25hbCBiZXR0ZXIgY2hlY2sgY3B1X2hhc19yZHRzY3AgfHwgY3B1X2hhc19yZHBp
-ZAo+ICh0aGVuIGFsc28gYmV0dGVyIG1hdGNoaW5nIHRoZSBkZXNjcmlwdGlvbik/IEFuZCBpZiBz
-bywgdGhlbiBwZXJoYXBzCj4gYWxzbyBpbiBvdGhlciwgcHJlLWV4aXN0aW5nIGNvbmRpdGlvbmFs
-cz8KCmNwdV9oYXNfcmRwaWQgYWxyZWFkeSBpbXBsaWVzIGNwdV9oYXNfcmR0c2NwIGluIHByYWN0
-aWNlLCBtYWtpbmcgdGhlIHx8CnJlZHVuZGFudC7CoCBObyBoYXJkd2FyZSBleGlzdHMgd2l0aCBy
-ZHBpZCBidXQgd2l0aG91dCByZHRzY3AuCgpYZW4ncyBDUFVJRCBsb2dpYyBnZXRzIHVwZGF0ZWQg
-dG8gY29wZSBpbiBwYXRjaCA1LCBidXQgdGhlIG9ubHkgcGxhY2UKdGhpcyBjYW4gY3VycmVudGx5
-IGdvIHdyb25nIGlzIHdoZW4gcnVubmluZyBYZW4gdmlydHVhbGlzZWQgdW5kZXIgWGVuCndpdGgg
-UFZSRFRTQyBlbmFibGVkLCBhbmQgSSBkb24ndCB0aGluayB3ZSBuZWVkIHRvIGNhcmUgYWJvdXQg
-dGhpcyBjYXNlLgoKPgo+PiBAQCAtMjEwLDYgKzIwOCwyMCBAQCBzdGF0aWMgaW5saW5lIHZvaWQg
-d3JpdGVfZWZlcih1aW50NjRfdCB2YWwpCj4+ICAKPj4gIERFQ0xBUkVfUEVSX0NQVSh1MzIsIGxl
-cl9tc3IpOwo+PiAgCj4+ICtERUNMQVJFX1BFUl9DUFUodWludDMyX3QsIHRzY19hdXgpOwo+PiAr
-Cj4+ICsvKiBMYXp5IHVwZGF0ZSBvZiBNU1JfVFNDX0FVWCAqLwo+PiArc3RhdGljIGlubGluZSB2
-b2lkIHdybXNyX3RzY19hdXgodWludDMyX3QgdmFsKQo+IEFsb25nIHRoZSBsaW5lcyBvZiByZHRz
-YygpICh3aGljaCBhbHNvIHJlYWRzIGFuIE1TUiBpbiByZWFsaXR5KQo+IHdydHNjX2F1eCgpPwoK
-cmR0c2MoKSBpcyBuYW1lZCBhZnRlciB0aGUgaW5zdHJ1Y3Rpb24uCgpUaGVyZSBpcyBubyB3cnRz
-YyBpbnN0cnVjdGlvbiwgYW5kIG5hbWluZyB0aGUgZnVuY3Rpb24gbGlrZSB0aGF0IGhpZGVzCml0
-cyBwdXJwb3NlLgoKPgo+PiArewo+PiArICAgIHVpbnQzMl90ICp0aGlzX3RzY19hdXggPSAmdGhp
-c19jcHUodHNjX2F1eCk7Cj4+ICsKPj4gKyAgICBpZiAoICp0aGlzX3RzY19hdXggIT0gdmFsICkK
-Pj4gKyAgICB7Cj4+ICsgICAgICAgIHdybXNyKE1TUl9UU0NfQVVYLCB2YWwsIDApOwo+PiArICAg
-ICAgICAqdGhpc190c2NfYXV4ID0gdmFsOwo+IEkgdGhpbmsgaXQgaXMgZ2VuZXJhbGx5IG1vcmUg
-c2FmZSB0byB3cml0ZSB0aGUgY2FjaGVkIHZhbHVlIGZpcnN0LCBzbwo+IHRoYXQgc29tZSBhc3lu
-Y2hyb25vdXMgd3JpdGVyIHdvdWxkIHBpY2sgdXAgdGhlIGludGVuZGVkIG5ldwo+IHZhbHVlLiBC
-dXQgb2J2aW91c2x5IHRoYXQncyBtYXJnaW5hbCBoZXJlLgoKT2ssIGFsdGhvdWdoIHRoZXJlIGlz
-IG9uIGNoYW5jZSBvZiBhc3luY3Job25vdXMgd3JpdGluZyBoZXJlLgoKPgo+IFdpdGggYXQgbGVh
-c3QgdGhlIGFkanVzdG1lbnRzIHRvIHRoZSBjb25kaXRpb25hbHMKPiBSZXZpZXdlZC1ieTogSmFu
-IEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+IElmLCBvdG9oLCB5b3UgZGlzYWdyZWUsIHRo
-ZW4gd2UnbGwgbmVlZCB0byBzZXR0bGUgb24gc29tZXRoaW5nCj4gZmlyc3QuCgpJJ20gYWZyYWlk
-IEkgZGlzYWdyZWUuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+
+--===============1985872688559422051==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-PuaSZi3dP2eKM60bYTPV"
+
+
+--=-PuaSZi3dP2eKM60bYTPV
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2018-02-22 at 17:55 +0100, Dario Faggioli wrote:
+> --- a/tools/libxl/libxl_sched.c
+> +++ b/tools/libxl/libxl_sched.c
+> @@ -505,6 +507,9 @@ int main_sched_credit(int argc, char **argv)
+>          ratelimit =3D strtol(optarg, NULL, 10);
+>          opt_r =3D true;
+>          break;
+> +    case 'm':
+> +        migrdelay =3D strtol(optarg, NULL, 10);
+> +        opt_m =3D true;
+>
+This is missing a 'break'.
+
+>      case 's':
+>          opt_s =3D true;
+>          break;
+> @@ -522,7 +527,7 @@ int main_sched_credit(int argc, char **argv)
+>          fprintf(stderr, "Must specify a domain.\n");
+>          return EXIT_FAILURE;
+>      }
+> -    if (!opt_s && (opt_t || opt_r)) {
+> +    if (!opt_s && (opt_t || opt_r || opt_w)) {
+>
+And this is 'opt_m'.
+
+I'll send a v2. :-)
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-PuaSZi3dP2eKM60bYTPV
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqQJKIACgkQFkJ4iaW4
+c+597Q/+PFC6tPp2uAmZbB3NJekULgNquwhpb174qqsgSFDR8GuXlqwjz3CDnOkU
+luVj3Xzi9S1uAJvvqIEDXcblQP2i9NImXTur5kV669ZZEVpRBuJms98RPK4kyxaq
+mQcoOlK2XiFRwua46IrofaNX+5gHge5HVWR9vWxVFDupCmtFDq6czPGebj3ONXP1
+FWt039P9+5gSn88pdh5l+TYG0ZBQq7+n8fLfdosUsPQbDlpE+PhHXK/PGQfyQamV
+ySZBGHZoYCE1KHggA0KTZ4LAfZAPMIrhndiCMV5rAQQec3+1LwUYbsC8fvPltY9i
+UF9n7h4U//zoo8wqPB25jZjhTH8Pmp2RdvlPnsY4eR2MTwtYQ/T3lGXf6tqVhbvg
+FigaJ/+QLvfWvq0ezlz2ExzQXIWumSSvvOa41JMJht47fzaVyS36GvBeBFqGlmeS
+GCX8M6jnQwGYS6nqNScrZTpm7Yx6RSRgDDv0Uj8zoMjtqXHh1hIDSC1/uTT1YF0d
+JOTqmGjInQ+kGBuWB8+hNdl0780pQ7fNT2NO9lfAssc5jV8Z+cg9iZFGXXX9IUdf
+R0elLTzI4UeQUz3RrPBYbRRdTvGl0Dw2+E65fC6ux4oFmMANF3ikc+N04GjShB7O
++0psc/K049nXW18fTSpZCIqxXmRgoOVYU8zQZm5UFjlY7vN0t0k=
+=iVE7
+-----END PGP SIGNATURE-----
+
+--=-PuaSZi3dP2eKM60bYTPV--
+
+
+
+--===============1985872688559422051==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1985872688559422051==--
