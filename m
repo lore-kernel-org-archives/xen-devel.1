@@ -1,14 +1,23 @@
-From: Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH v3] tools: detect appropriate debug
-	optimization level
-Date: Fri, 23 Feb 2018 23:26:17 -0600
-Message-ID: <26771eaa-0904-30bb-a728-096d18ab480f@cardoe.com>
-References: <1461681525-12078-1-git-send-email-cardoe@cardoe.com>
- <20160428174049.GG18194@citrix.com>
+From: Zhongze Liu <blackskygg@gmail.com>
+Subject: Re: [PATCH v4 2/7] xen: xsm: flask: introduce
+ XENMAPSPACE_gmfn_share for memory sharing
+Date: Sat, 24 Feb 2018 13:37:44 +0800
+Message-ID: <CAHrd_jpauFvFJ0Aq0s4J+WqfijWXiYZT_HBVQig4BABc4+UpKg@mail.gmail.com>
+References: <20180130175024.26921-1-blackskygg@gmail.com>
+ <20180130175024.26921-3-blackskygg@gmail.com>
+ <5A72F8C902000078001A4450@prv-mh.provo.novell.com>
+ <CAHrd_jopeMDW-GkOetauDefuYw=Rvk0zH=ZxBRAW_d8W75hEKw@mail.gmail.com>
+ <5A8311B202000078001A76C7@prv-mh.provo.novell.com>
+ <CAHrd_jp0DPBau69t_9bOyhn4QReW1H2NgkbDcXBBWE7bG-gZmA@mail.gmail.com>
+ <5A84034902000078001A7A27@prv-mh.provo.novell.com>
+ <CAHrd_jqsN7NL5Q9CX6DdH8VFJ1kn4pL72MU59Q1P8f+ZziYtHA@mail.gmail.com>
+ <5A8559B502000078001A7F2F@prv-mh.provo.novell.com>
+ <CAHrd_jpD=VtGw_GCA+C_SANw5RqpcKHYy9xgJ8kQP450zVxkGg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1652470892662377210=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20160428174049.GG18194@citrix.com>
+In-Reply-To: <CAHrd_jpD=VtGw_GCA+C_SANw5RqpcKHYy9xgJ8kQP450zVxkGg@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,155 +26,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1652470892662377210==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="MOWgJNLqg7xdSdPAS54FxbJaX4atqU4xc"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---MOWgJNLqg7xdSdPAS54FxbJaX4atqU4xc
-Content-Type: multipart/mixed; boundary="EWkynm1hdzJnithMrln3ELQXce85sNp8K";
- protected-headers="v1"
-From: Doug Goldstein <cardoe@cardoe.com>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xen.org, Ian Jackson <ian.jackson@eu.citrix.com>
-Message-ID: <26771eaa-0904-30bb-a728-096d18ab480f@cardoe.com>
-Subject: Re: [PATCH v3] tools: detect appropriate debug optimization level
-References: <1461681525-12078-1-git-send-email-cardoe@cardoe.com>
- <20160428174049.GG18194@citrix.com>
-In-Reply-To: <20160428174049.GG18194@citrix.com>
-
---EWkynm1hdzJnithMrln3ELQXce85sNp8K
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 4/28/16 12:40 PM, Wei Liu wrote:
-> On Tue, Apr 26, 2016 at 09:38:45AM -0500, Doug Goldstein wrote:
->> When building debug use -Og as the optimization level if its available=
-,
->> otherwise retain the use of -O0. -Og has been added by GCC to enable a=
-ll
->> optimizations that to not affect debugging while retaining full
->> debugability.
->>
->> Signed-off-by: Doug Goldstein <cardoe@cardoe.com>
->> ---
->> change since v2:
->> - switch back to cc-option-add to not call cc-option on every invocati=
-on
->> change since v1:
->> - switch to cc-option to only specify -O0 if -Og isn't supported
->> ---
->>  tools/Rules.mk | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/tools/Rules.mk b/tools/Rules.mk
->> index 9ef0b47..1b79a6e 100644
->> --- a/tools/Rules.mk
->> +++ b/tools/Rules.mk
->> @@ -138,6 +138,7 @@ SHLIB_libxenvchan  =3D $(SHDEPS_libxenvchan) -Wl,-=
-rpath-link=3D$(XEN_LIBVCHAN)
->>  ifeq ($(debug),y)
->>  # Disable optimizations and enable debugging information for macros
->>  CFLAGS +=3D -O0 -g3
->> +$(call cc-option-add,CFLAGS,CC,-Og)
->>  # But allow an override to -O0 in case Python enforces -D_FORTIFY_SOU=
-RCE=3D<n>.
->>  PY_CFLAGS +=3D $(PY_NOOPT_CFLAGS)
->>  endif
->> --=20
->> 2.7.3
->=20
-> Heh, this patch seems to has a (good) side effect. I will look into
-> fixing that tomorrow.
->=20
-> make[10]: Entering directory '/local/work/COMMITTER/xen.git/tools/firmw=
-are/rombios/32bit/tcgbios'
-> gcc   -O1 -fno-omit-frame-pointer -m32 -march=3Di686 -g -fno-strict-ali=
-asing -std=3Dgnu99 -Wall -Wstrict-prototypes -Wdeclaration-after-statemen=
-t -Wno-unused-but-set-variable -Wno-unused-local-typedefs   -O0 -g3 -Og -=
-D__XEN_INTERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERSION__ -MMD -MF .t=
-cgbios.o.d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -fno-optimize-siblin=
-g-calls -mno-tls-direct-seg-refs  -Werror -fno-stack-protector -fno-excep=
-tions -fno-builtin -msoft-float -I/local/work/COMMITTER/xen.git/tools/fir=
-mware/rombios/32bit/tcgbios/../../../../../tools/include -I.. -I../..  -c=
- -o tcgbios.o tcgbios.c=20
-> gcc   -O1 -fno-omit-frame-pointer -m32 -march=3Di686 -g -fno-strict-ali=
-asing -std=3Dgnu99 -Wall -Wstrict-prototypes -Wdeclaration-after-statemen=
-t -Wno-unused-but-set-variable -Wno-unused-local-typedefs   -O0 -g3 -Og -=
-D__XEN_INTERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERSION__ -MMD -MF .t=
-pm_drivers.o.d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -fno-optimize-si=
-bling-calls -mno-tls-direct-seg-refs  -Werror -fno-stack-protector -fno-e=
-xceptions -fno-builtin -msoft-float -I/local/work/COMMITTER/xen.git/tools=
-/firmware/rombios/32bit/tcgbios/../../../../../tools/include -I.. -I../..=
-  -c -o tpm_drivers.o tpm_drivers.c=20
-> tcgbios.c: In function =E2=80=98tcpa_extend_acpi_log=E2=80=99:
-> tcgbios.c:362:3: error: =E2=80=98size=E2=80=99 may be used uninitialize=
-d in this function [-Werror=3Dmaybe-uninitialized]
->    memcpy((char *)lasa_last, (char *)entry_ptr, size);
->    ^
-> tcgbios.c: In function =E2=80=98HashLogEvent32=E2=80=99:
-> tcgbios.c:1142:22: error: =E2=80=98entry=E2=80=99 may be used uninitial=
-ized in this function [-Werror=3Dmaybe-uninitialized]
->     hleo->eventnumber =3D entry;
->                       ^
-> tcgbios.c:1131:10: error: =E2=80=98logdataptr=E2=80=99 may be used unin=
-itialized in this function [-Werror=3Dmaybe-uninitialized]
->     entry =3D tcpa_extend_acpi_log(logdataptr);
->           ^
-
-This appears to be fixed with 0b5e769ae3ac81f8a8dfaf476147ccdf41caeb68
-but the patch referenced here never landed. The patch doesn't apply
-cleanly anymore (due to context) but its a one-liner so maybe someone
-can fix it up as its committed?
-
---=20
-Doug Goldstein
-
-
---EWkynm1hdzJnithMrln3ELQXce85sNp8K--
-
---MOWgJNLqg7xdSdPAS54FxbJaX4atqU4xc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlqQ93lfFIAAAAAALgAo
-aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
-MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
-Nl1DQg//ap+dS5F2o3s1mV5lqXraMSWaGHKPy2kVi3hA+dnic8+YAb51MpZnxXp7
-v53ob20TDxW99Wr2iDIgF6tjUxXToASIS0+J4MxYe6IS+OcFMEhMTeC2+Y6go7H/
-OBHo7ZX5SwVu2180SD8AkMHDseU5riRu2p0uh5vlijCuPjXmX6gCNf5AXkfpOAzq
-LbR9GWEvYBgqLuJvVqu8DNdbWuhuEacPvzkaa54xhgtT6Kpz4lbOZFgks+/ZXSrS
-zisZp/JDj0pb9z418wMRqWbEEo1ZW6Tuudt38yGasWZjWPpw+gvbZgmlIUWEHqBG
-isG578fCvyo4NtG692EG8InV9HnLYSp4BZq9o8EEvu7ddVWdKDFPvMjTpAszz0d+
-k8RpxevhBb8gCUNpdIwd8SBBzwIzSVwsT0YapXo2vPUnNDGj/i3aj0pnlKmCRq8T
-m02Mp8H72VZSuI2X+wZtjtgL+W0ys2vnS1yunwhactasdyGTwQOUBYQSAZSPf7lG
-yich3Q45sFj+9p93N8cvAOIOOrnwNJDpypt5Tmt7ZhkJ0XxEioexCRMsk/894csB
-kz4hSdq4A9DTR0FE9I0hnnbHf+tDLCvUjm8uD6Uos3TeIEX7S1z+o/mTYouqkIwr
-9snL00bTDIZ/NrTmdmllkXpn8iepgfkHp9Ug5avzPji7X9RXOEU=
-=207g
------END PGP SIGNATURE-----
-
---MOWgJNLqg7xdSdPAS54FxbJaX4atqU4xc--
-
-
---===============1652470892662377210==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1652470892662377210==--
+Li4uIFNvcnJ5IGZvciB0aGUgaW5jb21wbGV0ZSBtYWlsLiBJIHNvbWVob3cgaGl0IHRoZSAic2Vu
+ZCIgYnV0dG9uIGJlZm9yZSBJCmZpbmlzaCBjb21wb3NpbmcgdGhlIHByZXZpb3VzIG1haWwuIEFu
+ZCBub3cgaXQgY29udGludWVzLi4uCgoyMDE4LTAyLTI0IDEwOjUwIEdNVCswODowMCBaaG9uZ3pl
+IExpdSA8YmxhY2tza3lnZ0BnbWFpbC5jb20+Ogo+IEhpIEphbiwKPgo+IChMYXN0IHdlZWsgd2Fz
+IHRoZSBDaGluZXNlIFNwcmluZyBGZXN0aXZhbCwgc28gSSBmYWlsZWQgdG8gZm9sbG93IHVwCj4g
+dGltZWx5LiBTb3JyeSBmb3IgdGhhdC4pCj4KPiAyMDE4LTAyLTE1IDE2OjU4IEdNVCswODowMCBK
+YW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+Ogo+Pj4+PiBPbiAxNC4wMi4xOCBhdCAxODow
+MiwgPGJsYWNrc2t5Z2dAZ21haWwuY29tPiB3cm90ZToKPj4+IDIwMTgtMDItMTQgMTY6MzcgR01U
+KzA4OjAwIEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT46Cj4+Pj4+Pj4gT24gMTQuMDIu
+MTggYXQgMDg6MTUsIDxibGFja3NreWdnQGdtYWlsLmNvbT4gd3JvdGU6Cj4+Pj4+IDIwMTgtMDIt
+MTMgMjM6MjYgR01UKzA4OjAwIEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT46Cj4+Pj4+
+Pj4+PiBPbiAxMy4wMi4xOCBhdCAxNjoxNSwgPGJsYWNrc2t5Z2dAZ21haWwuY29tPiB3cm90ZToK
+Pj4+Pj4+PiBJJ3ZlIHVwZGF0ZWQgdGhlIGNvbW1lbnRzIGFjY29yZGluZyB0byB5b3VyIHByZXZp
+b3VzIHN1Z2dlc3Rpb25zLAo+Pj4+Pj4+IGRvIHRoZXkgbG9vayBnb29kIHRvIHlvdT8KPj4+Pj4+
+Cj4+Pj4+PiBUaGUgb25lIGluIHRoZSBwdWJsaWMgaGVhZGVyIGlzIHdheSB0b28gdmVyYm9zZS4g
+SSBzcGVjaWZpY2FsbHkgZG9uJ3QKPj4+Pj4+IHNlZSB3aHkgeW91IHdvdWxkIG5lZWQgdG8gc3Bl
+bGwgb3V0IFhTTSBwcml2aWxlZ2UgcmVxdWlyZW1lbnRzCj4+Pj4+PiB0aGVyZS4gUGxlYXNlIG1h
+a2UgbmV3IGNvbW1lbnRzIG1hdGNoIGV4aXN0aW5nIG9uZXMgaW4gc3R5bGUgYW5kCj4+Pj4+PiB2
+ZXJib3NpdHkgaWYgYXQgYWxsIHBvc3NpYmxlLCB3aGlsZSBzdGlsbCBjb252ZXlpbmcgYWxsIG5l
+Y2Vzc2FyeSAvCj4+Pj4+PiByZWxldmFudCBpbmZvcm1hdGlvbi4KPj4+Pj4+Cj4+Pj4+Cj4+Pj4+
+IEkgc2hvcnRlbmVkIGl0IGEgbGl0dGxlIGJpdCwgYW5kIG5vdyBpdCBsb29rcyBsaWtlOgo+Pj4+
+Pgo+Pj4+PiAjZGVmaW5lIFhFTk1BUFNQQUNFX2dtZm5fc2hhcmUgICA2IC8qIEdNRk4gZnJvbSBh
+bm90aGVyIGRvbS4gVW5saWtlCj4+Pj4+IGdtZm5fZm9yZWlnbiwKPj4+Pj4gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoYykgdHJpZXMgdG8gbWFwIHBhZ2VzIGZyb20g
+KHQpIGludG8KPj4+Pj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoZCks
+IHRoaXMgZG9lc24ndCByZXF1aXJlIHRoYXQgKGQpIGl0c2VsZgo+Pj4+PiAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIGhhcyB0aGUgcHJpdmlsZWdlIHRvIG1hcCB0aGUgcGFn
+ZXMsIGJ1dAo+Pj4+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGluc3Rl
+YWQgcmVxdWlyZXMgdGhhdCAoYykgaGFzIHRoZQo+Pj4+PiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHByaXZpbGVnZSB0byBkbyBzbywgYXMgbG9uZyBhcyAoZCkgYW5kICh0
+KQo+Pj4+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGFyZSBhbGxvd2Vk
+IHRvIHNoYXJlIG1lbW9yeSBwYWdlcy4KPj4+Pj4gICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBUaGlzIGlzIFhFTk1FTV9hZGRfdG9fcGh5c21hcF9iYXRjaCBvbmx5LAo+Pj4+
+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGFuZCBjdXJyZW50bHkgQVJN
+IG9ubHkuICovCj4+Pj4KPj4+PiBXaGljaCBsZWF2ZXMgdW5jbGVhciB3aGF0IChjKSwgKGQpLCBh
+bmQgKHQpIGFyZS4gSG93IGFib3V0Cj4+Pj4KPj4+PiAiR01GTiBmcm9tIGFub3RoZXIgZG9tLCBY
+RU5NRU1fYWRkX3RvX3BoeXNtYXBfYmF0Y2ggKGFuZAo+Pj4+IGN1cnJlbnRseSBBUk0pIG9ubHku
+IE90aGVyIHRoYW4gWEVOTUFQU1BBQ0VfZ21mbl9mb3JlaWduIHRoaXMKPj4+PiA8ZXhwbGFpbiBo
+ZXJlIHdoYXQgdGhlIGRpZmZlcmVuY2UgaXMgd2l0aCBhIGZldyBzaW1wbGUgd29yZHM+LiIKPj4+
+Pgo+Pj4+IChZb3UgY2FuIGFuZCBzaG91bGQgZ28gaW50byBmdXJ0aGVyIGRldGFpbCBpbiB0aGUg
+Y29tbWl0IG1lc3NhZ2UuKQo+Pj4+IFdpdGhvdXQgdGhpcyBfcHJvcGVybHlfIGV4cGxhaW5lZCwg
+SSdsbCBjb250aW51ZSB0byBhc2sgd2h5IHlvdQo+Pj4+IGNhbid0IHNpbXBseSBtYWtlIFhFTk1B
+UFNQQUNFX2dtZm5fZm9yZWlnbiBkbyB3aGF0IHlvdSB3YW50Cj4+Pj4gKGFzIGl0IGFscmVhZHkg
+dGFrZXMgdHdvIGRvbWlkX3QtcyBhcyBpbnB1dCksIGJ5IHN1aXRhYmx5IGFkanVzdGluZwo+Pj4+
+IGl0cyBYU00gY2hlY2socykuCj4+Pgo+Pj4gSSdtIHNvcnJ5IHRoYXQgSSBmYWlsZWQgdG8gc2Vl
+IHRoZSByZWFzb24gd2h5IHlvdSBzYXkgIndoaWNoIGxlYXZlcwo+Pj4gdW5jbGVhciB3aGF0IChj
+KSwgKGQpLCBhbmQgKHQpIGFyZSIuIEkgdGhpbmsgImlmIChjKSB0cmllcyB0byBtYXAgcGFnZXMK
+Pj4+IGZyb20gKHQpIGludG8gKGQpIiBoYXMgYWxyZWFkeSBpbmNsdWRlZCB0aGUgbmVjZXNzYXJ5
+IGluZm9ybWF0aW9uCj4+PiBhYm91dCB0aGlzOiAoYykgaXMgdGhlIGNhbGxlciBvZiB0aGUgaHlw
+ZXJjYWxsIChjdXJyZW50KSwgKGQpIGlzIHRoZQo+Pj4gZGVzdCBkb21haW4sIGFuZCAodCkgdGhl
+IHNvdXJjZSBkb21haW4uCj4+PiBJIHRoaW5rIEkgc3RpbGwgbmVlZCBtb3JlIG9mIHlvdXIgZXhw
+bGFuYXRpb24gaGVyZS4KPj4KPj4gU29tZW9uZSBjb21pbmcgYWNyb3NzIF9qdXN0XyB0aGlzIGNv
+bW1lbnQgKHdoaWxlIHJlYWRpbmcgdGhlCj4+IHB1YmxpYyBoZWFkZXIpIHdpbGwgbm90IG5lY2Vz
+c2FyaWx5IGtub3cgd2hhdCAoYyksIChkKSwgYW5kICh0KQo+PiBzdGFuZCBmb3IsIGFuZCAocylo
+ZSBzaG91bGRuJ3QgYmUgZm9yY2VkIHRvIGRpZyBpbnRvIGdpdCBoaXN0b3J5IHRvCj4+IGZpbmQg
+dGhlIHBhdGNoIGRlc2NyaXB0aW9uLiBCdXQgYW55d2F5IC0gYWxsIHRoaXMgc2hvdWxkIGdvIGF3
+YXkKPj4gZnJvbSB0aGUgaGVhZGVyIGFueXdheSwgYXMgZXhwbGFpbmVkIGJlZm9yZS4gQWxsIHRo
+YXQncyBuZWVkZWQKPj4gaGVyZSBpcyBhIHRlcnNlIGJ1dCB1bmRlcnN0YW5kYWJsZSBleHBsYW5h
+dGlvbiBvZiB3aGF0J3MgZGlmZmVyZW50Cj4+IGZyb20gWEVOTUFQU1BBQ0VfZ21mbl9mb3JlaWdu
+Lgo+Pgo+Cj4gSSB0aGluayBiZWZvcmUgd2UgY2FuIHJlYWNoIGEgY29uc2Vuc3VzIG9uIGhvdyB0
+aGUgZmluYWwgY29tbWVudAo+IHNob3VsZCBsb29rIGxpa2UsIHdlIG5lZWQgdG8gcmVhY2ggYW4g
+YWdyZWVtZW50IG9uIHdoYXQgc2hvdWxkCj4gYmUgaW5jbHVkZWQgaW4gdGhlIDxkaWZmZXJlbmNl
+cz4gcGFydC4gQW5kIGFjY29yZGluZyB0byBvdXIgcHJldmlvdXMKPiBkaXNjdXNzaW9uLCBiZWxv
+dyBpcyB3aGF0IEkgdGhpbmsgaXMgbmVjZXNzYXJ5IHNvIGZhcjoKPgo+IDEuIERpZmZlcmVudCBw
+cml2aWxlZ2UgcmVxdWlyZW1lbnRzCj4KClRoaXMgaXMgd2hhdCBJJ3ZlIGJlZW4gdHJ5aW5nIHRv
+IGNvbnZleSBpbiB0aGUgY29tbWVudC4gQnV0IGl0IHNlZW1zIHRoYXQKSSBmYWlsZWQgdG8gbWFr
+ZSBpdCAidGVyc2UgeWV0IHVuZGVyc3RhbmRhYmxlIi4gTm93IG15IHF1ZXN0aW9uIGlzOiBBbSBJ
+ICpub3QqCnN1cHBvc2VkIHRvIHNwZWxsIG91dCB0aGUgZGV0YWlsIG9mIHRoZSBleGFjdCBkaWZm
+ZXJlbmNlIGJldHdlZW4gdGhlaXIKcHJpdmlsZWdlIHJlcXVpcmVtZW50cz8gSWYgc28sIGRvIHlv
+dSBoYXZlIGEgcm91Z2ggcGljdHVyZSBvZiBob3cgaXQKc2hvdWxkIGxvb2sgbGlrZT8gQXJlIHdl
+IGdvaW5nIHRvIGdpdmUgYW4gZXhhbXBsZSBvZiBhIHVzZSBjYXNlIHdoZXJlCnRoZSBvbGQgc3Vi
+b3AgaXMgbm90IGFwcGxpY2FibGU/Cgo+Cj4gMi4gV2h5IHdlIGNhbid0IGp1c3QgbW9kaWZ5IHRo
+ZSBvcmlnaW5hbCBoeXBlcmNhbGwgdG8gbWVldCBvdXIgbmVlZHMuCgpBY2NvcmRpbmcgdG8gb3Vy
+IGRpc2N1c3Npb24gb24gdGhlIHByZXZpb3VzIHZlcnNpb25zIG9mIHRoaXMgcGF0Y2gsIHdlCmNh
+bid0IGZpdCB0aGUgY2hlY2tzIG5lZWRlZCBieSBib3RoIHN1Ym9wIGludG8gb25lIGJlY2F1c2Ug
+ZG9pbmcgc28gd2lsbAplaXRoZXIgcmVncmVzcyB0aGUgb3JpZ2luYWwgb25lIG9yIHBlcm1pdCBz
+b21ldGhpbmcgdGhhdCBzaG91bGRuJ3QgYmUKYWxsb3dlZCBpbiB0aGUgbmV3IHVzZSBjYXNlcy4g
+U2hvdWxkIHdlIGNsYXJpZnkgdGhpcyBpbiB0aGUgY29tbWVudCwgdG9vPwoKQ2hlZXJzLAphbmQg
+QmVzdCBXaXNoZXMuCgpaaG9uZ3plIExpdQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
