@@ -1,17 +1,15 @@
-From: Chao Gao <chao.gao@intel.com>
-Subject: Re: [RFC Patch v4 8/8] x86/hvm: bump the maximum number
- of vcpus to 512
-Date: Sat, 24 Feb 2018 14:26:19 +0800
-Message-ID: <20180224062619.GG162485@skl-4s-chao.sh.intel.com>
-References: <1512546614-9937-1-git-send-email-chao.gao@intel.com>
- <1512546614-9937-9-git-send-email-chao.gao@intel.com>
- <20180223181139.crabalgltt34ry7m@MacBook-Pro-de-Roger.local>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [libvirt test] 119943: tolerable all pass - PUSHED
+Date: Sat, 24 Feb 2018 07:52:24 +0000
+Message-ID: <osstest-119943-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5093805382415492274=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <20180223181139.crabalgltt34ry7m@MacBook-Pro-de-Roger.local>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=ffbk=fs=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1epUdK-0008HX-VU
+ for xen-devel@lists.xenproject.org; Sat, 24 Feb 2018 07:52:38 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,46 +18,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBGZWIgMjMsIDIwMTggYXQgMDY6MTE6MzlQTSArMDAwMCwgUm9nZXIgUGF1IE1vbm7D
-qSB3cm90ZToKPk9uIFdlZCwgRGVjIDA2LCAyMDE3IGF0IDAzOjUwOjE0UE0gKzA4MDAsIENoYW8g
-R2FvIHdyb3RlOgo+PiBTaWduZWQtb2ZmLWJ5OiBDaGFvIEdhbyA8Y2hhby5nYW9AaW50ZWwuY29t
-Pgo+PiAtLS0KPj4gIHhlbi9pbmNsdWRlL3B1YmxpYy9odm0vaHZtX2luZm9fdGFibGUuaCB8IDIg
-Ky0KPj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+PiAK
-Pj4gZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL3B1YmxpYy9odm0vaHZtX2luZm9fdGFibGUuaCBi
-L3hlbi9pbmNsdWRlL3B1YmxpYy9odm0vaHZtX2luZm9fdGFibGUuaAo+PiBpbmRleCAwOGMyNTJl
-Li42ODMzYTRjIDEwMDY0NAo+PiAtLS0gYS94ZW4vaW5jbHVkZS9wdWJsaWMvaHZtL2h2bV9pbmZv
-X3RhYmxlLmgKPj4gKysrIGIveGVuL2luY2x1ZGUvcHVibGljL2h2bS9odm1faW5mb190YWJsZS5o
-Cj4+IEBAIC0zMiw3ICszMiw3IEBACj4+ICAjZGVmaW5lIEhWTV9JTkZPX1BBRERSICAgICAgICgo
-SFZNX0lORk9fUEZOIDw8IDEyKSArIEhWTV9JTkZPX09GRlNFVCkKPj4gIAo+PiAgLyogTWF4aW11
-bSB3ZSBjYW4gc3VwcG9ydCB3aXRoIGN1cnJlbnQgdkxBUElDIElEIG1hcHBpbmcuICovCj4+IC0j
-ZGVmaW5lIEhWTV9NQVhfVkNQVVMgICAgICAgIDEyOAo+PiArI2RlZmluZSBIVk1fTUFYX1ZDUFVT
-ICAgICAgICA1MTIKPgo+V293LCB0aGF0IGxvb2tzIGxpa2UgYSBwcmV0dHkgYmlnIGp1bXAuIEkg
-Y2VydGFpbmx5IGRvbid0IGhhdmUgYWNjZXNzCj50byBhbnkgYm94IHdpdGggdGhpcyBudW1iZXIg
-b2YgdkNQVXMsIHNvIHRoYXQncyBnb2luZyB0byBiZSBxdWl0ZSBoYXJkCj50byB0ZXN0LiBXaGF0
-IHRoZSByZWFzb25pbmcgYmVoaW5kIHRoaXMgYnVtcD8KClRoZXJlIGFyZSAyODggY3B1cyBvbiBz
-b21lIEludGVsIFhFT04tcGhpIHBsYXRmb3JtLiBCdW1waW5nIHRoaXMgdmFsdWUgdG8KMjg4IHdv
-dWxkIGJlIHdlaXJkIGJlY2F1c2UgSSB0aGluayBpZiBJIGRvIHRoYXQgdGhlcmUgd291bGQgYmUg
-c29tZQpxdWVzdGlvbnMgLS0gd2h5IGl0IHNob3VsZCBiZSAyODggYW5kIHdoeSB0aGUgbnVtYmVy
-IG9mIHZDUFVzIHNob3VsZCBiZSB0aGUKc2FtZSB3aXRoIHRoZSBudW1iZXIgb2YgcENQVXMuIEkg
-Y2hvb3NlIDUxMiwganVzdCBiZWNhdXNlIGl0IGlzIHRoZSBuZWFyZXN0Cm5leHQgcG93ZXIgb2Yg
-MiBudW1iZXIuCgo+SXMgaGFyZHdhcmUgd2l0aCA1MTIgd2F5cyBleHBlY3RlZCBzb29uLWlzaD8K
-Ck5vLiAKCj4KPkFsc28gb3NzdGVzdCBpcyBub3QgZXZlbiBhYmxlIHRvIHRlc3QgdGhlIGN1cnJl
-bnQgbGltaXQsIHNvIEkgd291bGQKCkRvIHdlIGhhdmUgYW55IHBsYW4gdG8gdGVzdCBndWVzdCB3
-aXRoIDEyOCB2Q1BVcyBvbiBvc3N0ZXN0PwoKPm1heWJlIGJ1bXAgdGhpcyB0byAyNTYsIGJ1dCBh
-cyBJIGV4cHJlc3NlZCBpbiBvdGhlciBvY2Nhc2lvbnMgSSBkb24ndAo+ZmVlbCBjb21mb3J0YWJs
-ZSB3aXRoIGhhdmUgYSBudW1iZXIgb2YgdkNQVXMgdGhhdCB0aGUgY3VycmVudCB0ZXN0Cj5zeXN0
-ZW0gZG9lc24ndCBoYXZlIGhhcmR3YXJlIHRvIHRlc3Qgd2l0aC4KCklmIHdlIG9ubHkgdGVzdCBm
-dW5jdGlvbmFsaXR5IChvc3N0ZXN0IGRvZXNuJ3QgdGVzdCBwZXJmb3JtYW5jZSwKcmlnaHQ/KSwg
-aGFyZHdhcmUgbmVlZG4ndCBoYXZlIHNvIG1hbnkgcENQVXMuCgpDb3VsZCB3ZSBkZWNsYXJlIHRo
-YXQgbW9yZSB0aGFuIDEyOCB2Q1BVcyBzdXBwb3J0IGlzIG9ubHkKZXhwZXJpbWVudGFsIGZlYXR1
-cmU/IE9uY2Ugc29tZSByZWd1bGFyIHRlc3RzIGFyZSBhdmFpbGFibGUsIHdlIGNhbgphbm5vdW5j
-ZSB0aGF0IE9uIHg4NiwgWGVuIHN1cHBvcnRzIEhWTSB3aXRoLCBmb3IgZXhhbXBsZSwgMTI4IHZD
-UFVzIG9yCjUxMiB2Q1BVcy4gSXQgc2VlbXMgR2Vyb2dlJ3Mgd29yayBvbiBTVVBQT1JULm1kIGlz
-IGZvciB0aGlzIGtpbmQgb2YgcHJvcG9zZS4KClRoYW5rcwpDaGFvCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============5093805382415492274==
+Content-Type: text/plain
+
+flight 119943 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/119943/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 119874
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 119874
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 119874
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-qcow2 12 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 13 saverestore-support-check    fail never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ libvirt              87876c7736646452f4139a4d3a8478c51b92abbe
+baseline version:
+ libvirt              ab59d3895bd2ea604aa336d2cd38aa374e43ed44
+
+Last test of basis   119874  2018-02-22 09:50:39 Z    1 days
+Testing same since   119943  2018-02-23 06:46:50 Z    1 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Daniel P. Berrangé <berrange@redhat.com>
+  Jim Fehlig <jfehlig@suse.com>
+  John Ferlan <jferlan@redhat.com>
+  Michal Privoznik <mprivozn@redhat.com>
+  Nikolay Shirokovskiy <nshirokovskiy@virtuozzo.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/libvirt.git
+   ab59d3895b..87876c7736  87876c7736646452f4139a4d3a8478c51b92abbe -> xen-tested-master
+
+
+--===============5093805382415492274==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5093805382415492274==--
