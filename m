@@ -1,23 +1,16 @@
-From: KANIKA SAINI <kanika16047@iiitd.ac.in>
-Subject: Re: [Minios-devel] Excited for Xen Project in Outreachy
-Date: Sun, 25 Feb 2018 01:10:27 +0530
-Message-ID: <CAFSf9ho7cA04Uey+6y_3DRA6D054QiGQwK22yCHvF6wwuo3A3w@mail.gmail.com>
-References: <4C7AE15B-6A38-4D0B-8E31-2A13DAD04D71@citrix.com>
- <alpine.DEB.2.10.1802141036260.5392@sstabellini-ThinkPad-X260>
- <CAFSf9ho6SwiPw8jDzzy3O+MhjY23MdwWvSNQDwJcr5Y56rjTTA@mail.gmail.com>
- <CAFSf9hqHcZ=9KEb2R=psTy5ou1L6Kh_AE-Tr2HZNWW-qtuw_9g@mail.gmail.com>
- <723A9DC0-1134-4637-9B80-E15ADF026EC3@xenproject.org>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-4.9-testing test] 119954: regressions - FAIL
+Date: Sat, 24 Feb 2018 21:05:53 +0000
+Message-ID: <osstest-119954-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7825096319659749708=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=les6=fs=iiitd.ac.in=kanika16047@srs-us1.protection.inumbo.net>)
- id 1epfgS-0002oZ-0a
- for xen-devel@lists.xenproject.org; Sat, 24 Feb 2018 19:40:37 +0000
-Received: by mail-lf0-x232.google.com with SMTP id o145so13686828lff.0
- for <xen-devel@lists.xenproject.org>; Sat, 24 Feb 2018 11:40:28 -0800 (PST)
-In-Reply-To: <723A9DC0-1134-4637-9B80-E15ADF026EC3@xenproject.org>
+ <srs0=ffbk=fs=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1eph19-0000oB-Qb
+ for xen-devel@lists.xenproject.org; Sat, 24 Feb 2018 21:06:03 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,252 +19,245 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth.xen@gmail.com>
-Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, "minios-devel@lists.xenproject.org" <minios-devel@lists.xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Simon Kuenzer <simon.kuenzer@neclab.eu>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============7825096319659749708==
-Content-Type: multipart/alternative; boundary="001a113c4962e758ee0565fa726e"
-
---001a113c4962e758ee0565fa726e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Thank you, Lars.
-The links you have provided have managed to make things clearer to me now.
-
-I understand how a flag in the makefile can be changed by passing a
-parameter to the make command in the command line and how
-"origin" checks where the variable comes from.
-I did realize creating the dependency of the Makefile itself would indeed
-not be a good idea at the finer level of granularity.
-I went through the documentation at
-http://unikraft.neclab.eu/developers-app.html and can now understand the
-structure of makefiles of libraries better.
-
-I spent some time studying the problem and came across this solution at
-https://www.cmcrossroads.com/article/rebuilding-when-cppflags-changes which
-uses the concept of signatures.
-I also understood how rules are dynamically being set by the Makefiles in
-support/build/ directory.
-
-To be able to draft a solution there's one more thing lacking my
-understanding, which is the order of the execution of the makefiles.
-What calls the dynamic makefiles and when is the main makefile called and
-how do the dynamic makefiles pass those parameters to the main one?
-
-According to what I understood, the flags for the addition of new libraries
-or new configurations through the menu config are already being taken care
-of by the dynamic checking if that's right. We only have to handle the
-additional flags passed through the command line.
-
-I appreciate your time and guidance.
-
-Thank you.
-
-
-
-
-=E2=80=8C
-
-On Fri, Feb 23, 2018 at 2:31 PM, Lars Kurth <lars.kurth.xen@gmail.com>
-wrote:
-
-> Hi Kanika,
->
-> On 22 Feb 2018, at 20:34, KANIKA SAINI <kanika16047@iiitd.ac.in> wrote:
->
-> *Issue suggested by Simon*
-> In Unikraft - whenever compiler flags are changed due to an addition of a
-> library or something else according to the build rules, the make command
-> doesn't force recompilation of those files affected by the flag change
-> unless the files are altered too. The only way out is to "make clean" and
-> "make" again all the files which can be redundantly time-consuming.
->
->
-> *Solution*One way is to create flag files for objects and add those as
-> their dependency in the Makefile.
->
->
->
-> Apart from this, I'm wondering if rules are passed on to the Makefile and
-> changes are depicted in the Makefile itself, can we add Makefile as the
-> dependency of objects to solve this issue?
->
->
-> I think the answer is in the documentation, which explains the UI (if you
-> to call it that way) for the build system (see http://unikraft.neclab.
-> eu/developers-app.html)
->
-> You can also usually figure out which parameters are passed to make via
-> the command line by searching for the origin function, in particular for
-> "command line" return values (https://www.gnu.org/software/
-> make/manual/html_node/Origin-Function.html). This will give you a sense
-> of the values that can be passed to the build system from outside of a
-> makefile.
->
-> Now, you do need to make sure that you don't change the UI interface, as
-> this would break everyone who uses Unikraft.
->
-> Assuming that all the flags we care about are already encoded in a
-> Makefile (and don't come through the command line or through any other
-> means), then adding a dependency may be sufficient. There is the question
-> how granular you want this to be:
-> a) Is it OK for everything to be rebuilt when say you change a -Dfoo
-> b) Do you want this to be more fine grained
->
-> Have a google for something like "rebuilding when makefile flags change"
-> and you will find a few example patterns with different trade-offs to sol=
-ve
-> this problem in general
->
-> The second challenge is that most substantial build rules get created
-> dynamically via* [unikraft/unikraft.git]
-> <http://xenbits.xen.org/gitweb/?p=3Dunikraft/unikraft.git;a=3Dtree;hb=3DH=
-EAD> / support
-> <http://xenbits.xen.org/gitweb/?p=3Dunikraft/unikraft.git;a=3Dtree;f=3Dsu=
-pport;hb=3DHEAD> / build
-> <http://xenbits.xen.org/gitweb/?p=3Dunikraft/unikraft.git;a=3Dtree;f=3Dsu=
-pport/build;hb=3DHEAD> /
-> * *
-> Thus, adding a dependency on a makefile may not be as simple as it sounds
->
-> Lars
->
-
-
-
---=20
-Yours sincerely,
-Kanika Saini
-CSE, IIITD Class of 2020
-
---001a113c4962e758ee0565fa726e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><img width=3D"0" height=3D"0" class=3D"mailtrack-img" alt=
-=3D"" style=3D"display:flex" src=3D"https://mailtrack.io/trace/mail/e0547bf=
-16b9227ec7e088fe59676c17f256bcccc.png?u=3D1498883">Thank you, Lars.=C2=A0<b=
-r>The links you have provided have managed to make things clearer to me now=
-.<br><br>I understand how a flag in the makefile can be changed by passing =
-a parameter to the make command in the command line and how <br>&quot;origi=
-n&quot; checks where the variable comes from.<br>I did realize creating the=
- dependency of the Makefile itself would indeed not be a good idea at the f=
-iner level of granularity.=C2=A0<br>I went through the documentation at=C2=
-=A0<span id=3D"gmail-docs-internal-guid-1ee4b8dd-c947-9b59-ad09-0d74946c349=
-6"><span style=3D"text-decoration-line:underline;font-size:9.5pt;font-famil=
-y:Arial;vertical-align:baseline;white-space:pre-wrap"><a href=3D"http://uni=
-kraft.neclab.eu/developers-app.html" style=3D"text-decoration-line:none">ht=
-tp://unikraft.neclab.eu/developers-app.html</a> </span></span>and can now u=
-nderstand the structure of makefiles of libraries better.=C2=A0<br><br>I sp=
-ent some time studying the problem and came across this solution at=C2=A0<a=
- href=3D"https://www.cmcrossroads.com/article/rebuilding-when-cppflags-chan=
-ges">https://www.cmcrossroads.com/article/rebuilding-when-cppflags-changes<=
-/a>=C2=A0which uses the concept of signatures.=C2=A0<br>I also understood h=
-ow rules are dynamically being set by the Makefiles in support/build/ direc=
-tory.=C2=A0<br><br>To be able to draft a solution=C2=A0there&#39;s one more=
- thing lacking my understanding, which is the order of the execution of the=
- makefiles.=C2=A0<br>What calls the dynamic makefiles and when is the main =
-makefile called and how do the dynamic makefiles pass those parameters to t=
-he main one?<br><br>According to what I understood, the flags for the addit=
-ion of new libraries or new configurations through the menu config are alre=
-ady being taken care of by the dynamic checking if that&#39;s right. We onl=
-y have to handle the additional flags passed through the command line.=C2=
-=A0<br><br>I appreciate your time and guidance.<br><br>Thank you.<br><br><b=
-r><br><br>=E2=80=8C</div><div class=3D"gmail_extra"><br><div class=3D"gmail=
-_quote">On Fri, Feb 23, 2018 at 2:31 PM, Lars Kurth <span dir=3D"ltr">&lt;<=
-a href=3D"mailto:lars.kurth.xen@gmail.com" target=3D"_blank">lars.kurth.xen=
-@gmail.com</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" style=
-=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div sty=
-le=3D"word-wrap:break-word;line-break:after-white-space">Hi Kanika,<br><div=
-><br><blockquote type=3D"cite"><span class=3D""><div>On 22 Feb 2018, at 20:=
-34, KANIKA SAINI &lt;<a href=3D"mailto:kanika16047@iiitd.ac.in" target=3D"_=
-blank">kanika16047@iiitd.ac.in</a>&gt; wrote:</div><br class=3D"m_386647243=
-6702958773Apple-interchange-newline"></span><div><div dir=3D"ltr" style=3D"=
-font-family:Helvetica;font-size:12px;font-style:normal;font-variant-caps:no=
-rmal;font-weight:normal;letter-spacing:normal;text-align:start;text-indent:=
-0px;text-transform:none;white-space:normal;word-spacing:0px"><img width=3D"=
-0" height=3D"0" class=3D"m_3866472436702958773mailtrack-img" alt=3D"" src=
-=3D"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAA=
-AIBRAA7" style=3D"display:flex"><span class=3D""><div></div><div></div><div=
-></div><b>Issue suggested by Simon</b><div>In Unikraft - whenever compiler =
-flags are changed due to an addition of a library or something else accordi=
-ng to the build rules, the make command doesn&#39;t force recompilation of =
-those files affected by the flag change unless the files are altered too. T=
-he only way out is to &quot;make clean&quot; and &quot;make&quot; again all=
- the files which can be redundantly time-consuming.<br><br><b>Solution<br><=
-/b>One way is to create flag files for objects and add those as their depen=
-dency in the Makefile.<br></div></span></div></div></blockquote><div><br></=
-div></div><span class=3D""><div><br><blockquote type=3D"cite"><div><div dir=
-=3D"ltr" style=3D"font-family:Helvetica;font-size:12px;font-style:normal;fo=
-nt-variant-caps:normal;font-weight:normal;letter-spacing:normal;text-align:=
-start;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0=
-px"><div>Apart from this, I&#39;m wondering if rules are passed on to the M=
-akefile and changes are depicted in the Makefile itself, can we add Makefil=
-e as the dependency of objects to solve this issue?<br></div></div></div></=
-blockquote><div><br></div></div></span>I think the answer is in the documen=
-tation, which explains the UI (if you to call it that way) for the build sy=
-stem (see=C2=A0<a href=3D"http://unikraft.neclab.eu/developers-app.html" ta=
-rget=3D"_blank">http://unikraft.neclab.<wbr>eu/developers-app.html</a>)<div=
-><br><div>You can also usually figure out which parameters are passed to ma=
-ke via the command line by searching for the origin function, in particular=
- for &quot;command line&quot; return values (<a href=3D"https://www.gnu.org=
-/software/make/manual/html_node/Origin-Function.html" target=3D"_blank">htt=
-ps://www.gnu.org/software/<wbr>make/manual/html_node/Origin-<wbr>Function.h=
-tml</a>). This will give you a sense of the values that can be passed to th=
-e build system from outside of a makefile.</div><div><br></div><div>Now, yo=
-u do need to make sure that you don&#39;t change the UI interface, as this =
-would break everyone who uses Unikraft.</div></div><div><br></div><div>Assu=
-ming that all the flags we care about are already encoded in a Makefile (an=
-d don&#39;t come through the command line or through any other means), then=
- adding a dependency may be sufficient. There is the question how granular =
-you want this to be:=C2=A0</div><div>a) Is it OK for everything to be rebui=
-lt when say you change a -Dfoo=C2=A0</div><div>b) Do you want this to be mo=
-re fine grained</div><div><br></div><div>Have a google for something like &=
-quot;rebuilding when makefile flags change&quot; and you will find a few ex=
-ample patterns with different trade-offs to solve this problem in general</=
-div><div><br></div><div>The second challenge is that most substantial build=
- rules get created dynamically via<b>=C2=A0<a href=3D"http://xenbits.xen.or=
-g/gitweb/?p=3Dunikraft/unikraft.git;a=3Dtree;hb=3DHEAD" title=3D"tree root"=
- style=3D"color:rgb(136,0,0);font-family:sans-serif;font-variant-ligatures:=
-normal;background-color:rgb(255,255,255)" target=3D"_blank">[unikraft/unikr=
-aft.git]</a><span style=3D"font-family:sans-serif;font-variant-ligatures:no=
-rmal;background-color:rgb(255,255,255)">=C2=A0/=C2=A0</span><a href=3D"http=
-://xenbits.xen.org/gitweb/?p=3Dunikraft/unikraft.git;a=3Dtree;f=3Dsupport;h=
-b=3DHEAD" title=3D"support" style=3D"color:rgb(136,0,0);font-family:sans-se=
-rif;font-variant-ligatures:normal;background-color:rgb(255,255,255)" target=
-=3D"_blank"><wbr>support</a><span style=3D"font-family:sans-serif;font-vari=
-ant-ligatures:normal;background-color:rgb(255,255,255)">=C2=A0/=C2=A0</span=
-><a href=3D"http://xenbits.xen.org/gitweb/?p=3Dunikraft/unikraft.git;a=3Dtr=
-ee;f=3Dsupport/build;hb=3DHEAD" title=3D"support/build" style=3D"color:rgb(=
-136,0,0);font-family:sans-serif;font-variant-ligatures:normal;background-co=
-lor:rgb(255,255,255)" target=3D"_blank">build</a><span style=3D"font-family=
-:sans-serif;font-variant-ligatures:normal;background-color:rgb(255,255,255)=
-">=C2=A0/ *=C2=A0</span></b></div><div><span style=3D"font-family:sans-seri=
-f;font-variant-ligatures:normal;background-color:rgb(255,255,255)">Thus, ad=
-ding a dependency on a makefile may not be as simple as it sounds</span></d=
-iv><span class=3D"HOEnZb"><font color=3D"#888888"><div><span style=3D"font-=
-family:sans-serif;font-variant-ligatures:normal;background-color:rgb(255,25=
-5,255)"><br></span></div><div><span style=3D"font-family:sans-serif;font-va=
-riant-ligatures:normal;background-color:rgb(255,255,255)">Lars=C2=A0</span>=
-</div></font></span></div></blockquote></div><br><br clear=3D"all"><div><br=
-></div>-- <br><div class=3D"gmail_signature" data-smartmail=3D"gmail_signat=
-ure"><div dir=3D"ltr"><div><div dir=3D"ltr"><div>Yours sincerely,<br></div>=
-Kanika Saini<br></div><div>CSE, IIITD Class of 2020</div></div></div></div>
-</div>
-
---001a113c4962e758ee0565fa726e--
-
-
---===============7825096319659749708==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7825096319659749708==--
+ZmxpZ2h0IDExOTk1NCB4ZW4tNC45LXRlc3RpbmcgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVz
+dC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzExOTk1NC8KClJlZ3Jlc3Npb25zIDot
+KAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGlu
+ZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
+LWRlYmlhbmh2bS1hbWQ2NCAxNiBndWVzdC1sb2NhbG1pZ3JhdGUveDEwIGZhaWwgUkVHUi4gdnMu
+IDExOTgzOQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0IDE2IGd1ZXN0LWxv
+Y2FsbWlncmF0ZS94MTAgZmFpbCBSRUdSLiB2cy4gMTE5ODM5CgpUZXN0cyB3aGljaCBkaWQgbm90
+IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
+LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTE5Nzc2CiB0
+ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAxNiBndWVzdC1sb2NhbG1pZ3JhdGUv
+eDEwIGZhaWwgbGlrZSAxMTk3NzYKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2
+NCAxNiBndWVzdC1sb2NhbG1pZ3JhdGUveDEwIGZhaWwgbGlrZSAxMTk4MzkKIHRlc3QtYW1kNjQt
+YW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBs
+aWtlIDExOTgzOQogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxNiBndWVzdC1zdGFydC9k
+ZWJpYW4ucmVwZWF0ICAgIGZhaWwgIGxpa2UgMTE5ODM5CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVt
+dXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMTk4MzkK
+IHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAg
+ICAgICAgZmFpbCBsaWtlIDExOTgzOQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjctYW1k
+NjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTE5ODM5CiB0ZXN0LXh0Zi1h
+bWQ2NC1hbWQ2NC0yICAgICAgIDUyIHh0Zi90ZXN0LWh2bTY0LW1lbW9wLXNlZyAgICAgZmFpbCAg
+IG5ldmVyIHBhc3MKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTEgICAgICAgNTIgeHRmL3Rlc3QtaHZt
+NjQtbWVtb3Atc2VnICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC14dGYtYW1kNjQtYW1kNjQt
+NCAgICAgICA1MiB4dGYvdGVzdC1odm02NC1tZW1vcC1zZWcgICAgIGZhaWwgICBuZXZlciBwYXNz
+CiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC0zICAgICAgIDUyIHh0Zi90ZXN0LWh2bTY0LW1lbW9wLXNl
+ZyAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTUgICAgICAgNTIg
+eHRmL3Rlc3QtaHZtNjQtbWVtb3Atc2VnICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2
+NC1pMzg2LWxpYnZpcnQteHNtICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwg
+ICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgIDEzIG1pZ3JhdGUtc3Vw
+cG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGli
+dmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFz
+cwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sg
+ICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsICAgICAgICAgIDEz
+IG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJt
+NjQtYXJtNjQteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWls
+ICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1
+cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxp
+YnZpcnQteHNtIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBh
+c3MKIHRlc3QtYXJtNjQtYXJtNjQteGwtY3JlZGl0MiAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
+ICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAx
+NCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
+bTY0LWFybTY0LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFp
+bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3Rv
+cmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1s
+aWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
+IGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZt
+LWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0
+LWFybWhmLWFybWhmLXhsLWFybmRhbGUgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
+ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgMTQgc2F2ZXJl
+c3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2
+NC1saWJ2aXJ0LXZoZCAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZl
+ciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1hbWQgMTcgZGViaWFuLWh2bS1p
+bnN0YWxsL2wxL2wyICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAg
+ICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
+dC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAg
+IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDEzIG1pZ3Jh
+dGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJt
+aGYteGwtY3JlZGl0MiAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2
+ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgMTMgbWlncmF0ZS1zdXBwb3J0
+LWNoZWNrICAgICAgICBmYWlsICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRp
+dmNwdSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIG5ldmVyIHBhc3MKIHRl
+c3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAg
+ICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrIDE0IHNh
+dmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
+bWhmLWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
+dmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gMTQgc2F2ZXJlc3RvcmUtc3Vw
+cG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC14c20g
+ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
+ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sg
+ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTIgbWln
+cmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
+cm1oZi1saWJ2aXJ0LXJhdyAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBu
+ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEyIG1pZ3JhdGUtc3VwcG9y
+dC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhk
+ICAgICAgMTMgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwog
+dGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAg
+ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgIDE0IHNh
+dmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
+YW1kNjQteGwtcWVtdXQtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwg
+bmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93
+cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFl
+bXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICBmYWlsIG5ldmVyIHBhc3MK
+IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAg
+ICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAxMyBt
+aWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhm
+LWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAg
+IG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAgICAgICAg
+ICAgICAgICA4OGZiYWJjNDkxNThiMGI4NTgyNDhmYTEyNGVmNTkwYzVkZjc3ODJmCmJhc2VsaW5l
+IHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICAzYjEwZTEyM2U5MjZkZDg0NjljMGIzMTM3
+YTMyZDM4N2VmNzBiMWY1CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMTk4MzkgIDIwMTgtMDItMjEg
+MTk6MzE6NTQgWiAgICAzIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTE5OTU0ICAyMDE4LTAy
+LTIzIDA5OjQ0OjA4IFogICAgMSBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRv
+dWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2Uu
+Y29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi14c20g
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
+aWxkLWkzODYteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBwYXNzICAgIAogYnVpbGQtYW1kNjQteHRmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
+bGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtbGlidmly
+dCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
+ZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHJldiAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXByZXYgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
+LWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
+YXNzICAgIAogYnVpbGQtYXJtNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHZvcHMgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
+YW1kNjQtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiBidWlsZC1pMzg2LXJ1bXBydW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTEgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQt
+MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0
+Zi1hbWQ2NC1hbWQ2NC0zICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtNSAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJt
+NjQtYXJtNjQteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
+dXQtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
+NC1pMzg2LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAg
+ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2
+bS1hbWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
+dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
+LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNt
+ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXN0dWJkb20tZGViaWFu
+aHZtLWFtZDY0LXhzbSAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQt
+eHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQt
+YXJtNjQtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwteHNtICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1h
+cm02NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0
+ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkz
+ODYtcWVtdXQtcmhlbDZodm0tYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtZGVi
+aWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1k
+NjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
+dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWFtZDY0ICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3Zt
+Zi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2
+LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
+ZXN0LWFtZDY0LWFtZDY0LXJ1bXBydW4tYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAg
+ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjct
+YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
+LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
+c3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
+ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAg
+ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd3MxNi1h
+bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
+eGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
+dC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAg
+IGZhaWwgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14
+bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
+LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWZyZWVic2QxMC1pMzg2ICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcnVt
+cHJ1bi1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
+YW1kNjQtYW1kNjQteGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICBm
+YWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjEwLWkzODYgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkz
+ODYgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
+ZW11dS13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1h
+bWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1pbnRl
+bCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2
+aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFy
+bWhmLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saXZlcGF0Y2ggICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGl2ZXBh
+dGNoICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
+NjQtYW1kNjQtbWlncnVwZ3JhZGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogdGVzdC1hbWQ2NC1pMzg2LW1pZ3J1cGdyYWRlICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLW11bHRpdmNwdSAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVs
+dGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
+NC1hbWQ2NC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFtZDY0LWkzODYtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1wYWlyICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQt
+cGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
+LWFtZDY0LWFtZDY0LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1wdmdydWIgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdydWIgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFjb3cy
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYt
+YXJtaGYtbGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1h
+bWQ2NC1saWJ2aXJ0LXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFi
+LnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3Mv
+aW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0
+cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlv
+biBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAg
+aHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVB
+RE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9
+b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUg
+Y2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rl
+c3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCA4OGZiYWJjNDkxNThi
+MGI4NTgyNDhmYTEyNGVmNTkwYzVkZjc3ODJmCkF1dGhvcjogSmFuIEJldWxpY2ggPGpiZXVsaWNo
+QHN1c2UuY29tPgpEYXRlOiAgIEZyaSBGZWIgMjMgMTA6MTM6NTUgMjAxOCArMDEwMAoKICAgIHg4
+Ni9QVjogY29ycmVjdGx5IGNvdW50IE1TUnMgdG8gbWlncmF0ZQogICAgCiAgICBTaWduZWQtb2Zm
+LWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CihxZW11IGNoYW5nZXMgbm90IGlu
+Y2x1ZGVkKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
