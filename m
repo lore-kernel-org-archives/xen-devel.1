@@ -1,26 +1,22 @@
-From: Andre Przywara <andre.przywara@linaro.org>
-Subject: Re: [RFC PATCH 25/49] ARM: new VGIC: Add GICv2 world
-	switch backend
-Date: Mon, 26 Feb 2018 16:19:29 +0000
-Message-ID: <a6525233-6174-4ec1-a4b2-e567aa13a78e@linaro.org>
-References: <20180209143937.28866-1-andre.przywara@linaro.org>
- <20180209143937.28866-26-andre.przywara@linaro.org>
- <f94e28f0-8c57-63b6-5ea0-2f3f330a2f1c@arm.com>
- <1d221d96-0d50-78d1-cd9c-1c9d15b8e114@linaro.org>
- <243285a7-0537-e19c-7760-3e42a5d4ca91@arm.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: [Minios-devel] Excited for Xen Project in Outreachy
+Date: Mon, 26 Feb 2018 17:21:51 +0100
+Message-ID: <B3203C11-6B69-49FB-8654-9656122D8677@gmail.com>
+References: <4C7AE15B-6A38-4D0B-8E31-2A13DAD04D71@citrix.com>
+ <alpine.DEB.2.10.1802141036260.5392@sstabellini-ThinkPad-X260>
+ <CAFSf9ho6SwiPw8jDzzy3O+MhjY23MdwWvSNQDwJcr5Y56rjTTA@mail.gmail.com>
+ <CAFSf9hqHcZ=9KEb2R=psTy5ou1L6Kh_AE-Tr2HZNWW-qtuw_9g@mail.gmail.com>
+ <723A9DC0-1134-4637-9B80-E15ADF026EC3@xenproject.org>
+ <CAFSf9ho7cA04Uey+6y_3DRA6D054QiGQwK22yCHvF6wwuo3A3w@mail.gmail.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.2 \(3445.5.20\))
+Content-Type: multipart/mixed; boundary="===============7798694638300854147=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=gfbg=fu=linaro.org=andre.przywara@srs-us1.protection.inumbo.net>)
- id 1eqLV2-0000Gv-TS
- for xen-devel@lists.xenproject.org; Mon, 26 Feb 2018 16:19:36 +0000
-Received: by mail-wm0-x234.google.com with SMTP id t6so10033897wmt.5
- for <xen-devel@lists.xenproject.org>; Mon, 26 Feb 2018 08:19:35 -0800 (PST)
-In-Reply-To: <243285a7-0537-e19c-7760-3e42a5d4ca91@arm.com>
-Content-Language: en-GB
+ <srs0=fynv=fu=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1eqLXI-0000tr-H8
+ for xen-devel@lists.xenproject.org; Mon, 26 Feb 2018 16:21:56 +0000
+In-Reply-To: <CAFSf9ho7cA04Uey+6y_3DRA6D054QiGQwK22yCHvF6wwuo3A3w@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,128 +25,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+To: KANIKA SAINI <kanika16047@iiitd.ac.in>, Simon Kuenzer <simon.kuenzer@neclab.eu>
+Cc: "minios-devel@lists.xenproject.org" <minios-devel@lists.xenproject.org>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAyNi8wMi8xOCAxNjowMiwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIEFuZHJlLAo+
-IAo+IE9uIDAyLzI2LzIwMTggMDM6MTMgUE0sIEFuZHJlIFByenl3YXJhIHdyb3RlOgo+PiBIaSwK
-Pj4KPj4gT24gMTMvMDIvMTggMTQ6MzEsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4+IEhpLAo+Pj4K
-Pj4+IE9uIDA5LzAyLzE4IDE0OjM5LCBBbmRyZSBQcnp5d2FyYSB3cm90ZToKPj4+PiBQcm9jZXNz
-aW5nIG1haW50ZW5hbmNlIGludGVycnVwdHMgYW5kIGFjY2Vzc2luZyB0aGUgbGlzdCByZWdpc3Rl
-cnMKPj4+PiBhcmUgZGVwZW5kZW50IG9uIHRoZSBob3N0J3MgR0lDIHZlcnNpb24uCj4+Pj4gSW50
-cm9kdWNlIHZnaWMtdjIuYyB0byBjb250YWluIEdJQ3YyIHNwZWNpZmljIGZ1bmN0aW9ucy4KPj4+
-PiBJbXBsZW1lbnQgdGhlIEdJQ3YyIHNwZWNpZmljIGNvZGUgZm9yIHN5bmNpbmcgdGhlIGVtdWxh
-dGlvbiBzdGF0ZQo+Pj4+IGludG8gdGhlIFZHSUMgcmVnaXN0ZXJzLgo+Pj4+IFRoaXMgYWxzbyBh
-ZGRzIHRoZSBob29rIHRvIGxldCBYZW4gc2V0dXAgdGhlIGhvc3QgR0lDIGFkZHJlc3Nlcy4KPj4+
-Pgo+Pj4+IFRoaXMgaXMgYmFzZWQgb24gTGludXggY29tbWl0IDE0MGIwODZkZDE5Nywgd3JpdHRl
-biBieSBNYXJjIFp5bmdpZXIuCj4+Pj4KPj4+PiBTaWduZWQtb2ZmLWJ5OiBBbmRyZSBQcnp5d2Fy
-YSA8YW5kcmUucHJ6eXdhcmFAbGluYXJvLm9yZz4KPj4+PiAtLS0KPj4+PiDCoMKgIHhlbi9hcmNo
-L2FybS92Z2ljL3ZnaWMtdjIuYyB8IDI2MQo+Pj4+ICsrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrCj4+Pj4gwqDCoCB4ZW4vYXJjaC9hcm0vdmdpYy92Z2ljLmPCoMKg
-wqAgfMKgIDIwICsrKysKPj4+PiDCoMKgIHhlbi9hcmNoL2FybS92Z2ljL3ZnaWMuaMKgwqDCoCB8
-wqDCoCA4ICsrCj4+Pj4gwqDCoCAzIGZpbGVzIGNoYW5nZWQsIDI4OSBpbnNlcnRpb25zKCspCj4+
-Pj4gwqDCoCBjcmVhdGUgbW9kZSAxMDA2NDQgeGVuL2FyY2gvYXJtL3ZnaWMvdmdpYy12Mi5jCj4+
-Pj4KPj4+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3ZnaWMvdmdpYy12Mi5jIGIveGVuL2Fy
-Y2gvYXJtL3ZnaWMvdmdpYy12Mi5jCj4+Pj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPj4+PiBpbmRl
-eCAwMDAwMDAwMDAwLi4xMGZjNDY3ZmZhCj4+Pj4gLS0tIC9kZXYvbnVsbAo+Pj4+ICsrKyBiL3hl
-bi9hcmNoL2FybS92Z2ljL3ZnaWMtdjIuYwo+Pj4+IEBAIC0wLDAgKzEsMjYxIEBACj4+Pj4gKy8q
-Cj4+Pj4gKyAqIENvcHlyaWdodCAoQykgMjAxNSwgMjAxNiBBUk0gTHRkLgo+Pj4+ICsgKiBJbXBv
-cnRlZCBmcm9tIExpbnV4ICgibmV3IiBLVk0gVkdJQykgYW5kIGhlYXZpbHkgYWRhcHRlZCB0byBY
-ZW4uCj4+Pj4gKyAqCj4+Pj4gKyAqIFRoaXMgcHJvZ3JhbSBpcyBmcmVlIHNvZnR3YXJlOyB5b3Ug
-Y2FuIHJlZGlzdHJpYnV0ZSBpdCBhbmQvb3IKPj4+PiBtb2RpZnkKPj4+PiArICogaXQgdW5kZXIg
-dGhlIHRlcm1zIG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSB2ZXJzaW9uIDIgYXMK
-Pj4+PiArICogcHVibGlzaGVkIGJ5IHRoZSBGcmVlIFNvZnR3YXJlIEZvdW5kYXRpb24uCj4+Pj4g
-KyAqCj4+Pj4gKyAqIFRoaXMgcHJvZ3JhbSBpcyBkaXN0cmlidXRlZCBpbiB0aGUgaG9wZSB0aGF0
-IGl0IHdpbGwgYmUgdXNlZnVsLAo+Pj4+ICsgKiBidXQgV0lUSE9VVCBBTlkgV0FSUkFOVFk7IHdp
-dGhvdXQgZXZlbiB0aGUgaW1wbGllZCB3YXJyYW50eSBvZgo+Pj4+ICsgKiBNRVJDSEFOVEFCSUxJ
-VFkgb3IgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuwqAgU2VlIHRoZQo+Pj4+ICsg
-KiBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBmb3IgbW9yZSBkZXRhaWxzLgo+Pj4+ICsgKgo+
-Pj4+ICsgKiBZb3Ugc2hvdWxkIGhhdmUgcmVjZWl2ZWQgYSBjb3B5IG9mIHRoZSBHTlUgR2VuZXJh
-bCBQdWJsaWMgTGljZW5zZQo+Pj4+ICsgKiBhbG9uZyB3aXRoIHRoaXMgcHJvZ3JhbS7CoCBJZiBu
-b3QsIHNlZQo+Pj4+IDxodHRwOi8vd3d3LmdudS5vcmcvbGljZW5zZXMvPi4KPj4+PiArICovCj4+
-Pj4gKwo+Pj4+ICsjaW5jbHVkZSA8YXNtL2FybV92Z2ljLmg+Cj4+Pj4gKyNpbmNsdWRlIDxhc20v
-YnVnLmg+Cj4+Pj4gKyNpbmNsdWRlIDxhc20vaW8uaD4KPj4+PiArI2luY2x1ZGUgPHhlbi9zY2hl
-ZC5oPgo+Pj4+ICsjaW5jbHVkZSA8eGVuL3NpemVzLmg+Cj4+Pj4gKwo+Pj4+ICsjaW5jbHVkZSAi
-dmdpYy5oIgo+Pj4+ICsKPj4+PiArI2RlZmluZSBHSUNIX0VMUlNSMMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHgzMAo+Pj4+ICsjZGVmaW5lIEdJQ0hfRUxSU1IxwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAweDM0Cj4+Pj4gKyNkZWZpbmUg
-R0lDSF9MUjDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4
-MTAwCj4+Pj4gKwo+Pj4+ICsjZGVmaW5lIEdJQ0hfTFJfVklSVFVBTElEwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCAoMHgzZmYgPDwgMCkKPj4+PiArI2RlZmluZSBHSUNIX0xSX1BIWVNJRF9D
-UFVJRF9TSElGVMKgwqDCoMKgwqAgKDEwKQo+Pj4+ICsjZGVmaW5lIEdJQ0hfTFJfUEhZU0lEX0NQ
-VUlEwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAoMHgzZmYgPDwKPj4+PiBHSUNIX0xSX1BIWVNJRF9D
-UFVJRF9TSElGVCkKPj4+PiArI2RlZmluZSBHSUNIX0xSX1BSSU9SSVRZX1NISUZUwqDCoMKgwqDC
-oMKgwqDCoMKgIDIzCj4+Pj4gKyNkZWZpbmUgR0lDSF9MUl9TVEFURcKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCAoMyA8PCAyOCkKPj4+PiArI2RlZmluZSBHSUNIX0xSX1BFTkRJ
-TkdfQklUwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICgxIDw8IDI4KQo+Pj4+ICsjZGVmaW5lIEdJ
-Q0hfTFJfQUNUSVZFX0JJVMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICgxIDw8IDI5KQo+Pj4+
-ICsjZGVmaW5lIEdJQ0hfTFJfRU9JwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCAoMSA8PCAxOSkKPj4+PiArI2RlZmluZSBHSUNIX0xSX0hXwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICgxIDw8IDMxKQo+Pj4KPj4+IENhbiB3ZSBkZWZpbmUg
-dGhlbSBpbiBlaXRoZXIgaW4gZ2ljLmggb3IgYSBuZXcgaGVhZGVyIGdpYy12Mi5oPwo+Pgo+PiBZ
-ZXMsIGJ1dCB0aGV5IGNsYXNoIHdpdGggc29tZSBpbGwtbmFtZWQgR0lDdjMgTFIgYml0cy4gU28g
-ZXhwZWN0IGFub3RoZXIKPj4gcGF0Y2ggd2hpY2ggcmVuYW1lcyBHSUNIX0xSX1NUQVRFX1NISUZU
-IHRvIElDSF9MUl9TVEFURV9TSElGVC4gV2hpY2ggaXMKPj4gdGhlIGFjdHVhbCBzcGVjIG5hbWUg
-Zm9yIHRoYXQgc3lzdGVtIHJlZ2lzdGVyIGluIEdJQ3YzLCB0aGVyZSBpcyBubwo+PiBHSUNIX0xS
-XyB3aXRoIHRoZSBHSUN2MyBiaXQgcG9zaXRpb25zLgo+IAo+IFdoaWxlIHRoaXMgd291bGQgYmUg
-YSBuaWNlIGNsZWFuLXVwLiBXb3VsZG4ndCBjcmVhdGUgYSBuZXcgZ2ljLXYyLmgKPiBzdWZmaWNp
-ZW50PwoKSSBkb24ndCB0aGluayB0aGF0IHdvdWxkIGJlIHJpZ2h0LiBXZSBhY3R1YWxseSBhbHJl
-YWR5IGhhdmUgc29tZSBHSUNIXwpkZWZpbml0aW9ucyBpbiB4ZW4vaW5jbHVkZS9hc20tYXJtL2dp
-Yy5oLCBzbyBqdXN0IGFkZGluZyB0aGUgbWlzc2luZwpvbmVzIHRoZXJlIHNvdW5kcyBuYXR1cmFs
-LiBJIG5vdyByZW1lbWJlciB0aGF0IEkganVzdCBkaWRuJ3QgZG8gdGhpcwppbml0aWFsbHkgYmVj
-YXVzZSBvZiB0aGUgY2xhc2ggYW5kIGFuZCBhdCB0aGlzIHRpbWUgSSBqdXN0IHdhbnRlZCB0bwpt
-YWtlIGl0IGNvbXBpbGUgOy0pCgpBbmQgc2luY2UgYXNzaWduaW5nIEdJQ0hfIG5hbWVzIHRvIEdJ
-Q3YzIElDSF8gcmVnaXN0ZXIgYml0cyBzb3VuZHMgd3JvbmcKaW4gdGhlIGZpcnN0IHBsYWNlLCBJ
-IGNvbnNpZGVyIHRoaXMgYSBnb29kIG9wcG9ydHVuaXR5IHRvIGZpeCB0aGlzLgoKQ2hlZXJzLApB
-bmRyZS4KCj4gCj4+Cj4+Cj4+Pj4gKwo+Pj4+ICtzdGF0aWMgc3RydWN0IHsKPj4+PiArwqDCoMKg
-IGJvb2wgZW5hYmxlZDsKPj4+PiArwqDCoMKgIHBhZGRyX3QgZGJhc2U7wqDCoMKgwqDCoMKgwqDC
-oMKgIC8qIERpc3RyaWJ1dG9yIGludGVyZmFjZSBhZGRyZXNzICovCj4+Pj4gK8KgwqDCoCBwYWRk
-cl90IGNiYXNlO8KgwqDCoMKgwqDCoMKgwqDCoCAvKiBDUFUgaW50ZXJmYWNlIGFkZHJlc3MgJiBz
-aXplICovCj4+Pj4gK8KgwqDCoCBwYWRkcl90IGNzaXplOwo+Pj4+ICvCoMKgwqAgcGFkZHJfdCB2
-YmFzZTvCoMKgwqDCoMKgwqDCoMKgwqAgLyogVmlydHVhbCBDUFUgaW50ZXJmYWNlIGFkZHJlc3Mg
-Ki8KPj4+PiArwqDCoMKgIHZvaWQgX19pb21lbSAqaGJhc2U7wqDCoMKgwqDCoMKgwqAgLyogSHlw
-ZXJ2aXNvciBjb250cm9sIGludGVyZmFjZSAqLwo+Pj4+ICsKPj4+PiArwqDCoMKgIC8qIE9mZnNl
-dCB0byBhZGQgdG8gZ2V0IGFuIDhrQiBjb250aWd1b3VzIHJlZ2lvbiBpZiBHSUMgaXMKPj4+PiBh
-bGlhc2VkICovCj4+Pj4gK8KgwqDCoCB1aW50MzJfdCBhbGlhc2VkX29mZnNldDsKPj4+PiArfSBn
-aWNfdjJfaHdfZGF0YTsKPj4+PiArCj4+Pj4gK3ZvaWQgdmdpY192Ml9zZXR1cF9odyhwYWRkcl90
-IGRiYXNlLCBwYWRkcl90IGNiYXNlLCBwYWRkcl90IGNzaXplLAo+Pj4+ICvCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCBwYWRkcl90IHZiYXNlLCB2b2lkIF9faW9tZW0gKmhiYXNlLAo+Pj4+ICvC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB1aW50MzJfdCBhbGlhc2VkX29mZnNldCkKPj4+PiAr
-ewo+Pj4+ICvCoMKgwqAgZ2ljX3YyX2h3X2RhdGEuZW5hYmxlZCA9IHRydWU7Cj4+Pj4gK8KgwqDC
-oCBnaWNfdjJfaHdfZGF0YS5kYmFzZSA9IGRiYXNlOwo+Pj4+ICvCoMKgwqAgZ2ljX3YyX2h3X2Rh
-dGEuY2Jhc2UgPSBjYmFzZTsKPj4+PiArwqDCoMKgIGdpY192Ml9od19kYXRhLmNzaXplID0gY3Np
-emU7Cj4+Pj4gK8KgwqDCoCBnaWNfdjJfaHdfZGF0YS52YmFzZSA9IHZiYXNlOwo+Pj4+ICvCoMKg
-wqAgZ2ljX3YyX2h3X2RhdGEuaGJhc2UgPSBoYmFzZTsKPj4+PiArwqDCoMKgIGdpY192Ml9od19k
-YXRhLmFsaWFzZWRfb2Zmc2V0ID0gYWxpYXNlZF9vZmZzZXQ7Cj4+Pj4gK30KPj4+PiArCj4+Pj4g
-K3ZvaWQgdmdpY192Ml9zZXRfdW5kZXJmbG93KHN0cnVjdCB2Y3B1ICp2Y3B1KQo+Pj4+ICt7Cj4+
-Pj4gK8KgwqDCoCBnaWNfaHdfb3BzLT51cGRhdGVfaGNyX3N0YXR1cyhHSUNIX0hDUl9VSUUsIDEp
-Owo+Pj4+ICt9Cj4+Pj4gKwo+Pj4+ICsvKgo+Pj4+ICsgKiB0cmFuc2ZlciB0aGUgY29udGVudCBv
-ZiB0aGUgTFJzIGJhY2sgaW50byB0aGUgY29ycmVzcG9uZGluZwo+Pj4+IGFwX2xpc3Q6Cj4+Pj4g
-KyAqIC0gYWN0aXZlIGJpdCBpcyB0cmFuc2ZlcnJlZCBhcyBpcwo+Pj4+ICsgKiAtIHBlbmRpbmcg
-Yml0IGlzCj4+Pj4gKyAqwqDCoCAtIHRyYW5zZmVycmVkIGFzIGlzIGluIGNhc2Ugb2YgZWRnZSBz
-ZW5zaXRpdmUgSVJRcwo+Pj4+ICsgKsKgwqAgLSBzZXQgdG8gdGhlIGxpbmUtbGV2ZWwgKHJlc2Ft
-cGxlIHRpbWUpIGZvciBsZXZlbCBzZW5zaXRpdmUgSVJRcwo+Pj4+ICsgKi8KPj4+PiArdm9pZCB2
-Z2ljX3YyX2ZvbGRfbHJfc3RhdGUoc3RydWN0IHZjcHUgKnZjcHUpCj4+Pgo+Pj4gSSBhbSB3b25k
-ZXJpbmcgaG93IG11Y2ggd2UgY291bGQgc2hhcmUgdGhpcyBjb2RlIHdpdGgKPj4+IHZnaWNfdjNf
-Zm9sZF9scl9zdGF0ZS4KPj4KPj4gSSB0aGluayB3ZSBkaXNjdXNzZWQgdGhpcyBhbmQgZGlzbWlz
-c2VkIHRoZSBpZGVhOgo+PiAtIFRoZSBhY3R1YWwgTFIgZW5jb2RpbmcgaXMgbXVjaCBkaWZmZXJl
-bnQgYmV0d2VlbiBHSUN2MyBhbmQgR0lDdjIsIHVwCj4+IHRvIHRoZSBwb2ludCB3aGVyZSB3ZSBo
-YXZlIHNvbWUgZmllbGRzIGluIG9uZSB3aGljaCBhcmUgbm90IGluIHRoZQo+PiBvdGhlci4gVGhh
-dCByZWFsbHkgY2x1dHRlcnMgdGhlIGNvZGUuCj4+IC0gT3JpZ2luYWxseSB0aGlzIGZ1bmN0aW9u
-IHdhcyBtdWNoIHNob3J0ZXIgYW5kIGRpZG4ndCBoYXZlIHRoYXQgbWFueQo+PiBzcGVjaWFsIGNh
-c2VzLiBTbyB0aGUgY29kZSBkdXBsaWNhdGlvbiB3YXMgcmVhbGx5IG1pbmltYWwuCj4+Cj4+IEkg
-c2VlIHlvdXIgcG9pbnQsIGJ1dCBkb24ndCByZWFsbHkgd2FudCB0byBnbyB0aGVyZSBub3cgZm9y
-IHR3byByZWFzb25zOgo+PiAtIEl0IGlzIHByb2JhYmx5IG5hc3R5IHRvIGltcGxlbWVudCwgc2lu
-Y2Ugd2UgYWx3YXlzIGhhdmUgdG8gY2hlY2sgd2hpY2gKPj4gR0lDIHdlIGFyZSBydW5uaW5nIG9u
-IHdoZW4gbWFza2luZyB0aGUgTFIgdmFsdWUuCj4+IC0gSXQgd291bGQgZGV2aWF0ZSBmdXJ0aGVy
-IGZyb20gdGhlIEtWTSBpbXBsZW1lbnRhdGlvbiwgaW4gYSBjb3JlCj4+IGZ1bmN0aW9uLiBGb3Ig
-YW55IGJ1Z3MgaW50cm9kdWNlZCB3ZSBhcmUgb24gb3VyIG93biBoZXJlLgo+Pgo+PiBJIHdpbGwg
-dHJ5IHRvIGJyaW5nIHRoaXMgdXAgd2l0aCB0aGUgS1ZNIHBlb3BsZSwgdG8gc2VlIHdoZXRoZXIg
-aXQncwo+PiB3b3J0aCB0byByZXZpc2l0IHRoaXMgZGVjaXNpb24uIFRoZXJlIGlzIGluZGVlZCBx
-dWl0ZSBzb21lIGNvZGUKPj4gZHVwbGljYXRpb24gdGhlc2UgZGF5cy4KPj4gQnV0IHRoaXMgbWF5
-IGNvbWUgYXMgYW4gb3B0aW1pemF0aW9uIGxhdGVyLgo+IAo+IEZpbmUgd2l0aCBtZS4gSXQgd2Fz
-IG1vc3RseSB0byBhdm9pZCBoYXZpbmcgdG8gcmV2aWV3IHR3aWNlIHRoZSBzYW1lCj4gaGFpcnkg
-Y29kZS4KPiAKPiBDaGVlcnMsCj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+
+--===============7798694638300854147==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_2EFE6165-4C5F-430D-8586-A32A8C15CF4B"
+
+
+--Apple-Mail=_2EFE6165-4C5F-430D-8586-A32A8C15CF4B
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+Hi Kanika,
+
+> On 24 Feb 2018, at 20:40, KANIKA SAINI <kanika16047@iiitd.ac.in> =
+wrote:
+>=20
+> Thank you, Lars.=20
+> The links you have provided have managed to make things clearer to me =
+now.
+>=20
+> I understand how a flag in the makefile can be changed by passing a =
+parameter to the make command in the command line and how=20
+> "origin" checks where the variable comes from.
+> I did realize creating the dependency of the Makefile itself would =
+indeed not be a good idea at the finer level of granularity.=20
+> I went through the documentation at =
+http://unikraft.neclab.eu/developers-app.html =
+<http://unikraft.neclab.eu/developers-app.html> and can now understand =
+the structure of makefiles of libraries better.=20
+>=20
+> I spent some time studying the problem and came across this solution =
+at https://www.cmcrossroads.com/article/rebuilding-when-cppflags-changes =
+<https://www.cmcrossroads.com/article/rebuilding-when-cppflags-changes> =
+which uses the concept of signatures.=20
+> I also understood how rules are dynamically being set by the Makefiles =
+in support/build/ directory.=20
+>=20
+> To be able to draft a solution there's one more thing lacking my =
+understanding, which is the order of the execution of the makefiles.=20
+> What calls the dynamic makefiles and when is the main makefile called =
+and how do the dynamic makefiles pass those parameters to the main one?
+
+I am not sure I understand your question.
+
+Generally, you can debug makefiles which can help you understand what is =
+going on: e.g. see http://www.oreilly.com/openbook/make3/book/ch12.pdf =
+<http://www.oreilly.com/openbook/make3/book/ch12.pdf>
+
+But in a nutshell: you call make ... in your directory and the Makefile =
+is invoked
+* Other rules, e.g. in support / build are included via include =
+statements
+* All the other *.uk makefiles are also included=20
+=3D> The makefile in unikraft / unikraft.git drives everything related =
+to building and configuration (including menuconfig)
+
+In some cases you have nested makefile execution, where another makefile =
+is invoked via "@make" as in the Hello World app
+
+Lars
+
+
+--Apple-Mail=_2EFE6165-4C5F-430D-8586-A32A8C15CF4B
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">Hi =
+Kanika,<br class=3D""><div><br class=3D""><blockquote type=3D"cite" =
+class=3D""><div class=3D"">On 24 Feb 2018, at 20:40, KANIKA SAINI &lt;<a =
+href=3D"mailto:kanika16047@iiitd.ac.in" =
+class=3D"">kanika16047@iiitd.ac.in</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><div dir=3D"ltr" =
+style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;" =
+class=3D""><img width=3D"0" height=3D"0" class=3D"mailtrack-img" alt=3D"" =
+src=3D"https://mailtrack.io/trace/mail/e0547bf16b9227ec7e088fe59676c17f256=
+bcccc.png?u=3D1498883" style=3D"display: flex;">Thank you, =
+Lars.&nbsp;<br class=3D"">The links you have provided have managed to =
+make things clearer to me now.<br class=3D""><br class=3D"">I understand =
+how a flag in the makefile can be changed by passing a parameter to the =
+make command in the command line and how<span =
+class=3D"Apple-converted-space">&nbsp;</span><br class=3D"">"origin" =
+checks where the variable comes from.<br class=3D"">I did realize =
+creating the dependency of the Makefile itself would indeed not be a =
+good idea at the finer level of granularity.&nbsp;<br class=3D"">I went =
+through the documentation at&nbsp;<span =
+id=3D"gmail-docs-internal-guid-1ee4b8dd-c947-9b59-ad09-0d74946c3496" =
+class=3D""><span style=3D"font-size: 9.5pt; font-family: Arial; =
+vertical-align: baseline; white-space: pre-wrap;" class=3D""><a =
+href=3D"http://unikraft.neclab.eu/developers-app.html" =
+class=3D"">http://unikraft.neclab.eu/developers-app.html</a> =
+</span></span>and can now understand the structure of makefiles of =
+libraries better.&nbsp;<br class=3D""><br class=3D"">I spent some time =
+studying the problem and came across this solution at&nbsp;<a =
+href=3D"https://www.cmcrossroads.com/article/rebuilding-when-cppflags-chan=
+ges" =
+class=3D"">https://www.cmcrossroads.com/article/rebuilding-when-cppflags-c=
+hanges</a>&nbsp;which uses the concept of signatures.&nbsp;<br =
+class=3D"">I also understood how rules are dynamically being set by the =
+Makefiles in support/build/ directory.&nbsp;<br class=3D""><br =
+class=3D"">To be able to draft a solution&nbsp;there's one more thing =
+lacking my understanding, which is the order of the execution of the =
+makefiles.&nbsp;<br class=3D"">What calls the dynamic makefiles and when =
+is the main makefile called and how do the dynamic makefiles pass those =
+parameters to the main one?<br =
+class=3D""></div></div></blockquote><div><br class=3D""></div><div>I am =
+not sure I understand your question.</div><div><br =
+class=3D""></div><div>Generally, you can debug makefiles which can help =
+you understand what is going on: e.g. see <a =
+href=3D"http://www.oreilly.com/openbook/make3/book/ch12.pdf" =
+class=3D"">http://www.oreilly.com/openbook/make3/book/ch12.pdf</a></div><d=
+iv><br class=3D""></div><div>But in a nutshell: you call make ... in =
+your directory and the Makefile is invoked</div><div>* Other rules, e.g. =
+in support / build are included via include statements</div><div>* All =
+the other *.uk makefiles are also included&nbsp;</div><div>=3D&gt; The =
+makefile in&nbsp;unikraft / unikraft.git drives everything related to =
+building and configuration (including<span style=3D"color: rgb(64, 64, =
+64); font-family: Consolas, &quot;Andale Mono WT&quot;, &quot;Andale =
+Mono&quot;, &quot;Lucida Console&quot;, &quot;Lucida Sans =
+Typewriter&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera =
+Sans Mono&quot;, &quot;Liberation Mono&quot;, &quot;Nimbus Mono L&quot;, =
+Monaco, &quot;Courier New&quot;, Courier, monospace; orphans: 2; widows: =
+2; background-color: rgb(255, 255, 255);" =
+class=3D"">&nbsp;menuconfig)</span></div><div><br class=3D""></div><div>In=
+ some cases you have nested makefile execution, where another makefile =
+is invoked via "<span style=3D"font-family: monospace; orphans: 2; =
+white-space: pre; widows: 2; background-color: rgb(255, 255, 255);" =
+class=3D"">@make</span>" as in the Hello World =
+app</div></div><div></div><div class=3D""><br class=3D""></div>Lars<br =
+class=3D""><br class=3D""></body></html>=
+
+--Apple-Mail=_2EFE6165-4C5F-430D-8586-A32A8C15CF4B--
+
+
+--===============7798694638300854147==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7798694638300854147==--
