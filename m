@@ -1,16 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 120044: tolerable all pass -
-	PUSHED
-Date: Mon, 26 Feb 2018 20:41:34 +0000
-Message-ID: <osstest-120044-mainreport@xen.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [RFC PATCH 0/5] x86: Multiple fixes to MSR_TSC_AUX
+ and RDTSCP handling for guests
+Date: Mon, 26 Feb 2018 23:30:02 +0000
+Message-ID: <bd5b1055-78eb-ef1a-1c99-621ee8ed5bc2@citrix.com>
+References: <1519127923-23539-1-git-send-email-andrew.cooper3@citrix.com>
+ <3932aaca-1d30-85f9-b27a-c717997794fa@citrix.com>
+ <fa752277-f9d1-610c-dbdf-4d9d1ab6a96a@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2617835058634942246=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=hv1c=fu=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1eqPak-0001Ex-UH
- for xen-devel@lists.xenproject.org; Mon, 26 Feb 2018 20:41:46 +0000
+In-Reply-To: <fa752277-f9d1-610c-dbdf-4d9d1ab6a96a@oracle.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,81 +20,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen-devel <xen-devel@lists.xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2617835058634942246==
-Content-Type: text/plain
-
-flight 120044 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/120044/
-
-Failures :-/ but no regressions.
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  9683360c574dff909d728cf55a1ed310a8bc60bb
-baseline version:
- xen                  a823a5280f25ad19a751dd9a41044f556471e61a
-
-Last test of basis   119966  2018-02-23 14:33:58 Z    3 days
-Testing same since   120044  2018-02-26 18:01:25 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   a823a5280f..9683360c57  9683360c574dff909d728cf55a1ed310a8bc60bb -> smoke
-
-
---===============2617835058634942246==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2617835058634942246==--
+T24gMjYvMDIvMjAxOCAxOTo0NCwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDAyLzI2LzIw
+MTggMDI6MTIgUE0sIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4+IE9uIDIwLzAyLzE4IDExOjU4LCBB
+bmRyZXcgQ29vcGVyIHdyb3RlOgo+Pj4gVGhpcyByYXRzIG5lc3Qgd2FzIGRpc2NvdmVyZWQgd2hl
+biBmaW5kaW5nIHRoYXQgTVNSX1RTQ19BVVggbGVha2VkIGludG8gUFYKPj4+IGd1ZXN0cy4gIEl0
+IGlzIFJGQyBiZWNhdXNlIEkgaGF2ZW4ndCBkb25lIGV4dGVuc2l2ZSB0ZXN0aW5nIG9uIHRoZSBy
+ZXN1bHQsIGFuZAo+Pj4gYmVjYXVzZSB0aGVyZSBhcmUgc29tZSBmdW5jdGlvbmFsIGNoYW5nZXMg
+Zm9yIHRoZSB2aXJ0dWFsaXNlZCBUU0MgbW9kZXMuCj4+Pgo+Pj4gQW5kcmV3IENvb3BlciAoNSk6
+Cj4+PiAgIHg4Ni9odm06IERvbid0IHNoYWRvdyB0aGUgZG9tYWluIHBhcmFtZXRlciBpbiBodm1f
+c2F2ZV9jcHVfbXNycygpCj4+PiAgIHg4Ni9wdjogQXZvaWQgbGVha2luZyBvdGhlciBndWVzdHMn
+IE1TUl9UU0NfQVVYIHZhbHVlcyBpbnRvIFBWIGNvbnRleHQKPj4+ICAgeDg2L3RpbWU6IFJld29y
+ayBwdl9zb2Z0X3JkdHNjKCkgdG8gYWlkIGZ1cnRoZXIgY2xlYW51cAo+Pj4gICB4ODYvcHY6IFJl
+bW92ZSBkZWZlcnJlZCBSRFRTQ3ssUH0gaGFuZGxpbmcgaW4gcHZfZW11bGF0ZV9wcml2aWxlZ2Vk
+X29wKCkKPj4+ICAgeDg2OiBSZXdvcmsgTVNSX1RTQ19BVVggaGFuZGxpbmcgZnJvbSBzY3JhdGNo
+Lgo+PiBLb25yYWQvQm9yaXM6IENhbiB3ZSBoYXZlIGFueSBpbnB1dCBXUlQgVFNDX01PREVfUFZS
+RFRTQ1AgdXNhZ2U/ICBBcmUKPj4geW91IHN0aWxsIHVzaW5nIHRoZSBmZWF0dXJlLCBvciBpcyBp
+dCBhYmFuZG9uZWQ/Cj4gSSBhbHJlYWR5IGFza2VkIGEgZmV3IGludGVybmFsIHRlYW1zIGFib3V0
+LCBoYXZlbid0IGhlYXJkIGJhY2suCgpBaCBvayAtIHRoYW5rcy7CoCBJJ2xsIHdhaXQgdG8gaGVh
+ciBiYWNrIGZyb20geW91IHRoZW4uCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
