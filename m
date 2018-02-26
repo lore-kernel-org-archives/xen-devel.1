@@ -1,21 +1,23 @@
-From: Ian Jackson <ian.jackson@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
 Subject: Re: [PATCH v2] tools/xenstore: try to get minimum
  thread stack size for watch thread
-Date: Mon, 26 Feb 2018 12:03:29 +0000
-Message-ID: <23187.63377.453301.479717@mariner.uk.xensource.com>
+Date: Mon, 26 Feb 2018 12:04:53 +0000
+Message-ID: <20180226120453.czxaazjmmq2s2n45@citrix.com>
 References: <20180226084612.2844-1-jgross@suse.com>
  <20180226094601.knt564ze5dmkzqvg@MacBook-Pro-de-Roger.local>
  <20180226103723.vksgomk3k4jyjvoy@citrix.com>
+ <23187.63377.453301.479717@mariner.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=lxwb=fu=citrix.com=prvs=58832e820=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1eqHVF-0008Af-VU
- for xen-devel@lists.xenproject.org; Mon, 26 Feb 2018 12:03:33 +0000
-In-Reply-To: <20180226103723.vksgomk3k4jyjvoy@citrix.com>
+ <srs0=6hhj=fu=citrix.com=prvs=588a5efd2=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1eqHWa-0008HS-F0
+ for xen-devel@lists.xenproject.org; Mon, 26 Feb 2018 12:04:56 +0000
+Content-Disposition: inline
+In-Reply-To: <23187.63377.453301.479717@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,15 +26,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, jfehlig@suse.com, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, jfehlig@suse.com, Wei Liu <wei.liu2@citrix.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-V2VpIExpdSB3cml0ZXMgKCJSZTogW1hlbi1kZXZlbF0gW1BBVENIIHYyXSB0b29scy94ZW5zdG9y
-ZTogdHJ5IHRvIGdldCBtaW5pbXVtIHRocmVhZCBzdGFjayBzaXplIGZvciB3YXRjaCB0aHJlYWQi
-KToKPiBJIGRvbid0IHRoaW5rIEZyZWVCU0QgbmVlZHMgdGhpcyBwYXJ0aWN1bGFyIHdvcmthcm91
-bmQgZm9yIGdsaWJjIEZXSVcuCgpJbmRlZWQuCgpFcnIsIEkgZ3Vlc3Mgd2Ugc2hvdWxkIGhhdmUg
-YSBjb25maWd1cmUgdGVzdCBvZiBzb21lIGtpbmQgdGhlbiA/CgpUaGUgcGF0Y2ggbG9va3MgZ29v
-ZC4KCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gTW9uLCBGZWIgMjYsIDIwMTggYXQgMTI6MDM6MjlQTSArMDAwMCwgSWFuIEphY2tzb24gd3Jv
+dGU6Cj4gV2VpIExpdSB3cml0ZXMgKCJSZTogW1hlbi1kZXZlbF0gW1BBVENIIHYyXSB0b29scy94
+ZW5zdG9yZTogdHJ5IHRvIGdldCBtaW5pbXVtIHRocmVhZCBzdGFjayBzaXplIGZvciB3YXRjaCB0
+aHJlYWQiKToKPiA+IEkgZG9uJ3QgdGhpbmsgRnJlZUJTRCBuZWVkcyB0aGlzIHBhcnRpY3VsYXIg
+d29ya2Fyb3VuZCBmb3IgZ2xpYmMgRldJVy4KPiAKPiBJbmRlZWQuCj4gCj4gRXJyLCBJIGd1ZXNz
+IHdlIHNob3VsZCBoYXZlIGEgY29uZmlndXJlIHRlc3Qgb2Ygc29tZSBraW5kIHRoZW4gPwo+IAoK
+SXQgaXMgYWxyZWFkeSBlbmNsb3NlZCBpbiBDT05GSUdfTGludXguIEkgdGhpbmsgdGhhdCBzaG91
+bGQgYmUgZW5vdWdoLgoKV2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
