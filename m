@@ -1,13 +1,23 @@
-From: Minjun Hong <nickeysgo@gmail.com>
-Subject: Re: Is there any way to read msr in hypervisor code?
-Date: Tue, 27 Feb 2018 21:35:28 +0900
-Message-ID: <CAFX_q-HtYz=h-kFr_Jbp1WXFaXaa1L1t-zCMY-e1amQNeYq0Rw@mail.gmail.com>
-References: <CAFX_q-F=CkRYyH5BgWxNig9G5XFQOKNgwAKoCsNDPO218a1bdQ@mail.gmail.com>
- <fbea2750-f4a6-d72b-8738-4751f0fbf45e@citrix.com>
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+Subject: Re: [PATCH 0/9] drm/xen-front: Add support for Xen PV
+ display frontend
+Date: Tue, 27 Feb 2018 14:40:42 +0200
+Message-ID: <7e265c53-db9a-0946-6b1c-b946bcbb4100__36004.6167196289$1519735182$gmane$org@gmail.com>
+References: <1519200222-20623-1-git-send-email-andr2000@gmail.com>
+ <4c7e6f65-1787-3815-22b5-f9495e388c06@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4346876011564459776=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <fbea2750-f4a6-d72b-8738-4751f0fbf45e@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=d40k=fv=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1eqeYr-0007xR-4h
+ for xen-devel@lists.xenproject.org; Tue, 27 Feb 2018 12:40:49 +0000
+Received: by mail-lf0-x241.google.com with SMTP id v9so27290931lfa.11
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Feb 2018 04:40:46 -0800 (PST)
+In-Reply-To: <4c7e6f65-1787-3815-22b5-f9495e388c06@gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,598 +26,250 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, airlied@linux.ie, daniel.vetter@intel.com, seanpaul@chromium.org, gustavo@padovan.org, jgross@suse.com, boris.ostrovsky@oracle.com, konrad.wilk@oracle.com
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4346876011564459776==
-Content-Type: multipart/alternative; boundary="94eb2c117a689ed917056630dc43"
-
---94eb2c117a689ed917056630dc43
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Feb 27, 2018 at 7:00 PM, Andrew Cooper <andrew.cooper3@citrix.com>
-wrote:
-
-> On 27/02/2018 09:37, Minjun Hong wrote:
->
-> Hello, I've tried to read msr in hypervisor code:
->
-> uint64_t reg;
->
-> rdmsr_safe(0x412e, ret);
->
->
-> But, I all failed to read it because the hypervisor is running in ring-1
-> CPL as I did googling.
->
->
-> Xen runs in ring 0, root mode.  Forget terms like "ring -1" because they
-> are not accurate, and not a helpful description of what is going on.
->
-> When I accessed msr, the crash log is below:
->
->
-> (XEN) ----[ Xen-4.9.0  x86_64  debug=3Dn   Not tainted ]----
->>
->> (XEN) CPU:    7
->>
->> (XEN) RIP:    e008:[<ffff82d08024139d>] mcsched.c#shscan_timer_fn+0xd/
->>> 0x180
->>
->> (XEN) RFLAGS: 0000000000010206   CONTEXT: hypervisor
->>
->> (XEN) rax: ffff83084abfe028   rbx: ffff83084abfe300   rcx:
->>> 000000000000412e
->>
->> (XEN) rdx: ffff83084abb7fff   rsi: ffff82d080632f00   rdi:
->>> 0000000000000000
->>
->> (XEN) rbp: ffff82d080241390   rsp: ffff83084abb7e30   r8:
->>> ffff830868d4bdc0
->>
->> (XEN) r9:  0000000000000005   r10: 0000012da75b50a5   r11:
->>> ffff8300782f3060
->>
->> (XEN) r12: 0000000000000000   r13: 0000012d9f9d6e07   r14:
->>> ffff83084abb7fff
->>
->> (XEN) r15: ffff82d08062ad80   cr0: 000000008005003b   cr4:
->>> 00000000003526e0
->>
->> (XEN) cr3: 00000003426f3000   cr2: 00007fc3c21d4000
->>
->> (XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: e010   cs: e008
->>
->> (XEN) Xen code around <ffff82d08024139d> (mcsched.c#shscan_timer_fn+
->>> 0xd/0x180):
->>
->> (XEN)  00 00 41 55 41 54 55 53 <0f> 32 4c 8d 05 0a 79 11 00 48 8d 0d 91
->>> 45 14 00
->>
->>
-> This is a rdmsr(), not rdmsr_safe(), which is why you are crashing.
->
-> Irrespective of that, 0x412e isn't an MSR which exists on any real
-> hardware, so I'm not sure what other result you were expecting.
->
-> ~Andrew
->
-
-Thanks for your answer, Andrew.
-
-Actually, I intended to get the number of cache-misses from msr and  accord=
-ing
-to "*Figure 18**-1 Layout of IA32_PERFEVTSELx MSRs in Intel=C2=AE 64 and IA=
--32
-Architectures Software Developer=E2=80=99s Manual Volume 3B: System Program=
-ming
-Guide*",
-it can be achieved by "0x412e":
-
-Bit Position
-
-CPUID.AH.EBX
-
-Event Name
-
-UMask
-
-Event Select
-
-0
-
-UnHalted Core Cycles
-
-00H
-
-3CH
-
-1
-
-Instruction Retired
-
-00H
-
-C0H
-
-2
-
-UnHalted Reference Cycles
-
-01H
-
-3CH
-
-3
-
-LLC Reference
-
-4FH
-
-2EH
-
-*4*
-
-*LLC Misses*
-
-*41H*
-
-*2EH*
-
-5
-
-Branch Instruction Retired
-
-00H
-
-C4H
-
-6
-
-Branch Misses Retired
-
-00H
-
-C5H
-
-I also tried to do that w/ rdmsr_safe() but, I failed to read msr.
-Through the macro that returns a non-zero value, it was easy to see that
-reading msr failed:
-
-if ( rdmsr_safe(0x412e, ret) ) {
->     printk("cannot read msr!!!\n");
-> } else {
->     printk("rdmsr: %lu\n", ret);
-> }
-
-
- I cannot understand why you said "0x412e isn't an MSR which exists on any
-real hardware" so, is it impossible to get the number of cache-misses by
-using msr ??
-
---94eb2c117a689ed917056630dc43
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On T=
-ue, Feb 27, 2018 at 7:00 PM, Andrew Cooper <span dir=3D"ltr">&lt;<a href=3D=
-"mailto:andrew.cooper3@citrix.com" target=3D"_blank">andrew.cooper3@citrix.=
-com</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
-ex">
- =20
-   =20
- =20
-  <div bgcolor=3D"#FFFFFF"><span class=3D"gmail-">
-    <div class=3D"gmail-m_-3011046827900447549moz-cite-prefix">On 27/02/201=
-8 09:37, Minjun Hong wrote:<br>
-    </div>
-    <blockquote type=3D"cite">
-     =20
-      <div dir=3D"ltr">Hello, I&#39;ve tried to read msr in hypervisor code=
-:
-        <div><br>
-        </div>
-        <div>
-          <blockquote class=3D"gmail_quote" style=3D"color:rgb(34,34,34);fo=
-nt-family:arial,sans-serif;font-size:small;font-style:normal;font-variant-l=
-igatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:nor=
-mal;text-align:start;text-indent:0px;text-transform:none;white-space:normal=
-;word-spacing:0px;text-decoration-style:initial;text-decoration-color:initi=
-al;margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-=
-left:1ex">uint64_t reg;=C2=A0=C2=A0</blockquote>
-          <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">rdmsr_safe(0x41=
-2e, ret);</blockquote>
-        </div>
-        <div><br>
-          <div>But, I all failed to read it because the hypervisor is
-            running in ring-1 CPL as I did googling.</div>
-        </div>
-      </div>
-    </blockquote>
-    <br></span>
-    Xen runs in ring 0, root mode.=C2=A0 Forget terms like &quot;ring -1&qu=
-ot; because
-    they are not accurate, and not a helpful description of what is
-    going on.<span class=3D"gmail-"><br>
-    <br>
-    <blockquote type=3D"cite">
-      <div dir=3D"ltr">
-        <div>
-          <div>When I accessed msr, the crash log is below:</div>
-          <div><br>
-          </div>
-          <div><br>
-          </div>
-          <div>
-            <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) ----[
-                Xen-4.9.0=C2=A0 x86_64=C2=A0 debug=3Dn=C2=A0 =C2=A0Not tain=
-ted ]----</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) CPU:=
-=C2=A0 =C2=A0 7</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) RIP:=
-=C2=A0 =C2=A0
-                e008:[&lt;ffff82d08024139d&gt;]
-                mcsched.c#shscan_timer_fn+0xd/<wbr>0x180</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) RFLAG=
-S:
-                0000000000010206=C2=A0 =C2=A0CONTEXT: hypervisor</blockquot=
-e>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) rax:
-                ffff83084abfe028=C2=A0 =C2=A0rbx: ffff83084abfe300=C2=A0 =
-=C2=A0rcx:
-                000000000000412e</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) rdx:
-                ffff83084abb7fff=C2=A0 =C2=A0rsi: ffff82d080632f00=C2=A0 =
-=C2=A0rdi:
-                0000000000000000</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) rbp:
-                ffff82d080241390=C2=A0 =C2=A0rsp: ffff83084abb7e30=C2=A0 =
-=C2=A0r8:=C2=A0
-                ffff830868d4bdc0</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) r9:=
-=C2=A0
-                0000000000000005=C2=A0 =C2=A0r10: 0000012da75b50a5=C2=A0 =
-=C2=A0r11:
-                ffff8300782f3060</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) r12:
-                0000000000000000=C2=A0 =C2=A0r13: 0000012d9f9d6e07=C2=A0 =
-=C2=A0r14:
-                ffff83084abb7fff</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) r15:
-                ffff82d08062ad80=C2=A0 =C2=A0cr0: 000000008005003b=C2=A0 =
-=C2=A0cr4:
-                00000000003526e0</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) cr3:
-                00000003426f3000=C2=A0 =C2=A0cr2: 00007fc3c21d4000</blockqu=
-ote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) ds: 0=
-000=C2=A0 =C2=A0es:
-                0000=C2=A0 =C2=A0fs: 0000=C2=A0 =C2=A0gs: 0000=C2=A0 =C2=A0=
-ss: e010=C2=A0 =C2=A0cs: e008</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) Xen c=
-ode around
-                &lt;ffff82d08024139d&gt;
-                (mcsched.c#shscan_timer_fn+<wbr>0xd/0x180):</blockquote>
-              <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN)=C2=A0=
- 00 00 41 55 41
-                54 55 53 &lt;0f&gt; 32 4c 8d 05 0a 79 11 00 48 8d 0d 91
-                45 14 00</blockquote>
-            </blockquote>
-          </div>
-        </div>
-      </div>
-    </blockquote>
-    <br></span>
-    This is a rdmsr(), not rdmsr_safe(), which is why you are crashing.<br>
-    <br>
-    Irrespective of that, 0x412e isn&#39;t an MSR which exists on any real
-    hardware, so I&#39;m not sure what other result you were expecting.<spa=
-n class=3D"gmail-HOEnZb"><font color=3D"#888888"><br>
-    <br>
-    ~Andrew<br>
-  </font></span></div>
-
-</blockquote></div><br></div><div class=3D"gmail_extra">Thanks for your ans=
-wer, Andrew.</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_=
-extra">Actually, I intended to get the number of cache-misses from msr and=
-=C2=A0
-
-<span style=3D"color:rgb(34,34,34);font-family:arial,sans-serif;font-size:s=
-mall;font-style:normal;font-variant-ligatures:normal;font-variant-caps:norm=
-al;font-weight:400;letter-spacing:normal;text-align:start;text-indent:0px;t=
-ext-transform:none;white-space:normal;word-spacing:0px;background-color:rgb=
-(255,255,255);text-decoration-style:initial;text-decoration-color:initial;f=
-loat:none;display:inline">according to<span>=C2=A0</span></span><font face=
-=3D"arial, helvetica, sans-serif" style=3D"color:rgb(34,34,34);font-size:sm=
-all;font-style:normal;font-variant-ligatures:normal;font-variant-caps:norma=
-l;font-weight:400;letter-spacing:normal;text-align:start;text-indent:0px;te=
-xt-transform:none;white-space:normal;word-spacing:0px;background-color:rgb(=
-255,255,255);text-decoration-style:initial;text-decoration-color:initial">&=
-quot;<i><span lang=3D"en-US" style=3D"font-size:11pt">Figure<span>=C2=A0</s=
-pan></span><span lang=3D"en-US" style=3D"font-size:11pt">18</span></i><span=
- lang=3D"en-US" style=3D"font-size:11pt"><i>-1 Layout of IA32_PERFEVTSELx M=
-SRs in=C2=A0<span lang=3D"ko" style=3D"color:rgb(34,34,34);font-variant-lig=
-atures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:norma=
-l;text-align:start;text-indent:0px;text-transform:none;white-space:normal;w=
-ord-spacing:0px;background-color:rgb(255,255,255);text-decoration-style:ini=
-tial;text-decoration-color:initial;font-size:11pt">Intel</span><span lang=
-=3D"en-US" style=3D"color:rgb(34,34,34);font-variant-ligatures:normal;font-=
-variant-caps:normal;font-weight:400;letter-spacing:normal;text-align:start;=
-text-indent:0px;text-transform:none;white-space:normal;word-spacing:0px;bac=
-kground-color:rgb(255,255,255);text-decoration-style:initial;text-decoratio=
-n-color:initial;font-size:11pt">=C2=AE 64 and IA-32 Architectures Software =
-Developer=E2=80=99s Manual Volume 3B: System Programming Guide</span></i><s=
-pan lang=3D"en-US" style=3D"color:rgb(34,34,34);font-style:normal;font-vari=
-ant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacin=
-g:normal;text-align:start;text-indent:0px;text-transform:none;white-space:n=
-ormal;word-spacing:0px;background-color:rgb(255,255,255);text-decoration-st=
-yle:initial;text-decoration-color:initial;font-size:11pt">&quot;</span></sp=
-an>,</font>
-
-</div><div class=3D"gmail_extra"><font face=3D"arial, helvetica, sans-serif=
-" style=3D"color:rgb(34,34,34);font-size:small;font-style:normal;font-varia=
-nt-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing=
-:normal;text-align:start;text-indent:0px;text-transform:none;white-space:no=
-rmal;word-spacing:0px;background-color:rgb(255,255,255);text-decoration-sty=
-le:initial;text-decoration-color:initial">it can be achieved by &quot;0x412=
-e&quot;:</font></div><div class=3D"gmail_extra"><br></div><div class=3D"gma=
-il_extra">
-
-
-
-
-
-
-
-
-
-
-<div style=3D"direction:ltr">
-
-<table border=3D"1" cellpadding=3D"0" cellspacing=3D"0" valign=3D"top" styl=
-e=3D"direction:ltr;border-collapse:collapse;border-style:solid;border-color=
-:rgb(163,163,163);border-width:1pt">
- <tbody><tr>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:1.2895in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center"><span style=3D"font-weig=
-ht:bold">Bit Position</span></p>
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center"><span style=3D"font-weig=
-ht:bold">CPUID.AH.EBX</span></p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:2.0916in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center"><span style=3D"font-weig=
-ht:bold">Event Name</span></p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.7381in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center"><span style=3D"font-weig=
-ht:bold">UMask</span></p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:1.0402in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center"><span style=3D"font-weig=
-ht:bold">Event Select</span></p>
-  </td>
- </tr>
- <tr>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:1.2701in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">0</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:2.0916in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">UnHalted Core Cycles</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.7187in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">00H</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.9368in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">3CH</p>
-  </td>
- </tr>
- <tr>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:1.2701in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">1</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:2.0916in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">Instruction Retired</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.7187in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">00H</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.9368in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">C0H</p>
-  </td>
- </tr>
- <tr>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:1.2701in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">2</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:2.1111in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">UnHalted Reference Cycle=
-s</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.7187in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">01H</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.9368in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">3CH</p>
-  </td>
- </tr>
- <tr>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:1.2701in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">3</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:2.0916in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">LLC Reference</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.7187in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">4FH</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.9368in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">2EH</p>
-  </td>
- </tr>
- <tr>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:1.2701in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;text-align:center"><b><font color=3D"#ff0000">4</font><=
-/b></p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:2.0916in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;text-align:center"><b><font color=3D"#ff0000">LLC Misse=
-s</font></b></p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.7187in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;text-align:center"><b><font color=3D"#ff0000">41H</font=
-></b></p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.9368in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;text-align:center"><b><font color=3D"#ff0000">2EH</font=
-></b></p>
-  </td>
- </tr>
- <tr>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:1.2701in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">5</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:2.1034in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">Branch Instruction Retir=
-ed</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.7187in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">00H</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.9368in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">C4H</p>
-  </td>
- </tr>
- <tr>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:1.2701in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">6</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:2.0916in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">Branch Misses Retired</p=
->
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.7187in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">00H</p>
-  </td>
-  <td style=3D"border-style:solid;border-color:rgb(163,163,163);border-widt=
-h:1pt;vertical-align:top;width:0.9368in;padding:4pt">
-  <p style=3D"margin:0in;font-family:&quot;\00b9d1\00c740  \00ace0\00b515&q=
-uot;;font-size:11pt;color:black;text-align:center">C5H</p>
-  </td>
- </tr>
-</tbody></table>
-
-</div><br></div><div class=3D"gmail_extra">I also tried to do that w/ rdmsr=
-_safe() but, I failed to read msr.</div><div class=3D"gmail_extra">Through =
-the macro that returns a non-zero value, it was easy to see that reading ms=
-r failed:</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_ext=
-ra"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
-der-left:1px solid rgb(204,204,204);padding-left:1ex">if ( rdmsr_safe(0x412=
-e, ret) ) {<br>=C2=A0 =C2=A0 printk(&quot;cannot read msr!!!\n&quot;);=C2=
-=A0=C2=A0<br>} else {<br>=C2=A0 =C2=A0 printk(&quot;rdmsr: %lu\n&quot;, ret=
-);<br>}</blockquote><div><br></div><div>=C2=A0I cannot understand why you s=
-aid &quot;<span style=3D"color:rgb(34,34,34);font-family:arial,sans-serif;f=
-ont-size:small;font-style:normal;font-variant-ligatures:normal;font-variant=
--caps:normal;font-weight:400;letter-spacing:normal;text-align:start;text-in=
-dent:0px;text-transform:none;white-space:normal;word-spacing:0px;background=
--color:rgb(255,255,255);text-decoration-style:initial;text-decoration-color=
-:initial;float:none;display:inline">0x412e isn&#39;t an MSR which exists on=
- any real hardware&quot; so, is it impossible to get the number of cache-mi=
-sses by using msr ??</span></div></div></div>
-
---94eb2c117a689ed917056630dc43--
-
-
---===============4346876011564459776==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4346876011564459776==--
+UGxlYXNlIGZpbmQgc29tZSBtb3JlIGNsYXJpZmljYXRpb25zIG9uIFZpcnRJTyB1c2Ugd2l0aCBY
+ZW4KKEkgd291bGQgbGlrZSB0byB0aGFuayBYZW4gY29tbXVuaXR5IGZvciBoZWxwaW5nIHdpdGgg
+dGhpcykKCjEuIFBvc3NpYmxlIHNlY3VyaXR5IGlzc3VlcyAtIFZpcnRJTyBkZXZpY2VzIGFyZSBQ
+Q0kgYnVzIG1hc3RlcnMsIHRodXMKYWxsb3dpbmcgcmVhbCBkZXZpY2UgKHJ1bm5pbmcsIGZvciBl
+eGFtcGxlLCBpbiB1bnRydXN0ZWQgZHJpdmVyIGRvbWFpbikKdG8gZ2V0IGNvbnRyb2wgb3ZlciBn
+dWVzdCdzIG1lbW9yeSBieSB3cml0aW5nIHRvIGl0cyBtZW1vcnkKCjIuIFZpcnRJTyBjdXJyZW50
+bHkgdXNlcyBHRk5zIHdyaXR0ZW4gaW50byB0aGUgc2hhcmVkIHJpbmcsIHdpdGhvdXQgWGVuCmdy
+YW50cyBzdXBwb3J0LiBUaGlzIHdpbGwgcmVxdWlyZSBnZW5lcmljIGdyYW50LW1hcHBpbmcvc2hh
+cmluZyBsYXllcgp0byBiZSBhZGRlZCB0byBWaXJ0SU8uCgozLiBWaXJ0SU8gcmVxdWlyZXMgUUVN
+VSBQQ0kgZW11bGF0aW9uIGZvciBzZXR0aW5nIHVwIGEgZGV2aWNlLiBYZW4gUFYgCihhbmQgUFZI
+KQpkb21haW5zIGRvbid0IHVzZSBRRU1VIGZvciBwbGF0Zm9ybSBlbXVsYXRpb24gaW4gb3JkZXIg
+dG8gcmVkdWNlIGF0dGFjayAKc3VyZmFjZS4KKFBWSCBpcyBpbiB0aGUgcHJvY2VzcyBvZiBnYWlu
+aW5nIFBDSSBjb25maWcgc3BhY2UgZW11bGF0aW9uIHRob3VnaCwgYnV0IAppdCBpcwpvcHRpb25h
+bCwgbm90IGEgcmVxdWlyZW1lbnQpCgo0LiBNb3N0IG9mIHRoZSBQViBkcml2ZXJzIGEgZ3Vlc3Qg
+dXNlcyBhdCB0aGUgbW9tZW50IGFyZSBYZW4gUFYgZHJpdmVycywgCmUuZy4gbmV0LApibG9jaywg
+Y29uc29sZSwgc28gb25seSB2aXJ0aW8tZ3B1IHdpbGwgcmVxdWlyZSBRRU1VIHRvIHJ1bi4KQWx0
+aG91Z2ggdGhpcyB1c2UgY2FzZSB3b3VsZCB3b3JrIG9uIHg4NiBpdCB3aWxsIHJlcXVpcmUgYWRk
+aXRpb25hbCBjaGFuZ2VzCnRvIGdldCB0aGlzIHJ1bm5pbmcgb24gQVJNLCB3aGljaCBpcyBteSB0
+YXJnZXQgcGxhdGZvcm0uCgpUaGFuayB5b3UsCk9sZWtzYW5kcgoKT24gMDIvMjYvMjAxOCAxMDoy
+MSBBTSwgT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gd3JvdGU6Cj4gKioKPgo+ICpIaSwgYWxsISoK
+Pgo+ICoKPgo+IExhc3QgKkZyaWRheSogc29tZSBjb25jZXJucyBvbiAjZHJpLWRldmVsIHdlcmUg
+cmFpc2VkIHdydCAieWV0Cj4KPiBhbm90aGVyIGRyaXZlciIgZm9yIFhlbiBhbmQgd2h5IG5vdCB2
+aXJ0aW8tZ3B1LiBMZXQgbWUgaGlnaGxpZ2h0Cj4KPiBvbiB3aHkgd2UgbmVlZCBhIG5ldyBwYXJh
+dmlydHVhbGl6ZWQgZHJpdmVyIGZvciBYZW4gYW5kIHdoeSB3ZQo+Cj4gY2FuJ3QganVzdCB1c2Ug
+dmlydGlvLiBIb3BlIHRoaXMgaGVscHMgdGhlIGNvbW11bml0aWVzIChib3RoIFhlbgo+Cj4gYW5k
+IERSSSkgdG8gaGF2ZSBiZXR0ZXIgdW5kZXJzdGFuZGluZyBvZiB0aGlzIHdvcmsgYW5kIG91ciBt
+b3RpdmF0aW9uLgo+Cj4KPiBEaXNjbGFpbWVyOiBzb21lIG9yIGFsbCBvZiB0aGUgYmVsb3cgbWF5
+IHNvdW5kIHdlYWsgYXJndW1lbnQgb3IKPgo+IG5vdCAxMDAlIGNvcnJlY3QsIHNvIGFueSBoZWxw
+IG9uIGNsYXJpZnlpbmcgdGhlIGJlbG93IGlzIG1vcmUKPgo+IHRoYW4gd2VsY29tZSA7KQo+Cj4K
+PiAxLiBGaXJzdCBvZiBhbGwsIHdlIGFyZSB0YXJnZXRpbmcgQVJNIGVtYmVkZGVkIHVzZS1jYXNl
+cyBhbmQgZm9yCj4KPiBBUk0gd2UgZG8gbm90IHVzZSBRRU1VIFsxXTogIi4uLlhlbiBvbiBBUk0g
+aXMgbm90IGp1c3QgYSBzdHJhaWdodAo+Cj4gMToxIHBvcnQgb2YgeDg2IFhlbi4uLiBYZW4gb24g
+QVJNIGRvZXMgbm90IG5lZWQgUUVNVSBiZWNhdXNlIGl0IGRvZXMKPgo+IG5vdCBkbyBhbnkgZW11
+bGF0aW9uLiBJdCBhY2NvbXBsaXNoZXMgdGhlIGdvYWwgYnkgZXhwbG9pdGluZwo+Cj4gdmlydHVh
+bGl6YXRpb24gc3VwcG9ydCBpbiBoYXJkd2FyZSBhcyBtdWNoIGFzIHBvc3NpYmxlIGFuZCB1c2lu
+Zwo+Cj4gcGFyYXZpcnR1YWxpemVkIGludGVyZmFjZXMgZm9yIElPLiIKPgo+Cj4gVGhhdCBiZWlu
+ZyBzYWlkIGl0IGlzIHN0aWxsIHBvc3NpYmxlIHRvIHJ1biB2aXJ0aW8tZ3B1IGFuZCBYZW4rUUVN
+VTogWzJdCj4KPgo+IEluIHRoaXMgY2FzZSBRRU1VIGNhbiBiZSB1c2VkIGZvciBkZXZpY2Ugdmly
+dHVhbGl6YXRpb24sIGUuZy4gbmV0d29yaywKPgo+IGJsb2NrLCBjb25zb2xlLiBCdXQgdGhlc2Ug
+YWxyZWFkeSBleGlzdCBhcyBYZW4gcGFyYS12aXJ0dWFsaXplZCBkcml2ZXJzCj4KPiBhZ2FpbiBl
+bGltaW5hdGluZyB0aGUgbmVlZCBmb3IgUUVNVTogdHlwaWNhbCBBUk0gc3lzdGVtIHJ1bnMgCj4g
+cGFyYS12aXJ0dWFsaXplZAo+Cj4gZHJpdmVycyBmb3IgbmV0d29yaywgYmxvY2ssIGNvbnNvbGUg
+ZXRjLgo+Cj4KPiAyLiB2aXJ0aW8tZ3B1IHJlcXVpcmVzIFBDSS9NTUlPIGVtdWxhdGlvbgo+Cj4g
+dmlydGlvLWdwdSAodmlydGlvLWdwdS1wY2kpIHJlcXVpcmUgdmlydGlvLXBjaSwgYnV0IHBhcmEt
+dmlydHVhbGl6ZWQgCj4gZGV2aWNlCj4KPiBkcml2ZXJzIGRvIG5vdCBuZWVkIHRoaXMuCj4KPgo+
+IDMuIE5vIG5lZWQgZm9yIDNkL3ZpcmdsLgo+Cj4gVGhlcmUgYXJlIHVzZS1jYXNlcyB3aGljaCBl
+aXRoZXIgZG8gbm90IHVzZSBPcGVuR0wgYXQgYWxsIG9yIHdpbGwgdXNlCj4KPiBjdXN0b20gdmly
+dHVhbGl6YXRpb24gc29sdXRpb25zIGFsbG93aW5nIHNoYXJpbmcgb2YgYSByZWFsIEdQVSB3aXRo
+IAo+IGd1ZXN0LAo+Cj4gZS5nLiB2R1BVIGFwcHJvYWNoLgo+Cj4KPiA0LiBNb3JlIGZyZWVkb20g
+Zm9yIGJ1ZmZlciBhbGxvY2F0aW9uLgo+Cj4gQXMgb2Ygbm93IHZpcnRpby1ncHUgaXMgb25seSBj
+YXBhYmxlIG9mIGFsbG9jYXRpbmcgYnVmZmVycyB2aWEgVFRNLCB3aGlsZQo+Cj4gdGhlcmUgYXJl
+IHVzZS1jYXNlcyB3aGVyZSB3ZSBuZWVkIHRvIGhhdmUgbW9yZSBmcmVlZG9tOgo+Cj4gZm9yIHN5
+c3RlbXMgd2hpY2ggZG8gbm90IHByb3ZpZGUgSU9NTVUgc3VwcG9ydCwgYnV0IGhhdmluZyBzcGVj
+aWZpYwo+Cj4gcmVxdWlyZW1lbnRzIGZvciBkaXNwbGF5IGJ1ZmZlcnMsIGl0IGlzIHBvc3NpYmxl
+IHRvIGFsbG9jYXRlIHN1Y2ggYnVmZmVycwo+Cj4gYXQgYmFja2VuZCBzaWRlIGFuZCBzaGFyZSB0
+aG9zZSB3aXRoIHRoZSBmcm9udGVuZCBkcml2ZXIuCj4KPiBGb3IgZXhhbXBsZSwgaWYgaG9zdCBk
+b21haW4gaXMgMToxIG1hcHBlZCBhbmQgaGFzIERSTS9HUFUgaGFyZHdhcmUgCj4gZXhwZWN0aW5n
+Cj4KPiBwaHlzaWNhbGx5IGNvbnRpZ3VvdXMgbWVtb3J5IChpbiBQQSwgbm90IElQQSksIHRoaXMg
+YWxsb3dzIGltcGxlbWVudGluZwo+Cj4gemVyby1jb3B5aW5nIHVzZS1jYXNlcy4KPgo+Cj4gNS4g
+WmVyby1jb3B5aW5nIHN1cHBvcnQgYXQgYmFja2VuZCBzaWRlCj4KPiBIYXZpbmcgbmF0aXZlIFhl
+biBpbXBsZW1lbnRhdGlvbiBhbGxvd3MgaW1wbGVtZW50aW5nIHplcm8tY29weWluZyAKPiB1c2Ut
+Y2FzZXMKPgo+IG9uIGJhY2tlbmQgc2lkZSB3aXRoIHRoZSBoZWxwIG9mIHN1cHBvcnRpbmcgZHJp
+dmVyIERSTSBkcml2ZXIgWzNdIAo+IHdoaWNoIHdlCj4KPiBob3BlIHRvIHVwc3RyZWFtIGFzIHdl
+bGwgKGl0IGlzIG5vdCB5ZXQgcmVhZHkgaW4gdGVybXMgb2YgY29kZSBjbGVhbnVwKS4KPgo+Cj4g
+Ni4gUUVNVSBiYWNrZW5kcyBmb3IgdmlydGlvLWdwdSBjYW5ub3QgYmUgdXNlZCBhcyBpcywgZS5n
+LiBndWVzdCBkaXNwbGF5cwo+Cj4gY291bGQgYmUganVzdCBhIHBhcnQgb2YgdGhlIGZpbmFsIHVz
+ZXIgZXhwZXJpZW5jZS4gVGh1cywgYSBRRU1VIGJhY2tlbmQKPgo+IG11c3QgYmUgbW9kaWZpZWQg
+dG8gaW50ZXJhY3QsIGZvciBleGFtcGxlLCB3aXRoIEF1dG9tb3RpdmUgR3JhZGUgTGludXgKPgo+
+IGRpc3BsYXkgbWFuYWdlci4gU28sIFFFTVUgcGFydCBuZWVkcyBtb2RpZmljYXRpb25zLgo+Cj4g
+SW4gb3VyIHVzZS1jYXNlIHdlIGhhdmUgYSBiYWNrZW5kIHdoaWNoIHN1cHBvcnRzIG11bHRpLXRv
+dWNoIGFuZCBndWVzdAo+Cj4gZGlzcGxheShzKSBhbmQgcnVubmluZyBlaXRoZXIgYXMgYSB3ZXN0
+b24gY2xpZW50ICh3aGljaCBpcyBub3Qgc3VwcG9ydGVkCj4KPiBieSBRRU1VIGF0IHRoZSBtb21l
+bnQ/KSBvciBLTVMvRFJNIGNsaWVudC4gVGhpcyBhbGxvd3MgdXMgdG8gZW5hYmxlIG11Y2gKPgo+
+IG1vcmUgdXNlLWNhc2VzKip3aXRob3V0IHRoZSBuZWVkIHRvIHJ1biBRRU1VLgo+Cj4gKgo+Cj4g
+KlRoYW5rIHlvdSwqCj4KPiAqKk9sZWtzYW5kciBBbmRydXNoY2hlbmtvKgo+ICoKPgo+ICoKPiAq
+Cj4KPiAqWzFdIAo+IGh0dHBzOi8vd2lraS54ZW4ub3JnL3dpa2kvWGVuX0FSTV93aXRoX1ZpcnR1
+YWxpemF0aW9uX0V4dGVuc2lvbnNfd2hpdGVwYXBlcioKPgo+ICoKPgo+IFsyXSBodHRwczovL2Vs
+aW51eC5vcmcvUi1DYXIvVmlydHVhbGl6YXRpb24KPgo+IFszXSAKPiBodHRwczovL2dpdGh1Yi5j
+b20veGVuLXRyb29wcy9saW51eC9ibG9iL2NlczIwMTgvZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5f
+ZHJtX3pjb3B5X2Rydi5jCj4KPgo+ICoKPgo+Cj4gT24gMDIvMjEvMjAxOCAxMDowMyBBTSwgT2xl
+a3NhbmRyIEFuZHJ1c2hjaGVua28gd3JvdGU6Cj4+IEZyb206IE9sZWtzYW5kciBBbmRydXNoY2hl
+bmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KPj4KPj4gSGVsbG8hCj4+Cj4+
+IFRoaXMgcGF0Y2ggc2VyaWVzIGFkZHMgc3VwcG9ydCBmb3IgWGVuIFsxXSBwYXJhLXZpcnR1YWxp
+emVkCj4+IGZyb250ZW5kIGRpc3BsYXkgZHJpdmVyLiBJdCBpbXBsZW1lbnRzIHRoZSBwcm90b2Nv
+bCBmcm9tCj4+IGluY2x1ZGUveGVuL2ludGVyZmFjZS9pby9kaXNwbGlmLmggWzJdLgo+PiBBY2Nv
+bXBhbnlpbmcgYmFja2VuZCBbM10gaXMgaW1wbGVtZW50ZWQgYXMgYSB1c2VyLXNwYWNlIGFwcGxp
+Y2F0aW9uCj4+IGFuZCBpdHMgaGVscGVyIGxpYnJhcnkgWzRdLCBjYXBhYmxlIG9mIHJ1bm5pbmcg
+YXMgYSBXZXN0b24gY2xpZW50Cj4+IG9yIERSTSBtYXN0ZXIuCj4+IENvbmZpZ3VyYXRpb24gb2Yg
+Ym90aCBiYWNrZW5kIGFuZCBmcm9udGVuZCBpcyBkb25lIHZpYQo+PiBYZW4gZ3Vlc3QgZG9tYWlu
+IGNvbmZpZ3VyYXRpb24gb3B0aW9ucyBbNV0uCj4+Cj4+ICoqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKiog
+Cj4+Cj4+ICogRHJpdmVyIGxpbWl0YXRpb25zCj4+ICoqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKiogCj4+
+Cj4+IMKgIDEuIENvbmZpZ3VyYXRpb24gb3B0aW9ucyAxLjEgKGNvbnRpZ3VvdXMgZGlzcGxheSBi
+dWZmZXJzKSBhbmQgMiAKPj4gKGJhY2tlbmQKPj4gwqDCoMKgwqAgYWxsb2NhdGVkIGJ1ZmZlcnMp
+IGJlbG93IGFyZSBub3Qgc3VwcG9ydGVkIGF0IHRoZSBzYW1lIHRpbWUuCj4+Cj4+IMKgIDIuIE9u
+bHkgcHJpbWFyeSBwbGFuZSB3aXRob3V0IGFkZGl0aW9uYWwgcHJvcGVydGllcyBpcyBzdXBwb3J0
+ZWQuCj4+Cj4+IMKgIDMuIE9ubHkgb25lIHZpZGVvIG1vZGUgc3VwcG9ydGVkIHdoaWNoIHJlc29s
+dXRpb24gaXMgY29uZmlndXJlZCB2aWEgCj4+IFhlblN0b3JlLgo+Pgo+PiDCoCA0LiBBbGwgQ1JU
+Q3Mgb3BlcmF0ZSBhdCBmaXhlZCBmcmVxdWVuY3kgb2YgNjBIei4KPj4KPj4gKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKiAKPj4KPj4gKiBEcml2ZXIgbW9kZXMgb2Ygb3BlcmF0aW9uIGluIHRlcm1zIG9m
+IGRpc3BsYXkgYnVmZmVycyB1c2VkCj4+ICoqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKiogCj4+Cj4+IMKg
+IERlcGVuZGluZyBvbiB0aGUgcmVxdWlyZW1lbnRzIGZvciB0aGUgcGFyYS12aXJ0dWFsaXplZCBl
+bnZpcm9ubWVudCwgCj4+IG5hbWVseQo+PiDCoCByZXF1aXJlbWVudHMgZGljdGF0ZWQgYnkgdGhl
+IGFjY29tcGFueWluZyBEUk0vKHYpR1BVIGRyaXZlcnMgCj4+IHJ1bm5pbmcgaW4gYm90aAo+PiDC
+oCBob3N0IGFuZCBndWVzdCBlbnZpcm9ubWVudHMsIG51bWJlciBvZiBvcGVyYXRpbmcgbW9kZXMg
+b2YgCj4+IHBhcmEtdmlydHVhbGl6ZWQKPj4gwqAgZGlzcGxheSBkcml2ZXIgYXJlIHN1cHBvcnRl
+ZDoKPj4gwqDCoCAtIGRpc3BsYXkgYnVmZmVycyBjYW4gYmUgYWxsb2NhdGVkIGJ5IGVpdGhlciBm
+cm9udGVuZCBkcml2ZXIgb3IgCj4+IGJhY2tlbmQKPj4gwqDCoCAtIGRpc3BsYXkgYnVmZmVycyBj
+YW4gYmUgYWxsb2NhdGVkIHRvIGJlIGNvbnRpZ3VvdXMgaW4gbWVtb3J5IG9yIG5vdAo+Pgo+PiDC
+oCBOb3RlISBGcm9udGVuZCBkcml2ZXIgaXRzZWxmIGhhcyBubyBkZXBlbmRlbmN5IG9uIGNvbnRp
+Z3VvdXMgbWVtb3J5IAo+PiBmb3IKPj4gwqDCoMKgwqDCoMKgwqAgaXRzIG9wZXJhdGlvbi4KPj4K
+Pj4gKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKiAKPj4KPj4gKiAxLiBCdWZmZXJzIGFsbG9jYXRlZCBi
+eSB0aGUgZnJvbnRlbmQgZHJpdmVyLgo+PiAqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqIAo+Pgo+Pgo+
+PiDCoCBUaGUgYmVsb3cgbW9kZXMgb2Ygb3BlcmF0aW9uIGFyZSBjb25maWd1cmVkIGF0IGNvbXBp
+bGUtdGltZSB2aWEKPj4gwqAgZnJvbnRlbmQgZHJpdmVyJ3Mga2VybmVsIGNvbmZpZ3VyYXRpb24u
+Cj4+Cj4+IMKgIDEuMS4gRnJvbnQgZHJpdmVyIGNvbmZpZ3VyZWQgdG8gdXNlIEdFTSBDTUEgaGVs
+cGVycwo+PiDCoMKgwqDCoMKgwqAgVGhpcyB1c2UtY2FzZSBpcyB1c2VmdWwgd2hlbiB1c2VkIHdp
+dGggYWNjb21wYW55aW5nIERSTS92R1BVIAo+PiBkcml2ZXIgaW4KPj4gwqDCoMKgwqDCoMKgIGd1
+ZXN0IGRvbWFpbiB3aGljaCB3YXMgZGVzaWduZWQgdG8gb25seSB3b3JrIHdpdGggY29udGlndW91
+cyAKPj4gYnVmZmVycywKPj4gwqDCoMKgwqDCoMKgIGUuZy4gRFJNIGRyaXZlciBiYXNlZCBvbiBH
+RU0gQ01BIGhlbHBlcnM6IHN1Y2ggZHJpdmVycyBjYW4gCj4+IG9ubHkgaW1wb3J0Cj4+IMKgwqDC
+oMKgwqDCoCBjb250aWd1b3VzIFBSSU1FIGJ1ZmZlcnMsIHRodXMgcmVxdWlyaW5nIGZyb250ZW5k
+IGRyaXZlciB0byAKPj4gcHJvdmlkZQo+PiDCoMKgwqDCoMKgwqAgc3VjaC4gSW4gb3JkZXIgdG8g
+aW1wbGVtZW50IHRoaXMgbW9kZSBvZiBvcGVyYXRpb24gCj4+IHBhcmEtdmlydHVhbGl6ZWQKPj4g
+wqDCoMKgwqDCoMKgIGZyb250ZW5kIGRyaXZlciBjYW4gYmUgY29uZmlndXJlZCB0byB1c2UgR0VN
+IENNQSBoZWxwZXJzLgo+Pgo+PiDCoCAxLjIuIEZyb250IGRyaXZlciBkb2Vzbid0IHVzZSBHRU0g
+Q01BCj4+IMKgwqDCoMKgwqDCoCBJZiBhY2NvbXBhbnlpbmcgZHJpdmVycyBjYW4gY29wZSB3aXRo
+IG5vbi1jb250aWd1b3VzIG1lbW9yeSAKPj4gdGhlbiwgdG8KPj4gwqDCoMKgwqDCoMKgIGxvd2Vy
+IHByZXNzdXJlIG9uIENNQSBzdWJzeXN0ZW0gb2YgdGhlIGtlcm5lbCwgZHJpdmVyIGNhbiAKPj4g
+YWxsb2NhdGUKPj4gwqDCoMKgwqDCoMKgIGJ1ZmZlcnMgZnJvbSBzeXN0ZW0gbWVtb3J5Lgo+Pgo+
+PiDCoCBOb3RlISBJZiB1c2VkIHdpdGggYWNjb21wYW55aW5nIERSTS8odilHUFUgZHJpdmVycyB0
+aGlzIG1vZGUgb2YgCj4+IG9wZXJhdGlvbgo+PiDCoMKgwqAgbWF5IHJlcXVpcmUgSU9NTVUgc3Vw
+cG9ydCBvbiB0aGUgcGxhdGZvcm0sIHNvIGFjY29tcGFueWluZyBEUk0vdkdQVQo+PiDCoMKgwqAg
+aGFyZHdhcmUgY2FuIHN0aWxsIHJlYWNoIGRpc3BsYXkgYnVmZmVyIG1lbW9yeSB3aGlsZSBpbXBv
+cnRpbmcgUFJJTUUKPj4gwqDCoMKgIGJ1ZmZlcnMgZnJvbSB0aGUgZnJvbnRlbmQgZHJpdmVyLgo+
+Pgo+PiAqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqIAo+Pgo+PiAqIDIuIEJ1ZmZlcnMgYWxsb2NhdGVk
+IGJ5IHRoZSBiYWNrZW5kCj4+ICoqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKiogCj4+Cj4+Cj4+IMKgIFRo
+aXMgbW9kZSBvZiBvcGVyYXRpb24gaXMgcnVuLXRpbWUgY29uZmlndXJlZCB2aWEgZ3Vlc3QgZG9t
+YWluIAo+PiBjb25maWd1cmF0aW9uCj4+IMKgIHRocm91Z2ggWGVuU3RvcmUgZW50cmllcy4KPj4K
+Pj4gwqAgRm9yIHN5c3RlbXMgd2hpY2ggZG8gbm90IHByb3ZpZGUgSU9NTVUgc3VwcG9ydCwgYnV0
+IGhhdmluZyBzcGVjaWZpYwo+PiDCoCByZXF1aXJlbWVudHMgZm9yIGRpc3BsYXkgYnVmZmVycyBp
+dCBpcyBwb3NzaWJsZSB0byBhbGxvY2F0ZSBzdWNoIAo+PiBidWZmZXJzCj4+IMKgIGF0IGJhY2tl
+bmQgc2lkZSBhbmQgc2hhcmUgdGhvc2Ugd2l0aCB0aGUgZnJvbnRlbmQuCj4+IMKgIEZvciBleGFt
+cGxlLCBpZiBob3N0IGRvbWFpbiBpcyAxOjEgbWFwcGVkIGFuZCBoYXMgRFJNL0dQVSBoYXJkd2Fy
+ZSAKPj4gZXhwZWN0aW5nCj4+IMKgIHBoeXNpY2FsbHkgY29udGlndW91cyBtZW1vcnksIHRoaXMg
+YWxsb3dzIGltcGxlbWVudGluZyB6ZXJvLWNvcHlpbmcKPj4gwqAgdXNlLWNhc2VzLgo+Pgo+Pgo+
+PiBJIHdvdWxkIGxpa2UgdG8gdGhhbmsgYXQgbGVhc3QsIGJ1dCBub3QgYXQgbGFzdCB0aGUgZm9s
+bG93aW5nCj4+IHBlb3BsZS9jb21tdW5pdGllcyB3aG8gaGVscGVkIHRoaXMgZHJpdmVyIHRvIGhh
+cHBlbiA7KQo+Pgo+PiAxLiBNeSB0ZWFtIGF0IEVQQU0gZm9yIGNvbnRpbnVvdXMgc3VwcG9ydAo+
+PiAyLiBYZW4gY29tbXVuaXR5IGZvciBhbnN3ZXJpbmcgdG9ucyBvZiBxdWVzdGlvbnMgb24gZGlm
+ZmVyZW50Cj4+IG1vZGVzIG9mIG9wZXJhdGlvbiBvZiB0aGUgZHJpdmVyIHdpdGggcmVzcGVjdCB0
+byB2aXJ0dWFsaXplZAo+PiBlbnZpcm9ubWVudC4KPj4gMy4gUm9iIENsYXJrIGZvciAiR0VNIGFs
+bG9jYXRpb24gZm9yIHBhcmEtdmlydHVhbGl6ZWQgRFJNIGRyaXZlciIgWzZdCj4+IDQuIE1hYXJ0
+ZW4gTGFua2hvcnN0IGZvciAiQXRvbWljIGRyaXZlciBhbmQgb2xkIHJlbW92ZSBGQiBiZWhhdmlv
+ciIgWzddCj4+IDUuIFZpbGxlIFN5cmrDpGzDpCBmb3IgIlF1ZXN0aW9ucyBvbiBwYWdlIGZsaXBz
+IGFuZCBhdG9taWMgbW9kZXNldCIgWzhdCj4+Cj4+IFRoYW5rIHlvdSwKPj4gT2xla3NhbmRyIEFu
+ZHJ1c2hjaGVua28KPj4KPj4gUC5TLiBUaGVyZSBhcmUgdHdvIGRlcGVuZGVuY2llcyBmb3IgdGhp
+cyBkcml2ZXIgbGltaXRpbmcgc29tZSBvZiB0aGUKPj4gdXNlLWNhc2VzIHdoaWNoIGFyZSBvbiBy
+ZXZpZXcgbm93Ogo+PiAxLiAiZHJtL3NpbXBsZV9rbXNfaGVscGVyOiBBZGQge2VuYWJsZXxkaXNh
+YmxlfV92YmxhbmsgY2FsbGJhY2sgCj4+IHN1cHBvcnQiIFs5XQo+PiAyLiAiZHJtL3NpbXBsZV9r
+bXNfaGVscGVyOiBGaXggTlVMTCBwb2ludGVyIGRlcmVmZXJlbmNlIHdpdGggbm8gCj4+IGFjdGl2
+ZSBDUlRDIiBbMTBdCj4+Cj4+IFsxXSBodHRwczovL3dpa2kueGVuLm9yZy93aWtpL1BhcmF2aXJ0
+dWFsaXphdGlvbl8oUFYpI1BWX0lPX0RyaXZlcnMKPj4gWzJdIAo+PiBodHRwczovL2VsaXhpci5i
+b290bGluLmNvbS9saW51eC92NC4xNi1yYzIvc291cmNlL2luY2x1ZGUveGVuL2ludGVyZmFjZS9p
+by9kaXNwbGlmLmgKPj4gWzNdIGh0dHBzOi8vZ2l0aHViLmNvbS94ZW4tdHJvb3BzL2Rpc3BsX2Jl
+Cj4+IFs0XSBodHRwczovL2dpdGh1Yi5jb20veGVuLXRyb29wcy9saWJ4ZW5iZQo+PiBbNV0gCj4+
+IGh0dHBzOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD14ZW4uZ2l0O2E9YmxvYjtmPWRvY3Mv
+bWFuL3hsLmNmZy5wb2QuNS5pbjtoPWE2OTkzNjc3NzllMmFlMTIxMmZmOGY2MzhlZmYwMjA2ZWMx
+YTFjYzk7aGI9cmVmcy9oZWFkcy9tYXN0ZXIjbDEyNTcKPj4gWzZdIAo+PiBodHRwczovL2xpc3Rz
+LmZyZWVkZXNrdG9wLm9yZy9hcmNoaXZlcy9kcmktZGV2ZWwvMjAxNy1NYXJjaC8xMzYwMzguaHRt
+bAo+PiBbN10gaHR0cHM6Ly93d3cuc3Bpbmljcy5uZXQvbGlzdHMvZHJpLWRldmVsL21zZzE2NDEw
+Mi5odG1sCj4+IFs4XSBodHRwczovL3d3dy5zcGluaWNzLm5ldC9saXN0cy9kcmktZGV2ZWwvbXNn
+MTY0NDYzLmh0bWwKPj4gWzldIGh0dHBzOi8vcGF0Y2h3b3JrLmZyZWVkZXNrdG9wLm9yZy9zZXJp
+ZXMvMzgwNzMvCj4+IFsxMF0gaHR0cHM6Ly9wYXRjaHdvcmsuZnJlZWRlc2t0b3Aub3JnL3Nlcmll
+cy8zODEzOS8KPj4KPj4gT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gKDkpOgo+PiDCoMKgIGRybS94
+ZW4tZnJvbnQ6IEludHJvZHVjZSBYZW4gcGFyYS12aXJ0dWFsaXplZCBmcm9udGVuZCBkcml2ZXIK
+Pj4gwqDCoCBkcm0veGVuLWZyb250OiBJbXBsZW1lbnQgWGVuIGJ1cyBzdGF0ZSBoYW5kbGluZwo+
+PiDCoMKgIGRybS94ZW4tZnJvbnQ6IFJlYWQgZHJpdmVyIGNvbmZpZ3VyYXRpb24gZnJvbSBYZW4g
+c3RvcmUKPj4gwqDCoCBkcm0veGVuLWZyb250OiBJbXBsZW1lbnQgWGVuIGV2ZW50IGNoYW5uZWwg
+aGFuZGxpbmcKPj4gwqDCoCBkcm0veGVuLWZyb250OiBJbXBsZW1lbnQgaGFuZGxpbmcgb2Ygc2hh
+cmVkIGRpc3BsYXkgYnVmZmVycwo+PiDCoMKgIGRybS94ZW4tZnJvbnQ6IEludHJvZHVjZSBEUk0v
+S01TIHZpcnR1YWwgZGlzcGxheSBkcml2ZXIKPj4gwqDCoCBkcm0veGVuLWZyb250OiBJbXBsZW1l
+bnQgS01TL2Nvbm5lY3RvciBoYW5kbGluZwo+PiDCoMKgIGRybS94ZW4tZnJvbnQ6IEltcGxlbWVu
+dCBHRU0gb3BlcmF0aW9ucwo+PiDCoMKgIGRybS94ZW4tZnJvbnQ6IEltcGxlbWVudCBjb21tdW5p
+Y2F0aW9uIHdpdGggYmFja2VuZAo+Pgo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vS2NvbmZpZ8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgMiArCj4+IMKgIGRyaXZl
+cnMvZ3B1L2RybS9NYWtlZmlsZcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IHzCoMKgIDEgKwo+PiDCoCBkcml2ZXJzL2dwdS9kcm0veGVuL0tjb25maWfCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMzAgKysKPj4gwqAgZHJpdmVycy9ncHUvZHJtL3hlbi9N
+YWtlZmlsZcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMTcgKwo+PiDCoCBkcml2
+ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnQuY8KgwqDCoMKgwqDCoMKgwqAgfCA3MTIgCj4+
+ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysKPj4gwqAgZHJpdmVycy9ncHUvZHJtL3hlbi94
+ZW5fZHJtX2Zyb250LmjCoMKgwqDCoMKgwqDCoMKgIHwgMTU0ICsrKysrKwo+PiDCoCBkcml2ZXJz
+L2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfY2ZnLmPCoMKgwqDCoCB8wqAgODQgKysrKwo+PiDC
+oCBkcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfY2ZnLmjCoMKgwqDCoCB8wqAgNDUg
+KysKPj4gwqAgZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250X2Nvbm4uY8KgwqDCoCB8
+IDEyNSArKysrKwo+PiDCoCBkcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfY29ubi5o
+wqDCoMKgIHzCoCAzNSArKwo+PiDCoCBkcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnRf
+ZHJ2LmPCoMKgwqDCoCB8IDI5NCArKysrKysrKysrKysKPj4gwqAgZHJpdmVycy9ncHUvZHJtL3hl
+bi94ZW5fZHJtX2Zyb250X2Rydi5owqDCoMKgwqAgfMKgIDczICsrKwo+PiDCoCBkcml2ZXJzL2dw
+dS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfZXZ0Y2hubC5jIHwgMzk5ICsrKysrKysrKysrKysrKysK
+Pj4gwqAgZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250X2V2dGNobmwuaCB8wqAgODkg
+KysrKwo+PiDCoCBkcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfZ2VtLmPCoMKgwqDC
+oCB8IDM2MCArKysrKysrKysrKysrKwo+PiDCoCBkcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1f
+ZnJvbnRfZ2VtLmjCoMKgwqDCoCB8wqAgNDYgKysKPj4gwqAgZHJpdmVycy9ncHUvZHJtL3hlbi94
+ZW5fZHJtX2Zyb250X2dlbV9jbWEuYyB8wqAgOTMgKysrKwo+PiDCoCBkcml2ZXJzL2dwdS9kcm0v
+eGVuL3hlbl9kcm1fZnJvbnRfa21zLmPCoMKgwqDCoCB8IDI5OSArKysrKysrKysrKysKPj4gwqAg
+ZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250X2ttcy5owqDCoMKgwqAgfMKgIDMwICsr
+Cj4+IMKgIGRyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9zaGJ1Zi5jwqDCoCB8IDQz
+MCArKysrKysrKysrKysrKysrKwo+PiDCoCBkcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJv
+bnRfc2hidWYuaMKgwqAgfMKgIDgwICsrKysKPj4gwqAgMjEgZmlsZXMgY2hhbmdlZCwgMzM5OCBp
+bnNlcnRpb25zKCspCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0veGVu
+L0tjb25maWcKPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS94ZW4vTWFr
+ZWZpbGUKPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2Ry
+bV9mcm9udC5jCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0veGVuL3hl
+bl9kcm1fZnJvbnQuaAo+PiDCoCBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL3hl
+bi94ZW5fZHJtX2Zyb250X2NmZy5jCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dw
+dS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfY2ZnLmgKPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRy
+aXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9jb25uLmMKPj4gwqAgY3JlYXRlIG1vZGUg
+MTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9jb25uLmgKPj4gwqAgY3Jl
+YXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9kcnYuYwo+
+PiDCoCBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250
+X2Rydi5oCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9k
+cm1fZnJvbnRfZXZ0Y2hubC5jCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9k
+cm0veGVuL3hlbl9kcm1fZnJvbnRfZXZ0Y2hubC5oCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBk
+cml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfZ2VtLmMKPj4gwqAgY3JlYXRlIG1vZGUg
+MTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9nZW0uaAo+PiDCoCBjcmVh
+dGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250X2dlbV9jbWEu
+Ywo+PiDCoCBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zy
+b250X2ttcy5jCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0veGVuL3hl
+bl9kcm1fZnJvbnRfa21zLmgKPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2Ry
+bS94ZW4veGVuX2RybV9mcm9udF9zaGJ1Zi5jCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2
+ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfc2hidWYuaAo+Pgo+CgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
