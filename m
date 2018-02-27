@@ -1,13 +1,25 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: Is there any way to read msr in hypervisor code?
-Date: Tue, 27 Feb 2018 10:00:49 +0000
-Message-ID: <fbea2750-f4a6-d72b-8738-4751f0fbf45e@citrix.com>
-References: <CAFX_q-F=CkRYyH5BgWxNig9G5XFQOKNgwAKoCsNDPO218a1bdQ@mail.gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v8 07/11] vpci/bars: add handlers to map the
+	BARs
+Date: Tue, 27 Feb 2018 03:01:44 -0700
+Message-ID: <5A953A9802000078001AC158@prv-mh.provo.novell.com>
+References: <5A6750020200009C0431366C@prv-mh.provo.novell.com>
+ <5A905C0902000078001AB15D@prv-mh.provo.novell.com>
+ <5A93FB8202000078001ABAE7@prv-mh.provo.novell.com>
+ <20180226180018.tqpxlkdjsamr5c3g@MacBook-Pro-de-Roger.local>
+ <5A9525A802000078001AC0B0@prv-mh.provo.novell.com>
+ <20180227092133.fynrrw7327kxh7nr@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0852864473306774887=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAFX_q-F=CkRYyH5BgWxNig9G5XFQOKNgwAKoCsNDPO218a1bdQ@mail.gmail.com>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=8ygc=fv=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1eqc56-0002Ht-Vb
+ for xen-devel@lists.xenproject.org; Tue, 27 Feb 2018 10:01:56 +0000
+In-Reply-To: <20180227092133.fynrrw7327kxh7nr@MacBook-Pro-de-Roger.local>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,223 +28,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Minjun Hong <nickeysgo@gmail.com>, xen-devel@lists.xen.org
+To: =?UTF-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, AndrewCooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, TimDeegan <tim@xen.org>, Paul Durrant <paul.durrant@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---===============0852864473306774887==
-Content-Type: multipart/alternative;
- boundary="------------7F36471F136C82544670697E"
-Content-Language: en-GB
-
-This is a multi-part message in MIME format.
---------------7F36471F136C82544670697E
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-On 27/02/2018 09:37, Minjun Hong wrote:
-> Hello, I've tried to read msr in hypervisor code:
->
->     uint64_t reg;  
->
->     rdmsr_safe(0x412e, ret);
->
->
-> But, I all failed to read it because the hypervisor is running in
-> ring-1 CPL as I did googling.
-
-Xen runs in ring 0, root mode.  Forget terms like "ring -1" because they
-are not accurate, and not a helpful description of what is going on.
-
-> When I accessed msr, the crash log is below:
->
->
->         (XEN) ----[ Xen-4.9.0  x86_64  debug=n   Not tainted ]----
->
->         (XEN) CPU:    7
->
->         (XEN) RIP:    e008:[<ffff82d08024139d>]
->         mcsched.c#shscan_timer_fn+0xd/0x180
->
->         (XEN) RFLAGS: 0000000000010206   CONTEXT: hypervisor
->
->         (XEN) rax: ffff83084abfe028   rbx: ffff83084abfe300   rcx:
->         000000000000412e
->
->         (XEN) rdx: ffff83084abb7fff   rsi: ffff82d080632f00   rdi:
->         0000000000000000
->
->         (XEN) rbp: ffff82d080241390   rsp: ffff83084abb7e30   r8: 
->         ffff830868d4bdc0
->
->         (XEN) r9:  0000000000000005   r10: 0000012da75b50a5   r11:
->         ffff8300782f3060
->
->         (XEN) r12: 0000000000000000   r13: 0000012d9f9d6e07   r14:
->         ffff83084abb7fff
->
->         (XEN) r15: ffff82d08062ad80   cr0: 000000008005003b   cr4:
->         00000000003526e0
->
->         (XEN) cr3: 00000003426f3000   cr2: 00007fc3c21d4000
->
->         (XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: e010 
->          cs: e008
->
->         (XEN) Xen code around <ffff82d08024139d>
->         (mcsched.c#shscan_timer_fn+0xd/0x180):
->
->         (XEN)  00 00 41 55 41 54 55 53 <0f> 32 4c 8d 05 0a 79 11 00 48
->         8d 0d 91 45 14 00
->
-
-This is a rdmsr(), not rdmsr_safe(), which is why you are crashing.
-
-Irrespective of that, 0x412e isn't an MSR which exists on any real
-hardware, so I'm not sure what other result you were expecting.
-
-~Andrew
-
---------------7F36471F136C82544670697E
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 27/02/2018 09:37, Minjun Hong wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAFX_q-F=CkRYyH5BgWxNig9G5XFQOKNgwAKoCsNDPO218a1bdQ@mail.gmail.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <div dir="ltr">Hello, I've tried to read msr in hypervisor code:
-        <div><br>
-        </div>
-        <div>
-          <blockquote class="gmail_quote"
-style="color:rgb(34,34,34);font-family:arial,sans-serif;font-size:small;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;text-align:start;text-indent:0px;text-transform:none;white-space:normal;word-spacing:0px;text-decoration-style:initial;text-decoration-color:initial;margin:0px
-            0px 0px 0.8ex;border-left:1px solid
-            rgb(204,204,204);padding-left:1ex">uint64_t reg;  </blockquote>
-          <blockquote class="gmail_quote" style="margin:0px 0px 0px
-            0.8ex;border-left:1px solid
-            rgb(204,204,204);padding-left:1ex">rdmsr_safe(0x412e, ret);</blockquote>
-        </div>
-        <div><br>
-          <div>But, I all failed to read it because the hypervisor is
-            running in ring-1 CPL as I did googling.</div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    Xen runs in ring 0, root mode.  Forget terms like "ring -1" because
-    they are not accurate, and not a helpful description of what is
-    going on.<br>
-    <br>
-    <blockquote type="cite"
-cite="mid:CAFX_q-F=CkRYyH5BgWxNig9G5XFQOKNgwAKoCsNDPO218a1bdQ@mail.gmail.com">
-      <div dir="ltr">
-        <div>
-          <div>When I accessed msr, the crash log is below:</div>
-          <div><br>
-          </div>
-          <div><br>
-          </div>
-          <div>
-            <blockquote class="gmail_quote" style="margin:0px 0px 0px
-              0.8ex;border-left:1px solid
-              rgb(204,204,204);padding-left:1ex">
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) ----[
-                Xen-4.9.0  x86_64  debug=n   Not tainted ]----</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) CPU:    7</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) RIP:   
-                e008:[&lt;ffff82d08024139d&gt;]
-                mcsched.c#shscan_timer_fn+0xd/0x180</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) RFLAGS:
-                0000000000010206   CONTEXT: hypervisor</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) rax:
-                ffff83084abfe028   rbx: ffff83084abfe300   rcx:
-                000000000000412e</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) rdx:
-                ffff83084abb7fff   rsi: ffff82d080632f00   rdi:
-                0000000000000000</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) rbp:
-                ffff82d080241390   rsp: ffff83084abb7e30   r8: 
-                ffff830868d4bdc0</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) r9: 
-                0000000000000005   r10: 0000012da75b50a5   r11:
-                ffff8300782f3060</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) r12:
-                0000000000000000   r13: 0000012d9f9d6e07   r14:
-                ffff83084abb7fff</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) r15:
-                ffff82d08062ad80   cr0: 000000008005003b   cr4:
-                00000000003526e0</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) cr3:
-                00000003426f3000   cr2: 00007fc3c21d4000</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) ds: 0000   es:
-                0000   fs: 0000   gs: 0000   ss: e010   cs: e008</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN) Xen code around
-                &lt;ffff82d08024139d&gt;
-                (mcsched.c#shscan_timer_fn+0xd/0x180):</blockquote>
-              <blockquote class="gmail_quote" style="margin:0px 0px 0px
-                0.8ex;border-left:1px solid
-                rgb(204,204,204);padding-left:1ex">(XEN)  00 00 41 55 41
-                54 55 53 &lt;0f&gt; 32 4c 8d 05 0a 79 11 00 48 8d 0d 91
-                45 14 00</blockquote>
-            </blockquote>
-          </div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    This is a rdmsr(), not rdmsr_safe(), which is why you are crashing.<br>
-    <br>
-    Irrespective of that, 0x412e isn't an MSR which exists on any real
-    hardware, so I'm not sure what other result you were expecting.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------7F36471F136C82544670697E--
-
-
---===============0852864473306774887==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0852864473306774887==--
+Pj4+IE9uIDI3LjAyLjE4IGF0IDEwOjIxLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
+IE9uIFR1ZSwgRmViIDI3LCAyMDE4IGF0IDAxOjMyOjI0QU0gLTA3MDAsIEphbiBCZXVsaWNoIHdy
+b3RlOgo+PiA+Pj4gT24gMjYuMDIuMTggYXQgMTk6MDAsIDxyb2dlci5wYXVAY2l0cml4LmNvbT4g
+d3JvdGU6Cj4+ID4gT24gTW9uLCBGZWIgMjYsIDIwMTggYXQgMDQ6MjA6MTdBTSAtMDcwMCwgSmFu
+IEJldWxpY2ggd3JvdGU6Cj4+ID4+ID4+PiBPbiAyMy4wMS4xOCBhdCAxNjowNywgPHJvZ2VyLnBh
+dUBjaXRyaXguY29tPiB3cm90ZToKPj4gPj4gPiArc3RhdGljIHZvaWQgbWF5YmVfZGVmZXJfbWFw
+KHN0cnVjdCBkb21haW4gKmQsIGNvbnN0IHN0cnVjdCBwY2lfZGV2ICpwZGV2LAo+PiA+PiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHJhbmdlc2V0ICptZW0sIGJvb2wgbWFw
+LCBib29sIHJvbSkKPj4gPj4gPiArewo+PiA+PiA+ICsgICAgc3RydWN0IHZjcHUgKmN1cnIgPSBj
+dXJyZW50Owo+PiA+PiA+ICsKPj4gPj4gPiArICAgIGlmICggaXNfaWRsZV92Y3B1KGN1cnIpICkK
+Pj4gPj4gPiArICAgIHsKPj4gPj4gPiArICAgICAgICBzdHJ1Y3QgbWFwX2RhdGEgZGF0YSA9IHsg
+LmQgPSBkLCAubWFwID0gdHJ1ZSB9Owo+PiA+PiA+ICsKPj4gPj4gPiArICAgICAgICAvKgo+PiA+
+PiA+ICsgICAgICAgICAqIE9ubHkgdXNlZCBmb3IgZG9tYWluIGNvbnN0cnVjdGlvbiBpbiBvcmRl
+ciB0byBtYXAgdGhlIEJBUnMKPj4gPj4gPiArICAgICAgICAgKiBvZiBkZXZpY2VzIHdpdGggbWVt
+b3J5IGRlY29kaW5nIGVuYWJsZWQuCj4+ID4+ID4gKyAgICAgICAgICovCj4+ID4+ID4gKyAgICAg
+ICAgQVNTRVJUKG1hcCAmJiAhcm9tKTsKPj4gPj4gPiArICAgICAgICByYW5nZXNldF9jb25zdW1l
+X3JhbmdlcyhtZW0sIG1hcF9yYW5nZSwgJmRhdGEpOwo+PiA+PiAKPj4gPj4gV2hhdCBpZiB0aGlz
+IHByb2R1Y2VzIC1FTk9NRU0/IEFuZCBkZXNwaXRlIGhhdmluZyBsb29rZWQgYXQKPj4gPj4gc2V2
+ZXJhbCByZXZpc2lvbnMgb2YgdGhpcywgSSBjYW4ndCBtYWtlIHRoZSBjb25uZWN0aW9uIHRvIHdo
+eSB0aGlzCj4+ID4+IGlzIGluIGFuIGlzX2lkbGVfdmNwdSgpIGNvbmRpdGlvbmFsIChuZWl0aGVy
+IHRoZSBkaXJlY3QgY2FsbGVyIG5vciB0aGUKPj4gPj4gbmV4dCBsZXZlbCB1cCBtYWtlIHRoaXMg
+b2J2aW91cyB0byBtZSkuIFRoZXJlJ3MgY2xlYXJseSBhIG5lZWQKPj4gPj4gZm9yIGV4dGVuZGlu
+ZyB0aGUgY29tbWVudC4KPj4gPiAKPj4gPiBJIHRob3VnaHQgdGhlIGNvbW1lbnQgYWJvdmUgdGhh
+dCBtZW50aW9ucyBkb21haW4gY29uc3RydWN0aW9uIHdvdWxkIGJlCj4+ID4gZW5vdWdoLiBJIGNh
+biB0cnkgdG8gZXhwYW5kIHRoaXMsIG1heWJlIGxpa2U6Cj4+ID4gCj4+ID4gIlRoaXMgZnVuY3Rp
+b24gd2lsbCBvbmx5IGJlIGNhbGxlZCBmcm9tIHRoZSBpZGxlIHZDUFUgd2hpbGUgYnVpbGRpbmcK
+Pj4gPiB0aGUgZG9tYWluLCBpbiB3aGljaCBjYXNlIGl0J3Mgbm90IHBvc3NpYmxlIHRvIGRlZmVy
+IHRoZSBvcGVyYXRpb24KPj4gPiAobGlrZSBkb25lIGluIHRoZSBlbHNlIGJyYW5jaCkuIENhbGwg
+cmFuZ2VzZXRfY29uc3VtZV9yYW5nZXMgaW4gb3JkZXIKPj4gPiB0byBlc3RhYmxpc2ggdGhlIG1h
+cHBpbmdzIHJpZ2h0IGF3YXkuIgo+PiAKPj4gQW5kIHdoYXQgYWdhaW4gaXMgdGhlIGNvbm5lY3Rp
+b24gYmV0d2VlbiBpc19pZGxlX2RvbWFpbigpIGFuZAo+PiBkb21haW4gY29uc3RydWN0aW9uPyBJ
+IHRoaW5rIHRoZSBjb21tZW50IGJlbG9uZ3MgYWhlYWQgb2YgdGhlCj4+IGlmKCksIGFuZCBpdCBu
+ZWVkcyB0byBtYWtlIHRoYXQgY29ubmVjdGlvbi4KPiAKPiBPaCwgZG9tYWluIGNvbnN0cnVjdGlv
+bnMgcnVucyBvbiB0aGUgaWRsZSB2Q1BVLCB0aGF0J3MgdGhlIHJlbGF0aW9uLgo+IAo+ICJUaGlz
+IGZ1bmN0aW9uIHdpbGwgb25seSBiZSBjYWxsZWQgZnJvbSB0aGUgaWRsZSB2Q1BVIHdoaWxlIGJ1
+aWxkaW5nCj4gdGhlIGRvbWFpbiAoYmVjYXVzZSBEb20wIGJ1aWxkaW5nIHJ1bnMgb24gdGhlIGlk
+bGUgdkNQVSksIGluIHdoaWNoCj4gY2FzZSBpdCdzIG5vdCBwb3NzaWJsZSB0byBkZWZlciB0aGUg
+b3BlcmF0aW9uIChsaWtlIGRvbmUgaW4gdGhlIGVsc2UKPiBicmFuY2gpLiBDYWxsIHJhbmdlc2V0
+X2NvbnN1bWVfcmFuZ2VzIGluIG9yZGVyIHRvIGVzdGFibGlzaCB0aGUKPiBtYXBwaW5ncyByaWdo
+dCBhd2F5LiIKPiAKPiBEb2VzIHRoYXQgc2VlbSBjbGVhcmVyIGlmIHBsYWNlZCBhaGVhZCBvZiB0
+aGUgaWY/CgpDYW4gYmUgc2hvcnRlciBpbW8gLSB0aGUgdGhpbmcgSSBkaWRuJ3QgcGF5IGF0dGVu
+dGlvbiB0byBpcyB0aGF0CnRoaXMgaXMgYWxsIGFib3V0IF9kb20wXyBidWlsZGluZywgbm90IGdl
+bmVyYWwgX2RvbWFpbl8gYnVpbGRpbmcuCkhlbmNlIHBlcmhhcHM6CgoiRG9tMCBidWlsZGluZyBy
+dW5zIG9uIHRoZSBpZGxlIHZDUFUsIGluIHdoaWNoIGNhc2UgaXQncyBub3QgcG9zc2libGUKIHRv
+IGRlZmVyIHRoZSBvcGVyYXRpb24gKGxpa2UgZG9uZSBpbiB0aGUgZWxzZSBicmFuY2gpLiBDYWxs
+CiByYW5nZXNldF9jb25zdW1lX3JhbmdlcyBpbiBvcmRlciB0byBlc3RhYmxpc2ggdGhlIG1hcHBp
+bmdzIHJpZ2h0CiBhd2F5LiIKCj4+ID4+ID4gK3N0YXRpYyB2b2lkIG1vZGlmeV9iYXJzKGNvbnN0
+IHN0cnVjdCBwY2lfZGV2ICpwZGV2LCBib29sIG1hcCwgYm9vbCByb20pCj4+ID4+ID4gK3sKPj4g
+Pj4gPiArICAgIHN0cnVjdCB2cGNpX2hlYWRlciAqaGVhZGVyID0gJnBkZXYtPnZwY2ktPmhlYWRl
+cjsKPj4gPj4gPiArICAgIHN0cnVjdCByYW5nZXNldCAqbWVtID0gcmFuZ2VzZXRfbmV3KE5VTEws
+IE5VTEwsIDApOwo+PiA+PiA+ICsgICAgY29uc3Qgc3RydWN0IHBjaV9kZXYgKnRtcDsKPj4gPj4g
+PiArICAgIHVuc2lnbmVkIGludCBpOwo+PiA+PiA+ICsgICAgaW50IHJjOwo+PiA+PiA+ICsKPj4g
+Pj4gPiArICAgIGlmICggIW1hcCApCj4+ID4+ID4gKyAgICAgICAgbW9kaWZ5X2RlY29kaW5nKHBk
+ZXYsIGZhbHNlLCByb20pOwo+PiA+PiA+ICsKPj4gPj4gPiArICAgIGlmICggIW1lbSApCj4+ID4+
+ID4gKyAgICAgICAgcmV0dXJuOwo+PiA+PiAKPj4gPj4gU2ltaWxhcmx5IGhlcmUgLSB3aHkgaXMg
+aXQgb2theSAob3Igd2hhdCBlZmZlY3Qgd2lsbCBpdCBoYXZlKSB0byByZXR1cm4KPj4gPj4gaGVy
+ZSB3aGVuIHdlJ3JlIG91dCBvZiBtZW1vcnksIGJ1dCB0aGUgY2FsbGVyIHdvbid0IGtub3c/Cj4+
+ID4gCj4+ID4gVGhlIGJlaGF2aW91ciBoZXJlIGRlcGVuZHMgb24gdGhlIGNoYW5nZSB0byB0aGUg
+bWVtb3J5IGRlY29kaW5nIGJpdDoKPj4gPiAKPj4gPiAgLSBDbGVhcmluZzogbWVtb3J5IGRlY29k
+aW5nIG9uIGRldmljZSB3aWxsIGJlIGRpc2FibGVkLCBCQVJzIHdvbid0IGJlCj4+ID4gICAgdW5t
+YXBwZWQuCj4+ID4gIC0gU2V0dGluZzogbm8gY2hhbmdlIHRvIGRldmljZSBtZW1vcnkgZGVjb2Rp
+bmcgYml0LCBCQVJzIHdvbid0IGJlCj4+ID4gICAgbWFwcGVkLgo+PiA+IAo+PiA+IERvIHlvdSB0
+aGluayB0aGlzIGlzIHN1aXRhYmxlPyBJTU8gaXQncyBmaW5lIHRvIGRpc2FibGUgdGhlIG1lbW9y
+eQo+PiA+IGRlY29kaW5nIGJpdCBvbiB0aGUgZGV2aWNlIGFuZCBsZWF2ZSB0aGUgbWVtb3J5IHJl
+Z2lvbnMgbWFwcGVkLgo+PiAKPj4gQXMgbG9uZyBhcyBzdWJzZXF1ZW50IGNoYW5nZXMgdG8gdGhl
+IGRlY29kaW5nIGJpdCBjYW4ndCBsZWF2ZQo+PiBzdGFsZSBtYXBwaW5ncy4gUGx1cyB0aGVyZSBu
+ZWVkcyB0byBiZSBhIGNvbW1lbnQgdG8gZXhwbGFpbiB0aGlzLgo+IAo+IFdpdGggdGhlIGN1cnJl
+bnQgYXBwcm9hY2ggaW4gdGhlIHVubWFwIGNhc2UgdGhlcmUgd2lsbCBiZSBzdGFsZQo+IG1hcHBp
+bmdzIGxlZnQgYmVoaW5kLgo+IAo+IEkgZ3Vlc3MgaXQncyBiZXR0ZXIgdGhlbiB0byBub3QgbW9k
+aWZ5IHRoZSBtZW1vcnkgZGVjb2RpbmcgYml0IGF0IGFsbAo+IHVudGlsIHRoZSBvcGVyYXRpb24g
+ZmluaXNoZXMuIFRoYXQgYWxzbyByaXNlcyB0aGUgcXVlc3Rpb24gb2Ygd2hldGhlcgo+IHRoZSBt
+ZW1vcnkgZGVjb2RpbmcgYml0IHNob3VsZCBiZSBtb2RpZmllZCBpZiBwMm0gbWFwcGluZy91bm1h
+cHBpbmcKPiByZXBvcnRzIGFuIGVycm9yLgo+IAo+IFNob3VsZCB3ZSBhbHNvIGF0dGVtcHQgdG8g
+cm9sbGJhY2sgZmFpbGVkIG1hcC91bm1hcCBvcGVyYXRpb25zPyBXaGF0Cj4gaGFwcGVucyBpZiB0
+aGUgcm9sbGJhY2sgYWxzbyBmYWlscz8KCkl0IGlzIGluIHBhcnRpY3VsYXIgdGhpcyBsYXN0IHF1
+ZXN0aW9uIHdoeSBJIGRvbid0IHRoaW5rIHJvbGxiYWNrIG1ha2VzCnNlbnNlLiBJZiB0aGVyZSdz
+IGFueSBmYWlsdXJlLCBJIHRoaW5rIHRoZSBkZWNvZGUgYml0IHNob3VsZCBiZSBzdGlja3kKY2xl
+YXI7IHdlIG1heSB3YW50IChuZWVkPykgdG8gaW52ZW50IHNvbWUgbWFnaWNhbCBtZWNoYW5pc20g
+dG8KZ2V0IGEgZGV2aWNlIGJhY2sgb3V0IG9mIHRoaXMgc3RhdGUgbGF0ZXIgb24uIEJ1dCB0aGF0
+IHdheSBzdGFsZQptYXBwaW5ncyBhcmUgbm90IGFuIGltbWVkaWF0ZSBwcm9ibGVtIChJIHRoaW5r
+KS4KCj4gV2hhdCBhYm91dCB0aGUgZm9sbG93aW5nOgo+IAo+ICAgICArLS0tLS0tLS0tKyAgIFNV
+Q0NFU1MgICstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rCj4gICAgIHxtYXAvdW5t
+YXArLS0tLS0tLS0tLS0tPkNoYW5nZSBkZWNvZGluZyBvciBST00gZW5hYmxlIGJpdHwKPiAgICAg
+Ky0tLS0rLS0tLSsgICAgICAgICAgICArLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+Kwo+ICAgICAgICAgIHwKPiAgICAgICAgICB8RkFJTFVSRQo+ICAgICAgICAgIHwKPiArLS0tLS0t
+LS12LS0tLS0tLSsgU1VDQ0VTUyArLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tKwo+IHxyZXZlcnQgb3BlcmF0aW9uKy0tLS0tLS0tLT5ObyBjaGFuZ2UgdG8gZGVjb2Rpbmcg
+b3IgUk9NIGVuYWJsZSBiaXR8Cj4gKy0tLS0tLS0tKy0tLS0tLS0rICAgICAgICAgKy0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSsKPiAgICAgICAgICB8Cj4gICAgICAgICAg
+fEZBSUxVUkUKPiAgICAgICAgICB8Cj4gICAgKy0tLS0tdi0tLS0tKwo+ICAgIHxLaWxsIGRvbWFp
+bnwKPiAgICArLS0tLS0tLS0tLS0rCgpQb3NzaWJseS4gS2lsbGluZyBEb20wIGlzIGEgYmFkIHRo
+aW5nIHRob3VnaCwgaWYganVzdCBzb21lIHJhbmRvbQpkZXZpY2UgaGFzIGEgcHJvYmxlbS4KCj4+
+ID4+ID4gKyAgICBmb3IgKCBpID0gMDsgaSA8IEFSUkFZX1NJWkUoaGVhZGVyLT5iYXJzKTsgaSsr
+ICkKPj4gPj4gPiArICAgIHsKPj4gPj4gPiArICAgICAgICBjb25zdCBzdHJ1Y3QgdnBjaV9iYXIg
+KmJhciA9ICZoZWFkZXItPmJhcnNbaV07Cj4+ID4+ID4gKwo+PiA+PiA+ICsgICAgICAgIGlmICgg
+IU1BUFBBQkxFX0JBUihiYXIpIHx8Cj4+ID4+ID4gKyAgICAgICAgICAgICAocm9tID8gYmFyLT50
+eXBlICE9IFZQQ0lfQkFSX1JPTQo+PiA+PiA+ICsgICAgICAgICAgICAgICAgICA6IChiYXItPnR5
+cGUgPT0gVlBDSV9CQVJfUk9NICYmICFoZWFkZXItPnJvbV9lbmFibGVkKSkgKQo+PiA+PiA+ICsg
+ICAgICAgICAgICBjb250aW51ZTsKPj4gPj4gCj4+ID4+IFdoeSBkb2VzIHJvbV9lbmFibGVkIG1h
+dHRlciBmb3IgdGhlICFyb20gY2FzZSByYXRoZXIgdGhhbiBmb3IKPj4gPj4gdGhlIHJvbSBvbmU/
+IEkuZS4KPj4gPj4gCj4+ID4+ICAgICAgICAgaWYgKCAhTUFQUEFCTEVfQkFSKGJhcikgfHwKPj4g
+Pj4gICAgICAgICAgICAgIChyb20gPyBiYXItPnR5cGUgIT0gVlBDSV9CQVJfUk9NIHx8ICFoZWFk
+ZXItPnJvbV9lbmFibGVkCj4+ID4+ICAgICAgICAgICAgICAgICAgIDogYmFyLT50eXBlID09IFZQ
+Q0lfQkFSX1JPTSkgKQo+PiA+PiAgICAgICAgICAgICBjb250aW51ZTsKPj4gPj4gCj4+ID4+ID8K
+Pj4gPiAKPj4gPiBObywgZm9yIHRoZSBST00gY2FzZSB3ZSBvbmx5IHdhbnQgdG8gbWFwL3VubWFw
+IHRoZSBST00sIHNvIHRoYXQncyB0aGUKPj4gPiBvbmx5IHRoaW5nIGFkZGVkIHRvIHRoZSByYW5n
+ZXNldC4gRm9yIHRoZSBub24tUk9NIGNhc2UgWGVuIHdpbGwgYWxzbwo+PiA+IG1hcC91bm1hcCB0
+aGUgUk9NIGlmIHRoZSBlbmFibGUgYml0IGlzIHNldC4KPj4gPiAKPj4gPiBZb3VyIHByb3Bvc2Vk
+IGNvZGUgd291bGQgYWx3YXlzIG1hcC91bm1hcCB0aGUgUk9NIGludG8gdGhlIHAybSB3aGVuCj4+
+ID4gdGhlIG1lbW9yeSBkZWNvZGluZyBiaXQgaXMgY2hhbmdlZCBldmVuIGlmIGl0J3Mgbm90IGVu
+YWJsZWQuCj4+IAo+PiBJIGRvbid0IHVuZGVyc3RhbmQuIFRha2luZyBhcGFydCB0aGUgY29uZGl0
+aW9uYWwgSSd2ZSBzdWdnZXN0ZWQsCj4+IGFuZCBjb252ZXJ0aW5nIHRvIGh1bWFuIGxhbmd1YWdl
+Ogo+PiAtIGlmIHRoZSBCQVIgaXMgbm8gbWFwcGFibGUsIGNvbnRpbnVlCj4+IC0gaWYgd2Ugd2Fu
+dCB0byBkZWFsIHdpdGggUk9NIChyb209dHJ1ZSksIGlmIHRoZSBCQVIgaXNuJ3QgUk9NCj4+ICAg
+b3IgaXNuJ3QgZW5hYmxlZCwgY29udGludWUKPiAKPiBXaXRoIHRoZSBjdXJyZW50IGZsb3cgcm9t
+X2VuYWJsZWQgaXMgc2V0IGFmdGVyIHRoZSBST00gQkFSIG1hcHBpbmdzCj4gYXJlIGVzdGFibGlz
+aGVkLCB3aGljaCBtZWFucyB0aGF0IHdoZW4gbW9kaWZ5X2JhcnMgaXMgY2FsbGVkIHdpdGgKPiBy
+b209dHJ1ZSByb21fZW5hYmxlZCBpcyBub3QgeWV0IHNldCwgYW5kIHVzaW5nIHRoZSBsb2dpYyBh
+Ym92ZSB0aGUKPiBtYXBwaW5ncyB3b24ndCBiZSBjcmVhdGVkLgo+IAo+PiAtIGlmIHdlIHdhbnQg
+dG8gZGVhbCB3aXRoIG5vbi1ST00gKHJvbT1mYWxzZSksIGlmIHRoZSBCQVIgaXMgUk9NLAo+PiAg
+IGNvbnRpbnVlCj4gCj4gWGVuIGFsc28gaGFzIHRvIGRlYWwgd2l0aCB0aGUgUk9NIGlmIGl0J3Mg
+ZW5hYmxlZCB3aGVuIHRoZSBtZW1vcnkKPiBkZWNvZGluZyBiaXQgaXMgdG9nZ2xlZCwgaGVuY2Ug
+aW4gcm9tPWZhbHNlIGNhc2UgdGhlIFJPTSBhbHNvIG5lZWRzIHRvCj4gYmUgbWFwcGVkL3VuYW1w
+cGVkIGlmIGl0J3MgZW5hYmxlZC4KPiAKPiBUaGlzIGRlcGVuZGVuY3kgYmV0d2VlbiB0aGUgbWVt
+b3J5IGRlY29kaW5nIGJpdCBhbmQgdGhlIFJPTSBlbmFibGUgYml0Cj4gaXMgcXVpdGUgY29udm9s
+dXRlZCBUQkguCj4gCj4+IFRvIG1lIHRoaXMgaXMgaW4gbGluZSB3aXRoIHRoZSAybmQgcGFyYWdy
+YXBoIG9mIHlvdXIgcmVwbHkuIEl0J3Mgbm90Cj4+IGluIGxpbmUgd2l0aCB0aGUgZmlyc3QsIHdo
+aWNoIG1ha2VzIG1lIHdvbmRlciB3aGV0aGVyICJyb20iIGlzCj4+IG1pc25hbWVkIGFuZCB3YW50
+cyB0byBiZSAicm9tX29ubHkiLiBTdGlsbCwgdGhlIHF1ZXN0aW9uIHdvdWxkCj4+IHJlbWFpbiBv
+ZiB3aHkgcm9tX2VuYWJsZWQgZG9lc24ndCBtYXR0ZXIgd2hlbiB0aGUgdmFyaWFibGUgaXMKPj4g
+dHJ1ZS4KPiAKPiBZZXMsIHJvbSBtZWFucyByb21fb25seSAoaWU6IFJPTSBlbmFibGUgYml0IGhh
+cyBiZWVuIHRvZ2dsZWQgYW5kCj4gbWVtb3J5IGRlY29kaW5nIGJpdCBpcyBlbmFibGVkKS4gSSBh
+c3N1bWUgeW91IHdvdWxkIHByZWZlciB0byBjaGFuZ2UKPiB0aGUgbmFtZSB0byByb21fb25seS4K
+ClllcywgYW5kIHBlcmhhcHMgcHJvdmlkZSBhbiBhYnJpZGdlZCB2ZXJzaW9uIG9mIHlvdXIgZXhw
+bGFuYXRpb24KYWJvdmUgaW4gYSBjb21tZW50IG5leHQgdG8gdGhlIGNvbmRpdGlvbmFsLgoKSmFu
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
