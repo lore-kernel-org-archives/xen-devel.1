@@ -1,21 +1,12 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
-Subject: Re: [RFC QEMU PATCH v4 00/10] Implement vNVDIMM for Xen
-	HVM guest
-Date: Tue, 27 Feb 2018 17:22:23 +0000
-Message-ID: <20180227172223.GD1799@perard.uk.xensource.com>
-References: <20171207101030.22364-1-haozhong.zhang@intel.com>
- <20171207101812.23602-1-haozhong.zhang@intel.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Naming things (was XEN_SYSCTL_get_cpuid_policy)
+Date: Tue, 27 Feb 2018 17:27:10 +0000
+Message-ID: <4abb2883-b3a5-db07-eeca-8b57dcd9476f@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=0sft=fv=citrix.com=prvs=5899da973=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1eqixT-0000jM-C4
- for xen-devel@lists.xenproject.org; Tue, 27 Feb 2018 17:22:31 +0000
-Content-Disposition: inline
-In-Reply-To: <20171207101812.23602-1-haozhong.zhang@intel.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,25 +15,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Haozhong Zhang <haozhong.zhang@intel.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Eduardo Habkost <ehabkost@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>, qemu-devel@nongnu.org, Igor Mammedov <imammedo@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Chao Peng <chao.p.peng@linux.intel.com>, xen-devel@lists.xenproject.org, Dan Williams <dan.j.williams@intel.com>, Richard Henderson <rth@twiddle.net>, Xiao Guangrong <xiaoguangrong.eric@gmail.com>
+To: Xen-devel List <xen-devel@lists.xen.org>, Jan Beulich <JBeulich@suse.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBEZWMgMDcsIDIwMTcgYXQgMDY6MTg6MDJQTSArMDgwMCwgSGFvemhvbmcgWmhhbmcg
-d3JvdGU6Cj4gVGhpcyBpcyB0aGUgUUVNVSBwYXJ0IHBhdGNoZXMgdGhhdCB3b3JrcyB3aXRoIHRo
-ZSBhc3NvY2lhdGVkIFhlbgo+IHBhdGNoZXMgdG8gZW5hYmxlIHZOVkRJTU0gc3VwcG9ydCBmb3Ig
-WGVuIEhWTSBkb21haW5zLiBYZW4gcmVsaWVzIG9uCj4gUUVNVSB0byBidWlsZCBndWVzdCBORklU
-IGFuZCBOVkRJTU0gbmFtZXNwYWNlIGRldmljZXMsIGFuZCBhbGxvY2F0ZQo+IGd1ZXN0IGFkZHJl
-c3Mgc3BhY2UgZm9yIHZOVkRJTU0gZGV2aWNlcy4KCkkndmUgZ290IG90aGVyIHF1ZXN0aW9uLCBh
-bmQgbWF5YmUgcG9zc2libGUgaW1wcm92ZW1lbnRzLgoKV2hlbiBRRU1VIGJ1aWxkIHRoZSBBQ1BJ
-IHRhYmxlcywgaXQgYWxzbyBpbml0aWFsaXplIHNvbWUgTWVtb3J5UmVnaW9uLAp3aGljaCB1c2Ug
-bW9yZSBndWVzdCBtZW1vcnkuIERvIHlvdSBrbm93IGlmIHRob3NlIHJlZ2lvbnMgYXJlIHVzZWQg
-d2l0aAp5b3VyIHBhdGNoIHNlcmllcyBvbiBYZW4/IE90aGVyd2lzZSwgd2UgY291bGQgdHJ5IHRv
-IGF2b2lkIHRoZWlyCmNyZWF0aW9uIHdpdGggdGhpczoKSW4geGVuZnZfbWFjaGluZV9vcHRpb25z
-KCkKbS0+cm9tX2ZpbGVfaGFzX21yID0gZmFsc2U7CihzZXR0aW5nIHRoaXMgaW4geGVuX2h2bV9p
-bml0KCkgd291bGQgcHJvYmFibHkgYmUgYmV0dGVyLCBidXQgSSBoYXZuJ3QKdHJ5KQoKSWYgdGhp
-cyBpcyBwb3NzaWJsZSwgbGlieGwgd291bGQgbm90IG5lZWQgdG8gYWxsb2NhdGUgbW9yZSBtZW1v
-cnkgZm9yCnRoZSBndWVzdCAoZG1fYWNwaV9zaXplKS4KCi0tIApBbnRob255IFBFUkFSRAoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+QWxsLAoKSGF2aW5nIGZpbmFsbHkgZ290IGJhY2sgdG8gc29tZSBDUFVJRCB3b3JrLCBJJ3ZlIGNv
+bWUgYmFjayB0byBhIG5hbWluZwpwcm9ibGVtIEkndmUgYmVlbiB1bmFibGUgdG8gcmVzb2x2ZSBp
+biB0aGUgaW50ZXJ2ZW5pbmcgdGltZS4KCk9yaWdpbmFsbHksIHRoZSBwbGFuIHdhcyB0byBpbnRy
+b2R1Y2UgWEVOX1NZU0NUTF9nZXRfY3B1aWRfcG9saWN5IGFuZApYRU5fRE9NQ1RMX3tnZXQsc2V0
+fV9jcHVpZF9wb2xpY3ksIHdoaWNoIHdhcyBzaG9ydGx5IGZvbGxvd2VkIGJ5IHNpbWlsYXIKTVNS
+IHBvbGljeSBjYWxscy4KCkhvd2V2ZXIsIHRvIGRvIHRoZSBoeXBlcnZpc29yIHNpZGUgYXVkaXQs
+IHRoZSBkb21haW4gc2V0IGNwdWlkIGFuZCBtc3IKcG9saWN5IGNhbGxzIGhhdmUgdG8gYmUgZG9u
+ZSB0b2dldGhlciwgc28gYWxsIHN0YXRlIGNhbiBiZSBjcm9zcy1jaGVja2VkCnRvZ2V0aGVyLgoK
+VGhlcmVmb3JlLCBJIHdhcyB0aGlua2luZyBvZiBzb21ldGhpbmcgbW9yZSBhbG9uZyB0aGUgbGlu
+ZXMgb2YKWEVOX0RPTUNUTF97Z2V0LHNldH1fYXJjaF9jb25maWcgdG8gYmUgcmF0aGVyIG1vcmUg
+Z2VuZXJpYywgYW5kIHByZXZlbnQKdGhlIG5lZWQgdG8gYWRkIGEgbmV3IGdldC9zZXQgaHlwZXJj
+YWxsIHBhaXIgZm9yIGVhY2ggY2xhc3Mgb2YKaW5mb3JtYXRpb24uwqAgSG93ZXZlciwgdGhhdCBu
+YW1lIGlzIGNvbmZ1c2luZyB3aXRoIHN0cnVjdAp4ZW5fYXJjaF9kb21haW5jb25maWcgYXJjaF9j
+b25maWcgYXMgcGFydCBvZiB0aGUgY3JlYXRlZG9tYWluIGNhbGwuCgpTbywgWEVOX0RPTUNUTF97
+Z2V0LHNldH1fYXJjaF9zZXR0aW5ncyA/CgpBbHNvLCBpcyB0aGlzIHRoZSBraW5kIG9mIHRoaW5n
+IHdoaWNoIHdvdWxkIGJlIHVzZWZ1bCBvbiBBUk0/wqAgSXRzCmludGVuZGVkIGZvciB0aGUgdGhp
+bmdzIHNldHRpbmdzIHdoaWNoIGFyZSBlc3NlbnRpYWxseSB2YXJpYWJsZSBmb3IgdGhlCmRvbWFp
+biwgYmFzZWQgb24gdGhlIGFkbWlucyBjaG9pY2UuwqAgT25lIHVzZWNhc2UgSmFuIGhhcyBwcm9w
+b3NlZCBpcyB0aGUKYWJpbGl0eSBmb3IgYSBvbmUtdGltZSBhY3Rpb24gd2hlcmUgdGhlIGFkbWlu
+IGhhcyBkb25lIGFuIHVwZGF0ZSAoZS5nLgp0YWtlbiB0aGUgU3BlY3RyZSBNaWNyb2NvZGUpIGFu
+ZCB3YW50cyB0byBidW1wIHVwIHRoZSB2aXNpYmxlIGZlYXR1cmVzZXQKaW4gdGhlIGd1ZXN0LCBr
+bm93aW5nIHRoYXQgdGhlIGd1ZXN0IGhhcyBhIG1lY2hhbmlzbSB0byBkZXRlY3QgYW5kIGFkYXB0
+CnRvIHRoZSBuZXcgZmVhdHVyZXMuwqAgKEkgcmVhbGlzZSB0aGlzIGRlc2NyaXB0aW9uIGlzIGEg
+Yml0IHdvb2xseSkuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
