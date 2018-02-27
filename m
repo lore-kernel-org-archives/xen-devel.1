@@ -1,28 +1,10 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH 5/7] public / x86: introduce
- __HYPERCALL_iommu_op
-Date: Tue, 27 Feb 2018 09:32:42 +0000
-Message-ID: <a448b335ee1648bb86d840c001924396@AMSPEX02CL03.citrite.net>
-References: <20180212104714.1922-1-paul.durrant@citrix.com>
- <20180212104714.1922-6-paul.durrant@citrix.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D191002712@SHSMSX101.ccr.corp.intel.com>
- <5ed4994c89994703b24e607c5f183e68@AMSPEX02CL03.citrite.net>
- <AADFC41AFE54684AB9EE6CBC0274A5D19101540B@SHSMSX101.ccr.corp.intel.com>
- <6c5e1abad397407e8dbed6e3945c68be@AMSPEX02CL03.citrite.net>
- <AADFC41AFE54684AB9EE6CBC0274A5D1910184EF@SHSMSX101.ccr.corp.intel.com>
- <88e69f29f4d243eb8b9df40277e48085@AMSPEX02CL03.citrite.net>
- <AADFC41AFE54684AB9EE6CBC0274A5D19101C57F@SHSMSX101.ccr.corp.intel.com>
+From: Minjun Hong <nickeysgo@gmail.com>
+Subject: Is there any way to read msr in hypervisor code?
+Date: Tue, 27 Feb 2018 18:37:48 +0900
+Message-ID: <CAFX_q-F=CkRYyH5BgWxNig9G5XFQOKNgwAKoCsNDPO218a1bdQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2361391045707721827=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=pawk=fv=citrix.com=prvs=5895023f2=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1eqbd4-0008Uv-Ho
- for xen-devel@lists.xenproject.org; Tue, 27 Feb 2018 09:32:58 +0000
-In-Reply-To: <AADFC41AFE54684AB9EE6CBC0274A5D19101C57F@SHSMSX101.ccr.corp.intel.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,112 +13,299 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Kevin Tian <kevin.tian@intel.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, George Dunlap <George.Dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <Ian.Jackson@citrix.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KW3NuaXBdDQo+ID4gSSdsbCBkZWZpbmUgc29t
-ZSB0ZXJtcyB0byB0cnkgdG8gYXZvaWQgY29uZnVzaW5nLi4uDQo+ID4NCj4gPiAtIHdoZXJlIHRo
-ZSBJT01NVSBjb2RlIGluIFhlbiBtYWludGFpbnMgYSBtYXAgc3VjaCB0aGF0IEJGTiA9PSBNRk4s
-DQo+ID4gbGV04oCZcyBjYWxsIHRoaXMgYW4gJ2lkZW50aXRpdHkgTUZOIG1hcCcNCj4gPiAtIHdo
-ZXJlIHRoZSBJT01NVSBjb2RlIGluIFhlbiAqaW5pdGlhbGx5IHByb2dyYW1tZXMqIHRoZSBJT01N
-VSB3aXRoDQo+ID4gYW4gaWRlbnRpdHkgTUZOIG1hcCBmb3IgdGhlIHdob2xlIGhvc3QsIGxldCdz
-IGNhbGwgdGhpcyBhICdob3N0IG1hcCcNCj4gPiAtIHdoZXJlIHRoZSBJT01NVSBjb2RlIGluIFhl
-biBtYWludGFpbnMgYSBtYXAgc3VjaCB0aGF0IEJGTiA9PSBHRk4sDQo+ID4gbGV0J3MgY2FsbCB0
-aGlzIGFuICdpZGVudGl0eSBHRk4gbWFwJw0KPiA+IC0gd2hlcmUgdGhlIElPTU1VIGNvZGUgaW4g
-WGVuICppbml0aWFsbHkgcHJvZ3JhbW1lcyogdGhlIElPTU1VIHdpdGgNCj4gPiBhbiBpZGVudGl0
-eSBHRk4gbWFwIGZvciB0aGUgZ3Vlc3QsIGxldCdzIGNhbGwgdGhpcyBhICdndWVzdCBtYXAnDQo+
-IA0KPiBDYW4geW91IGludHJvZHVjZSBhIG5hbWUgZm9yIHN1Y2ggbWFwcGluZz8gdGhlbiB3aGVu
-IHlvdSBkZXNjcmliZQ0KPiBpZGVudGl0eSBtYXBwaW5nIGluIGZ1dHVyZSB2ZXJzaW9uLCBwZW9w
-bGUgY2FuIGltbWVkaWF0ZWx5IGdldCB0aGUNCj4gYWN0dWFsIG1lYW5pbmcuIEF0IGxlYXN0IHRv
-IG1lIEkgYWx3YXlzIHRoaW5rIGFib3V0IHRoZSBtYXBwaW5nIG9uDQo+IGFjdHVhbCBJT01NVSBw
-YWdlIHRhYmxlIGZpcnN0LCB3aGljaCBpcyBhbHdheXMgYWJvdXQgQkZOLT5NRk4NCj4gbWFwcGlu
-ZyAod2hlcmUgdGhlIGRlZmluaXRpb24gb2YgQkZOIHZhcmllcyBpbiBkaWZmZXJlbnQgdXNhZ2Vz
-KS4NCj4gDQoNCk15IHBvaW50IGlzIHRoYXQgdGhlcmUgYXJlIHR3byBub3Rpb25hbCB0eXBlcyBv
-ZiBpZGVudGl0eSBtYXA6IG9uZSB3aGVyZSBCRk4gPT0gTUZOIGFuZCBvbmUgd2hlcmUgQkZOID09
-IEdGTi4gVGhlbiB0aGVyZSBpcyB3aGV0aGVyIFhlbiBtYWludGFpbnMgdGhlIG1hcCwgb3IganVz
-dCBwcm9ncmFtbWVzIGl0IGF0IGRvbWFpbiBjcmVhdGUgYW5kIHRoZXJlYWZ0ZXIgbGVhdmVzIGl0
-IGFsb25lLg0KDQo+ID4NCj4gPiA+IDEpIGZvciBkb20wICh3L28gcHZJT01NVSkgaW4gc3RyaWN0
-IG1vZGUsIGl0J3MgTUZOOk1GTiBpZGVudGl0eQ0KPiA+IG1hcHBpbmcNCj4gPg0KPiA+IFdpdGhv
-dXQgc3RyaWN0IG1vZGUsIGEgaG9zdCBtYXAgaXMgc2V0IHVwIGZvciBkb20wLCBvdGhlcndpc2Ug
-aXQgaXMgYW4NCj4gPiBpZGVudGl0eSBNRk4gbWFwLiBJbiBib3RoIGNhc2VzIHRoZSB4ZW4tc3dp
-b3RsYiBkcml2ZXIgaXMgdXNlIGluIExpbnV4IGFzDQo+ID4gdGhlcmUgaXMgbm8gZGlmZmVyZW5j
-ZSBmcm9tIGl0cyBwb2ludCBvZiB2aWV3Lg0KPiA+DQo+ID4gPiAyKSBmb3IgZG9tMCAody8gcHZJ
-T01NVSksIGl0J3MgQkZOOk1GTiBtYXBwaW5nDQo+ID4NCj4gPiBXaXRoIFBWLUlPTU1VIHRoZXJl
-IGlzIGFsc28gYSBob3N0IG1hcCBidXQgc2luY2UgYSBob3N0IG1hcCBpcyBvbmx5DQo+ID4gaW5p
-dGlhbGl6ZWQgYW5kIG5vdCBtYWludGFpbmVkIChpLmUuIG5vdGhpbmcgaGFwcGVucyB3aGVuIHBh
-Z2VzIGFyZQ0KPiA+IHJlbW92ZWQgZnJvbSBvciBhZGRlZCB0byBkb20wKSB0aGVuIGl0IGlzIHNh
-ZmUgZm9yIGRvbTAgdG8gY29udHJvbCB0aGUNCj4gPiBJT01NVSBtYXBwaW5ncyBhcyBpdCB3aWxs
-IG5vdCBjb25mbGljdCB3aXRoIGFueXRoaW5nIFhlbiBpcyBkb2luZy4NCj4gDQo+IHdoYXQgZG8g
-eW91IG1lYW4gYnkgbm90IG1haW50YWluZWQ/DQoNCkJ5ICdtYWludGFpbmVkJyBJIG1lYW4gdGhh
-dCwgd2hlbiB0aGUgUDJNIG9mIHRoZSBndWVzdCBpcyBtb2RpZmllZCwgWGVuIHdpbGwgYWRqdXN0
-IHRoZSBJT01NVSBtYXBwaW5ncyBhY2NvcmRpbmdseS4NCg0KPiBob3N0IG1hcCB3aWxsIGJlIHBy
-b2dyYW1tZWQNCj4gdG8gSU9NTVUgcGFnZSB0YWJsZSBiZWZvcmUgbGF1bmNoaW5nIERvbTAsIHNp
-bmNlIGh5cGVydmlzb3IgZG9lc24ndA0KPiBrbm93IHdoZXRoZXIgdGhlcmUgd2lsbCBiZSBhIHB2
-SU9NTVUgZHJpdmVyIGxhdW5jaGVkLiBMYXRlcg0KPiBwdklPTU1VIGRyaXZlciBpcyBsb2FkZWQg
-YW5kIGlzc3VlcyBoeXBlcmNhbGwgdG8gY29udHJvbCBpdHMgb3duDQo+IG1hcHBpbmcsIGh5cGVy
-dmlzb3IgdGhlbiBzd2l0Y2ggSU9NTVUgcGFnZSB0YWJsZSBmcm9tIGhvc3QgbWFwDQo+IHRvIHRo
-ZSBuZXcgb25lLCB3aGljaCBpcyB0aGUgc2FtZSBsb2dpYyByZWdhcmRpbmcgdG8gdmlydHVhbCBW
-VGQgZm9yDQo+IEhWTSBndWVzdC4gdGhhdCBpcyBob3cgSSBjYWxsIGFuIGFkZHJlc3Mgc3BhY2Ug
-c3dpdGNoLg0KDQpCdXQgdGhhdCBpcyBub3Qgd2hhdCBoYXBwZW5zLiBJZiBuZWVkX2lvbW11KCkg
-aXMgZmFsc2UgdGhlbiBYZW4gd2lsbCBoYXZlIHByb2dyYW1tZWQgYSBtYXBwaW5nIChCRk4gPT0g
-TUZOIGluIHRoZSBjYXNlIG9mIGRvbTApLCBidXQgd2lsbCBub3QgdG91Y2ggaXQgYWZ0ZXIgdGhh
-dC4gV2hldGhlciB0aGUgZG9tYWluIChkb20wIGluIHRoaXMgY2FzZSkgY2hvb3NlcyB0byBtb2Rp
-ZnkgdGhvc2UgbWFwcGluZyBhZnRlciB0aGF0IGlzIHVwIHRvIHRoZSBkb21haW4uLi4uIGJ1dCBp
-dCBpcyBmcmVlIHRvIGRvIHNvIGJlY2F1c2UgWGVuIHdpbGwgbm90IGR5bmFtaWNhbGx5IGFkanVz
-dCB0aGUgbWFwcGluZyBzaG91bGQgdGhlIFAyTSBjaGFuZ2UuDQpXaXRoIFBWLUlPTU1VIHRoZXJl
-IGlzIG5vICdiaWcgc3dpdGNoJzsgWGVuIGRvZXMgbm90aGluZyBtb3JlIHRoYW4gc2V0IHVwIHRo
-ZSBpbml0aWFsIG1hcHBpbmcgYW5kIHRoZW4gcmVzcG9uZCB0byB0aGUgaW5kaXZpZHVhbCBtYXAv
-dW5tYXAgaHlwZXJjYWxscyB0aGF0IHRoZSBkb21haW4gbWF5IG9yIG1heSBub3QgaXNzdWUuDQoN
-Cj4gDQo+ID4NCj4gPiA+IDMpIGZvciBIVk0gKHcvbyB2aXJ0dWFsIFZUZCkgd2l0aCBwYXNzdGhy
-b3VnaCBkZXZpY2UsIGl0J3MgR0ZOOk1GTg0KPiA+DQo+ID4gSSBoYXZlIG5vdCBiZWVuIGZvbGxv
-d2luZyB2aXJ0dWFsIFZUZCBjbG9zZWx5IGJ1dCwgeWVzLCBhcyBpdCBzdGFuZHMgKndoZW4NCj4g
-PiBoL3cgaXMgcGFzc2VkIHRocm91Z2gqIHRoZSBndWVzdCBnZXRzIGFuIGlkZW50aXR5IEdGTiBt
-YXAgb3RoZXJ3aXNlIGl0DQo+ID4gZ2V0cyBubyBtYXAgYXQgYWxsLg0KPiA+DQo+ID4gPiA0KSBm
-b3IgSFZNICh3LyB2aXJ0dWFsIFZUZCkgd2l0aCBwYXNzdGhyb3VnaCBkZXZpY2UsIGl0J3MgQkZO
-Ok1GTg0KPiA+ID4NCj4gPg0KPiA+IFdpdGggdmlydHVhbCBWVGQgSSdkIGV4cGVjdCB0aGVyZSB3
-b3VsZCBiZSBhIGd1ZXN0IG1hcCBhbmQgdGhlbiB0aGUgZ3Vlc3QNCj4gPiB3b3VsZCBnZXQgdGhl
-IHNhbWUgbGV2ZWwgb2YgY29udHJvbCBvdmVyIHRoZSBJT01NVSB0aGF0IFBWLUlPTU1VDQo+ID4g
-YWxsb3dzIGZvciBhIFBWIGRvbWFpbiBidXQsIG9mIGNvdXJzZSwgc3VjaCBjb250cm9sIGlzIGFz
-LXlldCB1bnNhZmUgZm9yDQo+ID4gZ3Vlc3RzIHNpbmNlIGFuIElPTU1VIGZhdWx0IGNhbiBjYXVz
-ZSBhIGhvc3QgY3Jhc2guDQo+IA0KPiBJJ20gbm90IHN1cmUgd2h5IHlvdSBjYWxsIGl0IHVuc2Fm
-ZS4gZXZlbiB0b2RheSB3aXRoIGFueSBwYXNzdGhyb3VnaA0KPiBkZXZpY2UgKHcvbyB2aXJ0dWFs
-IFZUZCBleHBvc2VkKSwgYSBiYWQgZ3Vlc3QgZHJpdmVyIGNhbiBhbHdheXMgY2F1c2UNCj4gRE1B
-IGFjY2VzcyB0byBpbnZhbGlkIEdQQSBhZGRyZXNzIGFuZCB0aHVzIGNhdXNlIElPTU1VIGZhdWx0
-LiBhZGRpbmcNCj4gdmlydHVhbCBWVGQgZG9lc24ndCBjaGFuZ2UgYW55IHNlY3VyaXR5IGFzcGVj
-dCBoZXJlLg0KDQpUaGF0J3Mgbm90IGVudGlyZWx5IHRydWUuIFhlbiBjb3VsZCBlYXNpbHkgZmls
-bCB0aGUgSU9NTVUgd2l0aCBhIEJGTiA9PSBHRk4gbWFwcGluZyBmb3IgdmFsaWQgR0ZOIGFuZCB0
-aGVuIHByb2dyYW0gYWxsIHRoZSBvdGhlciBCRk4gdG8gcG9pbnQgYXQgYSBzY3JhdGNoIHBhZ2Ug
-YW5kIHRodXMgYXZvaWQgYW55IHBvc3NpYmlsaXR5IG9mIGFuIElPTU1VIGZhdWx0IGNhdXNlZCBi
-eSBhbiBpbi1ndWVzdCBkcml2ZXIgbWlzLXByb2dyYW1taW5nIGEgZGV2aWNlLiBBcyBzb29uIGFz
-IFhlbiBnaXZlcyB0aGUgZG9tYWluIGNvbnRyb2wgb3ZlciBpdHMgb3duIG1hcHBpbmdzIHRoZW4g
-aXQgY2FuIG5vIGxvbmdlciBlbnN1cmUgYWxsIEJGTiBtYXAgdG8gc29tZXRoaW5nIHZhbGlkLg0K
-DQo+IA0KPiA+DQo+ID4gPiAoZnJvbSBJT01NVSBwLm8udiB3ZSBjYW4gYWx3YXlzIGNhbGwgYWxs
-IDQgY2F0ZWdvcmllcyBhcyBCRk46TUZOLg0KPiA+ID4gSSBkZWxpYmVyYXRlbHkgc2VwYXJhdGUg
-dGhlbSBmcm9tIHVzYWdlIHAuby52LCB3aGVyZSAnQkZOJw0KPiA+ID4gcmVwcmVzZW50cyB0aGUg
-Y2FzZXMgd2hlcmUgZ3Vlc3QgZXhwbGljaXRseSBtYW5hZ2VzIGEgbmV3IGFkZHJlc3MNCj4gPiA+
-IHNwYWNlIC0gZGlmZmVyZW50IGZyb20gcGh5c2ljYWwgYWRkcmVzcyBzcGFjZSBpbiBpdHMgbWlu
-ZCkNCj4gPiA+DQo+ID4gPiB0aGVyZSBpcyBhbiBhZGRyZXNzIHNwYWNlIHN3aXRjaCBpbiAyKSBh
-bmQgNCkgYmVmb3JlIGFuZCBhZnRlcg0KPiA+ID4gZW5hYmxpbmcgdklPTU1VLg0KPiA+DQo+ID4g
-SXMgdGhlcmU/IFRoZSBpbml0aWFsIG1hcHBpbmcgaW4gMiBpcyB0aGUgc2FtZSBhcyAxLCBhbmQg
-dGhlIGluaXRpYWwgbWFwcGluZyBpbg0KPiA+IDQgaXMgdGhlIHNhbWUgYXMgMy4NCj4gPg0KPiA+
-ID4NCj4gPiA+IGFib3ZlIGlzIHdoeSBJIGRpZG7igJl0IGZvbGxvdyB0aGUgYXNzdW1wdGlvbiB0
-aGF0ICJYZW4gaXMgbWFpbnRhaW5pbmcNCj4gPiA+IGFuIGlkZW50aXR5IG1hcCIgaXMgaWRlbnRp
-Y2FsIHRvIG5lZWRfaW9tbXUuDQo+ID4gPg0KPiA+DQo+ID4gVGhlIGNydWNpYWwgcG9pbnQgaXMg
-dGhhdCBpbiBjYXNlcyAyIGFuZCA0IFhlbiBpcyBub3QgKm1haW50YWluaW5nKiBhbnkgbWFwDQo+
-ID4gc28gbmVlZF9pb21tdShkKSBzaG91bGQgYmUgZmFsc2UgYW5kIGhlbmNlIHRoZSBkb21haW4g
-Y2FuIGNvbnRyb2wgaXRzDQo+ID4gb3duIG1hcHBpbmdzIHdpdGhvdXQgaW50ZXJmZXJpbmcgd2hp
-Y2ggd2hhdCBYZW4gaXMgZG9pbmcgaW50ZXJuYWxseS4NCj4gPg0KPiA+IERvZXMgdGhhdCBoZWxw
-IGNsYXJpZnk/DQo+ID4NCj4gDQo+IGFnYWluLCBhYm92ZSBkZXNjcmlwdGlvbiBpcyByZWFsbHkg
-Y29uZnVzaW5nIGFzIHlvdSBkb24ndCBzcGVjaWZ5DQo+IHdoaWNoIG1hcHBpbmcgaXMgcmVmZXJy
-ZWQgdG8gaGVyZS4NCj4gDQoNClRoYXQncyBiZWNhdXNlIHRoZSBhY3R1YWwgbWFwcGluZyBpcyBp
-cnJlbGV2YW50IGhlcmUuIERvIHlvdSBub3cgdW5kZXJzdGFuZCB0aGUgZGlmZmVyZW5jZSBiZXR3
-ZWVuIFhlbiBzZXR0aW5nIHVwIGFuIGluaXRpYWwgbWFwcGluZyBhbmQgWGVuIG1haW50YWluaW5n
-IHRoYXQgbWFwcGluZyAoYnkga2VlcGluZyBpdCBzeW5jaHJvbml6ZWQgd2l0aCB0aGUgUDJNKT8g
-VGhhdCdzIHdoYXQgdGhlIG5lZWRfaW9tbXUoZCkgZmxhZyBpcyBhbGwgYWJvdXQuLi4uIGl0IGhh
-cyBub3RoaW5nIHRvIGRvIHdpdGggd2hldGhlciB0aGUgbWFwcGluZyBpcyBpZGVudGl0eSBNRk4g
-b3IgaWRlbnRpdHkgR0ZOLCBvciBzb21ldGhpbmcgZGlmZmVyZW50Lg0KDQogIENoZWVycywNCg0K
-ICAgIFBhdWwNCg0KPiBUaGFua3MNCj4gS2V2aW4NCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+--===============2361391045707721827==
+Content-Type: multipart/alternative; boundary="f403043ef80c30febe05662e6177"
+
+--f403043ef80c30febe05662e6177
+Content-Type: text/plain; charset="UTF-8"
+
+Hello, I've tried to read msr in hypervisor code:
+
+uint64_t reg;
+
+rdmsr_safe(0x412e, ret);
+
+
+But, I all failed to read it because the hypervisor is running in ring-1
+CPL as I did googling.
+When I accessed msr, the crash log is below:
+
+
+(XEN) ----[ Xen-4.9.0  x86_64  debug=n   Not tainted ]----
+>
+> (XEN) CPU:    7
+>
+> (XEN) RIP:    e008:[<ffff82d08024139d>] mcsched.c#shscan_timer_fn+0xd/0x180
+>
+> (XEN) RFLAGS: 0000000000010206   CONTEXT: hypervisor
+>
+> (XEN) rax: ffff83084abfe028   rbx: ffff83084abfe300   rcx: 000000000000412e
+>
+> (XEN) rdx: ffff83084abb7fff   rsi: ffff82d080632f00   rdi: 0000000000000000
+>
+> (XEN) rbp: ffff82d080241390   rsp: ffff83084abb7e30   r8:  ffff830868d4bdc0
+>
+> (XEN) r9:  0000000000000005   r10: 0000012da75b50a5   r11: ffff8300782f3060
+>
+> (XEN) r12: 0000000000000000   r13: 0000012d9f9d6e07   r14: ffff83084abb7fff
+>
+> (XEN) r15: ffff82d08062ad80   cr0: 000000008005003b   cr4: 00000000003526e0
+>
+> (XEN) cr3: 00000003426f3000   cr2: 00007fc3c21d4000
+>
+> (XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: e010   cs: e008
+>
+> (XEN) Xen code around <ffff82d08024139d>
+>> (mcsched.c#shscan_timer_fn+0xd/0x180):
+>
+> (XEN)  00 00 41 55 41 54 55 53 <0f> 32 4c 8d 05 0a 79 11 00 48 8d 0d 91 45
+>> 14 00
+>
+> (XEN) Xen stack trace from rsp=ffff83084abb7e30:
+>
+> (XEN)    ffff83084abfe300 ffff82d080241390 0000000000000000
+>> 0000012d9f9d6e07
+>
+> (XEN)    ffff83084abb7fff ffff82d08023841d ffff83084abfe300
+>> ffff82d080632f00
+>
+> (XEN)    ffff830868d4bdb0 ffff82d0802385c6 ffff82d080641240
+>> 00000000ffffffff
+>
+> (XEN)    0000000000000000 ffff82d08062aa00 ffffffffffffffff
+>> ffff83084abb7fff
+>
+> (XEN)    ffff82d08062ad80 ffff82d080234e0a ffff83084abb7fff
+>> 00000000ffffffff
+>
+> (XEN)    ffff83084abb7fff 00000000ffffffff ffff830868ce2000
+>> ffff8306e5a36000
+>
+> (XEN)    ffff82d080641240 ffff82d08026b725 0000000000000000
+>> ffff830077ff8000
+>
+> (XEN)    ffff8300782f3000 ffffffff81e00000 0000000000000000
+>> 0000000000000000
+>
+> (XEN)    0000000000000000 ffffffff81e03e68 ffffffff81f3c9c0
+>> 0000000000000246
+>
+> (XEN)    0000000000007ff0 0000000000000000 ffff88003f810580
+>> 0000000000000000
+>
+> (XEN)    ffffffff810013aa ffffffff81e55450 0000000000000000
+>> 0000000000000001
+>
+> (XEN)    0000010000000000 ffffffff810013aa 000000000000e033
+>> 0000000000000246
+>
+> (XEN)    ffffffff81e03e38 000000000000e02b 0000000000000000
+>> 0000000000000000
+>
+> (XEN)    0000000000000000 0000000000000000 0000000000000007
+>> ffff830077ff8000
+>
+> (XEN)    00000037ca5a7300 00000000003526e0
+>
+> (XEN) Xen call trace:
+>
+> (XEN)    [<ffff82d08024139d>] mcsched.c#shscan_timer_fn+0xd/0x180
+>
+> (XEN)    [<ffff82d080241390>] mcsched.c#shscan_timer_fn+0/0x180
+>
+> (XEN)    [<ffff82d08023841d>] timer.c#execute_timer+0x3d/0x60
+>
+> (XEN)    [<ffff82d0802385c6>] timer.c#timer_softirq_action+0x66/0x250
+>
+> (XEN)    [<ffff82d080234e0a>] softirq.c#__do_softirq+0x7a/0xc0
+>
+> (XEN)    [<ffff82d08026b725>] domain.c#idle_loop+0x35/0x70
+>
+> (XEN)
+>
+> (XEN)
+>
+> (XEN) ****************************************
+>
+> (XEN) Panic on CPU 7:
+>
+> (XEN) GENERAL PROTECTION FAULT
+>
+> (XEN) [error_code=0000]
+>
+> (XEN) ****************************************
+>
+>
+>
+So... I need to find any way to access msr.
+Please give me some clue to solve this problem.
+
+Thanks!
+
+Minjun Hong
+
+--f403043ef80c30febe05662e6177
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hello, I&#39;ve tried to read msr in hypervisor code:<div>=
+<br></div><div>
+
+<blockquote class=3D"gmail_quote" style=3D"color:rgb(34,34,34);font-family:=
+arial,sans-serif;font-size:small;font-style:normal;font-variant-ligatures:n=
+ormal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;text-a=
+lign:start;text-indent:0px;text-transform:none;white-space:normal;word-spac=
+ing:0px;text-decoration-style:initial;text-decoration-color:initial;margin:=
+0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
+uint64_t reg;=C2=A0=C2=A0</blockquote><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddi=
+ng-left:1ex">rdmsr_safe(0x412e, ret);</blockquote></div><div><br><div>But, =
+I all failed to read it because the hypervisor is running in ring-1 CPL as =
+I did googling.</div><div>When I accessed msr, the crash log is below:</div=
+><div><br></div><div><br></div><div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
+8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) ----[ Xe=
+n-4.9.0=C2=A0 x86_64=C2=A0 debug=3Dn=C2=A0 =C2=A0Not tainted ]----</blockqu=
+ote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
+der-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) CPU:=C2=A0 =C2=
+=A0 7</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
+ 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) R=
+IP:=C2=A0 =C2=A0 e008:[&lt;ffff82d08024139d&gt;] mcsched.c#shscan_timer_fn+=
+0xd/0x180</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XE=
+N) RFLAGS: 0000000000010206=C2=A0 =C2=A0CONTEXT: hypervisor</blockquote><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t:1px solid rgb(204,204,204);padding-left:1ex">(XEN) rax: ffff83084abfe028=
+=C2=A0 =C2=A0rbx: ffff83084abfe300=C2=A0 =C2=A0rcx: 000000000000412e</block=
+quote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
+order-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) rdx: ffff8308=
+4abb7fff=C2=A0 =C2=A0rsi: ffff82d080632f00=C2=A0 =C2=A0rdi: 000000000000000=
+0</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
+ 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) rbp: =
+ffff82d080241390=C2=A0 =C2=A0rsp: ffff83084abb7e30=C2=A0 =C2=A0r8:=C2=A0 ff=
+ff830868d4bdc0</blockquote><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">(XEN) r9:=C2=A0 0000000000000005=C2=A0 =C2=A0r10: 0000012da75b50a5=C2=A0 =
+=C2=A0r11: ffff8300782f3060</blockquote><blockquote class=3D"gmail_quote" s=
+tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
+ding-left:1ex">(XEN) r12: 0000000000000000=C2=A0 =C2=A0r13: 0000012d9f9d6e0=
+7=C2=A0 =C2=A0r14: ffff83084abb7fff</blockquote><blockquote class=3D"gmail_=
+quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
+204);padding-left:1ex">(XEN) r15: ffff82d08062ad80=C2=A0 =C2=A0cr0: 0000000=
+08005003b=C2=A0 =C2=A0cr4: 00000000003526e0</blockquote><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">(XEN) cr3: 00000003426f3000=C2=A0 =C2=A0cr=
+2: 00007fc3c21d4000</blockquote><blockquote class=3D"gmail_quote" style=3D"=
+margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
+t:1ex">(XEN) ds: 0000=C2=A0 =C2=A0es: 0000=C2=A0 =C2=A0fs: 0000=C2=A0 =C2=
+=A0gs: 0000=C2=A0 =C2=A0ss: e010=C2=A0 =C2=A0cs: e008</blockquote><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">(XEN) Xen code around &lt;ffff82d0=
+8024139d&gt; (mcsched.c#shscan_timer_fn+0xd/0x180):</blockquote><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex">(XEN)=C2=A0 00 00 41 55 41 54 55 53 =
+&lt;0f&gt; 32 4c 8d 05 0a 79 11 00 48 8d 0d 91 45 14 00</blockquote><blockq=
+uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
+x solid rgb(204,204,204);padding-left:1ex">(XEN) Xen stack trace from rsp=
+=3Dffff83084abb7e30:</blockquote><blockquote class=3D"gmail_quote" style=3D=
+"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
+ft:1ex">(XEN)=C2=A0 =C2=A0 ffff83084abfe300 ffff82d080241390 00000000000000=
+00 0000012d9f9d6e07</blockquote><blockquote class=3D"gmail_quote" style=3D"=
+margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
+t:1ex">(XEN)=C2=A0 =C2=A0 ffff83084abb7fff ffff82d08023841d ffff83084abfe30=
+0 ffff82d080632f00</blockquote><blockquote class=3D"gmail_quote" style=3D"m=
+argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
+:1ex">(XEN)=C2=A0 =C2=A0 ffff830868d4bdb0 ffff82d0802385c6 ffff82d080641240=
+ 00000000ffffffff</blockquote><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
+1ex">(XEN)=C2=A0 =C2=A0 0000000000000000 ffff82d08062aa00 ffffffffffffffff =
+ffff83084abb7fff</blockquote><blockquote class=3D"gmail_quote" style=3D"mar=
+gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
+ex">(XEN)=C2=A0 =C2=A0 ffff82d08062ad80 ffff82d080234e0a ffff83084abb7fff 0=
+0000000ffffffff</blockquote><blockquote class=3D"gmail_quote" style=3D"marg=
+in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
+x">(XEN)=C2=A0 =C2=A0 ffff83084abb7fff 00000000ffffffff ffff830868ce2000 ff=
+ff8306e5a36000</blockquote><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">(XEN)=C2=A0 =C2=A0 ffff82d080641240 ffff82d08026b725 0000000000000000 fff=
+f830077ff8000</blockquote><blockquote class=3D"gmail_quote" style=3D"margin=
+:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
+>(XEN)=C2=A0 =C2=A0 ffff8300782f3000 ffffffff81e00000 0000000000000000 0000=
+000000000000</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:=
+0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
+(XEN)=C2=A0 =C2=A0 0000000000000000 ffffffff81e03e68 ffffffff81f3c9c0 00000=
+00000000246</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(=
+XEN)=C2=A0 =C2=A0 0000000000007ff0 0000000000000000 ffff88003f810580 000000=
+0000000000</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0p=
+x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(X=
+EN)=C2=A0 =C2=A0 ffffffff810013aa ffffffff81e55450 0000000000000000 0000000=
+000000001</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XE=
+N)=C2=A0 =C2=A0 0000010000000000 ffffffff810013aa 000000000000e033 00000000=
+00000246</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px =
+0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN=
+)=C2=A0 =C2=A0 ffffffff81e03e38 000000000000e02b 0000000000000000 000000000=
+0000000</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN)=
+=C2=A0 =C2=A0 0000000000000000 0000000000000000 0000000000000007 ffff830077=
+ff8000</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
+x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN)=
+=C2=A0 =C2=A0 00000037ca5a7300 00000000003526e0</blockquote><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
+rgb(204,204,204);padding-left:1ex">(XEN) Xen call trace:</blockquote><block=
+quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
+px solid rgb(204,204,204);padding-left:1ex">(XEN)=C2=A0 =C2=A0 [&lt;ffff82d=
+08024139d&gt;] mcsched.c#shscan_timer_fn+0xd/0x180</blockquote><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
+id rgb(204,204,204);padding-left:1ex">(XEN)=C2=A0 =C2=A0 [&lt;ffff82d080241=
+390&gt;] mcsched.c#shscan_timer_fn+0/0x180</blockquote><blockquote class=3D=
+"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(2=
+04,204,204);padding-left:1ex">(XEN)=C2=A0 =C2=A0 [&lt;ffff82d08023841d&gt;]=
+ timer.c#execute_timer+0x3d/0x60</blockquote><blockquote class=3D"gmail_quo=
+te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
+);padding-left:1ex">(XEN)=C2=A0 =C2=A0 [&lt;ffff82d0802385c6&gt;] timer.c#t=
+imer_softirq_action+0x66/0x250</blockquote><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex">(XEN)=C2=A0 =C2=A0 [&lt;ffff82d080234e0a&gt;] softirq.c#_=
+_do_softirq+0x7a/0xc0</blockquote><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">(XEN)=C2=A0 =C2=A0 [&lt;ffff82d08026b725&gt;] domain.c#idle_loop=
++0x35/0x70</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0p=
+x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(X=
+EN)</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN)</bl=
+ockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) **********=
+******************************</blockquote><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex">(XEN) Panic on CPU 7:</blockquote><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex">(XEN) GENERAL PROTECTION FAULT</blockquote><bloc=
+kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
+1px solid rgb(204,204,204);padding-left:1ex">(XEN) [error_code=3D0000]</blo=
+ckquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
+;border-left:1px solid rgb(204,204,204);padding-left:1ex">(XEN) ***********=
+*****************************</blockquote><div><br></div></blockquote><div>=
+<br></div><div>So... I need to find any way to access msr.</div><div>Please=
+ give me some clue to solve this problem.</div><div><br></div><div>Thanks!<=
+/div><div><br></div><div>Minjun Hong=C2=A0</div></div></div></div>
+
+--f403043ef80c30febe05662e6177--
+
+
+--===============2361391045707721827==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2361391045707721827==--
