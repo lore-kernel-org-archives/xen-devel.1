@@ -1,19 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: rwlock and per-cpu rwlock recursive?
-Date: Tue, 27 Feb 2018 19:57:50 +0000
-Message-ID: <5c96fe6b-0509-012e-0408-debde97e6dc7@citrix.com>
-References: <3a7d3b6a-623a-0ddb-d42b-aa68fca1fe92@arm.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] xen: use hvc console for dom0
+Date: Tue, 27 Feb 2018 12:03:08 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1802271159070.4239__4932.14665116302$1519761719$gmane$org@sstabellini-ThinkPad-X260>
+References: <20180226110822.13787-1-jgross@suse.com>
+ <0d8bdda5-faef-41da-344a-644b5c3d6006@epam.com>
+ <58e94cc9-9b09-d6b7-3122-fb4c83e97926@suse.com>
+ <b57092b4-e740-e1f8-3885-a817bb7d4e70@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1944649226-1519761789=:4239"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=ijku=fv=citrix.com=prvs=58962d594=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1eqlNq-0003Hn-VO
- for xen-devel@lists.xenproject.org; Tue, 27 Feb 2018 19:57:55 +0000
-In-Reply-To: <3a7d3b6a-623a-0ddb-d42b-aa68fca1fe92@arm.com>
-Content-Language: en-GB
+ <srs0=bhja=fv=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1eqlSx-00043B-34
+ for xen-devel@lists.xenproject.org; Tue, 27 Feb 2018 20:03:11 +0000
+In-Reply-To: <b57092b4-e740-e1f8-3885-a817bb7d4e70@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,44 +23,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich <JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, linux-kernel@vger.kernel.org, jbeulich@suse.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjcvMDIvMTggMTk6MTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPiBIaSwKPgo+IE9uIEFybSwg
-d2UgbWFkZSB0aGUgKHdyb25nPykgYXNzdW1wdGlvbiB0aGF0IHRoZSByd2xvY2sgd2FzIHJlY3Vy
-c2l2ZS4KPiBXZSBoYXZlIGEgY291cGxlIG9mIHBsYWNlcyB3aGVyZSB0aGUgcmVhZCBsb2NrIGNh
-biBiZSBuZXN0ZWQgKG1vc3RseQo+IHRoZSBtZW1hY2Nlc3MgY29kZSkuCj4KPiBJIGZvdW5kIG91
-dCB0b2RheSB0aGF0IGl0IGNhbiBhY3R1YWxseSBkZWFkbG9jayBpbiB0aGUgZm9sbG93aW5nIGNh
-c2U6Cj4gwqDCoMKgwqAxKSBDUFUgQSAtPiBBc2sgZm9yIHRoZSByZWFkIGxvY2sKPiDCoMKgwqDC
-oMKgwqDCoCA9PiBTdWNjZWVkCj4gwqDCoMKgwqAyKSBDUFUgQiAtPiBBc2sgZm9yIHRoZSB3cml0
-ZSBsb2NrCj4gwqDCoMKgwqDCoMKgwqAgPT4gQWxyZWFkeSB0YWtlbiBieSBDUFUgQSBzbyBnbyB0
-byB0aGUgc2xvd3BhdGgKPiDCoMKgwqDCoMKgwqDCoCA9PiBUYWtlIHRoZSBpbnRlcm5hbCBsb2Nr
-IChsb2NrLT5sb2NrKQo+IMKgwqDCoMKgwqDCoMKgID0+IFdhaXQgdW50aWwgdGhlIGxvY2sgaXMg
-cmVsZWFzZWQuCj4gwqDCoMKgwqAzKSBDUFUgQSAtPiBBc2sgZm9yIHRoZSByZWFkIGxvY2sgcmVj
-dXJzaXZlbHkKPiDCoMKgwqDCoMKgwqDCoCA9PiBBIHdyaXRlciBpcyB3YWl0aW5nIHNvIGdvIHRv
-IHRoZSBzbG93cGF0aAo+IMKgwqDCoMKgwqDCoMKgID0+IFRyeSB0byB0YWtlIHRoZSBpbnRlcm5h
-bCBsb2NrIChsb2NrLT5sb2NrKQo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgPT4gQmxvY2tpbmcg
-YmVjYXVzZSBDUFUgQiBhbHJlYWR5IGhhcyBpdAo+Cj4gU28gd2UgZW5kIHVwIGluIGEgZGVhZGxv
-Y2sgY2FzZS4gQ2FuIHNvbWVvbmUgY29uZmlybSB3aGV0aGVyIHdoZXRoZXIKPiByd2xvY2sgd2Fz
-IG1lYW50IHRvIGJlIHJlY3Vyc2l2ZT8KCnJ3bG9ja3MgYXJlIG5vdCByZWN1cnNpdmUsIGJ1dCBw
-cm9iYWJseSB3aWxsIGFwcGVhciB0byBiZSBpbiB0aGUgY29tbW9uCmNhc2UuCgpXaGVuIHVuY29u
-dGVuZGVkLCBhbiBlZmZlY3RpdmVseS1hcmJpdHJhcnkgbnVtYmVyIG9mIHJlYWRfbG9jaygpJ3Mg
-Y2FuCmNvbXBsZXRlLCBidXQgd2hlbiBjb250ZW5kZWQsIHJlYWRlcnMgYW5kIHdyaXRlcnMgdXNl
-IGEgcmVndWxhciBzcGlubG9jawood2hpY2ggaXMgYSB0aWNrZXRsb2NrIHVuZGVyIHRoZSBob29k
-KSB0byBlbnN1cmUgZmFpcm5lc3MuCgo+IFNpbWlsYXJseSwgSSB3YXMgdGhpbmtpbmcgdG8gbW92
-ZSB0aGUgcDJtIGNvZGUgdG8gdGhlIHBlci1jcHUgcndsb2NrCj4gYXMgeDg2IGRvZXMuIEZyb20g
-d2hhdCBJIGdhdGhlcmVkIGJ5IHJlYWRpbmcgdGhlIHg4NiBjb2RlLCB0aGlzIGxvY2sKPiBjb3Vs
-ZCBiZSB0YWtlbiByZWN1cnNpdmVseS4gQW0gSSByaWdodD8KCk5vIC0gd2hhdCBnaXZlcyB5b3Ug
-dGhlIGltcHJlc3Npb24gdGhhdCBpdCBjYW4gYmUgdGFrZW4gcmVjdXJzaXZlbHk/wqAgSW4KdGhl
-IGNhc2Ugd2hlcmUgd2UgZGV0ZWN0IHRha2luZyBhIHNlY29uZCBwZXJjcHVfcndsb2NrLCB3ZSBm
-YWxsIGJhY2sgdG8KdGhlIHNsb3dwYXRoIG9mIGEgcmVhbCByZWFkX2xvY2soKSBjYWxsLgoKPiBM
-YXN0bHksIHRoZSB4ODYgcDJtIGNvZGUgc2VlbWVkIHRvIHVzZSByd2xvY2sgYmVmb3JlIGhhbmQu
-IEhvdyBkaWQgdGhlCj4gcDJtIGNvZGUgd2FzIGhhbmRsaW5nIHJlY3Vyc2l2ZSBsb2NraW5nPwoK
-UGxhaW4gc3BpbmxvY2tzICh3aGVuIHVzaW5nIHRoZSByZWN1cnNpdmUgaGVscGVycyksIGFuZCB4
-ODYKbW1fe3J3LH1sb2NrX3QncyBjYW4gYmUgdGFrZW4gcmVjdXJzaXZlbHkuwqAgQSBjYWxsIHRv
-IHNwaW5fbG9jaygpIHdpbGwKZGVhZGxvY2sgaWYgdGhlIGxvY2sgaXMgYWxyZWFkeSB0YWtlbiBh
-bmQgeW91IG1lYW50IHRvIHVzZQpzcGluX2xvY2tfcmVjdXJzaXZlKCkuCgpZb3UgcHJvYmFibHkg
-d2FudCB0byBzZWUgYWJvdXQgcmVhZGluZyB4ZW4vYXJjaC94ODYvbW0vbW0tbG9ja3MuaAoKfkFu
-ZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1944649226-1519761789=:4239
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Tue, 27 Feb 2018, Julien Grall wrote:
+> Hi,
+> 
+> On 26/02/18 12:32, Juergen Gross wrote:
+> > On 26/02/18 13:06, Andrii Anisov wrote:
+> > > Hello Juergen,
+> > > 
+> > > 
+> > > On 26.02.18 13:08, Juergen Gross wrote:
+> > > > Today the hvc console is added as a preferred console for pv domUs
+> > > > only. As this requires a boot parameter for getting dom0 messages per
+> > > > default add it for dom0, too.
+> > > > 
+> > > > Signed-off-by: Juergen Gross <jgross@suse.com>
+> > > > ---
+> > > >    arch/x86/xen/enlighten_pv.c | 4 +++-
+> > > >    1 file changed, 3 insertions(+), 1 deletion(-)
+> > > > 
+> > > > diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+> > > Is this something x86 specific? Could it be a generic approach?
+> > 
+> > In case ARM wants something similar I guess the test for
+> > xen_initial_domain() should be dropped in xen_early_init().
+> I am pretty sure we discussed to remove !xen_initial_domain() for Arm in the
+> past. But I don't remember why the patch was not sent to remove it.
+> 
+> Anyway, I guess this should be fine to have hvc as a preferred console for the
+> initial domain as well.
+
+Usually, Dom0 has access to several physical UARTs and/or VGA, making
+this patch less obviously desirable. I think that for Dom0 the best
+behavior would be to add "hvc0" as first console rather than last
+console, so that if the user specified something else, this call won't
+interfere with it.
+--8323329-1944649226-1519761789=:4239
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1944649226-1519761789=:4239--
