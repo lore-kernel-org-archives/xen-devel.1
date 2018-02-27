@@ -1,24 +1,19 @@
-From: Andre Przywara <andre.przywara@linaro.org>
-Subject: Re: [RFC PATCH 43/49] ARM: new VGIC: Add preliminary
- stub implementations
-Date: Tue, 27 Feb 2018 17:05:27 +0000
-Message-ID: <6dc6222f-455c-e546-8fc1-37c890944b7d@linaro.org>
-References: <20180209143937.28866-1-andre.przywara@linaro.org>
- <20180209143937.28866-44-andre.przywara@linaro.org>
- <3029eb67-5ed4-1b71-6969-b97d30a46b86@arm.com>
+From: Simon Gaiser <simon@invisiblethingslab.com>
+Subject: Re: [PATCH] x86/xen: Calculate __max_logical_packages
+	on PV domains
+Date: Tue, 27 Feb 2018 17:08:00 +0000
+Message-ID: <9a7c4dae-4758-5aca-b3af-2129b62719e2__49409.5450420447$1519751237$gmane$org@invisiblethingslab.com>
+References: <20180207234923.13544-1-prarit@redhat.com>
+ <5607eaea-5cc3-31a4-9685-1d7dd147f564@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1829761460960072596=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=oqrf=fv=linaro.org=andre.przywara@srs-us1.protection.inumbo.net>)
- id 1eqih5-0007Ry-CP
- for xen-devel@lists.xenproject.org; Tue, 27 Feb 2018 17:05:35 +0000
-Received: by mail-wr0-x231.google.com with SMTP id k9so25646348wre.9
- for <xen-devel@lists.xenproject.org>; Tue, 27 Feb 2018 09:05:34 -0800 (PST)
-In-Reply-To: <3029eb67-5ed4-1b71-6969-b97d30a46b86@arm.com>
-Content-Language: en-GB
+ <srs0=ineh=fv=invisiblethingslab.com=simon@srs-us1.protection.inumbo.net>)
+ id 1eqijp-0007i2-B9
+ for xen-devel@lists.xenproject.org; Tue, 27 Feb 2018 17:08:25 +0000
+In-Reply-To: <5607eaea-5cc3-31a4-9685-1d7dd147f564@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,59 +22,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+To: stable@vger.kernel.org
+Cc: Prarit Bhargava <prarit@redhat.com>, Juergen Gross <jgross@suse.com>, Andi Kleen <ak@linux.intel.com>, Dou Liyang <douly.fnst@cn.fujitsu.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, x86@kernel.org, linux-kernel@vger.kernel.org, Vitaly Kuznetsov <vkuznets@redhat.com>, Ingo Molnar <mingo@redhat.com>, Andy Lutomirski <luto@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Thomas Gleixner <tglx@linutronix.de>, Kate Stewart <kstewart@linuxfoundation.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAxOS8wMi8xOCAxMjozNCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpLAo+IAo+IE9u
-IDA5LzAyLzE4IDE0OjM5LCBBbmRyZSBQcnp5d2FyYSB3cm90ZToKPj4gVGhlIFhlbiBjb3JlIGNv
-ZGUgcmVxdWlyZXMgYW4gaW50ZXJydXB0IGNvbnRyb2xsZXIgZW11bGF0aW9uIHRvIGltcGxlbWVu
-dAo+PiBhcmNoX21vdmVfaXJxcygpLCB0byBtb3ZlIHRoZSBhZmZpbml0eSBvZiBhbiBoYXJkd2Fy
-ZSBtYXBwZWQgdmlydHVhbCBJUlEKPj4gdG8gYW5vdGhlciBjb3JlLiBJbiB0aGUgbW9tZW50IHdl
-IGRvbid0IGltcGxlbWVudCB0aGlzCj4+IHBoeXNpY2FsLWZvbGxvdy12aXJ0dWFsIHJlZ2ltZSBp
-biBvdXIgbmV3IFZHSUMsIHNvIGp1c3QgcHJvdmlkZSBhbiBlbXB0eQo+PiBzdHViIGltcGxlbWVu
-dGF0aW9uIHRvIG1ha2UgdGhlIGxpbmtlciBoYXBweS4KPiAKPiBwaHlzaWNhbC1mb2xsb3ctdmly
-dHVhbCBpcyBhIG11c3QgZmVhdHVyZSBmb3IgdGhlIG5ldyB2R0lDLiBUaGlzIGhhcwo+IHNob3du
-IGJldHRlciBpbnRlcnJ1cHQgbGF0ZW5jeS4KPiAKPj4gU2ltaWxhcmlseSB2Z2ljX2NsZWFyX3Bl
-bmRpbmdfaXJxcygpIGlzIHJlcXVpcmVkIGJ5IHRoZSBBUk0gY29kZSwKPj4gYWx0aG91Z2ggaXQg
-aXMgc3VzcGVjdGVkIHRoYXQgaXQgaXMgYWN0dWFsbHkgbm90IG5lY2Vzc2FyeS4gR28gd2l0aCBh
-Cj4+IHN0dWIgZm9yIG5vdy4KPj4KPj4gU2lnbmVkLW9mZi1ieTogQW5kcmUgUHJ6eXdhcmEgPGFu
-ZHJlLnByenl3YXJhQGxpbmFyby5vcmc+Cj4+IC0tLQo+PiDCoCB4ZW4vYXJjaC9hcm0vdmdpYy92
-Z2ljLmMgfCAxMyArKysrKysrKysrKysrCj4+IMKgIDEgZmlsZSBjaGFuZ2VkLCAxMyBpbnNlcnRp
-b25zKCspCj4+Cj4+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vdmdpYy92Z2ljLmMgYi94ZW4v
-YXJjaC9hcm0vdmdpYy92Z2ljLmMKPj4gaW5kZXggZDkxMDI4YmQ0My4uNzdmYTc1NjMyOSAxMDA2
-NDQKPj4gLS0tIGEveGVuL2FyY2gvYXJtL3ZnaWMvdmdpYy5jCj4+ICsrKyBiL3hlbi9hcmNoL2Fy
-bS92Z2ljL3ZnaWMuYwo+PiBAQCAtNzcwLDYgKzc3MCwxOSBAQCB2b2lkIGdpY19kdW1wX3ZnaWNf
-aW5mbyhzdHJ1Y3QgdmNwdSAqdikKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-aXJxLT5hY3RpdmUgPyAiIiA6ICJub3QgIiwgaXJxLT5lbmFibGVkID8gIiIgOiAibm90ICIpOwo+
-PiDCoCB9Cj4+IMKgICt2b2lkIHZnaWNfY2xlYXJfcGVuZGluZ19pcnFzKHN0cnVjdCB2Y3B1ICp2
-KQo+PiArewo+PiArwqDCoMKgIC8qCj4+ICvCoMKgwqDCoCAqIFRPRE86IEl0IGlzIHVuY2xlYXIg
-d2hldGhlciB3ZSByZWFsbHkgbmVlZCB0aGlzLCBzbyB3ZSBtaWdodAo+PiBpbnN0ZWFkCj4+ICvC
-oMKgwqDCoCAqIHJlbW92ZSBpdCBvbiB0aGUgY2FsbGVyIHNpdGUuCj4+ICvCoMKgwqDCoCAqLwo+
-IAo+IEkgcmVtZW1iZXIgc29tZSBpc3N1ZSB3aXRoIHRoZSBjdXJyZW50IHZHSUMgd2hlbiBub3Qg
-cmVtb3ZpbmcgcGVuZGluZwo+IGludGVycnVwdHMgb24gUFNDSSBDUFUgT04uIEJ1dCB0aGF0IHdh
-cyBhIHdoaWxlIGFnby4gSSB3aWxsIGhhdmUgYW5vdGhlcgo+IHRyeSBhbmQgc2VlIGlmIHdlIGNh
-biBkcm9wIGl0LgoKU28gdGhhdCdzIHdoYXQgSSBjYW1lIHVwIHdpdGg6CkNQVV9PTiBjYW4gYmUg
-Y2FsbGVkIGZyb20gdHdvIHN0YXRlczoKLSBUaGUgaW5pdGlhbCBzdGF0ZSBvZiBhIGNvcmUgYmVm
-b3JlIGl0J3MgYmVpbmcgYnJvdWdodCB1cCBmb3IgdGhlIGZpcnN0CnRpbWUuCi0gQWZ0ZXIgdGhl
-IE9TIGhhcyBjYWxsZWQgQ1BVX09GRi4KIFRoZSBQU0NJIHNwZWMgc2F5cyB0aGF0IGJlZm9yZSBj
-YWxsaW5nIENQVV9PRkYgYW4gT1MgYWxsIElSUXMgbXVzdCBoYXZlCmJlZW4gbWlncmF0ZWQgYXdh
-eSBmcm9tIHRoYXQgY29yZS4gSSB0YWtlIHRoaXMgYXMgbm8gSVJRcyBhcmUgYWxsb3dlZCwKaGVu
-Y2Ugd2UgZG9uJ3QgaGF2ZSB0byBjbGVhciBhbnl0aGluZyBvbiBDUFVfT04uCgpJbiBib3RoIGNh
-c2VzIHRoZSBDUFUgaXMgZXhwZWN0ZWQgdG8gZW50ZXIgaW4gYSBkZWZpbmVkIHN0YXRlLCB3aGlj
-aAppbmNsdWRlcyBhbGwgaW50ZXJydXB0cyBtYXNrZWQgb24gdGhlIENQVSBsZXZlbCAoU1BTUi5F
-THguW0RBSUZdID0gMSkuClRoZSBHSUMgZGVmYXVsdHMgdG8gSVNQRU5EUiBiZWluZyAwLgoKU28g
-SSB0YWtlIHdlIHNob3VsZCBub3QgYmUgaGVsZCByZXNwb25zaWJsZSBmb3IgY2xlYXJpbmcgdGhl
-IHBlbmRpbmcKc3RhdGUgdXBvbiBDUFVfT04uCgpXaGF0IGlzIHlvdXIgb3Bpbmlvbj8KCj4+ICt9
-Cj4+ICsKPj4gK3ZvaWQgYXJjaF9tb3ZlX2lycXMoc3RydWN0IHZjcHUgKnYpCj4+ICt7Cj4+ICvC
-oMKgwqAgLyogVE9ETzogaW1wbGVtZW50IHRoaXMgKD8pICovCj4gCj4gSGVyZSB5b3Ugd291bGQg
-bmVlZCB0byBnbyB0aHJvdWdoIHRoZSBpbnRlcnJ1cHQgYW5kIG1vZGlmeSB0aGUgYWZmaW5pdHkK
-PiBvZiB0aGUgcGh5c2ljYWwgSVJRcyByb3V0ZWQgdG8gdGhhdCB2Q1BVLgoKU2luY2UgdGhpcyBp
-cyBhcHBhcmVudGx5IHRoZSBuZXh0IGJlc3QgdGhpbmcgYWZ0ZXIgc2xpY2VkIGJyZWFkLCBJCmlt
-cGxlbWVudGVkIHRoaXMgbm93LiBDb21pbmcgdG8gYSB0aGVhdHJlIG5lYXIgeW91IGFueSB0aW1l
-IHNvb24uCgo+IAo+PiArfQo+PiArCj4+IMKgIHN0cnVjdCBpcnFfZGVzYyAqdmdpY19nZXRfaHdf
-aXJxX2Rlc2Moc3RydWN0IGRvbWFpbiAqZCwgc3RydWN0IHZjcHUgKnYsCj4+IMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCB1bnNpZ25lZCBpbnQgdmlycSkKPj4gwqAgewo+Pgo+IAo+IENoZWVycywKPiAK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1829761460960072596==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="JMngEWmMcPHWStrIjEXor47fA6wpJJMRn"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--JMngEWmMcPHWStrIjEXor47fA6wpJJMRn
+Content-Type: multipart/mixed; boundary="2I3xzpHpxaU3zHZL2ruHtg5OjUjA6ry4H";
+ protected-headers="v1"
+From: Simon Gaiser <simon@invisiblethingslab.com>
+To: stable@vger.kernel.org
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Prarit Bhargava <prarit@redhat.com>, linux-kernel@vger.kernel.org,
+ Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+ "H. Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
+ Juergen Gross <jgross@suse.com>, Dou Liyang <douly.fnst@cn.fujitsu.com>,
+ Kate Stewart <kstewart@linuxfoundation.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Andy Lutomirski <luto@kernel.org>, Andi Kleen <ak@linux.intel.com>,
+ Vitaly Kuznetsov <vkuznets@redhat.com>, xen-devel@lists.xenproject.org
+Message-ID: <9a7c4dae-4758-5aca-b3af-2129b62719e2@invisiblethingslab.com>
+Subject: Re: [PATCH] x86/xen: Calculate __max_logical_packages on PV domains
+References: <20180207234923.13544-1-prarit@redhat.com>
+ <5607eaea-5cc3-31a4-9685-1d7dd147f564@oracle.com>
+In-Reply-To: <5607eaea-5cc3-31a4-9685-1d7dd147f564@oracle.com>
+
+--2I3xzpHpxaU3zHZL2ruHtg5OjUjA6ry4H
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Boris Ostrovsky:
+> On 02/07/2018 06:49 PM, Prarit Bhargava wrote:
+>> The kernel panics on PV domains because native_smp_cpus_done() is
+>> only called for HVM domains.
+>>
+>> Calculate __max_logical_packages for PV domains.
+>>
+>> Fixes: b4c0a7326f5d ("x86/smpboot: Fix __max_logical_packages estimate=
+")
+>> Signed-off-by: Prarit Bhargava <prarit@redhat.com>
+>> Tested-and-reported-by: Simon Gaiser <simon@invisiblethingslab.com>
+>> Cc: Thomas Gleixner <tglx@linutronix.de>
+>> Cc: Ingo Molnar <mingo@redhat.com>
+>> Cc: "H. Peter Anvin" <hpa@zytor.com>
+>> Cc: x86@kernel.org
+>> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+>> Cc: Juergen Gross <jgross@suse.com>
+>> Cc: Dou Liyang <douly.fnst@cn.fujitsu.com>
+>> Cc: Prarit Bhargava <prarit@redhat.com>
+>> Cc: Kate Stewart <kstewart@linuxfoundation.org>
+>> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+>> Cc: Andy Lutomirski <luto@kernel.org>
+>> Cc: Andi Kleen <ak@linux.intel.com>
+>> Cc: Vitaly Kuznetsov <vkuznets@redhat.com>
+>> Cc: xen-devel@lists.xenproject.org
+>=20
+>=20
+> Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+
+The fixed bug is in 4.15 so it should get into stable. It's
+63e708f826bb21470155d37b103a75d8a9e25b18 upstream.
+
+
+--2I3xzpHpxaU3zHZL2ruHtg5OjUjA6ry4H--
+
+--JMngEWmMcPHWStrIjEXor47fA6wpJJMRn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlqVkIoACgkQkO9xfO/x
+ly8mrA//VO8ImbrrDAH96dqEKxlkrZJR7d/c7BX5Wr7YYjRN/cRjCMJVTRpKAmjV
+95mk8Ra4S0U2zlKV/sG02q5Ni/lgmPtOcHJ9SerVXywDaREHX+xoNc8yM/y4DWbE
+uABPS8JFBhNfzCFSBqYjHeKrnPpniEdiZgl+YUZTRyx559gHU/wU0CH7II1IUvm9
+SEanahC4xjPhLkSh0bfITimB+Dg6xPnG91ELAvCOkkGyfakHOC51I6+yafmX97io
+ZvHjvTIOS1BeXQHVEWjs6s1P+F2v1pzl3ozvKCVDecK76WCd0RZWqMvOW9nXQkN3
+XXKzYXBb4ZwcN3dCSlsCnIc2TdAJ2u0B4EubAyVRBGqFKV19uRK+geBInBsSuD0c
+iE5aJkef4WnomDnGjQdpQZCYcpnwaG2qhLvdJ69jqw5Q6KdRKIQduCY5HGBR9s2Y
+iBUX6gvtKxuVh3zAVBG9Gxt7MNRg9aPeqXGc4r5t13FyhPtxJDUULsafUVFMqY20
+wmpry30hTOPveh//AWN88dS0gCuTCDFWTDqWfeVv8lnhm6+swEmDAHzamZv1EK1p
+2HLG4a88e5+0gILmki/FRZEyk/tGwydmuukKyD442tyH6URAk637Frv9qQQO3xJS
+5rWWL0j7JE942VQrLGtM93fQCnZdhrhX4rQQ8henRt1F2PjWyuA=
+=7b7d
+-----END PGP SIGNATURE-----
+
+--JMngEWmMcPHWStrIjEXor47fA6wpJJMRn--
+
+
+--===============1829761460960072596==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1829761460960072596==--
