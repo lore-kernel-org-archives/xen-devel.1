@@ -1,18 +1,19 @@
 From: "Jan Beulich" <JBeulich@suse.com>
 Subject: [PATCH v4 07/20] x86: move and rename XSTATE_*
-Date: Wed, 28 Feb 2018 06:00:51 -0700
-Message-ID: <5A96B61302000078001ACBC4@prv-mh.provo.novell.com>
-References: <5A96B3B902000078001ACB6D@prv-mh.provo.novell.com>
+Date: Wed, 28 Feb 2018 06:01:45 -0700
+Message-ID: <5A96B64902000078001ACBC7@prv-mh.provo.novell.com>
+References: <5A96A5E7020000B40353C18D@prv-mh.provo.novell.com>
+ <5A96B61302000078001ACBC4@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
  (envelope-from <srs0=ets7=fw=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1er1Ls-0001Y8-So
- for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 13:00:56 +0000
-In-Reply-To: <5A96B3B902000078001ACB6D@prv-mh.provo.novell.com>
+ id 1er1Mp-0001kU-RS
+ for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 13:01:55 +0000
+In-Reply-To: <5A96B61302000078001ACBC4@prv-mh.provo.novell.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,7 +24,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 U2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgotLS0KdjQ6IE5l
