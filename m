@@ -1,18 +1,19 @@
-From: Hans-Joachim Kliemeck <info@kliemeck.de>
-Subject: Re: PVH backports to 4.9 and 4.8
-Date: Wed, 28 Feb 2018 19:38:32 +0100
-Message-ID: <5f747731-2182-e485-7843-b35f2db13b23@kliemeck.de>
-References: <97dc0694-d27f-2e50-afd3-a4f7fc828f1d@kliemeck.de>
+From: Maran Wilson <maran.wilson@oracle.com>
+Subject: [RFC PATCH v4 6/7] xen/pvh: Add memory map pointer to
+	hvm_start_info struct
+Date: Wed, 28 Feb 2018 10:28:02 -0800
+Message-ID: <1519842483-8887-7-git-send-email-maran.wilson__11490.8589203425$1519843089$gmane$org@oracle.com>
+References: <1519842483-8887-1-git-send-email-maran.wilson@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6022059766711830251=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=hi5t=fw=kliemeck.de=info@srs-us1.protection.inumbo.net>)
- id 1er6cg-00032q-80
- for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 18:38:38 +0000
-In-Reply-To: <97dc0694-d27f-2e50-afd3-a4f7fc828f1d@kliemeck.de>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=nwrv=fw=oracle.com=maran.wilson@srs-us1.protection.inumbo.net>)
+ id 1er6dQ-00037S-Jd
+ for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 18:39:24 +0000
+In-Reply-To: <1519842483-8887-1-git-send-email-maran.wilson@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,156 +22,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: george.dunlap@citrix.com, xen-devel@lists.xenproject.org
+To: pbonzini@redhat.com, jgross@suse.com, boris.ostrovsky@oracle.com, roger.pau@citrix.com, andrew.cooper3@citrix.com, hch@infradead.org, JBeulich@suse.com, x86@kernel.org, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org
+Cc: thomas.lendacky@amd.com, maran.wilson@oracle.com, dave.hansen@linux.intel.com, rkrcmar@redhat.com, gregkh@linuxfoundation.org, mchehab@kernel.org, hpa@zytor.com, linus.walleij@linaro.org, mingo@redhat.com, rdunlap@infradead.org, luto@kernel.org, jpoimboe@redhat.com, tglx@linutronix.de, bp@suse.de, davem@davemloft.net, kirill.shutemov@linux.intel.com
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---===============6022059766711830251==
-Content-Type: multipart/alternative;
- boundary="------------10C50909858AA1C82D126020"
-Content-Language: en-US
-
-This is a multi-part message in MIME format.
---------------10C50909858AA1C82D126020
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-
-> George Dunlap:
->> /On 01/23/2018 04:06 AM, Simon Gaiser wrote:/
->> /> George Dunlap:/
->> />> Part of our solution to XSA-254 SP3 (aka "Meltdown") is to backport/
->> />> the PVH mode from 4.10 to 4.9 and 4.8. This will first allow people/
->> />> able to run PVH kernels to switch their PV guests directly to PVH/
->> />> guests; and second, eventually enable the backport of patches which/
->> />> will enable transparent changing of PV guests into PVH guests./
->> />>/
->> />> All of the hypervisor support seems to have existed already in 4.8, so/
->> />> the only backports involve toolstack patches./
->> />>/
->> />> I've put up two trees for a first-cut backport of the PVH/
->> />> functionality, to 4.9 and 4.8 here:/
->> />>/
->> />> git://xenbits.xen.org/people/gdunlap/xen.git/
->> />>/
->> />> Branches out/pvh-backport/4.8/v1 and out/pvh-backport/4.9/v1/
->> />>/
->> />> Below are the patches backported from 4.10 to 4.9 (23 patches total):/
->> /> [...]/
->> />/
->> /> So future 4.8 releases will include the backports, right? Asking because/
->> /> the AFAICS the 4.8.3-pre-shim-comet branch include them but staging-4.8/
->> /> does not./
->> //
->> /Some of us have had informal conversations about backporting PVH and/
->> /Comet host/toolstack patches to 4.8, and a number of us think it's a/
->> /good idea, but we haven't had an official discussion with all the/
->> /stakeholders yet. We'll come back to it once more of the fires have/
->> /been put out./
->> //
->> /Feel free to remind us in a month or so if you still haven't seen any/
->> /patches in the stable-4.8 branch. :-)/
-> Ok, thank you for the quick reply. In Qubes we are using PVH with 4.8
-> using the old device_model_version=none config option. And changing this
-> would be much easier before release (So the change should be in our rc
-> now). Anyway if it's not decided yet, we will have to guess what ends up
-> in future 4.8.z releases.
->
->
-
-Hi,
-
-is there an update for the backports for 4.8 and 4.9? Or is there some
-documentation available to see which parts are missing on 4.9 vs 4.10
-(or 4.8 vs 4.10) to get PVH running (device_model_version=none, ...)?
-
-Best Regards
-Hajo
-
---------------10C50909858AA1C82D126020
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <br>
-    <blockquote type="cite"
-      cite="mid:97dc0694-d27f-2e50-afd3-a4f7fc828f1d@kliemeck.de">
-      <pre wrap="">George Dunlap:
-</pre>
-      <blockquote type="cite">
-        <pre wrap="">/On 01/23/2018 04:06 AM, Simon Gaiser wrote:/
-/&gt; George Dunlap:/
-/&gt;&gt; Part of our solution to XSA-254 SP3 (aka "Meltdown") is to backport/
-/&gt;&gt; the PVH mode from 4.10 to 4.9 and 4.8. This will first allow people/
-/&gt;&gt; able to run PVH kernels to switch their PV guests directly to PVH/
-/&gt;&gt; guests; and second, eventually enable the backport of patches which/
-/&gt;&gt; will enable transparent changing of PV guests into PVH guests./
-/&gt;&gt;/
-/&gt;&gt; All of the hypervisor support seems to have existed already in 4.8, so/
-/&gt;&gt; the only backports involve toolstack patches./
-/&gt;&gt;/
-/&gt;&gt; I've put up two trees for a first-cut backport of the PVH/
-/&gt;&gt; functionality, to 4.9 and 4.8 here:/
-/&gt;&gt;/
-/&gt;&gt; git://xenbits.xen.org/people/gdunlap/xen.git/
-/&gt;&gt;/
-/&gt;&gt; Branches out/pvh-backport/4.8/v1 and out/pvh-backport/4.9/v1/
-/&gt;&gt;/
-/&gt;&gt; Below are the patches backported from 4.10 to 4.9 (23 patches total):/
-/&gt; [...]/
-/&gt;/
-/&gt; So future 4.8 releases will include the backports, right? Asking because/
-/&gt; the AFAICS the 4.8.3-pre-shim-comet branch include them but staging-4.8/
-/&gt; does not./
-//
-/Some of us have had informal conversations about backporting PVH and/
-/Comet host/toolstack patches to 4.8, and a number of us think it's a/
-/good idea, but we haven't had an official discussion with all the/
-/stakeholders yet. We'll come back to it once more of the fires have/
-/been put out./
-//
-/Feel free to remind us in a month or so if you still haven't seen any/
-/patches in the stable-4.8 branch. :-)/
-</pre>
-      </blockquote>
-      <pre wrap="">
-Ok, thank you for the quick reply. In Qubes we are using PVH with 4.8
-using the old device_model_version=none config option. And changing this
-would be much easier before release (So the change should be in our rc
-now). Anyway if it's not decided yet, we will have to guess what ends up
-in future 4.8.z releases.
-
-
-</pre>
-    </blockquote>
-    <br>
-    Hi,<br>
-    <br>
-    is there an update for the backports for 4.8 and 4.9? Or is there
-    some documentation available to see which parts are missing on 4.9
-    vs 4.10 (or 4.8 vs 4.10) to get PVH running
-    (device_model_version=none, ...)?<br>
-    <br>
-    Best Regards<br>
-    Hajo
-  </body>
-</html>
-
---------------10C50909858AA1C82D126020--
-
-
---===============6022059766711830251==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6022059766711830251==--
+VGhlIHN0YXJ0IGluZm8gc3RydWN0dXJlIHRoYXQgaXMgZGVmaW5lZCBhcyBwYXJ0IG9mIHRoZSB4
+ODYvSFZNIGRpcmVjdCBib290CkFCSSBhbmQgdXNlZCBmb3Igc3RhcnRpbmcgWGVuIFBWSCBndWVz
+dHMgd291bGQgYmUgbW9yZSB2ZXJzYXRpbGUgaWYgaXQgYWxzbwppbmNsdWRlZCBhIHdheSB0byBw
+YXNzIGluZm9ybWF0aW9uIGFib3V0IHRoZSBtZW1vcnkgbWFwIHRvIHRoZSBndWVzdC4gVGhpcwp3
+b3VsZCBhbGxvdyBLVk0gZ3Vlc3RzIHRvIHNoYXJlIHRoZSBzYW1lIGVudHJ5IHBvaW50LgoKU2ln
+bmVkLW9mZi1ieTogTWFyYW4gV2lsc29uIDxtYXJhbi53aWxzb25Ab3JhY2xlLmNvbT4KLS0tCiBp
+bmNsdWRlL3hlbi9pbnRlcmZhY2UvaHZtL3N0YXJ0X2luZm8uaCB8IDUwICsrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKy0KIDEgZmlsZSBjaGFuZ2VkLCA0OSBpbnNlcnRpb25zKCspLCAx
+IGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvaW5jbHVkZS94ZW4vaW50ZXJmYWNlL2h2bS9zdGFy
+dF9pbmZvLmggYi9pbmNsdWRlL3hlbi9pbnRlcmZhY2UvaHZtL3N0YXJ0X2luZm8uaAppbmRleCA2
+NDg0MTU5NzZlYWQuLjgwY2ZiZDM1YzFhZiAxMDA2NDQKLS0tIGEvaW5jbHVkZS94ZW4vaW50ZXJm
+YWNlL2h2bS9zdGFydF9pbmZvLmgKKysrIGIvaW5jbHVkZS94ZW4vaW50ZXJmYWNlL2h2bS9zdGFy
+dF9pbmZvLmgKQEAgLTMzLDcgKzMzLDcgQEAKICAqICAgIHwgbWFnaWMgICAgICAgICAgfCBDb250
+YWlucyB0aGUgbWFnaWMgdmFsdWUgWEVOX0hWTV9TVEFSVF9NQUdJQ19WQUxVRQogICogICAgfCAg
+ICAgICAgICAgICAgICB8ICgieEVuMyIgd2l0aCB0aGUgMHg4MCBiaXQgb2YgdGhlICJFIiBzZXQp
+LgogICogIDQgKy0tLS0tLS0tLS0tLS0tLS0rCi0gKiAgICB8IHZlcnNpb24gICAgICAgIHwgVmVy
+c2lvbiBvZiB0aGlzIHN0cnVjdHVyZS4gQ3VycmVudCB2ZXJzaW9uIGlzIDAuIE5ldworICogICAg
+fCB2ZXJzaW9uICAgICAgICB8IFZlcnNpb24gb2YgdGhpcyBzdHJ1Y3R1cmUuIEN1cnJlbnQgdmVy
+c2lvbiBpcyAxLiBOZXcKICAqICAgIHwgICAgICAgICAgICAgICAgfCB2ZXJzaW9ucyBhcmUgZ3Vh
+cmFudGVlZCB0byBiZSBiYWNrd2FyZHMtY29tcGF0aWJsZS4KICAqICA4ICstLS0tLS0tLS0tLS0t
+LS0tKwogICogICAgfCBmbGFncyAgICAgICAgICB8IFNJRl94eHggZmxhZ3MuCkBAIC00OCw2ICs0
+OCwxNSBAQAogICogMzIgKy0tLS0tLS0tLS0tLS0tLS0rCiAgKiAgICB8IHJzZHBfcGFkZHIgICAg
+IHwgUGh5c2ljYWwgYWRkcmVzcyBvZiB0aGUgUlNEUCBBQ1BJIGRhdGEgc3RydWN0dXJlLgogICog
+NDAgKy0tLS0tLS0tLS0tLS0tLS0rCisgKiAgICB8IG1lbW1hcF9wYWRkciAgIHwgUGh5c2ljYWwg
+YWRkcmVzcyBvZiB0aGUgKG9wdGlvbmFsKSBtZW1vcnkgbWFwLiBPbmx5CisgKiAgICB8ICAgICAg
+ICAgICAgICAgIHwgcHJlc2VudCBpbiB2ZXJzaW9uIDEgYW5kIG5ld2VyIG9mIHRoZSBzdHJ1Y3R1
+cmUuCisgKiA0OCArLS0tLS0tLS0tLS0tLS0tLSsKKyAqICAgIHwgbWVtbWFwX2VudHJpZXMgfCBO
+dW1iZXIgb2YgZW50cmllcyBpbiB0aGUgbWVtb3J5IG1hcCB0YWJsZS4gT25seQorICogICAgfCAg
+ICAgICAgICAgICAgICB8IHByZXNlbnQgaW4gdmVyc2lvbiAxIGFuZCBuZXdlciBvZiB0aGUgc3Ry
+dWN0dXJlLgorICogICAgfCAgICAgICAgICAgICAgICB8IFplcm8gaWYgdGhlcmUgaXMgbm8gbWVt
+b3J5IG1hcCBiZWluZyBwcm92aWRlZC4KKyAqIDUyICstLS0tLS0tLS0tLS0tLS0tKworICogICAg
+fCByZXNlcnZlZCAgICAgICB8IFZlcnNpb24gMSBhbmQgbmV3ZXIgb25seS4KKyAqIDU2ICstLS0t
+LS0tLS0tLS0tLS0tKwogICoKICAqIFRoZSBsYXlvdXQgb2YgZWFjaCBlbnRyeSBpbiB0aGUgbW9k
+dWxlIHN0cnVjdHVyZSBpcyB0aGUgZm9sbG93aW5nOgogICoKQEAgLTYyLDEwICs3MSwzNCBAQAog
+ICogICAgfCByZXNlcnZlZCAgICAgICB8CiAgKiAzMiArLS0tLS0tLS0tLS0tLS0tLSsKICAqCisg
+KiBUaGUgbGF5b3V0IG9mIGVhY2ggZW50cnkgaW4gdGhlIG1lbW9yeSBtYXAgdGFibGUgaXMgYXMg
+Zm9sbG93czoKKyAqCisgKiAgMCArLS0tLS0tLS0tLS0tLS0tLSsKKyAqICAgIHwgYWRkciAgICAg
+ICAgICAgfCBCYXNlIGFkZHJlc3MKKyAqICA4ICstLS0tLS0tLS0tLS0tLS0tKworICogICAgfCBz
+aXplICAgICAgICAgICB8IFNpemUgb2YgbWFwcGluZyBpbiBieXRlcworICogMTYgKy0tLS0tLS0t
+LS0tLS0tLS0rCisgKiAgICB8IHR5cGUgICAgICAgICAgIHwgVHlwZSBvZiBtYXBwaW5nIGFzIGRl
+ZmluZWQgYmV0d2VlbiB0aGUgaHlwZXJ2aXNvcgorICogICAgfCAgICAgICAgICAgICAgICB8IGFu
+ZCBndWVzdCBpdCdzIHN0YXJ0aW5nLiBFODIwX1RZUEVfeHh4LCBmb3IgZXhhbXBsZS4KKyAqIDIw
+ICstLS0tLS0tLS0tLS0tLS0tfAorICogICAgfCByZXNlcnZlZCAgICAgICB8CisgKiAyNCArLS0t
+LS0tLS0tLS0tLS0tLSsKKyAqCiAgKiBUaGUgYWRkcmVzcyBhbmQgc2l6ZXMgYXJlIGFsd2F5cyBh
+IDY0Yml0IGxpdHRsZSBlbmRpYW4gdW5zaWduZWQgaW50ZWdlci4KICAqCiAgKiBOQjogWGVuIG9u
+IHg4NiB3aWxsIGFsd2F5cyB0cnkgdG8gcGxhY2UgYWxsIHRoZSBkYXRhIGJlbG93IHRoZSA0R2lC
+CiAgKiBib3VuZGFyeS4KKyAqCisgKiBWZXJzaW9uIG51bWJlcnMgb2YgdGhlIGh2bV9zdGFydF9p
+bmZvIHN0cnVjdHVyZSBoYXZlIGV2b2x2ZWQgbGlrZSB0aGlzOgorICoKKyAqIFZlcnNpb24gMDoK
+KyAqCisgKiBWZXJzaW9uIDE6CUFkZGVkIHRoZSBtZW1tYXBfcGFkZHIvbWVtbWFwX2VudHJpZXMg
+ZmllbGRzIChwbHVzIDQgYnl0ZXMgb2YKKyAqCQlwYWRkaW5nKSB0byB0aGUgZW5kIG9mIHRoZSBo
+dm1fc3RhcnRfaW5mbyBzdHJ1Y3QuIFRoZXNlIG5ldworICoJCWZpZWxkcyBjYW4gYmUgdXNlZCB0
+byBwYXNzIGEgbWVtb3J5IG1hcCB0byB0aGUgZ3Vlc3QuIFRoZQorICoJCW1lbW9yeSBtYXAgaXMg
+b3B0aW9uYWwgYW5kIHNvIGd1ZXN0cyB0aGF0IHVuZGVyc3RhbmQgdmVyc2lvbiAxCisgKgkJb2Yg
+dGhlIHN0cnVjdHVyZSBtdXN0IGNoZWNrIHRoYXQgbWVtbWFwX2VudHJpZXMgaXMgbm9uLXplcm8K
+KyAqCQliZWZvcmUgdHJ5aW5nIHRvIHJlYWQgdGhlIG1lbW9yeSBtYXAuCiAgKi8KICNkZWZpbmUg
+WEVOX0hWTV9TVEFSVF9NQUdJQ19WQUxVRSAweDMzNmVjNTc4CiAKQEAgLTg2LDYgKzExOSwxNCBA
+QCBzdHJ1Y3QgaHZtX3N0YXJ0X2luZm8gewogICAgIHVpbnQ2NF90IGNtZGxpbmVfcGFkZHI7ICAg
+ICAvKiBQaHlzaWNhbCBhZGRyZXNzIG9mIHRoZSBjb21tYW5kIGxpbmUuICAgICAqLwogICAgIHVp
+bnQ2NF90IHJzZHBfcGFkZHI7ICAgICAgICAvKiBQaHlzaWNhbCBhZGRyZXNzIG9mIHRoZSBSU0RQ
+IEFDUEkgZGF0YSAgICAqLwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvKiBzdHJ1
+Y3R1cmUuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAqLworICAgIHVpbnQ2NF90IG1l
+bW1hcF9wYWRkcjsJLyogUGh5c2ljYWwgYWRkcmVzcyBvZiBhbiBhcnJheSBvZiAgICAgICAgICAg
+Ki8KKwkJCQkvKiBodm1fbWVtbWFwX3RhYmxlX2VudHJ5LiBPbmx5IHByZXNlbnQgaW4gICAqLwor
+CQkJCS8qIHZlcnNpb24gMSBhbmQgbmV3ZXIgb2YgdGhlIHN0cnVjdHVyZSAgICAgICovCisgICAg
+dWludDMyX3QgbWVtbWFwX2VudHJpZXM7CS8qIE51bWJlciBvZiBlbnRyaWVzIGluIHRoZSBtZW1t
+YXAgdGFibGUuICAgICovCisJCQkJLyogT25seSBwcmVzZW50IGluIHZlcnNpb24gMSBhbmQgbmV3
+ZXIgb2YgICAgKi8KKwkJCQkvKiB0aGUgc3RydWN0dXJlLiBWYWx1ZSB3aWxsIGJlIHplcm8gaWYg
+ICAgICAqLworCQkJCS8qIHRoZXJlIGlzIG5vIG1lbW9yeSBtYXAgYmVpbmcgcHJvdmlkZWQuICAg
+ICovCisgICAgdWludDMyX3QgcmVzZXJ2ZWQ7CiB9OwogCiBzdHJ1Y3QgaHZtX21vZGxpc3RfZW50
+cnkgewpAQCAtOTUsNCArMTM2LDExIEBAIHN0cnVjdCBodm1fbW9kbGlzdF9lbnRyeSB7CiAgICAg
+dWludDY0X3QgcmVzZXJ2ZWQ7CiB9OwogCitzdHJ1Y3QgaHZtX21lbW1hcF90YWJsZV9lbnRyeSB7
+CisgICAgdWludDY0X3QgYWRkcjsJCS8qIEJhc2UgYWRkcmVzcyBvZiB0aGUgbWVtb3J5IHJlZ2lv
+biAgICAgICAgICovCisgICAgdWludDY0X3Qgc2l6ZTsJCS8qIFNpemUgb2YgdGhlIG1lbW9yeSBy
+ZWdpb24gaW4gYnl0ZXMgICAgICAgICovCisgICAgdWludDMyX3QgdHlwZTsJCS8qIE1hcHBpbmcg
+dHlwZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICovCisgICAgdWludDMyX3QgcmVzZXJ2
+ZWQ7Cit9OworCiAjZW5kaWYgLyogX19YRU5fUFVCTElDX0FSQ0hfWDg2X0hWTV9TVEFSVF9JTkZP
+X0hfXyAqLwotLSAKMi4xNi4xCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
