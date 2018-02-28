@@ -1,15 +1,16 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v3 07/17] xen/arm: smccc: Add macros
- SMCCC_VERSION, SMCCC_VERSION_{MINOR, MAJOR}
-Date: Mon, 19 Feb 2018 16:36:47 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1802191636400.19448@sstabellini-ThinkPad-X260>
-References: <20180215150248.28922-1-julien.grall@arm.com>
- <20180215150248.28922-8-julien.grall@arm.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 120106: regressions -
+	trouble: blocked/broken/pass
+Date: Wed, 28 Feb 2018 23:56:38 +0000
+Message-ID: <osstest-120106-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7334836362084935037=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180215150248.28922-8-julien.grall@arm.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=zfhr=fw=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1erBae-0000to-Cq
+ for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 23:56:52 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,43 +19,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: sstabellini@kernel.org, volodymyr_babchuk@epam.com, andre.przywara@linaro.org, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCAxNSBGZWIgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEFkZCBtYWNyb3MgU01D
-Q0NfVkVSU0lPTiwgU01DQ0NfVkVSU0lPTl97TUlOT1IsIE1BSk9SfSB0byBlYXNpbHkgY29udmVy
-dAo+IGJldHdlZW4gYSAzMi1iaXQgdmFsdWUgYW5kIGEgdmVyc2lvbiBudW1iZXIuIFRoZSBlbmNv
-ZGluZyBpcyBiYXNlZCBvbgo+IDIuMi4yIGluICJGaXJtd2FyZSBpbnRlcmZhY2VzIGZvciBtaXRp
-Z2F0aW9uIENWRS0yMDE3LTU3MTUiIChBUk0gREVOIDAwNzBBKS4KPiAKPiBBbHNvIHJlLXVzZSB0
-aGVtIHRvIGRlZmluZSBBUk1fU01DQ0NfVkVSU0lPTl8xXzAgYW5kIEFSTV9TTUNDQ19WRVJTSU9O
-XzFfMS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0u
-Y29tPgo+IFJldmlld2VkLWJ5OiBWb2xvZHlteXIgQmFiY2h1ayA8dm9sb2R5bXlyX2JhYmNodWtA
-ZXBhbS5jb20+CgpBY2tlZC1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJu
-ZWwub3JnPgoKCj4gLS0tCj4gICAgIENoYW5nZXMgaW4gdjM6Cj4gICAgICAgICAtIEFkZCBWb2xv
-ZHlteXIncyByZXZpZXdlZC1ieQo+IAo+ICAgICBDaGFuZ2VzIGluIHYyOgo+ICAgICAgICAgLSBQ
-YXRjaCBhZGRlZAo+IC0tLQo+ICB4ZW4vaW5jbHVkZS9hc20tYXJtL3NtY2NjLmggfCAxNiArKysr
-KysrKysrKysrKy0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAxNCBpbnNlcnRpb25zKCspLCAyIGRlbGV0
-aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20tYXJtL3NtY2NjLmggYi94
-ZW4vaW5jbHVkZS9hc20tYXJtL3NtY2NjLmgKPiBpbmRleCAzMDIwOGQxMmNhLi5kMDI0MGQ2NGJm
-IDEwMDY0NAo+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vc21jY2MuaAo+ICsrKyBiL3hlbi9p
-bmNsdWRlL2FzbS1hcm0vc21jY2MuaAo+IEBAIC0xNiw4ICsxNiwyMCBAQAo+ICAjaWZuZGVmIF9f
-QVNNX0FSTV9TTUNDQ19IX18KPiAgI2RlZmluZSBfX0FTTV9BUk1fU01DQ0NfSF9fCj4gIAo+IC0j
-ZGVmaW5lIEFSTV9TTUNDQ19WRVJTSU9OXzFfMCAgIDB4MTAwMDAKPiAtI2RlZmluZSBBUk1fU01D
-Q0NfVkVSU0lPTl8xXzEgICAweDEwMDAxCj4gKyNkZWZpbmUgU01DQ0NfVkVSU0lPTl9NQUpPUl9T
-SElGVCAgICAgICAgICAgIDE2Cj4gKyNkZWZpbmUgU01DQ0NfVkVSU0lPTl9NSU5PUl9NQVNLICAg
-ICAgICAgICAgIFwKPiArICAgICAgICAoKDFVIDw8IFNNQ0NDX1ZFUlNJT05fTUFKT1JfU0hJRlQp
-IC0gMSkKPiArI2RlZmluZSBTTUNDQ19WRVJTSU9OX01BSk9SX01BU0sgICAgICAgICAgICAgflNN
-Q0NDX1ZFUlNJT05fTUlOT1JfTUFTSwo+ICsjZGVmaW5lIFNNQ0NDX1ZFUlNJT05fTUFKT1IodmVy
-KSAgICAgICAgICAgICBcCj4gKyAgICAgICAgKCgodmVyKSAmIFNNQ0NDX1ZFUlNJT05fTUFKT1Jf
-TUFTSykgPj4gU01DQ0NfVkVSU0lPTl9NQUpPUl9TSElGVCkKPiArI2RlZmluZSBTTUNDQ19WRVJT
-SU9OX01JTk9SKHZlcikgICAgICAgICAgICAgXAo+ICsgICAgICAgICgodmVyKSAmIFNNQ0NDX1ZF
-UlNJT05fTUlOT1JfTUFTSykKPiArCj4gKyNkZWZpbmUgU01DQ0NfVkVSU0lPTihtYWpvciwgbWlu
-b3IpICAgICAgICAgIFwKPiArICAgICgoKG1ham9yKSA8PCBTTUNDQ19WRVJTSU9OX01BSk9SX1NI
-SUZUKSB8IChtaW5vcikpCj4gKwo+ICsjZGVmaW5lIEFSTV9TTUNDQ19WRVJTSU9OXzFfMCAgIFNN
-Q0NDX1ZFUlNJT04oMSwgMCkKPiArI2RlZmluZSBBUk1fU01DQ0NfVkVSU0lPTl8xXzEgICBTTUND
-Q19WRVJTSU9OKDEsIDEpCj4gIAo+ICAvKgo+ICAgKiBUaGlzIGZpbGUgcHJvdmlkZXMgY29tbW9u
-IGRlZmluZXMgZm9yIEFSTSBTTUMgQ2FsbGluZyBDb252ZW50aW9uIGFzCj4gLS0gCj4gMi4xMS4w
-Cj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7334836362084935037==
+Content-Type: text/plain
+
+flight 120106 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/120106/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-armhf                     <job status>                 broken
+ build-armhf                   5 host-build-prep          fail REGR. vs. 120098
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  85688075ccc22c12bd0fca2a2c269199938e104c
+baseline version:
+ xen                  cb671efbf1fae302c0ee5ebd6e23564e319babc8
+
+Last test of basis   120098  2018-02-28 16:01:46 Z    0 days
+Testing same since   120102  2018-02-28 19:01:39 Z    0 days    2 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Razvan Cojocaru <rcojocaru@bitdefender.com>
+  Tamas K Lengyel <tamas@tklengyel.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  broken  
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job build-armhf broken
+
+Not pushing.
+
+------------------------------------------------------------
+commit 85688075ccc22c12bd0fca2a2c269199938e104c
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Wed Feb 21 18:10:00 2018 +0000
+
+    x86/hvm: Constify the read side of vlapic handling
+    
+    This is in preparation to make hvm_x2apic_msr_read() take a const vcpu
+    pointer.  One modification is to alter vlapic_get_tmcct() to not use current.
+    
+    This in turn needs an alteration to hvm_get_guest_time_fixed(), which is safe
+    because the only mutable action it makes is to take the domain plt lock.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 62e80dff59c779cb56755b419120529e3d7eb17d
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Mon Feb 26 14:23:03 2018 +0000
+
+    x86/vmx: Simplfy the default cases in vmx_msr_{read,write}_intercept()
+    
+    The default case of vmx_msr_write_intercept() in particular is very tangled.
+    
+    First of all, fold long_mode_do_msr_{read,write}() into their callers.  These
+    functions were split out in the past because of the 32bit build of Xen, but it
+    is unclear why the cases weren't simply #ifdef'd in place.
+    
+    Next, invert the vmx_write_guest_msr()/is_last_branch_msr() logic to break if
+    the condition is satisfied, rather than nesting if it wasn't.  This allows the
+    wrmsr_hypervisor_regs() call to be un-nested with respect to the other default
+    logic.
+    
+    No practical difference from a guests point of view.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Kevin Tian <kevin.tian@intel.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+
+commit b68c4f1ebe4f413076c4915733a61c818b7dc73a
+Author: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Date:   Wed Feb 28 12:38:15 2018 +0200
+
+    x86/hvm: fix domain crash when CR3 has the noflush bit set
+    
+    In hardware, when PCID support is enabled and the NOFLUSH bit is set
+    when writing a CR3 value, the hardware will clear that that bit and
+    change the CR3 without flushing the TLB. hvm_set_cr3(), however, was
+    ignoring this bit; the result was that post-vm_event checks detected
+    an invalid CR3 value and crashed the domain.
+    
+    Handle NOFLUSH in hvm_set_cr3() by:
+    1. Clearing the bit
+    2. Passing a "noflush" flag to lower-level cr3 setting functions to
+    indicate that a flush should not be performed.
+    
+    Also clear X86_CR3_NOFLUSH when reporting CR3 monitored CR3 writes.
+    
+    This allows introspection to be used on VMs whose operating system uses
+    the NOFLUSH bit.
+    
+    Signed-off-by: Razvan Cojocaru <rcojocaru@bitdefender.com>
+    Reported-by: Bitweasil <bitweasil@cryptohaze.com>
+    Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Kevin Tian <kevin.tian@intel.com>
+    Acked-by: George Dunlap <george.dunlap@citrix.com>
+    Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+(qemu changes not included)
+
+
+--===============7334836362084935037==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7334836362084935037==--
