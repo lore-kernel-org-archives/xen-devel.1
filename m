@@ -1,19 +1,18 @@
-From: Maran Wilson <maran.wilson@oracle.com>
-Subject: [RFC PATCH v4 7/7] KVM: x86: Allow Qemu/KVM to use PVH
-	entry point
-Date: Wed, 28 Feb 2018 10:28:03 -0800
-Message-ID: <1519842483-8887-8-git-send-email-maran.wilson__25086.8618175902$1519842597$gmane$org@oracle.com>
-References: <1519842483-8887-1-git-send-email-maran.wilson@oracle.com>
+From: Hans-Joachim Kliemeck <info@kliemeck.de>
+Subject: Re: PVH backports to 4.9 and 4.8
+Date: Wed, 28 Feb 2018 19:38:32 +0100
+Message-ID: <5f747731-2182-e485-7843-b35f2db13b23@kliemeck.de>
+References: <97dc0694-d27f-2e50-afd3-a4f7fc828f1d@kliemeck.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6022059766711830251=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=nwrv=fw=oracle.com=maran.wilson@srs-us1.protection.inumbo.net>)
- id 1er6VS-0002Y8-MA
- for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 18:31:10 +0000
-In-Reply-To: <1519842483-8887-1-git-send-email-maran.wilson@oracle.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=hi5t=fw=kliemeck.de=info@srs-us1.protection.inumbo.net>)
+ id 1er6cg-00032q-80
+ for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 18:38:38 +0000
+In-Reply-To: <97dc0694-d27f-2e50-afd3-a4f7fc828f1d@kliemeck.de>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,76 +21,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: pbonzini@redhat.com, jgross@suse.com, boris.ostrovsky@oracle.com, roger.pau@citrix.com, andrew.cooper3@citrix.com, hch@infradead.org, JBeulich@suse.com, x86@kernel.org, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org
-Cc: thomas.lendacky@amd.com, maran.wilson@oracle.com, dave.hansen@linux.intel.com, rkrcmar@redhat.com, gregkh@linuxfoundation.org, mchehab@kernel.org, hpa@zytor.com, linus.walleij@linaro.org, mingo@redhat.com, rdunlap@infradead.org, luto@kernel.org, jpoimboe@redhat.com, tglx@linutronix.de, bp@suse.de, davem@davemloft.net, kirill.shutemov@linux.intel.com
+To: george.dunlap@citrix.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Rm9yIGNlcnRhaW4gYXBwbGljYXRpb25zIGl0IGlzIGRlc2lyYWJsZSB0byByYXBpZGx5IGJvb3Qg
-YSBLVk0gdmlydHVhbAptYWNoaW5lLiBJbiBjYXNlcyB3aGVyZSBsZWdhY3kgaGFyZHdhcmUgYW5k
-IHNvZnR3YXJlIHN1cHBvcnQgd2l0aGluIHRoZQpndWVzdCBpcyBub3QgbmVlZGVkLCBRZW11IHNo
-b3VsZCBiZSBhYmxlIHRvIGJvb3QgZGlyZWN0bHkgaW50byB0aGUKdW5jb21wcmVzc2VkIExpbnV4
-IGtlcm5lbCBiaW5hcnkgd2l0aG91dCB0aGUgbmVlZCB0byBydW4gZmlybXdhcmUuCgpUaGVyZSBh
-bHJlYWR5IGV4aXN0cyBhbiBBQkkgdG8gYWxsb3cgdGhpcyBmb3IgWGVuIFBWSCBndWVzdHMgYW5k
-IHRoZSBBQkkKaXMgc3VwcG9ydGVkIGJ5IExpbnV4IGFuZCBGcmVlQlNEOgoKICAgaHR0cHM6Ly94
-ZW5iaXRzLnhlbi5vcmcvZG9jcy91bnN0YWJsZS9taXNjL3B2aC5odG1sCgpUaGlzIHBhdGNoIGVu
-YWJsZXMgUWVtdSB0byB1c2UgdGhhdCBzYW1lIGVudHJ5IHBvaW50IGZvciBib290aW5nIEtWTQpn
-dWVzdHMuCgpTaWduZWQtb2ZmLWJ5OiBNYXJhbiBXaWxzb24gPG1hcmFuLndpbHNvbkBvcmFjbGUu
-Y29tPgotLS0KIGFyY2gveDg2L0tidWlsZCB8ICA0ICsrLS0KIGFyY2gveDg2L3B2aC5jICB8IDQz
-ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0KIDIgZmlsZXMgY2hh
-bmdlZCwgMzQgaW5zZXJ0aW9ucygrKSwgMTMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvYXJj
-aC94ODYvS2J1aWxkIGIvYXJjaC94ODYvS2J1aWxkCmluZGV4IGE0ZTVlM2QzNDhkYy4uZTlkYzBm
-MWM5ZDMyIDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9LYnVpbGQKKysrIGIvYXJjaC94ODYvS2J1aWxk
-CkBAIC03LDggKzcsOCBAQCBvYmotJChDT05GSUdfS1ZNKSArPSBrdm0vCiAjIFhlbiBwYXJhdmly
-dHVhbGl6YXRpb24gc3VwcG9ydAogb2JqLSQoQ09ORklHX1hFTikgKz0geGVuLwogCi1vYmotJChD
-T05GSUdfWEVOX1BWSCkgKz0gcHZoLm8KLW9iai0kKENPTkZJR19YRU5fUFZIKSArPSBwdmgtaGVh
-ZC5vCitvYmotJChDT05GSUdfUFZIKSArPSBwdmgubworb2JqLSQoQ09ORklHX1BWSCkgKz0gcHZo
-LWhlYWQubwogCiAjIEh5cGVyLVYgcGFyYXZpcnR1YWxpemF0aW9uIHN1cHBvcnQKIG9iai0kKHN1
-YnN0IG0seSwkKENPTkZJR19IWVBFUlYpKSArPSBoeXBlcnYvCmRpZmYgLS1naXQgYS9hcmNoL3g4
-Ni9wdmguYyBiL2FyY2gveDg2L3B2aC5jCmluZGV4IDZlOWY2YTZlOTdiMy4uOTcwNDJkMTEzNDJm
-IDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9wdmguYworKysgYi9hcmNoL3g4Ni9wdmguYwpAQCAtNyw2
-ICs3LDkgQEAKICNpbmNsdWRlIDxhc20vaHlwZXJ2aXNvci5oPgogI2luY2x1ZGUgPGFzbS9lODIw
-L2FwaS5oPgogCisjaW5jbHVkZSA8YXNtL3hlbi9pbnRlcmZhY2UuaD4KKyNpbmNsdWRlIDxhc20v
-eGVuL2h5cGVyY2FsbC5oPgorCiAjaW5jbHVkZSA8eGVuL2ludGVyZmFjZS9tZW1vcnkuaD4KICNp
-bmNsdWRlIDx4ZW4vaW50ZXJmYWNlL2h2bS9zdGFydF9pbmZvLmg+CiAKQEAgLTM0LDExICszNywy
-OCBAQCB2b2lkIF9faW5pdCBfX3dlYWsgbWVtX21hcF92aWFfaGNhbGwoc3RydWN0IGJvb3RfcGFy
-YW1zICpwdHIgX19tYXliZV91bnVzZWQpCiAJQlVHKCk7CiB9CiAKLXN0YXRpYyB2b2lkIF9faW5p
-dCBpbml0X3B2aF9ib290cGFyYW1zKHZvaWQpCitzdGF0aWMgdm9pZCBfX2luaXQgaW5pdF9wdmhf
-Ym9vdHBhcmFtcyhib29sIHhlbl9ndWVzdCkKIHsKIAltZW1zZXQoJnB2aF9ib290cGFyYW1zLCAw
-LCBzaXplb2YocHZoX2Jvb3RwYXJhbXMpKTsKIAotCW1lbV9tYXBfdmlhX2hjYWxsKCZwdmhfYm9v
-dHBhcmFtcyk7CisJaWYgKChwdmhfc3RhcnRfaW5mby52ZXJzaW9uID4gMCkgJiYgKHB2aF9zdGFy
-dF9pbmZvLm1lbW1hcF9lbnRyaWVzKSkgeworCQlzdHJ1Y3QgaHZtX21lbW1hcF90YWJsZV9lbnRy
-eSAqZXA7CisJCWludCBpOworCisJCWVwID0gX192YShwdmhfc3RhcnRfaW5mby5tZW1tYXBfcGFk
-ZHIpOworCQlwdmhfYm9vdHBhcmFtcy5lODIwX2VudHJpZXMgPSBwdmhfc3RhcnRfaW5mby5tZW1t
-YXBfZW50cmllczsKKworCQlmb3IgKGkgPSAwOyBpIDwgcHZoX2Jvb3RwYXJhbXMuZTgyMF9lbnRy
-aWVzIDsgaSsrLCBlcCsrKSB7CisJCQlwdmhfYm9vdHBhcmFtcy5lODIwX3RhYmxlW2ldLmFkZHIg
-PSBlcC0+YWRkcjsKKwkJCXB2aF9ib290cGFyYW1zLmU4MjBfdGFibGVbaV0uc2l6ZSA9IGVwLT5z
-aXplOworCQkJcHZoX2Jvb3RwYXJhbXMuZTgyMF90YWJsZVtpXS50eXBlID0gZXAtPnR5cGU7CisJ
-CX0KKwl9IGVsc2UgaWYgKHhlbl9ndWVzdCkgeworCQltZW1fbWFwX3ZpYV9oY2FsbCgmcHZoX2Jv
-b3RwYXJhbXMpOworCX0gZWxzZSB7CisJCS8qIE5vbi14ZW4gZ3Vlc3RzIGFyZSBub3Qgc3VwcG9y
-dGVkIGJ5IHZlcnNpb24gMCAqLworCQlCVUcoKTsKKwl9CiAKIAlpZiAocHZoX2Jvb3RwYXJhbXMu
-ZTgyMF9lbnRyaWVzIDwgRTgyMF9NQVhfRU5UUklFU19aRVJPUEFHRSAtIDEpIHsKIAkJcHZoX2Jv
-b3RwYXJhbXMuZTgyMF90YWJsZVtwdmhfYm9vdHBhcmFtcy5lODIwX2VudHJpZXNdLmFkZHIgPQpA
-QCAtNjksNyArODksNyBAQCBzdGF0aWMgdm9pZCBfX2luaXQgaW5pdF9wdmhfYm9vdHBhcmFtcyh2
-b2lkKQogCSAqIGVudmlyb25tZW50IChpLmUuIGhhcmR3YXJlX3N1YmFyY2ggMCkuCiAJICovCiAJ
-cHZoX2Jvb3RwYXJhbXMuaGRyLnZlcnNpb24gPSAweDIxMjsKLQlwdmhfYm9vdHBhcmFtcy5oZHIu
-dHlwZV9vZl9sb2FkZXIgPSAoOSA8PCA0KSB8IDA7IC8qIFhlbiBsb2FkZXIgKi8KKwlwdmhfYm9v
-dHBhcmFtcy5oZHIudHlwZV9vZl9sb2FkZXIgPSAoKHhlbl9ndWVzdCA/IDB4OSA6IDB4YikgPDwg
-NCkgfCAwOwogfQogCiAvKgpAQCAtODIsMTMgKzEwMiwxMCBAQCB2b2lkIF9faW5pdCBfX3dlYWsg
-eGVuX3B2aF9pbml0KHZvaWQpCiAJQlVHKCk7CiB9CiAKLS8qCi0gKiBXaGVuIHdlIGFkZCBzdXBw
-b3J0IGZvciBvdGhlciBoeXBlcnZpc29ycyBsaWtlIFFlbXUvS1ZNLCB0aGlzIHJvdXRpbmUgY2Fu
-Ci0gKiBzZWxlY3RpdmVseSBpbnZva2UgdGhlIGFwcHJvcHJpYXRlIGluaXRpYWxpemF0aW9uIGJh
-c2VkIG9uIGd1ZXN0IHR5cGUuCi0gKi8KLXN0YXRpYyB2b2lkIGh5cGVydmlzb3Jfc3BlY2lmaWNf
-aW5pdCh2b2lkKQorc3RhdGljIHZvaWQgaHlwZXJ2aXNvcl9zcGVjaWZpY19pbml0KGJvb2wgeGVu
-X2d1ZXN0KQogewotCXhlbl9wdmhfaW5pdCgpOworCWlmICh4ZW5fZ3Vlc3QpCisJCXhlbl9wdmhf
-aW5pdCgpOwogfQogCiAvKgpAQCAtOTcsMTMgKzExNCwxNyBAQCBzdGF0aWMgdm9pZCBoeXBlcnZp
-c29yX3NwZWNpZmljX2luaXQodm9pZCkKICAqLwogdm9pZCBfX2luaXQgeGVuX3ByZXBhcmVfcHZo
-KHZvaWQpCiB7CisKKwl1MzIgbXNyID0geGVuX2NwdWlkX2Jhc2UoKTsKKwlib29sIHhlbl9ndWVz
-dCA9ICEhbXNyOworCiAJaWYgKHB2aF9zdGFydF9pbmZvLm1hZ2ljICE9IFhFTl9IVk1fU1RBUlRf
-TUFHSUNfVkFMVUUpIHsKIAkJeGVuX3Jhd19wcmludGsoIkVycm9yOiBVbmV4cGVjdGVkIG1hZ2lj
-IHZhbHVlICgweCUwOHgpXG4iLAogCQkJCXB2aF9zdGFydF9pbmZvLm1hZ2ljKTsKIAkJQlVHKCk7
-CiAJfQogCi0JaHlwZXJ2aXNvcl9zcGVjaWZpY19pbml0KCk7CisJaHlwZXJ2aXNvcl9zcGVjaWZp
-Y19pbml0KHhlbl9ndWVzdCk7CiAKLQlpbml0X3B2aF9ib290cGFyYW1zKCk7CisJaW5pdF9wdmhf
-Ym9vdHBhcmFtcyh4ZW5fZ3Vlc3QpOwogfQotLSAKMi4xNi4xCgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+This is a multi-part message in MIME format.
+--===============6022059766711830251==
+Content-Type: multipart/alternative;
+ boundary="------------10C50909858AA1C82D126020"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------10C50909858AA1C82D126020
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+
+> George Dunlap:
+>> /On 01/23/2018 04:06 AM, Simon Gaiser wrote:/
+>> /> George Dunlap:/
+>> />> Part of our solution to XSA-254 SP3 (aka "Meltdown") is to backport/
+>> />> the PVH mode from 4.10 to 4.9 and 4.8. This will first allow people/
+>> />> able to run PVH kernels to switch their PV guests directly to PVH/
+>> />> guests; and second, eventually enable the backport of patches which/
+>> />> will enable transparent changing of PV guests into PVH guests./
+>> />>/
+>> />> All of the hypervisor support seems to have existed already in 4.8, so/
+>> />> the only backports involve toolstack patches./
+>> />>/
+>> />> I've put up two trees for a first-cut backport of the PVH/
+>> />> functionality, to 4.9 and 4.8 here:/
+>> />>/
+>> />> git://xenbits.xen.org/people/gdunlap/xen.git/
+>> />>/
+>> />> Branches out/pvh-backport/4.8/v1 and out/pvh-backport/4.9/v1/
+>> />>/
+>> />> Below are the patches backported from 4.10 to 4.9 (23 patches total):/
+>> /> [...]/
+>> />/
+>> /> So future 4.8 releases will include the backports, right? Asking because/
+>> /> the AFAICS the 4.8.3-pre-shim-comet branch include them but staging-4.8/
+>> /> does not./
+>> //
+>> /Some of us have had informal conversations about backporting PVH and/
+>> /Comet host/toolstack patches to 4.8, and a number of us think it's a/
+>> /good idea, but we haven't had an official discussion with all the/
+>> /stakeholders yet. We'll come back to it once more of the fires have/
+>> /been put out./
+>> //
+>> /Feel free to remind us in a month or so if you still haven't seen any/
+>> /patches in the stable-4.8 branch. :-)/
+> Ok, thank you for the quick reply. In Qubes we are using PVH with 4.8
+> using the old device_model_version=none config option. And changing this
+> would be much easier before release (So the change should be in our rc
+> now). Anyway if it's not decided yet, we will have to guess what ends up
+> in future 4.8.z releases.
+>
+>
+
+Hi,
+
+is there an update for the backports for 4.8 and 4.9? Or is there some
+documentation available to see which parts are missing on 4.9 vs 4.10
+(or 4.8 vs 4.10) to get PVH running (device_model_version=none, ...)?
+
+Best Regards
+Hajo
+
+--------------10C50909858AA1C82D126020
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <br>
+    <blockquote type="cite"
+      cite="mid:97dc0694-d27f-2e50-afd3-a4f7fc828f1d@kliemeck.de">
+      <pre wrap="">George Dunlap:
+</pre>
+      <blockquote type="cite">
+        <pre wrap="">/On 01/23/2018 04:06 AM, Simon Gaiser wrote:/
+/&gt; George Dunlap:/
+/&gt;&gt; Part of our solution to XSA-254 SP3 (aka "Meltdown") is to backport/
+/&gt;&gt; the PVH mode from 4.10 to 4.9 and 4.8. This will first allow people/
+/&gt;&gt; able to run PVH kernels to switch their PV guests directly to PVH/
+/&gt;&gt; guests; and second, eventually enable the backport of patches which/
+/&gt;&gt; will enable transparent changing of PV guests into PVH guests./
+/&gt;&gt;/
+/&gt;&gt; All of the hypervisor support seems to have existed already in 4.8, so/
+/&gt;&gt; the only backports involve toolstack patches./
+/&gt;&gt;/
+/&gt;&gt; I've put up two trees for a first-cut backport of the PVH/
+/&gt;&gt; functionality, to 4.9 and 4.8 here:/
+/&gt;&gt;/
+/&gt;&gt; git://xenbits.xen.org/people/gdunlap/xen.git/
+/&gt;&gt;/
+/&gt;&gt; Branches out/pvh-backport/4.8/v1 and out/pvh-backport/4.9/v1/
+/&gt;&gt;/
+/&gt;&gt; Below are the patches backported from 4.10 to 4.9 (23 patches total):/
+/&gt; [...]/
+/&gt;/
+/&gt; So future 4.8 releases will include the backports, right? Asking because/
+/&gt; the AFAICS the 4.8.3-pre-shim-comet branch include them but staging-4.8/
+/&gt; does not./
+//
+/Some of us have had informal conversations about backporting PVH and/
+/Comet host/toolstack patches to 4.8, and a number of us think it's a/
+/good idea, but we haven't had an official discussion with all the/
+/stakeholders yet. We'll come back to it once more of the fires have/
+/been put out./
+//
+/Feel free to remind us in a month or so if you still haven't seen any/
+/patches in the stable-4.8 branch. :-)/
+</pre>
+      </blockquote>
+      <pre wrap="">
+Ok, thank you for the quick reply. In Qubes we are using PVH with 4.8
+using the old device_model_version=none config option. And changing this
+would be much easier before release (So the change should be in our rc
+now). Anyway if it's not decided yet, we will have to guess what ends up
+in future 4.8.z releases.
+
+
+</pre>
+    </blockquote>
+    <br>
+    Hi,<br>
+    <br>
+    is there an update for the backports for 4.8 and 4.9? Or is there
+    some documentation available to see which parts are missing on 4.9
+    vs 4.10 (or 4.8 vs 4.10) to get PVH running
+    (device_model_version=none, ...)?<br>
+    <br>
+    Best Regards<br>
+    Hajo
+  </body>
+</html>
+
+--------------10C50909858AA1C82D126020--
+
+
+--===============6022059766711830251==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6022059766711830251==--
