@@ -1,20 +1,15 @@
-From: Paolo Bonzini <pbonzini@redhat.com>
-Subject: Re: [RFC PATCH v4 0/7] KVM: x86: Allow Qemu/KVM to use
- PVH entry point
-Date: Wed, 28 Feb 2018 22:39:34 +0100
-Message-ID: <239b5f48-00ad-5ff3-aa4f-ba126596c808__26067.2241136946$1519853914$gmane$org@redhat.com>
-References: <1519842483-8887-1-git-send-email-maran.wilson@oracle.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 120102: trouble: broken/pass
+Date: Wed, 28 Feb 2018 21:40:20 +0000
+Message-ID: <osstest-120102-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2245134217551266385=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=tscl=fw=redhat.com=pbonzini@srs-us1.protection.inumbo.net>)
- id 1er9Rz-0008T8-1I
- for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 21:39:47 +0000
-In-Reply-To: <1519842483-8887-1-git-send-email-maran.wilson@oracle.com>
-Content-Language: en-US
+ <srs0=zfhr=fw=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1er9Sl-0000a3-BV
+ for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 21:40:35 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,50 +18,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Maran Wilson <maran.wilson@oracle.com>, jgross@suse.com, boris.ostrovsky@oracle.com, roger.pau@citrix.com, andrew.cooper3@citrix.com, hch@infradead.org, JBeulich@suse.com, x86@kernel.org, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org
-Cc: thomas.lendacky@amd.com, linus.walleij@linaro.org, dave.hansen@linux.intel.com, rkrcmar@redhat.com, gregkh@linuxfoundation.org, mchehab@kernel.org, hpa@zytor.com, mingo@redhat.com, rdunlap@infradead.org, luto@kernel.org, jpoimboe@redhat.com, tglx@linutronix.de, bp@suse.de, davem@davemloft.net, kirill.shutemov@linux.intel.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjgvMDIvMjAxOCAxOToyNywgTWFyYW4gV2lsc29uIHdyb3RlOgo+IFNvcnJ5IGZvciB0aGUg
-ZGVsYXkgYmV0d2VlbiB0aGlzIHZlcnNpb24gYW5kIHRoZSBsYXN0IC0tIGl0IHdhcyBtb3N0bHkK
-PiBkdWUgdG8gaG9saWRheXMgYW5kIGV2ZXJ5b25lIGJlaW5nIGZvY3VzZWQgb24gc2VjdXJpdHkg
-YnVnIG1pdGlnYXRpb24KPiBpc3N1ZXMuIEhlcmUgYXJlIHRoZSBsaW5rcyB0byB0aGUgcHJldmlv
-dXMgZW1haWwgdGhyZWFkcyBpbiBjYXNlIGl0IGlzCj4gaGVscGZ1bDoKPiAKPiBWMzogaHR0cHM6
-Ly9sa21sLm9yZy9sa21sLzIwMTcvMTIvMTIvMTIzMAo+IFYyOiBodHRwczovL2xrbWwub3JnL2xr
-bWwvMjAxNy8xMi83LzE2MjQKPiBWMTogaHR0cHM6Ly9sa21sLm9yZy9sa21sLzIwMTcvMTEvMjgv
-MTI4MAo+IAo+IENoYW5nZXMgZnJvbSB2MzoKPiAKPiAgKiBJbXBsZW1lbnRlZCBKdWVyZ2VuJ3Mg
-c3VnZ2VzdGlvbiBmb3IgcmVmYWN0b3JpbmcgYW5kIG1vdmluZyB0aGUgUFZICj4gICAgY29kZSBz
-byB0aGF0IENPTkZJR19YRU4gaXMgbm8gbG9uZ2VyIHJlcXVpcmVkIGZvciBib290aW5nIEtWTSBn
-dWVzdHMKPiAgICB2aWEgdGhlIFBWSCBlbnRyeSBwb2ludC4KPiAgICBGdW5jdGlvbmFsbHksIG5v
-dGhpbmcgaGFzIGNoYW5nZWQgZnJvbSBWMyByZWFsbHksIGJ1dCB0aGUgcGF0Y2hlcwo+ICAgIGxv
-b2sgY29tcGxldGVseSBkaWZmZXJlbnQgbm93IGJlY2F1c2Ugb2YgYWxsIHRoZSBjb2RlIG1vdmVt
-ZW50IGFuZAo+ICAgIHJlZmFjdG9yaW5nLiBTb21lIG9mIHRoZXNlIHBhdGNoZXMgY2FuIGJlIGNv
-bWJpbmVkLCBidXQgSSd2ZSBsZWZ0Cj4gICAgdGhlbSB2ZXJ5IHNtYWxsIGluIHNvbWUgY2FzZXMg
-dG8gbWFrZSB0aGUgcmVmYWN0b3JpbmcgYW5kIGNvZGUKPiAgICBtb3ZlbWVudCBlYXNpZXIgdG8g
-cmV2aWV3Lgo+ICAgIE15IGFwcHJvYWNoIGZvciByZWZhY3RvcmluZyBoYXMgYmVlbiB0byBjcmVh
-dGUgYSBQVkggZW50cnkgbGF5ZXIgdGhhdAo+ICAgIHN0aWxsIGhhcyB1bmRlcnN0YW5kaW5nIGFu
-ZCBrbm93bGVkZ2UgYWJvdXQgWGVuIHZzIG5vbi1YZW4gZ3Vlc3QgdHlwZXMKPiAgICBzbyB0aGF0
-IGl0IGNhbiBtYWtlIHJ1biB0aW1lIGRlY2lzaW9ucyB0byBoYW5kbGUgZWl0aGVyIGNhc2UsIGFz
-Cj4gICAgb3Bwb3NlZCB0byBnb2luZyBhbGwgdGhlIHdheSBhbmQgcmUtd3JpdGluZyBpdCB0byBi
-ZSBhIGNvbXBsZXRlbHkKPiAgICBoeXBlcnZpc29yIGFnbm9zdGljIGFuZCBhcmNoaXRlY3R1cmFs
-bHkgcHVyZSBsYXllciB0aGF0IGlzIHNlcGFyYXRlCj4gICAgZnJvbSBndWVzdCB0eXBlIGRldGFp
-bHMuIFRoZSBsYXR0ZXIgc2VlbWVkIGEgYml0IG92ZXJraWxsIGluIHRoaXMKPiAgICBzaXR1YXRp
-b24uIEFuZCBJJ3ZlIGhhbmRsZWQgdGhlIGNvbXBsZXhpdHkgb2YgaGF2aW5nIHRvIHN1cHBvcnQK
-PiAgICBRZW11L0tWTSBib290IG9mIGtlcm5lbHMgY29tcGlsZWQgd2l0aCBvciB3aXRob3V0IENP
-TkZJR19YRU4gdmlhIGEKPiAgICBwYWlyIG9mIHhlbiBzcGVjaWZpYyBfX3dlYWsgcm91dGluZXMg
-dGhhdCBjYW4gYmUgb3ZlcnJpZGRlbiBpbiBrZXJuZWxzCj4gICAgdGhhdCBzdXBwb3J0IFhlbiBn
-dWVzdHMuIEltcG9ydGFudGx5LCB0aGUgX193ZWFrIHJvdXRpbmVzIGFyZSBmb3IKPiAgICB4ZW4g
-c3BlY2lmaWMgY29kZSBvbmx5IChub3QgZ2VuZXJpYyAiZ3Vlc3QgdHlwZSIgc3BlY2lmaWMgY29k
-ZSkgc28KPiAgICB0aGVyZSBpcyBubyBjbGFzaGluZyBiZXR3ZWVuIHhlbiB2ZXJzaW9uIG9mIHRo
-ZSBzdHJvbmcgcm91dGluZSBhbmQsCj4gICAgc2F5LCBhIEtWTSB2ZXJzaW9uIG9mIHRoZSBzYW1l
-IHJvdXRpbmUuIEJ1dCBJJ20gc3VyZSB0aGVyZSBhcmUgbWFueQo+ICAgIHdheXMgdG8gc2tpbiB0
-aGlzIGNhdCwgc28gSSdtIG9wZW4gdG8gYWx0ZXJuYXRlIHN1Z2dlc3Rpb25zIGlmIHRoZXJlCj4g
-ICAgaXMgYSBjb21wZWxsaW5nIHJlYXNvbiBmb3Igbm90IHVzaW5nIF9fd2VhayBpbiB0aGlzIHNp
-dHVhdGlvbi4KCkFzIHlvdSBzYXkgdGhlcmUgYXJlIG1hbnkgd2F5cyB0byBhY2hpZXZlIHRoaXMg
-YW5kIEkgdGhpbmsgeW91ciBjaG9pY2UKaXMgZnVsbHkgcmVhc29uYWJsZSAodGhlIG90aGVyIGFs
-dGVybmF0aXZlIHRoYXQgY29tZXMgdG8gbWluZCBpcyBhICJYZW4KZGV0ZWN0IiBmdW5jdGlvbiB0
-aGF0IHJldHVybnMgYSBzdHJ1Y3Qgb2YgZnVuY3Rpb24gcG9pbnRlcnMpLgoKQXBhcnQgZnJvbSB0
-aGUgcGxhY2VtZW50IG9mIHRoZSBmaWxlcywgaXQgbG9va3MgZ3JlYXQuICBUaGFua3MhCgpQYW9s
-bwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============2245134217551266385==
+Content-Type: text/plain
+
+flight 120102 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/120102/
+
+Failures and problems with tests :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-armhf-armhf-xl             <job status>                 broken
+ test-armhf-armhf-xl           4 host-install(4)        broken REGR. vs. 120098
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  85688075ccc22c12bd0fca2a2c269199938e104c
+baseline version:
+ xen                  cb671efbf1fae302c0ee5ebd6e23564e319babc8
+
+Last test of basis   120098  2018-02-28 16:01:46 Z    0 days
+Testing same since   120102  2018-02-28 19:01:39 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Razvan Cojocaru <rcojocaru@bitdefender.com>
+  Tamas K Lengyel <tamas@tklengyel.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          broken  
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job test-armhf-armhf-xl broken
+broken-step test-armhf-armhf-xl host-install(4)
+
+Not pushing.
+
+------------------------------------------------------------
+commit 85688075ccc22c12bd0fca2a2c269199938e104c
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Wed Feb 21 18:10:00 2018 +0000
+
+    x86/hvm: Constify the read side of vlapic handling
+    
+    This is in preparation to make hvm_x2apic_msr_read() take a const vcpu
+    pointer.  One modification is to alter vlapic_get_tmcct() to not use current.
+    
+    This in turn needs an alteration to hvm_get_guest_time_fixed(), which is safe
+    because the only mutable action it makes is to take the domain plt lock.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 62e80dff59c779cb56755b419120529e3d7eb17d
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Mon Feb 26 14:23:03 2018 +0000
+
+    x86/vmx: Simplfy the default cases in vmx_msr_{read,write}_intercept()
+    
+    The default case of vmx_msr_write_intercept() in particular is very tangled.
+    
+    First of all, fold long_mode_do_msr_{read,write}() into their callers.  These
+    functions were split out in the past because of the 32bit build of Xen, but it
+    is unclear why the cases weren't simply #ifdef'd in place.
+    
+    Next, invert the vmx_write_guest_msr()/is_last_branch_msr() logic to break if
+    the condition is satisfied, rather than nesting if it wasn't.  This allows the
+    wrmsr_hypervisor_regs() call to be un-nested with respect to the other default
+    logic.
+    
+    No practical difference from a guests point of view.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Kevin Tian <kevin.tian@intel.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+
+commit b68c4f1ebe4f413076c4915733a61c818b7dc73a
+Author: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Date:   Wed Feb 28 12:38:15 2018 +0200
+
+    x86/hvm: fix domain crash when CR3 has the noflush bit set
+    
+    In hardware, when PCID support is enabled and the NOFLUSH bit is set
+    when writing a CR3 value, the hardware will clear that that bit and
+    change the CR3 without flushing the TLB. hvm_set_cr3(), however, was
+    ignoring this bit; the result was that post-vm_event checks detected
+    an invalid CR3 value and crashed the domain.
+    
+    Handle NOFLUSH in hvm_set_cr3() by:
+    1. Clearing the bit
+    2. Passing a "noflush" flag to lower-level cr3 setting functions to
+    indicate that a flush should not be performed.
+    
+    Also clear X86_CR3_NOFLUSH when reporting CR3 monitored CR3 writes.
+    
+    This allows introspection to be used on VMs whose operating system uses
+    the NOFLUSH bit.
+    
+    Signed-off-by: Razvan Cojocaru <rcojocaru@bitdefender.com>
+    Reported-by: Bitweasil <bitweasil@cryptohaze.com>
+    Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Kevin Tian <kevin.tian@intel.com>
+    Acked-by: George Dunlap <george.dunlap@citrix.com>
+    Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+(qemu changes not included)
+
+
+--===============2245134217551266385==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2245134217551266385==--
