@@ -1,24 +1,20 @@
-From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v3] build: remove shim related targets
-Date: Wed, 28 Feb 2018 15:02:36 +0000
-Message-ID: <20180228150236.ndh7x4d4vryuqc6j@MacBook-Pro-de-Roger.local>
-References: <20180221122218.37777-1-roger.pau@citrix.com>
- <5A969A6D02000078001ACA01@prv-mh.provo.novell.com>
- <20180228114722.pe3qegstcejubini@MacBook-Pro-de-Roger.local>
- <5A96AEA202000078001ACB31@prv-mh.provo.novell.com>
- <20180228130254.pisdymntg33pscm2@MacBook-Pro-de-Roger.local>
- <5A96BBD302000078001ACCA7@prv-mh.provo.novell.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH v2 4/5] tools: xenpm: continue to support
+ {set, get}-vcpu-migration-delay
+Date: Wed, 28 Feb 2018 16:17:42 +0100
+Message-ID: <1519831062.9145.10.camel@suse.com>
+References: <151940399656.10991.13321858263862527366.stgit@Palanthas.fritz.box>
+ <151940411577.10991.534361130254778056.stgit@Palanthas.fritz.box>
+ <1bcdf046-581e-d055-c954-80ddcb45451f@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8376593615012325701=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=j/eq=fw=citrix.com=prvs=5902857c7=roger.pau@srs-us1.protection.inumbo.net>)
- id 1er3Sb-0008AZ-1L
- for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 15:16:01 +0000
-Content-Disposition: inline
-In-Reply-To: <5A96BBD302000078001ACCA7@prv-mh.provo.novell.com>
+ <srs0=fmfk=fw=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1er3Uc-0008JV-UK
+ for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 15:18:06 +0000
+In-Reply-To: <1bcdf046-581e-d055-c954-80ddcb45451f@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,55 +23,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xenproject.org
+To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: George Dunlap <george.dunlap@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBGZWIgMjgsIDIwMTggYXQgMDY6MjU6MjNBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gPj4+IE9uIDI4LjAyLjE4IGF0IDE0OjAyLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdy
-b3RlOgo+ID4gT24gV2VkLCBGZWIgMjgsIDIwMTggYXQgMDU6Mjk6MDZBTSAtMDcwMCwgSmFuIEJl
-dWxpY2ggd3JvdGU6Cj4gPj4gPj4+IE9uIDI4LjAyLjE4IGF0IDEyOjQ3LCA8cm9nZXIucGF1QGNp
-dHJpeC5jb20+IHdyb3RlOgo+ID4+ID4gT24gV2VkLCBGZWIgMjgsIDIwMTggYXQgMDQ6MDI6NTNB
-TSAtMDcwMCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gPj4gPj4gPj4+IE9uIDIxLjAyLjE4IGF0IDEz
-OjIyLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+ID4+ID4+ID4gLS0tIGEvdG9vbHMv
-ZmlybXdhcmUvTWFrZWZpbGUKPiA+PiA+PiA+ICsrKyBiL3Rvb2xzL2Zpcm13YXJlL01ha2VmaWxl
-Cj4gPj4gPj4gPiBAQCAtOCw2ICs4LDcgQEAgZW5kaWYKPiA+PiA+PiA+ICAjIGh2bWxvYWRlciBp
-cyBhIDMyLWJpdCBwcm90ZWN0ZWQgbW9kZSBiaW5hcnkuCj4gPj4gPj4gPiAgVEFSR0VUICAgICAg
-Oj0gaHZtbG9hZGVyL2h2bWxvYWRlcgo+ID4+ID4+ID4gIElOU1RfRElSIDo9ICQoREVTVERJUikk
-KFhFTkZJUk1XQVJFRElSKQo+ID4+ID4+ID4gK0RFQkdfRElSIDo9ICQoREVTVERJUikkKERFQlVH
-X0RJUikkKFhFTkZJUk1XQVJFRElSKQo+ID4+ID4+IAo+ID4+ID4+IFRoaXMgaXMgc2NyZXdpbmcg
-dXAgbXkgYnVpbGQsIGFuZCBsb29raW5nIGFnYWluIEkgY2FuJ3Qgc2VlIGhvdwo+ID4+ID4+IHRo
-aXMgY2FuIGJlIHJpZ2h0OiBCb3RoICQoWEVORklSTVdBUkVESVIpIGFuZCAkKERFQlVHX0RJUikK
-PiA+PiA+PiBhcmUgc3VwcG9zZWQgdG8gYmUgJHtwcmVmaXh9LWFibGUsIHlldCB0aGVyZSBjbGVh
-cmx5IHNob3VsZCBub3QKPiA+PiA+PiBiZSBhbiBpbmZpeCByZXN1bHRpbmcgZnJvbSB0aGUgY29u
-c3RydWN0aW9uIG9mIHRoaXMgcGF0aC4KPiA+PiA+IAo+ID4+ID4gQnkgYmVpbmcgcHJlZml4YWJs
-ZSB5b3UgbWVhbiB0aGF0IGJvdGggWEVORklSTVdBUkVESVIgYW5kIERFQlVHX0RJUgo+ID4+ID4g
-Y2FuIGJlIHJlbGF0aXZlIHBhdGhzPwo+ID4+IAo+ID4+IEJvdGggc2hvdWxkIGJlIHBvc3NpYmxl
-IHRvIGxpdmUgaW4gL3Vzci9saWIgb3IgL3Vzci9sb2NhbC9saWIsCj4gPj4gZm9yIGV4YW1wbGUu
-Cj4gPiAKPiA+IEknbSBhZnJhaWQgSSBkb24ndCBzZWUgdGhlIGlzc3VlLCBjb3VsZCB5b3UgcHJv
-dmlkZSB0aGUgdmFsdWVzIG9mCj4gPiBERVNURElSLCBERUJVR19ESVIgYW5kIFhFTkZJUk1XQVJF
-RElSIHRoYXQgYXJlIGNhdXNpbmcgdGhlIGlzc3VlPwo+IAo+IE15IGJ1aWxkIGlzc3VlIGlzIGJl
-Y2F1c2Ugb2Ygc29tZSB0d2Vha2luZyBJIGhhdmUgdG8gZG8gaW4gb3JkZXIgdG8KPiBiZSBhYmxl
-IHRvIHJ1biB0aGUgdG9vbHMgZnJvbSB0aGUgYnVpbGQgZGlyZWN0b3J5IChpdCdzIHF1aXRlIHNh
-ZCB0aGF0Cj4gdGhpcyBzdGlsbCBpc24ndCBzdXBwb3J0ZWQgIm91dCBvZiB0aGUgYm94IikuCj4g
-Cj4gPiBJcyB0aGlzIGJlY2F1c2UgeW91IGVuZCB1cCB3aXRoIHNvbWV0aGluZyBsaWtlOgo+ID4g
-Cj4gPiAvdXNyL2xvY2FsL2xpYi9kZWJ1Zy91c3IvbG9jYWwvLi4uIGluIHRoZSBkZWJ1ZyBwYXRo
-Pwo+IAo+IEluZGVlZCAoZXhjZXB0IHRoZSBmaXJzdCAibG9jYWwiIHlvdSBzaG93IHdyb25nbHkg
-aXNuJ3QgdGhlcmUpLCBqdXN0Cj4gdGhhdCB0aGVyZSdzIHNvbWUgL2hvbWUvamJldWxpY2gvLi4u
-LyBpbmZpeCwgYnV0IF9ub18gc3VjaCBwcmVmaXgKPiAoREVTVERJUiBmb3IgdGhlIHJlYXNvbiBt
-ZW50aW9uZWQgYWJvdmUgY2FuJ3QgYmUgc2V0IHRvCj4gL2hvbWUvamJldWxpY2gvLi4uLCBvciBb
-SSBkb24ndCByZWNhbGxdIGVpdGhlciB0aGUgYnVpbGQgYnJlYWtzIG9yCj4gdGhpbmdzIGRvbid0
-IHdvcmsgaW4gdGhlIGVuZCwgYnV0IG5lZWRzIHRvIGJlIGZvcmNlZCB0byAvIG9uIHRoZQo+IG1h
-a2UgY29tbWFuZCBsaW5lOyBhcyBzYWlkIEkgaGF2ZSBhIGNvbXBlbnNhdGluZyB0d2Vhawo+IGVs
-c2V3aGVyZSBzbyB0aGF0IHRoZSBmdWxsIHJlc3VsdGluZyBwYXRoIGlzIGNvcnJlY3QgZXZlcnl3
-aGVyZQo+IF9leGNlcHRfIG5vdyBmb3IgREVCR19ESVIpLgoKT0ssIEkgKnRoaW5rKiBJIHVuZGVy
-c3RhbmQgd2hhdCdzIG1pc3NpbmcgaGVyZS4gVGhpcyB3b3VsZCBiZSBtb3JlCmNvcnJlY3QgYXMg
-JChERVNURElSKSQocHJlZml4KSQoREVCVUdfRElSKSQoWEVORklSTVdBUkVESVIpLgoKSXQgbG9v
-a3MgbGlrZSBERUJVR19ESVIgd2FudHMgdG8gYmUgc2V0IGluIFBhdGhzLm1rLmluIGFzIHlvdQpz
-dWdnZXN0ZWQuCgpCdXQgdGhhdCByYWlzZXMgdGhlIHF1ZXN0aW9uLCBpZiBwcmVmaXg9L3Vzci9s
-b2NhbCB0aGlzIHdpbGwgYmVjb21lOgoKL3Vzci9sb2NhbC9saWIvdXNyL2xvY2FsL2xpYi94ZW4v
-Li4uCgpTaG91bGQgdGhpcyBpbnN0ZWFkIGJlOgoKL3Vzci9sb2NhbC9saWIvdXNyL2xpYi94ZW4v
-Li4uCgpJIGRvbid0IHRoaW5rIHNvLCBidXQgd2FudCB0byBiZSBzdXJlLgoKVGhhbmtzLCBSb2dl
-ci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============8376593615012325701==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-T8qaXPE1YebGgOYOdYTY"
+
+
+--=-T8qaXPE1YebGgOYOdYTY
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-02-28 at 15:02 +0000, George Dunlap wrote:
+> On 02/23/2018 04:41 PM, Dario Faggioli wrote:
+> > From this commit on, `xenpm {set,get}-vcpu-migration-delay'
+> >=20
+> > commands work again. But that is only for the sake of
+> > backward compatibility, and their use is deprecated, in
+> > favour of 'xl sched-credit -s [-c <poolid>] -m <delay>'.
+> >=20
+> > Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
+> > Acked-by: Wei Liu <wei.liu2@citrix.com>
+>=20
+> If we cared about strict behavioral compatibility, we would modify
+> the
+> xenpm function to set the migration delay for all cpupools; but I
+> think
+> we can worry about that if anyone complains. :-)
+>=20
+Yes, I thought about that. But, considering what would be required to
+implement such behavior, as compared to how many people (as far as we
+can tell, of course) use this feature, and use xenpm to change it, I
+also thought we are indeed fine "waiting and seeing".
+
+> > @@ -1087,13 +1097,17 @@ void set_vcpu_migration_delay_func(int
+> > argc, char *argv[])
+> > =20
+> >  void get_vcpu_migration_delay_func(int argc, char *argv[])
+> >  {
+> > -    uint32_t value;
+> > +    struct xen_sysctl_credit_schedule sparam;
+> > +
+> > +    printf("WARNING: using xenpm for this purpose is deprecated."
+> > +           " Check out `xl sched-credit -s'\n");
+>=20
+> Should these warnings be to stderr rather than stdout, so that if
+> anything is manually parsing stout it will continue to work?
+>=20
+Again, I considered this, for that same reason. The reason why I
+decided for stdout is for maximizing the chances that anyone actually
+using this will see the warning (even if, e.g., they're redirecting
+stderr).
+
+But I am fine with both, actually, just let me know what's considered
+best.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-T8qaXPE1YebGgOYOdYTY
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqWyBYACgkQFkJ4iaW4
+c+4JdhAArYVRS1aRsfiDSxN5IPNIU7gjAxQq4ONCbm9WE2Mu0cps6bR2t9uTHNI0
+nss3eTD5DCuF4JAbwYhSG4kZCvq7ni+l2gsGbP2J//bfRdkh07J4UNY2pWxwUNOC
+mXmAA1uD8tt92fxpRAX462P5j7W/ekb5FIsJ26tKTY2JsWIjDGuRTtrg7F2wxuj8
+cGSXtIg3twbn4QZfWFDwV9sPrLjxoHkE72RljAA5+ubIB3Uk5UTo5Svdttv5UNfE
+fBlb6TIteOBBQPEDM3P77uwL6O4K6j8XFQgFQ6oclMsl3RyKkfUwlXSKofa4j3EG
+7OEHf5Vbb9Jh0lF/nq1bx0Gpmpdn37wIA/oV4SlJjl+XfYay9/McVVJy9ItjYUoQ
+j/7iU3R+edly4Jpf3Dz3MKa8VC6TFE0OAd7mza0YJAUrRAFvzFESmvN+R8w7tZkl
+LPZ+SGr5ue6soj67Vz83IfVOBUvtUlL/QWbKDCVZSaPp00aouSz9hUavyPUvf18l
+XtJ4mc/kx5k8qMzjNOyyo1cnpuBAsBXxFSrYdtlA9XPFp/U8Ikl1jnNjaJ5+7yP6
+R0Xt+ayEqS26gYsidoFdsdKo9eGodWjp3dS7/m5bUisOsrW0BSVR9bX2jNpEolOM
+RLcWGWDQd9QXmRw1rUIkWu/svQce+SFizUy5L34nlFXFyCls3l0=
+=4Ini
+-----END PGP SIGNATURE-----
+
+--=-T8qaXPE1YebGgOYOdYTY--
+
+
+
+--===============8376593615012325701==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8376593615012325701==--
