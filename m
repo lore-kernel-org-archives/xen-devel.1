@@ -1,20 +1,10 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH v2 2/2] firmware/shim: better filtering of
- intermediate files during Xen tree setup
-Date: Wed, 28 Feb 2018 04:35:19 -0700
-Message-ID: <5A96A20702000078001ACAB5@prv-mh.provo.novell.com>
-References: <5A96A0DA02000078001ACA99@prv-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: untracked pvshim related dirty files in staging
+Date: Wed, 28 Feb 2018 12:39:13 +0100
+Message-ID: <20180228113843.GA25447@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1121638050422619817=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=ets7=fw=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1er01A-0001pT-8R
- for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 11:35:28 +0000
-In-Reply-To: <5A96A0DA02000078001ACA99@prv-mh.provo.novell.com>
-Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,22 +13,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-SSBoYXZlIG5vIGlkZWEgd2hhdCAqLjEgaXMgbWVhbnQgdG8gY292ZXIuIEluc3RlYWQgYWxzbyBl
-eGNsdWRlCnByZXByb2Nlc3NlZCBhbmQgbm9uLXNvdXJjZSBhc3NlbWJseSBmaWxlcy4KClNpZ25l
-ZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KUmV2aWV3ZWQtYnk6IFdl
-aSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Ci0tLQp2MjogUmUtYmFzZSBvdmVyIGNoYW5nZSB0
-byBlYXJsaWVyIHBhdGNoLgoKLS0tIGEvdG9vbHMvZmlybXdhcmUveGVuLWRpci9NYWtlZmlsZQor
-KysgYi90b29scy9maXJtd2FyZS94ZW4tZGlyL01ha2VmaWxlCkBAIC0yNiw3ICsyNiw3IEBAIGxp
-bmtmYXJtLnN0YW1wOiAkKERFUF9ESVJTKSAkKERFUF9GSUxFUykKIAkkKGZvcmVhY2ggZCwgJChM
-SU5LX0RJUlMpLCBcCiAJCShjZCAkKFhFTl9ST09UKTsgXAogCQkgZmluZCAkKGQpICEgLXR5cGUg
-bCAtdHlwZSBmIFwKLQkJICQoYWRkcHJlZml4ICEgLW5hbWUgLCAnKi5bb2ExXScgJy4qLmQnICcu
-Ki5kMicpKSBcCisJCSAkKGFkZHByZWZpeCAhIC1uYW1lICwgJyouW2lzb2FdJyAnLiouZCcgJy4q
-LmQyJykpIFwKIAkJID4+IGxpbmtmYXJtLnN0YW1wLnRtcCA7ICkgXAogCSQoZm9yZWFjaCBmLCAk
-KExJTktfRklMRVMpLCBcCiAJCWVjaG8gJChmKSA+PiBsaW5rZmFybS5zdGFtcC50bXAgOykKCgoK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============1121638050422619817==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="MW5yreqqjyrRcusr"
+Content-Disposition: inline
+
+
+--MW5yreqqjyrRcusr
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+While building staging I got these two untracked dirty files.
+I wonder what should be done about it?
+
+  Changes not staged for commit:
+          modified:   tools/firmware/xen-dir/shim.config
+  Untracked files:
+          tools/firmware/xen-dir/xen-shim-syms
+
+What is the value of adding version and branch name into the Xen
+.config?  I remember many years ago I submitted some change to Kbuild in
+linux.git which prevents such jitter in .config. Perhaps it was just for
+timestamps, I forgot.
+
+--- a/tools/firmware/xen-dir/shim.config
++++ b/tools/firmware/xen-dir/shim.config
+@@ -1,6 +1,6 @@
+ #
+ # Automatically generated file; DO NOT EDIT.
+-# Xen/x86 4.11-unstable Configuration
++# Xen/x86 4.11-my_branch_name Configuration
+ #
+ CONFIG_X86_64=y
+ CONFIG_X86=y
+
+
+Olaf
+
+--MW5yreqqjyrRcusr
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWpaU2QAKCRBdQqD6ppg2
+fmeYAKDJvOYMu5KlXpEIO+d9wu5I01DDaACeLTFFZiWq+yWSAOTg3BosAljD/Gg=
+=ZDEe
+-----END PGP SIGNATURE-----
+
+--MW5yreqqjyrRcusr--
+
+
+--===============1121638050422619817==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1121638050422619817==--
