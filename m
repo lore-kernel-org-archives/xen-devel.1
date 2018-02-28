@@ -1,19 +1,19 @@
-From: Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH v2 1/2] README: require Python 2.4 or newer
-Date: Wed, 28 Feb 2018 13:20:08 -0600
-Message-ID: <be8ebee1-4151-1fa2-38bd-6fcaa5a1cd10@cardoe.com>
-References: <20180228191844.29413-1-cardoe@cardoe.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] xen-netfront: Fix hang on device removal
+Date: Wed, 28 Feb 2018 20:21:30 +0100
+Message-ID: <d6411bf3-9edd-15a7-1f4e-a9f51869129d__15794.3409555175$1519845624$gmane$org@suse.com>
+References: <20180228122323.3914-1-jandryuk@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8302674180103412480=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=mqb1=fw=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
- id 1er7H3-0006qU-RM
- for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 19:20:21 +0000
-Received: by mail-qk0-x234.google.com with SMTP id w142so4428112qkb.8
- for <xen-devel@lists.xenproject.org>; Wed, 28 Feb 2018 11:20:21 -0800 (PST)
-In-Reply-To: <20180228191844.29413-1-cardoe@cardoe.com>
+ (envelope-from <srs0=j4wv=fw=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1er7IJ-0006ym-AR
+ for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 19:21:39 +0000
+In-Reply-To: <20180228122323.3914-1-jandryuk@gmail.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,89 +22,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>
+To: Jason Andryuk <jandryuk@gmail.com>, xen-devel@lists.xenproject.org, netdev@vger.kernel.org
+Cc: Eduardo Otubo <otubo@redhat.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, open list <linux-kernel@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============8302674180103412480==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="7KhrFn1hQNcBMRXb40AHuOEe8Col3QvhI"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---7KhrFn1hQNcBMRXb40AHuOEe8Col3QvhI
-Content-Type: multipart/mixed; boundary="epTFdr4hsVaRJrGrGusrfYsWXlpXWnkGU";
- protected-headers="v1"
-From: Doug Goldstein <cardoe@cardoe.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Tim Deegan <tim@xen.org>,
- Wei Liu <wei.liu2@citrix.com>
-Message-ID: <be8ebee1-4151-1fa2-38bd-6fcaa5a1cd10@cardoe.com>
-Subject: Re: [PATCH v2 1/2] README: require Python 2.4 or newer
-References: <20180228191844.29413-1-cardoe@cardoe.com>
-In-Reply-To: <20180228191844.29413-1-cardoe@cardoe.com>
-
---epTFdr4hsVaRJrGrGusrfYsWXlpXWnkGU
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 2/28/18 1:18 PM, Doug Goldstein wrote:
-
-> change from v1:
-> - changed from Python 2.6 to Python 2.4 based on
-
-Not sure what happened to my mind here....
-
-based on feedback on the list of folks still having environments where
-Python 2.4 is in use.
-
---=20
-Doug Goldstein
-
-
---epTFdr4hsVaRJrGrGusrfYsWXlpXWnkGU--
-
---7KhrFn1hQNcBMRXb40AHuOEe8Col3QvhI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlqXAOpfFIAAAAAALgAo
-aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
-MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
-Nl0t6Q/9FXqFlPeYc+g9t0FyQl0wUTx6I9g+DzYruQ8nWIso2+hzyl2RYXA07TAx
-Th/B2n4irE9tVnHdaaprj/4NoOyr+rMaSmC/96HuAQY3lfhUDcPUv77wm/SVHhc2
-8Hj1FMKFNwVn5OFDHt5FQW+Pjve/0vp5bBIfawVLhwGGjXiAbuPERDfWWkeqVco1
-FZBvXaCIvHyIoFLzg2T5IMzrraVjAuAw+GMMHRRg9dBAatnHkrMwIoU5qPER0eyi
-JF/LDyc71uDndylBMZ0EXqZhXc4ZUZjIcUU3L4W33pbqxhGPVA+x0PFlZSiL7lw2
-/WA3/EfSeM8BVXQRiK2gnWFGN6U0WFIy8ZKxk9mqbE5aiYK67gFe7Opsa0aC0ygZ
-CIcyX2xYeq72y+F8sRKihqFaQtSP/Bl+IWhf72yTvdxslw/D3+BnRWfWeUBgEXQ9
-lU13S8kAKyPkEOVrjtN5ILQtSAYMX2oPvTZz7rKUQvR5I5M9tSu7sDwTW6qteNk2
-Qz008cfJd2ar6Fa9UqKsX1pBiwd77WysQm9rJFMUWpRlxg2gczAiq2uhXfgoGPO3
-t4MaJLVdKB3rk1UCuJtS2qhiICZjbQcPhh9BGh6zLgwoa+zAFpEsuVeI8xoQgIfK
-3V4SOCCifseT+wnagHCqjRKyIAWJxG+nbej70EwamGJ0gZu3rE8=
-=YOZ6
------END PGP SIGNATURE-----
-
---7KhrFn1hQNcBMRXb40AHuOEe8Col3QvhI--
-
-
---===============8302674180103412480==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8302674180103412480==--
+T24gMjgvMDIvMTggMTM6MjMsIEphc29uIEFuZHJ5dWsgd3JvdGU6Cj4gQSB0b29sc3RhY2sgbWF5
+IGRlbGV0ZSB0aGUgdmlmIGZyb250ZW5kIGFuZCBiYWNrZW5kIHhlbnN0b3JlIGVudHJpZXMKPiB3
+aGlsZSB4ZW4tbmV0ZnJvbnQgaXMgaW4gdGhlIHJlbW92YWwgY29kZSBwYXRoLiAgSW4gdGhhdCBj
+YXNlLCB0aGUKPiBjaGVja3MgZm9yIHhlbmJ1c19yZWFkX2RyaXZlcl9zdGF0ZSB3b3VsZCByZXR1
+cm4gWGVuYnVzU3RhdGVVbmtub3duLCBhbmQKPiB4ZW5uZXRfcmVtb3ZlIHdvdWxkIGhhbmcgaW5k
+ZWZpbml0ZWx5LiAgVGhpcyBoYW5nIHByZXZlbnRzIHN5c3RlbQo+IHNodXRkb3duLgo+IAo+IHhl
+bm5ldF9yZW1vdmUgbXVzdCBiZSBhYmxlIHRvIGhhbmRsZSBYZW5idXNTdGF0ZVVua25vd24sIGFu
+ZAo+IG5ldGJhY2tfY2hhbmdlZCBtdXN0IGFsc28gd2FrZSB1cCB0aGUgd2FrZV9xdWV1ZSBmb3Ig
+dGhhdCBzdGF0ZSBhcyB3ZWxsLgo+IAo+IEZpeGVzOiA1YjU5NzFkZjNiYzIgKCJ4ZW4tbmV0ZnJv
+bnQ6IHJlbW92ZSB3YXJuaW5nIHdoZW4gdW5sb2FkaW5nIG1vZHVsZSIpCj4gCj4gU2lnbmVkLW9m
+Zi1ieTogSmFzb24gQW5kcnl1ayA8amFuZHJ5dWtAZ21haWwuY29tPgo+IENjOiBFZHVhcmRvIE90
+dWJvIDxvdHVib0ByZWRoYXQuY29tPgoKQ29tbWl0dGVkIHRvIHhlbi90aXAgZm9yLWxpbnVzLTQu
+MTZhCgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
