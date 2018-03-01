@@ -1,21 +1,19 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v2 1/2] firmware/shim: better filtering of
- dependency files during Xen tree setup
-Date: Thu, 1 Mar 2018 12:01:38 +0000
-Message-ID: <20180301120138.ks4bvohojbvbelva@citrix.com>
-References: <5A96A0DA02000078001ACA99@prv-mh.provo.novell.com>
- <5A96A1F202000078001ACAB2@prv-mh.provo.novell.com>
+Subject: Re: [PATCH] xl: remove apic option for PVH guests
+Date: Thu, 1 Mar 2018 12:22:05 +0000
+Message-ID: <20180301122205.bopopnky7n55zdmo@citrix.com>
+References: <20180228102053.1838-1-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=rbbq=fx=citrix.com=prvs=5917dc0a2=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1erMuC-0001zM-6V
- for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 12:01:48 +0000
+ id 1erNDy-0003SZ-Nb
+ for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 12:22:14 +0000
 Content-Disposition: inline
-In-Reply-To: <5A96A1F202000078001ACAB2@prv-mh.provo.novell.com>
+In-Reply-To: <20180228102053.1838-1-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +22,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBGZWIgMjgsIDIwMTggYXQgMDQ6MzQ6NThBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gSSBoYXZlIG5vIGlkZWEgd2hhdCAqLmQxIGlzIHN1cHBvc2VkIHRvIHJlZmVyIHRvIC0g
-d2Ugb25seSBoYXZlIC4qLmQKPiBhbmQgLiouZDIgZmlsZXMgKG5vdGUgYWxzbyB0aGUgbGVhZGlu
-ZyBkb3QpLiBBbHNvIHN3aXRjaCB0byBwYXNzaW5nCj4gLW5hbWUgaW5zdGVhZCBvZiAtcGF0aCB0
-byBmaW5kIC0gdGhhdCdzIGEgcmVxdWlyZW1lbnQgZm9yIC4qLmQgZXQgYWwgdG8KPiB3b3JrLCBi
-dXQgd291bGQgcHJvYmFibHkgaGF2ZSBiZWVuIGJldHRlciBmcm9tIHRoZSBiZWdpbm5pbmcuCj4g
-Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKUmV2aWV3
-ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpUaGFua3MgZm9yIGZpeGluZyB0
-aGlzLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gV2VkLCBGZWIgMjgsIDIwMTggYXQgMTA6MjA6NTNBTSArMDAwMCwgUm9nZXIgUGF1IE1vbm5l
+IHdyb3RlOgo+IFhTQS0yNTYgZm9yY2VzIHRoZSBsb2NhbCBBUElDIHRvIGFsd2F5cyBiZSBlbmFi
+bGVkIGZvciBQVkggZ3Vlc3RzLCBzbwo+IGlnbm9yZSBhbnkgYXBpYyBvcHRpb24gZm9yIFBWSCBn
+dWVzdHMuIFVwZGF0ZSB0aGUgZG9jdW1lbnRhdGlvbgo+IGFjY29yZGluZ2x5LgoKSSB0aGluayBo
+b3cgSSB3aWxsIGFwcHJvYWNoIHRoaXMgaXMgdG8gZGljdGF0ZSB0aGF0IFBWSCBhbHdheXMgaGFz
+IExBUElDCmluIG91ciBpbi10cmVlIGRvY3VtZW50LCB0aGVuIHVzZSB0aGF0IGFzIHRoZSBqdXN0
+aWZpY2F0aW9uIGZvciB0aGlzCmNoYW5nZS4gVGhhdCdzIHRoZSBjb25zZW5zdXMgZnJvbSAyIHll
+YXJzIGFnbywgcmlnaHQ/CgpPciB3ZSdyZSBqdXN0IHdvcmtpbmcgYXJvdW5kIHRoZSBsaW1pdGF0
+aW9uIGluIG91ciBjb2RlIGJhc2UsIGFuZCB1c2VycwptYXkgZGVtYW5kIGEgbm8tTEFQSUMgUFZI
+IGd1ZXN0IGp1c3QgYmVjYXVzZS4uLgoKV2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
