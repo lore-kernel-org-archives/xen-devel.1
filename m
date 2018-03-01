@@ -1,16 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 120130: tolerable all pass -
-	PUSHED
-Date: Thu, 01 Mar 2018 20:39:16 +0000
-Message-ID: <osstest-120130-mainreport@xen.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] Please Welcome Julien, our new Committer
+Date: Thu, 1 Mar 2018 21:36:16 +0000
+Message-ID: <a223c378-6cd0-3982-a314-1e18c040ff34@citrix.com>
+References: <alpine.DEB.2.10.1803011116230.4239@sstabellini-ThinkPad-X260>
+ <20180301200352.GA25609@char.us.oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0664423877142596163=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=1os/=fx=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1erUzD-0004gH-28
- for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 20:39:31 +0000
+ <srs0=dpn6=fx=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
+ id 1erVsD-0000LX-Aa
+ for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 21:36:21 +0000
+In-Reply-To: <20180301200352.GA25609@char.us.oracle.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,79 +23,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <stefano@aporeto.com>
+Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, committers@xenproject.org, lars.kurth@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============0664423877142596163==
-Content-Type: text/plain
-
-flight 120130 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/120130/
-
-Failures :-/ but no regressions.
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  301e96ea1f1b115481204826953f4d341774c0a8
-baseline version:
- xen                  85688075ccc22c12bd0fca2a2c269199938e104c
-
-Last test of basis   120107  2018-03-01 00:02:11 Z    0 days
-Testing same since   120126  2018-03-01 15:01:08 Z    0 days    2 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   85688075cc..301e96ea1f  301e96ea1f1b115481204826953f4d341774c0a8 -> smoke
-
-
---===============0664423877142596163==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0664423877142596163==--
+T24gMDEvMDMvMjAxOCAyMDowMywgS29ucmFkIFJ6ZXN6dXRlayBXaWxrIHdyb3RlOgo+IE9uIFRo
+dSwgTWFyIDAxLCAyMDE4IGF0IDExOjE3OjEzQU0gLTA4MDAsIFN0ZWZhbm8gU3RhYmVsbGluaSB3
+cm90ZToKPj4gSW4gcmVjb2duaXRpb24gb2YgaGlzIGV4cGVydGlzZSBhbmQgY29tbWl0bWVudCB0
+byBYZW4gUHJvamVjdCwgcGxlYXNlCj4+IGpvaW4gbWUgaW4gd2VsY29taW5nIEp1bGllbiBhbW9u
+ZyB0aGUgQ29tbWl0dGVycyBhbmQgUkVTVCBNYWludGFpbmVycy4KPj4KPj4gU2lnbmVkLW9mZi1i
+eTogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgo+Cj4gQWNrZWQt
+Ynk6IEtvbnJhZCBSemVzenV0ZWsgV2lsayA8a29ucmFkLndpbGtAb3JhY2xlLmNvbT4KCkFja2Vk
+LWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKQ29uZ3JhdHVs
+YXRpb25zLCBhbmQgdmVyeSB3ZWxsIGRlc2VydmVkLgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
