@@ -1,12 +1,12 @@
 From: Dario Faggioli <dfaggioli@suse.com>
 Subject: Re: [PATCH 5/6] xen/domain: Call sched_destroy_domain()
  in the domain_create() error path
-Date: Thu, 01 Mar 2018 14:25:57 +0100
-Message-ID: <1519910757.9145.19.camel@suse.com>
+Date: Thu, 01 Mar 2018 14:27:09 +0100
+Message-ID: <1519910829.9145.21.camel@suse.com>
 References: <1519827268-18199-1-git-send-email-andrew.cooper3@citrix.com>
  <1519827268-18199-6-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2943530624678005741=="
+Content-Type: multipart/mixed; boundary="===============5794895119590068009=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 In-Reply-To: <1519827268-18199-6-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -22,12 +22,12 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, 
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============2943530624678005741==
+--===============5794895119590068009==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-Ubxgni+R7ejCcNp1n1Oz"
+	protocol="application/pgp-signature"; boundary="=-j7PrKIjdB37Abl7l31yi"
 
 
---=-Ubxgni+R7ejCcNp1n1Oz
+--=-j7PrKIjdB37Abl7l31yi
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -51,33 +51,33 @@ Dario
 -----------------------------------------------------------------
 Dario Faggioli, Ph.D, http://about.me/dario.faggioli
 Software Engineer @ SUSE https://www.suse.com/
---=-Ubxgni+R7ejCcNp1n1Oz
+--=-j7PrKIjdB37Abl7l31yi
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqX/2UACgkQFkJ4iaW4
-c+5nuhAA5ZYlmG5MkqkkhfvZVEOo4Ez0DJtL2kGdgKicEcOgJJC5GqMVD0Twvuez
-7me5hcp5+qL6IK6SWYDCXvyvNRsZZigSYrxzxxFnpKXNT3fVgKQy0oWZ8ZGVCNAn
-Qab1HkGc0+f2sV+6yQaJ4zRIq3OD3JmNKjulgdAH6CxnB3LNSoF2LthNrxBLv66Z
-N6j7d79RiypEycgPxa0U0SmAXe97G2W7+AYq6tU9dplOig4RyI5+GePG/P1JXDtc
-cVjx3YiJoKwRm9yOzrjr5wL6zpmR868ZAFwTWNZrGSxi8qxq5UJrhOmyxBiJ5iTd
-baCY3xXAzlqrknf1Esk2UT8hTiexJUI/t84yDK7RA18g5nuOe6CaVwMoz7/pH+7R
-h1Fs0vEyUasbWMnVllug7/YybMhEw0g4YOVOiK1U3REh718uKs9i981l0d1lyQ1i
-3pXyOpGt1JZNOiFQ7cNH1PpVouc14Ut8P0ISUI6v8sE8+al+QdsFyqTKXoYNvdsq
-L1IkxIjMIbuMVAXpesV0LAHGvAJY4OIZt3DxHsmYYFSlrjZ3tvom/llnTD8BFoKD
-mEY1HiMGT51DnU2KzkKcLTOje1QlUY7p1FVPbVof+nISN/DUwOgwPFxz7rrVYQz+
-lpQc5eBSGn/GmEXEC7VxmL5qCn9pXKVgv5OS83H5nRqgl3uzLks=
-=qBJg
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqX/60ACgkQFkJ4iaW4
+c+5BTRAArkgimZlvWUaDFpf8a7+/TjX69XgggeH5ZGFM6Xg/l2X5NNzUqaEFk10r
+EX8kJHCGiarDiE0BI6qjWP5pP+nJwkPKFWR8ueq6socMTkTJldr1y9MSzGkZmRMN
+IonkI/RYuvP0Hg713NCPulrkyKWuXIB8mevF4hT3ecwet9j//GjMm3Oa9zIjgXT6
+2hZMYB7URiP4zsQI041vlGQ+LwuMbgI/2z6+IGpDNq03eX2c6yx596cizKgTtsiY
+d0y8oRq24c2EC5+3qtOhJuVDc8sZ5Z1i+RuFwBoXL4nXn2cz8Yecjf2KOaMzvIa3
+MwD6oLnoyMLX48BAygxu/S3TwEt+5QvVlD+Lcb04mQoiBdNRMatJymEq5lYYej64
+UxURlPz5QNE56zM+MFRxJiFa2T/9368C+VXAVHJzQ79BD6v/n+vwKt/w/B/AWE46
+t/lUGKC6yA9+ImX+r+XTTtk7fdmgkeSV5JQ0QsgpZkV2Bzz87SoBaZ93QUCKH+x/
+x1YVJRdu7oP5FyqZKCLslKN1OOuSSJVkO+BTJJ7fk7yD9FQnYbxjX/qIuKHo8DI3
+yTOpzlArFdYLzU5AzO8gfR+qUmTRsYSQ3rMeiz2vmK23fOdBX0M229Q2yI0g7wYZ
+mo0YHBPcws9baugol2RHizmCKL3lOUXuJS92gHWgodt4cwt8cTA=
+=xbOH
 -----END PGP SIGNATURE-----
 
---=-Ubxgni+R7ejCcNp1n1Oz--
+--=-j7PrKIjdB37Abl7l31yi--
 
 
 
---===============2943530624678005741==
+--===============5794895119590068009==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -87,4 +87,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============2943530624678005741==--
+--===============5794895119590068009==--
