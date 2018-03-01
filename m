@@ -1,11 +1,12 @@
 From: Olaf Hering <olaf@aepfle.de>
-Subject: [PATCH] tools: drop stale references to xml2-config
-Date: Thu,  1 Mar 2018 15:22:21 +0100
-Message-ID: <20180301142221.31294-1-olaf@aepfle.de>
+Subject: Re: [PATCH] tools: drop stale references to xml2-config
+Date: Thu, 1 Mar 2018 15:24:46 +0100
+Message-ID: <20180301152446.2510428f.olaf@aepfle.de>
+References: <20180301142221.31294-1-olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7786604332967586378=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <20180301142221.31294-1-olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,29 +16,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
-Cc: Olaf Hering <olaf@aepfle.de>
 List-Id: xen-devel@lists.xenproject.org
 
-Rml4ZXMgY29tbWl0IDE4NWJiNThiZTMgKCJ0b29sczogZHJvcCBsaWJ4ZW4iKQoKU2lnbmVkLW9m
-Zi1ieTogT2xhZiBIZXJpbmcgPG9sYWZAYWVwZmxlLmRlPgotLS0KIGNvbmZpZy9Ub29scy5tay5p
-biB8IDEgLQogdG9vbHMvY29uZmlndXJlLmFjIHwgMSAtCiAyIGZpbGVzIGNoYW5nZWQsIDIgZGVs
-ZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvY29uZmlnL1Rvb2xzLm1rLmluIGIvY29uZmlnL1Rvb2xz
-Lm1rLmluCmluZGV4IDBmNzlmNGUwYzIuLjc4MzExNTkyNTcgMTAwNjQ0Ci0tLSBhL2NvbmZpZy9U
-b29scy5tay5pbgorKysgYi9jb25maWcvVG9vbHMubWsuaW4KQEAgLTEzLDcgKzEzLDYgQEAgUFlU
-SE9OX1BBVEggICAgICAgICA6PSBAUFlUSE9OUEFUSEAKIFBZX05PT1BUX0NGTEFHUyAgICAgOj0g
-QFBZX05PT1BUX0NGTEFHU0AKIFBFUkwgICAgICAgICAgICAgICAgOj0gQFBFUkxACiBDVVJMX0NP
-TkZJRyAgICAgICAgIDo9IEBDVVJMQAotWE1MMl9DT05GSUcgICAgICAgICA6PSBAWE1MQAogQkFT
-SCAgICAgICAgICAgICAgICA6PSBAQkFTSEAKIFhHRVRUVEVYVCAgICAgICAgICAgOj0gQFhHRVRU
-RVhUQAogQVM4NiAgICAgICAgICAgICAgICA6PSBAQVM4NkAKZGlmZiAtLWdpdCBhL3Rvb2xzL2Nv
-bmZpZ3VyZS5hYyBiL3Rvb2xzL2NvbmZpZ3VyZS5hYwppbmRleCAwNmViMTZkYjRmLi40ZTUwN2Fk
-MGI4IDEwMDY0NAotLS0gYS90b29scy9jb25maWd1cmUuYWMKKysrIGIvdG9vbHMvY29uZmlndXJl
-LmFjCkBAIC0yNjcsNyArMjY3LDYgQEAgQUNfQVJHX1ZBUihbUEVSTF0sIFtQYXRoIHRvIFBlcmwg
-cGFyc2VyXSkKIEFDX0FSR19WQVIoW0JJU09OXSwgW1BhdGggdG8gQmlzb24gcGFyc2VyIGdlbmVy
-YXRvcl0pCiBBQ19BUkdfVkFSKFtGTEVYXSwgW1BhdGggdG8gRmxleCBsZXhpY2FsIGFuYWx5c2Vy
-IGdlbmVyYXRvcl0pCiBBQ19BUkdfVkFSKFtDVVJMXSwgW1BhdGggdG8gY3VybC1jb25maWcgdG9v
-bF0pCi1BQ19BUkdfVkFSKFtYTUxdLCBbUGF0aCB0byB4bWwyLWNvbmZpZyB0b29sXSkKIEFDX0FS
-R19WQVIoW0JBU0hdLCBbUGF0aCB0byBiYXNoIHNoZWxsXSkKIEFDX0FSR19WQVIoW1hHRVRURVhU
-XSwgW1BhdGggdG8geGdldHR0ZXh0IHRvb2xdKQogQUNfQVJHX1ZBUihbQVM4Nl0sIFtQYXRoIHRv
-IGFzODYgdG9vbF0pCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7786604332967586378==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/01bCUzIp0iWxOS68ww6XWQo"; protocol="application/pgp-signature"
+
+--Sig_/01bCUzIp0iWxOS68ww6XWQo
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu,  1 Mar 2018 15:22:21 +0100
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> Fixes commit 185bb58be3 ("tools: drop libxen")
+
+>  CURL_CONFIG         :=3D @CURL@
+>  AC_ARG_VAR([CURL], [Path to curl-config tool])
+
+These are stale as well. Somehow I overlooked that, will send v2.
+
+Olaf
+
+--Sig_/01bCUzIp0iWxOS68ww6XWQo
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWpgNLgAKCRBdQqD6ppg2
+fnqRAJ40EplW2IT9kpaKdwMVu82J5NN+BgCg8zo5QkD2xs97k4A32W2NxpBwO2g=
+=n5On
+-----END PGP SIGNATURE-----
+
+--Sig_/01bCUzIp0iWxOS68ww6XWQo--
+
+
+--===============7786604332967586378==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7786604332967586378==--
