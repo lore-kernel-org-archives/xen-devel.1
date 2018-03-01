@@ -1,18 +1,21 @@
-From: "Jan Beulich" <jbeulich@suse.com>
-Subject: Re: [PATCH v2 7/7] x86/build: Use new .nop directive
- when available
-Date: Thu, 01 Mar 2018 00:28:27 -0700
-Message-ID: <5A97AB9B0200007800128BF6@prv-mh.provo.novell.com>
-References: <1519644904-11349-1-git-send-email-andrew.cooper3@citrix.com>
- <1519644904-11349-8-git-send-email-andrew.cooper3@citrix.com>
- <5A96E54602000078001ACF21@prv-mh.provo.novell.com>
- <782df0c6-4449-9d71-2370-b68d1110f815@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [RFC PATCH v4 6/7] xen/pvh: Add memory map pointer
+ to hvm_start_info struct
+Date: Thu, 1 Mar 2018 08:29:05 +0100
+Message-ID: <81b64427-4d4e-8758-436a-f2b98e3e6829__5872.79316173426$1519889275$gmane$org@suse.com>
+References: <1519842483-8887-1-git-send-email-maran.wilson@oracle.com>
+ <1519842483-8887-7-git-send-email-maran.wilson@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <782df0c6-4449-9d71-2370-b68d1110f815@citrix.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=9pmo=fx=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1erIeM-0004UF-RD
+ for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 07:29:10 +0000
+In-Reply-To: <1519842483-8887-7-git-send-email-maran.wilson@oracle.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,30 +24,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: andrew.cooper3@citrix.com
-Cc: xen-devel@lists.xen.org, wei.liu2@citrix.com, roger.pau@citrix.com
+To: Maran Wilson <maran.wilson@oracle.com>, pbonzini@redhat.com, boris.ostrovsky@oracle.com, roger.pau@citrix.com, andrew.cooper3@citrix.com, hch@infradead.org, JBeulich@suse.com, x86@kernel.org, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org
+Cc: thomas.lendacky@amd.com, linus.walleij@linaro.org, dave.hansen@linux.intel.com, rkrcmar@redhat.com, gregkh@linuxfoundation.org, mchehab@kernel.org, hpa@zytor.com, mingo@redhat.com, rdunlap@infradead.org, luto@kernel.org, jpoimboe@redhat.com, tglx@linutronix.de, bp@suse.de, davem@davemloft.net, kirill.shutemov@linux.intel.com
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IDAyLzI4LzE4IDc6
-MjAgUE0gPj4+Cj5PbiAyOC8wMi8xOCAxNjoyMiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9u
-IDI2LjAyLjE4IGF0IDEyOjM1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+
-PiAtLS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L2FsdGVybmF0aXZlLWFzbS5oCj4+PiArKysgYi94
-ZW4vaW5jbHVkZS9hc20teDg2L2FsdGVybmF0aXZlLWFzbS5oCj4+PiBAQCAtMSw2ICsxLDggQEAK
-Pj4+ICAjaWZuZGVmIF9BU01fWDg2X0FMVEVSTkFUSVZFX0FTTV9IXwo+Pj4gICNkZWZpbmUgX0FT
-TV9YODZfQUxURVJOQVRJVkVfQVNNX0hfCj4+PiAgCj4+PiArI2luY2x1ZGUgPGFzbS9ub3BzLmg+
-Cj4+PiArCj4+PiAgI2lmZGVmIF9fQVNTRU1CTFlfXwo+Pj4gIAo+Pj4gIC8qCj4+PiBAQCAtMTgs
-NiArMjAsMTQgQEAKPj4+ICAgICAgLmJ5dGUgXHBhZF9sZW4KPj4+ICAuZW5kbQo+Pj4gIAo+Pj4g
-Ky5tYWNybyBta25vcHMgbnJfYnl0ZXMKPj4+ICsjaWZkZWYgSEFWRV9BU19OT1BfRElSRUNUSVZF
-Cj4+PiArICAgIC5ub3AgXG5yX2J5dGVzLCBBU01fTk9QX01BWAo+PiBBbmQgZG8geW91IHJlYWxs
-eSBuZWVkIHRvIHNwZWNpZnkgQVNNX05PUF9NQVggaGVyZT8gV2hhdCdzCj4+IHdyb25nIHdpdGgg
-bGV0dGluZyB0aGUgYXNzZW1ibGVyIHBpY2sgd2hhdCBpdCB3YW50cyBhcyB0aGUgbG9uZ2VzdAo+
-PiBOT1A/Cj4KPkkgZG9uJ3Qgd2FudCBhIHRvb2xjaGFpbiBjaGFuZ2UgdG8gY2F1c2UgdXMgdG8g
-Z28gYmV5b25kIDExIGJ5dGUgbm9wcywKPmJlY2F1c2Ugb2YgdGhlIGFzc29jaWF0ZWQgZGVjb2Rl
-IHN0YWxsIG9uIGFsbW9zdCBhbGwgaGFyZHdhcmUuICBVc2luZwo+QVNNX05PUF9NQVggc2VlbWVk
-IGxpa2UgdGhlIGVhc2llc3Qgd2F5IHRvIGtlZXAgdGhlIGVuZCByZXN1bHQKPmNvbnNpc3RlbnQs
-IGlycmVzcGVjdGl2ZSBvZiB0b29sY2hhaW4gc3VwcG9ydC4KCkkgZG9uJ3QgdW5kZXJzdGFuZCAt
-IGFuIGVhcmxpZXIgcGF0Y2ggdGFrZXMgY2FyZSBvZiBydW50aW1lIHJlcGxhY2luZyB0aGVtCmFu
-eXdheS4gV2hhdCBzdGFsbHMgY2FuIHRoZW4gcmVzdWx0PwoKSmFuCgoKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMjgvMDIvMTggMTk6MjgsIE1hcmFuIFdpbHNvbiB3cm90ZToKPiBUaGUgc3RhcnQgaW5mbyBz
+dHJ1Y3R1cmUgdGhhdCBpcyBkZWZpbmVkIGFzIHBhcnQgb2YgdGhlIHg4Ni9IVk0gZGlyZWN0IGJv
+b3QKPiBBQkkgYW5kIHVzZWQgZm9yIHN0YXJ0aW5nIFhlbiBQVkggZ3Vlc3RzIHdvdWxkIGJlIG1v
+cmUgdmVyc2F0aWxlIGlmIGl0IGFsc28KPiBpbmNsdWRlZCBhIHdheSB0byBwYXNzIGluZm9ybWF0
+aW9uIGFib3V0IHRoZSBtZW1vcnkgbWFwIHRvIHRoZSBndWVzdC4gVGhpcwo+IHdvdWxkIGFsbG93
+IEtWTSBndWVzdHMgdG8gc2hhcmUgdGhlIHNhbWUgZW50cnkgcG9pbnQuCj4gCj4gU2lnbmVkLW9m
+Zi1ieTogTWFyYW4gV2lsc29uIDxtYXJhbi53aWxzb25Ab3JhY2xlLmNvbT4KCkknbSBmaW5lIHdp
+dGggdGhpcywgYnV0IHdlIG5lZWQgdGhpcyBjaGFuZ2UgYmVpbmcgYWNjZXB0ZWQgYnkgdGhlIFhl
+bgpjb21tdW5pdHkgZmlyc3QuIFNvIGFuIEFjayBmcm9tIEphbiBvciBBbmRyZXcgaXMgcmVxdWly
+ZWQgYXMgdGhlIHNhbWUKY2hhbmdlIHNob3VsZCBiZSBkb25lIG9uIFhlbiBzaWRlLgoKSnVlcmdl
+bgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
