@@ -1,14 +1,19 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v2] tools: drop stale references to
-	curl/xml2-config
-Date: Thu, 1 Mar 2018 17:28:16 +0100
-Message-ID: <20180301172816.2ead6585.olaf@aepfle.de>
-References: <20180301142632.31763-1-olaf@aepfle.de>
- <20180301153205.qaaui3lq54vufw74@citrix.com>
+From: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Subject: Re: [xen-unstable test] 120076: regressions - FAIL
+Date: Thu, 1 Mar 2018 16:26:36 +0000
+Message-ID: <20180301162636.ful34sntnbmp5hkb@MacBook-Pro-de-Roger.local>
+References: <osstest-120076-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2258756489917518262=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180301153205.qaaui3lq54vufw74@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=p77i=fx=citrix.com=prvs=59130488e=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1erRBs-0002Ac-Vi
+ for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 16:36:21 +0000
+Content-Disposition: inline
+In-Reply-To: <osstest-120076-mainreport@xen.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,49 +22,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: osstest service owner <osstest-admin@xenproject.org>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============2258756489917518262==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/XGjuz4s3m5fP2zAMmnfx=Qs"; protocol="application/pgp-signature"
-
---Sig_/XGjuz4s3m5fP2zAMmnfx=Qs
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 1 Mar 2018 15:32:05 +0000
-schrieb Wei Liu <wei.liu2@citrix.com>:
-
-> If you don't object I can replace the commit message.
-
-Yes, please.
-
-Olaf
-
---Sig_/XGjuz4s3m5fP2zAMmnfx=Qs
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWpgqIAAKCRBdQqD6ppg2
-fjoHAJ9xDwhsNiCZJQRDlEA6rkm/iyXpMACg3fNG9vrjslMHJzl6z4vcsypJtHw=
-=dUGL
------END PGP SIGNATURE-----
-
---Sig_/XGjuz4s3m5fP2zAMmnfx=Qs--
-
-
---===============2258756489917518262==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2258756489917518262==--
+T24gVGh1LCBNYXIgMDEsIDIwMTggYXQgMTA6Mzg6NTFBTSArMDAwMCwgb3NzdGVzdCBzZXJ2aWNl
+IG93bmVyIHdyb3RlOgo+IGZsaWdodCAxMjAwNzYgeGVuLXVuc3RhYmxlIHJlYWwgW3JlYWxdCj4g
+aHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMDA3Ni8K
+PiAKPiBSZWdyZXNzaW9ucyA6LSgKPiAKPiBUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5k
+IGFyZSBibG9ja2luZywKPiBpbmNsdWRpbmcgdGVzdHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoK
+PiAgdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrICA2IHhlbi1pbnN0YWxsICAgICAgICAg
+ICAgZmFpbCBSRUdSLiB2cy4gMTIwMDM3Cj4gIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVk
+LWludGVsIDE3IGRlYmlhbi1odm0taW5zdGFsbC9sMS9sMiBmYWlsIFJFR1IuIHZzLiAxMjAwMzcK
+ClRoZSBuZXN0ZWQgZmFpbHVyZSBzaG91bGQgYmUgZml4ZWQgYnk6CgpodHRwczovL21hcmMuaW5m
+by8/bD14ZW4tZGV2ZWwmbT0xNTE5OTIxNDI0MjU5NDUKCk9yIHNvbWV0aGluZyBzaW1pbGFyLiBJ
+dCdzIGZhbGxvdXQgZnJvbSBteSAidm14L2hhcDogb3B0aW1pemUgQ1I0CnRyYXBwaW5nIiwgc29y
+cnkuCgpSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
