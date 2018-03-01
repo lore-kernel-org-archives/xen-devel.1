@@ -1,22 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH RFC 3/3] xtf: add minimal HPET functionality
- test
-Date: Thu, 01 Mar 2018 05:57:18 -0700
-Message-ID: <5A9806BE02000078001AD49A@prv-mh.provo.novell.com>
-References: <20180223132743.59804-1-roger.pau@citrix.com>
- <20180223132743.59804-4-roger.pau@citrix.com>
- <ae34d54d-d44e-a624-5e60-3d10854062e3@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] libxc: really tolerate empty PV records
+Date: Thu, 1 Mar 2018 12:59:26 +0000
+Message-ID: <20180301125925.hhzs4bx3h2k4dlsg@citrix.com>
+References: <5A957E7A02000078001AC4CA@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=ib05=fx=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1erNm3-0006Kw-Jh
- for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 12:57:27 +0000
-In-Reply-To: <ae34d54d-d44e-a624-5e60-3d10854062e3@citrix.com>
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=rbbq=fx=citrix.com=prvs=5917dc0a2=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1erNo5-0006V5-BA
+ for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 12:59:33 +0000
 Content-Disposition: inline
+In-Reply-To: <5A957E7A02000078001AC4CA@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,47 +22,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDAxLjAzLjE4IGF0IDEyOjQ2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMjMvMDIvMTggMTM6MjcsIFJvZ2VyIFBhdSBNb25uZSB3cm90ZToKPj4gQWRkIGEg
-YmFzaWMgSFBFVCBmdW5jdGlvbmFsaXR5IHRlc3QsIG5vdGUgdGhhdCB0aGlzIHRlc3QgcmVxdWly
-ZXMgdGhlCj4+IEhQRVQgdG8gc3VwcG9ydCBsZXZlbCB0cmlnZ2VyZWQgaW50ZXJydXB0cy4KPj4K
-Pj4gRnVydGhlciBpbXByb3ZlbWVudHMgc2hvdWxkIGFkZCBzdXBwb3J0IGZvciBpbnRlcnJ1cHQg
-ZGVsaXZlcnksIGFuZAo+PiB0ZXN0aW5nIGFsbCB0aGUgYXZhaWxhYmxlIHRpbWVycy4KPj4KPj4g
-U2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4+
-IC0tLQo+PiBDYzogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPj4g
-LS0tCj4+ICBhcmNoL3g4Ni9pbmNsdWRlL2FyY2gvbGliLmggfCAgMTQgKysrKwo+PiAgZG9jcy9h
-bGwtdGVzdHMuZG94ICAgICAgICAgIHwgICAyICsKPj4gIHRlc3RzL2hwZXQvTWFrZWZpbGUgICAg
-ICAgICB8ICAgOSArKysKPj4gIHRlc3RzL2hwZXQvbWFpbi5jICAgICAgICAgICB8IDE4NyAKPiAr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+PiAgNCBmaWxlcyBj
-aGFuZ2VkLCAyMTIgaW5zZXJ0aW9ucygrKQo+PiAgY3JlYXRlIG1vZGUgMTAwNjQ0IHRlc3RzL2hw
-ZXQvTWFrZWZpbGUKPj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCB0ZXN0cy9ocGV0L21haW4uYwo+Pgo+
-PiBkaWZmIC0tZ2l0IGEvYXJjaC94ODYvaW5jbHVkZS9hcmNoL2xpYi5oIGIvYXJjaC94ODYvaW5j
-bHVkZS9hcmNoL2xpYi5oCj4+IGluZGV4IDY3MTRiZGMuLjM0MDA4OTAgMTAwNjQ0Cj4+IC0tLSBh
-L2FyY2gveDg2L2luY2x1ZGUvYXJjaC9saWIuaAo+PiArKysgYi9hcmNoL3g4Ni9pbmNsdWRlL2Fy
-Y2gvbGliLmgKPj4gQEAgLTM5Miw2ICszOTIsMjAgQEAgc3RhdGljIGlubGluZSB2b2lkIHdyaXRl
-X3hjcjAodWludDY0X3QgeGNyMCkKPj4gICAgICB4c2V0YnYoMCwgeGNyMCk7Cj4+ICB9Cj4+ICAK
-Pj4gK3N0YXRpYyBpbmxpbmUgdWludDY0X3QgcmR0c2Modm9pZCkKPj4gK3sKPj4gKyAgICB1aW50
-MzJfdCBsb3csIGhpZ2g7Cj4+ICsKPj4gKyAgICBhc20gdm9sYXRpbGUgKCJyZHRzYyIgOiAiPWEi
-IChsb3cpLCAiPWQiIChoaWdoKSk7Cj4gCj4gRm9yIG15IG93biB0aW1pbmcgcHVycG9zZXMsIEkn
-dmUgYmVlbiB1c2luZyByZHRzY3AgYmVjYXVzZSBpdCBpcwo+IHN0cmljdGx5IG1vcmUgaGVscGZ1
-bCwgYnV0IHRoaXMgaXNuJ3QgYSBnZW5lcmFsIHNvbHV0aW9uLgo+IAo+IEZvciByZHRzYywgKGNv
-bnRyYXJ5IHRvIHRoZSB3YXkgdGhlIG90aGVyIHRocmVhZCBpcyBwcm9ncmVzc2luZyksIHdoYXQK
-PiBtYXR0ZXJzIGlzIGEgZGlzcGF0Y2ggc2VyaWFsaXNpbmcgZXZlbnQsIHdoaWNoIGlzIGRpZmZl
-cmVudCB0byBhbgo+IGFyY2hpdGVjdHVyYWxseSBzZXJpYWxpc2luZyBldmVudC4KPiAKPiBUaGUg
-ZWFzaWVzdCBmaXggZm9yIG5vdyBpcyB0byB1bmNvbmRpdGlvbmFsbHkgdXNlIG1mZW5jZSwgbGVh
-dmluZyBhCj4gY29tbWVudCBzYXlpbmcgdGhhdCB0aGlzIHNob3VsZCBiZSBsZmVuY2Ugb24gSW50
-ZWwgYW5kIHdoZW4gdGhlIEFNRAo+IHBpcGVsaW5lIGlzIGNvbmZpZ3VyZWQgY29ycmVjdGx5LiAg
-UGxlYXNlIG5hbWUgdGhlIGZ1bmN0aW9uCj4gcmR0c2NwX29yZGVyZWQoKSB0aG91Z2gsIHRvIGRp
-c3Rpbmd1aXNoIGl0IGZyb20gYSBwbGFpbiByZHRzYyBpbnN0cnVjdGlvbi4KCkludGVyZXN0aW5n
-LiBSaWdodCBhYm92ZSB5b3Ugc2F5ICJkaXNwYXRjaCBzZXJpYWxpc2luZyIsIGJ1dCB0aGVuCnlv
-dSBzdWdnZXN0IE1GRU5DRSwgd2hpY2ggaXNuJ3Qgb24gSW50ZWw/IEl0J3MgdGhvc2UgZGlmZmVy
-ZW5jZXMKdGhhdCBJJ3ZlIGJlZW4gdHJ5aW5nIHRvIGV4cGxhaW4gb24gdGhhdCBvdGhlciBwYXJ0
-IG9mIHRoZSB0aHJlYWQKKGFwcGFyZW50bHkgd2l0aCBsaXR0bGUgc3VjY2Vzcywgc2VlaW5nIHlv
-dXIgImNvbnRyYXJ5IHRvIikuCgpKYW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+T24gVHVlLCBGZWIgMjcsIDIwMTggYXQgMDc6NTE6MjJBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gQ29tbWl0IDExOWVlNGQ3NzMgKCJ0b29scy9saWJ4YzogVG9sZXJhdGUgc3BlY2lmaWMg
+emVyby1jb250ZW50IHJlY29yZHMKPiBpbiBtaWdyYXRpb24gdjIgc3RyZWFtcyIpIG1lYW50IHRv
+bGVyYXRlIHRob3NlLCBidXQgZmFpbGVkIHRvIHNldCByYwo+IGFjY29yZGluZ2x5Lgo+IAo+IFNp
+Z25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KClJldmlld2VkLWJ5
+OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
