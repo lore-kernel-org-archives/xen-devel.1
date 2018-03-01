@@ -1,18 +1,15 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 0/9] drm/xen-front: Add support for Xen PV
- display frontend
-Date: Wed, 28 Feb 2018 17:14:23 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1802281708480.4239__1871.65325410223$1519866826$gmane$org@sstabellini-ThinkPad-X260>
-References: <1519200222-20623-1-git-send-email-andr2000@gmail.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-4.10-testing test] 120065: regressions - FAIL
+Date: Thu, 01 Mar 2018 01:23:43 +0000
+Message-ID: <osstest-120065-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1461234502-1519866864=:4239"
+Content-Type: multipart/mixed; boundary="===============6974955476275974744=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=redc=fx=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1erCno-0004Ut-S3
- for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 01:14:32 +0000
-In-Reply-To: <1519200222-20623-1-git-send-email-andr2000@gmail.com>
+ <srs0=1os/=fx=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1erCwx-0005EG-Tt
+ for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 01:23:59 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,203 +18,311 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr Andrushchenko <andr2000@gmail.com>
-Cc: jgross@suse.com, airlied@linux.ie, gustavo@padovan.org, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, seanpaul@chromium.org, daniel.vetter@intel.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+--===============6974955476275974744==
+Content-Type: text/plain
 
---8323329-1461234502-1519866864=:4239
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+flight 120065 xen-4.10-testing real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/120065/
 
-Hi all,
+Regressions :-(
 
-just as a clarification, this patch series implements the frontend
-driver for the "vdispl" protocol, which was reviewed, approved and
-committed in xen.git back in April:
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 10 debian-hvm-install fail REGR. vs. 119859
+ test-armhf-armhf-xl-credit2 16 guest-start/debian.repeat fail REGR. vs. 119859
+ test-amd64-amd64-xl-qemut-ws16-amd64 16 guest-localmigrate/x10 fail REGR. vs. 119859
 
-https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=xen/include/public/io/displif.h
+Tests which did not succeed, but are not blocking:
+ test-xtf-amd64-amd64-4       52 xtf/test-hvm64-memop-seg     fail   never pass
+ test-xtf-amd64-amd64-2       52 xtf/test-hvm64-memop-seg     fail   never pass
+ test-xtf-amd64-amd64-5       52 xtf/test-hvm64-memop-seg     fail   never pass
+ test-xtf-amd64-amd64-1       52 xtf/test-hvm64-memop-seg     fail   never pass
+ test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
+ test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-xtf-amd64-amd64-3       52 xtf/test-hvm64-memop-seg     fail   never pass
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
+ test-amd64-i386-xl-qemut-win7-amd64 17 guest-stop              fail never pass
+ test-amd64-amd64-xl-qemut-win7-amd64 17 guest-stop             fail never pass
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop              fail never pass
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop             fail never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-amd64-i386-xl-qemut-ws16-amd64 17 guest-stop              fail never pass
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop             fail never pass
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop              fail never pass
+ test-amd64-amd64-xl-qemut-win10-i386 10 windows-install        fail never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+ test-amd64-i386-xl-qemut-win10-i386 10 windows-install         fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
 
-As Xen maintainer, if a competing PV DRM protocol proposal will come up,
-I'll try to steer it into evolving the existing vdispl protocol, as we
-like to have only one protocol per device class.
+version targeted for testing:
+ xen                  a6780c122b863d2b626747a6b93ad6bd89fa11ec
+baseline version:
+ xen                  5e91fc4d3b6c1d3cd4d684d132e6fa1054627c04
 
-I am really looking forward to having this driver upstream in Linux.
+Last test of basis   119859  2018-02-22 02:57:59 Z    6 days
+Testing same since   120065  2018-02-27 13:55:24 Z    1 days    1 attempts
 
-Thanks Oleksandr!
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
 
-Cheers,
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64-xtf                                              pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-prev                                             pass    
+ build-i386-prev                                              pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ build-amd64-rumprun                                          pass    
+ build-i386-rumprun                                           pass    
+ test-xtf-amd64-amd64-1                                       pass    
+ test-xtf-amd64-amd64-2                                       pass    
+ test-xtf-amd64-amd64-3                                       pass    
+ test-xtf-amd64-amd64-4                                       pass    
+ test-xtf-amd64-amd64-5                                       pass    
+ test-amd64-amd64-xl                                          pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-i386-qemut-rhel6hvm-amd                           pass    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64                     pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-rumprun-amd64                               pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-i386-xl-qemut-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemut-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  fail    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-i386-rumprun-i386                                 pass    
+ test-amd64-amd64-xl-qemut-win10-i386                         fail    
+ test-amd64-i386-xl-qemut-win10-i386                          fail    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-i386-qemut-rhel6hvm-intel                         pass    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-migrupgrade                                 pass    
+ test-amd64-i386-migrupgrade                                  pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
-Stefano
 
-On Wed, 21 Feb 2018, Oleksandr Andrushchenko wrote:
-> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-> 
-> Hello!
-> 
-> This patch series adds support for Xen [1] para-virtualized
-> frontend display driver. It implements the protocol from
-> include/xen/interface/io/displif.h [2].
-> Accompanying backend [3] is implemented as a user-space application
-> and its helper library [4], capable of running as a Weston client
-> or DRM master.
-> Configuration of both backend and frontend is done via 
-> Xen guest domain configuration options [5].
-> 
-> *******************************************************************************
-> * Driver limitations
-> *******************************************************************************
->  1. Configuration options 1.1 (contiguous display buffers) and 2 (backend
->     allocated buffers) below are not supported at the same time.
-> 
->  2. Only primary plane without additional properties is supported.
-> 
->  3. Only one video mode supported which resolution is configured via XenStore.
-> 
->  4. All CRTCs operate at fixed frequency of 60Hz.
-> 
-> *******************************************************************************
-> * Driver modes of operation in terms of display buffers used
-> *******************************************************************************
->  Depending on the requirements for the para-virtualized environment, namely
->  requirements dictated by the accompanying DRM/(v)GPU drivers running in both
->  host and guest environments, number of operating modes of para-virtualized
->  display driver are supported:
->   - display buffers can be allocated by either frontend driver or backend
->   - display buffers can be allocated to be contiguous in memory or not
-> 
->  Note! Frontend driver itself has no dependency on contiguous memory for
->        its operation.
-> 
-> *******************************************************************************
-> * 1. Buffers allocated by the frontend driver.
-> *******************************************************************************
-> 
->  The below modes of operation are configured at compile-time via
->  frontend driver's kernel configuration.
-> 
->  1.1. Front driver configured to use GEM CMA helpers
->       This use-case is useful when used with accompanying DRM/vGPU driver in
->       guest domain which was designed to only work with contiguous buffers,
->       e.g. DRM driver based on GEM CMA helpers: such drivers can only import
->       contiguous PRIME buffers, thus requiring frontend driver to provide
->       such. In order to implement this mode of operation para-virtualized
->       frontend driver can be configured to use GEM CMA helpers.
-> 
->  1.2. Front driver doesn't use GEM CMA
->       If accompanying drivers can cope with non-contiguous memory then, to
->       lower pressure on CMA subsystem of the kernel, driver can allocate
->       buffers from system memory.
-> 
->  Note! If used with accompanying DRM/(v)GPU drivers this mode of operation
->    may require IOMMU support on the platform, so accompanying DRM/vGPU
->    hardware can still reach display buffer memory while importing PRIME
->    buffers from the frontend driver.
-> 
-> *******************************************************************************
-> * 2. Buffers allocated by the backend
-> *******************************************************************************
-> 
->  This mode of operation is run-time configured via guest domain configuration
->  through XenStore entries.
-> 
->  For systems which do not provide IOMMU support, but having specific
->  requirements for display buffers it is possible to allocate such buffers
->  at backend side and share those with the frontend.
->  For example, if host domain is 1:1 mapped and has DRM/GPU hardware expecting
->  physically contiguous memory, this allows implementing zero-copying
->  use-cases.
-> 
-> 
-> I would like to thank at least, but not at last the following
-> people/communities who helped this driver to happen ;)
-> 
-> 1. My team at EPAM for continuous support
-> 2. Xen community for answering tons of questions on different
-> modes of operation of the driver with respect to virtualized
-> environment.
-> 3. Rob Clark for "GEM allocation for para-virtualized DRM driver" [6]
-> 4. Maarten Lankhorst for "Atomic driver and old remove FB behavior" [7]
-> 5. Ville Syrjälä for "Questions on page flips and atomic modeset" [8]
-> 
-> Thank you,
-> Oleksandr Andrushchenko
-> 
-> P.S. There are two dependencies for this driver limiting some of the
-> use-cases which are on review now:
-> 1. "drm/simple_kms_helper: Add {enable|disable}_vblank callback support" [9]
-> 2. "drm/simple_kms_helper: Fix NULL pointer dereference with no active CRTC" [10]
-> 
-> [1] https://wiki.xen.org/wiki/Paravirtualization_(PV)#PV_IO_Drivers
-> [2] https://elixir.bootlin.com/linux/v4.16-rc2/source/include/xen/interface/io/displif.h
-> [3] https://github.com/xen-troops/displ_be
-> [4] https://github.com/xen-troops/libxenbe
-> [5] https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=docs/man/xl.cfg.pod.5.in;h=a699367779e2ae1212ff8f638eff0206ec1a1cc9;hb=refs/heads/master#l1257
-> [6] https://lists.freedesktop.org/archives/dri-devel/2017-March/136038.html
-> [7] https://www.spinics.net/lists/dri-devel/msg164102.html
-> [8] https://www.spinics.net/lists/dri-devel/msg164463.html
-> [9] https://patchwork.freedesktop.org/series/38073/
-> [10] https://patchwork.freedesktop.org/series/38139/
-> 
-> Oleksandr Andrushchenko (9):
->   drm/xen-front: Introduce Xen para-virtualized frontend driver
->   drm/xen-front: Implement Xen bus state handling
->   drm/xen-front: Read driver configuration from Xen store
->   drm/xen-front: Implement Xen event channel handling
->   drm/xen-front: Implement handling of shared display buffers
->   drm/xen-front: Introduce DRM/KMS virtual display driver
->   drm/xen-front: Implement KMS/connector handling
->   drm/xen-front: Implement GEM operations
->   drm/xen-front: Implement communication with backend
-> 
->  drivers/gpu/drm/Kconfig                     |   2 +
->  drivers/gpu/drm/Makefile                    |   1 +
->  drivers/gpu/drm/xen/Kconfig                 |  30 ++
->  drivers/gpu/drm/xen/Makefile                |  17 +
->  drivers/gpu/drm/xen/xen_drm_front.c         | 712 ++++++++++++++++++++++++++++
->  drivers/gpu/drm/xen/xen_drm_front.h         | 154 ++++++
->  drivers/gpu/drm/xen/xen_drm_front_cfg.c     |  84 ++++
->  drivers/gpu/drm/xen/xen_drm_front_cfg.h     |  45 ++
->  drivers/gpu/drm/xen/xen_drm_front_conn.c    | 125 +++++
->  drivers/gpu/drm/xen/xen_drm_front_conn.h    |  35 ++
->  drivers/gpu/drm/xen/xen_drm_front_drv.c     | 294 ++++++++++++
->  drivers/gpu/drm/xen/xen_drm_front_drv.h     |  73 +++
->  drivers/gpu/drm/xen/xen_drm_front_evtchnl.c | 399 ++++++++++++++++
->  drivers/gpu/drm/xen/xen_drm_front_evtchnl.h |  89 ++++
->  drivers/gpu/drm/xen/xen_drm_front_gem.c     | 360 ++++++++++++++
->  drivers/gpu/drm/xen/xen_drm_front_gem.h     |  46 ++
->  drivers/gpu/drm/xen/xen_drm_front_gem_cma.c |  93 ++++
->  drivers/gpu/drm/xen/xen_drm_front_kms.c     | 299 ++++++++++++
->  drivers/gpu/drm/xen/xen_drm_front_kms.h     |  30 ++
->  drivers/gpu/drm/xen/xen_drm_front_shbuf.c   | 430 +++++++++++++++++
->  drivers/gpu/drm/xen/xen_drm_front_shbuf.h   |  80 ++++
->  21 files changed, 3398 insertions(+)
->  create mode 100644 drivers/gpu/drm/xen/Kconfig
->  create mode 100644 drivers/gpu/drm/xen/Makefile
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front.c
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front.h
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_cfg.c
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_cfg.h
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_conn.c
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_conn.h
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_drv.c
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_drv.h
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_evtchnl.h
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_gem.c
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_gem.h
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_gem_cma.c
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_kms.c
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_kms.h
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_shbuf.c
->  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_shbuf.h
-> 
-> -- 
-> 2.7.4
-> 
---8323329-1461234502-1519866864=:4239
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit a6780c122b863d2b626747a6b93ad6bd89fa11ec
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Tue Feb 27 14:19:50 2018 +0100
+
+    x86/hvm: Disallow the creation of HVM domains without Local APIC emulation
+    
+    There are multiple problems, not necesserily limited to:
+    
+     * Guests which configure event channels via hvmop_set_evtchn_upcall_vector(),
+       or which hit %cr8 emulation will cause Xen to fall over a NULL vlapic->regs
+       pointer.
+    
+     * On Intel hardware, disabling the TPR_SHADOW execution control without
+       reenabling CR8_{LOAD,STORE} interception means that the guests %cr8
+       accesses interact with the real TPR.  Amongst other things, setting the
+       real TPR to 0xf blocks even IPIs from interrupting this CPU.
+    
+     * On hardware which sets up the use of Interrupt Posting, including
+       IOMMU-Posting, guests run without the appropriate non-root configuration,
+       which at a minimum will result in dropped interrupts.
+    
+    Whether no-LAPIC mode is of any use at all remains to be seen.
+    
+    This is XSA-256.
+    
+    Reported-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+    master commit: 0aa6158b674c5d083b75ac8fcd1e7ae92d0c39ae
+    master date: 2018-02-27 14:08:36 +0100
+
+commit 16edf98e95bf995864d375b9b67b4fc2cef928a5
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Tue Feb 27 14:19:19 2018 +0100
+
+    gnttab: don't blindly free status pages upon version change
+    
+    There may still be active mappings, which would trigger the respective
+    BUG_ON(). Split the loop into one dealing with the page attributes and
+    the second (when the first fully passed) freeing the pages. Return an
+    error if any pages still have pending references.
+    
+    This is part of XSA-255.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    master commit: 38bfcc165dda5f4284d7c218b91df9e144ddd88d
+    master date: 2018-02-27 14:07:12 +0100
+
+commit e2ceb2ed665647b111efcac550935e90a1edbdc4
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Tue Feb 27 14:18:34 2018 +0100
+
+    gnttab/ARM: don't corrupt shared GFN array
+    
+    ... by writing status GFNs to it. Introduce a second array instead.
+    Also implement gnttab_status_gmfn() properly now that the information is
+    suitably being tracked.
+    
+    While touching it anyway, remove a misguided (but luckily benign) upper
+    bound check from gnttab_shared_gmfn(): We should never access beyond the
+    bounds of that array.
+    
+    This is part of XSA-255.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    master commit: 9d2f8f9c65d4da35437f50ed9e812a2c5ab313e2
+    master date: 2018-02-27 14:04:44 +0100
+
+commit 1b1c0590992d3d4a547203b124b0d130a475bc52
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Tue Feb 27 14:17:36 2018 +0100
+
+    memory: don't implicitly unpin for decrease-reservation
+    
+    It very likely was a mistake (copy-and-paste from domain cleanup code)
+    to implicitly unpin here: The caller should really unpin itself before
+    (or after, if they so wish) requesting the page to be removed.
+    
+    This is XSA-252.
+    
+    Reported-by: Jann Horn <jannh@google.com>
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    master commit: d798a0952903db9d8ee0a580e03f214d2b49b7d7
+    master date: 2018-02-27 14:03:27 +0100
+(qemu changes not included)
+
+
+--===============6974955476275974744==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -227,4 +332,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---8323329-1461234502-1519866864=:4239--
+--===============6974955476275974744==--
