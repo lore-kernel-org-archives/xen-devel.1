@@ -1,18 +1,16 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH 2/6] x86/hvm: Handle viridian MSRs via the
- new guest_{rd, wr}msr() infrastructure
-Date: Thu, 1 Mar 2018 11:08:13 +0000
-Message-ID: <828ed7dfa5d744a8b883df68bf13c9d5@AMSPEX02CL03.citrite.net>
-References: <1519666519-16311-1-git-send-email-andrew.cooper3@citrix.com>
- <1519666519-16311-3-git-send-email-andrew.cooper3@citrix.com>
- <8d1f32d3eeaa4903bc7b6e0e6b951795@AMSPEX02CL03.citrite.net>
- <9c498857-91ee-416e-bb35-46f18e1058fa@citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 4/6] xen/sched: Remove {init,
+ destroy}_domain() interfaces
+Date: Thu, 01 Mar 2018 12:08:22 +0100
+Message-ID: <1519902502.9145.18.camel@suse.com>
+References: <1519827268-18199-1-git-send-email-andrew.cooper3@citrix.com>
+ <1519827268-18199-5-git-send-email-andrew.cooper3@citrix.com>
+ <92a3c792-1399-c2fc-44d4-fbf4161c0c83@citrix.com>
+ <8bf35012-737a-420e-33a7-ab68b06df14a@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3595402051283452424=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <9c498857-91ee-416e-bb35-46f18e1058fa@citrix.com>
-Content-Language: en-US
+In-Reply-To: <8bf35012-737a-420e-33a7-ab68b06df14a@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,81 +19,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <Andrew.Cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Jan Beulich <JBeulich@suse.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: George Dunlap <george.dunlap@eu.citrix.com>, Josh Whitehead <josh.whitehead@dornerworks.com>, Meng Xu <mengxu@cis.upenn.edu>, Robert VanVossen <robert.vanvossen@dornerworks.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBBbmRyZXcgQ29vcGVyDQo+IFNl
-bnQ6IDI4IEZlYnJ1YXJ5IDIwMTggMTg6MjINCj4gVG86IFBhdWwgRHVycmFudCA8UGF1bC5EdXJy
-YW50QGNpdHJpeC5jb20+OyBYZW4tZGV2ZWwgPHhlbi0NCj4gZGV2ZWxAbGlzdHMueGVuLm9yZz4N
-Cj4gQ2M6IEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT47IEp1biBOYWthamltYQ0KPiA8
-anVuLm5ha2FqaW1hQGludGVsLmNvbT47IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29t
-PjsgQm9yaXMNCj4gT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT47IFN1cmF2
-ZWUgU3V0aGlrdWxwYW5pdA0KPiA8c3VyYXZlZS5zdXRoaWt1bHBhbml0QGFtZC5jb20+OyBXZWkg
-TGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPjsgUm9nZXINCj4gUGF1IE1vbm5lIDxyb2dlci5wYXVA
-Y2l0cml4LmNvbT47IFNlcmdleSBEeWFzbGkNCj4gPHNlcmdleS5keWFzbGlAY2l0cml4LmNvbT4N
-Cj4gU3ViamVjdDogUmU6IFtQQVRDSCAyLzZdIHg4Ni9odm06IEhhbmRsZSB2aXJpZGlhbiBNU1Jz
-IHZpYSB0aGUgbmV3DQo+IGd1ZXN0X3tyZCx3cn1tc3IoKSBpbmZyYXN0cnVjdHVyZQ0KPiANCj4g
-T24gMjcvMDIvMTggMTQ6MzgsIFBhdWwgRHVycmFudCB3cm90ZToNCj4gPj4gQEAgLTY5OCwxMyAr
-Njk3LDExIEBAIHZvaWQgdmlyaWRpYW5fdGltZV9yZWZfY291bnRfdGhhdyhzdHJ1Y3QNCj4gZG9t
-YWluDQo+ID4+ICpkKQ0KPiA+PiAgICAgICAgICB0cmMtPm9mZiA9IChpbnQ2NF90KXRyYy0+dmFs
-IC0gcmF3X3RyY192YWwoZCk7DQo+ID4+ICB9DQo+ID4+DQo+ID4+IC1pbnQgcmRtc3JfdmlyaWRp
-YW5fcmVncyh1aW50MzJfdCBpZHgsIHVpbnQ2NF90ICp2YWwpDQo+ID4+ICtpbnQgZ3Vlc3RfcmRt
-c3JfdmlyaWRpYW4oY29uc3Qgc3RydWN0IHZjcHUgKnYsIHVpbnQzMl90IGlkeCwgdWludDY0X3QN
-Cj4gKnZhbCkNCj4gPj4gIHsNCj4gPj4gLSAgICBzdHJ1Y3QgdmNwdSAqdiA9IGN1cnJlbnQ7DQo+
-ID4+ICAgICAgc3RydWN0IGRvbWFpbiAqZCA9IHYtPmRvbWFpbjsNCj4gPj4gLQ0KPiA+PiAtICAg
-IGlmICggIWlzX3ZpcmlkaWFuX2RvbWFpbihkKSApDQo+ID4+IC0gICAgICAgIHJldHVybiAwOw0K
-PiA+PiArDQo+ID4+ICsgICAgQVNTRVJUKGlzX3ZpcmlkaWFuX2RvbWFpbihkKSk7DQo+ID4+DQo+
-ID4+ICAgICAgc3dpdGNoICggaWR4ICkNCj4gPj4gICAgICB7DQo+ID4+IEBAIC03MjUsNyArNzIy
-LDcgQEAgaW50IHJkbXNyX3ZpcmlkaWFuX3JlZ3ModWludDMyX3QgaWR4LCB1aW50NjRfdCAqdmFs
-KQ0KPiA+Pg0KPiA+PiAgICAgIGNhc2UgSFZfWDY0X01TUl9UU0NfRlJFUVVFTkNZOg0KPiA+PiAg
-ICAgICAgICBpZiAoIHZpcmlkaWFuX2ZlYXR1cmVfbWFzayhkKSAmIEhWTVBWX25vX2ZyZXEgKQ0K
-PiA+PiAtICAgICAgICAgICAgcmV0dXJuIDA7DQo+ID4+ICsgICAgICAgICAgICBnb3RvIGdwX2Zh
-dWx0Ow0KPiA+Pg0KPiA+PiAgICAgICAgICBwZXJmY19pbmNyKG1zaHZfcmRtc3JfdHNjX2ZyZXF1
-ZW5jeSk7DQo+ID4+ICAgICAgICAgICp2YWwgPSAodWludDY0X3QpZC0+YXJjaC50c2Nfa2h6ICog
-MTAwMHVsbDsNCj4gPj4gQEAgLTczMyw3ICs3MzAsNyBAQCBpbnQgcmRtc3JfdmlyaWRpYW5fcmVn
-cyh1aW50MzJfdCBpZHgsIHVpbnQ2NF90ICp2YWwpDQo+ID4+DQo+ID4+ICAgICAgY2FzZSBIVl9Y
-NjRfTVNSX0FQSUNfRlJFUVVFTkNZOg0KPiA+PiAgICAgICAgICBpZiAoIHZpcmlkaWFuX2ZlYXR1
-cmVfbWFzayhkKSAmIEhWTVBWX25vX2ZyZXEgKQ0KPiA+PiAtICAgICAgICAgICAgcmV0dXJuIDA7
-DQo+ID4+ICsgICAgICAgICAgICBnb3RvIGdwX2ZhdWx0Ow0KPiA+Pg0KPiA+PiAgICAgICAgICBw
-ZXJmY19pbmNyKG1zaHZfcmRtc3JfYXBpY19mcmVxdWVuY3kpOw0KPiA+PiAgICAgICAgICAqdmFs
-ID0gMTAwMDAwMDAwMHVsbCAvIEFQSUNfQlVTX0NZQ0xFX05TOw0KPiA+PiBAQCAtNzU3LDcgKzc1
-NCw3IEBAIGludCByZG1zcl92aXJpZGlhbl9yZWdzKHVpbnQzMl90IGlkeCwgdWludDY0X3QgKnZh
-bCkNCj4gPj4NCj4gPj4gICAgICBjYXNlIEhWX1g2NF9NU1JfUkVGRVJFTkNFX1RTQzoNCj4gPj4g
-ICAgICAgICAgaWYgKCAhKHZpcmlkaWFuX2ZlYXR1cmVfbWFzayhkKSAmIEhWTVBWX3JlZmVyZW5j
-ZV90c2MpICkNCj4gPj4gLSAgICAgICAgICAgIHJldHVybiAwOw0KPiA+IEkgaGF2ZSBhIHJlY29s
-bGVjdGlvbiB0aGF0IGZvciBhdCBsZWFzdCBvbmUgdmVyc2lvbiBvZiBXaW5kb3dzLCB3aGVuIGRl
-YnVnDQo+IG1vZGUgaXMgZW5hYmxlZCwgaXQgcmVhZHMgdGhlIHJlZmVyZW5jZSBUU0MgTVNSIHJl
-Z2FyZGxlc3Mgb2Ygd2hldGhlciB0aGUNCj4gZmVhdHVyZSBpcyBlbmFibGVkIG9yIG5vdCBzbyB0
-aGlzIGNoYW5nZSBtYXkgd2VsbCBjYXVzZSBndWVzdCBib290IGZhaWx1cmVzLg0KPiA+IEluIGdl
-bmVyYWwgSSB3b3VsZCBiZSB3YXJ5IG9mICNHUCBmYXVsdGluZyB3aGVyZSB0aGUgY3VycmVudCBj
-b2RlIGRvZXMNCj4gbm90LiBJIHRoaW5rIHRoZSBjdXJyZW50IGNvZGUgaXMgYWxtb3N0IGNlcnRh
-aW5seSB0b28gbGliZXJhbCBldmVuIGluIHRoZSBmYWNlIG9mDQo+IGJ1Z2d5IHZlcnNpb25zIG9m
-IFdpbmRvd3MgYnV0IHRoZSBuZXcgY29kZSBtaWdodCBiZSB0b28gY29uc2VydmF0aXZlLiBJdA0K
-PiB3aWxsIG5lZWQgc29tZSB0ZXN0aW5nLg0KPiA+DQo+ID4gSW4gcHJpbmNpcGxlIHRob3VnaC4u
-Lg0KPiA+DQo+ID4gUmV2aWV3ZWQtYnk6IFBhdWwgRHVycmFudCA8cGF1bC5kdXJyYW50QGNpdHJp
-eC5jb20+DQo+IA0KPiBUaGUgY3VycmVudCBjb2RlIGlzIGFic29sdXRlbHkgd3JvbmcsIGJlY2F1
-c2UgaXQgZmFsbHMgYmFjayBpbnRvIHRoZQ0KPiBkZWZhdWx0IHBhdGggYW5kIGNvbnRpbnVlcyBs
-b29raW5nIGZvciBhIHJlc3VsdC7CoCBPbiB0aGUgcmVhZCBzaWRlLCB0aGF0DQo+IGVuZHMgdXAg
-bGVha2luZyBpbiBMJE4tMSBoeXBlcnZpc29yIGxlYXZlcyBpZiB0aGV5IGFyZSBwcmVzZW50LCB3
-aGlsZQ0KPiB0aGUgd3JpdGUgc2lkZSBlbmRzIHVwIGRpc2NhcmRpbmcgdGhlIHJlc3VsdC4NCj4g
-DQo+IElTVFIgaXQgd2FzIG9ubHkgb25lIHNpbmdsZSBwcmUtcmVsZWFzZSBidWlsZCBvZiB3aW5k
-b3dzIHdoaWNoIGZhaWxlZCB0bw0KPiBjaGVjayBmb3IgdGhlIFRTQyBmZWF0dXJlLCBzbyBJJ20g
-bm90IHN1cmUgd2UgbmVlZCB0byB3b3JyeS4NCj4gDQoNCk5vLCBJU1RSIHRoYXQgdHVybmluZyBk
-ZWJ1ZyBtb2RlIG9uIGluIHJlY2VudCBXaW5kb3dzIGtlcm5lbHMgbWFrZXMgdGhlbSBhc3N1bWUg
-dGhleSBoYXZlIHRoZSB0aW1lciBNU1IuIChUaGUgYmFkIGJyZWFrYWdlIGluIHByZS1yZWxlYXNl
-IFdpbmRvd3MgOCB3YXMgdGhhdCBpdCBhc3N1bWVkIGl0IGhhZCBhIHN5bklDIGp1c3QgYmVjYXVz
-ZSBpdCBzYXcgdGhlIGJhc2ljIHZpcmlkaWFuIENQVUlEIGxlYXZlcykuDQoNCj4gSWYgd2UgZG8g
-ZmluZCB0aGF0IGl0IGlzIGEgcHJvYmxlbSBpbiBwcmFjdGljZSwgdGhlbiB0aGUgY29ycmVjdCBj
-b3Vyc2UNCj4gb2YgYWN0aW9uIGlzIHRvIGV4cGxpY2l0bHkgZmlsbCB3aXRoIDAgYW5kIHJldHVy
-biBYODZFTVVMX09LQVksIHdoaWNoIGF0DQo+IGxlYXN0IG1lYW5zIHRoYXQgd2UndmUgZGVhbHQg
-d2l0aCB0aGUgcmVxdWVzdC4NCj4gDQo+IEkndmUgYm9vdGVkIFdpbjcgYW5kIFdpbjEwIHdpdGgg
-dGhlIGNvZGUgaW4gdGhpcyBzdGF0ZS7CoCBBcmUgeW91IGhhcHB5DQo+IGZvciB1cyB0byBnbyB3
-aXRoIHRoaXMgcHJvdmlzaW9uYWxseSwgYW5kIHJldmVydCBiYWNrIHRvIGFuIGV4cGxpY2l0DQo+
-IGRpc2NhcmQgaWYgd2UgZW5jb3VudGVyIHByb2JsZW1zPw0KPiANCg0KWWVzLCB0aGF0J3MgZmlu
-ZS4gSWYgNyBhbmQgMTAgYXJlIGhhcHB5IChpbiBkZWJ1ZyBtb2RlKSB0aGVuIEknbSBoYXBweS4g
-QXMgeW91IHNheSwgd2UnbGwganVzdCBkZWFsIHdpdGggYW55IGZhbGxvdXQgb24gYSBjYXNlLWJ5
-LWNhc2UgYmFzaXMuDQoNCkNoZWVycywNCg0KICBQYXVsDQoNCj4gfkFuZHJldw0KX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3595402051283452424==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-rMlpaXtf3lFL55T6TTMW"
+
+
+--=-rMlpaXtf3lFL55T6TTMW
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-02-28 at 16:33 +0000, Andrew Cooper wrote:
+> On 28/02/18 16:22, George Dunlap wrote:
+> >=20
+> > I kind of feel like there was a reason for the init / alloc
+> > difference;
+> > but as you say, at the moment all the schedulers are basically
+> > identical.  In the unlikely event that we need separate callbacks,
+> > we
+> > can introduce them at such time as we have a need for them.
+> >=20
+> > Reviewed-by: George Dunlap <george.dunlap@citrix.com>
+>=20
+> It looks like it was the cpupool work (c/s 78be3dbb, 2010) which
+> split
+> alloc/free domdata() out of init/destroy domain() and made the latter
+> effectively redundant.
+>=20
+Yes. As far as I can see/tell (I wasn't here), that commit introduced
+alloc_domdata because there was the need to allocate the per-scheduler
+domain data, without immediately assigning it to sched_priv.
+
+I guess something like this that Andrew is doing could have been done
+at that point. It just was not. :-)
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-rMlpaXtf3lFL55T6TTMW
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqX3yYACgkQFkJ4iaW4
+c+67zQ/+PQCbCl+wGVrEqSNBtoNScWJoWVVI+CHPo+j3fVk5Yk1tuSHYzXEcx4oT
+8DD8q8bV/eBzJCLc8qO0/X+ymhoL7nXLeL87WQ0Espaeva1wEr/1chqkluS8SEH5
+IPlsEtF6f1WEQNXDC94cEfpxJlQYbSx5JRD0MfLRDuxOyW7aRqmiV6aIH0qP0shg
+cWJeQtsSqM19hub6VGbmFiLmslJF0X9VO4L2+2eP7HqJrS2lrKDqQADIcOviDAmU
+oDmuiQjKStPVlerqKZj1xf+fJHXD1lO/s0p3h9C0aggZDmAeGAA/bFiTmHvZg3RP
+D7fv6oWU7naTJ8BwTfmrJxel8DKB7TCE/5jH6Oic5OApmS9RbxBSSharoYd6HZ8w
+aH4TNqRPWoOgstBP96nNIQNTwNp3jiZnyHk4uQPvN3Zz12a24OvS+2pQX2f1cHVA
+M+/mtSFsXYwNa8Fbuld/NYjyJju2Ciq6SGVd1osZtv5pFcIdQywqsgsNdcwxuBRL
+HZ8oa2At4Uaq+SqE+CtK2tTiFnh3BNoBsSLpVDjwvZon319UjV3+yVwTGxG9jpqP
+yOFsBo2UHvIsbbGlfAf/AtSup/TId68aEOZBoHZd1TcUTPxkVOCToW1HJPiJk33T
+x7i+ixzpLMrj+6SKOETObahMy5zX3icGfdFie+PAuyAp+kwkWT4=
+=/zaH
+-----END PGP SIGNATURE-----
+
+--=-rMlpaXtf3lFL55T6TTMW--
+
+
+
+--===============3595402051283452424==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3595402051283452424==--
