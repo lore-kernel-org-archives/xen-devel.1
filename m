@@ -1,16 +1,18 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 120106: regressions -
-	trouble: blocked/broken/pass
-Date: Wed, 28 Feb 2018 23:56:38 +0000
-Message-ID: <osstest-120106-mainreport@xen.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 0/9] drm/xen-front: Add support for Xen PV
+ display frontend
+Date: Wed, 28 Feb 2018 17:14:23 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1802281708480.4239__1871.65325410223$1519866826$gmane$org@sstabellini-ThinkPad-X260>
+References: <1519200222-20623-1-git-send-email-andr2000@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7334836362084935037=="
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1461234502-1519866864=:4239"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=zfhr=fw=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1erBae-0000to-Cq
- for xen-devel@lists.xenproject.org; Wed, 28 Feb 2018 23:56:52 +0000
+ <srs0=redc=fx=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1erCno-0004Ut-S3
+ for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 01:14:32 +0000
+In-Reply-To: <1519200222-20623-1-git-send-email-andr2000@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,148 +21,203 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Oleksandr Andrushchenko <andr2000@gmail.com>
+Cc: jgross@suse.com, airlied@linux.ie, gustavo@padovan.org, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, seanpaul@chromium.org, daniel.vetter@intel.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============7334836362084935037==
-Content-Type: text/plain
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-flight 120106 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/120106/
+--8323329-1461234502-1519866864=:4239
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 
-Regressions :-(
+Hi all,
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-armhf                     <job status>                 broken
- build-armhf                   5 host-build-prep          fail REGR. vs. 120098
+just as a clarification, this patch series implements the frontend
+driver for the "vdispl" protocol, which was reviewed, approved and
+committed in xen.git back in April:
 
-Tests which did not succeed, but are not blocking:
- test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=xen/include/public/io/displif.h
 
-version targeted for testing:
- xen                  85688075ccc22c12bd0fca2a2c269199938e104c
-baseline version:
- xen                  cb671efbf1fae302c0ee5ebd6e23564e319babc8
+As Xen maintainer, if a competing PV DRM protocol proposal will come up,
+I'll try to steer it into evolving the existing vdispl protocol, as we
+like to have only one protocol per device class.
 
-Last test of basis   120098  2018-02-28 16:01:46 Z    0 days
-Testing same since   120102  2018-02-28 19:01:39 Z    0 days    2 attempts
+I am really looking forward to having this driver upstream in Linux.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  George Dunlap <george.dunlap@citrix.com>
-  Kevin Tian <kevin.tian@intel.com>
-  Razvan Cojocaru <rcojocaru@bitdefender.com>
-  Tamas K Lengyel <tamas@tklengyel.com>
+Thanks Oleksandr!
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  broken  
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          blocked 
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
- test-amd64-amd64-libvirt                                     pass    
+Cheers,
 
+Stefano
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-broken-job build-armhf broken
-
-Not pushing.
-
-------------------------------------------------------------
-commit 85688075ccc22c12bd0fca2a2c269199938e104c
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Wed Feb 21 18:10:00 2018 +0000
-
-    x86/hvm: Constify the read side of vlapic handling
-    
-    This is in preparation to make hvm_x2apic_msr_read() take a const vcpu
-    pointer.  One modification is to alter vlapic_get_tmcct() to not use current.
-    
-    This in turn needs an alteration to hvm_get_guest_time_fixed(), which is safe
-    because the only mutable action it makes is to take the domain plt lock.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-commit 62e80dff59c779cb56755b419120529e3d7eb17d
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Mon Feb 26 14:23:03 2018 +0000
-
-    x86/vmx: Simplfy the default cases in vmx_msr_{read,write}_intercept()
-    
-    The default case of vmx_msr_write_intercept() in particular is very tangled.
-    
-    First of all, fold long_mode_do_msr_{read,write}() into their callers.  These
-    functions were split out in the past because of the 32bit build of Xen, but it
-    is unclear why the cases weren't simply #ifdef'd in place.
-    
-    Next, invert the vmx_write_guest_msr()/is_last_branch_msr() logic to break if
-    the condition is satisfied, rather than nesting if it wasn't.  This allows the
-    wrmsr_hypervisor_regs() call to be un-nested with respect to the other default
-    logic.
-    
-    No practical difference from a guests point of view.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Kevin Tian <kevin.tian@intel.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-
-commit b68c4f1ebe4f413076c4915733a61c818b7dc73a
-Author: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Date:   Wed Feb 28 12:38:15 2018 +0200
-
-    x86/hvm: fix domain crash when CR3 has the noflush bit set
-    
-    In hardware, when PCID support is enabled and the NOFLUSH bit is set
-    when writing a CR3 value, the hardware will clear that that bit and
-    change the CR3 without flushing the TLB. hvm_set_cr3(), however, was
-    ignoring this bit; the result was that post-vm_event checks detected
-    an invalid CR3 value and crashed the domain.
-    
-    Handle NOFLUSH in hvm_set_cr3() by:
-    1. Clearing the bit
-    2. Passing a "noflush" flag to lower-level cr3 setting functions to
-    indicate that a flush should not be performed.
-    
-    Also clear X86_CR3_NOFLUSH when reporting CR3 monitored CR3 writes.
-    
-    This allows introspection to be used on VMs whose operating system uses
-    the NOFLUSH bit.
-    
-    Signed-off-by: Razvan Cojocaru <rcojocaru@bitdefender.com>
-    Reported-by: Bitweasil <bitweasil@cryptohaze.com>
-    Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Kevin Tian <kevin.tian@intel.com>
-    Acked-by: George Dunlap <george.dunlap@citrix.com>
-    Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-(qemu changes not included)
-
-
---===============7334836362084935037==
+On Wed, 21 Feb 2018, Oleksandr Andrushchenko wrote:
+> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+> 
+> Hello!
+> 
+> This patch series adds support for Xen [1] para-virtualized
+> frontend display driver. It implements the protocol from
+> include/xen/interface/io/displif.h [2].
+> Accompanying backend [3] is implemented as a user-space application
+> and its helper library [4], capable of running as a Weston client
+> or DRM master.
+> Configuration of both backend and frontend is done via 
+> Xen guest domain configuration options [5].
+> 
+> *******************************************************************************
+> * Driver limitations
+> *******************************************************************************
+>  1. Configuration options 1.1 (contiguous display buffers) and 2 (backend
+>     allocated buffers) below are not supported at the same time.
+> 
+>  2. Only primary plane without additional properties is supported.
+> 
+>  3. Only one video mode supported which resolution is configured via XenStore.
+> 
+>  4. All CRTCs operate at fixed frequency of 60Hz.
+> 
+> *******************************************************************************
+> * Driver modes of operation in terms of display buffers used
+> *******************************************************************************
+>  Depending on the requirements for the para-virtualized environment, namely
+>  requirements dictated by the accompanying DRM/(v)GPU drivers running in both
+>  host and guest environments, number of operating modes of para-virtualized
+>  display driver are supported:
+>   - display buffers can be allocated by either frontend driver or backend
+>   - display buffers can be allocated to be contiguous in memory or not
+> 
+>  Note! Frontend driver itself has no dependency on contiguous memory for
+>        its operation.
+> 
+> *******************************************************************************
+> * 1. Buffers allocated by the frontend driver.
+> *******************************************************************************
+> 
+>  The below modes of operation are configured at compile-time via
+>  frontend driver's kernel configuration.
+> 
+>  1.1. Front driver configured to use GEM CMA helpers
+>       This use-case is useful when used with accompanying DRM/vGPU driver in
+>       guest domain which was designed to only work with contiguous buffers,
+>       e.g. DRM driver based on GEM CMA helpers: such drivers can only import
+>       contiguous PRIME buffers, thus requiring frontend driver to provide
+>       such. In order to implement this mode of operation para-virtualized
+>       frontend driver can be configured to use GEM CMA helpers.
+> 
+>  1.2. Front driver doesn't use GEM CMA
+>       If accompanying drivers can cope with non-contiguous memory then, to
+>       lower pressure on CMA subsystem of the kernel, driver can allocate
+>       buffers from system memory.
+> 
+>  Note! If used with accompanying DRM/(v)GPU drivers this mode of operation
+>    may require IOMMU support on the platform, so accompanying DRM/vGPU
+>    hardware can still reach display buffer memory while importing PRIME
+>    buffers from the frontend driver.
+> 
+> *******************************************************************************
+> * 2. Buffers allocated by the backend
+> *******************************************************************************
+> 
+>  This mode of operation is run-time configured via guest domain configuration
+>  through XenStore entries.
+> 
+>  For systems which do not provide IOMMU support, but having specific
+>  requirements for display buffers it is possible to allocate such buffers
+>  at backend side and share those with the frontend.
+>  For example, if host domain is 1:1 mapped and has DRM/GPU hardware expecting
+>  physically contiguous memory, this allows implementing zero-copying
+>  use-cases.
+> 
+> 
+> I would like to thank at least, but not at last the following
+> people/communities who helped this driver to happen ;)
+> 
+> 1. My team at EPAM for continuous support
+> 2. Xen community for answering tons of questions on different
+> modes of operation of the driver with respect to virtualized
+> environment.
+> 3. Rob Clark for "GEM allocation for para-virtualized DRM driver" [6]
+> 4. Maarten Lankhorst for "Atomic driver and old remove FB behavior" [7]
+> 5. Ville Syrjälä for "Questions on page flips and atomic modeset" [8]
+> 
+> Thank you,
+> Oleksandr Andrushchenko
+> 
+> P.S. There are two dependencies for this driver limiting some of the
+> use-cases which are on review now:
+> 1. "drm/simple_kms_helper: Add {enable|disable}_vblank callback support" [9]
+> 2. "drm/simple_kms_helper: Fix NULL pointer dereference with no active CRTC" [10]
+> 
+> [1] https://wiki.xen.org/wiki/Paravirtualization_(PV)#PV_IO_Drivers
+> [2] https://elixir.bootlin.com/linux/v4.16-rc2/source/include/xen/interface/io/displif.h
+> [3] https://github.com/xen-troops/displ_be
+> [4] https://github.com/xen-troops/libxenbe
+> [5] https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=docs/man/xl.cfg.pod.5.in;h=a699367779e2ae1212ff8f638eff0206ec1a1cc9;hb=refs/heads/master#l1257
+> [6] https://lists.freedesktop.org/archives/dri-devel/2017-March/136038.html
+> [7] https://www.spinics.net/lists/dri-devel/msg164102.html
+> [8] https://www.spinics.net/lists/dri-devel/msg164463.html
+> [9] https://patchwork.freedesktop.org/series/38073/
+> [10] https://patchwork.freedesktop.org/series/38139/
+> 
+> Oleksandr Andrushchenko (9):
+>   drm/xen-front: Introduce Xen para-virtualized frontend driver
+>   drm/xen-front: Implement Xen bus state handling
+>   drm/xen-front: Read driver configuration from Xen store
+>   drm/xen-front: Implement Xen event channel handling
+>   drm/xen-front: Implement handling of shared display buffers
+>   drm/xen-front: Introduce DRM/KMS virtual display driver
+>   drm/xen-front: Implement KMS/connector handling
+>   drm/xen-front: Implement GEM operations
+>   drm/xen-front: Implement communication with backend
+> 
+>  drivers/gpu/drm/Kconfig                     |   2 +
+>  drivers/gpu/drm/Makefile                    |   1 +
+>  drivers/gpu/drm/xen/Kconfig                 |  30 ++
+>  drivers/gpu/drm/xen/Makefile                |  17 +
+>  drivers/gpu/drm/xen/xen_drm_front.c         | 712 ++++++++++++++++++++++++++++
+>  drivers/gpu/drm/xen/xen_drm_front.h         | 154 ++++++
+>  drivers/gpu/drm/xen/xen_drm_front_cfg.c     |  84 ++++
+>  drivers/gpu/drm/xen/xen_drm_front_cfg.h     |  45 ++
+>  drivers/gpu/drm/xen/xen_drm_front_conn.c    | 125 +++++
+>  drivers/gpu/drm/xen/xen_drm_front_conn.h    |  35 ++
+>  drivers/gpu/drm/xen/xen_drm_front_drv.c     | 294 ++++++++++++
+>  drivers/gpu/drm/xen/xen_drm_front_drv.h     |  73 +++
+>  drivers/gpu/drm/xen/xen_drm_front_evtchnl.c | 399 ++++++++++++++++
+>  drivers/gpu/drm/xen/xen_drm_front_evtchnl.h |  89 ++++
+>  drivers/gpu/drm/xen/xen_drm_front_gem.c     | 360 ++++++++++++++
+>  drivers/gpu/drm/xen/xen_drm_front_gem.h     |  46 ++
+>  drivers/gpu/drm/xen/xen_drm_front_gem_cma.c |  93 ++++
+>  drivers/gpu/drm/xen/xen_drm_front_kms.c     | 299 ++++++++++++
+>  drivers/gpu/drm/xen/xen_drm_front_kms.h     |  30 ++
+>  drivers/gpu/drm/xen/xen_drm_front_shbuf.c   | 430 +++++++++++++++++
+>  drivers/gpu/drm/xen/xen_drm_front_shbuf.h   |  80 ++++
+>  21 files changed, 3398 insertions(+)
+>  create mode 100644 drivers/gpu/drm/xen/Kconfig
+>  create mode 100644 drivers/gpu/drm/xen/Makefile
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front.c
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front.h
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_cfg.c
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_cfg.h
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_conn.c
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_conn.h
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_drv.c
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_drv.h
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_evtchnl.h
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_gem.c
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_gem.h
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_gem_cma.c
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_kms.c
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_kms.h
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_shbuf.c
+>  create mode 100644 drivers/gpu/drm/xen/xen_drm_front_shbuf.h
+> 
+> -- 
+> 2.7.4
+> 
+--8323329-1461234502-1519866864=:4239
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -170,4 +227,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============7334836362084935037==--
+--8323329-1461234502-1519866864=:4239--
