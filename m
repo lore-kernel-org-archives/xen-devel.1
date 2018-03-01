@@ -1,14 +1,16 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 4/6] xen/sched: Remove {init,
- destroy}_domain() interfaces
-Date: Thu, 01 Mar 2018 12:00:34 +0100
-Message-ID: <1519902034.9145.15.camel@suse.com>
-References: <1519827268-18199-1-git-send-email-andrew.cooper3@citrix.com>
- <1519827268-18199-5-git-send-email-andrew.cooper3@citrix.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH V6] x86/hvm: fix domain crash when CR3 has
+ the noflush bit set
+Date: Thu, 1 Mar 2018 11:02:21 +0000
+Message-ID: <e9e74409-9eff-f01f-b524-3432a25a268b@citrix.com>
+References: <1519814295-3211-1-git-send-email-rcojocaru@bitdefender.com>
+ <5A97EAE402000078001AD36E@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6717682673784728105=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1519827268-18199-5-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <5A97EAE402000078001AD36E@prv-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,95 +19,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: George Dunlap <george.dunlap@eu.citrix.com>, Josh Whitehead <josh.whitehead@dornerworks.com>, Meng Xu <mengxu@cis.upenn.edu>, Robert VanVossen <robert.vanvossen@dornerworks.com>
+To: Jan Beulich <JBeulich@suse.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: kevin.tian@intel.com, tamas@tklengyel.com, suravee.suthikulpanit@amd.com, george.dunlap@eu.citrix.com, andrew.cooper3@citrix.com, tim@xen.org, xen-devel@lists.xen.org, jun.nakajima@intel.com, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6717682673784728105==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-dvaOzOYiNq2huDHVtYhT"
-
-
---=-dvaOzOYiNq2huDHVtYhT
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2018-02-28 at 14:14 +0000, Andrew Cooper wrote:
-> These hooks have one single caller (sched_{init,destroy}_domain()
-> respectively) and are all identical (when implemented).
->=20
-> Previous changes have ensured that only real domains reach these
-> functions, so
-> ASSERT() that system domains are not seen. Call
-> sched_{alloc,free}_domdata()
-> directly, and handle d->sched_priv directly.
->=20
-> The net diffstat is:
->   add/remove: 0/8 grow/shrink: 1/7 up/down: 7/-335 (-328)
->   function                                     old     new   delta
->   sched_destroy_domain                         130     137      +7
->   sched_init_domain                            138     137      -1
->   rt_dom_destroy                                 6       -      -6
->   null_dom_destroy                               6       -      -6
->   csched_dom_destroy                             9       -      -9
->   csched2_dom_destroy                            9       -      -9
->   sched_rtds_def                               264     248     -16
->   sched_null_def                               264     248     -16
->   sched_credit_def                             264     248     -16
->   sched_credit2_def                            264     248     -16
->   sched_arinc653_def                           264     248     -16
->   ops                                          264     248     -16
->   rt_dom_init                                   52       -     -52
->   null_dom_init                                 52       -     -52
->   csched_dom_init                               52       -     -52
->   csched2_dom_init                              52       -     -52
->=20
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-dvaOzOYiNq2huDHVtYhT
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqX3VIACgkQFkJ4iaW4
-c+6IWQ/8CxsirWcvjJX22i5uiVK6p7UrMRnoRHRUIr/zMgLTKlA0+gsHLlGYJ0FT
-705e75AomzssBMMUYF/5EozpUzZp4/k5jL/r/t+jzDOEdtrgpNJy/S+yyvOnmCBK
-DQmOzGHnqAZM5Sq++LJ1bf5/q2ibm5dBiNGR/cI20wqAzyU9jMEZcdLsU9lcaNbf
-nZUMcPauRaKQj6wSJ4nYi3BNHPx7yUVzoi0nkFDG6LRNvaMgQ9bVBNmstTCgLMM8
-E/1S/53IdJoAP+sYoSeW6C4XG+P4QQ0w7WG4WsIxXlTpIH0ufPCUvZmYJWG9sQ2P
-CUP/8YMMsyXjiXjbu0hrX4PEw0i203k1LJx2hiBa9HEoUj8XIlXFsPq+5VrQT8Fi
-6XvYpjo9I+TuuxV/kF/WhY4BwgOPazVpc1K+E1BgARydSsVbpG3RaXZh/je9KK2t
-K2D0UqwTh6E0DgFUdnny9kk0k9NxwttqupUVMrujpVv5JlS0xasaH4nFdeoNptF3
-bBeEW8tM5UuAimeJs5rydLUnPVEOKBoECxZGCn54Fw9ID4so9YEj+3gFUqVAUoJX
-PjminIZ9VQBTcM2wwzQEnMEXem4RyexXozARYDvR0Jxrj7HK7m18sKRfOC3fU4TM
-ImY62ZnkTM4NQ/sldKvkqJNTpO3Pr4cB8m4n1kFhOBVDqSAM0go=
-=6xLx
------END PGP SIGNATURE-----
-
---=-dvaOzOYiNq2huDHVtYhT--
-
-
-
---===============6717682673784728105==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6717682673784728105==--
+T24gMDMvMDEvMjAxOCAxMDo1OCBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMjguMDIu
+MTggYXQgMTE6MzgsIDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29tPiB3cm90ZToKPj4gSW4gaGFy
+ZHdhcmUsIHdoZW4gUENJRCBzdXBwb3J0IGlzIGVuYWJsZWQgYW5kIHRoZSBOT0ZMVVNIIGJpdCBp
+cyBzZXQKPj4gd2hlbiB3cml0aW5nIGEgQ1IzIHZhbHVlLCB0aGUgaGFyZHdhcmUgd2lsbCBjbGVh
+ciB0aGF0IHRoYXQgYml0IGFuZAo+PiBjaGFuZ2UgdGhlIENSMyB3aXRob3V0IGZsdXNoaW5nIHRo
+ZSBUTEIuIGh2bV9zZXRfY3IzKCksIGhvd2V2ZXIsIHdhcwo+PiBpZ25vcmluZyB0aGlzIGJpdDsg
+dGhlIHJlc3VsdCB3YXMgdGhhdCBwb3N0LXZtX2V2ZW50IGNoZWNrcyBkZXRlY3RlZAo+PiBhbiBp
+bnZhbGlkIENSMyB2YWx1ZSBhbmQgY3Jhc2hlZCB0aGUgZG9tYWluLgo+Pgo+PiBIYW5kbGUgTk9G
+TFVTSCBpbiBodm1fc2V0X2NyMygpIGJ5Ogo+PiAxLiBDbGVhcmluZyB0aGUgYml0Cj4+IDIuIFBh
+c3NpbmcgYSAibm9mbHVzaCIgZmxhZyB0byBsb3dlci1sZXZlbCBjcjMgc2V0dGluZyBmdW5jdGlv
+bnMgdG8KPj4gaW5kaWNhdGUgdGhhdCBhIGZsdXNoIHNob3VsZCBub3QgYmUgcGVyZm9ybWVkLgo+
+Pgo+PiBBbHNvIGNsZWFyIFg4Nl9DUjNfTk9GTFVTSCB3aGVuIHJlcG9ydGluZyBDUjMgbW9uaXRv
+cmVkIENSMyB3cml0ZXMuCj4+Cj4+IFRoaXMgYWxsb3dzIGludHJvc3BlY3Rpb24gdG8gYmUgdXNl
+ZCBvbiBWTXMgd2hvc2Ugb3BlcmF0aW5nIHN5c3RlbSB1c2VzCj4+IHRoZSBOT0ZMVVNIIGJpdC4K
+Pj4KPj4gU2lnbmVkLW9mZi1ieTogUmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVmZW5k
+ZXIuY29tPgo+PiBSZXBvcnRlZC1ieTogQml0d2Vhc2lsIDxiaXR3ZWFzaWxAY3J5cHRvaGF6ZS5j
+b20+Cj4+IFN1Z2dlc3RlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4
+LmNvbT4KPj4gQWNrZWQtYnk6IFRhbWFzIEsgTGVuZ3llbCA8dGFtYXNAdGtsZW5neWVsLmNvbT4K
+Pj4gUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPj4gUmV2aWV3
+ZWQtYnk6IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgo+PiBBY2tlZC1ieTogR2Vv
+cmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgo+IAo+IFRoZXJlJ3Mgbm93IHRo
+ZSBxdWVzdGlvbiBvZiB3aGV0aGVyIHRvIGJhY2twb3J0IHRoaXMgY2hhbmdlOgo+IEl0J3MgcXVp
+dGUgbGFyZ2UsIGFuZCBhcyBwZXIgdGhlIGRlc2NyaXB0aW9uIGl0IGRlYWxzIHdpdGggYW4KPiBp
+bnRyb3NwZWN0aW9uIGlzc3VlIG9ubHkuIEhlbmNlIGZvciB0aGUgbW9tZW50IEknbGwgbGVhdmUg
+dGhpcwo+IG91dC4gSWYgc29tZW9uZSBjb21lcyBmb3J3YXJkIHdpdGggZ29vZCByZWFzb25zIHRv
+IHRha2UgdGhpcwo+IGZvciBzb21lIG9yIGFsbCBvZiB0aGUgc3RpbGwgbWFpbnRhaW5lZCBvbGRl
+ciB0cmVlcywgSSdtIHdpbGxpbmcgdG8KPiByZWNvbnNpZGVyLiBCdXQgb2YgY291cnNlIHBvc3Np
+YmxlIGludGVyZGVwZW5kZW5jaWVzIHdpdGgKPiBvdGhlciBjaGFuZ2VzIHRoYXQgd2VyZW4ndCBi
+YWNrcG9ydGVkIHdpbGwgYWxzbyBuZWVkIHRvIGJlCj4gdGFrZW4gaW50byBjb25zaWRlcmF0aW9u
+IHdpdGggYW55IHN1Y2ggcmVxdWVzdC4KClRoYXQgc2VlbXMgcmVhc29uYWJsZSB0byBtZS4KCiAt
+R2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
