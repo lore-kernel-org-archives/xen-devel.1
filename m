@@ -1,22 +1,15 @@
-From: Maran Wilson <maran.wilson@oracle.com>
-Subject: Re: [RFC PATCH v4 4/7] xen/pvh: Move Xen specific PVH
- VM initialization out of common code
-Date: Thu, 1 Mar 2018 09:43:49 -0800
-Message-ID: <2876cbf2-e26a-d6dd-064a-32cf93a9e7ab__38922.4076331176$1519926563$gmane$org@oracle.com>
-References: <1519842483-8887-1-git-send-email-maran.wilson@oracle.com>
- <1519842483-8887-5-git-send-email-maran.wilson@oracle.com>
- <d9b1e5ef-af73-d2cb-0f3d-f41cdc8f35cd@oracle.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 120126: regressions - FAIL
+Date: Thu, 01 Mar 2018 17:55:34 +0000
+Message-ID: <osstest-120126-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2031271618262508756=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=twhr=fx=oracle.com=maran.wilson@srs-us1.protection.inumbo.net>)
- id 1erSLg-00004w-5y
- for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 17:50:32 +0000
-In-Reply-To: <d9b1e5ef-af73-d2cb-0f3d-f41cdc8f35cd@oracle.com>
-Content-Language: en-US
+ <srs0=1os/=fx=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1erSQi-0000L1-Ei
+ for xen-devel@lists.xenproject.org; Thu, 01 Mar 2018 17:55:44 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,52 +18,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, pbonzini@redhat.com, jgross@suse.com, roger.pau@citrix.com, andrew.cooper3@citrix.com, hch@infradead.org, JBeulich@suse.com, x86@kernel.org, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org
-Cc: thomas.lendacky@amd.com, linus.walleij@linaro.org, dave.hansen@linux.intel.com, rkrcmar@redhat.com, gregkh@linuxfoundation.org, mchehab@kernel.org, hpa@zytor.com, mingo@redhat.com, rdunlap@infradead.org, luto@kernel.org, jpoimboe@redhat.com, tglx@linutronix.de, bp@suse.de, davem@davemloft.net, kirill.shutemov@linux.intel.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMy8xLzIwMTggODowNSBBTSwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDAyLzI4LzIw
-MTggMDE6MjggUE0sIE1hcmFuIFdpbHNvbiB3cm90ZToKPj4gV2UgbmVlZCB0byByZWZhY3RvciBQ
-VkggZW50cnkgY29kZSBzbyB0aGF0IHN1cHBvcnQgZm9yIG90aGVyIGh5cGVydmlzb3JzCj4+IGxp
-a2UgUWVtdS9LVk0gY2FuIGJlIGFkZGVkIG1vcmUgZWFzaWx5Lgo+Pgo+PiBUaGlzIHBhdGNoIG1v
-dmVzIHRoZSBzbWFsbCBibG9jayBvZiBjb2RlIHVzZWQgZm9yIGluaXRpYWxpemluZyBYZW4gUFZI
-Cj4+IHZpcnR1YWwgbWFjaGluZXMgaW50byB0aGUgWGVuIHNwZWNpZmljIGZpbGUuIFRoaXMgaW5p
-dGlhbGl6YXRpb24gaXMgbm90Cj4+IGdvaW5nIHRvIGJlIG5lZWRlZCBmb3IgUWVtdS9LVk0gZ3Vl
-c3RzLiBNb3ZpbmcgaXQgb3V0IG9mIHRoZSBjb21tb24gZmlsZQo+PiBpcyBnb2luZyB0byBhbGxv
-dyB1cyB0byBjb21waWxlIGtlcm5lbHMgaW4gdGhlIGZ1dHVyZSB3aXRob3V0IENPTkZJR19YRU4K
-Pj4gdGhhdCBhcmUgc3RpbGwgY2FwYWJsZSBvZiBiZWluZyBib290ZWQgYXMgYSBRZW11L0tWTSBn
-dWVzdCB2aWEgdGhlIFBWSAo+PiBlbnRyeSBwb2ludC4KPj4KPj4gU2lnbmVkLW9mZi1ieTogTWFy
-YW4gV2lsc29uIDxtYXJhbi53aWxzb25Ab3JhY2xlLmNvbT4KPj4gLS0tCj4+ICAgYXJjaC94ODYv
-cHZoLmMgICAgICAgICAgICAgICB8IDI4ICsrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0KPj4g
-ICBhcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2aC5jIHwgMTggKysrKysrKysrKysrKysrKystCj4+
-ICAgMiBmaWxlcyBjaGFuZ2VkLCAzNyBpbnNlcnRpb25zKCspLCA5IGRlbGV0aW9ucygtKQo+Pgo+
-PiBkaWZmIC0tZ2l0IGEvYXJjaC94ODYvcHZoLmMgYi9hcmNoL3g4Ni9wdmguYwo+PiBpbmRleCBi
-NTZjYjVlN2Q2YWMuLjJkN2E3ZjQ5NThjYiAxMDA2NDQKPj4gLS0tIGEvYXJjaC94ODYvcHZoLmMK
-Pj4gKysrIGIvYXJjaC94ODYvcHZoLmMKPj4gQEAgLTcyLDI2ICs3MiwzOCBAQCBzdGF0aWMgdm9p
-ZCBfX2luaXQgaW5pdF9wdmhfYm9vdHBhcmFtcyh2b2lkKQo+PiAgIAlwdmhfYm9vdHBhcmFtcy5o
-ZHIudHlwZV9vZl9sb2FkZXIgPSAoOSA8PCA0KSB8IDA7IC8qIFhlbiBsb2FkZXIgKi8KPj4gICB9
-Cj4+ICAgCj4+ICsvKgo+PiArICogSWYgd2UgYXJlIHRyeWluZyB0byBib290IGEgWGVuIFBWSCBn
-dWVzdCwgaXQgaXMgZXhwZWN0ZWQgdGhhdCB0aGUga2VybmVsCj4+ICsgKiB3aWxsIGhhdmUgYmVl
-biBjb25maWd1cmVkIHRvIHByb3ZpZGUgdGhlIHJlcXVpcmVkIG92ZXJyaWRlIGZvciB0aGlzIHJv
-dXRpbmUuCj4+ICsgKi8KPj4gK3ZvaWQgX19pbml0IF9fd2VhayB4ZW5fcHZoX2luaXQodm9pZCkK
-Pj4gK3sKPj4gKwl4ZW5fcmF3X3ByaW50aygiRXJyb3I6IE1pc3NpbmcgeGVuIFBWSCBpbml0aWFs
-aXphdGlvblxuIik7Cj4gSSB0aGluayB0aGlzIHNob3VsZCBiZSBwcmludGsgKG9yLCBtb3JlIHBy
-ZWNpc2VseSwgdGhpcyBzaG91bGQgbm90IGJlCj4geGVuX3Jhd19wcmludGsoKSk6IHdlIGFyZSBo
-ZXJlIGJlY2F1c2Ugd2UgYXJlICpub3QqIGEgWGVuIGd1ZXN0IGFuZCBzbwo+IFhlbi1zcGVjaWZp
-YyBwcmludGsgd2lsbCBub3Qgd29yay4gKGFuZCB0aGUgc2FtZSBpcyB0cnVlIGZvciB0aGUgbmV4
-dAo+IHBhdGNoIHdoZXJlIHdlYWsgbWVtX21hcF92aWFfaGNhbGwoKSBpcyBhZGRlZCkuCgpBY3R1
-YWxseSBJIGxlZnQgdGhhdCB4ZW5fcmF3X3ByaW50aygpIHN0YXRlbWVudCBpbiBvbiBwdXJwb3Nl
-LiBJdCdzIGFsc28gCnBvc3NpYmxlIHRoYXQgc29tZSBmdXR1cmUgZGV2ZWxvcGVyIGFjY2lkZW50
-YWxseSBkcm9wcyBvciBoaWRlcyB0aGUgCnN0cm9uZyB2ZXJzaW9uIG9mIHRoZSByb3V0aW5lIGV2
-ZW4gd2hlbiBDT05GSUdfWEVOIChhbmQgQ09ORklHX0hWQ19YRU4pIAppcyBlbmFibGVkLiBJbiB0
-aGF0IHNpdHVhdGlvbiwgdGhpcyBlcnJvciBtZXNzYWdlIG1pZ2h0IHByb3ZlIGhlbHBmdWwgaW4g
-CnF1aWNrbHkgaWRlbnRpZnlpbmcgdGhlIHByb2JsZW0gd2hlbiBoZSBvciBzaGUgYXR0ZW1wdHMg
-dG8gYm9vdCBhIFhlbiBndWVzdC4KCkFuZCBpbiBzaXR1YXRpb25zIHdoZXJlIENPTkZJR19YRU4g
-aXMgZGlzYWJsZWQgb3Igc29tZW9uZSBpcyBib290aW5nIGEgCm5vbiB4ZW4gZ3Vlc3QsIHRoZSBz
-dGF0ZW1lbnQgc2ltcGx5IGJlY29tZXMgYSBub3AsIHNvIG5vIGhhcm0gaXMgZG9uZS4gCkFuZCBh
-bHNvLCBJIGJlbGlldmUgdGhpcyBjb2RlIGlzIGZhciB0b28gZWFybHkgZm9yIG5vcm1hbCBwcmlu
-dGsoKSAKc3RhdGVtZW50cyB0byB3b3JrIHNvIHN3aXRjaGluZyB0byB0aGF0IHdvbid0IGJ1eSB1
-cyBhbnl0aGluZy4KClRoYW5rcywKLU1hcmFuCgo+IC1ib3Jpcwo+Cj4KPj4gKwlCVUcoKTsKPj4g
-K30KPj4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============2031271618262508756==
+Content-Type: text/plain
+
+flight 120126 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/120126/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-armhf-armhf-xl           7 xen-boot                 fail REGR. vs. 120107
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  301e96ea1f1b115481204826953f4d341774c0a8
+baseline version:
+ xen                  85688075ccc22c12bd0fca2a2c269199938e104c
+
+Last test of basis   120107  2018-03-01 00:02:11 Z    0 days
+Testing same since   120126  2018-03-01 15:01:08 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          fail    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit 301e96ea1f1b115481204826953f4d341774c0a8
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Thu Mar 1 15:14:29 2018 +0100
+
+    x86/PV: convert page table emulation code from paddr_t to intpte_t
+    
+    It's dealing with PTEs after all.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 3f9b01d651c1f5466b59d85ac05fa85e4a4c6b54
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Thu Mar 1 15:11:45 2018 +0100
+
+    x86emul: make all FPU emulation use the stub
+    
+    While this means quite some reduction of (source) code, the main
+    purpose is to no longer have exceptions raised from other than stubs.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 93de8da382480ab78e83e3bfc05cebb5e5865fe3
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Mar 1 15:11:07 2018 +0100
+
+    ignores: update .hgignore
+    
+    To add the shim build output and build directory.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+
+commit cfbdaeb2e4b47e47521ade90729ba751eb47f4d1
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Mar 1 15:10:54 2018 +0100
+
+    ignores: update list of git ignored files
+    
+    Add the shim build symbol file and remove the xen-shim binary (which
+    is no longer created).
+    
+    Reported-by: Olaf Hering <olaf@aepfle.de>
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+
+commit 4c45567d3e5a296af2ff8032cd3108f195b5eb44
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Thu Mar 1 15:10:15 2018 +0100
+
+    firmware/shim: better filtering of intermediate files during Xen tree setup
+    
+    I have no idea what *.1 is meant to cover. Instead also exclude
+    preprocessed and non-source assembly files.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+
+commit 3f4bc4cc2f521c572fdc4a30dd1434ef8ecd559c
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Thu Mar 1 15:10:02 2018 +0100
+
+    firmware/shim: better filtering of dependency files during Xen tree setup
+    
+    I have no idea what *.d1 is supposed to refer to - we only have .*.d
+    and .*.d2 files (note also the leading dot). Also switch to passing
+    -name instead of -path to find - that's a requirement for .*.d et al to
+    work, but would probably have been better from the beginning.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+
+commit f593747666677c4c1e2e250329c64956b732e61f
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Thu Mar 1 15:09:38 2018 +0100
+
+    libxc: really tolerate empty PV records
+    
+    Commit 119ee4d773 ("tools/libxc: Tolerate specific zero-content records
+    in migration v2 streams") meant tolerate those, but failed to set rc
+    accordingly.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+(qemu changes not included)
+
+
+--===============2031271618262508756==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2031271618262508756==--
