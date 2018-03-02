@@ -1,18 +1,19 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: osstest planned outage consultation
-Date: Fri, 2 Mar 2018 16:55:24 +0000
-Message-ID: <23193.33276.834923.421617@mariner.uk.xensource.com>
-Reply-To: Ian Jackson <ian.jackson@citrix.com>,
- Lars Kurth <lars.kurth.xen@gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86: rename HAVE_GAS_* to HAVE_AS_*
+Date: Fri, 2 Mar 2018 16:55:57 +0000
+Message-ID: <a015f472-c0a2-ad92-f878-cb2efc6bf7e4@citrix.com>
+References: <20180302164625.16460-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=la6f=fy=citrix.com=prvs=59212cd4d=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1ernyJ-0002IY-Dg
- for xen-devel@lists.xenproject.org; Fri, 02 Mar 2018 16:55:51 +0000
+ <srs0=prhv=fy=citrix.com=prvs=592350325=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1ernyT-0002Jp-Uw
+ for xen-devel@lists.xenproject.org; Fri, 02 Mar 2018 16:56:01 +0000
+In-Reply-To: <20180302164625.16460-1-wei.liu2@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,22 +22,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: security@xenproject.org, committers@xenproject.org
-Cc: Lars Kurth <lars.kurth.xen@gmail.com>, xen-devel@lists.xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-U2V2ZXJhbCBvZiB0aGUgVk1zIGluIHRoZSBNYXNzYWNodXNldHRzIFhlbiBQcm9qZWN0IFRlc3Qg
-TGFiLCB3aGljaApydW5zIG91ciBjb21tdW5pdHkgb3NzdGVzdCBpbnN0YW5jZSwgbmVlZCB0byBi
-ZSB1cGdyYWRlZC4gIEFuZCB3ZSB3YW50CnRvIHNvcnQgb3V0IHNvbWUgb2RkaXRpZXMgd2l0aCB0
-aGUgd2F5IHRoZSBzdG9yYWdlIGlzIGNvbmZpZ3VyZWQuCgpUaGlzIHdpbGwgaW52b2x2ZSBhIGxv
-bmcgb3V0YWdlLCBtYXliZSAzIGRheXMgb3Igc28uCgpXZSBzaG91bGQgc2NoZWR1bGUgdGhpcyB3
-aGVuIGl0IGlzIGNvbnZlbmllbnQgZm9yIGV2ZXJ5b25lLiAgUmlnaHQgbm93CmlzIG5vdCBjb252
-ZW5pZW50IGJlY2F1c2Ugd2UgaGF2ZSB0aGUgQlRJIHBhdGNoZXMgd2hpY2ggYXJlIHN0dWNrIGlu
-CnZhcmlvdXMgc3RhZ2luZy1OTiBicmFuY2hlcyBhbmQgd2hpY2ggbmVlZCB0byBiZSBmaXhlZCBh
-bmQgcHVzaGVkIHRvCnN0YWJsZS1OTiBhbmQgcmVsZWFzZWQuCgpBbHNvIHBlb3BsZSBtYXkgYmUg
-YXdheSBhdCB2YXJpb3VzIHRpbWVzLgoKSWYgeW91IGhhdmUgb3BpbmlvbnMgYWJvdXQgdGhpcyBw
-bGVhc2UgcmVwbHkgdG8gdGhpcyBtYWlsLCB0byBtZSBhbmQKdG8gTGFycy4KCklhbi4KCihGb3Ig
-b3VyIHJlZmVyZW5jZSwgdGhpcyByZWxhdGVzIHRvIHRpY2tldHMgMTA0NzcxIDEwMjk1MSkKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDIvMDMvMTggMTY6NDYsIFdlaSBMaXUgd3JvdGU6Cj4gWGVuIGFsc28gdXNlcyBjbGFuZydz
+IGFzc2VtYmxlciB3aGVuIGl0IGlzIHBvc3NpYmxlLiBDaGFuZ2UgdGhlIG1hY3JvCj4gbmFtZXMg
+dG8gbm90IGJlIEdBUyBzcGVjaWZpYy4KPgo+IFBhdGNoIHByb2R1Y2VkIHdpdGg6Cj4KPiAkIGZv
+ciBmIGluIGBnaXQgZ3JlcCBIQVZFX0dBU18gfCBjdXQgLWQnOicgLWYxYDsgXAo+ICAgICBkbyBz
+ZWQgLWkgJ3MvSEFWRV9HQVNfL0hBVkVfQVNfL2cnICRmOyBkb25lCgphbmRyZXdjb29wQGFuZHJl
+d2Nvb3A6L2xvY2FsL3hlbi5naXQveGVuJCBnaXQgaGVscCByZWZhY3RvcgpgZ2l0IHJlZmFjdG9y
+JyBpcyBhbGlhc2VkIHRvIGAhc2ggLWMgJ2dpdCBncmVwIC1sICIkMSIgLS0gJEdJVF9QUkVGSVgg
+fAp4YXJncyBzZWQgInN8JDF8JDJ8ZyIgLWknIC0nCgpPbmUgb2YgbXkgbW9zdCB1c2VmdWwgZ2l0
+IGFsaWFzZXMgOikKCj4KPiBTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXgu
+Y29tPgoKQWNrZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
