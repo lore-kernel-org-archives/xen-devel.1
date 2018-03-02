@@ -1,18 +1,16 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v4 14/16] xen/grant: Switch
- common/grant_table.c to use typesafe MFN
-Date: Fri, 02 Mar 2018 09:12:34 -0700
-Message-ID: <5A99860202000078001ADF3B@prv-mh.provo.novell.com>
-References: <20180221140259.29360-1-julien.grall@arm.com>
- <20180221140259.29360-15-julien.grall@arm.com>
- <5A9981C102000078001ADEDA@prv-mh.provo.novell.com>
- <3345768a-a6be-812e-fb74-4f2e57665486@arm.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 120151: tolerable all pass -
+	PUSHED
+Date: Fri, 02 Mar 2018 16:14:21 +0000
+Message-ID: <osstest-120151-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4556134030192302292=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <3345768a-a6be-812e-fb74-4f2e57665486@arm.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=v++t=fy=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1ernKH-0005NY-Vu
+ for xen-devel@lists.xenproject.org; Fri, 02 Mar 2018 16:14:30 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,24 +19,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDAyLjAzLjE4IGF0IDE2OjU5LCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+
-IE9uIDAyLzAzLzE4IDE1OjU0LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4gT24gMjEuMDIuMTgg
-YXQgMTU6MDIsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+PiBAQCAtODcyLDcgKzg3
-OSw3IEBAIG1hcF9ncmFudF9yZWYoCj4+PiAgICAgICBzdHJ1Y3QgZ3JhbnRfdGFibGUgKmxndCwg
-KnJndDsKPj4+ICAgICAgIHN0cnVjdCB2Y3B1ICAgKmxlZDsKPj4+ICAgICAgIGdyYW50X2hhbmRs
-ZV90IGhhbmRsZTsKPj4+IC0gICAgdW5zaWduZWQgbG9uZyAgZnJhbWUgPSAwOwo+Pj4gKyAgICBt
-Zm5fdCBmcmFtZSA9IF9tZm4oMCk7Cj4+IAo+PiBJZiB0aGUgaW5pdGlhbGl6ZXIgaXMgbmVlZGVk
-IGF0IGFsbCwgSSB0aGluayBpdCBzaG91bGQgYWdhaW4gYmVjb21lCj4+IElOVkFMSURfTUZOLiBT
-YW1lIGluIGEgZmV3IG90aGVyIHBsYWNlcy4KPiAKPiBJIGRpZG4ndCBzd2l0Y2ggdG8gSU5WQUxJ
-RF9NRk4gYmVjYXVzZSBJIHdhc24ndCBzdXJlIGlmIHNvbWUgcGxhY2UgaW4gCj4gdGhlIGNvZGUg
-d2hlcmUgcmVseWluZyBvbiAwLiBJZiB5b3UgdGhpbmsgaXQgaXMgZmluZSwgdGhlbiBJIGFtIG1v
-cmUgCj4gdGhhbmsgaGFwcHkgdG8gc3dpdGNoIHRvIElOVkFMSURfTUZOLgoKV2VsbCwgYXMgc2Fp
-ZCAtIGl0IGxvb2tzIGFzIGlmIHRoZSBpbml0aWFsaXplciBpc24ndCBuZWVkZWQgYXQgYWxsLCBp
-bgp3aGljaCBjYXNlIGl0J3MgdmFsdWUgcmVhbGx5IGlzIGEgZG9uJ3QgY2FyZS4KCkphbgoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============4556134030192302292==
+Content-Type: text/plain
+
+flight 120151 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/120151/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  2d9078954279e943d976ca2154c16b986dd25799
+baseline version:
+ xen                  59afdb8a81d66454d8bc0489e82de031613227bf
+
+Last test of basis   120134  2018-03-01 21:01:49 Z    0 days
+Testing same since   120151  2018-03-02 13:06:50 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Jim Fehlig <jfehlig@suse.com>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Olaf Hering <olaf@aepfle.de>
+  Paul Semel <semelpaul@gmail.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   59afdb8a81..2d90789542  2d9078954279e943d976ca2154c16b986dd25799 -> smoke
+
+
+--===============4556134030192302292==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4556134030192302292==--
