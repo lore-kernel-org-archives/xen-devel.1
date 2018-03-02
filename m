@@ -1,16 +1,17 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v4 14/16] xen/grant: Switch
- common/grant_table.c to use typesafe MFN
-Date: Fri, 02 Mar 2018 08:54:25 -0700
-Message-ID: <5A9981C102000078001ADEDA@prv-mh.provo.novell.com>
-References: <20180221140259.29360-1-julien.grall@arm.com>
- <20180221140259.29360-15-julien.grall@arm.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: update_runstate_area and Linux KPTI
+Date: Fri, 2 Mar 2018 15:57:01 +0000
+Message-ID: <3a77a293-1a29-42ed-8fc0-a74bda213b92@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180221140259.29360-15-julien.grall@arm.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=qa/0=fy=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1ern3X-0002fE-V0
+ for xen-devel@lists.xenproject.org; Fri, 02 Mar 2018 15:57:11 +0000
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,26 +20,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: xen-devel <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Jan Beulich <JBeulich@suse.com>, osstest service owner <osstest-admin@xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIxLjAyLjE4IGF0IDE1OjAyLCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+
-IEBAIC04NzIsNyArODc5LDcgQEAgbWFwX2dyYW50X3JlZigKPiAgICAgIHN0cnVjdCBncmFudF90
-YWJsZSAqbGd0LCAqcmd0Owo+ICAgICAgc3RydWN0IHZjcHUgICAqbGVkOwo+ICAgICAgZ3JhbnRf
-aGFuZGxlX3QgaGFuZGxlOwo+IC0gICAgdW5zaWduZWQgbG9uZyAgZnJhbWUgPSAwOwo+ICsgICAg
-bWZuX3QgZnJhbWUgPSBfbWZuKDApOwoKSWYgdGhlIGluaXRpYWxpemVyIGlzIG5lZWRlZCBhdCBh
-bGwsIEkgdGhpbmsgaXQgc2hvdWxkIGFnYWluIGJlY29tZQpJTlZBTElEX01GTi4gU2FtZSBpbiBh
-IGZldyBvdGhlciBwbGFjZXMuCgo+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS14ODYvZ3JhbnRfdGFi
-bGUuaAo+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvZ3JhbnRfdGFibGUuaAo+IEBAIC03Niw3
-ICs3Niw3IEBAIHN0YXRpYyBpbmxpbmUgdW5zaWduZWQgaW50IGdudHRhYl9kb20wX21heCh2b2lk
-KQo+ICAjZGVmaW5lIGdudHRhYl9zdGF0dXNfZ21mbihkLCB0LCBpKSAgICAgICAgICAgICAgICAg
-ICAgIFwKPiAgICAgIChtZm5fdG9fZ21mbihkLCBnbnR0YWJfc3RhdHVzX21mbih0LCBpKSkpCj4g
-IAo+IC0jZGVmaW5lIGdudHRhYl9tYXJrX2RpcnR5KGQsIGYpIHBhZ2luZ19tYXJrX2RpcnR5KChk
-KSwgX21mbihmKSkKPiArI2RlZmluZSBnbnR0YWJfbWFya19kaXJ0eShkLCBmKSBwYWdpbmdfbWFy
-a19kaXJ0eSgoZCksIGYpCgpQbGVhc2UgdGFrZSB0aGUgb3Bwb3J0dW5pdHkgYW5kIGFsc28gZHJv
-cCB0aGUgc3RyYXkgcGFyZW50aGVzZXMKYXJvdW5kIGQuCgpXaXRoIHRoZXNlIHRha2VuIGNhcmUg
-b2YgYW5kIHdpdGggV2VpJ3MgUi1iCkFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3Vz
-ZS5jb20+CgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+SGksCgpXaGlsZSBJIHdhcyBsb29raW5nIGF0IHNvbWUgdW5yZWxhdGVkIHByb2JsZW0gd2l0aCBY
+ZW4gQVJNIFAyTSBjb2RlLCBJIApub3RpY2VkIHRoYXQgdGhlIGZ1bmN0aW9uIHVwZGF0ZV9ydW5z
+dGF0ZV9hcmVhIGlzIHVzaW5nIGd1ZXN0IHZpcnR1YWwgCmFkZHJlc3MgdG8gdXBkYXRlIHRoZSB2
+Q1BVIHJ1bnN0YXRlLiBUaGF0IGZ1bmN0aW9uIHdpbGwgYmUgY2FsbGVkIHdoZW4gCmNvbnRleHQg
+c3dpdGNoIHRvIGEgdkNQVS4gSG93ZXZlciwgdGhhdCB2Q1BVIG1heSBydW4gaW4gdXNlcnNwYWNl
+IApjb250ZXh0LiBXaGVuIEtQVEkgKGtlcm5lbCBwYWdlIHRhYmxlIGlzb2xhdGlvbikgaXMgdXNl
+ZCwKCkluIHRoZSBiZXN0IGNhc2UsIHRoYXQgYWRkcmVzcyBpcyBub3QgbWFwcGVkIGludG8gdGhl
+IHBhZ2UtdGFibGUgCmN1cnJlbnRseSB1c2VkLiBYZW4gd2lsbCBub3QgYmUgYWJsZSB0byB1cGRh
+dGUgdGhlIHJlZ2lvbi4KCkluIHRoZSB3b3JzdCBjYXNlLCB0aGF0IGFkZHJlc3MgaXMgbWFwcGVk
+IHRvIGEgZGlmZmVyZW50IHJlZ2lvbiBhbmQgWGVuIAp3aWxsIGNvcnJ1cHQgc29tZSBiaXRzIG9m
+IHRoZSBtZW1vcnkuCgpUaGUgY29kZSBsb29rcyBmdW5kYW1lbnRhbGx5IHdyb25nIG9uIEFybSwg
+SSBhbSBlbnRpcmVseSBub3Qgc3VyZSBhYm91dCB4ODYuCgpJdCBsb29rIGxpa2UgdG8gbWUgdGhh
+dCBYZW4gc2hvdWxkIGFsd2F5cyB1c2UgdGhlIGd1ZXN0IHBoeXNpY2FsIGFkZHJlc3MgCmFuZCB0
+aGVyZWZvcmUgdHJhbnNsYXRlIHRoZSB2aXJ0dWFsIGFkZHJlc3MgdG8gYSBwaHlzaWNhbCBvbmUg
+aW4gClZDUFVPUF9yZWdpc3Rlcl9ydW5zdGF0ZV9tZW1vcnlfYXJlYS4gU28gb25seSB0aGUgcGh5
+c2ljYWwgYWRkcmVzcyB3aWxsIApiZSB1c2VkIGluIHVwZGF0ZV9ydW5zdGF0ZV9hcmVhIG1ha2lu
+ZyB0aGUgZnVuY3Rpb24gbXVjaCBzYWZlci4KCkFueSBvcGluaW9uIG9uIHRoaXMgYXBwcm9hY2g/
+CgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
