@@ -1,18 +1,18 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v3 6/6] xen/arm: disable CPUs with different
- cacheline sizes
-Date: Fri, 2 Mar 2018 10:35:45 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1803021034250.4239@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1803011524530.4239@sstabellini-ThinkPad-X260>
- <1519946795-7191-1-git-send-email-sstabellini@kernel.org>
- <1519946795-7191-6-git-send-email-sstabellini@kernel.org>
- <eefdee3b-9a35-d758-51ce-bdb15a287dbc@arm.com>
- <alpine.DEB.2.10.1803021025000.4239@sstabellini-ThinkPad-X260>
- <12674c97-344c-261a-fae6-0b755cc6acfa@citrix.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH] xen/arm: Read the cacheline size from CTR
+	register
+Date: Fri, 2 Mar 2018 18:38:47 +0000
+Message-ID: <dd2a68fe-9ef2-7ba7-19fa-d02c864d4f09@arm.com>
+References: <1519946857-7443-1-git-send-email-sstabellini@kernel.org>
+ <333519c2-42c2-66e1-af4b-90ca2e8543de@arm.com>
+ <alpine.DEB.2.10.1803021027130.4239@sstabellini-ThinkPad-X260>
+ <alpine.DEB.2.10.1803021032510.4239@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1516584438-1520015746=:4239"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <12674c97-344c-261a-fae6-0b755cc6acfa@citrix.com>
+In-Reply-To: <alpine.DEB.2.10.1803021032510.4239@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,47 +21,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: nd@arm.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1516584438-1520015746=:4239
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Fri, 2 Mar 2018, Andrew Cooper wrote:
-> On 02/03/18 18:26, Stefano Stabellini wrote:
-> >
-> >>> Suggested-by: Julien Grall <julien.grall@arm.com>
-> >>> Signed-off-by: Stefano Stabellini <sstabellini@kernel.org>
-> >>>
-> >>> ---
-> >>> Changes in v3:
-> >>> - new patch
-> >>>
-> >>> ---
-> >>> Interestingly I couldn't find a better way in C89 to printk a size_t
-> >>> than casting it to unsigned long.
-> >> You can use %zu.
-> > It's C99 only :-(
-> 
-> Sorry for the interjection, but what has C89 got to do with anything? 
-> Xen uses -std=gnu99, as per the root Config.mk file.
-
-I remember our discussions about C standard versions, but I take that
-they only affected public headers then (unless I am misremembering).
-Good!
---8323329-1516584438-1520015746=:4239
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1516584438-1520015746=:4239--
+CgpPbiAwMi8wMy8yMDE4IDE4OjMzLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gT24gRnJp
+LCAyIE1hciAyMDE4LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4+IE9uIEZyaSwgMiBNYXIg
+MjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+Pj4gSGksCj4+Pgo+Pj4gT24gMDEvMDMvMTggMjM6
+MjcsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPj4+PiBTZWUgdGhlIGNvcnJlc3BvbmRpbmcg
+TGludXggY29tbWl0IGFzIHJlZmVyZW5jZToKPj4+Pgo+Pj4+ICAgICBjb21taXQgZjkxZTJjM2Jk
+NDI3MjM5YzE5ODM1MWY0NDgxNGRkMzlkYjkxYWZlMAo+Pj4+ICAgICBBdXRob3I6IENhdGFsaW4g
+TWFyaW5hcyA8Y2F0YWxpbi5tYXJpbmFzQGFybS5jb20+Cj4+Pj4gICAgIERhdGU6ICAgVHVlIERl
+YyA3IDE2OjUyOjA0IDIwMTAgKzAxMDAKPj4+Pgo+Pj4+ICAgICAgICAgQVJNOiA2NTI3LzE6IFVz
+ZSBDVFIgaW5zdGVhZCBvZiBDQ1NJRFIgZm9yIHRoZSBELWNhY2hlIGxpbmUgc2l6ZSBvbgo+Pj4+
+IEFSTXY3Cj4+Pj4KPj4+PiAgICAgICAgIFRoZSBjdXJyZW50IGltcGxlbWVudGF0aW9uIG9mIHRo
+ZSBkY2FjaGVfbGluZV9zaXplIG1hY3JvIHJlYWRzIHRoZSBMMQo+Pj4+ICAgICAgICAgY2FjaGUg
+c2l6ZSBmcm9tIHRoZSBDQ1NJRFIgcmVnaXN0ZXIuIFRoaXMsIGhvd2V2ZXIsIGlzIG5vdCBndWFy
+YW50ZWVkCj4+Pj4gdG8KPj4+PiAgICAgICAgIGJlIHRoZSBzbWFsbGVzdCBjYWNoZSBsaW5lIGlu
+IHRoZSBjYWNoZSBoaWVyYXJjaHkuIFRoZSBwYXRjaCBjaGFuZ2VzCj4+Pj4gdG8KPj4+PiAgICAg
+ICAgIHRoZSBtYWNybyB0byB1c2UgdGhlIG1vcmUgYXJjaGl0ZWN0dXJhbGx5IGNvcnJlY3QgQ1RS
+IHJlZ2lzdGVyLgo+Pj4+Cj4+Pj4gICAgICAgICBSZXBvcnRlZC1ieTogS2V2aW4gU2FwcCA8a3Nh
+cHBAcXVpY2luYy5jb20+Cj4+Pj4gICAgICAgICBTaWduZWQtb2ZmLWJ5OiBDYXRhbGluIE1hcmlu
+YXMgPGNhdGFsaW4ubWFyaW5hc0Bhcm0uY29tPgo+Pj4+ICAgICAgICAgU2lnbmVkLW9mZi1ieTog
+UnVzc2VsbCBLaW5nIDxybWsra2VybmVsQGFybS5saW51eC5vcmcudWs+Cj4+Pj4KPj4+PiBTdWdn
+ZXN0ZWQtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4+Pj4gU2lnbmVk
+LW9mZi1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgo+Pj4+
+Cj4+Pj4gLS0tCj4+Pj4KPj4+PiBUaGlzIHBhdGNoIGRlcGVuZHMgb24gInVuc2FmZSBiaWcuTElU
+VExFIHN1cHBvcnQiLgo+Pj4KPj4+IEkgc3RpbGwgcmVhbGx5IGRvbid0IHRoaW5rIHRoaXMgc2hv
+dWxkIGRlcGVuZCBvbiAidW5zYWZlIGJpZy5MSVRUTEUgc3VwcG9ydCIuCj4+PiBXZSB3YW50IHRv
+IGJhY2twb3J0IHRoaXMgcGF0Y2ggYnV0IEkgYW0gc3RpbGwgdW5jb252aW5jZWQgdGhhdCB0aGlz
+IGlzIHRoZQo+Pj4gY2FzZSBvZiB0aGUgYmlnLkxJVFRMRSBvbmUuIFNvIGNhbiB5b3UgcGxlYXNl
+IHJlc2h1ZmZsZSB0aGUgcGF0Y2hlcz8KPj4KPj4gSSdsbCBtb3ZlIGl0IGVhcmxpZXIuIEZvciBz
+aW1wbGljaXR5LCBJJ2xsIG1ha2UgaXQgdGhlIGZpcnN0IHBhdGNoIG9mCj4+ICJ1bnNhZmUgYmln
+LkxJVFRMRSBzdXBwb3J0IiwgYWx0aG91Z2h0IEkgdW5kZXJzdGFuZCB0aGF0IHRoZXkgYXJlCj4+
+IHNlcGFyYXRlIGZpeGVzLgo+Pgo+Pgo+Pj4+Cj4+Pj4gUHJldmlvdXNseSwgd2UgZGlzY3Vzc2Vk
+IHRoZSBwb3NzaWJpbGl0eSBvZiByZWFkaW5nIHRoZSBjYWNoZWxpbmUgc2l6ZQo+Pj4+IHdoZW4g
+bmVlZGVkIGZyb20gdGhlIHJlZ2lzdGVyLCBpbnN0ZWFkIG9mIHJlYWRpbmcgaXQgZnJvbSBhIHZh
+cmlhYmxlLAo+Pj4+IGJ1dCBnb2luZyB0aHJvdWdoIHRoZSBjb2RlIGl0IGRvZXNuJ3Qgc2VlbSBs
+aWtlIGEgd29ydGh3aGlsZQo+Pj4+IG9wdGltaXphdGlvbi4KPj4+Cj4+PiBXZWxsIHRoZXJlIGFy
+ZSBhIGNvdXBsZSBvZiByZWFzb25zIEkgd2FudGVkIHRoaXMgdG8gYXZvaWQgdGhlIGEgdmFyaWFi
+bGU6Cj4+PiAJMSkgUG90ZW50aWFsbHkgcmVhZGluZyBhIHN5c3RlbSByZWdpc3RlciArIGZldyBp
+bnN0cnVjdGlvbnMgaXMgZmFzdGVyCj4+PiB0aGFuIGEgbWVtb3J5IGFjY2Vzcwo+Pj4gCTIpIFRo
+ZSBuYW1lIG9mIHRoZSB2YXJpYWJsZSBsZWFkcyB0byBjb25mdXNpbmcuIEl0IGlzIG5hbWVkCj4+
+PiBjYWNoZWxpbmVfYnl0ZXMgYnV0IHN0b3JlcyB0aGUgbWluaW11bSBjYWNoZWxpbmUgc2l6ZSBv
+ZiBmb3IgdGhlIGRhdGEgY2FjaGUuCj4+Pgo+Pj4gMSkgaXMgYXJndWFibGUgYW5kIEkgZG9uJ3Qg
+bXVjaCBjYXJlIHdoZXRoZXIgaXQgaXMgZG9uZS4gSG93ZXZlciwgSSByZWFsbHkKPj4+IHdhbnQg
+dG8gYXZvaWQgYSB3cm9uZyB2YXJpYWJsZSBuYW1lIHRoYXQgY291bGQgbGVhZCB0byBtb3JlIG1p
+c3VzZS4gU28gd2UKPj4+IHNob3VsZCBhdCBsZWFzdCByZW5hbWUgcmVhZF9jYWNoZWxpbmVfc2l6
+ZSgpIGFuZCBjYWNoZWxpbmVfYnl0ZXMuCj4+Cj4+IFN1cmUsIEkgY2FuIHJlbmFtZS4gV291bGQg
+bWluX2NhY2hlbGluZV9ieXRlcyBhbmQKPj4gcmVhZF9taW5fY2FjaGVsaW5lX2J5dGVzKCkgYmUg
+Y2xlYXJlcj8gT3RoZXJ3aXNlLCBwbGVhc2Ugc3VnZ2VzdCBhbgo+PiBhbHRlcm5hdGl2ZSBuYW1p
+bmcgc2NoZW1lLgo+IAo+IE9yIG1pbl9kY2FjaGVfbGluZV9ieXRlcyA/CgpJIHdvdWxkIHJlZHVj
+ZSB0byBkY2FjaGVfbGluZV9ieXRlcyB0byBhdm9pZCBsZW5ndGh5IG5hbWUuClRoYXQgd291bGQg
+Z28gaW5saW5lIHdpdGggdGhlIG1hY3JvIGRjYWNoZV9saW5lX3NpemUgd2UgY3VycmVudGx5IGhh
+dmUgCmluIGFybTY0LgoKV2hhdCBtYXR0ZXJzIGlzIHRoZSAnZCcgZm9yIGRhdGEgY2FjaGUuIFRv
+IGF2b2lkIGNvbmZ1c2lvbiB3aGljaCAnaScgZm9yIAppbnN0cnVjdGlvbiBjYWNoZSB0aGF0IHdl
+IG1heSBuZWVkIGluIHRoZSBmdXR1cmUuCgpBbnl3YXksIEkgYW0gaGFwcHkgd2l0aCBib3RoLgoK
+Q2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
