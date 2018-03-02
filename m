@@ -1,16 +1,18 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH] xen/arm: Read the cacheline size from CTR
-	register
-Date: Fri, 2 Mar 2018 10:33:06 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1803021032510.4239@sstabellini-ThinkPad-X260>
-References: <1519946857-7443-1-git-send-email-sstabellini@kernel.org>
- <333519c2-42c2-66e1-af4b-90ca2e8543de@arm.com>
- <alpine.DEB.2.10.1803021027130.4239@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH v3 6/6] xen/arm: disable CPUs with different
+ cacheline sizes
+Date: Fri, 2 Mar 2018 10:35:45 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1803021034250.4239@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1803011524530.4239@sstabellini-ThinkPad-X260>
+ <1519946795-7191-1-git-send-email-sstabellini@kernel.org>
+ <1519946795-7191-6-git-send-email-sstabellini@kernel.org>
+ <eefdee3b-9a35-d758-51ce-bdb15a287dbc@arm.com>
+ <alpine.DEB.2.10.1803021025000.4239@sstabellini-ThinkPad-X260>
+ <12674c97-344c-261a-fae6-0b755cc6acfa@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1516584438-1520015746=:4239"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1803021027130.4239@sstabellini-ThinkPad-X260>
+In-Reply-To: <12674c97-344c-261a-fae6-0b755cc6acfa@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,95 +21,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCAyIE1hciAyMDE4LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gT24gRnJpLCAy
-IE1hciAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gPiBIaSwKPiA+IAo+ID4gT24gMDEvMDMv
-MTggMjM6MjcsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+ID4gU2VlIHRoZSBjb3JyZXNw
-b25kaW5nIExpbnV4IGNvbW1pdCBhcyByZWZlcmVuY2U6Cj4gPiA+IAo+ID4gPiAgICBjb21taXQg
-ZjkxZTJjM2JkNDI3MjM5YzE5ODM1MWY0NDgxNGRkMzlkYjkxYWZlMAo+ID4gPiAgICBBdXRob3I6
-IENhdGFsaW4gTWFyaW5hcyA8Y2F0YWxpbi5tYXJpbmFzQGFybS5jb20+Cj4gPiA+ICAgIERhdGU6
-ICAgVHVlIERlYyA3IDE2OjUyOjA0IDIwMTAgKzAxMDAKPiA+ID4gCj4gPiA+ICAgICAgICBBUk06
-IDY1MjcvMTogVXNlIENUUiBpbnN0ZWFkIG9mIENDU0lEUiBmb3IgdGhlIEQtY2FjaGUgbGluZSBz
-aXplIG9uCj4gPiA+IEFSTXY3Cj4gPiA+IAo+ID4gPiAgICAgICAgVGhlIGN1cnJlbnQgaW1wbGVt
-ZW50YXRpb24gb2YgdGhlIGRjYWNoZV9saW5lX3NpemUgbWFjcm8gcmVhZHMgdGhlIEwxCj4gPiA+
-ICAgICAgICBjYWNoZSBzaXplIGZyb20gdGhlIENDU0lEUiByZWdpc3Rlci4gVGhpcywgaG93ZXZl
-ciwgaXMgbm90IGd1YXJhbnRlZWQKPiA+ID4gdG8KPiA+ID4gICAgICAgIGJlIHRoZSBzbWFsbGVz
-dCBjYWNoZSBsaW5lIGluIHRoZSBjYWNoZSBoaWVyYXJjaHkuIFRoZSBwYXRjaCBjaGFuZ2VzCj4g
-PiA+IHRvCj4gPiA+ICAgICAgICB0aGUgbWFjcm8gdG8gdXNlIHRoZSBtb3JlIGFyY2hpdGVjdHVy
-YWxseSBjb3JyZWN0IENUUiByZWdpc3Rlci4KPiA+ID4gCj4gPiA+ICAgICAgICBSZXBvcnRlZC1i
-eTogS2V2aW4gU2FwcCA8a3NhcHBAcXVpY2luYy5jb20+Cj4gPiA+ICAgICAgICBTaWduZWQtb2Zm
-LWJ5OiBDYXRhbGluIE1hcmluYXMgPGNhdGFsaW4ubWFyaW5hc0Bhcm0uY29tPgo+ID4gPiAgICAg
-ICAgU2lnbmVkLW9mZi1ieTogUnVzc2VsbCBLaW5nIDxybWsra2VybmVsQGFybS5saW51eC5vcmcu
-dWs+Cj4gPiA+IAo+ID4gPiBTdWdnZXN0ZWQtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxs
-QGFybS5jb20+Cj4gPiA+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJl
-bGxpbmlAa2VybmVsLm9yZz4KPiA+ID4gCj4gPiA+IC0tLQo+ID4gPiAKPiA+ID4gVGhpcyBwYXRj
-aCBkZXBlbmRzIG9uICJ1bnNhZmUgYmlnLkxJVFRMRSBzdXBwb3J0Ii4KPiA+IAo+ID4gSSBzdGls
-bCByZWFsbHkgZG9uJ3QgdGhpbmsgdGhpcyBzaG91bGQgZGVwZW5kIG9uICJ1bnNhZmUgYmlnLkxJ
-VFRMRSBzdXBwb3J0Ii4KPiA+IFdlIHdhbnQgdG8gYmFja3BvcnQgdGhpcyBwYXRjaCBidXQgSSBh
-bSBzdGlsbCB1bmNvbnZpbmNlZCB0aGF0IHRoaXMgaXMgdGhlCj4gPiBjYXNlIG9mIHRoZSBiaWcu
-TElUVExFIG9uZS4gU28gY2FuIHlvdSBwbGVhc2UgcmVzaHVmZmxlIHRoZSBwYXRjaGVzPwo+IAo+
-IEknbGwgbW92ZSBpdCBlYXJsaWVyLiBGb3Igc2ltcGxpY2l0eSwgSSdsbCBtYWtlIGl0IHRoZSBm
-aXJzdCBwYXRjaCBvZgo+ICJ1bnNhZmUgYmlnLkxJVFRMRSBzdXBwb3J0IiwgYWx0aG91Z2h0IEkg
-dW5kZXJzdGFuZCB0aGF0IHRoZXkgYXJlCj4gc2VwYXJhdGUgZml4ZXMuCj4gCj4gCj4gPiA+IAo+
-ID4gPiBQcmV2aW91c2x5LCB3ZSBkaXNjdXNzZWQgdGhlIHBvc3NpYmlsaXR5IG9mIHJlYWRpbmcg
-dGhlIGNhY2hlbGluZSBzaXplCj4gPiA+IHdoZW4gbmVlZGVkIGZyb20gdGhlIHJlZ2lzdGVyLCBp
-bnN0ZWFkIG9mIHJlYWRpbmcgaXQgZnJvbSBhIHZhcmlhYmxlLAo+ID4gPiBidXQgZ29pbmcgdGhy
-b3VnaCB0aGUgY29kZSBpdCBkb2Vzbid0IHNlZW0gbGlrZSBhIHdvcnRod2hpbGUKPiA+ID4gb3B0
-aW1pemF0aW9uLgo+ID4gCj4gPiBXZWxsIHRoZXJlIGFyZSBhIGNvdXBsZSBvZiByZWFzb25zIEkg
-d2FudGVkIHRoaXMgdG8gYXZvaWQgdGhlIGEgdmFyaWFibGU6Cj4gPiAJMSkgUG90ZW50aWFsbHkg
-cmVhZGluZyBhIHN5c3RlbSByZWdpc3RlciArIGZldyBpbnN0cnVjdGlvbnMgaXMgZmFzdGVyCj4g
-PiB0aGFuIGEgbWVtb3J5IGFjY2Vzcwo+ID4gCTIpIFRoZSBuYW1lIG9mIHRoZSB2YXJpYWJsZSBs
-ZWFkcyB0byBjb25mdXNpbmcuIEl0IGlzIG5hbWVkCj4gPiBjYWNoZWxpbmVfYnl0ZXMgYnV0IHN0
-b3JlcyB0aGUgbWluaW11bSBjYWNoZWxpbmUgc2l6ZSBvZiBmb3IgdGhlIGRhdGEgY2FjaGUuCj4g
-PiAKPiA+IDEpIGlzIGFyZ3VhYmxlIGFuZCBJIGRvbid0IG11Y2ggY2FyZSB3aGV0aGVyIGl0IGlz
-IGRvbmUuIEhvd2V2ZXIsIEkgcmVhbGx5Cj4gPiB3YW50IHRvIGF2b2lkIGEgd3JvbmcgdmFyaWFi
-bGUgbmFtZSB0aGF0IGNvdWxkIGxlYWQgdG8gbW9yZSBtaXN1c2UuIFNvIHdlCj4gPiBzaG91bGQg
-YXQgbGVhc3QgcmVuYW1lIHJlYWRfY2FjaGVsaW5lX3NpemUoKSBhbmQgY2FjaGVsaW5lX2J5dGVz
-Lgo+IAo+IFN1cmUsIEkgY2FuIHJlbmFtZS4gV291bGQgbWluX2NhY2hlbGluZV9ieXRlcyBhbmQK
-PiByZWFkX21pbl9jYWNoZWxpbmVfYnl0ZXMoKSBiZSBjbGVhcmVyPyBPdGhlcndpc2UsIHBsZWFz
-ZSBzdWdnZXN0IGFuCj4gYWx0ZXJuYXRpdmUgbmFtaW5nIHNjaGVtZS4KCk9yIG1pbl9kY2FjaGVf
-bGluZV9ieXRlcyA/CgogCj4gPiAKPiA+ID4gLS0tCj4gPiA+ICAgeGVuL2luY2x1ZGUvYXNtLWFy
-bS9jcHJlZ3MuaCB8ICAyICsrCj4gPiA+ICAgeGVuL2luY2x1ZGUvYXNtLWFybS9wYWdlLmggICB8
-IDExICsrKysrLS0tLS0tCj4gPiA+ICAgMiBmaWxlcyBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyks
-IDYgZGVsZXRpb25zKC0pCj4gPiA+IAo+ID4gPiBkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvYXNt
-LWFybS9jcHJlZ3MuaCBiL3hlbi9pbmNsdWRlL2FzbS1hcm0vY3ByZWdzLmgKPiA+ID4gaW5kZXgg
-OWUxMzg0OC4uOGRiNjVkNSAxMDA2NDQKPiA+ID4gLS0tIGEveGVuL2luY2x1ZGUvYXNtLWFybS9j
-cHJlZ3MuaAo+ID4gPiArKysgYi94ZW4vaW5jbHVkZS9hc20tYXJtL2NwcmVncy5oCj4gPiA+IEBA
-IC0xMDYsNiArMTA2LDcgQEAKPiA+ID4gICAgIC8qIENQMTUgQ1IwOiBDUFVJRCBhbmQgQ2FjaGUg
-VHlwZSBSZWdpc3RlcnMgKi8KPiA+ID4gICAjZGVmaW5lIE1JRFIgICAgICAgICAgICBwMTUsMCxj
-MCxjMCwwICAgLyogTWFpbiBJRCBSZWdpc3RlciAqLwo+ID4gPiArI2RlZmluZSBDVFIgICAgICAg
-ICAgICAgcDE1LDAsYzAsYzAsMSAgIC8qIENhY2hlIFR5cGUgUmVnaXN0ZXIgKi8KPiA+ID4gICAj
-ZGVmaW5lIE1QSURSICAgICAgICAgICBwMTUsMCxjMCxjMCw1ICAgLyogTXVsdGlwcm9jZXNzb3Ig
-QWZmaW5pdHkKPiA+ID4gUmVnaXN0ZXIgKi8KPiA+ID4gICAjZGVmaW5lIElEX1BGUjAgICAgICAg
-ICBwMTUsMCxjMCxjMSwwICAgLyogUHJvY2Vzc29yIEZlYXR1cmUgUmVnaXN0ZXIgMCAqLwo+ID4g
-PiAgICNkZWZpbmUgSURfUEZSMSAgICAgICAgIHAxNSwwLGMwLGMxLDEgICAvKiBQcm9jZXNzb3Ig
-RmVhdHVyZSBSZWdpc3RlciAxICovCj4gPiA+IEBAIC0zMDMsNiArMzA0LDcgQEAKPiA+ID4gICAj
-ZGVmaW5lIENQQUNSX0VMMSAgICAgICAgICAgICAgIENQQUNSCj4gPiA+ICAgI2RlZmluZSBDUFRS
-X0VMMiAgICAgICAgICAgICAgICBIQ1BUUgo+ID4gPiAgICNkZWZpbmUgQ1NTRUxSX0VMMSAgICAg
-ICAgICAgICAgQ1NTRUxSCj4gPiA+ICsjZGVmaW5lIENUUl9FTDAgICAgICAgICAgICAgICAgIENU
-Ugo+ID4gPiAgICNkZWZpbmUgREFDUjMyX0VMMiAgICAgICAgICAgICAgREFDUgo+ID4gPiAgICNk
-ZWZpbmUgRVNSX0VMMSAgICAgICAgICAgICAgICAgREZTUgo+ID4gPiAgICNkZWZpbmUgRVNSX0VM
-MiAgICAgICAgICAgICAgICAgSFNSCj4gPiA+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20t
-YXJtL3BhZ2UuaCBiL3hlbi9pbmNsdWRlL2FzbS1hcm0vcGFnZS5oCj4gPiA+IGluZGV4IDlmYmYy
-MzIuLjRjODE4NzggMTAwNjQ0Cj4gPiA+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vcGFnZS5o
-Cj4gPiA+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS1hcm0vcGFnZS5oCj4gPiA+IEBAIC0xNDAsMTQg
-KzE0MCwxMyBAQCBleHRlcm4gc2l6ZV90IGNhY2hlbGluZV9ieXRlczsKPiA+ID4gICAgIHN0YXRp
-YyBpbmxpbmUgc2l6ZV90IHJlYWRfY2FjaGVsaW5lX3NpemUodm9pZCkKPiA+ID4gICB7Cj4gPiA+
-IC0gICAgdWludDMyX3QgY2NzaWQ7Cj4gPiA+ICsgICAgdWludDMyX3QgY3RyOwo+ID4gPiAgIC0g
-ICAgLyogUmVhZCB0aGUgY2FjaGUgc2l6ZSBJRCByZWdpc3RlciBmb3IgdGhlIGxldmVsLTAgZGF0
-YSBjYWNoZSAqLwo+ID4gPiAtICAgIFdSSVRFX1NZU1JFRzMyKDAsIENTU0VMUl9FTDEpOwo+ID4g
-PiAtICAgIGNjc2lkID0gUkVBRF9TWVNSRUczMihDQ1NJRFJfRUwxKTsKPiA+ID4gKyAgICAvKiBS
-ZWFkIENUUiAqLwo+ID4gPiArICAgIGN0ciA9IFJFQURfU1lTUkVHMzIoQ1RSX0VMMCk7Cj4gPiA+
-ICAgLSAgICAvKiBMb3cgMyBiaXRzIGFyZSBsb2cyKGNhY2hlbGluZSBzaXplIGluIHdvcmRzKSAt
-IDIuICovCj4gPiA+IC0gICAgcmV0dXJuIChzaXplX3QpICgxVSA8PCAoNCArIChjY3NpZCAmIDB4
-NykpKTsKPiA+ID4gKyAgICAvKiBCaXRzIDE2LTE5IGFyZSB0aGUgbG9nMiBudW1iZXIgb2Ygd29y
-ZHMgaW4gdGhlIGNhY2hlbGluZS4gKi8KPiA+ID4gKyAgICByZXR1cm4gKHNpemVfdCkgKDQgPDwg
-KChjdHIgPj4gMTYpICYgMHhmKSk7Cj4gPiA+ICAgfQo+ID4gPiAgICAgLyogRnVuY3Rpb25zIGZv
-ciBmbHVzaGluZyBtZWRpdW0tc2l6ZWQgYXJlYXMuCj4gPiA+IAo+ID4gCj4gPiAtLSAKPiA+IEp1
-bGllbiBHcmFsbAo+ID4gCj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1516584438-1520015746=:4239
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Fri, 2 Mar 2018, Andrew Cooper wrote:
+> On 02/03/18 18:26, Stefano Stabellini wrote:
+> >
+> >>> Suggested-by: Julien Grall <julien.grall@arm.com>
+> >>> Signed-off-by: Stefano Stabellini <sstabellini@kernel.org>
+> >>>
+> >>> ---
+> >>> Changes in v3:
+> >>> - new patch
+> >>>
+> >>> ---
+> >>> Interestingly I couldn't find a better way in C89 to printk a size_t
+> >>> than casting it to unsigned long.
+> >> You can use %zu.
+> > It's C99 only :-(
+> 
+> Sorry for the interjection, but what has C89 got to do with anything? 
+> Xen uses -std=gnu99, as per the root Config.mk file.
+
+I remember our discussions about C standard versions, but I take that
+they only affected public headers then (unless I am misremembering).
+Good!
+--8323329-1516584438-1520015746=:4239
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1516584438-1520015746=:4239--
