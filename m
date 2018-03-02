@@ -1,17 +1,16 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v4 06/16] xen/x86: Remove unused override of
- page_to_mfn/mfn_to_page
-Date: Fri, 2 Mar 2018 14:44:57 +0000
-Message-ID: <f1b55999-e105-e504-eb24-95946ef5e680@arm.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v4 07/16] xen/x86: mm: Switch x86/mm.c to
+ use typesafe for virt_to_mfn
+Date: Fri, 02 Mar 2018 07:45:43 -0700
+Message-ID: <5A9971A702000078001ADD74@prv-mh.provo.novell.com>
 References: <20180221140259.29360-1-julien.grall@arm.com>
- <20180221140259.29360-7-julien.grall@arm.com>
- <5A9970F602000078001ADD71@prv-mh.provo.novell.com>
+ <20180221140259.29360-8-julien.grall@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A9970F602000078001ADD71@prv-mh.provo.novell.com>
-Content-Language: en-US
+In-Reply-To: <20180221140259.29360-8-julien.grall@arm.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,22 +19,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
+To: Julien Grall <julien.grall@arm.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAwMi8wMy8xOCAxNDo0MiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMjEuMDIu
-MTggYXQgMTU6MDIsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+IEEgZmV3IGZpbGVz
-IG92ZXJyaWRlIHBhZ2VfdG9fbWZuL21mbl90b19wYWdlIGJ1dCBhY3R1YWxseSBuZXZlciB1c2UK
-Pj4gdGhvc2UgbWFjcm9zLiBTbyBkcm9wIHRoZW0uCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IEp1bGll
-biBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4gCj4gSXQgZG9lc24ndCBsb29rIGxpa2Ug
-dGhlcmUgYXJlIGFueSByaXNreSB1c2VzIG9mIHRoZSByZW1vdmVkCj4gc3ltYm9scyBpbiB0aGUg
-aGVhZGVycywgc28KPiBBY2tlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+
-IGFzc3VtaW5nIHRoaXMgaGFzIGJlZW4gYnVpbGQtdGVzdGVkIGluIHJlbGV2YW50IGNvbmZpZ3Vy
-YXRpb25zLgoKQWxsIHBhdGNoZXMgaGF2ZSBiZWVuIGJ1aWxkLXRlc3RlZCBvbmUgYnkgb25lLiBJ
-IGhhdmUgYWxzbyBsb29rZWQgYXQgdGhlIApjb2RlIHRvIHNlZSBpZiB0aGVyZSB3YXMgYW55IHVz
-ZSB3aXRoaW4gdGhlIGNvZGUuCgpOb3RlIHRoYXQgYWZ0ZXIgcGF0Y2ggIzE2LCB0aGV5IHdpbGwg
-YmVjb21lIGlycmVsZXZhbnQuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDIxLjAyLjE4IGF0IDE1OjAyLCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+
+IE5vIGZ1bmN0aW9uYWwgY2hhbmdlIGludGVuZGVkLgo+IAo+IFNpZ25lZC1vZmYgSnVsaWVuIEdy
+YWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCkFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxp
+Y2hAc3VzZS5jb20+CndpdGggb25lIHJlbWFyazoKCj4gQEAgLTU1NDUsOCArNTU0Nyw3IEBAIHN0
+YXRpYyB2b2lkIF9fbWVtZ3VhcmRfY2hhbmdlX3JhbmdlKHZvaWQgKnAsIHVuc2lnbmVkIGxvbmcg
+bCwgaW50IGd1YXJkKQo+ICAgICAgaWYgKCBndWFyZCApCj4gICAgICAgICAgZmxhZ3MgJj0gfl9Q
+QUdFX1BSRVNFTlQ7Cj4gIAo+IC0gICAgbWFwX3BhZ2VzX3RvX3hlbigKPiAtICAgICAgICBfcCwg
+dmlydF90b19tYWRkcihwKSA+PiBQQUdFX1NISUZULCBfbCA+PiBQQUdFX1NISUZULCBmbGFncyk7
+Cj4gKyAgICBtYXBfcGFnZXNfdG9feGVuKF9wLCBtZm5feCh2aXJ0X3RvX21mbihwKSksIF9sID4+
+IFBBR0VfU0hJRlQsIGZsYWdzKTsKCldvdWxkIGhhdmUgYmVlbiBuaWNlIGlmIHRoaXMgd2FzIHN3
+aXRjaGVkIHRvIFBGTl9ET1dOKCkgaW5zdGVhZApvZiB0aGUgb3BlbiBjb2RlZCBzaGlmdCByaWdo
+dCBhd2F5LgoKSmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
