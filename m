@@ -1,19 +1,15 @@
-From: "Ji, John" <john.ji@intel.com>
-Subject: Re: Setting up a Xen x86 community call
-Date: Sat, 3 Mar 2018 06:57:21 +0000
-Message-ID: <35286436E1DCFA4FB3BE7CE61C511D9234501A42@SHSMSX101.ccr.corp.intel.com>
-References: <B2025C1A-199C-4019-9ECF-AFF34FE8D702@gmail.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [seabios test] 120123: regressions - FAIL
+Date: Sat, 03 Mar 2018 11:28:57 +0000
+Message-ID: <osstest-120123-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8666250237298101270=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=djsu=fz=intel.com=john.ji@srs-us1.protection.inumbo.net>)
- id 1es16s-0005IO-7x
- for xen-devel@lists.xenproject.org; Sat, 03 Mar 2018 06:57:34 +0000
-In-Reply-To: <B2025C1A-199C-4019-9ECF-AFF34FE8D702@gmail.com>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=ybyn=fz=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1es5Li-0001pD-E4
+ for xen-devel@lists.xenproject.org; Sat, 03 Mar 2018 11:29:10 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,64 +18,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth.xen@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: "Tian, Kevin" <kevin.tian@intel.com>, "tamas@tklengyel.com" <tamas@tklengyel.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, "Li,
- Susie" <susie.li@intel.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?= <royger@freebsd.org>, Babu Moger <Babu.Moger@amd.com>, Rich Persaud <persaur@gmail.com>, "paul.durrant@citrix.com" <paul.durrant@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, Jan Beulich <jbeulich@suse.com>, "Hurwitz, Sherry" <sherry.hurwitz@amd.com>, Chao Peng <chao.p.peng@linux.intel.com>, "joao.m.martins@oracle.com" <joao.m.martins@oracle.com>, Brian Woods <brian.woods@amd.com>, "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGksIExhcnMgYW5kIGFsbCwgClRoaXMgaXMgcmVhbGx5IGdyZWF0IGFuZCBhYnNvbHV0ZWx5IG5l
-ZWRlZCEgV2UgYXJlIHZlcnkgZ2xhZCB0byBzZWUgdGhpcyBjYW4gaGFwcGVuLiAKCkZyb20gSW50
-ZWwsIFBlbmcgQ2hhbyB3aWxsIGF0dGVuZCBhbGwgc2Vzc2lvbnMgYW5kIGZlYXR1cmVzIG93bmVy
-cyAoWmhhbmcgSGFvemhvbmcsIEh1YW5nIEthaSwgRmVuZyBCb3F1biwgWmhhbmcgWWksIFpoYW5n
-IFl1LCBLYW5nIEx1d2VpLCBaaG9uZyBZYW5nKSB3aWxsIGF0dGVuZCBhY2NvcmRpbmcgdG8gdG9w
-aWNzLiBXZSBhcmUgYWxzbyBkaXNjdXNzaW5nIHRvIGhhdmUgbW9yZSBwZW9wbGUgZnJvbSBJbnRl
-bCB0byBhdHRlbmQuIAoKVGltZTogNjowMEFNfjEyOjAwQU0gQ2hpbmEgdGltZSBpcyBhbGwgb2sg
-Zm9yIHVzLiAKCkJlc3QgUmVnYXJkcwoKSm9obiBKaQoKCi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0t
-LS0tCkZyb206IExhcnMgS3VydGggW21haWx0bzpsYXJzLmt1cnRoLnhlbkBnbWFpbC5jb21dIApT
-ZW50OiBGcmlkYXksIE1hcmNoIDIsIDIwMTggMTE6NDAgUE0KVG86IHhlbi1kZXZlbCA8eGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnPgpDYzogY29tbWl0dGVyc0B4ZW5wcm9qZWN0Lm9yZzsg
-SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPjsgQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT47IExpLCBTdXNpZSA8c3VzaWUubGlAaW50ZWwuY29tPjsgSmksIEpv
-aG4gPGpvaG4uamlAaW50ZWwuY29tPjsgSHVyd2l0eiwgU2hlcnJ5IDxzaGVycnkuaHVyd2l0ekBh
-bWQuY29tPjsgQnJpYW4gV29vZHMgPGJyaWFuLndvb2RzQGFtZC5jb20+OyBCYWJ1IE1vZ2VyIDxC
-YWJ1Lk1vZ2VyQGFtZC5jb20+OyBDaGFvIFBlbmcgPGNoYW8ucC5wZW5nQGxpbnV4LmludGVsLmNv
-bT47IGRhbmllbC5raXBlckBvcmFjbGUuY29tOyBqb2FvLm0ubWFydGluc0BvcmFjbGUuY29tOyBi
-b3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbTsgUmljaCBQZXJzYXVkIDxwZXJzYXVyQGdtYWlsLmNv
-bT47IFRpYW4sIEtldmluIDxrZXZpbi50aWFuQGludGVsLmNvbT47IFJhenZhbiBDb2pvY2FydSA8
-cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT47IHRhbWFzQHRrbGVuZ3llbC5jb207IHBhdWwuZHVy
-cmFudEBjaXRyaXguY29tOyBSb2dlciBQYXUgTW9ubsOpIDxyb3lnZXJAZnJlZWJzZC5vcmc+ClN1
-YmplY3Q6IFNldHRpbmcgdXAgYSBYZW4geDg2IGNvbW11bml0eSBjYWxsCgpIaSBhbGwsCihzb3Jy
-eSBmb3IgdGhlIGV4dGVuc2l2ZSBkaXN0cmlidXRpb24gbGlzdCAtIEkgd2VudCB0aHJvdWdoIE1B
-SU5UQUlORVJTIGFuZCBwZW9wbGUgd2hvIG1heSBoYXZlIGFuIGludGVyZXN0KQoKSSB3b3VsZCBs
-aWtlIHRvIHN0YXJ0IG9yZ2FuaXppbmcgYSByZWN1cnJpbmcgeDg2IGNvbW11bml0eSBjYWxsIHRv
-IGRpc2N1c3MgYW5kIHN5bmMtdXAgb24gdXBjb21pbmcgZmVhdHVyZXMgZm9yIFhlbiBvbiB4ODYu
-IFRoaXMgY2FsbCB3b3VsZCBtaXJyb3IgYW5kIGZvbGxvdyBhIHNpbWlsYXIgc3RydWN0dXJlIHRv
-IHRoZSBBUk0gY2FsbCAoc2VlIGh0dHA6Ly94ZW4ubWFya21haWwub3JnL3RocmVhZC94cWR4dnFj
-anBmMnk1ZnR1IGZvciB0aGUgbGFzdCBvbmUpCgpJIGV4cGVjdCB0aGF0IHRoZSBjYWxsIHdpbGwg
-Y29udGFpbgoKYSkgQ29vcmRpbmF0aW9uIGFuZCBQbGFubmluZwpDb29yZGluYXRpbmcgd2hvIGRv
-ZXMgd2hhdCwgd2hhdCBuZWVkcyBhdHRlbnRpb24sIHdoYXQgaXMgYmxvY2tlZCwgZXRjLiAKSSB3
-b3VsZCBwcmVwYXJlIGEgbGlzdCBvZiBub24tbWVyZ2VkIHBhdGNoIHNlcmllcyBvZiBhIGNlcnRh
-aW4gc2l6ZSAoZS5nLiBtb3JlIHRoYW4gNSBwYXRjaGVzKSBhbmQgYXR0YWNoIHRvIHRoZSBpbnZp
-dGUgSWYgYW55dGhpbmcgaXMgbWlzc2VkLCBJIHdvdWxkIGV4cGVjdCB0aGF0IHRoZXNlIGFyZSBz
-ZW50IHRvIG1lIGJlZm9yZSB0aGUgbWVldGluZwoKYikgRGVzaWduIGFuZCBhcmNoaXRlY3R1cmUg
-cmVsYXRlZCBkaXNjdXNzaW9uczogaW4gcGFydGljdWxhciBmb3IgYmlnZ2VyLCBtb3JlIGNvbXBs
-ZXggaXRlbXMsIC4uLiAKQWx0aG91Z2ggYWxsIG9mIHRoaXMgY291bGQgYmUgZG9uZSBieSBlbWFp
-bCwgaW4gcmVhbGl0eSwgd2UgYXJlIGFsbCBodW1hbiBhbmQgbWFueSBwZW9wbGUgZmluZCBpdCBl
-YXNpZXIgdG8gY29sbGFib3JhdGUgYW5kIGNvbW11bmljYXRlIGJ5IHRhbGtpbmcgdG8gZWFjaCBv
-dGhlciwgcmF0aGVyIHRoYW4gYnkgZW1haWwuIFRoaXMgaXMgbm90IGEgbXVzdCwgYnV0IGFuIG9w
-dGlvbiB0byBoaWdobGlnaHQgaXNzdWVzCgpjKSBEZW1vcywgU2hhcmluZyBvZiBFeHBlcmllbmNl
-cywgU29tZXRpbWVzIGRpc2N1c3Npb24gb2Ygc3BlY2lmaWMgaXNzdWVzL2J1Z3MvcHJvYmxlbXMv
-Li4uClRoaXMgaXMgc29tZXRoaW5nIHdoaWNoIGhhcHBlbnMgZnJlcXVlbnRseSBvbiB0aGUgQVJN
-IGNhbGwgYW5kIHNlZW1zIHRvIHdvcmsgdmVyeSB3ZWxsCgpJIHdvdWxkIHN1Z2dlc3QgdG8gc3Rh
-cnQgd2l0aCBhIDEgaG91ciBtb250aGx5IG1lZXRpbmc6IHBvc3NpYmx5IGV2ZXJ5IDJuZCBUdWUg
-b3IgVGh1IGVhY2ggbW9udGggKGRlcGVuZHMgb24gdGltaW5nKS4gSSBrbm93IHRoYXQgcGVvcGxl
-IGFyZSBzcHJlYWQgYWNyb3NzIGRpZmZlcmVudCB0aW1lem9uZXMgKGZyb20gQ2hpbmEgdG8gdGhl
-IFVTKSwgc28gSSB3b3VsZCBsaWtlIHRvIGdhdGhlciB0aG91Z2h0cyBiZWZvcmUgY2hvb3Npbmcg
-YSB0aW1lLiBXZSBtYXkgaGF2ZSB0byBoYXZlIGFsdGVybmF0aW5nIHRpbWUtc2xvdHMgZXZlcnkg
-b3RoZXIgbW9udGg6IGJ1dCB0aGlzIGlzIG5vdCBpZGVhbCBmb3Igc29tZS4KClRvIGRvIHRoaXMs
-IHBsZWFzZQoqIFJhaXNlIHlvdXIgaGFuZHMgb24gd2hldGhlciB5b3Ugb3IgeW91ciBvcmcgd291
-bGQgd2FudCB0byBwYXJ0aWNpcGF0ZQoqIFByb3ZpZGUgeW91ciB0aW1lem9uZQoqIFByb3ZpZGUg
-YSBVVEMgdGltZSByYW5nZSB3aGVuIHlvdSBjYW4gYXR0ZW5kIAoKWW91ciBzaW5jZXJlbHksCkxh
-cnMKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============8666250237298101270==
+Content-Type: text/plain
+
+flight 120123 seabios real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/120123/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop       fail REGR. vs. 115539
+
+Tests which are failing intermittently (not blocking):
+ test-amd64-i386-xl-qemuu-ws16-amd64 10 windows-install     fail pass in 120079
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop   fail in 120079 like 115539
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 115539
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 115539
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+
+version targeted for testing:
+ seabios              9c6e73b5ebf1f184f96e9ed498a8d1a51512e807
+baseline version:
+ seabios              0ca6d6277dfafc671a5b3718cbeb5c78e2a888ea
+
+Last test of basis   115539  2017-11-03 20:48:58 Z  119 days
+Failing since        115733  2017-11-10 17:19:59 Z  112 days  140 attempts
+Testing same since   120079  2018-02-27 21:24:36 Z    3 days    2 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Kevin O'Connor <kevin@koconnor.net>
+  Marc-André Lureau <marcandre.lureau@redhat.com>
+  Marcel Apfelbaum <marcel@redhat.com>
+  Michael S. Tsirkin <mst@redhat.com>
+  Nikolay Nikolov <nickysn@users.sourceforge.net>
+  Paul Menzel <pmenzel@molgen.mpg.de>
+  Stefan Berger <stefanb@linux.vnet.ibm.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 300 lines long.)
+
+
+--===============8666250237298101270==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8666250237298101270==--
