@@ -1,17 +1,15 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-linus test] 120140: regressions - trouble:
-	broken/fail/pass
-Date: Sun, 04 Mar 2018 10:51:00 +0000
-Message-ID: <osstest-120140-mainreport@xen.org>
+Subject: [ovmf test] 120165: trouble: broken/pass
+Date: Sun, 04 Mar 2018 11:41:53 +0000
+Message-ID: <osstest-120165-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5274952623085014827=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=auwy=f2=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1esREa-0007IS-Ix
- for xen-devel@lists.xenproject.org; Sun, 04 Mar 2018 10:51:16 +0000
+ id 1esS1q-0002S4-3j
+ for xen-devel@lists.xenproject.org; Sun, 04 Mar 2018 11:42:10 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,286 +21,366 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMDE0MCBsaW51eC1saW51cyByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0LWxh
-Yi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTIwMTQwLwoKUmVncmVzc2lvbnMgOi0oCgpU
-ZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRl
-c3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAgICAg
-ICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiB0ZXN0LWFtZDY0LWFtZDY0
-LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICA8am9iIHN0YXR1cz4gICAgICBi
-cm9rZW4KIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAg
-ICAgICAgICAgICBicm9rZW4KIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1ICAgIDxqb2Ig
-c3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQt
-cGFpciAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAg
-ICAgYnJva2VuCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICAgIDxqb2Igc3RhdHVzPiAg
-ICAgICAgICAgICAgICAgYnJva2VuCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGVi
-aWFuaHZtLWFtZDY0LXhzbSA0IGhvc3QtaW5zdGFsbCg0KSBicm9rZW4gUkVHUi4gdnMuIDExODMy
-NAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAg
-IGJyb2tlbiBSRUdSLiB2cy4gMTE4MzI0CiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAgICAgICA0
-IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgYnJva2VuIFJFR1IuIHZzLiAxMTgzMjQKIHRlc3QtYW1k
-NjQtYW1kNjQtbGlidmlydC1wYWlyIDUgaG9zdC1pbnN0YWxsL2RzdF9ob3N0KDUpIGJyb2tlbiBS
-RUdSLiB2cy4gMTE4MzI0CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLW11bHRpdmNwdSAgNCBob3N0LWlu
-c3RhbGwoNCkgICAgICAgYnJva2VuIFJFR1IuIHZzLiAxMTgzMjQKIHRlc3QtYW1kNjQtYW1kNjQt
-eGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0IDQgaG9zdC1pbnN0YWxsKDQpIGJyb2tlbiBSRUdSLiB2
-cy4gMTE4MzI0CiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgICA3IHhlbi1ib290ICAgICAg
-ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMTgzMjQKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11
-dS1vdm1mLWFtZDY0ICA3IHhlbi1ib290ICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDExODMyNAog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXhzbSAgICAgICAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAg
-ZmFpbCBSRUdSLiB2cy4gMTE4MzI0CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtc3R1YmRvbS1k
-ZWJpYW5odm0tYW1kNjQteHNtIDcgeGVuLWJvb3QgZmFpbCBSRUdSLiB2cy4gMTE4MzI0CiB0ZXN0
-LWFtZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAgNyB4ZW4tYm9vdCAgICAgICAgICBmYWls
-IFJFR1IuIHZzLiAxMTgzMjQKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1kNjQgIDcgeGVu
-LWJvb3QgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDExODMyNAogdGVzdC1hbWQ2NC1pMzg2
-LXhsLXFlbXV0LXdpbjctYW1kNjQgIDcgeGVuLWJvb3QgICAgICAgICAgZmFpbCBSRUdSLiB2cy4g
-MTE4MzI0CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgNyB4
-ZW4tYm9vdCBmYWlsIFJFR1IuIHZzLiAxMTgzMjQKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1k
-ZWJpYW5odm0tYW1kNjQgIDcgeGVuLWJvb3QgICAgIGZhaWwgUkVHUi4gdnMuIDExODMyNAogdGVz
-dC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgNyB4ZW4tYm9vdCAgICAgICAgICAgZmFp
-bCBSRUdSLiB2cy4gMTE4MzI0CiB0ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhlbDZodm0tYW1kICA3
-IHhlbi1ib290ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMTgzMjQKIHRlc3QtYW1kNjQtaTM4
-Ni14bC1yYXcgICAgICAgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMu
-IDExODMyNAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1pbnRlbCAxMiBndWVzdC1zdGFydCAg
-ICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTE4MzI0CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYy
-LWFtZCAxMiBndWVzdC1zdGFydCAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMTgzMjQKIHRl
-c3QtYW1kNjQtaTM4Ni1leGFtaW5lICAgICAgIDggcmVib290ICAgICAgICAgICAgICAgICAgIGZh
-aWwgUkVHUi4gdnMuIDExODMyNAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQg
-IDcgeGVuLWJvb3QgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTE4MzI0CiB0ZXN0LWFtZDY0LWkz
-ODYtcWVtdXUtcmhlbDZodm0taW50ZWwgIDcgeGVuLWJvb3QgICAgICAgICBmYWlsIFJFR1IuIHZz
-LiAxMTgzMjQKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgMTAgeGVuLWJvb3Qvc3JjX2hv
-c3QgICAgICAgIGZhaWwgUkVHUi4gdnMuIDExODMyNAogdGVzdC1hbWQ2NC1pMzg2LXBhaXIgICAg
-ICAgICAxMSB4ZW4tYm9vdC9kc3RfaG9zdCAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTE4MzI0CiB0
-ZXN0LWFtZDY0LWkzODYtbGlidmlydC1wYWlyIDEwIHhlbi1ib290L3NyY19ob3N0ICAgICAgICBm
-YWlsIFJFR1IuIHZzLiAxMTgzMjQKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXBhaXIgMTEgeGVu
-LWJvb3QvZHN0X2hvc3QgICAgICAgIGZhaWwgUkVHUi4gdnMuIDExODMyNAogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV0LXdzMTYtYW1kNjQgIDcgeGVuLWJvb3QgICAgICAgICAgZmFpbCBSRUdSLiB2
-cy4gMTE4MzI0CiB0ZXN0LWFtZDY0LWkzODYtcnVtcHJ1bi1pMzg2ICA3IHhlbi1ib290ICAgICAg
-ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMTgzMjQKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1y
-aGVsNmh2bS1pbnRlbCAgNyB4ZW4tYm9vdCAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDExODMyNAog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjEwLWkzODYgIDcgeGVuLWJvb3QgICAgICAgICAg
-ZmFpbCBSRUdSLiB2cy4gMTE4MzI0CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZt
-LWFtZDY0ICA3IHhlbi1ib290ICAgICBmYWlsIFJFR1IuIHZzLiAxMTgzMjQKIHRlc3QtYW1kNjQt
-aTM4Ni1saWJ2aXJ0LXhzbSAgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4g
-dnMuIDExODMyNAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgIDcgeGVuLWJv
-b3QgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTE4MzI0CiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJz
-ZDEwLWkzODYgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMTgzMjQK
-IHRlc3QtYW1kNjQtaTM4Ni14bCAgICAgICAgICAgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAg
-IGZhaWwgUkVHUi4gdnMuIDExODMyNAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGVi
-aWFuaHZtLWFtZDY0LXhzbSA3IHhlbi1ib290IGZhaWwgUkVHUi4gdnMuIDExODMyNAogdGVzdC1h
-bWQ2NC1pMzg2LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gIDcgeGVuLWJvb3QgZmFpbCBS
-RUdSLiB2cy4gMTE4MzI0CiB0ZXN0LWFybWhmLWFybWhmLWV4YW1pbmUgICAgICA2IHhlbi1pbnN0
-YWxsICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMTgzMjQKClJlZ3Jlc3Npb25zIHdoaWNo
-IGFyZSByZWdhcmRlZCBhcyBhbGxvd2FibGUgKG5vdCBibG9ja2luZyk6CiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXJ0ZHMgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgYnJva2VuIFJFR1IuIHZz
-LiAxMTgzMjQKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tp
-bmc6CiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQt
-Y2hlY2sgICAgZmFpbCAgbGlrZSAxMTgzMjQKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2lu
-Ny1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDExODMyNAogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBm
-YWlsIGxpa2UgMTE4MzI0CiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3IDEzIHNhdmVyZXN0
-b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgbGlrZSAxMTgzMjQKIHRlc3QtYXJtaGYtYXJtaGYt
-bGlidmlydC14c20gMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICBsaWtlIDEx
-ODMyNAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3Ag
-ICAgICAgICAgICBmYWlsIGxpa2UgMTE4MzI0CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdz
-MTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMTgzMjQKIHRlc3Qt
-YW1kNjQtYW1kNjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhz
-bSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybTY0LWFybTY0LXhsLWNyZWRpdDIgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwtY3JlZGl0MiAgMTQgc2F2ZXJl
-c3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02
-NC14bC14c20gICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZl
-ciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBv
-cnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVz
-dGVkLWFtZCAxNyBkZWJpYW4taHZtLWluc3RhbGwvbDEvbDIgIGZhaWwgbmV2ZXIgcGFzcwogdGVz
-dC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgIDE0IHNhdmVy
-ZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1k
-NjQtbGlidmlydC12aGQgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBvcnQt
-Y2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRp
-dDIgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAxNCBzYXZl
-cmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLWN1YmlldHJ1Y2sgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAxNCBzYXZlcmVzdG9yZS1z
-dXBwb3J0LWNoZWNrICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRz
-ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
-ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTMgbWln
-cmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
-cm1oZi14bC14c20gICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBu
-ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1
-cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmly
-dC1yYXcgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwog
-dGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAg
-ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEzIHNh
-dmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYt
-YXJtaGYteGwtbXVsdGl2Y3B1IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAg
-bmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgMTQgc2F2ZXJlc3RvcmUt
-c3VwcG9ydC1jaGVjayAgICBmYWlsICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZp
-cnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwg
-ICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW4xMC1p
-Mzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgZmFpbCBuZXZlciBwYXNzCgp2ZXJzaW9uIHRh
-cmdldGVkIGZvciB0ZXN0aW5nOgogbGludXggICAgICAgICAgICAgICAgNWQ2MGUwNTdkMTI3NTM4
-MTEzZDg5NDVlYTg3ZDkxNmZjY2VlOTNmZQpiYXNlbGluZSB2ZXJzaW9uOgogbGludXggICAgICAg
-ICAgICAgICAgNWI3ZDI3OTY3ZGFiZmIxN2MyMWIwZDk4YjI5MTUzYjllM2VlNzFlNQoKTGFzdCB0
-ZXN0IG9mIGJhc2lzICAgMTE4MzI0ICAyMDE4LTAxLTI1IDA3OjMxOjI0IFogICAzOCBkYXlzCkZh
-aWxpbmcgc2luY2UgICAgICAgIDExODM2MiAgMjAxOC0wMS0yNiAxNjo1NjoxNyBaICAgMzYgZGF5
-cyAgIDM3IGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEyMDE0MCAgMjAxOC0wMy0wMiAw
-NToxNzo1NyBaICAgIDIgZGF5cyAgICAxIGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KMjMwOSBwZW9wbGUgdG91Y2hl
-ZCByZXZpc2lvbnMgdW5kZXIgdGVzdCwKbm90IGxpc3RpbmcgdGhlbSBhbGwKCmpvYnM6CiBidWls
-ZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYteHNtICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXhzbSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtYXJtNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-YW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1hcm02NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1h
-bWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFybTY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFt
-ZDY0LXJ1bXBydW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtaTM4Ni1ydW1wcnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1o
-Zi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtZGViaWFuaHZtLWFt
-ZDY0LXhzbSAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
-LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgYnJva2Vu
-ICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAg
-ICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1k
-NjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQteHNtICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14
-c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1h
-cm1oZi1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwteHNtICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFt
-ZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NCAg
-ICAgICAgICAgICAgICAgICAgYnJva2VuICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1kZWJp
-YW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAg
-ICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1kNjQgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1m
-LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-eGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43LWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luNy1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-eGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
-dC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgICAgICAgICAg
-ICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13czE2LWFt
-ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
-LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1jcmVkaXQyICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhs
-LWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWV4YW1pbmUgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQtZXhh
-bWluZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-cm1oZi1hcm1oZi1leGFtaW5lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtZXhhbWluZSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtaTM4NiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXJ1bXBy
-dW4taTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgZmFp
-bCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAg
-ICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW4xMC1pMzg2
-ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVt
-dXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQtcWVtdXUtbmVzdGVkLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1pbnRlbCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhlbDZodm0taW50ZWwg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1y
-aGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tl
-biAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1tdWx0
-aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiB0ZXN0LWFybWhm
-LWFybWhmLXhsLW11bHRpdmNwdSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXBhaXIgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQt
-cGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIHRlc3QtYW1kNjQt
-aTM4Ni1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1wdmdydWIgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWkzODYtcHZncnViICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcHlncnViICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xY293MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1yYXcgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1ydGRzICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3Nz
-dGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2Vz
-OiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFi
-bGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9n
-cwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJh
-bCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0
-O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
-cmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3Qg
-aGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9n
-aXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCmJyb2tlbi1qb2IgdGVzdC1hbWQ2NC1hbWQ2
-NC1weWdydWIgYnJva2VuCmJyb2tlbi1qb2IgdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1
-LWRlYmlhbmh2bS1hbWQ2NC14c20gYnJva2VuCmJyb2tlbi1qb2IgdGVzdC1hbWQ2NC1hbWQ2NC1s
-aWJ2aXJ0IGJyb2tlbgpicm9rZW4tam9iIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1IGJy
-b2tlbgpicm9rZW4tam9iIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1wYWlyIGJyb2tlbgpicm9r
-ZW4tam9iIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0IGJyb2tlbgpi
-cm9rZW4tam9iIHRlc3QtYW1kNjQtYW1kNjQteGwtcnRkcyBicm9rZW4KYnJva2VuLXN0ZXAgdGVz
-dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gaG9zdC1pbnN0
-YWxsKDQpCmJyb2tlbi1zdGVwIHRlc3QtYW1kNjQtYW1kNjQteGwtcnRkcyBob3N0LWluc3RhbGwo
-NCkKYnJva2VuLXN0ZXAgdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0IGhvc3QtaW5zdGFsbCg0KQpi
-cm9rZW4tc3RlcCB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiBob3N0LWluc3RhbGwoNCkKYnJva2Vu
-LXN0ZXAgdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgaG9zdC1pbnN0YWxsL2RzdF9ob3N0
-KDUpCmJyb2tlbi1zdGVwIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1IGhvc3QtaW5zdGFs
-bCg0KQpicm9rZW4tc3RlcCB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2
-NCBob3N0LWluc3RhbGwoNCkKCk5vdCBwdXNoaW5nLgoKKE5vIHJldmlzaW9uIGxvZzsgaXQgd291
-bGQgYmUgMjYzMjY5IGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+--===============5274952623085014827==
+Content-Type: text/plain
+
+flight 120165 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/120165/
+
+Failures and problems with tests :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-i386-xl-qemuu-ovmf-amd64    <job status>                 broken
+ test-amd64-i386-xl-qemuu-ovmf-amd64  4 host-install(4) broken REGR. vs. 120113
+
+version targeted for testing:
+ ovmf                 8805bd904abd2f331d91cc4ae26fe3ee75a1fd0d
+baseline version:
+ ovmf                 2157bc9c8b8be30ada11fe2e64454157d3ae528f
+
+Last test of basis   120113  2018-03-01 02:36:47 Z    3 days
+Testing same since   120165  2018-03-02 17:19:56 Z    1 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Ard Biesheuvel <ard.biesheuvel@linaro.org>
+  Dandan Bi <dandan.bi@intel.com>
+  Felix Polyudov <felixp@ami.com>
+  Feng, YunhuaX </o=Intel/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=Feng, YunhuaX4e1>
+  Jiaxin Wu <jiaxin.wu@intel.com>
+  Jiewen Yao <jiewen.yao@intel.com>
+  Liming Gao <liming.gao@intel.com>
+  Marc-André Lureau <marcandre.lureau@redhat.com>
+  Ruiyu Ni <ruiyu.ni@intel.com>
+  Wu Jiaxin <jiaxin.wu@intel.com>
+  Yonghong Zhu <yonghong.zhu@intel.com>
+  Yunhua Feng <yunhuax.feng@intel.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          broken  
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job test-amd64-i386-xl-qemuu-ovmf-amd64 broken
+broken-step test-amd64-i386-xl-qemuu-ovmf-amd64 host-install(4)
+
+Not pushing.
+
+------------------------------------------------------------
+commit 8805bd904abd2f331d91cc4ae26fe3ee75a1fd0d
+Author: Felix Polyudov <felixp@ami.com>
+Date:   Fri Mar 2 23:48:30 2018 +0800
+
+    MdePkg/Include/IndustryStandard: Add PCI Express 4.0 header file
+    
+    v3: LaneEqualizationControl is changed to be an array.
+    
+    v2: The structure is updated to include all the fields defined
+    in the PCI-E specification.
+    
+    The header includes Physical Layer PCI Express Extended Capability definitions
+    described in section 7.7.5 of PCI Express Base Specification rev. 4.0.
+    
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Felix Polyudov <felixp@ami.com>
+    Reviewed-by: Liming Gao <liming.gao@intel.com>
+
+commit a39e72267034d0cae72be8741fff37f37e5da920
+Author: Marc-André Lureau <marcandre.lureau@redhat.com>
+Date:   Fri Feb 23 14:23:05 2018 +0100
+
+    SecurityPkg/Tcg2Pei: drop Tcg2PhysicalPresenceLib dependency
+    
+    Apparently, unnecessary. Avoids extra build dependency and churn.
+    
+    CC: Laszlo Ersek <lersek@redhat.com>
+    CC: Stefan Berger <stefanb@linux.vnet.ibm.com>
+    Contributed-under: TianoCore Contribution Agreement 1.0
+    Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+    Reviewed-by: Laszlo Ersek <lersek@redhat.com>
+    Reviewed-by: Jiewen Yao <jiewen.yao@intel.com>
+
+commit 52b68f7d455a86baf8339939dea1f9eda726ac54
+Author: Dandan Bi <dandan.bi@intel.com>
+Date:   Thu Mar 1 15:08:01 2018 +0800
+
+    MdeModulePkg: Fix incorrect commit introduced by commit SHA-1:052c98
+    
+    The default value of PcdExtFpdtBootRecordPadSize is 0x20000
+    But the following commit in master update it to 0 by mistake.
+    SHA-1: 052c98ce246a1ffb0b4c5185a644aa9f902650f7
+    Subject: MdeModulePkg: Add ResetSystemPei PEIM
+    
+    This patch is to restore the value.
+    
+    Cc: Liming Gao <liming.gao@intel.com>
+    Cc: Star Zeng <star.zeng@intel.com>
+    Cc: Ruiyu Ni <ruiyu.ni@intel.com>
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Dandan Bi <dandan.bi@intel.com>
+    Reviewed-by: Liming Gao <liming.gao@intel.com>
+    Reviewed-by: Star Zeng <star.zeng@intel.com>
+
+commit c9f02a96d8a48844e7168e7572b8a1382c2bfd29
+Author: Dandan Bi <dandan.bi@intel.com>
+Date:   Thu Mar 1 13:40:48 2018 +0800
+
+    MdeModulePkg/DxeCorePerfLib: Add status check instead of ASSERT
+    
+    Currently DxeCorePerformanceLib will get SMM performance data based
+    on SMM communication handler. If SMM communication handler returns error,
+    the library will ASSERT. In fact, if SMM perf data is not found.
+    DXE perf data can still be dumped. So using status check instead of
+    ASSERT is better.
+    
+    Cc: Liming Gao <liming.gao@intel.com>
+    Cc: Star Zeng <star.zeng@intel.com>
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Dandan Bi <dandan.bi@intel.com>
+    Reviewed-by: Liming Gao <liming.gao@intel.com>
+
+commit a7119c81528072b13e9664ce51f70b8f91f4d9e2
+Author: Ruiyu Ni <ruiyu.ni@intel.com>
+Date:   Thu Mar 1 14:33:43 2018 +0800
+
+    MdeModulePkg/DebugLibReportStatusCode: Fix hang if format is too long
+    
+    The previous commit 137ed15511e2045a7333e33ae7f1e873ce1961dd
+    * MdeModulePkg/DebugLib: Print partial when format string is too long
+    copies partial format string to DEBUG_INFO buffer but when parsing
+    the format modifier, the original format string is still used.
+    
+    The patch fixes this issue.
+    
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Ruiyu Ni <ruiyu.ni@intel.com>
+    Reviewed-by: Liming Gao <liming.gao@intel.com>
+
+commit 79f84eb676982fd35e6089060f247c5e38d691dd
+Author: Jiaxin Wu <jiaxin.wu@intel.com>
+Date:   Tue Feb 27 11:11:46 2018 +0800
+
+    NetworkPkg/HttpDxe: Support HTTP Delete Method.
+    
+    Per the request to support HttpMethodDelete:
+    https://bugzilla.tianocore.org/show_bug.cgi?id=879,
+    This patch is to enable the HTTP Delete Method.
+    
+    Cc: Karunakar P <karunakarp@amiindia.co.in>
+    Cc: Ye Ting <ting.ye@intel.com>
+    Cc: Fu Siyuan <siyuan.fu@intel.com>
+    Contributed-under: TianoCore Contribution Agreement 1.0
+    Signed-off-by: Wu Jiaxin <jiaxin.wu@intel.com>
+    Reviewed-by: Fu Siyuan <siyuan.fu@intel.com>
+
+commit db79f8019de5e6add3a721b60283586558f5e848
+Author: Jiaxin Wu <jiaxin.wu@intel.com>
+Date:   Thu Mar 1 17:24:20 2018 +0800
+
+    NetworkPkg/Udp6Dxe: Fix the failure to leave one multicast group address.
+    
+    The issue was enrolled by the commit of ceec3638. One of the change in the commit
+    was to return the status from NetMapIterate in Udp6Groups function. But it should
+    not return EFI_ABORTED directly in case McastIp is not NULL, which means to terminate
+    the iteration and leave the McastIp successfully.
+    
+    Cc: Wang Fan <fan.wang@intel.com>
+    Cc: Fu Siyuan <siyuan.fu@intel.com>
+    Cc: Ye Ting <ting.ye@intel.com>
+    Contributed-under: TianoCore Contribution Agreement 1.0
+    Signed-off-by: Jiaxin Wu <jiaxin.wu@intel.com>
+    Reviewed-by: Fu Siyuan <siyuan.fu@intel.com>
+
+commit f33d39949b3eb7f7ab3f326c8adf560aabc6fd53
+Author: Jiaxin Wu <jiaxin.wu@intel.com>
+Date:   Thu Mar 1 12:59:57 2018 +0800
+
+    NetworkPkg/HttpBootDxe: Fix the incorrect error message output.
+    
+    For IPv6 case, if one invalid URL returned from DHCP server, HttpBootDxe
+    driver could not retrieve the URL host address from DNS server. In such a
+    case, the error message should be printed as:
+      Error: Could not retrieve the host address from DNS server.
+    Instead of:
+      Error: Could not discover the boot information for DHCP server.
+    Then, we can still output as following:
+      Error: Could not retrieve NBP file size from HTTP server.
+    
+    Besides, currently implementation in HttpBootLoadFile will always output
+    error message even the HTTP process is correct.
+    
+    This patch is to fix above issue.
+    
+    Cc: Ye Ting <ting.ye@intel.com>
+    Cc: Fu Siyuan <siyuan.fu@intel.com>
+    Contributed-under: TianoCore Contribution Agreement 1.0
+    Signed-off-by: Wu Jiaxin <jiaxin.wu@intel.com>
+    Reviewed-by: Fu Siyuan <siyuan.fu@intel.com>
+    Reviewed-by: Ye Ting <ting.ye@intel.com>
+
+commit 951c6e63f8dbcf9eb4c720cf218cb7ede7a7255e
+Author: Jiaxin Wu <jiaxin.wu@intel.com>
+Date:   Thu Mar 1 11:52:28 2018 +0800
+
+    NetworkPkg/HttpBootDxe: Correct the parameter check for the usage of HttpBootGetFileFromCache.
+    
+    The patch is to fix the incorrect parameter check for the HttpBootGetFileFromCache().
+    
+    Cc: Ye Ting <ting.ye@intel.com>
+    Cc: Fu Siyuan <siyuan.fu@intel.com>
+    Contributed-under: TianoCore Contribution Agreement 1.0
+    Signed-off-by: Wu Jiaxin <jiaxin.wu@intel.com>
+    Reviewed-by: Fu Siyuan <siyuan.fu@intel.com>
+    Reviewed-by: Ye Ting <ting.ye@intel.com>
+
+commit 5ac0a5450bb87ccefa9f847d3d5bf579cb13925e
+Author: Feng, YunhuaX </o=Intel/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=Feng, YunhuaX4e1>
+Date:   Thu Mar 1 16:22:08 2018 +0800
+
+    BaseTools: report error if flag in LABEL() invalid
+    
+    Flag in LABEL() is not valid C variable name, will report error.
+    
+    Cc: Liming Gao <liming.gao@intel.com>
+    Cc: Yonghong Zhu <yonghong.zhu@intel.com>
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Yunhua Feng <yunhuax.feng@intel.com>
+    Reviewed-by: Yonghong Zhu <yonghong.zhu@intel.com>
+
+commit 6ee9c68912324b4053cfa15fd06b02af1c1c74d9
+Author: Yonghong Zhu <yonghong.zhu@intel.com>
+Date:   Thu Mar 1 13:48:31 2018 +0800
+
+    BaseTools: Fix the bug for display incorrect *M flag in report
+    
+    The root cause is the byte array value in the driver Pcd, some bytes
+    have additional space character, while the value in DSC file doesn't
+    have this space, it cause the string compare return false, so we remove
+    the extra space.
+    
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Yonghong Zhu <yonghong.zhu@intel.com>
+    Reviewed-by: Liming Gao <liming.gao@intel.com>
+
+commit 4faf13222edead307109bf8c747200ea3fb617c0
+Author: Feng, YunhuaX </o=Intel/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=Feng, YunhuaX4e1>
+Date:   Thu Mar 1 10:16:07 2018 +0800
+
+    BaseTools: Fix eval parse string issue
+    
+    eval argument start with " or ', but it is unicode string,
+    will encounter error:
+        List = list(eval(Value)) # translate escape character
+      File "<string>", line 1
+        'j??=????????F??
+                 ^
+    SyntaxError: EOL while scanning string literal
+    
+    Cc: Liming Gao <liming.gao@intel.com>
+    Cc: Yonghong Zhu <yonghong.zhu@intel.com>
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Yunhua Feng <yunhuax.feng@intel.com>
+    Reviewed-by: Yonghong Zhu <yonghong.zhu@intel.com>
+
+commit 3db2823f1e270b191de701e5514968423b305530
+Author: Jiewen Yao <jiewen.yao@intel.com>
+Date:   Wed Feb 28 09:48:20 2018 +0800
+
+    Maintainers.txt: Add Jiewen to be co-maintainer of SecurityPkg.
+    
+    Cc: Chao B Zhang <chao.b.zhang@intel.com>
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Jiewen Yao <jiewen.yao@intel.com>
+    Reviewed-by: Chao Zhang <chao.b.zhang@intel.com>
+
+commit 541a3f5882d60d6241a752127acf3ef367c548e4
+Author: Feng, YunhuaX </o=Intel/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=Feng, YunhuaX4e1>
+Date:   Thu Mar 1 10:23:14 2018 +0800
+
+    BaseTools: GlobalData.gConfDirectory is None when run GenFds
+    
+    When run GenFds,  GlobalData.gConfDirectory is None, On Linux
+    self._ToolChainFamily default Value is "MSFT", and then
+    generate the wrong PcdValueInit Makefile
+    
+    Cc: Liming Gao <liming.gao@intel.com>
+    Cc: Yonghong Zhu <yonghong.zhu@intel.com>
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Yunhua Feng <yunhuax.feng@intel.com>
+    Reviewed-by: Yonghong Zhu <yonghong.zhu@intel.com>
+
+commit cd49821608f7eb867b8351c7a0cd3ed4dd2d563d
+Author: Yonghong Zhu <yonghong.zhu@intel.com>
+Date:   Thu Mar 1 00:07:48 2018 +0800
+
+    BaseTools: Fix the bug for single module build with GenC/GenMake
+    
+    copy the same logic from _BuildPa() function.
+    
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Yonghong Zhu <yonghong.zhu@intel.com>
+    Reviewed-by: Liming Gao <liming.gao@intel.com>
+
+commit 23b53ede358d9262a78e3f7b2a34423382d138a8
+Author: Ard Biesheuvel <ard.biesheuvel@linaro.org>
+Date:   Thu Mar 1 09:27:31 2018 +0000
+
+    ShellPkg/UefiShellDebug1CommandsLib: remove I/O address limit from 'mm'
+    
+    Neither the EFI_PCI_ROOT_BRIDGE_IO_PROTOCOL nor the EFI_CPU_IO2_PROTOCOL
+    impose any restrictions when it comes to the range of valid I/O
+    addresses. Even so, the 'mm' command in -IO mode refuses to perform
+    accesses to addresses >= 0xffff.
+    
+    It is not up to 'mm' to impose this restriction, so remove it.
+    
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Ard Biesheuvel <ard.biesheuvel@linaro.org>
+    Reviewed-by: Jaben Carsey <jaben.carsey@intel.com>
+
+commit a16f7f47949ebddf07d228ef3827ec8747180e48
+Author: Liming Gao <liming.gao@intel.com>
+Date:   Wed Feb 28 16:35:59 2018 +0800
+
+    BaseTools: Align WIN_CERTIFICATE_UEFI_GUID definition to MdePkg one.
+    
+    Contributed-under: TianoCore Contribution Agreement 1.1
+    Signed-off-by: Liming Gao <liming.gao@intel.com>
+    Reviewed-by: Yonghong Zhu <yonghong.zhu@intel.com>
+
+
+--===============5274952623085014827==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5274952623085014827==--
