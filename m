@@ -1,16 +1,16 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [libvirt test] 120188: tolerable all pass - PUSHED
-Date: Sun, 04 Mar 2018 21:40:09 +0000
-Message-ID: <osstest-120188-mainreport@xen.org>
+Subject: [xen-unstable bisection] complete
+	test-amd64-amd64-qemuu-nested-intel
+Date: Sun, 04 Mar 2018 22:47:38 +0000
+Message-ID: <E1escPq-00048d-As@osstest.test-lab.xenproject.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6977174853107856226=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=auwy=f2=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1esbMf-0003OI-ND
- for xen-devel@lists.xenproject.org; Sun, 04 Mar 2018 21:40:17 +0000
+ id 1escQ4-0007nq-9t
+ for xen-devel@lists.xenproject.org; Sun, 04 Mar 2018 22:47:52 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,98 +22,229 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMDE4OCBsaWJ2aXJ0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjAxODgvCgpGYWlsdXJlcyA6LS8gYnV0IG5vIHJl
-Z3Jlc3Npb25zLgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9j
-a2luZzoKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICBsaWtlIDEyMDEyMgogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAg
-ICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTIwMTIyCiB0ZXN0
-LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3IDEzIHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgbGlrZSAxMjAxMjIKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAgICAgMTMgbWlncmF0
-ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2
-NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZl
-ciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAg
-ICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hcm02NC1hcm02NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQgICAgIDE0IHNhdmVy
-ZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJt
-NjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAxNCBzYXZlcmVzdG9yZS1zdXBw
-b3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQt
-cWNvdzIgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtNjQtYXJtNjQtbGlidmlydC1xY293MiAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNr
-ICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlh
-bmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwog
-dGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZoZCAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAg
-ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNtIDEzIG1p
-Z3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYt
-YXJtaGYtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAg
-bmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAxMiBtaWdyYXRlLXN1cHBv
-cnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmly
-dC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWls
-IG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiBsaWJ2aXJ0ICAgICAg
-ICAgICAgICAzMjhiOGRiZThiZWU5OTM5YzcxMDhmZGVjNGZkYTA1ZmQwMjUxMWY2CmJhc2VsaW5l
-IHZlcnNpb246CiBsaWJ2aXJ0ICAgICAgICAgICAgICA3YTMyYmVkZmZjNTUyMWFhYmVkNjNhMjk5
-MWRiNmE4MDU0MDNmNzZkCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjAxMjIgIDIwMTgtMDMtMDEg
-MTE6NDA6MjkgWiAgICAzIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTIwMTg4ICAyMDE4LTAz
-LTAzIDA3OjMxOjU2IFogICAgMSBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRv
-dWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmVhIEJvbG9nbmFuaSA8YWJvbG9nbmFA
-cmVkaGF0LmNvbT4KICBKb2huIEZlcmxhbiA8amZlcmxhbkByZWRoYXQuY29tPgogIE1pY2hhbCBQ
-cml2b3puaWsgPG1wcml2b3puQHJlZGhhdC5jb20+CiAgUGF2ZWwgSHJkaW5hIDxwaHJkaW5hQHJl
-ZGhhdC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC14c20gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhm
-LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtbGlidmlydCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1s
-aWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2
-b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFt
-ZDY0LXhzbSAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1
-LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYXJtNjQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-bGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1pMzg2LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQtcWNvdzIgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1s
-aWJ2aXJ0LXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-CnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dz
-OiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmln
-IGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywg
-YW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
-cmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIK
-ICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtm
-PVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAg
-aHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQ
-dXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94ZW4vZ2l0L2xpYnZp
-cnQuZ2l0CiAgIDdhMzJiZWRmZmMuLjMyOGI4ZGJlOGIgIDMyOGI4ZGJlOGJlZTk5MzljNzEwOGZk
-ZWM0ZmRhMDVmZDAyNTExZjYgLT4geGVuLXRlc3RlZC1tYXN0ZXIKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============6977174853107856226==
+Content-Type: text/plain
+
+branch xen-unstable
+xenbranch xen-unstable
+job test-amd64-amd64-qemuu-nested-intel
+testid debian-hvm-install/l1/l2
+
+Tree: linux git://xenbits.xen.org/linux-pvops.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  40681735502648fdc45973382a440aa38f4ec800
+  Bug not present: c6527bc66b6dd7a8dadaebb1047c8e52c6c5793c
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/120243/
+
+
+  commit 40681735502648fdc45973382a440aa38f4ec800
+  Author: Roger Pau Monné <roger.pau@citrix.com>
+  Date:   Tue Feb 27 14:10:33 2018 +0100
+  
+      vmx/hap: optimize CR4 trapping
+      
+      There a bunch of bits in CR4 that should be allowed to be set directly
+      by the guest without requiring Xen intervention, currently this is
+      already done by passing through guest writes into the CR4 used when
+      running in non-root mode, but taking an expensive vmexit in order to
+      do so.
+      
+      xenalyze reports the following when running a PV guest in shim mode:
+      
+       CR_ACCESS             3885950  6.41s 17.04%  3957 cyc { 2361| 3378| 7920}
+         cr4  3885940  6.41s 17.04%  3957 cyc { 2361| 3378| 7920}
+         cr3        1  0.00s  0.00%  3480 cyc { 3480| 3480| 3480}
+           *[  0]        1  0.00s  0.00%  3480 cyc { 3480| 3480| 3480}
+         cr0        7  0.00s  0.00%  7112 cyc { 3248| 5960|17480}
+         clts        2  0.00s  0.00%  4588 cyc { 3456| 5720| 5720}
+      
+      After this change this turns into:
+      
+       CR_ACCESS                  12  0.00s  0.00%  9972 cyc { 3680|11024|24032}
+         cr4        2  0.00s  0.00% 17528 cyc {11024|24032|24032}
+         cr3        1  0.00s  0.00%  3680 cyc { 3680| 3680| 3680}
+           *[  0]        1  0.00s  0.00%  3680 cyc { 3680| 3680| 3680}
+         cr0        7  0.00s  0.00%  9209 cyc { 4184| 7848|17488}
+         clts        2  0.00s  0.00%  8232 cyc { 5352|11112|11112}
+      
+      Note that this optimized trapping is currently only applied to guests
+      running with HAP on Intel hardware. If using shadow paging more CR4
+      bits need to be unconditionally trapped, which makes this approach
+      unlikely to yield any important performance improvements.
+      
+      Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+      Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+      Acked-by: Razvan Cojocaru <rcojocaru@bitdefender.com>
+      Reviewed-by: Kevin Tian <kevin.tian@intel.com>
+
+
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/xen-unstable/test-amd64-amd64-qemuu-nested-intel.debian-hvm-install--l1--l2.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
+
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/xen-unstable/test-amd64-amd64-qemuu-nested-intel.debian-hvm-install--l1--l2 --summary-out=tmp/120243.bisection-summary --basis-template=120037 --blessings=real,real-bisect xen-unstable test-amd64-amd64-qemuu-nested-intel debian-hvm-install/l1/l2
+Searching for failure / basis pass:
+ 120120 fail [host=fiano0] / 120037 [host=elbling0] 120001 [host=baroque0] 119970 [host=godello0] 119879 [host=elbling1] 119785 [host=godello1] 119713 [host=huxelrebe1] 119651 [host=huxelrebe0] 119592 [host=baroque1] 119521 [host=italia0] 119451 [host=chardonnay1] 119358 [host=chardonnay0] 119217 ok.
+Failure / basis pass flights: 120120 / 119217
+(tree with no url: minios)
+(tree with no url: ovmf)
+(tree with no url: seabios)
+Tree: linux git://xenbits.xen.org/linux-pvops.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 85688075ccc22c12bd0fca2a2c269199938e104c
+Basis pass 7f3bd8db99746a60bcae1ec4059a4756d19b63c2 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 27196d4cc917d91b5b5daee50173565139ca9c9d
+Generating revisions with ./adhoc-revtuple-generator  git://xenbits.xen.org/linux-pvops.git#7f3bd8db99746a60bcae1ec4059a4756d19b63c2-19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 git://xenbits.xen.org/osstest/linux-firmware.git#c530a75c1e6a472b0eb9558310b518f0dfcd8860-c530a75c1e6a472b0eb9558310b518f0dfcd8860 git://xenbits.xen.org/qemu-xen-traditional.git#c8ea0457495342c417c3dc033bba25148b279f60-c8ea0457495342c417c3dc033bba25148b279f60 git://xenbits.xen.org/qemu-xen.git#2b033e396f4fa0981bae1213cdacd15775655a97-2b033e396f4fa0981bae1213cdacd15775655a97 git://xenbits.xen.org/xen.git#27196d4cc917d91b5b5daee50173565139ca9c9d-85688075ccc22c12bd0fca2a2c269199938e104c
+Loaded 2001 nodes in revision graph
+Searching for test results:
+ 119217 pass 7f3bd8db99746a60bcae1ec4059a4756d19b63c2 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 27196d4cc917d91b5b5daee50173565139ca9c9d
+ 119358 [host=chardonnay0]
+ 119451 [host=chardonnay1]
+ 119521 [host=italia0]
+ 119592 [host=baroque1]
+ 119651 [host=huxelrebe0]
+ 119713 [host=huxelrebe1]
+ 119785 [host=godello1]
+ 119970 [host=godello0]
+ 119879 [host=elbling1]
+ 120001 [host=baroque0]
+ 120076 fail irrelevant
+ 120037 [host=elbling0]
+ 120161 pass 7f3bd8db99746a60bcae1ec4059a4756d19b63c2 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 27196d4cc917d91b5b5daee50173565139ca9c9d
+ 120180 pass b7dc0f532107ec150ccaf381d926c07f6c3fa30d c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 da3d180d101cf81d085f0c6560d70acd16c934bd
+ 120176 fail irrelevant
+ 120120 fail 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 85688075ccc22c12bd0fca2a2c269199938e104c
+ 120183 pass 90ca269463c55e99e3e91c667a821c6303f207ec c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 da3d180d101cf81d085f0c6560d70acd16c934bd
+ 120186 fail 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 85688075ccc22c12bd0fca2a2c269199938e104c
+ 120192 pass d947e0d510a328d30c399c99a41be558e35a4390 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 a823a5280f25ad19a751dd9a41044f556471e61a
+ 120198 pass e4f0069c647e94d8070fc6f6ae1d753d14684c14 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 a823a5280f25ad19a751dd9a41044f556471e61a
+ 120203 pass 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 16f878bf69ae0ef0dbb7e8c7cc59a86702c7885f
+ 120206 pass 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 9d2f8f9c65d4da35437f50ed9e812a2c5ab313e2
+ 120210 fail 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 dc96c65ed6d7ffd4c95487373df708d97443cf77
+ 120212 pass 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 d05f1eb3741b85ef37d92d2971528aab2fe64820
+ 120216 fail 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 40681735502648fdc45973382a440aa38f4ec800
+ 120237 pass 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 c6527bc66b6dd7a8dadaebb1047c8e52c6c5793c
+ 120218 pass 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 c6527bc66b6dd7a8dadaebb1047c8e52c6c5793c
+ 120243 fail 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 40681735502648fdc45973382a440aa38f4ec800
+ 120222 fail 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 40681735502648fdc45973382a440aa38f4ec800
+ 120225 pass 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 c6527bc66b6dd7a8dadaebb1047c8e52c6c5793c
+ 120231 fail 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 40681735502648fdc45973382a440aa38f4ec800
+Searching for interesting versions
+ Result found: flight 119217 (pass), for basis pass
+ Result found: flight 120120 (fail), for basis failure
+ Repro found: flight 120161 (pass), for basis pass
+ Repro found: flight 120186 (fail), for basis failure
+ 0 revisions at 19c04ca5b239e6e2277a5b381d1e79482ab9bbc5 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 2b033e396f4fa0981bae1213cdacd15775655a97 c6527bc66b6dd7a8dadaebb1047c8e52c6c5793c
+No revisions left to test, checking graph state.
+ Result found: flight 120218 (pass), for last pass
+ Result found: flight 120222 (fail), for first failure
+ Repro found: flight 120225 (pass), for last pass
+ Repro found: flight 120231 (fail), for first failure
+ Repro found: flight 120237 (pass), for last pass
+ Repro found: flight 120243 (fail), for first failure
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  40681735502648fdc45973382a440aa38f4ec800
+  Bug not present: c6527bc66b6dd7a8dadaebb1047c8e52c6c5793c
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/120243/
+
+
+  commit 40681735502648fdc45973382a440aa38f4ec800
+  Author: Roger Pau Monné <roger.pau@citrix.com>
+  Date:   Tue Feb 27 14:10:33 2018 +0100
+  
+      vmx/hap: optimize CR4 trapping
+      
+      There a bunch of bits in CR4 that should be allowed to be set directly
+      by the guest without requiring Xen intervention, currently this is
+      already done by passing through guest writes into the CR4 used when
+      running in non-root mode, but taking an expensive vmexit in order to
+      do so.
+      
+      xenalyze reports the following when running a PV guest in shim mode:
+      
+       CR_ACCESS             3885950  6.41s 17.04%  3957 cyc { 2361| 3378| 7920}
+         cr4  3885940  6.41s 17.04%  3957 cyc { 2361| 3378| 7920}
+         cr3        1  0.00s  0.00%  3480 cyc { 3480| 3480| 3480}
+           *[  0]        1  0.00s  0.00%  3480 cyc { 3480| 3480| 3480}
+         cr0        7  0.00s  0.00%  7112 cyc { 3248| 5960|17480}
+         clts        2  0.00s  0.00%  4588 cyc { 3456| 5720| 5720}
+      
+      After this change this turns into:
+      
+       CR_ACCESS                  12  0.00s  0.00%  9972 cyc { 3680|11024|24032}
+         cr4        2  0.00s  0.00% 17528 cyc {11024|24032|24032}
+         cr3        1  0.00s  0.00%  3680 cyc { 3680| 3680| 3680}
+           *[  0]        1  0.00s  0.00%  3680 cyc { 3680| 3680| 3680}
+         cr0        7  0.00s  0.00%  9209 cyc { 4184| 7848|17488}
+         clts        2  0.00s  0.00%  8232 cyc { 5352|11112|11112}
+      
+      Note that this optimized trapping is currently only applied to guests
+      running with HAP on Intel hardware. If using shadow paging more CR4
+      bits need to be unconditionally trapped, which makes this approach
+      unlikely to yield any important performance improvements.
+      
+      Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+      Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+      Acked-by: Razvan Cojocaru <rcojocaru@bitdefender.com>
+      Reviewed-by: Kevin Tian <kevin.tian@intel.com>
+
+pnmtopng: 93 colors found
+Revision graph left in /home/logs/results/bisect/xen-unstable/test-amd64-amd64-qemuu-nested-intel.debian-hvm-install--l1--l2.{dot,ps,png,html,svg}.
+----------------------------------------
+120243: tolerable ALL FAIL
+
+flight 120243 xen-unstable real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/120243/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ test-amd64-amd64-qemuu-nested-intel 17 debian-hvm-install/l1/l2 fail baseline untested
+
+
+jobs:
+ test-amd64-amd64-qemuu-nested-intel                          fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+
+--===============6977174853107856226==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6977174853107856226==--
