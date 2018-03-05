@@ -1,22 +1,21 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH 01/57] tools: ARM: vGICv3: Avoid inserting
- optional DT properties
-Date: Mon, 5 Mar 2018 17:18:02 +0000
-Message-ID: <20180305171802.nnbxiogt7pgbcisg@citrix.com>
+From: Andre Przywara <andre.przywara@linaro.org>
+Subject: Re: [PATCH 00/57] New VGIC(-v2) implementation
+Date: Mon, 5 Mar 2018 17:34:40 +0000
+Message-ID: <9f0b960b-b521-7732-bbd3-2f7cd0c0810a@linaro.org>
 References: <20180305160415.16760-1-andre.przywara@linaro.org>
- <20180305160415.16760-2-andre.przywara@linaro.org>
- <c1084fea-836d-c0d9-edbf-4be72dec3b54@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=yt/y=f3=citrix.com=prvs=595ca3bc4=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1estkZ-0004YM-Rn
- for xen-devel@lists.xenproject.org; Mon, 05 Mar 2018 17:18:11 +0000
-Content-Disposition: inline
-In-Reply-To: <c1084fea-836d-c0d9-edbf-4be72dec3b54@arm.com>
+ <srs0=oang=f3=linaro.org=andre.przywara@srs-us1.protection.inumbo.net>)
+ id 1esu0f-0006En-Jf
+ for xen-devel@lists.xenproject.org; Mon, 05 Mar 2018 17:34:49 +0000
+Received: by mail-wm0-x22d.google.com with SMTP id w128so17621164wmw.0
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Mar 2018 09:34:48 -0800 (PST)
+In-Reply-To: <20180305160415.16760-1-andre.przywara@linaro.org>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,27 +24,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Andre Przywara <andre.przywara@linaro.org>
+To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBNYXIgMDUsIDIwMTggYXQgMDQ6Mzk6MDlQTSArMDAwMCwgSnVsaWVuIEdyYWxsIHdy
-b3RlOgo+ICgrIHRvb2xzIG1haW50YWluZXJzKQo+IAo+IEhpIEFuZHJlLAo+IAo+IFBsZWFzZSBk
-b24ndCBmb3JnZXQgdG8gQ0MgdGhlIHJlbGV2YW50IG1haW50YWluZXJzLgo+IAo+IE9uIDA1LzAz
-LzE4IDE2OjAzLCBBbmRyZSBQcnp5d2FyYSB3cm90ZToKPiA+IFdoZW4gY3JlYXRpbmcgYSBHSUN2
-MyBkZXZpY2V0cmVlIG5vZGUsIHdlIGN1cnJlbnRseSBpbnNlcnQgdGhlCj4gPiByZWRpc3RyaWJ1
-dG9yLXN0cmlkZSBhbmQgI3JlZGlzdHJpYnV0b3ItcmVnaW9ucyBwcm9wZXJ0aWVzLCB3aXRoIGZp
-eGVkCj4gPiB2YWx1ZXMgd2hpY2ggYXJlIGFjdHVhbGx5IHRoZSBhcmNoaXRlY3RlZCBvbmVzLiBT
-aW5jZSB0aG9zZSBwcm9wZXJ0aWVzIGFyZQo+ID4gb3B0aW9uYWwsIGFuZCBpbiB0aGUgY2FzZSBv
-ZiB0aGUgc3RyaWRlIG9ubHkgbmVlZGVkIHRvIGNvdmVyIGZvciBicm9rZW4KPiA+IHBsYXRmb3Jt
-cywgd2UgZG9uJ3QgbmVlZCB0byBkZXNjcmliZSB0aGVtIGlmIHRoZXkgZG9uJ3QgZGlmZmVyIGZy
-b20gdGhlCj4gPiBkZWZhdWx0IHZhbHVlcy4gVGhpcyB3aWxsIGFsd2F5cyBiZSB0aGUgY2FzZSBm
-b3Igb3VyIGNvbnN0cnVjdGVkCj4gPiBEb21VIG1lbW9yeSBtYXAuCj4gPiBTbyB3ZSBkcm9wIHRo
-b3NlIHByb3BlcnRpZXMgYWx0b2dldGhlciBhbmQgcHJvdmlkZSBhIGNsZWFuIGFuZCBhcmNoaXRl
-Y3RlZAo+ID4gR0lDdjMgRFQgbm9kZSBmb3IgRG9tVXMuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6
-IEFuZHJlIFByenl3YXJhIDxhbmRyZS5wcnp5d2FyYUBsaW5hcm8ub3JnPgo+IAo+IFJldmlld2Vk
-LWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgo+IAoKQWNrZWQtYnk6IFdl
-aSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpKdWxpZW4gcGxlYXNlIGNvbW1pdCB0aGlzIHlv
-dXJzZWxmLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGksCgpPbiAwNS8wMy8xOCAxNjowMywgQW5kcmUgUHJ6eXdhcmEgd3JvdGU6Cj4gdGw7ZHI6IENv
+YXJzZSBjaGFuZ2Vsb2cgYmVsb3csIGluZGl2aWR1YWwgcGF0Y2hlcyBoYXZlIGNoYW5nZWxvZ3Mg
+YXMKPiB3ZWxsLgo+IAo+IFRoaXMgaXMgYW4gdXBkYXRlZCB2ZXJzaW9uIG9mIHRoZSBuZXcgVkdJ
+Qy12MiBpbXBsZW1lbnRhdGlvbi4KCkZvciB0aGUgYnJhdmUgYW1vbmdzdCB5b3Ugd2hvIGFjdHVh
+bGx5IHdhbnQgdG8gdHJ5IGl0LCB0aGVyZSBpcyBhIGdpdApyZXBvIHdpdGggdGhlc2UgcGF0Y2hl
+cyBvbiB0b3Agb2YgY3VycmVudCBvcmlnaW4vc3RhZ2luZzoKaHR0cDovL3d3dy5saW51eC1hcm0u
+b3JnL2dpdD9wPXhlbi1hcC5naXQ7YT1zaG9ydGxvZztoPXJlZnMvaGVhZHMvdmdpYy1uZXcvdjEK
+Z2l0Oi8vbGludXgtYXJtLm9yZy94ZW4tYXAuZ2l0IGJyYW5jaCB2Z2ljLW5ldy92MQoKQ2hlZXJz
+LApBbmRyZS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
