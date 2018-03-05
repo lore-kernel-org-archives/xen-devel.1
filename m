@@ -1,20 +1,16 @@
-From: Andre Przywara <andre.przywara@linaro.org>
-Subject: [FIXUP] replace LOG_2 with ilog2
-Date: Mon,  5 Mar 2018 16:56:34 +0000
-Message-ID: <20180305165634.4178-1-andre.przywara@linaro.org>
-References: <20180305160415.16760-35-andre.przywara@linaro.org>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v2] new config option vtsc_khz_tolerance to
+ avoid TSC emulation
+Date: Mon, 5 Mar 2018 18:05:58 +0100
+Message-ID: <20180305180558.23203362.olaf@aepfle.de>
+References: <20180305113555.8467-1-olaf@aepfle.de>
+ <5A9D51A902000078001AE868@prv-mh.provo.novell.com>
+ <20180305151835.6d36d52e.olaf@aepfle.de>
+ <5A9D661402000078001AE986@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2247459188074238424=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=oang=f3=linaro.org=andre.przywara@srs-us1.protection.inumbo.net>)
- id 1estPo-0002Th-Nh
- for xen-devel@lists.xenproject.org; Mon, 05 Mar 2018 16:56:44 +0000
-Received: by mail-wm0-x241.google.com with SMTP id t74so17371330wme.3
- for <xen-devel@lists.xenproject.org>; Mon, 05 Mar 2018 08:56:42 -0800 (PST)
-In-Reply-To: <20180305160415.16760-35-andre.przywara@linaro.org>
+In-Reply-To: <5A9D661402000078001AE986@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,31 +19,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Tim Deegan <tim@xen.org>, StefanoStabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, IanJackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293?= =?UTF-8?B?c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Daniel De Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIG1hY3JvIGZvcm1lcmx5IG5hbWVkIExPR18yIGhhcyBiZWVuIHJlY2VudGx5IHJlbmFtZWQg
-dG8gaWxvZzIsCnNvIGFkanVzdCB0aGUgbmFtZSBpbiB2Z2ljLW1taW8uaC4KClNpZ25lZC1vZmYt
-Ynk6IEFuZHJlIFByenl3YXJhIDxhbmRyZS5wcnp5d2FyYUBsaW5hcm8ub3JnPgotLS0KSGksCgpJ
-IHNvbWVob3cgcmViYXNlZCB3aXRob3V0IGFjdHVhbGx5IHRyeWluZyB0byByZS1jb21waWxlIChz
-aW5jZSB0aGUgcmViYXNlCml0c2VsZiB3ZW50IHRocm91Z2ggc21vb3RobHkpLiBTbyBJIG1pc3Nl
-ZCB0aGlzIHN1YnRsZSByZW5hbWluZyBpbiB0aGUgdHJlZS4KUGxlYXNlIGFwcGx5IHRoaXMgcGF0
-Y2ggKG9yIG1lcmdlIGl0IGludG8KIltQQVRDSCAzNC81N10gQVJNOiBuZXcgVkdJQzogQWRkIE1N
-SU8gaGFuZGxpbmcgZnJhbWV3b3JrIikgdG8gZ2V0IGFjdHVhbGx5CnNvbWV0aGluZyB0aGF0IGNv
-bXBpbGVzLgpBcG9sb2dpZXMgZm9yIHRoYXQgbWlzaGFwIQoKQ2hlZXJzLApBbmRyZQoKIHhlbi9h
-cmNoL2FybS92Z2ljL3ZnaWMtbW1pby5oIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0
-aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3ZnaWMvdmdp
-Yy1tbWlvLmggYi94ZW4vYXJjaC9hcm0vdmdpYy92Z2ljLW1taW8uaAppbmRleCBiYmYwZDE4MWFl
-Li41ZTZjZmY5ZWIyIDEwMDY0NAotLS0gYS94ZW4vYXJjaC9hcm0vdmdpYy92Z2ljLW1taW8uaAor
-KysgYi94ZW4vYXJjaC9hcm0vdmdpYy92Z2ljLW1taW8uaApAQCAtNDksNyArNDksNyBAQCBleHRl
-cm4gc3RydWN0IG1taW9faGFuZGxlcl9vcHMgdmdpY19pb19vcHM7CiAgKiBUaGlzIGFzc3VtZXMg
-dGhhdCA8Yml0cz4gaXMgYSBwb3dlciBvZiB0d28uCiAgKi8KICNkZWZpbmUgVkdJQ19BRERSX1RP
-X0lOVElEKGFkZHIsIGJpdHMpICAoKChhZGRyKSAmIFZHSUNfQUREUl9JUlFfTUFTSyhiaXRzKSkg
-KiBcCi0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDggPj4gTE9HXzIo
-Yml0cykpCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDggPj4gaWxv
-ZzIoYml0cykpCiAKIC8qCiAgKiBTb21lIFZHSUMgcmVnaXN0ZXJzIHN0b3JlIHBlci1JUlEgaW5m
-b3JtYXRpb24sIHdpdGggYSBkaWZmZXJlbnQgbnVtYmVyCi0tIAoyLjE0LjEKCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============2247459188074238424==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/8c6drcmXyNw9PRyFwyfqE/z"; protocol="application/pgp-signature"
+
+--Sig_/8c6drcmXyNw9PRyFwyfqE/z
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 05 Mar 2018 07:45:24 -0700
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> I'm only talking about additions you make, and I don't see a size
+> difference between "vtsc_khz_tolerance" and "vtsc_tolerance_khz".
+
+Oh, I misunderstood that sentence. I will change the name as suggested.
+
+Olaf
+
+--Sig_/8c6drcmXyNw9PRyFwyfqE/z
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWp149gAKCRBdQqD6ppg2
+frSUAJ4jGfoOAFQ0PjVcrX3MD+s8SrHJawCg+teQGsDyzDyS/24Qz4oWLIAPTdo=
+=p0AU
+-----END PGP SIGNATURE-----
+
+--Sig_/8c6drcmXyNw9PRyFwyfqE/z--
+
+
+--===============2247459188074238424==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2247459188074238424==--
