@@ -1,14 +1,24 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v2] new config option vtsc_khz_tolerance to
- avoid TSC emulation
-Date: Mon, 5 Mar 2018 15:18:35 +0100
-Message-ID: <20180305151835.6d36d52e.olaf@aepfle.de>
-References: <20180305113555.8467-1-olaf@aepfle.de>
- <5A9D51A902000078001AE868@prv-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v4 08/16] xen/mm: Drop the parameter mfn
+ from populate_pt_range
+Date: Mon, 05 Mar 2018 07:38:36 -0700
+Message-ID: <5A9D647C02000078001AE959@prv-mh.provo.novell.com>
+References: <20180221140259.29360-1-julien.grall@arm.com>
+ <20180221140259.29360-9-julien.grall@arm.com>
+ <20180222163505.enzgrp4alo7pibeh@citrix.com>
+ <445bc932-044d-eacf-a487-0410e8fdb22d@arm.com>
+ <20180222165124.zaufci7dew2dp23n@citrix.com>
+ <f3384413-021b-e12e-b602-c3e5fd619282@arm.com>
+ <5A9973D402000078001ADDA8@prv-mh.provo.novell.com>
+ <ca1b2cfa-67b5-f6d7-038b-d95305189176@arm.com>
+ <5A9D5B8F02000078001AE8DF@prv-mh.provo.novell.com>
+ <403b56c9-f337-9330-3f6a-5e5f4a69a238@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0191532364985545712=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A9D51A902000078001AE868@prv-mh.provo.novell.com>
+In-Reply-To: <403b56c9-f337-9330-3f6a-5e5f4a69a238@arm.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,82 +27,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293c2tp?= =?UTF-8?B?LUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Daniel De Graaf <dgdegra@tycho.nsa.gov>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0191532364985545712==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/i3Kus254lhe=0HvR8SRBYrt"; protocol="application/pgp-signature"
-
---Sig_/i3Kus254lhe=0HvR8SRBYrt
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Mon, 05 Mar 2018 06:18:17 -0700
-schrieb "Jan Beulich" <JBeulich@suse.com>:
-
-> >>> On 05.03.18 at 12:35, <olaf@aepfle.de> wrote: =20
->=20
-> One thing I'm missing in the description (or the added documentation)
-> is a discussion of the conditions under which it is safe to make use of
-> the new setting.
-
-The same rules as tsc_mode=3Dnative apply, I think.
-xen-tscmode(7) has to be updated as well to cover the new knob.
-
-
-> > +    case XEN_DOMCTL_set_vtsc_khz_tolerance:
-> > +        if ( d =3D=3D currd )
-> > +            ret =3D -EINVAL; =20
-> Why? There's e.g. no domain_pause() involved here.
-
-I have thought about that. Now I think that part can be even simpler,
-just like the following XEN_DOMCTL_suppress_spurious_page_faults:
-just change that read-only value unconditionally. There is no obvious
-harm in changing that value.
-
-> Also throughout the patch I wonder if it wasn't more natural to
-> put the unit last in the parameter / field names.
-
-That was just to keep the diff slightly smaller.
-
-
-> > +            printk(XENLOG_WARNING "%s: d%u: host has %lu kHz,"
-> > +                   " domU expects %u kHz,"
-> > +                   " difference of %u is %s tolerance of %u\n",
-> > +                   __func__, d->domain_id, cpu_khz, gtsc_khz, khz_diff,
-> > +                   diff_tolerated ? "within" : "outside", vtsc_khz_tol=
-erance); =20
-> Leftover debugging message?
-
-I think it is worth to log that event, perhaps not with WARNING level.
-
-
-Olaf
-
---Sig_/i3Kus254lhe=0HvR8SRBYrt
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWp1RuwAKCRBdQqD6ppg2
-fprlAJ9rgwvfYhphmPIM332meSeS3bRcNwCeM+Wk/3p0RFIVSULxyn7SsKeBzuY=
-=HlHl
------END PGP SIGNATURE-----
-
---Sig_/i3Kus254lhe=0HvR8SRBYrt--
-
-
---===============0191532364985545712==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0191532364985545712==--
+Pj4+IE9uIDA1LjAzLjE4IGF0IDE1OjExLCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+
+IE9uIDA1LzAzLzE4IDE0OjAwLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4gT24gMDUuMDMuMTgg
+YXQgMTQ6NDMsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+PiBBbnl3YXksIEkgZG9u
+J3QgaGF2ZSBtdWNoIGtub3dsZWRnZSBvbiB0aGUgeDg2IHRvIG1ha2UgdGhlIG1vZGlmaWNhdGlv
+bgo+Pj4gdGhhdCB5b3Ugc3VnZ2VzdGVkLiBTbyBJIGFtIGdvaW5nIHRvIHJldmVydCB0byBfbWZu
+KDApIGZvciB4ODYuCj4+IAo+PiBJJ2QgcHJlZmVyIGlmIHlvdSBkaWRuJ3QsIGJ1dCB3ZWxsLCBp
+dCdsbCBiZSBvbmUgb2YgdXMgdG8gY2xlYW4gaXQgdXAKPj4gdGhlbi4KPiBJIGNhbiBrZWVwIGFz
+IElOVkFMSURfTUZOLiBCdXQgdGhlbiBlaXRoZXIgeW91IG9yIEFuZHJldyAob3IgYW55b25lIHg4
+NiAKPiBmb2xrcykgd291bGQgaGF2ZSB0byBwcm92aWRlIHRoZSBwYXRjaCB0byBza2lwIGluY3Jl
+bWVudGluZyBpbnZhbGlkIE1GTiAKPiAoaWYgSSB1bmRlcnN0b29kIGNvcnJlY3RseSB5b3VyIHJl
+cXVlc3QpLgoKU2lnaCAtIHRoaXMgc2hvdWxkIGdvIHRvZ2V0aGVyIGltby4gV2hpbGUgd3Jvbmds
+eSBpbmNyZW1lbnRpbmcgZnJvbQp6ZXJvIHdhcyBiYWQsIHdyb25nbHkgd3JhcHBpbmcgZnJvbSBJ
+TlZBTElEX01GTiBtYWtlcyB0aGluZ3MKd29yc2UuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
