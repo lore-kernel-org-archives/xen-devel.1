@@ -1,17 +1,14 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v4 12/16] xen/mm: Switch common/memory.c to
- use typesafe MFN
-Date: Mon, 5 Mar 2018 14:18:25 +0000
-Message-ID: <8a879538-9206-cc79-2951-69f89f53dbc1@arm.com>
-References: <20180221140259.29360-1-julien.grall@arm.com>
- <20180221140259.29360-13-julien.grall@arm.com>
- <5A997D2202000078001ADE90@prv-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v2] new config option vtsc_khz_tolerance to
+ avoid TSC emulation
+Date: Mon, 5 Mar 2018 15:18:35 +0100
+Message-ID: <20180305151835.6d36d52e.olaf@aepfle.de>
+References: <20180305113555.8467-1-olaf@aepfle.de>
+ <5A9D51A902000078001AE868@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0191532364985545712=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5A997D2202000078001ADE90@prv-mh.provo.novell.com>
-Content-Language: en-US
+In-Reply-To: <5A9D51A902000078001AE868@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,39 +18,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293c2tp?= =?UTF-8?B?LUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Daniel De Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSmFuLAoKT24gMDIvMDMvMTggMTU6MzQsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDIx
-LjAyLjE4IGF0IDE1OjAyLCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+PiBAQCAtOTUs
-MTEgKzEwMSwxOCBAQCBzdGF0aWMgdW5zaWduZWQgaW50IG1heF9vcmRlcihjb25zdCBzdHJ1Y3Qg
-ZG9tYWluICpkKQo+PiAgICAgICByZXR1cm4gbWluKG9yZGVyLCBNQVhfT1JERVIgKyAwVSk7Cj4+
-ICAgfQo+PiAgIAo+PiArLyogSGVscGVyIHRvIGNvcHkgYSB0eXBlc2FmZSBNRk4gdG8gZ3Vlc3Qg
-Ki8KPj4gKyNkZWZpbmUgY29weV9tZm5fdG9fZ3Vlc3QoaG5kLCBvZmYsIG1mbikgICAgICAgICAg
-ICBcCj4+ICsgICAgKHsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgXAo+PiArICAgICAgICB4ZW5fcGZuX3QgbWZuXyA9IG1mbl94KG1mbik7ICAgICAgICAgICAg
-ICAgIFwKPj4gKyAgICAgICAgX19jb3B5X3RvX2d1ZXN0X29mZnNldChobmQsIG9mZiwgJm1mbl8s
-IDEpOyBcCj4+ICsgICAgfSkKPiAKPiBIbW0sIG5vdCByZWFsbHkgbmljZSwgYnV0IHdoYXQgZG8g
-eW91IGRvLgoKSSBhbSBvcGVuIHRvIGJldHRlciBzdWdnZXN0aW9uLiBJIHdhbnRlZCB0byBhdm9p
-ZCB0aGUgY29udmVyc2lvbiBhbGwgCm92ZXIgdGhlIGNvZGUuCgpBbHNvLCBkbyB5b3UgaGF2ZSBh
-biBvcGluaW9uIG9uIFdlaSdzIHN1Z2dlc3Rpb246CgoiV2hhdCBJIG1lYW50IHdhcyB0byBtYWtl
-IGNvcHlfe3RvLGZyb219X2d1ZXN0KiB0eXBlLXNhZmUuIEkganVzdCBmZWVsIGl0CmEgYml0IHN0
-cmFuZ2UgeW91IG9ubHkgY3JlYXRlZCBhIHdyYXBwZXIgZm9yIHRoaXMgZmlsZS4gSSB3b25kZXIg
-d2h5LgoKTm90ZSBJJ20ganVzdCBhc2tpbmcgcXVlc3Rpb24uIFRoYXQncyBub3QgbmVjZXNzYXJp
-bHkgYSBnb29kIGlkZWEgdG8KdHVybiB0aGVtIGFsbCBpbiB0aGUgZW5kLiIKCj4gCj4+ICAgc3Rh
-dGljIHZvaWQgaW5jcmVhc2VfcmVzZXJ2YXRpb24oc3RydWN0IG1lbW9wX2FyZ3MgKmEpCj4+ICAg
-ewo+PiAgICAgICBzdHJ1Y3QgcGFnZV9pbmZvICpwYWdlOwo+PiAgICAgICB1bnNpZ25lZCBsb25n
-IGk7Cj4+IC0gICAgeGVuX3Bmbl90IG1mbjsKPj4gKyAgICBtZm5fdCBtZm47Cj4gCj4gUGxlYXNl
-IG1vdmUgdGhpcyBkZWNsYXJhdGlvbiAuLi4KPiAKPj4gQEAgLTEzMyw3ICsxNDYsNyBAQCBzdGF0
-aWMgdm9pZCBpbmNyZWFzZV9yZXNlcnZhdGlvbihzdHJ1Y3QgbWVtb3BfYXJncyAqYSkKPj4gICAg
-ICAgICAgICAgICAgIWd1ZXN0X2hhbmRsZV9pc19udWxsKGEtPmV4dGVudF9saXN0KSApCj4+ICAg
-ICAgICAgICB7Cj4+ICAgICAgICAgICAgICAgbWZuID0gcGFnZV90b19tZm4ocGFnZSk7Cj4gCj4g
-Li4uIGhlcmUsIG1ha2luZyB0aGUgYXNzaWdubWVudCBpdHMgaW5pdGlhbGl6ZXIuIE9yIGV2ZW4g
-YXZvaWQgdGhlCj4gbG9jYWwgdmFyaWFibGUgYWx0b2dldGhlciwgYXMgdGhlIG1hY3JvIGhhcyBh
-bHJlYWR5IGdvdCBvbmUuIFNhbWUKPiBlbHNld2hlcmUgKHdoaWNoZXZlciBvZiB0aGUgdHdvIHZh
-cmlhbnRzIGZpdHMpLCBhbGJlaXQgbWF5YmUgaW4gdGhlCj4gb3RoZXIgY2FzZXMgdGhlIHNjb3Bl
-IGNhbid0IGJlIHNocnVuayBtdWNoLgoKSSB3aWxsIGhhdmUgYSBsb29rLgoKQ2hlZXJzLAoKLS0g
-Ckp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+--===============0191532364985545712==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/i3Kus254lhe=0HvR8SRBYrt"; protocol="application/pgp-signature"
+
+--Sig_/i3Kus254lhe=0HvR8SRBYrt
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 05 Mar 2018 06:18:17 -0700
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> >>> On 05.03.18 at 12:35, <olaf@aepfle.de> wrote: =20
+>=20
+> One thing I'm missing in the description (or the added documentation)
+> is a discussion of the conditions under which it is safe to make use of
+> the new setting.
+
+The same rules as tsc_mode=3Dnative apply, I think.
+xen-tscmode(7) has to be updated as well to cover the new knob.
+
+
+> > +    case XEN_DOMCTL_set_vtsc_khz_tolerance:
+> > +        if ( d =3D=3D currd )
+> > +            ret =3D -EINVAL; =20
+> Why? There's e.g. no domain_pause() involved here.
+
+I have thought about that. Now I think that part can be even simpler,
+just like the following XEN_DOMCTL_suppress_spurious_page_faults:
+just change that read-only value unconditionally. There is no obvious
+harm in changing that value.
+
+> Also throughout the patch I wonder if it wasn't more natural to
+> put the unit last in the parameter / field names.
+
+That was just to keep the diff slightly smaller.
+
+
+> > +            printk(XENLOG_WARNING "%s: d%u: host has %lu kHz,"
+> > +                   " domU expects %u kHz,"
+> > +                   " difference of %u is %s tolerance of %u\n",
+> > +                   __func__, d->domain_id, cpu_khz, gtsc_khz, khz_diff,
+> > +                   diff_tolerated ? "within" : "outside", vtsc_khz_tol=
+erance); =20
+> Leftover debugging message?
+
+I think it is worth to log that event, perhaps not with WARNING level.
+
+
+Olaf
+
+--Sig_/i3Kus254lhe=0HvR8SRBYrt
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWp1RuwAKCRBdQqD6ppg2
+fprlAJ9rgwvfYhphmPIM332meSeS3bRcNwCeM+Wk/3p0RFIVSULxyn7SsKeBzuY=
+=HlHl
+-----END PGP SIGNATURE-----
+
+--Sig_/i3Kus254lhe=0HvR8SRBYrt--
+
+
+--===============0191532364985545712==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0191532364985545712==--
