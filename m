@@ -1,19 +1,21 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: [PATCH 1/2] x86: report if PCID and INVPCID are
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 1/2] x86: report if PCID and INVPCID are
 	supported
-Date: Mon, 5 Mar 2018 09:50:31 +0000
-Message-ID: <20180305095032.30062-2-wei.liu2@citrix.com>
+Date: Mon, 5 Mar 2018 10:51:41 +0100
+Message-ID: <226190d7-a6e2-4649-20d1-3e8272f68c65@suse.com>
 References: <20180305095032.30062-1-wei.liu2@citrix.com>
+ <20180305095032.30062-2-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=yt/y=f3=citrix.com=prvs=595ca3bc4=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1esmlR-0006HO-JQ
- for xen-devel@lists.xenproject.org; Mon, 05 Mar 2018 09:50:37 +0000
-In-Reply-To: <20180305095032.30062-1-wei.liu2@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=u36v=f3=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1esmmb-0006Rd-G3
+ for xen-devel@lists.xenproject.org; Mon, 05 Mar 2018 09:51:49 +0000
+In-Reply-To: <20180305095032.30062-2-wei.liu2@citrix.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,25 +24,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-U2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KLS0tCiB4ZW4vYXJj
-aC94ODYvc2V0dXAuYyB8IDcgKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygr
-KQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9zZXR1cC5jIGIveGVuL2FyY2gveDg2L3NldHVw
-LmMKaW5kZXggYWM1MzBlY2UyYy4uODllNDI4NjVhNCAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2
-L3NldHVwLmMKKysrIGIveGVuL2FyY2gveDg2L3NldHVwLmMKQEAgLTE3MDEsNiArMTcwMSwxMyBA
-QCB2b2lkIF9faW5pdCBub3JldHVybiBfX3N0YXJ0X3hlbih1bnNpZ25lZCBsb25nIG1iaV9wKQog
-ICAgICAgICAgICBjcHVfaGFzX254ID8gWEVOTE9HX0lORk8gOiBYRU5MT0dfV0FSTklORyAiV2Fy
-bmluZzogIiwKICAgICAgICAgICAgY3B1X2hhc19ueCA/ICIiIDogIm5vdCAiKTsKIAorCisgICAg
-cHJpbnRrKFhFTkxPR19JTkZPCisgICAgICAgICAgICJQQ0lEIChQcm9jZXNzLUNvbnRleHQgSURl
-bnRpZmllcikgJXNzdXBwb3J0ZWRcbiIsCisgICAgICAgICAgIGNwdV9oYXNfcGNpZCA/ICIiIDog
-Im5vdCAiKTsKKworICAgIHByaW50ayhYRU5MT0dfSU5GTyAiSU5WUENJRCAlc3N1cHBvcnRlZFxu
-IiwgY3B1X2hhc19pbnZwY2lkID8gIiIgOiAibm90ICIpOworCiAgICAgLyoKICAgICAgKiBXZSdy
-ZSBnb2luZyB0byBzZXR1cCBkb21haW4wIHVzaW5nIHRoZSBtb2R1bGUocykgdGhhdCB3ZSBzdGFz
-aGVkIHNhZmVseQogICAgICAqIGFib3ZlIG91ciBoZWFwLiBUaGUgc2Vjb25kIG1vZHVsZSwgaWYg
-cHJlc2VudCwgaXMgYW4gaW5pdHJkIHJhbWRpc2suCi0tIAoyLjExLjAKCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMDUvMDMvMTggMTA6NTAsIFdlaSBMaXUgd3JvdGU6Cj4gU2lnbmVkLW9mZi1ieTogV2VpIExp
+dSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KClJldmlld2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jv
+c3NAc3VzZS5jb20+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
