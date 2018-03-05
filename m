@@ -1,20 +1,19 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 1/2] x86: report if PCID and INVPCID are
-	supported
-Date: Mon, 5 Mar 2018 10:51:41 +0100
-Message-ID: <226190d7-a6e2-4649-20d1-3e8272f68c65@suse.com>
+Subject: Re: [PATCH 2/2] x86: use invpcid to do global flushing
+Date: Mon, 5 Mar 2018 10:52:30 +0100
+Message-ID: <b3e17b01-e3a2-68a1-6bf8-ecedc37f7959@suse.com>
 References: <20180305095032.30062-1-wei.liu2@citrix.com>
- <20180305095032.30062-2-wei.liu2@citrix.com>
+ <20180305095032.30062-3-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
  (envelope-from <srs0=u36v=f3=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1esmmb-0006Rd-G3
- for xen-devel@lists.xenproject.org; Mon, 05 Mar 2018 09:51:49 +0000
-In-Reply-To: <20180305095032.30062-2-wei.liu2@citrix.com>
+ id 1esmnJ-0006ay-NQ
+ for xen-devel@lists.xenproject.org; Mon, 05 Mar 2018 09:52:33 +0000
+In-Reply-To: <20180305095032.30062-3-wei.liu2@citrix.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
