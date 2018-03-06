@@ -1,14 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v3] new config option vtsc_tolerance_khz to
- avoid TSC emulation
-Date: Tue, 6 Mar 2018 12:32:42 +0100
-Message-ID: <20180306123242.44f69b41.olaf@aepfle.de>
-References: <20180306104133.22106-1-olaf@aepfle.de>
- <af47cc31-d3cb-023a-1229-ab9eb013f985@citrix.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH] xen/arm: p2m: Prevent deadlock when using
+ memaccess
+Date: Tue, 6 Mar 2018 11:37:06 +0000
+Message-ID: <ef3f86dc-df8c-bd01-9007-ef6c886af43d@arm.com>
+References: <20180228152547.12700-1-julien.grall@arm.com>
+ <c79f7ef4-91e0-e92c-bbfb-521148acfb6a@sec.in.tum.de>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3168183267951956349=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <af47cc31-d3cb-023a-1229-ab9eb013f985@citrix.com>
+In-Reply-To: <c79f7ef4-91e0-e92c-bbfb-521148acfb6a@sec.in.tum.de>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,61 +19,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFy?= =?UTF-8?B?Y3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
+To: Sergej Proskurin <proskurin@sec.in.tum.de>, xen-devel@lists.xen.org
+Cc: sstabellini@kernel.org, tamas@tklengyel.com, andre.przywara@linaro.org, rcojocaru@bitdefender.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============3168183267951956349==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/2c/ecJP+3/e43JOldwbXljA"; protocol="application/pgp-signature"
-
---Sig_/2c/ecJP+3/e43JOldwbXljA
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Am Tue, 6 Mar 2018 11:07:54 +0000
-schrieb Andrew Cooper <andrew.cooper3@citrix.com>:
-
-> > One option to avoid the TSC option is to run domUs with tsc_mode=3Dnati=
-ve.
-> > This has the drawback that migrating a domU from a "2.3GHz" class host
-> > to a "2.4GHz" class host may change the rate at wich the TSC counter
-> > increases, the domU may not be prepared for that. =20
->=20
-> Given that you identify this specifically, why do you think this change
-> is safe or sensible in the first place?=C2=A0 If using the options here, =
-time
-> will definitely drift in the VM after migrate.
-
-This option is a variant of tsc_mode=3Ddefault for different hosts,
-and tsc_mode=3Dnative for identical hosts. I think the tsc_mode can not
-be adjusted for running domUs. So it gives some control to the host admin
-about how to handle the drift.
-
-Olaf
-
---Sig_/2c/ecJP+3/e43JOldwbXljA
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWp58WgAKCRBdQqD6ppg2
-fnm1AJ9UEdFHXDr+eXjuljOxlU9tVLQiEQCg3pE+RTiIqNhoL2ZB1UcCouJyPps=
-=mUAs
------END PGP SIGNATURE-----
-
---Sig_/2c/ecJP+3/e43JOldwbXljA--
-
-
---===============3168183267951956349==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3168183267951956349==--
+T24gMDYvMDMvMTggMTE6MDYsIFNlcmdlaiBQcm9za3VyaW4gd3JvdGU6Cj4gSGkgSnVsaWVuLAoK
+SGkgU2VyZ2VqLAoKPiAKPiBPbiAwMi8yOC8yMDE4IDA0OjI1IFBNLCBKdWxpZW4gR3JhbGwgd3Jv
+dGU6Cj4+IENvbW1pdCA3ZDYyM2IzNThhNCAiYXJtL21lbV9hY2Nlc3M6IEFkZCBsb25nLWRlc2Ny
+aXB0b3IgYmFzZWQgZ3B0Igo+PiBhc3N1bWVkIHRoZSByZWFkLXdyaXRlIGxvY2sgY2FuIGJlIHRh
+a2VuIHJlY3Vyc2l2ZWx5LiBIb3dldmVyLCB0aGlzCj4+IGFzc3VtcHRpb24gaXMgd3JvbmcgYW5k
+IHdpbGwgbGVhZCB0byBkZWFkbG9jayB3aGVuIHRoZSBsb2NrIGlzCj4+IGNvbnRlbmRlZC4KPj4K
+Pj4gVG8gYXZvaWQgdGhlIG5lc3RlZCBsb2NrLCByZXdvcmsgdGhlIGxvY2tpbmcgaW4gZ2V0X3Bh
+Z2VfZnJvbV9ndmEgYW5kCj4+IHAybV9tZW1fYWNjZXNzX2NoZWNrX2FuZF9nZXRfcGFnZS4gVGhl
+IGxhdHRlciB3aWxsIG5vdyBiZSBjYWxsZWQgd2l0aG91dAo+PiB0aGUgcDJtIGxvY2suIFRoZSBu
+ZXcgbG9ja2luZyBpbiBwMm1fbWVtX2FjY2Nlc19jaGVja19hbmRfZ2V0X3BhZ2Ugd2lsbAo+PiBu
+b3QgY292ZXIgdGhlIHRyYW5zbGF0aW9uIG9mIHRoZSBWQSB0byBhbiBJUEEuCj4+Cj4+IFRoaXMg
+aXMgZmluZSBiZWNhdXNlIHdlIGNhbid0IHByb21pc2UgdGhhdCB0aGUgc3RhZ2UtMSBwYWdlLXRh
+YmxlIGhhdmUKPj4gY2hhbmdlZCBiZWhpbmQgb3VyIGJhY2sgKHRoZXkgYXJlIHVuZGVyIGd1ZXN0
+IGNvbnRyb2wpLiBNb2RpZmljYXRpb24gaW4KPj4gdGhlIHN0YWdlLTIgcGFnZS10YWJsZSBjYW4g
+bm93IGhhcHBlbiwgYnV0IEkgY2FuJ3QgaXNzdWUgYW55IHBvdGVudGlhbAo+PiBpc3N1ZSBoZXJl
+IGV4Y2VwdCB3aXRoIHRoZSBicmVhay1iZWZvcmUtbWFrZSBzZXF1ZW5jZSB1c2VkIHdoZW4gdXBk
+YXRpbmcKPj4gcGFnZS10YWJsZS4gZ3ZhX3RvX2lwYSBtYXkgZmFpbCBpZiB0aGUgc2VxdWVuY2Ug
+aXMgZXhlY3V0ZWQgYXQgdGhlIHNhbWUKPj4gb24gYW5vdGhlciBDUFUuIEluIHRoYXQgY2FzZSB3
+ZSB3b3VsZCBmYWxsYmFjayBpbiB0aGUgc29mdHdhcmUgbG9va3VwCj4+IHBhdGguCj4+Cj4+IFNp
+Z25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4gCj4gVGhl
+IHBhdGNoIGxvb2tzIGdvb2QgdG8gbWUuIEhvd2V2ZXIsIEkgZGlkIG5vdCB1bmRlcnN0YW5kIHRo
+ZSBmb2xsb3dpbmcKPiBzZW50ZW5jZSBpbiB0aGUgY29tbWl0IG1lc3NhZ2U6ICIuLi4gYnV0IEkg
+Y2FuJ3QgaXNzdWUgYW55IHBvdGVudGlhbAo+IGlzc3VlIGhlcmUgZXhjZXB0IHdpdGggdGhlIGJy
+ZWFrLWJlZm9yZS1tYWtlIHNlcXVlbmNlIHVzZWQgd2hlbiB1cGRhdGluZwo+IHBhZ2UtdGFibGUi
+LiBXaGF0IGlzc3VlIGRpZCB5b3UgbWVhbj8gVGhhbmsgeW91LgoKVG8gYXZvaWQgYnJlYWtpbmcg
+dGhlIGNvaGVyZW5jeSB3aGVuIHVwZGF0aW5nIHRoZSBwYWdlLXRhYmxlIHRoZSBBcm0gQXJtIApy
+ZWNvbW1lbmRzIHRvIGZvbGxvdyBhIGJyZWFrLWJlZm9yZS1tYWtlIHNlcXVlbmNlIChzZWUgRzQt
+NDkxNiBpbiBBUk0gCkRESSAwNDg3Qy5hKS4gSXQgYSA0IHN0ZXBzIGFwcHJvYWNoOgoKMS4gUmVw
+bGFjZSB0aGUgb2xkIGVudHJ5IHdpdGggYW4gaW52YWxpZCBlbnRyeQoyLiBJbnZhbGlkYXRlIHRo
+ZSBjYWNoZWQgb2xkIGVudHJpZXMgd2l0aCBhIGJyb2FkY2FzdGluZyBUTEIgCmludmFsaWRhdGlv
+biBpbnN0cnVjdGlvbgozLiBXYWl0IGZvciB0aGUgY29tcGxldGlvbiBvZiB0aGUgVExCIGluc3Ry
+dWN0aW9uIHdpdGggYSBkc2IgZm9sbG93ZWQgYnkgCmFuIGlzYgo0LiBXcml0ZSB0aGUgbmV3IGVu
+dHJ5CgpUaGUgUDJNIGNvZGUgaXMgdXNpbmcgdGhpcyBzZXF1ZW5jZSwgc28gYW4gYWRkcmVzcyB0
+cmFuc2xhdGlvbiB3YWxrIAp1c2luZyBoYXJkd2FyZSBpbnN0cnVjdGlvbiBtYXkgZmFpbCBpZiBh
+bm90aGVyIENQVSBoYXBwZW4gdG8gdXBkYXRlIChlLmcgCmJyZWFraW5nIGEgc3VwZXJwYWdlKSB0
+aGUgUDJNIGVudHJ5IGF0IHRoZSBzYW1lIHRpbWUvIFRoaXMgaXMgYmVjYXVzZSAKdGhlcmUgYXJl
+IGEgc21hbGwgd2luZG93IHdoZXJlIHRoZSBlbnRyeSBkb2VzIG5vdCBleGlzdC4KCklmIHlvdSBh
+cmUgaW50ZXJlc3RlZCBpbiBtb3JlIGRldGFpbHMsIHlvdSBjYW4gbG9vayBhdCB0aGUgdGFsayBJ
+IGdhdmUgYSAKY291cGxlIG9mIHllYXJzIGFnbyAoc2VlIFsxXSkuCgo+IAo+IFJldmlld2VkLWJ5
+OiBTZXJnZWogUHJvc2t1cmluIDxwcm9za3VyaW5Ac2VjLmluLnR1bS5kZT4KClRoYW5rIHlvdS4K
+CkNoZWVycywKClsxXSBodHRwczovL3NjaGQud3MvaG9zdGVkX2ZpbGVzL3hlbnN1bW1pdDIwMTYv
+NDkvc2xpZGVzLnBkZgoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
