@@ -1,16 +1,14 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH] xen/arm: p2m: Prevent deadlock when using
-	memaccess
-Date: Tue, 6 Mar 2018 11:17:27 +0000
-Message-ID: <5e22bffe-df0e-7bd7-d73b-c5ee4c644ce6@arm.com>
-References: <20180228152547.12700-1-julien.grall@arm.com>
- <alpine.DEB.2.10.1803021540150.4239@sstabellini-ThinkPad-X260>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v3] new config option vtsc_tolerance_khz to
+ avoid TSC emulation
+Date: Tue, 6 Mar 2018 12:20:58 +0100
+Message-ID: <20180306122058.019da551.olaf@aepfle.de>
+References: <20180306104133.22106-1-olaf@aepfle.de>
+ <af47cc31-d3cb-023a-1229-ab9eb013f985@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8513091183457866186=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1803021540150.4239@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+In-Reply-To: <af47cc31-d3cb-023a-1229-ab9eb013f985@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,39 +17,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: proskurin@sec.in.tum.de, tamas@tklengyel.com, rcojocaru@bitdefender.com, andre.przywara@linaro.org, xen-devel@lists.xen.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFy?= =?UTF-8?B?Y3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgU3RlZmFubywKCk9uIDAyLzAzLzE4IDIzOjQyLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6
-Cj4gT24gV2VkLCAyOCBGZWIgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+PiBDb21taXQgN2Q2
-MjNiMzU4YTQgImFybS9tZW1fYWNjZXNzOiBBZGQgbG9uZy1kZXNjcmlwdG9yIGJhc2VkIGdwdCIK
-Pj4gYXNzdW1lZCB0aGUgcmVhZC13cml0ZSBsb2NrIGNhbiBiZSB0YWtlbiByZWN1cnNpdmVseS4g
-SG93ZXZlciwgdGhpcwo+PiBhc3N1bXB0aW9uIGlzIHdyb25nIGFuZCB3aWxsIGxlYWQgdG8gZGVh
-ZGxvY2sgd2hlbiB0aGUgbG9jayBpcwo+PiBjb250ZW5kZWQuCj4+Cj4+IFRvIGF2b2lkIHRoZSBu
-ZXN0ZWQgbG9jaywgcmV3b3JrIHRoZSBsb2NraW5nIGluIGdldF9wYWdlX2Zyb21fZ3ZhIGFuZAo+
-PiBwMm1fbWVtX2FjY2Vzc19jaGVja19hbmRfZ2V0X3BhZ2UuIFRoZSBsYXR0ZXIgd2lsbCBub3cg
-YmUgY2FsbGVkIHdpdGhvdXQKPj4gdGhlIHAybSBsb2NrLiBUaGUgbmV3IGxvY2tpbmcgaW4gcDJt
-X21lbV9hY2NjZXNfY2hlY2tfYW5kX2dldF9wYWdlIHdpbGwKPj4gbm90IGNvdmVyIHRoZSB0cmFu
-c2xhdGlvbiBvZiB0aGUgVkEgdG8gYW4gSVBBLgo+Pgo+PiBUaGlzIGlzIGZpbmUgYmVjYXVzZSB3
-ZSBjYW4ndCBwcm9taXNlIHRoYXQgdGhlIHN0YWdlLTEgcGFnZS10YWJsZSBoYXZlCj4+IGNoYW5n
-ZWQgYmVoaW5kIG91ciBiYWNrICh0aGV5IGFyZSB1bmRlciBndWVzdCBjb250cm9sKS4gTW9kaWZp
-Y2F0aW9uIGluCj4+IHRoZSBzdGFnZS0yIHBhZ2UtdGFibGUgY2FuIG5vdyBoYXBwZW4sIGJ1dCBJ
-IGNhbid0IGlzc3VlIGFueSBwb3RlbnRpYWwKPj4gaXNzdWUgaGVyZSBleGNlcHQgd2l0aCB0aGUg
-YnJlYWstYmVmb3JlLW1ha2Ugc2VxdWVuY2UgdXNlZCB3aGVuIHVwZGF0aW5nCj4+IHBhZ2UtdGFi
-bGUuIGd2YV90b19pcGEgbWF5IGZhaWwgaWYgdGhlIHNlcXVlbmNlIGlzIGV4ZWN1dGVkIGF0IHRo
-ZSBzYW1lCj4+IG9uIGFub3RoZXIgQ1BVLiBJbiB0aGF0IGNhc2Ugd2Ugd291bGQgZmFsbGJhY2sg
-aW4gdGhlIHNvZnR3YXJlIGxvb2t1cAo+PiBwYXRoLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBKdWxp
-ZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgo+IAo+IAo+IEhpIEp1bGllbiwKPiAKPiBB
-dCBmaXJzdCBnbGFuY2UgdGhlIHBhdGNoIGxvb2tzIE9LLCBidXQgY291bGQgeW91IHBsZWFzZSBh
-ZGQgbW9yZQo+IGluZm9ybWF0aW9uIG9uIHRoZSByZWN1cnNpdmUgbG9jayBzZXF1ZW5jZSB0aGF0
-IHRoaXMgcGF0Y2ggaXMgdHJ5aW5nIHRvCj4gc29sdmU/IFNwZWNpZmljYWxseSwgaG93IFhlbiBj
-YW4gZ2V0IGludG8gYSBzaXR1YXRpb24gd2hlcmUgaXQgdHJpZXMgdG8KPiBhY3F1aXJlIHRoZSBw
-Mm0gbG9jayB0d2ljZSByZWN1cnNpdmVseT8gSSByZWFsaXplIHRoZSBjb21tZW50IGF0IHRoZQo+
-IGJvdHRvbSBzYXlzICJhY2Nlc3NfZ3Vlc3RfbWVtb3J5X2J5X2lwYSBpbiBndWVzdF93YWxrXyhz
-ZHxsZCkiIGJ1dCBJCj4gd291bGQgYXBwcmVjaWF0ZSBtb3JlIGRldGFpbHMuIFRoYW5rcyEKCkdv
-b2QgcG9pbnQuIEkgd2lsbCByZXNlbmQgaXQgd2l0aCBhbiB1cGRhdGVkIGNvbW1pdCBtZXNzYWdl
-LgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+--===============8513091183457866186==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/J.5O6KJ=Lw/NKb0VH2BU=Eo"; protocol="application/pgp-signature"
+
+--Sig_/J.5O6KJ=Lw/NKb0VH2BU=Eo
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Tue, 6 Mar 2018 11:07:54 +0000
+schrieb Andrew Cooper <andrew.cooper3@citrix.com>:
+
+> This looks like it should be part of the set_tsc_info hypercall, not a
+> separate hypercall.
+
+How would one adjust the value at runtime with set_tsc_info of a running do=
+mU?
+It seems to me set_tsc_info does way more than just applying some values, it
+uses runtime data such as get_s_time.
+
+Olaf
+
+--Sig_/J.5O6KJ=Lw/NKb0VH2BU=Eo
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWp55mgAKCRBdQqD6ppg2
+fji8AKC8JrZpqA6lFNCW7Zc6/x2Uqz/m6ACeLXxGVnjojrKyJ2ZCJPgmjm3KaX8=
+=rztZ
+-----END PGP SIGNATURE-----
+
+--Sig_/J.5O6KJ=Lw/NKb0VH2BU=Eo--
+
+
+--===============8513091183457866186==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8513091183457866186==--
