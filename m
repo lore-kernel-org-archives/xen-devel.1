@@ -1,16 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 120298: regressions - ALL
-	FAIL
-Date: Wed, 07 Mar 2018 10:47:17 +0000
-Message-ID: <osstest-120298-mainreport@xen.org>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] tools/xenstore: add libdl dependency to
+ libxenstore
+Date: Wed, 7 Mar 2018 12:01:25 +0100
+Message-ID: <9b0b9411-bcfb-6895-177c-18abe7bd7198@suse.com>
+References: <20180307101744.32608-1-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1604165262492152530=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=/bh1=f5=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1etWbb-0007b9-Oy
- for xen-devel@lists.xenproject.org; Wed, 07 Mar 2018 10:47:31 +0000
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=rcf1=f5=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1etWpB-0000Z0-W7
+ for xen-devel@lists.xenproject.org; Wed, 07 Mar 2018 11:01:34 +0000
+In-Reply-To: <20180307101744.32608-1-jgross@suse.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,96 +23,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xenproject.org
+Cc: ian.jackson@eu.citrix.com, wei.liu2@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============1604165262492152530==
-Content-Type: text/plain
-
-flight 120298 xen-unstable-coverity real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/120298/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- coverity-amd64                7 coverity-upload          fail REGR. vs. 119558
-
-version targeted for testing:
- xen                  457c86ff39f966aa040794d218e7e6d20436deef
-baseline version:
- xen                  24470b99c1671dca531c2cf5747eda2f8892ecbc
-
-Last test of basis   119558  2018-02-18 09:47:32 Z   17 days
-Failing since        119806  2018-02-21 09:29:16 Z   14 days    5 attempts
-Testing same since   120298  2018-03-07 09:20:00 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Alan Robinson <Alan.Robinson@ts.fujitsu.com>
-  Alexandru Isaila <aisaila@bitdefender.com>
-  Andre Przywara <andre.przywara@linaro.org>
-  Andrew Cooper <andrew.cooper3@citix.com>
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Brian Woods <brian.woods@amd.com>
-  Dario Faggioli <dfaggioli@suse.com>
-  Doug Goldstein <cardoe@cardoe.com>
-  George Dunlap <george.dunlap@citrix.com>
-  Haozhong Zhang <haozhong.zhang@intel.com>
-  Ian Jackson <ian.jackson@eu.citrix.com>
-  Igor Druzhinin <igor.druzhinin@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Jim Fehlig <jfehlig@suse.com>
-  Juergen Gross <jgross@suse.com>
-  Julien Grall <julien.grall@arm.com>
-  Kevin Tian <kevin.tian@intel.com>
-  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-  Olaf Hering <olaf@aepfle.de>
-  Paul Semel <semelpaul@gmail.com>
-  Razvan Cojocaru <rcojocaru@bitdefender.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Sergey Dyasli <sergey.dyasli@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Stefano Stabellini <stefano@aporeto.com>
-  Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
-  Tamas K Lengyel <tamas@tklengyel.com>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- coverity-amd64                                               fail    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 1944 lines long.)
-
-
---===============1604165262492152530==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1604165262492152530==--
+T24gMDcvMDMvMTggMTE6MTcsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gQ29tbWl0IDQ0OGMwM2Iz
+Y2JlMTQ4NzNlZTYzICgidG9vbHMveGVuc3RvcmU6IHRyeSB0byBnZXQgbWluaW11bSB0aHJlYWQK
+PiBzdGFjayBzaXplIGZvciB3YXRjaCB0aHJlYWQiKSBhZGRlZCBhIGRlcGVuZGVuY3kgdG8gbGli
+ZGwgdG8KPiBsaWJ4ZW5zdG9yZS4KPiAKPiBBZGQgdGhlIG5lZWRlZCBmbGFncyB0byBMRExJQlNf
+bGlieGVuc3RvcmUgYW5kIHRoZSBwa2ctY29uZmlnIGZpbGUgb2YKPiBsaWJ4ZW5zdG9yZS4KPiAK
+PiBGaXhlczogNDQ4YzAzYjNjYmUxNDg3M2VlNjMKPiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdy
+b3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cj4gVGVzdGVkLWJ5OiBPbGFmIEhlcmluZyA8b2xhZkBhZXBm
+bGUuZGU+Cj4gLS0tCj4gIHRvb2xzL1J1bGVzLm1rICAgICAgICAgICAgICAgIHwgMyArKysKPiAg
+dG9vbHMveGVuc3RvcmUvTWFrZWZpbGUgICAgICAgfCAyICsrCj4gIHRvb2xzL3hlbnN0b3JlL3hl
+bnN0b3JlLnBjLmluIHwgMiArLQo+ICAzIGZpbGVzIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKSwg
+MSBkZWxldGlvbigtKQo+IAo+IGRpZmYgLS1naXQgYS90b29scy9SdWxlcy5tayBiL3Rvb2xzL1J1
+bGVzLm1rCj4gaW5kZXggNjE1MTVkMzA2My4uMjk2YjcyMjM3MiAxMDA2NDQKPiAtLS0gYS90b29s
+cy9SdWxlcy5tawo+ICsrKyBiL3Rvb2xzL1J1bGVzLm1rCj4gQEAgLTE0OSw2ICsxNDksOSBAQCBD
+RkxBR1NfbGlieGVuc3RvcmUgPSAtSSQoWEVOX1hFTlNUT1JFKS9pbmNsdWRlICQoQ0ZMQUdTX3hl
+bmluY2x1ZGUpCj4gIFNIREVQU19saWJ4ZW5zdG9yZSA9ICQoU0hMSUJfbGlieGVudG9vbGNvcmUp
+Cj4gIExETElCU19saWJ4ZW5zdG9yZSA9ICQoU0hERVBTX2xpYnhlbnN0b3JlKSAkKFhFTl9YRU5T
+VE9SRSkvbGlieGVuc3RvcmUkKGxpYmV4dGVuc2lvbikKPiAgU0hMSUJfbGlieGVuc3RvcmUgID0g
+JChTSERFUFNfbGlieGVuc3RvcmUpIC1XbCwtcnBhdGgtbGluaz0kKFhFTl9YRU5TVE9SRSkKPiAr
+aWZlcSAoJChDT05GSUdfTGludXgpLHkpCj4gK0xETElCU19saWJ4ZW5zdG9yZSArPSAtbGRsCj4g
+K2VuZGlmCj4gIAo+ICBDRkxBR1NfbGlieGVuc3RhdCAgPSAtSSQoWEVOX0xJQlhFTlNUQVQpCj4g
+IFNIREVQU19saWJ4ZW5zdGF0ICA9ICQoU0hMSUJfbGlieGVuY3RybCkgJChTSExJQl9saWJ4ZW5z
+dG9yZSkKPiBkaWZmIC0tZ2l0IGEvdG9vbHMveGVuc3RvcmUvTWFrZWZpbGUgYi90b29scy94ZW5z
+dG9yZS9NYWtlZmlsZQo+IGluZGV4IDA4MzFiZTBiNmYuLmFlZWU4MTk3NDggMTAwNjQ0Cj4gLS0t
+IGEvdG9vbHMveGVuc3RvcmUvTWFrZWZpbGUKPiArKysgYi90b29scy94ZW5zdG9yZS9NYWtlZmls
+ZQo+IEBAIC0xMDMsNiArMTAzLDggQEAgeHMub3BpYzogQ0ZMQUdTICs9IC1EVVNFX1BUSFJFQUQK
+PiAgaWZlcSAoJChDT05GSUdfTGludXgpLHkpCj4gIHhzLm9waWM6IENGTEFHUyArPSAtRFVTRV9E
+TFNZTQo+ICBsaWJ4ZW5zdG9yZS5zby4kKE1BSk9SKS4kKE1JTk9SKTogTERGTEFHUyArPSAtbGRs
+Cj4gK2Vsc2UKPiArUEtHX0NPTkZJR19SRU1PVkUgKz0gZGwKPiAgZW5kaWYKPiAgCj4gIGxpYnhl
+bnN0b3JlLnNvLiQoTUFKT1IpLiQoTUlOT1IpOiB4cy5vcGljIHhzX2xpYi5vcGljCj4gZGlmZiAt
+LWdpdCBhL3Rvb2xzL3hlbnN0b3JlL3hlbnN0b3JlLnBjLmluIGIvdG9vbHMveGVuc3RvcmUveGVu
+c3RvcmUucGMuaW4KPiBpbmRleCA2ZmQ3MmExZjE3Li40ZmMzN2Y4MDViIDEwMDY0NAo+IC0tLSBh
+L3Rvb2xzL3hlbnN0b3JlL3hlbnN0b3JlLnBjLmluCj4gKysrIGIvdG9vbHMveGVuc3RvcmUveGVu
+c3RvcmUucGMuaW4KPiBAQCAtNyw0ICs3LDQgQEAgRGVzY3JpcHRpb246IFRoZSBYZW5zdG9yZSBs
+aWJyYXJ5IGZvciBYZW4gaHlwZXJ2aXNvcgo+ICBWZXJzaW9uOiBAQHZlcnNpb25AQAo+ICBDZmxh
+Z3M6IC1JJHtpbmNsdWRlZGlyfSBAQGNmbGFnc2xvY2FsQEAKPiAgTGliczogQEBsaWJzZmxhZ0BA
+JHtsaWJkaXJ9IC1seGVuc3RvcmUKPiAtUmVxdWlyZXMucHJpdmF0ZTogeGVuZXZ0Y2huLHhlbmNv
+bnRyb2wseGVuZ250dGFiLHhlbnRvb2xjb3JlCj4gK1JlcXVpcmVzLnByaXZhdGU6IHhlbmV2dGNo
+bix4ZW5jb250cm9sLHhlbmdudHRhYix4ZW50b29sY29yZSxkbAoKVXVoLCB0aGlzIHdhcyB3cm9u
+Zy4gbGliZGwgaGFzbid0IGdvdCBhIHBrZ2NvbmZpZyBmaWxlLCBzbyB3ZSBuZWVkIHRvCmFkZCAt
+bGRsIHRvIExpYnMucHJpdmF0ZSBpbnN0ZWFkLiBWMiBjb21pbmcgc29vbi4uLgoKCkp1ZXJnZW4K
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
