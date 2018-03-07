@@ -1,21 +1,20 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 35/57] ARM: new VGIC: Add GICv2 MMIO
-	handling framework
-Date: Wed, 7 Mar 2018 15:00:37 +0000
-Message-ID: <ef3675df-ebe1-4913-5373-846de57433f1@arm.com>
-References: <20180305160415.16760-1-andre.przywara@linaro.org>
- <20180305160415.16760-36-andre.przywara@linaro.org>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [OSSTEST PATCH v2 08/19] ts-guests-nbd-mirror: use
+	target_{get, put}file_root to transfter cfg
+Date: Wed, 7 Mar 2018 15:04:41 +0000
+Message-ID: <23199.65417.402495.909095@mariner.uk.xensource.com>
+References: <20171031135203.11537-1-wei.liu2@citrix.com>
+ <20171031135203.11537-9-wei.liu2@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=+hct=f5=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1etaYg-0003ft-QO
- for xen-devel@lists.xenproject.org; Wed, 07 Mar 2018 15:00:46 +0000
-In-Reply-To: <20180305160415.16760-36-andre.przywara@linaro.org>
-Content-Language: en-US
+ <srs0=yqaj=f5=citrix.com=prvs=597a3b2b9=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1etacq-0003tW-6Y
+ for xen-devel@lists.xenproject.org; Wed, 07 Mar 2018 15:05:04 +0000
+In-Reply-To: <20171031135203.11537-9-wei.liu2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,20 +23,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andre Przywara <andre.przywara@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgQW5kcmUsCgpPbiAwMy8wNS8yMDE4IDA0OjAzIFBNLCBBbmRyZSBQcnp5d2FyYSB3cm90ZToK
-PiBDcmVhdGUgdmdpYy1tbWlvLXYyLmMgdG8gZGVzY3JpYmUgR0lDdjIgZW11bGF0aW9uIHNwZWNp
-ZmljIGhhbmRsZXJzCj4gdXNpbmcgdGhlIGluaXRpYWxpemVyIG1hY3JvcyBwcm92aWRlZCBieSB0
-aGUgVkdJQyBNTUlPIGZyYW1ld29yay4KPiBQcm92aWRlIGEgZnVuY3Rpb24gdG8gcmVnaXN0ZXIg
-dGhlIEdJQ3YyIGRpc3RyaWJ1dG9yIHJlZ2lzdGVycyB0bwo+IHRoZSBYZW4gTU1JTyBmcmFtZXdv
-cmsuCj4gVGhlIGFjdHVhbCBoYW5kbGVyIGZ1bmN0aW9ucyBhcmUgc3RpbGwgc3R1YnMgaW4gdGhp
-cyBwYXRjaC4KPiAKPiBUaGlzIGlzIGJhc2VkIG9uIExpbnV4IGNvbW1pdCBmYjg0OGRiMzk2NjEs
-IHdyaXR0ZW4gYnkgQW5kcmUgUHJ6eXdhcmEuCj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmUgUHJ6
-eXdhcmEgPGFuZHJlLnByenl3YXJhQGxpbmFyby5vcmc+CgpSZXZpZXdlZC1ieTogSnVsaWVuIEdy
-YWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+V2VpIExpdSB3cml0ZXMgKCJbT1NTVEVTVCBQQVRDSCB2MiAwOC8xOV0gdHMtZ3Vlc3RzLW5iZC1t
+aXJyb3I6IHVzZSB0YXJnZXRfe2dldCxwdXR9ZmlsZV9yb290IHRvIHRyYW5zZnRlciBjZmciKToK
+PiBUaGUgb3JpZ2luYWwgY29kZSB1c2VkIHRhcmdldF9jbWRfb3V0cHV0X3Jvb3Qgd2hpY2ggY2F1
+c2VkIGEgdHJhaWxpbmcKPiBuZXcgbGluZSB0byBiZSBkZWxldGVkLCB3aGljaCBjYXVzZWQgbGli
+dmlydCBjb252ZXJ0ZXIgdG8gZmFpbC4KPiAKPiBJdCB3YXNuJ3QgZGlzY292ZXJlZCB1bnRpbCBu
+b3cgYmVjYXVzZSB3ZSBhcHBlbmRlZCB0b28gbWFueSAiXG4iLgo+IAo+IFVzZSB0YXJnZXRfe2dl
+dCxwdXR9ZmlsZV9yb290IHRvIGRvIHRoZSBqb2IuCgpNYXliZSB0YXJnZXRfZ2V0ZmlsZWNvbnRl
+bnRzIGFuZCBzdGFzaGZpbGVjb250ZW50cyBhbmQKdGFyZ2V0X3B1dGZpbGVjb250ZW50cyB3b3Vs
+ZCBiZSBlYXNpZXIgYW5kIGFsc28gYmV0dGVyID8KCkl0IGlzIHVzdWFsbHkgYmV0dGVyIHRvIHVz
+ZSB0aGUgZXhpc3RpbmcgZmFjaWxpdGllcyBmb3IgaW52ZW50aW5nCnN0YXNoIGZpbGUgbmFtZXMg
+YmVjYXVzZSB0aGV5IGNoZWNrIGZvciB1bmlxdWVuZXNzLgoKT3IgbWF5YmUgeW91IHdhbnQgdG8g
+aW52ZW50IGB0YXJnZXRfZ2V0ZmlsZV9zdGFzaCcgd2hpY2ggdXNlcwpvcGVuX3VuaXF1ZV9zdGFz
+aGZpbGUgYW5kIHRhcmdldF9nZXRmaWxlLCBhbmQgcmV0dXJucyB0aGUgZmlsZW5hbWUuCgpJYW4u
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
