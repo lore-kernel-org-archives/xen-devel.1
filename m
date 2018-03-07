@@ -1,19 +1,20 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [OSSTEST PATCH v2 19/19] Switch to Debian Stretch
-Date: Wed, 7 Mar 2018 14:50:50 +0000
-Message-ID: <23199.64586.347911.319686@mariner.uk.xensource.com>
-References: <20171031135203.11537-1-wei.liu2@citrix.com>
- <20171031135203.11537-20-wei.liu2@citrix.com>
+From: Daniel Kiper <daniel.kiper@oracle.com>
+Subject: Re: Setting up a Xen x86 community call
+Date: Wed, 7 Mar 2018 15:45:20 +0100
+Message-ID: <20180307144520.GN20614@olila.local.net-space.pl>
+References: <B2025C1A-199C-4019-9ECF-AFF34FE8D702@gmail.com>
+ <83E88477-F05E-4317-8643-85F54521BD78@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=yqaj=f5=citrix.com=prvs=597a3b2b9=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1etaPC-0002K5-7v
- for xen-devel@lists.xenproject.org; Wed, 07 Mar 2018 14:50:58 +0000
-In-Reply-To: <20171031135203.11537-20-wei.liu2@citrix.com>
+ <srs0=rlpf=f5=oracle.com=daniel.kiper@srs-us1.protection.inumbo.net>)
+ id 1etaSk-0002eN-Uy
+ for xen-devel@lists.xenproject.org; Wed, 07 Mar 2018 14:54:39 +0000
+Content-Disposition: inline
+In-Reply-To: <83E88477-F05E-4317-8643-85F54521BD78@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,13 +23,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>
+To: Lars Kurth <lars.kurth.xen@gmail.com>
+Cc: Chao Peng <chao.p.peng@linux.intel.com>, Kevin Tian <kevin.tian@intel.com>, tamas@tklengyel.com, Razvan Cojocaru <rcojocaru@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 'Susie Li' <susie.li@intel.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <royger@freebsd.org>, Christopher Clark <christopher.w.clark@gmail.com>, John Ji <john.ji@intel.com>, Babu Moger <Babu.Moger@amd.com>, Rich Persaud <persaur@gmail.com>, paul.durrant@citrix.com, committers@xenproject.org, Janakarajan Natarajan <jnataraj@amd.com>, Jan Beulich <jbeulich@suse.com>, "Hurwitz, Sherry" <sherry.hurwitz@amd.com>, xen-devel <xen-devel@lists.xenproject.org>, joao.m.martins@oracle.com, Brian Woods <brian.woods@amd.com>, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-V2VpIExpdSB3cml0ZXMgKCJbT1NTVEVTVCBQQVRDSCB2MiAxOS8xOV0gU3dpdGNoIHRvIERlYmlh
-biBTdHJldGNoIik6Cj4gU2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNv
-bT4KCkFja2VkLWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBNYXIgMDcsIDIwMTggYXQgMDE6Mjc6NDVQTSArMDEwMCwgTGFycyBLdXJ0aCB3cm90
+ZToKPiBIaSBhbGwsCj4KPiB0aGFua3MgZm9yIHRoZSBmZWVkYmFjay4gSXQgc2VlbXMgdG8gbWUg
+dGhhdCB0aGUgZm9sbG93aW5nIHRpbWVzIHNhdGlzZnkgYWxsIHJlcXVpcmVtZW50cy4KPiBUaG9z
+ZSB3aXRoIG1pbm9yIGlzc3VlcyBhcmUgb24gdGhlIFRPIGxpc3QgYW5kIGNhbGxlZCBvdXQgYmVs
+b3cuCj4KPiBXaW50ZXIKPiA9PT09PT0KPiAxNTowMCAtIDE2OjAwIFVUQwo+IDA3OjAwIC0gMDg6
+MDAgUGFjaWZpYwo+IDA5OjAwIC0gMTA6MDAgQXVzdGluCj4gMTA6MDAgLSAxMTowMCBOZXcgWW9y
+awo+IDE1OjAwIC0gMTY6MDAgTG9uZG9uCj4gMTY6MDAgLSAxNzowMCBCZXJsaW4KPiAyMzowMCAt
+IDI0OjAwIEJlaWppbmcKPgo+IFN1bW1lcgo+ID09PT09PQo+IDE0OjAwIC0gMTU6MDAgVVRDCj4g
+MDc6MDAgLSAwODowMCBQYWNpZmljCj4gMDk6MDAgLSAxMDowMCBBdXN0aW4KPiAxMDowMCAtIDEx
+OjAwIE5ldyBZb3JrCj4gMTU6MDAgLSAxNjowMCBMb25kb24KPiAxNjowMCAtIDE3OjAwIEJlcmxp
+bgo+IDIyOjAwIC0gMjM6MDAgQmVpamluZwo+Cj4gU2VlIGh0dHBzOi8vd3d3LnRpbWVhbmRkYXRl
+LmNvbS90aW1lL2RzdC9ldmVudHMuaHRtbCBmb3Igc3VtbWVyIHRpbWUgY2hhbmdlcyBzcGVjaWZp
+YyBjb3VudHJpZXMKPgo+IFRoZSBpbmZvcm1hdGlvbiBpcyBhbHNvIGNvbGxhdGVkIGluIGh0dHBz
+Oi8vZG9jcy5nb29nbGUuY29tL3NwcmVhZHNoZWV0cy9kLzFKUlR5NnU2WmZ3Zk4wd1JuVzc5Ykp0
+S3ZNaE1EVGNRSXV0cEx6NEdkekZvL2VkaXQ/dXNwPXNoYXJpbmcgKHRoZSBzZWNvbmQgdGFiIHNo
+b3dzIGEgc25pcHBldCBvZiB0aGUgd29ybGQgY2xvY2spCj4KPiBKYW4gQmV1bGljaDoKPiBPbmx5
+IFdlZCB1cCB0byAxNzowMAo+Cj4gRGFuaWVsIEtpcGVyOgo+IENhbid0IGRvIHRoaXMgc2xvdCBv
+biBUdWVzZGF5LCBhbmQgbm90IFRodXJzZGF5Cj4gQnV0IEkgYW0gYXNzdW1pbmcgV2VkIG1heSB3
+b3JrLgoKWWVwLCBJIGFtIE9LIHdpdGggdGhhdC4KCkRhbmllbAoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
