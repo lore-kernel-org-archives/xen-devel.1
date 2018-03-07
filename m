@@ -1,20 +1,16 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [OSSTEST PATCH v2 18/19] make-flight: don't test
-	pvgrub for Xen XXX
-Date: Wed, 7 Mar 2018 15:14:53 +0000
-Message-ID: <23200.493.93919.673952@mariner.uk.xensource.com>
-References: <20171031135203.11537-1-wei.liu2@citrix.com>
- <20171031135203.11537-19-wei.liu2@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 120304: tolerable all pass -
+	PUSHED
+Date: Wed, 07 Mar 2018 15:32:06 +0000
+Message-ID: <osstest-120304-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6194787904581987892=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=yqaj=f5=citrix.com=prvs=597a3b2b9=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1etamU-0005Yn-3n
- for xen-devel@lists.xenproject.org; Wed, 07 Mar 2018 15:15:02 +0000
-In-Reply-To: <20171031135203.11537-19-wei.liu2@citrix.com>
+ <srs0=/bh1=f5=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1etb3C-000728-Hy
+ for xen-devel@lists.xenproject.org; Wed, 07 Mar 2018 15:32:18 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,24 +19,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-V2VpIExpdSB3cml0ZXMgKCJbT1NTVEVTVCBQQVRDSCB2MiAxOC8xOV0gbWFrZS1mbGlnaHQ6IGRv
-bid0IHRlc3QgcHZncnViIGZvciBYZW4gWFhYIik6Cj4gWFhYIE5lZWQgdG8gcGluIGRvd24gdGhl
-IHZlcnNpb24gb2YgWGVuIHdoZW4gdGhlIHVwZ3JhZGUgdG8gc3RyZXRjaCBpcwo+IGNvbXBsZXRl
-IGJlY2F1c2Ugb3NzdGVzdCBjb25maWd1cmF0aW9uIGlzIGJyYW5jaGVkIGZvciBlYWNoIHZlcnNp
-b24uCgpJIGRvbid0IHVuZGVyc3RhbmQgdGhpcy4KCj4gKyAgIyBwdmdydWIxIHRlc3RzIGZvciB2
-ZXJzaW9uIDwgWFhYIG9ubHkKPiArICBjYXNlICIkeGVuYnJhbmNoIiBpbgo+ICsgIHhlbi00LjMt
-dGVzdGluZykgdGVzdF9wdmdydWI9eSA7Owo+ICsgIHhlbi00LjQtdGVzdGluZykgdGVzdF9wdmdy
-dWI9eSA7Owo+ICsgIHhlbi00LjUtdGVzdGluZykgdGVzdF9wdmdydWI9eSA7Owo+ICsgIHhlbi00
-LjYtdGVzdGluZykgdGVzdF9wdmdydWI9eSA7Owo+ICsgIHhlbi00LjctdGVzdGluZykgdGVzdF9w
-dmdydWI9eSA7Owo+ICsgIHhlbi00LjgtdGVzdGluZykgdGVzdF9wdmdydWI9eSA7Owo+ICsgIHhl
-bi00LjktdGVzdGluZykgdGVzdF9wdmdydWI9eSA7Owo+ICsgICopICAgICAgICAgICAgICAgdGVz
-dF9wdmdydWI9biA7Owo+ICsgIGVzYWMKCkkgZG9uJ3QgdW5kZXJzdGFuZCB3aGF0IHRoZSByZWxh
-dGlvbnNoaXAgaXMgYmV0d2VlbiBwdmdydWIxIGFuZApzdHJldGNoLCBub3IgaG93IHRoaXMgcmVs
-YXRlcyB0byBYZW4gcmVsZWFzZXMuCgpJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+--===============6194787904581987892==
+Content-Type: text/plain
+
+flight 120304 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/120304/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  8b022d0005d5b941cd078f640cae04711f5536c1
+baseline version:
+ xen                  457c86ff39f966aa040794d218e7e6d20436deef
+
+Last test of basis   120288  2018-03-06 20:01:11 Z    0 days
+Testing same since   120304  2018-03-07 13:01:17 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   457c86ff39..8b022d0005  8b022d0005d5b941cd078f640cae04711f5536c1 -> smoke
+
+
+--===============6194787904581987892==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6194787904581987892==--
