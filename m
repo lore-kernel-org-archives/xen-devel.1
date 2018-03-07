@@ -1,12 +1,15 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] tools/xenstore: Don't link libxenstore against
-	systemd
-Date: Wed, 7 Mar 2018 11:13:33 +0000
-Message-ID: <1520421213-21641-1-git-send-email-andrew.cooper3@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] tools/xenstore: Don't link libxenstore
+	against systemd
+Date: Wed, 7 Mar 2018 11:15:59 +0000
+Message-ID: <20180307111559.6aue4ybzvbsxihkd@citrix.com>
+References: <1520421213-21641-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Content-Disposition: inline
+In-Reply-To: <1520421213-21641-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,30 +18,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SXQgaXMgb25seSB4ZW5zdG9yZWQgd2hpY2ggdXNlcyBsaWJzeXN0ZW1kLiAgQXZvaWQgaGF2aW5n
-IGxpYnhlbnN0b3JlZCBwdWxsCmxpYnN5c3RlbWQgaW50byB0aGUgYWRkcmVzcyBzcGFjZSBvZiBh
-bGwgb2YgaXRzIHVzZXJzLgoKU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT4KLS0tCkNDOiBJYW4gSmFja3NvbiA8SWFuLkphY2tzb25AZXUuY2l0
-cml4LmNvbT4KQ0M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Ci0tLQogdG9vbHMveGVu
-c3RvcmUvTWFrZWZpbGUgfCA4ICsrKysrLS0tCiAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25z
-KCspLCAzIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3Rvb2xzL3hlbnN0b3JlL01ha2VmaWxl
-IGIvdG9vbHMveGVuc3RvcmUvTWFrZWZpbGUKaW5kZXggMDgzMWJlMC4uNDQ3M2NmNiAxMDA2NDQK
-LS0tIGEvdG9vbHMveGVuc3RvcmUvTWFrZWZpbGUKKysrIGIvdG9vbHMveGVuc3RvcmUvTWFrZWZp
-bGUKQEAgLTE1LDkgKzE1LDYgQEAgQ0ZMQUdTICs9ICQoQ0ZMQUdTX2xpYnhlbnRvb2xjb3JlKQog
-Q0ZMQUdTICs9IC1EWEVOX0xJQl9TVE9SRUQ9IlwiJChYRU5fTElCX1NUT1JFRClcIiIKIENGTEFH
-UyArPSAtRFhFTl9SVU5fU1RPUkVEPSJcIiQoWEVOX1JVTl9TVE9SRUQpXCIiCiAKLUNGTEFHUy0k
-KENPTkZJR19TWVNURU1EKSAgKz0gJChTWVNURU1EX0NGTEFHUykKLUxERkxBR1MtJChDT05GSUdf
-U1lTVEVNRCkgKz0gJChTWVNURU1EX0xJQlMpCi0KIENGTEFHUyAgKz0gJChDRkxBR1MteSkKIExE
-RkxBR1MgKz0gJChMREZMQUdTLXkpCiAKQEAgLTc0LDYgKzcxLDExIEBAIHhlbnN0b3JlZF9wcm9i
-ZXMubzogeGVuc3RvcmVkX3NvbGFyaXMubwogQ0ZMQUdTICs9IC1ESEFWRV9EVFJBQ0U9MQogZW5k
-aWYKIAoraWZlcSAoJChDT05GSUdfU1lTVEVNRCkseSkKKyQoWEVOU1RPUkVEX09CSlMpOiBDRkxB
-R1MgKz0gJChTWVNURU1EX0NGTEFHUykKK3hlbnN0b3JlZDogTERGTEFHUyArPSAkKFNZU1RFTURf
-TElCUykKK2VuZGlmCisKICQoWEVOU1RPUkVEX09CSlMpOiBDRkxBR1MgKz0gJChDRkxBR1NfbGli
-eGVuZ250dGFiKQogCiB4ZW5zdG9yZWQ6ICQoWEVOU1RPUkVEX09CSlMpCi0tIAoyLjEuNAoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBNYXIgMDcsIDIwMTggYXQgMTE6MTM6MzNBTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBJdCBpcyBvbmx5IHhlbnN0b3JlZCB3aGljaCB1c2VzIGxpYnN5c3RlbWQuICBBdm9p
+ZCBoYXZpbmcgbGlieGVuc3RvcmVkIHB1bGwKPiBsaWJzeXN0ZW1kIGludG8gdGhlIGFkZHJlc3Mg
+c3BhY2Ugb2YgYWxsIG9mIGl0cyB1c2Vycy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29v
+cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5s
+aXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
