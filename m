@@ -1,18 +1,17 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: Save the date: Xen Project Developer Summit, Nanjing,
- China, June 20-22 (Wednesday - Friday)
-Date: Wed, 7 Mar 2018 11:00:07 +0100
-Message-ID: <BC87D943-9E13-48CB-A8FB-2EDBC8A2F813__6334.69553799859$1520416779$gmane$org@gmail.com>
-References: <7B105F1A-A54A-4613-8108-91D96DEB9708@gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.2 \(3445.5.20\))
-Content-Type: multipart/mixed; boundary="===============7532966844578383079=="
+From: Juergen Gross <jgross@suse.com>
+Subject: [PATCH] tools/xenstore: add libdl dependency to
+	libxenstore
+Date: Wed,  7 Mar 2018 11:17:44 +0100
+Message-ID: <20180307101744.32608-1-jgross@suse.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=rihp=f5=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1etVrq-0004Ep-K4
- for xen-devel@lists.xenproject.org; Wed, 07 Mar 2018 10:00:14 +0000
-In-Reply-To: <7B105F1A-A54A-4613-8108-91D96DEB9708@gmail.com>
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=rcf1=f5=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1etW8r-0005Kx-9O
+ for xen-devel@lists.xenproject.org; Wed, 07 Mar 2018 10:17:49 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,137 +20,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>, mirageos-devel@lists.xenproject.org, unikraft-devel@lists.xenproject.org, win-pv-devel@lists.xenproject.org, embedded-pv-devel@lists.xenproject.org, xen-api@lists.xenproject.org
-Cc: advisory-board@lists.xenproject.org, committers@xenproject.org
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, wei.liu2@citrix.com, ian.jackson@eu.citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7532966844578383079==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_57E2C50C-4D64-4C0A-82C5-593101269260"
-
-
---Apple-Mail=_57E2C50C-4D64-4C0A-82C5-593101269260
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-Hi everyone,
-
-a quick update. We finally have the contract in hand: that took a lot =
-longer than expected as we didn't realise that contracts which involve =
-foreign events hosted in China, need to be vetted by the Chinese =
-government.
-
-My LF contact will meet the Linux Foundation's contract specialist later =
-today to make sure there are no large red flags: hopefully there aren't =
-any which means we will be able to offically announce the event, publish =
-the website, etc. this week.
-
-Best Regards
-Lars
-
-> On 5 Feb 2018, at 15:52, Lars Kurth <lars.kurth.xen@gmail.com> wrote:
->=20
-> Dear Community members,
->=20
-> we finalized the Xen Project Developer Summit proposal with the event =
-hotel. Apologies this has taken so long.
->=20
-> The event will be held at the Crowne Plaza Nanjing Jiangning =
-<https://www.ihg.com/crowneplaza/hotels/us/en/nanjing/nkgnj/hoteldetail/ev=
-ents-facilities#scmisc=3Dnav_events-facilities_cp>. I am still waiting =
-for the schedule to put registration and the website into place, as well =
-as CfP time-table, but this should all be done within a couple of weeks =
-or so.
-> The cost per hotel room is $135/night + taxes.
-> The dates for the summit are June 20-22 (Wednesday - Friday), allowing =
-attendees to travel to Beijing and attend LinuxCon China the following =
-Monday. =20
->=20
-> For those, who want to attend LinuxCon as well as the Dev Summit, the =
-LinuxCon CfP is still open until March 4th (see =
-https://www.lfasiallc.com/linuxcon-containercon-cloudopen-china/cfp =
-<https://www.lfasiallc.com/linuxcon-containercon-cloudopen-china/cfp>)
-> =20
-> I will provide more information on travel logistics, etc. a little =
-later
->=20
-> Best Regards
-> Lars
-
-
---Apple-Mail=_57E2C50C-4D64-4C0A-82C5-593101269260
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">Hi =
-everyone,<div class=3D""><br class=3D""><div class=3D"">a quick =
-update.&nbsp;We finally have the contract in hand: that took a lot =
-longer than expected as we didn't realise that contracts which involve =
-foreign events hosted in China, need to be vetted by the Chinese =
-government.</div><div class=3D""><br class=3D""></div><div class=3D"">My =
-LF contact will meet the Linux Foundation's contract specialist later =
-today to make sure there are no large red flags: hopefully there aren't =
-any which means we will be able to offically announce the event, publish =
-the website, etc. this week.</div><div class=3D""><br =
-class=3D""></div><div class=3D"">Best Regards</div><div =
-class=3D"">Lars</div><div class=3D""><div><br class=3D""><blockquote =
-type=3D"cite" class=3D""><div class=3D"">On 5 Feb 2018, at 15:52, Lars =
-Kurth &lt;<a href=3D"mailto:lars.kurth.xen@gmail.com" =
-class=3D"">lars.kurth.xen@gmail.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><meta =
-http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii" =
-class=3D""><div style=3D"word-wrap: break-word; -webkit-nbsp-mode: =
-space; line-break: after-white-space;" class=3D"">Dear Community =
-members,<div class=3D""><br class=3D""></div><div class=3D""><div =
-class=3D""><div style=3D"margin: 0cm 0cm 0.0001pt;" class=3D"">we =
-finalized the Xen Project Developer Summit proposal with the event =
-hotel. Apologies this has taken so long.</div><div style=3D"margin: 0cm =
-0cm 0.0001pt;" class=3D""><br class=3D""></div><div style=3D"margin: 0cm =
-0cm 0.0001pt;" class=3D"">The event will be held at the&nbsp;<a =
-href=3D"https://www.ihg.com/crowneplaza/hotels/us/en/nanjing/nkgnj/hotelde=
-tail/events-facilities#scmisc=3Dnav_events-facilities_cp" style=3D"color: =
-purple;" class=3D"">Crowne Plaza Nanjing Jiangning</a>. I am still =
-waiting for the schedule to put registration and the website into place, =
-as well as CfP time-table, but this should all be done within a couple =
-of weeks or so.<o:p class=3D""></o:p></div></div><div style=3D"margin: =
-0cm 0cm 0.0001pt;" class=3D"">The cost per hotel room is $135/night + =
-taxes.</div><div style=3D"margin: 0cm 0cm 0.0001pt;" class=3D"">The =
-dates for the summit are June 20-22 (Wednesday - Friday), allowing =
-attendees to travel to Beijing and attend LinuxCon China the following =
-Monday. &nbsp;</div><div class=3D""><div style=3D"margin: 0cm 0cm =
-0.0001pt;" class=3D""><o:p class=3D""></o:p></div></div><div =
-class=3D""><div style=3D"margin: 0cm 0cm 0.0001pt;" class=3D""><br =
-class=3D""></div><div style=3D"margin: 0cm 0cm 0.0001pt;" class=3D"">For =
-those, who want to attend LinuxCon as well as the Dev Summit, the =
-LinuxCon CfP is still open until March 4th (see&nbsp;<a =
-href=3D"https://www.lfasiallc.com/linuxcon-containercon-cloudopen-china/cf=
-p" =
-class=3D"">https://www.lfasiallc.com/linuxcon-containercon-cloudopen-china=
-/cfp</a>)</div><div style=3D"margin: 0cm 0cm 0.0001pt;" =
-class=3D"">&nbsp;</div></div><div class=3D""><div style=3D"margin: 0cm =
-0cm 0.0001pt;" class=3D"">I will provide more information on travel =
-logistics, etc. a little later</div></div></div><div style=3D"margin: =
-0cm 0cm 0.0001pt;" class=3D""><br class=3D""></div><div style=3D"margin: =
-0cm 0cm 0.0001pt;" class=3D"">Best Regards</div><div style=3D"margin: =
-0cm 0cm 0.0001pt;" class=3D"">Lars</div></div></div></blockquote></div><br=
- class=3D""></div></div></body></html>=
-
---Apple-Mail=_57E2C50C-4D64-4C0A-82C5-593101269260--
-
-
---===============7532966844578383079==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7532966844578383079==--
+Q29tbWl0IDQ0OGMwM2IzY2JlMTQ4NzNlZTYzICgidG9vbHMveGVuc3RvcmU6IHRyeSB0byBnZXQg
+bWluaW11bSB0aHJlYWQKc3RhY2sgc2l6ZSBmb3Igd2F0Y2ggdGhyZWFkIikgYWRkZWQgYSBkZXBl
+bmRlbmN5IHRvIGxpYmRsIHRvCmxpYnhlbnN0b3JlLgoKQWRkIHRoZSBuZWVkZWQgZmxhZ3MgdG8g
+TERMSUJTX2xpYnhlbnN0b3JlIGFuZCB0aGUgcGtnLWNvbmZpZyBmaWxlIG9mCmxpYnhlbnN0b3Jl
+LgoKRml4ZXM6IDQ0OGMwM2IzY2JlMTQ4NzNlZTYzClNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jv
+c3MgPGpncm9zc0BzdXNlLmNvbT4KVGVzdGVkLWJ5OiBPbGFmIEhlcmluZyA8b2xhZkBhZXBmbGUu
+ZGU+Ci0tLQogdG9vbHMvUnVsZXMubWsgICAgICAgICAgICAgICAgfCAzICsrKwogdG9vbHMveGVu
+c3RvcmUvTWFrZWZpbGUgICAgICAgfCAyICsrCiB0b29scy94ZW5zdG9yZS94ZW5zdG9yZS5wYy5p
+biB8IDIgKy0KIDMgZmlsZXMgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0p
+CgpkaWZmIC0tZ2l0IGEvdG9vbHMvUnVsZXMubWsgYi90b29scy9SdWxlcy5tawppbmRleCA2MTUx
+NWQzMDYzLi4yOTZiNzIyMzcyIDEwMDY0NAotLS0gYS90b29scy9SdWxlcy5taworKysgYi90b29s
+cy9SdWxlcy5tawpAQCAtMTQ5LDYgKzE0OSw5IEBAIENGTEFHU19saWJ4ZW5zdG9yZSA9IC1JJChY
+RU5fWEVOU1RPUkUpL2luY2x1ZGUgJChDRkxBR1NfeGVuaW5jbHVkZSkKIFNIREVQU19saWJ4ZW5z
+dG9yZSA9ICQoU0hMSUJfbGlieGVudG9vbGNvcmUpCiBMRExJQlNfbGlieGVuc3RvcmUgPSAkKFNI
+REVQU19saWJ4ZW5zdG9yZSkgJChYRU5fWEVOU1RPUkUpL2xpYnhlbnN0b3JlJChsaWJleHRlbnNp
+b24pCiBTSExJQl9saWJ4ZW5zdG9yZSAgPSAkKFNIREVQU19saWJ4ZW5zdG9yZSkgLVdsLC1ycGF0
+aC1saW5rPSQoWEVOX1hFTlNUT1JFKQoraWZlcSAoJChDT05GSUdfTGludXgpLHkpCitMRExJQlNf
+bGlieGVuc3RvcmUgKz0gLWxkbAorZW5kaWYKIAogQ0ZMQUdTX2xpYnhlbnN0YXQgID0gLUkkKFhF
+Tl9MSUJYRU5TVEFUKQogU0hERVBTX2xpYnhlbnN0YXQgID0gJChTSExJQl9saWJ4ZW5jdHJsKSAk
+KFNITElCX2xpYnhlbnN0b3JlKQpkaWZmIC0tZ2l0IGEvdG9vbHMveGVuc3RvcmUvTWFrZWZpbGUg
+Yi90b29scy94ZW5zdG9yZS9NYWtlZmlsZQppbmRleCAwODMxYmUwYjZmLi5hZWVlODE5NzQ4IDEw
+MDY0NAotLS0gYS90b29scy94ZW5zdG9yZS9NYWtlZmlsZQorKysgYi90b29scy94ZW5zdG9yZS9N
+YWtlZmlsZQpAQCAtMTAzLDYgKzEwMyw4IEBAIHhzLm9waWM6IENGTEFHUyArPSAtRFVTRV9QVEhS
+RUFECiBpZmVxICgkKENPTkZJR19MaW51eCkseSkKIHhzLm9waWM6IENGTEFHUyArPSAtRFVTRV9E
+TFNZTQogbGlieGVuc3RvcmUuc28uJChNQUpPUikuJChNSU5PUik6IExERkxBR1MgKz0gLWxkbAor
+ZWxzZQorUEtHX0NPTkZJR19SRU1PVkUgKz0gZGwKIGVuZGlmCiAKIGxpYnhlbnN0b3JlLnNvLiQo
+TUFKT1IpLiQoTUlOT1IpOiB4cy5vcGljIHhzX2xpYi5vcGljCmRpZmYgLS1naXQgYS90b29scy94
+ZW5zdG9yZS94ZW5zdG9yZS5wYy5pbiBiL3Rvb2xzL3hlbnN0b3JlL3hlbnN0b3JlLnBjLmluCmlu
+ZGV4IDZmZDcyYTFmMTcuLjRmYzM3ZjgwNWIgMTAwNjQ0Ci0tLSBhL3Rvb2xzL3hlbnN0b3JlL3hl
+bnN0b3JlLnBjLmluCisrKyBiL3Rvb2xzL3hlbnN0b3JlL3hlbnN0b3JlLnBjLmluCkBAIC03LDQg
+KzcsNCBAQCBEZXNjcmlwdGlvbjogVGhlIFhlbnN0b3JlIGxpYnJhcnkgZm9yIFhlbiBoeXBlcnZp
+c29yCiBWZXJzaW9uOiBAQHZlcnNpb25AQAogQ2ZsYWdzOiAtSSR7aW5jbHVkZWRpcn0gQEBjZmxh
+Z3Nsb2NhbEBACiBMaWJzOiBAQGxpYnNmbGFnQEAke2xpYmRpcn0gLWx4ZW5zdG9yZQotUmVxdWly
+ZXMucHJpdmF0ZTogeGVuZXZ0Y2huLHhlbmNvbnRyb2wseGVuZ250dGFiLHhlbnRvb2xjb3JlCitS
+ZXF1aXJlcy5wcml2YXRlOiB4ZW5ldnRjaG4seGVuY29udHJvbCx4ZW5nbnR0YWIseGVudG9vbGNv
+cmUsZGwKLS0gCjIuMTMuNgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
