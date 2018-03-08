@@ -1,100 +1,31 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 42/57] ARM: new VGIC: Add TARGET registers
-	handlers
-Date: Thu, 8 Mar 2018 16:18:05 +0000
-Message-ID: <01392a6c-f679-32e3-d93b-b2d47dec85e3@arm.com>
-References: <20180305160415.16760-1-andre.przywara@linaro.org>
- <20180305160415.16760-43-andre.przywara@linaro.org>
+From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Subject: [GIT PULL] (xen) stable/for-jens-4.15
+Date: Thu, 8 Mar 2018 11:19:14 -0500
+Message-ID: <20180308161914.GN12029@char.us.oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
-Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=ui9k=f6=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1etyFD-0005oU-NY
- for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 16:18:15 +0000
-In-Reply-To: <20180305160415.16760-43-andre.przywara@linaro.org>
-Content-Language: en-US
-List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
-List-Post: <mailto:xen-devel@lists.xenproject.org>
-List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
-List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Errors-To: xen-devel-bounces@lists.xenproject.org
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andre Przywara <andre.przywara@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset=us-ascii
+Return-path: <linux-kernel-owner@vger.kernel.org>
+Content-Disposition: inline
+Sender: linux-kernel-owner@vger.kernel.org
+To: Jens Axboe <axboe@kernel.dk>, linux-kernel@vger.kernel.org, xen-devel@lists.xensource.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgQW5kcmUsCgpPbiAwNS8wMy8xOCAxNjowNCwgQW5kcmUgUHJ6eXdhcmEgd3JvdGU6Cj4gVGhl
-IHRhcmdldCByZWdpc3RlciBoYW5kbGVycyBhcmUgdjIgZW11bGF0aW9uIHNwZWNpZmljLCBzbyB0
-aGVpcgo+IGltcGxlbWVudGF0aW9uIGxpdmVzIGVudGlyZWx5IGluIHZnaWMtbW1pby12Mi5jLgo+
-IFdlIGNvcHkgdGhlIG9sZCBWR0lDIGJlaGF2aW91ciBvZiBhc3NpZ25pbmcgYW4gSVJRIHRvIHRo
-ZSBmaXJzdCBWQ1BVCj4gc2V0IGluIHRoZSB0YXJnZXQgbWFzayBpbnN0ZWFkIG9mIG1ha2luZyBp
-dCBwb3NzaWJseSBwZW5kaW5nIG9uCj4gbXVsdGlwbGUgVkNQVXMuCj4gV2UgdXBkYXRlIHRoZSBw
-aHlzaWNhbCBhZmZpbml0eSBvZiBhIGhhcmR3YXJlIG1hcHBlZCB2SVJRIG9uIHRoZSB3YXkuCj4g
-Cj4gVGhpcyBpcyBiYXNlZCBvbiBMaW51eCBjb21taXQgMmMyMzRkNmYxODI2LCB3cml0dGVuIGJ5
-IEFuZHJlIFByenl3YXJhLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJlIFByenl3YXJhIDxhbmRy
-ZS5wcnp5d2FyYUBsaW5hcm8ub3JnPgo+IC0tLQo+IENoYW5nZWxvZyBSRkMgLi4uIHYxOgo+IC0g
-cHJvcGFnYXRlIGFmZmluaXR5IGNoYW5nZXMgdG8gaGFyZHdhcmUgbWFwcGVkIElSUXMKPiAKPiAg
-IHhlbi9hcmNoL2FybS92Z2ljL3ZnaWMtbW1pby12Mi5jIHwgNjQgKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrLQo+ICAgMSBmaWxlIGNoYW5nZWQsIDYzIGluc2VydGlvbnMo
-KyksIDEgZGVsZXRpb24oLSkKPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3ZnaWMvdmdp
-Yy1tbWlvLXYyLmMgYi94ZW4vYXJjaC9hcm0vdmdpYy92Z2ljLW1taW8tdjIuYwo+IGluZGV4IGQx
-OWRkZDNmMWUuLjAxYzZhNzE5OGMgMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gvYXJtL3ZnaWMvdmdp
-Yy1tbWlvLXYyLmMKPiArKysgYi94ZW4vYXJjaC9hcm0vdmdpYy92Z2ljLW1taW8tdjIuYwo+IEBA
-IC03Miw2ICs3Miw2OCBAQCBzdGF0aWMgdm9pZCB2Z2ljX21taW9fd3JpdGVfdjJfbWlzYyhzdHJ1
-Y3QgdmNwdSAqdmNwdSwKPiAgICAgICB9Cj4gICB9Cj4gICAKPiArc3RhdGljIHVuc2lnbmVkIGxv
-bmcgdmdpY19tbWlvX3JlYWRfdGFyZ2V0KHN0cnVjdCB2Y3B1ICp2Y3B1LAo+ICsgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFkZHJfdCBhZGRyLCB1bnNpZ25lZCBp
-bnQgbGVuKQo+ICt7Cj4gKyAgICB1aW50MzJfdCBpbnRpZCA9IFZHSUNfQUREUl9UT19JTlRJRChh
-ZGRyLCA4KTsKPiArICAgIHVpbnQzMl90IHZhbCA9IDA7Cj4gKyAgICB1bnNpZ25lZCBpbnQgaTsK
-PiArCj4gKyAgICBmb3IgKCBpID0gMDsgaSA8IGxlbjsgaSsrICkKPiArICAgIHsKPiArICAgICAg
-ICBzdHJ1Y3QgdmdpY19pcnEgKmlycSA9IHZnaWNfZ2V0X2lycSh2Y3B1LT5kb21haW4sIHZjcHUs
-IGludGlkICsgaSk7Cj4gKwo+ICsgICAgICAgIHZhbCB8PSAodWludDMyX3QpaXJxLT50YXJnZXRz
-IDw8IChpICogOCk7Cj4gKwo+ICsgICAgICAgIHZnaWNfcHV0X2lycSh2Y3B1LT5kb21haW4sIGly
-cSk7Cj4gKyAgICB9Cj4gKwo+ICsgICAgcmV0dXJuIHZhbDsKPiArfQo+ICsKPiArc3RhdGljIHZv
-aWQgdmdpY19tbWlvX3dyaXRlX3RhcmdldChzdHJ1Y3QgdmNwdSAqdmNwdSwKPiArICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYWRkcl90IGFkZHIsIHVuc2lnbmVkIGludCBsZW4s
-Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgbG9uZyB2YWwp
-Cj4gK3sKPiArICAgIHVpbnQzMl90IGludGlkID0gVkdJQ19BRERSX1RPX0lOVElEKGFkZHIsIDgp
-Owo+ICsgICAgdWludDhfdCBjcHVfbWFzayA9IEdFTk1BU0sodmNwdS0+ZG9tYWluLT5tYXhfdmNw
-dXMgLSAxLCAwKTsKPiArICAgIHVuc2lnbmVkIGludCBpOwo+ICsgICAgdW5zaWduZWQgbG9uZyBm
-bGFnczsKPiArCj4gKyAgICAvKiBHSUNEX0lUQVJHRVRTUlswLTddIGFyZSByZWFkLW9ubHkgKi8K
-PiArICAgIGlmICggaW50aWQgPCBWR0lDX05SX1BSSVZBVEVfSVJRUyApCj4gKyAgICAgICAgcmV0
-dXJuOwo+ICsKPiArICAgIGZvciAoIGkgPSAwOyBpIDwgbGVuOyBpKysgKQo+ICsgICAgewo+ICsg
-ICAgICAgIHN0cnVjdCB2Z2ljX2lycSAqaXJxID0gdmdpY19nZXRfaXJxKHZjcHUtPmRvbWFpbiwg
-TlVMTCwgaW50aWQgKyBpKTsKPiArICAgICAgICBzdHJ1Y3QgaXJxX2Rlc2MgKmRlc2M7Cj4gKwo+
-ICsgICAgICAgIHNwaW5fbG9ja19pcnFzYXZlKCZpcnEtPmlycV9sb2NrLCBmbGFncyk7Cj4gKwo+
-ICsgICAgICAgIGlycS0+dGFyZ2V0cyA9ICh2YWwgPj4gKGkgKiA4KSkgJiBjcHVfbWFzazsKPiAr
-ICAgICAgICBpZiAoIGlycS0+dGFyZ2V0cyApCj4gKyAgICAgICAgewo+ICsgICAgICAgICAgICBp
-cnEtPnRhcmdldF92Y3B1ID0gdmNwdS0+ZG9tYWluLT52Y3B1W2ZmcyhpcnEtPnRhcmdldHMpIC0g
-MV07Cj4gKyAgICAgICAgICAgIGlmICggaXJxLT5odyApCj4gKyAgICAgICAgICAgICAgICBkZXNj
-ID0gaXJxX3RvX2Rlc2MoaXJxLT5od2ludGlkKTsKPiArICAgICAgICAgICAgZWxzZQo+ICsgICAg
-ICAgICAgICAgICAgZGVzYyA9IE5VTEw7CgpJZiB5b3UgaW5pdGlhbGl6ZWQgZGVzYyB0byBOVUxM
-IGR1cmluZyB0aGUgZGVjbGFyYXRpb24sIHRoZW4gdGhlIGVsc2UgaXMgCm5vdCBuZWNlc3Nhcnku
-Cgo+ICsgICAgICAgIH0KPiArICAgICAgICBlbHNlIHsKPiArICAgICAgICAgICAgaXJxLT50YXJn
-ZXRfdmNwdSA9IE5VTEw7Cj4gKyAgICAgICAgICAgIGRlc2MgPSBOVUxMOwo+ICsgICAgICAgIH0K
-PiArCj4gKyAgICAgICAgc3Bpbl91bmxvY2tfaXJxcmVzdG9yZSgmaXJxLT5pcnFfbG9jaywgZmxh
-Z3MpOwo+ICsKPiArICAgICAgICBpZiAoIGRlc2MgKQo+ICsgICAgICAgICAgICB2Z2ljX3VwZGF0
-ZV9oYXJkd2FyZV9pcnEoZGVzYywgaXJxKTsKCkkgY2FuJ3QgZmluZCB0aGlzIGZ1bmN0aW9uIGlu
-IHRoZSB0cmVlLgoKPiArCj4gKyAgICAgICAgdmdpY19wdXRfaXJxKHZjcHUtPmRvbWFpbiwgaXJx
-KTsKPiArICAgIH0KPiArfQo+ICsKPiAgIHN0YXRpYyBjb25zdCBzdHJ1Y3QgdmdpY19yZWdpc3Rl
-cl9yZWdpb24gdmdpY192Ml9kaXN0X3JlZ2lzdGVyc1tdID0gewo+ICAgICAgIFJFR0lTVEVSX0RF
-U0NfV0lUSF9MRU5HVEgoR0lDRF9DVExSLAo+ICAgICAgICAgICB2Z2ljX21taW9fcmVhZF92Ml9t
-aXNjLCB2Z2ljX21taW9fd3JpdGVfdjJfbWlzYywgMTIsCj4gQEAgLTEwMSw3ICsxNjMsNyBAQCBz
-dGF0aWMgY29uc3Qgc3RydWN0IHZnaWNfcmVnaXN0ZXJfcmVnaW9uIHZnaWNfdjJfZGlzdF9yZWdp
-c3RlcnNbXSA9IHsKPiAgICAgICAgICAgdmdpY19tbWlvX3JlYWRfcHJpb3JpdHksIHZnaWNfbW1p
-b193cml0ZV9wcmlvcml0eSwgOCwKPiAgICAgICAgICAgVkdJQ19BQ0NFU1NfMzJiaXQgfCBWR0lD
-X0FDQ0VTU184Yml0KSwKPiAgICAgICBSRUdJU1RFUl9ERVNDX1dJVEhfQklUU19QRVJfSVJRKEdJ
-Q0RfSVRBUkdFVFNSLAo+IC0gICAgICAgIHZnaWNfbW1pb19yZWFkX3JheiwgdmdpY19tbWlvX3dy
-aXRlX3dpLCA4LAo+ICsgICAgICAgIHZnaWNfbW1pb19yZWFkX3RhcmdldCwgdmdpY19tbWlvX3dy
-aXRlX3RhcmdldCwgOCwKPiAgICAgICAgICAgVkdJQ19BQ0NFU1NfMzJiaXQgfCBWR0lDX0FDQ0VT
-U184Yml0KSwKPiAgICAgICBSRUdJU1RFUl9ERVNDX1dJVEhfQklUU19QRVJfSVJRKEdJQ0RfSUNG
-R1IsCj4gICAgICAgICAgIHZnaWNfbW1pb19yZWFkX2NvbmZpZywgdmdpY19tbWlvX3dyaXRlX2Nv
-bmZpZywgMiwKPiAKCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Hi Jens,
+
+Please git pull the following branch for your for-linus branch:
+
+git://git.kernel.org/pub/scm/linux/kernel/git/konrad/xen.git stable/for-jens-4.15
+
+It has one simple fix for the multi-queue support not showing up after a block
+device was detached/re-attached.
+
+The patch was originally posted in Dec 22nd but with the Spectre/Meltdown
+circus I forgot about it until now.
+
+Thank you!
+ 
+drivers/block/xen-blkfront.c | 17 ++++++++---------
+ 1 file changed, 8 insertions(+), 9 deletions(-)
+
+Bhavesh Davda (1):
+      xen-blkfront: move negotiate_mq to cover all cases of new VBDs
