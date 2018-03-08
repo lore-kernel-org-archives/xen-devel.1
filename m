@@ -1,19 +1,16 @@
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [PATCH 12/12] scripts/get_maintainer.pl: Print proper
-	error message for missing $file
-Date: Thu, 8 Mar 2018 19:03:07 +0000
-Message-ID: <1520535787-6223-13-git-send-email-ian.jackson@eu.citrix.com>
-References: <1520535787-6223-1-git-send-email-ian.jackson@eu.citrix.com>
+From: Sander Eikelenboom <linux@eikelenboom.it>
+Subject: Re: tools/libacpi printf output to logging instead of
+ console/stdout ?
+Date: Thu, 8 Mar 2018 20:23:40 +0100
+Message-ID: <5def13d3-591a-277d-bbe0-1ad26dfebbc7@eikelenboom.it>
+References: <d3dba7dc-5c89-f27d-ef2b-af8bda0c33bf@eikelenboom.it>
+ <5AA10BCF02000078001AFB53@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=awgw=f6=citrix.com=prvs=5980b9d75=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1eu0sf-00078I-C2
- for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 19:07:09 +0000
-In-Reply-To: <1520535787-6223-1-git-send-email-ian.jackson@eu.citrix.com>
+In-Reply-To: <5AA10BCF02000078001AFB53@prv-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,31 +19,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: qemu-devel@nongnu.org
-Cc: Juergen Gross <jgross@suse.com>, Thomas Huth <thuth@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, Paolo Bonzini <pbonzini@redhat.com>, Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SWYgeW91IHBhc3Mgc2NyaXB0cy9nZXRfbWFpbnRhaW5lci5wbCB0aGUgbmFtZSBvZiBhIEZJRk8g
-b3Igb3RoZXIKZXhjaXRpbmcgb2JqZWN0ICgvZGV2L3N0ZGluLCBmb3IgZXhhbXBsZSksIGl0IHdv
-dWxkIGZhbHNlbHkgcHJpbnQKImZpbGUgbm90IGZvdW5kIi4gIEluc3RlYWQ6IHN0YXQgdGhlIG9i
-amVjdCByYXRoZXIgdGhhbiB1c2luZyAtZiBzbwp0aGF0IHdlIGRvIG5vdCBtaW5kIGlmIHRoZSBv
-YmplY3QgaXMgbm90IGEgZmlsZTsgYW5kIHByaW50IHRoZSBlcnJubwp2YWx1ZSBpbiB0aGUgZXJy
-b3IgbWVzc2FnZS4KClNpZ25lZC1vZmYtYnk6IElhbiBKYWNrc29uIDxJYW4uSmFja3NvbkBldS5j
-aXRyaXguY29tPgpDQzogVGhvbWFzIEh1dGggPHRodXRoQHJlZGhhdC5jb20+CkNDOiBQYW9sbyBC
-b256aW5pIDxwYm9uemluaUByZWRoYXQuY29tPgpDQzogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3Rh
-YmVsbGluaUBrZXJuZWwub3JnPgpDQzogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNp
-dHJpeC5jb20+Ci0tLQp2NjogTmV3IHBhdGNoIGluIHRoaXMgdmVyc2lvbiBvZiB0aGUgc2VyaWVz
-Ci0tLQogc2NyaXB0cy9nZXRfbWFpbnRhaW5lci5wbCB8IDQgKystLQogMSBmaWxlIGNoYW5nZWQs
-IDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9zY3JpcHRzL2dl
-dF9tYWludGFpbmVyLnBsIGIvc2NyaXB0cy9nZXRfbWFpbnRhaW5lci5wbAppbmRleCAwNzM2OWFh
-Li40M2ZiNWY1IDEwMDc1NQotLS0gYS9zY3JpcHRzL2dldF9tYWludGFpbmVyLnBsCisrKyBiL3Nj
-cmlwdHMvZ2V0X21haW50YWluZXIucGwKQEAgLTM4MSw4ICszODEsOCBAQCBmb3JlYWNoIG15ICRm
-aWxlIChAQVJHVikgewogCSMjaWYgJGZpbGUgaXMgYSBkaXJlY3RvcnkgYW5kIGl0IGxhY2tzIGEg
-dHJhaWxpbmcgc2xhc2gsIGFkZCBvbmUKIAlpZiAoKC1kICRmaWxlKSkgewogCSAgICAkZmlsZSA9
-fiBzQChbXi9dKSRAJDEvQDsKLQl9IGVsc2lmICghKC1mICRmaWxlKSkgewotCSAgICBkaWUgIiRQ
-OiBmaWxlICcke2ZpbGV9JyBub3QgZm91bmRcbiI7CisJfSBlbHNpZiAoIShzdGF0ICRmaWxlKSkg
-eworCSAgICBkaWUgIiRQOiBmaWxlICcke2ZpbGV9JyBub3QgZm91bmQ6ICQhXG4iOwogCX0KICAg
-ICB9CiAgICAgaWYgKCRmcm9tX2ZpbGVuYW1lKSB7Ci0tIAoyLjEuNAoKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDgvMDMvMTggMTA6MDksIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDA3LjAzLjE4IGF0
+IDIxOjUyLCA8bGludXhAZWlrZWxlbmJvb20uaXQ+IHdyb3RlOgo+PiBXaGVuIHN0YXJ0aW5nIGEg
+Z3Vlc3Qgd2l0aCB0aGUgJ3hsIGNyZWF0ZScgY29tbWFuZCAobm9uLXZlcmJvc2UpIGkgZ2V0Cj4+
+IHRoaXMgZXh0cmEgb3V0cHV0IG9uIFBWSCBndWVzdCB0eXBlcyBvbmx5Ogo+Pgo+PiBTMyBkaXNh
+YmxlZAo+PiBTNCBkaXNhYmxlZAo+PiBDT05WIGRpc2FibGVkCj4+Cj4+Cj4+IEl0IHNlZW1zIGxp
+YmFjcGkvKiBvbmx5IGNvbnRhaW5zIG5vcm1hbCBwcmludGYncywgc28gZm9yIHRoZSBvdGhlciBn
+dWVzdAo+PiB0eXBlcyBpIHByb2JhYmx5IGp1c3QgbmV2ZXIgdHJpZ2dlcmVkIG9uZSBvZiB0aGVt
+Lgo+Pgo+PiBTaG91bGRuJ3QgdGhlc2UgcHJpbnRmJ3MgZ28gdG8gbG9nZ2luZyBpbnN0ZWFkIG9m
+IGNvbnNvbGUvc3Rkb3V0ID8KPiAKPiBJIHRoaW5rIGl0J3MgdGhlIHJlc3BvbnNpYmlsaXR5IG9m
+IHRoZSBleGVjdXRhYmxlIGxpbmtpbmcgdG8gdGhhdCBsaWJyYXJ5Cj4gdG8gc3VpdGFibHkgc2V0
+IHVwIC8gcmVkaXJlY3Qgc3Rkb3V0LiBUaGVyZSBub3QgYmVpbmcgYW55dGhpbmcgbGlrZQo+ICJz
+dGRsb2ciLCBJJ20gYWxzbyBub3Qgc3VyZSB3aGVyZSB5b3Ugd291bGQgdGhpbmsgbGliYWNwaSBz
+aG91bGQKPiBzZW5kIHRoZW0gKGlmIGl0IHdhcyB0byBjb250cm9sIHRoaXMgaXRzZWxmKSAtIHN1
+cmVseSBub3Qgc3RkZXJyLgoKVGhlIGV4dHJhIG91dHB1dCBzZWVtcyBvbmx5IGluZm9ybWF0aW9u
+YWwsIG5vdCBldmVuIGEgd2FybmluZywgc28gc3RkZXJyCnNlZW1zIHdyb25nIGluZGVlZC4KCldp
+dGggbXkgbm92aWNlIEMgc2tpbGxzIGl0IHNlZW1zIHRoYXQ6ClRoZSBkaWZmZXJlbmNlIGJldHdl
+ZW4gSFZNIGFuZCBQVkggaXMgdGhhdCAKaW4gdGhlIEhWTSBjYXNlIHRoZSBjb2RlIG9mIGxpYmFj
+cGkgaXMgbGlua2VkIHRvIGFuZCBnZXRzIHJ1biBieQp0aGUgaHZtbG9hZGVyIGJpbmFyeSwgd2hp
+Y2ggbGlieGwgY2FwdHVyZXMgYWxsIHRoZSBvdXRwdXQgZnJvbQphbmQgb25seSBwcmludHMgb24g
+dmVyYm9zZSBpbnZvY2F0aW9uIG9mIHRoZSB4bCB0b29sIGFuZC9vciB0aGUgeGVuIGxvZwoob24g
+ZGVidWcgYnVpbGRzKS4KCkluIHRoZSBQVkggY2FzZSB0aGUgYWNwaSB0YWJsZXMgYXJlIGdlbmVy
+YXRlZCBieSBsaWJ4bCBpdApzZWxmIChsaWJ4bF94ODZfYWNwaS5jOiBsaWJ4bF9fZG9tX2xvYWRf
+YWNwaSgpKSwgd2hpY2ggaXMgbGlua2VkIHRvIGxpYmFjcGkgZGlyZWN0bHksIApoZW5jZSB0aGUg
+b3V0cHV0IGNhbid0IGJlIGNhcHR1cmVkIHNlcGFyYXRlbHkgc2luY2UgaXQgaXMgbm90IGEgc2Vw
+YXJhdGUgYmluYXJ5LgoKV291bGQgcHJvYmFibHkgYmUgaGFyZCB0byBhbGlnbiB0aGUgbG9nZ2lu
+ZyB3aXRoIHRob3NlIDIgZGlmZmVyZW50IHdheSBvZiB1c2luZyBsaWJhY3BpID8KCi0tClNhbmRl
+cgogCj4gSmFuCj4gCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
