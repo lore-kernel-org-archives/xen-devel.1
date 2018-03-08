@@ -1,40 +1,73 @@
-From: Jens Axboe <axboe@kernel.dk>
-Subject: Re: [GIT PULL] (xen) stable/for-jens-4.15
-Date: Thu, 8 Mar 2018 09:25:51 -0700
-Message-ID: <f386ba9b-d331-ee8d-2b2f-27ff0074ed7d@kernel.dk>
-References: <20180308161914.GN12029@char.us.oracle.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH 40/57] ARM: new VGIC: Add PRIORITY registers
+	handlers
+Date: Thu, 8 Mar 2018 16:25:10 +0000
+Message-ID: <6f50af37-e788-7625-a77c-0ace0c7dc0ed@arm.com>
+References: <20180305160415.16760-1-andre.przywara@linaro.org>
+ <20180305160415.16760-41-andre.przywara@linaro.org>
+ <9c9cb3ac-9125-cdcf-7a89-68ca88ff8bed@arm.com>
+ <9a17bfcf-c57e-d3d5-6a7f-811c2ff8818f@linaro.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Return-path: <linux-kernel-owner@vger.kernel.org>
-In-Reply-To: <20180308161914.GN12029@char.us.oracle.com>
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
+Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=ui9k=f6=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1etyM3-0006jp-SL
+ for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 16:25:19 +0000
+In-Reply-To: <9a17bfcf-c57e-d3d5-6a7f-811c2ff8818f@linaro.org>
 Content-Language: en-US
-Sender: linux-kernel-owner@vger.kernel.org
-To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xensource.com
+List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
+List-Post: <mailto:xen-devel@lists.xenproject.org>
+List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
+List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Errors-To: xen-devel-bounces@lists.xenproject.org
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+To: Andre Przywara <andre.przywara@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-On 3/8/18 9:19 AM, Konrad Rzeszutek Wilk wrote:
-> Hi Jens,
-> 
-> Please git pull the following branch for your for-linus branch:
-> 
-> git://git.kernel.org/pub/scm/linux/kernel/git/konrad/xen.git stable/for-jens-4.15
-> 
-> It has one simple fix for the multi-queue support not showing up after a block
-> device was detached/re-attached.
-> 
-> The patch was originally posted in Dec 22nd but with the Spectre/Meltdown
-> circus I forgot about it until now.
-> 
-> Thank you!
->  
-> drivers/block/xen-blkfront.c | 17 ++++++++---------
->  1 file changed, 8 insertions(+), 9 deletions(-)
-> 
-> Bhavesh Davda (1):
->       xen-blkfront: move negotiate_mq to cover all cases of new VBDs
-
-Pulled, thanks.
-
--- 
-Jens Axboe
+CgpPbiAwOC8wMy8xOCAxNjoyMSwgQW5kcmUgUHJ6eXdhcmEgd3JvdGU6Cj4gSGksCj4gCj4gT24g
+MDgvMDMvMTggMTU6NDgsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4KPj4KPj4gT24gMDUvMDMvMTgg
+MTY6MDMsIEFuZHJlIFByenl3YXJhIHdyb3RlOgo+Pj4gVGhlIHByaW9yaXR5IHJlZ2lzdGVyIGhh
+bmRsZXJzIGFyZSBzaGFyZWQgYmV0d2VlbiB0aGUgdjIgYW5kIHYzCj4+PiBlbXVsYXRpb24sCj4+
+PiBzbyB0aGVpciBpbXBsZW1lbnRhdGlvbiBnb2VzIGludG8gdmdpYy1tbWlvLmMsIHRvIGJlIGVh
+c2lseSByZWZlcmVuY2VkCj4+PiBmcm9tIHRoZSB2MyBlbXVsYXRpb24gYXMgd2VsbCBsYXRlci4K
+Pj4+IFRoZXJlIGlzIGEgY29ybmVyIGNhc2Ugd2hlbiB3ZSBjaGFuZ2UgdGhlIHByaW9yaXR5IG9m
+IGEgcGVuZGluZwo+Pj4gaW50ZXJydXB0IHdoaWNoIHdlIGRvbid0IGhhbmRsZSBhdCB0aGUgbW9t
+ZW50Lgo+Pgo+PiBJIGRvbid0IGJlbGlldmUgaXQgaXMgYSBjb3JuZXIgY2FzZS4gVGhlIHNwZWMg
+KDguOS4xMiBBUk0gSUhJIDAwNjlkKSBzYXlzOgo+Pgo+PiAiSW1wbGVtZW50YXRpb25zIG11c3Qg
+ZW5zdXJlIHRoYXQgYW4gaW50ZXJydXB0IHRoYXQgaXMgcGVuZGluZyBhdCB0aGUKPj4gdGltZSBv
+ZiB0aGUgd3JpdGUgdXNlcyBlaXRoZXIgdGhlIG9sZCB2YWx1ZSBvciB0aGUgbmV3IHZhbHVlIGFu
+ZCBtdXN0Cj4+IGVuc3VyZSB0aGF0IHRoZSBpbnRlcnJ1cHQgaXMgbmVpdGhlciBsb3N0IG5vciBo
+YW5kbGVkIG1vcmUgdGhhbiBvbmNlLgo+PiBUaGUgZWZmZWN0IG9mIHRoZSBjaGFuZ2UgbXVzdCBi
+ZSB2aXNpYmxlIGluIGZpbml0ZSB0aW1lLiIKPj4KPj4gU28gdGhlIGN1cnJlbnQgaW1wbGVtZW50
+YXRpb24gbG9va3MgY29tcGxpYW50IHRvIHRoZSBzcGVjLgo+IAo+IEludGVyZXN0aW5nbHkgdGhl
+IEdJQ3YyIHNwZWMgZG9lc24ndCBtZW50aW9uIGFueXRoaW5nIGF0IGFsbCByZWxhdGVkIHRvCj4g
+dGhhdCwgYXQgbGVhc3Qgbm90IGluIHRoZSBJUFJJT1JJVFlSIGRlc2NyaXB0aW9uLgo+IAo+IEFu
+eXdheSwgYXJlIHlvdSBzYXlpbmcgdGhhdCBJIHNob3VsZCBqdXN0IGNoYW5nZSB0aGUgY29tbWl0
+IG1lc3NhZ2U/CgpZZXMuCgo+IAo+Pj4KPj4+IFRoaXMgaXMgYmFzZWQgb24gTGludXggY29tbWl0
+IGRkMjM4ZWMyYjg3Yiwgd3JpdHRlbiBieSBBbmRyZSBQcnp5d2FyYS4KPj4KPj4gVXNpbmcgc2hv
+cnQgY29tbWl0IElEIGlzIHVzdWFsbHkgYSBwcmV0dHkgYmFkIGlkZWEgYmVjYXVzZSBpdCBtYXkg
+bm90IGJlCj4+IHVuaXEuIEZvciBpbnN0YW5jZSwgYSBnaXQgc2hvdyBvbiBteSBMaW51eCB0cmVl
+IHdpbGwgbm90IGJlIGFibGUgdG8gZmluZAo+PiBpdC4KPiAKPiBJbmRlZWQgc29tZWhvdyB0aGUg
+Y29tbWl0IElEIGlzIHdyb25nLgo+IExpbnV4IHJlY29tbWVuZHMgKGF0IGxlYXN0KSAxMiBkaWdp
+dHMgd2hlbiBzcGFjZSBpcyBpbXBvcnRhbnQsIHBsdXMgdGhlCj4gY29tbWl0IHRpdGxlLCBpZiBw
+b3NzaWJsZS4gQnV0IHRoaXMgaXMganVzdCBmb3IgdGhlIHJlY29yZHMsIHNvIEkganVzdAo+IHdl
+bnQgd2l0aCB0aGUgc2hvcnRlbmVkIFNIQS4KCldlbGwsIGl0IGlzIG5vdCBvbmx5IGp1c3QgZm9y
+IHRoZSByZWNvcmRzLiBJdCBpcyBhbHNvIGEgd2F5IGZvciB1cyB0byAKa25vdyB3aGVyZSBpdCBj
+b21lcyBmcm9tIHNvIHdlIGNhbiBmaW5kIGZvciB0aGUgCnNpZ25lZC1vZmYtYnkvYXV0aG9yc2hp
+cC4gU28gd2UgbmVlZCB0byBlYXNpbHkgZmluZCB0aGUgZXhhY3QgY29tbWl0IGFuZCAKdGhlcmVm
+b3JlIHRoZSBlLW1haWwgYWRkcmVzc2VzLgoKPiBFdmVuIGlmIHRoYXQgY2xhc2hlcyBpbiB0aGUg
+ZnV0dXJlLCB0aGUKPiBmaXJzdCBoaXQgc2hvdWxkIGJlIHRoZSBvbmUuIFRoZSBjb21taXQgbWVz
+c2FnZSBzdGVtIHNob3VsZCBiZSB0aGUgc2FtZQo+IGFzIGluIExpbnV4IGZvciB0aG9zZSBjb21t
+aXRzLgoKV2h5IHRoZSBmaXJzdCBoaXQgc2hvdWxkIGJlIHRoZSBvbmU/IEl0IGxpa2VseSBtZWFu
+cyBhbm90aGVyIGNvbW1pdCBoYXZlIApzaW1pbGFyIHNoYTEgYW5kIGxpa2VseSBnb2luZyB0byBi
+ZSB0aGUgbmV3IG9uZS4gQW5kIHVzdWFsbHkgZ2l0IHNob3cgCndpbGwgdGVsbCB5b3UgImFtYmln
+dW91cyIuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
