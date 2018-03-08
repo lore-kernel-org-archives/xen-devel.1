@@ -1,19 +1,19 @@
 From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH] Move missing items from
-	docs/misc/qemu-xen-security to SUPPORT.md
-Date: Thu, 8 Mar 2018 17:44:27 +0000
-Message-ID: <23201.30331.17592.424886@mariner.uk.xensource.com>
-References: <20180308173719.14791-1-lars.kurth@citrix.com>
+Subject: Re: [PATCH v6 00/11] xen: xen-domid-restrict
+	improvements
+Date: Thu, 8 Mar 2018 17:45:58 +0000
+Message-ID: <23201.30422.443155.208749@mariner.uk.xensource.com>
+References: <1520530757-4477-1-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=awgw=f6=citrix.com=prvs=5980b9d75=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1etzbA-0007LT-9n
- for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 17:45:00 +0000
-In-Reply-To: <20180308173719.14791-1-lars.kurth@citrix.com>
+ id 1etzcF-0007YZ-4Q
+ for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 17:46:07 +0000
+In-Reply-To: <1520530757-4477-1-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,24 +22,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth@citrix.com>
-Cc: xen-devel@lists.xenproject.org, committers@xenproject.org
+To: qemu-devel@nongnu.org
+Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>, Ross Lagerwall <ross.lagerwall@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-TGFycyBLdXJ0aCB3cml0ZXMgKCJbUEFUQ0hdIE1vdmUgbWlzc2luZyBpdGVtcyBmcm9tIGRvY3Mv
-bWlzYy9xZW11LXhlbi1zZWN1cml0eSB0byBTVVBQT1JULm1kIik6Cj4geDg2L0VtdWxhdGVkIHBs
-YXRmb3JtIGRldmljZXMgKFFFTVUpOgo+IC0gQWRlZCBQQ0kgaG9zdCBicmlkZ2UgKGFzIGluIHhl
-bi5naXQ6ZG9jcy9taXNjL3FlbXUteGVuLXNlY3VyaXR5KQo+IE5ldzogeDg2L0VtdWxhdGVkIFN0
-b3JhZ2UgSW1hZ2UgRm9ybWF0cwo+IC0gQWRkZWQgcmF3LCBxY293LCBxY293MiwgdmhkIChhcyBp
-biB4ZW4uZ2l0OmRvY3MvbWlzYy9xZW11LXhlbi1zZWN1cml0eSkKPiB4ODYvRW11bGF0ZWQgZ3Jh
-cGhpY3MgKFFFTVUpCj4gLSBGaXhlZCB0eXBvIChzdGR2Z2EpCj4gLSBBZGRlZCB4ZW5mYiAoYXMg
-aW4geGVuLmdpdDpkb2NzL21pc2MvcWVtdS14ZW4tc2VjdXJpdHkpCj4geDg2L0VtdWxhdGVkIGlu
-cHV0IChRRU1VKToKPiAtIEFkZGVkIHhlbmZiIGtleWJvYXJkL21vdXNlIChhcyBpbiB4ZW4uZ2l0
-OmRvY3MvbWlzYy9xZW11LXhlbi1zZWN1cml0eSkKPiAKPiBEZWxldGUgeGVuLmdpdDpkb2NzL21p
-c2MvcWVtdS14ZW4tc2VjdXJpdHkgYXMgbm93IG5vdCBuZWVkZWQKCkxHVE0uICBUaGFua3MuCgpB
-Y2tlZC1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CgpXZSBzaG91
-bGQgd2FpdCBhIGJpdCB3aXRoIGNvbW1pdHRpbmcgaW4gY2FzZSBzb21lb25lIHdhbnRzIHRvIG9i
-amVjdApmb3Igc29tZSByZWFzb24uLi4KCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+Rm9yIHJlYXNvbnMgSSBzdGlsbCBkb24ndCBxdWl0ZSB1bmRlcnN0YW5kLCB0aGlzIGNvdmVyIGxl
+dHRlciB3YXMgbm90CnNlbnQgdG8gdGhlIHdob2xlIENDIGxpc3Qgc28gSSBhbSBkb2luZyB0aGF0
+IGJ5IGhhbmQgbm93LgoKSWFuIEphY2tzb24gd3JpdGVzICgiW1BBVENIIHY2IDAwLzExXSB4ZW46
+IHhlbi1kb21pZC1yZXN0cmljdCBpbXByb3ZlbWVudHMiKToKPiBUaGlzIHNlcmllcyBwcm92aWRl
+cyBuZWNlc3Nhcnkgc3VwcG9ydCBmb3IgcnVubmluZyBxZW11IGFzIGEgWGVuCj4gZGV2aWNlIG1v
+ZGVsIHdpdGhvdXQgcG93ZXIgZXF1aXZhbGVudCB0byByb290LiAgSW4gcGFydGljdWxhciwgaXQK
+PiBtYWtlcyAteGVuLWRvbWlkLXJlc3RyaWN0IGVmZmVjdGl2ZS4KPiAKPiBJIGhhdmUgdGFrZW4g
+aW50byBhY2NvdW50IGFsbCB0aGUgY29tbWVudHMgZnJvbSB2NSAoZnJvbSBPY3RvYmVyISkgYW5k
+Cj4gdGhlcmUgYXJlIGFsc28gdHdvIG5ldyBwYXRjaGVzIGZyb20gUm9zcyBMYWdlcndhbGwuCj4g
+Cj4gICBtICBhIFtQQVRDSCAwMS8xMV0geGVuOiBsaW5rIGFnYWluc3QgeGVudG9vbGNvcmUKPiAg
+ICAgIGEgW1BBVENIIDAyLzExXSB4ZW46IHJlc3RyaWN0OiB1c2UgeGVudG9vbGNvcmVfcmVzdHJp
+Y3RfYWxsCj4gICAgIHIgIFtQQVRDSCAwMy8xMV0geGVuOiBkZWZlciBjYWxsIHRvIHhlbl9yZXN0
+cmljdCB1bnRpbCBqdXN0IGJlZm9yZQo+ICAgICAgYSBbUEFUQ0ggMDQvMTFdIHhlbjogZGVzdHJv
+eV9odm1fZG9tYWluOiBNb3ZlIHJlYXNvbiBpbnRvIGEgdmFyaWFibGUKPiAgICAgcmEgW1BBVENI
+IDA1LzExXSB4ZW46IG1vdmUgeGNfaW50ZXJmYWNlIGNvbXBhdGliaWxpdHkgZmFsbGJhY2sgZnVy
+dGhlcgo+ICAgKiByICBbUEFUQ0ggMDYvMTFdIHhlbjogZGVzdHJveV9odm1fZG9tYWluOiBUcnkg
+eGVuZGV2aWNlbW9kZWxfc2h1dGRvd24KPiAgICogciAgW1BBVENIIDA3LzExXSBvcy1wb3NpeDog
+UHJvdmlkZSBuZXcgLXJ1bmFzIDx1aWQ+OjxnaWQ+IGZhY2lsaXR5Cj4gICBtICAgIFtQQVRDSCAw
+OC8xMV0gY29uZmlndXJlOiBkb19jb21waWxlcjogRHVtcCBzb21lIGV4dHJhIGluZm8gdW5kZXIg
+YmFzaAo+ICAgKyAgICBbUEFUQ0ggMDkvMTFdIHhlbjogVXNlIG5ld2x5IGFkZGVkIGRtb3BzIGZv
+ciBtYXBwaW5nIFZHQSBtZW1vcnkKPiAgICsgICAgW1BBVENIIDEwLzExXSB4ZW46IEV4cGVjdCB4
+ZW5zdG9yZSB3cml0ZSB0byBmYWlsIHdoZW4gcmVzdHJpY3RlZAo+ICAgKyAgICBbUEFUQ0ggMTEv
+MTFdIHNjcmlwdHMvZ2V0X21haW50YWluZXIucGw6IFByaW50IHByb3BlciBlcnJvciBtZXNzYWdl
+Cj4gCj4gIG0gPSBjb21taXQgbWVzc2FnZSAob25seSkgY2hhbmdlZCBpbiB2NiBvZiB0aGUgc2Vy
+aWVzCj4gICogPSBwYXRjaCBjaGFuZ2VkIGluIHY2IG9mIHRoZSBzZXJpZXMKPiAgKyA9IG5ldyBw
+YXRjaAo+ICByID0gcmV2aWV3ZWQgKGJ5IHNvbWVvbmUgb3RoZXIgdGhhbiBtZSkKPiAgYSA9IGFj
+a2VkCj4gCj4gVGhhbmtzIGZvciB5b3VyIGF0dGVudGlvbi4KPiAKPiBSZWdhcmRzLAo+IElhbi4K
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
