@@ -1,21 +1,14 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v4 08/20] x86emul: abstract out XCRn accesses
-Date: Thu, 08 Mar 2018 02:33:55 -0700
-Message-ID: <5AA1119302000078001AFB61@prv-mh.provo.novell.com>
-References: <5A96B3B902000078001ACB6D@prv-mh.provo.novell.com>
- <5A96B6B202000078001ACBCD@prv-mh.provo.novell.com>
- <85b4bd7a-4c69-340e-33f7-a7dd02959b2b@citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH] common/sched: Fix ARM build following c/s
+	340edc3902
+Date: Thu, 08 Mar 2018 10:37:39 +0100
+Message-ID: <1520501859.7628.0.camel@suse.com>
+References: <1520451675-22608-1-git-send-email-andrew.cooper3@citrix.com>
+ <alpine.DEB.2.10.1803071159580.7316@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============9186913595045623726=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=bbjo=f6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1etrw4-0004VO-KO
- for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 09:34:04 +0000
-In-Reply-To: <85b4bd7a-4c69-340e-33f7-a7dd02959b2b@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <alpine.DEB.2.10.1803071159580.7316@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,51 +17,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>
+To: Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA1LjAzLjE4IGF0IDE2OjU2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMjgvMDIvMTggMTM6MDMsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBAQCAtNTE3OCwx
-OCArNTIwMiwzMyBAQCB4ODZfZW11bGF0ZSgKPj4gICAgICAgICAgICAgICAgICBfcmVncy5lZmxh
-Z3MgfD0gWDg2X0VGTEFHU19BQzsKPj4gICAgICAgICAgICAgIGJyZWFrOwo+PiAgCj4+IC0jaWZk
-ZWYgX19YRU5fXwo+PiAtICAgICAgICBjYXNlIDB4ZDE6IC8qIHhzZXRidiAqLwo+PiArICAgICAg
-ICBjYXNlIDB4ZDA6IC8qIHhnZXRidiAqLwo+PiAgICAgICAgICAgICAgZ2VuZXJhdGVfZXhjZXB0
-aW9uX2lmKHZleC5wZngsIEVYQ19VRCk7Cj4+IC0gICAgICAgICAgICBpZiAoICFvcHMtPnJlYWRf
-Y3IgfHwgb3BzLT5yZWFkX2NyKDQsICZjcjQsIGN0eHQpICE9IFg4NkVNVUxfT0tBWSApCj4+ICsg
-ICAgICAgICAgICBpZiAoICFvcHMtPnJlYWRfY3IgfHwgIW9wcy0+cmVhZF94Y3IgfHwKPj4gKyAg
-ICAgICAgICAgICAgICAgb3BzLT5yZWFkX2NyKDQsICZjcjQsIGN0eHQpICE9IFg4NkVNVUxfT0tB
-WSApCj4+ICAgICAgICAgICAgICAgICAgY3I0ID0gMDsKPj4gICAgICAgICAgICAgIGdlbmVyYXRl
-X2V4Y2VwdGlvbl9pZighKGNyNCAmIFg4Nl9DUjRfT1NYU0FWRSksIEVYQ19VRCk7Cj4+IC0gICAg
-ICAgICAgICBnZW5lcmF0ZV9leGNlcHRpb25faWYoIW1vZGVfcmluZzAoKSB8fAo+PiAtICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGhhbmRsZV94c2V0YnYoX3JlZ3MuZWN4LAo+PiAt
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgX3JlZ3MuZWF4
-IHwgKF9yZWdzLnJkeCA8PCAzMikpLAo+PiArICAgICAgICAgICAgZ2VuZXJhdGVfZXhjZXB0aW9u
-X2lmKF9yZWdzLmVjeCA+ICh2Y3B1X2hhc194Z2V0YnYxKCkgPyAxIDogMCksCj4+ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgRVhDX0dQLCAwKTsKPiAKPiBJJ20gc3RpbGwgb3Bw
-b3NlZCB0byB0aGlzIGNoYW5nZS4gIEl0IGlzIGluY29uc2lzdGVudCB3aXRoIGFsbCBvdGhlcgo+
-IGhhbmRsaW5nIGluIHRoZSBlbXVsYXRvciwgYmVjYXVzZSB3ZSBkbyBub3QgZG8gaW5wdXQgcmVn
-aXN0ZXIgdmFsaWRhdGlvbgo+IGZvciBhbnkgb2YgdGhlIENSL0RSL01TUiBob29rcy4KPiAKPiBU
-aGUge3JlYWQsd3JpdGV9X3hjcigpIGhvb2tzIHNob3VsZCBiZSByZXF1aXJlZCB0byBkZWFsIHdp
-dGggYW55Cj4gYXJiaXRyYXJ5IHJlZ2lzdGVyLCBqdXN0IGxpa2UgdGhlIHtyZWFkLHdyaXRlfV97
-Y3IsZHIsbXNyfSgpIGhvb2tzIGFyZQo+IGN1cnJlbnRseSBleHBlY3RlZCB0byBkby4KCkFuZCBJ
-IGNvbnRpbnVlIHRvIG5vdCBmb2xsb3cgeW91IGhlcmU6IE5vbmUgb2YgdGhlICVjck4ncwpleGlz
-dGVuY2UgaXMgY29udHJvbGxlZCBieSBhbnkgQ1BVSUQgZmxhZ3MsIGhlbmNlIGEgY2hlY2sgbGlr
-ZSB0aGUKYWJvdmUgb25lIHdvdWxkIG5vdCBiZSBwb3NzaWJsZSB0aGVyZS4gSWYgYW55dGhpbmcs
-IEkgY291bGQgc2VlCnRoZSBjb3JlIGVtdWxhdG9yIGZpbHRlcmluZyBvdXQgJWNyMSwgJWNyNS0l
-Y3I3LCBhbmQgZnJvbSAlY3I5CnVwd2FyZHMgKGFuZCBzaW1pbGFybHkgZm9yICVkck4sIGF0IHdo
-aWNoIHBvaW50IHdlIGNvdWxkIGFsc28KY2VudHJhbGl6ZSB0aGUgW25vbi1dYWxpYXNpbmcgb2Yg
-JWRyNC8lZHI1IG9udG8gJWRyNi8lZHI3KS4KVGhlIGZ1bmRhbWVudGFsIGlkZWEgYmVoaW5kIHRo
-ZSBjaGVjayBhYm92ZSAoYW5kIHN1Y2ggYSBwb3NzaWJsZQolY3JOLyVkck4gcmVsYXRlZCBjaGFu
-Z2UpIGJlaW5nIHRvIGtlZXAgaW4gYSBzaW5nbGUgcGxhY2UgYWxsCmNoZWNrcyB3aGljaCBhcmUg
-bWFuZGF0ZWQgYnkgdGhlIGFyY2hpdGVjdHVyZS4KCk1TUnMgKGFscmVhZHkgYnkgdGhlaXIgc3Bl
-bGxlZCBvdXQgbmFtZSwgZXZlbiBpZiB0aGF0IGhhcyBiZWNvbWUKYSBtaXNub21lciBxdWl0ZSBx
-dWlja2x5IGFmdGVyIHRoZWlyIGludHJvZHVjdGlvbikgYXJlIGEgYml0IGRpZmZlcmVudCwKYW5k
-IGhlbmNlIEknbSBsZXNzIGNvbnZpbmNlZCBjb3JlIFJETVNSL1dSTVNSIGVtdWxhdGlvbgpzaG91
-bGQgZ28gdGhyb3VnaCBzdWNoIGhvb3BzIHdoZW4gdGhlIGNhbGxiYWNrcyB3aWxsIGhhdmUgdG8K
-bm9ybWFsbHkgaGF2ZSBhIGJpZyBzd2l0Y2goKSBzdGF0ZW1lbnQgYW55d2F5LgoKQnV0IHllcywg
-aWYgdGhlIG9ubHkgd2F5IGZvcndhcmQgaGVyZSBpcyB0byBtb3ZlIHRoZSBjaGVja3MgaW50bwp0
-aGUgaW5kaXZpZHVhbCBjYWxsYmFja3MsIEknbGwgaGF2ZSBubyBjaG9pY2UuIFBsZWFzZSBjbGFy
-aWZ5LgoKSmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9186913595045623726==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-EQ0ma3/L0Ct8pxfuNyTJ"
+
+
+--=-EQ0ma3/L0Ct8pxfuNyTJ
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-03-07 at 12:04 -0800, Stefano Stabellini wrote:
+> On Wed, 7 Mar 2018, Andrew Cooper wrote:
+> > The OSSTest smoke tests reports:
+> >=20
+> >   sched_credit2.c: In function 'csched2_alloc_domdata':
+> >   sched_credit2.c:3015:9: error: implicit declaration of function
+> 'ERR_PTR' [-Werror=3Dimplicit-function-declaration]
+> >            return ERR_PTR(-ENOMEM);
+> >            ^
+> >   sched_credit2.c:3015:9: error: nested extern declaration of
+> 'ERR_PTR' [-Werror=3Dnested-externs]
+> >=20
+> > As the ERR infrastructure is part of the main scheduler interface
+> now, include it from xen/sched-if.h
+> >=20
+> > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>=20
+> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+>=20
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-EQ0ma3/L0Ct8pxfuNyTJ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqhBGMACgkQFkJ4iaW4
+c+6R3w/+PbMBPXIKsy25lZVtqKrTfgqRLkbm3QFWFQxq0xBHL21GmwqfCyg2ETiJ
+OocJkpEpMMeLtsw2HUJNWZYI9NAKgR5Uj4e9zzZyFhpxBAyVcZym2QONdSlg646Y
+1ZEOt0wO3E0NQTrnLRRiiJs8fpglWBUTiA52wtC1i8Jfh3JwBa+9XxZ5C5KETVjJ
+raQA7mFYLjlib77z24ETBqLZcYBI3JEarGbz7cNEGG9Knt1NPRZW68mcGLvDvxQD
+FelqdAAa7/h0z6MctftgjUOHjtLGTyZEr9m0Oc0ZikWKRW3CmyqEfNc2ui9Iydyq
+pEY7dWyPhnsd2QxxNf40JkrEcFecuJ9zRvL7zq43oaHwTNkMV0q0fGetymzZF4LJ
+r6oFof5NC2MTBUYFNU1I6MgsU0Z4fX7T7LMyn6w9YPr5I2hQD+InE2z4SNBulp0s
+OeDUXjWJ7+h2Kchkw0+ISyEtiba2OE4jcyw20R6QU5Y/yY+zCeSLJfv3YhekgvE2
+N8IfTd2MeoJalLVLuHuy9gGKRz6m50IC3JS3HvuckKqAUDnkIXwCBMRsR41WpSUd
+1mz1HlE8YCJrcaR70GNi+vBL2OE6m4YOiGaIL7dzQsCBkq9cGpa5p2q6ZNQjJTkM
+nyHLvxZrkrdug1mEJLNz39V9nh/IxzpQ92gBLv20GKDhtPCa2FM=
+=yaXC
+-----END PGP SIGNATURE-----
+
+--=-EQ0ma3/L0Ct8pxfuNyTJ--
+
+
+
+--===============9186913595045623726==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9186913595045623726==--
