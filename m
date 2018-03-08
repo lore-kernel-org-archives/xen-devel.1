@@ -1,15 +1,19 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v4 0/7] unsafe big.LITTLE support
-Date: Thu, 8 Mar 2018 11:03:57 +0000
-Message-ID: <edbc8066-397f-9aea-264b-3e27d052b56e@arm.com>
-References: <alpine.DEB.2.10.1803021103130.4239@sstabellini-ThinkPad-X260>
- <20180308061458.GA25007@shlinux2>
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Subject: Re: Xen Virtio Drivers
+Date: Wed, 7 Mar 2018 18:47:11 -0800
+Message-ID: <CACMJ4GYj+UNVwMzY7YbdkABr045+aHmTv44+VgOdUPnorU-f5w@mail.gmail.com>
+References: <CAFU1X6ww54Ohq4L837sQzNz=Q9w=RBx3Ma4R6rjin=8YRgTdDQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1905296030225024182=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180308061458.GA25007@shlinux2>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=b2/e=f6=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
+ id 1etlaN-0007mW-6t
+ for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 02:47:15 +0000
+Received: by mail-qk0-x233.google.com with SMTP id z197so5223604qkb.6
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Mar 2018 18:47:12 -0800 (PST)
+In-Reply-To: <CAFU1X6ww54Ohq4L837sQzNz=Q9w=RBx3Ma4R6rjin=8YRgTdDQ@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,46 +22,255 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Peng Fan <van.freenix@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xen.org
+To: "Volo M." <vm@vovs.net>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8sCgpPbiAwOC8wMy8xOCAwNjoxNSwgUGVuZyBGYW4gd3JvdGU6Cj4gSGkgU3RlZmFubywK
-PiBPbiBGcmksIE1hciAwMiwgMjAxOCBhdCAxMTowNTo1NEFNIC0wODAwLCBTdGVmYW5vIFN0YWJl
-bGxpbmkgd3JvdGU6Cj4+IEhpIGFsbCwKPj4KPj4gVGhpcyBzZXJpZXMgY2hhbmdlcyB0aGUgaW5p
-dGlhbGl6YXRpb24gb2YgdHdvIHZpcnR1YWwgcmVnaXN0ZXJzIHRvIG1ha2UKPj4gc3VyZSB0aGV5
-IG1hdGNoIHRoZSB2YWx1ZSBvZiB0aGUgdW5kZXJseWluZyBwaHlzaWNhbCBjcHUuCj4+Cj4+IEl0
-IGFsc28gZGlzYWJsZXMgY3B1cyBkaWZmZXJlbnQgZnJvbSB0aGUgYm9vdCBjcHUsIHVubGVzcyBh
-IG5ld2x5Cj4+IGludHJvZHVjZWQgY29tbWFuZCBsaW5lIG9wdGlvbiBpcyBzcGVjaWZpZWQuIElu
-IHRoYXQgY2FzZSwgaXQgZXhwbGFpbnMKPj4gaG93IHRvIHNldHVwIHRoZSBzeXN0ZW0gdG8gYXZv
-aWQgY29ycnVwdGlvbnMsIHdoaWNoIGludm9sdmVzIG1hbnVhbGx5Cj4+IHNwZWNpZnlpbmcgdGhl
-IGNwdSBhZmZpbml0eSBvZiBhbGwgZG9tYWlucywgYmVjYXVzZSB0aGUgc2NoZWR1bGVyIHN0aWxs
-Cj4+IGxhY2tzIGJpZy5MSVRUTEUgc3VwcG9ydC4KPj4KPj4gSW4gdGhlIHVuY29tbW9uIGNhc2Ug
-b2YgYSBzeXN0ZW0gd2hlcmUgdGhlIGNhY2hlbGluZSBzaXplcyBhcmUgZGlmZmVyZW50Cj4+IGFj
-cm9zcyBjb3JlcywgaXQgZGlzYWJsZXMgYWxsIGNvcmVzIHRoYXQgaGF2ZSBhIGRpZmZlcmVudCBk
-Y2FjaGUgbGluZSBzaXplCj4+ZnJvbSB0aGUgYm9vdCBjcHUuIEluIGZhY3QsIGl0IGlzIG5vdCBz
-dWZmaWNpZW50IHRvIHVzZSB0aGUgZGNhY2hlIGxpbmUKPj4gc2l6ZSBvZiB0aGUgY3VycmVudCBj
-cHUsIGl0IHdvdWxkIGJlIG5lY2Vzc2FyeSB0byB1c2UgdGhlIG1pbmltdW0gYWNyb3NzCj4+IGFs
-bCBkY2FjaGUgbGluZSBzaXplcyBvZiBhbGwgY29yZXMuICBHaXZlbiB0aGF0IGl0IGlzIGFjdHVh
-bGx5IHVuY29tbW9uCj4+IGV2ZW4gaW4gYmlnLkxJVFRMRSBzeXN0ZW1zLCBqdXN0IGRpc2FibGUg
-Y3B1cyBmb3Igbm93Lgo+Pgo+PiBUaGUgZmlyc3QgcGF0Y2ggaW4gdGhlIHNlcmllcyBpcyBhIGZp
-eCBmb3IgdGhlIHdheSB3ZSByZWFkIHRoZSBkY2FjaGUKPj4gbGluZSBzaXplLgo+IAo+IEkgYW0g
-dHJ5aW5nIHRoZSBwYXRjaHNldCwgYnV0IEkgbWVldCBpc3N1ZSB0aGF0IEd1ZXN0IEJpZy9MaXR0
-bGUgd2l0aAo+IHZjcHUgbm90IHdvcmtpbmcgcHJvcGVybHkuIEFzIG15IGN1cnJlbnQgaGFyZHdh
-cmUgaGFzIGFuIGlzc3VlCj4gd2hpY2ggaGFzIGZpeCBpbiBLZXJuZWwsIGh0dHBzOi8vc291cmNl
-LmNvZGVhdXJvcmEub3JnL2V4dGVybmFsL2lteC9saW51eC1pbXgvY29tbWl0Lz9oPWlteF80Ljku
-NTFfaW14OF9iZXRhMiZpZD05MTdjYzNhOGRiMmYzNjA5ZWY4ZTJmNTllN2JjZDMxYWEyY2Q0ZTU5
-CgpDYW4geW91IGRlc2NyaWJlIHdoYXQgeW91IG1lYW4gYnkgbm90IHdvcmtpbmcgcHJvcGVybHk/
-IEFsc28gd2hhdCBpcyAKeW91ciBzZXR1cD8gRGlkIHlvdSBwaW4gdGhlIGRpZmZlcmVudCB2Q1BV
-cyBhcyByZXF1ZXN0ZWQgYnkgdGhlIApkb2N1bWVudGF0aW9uLgoKPiAKPiBJIGFtIG5vdCBzdXJl
-IHdoZXRoZXIgdGhpcyBpc3N1ZSBjYXVzZSBEb21VIGJpZy9MaXR0bGUgbm90IHdvcmsuCgpXZWxs
-LCBJIHdvdWxkIHJlY29tbWVuZCB0byBzcGVhayB3aXRoIE5YUCB3aGV0aGVyIHRoaXMgZXJyYXRh
-IGFmZmVjdHMgClRMQiBmbHVzaCBmb3IgSHlwZXJ2aXNvciBQYWdlLVRhYmxlIG9yIFN0YWdlLTIg
-UGFnZS1UYWJsZS4KCj4gU28gd29uZGVyIGhhcyB0aGlzIHBhdGNoc2V0IGJlZW4gdGVzdGVkIG9u
-IEJpZy9MaXR0bGUgSGFyZHdhcmU/CgpUaGlzIHNlcmllcyBvbmx5IGFkZHMgZmFjaWxpdHkgdG8g
-cmVwb3J0IHRoZSBjb3JyZWN0IE1JRFIgdG8gdGhlIGd1ZXN0LiAKSWYgeW91ciBwbGF0Zm9ybSBy
-ZXF1aXJlcyBtb3JlLCB0aGVuIGl0IHdvdWxkIGJlIG5lY2Vzc2FyeSBzZW5kIGEgcGF0Y2ggCmZv
-ciBYZW4uCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+--===============1905296030225024182==
+Content-Type: multipart/alternative; boundary="94eb2c06ad284cf4610566ddb1dd"
+
+--94eb2c06ad284cf4610566ddb1dd
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Mar 7, 2018 at 6:13 AM, Volo M. <vm@vovs.net> wrote:
+
+> Hi Devs,
+>
+> Could you please help me to identify right way to start using Virtio
+> drivers for Xen guests
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*HiThis reply might not be the answer that you=E2=80=99re looking for, but =
+it may
+be helpful for the next person arriving via searching with a similar Virtio
+driver query.If you can, using the native Xen device drivers in your
+Windows VM is preferable to using Virtio, and there=E2=80=99s a driver set
+available at: https://www.xenproject.org/downloads/windows-pv-drivers.html
+<https://www.xenproject.org/downloads/windows-pv-drivers.html>and more info
+at: https://www.xenproject.org/developers/teams/windows-pv-drivers.html
+<https://www.xenproject.org/developers/teams/windows-pv-drivers.html>Altern=
+atively,
+Citrix=E2=80=99s XenServer also has a set of Xen PV drivers for Windows
+VMs.Virtio's design requires that the domain where the Virtio device is
+emulated (where QEMU is running) has full privileges over the VM using the
+Virtio driver -- ie. is able to map any memory inside that VM. This
+requirement is contrary to the security model of a type-1 hypervisor such
+as Xen, and is not necessary: Xen's native device drivers are performant
+and don't need it, and they are compatible with deprivileged Driver
+Domains.Driver domains are important for many Xen deployments -- for
+example, OpenXT and Qubes OS use network driver
+domains:https://wiki.xenproject.org/wiki/Driver_Domain
+<https://wiki.xenproject.org/wiki/Driver_Domain>https://www.slideshare.net/=
+xen_com_mgr/the-openxt-project-in-2016-christopher-clark-bae-systems/15
+<https://www.slideshare.net/xen_com_mgr/the-openxt-project-in-2016-christop=
+her-clark-bae-systems/15>https://www.qubes-os.org/doc/networking/
+<https://www.qubes-os.org/doc/networking/>In addition to security
+architecture, there is a question of performance:the Virtio protocols are
+optimized for -- and can work well with -- hosted Type-2 hypervisors, but
+being implemented in QEMU they tend to become a performance bottleneck in
+Xen deployments where Dom0 is usually only one of many domains, and
+possibly not the largest.Significant development effort on Xen has gone
+into isolating and deprivileging the QEMU device emulator (stubdomains,
+dm_ops, dropping privileges, non-root QEMU, SELinux and XSM policy, ...) to
+reduce attack surface.Running VMs without QEMU at all whenever possible is
+a valued capability.Finally, although Virtio is often presented as a
+paravirtualized solution, it requires an emulation infrastructure that is
+not otherwise necessary - and so it is not compatible with PV and PVH
+guests on x86, or at all on ARM, because of this requirement.A reference to
+a related earlier discussion thread:https://lists.gt.net/xen/devel/318380
+<https://lists.gt.net/xen/devel/318380>Christopher*
+
+--94eb2c06ad284cf4610566ddb1dd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_extra"><br><div class=3D"gmail_quo=
+te">On Wed, Mar 7, 2018 at 6:13 AM, Volo M. <span dir=3D"ltr">&lt;<a href=
+=3D"mailto:vm@vovs.net" target=3D"_blank">vm@vovs.net</a>&gt;</span> wrote:=
+<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-lef=
+t:1px #ccc solid;padding-left:1ex"><div dir=3D"ltr">Hi Devs,<div><br></div>=
+<div>Could you please help me to identify right way to start using Virtio d=
+rivers for Xen guests</div></div></blockquote><div><br></div><div><b style=
+=3D"font-weight:normal" id=3D"gmail-docs-internal-guid-15f55720-037c-2026-2=
+b25-7c5840fa9357"><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;m=
+argin-bottom:0pt"><span style=3D"font-size:10pt;font-family:Arial;color:rgb=
+(0,0,0);background-color:transparent;font-weight:400;font-style:normal;font=
+-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pr=
+e-wrap">Hi</span></p><br><p dir=3D"ltr" style=3D"line-height:1.38;margin-to=
+p:0pt;margin-bottom:0pt"><span style=3D"font-size:10pt;font-family:Arial;co=
+lor:rgb(0,0,0);background-color:transparent;font-weight:400;font-style:norm=
+al;font-variant:normal;text-decoration:none;vertical-align:baseline;white-s=
+pace:pre-wrap">This reply might not be the answer that you=E2=80=99re looki=
+ng for, but it may be helpful for the next person arriving via searching wi=
+th a similar Virtio driver query.</span></p><p dir=3D"ltr" style=3D"line-he=
+ight:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:10pt;f=
+ont-family:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:=
+400;font-style:normal;font-variant:normal;text-decoration:none;vertical-ali=
+gn:baseline;white-space:pre-wrap">If you can, using the native Xen device d=
+rivers in your Windows VM is preferable to using Virtio, and there=E2=80=99=
+s a driver set available at: <a href=3D"https://www.xenproject.org/download=
+s/windows-pv-drivers.html">https://www.xenproject.org/downloads/windows-pv-=
+drivers.html</a></span></p><p dir=3D"ltr" style=3D"line-height:1.38;margin-=
+top:0pt;margin-bottom:0pt"><span style=3D"font-size:10pt;font-family:Arial;=
+color:rgb(0,0,0);background-color:transparent;font-weight:400;font-style:no=
+rmal;font-variant:normal;text-decoration:none;vertical-align:baseline;white=
+-space:pre-wrap">and more info at: <a href=3D"https://www.xenproject.org/de=
+velopers/teams/windows-pv-drivers.html">https://www.xenproject.org/develope=
+rs/teams/windows-pv-drivers.html</a></span></p><p dir=3D"ltr" style=3D"line=
+-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:10p=
+t;font-family:Arial;color:rgb(0,0,0);background-color:transparent;font-weig=
+ht:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-=
+align:baseline;white-space:pre-wrap">Alternatively, Citrix=E2=80=99s XenSer=
+ver also has a set of Xen PV drivers for Windows VMs.</span></p><br><p dir=
+=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span =
+style=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0);background-color=
+:transparent;font-weight:400;font-style:normal;font-variant:normal;text-dec=
+oration:none;vertical-align:baseline;white-space:pre-wrap">Virtio&#39;s des=
+ign requires that the domain where the Virtio device is emulated (where QEM=
+U is running) has full privileges over the VM using the Virtio driver -- ie=
+. is able to map any memory inside that VM. This requirement is contrary to=
+ the security model of a type-1 hypervisor such as Xen, and is not necessar=
+y: Xen&#39;s native device drivers are performant and don&#39;t need it, an=
+d they are compatible with deprivileged Driver Domains.</span><span style=
+=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0);background-color:tran=
+sparent;font-weight:400;font-style:normal;font-variant:normal;text-decorati=
+on:none;vertical-align:baseline;white-space:pre-wrap"><br class=3D"gmail-ki=
+x-line-break"></span><span style=3D"font-size:10pt;font-family:Arial;color:=
+rgb(0,0,0);background-color:transparent;font-weight:400;font-style:normal;f=
+ont-variant:normal;text-decoration:none;vertical-align:baseline;white-space=
+:pre-wrap"><br class=3D"gmail-kix-line-break"></span><span style=3D"font-si=
+ze:10pt;font-family:Arial;color:rgb(0,0,0);background-color:transparent;fon=
+t-weight:400;font-style:normal;font-variant:normal;text-decoration:none;ver=
+tical-align:baseline;white-space:pre-wrap">Driver domains are important for=
+ many Xen deployments -- for example, OpenXT and Qubes OS use network drive=
+r domains:</span><span style=3D"font-size:10pt;font-family:Arial;color:rgb(=
+0,0,0);background-color:transparent;font-weight:400;font-style:normal;font-=
+variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre=
+-wrap"><br class=3D"gmail-kix-line-break"></span><span style=3D"font-size:1=
+0pt;font-family:Arial;color:rgb(0,0,0);background-color:transparent;font-we=
+ight:400;font-style:normal;font-variant:normal;text-decoration:none;vertica=
+l-align:baseline;white-space:pre-wrap"><a href=3D"https://wiki.xenproject.o=
+rg/wiki/Driver_Domain">https://wiki.xenproject.org/wiki/Driver_Domain</a></=
+span><span style=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0);backg=
+round-color:transparent;font-weight:400;font-style:normal;font-variant:norm=
+al;text-decoration:none;vertical-align:baseline;white-space:pre-wrap"><br c=
+lass=3D"gmail-kix-line-break"></span><span style=3D"font-size:10pt;font-fam=
+ily:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:400;fon=
+t-style:normal;font-variant:normal;text-decoration:none;vertical-align:base=
+line;white-space:pre-wrap"><a href=3D"https://www.slideshare.net/xen_com_mg=
+r/the-openxt-project-in-2016-christopher-clark-bae-systems/15">https://www.=
+slideshare.net/xen_com_mgr/the-openxt-project-in-2016-christopher-clark-bae=
+-systems/15</a></span><span style=3D"font-size:10pt;font-family:Arial;color=
+:rgb(0,0,0);background-color:transparent;font-weight:400;font-style:normal;=
+font-variant:normal;text-decoration:none;vertical-align:baseline;white-spac=
+e:pre-wrap"><br class=3D"gmail-kix-line-break"></span><span style=3D"font-s=
+ize:10pt;font-family:Arial;color:rgb(0,0,0);background-color:transparent;fo=
+nt-weight:400;font-style:normal;font-variant:normal;text-decoration:none;ve=
+rtical-align:baseline;white-space:pre-wrap"><a href=3D"https://www.qubes-os=
+.org/doc/networking/">https://www.qubes-os.org/doc/networking/</a></span><s=
+pan style=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0);background-c=
+olor:transparent;font-weight:400;font-style:normal;font-variant:normal;text=
+-decoration:none;vertical-align:baseline;white-space:pre-wrap"><br class=3D=
+"gmail-kix-line-break"></span><span style=3D"font-size:10pt;font-family:Ari=
+al;color:rgb(0,0,0);background-color:transparent;font-weight:400;font-style=
+:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;wh=
+ite-space:pre-wrap"><br class=3D"gmail-kix-line-break"></span><span style=
+=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0);background-color:tran=
+sparent;font-weight:400;font-style:normal;font-variant:normal;text-decorati=
+on:none;vertical-align:baseline;white-space:pre-wrap">In addition to securi=
+ty architecture, there is a question of performance:</span><span style=3D"f=
+ont-size:10pt;font-family:Arial;color:rgb(0,0,0);background-color:transpare=
+nt;font-weight:400;font-style:normal;font-variant:normal;text-decoration:no=
+ne;vertical-align:baseline;white-space:pre-wrap"><br class=3D"gmail-kix-lin=
+e-break"></span><span style=3D"font-size:10pt;font-family:Arial;color:rgb(0=
+,0,0);background-color:transparent;font-weight:400;font-style:normal;font-v=
+ariant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-=
+wrap">the Virtio protocols are optimized for -- and can work well with -- h=
+osted Type-2 hypervisors, but being implemented in QEMU they tend to become=
+ a performance bottleneck in Xen deployments where Dom0 is usually only one=
+ of many domains, and possibly not the largest.</span><span style=3D"font-s=
+ize:10pt;font-family:Arial;color:rgb(0,0,0);background-color:transparent;fo=
+nt-weight:400;font-style:normal;font-variant:normal;text-decoration:none;ve=
+rtical-align:baseline;white-space:pre-wrap"><br class=3D"gmail-kix-line-bre=
+ak"></span><span style=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0)=
+;background-color:transparent;font-weight:400;font-style:normal;font-varian=
+t:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap"=
+><br class=3D"gmail-kix-line-break"></span><span style=3D"font-size:10pt;fo=
+nt-family:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:4=
+00;font-style:normal;font-variant:normal;text-decoration:none;vertical-alig=
+n:baseline;white-space:pre-wrap">Significant development effort on Xen has =
+gone into isolating and deprivileging the QEMU device emulator (stubdomains=
+, dm_ops, dropping privileges, non-root QEMU, SELinux and XSM policy, ...) =
+to reduce attack surface.</span><span style=3D"font-size:10pt;font-family:A=
+rial;color:rgb(0,0,0);background-color:transparent;font-weight:400;font-sty=
+le:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;=
+white-space:pre-wrap"><br class=3D"gmail-kix-line-break"></span><span style=
+=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0);background-color:tran=
+sparent;font-weight:400;font-style:normal;font-variant:normal;text-decorati=
+on:none;vertical-align:baseline;white-space:pre-wrap">Running VMs without Q=
+EMU at all whenever possible is a valued capability.</span><span style=3D"f=
+ont-size:10pt;font-family:Arial;color:rgb(0,0,0);background-color:transpare=
+nt;font-weight:400;font-style:normal;font-variant:normal;text-decoration:no=
+ne;vertical-align:baseline;white-space:pre-wrap"><br class=3D"gmail-kix-lin=
+e-break"></span><span style=3D"font-size:10pt;font-family:Arial;color:rgb(0=
+,0,0);background-color:transparent;font-weight:400;font-style:normal;font-v=
+ariant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-=
+wrap"><br class=3D"gmail-kix-line-break"></span><span style=3D"font-size:10=
+pt;font-family:Arial;color:rgb(0,0,0);background-color:transparent;font-wei=
+ght:400;font-style:normal;font-variant:normal;text-decoration:none;vertical=
+-align:baseline;white-space:pre-wrap">Finally, although Virtio is often pre=
+sented as a paravirtualized solution, it requires an emulation infrastructu=
+re that is not otherwise necessary - and so it is not compatible with PV an=
+d PVH guests on x86, or at all on ARM, because of this requirement.</span><=
+/p><br><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-botto=
+m:0pt"><span style=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0);bac=
+kground-color:transparent;font-weight:400;font-style:normal;font-variant:no=
+rmal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap">A r=
+eference to a related earlier discussion thread:</span></p><p dir=3D"ltr" s=
+tyle=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"f=
+ont-size:10pt;font-family:Arial;color:rgb(0,0,0);background-color:transpare=
+nt;font-weight:400;font-style:normal;font-variant:normal;text-decoration:no=
+ne;vertical-align:baseline;white-space:pre-wrap"><a href=3D"https://lists.g=
+t.net/xen/devel/318380">https://lists.gt.net/xen/devel/318380</a></span></p=
+><br><span style=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0);backg=
+round-color:transparent;font-weight:400;font-style:normal;font-variant:norm=
+al;text-decoration:none;vertical-align:baseline;white-space:pre-wrap">Chris=
+topher</span><span style=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,=
+0);background-color:transparent;font-weight:400;font-style:normal;font-vari=
+ant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wra=
+p"><br class=3D"gmail-kix-line-break"></span></b><br></div><div><br></div><=
+/div></div></div>
+
+--94eb2c06ad284cf4610566ddb1dd--
+
+
+--===============1905296030225024182==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1905296030225024182==--
