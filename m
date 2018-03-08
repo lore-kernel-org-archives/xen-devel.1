@@ -1,13 +1,12 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2 1/6] x86/xpti: avoid copying L4 page
- table contents when possible
-Date: Thu, 8 Mar 2018 14:03:35 +0100
-Message-ID: <958f27e2-034c-868d-0516-ab2e5ad9750c@suse.com>
+Subject: Re: [PATCH v2 3/6] xen/x86: support per-domain flag for
+	xpti
+Date: Thu, 8 Mar 2018 14:13:24 +0100
+Message-ID: <b9178757-8e4a-4902-3b2e-0cb455e1a2ff@suse.com>
 References: <20180302081403.16953-1-jgross@suse.com>
- <20180302081403.16953-2-jgross@suse.com>
- <5A9D81DC02000078001AEB68@prv-mh.provo.novell.com>
- <3430d1f9-cb70-25fc-26a1-8ec1a5cc0f38@suse.com>
- <5AA13EEA02000078001AFCAF@suse.com>
+ <20180302081403.16953-4-jgross@suse.com> <5AA11BDE02000078001AFB92@suse.com>
+ <a0e3b93a-0111-bfb0-fb9e-ff736769fe7e@suse.com>
+ <5AA13F7D02000078001AFCB3@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -15,9 +14,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
  (envelope-from <srs0=4t3w=f6=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1etvCz-00065H-Ls
- for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 13:03:45 +0000
-In-Reply-To: <5AA13EEA02000078001AFCAF@suse.com>
+ id 1etvMS-0006uD-QW
+ for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 13:13:32 +0000
+In-Reply-To: <5AA13F7D02000078001AFCB3@suse.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -31,38 +30,25 @@ To: Jan Beulich <JBeulich@suse.com>
 Cc: andrew.cooper3@citrix.com, wei.liu2@citrix.com, xen-devel@lists.xenproject.org, Dario Faggioli <dfaggioli@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMDMvMTggMTM6NDcsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDA4LjAzLjE4IGF0
-IDEyOjU5LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4gT24gMDUvMDMvMTggMTc6NDMsIEph
-biBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4gT24gMDIuMDMuMTggYXQgMDk6MTMsIDxqZ3Jvc3NAc3Vz
-ZS5jb20+IHdyb3RlOgo+Pj4+IEBAIC0zNzA0LDE4ICszNzA2LDIyIEBAIGxvbmcgZG9fbW11X3Vw
-ZGF0ZSgKPj4+PiAgICAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7Cj4+Pj4gICAgICAgICAg
-ICAgICAgICAgICAgcmMgPSBtb2RfbDRfZW50cnkodmEsIGw0ZV9mcm9tX2ludHB0ZShyZXEudmFs
-KSwgbWZuLAo+Pj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNtZCA9
-PSBNTVVfUFRfVVBEQVRFX1BSRVNFUlZFX0FELCB2KTsKPj4+PiAtICAgICAgICAgICAgICAgICAg
-ICAvKgo+Pj4+IC0gICAgICAgICAgICAgICAgICAgICAqIE5vIG5lZWQgdG8gc3luYyBpZiBhbGwg
-dXNlcyBvZiB0aGUgcGFnZSBjYW4gYmUgYWNjb3VudGVkCj4+Pj4gLSAgICAgICAgICAgICAgICAg
-ICAgICogdG8gdGhlIHBhZ2UgbG9jayB3ZSBob2xkLCBpdHMgcGlubmVkIHN0YXR1cywgYW5kIHVz
-ZXMgb24KPj4+PiAtICAgICAgICAgICAgICAgICAgICAgKiB0aGlzICh2KUNQVS4KPj4+PiAtICAg
-ICAgICAgICAgICAgICAgICAgKi8KPj4+PiAtICAgICAgICAgICAgICAgICAgICBpZiAoICFyYyAm
-JiAhY3B1X2hhc19ub194cHRpICYmCj4+Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAoKHBh
-Z2UtPnUuaW51c2UudHlwZV9pbmZvICYgUEdUX2NvdW50X21hc2spID4KPj4+PiAtICAgICAgICAg
-ICAgICAgICAgICAgICAgICAoMSArICEhKHBhZ2UtPnUuaW51c2UudHlwZV9pbmZvICYgUEdUX3Bp
-bm5lZCkgKwo+Pj4+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAocGFnZXRhYmxlX2dldF9w
-Zm4oY3Vyci0+YXJjaC5ndWVzdF90YWJsZSkgPT0gbWZuKSAKPj4+PiArCj4+Pj4gLSAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIChwYWdldGFibGVfZ2V0X3BmbihjdXJyLT5hcmNoLmd1ZXN0X3Rh
-YmxlX3VzZXIpID09Cj4+Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICBtZm4pKSkgKQo+
-Pgo+PiBJcyBpdCByZWFsbHkgcG9zc2libGUgdGhpcyBjb2RlIGlzIHJ1bm5pbmcgd2l0aCB0aGUg
-dXNlciBwYWdlIHRhYmxlCj4+IGJlaW5nIGFjdGl2ZSBvbiB0aGUgY3VycmVudCBjcHU/IEkgdGhp
-bmsgdGhpcyB0ZXN0IGNhbiBiZSBkcm9wcGVkLgo+IAo+IEknbSBub3Qgc3VyZSBJIHVuZGVyc3Rh
-bmQ6IFRoZSBjaGVjayBhYm92ZSBpc24ndCBmb3Igd2hhdCBpcwo+IGFjdGl2ZSBvbiBhIENQVSwg
-YnV0IGZvciB3aGF0IHJlZmVyZW5jZXMgYXJlIGJlaW5nIGhlbGQuCj4gX0luc3RhbGxpbmdfIGEg
-cm9vdCBwYWdlIHRhYmxlIGludG8gLT5hcmNoLmd1ZXN0X3RhYmxleyxfdXNlcn0KPiBpcyB3aGVu
-IGEgcmVmZXJlbmNlIGlzIGJlaW5nIG9idGFpbmVkLCBub3QgX2xvYWRpbmdfIHRoZSB0YWJsZQo+
-IGludG8gQ1IzLiAoSW4gdGhlb3J5IHRoZSBhYm92ZSBjb3VsZCBiZSBleHRlbmRlZCB0byBhbHNv
-Cj4gY2hlY2sgdkNQVS1zIG90aGVyIHRoYW4gY3VycmVudCwgYnV0IG9uZSB3b3VsZCBuZWVkIHRv
-IGRlYWwKPiB3aXRoIHJhY2VzOyBvYnZpb3VzbHkgcGF1c2luZyB0aGUgb3RoZXIgdkNQVS1zIG9m
-IHRoZSBkb21haW4KPiB3b3VsZG4ndCBiZSBhIGdvb2QgaWRlYSwgYnV0IHRoYXQgd291bGQgYmUg
-b25lIHBvc3NpYmxlIHdheS4pCgpBYWgsIHNvcnJ5LiBOb3cgSSB1bmRlcnN0YW5kLgoKVGhhbmtz
-LAoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDgvMDMvMTggMTM6NDksIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDA4LjAzLjE4IGF0
+IDEyOjMwLCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4gT24gMDgvMDMvMTggMTE6MTcsIEph
+biBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4gT24gMDIuMDMuMTggYXQgMDk6MTQsIDxqZ3Jvc3NAc3Vz
+ZS5jb20+IHdyb3RlOgo+Pj4+ICtzdGF0aWMgaW50IHBhcnNlX3hwdGkoY29uc3QgY2hhciAqcykK
+Pj4+PiArewo+Pj4+ICsgICAgaW50IHJjID0gMDsKPj4+PiArCj4+Pj4gKyAgICBzd2l0Y2ggKCBw
+YXJzZV9ib29sKHMsIE5VTEwpICkKPj4+PiArICAgIHsKPj4+PiArICAgIGNhc2UgMDoKPj4+PiAr
+ICAgICAgICBvcHRfeHB0aSA9IFhQVElfT0ZGOwo+Pj4+ICsgICAgICAgIGJyZWFrOwo+Pj4+ICsg
+ICAgY2FzZSAxOgo+Pj4+ICsgICAgICAgIG9wdF94cHRpID0gWFBUSV9PTjsKPj4+PiArICAgICAg
+ICBicmVhazsKPj4+PiArICAgIGRlZmF1bHQ6Cj4+Pj4gKyAgICAgICAgaWYgKCAhc3RyY21wKHMs
+ICJkZWZhdWx0IikgKQo+Pj4KPj4+IFRoaXMgd2FudHMgdG8gYWxzbyBiZSBtZW50aW9uZWQgaW4g
+dGhlIGNvbW1hbmQgbGluZSBkb2MuCj4+Cj4+IFV1aCwgdGhpcyB3YXMgYSBjb3B5LWFuZC1wYXN0
+ZSByZXN1bHQgZnJvbSBteSBhbHRlcm5hdGl2ZSBYUFRJIGFwcHJvYWNoLgo+PiBJJ2xsIGp1c3Qg
+ZHJvcCB0aGF0IHZhbHVlLgo+IAo+IEknbSBub3Qgc3VyZSB0aGF0J3MgdGhlIGJlc3Qgcm91dGUg
+KGFuZCBJIGRpZCBpbnRlbnRpb25hbGx5IG5vdCBhc2sgZm9yCj4geW91IGRvaW5nIHNvKTogSW4g
+Y2FzZXMgd2hlcmUgeW91IGNhbid0IGVkaXQgdGhlIHByZS1idWlsdCBjb21tYW5kCj4gbGluZSBv
+cHRpb25zIChsaWtlIGUuZy4gdGhvc2UgcmVhZCBieSB4ZW4uZWZpIGZyb20gdGhlIGNvbmZpZyBm
+aWxlKSwgaXQKPiBpcyBxdWl0ZSB1c2VmdWwgdG8gYmUgYWJsZSB0byBvdmVycmlkZSB3aGF0IG1h
+eSBiZSB0aGVyZSBiYWNrIHRvIHRoZQo+IGRlZmF1bHQuCgpPa2F5LCB0aGVuIEknbGwgZG9jdW1l
+bnQgaXQuCgoKSnVlcmdlbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
