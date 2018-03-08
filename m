@@ -1,17 +1,19 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: Re: [PATCH v6.1 00/11] xen: xen-domid-restrict
-	improvements
-Date: Thu, 8 Mar 2018 19:02:55 +0000
-Message-ID: <1520535787-6223-1-git-send-email-ian.jackson@eu.citrix.com>
+Subject: [PATCH 01/12] checkpatch: Add xendevicemodel_handle to
+	the list of types
+Date: Thu, 8 Mar 2018 19:02:56 +0000
+Message-ID: <1520535787-6223-2-git-send-email-ian.jackson@eu.citrix.com>
+References: <1520535787-6223-1-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=awgw=f6=citrix.com=prvs=5980b9d75=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1eu0pN-0005o5-Ab
- for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 19:03:45 +0000
+ id 1eu0pW-0005pJ-Ct
+ for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 19:03:54 +0000
+In-Reply-To: <1520535787-6223-1-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,39 +23,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: qemu-devel@nongnu.org
-Cc: Anthony PERARD <anthony.perard@citrix.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, "Daniel P. Berrange" <berrange@redhat.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, Paolo Bonzini <pbonzini@redhat.com>, Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Eric Blake <eblake@redhat.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBqdXN0LWFtZW5kZWQgc2VyaWVzIHByb3ZpZGVzIG5lY2Vzc2FyeSBzdXBwb3J0IGZvciBy
-dW5uaW5nIHFlbXUKYXMgYSBYZW4gZGV2aWNlIG1vZGVsIHdpdGhvdXQgcG93ZXIgZXF1aXZhbGVu
-dCB0byByb290LiAgSW4KcGFydGljdWxhciwgaXQgbWFrZXMgLXhlbi1kb21pZC1yZXN0cmljdCBl
-ZmZlY3RpdmUuCgpDb21wYXJlZCB0byB2NiwgaXQgZml4ZXMgc29tZSBtaW5vciBjaGVja3BhdGNo
-LCBzdHlsZSBhbmQgcG9ydGFiaWxpdHkKaXNzdWVzLiAgU29ycnkgZm9yIHRoZSBlYXJsaWVyIHRy
-b3VibGVkIHN1Ym1pc3Npb24uCgpDb21wYXJlZCB0byB2NSwgSSBoYXZlIHRha2VuIGludG8gYWNj
-b3VudCBhbGwgdGhlIGNvbW1lbnRzIGZyb20gdjUKKGZyb20gT2N0b2JlciEpIGFuZCB0aGVyZSBh
-cmUgYWxzbyB0d28gbmV3IHBhdGNoZXMgZnJvbSBSb3NzCkxhZ2Vyd2FsbC4KCiArLiAgICBbUEFU
-Q0ggMDEvMTJdIGNoZWNrcGF0Y2g6IEFkZCB4ZW5kZXZpY2Vtb2RlbF9oYW5kbGUgdG8gdGhlIGxp
-c3Qgb2YgICAgIAogbSAgIGEgW1BBVENIIDAyLzEyXSB4ZW46IGxpbmsgYWdhaW5zdCB4ZW50b29s
-Y29yZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICBhIFtQQVRDSCAwMy8xMl0geGVu
-OiByZXN0cmljdDogdXNlIHhlbnRvb2xjb3JlX3Jlc3RyaWN0X2FsbCAgICAgICAgICAgICAgCiAg
-ICByICBbUEFUQ0ggMDQvMTJdIHhlbjogZGVmZXIgY2FsbCB0byB4ZW5fcmVzdHJpY3QgdW50aWwg
-anVzdCBiZWZvcmUgICAgICAgIAogICAgIGEgW1BBVENIIDA1LzEyXSB4ZW46IGRlc3Ryb3lfaHZt
-X2RvbWFpbjogTW92ZSByZWFzb24gaW50byBhIHZhcmlhYmxlICAgICAKICAgIHJhIFtQQVRDSCAw
-Ni8xMl0geGVuOiBtb3ZlIHhjX2ludGVyZmFjZSBjb21wYXRpYmlsaXR5IGZhbGxiYWNrIGZ1cnRo
-ZXIgICAgCiAqLiByICBbUEFUQ0ggMDcvMTJdIHhlbjogZGVzdHJveV9odm1fZG9tYWluOiBUcnkg
-eGVuZGV2aWNlbW9kZWxfc2h1dGRvd24gICAgIAogKi4gciAgW1BBVENIIDA4LzEyXSBvcy1wb3Np
-eDogUHJvdmlkZSBuZXcgLXJ1bmFzIDx1aWQ+OjxnaWQ+IGZhY2lsaXR5ICAgICAgICAKIG0gICAg
-IFtQQVRDSCAwOS8xMl0gY29uZmlndXJlOiBkb19jb21waWxlcjogRHVtcCBzb21lIGV4dHJhIGlu
-Zm8gdW5kZXIgYmFzaCAgCiArLiAgICBbUEFUQ0ggMTAvMTJdIHhlbjogVXNlIG5ld2x5IGFkZGVk
-IGRtb3BzIGZvciBtYXBwaW5nIFZHQSBtZW1vcnkgICAgICAgIAogKyAgICAgW1BBVENIIDExLzEy
-XSB4ZW46IEV4cGVjdCB4ZW5zdG9yZSB3cml0ZSB0byBmYWlsIHdoZW4gcmVzdHJpY3RlZCAgICAg
-ICAKICsgICAgIFtQQVRDSCAxMi8xMl0gc2NyaXB0cy9nZXRfbWFpbnRhaW5lci5wbDogUHJpbnQg
-cHJvcGVyIGVycm9yIG1lc3NhZ2UgICAgCgogbSA9IGNvbW1pdCBtZXNzYWdlIChvbmx5KSBjaGFu
-Z2VkIGluIHY2LjEgb2YgdGhlIHNlcmllcyAoY29tcGFyZWQgdG8gdjUpCiAqID0gcGF0Y2ggY2hh
-bmdlZCBpbiB2Ni4xIG9mIHRoZSBzZXJpZXMgKGNvbXBhcmVkIHRvIHY1KQogKyA9IG5ldyBwYXRj
-aAogLiA9IGNoYW5nZXMgbWFkZSBpbiB2Ni4xIChjb21wYXJlZCB0byB2NikKIHIgPSByZXZpZXdl
-ZCAoYnkgc29tZW9uZSBvdGhlciB0aGFuIG1lKQogYSA9IGFja2VkCgpUaGFua3MgZm9yIHlvdXIg
-YXR0ZW50aW9uLgoKUmVnYXJkcywKSWFuLgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+VGhpcyBhdm9pZHMgY2hlY2twYXRjaCBtaXNwYXJzaW5nIChhcyBzdGF0ZW1lbnRzKSBsb25nIGZ1
+bmN0aW9uCmRlZmluaXRpb25zIG9yIGRlY2xhcmF0aW9ucywgd2hpY2ggc29tZXRpbWVzIHN0YXJ0
+IHdpdGggY29uc3RydWN0cwpsaWtlIHRoaXM6CgogIHN0YXRpYyBpbmxpbmUgaW50IHhlbmRldmlj
+ZW1vZGVsX3JlbG9jYXRlX21lbW9yeSgKICAgICAgeGVuZGV2aWNlbW9kZWxfaGFuZGxlICpkbW9k
+LCBkb21pZF90IGRvbWlkLCAuLi4KCkNDOiBFcmljIEJsYWtlIDxlYmxha2VAcmVkaGF0LmNvbT4K
+Q0M6IFBhb2xvIEJvbnppbmkgPHBib256aW5pQHJlZGhhdC5jb20+CkNDOiBEYW5pZWwgUC4gQmVy
+cmFuZ2UgPGJlcnJhbmdlQHJlZGhhdC5jb20+ClNpZ25lZC1vZmYtYnk6IElhbiBKYWNrc29uIDxJ
+YW4uSmFja3NvbkBldS5jaXRyaXguY29tPgotLS0KdjYuMTogTmV3IHBhdGNoCi0tLQogc2NyaXB0
+cy9jaGVja3BhdGNoLnBsIHwgMSArCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykKCmRp
+ZmYgLS1naXQgYS9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgYi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwK
+aW5kZXggZDFmZTc5Yi4uM2U0ODhmNyAxMDA3NTUKLS0tIGEvc2NyaXB0cy9jaGVja3BhdGNoLnBs
+CisrKyBiL3NjcmlwdHMvY2hlY2twYXRjaC5wbApAQCAtMjY2LDYgKzI2Niw3IEBAIG91ciBAdHlw
+ZUxpc3QgPSAoCiAJcXJ7dGFyZ2V0Xyg/OnUpP2xvbmd9LAogCXFye2h3YWRkcn0sCiAJcXJ7eG1s
+JHtJZGVudH19LAorCXFye3hlbmRldmljZW1vZGVsX2hhbmRsZX0sCiApOwogCiAjIFRoaXMgY2Fu
+IGJlIG1vZGlmaWVkIGJ5IHN1YiBwb3NzaWJsZS4gIFNpbmNlIGl0IGNhbiBiZSBlbXB0eSwgYmUg
+Y2FyZWZ1bAotLSAKMi4xLjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
