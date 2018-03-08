@@ -1,60 +1,40 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v3 5/7] x86/alt: Support for automatic
- padding calculations
-Date: Thu, 8 Mar 2018 16:23:05 +0000
-Message-ID: <d2c2ab42-5286-bce1-073f-eca8d648c24c@citrix.com>
-References: <1520437896-29359-1-git-send-email-andrew.cooper3@citrix.com>
- <1520437896-29359-6-git-send-email-andrew.cooper3@citrix.com>
- <5AA167F902000078001AFE2C@prv-mh.provo.novell.com>
+From: Jens Axboe <axboe@kernel.dk>
+Subject: Re: [GIT PULL] (xen) stable/for-jens-4.15
+Date: Thu, 8 Mar 2018 09:25:51 -0700
+Message-ID: <f386ba9b-d331-ee8d-2b2f-27ff0074ed7d@kernel.dk>
+References: <20180308161914.GN12029@char.us.oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5AA167F902000078001AFE2C@prv-mh.provo.novell.com>
-Content-Language: en-GB
-List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
-List-Post: <mailto:xen-devel@lists.xenproject.org>
-List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
-List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Errors-To: xen-devel-bounces@lists.xenproject.org
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Return-path: <linux-kernel-owner@vger.kernel.org>
+In-Reply-To: <20180308161914.GN12029@char.us.oracle.com>
+Content-Language: en-US
+Sender: linux-kernel-owner@vger.kernel.org
+To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xensource.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMDMvMTggMTU6NDIsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDA3LjAzLjE4IGF0
-IDE2OjUxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IEBAIC0xNzUsMTgg
-KzE3NSw0NyBAQCB2b2lkIGluaXRfb3JfbGl2ZXBhdGNoIGFwcGx5X2FsdGVybmF0aXZlcyhjb25z
-dCBzdHJ1Y3QgYWx0X2luc3RyICpzdGFydCwKPj4gICAgICAgKiBTbyBiZSBjYXJlZnVsIGlmIHlv
-dSB3YW50IHRvIGNoYW5nZSB0aGUgc2NhbiBvcmRlciB0byBhbnkgb3RoZXIKPj4gICAgICAgKiBv
-cmRlci4KPj4gICAgICAgKi8KPj4gLSAgICBmb3IgKCBhID0gc3RhcnQ7IGEgPCBlbmQ7IGErKyAp
-Cj4+ICsgICAgZm9yICggYSA9IGJhc2UgPSBzdGFydDsgYSA8IGVuZDsgYSsrICkKPj4gICAgICB7
-Cj4+ICAgICAgICAgIHVpbnQ4X3QgKm9yaWcgPSBBTFRfT1JJR19QVFIoYSk7Cj4+ICAgICAgICAg
-IHVpbnQ4X3QgKnJlcGwgPSBBTFRfUkVQTF9QVFIoYSk7Cj4+ICAgICAgICAgIHVpbnQ4X3QgYnVm
-W01BWF9QQVRDSF9MRU5dOwo+PiArICAgICAgICB1bnNpZ25lZCBpbnQgdG90YWxfbGVuID0gYS0+
-b3JpZ19sZW4gKyBhLT5wYWRfbGVuOwo+PiAgCj4+IC0gICAgICAgIEJVR19PTihhLT5yZXBsX2xl
-biA+IGEtPm9yaWdfbGVuKTsKPj4gLSAgICAgICAgQlVHX09OKGEtPm9yaWdfbGVuID4gc2l6ZW9m
-KGJ1ZikpOwo+PiArICAgICAgICBCVUdfT04oYS0+cmVwbF9sZW4gPiB0b3RhbF9sZW4pOwo+PiAr
-ICAgICAgICBCVUdfT04odG90YWxfbGVuID4gc2l6ZW9mKGJ1ZikpOwo+PiAgICAgICAgICBCVUdf
-T04oYS0+Y3B1aWQgPj0gTkNBUElOVFMgKiAzMik7Cj4+ICAKPj4gKyAgICAgICAgLyoKPj4gKyAg
-ICAgICAgICogRGV0ZWN0IHNlcXVlbmNlcyBvZiBhbHRfaW5zdHIncyBwYXRjaGluZyB0aGUgc2Ft
-ZSBvcmlnaW4gc2l0ZSwgYW5kCj4+ICsgICAgICAgICAqIGtlZXAgYmFzZSBwb2ludGluZyBhdCB0
-aGUgZmlyc3QgYWx0X2luc3RyIGVudHJ5LiAgVGhpcyBpcyBzbyB3ZSBjYW4KPj4gKyAgICAgICAg
-ICogcmVmZXIgdG8gYSBzaW5nbGUgLT5wcml2IGZpZWxkIGZvciBwYXRjaGluZyBkZWNpc2lvbnMu
-Cj4+ICsgICAgICAgICAqCj4+ICsgICAgICAgICAqIC0+cHJpdiBiZWluZyBub256ZXJvIG1lYW5z
-IHRoYXQgdGhlIG9yaWdpbiBzaXRlIGhhcyBhbHJlYWR5IGJlZW4KPj4gKyAgICAgICAgICogbW9k
-aWZpZWQsIGFuZCB3ZSBzaG91bGRuJ3QgdHJ5IHRvIG9wdGltaXNlIHRoZSBub3BzIGFnYWluLgo+
-PiArICAgICAgICAgKi8KPj4gKyAgICAgICAgaWYgKCBBTFRfT1JJR19QVFIoYmFzZSkgIT0gb3Jp
-ZyApCj4+ICsgICAgICAgICAgICBiYXNlID0gYTsKPiBJIGRvbid0IHVuZGVyc3RhbmQgd2h5IHlv
-dSBuZWVkIHRoZSBuZXcgInByaXYiIGZpZWxkIC0gaGF2ZSBhCj4gYm9vbGVhbiBsb2NhbCB2YXJp
-YWJsZSB3aGljaCB5b3UgcmVzZXQgaW5zdGVhZCBvZiBiYXNlIGhlcmUsIGFuZAo+IHdoaWNoIHlv
-dSBjaGVjay9zZXQgaW5zdGVhZCBvZiBiYXNlLT5wcml2IGJlbG93LgoKVGhhdCBjYW4gYnJlYWsg
-aW4gYSAiY29ycnVwdGVkIGluc3RydWN0aW9uIHN0cmVhbSIga2luZCBvZiB3YXkgaWYgd2UKcGVy
-Zm9ybSB0d28gcGFzc2VzIG92ZXIgdGhlIHNhbWUgc2V0IG9mIGFsdF9pbnN0cidzLCBlLmcuIGFm
-dGVyIGxvYWRpbmcKbWljcm9jb2RlLCBmaW5kaW5nIHNvbWUgbmV3IGZlYXR1cmVzLCBhbmQgcmVy
-dW5uaW5nIGFsdGVybmF0aXZlcy4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+On 3/8/18 9:19 AM, Konrad Rzeszutek Wilk wrote:
+> Hi Jens,
+> 
+> Please git pull the following branch for your for-linus branch:
+> 
+> git://git.kernel.org/pub/scm/linux/kernel/git/konrad/xen.git stable/for-jens-4.15
+> 
+> It has one simple fix for the multi-queue support not showing up after a block
+> device was detached/re-attached.
+> 
+> The patch was originally posted in Dec 22nd but with the Spectre/Meltdown
+> circus I forgot about it until now.
+> 
+> Thank you!
+>  
+> drivers/block/xen-blkfront.c | 17 ++++++++---------
+>  1 file changed, 8 insertions(+), 9 deletions(-)
+> 
+> Bhavesh Davda (1):
+>       xen-blkfront: move negotiate_mq to cover all cases of new VBDs
+
+Pulled, thanks.
+
+-- 
+Jens Axboe
