@@ -1,14 +1,15 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] common/sched: Fix ARM build following c/s
-	340edc3902
-Date: Thu, 08 Mar 2018 10:37:39 +0100
-Message-ID: <1520501859.7628.0.camel@suse.com>
-References: <1520451675-22608-1-git-send-email-andrew.cooper3@citrix.com>
- <alpine.DEB.2.10.1803071159580.7316@sstabellini-ThinkPad-X260>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v4 0/7] unsafe big.LITTLE support
+Date: Thu, 8 Mar 2018 11:03:57 +0000
+Message-ID: <edbc8066-397f-9aea-264b-3e27d052b56e@arm.com>
+References: <alpine.DEB.2.10.1803021103130.4239@sstabellini-ThinkPad-X260>
+ <20180308061458.GA25007@shlinux2>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============9186913595045623726=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1803071159580.7316@sstabellini-ThinkPad-X260>
+In-Reply-To: <20180308061458.GA25007@shlinux2>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,82 +18,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Peng Fan <van.freenix@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============9186913595045623726==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-EQ0ma3/L0Ct8pxfuNyTJ"
-
-
---=-EQ0ma3/L0Ct8pxfuNyTJ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2018-03-07 at 12:04 -0800, Stefano Stabellini wrote:
-> On Wed, 7 Mar 2018, Andrew Cooper wrote:
-> > The OSSTest smoke tests reports:
-> >=20
-> >   sched_credit2.c: In function 'csched2_alloc_domdata':
-> >   sched_credit2.c:3015:9: error: implicit declaration of function
-> 'ERR_PTR' [-Werror=3Dimplicit-function-declaration]
-> >            return ERR_PTR(-ENOMEM);
-> >            ^
-> >   sched_credit2.c:3015:9: error: nested extern declaration of
-> 'ERR_PTR' [-Werror=3Dnested-externs]
-> >=20
-> > As the ERR infrastructure is part of the main scheduler interface
-> now, include it from xen/sched-if.h
-> >=20
-> > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->=20
-> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
->=20
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-EQ0ma3/L0Ct8pxfuNyTJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqhBGMACgkQFkJ4iaW4
-c+6R3w/+PbMBPXIKsy25lZVtqKrTfgqRLkbm3QFWFQxq0xBHL21GmwqfCyg2ETiJ
-OocJkpEpMMeLtsw2HUJNWZYI9NAKgR5Uj4e9zzZyFhpxBAyVcZym2QONdSlg646Y
-1ZEOt0wO3E0NQTrnLRRiiJs8fpglWBUTiA52wtC1i8Jfh3JwBa+9XxZ5C5KETVjJ
-raQA7mFYLjlib77z24ETBqLZcYBI3JEarGbz7cNEGG9Knt1NPRZW68mcGLvDvxQD
-FelqdAAa7/h0z6MctftgjUOHjtLGTyZEr9m0Oc0ZikWKRW3CmyqEfNc2ui9Iydyq
-pEY7dWyPhnsd2QxxNf40JkrEcFecuJ9zRvL7zq43oaHwTNkMV0q0fGetymzZF4LJ
-r6oFof5NC2MTBUYFNU1I6MgsU0Z4fX7T7LMyn6w9YPr5I2hQD+InE2z4SNBulp0s
-OeDUXjWJ7+h2Kchkw0+ISyEtiba2OE4jcyw20R6QU5Y/yY+zCeSLJfv3YhekgvE2
-N8IfTd2MeoJalLVLuHuy9gGKRz6m50IC3JS3HvuckKqAUDnkIXwCBMRsR41WpSUd
-1mz1HlE8YCJrcaR70GNi+vBL2OE6m4YOiGaIL7dzQsCBkq9cGpa5p2q6ZNQjJTkM
-nyHLvxZrkrdug1mEJLNz39V9nh/IxzpQ92gBLv20GKDhtPCa2FM=
-=yaXC
------END PGP SIGNATURE-----
-
---=-EQ0ma3/L0Ct8pxfuNyTJ--
-
-
-
---===============9186913595045623726==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============9186913595045623726==--
+SGVsbG8sCgpPbiAwOC8wMy8xOCAwNjoxNSwgUGVuZyBGYW4gd3JvdGU6Cj4gSGkgU3RlZmFubywK
+PiBPbiBGcmksIE1hciAwMiwgMjAxOCBhdCAxMTowNTo1NEFNIC0wODAwLCBTdGVmYW5vIFN0YWJl
+bGxpbmkgd3JvdGU6Cj4+IEhpIGFsbCwKPj4KPj4gVGhpcyBzZXJpZXMgY2hhbmdlcyB0aGUgaW5p
+dGlhbGl6YXRpb24gb2YgdHdvIHZpcnR1YWwgcmVnaXN0ZXJzIHRvIG1ha2UKPj4gc3VyZSB0aGV5
+IG1hdGNoIHRoZSB2YWx1ZSBvZiB0aGUgdW5kZXJseWluZyBwaHlzaWNhbCBjcHUuCj4+Cj4+IEl0
+IGFsc28gZGlzYWJsZXMgY3B1cyBkaWZmZXJlbnQgZnJvbSB0aGUgYm9vdCBjcHUsIHVubGVzcyBh
+IG5ld2x5Cj4+IGludHJvZHVjZWQgY29tbWFuZCBsaW5lIG9wdGlvbiBpcyBzcGVjaWZpZWQuIElu
+IHRoYXQgY2FzZSwgaXQgZXhwbGFpbnMKPj4gaG93IHRvIHNldHVwIHRoZSBzeXN0ZW0gdG8gYXZv
+aWQgY29ycnVwdGlvbnMsIHdoaWNoIGludm9sdmVzIG1hbnVhbGx5Cj4+IHNwZWNpZnlpbmcgdGhl
+IGNwdSBhZmZpbml0eSBvZiBhbGwgZG9tYWlucywgYmVjYXVzZSB0aGUgc2NoZWR1bGVyIHN0aWxs
+Cj4+IGxhY2tzIGJpZy5MSVRUTEUgc3VwcG9ydC4KPj4KPj4gSW4gdGhlIHVuY29tbW9uIGNhc2Ug
+b2YgYSBzeXN0ZW0gd2hlcmUgdGhlIGNhY2hlbGluZSBzaXplcyBhcmUgZGlmZmVyZW50Cj4+IGFj
+cm9zcyBjb3JlcywgaXQgZGlzYWJsZXMgYWxsIGNvcmVzIHRoYXQgaGF2ZSBhIGRpZmZlcmVudCBk
+Y2FjaGUgbGluZSBzaXplCj4+ZnJvbSB0aGUgYm9vdCBjcHUuIEluIGZhY3QsIGl0IGlzIG5vdCBz
+dWZmaWNpZW50IHRvIHVzZSB0aGUgZGNhY2hlIGxpbmUKPj4gc2l6ZSBvZiB0aGUgY3VycmVudCBj
+cHUsIGl0IHdvdWxkIGJlIG5lY2Vzc2FyeSB0byB1c2UgdGhlIG1pbmltdW0gYWNyb3NzCj4+IGFs
+bCBkY2FjaGUgbGluZSBzaXplcyBvZiBhbGwgY29yZXMuICBHaXZlbiB0aGF0IGl0IGlzIGFjdHVh
+bGx5IHVuY29tbW9uCj4+IGV2ZW4gaW4gYmlnLkxJVFRMRSBzeXN0ZW1zLCBqdXN0IGRpc2FibGUg
+Y3B1cyBmb3Igbm93Lgo+Pgo+PiBUaGUgZmlyc3QgcGF0Y2ggaW4gdGhlIHNlcmllcyBpcyBhIGZp
+eCBmb3IgdGhlIHdheSB3ZSByZWFkIHRoZSBkY2FjaGUKPj4gbGluZSBzaXplLgo+IAo+IEkgYW0g
+dHJ5aW5nIHRoZSBwYXRjaHNldCwgYnV0IEkgbWVldCBpc3N1ZSB0aGF0IEd1ZXN0IEJpZy9MaXR0
+bGUgd2l0aAo+IHZjcHUgbm90IHdvcmtpbmcgcHJvcGVybHkuIEFzIG15IGN1cnJlbnQgaGFyZHdh
+cmUgaGFzIGFuIGlzc3VlCj4gd2hpY2ggaGFzIGZpeCBpbiBLZXJuZWwsIGh0dHBzOi8vc291cmNl
+LmNvZGVhdXJvcmEub3JnL2V4dGVybmFsL2lteC9saW51eC1pbXgvY29tbWl0Lz9oPWlteF80Ljku
+NTFfaW14OF9iZXRhMiZpZD05MTdjYzNhOGRiMmYzNjA5ZWY4ZTJmNTllN2JjZDMxYWEyY2Q0ZTU5
+CgpDYW4geW91IGRlc2NyaWJlIHdoYXQgeW91IG1lYW4gYnkgbm90IHdvcmtpbmcgcHJvcGVybHk/
+IEFsc28gd2hhdCBpcyAKeW91ciBzZXR1cD8gRGlkIHlvdSBwaW4gdGhlIGRpZmZlcmVudCB2Q1BV
+cyBhcyByZXF1ZXN0ZWQgYnkgdGhlIApkb2N1bWVudGF0aW9uLgoKPiAKPiBJIGFtIG5vdCBzdXJl
+IHdoZXRoZXIgdGhpcyBpc3N1ZSBjYXVzZSBEb21VIGJpZy9MaXR0bGUgbm90IHdvcmsuCgpXZWxs
+LCBJIHdvdWxkIHJlY29tbWVuZCB0byBzcGVhayB3aXRoIE5YUCB3aGV0aGVyIHRoaXMgZXJyYXRh
+IGFmZmVjdHMgClRMQiBmbHVzaCBmb3IgSHlwZXJ2aXNvciBQYWdlLVRhYmxlIG9yIFN0YWdlLTIg
+UGFnZS1UYWJsZS4KCj4gU28gd29uZGVyIGhhcyB0aGlzIHBhdGNoc2V0IGJlZW4gdGVzdGVkIG9u
+IEJpZy9MaXR0bGUgSGFyZHdhcmU/CgpUaGlzIHNlcmllcyBvbmx5IGFkZHMgZmFjaWxpdHkgdG8g
+cmVwb3J0IHRoZSBjb3JyZWN0IE1JRFIgdG8gdGhlIGd1ZXN0LiAKSWYgeW91ciBwbGF0Zm9ybSBy
+ZXF1aXJlcyBtb3JlLCB0aGVuIGl0IHdvdWxkIGJlIG5lY2Vzc2FyeSBzZW5kIGEgcGF0Y2ggCmZv
+ciBYZW4uCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
