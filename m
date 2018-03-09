@@ -1,17 +1,21 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: Xen 4.11 Development Update
-Date: Fri, 09 Mar 2018 18:50:55 +0100
-Message-ID: <1520617855.21431.42.camel@suse.com>
-References: <20180228082337.15821-1-jgross@suse.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH 47/57] ARM: new VGIC: Handle virtual IRQ
+ allocation/reservation
+Date: Fri, 9 Mar 2018 17:52:05 +0000
+Message-ID: <61d55963-7ea6-ce93-db50-02590d1040b6@arm.com>
+References: <20180305160415.16760-1-andre.przywara@linaro.org>
+ <20180305160415.16760-48-andre.przywara@linaro.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4180306592719617855=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=ogvm=f7=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1euMB2-0001pD-Mp
- for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 17:51:32 +0000
-In-Reply-To: <20180228082337.15821-1-jgross@suse.com>
+ <srs0=opao=f7=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1euMBd-0001sD-0n
+ for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 17:52:09 +0000
+In-Reply-To: <20180305160415.16760-48-andre.przywara@linaro.org>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,84 +24,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+To: Andre Przywara <andre.przywara@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4180306592719617855==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-ysubHD9TvxgE4eGDfptB"
-
-
---=-ysubHD9TvxgE4eGDfptB
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hey Juergen,
-
-On Wed, 2018-02-28 at 09:23 +0100, Juergen Gross wrote:
-> =3D Timeline =3D
->=20
-> We now adopt a fixed cut-off date scheme. We will release twice a
-> year. The upcoming 4.11 timeline are as followed:
->=20
-> * Last posting date: March 16th, 2018
-> * Hard code freeze: March 30th, 2018
-> * RC1: TBD
-> * Release: June 1st, 2018
->=20
-> =3D=3D=3D x86 =3D=3D=3D=20
->=20
-> *  Mitigations for Meltdown/CVE-2017-5754
->   -  Jan Beulich
->=20
-Now that this is done, are we committing to having your speedup series
-in 4.11 as well? I think we should.
-
-Maybe it could even be a blocker, considering how big the performance
-impact is (and the fact that the series is already there ;-P).
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-ysubHD9TvxgE4eGDfptB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqiyX8ACgkQFkJ4iaW4
-c+5MwhAA6pkQknC9f+Kz5bJOOj2bsvU2k1975hx76t//W7tO8FqjoIzDY/3b/5wV
-L83GXRE1qDobu9PoL3Mv/vP6NGQ7sabUcQTxs5IaAOnv4E3bP6VehzskAVa7Rrld
-Hg9pQxfo0toZu2deS+N2h8msNJn9230b6YjSWKt0vut3RMvOZA6fLYhYZtiXiTM5
-6384utb63Qt6GShc+CrBg0yWgKkEqBupVfnYltMZxrCUzfVJ5eXko0nO4l6xMQ0E
-RnpCk+8kw+IK3JZSgfRd3UICl1sgaA8taGGPG7Ume/lw1iugISbQEQUhQF/mfgRs
-DcvhP/KhluWysny/dwUbjXcUqrFhCV2WzVZD8RIAj11zWa28MRJiY4rNTduVfnfR
-eINilylPA/r4W76uKhOgYQQBBhnR0YjDZf5au0oVLYx8mqSFUBx5v/WoipRAlpkY
-lQFi2WRPTZYNjI4DPWlUUUr69CrXpiF7eqC60TDawyqwzQ5vvVk02Hjtm65po0aP
-iCPd+Mx6lWIdBdp8YdCwiGzgeHPA9TCB0LQregJr1XHsubZtvHFB1m/d+KuM4whd
-1zhBlrERwlk8wFW9jzpyobhP8yG0PYJaq1FQrogBLX3YoTVCU4dLFonkEUWWiMrG
-+ul0Bx58dPrRzdEoyX+UUPZpp+4jH/bswD8iRjjl1RVTfL3d6Fo=
-=S4JS
------END PGP SIGNATURE-----
-
---=-ysubHD9TvxgE4eGDfptB--
-
-
-
---===============4180306592719617855==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4180306592719617855==--
+SGkgQW5kcmUsCgpPbiAwNS8wMy8xOCAxNjowNCwgQW5kcmUgUHJ6eXdhcmEgd3JvdGU6Cj4gVG8g
+ZmluZCBhbiB1bnVzZWQgdmlydHVhbCBJUlEgbnVtYmVyIFhlbiB1c2VzIGEgc2NoZW1lIHRvIHRy
+YWNrIHVzZWQKPiB2aXJ0dWFsIElSUXMuCj4gSW1wbGVtZW50IHRoaXMgaW50ZXJmYWNlIGluIHRo
+ZSBuZXcgVkdJQyB0byBtYWtlIHRoZSBYZW4gY29yZS9hcmNoIGNvZGUKPiBoYXBweS4KPiBUaGlz
+IGlzIGFjdHVhbGx5IHNvbWV3aGF0IFZHSUMgYWdub3N0aWMsIHNvIGlzIG1vc3RseSBhIGNvcHkg
+b2YgdGhlIGNvZGUKPiBmcm9tIHRoZSBvbGQgVkdJQy4gQnV0IGl0IGhhcyB0byBsaXZlIGluIHRo
+ZSBWR0lDIGZpbGVzLCBzbyB3ZSBjYW4ndAo+IGVhc2lseSByZXVzZSB0aGUgZXhpc3RpbmcgaW1w
+bGVtZW50YXRpb24uCj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnBy
+enl3YXJhQGxpbmFyby5vcmc+CgpBY2tlZC1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxA
+YXJtLmNvbT4KCkNoZWVycywKCj4gLS0tCj4gQ2hhbmdlbG9nIFJGQyAuLi4gdjE6Cj4gLSBubyBj
+aGFuZ2VzCj4gCj4gICB4ZW4vYXJjaC9hcm0vdmdpYy92Z2ljLmMgfCA0NCArKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+ICAgMSBmaWxlIGNoYW5nZWQsIDQ0IGlu
+c2VydGlvbnMoKykKPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3ZnaWMvdmdpYy5jIGIv
+eGVuL2FyY2gvYXJtL3ZnaWMvdmdpYy5jCj4gaW5kZXggMGJmMjU3Yzg2NS4uZTllZjk5MmUxZSAx
+MDA2NDQKPiAtLS0gYS94ZW4vYXJjaC9hcm0vdmdpYy92Z2ljLmMKPiArKysgYi94ZW4vYXJjaC9h
+cm0vdmdpYy92Z2ljLmMKPiBAQCAtNzIxLDYgKzcyMSw1MCBAQCBib29sIHZnaWNfZXZ0Y2huX2ly
+cV9wZW5kaW5nKHN0cnVjdCB2Y3B1ICp2KQo+ICAgICAgIHJldHVybiBwZW5kaW5nOwo+ICAgfQo+
+ICAgCj4gK2Jvb2wgdmdpY19yZXNlcnZlX3ZpcnEoc3RydWN0IGRvbWFpbiAqZCwgdW5zaWduZWQg
+aW50IHZpcnEpCj4gK3sKPiArICAgIGlmICggdmlycSA+PSB2Z2ljX251bV9pcnFzKGQpICkKPiAr
+ICAgICAgICByZXR1cm4gZmFsc2U7Cj4gKwo+ICsgICAgcmV0dXJuICF0ZXN0X2FuZF9zZXRfYml0
+KHZpcnEsIGQtPmFyY2gudmdpYy5hbGxvY2F0ZWRfaXJxcyk7Cj4gK30KPiArCj4gK2ludCB2Z2lj
+X2FsbG9jYXRlX3ZpcnEoc3RydWN0IGRvbWFpbiAqZCwgYm9vbCBzcGkpCj4gK3sKPiArICAgIGlu
+dCBmaXJzdCwgZW5kOwo+ICsgICAgdW5zaWduZWQgaW50IHZpcnE7Cj4gKwo+ICsgICAgaWYgKCAh
+c3BpICkKPiArICAgIHsKPiArICAgICAgICAvKiBXZSBvbmx5IGFsbG9jYXRlIFBQSXMuIFNHSXMg
+YXJlIGFsbCByZXNlcnZlZCAqLwo+ICsgICAgICAgIGZpcnN0ID0gMTY7Cj4gKyAgICAgICAgZW5k
+ID0gMzI7Cj4gKyAgICB9Cj4gKyAgICBlbHNlCj4gKyAgICB7Cj4gKyAgICAgICAgZmlyc3QgPSAz
+MjsKPiArICAgICAgICBlbmQgPSB2Z2ljX251bV9pcnFzKGQpOwo+ICsgICAgfQo+ICsKPiArICAg
+IC8qCj4gKyAgICAgKiBUaGVyZSBpcyBubyBzcGlubG9jayB0byBwcm90ZWN0IGFsbG9jYXRlZF9p
+cnFzLCB0aGVyZWZvcmUKPiArICAgICAqIHRlc3RfYW5kX3NldF9iaXQgbWF5IGZhaWwuIElmIHNv
+IHJldHJ5IGl0Lgo+ICsgICAgICovCj4gKyAgICBkbwo+ICsgICAgewo+ICsgICAgICAgIHZpcnEg
+PSBmaW5kX25leHRfemVyb19iaXQoZC0+YXJjaC52Z2ljLmFsbG9jYXRlZF9pcnFzLCBlbmQsIGZp
+cnN0KTsKPiArICAgICAgICBpZiAoIHZpcnEgPj0gZW5kICkKPiArICAgICAgICAgICAgcmV0dXJu
+IC0xOwo+ICsgICAgfSB3aGlsZSAoIHRlc3RfYW5kX3NldF9iaXQodmlycSwgZC0+YXJjaC52Z2lj
+LmFsbG9jYXRlZF9pcnFzKSApOwo+ICsKPiArICAgIHJldHVybiB2aXJxOwo+ICt9Cj4gKwo+ICt2
+b2lkIHZnaWNfZnJlZV92aXJxKHN0cnVjdCBkb21haW4gKmQsIHVuc2lnbmVkIGludCB2aXJxKQo+
+ICt7Cj4gKyAgICBjbGVhcl9iaXQodmlycSwgZC0+YXJjaC52Z2ljLmFsbG9jYXRlZF9pcnFzKTsK
+PiArfQo+ICsKPiAgIHN0cnVjdCBpcnFfZGVzYyAqdmdpY19nZXRfaHdfaXJxX2Rlc2Moc3RydWN0
+IGRvbWFpbiAqZCwgc3RydWN0IHZjcHUgKnYsCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHVuc2lnbmVkIGludCB2aXJxKQo+ICAgewo+IAoKLS0gCkp1bGllbiBHcmFs
+bAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
