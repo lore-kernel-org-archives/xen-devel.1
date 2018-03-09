@@ -1,25 +1,16 @@
-From: George Dunlap <dunlapg@umich.edu>
-Subject: Re: Xen on POWER
-Date: Fri, 9 Mar 2018 12:35:56 +0000
-Message-ID: <CAFLBxZayF7xJ3TYom1NXvocAfK-5U__FZMAjx8tYh8yaSdPCbg@mail.gmail.com>
-References: <1fc954f27ec976b1ce405b16ca5319f7.squirrel@tt3j2x4k5ycaa5zt.onion>
- <2f6a8bb7-1032-0646-fa81-84548ace805f@citrix.com>
- <cbdfef692f94e6b93398b5ab53174245.squirrel@tt3j2x4k5ycaa5zt.onion>
- <fbca9db3-adef-920e-25ad-984b510e92b4@arm.com>
- <CAFLBxZb_8_YnY9dQXaa_U3iW5tFNv-CtiCjAjKyoq=DQeGXY=w@mail.gmail.com>
- <d3c8c3028c7f5785d96ab1d5f9071f34.squirrel@tt3j2x4k5ycaa5zt.onion>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 1/3] tests/x86emul: Helpers to save and
+ restore FPU state
+Date: Fri, 09 Mar 2018 05:37:48 -0700
+Message-ID: <5AA28E2C02000078001B0398@prv-mh.provo.novell.com>
+References: <1520367892-15055-1-git-send-email-andrew.cooper3@citrix.com>
+ <1520367892-15055-2-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=w3y6=f7=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
- id 1euHFg-0006E9-JK
- for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 12:36:00 +0000
-Received: by mail-qk0-x244.google.com with SMTP id o25so3401606qkl.7
- for <xen-devel@lists.xenproject.org>; Fri, 09 Mar 2018 04:35:57 -0800 (PST)
-In-Reply-To: <d3c8c3028c7f5785d96ab1d5f9071f34.squirrel@tt3j2x4k5ycaa5zt.onion>
+In-Reply-To: <1520367892-15055-2-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,37 +19,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: awokd@danwin1210.me
-Cc: Andre Przywara <andre.przywara@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBNYXIgOSwgMjAxOCBhdCAxMjoxNyBQTSwgYXdva2QgPGF3b2tkQGRhbndpbjEyMTAu
-bWU+IHdyb3RlOgo+IE9uIEZyaSwgTWFyY2ggOSwgMjAxOCAxMjowNCBwbSwgR2VvcmdlIER1bmxh
-cCB3cm90ZToKPgo+PiBJJ20gYWxsIGZvciBlbmNvdXJhZ2luZyBwZW9wbGUgdG8ganVtcCBpbnRv
-IFhlbiwgYnV0IEkgYWdyZWUgd2l0aAo+PiBBbmRyZSBoZXJlLCB0aGF0IHlvdSBzaG91bGQgcmVh
-bGx5IGNvdW50IHRoZSBjb3N0LiAgSSBkb3VidCB0aGlzIGlzCj4+IHRoZSBzb3J0IG9mIHRoaW5n
-IGEgc2luZ2xlIHBlcnNvbiBjb3VsZCByZWFsbHkgd3JpdGUgYW5kIG1haW50YWluIHVucGFpZCBv
-bgo+PiBldmVuaW5ncyBhbmQgd2Vla2VuZHMuICBSZW1lbWJlciBhbHNvIHRoYXQgeW91J2QgYmUg
-cG9ydGluZyBub3Qgb25seSBYZW4KPj4gdG8gUG93ZXI5LCBidXQgYWxzbyBMaW51eCAob3Igc29t
-ZSBvdGhlciBvcGVyYXRpbmcgc3lzdGVtKSB0byBydW4gYXMgYSBYZW4KPj4gZG9tMC4KPgo+IEkg
-dW5kZXJzdGFuZC4gSSB0aGluayBMaW51eCAod2l0aCBLVk0pIGFscmVhZHkgd29ya3Mgb24gYmFy
-ZW1ldGFsIFBvd2VyOQo+IHNvIGl0IHdvdWxkICJqdXN0IiBiZSBYZW4uCj4gaHR0cHM6Ly93d3cu
-aWJtLmNvbS9zdXBwb3J0L2tub3dsZWRnZWNlbnRlci9lbi9saW51eG9uaWJtL2xpYWFtL2xpYWFt
-ZGlzdHJvcy5odG0KCkkgdGhpbmsgeW91IG1pc3VuZGVyc3Rvb2QgbWUgLS0gSSBkaWRuJ3QgbWVh
-biBwb3J0aW5nIExpbnV4IHRvIFBvd2VyOQpmcm9tIHNjcmF0Y2g7IEkgbWVhbnQgcG9ydGluZyB0
-aGUgTGludXggUG93ZXI5IGJhcmUtbWV0YWwgdG8gTGludXgKUG93ZXI5IHJ1bm5pbmcgYXMgYSBY
-ZW4gImRvbWFpbiAwIi4KClRoZSBjdXJyZW50IExpbnV4IHBvcnQgKEknbSBndWVzc2luZykgZXhw
-ZWN0cyB0byBiZSBpbiBjb250cm9sIG9mIDEwMCUKb2YgdGhlIGhhcmR3YXJlLiAgQnV0IHJ1bm5p
-bmcgYXMgYSAiZG9tIDAiIHVuZGVyIFhlbiwgaXQgd291bGRuJ3QgYmUuCkEgTGludXggZG9tMCBp
-cyBleHBlY3RlZCB0byBwcm92aWRlIGRldmljZSBkcml2ZXJzIGZvciBhbGwgZGV2aWNlcywKYnV0
-IHRvIGFzayBYZW4gbmljZWx5IGZvciBldmVyeXRoaW5nIHRvIGRvIHdpdGggQ1BVcywgbWVtb3J5
-LCBhbmQKaW50ZXJydXB0cy4gIFRoYXQgdGFrZXMgY2FyZWZ1bCB0aG91Z2h0LCBhbmQgc29tZXRp
-bWVzIGZhaXJseSBpbnZhc2l2ZQpjaGFuZ2VzIHRvIExpbnV4LiAgSGF2aW5nIHRoZSBBUk0gZG9t
-MCB3b3JrIGFzIGEgdGVtcGxhdGUgc2hvdWxkIG1ha2UKaXQgZWFzaWVyLCBidXQgaXQncyBieSBu
-byBtZWFucyAiYWxyZWFkeSBkb25lIi4KCj4gQW5kIEknbSBkZWZpbml0ZWx5IG5vdCBtYWtpbmcg
-YW55IGNvbW1pdG1lbnRzIHRoaXMgZWFybHkuIFdvcnN0IGNhc2UgSSdsbAo+IGZhaWwgYnV0IHN0
-aWxsIGxlYXJuIGEgbG90IGFuZCBoYXZlIHNvbWUgbmljZSBzZXJ2ZXIgaGFyZHdhcmUuCgpHcmVh
-dCEgSGF2ZSBmdW4sIGFuZCBsb29rIGZvcndhcmQgdG8gc2VlaW5nIHBhdGNoZXMuIDotKQoKIC1H
-ZW9yZ2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDA2LjAzLjE4IGF0IDIxOjI0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gK3ZvaWQgZW11bF9zYXZlX2ZwdV9zdGF0ZSh2b2lkKQo+ICt7Cj4gKyAgICBpZiAoIHVz
+ZV94c2F2ZSApCj4gKyAgICAgICAgYXNtIHZvbGF0aWxlICggInhzYXZlIiBfX09TICIgJVtwdHJd
+Igo+ICsgICAgICAgICAgICAgICAgICAgICAgIDogW3B0cl0gIj1tIiAoZnB1X3NhdmVfYXJlYSkK
+PiArICAgICAgICAgICAgICAgICAgICAgICA6ICJhIiAofjB1bGwpLCAiZCIgKH4wdWxsKSApOwoK
+V2FpdCwgdGhpcyBkb2Vzbid0IGJ1aWxkIGFzIDMyLWJpdCBiaW5hcnkuIE5lZWRzIHRvIGJlIH4w
+dWwsIGFuZApfX09TIGFsc28gY2FuJ3QgYmUgdXNlZCBoZXJlLgoKPiArICAgIGVsc2UKPiArICAg
+ICAgICBhc20gdm9sYXRpbGUgKCAiZnhzYXZlICUwIiA6ICI9bSIgKGZwdV9zYXZlX2FyZWEpICk7
+CgpXaGVyZWFzIGlmIHlvdSB3YW50IHNvbWV0aGluZyBsaWtlIF9fT1MgYWJvdmUsIHlvdSdkIHdh
+bnQgdGhlCnNhbWUgaGVyZS4KCkphbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
