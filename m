@@ -1,19 +1,12 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: X86 Community Call: Wed March 14, 15:00 - 16:00 UTC
-Date: Fri, 9 Mar 2018 15:17:56 +0000
-Message-ID: <20180309151756.xylqgzzmgr3eutha@citrix.com>
-References: <A7247849-7D03-4B9C-ABB9-AFF48DD561B0@citrix.com>
+From: Chris Brannon <cmb@prgmr.com>
+Subject: xen 4.10.0: stubdomain for HVM guest fails to start
+	unless qdisk backend is used?
+Date: Fri, 09 Mar 2018 07:24:51 -0800
+Message-ID: <87po4db7b0.fsf@prgmr.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=ymxc=f7=citrix.com=prvs=599389b9c=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1euJmS-0008B2-6j
- for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 15:18:00 +0000
-Content-Disposition: inline
-In-Reply-To: <A7247849-7D03-4B9C-ABB9-AFF48DD561B0@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,24 +15,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Janakarajan Natarajan <jnataraj@amd.com>, Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Daniel Kiper <daniel.kiper@oracle.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <royger@freebsd.org>, George Dunlap <George.Dunlap@citrix.com>, Christopher Clark <christopher.w.clark@gmail.com>, "Ji,
- John" <john.ji@intel.com>, Rich Persaud <persaur@gmail.com>, Paul Durrant <Paul.Durrant@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, Jan Beulich' <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Brian Woods <brian.woods@amd.com>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBNYXIgMDcsIDIwMTggYXQgMDM6NDQ6MjJQTSArMDAwMCwgTGFycyBLdXJ0aCB3cm90
-ZToKPiAKPiBBMikgTG9uZy10ZXJtLCBMYXJnZXIgc2VyaWVzCj4gCj4gIAo+IAo+IFBsZWFzZSBj
-YWxsIG91dCBhbnkgeDg2IHJlbGF0ZWQgc2VyaWVzLCB0aGF0IG5lZWQgYXR0ZW50aW9uIGluIHRo
-ZSBsb25nZXIgdGVybS4KPiBQcm92aWRlCj4gCj4gKiBUaXRsZSBvZiBzZXJpZXMKPiAKPiAqIExp
-bmsgdG8gc2VyaWVzIChlLmcuIG9uIGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2
-ZXMvaHRtbC94ZW4tZGV2ZWwsCj4gbWFya21haWwsIOKApikKPiAKPiAqIERlc2NyaWJlIGFueTog
-RGVwZW5kZW5jaWVzLCBJc3N1ZXMsIGV0Yy4gdGhhdCBhcmUgcmVsZXZhbnQKPiAKCkkgaGF2ZSBv
-bmUgc2VyaWVzIHRoYXQgSSBoYXZlbid0IGdvdCBhbiBpZGVhIGhvdyB0byBwcm9jZWVkOgoKW1BB
-VENIIFJGQyAwMC8xMF0geDg2IHBhc3N0aHJvdWdoIGNvZGUgY2xlYW51cAoKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE4LTAyL21zZzAxOTM5
-Lmh0bWwKClRoZXJlIGlzbid0IGFueSBkZXBlbmRlbmN5LiBJIG1vc3RseSB3YW50IHRvIGtub3cg
-bWFpbnRhaW5lcnMgb3BpbmlvbnMKb24gd2hhdCBpcyByZXF1aXJlZCBtYWtlIHBhc3N0aHJvdWdo
-IGNvZGUgY2xlYW5lci4KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+SSByZWNlbnRseSBtYWRlIGEgYnVpbGQgb2YgeGVuIDQuMTAuMCBhbmQgaW5zdGFsbGVkIGl0LgpJ
+IGhhdmUgYSBwcmUtZXhpc3RpbmcgSFZNIGd1ZXN0IHRoYXQgdXNlcyB0aGUgZm9sbG93aW5nIGNv
+bmZpZ3VyYXRpb246CjEgaGFyZCBkcml2ZSB1c2luZyB0aGUgcGh5IGRpc2sgYmFja2VuZC4gIFRo
+ZSBndWVzdCBhbHNvIHVzZXMgYSBkZXZpY2UKbW9kZWwgc3R1YmRvbWFpbi4gIEFmdGVyIHVwZ3Jh
+ZGluZywgaXQgcmVmdXNlcyB0byBzdGFydCwgZHVlIHRvIGEKc3R1YmRvbWFpbiB0aW1lb3V0OgoK
+UGFyc2luZyBjb25maWcgZnJvbSBzb21lZG9tYWluCmxpYnhsOiBlcnJvcjogbGlieGxfZG0uYzoy
+MjAzOnN0dWJkb21feHN3YWl0X2NiOiBEb21haW4gMzI6U3R1YmRvbSAzMyBmb3IgMzIgc3RhcnR1
+cDogc3RhcnR1cCB0aW1lZCBvdXQKbGlieGw6IGVycm9yOiBsaWJ4bF9jcmVhdGUuYzoxNTM4OmRv
+bWNyZWF0ZV9kZXZtb2RlbF9zdGFydGVkOiBEb21haW4gMzI6ZGV2aWNlIG1vZGVsIGRpZCBub3Qg
+c3RhcnQ6IC05CmxpYnhsOiBlcnJvcjogbGlieGxfZG9tYWluLmM6MTAwMDpsaWJ4bF9fZGVzdHJv
+eV9kb21pZDogRG9tYWluIDMyOk5vbi1leGlzdGFudCBkb21haW4KbGlieGw6IGVycm9yOiBsaWJ4
+bF9kb21haW4uYzo5NTk6ZG9tYWluX2Rlc3Ryb3lfY2FsbGJhY2s6IERvbWFpbiAzMjpVbmFibGUg
+dG8gZGVzdHJveSBndWVzdApsaWJ4bDogZXJyb3I6IGxpYnhsX2RvbWFpbi5jOjg4Njpkb21haW5f
+ZGVzdHJveV9jYjogRG9tYWluIDMyOkRlc3RydWN0aW9uIG9mIGRvbWFpbiBmYWlsZWQKClRoZXJl
+IGlzIG5vdGhpbmcgaW4gdGhlIGxvZ3MuCgpJIG5vdGljZWQgdGhhdCBhIHNpbWlsYXIgZ3Vlc3Qg
+d2FzIGJvb3Rpbmcgd2l0aCBubyBpc3N1ZS4gIFRoZQpkaWZmZXJlbmNlIHdhcyB0aGF0IHRoZSBi
+b290aW5nIGd1ZXN0IGFsc28gaGFkIGEgQ0QtUk9NIGF0dGFjaGVkLiAgVGhhdApDRC1ST00gdXNl
+ZCB0aGUgcWRpc2sgYmFja2VuZCwgYmVjYXVzZSBpdCBpcyBiYWNrZWQgYnkgYW4gSVNPOTY2MCBp
+bWFnZSBmaWxlLgpJIGNoYW5nZWQgdGhlIGRpc2sgcGFyYW1ldGVyIGluIHRoZSBmaXJzdCBub24t
+Ym9vdGluZyBndWVzdCBzbyB0aGF0IGl0CnVzZWQgdGhlIHFkaXNrIGJhY2tlbmQgcmF0aGVyIHRo
+YW4gcGh5LCBhbmQgaXQgYm9vdGVkIHdpdGggbm8gdHJvdWJsZS4KCkhhcyBhbnlvbmUgZWxzZSBo
+YWQgYW4gaXNzdWUgbGlrZSB0aGlzIGFmdGVyIHVwZ3JhZGluZyB0byA0LjEwPyAgSSBkaWQKc29t
+ZSBzZWFyY2hpbmcsIGFuZCBJIGRpZG4ndCBmaW5kIGFueXRoaW5nLiAgSSdtIGEgYml0IHN1cnBy
+aXNlZCBieQp0aGF0LiAgU2luY2UgdGhpcyBpcyBzbyBlYXN5IGZvciBtZSB0byByZXByb2R1Y2Us
+IGFuZCBubyBvbmUgZWxzZSBoYXMKbWVudGlvbmVkIGl0LCBJIHdvbmRlciBpZiBteSBidWlsZCBj
+b3VsZCBiZSBzdWJ0bHkgYnJva2VuIHNvbWVob3cuCgotLSBDaHJpcwoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
