@@ -1,15 +1,14 @@
-From: Wei Liu <wei.liu2@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: [PATCH v1] x86/domctl: remove impossible condition
  in XEN_DOMCTL_getpageframeinfo3
-Date: Fri, 9 Mar 2018 16:07:45 +0000
-Message-ID: <20180309160745.lbfb4rsqbms5bmxo@citrix.com>
+Date: Fri, 9 Mar 2018 17:09:37 +0100
+Message-ID: <20180309160937.GE12975@aepfle.de>
 References: <20180309160116.16298-1-olaf@aepfle.de>
+ <35524832-2900-6a73-8bf3-1d6a5d92783b@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7488301519758865888=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <20180309160116.16298-1-olaf@aepfle.de>
+In-Reply-To: <35524832-2900-6a73-8bf3-1d6a5d92783b@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,31 +17,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBNYXIgMDksIDIwMTggYXQgMDU6MDE6MTZQTSArMDEwMCwgT2xhZiBIZXJpbmcgd3Jv
-dGU6Cj4gVGhlIHZhbHVlIG9mIG51bSBpcyBhbHdheXMgdGhlIHNhbWUgYXMgZG9tY3RsLT51Lmdl
-dHBhZ2VmcmFtZWluZm8zLm51bSwKPiBpdCB3YXMgYXNzaWduZWQganVzdCBhIGZldyBsaW5lcyBi
-ZWZvcmUuCj4gCj4gU2lnbmVkLW9mZi1ieTogT2xhZiBIZXJpbmcgPG9sYWZAYWVwZmxlLmRlPgoK
-SXQgaXMgc3RpbGwgdXNlZnVsLiAgVGhlIGZpZWxkIGluIGdldHBhZ2VmcmFtZWluZm8zIGlzIHVp
-bnQ2NF9hbGlnbmVkX3QKd2hpbGUgaGVyZSBudW0gaXMganVzdCB1bnNpZ25lZCBpbnQuIFRoZSBj
-aGVjayBtYWtlcyBzdXJlIG5vIHRydW5jYXRpb24KaGFwcGVucy4KCj4gLS0tCj4gIHhlbi9hcmNo
-L3g4Ni9kb21jdGwuYyB8IDMgKy0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwg
-MiBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2RvbWN0bC5jIGIv
-eGVuL2FyY2gveDg2L2RvbWN0bC5jCj4gaW5kZXggOGZiYmYzYWViMy4uNDZkMjg4YTQ5MCAxMDA2
-NDQKPiAtLS0gYS94ZW4vYXJjaC94ODYvZG9tY3RsLmMKPiArKysgYi94ZW4vYXJjaC94ODYvZG9t
-Y3RsLmMKPiBAQCAtNDIxLDggKzQyMSw3IEBAIGxvbmcgYXJjaF9kb19kb21jdGwoCj4gICAgICAg
-ICAgLyogR2FtZXMgdG8gYWxsb3cgdGhpcyBjb2RlIGJsb2NrIHRvIGhhbmRsZSBhIGNvbXBhdCBn
-dWVzdC4gKi8KPiAgICAgICAgICB2b2lkIF9fdXNlciAqZ3Vlc3RfaGFuZGxlID0gZG9tY3RsLT51
-LmdldHBhZ2VmcmFtZWluZm8zLmFycmF5LnA7Cj4gIAo+IC0gICAgICAgIGlmICggdW5saWtlbHko
-bnVtID4gMTAyNCkgfHwKPiAtICAgICAgICAgICAgIHVubGlrZWx5KG51bSAhPSBkb21jdGwtPnUu
-Z2V0cGFnZWZyYW1laW5mbzMubnVtKSApCj4gKyAgICAgICAgaWYgKCB1bmxpa2VseShudW0gPiAx
-MDI0KSApCj4gICAgICAgICAgewo+ICAgICAgICAgICAgICByZXQgPSAtRTJCSUc7Cj4gICAgICAg
-ICAgICAgIGJyZWFrOwo+IAo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fCj4gWGVuLWRldmVsIG1haWxpbmcgbGlzdAo+IFhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwo+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============7488301519758865888==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="84ND8YJRMFlzkrP4"
+Content-Disposition: inline
+
+
+--84ND8YJRMFlzkrP4
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Mar 09, Andrew Cooper wrote:
+
+> On 09/03/18 16:01, Olaf Hering wrote:
+> > The value of num is always the same as domctl->u.getpageframeinfo3.num,
+> > it was assigned just a few lines before.
+> >
+> > Signed-off-by: Olaf Hering <olaf@aepfle.de>
+>=20
+> This isn't dead code.=C2=A0 It is a truncation check.
+
+How can this happen, other than num being a 32bit type?
+Perhaps the type of num should match the type of i?
+
+Olaf
+
+--84ND8YJRMFlzkrP4
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWqKxvgAKCRBdQqD6ppg2
+fvojAKDGs+nweMOn3wNP2KX9K1njsRHSiQCg7azCW09Og+7W781YNIZ0b2JSNws=
+=DQ4n
+-----END PGP SIGNATURE-----
+
+--84ND8YJRMFlzkrP4--
+
+
+--===============7488301519758865888==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7488301519758865888==--
