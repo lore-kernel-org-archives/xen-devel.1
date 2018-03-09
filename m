@@ -1,14 +1,21 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v1] x86/domctl: remove impossible condition
- in XEN_DOMCTL_getpageframeinfo3
-Date: Fri, 9 Mar 2018 17:09:37 +0100
-Message-ID: <20180309160937.GE12975@aepfle.de>
-References: <20180309160116.16298-1-olaf@aepfle.de>
- <35524832-2900-6a73-8bf3-1d6a5d92783b@citrix.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH 10/12] xen: Use newly added dmops for
+	mapping VGA memory
+Date: Fri, 9 Mar 2018 16:12:13 +0000
+Message-ID: <23202.45661.318179.372531@mariner.uk.xensource.com>
+References: <1520535787-6223-1-git-send-email-ian.jackson@eu.citrix.com>
+ <1520535787-6223-11-git-send-email-ian.jackson@eu.citrix.com>
+ <20180309154431.GJ1921@perard.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7488301519758865888=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <35524832-2900-6a73-8bf3-1d6a5d92783b@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=gdq1=f7=citrix.com=prvs=5995bc012=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1euKd7-0006NO-Hq
+ for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 16:12:25 +0000
+In-Reply-To: <20180309154431.GJ1921@perard.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,58 +24,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7488301519758865888==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="84ND8YJRMFlzkrP4"
-Content-Disposition: inline
-
-
---84ND8YJRMFlzkrP4
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Mar 09, Andrew Cooper wrote:
-
-> On 09/03/18 16:01, Olaf Hering wrote:
-> > The value of num is always the same as domctl->u.getpageframeinfo3.num,
-> > it was assigned just a few lines before.
-> >
-> > Signed-off-by: Olaf Hering <olaf@aepfle.de>
->=20
-> This isn't dead code.=C2=A0 It is a truncation check.
-
-How can this happen, other than num being a 32bit type?
-Perhaps the type of num should match the type of i?
-
-Olaf
-
---84ND8YJRMFlzkrP4
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWqKxvgAKCRBdQqD6ppg2
-fvojAKDGs+nweMOn3wNP2KX9K1njsRHSiQCg7azCW09Og+7W781YNIZ0b2JSNws=
-=DQ4n
------END PGP SIGNATURE-----
-
---84ND8YJRMFlzkrP4--
-
-
---===============7488301519758865888==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7488301519758865888==--
+QW50aG9ueSBQRVJBUkQgd3JpdGVzICgiUmU6IFtQQVRDSCAxMC8xMl0geGVuOiBVc2UgbmV3bHkg
+YWRkZWQgZG1vcHMgZm9yIG1hcHBpbmcgVkdBIG1lbW9yeSIpOgo+IFRoaXMgcGF0Y2ggc2VlbXMg
+dG8gcmVtb3ZlIHRoZSBsYXN0IHVzZXJzIG9mCj4geGVuX3hjX2RvbWFpbl9hZGRfdG9fcGh5c21h
+cCgpLiBDYW4gaXQgYmUgcmVtb3ZlIGZyb20geGVuX2NvbW1vbi5oPwo+IAo+IFdpdGggdGhhdDoK
+PiBBY2tlZC1ieTogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+CgpI
+YXZlIGFkZGVkIGEgc2VwYXJhdGUgcGF0Y2ggZm9yIHRoYXQuCgpGcm9tIDE1ZGVkYzYyN2NhZDk2
+MzAxZTQwMTVmMWY3NzdmY2FiMzkwNmFiYTcgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxCkZyb206
+IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgpEYXRlOiBGcmksIDI3IE9j
+dCAyMDE3IDExOjIzOjEwICswMTAwClN1YmplY3Q6IFtQQVRDSCA1LzVdIHNjcmlwdHMvZ2V0X21h
+aW50YWluZXIucGw6IFByaW50IHByb3BlciBlcnJvciBtZXNzYWdlIGZvcgogbWlzc2luZyAkZmls
+ZQoKSWYgeW91IHBhc3Mgc2NyaXB0cy9nZXRfbWFpbnRhaW5lci5wbCB0aGUgbmFtZSBvZiBhIEZJ
+Rk8gb3Igb3RoZXIKZXhjaXRpbmcgb2JqZWN0ICgvZGV2L3N0ZGluLCBmb3IgZXhhbXBsZSksIGl0
+IHdvdWxkIGZhbHNlbHkgcHJpbnQKImZpbGUgbm90IGZvdW5kIi4gIEluc3RlYWQ6IHN0YXQgdGhl
+IG9iamVjdCByYXRoZXIgdGhhbiB1c2luZyAtZiBzbwp0aGF0IHdlIGRvIG5vdCBtaW5kIGlmIHRo
+ZSBvYmplY3QgaXMgbm90IGEgZmlsZTsgYW5kIHByaW50IHRoZSBlcnJubwp2YWx1ZSBpbiB0aGUg
+ZXJyb3IgbWVzc2FnZS4KClNpZ25lZC1vZmYtYnk6IElhbiBKYWNrc29uIDxJYW4uSmFja3NvbkBl
+dS5jaXRyaXguY29tPgpDQzogVGhvbWFzIEh1dGggPHRodXRoQHJlZGhhdC5jb20+CkNDOiBQYW9s
+byBCb256aW5pIDxwYm9uemluaUByZWRoYXQuY29tPgpDQzogU3RlZmFubyBTdGFiZWxsaW5pIDxz
+c3RhYmVsbGluaUBrZXJuZWwub3JnPgpDQzogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJk
+QGNpdHJpeC5jb20+Ci0tLQp2NjogTmV3IHBhdGNoIGluIHRoaXMgdmVyc2lvbiBvZiB0aGUgc2Vy
+aWVzCi0tLQogc2NyaXB0cy9nZXRfbWFpbnRhaW5lci5wbCB8IDQgKystLQogMSBmaWxlIGNoYW5n
+ZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9zY3JpcHRz
+L2dldF9tYWludGFpbmVyLnBsIGIvc2NyaXB0cy9nZXRfbWFpbnRhaW5lci5wbAppbmRleCAwNzM2
+OWFhLi40M2ZiNWY1IDEwMDc1NQotLS0gYS9zY3JpcHRzL2dldF9tYWludGFpbmVyLnBsCisrKyBi
+L3NjcmlwdHMvZ2V0X21haW50YWluZXIucGwKQEAgLTM4MSw4ICszODEsOCBAQCBmb3JlYWNoIG15
+ICRmaWxlIChAQVJHVikgewogCSMjaWYgJGZpbGUgaXMgYSBkaXJlY3RvcnkgYW5kIGl0IGxhY2tz
+IGEgdHJhaWxpbmcgc2xhc2gsIGFkZCBvbmUKIAlpZiAoKC1kICRmaWxlKSkgewogCSAgICAkZmls
+ZSA9fiBzQChbXi9dKSRAJDEvQDsKLQl9IGVsc2lmICghKC1mICRmaWxlKSkgewotCSAgICBkaWUg
+IiRQOiBmaWxlICcke2ZpbGV9JyBub3QgZm91bmRcbiI7CisJfSBlbHNpZiAoIShzdGF0ICRmaWxl
+KSkgeworCSAgICBkaWUgIiRQOiBmaWxlICcke2ZpbGV9JyBub3QgZm91bmQ6ICQhXG4iOwogCX0K
+ICAgICB9CiAgICAgaWYgKCRmcm9tX2ZpbGVuYW1lKSB7Ci0tIAoyLjEuNAoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
