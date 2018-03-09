@@ -1,22 +1,24 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH] tools/xenstore: add libdl dependency to
- libxenstore
-Date: Fri, 9 Mar 2018 09:36:33 +0100
-Message-ID: <20180309083633.GA12975@aepfle.de>
-References: <20180307101744.32608-1-jgross@suse.com>
- <23199.51911.713278.912475@mariner.uk.xensource.com>
- <ac4b3f73-63b1-d081-aeed-a56d8a660d83@suse.com>
- <23199.54702.631341.284821@mariner.uk.xensource.com>
- <c0db67f3-707d-6e86-0fbd-7dfed9178d99@suse.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v2 4/6] xen/x86: disable global pages for
+ domains with XPTI active
+Date: Fri, 9 Mar 2018 09:42:34 +0100
+Message-ID: <2a5c0cd6-eb96-a016-1051-24acbf2f3748@suse.com>
+References: <20180302081403.16953-1-jgross@suse.com>
+ <20180302081403.16953-5-jgross@suse.com>
+ <5AA14AF302000078001AFD30@prv-mh.provo.novell.com>
+ <AADFC41AFE54684AB9EE6CBC0274A5D19104023E@SHSMSX101.ccr.corp.intel.com>
+ <5AA2551002000078001B0116@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6071879765259270752=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=1s9y=f7=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1euDW6-0008WE-LZ
- for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 08:36:43 +0000
-In-Reply-To: <c0db67f3-707d-6e86-0fbd-7dfed9178d99@suse.com>
+ (envelope-from <srs0=vgtz=f7=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1euDbx-0000ms-6s
+ for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 08:42:45 +0000
+In-Reply-To: <5AA2551002000078001B0116@suse.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,70 +27,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: ian.jackson@citrix.com, wei.liu2@citrix.com, xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>, Kevin Tian <kevin.tian@intel.com>
+Cc: "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Jun Nakajima <jun.nakajima@intel.com>, Dario Faggioli <dfaggioli@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6071879765259270752==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="gKMricLos+KVdGMg"
-Content-Disposition: inline
-
-
---gKMricLos+KVdGMg
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Wed, Mar 07, Juergen Gross wrote:
-
-> On 07/03/18 13:06, ian.jackson@citrix.com wrote:
-> > Juergen Gross writes ("Re: [PATCH] tools/xenstore: add libdl dependency to libxenstore"):
-> >> On 07/03/18 12:19, Ian Jackson wrote:
-> >>> Juergen Gross writes ("[PATCH] tools/xenstore: add libdl dependency to libxenstore"):
-> >>>>  libxenstore.so.$(MAJOR).$(MINOR): LDFLAGS += -ldl
-> >>>> +else
-> >>>> +PKG_CONFIG_REMOVE += dl
-> >>> What is this ?
-> >> -ldl is needed on Linux only, but I didn't want to add a Linux specific
-> >> pkg-config file. So I'm removing the dependency in case we are not on
-> >> Linux.
-> > Sorry, I was grepping an older xen tree, so I didn't see where this
-> > variable was honoured.
-> > Will this work, though, when what has to be done is to remove -ldl
-> > from Libs, rather than from Requires ?
-> Yes, I've tested it to work (in V2 we have: PKG_CONFIG_REMOVE += -ldl)
-
-This breaks libvirt.
-m4/virt-driver-xen.m4 tries to use just '-lxenstore' and the test fails
-with missing 'dlsym'. If I adjust this .m4 file to use pkgconfig it
-still fails. Only appending '-ldl' to XEN_LIBS will help. So to me it
-looks like -ldl is now a hard requirement when linking to
-libxenstore.so. I used 20180307T163340.c9bd8a7365 for testing.
-
-Olaf
-
---gKMricLos+KVdGMg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWqJHjgAKCRBdQqD6ppg2
-flAVAKDy2y5dbu9iMnXm3n60wQrcvEVfwQCg1nThKwl2ywY/V8laA5aUKaUhCg0=
-=KkgZ
------END PGP SIGNATURE-----
-
---gKMricLos+KVdGMg--
-
-
---===============6071879765259270752==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6071879765259270752==--
+T24gMDkvMDMvMTggMDk6MzQsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDA5LjAzLjE4IGF0
+IDA2OjIzLCA8a2V2aW4udGlhbkBpbnRlbC5jb20+IHdyb3RlOgo+Pj4gIEZyb206IEphbiBCZXVs
+aWNoIFttYWlsdG86SkJldWxpY2hAc3VzZS5jb21dCj4+PiBTZW50OiBUaHVyc2RheSwgTWFyY2gg
+OCwgMjAxOCA5OjM5IFBNCj4+Pgo+Pj4+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS14ODYvZG9tYWlu
+LmgKPj4+PiArKysgYi94ZW4vaW5jbHVkZS9hc20teDg2L2RvbWFpbi5oCj4+Pj4gQEAgLTYyMiw3
+ICs2MjIsOCBAQCB1bnNpZ25lZCBsb25nIHB2X2d1ZXN0X2NyNF9maXh1cChjb25zdCBzdHJ1Y3QK
+Pj4+IHZjcHUgKiwgdW5zaWduZWQgbG9uZyBndWVzdF9jcjQpOwo+Pj4+ICAgICAgICAgICAgICBY
+ODZfQ1I0X1NNQVAgfCBYODZfQ1I0X09TWFNBVkUgfCAgICAgICAgICAgICAgICBcCj4+Pj4gICAg
+ICAgICAgICAgIFg4Nl9DUjRfRlNHU0JBU0UpKSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IFwKPj4+PiAgICAgICAgfCAoKHYpLT5kb21haW4tPmFyY2gudnRzYyA/IFg4Nl9DUjRfVFNEIDog
+MCkpICAgICAgICAgXAo+Pj4+IC0gICAgICYgflg4Nl9DUjRfREUpCj4+Pj4gKyAgICAgJiB+KFg4
+Nl9DUjRfREUgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKPj4+PiAr
+ICAgICAgICAgKCh2KS0+ZG9tYWluLT5hcmNoLnB2X2RvbWFpbi54cHRpID8gWDg2X0NSNF9QR0Ug
+OiAwKSkpCj4+Pgo+Pj4gV2l0aCB0aGlzIHlvdSBtYW5hZ2UgdG8gdHVybiBvZmYgZ2xvYmFsIHBh
+Z2VzIHdoZW4gc3dpdGNoaW5nIHRvCj4+PiBhIFBWIHZDUFUuIEJ1dCBJIGNhbid0IHNlZSBob3cg
+eW91IHR1cm4gZ2xvYmFsIHBhZ2VzIGJhY2sgb24gd2hlbgo+Pj4gc3dpdGNoaW5nIGF3YXkgZnJv
+bSBpdC4gSSBjYW4gc2VlIHRoZXkgd291bGQgYmUgdHVybmVkIGJhY2sgb24gZS5nLgo+Pj4gb24g
+dGhlIGZpcnN0IGVudHJ5IHRvIGEgVk1YIGd1ZXN0LCBidXQgaG93IGFib3V0IGFuIFNWTSBvbmU/
+IEFuZAo+Pj4gaG93IGFib3V0IHRoZSB0aW1lIGJldHdlZW4gc3dpdGNoaW5nIGF3YXkgZnJvbSB0
+aGUgUFYgdkNQVSBhbmQKPj4+IHRoYXQgVk0gZW50cnk/IEdyYW50ZWQgYWxsIGZsdXNoZXMgYXJl
+IGdsb2JhbCBvbmVzIHJpZ2h0IG5vdywgYnV0Cj4+PiB0aGF0IHNob3VsZCBjaGFuZ2Ugd2l0aCB0
+aGUgbW9kaWZpY2F0aW9uIGhlcmU6IElmIHlvdSBsb29rIGJhY2sgYXQKPj4+IDQuMiBjb2RlLCB5
+b3UnbGwgc2VlIHRoYXQgRkxVU0hfVExCIHdhcyBoYW5kbGVkIGRpZmZlcmVudGx5IGluIHRoYXQK
+Pj4+IGNhc2UsIHJldGFpbmluZyBYZW4ncyBnbG9iYWwgbWFwcGluZ3MuIEFueSBmbHVzaCBJUEkg
+bm90IHJlcXVlc3RpbmcKPj4+IGdsb2JhbCBwYWdlcyB0byBiZSBmbHVzaGVkIGNvdWxkIHRoZW4g
+bGVhdmUgaW50YWN0IFhlbidzIG93biBUTEIKPj4+IGVudHJpZXMsIHdoaWNoIHRha2VzIGFzIGEg
+cHJlcmVxIHRoYXQgQ1I0LlBHRSBnZXRzIHR1cm5lZCBiYWNrIG9uCj4+PiBlYXJsaWVyLgo+Pgo+
+PiBidHcgZG9lcyBQR0UgcmVhbGx5IG1hdHRlciByZWdhcmRpbmcgdG8gZW50cnkgdG8gSFZNIGd1
+ZXN0PyBYZW4ncyAKPj4gbWFwcGluZ3MgYXJlIGVpdGhlciBhbGwgZmx1c2hlZCAodnBpZCBkaXNh
+YmxlZCkgb3IgYWxsIHN1c3RhaW5lZAo+PiAodnBpZCBlbmFibGVkKSBhdCBWTSBlbnRyaWVzLCBy
+ZWdhcmRsZXNzIG9mIGdsb2JhbCBzZXR0aW5nLiB0aGVuIGlmIAo+PiBQR0UgaXMgYW55d2F5IHR1
+cm5lZCBvZmYgZm9yIFBWIGFuZCBkb2Vzbid0IG1hdHRlciBmb3IgSFZNIGlzIGl0IAo+PiBzdGls
+bCB1c2VmdWwgdG8ga2VlcCBpdCB0dXJuZWQgb24gYmV0d2VlbiBzd2l0Y2hlcz8KPiAKPiBXZWxs
+LCB5ZXMgaW5kZWVkLCBidXQgdGhhdCdzIG9ubHkgaGFsZiBvZiB3aGVyZSB3ZSBtYXkgd2FudCB0
+bwo+IHJldGFpbiB0aGVtIChpZiBwb3NzaWJsZSkuIFRoZSBvdGhlciBoYWxmIGlzIHRoZSB0aW1l
+IGJldHdlZW4KPiBjb250ZXh0IHN3aXRjaGluZyBpbiBhIEhWTSB2Q1BVIGFuZCB0aGUgc3Vic2Vx
+dWVudCBWTSBlbnRyeSAob3IKPiB0byBiZSBwcmVjaXNlIHRoZSBwb2ludCBpbiB0aW1lIHdoZW4g
+aW50ZXJydXB0cyBnZXQgdHVybmVkIG9mZgo+IGJlZm9yZSB0aGF0IFZNIGVudHJ5LCBhcyB0aGF0
+J3Mgd2hlcmUgZmx1c2ggSVBJcyBjYW4gc3RpbGwgYXJyaXZlKS4KCkknZCBsaWtlIHRvIG1vdmUg
+bG9hZGluZyBjcjQgZnJvbSAqX2N0eHRfc3dpdGNoX3RvKCkgdG8gd3JpdGVfcHRiYXNlKCkKaW4g
+b3JkZXIgdG8gbWluaW1pemUgVExCIGZsdXNoZXMuIFRoaXMgd2lsbCBtYWtlIGl0IG11Y2ggZWFz
+aWVyIHRvIHVzZQp0aGUgb3B0aW1hbCBmbHVzaGluZyBzdHJhdGVneSBhcyBhbGwgaW50ZXJtZWRp
+YXRlIHN0YXRlcyBhcmUgaGFuZGxlZCBpbgpvbmUgcGxhY2UuCgoKSnVlcmdlbgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
