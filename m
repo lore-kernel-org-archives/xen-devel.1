@@ -1,23 +1,22 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 4/6] xen/x86: disable global pages for
- domains with XPTI active
-Date: Fri, 09 Mar 2018 01:34:08 -0700
-Message-ID: <5AA2551002000078001B0116@prv-mh.provo.novell.com>
-References: <20180302081403.16953-1-jgross@suse.com>
- <20180302081403.16953-5-jgross@suse.com>
- <5AA14AF302000078001AFD30@prv-mh.provo.novell.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D19104023E@SHSMSX101.ccr.corp.intel.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH] tools/xenstore: add libdl dependency to
+ libxenstore
+Date: Fri, 9 Mar 2018 09:36:33 +0100
+Message-ID: <20180309083633.GA12975@aepfle.de>
+References: <20180307101744.32608-1-jgross@suse.com>
+ <23199.51911.713278.912475@mariner.uk.xensource.com>
+ <ac4b3f73-63b1-d081-aeed-a56d8a660d83@suse.com>
+ <23199.54702.631341.284821@mariner.uk.xensource.com>
+ <c0db67f3-707d-6e86-0fbd-7dfed9178d99@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6071879765259270752=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=ibp0=f7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1euDTm-0008Ix-Bw
- for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 08:34:18 +0000
-In-Reply-To: <AADFC41AFE54684AB9EE6CBC0274A5D19104023E@SHSMSX101.ccr.corp.intel.com>
-Content-Disposition: inline
+ (envelope-from <srs0=1s9y=f7=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1euDW6-0008WE-LZ
+ for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 08:36:43 +0000
+In-Reply-To: <c0db67f3-707d-6e86-0fbd-7dfed9178d99@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,48 +25,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Kevin Tian <kevin.tian@intel.com>
-Cc: Juergen Gross <jgross@suse.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, Dario Faggioli <dfaggioli@suse.com>, Jun Nakajima <jun.nakajima@intel.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: ian.jackson@citrix.com, wei.liu2@citrix.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA5LjAzLjE4IGF0IDA2OjIzLCA8a2V2aW4udGlhbkBpbnRlbC5jb20+IHdyb3RlOgo+
-PiAgRnJvbTogSmFuIEJldWxpY2ggW21haWx0bzpKQmV1bGljaEBzdXNlLmNvbV0KPj4gU2VudDog
-VGh1cnNkYXksIE1hcmNoIDgsIDIwMTggOTozOSBQTQo+PiAKPj4gPiAtLS0gYS94ZW4vaW5jbHVk
-ZS9hc20teDg2L2RvbWFpbi5oCj4+ID4gKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9kb21haW4u
-aAo+PiA+IEBAIC02MjIsNyArNjIyLDggQEAgdW5zaWduZWQgbG9uZyBwdl9ndWVzdF9jcjRfZml4
-dXAoY29uc3Qgc3RydWN0Cj4+IHZjcHUgKiwgdW5zaWduZWQgbG9uZyBndWVzdF9jcjQpOwo+PiA+
-ICAgICAgICAgICAgICBYODZfQ1I0X1NNQVAgfCBYODZfQ1I0X09TWFNBVkUgfCAgICAgICAgICAg
-ICAgICBcCj4+ID4gICAgICAgICAgICAgIFg4Nl9DUjRfRlNHU0JBU0UpKSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIFwKPj4gPiAgICAgICAgfCAoKHYpLT5kb21haW4tPmFyY2gudnRzYyA/
-IFg4Nl9DUjRfVFNEIDogMCkpICAgICAgICAgXAo+PiA+IC0gICAgICYgflg4Nl9DUjRfREUpCj4+
-ID4gKyAgICAgJiB+KFg4Nl9DUjRfREUgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIFwKPj4gPiArICAgICAgICAgKCh2KS0+ZG9tYWluLT5hcmNoLnB2X2RvbWFpbi54cHRp
-ID8gWDg2X0NSNF9QR0UgOiAwKSkpCj4+IAo+PiBXaXRoIHRoaXMgeW91IG1hbmFnZSB0byB0dXJu
-IG9mZiBnbG9iYWwgcGFnZXMgd2hlbiBzd2l0Y2hpbmcgdG8KPj4gYSBQViB2Q1BVLiBCdXQgSSBj
-YW4ndCBzZWUgaG93IHlvdSB0dXJuIGdsb2JhbCBwYWdlcyBiYWNrIG9uIHdoZW4KPj4gc3dpdGNo
-aW5nIGF3YXkgZnJvbSBpdC4gSSBjYW4gc2VlIHRoZXkgd291bGQgYmUgdHVybmVkIGJhY2sgb24g
-ZS5nLgo+PiBvbiB0aGUgZmlyc3QgZW50cnkgdG8gYSBWTVggZ3Vlc3QsIGJ1dCBob3cgYWJvdXQg
-YW4gU1ZNIG9uZT8gQW5kCj4+IGhvdyBhYm91dCB0aGUgdGltZSBiZXR3ZWVuIHN3aXRjaGluZyBh
-d2F5IGZyb20gdGhlIFBWIHZDUFUgYW5kCj4+IHRoYXQgVk0gZW50cnk/IEdyYW50ZWQgYWxsIGZs
-dXNoZXMgYXJlIGdsb2JhbCBvbmVzIHJpZ2h0IG5vdywgYnV0Cj4+IHRoYXQgc2hvdWxkIGNoYW5n
-ZSB3aXRoIHRoZSBtb2RpZmljYXRpb24gaGVyZTogSWYgeW91IGxvb2sgYmFjayBhdAo+PiA0LjIg
-Y29kZSwgeW91J2xsIHNlZSB0aGF0IEZMVVNIX1RMQiB3YXMgaGFuZGxlZCBkaWZmZXJlbnRseSBp
-biB0aGF0Cj4+IGNhc2UsIHJldGFpbmluZyBYZW4ncyBnbG9iYWwgbWFwcGluZ3MuIEFueSBmbHVz
-aCBJUEkgbm90IHJlcXVlc3RpbmcKPj4gZ2xvYmFsIHBhZ2VzIHRvIGJlIGZsdXNoZWQgY291bGQg
-dGhlbiBsZWF2ZSBpbnRhY3QgWGVuJ3Mgb3duIFRMQgo+PiBlbnRyaWVzLCB3aGljaCB0YWtlcyBh
-cyBhIHByZXJlcSB0aGF0IENSNC5QR0UgZ2V0cyB0dXJuZWQgYmFjayBvbgo+PiBlYXJsaWVyLgo+
-IAo+IGJ0dyBkb2VzIFBHRSByZWFsbHkgbWF0dGVyIHJlZ2FyZGluZyB0byBlbnRyeSB0byBIVk0g
-Z3Vlc3Q/IFhlbidzIAo+IG1hcHBpbmdzIGFyZSBlaXRoZXIgYWxsIGZsdXNoZWQgKHZwaWQgZGlz
-YWJsZWQpIG9yIGFsbCBzdXN0YWluZWQKPiAodnBpZCBlbmFibGVkKSBhdCBWTSBlbnRyaWVzLCBy
-ZWdhcmRsZXNzIG9mIGdsb2JhbCBzZXR0aW5nLiB0aGVuIGlmIAo+IFBHRSBpcyBhbnl3YXkgdHVy
-bmVkIG9mZiBmb3IgUFYgYW5kIGRvZXNuJ3QgbWF0dGVyIGZvciBIVk0gaXMgaXQgCj4gc3RpbGwg
-dXNlZnVsIHRvIGtlZXAgaXQgdHVybmVkIG9uIGJldHdlZW4gc3dpdGNoZXM/CgpXZWxsLCB5ZXMg
-aW5kZWVkLCBidXQgdGhhdCdzIG9ubHkgaGFsZiBvZiB3aGVyZSB3ZSBtYXkgd2FudCB0bwpyZXRh
-aW4gdGhlbSAoaWYgcG9zc2libGUpLiBUaGUgb3RoZXIgaGFsZiBpcyB0aGUgdGltZSBiZXR3ZWVu
-CmNvbnRleHQgc3dpdGNoaW5nIGluIGEgSFZNIHZDUFUgYW5kIHRoZSBzdWJzZXF1ZW50IFZNIGVu
-dHJ5IChvcgp0byBiZSBwcmVjaXNlIHRoZSBwb2ludCBpbiB0aW1lIHdoZW4gaW50ZXJydXB0cyBn
-ZXQgdHVybmVkIG9mZgpiZWZvcmUgdGhhdCBWTSBlbnRyeSwgYXMgdGhhdCdzIHdoZXJlIGZsdXNo
-IElQSXMgY2FuIHN0aWxsIGFycml2ZSkuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+
+--===============6071879765259270752==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gKMricLos+KVdGMg"
+Content-Disposition: inline
+
+
+--gKMricLos+KVdGMg
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Wed, Mar 07, Juergen Gross wrote:
+
+> On 07/03/18 13:06, ian.jackson@citrix.com wrote:
+> > Juergen Gross writes ("Re: [PATCH] tools/xenstore: add libdl dependency to libxenstore"):
+> >> On 07/03/18 12:19, Ian Jackson wrote:
+> >>> Juergen Gross writes ("[PATCH] tools/xenstore: add libdl dependency to libxenstore"):
+> >>>>  libxenstore.so.$(MAJOR).$(MINOR): LDFLAGS += -ldl
+> >>>> +else
+> >>>> +PKG_CONFIG_REMOVE += dl
+> >>> What is this ?
+> >> -ldl is needed on Linux only, but I didn't want to add a Linux specific
+> >> pkg-config file. So I'm removing the dependency in case we are not on
+> >> Linux.
+> > Sorry, I was grepping an older xen tree, so I didn't see where this
+> > variable was honoured.
+> > Will this work, though, when what has to be done is to remove -ldl
+> > from Libs, rather than from Requires ?
+> Yes, I've tested it to work (in V2 we have: PKG_CONFIG_REMOVE += -ldl)
+
+This breaks libvirt.
+m4/virt-driver-xen.m4 tries to use just '-lxenstore' and the test fails
+with missing 'dlsym'. If I adjust this .m4 file to use pkgconfig it
+still fails. Only appending '-ldl' to XEN_LIBS will help. So to me it
+looks like -ldl is now a hard requirement when linking to
+libxenstore.so. I used 20180307T163340.c9bd8a7365 for testing.
+
+Olaf
+
+--gKMricLos+KVdGMg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWqJHjgAKCRBdQqD6ppg2
+flAVAKDy2y5dbu9iMnXm3n60wQrcvEVfwQCg1nThKwl2ywY/V8laA5aUKaUhCg0=
+=KkgZ
+-----END PGP SIGNATURE-----
+
+--gKMricLos+KVdGMg--
+
+
+--===============6071879765259270752==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6071879765259270752==--
