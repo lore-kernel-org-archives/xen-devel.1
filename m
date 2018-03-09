@@ -1,19 +1,18 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v2] xen/acpi: upload _PSD info for non Dom0
- CPUs too
-Date: Thu, 8 Mar 2018 17:33:56 -0500
-Message-ID: <4f20689f-552f-b9eb-272d-0035ba2efdd6__28663.0653463819$1520548390$gmane$org@oracle.com>
-References: <20180308105751.8176-1-joao.m.martins@oracle.com>
+From: "Tian, Kevin" <kevin.tian@intel.com>
+Subject: Re: [PATCH v2] x86: improve MSR_SHADOW_GS accesses
+Date: Fri, 9 Mar 2018 02:03:29 +0000
+Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D19103E3DE@SHSMSX101.ccr.corp.intel.com>
+References: <5AA1296402000078001AFBE3@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=pdqf=f6=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1eu47C-0006a8-Gf
- for xen-devel@lists.xenproject.org; Thu, 08 Mar 2018 22:34:22 +0000
-In-Reply-To: <20180308105751.8176-1-joao.m.martins@oracle.com>
+ <srs0=okzm=f7=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
+ id 1eu7Nn-0003ud-D2
+ for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 02:03:43 +0000
+In-Reply-To: <5AA1296402000078001AFBE3@prv-mh.provo.novell.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,23 +22,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Joao Martins <joao.m.martins@oracle.com>, linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>, "Rafael J. Wysocki" <rjw@rjwysocki.net>, Robert Moore <robert.moore@intel.com>, linux-acpi@vger.kernel.org, xen-devel@lists.xenproject.org, Len Brown <lenb@kernel.org>, Erik Schmauss <erik.schmauss@intel.com>, devel@acpica.org
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, "Nakajima,
+ Jun" <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwMy8wOC8yMDE4IDA1OjU3IEFNLCBKb2FvIE1hcnRpbnMgd3JvdGU6Cgo+IEBAIC0zNzIs
-NiArMzc2LDE1IEBAIHJlYWRfYWNwaV9pZChhY3BpX2hhbmRsZSBoYW5kbGUsIHUzMiBsdmwsIHZv
-aWQgKmNvbnRleHQsIHZvaWQgKipydikKPiAgIAo+ICAgCXByX2RlYnVnKCJBQ1BJIENQVSV1IHcv
-IFBCTEs6MHglbHhcbiIsIGFjcGlfaWQsICh1bnNpZ25lZCBsb25nKXBibGspOwo+ICAgCj4gKwkv
-KiBJdCBoYXMgUC1zdGF0ZSBkZXBlbmRlbmNpZXMgKi8KPiArCWlmICghYWNwaV9wcm9jZXNzb3Jf
-Z2V0X3BzZChoYW5kbGUsICZhY3BpX3BzZFthY3BpX2lkXSkpIHsKPiArCQlfX3NldF9iaXQoYWNw
-aV9pZCwgYWNwaV9pZF9wc2RfcHJlc2VudCk7Cj4gKwo+ICsJCXByX2RlYnVnKCJBQ1BJIENQVSV1
-IHcvIFBTVDpjb29yZF90eXBlID0gJWxsdSBkb21haW4gPSAlbGx1XG4iLAo+ICsJCQkgYWNwaV9p
-ZCwgYWNwaV9wc2RbYWNwaV9pZF0uY29vcmRfdHlwZSwKPiArCQkJIGFjcGlfcHNkW2FjcGlfaWRd
-LmRvbWFpbik7Cj4gKwl9CgoKSSBzaG91bGQgaGF2ZSBub3RpY2VkIHRoaXMgZWFybGllciwgYnV0
-IGRvIHlvdSByZWFsbHkgbmVlZCAKYWNwaV9pZF9wc2RfcHJlc2VudD8gQ2FuIHlvdSBqdXN0IGdv
-IGJ5IGFjcGlfcHNkW2ldICE9IE5VTEw/CgpTb3JyeSBmb3IgbWlzc2luZyBpdCBpbiB0aGUgZmly
-c3QgcGF0Y2guCgotYm9yaXMKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+PiBGcm9tOiBKYW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+IFNlbnQ6IFRo
+dXJzZGF5LCBNYXJjaCA4LCAyMDE4IDc6MTYgUE0KPiAKPiBJbnN0ZWFkIG9mIHVzaW5nIFJETVNS
+L1dSTVNSLCBvbiBmc2dzYmFzZS1jYXBhYmxlIHN5c3RlbXMgdXNlIGEKPiBkb3VibGUKPiBTV0FQ
+R1MgY29tYmluZWQgd2l0aCBSREdTQkFTRS9XUkdTQkFTRS4gVGhpcyBoYWx2ZXMgZXhlY3V0aW9u
+IHRpbWUKPiBmb3IKPiBhIHNoYWRvdyBHUyB1cGRhdGUgYWxvbmUgb24gbXkgSGFzd2VsbCAoYW5k
+IHdlIGhhdmUgaW5kaWNhdGlvbnMgb2YKPiBnb29kIHBlcmZvcm1hbmNlIGltcHJvdmVtZW50cyBi
+eSB0aGlzIG9uIFNreWxha2UgdG9vKSwgd2hpbGUgdGhlIHdpbiBpcwo+IGV2ZW4gaGlnaGVyIHdo
+ZW4gZS5nLiB1cGRhdGluZyBtb3JlIHRoYW4gb25lIGJhc2UgKGFzIG1heSBhbmQKPiBjb21tb25s
+eQo+IHdpbGwgaGFwcGVuIGluIGxvYWRfc2VnbWVudHMoKSkuCj4gCj4gU2lnbmVkLW9mZi1ieTog
+SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKUmV2aWV3ZWQtYnk6IEtldmluIFRpYW4g
+PGtldmluLnRpYW5AaW50ZWwuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
