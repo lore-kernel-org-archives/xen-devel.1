@@ -1,16 +1,17 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] libxl: allow libxl_domain_suspend to simply
- suspend a domain, without saving it
-Date: Fri, 9 Mar 2018 16:55:14 +0000
-Message-ID: <20180309165514.6ttrog5gwchmcurp@citrix.com>
-References: <20180208231404.3857-1-marmarek@invisiblethingslab.com>
- <20180223184757.5iwsch7sf4p5tvcg@citrix.com> <20180223200326.GI2023@mail-itl>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] getpageframeinfo3: replace hardcoded
+	batchsize with constant
+Date: Fri, 09 Mar 2018 16:55:24 +0000
+Message-ID: <137DC3C1-0BA1-48C0-8E3F-3BBE6AB26C20@aepfle.de>
+References: <20180309161720.17510-1-olaf@aepfle.de>
+ <5AA2C39E02000078001B061D@prv-mh.provo.novell.com>
+ <ae7b71fa-1493-a61e-1235-90fed2a926e7@citrix.com>
+ <5AA2C7D602000078001B067B@prv-mh.provo.novell.com>
+ <8da306fb-a1e9-e15c-084e-87091cccef83@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0164249483652785578=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <20180223200326.GI2023@mail-itl>
+In-Reply-To: <8da306fb-a1e9-e15c-084e-87091cccef83@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,33 +20,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Marcus of Wetware Labs <marcus@wetwa.re>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: George Dunlap <george.dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBGZWIgMjMsIDIwMTggYXQgMDk6MDM6MjZQTSArMDEwMCwgTWFyZWsgTWFyY3p5a293
-c2tpLUfDs3JlY2tpIHdyb3RlOgo+IE9uIEZyaSwgRmViIDIzLCAyMDE4IGF0IDA2OjQ3OjU3UE0g
-KzAwMDAsIFdlaSBMaXUgd3JvdGU6Cj4gPiBPbiBGcmksIEZlYiAwOSwgMjAxOCBhdCAxMjoxNDow
-M0FNICswMTAwLCBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVja2kgd3JvdGU6Cj4gPiA+IFdoZW4g
-ZmQ9LTEsIG5vIHNhdmVmaWxlIHdpbGwgYmUgd3JpdHRlbiwgYnV0IHRoZSBkb21haW4gd2lsbCBz
-dGlsbCBiZQo+ID4gPiBzdXNwZW5kZWQgKGJ1dCBub3QgZGVzdHJveWVkKS4gVGhlIG1haW4gcmVh
-c29uIGZvciB0aGlzIGZ1bmN0aW9uYWxpdHkgaXMKPiA+ID4gdG8gc3VzcGVuZCB0aGUgaG9zdCB3
-aGlsZSBzb21lIGRvbWFpbnMgYXJlIHJ1bm5pbmcsIHBvdGVudGlhbGx5IGhvbGRpbmcKPiA+ID4g
-UENJIGRldmljZXMuIFRoaXMgd2lsbCBnaXZlIGEgY2hhbmNlIHRvIGEgZHJpdmVyIGluIHN1Y2gg
-YSBkb21haW4gdG8KPiA+ID4gcHJvcGVybHkgc3VzcGVuZCBkZXZpY2UuCj4gPiA+IAo+ID4gPiBJ
-dCB3b3VsZCBiZSBiZXR0ZXIgdG8gaGF2ZSBzZXBhcmF0ZSBmdW5jdGlvbiBmb3IgdGhpcywgYnV0
-IGluIGZhY3QgaXQKPiA+ID4gc2hvdWxkIGJlIG5hbWVkIGxpYnhsX2RvbWFpbl9zdXNwZW5kLCB0
-aGVuIHRoZSBjdXJyZW50IG9uZSByZW5hbWVkIHRvCj4gPiA+IGxpYnhsX2RvbWFpbl9zYXZlLiBT
-aW5jZSB0aGF0IHdvdWxkIGJyZWFrIEFQSSBjb21wYXRpYmlsaXR5LCBrZWVwIGl0IGluCj4gPiA+
-IHRoZSBzYW1lIGZ1bmN0aW9uLgo+ID4gPiAKPiA+ID4gU2lnbmVkLW9mZi1ieTogTWFyZWsgTWFy
-Y3p5a293c2tpLUfDs3JlY2tpIDxtYXJtYXJla0BpbnZpc2libGV0aGluZ3NsYWIuY29tPgo+ID4g
-PiBTaWduZWQtb2ZmLWJ5OiBNYXJjdXMgb2YgV2V0d2FyZSBMYWJzIDxtYXJjdXNAd2V0d2EucmU+
-Cj4gPiAKPiA+IFRoZSBiYXNpYyBpZGVhIHNlZW1zIHNlbnNpYmxlLgo+ID4gCj4gPiBQbGVhc2Ug
-YWRkIGEgY29tbWVudCB0byBsaWJ4bC5oIHRvIHNwZWNpZnkgdGhlIG5ldyBzZW1hbnRpY3MuCj4g
-Cj4gSG1tLCB3aGlsZSBJJ20gbG9va2luZyBhdCBpdCwgbWF5YmUgYmV0dGVyIGlkZWEgd291bGQg
-YmUgdG8gdXNlIGZsYWdzCj4gZm9yIHRoYXQ/IEknZCBjYWxsIGl0IExJQlhMX1NVU1BFTkRfU1VT
-UEVORCwgYnV0IGl0IGxvb2tzIHN0dXBpZCwgYW55Cj4gYmV0dGVyIGlkZWE/CgpJIGRvbid0IGhh
-dmUgYW55IGJldHRlciBpZGVhIEknbSBhZnJhaWQuLi4KCldlaS4KCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============0164249483652785578==
+Content-Type: multipart/alternative; boundary="----97M9P5DDQC1SN37GJ32OQUWETIPTDG"
+Content-Transfer-Encoding: 7bit
+
+------97M9P5DDQC1SN37GJ32OQUWETIPTDG
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+The point was to document the counter part=2E Grep -w 1024 is not helpful=
+=2E
+
+Olaf
+------97M9P5DDQC1SN37GJ32OQUWETIPTDG
+Content-Type: text/html;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+The point was to document the counter part=2E Grep -w 1024 is not helpful=
+=2E<br>
+<br>
+Olaf
+------97M9P5DDQC1SN37GJ32OQUWETIPTDG--
+
+
+--===============0164249483652785578==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0164249483652785578==--
