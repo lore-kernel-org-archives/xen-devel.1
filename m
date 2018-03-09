@@ -1,22 +1,15 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: osstest planned outage consultation
-Date: Fri, 9 Mar 2018 16:02:48 +0000
-Message-ID: <23202.45096.90866.563420@mariner.uk.xensource.com>
-References: <23193.33276.834923.421617@mariner.uk.xensource.com>
- <5A9E5F0F02000078001AED83@prv-mh.provo.novell.com>
- <23198.60604.72583.53459@mariner.uk.xensource.com>
- <5A9FAA3002000078001AF3C1@prv-mh.provo.novell.com>
- <23201.9924.443629.987357@mariner.uk.xensource.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v1] x86/domctl: remove impossible condition
+ in XEN_DOMCTL_getpageframeinfo3
+Date: Fri, 9 Mar 2018 16:02:43 +0000
+Message-ID: <35524832-2900-6a73-8bf3-1d6a5d92783b@citrix.com>
+References: <20180309160116.16298-1-olaf@aepfle.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=gdq1=f7=citrix.com=prvs=5995bc012=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1euKTs-00058W-7s
- for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 16:02:52 +0000
-In-Reply-To: <23201.9924.443629.987357@mariner.uk.xensource.com>
+In-Reply-To: <20180309160116.16298-1-olaf@aepfle.de>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,15 +18,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Lars Kurth <lars.kurth.xen@gmail.com>, xen-devel@lists.xenproject.org, committers@xenproject.org, security@xenproject.org
+To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xen.org
+Cc: Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SWFuIEphY2tzb24gd3JpdGVzICgiUmU6IG9zc3Rlc3QgcGxhbm5lZCBvdXRhZ2UgY29uc3VsdGF0
-aW9uIik6Cj4gSXQgdHVybnMgb3V0IHRoYXQgYW5vdGhlciBrZXkgbWVtYmVyIG9mIHN0YWZmIGlz
-IGF3YXkgdGhlbi4gIFdlIHdpbGwKPiBoYXZlIHRvIGRvIHRoaXMgc29tZSB0aW1lIGluIGxhdGUg
-QXByaWwuICBTb21lIHRpbWUgdGhlIFt3ZWVrXSBvZiB0aGUKPiAxNnRoLTIwdGggSSB0aGluay4K
-CkxhcnMsIGNhbiB5b3UgY2hlY2sgdGhpcyBpcyBPSyB3aXRoIENyZWRhdGl2IGFuZCB0aGVuIHJl
-cG9ydCBiYWNrIGhlcmUKd2l0aCBhIGNvbmZpcm1hdGlvbiB3ZSdyZSBkb2luZyBpdCB0aGVuID8K
-Cklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDkvMDMvMTggMTY6MDEsIE9sYWYgSGVyaW5nIHdyb3RlOgo+IFRoZSB2YWx1ZSBvZiBudW0g
+aXMgYWx3YXlzIHRoZSBzYW1lIGFzIGRvbWN0bC0+dS5nZXRwYWdlZnJhbWVpbmZvMy5udW0sCj4g
+aXQgd2FzIGFzc2lnbmVkIGp1c3QgYSBmZXcgbGluZXMgYmVmb3JlLgo+Cj4gU2lnbmVkLW9mZi1i
+eTogT2xhZiBIZXJpbmcgPG9sYWZAYWVwZmxlLmRlPgoKVGhpcyBpc24ndCBkZWFkIGNvZGUuwqAg
+SXQgaXMgYSB0cnVuY2F0aW9uIGNoZWNrLgoKfkFuZHJldwoKPiAtLS0KPiAgeGVuL2FyY2gveDg2
+L2RvbWN0bC5jIHwgMyArLS0KPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAyIGRl
+bGV0aW9ucygtKQo+Cj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9kb21jdGwuYyBiL3hlbi9h
+cmNoL3g4Ni9kb21jdGwuYwo+IGluZGV4IDhmYmJmM2FlYjMuLjQ2ZDI4OGE0OTAgMTAwNjQ0Cj4g
+LS0tIGEveGVuL2FyY2gveDg2L2RvbWN0bC5jCj4gKysrIGIveGVuL2FyY2gveDg2L2RvbWN0bC5j
+Cj4gQEAgLTQyMSw4ICs0MjEsNyBAQCBsb25nIGFyY2hfZG9fZG9tY3RsKAo+ICAgICAgICAgIC8q
+IEdhbWVzIHRvIGFsbG93IHRoaXMgY29kZSBibG9jayB0byBoYW5kbGUgYSBjb21wYXQgZ3Vlc3Qu
+ICovCj4gICAgICAgICAgdm9pZCBfX3VzZXIgKmd1ZXN0X2hhbmRsZSA9IGRvbWN0bC0+dS5nZXRw
+YWdlZnJhbWVpbmZvMy5hcnJheS5wOwo+ICAKPiAtICAgICAgICBpZiAoIHVubGlrZWx5KG51bSA+
+IDEwMjQpIHx8Cj4gLSAgICAgICAgICAgICB1bmxpa2VseShudW0gIT0gZG9tY3RsLT51LmdldHBh
+Z2VmcmFtZWluZm8zLm51bSkgKQo+ICsgICAgICAgIGlmICggdW5saWtlbHkobnVtID4gMTAyNCkg
+KQo+ICAgICAgICAgIHsKPiAgICAgICAgICAgICAgcmV0ID0gLUUyQklHOwo+ICAgICAgICAgICAg
+ICBicmVhazsKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
