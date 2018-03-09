@@ -1,8 +1,8 @@
 From: "Tian, Kevin" <kevin.tian@intel.com>
 Subject: Re: [PATCH v2 4/6] xen/x86: disable global pages for
  domains with XPTI active
-Date: Fri, 9 Mar 2018 03:01:11 +0000
-Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D19103E46E@SHSMSX101.ccr.corp.intel.com>
+Date: Fri, 9 Mar 2018 05:23:54 +0000
+Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D19104023E@SHSMSX101.ccr.corp.intel.com>
 References: <20180302081403.16953-1-jgross@suse.com>
  <20180302081403.16953-5-jgross@suse.com>
  <5AA14AF302000078001AFD30@prv-mh.provo.novell.com>
@@ -13,8 +13,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=okzm=f7=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
- id 1eu8Hc-0008Jn-2y
- for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 03:01:24 +0000
+ id 1euAVl-0001zd-JR
+ for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 05:24:09 +0000
 In-Reply-To: <5AA14AF302000078001AFD30@prv-mh.provo.novell.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,22 +54,13 @@ RkxVU0hfVExCIHdhcyBoYW5kbGVkIGRpZmZlcmVudGx5IGluIHRoYXQKPiBjYXNlLCByZXRhaW5p
 bmcgWGVuJ3MgZ2xvYmFsIG1hcHBpbmdzLiBBbnkgZmx1c2ggSVBJIG5vdCByZXF1ZXN0aW5nCj4g
 Z2xvYmFsIHBhZ2VzIHRvIGJlIGZsdXNoZWQgY291bGQgdGhlbiBsZWF2ZSBpbnRhY3QgWGVuJ3Mg
 b3duIFRMQgo+IGVudHJpZXMsIHdoaWNoIHRha2VzIGFzIGEgcHJlcmVxIHRoYXQgQ1I0LlBHRSBn
-ZXRzIHR1cm5lZCBiYWNrIG9uCj4gZWFybGllci4KPiAKPiBBbmQgb25lIG1vcmUgY2hhbmdlIHdv
-dWxkIGJlbG9uZyBpbnRvIHRoaXMgcGF0Y2gsIEkgdGhpbms6IEluIHBhdGNoCj4gMiB5b3UgY2hh
-bmdlIHdyaXRlX3B0YmFzZSgpLiBUaGUgYmFyZSBDUjMgd3JpdGUgdGhlcmUgd291bGQKPiBiZWNv
-bWUgZWxpZ2libGUgdG8gdGljayB0aGUgVExCIGZsdXNoIGNsb2NrIHdpdGggd2hhdCB5b3UgZG8g
-aGVyZS4KPiAKPiBUYWxraW5nIG9mIFZNWDogSSB3b25kZXIgd2hldGhlciBpdCB3b3VsZG4ndCBi
-ZSBiZXR0ZXIgKHBlcmhhcHMgYm90aAo+IGNoZWFwZXIgYW5kIGxvbmcgdGVybSBwb3NzaWJseSBt
-b3JlIGNvcnJlY3QpIGlmIHZteF9jdHh0X3N3aXRjaF90bygpCj4gZGlkbid0IHdyaXRlIENSNCwg
-YnV0IGluc3RlYWQgc3luYy1lZCBIT1NUX0NSNCB0byB3aGF0IHJlYWRfY3I0KCkKPiByZXR1cm5z
-LiBKdW4sIEtldmluLCBkbyB5b3UgaGF2ZSBhbnkgdGhvdWdodHMgb24gdGhpcz8gRm9yIHRoZSBw
-YXRjaAo+IGhlcmUsIHRoaXMgd291bGQgZ2V0IHRoZSBiZWhhdmlvciBvbiBwYXIgd2l0aCBTVk0s
-IGFzIGRlc2NyaWJlZCBhYm92ZS4KPiAKCkkgZGlkbid0IHNlZSBhIHJlYXNvbiB3aHkgd2Ugd2Fu
-dCBIT1NUX0NSNCBkaWZmZXJlbnQgZnJvbSAKbGF0ZXN0IGNyNCB2YWx1ZSwgc28geWVzLCBJIHRo
-aW5rIGl0J3MgYSByZWFzb25hYmxlIGNsZWFudXAuCgpwLnMuIGN1cnJlbnQgdm14IGxvZ2ljIGxv
-b2tzIHByb2JsZW1hdGljLiBJdCBhY3R1YWxseSBkb2VzIApyZXZlcnNlIHN5bmMgZnJvbSBIT1NU
-X0NSNCB0byBjcjQgYmVmb3JlIHZtZW50cnkgd2hpY2ggCmRvZXNuJ3QgbWFrZSBhbnkgc2Vuc2Uu
-CgpUaGFua3MKS2V2aW4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+ZXRzIHR1cm5lZCBiYWNrIG9uCj4gZWFybGllci4KPiAKCmJ0dyBkb2VzIFBHRSByZWFsbHkgbWF0
+dGVyIHJlZ2FyZGluZyB0byBlbnRyeSB0byBIVk0gZ3Vlc3Q/IFhlbidzIAptYXBwaW5ncyBhcmUg
+ZWl0aGVyIGFsbCBmbHVzaGVkICh2cGlkIGRpc2FibGVkKSBvciBhbGwgc3VzdGFpbmVkCih2cGlk
+IGVuYWJsZWQpIGF0IFZNIGVudHJpZXMsIHJlZ2FyZGxlc3Mgb2YgZ2xvYmFsIHNldHRpbmcuIHRo
+ZW4gaWYgClBHRSBpcyBhbnl3YXkgdHVybmVkIG9mZiBmb3IgUFYgYW5kIGRvZXNuJ3QgbWF0dGVy
+IGZvciBIVk0gaXMgaXQgCnN0aWxsIHVzZWZ1bCB0byBrZWVwIGl0IHR1cm5lZCBvbiBiZXR3ZWVu
+IHN3aXRjaGVzPwogClRoYW5rcwpLZXZpbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
