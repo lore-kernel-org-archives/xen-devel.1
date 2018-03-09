@@ -1,12 +1,10 @@
 From: Lars Kurth <lars.kurth@citrix.com>
 Subject: Re: [PATCH] Move missing items from
  docs/misc/qemu-xen-security to SUPPORT.md
-Date: Fri, 9 Mar 2018 10:34:10 +0000
-Message-ID: <E514A8D1-BF1F-44CF-9243-603C708A6F02@citrix.com>
+Date: Fri, 9 Mar 2018 10:35:26 +0000
+Message-ID: <44B1472E-BA4F-4656-AB0E-8F750229312B@citrix.com>
 References: <20180308173719.14791-1-lars.kurth@citrix.com>
- <23201.30331.17592.424886@mariner.uk.xensource.com>
- <8473046C-FDDE-436E-963C-2965F183F013@citrix.com>
- <f3c5d615-84e6-0796-705b-26450f2894a4@citrix.com>
+ <8f5736eb-a423-dbd4-48d6-1eead967e4fa@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -14,11 +12,11 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=7v9i=f7=citrix.com=prvs=599f723f2=lars.kurth@srs-us1.protection.inumbo.net>)
- id 1euFMC-0002FE-OM
- for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 10:34:36 +0000
-In-Reply-To: <f3c5d615-84e6-0796-705b-26450f2894a4@citrix.com>
+ id 1euFN8-0002Ks-Do
+ for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 10:35:34 +0000
+In-Reply-To: <8f5736eb-a423-dbd4-48d6-1eead967e4fa@arm.com>
 Content-Language: en-US
-Content-ID: <17E59429CBE38044B54B516CE3F89AEA@citrix.com>
+Content-ID: <A12BAB291CADAF4A8BDDD106ED410300@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,43 +25,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <George.Dunlap@citrix.com>, Ian Jackson <Ian.Jackson@citrix.com>, 'Jan Beulich' <JBeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "committers@xenproject.org" <committers@xenproject.org>
+To: Julien Grall <julien.grall@arm.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: "committers@xenproject.org" <committers@xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-DQoNCu+7v09uIDA5LzAzLzIwMTgsIDExOjMyLCAiR2VvcmdlIER1bmxhcCIgPGdlb3JnZS5kdW5s
-YXBAY2l0cml4LmNvbT4gd3JvdGU6DQoNCiAgICBPbiAwMy8wOC8yMDE4IDA2OjA3IFBNLCBMYXJz
-IEt1cnRoIHdyb3RlOg0KICAgID4gDQogICAgPiBPbiAwOC8wMy8yMDE4LCAxODo0NCwgIklhbiBK
-YWNrc29uIiA8aWFuLmphY2tzb25AY2l0cml4LmNvbT4gd3JvdGU6DQogICAgPiANCiAgICA+ICAg
-ICBMYXJzIEt1cnRoIHdyaXRlcyAoIltQQVRDSF0gTW92ZSBtaXNzaW5nIGl0ZW1zIGZyb20gZG9j
-cy9taXNjL3FlbXUteGVuLXNlY3VyaXR5IHRvIFNVUFBPUlQubWQiKToNCiAgICA+ICAgICA+IHg4
-Ni9FbXVsYXRlZCBwbGF0Zm9ybSBkZXZpY2VzIChRRU1VKToNCiAgICA+ICAgICA+IC0gQWRlZCBQ
-Q0kgaG9zdCBicmlkZ2UgKGFzIGluIHhlbi5naXQ6ZG9jcy9taXNjL3FlbXUteGVuLXNlY3VyaXR5
-KQ0KICAgID4gICAgID4gTmV3OiB4ODYvRW11bGF0ZWQgU3RvcmFnZSBJbWFnZSBGb3JtYXRzDQog
-ICAgPiAgICAgPiAtIEFkZGVkIHJhdywgcWNvdywgcWNvdzIsIHZoZCAoYXMgaW4geGVuLmdpdDpk
-b2NzL21pc2MvcWVtdS14ZW4tc2VjdXJpdHkpDQogICAgPiAgICAgPiB4ODYvRW11bGF0ZWQgZ3Jh
-cGhpY3MgKFFFTVUpDQogICAgPiAgICAgPiAtIEZpeGVkIHR5cG8gKHN0ZHZnYSkNCiAgICA+ICAg
-ICA+IC0gQWRkZWQgeGVuZmIgKGFzIGluIHhlbi5naXQ6ZG9jcy9taXNjL3FlbXUteGVuLXNlY3Vy
-aXR5KQ0KICAgID4gICAgID4geDg2L0VtdWxhdGVkIGlucHV0IChRRU1VKToNCiAgICA+ICAgICA+
-IC0gQWRkZWQgeGVuZmIga2V5Ym9hcmQvbW91c2UgKGFzIGluIHhlbi5naXQ6ZG9jcy9taXNjL3Fl
-bXUteGVuLXNlY3VyaXR5KQ0KICAgID4gICAgID4gDQogICAgPiAgICAgPiBEZWxldGUgeGVuLmdp
-dDpkb2NzL21pc2MvcWVtdS14ZW4tc2VjdXJpdHkgYXMgbm93IG5vdCBuZWVkZWQNCiAgICA+ICAg
-ICANCiAgICA+ICAgICBMR1RNLiAgVGhhbmtzLg0KICAgID4gICAgIA0KICAgID4gICAgIEFja2Vk
-LWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4NCiAgICA+ICAgICAN
-CiAgICA+ICAgICBXZSBzaG91bGQgd2FpdCBhIGJpdCB3aXRoIGNvbW1pdHRpbmcgaW4gY2FzZSBz
-b21lb25lIHdhbnRzIHRvIG9iamVjdA0KICAgID4gICAgIGZvciBzb21lIHJlYXNvbi4uLg0KICAg
-ID4gICAgIA0KICAgID4gICAgIElhbi4NCiAgICA+ICAgIA0KICAgID4gQEphbjogdGhpcyBzaG91
-bGQgYmUgYmFja3BvcnRlZCB0byA0LjEwIGFsc28NCiAgICANCiAgICBJIHRoaW5rIHdlIHNob3Vs
-ZCBiYWNrcG9ydCBhbnkgdXBkYXRlcyB0byBTVVBQT1JULm1kLCBidXQgSSBkb24ndCB0aGluaw0K
-ICAgIHdlIHNob3VsZCByZW1vdmUgcWVtdS14ZW4tc2VjdXJpdHkgaW4gNC4xMC4gIFRoYXQncyBu
-b3QgdGhlIGtpbmQgb2YNCiAgICB0aGluZyB3ZSBzaG91bGQgcmVhbGx5IGRlbGV0ZSBpbiBhIHBv
-aW50IHJlbGVhc2UuDQogICAgDQogICAgTGFycywgbWF5YmUgd2hlbiB5b3UgcmUtc3VibWl0IHlv
-dSBjb3VsZCBtYWtlIHRoaXMgdHdvIHBhdGNoZXMgLS0gb25lIHRvDQogICAgdXBkYXRlIFNVUFBP
-UlQubWQgKHdoaWNoIHdvdWxkIGJlIGJhY2twb3J0ZWQpIGFuZCBvbmUgdG8gcmVtb3ZlDQogICAg
-cWVtdS14ZW4tc2VjdXJpdHkgKHdoaWNoIHdvdWxkIG5vdCBiZSk/DQoNClN1cmUuIEkgd2lsbCBu
-ZWVkIHlvdSBndXlzIHRvIGhlbHAgbWUgcHV0IHRoZSByaWdodCB0ZXJtaW5vbG9neSBpbiBwbGFj
-ZSBmb3IgU1VQUE9SVC5tZA0KSSB0aG91Z2h0IHRoZSB0YXNrIGlzIG1vcmUgbWVjaGFuaWNhbCB0
-aGFuIGl0IGlzDQoNCkxhcnMNCiANCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+DQrvu79PbiAwOS8wMy8yMDE4LCAxMTozMSwgIkp1bGllbiBHcmFsbCIgPGp1bGllbi5ncmFsbEBh
+cm0uY29tPiB3cm90ZToNCg0KICAgIEhpIExhcnMsDQogICAgDQogICAgT24gMDgvMDMvMTggMTc6
+MzcsIExhcnMgS3VydGggd3JvdGU6DQogICAgPiB4ODYvRW11bGF0ZWQgcGxhdGZvcm0gZGV2aWNl
+cyAoUUVNVSk6DQogICAgPiAtIEFkZWQgUENJIGhvc3QgYnJpZGdlIChhcyBpbiB4ZW4uZ2l0OmRv
+Y3MvbWlzYy9xZW11LXhlbi1zZWN1cml0eSkNCiAgICA+IE5ldzogeDg2L0VtdWxhdGVkIFN0b3Jh
+Z2UgSW1hZ2UgRm9ybWF0cw0KICAgID4gLSBBZGRlZCByYXcsIHFjb3csIHFjb3cyLCB2aGQgKGFz
+IGluIHhlbi5naXQ6ZG9jcy9taXNjL3FlbXUteGVuLXNlY3VyaXR5KQ0KICAgIA0KICAgIElzIHRo
+ZXJlIGFueSByZWFzb24gdG8gYmUgeDg2L2VtdWxhdGUgc3RvcmFnZSBvbmx5PyBJZiBJIGFtIG5v
+dCANCiAgICBtaXN0YWtlbiwgUUVNVSBjb3VsZCBhbHNvIGJlIHVzZWQgYXMgUFYgYmxvY2sgYmFj
+a2VuZCBmb3IgYWxsIHRob3NlIA0KICAgIGltYWdlIGZvcm1hdHMuIFRoYXQgaXMgYWxzbyB3b3Jr
+aW5nIG9uIEFybS4NCg0KVGhlIG9ubHkgcmVhc29uLCBJIGRpZCB0aGlzLCB3YXMgYmVjYXVzZSB0
+aGF0IGlzIGhvdyBpdCB3YXMgcGhyYXNlZCBpbiBxZW11LXhlbi1zZWN1cml0eQ0KTGFycw0KICAN
+Cg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
