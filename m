@@ -1,12 +1,22 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: [PATCH v1] x86/domctl: remove impossible condition in
-	XEN_DOMCTL_getpageframeinfo3
-Date: Fri,  9 Mar 2018 17:01:16 +0100
-Message-ID: <20180309160116.16298-1-olaf@aepfle.de>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: osstest planned outage consultation
+Date: Fri, 9 Mar 2018 16:02:48 +0000
+Message-ID: <23202.45096.90866.563420@mariner.uk.xensource.com>
+References: <23193.33276.834923.421617@mariner.uk.xensource.com>
+ <5A9E5F0F02000078001AED83@prv-mh.provo.novell.com>
+ <23198.60604.72583.53459@mariner.uk.xensource.com>
+ <5A9FAA3002000078001AF3C1@prv-mh.provo.novell.com>
+ <23201.9924.443629.987357@mariner.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=gdq1=f7=citrix.com=prvs=5995bc012=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1euKTs-00058W-7s
+ for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 16:02:52 +0000
+In-Reply-To: <23201.9924.443629.987357@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,24 +25,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Olaf Hering <olaf@aepfle.de>, Jan Beulich <jbeulich@suse.com>
+To: Jan Beulich <JBeulich@suse.com>, Lars Kurth <lars.kurth.xen@gmail.com>, xen-devel@lists.xenproject.org, committers@xenproject.org, security@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIHZhbHVlIG9mIG51bSBpcyBhbHdheXMgdGhlIHNhbWUgYXMgZG9tY3RsLT51LmdldHBhZ2Vm
-cmFtZWluZm8zLm51bSwKaXQgd2FzIGFzc2lnbmVkIGp1c3QgYSBmZXcgbGluZXMgYmVmb3JlLgoK
-U2lnbmVkLW9mZi1ieTogT2xhZiBIZXJpbmcgPG9sYWZAYWVwZmxlLmRlPgotLS0KIHhlbi9hcmNo
-L3g4Ni9kb21jdGwuYyB8IDMgKy0tCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDIg
-ZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2RvbWN0bC5jIGIveGVuL2Fy
-Y2gveDg2L2RvbWN0bC5jCmluZGV4IDhmYmJmM2FlYjMuLjQ2ZDI4OGE0OTAgMTAwNjQ0Ci0tLSBh
-L3hlbi9hcmNoL3g4Ni9kb21jdGwuYworKysgYi94ZW4vYXJjaC94ODYvZG9tY3RsLmMKQEAgLTQy
-MSw4ICs0MjEsNyBAQCBsb25nIGFyY2hfZG9fZG9tY3RsKAogICAgICAgICAvKiBHYW1lcyB0byBh
-bGxvdyB0aGlzIGNvZGUgYmxvY2sgdG8gaGFuZGxlIGEgY29tcGF0IGd1ZXN0LiAqLwogICAgICAg
-ICB2b2lkIF9fdXNlciAqZ3Vlc3RfaGFuZGxlID0gZG9tY3RsLT51LmdldHBhZ2VmcmFtZWluZm8z
-LmFycmF5LnA7CiAKLSAgICAgICAgaWYgKCB1bmxpa2VseShudW0gPiAxMDI0KSB8fAotICAgICAg
-ICAgICAgIHVubGlrZWx5KG51bSAhPSBkb21jdGwtPnUuZ2V0cGFnZWZyYW1laW5mbzMubnVtKSAp
-CisgICAgICAgIGlmICggdW5saWtlbHkobnVtID4gMTAyNCkgKQogICAgICAgICB7CiAgICAgICAg
-ICAgICByZXQgPSAtRTJCSUc7CiAgICAgICAgICAgICBicmVhazsKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+SWFuIEphY2tzb24gd3JpdGVzICgiUmU6IG9zc3Rlc3QgcGxhbm5lZCBvdXRhZ2UgY29uc3VsdGF0
+aW9uIik6Cj4gSXQgdHVybnMgb3V0IHRoYXQgYW5vdGhlciBrZXkgbWVtYmVyIG9mIHN0YWZmIGlz
+IGF3YXkgdGhlbi4gIFdlIHdpbGwKPiBoYXZlIHRvIGRvIHRoaXMgc29tZSB0aW1lIGluIGxhdGUg
+QXByaWwuICBTb21lIHRpbWUgdGhlIFt3ZWVrXSBvZiB0aGUKPiAxNnRoLTIwdGggSSB0aGluay4K
+CkxhcnMsIGNhbiB5b3UgY2hlY2sgdGhpcyBpcyBPSyB3aXRoIENyZWRhdGl2IGFuZCB0aGVuIHJl
+cG9ydCBiYWNrIGhlcmUKd2l0aCBhIGNvbmZpcm1hdGlvbiB3ZSdyZSBkb2luZyBpdCB0aGVuID8K
+Cklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
