@@ -1,22 +1,16 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] Move missing items from
- docs/misc/qemu-xen-security to SUPPORT.md
-Date: Fri, 09 Mar 2018 03:53:27 -0700
-Message-ID: <5AA275B702000078001B02B5@prv-mh.provo.novell.com>
-References: <20180308173719.14791-1-lars.kurth@citrix.com>
- <5AA26AE702000078001B01B1@prv-mh.provo.novell.com>
- <17BAC847-D2D7-4D35-9318-38478066834E@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: staging fails to build due to missing qemu patch for
+	memfd_create
+Date: Fri, 9 Mar 2018 12:05:18 +0100
+Message-ID: <20180309110517.GC12975@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2161159341660084011=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=ibp0=f7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1euFea-0004mq-Jy
- for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 10:53:36 +0000
-In-Reply-To: <17BAC847-D2D7-4D35-9318-38478066834E@citrix.com>
-Content-Disposition: inline
+ (envelope-from <srs0=1s9y=f7=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1euFq0-0005g7-4q
+ for xen-devel@lists.xenproject.org; Fri, 09 Mar 2018 11:05:24 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,58 +19,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "committers@xenproject.org" <committers@xenproject.org>
+To: anthony.perard@citrix.com, ian.jackson@citrix.com, wei.liu2@citrix.com
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA5LjAzLjE4IGF0IDExOjI4LCA8bGFycy5rdXJ0aEBjaXRyaXguY29tPiB3cm90ZToK
-PiDvu79PbiAwOS8wMy8yMDE4LCAxMTowNywgIkphbiBCZXVsaWNoIiA8SkJldWxpY2hAc3VzZS5j
-b20+IHdyb3RlOgo+IAo+ICAgICA+Pj4gT24gMDguMDMuMTggYXQgMTg6MzcsIDxsYXJzLmt1cnRo
-QGNpdHJpeC5jb20+IHdyb3RlOgo+ICAgICA+IC0tLSBhL1NVUFBPUlQubWQKPiAgICAgPiArKysg
-Yi9TVVBQT1JULm1kCj4gICAgID4gQEAgLTYyMCw2ICs2MjAsNyBAQCBOb3RlIHRoYXQgb3RoZXIg
-ZGV2aWNlcyBhcmUgYXZhaWxhYmxlIGJ1dCBub3Qgc2VjdXJpdHkgc3VwcG9ydGVkLgo+ICAgICA+
-ICAKPiAgICAgPiAgIyMjIHg4Ni9FbXVsYXRlZCBwbGF0Zm9ybSBkZXZpY2VzIChRRU1VKToKPiAg
-ICAgPiAgCj4gICAgID4gKyAgICBTdGF0dXMsIFBDSSBob3N0IGJyaWRnZTogU3VwcG9ydGVkCj4g
-ICAgID4gICAgICBTdGF0dXMsIHBpaXgzOiBTdXBwb3J0ZWQKPiAgICAgCj4gICAgIFRoYXQncyB3
-YXkgdG9vIGdlbmVyaWMgaW1vOiBBbnkgY2hpcHNldCB3aWxsIGhhdmUgYSBob3N0IGJyaWRnZSwg
-c28KPiAgICAgaXRzIHN1cHBvcnQgaXMgYWxyZWFkeSBpbmNsdWRlZCBpbiB0aGUgc3RhdGVtZW50
-IG9uIHdoaWNoIGNoaXBzZXQKPiAgICAgZW11bGF0aW9uKHMpIHdlIHN1cHBvcnQuIEJ5IGFkZGlu
-ZyB3aGF0IHlvdSBhZGQsIHlvdSBjb3VsZCBhZ2Fpbgo+ICAgICByYWlzZSB0aGUgZXhwZWN0YXRp
-b24gdGhhdCBhbnkgaG9zdCBicmlkZ2UgaW1wbGVtZW50YXRpb24gaW4gcWVtdQo+ICAgICBpcyBz
-dXBwb3J0ZWQuCj4gCj4gSSB0aG91Z2h0IHRoaXMgbWF5IGJlIGFuIGlzc3VlLiBJIHdvdWxkIGJl
-IHF1aXRlIGhhcHB5IHRvIGNoYW5nZSBpdCwgYnV0IAo+IHdvdWxkIG5lZWQgdG8ga25vdyBob3cg
-dG8gcGhyYXNlIGl0Lgo+IFN1Z2dlc3Rpb25zPwoKSnVzdCBkcm9wIHRoaXMgYWRkaXRpb24gb2Yg
-YSBsaW5lLgoKPiAgICAgPiAgIyMjIHg4Ni9FbXVsYXRlZCBncmFwaGljcyAoUUVNVSk6Cj4gICAg
-ID4gIAo+ICAgICA+ICAgICAgU3RhdHVzLCBjaXJydXMtdmdhOiBTdXBwb3J0ZWQKPiAgICAgPiAt
-ICAgIFN0YXR1cywgc3RndmdhOiBTdXBwb3J0ZWQKPiAgICAgPiArICAgIFN0YXR1cywgc3Rkdmdh
-OiBTdXBwb3J0ZWQKPiAgICAgPiArICAgIFN0YXR1cywgeGVuZmI6IFN1cHBvcnRlZAo+ICAgICAK
-PiAgICAgSnVzdCBsaWtlIHhlbl9kaXNrIChjb3JyZWN0bHkpIGlzbid0IGxpc3RlZCBpbiB0aGUg
-Ing4Ni9FbXVsYXRlZCBzdG9yYWdlCj4gICAgIChRRU1VKSIgc2VjdGlvbiwgeGVuZmIgZG9lc24n
-dCBiZWxvbmcgaGVyZSBpbW8uIEl0J3Mgbm90IGFuIGVtdWxhdGVkCj4gICAgIGRldmljZSwgYW5k
-IGlzIGFscmVhZHkgZW51bWVyYXRlZCBpbiAiUFYgRnJhbWVidWZmZXIgKGJhY2tlbmQpIgo+ICAg
-ICAoanVzdCBub3Qgd2l0aCB0aGUgdGVybSAieGVuZmIiKS4KPiAKPiBTbywgd2hhdCBJIHJlYWQg
-ZnJvbSB0aGlzLCB0aGUgZXhpc3RpbmcgbGluZSAKPiAKPiAjIyMgUFYgRnJhbWVidWZmZXIgKGJh
-Y2tlbmQpCj4gICAgIFN0YXR1cywgUUVNVTogU3VwcG9ydGVkCj4gCj4gY292ZXJzIHRoZSBiYWNr
-LWVuZC4KClllcy4KCj4gICAgID4gQEAgLTY1MCw3ICs2NTksOSBAQCBOb3RlIHRoYXQgb3RoZXIg
-ZGV2aWNlcyBhcmUgYXZhaWxhYmxlIGJ1dCBub3Qgc2VjdXJpdHkgc3VwcG9ydGVkLgo+ICAgICA+
-ICAgICAgU3RhdHVzLCB1c2J0YWJsZXQ6IFN1cHBvcnRlZAo+ICAgICA+ICAgICAgU3RhdHVzLCBw
-cy8yIGtleWJvYXJkOiBTdXBwb3J0ZWQKPiAgICAgPiAgICAgIFN0YXR1cywgcHMvMiBtb3VzZTog
-U3VwcG9ydGVkCj4gICAgID4gLQo+ICAgICA+ICsgICAgU3RhdHVzLCB4ZW5mYiBrZXlib2FyZDog
-U3VwcG9ydGVkCj4gICAgID4gKyAgICBTdGF0dXMsIHhlbmZiIG1vdXNlOiBTdXBwb3J0ZWQKPiAg
-ICAgCj4gICAgIFNpbWlsYXJseSBmb3IgdGhlc2Ugb25lcyBhbmQgIlBWIGtleWJvYXJkIChiYWNr
-ZW5kKSIuIFBlcmhhcHMgYQo+ICAgICAiUFYgbW91c2UgKGJhY2tlbmQpIiBzZWN0aW9uIHNob3Vs
-ZCBiZSBhZGRlZC4KPiAgCj4gU28gdG8gY2xhcmlmeSwgCj4gCj4gIyMjIFBWIGtleWJvYXJkIChi
-YWNrZW5kKQo+ICAgICBTdGF0dXMsIFFFTVU6IFN1cHBvcnRlZAo+ICMjIyBQViBtb3VzZSAoYmFj
-a2VuZCkKPiAgICAgU3RhdHVzLCBRRU1VOiBTdXBwb3J0ZWQKPiAKPiB3b3VsZCBjb3ZlciB0aGlz
-IGluIHlvdXIgdmlldz8KClllcy4KCj4gRG9lcyB0aGlzIGNvdmVyIGFsbCB0aGUgYmFzZXMsIG9y
-IGRpZCBJIG1pc3MgYW55dGhpbmc/IAoKV2l0aCBzL2Jhc2VzL2JhY2tlbmRzLyAtIHllcywgSSB0
-aGluayBzby4KCj4gSW4gb3RoZXIgd29yZHMsIGFyZSB0aGVyZSBhbnkgZnJvbnRlbmQgYml0cyBm
-b3IgeGVuZmIgKGZyYW1lYnVmZmVyLCAKPiBrZXlib2FyZCwgbW91c2UpIHRoYXQgd291bGQgbmVl
-ZCB0byBiZSByZWNvcmRlZCBzb21ld2hlcmUKClRoZSBmcm9udGVuZCBhcmUgaW4gdGhlIGd1ZXN0
-IE9TZXMgYW55d2F5LCBhbmQgdGhleSBhbGwgaGF2ZSB0aGVpcgpvd24gc2VjdGlvbnMgKGxvb2tz
-IGxpa2UgYXMgZm9yIHRoZSBiYWNrZW5kcyB0aGVyZSdzICJrZXlib2FyZCIgYnV0Cm5vdCAibW91
-c2UiOyBpbiBib3RoIGNhc2VzIG5vdCB1bmxpa2VseSBiZWNhdXNlIHRoZXkgbGl2ZSBjbG9zZQp0
-b2dldGhlcikuCgpKYW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+
+--===============2161159341660084011==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="tqI+Z3u+9OQ7kwn0"
+Content-Disposition: inline
+
+
+--tqI+Z3u+9OQ7kwn0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+Please update the qemu-xen tree to include 75e5b70e6b ("memfd: fix
+configure test"). Currently xen.git#staging fails like this:
+
+xen-staging/tools/qemu-xen-dir/util/memfd.c:40:12: error: static declaration of 'memfd_create' follows non-static declaration
+
+Thank you.
+
+Olaf
+
+--tqI+Z3u+9OQ7kwn0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWqJqawAKCRBdQqD6ppg2
+fsE4AJ4siYhe0STIh3aCLrwhvFC7KZ59BwCggamPrHMvtatUlFG2kJIpRE/EJCg=
+=Avm5
+-----END PGP SIGNATURE-----
+
+--tqI+Z3u+9OQ7kwn0--
+
+
+--===============2161159341660084011==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2161159341660084011==--
