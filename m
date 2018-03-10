@@ -1,25 +1,23 @@
-From: Michael Young <m.a.young@durham.ac.uk>
-Subject: Re: [PATCH 1/2] make xen ocaml safe-strings compliant
-Date: Sat, 10 Mar 2018 00:36:12 +0000 (GMT)
-Message-ID: <alpine.LFD.2.21.1803092352560.3092@austen3.home>
-References: <alpine.LFD.2.21.1801302254440.2952@austen3.home>
- <1518112198.5629.68.camel@suse.com>
- <20180208180348.moi3fujoq22fkkqg@citrix.com>
- <20180208182400.g4qlkiaetnvqhuo6@citrix.com>
- <EAB71B74-BDA5-49CD-9C55-6BB3BCDC3FB1@citrix.com>
- <20180212145519.ovy6zfusvhsd24s7@citrix.com>
- <alpine.LFD.2.21.1803092248590.3092@austen3.home>
- <C2CE6FE9-8010-4936-A2C7-32C0DAAD05F9@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v4 0/7] unsafe big.LITTLE support
+Date: Fri, 9 Mar 2018 17:09:20 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1803091651440.23583@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1803021103130.4239@sstabellini-ThinkPad-X260>
+ <20180308061458.GA25007@shlinux2>
+ <edbc8066-397f-9aea-264b-3e27d052b56e@arm.com>
+ <DB6PR04MB32219D215C6691B6640089DF88DF0@DB6PR04MB3221.eurprd04.prod.outlook.com>
+ <ee741bd9-a12a-4d5b-baea-0630b827609d@arm.com>
+ <DB6PR04MB3221B282FCF671F4F033C70E88DF0@DB6PR04MB3221.eurprd04.prod.outlook.com>
+ <8cf8b6a8-b08b-32c6-04f5-fd9dc270db9b@arm.com>
+ <20180309090529.GA20107@shlinux2>
+ <983abafd-e8c9-57d4-2d7a-74291a2a24c5@arm.com>
+ <20180309133016.GA25062@shlinux2>
+ <2f3185d6-911d-4d56-2ded-9debb1cab951@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323328-2075177674-1520639636=:3092"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=8oal=ga=durham.ac.uk=m.a.young@srs-us1.protection.inumbo.net>)
- id 1euSUs-0005JY-Df
- for xen-devel@lists.xenproject.org; Sat, 10 Mar 2018 00:36:26 +0000
-In-Reply-To: <C2CE6FE9-8010-4936-A2C7-32C0DAAD05F9@citrix.com>
-Content-ID: <alpine.LFD.2.21.1803092356420.3092@austen3.home>
+In-Reply-To: <2f3185d6-911d-4d56-2ded-9debb1cab951@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,75 +26,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Christian Lindig <christian.lindig@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, John Thomson <git@johnthomson.fastmail.com.au>, Dario Faggioli <dfaggioli@suse.com>, Marcello Seri <marcello.seri@citrix.com>, David Scott <dave@recoil.org>, Xen-devel <xen-devel@lists.xenproject.org>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Peng Fan <van.freenix@gmail.com>, Peng Fan <peng.fan@nxp.com>, Stefano Stabellini <sstabellini@kernel.org>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323328-2075177674-1520639636=:3092
-Content-Type: text/plain; CHARSET=UTF-8; FORMAT=flowed
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.LFD.2.21.1803092356421.3092@austen3.home>
-
-On Fri, 9 Mar 2018, Christian Lindig wrote:
-
->
->
->> On 9. Mar 2018, at 22:57, Michael Young <m.a.young@durham.ac.uk> wrote:
->>
->> I have had a go at fixing the patch and my revised attempt is attached. I suspect it could be tidied up, but it works for me.
->
-> Thank you for giving this another go. What is the key difference to the previous patch which compiled but lead to lock up at run time? I briefly tried your patch and can confirm that it compiles and looks clean except for two trailing spaces.
->
-> — Christian
->
-> Acked-by: Christian Lindig <christian.lindig@citrix.com>
-
-The problem with the old patch is illustrated by the following section 
-from the old patch for tools/ocaml/xenstored/utils.ml
-@@ -85,7 +85,7 @@ let create_unix_socket name =
-  let read_file_single_integer filename =
-         let fd = Unix.openfile filename [ Unix.O_RDONLY ] 0o640 in
-         let buf = String.make 20 (char_of_int 0) in
--       let sz = Unix.read fd buf 0 20 in
-+       let sz = Unix.read fd (Bytes.of_string buf) 0 20 in
-         Unix.close fd;
-         int_of_string (String.sub buf 0 sz)
-
-where the patch makes Unix.read write to a Bytes copy of buf and buf 
-itself is unchanged, so int_of_string sees a string of null characters 
-rather than a string to convert into a number. The net result is that 
-information being read by oxenstored from the hypervisor is corrupted or 
-lost.
-The same basic problem also occurred in a couple of places in 
-the old patch of tools/ocaml/libs/xb/xb.ml.
-My fix for this is to switch to Bytes at an earlier stage, so for example 
-the corresponding section in the new patch becomes
-@@ -84,10 +84,10 @@ let create_unix_socket name =
-
-  let read_file_single_integer filename =
-  	let fd = Unix.openfile filename [ Unix.O_RDONLY ] 0o640 in
--	let buf = String.make 20 (char_of_int 0) in
-+	let buf = Bytes.make 20 (char_of_int 0) in
-  	let sz = Unix.read fd buf 0 20 in
-  	Unix.close fd;
--	int_of_string (String.sub buf 0 sz)
-+	int_of_string (Bytes.to_string (Bytes.sub buf 0 sz))
-
-  let path_complete path connection_path =
-  	if String.get path 0 <> '/' then
-
- 	Michael Young
---8323328-2075177674-1520639636=:3092
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323328-2075177674-1520639636=:3092--
+T24gRnJpLCA5IE1hciAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gRnVydGhlcm1vcmUsIHRo
+ZSB3b3JrYXJvdW5kIGlzIG5vdCBpbiBMaW51eCB1cHN0cmVhbSBhbmQgSSBkb3VidCB0aGlzIHdp
+bGwgYmUKPiBhY2NlcHRlZCBhcyBpdCBpcy4gU28gSSBhbSBub3QgY29udmluY2VkIHRoYXQgd2Ug
+c2hvdWxkIG1vZGlmeSBYZW4gaW50ZXJmYWNlCj4gZm9yIHRoYXQuCj4gCj4gQW55d2F5LCBnaXZl
+biB0aGF0IHlvdXIgc2lsaWNvbiBpcyBnb2luZyB0byBiZSByZXNwaW5lZCwgdGhlbiB5b3UgcHJv
+YmFibHkKPiB3YW50IHRvIHJlc3RyaWN0IHRvIHJ1biBvbiB0aGUgc2FtZSBjbHVzdGVyLgoKSGkg
+UGVuLAoKSSB0aGluayB0aGF0IGkuTVg4IGlzIGEgY3JpdGljYWwgcGxhdGZvcm0gZm9yIHRoZSBm
+dXR1cmUgb2YgZW1iZWRkZWQKdmlydHVhbGl6YXRpb24gYW5kIEkgcmVhbGx5IHdhbnQgdG8gc3Vw
+cG9ydCBpdCBpbiBYZW4gb3V0IG9mIHRoZSBib3guCgpIb3dldmVyLCBJIGFncmVlIHdpdGggSnVs
+aWVuIHRoYXQgaWYgdGhlcmUgd2lsbCBiZSBhIG5ldyB2ZXJzaW9uIG9mIHRoZQpzaWxpY29uIHdp
+dGggdGhpcyBpc3N1ZSBwcm9wZXJseSBmaXhlZCBpbiBoYXJkd2FyZSwgdGhlbiBpdCBtaWdodCBu
+b3QKbWFrZSBzZW5zZSB0byBhZGQgd29ya2Fyb3VuZHMgaW4gWGVuIGZvciB0aGlzLiBVbmxlc3Mg
+eW91IHRoaW5rIHRoZQp2ZXJzaW9uIG9mIHRoZSBoYXJkd2FyZSB3aXRoIHRoZSBlcnJhdGEgd2ls
+bCBiZSBjb21tZXJjaWFsaXplZD8KCkRvIHlvdSBwbGFuIHRvIHVwc3RyZWFtIHlvdXIgd29ya2Fy
+b3VuZCBpbiBMaW51eD8gSWYgbm90LCB0aGVuIGl0IG1pZ2h0CmJlIGJlc3QgZm9yIHlvdSB0byBj
+YXJyeSB0aGUgd29ya2Fyb3VuZCBmb3IgWGVuIGluIHlvdXIgWGVuIHRyZWUsIHRoZQpzYW1lIHdh
+eSB5b3UnbGwgZG8gZm9yIExpbnV4LiBGb3Igd29ya2Fyb3VuZHMgdGhhdCBhZmZlY3QvaW52b2x2
+ZSBib3RoCkxpbnV4IGFuZCBYZW4sIHdlIHRlbmQgdG8gZm9sbG93IHRoZSBzYW1lIHBvbGljeSBh
+cyB0aGUgTGludXgga2VybmVsLAp1bmxlc3Mgd2UgaGF2ZSBnb29kIHJlYXNvbnMgbm90IHRvLiBP
+biB0aGUgb3RoZXIgZW5kLCBpZiB5b3UgaW50ZW5kIHRvCnVwc3RyZWFtIHRoZSBMaW51eCB3b3Jr
+YXJvdW5kLCB0aGVuIHdlIGNhbiBkaXNjdXNzIHdoYXQgdG8gZG8gZm9yIFhlbi4KCgpBbHNvIGxl
+dCBtZSBleHBhbmQgb24gb25lIG9mIEp1bGllbidzIHN1Z2dlc3Rpb25zIHRoYXQgYWN0dWFsbHkg
+SSB0aGluawppcyBxdWl0ZSBnb29kLiBBc3N1bWluZyB0aGF0IHdlIGhhdmUgdGhlIHRsYiBtYWlu
+dGVuYW5jZSB3b3JrYXJvdW5kIGluCnRoZSBoeXBlcnZpc29yLCBpdCB3b3VsZCBiZSBzYWZlIHRv
+IHN0YXJ0IGd1ZXN0cyBvbmx5IGluIHRoZSBiaWcgb3Igb25seQppbiB0aGUgbGl0dGxlIGNsdXN0
+ZXIsIHJpZ2h0PyBJbiBvdGhlciB3b3JkcywgeW91IGNvdWxkIHN0aWxsIHVzZSBib3RoCmNsdXN0
+ZXJzIGJ1dCBvbmx5IHN0YXJ0aW5nIGd1ZXN0cyBpbiBvbmUgb3IgdGhlIG90aGVyLCBub3QgYm90
+aC4gVGhpcyBpcwphIGdvb2QgY29tcHJvbWlzZSBiZWNhdXNlIGl0IGFsbG93cyBmdWxsIHVzYWdl
+IG9mIHRoZSBoYXJkd2FyZSwgYQpyZWxhdGl2ZWx5IHNtYWxsIHBhdGNoIGluIFhlbiwgYW5kIG5v
+IGd1ZXN0IHZpc2libGUgY2hhbmdlcyAoc3VjaCBhcwp0b29sc3RhY2sgY2hhbmdlcyB0byBtb2Rp
+ZnkgdGhlIGNvbXBhdGlibGUgbGluZSkuIEd1ZXN0IHZpc2libGUgYW5kIHVzZXIKdmlzaWJsZSBj
+aGFuZ2VzIGFyZSBwYXJ0aWN1bGFybHkgdHJvdWJsZXNvbWUgdG8gbWFpbnRhaW4gaW4gdGhlIGxv
+bmcKdGVybSBhbmQgdGhpcyBpcyByZWFzb24gd2h5IHdlIGFyZSByZXRpY2VudCBpbiBpbnRyb2R1
+Y2luZyB0aGVtLiBUaGUgdGxiCm1haW50ZW5hbmNlIHdvcmthcm91bmQgaW4gdGhlIGh5cGVydmlz
+b3IgaXMgc29tZXRoaW5nIG11Y2ggZWFzaWVyIHRvCm1hbmFnZSBhbmQgd2UgY291bGQgY29uc2lk
+ZXIgdGFraW5nIGl0IGluIGlmIGhhcmR3YXJlIHdpdGggdGhlIGVycmF0YQp3aWxsIGJlY29tZSBh
+dmFpbGFibGUgdG8gY3VzdG9tZXJzLgoKQ2hlZXJzLAoKU3RlZmFubwoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
