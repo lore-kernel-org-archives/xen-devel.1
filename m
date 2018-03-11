@@ -1,15 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [libvirt test] 120378: regressions - FAIL
-Date: Sun, 11 Mar 2018 17:31:59 +0000
-Message-ID: <osstest-120378-mainreport@xen.org>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [RFC PATCH] xen/arm64: Add Support for Marvell
+	ARMADA 3700 SoC
+Date: Sun, 11 Mar 2018 18:58:56 +0000
+Message-ID: <0d995288-4f2a-7ce8-d9bb-a04775119371@arm.com>
+References: <1520700252-19385-1-git-send-email-amittomer25@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1423502854409039838=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=26gn=gb=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1ev4pN-00068R-FX
- for xen-devel@lists.xenproject.org; Sun, 11 Mar 2018 17:32:09 +0000
+ <srs0=yupc=gb=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1ev6BT-0003jZ-Nl
+ for xen-devel@lists.xenproject.org; Sun, 11 Mar 2018 18:59:03 +0000
+In-Reply-To: <1520700252-19385-1-git-send-email-amittomer25@gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,122 +23,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Amit Singh Tomar <amittomer25@gmail.com>, xen-devel@lists.xenproject.org
+Cc: andre.przywara@arm.com, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============1423502854409039838==
-Content-Type: text/plain
-
-flight 120378 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/120378/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-amd64-i386-libvirt-xsm   7 xen-boot                 fail REGR. vs. 120326
-
-Tests which did not succeed, but are not blocking:
- test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 120326
- test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 120326
- test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 120326
- test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt     14 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-qcow2 12 migrate-support-check        fail never pass
- test-arm64-arm64-libvirt-qcow2 13 saverestore-support-check    fail never pass
-
-version targeted for testing:
- libvirt              b9b9195f15c94ec0e1d26d0def7387b32126f09b
-baseline version:
- libvirt              b932ed69f6664f42e211bdde84c8ab04e1f19033
-
-Last test of basis   120326  2018-03-08 01:25:03 Z    3 days
-Testing same since   120378  2018-03-09 21:20:32 Z    1 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrea Bolognani <abologna@redhat.com>
-  Christian Ehrhardt <christian.ehrhardt@canonical.com>
-  Daniel P. Berrangé <berrange@redhat.com>
-  Jamie Strandboge <jamie@canonical.com>
-  John Ferlan <jferlan@redhat.com>
-  Ján Tomko <jtomko@redhat.com>
-  Peter Krempa <pkrempa@redhat.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-armhf-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-armhf-armhf-libvirt-xsm                                 pass    
- test-amd64-i386-libvirt-xsm                                  fail    
- test-amd64-amd64-libvirt                                     pass    
- test-arm64-arm64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-arm64-arm64-libvirt-qcow2                               pass    
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 490 lines long.)
-
-
---===============1423502854409039838==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1423502854409039838==--
+SGkgQW1pdCwKCk9uIDAzLzEwLzIwMTggMDQ6NDQgUE0sIEFtaXQgU2luZ2ggVG9tYXIgd3JvdGU6
+Cj4gVGhpcyBwYXRjaC1zZXQgaXMgYW4gYXR0ZW1wdCB0byBlbmFibGUgWEVOIG9uIEVTUFJFU1NP
+YmluWzFdIGJhc2VkIG9uCj4gTWFydmVsbCdzIEFSTUFEQSAzNzAwIFNvQwoKVGhhbmsgeW91IGZv
+ciBhZGRpbmcgc3VwcG9ydCB0byBib290IFhlbiBvbiB0aGF0IGJvYXJkIQoKV291bGQgeW91IG1p
+bmQgY3JlYXRpbmcgYSBwYWdlIG9uIFhlbiB3aWtpIHRvIGV4cGxhaW4gaG93IHRvIGJvb3QgWGVu
+IG9uIAp0aGF0IGJvYXJkPyBTZWUgWzFdLgoKRnVydGhlcm1vcmUsIHdlIGFyZSBhbHdheXMgbG9v
+a2luZyBmb3IgdXNlciB0byB0ZXN0IFhlbiBSQyBvbiBzdXBwb3J0ZWQgCmhhcmR3YXJlLiBXb3Vs
+ZCB5b3UgYmUgd2lsbGluZyB0byBzdGVwIHVwIGZvciB0aGF0IGJvYXJkPyBJZiBzbywgY2FuIHlv
+dSAKYWRkIHlvdXIgbmFtZSBvbiBbMl0/CgpDaGVlcnMsCgpbMV0gCmh0dHBzOi8vd2lraS54ZW5w
+cm9qZWN0Lm9yZy93aWtpL1hlbl9BUk1fd2l0aF9WaXJ0dWFsaXphdGlvbl9FeHRlbnNpb25zI0hh
+cmR3YXJlCgpbMl0gaHR0cHM6Ly93aWtpLnhlbnByb2plY3Qub3JnL3dpa2kvWGVuX0FSTV9NYW51
+YWxfU21va2VfVGVzdC9SZXN1bHRzCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
