@@ -1,20 +1,15 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH 1/3] SUPPORT.md: Clarify that the PV
- keyboard protocol includes mouse support
-Date: Sun, 11 Mar 2018 15:26:59 +0000
-Message-ID: <496010512d804677b38b0a78ae67ad9b@AMSPEX02CL03.citrite.net>
-References: <20180309180356.8067-1-george.dunlap@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [libvirt test] 120378: regressions - FAIL
+Date: Sun, 11 Mar 2018 17:31:59 +0000
+Message-ID: <osstest-120378-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1423502854409039838=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=xycw=gb=citrix.com=prvs=601f3fdd6=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1ev2sh-00043C-UE
- for xen-devel@lists.xenproject.org; Sun, 11 Mar 2018 15:27:27 +0000
-In-Reply-To: <20180309180356.8067-1-george.dunlap@citrix.com>
-Content-Language: en-US
+ <srs0=26gn=gb=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1ev4pN-00068R-FX
+ for xen-devel@lists.xenproject.org; Sun, 11 Mar 2018 17:32:09 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,51 +18,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, George Dunlap <George.Dunlap@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Anthony Perard <anthony.perard@citrix.com>, Ian Jackson <Ian.Jackson@citrix.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IEdlb3JnZSBEdW5sYXAgW21haWx0
-bzpnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb21dCj4gU2VudDogMDkgTWFyY2ggMjAxOCAxODowNAo+
-IFRvOiB4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKPiBDYzogR2VvcmdlIER1bmxhcCA8
-R2VvcmdlLkR1bmxhcEBjaXRyaXguY29tPjsgSWFuIEphY2tzb24KPiA8SWFuLkphY2tzb25AY2l0
-cml4LmNvbT47IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+OyBBbmRyZXcgQ29vcGVyCj4g
-PEFuZHJldy5Db29wZXIzQGNpdHJpeC5jb20+OyBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5j
-b20+OyBUaW0KPiAoWGVuLm9yZykgPHRpbUB4ZW4ub3JnPjsgS29ucmFkIFdpbGsgPGtvbnJhZC53
-aWxrQG9yYWNsZS5jb20+OyBTdGVmYW5vCj4gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVs
-Lm9yZz47IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Owo+IEFudGhvbnkgUGVy
-YXJkIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPjsgUGF1bCBEdXJyYW50Cj4gPFBhdWwuRHVy
-cmFudEBjaXRyaXguY29tPjsgTGFycyBLdXJ0aCA8bGFycy5rdXJ0aEBjaXRyaXguY29tPgo+IFN1
-YmplY3Q6IFtQQVRDSCAxLzNdIFNVUFBPUlQubWQ6IENsYXJpZnkgdGhhdCB0aGUgUFYga2V5Ym9h
-cmQgcHJvdG9jb2wKPiBpbmNsdWRlcyBtb3VzZSBzdXBwb3J0Cj4gCj4gcy9mby9mbzsgd2hpbGUg
-d2UncmUgaGVyZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVu
-bGFwQGNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogUGF1bCBEdXJyYW50IDxwYXVsLmR1cnJhbnRA
-Y2l0cml4LmNvbT4KCj4gLS0tCj4gVGhpcyBpcyBhIGNhbmRpZGF0ZSBmb3IgYmFja3BvcnQgdG8g
-NC4xMC4KPiAKPiBDQzogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGNpdHJpeC5jb20+Cj4gQ0M6
-IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4gQ0M6IEFuZHJldyBDb29wZXIgPGFuZHJl
-dy5jb29wZXIzQGNpdHJpeC5jb20+Cj4gQ0M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNv
-bT4KPiBDQzogVGltIERlZWdhbiA8dGltQHhlbi5vcmc+Cj4gQ0M6IEtvbnJhZCBXaWxrIDxrb25y
-YWQud2lsa0BvcmFjbGUuY29tPgo+IENDOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5p
-QGtlcm5lbC5vcmc+Cj4gQ0M6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4g
-Q0M6IEFudGhvbnkgUGVyYXJkIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPgo+IENDOiBQYXVs
-IER1cnJhbnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPgo+IENDOiBMYXJzIEt1cnRoIDxsYXJz
-Lmt1cnRoQGNpdHJpeC5jb20+Cj4gLS0tCj4gIFNVUFBPUlQubWQgfCA2ICsrKystLQo+ICAxIGZp
-bGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1n
-aXQgYS9TVVBQT1JULm1kIGIvU1VQUE9SVC5tZAo+IGluZGV4IGExODEwYjgwNDYuLjg3ZDA3MTI5
-YjQgMTAwNjQ0Cj4gLS0tIGEvU1VQUE9SVC5tZAo+ICsrKyBiL1NVUFBPUlQubWQKPiBAQCAtMzgw
-LDcgKzM4MCw4IEBAIEd1ZXN0LXNpZGUgZHJpdmVyIGNhcGFibGUgb2Ygc3BlYWtpbmcgdGhlIFhl
-biBQVgo+IGNvbnNvbGUgcHJvdG9jb2wKPiAKPiAgICAgIFN0YXR1cywgTGludXggKHhlbi1rYmRm
-cm9udCk6IFN1cHBvcnRlZAo+IAo+IC1HdWVzdC1zaWRlIGRyaXZlciBjYXBhYmxlIG9mIHNwZWFr
-aW5nIHRoZSBYZW4gUFYga2V5Ym9hcmQgcHJvdG9jb2wKPiArR3Vlc3Qtc2lkZSBkcml2ZXIgY2Fw
-YWJsZSBvZiBzcGVha2luZyB0aGUgWGVuIFBWIGtleWJvYXJkIHByb3RvY29sLgo+ICtOb3RlIHRo
-YXQgdGhlICJrZXlib2FyZCBwcm90b2NvbCIgaW5jbHVkZXMgbW91c2UgLyBwb2ludGVyIHN1cHBv
-cnQgYXMKPiB3ZWxsLgo+IAo+ICAjIyMgUFYgVVNCIChmcm9udGVuZCkKPiAKPiBAQCAtNDUxLDcg
-KzQ1Miw4IEBAIEhvc3Qtc2lkZSBpbXBsZW1lbnRhdGlvbiBvZiB0aGUgWGVuIFBWIGNvbnNvbGUK
-PiBwcm90b2NvbAo+IAo+ICAgICAgU3RhdHVzLCBRRU1VOiBTdXBwb3J0ZWQKPiAKPiAtSG9zdC1z
-aWRlIGltcGxlbWVudGF0aW9uIGZvIHRoZSBYZW4gUFYga2V5Ym9hcmQgcHJvdG9jb2wKPiArSG9z
-dC1zaWRlIGltcGxlbWVudGF0aW9uIG9mIHRoZSBYZW4gUFYga2V5Ym9hcmQgcHJvdG9jb2wuCj4g
-K05vdGUgdGhhdCB0aGUgImtleWJvYXJkIHByb3RvY29sIiBpbmNsdWRlcyBtb3VzZSAvIHBvaW50
-ZXIgc3VwcG9ydCBhcwo+IHdlbGwuCj4gCj4gICMjIyBQViBVU0IgKGJhY2tlbmQpCj4gCj4gLS0K
-PiAyLjE2LjIKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============1423502854409039838==
+Content-Type: text/plain
+
+flight 120378 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/120378/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-i386-libvirt-xsm   7 xen-boot                 fail REGR. vs. 120326
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 120326
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 120326
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 120326
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt     14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-qcow2 12 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 13 saverestore-support-check    fail never pass
+
+version targeted for testing:
+ libvirt              b9b9195f15c94ec0e1d26d0def7387b32126f09b
+baseline version:
+ libvirt              b932ed69f6664f42e211bdde84c8ab04e1f19033
+
+Last test of basis   120326  2018-03-08 01:25:03 Z    3 days
+Testing same since   120378  2018-03-09 21:20:32 Z    1 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrea Bolognani <abologna@redhat.com>
+  Christian Ehrhardt <christian.ehrhardt@canonical.com>
+  Daniel P. Berrangé <berrange@redhat.com>
+  Jamie Strandboge <jamie@canonical.com>
+  John Ferlan <jferlan@redhat.com>
+  Ján Tomko <jtomko@redhat.com>
+  Peter Krempa <pkrempa@redhat.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  fail    
+ test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 490 lines long.)
+
+
+--===============1423502854409039838==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1423502854409039838==--
