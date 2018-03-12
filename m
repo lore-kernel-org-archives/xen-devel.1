@@ -1,18 +1,20 @@
-From: "Jan Beulich" <jbeulich@suse.com>
-Subject: Re: [PATCH 6/7] xen/domain: Pass the full
- domctl_createdomain struct to create_domain()
-Date: Mon, 12 Mar 2018 06:57:23 -0600
-Message-ID: <5AA679330200007800129C48@prv-mh.provo.novell.com>
-References: <1520601522-2886-1-git-send-email-andrew.cooper3@citrix.com>
- <1520601522-2886-7-git-send-email-andrew.cooper3@citrix.com>
- <5AA2CBA802000078001B06F6@prv-mh.provo.novell.com>
- <29693118-367c-3734-99ed-8371d0102254@citrix.com>
+From: Marc Zyngier <marc.zyngier@arm.com>
+Subject: Re: [PATCH 00/12] arm64: Mediate access to GICv3
+	sysregs at EL2
+Date: Mon, 12 Mar 2018 12:58:06 +0000
+Message-ID: <c6c2b9cc-d6f4-215f-5d3b-2d0d4289fa40@arm.com>
+References: <cover.1520857428.git.manish.jaggi@cavium.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <29693118-367c-3734-99ed-8371d0102254@citrix.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=fjgp=gc=arm.com=marc.zyngier@srs-us1.protection.inumbo.net>)
+ id 1evN1n-0004Wd-6q
+ for xen-devel@lists.xenproject.org; Mon, 12 Mar 2018 12:58:11 +0000
+In-Reply-To: <cover.1520857428.git.manish.jaggi@cavium.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,27 +23,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: andrew.cooper3@citrix.com
-Cc: sstabellini@kernel.org, wei.liu2@citrix.com, George.Dunlap@eu.citrix.com, tim@xen.org, ian.jackson@eu.citrix.com, xen-devel@lists.xen.org, julien.grall@arm.com
+To: mjaggi@caviumnetworks.com, julien.grall@linaro.org, sstabellini@kernel.org, jgross@suse.com, xen-devel@lists.xenproject.org
+Cc: manish.jaggi@cavium.com
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IDAzLzA5LzE4IDY6
-MDYgUE0gPj4+Cj5PbiAwOS8wMy8xOCAxNzowMCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9u
-IDA5LjAzLjE4IGF0IDE0OjE4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+
-PiAtLS0gYS94ZW4vYXJjaC94ODYvZG9tYWluLmMKPj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9kb21h
-aW4uYwo+Pj4gQEAgLTQyNiw4ICs0MjYsOCBAQCBzdGF0aWMgYm9vbCBlbXVsYXRpb25fZmxhZ3Nf
-b2soY29uc3Qgc3RydWN0IGRvbWFpbiAqZCwgdWludDMyX3QgZW1mbGFncykKPj4+ICAgICAgcmV0
-dXJuIHRydWU7Cj4+PiAgfQo+Pj4gIAo+Pj4gLWludCBhcmNoX2RvbWFpbl9jcmVhdGUoc3RydWN0
-IGRvbWFpbiAqZCwgdW5zaWduZWQgaW50IGRvbWNyX2ZsYWdzLAo+Pj4gLSAgICAgICAgICAgICAg
-ICAgICAgICAgc3RydWN0IHhlbl9hcmNoX2RvbWFpbmNvbmZpZyAqY29uZmlnKQo+Pj4gK2ludCBh
-cmNoX2RvbWFpbl9jcmVhdGUoc3RydWN0IGRvbWFpbiAqZCwKPj4+ICsgICAgICAgICAgICAgICAg
-ICAgICAgIHN0cnVjdCB4ZW5fZG9tY3RsX2NyZWF0ZWRvbWFpbiAqY29uZmlnKQo+PiBJcyB0aGVy
-ZSBhbnkgcmVhc29uIGZvciB0aGlzIHRvIG5vdCBiZSBjb25zdD8gVGhlcmUncyBubyB3cml0ZSBu
-b3cKPj4gYWZhaWNzLCBhbmQgSSBjYW4ndCBpbWFnaW5lIHlvdSB3YW50aW5nIHRvIGFkZCBvbmUg
-bGF0ZXIgb24uCj4KPkkgb3JpZ2luYWxseSBwbGFubmVkIHRvIG1ha2UgdGhlbSBjb25zdCwgYnV0
-IHRoZSBBUk0gc2lkZSBwYXNzZXMgZGF0YQo+YmFjayB0byB0aGUgdG9vbHN0YWNrLCBhbmQgdGhl
-IHByb3RvdHlwZSBpcyAocmlnaHRmdWxseSkgY29tbW9uLgoKT2gsIEkgc2VlIC0gY2VydGFpbmx5
-IGEgbGl0dGxlIG9kZCwgYnV0IHRoYXQncyB0aGUgd2F5IGl0IGlzIHRoZW4uCgpKYW4KCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+TWFuaXNoLAoKT24gMTIvMDMvMTggMTI6NDIsIG1qYWdnaUBjYXZpdW1uZXR3b3Jrcy5jb20gd3Jv
+dGU6Cj4gRnJvbTogTWFuaXNoIEphZ2dpIDxtYW5pc2guamFnZ2lAY2F2aXVtLmNvbT4KPiAKPiBU
+aGlzIHBhdGNoc2V0IGlzIGEgWGVuIHBvcnQgb2YgTWFyYydzIHBhdGNoc2V0Lgo+IGFybTY0OiBL
+Vk06IE1lZGlhdGUgYWNjZXNzIHRvIEdJQ3YzIHN5c3JlZ3MgYXQgRUwyIFsxXQo+IAo+IFRoZSBj
+dXJyZW50IFJGQyBwYXRjaHNldCBpcyBhIHN1YnNldCBvZiBbMV0sIGFzIGl0IGhhbmRsZWluZyBv
+bmx5IEdyb3VwMSB0cmFwcwo+IGFzIGEgUG9DLiBNb3N0IG9mIHRoZSB0cmFwIGNvZGUgaXMgYWRk
+ZWQgaW4gdnN5c3JlZy5jLiBUcmFwIGhhbmRsZXIgZnVuY3Rpb24gaXMga2VwdAo+IGluZGVwZW5k
+ZW50IG9mIHRoZSB1c3VhbCBndWVzdCB0cmFwIGhhbmRsaW5nIGNvZGUuIAo+IExvb2tpbmcgZm9y
+IGZlZWRiYWNrIG9uIHRoaXMgYXBwcm9hY2guICAKV2h5IEdyb3VwLTEgb25seT8gQUZBSUssIEdy
+b3VwLTAgaXMgYWZmZWN0ZWQgYXMgd2VsbCwgYW5kIHJlc3VsdHMgaW4gYQpEb1Mgb24gdGhlIHNl
+Y3VyZSBzaWRlLiBPbmx5IGhhbmRsaW5nIEdyb3VwLTEgbWFrZXMgaXQgaGFyZCB0byBjb21wYXJl
+CnRvIHRoZSByZWZlcmVuY2UgaW1wbGVtZW50YXRpb24gKHdoaWNoIGhhbmRsZXMgYm9vdGggZ3Jv
+dXBzKSwgYW5kIHdpbGwKaW50cm9kdWNlIHBvaW50bGVzcyBjaHVybiBvbmNlIHlvdSBzdGFydCBh
+ZGRpbmcgR3JvdXAtMCBoYW5kbGluZy4KCkFzIGl0IHN0YW5kcywgdGhpcyBzZXJpZXMgaXMgYSBi
+aXQgcG9pbnRsZXNzLiBQbGVhc2UgY29uc2lkZXIgcG9zdGluZyBhCmNvbXBsZXRlIGZpeC4KClRo
+YW5rcywKCglNLgotLSAKSmF6eiBpcyBub3QgZGVhZC4gSXQganVzdCBzbWVsbHMgZnVubnkuLi4K
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
