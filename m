@@ -1,16 +1,23 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-4.8-testing test] 120391: regressions - FAIL
-Date: Mon, 12 Mar 2018 04:14:42 +0000
-Message-ID: <osstest-120391-mainreport@xen.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Rich Persaud <persaur@gmail.com>
+Subject: CFP:  Platform Security Summit 2018:  OpenXT,
+	Xen Project and OpenEmbedded
+Date: Mon, 12 Mar 2018 01:52:04 -0400
+Message-ID: <9419494E-9091-463F-B18A-84F0417469F9@gmail.com>
+Mime-Version: 1.0 (1.0)
+Content-Type: multipart/mixed; boundary="===============6304636530679069069=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=e8xk=gc=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1evErQ-0003lo-3A
- for xen-devel@lists.xenproject.org; Mon, 12 Mar 2018 04:14:56 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=bfph=gc=gmail.com=persaur@srs-us1.protection.inumbo.net>)
+ id 1evGNV-0002i9-8c
+ for xen-devel@lists.xenproject.org; Mon, 12 Mar 2018 05:52:09 +0000
+Received: by mail-qk0-x22f.google.com with SMTP id 132so278607qkd.5
+ for <xen-devel@lists.xenproject.org>; Sun, 11 Mar 2018 22:52:06 -0700 (PDT)
+Received: from [100.64.72.56] ([173.245.215.240])
+ by smtp.gmail.com with ESMTPSA id d77sm4600034qkc.33.2018.03.11.22.52.05
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Sun, 11 Mar 2018 22:52:05 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,257 +26,147 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMDM5MSB4ZW4tNC44LXRlc3RpbmcgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVz
-dC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMDM5MS8KClJlZ3Jlc3Npb25zIDot
-KAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGlu
-ZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC14dGYtYW1kNjQtYW1kNjQtNSA1
-MCB4dGYvdGVzdC1odm02NC1sYnItdHN4LXZtZW50cnkgZmFpbCBSRUdSLiB2cy4gMTIwMTE2CgpU
-ZXN0cyB3aGljaCBhcmUgZmFpbGluZyBpbnRlcm1pdHRlbnRseSAobm90IGJsb2NraW5nKToKIHRl
-c3QteHRmLWFtZDY0LWFtZDY0LTIgNTAgeHRmL3Rlc3QtaHZtNjQtbGJyLXRzeC12bWVudHJ5IGZh
-aWwgaW4gMTIwMzUwIHBhc3MgaW4gMTIwMzkxCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC0zIDUwIHh0
-Zi90ZXN0LWh2bTY0LWxici10c3gtdm1lbnRyeSBmYWlsIGluIDEyMDM1MCBwYXNzIGluIDEyMDM5
-MQogdGVzdC14dGYtYW1kNjQtYW1kNjQtNCAgIDUwIHh0Zi90ZXN0LWh2bTY0LWxici10c3gtdm1l
-bnRyeSBmYWlsIHBhc3MgaW4gMTIwMzUwCgpSZWdyZXNzaW9ucyB3aGljaCBhcmUgcmVnYXJkZWQg
-YXMgYWxsb3dhYmxlIChub3QgYmxvY2tpbmcpOgogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAg
-IDE2IGd1ZXN0LXN0YXJ0L2RlYmlhbi5yZXBlYXQgZmFpbCBSRUdSLiB2cy4gMTIwMTE2CgpUZXN0
-cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2
-NC1pMzg2LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWls
-IGxpa2UgMTIwMTE2CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vl
-c3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMjAxMTYKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDEyMDEx
-NgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAg
-ICAgICAgICBmYWlsIGxpa2UgMTIwMTE2CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1h
-bWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMjAxMTYKIHRlc3QtYW1k
-NjQtaTM4Ni14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFp
-bCBsaWtlIDEyMDExNgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1
-ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTIwMTE2CiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMjAx
-MTYKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTEgICAgICAgNTIgeHRmL3Rlc3QtaHZtNjQtbWVtb3At
-c2VnICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC14dGYtYW1kNjQtYW1kNjQtNCAgICAgICA1
-MiB4dGYvdGVzdC1odm02NC1tZW1vcC1zZWcgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LXh0
-Zi1hbWQ2NC1hbWQ2NC01ICAgICAgIDUyIHh0Zi90ZXN0LWh2bTY0LW1lbW9wLXNlZyAgICAgZmFp
-bCAgIG5ldmVyIHBhc3MKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTIgICAgICAgNTIgeHRmL3Rlc3Qt
-aHZtNjQtbWVtb3Atc2VnICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC14dGYtYW1kNjQtYW1k
-NjQtMyAgICAgICA1MiB4dGYvdGVzdC1odm02NC1tZW1vcC1zZWcgICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVj
-ayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIGJ1aWxkLWFtZDY0LXByZXYgICAgICAgICAgICAg
-IDcgeGVuLWJ1aWxkL2Rpc3QtdGVzdCAgICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-bWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZh
-aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUt
-c3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1s
-aWJ2aXJ0LXhzbSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIg
-cGFzcwogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hl
-Y2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAg
-IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-YXJtNjQtYXJtNjQteGwtY3JlZGl0MiAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAxNCBzYXZlcmVz
-dG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20gMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybTY0LWFybTY0LXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIGJ1aWxkLWkzODYtcHJldiAgICAgICAgICAgICAgIDcgeGVuLWJ1
-aWxkL2Rpc3QtdGVzdCAgICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2
-LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hl
-Y2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFu
-aHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0
-ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1hbWQgMTcgZGViaWFuLWh2bS1pbnN0YWxsL2wx
-L2wyICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgMTMgbWln
-cmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
-cm1oZi14bC1hcm5kYWxlICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBu
-ZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkIDEyIG1pZ3JhdGUtc3VwcG9y
-dC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAg
-ICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwog
-dGVzdC1hcm1oZi1hcm1oZi14bC14c20gICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAg
-ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNh
-dmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYt
-YXJtaGYteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAg
-bmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrIDEzIG1pZ3JhdGUtc3Vw
-cG9ydC1jaGVjayAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWN1
-YmlldHJ1Y2sgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsIG5ldmVyIHBhc3MK
-IHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAg
-ICAgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQyICAxMyBt
-aWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhm
-LWFybWhmLWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAg
-IG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1IDE0IHNhdmVyZXN0b3Jl
-LXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1j
-cmVkaXQyICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNz
-CiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNtIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hl
-Y2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTMg
-bWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1o
-Zi1hcm1oZi1saWJ2aXJ0ICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwg
-ICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3IDEyIG1pZ3JhdGUtc3Vw
-cG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGli
-dmlydC1yYXcgMTMgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFz
-cwogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sg
-ICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEz
-IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJt
-aGYtYXJtaGYteGwtcnRkcyAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWls
-ICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxNCBzYXZlcmVzdG9y
-ZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICBmYWlsIG5ldmVyIHBh
-c3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFs
-bCAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW4x
-MC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFt
-ZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgICBm
-YWlsIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAgICAg
-ICAgICAgICAgICBhMjcwMGNhMTRlMTQ3ZWQwN2NiOTc2ZWQ3ODdlNzIwODk4MDQzYTM0CmJhc2Vs
-aW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICAwM2Y5NDc0NzJmZGUwMWY0MzhlYzA1
-NzQzOWQ4ZDMwNDU2MjEwYTFjCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjAxMTYgIDIwMTgtMDMt
-MDEgMDU6MDg6MTcgWiAgIDEwIGRheXMKRmFpbGluZyBzaW5jZSAgICAgICAgMTIwMTc4ICAyMDE4
-LTAzLTAzIDAwOjI2OjA3IFogICAgOSBkYXlzICAgIDUgYXR0ZW1wdHMKVGVzdGluZyBzYW1lIHNp
-bmNlICAgMTIwMzUwICAyMDE4LTAzLTA4IDEyOjE1OjU2IFogICAgMyBkYXlzICAgIDIgYXR0ZW1w
-dHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3
-IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICBEYW5pZWwgU2Fib2dhbCA8ZHNh
-Ym9nYWxjY0BnbWFpbC5jb20+CiAgR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXgu
-Y29tPgogIEhhb3pob25nIFpoYW5nIDxoYW96aG9uZy56aGFuZ0BpbnRlbC5jb20+CiAgSWdvciBE
-cnV6aGluaW4gPGlnb3IuZHJ1emhpbmluQGNpdHJpeC5jb20+CiAgSmFuIEJldWxpY2ggPGpiZXVs
-aWNoQHN1c2UuY29tPgogIEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CiAgU3Rl
-ZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgogIFdlaSBMaXUgPHdlaS5s
-aXUyQGNpdHJpeC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC14c20gICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWFybWhmLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC14dGYgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-YXJtNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1h
-cm02NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1wcmV2ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
-ODYtcHJldiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4
-Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1hbWQ2NC1ydW1wcnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtMSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1h
-bWQ2NC1hbWQ2NC0yICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtNCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC01ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0t
-YW1kNjQteHNtICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVt
-dXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2
-bS1hbWQ2NC14c20gICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtc3R1
-YmRvbS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhzbSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwteHNtICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXhzbSAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXFlbXV1LW5lc3RlZC1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlh
-bmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14
-bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1kNjQg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2NCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43LWFt
-ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwt
-cWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1k
-NjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1j
-cmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFy
-bTY0LWFybTY0LXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJz
-ZDEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtaTM4Ni1ydW1wcnVuLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAg
-ICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
-dXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1pbnRlbCAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJo
-ZWw2aHZtLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpdmVwYXRj
-aCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni1saXZlcGF0Y2ggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1taWdydXBncmFkZSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbWlncnVwZ3JhZGUgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2
-Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1h
-cm1oZi14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBh
-aXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkz
-ODYtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcWNvdzIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcmF3ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcnRkcyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1o
-Zi14bC1ydGRzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0
-ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rl
-c3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczog
-L2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxl
-IGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MK
-CkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWws
-IGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDth
-PWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
-L2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhh
-cm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0
-d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKTm90IHB1c2hpbmcuCgooTm8gcmV2aXNpb24g
-bG9nOyBpdCB3b3VsZCBiZSAzMjQgbGluZXMgbG9uZy4pCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============6304636530679069069==
+Content-Transfer-Encoding: 7bit
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-3AA195B4-08C1-4410-BE85-C8FDAD6526B7
+
+
+--Apple-Mail-3AA195B4-08C1-4410-BE85-C8FDAD6526B7
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+If you are working on commercial, academic or open-source projects which use=
+ OpenXT, Xen Project or OpenEmbedded to implement platform components with w=
+ell-defined security properties, you are invited to present at Platform Secu=
+rity Summit 2018, which will take place on May 23-24 in Fairfax, VA, USA.
+
+Topics of interest include:
+
+ - Virtualization-based isolation of open, proprietary and restricted code
+ - Architecture for disaggregation of Xen-based systems
+ - Mixed-criticality system design, testing and safety certification
+ - Scheduling, hardware partitioning and hypervisor nesting
+ - Xen PVH, PCI passthrough, PV-IOMMU, Qemu disaggregation
+
+ - Hardware-rooted security technologies (e.g. TPM, TEE, SGX)
+ - Measured launch, DRTM and SRTM deployment models
+ - Stateless VMs and unikernels with OpenEmbedded
+ - Reproducible, cross-compiled builds with OpenEmbedded
+ - Spectre/Meltdown mitigations, performance & security
+
+ - Inter-VM and Multi-Hypervisor Communication
+ - Networking technologies for mutually trusting systems
+ - Mandatory Access Control (e.g. SE Linux, Xen Security Modules)
+ - Fuzzing of Xen, OpenEmbedded and platform firmware
+ - GPU and co-processor virtualization=20
+
+The 2-day event will have a single track of presentations and discussions.  T=
+here is no cost to attend, but space will be limited.  If you would like to p=
+resent or attend, please respond to this message by Friday, 31st March, stat=
+ing your organization name and topics of interest.
+
+Rich=
+
+--Apple-Mail-3AA195B4-08C1-4410-BE85-C8FDAD6526B7
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><div><span></span></div><div><meta http-equ=
+iv=3D"content-type" content=3D"text/html; charset=3Dutf-8"><div><span></span=
+></div><div><div><span></span></div><div><meta http-equiv=3D"content-type" c=
+ontent=3D"text/html; charset=3Dutf-8"><div><span></span></div><div><meta htt=
+p-equiv=3D"content-type" content=3D"text/html; charset=3Dutf-8"><div><span><=
+/span></div><div><meta http-equiv=3D"content-type" content=3D"text/html; cha=
+rset=3Dutf-8"><div><span></span></div><div><meta http-equiv=3D"content-type"=
+ content=3D"text/html; charset=3Dutf-8"><p style=3D"margin: 0px; font-stretc=
+h: normal; line-height: normal; min-height: 13.8px;"><span style=3D"backgrou=
+nd-color: rgba(255, 255, 255, 0);">If you are working on commercial, academi=
+c or open-source projects which use OpenXT, Xen Project or OpenEmbedded to i=
+mplement platform components with well-defined security properties, you are i=
+nvited to present at <i>Platform Security Summit 2018</i>, which will take p=
+lace on May 23-24 in Fairfax, VA, USA.</span></p><p style=3D"margin: 0px; fo=
+nt-stretch: normal; line-height: normal; min-height: 13.8px;"><span style=3D=
+"background-color: rgba(255, 255, 255, 0);"><br></span></p><p style=3D"margi=
+n: 0px; font-stretch: normal; line-height: normal;"><span style=3D"backgroun=
+d-color: rgba(255, 255, 255, 0);">Topics of interest include:</span></p><p s=
+tyle=3D"margin: 0px; font-stretch: normal; line-height: normal; min-height: 1=
+3.8px;"><span style=3D"background-color: rgba(255, 255, 255, 0);"><br></span=
+></p><p style=3D"margin: 0px; font-stretch: normal; line-height: normal;"><s=
+pan style=3D"background-color: rgba(255, 255, 255, 0);">&nbsp;- Virtualizati=
+on-based isolation of open, proprietary and restricted code</span></p><p sty=
+le=3D"margin: 0px; font-stretch: normal; line-height: normal;"><span style=3D=
+"background-color: rgba(255, 255, 255, 0);">&nbsp;- Architecture for disaggr=
+egation of Xen-based systems</span></p><p style=3D"margin: 0px; font-stretch=
+: normal; line-height: normal;"><span style=3D"background-color: rgba(255, 2=
+55, 255, 0);">&nbsp;- Mixed-criticality system design, testing and safety ce=
+rtification</span></p><p style=3D"margin: 0px; font-stretch: normal; line-he=
+ight: normal;"><span style=3D"background-color: rgba(255, 255, 255, 0);">&nb=
+sp;- Scheduling, hardware partitioning and hypervisor nesting</span></p><p s=
+tyle=3D"margin: 0px; font-stretch: normal; line-height: normal;"><span style=
+=3D"background-color: rgba(255, 255, 255, 0);">&nbsp;- Xen PVH, PCI passthro=
+ugh, PV-IOMMU, Qemu disaggregation</span></p><p style=3D"margin: 0px; font-s=
+tretch: normal; line-height: normal; min-height: 13.8px;"><span style=3D"bac=
+kground-color: rgba(255, 255, 255, 0);"><br></span></p><p style=3D"margin: 0=
+px; font-stretch: normal; line-height: normal;"><span style=3D"background-co=
+lor: rgba(255, 255, 255, 0);">&nbsp;- Hardware-rooted security technologies (=
+e.g. TPM, TEE, SGX)</span></p><p style=3D"margin: 0px; font-stretch: normal;=
+ line-height: normal;"><span style=3D"background-color: rgba(255, 255, 255, 0=
+);">&nbsp;- Measured launch, DRTM and SRTM deployment models</span></p><p st=
+yle=3D"margin: 0px; font-stretch: normal; line-height: normal;"><span style=3D=
+"background-color: rgba(255, 255, 255, 0);">&nbsp;- Stateless VMs and uniker=
+nels with OpenEmbedded</span></p><p style=3D"margin: 0px; font-stretch: norm=
+al; line-height: normal;"><span style=3D"background-color: rgba(255, 255, 25=
+5, 0);">&nbsp;- Reproducible, cross-compiled builds with OpenEmbedded</span>=
+</p><p style=3D"margin: 0px; font-stretch: normal; line-height: normal;"><sp=
+an style=3D"background-color: rgba(255, 255, 255, 0);">&nbsp;- Spectre/Meltd=
+own mitigations, performance &amp; security</span></p><p style=3D"margin: 0p=
+x; font-stretch: normal; line-height: normal; min-height: 13.8px;"><span sty=
+le=3D"background-color: rgba(255, 255, 255, 0);"><br></span></p><p style=3D"=
+margin: 0px; font-stretch: normal; line-height: normal;"><span style=3D"back=
+ground-color: rgba(255, 255, 255, 0);">&nbsp;- Inter-VM and Multi-Hypervisor=
+ Communication</span></p><p style=3D"margin: 0px; font-stretch: normal; line=
+-height: normal;"><span style=3D"background-color: rgba(255, 255, 255, 0);">=
+&nbsp;- Networking technologies for mutually trusting systems</span></p><p s=
+tyle=3D"margin: 0px; font-stretch: normal; line-height: normal;"><span style=
+=3D"background-color: rgba(255, 255, 255, 0);">&nbsp;- Mandatory Access Cont=
+rol (e.g. SE Linux, Xen Security Modules)</span></p><p style=3D"margin: 0px;=
+ font-stretch: normal; line-height: normal;"><span style=3D"background-color=
+: rgba(255, 255, 255, 0);">&nbsp;- Fuzzing of Xen, OpenEmbedded and platform=
+ firmware</span></p><p style=3D"margin: 0px; font-stretch: normal; line-heig=
+ht: normal;"><span style=3D"background-color: rgba(255, 255, 255, 0);">&nbsp=
+;- GPU and co-processor virtualization&nbsp;</span></p><p style=3D"margin: 0=
+px; font-stretch: normal; line-height: normal; min-height: 13.8px;"><span st=
+yle=3D"background-color: rgba(255, 255, 255, 0);"><br></span></p><p style=3D=
+"margin: 0px; font-stretch: normal; line-height: normal;"><span style=3D"bac=
+kground-color: rgba(255, 255, 255, 0);">The 2-day event will have a single t=
+rack of presentations and discussions.&nbsp;&nbsp;There is no cost to attend=
+, but space will be limited.&nbsp;&nbsp;If you would like to present or atte=
+nd, please respond to this message by Friday, 31st March, stating your organ=
+ization name and topics of interest.</span></p><p style=3D"margin: 0px; font=
+-stretch: normal; line-height: normal;"><br></p><p style=3D"margin: 0px; fon=
+t-stretch: normal; line-height: normal;"><span style=3D"background-color: rg=
+ba(255, 255, 255, 0);">Rich</span></p></div></div></div></div></div></div></=
+body></html>=
+
+--Apple-Mail-3AA195B4-08C1-4410-BE85-C8FDAD6526B7--
+
+
+--===============6304636530679069069==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6304636530679069069==--
