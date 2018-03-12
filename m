@@ -1,21 +1,16 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH 3/3] docs: Remove redundant
-	qemu-xen-security document
-Date: Mon, 12 Mar 2018 12:09:45 +0000
-Message-ID: <c670dbad-3ab1-d53d-380e-94be6afdc6dc@citrix.com>
-References: <20180309180356.8067-1-george.dunlap@citrix.com>
- <20180309180356.8067-3-george.dunlap@citrix.com>
- <alpine.DEB.2.10.1803111328210.23583@sstabellini-ThinkPad-X260>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [rumprun test] 120451: regressions - FAIL
+Date: Mon, 12 Mar 2018 12:29:34 +0000
+Message-ID: <osstest-120451-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------27775601B0269A19D62DD274"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=snkv=gc=citrix.com=prvs=602fbdb5d=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1evMH1-0007Ia-U6
- for xen-devel@lists.xenproject.org; Mon, 12 Mar 2018 12:09:51 +0000
-In-Reply-To: <alpine.DEB.2.10.1803111328210.23583@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+ <srs0=e8xk=gc=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1evMaJ-0000dd-QD
+ for xen-devel@lists.xenproject.org; Mon, 12 Mar 2018 12:29:47 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,146 +19,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Lars Kurth <lars.kurth@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---------------27775601B0269A19D62DD274
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-On 03/11/2018 08:29 PM, Stefano Stabellini wrote:
-> On Fri, 9 Mar 2018, George Dunlap wrote:
->> All this information is now covered in SUPPORT.md.
->>
->> Most of the emulated hardware is obvious a couple of the items are
->> worth pointing out specifically.
->>
->> "xen_disk" is listed under "Blkback"
->>
->> "...the PCI host bridge and the PIIX3 chipset...": This statement is
->> redundant -- the PCI host bridge is a part of the piix3 chipset, which
->> is listed as supported.
->>
->> xenfb: The "graphics" side of "xenfb" is listed under "PV Framebuffer
->> (backend)", and the "input" side of "xenfb" (including both keyboard
->> and mouse) is listed under "PV Keyboard (backend)".
->>
->> Backing storage image format is listed in the "Blkback" section.
->>
->> Signed-off-by: George Dunlap <george.dunlap@citrix.com>
-> 
-> One thing: stdvga is still mispelled in SUPPORT.md.
-> Anything else is fine.
-
-So it is.  What about the attached?
-
- -George
-
---------------27775601B0269A19D62DD274
-Content-Type: text/x-patch;
-	name="0001-docs-Remove-redundant-qemu-xen-security-document.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename="0001-docs-Remove-redundant-qemu-xen-security-document.patch"
-
->From 6b41d5c33b95f55fd16b259f58a3852a6cce13f9 Mon Sep 17 00:00:00 2001
-From: George Dunlap <george.dunlap@citrix.com>
-Date: Fri, 9 Mar 2018 11:04:18 +0000
-Subject: [PATCH] docs: Remove redundant qemu-xen-security document
-
-All this information is now covered in SUPPORT.md.
-
-Most of the emulated hardware is obvious a couple of the items are
-worth pointing out specifically.
-
-"xen_disk" is listed under "Blkback"
-
-"...the PCI host bridge and the PIIX3 chipset...": This statement is
-redundant -- the PCI host bridge is a part of the piix3 chipset, which
-is listed as supported.
-
-xenfb: The "graphics" side of "xenfb" is listed under "PV Framebuffer
-(backend)", and the "input" side of "xenfb" (including both keyboard
-and mouse) is listed under "PV Keyboard (backend)".
-
-Backing storage image format is listed in the "Blkback" section.
-
-Fix 'stdvga' spelling while we're here.
-
-Signed-off-by: George Dunlap <george.dunlap@citrix.com>
----
-v2:
-- Fix stdvgga spelling.
-
-CC: Ian Jackson <ian.jackson@citrix.com>
-CC: Wei Liu <wei.liu2@citrix.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Tim Deegan <tim@xen.org>
-CC: Konrad Wilk <konrad.wilk@oracle.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien.grall@arm.com>
-CC: Anthony Perard <anthony.perard@citrix.com>
-CC: Lars Kurth <lars.kurth@citrix.com>
----
- SUPPORT.md                  |  2 +-
- docs/misc/qemu-xen-security | 21 ---------------------
- 2 files changed, 1 insertion(+), 22 deletions(-)
- delete mode 100644 docs/misc/qemu-xen-security
-
-diff --git a/SUPPORT.md b/SUPPORT.md
-index ee65d45b24..9ac1a40036 100644
---- a/SUPPORT.md
-+++ b/SUPPORT.md
-@@ -645,7 +645,7 @@ See the section **Blkback** for image formats supported by QEMU.
- ### x86/Emulated graphics (QEMU):
- 
-     Status, cirrus-vga: Supported
--    Status, stgvga: Supported
-+    Status, stdvga: Supported
- 
- ### x86/Emulated audio (QEMU):
- 
-diff --git a/docs/misc/qemu-xen-security b/docs/misc/qemu-xen-security
-deleted file mode 100644
-index 496f7eee7a..0000000000
---- a/docs/misc/qemu-xen-security
-+++ /dev/null
-@@ -1,21 +0,0 @@
--qemu-xen (git://xenbits.xen.org/qemu-xen.git) is only supported for
--security fixes when used together with the Xen hypervisor and only with
--a subset of all the possible QEMU emulators. Specifically:
--
--- network: e1000, rtl8139, virtio-net
--- storage: piix3 ide, ahci, xen_disk
--- backing storage image format: raw, qcow, qcow2, vhd
--- graphics: cirris-vga, stdvga and xenfb
--- audio: sb16, es1370, ac97
--- input: Xen PV keyboard and mouse (part of xenfb), USB and PS/2
--         keyboard and mouse
--- serial cards: UART 16550A
--
--Core components, such as the PCI host bridge and the PIIX3 chipset, are
--supported. All devices of one the above classes, which are not explicitly
--mentioned, are not supported. For example the ne2000 network card is not
--supported. 
--
--If you think that a specific emulated device should be supported, please
--contact the QEMU UPSTREAM maintainer and the Xen Security Team
--(security@xenproject.org).
--- 
-2.16.2
-
-
---------------27775601B0269A19D62DD274
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------27775601B0269A19D62DD274--
+ZmxpZ2h0IDEyMDQ1MSBydW1wcnVuIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
+bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjA0NTEvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3Rz
+IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMg
+d2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFtZDY0LXJ1bXBydW4gICAgICAgICAgIDYg
+cnVtcHJ1bi1idWlsZCAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEwNjc1NAogYnVpbGQtaTM4
+Ni1ydW1wcnVuICAgICAgICAgICAgNiBydW1wcnVuLWJ1aWxkICAgICAgICAgICAgZmFpbCBSRUdS
+LiB2cy4gMTA2NzU0CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJs
+b2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1ydW1wcnVuLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEp
+ICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYtcnVtcHJ1bi1pMzg2
+ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRh
+cmdldGVkIGZvciB0ZXN0aW5nOgogcnVtcHJ1biAgICAgICAgICAgICAgOTRiZGYzMmFjNTdiODRj
+MWI0MjE1MGQyMWYwYWQ3OWIzYjVkZDk5YwpiYXNlbGluZSB2ZXJzaW9uOgogcnVtcHJ1biAgICAg
+ICAgICAgICAgYzdmMmYwMTZiZWNjMWNkMGU4NWRhNmUxYjI1YThlN2Y5ZmIyYWE3NAoKTGFzdCB0
+ZXN0IG9mIGJhc2lzICAgMTA2NzU0ICAyMDE3LTAzLTE4IDA0OjIxOjI1IFogIDM1OSBkYXlzClRl
+c3Rpbmcgc2FtZSBzaW5jZSAgIDEyMDM2MCAgMjAxOC0wMy0wOSAwNDoxOToyMCBaICAgIDMgZGF5
+cyAgICAzIGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0
+ZXN0OgogIEtlbnQgTWNMZW9kIDxrZW50LW1jbGVvZEB1c2Vycy5ub3JlcGx5LmdpdGh1Yi5jb20+
+CiAgS2VudCBNY0xlb2QgPEtlbnQuTWNsZW9kQGRhdGE2MS5jc2lyby5hdT4KICBOYWphIE1lbGFu
+IDxuYWphbWVsYW5AYXV0aXN0aWNpLm9yZz4KICBTZWJhc3RpYW4gV2lja2kgPGdhbmRyb0BnbXgu
+bmV0PgogIFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1y
+dW1wcnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
+IGJ1aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1ydW1wcnVuLWFtZDY0ICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYtcnVtcHJ1bi1pMzg2
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKCgotLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0
+LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xv
+Z3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0
+Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5v
+cmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3Nz
+dGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIv
+P3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDov
+L3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hi
+PW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVu
+Yml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5n
+LgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tCmNvbW1pdCA5NGJkZjMyYWM1N2I4NGMxYjQyMTUwZDIxZjBhZDc5YjNiNWRkOTljCk1l
+cmdlOiA4ZmU0MGM4IGIzYzEwMzMKQXV0aG9yOiBLZW50IE1jTGVvZCA8a2VudC1tY2xlb2RAdXNl
+cnMubm9yZXBseS5naXRodWIuY29tPgpEYXRlOiAgIEZyaSBGZWIgMTYgMDk6MTU6NDUgMjAxOCAr
+MTEwMAoKICAgIE1lcmdlIHB1bGwgcmVxdWVzdCAjMTE4IGZyb20ga2VudC1tY2xlb2Qvc3RyZXRj
+aC1saW5raW5nLWRlZmF1bHRwaWUKICAgIAogICAgRml4IGxpbmtpbmcgb24gRGViaWFuIFN0cmV0
+Y2ggKGdjYy02KQoKY29tbWl0IGIzYzEwMzNiMDkwYjY1ZThlODY5OTlkZGQwNjNjMTc0NTAyYWEz
+ZjAKQXV0aG9yOiBLZW50IE1jTGVvZCA8S2VudC5NY2xlb2RAZGF0YTYxLmNzaXJvLmF1PgpEYXRl
+OiAgIFdlZCBGZWIgMTQgMTY6NDM6MTYgMjAxOCArMTEwMAoKICAgIEFkZCBmdXJ0aGVyIC1uby1w
+aWUgY2hlY2tzIHRvIFJ1bXBydW4gYnVpbGQgdG9vbHMKICAgIAogICAgVGhpcyBidWlsZHMgdXBv
+biB0aGUgcHJldmlvdXMgY29tbWl0IHRvIGFkZCAtbm8tcGllIGFueXdoZXJlIHRoZQogICAgcmVs
+b2NhdGFibGUgZmxhZyAoLVdsLC1yKSBpcyB1c2VkIHRvIGhhbmRsZSBjb21waWxlcnMgdGhhdCBl
+bmFibGUgLXBpZQogICAgYnkgZGVmYXVsdCAoU3VjaCBhcyBEZWJpYW4gU3RyZXRjaCkuCgpjb21t
+aXQgOGZlNDBjODRlZGRkZmJmNDcyYjRhN2NjZTk2MGRmNzQ5NzAxMTc0YwpNZXJnZTogYzdmMmYw
+MSA2ODVmNGFiCkF1dGhvcjogU2ViYXN0aWFuIFdpY2tpIDxnYW5kcm9AZ214Lm5ldD4KRGF0ZTog
+ICBGcmkgSmFuIDUgMTU6MDQ6MTggMjAxOCArMDEwMAoKICAgIE1lcmdlIHB1bGwgcmVxdWVzdCAj
+MTEyIGZyb20gbmFqYW1lbGFuL2J1Z2ZpeC9nY2M3LWZhbGx0aHJvdWdoCiAgICAKICAgIEFkZCB0
+aGUgLVdpbXBsaWNpdC1mYWxsdGhyb3VnaD0wIGZsYWcgdG8gYWxsb3cgY29tcGlsaW5nIHdpdGgg
+R0NDNwoKY29tbWl0IDY4NWY0YWIzYjc0YjZmMWUxYjQwYmRkM2QyYzQyZWZhNDRiZjM4NWQKQXV0
+aG9yOiBOYWphIE1lbGFuIDxuYWphbWVsYW5AYXV0aXN0aWNpLm9yZz4KRGF0ZTogICBUaHUgSmFu
+IDQgMTY6MDc6NDYgMjAxOCArMDAwMAoKICAgIE1ha2UgdGhlIGRpc2FibGluZyBvZiB0aGUgZmFs
+bHRocm91Z2ggd2FybmluZyBkZXBlbmRlbnQgb24gR0NDIHZlcnNpb24KICAgIAogICAgVGhpcyBz
+aG91bGQgcHJldmVudCBvbGRlciBnY2MgdmVyc2lvbnMgZnJvbSBjaG9raW5nIG9uIHVua25vd24g
+YXJndW1lbnQuCiAgICAKICAgIEkgaGF2ZSBub3QgdGVzdGVkIHRoaXMsIGp1c3Qgd3JvdGUgdGhl
+IGNvZGUgZGlyZWN0bHkgb24gZ2l0aHViLiBVc2Ugd2l0aCBjYXV0aW9uLgoKY29tbWl0IDM0MDU2
+NDUxMTc0ZTg3MjJiOTcyMjI5ZmVmYzFiZjllMGI4OWE3ZGEKQXV0aG9yOiBOYWphIE1lbGFuIDxu
+YWphbWVsYW5AYXV0aXN0aWNpLm9yZz4KRGF0ZTogICBXZWQgSmFuIDMgMTg6NTc6NTAgMjAxOCAr
+MDAwMAoKICAgIEFkZCB0aGUgLVdpbXBsaWNpdC1mYWxsdGhyb3VnaD0wIGZsYWcgdG8gYWxsb3cg
+Y29tcGlsaW5nIHdpdGggR0NDNwogICAgCiAgICBHQ0M3IGNvbWVzIHdpdGggYSBuZXcgd2Fybmlu
+ZyAiaW1wbGljaXQtZmFsbHRocm91Z2giIHdoaWNoIHdpbGwgcHJldmVudCBidWlsZGluZyB0aGUg
+bmV0YnNkLXNyYy4KICAgIAogICAgRm9yIG1vcmUgaW5mb3JtYXRpb246IGh0dHBzOi8vZHpvbmUu
+Y29tL2FydGljbGVzL2ltcGxpY2l0LWZhbGx0aHJvdWdoLWluLWdjYy03Cgpjb21taXQgMzVkODEx
+OTRiN2ZlYjc1ZDIwYWYzYmE0ZmRiNDVlYTc2MjMwODUyZgpBdXRob3I6IFdlaSBMaXUgPHdlaS5s
+aXUyQGNpdHJpeC5jb20+CkRhdGU6ICAgV2VkIEp1biA3IDE2OjMwOjAwIDIwMTcgKzAxMDAKCiAg
+ICBGaXggbGlua2luZyBvbiBEZWJpYW4gU3RyZXRjaAogICAgCiAgICBQcm92aWRlIGNjLW9wdGlv
+bi4gVXNlIHRoYXQgdG8gY2hlY2sgaWYgLW5vLXBpZSBpcyBhdmFpbGFibGUgYW5kCiAgICBhcHBl
+bmQgaXQgd2hlbiBuZWNlc3NhcnkuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdl
+aS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
