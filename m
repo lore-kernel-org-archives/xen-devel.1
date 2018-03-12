@@ -1,14 +1,17 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v3] new config option vtsc_tolerance_khz to
- avoid TSC emulation
-Date: Mon, 12 Mar 2018 10:15:08 +0100
-Message-ID: <20180312101508.4a9444c2.olaf@aepfle.de>
-References: <20180306104133.22106-1-olaf@aepfle.de>
- <af47cc31-d3cb-023a-1229-ab9eb013f985@citrix.com>
+From: "Kang, Luwei" <luwei.kang@intel.com>
+Subject: Re: [PATCH RESEND v1 1/7] x86: add a flag to enable
+ Intel processor trace
+Date: Mon, 12 Mar 2018 09:25:40 +0000
+Message-ID: <82D7661F83C1A047AF7DC287873BF1E167EF4937@SHSMSX101.ccr.corp.intel.com>
+References: <1516039953-2988-1-git-send-email-luwei.kang@intel.com>
+ <1516039953-2988-2-git-send-email-luwei.kang@intel.com>
+ <20180309165309.pimwqyilkik2oi7a@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5276904649864506958=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <af47cc31-d3cb-023a-1229-ab9eb013f985@citrix.com>
+In-Reply-To: <20180309165309.pimwqyilkik2oi7a@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,58 +20,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFy?= =?UTF-8?B?Y3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: "Tian, Kevin" <kevin.tian@intel.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>, "jbeulich@suse.com" <jbeulich@suse.com>, "George.Dunlap@eu.citrix.com" <George.Dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "tim@xen.org" <tim@xen.org>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, "Nakajima,
+ Jun" <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5276904649864506958==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/LPdW5b0ZcJqC96FxSHjtXFo"; protocol="application/pgp-signature"
-
---Sig_/LPdW5b0ZcJqC96FxSHjtXFo
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Tue, 6 Mar 2018 11:07:54 +0000
-schrieb Andrew Cooper <andrew.cooper3@citrix.com>:
-
-> > Add a new domctl XEN_DOMCTL_set_vtsc_tolerance_khz to adjust the
-> > tolerance value of a running domU that is supposed to be migrated. =20
-> Please can we not proliferate the domctls.
-> This looks like it should be part of the set_tsc_info hypercall, not a
-> separate hypercall.
-
-How should this approach be implemented? To me it looks like set_tsc_info
-should be called only once for a not-yet-active domU, but I'm not familiar
-with timekeeping.
-If it can be just called once, and there should be a way to adjust the=20
-tolerance value, then XEN_DOMCTL_settscinfo would need to be changed to=20
-have subcommands.
-
-Olaf
-
---Sig_/LPdW5b0ZcJqC96FxSHjtXFo
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWqZFHAAKCRBdQqD6ppg2
-fqa1AJ9wpYLVjEL6Fit8HzVPi4bev6G4AACgkMX9JaY42+GV2j8R/jaEnmgnxoU=
-=dYf8
------END PGP SIGNATURE-----
-
---Sig_/LPdW5b0ZcJqC96FxSHjtXFo--
-
-
---===============5276904649864506958==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5276904649864506958==--
+PiA+IGRpZmYgLS1naXQgYS9kb2NzL21pc2MveGVuLWNvbW1hbmQtbGluZS5tYXJrZG93bgo+ID4g
+Yi9kb2NzL21pc2MveGVuLWNvbW1hbmQtbGluZS5tYXJrZG93bgo+ID4gaW5kZXggNzgxMTEwZC4u
+OTU0MTFjZiAxMDA2NDQKPiA+IC0tLSBhL2RvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtk
+b3duCj4gPiArKysgYi9kb2NzL21pc2MveGVuLWNvbW1hbmQtbGluZS5tYXJrZG93bgo+ID4gQEAg
+LTEwMDksNiArMTAwOSwxMyBAQCBkZWJ1ZyBoeXBlcnZpc29yIG9ubHkpLgo+ID4gICMjIyBpZGxl
+XF9sYXRlbmN5XF9mYWN0b3IKPiA+ICA+IGA9IDxpbnRlZ2VyPmAKPiA+Cj4gPiArIyMjIGludGVs
+XF9wdAo+ID4gKz4gYD0gPGJvb2xlYW4+YAo+ID4gKwo+ID4gKz4gRGVmYXVsdDogYHRydWVgCj4g
+PiArCj4gPiArRmxhZyB0byBlbmFibGUgSW50ZWwgUHJvY2Vzc29yIFRyYWNlLgo+ID4gKwo+ID4g
+ICMjIyBpb2FwaWNcX2Fjawo+ID4gID4gYD0gb2xkIHwgbmV3YAo+ID4KPiAKPiBObyBkb2N1bWVu
+dCBmb3IgdGhpcyBvcHRpb24/CgpUaGFua3MgZm9yIHRoZSBjb2RlIHJldmlldy4gV2lsbCBhZGQg
+YSBzaW1wbGUgZGVzY3JpcHRpb24gaGVyZS4KCj4gCj4gPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gv
+eDg2L2NwdS9NYWtlZmlsZSBiL3hlbi9hcmNoL3g4Ni9jcHUvTWFrZWZpbGUKPiA+IGluZGV4IDc0
+ZjIzYWUuLjMzZDdhNzQgMTAwNjQ0Cj4gPiAtLS0gYS94ZW4vYXJjaC94ODYvY3B1L01ha2VmaWxl
+Cj4gPiArKysgYi94ZW4vYXJjaC94ODYvY3B1L01ha2VmaWxlCj4gPiBAQCAtOCwzICs4LDQgQEAg
+b2JqLXkgKz0gaW50ZWwubwo+ID4gIG9iai15ICs9IGludGVsX2NhY2hlaW5mby5vCj4gPiAgb2Jq
+LXkgKz0gbXdhaXQtaWRsZS5vCj4gPiAgb2JqLXkgKz0gdnBtdS5vIHZwbXVfYW1kLm8gdnBtdV9p
+bnRlbC5vCj4gPiArb2JqLXkgKz0gaW50ZWxfcHQubwo+IAo+IE1vdmUgdGhpcyBhZnRlciBpbnRl
+bF9jYWNoZWluZm8gcGxlYXNlLgo+IAo+IFdlIG9yZGVyIHRoaW5ncyBhbHBoYWJldGljYWxseS4K
+CldpbGwgY2hlY2sgYW5kIHJlb3JkZXIgYWxsIHRoZSB0aGluZ3MgaW4gbmV4dCB2ZXJzaW9uLgoK
+PiA+ICsKPiA+ICsvKiBpbnRlbF9wdDogRmxhZyB0byBlbmFibGUgSW50ZWwgUHJvY2Vzc29yIFRy
+YWNlIChkZWZhdWx0IG9uKS4gKi8KPiA+ICtib29sX3QgX19yZWFkX21vc3RseSBvcHRfaW50ZWxf
+cHQgPSAxOwo+IAo+IFVzZSBwbGFpbiBib29sIGFuZCB0cnVlIHBsZWFzZS4KCldpbGwgZml4IGl0
+LiBCVFcsIEkgYW0gdGhpbmtpbmcgb2YgbWFrZSBpdCAiZmFsc2UiIGFzIGRlZmF1bHQgdG8gcmVk
+dWNlIG92ZXJoZWFkLgoKVGhhbmtzLApMdXdlaSBLYW5nCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
