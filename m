@@ -1,34 +1,21 @@
-From: Tamas K Lengyel <tamas@tklengyel.com>
-Subject: Re: [PATCHv3] xen: Add EFI_LOAD_OPTION support
-Date: Tue, 13 Mar 2018 14:58:00 -0600
-Message-ID: <CABfawhnXxLjvg6Lgqb88pVzknbU6KmyR8kMSK=wWicXjzy69NQ@mail.gmail.com>
-References: <20180123002104.1674-1-tamas@tklengyel.com>
- <5A6B312C02000078001A2C0B@prv-mh.provo.novell.com>
- <CABfawhm5Rt-ChYoVHH1S5EnZBcVhb+66KpvV7TgUf27roXzdbw@mail.gmail.com>
- <5A6EF4DD02000078001A3406@prv-mh.provo.novell.com>
- <CABfawhmdX3LJcvZ0NX2FFXSsTCri+EenvV8OBZ-R9mEgfgOW8w@mail.gmail.com>
- <CABfawhnLVO4gHcahJW8EROUciOwc48NPihotJLNOwujw3ZHTmw@mail.gmail.com>
- <5AA7901502000078001B0CAB@prv-mh.provo.novell.com>
+From: Thomas Garnier <thgarnie@google.com>
+Subject: [PATCH v2 02/27] x86: Use symbol name on bug table for
+	PIE support
+Date: Tue, 13 Mar 2018 13:59:20 -0700
+Message-ID: <20180313205945.245105-3-thgarnie__235.851392108266$1520974742$gmane$org@google.com>
+References: <20180313205945.245105-1-thgarnie@google.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=wvht=gd=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1evr0S-0008UG-9m
- for xen-devel@lists.xenproject.org; Tue, 13 Mar 2018 20:58:48 +0000
-Received: by mail-wm0-f53.google.com with SMTP id 139so465501wmn.2
- for <xen-devel@lists.xenproject.org>; Tue, 13 Mar 2018 13:58:42 -0700 (PDT)
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com.
- [74.125.82.51])
- by smtp.gmail.com with ESMTPSA id u46sm1119245edm.57.2018.03.13.13.58.41
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 13 Mar 2018 13:58:41 -0700 (PDT)
-Received: by mail-wm0-f51.google.com with SMTP id u10so254155wmu.4
- for <xen-devel@lists.xenproject.org>; Tue, 13 Mar 2018 13:58:41 -0700 (PDT)
-In-Reply-To: <5AA7901502000078001B0CAB@prv-mh.provo.novell.com>
+ <srs0=etlo=gd=google.com=thgarnie@srs-us1.protection.inumbo.net>)
+ id 1evr1t-0000eG-RT
+ for xen-devel@lists.xenproject.org; Tue, 13 Mar 2018 21:00:17 +0000
+Received: by mail-pg0-x244.google.com with SMTP id i14so417533pgv.3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Mar 2018 14:00:16 -0700 (PDT)
+In-Reply-To: <20180313205945.245105-1-thgarnie@google.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -37,22 +24,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>
+To: Herbert Xu <herbert@gondor.apana.org.au>, "David S . Miller" <davem@davemloft.net>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, "H . Peter Anvin" <hpa@zytor.com>, Peter Zijlstra <peterz@infradead.org>, Josh Poimboeuf <jpoimboe@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Kate Stewart <kstewart@linuxfoundation.org>, Thomas Garnier <thgarnie@google.com>, Arnd Bergmann <arnd@arndb.de>, Philippe Ombredanne <pombredanne@nexb.com>, Arnaldo Carvalho de Melo <acme@redhat.com>, Andrey Ryabinin <aryabinin@virtuozzo.com>, Matthias Kaehlcke <mka@chromium.org>, Kees Cook <keescook@chromium.org>, Tom Lendacky <thomas.lendacky@amd.com>, "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>, Andy Lutomirski <luto@kernel.org>, Dominik Brodowski <linux@dominikbrodowski.net>, Borislav Petkov <bp@alien8.de>, Borislav Petkov <bp@suse.de>, Raf
+Cc: linux-arch@vger.kernel.org, kvm@vger.kernel.org, linux-pm@vger.kernel.org, x86@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org, linux-sparse@vger.kernel.org, linux-crypto@vger.kernel.org, kernel-hardening@lists.openwall.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBNYXIgMTMsIDIwMTggYXQgMTo0NyBBTSwgSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1
-c2UuY29tPiB3cm90ZToKPj4+PiBPbiAxMi4wMy4xOCBhdCAxNjowMCwgPHRhbWFzQHRrbGVuZ3ll
-bC5jb20+IHdyb3RlOgo+PiBQYXRjaCBwaW5nLiBKYW4sIEkgd291bGQgbGlrZSB0byB0b3VjaCBi
-YXNlIG9uY2UgbW9yZSB0byBzZWUgaWYgd2UgY2FuCj4+IGdldCB0aGlzIHBhdGNoIGluY2x1ZGVk
-IGluIDQuMTEuIFRoZSBwYXRjaCBhcy1pcyBjb3JyZWN0bHkgdGVsbHMgdGhlCj4+IGRpZmZlcmVu
-Y2UgYmV0d2VlbiBidWZmZXJzIHByb3ZpZGVkIGJ5IGJvdGggYW4gRUZJIHNoZWxsIG9yIGJ5IHRo
-ZQo+PiBmaXJtd2FyZSBhcyBhbiBFRklfTE9BRF9PUFRJT04uCj4KPiBXZWxsLCBJJ3ZlIHN0YXRl
-ZCBteSBvcGluaW9uIGJlZm9yZSwgYW5kIEknbSBpbnRlbmRpbmcgdG8gcHJvdmlkZSBhCj4gcmVw
-bGFjZW1lbnQgcGF0Y2ggYWxvbmcgdGhlIG91dGxpbmUgSSBoYWQgcHJvdmlkZWQsIGJ1dCBJIGRp
-ZG4ndCBnZXQKPiBhcm91bmQgdG8gYWN0dWFsbHkgZG8gc28geWV0Lgo+CgpUaGFua3MgZm9yIHRo
-ZSB1cGRhdGUuIEkgd291bGQgYmUgaGFwcHkgdG8gd2FpdCBmb3IgeW91ciBwYXRjaCB0bwpyZWJh
-c2UgdGhpcyBvbiB0b3Agb2YgaW4gc3RpbGwgbmVlZGVkLgoKVGFtYXMKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+UmVwbGFjZSB0aGUgJWMgY29uc3RyYWludCB3aXRoICVQLiBUaGUgJWMgaXMgaW5jb21wYXRpYmxl
+IHdpdGggUElFCmJlY2F1c2UgaXQgaW1wbGllcyBhbiBpbW1lZGlhdGUgdmFsdWUgd2hlcmVhcyAl
+UCByZWZlcmVuY2UgYSBzeW1ib2wuCgpQb3NpdGlvbiBJbmRlcGVuZGVudCBFeGVjdXRhYmxlIChQ
+SUUpIHN1cHBvcnQgd2lsbCBhbGxvdyB0byBleHRlbmRlZCB0aGUKS0FTTFIgcmFuZG9taXphdGlv
+biByYW5nZSBiZWxvdyB0aGUgLTJHIG1lbW9yeSBsaW1pdC4KClNpZ25lZC1vZmYtYnk6IFRob21h
+cyBHYXJuaWVyIDx0aGdhcm5pZUBnb29nbGUuY29tPgotLS0KIGFyY2gveDg2L2luY2x1ZGUvYXNt
+L2J1Zy5oIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9u
+KC0pCgpkaWZmIC0tZ2l0IGEvYXJjaC94ODYvaW5jbHVkZS9hc20vYnVnLmggYi9hcmNoL3g4Ni9p
+bmNsdWRlL2FzbS9idWcuaAppbmRleCA2ODA0ZDY2NDI3NjcuLjNkNjkwYTRhYmY1MCAxMDA2NDQK
+LS0tIGEvYXJjaC94ODYvaW5jbHVkZS9hc20vYnVnLmgKKysrIGIvYXJjaC94ODYvaW5jbHVkZS9h
+c20vYnVnLmgKQEAgLTM1LDcgKzM1LDcgQEAgZG8gewkJCQkJCQkJCVwKIAlhc20gdm9sYXRpbGUo
+IjE6XHQiIGlucyAiXG4iCQkJCQlcCiAJCSAgICAgIi5wdXNoc2VjdGlvbiBfX2J1Z190YWJsZSxc
+ImF3XCJcbiIJCVwKIAkJICAgICAiMjpcdCIgX19CVUdfUkVMKDFiKSAiXHQjIGJ1Z19lbnRyeTo6
+YnVnX2FkZHJcbiIJXAotCQkgICAgICJcdCIgIF9fQlVHX1JFTCglYzApICJcdCMgYnVnX2VudHJ5
+OjpmaWxlXG4iCVwKKwkJICAgICAiXHQiICBfX0JVR19SRUwoJVAwKSAiXHQjIGJ1Z19lbnRyeTo6
+ZmlsZVxuIglcCiAJCSAgICAgIlx0LndvcmQgJWMxIiAgICAgICAgIlx0IyBidWdfZW50cnk6Omxp
+bmVcbiIJXAogCQkgICAgICJcdC53b3JkICVjMiIgICAgICAgICJcdCMgYnVnX2VudHJ5OjpmbGFn
+c1xuIglcCiAJCSAgICAgIlx0Lm9yZyAyYislYzNcbiIJCQkJCVwKLS0gCjIuMTYuMi42NjAuZzcw
+OTg4Nzk3MWItZ29vZwoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
