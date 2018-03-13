@@ -1,26 +1,14 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH] xl: remove apic option for PVH guests
-Date: Tue, 13 Mar 2018 10:31:20 +0000
-Message-ID: <20180313103120.htpya3owzrt7btnc@MacBook-Pro-de-Roger.local>
-References: <20180228102053.1838-1-roger.pau@citrix.com>
- <20180301122205.bopopnky7n55zdmo@citrix.com>
- <7cb0df11-35a4-86fc-b475-e8a8c71102e7@citrix.com>
- <20180301160123.b5psgx5pjkvxkprh@citrix.com>
- <20180301170155.tzemvvsx6sgt2kob@MacBook-Pro-de-Roger.local>
- <20180302110929.tu2hdqa2jxpyzm2z@citrix.com>
- <5A9943A402000078001ADBD0@prv-mh.provo.novell.com>
- <6e1a0fe7-b27e-cdbb-e4b3-4e775e781c01@cardoe.com>
+From: Oleksandr Grytsov <al1img@gmail.com>
+Subject: Re: [PATCH] tools/xl: fix uninitialized variable in
+	xl_vdispl
+Date: Tue, 13 Mar 2018 12:33:39 +0200
+Message-ID: <CACvf2oVxeFUkFEv0NWqK+9KJk=mvRmVf_NE3VUEAh7RTmro=9g@mail.gmail.com>
+References: <20180313044333.27923-1-cardoe@cardoe.com>
+ <5AA793F302000078001B0CC4@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============9081230819173449935=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=yz32=gd=citrix.com=prvs=603653d7e=roger.pau@srs-us1.protection.inumbo.net>)
- id 1evhDM-0007oe-Dm
- for xen-devel@lists.xenproject.org; Tue, 13 Mar 2018 10:31:28 +0000
-Content-Disposition: inline
-In-Reply-To: <6e1a0fe7-b27e-cdbb-e4b3-4e775e781c01@cardoe.com>
+In-Reply-To: <5AA793F302000078001B0CC4@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,64 +17,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Doug Goldstein <cardoe@cardoe.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Doug Goldstein <cardoe@cardoe.com>, Xen Development List <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBNYXIgMDUsIDIwMTggYXQgMDg6NDM6NDhBTSAtMDYwMCwgRG91ZyBHb2xkc3RlaW4g
-d3JvdGU6Cj4gT24gMy8yLzE4IDU6MjkgQU0sIEphbiBCZXVsaWNoIHdyb3RlOgo+ID4+Pj4gT24g
-MDIuMDMuMTggYXQgMTI6MDksIDx3ZWkubGl1MkBjaXRyaXguY29tPiB3cm90ZToKPiA+PiBPbiBU
-aHUsIE1hciAwMSwgMjAxOCBhdCAwNTowMTo1NVBNICswMDAwLCBSb2dlciBQYXUgTW9ubsOpIHdy
-b3RlOgo+ID4+PiBPbiBUaHUsIE1hciAwMSwgMjAxOCBhdCAwNDowMToyM1BNICswMDAwLCBXZWkg
-TGl1IHdyb3RlOgo+ID4+Pj4gT24gVGh1LCBNYXIgMDEsIDIwMTggYXQgMDM6NTc6MThQTSArMDAw
-MCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiA+Pj4+PiBPbiAwMS8wMy8xOCAxMjoyMiwgV2VpIExp
-dSB3cm90ZToKPiA+Pj4+Pj4gT24gV2VkLCBGZWIgMjgsIDIwMTggYXQgMTA6MjA6NTNBTSArMDAw
-MCwgUm9nZXIgUGF1IE1vbm5lIHdyb3RlOgo+ID4+Pj4+Pj4gWFNBLTI1NiBmb3JjZXMgdGhlIGxv
-Y2FsIEFQSUMgdG8gYWx3YXlzIGJlIGVuYWJsZWQgZm9yIFBWSCBndWVzdHMsIHNvCj4gPj4+Pj4+
-PiBpZ25vcmUgYW55IGFwaWMgb3B0aW9uIGZvciBQVkggZ3Vlc3RzLiBVcGRhdGUgdGhlIGRvY3Vt
-ZW50YXRpb24KPiA+Pj4+Pj4+IGFjY29yZGluZ2x5Lgo+ID4+Pj4+PiBJIHRoaW5rIGhvdyBJIHdp
-bGwgYXBwcm9hY2ggdGhpcyBpcyB0byBkaWN0YXRlIHRoYXQgUFZIIGFsd2F5cyBoYXMgTEFQSUMK
-PiA+Pj4+Pj4gaW4gb3VyIGluLXRyZWUgZG9jdW1lbnQsIHRoZW4gdXNlIHRoYXQgYXMgdGhlIGp1
-c3RpZmljYXRpb24gZm9yIHRoaXMKPiA+Pj4+Pj4gY2hhbmdlLiBUaGF0J3MgdGhlIGNvbnNlbnN1
-cyBmcm9tIDIgeWVhcnMgYWdvLCByaWdodD8KPiA+Pj4+Pj4KPiA+Pj4+Pj4gT3Igd2UncmUganVz
-dCB3b3JraW5nIGFyb3VuZCB0aGUgbGltaXRhdGlvbiBpbiBvdXIgY29kZSBiYXNlLCBhbmQgdXNl
-cnMKPiA+Pj4+Pj4gbWF5IGRlbWFuZCBhIG5vLUxBUElDIFBWSCBndWVzdCBqdXN0IGJlY2F1c2Uu
-Li4KPiA+Pj4+Pgo+ID4+Pj4+IEN1cnJlbnRseSwgWGVuIGVuZm9yY2VzIHRoYXQgSFZNIGd1ZXN0
-cyBoYXZlIGFuIExBUElDLiAgVGhpcyBpcyBiZWNhdXNlCj4gPj4+Pj4gbWFraW5nIHRoZSBub24t
-TEFQSUMgY2FzZSBmdW5jdGlvbiBjb3JyZWN0bHkvc2FmZWx5IGRldm9sdmVkIGludG8gYQo+ID4+
-Pj4+IG1hc3NpdmUgcmF0cyBuZXN0IGFuZCBJIHN0b3BwZWQgdHJ5aW5nIHRvIGZpeCBpdCBhZnRl
-ciAyIGRheXMgb2YgdHJ5aW5nLgo+ID4+Pj4+Cj4gPj4+Pj4gQXQgdGhlIG1vbWVudCwgaXQgd291
-bGQgYmUgd2lzZSB0byBkaXNjdXNzIHdoZXRoZXIgdGhlIG5vbi1MQVBJQyBjYXNlIGlzCj4gPj4+
-Pj4gYWN0dWFsbHkgc2Vuc2libGUuICBJIHBlcnNvbmFsbHkgc2VlIG5vIHZhbHVlIGluIGtlZXBp
-bmcgaXQuCj4gPj4+Pj4KPiA+Pj4+Cj4gPj4+PiArMQo+ID4+Pj4KPiA+Pj4+PiBJZiBzb21lb25l
-IGNhbiBjb21lIHVwIHdpdGggYSBjb252aW5jaW5nIHVzZWNhc2UgZm9yIGtlZXBpbmcgaXQsIHRo
-ZW4KPiA+Pj4+PiBvaywgYnV0IHRoZSBiYXJyaWVyIGZvciB0aGlzIGlzIGluY3JlYXNpbmcgYWxs
-IHRoZSB0aW1lLCBlc3BlY2lhbGx5IG5vdwo+ID4+Pj4+IHRoYXQgaGFyZHdhcmUgYWNjZWxlcmF0
-aW9uIGFuZCBwb3N0ZWQgaW50ZXJydXB0cyBtZWFucyB0aGF0IGEKPiA+Pj4+PiBwaXBlbGluZS12
-aXJ0dWFsaXNlZCBBUElDIGlzIGZhc3RlciBhbmQgbW9yZSBlZmZpY2llbnQgdGhhbiBhbnkgb2Yg
-b3VyCj4gPj4+Pj4gZXZlbnQgY2hhbm5lbCBtZWNoYW5pc21zLgo+ID4+Pj4KPiA+Pj4+ICsxCj4g
-Pj4+Cj4gPj4+IEkndmUgbG9va2VkIGF0IHRoZSBpbi10cmVlIHB2aCBkb2N1bWVudCBhbmQgaXQg
-anVzdCByZWZlcnMgdG8gdGhlIGxvY2FsCj4gPj4+IEFQSUMgaW4gdGhpcyBzZW50ZW5jZToKPiA+
-Pj4KPiA+Pj4gIkFQIHN0YXJ0dXAgY2FuIGJlIHBlcmZvcm1lZCB1c2luZyBoeXBlcmNhbGxzIG9y
-IHRoZSBsb2NhbCBBUElDIGlmIHByZXNlbnQuIgo+ID4+Pgo+ID4+PiBJIGd1ZXNzIHRoZSB0cmFp
-bGluZyAiaWYgcHJlc2VudCIgY291bGQgYmUgcmVtb3ZlZCwgYnV0IGl0J3Mgbm90Cj4gPj4+IGNv
-bGxpZGluZyB3aXRoIHRoaXMgcGF0Y2guCj4gPj4+Cj4gPj4+IEknbSBoYXBweSB3aXRoIHJlYmFz
-aW5nIHRoaXMgcGF0Y2ggYW5kIGFwcGx5aW5nIHRoZSBhYm92ZSBjaGFuZ2UsIGlzCj4gPj4+IHRo
-ZXJlIGFueSBvdGhlciBkb2N1bWVudCB0aGF0IHNob3VsZCBiZSBjaGFuZ2VkPwo+ID4+Cj4gPj4g
-Q2FuIHdlIG1ha2UgaXQgbW9yZSBleHBsaWNpdC4gTGlrZQo+ID4+Cj4gPj4gICBWQ1BVcyBmb3Ig
-UFZIIG11c3QgaGF2ZSBsb2NhbCBBUElDIGFuZCBpdCBjYW4ndCBiZSBkaXNhYmxlZC4KPiA+Pgo+
-ID4+ID8KPiA+IAo+ID4gVG8gYmUgaG9uZXN0IEkgbGlrZXIgUm9nZXIncyBzdWdnZXN0aW9uIGJl
-dHRlci4gQW5kIHlldCBiZXR0ZXIKPiA+IHdvdWxkIGltbyBiZSBpZiB3ZSBsZWZ0IHRoYXQgc2Vu
-dGVuY2UgYWxvbmUsIHVubGVzcyB3ZSByZWFsbHkgbWVhbgo+ID4gdG8gY2xvc2UgdGhhdCByb2Fk
-IGZvciBhbnlvbmUgd2FudGluZyB0byB0YWtlIG9uIG1ha2luZyBBUElDLQo+ID4gbGVzcyBndWVz
-dHMgd29yayBzZWN1cmVseS4KPiA+IAo+ID4gSmFuCj4gCj4gSSBiZWxpZXZlIHRoYXQncyBleGFj
-dGx5IHdoYXQgQW5kcmV3IHByb3Bvc2VkIGluCj4gaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE4LTAzL21zZzAwMDg5Lmh0bWwKPiByZW1vdmlu
-ZyB0aGUgd29yZGluZyBkb2Vzbid0IGV4Y2x1ZGUgc29tZW9uZSBmcm9tIGFkZGluZyBpdCBsYXRl
-ciBidXQgaXQKPiBkb2VzIG1ha2UgaXQgY2xlYXIgdGhhdCBpdHMgbm90IGF2YWlsYWJsZSB0b2Rh
-eS4KCkknbSBraW5kIG9mIGxvc3QgcmVnYXJkaW5nIHdoZXRoZXIgd2UgcmVhY2hlZCBjb25zZW5z
-dXMgb3Igbm90LiBJcyB0aGUKY3VycmVudCBwYXRjaCBzdWl0YWJsZSwgb3Igc2hvdWxkIEkgY2hh
-bmdlIHNvbWUgb2YgdGhlIHdvcmRpbmc/CgpUaGFua3MsIFJvZ2VyLgoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============9081230819173449935==
+Content-Type: multipart/alternative; boundary="001a11406f18be4e94056748caa2"
+
+--001a11406f18be4e94056748caa2
+Content-Type: text/plain; charset="UTF-8"
+
+On Tue, Mar 13, 2018 at 10:03 AM, Jan Beulich <JBeulich@suse.com> wrote:
+
+> >>> On 13.03.18 at 05:43, <cardoe@cardoe.com> wrote:
+> > The code added in 7a48622a78a0b452e8afa55b8442c958abd226a7 could use rc
+> > uninitialized in main_vdisplattach().
+> >
+> > Signed-off-by: Doug Goldstein <cardoe@cardoe.com>
+> > ---
+> > CC: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
+> > ---
+> >  tools/xl/xl_vdispl.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> Please trim your Cc list - I've removed all individuals here, and I
+> don't see why you've copied all REST maintainers when this is
+> clearly a pure tool stack change.
+>
+> Jan
+>
+>
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+>
+
+
+Hi, Doug,
+
+Thanks for pointing it out.
+
+The implementation is done according to CODING_STYLE document (see ERROR
+HANDLING)
+which requests to define return value rc uninitialized. The only path where
+rc is uninitialized it is
+when dryrun_only set to true. So, proper fix should be:
+
+    if (dryrun_only) {
+        char *json = libxl_device_vdispl_to_json(ctx, &vdispl);
+        printf("vdispl: %s\n", json);
+        free(json);
++      rc = 0;
+        goto out;
+    }
+
+
+-- 
+Best Regards,
+Oleksandr Grytsov.
+
+--001a11406f18be4e94056748caa2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_extra"><br><div class=3D"gmail_quo=
+te">On Tue, Mar 13, 2018 at 10:03 AM, Jan Beulich <span dir=3D"ltr">&lt;<a =
+href=3D"mailto:JBeulich@suse.com" target=3D"_blank">JBeulich@suse.com</a>&g=
+t;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><span=
+ class=3D"gmail-">&gt;&gt;&gt; On 13.03.18 at 05:43, &lt;<a href=3D"mailto:=
+cardoe@cardoe.com">cardoe@cardoe.com</a>&gt; wrote:<br>
+&gt; The code added in 7a48622a78a0b452e8afa55b8442c9<wbr>58abd226a7 could =
+use rc<br>
+&gt; uninitialized in main_vdisplattach().<br>
+&gt;<br>
+&gt; Signed-off-by: Doug Goldstein &lt;<a href=3D"mailto:cardoe@cardoe.com"=
+>cardoe@cardoe.com</a>&gt;<br>
+&gt; ---<br>
+&gt; CC: Oleksandr Grytsov &lt;<a href=3D"mailto:oleksandr_grytsov@epam.com=
+">oleksandr_grytsov@epam.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 tools/xl/xl_vdispl.c | 2 +-<br>
+&gt;=C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+</span>Please trim your Cc list - I&#39;ve removed all individuals here, an=
+d I<br>
+don&#39;t see why you&#39;ve copied all REST maintainers when this is<br>
+clearly a pure tool stack change.<br>
+<span class=3D"gmail-HOEnZb"><font color=3D"#888888"><br>
+Jan<br>
+</font></span><div class=3D"gmail-HOEnZb"><div class=3D"gmail-h5"><br>
+<br>
+______________________________<wbr>_________________<br>
+Xen-devel mailing list<br>
+<a href=3D"mailto:Xen-devel@lists.xenproject.org">Xen-devel@lists.xenprojec=
+t.org</a><br>
+<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
+noreferrer" target=3D"_blank">https://lists.xenproject.org/<wbr>mailman/lis=
+tinfo/xen-devel</a></div></div></blockquote></div><br><br></div><div class=
+=3D"gmail_extra">Hi, Doug,<br><br></div><div class=3D"gmail_extra">Thanks f=
+or pointing it out.<br><br>The implementation is done according to CODING_S=
+TYLE document (see ERROR HANDLING)<br></div><div class=3D"gmail_extra">whic=
+h requests to define return value rc uninitialized. The only path where rc =
+is uninitialized it is<br></div><div class=3D"gmail_extra">when dryrun_only=
+ set to true. So, proper fix should be:<br></div><div class=3D"gmail_extra"=
+><br>=C2=A0=C2=A0=C2=A0 if (dryrun_only) {<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 char *json =3D libxl_device_vdispl_to_json(ctx, &amp;vdispl=
+);<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 printf(&quot;vdispl: %s\n&=
+quot;, json);<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 free(json);<br>=
+</div><div class=3D"gmail_extra">+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rc =3D 0;<=
+br></div><div class=3D"gmail_extra">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 goto out;<br>=C2=A0=C2=A0=C2=A0 }<br><br></div><div class=3D"gmail_extr=
+a"><br></div><div class=3D"gmail_extra">-- <br><div class=3D"gmail_signatur=
+e">Best Regards,<br>Oleksandr Grytsov.</div>
+</div></div>
+
+--001a11406f18be4e94056748caa2--
+
+
+--===============9081230819173449935==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9081230819173449935==--
