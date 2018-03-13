@@ -1,16 +1,14 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [RFC PATCH 6/6] ci: add a README about the
-	containers
-Date: Tue, 13 Mar 2018 15:38:22 +0000
-Message-ID: <674191fe-511c-fd04-a75e-3420e04a0e95@citrix.com>
+From: Doug Goldstein <cardoe@cardoe.com>
+Subject: Re: [RFC PATCH 1/6] ci: add Dockerfile for CentOS 7.2
+Date: Tue, 13 Mar 2018 10:48:38 -0500
+Message-ID: <c8019016-1a14-2ba8-d189-d606afa3d811@cardoe.com>
 References: <cover.fc61971d5999dddd95c2bee5d18d572bfcc28399.1520911150.git-series.cardoe@cardoe.com>
- <38ba2257035d0ca0eb1dbc488f9ca8ec3f03ed88.1520911150.git-series.cardoe@cardoe.com>
+ <ebb0926a801b494560f5305d8ceaa4d40934d301.1520911150.git-series.cardoe@cardoe.com>
+ <f430f5e5-3c8d-f0b9-4f7b-f8f50f121005@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6850673829391200380=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <38ba2257035d0ca0eb1dbc488f9ca8ec3f03ed88.1520911150.git-series.cardoe@cardoe.com>
-Content-Language: en-US
+In-Reply-To: <f430f5e5-3c8d-f0b9-4f7b-f8f50f121005@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,36 +17,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Doug Goldstein <cardoe@cardoe.com>, xen-devel@lists.xen.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDMvMTMvMjAxOCAwMzozMSBBTSwgRG91ZyBHb2xkc3RlaW4gd3JvdGU6Cj4gQWRkIGEgYmFz
-aWMgUkVBRE1FIGV4cGxhaW5pbmcgdGhlIGNvbnRhaW5lcnMgYW5kIGhvdyBwZW9wbGUgY2FuIHVz
-ZSB0aGVtCj4gdG8gbG9jYWxseSB0ZXN0IHdpdGggaWYgdGhleSBzZWUgYW4gZXJyb3IgaW4gQ0kg
-YW5kIHdhbnQgdG8gcmVwcm9kdWNlIGl0Cj4gbG9jYWxseS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBE
-b3VnIEdvbGRzdGVpbiA8Y2FyZG9lQGNhcmRvZS5jb20+Cj4gLS0tCj4gIGV4dHJhcy90ZXN0aW5n
-L1JFQURNRS5tZCB8IDI5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gIDEgZmlsZSBj
-aGFuZ2VkLCAyOSBpbnNlcnRpb25zKCspCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBleHRyYXMvdGVz
-dGluZy9SRUFETUUubWQKPiAKPiBkaWZmIC0tZ2l0IGEvZXh0cmFzL3Rlc3RpbmcvUkVBRE1FLm1k
-IGIvZXh0cmFzL3Rlc3RpbmcvUkVBRE1FLm1kCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiBpbmRl
-eCAwMDAwMDAwLi4wOTA4YTY2Cj4gLS0tIC9kZXYvbnVsbAo+ICsrKyBiL2V4dHJhcy90ZXN0aW5n
-L1JFQURNRS5tZAo+IEBAIC0wLDAgKzEsMjkgQEAKPiArRG9ja2VyIENvbnRhaW5lcnMKPiArPT09
-PT09PT09PT09PT09PT0KPiArCj4gK1RoZXNlIERvY2tlciBjb250YWluZXJzIHNob3VsZCBtYWtl
-IGl0IHBvc3NpYmxlIHRvIGJ1aWxkIFhlbiBpbgo+ICthbnkgb2YgdGhlIGF2YWlsYWJsZSBlbnZp
-cm9ubWVudHMgb24gYW55IHN5c3RlbSB0aGF0IHN1cHBvcnRzCj4gK3J1bm5pbmcgRG9ja2VyLiBU
-aGV5IGFyZSBvcmdhbml6ZWQgYnkgZGlzdHJvIGFuZCB0YWdnZWQgd2l0aAo+ICt0aGUgdmVyc2lv
-biBvZiB0aGF0IGRpc3Ryby4gVGhleSBhcmUgYXZhaWxhYmxlIGZyb20gdGhlIEdpdExhYgo+ICtD
-b250YWluZXIgUmVnaXN0cnkgdW5kZXIgdGhlIFhlbiBwcm9qZWN0IGF0Ogo+ICsKPiArcmVnaXN0
-cnkuZ2l0bGFiLmNvbS9jYXJkb2UveGVuL0RJU1RSTzpWRVJTSU9OCgpJZiB3ZSB3ZXJlIHRvIGNo
-ZWNrIHNvbWV0aGluZyBsaWtlIHRoaXMgaW50byB0aGUgdXBzdHJlYW0gdHJlZSwgaXQgd291bGQK
-YmUgYmV0dGVyIGlmIHRoaXMgd2VyZSBzb21lIHNvcnQgb2Ygb2ZmaWNpYWwgWGVuIGFjY291bnQg
-KG9mIHdoaWNoIEknZApiZSBoYXBweSBmb3IgeW91IHRvIGJlIHRoZSBtYWludGFpbmVyKS4gIElz
-IHRoYXQgcG9zc2libGU/CgpPdGhlciB0aGFuIHRoYXQsIHRoaXMgbG9va3MgcmVhbGx5IGdvb2Qu
-ICBBcyB5b3Ugc2F5LCBoYXZpbmcgRnJlZUJTRAp3b3VsZCBiZSBhIGdvb2QgdGhpbmcgdG8gYWRk
-LCBhbmQgd2l0aCBteSBDZW50T1MgaGF0IG9uLCBJJ2QgbGlrZSB0byBhZGQKYSBob29rIHRvIGJ1
-aWxkIHRoZSBDZW50T1MgVmlydCBTSUcgcGFja2FnZXMgYWdhaW5zdCBtYXN0ZXIgYXMgd2VsbCAo
-c28KdGhhdCBJIGNvdWxkIGdldCBlYXJseSBub3RpZmljYXRpb24gb2YgaXNzdWVzKS4KCiAtR2Vv
-cmdlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============6850673829391200380==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="hwr3FcQDkzm08YWCxrggsNMNs4kUsQe7d"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--hwr3FcQDkzm08YWCxrggsNMNs4kUsQe7d
+Content-Type: multipart/mixed; boundary="d13LXsiAZGcqdbYDWTrcpA8AbAMjmzAsQ";
+ protected-headers="v1"
+From: Doug Goldstein <cardoe@cardoe.com>
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Tim Deegan <tim@xen.org>,
+ Wei Liu <wei.liu2@citrix.com>
+Message-ID: <c8019016-1a14-2ba8-d189-d606afa3d811@cardoe.com>
+Subject: Re: [RFC PATCH 1/6] ci: add Dockerfile for CentOS 7.2
+References: <cover.fc61971d5999dddd95c2bee5d18d572bfcc28399.1520911150.git-series.cardoe@cardoe.com>
+ <ebb0926a801b494560f5305d8ceaa4d40934d301.1520911150.git-series.cardoe@cardoe.com>
+ <f430f5e5-3c8d-f0b9-4f7b-f8f50f121005@arm.com>
+In-Reply-To: <f430f5e5-3c8d-f0b9-4f7b-f8f50f121005@arm.com>
+
+--d13LXsiAZGcqdbYDWTrcpA8AbAMjmzAsQ
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+On 3/13/18 9:52 AM, Julien Grall wrote:
+> Hi Doug,
+>=20
+> On 13/03/18 03:31, Doug Goldstein wrote:
+>> +# work around https://github.com/moby/moby/issues/10180
+>> +# and install Xen depends
+>> +RUN rpm --rebuilddb && \
+>> +=C2=A0=C2=A0=C2=A0 yum -y install \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 yum-plugin-ovl \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gcc \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gcc-c++ \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ncurses-devel \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 zlib-devel \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 openssl-devel \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 python-devel \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 libuuid-devel \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pkgconfig \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gettext \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 flex \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bison \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 libaio-devel \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 glib2-devel \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 yajl-devel \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pixman-devel \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 glibc-devel \
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 glibc-devel.i686 \
+>=20
+> This looks fairly x86. Do you have any plan to add arm support?
+>=20
+> In any case, the README should explain what architectures are supported=
+=2E
+>=20
+> Cheers,
+>=20
+
+Yes it definitely x86. I plan on adding ARM support I just haven't had
+enough time to gather up what the dependencies need to be. Since its
+going to be a cross compile environment I need to take the time to setup
+one. Do you have a recommendation? I'm sure there are docs I just
+haven't looked at them.
+
+I'm hoping some people approve of this and we can potentially land this
+for 4.11 so we can get some build testing for that branch.
+--=20
+Doug Goldstein
+
+
+--d13LXsiAZGcqdbYDWTrcpA8AbAMjmzAsQ--
+
+--hwr3FcQDkzm08YWCxrggsNMNs4kUsQe7d
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlqn8tZfFIAAAAAALgAo
+aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
+MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
+Nl3LNg/7B/ozbKdwWRziTNoXJK8QMHClZkSbLKQAs00CV1E13uvwbhhIi1X2XMuv
+QHtSzC7azCBih+kIECbKXlUyNYVLh9A/dupvjPTv7i5K0Wdflt/Nlyob8OA7KlGr
+kexZ9HJKst3A1BlK6sLT99dbHX4wvI/WJmF2QyfTj1x4iEyqa56gFYaIKkcmpq+M
+QCTYHfukCiOA2ib6hCGUvNJl5CKc9CrNlUZjhBZlXGxDZVzxA+y3cx05oAxtr86P
+/q7mwoFNDBA3PPsQMcZLTplqQy6Ua7PBrfUuQnEZdhK7UbbAmHYyzDrl/6CfYBbO
+74N7dst+taQ4GB193McleX2ui2HbFhBntTEpwtj4CAGVkVonBabgt8tk8XZPg1bp
+QZ8NMfWphiODy4x4MKYb40HdfvguDWMdj6sMWWSU08I4+ou/k8xBzwy6AxODZ0yw
+dHaJ9xd3DlraXaSbqFaGomeAz6kjmIIdj9ll3CgiRT1G/IONzE28qwLGYD2YqSXS
+/MzKLDipvRmUTCl0EGdVxBqkUG0eUD5jEBNGE9zs4Fd+K+CETGjqtyssDcopJRTa
+OEge8kiEoV+Y2ZFoEBrgb254iZjgt41O04b2WI5V8SxWXlQC9aVMGD3fgcTYA8yL
+JBHhivZa7s3HKaZ4/a/jjX+5f427Fv1su47M0y7n00ujMO3nNgE=
+=zwzq
+-----END PGP SIGNATURE-----
+
+--hwr3FcQDkzm08YWCxrggsNMNs4kUsQe7d--
+
+
+--===============6850673829391200380==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6850673829391200380==--
