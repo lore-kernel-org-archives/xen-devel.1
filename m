@@ -1,23 +1,14 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCHv3] xen: Add EFI_LOAD_OPTION support
-Date: Tue, 13 Mar 2018 01:47:17 -0600
-Message-ID: <5AA7901502000078001B0CAB@prv-mh.provo.novell.com>
-References: <20180123002104.1674-1-tamas@tklengyel.com>
- <5A6B312C02000078001A2C0B@prv-mh.provo.novell.com>
- <CABfawhm5Rt-ChYoVHH1S5EnZBcVhb+66KpvV7TgUf27roXzdbw@mail.gmail.com>
- <5A6EF4DD02000078001A3406@prv-mh.provo.novell.com>
- <CABfawhmdX3LJcvZ0NX2FFXSsTCri+EenvV8OBZ-R9mEgfgOW8w@mail.gmail.com>
- <CABfawhnLVO4gHcahJW8EROUciOwc48NPihotJLNOwujw3ZHTmw@mail.gmail.com>
+Subject: Re: [PATCH] tools/xl: fix uninitialized variable in
+	xl_vdispl
+Date: Tue, 13 Mar 2018 02:03:47 -0600
+Message-ID: <5AA793F302000078001B0CC4@prv-mh.provo.novell.com>
+References: <20180313044333.27923-1-cardoe@cardoe.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=c4be=gd=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1eveeZ-000142-He
- for xen-devel@lists.xenproject.org; Tue, 13 Mar 2018 07:47:23 +0000
-In-Reply-To: <CABfawhnLVO4gHcahJW8EROUciOwc48NPihotJLNOwujw3ZHTmw@mail.gmail.com>
+In-Reply-To: <20180313044333.27923-1-cardoe@cardoe.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -27,19 +18,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Tamas K Lengyel <tamas@tklengyel.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>
+To: Doug Goldstein <cardoe@cardoe.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEyLjAzLjE4IGF0IDE2OjAwLCA8dGFtYXNAdGtsZW5neWVsLmNvbT4gd3JvdGU6Cj4g
-UGF0Y2ggcGluZy4gSmFuLCBJIHdvdWxkIGxpa2UgdG8gdG91Y2ggYmFzZSBvbmNlIG1vcmUgdG8g
-c2VlIGlmIHdlIGNhbgo+IGdldCB0aGlzIHBhdGNoIGluY2x1ZGVkIGluIDQuMTEuIFRoZSBwYXRj
-aCBhcy1pcyBjb3JyZWN0bHkgdGVsbHMgdGhlCj4gZGlmZmVyZW5jZSBiZXR3ZWVuIGJ1ZmZlcnMg
-cHJvdmlkZWQgYnkgYm90aCBhbiBFRkkgc2hlbGwgb3IgYnkgdGhlCj4gZmlybXdhcmUgYXMgYW4g
-RUZJX0xPQURfT1BUSU9OLgoKV2VsbCwgSSd2ZSBzdGF0ZWQgbXkgb3BpbmlvbiBiZWZvcmUsIGFu
-ZCBJJ20gaW50ZW5kaW5nIHRvIHByb3ZpZGUgYQpyZXBsYWNlbWVudCBwYXRjaCBhbG9uZyB0aGUg
-b3V0bGluZSBJIGhhZCBwcm92aWRlZCwgYnV0IEkgZGlkbid0IGdldAphcm91bmQgdG8gYWN0dWFs
-bHkgZG8gc28geWV0LgoKSmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+Pj4+IE9uIDEzLjAzLjE4IGF0IDA1OjQzLCA8Y2FyZG9lQGNhcmRvZS5jb20+IHdyb3RlOgo+IFRo
+ZSBjb2RlIGFkZGVkIGluIDdhNDg2MjJhNzhhMGI0NTJlOGFmYTU1Yjg0NDJjOTU4YWJkMjI2YTcg
+Y291bGQgdXNlIHJjCj4gdW5pbml0aWFsaXplZCBpbiBtYWluX3ZkaXNwbGF0dGFjaCgpLgo+IAo+
+IFNpZ25lZC1vZmYtYnk6IERvdWcgR29sZHN0ZWluIDxjYXJkb2VAY2FyZG9lLmNvbT4KPiAtLS0K
+PiBDQzogT2xla3NhbmRyIEdyeXRzb3YgPG9sZWtzYW5kcl9ncnl0c292QGVwYW0uY29tPgo+IC0t
+LQo+ICB0b29scy94bC94bF92ZGlzcGwuYyB8IDIgKy0KPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5z
+ZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpQbGVhc2UgdHJpbSB5b3VyIENjIGxpc3QgLSBJJ3Zl
+IHJlbW92ZWQgYWxsIGluZGl2aWR1YWxzIGhlcmUsIGFuZCBJCmRvbid0IHNlZSB3aHkgeW91J3Zl
+IGNvcGllZCBhbGwgUkVTVCBtYWludGFpbmVycyB3aGVuIHRoaXMgaXMKY2xlYXJseSBhIHB1cmUg
+dG9vbCBzdGFjayBjaGFuZ2UuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
