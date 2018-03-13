@@ -1,14 +1,19 @@
-From: Oleksandr Grytsov <al1img@gmail.com>
-Subject: Re: [PATCH] tools/xl: fix uninitialized variable in
-	xl_vdispl
-Date: Tue, 13 Mar 2018 12:33:39 +0200
-Message-ID: <CACvf2oVxeFUkFEv0NWqK+9KJk=mvRmVf_NE3VUEAh7RTmro=9g@mail.gmail.com>
-References: <20180313044333.27923-1-cardoe@cardoe.com>
- <5AA793F302000078001B0CC4@prv-mh.provo.novell.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86: ignore guest microcode loading attempts
+Date: Tue, 13 Mar 2018 10:36:50 +0000
+Message-ID: <f3dc5e7e-c3e8-8e46-062a-cebeb21bc643@citrix.com>
+References: <5AA7B27402000078001B0D94@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============9081230819173449935=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5AA793F302000078001B0CC4@prv-mh.provo.novell.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=ygh5=gd=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
+ id 1evhIg-0008GW-G4
+ for xen-devel@lists.xenproject.org; Tue, 13 Mar 2018 10:36:58 +0000
+In-Reply-To: <5AA7B27402000078001B0D94@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,133 +22,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Doug Goldstein <cardoe@cardoe.com>, Xen Development List <xen-devel@lists.xen.org>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============9081230819173449935==
-Content-Type: multipart/alternative; boundary="001a11406f18be4e94056748caa2"
-
---001a11406f18be4e94056748caa2
-Content-Type: text/plain; charset="UTF-8"
-
-On Tue, Mar 13, 2018 at 10:03 AM, Jan Beulich <JBeulich@suse.com> wrote:
-
-> >>> On 13.03.18 at 05:43, <cardoe@cardoe.com> wrote:
-> > The code added in 7a48622a78a0b452e8afa55b8442c958abd226a7 could use rc
-> > uninitialized in main_vdisplattach().
-> >
-> > Signed-off-by: Doug Goldstein <cardoe@cardoe.com>
-> > ---
-> > CC: Oleksandr Grytsov <oleksandr_grytsov@epam.com>
-> > ---
-> >  tools/xl/xl_vdispl.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> Please trim your Cc list - I've removed all individuals here, and I
-> don't see why you've copied all REST maintainers when this is
-> clearly a pure tool stack change.
->
-> Jan
->
->
-> _______________________________________________
-> Xen-devel mailing list
-> Xen-devel@lists.xenproject.org
-> https://lists.xenproject.org/mailman/listinfo/xen-devel
->
-
-
-Hi, Doug,
-
-Thanks for pointing it out.
-
-The implementation is done according to CODING_STYLE document (see ERROR
-HANDLING)
-which requests to define return value rc uninitialized. The only path where
-rc is uninitialized it is
-when dryrun_only set to true. So, proper fix should be:
-
-    if (dryrun_only) {
-        char *json = libxl_device_vdispl_to_json(ctx, &vdispl);
-        printf("vdispl: %s\n", json);
-        free(json);
-+      rc = 0;
-        goto out;
-    }
-
-
--- 
-Best Regards,
-Oleksandr Grytsov.
-
---001a11406f18be4e94056748caa2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br><div class=3D"gmail_extra"><br><div class=3D"gmail_quo=
-te">On Tue, Mar 13, 2018 at 10:03 AM, Jan Beulich <span dir=3D"ltr">&lt;<a =
-href=3D"mailto:JBeulich@suse.com" target=3D"_blank">JBeulich@suse.com</a>&g=
-t;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
-px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><span=
- class=3D"gmail-">&gt;&gt;&gt; On 13.03.18 at 05:43, &lt;<a href=3D"mailto:=
-cardoe@cardoe.com">cardoe@cardoe.com</a>&gt; wrote:<br>
-&gt; The code added in 7a48622a78a0b452e8afa55b8442c9<wbr>58abd226a7 could =
-use rc<br>
-&gt; uninitialized in main_vdisplattach().<br>
-&gt;<br>
-&gt; Signed-off-by: Doug Goldstein &lt;<a href=3D"mailto:cardoe@cardoe.com"=
->cardoe@cardoe.com</a>&gt;<br>
-&gt; ---<br>
-&gt; CC: Oleksandr Grytsov &lt;<a href=3D"mailto:oleksandr_grytsov@epam.com=
-">oleksandr_grytsov@epam.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 tools/xl/xl_vdispl.c | 2 +-<br>
-&gt;=C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-</span>Please trim your Cc list - I&#39;ve removed all individuals here, an=
-d I<br>
-don&#39;t see why you&#39;ve copied all REST maintainers when this is<br>
-clearly a pure tool stack change.<br>
-<span class=3D"gmail-HOEnZb"><font color=3D"#888888"><br>
-Jan<br>
-</font></span><div class=3D"gmail-HOEnZb"><div class=3D"gmail-h5"><br>
-<br>
-______________________________<wbr>_________________<br>
-Xen-devel mailing list<br>
-<a href=3D"mailto:Xen-devel@lists.xenproject.org">Xen-devel@lists.xenprojec=
-t.org</a><br>
-<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
-noreferrer" target=3D"_blank">https://lists.xenproject.org/<wbr>mailman/lis=
-tinfo/xen-devel</a></div></div></blockquote></div><br><br></div><div class=
-=3D"gmail_extra">Hi, Doug,<br><br></div><div class=3D"gmail_extra">Thanks f=
-or pointing it out.<br><br>The implementation is done according to CODING_S=
-TYLE document (see ERROR HANDLING)<br></div><div class=3D"gmail_extra">whic=
-h requests to define return value rc uninitialized. The only path where rc =
-is uninitialized it is<br></div><div class=3D"gmail_extra">when dryrun_only=
- set to true. So, proper fix should be:<br></div><div class=3D"gmail_extra"=
-><br>=C2=A0=C2=A0=C2=A0 if (dryrun_only) {<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 char *json =3D libxl_device_vdispl_to_json(ctx, &amp;vdispl=
-);<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 printf(&quot;vdispl: %s\n&=
-quot;, json);<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 free(json);<br>=
-</div><div class=3D"gmail_extra">+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 rc =3D 0;<=
-br></div><div class=3D"gmail_extra">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 goto out;<br>=C2=A0=C2=A0=C2=A0 }<br><br></div><div class=3D"gmail_extr=
-a"><br></div><div class=3D"gmail_extra">-- <br><div class=3D"gmail_signatur=
-e">Best Regards,<br>Oleksandr Grytsov.</div>
-</div></div>
-
---001a11406f18be4e94056748caa2--
-
-
---===============9081230819173449935==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============9081230819173449935==--
+T24gMTMvMDMvMjAxOCAxMDoxMywgSmFuIEJldWxpY2ggd3JvdGU6Cj4gVGhlIHJlc3BlY3RpdmUg
+TVNScyBhcmUgd3JpdGUtb25seSwgYW5kIGhlbmNlIGF0dGVtcHRzIGJ5IGd1ZXN0cyB0bwo+IHdy
+aXRlIHRvIHRoZXNlIGFyZSAtIGFzIG9mIDFmMWQxODNkNDkgKCJ4ODYvSFZNOiBkb24ndCBnaXZl
+IHRoZSB3cm9uZwo+IGltcHJlc3Npb24gb2YgV1JNU1Igc3VjY2VlZGluZyIpIG5vIGxvbmdlciBp
+Z25vcmVkLiBSZXN0b3JlIG9yaWdpbmFsCj4gYmVoYXZpb3IgZm9yIHRoZSB0d28gYWZmZWN0ZWQg
+TVNScy4KPgo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4K
+PiAtLS0KPiBXaGlsZSB3aGF0IGlzIGJlaW5nIGxvZ2dlZCBmb3IgdGhlIGN1cnJlbnQgb3NzdGVz
+dCBmYWlsdXJlIG9uIHRoZSA0LjcKPiBicmFuY2ggKEkgaGF2ZSB0byBhZG1pdCB0aGF0IEkgZG9u
+J3QgdW5kZXJzdGFuZCB3aHkgaXQncyBvbmx5IHRoYXQKPiBicmFuY2ggd2hpY2ggc2hvd3MgYSBy
+ZWdyZXNzaW9uKQoKRGlmZmVyZW5jZXMgaW4gYWR2ZXJ0aXNlZCB2aXJpZGlhbj8KCj4gIGRvZXNu
+J3QgZnVsbHkgcHJvdmUgdGhpcyB0byBiZSB0aGUKPiBwcm9ibGVtLCBSQ1ggaG9sZGluZyAweDc5
+IGFuZCB0aGVyZSBiZWluZyBhIHJlY29yZGVkIGh5cGVydmlzb3IgbGV2ZWwKPiAjR1AgcmVjb3Zl
+cnkgaW1tZWRpYXRlbHkgYmVmb3JlIHRoZSBndWVzdCB0cmlwbGUgZmF1bHQgaXMgc3VmZmljaWVu
+dAo+IGluZGljYXRpb24gaW1vLgo+IFdoYXQgSSdtIHVuc3VyZSBhYm91dCBpcyB3aGV0aGVyIHdl
+IHdhbnQgdG8gaWdub3JlIHN1Y2ggd3JpdGVzIGFsc28gZm9yCj4gUFYgZ3Vlc3RzLiBJZiBub3Qs
+IGF0IGxlYXN0IHRoZSBXUk1TUiBjaGFuZ2Ugd291bGQgbmVlZCB0byBtb3ZlIGludG8KPiBodm0v
+aHZtLmMuCgpIbW0gLSBJJ2QgdmVyeSBtdWNoIGxpa2Ugbm90IHRvIG1ha2UgdGhpcyBjaGFuZ2Us
+IGJlY2F1c2UgaXQgc2V0cyBhIGJhZApwcmVjZWRlbnQgZm9yIG1ha2luZyB0aGUgTVNSIGhhbmRs
+aW5nIHNhbmUuwqAgV2Ugc2hvdWxkbid0IGJlIHNpbGVudGx5CmRyb3BwaW5nIE1TUiB3cml0ZXMs
+IGFzIHRoYXQgd2lsbCBjYXVzZSBtb3JlIHByb2JsZW1zIGZvciB0aGUgZ3Vlc3RzLApyYXRoZXIg
+dGhhbiBsZXNzLgoKR2l2ZW4gdGhhdCBpdCBpcyBhcHBlYXJzIHRvIGJlIGp1c3QgNC43IHdoaWNo
+IGlzIGFmZmVjdGVkLCBJIHRoaW5rIGl0IGlzCndvcnRoIHRyeWluZyB0byB3b3JrIG91dCB3aGF0
+IGlzIGNhdXNpbmcgNC44IGFuZCBsYXRlciB0byBiZSBmaW5lLCBhbmQKd2hldGhlciB0aGF0IGlz
+IGEgYmV0dGVyIHNvbHV0aW9uIHRvIGJhY2twb3J0LgoKPgo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9t
+c3IuYwo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9tc3IuYwo+IEBAIC0xNDcsNiArMTQ3LDggQEAgaW50
+IGd1ZXN0X3JkbXNyKGNvbnN0IHN0cnVjdCB2Y3B1ICp2LCB1aQo+ICAKPiAgICAgIHN3aXRjaCAo
+IG1zciApCj4gICAgICB7Cj4gKyAgICBjYXNlIE1TUl9BTURfUEFUQ0hMT0FERVI6Cj4gKyAgICBj
+YXNlIE1TUl9JQTMyX1VDT0RFX1dSSVRFOgo+ICAgICAgY2FzZSBNU1JfUFJFRF9DTUQ6Cj4gICAg
+ICAgICAgLyogV3JpdGUtb25seSAqLwo+ICAgICAgICAgIGdvdG8gZ3BfZmF1bHQ7Cj4gQEAgLTIw
+MCw2ICsyMDIsMTYgQEAgaW50IGd1ZXN0X3dybXNyKHN0cnVjdCB2Y3B1ICp2LCB1aW50MzJfdAo+
+ICAgICAgICAgIC8qIFJlYWQtb25seSAqLwo+ICAgICAgICAgIGdvdG8gZ3BfZmF1bHQ7Cj4gIAo+
+ICsgICAgY2FzZSBNU1JfQU1EX1BBVENITE9BREVSOgo+ICsgICAgICAgIGlmICggZC0+YXJjaC5j
+cHVpZC0+eDg2X3ZlbmRvciAhPSBYODZfVkVORE9SX0FNRCApCgpJZiB3ZSBkbyBlbmQgdXAgZ29p
+bmcgd2l0aCB0aGlzIHBhdGNoLCB0aGVuIHRoZXJlIGlzIHByb2JhYmx5IGEgY3AtPiBpbgpjb250
+ZXh0LsKgIEFsc28sIEknZCBuZWVkIHRvIGRvdWJsZSBjaGVjayB0aGUgaW5kaWNlcyBvcmRlci4K
+Cn5BbmRyZXcKCj4gKyAgICAgICAgICAgIGdvdG8gZ3BfZmF1bHQ7Cj4gKyAgICAgICAgYnJlYWs7
+Cj4gKwo+ICsgICAgY2FzZSBNU1JfSUEzMl9VQ09ERV9XUklURToKPiArICAgICAgICBpZiAoIGQt
+PmFyY2guY3B1aWQtPng4Nl92ZW5kb3IgIT0gWDg2X1ZFTkRPUl9JTlRFTCApCj4gKyAgICAgICAg
+ICAgIGdvdG8gZ3BfZmF1bHQ7Cj4gKyAgICAgICAgYnJlYWs7Cj4gKwo+ICAgICAgY2FzZSBNU1Jf
+U1BFQ19DVFJMOgo+ICAgICAgICAgIGlmICggIWNwLT5mZWF0LmlicnNiICkKPiAgICAgICAgICAg
+ICAgZ290byBncF9mYXVsdDsgLyogTVNSIGF2YWlsYWJsZT8gKi8KPgo+Cj4KCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
