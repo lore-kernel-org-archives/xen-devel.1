@@ -1,17 +1,14 @@
 From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 3/7] RFC arm/domain: Reject invalid
- combinations of domain creation flags
-Date: Tue, 13 Mar 2018 14:42:13 +0000
-Message-ID: <07732b07-dd2a-ae4c-58f2-ff938db82c77@arm.com>
-References: <1520601522-2886-1-git-send-email-andrew.cooper3@citrix.com>
- <1520601522-2886-4-git-send-email-andrew.cooper3@citrix.com>
- <8b868679-4e3d-6fa7-5b8c-16dd6a223acc@arm.com>
- <20180312163235.scpnygcfvvphcc5n@citrix.com>
+Subject: Re: [RFC PATCH 1/6] ci: add Dockerfile for CentOS 7.2
+Date: Tue, 13 Mar 2018 14:52:38 +0000
+Message-ID: <f430f5e5-3c8d-f0b9-4f7b-f8f50f121005@arm.com>
+References: <cover.fc61971d5999dddd95c2bee5d18d572bfcc28399.1520911150.git-series.cardoe@cardoe.com>
+ <ebb0926a801b494560f5305d8ceaa4d40934d301.1520911150.git-series.cardoe@cardoe.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180312163235.scpnygcfvvphcc5n@citrix.com>
+In-Reply-To: <ebb0926a801b494560f5305d8ceaa4d40934d301.1520911150.git-series.cardoe@cardoe.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -21,36 +18,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Doug Goldstein <cardoe@cardoe.com>, xen-devel@lists.xen.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAxMi8wMy8xOCAxNjozMiwgV2VpIExpdSB3cm90ZToKPiBPbiBTdW4sIE1hciAxMSwg
-MjAxOCBhdCAwNzo1OToxNlBNICswMDAwLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+IEhpIEFuZHJl
-dywKPj4KPj4gT24gMDMvMDkvMjAxOCAwMToxOCBQTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4+
-IEFSTSBndWVzdHMgYXJlIEhWTSBhbmQgaGF2ZSBoYXJkd2FyZSBhc3Npc3RlZCBwYWdpbmcuICBU
-aGVyZSBhcmUgbm8gUFYgZ3Vlc3RzCj4+PiBvciBzaGFkb3cgcGFnaW5nLCBhbmQgYWxsIG90aGVy
-IGNyZWF0aW9uIGZsYWdzIGFyZSB4ODYgc3BlY2lmaWMuCj4+Pgo+Pj4gU2lnbmVkLW9mZi1ieTog
-QW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPj4+IC0tLQo+Pj4gQ0M6
-IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KPj4+IENDOiBKdWxp
-ZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgo+Pj4gQ0M6IElhbiBKYWNrc29uIDxJYW4u
-SmFja3NvbkBldS5jaXRyaXguY29tPgo+Pj4gQ0M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5j
-b20+Cj4+Pgo+Pj4gUkZDLiAgVGhpcyBpcyB1bnRlc3RlZCwgYnV0IEkgbm90aWNlZCBpdCB3aGVu
-IHB1dHRpbmcgdG9nZXRoZXIgdGhlIHByZWNlZWRpbmcKPj4+IHBhdGNoLiAgVGhlcmUgaXMgYSBt
-b2RlcmF0ZSBjaGFuY2UgdGhhdCB0aGlzIHdpbGwgY2F1c2UgdGhpbmdzIHRvIGV4cGxvZGUKPj4+
-IGJlY2F1c2Ugb2YgaG93IGxpYnhsIGhhbmRsZXMgQVJNIGd1ZXN0IGNvbnN0cnVjdGlvbiwgYnV0
-IHNvbWV0aGluZyBhbG9uZyB0aGVzZQo+Pj4gbGluZXMgaXMgdGhlIHJpZ2h0IHRoaW5nIHRvIGRv
-Lgo+Pgo+PiBUb29scyBhbmQgaHlwZXJ2aXNvciBhcmUgY29uc2lkZXJpbmcgQVJNIGd1ZXN0cyBh
-cyBQVi4gU28gdGhpcyBwYXRjaCBpcwo+PiBnb2luZyB0byBicmVhayBib290LiBUaGVyZSBhcmUg
-YW4gYWN0aW9uIChYRU4tMTAyKSB0byBtb3ZlIEFSTSBndWVzdHMgdG8KPj4gYmVoYXZlIG1vcmUg
-bGlrZSBQVkggZnJvbSB0aGUgdG9vbHMgUE9WLiBJIGFtIG5vdCBzdXJlIHdoZW4gSSB3aWxsIGhh
-dmUgdGltZQo+PiB0byBsb29rIGF0IGl0IHRob3VnaHQuCj4+Cj4+IEZvciB0aGUgdGltZSBiZWlu
-ZywgSSBhbSB3b25kZXJpbmcgaWYgd2UgY291bGQgb3ZlcnJpZGUgdGhlIGZsYWdzIGZvciBBcm0g
-aW4KPj4gdGhlIHRvb2xzdGFjaz8KPj4KPiAKPiBJcyB0aGF0IG5lY2Vzc2FyeT8gSSBkb24ndCB0
-aGluayB0aGUgcmVzdCBvZiB0aGlzIHNlcmllcyB3aWxsIGJyZWFrIEFSTQo+IGF0IGZpcnN0IGds
-YW5jZS4KCkFGQUlDVCwgdGhlIHJlc3Qgb2YgdGhlIHNlcmllcyB3aWxsIG5vdCBicmVhayBBUk0u
-IFNvIEkgdGhpbmsgaXQgd291bGQgCmJlIGZpbmUgdG8ganVzdCBkcm9wIHRoaXMgcGF0Y2ggZm9y
-IHRoZSB0aW1lIGJlaW5nLgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+SGkgRG91ZywKCk9uIDEzLzAzLzE4IDAzOjMxLCBEb3VnIEdvbGRzdGVpbiB3cm90ZToKPiArIyB3
+b3JrIGFyb3VuZCBodHRwczovL2dpdGh1Yi5jb20vbW9ieS9tb2J5L2lzc3Vlcy8xMDE4MAo+ICsj
+IGFuZCBpbnN0YWxsIFhlbiBkZXBlbmRzCj4gK1JVTiBycG0gLS1yZWJ1aWxkZGIgJiYgXAo+ICsg
+ICAgeXVtIC15IGluc3RhbGwgXAo+ICsgICAgICAgIHl1bS1wbHVnaW4tb3ZsIFwKPiArICAgICAg
+ICBnY2MgXAo+ICsgICAgICAgIGdjYy1jKysgXAo+ICsgICAgICAgIG5jdXJzZXMtZGV2ZWwgXAo+
+ICsgICAgICAgIHpsaWItZGV2ZWwgXAo+ICsgICAgICAgIG9wZW5zc2wtZGV2ZWwgXAo+ICsgICAg
+ICAgIHB5dGhvbi1kZXZlbCBcCj4gKyAgICAgICAgbGlidXVpZC1kZXZlbCBcCj4gKyAgICAgICAg
+cGtnY29uZmlnIFwKPiArICAgICAgICBnZXR0ZXh0IFwKPiArICAgICAgICBmbGV4IFwKPiArICAg
+ICAgICBiaXNvbiBcCj4gKyAgICAgICAgbGliYWlvLWRldmVsIFwKPiArICAgICAgICBnbGliMi1k
+ZXZlbCBcCj4gKyAgICAgICAgeWFqbC1kZXZlbCBcCj4gKyAgICAgICAgcGl4bWFuLWRldmVsIFwK
+PiArICAgICAgICBnbGliYy1kZXZlbCBcCj4gKyAgICAgICAgZ2xpYmMtZGV2ZWwuaTY4NiBcCgpU
+aGlzIGxvb2tzIGZhaXJseSB4ODYuIERvIHlvdSBoYXZlIGFueSBwbGFuIHRvIGFkZCBhcm0gc3Vw
+cG9ydD8KCkluIGFueSBjYXNlLCB0aGUgUkVBRE1FIHNob3VsZCBleHBsYWluIHdoYXQgYXJjaGl0
+ZWN0dXJlcyBhcmUgc3VwcG9ydGVkLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
