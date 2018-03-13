@@ -1,16 +1,13 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 4/7] x86/domain: Remove unused parameters
- from {hvm, pv}_domain_initialise()
-Date: Tue, 13 Mar 2018 12:05:06 +0000
-Message-ID: <20180313120506.wnkjzgei6m4o6bjk@MacBook-Pro-de-Roger.local>
-References: <1520601522-2886-1-git-send-email-andrew.cooper3@citrix.com>
- <1520601522-2886-5-git-send-email-andrew.cooper3@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] Rename DEBUG_DIR to XEN_DEBUG_DIR
+Date: Tue, 13 Mar 2018 13:09:29 +0100
+Message-ID: <20180313130929.76e084b1.olaf@aepfle.de>
+References: <20180312154551.23777-1-olaf@aepfle.de>
+ <20180313115651.dxcqrb5fnqtk536x@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4107202294864444131=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <1520601522-2886-5-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <20180313115651.dxcqrb5fnqtk536x@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,42 +16,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, Ross Lagerwall <ross.lagerwall@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBNYXIgMDksIDIwMTggYXQgMDE6MTg6MzlQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBOZWl0aGVyIGRvbWNyX2ZsYWdzIG5vciBjb25maWcgYXJlIHVzZWQgb24gZWl0aGVy
-IHNpZGUuICBEcm9wIHRoZW0sIG1ha2luZwo+IHtodm0scHZ9X2RvbWFpbl9pbml0aWFsaXNlKCkg
-c3ltbWV0cmljIHdpdGggYWxsIHRoZSBvdGhlciBkb21haW4vdmNwdQo+IGluaXRpYWxpc2UvZGVz
-dHJveSBjYWxscy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29v
-cGVyM0BjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBh
-dUBjaXRyaXguY29tPgoKPiAtLS0KPiBDQzogSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1c2UuY29t
-Pgo+IENDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+IENDOiBSb2dlciBQYXUgTW9u
-bsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KPiAtLS0KPiAgeGVuL2FyY2gveDg2L2RvbWFpbi5j
-ICAgICAgICAgICB8ICA0ICsrLS0KPiAgeGVuL2FyY2gveDg2L2h2bS9odm0uYyAgICAgICAgICB8
-ICAzICstLQo+ICB4ZW4vYXJjaC94ODYvcHYvZG9tYWluLmMgICAgICAgIHwgIDMgKy0tCj4gIHhl
-bi9pbmNsdWRlL2FzbS14ODYvaHZtL2h2bS5oICAgfCAgMyArLS0KPiAgeGVuL2luY2x1ZGUvYXNt
-LXg4Ni9wdi9kb21haW4uaCB8IDExICsrKy0tLS0tLS0tCj4gIDUgZmlsZXMgY2hhbmdlZCwgOCBp
-bnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gv
-eDg2L2RvbWFpbi5jIGIveGVuL2FyY2gveDg2L2RvbWFpbi5jCj4gaW5kZXggMzY1NTVlYS4uODFl
-ZTk5MiAxMDA2NDQKPiAtLS0gYS94ZW4vYXJjaC94ODYvZG9tYWluLmMKPiArKysgYi94ZW4vYXJj
-aC94ODYvZG9tYWluLmMKPiBAQCAtNTM4LDcgKzUzOCw3IEBAIGludCBhcmNoX2RvbWFpbl9jcmVh
-dGUoc3RydWN0IGRvbWFpbiAqZCwgdW5zaWduZWQgaW50IGRvbWNyX2ZsYWdzLAo+ICAKPiAgICAg
-IGlmICggaXNfaHZtX2RvbWFpbihkKSApCj4gICAgICB7Cj4gLSAgICAgICAgaWYgKCAocmMgPSBo
-dm1fZG9tYWluX2luaXRpYWxpc2UoZCwgZG9tY3JfZmxhZ3MsIGNvbmZpZykpICE9IDAgKQo+ICsg
-ICAgICAgIGlmICggKHJjID0gaHZtX2RvbWFpbl9pbml0aWFsaXNlKGQpKSAhPSAwICkKPiAgICAg
-ICAgICAgICAgZ290byBmYWlsOwo+ICAgICAgfQo+ICAgICAgZWxzZSBpZiAoIGlzX2lkbGVfZG9t
-YWluKGQpICkKPiBAQCAtNTUzLDcgKzU1Myw3IEBAIGludCBhcmNoX2RvbWFpbl9jcmVhdGUoc3Ry
-dWN0IGRvbWFpbiAqZCwgdW5zaWduZWQgaW50IGRvbWNyX2ZsYWdzLAo+ICAgICAgfQo+ICAgICAg
-ZWxzZQo+ICAgICAgewo+IC0gICAgICAgIGlmICggKHJjID0gcHZfZG9tYWluX2luaXRpYWxpc2Uo
-ZCwgZG9tY3JfZmxhZ3MsIGNvbmZpZykpICE9IDAgKQo+ICsgICAgICAgIGlmICggKHJjID0gcHZf
-ZG9tYWluX2luaXRpYWxpc2UoZCkpICE9IDAgKQo+ICAgICAgICAgICAgICBnb3RvIGZhaWw7Cj4g
-ICAgICB9CgpNYXliZSB0aGlzIGNvdWxkIGJlOgoKaWYgKCBpc19pZGxlX2RvbWFpbihkKSApCi4u
-LgplbHNlCnsKICAgIHJjID0gaXNfaHZtX2RvbWFpbihkKSA/IGh2bV9kb21haW5faW5pdGlhbGlz
-ZShkKQogICAgICAgICAgICAgICAgICAgICAgICAgIDogcHZfZG9tYWluX2luaXRpYWxpc2UoZCk7
-CiAgICBpZiAoIHJjICkKICAgICAgICBnb3RvIGZhaWw7Cn0KCkJ1dCB0aGF0J3MgbWF5YmUgb3V0
-IG9mIHRoZSBzY29wZSBvZiB0aGlzIHBhdGNoLgoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============4107202294864444131==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/x4OYajw5Y=0BXgPedU92CUR"; protocol="application/pgp-signature"
+
+--Sig_/x4OYajw5Y=0BXgPedU92CUR
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Am Tue, 13 Mar 2018 11:56:51 +0000
+schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
+
+> Do you think that would solve your issues?
+
+This will most likely work, yes. Thanks.
+
+Olaf
+
+--Sig_/x4OYajw5Y=0BXgPedU92CUR
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWqe/egAKCRBdQqD6ppg2
+fsDiAKCJW9pH8x1JoU8K9K0XptangZYMzQCghH3vqiqhivDhRilf/l9U5y+Su7I=
+=44MX
+-----END PGP SIGNATURE-----
+
+--Sig_/x4OYajw5Y=0BXgPedU92CUR--
+
+
+--===============4107202294864444131==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4107202294864444131==--
