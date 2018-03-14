@@ -1,21 +1,17 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [SVM] Getting the length of the current instruction
- in svm_vmexit_handler()
-Date: Wed, 14 Mar 2018 17:06:31 +0000
-Message-ID: <bff2affa-8495-8b32-ed18-24bc38034988@citrix.com>
-References: <144d97a9-7616-bd21-17f6-6621fa5ad69e@bitdefender.com>
- <5AA9539B02000078001B1A65@prv-mh.provo.novell.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH v2 1/4] x86/PVHv2: Add memory map pointer to
+ hvm_start_info struct
+Date: Wed, 14 Mar 2018 13:28:41 -0400
+Message-ID: <c157766a-f80d-bafc-e135-c0be8827c1d9@oracle.com>
+References: <1520983900-13977-1-git-send-email-maran.wilson@oracle.com>
+ <1520983900-13977-2-git-send-email-maran.wilson@oracle.com>
+ <5AA8E37602000078001B1579@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=whqe=ge=citrix.com=prvs=604697e0d=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ewA5e-00005M-3W
- for xen-devel@lists.xenproject.org; Wed, 14 Mar 2018 17:21:26 +0000
-In-Reply-To: <5AA9539B02000078001B1A65@prv-mh.provo.novell.com>
-Content-Language: en-GB
+In-Reply-To: <5AA8E37602000078001B1579@prv-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,31 +20,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: Alexandru Isaila <aisaila@bitdefender.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: Jan Beulich <JBeulich@suse.com>, Maran Wilson <maran.wilson@oracle.com>
+Cc: andrew.cooper3@citrix.com, xen-devel@lists.xen.org, wei.liu2@citrix.com, ian.jackson@eu.citrix.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTQvMDMvMTggMTU6NTMsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDE0LjAzLjE4IGF0
-IDE1OjU2LCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4+IFdlJ2QgbGlrZSB0
-byByZXRyaWV2ZSB0aGUgbGVuZ3RoIG9mIHRoZSBjdXJyZW50IGluc3RydWN0aW9uIGluCj4+IHN2
-bV92bWV4aXRfaGFuZGxlcigpLCBzcGVjaWZpY2FsbHkgZm9yIHRoZSBWTUVYSVRfRVhDRVBUSU9O
-X0RCIGFuZAo+PiBWTUVYSVRfRVhDRVBUSU9OX0JQIGNhc2VzLgo+Pgo+PiBXZSd2ZSBjb21iZWQg
-dGhlIHZtY2IgdG8gbm8gYXZhaWwuIEV2ZXJ5dGhpbmcgd2UndmUgdGhvdWdodCB0byBjaGVjawo+
-PiAoZXhpdGluZm8xLCBleGl0aW5mbzIsIGV4aXRpbnRpbmZvKSB0dXJucyBvdXQgdG8gYmUgemVy
-byB0aGVyZSB3aGlsZQo+PiB0ZXN0aW5nLgo+Pgo+PiBUaGVyZSdzIF9fZ2V0X2luc3RydWN0aW9u
-X2xlbmd0aCh2Y3B1LCBpbnN0ciksIGJ1dCBpdCBleHBlY3RzIHRvIGJlIGZlZAo+PiB0aGUgZXhh
-Y3QgaW5zdHJ1Y3Rpb24gd2Ugd2FudCB0aGUgbGVuZ3RoIGZvciwgd2hpY2ggb2J2aW91c2x5IGRl
-ZmVhdHMKPj4gdGhlIHB1cnBvc2UgaGVyZS4KPj4KPj4gSXMgdGhlcmUgYSBjbGVhbiB3YXkgdG8g
-Z2V0IHRoZSBjdXJyZW50IGluc3RydWN0aW9uIGxlbmd0aCBsaWtlIHdlIGRvIGluCj4+IHRoZSBW
-TVggY2FzZSAoX192bXJlYWQoVk1fRVhJVF9JTlNUUlVDVElPTl9MRU4sICZpbnNuX2xlbikpIHRo
-YXQgd2UncmUKPj4gb3Zlcmxvb2tpbmc/Cj4gSnVzdCBsaWtlIEludGVsJ3MsIEFNRCdzIGlzIGF2
-YWlsYWJsZSBpbiBhIHN1YnNldCBvZiBjYXNlcyBvbmx5Cj4gKGxvb2sgZm9yIHZtY2ItPmd1ZXN0
-X2luc19sZW4pLCB3aGljaCBkb24ndCBpbmNsdWRlIHRoZQo+IGV4Y2VwdGlvbiBpbnRlcmNlcHRz
-IHlvdSB0YWxrIGFib3V0LiBGb3IgI0RCIEkgdGhpbmsgdGhlcmUncwo+IG5vIGRpZmZlcmVuY2Ug
-YmV0d2VlbiBib3RoIGFueXdheS4KCk9uIG5vbi1maXJzdC1nZW4gaGFyZHdhcmUsIHRoZSBkaWZm
-ZXJlbmNlIGJldHdlZW4gUklQIGFuZCBOZXh0UklQIHNob3VsZApnaXZlIHlvdSB0aGUgaW5zdHJ1
-Y3Rpb24gbGVuZ3RoLsKgIElTVFIgTmV4dFJJUCBpcyB3cml0dGVuIG9uIGFsbCBleGl0cywKYW5k
-IGNvbnN1bWVkIG9uIGFsbCBlbnRyaWVzLgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMDMvMTQvMjAxOCAwMzo1NSBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMTQuMDMu
+MTggYXQgMDA6MzEsIDxtYXJhbi53aWxzb25Ab3JhY2xlLmNvbT4gd3JvdGU6Cj4+ICsgKiBGb3Ig
+eDg2IGltcGxlbWVudGF0aW9ucyBhdCBsZWFzdCwgdGhlIHZhbHVlcyB1c2VkIGluIHRoZSB0eXBl
+IGZpZWxkIHdpbGwKPj4gKyAqIG1hdGNoIHRoZSBBZGRyZXNzIFJhbmdlIFR5cGVzIGFzIGRlZmlu
+ZWQgaW4gc2VjdGlvbiAxNSAoU3lzdGVtIEFkZHJlc3MKPj4gKyAqIE1hcCBJbnRlcmZhY2VzKSBv
+ZiB0aGUgQUNQSSBTcGVjaWZpY2F0aW9uIChodHRwOi8vdWVmaS5vcmcvc3BlY2lmaWNhdGlvbnMp
+Cj4+ICsgKiB3aGVyZToKPj4gKyAqICAgICBBZGRyZXNzUmFuZ2VNZW1vcnkgPSAxIChFODIwX1JB
+TSkKPj4gKyAqICAgICBBZGRyZXNzUmFuZ2VSZXNlcnZlZCA9IDIgKEU4MjBfUkVTRVJWRUQpCj4+
+ICsgKiAgICAgQWRkcmVzc1JhbmdlQUNQSSA9IDMgKEU4MjBfQUNQSSkKPj4gKyAqICAgICBBZGRy
+ZXNzUmFuZ2VOVlMgPSA0IChFODIwX05WUykKPj4gKyAqICAgICBBZGRyZXNzUmFuZ2VVbnVzYWJs
+ZSA9IDUgKEU4MjBfVU5VU0FCTEUpCj4+ICsgKiAgICAgQWRkcmVzc1JhbmdlRGlzYWJsZWQgPSA2
+IChFODIwX0RJU0FCTEVEKQo+PiArICogICAgIEFkZHJlc3NSYW5nZVBlcnNpc3RlbnRNZW1vcnkg
+PSA3IChFODIwX1BNRU0pCj4gV291bGQgeW91IG1pbmQgd2FpdGluZyBmb3IgYSBkaXNjdXNzaW9u
+IHRvIHNldHRsZSBiZWZvcmUgc2VuZGluZwo+IG91dCBuZXcgcGF0Y2ggdmVyc2lvbnM/IEFzIGlu
+ZGljYXRlZCBpbiBhbiBlYXJsaWVyIHJlcGx5IHRvIHYxLCBJCj4gY29uc2lkZXIgdGhpcyBzdGls
+bCBpbnN1ZmZpY2llbnQuIEFuZCBubywgSSdtIG5vdCBhc2tpbmcgZm9yIHlvdSB0bwo+IGFkZCBy
+ZWR1bmRhbnQgYW5kIHBvdGVudGlhbGx5IGNvbmZsaWN0aW5nIGRlZmluaXRpb25zIG9mIEU4MjBf
+KiwKPiBidXQgaW5zdGVhZCB5b3Ugd2FudCB0byB1c2UgWGVuIHNwZWNpZmljIG9uZXMgKHByZWZp
+eGVkIGUuZy4KPiBieSBYRU5fSFZNX01FTU1BUF9UWVBFXykuCgpTaW5jZSB3ZSB3aWxsIG5vdyBo
+YXZlIGEgbm9uLVhlbiB1c2VyIG9mIHRoaXMgaW50ZXJmYWNlIHBlcmhhcHMKUFZIX01FTU1BUF9U
+WVBFXyA/CgotYm9yaXMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
