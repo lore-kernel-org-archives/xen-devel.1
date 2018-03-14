@@ -1,13 +1,21 @@
-From: George Dunlap <dunlapg@umich.edu>
-Subject: Re: [PATCH v10] run QEMU as non-root
-Date: Wed, 14 Mar 2018 14:49:37 +0000
-Message-ID: <CAFLBxZZhNsnzePeEWBq8bwrWRv_UkdmbAnOTf491nbBqVU=f7g@mail.gmail.com>
-References: <1446727646-6802-1-git-send-email-stefano.stabellini@eu.citrix.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: [SVM] Getting the length of the current instruction in
+ svm_vmexit_handler()
+Date: Wed, 14 Mar 2018 16:56:06 +0200
+Message-ID: <144d97a9-7616-bd21-17f6-6621fa5ad69e@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1446727646-6802-1-git-send-email-stefano.stabellini@eu.citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=c2fp=ge=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1ew7pD-0000h8-Fl
+ for xen-devel@lists.xenproject.org; Wed, 14 Mar 2018 14:56:19 +0000
+Received: from smtp03.buh.bitdefender.org (smtp.bitdefender.biz [10.17.80.77])
+ by mx-sr.buh.bitdefender.com (Postfix) with ESMTP id 8AB057FBF6
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Mar 2018 16:56:10 +0200 (EET)
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,42 +24,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: xen-devel@lists.xenproject.org
+Cc: Alexandru Isaila <aisaila@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBOb3YgNSwgMjAxNSBhdCAxMjo0NyBQTSwgU3RlZmFubyBTdGFiZWxsaW5pCjxzdGVm
-YW5vLnN0YWJlbGxpbmlAZXUuY2l0cml4LmNvbT4gd3JvdGU6Cj4gZGlmZiAtLWdpdCBhL2RvY3Mv
-bWlzYy9xZW11LWRlcHJpdmlsZWdlLnR4dCBiL2RvY3MvbWlzYy9xZW11LWRlcHJpdmlsZWdlLnR4
-dAo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj4gaW5kZXggMDAwMDAwMC4uZGRlNzRhYgo+IC0tLSAv
-ZGV2L251bGwKPiArKysgYi9kb2NzL21pc2MvcWVtdS1kZXByaXZpbGVnZS50eHQKPiBAQCAtMCww
-ICsxLDMxIEBACj4gK0ZvciBzZWN1cml0eSByZWFzb25zLCBsaWJ4bCB0cmllcyB0byBwYXNzIGEg
-bm9uLXJvb3QgdXNlcm5hbWUgdG8gUUVNVSBhcwo+ICthcmd1bWVudC4gRHVyaW5nIGluaXRpYWxp
-emF0aW9uIFFFTVUgY2FsbHMgc2V0dWlkIGFuZCBzZXRnaWQgd2l0aCB0aGUKPiArdXNlciBJRCBh
-bmQgdGhlIGdyb3VwIElEIG9mIHRoZSB1c2VyIHBhc3NlZCBhcyBhcmd1bWVudC4KPiArTGlieGwg
-bG9va3MgZm9yIHRoZSBmb2xsb3dpbmcgdXNlcnMgaW4gdGhpcyBvcmRlcjoKPiArCj4gKzEpIGEg
-dXNlciBuYW1lZCAieGVuLXFlbXV1c2VyLWRvbWlkJGRvbWlkIiwKPiArV2hlcmUgJGRvbWlkIGlz
-IHRoZSBkb21pZCBvZiB0aGUgZG9tYWluIGJlaW5nIGNyZWF0ZWQuCj4gK1RoaXMgcmVxdWlyZXMg
-dGhlIHJlc2VydmF0aW9uIG9mIDY1NTM1IHVpZHMgZnJvbSB4ZW4tcWVtdXVzZXItZG9taWQxCj4g
-K3RvIHhlbi1xZW11dXNlci1kb21pZDY1NTM1LiBUbyB1c2UgdGhpcyBtZWNoYW5pc20sIHlvdSBt
-aWdodCB3YW50IHRvCj4gK2NyZWF0ZSBhIGxhcmdlIG51bWJlciBvZiB1c2VycyBhdCBpbnN0YWxs
-YXRpb24gdGltZS4gRm9yIGV4YW1wbGU6Cj4gKwo+ICtmb3IgKChpPTE7IGk8NjU1MzY7IGkrKykp
-Cj4gK2RvCj4gKyAgICBhZGR1c2VyIC0tbm8tY3JlYXRlLWhvbWUgLS1zeXN0ZW0geGVuLXFlbXV1
-c2VyLWRvbWlkJGkKPiArZG9uZQoKVGhpcyBmYWlscyBmb3IgbWUgYWZ0ZXIgYSBmZXcgaHVuZHJl
-ZCB1aWRzOgoKYWRkdXNlcjogTm8gVUlEIGlzIGF2YWlsYWJsZSBpbiB0aGUgcmFuZ2UgMTAwLTk5
-OSAoRklSU1RfU1lTX1VJRCAtCkxBU1RfU1lTX1VJRCkuCmFkZHVzZXI6IFRoZSB1c2VyIGB4ZW4t
-cWVtdXVzZXItZG9taWQ4OTInIHdhcyBub3QgY3JlYXRlZC4KYWRkdXNlcjogTm8gVUlEIGlzIGF2
-YWlsYWJsZSBpbiB0aGUgcmFuZ2UgMTAwLTk5OSAoRklSU1RfU1lTX1VJRCAtCkxBU1RfU1lTX1VJ
-RCkuCmFkZHVzZXI6IFRoZSB1c2VyIGB4ZW4tcWVtdXVzZXItZG9taWQ4OTMnIHdhcyBub3QgY3Jl
-YXRlZC4KYWRkdXNlcjogTm8gVUlEIGlzIGF2YWlsYWJsZSBpbiB0aGUgcmFuZ2UgMTAwLTk5OSAo
-RklSU1RfU1lTX1VJRCAtCkxBU1RfU1lTX1VJRCkuCmFkZHVzZXI6IFRoZSB1c2VyIGB4ZW4tcWVt
-dXVzZXItZG9taWQ4OTQnIHdhcyBub3QgY3JlYXRlZC4KCkl0IGxvb2tzIGxpa2UgZXZlbiBpZiAt
-LXN5c3RlbSB3ZXJlIG9taXR0ZWQsIHRoaXMgd291bGQgZmFpbCBvbiBhCm5vcm1hbCBzeXN0ZW0s
-IGFzIHRoZSBkZWZhdWx0IFVJRCByYW5nZSBsb29rcyB0byBiZSBbMTAwMCwyOTk5OV0uCgpBbHNv
-LCBvbiBteSB0ZXN0IGJveCBhIHNpbmdsZSAnYWRkdXNlcicgdGFrZXMgYWJvdXQgMSBzZWNvbmQs
-IG1lYW5pbmcKanVzdCBkb2luZyB1cCB0byB0aGUgbm9ybWFsIG51bWJlciBvZiBkb21haW5zIChh
-cm91bmQgMzJrKSB3b3VsZCB0YWtlCjkgaG91cnMgb3Igc287IGlzIHRoYXQgcmVhbGx5IGEgcHJh
-Y3RpY2FsIHN1Z2dlc3Rpb24/CgogLUdlb3JnZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+SGVsbG8sCgpXZSdkIGxpa2UgdG8gcmV0cmlldmUgdGhlIGxlbmd0aCBvZiB0aGUgY3VycmVudCBp
+bnN0cnVjdGlvbiBpbgpzdm1fdm1leGl0X2hhbmRsZXIoKSwgc3BlY2lmaWNhbGx5IGZvciB0aGUg
+Vk1FWElUX0VYQ0VQVElPTl9EQiBhbmQKVk1FWElUX0VYQ0VQVElPTl9CUCBjYXNlcy4KCldlJ3Zl
+IGNvbWJlZCB0aGUgdm1jYiB0byBubyBhdmFpbC4gRXZlcnl0aGluZyB3ZSd2ZSB0aG91Z2h0IHRv
+IGNoZWNrCihleGl0aW5mbzEsIGV4aXRpbmZvMiwgZXhpdGludGluZm8pIHR1cm5zIG91dCB0byBi
+ZSB6ZXJvIHRoZXJlIHdoaWxlCnRlc3RpbmcuCgpUaGVyZSdzIF9fZ2V0X2luc3RydWN0aW9uX2xl
+bmd0aCh2Y3B1LCBpbnN0ciksIGJ1dCBpdCBleHBlY3RzIHRvIGJlIGZlZAp0aGUgZXhhY3QgaW5z
+dHJ1Y3Rpb24gd2Ugd2FudCB0aGUgbGVuZ3RoIGZvciwgd2hpY2ggb2J2aW91c2x5IGRlZmVhdHMK
+dGhlIHB1cnBvc2UgaGVyZS4KCklzIHRoZXJlIGEgY2xlYW4gd2F5IHRvIGdldCB0aGUgY3VycmVu
+dCBpbnN0cnVjdGlvbiBsZW5ndGggbGlrZSB3ZSBkbyBpbgp0aGUgVk1YIGNhc2UgKF9fdm1yZWFk
+KFZNX0VYSVRfSU5TVFJVQ1RJT05fTEVOLCAmaW5zbl9sZW4pKSB0aGF0IHdlJ3JlCm92ZXJsb29r
+aW5nPwoKClRoYW5rcywKUmF6dmFuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
