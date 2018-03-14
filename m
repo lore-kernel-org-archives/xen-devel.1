@@ -1,15 +1,21 @@
-From: George Dunlap <dunlapg@umich.edu>
-Subject: Re: [PATCH v10] run QEMU as non-root
-Date: Wed, 14 Mar 2018 17:37:12 +0000
-Message-ID: <CAFLBxZb6tfbRicfZoyKdzkJqp1=L2YiHt==AcOMQRMYf98wdWQ@mail.gmail.com>
-References: <1446727646-6802-1-git-send-email-stefano.stabellini@eu.citrix.com>
- <CAFLBxZZhNsnzePeEWBq8bwrWRv_UkdmbAnOTf491nbBqVU=f7g@mail.gmail.com>
- <20180314161428.GA2330@perard>
+From: Alexey G <x1917x@gmail.com>
+Subject: Re: [RFC PATCH 11/12] hvmloader: use libacpi to build
+	MCFG table
+Date: Thu, 15 Mar 2018 03:48:27 +1000
+Message-ID: <20180315034827.0000786e@gmail.com>
+References: <cover.1520867740.git.x1917x@gmail.com>
+ <d9da7e43b56986b7aca9c84ee93e41587f9d5ac1.1520867741.git.x1917x@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="MP_/0apbG0V_.zAm=ueqKjBOhiU"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180314161428.GA2330@perard>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=dmrx=ge=gmail.com=x1917x@srs-us1.protection.inumbo.net>)
+ id 1ewAW2-0002hA-4l
+ for xen-devel@lists.xenproject.org; Wed, 14 Mar 2018 17:48:42 +0000
+Received: by mail-lf0-x241.google.com with SMTP id y2-v6so3983013lfc.5
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Mar 2018 10:48:40 -0700 (PDT)
+In-Reply-To: <d9da7e43b56986b7aca9c84ee93e41587f9d5ac1.1520867741.git.x1917x@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,68 +24,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBNYXIgMTQsIDIwMTggYXQgNDoxNCBQTSwgQW50aG9ueSBQRVJBUkQKPGFudGhvbnku
-cGVyYXJkQGNpdHJpeC5jb20+IHdyb3RlOgo+IE9uIFdlZCwgTWFyIDE0LCAyMDE4IGF0IDAyOjQ5
-OjM3UE0gKzAwMDAsIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4+IE9uIFRodSwgTm92IDUsIDIwMTUg
-YXQgMTI6NDcgUE0sIFN0ZWZhbm8gU3RhYmVsbGluaQo+PiA8c3RlZmFuby5zdGFiZWxsaW5pQGV1
-LmNpdHJpeC5jb20+IHdyb3RlOgo+PiA+IGRpZmYgLS1naXQgYS9kb2NzL21pc2MvcWVtdS1kZXBy
-aXZpbGVnZS50eHQgYi9kb2NzL21pc2MvcWVtdS1kZXByaXZpbGVnZS50eHQKPj4gPiBuZXcgZmls
-ZSBtb2RlIDEwMDY0NAo+PiA+IGluZGV4IDAwMDAwMDAuLmRkZTc0YWIKPj4gPiAtLS0gL2Rldi9u
-dWxsCj4+ID4gKysrIGIvZG9jcy9taXNjL3FlbXUtZGVwcml2aWxlZ2UudHh0Cj4+ID4gQEAgLTAs
-MCArMSwzMSBAQAo+PiA+ICtGb3Igc2VjdXJpdHkgcmVhc29ucywgbGlieGwgdHJpZXMgdG8gcGFz
-cyBhIG5vbi1yb290IHVzZXJuYW1lIHRvIFFFTVUgYXMKPj4gPiArYXJndW1lbnQuIER1cmluZyBp
-bml0aWFsaXphdGlvbiBRRU1VIGNhbGxzIHNldHVpZCBhbmQgc2V0Z2lkIHdpdGggdGhlCj4+ID4g
-K3VzZXIgSUQgYW5kIHRoZSBncm91cCBJRCBvZiB0aGUgdXNlciBwYXNzZWQgYXMgYXJndW1lbnQu
-Cj4+ID4gK0xpYnhsIGxvb2tzIGZvciB0aGUgZm9sbG93aW5nIHVzZXJzIGluIHRoaXMgb3JkZXI6
-Cj4+ID4gKwo+PiA+ICsxKSBhIHVzZXIgbmFtZWQgInhlbi1xZW11dXNlci1kb21pZCRkb21pZCIs
-Cj4+ID4gK1doZXJlICRkb21pZCBpcyB0aGUgZG9taWQgb2YgdGhlIGRvbWFpbiBiZWluZyBjcmVh
-dGVkLgo+PiA+ICtUaGlzIHJlcXVpcmVzIHRoZSByZXNlcnZhdGlvbiBvZiA2NTUzNSB1aWRzIGZy
-b20geGVuLXFlbXV1c2VyLWRvbWlkMQo+PiA+ICt0byB4ZW4tcWVtdXVzZXItZG9taWQ2NTUzNS4g
-VG8gdXNlIHRoaXMgbWVjaGFuaXNtLCB5b3UgbWlnaHQgd2FudCB0bwo+PiA+ICtjcmVhdGUgYSBs
-YXJnZSBudW1iZXIgb2YgdXNlcnMgYXQgaW5zdGFsbGF0aW9uIHRpbWUuIEZvciBleGFtcGxlOgo+
-PiA+ICsKPj4gPiArZm9yICgoaT0xOyBpPDY1NTM2OyBpKyspKQo+PiA+ICtkbwo+PiA+ICsgICAg
-YWRkdXNlciAtLW5vLWNyZWF0ZS1ob21lIC0tc3lzdGVtIHhlbi1xZW11dXNlci1kb21pZCRpCj4+
-ID4gK2RvbmUKPj4KPj4gVGhpcyBmYWlscyBmb3IgbWUgYWZ0ZXIgYSBmZXcgaHVuZHJlZCB1aWRz
-Ogo+Pgo+PiBhZGR1c2VyOiBObyBVSUQgaXMgYXZhaWxhYmxlIGluIHRoZSByYW5nZSAxMDAtOTk5
-IChGSVJTVF9TWVNfVUlEIC0KPj4gTEFTVF9TWVNfVUlEKS4KPj4gYWRkdXNlcjogVGhlIHVzZXIg
-YHhlbi1xZW11dXNlci1kb21pZDg5Micgd2FzIG5vdCBjcmVhdGVkLgo+PiBhZGR1c2VyOiBObyBV
-SUQgaXMgYXZhaWxhYmxlIGluIHRoZSByYW5nZSAxMDAtOTk5IChGSVJTVF9TWVNfVUlEIC0KPj4g
-TEFTVF9TWVNfVUlEKS4KPj4gYWRkdXNlcjogVGhlIHVzZXIgYHhlbi1xZW11dXNlci1kb21pZDg5
-Mycgd2FzIG5vdCBjcmVhdGVkLgo+PiBhZGR1c2VyOiBObyBVSUQgaXMgYXZhaWxhYmxlIGluIHRo
-ZSByYW5nZSAxMDAtOTk5IChGSVJTVF9TWVNfVUlEIC0KPj4gTEFTVF9TWVNfVUlEKS4KPj4gYWRk
-dXNlcjogVGhlIHVzZXIgYHhlbi1xZW11dXNlci1kb21pZDg5NCcgd2FzIG5vdCBjcmVhdGVkLgo+
-Pgo+PiBJdCBsb29rcyBsaWtlIGV2ZW4gaWYgLS1zeXN0ZW0gd2VyZSBvbWl0dGVkLCB0aGlzIHdv
-dWxkIGZhaWwgb24gYQo+PiBub3JtYWwgc3lzdGVtLCBhcyB0aGUgZGVmYXVsdCBVSUQgcmFuZ2Ug
-bG9va3MgdG8gYmUgWzEwMDAsMjk5OTldLgo+Pgo+PiBBbHNvLCBvbiBteSB0ZXN0IGJveCBhIHNp
-bmdsZSAnYWRkdXNlcicgdGFrZXMgYWJvdXQgMSBzZWNvbmQsIG1lYW5pbmcKPj4ganVzdCBkb2lu
-ZyB1cCB0byB0aGUgbm9ybWFsIG51bWJlciBvZiBkb21haW5zIChhcm91bmQgMzJrKSB3b3VsZCB0
-YWtlCj4+IDkgaG91cnMgb3Igc287IGlzIHRoYXQgcmVhbGx5IGEgcHJhY3RpY2FsIHN1Z2dlc3Rp
-b24/Cj4KPiBVc2luZyBzeXN0ZW1kLCBpdCdzIGEgYml0IGZhc3RlcjoKPgo+IGZvciAoKGk9MTsg
-aTw1MDAwOyBpKyspKTsgZG8KPiAgIGVjaG8gInUgeGVuLXFlbXV1c2VyLWRvbWlkJGkgLSIgPj4g
-L2V0Yy9zeXN1c2Vycy5kL3hlbi1xZW11LWRlcHJpdi5jb25mOwo+IGRvbmUKPiAkIHRpbWUgc3lz
-dGVtZC1zeXN1c2VycyB4ZW4tcWVtdS1kZXByaXYuY29uZgo+IHN5c3RlbWQtc3lzdXNlcnMgeGVu
-LXFlbXUtZGVwcml2LmNvbmYgIDEuMTlzIHVzZXIgMS43MXMgc3lzdGVtIDQ1JSBjcHUgNi4zNTEg
-dG90YWwKPgo+IGJ1dCB0aGF0IGFsc28gZmFpbHMgdG8gY3JlYXRlIHVzZXIgeGVuLXFlbXV1c2Vy
-LWRvbWlkOTQwIGFuZCB0aGUKPiBmb2xsb3dpbmcuIEFuZCB1aWQgZm9yIGFsbCBuZXcgdXNlcnMg
-d2FzIDwgMTAwMC4KPgo+IFRoYXQgd29ya3MgYmV0dGVyIGlmIHlvdSBzdGFydCBteSBsaXR0bGUg
-c2NyaXB0IGhlcmUgd2l0aDoKPiBlY2hvICJyIC0gMjAwMC05MDAwIiA+PiAvZXRjL3N5c3VzZXJz
-LmQveGVuLXFlbXUtZGVwcml2LmNvbmYKPiAjIGZvciA1MDAwIHVpZDoKPiBzeXN0ZW1kLXN5c3Vz
-ZXJzIHhlbi1xZW11LWRlcHJpdi5jb25mICAyLjI5cyB1c2VyIDMuNTRzIHN5c3RlbSA0NyUgY3B1
-IDEyLjIzNyB0b3RhbAoKV2VsbCwgdGhhdCBtYXkgYmUsIGJ1dCAqdGhpcyBwYXJ0aWN1bGFyIGRv
-Y3VtZW50KiBkb2Vzbid0IG1lbnRpb24Kc3lzdGVtZCwgbm9yIG1vZGlmeWluZyB0aGUgcmFuZ2Ug
-b2YgVUlEcyBhdmFpbGFibGU7IHNvIGl0J3Mgbm90IGEKcHJhY3RpY2FsIHN1Z2dlc3Rpb24uCgo+
-IEdlb3JnZSwgaWYgeW91IHJlYWQgdGhlIG1hbnVhbCBmb3IgZG1fcmVzdHJpY3QsIHRoZSBmaXJz
-dCBvcHRpb24KPiBwcmVzZW50ZWQgaXMgdG8gY3JlYXRlIGEgc2luZ2xlIHVzZXJpZCB0aGF0IGlz
-IHRoZSBzdGFydCBvZiBhIHJhbmdlIG9mCj4gdWlkIHRvIHVzZToKClJpZ2h0LCBJIGRpZCBtaXNz
-IHRoYXQgZnJvbSB0aGUgbWFuIHBhZ2UgLS0gYnV0IGFnYWluLCB0aGF0IG9wdGlvbiBpcwpub3Qg
-bWVudGlvbmVkIGhlcmUgaW4gdGhpcyBkb2N1bWVudC4KCkEgbG90IG9mIHRoZSBzdHVmZiBpbiB0
-aGUgbWFuIHBhZ2UgdGhlcmUgaXNuJ3QgcmVhbGx5IHN1aXRhYmxlIGZvciBhCm1hbiBwYWdlOyBp
-dCBzaG91bGQgYmUgcHV0IGluIGEgc2VwYXJhdGUgZG9jdW1lbnQuCgpJJ2xsIHN1Ym1pdCBzb21l
-IHBhdGNoZXMuIDotKQoKIC1HZW9yZ2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+--MP_/0apbG0V_.zAm=ueqKjBOhiU
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+On Tue, 13 Mar 2018 04:33:56 +1000
+Alexey Gerasimenko <x1917x@gmail.com> wrote:
+
+>This patch extends hvmloader_acpi_build_tables() with code which
+>detects if MMCONFIG is available -- i.e. initialized and enabled
+>(+we're running on Q35), obtains its base address and size and asks
+>libacpi to build MCFG table for it via setting the flag ACPI_HAS_MCFG
+>in a manner similar to other optional ACPI tables building.
+>
+>Signed-off-by: Alexey Gerasimenko <x1917x@gmail.com>
+>---
+> tools/firmware/hvmloader/util.c | 70
+> +++++++++++++++++++++++++++++++++++++++++ 1 file changed, 70
+> insertions(+)
+
+Looks like I missed the patch for reserving MMCONFIG area in E820 map,
+it is required for Linux guests (otherwise MMCONFIG info will be
+rejected by linux kernel). Windows guests allow to use MMCONFIG without
+a corresponding E820 entry.
+
+Following lines need to be added to /hvmloader/e820.c:
+
++    /* mark MMCONFIG area */
++    if ( is_mmconfig_used() )
++    {
++        e820[nr].addr = mmconfig_get_base();
++        e820[nr].size = mmconfig_get_size();
++        e820[nr].type = E820_RESERVED;
++        nr++;
++    }
+
+The corresponding patch-file is attached, will include it in v2 patches.
+--MP_/0apbG0V_.zAm=ueqKjBOhiU
+Content-Type: application/octet-stream;
+ name=hvmloader-mark-MMCONFIG-in-E820-map.patch
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename=hvmloader-mark-MMCONFIG-in-E820-map.patch
+
+RnJvbSBjMTYxODZlMGMxYWQzODgzNjJmNjExMzZiOGRhMmUwMmU3NmQxODQwIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbGV4ZXkgR2VyYXNpbWVua28gPHgxOTE3eEBnbWFpbC5jb20+
+CkRhdGU6IFRodSwgMTUgTWFyIDIwMTggMDM6MDY6MzkgKzEwMDAKU3ViamVjdDogW1BBVENIXSBo
+dm1sb2FkZXI6IG1hcmsgTU1DT05GSUcgaW4gRTgyMCBtYXAKCi0tLQogdG9vbHMvZmlybXdhcmUv
+aHZtbG9hZGVyL2U4MjAuYyB8IDkgKysrKysrKysrCiB0b29scy9maXJtd2FyZS9odm1sb2FkZXIv
+dXRpbC5jIHwgNiArKystLS0KIHRvb2xzL2Zpcm13YXJlL2h2bWxvYWRlci91dGlsLmggfCA1ICsr
+KysrCiAzIGZpbGVzIGNoYW5nZWQsIDE3IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpk
+aWZmIC0tZ2l0IGEvdG9vbHMvZmlybXdhcmUvaHZtbG9hZGVyL2U4MjAuYyBiL3Rvb2xzL2Zpcm13
+YXJlL2h2bWxvYWRlci9lODIwLmMKaW5kZXggNGQxYzk1NWEwMi4uOWNmZTg2ZTc4ZSAxMDA2NDQK
+LS0tIGEvdG9vbHMvZmlybXdhcmUvaHZtbG9hZGVyL2U4MjAuYworKysgYi90b29scy9maXJtd2Fy
+ZS9odm1sb2FkZXIvZTgyMC5jCkBAIC0yMzMsNiArMjMzLDE1IEBAIGludCBidWlsZF9lODIwX3Rh
+YmxlKHN0cnVjdCBlODIwZW50cnkgKmU4MjAsCiAgICAgICAgIG5yKys7CiAgICAgfQogCisgICAg
+LyogbWFyayBNTUNPTkZJRyBhcmVhICovCisgICAgaWYgKCBpc19tbWNvbmZpZ191c2VkKCkgKQor
+ICAgIHsKKyAgICAgICAgZTgyMFtucl0uYWRkciA9IG1tY29uZmlnX2dldF9iYXNlKCk7CisgICAg
+ICAgIGU4MjBbbnJdLnNpemUgPSBtbWNvbmZpZ19nZXRfc2l6ZSgpOworICAgICAgICBlODIwW25y
+XS50eXBlID0gRTgyMF9SRVNFUlZFRDsKKyAgICAgICAgbnIrKzsKKyAgICB9CisKICAgICAvKiBM
+b3cgUkFNIGdvZXMgaGVyZS4gUmVzZXJ2ZSBzcGFjZSBmb3Igc3BlY2lhbCBwYWdlcy4gKi8KICAg
+ICBCVUdfT04obG93X21lbV9lbmQgPCBNQigyKSk7CiAKZGlmZiAtLWdpdCBhL3Rvb2xzL2Zpcm13
+YXJlL2h2bWxvYWRlci91dGlsLmMgYi90b29scy9maXJtd2FyZS9odm1sb2FkZXIvdXRpbC5jCmlu
+ZGV4IGM2ZmM4MWQ1MmEuLmEzMmFkYTk2MTMgMTAwNjQ0Ci0tLSBhL3Rvb2xzL2Zpcm13YXJlL2h2
+bWxvYWRlci91dGlsLmMKKysrIGIvdG9vbHMvZmlybXdhcmUvaHZtbG9hZGVyL3V0aWwuYwpAQCAt
+Nzg4LDcgKzc4OCw3IEBAIGludCBnZXRfcGNfbWFjaGluZV90eXBlKHZvaWQpCiAjZGVmaW5lIFBD
+SUVYQkFSX0xFTkdUSF9CSVRTKHJlZykgICAoKChyZWcpID4+IDEpICYgMykKICNkZWZpbmUgUENJ
+RVhCQVJFTiAgICAgICAgICAgICAgICAgIDEKIAotc3RhdGljIHVpbnQ2NF90IG1tY29uZmlnX2dl
+dF9iYXNlKHZvaWQpCit1aW50NjRfdCBtbWNvbmZpZ19nZXRfYmFzZSh2b2lkKQogewogICAgIHVp
+bnQ2NF90IGJhc2U7CiAgICAgdWludDMyX3QgcmVnID0gcGNpX3JlYWRsKFBDSV9NQ0hfREVWRk4s
+IFBDSV9NQ0hfUENJRVhCQVIpOwpAQCAtODEzLDcgKzgxMyw3IEBAIHN0YXRpYyB1aW50NjRfdCBt
+bWNvbmZpZ19nZXRfYmFzZSh2b2lkKQogICAgIHJldHVybiBiYXNlOwogfQogCi1zdGF0aWMgdWlu
+dDMyX3QgbW1jb25maWdfZ2V0X3NpemUodm9pZCkKK3VpbnQzMl90IG1tY29uZmlnX2dldF9zaXpl
+KHZvaWQpCiB7CiAgICAgdWludDMyX3QgcmVnID0gcGNpX3JlYWRsKFBDSV9NQ0hfREVWRk4sIFBD
+SV9NQ0hfUENJRVhCQVIpOwogCkBAIC04MzQsNyArODM0LDcgQEAgc3RhdGljIHVpbnQzMl90IG1t
+Y29uZmlnX2lzX2VuYWJsZWQodm9pZCkKICAgICByZXR1cm4gcGNpX3JlYWRsKFBDSV9NQ0hfREVW
+Rk4sIFBDSV9NQ0hfUENJRVhCQVIpICYgUENJRVhCQVJFTjsKIH0KIAotc3RhdGljIGludCBpc19t
+bWNvbmZpZ191c2VkKHZvaWQpCitpbnQgaXNfbW1jb25maWdfdXNlZCh2b2lkKQogewogICAgIGlm
+IChnZXRfcGNfbWFjaGluZV90eXBlKCkgPT0gTUFDSElORV9UWVBFX1EzNSkKICAgICB7CmRpZmYg
+LS1naXQgYS90b29scy9maXJtd2FyZS9odm1sb2FkZXIvdXRpbC5oIGIvdG9vbHMvZmlybXdhcmUv
+aHZtbG9hZGVyL3V0aWwuaAppbmRleCBmZDJkODg1Yzk2Li44OTJhYjM4OTdhIDEwMDY0NAotLS0g
+YS90b29scy9maXJtd2FyZS9odm1sb2FkZXIvdXRpbC5oCisrKyBiL3Rvb2xzL2Zpcm13YXJlL2h2
+bWxvYWRlci91dGlsLmgKQEAgLTI5Niw2ICsyOTYsMTEgQEAgc3RydWN0IGFjcGlfY29uZmlnOwog
+dm9pZCBodm1sb2FkZXJfYWNwaV9idWlsZF90YWJsZXMoc3RydWN0IGFjcGlfY29uZmlnICpjb25m
+aWcsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBpbnQgcGh5c2lj
+YWwpOwogCisvKiBNTUNPTkZJRy1yZWxhdGVkICovCit1aW50NjRfdCBtbWNvbmZpZ19nZXRfYmFz
+ZSh2b2lkKTsKK3VpbnQzMl90IG1tY29uZmlnX2dldF9zaXplKHZvaWQpOworaW50IGlzX21tY29u
+ZmlnX3VzZWQodm9pZCk7CisKICNlbmRpZiAvKiBfX0hWTUxPQURFUl9VVElMX0hfXyAqLwogCiAv
+KgotLSAKMi4xMS4wCgo=
+
+--MP_/0apbG0V_.zAm=ueqKjBOhiU
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--MP_/0apbG0V_.zAm=ueqKjBOhiU--
