@@ -1,10 +1,10 @@
 From: Peter Zijlstra <peterz@infradead.org>
-Subject: Re: [PATCH v2 06/27] x86/entry/64: Adapt assembly for
-	PIE support
-Date: Wed, 14 Mar 2018 11:29:51 +0100
-Message-ID: <20180314102951.GQ4043__18857.252438511$1521023377$gmane$org@hirez.programming.kicks-ass.net>
+Subject: Re: [PATCH v2 21/27] x86/ftrace: Adapt function tracing
+ for PIE support
+Date: Wed, 14 Mar 2018 11:35:37 +0100
+Message-ID: <20180314103537.GR4043__27493.3980581865$1521023707$gmane$org@hirez.programming.kicks-ass.net>
 References: <20180313205945.245105-1-thgarnie@google.com>
- <20180313205945.245105-7-thgarnie@google.com>
+ <20180313205945.245105-22-thgarnie@google.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,10 +12,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
  <srs0=7+8z=ge=infradead.org=peterz@srs-us1.protection.inumbo.net>)
- id 1ew3g2-0004iQ-Nz
- for xen-devel@lists.xenproject.org; Wed, 14 Mar 2018 10:30:34 +0000
+ id 1ew3lR-00057L-D4
+ for xen-devel@lists.xenproject.org; Wed, 14 Mar 2018 10:36:09 +0000
 Content-Disposition: inline
-In-Reply-To: <20180313205945.245105-7-thgarnie@google.com>
+In-Reply-To: <20180313205945.245105-22-thgarnie@google.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,15 +28,16 @@ To: Thomas Garnier <thgarnie@google.com>
 Cc: Kate Stewart <kstewart@linuxfoundation.org>, Nicolas Pitre <nicolas.pitre@linaro.org>, Michal Hocko <mhocko@suse.com>, Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>, Petr Mladek <pmladek@suse.com>, Len Brown <len.brown@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Christopher Li <sparse@chrisli.org>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, Dominik Brodowski <linux@dominikbrodowski.net>, linux-kernel@vger.kernel.org, Masahiro Yamada <yamada.masahiro@socionext.com>, Pavel Machek <pavel@ucw.cz>, "H . Peter Anvin" <hpa@zytor.com>, kernel-hardening@lists.openwall.com, Christoph Lameter <cl@linux.com>, Jiri Slaby <jslaby@suse.cz>, Alok Kataria <akataria@vmware.com>, linux-doc@vger.kernel.org, linux-arch@vger.kernel.org, Herbert Xu <herbert@gondor.apana.org.au>, Baoquan He <bhe@redhat.com>, Jonathan Corbet <corbet@lwn.net>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBNYXIgMTMsIDIwMTggYXQgMDE6NTk6MjRQTSAtMDcwMCwgVGhvbWFzIEdhcm5pZXIg
-d3JvdGU6Cj4gQEAgLTE1NzYsNyArMTU3OCw5IEBAIGZpcnN0X25taToKPiAgCWFkZHEJJDgsICgl
-cnNwKQkvKiBGaXggdXAgUlNQICovCj4gIAlwdXNoZnEJCQkvKiBSRkxBR1MgKi8KPiAgCXB1c2hx
-CSRfX0tFUk5FTF9DUwkvKiBDUyAqLwo+IC0JcHVzaHEJJDFmCQkvKiBSSVAgKi8KPiArCXB1c2hx
-CSVyYXgJCS8qIFN1cHBvcnQgUG9zaXRpb24gSW5kZXBlbmRlbnQgQ29kZSAqLwo+ICsJbGVhcQkx
-ZiglcmlwKSwgJXJheAkvKiBSSVAgKi8KPiArCXhjaGdxCSVyYXgsICglcnNwKQkvKiBSZXN0b3Jl
-IFJBWCwgcHV0IDFmICovCj4gIAlpcmV0cQkJCS8qIGNvbnRpbnVlcyBhdCByZXBlYXRfbm1pIGJl
-bG93ICovCj4gIAlVTldJTkRfSElOVF9JUkVUX1JFR1MKPiAgMToKClVyZ2gsIHhjaGcgd2l0aCBh
-IG1lbW9wIGhhcyBhbiBpbXBsaWNpdCBMT0NLIHByZWZpeC4KCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCBNYXIgMTMsIDIwMTggYXQgMDE6NTk6MzlQTSAtMDcwMCwgVGhvbWFzIEdhcm5pZXIg
+d3JvdGU6Cj4gKwkvKgo+ICsJICogSWYgUElFIGlzIG5vdCBlbmFibGVkIG9yIG5vIEdPVCBjYWxs
+IHdhcyBmb3VuZCwgZGVmYXVsdCB0byB0aGUKPiArCSAqIG9yaWdpbmFsIGFwcHJvYWNoIHRvIGNv
+ZGUgbW9kaWZpY2F0aW9uLgo+ICsJICovCj4gKwlpZiAoIUlTX0VOQUJMRUQoQ09ORklHX1g4Nl9Q
+SUUpCj4gKwkgICAgfHwgcHJvYmVfa2VybmVsX3JlYWQocmVwbGFjZWQsICh2b2lkICopaXAsIHNp
+emVvZihyZXBsYWNlZCkpCj4gKwkgICAgfHwgbWVtY21wKHJlcGxhY2VkLCBnb3RfY2FsbF9wcmVp
+bnNuLCBzaXplb2YoZ290X2NhbGxfcHJlaW5zbikpKQo+ICsJCXJldHVybiBmdHJhY2VfbW9kaWZ5
+X2NvZGVfZGlyZWN0KGlwLCBvbGRfY29kZSwgbmV3X2NvZGUpOwoKVGhlIHByZWRvbWluYW50IGtl
+cm5lbCBzdHlsZSBpcyB0byBwbGFjZSB0aGUgb3BlcmF0b3JzIGF0IHRoZSBlbmQgb2YgdGhlCnBy
+ZXZpb3VzIGxpbmUsIG5vdCBmaXJzdCBvbiB0aGUgbmV3IGxpbmUuCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
