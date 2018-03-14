@@ -1,7 +1,7 @@
-From: George Dunlap <George.Dunlap@eu.citrix.com>
+From: George Dunlap <dunlapg@umich.edu>
 Subject: Re: [RFC PATCH 0/6] Using GitLab CI for build testing
-Date: Wed, 14 Mar 2018 09:45:17 +0000
-Message-ID: <CAFLBxZYWgajgoma0e_R_u2KzXwb6C4j-BqkTUTZ-hxkiaPjJsQ@mail.gmail.com>
+Date: Wed, 14 Mar 2018 09:45:45 +0000
+Message-ID: <CAFLBxZaw8WUt3Om==hiKt=YRyn=ki+MXGWZxvEQRyy+Mkc9tnQ@mail.gmail.com>
 References: <cover.fc61971d5999dddd95c2bee5d18d572bfcc28399.1520911150.git-series.cardoe@cardoe.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -56,7 +56,7 @@ dGluZy91YnVudHUvRG9ja2VyZmlsZS50cnVzdHkgfCAyMSArKysrKysrKysrKysrLQo+ICBleHRy
 YXMvdGVzdGluZy91YnVudHUvRG9ja2VyZmlsZS54ZW5pYWwgfCAyMSArKysrKysrKysrKysrLQoK
 ImV4dHJhcyIgaXMgYSBiaXQgZ2VuZXJpYy4gIFdoYXQgYWJvdXQgc29tZXRoaW5nIGxpa2UgImF1
 dG9tYXRpb24vYnVpbGQiPwoKKFlvdSBrbmV3IHRoaXMgYmlrZSBzaGVkIHdhc24ndCBnb2luZyB0
-byBnZXQgaW4gd2l0aG91dCAqc29tZSoKZGlzY3Vzc2lvbiBvZiB0aGUgY29sb3IhKQoKIC1HZW9y
-Z2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+byBnZXQgaW4gd2l0aG91dCAqc29tZSoKZGlzY3Vzc2lvbiBvZiB0aGUgY29sb3IhKQoKLUdlb3Jn
+ZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
