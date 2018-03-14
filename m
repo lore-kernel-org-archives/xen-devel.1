@@ -1,14 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v4] new config option vtsc_tolerance_khz to
- avoid TSC emulation
-Date: Wed, 14 Mar 2018 12:07:19 +0100
-Message-ID: <20180314120719.2f6964df.olaf@aepfle.de>
-References: <20180309141039.31691-1-olaf@aepfle.de>
- <20180313170425.wnnpojcogqz24jih@citrix.com>
+From: Roger Pau Monne <roger.pau@citrix.com>
+Subject: [PATCH v2] xl: remove apic option for PVH guests
+Date: Wed, 14 Mar 2018 11:09:24 +0000
+Message-ID: <20180314110924.36221-1-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2926159786634959849=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180313170425.wnnpojcogqz24jih@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=biks=ge=citrix.com=prvs=604a7b455=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1ew4Hn-0000mh-RC
+ for xen-devel@lists.xenproject.org; Wed, 14 Mar 2018 11:09:35 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,53 +19,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2926159786634959849==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/x1Q7G3i_JkCeCiPCc34tFVt"; protocol="application/pgp-signature"
-
---Sig_/x1Q7G3i_JkCeCiPCc34tFVt
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Tue, 13 Mar 2018 17:04:25 +0000
-schrieb Wei Liu <wei.liu2@citrix.com>:
-
-> There were questions on previous patches as to why this approach is
-> better than what we already have. Are those comments addressed?
-
-Which questions? I do not see any.
-What we have is tsc_mode=3Dnative, which avoids emulation on the same class
-of hardware, like this patch does. But it also avoids emulation on a
-different class of hardware, which this patch fixes.
-
-Olaf
-
---Sig_/x1Q7G3i_JkCeCiPCc34tFVt
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWqkCZwAKCRBdQqD6ppg2
-fgSaAJ0fCFt0fojLhdW5MWe+bwBBF0MjgACg8ZVEMd1z+4O9VTFghq0nFxZXYJk=
-=/mw9
------END PGP SIGNATURE-----
-
---Sig_/x1Q7G3i_JkCeCiPCc34tFVt--
-
-
---===============2926159786634959849==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2926159786634959849==--
+WFNBLTI1NiBmb3JjZXMgdGhlIGxvY2FsIEFQSUMgdG8gYWx3YXlzIGJlIGVuYWJsZWQgZm9yIFBW
+SCBndWVzdHMsIHNvCmlnbm9yZSBhbnkgYXBpYyBvcHRpb24gZm9yIFBWSCBndWVzdHMuIFVwZGF0
+ZSB0aGUgZG9jdW1lbnRhdGlvbgphY2NvcmRpbmdseS4KClNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBh
+dSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgotLS0KQ2M6IElhbiBKYWNrc29uIDxpYW4u
+amFja3NvbkBldS5jaXRyaXguY29tPgpDYzogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4K
+Q2M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkNjOiBHZW9yZ2Ug
+RHVubGFwIDxHZW9yZ2UuRHVubGFwQGV1LmNpdHJpeC5jb20+CkNjOiBKYW4gQmV1bGljaCA8amJl
+dWxpY2hAc3VzZS5jb20+CkNjOiBLb25yYWQgUnplc3p1dGVrIFdpbGsgPGtvbnJhZC53aWxrQG9y
+YWNsZS5jb20+CkNjOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+
+CkNjOiBUaW0gRGVlZ2FuIDx0aW1AeGVuLm9yZz4KLS0tCkNoYW5nZXMgc2luY2UgdjE6CiAtIFJl
+YmFzZWQuCi0tLQogZG9jcy9tYW4veGwuY2ZnLnBvZC41LmluIHwgNiAtLS0tLS0KIHRvb2xzL2xp
+YnhsL2xpYnhsX3g4Ni5jICB8IDYgKy0tLS0tCiB0b29scy94bC94bF9wYXJzZS5jICAgICAgfCAy
+ICstCiAzIGZpbGVzIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMTIgZGVsZXRpb25zKC0pCgpk
+aWZmIC0tZ2l0IGEvZG9jcy9tYW4veGwuY2ZnLnBvZC41LmluIGIvZG9jcy9tYW4veGwuY2ZnLnBv
+ZC41LmluCmluZGV4IGE2OTkzNjc3NzkuLjY5NTUyZjhhMDUgMTAwNjQ0Ci0tLSBhL2RvY3MvbWFu
+L3hsLmNmZy5wb2QuNS5pbgorKysgYi9kb2NzL21hbi94bC5jZmcucG9kLjUuaW4KQEAgLTIzNTMs
+MTIgKzIzNTMsNiBAQCBjb21wYXRpYmlsaXR5IG1vZGUgb24gbW9yZSBtb2Rlcm4gV2luZG93cyBP
+UykuCiAKIFRoaXMgb3B0aW9uIGlzIGRpc2FibGVkIGJ5IGRlZmF1bHQuCiAKLT1pdGVtIEI8YXBp
+Yz1CT09MRUFOPgotCi1FbmFibGUgdGhlIGxvY2FsIEFQSUMgZW11bGF0aW9uIGZvciB0aGUgZ3Vl
+c3QuIFRoZSBsb2NhbCBBUElDIGluZm9ybWF0aW9uCi13aWxsIGJlIGV4cG9zZWQgdG8gdGhlIGd1
+ZXN0IGluIHRoZSBBQ1BJIHRhYmxlcy4gVGhpcyBvcHRpb24gaXMgZW5hYmxlZCBieQotZGVmYXVs
+dC4KLQogPWl0ZW0gQjxib290bG9hZGVyPSJQUk9HUkFNIj4KIAogUnVuIEM8UFJPR1JBTT4gdG8g
+ZmluZCB0aGUga2VybmVsIGltYWdlIGFuZCByYW1kaXNrIHRvIHVzZS4gIE5vcm1hbGx5CmRpZmYg
+LS1naXQgYS90b29scy9saWJ4bC9saWJ4bF94ODYuYyBiL3Rvb2xzL2xpYnhsL2xpYnhsX3g4Ni5j
+CmluZGV4IGQ4MjAxM2Y2ZWQuLjRlYTEyNDk5MjUgMTAwNjQ0Ci0tLSBhL3Rvb2xzL2xpYnhsL2xp
+YnhsX3g4Ni5jCisrKyBiL3Rvb2xzL2xpYnhsL2xpYnhsX3g4Ni5jCkBAIC0xMiwxMSArMTIsNyBA
+QCBpbnQgbGlieGxfX2FyY2hfZG9tYWluX3ByZXBhcmVfY29uZmlnKGxpYnhsX19nYyAqZ2MsCiAg
+ICAgICAgIHhjX2NvbmZpZy0+ZW11bGF0aW9uX2ZsYWdzID0gWEVOX1g4Nl9FTVVfQUxMOwogICAg
+ICAgICBicmVhazsKICAgICBjYXNlIExJQlhMX0RPTUFJTl9UWVBFX1BWSDoKLSAgICAgICAgaWYg
+KGxpYnhsX2RlZmJvb2xfdmFsKGRfY29uZmlnLT5iX2luZm8uYXBpYykpCi0gICAgICAgICAgICAv
+KiBQVkggZ3Vlc3RzIG1heSB3YW50IHRvIGhhdmUgTEFQSUMgZW11bGF0aW9uLiAqLwotICAgICAg
+ICAgICAgeGNfY29uZmlnLT5lbXVsYXRpb25fZmxhZ3MgPSBYRU5fWDg2X0VNVV9MQVBJQzsKLSAg
+ICAgICAgZWxzZQotICAgICAgICAgICAgeGNfY29uZmlnLT5lbXVsYXRpb25fZmxhZ3MgPSAwOwor
+ICAgICAgICB4Y19jb25maWctPmVtdWxhdGlvbl9mbGFncyA9IFhFTl9YODZfRU1VX0xBUElDOwog
+ICAgICAgICBicmVhazsKICAgICBjYXNlIExJQlhMX0RPTUFJTl9UWVBFX1BWOgogICAgICAgICB4
+Y19jb25maWctPmVtdWxhdGlvbl9mbGFncyA9IDA7CmRpZmYgLS1naXQgYS90b29scy94bC94bF9w
+YXJzZS5jIGIvdG9vbHMveGwveGxfcGFyc2UuYwppbmRleCBmNjg0MjU0MGNhLi44Yjk5OTgyNWQy
+IDEwMDY0NAotLS0gYS90b29scy94bC94bF9wYXJzZS5jCisrKyBiL3Rvb2xzL3hsL3hsX3BhcnNl
+LmMKQEAgLTEyMDgsNyArMTIwOCw2IEBAIHZvaWQgcGFyc2VfY29uZmlnX2RhdGEoY29uc3QgY2hh
+ciAqY29uZmlnX3NvdXJjZSwKICAgICB9CiAKICAgICB4bHVfY2ZnX2dldF9kZWZib29sKGNvbmZp
+ZywgIm5lc3RlZGh2bSIsICZiX2luZm8tPm5lc3RlZF9odm0sIDApOwotICAgIHhsdV9jZmdfZ2V0
+X2RlZmJvb2woY29uZmlnLCAiYXBpYyIsICZiX2luZm8tPmFwaWMsIDApOwogCiAgICAgc3dpdGNo
+KGJfaW5mby0+dHlwZSkgewogICAgIGNhc2UgTElCWExfRE9NQUlOX1RZUEVfSFZNOgpAQCAtMTI0
+Myw2ICsxMjQyLDcgQEAgdm9pZCBwYXJzZV9jb25maWdfZGF0YShjb25zdCBjaGFyICpjb25maWdf
+c291cmNlLAogICAgICAgICB4bHVfY2ZnX2dldF9kZWZib29sKGNvbmZpZywgIm54IiwgJmJfaW5m
+by0+dS5odm0ubngsIDApOwogICAgICAgICB4bHVfY2ZnX2dldF9kZWZib29sKGNvbmZpZywgImhw
+ZXQiLCAmYl9pbmZvLT51Lmh2bS5ocGV0LCAwKTsKICAgICAgICAgeGx1X2NmZ19nZXRfZGVmYm9v
+bChjb25maWcsICJ2cHRfYWxpZ24iLCAmYl9pbmZvLT51Lmh2bS52cHRfYWxpZ24sIDApOworICAg
+ICAgICB4bHVfY2ZnX2dldF9kZWZib29sKGNvbmZpZywgImFwaWMiLCAmYl9pbmZvLT5hcGljLCAw
+KTsKIAogICAgICAgICBzd2l0Y2ggKHhsdV9jZmdfZ2V0X2xpc3QoY29uZmlnLCAidmlyaWRpYW4i
+LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJnZpcmlkaWFuLCAmbnVtX3Zpcmlk
+aWFuLCAxKSkKLS0gCjIuMTYuMgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
