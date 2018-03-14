@@ -1,17 +1,14 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: [PATCH] SUPPORT.md: Multiple IOREQ servers are
-	experimental
-Date: Wed, 14 Mar 2018 11:05:47 +0000
-Message-ID: <20180314110547.29285-1-george.dunlap@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v4] new config option vtsc_tolerance_khz to
+ avoid TSC emulation
+Date: Wed, 14 Mar 2018 12:07:19 +0100
+Message-ID: <20180314120719.2f6964df.olaf@aepfle.de>
+References: <20180309141039.31691-1-olaf@aepfle.de>
+ <20180313170425.wnnpojcogqz24jih@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2926159786634959849=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=td4q=ge=citrix.com=prvs=6046475dd=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1ew4EI-0000J7-RE
- for xen-devel@lists.xenproject.org; Wed, 14 Mar 2018 11:05:58 +0000
+In-Reply-To: <20180313170425.wnnpojcogqz24jih@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,42 +17,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIGNvZGUgaGFzIGJlZW4gdGhlcmUgaW4gdGhlIGh5cGVydmlzb3IgZm9yIHNldmVyYWwgcmVs
-ZWFzZXMsIGJ1dAp0aGVyZSBpcyBubyB0b29sc3RhY2sgc3VwcG9ydC4KCldoaWxlIHdlJ3JlIGhl
-cmUgZGVsZXRlIHNvbWUgdHJhaWxpbmcgd2hpdGVzcGFjZS4KClNpZ25lZC1vZmYtYnk6IEdlb3Jn
-ZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KLS0tClRoaXMgaXMgYSBiYWNrcG9y
-dCBjYW5kaWRhdGUgdG8gNC4xMC4KCldhc24ndCBjbGVhciBleGFjdGx5IHdoYXQgc2VjdGlvbiB0
-byBwdXQgaXQgaW4sIGJ1dCBJIGZpZ3VyZWQgaXQgaGFkCnRvIGRvIHdpdGggdmlydHVhbCBoYXJk
-d2FyZSBhbmQgaXQgd2FzIGluIHRoZSBoeXBlcnZpc29yLCBzbyB0aGlzIHdhcwp0aGUgYmVzdCBw
-bGFjZS4KCkNDOiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AY2l0cml4LmNvbT4KQ0M6IFdlaSBM
-aXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CkNDOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVy
-M0BjaXRyaXguY29tPgpDQzogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpDQzogVGlt
-IERlZWdhbiA8dGltQHhlbi5vcmc+CkNDOiBLb25yYWQgV2lsayA8a29ucmFkLndpbGtAb3JhY2xl
-LmNvbT4KQ0M6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KQ0M6
-IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CkNDOiBQYXVsIER1cnJhbnQgPHBh
-dWwuZHVycmFudEBjaXRyaXguY29tPgotLS0KIFNVUFBPUlQubWQgfCAxMiArKysrKysrKysrKy0K
-IDEgZmlsZSBjaGFuZ2VkLCAxMSBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0t
-Z2l0IGEvU1VQUE9SVC5tZCBiL1NVUFBPUlQubWQKaW5kZXggOWFjMWE0MDAzNi4uZGRjZGZhYjVh
-ZCAxMDA2NDQKLS0tIGEvU1VQUE9SVC5tZAorKysgYi9TVVBQT1JULm1kCkBAIC01OTksNiArNTk5
-LDE2IEBAIEhvd2V2ZXIsIHRoaXMgZmVhdHVyZSBjYW4gc3RpbGwgY29uZmVyIHNpZ25pZmljYW50
-IHNlY3VyaXR5IGJlbmVmaXQKIHdoZW4gdXNlZCB0byByZW1vdmUgZHJpdmVycyBhbmQgYmFja2Vu
-ZHMgZnJvbSBkb21haW4gMAogKGkuZS4sIERyaXZlciBEb21haW5zKS4KIAorIyMjIHg4Ni9NdWx0
-aXBsZSBJT1JFUSBzZXJ2ZXJzCisKKwlTdGF0dXM6IEV4cGVyaW1lbnRhbAorCitBbiBJT1JFUSBz
-ZXJ2ZXIgcHJvdmlkZXMgZW11bGF0ZWQgZGV2aWNlcyB0byBIVk0gYW5kIFBWSCBndWVzdHMuCitR
-RU1VIGlzIG5vcm1hbGx5IHRoZSBvbmx5IElPUkVRIHNlcnZlciwKK2J1dCBYZW4gaGFzIHN1cHBv
-cnQgZm9yIG11bHRpcGxlIElPUkVRIHNlcnZlcnMuCitUaGlzIGFsbG93cyBmb3IgY3VzdG9tIG9y
-IHByb3ByaWV0YXJ5IGRldmljZSBlbXVsYXRvcnMKK3RvIGJlIHVzZWQgaW4gYWRkaXRpb24gdG8g
-UUVNVS4KKwogIyMjIEFSTS9Ob24tUENJIGRldmljZSBwYXNzdGhyb3VnaAogCiAgICAgU3RhdHVz
-OiBTdXBwb3J0ZWQsIG5vdCBzZWN1cml0eSBzdXBwb3J0ZWQKQEAgLTYzOSw3ICs2NDksNyBAQCBO
-b3RlIHRoYXQgb3RoZXIgZGV2aWNlcyBhcmUgYXZhaWxhYmxlIGJ1dCBub3Qgc2VjdXJpdHkgc3Vw
-cG9ydGVkLgogCiAgICAgU3RhdHVzLCBwaWl4MyBpZGU6IFN1cHBvcnRlZAogICAgIFN0YXR1cywg
-YWhjaTogU3VwcG9ydGVkCi0JCisKIFNlZSB0aGUgc2VjdGlvbiAqKkJsa2JhY2sqKiBmb3IgaW1h
-Z2UgZm9ybWF0cyBzdXBwb3J0ZWQgYnkgUUVNVS4KIAogIyMjIHg4Ni9FbXVsYXRlZCBncmFwaGlj
-cyAoUUVNVSk6Ci0tIAoyLjE2LjIKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+--===============2926159786634959849==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/x1Q7G3i_JkCeCiPCc34tFVt"; protocol="application/pgp-signature"
+
+--Sig_/x1Q7G3i_JkCeCiPCc34tFVt
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Tue, 13 Mar 2018 17:04:25 +0000
+schrieb Wei Liu <wei.liu2@citrix.com>:
+
+> There were questions on previous patches as to why this approach is
+> better than what we already have. Are those comments addressed?
+
+Which questions? I do not see any.
+What we have is tsc_mode=3Dnative, which avoids emulation on the same class
+of hardware, like this patch does. But it also avoids emulation on a
+different class of hardware, which this patch fixes.
+
+Olaf
+
+--Sig_/x1Q7G3i_JkCeCiPCc34tFVt
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWqkCZwAKCRBdQqD6ppg2
+fgSaAJ0fCFt0fojLhdW5MWe+bwBBF0MjgACg8ZVEMd1z+4O9VTFghq0nFxZXYJk=
+=/mw9
+-----END PGP SIGNATURE-----
+
+--Sig_/x1Q7G3i_JkCeCiPCc34tFVt--
+
+
+--===============2926159786634959849==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2926159786634959849==--
