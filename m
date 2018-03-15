@@ -1,18 +1,20 @@
-From: Pavel Machek <pavel@ucw.cz>
-Subject: Re: [PATCH v2 00/27] x86: PIE support and option to
- extend KASLR randomization
-Date: Thu, 15 Mar 2018 09:48:36 +0100
-Message-ID: <20180315084836.GA15953__40274.3406979882$1521103651$gmane$org@amd>
-References: <20180313205945.245105-1-thgarnie@google.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v2 1/4] x86/PVHv2: Add memory map pointer to
+ hvm_start_info struct
+Date: Thu, 15 Mar 2018 09:31:40 +0000
+Message-ID: <20180315093140.osjmbogh5635iatr@MacBook-Pro-de-Roger.local>
+References: <1520983900-13977-1-git-send-email-maran.wilson@oracle.com>
+ <1520983900-13977-2-git-send-email-maran.wilson@oracle.com>
+ <5AA8E37602000078001B1579@prv-mh.provo.novell.com>
+ <c157766a-f80d-bafc-e135-c0be8827c1d9@oracle.com>
+ <32b74853-f493-12c8-8ad9-f96469141a96@oracle.com>
+ <5AAA2D4002000078001B1E76@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3080996901976717656=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=ovbe=gf=ucw.cz=pavel@srs-us1.protection.inumbo.net>)
- id 1ewOZ0-0005Ih-EV
- for xen-devel@lists.xenproject.org; Thu, 15 Mar 2018 08:48:42 +0000
-In-Reply-To: <20180313205945.245105-1-thgarnie@google.com>
+Content-Disposition: inline
+In-Reply-To: <5AAA2D4002000078001B1E76@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,68 +23,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Thomas Garnier <thgarnie@google.com>
-Cc: Kate Stewart <kstewart@linuxfoundation.org>, Nicolas Pitre <nicolas.pitre@linaro.org>, Michal Hocko <mhocko@suse.com>, Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>, Petr Mladek <pmladek@suse.com>, Len Brown <len.brown@intel.com>, Peter Zijlstra <peterz@infradead.org>, Christopher Li <sparse@chrisli.org>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, Dominik Brodowski <linux@dominikbrodowski.net>, linux-kernel@vger.kernel.org, Masahiro Yamada <yamada.masahiro@socionext.com>, "H . Peter Anvin" <hpa@zytor.com>, kernel-hardening@lists.openwall.com, Christoph Lameter <cl@linux.com>, Jiri Slaby <jslaby@suse.cz>, Alok Kataria <akataria@vmware.com>, linux-doc@vger.kernel.org, linux-arch@vger.kernel.org, Herbert Xu <herbert@gondor.apana.org.au>, Baoquan He <bhe@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Rad
+To: Jan Beulich <JBeulich@suse.com>
+Cc: wei.liu2@citrix.com, Maran Wilson <maran.wilson@oracle.com>, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, xen-devel@lists.xen.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3080996901976717656==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="0OAP2g/MAC+5xKAE"
-Content-Disposition: inline
-
-
---0OAP2g/MAC+5xKAE
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi!
-
-> These patches make the changes necessary to build the kernel as Position
-> Independent Executable (PIE) on x86_64. A PIE kernel can be relocated bel=
-ow
-> the top 2G of the virtual address space. It allows to optionally extend t=
-he
-> KASLR randomization range from 1G to 3G.
-
-Would you explain why PIE code is good idea?
-
-You are adding less than 2 bits of randomness. Cost is new config
-option, some size and performance impact, and more than 1000 lines of
-code...
-
-Is there some grand plan of adding 30 more bits of randomness with
-future patch or something?
-									Pavel
---=20
-(english) http://www.livejournal.com/~pavelmachek
-(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
-g.html
-
---0OAP2g/MAC+5xKAE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iEYEARECAAYFAlqqM2QACgkQMOfwapXb+vIPUQCgiwtu3igz+Mea6JgZEWaFBEa4
-DdUAn1zcqcTDjpsItrwfFnQZ9XU/fRNQ
-=OpfY
------END PGP SIGNATURE-----
-
---0OAP2g/MAC+5xKAE--
-
-
---===============3080996901976717656==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3080996901976717656==--
+T24gVGh1LCBNYXIgMTUsIDIwMTggYXQgMDE6MjI6MjRBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDE0LjAzLjE4IGF0IDIxOjA3LCA8bWFyYW4ud2lsc29uQG9yYWNsZS5jb20+
+IHdyb3RlOgo+ID4gT0ssIEkgdGhpbmsgSSdtIGZvbGxvd2luZyB0aGUgc3BlY2lmaWNzIG5vdy4g
+QnV0IGp1c3QgdG8gbWFrZSBzdXJlIHdlIAo+ID4gYWxsIG9uIHRoZSBzYW1lIHBhZ2UgYmVmb3Jl
+IHNlbmRpbmcgb3V0IHRoZSBuZXh0IHZlcnNpb24uLi4KPiA+IAo+ID4gSSdsbCBiZSBhZGRpbmcg
+c29tZXRoaW5nIGxpa2UgdGhlIGZvbGxvd2luZyB0byB0aGUgaGVhZGVyIGZpbGU6Cj4gPiAKPiA+
+IC4uLgo+ID4gLyoKPiA+ICAgKiBGb3IgeDg2IGltcGxlbWVudGF0aW9ucyBhdCBsZWFzdCwgdGhl
+IHZhbHVlcyB1c2VkIGluIHRoZSB0eXBlIGZpZWxkIAo+ID4gb2YgdGhlCj4gPiAgICogbWVtb3J5
+IG1hcCB0YWJsZSBlbnRyaWVzIGFyZSBkZWZpbmVkIGJlbG93IGFuZCBtYXRjaCB0aGUgQWRkcmVz
+cyAKPiA+IFJhbmdlIFR5cGVzCj4gPiAgICogYXMgZGVmaW5lZCBpbiBzZWN0aW9uIDE1IChTeXN0
+ZW0gQWRkcmVzcyBNYXAgSW50ZXJmYWNlcykgb2YgdGhlIEFDUEkKPiA+ICAgKiBTcGVjaWZpY2F0
+aW9uIChodHRwOi8vdWVmaS5vcmcvc3BlY2lmaWNhdGlvbnMpCj4gPiAgICovCj4gPiAjZGVmaW5l
+IFBWSF9NRU1NQVBfVFlQRV9SQU0gICAgICAgMQo+ID4gI2RlZmluZSBQVkhfTUVNTUFQX1RZUEVf
+UkVTRVJWRUQgIDIKPiA+ICNkZWZpbmUgUFZIX01FTU1BUF9UWVBFX0FDUEkgICAgICAzCj4gPiAj
+ZGVmaW5lIFBWSF9NRU1NQVBfVFlQRV9OVlMgICAgICAgNAo+ID4gI2RlZmluZSBQVkhfTUVNTUFQ
+X1RZUEVfVU5VU0FCTEUgIDUKPiA+ICNkZWZpbmUgUFZIX01FTU1BUF9UWVBFX1BNRU0gICAgICA3
+Cj4gPiAuLi4KPiA+IAo+ID4gQW5kIHRoZW4gd2Ugd2lsbCBmaW5kIGFuIGFwcHJvcHJpYXRlIHBs
+YWNlIGluIHRoZSBjIGNvZGUgdG8gYWRkIGEgY291cGxlIAo+ID4gb2YgQlVJTERfQlVHX09OKCkg
+bWFjcm9zIHRvIG1ha2Ugc3VyZSB0aGUgYWJvdmUgcmVtYWluIGNvbnNpc3RlbnQgd2l0aCAKPiA+
+IEU4MjBfeHh4Lgo+ID4gCj4gPiBEb2VzIHRoYXQgc291bmQgYWJvdXQgcmlnaHQ/Cj4gCj4gQWJv
+dXQsIHllcy4gU3ViamVjdCB0byB0aGUgbmFtZSBwcmVmaXggYWRqdXN0bWVudCBhcyBwZXIgdGhl
+IG90aGVyCj4gcmVwbHkgKHRvIEJvcmlzKSBqdXN0IHNlbnQuIFBsdXMgSSdtIG5vdCBjb252aW5j
+ZWQgb2YgdGhlIHg4Ngo+IHJlc3RyaWN0aW9uIGhlcmU6IFRoZXJlJ3Mgbm90aGluZyB4ODYtc3Bl
+Y2lmaWMgYWJvdXQgdGhlc2UgaW4gdGhlCj4gQUNQSSBzcGVjLgoKVGhpcyBoZWFkZXIgYW5kIGlu
+dGVyZmFjZSBpcyBhbHJlYWR5IHg4NiBzcGVjaWZpYyBBVE0sIHNvIEkgd291bGQKc2ltcGx5IGF2
+b2lkIHRoZSBzdGFydGluZyAiRm9yIHg4Ni4uLiIuIElmZiB0aGlzIGlzIGV2ZXIgdXNlZCBieQpv
+dGhlciBhcmNoZXMgd2UgY2FuIHRoZW4gZGVjaWRlIHdoYXQgdG8gZG8gd2l0aCB0aGUgbWVtb3J5
+IHR5cGVzLgoKVGhlIHJlc3QgTEdUTSAobW9kdWxvIEphbidzIHJlcXVlc3RlZCBjaGFuZ2VzKS4K
+ClRoYW5rcywgUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
