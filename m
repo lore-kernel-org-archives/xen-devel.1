@@ -1,19 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: Implementaiton of cc-option in Config.mk
-Date: Thu, 15 Mar 2018 02:45:15 -0600
-Message-ID: <5AAA40AB02000078001B1F71@prv-mh.provo.novell.com>
-References: <20180314171128.52ln4efljqd56mnu@citrix.com>
+From: Pavel Machek <pavel@ucw.cz>
+Subject: Re: [PATCH v2 00/27] x86: PIE support and option to
+ extend KASLR randomization
+Date: Thu, 15 Mar 2018 09:48:36 +0100
+Message-ID: <20180315084836.GA15953__40274.3406979882$1521103651$gmane$org@amd>
+References: <20180313205945.245105-1-thgarnie@google.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3080996901976717656=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=ovtz=gf=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ewOVo-0004pm-3Z
- for xen-devel@lists.xenproject.org; Thu, 15 Mar 2018 08:45:24 +0000
-In-Reply-To: <20180314171128.52ln4efljqd56mnu@citrix.com>
-Content-Disposition: inline
+ (envelope-from <srs0=ovbe=gf=ucw.cz=pavel@srs-us1.protection.inumbo.net>)
+ id 1ewOZ0-0005Ih-EV
+ for xen-devel@lists.xenproject.org; Thu, 15 Mar 2018 08:48:42 +0000
+In-Reply-To: <20180313205945.245105-1-thgarnie@google.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,32 +21,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Doug Goldstein <cardoe@cardoe.com>
+To: Thomas Garnier <thgarnie@google.com>
+Cc: Kate Stewart <kstewart@linuxfoundation.org>, Nicolas Pitre <nicolas.pitre@linaro.org>, Michal Hocko <mhocko@suse.com>, Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>, Petr Mladek <pmladek@suse.com>, Len Brown <len.brown@intel.com>, Peter Zijlstra <peterz@infradead.org>, Christopher Li <sparse@chrisli.org>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, Dominik Brodowski <linux@dominikbrodowski.net>, linux-kernel@vger.kernel.org, Masahiro Yamada <yamada.masahiro@socionext.com>, "H . Peter Anvin" <hpa@zytor.com>, kernel-hardening@lists.openwall.com, Christoph Lameter <cl@linux.com>, Jiri Slaby <jslaby@suse.cz>, Alok Kataria <akataria@vmware.com>, linux-doc@vger.kernel.org, linux-arch@vger.kernel.org, Herbert Xu <herbert@gondor.apana.org.au>, Baoquan He <bhe@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Rad
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE0LjAzLjE4IGF0IDE4OjExLCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
-VGhlIGltcGxlbWVudGF0aW9uIG9mIGNjLW9wdGlvbiAoZ3JlcHBpbmcgdGhlIG9wdGlvbiBiZWlu
-ZyB0ZXN0ZWQgaW4KPiBvdXRwdXQpIGluIENvbmZpZy5tayBub3cgbWFrZXMgaXQgbm90IHBvc3Np
-YmxlIHRvIGRldGVjdCBpZiAtT2cgaXMKPiBzdXBwb3J0ZWQgYmVjYXVzZSAiLU9nIiBkb2Vzbid0
-IGFwcGVhciBpbiB0aGUgb3V0cHV0IGlmIGl0IGlzIG5vdAo+IHN1cHBvcnRlZC4gSSBzdXNwZWN0
-IHRoZXJlIHdpbGwgYmUgb3RoZXIgb3B0aW9ucyB0aGF0IGNjLW9wdGlvbiBjYW4ndCB3b3JrCj4g
-d2l0aC4KPiAKPiBJdCBpcyBpbXBsZW1lbnRlZCBsaWtlIHRoYXQgYmVjYXVzZSB3ZSB0cnkgdG8g
-ZGV0ZWN0IC1Xbm8tKiBvcHRpb24uIEJ1dAo+IHdoeSBpcyB0aGF0IGltcG9ydGFudD8gQ2FuJ3Qg
-d2UganVzdCBpZ25vcmUgLVduby0qIGlmIHRoZXkgYXJlbid0Cj4gc3VwcG9ydGVkPwoKV2VsbCwg
-dGhlIGV4cGxhbmF0aW9uIGZvciBpdHMgYmVoYXZpb3IgaXMgZ2l2ZW4gaW4gdGhlIGNvbW1lbnQK
-bmV4dCB0byBpdHMgZGVmaW5pdGlvbjoKCiMgVGhpcyBpcyBjb21wbGljYXRlZCBieSB0aGUgZmFj
-dCB0aGF0IHVucmVjb2duaXNlZCAtV25vLSogb3B0aW9uczoKIyAgIChhKSBhcmUgaWdub3JlZCB1
-bmxlc3MgdGhlIGNvbXBpbGF0aW9uIGVtaXRzIGEgd2FybmluZzsgYW5kCiMgICAoYikgZXZlbiB0
-aGVuIHByb2R1Y2UgYSB3YXJuaW5nIHJhdGhlciB0aGFuIGFuIGVycm9yCgo+IERvZXMgYW55b25l
-IGhhcyBhbiBpZGVhIGhvdyB0byBtYWtlIGNjLW9wdGlvbiB3b3JrIGZvciAtT2cKPiAoYW5kIG90
-aGVyIG9wdGlvbnMpPwoKSG93IGFib3V0IHNpbXBseSBleHRlbmRpbmcgaXQgdG8gYWxzbyB1c2Ug
-dGhlICJ0ZXN0IGZhaWxlZCIKYWx0ZXJuYXRpdmUgaWYgdGhlIGNvbXBpbGF0aW9uIHByb2R1Y2Vk
-IGFuIGVycm9yIHN0YXR1cyAod2hpY2gKaXMgY3VycmVudGx5IGlnbm9yZWQgYnkgd2F5IG9mIHRo
-ZSB1c2Ugb2YgYSBwaXBlbGluZSk/IFVudGVzdGVkOgoKY2Mtb3B0aW9uID0gJChzaGVsbCBpZiB0
-ZXN0IC16ICJgZWNobyAndm9pZCpwPTE7JyB8IFwKICAgICAgICAgICAgICB7ICQoMSkgJCgyKSAt
-UyAtbyAvZGV2L251bGwgLXggYyAtIDI+JjEgfHwgZWNobyAkKDIpOyB9IHwgZ3JlcCAtLSAkKDIp
-IC1gIjsgXAogICAgICAgICAgICAgIHRoZW4gZWNobyAiJCgyKSI7IGVsc2UgZWNobyAiJCgzKSI7
-IGZpIDspCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============3080996901976717656==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="0OAP2g/MAC+5xKAE"
+Content-Disposition: inline
+
+
+--0OAP2g/MAC+5xKAE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi!
+
+> These patches make the changes necessary to build the kernel as Position
+> Independent Executable (PIE) on x86_64. A PIE kernel can be relocated bel=
+ow
+> the top 2G of the virtual address space. It allows to optionally extend t=
+he
+> KASLR randomization range from 1G to 3G.
+
+Would you explain why PIE code is good idea?
+
+You are adding less than 2 bits of randomness. Cost is new config
+option, some size and performance impact, and more than 1000 lines of
+code...
+
+Is there some grand plan of adding 30 more bits of randomness with
+future patch or something?
+									Pavel
+--=20
+(english) http://www.livejournal.com/~pavelmachek
+(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
+g.html
+
+--0OAP2g/MAC+5xKAE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iEYEARECAAYFAlqqM2QACgkQMOfwapXb+vIPUQCgiwtu3igz+Mea6JgZEWaFBEa4
+DdUAn1zcqcTDjpsItrwfFnQZ9XU/fRNQ
+=OpfY
+-----END PGP SIGNATURE-----
+
+--0OAP2g/MAC+5xKAE--
+
+
+--===============3080996901976717656==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3080996901976717656==--
