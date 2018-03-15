@@ -1,17 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 4/7] x86/domain: Remove unused parameters
- from {hvm, pv}_domain_initialise()
-Date: Thu, 15 Mar 2018 20:09:13 +0000
-Message-ID: <19b24ce8-67ae-7cbd-a867-1f11799941d9@citrix.com>
-References: <1520601522-2886-1-git-send-email-andrew.cooper3@citrix.com>
- <1520601522-2886-5-git-send-email-andrew.cooper3@citrix.com>
- <20180313120506.wnkjzgei6m4o6bjk@MacBook-Pro-de-Roger.local>
+From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Subject: Re: [PATCH v2 1/3] sndif: Introduce protocol version
+Date: Thu, 15 Mar 2018 16:14:40 -0400
+Message-ID: <20180315201440.GM10870__49852.877649437$1521144841$gmane$org@char.us.oracle.com>
+References: <1521043365-26813-1-git-send-email-andr2000@gmail.com>
+ <1521043365-26813-2-git-send-email-andr2000@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180313120506.wnkjzgei6m4o6bjk@MacBook-Pro-de-Roger.local>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=wlzb=gf=oracle.com=konrad.wilk@srs-us1.protection.inumbo.net>)
+ id 1ewZHA-0000UA-Gi
+ for xen-devel@lists.xenproject.org; Thu, 15 Mar 2018 20:15:00 +0000
+Content-Disposition: inline
+In-Reply-To: <1521043365-26813-2-git-send-email-andr2000@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,26 +23,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Oleksandr Andrushchenko <andr2000@gmail.com>
+Cc: tiwai@suse.de, xen-devel@lists.xenproject.org, alsa-devel@alsa-project.org, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTMvMDMvMTggMTI6MDUsIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6Cj4gTWF5YmUgdGhpcyBj
-b3VsZCBiZToKPgo+IGlmICggaXNfaWRsZV9kb21haW4oZCkgKQo+IC4uLgo+IGVsc2UKPiB7Cj4g
-ICAgIHJjID0gaXNfaHZtX2RvbWFpbihkKSA/IGh2bV9kb21haW5faW5pdGlhbGlzZShkKQo+ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgOiBwdl9kb21haW5faW5pdGlhbGlzZShkKTsKPiAgICAg
-aWYgKCByYyApCj4gICAgICAgICBnb3RvIGZhaWw7Cj4gfQo+Cj4gQnV0IHRoYXQncyBtYXliZSBv
-dXQgb2YgdGhlIHNjb3BlIG9mIHRoaXMgcGF0Y2guCgpJJ2QgYWN0dWFsbHkgbGlrZSB0byByZWNv
-bnNpZGVyIG91ciB1c2Ugb2YgdGhpcyBkZXNpZ24gcGF0dGVybi4KCkFzIGZhciBhcyBJIGNhbiB0
-ZWxsIGZyb20gc29tZSBYVEYgZXhhbXBsZXMsIGl0IGZvcmNlcyB0aGUgdXNlIG9mIGEKZnVuY3Rp
-b24gcG9pbnRlciByYXRoZXIgdGhhbiBhbiAiaWYgY2FsbCBlbHNlIGNhbGwiIHdoaWNoIGluIHR1
-cm4KZm9yY2libHkgb3V0LW9mLWxpbmVzIHN0YXRpYyBpbmxpbmUgc3R1YnMsIGFuZCBwcmV2ZW50
-cyBMVE8gZnJvbSBtZXJnaW5nCmEgY3Jvc3MgVFUgY2FsbCBpbnRvIGl0cyBzb2xlIGNhbGxlci4K
-CldoaWxlIHRoZSBjb2RlIGRvZXMgZG9lcyBsb29rIHNsaWdodGx5IG5lYXRlciBhcyBhIHJlc3Vs
-dCwgSSBnZXQgdGhlCmZlZWxpbmcgdGhhdAoKaWYgKCBpc19odm1fZG9tYWluKGQpICkKwqDCoMKg
-IHJjID0gaHZtX2RvbWFpbl9pbml0aWFsaXNlKGQpOwplbHNlCsKgwqDCoCByYyA9IHB2X2RvbWFp
-bl9pbml0aWFsaXNlKGQpOwoKaXMgZmFyIGVhc2llciBmb3IgdGhlIGNvbXBpbGVyIHRvIG9wdGlt
-aXNlIHdoZW4gdGhlIG9wcG9ydHVuaXRpZXMgYXJpc2UuCgp+QW5kcmV3CgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gV2VkLCBNYXIgMTQsIDIwMTggYXQgMDY6MDI6NDNQTSArMDIwMCwgT2xla3NhbmRyIEFuZHJ1
+c2hjaGVua28gd3JvdGU6Cj4gRnJvbTogT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gPG9sZWtzYW5k
+cl9hbmRydXNoY2hlbmtvQGVwYW0uY29tPgo+IAo+IFByb3RvY29sIHZlcnNpb24gd2FzIHJlZmVy
+ZW5jZWQgaW4gdGhlIHByb3RvY29sIGRlc2NyaXB0aW9uLAo+IGJ1dCBtaXNzZWQgaXRzIGRlZmlu
+aXRpb24uIEZpeCB0aGlzIGJ5IGFkZGluZyBhIGNvbnN0YW50Cj4gZm9yIGN1cnJlbnQgcHJvdG9j
+b2wgdmVyc2lvbi4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyA8
+b2xla3NhbmRyX2FuZHJ1c2hjaGVua29AZXBhbS5jb20+ClJldmlld2VkLWJ5OiBLb25yYWQgUnpl
+c3p1dGVrIFdpbGsgPGtvbnJhZC53aWxrQG9yYWNsZS5jb20+CgpUaGFuayB5b3UhCj4gLS0tCj4g
+IHhlbi9pbmNsdWRlL3B1YmxpYy9pby9zbmRpZi5oIHwgNyArKysrKysrCj4gIDEgZmlsZSBjaGFu
+Z2VkLCA3IGluc2VydGlvbnMoKykKPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvcHVibGlj
+L2lvL3NuZGlmLmggYi94ZW4vaW5jbHVkZS9wdWJsaWMvaW8vc25kaWYuaAo+IGluZGV4IGM1YzE5
+Nzg0MDZiMy4uNjY3ZTYxMGZkYTJiIDEwMDY0NAo+IC0tLSBhL3hlbi9pbmNsdWRlL3B1YmxpYy9p
+by9zbmRpZi5oCj4gKysrIGIveGVuL2luY2x1ZGUvcHVibGljL2lvL3NuZGlmLmgKPiBAQCAtMzgs
+NiArMzgsMTMgQEAKPiAgCj4gIC8qCj4gICAqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioKPiArICogICAg
+ICAgICAgICAgICAgICAgICAgICAgICBQcm90b2NvbCB2ZXJzaW9uCj4gKyAqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioKPiArICovCj4gKyNkZWZpbmUgWEVOU05EX1BST1RPQ09MX1ZFUlNJT04gICAgICAg
+ICAxCj4gKwo+ICsvKgo+ICsgKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqCj4gICAqICAgICAgICAgICAg
+ICAgICAgRmVhdHVyZSBhbmQgUGFyYW1ldGVyIE5lZ290aWF0aW9uCj4gICAqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioKPiAgICoKPiAtLSAKPiAyLjcuNAo+IAoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
