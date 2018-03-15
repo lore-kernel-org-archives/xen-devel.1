@@ -1,17 +1,16 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH v2] x86: ignore guest microcode loading attempts
-Date: Thu, 15 Mar 2018 05:09:23 -0600
-Message-ID: <5AAA627302000078001B2075@prv-mh.provo.novell.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v5 10/16] xen/mm: Switch map_pages_to_xen to
+ use MFN typesafe
+Date: Thu, 15 Mar 2018 11:08:43 +0000
+Message-ID: <20180315110843.3zyimrdiplnewajm@citrix.com>
+References: <20180314182009.14274-1-julien.grall@arm.com>
+ <20180314182009.14274-11-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2)
- (envelope-from <srs0=ovtz=gf=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ewQlI-0003Gm-0K
- for xen-devel@lists.xenproject.org; Thu, 15 Mar 2018 11:09:32 +0000
 Content-Disposition: inline
+In-Reply-To: <20180314182009.14274-11-julien.grall@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,45 +19,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+To: julien.grall@arm.com
+Cc: Tim Deegan <tim@xen.org>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>, Shane Wang <shane.wang@intel.com>, Gang Wei <gang.wei@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIHJlc3BlY3RpdmUgTVNScyBhcmUgd3JpdGUtb25seSwgYW5kIGhlbmNlIGF0dGVtcHRzIGJ5
-IGd1ZXN0cyB0bwp3cml0ZSB0byB0aGVzZSBhcmUgLSBhcyBvZiAxZjFkMTgzZDQ5ICgieDg2L0hW
-TTogZG9uJ3QgZ2l2ZSB0aGUgd3JvbmcKaW1wcmVzc2lvbiBvZiBXUk1TUiBzdWNjZWVkaW5nIikg
-bm8gbG9uZ2VyIGlnbm9yZWQuIFJlc3RvcmUgb3JpZ2luYWwKYmVoYXZpb3IgZm9yIHRoZSB0d28g
-YWZmZWN0ZWQgTVNScy4KClNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNl
-LmNvbT4KLS0tCnYyOiBBZGQgY29tbWVudHMuCi0tLQpXaGlsZSB3aGF0IGlzIGJlaW5nIGxvZ2dl
-ZCBmb3IgdGhlIGN1cnJlbnQgb3NzdGVzdCBmYWlsdXJlcyBvbiB0aGUgNC43CmFuZCA0LjkgYnJh
-bmNoZXMgZG9lc24ndCBmdWxseSBwcm92ZSB0aGlzIHRvIGJlIHRoZSBwcm9ibGVtLCBSQ1ggaG9s
-ZGluZwoweDc5IGFuZCB0aGVyZSBiZWluZyBhIHJlY29yZGVkIGh5cGVydmlzb3IgbGV2ZWwgI0dQ
-IHJlY292ZXJ5CmltbWVkaWF0ZWx5IGJlZm9yZSB0aGUgZ3Vlc3QgdHJpcGxlIGZhdWx0IGlzIHN1
-ZmZpY2llbnQgaW5kaWNhdGlvbiBpbW8uCldoYXQgSSdtIHVuc3VyZSBhYm91dCBpcyB3aGV0aGVy
-IHdlIHdhbnQgdG8gaWdub3JlIHN1Y2ggd3JpdGVzIGFsc28gZm9yClBWIGd1ZXN0cy4gSWYgbm90
-LCBhdCBsZWFzdCB0aGUgV1JNU1IgY2hhbmdlIHdvdWxkIG5lZWQgdG8gbW92ZSBpbnRvCmh2bS9o
-dm0uYy4KCi0tLSBhL3hlbi9hcmNoL3g4Ni9tc3IuYworKysgYi94ZW4vYXJjaC94ODYvbXNyLmMK
-QEAgLTE0Nyw2ICsxNDcsOCBAQCBpbnQgZ3Vlc3RfcmRtc3IoY29uc3Qgc3RydWN0IHZjcHUgKnYs
-IHVpCiAKICAgICBzd2l0Y2ggKCBtc3IgKQogICAgIHsKKyAgICBjYXNlIE1TUl9BTURfUEFUQ0hM
-T0FERVI6CisgICAgY2FzZSBNU1JfSUEzMl9VQ09ERV9XUklURToKICAgICBjYXNlIE1TUl9QUkVE
-X0NNRDoKICAgICAgICAgLyogV3JpdGUtb25seSAqLwogICAgICAgICBnb3RvIGdwX2ZhdWx0OwpA
-QCAtMjAwLDYgKzIwMiwyNiBAQCBpbnQgZ3Vlc3Rfd3Jtc3Ioc3RydWN0IHZjcHUgKnYsIHVpbnQz
-Ml90CiAgICAgICAgIC8qIFJlYWQtb25seSAqLwogICAgICAgICBnb3RvIGdwX2ZhdWx0OwogCisg
-ICAgY2FzZSBNU1JfQU1EX1BBVENITE9BREVSOgorICAgICAgICAvKgorICAgICAgICAgKiBTZWUg
-bm90ZSBvbiBNU1JfSUEzMl9VQ09ERV9XUklURSBiZWxvdywgd2hpY2ggbWF5IG9yIG1heSBub3Qg
-YXBwbHkKKyAgICAgICAgICogdG8gQU1EIENQVXMgYXMgd2VsbCAoYXQgbGVhc3QgdGhlIGFyY2hp
-dGVjdHVyYWwvQ1BVSUQgcGFydCBkb2VzKS4KKyAgICAgICAgICovCisgICAgICAgIGlmICggZC0+
-YXJjaC5jcHVpZC0+eDg2X3ZlbmRvciAhPSBYODZfVkVORE9SX0FNRCApCisgICAgICAgICAgICBn
-b3RvIGdwX2ZhdWx0OworICAgICAgICBicmVhazsKKworICAgIGNhc2UgTVNSX0lBMzJfVUNPREVf
-V1JJVEU6CisgICAgICAgIC8qCisgICAgICAgICAqIFNvbWUgdmVyc2lvbnMgb2YgV2luZG93cyBh
-dCBsZWFzdCBvbiBjZXJ0YWluIGhhcmR3YXJlIHRyeSB0byBsb2FkCisgICAgICAgICAqIG1pY3Jv
-Y29kZSBiZWZvcmUgc2V0dGluZyB1cCBhbiBJRFQuIFRoZXJlZm9yZSB3ZSBtdXN0IG5vdCBpbmpl
-Y3QgI0dQCisgICAgICAgICAqIGZvciBzdWNoIGF0dGVtcHRzLiBBbHNvIHRoZSBNU1IgaXMgYXJj
-aGl0ZWN0dXJhbCBhbmQgbm90IHF1YWxpZmllZAorICAgICAgICAgKiBieSBhbnkgQ1BVSUQgYml0
-LgorICAgICAgICAgKi8KKyAgICAgICAgaWYgKCBkLT5hcmNoLmNwdWlkLT54ODZfdmVuZG9yICE9
-IFg4Nl9WRU5ET1JfSU5URUwgKQorICAgICAgICAgICAgZ290byBncF9mYXVsdDsKKyAgICAgICAg
-YnJlYWs7CisKICAgICBjYXNlIE1TUl9TUEVDX0NUUkw6CiAgICAgICAgIGlmICggIWNwLT5mZWF0
-LmlicnNiICkKICAgICAgICAgICAgIGdvdG8gZ3BfZmF1bHQ7IC8qIE1TUiBhdmFpbGFibGU/ICov
-CgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gV2VkLCBNYXIgMTQsIDIwMTggYXQgMDY6MjA6MDNQTSArMDAwMCwganVsaWVuLmdyYWxsQGFy
+bS5jb20gd3JvdGU6Cj4gRnJvbTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4K
+PiAKPiBUaGUgY3VycmVudCBwcm90b3R5cGUgaXMgc2xpZ2h0bHkgY29uZnVzaW5nIGJlY2F1c2Ug
+aXQgdGFrZXMgYSB2aXJ0dWFsCj4gYWRkcmVzcyBhbmQgYSBwaHlzaWNhbCBmcmFtZSAobm90IGFk
+ZHJlc3MhKS4gU3dpdGNoaW5nIHRvIE1GTiB3aWxsIGltcHJvdmUKPiBzYWZldHkgYW5kIHJlZHVj
+ZSB0aGUgY2hhbmNlIHRvIG1pc3Rha2VubHkgaW52ZXJ0IHRoZSAyIHBhcmFtZXRlcnMuCj4gCj4g
+QWxzbywgdGFrZSB0aGUgb3Bwb3J0dW5pdHkgdG8gc3dpdGNoIChhIC0gYikgPj4gUEFHRV9TSElG
+VCB0bwo+IFBGTl9ET1dOKGEgLSBiKSBpbiB0aGUgY29kZSBtb2RpZmllZC4KPiAKPiBTaWduZWQt
+b2ZmLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgoKUmV2aWV3ZWQtYnk6
+IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
