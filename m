@@ -1,17 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 120794: tolerable all pass -
-	PUSHED
-Date: Thu, 15 Mar 2018 15:40:33 +0000
-Message-ID: <osstest-120794-mainreport@xen.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v5 10/14] x86/HVM: do actual CMPXCHG in
+	hvmemul_cmpxchg()
+Date: Thu, 15 Mar 2018 15:28:32 +0000
+Message-ID: <e6de4aab-3cc0-ed7b-18c3-3884a154c214@citrix.com>
+References: <5AAA7BAF02000078001B2242@prv-mh.provo.novell.com>
+ <5AAA7EBA02000078001B2291@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8574433916266512038=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=rzuj=gf=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1ewUzg-0004ug-Bw
- for xen-devel@lists.xenproject.org; Thu, 15 Mar 2018 15:40:40 +0000
+ <srs0=h5rp=gf=citrix.com=prvs=605c7d53e=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1ewV2e-00053w-FH
+ for xen-devel@lists.xenproject.org; Thu, 15 Mar 2018 15:43:44 +0000
+In-Reply-To: <5AAA7EBA02000078001B2291@prv-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,51 +23,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMDc5NCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMDc5NC8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
-ICAgICAgICAgICAgICBjMGUzNGJhNzhhYWVjMmUyYjFhYTJhODEwYmM3YjNlZTFmZGZjZjNmCmJh
-c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICAxZGQ5ZmEwNGZhZTY5YTIzNzE1
-NzI2NjNkMTUwYzk3NmE5ZTk0OGQzCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjA3NTkgIDIwMTgt
-MDMtMTQgMTk6MDI6NDAgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTIwNzk0ICAy
-MDE4LTAzLTE1IDEyOjUzOjI5IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
-d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgSmFuIEJldWxpY2ggPGpiZXVsaWNo
-QHN1c2UuY29tPgogIEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgoKam9iczoKIGJ1
-aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZp
-cnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFu
-aHZtLWkzODYgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1s
-aWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-CnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dz
-OiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmln
-IGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywg
-YW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
-cmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIK
-ICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtm
-PVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAg
-aHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQ
-dXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94ZW4vZ2l0L3hlbi5n
-aXQKICAgMWRkOWZhMDRmYS4uYzBlMzRiYTc4YSAgYzBlMzRiYTc4YWFlYzJlMmIxYWEyYTgxMGJj
-N2IzZWUxZmRmY2YzZiAtPiBzbW9rZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+--===============8574433916266512038==
+Content-Type: multipart/alternative;
+	boundary="------------2B2CC44E3CEE93635FE418B5"
+Content-Language: en-GB
+
+--------------2B2CC44E3CEE93635FE418B5
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+On 15/03/18 13:10, Jan Beulich wrote:
+> ..., at least as far as currently possible, i.e. when a mapping can be
+> obtained.
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+--------------2B2CC44E3CEE93635FE418B5
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">On 15/03/18 13:10, Jan Beulich wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:5AAA7EBA02000078001B2291@prv-mh.provo.novell.com">
+      <pre wrap="">..., at least as far as currently possible, i.e. when a mapping can be
+obtained.
+
+Signed-off-by: Jan Beulich <a class="moz-txt-link-rfc2396E" href="mailto:jbeulich@suse.com">&lt;jbeulich@suse.com&gt;</a>
+Reviewed-by: Paul Durrant <a class="moz-txt-link-rfc2396E" href="mailto:paul.durrant@citrix.com">&lt;paul.durrant@citrix.com&gt;</a></pre>
+    </blockquote>
+    <br>
+    Acked-by: Andrew Cooper <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a><br>
+  </body>
+</html>
+
+--------------2B2CC44E3CEE93635FE418B5--
+
+
+--===============8574433916266512038==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8574433916266512038==--
