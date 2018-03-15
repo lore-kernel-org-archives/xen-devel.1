@@ -1,16 +1,14 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH v5 11/16] xen/mm: Switch some of
- page_alloc.c to typesafe MFN
-Date: Thu, 15 Mar 2018 17:02:38 +0000
-Message-ID: <47029b9d-b31d-2364-afdc-d6969d0fb287@citrix.com>
-References: <20180314182009.14274-1-julien.grall@arm.com>
- <20180314182009.14274-12-julien.grall@arm.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] xen/x86: Implement enable_nmis() in C
+Date: Thu, 15 Mar 2018 11:02:40 -0600
+Message-ID: <5AAAB54002000078001B25B5@prv-mh.provo.novell.com>
+References: <1521132237-31913-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180314182009.14274-12-julien.grall@arm.com>
-Content-Language: en-US
+In-Reply-To: <1521132237-31913-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,18 +17,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: julien.grall@arm.com, xen-devel@lists.xen.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDMvMTQvMjAxOCAwNjoyMCBQTSwganVsaWVuLmdyYWxsQGFybS5jb20gd3JvdGU6Cj4gRnJv
-bTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KPiAKPiBObyBmdW5jdGlvbmFs
-IGNoYW5nZSBpbnRlbmRlZC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGll
-bi5ncmFsbEBhcm0uY29tPgo+IFJldmlld2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXgu
-Y29tPgoKVGhpcyBwYXRjaCBieSBpdHNlbGYgZG9lc24ndCBsb29rIGxpa2UgaXQgYWN0dWFsbHkg
-bWFrZXMgdGhpbmdzIHNpbXBsZXIKaW4gZ2VuZXJhbCwgYnV0IEknbGwgdHJ1c3QgdGhhdCBpdCB3
-aWxsIGluIHRoZSBmdXR1cmU6CgpSZXZpZXdlZC1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1
-bmxhcEBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+Pj4+IE9uIDE1LjAzLjE4IGF0IDE3OjQzLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gK3N0YXRpYyBpbmxpbmUgdm9pZCBlbmFibGVfbm1pcyh2b2lkKQo+ICt7Cj4gKyAgICB1
+bnNpZ25lZCBsb25nIHRtcDsKPiArCj4gKyAgICBhc20gdm9sYXRpbGUgKCAibW92ICUlcnNwLCAl
+W3NwXSAgICAgXG5cdCIKPiArICAgICAgICAgICAgICAgICAgICJwdXNoICVbc3NdICAgICAgICAg
+ICBcblx0Igo+ICsgICAgICAgICAgICAgICAgICAgInB1c2ggJVtzcF0gICAgICAgICAgIFxuXHQi
+Cj4gKyAgICAgICAgICAgICAgICAgICAicHVzaGYgICAgICAgICAgICAgICAgXG5cdCIKPiArICAg
+ICAgICAgICAgICAgICAgICJwdXNoICVbY3NdICAgICAgICAgICBcblx0Igo+ICsgICAgICAgICAg
+ICAgICAgICAgImxlYSAxZiglJXJpcCksICVbaXBdIFxuXHQiCj4gKyAgICAgICAgICAgICAgICAg
+ICAicHVzaCAlW2lwXSAgICAgICAgICAgXG5cdCIKPiArICAgICAgICAgICAgICAgICAgICJpcmV0
+cTsgMTogICAgICAgICAgICBcblx0Igo+ICsgICAgICAgICAgICAgICAgICAgOiBbc3BdICI9ciIg
+KHRtcCksIFtpcF0gIj1yIiAodG1wKQoKU3RyaWN0bHkgc3BlYWtpbmcgdGhpcyBuZWVkcyB0byBi
+ZSAiPSZyIiBpbiBib3RoIGNhc2VzLiBUaGF0J2xsCmd1YXJhbnRlZSB0aGUgY29tcGlsZXIgdG8g
+cGljayB0d28gZGlzdGluY3QgcmVnaXN0ZXJzIChub3Qgc3VyZQpob3cgdGhhdCBlbmRzIHVwIGJl
+aW5nIHdpdGggdGhlIGNvZGUgeW91IGhhdmUpLCB3aGljaCBpcwptb3JlIHRoYW4gd2UgbmVlZCB3
+YW50LiBIb3cgYWJvdXQgaGF2aW5nIGp1c3QgYSBzaW5nbGUKW3RtcF0gb3V0cHV0PwoKV2l0aCBh
+dCBsZWFzdCB0aGUgbWlzc2luZyAmIGFkZGVkClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJl
+dWxpY2hAc3VzZS5jb20+CgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
