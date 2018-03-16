@@ -1,21 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v3 1/4] x86/PVHv2: Add memory map pointer to
- hvm_start_info struct
-Date: Fri, 16 Mar 2018 06:25:58 -0600
-Message-ID: <5AABC5E602000078001B2C6E@prv-mh.provo.novell.com>
-References: <1521149589-21200-1-git-send-email-maran.wilson@oracle.com>
- <1521149589-21200-2-git-send-email-maran.wilson@oracle.com>
- <20180316111125.dvcmgyzglshwqxcc@MacBook-Pro-de-Roger.local>
- <5AABB8A702000078001B2B4B@prv-mh.provo.novell.com>
- <20180316113700.avs6zejqewqfda3j@MacBook-Pro-de-Roger.local>
- <5AABBD0902000078001B2BBD@prv-mh.provo.novell.com>
- <2264231f-02f6-38b4-a6c5-d2bbb8cdc953@suse.com>
+From: Roger Pau Monne <roger.pau@citrix.com>
+Subject: [PATCH v10 08/11] x86/pt: mask MSI vectors on unbind
+Date: Fri, 16 Mar 2018 13:30:05 +0000
+Message-ID: <20180316133008.66443-9-roger.pau@citrix.com>
+References: <20180316133008.66443-1-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <2264231f-02f6-38b4-a6c5-d2bbb8cdc953@suse.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=dokm=gg=citrix.com=prvs=60669260a=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1ewpRq-0002TI-7d
+ for xen-devel@lists.xenproject.org; Fri, 16 Mar 2018 13:31:06 +0000
+In-Reply-To: <20180316133008.66443-1-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,12 +21,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Juergen Gross <jgross@suse.com>
-Cc: andrew.cooper3@citrix.com, boris.ostrovsky@oracle.com, Maran Wilson <maran.wilson@oracle.com>, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE2LjAzLjE4IGF0IDEzOjA1LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBJJ2Qg
-cmVnYXJkIGFuIGFkZHJlc3Mgb2YgemVybyBhbmQgY291bnQgPiAwIGFzIGludmFsaWQuCgpJbmRl
-ZWQuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+V2hlbiBhIE1TSSBkZXZpY2Ugd2l0aCBwZXItdmVjdG9yIG1hc2tpbmcgY2FwYWJpbGl0aWVzIGlz
+IGRldGVjdGVkIG9yCmFkZGVkIHRvIFhlbiBhbGwgdGhlIHZlY3RvcnMgYXJlIG1hc2tlZCB3aGVu
+IGluaXRpYWxpemluZyBpdC4gVGhpcwppbXBsaWVzIHRoYXQgdGhlIGZpcnN0IHRpbWUgdGhlIGlu
+dGVycnVwdCBpcyBib3VuZCB0byBhIGRvbWFpbiBpdCdzCm1hc2tlZC4KClRoaXMgaG93ZXZlciBv
+bmx5IGFwcGxpZXMgdG8gdGhlIGZpcnN0IHRpbWUgdGhlIGludGVycnVwdCBpcyBib3VuZApiZWNh
+dXNlIG5laXRoZXIgdGhlIHVuYmluZCBub3IgdGhlIHBpcnEgdW5tYXAgd2lsbCBtYXNrIHRoZSB2
+ZWN0b3IKYWdhaW4uIEluIG9yZGVyIHRvIGZpeCB0aGlzIHJlLW1hc2sgdGhlIGludGVycnVwdCB3
+aGVuIHVuYmluZGluZyBpdApmcm9tIGEgZ3Vlc3QuIFRoaXMgbWFrZXMgc3VyZSB0aGF0IHBhaXJz
+IG9mIGJpbmQvdW5iaW5kIHdpbGwgYWx3YXlzCmdldCB0aGUgc2FtZSBtYXNraW5nIHN0YXRlLgoK
+Tm90ZSB0aGF0IG5vIGlzc3VlcyBoYXZlIGJlZW4gcmVwb3J0ZWQgcmVnYXJkaW5nIHRoaXMgYmVo
+YXZpb3IgYmVjYXVzZQpRRU1VIGFsd2F5cyB1c2VzIHRoZSBuZXdseSBpbnRyb2R1Y2VkIFhFTl9Q
+VF9HRkxBR1NTSElGVF9VTk1BU0tFRCB3aGVuCmJpbmRpbmcgaW50ZXJydXB0cywgc28gaXQncyBh
+bHdheXMgdW5tYXNrZWQuCgpTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5w
+YXVAY2l0cml4LmNvbT4KUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNv
+bT4KLS0tCkNjOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Ci0tLQpDaGFuZ2VzIHNp
+bmNlIHY3OgogLSBOZXcgaW4gdGhpcyB2ZXJzaW9uLgotLS0KIHhlbi9kcml2ZXJzL3Bhc3N0aHJv
+dWdoL2lvLmMgfCAxNSArKysrKysrKysrKysrKysKIDEgZmlsZSBjaGFuZ2VkLCAxNSBpbnNlcnRp
+b25zKCspCgpkaWZmIC0tZ2l0IGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvaW8uYyBiL3hlbi9k
+cml2ZXJzL3Bhc3N0aHJvdWdoL2lvLmMKaW5kZXggOGYxNmU2YzBhNS4uYmFiM2FhMzQ5YSAxMDA2
+NDQKLS0tIGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvaW8uYworKysgYi94ZW4vZHJpdmVycy9w
+YXNzdGhyb3VnaC9pby5jCkBAIC02NDUsNyArNjQ1LDIyIEBAIGludCBwdF9pcnFfZGVzdHJveV9i
+aW5kKAogICAgICAgICB9CiAgICAgICAgIGJyZWFrOwogICAgIGNhc2UgUFRfSVJRX1RZUEVfTVNJ
+OgorICAgIHsKKyAgICAgICAgdW5zaWduZWQgbG9uZyBmbGFnczsKKyAgICAgICAgc3RydWN0IGly
+cV9kZXNjICpkZXNjID0gZG9tYWluX3NwaW5fbG9ja19pcnFfZGVzYyhkLCBtYWNoaW5lX2dzaSwK
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAmZmxhZ3MpOworCisgICAgICAgIGlmICggIWRlc2MgKQorICAgICAgICAgICAgcmV0dXJuIC1F
+SU5WQUw7CisgICAgICAgIC8qCisgICAgICAgICAqIExlYXZlIHRoZSBNU0kgbWFza2VkLCBzbyB0
+aGF0IHRoZSBzdGF0ZSB3aGVuIGNhbGxpbmcKKyAgICAgICAgICogcHRfaXJxX2NyZWF0ZV9iaW5k
+IGlzIGNvbnNpc3RlbnQgYWNyb3NzIGJpbmQvdW5iaW5kcy4KKyAgICAgICAgICovCisgICAgICAg
+IGd1ZXN0X21hc2tfbXNpX2lycShkZXNjLCB0cnVlKTsKKyAgICAgICAgc3Bpbl91bmxvY2tfaXJx
+cmVzdG9yZSgmZGVzYy0+bG9jaywgZmxhZ3MpOwogICAgICAgICBicmVhazsKKyAgICB9CisKICAg
+ICBkZWZhdWx0OgogICAgICAgICByZXR1cm4gLUVPUE5PVFNVUFA7CiAgICAgfQotLSAKMi4xNi4y
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
