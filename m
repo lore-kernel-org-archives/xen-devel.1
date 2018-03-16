@@ -1,16 +1,14 @@
-From: Naveed Asmat <naveedasmat@hotmail.com>
-Subject: Passthrough a device to DomU on a ARM platform
-Date: Fri, 16 Mar 2018 14:39:27 +0000
-Message-ID: <AM5P189MB0450C2AE4035B4490F66D08DB8D70@AM5P189MB0450.EURP189.PROD.OUTLOOK.COM>
+From: Wim ten Have <wim.ten.have@oracle.com>
+Subject: Re: [PATCH v5 0/2] Containing AER unrecoverable errors
+Date: Fri, 16 Mar 2018 15:49:47 +0100
+Message-ID: <20180316154947.39fac57b.wim.ten.have@oracle.com>
+References: <20180313184341.32266-1-venu.busireddy@oracle.com>
+ <20180316143210.GB10733@char.us.oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2484285205089585850=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=s4uq=gg=hotmail.com=naveedasmat@srs-us1.protection.inumbo.net>)
- id 1ewqW7-0001xV-OC
- for xen-devel@lists.xenproject.org; Fri, 16 Mar 2018 14:39:36 +0000
-Content-Language: en-GB
+In-Reply-To: <20180316143210.GB10733@char.us.oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,82 +17,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: Elena Ufimtseva <elena.ufimtseva@oracle.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Wim ten Have <wim.ten.have@oracle.com>, xen-devel@lists.xen.org, Venu Busireddy <venu.busireddy@oracle.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2484285205089585850==
-Content-Language: en-GB
-Content-Type: multipart/alternative;
-	boundary="_000_AM5P189MB0450C2AE4035B4490F66D08DB8D70AM5P189MB0450EURP_"
-
---_000_AM5P189MB0450C2AE4035B4490F66D08DB8D70AM5P189MB0450EURP_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-
-I am new to Xen and trying to understand how does the VGA passthrough will =
-work on a ARM based hardware.
-
-
-I have come across to a very limited information on this topic online.
-
-
-I will be very grateful if someone can point to the right direction.
-
-
-Kind Regards
-
-Naveed
-
---_000_AM5P189MB0450C2AE4035B4490F66D08DB8D70AM5P189MB0450EURP_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
-n-bottom:0;} --></style>
-</head>
-<body dir=3D"ltr">
-<div id=3D"divtagdefaultwrapper" style=3D"font-size:10pt;color:#000000;font=
--family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
-<p style=3D"margin-top:0;margin-bottom:0">Hi,</p>
-<p style=3D"margin-top:0;margin-bottom:0"><br>
-</p>
-<p style=3D"margin-top:0;margin-bottom:0">I am new to Xen and trying to und=
-erstand how does the VGA&nbsp;passthrough will work on a ARM based hardware=
-.</p>
-<p style=3D"margin-top:0;margin-bottom:0"><br>
-</p>
-<p style=3D"margin-top:0;margin-bottom:0">I have come across to a&nbsp;very=
- limited information on this topic online.</p>
-<p style=3D"margin-top:0;margin-bottom:0"><br>
-</p>
-<p style=3D"margin-top:0;margin-bottom:0">I will be very grateful if someon=
-e can point to the right direction.</p>
-<p style=3D"margin-top:0;margin-bottom:0"><br>
-</p>
-<p style=3D"margin-top:0;margin-bottom:0">Kind Regards</p>
-<p style=3D"margin-top:0;margin-bottom:0">Naveed</p>
-</div>
-</body>
-</html>
-
---_000_AM5P189MB0450C2AE4035B4490F66D08DB8D70AM5P189MB0450EURP_--
-
-
---===============2484285205089585850==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2484285205089585850==--
+T24gRnJpLCAxNiBNYXIgMjAxOCAxMDozMjoxMCAtMDQwMApLb25yYWQgUnplc3p1dGVrIFdpbGsg
+PGtvbnJhZC53aWxrQG9yYWNsZS5jb20+IHdyb3RlOgoKPiBPbiBUdWUsIE1hciAxMywgMjAxOCBh
+dCAwMTo0MzozOVBNIC0wNTAwLCBWZW51IEJ1c2lyZWRkeSB3cm90ZToKPiA+IFRoaXMgcGF0Y2gg
+c2V0IGlzIHBhcnQgb2YgYSBzZXQgb2YgcGF0Y2hlcyB0aGF0IHRvZ2V0aGVyIGFsbG93IGNvbnRh
+aW5tZW50Cj4gPiBvZiB1bnJlY292ZXJhYmxlIEFFUiBlcnJvcnMgZnJvbSBQQ0llIGRldmljZXMg
+YXNzaWduZWQgdG8gZ3Vlc3RzIGluCj4gPiBwYXNzdGhyb3VnaCBtb2RlLiBUaGUgY29udGFpbm1l
+bnQgaXMgYWNoaWV2ZWQgYnkgZm9yY2libHkgcmVtb3ZpbmcgdGhlCj4gPiBlcnJpbmcgUENJZSBk
+ZXZpY2UgZnJvbSB0aGUgZ3Vlc3QuCj4gPiAKPiA+IFRoZSBvcmlnaW5hbCB4ZW4tcGNpYmFjayBw
+YXRjaCBjb3JyZXNwb25kaW5nIHRvIHRoaXMgcGF0Y2ggc2V0IGlzOgo+ID4gaHR0cHM6Ly9saXN0
+cy54ZW4ub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMTctMDYvbXNnMDMyNzQuaHRtbC4K
+PiA+IEl0IHdpbGwgYmUgcmVwb3N0ZWQgYWZ0ZXIgdGhpcyBwYXRjaCBzZXQgaXMgYWNjZXB0ZWQu
+Cj4gPiAKPiA+IENoYW5nZXMgaW4gdjU6Cj4gPiAgICogdjQgd29ya2VkIG9ubHkgaW4gdGhlIGNh
+c2Ugb2YgZ3Vlc3RzIGNyZWF0ZWQgdXNpbmcgJ3hsJyBjb21tYW5kLgo+ID4gICAgIEVuaGFuY2Vk
+IHRoZSBmaXggdG8gd29yayBmb3IgZ3Vlc3RzIGNyZWF0ZWQgdXNpbmcgbGlidmlydCB0b28uICAK
+PiAKPiBBcmUgdGhlcmUgYW55IGxpYnZpcnQgcGF0Y2hlcyBmb3IgdGhpcz8KCiAgTm8sIHRoZSBj
+aGFuZ2UgdG8gbGlieGwgKHhlbmxpZ2h0KSBYZW4gZHJpdmVyIGFkZHMgdGhlIHN1cHBvcnQgdG8K
+ICBsaWJ2aXJ0IHdoZW4gWGVuIGd1ZXN0cyBhcmUgaW4gZWZmZWN0IHBlciB0aGUgbGlidmlydCBs
+b2FkZWQgRFNPLgoKPiA+IENoYW5nZXMgaW4gdjQ6Cj4gPiAgICogTWFkZSB0aGUgZm9sbG93aW5n
+IGNoYW5nZXMgc3VnZ2VzdGVkIGJ5IFdlaSBMaXUuCj4gPiAgICAgLSBDb21iaW5lIG11bHRpcGxl
+IExJQlhMX0hBVkVfKiBkZWZpbml0aW9ucyBpbnRvIG9uZS4KPiA+ICAgICAtIFVzZSBsaWJ4bF9f
+Y2FsbG9jKCkgaW5zdGVhZCBvZiBtYWxsb2MoKS4KPiA+IAo+ID4gQ2hhbmdlcyBpbiB2MzoKPiA+
+ICAgKiBNYWRlIHRoZSBmb2xsb3dpbmcgY2hhbmdlcyBzdWdnZXN0ZWQgYnkgV2VpIExpdS4KPiA+
+ICAgICAtIEFkZGVkIExJQlhMX0hBVkUgbWFjcm9zIHRvIGxpYnhsLmguCj4gPiAgICAgLSBEb24n
+dCBoYXJkLWNvZGUgZG9tMCdzIGRvbWlkIHRvIDAuIEluc3RlYWQsIHVzZSBsaWJ4bF9fZ2V0X2Rv
+bWlkKCkuCj4gPiAgICAgLSBDb3JyZWN0ZWQgY29tbWVudHMuCj4gPiAgICogTWFkZSB0aGUgZm9s
+bG93aW5nIGNoYW5nZXMgYmFzZWQgb24gY29tbWVudHMgZnJvbSBJYW4gSmFja3Nvbi4KPiA+ICAg
+ICAtIEdvdCByaWQgb2YgdGhlIGdsb2JhbCB2YXJpYWJsZSBhZXJfd2F0Y2guCj4gPiAgICAgLSBB
+ZGRlZCBkb2N1bWVudGF0aW9uIChjb21tZW50cyBpbiBjb2RlKSBmb3IgdGhlIG5ldyBBUEkgY2Fs
+bHMuCj4gPiAgICAgLSBSZW1vdmVkIHRoZSB1bm5lY2Vzc2FyeSB3cml0ZXMgdG8geGVuc3RvcmUu
+Cj4gPiAKPiA+IENoYW5nZXMgaW4gdjI6Cj4gPiAgIC0gSW5zdGVhZCBvZiBraWxsaW5nIHRoZSBn
+dWVzdCBhbmQgaGlkaW5nIHRoZSBkZXZpY2UsIGZvcmNpYmx5IHJlbW92ZQo+ID4gICAgIHRoZSBk
+ZXZpY2UgZnJvbSB0aGUgZ3Vlc3QuCj4gPiAKPiA+IFZlbnUgQnVzaXJlZGR5ICgyKToKPiA+ICAg
+bGlieGw6IEltcGxlbWVudCB0aGUgaGFuZGxlciB0byBoYW5kbGUgdW5yZWNvdmVyYWJsZSBBRVIg
+ZXJyb3JzCj4gPiAgIHhsOiBSZWdpc3RlciB0aGUgQUVSIGV2ZW50IGhhbmRsZXIgdGhhdCBoYW5k
+bGVzIEFFUiBlcnJvcnMKPiA+IAo+ID4gIHRvb2xzL2xpYnhsL2xpYnhsLmggICAgICAgICAgfCAg
+IDcgKysrCj4gPiAgdG9vbHMvbGlieGwvbGlieGxfY3JlYXRlLmMgICB8ICAxMSArKystCj4gPiAg
+dG9vbHMvbGlieGwvbGlieGxfZG9tYWluLmMgICB8ICAgMSArCj4gPiAgdG9vbHMvbGlieGwvbGli
+eGxfZXZlbnQuaCAgICB8ICAgNyArKysKPiA+ICB0b29scy9saWJ4bC9saWJ4bF9pbnRlcm5hbC5o
+IHwgICA4ICsrKwo+ID4gIHRvb2xzL2xpYnhsL2xpYnhsX3BjaS5jICAgICAgfCAxMjMgKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+ID4gIHRvb2xzL3hsL3hsX3Zt
+Y29udHJvbC5jICAgICAgfCAgMTQgKysrKy0KPiA+ICA3IGZpbGVzIGNoYW5nZWQsIDE2OCBpbnNl
+cnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+ID4gICAKCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
