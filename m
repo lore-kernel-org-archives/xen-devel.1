@@ -1,15 +1,16 @@
-From: Venu Busireddy <venu.busireddy@oracle.com>
-Subject: Re: [PATCH v5 0/2] Containing AER unrecoverable errors
-Date: Fri, 16 Mar 2018 09:40:35 -0500
-Message-ID: <20180316144035.GA9320@vbusired-dt>
-References: <20180313184341.32266-1-venu.busireddy@oracle.com>
- <20180316143210.GB10733@char.us.oracle.com>
+From: Naveed Asmat <naveedasmat@hotmail.com>
+Subject: Passthrough a device to DomU on a ARM platform
+Date: Fri, 16 Mar 2018 14:39:27 +0000
+Message-ID: <AM5P189MB0450C2AE4035B4490F66D08DB8D70@AM5P189MB0450.EURP189.PROD.OUTLOOK.COM>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2484285205089585850=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <20180316143210.GB10733@char.us.oracle.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
+ <srs0=s4uq=gg=hotmail.com=naveedasmat@srs-us1.protection.inumbo.net>)
+ id 1ewqW7-0001xV-OC
+ for xen-devel@lists.xenproject.org; Fri, 16 Mar 2018 14:39:36 +0000
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,51 +19,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-Cc: Elena Ufimtseva <elena.ufimtseva@oracle.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Wim Ten Have <wim.ten.have@oracle.com>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAxOC0wMy0xNiAxMDozMjoxMCAtMDQwMCwgS29ucmFkIFJ6ZXN6dXRlayBXaWxrIHdyb3Rl
-Ogo+IE9uIFR1ZSwgTWFyIDEzLCAyMDE4IGF0IDAxOjQzOjM5UE0gLTA1MDAsIFZlbnUgQnVzaXJl
-ZGR5IHdyb3RlOgo+ID4gVGhpcyBwYXRjaCBzZXQgaXMgcGFydCBvZiBhIHNldCBvZiBwYXRjaGVz
-IHRoYXQgdG9nZXRoZXIgYWxsb3cgY29udGFpbm1lbnQKPiA+IG9mIHVucmVjb3ZlcmFibGUgQUVS
-IGVycm9ycyBmcm9tIFBDSWUgZGV2aWNlcyBhc3NpZ25lZCB0byBndWVzdHMgaW4KPiA+IHBhc3N0
-aHJvdWdoIG1vZGUuIFRoZSBjb250YWlubWVudCBpcyBhY2hpZXZlZCBieSBmb3JjaWJseSByZW1v
-dmluZyB0aGUKPiA+IGVycmluZyBQQ0llIGRldmljZSBmcm9tIHRoZSBndWVzdC4KPiA+IAo+ID4g
-VGhlIG9yaWdpbmFsIHhlbi1wY2liYWNrIHBhdGNoIGNvcnJlc3BvbmRpbmcgdG8gdGhpcyBwYXRj
-aCBzZXQgaXM6Cj4gPiBodHRwczovL2xpc3RzLnhlbi5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2
-ZWwvMjAxNy0wNi9tc2cwMzI3NC5odG1sLgo+ID4gSXQgd2lsbCBiZSByZXBvc3RlZCBhZnRlciB0
-aGlzIHBhdGNoIHNldCBpcyBhY2NlcHRlZC4KPiA+IAo+ID4gQ2hhbmdlcyBpbiB2NToKPiA+ICAg
-KiB2NCB3b3JrZWQgb25seSBpbiB0aGUgY2FzZSBvZiBndWVzdHMgY3JlYXRlZCB1c2luZyAneGwn
-IGNvbW1hbmQuCj4gPiAgICAgRW5oYW5jZWQgdGhlIGZpeCB0byB3b3JrIGZvciBndWVzdHMgY3Jl
-YXRlZCB1c2luZyBsaWJ2aXJ0IHRvby4KPiAKPiBBcmUgdGhlcmUgYW55IGxpYnZpcnQgcGF0Y2hl
-cyBmb3IgdGhpcz8KCk5vLiBUaGVyZSBpcyBubyBjaGFuZ2UgdG8gbGlidmlydCBpdHNlbGYuIEFs
-bCB0aGUgY2hhbmdlcyBhcmUgY29udGFpbmVkCndpdGhpbiB4bCBhbmQgeGVuLXBjaWJhY2suCgpW
-ZW51Cgo+ID4gCj4gPiBDaGFuZ2VzIGluIHY0Ogo+ID4gICAqIE1hZGUgdGhlIGZvbGxvd2luZyBj
-aGFuZ2VzIHN1Z2dlc3RlZCBieSBXZWkgTGl1Lgo+ID4gICAgIC0gQ29tYmluZSBtdWx0aXBsZSBM
-SUJYTF9IQVZFXyogZGVmaW5pdGlvbnMgaW50byBvbmUuCj4gPiAgICAgLSBVc2UgbGlieGxfX2Nh
-bGxvYygpIGluc3RlYWQgb2YgbWFsbG9jKCkuCj4gPiAKPiA+IENoYW5nZXMgaW4gdjM6Cj4gPiAg
-ICogTWFkZSB0aGUgZm9sbG93aW5nIGNoYW5nZXMgc3VnZ2VzdGVkIGJ5IFdlaSBMaXUuCj4gPiAg
-ICAgLSBBZGRlZCBMSUJYTF9IQVZFIG1hY3JvcyB0byBsaWJ4bC5oLgo+ID4gICAgIC0gRG9uJ3Qg
-aGFyZC1jb2RlIGRvbTAncyBkb21pZCB0byAwLiBJbnN0ZWFkLCB1c2UgbGlieGxfX2dldF9kb21p
-ZCgpLgo+ID4gICAgIC0gQ29ycmVjdGVkIGNvbW1lbnRzLgo+ID4gICAqIE1hZGUgdGhlIGZvbGxv
-d2luZyBjaGFuZ2VzIGJhc2VkIG9uIGNvbW1lbnRzIGZyb20gSWFuIEphY2tzb24uCj4gPiAgICAg
-LSBHb3QgcmlkIG9mIHRoZSBnbG9iYWwgdmFyaWFibGUgYWVyX3dhdGNoLgo+ID4gICAgIC0gQWRk
-ZWQgZG9jdW1lbnRhdGlvbiAoY29tbWVudHMgaW4gY29kZSkgZm9yIHRoZSBuZXcgQVBJIGNhbGxz
-Lgo+ID4gICAgIC0gUmVtb3ZlZCB0aGUgdW5uZWNlc3Nhcnkgd3JpdGVzIHRvIHhlbnN0b3JlLgo+
-ID4gCj4gPiBDaGFuZ2VzIGluIHYyOgo+ID4gICAtIEluc3RlYWQgb2Yga2lsbGluZyB0aGUgZ3Vl
-c3QgYW5kIGhpZGluZyB0aGUgZGV2aWNlLCBmb3JjaWJseSByZW1vdmUKPiA+ICAgICB0aGUgZGV2
-aWNlIGZyb20gdGhlIGd1ZXN0Lgo+ID4gCj4gPiBWZW51IEJ1c2lyZWRkeSAoMik6Cj4gPiAgIGxp
-YnhsOiBJbXBsZW1lbnQgdGhlIGhhbmRsZXIgdG8gaGFuZGxlIHVucmVjb3ZlcmFibGUgQUVSIGVy
-cm9ycwo+ID4gICB4bDogUmVnaXN0ZXIgdGhlIEFFUiBldmVudCBoYW5kbGVyIHRoYXQgaGFuZGxl
-cyBBRVIgZXJyb3JzCj4gPiAKPiA+ICB0b29scy9saWJ4bC9saWJ4bC5oICAgICAgICAgIHwgICA3
-ICsrKwo+ID4gIHRvb2xzL2xpYnhsL2xpYnhsX2NyZWF0ZS5jICAgfCAgMTEgKysrLQo+ID4gIHRv
-b2xzL2xpYnhsL2xpYnhsX2RvbWFpbi5jICAgfCAgIDEgKwo+ID4gIHRvb2xzL2xpYnhsL2xpYnhs
-X2V2ZW50LmggICAgfCAgIDcgKysrCj4gPiAgdG9vbHMvbGlieGwvbGlieGxfaW50ZXJuYWwuaCB8
-ICAgOCArKysKPiA+ICB0b29scy9saWJ4bC9saWJ4bF9wY2kuYyAgICAgIHwgMTIzICsrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKPiA+ICB0b29scy94bC94bF92bWNv
-bnRyb2wuYyAgICAgIHwgIDE0ICsrKystCj4gPiAgNyBmaWxlcyBjaGFuZ2VkLCAxNjggaW5zZXJ0
-aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKPiA+IAoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+--===============2484285205089585850==
+Content-Language: en-GB
+Content-Type: multipart/alternative;
+	boundary="_000_AM5P189MB0450C2AE4035B4490F66D08DB8D70AM5P189MB0450EURP_"
+
+--_000_AM5P189MB0450C2AE4035B4490F66D08DB8D70AM5P189MB0450EURP_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+
+I am new to Xen and trying to understand how does the VGA passthrough will =
+work on a ARM based hardware.
+
+
+I have come across to a very limited information on this topic online.
+
+
+I will be very grateful if someone can point to the right direction.
+
+
+Kind Regards
+
+Naveed
+
+--_000_AM5P189MB0450C2AE4035B4490F66D08DB8D70AM5P189MB0450EURP_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
+n-bottom:0;} --></style>
+</head>
+<body dir=3D"ltr">
+<div id=3D"divtagdefaultwrapper" style=3D"font-size:10pt;color:#000000;font=
+-family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
+<p style=3D"margin-top:0;margin-bottom:0">Hi,</p>
+<p style=3D"margin-top:0;margin-bottom:0"><br>
+</p>
+<p style=3D"margin-top:0;margin-bottom:0">I am new to Xen and trying to und=
+erstand how does the VGA&nbsp;passthrough will work on a ARM based hardware=
+.</p>
+<p style=3D"margin-top:0;margin-bottom:0"><br>
+</p>
+<p style=3D"margin-top:0;margin-bottom:0">I have come across to a&nbsp;very=
+ limited information on this topic online.</p>
+<p style=3D"margin-top:0;margin-bottom:0"><br>
+</p>
+<p style=3D"margin-top:0;margin-bottom:0">I will be very grateful if someon=
+e can point to the right direction.</p>
+<p style=3D"margin-top:0;margin-bottom:0"><br>
+</p>
+<p style=3D"margin-top:0;margin-bottom:0">Kind Regards</p>
+<p style=3D"margin-top:0;margin-bottom:0">Naveed</p>
+</div>
+</body>
+</html>
+
+--_000_AM5P189MB0450C2AE4035B4490F66D08DB8D70AM5P189MB0450EURP_--
+
+
+--===============2484285205089585850==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2484285205089585850==--
