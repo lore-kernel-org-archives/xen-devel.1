@@ -1,17 +1,22 @@
-From: John Thomson <lists@johnthomson.fastmail.com.au>
-Subject: Request for Xen SeaBIOS git head / branch to follow or
- include Xen staging tag
-Date: Fri, 16 Mar 2018 12:16:44 +1000
-Message-ID: <1521166604.2209387.1304982880.5D8DABA0@webmail.messagingengine.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v3 1/6] x86: NOP out XPTI entry/exit code
+ when it's not in use
+Date: Fri, 16 Mar 2018 06:45:12 +0100
+Message-ID: <d27ec8ed-4701-c465-8222-f51c20467e70@suse.com>
+References: <5AA7E24402000078001B0F41@prv-mh.provo.novell.com>
+ <5AA7E49502000078001B0F50@prv-mh.provo.novell.com>
+ <0be1a848-0526-749e-2e04-0abc493e93ed@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=whbe=gg=johnthomson.fastmail.com.au=lists@srs-us1.protection.inumbo.net>)
- id 1ewevL-0005v9-Ec
- for xen-devel@lists.xenproject.org; Fri, 16 Mar 2018 02:16:51 +0000
+ by lists.xenproject.org with esmtp (Exim 4.84_2)
+ (envelope-from <srs0=cjyy=gg=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1ewiB7-0006JW-I2
+ for xen-devel@lists.xenproject.org; Fri, 16 Mar 2018 05:45:21 +0000
+In-Reply-To: <0be1a848-0526-749e-2e04-0abc493e93ed@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,18 +25,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: wei.liu2@citrix.com
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpDb3VsZCB0aGVyZSBwbGVhc2UgYmUgYSBicmFuY2ggb2YgdGhlIFhlbiBTZWFCSU9TIHJl
-cG9zaXRvcnkgdG8gdHJhY2sgb3IgaW5jbHVkZSB0aGUgbGF0ZXN0IHRhZyB1c2VkIGJ5IFhlbiBz
-dGFnaW5nPwpKdXN0IGZvciBlYXNlIG9mIHVzZS4gQWxsIHRoZSBvdGhlciBYZW4gZGVwZW5kZW5j
-eSByZXBvc2l0b3JpZXMgZG8gdGhpcy4KClhlbiBzdGFnaW5nIGN1cnJlbnRseSBwb2ludHMgdG8g
-U2VhQklPUyByZWwtMS4xMC4yLiBUaGlzIGlzIG5vdCBpbiBhIG5hbWVkIGhlYWQgb24gdGhlIHJl
-cG9zaXRvcnkuClhlbiBTZWFCSU9TIG1hc3RlciBpcyBjdXJyZW50bHkgcHJpb3IgdG8gcmVsLTEu
-MTAuMC4KaHR0cHM6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXNlYWJpb3MuZ2l0O2E9c3Vt
-bWFyeQoKQ2hlZXJzLAotLSAKICBKb2huIFRob21zb24KCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTUvMDMvMTggMjA6NDQsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4gT24gMTMvMDMvMTggMTM6
+NDcsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBJbnRyb2R1Y2UgYSBzeW50aGV0aWMgZmVhdHVyZSBm
+bGFnIHRvIHVzZSBhbHRlcm5hdGl2ZSBpbnN0cnVjdGlvbgo+PiBwYXRjaGluZyB0byBOT1Agb3V0
+IGFsbCBjb2RlIG9uIGVudHJ5L2V4aXQgcGF0aHMuIEhhdmluZyBOT1BzIGhlcmUgaXMKPj4gZ2Vu
+ZXJhbGx5IGJldHRlciB0aGFuIHVzaW5nIGNvbmRpdGlvbmFsIGJyYW5jaGVzLgo+Pgo+PiBBbHNv
+IGNoYW5nZSB0aGUgbGltaXQgb24gdGhlIG51bWJlciBvZiBieXRlcyB3ZSBjYW4gcGF0Y2ggaW4g
+b25lIGdvIHRvCj4+IHRoYXQgcmVzdWx0aW5nIGZyb20gdGhlIGVuY29kaW5nIGluIHN0cnVjdCBh
+bHRfaW5zdHIgLSB0aGVyZSdzIG5vIHBvaW50Cj4+IHJlZHVjaW5nIGl0IGJlbG93IHRoYXQgbGlt
+aXQsIGFuZCB3aXRob3V0IGEgY2hlY2sgYmVpbmcgaW4gcGxhY2UgdGhhdAo+PiB0aGUgbGltaXQg
+aXNuJ3QgYWN0dWFsbHkgZXhjZWVkZWQsIHN1Y2ggYW4gYXJ0aWZpY2lhbCBib3VuZGFyeSBpcyBh
+Cj4+IGxhdGVudCByaXNrLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxp
+Y2hAc3VzZS5jb20+Cj4+IFRlc3RlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29t
+Pgo+PiBSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgo+IAo+IEkn
+bSBhZnJhaWQgdGhhdCBJIHN0aWxsIGhhdmUgbWlzZ2l2aW5ncyBhYm91dCB0aGlzIHBhdGNoLgo+
+IAo+IFdoaWxlIEknbSBxdWl0ZSB3aWxsaW5nIHRvIHRydXN0IHRoYXQgaXQgZnVuY3Rpb25zIGNv
+cnJlY3RseSwgaXQgaXMKPiB0YWtpbmcgYSBzb21lIGNvZGUgd2hpY2ggaXMgYWxtb3N0IGltcG9z
+c2libGUgdG8gZm9sbG93IGFscmVhZHksIGFuZAo+IG1ha2luZyBpdCBzdWJzdGFudGlhbGx5IG1v
+cmUgY29tcGxpY2F0ZWQgdG8gZm9sbG93LCBmb3Igd2hhdCBhcHBlYXJzIHRvCj4gYmUgYSBmcmFj
+dGlvbmFsIGdhaW4uCj4gCj4gVGhlIHR3byBkaXN0aW5jdCBhcmVhcyBvZiBjb25jZXJuIGFyZSB0
+aGUgc3BsaXQgaW50ZXJydXB0IHJlLWVuYWJsZW1lbnQKPiAod2hpY2ggcmVhbGx5IGRvZXNuJ3Qg
+YnV5IHVzIGFueXRoaW5nIHVzZWZ1bCksIGFuZCBob3cgb2J2aW91cyB0aGUKPiBub3BwaW5nIGlz
+ICh3aGVyZSBpbiB0aGUgLkx4Y3B0X2NyM19zdGFydCBjYXNlLCB0aGUgQUxURVJOQVRJVkVfTk9Q
+IGlzCj4gMTExIGxpbmVzICghKSBhd2F5IGZyb20gdGhlIGNvZGUgaXQgYXBwbGllcyB0bykuCj4g
+Cj4gSS5lLiBJJ20gc3RydWdnbGluZyB0byBkZWNpZGUgd2hldGhlciBpdCBmYWxscyBpbnRvIHRo
+ZSBjYXRlZ29yeSBvZgo+IHVubmVjZXNzYXJ5IG1pY3JvLW9wdGltaXNhdGlvbiBvciBub3QuCj4g
+Cj4gVGhlcmVmb3JlLCBJJ2QgbGlrZSB0byBjb25zaWRlciB3aGF0IG90aGVyIFhQVEkgY2hhbmdl
+cyB3ZSdyZSBleHBlY3RpbmcKPiB0byBnZXQsIGFuZCB3aGV0aGVyIHRob3NlIGhhdmUgYW4gaW1w
+YWN0Lgo+IAo+IEkndmUgZ290IGEgcGF0Y2ggKHdoaWNoIEkndmUgbm90IGhhZCB0aW1lIHRvIHN1
+Ym1pdCB1cHN0cmVhbSB5ZXQsIGJ1dAo+IHdvdWxkIGxpa2UgdG8gZ2V0IGluIGZvciA0LjExKSB3
+aGljaCBpbXBsZW1lbnRzIGEgY3J1ZGUgIm5vIFhQVEkgZm9yCj4gZG9tMCIgbW9kZS7CoCBQZXJm
+b3JtYW5jZSB0ZXN0aW5nIHNob3dzIHRoYXQgaW4gc2NlbmFyaW9zIHJ1bm5pbmcgb25seQo+IEhW
+TSBndWVzdHMgKGEgdmVyeSBjb21tb24gWGVuU2VydmVyIHNldHVwKSwgdGhlIGRpZmZlcmVuY2Ug
+YmV0d2VlbiBkb20wCj4gWFBUSS1uZXNzIGNhbiBiZSB1cCB0byA0MCUgaW4gdGVybXMgb2YgYWdn
+cmVnYXRlIG5ldHdvcmsvZGlzayB0aHJvdWdocHV0LgoKVGhhdCdzIHNvbWV0aGluZyBteSBzZXJp
+ZXMgaXMgY292ZXJpbmcgYWxyZWFkeS4KClJpZ2h0IG5vdyBJJ20gaHVudGluZyBhIGJ1ZyBpbiBt
+eSBQQ0lEIHBhdGNoICh0aGUgbGFzdCBvZiBteSBzZXJpZXMpCndoaWNoIHNlZW1zIHRvIHJlbGF0
+ZSB0byB0aGUgSU5WUENJRCBhZGFwdGlvbnMgSSd2ZSBtYWRlIGFkZHJlc3NpbmcgdGhlCmNvbW1l
+bnRzIHRvIFYyIG9mIG15IHNlcmllcy4KCkkgY2FuIHBvc3QgbXkgc2VyaWVzIHdpdGhvdXQgdGhl
+IGxhc3QgcGF0Y2ggaWYgeW91IHdhbnQuIFRoaXMgd2lsbCBnaXZlCmEgc3BlZWR1cCBvZiB0aGUg
+c2ltcGxlIGNvbXBpbGF0aW9uIGJlbmNobWFyayBvZiBhYm91dCAyMCUgc3lzdGVtIHRpbWUKYW5k
+IDEyJSBlbGFwc2VkIHRpbWUuIEFuZCBpdCB3aWxsIGhhdmUgdGhlIGRvbTAgd2l0aG91dCBYUFRJ
+IG9wdGlvbi4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
