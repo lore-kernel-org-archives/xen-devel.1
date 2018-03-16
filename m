@@ -1,19 +1,20 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 17/45] Add list_sort() routine from Linux
-Date: Fri, 16 Mar 2018 04:47:29 -0600
-Message-ID: <5AABAED102000078001B2A69@prv-mh.provo.novell.com>
+Subject: Re: [PATCH v2 45/45] ARM: VGIC: wire new VGIC(-v2)
+ files into Xen build system
+Date: Fri, 16 Mar 2018 04:48:58 -0600
+Message-ID: <5AABAF2A02000078001B2A6C@prv-mh.provo.novell.com>
 References: <20180315203050.19791-1-andre.przywara@linaro.org>
- <20180315203050.19791-18-andre.przywara@linaro.org>
+ <20180315203050.19791-46-andre.przywara@linaro.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2)
  (envelope-from <srs0=krzt=gg=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ewmtX-0008MM-FN
- for xen-devel@lists.xenproject.org; Fri, 16 Mar 2018 10:47:31 +0000
-In-Reply-To: <20180315203050.19791-18-andre.przywara@linaro.org>
+ id 1ewmv4-0000Bw-VY
+ for xen-devel@lists.xenproject.org; Fri, 16 Mar 2018 10:49:07 +0000
+In-Reply-To: <20180315203050.19791-46-andre.przywara@linaro.org>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,13 +29,14 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, 
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IE9uIDE1LjAzLjE4IGF0IDIxOjMwLCA8YW5kcmUucHJ6eXdhcmFAbGluYXJvLm9yZz4gd3Jv
-dGU6Cj4gVGhpcyBwdWxscyBpbiBMaW51eCcgbGlzdF9zb3J0LmMsIHdoaWNoIGlzIGEgbWVyZ2Ug
-c29ydCBpbXBsZW1lbnRhdGlvbgo+IGZvciBsaW5rZWQgbGlzdHMuIEFwYXJ0IGZyb20gYWRkaW5n
-IGEgZnVsbCBmZWF0dXJlZCBsaWNlbnNlIGhlYWRlciBhbmQKPiBhZGp1c3RpbmcgdGhlICNpbmNs
-dWRlIGZpbGUsIG5vdGhpbmcgaGFzIGJlZW4gY2hhbmdlZCBpbiB0aGlzIGNvZGUuCgpQbGVhc2Ug
-bWVudGlvbiB0aGUgdmVyc2lvbiBvZiBMaW51eCB0aGlzIHdhcyB0YWtlbiBmcm9tLCB0byBlYXNl
-CmxhdGVyIGRldGVybWluYXRpb24gb2YgYXBwbGljYWJpbGl0eSB0byBvdXIgdHJlZSBvZiBjaGFu
-Z2VzIHRoZXkgZG8uCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+dGU6Cj4gLS0tIGEveGVuL2NvbW1vbi9NYWtlZmlsZQo+ICsrKyBiL3hlbi9jb21tb24vTWFrZWZp
+bGUKPiBAQCAtMTksNiArMTksNyBAQCBvYmoteSArPSBrZXloYW5kbGVyLm8KPiAgb2JqLSQoQ09O
+RklHX0tFWEVDKSArPSBrZXhlYy5vCj4gIG9iai0kKENPTkZJR19LRVhFQykgKz0ga2ltYWdlLm8K
+PiAgb2JqLXkgKz0gbGliLm8KPiArb2JqLXkgKz0gbGlzdF9zb3J0Lm8KCldoeSBoZXJlIHJhdGhl
+ciB0aGFuIGluIHBhdGNoIDE3PyBBbmQgd2h5IGFsc28gZm9yIHg4Nj8gSSB0aGluayB5b3UKd2Fu
+dCBhIHByb21wdGxlc3MgS2NvbmZpZyBvcHRpb24gdGhhdCBhbiBhcmNoIGNhbiBzZWxlY3QgaWYg
+aXQgbmVlZHMKdGhpcyBjb2RlLCB1bmxlc3Mgb3IgdW50aWwgY29tbW9uIGNvZGUgbWFrZXMgdXNl
+IG9mIGl0LgoKSmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
