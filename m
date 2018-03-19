@@ -1,20 +1,16 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v2 18/45] ARM: new VGIC: Add IRQ sorting
-Date: Mon, 19 Mar 2018 12:51:45 +0000
-Message-ID: <8a83b532-ed74-11c2-575f-fb55b1cd851d@arm.com>
-References: <20180315203050.19791-1-andre.przywara@linaro.org>
- <20180315203050.19791-19-andre.przywara@linaro.org>
+From: Dongli Zhang <dongli.zhang@oracle.com>
+Subject: What is the option 'e' used for in 'xl create' command
+Date: Mon, 19 Mar 2018 13:14:19 +0800
+Message-ID: <36a98a9f-a164-8fb6-7dc1-e662184ff22d@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=wrgj=gj=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1exmmP-0002SG-1C
- for xen-devel@lists.xenproject.org; Mon, 19 Mar 2018 04:52:17 +0000
-In-Reply-To: <20180315203050.19791-19-andre.przywara@linaro.org>
-Content-Language: en-US
+ <srs0=hzvw=gj=oracle.com=dongli.zhang@srs-us1.protection.inumbo.net>)
+ id 1exn6l-0004BM-5k
+ for xen-devel@lists.xenproject.org; Mon, 19 Mar 2018 05:13:19 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,19 +19,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andre Przywara <andre.przywara@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgQW5kcmUsCgpPbiAwMy8xNS8yMDE4IDA4OjMwIFBNLCBBbmRyZSBQcnp5d2FyYSB3cm90ZToK
-PiBBZGRzIHRoZSBzb3J0aW5nIGZ1bmN0aW9uIHRvIGNvdmVyIHRoZSBjYXNlIHdoZXJlIHlvdSBo
-YXZlIG1vcmUgSVJRcwo+IHRvIGNvbnNpZGVyIHRoYW4geW91IGhhdmUgTFJzLiBXZSBjb25zaWRl
-ciB0aGVpciBwcmlvcml0aWVzLgo+IFRoaXMgdXNlcyB0aGUgbmV3IHNvcnRfbGlzdCgpIGltcGxl
-bWVudGF0aW9uIGltcG9ydGVkIGZyb20gTGludXguCj4gCj4gVGhpcyBpcyBiYXNlZCBvbiBMaW51
-eCBjb21taXQgOGU0NDQ3NDU3OTY1LCB3cml0dGVuIGJ5IENocmlzdG9mZmVyIERhbGwuCj4gCj4g
-U2lnbmVkLW9mZi1ieTogQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnByenl3YXJhQGxpbmFyby5vcmc+
-CgpSZXZpZXdlZC1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCkNoZWVy
-cywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+SGksCgpUaGVyZSBpcyBhbiAnZScgb3B0aW9uIHdoZW4gcnVubmluZyB0aGUgZm9sbG93aW5nIHhs
+IGNvbW1hbmQ6CgotIHhsIGNyZWF0ZQotIHhsIHJlc3RvcmUKLSB4bCBtaWdyYXRlCi0geGwgcmVt
+dXMKClRoZSAnZScgb3B0aW9uIGlzIHVzZWQgdG8gIkRvIG5vdCB3YWl0IGluIHRoZSBiYWNrZ3Jv
+dW5kIChvbiA8aG9zdD4pIGZvciB0aGUKZGVhdGggb2YgdGhlIGRvbWFpbiIuIFRoaXMgb3B0aW9u
+IGRhdGVzIGJhY2sgdG8gRGVjIDIwMDkuCgpXb3VsZCB5b3UgcGxlYXNlIGhlbHAgbWUgdW5kZXJz
+dGFuZCB0aGUgb2JqZWN0aXZlIG9mIHRoZSBiZWxvdyBwYXRjaCBpbnRyb2R1Y2VkCmluIERlYyAy
+MDA5PwoKaHR0cHM6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhlbi5naXQ7YT1jb21taXQ7
+aD1kZTdjOTEwNmMxYTIyYzBmZDc1OWNlZmNlY2YyYzQyOGU1YTc2YTAwCgpUaGFuayB5b3UgdmVy
+eSBtdWNoIGZvciB5b3VyIGhlbHAhCgpEb25nbGkgWmhhbmcKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
