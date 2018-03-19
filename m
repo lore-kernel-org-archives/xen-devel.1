@@ -1,20 +1,12 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH] x86/xen: Delay get_cpu_cap until stack
- canary is established
-Date: Mon, 19 Mar 2018 18:22:12 -0400
-Message-ID: <0726a193-6ce9-e835-9eef-01c56680d30a__14154.8369116665$1521497996$gmane$org@oracle.com>
-References: <20180319165804.10636-1-jandryuk@gmail.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH v2] xen: fix null sched build with debug=n
+Date: Mon, 19 Mar 2018 23:39:24 +0100
+Message-ID: <1521499164.5400.93.camel@suse.com>
+References: <20180319184115.20957-1-cardoe@cardoe.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5576506777934970092=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=okmi=gj=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1ey39K-0004qF-Sm
- for xen-devel@lists.xenproject.org; Mon, 19 Mar 2018 22:21:02 +0000
-In-Reply-To: <20180319165804.10636-1-jandryuk@gmail.com>
-Content-Language: en-US
+In-Reply-To: <20180319184115.20957-1-cardoe@cardoe.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,44 +15,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jason Andryuk <jandryuk@gmail.com>, Juergen Gross <jgross@suse.com>
-Cc: x86@kernel.org, linux-kernel@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>
+To: Doug Goldstein <cardoe@cardoe.com>, xen-devel@lists.xen.org
+Cc: George Dunlap <george.dunlap@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDMvMTkvMjAxOCAxMjo1OCBQTSwgSmFzb24gQW5kcnl1ayB3cm90ZToKPiBDb21taXQgMmNj
-NDJiYWMxYzc5ICgieDg2LTY0L1hlbjogZWxpbWluYXRlIFcrWCBtYXBwaW5ncyIpIGludHJvZHVj
-ZWQgYQo+IGNhbGwgdG8gZ2V0X2NwdV9jYXAsIHdoaWNoIGlzIGZzdGFjay1wcm90ZWN0ZWQuICBU
-aGlzIGlzIHdvcmtzIG9uIHg4Ni02NAoKcy9UaGlzIGlzIHdvcmtzL1RoaXMgd29ya3MvCgpSZXZp
-ZXdlZC1ieTogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT4KCkRv
-IHdlIHN0aWxsIG5lZWQgNGYyNzcyOTVlNTQ/CgotYm9yaXMKCj4gYXMgY29tbWl0IDRmMjc3Mjk1
-ZTU0YyAoIng4Ni94ZW46IGluaXQgJWdzIHZlcnkgZWFybHkgdG8gYXZvaWQgcGFnZQo+IGZhdWx0
-cyB3aXRoIHN0YWNrIHByb3RlY3RvciIpIGVuc3VyZXMgdGhlIHN0YWNrIHByb3RlY3RvciBpcyBj
-b25maWd1cmVkLAo+IGJ1dCBpdCBpdCBkaWQgbm90IGNvdmVyIHg4Ni0zMi4KPgo+IERlbGF5IGNh
-bGxpbmcgZ2V0X2NwdV9jYXAgdW50aWwgYWZ0ZXIgeGVuX3NldHVwX2dkdCBoYXMgaW5pdGlhbGl6
-ZWQgdGhlCj4gc3RhY2sgY2FuYXJ5LiAgV2l0aG91dCB0aGlzLCBhIDMyYml0IFBWIG1hY2hpbmUg
-Y3Jhc2hlcyBlYXJseQo+IGluIGJvb3QuCj4gKFhFTikgRG9tYWluIDAgKHZjcHUjMCkgY3Jhc2hl
-ZCBvbiBjcHUjMDoKPiAoWEVOKSAtLS0tWyBYZW4tNC42LjYteGMgIHg4Nl82NCAgZGVidWc9biAg
-VGFpbnRlZDogICAgQyBdLS0tLQo+IChYRU4pIENQVTogICAgMAo+IChYRU4pIFJJUDogICAgZTAx
-OTpbPDAwMDAwMDAwYzEwMzYyZjg+XQo+Cj4gQW5kIHRoZSBQViBrZXJuZWwgSVAgY29ycmVzcG9u
-ZHMgdG8gaW5pdF9zY2F0dGVyZWRfY3B1aWRfZmVhdHVyZXMKPiAgICAweGMxMDM2MmY4IDwrMjQ+
-OiAgICBtb3YgICAgJWdzOjB4MTQsJWVheAo+Cj4gRml4ZXMgMmNjNDJiYWMxYzc5ICgieDg2LTY0
-L1hlbjogZWxpbWluYXRlIFcrWCBtYXBwaW5ncyIpCj4KPiBTaWduZWQtb2ZmLWJ5OiBKYXNvbiBB
-bmRyeXVrIDxqYW5kcnl1a0BnbWFpbC5jb20+Cj4gLS0tCj4gIGFyY2gveDg2L3hlbi9lbmxpZ2h0
-ZW5fcHYuYyB8IDggKysrKy0tLS0KPiAgMSBmaWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwg
-NCBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2
-LmMgYi9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMKPiBpbmRleCAzYzJjMjUzMDczN2UuLmMz
-NmQyM2FhNmMzNSAxMDA2NDQKPiAtLS0gYS9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMKPiAr
-KysgYi9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMKPiBAQCAtMTI1OSwxMCArMTI1OSw2IEBA
-IGFzbWxpbmthZ2UgX192aXNpYmxlIHZvaWQgX19pbml0IHhlbl9zdGFydF9rZXJuZWwodm9pZCkK
-PiAgCSAqLwo+ICAJX191c2VycHRlX2FsbG9jX2dmcCAmPSB+X19HRlBfSElHSE1FTTsKPiAgCj4g
-LQkvKiBXb3JrIG91dCBpZiB3ZSBzdXBwb3J0IE5YICovCj4gLQlnZXRfY3B1X2NhcCgmYm9vdF9j
-cHVfZGF0YSk7Cj4gLQl4ODZfY29uZmlndXJlX254KCk7Cj4gLQo+ICAJLyogR2V0IG1mbiBsaXN0
-ICovCj4gIAl4ZW5fYnVpbGRfZHluYW1pY19waHlzX3RvX21hY2hpbmUoKTsKPiAgCj4gQEAgLTEy
-NzIsNiArMTI2OCwxMCBAQCBhc21saW5rYWdlIF9fdmlzaWJsZSB2b2lkIF9faW5pdCB4ZW5fc3Rh
-cnRfa2VybmVsKHZvaWQpCj4gIAkgKi8KPiAgCXhlbl9zZXR1cF9nZHQoMCk7Cj4gIAo+ICsJLyog
-V29yayBvdXQgaWYgd2Ugc3VwcG9ydCBOWCAqLwo+ICsJZ2V0X2NwdV9jYXAoJmJvb3RfY3B1X2Rh
-dGEpOwo+ICsJeDg2X2NvbmZpZ3VyZV9ueCgpOwo+ICsKPiAgCXhlbl9pbml0X2lycV9vcHMoKTsK
-PiAgCj4gIAkvKiBMZXQncyBwcmVzdW1lIFBWIGd1ZXN0cyBhbHdheXMgYm9vdCBvbiB2Q1BVIHdp
-dGggaWQgMC4gKi8KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============5576506777934970092==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-uOaAacC555cS9/Xm3UWH"
+
+
+--=-uOaAacC555cS9/Xm3UWH
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, 2018-03-19 at 13:41 -0500, Doug Goldstein wrote:
+> The null_dom() static inline is just used when debug=3Dy so it results
+> in
+> a error with the default CFLAGS and debug=3Dn. This function is used in
+> only one place and it a one line helper so remove it until we
+> actually
+> need it.
+>=20
+> Signed-off-by: Doug Goldstein <cardoe@cardoe.com>
+>
+Acked-by: Dario Faggioli <dfaggioli@suse.com>
+
+Thanks,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-uOaAacC555cS9/Xm3UWH
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqwPBwACgkQFkJ4iaW4
+c+5NOhAAxja5E6EPj20EgQm3pYbS2ArCBokpbbAFIGgGszBfLfaZc94tWQhuUkgc
+zGmbK91XNAgmAAe7fdti3OwSVEsWCcvdr/r00x9rxqsFeOUTH0W6fvOvaQFCKTit
+toJI4q1Tn3fcpgH3EDaaH506E38xFu16u8rfP7eXgSCi+rbJL21Wnn36SQL3BrAu
+e7QHoJcOWEgs/Pc8t7myT9QKAKlQJ9P4CTna3BQJ14WmNwUT9zSklHYO3Io9wFzY
+dc6U/JRzICF9WibpO8dK3LPjAz95W+yfBo4ZL7As9bMSpuQd+OP06eC7dyNW+wE2
+kYTuo5kXPzaWKSFHAi959OxtNmM+mSMiu7DpJLwig/oELTVK/ut3r1pmLiqhCLYh
+yuSzCu3L3FibXlm94RYRpb47+1AYLhZefI5gbbaeTA2VPXeKnfDVHy7uTbXfUpDi
+1GEk6nr73hBsFapKwllXBmnBw++Llxal4CeVpEceR8D1+YksOhdZ5dJ/o34/Lmd2
+EpkEAh6r8x+N+Vjf1dAYZGMEJIPAbwPmtcRYxhO3WAUZpetEHOUO004epJEap2KM
+xoLRsnDg8K8Xygj8tcJykuBgch7OTKJHr0mjboTboEq+YCkMpApGpX/rQXWpvZVJ
+2PzEt6EjEn6Zq1W9nL5COdeYRGtRlnf9d3dA6W9lPPvIdiHbNsE=
+=80/b
+-----END PGP SIGNATURE-----
+
+--=-uOaAacC555cS9/Xm3UWH--
+
+
+
+--===============5576506777934970092==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5576506777934970092==--
