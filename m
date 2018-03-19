@@ -1,15 +1,15 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/3] x86/pv: Avoid locked bit manipulation
- in register_guest_callback()
-Date: Mon, 19 Mar 2018 10:59:57 -0600
-Message-ID: <5AAFFA9D02000078001B3961@prv-mh.provo.novell.com>
+Subject: Re: [PATCH 2/3] x86/pv: Fold
+ {compat_}unregister_guest_callback() into its non-compat counterpart
+Date: Mon, 19 Mar 2018 11:05:02 -0600
+Message-ID: <5AAFFBCE02000078001B3983@prv-mh.provo.novell.com>
 References: <1521115122-15824-1-git-send-email-andrew.cooper3@citrix.com>
- <1521115122-15824-2-git-send-email-andrew.cooper3@citrix.com>
+ <1521115122-15824-3-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1521115122-15824-2-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1521115122-15824-3-git-send-email-andrew.cooper3@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,13 +24,18 @@ Cc: Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, =?UTF-8?
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IE9uIDE1LjAzLjE4IGF0IDEyOjU4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gQ2hhbmdlcyB0byBhcmNoLnZnY19mbGFncyBhcmUgbWFkZSB0byBjdXJyZW50IGluIHN5
-bmNyaG9ub3VzIGNvbnRleHQgb25seSwgYW5kCj4gZG9uJ3QgbmVlZCB0byBiZSBsb2NrZWQuICAo
-VGhlIG9ubHkgb3RoZXIgY2hhbmdlcyBhcmUgdmlhCj4gYXJjaF9zZXRfaW5mb19ndWVzdCgpLCB3
-aGljaCBvcGVyYXRlcyBvbiBkZXNjaGVkdWxlZCB2Y3B1cyBvbmx5KS4KPiAKPiBSZXBsYWNlIHRo
-ZSB7c2V0LGNsZWFyfV9iaXQoKSBjYWxscyB3aXRoIGNvbXBpbGVyLXZpc2libGUgYml0d2lzZSAK
-PiBvcGVyYXRpb25zLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5j
-b29wZXIzQGNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1
-c2UuY29tPgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+dGU6Cj4gVGhlc2UgZnVuY3Rpb25zIGFyZSBhbG1vc3QgaWRlbnRpY2FsLiAgVGhleSBkaWZmZXIg
+b25seSBpbiB0aGUgZXJyb3IgZW1pdHRlZAo+IGZvciB0aGUgdXNlIG9mIENBTExCQUNLVFlQRV9z
+eXNjYWxsICh3aGljaCBpcyBpbmNvbnNlcXVlbnRpYWwgdG8gZ3Vlc3RzKSwKCkknbSBub3QgZW50
+aXJlbHkgY29udmluY2VkIC0gc28gZmFyIHRoZXJlJ3MgYmVlbiBhIG1hdGNoIGhlcmUgYmV0d2Vl
+bgptYXAgYW5kIHVubWFwLCBpLmUuIHdpdGggdGhlIGNoYW5nZSBpdCBtYXkgYmUgYWR2aXNhYmxl
+IGZvcgpjb21wYXRfcmVnaXN0ZXJfZ3Vlc3RfY2FsbGJhY2soKSB0byBhbHNvIHJldHVybiAtRUlO
+VkFMIGZvcgpDQUxMQkFDS1RZUEVfc3lzY2FsbC4gSG93ZXZlciwgSSBkb24ndCBmZWVsIHN0cm9u
+Z2x5IGFib3V0IHRoaXMsIHNvCmVpdGhlciB3YXkgLi4uCgo+IGFuZAo+IHRoZSB0eXBlIG9mIHRo
+ZWlyIGFyZ3VtZW50Lgo+IAo+IEhhdmUgdGhlIGNhbGxlcnMgcGFzcyB0aGUgdW5yZWcudHlwZSBw
+YXJhbWV0ZXIgZGlyZWN0bHksIGF2b2lkaW5nIHRoZSBuZWVkIGZvcgo+IGRpZmZlcmVudGx5IHR5
+cGVkIHBhcmFtZXRlcnMuCj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
+LmNvb3BlcjNAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3Vz
+ZS5jb20+CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
