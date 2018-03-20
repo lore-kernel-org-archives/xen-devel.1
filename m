@@ -1,20 +1,25 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v10 11/11] vpci/msix: add MSI-X handlers
-Date: Tue, 20 Mar 2018 05:03:09 -0600
-Message-ID: <5AB0F87D02000078001B3E0B@prv-mh.provo.novell.com>
-References: <20180316133008.66443-1-roger.pau@citrix.com>
- <20180316133008.66443-12-roger.pau@citrix.com>
+From: Julien Grall <julien.grall@linaro.org>
+Subject: Re: [PATCH 28/57] ARM: new VGIC: Add acccessor to new
+ struct vgic_irq instance
+Date: Tue, 20 Mar 2018 11:07:03 +0000
+Message-ID: <CAEC2Cxq3T642jBkDQozKfN2u45mwdbXfcEeNXnSzYF+b8GoNeg@mail.gmail.com>
+References: <20180305160415.16760-1-andre.przywara@linaro.org>
+ <20180305160415.16760-29-andre.przywara@linaro.org>
+ <54b15802-2f72-7e7c-ada2-a3b77f81b2f4@arm.com>
+ <f0f3b85e-2eea-6632-e2c6-824ab099837b@linaro.org>
+ <f18d38c1-44ab-9d8b-1c9c-3481b922b698@arm.com>
+ <03679127-9314-9190-80c3-628ffdff08af@linaro.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1695349015000494100=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=3grj=gk=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1eyF2w-00047w-9s
- for xen-devel@lists.xenproject.org; Tue, 20 Mar 2018 11:03:14 +0000
-In-Reply-To: <20180316133008.66443-12-roger.pau@citrix.com>
-Content-Disposition: inline
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=nvt7=gk=linaro.org=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1eyF6g-0004Hp-0C
+ for xen-devel@lists.xenproject.org; Tue, 20 Mar 2018 11:07:06 +0000
+Received: by mail-qt0-x22c.google.com with SMTP id l25so1079299qtj.1
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Mar 2018 04:07:04 -0700 (PDT)
+In-Reply-To: <03679127-9314-9190-80c3-628ffdff08af@linaro.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,55 +28,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: Andre Przywara <andre.przywara@linaro.org>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE2LjAzLjE4IGF0IDE0OjMwLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-ICtpbnQgdnBjaV9tc2l4X2FyY2hfcHJpbnQoY29uc3Qgc3RydWN0IHZwY2lfbXNpeCAqbXNpeCkK
-PiArewo+ICsgICAgdW5zaWduZWQgaW50IGk7Cj4gKwo+ICsgICAgZm9yICggaSA9IDA7IGkgPCBt
-c2l4LT5tYXhfZW50cmllczsgaSsrICkKPiArICAgIHsKPiArICAgICAgICBjb25zdCBzdHJ1Y3Qg
-dnBjaV9tc2l4X2VudHJ5ICplbnRyeSA9ICZtc2l4LT5lbnRyaWVzW2ldOwo+ICsKPiArICAgICAg
-ICBwcmludGsoIiU2dSB2ZWM9JTAyeCU3cyU2cyUzc2Fzc2VydCU1cyU3cyBkZXN0X2lkPSVsdSBt
-YXNrPSV1IHBpcnE6ICVkXG4iLAo+ICsgICAgICAgICAgICAgICBpLCBNQVNLX0VYVFIoZW50cnkt
-PmRhdGEsIE1TSV9EQVRBX1ZFQ1RPUl9NQVNLKSwKPiArICAgICAgICAgICAgICAgZW50cnktPmRh
-dGEgJiBNU0lfREFUQV9ERUxJVkVSWV9MT1dQUkkgPyAibG93ZXN0IiA6ICJmaXhlZCIsCj4gKyAg
-ICAgICAgICAgICAgIGVudHJ5LT5kYXRhICYgTVNJX0RBVEFfVFJJR0dFUl9MRVZFTCA/ICJsZXZl
-bCIgOiAiZWRnZSIsCj4gKyAgICAgICAgICAgICAgIGVudHJ5LT5kYXRhICYgTVNJX0RBVEFfTEVW
-RUxfQVNTRVJUID8gIiIgOiAiZGUiLAo+ICsgICAgICAgICAgICAgICBlbnRyeS0+YWRkciAmIE1T
-SV9BRERSX0RFU1RNT0RFX0xPR0lDID8gImxvZyIgOiAicGh5cyIsCj4gKyAgICAgICAgICAgICAg
-IGVudHJ5LT5hZGRyICYgTVNJX0FERFJfUkVESVJFQ1RJT05fTE9XUFJJID8gImxvd2VzdCIgOiAi
-Zml4ZWQiLAo+ICsgICAgICAgICAgICAgICBNQVNLX0VYVFIoZW50cnktPmFkZHIsIE1TSV9BRERS
-X0RFU1RfSURfTUFTSyksCj4gKyAgICAgICAgICAgICAgIGVudHJ5LT5tYXNrZWQsIGVudHJ5LT5h
-cmNoLnBpcnEpOwo+ICsgICAgICAgIGlmICggaSAmJiAhKGkgJSA2NCkgKQo+ICsgICAgICAgIHsK
-PiArICAgICAgICAgICAgc3RydWN0IHBjaV9kZXYgKnBkZXYgPSBtc2l4LT5wZGV2Owo+ICsKPiAr
-ICAgICAgICAgICAgc3Bpbl91bmxvY2soJm1zaXgtPnBkZXYtPnZwY2ktPmxvY2spOwo+ICsgICAg
-ICAgICAgICBwcm9jZXNzX3BlbmRpbmdfc29mdGlycXMoKTsKPiArICAgICAgICAgICAgLyogTkI6
-IHdlIGFzc3VtZSB0aGF0IHBkZXYgY2Fubm90IGdvIGF3YXkgZm9yIGFuIGFsaXZlIGRvbWFpbi4g
-Ki8KPiArICAgICAgICAgICAgaWYgKCAhcGRldi0+dnBjaSB8fCAhc3Bpbl90cnlsb2NrKCZwZGV2
-LT52cGNpLT5sb2NrKSApCj4gKyAgICAgICAgICAgICAgICByZXR1cm4gLUVCVVNZOwo+ICsgICAg
-ICAgICAgICBtc2l4ID0gcGRldi0+dnBjaS0+bXNpeDsKCkkgZGlzYWdyZWUgd2l0aCByZXN1bWlu
-ZyB3aXRoIGEgcG90ZW50aWFsbHkgY2hhbmdlZCBtc2l4IGhlcmU6IFRoaXMKY2FuIG9ubHkgbGVh
-ZCB0byBjb25mdXNpb24gb2YgdGhlIGNvbnN1bWVyIG9mIHRoZSBwcm9kdWNlZCBvdXRwdXQuCgo+
-IEBAIC0yMzEsNiArMjMyLDIzIEBAIHN0YXRpYyBpbnQgbW9kaWZ5X2JhcnMoY29uc3Qgc3RydWN0
-IHBjaV9kZXYgKnBkZXYsIGJvb2wgbWFwLCBib29sIHJvbV9vbmx5KQo+ICAgICAgICAgIH0KPiAg
-ICAgIH0KPiAgCj4gKyAgICAvKiBSZW1vdmUgYW55IE1TSVggcmVnaW9ucyBpZiBwcmVzZW50LiAq
-Lwo+ICsgICAgZm9yICggaSA9IDA7IG1zaXggJiYgaSA8IEFSUkFZX1NJWkUobXNpeC0+dGFibGVz
-KTsgaSsrICkKPiArICAgIHsKPiArICAgICAgICBwYWRkcl90IHN0YXJ0ID0gdm1zaXhfdGFibGVf
-YWRkcihwZGV2LT52cGNpLCBpKTsKPiArICAgICAgICBwYWRkcl90IGVuZCA9IHN0YXJ0ICsgdm1z
-aXhfdGFibGVfc2l6ZShwZGV2LT52cGNpLCBpKSAtIDE7Cj4gKwo+ICsgICAgICAgIHJjID0gcmFu
-Z2VzZXRfcmVtb3ZlX3JhbmdlKG1lbSwgUEZOX0RPV04oc3RhcnQpLCBQRk5fRE9XTihlbmQpKTsK
-PiArICAgICAgICBpZiAoIHJjICkKPiArICAgICAgICB7Cj4gKyAgICAgICAgICAgIHByaW50ayhY
-RU5MT0dfR19XQVJOSU5HCj4gKyAgICAgICAgICAgICAgICAgICAiRmFpbGVkIHRvIHJlbW92ZSBN
-U0lYIHRhYmxlIFslIiBQUklfZ2ZuICIsICUiIFBSSV9nZm4gIl06ICVkXG4iLAo+ICsgICAgICAg
-ICAgICAgICAgICAgUEZOX0RPV04oc3RhcnQpLCBQRk5fRE9XTihlbmQpLCByYyk7CgpJbiBjYXNl
-cyBsaWtlIHRoaXMgKHdoZXJlIHlvdSBkb24ndCB1c2UgcGxhaW4gc3RhcnQvZW5kIGFueXdoZXJl
-LApidXQgeW91IGRvIHVzZSB0aGUgc2FtZSBjYWxjdWxhdGlvbiBvbiB0aGVtIHR3aWNlIGVhY2gp
-LCBpdCdzCmNlcnRhaW5seSBtb3JlIGVmZmljaWVudCBmb3IgdGhlIGxvY2FsIHZhcmlhYmxlcyB0
-byBiZSBmcmFtZSBudW1iZXJzCnJpZ2h0IGF3YXkuCgpDb25zaWRlcmluZyB0aGF0IEkgZGlkbid0
-IG5vdGljZSB0aGlzIGVhcmxpZXIsIEkgd29uJ3QgaW5zaXN0IG9uIHRoZQpsYXR0ZXIgY2hhbmdl
-IHRvIGJlIG1hZGUsIGkuZS4gd2l0aCBhdCBsZWFzdCB0aGUgZm9ybWVyIGlzc3VlCmFkZHJlc3Nl
-ZApSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKSmFuCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============1695349015000494100==
+Content-Type: multipart/alternative; boundary="001a113fc51610a8400567d6139c"
+
+--001a113fc51610a8400567d6139c
+Content-Type: text/plain; charset="UTF-8"
+
+Hi,
+
+Sorry for the formatting.
+
+On 20 Mar 2018 19:01, "Andre Przywara" <andre.przywara@linaro.org> wrote:
+
+
+I am happy to add a comment saying that a list is not the right data
+structure.
+
+
+Fair enough. I won't argue more, let's keep the list and add a comment. I
+do want to see that series merged in Xen 4.11.
+
+Cheers,
+
+
+Cheers,
+Andre.
+
+_______________________________________________
+Xen-devel mailing list
+Xen-devel@lists.xenproject.org
+https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+--001a113fc51610a8400567d6139c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><div class=3D"gmail_extra">Hi,</div><div class=
+=3D"gmail_extra" dir=3D"auto"><br></div><div class=3D"gmail_extra" dir=3D"a=
+uto">Sorry for the formatting.</div><div class=3D"gmail_extra" dir=3D"auto"=
+><br></div><div class=3D"gmail_extra" dir=3D"auto"><div class=3D"gmail_quot=
+e" dir=3D"auto">On 20 Mar 2018 19:01, &quot;Andre Przywara&quot; &lt;<a hre=
+f=3D"mailto:andre.przywara@linaro.org">andre.przywara@linaro.org</a>&gt; wr=
+ote:<blockquote class=3D"quote" style=3D"margin:0 0 0 .8ex;border-left:1px =
+#ccc solid;padding-left:1ex">
+<br>
+I am happy to add a comment saying that a list is not the right data<br>
+structure.<br></blockquote></div></div></div><div dir=3D"auto"><br></div><d=
+iv dir=3D"auto">Fair enough. I won&#39;t argue more, let&#39;s keep the lis=
+t and add a comment. I do want to see that series merged in Xen 4.11.</div>=
+<div dir=3D"auto"><br></div><div dir=3D"auto">Cheers,</div><div dir=3D"auto=
+"><br></div><div dir=3D"auto"><div class=3D"gmail_extra"><div class=3D"gmai=
+l_quote"><blockquote class=3D"quote" style=3D"margin:0 0 0 .8ex;border-left=
+:1px #ccc solid;padding-left:1ex">
+<br>
+Cheers,<br>
+Andre.<br>
+<div class=3D"elided-text"><br>
+______________________________<wbr>_________________<br>
+Xen-devel mailing list<br>
+<a href=3D"mailto:Xen-devel@lists.xenproject.org">Xen-devel@lists.xenprojec=
+t.org</a><br>
+<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
+noreferrer" target=3D"_blank">https://lists.xenproject.org/<wbr>mailman/lis=
+tinfo/xen-devel</a></div></blockquote></div><br></div></div></div>
+
+--001a113fc51610a8400567d6139c--
+
+
+--===============1695349015000494100==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1695349015000494100==--
