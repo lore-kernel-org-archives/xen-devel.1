@@ -1,19 +1,15 @@
 From: Julien Grall <julien.grall@arm.com>
-Subject: Re: Xen ARM Community Call Wednesday 4th April 4PM UTC
-Date: Tue, 20 Mar 2018 03:18:39 +0000
-Message-ID: <ac4fb3a1-ddd7-dfaa-1d32-293ef9889858@arm.com>
-References: <alpine.DEB.2.10.1803151657360.8251@sstabellini-ThinkPad-X260>
- <269280dd-bf25-8a23-b5b4-e4a88a618ef8@arm.com>
+Subject: Re: [PATCH 05/20] arm/boot: Mark construct_dom0() as
+	__init
+Date: Tue, 20 Mar 2018 03:40:03 +0000
+Message-ID: <a4ba8c4c-7b22-154e-57c7-0a24fbf3a47c@arm.com>
+References: <1521486839-25617-1-git-send-email-andrew.cooper3@citrix.com>
+ <1521486839-25617-6-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.84_2) (envelope-from
- <srs0=kdcq=gk=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1ey7nT-0003o9-IS
- for xen-devel@lists.xenproject.org; Tue, 20 Mar 2018 03:18:47 +0000
-In-Reply-To: <269280dd-bf25-8a23-b5b4-e4a88a618ef8@arm.com>
+In-Reply-To: <1521486839-25617-6-git-send-email-andrew.cooper3@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,24 +19,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, Lars Kurth <lars.kurth@citrix.com>, "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, anastassios.nanos@onapp.com, vfachin@de.adit-jv.com, Jarvis Roach <Jarvis.Roach@dornerworks.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Artem Mygaiev <Artem_Mygaiev@epam.com>, mirela.simonovic@aggios.com, davorin.mista@aggios.com, robin.randhawa@arm.com
-Cc: xen-devel@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwMy8xNi8yMDE4IDA5OjU3IEFNLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gT24gMTYvMDMv
-MTggMDA6MDgsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPj4gSGkgYWxsLAo+IAo+IEhpIFN0
-ZWZhbm8sCj4gCj4+IEkgc3VnZ2VzdCB0byBoYXZlIHRoZSBuZXh0IGNvbW11bml0eSBjYWxsIG9u
-IFdlZG5lc2RheSA0dGggQXByaWwgNFBNCj4+IFVUQy4gS2VlcCBpbiBtaW5kIHRoYXQgZHVlIHRv
-IERheWxpZ2h0IFNhdmluZ3MgVGltZSA0UE0gVVRDIGlzIHRoZSB1c3VhbAo+PiB0aW1lIHNsb3Q6
-IDlBTSBDYWxpZm9ybmlhLCA1UE0gVUsuIERvZXMgaXQgd29yayBmb3IgZXZlcnlib2R5Pwo+IAo+
-IFRoaXMgd29ya3MgZm9yIG1lLgoKWy4uLl0KCj4+Cj4+IElmIHlvdSBoYXZlIGFueSBzcGVjaWZp
-YyB0b3BpY3MgdG8gZGlzY3VzcywgcGxlYXNlIHJlcGx5IHRvIHRoaXMgZW1haWwuCgpJIHdvdWxk
-IGxpa2UgdG8gZGlzY3VzcyBhYm91dCBYZW4gb24gQXV0b21vdGl2ZS4gV2hhdCB3b3VsZCBiZSB0
-aGUgCnJlcXVpcmVtZW50cyBhbmQgbWlzc2luZyBwaWVjZXMuCgpUaGUgb3V0Y29tZSBvZiB0aGUg
-ZGlzY3Vzc2lvbiB3b3VsZCBiZSB0cmFja2VkIG9uIHRoZSB3aWtpIChtYXliZSBbMV0pLgoKQ2hl
-ZXJzLAoKWzFdIApodHRwczovL3dpa2kueGVucHJvamVjdC5vcmcvd2lraS9FbWJlZGRlZF9hbmRf
-QXV0b21vdGl2ZV9QVl9Ecml2ZXJzL1JvYWRtYXAKCj4+Cj4+IENoZWVycywKPj4KPj4gU3RlZmFu
-bwo+Pgo+IAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+SGkgQW5kcmV3LAoKT24gMDMvMTkvMjAxOCAwNzoxMyBQTSwgQW5kcmV3IENvb3BlciB3cm90ZToK
+PiBJdHMgc29sZSBjYWxsZXIsIHN0YXJ0X3hlbigpLCBpcyBfX2luaXQuCgpBY3R1YWxseSwgbW9z
+dCBvZiB0aGF0IGZpbGVzIGNvdWxkIGJlbmVmaXRzIG9mIF9faW5pdCBhcyB0aGlzIGlzIGRvbWFp
+biAKb25seSBidWlsZC4KCkluIGFueSBjYXNlLCB0aGlzIHBhdGNoIGlzIGFscmVhZHkgYSBnb29k
+IHN0YXJ0LiBTbzoKCkFja2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29t
+PgoKQ2hlZXJzLAoKPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29v
+cGVyM0BjaXRyaXguY29tPgo+IC0tLQo+IENDOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxs
+aW5pQGtlcm5lbC5vcmc+Cj4gQ0M6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+
+Cj4gLS0tCj4gICB4ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMgfCAyICstCj4gICAxIGZpbGUg
+Y2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKPiAKPiBkaWZmIC0tZ2l0IGEv
+eGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5jIGIveGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5j
+Cj4gaW5kZXggMjhlZTg3Ni4uOWVmOTAzMCAxMDA2NDQKPiAtLS0gYS94ZW4vYXJjaC9hcm0vZG9t
+YWluX2J1aWxkLmMKPiArKysgYi94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMKPiBAQCAtMjA5
+NCw3ICsyMDk0LDcgQEAgc3RhdGljIHZvaWQgX19pbml0IGZpbmRfZ250dGFiX3JlZ2lvbihzdHJ1
+Y3QgZG9tYWluICpkLAo+ICAgICAgICAgICAgICBraW5mby0+Z250dGFiX3N0YXJ0LCBraW5mby0+
+Z250dGFiX3N0YXJ0ICsga2luZm8tPmdudHRhYl9zaXplKTsKPiAgIH0KPiAgIAo+IC1pbnQgY29u
+c3RydWN0X2RvbTAoc3RydWN0IGRvbWFpbiAqZCkKPiAraW50IF9faW5pdCBjb25zdHJ1Y3RfZG9t
+MChzdHJ1Y3QgZG9tYWluICpkKQo+ICAgewo+ICAgICAgIHN0cnVjdCBrZXJuZWxfaW5mbyBraW5m
+byA9IHt9Owo+ICAgICAgIHN0cnVjdCB2Y3B1ICpzYXZlZF9jdXJyZW50Owo+IAoKLS0gCkp1bGll
+biBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
