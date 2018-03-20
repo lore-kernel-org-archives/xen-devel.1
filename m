@@ -1,22 +1,15 @@
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-Subject: Re: [PATCH] qemu: include generated files with <> and
- not ""
-Date: Tue, 20 Mar 2018 09:44:06 +0000
-Message-ID: <20180320094406.GD4530@redhat.com>
-References: <1521510562-529051-1-git-send-email-mst@redhat.com>
- <8f06e1e3-4823-d8e8-43bd-c092c523849e@vivier.eu>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v3] new config option vtsc_tolerance_khz to
+ avoid TSC emulation
+Date: Tue, 20 Mar 2018 10:48:34 +0100
+Message-ID: <20180320104834.335c2a41.olaf@aepfle.de>
+References: <20180306104133.22106-1-olaf@aepfle.de>
+ <af47cc31-d3cb-023a-1229-ab9eb013f985@citrix.com>
+ <20180312101508.4a9444c2.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7548790046253250026=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=9iii=gk=redhat.com=berrange@srs-us1.protection.inumbo.net>)
- id 1eyDpA-0005yb-GM
- for xen-devel@lists.xenproject.org; Tue, 20 Mar 2018 09:44:56 +0000
-Content-Disposition: inline
-In-Reply-To: <8f06e1e3-4823-d8e8-43bd-c092c523849e@vivier.eu>
+In-Reply-To: <20180312101508.4a9444c2.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,71 +18,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Laurent Vivier <laurent@vivier.eu>
-Cc: Peter Maydell <peter.maydell@linaro.org>, Dmitry Fleytman <dmitry.fleytman@gmail.com>, sheepdog@lists.wpkg.org, Ronnie Sahlberg <ronniesahlberg@gmail.com>, Li Zhijian <lizhijian@cn.fujitsu.com>, "Michael S. Tsirkin" <mst@redhat.com>, Jeff Cody <jcody@redhat.com>, Zhang Chen <zhangckid@gmail.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-devel@nongnu.org, BALATON Zoltan <balaton@eik.bme.hu>, Keith Busch <keith.busch@intel.com>, Max Filippov <jcmvbkbc@gmail.com>, Gerd Hoffmann <kraxel@redhat.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Jiri Pirko <jiri@resnulli.us>, Subbaraya Sundeep <sundeep.lkml@gmail.com>, Eric Blake <eblake@redhat.com>, Michael Roth <mdroth@linux.vnet.ibm.com>, Marcelo Tosatti <mtosatti@redhat.com>, Josh Durgin <jdurgin@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, Alberto Garcia <berto@igalia.com>zhanghailiang <zha>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFy?= =?UTF-8?B?Y3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBNYXIgMjAsIDIwMTggYXQgMDk6NTg6MjNBTSArMDEwMCwgTGF1cmVudCBWaXZpZXIg
-d3JvdGU6Cj4gTGUgMjAvMDMvMjAxOCDDoCAwMjo1NCwgTWljaGFlbCBTLiBUc2lya2luIGEgw6lj
-cml0wqA6Cj4gPiBRRU1VIGNvZGluZyBzdHlsZSBhdCB0aGUgbW9tZW50IGFza3MgZm9yIGFsbCBu
-b24tc3lzdGVtCj4gPiBpbmNsdWRlIGZpbGVzIHRvIGJlIHVzZWQgd2l0aCAjaW5jbHVkZSAiZm9v
-LmgiLgo+ID4gSG93ZXZlciB0aGlzIHJ1bGUgYWN0dWFsbHkgZG9lcyBub3QgbWFrZSBzZW5zZSBh
-bmQKPiA+IGNyZWF0ZXMgaXNzdWVzIGZvciB3aGVuIHRoZSBpbmNsdWRlZCBmaWxlIGlzIGdlbmVy
-YXRlZC4KPiAKPiBJZiB5b3UgY2hhbmdlIHRoYXQsIHdlIGNhbiBoYXZlIGlzc3VlIHdoZW4gYSBz
-eXN0ZW0gaW5jbHVkZSBoYXMgdGhlIHNhbWUKPiBuYW1lIGFzIG91ciBsb2NhbCBpbmNsdWRlLiBX
-aXRoICI8RklMRT4iLCBzeXN0ZW0gaGVhZGVyIGFyZSB0YWtlbiBmaXJzdC4KCj4gPiBJbiBDLCBp
-bmNsdWRlICJmaWxlIiBtZWFucyBsb29rIGluIGN1cnJlbnQgZGlyZWN0b3J5LAo+ID4gdGhlbiBv
-biBpbmNsdWRlIHNlYXJjaCBwYXRoLiBDdXJyZW50IGRpcmVjdG9yeSBoZXJlCj4gPiBtZWFucyB0
-aGUgc291cmNlIGZpbGUgZGlyZWN0b3J5Lgo+ID4gQnkgY29tcGFyaXNvbiBpbmNsdWRlIDxmaWxl
-PiBtZWFucyBsb29rIG9uIGluY2x1ZGUgc2VhcmNoIHBhdGguCj4gCj4gTm90IGV4YWN0bHksIHRo
-ZXJlIGlzIHRoZSBub3Rpb24gb2YgInN5c3RlbSBoZWFkZXIiIHRvby4KPiAKPiBodHRwczovL2dj
-Yy5nbnUub3JnL29ubGluZWRvY3MvY3BwL0luY2x1ZGUtU3ludGF4Lmh0bWwKPiAKPiAjaW5jbHVk
-ZSA8ZmlsZT4KPiBUaGlzIHZhcmlhbnQgaXMgdXNlZCBmb3Igc3lzdGVtIGhlYWRlciBmaWxlcy4g
-SXQgc2VhcmNoZXMgZm9yIGEgZmlsZQo+IG5hbWVkIGZpbGUgaW4gYSBzdGFuZGFyZCBsaXN0IG9m
-IHN5c3RlbSBkaXJlY3Rvcmllcy4gWW91IGNhbiBwcmVwZW5kCj4gZGlyZWN0b3JpZXMgdG8gdGhp
-cyBsaXN0IHdpdGggdGhlIC1JIG9wdGlvbiAoc2VlIEludm9jYXRpb24pLgo+IAo+ICNpbmNsdWRl
-ICJmaWxlIgo+IFRoaXMgdmFyaWFudCBpcyB1c2VkIGZvciBoZWFkZXIgZmlsZXMgb2YgeW91ciBv
-d24gcHJvZ3JhbS4gSXQgc2VhcmNoZXMKPiBmb3IgYSBmaWxlIG5hbWVkIGZpbGUgZmlyc3QgaW4g
-dGhlIGRpcmVjdG9yeSBjb250YWluaW5nIHRoZSBjdXJyZW50Cj4gZmlsZSwgdGhlbiBpbiB0aGUg
-cXVvdGUgZGlyZWN0b3JpZXMgYW5kIHRoZW4gdGhlIHNhbWUgZGlyZWN0b3JpZXMgdXNlZAo+IGZv
-ciA8ZmlsZT4uIFlvdSBjYW4gcHJlcGVuZCBkaXJlY3RvcmllcyB0byB0aGUgbGlzdCBvZiBxdW90
-ZSBkaXJlY3Rvcmllcwo+IHdpdGggdGhlIC1pcXVvdGUgb3B0aW9uLgo+IAo+ID4gQXMgZ2VuZXJh
-dGVkIGZpbGVzIGFyZSBub3QgaW4gdGhlIHNlYXJjaCBkaXJlY3RvcnkgKHVubGVzcyB0aGUgYnVp
-bGQKPiA+IGRpcmVjdG9yeSBoYXBwZW5zIHRvIG1hdGNoIHRoZSBzb3VyY2UgZGlyZWN0b3J5KSwg
-aXQgZG9lcyBub3QgbWFrZSBzZW5zZQo+ID4gdG8gaW5jbHVkZSB0aGVtIHdpdGggIiIgLSBkb2lu
-ZyBzbyBpcyBtZXJlbHkgbW9yZSB3b3JrIGZvciBwcmVwcm9jZXNzb3IKPiA+IGFuZCBhIHNvdXJj
-ZSBvciBlcnJvcnMgaWYgYSBzdGFsZSBmaWxlIGhhcHBlbnMgdG8gZXhpc3QgaW4gdGhlIHNvdXJj
-ZQo+ID4gZGlyZWN0b3J5Lgo+IAo+IEkgYWdyZWUgdGhlcmUgaXMgYSBwcm9ibGVtIHdpdGggc3Rh
-bGUgZmlsZXMuIEJ1dCBsaW51eCwgZm9yIGluc3RhbmNlLAo+IGFza3MgZm9yIGEgIm1ha2UgbXJw
-cm9wZXIiIHRvIGF2b2lkIHRoaXMuCgpXZSBjYW4gZm9sbG93IHdoYXQgYXV0b2NvbmYgZG9lcywg
-YW5kIGFkZCBhIGNoZWNrIHRvIGNvbmZpZ3VyZSB0byBzZWUgaWYKdGhlcmUgYXJlIGdlbmVyYXRl
-ZCBmaWxlcyBsZWZ0IGluIHRoZSBzb3VyY2UgZGlyLCB3aGVuIGNvbmZpZ3VyaW5nIHdpdGgKYnVp
-bGRkaXIgIT0gc3JjZGlyLCBhbmQgZXhpdCB3aXRoIGVycm9yLCB0ZWxsaW5nIHVzZXIgdG8gY2xl
-YW4gdGhlaXIKc3JjIGRpciBmaXJzdC4KCj4gPiBUaGlzIGNoYW5nZXMgaW5jbHVkZSBkaXJlY3Rp
-dmVzIGZvciBhbGwgZ2VuZXJhdGVkIGZpbGVzLCBhY3Jvc3MgdGhlCj4gPiB0cmVlLiBUaGUgaWRl
-YSBpcyB0byBhdm9pZCBzZW5kaW5nIGEgaHVnZSBhbW91bnQgb2YgZW1haWwuICBCdXQgd2hlbgo+
-ID4gbWVyZ2luZywgdGhlIGNoYW5nZXMgd2lsbCBiZSBzcGxpdCB3aXRoIG9uZSBjb21taXQgcGVy
-IGZpbGUsIGUuZy4gZm9yCj4gPiBlYXNlIG9mIGJpc2VjdCBpbiBjYXNlIG9mIGJ1aWxkIGZhaWx1
-cmVzLCBhbmQgdG8gZWFzZSBtZXJnaW5nLgo+ID4gCj4gPiBOb3RlIHRoYXQgc2hvdWxkIHNvbWUg
-Z2VuZXJhdGVkIGZpbGVzIGJlIG1pc3NlZCBieSB0aGlzIHRyZWUtd2lkZQo+ID4gcmVmYWN0b3Jp
-bmcsIGl0IGlzbid0IGEgYmlnIGRlYWwgLSB0aGlzIG1lcmVseSBtYWludGFpbnMgdGhlIHN0YXR1
-cyBxdW8sCj4gPiBhbmQgdGhpcyBjYW4gYmUgYWRkcmVzc2VkIGJ5IGEgc2VwYXJhdGUgcGF0Y2gg
-b24gdG9wLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEBy
-ZWRoYXQuY29tPgo+IAo+IEkgdGhpbmsgeW91ciBpZGVhIGNvbmZsaWN0cyB3aXRoIHdoYXQgTWFy
-a3VzIGhhcyBzdGFydGVkIHRvIGRvOgoKWWVzLCBJIGRvbid0IHRoaW5rIHdlIHNob3VsZCByZXZl
-cnQgd2hhdCBNYXJrdXMgc3RhcnRlZC4gICBCb3RoIHdheXMgb2YKcmVmZXJlbmNpbmcgUUVNVSBo
-ZWFkZXJzIGhhdmUgZG93bnNpZGVzLCBidXQgSSB0aGluayAiLi4uIiBoYXMgZmV3ZXIKZG93bnNp
-ZGVzIHRoYXQgIjwuLi4uIj4uCgpUaGUgcHJvYmxlbSBNaWNoYWVsIGlzIHRhY2tsaW5nIHNob3Vs
-ZCBiZSBwcmV0dHkgcmFyZSwgYmVjYXVzZSBtb2lzdApkZXZlbG9wZXJzIGFyZW4ndCBmcmVxdWVu
-dGx5IHN3aXRjaGluZyBiZXR3ZWVuIHNyY2Rpcj09YnVpbGRkaXIgYW5kCnNyY2RpciE9Yml1bGRk
-aXIgc2V0dXBzIC0gdGhleSBoYXZlIHRoZWlyIHByZWZlcmVuY2UgZm9yIHdoaWNoIHRvIHVzZQph
-bmQgc3RpY2sgd2l0aCBpdC4gQXMgbG9uZyBhcyB3ZSBnZXQgLi9jb25maWd1cmUgdG8gd2FybiBh
-Ym91dCB0aGUKZGlydHkgc3JjZGlyIGl0IHNob3VsZCBiZSBnb29kIGVub3VnaAoKUmVnYXJkcywK
-RGFuaWVsCi0tIAp8OiBodHRwczovL2JlcnJhbmdlLmNvbSAgICAgIC1vLSAgICBodHRwczovL3d3
-dy5mbGlja3IuY29tL3Bob3Rvcy9kYmVycmFuZ2UgOnwKfDogaHR0cHM6Ly9saWJ2aXJ0Lm9yZyAg
-ICAgICAgIC1vLSAgICAgICAgICAgIGh0dHBzOi8vZnN0b3AxMzguYmVycmFuZ2UuY29tIDp8Cnw6
-IGh0dHBzOi8vZW50YW5nbGUtcGhvdG8ub3JnICAgIC1vLSAgICBodHRwczovL3d3dy5pbnN0YWdy
-YW0uY29tL2RiZXJyYW5nZSA6fAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+--===============7548790046253250026==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/he0z_07eZj9BsQ/1sqf0n7p"; protocol="application/pgp-signature"
+
+--Sig_/he0z_07eZj9BsQ/1sqf0n7p
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+So, how do we address the performance regression fixed by this patch?
+
+Olaf
+
+Am Mon, 12 Mar 2018 10:15:08 +0100
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> Am Tue, 6 Mar 2018 11:07:54 +0000
+> schrieb Andrew Cooper <andrew.cooper3@citrix.com>:
+>=20
+> > > Add a new domctl XEN_DOMCTL_set_vtsc_tolerance_khz to adjust the
+> > > tolerance value of a running domU that is supposed to be migrated.   =
+=20
+> > Please can we not proliferate the domctls.
+> > This looks like it should be part of the set_tsc_info hypercall, not a
+> > separate hypercall. =20
+>=20
+> How should this approach be implemented? To me it looks like set_tsc_info
+> should be called only once for a not-yet-active domU, but I'm not familiar
+> with timekeeping.
+> If it can be just called once, and there should be a way to adjust the=20
+> tolerance value, then XEN_DOMCTL_settscinfo would need to be changed to=20
+> have subcommands.
+
+--Sig_/he0z_07eZj9BsQ/1sqf0n7p
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWrDY8gAKCRBdQqD6ppg2
+fshoAJ9lXb9CjnheILarX1JUGvsEJ1LveQCeIiItQ/mgpBPKLVgPSVh4Hy7x/M0=
+=CjNW
+-----END PGP SIGNATURE-----
+
+--Sig_/he0z_07eZj9BsQ/1sqf0n7p--
+
+
+--===============7548790046253250026==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7548790046253250026==--
