@@ -1,16 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 04/20] xen/domctl: Drop vcpu_alloc_lock
-Date: Tue, 20 Mar 2018 17:22:29 +0000
-Message-ID: <c72ad6c4-0006-cb24-9e50-30735ecb6ab6@citrix.com>
-References: <1521486839-25617-1-git-send-email-andrew.cooper3@citrix.com>
- <1521486839-25617-5-git-send-email-andrew.cooper3@citrix.com>
- <5AB14BD002000078001B41EA@prv-mh.provo.novell.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH v5 03/14] x86emul: abstract out XCRn accesses
+Date: Tue, 20 Mar 2018 17:22:38 +0000
+Message-ID: <179fec1d-9153-5925-7e01-33a3785817d7@citrix.com>
+References: <5AAA7BAF02000078001B2242@prv-mh.provo.novell.com>
+ <5AAA7D6902000078001B225C@prv-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5AB14BD002000078001B41EA@prv-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=zndv=gk=citrix.com=prvs=610f4a706=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1eyL1F-0007UQ-11
+ for xen-devel@lists.xenproject.org; Tue, 20 Mar 2018 17:25:53 +0000
+In-Reply-To: <5AAA7D6902000078001B225C@prv-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,49 +23,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAvMDMvMTggMTY6NTgsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDE5LjAzLjE4IGF0
-IDIwOjEzLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IEl0IGlzIG5vdCBl
-bnRpcmVseSBjbGVhciB3aHkgdGhpcyBpbnRlcmxvY2sgd2FzIGludHJvZHVjZWQgaW4gYy9zIDhj
-YmI1Mjc4ZQo+PiAieDg2L0FNRDogQWRkIHN1cHBvcnQgZm9yIEFNRCdzIE9TVlcgZmVhdHVyZSBp
-biBndWVzdHMiLgo+Pgo+PiBBdCB0aGUgdGltZSwgc3ZtX2hhbmRsZV9vc3Z3KCkgY291bGQgaGF2
-ZSBzZWVuIGFuIHVuZXhwZWN0ZWQgY2hhbmdlIGluIE9TVlcKPj4gKG5vdCB0aGUgY2FzZSBub3cs
-IGR1ZSB0byB0aGUgbmV3IENQVUlEIFBvbGljeSBpbmZyYXN0cnVjdHVyZSksIGJ1dCBldmVuIHRo
-ZW4sCj4+IGl0IHdvdWxkIGhhdmUgY2F1c2VkIHNwdXJpb3VzIGNoYW5nZXMgaW4gYmVoYXZpb3Vy
-IHdoZW4gaGFuZGxpbmcKPj4gT1NWV197SURfTEVOR1RILFNUQVRVU30gcmVhZCByZXF1ZXN0cyBv
-biBiZWhhbGYgb2YgYW4gYWxyZWFkeS1ydW5uaW5nIGd1ZXN0Lgo+Pgo+PiBUaGVyZSBhcmUgcGxl
-bnR5IG9mIG90aGVyIGFzcGVjdHMgb2YgZG9tYWluIGNyZWF0aW9uIHdoaWNoIGRlcGVuZCBvbiBo
-YXJkd2FyZQo+PiBkZXRhaWxzIHdoaWNoIG1heSBjaGFuZ2UgYWNyb3NzIGEgbWljcm9jb2RlIGxv
-YWQsIGJ1dCB3aGVyZSBub3QgcHJvdGVjdGVkIGJ5Cj4+IHRoaXMgaW50ZXJsb2NrLgo+IEFyZSB0
-aGVyZT8gV2UgZG9uJ3QgcmUtcmVhZCBDUFVJRCAoeWV0KSwgZm9yIGV4YW1wbGUuIEJ1dCBvZgo+
-IGNvdXJzZSBpdCBpcyBhbHNvIG5vdCByZWFsbHkgc3BlY2lmaWVkIHdoaWNoIGFzcGVjdHMgbWF5
-IGNoYW5nZQo+IGFjcm9zcyBtaWNyb2NvZGUgdXBkYXRlcy4KPgo+PiBBIGhvc3QgYWRtaW5pc3Ry
-YXRvciBjaG9vc2luZyB0byBwZXJmb3JtIGxhdGUgbWljcm9jb2RlIGxvYWRpbmcgaGFzIHBsZW50
-eSBvZgo+PiBvdGhlciBwcm9ibGVtcyB0byB3b3JyeSBhYm91dCwgYW5kIGlzIGl0IG5vdCB1bnJl
-YXNvbmFibGUgdG8gZXhwZWN0IHRoZW0gdG8KPj4gdGVtcG9yYXJpbHkgY2Vhc2UgZG9tYWluIGNv
-bnN0cnVjdGlvbiBhY3Rpdml0aWVzIHdoaWxlIHRoZSBtaWNyb2NvZGUgbG9hZGluZwo+PiBpcyBp
-biBwcm9ncmVzcy4KPiBCdXQgaXQgaXMgYWxzbyBub3QgdW5yZWFzb25hYmxlIHRvIGV4cGVjdCB0
-aGUgaHlwZXJ2aXNvciB0byBndWFyZAo+IGFnYWluc3QgaW5jb25zaXN0ZW5jaWVzIGhlcmUuIE9u
-IHRoZSB3aG9sZSBJJ20gbm90IHJlYWxseQo+IGNvbnZpbmNlZDsgSSB0aGluayBJJ2QgbGlrZSB0
-byBoZWFyIG90aGVycycgb3BpbmlvbnMuCgpUaGUgdW5kZXJseWluZyBwcm9ibGVtIGlzIHRoYXQg
-dGhpcyBsb2NrIGNhbm5vdCBzYXkgd2hlbiBtZXJnaW5nCm1heF9jcHVzIGludG8gY3JlYXRlZG9t
-YWluLCBiZWNhdXNlIHdlIGNhbm5vdCBjb250aW51ZSB0aGUgaHlwZXJjYWxsCm1pZHdheSB0aHJv
-dWdoLgoKQXMgaXQgZG9lc24ndCBjdXJyZW50bHkgcHJvdGVjdCBjcmVhdGVkb21haW4sIHdoaWNo
-IGFtb25nc3Qgb3RoZXIgdGhpbmdzCmNvbnRhaW5zIGluaXRfZG9tYWluX2NwdWlkX3BvbGljeSgp
-IGFuZCBpbml0X2RvbWFpbl9tc3JfcG9saWN5KCkgKHRoZQptb3N0IGxpa2VseSBzdHJ1Y3R1cmVz
-IHRvIGJlIGFmZmVjdGVkIGJ5IG1pY3JvY29kZSB1cGRhdGVzKSwgSSBkb24ndCBzZWUKYW55IHB1
-cnBvc2UgaW4ga2VlcGluZyBpdCBmb3IgdGhlIG1pbnV0ZSBhcmVhIGl0IGRvZXMgY292ZXIuCgpp
-LmUuIHRoZSBiZWhhdmlvdXIgaXMgY3VycmVudGx5IGJyb2tlbiwgYW5kIHJlbW92aW5nIHRoZSBs
-b2NrIGRvZXNuJ3QKbWFrZSBpdCBtZWFuaW5nZnVsbHkgbW9yZSBicm9rZW4sIGJ1dCBkb2VzIGxl
-dCB1cyByZXNvbHZlIGEgd2hvbGUgY2xhc3MKb2YgaXNzdWVzIHJlbGF0aW5nIHRvIHBhcnRpYWxs
-eS1jb25zdHJ1Y3RlZCBkb21haW4gb2JqZWN0cy4KCk1ha2luZyB0aGluZ3Mgd29yayBjb25zaXN0
-ZW50bHkvc2Vuc2libHkgYWZ0ZXIgYSBtaWNyb2NvZGUgdXBkYXRlIGlzIGZhcgptb3JlIGNvbXBs
-aWNhdGVkIHRoYW4ganVzdCB0aGlzLCBhbmQgc3RyaWN0bHkgZG9lcyByZXF1aXJlIGFkbWluaXN0
-cmF0b3IKaW5wdXQgYmVjYXVzZSB3ZSBjYW4ndCBnbyBibGluZGx5IHN1YnN0aXR1dGluZyBndWVz
-dCB2aXNpYmxlIHN0YXRlLgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+T24gMDMvMTUvMjAxOCAwMTowNCBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gVXNlIGhvb2tzLCBq
+dXN0IGxpa2UgZG9uZSBmb3Igb3RoZXIgc3BlY2lhbCBwdXJwb3NlIHJlZ2lzdGVycy4KPiAKPiBU
+aGlzIGluY2x1ZGVzIG1vdmluZyBYQ1IwIGNoZWNrcyBmcm9tIGh2bWVtdWxfZ2V0X2ZwdSgpIHRv
+IHRoZSBlbXVsYXRvcgo+IGl0c2VsZiBhcyB3ZWxsIGFzIGFkZGluZyBzdXBwb3J0IGZvciBYR0VU
+QlYgZW11bGF0aW9uLgo+IAo+IEZvciBub3cgZnV6emVyIHJlYWRzIHdpbGwgb2J0YWluIHRoZSBy
+ZWFsIHZhbHVlcyAobWludXMgdGhlIGZ1enppbmcgb2YKPiB0aGUgaG9vayBwb2ludGVyIGl0c2Vs
+ZikuCj4gCj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoK
+VHJhY2luZyBwYXJ0czoKClJldmlld2VkLWJ5OiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFw
+QGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
