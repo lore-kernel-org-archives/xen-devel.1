@@ -1,15 +1,16 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v5 04/16] xen/arm: mm: Remove unused M2P code
-Date: Tue, 20 Mar 2018 08:34:23 +0000
-Message-ID: <07685cb2-aef9-3c0b-5636-7e081f518817@arm.com>
-References: <20180314182009.14274-1-julien.grall@arm.com>
- <20180314182009.14274-5-julien.grall@arm.com>
- <20180315072021.GA2711@ts.fujitsu.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: TLB flushing
+Date: Tue, 20 Mar 2018 09:50:29 +0100
+Message-ID: <0f224e94-2513-3146-d418-8789a5e1369b@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180315072021.GA2711@ts.fujitsu.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=vyyo=gk=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1eyCya-0000qD-OU
+ for xen-devel@lists.xenproject.org; Tue, 20 Mar 2018 08:50:36 +0000
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -19,18 +20,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Alan.Robinson@ts.fujitsu.com
-Cc: Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
+To: xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "George.Dunlap@eu.citrix.com" <George.Dunlap@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDMvMTUvMjAxOCAwNzoyMCBBTSwgQWxhbiBSb2JpbnNvbiB3cm90ZToKPiBIaSBKdWxpZW4s
-CgpIaSBBbGFuLAoKPj4gQXQgdGhlIHNhbWUgdGltZSBtb3ZlIHRoZSByZW1haW5pbmcgTTJQIGRl
-ZmluZSBqdXN0IGFib3ZlIGp1c3QgYWJvdmUKPj4gc2V0X2dwZm5fZnJvbV9tZm4gdG8ga2VlcCBh
-bGwgdGhlIGR1bW15IGhlbHBlcnMgZm9yIE0yUCB0b2dldGhlci4KPiAKPiAgICBBdCB0aGUgc2Ft
-ZSB0aW1lIG1vdmUgdGhlIHJlbWFpbmluZyBNMlAgZGVmaW5lIGp1c3QgYWJvdmUKPiAgICBzZXRf
-Z3Bmbl9mcm9tX21mbiB0byBrZWVwIGFsbCB0aGUgZHVtbXkgaGVscGVycyBmb3IgTTJQIHRvZ2V0
-aGVyLgoKVGhhbmsgeW91IGZvciBsb29raW5nIGF0IHRoZSBwYXRjaC4gSSB3aWxsIHVwZGF0ZSB0
-aGUgY29tbWl0IG1lc3NhZ2Ugb24gCnRoZSBuZXh0IHZlcnNpb24uCgpDaGVlcnMsCgotLSAKSnVs
-aWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+V2hpbGUgaHVudGluZyBhIHN0cmFuZ2UgYnVnIGluIG15IFBDSUQgcGF0Y2ggc2VyaWVzIGhpbnRp
+bmcgYXQgc29tZQpUTEIgaW52YWxpZGF0aW9uIHByb2JsZW0gSSBkaXNjb3ZlcmVkIGEgcGllY2Ug
+b2YgY29kZSBsb29raW5nIHJhdGhlcgpmaXNoeSB0byBtZS4KCklzIGl0IGNvcnJlY3QgZm9yIG5l
+d190bGJmbHVzaF9jbG9ja19wZXJpb2QoKSB0byB1c2UgRkxVU0hfVExCIGluc3RlYWQKb2YgRkxV
+U0hfVExCX0dMT0JBTD8KCldoaWxlIG5vdCBiZWluZyBhIHByb2JsZW0gaW4gY3VycmVudCBjb2Rl
+IGFzIGJvdGggd2lsbCBmbHVzaCBhbGwgVExCCmVudHJpZXMgbXkgc2VyaWVzIHdpbGwgY2hhbmdl
+IHRoYXQgYnkgdXNpbmcgaW52cGNpZCB0byBmbHVzaCBvbmx5IHRoZQpub24tZ2xvYmFsIGVudHJp
+ZXMgaWYgRkxVU0hfVExCX0dMT0JBTCB3YXNuJ3Qgc2V0LgoKSSBjYW4gc2VuZCBhIHBhdGNoIGlm
+IGFueW9uZSBjYW4gY29uZmlybSB0aGF0IHVzaW5nIEZMVVNIX1RMQiBvbmx5IGlzCndyb25nLgoK
+Ckp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
