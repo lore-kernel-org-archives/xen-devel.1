@@ -1,14 +1,13 @@
 From: Dario Faggioli <dfaggioli@suse.com>
 Subject: Re: [PATCH] xsm:schedop: introduce vcpuinfo permissions
  verification
-Date: Tue, 20 Mar 2018 13:37:51 +0100
-Message-ID: <1521549471.5400.114.camel@suse.com>
+Date: Tue, 20 Mar 2018 13:36:55 +0100
+Message-ID: <1521549415.5400.113.camel@suse.com>
 References: <1518691909-458-1-git-send-email-andrii.anisov@gmail.com>
- <f1317f4b-c5ca-d4e6-bf75-d436d81e981a@epam.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4458979860182921582=="
+Content-Type: multipart/mixed; boundary="===============7702665841989927942=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <f1317f4b-c5ca-d4e6-bf75-d436d81e981a@epam.com>
+In-Reply-To: <1518691909-458-1-git-send-email-andrii.anisov@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,67 +16,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii_anisov@epam.com>, xen-devel@lists.xen.org
-Cc: Daniel De Graaf <dgdegra@tycho.nsa.gov>, Meng Xu <xumengpanda@gmail.com>
+To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xen.org
+Cc: Meng Xu <xumengpanda@gmail.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, Andrii Anisov <andrii_anisov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============4458979860182921582==
+--===============7702665841989927942==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-mRrZfKt4fN+LYKz7Qo6J"
+	protocol="application/pgp-signature"; boundary="=-bcM82h2VNYgKFGtzm/lE"
 
 
---=-mRrZfKt4fN+LYKz7Qo6J
+--=-bcM82h2VNYgKFGtzm/lE
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2018-03-20 at 14:19 +0200, Andrii Anisov wrote:
-> Dear All,
+On Thu, 2018-02-15 at 12:51 +0200, Andrii Anisov wrote:
+> From: Andrii Anisov <andrii_anisov@epam.com>
 >=20
-> Any comments for the patch?
+> Introduce per-vcpu scheduler operations permission verification.
+> As long as Xvcpuinfo are in fact scheduler configuration
+> manipulations
+> there is no need to introduce specific access vectors.
 >=20
-> It addressed the issue mentioned here:=20
-> https://lists.xenproject.org/archives/html/xen-devel/2017-07/msg00452
-> .html
->=20
-Oops, sorry, I had missed it.
+> Signed-off-by: Andrii Anisov <andrii_anisov@epam.com>
+>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
 
-Now I've replied. I think it still needs a xsm / flask Ack.
-
-Thanks and Regards,
+Regards,
 Dario
 --=20
 <<This happens because I choose it to happen!>> (Raistlin Majere)
 -----------------------------------------------------------------
 Dario Faggioli, Ph.D, http://about.me/dario.faggioli
 Software Engineer @ SUSE https://www.suse.com/
---=-mRrZfKt4fN+LYKz7Qo6J
+--=-bcM82h2VNYgKFGtzm/lE
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqxAJ8ACgkQFkJ4iaW4
-c+6LhhAA1LcgSfRyDfNGSUOOz11j/rg8MWLtkQq8wu2gQoi21kTxRPLMEp2D79qL
-EsbaYvGnyRGlTlG41AQmzQ5tFAZ9rkNq6YblQsR4tTvyY5BTjhbkUmRSBbOIT+DR
-6maQ0SKvrEPGN2JFilmojOy/Om8BjYGW0D8dpiunLRea4uAmuuU+SXMfPVBxPC+D
-lZUGRF3VTcY+GEuSsliI5iPnnMy8jXwv91eG9LFGfLTiKgBtHAJ+C2PVR7bdSXIG
-sUknbFxyXSsveeTPKgJjDbCrEnRdrR2zspl81+6ChW6d13p7DLZkPaUl2sC5Yda0
-P7Z0KZmwtD+gUXZnXcbiUPawC4rmYbFcxl4E05lfBKRJPjpelNM+GlHauhquSQZS
-xbXkuyZEiMxpgAXSzmu75x4/OwvOlAPUH+h+4o2+hWkT4W/rzhtEaQkKbE0FzUr/
-RS4PwoLNGP2cWiiKzB7lS9YWz8Ojbgx7lrIiYRyBdCrZ1XLqQL3x03Nmn3n1M/g1
-FsKs8Hl/jisQ5XhGXPwRRUCY8bf1dqDQPQb0LrmJkBCN73K8URnLfBbPV/6RmCGV
-TON64NSFZNgM3YT/GlVyu+oyBiFWMtwX2A75mdbaldb4ZPZUdYfqZfm0m4L8BOry
-foH47MDIvN/AoebJnoKIVHmah5DsXXBNYSMYUVcVIEieQnpUFwE=
-=V3pd
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqxAGcACgkQFkJ4iaW4
+c+5L7A//YsYniumG4Pggjg3HzmHPm26bJkUafu+KNX7/psXVQNzAoxxrIkA7DtPN
+TVx6vyEMPALknVObBtFsxLgVd5d40hE/+I43aI8omTpqnYGZ92jS3t6tq4seoFSc
+GQ6Kp5wxwTS7h86p0UBZwKCxReY7/Bd+zA9CbZ/KnB9Won99pxSyz9bAUjAEWsuA
+2wN19IAJwANTr3Dx/EFI6NwOGuYPwgQymjFS/iGmyaC/pY3uxE1lNeETlK+GrSsv
+gcgsaTlNjrGV7ndo1GtA9m4huMVA8xoFldoS8kZwc12ph+yjR3m8Orghfk6v5Iup
+9lplt9JR+fIhvl1ZYdikTa6oiQ/bzUi4Mt3QG3pmAfLTfUFAUOjaqky2MaQaqky9
+mvfT4+NaBqg1c8S0XYEftnK1lknRhOvX5fTjdNvQtLpssmhBGWW3mnlp9FA2kof4
+FCs3sqnw3oShgMKaD5geNq5bVHRU3kxTlvTo5Q9i0hTqR5tbqH2Wk/vgarAKVJ1g
+0f8FlnGtgcEotYJ+YICXa0IoAgdaFG/lCuY4nlJDc7tpKVI9dS+p1x151mezTNdF
+BCV7ltM+NmNV1gLe04dB4lvqDNsFOIMT5GquU5VBRIeiJ+tjUYufTAJUB96i539U
+b1POGtYLhoV1K9JXk1Qr/zCL2zthp9fDFk0v7AHa/Se6iIi8vsQ=
+=13Tu
 -----END PGP SIGNATURE-----
 
---=-mRrZfKt4fN+LYKz7Qo6J--
+--=-bcM82h2VNYgKFGtzm/lE--
 
 
 
---===============4458979860182921582==
+--===============7702665841989927942==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -87,4 +84,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============4458979860182921582==--
+--===============7702665841989927942==--
