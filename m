@@ -1,22 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v10 11/11] vpci/msix: add MSI-X handlers
-Date: Tue, 20 Mar 2018 07:10:39 -0600
-Message-ID: <5AB1165F02000078001B3F03@prv-mh.provo.novell.com>
-References: <20180316133008.66443-1-roger.pau@citrix.com>
- <20180316133008.66443-12-roger.pau@citrix.com>
- <5AB0F87D02000078001B3E0B@prv-mh.provo.novell.com>
- <20180320114300.xzadfq244eihcgn3@MacBook-Pro-de-Roger.local>
+From: Stefan Hajnoczi <stefanha@gmail.com>
+Subject: Re: [Qemu-block] [PATCH] qemu: include generated files
+ with <> and not ""
+Date: Tue, 20 Mar 2018 13:10:41 +0000
+Message-ID: <20180320131041.GB24329@stefanha-x1.localdomain>
+References: <1521510562-529051-1-git-send-email-mst@redhat.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2545553586865084445=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=3grj=gk=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1eyH2K-0007WN-Ca
- for xen-devel@lists.xenproject.org; Tue, 20 Mar 2018 13:10:44 +0000
-In-Reply-To: <20180320114300.xzadfq244eihcgn3@MacBook-Pro-de-Roger.local>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=h5wp=gk=gmail.com=stefanha@srs-us1.protection.inumbo.net>)
+ id 1eyH2M-0007WY-KU
+ for xen-devel@lists.xenproject.org; Tue, 20 Mar 2018 13:10:46 +0000
+Received: by mail-wm0-x241.google.com with SMTP id t6so3389072wmt.5
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Mar 2018 06:10:45 -0700 (PDT)
+In-Reply-To: <1521510562-529051-1-git-send-email-mst@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,22 +23,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, IanJackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>, Dmitry Fleytman <dmitry.fleytman@gmail.com>, sheepdog@lists.wpkg.org, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Li Zhijian <lizhijian@cn.fujitsu.com>, David Hildenbrand <david@redhat.com>, Jason Wang <jasowang@redhat.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-devel@nongnu.org, Alexander Graf <agraf@suse.de>, BALATON Zoltan <balaton@eik.bme.hu>, Keith Busch <keith.busch@intel.com>, Max Filippov <jcmvbkbc@gmail.com>, Gerd Hoffmann <kraxel@redhat.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Max Reitz <mreitz@redhat.com>, Yongbok Kim <yongbok.kim@mips.com>, Hannes Reinecke <hare@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, zhanghailiang <zhang.zhanghailiang@huawei.com>, Ben Warren <ben@skyportsystems.com>, Stefan Berger <stefanb@linux.vnet.ibm.com>, Ronnie Sahlberg <ronniesahlberg@gmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIwLjAzLjE4IGF0IDEyOjQzLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IFNpbmNlIHlvdSBvbmx5IGhhZCBjb21tZW50cyBvbiBwYXRjaCA3IGFuZCAxMSBhbmQgdGhlcmUn
-cyB0aGUgZXh0cmEKPiBmaXggZm9yIHRoZSB0ZXN0IGhhcm5lc3MsIHNob3VsZCBJIGp1c3Qgc2Vu
-ZCB0aG9zZSBhbmQgcHJvdmlkZSB5b3UKPiB3aXRoIGEgZ2l0IGJyYW5jaCB0aGF0IGNvbnRhaW5z
-IHRoZSByZXN0PwoKV2VsbCwgaWYgaXQncyBub3QgdG9vIG11Y2ggaGFzc2xlIGZvciB5b3UgSSdk
-IHByZWZlciBpZiB5b3UgcmVzZW50IHRoZQpmdWxsIHNlcmllcyAob3IsIHNlZSBiZWxvdywgd2hh
-dGV2ZXIgaXMgbGVmdCBhdCB0aGUgdGltZSB5b3UgZ2V0CmFyb3VuZCB0byBzZW5kIGl0KS4KCj4g
-SSBjYW4gYWxzbyB3YWl0IGlmIHlvdSB3YW50IHRvIGNvbW1pdCB0aGUgc3RhcnQgb2YgdGhlIHNl
-cmllcwo+IChwcm92aWRlZCBJIGdldCBhbGwgdGhlIHJlbGV2YW50IEFja3MpIGFuZCByZWJhc2Ug
-b24gdG9wIG9mIHRoYXQuCgpJJ2QgbGVhdmUgdGhhdCB1cCB0byB5b3U7IGl0IGxvb2tzIGxpa2Ug
-Ym90aCB0b29sIHN0YWNrIG1haW50YWluZXJzCmFyZSBub3QgYXJvdW5kIHJpZ2h0IG5vdywgc28g
-dGhlaXIgYWNrIGZvciBwYXRjaCAxIG1heSB0YWtlIGEgZmV3Cm1vcmUgZGF5cyB0byBhcnJpdmUu
-CgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============2545553586865084445==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="LpQ9ahxlCli8rRTG"
+Content-Disposition: inline
+
+
+--LpQ9ahxlCli8rRTG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Mar 20, 2018 at 03:54:36AM +0200, Michael S. Tsirkin wrote:
+> QEMU coding style at the moment asks for all non-system
+> include files to be used with #include "foo.h".
+> However this rule actually does not make sense and
+> creates issues for when the included file is generated.
+>=20
+> In C, include "file" means look in current directory,
+> then on include search path. Current directory here
+> means the source file directory.
+> By comparison include <file> means look on include search path.
+>=20
+> As generated files are not in the search directory (unless the build
+> directory happens to match the source directory), it does not make sense
+> to include them with "" - doing so is merely more work for preprocessor
+> and a source or errors if a stale file happens to exist in the source
+> directory.
+>=20
+> This changes include directives for all generated files, across the
+> tree. The idea is to avoid sending a huge amount of email.  But when
+> merging, the changes will be split with one commit per file, e.g. for
+> ease of bisect in case of build failures, and to ease merging.
+>=20
+> Note that should some generated files be missed by this tree-wide
+> refactoring, it isn't a big deal - this merely maintains the status quo,
+> and this can be addressed by a separate patch on top.
+
+Stale header files are a pain.  I often do make distclean before
+checking out a radically different QEMU version to avoid the problem.
+
+This patch trades off the stale header file issue for a new approach to
+using <> vs "", which will be hard to use consistently in the future
+since it is unconventional.
+
+Is the build time improvement worth it (please post numbers)?
+
+Stefan
+
+--LpQ9ahxlCli8rRTG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEcBAEBAgAGBQJasQhRAAoJEJykq7OBq3PIhegIAIuKiJzv3MhB1QK0Lnz/P592
+Sj2qAfnfuQx/KTgnY8u9eookcjP0oLcPzlDMOMnuBcDmy676pEBiyfnUIdcQ0LZM
+2i2bROjPgfwqqfLWFI4zYc7w76i43e3rU4bzIBh7f767IxlRTlb3auxTknxEL1IO
+pi1ZYsNHvOHaXvfNTbTVfetHTOuP/KgwN2VFnHgzhqmPxNlesJOArsG341SG95X6
+4wkmXPEe1z47dpCWHF3HMvX8Lkn/Sb4C0LVK6cgBHHtRVS/5hhk150tQAiUTaRKM
+JgoD11JKE3C3+BK5n1z15dsx5UR2lKyEIEKKtgNp476Vw6UQprcvAITTJgD2CFw=
+=8mFJ
+-----END PGP SIGNATURE-----
+
+--LpQ9ahxlCli8rRTG--
+
+
+--===============2545553586865084445==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2545553586865084445==--
