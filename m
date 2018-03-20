@@ -1,20 +1,16 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 4/4] x86/hvm: add stricter permissions
- checks to ioreq server control plane
-Date: Tue, 20 Mar 2018 10:43:04 -0600
-Message-ID: <5AB1482802000078001B417B@prv-mh.provo.novell.com>
-References: <20180316165857.7112-1-paul.durrant@citrix.com>
- <20180316165857.7112-5-paul.durrant@citrix.com>
+Subject: Re: [PATCH v2] hvm/svm: Implement Debug events
+Date: Tue, 20 Mar 2018 10:44:02 -0600
+Message-ID: <5AB1486202000078001B417E@prv-mh.provo.novell.com>
+References: <1521538804-22772-1-git-send-email-aisaila@bitdefender.com>
+ <ae6bf6ef-4df2-ba53-3bf1-6de22c65fa2c@citrix.com>
+ <5AB13F7402000078001B40FD@prv-mh.provo.novell.com>
+ <0538060e-a0bc-5155-0505-5b7b69ba458b@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=3grj=gk=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1eyKLr-0002Sp-Hf
- for xen-devel@lists.xenproject.org; Tue, 20 Mar 2018 16:43:07 +0000
-In-Reply-To: <20180316165857.7112-5-paul.durrant@citrix.com>
+In-Reply-To: <0538060e-a0bc-5155-0505-5b7b69ba458b@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,23 +20,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: tamas@tklengyel.com, rcojocaru@bitdefender.com, xen-devel@lists.xen.org, suravee.suthikulpanit@amd.com, Alexandru Isaila <aisaila@bitdefender.com>, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE2LjAzLjE4IGF0IDE3OjU4LCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+IFRoZXJlIGhhcyBhbHdheXMgYmVlbiBhbiBpbnRlbnRpb24gaW4gdGhlIGlvcmVxIHNlcnZl
-ciBBUEkgdGhhdCBvbmx5IHRoZQo+IGRvbWFpbiB0aGF0IGNyZWF0ZXMgYW4gaW9yZXEgc2VydmVy
-IHNob3VsZCBiZSBhYmxlIHRvIG1hbmlwdWxhdGUgaXQuCj4gSG93ZXZlciwgc28gZmFyLCBub3Ro
-aW5nIGhhcyBlbmZvcmNlZCB0aGlzLiBUaGlzIG1lYW5zIHRoYXQgdHdvIGRvbWFpbnMKPiB3aXRo
-IERNX1BSSVYgb3ZlciBhIHRhcmdldCBkb21haW4gY2FuIGN1cnJlbnRseSBtYW5pcHVsYXRlIGVh
-Y2ggb3RoZXJzCj4gaW9yZXEgc2VydmVycy4KPiAKPiBBIHByZXZpb3VzIHBhdGNoIGFkZGVkIGNv
-ZGUgdG8gdGFrZSBhIHJlZmVyZW5jZSBhbmQgc3RvcmUgYSBwb2ludGVyIHRvIHRoZQo+IGRvbWFp
-biB0aGF0IGNyZWF0ZXMgYW4gaW9yZXEgc2VydmVyLiBUaGlzIHBhdGNoIG5vdyBhZGRzIGNoZWNr
-cyB0byB0aGUKPiBmdW5jdGlvbnMgdGhhdCBtYW5pcHVsYXRlIHRoZSBpb3JlcSBzZXJ2ZXIgdG8g
-bWFrZSBzdXJlIHRoZXkgYXJlIGJlaW5nCj4gY2FsbGVkIGJ5IHRoZSBzYW1lIGRvbWFpbi4KPiAK
-PiBTaWduZWQtb2ZmLWJ5OiBQYXVsIER1cnJhbnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPgoK
-UmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDIwLjAzLjE4IGF0IDE3OjE0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMjAvMDMvMTggMTY6MDUsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAyMC4w
+My4xOCBhdCAxNjo1MywgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gUGxl
+YXNlIGNvdWxkIHlvdSBkZWxldGUgdGhpcyBmdW5jdGlvbiBhbmQgdXNlOgo+Pj4KPj4+IGRpZmYg
+LS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9odm0uaCBiL3hlbi9pbmNsdWRlL2FzbS14
+ODYvaHZtL2h2bS5oCj4+PiBpbmRleCAyMzc2ZWQ2Li44NDNkYWZlIDEwMDY0NAo+Pj4gLS0tIGEv
+eGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vaHZtLmgKPj4+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14
+ODYvaHZtL2h2bS5oCj4+PiBAQCAtNDA3LDYgKzQwNywxOSBAQCB2b2lkIGh2bV9taWdyYXRlX3Bp
+cnFzKHN0cnVjdCB2Y3B1ICp2KTsKPj4+ICAKPj4+ICB2b2lkIGh2bV9pbmplY3RfZXZlbnQoY29u
+c3Qgc3RydWN0IHg4Nl9ldmVudCAqZXZlbnQpOwo+Pj4gIAo+Pj4gK3N0YXRpYyBpbmxpbmUgdm9p
+ZCBodm1faW5qZWN0X2V4Y2VwdGlvbigKPj4+ICsgICAgdW5zaWduZWQgaW50IHZlY3RvciwgdW5z
+aWduZWQgaW50IHR5cGUsIHVuc2lnbmVkIGludCBpbnNuX2xlbikKPj4+ICt7Cj4+PiArICAgIHN0
+cnVjdCB4ODZfZXZlbnQgZXZlbnQgPSB7Cj4+PiArICAgICAgICAudmVjdG9yID0gdmVjdG9yLAo+
+Pj4gKyAgICAgICAgLnR5cGUgPSB0eXBlLAo+Pj4gKyAgICAgICAgLmluc25fbGVuID0gaW5zbl9s
+ZW4sCj4+PiArICAgICAgICAuZXJyb3JfY29kZSA9IFg4Nl9FVkVOVF9OT19FQywKPj4+ICsgICAg
+fTsKPj4+ICsKPj4+ICsgICAgaHZtX2luamVjdF9ldmVudCgmZXZlbnQpOwo+Pj4gK30KPj4+ICsK
+Pj4+ICBzdGF0aWMgaW5saW5lIHZvaWQgaHZtX2luamVjdF9od19leGNlcHRpb24odW5zaWduZWQg
+aW50IHZlY3RvciwgaW50IAo+Pj4gZXJyY29kZSkKPj4+ICB7Cj4+PiAgICAgIHN0cnVjdCB4ODZf
+ZXZlbnQgZXZlbnQgPSB7Cj4+Pgo+Pj4gYXMgYSBuZXcgY29tbW9uIGhlbHBlci4gIChJJ20gbm90
+IHRlcnJpYmx5IGhhcHB5IHdpdGggdGhlIG5hbWUsIGJ1dCBJCj4+PiBjYW4ndCB0aGluayBvZiBh
+IGJldHRlciBhbHRlcm5hdGl2ZSwgc2VlaW5nIGFzIGl0IGlzIG5lZWRlZCBmb3IgYm90aAo+Pj4g
+c29mdHdhcmUgYW5kIGhhcmR3YXJlIGV4Y2VwdGlvbnMuKQo+PiBXZSdsbCBuZWVkIHNvbWUgYmV0
+dGVyIG5hbWUgdGhvdWdoIC0gImV4Y2VwdGlvbiIgdG9nZXRoZXIgd2l0aAo+PiBhbiB1bmNvbmRp
+dGlvbmFsIFg4Nl9FVkVOVF9OT19FQyBpcyBub3QgcmVhbGx5IGEgcmVhc29uYWJsZQo+PiBjb21i
+aW5hdGlvbi4KPiAKPiBBbHRlcm5hdGl2ZWx5LCBrZWVwIHRoZSBjdXJyZW50IG5hbWUsIGV4dGVu
+ZCB0aGUgcGFyYW1ldGVyIGxpc3Qgd2l0aCBhbgo+ICJpbnQgZXJyb3JfY29kZSIgYW5kIGhhdmUg
+dGhlIG5ldyBjYWxsZXJzIHBhc3MgWDg2X0VWRU5UX05PX0VDIGluPwoKRmluZSB3aXRoIG1lLgoK
+SmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
