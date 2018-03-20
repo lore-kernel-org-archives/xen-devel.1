@@ -1,20 +1,17 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: TLB flushing
-Date: Tue, 20 Mar 2018 10:29:24 +0100
-Message-ID: <ed495690-efc0-9379-271a-f0d94ea91a40@suse.com>
-References: <0f224e94-2513-3146-d418-8789a5e1369b@suse.com>
- <5AB0E04502000078001B3CFF@suse.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v5 14/16] xen/grant: Switch
+ common/grant_table.c to use typesafe MFN
+Date: Tue, 20 Mar 2018 09:30:29 +0000
+Message-ID: <7e804155-fa76-747d-47a1-20d1cbb5a60d@arm.com>
+References: <20180314182009.14274-1-julien.grall@arm.com>
+ <20180314182009.14274-15-julien.grall@arm.com>
+ <5AAA396002000078001B1EE4@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=vyyo=gk=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1eyDaB-00048b-Ff
- for xen-devel@lists.xenproject.org; Tue, 20 Mar 2018 09:29:27 +0000
-In-Reply-To: <5AB0E04502000078001B3CFF@suse.com>
-Content-Language: de-DE
+In-Reply-To: <5AAA396002000078001B1EE4@prv-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,41 +21,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>
-Cc: "George.Dunlap@eu.citrix.com" <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAvMDMvMTggMTA6MTksIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDIwLjAzLjE4IGF0
-IDA5OjUwLCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4gV2hpbGUgaHVudGluZyBhIHN0cmFu
-Z2UgYnVnIGluIG15IFBDSUQgcGF0Y2ggc2VyaWVzIGhpbnRpbmcgYXQgc29tZQo+PiBUTEIgaW52
-YWxpZGF0aW9uIHByb2JsZW0gSSBkaXNjb3ZlcmVkIGEgcGllY2Ugb2YgY29kZSBsb29raW5nIHJh
-dGhlcgo+PiBmaXNoeSB0byBtZS4KPj4KPj4gSXMgaXQgY29ycmVjdCBmb3IgbmV3X3RsYmZsdXNo
-X2Nsb2NrX3BlcmlvZCgpIHRvIHVzZSBGTFVTSF9UTEIgaW5zdGVhZAo+PiBvZiBGTFVTSF9UTEJf
-R0xPQkFMPwo+Pgo+PiBXaGlsZSBub3QgYmVpbmcgYSBwcm9ibGVtIGluIGN1cnJlbnQgY29kZSBh
-cyBib3RoIHdpbGwgZmx1c2ggYWxsIFRMQgo+PiBlbnRyaWVzIG15IHNlcmllcyB3aWxsIGNoYW5n
-ZSB0aGF0IGJ5IHVzaW5nIGludnBjaWQgdG8gZmx1c2ggb25seSB0aGUKPj4gbm9uLWdsb2JhbCBl
-bnRyaWVzIGlmIEZMVVNIX1RMQl9HTE9CQUwgd2Fzbid0IHNldC4KPj4KPj4gSSBjYW4gc2VuZCBh
-IHBhdGNoIGlmIGFueW9uZSBjYW4gY29uZmlybSB0aGF0IHVzaW5nIEZMVVNIX1RMQiBvbmx5IGlz
-Cj4+IHdyb25nLgo+IAo+IEkgdGhpbmsgdGhpcyBzaG91bGRuJ3QgYmUgYSBzZXBhcmF0ZSBwYXRj
-aCwgYnV0IGFuIGludGVncmFsIHBhcnQgb2YgdGhlCj4gb25lIGludHJvZHVjaW5nIHRoZSBkaXN0
-aW5jdGlvbiBiZXR3ZWVuICJhbGwiIGFuZCBub24tZ2xvYmFsIGZsdXNoZXMuCj4gVGhpcyBpcyBi
-ZWNhdXNlCj4gLSByaWdodCBub3cgaXQgZG9lc24ndCBtYWtlIGEgZGlmZmVyZW5jZSAod2UgZG8g
-ImFsbCIgZmx1c2hlcyBhbnl3YXkpLAo+IC0gYmFjayBpbiB0aGUgMzItYml0IGRheXMgaXQgZGlk
-bid0IG1hdHRlciBiZWNhdXNlIGd1ZXN0IG1hcHBpbmdzCj4gICB3b3VsZCBuZXZlciBoYXZlIGJl
-ZW4gYWxsb3dlZCB0byBiZSBnbG9iYWwsIGFuZCB0cmFuc2llbnQgWGVuCj4gICBtYXBwaW5ncyBh
-bHNvIHdvdWxkIG5ldmVyIGhhdmUgaGFkIHRoZSBHIGJpdCBzZXQuCj4gSU9XIHdpdGggd2hhdCB1
-c2VkIHRvIGJlIG5hbWVkIFVTRVJfTUFQUElOR1NfQVJFX0dMT0JBTAo+IHRoaXMgd291bGQgbmVl
-ZCB0byBiZWNvbWUgRkxVU0hfVExCX0dMT0JBTCBhdCB0aGUgcG9pbnQgdGhlCj4ga2luZCBvZiBm
-bHVzaCBnZXRzIGFsdGVyZWQsIHdoaWxlIHdpdGhvdXQgaXQgY291bGQgcmVtYWluIGF0IEZMVVNI
-X1RMQi4KClJlYWxseT8gQXJlbid0IGdsb2JhbCBoeXBlcnZpc29yIG1hcHBpbmdzIGFmZmVjdGVk
-IGJ5IHRoaXMsIHRvbz8KCj4gUGVyaGFwcyBpdCBpcyB3b3J0aHdoaWxlIHRvIHJldGFpbiB0aGlz
-IGRpc3RpbmN0aW9uIGp1c3QgZm9yCj4gZG9jdW1lbnRhdGlvbiBwdXJwb3NlcyAoaW4gY2FzZSBh
-IGZ1dHVyZSBjaGFuZ2Ugd2FudHMgdG8gdHVybiBvZmYKPiB0aGF0IFVTRVJfTUFQUElOR1NfQVJF
-X0dMT0JBTCBiZWhhdmlvciBmb3Igd2hhdGV2ZXIgcmVhc29uKS4KCkkgdGhpbmsgYXMgbG9uZyBh
-cyBGTFVTSF9UTEJfR0xPQkFMIGlzIGJlaW5nIHVzZWQgaW4gdGhlIGNvZGUKbmV3X3RsYmZsdXNo
-X2Nsb2NrX3BlcmlvZCgpIHNob3VsZCBkbyBzbywgdG9vLiBJbiBjYXNlIHRoZXJlIGlzIG5vIG5l
-ZWQKdG8gZG8gVExCIGZsdXNoZXMgaW5jbHVkaW5nIGdsb2JhbCBwYWdlcywgRkxVU0hfVExCX0dM
-T0JBTCBjYW4gYmUKbW9kaWZpZWQgdG8gZG8gb25seSBub24tZ2xvYmFsIGZsdXNoaW5nICh3aXRo
-IGEgY29tbWVudCBleHBsYWluaW5nIHdoeQp0aGlzIGlzIHNlY3VyZSkuCgoKSnVlcmdlbgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGkgSmFuLAoKT24gMDMvMTUvMjAxOCAwODoxNCBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4g
+T24gMTQuMDMuMTggYXQgMTk6MjAsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+IEZy
+b206IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4+Cj4+IEF0IHRoZSBzYW1l
+IHRpbWUgcmVwbGFjZSBfbWZuKDApIGJ5IElOVkFMSURfTUZOIG9yIGRyb3AgdGhlIGluaXRpYWxp
+emVyCj4+IHdoZW4gaXQgaXMgbm90IG5lY2Vzc2FyeS4gVGhpcyB3aWxsIG1ha2UgY2xlYXJlciB0
+aGF0IHRoZSBNRk4KPj4gaW5pdGlhbGl6ZWQgaXMgbm90IHZhbGlkLgo+Pgo+PiBPdGhlciB0aGFu
+IF9tZm4oMCkgLT4gSU5WQUxJRF9NRk4sIG5vIGZ1bmN0aW9uYWwgY2hhbmdlIGludGVuZGVkLgo+
+IAo+IFRoZXJlJ3Mgbm8gc3VjaCB0cmFuc2Zvcm1hdGlvbiBpbiB0aGUgcGF0Y2gsIHNvIEkgdGhp
+bmsgaXQgd291bGQKPiBiZSBiZXR0ZXIgaWYgeW91IHNhaWQgIjAiIG9yICJNRk4gMCIgaW5zdGVh
+ZCBvZiAiX21mbigwKSIgaW4gYm90aAo+IGluc3RhbmNlcyBhYm92ZS4KCkdvb2QgcG9pbnQuIEkg
+d2lsbCB1cGRhdGUgdGhlIGNvbW1pdCBtZXNzYWdlLgoKCj4+IFNpZ25lZC1vZmYtYnk6IEp1bGll
+biBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4gCj4gUmV2aWV3ZWQtYnk6IEphbiBCZXVs
+aWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KClRoYW5rIHlvdSEKCkNoZWVycywKCi0tIApKdWxpZW4g
+R3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
