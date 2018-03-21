@@ -1,10 +1,23 @@
-From: Jayadev Kumaran <jayadevk123@gmail.com>
-Subject: Xen support on arm64 platform
-Date: Wed, 21 Mar 2018 11:27:01 +0530
-Message-ID: <CAOG0fenTdiD+u-EbDny_XrDiAUsq_yDwzM5mVm-aHfXu=f85tA@mail.gmail.com>
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+Subject: Re: [PATCH v3 0/5] sndif: add explicit back and front
+ synchronization
+Date: Wed, 21 Mar 2018 09:15:36 +0200
+Message-ID: <2868f1f8-3988-7f25-9b88-8b686866b9ce__22449.059764813$1521616474$gmane$org@gmail.com>
+References: <1521444144-12451-1-git-send-email-andr2000@gmail.com>
+ <s5hr2oeebui.wl-tiwai@suse.de>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3435369445381468690=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=egsh=gl=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1eyXyH-0002po-Kv
+ for xen-devel@lists.xenproject.org; Wed, 21 Mar 2018 07:15:41 +0000
+Received: by mail-lf0-x22e.google.com with SMTP id j68-v6so6280389lfg.13
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Mar 2018 00:15:39 -0700 (PDT)
+In-Reply-To: <s5hr2oeebui.wl-tiwai@suse.de>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,45 +26,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Takashi Iwai <tiwai@suse.de>
+Cc: xen-devel@lists.xenproject.org, alsa-devel@alsa-project.org, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============3435369445381468690==
-Content-Type: multipart/alternative; boundary="000000000000271b5f0567e5dc9c"
-
---000000000000271b5f0567e5dc9c
-Content-Type: text/plain; charset="UTF-8"
-
-Hello all,
-
-I need to setup Xen on Snapdragon 820 platform - armv8 64 bit architecture.
-Is there support available for the same ? Is there Xen implementation on
-any other similar platform ?
-
-Thanks and Regards,
-Jay
-
---000000000000271b5f0567e5dc9c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hello all,<br><br></div>I need to setup Xen on Snapdr=
-agon 820 platform - armv8 64 bit architecture. Is there support available f=
-or the same ? Is there Xen implementation on any other similar platform ?<b=
-r><br><div>Thanks and Regards,<br></div><div>Jay<div class=3D"gmail-adL"><b=
-r></div></div><br></div>
-
---000000000000271b5f0567e5dc9c--
-
-
---===============3435369445381468690==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3435369445381468690==--
+T24gMDMvMjAvMjAxOCAxMDoyMiBQTSwgVGFrYXNoaSBJd2FpIHdyb3RlOgo+IE9uIE1vbiwgMTkg
+TWFyIDIwMTggMDg6MjI6MTkgKzAxMDAsCj4gT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gd3JvdGU6
+Cj4+IEZyb206IE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5r
+b0BlcGFtLmNvbT4KPj4KPj4gSGVsbG8sIGFsbCEKPj4KPj4gSW4gb3JkZXIgdG8gcHJvdmlkZSBl
+eHBsaWNpdCBzeW5jaHJvbml6YXRpb24gYmV0d2VlbiBiYWNrZW5kIGFuZAo+PiBmcm9udGVuZCB0
+aGUgZm9sbG93aW5nIGNoYW5nZXMgYXJlIGludHJvZHVjZWQgaW4gdGhlIHByb3RvY29sOgo+PiAg
+IC0gYnVtcCBwcm90b2NvbCB2ZXJzaW9uIHRvIDIKPj4gICAtIGFkZCBuZXcgcmluZyBidWZmZXIg
+Zm9yIHNlbmRpbmcgYXN5bmNocm9ub3VzIGV2ZW50cyBmcm9tCj4+ICAgICBiYWNrZW5kIHRvIGZy
+b250ZW5kIHRvIHJlcG9ydCBudW1iZXIgb2YgYnl0ZXMgcGxheWVkIGJ5IHRoZQo+PiAgICAgZnJv
+bnRlbmQgKFhFTlNORF9FVlRfQ1VSX1BPUykKPj4gICAtIGludHJvZHVjZSB0cmlnZ2VyIGV2ZW50
+cyBmb3IgcGxheWJhY2sgY29udHJvbDogc3RhcnQvc3RvcC9wYXVzZS9yZXN1bWUKPj4gICAtIGFk
+ZCAicmVxLSIgcHJlZml4IHRvIGV2ZW50LWNoYW5uZWwgYW5kIHJpbmctcmVmIHRvIHVuaWZ5IG5h
+bWluZwo+PiAgICAgb2YgdGhlIFhlbiBldmVudCBjaGFubmVscyBmb3IgcmVxdWVzdHMgYW5kIGV2
+ZW50cwo+PiAgIC0gYWRkIFhFTlNORF9PUF9IV19QQVJBTV9RVUVSWSByZXF1ZXN0IHRvIHJlYWQv
+dXBkYXRlCj4+ICAgICBzdHJlYW0gY29uZmlndXJhdGlvbiBzcGFjZTogcmVxdWVzdCBwYXNzZXMg
+ZGVzaXJlZCBpbnRlcnZhbHMvZm9ybWF0cyBmb3IKPj4gICAgIHRoZSBzdHJlYW0gcGFyYW1ldGVy
+cyBhbmQgdGhlIHJlc3BvbnNlIHJldHVybnMgYWxsb3dlZCBpbnRlcnZhbHMgYW5kCj4+ICAgICBm
+b3JtYXRzIG1hc2sgdGhhdCBjYW4gYmUgdXNlZC4KPj4KPj4gQ2hhbmdlcyBzaW5jZSB2MjoKPj4g
+MS4gS29ucmFkJ3Mgci1iIHRhZyBmb3IgdmVyc2lvbiBwYXRjaAo+PiAyLiBNQUpPUjogY2hhbmdl
+ZCByZXEvcmVzcC9ldnQgcGFja2V0IHNpemVzIGZyb20gMzIgdG8gNjQgb2N0ZXRzCj4+IDMuIFJl
+d29ya2VkIFhFTlNORF9PUF9IV19QQVJBTV9RVUVSWSBzbyBpdCBub3cgc2VuZHMgYWxsCj4+ICAg
+ICBwYXJhbWV0ZXJzIGF0IG9uY2UsIGFsbG93aW5nIHRvIGNoZWNrIGFsbCB0aGUgY29uZmlndXJh
+dGlvbgo+PiAgICAgc3BhY2UuCj4+IDQuIE1pbm9yIGRvY3VtZW50YXRpb24gY2xlYW51cCAoYWRk
+ZWQgbWlzc2VkICJyZXNlcnZlZCIgZmllbGRzKQo+Pgo+PiBDaGFuZ2VzIHNpbmNlIHYxOgo+Pgo+
+PiAxLiBDaGFuZ2VkIHByb3RvY29sIHZlcnNpb24gZGVmaW5pdGlvbiBmcm9tIHN0cmluZyB0byBp
+bnRlZ2VyLAo+PiBzbyBpdCBjYW4gZWFzaWx5IGJlIHVzZWQgaW4gY29tcGFyaXNvbnMuCj4+IEtv
+bnJhZCwgSSBoYXZlIHJlbW92ZWQgeW91ciByLWIgdGFnIGZvciB0aGUgcmVhc29uIG9mIHRoaXMg
+Y2hhbmdlLgo+Pgo+PiAyLiBJbiBvcmRlciB0byBwcm92aWRlIGV4cGxpY2l0IHN0cmVhbSBwYXJh
+bWV0ZXIgbmVnb3RpYXRpb24gYmV0d2Vlbgo+PiBiYWNrZW5kIGFuZCBmcm9udGVuZCB0aGUgZm9s
+bG93aW5nIGNoYW5nZXMgYXJlIGludHJvZHVjZWQgaW4gdGhlIHByb3RvY29sOgo+PiBhZGQgWEVO
+U05EX09QX0hXX1BBUkFNX1FVRVJZIHJlcXVlc3QgdG8gcmVhZC91cGRhdGUKPj4gY29uZmlndXJh
+dGlvbiBzcGFjZSBmb3IgdGhlIHBhcmFtZXRlciBnaXZlbjogcmVxdWVzdCBwYXNzZXMKPj4gZGVz
+aXJlZCBwYXJhbWV0ZXIgaW50ZXJ2YWwgKG1hc2spIGFuZCB0aGUgcmVzcG9uc2UgdG8gdGhpcyBy
+ZXF1ZXN0Cj4+IHJldHVybnMgbWluL21heCBpbnRlcnZhbCAobWFzaykgZm9yIHRoZSBwYXJhbWV0
+ZXIgdG8gYmUgdXNlZC4KPj4KPj4gUGFyYW1ldGVycyBzdXBwb3J0ZWQgYnkgdGhpcyByZXF1ZXN0
+L3Jlc3BvbnNlOgo+PiAgIC0gZm9ybWF0IG1hc2sKPj4gICAtIHNhbXBsZSByYXRlIGludGVydmFs
+Cj4+ICAgLSBudW1iZXIgb2YgY2hhbm5lbHMgaW50ZXJ2YWwKPj4gICAtIGJ1ZmZlciBzaXplLCBp
+bnRlcnZhbCwgZnJhbWVzCj4+ICAgLSBwZXJpb2Qgc2l6ZSwgaW50ZXJ2YWwsIGZyYW1lcwo+IEkg
+Y2FuJ3QganVkZ2UgZXhhY3RseSBhYm91dCB0aGUgcHJvdG9jb2wgd2l0aG91dCB0aGUgYWN0dWFs
+IEZFL0JFCj4gaW1wbGVtZW50YXRpb25zLCBidXQgdGhlIGNoYW5nZSBsb29rcyBnb29kIHRvIG1l
+LCBlc3BlY2lhbGx5IGlmIHlvdSd2ZQo+IGFscmVhZHkgdGVzdGVkIHNvbWV0aGluZy4KVGhhbmsg
+eW91LCBJIGhhdmUgdGVzdGVkIHRoZSBjaGFuZ2VzIGFuZCBuZWVkIHRoZW0gdG8gc3RhcnQgdXBz
+dHJlYW1pbmcKdGhlIGZyb250ZW5kIGRyaXZlciB1c2VkIHRvIHRlc3QgdGhlIHByb3RvY29sLgpE
+byB5b3UgbWluZCBpZiBJIHB1dCB5b3VyIEFja2VkLWJ5IChvciB5b3UgcHJlZmVyIFJldmlld2Vk
+LWJ5PykgdGFnIHRvIAp0aGVzZSBwYXRjaGVzOgoKW1BBVENIIHYzIDQvNV0gc25kaWY6IEFkZCBl
+eHBsaWNpdCBiYWNrIGFuZCBmcm9udCBzeW5jaHJvbml6YXRpb24KW1BBVENIIHYzIDUvNV0gc25k
+aWY6IEFkZCBleHBsaWNpdCBiYWNrIGFuZCBmcm9udCBwYXJhbWV0ZXIgbmVnb3RpYXRpb24KClBs
+ZWFzZSBub3RlLCB0aGF0IHRoZSBjaGFuZ2VzIGZpcnN0IHRvIGJlIG1lcmdlZCBpbnRvIFhlbiBh
+bmQgdGhlbiBJJ2xsIApwcmVwYXJlCnRoZSBzYW1lLCBidXQgZm9yIHRoZSBrZXJuZWwKPgo+IElm
+IG90aGVyIHBlb3BsZSBoYXZlIG5vIGNvbmNlcm4sIGxldCdzIGdvIGFoZWFkIHdpdGggRkUvQkUg
+c3R1ZmYuCktvbnJhZCwgYXJlIHlvdSBvayB3aXRoIHRoZSBjaGFuZ2VzPwo+Cj4gdGhhbmtzLAo+
+Cj4gVGFrYXNoaQpUaGFuayB5b3UsCk9sZWtzYW5kcgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
