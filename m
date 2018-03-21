@@ -1,21 +1,21 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v1 04/15] arm64: vgic-v3: Add ICV_BPR1_EL1
- handler
-Date: Wed, 21 Mar 2018 08:11:40 +0000
-Message-ID: <f18456b3-3039-2ff6-d921-5adeaa479f5d@arm.com>
-References: <cover.1521200294.git.manish.jaggi@cavium.com>
- <59180a6af11e97390da557da0a6c17a14c02eb6a.1521200294.git.manish.jaggi@cavium.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: [RFC PATCH] Make Security Policy Doc ready to
+ become a CNA
+Date: Wed, 21 Mar 2018 09:17:29 +0100
+Message-ID: <92CFADDD-DE84-4A83-BCD3-BA11662D4F4D@xenproject.org>
+References: <F465E328-FB40-4F0C-A3CE-391A44CF6C0E@citrix.com>
+ <e180a4e3-9d4a-fc4c-e1af-c24546a60042@citrix.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.2 \(3445.5.20\))
+Content-Type: multipart/mixed; boundary="===============7507918400556391213=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=kbl4=gl=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1eyYqY-0008T8-FM
- for xen-devel@lists.xenproject.org; Wed, 21 Mar 2018 08:11:46 +0000
-In-Reply-To: <59180a6af11e97390da557da0a6c17a14c02eb6a.1521200294.git.manish.jaggi@cavium.com>
-Content-Language: en-US
+ <srs0=/6yh=gl=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1eyYwB-0000FU-Ah
+ for xen-devel@lists.xenproject.org; Wed, 21 Mar 2018 08:17:35 +0000
+Received: by mail-wm0-x22c.google.com with SMTP id h76so8009613wme.4
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Mar 2018 01:17:33 -0700 (PDT)
+In-Reply-To: <e180a4e3-9d4a-fc4c-e1af-c24546a60042@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,96 +24,194 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Manish Jaggi <manish.jaggi@cavium.com>, xen-devel@lists.xenproject.org, sstabellini@kernel.org, marc.zyngier@arm.com, andre.przywara@arm.com
+To: George Dunlap <george.dunlap@citrix.com>
+Cc: Lars Kurth <lars.kurth@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, "security@xenproject.org" <security@xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgTWFuaXNoLAoKT24gMDMvMTYvMjAxOCAxMTo1OCBBTSwgTWFuaXNoIEphZ2dpIHdyb3RlOgo+
-IFRoaXMgcGF0Y2ggaXMgcG9ydGVkIHRvIHhlbiBmcm9tIGxpbnV4IGNvbW1pdAo+IGQ3MGM3YjMx
-YTYwZjI0NThmMzVjMjI2MTMxZjJhMDFhN2E5OGI2Y2YKPiAKPiBBZGQgYSBoYW5kbGVyIGZvciBy
-ZWFkaW5nL3dyaXRpbmcgdGhlIGd1ZXN0J3MgdmlldyBvZiB0aGUgSUNDX0JQUjFfRUwxCj4gcmVn
-aXN0ZXIsIHdoaWNoIGlzIGxvY2F0ZWQgaW4gdGhlIElDSF9WTUNSX0VMMi5CUFIxIGZpZWxkLgo+
-IAo+IFNpZ25lZC1vZmYtYnk6IE1hbmlzaCBKYWdnaSA8bWFuaXNoLmphZ2dpQGNhdml1bS5jb20+
-CgpBcyB5b3UgcG9ydCBjb21taXQgYnkgY29tbWl0LCBwbGVhc2UgYXQgbGVhc3QgbWVudGlvbiBN
-YXJjIGFzIGhlIGlzIHRoZSAKb3JpZ2luYWwgYXV0aG9yIG9mIHRoYXQgcGF0Y2guCgo+IAo+IGRp
-ZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vYXJtNjQvdmdpYy12My1zci5jIGIveGVuL2FyY2gvYXJt
-L2FybTY0L3ZnaWMtdjMtc3IuYwo+IGluZGV4IDU2YjAyZmQ0NWIuLjM2NDc4NWQzYWMgMTAwNjQ0
-Cj4gLS0tIGEveGVuL2FyY2gvYXJtL2FybTY0L3ZnaWMtdjMtc3IuYwo+ICsrKyBiL3hlbi9hcmNo
-L2FybS9hcm02NC92Z2ljLXYzLXNyLmMKPiBAQCAtMjAsMTAgKzIwLDc2IEBACj4gICAjaW5jbHVk
-ZSA8YXNtL3JlZ3MuaD4KPiAgICNpbmNsdWRlIDxhc20vdHJhcHMuaD4KPiAgICNpbmNsdWRlIDxh
-c20vc3lzdGVtLmg+Cj4gKyNpbmNsdWRlIDxhc20vZ2ljX3YzX2RlZnMuaD4KPiArCj4gKyNkZWZp
-bmUgdnRyX3RvX25yX3ByZV9iaXRzKHYpICAgICAoKCgodWludDMyX3QpKHYpID4+IDI2KSAmIDcp
-ICsgMSkKPiArCj4gK3N0YXRpYyBpbnQgIF9fdmdpY192M19icHJfbWluKHZvaWQpCgpQbGVhc2Ug
-cmVtb3ZlIG9uZSBvZiB0aGUgc3BhY2UuCgpBcyB5b3UgY29udmVydCB0byBYZW4gY29kaW5nIHN0
-eWxlLCBwbGVhc2UgcmVtb3ZlIF9fIGZyb20gYWxsIGZ1bmN0aW9uIApuYW1lcy4KCj4gK3sKPiAr
-ICAgIC8qIFNlZSBQc2V1ZG9jb2RlIGZvciBWUHJpb3JpdHlHcm91cCAqLwo+ICsgICAgcmV0dXJu
-IDggLSB2dHJfdG9fbnJfcHJlX2JpdHMoUkVBRF9TWVNSRUczMihJQ0hfVlRSX0VMMikpOwo+ICt9
-Cj4gKwo+ICtzdGF0aWMgdW5zaWduZWQgaW50IF9fdmdpY192M19nZXRfYnByMCh1aW50MzJfdCB2
-bWNyKQo+ICt7Cj4gKyAgICByZXR1cm4gKHZtY3IgJiBJQ0hfVk1DUl9CUFIwX01BU0spID4+IElD
-SF9WTUNSX0JQUjBfU0hJRlQ7Cj4gK30KPiArCj4gK3N0YXRpYyB1bnNpZ25lZCBpbnQgX192Z2lj
-X3YzX2dldF9icHIxKHVpbnQzMl90IHZtY3IpCj4gK3sKPiArICAgIHVuc2lnbmVkIGludCBicHI7
-Cj4gKwo+ICsgICAgaWYgKCB2bWNyICYgSUNIX1ZNQ1JfQ0JQUl9NQVNLICkKPiArICAgIHsKPiAr
-ICAgICAgICBicHIgPSBfX3ZnaWNfdjNfZ2V0X2JwcjAodm1jcik7Cj4gKyAgICAgICAgaWYgKCBi
-cHIgPCA3ICkKPiArICAgICAgICAgICAgYnByKys7Cj4gKyAgICB9Cj4gKyAgICBlbHNlCj4gKyAg
-ICAgICAgYnByID0gKHZtY3IgJiBJQ0hfVk1DUl9CUFIxX01BU0spID4+IElDSF9WTUNSX0JQUjFf
-U0hJRlQ7Cj4gKwo+ICsgICAgcmV0dXJuIGJwcjsKPiArfQo+ICsKPiArc3RhdGljIHZvaWQgIF9f
-dmdpY192M19yZWFkX2JwcjEoc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJlZ3MsIGludCByZWdpZHgp
-Cj4gK3sKPiArICAgIHVpbnQzMl90IHZtY3IgPSBSRUFEX1NZU1JFRzMyKElDSF9WTUNSX0VMMik7
-Cj4gKyAgICBzZXRfdXNlcl9yZWcocmVncywgcmVnaWR4LCBfX3ZnaWNfdjNfZ2V0X2JwcjEodm1j
-cikpOwo+ICt9Cj4gKwo+ICtzdGF0aWMgdm9pZCAgX192Z2ljX3YzX3dyaXRlX2JwcjEoc3RydWN0
-IGNwdV91c2VyX3JlZ3MgKnJlZ3MsIGludCByZWdpZHgpCj4gK3sKPiArICAgIHJlZ2lzdGVyX3Qg
-dmFsID0gZ2V0X3VzZXJfcmVnKHJlZ3MsIHJlZ2lkeCk7Cj4gKyAgICB1aW50OF90IGJwcl9taW4g
-PSBfX3ZnaWNfdjNfYnByX21pbigpOwo+ICsgICAgdWludDMyX3Qgdm1jciA9IFJFQURfU1lTUkVH
-MzIoSUNIX1ZNQ1JfRUwyKTsKPiArCj4gKyAgICBpZiAoIHZtY3IgJiBJQ0hfVk1DUl9DQlBSX01B
-U0sgKQo+ICsgICAgICAgIHJldHVybjsKPiArCj4gKyAgICAvKiBFbmZvcmNlIEJQUiBsaW1pdGlu
-ZyAqLwo+ICsgICAgaWYgKCB2YWwgPCBicHJfbWluICkKPiArICAgICAgICB2YWwgPSBicHJfbWlu
-Owo+ICsKPiArICAgIHZhbCA8PD0gSUNIX1ZNQ1JfQlBSMV9TSElGVDsKPiArICAgIHZhbCAmPSBJ
-Q0hfVk1DUl9CUFIxX01BU0s7Cj4gKyAgICB2bWNyICY9IH5JQ0hfVk1DUl9CUFIxX01BU0s7Cj4g
-KyAgICB2bWNyIHw9IHZhbDsKPiArCj4gKyAgICBXUklURV9TWVNSRUczMih2bWNyLCBJQ0hfVk1D
-Ul9FTDIpOwo+ICt9Cj4gKwo+ICt2b2lkIGhhbmRsZV9icHIxKHN0cnVjdCBjcHVfdXNlcl9yZWdz
-ICpyZWdzLCBpbnQgcmVnaWR4LCBjb25zdCB1bmlvbiBoc3IgaHNyKQoKSSBhbSBwcmV0dHkgc3Vy
-ZSBJIHNhaWQgaXQgaW4gdGhlIHBhc3QuIElmIHRoZSBmdW5jdGlvbiBpcyBub3QgZXhwb3J0ZWQg
-Cml0LCBpdCAqbXVzdCogYmUgc3RhdGljLiBJIGFtIG5vdCBnb2luZyB0byByZXBlYXQgaXQgYW5k
-IGV4cGVjdCBhbGwgdGhlIApzaXRlcyB0byBiZSBmaXhlZCBpbiB0aGUgbmV4dCB2ZXJzaW9uLgoK
-VGhlIG5hbWluZyBpcyBhbHNvIGEgYml0IG9kZC4gQWxsIG9mIHRoZSBmaWxlIGlzIHVzaW5nICJ2
-Z2ljX3YzXyIuIFNvIApwbGVhc2UgdHJ5IHRvIGJlIGNvbnNpc3RlbnQuCgo+ICt7Cj4gKyAgICBp
-ZiAoIGhzci5zeXNyZWcucmVhZCApCj4gKyAgICAgICAgX192Z2ljX3YzX3JlYWRfYnByMShyZWdz
-LCByZWdpZHgpOwo+ICsgICAgZWxzZQo+ICsgICAgICAgIF9fdmdpY192M193cml0ZV9icHIxKHJl
-Z3MsIHJlZ2lkeCk7Cj4gK30KPiAgIAo+ICAgYm9vbCB2Z2ljX3YzX2hhbmRsZV9jcHVpZl9hY2Nl
-c3Moc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJlZ3MsIGNvbnN0IHVuaW9uIGhzciBoc3IpCj4gICB7
-Cj4gICAgICAgYm9vbCByZXQgPSB0cnVlOwo+ICsgICAgaW50IHJlZ2lkeCA9IGhzci5zeXNyZWcu
-cmVnOwo+ICAgCj4gICAgICAgLyogRGlzYWJsaW5nIGludGVycnVwdHMgdG8gcHJldmVudCBjaGFu
-Z2UgaW4gZ3Vlc3Qgc3RhdGUgKi8KPiAgICAgICBsb2NhbF9pcnFfZGlzYWJsZSgpOwo+IEBAIC0z
-NSw2ICsxMDEsMTAgQEAgYm9vbCB2Z2ljX3YzX2hhbmRsZV9jcHVpZl9hY2Nlc3Moc3RydWN0IGNw
-dV91c2VyX3JlZ3MgKnJlZ3MsIGNvbnN0IHVuaW9uIGhzciBoc3IKPiAgIAo+ICAgICAgIHN3aXRj
-aCAoIGhzci5iaXRzICYgSFNSX1NZU1JFR19SRUdTX01BU0sgKQo+ICAgICAgIHsKPiArICAgIGNh
-c2UgSFNSX1NZU1JFR19JQ0NfQlBSMV9FTDE6Cj4gKyAgICAgICAgIGhhbmRsZV9icHIxKHJlZ3Ms
-IHJlZ2lkeCwgaHNyKTsKClBsZWFzZSB1c2UgdnJlZ19lbXVsYXRlXyogaGVscGVycy4KCj4gKyAg
-ICAgICAgIGJyZWFrOwo+ICsKPiAgICAgICBkZWZhdWx0Ogo+ICAgICAgICAgICByZXQgPSBmYWxz
-ZTsKPiAgICAgICAgICAgYnJlYWs7Cj4gZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS1hcm0v
-YXJtNjQvc3lzcmVncy5oIGIveGVuL2luY2x1ZGUvYXNtLWFybS9hcm02NC9zeXNyZWdzLmgKPiBp
-bmRleCAwODRkMmExZTVkLi4wMjVhMjdiMGI0IDEwMDY0NAo+IC0tLSBhL3hlbi9pbmNsdWRlL2Fz
-bS1hcm0vYXJtNjQvc3lzcmVncy5oCj4gKysrIGIveGVuL2luY2x1ZGUvYXNtLWFybS9hcm02NC9z
-eXNyZWdzLmgKPiBAQCAtODksNiArODksNyBAQAo+ICAgI2RlZmluZSBIU1JfU1lTUkVHX0lDQ19B
-U0dJMVJfRUwxIEhTUl9TWVNSRUcoMywxLGMxMixjMTEsNikKPiAgICNkZWZpbmUgSFNSX1NZU1JF
-R19JQ0NfU0dJMFJfRUwxICBIU1JfU1lTUkVHKDMsMixjMTIsYzExLDcpCj4gICAjZGVmaW5lIEhT
-Ul9TWVNSRUdfSUNDX1NSRV9FTDEgICAgSFNSX1NZU1JFRygzLDAsYzEyLGMxMiw1KQo+ICsjZGVm
-aW5lIEhTUl9TWVNSRUdfSUNDX0JQUjFfRUwxICAgSFNSX1NZU1JFRygzLDAsYzEyLGMxMiwzKQo+
-ICAgI2RlZmluZSBIU1JfU1lTUkVHX0NPTlRFWFRJRFJfRUwxIEhTUl9TWVNSRUcoMywwLGMxMyxj
-MCwxKQo+ICAgCj4gICAjZGVmaW5lIEhTUl9TWVNSRUdfUE1DUl9FTDAgICAgICAgSFNSX1NZU1JF
-RygzLDMsYzksYzEyLDApCj4gZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vZ2ljX3Yz
-X2RlZnMuaCBiL3hlbi9pbmNsdWRlL2FzbS1hcm0vZ2ljX3YzX2RlZnMuaAo+IGluZGV4IDY1Yzlk
-YzQ3Y2YuLjY4YTM0Y2MzNTMgMTAwNjQ0Cj4gLS0tIGEveGVuL2luY2x1ZGUvYXNtLWFybS9naWNf
-djNfZGVmcy5oCj4gKysrIGIveGVuL2luY2x1ZGUvYXNtLWFybS9naWNfdjNfZGVmcy5oCj4gQEAg
-LTE1Nyw2ICsxNTcsMTIgQEAKPiAgIAo+ICAgI2RlZmluZSBHSUNIX1ZNQ1JfRU9JICAgICAgICAg
-ICAgICAgICgxIDw8IDkpCj4gICAjZGVmaW5lIEdJQ0hfVk1DUl9WRU5HMSAgICAgICAgICAgICAg
-KDEgPDwgMSkKPiArI2RlZmluZSBJQ0hfVk1DUl9DQlBSX1NISUZUICAgICAgICAgIDQKPiArI2Rl
-ZmluZSBJQ0hfVk1DUl9DQlBSX01BU0sgICAgICAgICAgICgxIDw8IElDSF9WTUNSX0NCUFJfU0hJ
-RlQpCj4gKyNkZWZpbmUgSUNIX1ZNQ1JfQlBSMF9TSElGVCAgICAgICAgICAyMQo+ICsjZGVmaW5l
-IElDSF9WTUNSX0JQUjBfTUFTSyAgICAgICAgICAgKDcgPDwgSUNIX1ZNQ1JfQlBSMF9TSElGVCkK
-PiArI2RlZmluZSBJQ0hfVk1DUl9CUFIxX1NISUZUICAgICAgICAgIDE4Cj4gKyNkZWZpbmUgSUNI
-X1ZNQ1JfQlBSMV9NQVNLICAgICAgICAgICAoNyA8PCBJQ0hfVk1DUl9CUFIxX1NISUZUKQo+ICAg
-Cj4gICAjZGVmaW5lIEdJQ0hfTFJfVklSVFVBTF9NQVNLICAgICAgICAgMHhmZmZmCj4gICAjZGVm
-aW5lIEdJQ0hfTFJfVklSVFVBTF9TSElGVCAgICAgICAgMAo+IAoKQ2hlZXJzLAoKLS0gCkp1bGll
-biBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7507918400556391213==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_0500AEB4-E977-47D9-8234-A797A70DA30A"
+
+
+--Apple-Mail=_0500AEB4-E977-47D9-8234-A797A70DA30A
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+
+> On 20 Mar 2018, at 17:38, George Dunlap <george.dunlap@citrix.com> =
+wrote:
+>=20
+> On 03/19/2018 04:37 PM, Lars Kurth wrote:
+>> And this time with patch: note to myself - never try sendmail with =
+--compose again (-;
+>>=20
+>> This patch contains a proposal to change =
+https://xenproject.org/security-policy.html=20
+>> such that it points to SUPPORT.md. Having scope and process =
+information is necessary
+>> to become a CNA. This is the last piece, before formally asking to =
+become a CNA.
+>>=20
+>> To make the review of this easier, I based it on =
+xenbits:/larsk/governance.git
+>> (contains the pandoc as published today and the html)
+>>=20
+>> Regards
+>> Lars
+>> ---
+>> [PATCH] Make Security Policy Doc ready to become a CNA
+>>=20
+>> To become a CNA, we need to more clearly specifiy the scope of
+>> security support. This change updates the document and points
+>> to SUPPORT.md and pages generated from SUPPORT.md
+>>=20
+>> Expected changes:
+>> - Resend once the URL that is currently open has been agreed
+>>  with Ian Jackson
+>>=20
+>> Signed-off-by: Lars Kurth <lars.kurth@citrix.com>
+>> ---
+>> security-policy.pandoc | 10 +++++++++-
+>> 1 file changed, 9 insertions(+), 1 deletion(-)
+>>=20
+>> diff --git a/security-policy.pandoc b/security-policy.pandoc
+>> index 5783183..22e274b 100644
+>> --- a/security-policy.pandoc
+>> +++ b/security-policy.pandoc
+>> @@ -19,6 +19,14 @@ Scope of this process
+>>=20
+>> This process primarily covers the [Xen Hypervisor
+>> =
+Project](index.php?option=3Dcom_content&view=3Darticle&id=3D82:xen-hypervi=
+sor&catid=3D80:developers&Itemid=3D484).
+>> +Specific information about features with security support can be =
+found in
+>> +
+>> +1.  =
+[SUPPORT.md](http://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3DSUPPO=
+RT.md)
+>> +    in the releases' tar ball and its xen.git tree and on
+>> +    [web pages generated from the SUPPORT.md file](add URL)
+>=20
+> Not sure we should include the direct (ugly) link.  Other than that
+> looks OK to me.
+
+No strong opinion either way. There is no real harm in having it and =
+it's just a link on the final document
+Lars=
+
+--Apple-Mail=_0500AEB4-E977-47D9-8234-A797A70DA30A
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
+class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 20 Mar 2018, at 17:38, George Dunlap &lt;<a =
+href=3D"mailto:george.dunlap@citrix.com" =
+class=3D"">george.dunlap@citrix.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><span =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; =
+white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+float: none; display: inline !important;" class=3D"">On 03/19/2018 04:37 =
+PM, Lars Kurth wrote:</span><br style=3D"font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><blockquote=
+ type=3D"cite" style=3D"font-family: Menlo-Regular; font-size: 11px; =
+font-style: normal; font-variant-caps: normal; font-weight: normal; =
+letter-spacing: normal; orphans: auto; text-align: start; text-indent: =
+0px; text-transform: none; white-space: normal; widows: auto; =
+word-spacing: 0px; -webkit-text-size-adjust: auto; =
+-webkit-text-stroke-width: 0px;" class=3D"">And this time with patch: =
+note to myself - never try sendmail with --compose again (-;<br =
+class=3D""><br class=3D"">This patch contains a proposal to change <a =
+href=3D"https://xenproject.org/security-policy.html" =
+class=3D"">https://xenproject.org/security-policy.html</a><span =
+class=3D"Apple-converted-space">&nbsp;</span><br class=3D"">such&nbsp;that=
+ it points to SUPPORT.md. Having scope and process information is =
+necessary<br class=3D"">to become a CNA. This is the last piece, before =
+formally asking to become a CNA.<br class=3D""><br class=3D"">To make =
+the review of this easier, I based it on =
+xenbits:/larsk/governance.git<br class=3D"">(contains the pandoc as =
+published today and the html)<br class=3D""><br class=3D"">Regards<br =
+class=3D"">Lars<br class=3D"">---<br class=3D"">[PATCH] Make Security =
+Policy Doc ready to become a CNA<br class=3D""><br class=3D"">To become =
+a CNA, we need to more clearly specifiy the scope of<br =
+class=3D"">security support. This change updates the document and =
+points<br class=3D"">to SUPPORT.md and pages generated from =
+SUPPORT.md<br class=3D""><br class=3D"">Expected changes:<br class=3D"">- =
+Resend once the URL that is currently open has been agreed<br =
+class=3D"">&nbsp;with Ian Jackson<br class=3D""><br =
+class=3D"">Signed-off-by: Lars Kurth &lt;<a =
+href=3D"mailto:lars.kurth@citrix.com" =
+class=3D"">lars.kurth@citrix.com</a>&gt;<br class=3D"">---<br =
+class=3D"">security-policy.pandoc | 10 +++++++++-<br class=3D"">1 file =
+changed, 9 insertions(+), 1 deletion(-)<br class=3D""><br class=3D"">diff =
+--git a/security-policy.pandoc b/security-policy.pandoc<br =
+class=3D"">index 5783183..22e274b 100644<br class=3D"">--- =
+a/security-policy.pandoc<br class=3D"">+++ b/security-policy.pandoc<br =
+class=3D"">@@ -19,6 +19,14 @@ Scope of this process<br class=3D""><br =
+class=3D"">This process primarily covers the [Xen Hypervisor<br =
+class=3D"">Project](index.php?option=3Dcom_content&amp;view=3Darticle&amp;=
+id=3D82:xen-hypervisor&amp;catid=3D80:developers&amp;Itemid=3D484).<br =
+class=3D"">+Specific information about features with security support =
+can be found in<br class=3D"">+<br class=3D"">+1. &nbsp;[SUPPORT.md](<a =
+href=3D"http://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3DSUPPORT.md=
+" =
+class=3D"">http://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3DSUPPORT=
+.md</a>)<br class=3D"">+ &nbsp;&nbsp;&nbsp;in the releases' tar ball and =
+its xen.git tree and on<br class=3D"">+ &nbsp;&nbsp;&nbsp;[web pages =
+generated from the SUPPORT.md file](add URL)<br =
+class=3D""></blockquote><br style=3D"font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><span =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; =
+white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+float: none; display: inline !important;" class=3D"">Not sure we should =
+include the direct (ugly) link. &nbsp;Other than that</span><br =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; =
+white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;" =
+class=3D""><span style=3D"font-family: Menlo-Regular; font-size: 11px; =
+font-style: normal; font-variant-caps: normal; font-weight: normal; =
+letter-spacing: normal; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; word-spacing: 0px; =
+-webkit-text-stroke-width: 0px; float: none; display: inline =
+!important;" class=3D"">looks OK to me.</span><br style=3D"font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px;" =
+class=3D""></div></blockquote></div><br class=3D""><div class=3D"">No =
+strong opinion either way. There is no real harm in having it and it's =
+just a link on the final document</div><div =
+class=3D"">Lars</div></body></html>=
+
+--Apple-Mail=_0500AEB4-E977-47D9-8234-A797A70DA30A--
+
+
+--===============7507918400556391213==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7507918400556391213==--
