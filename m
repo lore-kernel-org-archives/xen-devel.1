@@ -1,10 +1,9 @@
 From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v2 02/45] ARM: Implement vcpu_kick()
-Date: Wed, 21 Mar 2018 04:10:53 +0000
-Message-ID: <7a8c4872-8192-b05f-d0e4-35eee9e09d83@arm.com>
-References: <20180315203050.19791-1-andre.przywara@linaro.org>
- <20180315203050.19791-3-andre.przywara@linaro.org>
- <5AB0F1E502000078001B3DD8@prv-mh.provo.novell.com>
+Subject: Re: [xen-unstable-smoke test] 121001: regressions - FAIL
+Date: Wed, 21 Mar 2018 04:12:57 +0000
+Message-ID: <cb9b21ff-6d03-3a1f-870d-d35a8c398d04@arm.com>
+References: <osstest-121001-mainreport@xen.org>
+ <c79d17bc-1747-8d02-7d9d-a4016680ca61@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
@@ -12,9 +11,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=kbl4=gl=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1eyV5Z-0004MW-Tx
- for xen-devel@lists.xenproject.org; Wed, 21 Mar 2018 04:11:01 +0000
-In-Reply-To: <5AB0F1E502000078001B3DD8@prv-mh.provo.novell.com>
+ id 1eyV7Z-0004TG-Gx
+ for xen-devel@lists.xenproject.org; Wed, 21 Mar 2018 04:13:05 +0000
+In-Reply-To: <c79d17bc-1747-8d02-7d9d-a4016680ca61@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,35 +23,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Andre Przywara <andre.przywara@linaro.org>
-Cc: xen-devel@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>, osstest service owner <osstest-admin@xenproject.org>, xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, Andre Przywara <andre.przywara@linaro.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSmFuLAoKT24gMDMvMjAvMjAxOCAxMDozNSBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4g
-T24gMTUuMDMuMTggYXQgMjE6MzAsIDxhbmRyZS5wcnp5d2FyYUBsaW5hcm8ub3JnPiB3cm90ZToK
-Pj4gSWYgd2UgY2hhbmdlIHNvbWV0aGluZyBpbiBhIHZDUFUgdGhhdCBhZmZlY3RzIGl0cyBydW5u
-YWJpbGl0eSBvcgo+PiBvdGhlcndpc2UgbmVlZHMgdGhlIHZDUFUncyBhdHRlbnRpb24sIHdlIG1p
-Z2h0IG5lZWQgdG8gdGVsbCB0aGUgc2NoZWR1bGVyCj4+IGFib3V0IGl0Lgo+PiBXZSBhcmUgdXNp
-bmcgdGhpcyBpbiBvbmUgcGxhY2UgKHZJUlEgaW5qZWN0aW9uKSBhdCB0aGUgbW9tZW50LCBidXQg
-d2lsbAo+PiBuZWVkIHRoaXMgYXQgbW9yZSBwbGFjZXMgc29vbi4KPj4gU28gbGV0J3MgZmFjdG9y
-IG91dCB0aGlzIGZ1bmN0aW9uYWxpdHksIHVzaW5nIHRoZSBhbHJlYWR5IGV4aXN0aW5nCj4+IHZj
-cHVfa2ljaygpIHByb3RvdHlwZSAodXNlZCBpbiB4ODYgb25seSBzbyBmYXIpLCB0byBtYWtlIHRo
-aXMgYXZhaWxhYmxlCj4+IHRvIHRoZSByZXN0IG9mIHRoZSBYZW4gY29kZS4KPiAKPiBIYXZpbmcg
-anVzdCBzZWVuIHRoaXMgYW1vbmcgdGhlIGNvbW1pdHMgaGF2aW5nIGdvbmUgaW4gcmVjZW50bHkg
-LQo+IHdhcyBpdCBjb25zaWRlcmVkIHRvIG1ha2UgdGhpcyBhIGNvbW1vbiBmdW5jdGlvbj8gVGhl
-Cj4gaW1wbGVtZW50YXRpb25zIGN1cnJlbnRseSBkaWZmZXIsIGJ1dCBJJ20gbm90IHN1cmUgSSBz
-ZWUgd2h5IHRoYXQKPiBuZWVkcyB0byBiZS4gV2l0aCB4ODYncyB2Y3B1X2tpY2tfc29mdGlycSgp
-IGhhbmRsZXIgZG9pbmcgbm90aGluZwo+IEkgY291bGQgc2VlIHRoZSBBUk0gaW1wbGVtZW50YXRp
-b24gYmUgc3VpdGFibGUgZm9yIHg4NiwganVzdCBsaWtlCj4gSSBjb3VsZCBzZWUgdGhlIHg4NiBp
-bXBsZW1lbnRhdGlvbiBiZSBzdWl0YWJsZSBmb3IgQVJNLgpJIGNvbnNpZGVyZWQgaXQgd2hlbiBy
-ZXZpZXdpbmcgdGhlIHBhdGNoIGJ1dCBkaXNjYXJkIGl0IEkgd2Fzbid0IAplbnRpcmVseSBzdXJl
-IGlmIGl0IHdhcyBwb3NzaWJsZSB0byBtYWtlIGl0IGNvbW1vbiBhbmQgIEkgd2FudGVkIHRoaXMg
-CnNlcmllcyB0byBtb3ZlIGZvcndhcmQgKGl0IGlzIDUwIHBhdGNoZXMgc2VyaWVzKSEKCkkgd291
-bGQgYmUgaGFwcHkgdG8gY29uc2lkZXIgYW55IHBhdGNoIHRvIG1ha2UgdGhlbSBjb21tb24uIE15
-IApwcmVmZXJlbmNlIHdvdWxkIHRlbmQgdG8gZ28gdG93YXJkcyB0aGUgQXJtIHNvbHV0aW9uIGFz
-IGl0IGhhcyBhIApzbGlnaHRseSBzbWFsbGVyIG92ZXJoZWFkIHRvIGtpY2sgYSB2Q1BVLiBJbmRl
-ZWQgdGhlIHg4NiB2ZXJzaW9uIApyZXF1aXJlcyB0byByYWlzZSBhIHNvZnRpcnEgYW5kIHRoZW4g
-c2VuZCBhbiBJUEkgdG8gdGhlIG90aGVyIENQVS4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+SGkgQW5kcmV3LAoKT24gMDMvMjAvMjAxOCAwNzo1NSBQTSwgQW5kcmV3IENvb3BlciB3cm90ZToK
+PiBPbiAyMC8wMy8xOCAxOTo0OCwgb3NzdGVzdCBzZXJ2aWNlIG93bmVyIHdyb3RlOgo+PiBmbGln
+aHQgMTIxMDAxIHhlbi11bnN0YWJsZS1zbW9rZSByZWFsIFtyZWFsXQo+PiBodHRwOi8vbG9ncy50
+ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTIxMDAxLwo+Pgo+PiBSZWdyZXNz
+aW9ucyA6LSgKPj4KPj4gVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tp
+bmcsCj4+IGluY2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgo+PiAgIHRlc3Qt
+YXJtNjQtYXJtNjQteGwteHNtICAgICAgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgIGZhaWwg
+UkVHUi4gdnMuIDEyMDk0OQo+IAo+IEZyb20KPiBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9q
+ZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTIxMDAxL3Rlc3QtYXJtNjQtYXJtNjQteGwteHNtL3Nlcmlh
+bC1sYXh0b24xLmxvZwo+IAo+IE1hciAyMCAxODozMDo1MC42MzMzNzAgKFhFTikgQXNzZXJ0aW9u
+ICchbHJfcmVnLT52aXJ0LnNvdXJjZSB8fCBscl9yZWctPnZpcnEgPCBOUl9HSUNfU0dJJyBmYWls
+ZWQgYXQgZ2ljLXYyLmM6NTE4Cj4gTWFyIDIwIDE4OjMwOjUwLjg4MTM2NyBbICAgNDAuOTE4NDQ4
+XSBJTkZPOiByY3VfcHJlZW1wdCBkZXRlY3RlZCBzdGFsbHMgb24gQ1BVcy90YXNrczoKPiAKPiAK
+PiBMb29rcyBsaWtlIHNvbWUgb2YgdGhlIHJlY2VudGx5IGNoZWNrZWQtaW4gdmdpYyBpbXByb3Zl
+bWVudHMgYXJlbid0Cj4gYWN0dWFsbHkgY29ycmVjdC4KCkkgZGlkbid0IHNwb3QgdGhlIGlzc3Vl
+IGR1cmluZyB0ZXN0aW5nLiBTb3JyeSBmb3IgdGhhdC4gSSBzZW50IGEgcGF0Y2ggCnRvIGZpeCBp
+dCBbMV0uCgpDaGVlcnMsCgpbMV0gaHR0cHM6Ly9saXN0cy54ZW4ub3JnL2FyY2hpdmVzL2h0bWwv
+eGVuLWRldmVsLzIwMTgtMDMvbXNnMDIzOTcuaHRtbAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
