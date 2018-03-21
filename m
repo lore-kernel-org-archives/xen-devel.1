@@ -1,20 +1,18 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH RESEND 3/4] xen: sched: improve checking
- soft-affinity
-Date: Wed, 21 Mar 2018 17:57:23 +0100
-Message-ID: <1521651443.5400.133.camel@suse.com>
-References: <152113809162.10025.17478920051714635122.stgit@Palanthas.fritz.box>
- <152113895082.10025.4949278803673146814.stgit@Palanthas.fritz.box>
- <b567625e-c4c6-b70c-16ff-ef420b113219@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v3 8/8] ci: add new bits to MAINTAINERS
+ combine with Travis
+Date: Wed, 21 Mar 2018 16:58:06 +0000
+Message-ID: <20180321165806.mcn7vofmb624iiag@citrix.com>
+References: <cover.517034f4470b4dbdfdfaaab48d9e3143bbb7aa81.1521600968.git-series.cardoe@cardoe.com>
+ <5b9117e02f93d8ad9994c13f1f4d27bb833fc8e9.1521600968.git-series.cardoe@cardoe.com>
+ <72472cdf-74b2-2fac-b58b-30d225169e12@citrix.com>
+ <0c738d27-0aa4-f55b-fc13-a0a1d4ef00e8@cardoe.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1326110292421066576=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=7sqo=gl=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1eyh3h-0000fM-SE
- for xen-devel@lists.xenproject.org; Wed, 21 Mar 2018 16:57:53 +0000
-In-Reply-To: <b567625e-c4c6-b70c-16ff-ef420b113219@citrix.com>
+Content-Disposition: inline
+In-Reply-To: <0c738d27-0aa4-f55b-fc13-a0a1d4ef00e8@cardoe.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,70 +21,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Anshul Makkar <anshulmakkar@gmail.com>
+To: Doug Goldstein <cardoe@cardoe.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1326110292421066576==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-ItOeYrEX+3AGIVUdBIXW"
-
-
---=-ItOeYrEX+3AGIVUdBIXW
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2018-03-21 at 15:24 +0000, George Dunlap wrote:
->=20
-> If you're OK with those changes,=20
->
-I am cool with every one of them.
-
-> I can make them on check-in (as well as
-> changing your email address)
->=20
-And thanks for this as well,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-ItOeYrEX+3AGIVUdBIXW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlqyjvMACgkQFkJ4iaW4
-c+4qFQ//cA6eyPYrP/RlrZfOPXnjsS+n3qwFWYgkNntF8E9aUBF8cmkq09rxckno
-/rOr5G6ZGrP183u+YnpF3dQ7VdngeyEGgQKZzG4roFqHljQiVlHUuEivs0Jl+9PB
-2UJgVV0kuVS9AIPspZommmN91Aq3D2kx+giLvqf1txhGjS7ky94alUGGOAiWu9zj
-X8gISUloEujntMVxyAS0q/RNvN6qf2xK7IACFfswfWwEE2r+esr/VYSfJwfsNI8j
-BP1XAXgUX4xT5voyoYzAKSTV/0AmSeJ/AoXyTUO3jIeXffzoO6Yi12dERL5Xonuo
-JqwSHuMXtCHwm6AL7gwCXlYxctaXgynV47jBIpneZJTtztaBzhz6GvGpjINLOgnP
-BgOWS4CZfTM11MAOuAvT+msoQQX+uZvXAj6XOXpzplyDB4WINeCNV+Vv9pGCClwD
-Mxa6bHV5abQZId9JqLEYy8CvS1yjjsXbYnXPfCKsL2+Y4+HEd//93f92ILg0mhFx
-o2fjuFEatUxzePZK1qWElQ8N7O6litlu+h97885NqWoCP2XS/kUkFzHo/Lhm0rmf
-vYMIsvvMx3HB3wSri/nW3b/oVajmnpP0W+lVNV9I3wMxXIKYYLlWFglwLq/YCa+Y
-ps9SFmTZ84tS2vfb/SGWycKaX+UwGitlWLulFkgZ32PByKI5Lm4=
-=atV+
------END PGP SIGNATURE-----
-
---=-ItOeYrEX+3AGIVUdBIXW--
-
-
-
---===============1326110292421066576==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1326110292421066576==--
+T24gV2VkLCBNYXIgMjEsIDIwMTggYXQgMTE6MDk6MTNBTSAtMDUwMCwgRG91ZyBHb2xkc3RlaW4g
+d3JvdGU6Cj4gT24gMy8yMS8xOCA2OjExIEFNLCBHZW9yZ2UgRHVubGFwIHdyb3RlOgo+ID4gT24g
+MDMvMjEvMjAxOCAwMzowMSBBTSwgRG91ZyBHb2xkc3RlaW4gd3JvdGU6Cj4gPj4gQ3JlYXRlZCBh
+IG5ldyBzZWN0aW9uIGp1c3QgY2FsbGVkICdDSScgc2luY2UgdGhpcyBpcyBhZGRpbmcgR2l0TGFi
+IENJCj4gPj4gYW5kIHN0aWxsIGxlYXZpbmcgdGhlIG9sZCBUcmF2aXMgQ0kgZmlsZXMgYXJvdW5k
+LiBUaGlzIGNvbnNvbGlkYXRlcyB0aGUKPiA+PiB0d28gc2VjdGlvbnMgYW5kIGFkZHMgdGhlIG5l
+dyBmaWxlcyBhcyB3ZWxsIGFzIGFkZGluZyBhbm90aGVyIFRyYXZpcwo+ID4+IGZpbGUgdGhhdCB3
+YXMgbWlzc2luZy4KPiA+Pgo+ID4+IFNpZ25lZC1vZmYtYnk6IERvdWcgR29sZHN0ZWluIDxjYXJk
+b2VAY2FyZG9lLmNvbT4KPiA+PiBSZXZpZXdlZC1ieTogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxr
+b25yYWQud2lsa0BvcmFjbGUuY29tPgo+ID4+IC0tLQo+ID4+ICBNQUlOVEFJTkVSUyB8IDE2ICsr
+KysrKysrKystLS0tLS0KPiA+PiAgMSBmaWxlIGNoYW5nZWQsIDEwIGluc2VydGlvbnMoKyksIDYg
+ZGVsZXRpb25zKC0pCj4gPj4KPiA+PiBkaWZmIC0tZ2l0IGEvTUFJTlRBSU5FUlMgYi9NQUlOVEFJ
+TkVSUwo+ID4+IGluZGV4IGE1YjNlOTUuLjgxZWMzMTIgMTAwNjQ0Cj4gPj4gLS0tIGEvTUFJTlRB
+SU5FUlMKPiA+PiArKysgYi9NQUlOVEFJTkVSUwo+ID4+IEBAIC0xODEsNiArMTgxLDE2IEBAIEJM
+S1RBUDIKPiA+PiAgUzoJT3JwaGFuZWQKPiA+PiAgRjoJdG9vbHMvYmxrdGFwMi8KPiA+PiAgCj4g
+Pj4gK0NJCj4gPj4gK006CURvdWcgR29sZHN0ZWluIDxjYXJkb2VAY2FyZG9lLmNvbT4KPiA+PiAr
+VzoJaHR0cHM6Ly9naXRsYWIuY29tL3hlbi1wcm9qZWN0L3hlbgo+ID4+ICtXOglodHRwczovL3Ry
+YXZpcy1jaS5vcmcveGVuLXByb2plY3QveGVuCj4gPj4gK1M6CVN1cHBvcnRlZAo+ID4+ICtGOgku
+Z2l0bGFiLWNpLnltbAo+ID4+ICtGOgkudHJhdmlzLnltbAo+ID4+ICtGOglhdXRvbWF0aW9uLwo+
+ID4+ICtGOglzY3JpcHRzL3RyYXZpcy1idWlsZAo+ID4gCj4gPiAiQ0kiIHNlZW1zIGF3ZnVsbHkg
+c2hvcnQgd2l0aG91dCBhIGNvbnRleHQuICAiVHJhdmlzIENJIiBnaXZlcyB5b3UKPiA+IGVub3Vn
+aCBjb250ZXh0IHRvIGZpZ3VyZSBvdXQgd2hhdCBDSSBpcyAob3IgZW5vdWdoIHRvIEdvb2dsZSBp
+dCkuCj4gPiAKPiA+ICJBdXRvbWF0aW9uIC8gQ0kiPyAgIkNvbnRpbnVvdXMgSW50ZWdyYXRpb24g
+KENJKSI/Cj4gPiAKPiA+IE90aGVyd2lzZSArMS4KPiA+IAo+ID4gIC1HZW9yZ2UKPiA+IAo+IAo+
+IExldCdzIGdvIHdpdGggIkNvbnRpbnVvdXMgSW50ZWdyYXRpb24gKENJKSIuIEkgY2FuIHBvc3Qg
+YSBmb2xsb3cgdXAgaWYKPiB0aGF0J3MgaGVscGZ1bC4KPiAKCkdpdmUgbWUgYSBicmFuY2ggdG8g
+cHVsbCBmcm9tLiBUaGF0J3MgYmV0dGVyLgoKV2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
