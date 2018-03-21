@@ -1,16 +1,16 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH 01/20] tools/libxl: Drop
- xc_domain_configuration_t from libxl__domain_build_state
-Date: Wed, 21 Mar 2018 17:17:53 +0000
-Message-ID: <20180321171753.o3my4na6c6j657bn@citrix.com>
+Subject: Re: [PATCH 02/20] tools/libxl: Don't prepare or save
+ xc_config when soft resetting a domain
+Date: Wed, 21 Mar 2018 17:27:21 +0000
+Message-ID: <20180321172721.2i6ml7nmr6axol75@citrix.com>
 References: <1521486839-25617-1-git-send-email-andrew.cooper3@citrix.com>
- <1521486839-25617-2-git-send-email-andrew.cooper3@citrix.com>
+ <1521486839-25617-3-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <1521486839-25617-2-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1521486839-25617-3-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,14 +23,17 @@ To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBNYXIgMTksIDIwMTggYXQgMDc6MTM6NDBQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBUaGUgZGF0YSBpdCBzdG9yZXMgaXMgaW5pdGlhbGlzZWQgYW5kIGV4Y2x1c2l2ZWx5
-IHVzZWQgd2l0aGluCj4gbGlieGxfX2RvbWFpbl9tYWtlKCksIHdpdGggdGhlIGltcG9ydGFudCBk
-ZXRhaWxzIHdyaXR0ZW4gYmFjayBlbHNld2hlcmUgYnkKPiBsaWJ4bF9fYXJjaF9kb21haW5fc2F2
-ZV9jb25maWcoKS4gIFByZXBhcmUgeGNfY29uZmlnIG9uIGxpYnhsX19kb21haW5fbWFrZSgpJ3MK
-PiBzdGFjaywgYW5kIGRyb3AgdGhlIHBhcmFtZXRlci4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRy
-ZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKQWNrZWQtYnk6IFdlaSBMaXUg
-PHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+T24gTW9uLCBNYXIgMTksIDIwMTggYXQgMDc6MTM6NDFQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiB4Y19jb25maWcgaXMgb25seSB1c2VkIGJ5IHhjX2RvbWFpbl9jcmVhdGUoKSwgYnV0
+IGJ5IGNhbGxpbmcKPiBsaWJ4bF9fYXJjaF9kb21haW5fe3ByZXBhcmUsc2F2ZX1fY29uZmlnKCkg
+d2UgY2xvYmJlciB0aGUgcmVhbCBzZXR0aW5ncyB3aXRoCj4gdGhlIGRlZmF1bHQgc2V0dGluZ3Mu
+Cj4gCj4gTW92ZSBhbGwgZGF0YSBhbmQgY2FsbHMgcmVsYXRpbmcgdG8geGNfZG9tYWluX2NyZWF0
+ZSgpIGludG8gdGhlIHBhdGggd2hpY2gKPiBjYWxscyBpdC4KPiAKPiBBcyBmYXIgYXMgSSBjYW4g
+dGVsbCwgc29mdF9yZXNldCBoYXMgYWx3YXlzIGJlZW4gYnJva2VuIGZvciBBUk0gZG9tYWlucyB1
+c2luZwo+IExJQlhMX0dJQ19WRVJTSU9OX0RFRkFVTFQsIHdoaWNoIGVsaWNpdHMgYSBoYXJkIGVy
+cm9yIG91dCBvZgo+IGxpYnhsX19hcmNoX2RvbWFpbl9zYXZlX2NvbmZpZygpLgo+IAo+IFNpZ25l
+ZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpBY2tl
+ZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
