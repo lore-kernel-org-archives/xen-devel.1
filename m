@@ -1,21 +1,13 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v4 7/8] x86: also NOP out xen_cr3 restores
- of XPTI
-Date: Wed, 21 Mar 2018 08:53:24 +0100
-Message-ID: <c81bada8-3377-760a-d8bf-a52976f67355@suse.com>
-References: <5AAFC9E202000078001B36F7@prv-mh.provo.novell.com>
- <5AAFCC0702000078001B3732@suse.com>
+From: Amit Tomer <amittomer25@gmail.com>
+Subject: Re: Xen support on arm64 platform
+Date: Wed, 21 Mar 2018 13:36:54 +0530
+Message-ID: <CABHD4K8FfqVmdwuO+0rXcWgvFCLf2e8GO=mCA3jf0kM+77vdAA@mail.gmail.com>
+References: <CAOG0fenTdiD+u-EbDny_XrDiAUsq_yDwzM5mVm-aHfXu=f85tA@mail.gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=n5/p=gl=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1eyYYp-0006K5-3m
- for xen-devel@lists.xenproject.org; Wed, 21 Mar 2018 07:53:27 +0000
-In-Reply-To: <5AAFCC0702000078001B3732@suse.com>
-Content-Language: de-DE
+In-Reply-To: <CAOG0fenTdiD+u-EbDny_XrDiAUsq_yDwzM5mVm-aHfXu=f85tA@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,15 +16,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Jayadev Kumaran <jayadevk123@gmail.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTkvMDMvMTggMTQ6NDEsIEphbiBCZXVsaWNoIHdyb3RlOgo+IC4uLiBkZXNwaXRlIHF1aXRl
-IGxpa2VseSB0aGUgZ2FpbiBiZWluZyByYXRoZXIgbGltaXRlZC4KPiAKPiBTaWduZWQtb2ZmLWJ5
-OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpUZXN0ZWQtYnk6IEp1ZXJnZW4gR3Jv
-c3MgPGpncm9zc0BzdXNlLmNvbT4KUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0Bz
-dXNlLmNvbT4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+SGksCgpPbiBXZWQsIE1hciAyMSwgMjAxOCBhdCAxMToyNyBBTSwgSmF5YWRldiBLdW1hcmFuIDxq
+YXlhZGV2azEyM0BnbWFpbC5jb20+IHdyb3RlOgo+IEhlbGxvIGFsbCwKPgo+IEkgbmVlZCB0byBz
+ZXR1cCBYZW4gb24gU25hcGRyYWdvbiA4MjAgcGxhdGZvcm0gLSBhcm12OCA2NCBiaXQgYXJjaGl0
+ZWN0dXJlLgo+IElzIHRoZXJlIHN1cHBvcnQgYXZhaWxhYmxlIGZvciB0aGUgc2FtZSA/IElzIHRo
+ZXJlIFhlbiBpbXBsZW1lbnRhdGlvbiBvbiBhbnkKPiBvdGhlciBzaW1pbGFyIHBsYXRmb3JtID8K
+CkZyb20gSW5pdGlhbCBpbnZlc3RpZ2F0aW9uKEkgbWF5IGJlIHdyb25nKSwgaXQgbG9va3MgbGlr
+ZSB0aGVyZSBpcyBubwpYRU4gcG9ydCBhdmFpbGFibGUgZm9yIFNuYXBkcmFnb24gODIwLgoKU3Bl
+Y2lhbGx5ICwgU25hcGRyYWdvbiA4MjAgdXNlcyB0aGUgc3BlY2lmaWMKdWFydCguL2RyaXZlcnMv
+dHR5L3NlcmlhbC9tc21fc2VyaWFsLmMgZnJvbSBMaW51eCA/KSB0aGF0IGhhcyBub3QgYmVlbgpw
+b3J0ZWQgdG8gWEVOKFdpdGhvdXQgaXQgZGVidWdnaW5nIHdvdWxkIGJlIGRpZmZpY3VsdCkKClRo
+YW5rcwotQW1pdAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
