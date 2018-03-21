@@ -1,21 +1,16 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: [RFC PATCH] Make Security Policy Doc ready to
- become a CNA
-Date: Wed, 21 Mar 2018 09:17:29 +0100
-Message-ID: <92CFADDD-DE84-4A83-BCD3-BA11662D4F4D@xenproject.org>
-References: <F465E328-FB40-4F0C-A3CE-391A44CF6C0E@citrix.com>
- <e180a4e3-9d4a-fc4c-e1af-c24546a60042@citrix.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.2 \(3445.5.20\))
-Content-Type: multipart/mixed; boundary="===============7507918400556391213=="
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 121017: regressions - FAIL
+Date: Wed, 21 Mar 2018 08:29:35 +0000
+Message-ID: <osstest-121017-mainreport@xen.org>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=/6yh=gl=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1eyYwB-0000FU-Ah
- for xen-devel@lists.xenproject.org; Wed, 21 Mar 2018 08:17:35 +0000
-Received: by mail-wm0-x22c.google.com with SMTP id h76so8009613wme.4
- for <xen-devel@lists.xenproject.org>; Wed, 21 Mar 2018 01:17:33 -0700 (PDT)
-In-Reply-To: <e180a4e3-9d4a-fc4c-e1af-c24546a60042@citrix.com>
+ <srs0=uc3o=gl=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1eyZ7p-00011w-GU
+ for xen-devel@lists.xenproject.org; Wed, 21 Mar 2018 08:29:37 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,194 +19,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>
-Cc: Lars Kurth <lars.kurth@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, "security@xenproject.org" <security@xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7507918400556391213==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_0500AEB4-E977-47D9-8234-A797A70DA30A"
-
-
---Apple-Mail=_0500AEB4-E977-47D9-8234-A797A70DA30A
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-
-
-> On 20 Mar 2018, at 17:38, George Dunlap <george.dunlap@citrix.com> =
-wrote:
->=20
-> On 03/19/2018 04:37 PM, Lars Kurth wrote:
->> And this time with patch: note to myself - never try sendmail with =
---compose again (-;
->>=20
->> This patch contains a proposal to change =
-https://xenproject.org/security-policy.html=20
->> such that it points to SUPPORT.md. Having scope and process =
-information is necessary
->> to become a CNA. This is the last piece, before formally asking to =
-become a CNA.
->>=20
->> To make the review of this easier, I based it on =
-xenbits:/larsk/governance.git
->> (contains the pandoc as published today and the html)
->>=20
->> Regards
->> Lars
->> ---
->> [PATCH] Make Security Policy Doc ready to become a CNA
->>=20
->> To become a CNA, we need to more clearly specifiy the scope of
->> security support. This change updates the document and points
->> to SUPPORT.md and pages generated from SUPPORT.md
->>=20
->> Expected changes:
->> - Resend once the URL that is currently open has been agreed
->>  with Ian Jackson
->>=20
->> Signed-off-by: Lars Kurth <lars.kurth@citrix.com>
->> ---
->> security-policy.pandoc | 10 +++++++++-
->> 1 file changed, 9 insertions(+), 1 deletion(-)
->>=20
->> diff --git a/security-policy.pandoc b/security-policy.pandoc
->> index 5783183..22e274b 100644
->> --- a/security-policy.pandoc
->> +++ b/security-policy.pandoc
->> @@ -19,6 +19,14 @@ Scope of this process
->>=20
->> This process primarily covers the [Xen Hypervisor
->> =
-Project](index.php?option=3Dcom_content&view=3Darticle&id=3D82:xen-hypervi=
-sor&catid=3D80:developers&Itemid=3D484).
->> +Specific information about features with security support can be =
-found in
->> +
->> +1.  =
-[SUPPORT.md](http://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3DSUPPO=
-RT.md)
->> +    in the releases' tar ball and its xen.git tree and on
->> +    [web pages generated from the SUPPORT.md file](add URL)
->=20
-> Not sure we should include the direct (ugly) link.  Other than that
-> looks OK to me.
-
-No strong opinion either way. There is no real harm in having it and =
-it's just a link on the final document
-Lars=
-
---Apple-Mail=_0500AEB4-E977-47D9-8234-A797A70DA30A
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
-class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
-class=3D"">On 20 Mar 2018, at 17:38, George Dunlap &lt;<a =
-href=3D"mailto:george.dunlap@citrix.com" =
-class=3D"">george.dunlap@citrix.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><span =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-float: none; display: inline !important;" class=3D"">On 03/19/2018 04:37 =
-PM, Lars Kurth wrote:</span><br style=3D"font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><blockquote=
- type=3D"cite" style=3D"font-family: Menlo-Regular; font-size: 11px; =
-font-style: normal; font-variant-caps: normal; font-weight: normal; =
-letter-spacing: normal; orphans: auto; text-align: start; text-indent: =
-0px; text-transform: none; white-space: normal; widows: auto; =
-word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px;" class=3D"">And this time with patch: =
-note to myself - never try sendmail with --compose again (-;<br =
-class=3D""><br class=3D"">This patch contains a proposal to change <a =
-href=3D"https://xenproject.org/security-policy.html" =
-class=3D"">https://xenproject.org/security-policy.html</a><span =
-class=3D"Apple-converted-space">&nbsp;</span><br class=3D"">such&nbsp;that=
- it points to SUPPORT.md. Having scope and process information is =
-necessary<br class=3D"">to become a CNA. This is the last piece, before =
-formally asking to become a CNA.<br class=3D""><br class=3D"">To make =
-the review of this easier, I based it on =
-xenbits:/larsk/governance.git<br class=3D"">(contains the pandoc as =
-published today and the html)<br class=3D""><br class=3D"">Regards<br =
-class=3D"">Lars<br class=3D"">---<br class=3D"">[PATCH] Make Security =
-Policy Doc ready to become a CNA<br class=3D""><br class=3D"">To become =
-a CNA, we need to more clearly specifiy the scope of<br =
-class=3D"">security support. This change updates the document and =
-points<br class=3D"">to SUPPORT.md and pages generated from =
-SUPPORT.md<br class=3D""><br class=3D"">Expected changes:<br class=3D"">- =
-Resend once the URL that is currently open has been agreed<br =
-class=3D"">&nbsp;with Ian Jackson<br class=3D""><br =
-class=3D"">Signed-off-by: Lars Kurth &lt;<a =
-href=3D"mailto:lars.kurth@citrix.com" =
-class=3D"">lars.kurth@citrix.com</a>&gt;<br class=3D"">---<br =
-class=3D"">security-policy.pandoc | 10 +++++++++-<br class=3D"">1 file =
-changed, 9 insertions(+), 1 deletion(-)<br class=3D""><br class=3D"">diff =
---git a/security-policy.pandoc b/security-policy.pandoc<br =
-class=3D"">index 5783183..22e274b 100644<br class=3D"">--- =
-a/security-policy.pandoc<br class=3D"">+++ b/security-policy.pandoc<br =
-class=3D"">@@ -19,6 +19,14 @@ Scope of this process<br class=3D""><br =
-class=3D"">This process primarily covers the [Xen Hypervisor<br =
-class=3D"">Project](index.php?option=3Dcom_content&amp;view=3Darticle&amp;=
-id=3D82:xen-hypervisor&amp;catid=3D80:developers&amp;Itemid=3D484).<br =
-class=3D"">+Specific information about features with security support =
-can be found in<br class=3D"">+<br class=3D"">+1. &nbsp;[SUPPORT.md](<a =
-href=3D"http://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3DSUPPORT.md=
-" =
-class=3D"">http://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3DSUPPORT=
-.md</a>)<br class=3D"">+ &nbsp;&nbsp;&nbsp;in the releases' tar ball and =
-its xen.git tree and on<br class=3D"">+ &nbsp;&nbsp;&nbsp;[web pages =
-generated from the SUPPORT.md file](add URL)<br =
-class=3D""></blockquote><br style=3D"font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D""><span =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-float: none; display: inline !important;" class=3D"">Not sure we should =
-include the direct (ugly) link. &nbsp;Other than that</span><br =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;" =
-class=3D""><span style=3D"font-family: Menlo-Regular; font-size: 11px; =
-font-style: normal; font-variant-caps: normal; font-weight: normal; =
-letter-spacing: normal; text-align: start; text-indent: 0px; =
-text-transform: none; white-space: normal; word-spacing: 0px; =
--webkit-text-stroke-width: 0px; float: none; display: inline =
-!important;" class=3D"">looks OK to me.</span><br style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px;" =
-class=3D""></div></blockquote></div><br class=3D""><div class=3D"">No =
-strong opinion either way. There is no real harm in having it and it's =
-just a link on the final document</div><div =
-class=3D"">Lars</div></body></html>=
-
---Apple-Mail=_0500AEB4-E977-47D9-8234-A797A70DA30A--
-
-
---===============7507918400556391213==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7507918400556391213==--
+ZmxpZ2h0IDEyMTAxNyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMTAxNy8KClJlZ3Jlc3Npb25z
+IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
+ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hcm02NC1hcm02NC14bC14
+c20gICAgICAxMiBndWVzdC1zdGFydCAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIwOTQ5
+CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVz
+dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
+IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDEzIG1pZ3Jh
+dGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJt
+aGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2
+ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAg
+ICAgIDE4NTk2OTAzZTlmMTM2MjgyNmI3MWY2OTAwOGU1YzgzOWNjNzU2YjUKYmFzZWxpbmUgdmVy
+c2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIDdhMTM1OGJiZTczZTVmNzQ5YzNkMmY1MzQ3OGRj
+MWYzMDcyMGY5NDkKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEyMDk0OSAgMjAxOC0wMy0xOSAwMjo0
+MTowNyBaICAgIDIgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMjA5ODcgIDIwMTgtMDMtMjAg
+MTA6MDI6MTYgWiAgICAwIGRheXMgICAgNyBhdHRlbXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAx
+MjEwMDEgIDIwMTgtMDMtMjAgMTc6MTI6MzMgWiAgICAwIGRheXMgICAgNSBhdHRlbXB0cwoKLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+ClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbmRyZSBQcnp5d2Fy
+YSA8YW5kcmUucHJ6eXdhcmFAYXJtLmNvbT4KICBBbmRyZSBQcnp5d2FyYSA8YW5kcmUucHJ6eXdh
+cmFAbGluYXJvLm9yZz4KICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
+PgogIERhcmlvIEZhZ2dpb2xpIDxkZmFnZ2lvbGlAc3VzZS5jb20+CiAgRGF2aWQgRS4gQm94IDxk
+YXZpZC5lLmJveEBsaW51eC5pbnRlbC5jb20+CiAgRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBjYXJk
+b2UuY29tPgogIEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICBKdWxpZW4gR3JhbGwg
+PGp1bGllbi5ncmFsbEBhcm0uY29tPgogIExlbiBCcm93biA8bGVuLmJyb3duQGludGVsLmNvbT4K
+ICBSYWZhZWwgSi4gV3lzb2NraSA8cmFmYWVsLmoud3lzb2NraUBpbnRlbC5jb20+CiAgU3RlZmFu
+byBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgoKam9iczoKIGJ1aWxkLWFybTY0
+LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1h
+cm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWkzODYg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9y
+dC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9s
+b2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBl
+dGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qu
+b3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9z
+c3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2Vi
+Lz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6
+Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTto
+Yj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hl
+bmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpOb3QgcHVzaGlu
+Zy4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLQpjb21taXQgMTg1OTY5MDNlOWYxMzYyODI2YjcxZjY5MDA4ZTVjODM5Y2M3NTZiNQpB
+dXRob3I6IERvdWcgR29sZHN0ZWluIDxjYXJkb2VAY2FyZG9lLmNvbT4KRGF0ZTogICBXZWQgRmVi
+IDI4IDEzOjE4OjQ0IDIwMTggLTA2MDAKCiAgICB4ZW4vdG9vbHM6IHN1cHBvcnQgUHl0aG9uIDIg
+YW5kIFB5dGhvbiAzCiAgICAKICAgIFRoZXNlIGNoYW5nZXMgc2hvdWxkIG1ha2UgaXQgcG9zc2li
+bGUgdG8gc3VwcG9ydCBtb2Rlcm4gUHl0aG9ucyBhcyB3ZWxsCiAgICBhcyB0aGUgb2xkZXN0IFB5
+dGhvbiAyIHN0aWxsIHN1cHBvcnRlZC4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogRG91ZyBHb2xk
+c3RlaW4gPGNhcmRvZUBjYXJkb2UuY29tPgogICAgQWNrZWQtYnk6IEFuZHJldyBDb29wZXIgPGFu
+ZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cgpjb21taXQgNDE1YWI5Yjg3MTY2M2EwMTYwZjEwOGY3
+YjlmY2U0NTE1NDg2OTIyNwpBdXRob3I6IERvdWcgR29sZHN0ZWluIDxjYXJkb2VAY2FyZG9lLmNv
+bT4KRGF0ZTogICBXZWQgRmViIDI4IDEzOjE4OjQzIDIwMTggLTA2MDAKCiAgICBSRUFETUU6IHJl
+cXVpcmUgUHl0aG9uIDIuNCBvciBuZXdlcgogICAgCiAgICBJbmNyZWFzZSB0aGUgbWluaW11bSBy
+ZXF1aXJlZCBQeXRob24gdG8gMi40IG9yIG5ld2VyLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBE
+b3VnIEdvbGRzdGVpbiA8Y2FyZG9lQGNhcmRvZS5jb20+CiAgICBBY2tlZC1ieTogQW5kcmV3IENv
+b3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCmNvbW1pdCAzOGQ5MTg0Mjg0NzkzYjA3
+NWRmOTdiYzI2M2ViOGU0YWUxZWM3NjcxCkF1dGhvcjogRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBj
+YXJkb2UuY29tPgpEYXRlOiAgIFR1ZSBNYXIgMjAgMTE6MjM6MjkgMjAxOCArMDEwMAoKICAgIGZp
+eCBudWxsIHNjaGVkIGJ1aWxkIHdpdGggY2xhbmcgYW5kIGRlYnVnPW4KICAgIAogICAgVGhlIG51
+bGxfZG9tKCkgc3RhdGljIGlubGluZSBpcyBqdXN0IHVzZWQgd2hlbiBkZWJ1Zz15IHNvIHdpdGgg
+Y2xhbmcgaXQKICAgIHJlc3VsdHMgaW4gYW4gZXJyb3Igd2l0aCB0aGUgZGVmYXVsdCBDRkxBR1Mg
+YW5kIGRlYnVnPW4uIFRoaXMgZnVuY3Rpb24KICAgIGlzIHVzZWQgaW4gb25seSBvbmUgcGxhY2Ug
+YW5kIGl0IGEgb25lIGxpbmUgaGVscGVyIHNvIHJlbW92ZSBpdCB1bnRpbCB3ZQogICAgYWN0dWFs
+bHkgbmVlZCBpdC4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogRG91ZyBHb2xkc3RlaW4gPGNhcmRv
+ZUBjYXJkb2UuY29tPgogICAgQWNrZWQtYnk6IERhcmlvIEZhZ2dpb2xpIDxkZmFnZ2lvbGlAc3Vz
+ZS5jb20+Cgpjb21taXQgNGUxMzE1OTZmMWRlZmVjOTQwN2I2ZTYwZDU4NGE2OTZiZWFmNWQ3ZQpB
+dXRob3I6IERhdmlkIEUuIEJveCA8ZGF2aWQuZS5ib3hAbGludXguaW50ZWwuY29tPgpEYXRlOiAg
+IFR1ZSBNYXIgMjAgMTE6MjE6NTggMjAxOCArMDEwMAoKICAgIHg4Ni9td2FpdC1pZGxlOiBhZGQg
+R2VtaW5pIExha2Ugc3VwcG9ydAogICAgCiAgICBHZW1pbmkgTGFrZSB1c2VzIHRoZSBzYW1lIEMt
+c3RhdGVzIGFzIEJyb3h0b24gYW5kIGFsc28gdXNlcyB0aGUKICAgIElSVEwgTVNSJ3MgdG8gZGV0
+ZXJtaW5lIG1heGltdW0gQy1zdGF0ZSBsYXRlbmN5LgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBE
+YXZpZCBFLiBCb3ggPGRhdmlkLmUuYm94QGxpbnV4LmludGVsLmNvbT4KICAgIEFja2VkLWJ5OiBM
+ZW4gQnJvd24gPGxlbi5icm93bkBpbnRlbC5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBSYWZhZWwg
+Si4gV3lzb2NraSA8cmFmYWVsLmoud3lzb2NraUBpbnRlbC5jb20+CiAgICBbTGludXggY29tbWl0
+IDFiMmU4NzY4N2QzZjk1MWE2NjkwMGNhYjZmMTU4M2Q5NDA5OWQyZjddCiAgICBTaWduZWQtb2Zm
+LWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgICBBY2tlZC1ieTogQW5kcmV3
+IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCmNvbW1pdCA1Y2IwMGQxODFjNzk5
+ZDQxNDQzODQ3NmYzYWY2ZTRlY2Y2YWZhZDE4CkF1dGhvcjogSnVsaWVuIEdyYWxsIDxqdWxpZW4u
+Z3JhbGxAYXJtLmNvbT4KRGF0ZTogICBUaHUgTWFyIDE1IDIwOjMwOjEzIDIwMTggKzAwMDAKCiAg
+ICBBUk06IEdJQzogZXh0ZW5kIExSIHJlYWQvd3JpdGUgZnVuY3Rpb25zIHRvIGNvdmVyIEVPSSBh
+bmQgc291cmNlCiAgICAKICAgIFNvIGZhciBvdXIgTFIgcmVhZC93cml0ZSBmdW5jdGlvbnMgZG8g
+bm90IGhhbmRsZSB0aGUgRU9JIGJpdCBhbmQgdGhlCiAgICBzb3VyY2UgQ1BVSUQgYml0cyBpbiBh
+biBMUiwgYmVjYXVzZSB0aGUgY3VycmVudCBWR0lDIGltcGxlbWVudGF0aW9uIGRvZXMKICAgIG5v
+dCB1c2UgdGhlbS4KICAgIEV4dGVuZCB0aGUgZ2ljX2xyIGRhdGEgc3RydWN0dXJlIHRvIGhvbGQg
+dGhlc2UgYml0cyBvZiBpbmZvcm1hdGlvbiBieQogICAgdXNpbmcgYSB1bmlvbiB0byBkaWZmZXJl
+bnRpYXRlIGZpZWxkIHVzZWQgZGVwZW5kaW5nIG9uIHdoZXRoZXIgdGhlIHZJUlEKICAgIGhhcyBh
+IGNvcnJlc3BvbmRpbmcgcElSUS4KICAgIAogICAgVGhpcyBhbGxvd3MgdGhlIG5ldyBWR0lDIHRv
+IHVzZSB0aGlzIGluZm9ybWF0aW9uLgogICAgCiAgICBUaGlzIGlzIGJhc2VkIG9uIHRoZSBvcmln
+aW5hbCBwYXRjaCBzZW50IGJ5IEFuZHJlIFByenl3YXJhIFsxXS4KICAgIAogICAgWzFdIGh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOC0wMy9t
+c2cwMDQzNS5odG1sCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVu
+LmdyYWxsQGFybS5jb20+CiAgICBSZXZpZXdlZC1ieTogQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnBy
+enl3YXJhQGFybS5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZSBQcnp5d2FyYSA8YW5kcmUu
+cHJ6eXdhcmFAYXJtLmNvbT4KICAgIEFja2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFi
+ZWxsaW5pQGtlcm5lbC5vcmc+Cgpjb21taXQgZWUzNzU3NDkwNTJjNjQ5ZmMyNzEwYzczYzdjZTUz
+NzEzOTNmNzc0MgpBdXRob3I6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CkRh
+dGU6ICAgVGh1IE1hciAxNSAyMDozMDoxMiAyMDE4ICswMDAwCgogICAgeGVuL2FybTogR0lDOiBP
+bmx5IHNldCBwaXJxIGluIHRoZSBMUiB3aGVuIGh3X3N0YXR1cyBpcyBzZXQKICAgIAogICAgVGhl
+IGZpZWxkIHBpcnEgc2hvdWxkIG9ubHkgYmUgdmFsaWQgd2hlbiB0aGUgdmlydHVhbCBpbnRlcnJ1
+cHQKICAgIGlzIGFzc29jaWF0ZWQgdG8gYSBwaHlzaWNhbCBpbnRlcnJ1cHQuCiAgICAKICAgIFRo
+aXMgY2hhbmdlIHdpbGwgaGVscCB0byBleHRlbmQgZ2ljX2xyIGZvciBzdXBwb3J0aW5nIHNwZWNp
+ZmljIHZpcnR1YWwKICAgIGludGVycnVwdCBmaWVsZCAoZS5nIGVvaSwgc291cmNlKSB0aGF0IGNs
+YXNoZXMgd2l0aCB0aGUgUElSUSBmaWVsZC4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogSnVsaWVu
+IEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KICAgIFJldmlld2VkLWJ5OiBBbmRyZSBQcnp5
+d2FyYSA8YW5kcmUucHJ6eXdhcmFAYXJtLmNvbT4KICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJlIFBy
+enl3YXJhIDxhbmRyZS5wcnp5d2FyYUBhcm0uY29tPgogICAgQWNrZWQtYnk6IFN0ZWZhbm8gU3Rh
+YmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KCmNvbW1pdCBiYThlM2U0MjI4OTZkNDIw
+NTEwMjk3MDExNTU4Y2ZhZWI4YWE3NWNlCkF1dGhvcjogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3Jh
+bGxAYXJtLmNvbT4KRGF0ZTogICBUaHUgTWFyIDE1IDIwOjMwOjExIDIwMTggKzAwMDAKCiAgICB4
+ZW4vYXJtOiBnaWM6IFNwbGl0IHRoZSBmaWVsZCBzdGF0ZSBpbiBnaWNfbHIgaW4gMiBmaWVsZHMg
+YWN0aXZlIGFuZCBwZW5kaW5nCiAgICAKICAgIE1vc3RseSBtYWtpbmcgdGhlIGNvZGUgbmljZXIg
+dG8gcmVhZC4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3Jh
+bGxAYXJtLmNvbT4KICAgIFJldmlld2VkLWJ5OiBBbmRyZSBQcnp5d2FyYSA8YW5kcmUucHJ6eXdh
+cmFAYXJtLmNvbT4KICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJlIFByenl3YXJhIDxhbmRyZS5wcnp5
+d2FyYUBhcm0uY29tPgogICAgQWNrZWQtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxp
+bmlAa2VybmVsLm9yZz4KCmNvbW1pdCA5MTAwYjZmMGU4ZmMzZWE2ZTAzYWI1NmM5Yzc1MzgzMjZm
+NjU0NjA2CkF1dGhvcjogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KRGF0ZTog
+ICBUaHUgTWFyIDE1IDIwOjMwOjEwIDIwMTggKzAwMDAKCiAgICB4ZW4vYXJtOiBnaWM6IFVzZSBi
+b29sIGluc3RlYWQgb2YgdWludDhfdCBmb3IgdGhlIGh3X3N0YXR1cyBpbiBnaWNfbHIKICAgIAog
+ICAgaHdfc3RhdHVzIGNhbiBvbmx5IGJlIDEgb3IgMC4gU28gY29udmVydCB0byBhIGJvb2wuCiAg
+ICAKICAgIFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+
+CiAgICBSZXZpZXdlZC1ieTogQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnByenl3YXJhQGFybS5jb20+
+CiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZSBQcnp5d2FyYSA8YW5kcmUucHJ6eXdhcmFAYXJtLmNv
+bT4KICAgIEFja2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5v
+cmc+Cgpjb21taXQgNWZiOGRkNjBkM2Q0M2IyMGRjZTRmNGJjOTA5MWY5NDIwMDcwOWY5MwpBdXRo
+b3I6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CkRhdGU6ICAgVGh1IE1hciAx
+NSAyMDozMDowOSAyMDE4ICswMDAwCgogICAgeGVuL2FybTogdmdpYzogT3ZlcnJpZGUgdGhlIGdy
+b3VwIGluIGxyIGV2ZXJ5dGltZQogICAgCiAgICBBdCB0aGUgbW9tZW50LCB3cml0ZV9sciBpcyBh
+c3N1bWluZyB0aGUgY2FsbGVyIHdpbGwgc2V0IGNvcnJlY3RseSB0aGUKICAgIGdyb3VwLiBIb3dl
+dmVyIHRoZSBncm91cCBzaG91bGQgYWx3YXlzIGJlIDAgd2hlbiB0aGUgZ3Vlc3QgaXMgdXNpbmcK
+ICAgIHZHSUN2MiBhbmQgMSBmb3IgdkdJQ3YzLiBBcyB0aGUgY2FsbGVyIHNob3VsZCBub3QgY2Fy
+ZSBhYm91dCB0aGUgZ3JvdXAsCiAgICBvdmVycmlkZSBpdCBkaXJlY3RseS4KICAgIAogICAgV2l0
+aCB0aGF0IGNoYW5nZSwgd3JpdGVfbHIgaXMgbm93IGJlaGF2aW5nIGxpa2UgdXBkYXRlX2xyIGZv
+ciB0aGUgZ3JvdXAuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVu
+LmdyYWxsQGFybS5jb20+CiAgICBSZXZpZXdlZC1ieTogQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnBy
+enl3YXJhQGFybS5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZSBQcnp5d2FyYSA8YW5kcmUu
+cHJ6eXdhcmFAYXJtLmNvbT4KICAgIEFja2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFi
+ZWxsaW5pQGtlcm5lbC5vcmc+Cgpjb21taXQgMTUxYjBjZjE0ZjhkY2E5YjQ2MzJkNGFkNGQ1NGRj
+MjY1NzcwNGM1OApBdXRob3I6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CkRh
+dGU6ICAgVGh1IE1hciAxNSAyMDozMDowOCAyMDE4ICswMDAwCgogICAgeGVuL2FybTogZ2ljOiBG
+aXggaW5kZW50YXRpb24gaW4gZ2ljX3VwZGF0ZV9vbmVfbHIKICAgIAogICAgU2lnbmVkLW9mZi1i
+eTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KICAgIFJldmlld2VkLWJ5OiBB
+bmRyZSBQcnp5d2FyYSA8YW5kcmUucHJ6eXdhcmFAYXJtLmNvbT4KICAgIFNpZ25lZC1vZmYtYnk6
+IEFuZHJlIFByenl3YXJhIDxhbmRyZS5wcnp5d2FyYUBhcm0uY29tPgoKY29tbWl0IGYyNzAwOWZm
+OWVjNDc4Njc2ZjFkNzYzNWI3Nzk3NTg3NTc1NWU1YTIKQXV0aG9yOiBBbmRyZSBQcnp5d2FyYSA8
+YW5kcmUucHJ6eXdhcmFAbGluYXJvLm9yZz4KRGF0ZTogICBUaHUgTWFyIDE1IDIwOjMwOjA3IDIw
+MTggKzAwMDAKCiAgICBBUk06IEltcGxlbWVudCB2Y3B1X2tpY2soKQogICAgCiAgICBJZiB3ZSBj
+aGFuZ2Ugc29tZXRoaW5nIGluIGEgdkNQVSB0aGF0IGFmZmVjdHMgaXRzIHJ1bm5hYmlsaXR5IG9y
+CiAgICBvdGhlcndpc2UgbmVlZHMgdGhlIHZDUFUncyBhdHRlbnRpb24sIHdlIG1pZ2h0IG5lZWQg
+dG8gdGVsbCB0aGUgc2NoZWR1bGVyCiAgICBhYm91dCBpdC4KICAgIFdlIGFyZSB1c2luZyB0aGlz
+IGluIG9uZSBwbGFjZSAodklSUSBpbmplY3Rpb24pIGF0IHRoZSBtb21lbnQsIGJ1dCB3aWxsCiAg
+ICBuZWVkIHRoaXMgYXQgbW9yZSBwbGFjZXMgc29vbi4KICAgIFNvIGxldCdzIGZhY3RvciBvdXQg
+dGhpcyBmdW5jdGlvbmFsaXR5LCB1c2luZyB0aGUgYWxyZWFkeSBleGlzdGluZwogICAgdmNwdV9r
+aWNrKCkgcHJvdG90eXBlICh1c2VkIGluIHg4NiBvbmx5IHNvIGZhciksIHRvIG1ha2UgdGhpcyBh
+dmFpbGFibGUKICAgIHRvIHRoZSByZXN0IG9mIHRoZSBYZW4gY29kZS4KICAgIEFsc28gYWRqdXN0
+IHRoZSBwZXJmY291bnRlciBuYW1lIHRvIHJlZmxlY3QgdGhlIG5ldyB1c2FnZS4KICAgIAogICAg
+U2lnbmVkLW9mZi1ieTogQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnByenl3YXJhQGxpbmFyby5vcmc+
+CiAgICBSZXZpZXdlZC1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KICAg
+IFJldmlld2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+
+Cgpjb21taXQgY2YyOTcwOGZmNmY5NDVkNWMwMGY5YjRkMmJkODhkNjg0ZTEyODk3ZgpBdXRob3I6
+IEFuZHJlIFByenl3YXJhIDxhbmRyZS5wcnp5d2FyYUBsaW5hcm8ub3JnPgpEYXRlOiAgIFRodSBN
+YXIgMTUgMjA6MzA6MDYgMjAxOCArMDAwMAoKICAgIEFSTTogVkdJQzogcmVuYW1lIGdpY19ldmVu
+dF9uZWVkc19kZWxpdmVyeSgpCiAgICAKICAgIGdpY19ldmVudF9uZWVkc19kZWxpdmVyeSgpIGlz
+IG5vdCBuYW1lZCB2ZXJ5IGludHVpdGl2ZWx5LCBlc3BlY2lhbGx5CiAgICB0aGUgZ2ljXyBwcmVm
+aXggaXMgc29tZXdoYXQgbWlzbGVhZGluZy4KICAgIFJlbmFtZSBpdCB0byB2Z2ljX3ZjcHVfcGVu
+ZGluZ19pcnEoKSwgd2hpY2ggbWFrZXMgaXQgY2xlYXIgdGhhdCB0aGlzCiAgICByZWxhdGVzIHRv
+IHRoZSB2aXJ0dWFsIEdJQyBhbmQgaXMgYWJvdXQgaW50ZXJydXB0cy4KICAgIEFsc28gYWRkIGEg
+VkNQVSBwYXJhbWV0ZXIsIHdoaWNoIG1ha2VzIHRoZSBjb2RlIG1vcmUgZmxleGlibGUgaW4gdGhl
+CiAgICBmdXR1cmUuIFRoZSBjdXJyZW50IFZHSUMgZXhwZWN0IHRoaXMgdG8gYmUgdGhlIGN1cnJl
+bnQgVkNQVSwgc28gYWRkCiAgICBhbiBhc3NlcnQgdG8gc3BvdCBhbnkgcmVncmVzc2lvbnMuCiAg
+ICAKICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJlIFByenl3YXJhIDxhbmRyZS5wcnp5d2FyYUBsaW5h
+cm8ub3JnPgogICAgUmV2aWV3ZWQtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5j
+b20+CiAgICBSZXZpZXdlZC1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJu
+ZWwub3JnPgoKY29tbWl0IDEyOTY2NjU1NTM4NzcwOTEwNWFjYTVlMmFkYWFkOTdkNjAzMzNhM2IK
+QXV0aG9yOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgpEYXRlOiAg
+IE1vbiBNYXIgMTkgMTk6MTM6NDQgMjAxOCArMDAwMAoKICAgIGFybS9ib290OiBNYXJrIGNvbnN0
+cnVjdF9kb20wKCkgYXMgX19pbml0CiAgICAKICAgIEl0cyBzb2xlIGNhbGxlciwgc3RhcnRfeGVu
+KCksIGlzIF9faW5pdC4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5k
+cmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGll
+bi5ncmFsbEBhcm0uY29tPgoocWVtdSBjaGFuZ2VzIG5vdCBpbmNsdWRlZCkKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
