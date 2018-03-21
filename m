@@ -1,14 +1,22 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH v2] libxl: allow libxl_domain_suspend to
- simply suspend a domain, without saving it
-Date: Wed, 21 Mar 2018 17:08:41 +0100
-Message-ID: <20180321160841.GQ7364@mail-itl>
-References: <20180314143608.22615-1-marmarek@invisiblethingslab.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v10 01/11] vpci: introduce basic handlers to
+ trap accesses to the PCI config space
+Date: Wed, 21 Mar 2018 16:01:41 +0000
+Message-ID: <20180321160141.keh2gtzy2ayfsvbh@citrix.com>
+References: <20180316133008.66443-1-roger.pau@citrix.com>
+ <20180316133008.66443-2-roger.pau@citrix.com>
+ <5AB0FA2102000078001B3E3A@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5179865247369756843=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180314143608.22615-1-marmarek@invisiblethingslab.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=24tk=gl=citrix.com=prvs=6111f1d8b=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1eygJm-00081u-Mc
+ for xen-devel@lists.xenproject.org; Wed, 21 Mar 2018 16:10:26 +0000
+Content-Disposition: inline
+In-Reply-To: <5AB0FA2102000078001B3E3A@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,182 +25,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
-Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marcus of Wetware Labs <marcus@wetwa.re>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, AndrewCooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, TimDeegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5179865247369756843==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="+ri2T0IZgb46yOXM"
-Content-Disposition: inline
-
-
---+ri2T0IZgb46yOXM
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Mar 14, 2018 at 03:36:08PM +0100, Marek Marczykowski-G=C3=B3recki w=
-rote:
-> When LIBXL_SUSPEND_NO_SAVE flag is set, no savefile will be written, but
-> the domain will still be suspended (but not destroyed). The main reason
-> for this functionality is to suspend the host while some domains are
-> running, potentially holding PCI devices. This will give a chance to a
-> driver in such a domain to properly suspend the device.
->=20
-> It would be better to have a separate function for this, but in fact it
-> should be named libxl_domain_suspend, then the current one renamed to
-> libxl_domain_save. Since that would break API compatibility, keep it in
-> the same function.
->=20
-> Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingsl=
-ab.com>
-> Signed-off-by: Marcus of Wetware Labs <marcus@wetwa.re>
-
-Bump?
-
-Any chances to get it into 4.11?
-
-> ---
-> Changes in v2:
->  - drop double initialization of dsps fields (libxl__domain_suspend_init
->    is called)
->  - use LIBXL_SUSPEND_NO_SAVE flag instead of fd=3D-1
-> ---
->  tools/libxl/libxl.h        |  5 +++++
->  tools/libxl/libxl_domain.c | 52 +++++++++++++++++++++++++++++++++-------=
-------
->  2 files changed, 42 insertions(+), 15 deletions(-)
->=20
-> diff --git a/tools/libxl/libxl.h b/tools/libxl/libxl.h
-> index eca0ea2c50..636db77c2b 100644
-> --- a/tools/libxl/libxl.h
-> +++ b/tools/libxl/libxl.h
-> @@ -1469,6 +1469,11 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t =
-domid, int fd,
->                           LIBXL_EXTERNAL_CALLERS_ONLY;
->  #define LIBXL_SUSPEND_DEBUG 1
->  #define LIBXL_SUSPEND_LIVE 2
-> +/*
-> + * Just transition the domain into suspended state, do not save its stat=
-e to
-> + * disk and do not destroy it. fd parameter is ignored.
-> + */
-> +#define LIBXL_SUSPEND_NO_SAVE 4
-> =20
->  /* @param suspend_cancel [from xenctrl.h:xc_domain_resume( @param fast )]
->   *   If this parameter is true, use co-operative resume. The guest
-> diff --git a/tools/libxl/libxl_domain.c b/tools/libxl/libxl_domain.c
-> index 13b1c73d40..0e9e245ce3 100644
-> --- a/tools/libxl/libxl_domain.c
-> +++ b/tools/libxl/libxl_domain.c
-> @@ -486,6 +486,13 @@ static void domain_suspend_cb(libxl__egc *egc,
-> =20
->  }
-> =20
-> +static void domain_suspend_empty_cb(libxl__egc *egc,
-> +                              libxl__domain_suspend_state *dss, int rc)
-> +{
-> +    STATE_AO_GC(dss->ao);
-> +    libxl__ao_complete(egc,ao,rc);
-> +}
-> +
->  int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd, int fla=
-gs,
->                           const libxl_asyncop_how *ao_how)
->  {
-> @@ -498,25 +505,40 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t d=
-omid, int fd, int flags,
->          goto out_err;
->      }
-> =20
-> -    libxl__domain_save_state *dss;
-> -    GCNEW(dss);
-> +    if (!(flags & LIBXL_SUSPEND_NO_SAVE)) {
-> +        libxl__domain_save_state *dss;
-> =20
-> -    dss->ao =3D ao;
-> -    dss->callback =3D domain_suspend_cb;
-> +        GCNEW(dss);
-> =20
-> -    dss->domid =3D domid;
-> -    dss->fd =3D fd;
-> -    dss->type =3D type;
-> -    dss->live =3D flags & LIBXL_SUSPEND_LIVE;
-> -    dss->debug =3D flags & LIBXL_SUSPEND_DEBUG;
-> -    dss->checkpointed_stream =3D LIBXL_CHECKPOINTED_STREAM_NONE;
-> +        dss->ao =3D ao;
-> +        dss->callback =3D domain_suspend_cb;
-> +
-> +        dss->domid =3D domid;
-> +        dss->fd =3D fd;
-> +        dss->type =3D type;
-> +        dss->live =3D flags & LIBXL_SUSPEND_LIVE;
-> +        dss->debug =3D flags & LIBXL_SUSPEND_DEBUG;
-> +        dss->checkpointed_stream =3D LIBXL_CHECKPOINTED_STREAM_NONE;
-> +
-> +        rc =3D libxl__fd_flags_modify_save(gc, dss->fd,
-> +                                         ~(O_NONBLOCK|O_NDELAY), 0,
-> +                                         &dss->fdfl);
-> +        if (rc < 0) goto out_err;
-> =20
-> -    rc =3D libxl__fd_flags_modify_save(gc, dss->fd,
-> -                                     ~(O_NONBLOCK|O_NDELAY), 0,
-> -                                     &dss->fdfl);
-> -    if (rc < 0) goto out_err;
-> +        libxl__domain_save(egc, dss);
-> +    } else {
-> +        libxl__domain_suspend_state *dsps;
-> +
-> +        GCNEW(dsps);
-> +        dsps->ao =3D ao;
-> +        dsps->domid =3D domid;
-> +        dsps->type =3D type;
-> +        rc =3D libxl__domain_suspend_init(egc, dsps, type);
-> +        if (rc < 0) goto out_err;
-> +        dsps->callback_common_done =3D domain_suspend_empty_cb;
-> +        libxl__domain_suspend(egc, dsps);
-> +    }
-> =20
-> -    libxl__domain_save(egc, dss);
->      return AO_INPROGRESS;
-> =20
->   out_err:
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---+ri2T0IZgb46yOXM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlqsCq4ACgkQ24/THMrX
-1yyBogf+PNsU1t26eYA4ULOF9D+vScRAZwKEcQqQHyHo3vVPSImyY4TnWZhDebs1
-JWl2r5n1FvKarnN55EWCga/RZpfZRacc4x8FR11TPMNW00+Xw8zNjuBMCJFSGQds
-a7U9OIgXYlvaL60P5F9Ih1+M744gmYEmK/CfAmzqfgY4ROLViXzVCG9BbZT7gbkQ
-AmhUGkO7Lr6Jr9tPOvl7XqJYURlY6G9OuGzSltKmoa3EwPrAJUhwyVeWDc5+prid
-ltVbXtOfHvILj2jrS+CkL6w5ryEZMtlPsmZ9J67WeklSiZPwl+mKD9G0q0NUjSAn
-FR1DanwR/0If7J8DROb+04C7pl2Q+Q==
-=T5JW
------END PGP SIGNATURE-----
-
---+ri2T0IZgb46yOXM--
-
-
---===============5179865247369756843==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5179865247369756843==--
+T24gVHVlLCBNYXIgMjAsIDIwMTggYXQgMDU6MTA6MDlBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDE2LjAzLjE4IGF0IDE0OjI5LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdy
+b3RlOgo+ID4gVGhpcyBmdW5jdGlvbmFsaXR5IGlzIGdvaW5nIHRvIHJlc2lkZSBpbiB2cGNpLmMg
+KGFuZCB0aGUgY29ycmVzcG9uZGluZwo+ID4gdnBjaS5oIGhlYWRlciksIGFuZCBzaG91bGQgYmUg
+YXJjaC1hZ25vc3RpYy4gVGhlIGhhbmRsZXJzIGludHJvZHVjZWQKPiA+IGluIHRoaXMgcGF0Y2gg
+c2V0dXAgdGhlIGJhc2ljIGZ1bmN0aW9uYWxpdHkgcmVxdWlyZWQgaW4gb3JkZXIgdG8gdHJhcAo+
+ID4gYWNjZXNzZXMgdG8gdGhlIFBDSSBjb25maWcgc3BhY2UsIGFuZCBhbGxvdyBkZWNvZGluZyB0
+aGUgYWRkcmVzcyBhbmQKPiA+IGZpbmRpbmcgdGhlIGNvcnJlc3BvbmRpbmcgaGFuZGxlciB0aGF0
+IHNob3VsZCBoYW5kbGUgdGhlIGFjY2Vzcwo+ID4gKGFsdGhvdWdoIG5vIGhhbmRsZXJzIGFyZSBp
+bXBsZW1lbnRlZCkuCj4gPiAKPiA+IE5vdGUgdGhhdCB0aGUgdHJhcHMgdG8gdGhlIFBDSSBJTyBw
+b3J0cyByZWdpc3RlcnMgKDB4Y2Y4LzB4Y2ZjKSBhcmUKPiA+IHNldHVwIGluc2lkZSBvZiBhIHg4
+NiBIVk0gZmlsZSwgc2luY2UgdGhhdCdzIG5vdCBzaGFyZWQgd2l0aCBvdGhlcgo+ID4gYXJjaGVz
+Lgo+ID4gCj4gPiBBIG5ldyBYRU5fWDg2X0VNVV9WUENJIHg4NiBkb21haW4gZmxhZyBpcyBhZGRl
+ZCBpbiBvcmRlciB0byBzaWduYWwgWGVuCj4gPiB3aGV0aGVyIGEgZG9tYWluIHNob3VsZCB1c2Ug
+dGhlIG5ld2x5IGludHJvZHVjZWQgdlBDSSBoYW5kbGVycywgdGhpcwo+ID4gaXMgb25seSBlbmFi
+bGVkIGZvciBQVkggRG9tMCBhdCB0aGUgbW9tZW50Lgo+ID4gCj4gPiBBIHZlcnkgc2ltcGxlIHVz
+ZXItc3BhY2UgdGVzdCBpcyBhbHNvIHByb3ZpZGVkLCBzbyB0aGF0IHRoZSBiYXNpYwo+ID4gZnVu
+Y3Rpb25hbGl0eSBvZiB0aGUgdlBDSSB0cmFwcyBjYW4gYmUgYXNzZXJ0ZWQuIFRoaXMgaGFzIGJl
+ZW4gcHJvdmVuCj4gPiBxdWl0ZSBoZWxwZnVsIGR1cmluZyBkZXZlbG9wbWVudCwgc2luY2UgdGhl
+IGxvZ2ljIHRvIGhhbmRsZSBwYXJ0aWFsCj4gPiBhY2Nlc3NlcyBvciBhY2Nlc3NlcyB0aGF0IGV4
+cGFuZCBhY3Jvc3MgbXVsdGlwbGUgcmVnaXN0ZXJzIGlzIG5vdAo+ID4gdHJpdmlhbC4KPiA+IAo+
+ID4gVGhlIGhhbmRsZXJzIGZvciB0aGUgcmVnaXN0ZXJzIGFyZSBhZGRlZCB0byBhIGxpbmtlZCBs
+aXN0IHRoYXQncyBrZWVwCj4gPiBzb3J0ZWQgYXQgYWxsIHRpbWVzLiBCb3RoIHRoZSByZWFkIGFu
+ZCB3cml0ZSBoYW5kbGVycyBzdXBwb3J0IGFjY2Vzc2VzCj4gPiB0aGF0IGV4cGFuZCBhY3Jvc3Mg
+bXVsdGlwbGUgZW11bGF0ZWQgcmVnaXN0ZXJzIGFuZCBjb250YWluIGdhcHMgbm90Cj4gPiBlbXVs
+YXRlZC4KPiA+IAo+ID4gU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1
+QGNpdHJpeC5jb20+Cj4gPiBSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2Uu
+Y29tPgo+ID4gW0lPIHBhcnRzXQo+ID4gUmV2aWV3ZWQtYnk6IFBhdWwgRHVycmFudCA8cGF1bC5k
+dXJyYW50QGNpdHJpeC5jb20+Cj4gCj4gU3RlZmFubywgSnVsaWVuLAo+IAo+IGFueSBjaGFuY2Ug
+b2YgZ2V0dGluZyBhbiBhY2sgZm9yIHRoZSBzbWFsbGlzaCBBUk0gc2lkZSBjaGFuZ2UKPiBoZXJl
+IChhc3N1bWluZyB5b3VyIGVhcmxpZXIgY29uY2VybnMgaGF2ZSBiZWVuIGFkZHJlc3NlZCk/Cj4g
+Cj4gSWFuLCBXZWksCj4gCj4gYWxvbmcgdGhvc2UgbGluZXMgKGlpcmMgdGhlcmUgd2VyZSBubyBw
+cmlvciBjb25jZXJucykgZm9yIHRoZSB0aW55Cj4gbGlieGwgcGFydD8gKEkgdGhpbmsgdGhlIG5l
+dyB0ZXN0IGNvZGUgZG9lc24ndCBzdHJpY3RseSBiZWxvbmcgdW5kZXIKPiB0b29scy8gbWFpbnRh
+aW5lcnNoaXAsIGp1c3QgbGlrZSB0aGUgeDg2X2VtdWxhdG9yIG9uZSBkb2Vzbid0LikKCkhlcmUg
+eW91IGdvOgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
