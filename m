@@ -1,17 +1,10 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 04/20] xen/domctl: Drop vcpu_alloc_lock
-Date: Wed, 21 Mar 2018 06:46:04 +0100
-Message-ID: <58b42b13-70c3-0b88-99a8-704745b78acd@suse.com>
-References: <1521486839-25617-1-git-send-email-andrew.cooper3@citrix.com>
- <1521486839-25617-5-git-send-email-andrew.cooper3@citrix.com>
- <5AB14BD002000078001B41EA@prv-mh.provo.novell.com>
- <c72ad6c4-0006-cb24-9e50-30735ecb6ab6@citrix.com>
+From: Jayadev Kumaran <jayadevk123@gmail.com>
+Subject: Xen support on arm64 platform
+Date: Wed, 21 Mar 2018 11:27:01 +0530
+Message-ID: <CAOG0fenTdiD+u-EbDny_XrDiAUsq_yDwzM5mVm-aHfXu=f85tA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3435369445381468690=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <c72ad6c4-0006-cb24-9e50-30735ecb6ab6@citrix.com>
-Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,47 +13,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAvMDMvMTggMTg6MjIsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4gT24gMjAvMDMvMTggMTY6
-NTgsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAxOS4wMy4xOCBhdCAyMDoxMywgPGFuZHJl
-dy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gSXQgaXMgbm90IGVudGlyZWx5IGNsZWFy
-IHdoeSB0aGlzIGludGVybG9jayB3YXMgaW50cm9kdWNlZCBpbiBjL3MgOGNiYjUyNzhlCj4+PiAi
-eDg2L0FNRDogQWRkIHN1cHBvcnQgZm9yIEFNRCdzIE9TVlcgZmVhdHVyZSBpbiBndWVzdHMiLgo+
-Pj4KPj4+IEF0IHRoZSB0aW1lLCBzdm1faGFuZGxlX29zdncoKSBjb3VsZCBoYXZlIHNlZW4gYW4g
-dW5leHBlY3RlZCBjaGFuZ2UgaW4gT1NWVwo+Pj4gKG5vdCB0aGUgY2FzZSBub3csIGR1ZSB0byB0
-aGUgbmV3IENQVUlEIFBvbGljeSBpbmZyYXN0cnVjdHVyZSksIGJ1dCBldmVuIHRoZW4sCj4+PiBp
-dCB3b3VsZCBoYXZlIGNhdXNlZCBzcHVyaW91cyBjaGFuZ2VzIGluIGJlaGF2aW91ciB3aGVuIGhh
-bmRsaW5nCj4+PiBPU1ZXX3tJRF9MRU5HVEgsU1RBVFVTfSByZWFkIHJlcXVlc3RzIG9uIGJlaGFs
-ZiBvZiBhbiBhbHJlYWR5LXJ1bm5pbmcgZ3Vlc3QuCj4+Pgo+Pj4gVGhlcmUgYXJlIHBsZW50eSBv
-ZiBvdGhlciBhc3BlY3RzIG9mIGRvbWFpbiBjcmVhdGlvbiB3aGljaCBkZXBlbmQgb24gaGFyZHdh
-cmUKPj4+IGRldGFpbHMgd2hpY2ggbWF5IGNoYW5nZSBhY3Jvc3MgYSBtaWNyb2NvZGUgbG9hZCwg
-YnV0IHdoZXJlIG5vdCBwcm90ZWN0ZWQgYnkKPj4+IHRoaXMgaW50ZXJsb2NrLgo+PiBBcmUgdGhl
-cmU/IFdlIGRvbid0IHJlLXJlYWQgQ1BVSUQgKHlldCksIGZvciBleGFtcGxlLiBCdXQgb2YKPj4g
-Y291cnNlIGl0IGlzIGFsc28gbm90IHJlYWxseSBzcGVjaWZpZWQgd2hpY2ggYXNwZWN0cyBtYXkg
-Y2hhbmdlCj4+IGFjcm9zcyBtaWNyb2NvZGUgdXBkYXRlcy4KPj4KPj4+IEEgaG9zdCBhZG1pbmlz
-dHJhdG9yIGNob29zaW5nIHRvIHBlcmZvcm0gbGF0ZSBtaWNyb2NvZGUgbG9hZGluZyBoYXMgcGxl
-bnR5IG9mCj4+PiBvdGhlciBwcm9ibGVtcyB0byB3b3JyeSBhYm91dCwgYW5kIGlzIGl0IG5vdCB1
-bnJlYXNvbmFibGUgdG8gZXhwZWN0IHRoZW0gdG8KPj4+IHRlbXBvcmFyaWx5IGNlYXNlIGRvbWFp
-biBjb25zdHJ1Y3Rpb24gYWN0aXZpdGllcyB3aGlsZSB0aGUgbWljcm9jb2RlIGxvYWRpbmcKPj4+
-IGlzIGluIHByb2dyZXNzLgo+PiBCdXQgaXQgaXMgYWxzbyBub3QgdW5yZWFzb25hYmxlIHRvIGV4
-cGVjdCB0aGUgaHlwZXJ2aXNvciB0byBndWFyZAo+PiBhZ2FpbnN0IGluY29uc2lzdGVuY2llcyBo
-ZXJlLiBPbiB0aGUgd2hvbGUgSSdtIG5vdCByZWFsbHkKPj4gY29udmluY2VkOyBJIHRoaW5rIEkn
-ZCBsaWtlIHRvIGhlYXIgb3RoZXJzJyBvcGluaW9ucy4KPiAKPiBUaGUgdW5kZXJseWluZyBwcm9i
-bGVtIGlzIHRoYXQgdGhpcyBsb2NrIGNhbm5vdCBzYXkgd2hlbiBtZXJnaW5nCj4gbWF4X2NwdXMg
-aW50byBjcmVhdGVkb21haW4sIGJlY2F1c2Ugd2UgY2Fubm90IGNvbnRpbnVlIHRoZSBoeXBlcmNh
-bGwKPiBtaWR3YXkgdGhyb3VnaC4KPiAKPiBBcyBpdCBkb2Vzbid0IGN1cnJlbnRseSBwcm90ZWN0
-IGNyZWF0ZWRvbWFpbiwgd2hpY2ggYW1vbmdzdCBvdGhlciB0aGluZ3MKPiBjb250YWlucyBpbml0
-X2RvbWFpbl9jcHVpZF9wb2xpY3koKSBhbmQgaW5pdF9kb21haW5fbXNyX3BvbGljeSgpICh0aGUK
-PiBtb3N0IGxpa2VseSBzdHJ1Y3R1cmVzIHRvIGJlIGFmZmVjdGVkIGJ5IG1pY3JvY29kZSB1cGRh
-dGVzKSwgSSBkb24ndCBzZWUKPiBhbnkgcHVycG9zZSBpbiBrZWVwaW5nIGl0IGZvciB0aGUgbWlu
-dXRlIGFyZWEgaXQgZG9lcyBjb3Zlci4KCldoYXQgYWJvdXQgZmFpbGluZyBkb21haW4gY3JlYXRp
-b24gZS5nLiB2aWEgLUVBR0FJTiBpbiBjYXNlIGEKbWljcm9jb2RlIHVwZGF0ZSBoYXBwZW5lZCBp
-biBiZXR3ZWVuPyBUaGlzIHdvdWxkIGJlIGVhc3kgYnkgYWRkaW5nIGEKbWljcm9jb2RlIGdlbmVy
-YXRpb24gY291bnQgd2hpY2ggd291bGQgaGF2ZSB0byBiZSB0aGUgc2FtZSBmb3Igc3RhcnQKYW5k
-IGVuZCBvZiB0aGUgY3JlYXRlIGRvbWFpbiBoeXBlcmNhbGwuCgoKSnVlcmdlbgoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============3435369445381468690==
+Content-Type: multipart/alternative; boundary="000000000000271b5f0567e5dc9c"
+
+--000000000000271b5f0567e5dc9c
+Content-Type: text/plain; charset="UTF-8"
+
+Hello all,
+
+I need to setup Xen on Snapdragon 820 platform - armv8 64 bit architecture.
+Is there support available for the same ? Is there Xen implementation on
+any other similar platform ?
+
+Thanks and Regards,
+Jay
+
+--000000000000271b5f0567e5dc9c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hello all,<br><br></div>I need to setup Xen on Snapdr=
+agon 820 platform - armv8 64 bit architecture. Is there support available f=
+or the same ? Is there Xen implementation on any other similar platform ?<b=
+r><br><div>Thanks and Regards,<br></div><div>Jay<div class=3D"gmail-adL"><b=
+r></div></div><br></div>
+
+--000000000000271b5f0567e5dc9c--
+
+
+--===============3435369445381468690==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3435369445381468690==--
