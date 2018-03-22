@@ -1,21 +1,23 @@
-From: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH v2 1/2] make: move generated headers to
- qemu-build/
-Date: Thu, 22 Mar 2018 22:04:26 +0200
-Message-ID: <20180322215555-mutt-send-email-mst__43073.0618573309$1521749018$gmane$org@kernel.org>
-References: <1521746188-496856-1-git-send-email-mst@redhat.com>
- <e149388d-eb17-ffd3-b54c-cbdf6a309882@redhat.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Subject: Re: [PATCH v2] qemu: replace "" with <> in headers
+Date: Thu, 22 Mar 2018 21:33:29 +0100
+Message-ID: <aba29cf7-637a-c967-9b2f-59060a1c1330__13774.8547051617$1521750821$gmane$org@redhat.com>
+References: <1521642402-197739-1-git-send-email-mst@redhat.com>
+ <20180321153439.GC3898@localhost.localdomain>
+ <20180321175452-mutt-send-email-mst@kernel.org>
+ <20180321162203.GE3898@localhost.localdomain>
+ <20180322211902-mutt-send-email-mst@kernel.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=rlrs=gm=redhat.com=mst@srs-us1.protection.inumbo.net>)
- id 1ez6Rx-0005Ou-J2
- for xen-devel@lists.xenproject.org; Thu, 22 Mar 2018 20:04:37 +0000
-Content-Disposition: inline
-In-Reply-To: <e149388d-eb17-ffd3-b54c-cbdf6a309882@redhat.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=q6qb=gm=redhat.com=pbonzini@srs-us1.protection.inumbo.net>)
+ id 1ez6uj-0007QB-HO
+ for xen-devel@lists.xenproject.org; Thu, 22 Mar 2018 20:34:21 +0000
+In-Reply-To: <20180322211902-mutt-send-email-mst@kernel.org>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,43 +26,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Eric Blake <eblake@redhat.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, Dmitry Fleytman <dmitry.fleytman@gmail.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Li Zhijian <lizhijian@cn.fujitsu.com>, David Hildenbrand <david@redhat.com>, Jeff Cody <jcody@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org, BALATON Zoltan <balaton@eik.bme.hu>, Keith Busch <keith.busch@intel.com>, Max Filippov <jcmvbkbc@gmail.com>, Hannes Reinecke <hare@suse.com>, Gerd Hoffmann <kraxel@redhat.com>, Fam Zheng <famz@redhat.com>, Max Reitz <mreitz@redhat.com>, Yongbok Kim <yongbok.kim@mips.com>, Josh Durgin <jdurgin@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, Alberto Garcia <berto@igalia.com>, zhanghailiang <zhang.zhanghailiang@huawei.com>, Ben Warren <ben@skyportsystems.com>, Stefan Berger <stefanb@linux.vnet.ibm.com>, Michael Roth <mdroth@linux.vnet.ibm.com>"Richard W.M. Jones" <r>
+To: "Michael S. Tsirkin" <mst@redhat.com>, Kevin Wolf <kwolf@redhat.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>, Dmitry Fleytman <dmitry.fleytman@gmail.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Li Zhijian <lizhijian@cn.fujitsu.com>, David Hildenbrand <david@redhat.com>, Jeff Cody <jcody@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, qemu-devel@nongnu.org, BALATON Zoltan <balaton@eik.bme.hu>, Keith Busch <keith.busch@intel.com>, Max Filippov <jcmvbkbc@gmail.com>, Hannes Reinecke <hare@suse.com>, Gerd Hoffmann <kraxel@redhat.com>, Fam Zheng <famz@redhat.com>, Max Reitz <mreitz@redhat.com>, Eric Blake <eblake@redhat.com>, Josh Durgin <jdurgin@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, Alberto Garcia <berto@igalia.com>, zhanghailiang <zhang.zhanghailiang@huawei.com>, Ben Warren <ben@skyportsystems.com>, Stefan Berger <stefanb@linux.vnet.ibm.com>, Yongbok Kim <yongbok.kim@mips.com>, Michael Roth <mdroth@linux.vnet.ib>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBNYXIgMjIsIDIwMTggYXQgMDI6NDI6NTVQTSAtMDUwMCwgRXJpYyBCbGFrZSB3cm90
-ZToKPiBPbiAwMy8yMi8yMDE4IDAyOjI3IFBNLCBNaWNoYWVsIFMuIFRzaXJraW4gd3JvdGU6Cj4g
-PiBNYWtlIHN1cmUgYWxsIGdlbmVyYXRlZCBmaWxlcyBnbyBpbnRvIHFlbXUtYnVpbGQgc3ViZGly
-ZWN0b3J5Lgo+ID4gV2UgY2FuIHRoZW4gaW5jbHVkZSB0aGVtIGxpa2UgdGhpczoKPiA+ICAgI2lu
-Y2x1ZGUgInFlbXUtYnVpbGQvdHJhY2UuaCIKPiA+IAo+ID4gVGhpcyBzZXJ2ZXMgdHdvIHB1cnBv
-c2VzOgo+ID4gLSBtYWtlIGl0IGVhc3kgdG8gZGV0ZWN0IHdoaWNoIGZpbGVzIGFyZSBpbiB0aGUg
-c291cmNlCj4gPiAgICBkaXJlY3RvcnkgKGEgYml0IG1vcmUgd29yayBmb3Igd3JpdGVycywgZWFz
-aWVyIGZvciByZWFkZXJzKQo+ID4gLSByZWR1Y2UgY2hhbmNlcyBvZiBjb25mbGljdHMgd2l0aCBw
-b3NzaWJsZSBzdGFsZSBmaWxlcyBpbiBzb3VyY2UKPiA+ICAgIGRpcmVjdG9yeSAod2hpY2ggY291
-bGQgYmUgbGVmdCBvdmVyIGZyb20gZS5nLiBvbGQgcGF0Y2hlcywgZXRjKQo+ID4gCj4gPiBUaGlz
-IHBhdGNoIG5lZWRzIHRvIGJlIG1lcmdlZCB3aXRoIHBhdGNoIDIgIG9mIHNlcmllcyB1cGRhdGlu
-ZyBhbGwKPiA+IGZpbGVzOiBzZW5kaW5nIGl0IHNlcGFyYXRlbHkgdG8gYXZvaWQgc3BhbW1pbmcg
-dGhlIGxpc3QuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IE1pY2hhZWwgUy4gVHNpcmtpbiA8bXN0
-QHJlZGhhdC5jb20+Cj4gPiAtLS0KPiAKPiA+ICsrKyBiL01ha2VmaWxlCj4gPiBAQCAtODksMTAy
-ICs4OSwxMDIgQEAgZW5kaWYKPiA+ICAgaW5jbHVkZSAkKFNSQ19QQVRIKS9ydWxlcy5tYWsKPiA+
-IC1HRU5FUkFURURfRklMRVMgPSBxZW11LXZlcnNpb24uaCBjb25maWctaG9zdC5oIHFlbXUtb3B0
-aW9ucy5kZWYKPiA+IC1HRU5FUkFURURfRklMRVMgKz0gcWFwaS9xYXBpLWJ1aWx0aW4tdHlwZXMu
-aCBxYXBpL3FhcGktYnVpbHRpbi10eXBlcy5jCj4gCj4gVWdnaCAtIEkgcmVhbGx5IG5lZWQgdG8g
-Zm9sbG93IHVwIG9uIG15IHRocmVhdCB0byBtYWtlIHNtYXJ0ZXIgdXNlIG9mIG1ha2UKPiB2YXJp
-YWJsZXMgYW5kIHN0cmluZyBtYW5pcHVsYXRpb24gdG8gY3V0IGRvd24gb24gdGhlIGJvaWxlcnBs
-YXRlIGludm9sdmVkCj4gaGVyZS4gIFNhZGx5LCBJJ20gbm90IGNvbnZpbmNlZCB0aGF0IGRvaW5n
-IHNvIGlzIGEgMi4xMiBidWdmaXggcHJpb3JpdHksIHNvCj4gaXQgaXNuJ3QgYXQgdGhlIHRvcCBv
-ZiBteSB3b3JrIHF1ZXVlLgo+IAo+IE92ZXJhbGwsIHRoZSBwYXRjaCBpcyBhbiBpbnRlcmVzdGlu
-ZyBpZGVhLiAgSSdtIHN0aWxsIG5vdCAxMDAlIHNvbGQgb24gaXQKPiAoYXMgeW91IHNheSwgaXQn
-cyBub3cgc2xpZ2h0bHkgbW9yZSB3b3JrIGZvciB3cml0ZXJzKSwgYnV0IEknbSBub3QgY29taW5n
-IHVwCj4gd2l0aCBhbnkgc29saWQgcmVhc29ucyB3aHkgaXQgc2hvdWxkIG5vdCBiZSBhcHBsaWVk
-IChhdCBsZWFzdCwgZm9yIDIuMTMgLQo+IGRvaW5nIGl0IGR1cmluZyBmcmVlemUgZm9yIDIuMTIg
-aXMgYSBiaXQgaGFyZGVyIHRvIGp1c3RpZnkpLgoKSXQncyB1cCB0byBQZXRlciByZWFsbHk6IGl0
-IGhlbHBzIHJlZHVjZSBjb25mbGljdHMgaWYgd2UgYXBwbHkgcGF0Y2hlcwpsaWtlIHRoaXMgZHVy
-aW5nIGZyZWV6ZS4gIEJ1dCB3aXRoIGVub3VnaCBlZmZvcnQgb24gUGF0ZXIncyBwYXJ0IGl0J3MK
-bm90IGEgaHVnZSBkZWFsLgoKPiAtLSAKPiBFcmljIEJsYWtlLCBQcmluY2lwYWwgU29mdHdhcmUg
-RW5naW5lZXIKPiBSZWQgSGF0LCBJbmMuICAgICAgICAgICArMS05MTktMzAxLTMyNjYKPiBWaXJ0
-dWFsaXphdGlvbjogIHFlbXUub3JnIHwgbGlidmlydC5vcmcKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMjIvMDMvMjAxOCAyMDoyOSwgTWljaGFlbCBTLiBUc2lya2luIHdyb3RlOgo+IE9uIFdlZCwg
+TWFyIDIxLCAyMDE4IGF0IDA1OjIyOjAzUE0gKzAxMDAsIEtldmluIFdvbGYgd3JvdGU6Cj4+PiBJ
+dCdzIGFsbCBzdGlsbCB2ZXJ5IG11Y2ggYSBub24tc3RhbmRhcmQgY29udmVudGlvbiBhbmQgc28g
+bGVzcyByb2J1c3QKPj4+IHRoYW4gcHJlZml4aW5nIGZpbGUgbmFtZSB3aXRoIGEgcHJvamVjdC1z
+cGVjaWZpeCBwcmVmaXguCj4+IEkndmUgYWx3YXlzIGhhZCB0aGUgaW1wcmVzc2lvbiB0aGF0IGl0
+J3MgYnkgZmFyIHRoZSBtb3N0IGNvbW1vbgo+PiBjb252ZW50aW9uLCB0byB0aGUgcG9pbnQgdGhh
+dCBJJ2QgYmxpbmRseSBhc3N1bWUgaXQgd2hlbiBqb2luaW5nIGEgbmV3Cj4+IHByb2plY3QuCj4g
+Cj4gQW55IGV4YW1wbGVzPwoKR0NDIC0gaHR0cHM6Ly9naXRodWIuY29tL2djYy1taXJyb3IvZ2Nj
+L2Jsb2IvbWFzdGVyL2djYy9yZWxvYWQuYwpMaWJ2aXJ0IC0gaHR0cHM6Ly9naXRodWIuY29tL2xp
+YnZpcnQvbGlidmlydC9ibG9iL21hc3Rlci9zcmMvdXRpbC92aXJwcm9jZXNzLmMKU0RMIC0gaHR0
+cHM6Ly9naXRodWIuY29tL1NETC1taXJyb3IvU0RML2Jsb2IvbWFzdGVyL3NyYy9jb3JlL3VuaXgv
+U0RMX3BvbGwuYwoKQW55dGhpbmcgYnV0IExpbnV4IHJlYWxseS4KCkkgZmluZCA8cWVtdS9mb28v
+YmFyLmg+IHZlcmJvc2UgYW5kIHVubmVjZXNzYXJ5LiAgVGhlIG9ubHkgYWR2YW50YWdlCm9mIHlv
+dXIgcHJvcG9zYWwgaXMgdGhhdCBmaWxlcyBpbmNsdWRlZCBmcm9tIHRoZSBzb3VyY2UgZGlyZWN0
+b3J5IHdvdWxkIGJlCmNsZWFybHkgbm90aWNlYWJsZS4gIFRoYXQgc2FpZCwgaXQncyBlYXN5IHRv
+IGFkZCBhIGNoZWNrcGF0Y2gucGwgcnVsZSB0aGF0CmRldGVjdHMgd2hlbiAiLi4uLy4uLiIgaXMg
+dXNlZCBvbiBhIGZpbGUgbm90IHVuZGVyIGluY2x1ZGUvLgoKUGFvbG8KCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
