@@ -1,16 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [rumprun test] 121042: regressions - FAIL
-Date: Thu, 22 Mar 2018 22:46:58 +0000
-Message-ID: <osstest-121042-mainreport@xen.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: X86 Community Call - Wed Apr 11,
+ 14:00 - 15:00 UTC - Call for Agenda Items
+Date: Thu, 22 Mar 2018 15:51:11 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1803221549241.12360@sstabellini-ThinkPad-X260>
+References: <DAA777E6-B987-454D-9EFA-153391163E36@citrix.com>
+ <911906d032394b138a8fc00dfc6f8ddf@AMSPEX02CL03.citrite.net>
+ <20180322115517.do5fzd7qvnaxrge5@MacBook-Pro-de-Roger.local>
+ <929bad70-55a1-342a-e370-8352fa5f6ee6@arm.com>
+ <AD4D119F-D928-4513-8CA7-12716AB711D0@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1325343598-1521759072=:12360"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xuu9=gm=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1ez8zB-0007lB-LP
- for xen-devel@lists.xenproject.org; Thu, 22 Mar 2018 22:47:05 +0000
+In-Reply-To: <AD4D119F-D928-4513-8CA7-12716AB711D0@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,88 +20,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Lars Kurth <lars.kurth@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, "Ji, John" <john.ji@intel.com>, "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>, Wei Liu <wei.liu2@citrix.com>, Tamas K Lengyel <tamas@tklengyel.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Daniel Kiper <daniel.kiper@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <royger@freebsd.org>, Christopher Clark <christopher.w.clark@gmail.com>, Rich Persaud <persaur@gmail.com>, Janakarajan Natarajan <jnataraj@amd.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <Paul.Durrant@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, Jan Beulich' <JBeulich@suse.com>, Brian Woods <brian.woods@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMTA0MiBydW1wcnVuIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjEwNDIvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3Rz
-IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMg
-d2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFtZDY0LXJ1bXBydW4gICAgICAgICAgIDYg
-cnVtcHJ1bi1idWlsZCAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEwNjc1NAogYnVpbGQtaTM4
-Ni1ydW1wcnVuICAgICAgICAgICAgNiBydW1wcnVuLWJ1aWxkICAgICAgICAgICAgZmFpbCBSRUdS
-LiB2cy4gMTA2NzU0CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJs
-b2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1ydW1wcnVuLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEp
-ICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYtcnVtcHJ1bi1pMzg2
-ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRh
-cmdldGVkIGZvciB0ZXN0aW5nOgogcnVtcHJ1biAgICAgICAgICAgICAgOTRiZGYzMmFjNTdiODRj
-MWI0MjE1MGQyMWYwYWQ3OWIzYjVkZDk5YwpiYXNlbGluZSB2ZXJzaW9uOgogcnVtcHJ1biAgICAg
-ICAgICAgICAgYzdmMmYwMTZiZWNjMWNkMGU4NWRhNmUxYjI1YThlN2Y5ZmIyYWE3NAoKTGFzdCB0
-ZXN0IG9mIGJhc2lzICAgMTA2NzU0ICAyMDE3LTAzLTE4IDA0OjIxOjI1IFogIDM2OSBkYXlzClRl
-c3Rpbmcgc2FtZSBzaW5jZSAgIDEyMDM2MCAgMjAxOC0wMy0wOSAwNDoxOToyMCBaICAgMTMgZGF5
-cyAgIDEwIGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0
-ZXN0OgogIEtlbnQgTWNMZW9kIDxrZW50LW1jbGVvZEB1c2Vycy5ub3JlcGx5LmdpdGh1Yi5jb20+
-CiAgS2VudCBNY0xlb2QgPEtlbnQuTWNsZW9kQGRhdGE2MS5jc2lyby5hdT4KICBOYWphIE1lbGFu
-IDxuYWphbWVsYW5AYXV0aXN0aWNpLm9yZz4KICBTZWJhc3RpYW4gV2lja2kgPGdhbmRyb0BnbXgu
-bmV0PgogIFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1y
-dW1wcnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IGJ1aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1ydW1wcnVuLWFtZDY0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYtcnVtcHJ1bi1pMzg2
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKCgotLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0
-LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xv
-Z3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0
-Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5v
-cmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3Nz
-dGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIv
-P3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDov
-L3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hi
-PW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVu
-Yml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5n
-LgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tCmNvbW1pdCA5NGJkZjMyYWM1N2I4NGMxYjQyMTUwZDIxZjBhZDc5YjNiNWRkOTljCk1l
-cmdlOiA4ZmU0MGM4IGIzYzEwMzMKQXV0aG9yOiBLZW50IE1jTGVvZCA8a2VudC1tY2xlb2RAdXNl
-cnMubm9yZXBseS5naXRodWIuY29tPgpEYXRlOiAgIEZyaSBGZWIgMTYgMDk6MTU6NDUgMjAxOCAr
-MTEwMAoKICAgIE1lcmdlIHB1bGwgcmVxdWVzdCAjMTE4IGZyb20ga2VudC1tY2xlb2Qvc3RyZXRj
-aC1saW5raW5nLWRlZmF1bHRwaWUKICAgIAogICAgRml4IGxpbmtpbmcgb24gRGViaWFuIFN0cmV0
-Y2ggKGdjYy02KQoKY29tbWl0IGIzYzEwMzNiMDkwYjY1ZThlODY5OTlkZGQwNjNjMTc0NTAyYWEz
-ZjAKQXV0aG9yOiBLZW50IE1jTGVvZCA8S2VudC5NY2xlb2RAZGF0YTYxLmNzaXJvLmF1PgpEYXRl
-OiAgIFdlZCBGZWIgMTQgMTY6NDM6MTYgMjAxOCArMTEwMAoKICAgIEFkZCBmdXJ0aGVyIC1uby1w
-aWUgY2hlY2tzIHRvIFJ1bXBydW4gYnVpbGQgdG9vbHMKICAgIAogICAgVGhpcyBidWlsZHMgdXBv
-biB0aGUgcHJldmlvdXMgY29tbWl0IHRvIGFkZCAtbm8tcGllIGFueXdoZXJlIHRoZQogICAgcmVs
-b2NhdGFibGUgZmxhZyAoLVdsLC1yKSBpcyB1c2VkIHRvIGhhbmRsZSBjb21waWxlcnMgdGhhdCBl
-bmFibGUgLXBpZQogICAgYnkgZGVmYXVsdCAoU3VjaCBhcyBEZWJpYW4gU3RyZXRjaCkuCgpjb21t
-aXQgOGZlNDBjODRlZGRkZmJmNDcyYjRhN2NjZTk2MGRmNzQ5NzAxMTc0YwpNZXJnZTogYzdmMmYw
-MSA2ODVmNGFiCkF1dGhvcjogU2ViYXN0aWFuIFdpY2tpIDxnYW5kcm9AZ214Lm5ldD4KRGF0ZTog
-ICBGcmkgSmFuIDUgMTU6MDQ6MTggMjAxOCArMDEwMAoKICAgIE1lcmdlIHB1bGwgcmVxdWVzdCAj
-MTEyIGZyb20gbmFqYW1lbGFuL2J1Z2ZpeC9nY2M3LWZhbGx0aHJvdWdoCiAgICAKICAgIEFkZCB0
-aGUgLVdpbXBsaWNpdC1mYWxsdGhyb3VnaD0wIGZsYWcgdG8gYWxsb3cgY29tcGlsaW5nIHdpdGgg
-R0NDNwoKY29tbWl0IDY4NWY0YWIzYjc0YjZmMWUxYjQwYmRkM2QyYzQyZWZhNDRiZjM4NWQKQXV0
-aG9yOiBOYWphIE1lbGFuIDxuYWphbWVsYW5AYXV0aXN0aWNpLm9yZz4KRGF0ZTogICBUaHUgSmFu
-IDQgMTY6MDc6NDYgMjAxOCArMDAwMAoKICAgIE1ha2UgdGhlIGRpc2FibGluZyBvZiB0aGUgZmFs
-bHRocm91Z2ggd2FybmluZyBkZXBlbmRlbnQgb24gR0NDIHZlcnNpb24KICAgIAogICAgVGhpcyBz
-aG91bGQgcHJldmVudCBvbGRlciBnY2MgdmVyc2lvbnMgZnJvbSBjaG9raW5nIG9uIHVua25vd24g
-YXJndW1lbnQuCiAgICAKICAgIEkgaGF2ZSBub3QgdGVzdGVkIHRoaXMsIGp1c3Qgd3JvdGUgdGhl
-IGNvZGUgZGlyZWN0bHkgb24gZ2l0aHViLiBVc2Ugd2l0aCBjYXV0aW9uLgoKY29tbWl0IDM0MDU2
-NDUxMTc0ZTg3MjJiOTcyMjI5ZmVmYzFiZjllMGI4OWE3ZGEKQXV0aG9yOiBOYWphIE1lbGFuIDxu
-YWphbWVsYW5AYXV0aXN0aWNpLm9yZz4KRGF0ZTogICBXZWQgSmFuIDMgMTg6NTc6NTAgMjAxOCAr
-MDAwMAoKICAgIEFkZCB0aGUgLVdpbXBsaWNpdC1mYWxsdGhyb3VnaD0wIGZsYWcgdG8gYWxsb3cg
-Y29tcGlsaW5nIHdpdGggR0NDNwogICAgCiAgICBHQ0M3IGNvbWVzIHdpdGggYSBuZXcgd2Fybmlu
-ZyAiaW1wbGljaXQtZmFsbHRocm91Z2giIHdoaWNoIHdpbGwgcHJldmVudCBidWlsZGluZyB0aGUg
-bmV0YnNkLXNyYy4KICAgIAogICAgRm9yIG1vcmUgaW5mb3JtYXRpb246IGh0dHBzOi8vZHpvbmUu
-Y29tL2FydGljbGVzL2ltcGxpY2l0LWZhbGx0aHJvdWdoLWluLWdjYy03Cgpjb21taXQgMzVkODEx
-OTRiN2ZlYjc1ZDIwYWYzYmE0ZmRiNDVlYTc2MjMwODUyZgpBdXRob3I6IFdlaSBMaXUgPHdlaS5s
-aXUyQGNpdHJpeC5jb20+CkRhdGU6ICAgV2VkIEp1biA3IDE2OjMwOjAwIDIwMTcgKzAxMDAKCiAg
-ICBGaXggbGlua2luZyBvbiBEZWJpYW4gU3RyZXRjaAogICAgCiAgICBQcm92aWRlIGNjLW9wdGlv
-bi4gVXNlIHRoYXQgdG8gY2hlY2sgaWYgLW5vLXBpZSBpcyBhdmFpbGFibGUgYW5kCiAgICBhcHBl
-bmQgaXQgd2hlbiBuZWNlc3NhcnkuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdl
-aS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1325343598-1521759072=:12360
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Thu, 22 Mar 2018, Lars Kurth wrote:
+> ﻿On 22/03/2018, 14:49, "Julien Grall" <julien.grall@arm.com> wrote:
+> 
+>     >> -----
+>     >>
+>     >> I think we need to discuss PCI emulation and our future direction. Our current hybrid with QEMU is becoming increasingly problematic.
+>     > 
+>     > +1
+>     
+>     I think it would be worth for Stefano and I to join this discussion. 
+>     Ideally, we want to use a common solution between Arm and x86.
+>     
+>     Not sure the time will fit for Stefano thought.
+>     
+> It's at 7am Pacific, which is a little early for Stefano. I can't really move the call: it was quite hard to agree a time-slot.
+> But we could aim to schedule this discussion for say 7:30 or 7:45, which makes this easier for Stefano
+
+Yes, indeed it is very early for Stefano :-)
+
+But I can do 7:30-7:45 for once.
+
+In general, for things that interest both x86 and Arm, and PCI
+passthrough is a great example, I think it would be best to organize
+topic specific calls (that I would love push to 8AM or later ;-)
+--8323329-1325343598-1521759072=:12360
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1325343598-1521759072=:12360--
