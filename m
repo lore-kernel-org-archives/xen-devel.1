@@ -1,24 +1,18 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH v3] drm/xen-front: Add support for Xen PV
- display frontend
-Date: Thu, 22 Mar 2018 11:36:54 +0200
-Message-ID: <4f28320b-701b-187d-1768-c41b52462ef9__30939.4088028514$1521711356$gmane$org@gmail.com>
-References: <1521644293-14612-1-git-send-email-andr2000@gmail.com>
- <1521644293-14612-2-git-send-email-andr2000@gmail.com>
- <d7cd6147-da9f-0f18-cb05-4dccbf212255@oracle.com>
+From: Sergey Dyasli <sergey.dyasli@citrix.com>
+Subject: Re: [PATCH v5 1/5] x86/msr: add VMX MSRs definitions
+ and populate Raw domain policy
+Date: Thu, 22 Mar 2018 09:39:36 +0000
+Message-ID: <1521711576.3556.2.camel@citrix.com>
+References: <20180228160948.6313-1-sergey.dyasli@citrix.com>
+ <20180228160948.6313-2-sergey.dyasli@citrix.com>
+ <b643a58a-fb03-eefb-42c6-b6d879099845@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=8aew=gm=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1eywec-0000eH-Da
- for xen-devel@lists.xenproject.org; Thu, 22 Mar 2018 09:37:02 +0000
-Received: by mail-lf0-x242.google.com with SMTP id p142-v6so12106423lfd.6
- for <xen-devel@lists.xenproject.org>; Thu, 22 Mar 2018 02:37:00 -0700 (PDT)
-In-Reply-To: <d7cd6147-da9f-0f18-cb05-4dccbf212255@oracle.com>
+In-Reply-To: <b643a58a-fb03-eefb-42c6-b6d879099845@citrix.com>
 Content-Language: en-US
+Content-ID: <A46E54A04521DF4784ACDED6BE5BF725@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,24 +21,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, airlied@linux.ie, daniel.vetter@intel.com, seanpaul@chromium.org, gustavo@padovan.org, jgross@suse.com, konrad.wilk@oracle.com
-Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+To: Andrew Cooper <Andrew.Cooper3@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Kevin Tian <kevin.tian@intel.com>, "jun.nakajima@intel.com" <jun.nakajima@intel.com>, "jbeulich@suse.com" <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDMvMjIvMjAxOCAwMzoxNCBBTSwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+Cj4KPiBPbiAw
-My8yMS8yMDE4IDEwOjU4IEFNLCBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyB3cm90ZToKPj4gRnJv
-bTogT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gPG9sZWtzYW5kcl9hbmRydXNoY2hlbmtvQGVwYW0u
-Y29tPgo+Pgo+PiBBZGQgc3VwcG9ydCBmb3IgWGVuIHBhcmEtdmlydHVhbGl6ZWQgZnJvbnRlbmQg
-ZGlzcGxheSBkcml2ZXIuCj4+IEFjY29tcGFueWluZyBiYWNrZW5kIFsxXSBpcyBpbXBsZW1lbnRl
-ZCBhcyBhIHVzZXItc3BhY2UgYXBwbGljYXRpb24KPj4gYW5kIGl0cyBoZWxwZXIgbGlicmFyeSBb
-Ml0sIGNhcGFibGUgb2YgcnVubmluZyBhcyBhIFdlc3RvbiBjbGllbnQKPj4gb3IgRFJNIG1hc3Rl
-ci4KPj4gQ29uZmlndXJhdGlvbiBvZiBib3RoIGJhY2tlbmQgYW5kIGZyb250ZW5kIGlzIGRvbmUg
-dmlhCj4+IFhlbiBndWVzdCBkb21haW4gY29uZmlndXJhdGlvbiBvcHRpb25zIFszXS4KPgo+Cj4g
-SSB3b24ndCBjbGFpbSB0aGF0IEkgcmVhbGx5IHVuZGVyc3RhbmQgd2hhdCdzIGdvaW5nIG9uIGhl
-cmUgYXMgZmFyIGFzIAo+IERSTSBzdHVmZiBpcyBjb25jZXJuZWQgYnV0IEkgZGlkbid0IHNlZSBh
-bnkgb2J2aW91cyBpc3N1ZXMgd2l0aCBYZW4gYml0cy4KPgo+IFNvIGZvciB0aGF0IHlvdSBjYW4g
-dGFjayBvbiBteQo+IFJldmlld2VkLWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNr
-eUBvcmFjbGUuY29tPgo+ClRoYW5rIHlvdQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+T24gV2VkLCAyMDE4LTAzLTIxIGF0IDE5OjUyICswMDAwLCBBbmRyZXcgQ29vcGVyIHdyb3RlOg0K
+PiBPbiAyOC8wMi8xOCAxNjowOSwgU2VyZ2V5IER5YXNsaSB3cm90ZToNCj4gPiANCj4gPiArICAg
+ICAgICBzdHJ1Y3Qgew0KPiA+ICsgICAgICAgICAgICAvKiAweDAwMDAwNDgwICBNU1JfSUEzMl9W
+TVhfQkFTSUMgKi8NCj4gPiArICAgICAgICAgICAgdW5pb24gew0KPiA+ICsgICAgICAgICAgICAg
+ICAgdWludDY0X3QgcmF3Ow0KPiA+ICsgICAgICAgICAgICAgICAgc3RydWN0IHsNCj4gPiArICAg
+ICAgICAgICAgICAgICAgICB1aW50MzJfdCB2bWNzX3JldmlzaW9uX2lkOjMxOw0KPiANCj4gdm1j
+c19yZXZfaWQNCj4gDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgYm9vbCAgICAgICAgICAgICAg
+ICAgIG1iejoxOyAgLyogMzEgYWx3YXlzIHplcm8gKi8NCj4gDQo+IElzIHRoaXMgcmVhbGx5IG1i
+ej8gIElzbid0IHRoaXMgdGhlIHNoYWRvdyBpZGVudGlmaWVyIGJpdCBmb3Igc2hhZG93IHZtY3Mn
+cz8NCg0KWWVzLCBpbiB2bWNzIGl0c2VsZiBpdCdzIHRoZSBzaGFkb3cgYml0LiBIb3dldmVyLCBp
+dCBpcyBhbHdheXMgemVybyBpbg0KTVNSIHNpbmNlIHRoZSBqb2Igb2YgTVNSIGlzIHRvIHJlcG9y
+dCB2bWNzIHJldmlzaW9uIGlkZW50aWZpZXIuDQoNCi0tIA0KVGhhbmtzLA0KU2VyZ2V5Cl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
