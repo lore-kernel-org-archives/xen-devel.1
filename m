@@ -1,20 +1,15 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: X86 Community Call - Wed Apr 11,
- 14:00 - 15:00 UTC - Call for Agenda Items
-Date: Fri, 23 Mar 2018 10:04:33 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1803231004250.12360@sstabellini-ThinkPad-X260>
-References: <DAA777E6-B987-454D-9EFA-153391163E36@citrix.com>
- <911906d032394b138a8fc00dfc6f8ddf@AMSPEX02CL03.citrite.net>
- <20180322115517.do5fzd7qvnaxrge5@MacBook-Pro-de-Roger.local>
- <929bad70-55a1-342a-e370-8352fa5f6ee6@arm.com>
- <AD4D119F-D928-4513-8CA7-12716AB711D0@citrix.com>
- <alpine.DEB.2.10.1803221549241.12360@sstabellini-ThinkPad-X260>
- <20180323094343.kxidyqj42vuk7x4a@MacBook-Pro-de-Roger.local>
- <67816c2fc5b44ee9951beb1db723d49d@AMSPEX02CL03.citrite.net>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [seabios test] 121050: regressions - FAIL
+Date: Fri, 23 Mar 2018 17:06:30 +0000
+Message-ID: <osstest-121050-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-336539605-1521824674=:12360"
+Content-Type: multipart/mixed; boundary="===============3157791137726244892=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <67816c2fc5b44ee9951beb1db723d49d@AMSPEX02CL03.citrite.net>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=kxoj=gn=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1ezQ9D-0005eM-32
+ for xen-devel@lists.xenproject.org; Fri, 23 Mar 2018 17:06:35 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,75 +18,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Daniel Kiper <daniel.kiper@oracle.com>, =?UTF-8?Q?'Roger_Pau_Monn=C3=A9'?= <royger@freebsd.org>, Christopher Clark <christopher.w.clark@gmail.com>, "Ji,
- John" <john.ji@intel.com>, Rich Persaud <persaur@gmail.com>, "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>, Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich' <JBeulich@suse.com>, "committers@xenproject.org" <committers@xenproject.org>, Janakarajan Natarajan <jnataraj@amd.com>, Brian Woods <brian.woods@amd.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+--===============3157791137726244892==
+Content-Type: text/plain
 
---8323329-336539605-1521824674=:12360
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+flight 121050 seabios real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/121050/
 
-On Fri, 23 Mar 2018, Paul Durrant wrote:
-> > -----Original Message-----
-> > From: Roger Pau Monné [mailto:royger@gmail.com] On Behalf Of Roger Pau
-> > Monné
-> > Sent: 23 March 2018 09:44
-> > To: Stefano Stabellini <sstabellini@kernel.org>
-> > Cc: Lars Kurth <lars.kurth@citrix.com>; Juergen Gross <jgross@suse.com>; Ji,
-> > John <john.ji@intel.com>; xen-devel@lists.xensource.com; Wei Liu
-> > <wei.liu2@citrix.com>; Tamas K Lengyel <tamas@tklengyel.com>; Andrew
-> > Cooper <Andrew.Cooper3@citrix.com>; Daniel Kiper
-> > <daniel.kiper@oracle.com>; Christopher Clark
-> > <christopher.w.clark@gmail.com>; Rich Persaud <persaur@gmail.com>;
-> > Janakarajan Natarajan <jnataraj@amd.com>; Julien Grall
-> > <julien.grall@arm.com>; Paul Durrant <Paul.Durrant@citrix.com>;
-> > committers@xenproject.org; Jan Beulich' <JBeulich@suse.com>; Brian
-> > Woods <brian.woods@amd.com>
-> > Subject: Re: [Xen-devel] X86 Community Call - Wed Apr 11, 14:00 - 15:00 UTC
-> > - Call for Agenda Items
-> > 
-> > On Thu, Mar 22, 2018 at 03:51:11PM -0700, Stefano Stabellini wrote:
-> > > On Thu, 22 Mar 2018, Lars Kurth wrote:
-> > > > ﻿On 22/03/2018, 14:49, "Julien Grall" <julien.grall@arm.com> wrote:
-> > > >
-> > > >     >> -----
-> > > >     >>
-> > > >     >> I think we need to discuss PCI emulation and our future direction.
-> > Our current hybrid with QEMU is becoming increasingly problematic.
-> > > >     >
-> > > >     > +1
-> > > >
-> > > >     I think it would be worth for Stefano and I to join this discussion.
-> > > >     Ideally, we want to use a common solution between Arm and x86.
-> > > >
-> > > >     Not sure the time will fit for Stefano thought.
-> > > >
-> > > > It's at 7am Pacific, which is a little early for Stefano. I can't really move the
-> > call: it was quite hard to agree a time-slot.
-> > > > But we could aim to schedule this discussion for say 7:30 or 7:45, which
-> > makes this easier for Stefano
-> > >
-> > > Yes, indeed it is very early for Stefano :-)
-> > >
-> > > But I can do 7:30-7:45 for once.
-> > >
-> > > In general, for things that interest both x86 and Arm, and PCI
-> > > passthrough is a great example, I think it would be best to organize
-> > > topic specific calls (that I would love push to 8AM or later ;-)
-> > 
-> > This is probably going to be a big topic, so I agree that a separate
-> > call with a dedicated agenda might be better.
-> > 
-> 
-> Yes, and it may be prudent to reserve some time for a design session at summit, if relevant folks will be there.
+Regressions :-(
 
-+1
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop       fail REGR. vs. 115539
 
---8323329-336539605-1521824674=:12360
+Tests which did not succeed, but are not blocking:
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 115539
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 115539
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop             fail like 115539
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+
+version targeted for testing:
+ seabios              4922d6cb391b8ea48a35a73c46e484cf5f1a9b1a
+baseline version:
+ seabios              0ca6d6277dfafc671a5b3718cbeb5c78e2a888ea
+
+Last test of basis   115539  2017-11-03 20:48:58 Z  139 days
+Failing since        115733  2017-11-10 17:19:59 Z  132 days  152 attempts
+Testing same since   121050  2018-03-22 07:01:10 Z    1 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Kevin O'Connor <kevin@koconnor.net>
+  Marc-André Lureau <marcandre.lureau@redhat.com>
+  Marcel Apfelbaum <marcel@redhat.com>
+  Michael S. Tsirkin <mst@redhat.com>
+  Nikolay Nikolov <nickysn@users.sourceforge.net>
+  Paul Menzel <pmenzel@molgen.mpg.de>
+  Stefan Berger <stefanb@linux.vnet.ibm.com>
+  Stephen Douthit <stephend@silicom-usa.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 374 lines long.)
+
+
+--===============3157791137726244892==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -101,4 +121,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---8323329-336539605-1521824674=:12360--
+--===============3157791137726244892==--
