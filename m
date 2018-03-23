@@ -1,15 +1,19 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [seabios test] 121050: regressions - FAIL
-Date: Fri, 23 Mar 2018 17:06:30 +0000
-Message-ID: <osstest-121050-mainreport@xen.org>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [seabios test] 121050: regressions - FAIL
+Date: Fri, 23 Mar 2018 17:23:52 +0000
+Message-ID: <20180323172352.ji6h7fxhlaldcwre@citrix.com>
+References: <osstest-121050-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3157791137726244892=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=kxoj=gn=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1ezQ9D-0005eM-32
- for xen-devel@lists.xenproject.org; Fri, 23 Mar 2018 17:06:35 +0000
+ <srs0=48bv=gn=citrix.com=prvs=6131b936e=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1ezQQH-00072c-RS
+ for xen-devel@lists.xenproject.org; Fri, 23 Mar 2018 17:24:13 +0000
+Content-Disposition: inline
+In-Reply-To: <osstest-121050-mainreport@xen.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,107 +22,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: osstest service owner <osstest-admin@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============3157791137726244892==
-Content-Type: text/plain
-
-flight 121050 seabios real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/121050/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop       fail REGR. vs. 115539
-
-Tests which did not succeed, but are not blocking:
- test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 115539
- test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 115539
- test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop             fail like 115539
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
- test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
- test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
-
-version targeted for testing:
- seabios              4922d6cb391b8ea48a35a73c46e484cf5f1a9b1a
-baseline version:
- seabios              0ca6d6277dfafc671a5b3718cbeb5c78e2a888ea
-
-Last test of basis   115539  2017-11-03 20:48:58 Z  139 days
-Failing since        115733  2017-11-10 17:19:59 Z  132 days  152 attempts
-Testing same since   121050  2018-03-22 07:01:10 Z    1 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Kevin O'Connor <kevin@koconnor.net>
-  Marc-André Lureau <marcandre.lureau@redhat.com>
-  Marcel Apfelbaum <marcel@redhat.com>
-  Michael S. Tsirkin <mst@redhat.com>
-  Nikolay Nikolov <nickysn@users.sourceforge.net>
-  Paul Menzel <pmenzel@molgen.mpg.de>
-  Stefan Berger <stefanb@linux.vnet.ibm.com>
-  Stephen Douthit <stephend@silicom-usa.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-i386-xl-qemuu-win7-amd64                          fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
- test-amd64-amd64-xl-qemuu-win10-i386                         fail    
- test-amd64-i386-xl-qemuu-win10-i386                          fail    
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 374 lines long.)
-
-
---===============3157791137726244892==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3157791137726244892==--
+T24gRnJpLCBNYXIgMjMsIDIwMTggYXQgMDU6MDY6MzBQTSArMDAwMCwgb3NzdGVzdCBzZXJ2aWNl
+IG93bmVyIHdyb3RlOgo+IGZsaWdodCAxMjEwNTAgc2VhYmlvcyByZWFsIFtyZWFsXQo+IGh0dHA6
+Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjEwNTAvCj4gCj4g
+UmVncmVzc2lvbnMgOi0oCj4gCj4gVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUg
+YmxvY2tpbmcsCj4gaW5jbHVkaW5nIHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46Cj4gIHRl
+c3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgIGZh
+aWwgUkVHUi4gdnMuIDExNTUzOQoKaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcv
+b3NzdGVzdC9yZXN1bHRzL2hpc3RvcnkvdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFt
+ZDY0L0FMTAoKVGhpcyB0ZXN0IGhhcyBiZWVuIGZhaWxpbmcgb24gYWxsIG91ciBicmFuY2hlcy4g
+SSB0aGluayB3ZSBnb3QgbHVja3kKb25jZSBpbiB0aGUgc2VhYmlvcyBicmFuY2guCgo+IAo+IFRl
+c3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6Cj4gIHRlc3Qt
+YW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAg
+ZmFpbCBsaWtlIDExNTUzOQo+ICB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQg
+MTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMTU1MzkKPiAgdGVzdC1hbWQ2NC1p
+Mzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxp
+a2UgMTE1NTM5Cj4gIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1k
+NjQteHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKPiAgdGVzdC1h
+bWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1
+cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCj4gIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVz
+dGVkLWFtZCAxNyBkZWJpYW4taHZtLWluc3RhbGwvbDEvbDIgIGZhaWwgbmV2ZXIgcGFzcwo+ICB0
+ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAg
+ICAgICBmYWlsIG5ldmVyIHBhc3MKPiAgdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkz
+ODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCj4gCj4gdmVyc2lv
+biB0YXJnZXRlZCBmb3IgdGVzdGluZzoKPiAgc2VhYmlvcyAgICAgICAgICAgICAgNDkyMmQ2Y2Iz
+OTFiOGVhNDhhMzVhNzNjNDZlNDg0Y2Y1ZjFhOWIxYQo+IGJhc2VsaW5lIHZlcnNpb246Cj4gIHNl
+YWJpb3MgICAgICAgICAgICAgIDBjYTZkNjI3N2RmYWZjNjcxYTViMzcxOGNiZWI1Yzc4ZTJhODg4
+ZWEKPiAKPiBMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMTU1MzkgIDIwMTctMTEtMDMgMjA6NDg6NTgg
+WiAgMTM5IGRheXMKPiBGYWlsaW5nIHNpbmNlICAgICAgICAxMTU3MzMgIDIwMTctMTEtMTAgMTc6
+MTk6NTkgWiAgMTMyIGRheXMgIDE1MiBhdHRlbXB0cwo+IFRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEy
+MTA1MCAgMjAxOC0wMy0yMiAwNzowMToxMCBaICAgIDEgZGF5cyAgICAxIGF0dGVtcHRzCgpUaGUg
+cmVncmVzc2lvbiBhY3R1YWxseSBzdGFydGVkIGEgbG9uZyB0aW1lIGFnby4gTG9va2luZyBhdCB0
+aGUgcmFuZ2Ugb2YKY29tbWl0cyB0ZXN0ZWQgb24gdGhhdCBkYXksIGl0IGlzIG9ubHkgYSBkb2Mg
+Y2hhbmdlLgoKSSB0aGluayB3ZSBzaG91bGQgZm9yY2UgcHVzaCB0aGUgc2VhYmlvcyBicmFuY2gu
+CgpXZWkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
