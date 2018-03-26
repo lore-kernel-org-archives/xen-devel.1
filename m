@@ -1,25 +1,23 @@
-From: Manish Jaggi <mjaggi@caviumnetworks.com>
-Subject: Re: [PATCH v1 00/15] arm64: Mediate access to GICv3
- sysregs at EL2
-Date: Mon, 26 Mar 2018 10:13:19 +0530
-Message-ID: <60f4cb6c-869b-3a68-f03c-04bcda986de2@caviumnetworks.com>
-References: <cover.1521200294.git.manish.jaggi@cavium.com>
- <c678e388-6d66-a744-d4f6-7cfdc62ff374@arm.com>
- <fa9fcde0-ac40-a950-920e-455815b924c7@caviumnetworks.com>
- <99bcf77a-7603-119b-0711-900f38f8ca55@arm.com>
- <3744eb81-1c57-e87b-d1ff-0d47a70cfa38@caviumnetworks.com>
- <ca515ba7-c53f-62e9-a495-8c330c36c089@arm.com>
- <48b5110b-1a07-a4fb-309c-b0fc4a334e09@caviumnetworks.com>
- <CAEC2CxohC5AiMYAnoDu+=LLs-+QA-HrgpmE9w-fNH8G6qa9AYw@mail.gmail.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v3 7/7] xen/x86: use PCID feature
+Date: Mon, 26 Mar 2018 08:49:07 +0200
+Message-ID: <473492c7-1e5b-a3ad-1496-f5b29ca4fc44@suse.com>
+References: <20180321125129.28539-1-jgross@suse.com>
+ <20180321125129.28539-8-jgross@suse.com> <5AB4EA4902000078001B577B@suse.com>
+ <c07a3b60-7bcb-c9dc-e63e-2ae41157d3ea@suse.com>
+ <5AB5136302000078001B58D9@suse.com>
+ <67a5bfca-7cce-4f10-1e24-30888d3d8ccb@suse.com>
+ <5AB5324C02000078001B59E7@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5717323301435731057=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gmfh=gq=cavium.com=manish.jaggi@srs-us1.protection.inumbo.net>)
- id 1f0Jyx-0001wz-3T
- for xen-devel@lists.xenproject.org; Mon, 26 Mar 2018 04:43:43 +0000
-In-Reply-To: <CAEC2CxohC5AiMYAnoDu+=LLs-+QA-HrgpmE9w-fNH8G6qa9AYw@mail.gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=jk6d=gq=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1f0LwN-0001sw-Ui
+ for xen-devel@lists.xenproject.org; Mon, 26 Mar 2018 06:49:11 +0000
+In-Reply-To: <5AB5324C02000078001B59E7@suse.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -29,352 +27,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@linaro.org>
-Cc: sstabellini@kernel.org, marc.zyngier@arm.com, andre.przywara@arm.com, "Jaggi, Manish" <Manish.Jaggi@cavium.com>, Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: andrew.cooper3@citrix.com, Kevin Tian <kevin.tian@intel.com>, xen-devel@lists.xenproject.org, Jun Nakajima <jun.nakajima@intel.com>, Dario Faggioli <dfaggioli@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---===============5717323301435731057==
-Content-Type: multipart/alternative;
- boundary="------------5AA67A9B401341F233AEAE31"
-Content-Language: en-US
-
-This is a multi-part message in MIME format.
---------------5AA67A9B401341F233AEAE31
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-
-
-On 03/23/2018 12:28 PM, Julien Grall wrote:
-> (Sorry for the formatting)
->
-> On 23 Mar 2018 14:46, "Manish Jaggi" <mjaggi@caviumnetworks.com 
-> <mailto:mjaggi@caviumnetworks.com>> wrote:
->
->
->
->     On 03/21/2018 03:26 PM, Julien Grall wrote:
->
->         Hi Manish,
->
->         On 03/21/2018 09:38 AM, Manish Jaggi wrote:
->
->
->
->             On 03/21/2018 02:15 PM, Julien Grall wrote:
->
->
->
->                 On 03/21/2018 04:58 AM, Manish Jaggi wrote:
->
->
->                     Hi Julien,
->
->                     On 03/20/2018 01:16 PM, Julien Grall wrote:
->
->
->
->                         On 03/16/2018 11:58 AM, Manish Jaggi wrote:
->
->                             This patchset is a Xen port of Marc's
->                             patchset.
->                             arm64: KVM: Mediate access to GICv3
->                             sysregs at EL2 [1]
->
->                             The current RFC patchset is a subset of
->                             [1], as it handleing only Group1 traps
->                             as a PoC. Most of the trap code is added
->                             in vsysreg.c. Trap handler function is kept
->                             independent of the usual guest trap
->                             handling code.
->                             Looking for feedback on this approach.
->
->
->                         This cover letter does not seem to match the
->                         series. Please update it on every time you
->                         send a series.
->
->                     %s/vsysreg.c/vgic-v3-sr..
->
->                     Could you please review the other patches in the
->                     series, so that I can send v2.
->
->
->                 Here the major comments for the series (included patch
->                 not reviewed):
->                     1) You seem to miss some patches from Linux. I
->                 would like to understand why they are not there.
->
->             if code is ported to xen, it is perfectly fine to take
->             only relevant patches.
->
->
->         It is usually expected from the contributor to have some sort
->         of explanation in the cover letter. In particular when you are
->         based on a series from Linux.
->
->         Where I am more worried is there are patch on top in Linux,
->         that you didn't backport. So it would be really nice to
->         understand why those patches are not in Xen.
->
->         A non-exhaustive list:
->             - KVM: arm64: Log an error if trapping a
->         write-to-read-only GICv3 access
->                 - KVM: arm64: Log an error if trapping a
->         read-from-write-only GICv3 access
->
->
->             For instance we are not providing any command line option
->             to individually enable group1 grou0 traps.
->
->
->         I think the command line option could be useful for testing.
->         Developer don't necessarily have a Thunder-X in hand.
->
->                     2) Strangely some commits does not match the Linux
->                 one either in order and content (I am not speaking
->                 about the changes required by Xen). For instance this
->                 is the case of patch #14 "arm64: vgic-v3: Add
->                 ICV_AP(0/1)Rn_EL1 handler". If you port commit from
->                 Linux, then you should follow the same. This help a
->                 lot for review.
->
->             Since we are not doing individually enable of group0/1, it
->             doesnt make sense to have two set of patches for ICV_AP0 /
->             ICV_AP1. So I merged it.
->
->
->         Sorry, but it does not make sense. Looking at the series you
->         pointed. I don't see a patch just for ICV_AP0. Instead it is
->         part of " KVM: arm64: vgic-v3: Enable trapping of Group-0
->         system registers". You ported that patch in Xen.
->
->     If you see this patch, you will find this one specifically for ICV_AP1
->     https://lists.cs.columbia.edu/pipermail/kvmarm/2017-June/026040.html
->     <https://lists.cs.columbia.edu/pipermail/kvmarm/2017-June/026040.html>
->
->
-> You didn't get my point...  You still don't explain why you move the 
-> ICV_AP0 from "Enable trapping of Group-0 system registers"  to that 
-> patch. If you take commit from Linux then don't move code between 
-> commit around unless there is a good reason.
-I gave a good reason, that it make sense to club two patches as we are 
-not individually enabling g0/g1 for 30115 errata.
-There is no documented rule that code taken from linux has to be 1:1 
-mapping with linux patch.
-When complete smmu.c is taken as one file the rule is not applied?
-
->
-> Please try to make the review a bit easier...
->
-> Cheers,
->
-
-
---------------5AA67A9B401341F233AEAE31
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <p><br>
-    </p>
-    <br>
-    <div class="moz-cite-prefix">On 03/23/2018 12:28 PM, Julien Grall
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAEC2CxohC5AiMYAnoDu+=LLs-+QA-HrgpmE9w-fNH8G6qa9AYw@mail.gmail.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <div dir="auto">
-        <div>(Sorry for the formatting)<br>
-          <div class="gmail_extra"><br>
-            <div class="gmail_quote">On 23 Mar 2018 14:46, "Manish
-              Jaggi" &lt;<a href="mailto:mjaggi@caviumnetworks.com"
-                target="_blank" moz-do-not-send="true">mjaggi@caviumnetworks.com</a>&gt;
-              wrote:<br type="attribution">
-              <blockquote class="m_-8161047757412401661quote"
-                style="margin:0 0 0 .8ex;border-left:1px #ccc
-                solid;padding-left:1ex">
-                <div class="m_-8161047757412401661elided-text"><br>
-                  <br>
-                  On 03/21/2018 03:26 PM, Julien Grall wrote:<br>
-                  <blockquote class="gmail_quote" style="margin:0 0 0
-                    .8ex;border-left:1px #ccc solid;padding-left:1ex">
-                    Hi Manish,<br>
-                    <br>
-                    On 03/21/2018 09:38 AM, Manish Jaggi wrote:<br>
-                    <blockquote class="gmail_quote" style="margin:0 0 0
-                      .8ex;border-left:1px #ccc solid;padding-left:1ex">
-                      <br>
-                      <br>
-                      On 03/21/2018 02:15 PM, Julien Grall wrote:<br>
-                      <blockquote class="gmail_quote" style="margin:0 0
-                        0 .8ex;border-left:1px #ccc
-                        solid;padding-left:1ex">
-                        <br>
-                        <br>
-                        On 03/21/2018 04:58 AM, Manish Jaggi wrote:<br>
-                        <blockquote class="gmail_quote" style="margin:0
-                          0 0 .8ex;border-left:1px #ccc
-                          solid;padding-left:1ex">
-                          <br>
-                          Hi Julien,<br>
-                          <br>
-                          On 03/20/2018 01:16 PM, Julien Grall wrote:<br>
-                          <blockquote class="gmail_quote"
-                            style="margin:0 0 0 .8ex;border-left:1px
-                            #ccc solid;padding-left:1ex">
-                            <br>
-                            <br>
-                            On 03/16/2018 11:58 AM, Manish Jaggi wrote:<br>
-                            <blockquote class="gmail_quote"
-                              style="margin:0 0 0 .8ex;border-left:1px
-                              #ccc solid;padding-left:1ex">
-                              This patchset is a Xen port of Marc's
-                              patchset.<br>
-                              arm64: KVM: Mediate access to GICv3
-                              sysregs at EL2 [1]<br>
-                              <br>
-                              The current RFC patchset is a subset of
-                              [1], as it handleing only Group1 traps<br>
-                              as a PoC. Most of the trap code is added
-                              in vsysreg.c. Trap handler function is
-                              kept<br>
-                              independent of the usual guest trap
-                              handling code.<br>
-                              Looking for feedback on this approach.<br>
-                            </blockquote>
-                            <br>
-                            This cover letter does not seem to match the
-                            series. Please update it on every time you
-                            send a series.<br>
-                          </blockquote>
-                          %s/vsysreg.c/vgic-v3-sr..<br>
-                          <br>
-                          Could you please review the other patches in
-                          the series, so that I can send v2.<br>
-                        </blockquote>
-                        <br>
-                        Here the major comments for the series (included
-                        patch not reviewed):<br>
-                            1) You seem to miss some patches from Linux.
-                        I would like to understand why they are not
-                        there.<br>
-                      </blockquote>
-                      if code is ported to xen, it is perfectly fine to
-                      take only relevant patches.<br>
-                    </blockquote>
-                    <br>
-                    It is usually expected from the contributor to have
-                    some sort of explanation in the cover letter. In
-                    particular when you are based on a series from
-                    Linux.<br>
-                    <br>
-                    Where I am more worried is there are patch on top in
-                    Linux, that you didn't backport. So it would be
-                    really nice to understand why those patches are not
-                    in Xen.<br>
-                    <br>
-                    A non-exhaustive list:<br>
-                        - KVM: arm64: Log an error if trapping a
-                    write-to-read-only GICv3 access<br>
-                            - KVM: arm64: Log an error if trapping a
-                    read-from-write-only GICv3 access<br>
-                    <br>
-                    <br>
-                    <blockquote class="gmail_quote" style="margin:0 0 0
-                      .8ex;border-left:1px #ccc solid;padding-left:1ex">
-                      For instance we are not providing any command line
-                      option to individually enable group1 grou0 traps.<br>
-                    </blockquote>
-                    <br>
-                    I think the command line option could be useful for
-                    testing. Developer don't necessarily have a
-                    Thunder-X in hand.<br>
-                    <br>
-                    <blockquote class="gmail_quote" style="margin:0 0 0
-                      .8ex;border-left:1px #ccc solid;padding-left:1ex">
-                      <blockquote class="gmail_quote" style="margin:0 0
-                        0 .8ex;border-left:1px #ccc
-                        solid;padding-left:1ex">
-                            2) Strangely some commits does not match the
-                        Linux one either in order and content (I am not
-                        speaking about the changes required by Xen). For
-                        instance this is the case of patch #14 "arm64:
-                        vgic-v3: Add ICV_AP(0/1)Rn_EL1 handler". If you
-                        port commit from Linux, then you should follow
-                        the same. This help a lot for review.<br>
-                      </blockquote>
-                      Since we are not doing individually enable of
-                      group0/1, it doesnt make sense to have two set of
-                      patches for ICV_AP0 / ICV_AP1. So I merged it.<br>
-                    </blockquote>
-                    <br>
-                    Sorry, but it does not make sense. Looking at the
-                    series you pointed. I don't see a patch just for
-                    ICV_AP0. Instead it is part of " KVM: arm64:
-                    vgic-v3: Enable trapping of Group-0 system
-                    registers". You ported that patch in Xen.<br>
-                    <br>
-                  </blockquote>
-                </div>
-                If you see this patch, you will find this one
-                specifically for ICV_AP1<br>
-                <a
-href="https://lists.cs.columbia.edu/pipermail/kvmarm/2017-June/026040.html"
-                  rel="noreferrer" target="_blank"
-                  moz-do-not-send="true">https://lists.cs.columbia.edu/<wbr>pipermail/kvmarm/2017-June/026<wbr>040.html</a></blockquote>
-            </div>
-          </div>
-        </div>
-        <div dir="auto"><br>
-        </div>
-        <div dir="auto">You didn't get my point...  You still don't
-          explain why you move the ICV_AP0 from "Enable trapping of
-          Group-0 system registers"  to that patch. If you take commit
-          from Linux then don't move code between commit around unless
-          there is a good reason.</div>
-      </div>
-    </blockquote>
-    I gave a good reason, that it make sense to club two patches as we
-    are not individually enabling g0/g1 for 30115 errata.<br>
-    There is no documented rule that code taken from linux has to be 1:1
-    mapping with linux patch.<br>
-    When complete smmu.c is taken as one file the rule is not applied?<br>
-    <br>
-    <blockquote type="cite"
-cite="mid:CAEC2CxohC5AiMYAnoDu+=LLs-+QA-HrgpmE9w-fNH8G6qa9AYw@mail.gmail.com">
-      <div dir="auto">
-        <div dir="auto"><br>
-        </div>
-        <div dir="auto">Please try to make the review a bit easier...</div>
-        <div dir="auto"><br>
-        </div>
-        <div dir="auto">Cheers,</div>
-        <div dir="auto"><br>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------5AA67A9B401341F233AEAE31--
-
-
---===============5717323301435731057==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5717323301435731057==--
+T24gMjMvMDMvMTggMTY6NTgsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDIzLjAzLjE4IGF0
+IDE1OjExLCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4gT24gMjMvMDMvMTggMTQ6NDYsIEph
+biBCZXVsaWNoIHdyb3RlOgo+Pj4gVmFsaWQgcG9pbnQuIExvb2tpbmcgYXQgYWxsIHByZXNlbnQg
+dXNlcyBvZiAtPmFyY2guY3IzLCBpdCdzIHByb2JhYmx5Cj4+PiBpbmRlZWQgYmV0dGVyIHRoZSB3
+YXkgeW91IGhhdmUgaXQuIEhvd2V2ZXIsIEknbSBub3cgd29uZGVyaW5nCj4+PiBhYm91dCBzb21l
+dGhpbmcgZWxzZTogbWFrZV9jcjMoKSBsZWF2ZXMgUENJRCBhcyB6ZXJvIGZvciBIVk0KPj4+IGFu
+ZCBpZGxlIGRvbWFpbnMsIGJ1dCBydW5zIFhlbiB3aXRoIFBDSURzIDIgYW5kIDMgZm9yIChzb21l
+KSBQVgo+Pj4gZG9tYWlucy4gVGhhdCBsb29rcyBsaWtlIGFuIHVuZGVzaXJhYmxlIHNldHVwIHRo
+b3VnaCAtIGl0IHdvdWxkCj4+PiBzZWVtIGJldHRlciB0byBydW4gWGVuICh3aXRoIGZ1bGwgcGFn
+ZSB0YWJsZXMpIHdpdGggUENJRCAwIGF0IGFsbAo+Pj4gdGltZXMuCj4+Pgo+Pj4gVGhlbiB3ZSdk
+IGhhdmUgZS5nLgo+Pj4gUENJRCAwCVhlbiAoZnVsbCBwYWdlIHRhYmxlcykKPj4+IFBDSUQgeAlQ
+ViBndWVzdCBwcml2Cj4+PiBQQ0lEIHkJUFYgZ3Vlc3QgdXNlcgo+Pgo+PiBTbyB0aGlzIHdvdWxk
+IG5lZWQgYW5vdGhlciB3YXkgdG8gc3dpdGNoIGJldHdlZW4gZ3Vlc3QgYW5kIHhlbiAlY3IzLgo+
+PiBPciB3b3VsZCB5b3Ugd2FudCB0byB1c2UgZGlmZmVyZW50ICVjcjMgdmFsdWVzIHdpdGggdGhl
+IHNhbWUgUENJRAo+PiB3aXRob3V0IGZsdXNoaW5nIHRoZSBUTEIgaW4gYmV0d2Vlbj8gVGhpcyBz
+ZWVtcyB0byBiZSBhIHdheSB0byBhc2sgZm9yCj4+IHByb2JsZW1zLi4uCj4gCj4gV2VsbCwgYSBU
+TEIgZmx1c2ggaXMgY2xlYXJseSBuZWVkZWQgaW4gc3VjaCBhIHNldHVwIHdoZW4gZ29pbmcKPiBm
+cm9tIGtlcm5lbCB0byB1c2VyIG1vZGUuCj4gCj4+IEluIGNhc2UgeW91J2QgdXNlIHRoZSBzYW1l
+ICVjcjMgKGd1ZXN0IGtlcm5lbCBvbmUsIEkgZ3Vlc3MpIGZvciBib3RoCj4+IGNhc2VzOiBhcmUg
+eW91IHJlYWxseSBzdXJlIHRoZXJlIGlzIG5vIHByb2JsZW0gaW4gYW55IGh5cGVydmlzb3IgcGF0
+aAo+PiBhY2Nlc3NpbmcgZ3Vlc3QgZGF0YSB3aGljaCB3b3VsZCByZXN1bHQgaW4gdXNpbmcgZ3Vl
+c3Qga2VybmVsIGFjY2Vzcwo+PiByaWdodHMgd2hlbiBjb21pbmcgZnJvbSB1c2VyIG1vZGUgKEJU
+VzogdGhhdCB3YXMgdGhlIHNlY3VyaXR5IG5vdGUgSQo+PiBoYWQgaW4gdjIgb2YgbXkgc2VyaWVz
+KS4KPiAKPiBJJ20gYWZyYWlkIEkgZG9uJ3QgdW5kZXJzdGFuZDogU2FtZSAlY3IzPyBUaGVyZSBh
+cmUgc2VwYXJhdGUKPiBrZXJuZWwgYW5kIHVzZXIgcGFnZSB0YWJsZXMsIHJlcXVpcmluZyBkaWZm
+ZXJlbnQgdmFsdWVzIGFueXdheS4KPiBJIGFsc28gZG9uJ3QgdW5kZXJzdGFuZCB3aGF0IHByb2Js
+ZW1zIGluIGh5cGVydmlzb3IgY29kZSBwYXRocwo+IHlvdSBzdXNwZWN0LCB3aGVuIGV2ZXJ5dGhp
+bmcgbG9va3MgdG8gd29yayBmaW5lIHJpZ2h0IG5vdwo+IHdpdGhvdXQgUENJRC4KCldpdGggc3dp
+dGNoaW5nIGJldHdlZW4gZGlmZmVyZW50IHBhZ2UgdGFibGVzIHlvdSBuZWVkIHRvIGZsdXNoIHRo
+ZSBUTEIuClRoYXQgd2FzIG15IHBvaW50LgoKPiAKPj4+IEdsb2JhbCBwYWdlcyBpbiBQQ0lEIDAg
+Y291bGQgdGhlbiBzdGlsbCBiZSBwZXJtaXR0ZWQsIGFuZCB3b3VsZG4ndAo+Pj4gZXZlciBuZWVk
+IGZsdXNoaW5nIGV4Y2VwdCB3aGVuIEZMVVNIX1RMQl9HTE9CQUwgaXMgcmVxdWVzdGVkLgo+Pj4K
+Pj4+IEFzIHRvIHRoZSB1c2Ugb2YgdHdvIHNlcGFyYXRlIFBDSURzIGZvciBQViBrZXJuZWwgYW5k
+IHVzZXIgbW9kZXMKPj4+IC0gd2hpbGUgdGhpcyBoZWxwcyBpc29sYXRpb24sIGl0IHByZXZlbnRz
+IHJlY292ZXJpbmcgdGhlIG5vbi1YUFRJCj4+PiBwcm9wZXJ0eSBvZiB1c2VyIG1vZGUgVExCIGVu
+dHJpZXMgc3Vydml2aW5nIGluLWd1ZXN0IG1vZGUgc3dpdGNoZXMuCj4+Cj4+IEkgZG9uJ3QgZ2V0
+IHRoYXQuIFdpdGggUENJRCB0aGUgZ3Vlc3QncyBrZXJuZWwgX2FuZF8gdXNlciBlbnRyaWVzCj4+
+IHdpbGwgc3Vydml2ZSBpbi1ndWVzdCBtb2RlIHN3aXRjaGVzIGFzIHRoZXJlIGlzIG5vIFRMQiBm
+bHVzaGluZwo+PiBpbnZvbHZlZCAodGhlIG5vLWZsdXNoIGJpdCBpcyBzZXQgaW4gdi0+YXJjaC5j
+cjMgZm9yIGJvdGggbW9kZXMpLgo+Pgo+PiBUaGUgb25seSBkb3duc2lkZSBhcmUgZ3Vlc3Qga2Vy
+bmVsIGFjY2Vzc2VzIHRvIHVzZXIgcGFnZXM6IHRoZXkgd2lsbAo+PiBuZWVkIGFkZGl0aW9uYWwg
+VExCIGVudHJpZXMgYXMgdGhlIFBDSUQgaXMgZGlmZmVyZW50Lgo+IAo+IFRoYXQncyB0aGUgcG9p
+bnQgSSB3YXMgdHJ5aW5nIHRvIG1ha2UuIFRoaXMgd2FzIGZ1cnRoZXIgZXhwbGFpbmVkCj4gaW4g
+bXkgcHJldmlvdXMgcmVwbHkgYSBsaXR0bGUgZnVydGhlciBkb3duLgo+IAo+Pj4gSSB3b25kZXIg
+d2hldGhlciB0aGlzIGlzIHBhcnQgb2YgdGhlIHJlYXNvbiB5b3Ugc2VlIFBDSUQgaGF2ZSBhCj4+
+PiBuZWdhdGl2ZSBlZmZlY3QgaW4gdGhlIG5vbi1YUFRJIGNhc2UuCj4+Pgo+Pj4gU28gaW4gdGhl
+IGVuZCB0aGUgcXVlc3Rpb24gaXM6IFdoeSBub3QgdXNlIGp1c3QgdHdvIFBDSURzLCBhbmQKPj4+
+IGFsbG93IGdsb2JhbCBwYWdlcyBqdXN0IGxpa2Ugd2UgZG8gbm93LCB3aXRoIHRoZSBhZGRlZCBi
+ZW5lZml0Cj4+PiB0aGF0IHdlIG5vIGxvbmdlciBuZWVkIHRvIGZsdXNoIFhlbidzIGdsb2JhbCBU
+TEIgZW50cmllcyBqdXN0Cj4+PiBiZWNhdXNlIHdlIHdhbnQgdG8gZ2V0IHJpZCBvZiBQViBndWVz
+dCB1c2VyIG9uZXMuCj4+Cj4+IEkgY2FuJ3Qgc2VlIGhvdyB0aGF0IHdvdWxkIHdvcmsgd2l0aG91
+dCBlaXRoZXIgbmVlZGluZyBzb21lIG1vcmUgVExCCj4+IGZsdXNoZXMgaW4gb3JkZXIgdG8gcHJl
+dmVudCBzdGFsZSBUTEIgZW50cmllcyBvciBsb29zaW5nIHRoZSBNZWx0ZG93bgo+PiBtaXRpZ2F0
+aW9uLgo+Pgo+PiBXaGljaCAlY3IzL1BDSUQgY29tYmluYXRpb24gc2hvdWxkIGJlIHVzZWQgaW4g
+aHlwZXJ2aXNvciwgZ3Vlc3Qga2VybmVsCj4+IGFuZCBndWVzdCB1c2VyIG1vZGU/Cj4gCj4gWGVu
+IHdvdWxkIHJ1biB3aXRoIFBDSUQgMCAoYW5kIGZ1bGwgWGVuIG1hcHBpbmdzKSBhdCBhbGwgdGlt
+ZXMKPiAoZXhjZXB0IGVhcmx5IGVudHJ5IGFuZCBsYXRlIGV4aXQgY29kZSBvZiBjb3Vyc2UpLiBU
+aGUgZ3Vlc3Qgd291bGQKPiBydW4gd2l0aCBQQ0lEIDEgKGFuZCBtaW5pbWFsIFhlbiBtYXBwaW5n
+cykgYXQgYWxsIHRpbWVzLiBUaGUgc3dpdGNoCj4gb2YgUENJRCBlbGltaW5hdGVzIHRoZSBuZWVk
+IGZvciBmbHVzaGVzIG9uIHRoZSB3YXkgb3V0IGFuZCBiYWNrIGluLgoKWW91IHN0aWxsIG5lZWQg
+dGhlIGtlcm5lbCBwYWdlIHRhYmxlcyBmbHVzaGVkIHdoZW4gc3dpdGNoaW5nIHRvIHVzZXIKbW9k
+ZSwgcmlnaHQ/Cgo+IAo+PiBXaGljaCBwYWdlcyB3b3VsZCBiZSBnbG9iYWw/Cj4gCj4gVXNlIG9m
+IGdsb2JhbCBwYWdlcyB3b3VsZCBjb250aW51ZSB0byBiZSBhcyB0b2RheTogWGVuIGhhcyBzb21l
+LAo+IGFuZCBndWVzdCB1c2VyIG1vZGUgaGFzIHNvbWUuIE9mIGNvdXJzZSBpdCBpcyBxdWl0ZSBw
+b3NzaWJsZSB0aGF0Cj4gdGhlIHVzZSBvZiBnbG9iYWwgcGFnZXMgd2l0aCBhIHNpbmdsZSBndWVz
+dCBQQ0lEIGlzIHN0aWxsIHdvcnNlIHRoYW4KPiBubyBnbG9iYWwgcGFnZXMgd2l0aCB0d28gZ3Vl
+c3QgUENJRHMsIGJ1dCB0aGF0J3MgYSBzZXBhcmF0ZSBzdGVwCj4gdG8gdGFrZSAoYW5kIG1lYXN1
+cmUpIGltby4KCkJ1dCBnbG9iYWwgcGFnZXMgb2YgWGVuIHdvdWxkIGVpdGhlciBtYWtlIGl0IHZ1
+bG5lcmFibGUgd2l0aCByZWdhcmQgdG8KTWVsdGRvd24gb3IgeW91IG5lZWQgYSBUTEIgZmx1c2gg
+YWdhaW4gd2hlbiBzd2l0Y2hpbmcgYmV0d2VlbiBYZW4gYW5kCmd1ZXN0IG1ha2luZyBhbGwgdGhl
+IFBDSUQgc3R1ZmYgbW9vdC4KCj4gCj4+Pj4gSSBkb24ndAo+Pj4+IHdhbnQgdG8gdXNlIGdsb2Jh
+bCBndWVzdCB1c2VyIHBhZ2VzIHRvZ2V0aGVyIHdpdGggUENJRCBhcyBmbHVzaGluZwo+Pj4+IGds
+b2JhbCBwYWdlcyBmcm9tIHRoZSBUTEIgd2l0aCBQQ0lEIGVuYWJsZWQgcmVxdWlyZXMgZmx1c2hp
+bmcgZWl0aGVyCj4+Pj4gdGhlIGNvbXBsZXRlIFRMQiBvciB5b3UnZCBoYXZlIHRvIHVzZSBJTlZM
+UEcgaW4gYWxsIHBvc3NpYmxlIGFkZHJlc3MKPj4+PiBzcGFjZXMgKHNvIHlvdSdkIG5lZWQgdG8g
+aGF2ZSBtdWx0aXBsZSAlY3IzIHN3aXRjaGVzKS4KPj4+Cj4+PiBXZWxsLCB5ZXMsIGZsdXNoaW5n
+IF9pbmRpdmlkdWFsXyBwYWdlcyBpcyBhIHByb2JsZW0gaW4gdGhhdCBjYXNlLgo+Pj4gQXMgdG8g
+bXVsdGlwbGUgQ1IzIHN3aXRjaGVzIC0gYXJlIHRoZXNlIGFsbCB0aGF0IGJhZCByZWFsbHkgd2l0
+aAo+Pj4gdGhlIG5vLWZsdXNoIGJpdCBzZXQ/IFdpdGggdGhlIHJlZHVjZWQgbnVtYmVyIG9mIFBD
+SURzIGluIGFjdHVhbAo+Pj4gdXNlIChhcyBkaXNjdXNzZWQgYWJvdmUpICJhbGwgcG9zc2libGUg
+YWRkcmVzcyBzcGFjZXMiIHdvdWxkCj4+PiBtZWFuIGp1c3QgdHdvLiBBbmQgSSBjb3VsZCBpbWFn
+aW5lIHRoYXQgaW4gYSBudW1iZXIgb2YgY2FzZXMKPj4+IGp1c3Qgb25lIElOVkxQRyAod2l0aCB0
+aGUgcmlnaHQgUENJRCBhY3RpdmUpIG1pZ2h0IHN1ZmZpY2UuCj4+Pgo+Pj4gT25lIGNvbXBsaWNh
+dGluZyBmYWN0b3IgaXMgdGhhdCB3ZSBkb24ndCB3YW50IHRvIGludHJvZHVjZQo+Pj4gWGVuIFRM
+QiBlbnRyaWVzIGZvciBvdGhlciB0aGFuIHdoYXQgd2UgbWFwIGluIHRoZSBtaW5pbWFsIHBhZ2UK
+Pj4+IHRhYmxlcyBpbnRvIFBWIGd1ZXN0IFBDSUQgc3BhY2UsIHdoaWNoIHdvdWxkIGhhcHBlbiBp
+ZiB3ZQo+Pj4gc2ltcGx5IHN3aXRjaGVkIFBDSUQgYXJvdW5kIGFuIElOVkxQRy4KPj4+Cj4+PiBX
+aGF0IEkgZG9uJ3QgdW5kZXJzdGFuZCBpbiBhbnkgZXZlbnQgaXMgd2h5IHlvdSBuZWVkIHNlcGFy
+YXRlCj4+PiBQQ0lEcyBmb3IgWGVuIGRlcGVuZGluZyBvbiB3aGV0aGVyIHRoZSBhY3RpdmUgUFYg
+Z3Vlc3QgaXMgaW4KPj4+IGtlcm5lbCBvciB1c2VyIG1vZGUuCj4+Cj4+IE1haW4gcmVhc29uIGFy
+ZSB0aGUgZGlmZmVyZW50IHBhZ2UgdGFibGVzIGFuY2hvcmVkIGluICVjcjMuCj4gCj4gSG1tLCBy
+aWdodCwgbG9va3MgbGlrZSB3ZSBjYW4ndCBoYXZlIHRoZSBiZXN0IG9mIGJvdGggd29ybGRzOiBX
+ZSdkCj4gbGlrZSB0aGUgWGVuIHBhcnQgb2YgdGhlIGFkZHJlc3Mgc3BhY2UgdG8gYmUgc2hhcmVk
+LCBidXQgdGhlIGd1ZXN0Cj4gcGFydCBvZiBpdCB0byBiZSBzZXBhcmF0ZS4gUXVlc3Rpb24gdGhl
+biBzdGlsbCBpcyB3aGV0aGVyIHRoZSByZWR1Y2VkCj4gZmx1c2hpbmcgb3V0d2VpZ2hzIHRoZSBy
+ZWR1Y2VkIHNoYXJpbmcuIElPVyBiZXR3ZWVuIHdoYXQgd2UKPiBoYXZlIHRvZGF5IChhIHNpbmds
+ZSBQQ0lEIGFuZCBhIGxvdCBvZiBmbHVzaGluZykgYW5kIHdoYXQgeW91Cj4gaW50cm9kdWNlIChm
+b3VyIFBDSURzIGFuZCB2ZXJ5IGxpdHRsZSBmbHVzaGluZykgaXMgYSBtaWRkbGUgYXBwcm9hY2gg
+LQo+IHR3byBQQ0lEcyBwbHVzIHNvbWUgZmx1c2hpbmcuCgpBcyBJIGJlbGlldmUga2VybmVsIGlz
+IHRvdWNoaW5nIG11Y2ggbGVzcyB1c2VyIHBhZ2VzIHRoYW4ga2VybmVsIHBhZ2VzCkknbSBwcmV0
+dHkgc3VyZSBteSBhcHByb2FjaCBpcyBiZXR0ZXIgaW4gbW9zdCBjYXNlcy4KCkFuZCBUQkggSSdt
+IHN0aWxsIG5vdCBzdXJlIHRoZSAic29tZSBmbHVzaGluZyIgd291bGRuJ3QgYmUgdG9vCmV4cGVu
+c2l2ZS4KClNvIGxldHMgY29tcGFyZSB0aGUgcG9zc2liaWxpdGllczoKCk15IGFwcHJvYWNoOgot
+IG5vIGdsb2JhbCBwYWdlcwotIDQgZGlmZmVyZW50IFBDSURzCi0gbm8gVExCIGZsdXNoZXMgbmVl
+ZGVkIHdoZW4gc3dpdGNoaW5nIGJldHdlZW4gWGVuIGFuZCBndWVzdAotIG5vIFRMQiBmbHVzaGVz
+IG5lZWRlZCB3aGVuIHN3aXRjaGluZyBiZXR3ZWVuIGd1ZXN0IHVzZXIgYW5kIGtlcm5lbAotIGZs
+dXNoaW5nIG9mIHNpbmdsZSBwYWdlcyAoZ3Vlc3Qgb3IgWGVuKSByYXRoZXIgc2ltcGxlICg0IElO
+VlBDSURzKQotIGZsdXNoaW5nIG9mIGNvbXBsZXRlIFRMQiB2aWEgMSBJTlZQQ0lECgoyIFBDSURz
+IChYZW4gYW5kIGd1ZXN0KSwga2VlcGluZyBndWVzdCB1c2VyIHBhZ2VzIGFzIGdsb2JhbCBwYWdl
+cwotIFhlbiBjYW4ndCB1c2UgZ2xvYmFsIHBhZ2VzIC0gZ2xvYmFsIGJpdCBtdXN0IGJlIGhhbmRs
+ZWQgZHluYW1pY2FsbHkKICBmb3IgWGVuIHBhZ2VzIChvciBkbyB3ZSB3YW50IHRvIGRyb3AgZ2xv
+YmFsIHBhZ2VzIGUuZy4gZm9yIEFNRCwgdG9vPwotIDIgUENJRHMKLSBubyBUTEIgZmx1c2hlcyBu
+ZWVkZWQgd2hlbiBzd2l0Y2hpbmcgYmV0d2VlbiBYZW4gYW5kIGd1ZXN0Ci0gd2hlbiBzd2l0Y2hp
+bmcgZnJvbSBndWVzdCBrZXJuZWwgdG8gZ3Vlc3QgdXNlciB0aGUga2VybmVsIHBhZ2VzIG11c3QK
+ICBiZSBmbHVzaGVkIGZyb20gVExCCi0gZmx1c2hpbmcgb2Ygc2luZ2xlIGd1ZXN0IHVzZXIgcGFn
+ZXMgbmVlZHMgMiBjaGFuZ2VzIG9mICVjcjMgYW5kIDIKICBJTlZMUEdzLCBzd2l0Y2ggY29kZSBt
+dXN0IGJlIG1hcHBlZCB0byBndWVzdCBwYWdlIHRhYmxlcwotIGZsdXNoaW5nIG9mIGNvbXBsZXRl
+IFRMQiB2aWEgMSBJTlZQQ0lECgpTbyB0aGUgYWR2YW50YWdlIG9mIHRoZSAyIFBDSUQgc29sdXRp
+b24gYXJlIHRoZSBzaW5nbGUgVExCIGVudHJpZXMgZm9yCmd1ZXN0IHVzZXIgcGFnZXMgY29tcGFy
+ZWQgdG8gMiBlbnRyaWVzIGZvciBndWVzdCB1c2VyIHBhZ2VzIGFjY2Vzc2VkIGJ5CnRoZSBndWVz
+dCBrZXJuZWwgb3IgWGVuLgoKVGhlIGRpc2FkdmFudGFnZSBhcmUgdGhlIGZsdXNoZWQgZ3Vlc3Qg
+a2VybmVsIHBhZ2VzIHdoZW4gZXhlY3V0aW5nIHVzZXIKY29kZSwgdGhlIG1vcmUgY29tcGxpY2F0
+ZWQgc2luZ2xlIHVzZXIgcGFnZSBmbHVzaGluZyBhbmQgdGhlIGR5bmFtaWNhbApYZW4gZ2xvYmFs
+IGJpdCBoYW5kbGluZy4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
