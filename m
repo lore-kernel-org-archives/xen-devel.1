@@ -1,22 +1,21 @@
-From: Manish Jaggi <mjaggi@caviumnetworks.com>
-Subject: Re: [PATCH v1 04/15] arm64: vgic-v3: Add ICV_BPR1_EL1
- handler
-Date: Mon, 26 Mar 2018 18:41:17 +0530
-Message-ID: <f053a8a1-419a-0c87-e9ce-337df82a5a2c@caviumnetworks.com>
-References: <cover.1521200294.git.manish.jaggi@cavium.com>
- <59180a6af11e97390da557da0a6c17a14c02eb6a.1521200294.git.manish.jaggi@cavium.com>
- <f18456b3-3039-2ff6-d921-5adeaa479f5d@arm.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: Sunseting mercurial
+Date: Mon, 26 Mar 2018 14:18:00 +0100
+Message-ID: <20180326131800.GB2208@perard>
+References: <a993c359-c573-ae71-80b1-09a466ce1c21@cardoe.com>
+ <5AB8E91C02000078001B6023@prv1-mh.provo.novell.com>
+ <20180326105649.GA2208@perard>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gmfh=gq=cavium.com=manish.jaggi@srs-us1.protection.inumbo.net>)
- id 1f0RuV-0007k7-Sn
- for xen-devel@lists.xenproject.org; Mon, 26 Mar 2018 13:11:39 +0000
-In-Reply-To: <f18456b3-3039-2ff6-d921-5adeaa479f5d@arm.com>
-Content-Language: en-US
+ <srs0=nchf=gq=citrix.com=prvs=61694493c=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1f0S0n-00081V-B5
+ for xen-devel@lists.xenproject.org; Mon, 26 Mar 2018 13:18:09 +0000
+Content-Disposition: inline
+In-Reply-To: <20180326105649.GA2208@perard>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,21 +24,12 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, Manish Jaggi <manish.jaggi@cavium.com>, xen-devel@lists.xenproject.org, sstabellini@kernel.org, marc.zyngier@arm.com, andre.przywara@arm.com
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Doug Goldstein <cardoe@cardoe.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwMy8yMS8yMDE4IDAxOjQxIFBNLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gSGkgTWFuaXNo
-LAo+Cj4gT24gMDMvMTYvMjAxOCAxMTo1OCBBTSwgTWFuaXNoIEphZ2dpIHdyb3RlOgo+PiBUaGlz
-IHBhdGNoIGlzIHBvcnRlZCB0byB4ZW4gZnJvbSBsaW51eCBjb21taXQKPj4gZDcwYzdiMzFhNjBm
-MjQ1OGYzNWMyMjYxMzFmMmEwMWE3YTk4YjZjZgo+Pgo+PiBBZGQgYSBoYW5kbGVyIGZvciByZWFk
-aW5nL3dyaXRpbmcgdGhlIGd1ZXN0J3MgdmlldyBvZiB0aGUgSUNDX0JQUjFfRUwxCj4+IHJlZ2lz
-dGVyLCB3aGljaCBpcyBsb2NhdGVkIGluIHRoZSBJQ0hfVk1DUl9FTDIuQlBSMSBmaWVsZC4KPj4K
-Pj4gU2lnbmVkLW9mZi1ieTogTWFuaXNoIEphZ2dpIDxtYW5pc2guamFnZ2lAY2F2aXVtLmNvbT4K
-Pgo+IEFzIHlvdSBwb3J0IGNvbW1pdCBieSBjb21taXQsIHBsZWFzZSBhdCBsZWFzdCBtZW50aW9u
-IE1hcmMgYXMgaGUgaXMgCj4gdGhlIG9yaWdpbmFsIGF1dGhvciBvZiB0aGF0IHBhdGNoLgpJIGhh
-dmUgYSBsaXR0bGUgY29uZnVzaW9uLCBzaG91bGQgYSBzaWdub2ZmIGJlIGFkZGVkIG9uY2UgaXQg
-aXMgcmV2aWV3ZWQgCm9yIGV2ZW4gaWYgaXQgaXMgcG9ydGVkPwpJIHRob3VnaHQgb25jZSBpdCBp
-cyBhY2tlZCwgd2UgYWRkIHNpZ25vZmYuCgpQbGVhc2Ugc3VnZ2VzdC4KCgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gTW9uLCBNYXIgMjYsIDIwMTggYXQgMTE6NTY6NDlBTSArMDEwMCwgQW50aG9ueSBQRVJBUkQg
+d3JvdGU6Cj4gSSdsbCBmaXggdGhlIG1pcnJvci4KCkl0J3MgZml4ZWQgbm93LgoKLS0gCkFudGhv
+bnkgUEVSQVJECgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
