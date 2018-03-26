@@ -1,14 +1,20 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86/boot: Disable IBRS in intr/nmi exit
- path at bootup stage
-Date: Mon, 26 Mar 2018 07:39:25 -0600
-Message-ID: <5AB9142D02000078001B61FD@prv1-mh.provo.novell.com>
-References: <3e2f14cb-87ce-4467-8fd2-2cad701cc997@default>
+Subject: Re: Sunseting mercurial
+Date: Mon, 26 Mar 2018 07:44:54 -0600
+Message-ID: <5AB9157602000078001B620C@prv1-mh.provo.novell.com>
+References: <a993c359-c573-ae71-80b1-09a466ce1c21@cardoe.com>
+ <5AB8E91C02000078001B6023@prv1-mh.provo.novell.com>
+ <20180326105649.GA2208@perard> <20180326131800.GB2208@perard>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <3e2f14cb-87ce-4467-8fd2-2cad701cc997@default>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=zopv=gq=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1f0SQm-0002Cj-9k
+ for xen-devel@lists.xenproject.org; Mon, 26 Mar 2018 13:45:00 +0000
+In-Reply-To: <20180326131800.GB2208@perard>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -18,30 +24,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Zhenzhong Duan <zhenzhong.duan@oracle.com>
-Cc: Srinivas REDDY Eeda <srinivas.eeda@oracle.com>, Andrew Cooper3 <andrew.cooper3@citrix.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen-Devel <xen-devel@lists.xen.org>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Doug Goldstein <cardoe@cardoe.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIxLjAzLjE4IGF0IDAzOjU4LCA8emhlbnpob25nLmR1YW5Ab3JhY2xlLmNvbT4gd3Jv
-dGU6Cj4gQWZ0ZXIgcmVzZXQsIElCUlMgaXMgZGlzYWJsZWQgYnkgcHJvY2Vzc29yLCBidXQgYSBj
-b21pbmcgaW50ci9ubWkgbGVhdmUgSUJSUwo+IGVuYWJsZWQgYWZ0ZXIgdGhlaXIgZXhpdC4gSXQn
-cyBub3QgbmVjZXNzb3J5IGZvciBib290dXAgY29kZSB0byBydW4gaW4gbG93Cj4gcGVyZm9ybWFu
-Y2Ugd2l0aCBJQlJTIGVuYWJsZWQuCj4gCj4gT24gT1JBQ0xFIFg2LTIoNTAwR0IvODggY3B1cywg
-ZG9tMCAxMUdCLzIwIHZjcHVzKSwgd2Ugb2JzZXJ2ZWQgYW4gMjAwcysgZGVsYXkKPiBpbiBjb25z
-dHJ1Y3RfZG9tMC4KPiAKPiBCeSBpbml0aWFsaXppbmcgdXNlX3NoYWRvd19zcGVjX2N0cmwgd2l0
-aCAxLCBJQlJTIGlzIGRpc2FibGVkIGluIGludHIvbm1pIGV4aXQKPiBwYXRoIGF0IGJvb3R1cCBz
-dGFnZS4gVGhlbiBkZWxheSBpbiBjb25zdHJ1Y3RfZG9tMCBpcyB+NTBzLgoKV2hpbGUgSSBjYW4g
-Y2VydGFpbmx5IGZvbGxvdyB0aGUgYXJndW1lbnRhdGlvbiwgZGlkIHlvdSBwYXkKYXR0ZW50aW9u
-IHRvIEFuZHJldyBhbHNvIG1vZGlmeWluZyB3aGF0IHlvdSB3b3VsZCBjYWxsICJib290dXAKY29k
-ZSIgaW4gY29tbWl0IDdjNTA4NjEyZjcgKCJ4ODY6IFN1cHBvcnQgaW5kaXJlY3QgdGh1bmtzIGZy
-b20KYXNzZW1ibHkgY29kZSIpPyBUaGF0IHdhc24ndCBqdXN0IGEgcmFuZG9tIGNoYW5nZSAtIHdl
-CnNwZWNpZmljYWxseSB3YW50IGl0IGZvciB0aGUgY2FzZSBvZiBicmluZ2luZyB1cCBDUFVzIGF0
-IHJ1bnRpbWUuCllvdSdsbCBuZWVkIHRvIGJlIGVxdWFsbHkgY2FyZWZ1bCBoZXJlLCBJIHRoaW5r
-OiBSYXRoZXIgdGhhbgpzdG9yaW5nIGxpdGVyYWwgMSAod2hpY2ggc2hvdWxkIGhhdmUgYmVlbiAi
-dHJ1ZSIgYW55d2F5KSwgeW91J2xsCndhbnQgdG8gc3RvcmUgKHN5c3RlbV9zdGF0ZSA8IFNZU19T
-VEFURV9hY3RpdmUpIG9yIG1heWJlCihzeXN0ZW1fc3RhdGUgIT0gU1lTX1NUQVRFX2FjdGl2ZSks
-IGF0IGxlYXN0IHdoZW4gdGhlIENQVQpiZWluZyBib290ZWQgaXMgYSBoeXBlcnRocmVhZCBvZiBh
-IENQVSB3aGljaCBpcyBhY3RpdmUgYWxyZWFkeS4KCkphbgoKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDI2LjAzLjE4IGF0IDE1OjE4LCA8YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gTW9uLCBNYXIgMjYsIDIwMTggYXQgMTE6NTY6NDlBTSArMDEwMCwgQW50aG9ueSBQ
+RVJBUkQgd3JvdGU6Cj4+IEknbGwgZml4IHRoZSBtaXJyb3IuCj4gCj4gSXQncyBmaXhlZCBub3cu
+CgpUaGFua3MgYSBsb3QhCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
