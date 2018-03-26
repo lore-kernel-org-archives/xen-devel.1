@@ -1,17 +1,21 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 121306: tolerable all pass -
- PUSHED
-Date: Mon, 26 Mar 2018 23:25:56 +0000
-Message-ID: <osstest-121306-mainreport@xen.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v3 15/39] ARM: new VGIC: Implement
+ vgic_vcpu_pending_irq
+Date: Mon, 26 Mar 2018 16:34:21 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1803261634140.12360@sstabellini-ThinkPad-X260>
+References: <20180321163235.12529-1-andre.przywara@linaro.org>
+ <20180321163235.12529-16-andre.przywara@linaro.org>
+ <21172163-9617-235b-15c4-224b60be6c53@arm.com>
+ <46b871c0-dfcc-0300-f838-e0c0fd820e10@linaro.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-608898209-1522107261=:12360"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=dgdy=gq=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1f0bV3-0004lw-5g
- for xen-devel@lists.xenproject.org; Mon, 26 Mar 2018 23:26:01 +0000
+ <srs0=desu=gq=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1f0bd9-0005Vi-Mg
+ for xen-devel@lists.xenproject.org; Mon, 26 Mar 2018 23:34:23 +0000
+In-Reply-To: <46b871c0-dfcc-0300-f838-e0c0fd820e10@linaro.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,51 +24,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Andre Przywara <andre.przywara@linaro.org>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMTMwNiB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMTMwNi8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
-ICAgICAgICAgICAgICA3MzU2MDExZWMyMjQyZjEyY2FhZTQ2MWVkNjk0YTZmMjc5NjYyMWY0CmJh
-c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICA5ZjViMGNlMTBiMjg5NWI0MTM2
-YzllNWM1ZWJkMGFlYmFjMzFlYTk4CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjEzMDEgIDIwMTgt
-MDMtMjYgMTY6MTA6MTUgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTIxMzA2ICAy
-MDE4LTAzLTI2IDIxOjAyOjMzIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
-d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmUgUHJ6eXdhcmEgPGFuZHJl
-LnByenl3YXJhQGxpbmFyby5vcmc+CiAgSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNv
-bT4KCmpvYnM6CiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
-ZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXFlbXV1LWRlYmlhbmh2bS1pMzg2ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJv
-amVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMK
-CkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9n
-cy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRo
-ZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8v
-eGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1h
-aWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0
-LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUg
-Zm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7
-YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhlbi5vcmc6L2hvbWUv
-eGVuL2dpdC94ZW4uZ2l0CiAgIDlmNWIwY2UxMGIuLjczNTYwMTFlYzIgIDczNTYwMTFlYzIyNDJm
-MTJjYWFlNDYxZWQ2OTRhNmYyNzk2NjIxZjQgLT4gc21va2UKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-608898209-1522107261=:12360
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Thu, 22 Mar 2018, Andre Przywara wrote:
+> Hi,
+> 
+> On 22/03/18 03:52, Julien Grall wrote:
+> > Hi Andre,
+> > 
+> > On 03/21/2018 04:32 PM, Andre Przywara wrote:
+> >> Tell Xen whether a particular VCPU has an IRQ that needs handling
+> >> in the guest. This is used to decide whether a VCPU is runnable or
+> >> if a hypercall should be preempted to let the guest handle the IRQ.
+> >>
+> >> This is based on Linux commit 90eee56c5f90, written by Eric Auger.
+> >>
+> >> Signed-off-by: Andre Przywara <andre.przywara@linaro.org>
+> >> ---
+> >> Changelog v2 ... v3:
+> >> - adjust vgic_vcpu_pending_irq() to return integers, not false/true
+> > 
+> > I would have preferred to have the return switch to bool instead. I
+> > guess this can be done on a follow-up. With one comment below:
+> 
+> I did that originally, but then you meanwhile merged that first patch
+> already. So I didn't want to add another patch to this series.
+> I am fine with changing this afterwards, probably as part of a fixup series.
+> 
+> > Reviewed-by: Julien Grall <julien.grall@arm.com>
+> 
+> Thanks!
+
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+
+
+> Cheers,
+> Andre.
+> 
+> >>
+> >> Changelog v1 ... v2:
+> >> - adjust to new vgic_vcpu_pending_irq() prototype, drop wrapper
+> >>
+> >>   xen/arch/arm/vgic/vgic.c | 37 +++++++++++++++++++++++++++++++++++++
+> >>   1 file changed, 37 insertions(+)
+> >>
+> >> diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
+> >> index 2fa595f4f7..925cda4580 100644
+> >> --- a/xen/arch/arm/vgic/vgic.c
+> >> +++ b/xen/arch/arm/vgic/vgic.c
+> >> @@ -647,6 +647,43 @@ void vgic_sync_to_lrs(void)
+> >>       gic_hw_ops->update_hcr_status(GICH_HCR_EN, 1);
+> >>   }
+> >>   +/**
+> >> + * vgic_vcpu_pending_irq() - determine if interrupts need to be injected
+> >> + * @vcpu: The vCPU on which to check for interrupts.
+> >> + *
+> >> + * Checks whether there is an interrupt on the given VCPU which needs
+> >> + * handling in the guest. This requires at least one IRQ to be pending
+> >> + * and enabled.
+> >> + *
+> >> + * Returns: 1 if the guest should run to handle interrupts, 0 otherwise.
+> > 
+> > NIT: Because of "ret = irq_is_pending(irq) && irq->enabled", you will
+> > return a non-zero value if the guest should run to handle interrupts.
+> > 
+> >> + */
+> >> +int vgic_vcpu_pending_irq(struct vcpu *vcpu)
+> >> +{
+> >> +    struct vgic_cpu *vgic_cpu = &vcpu->arch.vgic;
+> >> +    struct vgic_irq *irq;
+> >> +    unsigned long flags;
+> >> +    int ret = 0;
+> >> +
+> >> +    if ( !vcpu->domain->arch.vgic.enabled )
+> >> +        return 0;
+> >> +
+> >> +    spin_lock_irqsave(&vgic_cpu->ap_list_lock, flags);
+> >> +
+> >> +    list_for_each_entry(irq, &vgic_cpu->ap_list_head, ap_list)
+> >> +    {
+> >> +        spin_lock(&irq->irq_lock);
+> >> +        ret = irq_is_pending(irq) && irq->enabled;
+> >> +        spin_unlock(&irq->irq_lock);
+> >> +
+> >> +        if ( ret )
+> >> +            break;
+> >> +    }
+> >> +
+> >> +    spin_unlock_irqrestore(&vgic_cpu->ap_list_lock, flags);
+> >> +
+> >> +    return ret;
+> >> +}
+> >> +
+> >>   /*
+> >>    * Local variables:
+> >>    * mode: C
+> >>
+> > 
+> > Cheers,
+> > 
+> 
+--8323329-608898209-1522107261=:12360
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-608898209-1522107261=:12360--
