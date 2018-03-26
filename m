@@ -1,16 +1,15 @@
 From: Anoob Soman <anoob.soman@citrix.com>
-Subject: Re: [PATCH 3/5] libxc: Allow loading of firmware
- modules for HVM guest
-Date: Mon, 26 Mar 2018 16:51:29 +0100
-Message-ID: <2439132d-99eb-80ab-49f7-ee14d0187447@citrix.com>
+Subject: Re: [PATCH 4/5] libxl: Load iPXE ROM from a file
+Date: Mon, 26 Mar 2018 16:51:59 +0100
+Message-ID: <84d46b05-3520-63c7-1128-dc7ef9af7076@citrix.com>
 References: <1521135113-3764-1-git-send-email-anoob.soman@citrix.com>
- <1521135113-3764-4-git-send-email-anoob.soman@citrix.com>
- <20180321151706.o7mczicnq3q6gypo@citrix.com>
+ <1521135113-3764-5-git-send-email-anoob.soman@citrix.com>
+ <20180321152500.26vjgjitcl4upgne@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180321151706.o7mczicnq3q6gypo@citrix.com>
+In-Reply-To: <20180321152500.26vjgjitcl4upgne@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,23 +23,17 @@ To: Wei Liu <wei.liu2@citrix.com>
 Cc: andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, jbeulich@suse.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjEvMDMvMTggMTU6MTcsIFdlaSBMaXUgd3JvdGU6Cj4gT24gVGh1LCBNYXIgMTUsIDIwMTgg
-YXQgMDU6MzE6NTFQTSArMDAwMCwgQW5vb2IgU29tYW4gd3JvdGU6Cj4+ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgbW9kbGlzdCwgc3RhcnRfaW5mbyk7Cj4+ICsgICAgICAgIGZvciAoIGkg
-PSAwOyBpIDwgZG9tLT5udW1fbW9kdWxlczsgaSsrICkKPj4gKyAgICAgICAgewo+PiArICAgICAg
-ICAgICAgc3RydWN0IHhjX2h2bV9maXJtd2FyZV9tb2R1bGUgbW9kOwo+PiArCj4+ICsgICAgICAg
-ICAgICBET01QUklOVEYoIkFkZGluZyBtb2R1bGUgJXUiLCBpKTsKPj4gKyAgICAgICAgICAgIG1v
-ZC5ndWVzdF9hZGRyX291dCA9Cj4+ICsgICAgICAgICAgICAgICAgZG9tLT5tb2R1bGVzW2ldLnNl
-Zy52c3RhcnQ7Cj4gU2hvdWxkbid0IHRoaXMgYmUgZG9tLT5tb2R1bGVzW2ldLnNlZy52c3RhcnQg
-LSBkb20tPnBhcm1zLnZpcnRfYmFzZT8KCkl0IGRpZG4ndCB3b3JrIHdoZW4gZ3Vlc3RfYWRkcl9v
-dXQgPSBzZWcudnN0YXJ0IC0gdmlydF9iYXNlLiBJIHdpbGwgdHJ5IAp0byBmaWd1cmUgb3V0IHdo
-eS4KCj4KPj4gKyAgICAgICAgICAgIG1vZC5sZW5ndGggPQo+PiArICAgICAgICAgICAgICAgIGRv
-bS0+bW9kdWxlc1tpXS5zZWcudmVuZCAtIGRvbS0+bW9kdWxlc1tpXS5zZWcudnN0YXJ0Owo+PiAr
-Cj4+ICsgICAgICAgICAgICBhZGRfbW9kdWxlX3RvX2xpc3QoZG9tLCAmbW9kLCBkb20tPm1vZHVs
-ZXNbaV0uY21kbGluZSwKPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBtb2RsaXN0
-LCBzdGFydF9pbmZvKTsKPj4gKyAgICAgICAgfQo+IE5vdyB0aGF0IGJvdGggcGF0aHMgb2YgdGhl
-IGlmIC4uLiBlbHNlIC4uLiBzdHJ1Y3R1cmUgY29udGFpbiB0aGUgc2FtZQo+IGNvZGUgaXQgc2hv
-dWxkIGJlIGxpZnRlZCBvdXRzaWRlIG9mIHRoZSBsb29wLgoKU3VyZSwgSSBjYW4gZG8gdGhhdC4K
-Ci1Bbm9vYgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMjEvMDMvMTggMTU6MjUsIFdlaSBMaXUgd3JvdGU6Cj4KPj4gKyAgICAgICAgICAgIExPR0Uo
+RVJST1IsICJ4Y19kb21fa2VybmVsX2ZpbGUgZmFpbGVkIik7Cj4+ICsgICAgICAgICAgICBnb3Rv
+IG91dDsKPj4gKyAgICAgICAgfQo+PiArICAgICAgICBpZiAoKGlweGVfZmlsZW5hbWUgPSBsaWJ4
+bF9faXB4ZV9wYXRoKCkpKSB7Cj4+ICsgICAgICAgICAgICByYyA9IHhjX2RvbV9tb2R1bGVfZmls
+ZShkb20sIGlweGVfZmlsZW5hbWUsICJpcHhlIik7Cj4+ICsgICAgICAgICAgICBpZiAocmMpIHsK
+Pj4gKyAgICAgICAgICAgICAgICBMT0dFKEVSUk9SLCAieGNfZG9tX2lweGVfbW9kdWxlX2ZpbGUg
+ZmFpbGVkIik7Cj4+ICsgICAgICAgICAgICAgICAgZ290byBvdXQ7Cj4gVGhpcyBpcyB0aGUgd3Jv
+bmcgcGxhY2UuIEJlaW5nIGFuIEhWTSBndWVzdCBkb2Vzbid0IG1lYW4gaXB4ZSBzaG91bGQgYmUK
+PiBsb2FkZWQuIFlvdSBwcm9iYWJseSBuZWVkIHRvIGxvb2sgYSBmZXcgbGluZXMgZG93biBhbmQg
+YWRkIGNvZGUgaW4KPiBhcHByb3ByaWF0ZSBwbGFjZXMgbGlrZSB3aGVuIFJPTUJJT1MgaXMgcGlj
+a2VkLgoKU3VyZSwgSSB3aWxsIGZpeCBpdCB1cC4KCj4KPiBXZWkuCgoKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
