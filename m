@@ -1,21 +1,16 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH 01/12] checkpatch: Add xendevicemodel_handle
- to the list of types
-Date: Mon, 26 Mar 2018 14:58:42 +0100
-Message-ID: <23224.64658.859133.831793@mariner.uk.xensource.com>
-References: <1520535787-6223-1-git-send-email-ian.jackson@eu.citrix.com>
- <1520535787-6223-2-git-send-email-ian.jackson@eu.citrix.com>
- <e2f1cee4-8dad-d901-ae2f-51495a855b4e@redhat.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 13/20] xen/evtchn: Pass max_evtchn_port into
+ evtchn_init()
+Date: Mon, 26 Mar 2018 08:01:21 -0600
+Message-ID: <5AB9195102000078001B6236@prv1-mh.provo.novell.com>
+References: <1521486839-25617-1-git-send-email-andrew.cooper3@citrix.com>
+ <1521486839-25617-14-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=urmw=gq=citrix.com=prvs=6161f7288=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1f0Sep-0003GV-GR
- for xen-devel@lists.xenproject.org; Mon, 26 Mar 2018 13:59:31 +0000
-In-Reply-To: <e2f1cee4-8dad-d901-ae2f-51495a855b4e@redhat.com>
+In-Reply-To: <1521486839-25617-14-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,28 +19,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, "Daniel
- P. Berrange" <berrange@redhat.com>, qemu-devel@nongnu.org, Ross Lagerwall <ross.lagerwall@citrix.com>, Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Eric Blake <eblake@redhat.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: JulienGrall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-UGFvbG8gQm9uemluaSB3cml0ZXMgKCJSZTogW1BBVENIIDAxLzEyXSBjaGVja3BhdGNoOiBBZGQg
-eGVuZGV2aWNlbW9kZWxfaGFuZGxlIHRvIHRoZSBsaXN0IG9mIHR5cGVzIik6Cj4gT24gMDgvMDMv
-MjAxOCAyMDowMiwgSWFuIEphY2tzb24gd3JvdGU6Cj4gPiBUaGlzIGF2b2lkcyBjaGVja3BhdGNo
-IG1pc3BhcnNpbmcgKGFzIHN0YXRlbWVudHMpIGxvbmcgZnVuY3Rpb24KPiA+IGRlZmluaXRpb25z
-IG9yIGRlY2xhcmF0aW9ucywgd2hpY2ggc29tZXRpbWVzIHN0YXJ0IHdpdGggY29uc3RydWN0cwo+
-ID4gbGlrZSB0aGlzOgo+ID4gCj4gPiAgIHN0YXRpYyBpbmxpbmUgaW50IHhlbmRldmljZW1vZGVs
-X3JlbG9jYXRlX21lbW9yeSgKPiA+ICAgICAgIHhlbmRldmljZW1vZGVsX2hhbmRsZSAqZG1vZCwg
-ZG9taWRfdCBkb21pZCwgLi4uCi4uLgo+IAo+IE9yIGp1c3QgcmVuYW1lIGl0IHNvIHRoYXQgaXQg
-aXMgQ2FtZWxDYXNlLiAgVGhlbiBjaGVja3BhdGNoIHdpbGwgYmUgaGFwcHkuCgpJIGNhbiBkbyB0
-aGF0IGlmIHlvdSB3YW50LCBhbHRob3VnaCBpdCBzZWVtcyBhIGJpdCBsaWtlIHBvaW50bGVzcwpj
-aHVybi4gIElmIEkgZG8gdGhhdCBpdCBvdWdodCB0byBiZSByZW5hbWVkIGFzIHdlbGwgYXMgcmUt
-c3BlbGxlZApiZWNhdXNlIHhlbmRldmljZW1vZGVsX2hhbmRsZSBpcyBhY3R1YWxseSBhIHN0cnVj
-dCwgbm90IGEgImhhbmRsZSIKKGllLCBub3QgYSBzY2FsYXIpLlsxXSAgU28KICAgcy94ZW5kZXZp
-Y2Vtb2RlbF9oYW5kbGUvWGVuZGV2aWNlbW9kZWxJbnRlcmZhY2UvCkkgZ3Vlc3MgPwoKWzFdIElm
-IGl0IHdlcmUgYSBzY2FsYXIgQ09ESU5HX1NUWUxFIHNheXMgaXQgc2hvdWxkIGJlIGluIGxvd2Vy
-Y2FzZQp3aXRoIF90LiAgVGhpcyBpcyBhIHZpb2xhdGlvbiBvZiB0aGUgQyBzdGFuZGFyZCwgd2hp
-Y2ggcmVzZXJ2ZXMgbmFtZXMKZW5kaW5nIF90IGZvciB0aGUgaW1wbGVtZW50YXRpb24uLi4KCklh
-bi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDE5LjAzLjE4IGF0IDIwOjEzLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gLS0tIGEveGVuL2FyY2gvYXJtL3NldHVwLmMKPiArKysgYi94ZW4vYXJjaC9hcm0vc2V0
+dXAuYwo+IEBAIC02OTMsNyArNjkzLDkgQEAgdm9pZCBfX2luaXQgc3RhcnRfeGVuKHVuc2lnbmVk
+IGxvbmcgYm9vdF9waHlzX29mZnNldCwKPiAgICAgIGNvbnN0IGNoYXIgKmNtZGxpbmU7Cj4gICAg
+ICBzdHJ1Y3QgYm9vdG1vZHVsZSAqeGVuX2Jvb3Rtb2R1bGU7Cj4gICAgICBzdHJ1Y3QgZG9tYWlu
+ICpkb20wOwo+IC0gICAgc3RydWN0IHhlbl9kb21jdGxfY3JlYXRlZG9tYWluIGRvbTBfY2ZnID0g
+e307Cj4gKyAgICBzdHJ1Y3QgeGVuX2RvbWN0bF9jcmVhdGVkb21haW4gZG9tMF9jZmcgPSB7Cj4g
+KyAgICAgICAgLm1heF9ldnRjaG5fcG9ydCA9IC0xLAo+ICsgICAgfTsKPiAgCj4gICAgICBkY2Fj
+aGVfbGluZV9ieXRlcyA9IHJlYWRfZGNhY2hlX2xpbmVfYnl0ZXMoKTsKPiAgCj4gLS0tIGEveGVu
+L2FyY2gveDg2L3NldHVwLmMKPiArKysgYi94ZW4vYXJjaC94ODYvc2V0dXAuYwo+IEBAIC02NzMs
+NiArNjczLDcgQEAgdm9pZCBfX2luaXQgbm9yZXR1cm4gX19zdGFydF94ZW4odW5zaWduZWQgbG9u
+ZyBtYmlfcCkKPiAgICAgIH07Cj4gICAgICBzdHJ1Y3QgeGVuX2RvbWN0bF9jcmVhdGVkb21haW4g
+ZG9tMF9jZmcgPSB7Cj4gICAgICAgICAgLmZsYWdzID0gWEVOX0RPTUNUTF9DREZfczNfaW50ZWdy
+aXR5LAo+ICsgICAgICAgIC5tYXhfZXZ0Y2huX3BvcnQgPSAtMSwKPiAgICAgIH07CgpBbnkgY2hh
+bmNlIEkgY2FuIHRhbGsgeW91IGludG8gdXNpbmcgSU5UX01BWCwgVUlOVF9NQVgsIG9yIH4wdQpp
+biBib3RoIGNhc2VzIGFib3ZlLCBzZWVpbmcgdGhhdCBtYXhfZXZ0Y2huX3BvcnQncyB0eXBlIGlz
+CnVuc2lnbmVkIGludD8gT3RoZXIgdGhhbiB0aGlzClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8
+amJldWxpY2hAc3VzZS5jb20+CgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
