@@ -1,14 +1,15 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] retire bitkeeper bits
-Date: Mon, 26 Mar 2018 11:51:57 +0100
-Message-ID: <20180326105157.o5nlqjty4wswkbgg@citrix.com>
-References: <20180325023248.12382-1-cardoe@cardoe.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [seabios test] 121238: regressions - FAIL
+Date: Mon, 26 Mar 2018 10:53:31 +0000
+Message-ID: <osstest-121238-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0656336665464127910=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <20180325023248.12382-1-cardoe@cardoe.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=dgdy=gq=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f0Pks-0003ef-EZ
+ for xen-devel@lists.xenproject.org; Mon, 26 Mar 2018 10:53:34 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,15 +18,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Doug Goldstein <cardoe@cardoe.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gU2F0LCBNYXIgMjQsIDIwMTggYXQgMDk6MzI6NDdQTSAtMDUwMCwgRG91ZyBHb2xkc3RlaW4g
-d3JvdGU6Cj4gV2hpbGUgdGhlIHByb2plY3QgY291bGQgbWlncmF0ZSBmcm9tIGdpdCB0byAkbmV4
-dHNjbSwgaXRzIHVubGlrZWx5IHRoYXQKPiB0aGVzZSBiaXRzIHdpbGwgZXZlciBiZSB1c2VmdWwg
-YWdhaW4uCj4gCj4gU2lnbmVkLW9mZi1ieTogRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBjYXJkb2Uu
-Y29tPgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============0656336665464127910==
+Content-Type: text/plain
+
+flight 121238 seabios real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/121238/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop       fail REGR. vs. 115539
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 115539
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 115539
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop             fail like 115539
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+
+version targeted for testing:
+ seabios              4922d6cb391b8ea48a35a73c46e484cf5f1a9b1a
+baseline version:
+ seabios              0ca6d6277dfafc671a5b3718cbeb5c78e2a888ea
+
+Last test of basis   115539  2017-11-03 20:48:58 Z  142 days
+Failing since        115733  2017-11-10 17:19:59 Z  135 days  154 attempts
+Testing same since   121050  2018-03-22 07:01:10 Z    4 days    3 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Kevin O'Connor <kevin@koconnor.net>
+  Marc-André Lureau <marcandre.lureau@redhat.com>
+  Marcel Apfelbaum <marcel@redhat.com>
+  Michael S. Tsirkin <mst@redhat.com>
+  Nikolay Nikolov <nickysn@users.sourceforge.net>
+  Paul Menzel <pmenzel@molgen.mpg.de>
+  Stefan Berger <stefanb@linux.vnet.ibm.com>
+  Stephen Douthit <stephend@silicom-usa.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 374 lines long.)
+
+
+--===============0656336665464127910==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0656336665464127910==--
