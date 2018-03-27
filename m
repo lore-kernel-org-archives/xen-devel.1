@@ -1,25 +1,16 @@
-From: Marc Zyngier <marc.zyngier@arm.com>
-Subject: Re: [PATCH v2 02/17] arm64: vgic-v3: Add ICV_BPR1_EL1
- handler
-Date: Tue, 27 Mar 2018 12:05:27 +0100
-Message-ID: <5e10a25f-516a-9a72-fdb3-f96a433562c7@arm.com>
-References: <cover.1522135597.git.manish.jaggi@cavium.com>
- <c221fbff0f76c3feb06081ed9e59d3dbe6ca06c2.1522135597.git.manish.jaggi@cavium.com>
- <22c55d3f-ea39-4ece-b9f8-9007f776cde5@arm.com>
- <5b0854f4-a630-8b62-313c-843e98a73dba@caviumnetworks.com>
- <1874e4c5-85a5-2952-9dac-78804445d5cc@arm.com>
- <89277ead-19e1-7902-3f4a-ea5554e4ad53@caviumnetworks.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 121312: tolerable all pass -
+ PUSHED
+Date: Tue, 27 Mar 2018 11:07:14 +0000
+Message-ID: <osstest-121312-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2508781457851293980=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=bwnq=gr=arm.com=marc.zyngier@srs-us1.protection.inumbo.net>)
- id 1f0mQ0-00023C-WD
- for xen-devel@lists.xenproject.org; Tue, 27 Mar 2018 11:05:33 +0000
-In-Reply-To: <89277ead-19e1-7902-3f4a-ea5554e4ad53@caviumnetworks.com>
-Content-Language: en-GB
+ <srs0=miwf=gr=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f0mRi-0002GS-Ld
+ for xen-devel@lists.xenproject.org; Tue, 27 Mar 2018 11:07:18 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,94 +19,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Manish Jaggi <mjaggi@caviumnetworks.com>, Manish Jaggi <manish.jaggi@cavium.com>, xen-devel@lists.xenproject.org, julien.grall@arm.com, sstabellini@kernel.org, andre.przywara@arm.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjcvMDMvMTggMTE6NTYsIE1hbmlzaCBKYWdnaSB3cm90ZToKPiAKPiAKPiBPbiAwMy8yNy8y
-MDE4IDA0OjE1IFBNLCBNYXJjIFp5bmdpZXIgd3JvdGU6Cj4+IE9uIDI3LzAzLzE4IDExOjM1LCBN
-YW5pc2ggSmFnZ2kgd3JvdGU6Cj4+Pgo+Pj4gT24gMDMvMjcvMjAxOCAwNDowMCBQTSwgTWFyYyBa
-eW5naWVyIHdyb3RlOgo+Pj4+IE9uIDI3LzAzLzE4IDEwOjA3LCBNYW5pc2ggSmFnZ2kgd3JvdGU6
-Cj4+Pj4+IFRoaXMgcGF0Y2ggaXMgcG9ydGVkIHRvIHhlbiBmcm9tIGxpbnV4IGNvbW1pdAo+Pj4+
-PiBkNzBjN2IzMWE2MGYyNDU4ZjM1YzIyNjEzMWYyYTAxYTdhOThiNmNmCj4+Pj4+IEtWTTogYXJt
-NjQ6IHZnaWMtdjM6IEFkZCBJQ1ZfQlBSMV9FTDEgaGFuZGxlcgo+Pj4+Pgo+Pj4+PiBBZGQgYSBo
-YW5kbGVyIGZvciByZWFkaW5nL3dyaXRpbmcgdGhlIGd1ZXN0J3MgdmlldyBvZiB0aGUgSUNDX0JQ
-UjFfRUwxCj4+Pj4+IHJlZ2lzdGVyLCB3aGljaCBpcyBsb2NhdGVkIGluIHRoZSBJQ0hfVk1DUl9F
-TDIuQlBSMSBmaWVsZC4KPj4+Pj4KPj4+Pj4gU2lnbmVkLW9mZi1ieTogTWFuaXNoIEphZ2dpIDxt
-YW5pc2guamFnZ2lAY2F2aXVtLmNvbT4KPj4+Pj4gLS0tCj4+Pj4+ICAgIHhlbi9hcmNoL2FybS9h
-cm02NC92Z2ljLXYzLXNyLmMgICAgIHwgNzAgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKwo+Pj4+PiAgICB4ZW4vaW5jbHVkZS9hc20tYXJtL2FybTY0L3N5c3JlZ3MuaCB8ICAx
-ICsKPj4+Pj4gICAgeGVuL2luY2x1ZGUvYXNtLWFybS9naWNfdjNfZGVmcy5oICAgfCAgNiArKysr
-Cj4+Pj4+ICAgIDMgZmlsZXMgY2hhbmdlZCwgNzcgaW5zZXJ0aW9ucygrKQo+Pj4+Pgo+Pj4+PiBk
-aWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2FybTY0L3ZnaWMtdjMtc3IuYyBiL3hlbi9hcmNoL2Fy
-bS9hcm02NC92Z2ljLXYzLXNyLmMKPj4+Pj4gaW5kZXggMzlhYjFlZDZjYS4uZWQ0MjU0YWNmOSAx
-MDA2NDQKPj4+Pj4gLS0tIGEveGVuL2FyY2gvYXJtL2FybTY0L3ZnaWMtdjMtc3IuYwo+Pj4+PiAr
-KysgYi94ZW4vYXJjaC9hcm0vYXJtNjQvdmdpYy12My1zci5jCj4+Pj4+IEBAIC0xOCwxMCArMTgs
-NzYgQEAKPj4+Pj4gICAgICovCj4+Pj4+ICAgIAo+Pj4+PiAgICAjaW5jbHVkZSA8YXNtL2N1cnJl
-bnQuaD4KPj4+Pj4gKyNpbmNsdWRlIDxhc20vZ2ljX3YzX2RlZnMuaD4KPj4+Pj4gICAgI2luY2x1
-ZGUgPGFzbS9yZWdzLmg+Cj4+Pj4+ICAgICNpbmNsdWRlIDxhc20vc3lzdGVtLmg+Cj4+Pj4+ICAg
-ICNpbmNsdWRlIDxhc20vdHJhcHMuaD4KPj4+Pj4gICAgCj4+Pj4+ICsjZGVmaW5lIHZ0cl90b19u
-cl9wcmVfYml0cyh2KSAgICAgKCgoKHVpbnQzMl90KSh2KSA+PiAyNikgJiA3KSArIDEpCj4+Pj4+
-ICsKPj4+Pj4gK3N0YXRpYyBpbnQgdmdpY192M19icHJfbWluKHZvaWQpCj4+Pj4+ICt7Cj4+Pj4+
-ICsgICAgLyogU2VlIFBzZXVkb2NvZGUgZm9yIFZQcmlvcml0eUdyb3VwICovCj4+Pj4+ICsgICAg
-cmV0dXJuIDggLSB2dHJfdG9fbnJfcHJlX2JpdHMoUkVBRF9TWVNSRUczMihJQ0hfVlRSX0VMMikp
-Owo+Pj4+PiArfQo+Pj4+PiArCj4+Pj4+ICtzdGF0aWMgdW5zaWduZWQgaW50IHZnaWNfdjNfZ2V0
-X2JwcjAodWludDMyX3Qgdm1jcikKPj4+Pj4gK3sKPj4+Pj4gKyAgICByZXR1cm4gKHZtY3IgJiBJ
-Q0hfVk1DUl9CUFIwX01BU0spID4+IElDSF9WTUNSX0JQUjBfU0hJRlQ7Cj4+Pj4+ICt9Cj4+Pj4+
-ICsKPj4+Pj4gK3N0YXRpYyB1bnNpZ25lZCBpbnQgdmdpY192M19nZXRfYnByMSh1aW50MzJfdCB2
-bWNyKQo+Pj4+PiArewo+Pj4+PiArICAgIHVuc2lnbmVkIGludCBicHI7Cj4+Pj4+ICsKPj4+Pj4g
-KyAgICBpZiAoIHZtY3IgJiBJQ0hfVk1DUl9DQlBSX01BU0sgKQo+Pj4+PiArICAgIHsKPj4+Pj4g
-KyAgICAgICAgYnByID0gdmdpY192M19nZXRfYnByMCh2bWNyKTsKPj4+Pj4gKyAgICAgICAgaWYg
-KCBicHIgPCA3ICkKPj4+Pj4gKyAgICAgICAgICAgIGJwcisrOwo+Pj4+PiArICAgIH0KPj4+Pj4g
-KyAgICBlbHNlCj4+Pj4+ICsgICAgICAgIGJwciA9ICh2bWNyICYgSUNIX1ZNQ1JfQlBSMV9NQVNL
-KSA+PiBJQ0hfVk1DUl9CUFIxX1NISUZUOwo+Pj4+PiArCj4+Pj4+ICsgICAgcmV0dXJuIGJwcjsK
-Pj4+Pj4gK30KPj4+Pj4gKwo+Pj4+PiArc3RhdGljIHZvaWQgdmdpY192M19yZWFkX2JwcjEoc3Ry
-dWN0IGNwdV91c2VyX3JlZ3MgKnJlZ3MsIGludCByZWdpZHgpCj4+Pj4+ICt7Cj4+Pj4+ICsgICAg
-dWludDMyX3Qgdm1jciA9IFJFQURfU1lTUkVHMzIoSUNIX1ZNQ1JfRUwyKTsKPj4+Pj4gKwo+Pj4+
-PiArICAgIHNldF91c2VyX3JlZyhyZWdzLCByZWdpZHgsIHZnaWNfdjNfZ2V0X2JwcjEodm1jcikp
-Owo+Pj4+PiArfQo+Pj4+PiArCj4+Pj4+ICtzdGF0aWMgdm9pZCB2Z2ljX3YzX3dyaXRlX2JwcjEo
-c3RydWN0IGNwdV91c2VyX3JlZ3MgKnJlZ3MsIGludCByZWdpZHgpCj4+Pj4+ICt7Cj4+Pj4+ICsg
-ICAgcmVnaXN0ZXJfdCB2YWwgPSBnZXRfdXNlcl9yZWcocmVncywgcmVnaWR4KTsKPj4+Pj4gKyAg
-ICB1aW50OF90IGJwcl9taW4gPSB2Z2ljX3YzX2Jwcl9taW4oKTsKPj4+Pj4gKyAgICB1aW50MzJf
-dCB2bWNyID0gUkVBRF9TWVNSRUczMihJQ0hfVk1DUl9FTDIpOwo+Pj4+PiArCj4+Pj4+ICsgICAg
-aWYgKCB2bWNyICYgSUNIX1ZNQ1JfQ0JQUl9NQVNLICkKPj4+Pj4gKyAgICAgICAgcmV0dXJuOwo+
-Pj4+PiArCj4+Pj4+ICsgICAgLyogRW5mb3JjZSBCUFIgbGltaXRpbmcgKi8KPj4+Pj4gKyAgICBp
-ZiAoIHZhbCA8IGJwcl9taW4gKQo+Pj4+PiArICAgICAgICB2YWwgPSBicHJfbWluOwo+Pj4+PiAr
-Cj4+Pj4+ICsgICAgdmFsIDw8PSBJQ0hfVk1DUl9CUFIxX1NISUZUOwo+Pj4+PiArICAgIHZhbCAm
-PSBJQ0hfVk1DUl9CUFIxX01BU0s7Cj4+Pj4+ICsgICAgdm1jciAmPSB+SUNIX1ZNQ1JfQlBSMV9N
-QVNLOwo+Pj4+PiArICAgIHZtY3IgfD0gdmFsOwo+Pj4+PiArCj4+Pj4+ICsgICAgV1JJVEVfU1lT
-UkVHMzIodm1jciwgSUNIX1ZNQ1JfRUwyKTsKPj4+Pj4gK30KPj4+Pj4gKwo+Pj4+PiArc3RhdGlj
-IHZvaWQgdnJlZ19lbXVsYXRlX2JwcjEoc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJlZ3MsIGNvbnN0
-IHVuaW9uIGhzciBoc3IpCj4+Pj4+ICt7Cj4+Pj4+ICsgICAgaWYgKCBoc3Iuc3lzcmVnLnJlYWQg
-KQo+Pj4+PiArICAgICAgICB2Z2ljX3YzX3JlYWRfYnByMShyZWdzLCBoc3Iuc3lzcmVnLnJlZyk7
-Cj4+Pj4+ICsgICAgZWxzZQo+Pj4+PiArICAgICAgICB2Z2ljX3YzX3dyaXRlX2JwcjEocmVncywg
-aHNyLnN5c3JlZy5yZWcpOwo+Pj4+PiArfQo+Pj4+PiArCj4+Pj4+ICAgIC8qCj4+Pj4+ICAgICAq
-IHJldHVybnMgdHJ1ZSBpZiB0aGUgcmVnaXN0ZXIgaXMgZW11bGF0ZWQuCj4+Pj4+ICAgICAqLwo+
-Pj4+PiBAQCAtNDAsNiArMTA2LDEwIEBAIGJvb2wgdmdpY192M19oYW5kbGVfY3B1aWZfYWNjZXNz
-KHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzKQo+Pj4+PiAgICAKPj4+Pj4gICAgICAgIHN3aXRj
-aCAoIGhzci5iaXRzICYgSFNSX1NZU1JFR19SRUdTX01BU0sgKQo+Pj4+PiAgICAgICAgewo+Pj4+
-PiArICAgIGNhc2UgSFNSX1NZU1JFR19JQ0NfQlBSMV9FTDE6Cj4+Pj4+ICsgICAgICAgICB2cmVn
-X2VtdWxhdGVfYnByMShyZWdzLCBoc3IpOwo+Pj4+PiArICAgICAgICAgYnJlYWs7Cj4+Pj4gV2hh
-dCBpcyB0aGUgcmF0aW9uYWwgZm9yIGluZGlyZWN0aW5nIHRocm91Z2ggYSBmdW5jdGlvbiBhbmQg
-bW92aW5nIHRoZQo+Pj4+IHJlYWRpbmcgb2YgVk1DUiB0byB0aGUgbGVhZiBmdW5jdGlvbnM/IEkg
-YXBwcmVjaWF0ZSB0aGF0IHRoaXMgZG9lc24ndAo+Pj4+IGNoYW5nZSBtdWNoLCBidXQgc2luY2Ug
-dGhpcyBpcyBhIHBvcnQgb2YgZXhpc3RpbmcgY29kZSwgaXQgd2lsbCBtYWtlCj4+Pj4gbW9yZSBj
-b21wbGV4IHRoZSBwb3J0IG9mIHBvdGVudGlhbCBmaXhlcy4KPj4+IEkgdXNlZCB4ZW4gdGVtcGxh
-dGUgb2YgaGFuZGxpbmcgc3lzcmVnIHRyYXBzCj4+PiBJZiB5b3Ugc2VlIHRoZSBmaWxlIHhlbi9h
-cmNoL2FybS9hcm02NC9zeXNyZWcuYwo+Pj4gYSBoYW5kbGVfWFhYIGZ1bmN0aW9uIGlzIHVzZWQg
-dGhyb3VnaG91dC4uLgo+PiBTdXJlLCBidXQgdGhpcyBpcyBub3Qgc3lzcmVnLmMuIFRoaXMgaXMg
-YSBzZXBhcmF0ZSBmaWxlIGZvciBhIHJlYXNvbgo+PiAoaS5lLiBpdCBpcyBpbXBvcnRlZCBjb2Rl
-KS4gQW55d2F5LCB0aGF0J3MgZm9yIHRoZSBYZW4gbWFpbnRhaW5lcnMgdG8KPj4gZGVjaWRlLgo+
-Pgo+PiBNb3JlIGltcG9ydGFudGx5LCBteSBvdGhlciBxdWVzdGlvbiBzdGlsbCBzdGFuZDogbW9z
-dCB0cmFwIGZ1bmN0aW9ucyBkbwo+PiByZXF1aXJlIFZNQ1IgYXMgYW4gaW5wdXQuIFdoeSBtb3Zp
-bmcgaXQgdG8gdGhlIGxlYWYgZnVuY3Rpb25zPwo+IFNhbWUgcmVhc29uLCBJIHdhcyBrZWVwaW5n
-IHRoZSBpbnRlcmZhY2Ugc2FtZSBvZiBhbGwgaGFuZGxlX1hYWCBmdW5jdGlvbnMKPiBoYW5kbGVf
-WFhYKHJlZ3MsIGhzciwgLi4uKQo+IAo+IERvIHlvdSB3YW50IG1lIHRvIGNoYW5nZSBib3RoIHRv
-IG1hdGNoIHdpdGggeW91ciBwYXRjaCBvciBpdCBpcyBvaz8KCk15IHByZWZlcmVuY2Ugd291bGQg
-YmUgdG8ga2VlcCB0aGUgY29kZSBhcyBpbml0aWFsbHkgd3JpdHRlbiwgYXMgeW91J3JlCnBvaW50
-bGVzc2x5IGNoYW5naW5nIHRoZSBmbG93LiBBZ2FpbiwgdGhhdCdzIGZvciB0aGUgbWFpbnRhaW5l
-cnMgdG8KY29tbWVudCwgYnV0IHlvdSBzaG91bGQgYXQgdGhlIHZlcnkgbGVhc3QgaW5kaWNhdGUg
-dGhhdCBjaGFuZ2UgaW4gdGhlCmNvbW1pdCBsb2cuCgoJTS4KLS0gCkphenogaXMgbm90IGRlYWQu
-IEl0IGp1c3Qgc21lbGxzIGZ1bm55Li4uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+--===============2508781457851293980==
+Content-Type: text/plain
+
+flight 121312 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/121312/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  b7fd3a2efddb1a3582efba283b2df82b3dfdea5f
+baseline version:
+ xen                  7356011ec2242f12caae461ed694a6f2796621f4
+
+Last test of basis   121306  2018-03-26 21:02:33 Z    0 days
+Testing same since   121312  2018-03-27 09:01:05 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Alexandru Isaila <aisaila@bitdefender.com>
+  Andrii Anisov <andrii_anisov@epam.com>
+  Daniel De Graaf <dgegra@tycho.nsa.gov>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Tamas K Lengyel <tamas@tklengyel.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   7356011ec2..b7fd3a2efd  b7fd3a2efddb1a3582efba283b2df82b3dfdea5f -> smoke
+
+
+--===============2508781457851293980==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2508781457851293980==--
