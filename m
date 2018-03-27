@@ -1,21 +1,21 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
 Subject: Re: [PATCH v3a 14/39] ARM: new VGIC: Add GICv2 world
  switch backend
-Date: Mon, 26 Mar 2018 17:21:54 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1803261721380.12360@sstabellini-ThinkPad-X260>
+Date: Mon, 26 Mar 2018 17:23:39 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1803261721590.12360@sstabellini-ThinkPad-X260>
 References: <20180322115649.5283-1-andre.przywara@linaro.org>
  <20180322115649.5283-3-andre.przywara@linaro.org>
  <alpine.DEB.2.10.1803261554540.12360@sstabellini-ThinkPad-X260>
+ <CAF3u54DYQm5acQ7ZB62kcBivYQ-ig8pC8gw00m6GFg2yVeHABQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1592060599-1522110220=:12360"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=u3an=gr=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1f0cNB-0001Fr-EA
- for xen-devel@lists.xenproject.org; Tue, 27 Mar 2018 00:21:57 +0000
-In-Reply-To: <alpine.DEB.2.10.1803261554540.12360@sstabellini-ThinkPad-X260>
+ id 1f0cOs-0001Lg-GO
+ for xen-devel@lists.xenproject.org; Tue, 27 Mar 2018 00:23:42 +0000
+In-Reply-To: <CAF3u54DYQm5acQ7ZB62kcBivYQ-ig8pC8gw00m6GFg2yVeHABQ@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,170 +24,235 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Andre Przywara <andre.przywara@linaro.org>
+To: Julien Grall <julien.grall@gmail.com>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Andre Przywara <andre.przywara@linaro.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAyNiBNYXIgMjAxOCwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+IE9uIFRodSwg
-MjIgTWFyIDIwMTgsIEFuZHJlIFByenl3YXJhIHdyb3RlOgo+ID4gUHJvY2Vzc2luZyBtYWludGVu
-YW5jZSBpbnRlcnJ1cHRzIGFuZCBhY2Nlc3NpbmcgdGhlIGxpc3QgcmVnaXN0ZXJzCj4gPiBhcmUg
-ZGVwZW5kZW50IG9uIHRoZSBob3N0J3MgR0lDIHZlcnNpb24uCj4gPiBJbnRyb2R1Y2UgdmdpYy12
-Mi5jIHRvIGNvbnRhaW4gR0lDdjIgc3BlY2lmaWMgZnVuY3Rpb25zLgo+ID4gSW1wbGVtZW50IHRo
-ZSBHSUN2MiBzcGVjaWZpYyBjb2RlIGZvciBzeW5jaW5nIHRoZSBlbXVsYXRpb24gc3RhdGUKPiA+
-IGludG8gdGhlIFZHSUMgcmVnaXN0ZXJzLgo+ID4gVGhpcyBhbHNvIGFkZHMgdGhlIGhvb2sgdG8g
-bGV0IFhlbiBzZXR1cCB0aGUgaG9zdCBHSUMgYWRkcmVzc2VzLgo+ID4gCj4gPiBUaGlzIGlzIGJh
-c2VkIG9uIExpbnV4IGNvbW1pdCAxNDBiMDg2ZGQxOTcsIHdyaXR0ZW4gYnkgTWFyYyBaeW5naWVy
-Lgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZSBQcnp5d2FyYSA8YW5kcmUucHJ6eXdhcmFA
-bGluYXJvLm9yZz4KPiA+IC0tLQo+ID4gQ2hhbmdlbG9nIHYzIC4uLiB2M2E6Cj4gPiAtIHRha2Ug
-aGFyZHdhcmUgSVJRIGxvY2sgaW4gdmdpY192Ml9mb2xkX2xyX3N0YXRlKCkKPiA+IC0gZml4IGxh
-c3QgcmVtYWluaW5nIHUzMiB1c2FnZQo+ID4gLSBwcmludCBtZXNzYWdlIHdoZW4gdXNpbmcgbmV3
-IFZHSUMKPiA+IC0gYWRkIFRPRE8gYWJvdXQgcmFjeSBfSVJRX0lOUFJPR1JFU1Mgc2V0dGluZwo+
-ID4gCj4gPiBDaGFuZ2Vsb2cgdjIgLi4uIHYzOgo+ID4gLSByZW1vdmUgbm8gbG9uZ2VyIG5lZWRl
-ZCBhc20vaW8uaCBoZWFkZXIKPiA+IC0gcmVwbGFjZSAwLzEgd2l0aCBmYWxzZS90cnVlIGZvciBi
-b29sJ3MKPiA+IC0gY2xlYXIgX0lSUV9JTlBST0dSRVNTIGJpdCB3aGVuIHJldGlyaW5nIGhhcmR3
-YXJlIG1hcHBlZCBJUlEKPiA+IC0gZml4IGluZGVudGF0aW9uIGFuZCB3L3MgaXNzdWVzCj4gPiAK
-PiA+IENoYW5nZWxvZyB2MSAuLi4gdjI6Cj4gPiAtIHJlbW92ZSB2MiBzcGVjaWZpYyB1bmRlcmZs
-b3cgZnVuY3Rpb24gKG5vdyBnZW5lcmljKQo+ID4gLSByZS1hZGQgTGludXggY29kZSB0byBwcm9w
-ZXJseSBoYW5kbGUgYWNrZWQgbGV2ZWwgSVJRcwo+ID4gCj4gPiAgeGVuL2FyY2gvYXJtL3ZnaWMv
-dmdpYy12Mi5jIHwgMjU5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrCj4gPiAgeGVuL2FyY2gvYXJtL3ZnaWMvdmdpYy5jICAgIHwgICA2ICsKPiA+ICB4ZW4vYXJj
-aC9hcm0vdmdpYy92Z2ljLmggICAgfCAgIDkgKysKPiA+ICAzIGZpbGVzIGNoYW5nZWQsIDI3NCBp
-bnNlcnRpb25zKCspCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IHhlbi9hcmNoL2FybS92Z2ljL3Zn
-aWMtdjIuYwo+ID4gCj4gPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3ZnaWMvdmdpYy12Mi5j
-IGIveGVuL2FyY2gvYXJtL3ZnaWMvdmdpYy12Mi5jCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+
-ID4gaW5kZXggMDAwMDAwMDAwMC4uMTc3MzUwM2NmYgo+ID4gLS0tIC9kZXYvbnVsbAo+ID4gKysr
-IGIveGVuL2FyY2gvYXJtL3ZnaWMvdmdpYy12Mi5jCj4gPiBAQCAtMCwwICsxLDI1OSBAQAo+ID4g
-Ky8qCj4gPiArICogQ29weXJpZ2h0IChDKSAyMDE1LCAyMDE2IEFSTSBMdGQuCj4gPiArICogSW1w
-b3J0ZWQgZnJvbSBMaW51eCAoIm5ldyIgS1ZNIFZHSUMpIGFuZCBoZWF2aWx5IGFkYXB0ZWQgdG8g
-WGVuLgo+ID4gKyAqCj4gPiArICogVGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBj
-YW4gcmVkaXN0cmlidXRlIGl0IGFuZC9vciBtb2RpZnkKPiA+ICsgKiBpdCB1bmRlciB0aGUgdGVy
-bXMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIHZlcnNpb24gMiBhcwo+ID4gKyAq
-IHB1Ymxpc2hlZCBieSB0aGUgRnJlZSBTb2Z0d2FyZSBGb3VuZGF0aW9uLgo+ID4gKyAqCj4gPiAr
-ICogVGhpcyBwcm9ncmFtIGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQgd2lsbCBi
-ZSB1c2VmdWwsCj4gPiArICogYnV0IFdJVEhPVVQgQU5ZIFdBUlJBTlRZOyB3aXRob3V0IGV2ZW4g
-dGhlIGltcGxpZWQgd2FycmFudHkgb2YKPiA+ICsgKiBNRVJDSEFOVEFCSUxJVFkgb3IgRklUTkVT
-UyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuICBTZWUgdGhlCj4gPiArICogR05VIEdlbmVyYWwg
-UHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4KPiA+ICsgKgo+ID4gKyAqIFlvdSBzaG91
-bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNl
-Cj4gPiArICogYWxvbmcgd2l0aCB0aGlzIHByb2dyYW0uICBJZiBub3QsIHNlZSA8aHR0cDovL3d3
-dy5nbnUub3JnL2xpY2Vuc2VzLz4uCj4gPiArICovCj4gPiArCj4gPiArI2luY2x1ZGUgPGFzbS9u
-ZXdfdmdpYy5oPgo+ID4gKyNpbmNsdWRlIDxhc20vYnVnLmg+Cj4gPiArI2luY2x1ZGUgPGFzbS9n
-aWMuaD4KPiA+ICsjaW5jbHVkZSA8eGVuL3NjaGVkLmg+Cj4gPiArI2luY2x1ZGUgPHhlbi9zaXpl
-cy5oPgo+ID4gKwo+ID4gKyNpbmNsdWRlICJ2Z2ljLmgiCj4gPiArCj4gPiArc3RhdGljIHN0cnVj
-dCB7Cj4gPiArICAgIGJvb2wgZW5hYmxlZDsKPiA+ICsgICAgcGFkZHJfdCBkYmFzZTsgICAgICAg
-ICAgLyogRGlzdHJpYnV0b3IgaW50ZXJmYWNlIGFkZHJlc3MgKi8KPiA+ICsgICAgcGFkZHJfdCBj
-YmFzZTsgICAgICAgICAgLyogQ1BVIGludGVyZmFjZSBhZGRyZXNzICYgc2l6ZSAqLwo+ID4gKyAg
-ICBwYWRkcl90IGNzaXplOwo+ID4gKyAgICBwYWRkcl90IHZiYXNlOyAgICAgICAgICAvKiBWaXJ0
-dWFsIENQVSBpbnRlcmZhY2UgYWRkcmVzcyAqLwo+ID4gKwo+ID4gKyAgICAvKiBPZmZzZXQgdG8g
-YWRkIHRvIGdldCBhbiA4a0IgY29udGlndW91cyByZWdpb24gaWYgR0lDIGlzIGFsaWFzZWQgKi8K
-PiA+ICsgICAgdWludDMyX3QgYWxpYXNlZF9vZmZzZXQ7Cj4gPiArfSBnaWNfdjJfaHdfZGF0YTsK
-PiA+ICsKPiA+ICt2b2lkIHZnaWNfdjJfc2V0dXBfaHcocGFkZHJfdCBkYmFzZSwgcGFkZHJfdCBj
-YmFzZSwgcGFkZHJfdCBjc2l6ZSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgcGFkZHJfdCB2
-YmFzZSwgdWludDMyX3QgYWxpYXNlZF9vZmZzZXQpCj4gPiArewo+ID4gKyAgICBnaWNfdjJfaHdf
-ZGF0YS5lbmFibGVkID0gdHJ1ZTsKPiA+ICsgICAgZ2ljX3YyX2h3X2RhdGEuZGJhc2UgPSBkYmFz
-ZTsKPiA+ICsgICAgZ2ljX3YyX2h3X2RhdGEuY2Jhc2UgPSBjYmFzZTsKPiA+ICsgICAgZ2ljX3Yy
-X2h3X2RhdGEuY3NpemUgPSBjc2l6ZTsKPiA+ICsgICAgZ2ljX3YyX2h3X2RhdGEudmJhc2UgPSB2
-YmFzZTsKPiA+ICsgICAgZ2ljX3YyX2h3X2RhdGEuYWxpYXNlZF9vZmZzZXQgPSBhbGlhc2VkX29m
-ZnNldDsKPiA+ICsKPiA+ICsgICAgcHJpbnRrKCJVc2luZyB0aGUgbmV3IFZHSUMgaW1wbGVtZW50
-YXRpb24uXG4iKTsKPiA+ICt9Cj4gPiArCj4gPiArLyoKPiA+ICsgKiB0cmFuc2ZlciB0aGUgY29u
-dGVudCBvZiB0aGUgTFJzIGJhY2sgaW50byB0aGUgY29ycmVzcG9uZGluZyBhcF9saXN0Ogo+ID4g
-KyAqIC0gYWN0aXZlIGJpdCBpcyB0cmFuc2ZlcnJlZCBhcyBpcwo+ID4gKyAqIC0gcGVuZGluZyBi
-aXQgaXMKPiA+ICsgKiAgIC0gdHJhbnNmZXJyZWQgYXMgaXMgaW4gY2FzZSBvZiBlZGdlIHNlbnNp
-dGl2ZSBJUlFzCj4gPiArICogICAtIHNldCB0byB0aGUgbGluZS1sZXZlbCAocmVzYW1wbGUgdGlt
-ZSkgZm9yIGxldmVsIHNlbnNpdGl2ZSBJUlFzCj4gPiArICovCj4gPiArdm9pZCB2Z2ljX3YyX2Zv
-bGRfbHJfc3RhdGUoc3RydWN0IHZjcHUgKnZjcHUpCj4gPiArewo+ID4gKyAgICBzdHJ1Y3Qgdmdp
-Y19jcHUgKnZnaWNfY3B1ID0gJnZjcHUtPmFyY2gudmdpYzsKPiA+ICsgICAgdW5zaWduZWQgaW50
-IHVzZWRfbHJzID0gdmNwdS0+YXJjaC52Z2ljLnVzZWRfbHJzOwo+ID4gKyAgICB1bnNpZ25lZCBs
-b25nIGZsYWdzOwo+ID4gKyAgICB1bnNpZ25lZCBpbnQgbHI7Cj4gPiArCj4gPiArICAgIGlmICgg
-IXVzZWRfbHJzICkgICAgLyogTm8gTFJzIHVzZWQsIHNvIG5vdGhpbmcgdG8gc3luYyBiYWNrIGhl
-cmUuICovCj4gPiArICAgICAgICByZXR1cm47Cj4gPiArCj4gPiArICAgIGdpY19od19vcHMtPnVw
-ZGF0ZV9oY3Jfc3RhdHVzKEdJQ0hfSENSX1VJRSwgZmFsc2UpOwo+ID4gKwo+ID4gKyAgICBmb3Ig
-KCBsciA9IDA7IGxyIDwgdXNlZF9scnM7IGxyKysgKQo+ID4gKyAgICB7Cj4gPiArICAgICAgICBz
-dHJ1Y3QgZ2ljX2xyIGxyX3ZhbDsKPiA+ICsgICAgICAgIHVpbnQzMl90IGludGlkOwo+ID4gKyAg
-ICAgICAgc3RydWN0IHZnaWNfaXJxICppcnE7Cj4gPiArICAgICAgICBzdHJ1Y3QgaXJxX2Rlc2Mg
-KmRlc2MgPSBOVUxMOwo+ID4gKyAgICAgICAgYm9vbCBoYXZlX2Rlc2NfbG9jayA9IGZhbHNlOwo+
-ID4gKwo+ID4gKyAgICAgICAgZ2ljX2h3X29wcy0+cmVhZF9scihsciwgJmxyX3ZhbCk7Cj4gPiAr
-Cj4gPiArICAgICAgICAvKgo+ID4gKyAgICAgICAgICogVE9ETzogUG9zc2libGUgb3B0aW1pemF0
-aW9uIHRvIGF2b2lkIHJlYWRpbmcgTFJzOgo+ID4gKyAgICAgICAgICogUmVhZCB0aGUgRUxSU1Ig
-dG8gZmluZCBvdXQgd2hpY2ggb2Ygb3VyIExScyBoYXZlIGJlZW4gY2xlYXJlZAo+ID4gKyAgICAg
-ICAgICogYnkgdGhlIGd1ZXN0LiBXZSBqdXN0IG5lZWQgdG8ga25vdyB0aGUgSVJRIG51bWJlciBm
-b3IgdGhvc2UsIHdoaWNoCj4gPiArICAgICAgICAgKiB3ZSBjb3VsZCBzYXZlIGluIGFuIGFycmF5
-IHdoZW4gcG9wdWxhdGluZyB0aGUgTFJzLgo+ID4gKyAgICAgICAgICogVGhpcyB0cmFkZXMgb25l
-IE1NSU8gYWNjZXNzIChFTFJTUikgZm9yIHBvc3NpYmx5IG1vcmUgdGhhbiBvbmUgKExScyksCj4g
-PiArICAgICAgICAgKiBidXQgcmVxdWlyZXMgc29tZSBtb3JlIGNvZGUgdG8gc2F2ZSB0aGUgSVJR
-IG51bWJlciBhbmQgdG8gaGFuZGxlCj4gPiArICAgICAgICAgKiB0aG9zZSBmaW5pc2hlZCBJUlFz
-IGFjY29yZGluZyB0byB0aGUgYWxnb3JpdGhtIGJlbG93Lgo+ID4gKyAgICAgICAgICogV2UgbmVl
-ZCBzb21lIG51bWJlcnMgdG8ganVzdGlmeSB0aGlzOiBjaGFuY2VzIGFyZSB0aGF0IHdlIGRvbid0
-Cj4gPiArICAgICAgICAgKiBoYXZlIG1hbnkgTFJzIGluIHVzZSBtb3N0IG9mIHRoZSB0aW1lLCBz
-byB3ZSBtaWdodCBub3Qgc2F2ZSBtdWNoLgo+ID4gKyAgICAgICAgICovCj4gPiArICAgICAgICBn
-aWNfaHdfb3BzLT5jbGVhcl9scihscik7Cj4gPiArCj4gPiArICAgICAgICBpbnRpZCA9IGxyX3Zh
-bC52aXJxOwo+ID4gKyAgICAgICAgaXJxID0gdmdpY19nZXRfaXJxKHZjcHUtPmRvbWFpbiwgdmNw
-dSwgaW50aWQpOwo+ID4gKwo+ID4gKyAgICAgICAgbG9jYWxfaXJxX3NhdmUoZmxhZ3MpOwo+IAo+
-IFNob3VsZG4ndCB3ZSBkaXNhYmxlIGludGVycnVwdHMgZWFybGllciwgbWF5YmUgYXQgdGhlIGJl
-Z2lubmluZyBvZiB0aGUKPiBmdW5jdGlvbj8gSXMgaXQgbm90IGEgcHJvYmxlbSBpZiB3ZSB0YWtl
-IGFuIGludGVycnVwdCBhIGNvdXBsZSBvZiBsaW5lcwo+IGFib3ZlIHdpdGggdGhlIHJlYWRfbHIg
-YW5kIGNsZWFyX2xyIHRoYXQgd2UgZG8/Cj4gCj4gCj4gPiArICAgICAgICBzcGluX2xvY2soJmly
-cS0+aXJxX2xvY2spOwo+ID4gKwo+ID4gKyAgICAgICAgLyogVGhlIGxvY2tpbmcgb3JkZXIgZm9y
-Y2VzIHVzIHRvIGRyb3AgYW5kIHJlLXRha2UgdGhlIGxvY2tzIGhlcmUuICovCj4gPiArICAgICAg
-ICBpZiAoIGlycS0+aHcgKQo+ID4gKyAgICAgICAgewo+ID4gKyAgICAgICAgICAgIHNwaW5fdW5s
-b2NrKCZpcnEtPmlycV9sb2NrKTsKPiA+ICsKPiA+ICsgICAgICAgICAgICBkZXNjID0gaXJxX3Rv
-X2Rlc2MoaXJxLT5od2ludGlkKTsKPiA+ICsgICAgICAgICAgICBzcGluX2xvY2soJmRlc2MtPmxv
-Y2spOwo+ID4gKyAgICAgICAgICAgIHNwaW5fbG9jaygmaXJxLT5pcnFfbG9jayk7Cj4gPiArCj4g
-PiArICAgICAgICAgICAgLyogVGhpcyBoL3cgSVJRIHNob3VsZCBzdGlsbCBiZSBhc3NpZ25lZCB0
-byB0aGUgdmlydHVhbCBJUlEuICovCj4gPiArICAgICAgICAgICAgQVNTRVJUKGlycS0+aHcgJiYg
-ZGVzYy0+aXJxID09IGlycS0+aHdpbnRpZCk7Cj4gPiArCj4gPiArICAgICAgICAgICAgaGF2ZV9k
-ZXNjX2xvY2sgPSB0cnVlOwo+ID4gKyAgICAgICAgfQo+IAo+IEkgYWdyZWUgd2l0aCBKdWxpZW4g
-dGhhdCB0aGlzIGxvb2tzIHZlcnkgZnJhZ2lsZS4gSW5zdGVhZCwgSSB0aGluayBpdAo+IHdvdWxk
-IGJlIGJlc3QgdG8gYWx3YXlzIHRha2UgdGhlIGRlc2MgbG9jayAoaWYgaXJxLT5odykgYmVmb3Jl
-IHRoZQo+IGlycV9sb2NrIGVhcmxpZXIgaW4gdGhpcyBmdW5jdGlvbi4gVGhhdCB3YXksIHdlIGRv
-bid0IGhhdmUgdG8gZGVhbCB3aXRoCj4gdGhpcyBidXNpbmVzcyBvZiB1bmxvY2tpbmcgYW5kIHJl
-bG9ja2luZy4gRG8geW91IHNlZSBhbnkgcHJvYmxlbXMgd2l0aAo+IGl0PyBXZSBkb24ndCBjaGFu
-Z2UgaXJxLT5odyBhdCBydW4gdGltZSwgc28gaXQgbG9va3MgT0sgdG8gbWUuCj4gCj4gCj4gPiAr
-ICAgICAgICAvKgo+ID4gKyAgICAgICAgICogSWYgYSBoYXJkd2FyZSBtYXBwZWQgSVJRIGhhcyBi
-ZWVuIGhhbmRsZWQgZm9yIGdvb2QsIHdlIG5lZWQgdG8KPiA+ICsgICAgICAgICAqIGNsZWFyIHRo
-ZSBfSVJRX0lOUFJPR1JFU1MgYml0IHRvIGFsbG93IGhhbmRsaW5nIG9mIG5ldyBJUlFzLgo+ID4g
-KyAgICAgICAgICoKPiA+ICsgICAgICAgICAqIFRPRE86IFRoaXMgaXMgcHJvYmFibHkgcmFjeSwg
-YnV0IGlzIHNvIGFscmVhZHkgaW4gdGhlIGV4aXN0aW5nCj4gPiArICAgICAgICAgKiBWR0lDLiBB
-IGZpeCBkb2VzIG5vdCBzZWVtIHRvIGJlIHRyaXZpYWwuCj4gPiArICAgICAgICAgKi8KPiA+ICsg
-ICAgICAgIGlmICggaXJxLT5odyAmJiAhbHJfdmFsLmFjdGl2ZSAmJiAhbHJfdmFsLnBlbmRpbmcg
-KQo+ID4gKyAgICAgICAgICAgIGNsZWFyX2JpdChfSVJRX0lOUFJPR1JFU1MsICZkZXNjLT5zdGF0
-dXMpOwo+IAo+IEknbGwgcmVwbHkgaGVyZSB0byBKdWxpZW4ncyBjb21tZW50Ogo+IAo+ID4gSSBy
-ZWFsaXplIHRoZSBjdXJyZW50IHZHSUMgaXMgZG9pbmcgZXhhY3RseSB0aGUgc2FtZSB0aGluZy4g
-QnV0IHRoaXMgaXMgcmFjeS4KPiA+IAo+ID4gSW1hZ2luZSB0aGUgaW50ZXJydXB0IGlzIGZpcmlu
-ZyBvbiBhbm90aGVyIHBDUFUgKEkgd2Fzbid0IGFibGUgdG8gcnVsZSBvdXQgdGhpcyBldmVuIHdo
-ZW4gdGhlIGludGVycnVwdCBpcyBmb2xsb3dpbmcgdGhlIHZDUFUpLCB0aGF0IHBDUFUgbWF5IHNl
-dCBfSVJRX0lOUFJPR1JFU1MgYmVmb3JlIHRoaXMKPiA+IGlzIGNsZWFyZWQgaGVyZS4KPiAKPiBU
-aGUgYXNzdW1wdGlvbiBpbiB0aGUgb2xkIHZnaWMgd2FzIHRoYXQgdGhpcyBzY2VuYXJpbyB3YXMg
-bm90IHBvc3NpYmxlLgo+IHZnaWNfbWlncmF0ZV9pcnEgd291bGQgYXZvaWQgY2hhbmdpbmcgcGh5
-c2ljYWwgaW50ZXJydXB0IGFmZmluaXR5IGlmIGEKPiB2aXJ0dWFsIGludGVycnVwdCB3YXMgY3Vy
-cmVudGx5IGluIGFuIExSIChzZWUgeGVuL2FyY2gvYXJtL3ZnaWMuYzpMMjk4KS4KPiBJbnN0ZWFk
-LCBpdCB3b3VsZCBzZXQgdGhlIGlycSBhcyBHSUNfSVJRX0dVRVNUX01JR1JBVElORywgdGhlbiBh
-dCB0aGUKPiB0aW1lIG9mIGNsZWFyaW5nIHRoZSBMUiB3ZSB3b3VsZCBjaGFuZ2UgdGhlIHBoeXNp
-Y2FsIGlycSBhZmZpbml0eSAoc2VlCj4geGVuL2FyY2gvYXJtL2dpYy12Z2ljLmM6TDI0MCkuCj4g
-Cj4gSSB0aGluayB3ZSB3b3VsZCBuZWVkIGEgc2ltaWxhciBtZWNoYW5pc20gaGVyZSB0byBwcm90
-ZWN0IG91cnNlbHZlcyBmcm9tCj4gcmFjZXMuIElzIHRoZXJlIHNvbWV0aGluZyBlcXVpdmFsZW50
-IGluIHRoZSBuZXcgdmdpYz8KCkFmdGVyIHJlYWRpbmcgdGhlIGZvbGxvd2luZyBwYXRjaGVzLCBJ
-IGFtIHRoaW5raW5nIHRoYXQgdG8gZml4IHRoZSByYWNlCndlIG5lZWQgdG8gbWFrZSBzdXJlIHRo
-YXQgaXJxLT52Y3B1IGlzIHNldCB0byBOVUxMIGhlcmUsIGFuZCB3ZQpuZWVkIHRvIHNldCBpdCB0
-byBOVUxMIHdpdGggdGhlIGRlc2MtPmxvY2sgaGVsZC4KCkxldCdzIHN1cHBvc2VkIHRoYXQgdGhl
-IGlycSBpcyBJTlBST0dSRVNTIG9uIGNwdTAvdmNwdTAsIGFuZCB3ZSBnZXQgdGhlCnNhbWUgaW50
-ZXJydXB0IG9uIGNwdTEvdmNwdTEgYmVjYXVzZSBJVEFSR0VUU1IgaGFzIGJlZW4gY2hhbmdlZC4K
-dmdpY19xdWV1ZV9pcnFfdW5sb2NrIHNpbXBseSBkcm9wcyB0aGUgaW50ZXJydXB0IGJlY2F1c2Ug
-aXJxLT52Y3B1ICE9Ck5VTEwgKGFsc28ga2VlcCBpbiBtaW5kIHRoYXQgYXQgdGhhdCBwb2ludCBk
-ZXNjLT5sb2NrIGlzIGhlbGQpLiBNYXliZSBpdAppc24ndCBuaWNlIGJ1dCBpdCBzaG91bGRuJ3Qg
-YmUgcmFjeS4KCldoZW4gY3B1MC92Y3B1MCBjbGVhcnMgSU5QUk9HUkVTUyBpbiB2Z2ljX3YyX2Zv
-bGRfbHJfc3RhdGUsIGl0IGlzIG5vdCBhCnByb2JsZW0gYmVjYXVzZSB0aGUgaW50ZXJydXB0IHdh
-cyBuZXZlciBpbmplY3RlZCBpbiBjcHUxL3ZjcHUxLgoKVmljZSB2ZXJzYSwgaWYgY3B1MC92Y3B1
-MCBjbGVhcnMgSU5QUk9HUkVTUyBhbmQgc2V0cyBpcnEtPnZjcHUgPSBOVUxMIGluCnZnaWNfdjJf
-Zm9sZF9scl9zdGF0ZSBiZWZvcmUgdGhlIG5ldyBpbnRlcnJ1cHQgaXMgZGVsaXZlcmVkIHRvCmNw
-dTEvdmNwdTEsIHRoZW4gdGhlIGludGVycnVwdCB3aWxsIGJlIGluamVjdGVkIHRvIGNwdTEvdmNw
-dTEgYW5kCklOUFJPR1JFU1MgaXMgc2V0IGFnYWluIGNvcnJlY3RseS4KCkluIG90aGVyIHdvcmRz
-LCBhcyBsb25nIGFzIGlycS0+dmNwdSAhPSBOVUxMIGFuZCBJTlBST0dSRVNTIGFyZSBrZXB0IGlu
-CnN5bmMsIHRoZSByYWNlIGlzIGF2b2lkZWQuIFdpdGggdGhpcyBwYXRjaCwgdGhlIHJhY2UgZXhp
-c3RzIGJlY2F1c2UKSU5QUk9HUkVTUyBjb3VsZCBiZSBzZXQgb24gY3B1MS92Y3B1MSB3aGlsZSBj
-cHUwL3ZjcHUwIGNsZWFycwpzZXRzIHZjcHUgdG8gTlVMTC4KCkRvZXMgaXQgbWFrZSBzZW5zZT8g
-RG8geW91IGFncmVlIHdpdGggdGhpcyBhbmFseXNpcz8KClRoZSBmaXgsIGFsdGhvdWdoIGl0IGxv
-b2tzIHByZXR0eSBzbWFsbCwgY291bGQgYmUgc2VudCBzZXBhcmF0ZWx5IGFmdGVyCnRoZSBjb2Rl
-IGZyZWV6ZS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1592060599-1522110220=:12360
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Tue, 27 Mar 2018, Julien Grall wrote:
+> Hi,
+> Sorry for the formatting.
+> 
+> On Tue, 27 Mar 2018, 07:25 Stefano Stabellini, <sstabellini@kernel.org> wrote:
+>       On Thu, 22 Mar 2018, Andre Przywara wrote:
+>       > Processing maintenance interrupts and accessing the list registers
+>       > are dependent on the host's GIC version.
+>       > Introduce vgic-v2.c to contain GICv2 specific functions.
+>       > Implement the GICv2 specific code for syncing the emulation state
+>       > into the VGIC registers.
+>       > This also adds the hook to let Xen setup the host GIC addresses.
+>       >
+>       > This is based on Linux commit 140b086dd197, written by Marc Zyngier.
+>       >
+>       > Signed-off-by: Andre Przywara <andre.przywara@linaro.org>
+>       > ---
+>       > Changelog v3 ... v3a:
+>       > - take hardware IRQ lock in vgic_v2_fold_lr_state()
+>       > - fix last remaining u32 usage
+>       > - print message when using new VGIC
+>       > - add TODO about racy _IRQ_INPROGRESS setting
+>       >
+>       > Changelog v2 ... v3:
+>       > - remove no longer needed asm/io.h header
+>       > - replace 0/1 with false/true for bool's
+>       > - clear _IRQ_INPROGRESS bit when retiring hardware mapped IRQ
+>       > - fix indentation and w/s issues
+>       >
+>       > Changelog v1 ... v2:
+>       > - remove v2 specific underflow function (now generic)
+>       > - re-add Linux code to properly handle acked level IRQs
+>       >
+>       >  xen/arch/arm/vgic/vgic-v2.c | 259 ++++++++++++++++++++++++++++++++++++++++++++
+>       >  xen/arch/arm/vgic/vgic.c    |   6 +
+>       >  xen/arch/arm/vgic/vgic.h    |   9 ++
+>       >  3 files changed, 274 insertions(+)
+>       >  create mode 100644 xen/arch/arm/vgic/vgic-v2.c
+>       >
+>       > diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
+>       > new file mode 100644
+>       > index 0000000000..1773503cfb
+>       > --- /dev/null
+>       > +++ b/xen/arch/arm/vgic/vgic-v2.c
+>       > @@ -0,0 +1,259 @@
+>       > +/*
+>       > + * Copyright (C) 2015, 2016 ARM Ltd.
+>       > + * Imported from Linux ("new" KVM VGIC) and heavily adapted to Xen.
+>       > + *
+>       > + * This program is free software; you can redistribute it and/or modify
+>       > + * it under the terms of the GNU General Public License version 2 as
+>       > + * published by the Free Software Foundation.
+>       > + *
+>       > + * This program is distributed in the hope that it will be useful,
+>       > + * but WITHOUT ANY WARRANTY; without even the implied warranty of
+>       > + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+>       > + * GNU General Public License for more details.
+>       > + *
+>       > + * You should have received a copy of the GNU General Public License
+>       > + * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+>       > + */
+>       > +
+>       > +#include <asm/new_vgic.h>
+>       > +#include <asm/bug.h>
+>       > +#include <asm/gic.h>
+>       > +#include <xen/sched.h>
+>       > +#include <xen/sizes.h>
+>       > +
+>       > +#include "vgic.h"
+>       > +
+>       > +static struct {
+>       > +    bool enabled;
+>       > +    paddr_t dbase;          /* Distributor interface address */
+>       > +    paddr_t cbase;          /* CPU interface address & size */
+>       > +    paddr_t csize;
+>       > +    paddr_t vbase;          /* Virtual CPU interface address */
+>       > +
+>       > +    /* Offset to add to get an 8kB contiguous region if GIC is aliased */
+>       > +    uint32_t aliased_offset;
+>       > +} gic_v2_hw_data;
+>       > +
+>       > +void vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
+>       > +                      paddr_t vbase, uint32_t aliased_offset)
+>       > +{
+>       > +    gic_v2_hw_data.enabled = true;
+>       > +    gic_v2_hw_data.dbase = dbase;
+>       > +    gic_v2_hw_data.cbase = cbase;
+>       > +    gic_v2_hw_data.csize = csize;
+>       > +    gic_v2_hw_data.vbase = vbase;
+>       > +    gic_v2_hw_data.aliased_offset = aliased_offset;
+>       > +
+>       > +    printk("Using the new VGIC implementation.\n");
+>       > +}
+>       > +
+>       > +/*
+>       > + * transfer the content of the LRs back into the corresponding ap_list:
+>       > + * - active bit is transferred as is
+>       > + * - pending bit is
+>       > + *   - transferred as is in case of edge sensitive IRQs
+>       > + *   - set to the line-level (resample time) for level sensitive IRQs
+>       > + */
+>       > +void vgic_v2_fold_lr_state(struct vcpu *vcpu)
+>       > +{
+>       > +    struct vgic_cpu *vgic_cpu = &vcpu->arch.vgic;
+>       > +    unsigned int used_lrs = vcpu->arch.vgic.used_lrs;
+>       > +    unsigned long flags;
+>       > +    unsigned int lr;
+>       > +
+>       > +    if ( !used_lrs )    /* No LRs used, so nothing to sync back here. */
+>       > +        return;
+>       > +
+>       > +    gic_hw_ops->update_hcr_status(GICH_HCR_UIE, false);
+>       > +
+>       > +    for ( lr = 0; lr < used_lrs; lr++ )
+>       > +    {
+>       > +        struct gic_lr lr_val;
+>       > +        uint32_t intid;
+>       > +        struct vgic_irq *irq;
+>       > +        struct irq_desc *desc = NULL;
+>       > +        bool have_desc_lock = false;
+>       > +
+>       > +        gic_hw_ops->read_lr(lr, &lr_val);
+>       > +
+>       > +        /*
+>       > +         * TODO: Possible optimization to avoid reading LRs:
+>       > +         * Read the ELRSR to find out which of our LRs have been cleared
+>       > +         * by the guest. We just need to know the IRQ number for those, which
+>       > +         * we could save in an array when populating the LRs.
+>       > +         * This trades one MMIO access (ELRSR) for possibly more than one (LRs),
+>       > +         * but requires some more code to save the IRQ number and to handle
+>       > +         * those finished IRQs according to the algorithm below.
+>       > +         * We need some numbers to justify this: chances are that we don't
+>       > +         * have many LRs in use most of the time, so we might not save much.
+>       > +         */
+>       > +        gic_hw_ops->clear_lr(lr);
+>       > +
+>       > +        intid = lr_val.virq;
+>       > +        irq = vgic_get_irq(vcpu->domain, vcpu, intid);
+>       > +
+>       > +        local_irq_save(flags);
+> 
+>       Shouldn't we disable interrupts earlier, maybe at the beginning of the
+>       function? Is it not a problem if we take an interrupt a couple of lines
+>       above with the read_lr and clear_lr that we do?
+> 
+> 
+>       > +        spin_lock(&irq->irq_lock);
+>       > +
+>       > +        /* The locking order forces us to drop and re-take the locks here. */
+>       > +        if ( irq->hw )
+>       > +        {
+>       > +            spin_unlock(&irq->irq_lock);
+>       > +
+>       > +            desc = irq_to_desc(irq->hwintid);
+>       > +            spin_lock(&desc->lock);
+>       > +            spin_lock(&irq->irq_lock);
+>       > +
+>       > +            /* This h/w IRQ should still be assigned to the virtual IRQ. */
+>       > +            ASSERT(irq->hw && desc->irq == irq->hwintid);
+>       > +
+>       > +            have_desc_lock = true;
+>       > +        }
+> 
+>       I agree with Julien that this looks very fragile. Instead, I think it
+>       would be best to always take the desc lock (if irq->hw) before the
+>       irq_lock earlier in this function. That way, we don't have to deal with
+>       this business of unlocking and relocking. Do you see any problems with
+>       it? We don't change irq->hw at run time, so it looks OK to me.
+> 
+> 
+>       > +        /*
+>       > +         * If a hardware mapped IRQ has been handled for good, we need to
+>       > +         * clear the _IRQ_INPROGRESS bit to allow handling of new IRQs.
+>       > +         *
+>       > +         * TODO: This is probably racy, but is so already in the existing
+>       > +         * VGIC. A fix does not seem to be trivial.
+>       > +         */
+>       > +        if ( irq->hw && !lr_val.active && !lr_val.pending )
+>       > +            clear_bit(_IRQ_INPROGRESS, &desc->status);
+> 
+>       I'll reply here to Julien's comment:
+> 
+>       > I realize the current vGIC is doing exactly the same thing. But this is racy.
+>       >
+>       > Imagine the interrupt is firing on another pCPU (I wasn't able to rule out this even when the interrupt is following the vCPU), that pCPU may set _IRQ_INPROGRESS
+>       before this
+>       > is cleared here.
+> 
+>       The assumption in the old vgic was that this scenario was not possible.
+>       vgic_migrate_irq would avoid changing physical interrupt affinity if a
+>       virtual interrupt was currently in an LR (see xen/arch/arm/vgic.c:L298).
+>       Instead, it would set the irq as GIC_IRQ_GUEST_MIGRATING, then at the
+>       time of clearing the LR we would change the physical irq affinity (see
+>       xen/arch/arm/gic-vgic.c:L240).
+> 
+> 
+>       I think we would need a similar mechanism here to protect ourselves from
+>       races. Is there something equivalent in the new vgic?
+> 
+> 
+> A mechanism that we know is already very racy on the old vGIC. You also have to take into account that write to ITARGETR/IROUTER will take effect in finite time. A interrupt
+> may still get pending on the old pCPU. 
+> 
+> To be honest we should migrate the interrupt on gues MMIO and finding a way to handle the desc->state correctly.
+> 
+> One of the solution is to avoid relying in the desc->state when releasing IRQ. So we would not need to care a potential.
+
+I think I might have a simple suggestion to fix this, a suggestion that
+doesn't require anything like the mechanism we had in the old vgic. I
+hope I didn't miss anything :-)
+--8323329-1592060599-1522110220=:12360
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1592060599-1522110220=:12360--
