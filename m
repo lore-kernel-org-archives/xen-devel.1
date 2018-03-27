@@ -1,16 +1,17 @@
-From: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH for-4.11] tools: set DEBUG_DIR from configure
-Date: Tue, 27 Mar 2018 17:13:44 +0100
-Message-ID: <20180327161344.94634-1-roger.pau@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH for-4.11] tools: set DEBUG_DIR from configure
+Date: Tue, 27 Mar 2018 18:18:08 +0200
+Message-ID: <20180327161807.GD30726@aepfle.de>
+References: <20180327161344.94634-1-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3991088557508087173=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=jyqu=gr=citrix.com=prvs=617bf0025=roger.pau@srs-us1.protection.inumbo.net>)
- id 1f0rFK-0003l5-5X
- for xen-devel@lists.xenproject.org; Tue, 27 Mar 2018 16:14:50 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=t++c=gr=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1f0rIf-0003vA-V1
+ for xen-devel@lists.xenproject.org; Tue, 27 Mar 2018 16:18:18 +0000
+In-Reply-To: <20180327161344.94634-1-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,37 +20,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Wei Liu <wei.liu2@citrix.com>, Olaf Hering <olaf@aepfle.de>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-QWxsb3cgdGhlIHBhdGggdG8gYmUgc2V0IGZyb20gYSBjb25maWd1cmUgY29tbWFuZCBsaW5lIG9w
-dGlvbi4KClNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXgu
-Y29tPgotLS0KQ2M6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgpDYzog
-V2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KQ2M6IE9sYWYgSGVyaW5nIDxvbGFmQGFlcGZs
-ZS5kZT4KQ2M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KLS0tCiBjb25maWcvUGF0
-aHMubWsuaW4gfCAxICsKIG00L3BhdGhzLm00ICAgICAgICB8IDkgKysrKysrKysrCiAyIGZpbGVz
-IGNoYW5nZWQsIDEwIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9jb25maWcvUGF0aHMubWsu
-aW4gYi9jb25maWcvUGF0aHMubWsuaW4KaW5kZXggYTYwMzI5NTE0Ni4uOGE1MThkNWE1ZCAxMDA2
-NDQKLS0tIGEvY29uZmlnL1BhdGhzLm1rLmluCisrKyBiL2NvbmZpZy9QYXRocy5tay5pbgpAQCAt
-NTEsNiArNTEsNyBAQCBCQVNIX0NPTVBMRVRJT05fRElSICAgICAgOj0gJChDT05GSUdfRElSKS9i
-YXNoX2NvbXBsZXRpb24uZAogWEVOX0xPQ0tfRElSICAgICAgICAgICAgIDo9IEBYRU5fTE9DS19E
-SVJACiBYRU5fUEFHSU5HX0RJUiAgICAgICAgICAgOj0gQFhFTl9QQUdJTkdfRElSQAogWEVOX0RV
-TVBfRElSICAgICAgICAgICAgIDo9IEBYRU5fRFVNUF9ESVJACitERUJVR19ESVIgICAgICAgICAg
-ICAgICAgOj0gQERFQlVHX0RJUkAKIAogWEVORklSTVdBUkVESVIgICAgICAgICAgIDo9IEBYRU5G
-SVJNV0FSRURJUkAKIApkaWZmIC0tZ2l0IGEvbTQvcGF0aHMubTQgYi9tNC9wYXRocy5tNAppbmRl
-eCBmMjA4YjdlMzlmLi43YzVhNzc1Yzg4IDEwMDY0NAotLS0gYS9tNC9wYXRocy5tNAorKysgYi9t
-NC9wYXRocy5tNApAQCAtODIsNiArODIsMTIgQEAgQUNfQVJHX1dJVEgoW3J1bmRpcl0sCiAgICAg
-W3J1bmRpcl9wYXRoPSR3aXRodmFsXSwKICAgICBbcnVuZGlyX3BhdGg9JGxvY2Fsc3RhdGVkaXIv
-cnVuXSkKIAorQUNfQVJHX1dJVEgoW2RlYnVnZGlyXSwKKyAgICBBU19IRUxQX1NUUklORyhbLS13
-aXRoLWRlYnVnZGlyPURJUl0sCisgICAgW1BhdGggdG8gZGlyZWN0b3J5IGZvciBkZWJ1ZyBzeW1i
-b2xzLiBbUFJFRklYL3Vzci9saWIvZGVidWddXSksCisgICAgW2RlYnVnZGlyX3BhdGg9JHdpdGh2
-YWxdLAorICAgIFtkZWJ1Z2Rpcl9wYXRoPSRwcmVmaXgvdXNyL2xpYi9kZWJ1Z10pCisKIGlmIHRl
-c3QgIiRsaWJleGVjZGlyIiA9ICcke2V4ZWNfcHJlZml4fS9saWJleGVjJyA7IHRoZW4KICAgICBj
-YXNlICIkaG9zdF9vcyIgaW4KICAgICAgICAgICpuZXRic2QqKSA7OwpAQCAtMTQ2LDYgKzE1Miw5
-IEBAIEFDX1NVQlNUKFhFTl9QQUdJTkdfRElSKQogCiBYRU5fRFVNUF9ESVI9JHhlbl9kdW1wZGly
-X3BhdGgKIEFDX1NVQlNUKFhFTl9EVU1QX0RJUikKKworREVCVUdfRElSPSRkZWJ1Z2Rpcl9wYXRo
-CitBQ19TVUJTVChERUJVR19ESVIpCiBdKQogCiBjYXNlICIkaG9zdF9vcyIgaW4KLS0gCjIuMTYu
-MwoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============3991088557508087173==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="osDK9TLjxFScVI/L"
+Content-Disposition: inline
+
+
+--osDK9TLjxFScVI/L
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Tue, Mar 27, Roger Pau Monne wrote:
+
+> +AC_ARG_WITH([debugdir],
+> +    AS_HELP_STRING([--with-debugdir=DIR],
+> +    [Path to directory for debug symbols. [PREFIX/usr/lib/debug]]),
+> +    [debugdir_path=$withval],
+> +    [debugdir_path=$prefix/usr/lib/debug])
+
+Would that create /usr/usr/lib/debug per default?
+
+Olaf
+
+--osDK9TLjxFScVI/L
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWrpuvAAKCRBdQqD6ppg2
+fh6FAJ9aVjxYz4GwTfGssOz1soHAWh2jqQCgmULU8FIxKBqh1S5eceWKGr9FVFY=
+=LhK5
+-----END PGP SIGNATURE-----
+
+--osDK9TLjxFScVI/L--
+
+
+--===============3991088557508087173==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3991088557508087173==--
