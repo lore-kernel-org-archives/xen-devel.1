@@ -1,15 +1,23 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 121326: all pass - PUSHED
-Date: Wed, 28 Mar 2018 11:05:39 +0000
-Message-ID: <osstest-121326-mainreport@xen.org>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH for-4.11 1/2] libxc/x86: fix mapping of the
+ start_info area
+Date: Wed, 28 Mar 2018 12:08:07 +0100
+Message-ID: <20180328110807.hmludd4tpdusognn@citrix.com>
+References: <20180321144211.57274-1-roger.pau@citrix.com>
+ <20180321144211.57274-2-roger.pau@citrix.com>
+ <20180321180957.v6unr7yhw564i2b4@citrix.com>
+ <20180322091003.44yo2xopar2ktzoa@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5225901487899311790=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=u9ej=gs=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1f18tk-0002TW-0P
- for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 11:05:44 +0000
+ <srs0=b9f4=gs=citrix.com=prvs=618f79229=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1f18xo-0002lK-BU
+ for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 11:09:56 +0000
+Content-Disposition: inline
+In-Reply-To: <20180322091003.44yo2xopar2ktzoa@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,73 +26,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5225901487899311790==
-Content-Type: text/plain
-
-flight 121326 xen-unstable-coverity real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/121326/
-
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xen                  73a10cb91a4e5c6f7049a78a12dcdea3460f0bd1
-baseline version:
- xen                  eabb83121226d5a6a5a68da3a913ac0b5bb1e0cf
-
-Last test of basis   121265  2018-03-25 09:33:45 Z    3 days
-Testing same since   121326  2018-03-28 10:14:18 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Alexandru Isaila <aisaila@bitdefender.com>
-  Andre Przywara <andre.przywara@linaro.org>
-  Andrii Anisov <andrii_anisov@epam.com>
-  Daniel De Graaf <dgegra@tycho.nsa.gov>
-  Doug Goldstein <cardoe@cardoe.com>
-  Jan Beulich <jbeulich@suse.com>
-  Julien Grall <julien.grall@arm.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Tamas K Lengyel <tamas@tklengyel.com>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- coverity-amd64                                               pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   eabb831212..73a10cb91a  73a10cb91a4e5c6f7049a78a12dcdea3460f0bd1 -> coverity-tested/smoke
-
-
---===============5225901487899311790==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+T24gVGh1LCBNYXIgMjIsIDIwMTggYXQgMDk6MTA6MDNBTSArMDAwMCwgUm9nZXIgUGF1IE1vbm7D
+qSB3cm90ZToKPiBPbiBXZWQsIE1hciAyMSwgMjAxOCBhdCAwNjowOTo1N1BNICswMDAwLCBXZWkg
+TGl1IHdyb3RlOgo+ID4gT24gV2VkLCBNYXIgMjEsIDIwMTggYXQgMDI6NDI6MTBQTSArMDAwMCwg
+Um9nZXIgUGF1IE1vbm5lIHdyb3RlOgo+ID4gPiBUaGUgc3RhcnRfaW5mbyBzaXplIGNhbGN1bGF0
+ZWQgaW4gYm9vdGxhdGVfaHZtIGlzIHdyb25nLiBJdCBzaG91bGQgdXNlCj4gPiA+IEhWTUxPQURF
+Ul9NT0RVTEVfTUFYX0NPVU5UIGluc3RlYWQgb2YgZG9tLT5udW1fbW9kdWxlcyBhbmQgaXQgZG9l
+c24ndAo+ID4gPiB0YWtlIGludG8gYWNjb3VudCB0aGUgc2l6ZSBvZiB0aGUgbW9kdWxlcyBjb21t
+YW5kIGxpbmUuCj4gPiA+IAo+ID4gPiBUaGlzIGlzIG5vdCBhIHByb2JsZW0gc28gZmFyIGJlY2F1
+c2UgdGhlIGFjdHVhbGx5IHVzZWQgYW1vdW50IG9mCj4gPiA+IG1lbW9yeSBkb2Vzbid0IGNyb3Nz
+IGEgcGFnZSBib3VuZGFyeSwgYW5kIHNvIG5vIHBhZ2UtZmF1bHQgaXMKPiA+ID4gdHJpZ2dlcmVk
+Lgo+ID4gCj4gPiBJIGdldCB0aGUgY21kbGluZSBiaXQuCj4gPiAKPiA+IFdoYXQgZG9lcyBpdCBu
+ZWVkIHRvIGJlIEhWTUxPQURFUl9NT0RVTEVfTUFYX0NPVU5UPyBJc24ndCBiZXR0ZXIgdG8ganVz
+dAo+ID4gbWFwIHdoYXQgd2UgbmVlZCBoZXJlPwo+IAo+IEJlY2F1c2UgdGhlIHBvc2l0aW9uIG9m
+IHRoZSBtb2R1bGVzIGNvbW1hbmQgbGluZSBpczoKPiAKPiBtb2RsaXN0X3BhZGRyICsgc2l6ZW9m
+KHN0cnVjdCBodm1fbW9kbGlzdF9lbnRyeSkgKiBIVk1MT0FERVJfTU9EVUxFX01BWF9DT1VOVDsK
+PiAKPiAoVGhpcyBpcyBmcm9tIGFkZF9tb2R1bGVfdG9fbGlzdCkuCj4gCj4gU28gaWYgZG9tLT5u
+dW1fbW9kdWxlcyA8IEhWTUxPQURFUl9NT0RVTEVfTUFYX0NPVU5UIHRoZSBtYXBwZWQgcmVnaW9u
+Cj4gaXMgc21hbGxlciB0aGF0IHdoYXQgd2UgbWlnaHQgZW5kIHVwIHVzaW5nLgo+IAo+IEknbSBu
+b3Qgc3VyZSB3aHkgSFZNTE9BREVSX01PRFVMRV9NQVhfQ09VTlQgaXMgdXNlZCB3aGVuIGFsbG9j
+YXRpbmcKPiBtZW1vcnkgKGluIGFsbG9jX21hZ2ljX3BhZ2VzX2h2bSkgaW5zdGVhZCBvZiB0aGUg
+YWN0dWFsIG51bWJlciBvZgo+IG1vZHVsZXMgKGRvbS0+bnVtX21vZHVsZXMpLCBidXQgdGhlIHBy
+b3Bvc2VkIGNoYW5nZSBzZWVtcyB0byBiZSB0aGUKPiBlYXNpZXIgd2F5IHRvIGZpeCB0aGUgbWFw
+cGluZyBpc3N1ZS4KPiAKClRoaXMgcGF0Y2ggaXMgY29ycmVjdCwgaW4gdGhlIHNlbnNlIHRoYXQg
+aXQgcmVwbGljYXRlcyB0aGUgbG9naWMgZnJvbQphbGxvY19tYWdpY19wYWdlc19odm0gdG8gYm9v
+dGxhdGVfaHZtLiBIb3dldmVyLCBJIGRvbid0IHRoaW5rCmJvb3RsYXRlX2h2bSBpcyBpbiB0aGUg
+YnVzaW5lc3Mgb2YgY2FsY3VsYXRpbmcgdGhlIHNpemUgb25jZSBtb3JlLiBUaGlzCmlzIGJvdW5k
+IHRvIGZhaWwgaW4gdGhlIGZ1dHVyZS4KCkluc3RlYWQsIHlvdSBjYW4gc3Rhc2ggdGhlIHNpemUg
+dG8gZG9tIG9uY2UgdGhlIGNhbGN1bGF0aW9uIGluCmFsbG9jX21hZ2ljX3BhZ2VzX2h2bSBpcyBk
+b25lLCBhbmQgdGhlbiB1c2UgaXQgaW4gYm9vdGxhdGVfaHZtLiBUaGlzIGlzCnRoZSBsZWFzdCBm
+cmFnaWxlIHdheSBJIGNhbiB0aGluayBvZi4KCkRvZXMgdGhpcyBtYWtlIHNlbnNlPwoKV2VpLgoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5225901487899311790==--
