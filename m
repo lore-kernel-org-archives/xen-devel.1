@@ -1,20 +1,15 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v4 4/4] libxc: Pass e820 map to HVM/PVH
- guests via hvm_start_info
-Date: Wed, 28 Mar 2018 12:05:00 +0100
-Message-ID: <20180328110500.brmtxoicrua6xuxo@citrix.com>
-References: <1521564536-31880-1-git-send-email-maran.wilson@oracle.com>
- <1521564652-31992-3-git-send-email-maran.wilson@oracle.com>
- <20180321100716.4ghjkrdvg6dbzqwv@MacBook-Pro-de-Roger.local>
- <7473f125-6b4f-a93f-0f58-1b9084bea015@oracle.com>
- <20180321141849.jxbmyvayadmpfd3g@MacBook-Pro-de-Roger.local>
- <ad4bc5e9-0cdf-daa7-17dd-c06505a1bf07@oracle.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-coverity test] 121326: all pass - PUSHED
+Date: Wed, 28 Mar 2018 11:05:39 +0000
+Message-ID: <osstest-121326-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5225901487899311790=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <ad4bc5e9-0cdf-daa7-17dd-c06505a1bf07@oracle.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=u9ej=gs=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f18tk-0002TW-0P
+ for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 11:05:44 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,15 +18,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: wei.liu2@citrix.com, Maran Wilson <maran.wilson@oracle.com>, ian.jackson@eu.citrix.com, Jonathan.Ludlam@eu.citrix.com, xen-devel@lists.xen.org, anthony.perard@citrix.com, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBNYXIgMjEsIDIwMTggYXQgMDE6NTM6MzdQTSAtMDQwMCwgQm9yaXMgT3N0cm92c2t5
-IHdyb3RlOgo+IChBcyBhIHNpZGUgbm90ZSwgZG9tLT5udW1fbW9kdWxlcyBpcyBtZWFuaW5nbGVz
-cyBmb3IgSFZNIGd1ZXN0cyBoZXJlIC0tLQo+IHdlIG9ubHkgYWRkIG9uZSBtb2R1bGUsIHRoZSBG
-VyBibG9iLikKPiAKCkZXSVcgSXQgd2lsbCBzb29uIGJlIHJlbGV2YW50IGFzIHdlIHNwbGl0IGlw
-eGUgZnJvbSByb21iaW9zLgoKV2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+--===============5225901487899311790==
+Content-Type: text/plain
+
+flight 121326 xen-unstable-coverity real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/121326/
+
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ xen                  73a10cb91a4e5c6f7049a78a12dcdea3460f0bd1
+baseline version:
+ xen                  eabb83121226d5a6a5a68da3a913ac0b5bb1e0cf
+
+Last test of basis   121265  2018-03-25 09:33:45 Z    3 days
+Testing same since   121326  2018-03-28 10:14:18 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Alexandru Isaila <aisaila@bitdefender.com>
+  Andre Przywara <andre.przywara@linaro.org>
+  Andrii Anisov <andrii_anisov@epam.com>
+  Daniel De Graaf <dgegra@tycho.nsa.gov>
+  Doug Goldstein <cardoe@cardoe.com>
+  Jan Beulich <jbeulich@suse.com>
+  Julien Grall <julien.grall@arm.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Tamas K Lengyel <tamas@tklengyel.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ coverity-amd64                                               pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   eabb831212..73a10cb91a  73a10cb91a4e5c6f7049a78a12dcdea3460f0bd1 -> coverity-tested/smoke
+
+
+--===============5225901487899311790==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5225901487899311790==--
