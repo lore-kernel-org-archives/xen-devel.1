@@ -1,19 +1,19 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v5] new config option vtsc_tolerance_khz to
- avoid TSC emulation
-Date: Wed, 28 Mar 2018 18:13:50 +0100
-Message-ID: <20180328171350.prfrck2rcezmxbj2@citrix.com>
-References: <20180327092655.28530-1-olaf@aepfle.de>
- <20180328162716.zzkdwdoae73wpqa3@citrix.com>
- <fda64b8a-b513-1468-bea8-d54b71a829ee@citrix.com>
- <20180328165215.nzqqhtwi6opvl6rn@citrix.com>
- <353a9bd2-5c0f-4dcd-897b-8f16efa000ab@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: Make coverity results public
+Date: Wed, 28 Mar 2018 10:15:36 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1803281014090.15200@sstabellini-ThinkPad-X260>
+References: <20180328133337.xlzb7vqwr4dflnlu@MacBook-Pro-de-Roger.local>
+ <20180328134938.zoa6fa7pblek4mxx@citrix.com>
+ <3ea2f1ff-8234-95ad-a4bb-aac89cda9125@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-443120996-1522257343=:15200"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <353a9bd2-5c0f-4dcd-897b-8f16efa000ab@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=yb8v=gs=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1f1Efp-0007jv-4D
+ for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 17:15:45 +0000
+In-Reply-To: <3ea2f1ff-8234-95ad-a4bb-aac89cda9125@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,65 +23,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: George Dunlap <george.dunlap@citrix.com>
-Cc: Tim Deegan <tim@xen.org>, Olaf Hering <olaf@aepfle.de>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBNYXIgMjgsIDIwMTggYXQgMDY6MDc6NTNQTSArMDEwMCwgR2VvcmdlIER1bmxhcCB3
-cm90ZToKPiBPbiAwMy8yOC8yMDE4IDA1OjUyIFBNLCBXZWkgTGl1IHdyb3RlOgo+ID4gT24gV2Vk
-LCBNYXIgMjgsIDIwMTggYXQgMDU6NDk6MjhQTSArMDEwMCwgR2VvcmdlIER1bmxhcCB3cm90ZToK
-PiA+PiBPbiAwMy8yOC8yMDE4IDA1OjI3IFBNLCBXZWkgTGl1IHdyb3RlOgo+ID4+PiBPbiBUdWUs
-IE1hciAyNywgMjAxOCBhdCAxMToyNjo1NUFNICswMjAwLCBPbGFmIEhlcmluZyB3cm90ZToKPiA+
-Pj4+IEFkZCBhbiBvcHRpb24gdG8gY29udHJvbCB3aGVuIHZUU0MgZW11bGF0aW9uIHdpbGwgYmUg
-YWN0aXZhdGVkIGZvciBhCj4gPj4+PiBkb21VIHdpdGggdHNjX21vZGU9ZGVmYXVsdC4gV2l0aG91
-dCBzdWNoIG9wdGlvbiBlYWNoIFRTQyBhY2Nlc3MgZnJvbQo+ID4+Pj4gZG9tVSB3aWxsIGJlIGVt
-dWxhdGVkLCB3aGljaCBjYXVzZXMgYSBzaWduaWZpY2FudCBwZXJmb21hbmNlIGRyb3AgZm9yCj4g
-Pj4+PiB3b3JrbG9hZHMgdGhhdCBtYWtlIHVzZSBvZiByZHRzYy4KPiA+Pj4+Cj4gPj4+PiBPbmUg
-b3B0aW9uIHRvIGF2b2lkIHRoZSBUU0Mgb3B0aW9uIGlzIHRvIHJ1biBkb21VcyB3aXRoIHRzY19t
-b2RlPW5hdGl2ZS4KPiA+Pj4+IFRoaXMgaGFzIHRoZSBkcmF3YmFjayB0aGF0IG1pZ3JhdGluZyBh
-IGRvbVUgZnJvbSBhICIyLjNHSHoiIGNsYXNzIGhvc3QKPiA+Pj4+IHRvIGEgIjIuNEdIeiIgY2xh
-c3MgaG9zdCBtYXkgY2hhbmdlIHRoZSByYXRlIGF0IHdpY2ggdGhlIFRTQyBjb3VudGVyCj4gPj4+
-PiBpbmNyZWFzZXMsIHRoZSBkb21VIG1heSBub3QgYmUgcHJlcGFyZWQgZm9yIHRoYXQuCj4gPj4+
-Pgo+ID4+Pj4gV2l0aCB0aGUgbmV3IG9wdGlvbiB0aGUgaG9zdCBhZG1pbiBjYW4gZGVjaWRlIGhv
-dyBhIGRvbVUgc2hvdWxkIGJlaGF2ZQo+ID4+Pj4gd2hlbiBpdCBpcyBtaWdyYXRlZCBhY3Jvc3Mg
-c3lzdGVtcyBvZiB0aGUgc2FtZSBjbGFzcy4gU2luY2UgdGhlcmUgaXMKPiA+Pj4+IGFsd2F5cyBz
-b21lIGppdHRlciB3aGVuIFhlbiBjYWxpYnJhdGVzIHRoZSBjcHVfa2h6IHZhbHVlLCBhbGwgaG9z
-dHMgb2YKPiA+Pj4+IHRoZSBzYW1lIGNsYXNzIHdpbGwgbW9zdCBsaWtlbHkgaGF2ZSBzbGlnaHRs
-eSBkaWZmZXJlbnQgdmFsdWVzLiBBcyBhCj4gPj4+PiByZXN1bHQgdlRTQyBlbXVsYXRpb24gaXMg
-dW5hdm9pZGFibGUuIERhdGEgY29sbGVjdGVkIGR1cmluZyB0aGUgaW5jaWRlbnQKPiA+Pj4+IHdo
-aWNoIHRyaWdnZXJlZCB0aGlzIGNoYW5nZSBzaG93ZWQgYSBqaXR0ZXIgb2YgdXAgdG8gMjAwIEtI
-eiBhY3Jvc3MKPiA+Pj4+IHN5c3RlbXMgb2YgdGhlIHNhbWUgY2xhc3MuCj4gPj4+Pgo+ID4+Pj4g
-RXhpc3RpbmcgcGFkZGluZyBmaWVsZHMgYXJlIHJldXNlZCB0byBzdG9yZSB2dHNjX2toel90b2xl
-cmFuY2UgYXMgdTE2Lgo+ID4+Pj4KPiA+Pj4gWy4uLl0KPiA+Pj4+IGluZGV4IDJjMWE2ZTE0MjIu
-LjBiMzYyNjVlNGYgMTAwNjQ0Cj4gPj4+PiAtLS0gYS9kb2NzL21hbi94bC5jZmcucG9kLjUuaW4K
-PiA+Pj4+ICsrKyBiL2RvY3MvbWFuL3hsLmNmZy5wb2QuNS5pbgo+ID4+Pj4gQEAgLTE4OTEsNiAr
-MTg5MSwxNiBAQCBkZXRlcm1pbmVkIGluIGEgc2ltaWxhciB3YXkgdG8gdGhhdCBvZiBCPGRlZmF1
-bHQ+IFRTQyBtb2RlLgo+ID4+Pj4gIAo+ID4+Pj4gIFBsZWFzZSBzZWUgQjx4ZW4tdHNjbW9kZSg3
-KT4gZm9yIG1vcmUgaW5mb3JtYXRpb24gb24gdGhpcyBvcHRpb24uCj4gPj4+PiAgCj4gPj4+PiAr
-PWl0ZW0gQjx2dHNjX3RvbGVyYW5jZV9raHo9IktIWiI+Cj4gPj4+PiArCj4gPj4+PiArQjwoeDg2
-IG9ubHksIHJlbGV2YW50IG9ubHkgZm9yIHRzY19tb2RlPWRlZmF1bHQpPgo+ID4+Pj4gK1doZW4g
-YSBkb21VIGlzIHN0YXJ0ZWQsIHRoZSBDUFUgZnJlcXVlbmN5IG9mIHRoZSBob3N0IGlzIHVzZWQg
-YnkgdGhlIGRvbVUgZm9yCj4gPj4+PiArVFNDIHJlbGF0ZWQgdGltZSBtZWFzdXJlbWVudC4gT25j
-ZSB0aGUgZG9tVSBpcyBlaXRoZXIgbWlncmF0ZWQgb3IKPiA+Pj4+ICtzYXZlZC9yZXN0b3JlZCBv
-biBhbm90aGVyIGhvc3QgdGhhdCBDUFUgZnJlcXVlbmN5IGhhcyB0byBiZSBlbXVsYXRlZCB0byBh
-dm9pZAo+ID4+Pj4gK3RpbWVkcmlmdC4gVG8gYXZvaWQgdGhlIHBlcmZvcm1hbmNlIHBlbmFsdHkg
-b2YgdGhlIFRTQyBlbXVsYXRpb24sIGFsbG93IGEKPiA+Pj4+ICtjZXJ0YWluIGFtb3VudCBvZiBq
-aXR0ZXIgb2YgdGhlIG1lYXN1cmVkIENQVSBmcmVxdWVuY3kgb24gdGhlIGhvc3RzIHRoZSBkb21V
-Cj4gPj4+PiAraXMgc3VwcG9zZWQgdG8gcnVuIG9uLgo+ID4+Pgo+ID4+PiAiRGVmYXVsdCB2YWx1
-ZSBpcyAwLCBpLmUuIG5vIHRvbGVyYW5jZSIuCj4gPj4+Cj4gPj4+IENhbiB3ZSBnZXQgYW4gYWdy
-ZWVtZW50IG9uIHdoZXRoZXIgdGhpcyBpZGVhIHRoZSByaWdodCBhcHByb2FjaCBpbgo+ID4+PiBn
-ZW5lcmFsIGJlZm9yZSBJIGRvIGRldGFpbCByZXZpZXc/Cj4gPj4KPiA+PiBJJ20gbm90IHN1cGVy
-LWZhbWlsaWFyIHdpdGggdGhpcyBhcmVhLCBidXQgbG9va2luZyBmcm9tIHRoZSBvdXRzaWRlIEkK
-PiA+PiB0aGluayBPbGFmJ3MgYXBwcm9hY2ggKGhhdmluZyBhICJ0b2xlcmFuY2UiIGZvciBlcXVp
-dmFsZW5jZSkgbWFrZXMKPiA+PiBzZW5zZS4gIENhbid0IGNvbW1lbnQgb24gd2hhdCBraW5kIG9m
-IGEgaHlwZXJjYWxsIGl0IHNob3VsZCBiZS4KPiA+Pgo+ID4gCj4gPiBJIGhhdmUgYSByb3VnaCBp
-ZGVhIGhvdyB0aGUgY29kZSBzaG91bGQgbG9vayBsaWtlIC0tIHRoZSBwYXRjaCBpbiBpdHMKPiA+
-IGN1cnJlbnQgZm9ybSBsb29rcyBtb3N0bHkgT0ssIGJ1dCBub3Qgc3VyZSBpZiB0aGlzIGFwcHJv
-YWNoIGluIGdlbmVyYWwKPiA+IGlzIGZ1dHVyZSBwcm9vZi4KPiAKPiBXaGF0IGRvIHlvdSBtZWFu
-PyAgQW5kIGRvIHlvdSBoYXZlIGFuIGlkZWEgZm9yIGEgYmV0dGVyIHdheSB0byBzb2x2ZSB0aGUK
-PiBwcm9ibGVtPyAgT3IgZG8geW91IHRoaW5rIGl0J3Mgbm90IGEgdmVyeSBiaWcgcHJvYmxlbT8K
-CldoZXRoZXIgaW50cm9kdWNpbmcgdGhpcyBzcGVjaWFsIHBhcmFtZXRlciBpcyBmdXR1cmUgcHJv
-b2YsIGkuZS4gaXQKd29uJ3QgY29tZSBiYWNrIGFuZCBiaXRlIHVzIGJpZyB0aW1lLiBJIGRvbid0
-IGhhdmUgYmV0dGVyIGlkZWEgb24Kc29sdmluZyB0aGlzIHByb2JsZW0uCgpXZWkuCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-443120996-1522257343=:15200
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Wed, 28 Mar 2018, George Dunlap wrote:
+> On 03/28/2018 02:49 PM, Wei Liu wrote:
+> > On Wed, Mar 28, 2018 at 02:33:37PM +0100, Roger Pau Monné wrote:
+> >> Hello,
+> >>
+> >> According to the contribution guidelines document [0] the coverity
+> >> database of issues is private, which makes it hard for new people to
+> >> see issues. IMO it makes no sense to keep the result private anymore:
+> >>
+> >>  - They have been audited for plenty of time by different people
+> >>    that currently has access to the database.
+> >>  - Anyone can reproduce the same results by forking Xen on github and
+> >>    sending a build to coverity for analysis AFAICT.
+> >>
+> >> On the plus side, having the database open would allow us the
+> >> following:
+> >>
+> >>  - Coverity reports could be sent to xen-devel, so anyone could pick
+> >>    and fix new issues.
+> >>  - Newcomers could use coverity in order to find small size tasks to
+> >>    work on.
+> >>
+> > 
+> > +1 for making it public.
+> > 
+> > It used to be the case that people had access manually forward issues to
+> > new comers. It was not fun for anyone involved.
+> > 
+> > The way the current policy is written makes it only theoretically
+> > possible for new comers to access the results (note the signed by PGP
+> > key in a part of the strong set of web of trust), but is more likely to
+> > be impossible in practice.
+> 
+> NB that as I understand the term, "strong set" has a meaning generally
+> the opposite of what you'd expect in this context: that is, trusting the
+> "strong set", by including everyone that can be transitively included,
+> is relatively weak from a security point of view.
+> 
+> For anyone outside of old-school hacking communities (like Debian,
+> Linux, &c), this is likely to be a significant barrier to entry.  On the
+> other hand, the more communities insist on this sort of thing, the less
+> of a barrier it will become. :-)
+> 
+> In any case, I think the barrier is moot at this point, and should be
+> taken down.
+
+I started a thread recently among committers and the agreement was to
+open up the results. Andrew volunteered but the one time I reminded him
+to do it on IRC, Coverity was offline. Please go ahead and open up the
+results now.
+--8323329-443120996-1522257343=:15200
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-443120996-1522257343=:15200--
