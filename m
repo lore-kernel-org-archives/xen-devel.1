@@ -1,15 +1,23 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [libvirt test] 121310: tolerable all pass - PUSHED
-Date: Wed, 28 Mar 2018 10:10:33 +0000
-Message-ID: <osstest-121310-mainreport@xen.org>
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+Subject: Re: [PATCH v4 2/2] drm/xen-front: Add support for Xen
+ PV display frontend
+Date: Wed, 28 Mar 2018 13:29:46 +0300
+Message-ID: <32481355-27f6-695b-c6c1-8113ea268a33__19710.328061092$1522232932$gmane$org@gmail.com>
+References: <1522219661-26827-1-git-send-email-andr2000@gmail.com>
+ <1522219661-26827-3-git-send-email-andr2000@gmail.com>
+ <20180328074251.GE14155@phenom.ffwll.local>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3819516252839670291=="
+Content-Type: multipart/mixed; boundary="------------6AD22DBA8A9729784F0E8A7D"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=u9ej=gs=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1f182Q-00072d-O9
- for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 10:10:38 +0000
+ <srs0=3iov=gs=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1f18L2-0007we-6D
+ for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 10:29:52 +0000
+Received: by mail-lf0-x233.google.com with SMTP id o102-v6so2724937lfg.8
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Mar 2018 03:29:50 -0700 (PDT)
+In-Reply-To: <20180328074251.GE14155@phenom.ffwll.local>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,108 +26,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: daniel.vetter@intel.com
+Cc: jgross@suse.com, airlied@linux.ie, gustavo@padovan.org, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, seanpaul@chromium.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============3819516252839670291==
-Content-Type: text/plain
+This is a multi-part message in MIME format.
+--------------6AD22DBA8A9729784F0E8A7D
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-flight 121310 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/121310/
+Hi, Daniel!
 
-Failures :-/ but no regressions.
+I just noticed I have missed one change in the patch:
+the below must be static.
 
-Tests which did not succeed, but are not blocking:
- test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 121283
- test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 121283
- test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 121283
- test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
- test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt     14 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
- test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-qcow2 12 migrate-support-check        fail never pass
- test-arm64-arm64-libvirt-qcow2 13 saverestore-support-check    fail never pass
+On 03/28/2018 10:42 AM, Daniel Vetter wrote:
+> +enum drm_mode_status display_mode_valid(struct drm_crtc *crtc,
+> +		const struct drm_display_mode *mode)
+> +{
+> +	struct xen_drm_front_drm_pipeline *pipeline =
+> +			container_of(crtc,
+Could you please amend the patch in attachment
+when merging, so I don't resend?
 
-version targeted for testing:
- libvirt              5bb07527c11a6123e044a5dfc48bdeccee144994
-baseline version:
- libvirt              5123e6ed1fa9f833e46be4fc0d0b5c91bb6bc355
+Thank you in advance,
+Oleksandr
 
-Last test of basis   121283  2018-03-26 04:22:01 Z    2 days
-Testing same since   121310  2018-03-27 06:52:42 Z    1 days    1 attempts
+--------------6AD22DBA8A9729784F0E8A7D
+Content-Type: text/x-patch;
+ name="0001-drm-xen-front-Make-display_mode_valid-static.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="0001-drm-xen-front-Make-display_mode_valid-static.patch"
 
-------------------------------------------------------------
-People who touched revisions under test:
-  John Ferlan <jferlan@redhat.com>
-  Ján Tomko <jtomko@redhat.com>
+>From 3a82d76bd3d954056b760e5d1d09e2f96a2786ef Mon Sep 17 00:00:00 2001
+From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Date: Wed, 28 Mar 2018 13:24:04 +0300
+Subject: [PATCH] drm/xen-front: Make display_mode_valid static
 
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-armhf-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-armhf-armhf-libvirt-xsm                                 pass    
- test-amd64-i386-libvirt-xsm                                  pass    
- test-amd64-amd64-libvirt                                     pass    
- test-arm64-arm64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-i386-libvirt                                      pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-i386-libvirt-pair                                 pass    
- test-arm64-arm64-libvirt-qcow2                               pass    
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-amd64-libvirt-vhd                                 pass    
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+---
+ drivers/gpu/drm/xen/xen_drm_front_kms.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/xen/xen_drm_front_kms.c b/drivers/gpu/drm/xen/xen_drm_front_kms.c
+index 545049dfaf0a..bd676be5a0db 100644
+--- a/drivers/gpu/drm/xen/xen_drm_front_kms.c
++++ b/drivers/gpu/drm/xen/xen_drm_front_kms.c
+@@ -273,7 +273,7 @@ static void display_update(struct drm_simple_display_pipe *pipe,
+ 	drm_dev_exit(idx);
+ }
+ 
+-enum drm_mode_status display_mode_valid(struct drm_crtc *crtc,
++static enum drm_mode_status display_mode_valid(struct drm_crtc *crtc,
+ 		const struct drm_display_mode *mode)
+ {
+ 	struct xen_drm_front_drm_pipeline *pipeline =
+-- 
+2.7.4
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/libvirt.git
-   5123e6ed1f..5bb07527c1  5bb07527c11a6123e044a5dfc48bdeccee144994 -> xen-tested-master
-
-
---===============3819516252839670291==
+--------------6AD22DBA8A9729784F0E8A7D
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -129,4 +96,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============3819516252839670291==--
+--------------6AD22DBA8A9729784F0E8A7D--
