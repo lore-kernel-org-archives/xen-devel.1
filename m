@@ -1,14 +1,18 @@
 From: "Jan Beulich" <jbeulich@suse.com>
-Subject: Re: [PATCH] x86/alt: Fix wrong usage of as_max in
- OLDINSTR_2
-Date: Tue, 27 Mar 2018 23:52:56 -0600
-Message-ID: <5ABB2DB8020000780012BABC@prv1-mh.provo.novell.com>
-References: <dbcffebe-a10d-4c84-bcb5-44b82d5a9a8e@default>
+Subject: Re: [PATCH] Config.mk: remove CONFIG_TESTS
+Date: Wed, 28 Mar 2018 00:02:11 -0600
+Message-ID: <5ABB2FE3020000780012BACC@prv1-mh.provo.novell.com>
+References: <20180327185040.8586-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <dbcffebe-a10d-4c84-bcb5-44b82d5a9a8e@default>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=nfe5=gs=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1f14A4-0004PT-Ji
+ for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 06:02:16 +0000
+In-Reply-To: <20180327185040.8586-1-wei.liu2@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -18,16 +22,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: zhenzhong.duan@oracle.com
-Cc: wei.liu2@citrix.com, andrew.cooper3@citrix.com, srinivas.eeda@oracle.com, boris.ostrovsky@oracle.com, xen-devel@lists.xen.org, roger.pau@citrix.com
+To: wei.liu2@citrix.com
+Cc: xen-devel@lists.xenproject.org, Ian.Jackson@eu.citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IFpoZW56aG9uZyBEdWFuIDx6aGVuemhvbmcuZHVhbkBvcmFjbGUuY29tPiAwMy8yOC8xOCA0
-OjAzIEFNID4+Pgo+V2hlbiBBTFRFUk5BVElWRV8yIGlzIHVzZWQsIHdlIHNlZSBiZWxvdyBlcnJv
-ciBkdXJpbmcgYnVpbGQuCj4iZXJyb3I6IG1hY3JvICJhc19tYXgiIHJlcXVpcmVzIDIgYXJndW1l
-bnRzLCBidXQgb25seSAxIGdpdmVuIgo+Cj5TaWduZWQtb2ZmLWJ5OiBaaGVuemhvbmcgRHVhbiA8
-emhlbnpob25nLmR1YW5Ab3JhY2xlLmNvbT4KClNlZSAiW1BBVENIIHYyIDIvNl0geDg2OiBmaXgg
-T0xESU5TVFJfMigpIiBzZW50IG9uIE1hciAxM3RoLgoKSmFuCgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+IDAzLzI3LzE4IDg6NTIgUE0gPj4+Cj4t
+LS0gYS9Db25maWcubWsKPisrKyBiL0NvbmZpZy5tawo+QEAgLTMwMSw4ICszMDEsMyBAQCBRRU1V
+X1RSQURJVElPTkFMX0xPQyA/PSAkKGNhbGwgb3IsJCh3aWxkY2FyZCAkKFFFTVVfVFJBRElUSU9O
+QUxfSU5UUkVFKSksXAogPgo+UUVNVV9VUFNUUkVBTV9MT0MgPz0gJChjYWxsIG9yLCQod2lsZGNh
+cmQgJChRRU1VX1VQU1RSRUFNX0lOVFJFRSkpLFwKPiQoUUVNVV9VUFNUUkVBTV9VUkwpKQo+LQo+
+LSMgU2hvcnQgYW5zd2VyIC0tIGRvIG5vdCBlbmFibGUgdGhpcyB1bmxlc3MgeW91IGtub3cgd2hh
+dCB5b3UgYXJlCj4tIyBkb2luZyBhbmQgYXJlIHByZXBhcmVkIGZvciBzb21lIHBhaW4uCj4tCj4t
+Q09ORklHX1RFU1RTICAgICAgID89IHkKCk9uIG9uZSBoYW5kIHRoaXMgc3VnZ2VzdHMgdGhhdCB0
+ZXN0cyB3ZXJlIGJ1aWx0IGFscmVhZHkgYW55d2F5LCB1bmxlc3MKc29tZW9uZSBjaGFuZ2VkIHRo
+YXQgbGluZSBsb2NhbGx5IChhbmQgb3RoZXIgdGhhbiB3aGF0IHRoZSBjb21tZW50CnN1Z2dlc3Rz
+KS4gT3RvaCBJIGtub3cgdGhhdCB0aGUgeDg2IGVtdWxhdG9yIHRlc3QgZGlkbid0IGdldCBidWls
+dCBieQpkZWZhdWx0IHNvIGZhci4gVGhpcyBuZWVkcyB0byByZW1haW4gdGhhdCB3YXksIGFzIGEg
+ZmFyIG5ld2VyIGdjYyB0aGFuCndoYXQgd2UgZG9jdW1lbnQgaXMgcmVxdWlyZWQgdG8gc3VjY2Vz
+c2Z1bGx5IGJ1aWxkIHRoaXMgc3ViZGlyLiBDYW4geW91CmNvbmZpcm0gdGhpcyB0byBiZSB0aGUg
+Y2FzZSB3aXRoIHlvdXIgY2hhbmdlLCBhcyBJIGNhbid0IGRlcml2ZSBob3cgaXRzCmJ1aWxkaW5n
+IGlzIGF2b2lkZWQgKGFzIHNhaWQsIHdpdGggb3Igd2l0aG91dCB5b3VyIGNoYW5nZSk/CgpKYW4K
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
