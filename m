@@ -1,16 +1,28 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 121329: tolerable all pass -
- PUSHED
-Date: Wed, 28 Mar 2018 15:17:23 +0000
-Message-ID: <osstest-121329-mainreport@xen.org>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: possible I/O emulation state machine issue
+Date: Wed, 28 Mar 2018 09:32:56 -0600
+Message-ID: <5ABBD1C802000078001B6DF8@prv1-mh.provo.novell.com>
+References: <5AB3D5E802000078001B530F@prv-mh.provo.novell.com>
+ <9038fd3e-6726-0418-8ce6-e023efb9f012@citrix.com>
+ <5AB4BB1E02000078001B5633@gwmail.emea.novell.com>
+ <cee96de9e1e94475bc55b3add0f14a44@AMSPEX02CL03.citrite.net>
+ <5AB4F4A102000078001B5815@gwmail.emea.novell.com>
+ <45c762bb12af4d3289060a452a58e8ec@AMSPEX02CL03.citrite.net>
+ <5AB8CE9602000078001B5F5F@prv1-mh.provo.novell.com>
+ <af3e3bd283ec4ad89fc8bcfc956d3f1d@AMSPEX02CL03.citrite.net>
+ <5ABBBDE302000078001B6D56@prv1-mh.provo.novell.com>
+ <b092e8586b9c45cb82a633c057aee358@AMSPEX02CL03.citrite.net>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7494089433664884766=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=u9ej=gs=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1f1CpJ-0006FK-Td
- for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 15:17:25 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=nfe5=gs=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1f1D4Q-0007Yl-Nh
+ for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 15:33:02 +0000
+In-Reply-To: <b092e8586b9c45cb82a633c057aee358@AMSPEX02CL03.citrite.net>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,84 +31,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Paul Durrant <Paul.Durrant@citrix.com>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7494089433664884766==
-Content-Type: text/plain
-
-flight 121329 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/121329/
-
-Failures :-/ but no regressions.
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  7fbb096bf345a4a441d595ee2efa032517e05c08
-baseline version:
- xen                  73a10cb91a4e5c6f7049a78a12dcdea3460f0bd1
-
-Last test of basis   121319  2018-03-27 23:01:15 Z    0 days
-Testing same since   121329  2018-03-28 13:01:11 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Anthony PERARD <anthony.perard@citrix.com>
-  George Dunlap <george.dunlap@citrix.com>
-  Ian Jackson <ian.jackson@eu.citrix.com>
-  Juergen Gross <jgross@suse.com>
-  Razvan Cojocaru <rcojocaru@bitdefender.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   73a10cb91a..7fbb096bf3  7fbb096bf345a4a441d595ee2efa032517e05c08 -> smoke
-
-
---===============7494089433664884766==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7494089433664884766==--
+Pj4+IE9uIDI4LjAzLjE4IGF0IDE2OjIwLCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
+Ogo+PiAgLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0KPj4gRnJvbTogSmFuIEJldWxpY2ggW21h
+aWx0bzpKQmV1bGljaEBzdXNlLmNvbV0KPj4gU2VudDogMjggTWFyY2ggMjAxOCAxNTowOAo+PiBU
+bzogUGF1bCBEdXJyYW50IDxQYXVsLkR1cnJhbnRAY2l0cml4LmNvbT4KPj4gQ2M6IEFuZHJldyBD
+b29wZXIgPEFuZHJldy5Db29wZXIzQGNpdHJpeC5jb20+OyB4ZW4tZGV2ZWwgPHhlbi0KPj4gZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmc+Cj4+IFN1YmplY3Q6IFJFOiBwb3NzaWJsZSBJL08gZW11
+bGF0aW9uIHN0YXRlIG1hY2hpbmUgaXNzdWUKPj4gCj4+ID4+PiBPbiAyOC4wMy4xOCBhdCAxNTo0
+OCwgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPiB3cm90ZToKPj4gPj4gRnJvbTogSmFuIEJldWxp
+Y2ggW21haWx0bzpKQmV1bGljaEBzdXNlLmNvbV0KPj4gPj4gU2VudDogMjYgTWFyY2ggMjAxOCAw
+OTo0Mwo+PiA+Pgo+PiA+PiBBZnRlciBoYXZpbmcgYWRkZWQgSS9PIGVtdWxhdGlvbiBzdGF0ZSBj
+aGVja3MgYXQgdGhlIGJlZ2lubmluZyBvZgo+PiA+PiB2bXhfdm1leGl0X2hhbmRsZXIoKSBhcyB3
+ZWxsIGFzIHZlcnkgZWFybHkgYW5kIHZlcnkgbGF0ZSBpbgo+PiA+PiB2bXhfdm1lbnRlcl9oZWxw
+ZXIoKSwgaXQgd2FzIHRoZSBvbmUgZWFybHkgaW4KPj4gPj4gdm14X3ZtZW50ZXJfaGVscGVyKCkg
+d2hpY2ggdHJpZ2dlcmVkIChzdGlsbCBzZWVpbmcgdGhlIFZHQSBwb3J0Cj4+ID4+IGFjY2VzcyBp
+biBTVEFURV9JT1JFU1BfUkVBRFkgd2hpbGUgdmlvLT5pb19jb21wbGV0aW9uIHdhcwo+PiA+PiBI
+Vk1JT19ub19jb21wbGV0aW9uKS4KPj4gPj4KPj4gPgo+PiA+IFRoZSBzYW1lIHRlc3QgaXMgdXNl
+ZCAoaHZtX3ZjcHVfaW9fbmVlZF9jb21wbGV0aW9uKCkpIGluIGhhbmRsZV9waW8oKQo+PiB0byBz
+ZXQKPj4gPiB0aGUgY29tcGxldGlvbiBoYW5kbGVyIGFuZCBpbiBodm1faW9fYXNzaXN0KCkgdG8g
+c2V0IHRoZSBzdGF0ZSB0bwo+PiA+IElPUkVTUF9SRUFEWS4gVGhlIG9ubHkgcGxhY2UgdGhlIGlu
+dGVybmFsIHN0YXRlIGdldHMgc2V0IHRvIElPUkVTUF9SRUFEWQo+PiBpcwo+PiA+IGluIGh2bV9p
+b19hc3Npc3QoKSBzbyB0aGUgZmFjdCB0aGF0IHlvdSBzZWUgYSBkaXNwYXJpdHkgYmV0d2VlbiB0
+aGUgc3RhdGUKPj4gYW5kCj4+ID4gdGhlIGNvbXBsZXRpb24gaGFuZGxlciBpcyB2ZXJ5IG9kZC4g
+UGVyaGFwcyBpdCBtaWdodCBiZSB3b3J0aCBhZGRpbmcgYW4KPj4gPiBBU1NFUlQgaW50byBodm1f
+aW9fYXNzaXN0KCkgdG8gZW5zdXJlIHRoZXJlIHJlYWxseSBpcyBhIGNvbXBsZXRpb24gaGFuZGxl
+cgo+PiBpbgo+PiA+IHBsYWNlIGJlZm9yZSBzZXR0aW5nIHRoZSBpbnRlcm5hbCBzdGF0ZSB0byBJ
+T1JFU1BfUkVBRFkgd291bGQgYmUKPj4gd29ydGh3aGlsZS4KPj4gCj4+IEZ1cnRoZXIgZXh0ZW5k
+ZWQgbG9nZ2luZyBhcHBlYXJzIHRvIGNvbmZpcm0gdGhlcmUncyBubyBpc3N1ZSBpbiB0aGF0Cj4+
+IGRpcmVjdGlvbi4gV2hpbGUgSSBoYXZlbid0IGJlZW4gYWJsZSB0byBkcmF3IHVzZWZ1bCBjb25j
+bHVzaW9ucyBmcm9tCj4+IHRoYXQgZnVydGhlciBsb2dnaW5nICh0b3dhcmRzIGEgZml4KSwgdGhl
+IGV4YWN0IGNvbmRpdGlvbnMgd2hlbiB0aGlzCj4+IHRyaWdnZXJzIGhhdmUgYmVjb21lIG1vcmUg
+Y2xlYXI6IEl0J3MgdGhlIGxhc3QgaXRlcmF0aW9uIG9mIGEgUkVQIE9VVFNXCj4+IHRvIGVpdGhl
+ciBvZiB0aGUgdHdvIFZHQSBwb3J0IHJhbmdlcyBzdGR2Z2EuYyBpbnRlcmNlcHRzLCBhbmQgSSd2
+ZQo+PiBiZWd1biB0byB0aGluayBpdCBtaWdodCBiZSBjb25uZWN0ZWQgdG8gdGhlIHdheSB0aGUg
+aW5zbiBlbXVsYXRvcgo+PiBkZWFscyB3aXRoIHN1Y2ggc2luZ2xlLWl0ZXJhdGlvbiBvcGVyYXRp
+b25zIChicmVha2luZyB0aGVtIHVwIGludG8gYQo+PiBtZW1vcnkgcmVhZCBhbmQgYW4gSS9PIHdy
+aXRlIGluIHRoZSBjYXNlIGhlcmUpLgo+PiAKPiAKPiBJdCBsb29rcyB0byBtZSBsaWtlICh1bmxl
+c3MgdGhlcmUncyBhIHBhZ2UgYm91bmRhcnkgaXNzdWUpIHRoZSByZXAgb3V0c3cgaXMgCj4gcHJv
+YmFibHkgb25seSBiZWluZyBicm9rZW4gdXAgYmVjYXVzZSBvZiB0aGUgc3RkdmdhIGNhY2hpbmcg
+KHdoaWNoIHdpbGwgCj4gcmV0dXJuICd1bmhhbmRsZWFibGUnIGluIHRoZSBtaWRkbGUgb2YgdGhl
+IGludGVyY2VwdCBsb29wIGFuZCB0aHVzIGZvcmNlIGEgCj4gdHJ1bmNhdGlvbikuIElmIHlvdSBk
+aXNhYmxlIGNhY2hpbmcgYW5kIGxldCB0aGUgZnVsbCByZXAgaW9yZXEgbWFrZSBpdCBvdXQgdG8g
+Cj4gUUVNVSwgZG9lcyB0aGUgaXNzdWUgZ28gYXdheT8KCkkndmUgc2VudCBoaW0gYSBwYXRjaCBz
+aW1wbHkgc3VwcHJlc3NpbmcgdGhlIHJlZ2lzdHJhdGlvbiBvZiB0aGUgUElPCmludGVyY2VwdCBm
+dW5jdGlvbiwgYnV0IG15IFhURiBjb2RlIGRvZXNuJ3QgYmVoYXZlIGFueSBkaWZmZXJlbnQKd2l0
+aCB0aGF0LiBJIHNob3VsZCBzYXkgdGhvdWdoIHRoYXQgKHdpdGhvdXQga25vd2luZyB5ZXQgd2hl
+dGhlcgp0aGF0J3MgYWxzbyB0aGUgY2FzZSBvbiB0aGF0IFdpbmRvd3MgdmVyc2lvbikgbXkgY29k
+ZSBkb2VzIHRoZQpSRVAgT1VUU1cgZnJvbSB2aWRlbyBtZW1vcnksIHdoaWNoIGNhdXNlcyB0aGUg
+c3RyaW5nIG9wZXJhdGlvbgp0byBiZSBzcGxpdCBpbmRlcGVuZGVudCBvZiB3aGF0IHN0ZHZnYS5j
+IGRvZXMgKHNlZSB0aGUgYm90dG9tIG9mCmh2bWVtdWxfcmVwX291dHMoKSkuIFdpdGhvdXQgZG9p
+bmcgdGhhdCwgSSBoYWRuJ3QgYmVlbiBhYmxlIHRvCm9ic2VydmUgYW55dGhpbmcgdW51c3VhbCBh
+dCBhbGwsIGkuZS4gbm9uZSBvZiB0aGUgZG96ZW4gb3Igc28KcHJpbnRrKClzIEkgaGFkIGFkZGVk
+IGV2ZXIgdHJpZ2dlcmVkLgoKSmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
