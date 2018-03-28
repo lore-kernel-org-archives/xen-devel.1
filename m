@@ -1,16 +1,26 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: [PATCH] correct maintainers file
-Date: Wed, 28 Mar 2018 11:51:14 +0200
-Message-ID: <20180328095114.7331-1-jgross@suse.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: [PATCH] correct maintainers file
+Date: Wed, 28 Mar 2018 12:55:30 +0300
+Message-ID: <241f4508-86ce-bdbf-6529-369ef8f33c44@bitdefender.com>
+References: <20180328095114.7331-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=v6x5=gs=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1f17jk-0005P3-TR
- for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 09:51:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=i1al=gs=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1f17nq-0005ZG-Iq
+ for xen-devel@lists.xenproject.org; Wed, 28 Mar 2018 09:55:34 +0000
+Received: from mx-sr.buh.bitdefender.com (mx-sr.buh.bitdefender.biz
+ [10.17.80.103])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id 4630C308627A
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Mar 2018 14:11:32 +0300 (EEST)
+Received: from smtp02.buh.bitdefender.net (smtp.bitdefender.biz [10.17.80.76])
+ by mx-sr.buh.bitdefender.com (Postfix) with ESMTP id 245197FC7B
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Mar 2018 12:55:32 +0300 (EEST)
+In-Reply-To: <20180328095114.7331-1-jgross@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,20 +29,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, sstabellini@kernel.org, wei.liu2@citrix.com, rcojocaru@bitdefender.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, tamas@tklengyel.com, jbeulich@suse.com
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org, wei.liu2@citrix.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, tamas@tklengyel.com, jbeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
-Q29ycmVjdCB3cm9uZyBlbnRyeSBpbiBNQUlOVEFJTkVSUyBmaWxlLgoKU2lnbmVkLW9mZi1ieTog
-SnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgotLS0KIE1BSU5UQUlORVJTIHwgMiArLQog
-MSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0
-IGEvTUFJTlRBSU5FUlMgYi9NQUlOVEFJTkVSUwppbmRleCBlYWNlMDllZDIyLi5iYjA0OWM4NjY0
-IDEwMDY0NAotLS0gYS9NQUlOVEFJTkVSUworKysgYi9NQUlOVEFJTkVSUwpAQCAtNDE2LDcgKzQx
-Niw3IEBAIEY6CXhlbi9hcmNoLyovdm1fZXZlbnQuYwogRjoJeGVuL2FyY2gvYXJtL21lbV9hY2Nl
-c3MuYwogRjoJeGVuL2FyY2gveDg2L21tL21lbV9hY2Nlc3MuYwogRjoJeGVuL2FyY2gveDg2L2h2
-bS9tb25pdG9yLmMKLUY6CXhlbi9hcmNoL3g4OC9odm0vdm1fZXZlbnQuYworRjoJeGVuL2FyY2gv
-eDg2L2h2bS92bV9ldmVudC5jCiBGOgl4ZW4vY29tbW9uL21lbV9hY2Nlc3MuYwogRjoJeGVuL2Nv
-bW1vbi9tb25pdG9yLmMKIEY6CXhlbi9jb21tb24vdm1fZXZlbnQuYwotLSAKMi4xMy42CgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMDMvMjgvMjAxOCAxMjo1MSBQTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBDb3JyZWN0IHdy
+b25nIGVudHJ5IGluIE1BSU5UQUlORVJTIGZpbGUuCj4gCj4gU2lnbmVkLW9mZi1ieTogSnVlcmdl
+biBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgo+IC0tLQo+ICBNQUlOVEFJTkVSUyB8IDIgKy0KPiAg
+MSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCj4gCj4gZGlmZiAt
+LWdpdCBhL01BSU5UQUlORVJTIGIvTUFJTlRBSU5FUlMKPiBpbmRleCBlYWNlMDllZDIyLi5iYjA0
+OWM4NjY0IDEwMDY0NAo+IC0tLSBhL01BSU5UQUlORVJTCj4gKysrIGIvTUFJTlRBSU5FUlMKPiBA
+QCAtNDE2LDcgKzQxNiw3IEBAIEY6CXhlbi9hcmNoLyovdm1fZXZlbnQuYwo+ICBGOgl4ZW4vYXJj
+aC9hcm0vbWVtX2FjY2Vzcy5jCj4gIEY6CXhlbi9hcmNoL3g4Ni9tbS9tZW1fYWNjZXNzLmMKPiAg
+RjoJeGVuL2FyY2gveDg2L2h2bS9tb25pdG9yLmMKPiAtRjoJeGVuL2FyY2gveDg4L2h2bS92bV9l
+dmVudC5jCj4gK0Y6CXhlbi9hcmNoL3g4Ni9odm0vdm1fZXZlbnQuYwo+ICBGOgl4ZW4vY29tbW9u
+L21lbV9hY2Nlc3MuYwo+ICBGOgl4ZW4vY29tbW9uL21vbml0b3IuYwo+ICBGOgl4ZW4vY29tbW9u
+L3ZtX2V2ZW50LmMKPiAKCkFja2VkLWJ5OiBSYXp2YW4gQ29qb2NhcnUgPHJjb2pvY2FydUBiaXRk
+ZWZlbmRlci5jb20+CgoKVGhhbmtzLApSYXp2YW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
