@@ -1,25 +1,18 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH v4 2/2] drm/xen-front: Add support for Xen
- PV display frontend
-Date: Thu, 29 Mar 2018 10:49:42 +0300
-Message-ID: <d5efc0d5-bfbc-9281-fb1e-3a09de3d43d9__2693.14310648969$1522309724$gmane$org@gmail.com>
-References: <1522219661-26827-1-git-send-email-andr2000@gmail.com>
- <1522219661-26827-3-git-send-email-andr2000@gmail.com>
- <20180328074251.GE14155@phenom.ffwll.local>
- <32481355-27f6-695b-c6c1-8113ea268a33@gmail.com>
- <20180329071748.GG3881@phenom.ffwll.local>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH RFC] x86/HVM: suppress I/O completion for port
+ output
+Date: Thu, 29 Mar 2018 01:52:08 -0600
+Message-ID: <5ABCB74802000078001B703F@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------0F431B0390EA6413AB0422ED"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=crdi=gt=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1f1SJg-0008Of-AG
- for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 07:49:48 +0000
-Received: by mail-wm0-x244.google.com with SMTP id r131so9706700wmb.2
- for <xen-devel@lists.xenproject.org>; Thu, 29 Mar 2018 00:49:46 -0700 (PDT)
-In-Reply-To: <20180329071748.GG3881@phenom.ffwll.local>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=fhp7=gt=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1f1SM2-0000Zd-1Q
+ for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 07:52:14 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,173 +21,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: daniel.vetter@intel.com, jgross@suse.com, konrad.wilk@oracle.com, airlied@linux.ie, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---------------0F431B0390EA6413AB0422ED
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-On 03/29/2018 10:17 AM, Daniel Vetter wrote:
-> On Wed, Mar 28, 2018 at 01:29:46PM +0300, Oleksandr Andrushchenko wrote:
->> Hi, Daniel!
->>
->> I just noticed I have missed one change in the patch:
->> the below must be static.
->>
->> On 03/28/2018 10:42 AM, Daniel Vetter wrote:
->>> +enum drm_mode_status display_mode_valid(struct drm_crtc *crtc,
->>> +		const struct drm_display_mode *mode)
->>> +{
->>> +	struct xen_drm_front_drm_pipeline *pipeline =
->>> +			container_of(crtc,
->> Could you please amend the patch in attachment
->> when merging, so I don't resend?
-> Merging is up to you, as soon as you have your commit rights.
-Thank you, meanwhile I'll need to rebase onto the latest drm-tip
-fixing 2 more minor issues (attached) and making the driver work after
-the API change [1]. So, I'll post v4 right after fd.o is back online
-with the v3..v4 diff to make review simpler
-> -Daniel
-Thank you,
-Oleksandr
->> Thank you in advance,
->> Oleksandr
->>  From 3a82d76bd3d954056b760e5d1d09e2f96a2786ef Mon Sep 17 00:00:00 2001
->> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
->> Date: Wed, 28 Mar 2018 13:24:04 +0300
->> Subject: [PATCH] drm/xen-front: Make display_mode_valid static
->>
->> Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
->> ---
->>   drivers/gpu/drm/xen/xen_drm_front_kms.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/drivers/gpu/drm/xen/xen_drm_front_kms.c b/drivers/gpu/drm/xen/xen_drm_front_kms.c
->> index 545049dfaf0a..bd676be5a0db 100644
->> --- a/drivers/gpu/drm/xen/xen_drm_front_kms.c
->> +++ b/drivers/gpu/drm/xen/xen_drm_front_kms.c
->> @@ -273,7 +273,7 @@ static void display_update(struct drm_simple_display_pipe *pipe,
->>   	drm_dev_exit(idx);
->>   }
->>   
->> -enum drm_mode_status display_mode_valid(struct drm_crtc *crtc,
->> +static enum drm_mode_status display_mode_valid(struct drm_crtc *crtc,
->>   		const struct drm_display_mode *mode)
->>   {
->>   	struct xen_drm_front_drm_pipeline *pipeline =
->> -- 
->> 2.7.4
->>
->> _______________________________________________
->> dri-devel mailing list
->> dri-devel@lists.freedesktop.org
->> https://lists.freedesktop.org/mailman/listinfo/dri-devel
->
-[1] 
-https://github.com/freedesktop/drm-misc/commit/0c9c7fd00e17907efb35697ecb9f2df39a0b536c
-
---------------0F431B0390EA6413AB0422ED
-Content-Type: text/x-patch;
- name="0001-drm-xen-front-Free-page-on-event-channel-error-path.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0001-drm-xen-front-Free-page-on-event-channel-error-path.pat";
- filename*1="ch"
-
->From e16847ef23d19106c6855951674624bfd37e4209 Mon Sep 17 00:00:00 2001
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Date: Thu, 29 Mar 2018 08:54:25 +0300
-Subject: [PATCH 1/2] drm/xen-front: Free page on event channel error path
-
-While creating an event channel a page was leaked in case
-of error. Fix this by freeing the page.
-
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
- drivers/gpu/drm/xen/xen_drm_front_evtchnl.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c b/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
-index e521785fd22b..02b6f3d9fe4c 100644
---- a/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
-@@ -186,8 +186,10 @@ static int evtchnl_alloc(struct xen_drm_front_info *front_info, int index,
- 				sring, XEN_PAGE_SIZE);
- 
- 		ret = xenbus_grant_ring(xb_dev, sring, 1, &gref);
--		if (ret < 0)
-+		if (ret < 0) {
-+			free_page(page);
- 			goto fail;
-+		}
- 
- 		handler = evtchnl_interrupt_ctrl;
- 	} else {
-@@ -195,8 +197,10 @@ static int evtchnl_alloc(struct xen_drm_front_info *front_info, int index,
- 
- 		ret = gnttab_grant_foreign_access(xb_dev->otherend_id,
- 				virt_to_gfn((void *)page), 0);
--		if (ret < 0)
-+		if (ret < 0) {
-+			free_page(page);
- 			goto fail;
-+		}
- 
- 		gref = ret;
- 		handler = evtchnl_interrupt_evt;
--- 
-2.7.4
-
-
---------------0F431B0390EA6413AB0422ED
-Content-Type: text/x-patch;
- name="0002-drm-xen-front-Align-documentation-title-w-other-driv.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0002-drm-xen-front-Align-documentation-title-w-other-driv.pa";
- filename*1="tch"
-
->From a6668b48003b46cd711f7e56faaf35dbad769c03 Mon Sep 17 00:00:00 2001
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Date: Thu, 29 Mar 2018 09:13:11 +0300
-Subject: [PATCH 2/2] drm/xen-front: Align documentation title w/ other drivers
-
-Align title of the documentation for the driver with the rest of the drivers,
-e.g. have drm/xen-front in front of the title.
-
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
- Documentation/gpu/xen-front.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/Documentation/gpu/xen-front.rst b/Documentation/gpu/xen-front.rst
-index 8188e03c9d23..009d942386c5 100644
---- a/Documentation/gpu/xen-front.rst
-+++ b/Documentation/gpu/xen-front.rst
-@@ -1,6 +1,6 @@
--====================================
--Xen para-virtualized frontend driver
--====================================
-+====================================================
-+ drm/xen-front Xen para-virtualized frontend driver
-+====================================================
- 
- This frontend driver implements Xen para-virtualized display
- according to the display protocol described at
--- 
-2.7.4
-
-
---------------0F431B0390EA6413AB0422ED
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------0F431B0390EA6413AB0422ED--
+V2UgZG9uJ3QgYnJlYWsgdXAgcG9ydCByZXF1ZXN0cyBpbiBjYXNlIHRoZXkgY3Jvc3MgZW11bGF0
+aW9uIGVudGl0eQpib3VuZGFyaWVzLCBhbmQgYSB3cml0ZSB0byBhbiBJL08gcG9ydCBpcyBuZWNl
+c3NhcmlseSB0aGUgbGFzdApvcGVyYXRpb24gb2YgYW4gaW5zdHJ1Y3Rpb24gaW5zdGFuY2UsIHNv
+IHRoZXJlJ3Mgbm8gbmVlZCB0byByZS1pbnZva2UKdGhlIGZ1bGwgZW11bGF0aW9uIHBhdGggdXBv
+biByZWNlaXZpbmcgdGhlIHJlc3VsdCBmcm9tIGFuIGV4dGVybmFsCmVtdWxhdG9yLgoKSW4gY2Fz
+ZSB3ZSB3YW50IHRvIHByb3Blcmx5IHNwbGl0IHBvcnQgYWNjZXNzZXMgaW4gdGhlIGZ1dHVyZSwg
+dGhpcwpjaGFuZ2Ugd2lsbCBuZWVkIHRvIGJlIHJldmVydGVkLCBhcyBpdCB3b3VsZCBwcmV2ZW50
+IHRoaW5ncyB3b3JraW5nCmNvcnJlY3RseSB3aGVuIGUuZy4gdGhlIGZpcnN0IHBhcnQgbmVlZHMg
+dG8gZ28gdG8gYW4gZXh0ZXJuYWwgZW11bGF0b3IsCndoaWxlIHRoZSBzZWNvbmQgcGFydCBpcyB0
+byBiZSBoYW5kbGVkIGludGVybmFsbHkuCgpXaGlsZSB0aGlzIGFkZHJlc3NlcyB0aGUgcmVwb3J0
+ZWQgcHJvYmxlbSBvZiBXaW5kb3dzIHBhZ2luZyBvdXQgdGhlCmJ1ZmZlciB1bmRlcm5lYXRoIGFu
+IGluLXByb2Nlc3MgUkVQIE9VVFMsIGl0IGRvZXMgbm90IGFkZHJlc3MgdGhlIHdpZGVyCnByb2Js
+ZW0gb2YgdGhlIHJlLWlzc3VlZCBpbnNuICh0byB0aGUgaW5zbiBlbXVsYXRvcikgYmVpbmcgcHJv
+bmUgdG8KcmFpc2UgYW4gZXhjZXB0aW9uICgjUEYpIGR1cmluZyBhIHJlcGxheWVkLCBwcmV2aW91
+c2x5IHN1Y2Nlc3NmdWwgbWVtb3J5CmFjY2VzcyAod2Ugb25seSByZWNvcmQgcHJpb3IgTU1JTyBh
+Y2Nlc3NlcykuCgpMZWF2aW5nIGFzaWRlIHRoZSBwcm9ibGVtIHRyaWVkIHRvIGJlIHdvcmtlZCBh
+cm91bmQgaGVyZSwgSSB0aGluayB0aGUKcGVyZm9ybWFuY2UgYXNwZWN0IGFsb25lIGlzIGEgZ29v
+ZCByZWFzb24gdG8gY2hhbmdlIHRoZSBiZWhhdmlvci4KCkFsc28gdGFrZSB0aGUgb3Bwb3J0dW5p
+dHkgYW5kIGNoYW5nZSBib29sX3QgLT4gYm9vbCBhcwpodm1fdmNwdV9pb19uZWVkX2NvbXBsZXRp
+b24oKSdzIHJldHVybiB0eXBlLgoKU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNo
+QHN1c2UuY29tPgotLS0KUkZDOiBBdCB0aGlzIHBvaW50IGl0IGlzIG9ubHkgYSBoeXBvdGhlc2lz
+IHRoYXQgdGhpcyBjaGFuZ2UgYWRkcmVzc2VzCiAgICAgdGhlIG9ic2VydmVkIGlzc3VlLiBJT1cg
+dGVzdGluZyBpbiB0aGUgYWN0dWFsIGVudmlyb25tZW50IGlzIHN0aWxsCiAgICAgcGVuZGluZy4K
+Ci0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jCisrKyBiL3hlbi9hcmNoL3g4Ni9odm0v
+ZW11bGF0ZS5jCkBAIC0yODIsNyArMjgyLDcgQEAgc3RhdGljIGludCBodm1lbXVsX2RvX2lvKAog
+ICAgICAgICAgICAgcmMgPSBodm1fc2VuZF9pb3JlcShzLCAmcCwgMCk7CiAgICAgICAgICAgICBp
+ZiAoIHJjICE9IFg4NkVNVUxfUkVUUlkgfHwgY3VycmQtPmlzX3NodXR0aW5nX2Rvd24gKQogICAg
+ICAgICAgICAgICAgIHZpby0+aW9fcmVxLnN0YXRlID0gU1RBVEVfSU9SRVFfTk9ORTsKLSAgICAg
+ICAgICAgIGVsc2UgaWYgKCBkYXRhX2lzX2FkZHIgKQorICAgICAgICAgICAgZWxzZSBpZiAoIGRh
+dGFfaXNfYWRkciB8fCAoIWlzX21taW8gJiYgZGlyID09IElPUkVRX1dSSVRFKSApCiAgICAgICAg
+ICAgICAgICAgcmMgPSBYODZFTVVMX09LQVk7CiAgICAgICAgIH0KICAgICAgICAgYnJlYWs7Ci0t
+LSBhL3hlbi9pbmNsdWRlL2FzbS14ODYvaHZtL3ZjcHUuaAorKysgYi94ZW4vaW5jbHVkZS9hc20t
+eDg2L2h2bS92Y3B1LmgKQEAgLTkxLDEwICs5MSwxMiBAQCBzdHJ1Y3QgaHZtX3ZjcHVfaW8gewog
+ICAgIGNvbnN0IHN0cnVjdCBnMm1faW9wb3J0ICpnMm1faW9wb3J0OwogfTsKIAotc3RhdGljIGlu
+bGluZSBib29sX3QgaHZtX3ZjcHVfaW9fbmVlZF9jb21wbGV0aW9uKGNvbnN0IHN0cnVjdCBodm1f
+dmNwdV9pbyAqdmlvKQorc3RhdGljIGlubGluZSBib29sIGh2bV92Y3B1X2lvX25lZWRfY29tcGxl
+dGlvbihjb25zdCBzdHJ1Y3QgaHZtX3ZjcHVfaW8gKnZpbykKIHsKICAgICByZXR1cm4gKHZpby0+
+aW9fcmVxLnN0YXRlID09IFNUQVRFX0lPUkVRX1JFQURZKSAmJgotICAgICAgICAgICAhdmlvLT5p
+b19yZXEuZGF0YV9pc19wdHI7CisgICAgICAgICAgICF2aW8tPmlvX3JlcS5kYXRhX2lzX3B0ciAm
+JgorICAgICAgICAgICAodmlvLT5pb19yZXEudHlwZSAhPSBJT1JFUV9UWVBFX1BJTyB8fAorICAg
+ICAgICAgICAgdmlvLT5pb19yZXEuZGlyICE9IElPUkVRX1dSSVRFKTsKIH0KIAogc3RydWN0IG5l
+c3RlZHZjcHUgewoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
