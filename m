@@ -1,17 +1,25 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Cut-off date for Xen 4.11 is March 30th, 2018
-Date: Thu, 29 Mar 2018 08:52:09 +0200
-Message-ID: <3c24c0ab-9fb2-947b-0604-0cb39042eb0b@suse.com>
+From: Daniel Vetter <daniel@ffwll.ch>
+Subject: Re: [PATCH v4 2/2] drm/xen-front: Add support for Xen
+ PV display frontend
+Date: Thu, 29 Mar 2018 09:17:48 +0200
+Message-ID: <20180329071748.GG3881__48249.6624500074$1522307821$gmane$org@phenom.ffwll.local>
+References: <1522219661-26827-1-git-send-email-andr2000@gmail.com>
+ <1522219661-26827-3-git-send-email-andr2000@gmail.com>
+ <20180328074251.GE14155@phenom.ffwll.local>
+ <32481355-27f6-695b-c6c1-8113ea268a33@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=czor=gt=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1f1RPy-0004Ut-Ss
- for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 06:52:14 +0000
-Content-Language: de-DE
+ (envelope-from <srs0=bfz1=gt=ffwll.ch=daniel@srs-us1.protection.inumbo.net>)
+ id 1f1Roo-00062Q-3i
+ for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 07:17:54 +0000
+Received: by mail-wm0-x243.google.com with SMTP id x4so9514203wmh.5
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Mar 2018 00:17:52 -0700 (PDT)
+Content-Disposition: inline
+In-Reply-To: <32481355-27f6-695b-c6c1-8113ea268a33@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,14 +28,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: "committers@xenproject.org" <committers@xenproject.org>
+To: Oleksandr Andrushchenko <andr2000@gmail.com>
+Cc: jgross@suse.com, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, airlied@linux.ie, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org, daniel.vetter@intel.com, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgYWxsLAoKVGhlIGN1dC1vZmYgZGF0ZSBmb3IgWGVuIDQuMTEgaXMgTWFyY2ggMzB0aCwgMjAx
-OC4gSWYgeW91IHdhbnQgeW91cgpmZWF0dXJlcyB0byBiZSBpbmNsdWRlZCBmb3IgdGhlIHJlbGVh
-c2UsIHBsZWFzZSBtYWtlIHN1cmUgdGhleSBhcmUKY29tbWl0dGVkIGJ5IE1hcmNoIDMwdGgsIDIw
-MTguCgpKdWVyZ2VuIEdyb3NzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+T24gV2VkLCBNYXIgMjgsIDIwMTggYXQgMDE6Mjk6NDZQTSArMDMwMCwgT2xla3NhbmRyIEFuZHJ1
+c2hjaGVua28gd3JvdGU6Cj4gSGksIERhbmllbCEKPiAKPiBJIGp1c3Qgbm90aWNlZCBJIGhhdmUg
+bWlzc2VkIG9uZSBjaGFuZ2UgaW4gdGhlIHBhdGNoOgo+IHRoZSBiZWxvdyBtdXN0IGJlIHN0YXRp
+Yy4KPiAKPiBPbiAwMy8yOC8yMDE4IDEwOjQyIEFNLCBEYW5pZWwgVmV0dGVyIHdyb3RlOgo+ID4g
+K2VudW0gZHJtX21vZGVfc3RhdHVzIGRpc3BsYXlfbW9kZV92YWxpZChzdHJ1Y3QgZHJtX2NydGMg
+KmNydGMsCj4gPiArCQljb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSAqbW9kZSkKPiA+ICt7
+Cj4gPiArCXN0cnVjdCB4ZW5fZHJtX2Zyb250X2RybV9waXBlbGluZSAqcGlwZWxpbmUgPQo+ID4g
+KwkJCWNvbnRhaW5lcl9vZihjcnRjLAo+IENvdWxkIHlvdSBwbGVhc2UgYW1lbmQgdGhlIHBhdGNo
+IGluIGF0dGFjaG1lbnQKPiB3aGVuIG1lcmdpbmcsIHNvIEkgZG9uJ3QgcmVzZW5kPwoKTWVyZ2lu
+ZyBpcyB1cCB0byB5b3UsIGFzIHNvb24gYXMgeW91IGhhdmUgeW91ciBjb21taXQgcmlnaHRzLgot
+RGFuaWVsCgo+IAo+IFRoYW5rIHlvdSBpbiBhZHZhbmNlLAo+IE9sZWtzYW5kcgoKPiBGcm9tIDNh
+ODJkNzZiZDNkOTU0MDU2Yjc2MGU1ZDFkMDllMmY5NmEyNzg2ZWYgTW9uIFNlcCAxNyAwMDowMDow
+MCAyMDAxCj4gRnJvbTogT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gPG9sZWtzYW5kcl9hbmRydXNo
+Y2hlbmtvQGVwYW0uY29tPgo+IERhdGU6IFdlZCwgMjggTWFyIDIwMTggMTM6MjQ6MDQgKzAzMDAK
+PiBTdWJqZWN0OiBbUEFUQ0hdIGRybS94ZW4tZnJvbnQ6IE1ha2UgZGlzcGxheV9tb2RlX3ZhbGlk
+IHN0YXRpYwo+IAo+IFNpZ25lZC1vZmYtYnk6IE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVr
+c2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KPiAtLS0KPiAgZHJpdmVycy9ncHUvZHJtL3hl
+bi94ZW5fZHJtX2Zyb250X2ttcy5jIHwgMiArLQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRp
+b24oKyksIDEgZGVsZXRpb24oLSkKPiAKPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3hl
+bi94ZW5fZHJtX2Zyb250X2ttcy5jIGIvZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250
+X2ttcy5jCj4gaW5kZXggNTQ1MDQ5ZGZhZjBhLi5iZDY3NmJlNWEwZGIgMTAwNjQ0Cj4gLS0tIGEv
+ZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250X2ttcy5jCj4gKysrIGIvZHJpdmVycy9n
+cHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250X2ttcy5jCj4gQEAgLTI3Myw3ICsyNzMsNyBAQCBzdGF0
+aWMgdm9pZCBkaXNwbGF5X3VwZGF0ZShzdHJ1Y3QgZHJtX3NpbXBsZV9kaXNwbGF5X3BpcGUgKnBp
+cGUsCj4gIAlkcm1fZGV2X2V4aXQoaWR4KTsKPiAgfQo+ICAKPiAtZW51bSBkcm1fbW9kZV9zdGF0
+dXMgZGlzcGxheV9tb2RlX3ZhbGlkKHN0cnVjdCBkcm1fY3J0YyAqY3J0YywKPiArc3RhdGljIGVu
+dW0gZHJtX21vZGVfc3RhdHVzIGRpc3BsYXlfbW9kZV92YWxpZChzdHJ1Y3QgZHJtX2NydGMgKmNy
+dGMsCj4gIAkJY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgKm1vZGUpCj4gIHsKPiAgCXN0
+cnVjdCB4ZW5fZHJtX2Zyb250X2RybV9waXBlbGluZSAqcGlwZWxpbmUgPQo+IC0tIAo+IDIuNy40
+Cj4gCgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4g
+ZHJpLWRldmVsIG1haWxpbmcgbGlzdAo+IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcK
+PiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2RyaS1kZXZl
+bAoKCi0tIApEYW5pZWwgVmV0dGVyClNvZnR3YXJlIEVuZ2luZWVyLCBJbnRlbCBDb3Jwb3JhdGlv
+bgpodHRwOi8vYmxvZy5mZndsbC5jaAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
