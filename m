@@ -1,20 +1,14 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH RFC] x86/HVM: suppress I/O completion for
- port output
-Date: Thu, 29 Mar 2018 08:54:15 +0000
-Message-ID: <0133d20c70c14d68a6fc7111610ec8a4@AMSPEX02CL03.citrite.net>
-References: <5ABCB74802000078001B703F@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v5] new config option vtsc_tolerance_khz to
+ avoid TSC emulation
+Date: Thu, 29 Mar 2018 10:58:34 +0200
+Message-ID: <20180329085834.GI30726@aepfle.de>
+References: <20180327092655.28530-1-olaf@aepfle.de>
+ <20180329082545.sxx57zod4rttxqc6@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6788134216565148694=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ns1b=gt=citrix.com=prvs=619f37640=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1f1TK7-00064c-MB
- for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 08:54:19 +0000
-In-Reply-To: <5ABCB74802000078001B703F@prv1-mh.provo.novell.com>
-Content-Language: en-US
+In-Reply-To: <20180329082545.sxx57zod4rttxqc6@MacBook-Pro-de-Roger.local>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,62 +17,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Jan Beulich' <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IEphbiBCZXVsaWNoIFttYWlsdG86
-SkJldWxpY2hAc3VzZS5jb21dCj4gU2VudDogMjkgTWFyY2ggMjAxOCAwODo1Mgo+IFRvOiB4ZW4t
-ZGV2ZWwgPHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZz4KPiBDYzogQW5kcmV3IENvb3Bl
-ciA8QW5kcmV3LkNvb3BlcjNAY2l0cml4LmNvbT47IFBhdWwgRHVycmFudAo+IDxQYXVsLkR1cnJh
-bnRAY2l0cml4LmNvbT4KPiBTdWJqZWN0OiBbUEFUQ0ggUkZDXSB4ODYvSFZNOiBzdXBwcmVzcyBJ
-L08gY29tcGxldGlvbiBmb3IgcG9ydCBvdXRwdXQKPiAKPiBXZSBkb24ndCBicmVhayB1cCBwb3J0
-IHJlcXVlc3RzIGluIGNhc2UgdGhleSBjcm9zcyBlbXVsYXRpb24gZW50aXR5Cj4gYm91bmRhcmll
-cywgYW5kIGEgd3JpdGUgdG8gYW4gSS9PIHBvcnQgaXMgbmVjZXNzYXJpbHkgdGhlIGxhc3QKPiBv
-cGVyYXRpb24gb2YgYW4gaW5zdHJ1Y3Rpb24gaW5zdGFuY2UsIHNvIHRoZXJlJ3Mgbm8gbmVlZCB0
-byByZS1pbnZva2UKPiB0aGUgZnVsbCBlbXVsYXRpb24gcGF0aCB1cG9uIHJlY2VpdmluZyB0aGUg
-cmVzdWx0IGZyb20gYW4gZXh0ZXJuYWwKPiBlbXVsYXRvci4KPiAKPiBJbiBjYXNlIHdlIHdhbnQg
-dG8gcHJvcGVybHkgc3BsaXQgcG9ydCBhY2Nlc3NlcyBpbiB0aGUgZnV0dXJlLCB0aGlzCj4gY2hh
-bmdlIHdpbGwgbmVlZCB0byBiZSByZXZlcnRlZCwgYXMgaXQgd291bGQgcHJldmVudCB0aGluZ3Mg
-d29ya2luZwo+IGNvcnJlY3RseSB3aGVuIGUuZy4gdGhlIGZpcnN0IHBhcnQgbmVlZHMgdG8gZ28g
-dG8gYW4gZXh0ZXJuYWwgZW11bGF0b3IsCj4gd2hpbGUgdGhlIHNlY29uZCBwYXJ0IGlzIHRvIGJl
-IGhhbmRsZWQgaW50ZXJuYWxseS4KPiAKPiBXaGlsZSB0aGlzIGFkZHJlc3NlcyB0aGUgcmVwb3J0
-ZWQgcHJvYmxlbSBvZiBXaW5kb3dzIHBhZ2luZyBvdXQgdGhlCj4gYnVmZmVyIHVuZGVybmVhdGgg
-YW4gaW4tcHJvY2VzcyBSRVAgT1VUUywgaXQgZG9lcyBub3QgYWRkcmVzcyB0aGUgd2lkZXIKPiBw
-cm9ibGVtIG9mIHRoZSByZS1pc3N1ZWQgaW5zbiAodG8gdGhlIGluc24gZW11bGF0b3IpIGJlaW5n
-IHByb25lIHRvCj4gcmFpc2UgYW4gZXhjZXB0aW9uICgjUEYpIGR1cmluZyBhIHJlcGxheWVkLCBw
-cmV2aW91c2x5IHN1Y2Nlc3NmdWwgbWVtb3J5Cj4gYWNjZXNzICh3ZSBvbmx5IHJlY29yZCBwcmlv
-ciBNTUlPIGFjY2Vzc2VzKS4KPiAKPiBMZWF2aW5nIGFzaWRlIHRoZSBwcm9ibGVtIHRyaWVkIHRv
-IGJlIHdvcmtlZCBhcm91bmQgaGVyZSwgSSB0aGluayB0aGUKPiBwZXJmb3JtYW5jZSBhc3BlY3Qg
-YWxvbmUgaXMgYSBnb29kIHJlYXNvbiB0byBjaGFuZ2UgdGhlIGJlaGF2aW9yLgo+IAo+IEFsc28g
-dGFrZSB0aGUgb3Bwb3J0dW5pdHkgYW5kIGNoYW5nZSBib29sX3QgLT4gYm9vbCBhcwo+IGh2bV92
-Y3B1X2lvX25lZWRfY29tcGxldGlvbigpJ3MgcmV0dXJuIHR5cGUuCj4gCj4gU2lnbmVkLW9mZi1i
-eTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+IC0tLQo+IFJGQzogQXQgdGhpcyBw
-b2ludCBpdCBpcyBvbmx5IGEgaHlwb3RoZXNpcyB0aGF0IHRoaXMgY2hhbmdlIGFkZHJlc3Nlcwo+
-ICAgICAgdGhlIG9ic2VydmVkIGlzc3VlLiBJT1cgdGVzdGluZyBpbiB0aGUgYWN0dWFsIGVudmly
-b25tZW50IGlzIHN0aWxsCj4gICAgICBwZW5kaW5nLgo+IAo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9o
-dm0vZW11bGF0ZS5jCj4gKysrIGIveGVuL2FyY2gveDg2L2h2bS9lbXVsYXRlLmMKPiBAQCAtMjgy
-LDcgKzI4Miw3IEBAIHN0YXRpYyBpbnQgaHZtZW11bF9kb19pbygKPiAgICAgICAgICAgICAgcmMg
-PSBodm1fc2VuZF9pb3JlcShzLCAmcCwgMCk7Cj4gICAgICAgICAgICAgIGlmICggcmMgIT0gWDg2
-RU1VTF9SRVRSWSB8fCBjdXJyZC0+aXNfc2h1dHRpbmdfZG93biApCj4gICAgICAgICAgICAgICAg
-ICB2aW8tPmlvX3JlcS5zdGF0ZSA9IFNUQVRFX0lPUkVRX05PTkU7Cj4gLSAgICAgICAgICAgIGVs
-c2UgaWYgKCBkYXRhX2lzX2FkZHIgKQo+ICsgICAgICAgICAgICBlbHNlIGlmICggZGF0YV9pc19h
-ZGRyIHx8ICghaXNfbW1pbyAmJiBkaXIgPT0gSU9SRVFfV1JJVEUpICkKCkknbSBub3QgZW50aXJl
-bHkgc3VyZSwgYnV0IGl0IHNlZW1zIGxpa2UgdGhpcyB0ZXN0IG1pZ2h0IGFjdHVhbGx5IGJlICFo
-dm1fdmNwdV9pb19uZWVkX2NvbXBsZXRpb24oKS4uLgoKPiAgICAgICAgICAgICAgICAgIHJjID0g
-WDg2RU1VTF9PS0FZOwo+ICAgICAgICAgIH0KPiAgICAgICAgICBicmVhazsKPiAtLS0gYS94ZW4v
-aW5jbHVkZS9hc20teDg2L2h2bS92Y3B1LmgKPiArKysgYi94ZW4vaW5jbHVkZS9hc20teDg2L2h2
-bS92Y3B1LmgKPiBAQCAtOTEsMTAgKzkxLDEyIEBAIHN0cnVjdCBodm1fdmNwdV9pbyB7Cj4gICAg
-ICBjb25zdCBzdHJ1Y3QgZzJtX2lvcG9ydCAqZzJtX2lvcG9ydDsKPiAgfTsKPiAKPiAtc3RhdGlj
-IGlubGluZSBib29sX3QgaHZtX3ZjcHVfaW9fbmVlZF9jb21wbGV0aW9uKGNvbnN0IHN0cnVjdAo+
-IGh2bV92Y3B1X2lvICp2aW8pCj4gK3N0YXRpYyBpbmxpbmUgYm9vbCBodm1fdmNwdV9pb19uZWVk
-X2NvbXBsZXRpb24oY29uc3Qgc3RydWN0Cj4gaHZtX3ZjcHVfaW8gKnZpbykKPiAgewo+ICAgICAg
-cmV0dXJuICh2aW8tPmlvX3JlcS5zdGF0ZSA9PSBTVEFURV9JT1JFUV9SRUFEWSkgJiYKPiAtICAg
-ICAgICAgICAhdmlvLT5pb19yZXEuZGF0YV9pc19wdHI7Cj4gKyAgICAgICAgICAgIXZpby0+aW9f
-cmVxLmRhdGFfaXNfcHRyICYmCj4gKyAgICAgICAgICAgKHZpby0+aW9fcmVxLnR5cGUgIT0gSU9S
-RVFfVFlQRV9QSU8gfHwKPiArICAgICAgICAgICAgdmlvLT5pb19yZXEuZGlyICE9IElPUkVRX1dS
-SVRFKTsKCi4uLiBub3cgdGhhdCB5b3UndmUgdXBkYXRlZCBpdCBoZXJlLgoKICBQYXVsCgo+ICB9
-Cj4gCj4gIHN0cnVjdCBuZXN0ZWR2Y3B1IHsKPiAKPiAKCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============6788134216565148694==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="HuXIgs6JvY9hJs5C"
+Content-Disposition: inline
+
+
+--HuXIgs6JvY9hJs5C
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Mar 29, Roger Pau Monn=C3=A9 wrote:
+
+> AFAICT in the chunk above you will disable vtsc without checking if
+> the hardware supports TSC scaling, which leads to inaccurate TSC values
+> on hardware that could provide accurate results without the software
+> emulation overhead.
+
+Is that really the case? Maybe I get the logic wrong, but what I see is:
+what ever my change does, or if a HVM domain runs on a host with scaling
+feature, disable vtsc. hvm_get_tsc_scaling_ratio has no side effects.
+Isnt the purpose to not emulate vtsc if the hardware supports scaling?
+
+Olaf
+
+--HuXIgs6JvY9hJs5C
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWryqtwAKCRBdQqD6ppg2
+foBzAJ9mPCCOXxcHuZGZVhp+hqvnXpkN2wCg+CtmTBuShfA3x6JnOuBQ1I+W0IQ=
+=8u+/
+-----END PGP SIGNATURE-----
+
+--HuXIgs6JvY9hJs5C--
+
+
+--===============6788134216565148694==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6788134216565148694==--
