@@ -1,20 +1,20 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: Make coverity results public
-Date: Thu, 29 Mar 2018 09:58:46 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1803290956300.15200@sstabellini-ThinkPad-X260>
-References: <20180328133337.xlzb7vqwr4dflnlu@MacBook-Pro-de-Roger.local>
- <51636480-c21c-4f93-d2f7-0f3349f3b023@citrix.com>
- <CAF3u54DfcrUWn6hhVhQVe9xW38LRYbxTU=vjnKiW1F97MSHCDQ@mail.gmail.com>
- <20180329082952.qjhd4ms3x2v66hfe@MacBook-Pro-de-Roger.local>
+From: George Dunlap <dunlapg@umich.edu>
+Subject: Re: Upping gcc requirement for x86
+Date: Thu, 29 Mar 2018 18:05:57 +0100
+Message-ID: <CAFLBxZZJX1DPv-M8n_CDFf7OWfxmBwtXC9eDQb_WRXz9V5TYyA@mail.gmail.com>
+References: <20180329154523.nvxkzn5rhetphwki@citrix.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-480749283-1522342727=:15200"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=sost=gt=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1f1asz-0004ej-9n
- for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 16:58:49 +0000
-In-Reply-To: <20180329082952.qjhd4ms3x2v66hfe@MacBook-Pro-de-Roger.local>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=vfqb=gt=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
+ id 1f1azw-0005Pz-Jr
+ for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 17:06:00 +0000
+Received: by mail-qt0-x242.google.com with SMTP id h4so6908087qtn.13
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Mar 2018 10:05:59 -0700 (PDT)
+In-Reply-To: <20180329154523.nvxkzn5rhetphwki@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,79 +23,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@gmail.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Olaf Hering <olaf@aepfle.de>, Doug Goldstein <cardoe@cardoe.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-480749283-1522342727=:15200
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Thu, 29 Mar 2018, Roger Pau Monné wrote:
-> On Thu, Mar 29, 2018 at 12:30:25AM +0000, Julien Grall wrote:
-> > (sorry for the formatting)
-> > 
-> > On Wed, 28 Mar 2018, 21:48 George Dunlap, <george.dunlap@citrix.com> wrote:
-> > 
-> > > On 03/28/2018 02:33 PM, Roger Pau Monné wrote:
-> > > > Hello,
-> > > >
-> > > > According to the contribution guidelines document [0] the coverity
-> > > > database of issues is private, which makes it hard for new people to
-> > > > see issues. IMO it makes no sense to keep the result private anymore:
-> > > >
-> > > >  - They have been audited for plenty of time by different people
-> > > >    that currently has access to the database.
-> > > >  - Anyone can reproduce the same results by forking Xen on github and
-> > > >    sending a build to coverity for analysis AFAICT.
-> > > >
-> > > > On the plus side, having the database open would allow us the
-> > > > following:
-> > > >
-> > > >  - Coverity reports could be sent to xen-devel, so anyone could pick
-> > > >    and fix new issues.
-> > > >  - Newcomers could use coverity in order to find small size tasks to
-> > > >    work on.
-> > >
-> > > In general, +1 from me.  But Stefano, was there some special
-> > > circumstance for the ARM Coverity runs?
-> > >
-> > 
-> > We don't control what is tested on the ARM coverity. This was setup on a
-> > testing branch by EPAM, so they are putting their patches and update
-> > manually.
-> > 
-> > If we want to open that coverity then we need to track staging and have
-> > automatic push.
-> > 
-> > Otherwise it will be near to impossible to know if the failure is because
-> > of staging or their patches.
-> 
-> I don't know much about Coverity, but I guess the results from the ARM
-> scan are separated from the x86 ones?
-> 
-> Can't we just open the x86 results?
-> 
-> Or in the worse case, can we just ignore the ARM results if they are
-> not useful?
-
-Yes, there are basically two separate coverity instances: the one we
-have been talking about and that Andrew was about to open up, which is
-x86 only, and the one ran by EPAM, which is ARM only.
-
-Let's take a step at a time and open up the x86 coverity instance first.
-Then, we'll figure out what to do about the ARM instance.
---8323329-480749283-1522342727=:15200
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-480749283-1522342727=:15200--
+T24gVGh1LCBNYXIgMjksIDIwMTggYXQgNDo0NSBQTSwgV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4
+LmNvbT4gd3JvdGU6Cj4gSGkgYWxsCj4KPiBTZWFiaW9zIGhhcyBidW1wZWQgdGhlaXIgcmVxdWly
+ZW1lbnQgdG8gNC42IChyZWxlYXNlZCA3IHllYXJzIGFnbykuIFdlCj4gZWl0aGVyIG5lZWQgdG8g
+YnVtcCBvdXIgdG9vIG9yIGhhdmUgYSBzZXBhcmF0ZSBlbnRyeSBmb3Igc2VhYmlvcy4KClJIRUwg
+LyBDZW50T1MgNiBhcmUgc3RpbGwgc3VwcG9ydGVkLCBhbmQgdGhleSBjb21lIHdpdGggR0NDIDQu
+NC4KCk90aGVyIHBvdGVudGlhbCBvcHRpb25zOgoKMS4gSGF2ZSBjb25maWd1cmUgZGlzYWJsZSBz
+ZWFiaW9zIGlmIHRoZSBnY2MgdmVyc2lvbiBpcyB0b28gb2xkCjIuIEhhdmUgY29uZmlndXJlIGNo
+YW5nZSB0byBhbiBvbGRlciBzZWFiaW9zIHJlbGVhc2UgaWYgZ2NjIGlzIHRvbyBvbGQKMy4gRG93
+bmdyYWRlIHRoZSBzZWFiaW9zIHRhZyAvIGNoYW5nZXNldCB0byBhIHZlcnNpb24gdGhhdCBidWls
+ZHMgd2l0aApvbGRlciBnY2MgdmVyc2lvbnMKCkxvbmcgdGVybSBJIHRoaW5rIHdlIHdhbnQgdG8g
+Z2V0IGF3YXkgZnJvbSBidWlsZGluZyBzZWFiaW9zIG91cnNlbHZlcwphbHRvZ2V0aGVyOyBidXQg
+aXQncyBhIGJpdCBsYXRlIGluIHRoZSByZWxlYXNlIGN5Y2xlIHRvIHdvcmsgb3V0IHRoYXQKa2lu
+ZCBvZiBjaGFuZ2UuCgpPbiB0aGUgd2hvbGUgSSdkIHByb2JhYmx5IGdvIHdpdGggIzMgYXQgdGhp
+cyBwb2ludC4KCiAtR2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
