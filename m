@@ -1,23 +1,11 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH RFC] x86/HVM: suppress I/O completion for
- port output
-Date: Thu, 29 Mar 2018 03:41:21 -0600
-Message-ID: <5ABCD0E102000078001B715E@prv1-mh.provo.novell.com>
-References: <5ABCB74802000078001B703F@prv1-mh.provo.novell.com>
- <0133d20c70c14d68a6fc7111610ec8a4@AMSPEX02CL03.citrite.net>
- <5ABCC97102000078001B7111@prv1-mh.provo.novell.com>
- <04f232c2099d4b23a713d6dada40789a@AMSPEX02CL03.citrite.net>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: fuzz/wrappers.c fails to build due to missing
+ x86-emulate.h
+Date: Thu, 29 Mar 2018 11:46:06 +0200
+Message-ID: <20180329094605.GK30726@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3347296729507331260=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=fhp7=gt=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1f1U3i-0002DF-EA
- for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 09:41:26 +0000
-In-Reply-To: <04f232c2099d4b23a713d6dada40789a@AMSPEX02CL03.citrite.net>
-Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,53 +14,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI5LjAzLjE4IGF0IDExOjEzLCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+PiBGcm9tOiBKYW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+PiBTZW50
-OiAyOSBNYXJjaCAyMDE4IDEwOjEwCj4+IAo+PiA+Pj4gT24gMjkuMDMuMTggYXQgMTA6NTQsIDxQ
-YXVsLkR1cnJhbnRAY2l0cml4LmNvbT4gd3JvdGU6Cj4+ID4+IC0tLSBhL3hlbi9hcmNoL3g4Ni9o
-dm0vZW11bGF0ZS5jCj4+ID4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jCj4+ID4+
-IEBAIC0yODIsNyArMjgyLDcgQEAgc3RhdGljIGludCBodm1lbXVsX2RvX2lvKAo+PiA+PiAgICAg
-ICAgICAgICAgcmMgPSBodm1fc2VuZF9pb3JlcShzLCAmcCwgMCk7Cj4+ID4+ICAgICAgICAgICAg
-ICBpZiAoIHJjICE9IFg4NkVNVUxfUkVUUlkgfHwgY3VycmQtPmlzX3NodXR0aW5nX2Rvd24gKQo+
-PiA+PiAgICAgICAgICAgICAgICAgIHZpby0+aW9fcmVxLnN0YXRlID0gU1RBVEVfSU9SRVFfTk9O
-RTsKPj4gPj4gLSAgICAgICAgICAgIGVsc2UgaWYgKCBkYXRhX2lzX2FkZHIgKQo+PiA+PiArICAg
-ICAgICAgICAgZWxzZSBpZiAoIGRhdGFfaXNfYWRkciB8fCAoIWlzX21taW8gJiYgZGlyID09IElP
-UkVRX1dSSVRFKSApCj4+ID4KPj4gPiBJJ20gbm90IGVudGlyZWx5IHN1cmUsIGJ1dCBpdCBzZWVt
-cyBsaWtlIHRoaXMgdGVzdCBtaWdodCBhY3R1YWxseSBiZQo+PiA+ICFodm1fdmNwdV9pb19uZWVk
-X2NvbXBsZXRpb24oKS4uLgo+PiA+Cj4+ID4+ICAgICAgICAgICAgICAgICAgcmMgPSBYODZFTVVM
-X09LQVk7Cj4+ID4+ICAgICAgICAgIH0KPj4gPj4gICAgICAgICAgYnJlYWs7Cj4+ID4+IC0tLSBh
-L3hlbi9pbmNsdWRlL2FzbS14ODYvaHZtL3ZjcHUuaAo+PiA+PiArKysgYi94ZW4vaW5jbHVkZS9h
-c20teDg2L2h2bS92Y3B1LmgKPj4gPj4gQEAgLTkxLDEwICs5MSwxMiBAQCBzdHJ1Y3QgaHZtX3Zj
-cHVfaW8gewo+PiA+PiAgICAgIGNvbnN0IHN0cnVjdCBnMm1faW9wb3J0ICpnMm1faW9wb3J0Owo+
-PiA+PiAgfTsKPj4gPj4KPj4gPj4gLXN0YXRpYyBpbmxpbmUgYm9vbF90IGh2bV92Y3B1X2lvX25l
-ZWRfY29tcGxldGlvbihjb25zdCBzdHJ1Y3QKPj4gPj4gaHZtX3ZjcHVfaW8gKnZpbykKPj4gPj4g
-K3N0YXRpYyBpbmxpbmUgYm9vbCBodm1fdmNwdV9pb19uZWVkX2NvbXBsZXRpb24oY29uc3Qgc3Ry
-dWN0Cj4+ID4+IGh2bV92Y3B1X2lvICp2aW8pCj4+ID4+ICB7Cj4+ID4+ICAgICAgcmV0dXJuICh2
-aW8tPmlvX3JlcS5zdGF0ZSA9PSBTVEFURV9JT1JFUV9SRUFEWSkgJiYKPj4gPj4gLSAgICAgICAg
-ICAgIXZpby0+aW9fcmVxLmRhdGFfaXNfcHRyOwo+PiA+PiArICAgICAgICAgICAhdmlvLT5pb19y
-ZXEuZGF0YV9pc19wdHIgJiYKPj4gPj4gKyAgICAgICAgICAgKHZpby0+aW9fcmVxLnR5cGUgIT0g
-SU9SRVFfVFlQRV9QSU8gfHwKPj4gPj4gKyAgICAgICAgICAgIHZpby0+aW9fcmVxLmRpciAhPSBJ
-T1JFUV9XUklURSk7Cj4+ID4KPj4gPiAuLi4gbm93IHRoYXQgeW91J3ZlIHVwZGF0ZWQgaXQgaGVy
-ZS4KPj4gCj4+IEl0IGNvdWxkIGhhdmUgYmVlbiBiZWZvcmUsIGFuZCBpdCB3YXNuJ3QsIHNvIEkg
-ZGlkbid0IHdhbnQgdG8gY2hhbmdlCj4+IHRoYXQuIE15IGFzc3VtcHRpb24gaXMgdGhhdCB0aGUg
-ZnVuY3Rpb24gd2Fzbid0IHVzZWQgdG8gbGV2ZXJhZ2UKPj4gbG9jYWwgdmFyaWFibGVzIChhbmQg
-YXZvaWQgdGhlIC5zdGF0ZSBjb21wYXJpc29uIGFsdG9nZXRoZXIpLgo+IAo+IFllcywgdGhhdCdz
-IHdoeSBpdCB3YXMgbGlrZSBpdCBpcy4KPiAKPj4gVGVjaG5pY2FsbHkgaXQgY291bGQgYmUgc3dp
-dGNoZWQsIEkgYWdyZWUuIEkgZ3Vlc3MgSSBzaG91bGQgYXQgbGVhc3QKPj4gYXR0YWNoIGEgY29t
-bWVudCwgY2xhcmlmeWluZyB0aGF0IHRoaXMgaXMgYW4gb3Blbi1jb2RlZCwgc2xpZ2h0bHkKPj4g
-b3B0aW1pemVkIHZhcmlhbnQgb2YgdGhlIGZ1bmN0aW9uLgo+PiAKPiAKPiBBbHRlcm5hdGl2ZWx5
-IGlmIHRoZSBtYWNybyBpcyBtb2RpZmllZCB0byB0YWtlIGFuIGlvcmVxX3QgcG9pbnRlciBkaXJl
-Y3RseSAKPiByYXRoZXIgdGhhbiBhIHN0cnVjdCBodm1fdmNwdV9pbyBwb2ludGVyLCB0aGVuIEkg
-dGhpbmsgeW91IGNvdWxkIGp1c3QgcGFzcyAKPiB0aGUgb24tc3RhY2sgaW9yZXFfdCB0byBpdCBp
-biBodm1lbXVsX2RvX2lvKCkgYW5kIGF2b2lkIGFueSByZWFsIG5lZWQgZm9yIHRoZSAKPiBvcGVu
-LWNvZGVkIHRlc3QuCgpIbW0sIHllcywgYnV0IGV2ZW4gdGhlbiBJJ20gbm90IHN1cmUgdGhlIGNv
-bXBpbGVyIHdvdWxkIHJlYWxpemUKaXQgY2FuIG9taXQgdGhlIC5zdGF0ZSBjaGVjay4gSSBtYXkg
-dHJ5IG91dCB0aGF0IHRyYW5zZm9ybWF0aW9uIG9uY2UKSSBrbm93IHdoZXRoZXIgdGhpcyBoZWxw
-cyBpbiB0aGUgZmlyc3QgcGxhY2UuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+
+--===============3347296729507331260==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Rex5+51txc1ort/q"
+Content-Disposition: inline
+
+
+--Rex5+51txc1ort/q
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+In my automated SLE_11 builds I often see failures like that:
+
+[   74s] wrappers.c:5:25: error: x86-emulate.h: No such file or directory
+[   74s] make[6]: *** [wrappers.o] Error 1
+
+Just retriggering the package build fixes the error. SLE11 has make-3.81.
+Is that version of make perhaps too old to recognize the dependencies?
+
+Olaf
+
+--Rex5+51txc1ort/q
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWry11wAKCRBdQqD6ppg2
+fjAeAKCldWld6pmELFx0iGnHQiFAEkdo2ACffzIOyLy1NJZGH4tAA6LeefuPu8Q=
+=gOKS
+-----END PGP SIGNATURE-----
+
+--Rex5+51txc1ort/q--
+
+
+--===============3347296729507331260==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3347296729507331260==--
