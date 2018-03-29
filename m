@@ -1,14 +1,15 @@
-From: Olaf Hering <olaf@aepfle.de>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 Subject: Re: [PATCH v5] new config option vtsc_tolerance_khz to
  avoid TSC emulation
-Date: Thu, 29 Mar 2018 10:17:56 +0200
-Message-ID: <20180329081755.GG30726@aepfle.de>
+Date: Thu, 29 Mar 2018 09:25:45 +0100
+Message-ID: <20180329082545.sxx57zod4rttxqc6@MacBook-Pro-de-Roger.local>
 References: <20180327092655.28530-1-olaf@aepfle.de>
- <5ABCBA3502000078001B7055@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7086732645761381264=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5ABCBA3502000078001B7055@prv1-mh.provo.novell.com>
+Content-Disposition: inline
+In-Reply-To: <20180327092655.28530-1-olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,60 +18,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>
+To: Olaf Hering <olaf@aepfle.de>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7086732645761381264==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="aYDVKSzuImP48n7V"
-Content-Disposition: inline
-
-
---aYDVKSzuImP48n7V
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Thu, Mar 29, Jan Beulich wrote:
-
-> >>> On 27.03.18 at 11:26, <olaf@aepfle.de> wrote:
-> > +            khz_diff = cpu_khz > gtsc_khz ?
-> > +                       cpu_khz - gtsc_khz : gtsc_khz - cpu_khz;
-> abs() (or some variant of it, like __builtin_absl(), seeing that we
-> don't appear to have any abstraction right now)?
-
-I see no other usage of *abs*. Really optimize that one-shot function?
-
-> d%d
-
-A for an unsigned type? But I see it is done elsewhere, so it must be
-correct.
-
-
-Olaf
-
---aYDVKSzuImP48n7V
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWryhMAAKCRBdQqD6ppg2
-fiZeAJsEGEIt0CQWkccbfaXia9ljvAGsJACfVZz+MgXmKHrc3dCfJZ/yoIkaCU8=
-=UuJL
------END PGP SIGNATURE-----
-
---aYDVKSzuImP48n7V--
-
-
---===============7086732645761381264==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7086732645761381264==--
+T24gVHVlLCBNYXIgMjcsIDIwMTggYXQgMTE6MjY6NTVBTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
+dGU6Cj4gQWRkIGFuIG9wdGlvbiB0byBjb250cm9sIHdoZW4gdlRTQyBlbXVsYXRpb24gd2lsbCBi
+ZSBhY3RpdmF0ZWQgZm9yIGEKPiBkb21VIHdpdGggdHNjX21vZGU9ZGVmYXVsdC4gV2l0aG91dCBz
+dWNoIG9wdGlvbiBlYWNoIFRTQyBhY2Nlc3MgZnJvbQo+IGRvbVUgd2lsbCBiZSBlbXVsYXRlZCwg
+d2hpY2ggY2F1c2VzIGEgc2lnbmlmaWNhbnQgcGVyZm9tYW5jZSBkcm9wIGZvcgo+IHdvcmtsb2Fk
+cyB0aGF0IG1ha2UgdXNlIG9mIHJkdHNjLgoKVGhpcyBpcyBub3QgYWx3YXlzIHRydWUuIEludGVs
+IGhhcmR3YXJlIGhhcyBhIGZlYXR1cmUgY2FsbGVkIFRTQwpzY2FsaW5nIHRoYXQgYWxsb3dzIHRv
+IHNldCBhIHNjYWxpbmcgZmFjdG9yIGluIHRoZSBWTUNTIHNvIHRoYXQgVFNDCnZhbHVlcyBjYW4g
+YmUgc2NhbGVkIHdpdGhvdXQgcmVxdWlyaW5nIGVtdWxhdGlvbi4KCkknbSBub3Qgc3VyZSB0aGUg
+d2F5IHRoaXMgbmV3bHkgaW50cm9kdWNlZCBvcHRpb24gaW50ZXJhY3RzIHdpdGggdGhlCmhhcmR3
+YXJlIFRTQyBzY2FsaW5nIGZlYXR1cmUgaXMgY29ycmVjdC4KCklNTyBpZiBoYXJkd2FyZSBUU0Mg
+c2NhbGluZyBpcyBzdXBwb3J0ZWQgdnRzY190b2xlcmFuY2Vfa2h6IHNob3VsZCBiZQppZ25vcmVk
+LCBhbmQgdGhlIFRTQyBzaG91bGQgYmUgc2NhbGVkIGJ5IHRoZSBoYXJkd2FyZSBhbHdheXMgaW4g
+b3JkZXIKdG8gcHJvdmlkZSBhY2N1cmF0ZSB2YWx1ZXMuCgo+ICAgICAgY2FzZSBUU0NfTU9ERV9E
+RUZBVUxUOgo+ICsgICAgICAgIGQtPmFyY2gudnRzY190b2xlcmFuY2Vfa2h6ID0gdnRzY190b2xl
+cmFuY2Vfa2h6Owo+ICsgICAgICAgIC8qIEZhbGx0aHJvdWdoLiAqLwo+ICAgICAgY2FzZSBUU0Nf
+TU9ERV9BTFdBWVNfRU1VTEFURToKPiAgICAgICAgICBkLT5hcmNoLnZ0c2Nfb2Zmc2V0ID0gZ2V0
+X3NfdGltZSgpIC0gZWxhcHNlZF9uc2VjOwo+ICAgICAgICAgIGQtPmFyY2gudHNjX2toeiA9IGd0
+c2Nfa2h6ID86IGNwdV9raHo7Cj4gQEAgLTIxNDksOCArMjE1NCwyNiBAQCB2b2lkIHRzY19zZXRf
+aW5mbyhzdHJ1Y3QgZG9tYWluICpkLAo+ICAgICAgICAgICAqIFdoZW4gYSBndWVzdCBpcyBjcmVh
+dGVkLCBndHNjX2toeiBpcyBwYXNzZWQgaW4gYXMgemVybywgbWFraW5nCj4gICAgICAgICAgICog
+ZC0+YXJjaC50c2Nfa2h6ID09IGNwdV9raHouIFRodXMgbm8gbmVlZCB0byBjaGVjayBpbmNhcm5h
+dGlvbi4KPiAgICAgICAgICAgKi8KPiArICAgICAgICBkaXNhYmxlX3Z0c2MgPSBkLT5hcmNoLnRz
+Y19raHogPT0gY3B1X2toejsKPiArCj4gKyAgICAgICAgaWYgKCB0c2NfbW9kZSA9PSBUU0NfTU9E
+RV9ERUZBVUxUICYmIGd0c2Nfa2h6ICYmCj4gKyAgICAgICAgICAgICBkLT5hcmNoLnZ0c2NfdG9s
+ZXJhbmNlX2toeiApCj4gKyAgICAgICAgewo+ICsgICAgICAgICAgICB1aW50MzJfdCBraHpfZGlm
+ZjsKPiArCj4gKyAgICAgICAgICAgIGtoel9kaWZmID0gY3B1X2toeiA+IGd0c2Nfa2h6ID8KPiAr
+ICAgICAgICAgICAgICAgICAgICAgICBjcHVfa2h6IC0gZ3RzY19raHogOiBndHNjX2toeiAtIGNw
+dV9raHo7Cj4gKyAgICAgICAgICAgIGRpc2FibGVfdnRzYyA9IGtoel9kaWZmIDw9IGQtPmFyY2gu
+dnRzY190b2xlcmFuY2Vfa2h6Owo+ICsKPiArICAgICAgICAgICAgcHJpbnRrKFhFTkxPR19HX0lO
+Rk8gIiVzOiBkJXU6IGhvc3QgaGFzICVsdSBrSHosIgo+ICsgICAgICAgICAgICAgICAgICAgIiBk
+b21VIGV4cGVjdHMgJXUga0h6LCIKPiArICAgICAgICAgICAgICAgICAgICIgZGlmZmVyZW5jZSBv
+ZiAldSBpcyAlcyB0b2xlcmFuY2Ugb2YgJXVcbiIsCj4gKyAgICAgICAgICAgICAgICAgICBfX2Z1
+bmNfXywgZC0+ZG9tYWluX2lkLCBjcHVfa2h6LCBndHNjX2toeiwga2h6X2RpZmYsCj4gKyAgICAg
+ICAgICAgICAgICAgICBkaXNhYmxlX3Z0c2MgPyAid2l0aGluIiA6ICJvdXRzaWRlIiwKPiArICAg
+ICAgICAgICAgICAgICAgIGQtPmFyY2gudnRzY190b2xlcmFuY2Vfa2h6KTsKPiArICAgICAgICB9
+CgpBRkFJQ1QgaW4gdGhlIGNodW5rIGFib3ZlIHlvdSB3aWxsIGRpc2FibGUgdnRzYyB3aXRob3V0
+IGNoZWNraW5nIGlmCnRoZSBoYXJkd2FyZSBzdXBwb3J0cyBUU0Mgc2NhbGluZywgd2hpY2ggbGVh
+ZHMgdG8gaW5hY2N1cmF0ZSBUU0MgdmFsdWVzCm9uIGhhcmR3YXJlIHRoYXQgY291bGQgcHJvdmlk
+ZSBhY2N1cmF0ZSByZXN1bHRzIHdpdGhvdXQgdGhlIHNvZnR3YXJlCmVtdWxhdGlvbiBvdmVyaGVh
+ZC4KClJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
