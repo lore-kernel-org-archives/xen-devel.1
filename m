@@ -1,24 +1,14 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: Cut-off date for Xen 4.11 is March 30th, 2018
-Date: Thu, 29 Mar 2018 13:05:10 +0200
-Message-ID: <32cb831e-4e14-b91d-b62c-0176e85da0de@suse.com>
-References: <3c24c0ab-9fb2-947b-0604-0cb39042eb0b@suse.com>
- <9ce522da-f2fd-db44-209b-b99480cc476e@citrix.com>
- <e461a85f-910f-ec8f-234f-a5c069964ef6@suse.com>
- <4676475a-9229-7dc4-c011-2ba0cd29e133@citrix.com>
- <5ABCDD8F02000078001B7225@prv1-mh.provo.novell.com>
- <20180329105055.dn2oh5s7rcmlcyjp@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: fuzz/wrappers.c fails to build due to missing
+ x86-emulate.h
+Date: Thu, 29 Mar 2018 13:34:01 +0200
+Message-ID: <20180329113401.GM30726@aepfle.de>
+References: <20180329094605.GK30726@aepfle.de>
+ <5ABCD63102000078001B71CD@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7374378408537097837=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=czor=gt=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1f1VMq-0001DX-BT
- for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 11:05:16 +0000
-In-Reply-To: <20180329105055.dn2oh5s7rcmlcyjp@citrix.com>
-Content-Language: en-US
+In-Reply-To: <5ABCD63102000078001B71CD@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,66 +17,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, "committers@xenproject.org" <committers@xenproject.org>, George Dunlap <george.dunlap@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjkvMDMvMTggMTI6NTAsIFdlaSBMaXUgd3JvdGU6Cj4gT24gVGh1LCBNYXIgMjksIDIwMTgg
-YXQgMDQ6MzU6MjdBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDI5LjAzLjE4
-IGF0IDEyOjIyLCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPiB3cm90ZToKPj4+IE9uIDAzLzI5
-LzIwMTggMTA6NTYgQU0sIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+Pj4gT24gMjkvMDMvMTggMTE6
-NTMsIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4+Pj4+IE9uIDAzLzI5LzIwMTggMDc6NTIgQU0sIEp1
-ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+Pj4+PiBIaSBhbGwsCj4+Pj4+Pgo+Pj4+Pj4gVGhlIGN1dC1v
-ZmYgZGF0ZSBmb3IgWGVuIDQuMTEgaXMgTWFyY2ggMzB0aCwgMjAxOC4gSWYgeW91IHdhbnQgeW91
-cgo+Pj4+Pj4gZmVhdHVyZXMgdG8gYmUgaW5jbHVkZWQgZm9yIHRoZSByZWxlYXNlLCBwbGVhc2Ug
-bWFrZSBzdXJlIHRoZXkgYXJlCj4+Pj4+PiBjb21taXR0ZWQgYnkgTWFyY2ggMzB0aCwgMjAxOC4K
-Pj4+Pj4KPj4+Pj4gTWFyY2ggMzB0aCBpcyBhIHB1YmxpYyBob2xpZGF5IGhlcmUgaW4gdGhlIFVL
-LiAgSXMgaXQgdGhlIHNhbWUgaW4KPj4+Pj4gR2VybWFueT8gIFdvdWxkIGl0IGJlIE9LIHRvIHNh
-eSB0aGF0IHRoaW5ncyBzZW50IG9uIEZyaWRheSBjYW4gYmUKPj4+Pj4gY29tbWl0dGVkIG9uIFR1
-ZXNkYXkgMyBBcHJpbCBpZiB0aGUgYXBwcm9wcmlhdGUgbWFpbnRhaW5lciB3YXNuJ3QgYXJvdW5k
-Cj4+Pj4+IHRvIHJldmlldyB0aGVtPwo+Pj4+Pgo+Pj4+PiBJZiBub3Qgd2Ugc2hvdWxkIHdhcm4g
-cGVvcGxlIHRvIGdldCB0aGVpciBzdHVmZiByZXZpZXdlZCB0b2RheSBpZiBhdCBhbGwKPj4+Pj4g
-cG9zc2libGUuCj4+Pj4+Cj4+Pj4+IEFzIGl0IGhhcHBlbnMgSSdsbCBiZSB3b3JraW5nIEZyaWRh
-eSBzbyBJIGNhbiBjaGVjayBpbiBzdHVmZiB0aGF0J3MgZ290Cj4+Pj4+IHRoZSByaWdodCBBY2tz
-IC8gUi1iJ3M7IGJ1dCBJIHdvbid0IGRvIGxhc3QtcGFzcyByZXZpZXdzIG9uIGJlaGFsZiBvZgo+
-Pj4+PiBtYWludGFpbmVycy4KPj4+Pgo+Pj4+IEkgYWxyZWFkeSB0aG91Z2h0IG9mIHNoaWZ0aW5n
-IHRoZSBmcmVlemUgYnkgb25lIHdlZWsuIE1haW4gcmVhc29uIGlzCj4+Pj4gdGhhdCBzZXZlcmFs
-IG1haW50YWluZXJzIHNlZW0gdG8gaGF2ZSBhIGJhY2tsb2cgb2YgcGF0Y2hlcyB0byByZXZpZXcK
-Pj4+PiB3aGljaCBJTU8gc2hvdWxkIG1ha2UgaXQgaW50byA0LjExLgo+Pj4+Cj4+Pj4gVGhvdWdo
-dHM/Cj4+Pgo+Pj4gV2VsbCB0aGVyZSdzIGEgYmVuZWZpdCB0byB0aGlzLCBidXQgYWxzbyBhIHJp
-c2s6IHRoYXQgcGVvcGxlIHdpbGwgYmVnaW4KPj4+IHRvIHNlZSB0aGUgImhhcmQgZnJlZXplIiBh
-cyBtb3JlIGxpa2UgYSAic29mdCBmcmVlemUiLCB0aGF0IHdpbGwgYWx3YXlzCj4+PiBiZSBwdXNo
-ZWQgYmFjayAvIGZsZXhlZCBpZiB5b3UgcHVzaCBoYXJkIGVub3VnaC4gIFBhcnQgb2YgdGhlIHB1
-cnBvc2Ugb2YKPj4+IHNldHRpbmcgdGhlIGhhcmQgZnJlZXplIG1vbnRocyBpbiBhZHZhbmNlIGlz
-IHNvIHRoYXQgcGVvcGxlIGNhbiBwbGFuCj4+PiBhaGVhZCBhbmQgZ2V0IHN0dWZmIHJldmlld2Vk
-IGluIHRpbWU7IHBhcnQgb2YgdGhlIHJlYXNvbiBmb3IgaGF2aW5nCj4+PiA2LW1vbnRoIHJlbGVh
-c2VzIGlzIHNvIHRoYXQgdGhlIGNvc3Qgb2YgZGVsYXlpbmcgYSBmZWF0dXJlIC8gcGF0Y2hzZXQg
-dG8KPj4+IHRoZSBuZXh0IHJlbGVhc2UgaXNuJ3QgdmVyeSBoaWdoLgo+Pgo+PiBBcyBtZW50aW9u
-ZWQgYmVmb3JlIEkgdGhpbmsgYW55d2F5IHRoYXQgd2Ugc2hvdWxkIHJldmlzaXQgdGhpcwo+PiBo
-YXJkIGZyZWV6ZSBkYXRlIGFwcHJvYWNoLiBJIHdvdWxkIG11Y2ggZmF2b3IgYSBoYXJkIGZyZWV6
-ZQo+PiBkYXRlIG9uIHdoZXJlIGl0IGlzIGRldGVybWluZWQgd2hpY2ggZmVhdHVyZXMgYXJlIGlu
-dGVuZGVkIHRvCj4+IG1ha2UgaXQgYW5kIHdoaWNoIG5vdC4gUmlnaHQgbm93IGF0IGxlYXN0IGV2
-ZXJ5dGhpbmcgcmVsYXRlZCB0bwo+PiBTcGVjdHJlIGFuZCBNZWx0ZG93biB3b3VsZCBpbW8gd2Fu
-dCB0byBnbyBpbnRvIHRoZSBjYXRlZ29yeQo+PiBvZiAid2UnbGwgd2FpdCB1bnRpbCBpdCdzIGlu
-Ii4KPj4KPiAKPiBZb3UncmUgbWl4aW5nIHVwIHR3byB0aGluZ3M6IGZlYXR1cmVzIGFuZCBzZWN1
-cml0eSBmaXhlcyAoYW5kIHRoZWlyCj4gc3Vic2VxdWVudCBwYXRjaGVzKS4gSSBhZ3JlZSB0aGUg
-bGF0dGVyIHNob3VsZCBnZXQgc3BlY2lhbCBhdHRlbnRpb24KPiBiZWNhdXNlIG1pc3NpbmcgdGhv
-c2Ugd291bGQgZXNzZW50aWFsbHkgcmVuZGVyIGEgcmVsZWFzZSB1c2VsZXNzIG9yCj4gdW5hdHRy
-YWN0aXZlLiAgTWVsdGRvd24gYW5kIFNwZWN0cmUgZmFsbCBpbnRvIHRoZSBzZWNvbmQgY2F0ZWdv
-cnksIGFzCj4gd2l0aCBhbGwgdGhlIFhTQXMuCgpBbmQgd2Ugc3RpbGwgaGF2ZSB0aGUgcG9zc2li
-aWxpdHkgb2YgaW5kaXZpZHVhbCBSZWxlYXNlLUFja3MuCgo+IEJ1dCBtb3N0IG9mIHRoZSB0aW1l
-LCBhbmQgbW9zdCBkZXZlbG9wZXJzIC8gY29udHJpYnV0b3JzIHdyaXRlIG5ldwo+IGZlYXR1cmVz
-LiAgSWYgdGhleSBhcmUgaWRlbnRpZmllZCB3aXRoIHN0cmF0ZWdpYyBpbXBvcnRhbmNlLCB3ZSBz
-aG91bGQKPiB3YWl0IChsaXZlcGF0Y2hpbmcgY29tZXMgdG8gbWluZCksIGJ1dCBmb3Igbm9ybWFs
-IG9uZXMgKHdoaWNoIG5vb25lCj4gYXJndWVzIGZvciksIHdlIHNob3VsZCBoYXZlIHRoZSBkZWZh
-dWx0IHBvc2l0aW9uIHRvIG5vdCB3YWl0Lgo+IAo+IFRoaXMgaXNuJ3QgaW5jb21wYXRpYmxlIHdp
-dGggd2hhdCB5b3Ugc2FpZC4KClJpZ2h0LgoKU3RpbGwgSSB0aGluayBzaGlmdGluZyBieSBvbmUg
-d2VlaywgZ2l2ZW4gdGhlIGN1cnJlbnQgc2l0dWF0aW9uIHdoZXJlCnNvbWUgbWFpbnRhaW5lcnMg
-aGFkIHRvIHNwZW5kIGEgc2lnbmlmaWNhbnQgYW1vdW50IG9mIHRoZSBkZXZlbG9wbWVudApwaGFz
-ZSB3aXRoIHNlY3VyaXR5IHN0dWZmIGluc3RlYWQgb2YgYmVpbmcgYWJsZSB0byByZXZpZXcgcGF0
-Y2hlcywgaXMKYSBzZW5zaWJsZSB0aGluZyB0byBkby4KClNvIEkgdGhpbmsgSSdsbCBkbyB0aGF0
-IHdpdGggbWFraW5nIGl0IHZlcnkgY2xlYXIgdGhhdCB0aGlzIHdvbid0IGJlIHRoZQpkZWZhdWx0
-IHByb2Nlc3MgZm9yIHRoZSBmb2xsb3dpbmcgcmVsZWFzZXMuCgoKSnVlcmdlbgoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7374378408537097837==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="sMkrXc3gAYLRVOjR"
+Content-Disposition: inline
+
+
+--sMkrXc3gAYLRVOjR
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Thu, Mar 29, Jan Beulich wrote:
+
+> wrappers.o: $(x86_emulate.h)
+
+Thanks. This did probably help, the build got further. Will send a patch.
+But another unrelated regression appeared.
+
+Olaf
+
+--sMkrXc3gAYLRVOjR
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWrzPJQAKCRBdQqD6ppg2
+fnYsAJ4gGUOtBNitT+Tllzd+mMrIYgxqGwCgq3pVjMOxeb9fI8VyIskeI4W+ryo=
+=6DTi
+-----END PGP SIGNATURE-----
+
+--sMkrXc3gAYLRVOjR--
+
+
+--===============7374378408537097837==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7374378408537097837==--
