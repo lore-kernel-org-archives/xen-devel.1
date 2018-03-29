@@ -1,9 +1,10 @@
 From: Olaf Hering <olaf@aepfle.de>
-Subject: seabios regression in staging
-Date: Thu, 29 Mar 2018 13:42:43 +0200
-Message-ID: <20180329114243.GN30726@aepfle.de>
+Subject: [PATCH v1] fuzz: wrappers.c depends on x86_emulate.h
+Date: Thu, 29 Mar 2018 14:01:30 +0200
+Message-ID: <20180329120130.13630-1-olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1239559864518291330=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -14,60 +15,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xen.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Olaf Hering <olaf@aepfle.de>, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1239559864518291330==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="EqVOK5mkaJAMmtSx"
-Content-Disposition: inline
-
-
---EqVOK5mkaJAMmtSx
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-It seems the latest seabios that was pulled into staging recently fails
-to compile, at least in SLE_11:
-
-[   86s]   Compile checking out/src/hw/blockcmd.o
-[   86s] src/hw/blockcmd.c: In function 'scsi_rep_luns_scan':
-[   86s] src/hw/blockcmd.c:229: error: unknown field 'cdbcmd' specified in initializer
-[   86s] src/hw/blockcmd.c:229: warning: missing braces around initializer
-[   86s] src/hw/blockcmd.c:229: warning: (near initialization for 'op.<anonymous>')
-[   86s] src/hw/blockcmd.c:229: warning: initialization makes integer from pointer without a cast
-[   86s] make[7]: *** [out/src/hw/blockcmd.o] Error 1
-
-I can eventually trick the build to use gcc48 not only for xen but also
-for tools, but I wonder if there is a way to fix this.
-
-Upstream may have not fixed that yet:
-https://github.com/coreboot/seabios/blame/master/src/block.h
-https://github.com/coreboot/seabios/blame/master/src/hw/blockcmd.c
-
-Olaf
-
---EqVOK5mkaJAMmtSx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWrzRMwAKCRBdQqD6ppg2
-forfAJ9b1x6Du1MWQpHF7Kgul36OrWqi9ACcCP+OTLInpypx53pKdQA5YUh0/ss=
-=PE8u
------END PGP SIGNATURE-----
-
---EqVOK5mkaJAMmtSx--
-
-
---===============1239559864518291330==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+SW4gbXkgYXV0b21hdGVkIFNMRV8xMSBidWlsZHMgSSBvZnRlbiBzZWUgZmFpbHVyZXMgbGlrZSB0
+aGF0OgoKWyAgIDc0c10gd3JhcHBlcnMuYzo1OjI1OiBlcnJvcjogeDg2LWVtdWxhdGUuaDogTm8g
+c3VjaCBmaWxlIG9yIGRpcmVjdG9yeQpbICAgNzRzXSBtYWtlWzZdOiAqKiogW3dyYXBwZXJzLm9d
+IEVycm9yIDEKClNpZ25lZC1vZmYtYnk6IE9sYWYgSGVyaW5nIDxvbGFmQGFlcGZsZS5kZT4KLS0t
+CiB0b29scy9mdXp6L3g4Nl9pbnN0cnVjdGlvbl9lbXVsYXRvci9NYWtlZmlsZSB8IDIgKysKIDEg
+ZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS90b29scy9mdXp6L3g4
+Nl9pbnN0cnVjdGlvbl9lbXVsYXRvci9NYWtlZmlsZSBiL3Rvb2xzL2Z1enoveDg2X2luc3RydWN0
+aW9uX2VtdWxhdG9yL01ha2VmaWxlCmluZGV4IGRmMDRkMDkyNTIuLjY5N2JjNWVhNjQgMTAwNjQ0
+Ci0tLSBhL3Rvb2xzL2Z1enoveDg2X2luc3RydWN0aW9uX2VtdWxhdG9yL01ha2VmaWxlCisrKyBi
+L3Rvb2xzL2Z1enoveDg2X2luc3RydWN0aW9uX2VtdWxhdG9yL01ha2VmaWxlCkBAIC0xOCw2ICsx
+OCw4IEBAIGFzbToKIAogYXNtLyU6IGFzbSA7CiAKK3dyYXBwZXJzLm86ICQoeDg2X2VtdWxhdGUu
+aCkKKwogeDg2LWVtdWxhdGUuYyB4ODYtZW11bGF0ZS5oIHdyYXBwZXJzLmM6ICU6CiAJWyAtTCAk
+KiBdIHx8IGxuIC1zZiAkKFhFTl9ST09UKS90b29scy90ZXN0cy94ODZfZW11bGF0b3IvJCoKIAoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1239559864518291330==--
