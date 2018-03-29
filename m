@@ -1,14 +1,19 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v5] new config option vtsc_tolerance_khz to
- avoid TSC emulation
-Date: Thu, 29 Mar 2018 10:58:34 +0200
-Message-ID: <20180329085834.GI30726@aepfle.de>
-References: <20180327092655.28530-1-olaf@aepfle.de>
- <20180329082545.sxx57zod4rttxqc6@MacBook-Pro-de-Roger.local>
+From: Dan Carpenter <dan.carpenter@oracle.com>
+Subject: [PATCH v2] xen/acpi: off by one in read_acpi_id()
+Date: Thu, 29 Mar 2018 12:01:53 +0300
+Message-ID: <20180329090153.GA17927@mwanda>
+References: <b8a2f028-8bbe-ae14-41ff-26c99850cba8@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6788134216565148694=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180329082545.sxx57zod4rttxqc6@MacBook-Pro-de-Roger.local>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=oxvc=gt=oracle.com=dan.carpenter@srs-us1.protection.inumbo.net>)
+ id 1f1TRc-00070D-Iw
+ for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 09:02:04 +0000
+Content-Disposition: inline
+In-Reply-To: <b8a2f028-8bbe-ae14-41ff-26c99850cba8@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,57 +22,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, Joao Martins <joao.m.martins@oracle.com>, kernel-janitors@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6788134216565148694==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="HuXIgs6JvY9hJs5C"
-Content-Disposition: inline
-
-
---HuXIgs6JvY9hJs5C
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Mar 29, Roger Pau Monn=C3=A9 wrote:
-
-> AFAICT in the chunk above you will disable vtsc without checking if
-> the hardware supports TSC scaling, which leads to inaccurate TSC values
-> on hardware that could provide accurate results without the software
-> emulation overhead.
-
-Is that really the case? Maybe I get the logic wrong, but what I see is:
-what ever my change does, or if a HVM domain runs on a host with scaling
-feature, disable vtsc. hvm_get_tsc_scaling_ratio has no side effects.
-Isnt the purpose to not emulate vtsc if the hardware supports scaling?
-
-Olaf
-
---HuXIgs6JvY9hJs5C
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWryqtwAKCRBdQqD6ppg2
-foBzAJ9mPCCOXxcHuZGZVhp+hqvnXpkN2wCg+CtmTBuShfA3x6JnOuBQ1I+W0IQ=
-=8u+/
------END PGP SIGNATURE-----
-
---HuXIgs6JvY9hJs5C--
-
-
---===============6788134216565148694==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6788134216565148694==--
+SWYgYWNwaV9pZCBpcyA9PSBucl9hY3BpX2JpdHMsIHRoZW4gd2UgYWNjZXNzIG9uZSBlbGVtZW50
+IGJleW9uZCB0aGUgZW5kCm9mIHRoZSBhY3BpX3BzZFtdIGFycmF5IG9yIHdlIHNldCBvbmUgYml0
+IGJleW9uZCB0aGUgZW5kIG9mIHRoZSBiaXQgbWFwCndoZW4gd2UgZG8gX19zZXRfYml0KGFjcGlf
+aWQsIGFjcGlfaWRfcHJlc2VudCk7CgpGaXhlczogNTlhNTY4MDI5MTgxICgieGVuL2FjcGktcHJv
+Y2Vzc29yOiBDIGFuZCBQLXN0YXRlIGRyaXZlciB0aGF0IHVwbG9hZHMgc2FpZCBkYXRhIHRvIGh5
+cGVydmlzb3IuIikKU2lnbmVkLW9mZi1ieTogRGFuIENhcnBlbnRlciA8ZGFuLmNhcnBlbnRlckBv
+cmFjbGUuY29tPgpSZXZpZXdlZC1ieTogSm9hbyBNYXJ0aW5zIDxqb2FvLm0ubWFydGluc0BvcmFj
+bGUuY29tPgpSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKZGlm
+ZiAtLWdpdCBhL2RyaXZlcnMveGVuL3hlbi1hY3BpLXByb2Nlc3Nvci5jIGIvZHJpdmVycy94ZW4v
+eGVuLWFjcGktcHJvY2Vzc29yLmMKaW5kZXggYzgwMTk1ZThmYmQxLi5iMjlmNGU0MDg1MWYgMTAw
+NjQ0Ci0tLSBhL2RyaXZlcnMveGVuL3hlbi1hY3BpLXByb2Nlc3Nvci5jCisrKyBiL2RyaXZlcnMv
+eGVuL3hlbi1hY3BpLXByb2Nlc3Nvci5jCkBAIC0zNjQsOSArMzY0LDkgQEAgcmVhZF9hY3BpX2lk
+KGFjcGlfaGFuZGxlIGhhbmRsZSwgdTMyIGx2bCwgdm9pZCAqY29udGV4dCwgdm9pZCAqKnJ2KQog
+CX0KIAkvKiBUaGVyZSBhcmUgbW9yZSBBQ1BJIFByb2Nlc3NvciBvYmplY3RzIHRoYW4gaW4geDJB
+UElDIG9yIE1BRFQuCiAJICogVGhpcyBjYW4gaGFwcGVuIHdpdGggaW5jb3JyZWN0IEFDUEkgU1NE
+VCBkZWNsZXJhdGlvbnMuICovCi0JaWYgKGFjcGlfaWQgPiBucl9hY3BpX2JpdHMpIHsKLQkJcHJf
+ZGVidWcoIldlIG9ubHkgaGF2ZSAldSwgdHJ5aW5nIHRvIHNldCAldVxuIiwKLQkJCSBucl9hY3Bp
+X2JpdHMsIGFjcGlfaWQpOworCWlmIChhY3BpX2lkID49IG5yX2FjcGlfYml0cykgeworCQlwcl9k
+ZWJ1ZygibWF4IGFjcGkgaWQgJXUsIHRyeWluZyB0byBzZXQgJXVcbiIsCisJCQkgbnJfYWNwaV9i
+aXRzIC0gMSwgYWNwaV9pZCk7CiAJCXJldHVybiBBRV9PSzsKIAl9CiAJLyogT0ssIFRoZXJlIGlz
+IGEgQUNQSSBQcm9jZXNzb3Igb2JqZWN0ICovCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
