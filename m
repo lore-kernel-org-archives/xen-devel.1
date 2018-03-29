@@ -1,19 +1,13 @@
-From: Andre Przywara <andre.przywara@linaro.org>
-Subject: [PATCH] ARM: new VGIC: evtchn: fix potential race in
- vcpu_mark_events_pending()
-Date: Thu, 29 Mar 2018 16:30:59 +0100
-Message-ID: <20180329153059.24716-1-andre.przywara@linaro.org>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: seabios regression in staging
+Date: Thu, 29 Mar 2018 17:36:32 +0200
+Message-ID: <20180329153631.GR30726@aepfle.de>
+References: <20180329114243.GN30726@aepfle.de>
+ <20180329142901.wuso5qz647kkmqhp@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3677971336026808382=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=tb9/=gt=linaro.org=andre.przywara@srs-us1.protection.inumbo.net>)
- id 1f1ZWB-00050h-6F
- for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 15:31:11 +0000
-Received: by mail-wr0-x243.google.com with SMTP id u11so5766125wri.12
- for <xen-devel@lists.xenproject.org>; Thu, 29 Mar 2018 08:31:08 -0700 (PDT)
+In-Reply-To: <20180329142901.wuso5qz647kkmqhp@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,57 +16,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-U3RlZmFubyBwb2ludGVkIG91dCB0aGUgZm9sbG93aW5nIHNpdHVhdGlvbjoKLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLQoxKSB2Y3B1QS9jcHVBIGlzIHJ1bm5pbmcsIGl0IGhhcyBhbHJlYWR5IGhhbmRs
-ZWQgdGhlIGV2ZW50LCBjbGVhcmVkCmV2dGNobl91cGNhbGxfcGVuZGluZyBhbmQgRU9JZWQgdGhl
-IGV2ZW50X2lycSBidXQgaGFzbid0IHRyYXBwZWQgaW50bwpYZW4geWV0LiBJdCBpcyBzdGlsbCBp
-biBndWVzdCBtb2RlLgoKMikgWGVuIG9uIGNwdUIgY2FsbHMgdmNwdV9tYXJrX2V2ZW50c19wZW5k
-aW5nKHZjcHVBKSwgdGhlbiBjYWxscwp2Z2ljX2luamVjdF9pcnEuIEhvd2V2ZXIsIGJlY2F1c2Ug
-aXJxLT5saW5lX2xldmVsIGlzIGhpZ2gsIGl0IGlzIG5vdAppbmplY3RlZC4KCjMpIHZjcHVBIGhh
-cyB0byB3YWl0IHVudGlsIHRyYXBwaW5nIGludG8gWGVuLCBjYWxsaW5nCnZjcHVfdXBkYXRlX2V2
-dGNobl9pcnEsIGFuZCBnb2luZyBiYWNrIHRvIGd1ZXN0IG1vZGUgYmVmb3JlIHJlY2VpdmluZwp0
-aGUgZXZlbnQuIFRoaXMgaXMgdGhlb3JldGljYWxseSBhIHZlcnkgbG9uZyB0aW1lLgotLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tCgpGaXggdGhpcyBieSB1cGRhdGluZyB0aGUgc3RhdGUgb2Ygb3VyIGVt
-dWxhdGVkIElSUSBsaW5lIGxldmVsIGluc2lkZQp2Y3B1X21hcmtfZXZlbnRzX3BlbmRpbmcoKSwg
-YmVmb3JlIHRyeWluZyB0byBpbmplY3QgdGhlIG5ldyBpbnRlcnJ1cHQuCgpEZXNwaXRlIGhhdmlu
-ZyB0d28gY2FsbHMgdG8gdmdpY19pbmplY3RfaXJxKCksIG9ubHkgb25lIHdpbGwgYWN0dWFsbHkg
-ZG8Kc29tZXRoaW5nOgotIElmIHRoZSBlbXVsYXRlZCBsaW5lIGxldmVsIHdhcyBhbHJlYWR5IGlu
-IHN5bmMgd2l0aCB0aGUgYWN0dWFsIGZsYWcsCiAgdGhlIFZHSUMgaWdub3JlcyB0aGUgZmlyc3Qg
-Y2FsbCwgZHVlIHRvIHZnaWNfdmFsaWRhdGVfaW5qZWN0aW9uKCkuCi0gSWYgdGhlIGVtdWxhdGVk
-IGxpbmUgbGV2ZWwgd2FzIGhpZ2gsIGJ1dCB0aGUgZmxhZyBzYXlzIGl0IHNob3VsZCBoYXZlCiAg
-YmVlbiBsb3csIHZnaWNfaW5qZWN0X2lycSgpIHdpbGwganVzdCB1cGRhdGUgdGhlIGxpbmVfbGV2
-ZWwgc3RhdGUuCi0gSWYgdGhlIGVtdWxhdGVkIGxpbmUgbGV2ZWwgd2FzIGxvdywgYnV0IHRoZSBm
-bGFncyBzYXlzIGl0IHNob3VsZCBoYXZlCiAgYmVlbiBoaWdoLCB3ZSB3aWxsIGluamVjdCB0aGUg
-aW50ZXJydXB0LiBUaGUgc2Vjb25kIGNhbGwgaXMgdGhlbiBhCiAgTk9QLgoKU2lnbmVkLW9mZi1i
-eTogQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnByenl3YXJhQGxpbmFyby5vcmc+Ci0tLQpIaSwKCnRo
-aXMgd291bGQgaWRlYWxseSBoYXZlIGJlZW4gcGFydCBvZiBhIGZvcm1lciBwYXRjaDoKIltQQVRD
-SCB2MyAwNi8zOV0gQVJNOiBldnRjaG46IEhhbmRsZSBsZXZlbCB0cmlnZ2VyZWQgSVJRcyBjb3Jy
-ZWN0bHkiLApidXQgdGhpcyBoYXMgYmVlbiBtZXJnZWQgYWxyZWFkeSwgc28gdGhpcyBoYXMgdG8g
-YmUgYSBmb2xsb3ctdXAuCklkZWFsbHkgdGhpcyB3b3VsZCBiZSBtZXJnZWQgYmVmb3JlIHRoZSBm
-aW5hbCBwYXRjaCB0aGF0IGludHJvZHVjZXMgdGhlCkNPTkZJR19ORVdfVkdJQyBLY29uZmlnIHN5
-bWJvbCwgc28gdGhhdCB0aGUgb2xkIGNvZGUgZ2V0cyBuZXZlciBjb21waWxlZC4KClRoYW5rcywK
-QW5kcmUKCiB4ZW4vYXJjaC9hcm0vZG9tYWluLmMgfCAxMSArKysrKysrKystLQogMSBmaWxlIGNo
-YW5nZWQsIDkgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4v
-YXJjaC9hcm0vZG9tYWluLmMgYi94ZW4vYXJjaC9hcm0vZG9tYWluLmMKaW5kZXggOTY4OGU2MmY3
-OC4uMTFmYTkwMDJkYyAxMDA2NDQKLS0tIGEveGVuL2FyY2gvYXJtL2RvbWFpbi5jCisrKyBiL3hl
-bi9hcmNoL2FybS9kb21haW4uYwpAQCAtOTQ3LDEwICs5NDcsMTcgQEAgdm9pZCB2Y3B1X21hcmtf
-ZXZlbnRzX3BlbmRpbmcoc3RydWN0IHZjcHUgKnYpCiAgICAgaW50IGFscmVhZHlfcGVuZGluZyA9
-IHRlc3RfYW5kX3NldF9iaXQoCiAgICAgICAgIDAsICh1bnNpZ25lZCBsb25nICopJnZjcHVfaW5m
-byh2LCBldnRjaG5fdXBjYWxsX3BlbmRpbmcpKTsKIAotICAgIGlmICggYWxyZWFkeV9wZW5kaW5n
-ICkKLSAgICAgICAgcmV0dXJuOworI2lmZGVmIENPTkZJR19ORVdfVkdJQworICAgIC8qIFVwZGF0
-ZSB0aGUgc3RhdGUgb2YgdGhlIGN1cnJlbnQgaW50ZXJydXB0IGxpbmUuICovCisgICAgdmdpY19p
-bmplY3RfaXJxKHYtPmRvbWFpbiwgdiwgdi0+ZG9tYWluLT5hcmNoLmV2dGNobl9pcnEsIGFscmVh
-ZHlfcGVuZGluZyk7CiAKKyAgICAvKiBNYWtlIHRoZSBsZXZlbCBJUlEgcGVuZGluZy4gVGhhdCdz
-IGEgTk9QIGlmIGl0IHdhcyBhbHJlYWR5LiAqLwogICAgIHZnaWNfaW5qZWN0X2lycSh2LT5kb21h
-aW4sIHYsIHYtPmRvbWFpbi0+YXJjaC5ldnRjaG5faXJxLCB0cnVlKTsKKyNlbHNlCisgICAgLyog
-T25seSBzaWduYWwgdGhlIFZHSUMgaWYgaXQgd2Fzbid0IGFscmVhZHkgcGVuZGluZy4gKi8KKyAg
-ICBpZiAoICFhbHJlYWR5X3BlbmRpbmcgKQorICAgICAgICB2Z2ljX2luamVjdF9pcnEodi0+ZG9t
-YWluLCB2LCB2LT5kb21haW4tPmFyY2guZXZ0Y2huX2lycSwgdHJ1ZSk7CisjZW5kaWYKIH0KIAog
-dm9pZCB2Y3B1X3VwZGF0ZV9ldnRjaG5faXJxKHN0cnVjdCB2Y3B1ICp2KQotLSAKMi4xNC4xCgoK
+
+--===============3677971336026808382==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="kAOhhqH5290wydqT"
+Content-Disposition: inline
+
+
+--kAOhhqH5290wydqT
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Thu, Mar 29, Wei Liu wrote:
+
+> I think this is a problem with seabios upstream. We should ask them to
+> fix it and do another release.
+
+https://mail.coreboot.org/pipermail/seabios/2017-November/011932.html
+
+gcc-4.6+ is now required.
+
+Olaf
+
+--kAOhhqH5290wydqT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWr0H/AAKCRBdQqD6ppg2
+fi9rAKD0XLWUWVE10l8Klbfl8qbxViJgZgCePrXbHVxmegLZPAalp+H/dReSdDI=
+=C2PO
+-----END PGP SIGNATURE-----
+
+--kAOhhqH5290wydqT--
+
+
+--===============3677971336026808382==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3677971336026808382==--
