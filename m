@@ -1,14 +1,13 @@
-From: Wei Liu <wei.liu2@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: seabios regression in staging
-Date: Thu, 29 Mar 2018 15:29:01 +0100
-Message-ID: <20180329142901.wuso5qz647kkmqhp@citrix.com>
+Date: Thu, 29 Mar 2018 16:53:41 +0200
+Message-ID: <20180329145341.GO30726@aepfle.de>
 References: <20180329114243.GN30726@aepfle.de>
+ <20180329142901.wuso5qz647kkmqhp@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============9110257948923308691=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <20180329114243.GN30726@aepfle.de>
+In-Reply-To: <20180329142901.wuso5qz647kkmqhp@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,31 +16,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBNYXIgMjksIDIwMTggYXQgMDE6NDI6NDNQTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
-dGU6Cj4gSXQgc2VlbXMgdGhlIGxhdGVzdCBzZWFiaW9zIHRoYXQgd2FzIHB1bGxlZCBpbnRvIHN0
-YWdpbmcgcmVjZW50bHkgZmFpbHMKPiB0byBjb21waWxlLCBhdCBsZWFzdCBpbiBTTEVfMTE6Cj4g
-Cj4gWyAgIDg2c10gICBDb21waWxlIGNoZWNraW5nIG91dC9zcmMvaHcvYmxvY2tjbWQubwo+IFsg
-ICA4NnNdIHNyYy9ody9ibG9ja2NtZC5jOiBJbiBmdW5jdGlvbiAnc2NzaV9yZXBfbHVuc19zY2Fu
-JzoKPiBbICAgODZzXSBzcmMvaHcvYmxvY2tjbWQuYzoyMjk6IGVycm9yOiB1bmtub3duIGZpZWxk
-ICdjZGJjbWQnIHNwZWNpZmllZCBpbiBpbml0aWFsaXplcgo+IFsgICA4NnNdIHNyYy9ody9ibG9j
-a2NtZC5jOjIyOTogd2FybmluZzogbWlzc2luZyBicmFjZXMgYXJvdW5kIGluaXRpYWxpemVyCj4g
-WyAgIDg2c10gc3JjL2h3L2Jsb2NrY21kLmM6MjI5OiB3YXJuaW5nOiAobmVhciBpbml0aWFsaXph
-dGlvbiBmb3IgJ29wLjxhbm9ueW1vdXM+JykKPiBbICAgODZzXSBzcmMvaHcvYmxvY2tjbWQuYzoy
-Mjk6IHdhcm5pbmc6IGluaXRpYWxpemF0aW9uIG1ha2VzIGludGVnZXIgZnJvbSBwb2ludGVyIHdp
-dGhvdXQgYSBjYXN0Cj4gWyAgIDg2c10gbWFrZVs3XTogKioqIFtvdXQvc3JjL2h3L2Jsb2NrY21k
-Lm9dIEVycm9yIDEKPiAKPiBJIGNhbiBldmVudHVhbGx5IHRyaWNrIHRoZSBidWlsZCB0byB1c2Ug
-Z2NjNDggbm90IG9ubHkgZm9yIHhlbiBidXQgYWxzbwo+IGZvciB0b29scywgYnV0IEkgd29uZGVy
-IGlmIHRoZXJlIGlzIGEgd2F5IHRvIGZpeCB0aGlzLgo+IAo+IFVwc3RyZWFtIG1heSBoYXZlIG5v
-dCBmaXhlZCB0aGF0IHlldDoKPiBodHRwczovL2dpdGh1Yi5jb20vY29yZWJvb3Qvc2VhYmlvcy9i
-bGFtZS9tYXN0ZXIvc3JjL2Jsb2NrLmgKPiBodHRwczovL2dpdGh1Yi5jb20vY29yZWJvb3Qvc2Vh
-Ymlvcy9ibGFtZS9tYXN0ZXIvc3JjL2h3L2Jsb2NrY21kLmMKPiAKCkkgdGhpbmsgdGhpcyBpcyBh
-IHByb2JsZW0gd2l0aCBzZWFiaW9zIHVwc3RyZWFtLiBXZSBzaG91bGQgYXNrIHRoZW0gdG8KZml4
-IGl0IGFuZCBkbyBhbm90aGVyIHJlbGVhc2UuCgpEbyB5b3UgdXNlIGEgbm9uLWRlZmF1bHQgc2Vh
-YmlvcyBjb25maWd1cmF0aW9uPyBPc3N0ZXN0IHNlZW1zIHRvIGJlCmhhcHB5IHdpdGggdGhlIHVw
-ZGF0ZS4KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============9110257948923308691==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="MdEjg5WkSuUg8x46"
+Content-Disposition: inline
+
+
+--MdEjg5WkSuUg8x46
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Thu, Mar 29, Wei Liu wrote:
+
+> Do you use a non-default seabios configuration? Osstest seems to be
+> happy with the update.
+
+Not sure how I would create a non-default seabios or toolchain build.
+
+osstest does not use SLE11, so it can not possibly spot such compile
+errors. It would certainly be cool if there would be a test with very
+old and very new toolchain.
+
+Olaf
+
+--MdEjg5WkSuUg8x46
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWrz98gAKCRBdQqD6ppg2
+frt8AJ95m7tqDVVdJZBHKLIV+vBOzA9cYQCggDdsKVcmwU8syLPzFrT95/EIvGc=
+=0kH9
+-----END PGP SIGNATURE-----
+
+--MdEjg5WkSuUg8x46--
+
+
+--===============9110257948923308691==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9110257948923308691==--
