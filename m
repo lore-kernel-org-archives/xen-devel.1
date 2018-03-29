@@ -1,21 +1,24 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH v5 0/1] drm/xen-front: Add support for Xen
- PV display frontend
-Date: Thu, 29 Mar 2018 12:24:33 +0300
-Message-ID: <7d9511c8-c3ed-b834-3f23-9664281d4468__7152.11724532327$1522315403$gmane$org@gmail.com>
-References: <20180329092247.23905-1-andr2000@gmail.com>
+From: Daniel Kiper <daniel.kiper@oracle.com>
+Subject: Re: [PATCH v3 2/2] x86/setup: remap Xen image up to
+ PFN_DOWN(__pa(_end))
+Date: Thu, 29 Mar 2018 11:31:19 +0200
+Message-ID: <20180329093119.GK26100@olila.local.net-space.pl>
+References: <1515589548-27317-1-git-send-email-daniel.kiper@oracle.com>
+ <1515589548-27317-3-git-send-email-daniel.kiper@oracle.com>
+ <5A621C8202000078001A06F8@prv-mh.provo.novell.com>
+ <20180208134623.GR31868@olila.local.net-space.pl>
+ <5A82BAF602000078001A7372@prv-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------B0F36CF2C88CD34800597A42"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=crdi=gt=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1f1TnS-0000Wl-Jx
- for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 09:24:38 +0000
-Received: by mail-lf0-x229.google.com with SMTP id m200-v6so1689997lfm.4
- for <xen-devel@lists.xenproject.org>; Thu, 29 Mar 2018 02:24:37 -0700 (PDT)
-In-Reply-To: <20180329092247.23905-1-andr2000@gmail.com>
-Content-Language: en-US
+ <srs0=f6zg=gt=oracle.com=daniel.kiper@srs-us1.protection.inumbo.net>)
+ id 1f1Tu5-0001N0-V0
+ for xen-devel@lists.xenproject.org; Thu, 29 Mar 2018 09:31:29 +0000
+Content-Disposition: inline
+In-Reply-To: <5A82BAF602000078001A7372@prv-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,106 +27,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, airlied@linux.ie, daniel.vetter@intel.com, seanpaul@chromium.org, gustavo@padovan.org, jgross@suse.com, boris.ostrovsky@oracle.com, konrad.wilk@oracle.com
-Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: andrew.cooper3@citrix.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---------------B0F36CF2C88CD34800597A42
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-On 03/29/2018 12:22 PM, Oleksandr Andrushchenko wrote:
-> Changes since v4:
-For your convenience I am attaching diff between v4..v5
-
---------------B0F36CF2C88CD34800597A42
-Content-Type: text/x-patch;
- name="v4_v5.diff"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="v4_v5.diff"
-
-diff --git a/Documentation/gpu/xen-front.rst b/Documentation/gpu/xen-front.rst
-index 8188e03c9d23..009d942386c5 100644
---- a/Documentation/gpu/xen-front.rst
-+++ b/Documentation/gpu/xen-front.rst
-@@ -1,6 +1,6 @@
--====================================
--Xen para-virtualized frontend driver
--====================================
-+====================================================
-+ drm/xen-front Xen para-virtualized frontend driver
-+====================================================
- 
- This frontend driver implements Xen para-virtualized display
- according to the display protocol described at
-diff --git a/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c b/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
-index e521785fd22b..02b6f3d9fe4c 100644
---- a/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
-@@ -186,8 +186,10 @@ static int evtchnl_alloc(struct xen_drm_front_info *front_info, int index,
- 				sring, XEN_PAGE_SIZE);
- 
- 		ret = xenbus_grant_ring(xb_dev, sring, 1, &gref);
--		if (ret < 0)
-+		if (ret < 0) {
-+			free_page(page);
- 			goto fail;
-+		}
- 
- 		handler = evtchnl_interrupt_ctrl;
- 	} else {
-@@ -195,8 +197,10 @@ static int evtchnl_alloc(struct xen_drm_front_info *front_info, int index,
- 
- 		ret = gnttab_grant_foreign_access(xb_dev->otherend_id,
- 				virt_to_gfn((void *)page), 0);
--		if (ret < 0)
-+		if (ret < 0) {
-+			free_page(page);
- 			goto fail;
-+		}
- 
- 		gref = ret;
- 		handler = evtchnl_interrupt_evt;
-diff --git a/drivers/gpu/drm/xen/xen_drm_front_kms.c b/drivers/gpu/drm/xen/xen_drm_front_kms.c
-index 545049dfaf0a..f3ef9dfb4dfb 100644
---- a/drivers/gpu/drm/xen/xen_drm_front_kms.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front_kms.c
-@@ -107,12 +107,13 @@ static void send_pending_event(struct xen_drm_front_drm_pipeline *pipeline)
- }
- 
- static void display_enable(struct drm_simple_display_pipe *pipe,
--		struct drm_crtc_state *crtc_state)
-+		struct drm_crtc_state *crtc_state,
-+		struct drm_plane_state *plane_state)
- {
- 	struct xen_drm_front_drm_pipeline *pipeline =
- 			to_xen_drm_pipeline(pipe);
- 	struct drm_crtc *crtc = &pipe->crtc;
--	struct drm_framebuffer *fb = pipe->plane.state->fb;
-+	struct drm_framebuffer *fb = plane_state->fb;
- 	int ret, idx;
- 
- 	if (!drm_dev_enter(pipe->crtc.dev, &idx))
-@@ -273,7 +274,7 @@ static void display_update(struct drm_simple_display_pipe *pipe,
- 	drm_dev_exit(idx);
- }
- 
--enum drm_mode_status display_mode_valid(struct drm_crtc *crtc,
-+static enum drm_mode_status display_mode_valid(struct drm_crtc *crtc,
- 		const struct drm_display_mode *mode)
- {
- 	struct xen_drm_front_drm_pipeline *pipeline =
-
---------------B0F36CF2C88CD34800597A42
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------B0F36CF2C88CD34800597A42--
+T24gVHVlLCBGZWIgMTMsIDIwMTggYXQgMDI6MTY6MjJBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDA4LjAyLjE4IGF0IDE0OjQ2LCA8ZGFuaWVsLmtpcGVyQG9yYWNsZS5jb20+
+IHdyb3RlOgo+ID4gU29ycnkgZm9yIGxhdGUgcmVwbHkgYnV0IEkgd2FzIGJ1c3kgd2l0aCBvdGhl
+ciBzdHVmZi4KPiA+Cj4gPiBPbiBGcmksIEphbiAxOSwgMjAxOCBhdCAwODoyNzo0NkFNIC0wNzAw
+LCBKYW4gQmV1bGljaCB3cm90ZToKPiA+PiA+Pj4gT24gMTAuMDEuMTggYXQgMTQ6MDUsIDxkYW5p
+ZWwua2lwZXJAb3JhY2xlLmNvbT4gd3JvdGU6Cj4gPj4gPiBDdXJyZW50IGxpbWl0LCBQRk5fRE9X
+Tih4ZW5fcGh5c19zdGFydCksIGludHJvZHVjZWQgYnkgY29tbWl0IGIyODA0NDIKPiA+PiA+ICh4
+ODY6IG1ha2UgWGVuIGVhcmx5IGJvb3QgY29kZSByZWxvY2F0YWJsZSkgaXMgbm90IHJlbGlhYmxl
+LiBQb3RlbnRpYWxseQo+ID4+ID4gaXRzIHZhbHVlIG1heSBmYWxsIGJlbG93IFBGTl9ET1dOKF9f
+cGEoX2VuZCkpIGFuZCB0aGVuIHBhcnQgb2YgWGVuIGltYWdlCj4gPj4gPiBtYXkgbm90IGJlIG1h
+cHBlZCBhZnRlciByZWxvY2F0aW9uLiBUaGlzIHdpbGwgbm90IGhhcHBlbiBpbiBjdXJyZW50IGNv
+ZGUKPiA+PiA+IHRoYW5rcyB0byAieDg2L3NldHVwOiBkbyBub3QgcmVsb2NhdGUgb3ZlciBjdXJy
+ZW50IFhlbiBpbWFnZSBwbGFjZW1lbnQiCj4gPj4gPiBwYXRjaC4gVGhvdWdoIHRoaXMgc2FmZXR5
+IG1lYXN1cmUgbWF5IHNhdmUgYSBsb3Qgb2YgZGVidWdnaW5nIHRpbWUgd2hlbgo+ID4+ID4gc29t
+ZWJvZHkgZGVjaWRlIHRvIHJlbGF4IGV4aXN0aW5nIHJlbG9jYXRpb24gcmVzdHJpY3Rpb25zIG9u
+ZSBkYXkuCj4gPj4KPiA+PiBJJ3ZlIGdvbmUgYmFjayB0aHJvdWdoIHRoZSB2MiBkaXNjdXNzaW9u
+LCBhbmQgSSBjb250aW51ZSB0byBmYWlsIHRvCj4gPj4gc2VlIHdoYXQgaXMgYmVpbmcgZml4ZWQg
+aGVyZSwgZXZlbiBpZiBqdXN0IHRoZW9yZXRpY2FsbHkuIEl0IGlzIGJhZAo+ID4KPiA+IE9LLCBs
+ZXQncyBnaXZlIGFuIGV4YW1wbGUuIEkgYXNzdW1lIHRoYXQgdGhlcmUgaXMgbm8gcGF0Y2ggMSBh
+bmQgWGVuIGNhbgo+ID4gcmVsb2NhdGUgaXRzZWxmIGV2ZW4gaXQgd2FzIGluaXRpYWxseSByZWxv
+Y2F0ZWQgYnkgdGhlIGJvb3Rsb2FkZXIuIFNvLAo+ID4gbGV0J3MgYXNzdW1lIHRoYXQgdGhlIGJv
+b3Rsb2FkZXIgbG9hZGVkIFhlbiBpbWFnZSBhdCAweDgwMjAwMDAwCj4gPiAoeGVuX3BoeXNfc3Rh
+cnQgPT0gMHg4MDAwMDAwMCkgYW5kIGl0cyBzaXplIGlzIDB4NzAwMDAwICg3IE1pQikuCj4gPiBU
+aGUgUkFNIHJlZ2lvbiBlbmRzIGF0IDB4ODBEMDAwMDAgYW5kIHRoZXJlIGlzIG5vIFJBTSBhYm92
+ZSB0aGF0Cj4gPiBhZGRyZXNzLiBBdCBzb21lIHBvaW50IFhlbiByZWFsaXplcyB0aGF0IGl0IGNh
+biByZWxvY2F0ZSBpdHNlbGYKPiA+IHRvIDB4ODA2MDAwMDAgKHhlbl9waHlzX3N0YXJ0ID09IDB4
+ODA0MDAwMDApLiBTbywgaXQgZG9lcyBhbmQgdGhlbgo+ID4gcmVtYXBzIGl0c2VsZi4gQW5kIGhl
+cmUgaXMgdGhlIHByb2JsZW0uIEN1cnJlbnRseSBleGlzdGluZyBjb2RlCj4gPiB3aWxsIHJlbWFw
+IG9ubHkgWGVuIGltYWdlIHVwIHRvIDB4ODAzZmZmZmYuIEV2ZXJ5dGhpbmcgYWJvdmUgd2lsbAo+
+ID4gbm8gYmUgcmVtYXBwZWQuIFNvLCB0aGF0IGlzIHdoeSBJIHN1Z2dlc3RlZCB0aGlzIHBhdGNo
+Lgo+ID4KPiA+PiBlbm91Z2ggdGhhdCB0aGUgZGVzY3JpcHRpb24gaGVyZSBpc24ndCBjbGFyaWZ5
+aW5nIHRoaXMgYW5kIEkgbmVlZCB0bwo+ID4+IGdvIGJhY2sgdG8gdGhlIGVhcmxpZXIgZGlzY3Vz
+c2lvbiwgYnV0IGl0J3MgZXZlbiB3b3JzZSBpZiBldmVuIHRoYXQKPiA+PiBlYXJsaWVyIGRpc2N1
+c3Npb24gZGlkbid0IHJlYWxseSBoZWxwLiBNeSBjb25jbHVzaW9uIGlzIHRoYXQgeW91J3JlCj4g
+Pgo+ID4gU29ycnkgYWJvdXQgdGhhdC4KPiA+Cj4gPj4gdGFsa2luZyBhYm91dCBhIGNhc2Ugd2hl
+cmUgb2xkIGFuZCBwb3NpdGlvbnMgb2YgWGVuIG92ZXJsYXAsIGEKPiA+PiBjYXNlIHdoaWNoIEkg
+dGhvdWdodCBwYXRjaCAxIGVsaW1pbmF0ZXMuCj4gPgo+ID4gSXQgZG9lcyBub3QgZWxpbWluYXRl
+IHRoZSBpc3N1ZSBkZXNjcmliZWQgYWJvdmUuIEl0IGp1c3QgaGlkZXMgaXQuCj4KPiBXZWxsLCBu
+bywgSSBkaXNhZ3JlZSAtIGl0IG1ha2VzIGFuIG92ZXJsYXAgaW1wb3NzaWJsZSBhZmFpY3QsCj4g
+d2hpY2ggaXMgbW9yZSB0aGF0IGp1c3QgaGlkaW5nIHRoZSBwcm9ibGVtLiBBbnl3YXkgLSBJJ20g
+bm90Cj4gZ29pbmcgdG8gb2JqZWN0IHRvIHRoZSBjaGFuZ2UgcHJvdmlkZWQgaXQgY29tZXMgd2l0
+aCBhIGNsZWFyCj4gZGVzY3JpcHRpb24gb2Ygd2hhdCBfZXhpc3RpbmdfIGlzc3VlIChldmVuIGlm
+IGp1c3QgYSB0aGVvcmV0aWNhbAo+IG9uZSkgaXMgYmVpbmcgZml4ZWQgX3dpdGggdGhlIGN1cnJl
+bnRseSBwcmVzZW50IGNvZGUgaW4gbWluZF8KPiAoaS5lLiBpbiBwYXJ0aWN1bGFyIGluY2x1ZGlu
+ZyB5b3VyIHBhdGNoIDEpLgoKV2VsbCwgaXQgbG9va3MgdGhhdCBJIGhhdmUgbWlzcmVhZCB0aGUg
+Y29kZSBhbmQgSSB3YXMgc2ltcGx5IGx5aW5nLgpTb3JyeSBhYm91dCB0aGF0LiBIb3dldmVyLCBJ
+IGhhZCBzdHJhbmdlIGZlZWxpbmcgdGhhdCBzdGlsbCBzb21ldGhpbmcKaXMgd3JvbmcgaGVyZS4g
+QW5kIGl0IGlzIHdyb25nLiBDdXJyZW50bHkgZGVzdGluYXRpb24gcmVnaW9uIGJldHdlZW4KX19p
+bWFnZV9iYXNlX18gYW5kIChfX2ltYWdlX2Jhc2VfXyArIFhFTl9JTUdfT0ZGU0VUKSBtYXkgb3Zl
+cmxhcCB3aXRoCnRoZSBlbmQgb2Ygc291cmNlIGltYWdlLiBBbmQgaGVyZSBpcyB0aGUgcHJvYmxl
+bS4gSWYgYW55dGhpbmcgYmV0d2VlbgpfX3BhZ2VfdGFibGVzX3N0YXJ0IGFuZCBfX3BhZ2VfdGFi
+bGVzX2VuZCBsYW5kcyBpbiB0aGUgb3ZlcmxhcCB0aGVuCnNvbWUgb3IgZXZlbiBhbGwgcGFnZSB0
+YWJsZSBlbnRyaWVzIG1heSBub3QgYmUgdXBkYXRlZC4gVGhpcyBtZWFucyBib29tCmluIGVhcmx5
+IGJvb3Qgd2hpY2ggd2lsbCBiZSBkaWZmaWN1bHQgdG8gdGhlIGludmVzdGlnYXRlLiBTbywgSSB0
+aGluawp0aGUgd2UgaGF2ZSB0aHJlZSBjaG9pY2VzIHRvIGZpeCB0aGUgaXNzdWU6CiAgLSBkcm9w
+IFhFTl9JTUdfT0ZGU0VUIGZyb20KICAgIGlmICggKGVuZCA+IHMpICYmIChlbmQgLSByZWxvY19z
+aXplICsgWEVOX0lNR19PRkZTRVQgPj0gX19wYShfZW5kKSkgKQogIC0gYWRkIFhFTl9JTUdfT0ZG
+U0VUIHRvIHhlbl9waHlzX3N0YXJ0IGluIFBGTl9ET1dOKHhlbl9waHlzX3N0YXJ0KQogICAgdXNl
+ZCBpbiBsb29wcyBhcyBvbmUgb2YgY29uZGl0aW9ucywKICAtIGNoYW5nZSBQRk5fRE9XTih4ZW5f
+cGh5c19zdGFydCkgdG8gUEZOX0RPV04oeGVuX3JlbWFwX2VuZF9wZm4pCiAgICBwcm9wb3NlZCBp
+biB0aGlzIHBhdGNoLgoKSSB0aGluayB0aGF0IHdlIHNob3VsZCBjaG9vc2UgZmlyc3Qgb3B0aW9u
+LiBUaGlzIHdheSB3ZSB3aWxsIGF2b2lkCmFsbCBraW5kcyBvZiBvdmVybGFwcyB3aGljaCBhcmUg
+YWx3YXlzIGZ1bGwgY2FuIG9mIHdvcm1zLgoKRGFuaWVsCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
