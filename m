@@ -1,8 +1,10 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] Add pvcalls info to xl man page and add missing
- LIBXL_HAVE_PVCALLS
-Date: Fri, 30 Mar 2018 10:31:53 -0700
-Message-ID: <1522431113-19126-1-git-send-email-sstabellini@kernel.org>
+Subject: Re: [PATCH v2] xl/libxl: add pvcalls support
+Date: Fri, 30 Mar 2018 10:33:27 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1803301021040.15200@sstabellini-ThinkPad-X260>
+References: <1522361220-11023-1-git-send-email-sstabellini@kernel.org>
+ <20180330082534.raumpptl55dnwy7c@citrix.com>
+ <20180330115351.dg46qu7vylgqbm3n@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -10,8 +12,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=fgpl=gu=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1f1xsc-0007X5-3i
- for xen-devel@lists.xenproject.org; Fri, 30 Mar 2018 17:31:58 +0000
+ id 1f1xu5-0007cZ-E5
+ for xen-devel@lists.xenproject.org; Fri, 30 Mar 2018 17:33:29 +0000
+In-Reply-To: <20180330115351.dg46qu7vylgqbm3n@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,37 +23,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: wei.liu2@citrix.com
-Cc: Stefano Stabellini <stefano@aporeto.com>, xen-devel@lists.xenproject.org, sstabellini@kernel.org, ian.jackson@eu.citrix.com
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <stefano@aporeto.com>, xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, ian.jackson@eu.citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-QWRkIGEgc2hvcnQgZW50cnkgdG8gdGhlIHhsLmNmZyBtYW4gcGFnZSBhYm91dCBwdmNhbGxzLgpB
-bHNvIGFkZCBMSUJYTF9IQVZFX1BWQ0FMTFMgdG8gbWFyayB0aGUgcHJlc2VuY2Ugb2YgcHZjYWxs
-cyBzdXBwb3J0IGluCmxpYnhsLgoKU2lnbmVkLW9mZi1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxz
-dGVmYW5vQGFwb3JldG8uY29tPgotLS0KIGRvY3MvbWFuL3hsLmNmZy5wb2QuNS5pbiB8IDcgKysr
-KysrKwogdG9vbHMvbGlieGwvbGlieGwuaCAgICAgIHwgNyArKysrKysrCiAyIGZpbGVzIGNoYW5n
-ZWQsIDE0IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9kb2NzL21hbi94bC5jZmcucG9kLjUu
-aW4gYi9kb2NzL21hbi94bC5jZmcucG9kLjUuaW4KaW5kZXggMmMxYTZlMS4uNDdkODgyNCAxMDA2
-NDQKLS0tIGEvZG9jcy9tYW4veGwuY2ZnLnBvZC41LmluCisrKyBiL2RvY3MvbWFuL3hsLmNmZy5w
-b2QuNS5pbgpAQCAtNjg1LDYgKzY4NSwxMyBAQCBTcGVjaWZ5IHRoZSBiYWNrZW5kIGRvbWFpbiBu
-YW1lIG9yIGlkLCBkZWZhdWx0cyB0byBkb20wLgogCiA9YmFjawogCis9aXRlbSBCPHB2Y2FsbHM9
-WyAiYmFja2VuZD1kb21haW4taWQiLCAuLi4gXT4KKworQ3JlYXRlcyBhIFhlbiBwdmNhbGxzIGNv
-bm5lY3Rpb24gdG8gaGFuZGxlIHB2Y2FsbHMgcmVxdWVzdHMgZnJvbQorZnJvbnRlbmQgdG8gYmFj
-a2VuZC4gSXQgY2FuIGJlIHVzZWQgYXMgYW4gYWx0ZXJuYXRpdmUgbmV0d29ya2luZyBtb2RlbC4K
-K0ZvciBtb3JlIGluZm9ybWF0aW9uIGFib3V0IHRoZSBwcm90b2NvbCwgc2VlCitodHRwczovL3hl
-bmJpdHMueGVuLm9yZy9kb2NzL3Vuc3RhYmxlL21pc2MvcHZjYWxscy5odG1sLgorCiA9aXRlbSBC
-PHZmYj1bICJWRkJfU1BFQ19TVFJJTkciLCAiVkZCX1NQRUNfU1RSSU5HIiwgLi4uXT4KIAogU3Bl
-Y2lmaWVzIHRoZSBwYXJhdmlydHVhbCBmcmFtZWJ1ZmZlciBkZXZpY2VzIHdoaWNoIHNob3VsZCBi
-ZSBzdXBwbGllZApkaWZmIC0tZ2l0IGEvdG9vbHMvbGlieGwvbGlieGwuaCBiL3Rvb2xzL2xpYnhs
-L2xpYnhsLmgKaW5kZXggYmZmYzVhMS4uZWVhNTdjYSAxMDA2NDQKLS0tIGEvdG9vbHMvbGlieGwv
-bGlieGwuaAorKysgYi90b29scy9saWJ4bC9saWJ4bC5oCkBAIC0xMTI3LDYgKzExMjcsMTMgQEAg
-dm9pZCBsaWJ4bF9tYWNfY29weShsaWJ4bF9jdHggKmN0eCwgbGlieGxfbWFjICpkc3QsIGNvbnN0
-IGxpYnhsX21hYyAqc3JjKTsKICAqLwogI2RlZmluZSBMSUJYTF9IQVZFX1BWX1NISU0gMQogCisv
-KgorICogTElCWExfSEFWRV9QVkNBTExTCisgKgorICogSWYgdGhpcyBpcyBkZWZpbmVkLCBsaWJ4
-bCBzdXBwb3J0cyBjcmVhdGluZyBwdmNhbGxzIGludGVyZmFjZXMuCisgKi8KKyNkZWZpbmUgTElC
-WExfSEFWRV9QVkNBTExTIDEKKwogdHlwZWRlZiBjaGFyICoqbGlieGxfc3RyaW5nX2xpc3Q7CiB2
-b2lkIGxpYnhsX3N0cmluZ19saXN0X2Rpc3Bvc2UobGlieGxfc3RyaW5nX2xpc3QgKnNsKTsKIGlu
-dCBsaWJ4bF9zdHJpbmdfbGlzdF9sZW5ndGgoY29uc3QgbGlieGxfc3RyaW5nX2xpc3QgKnNsKTsK
-LS0gCjEuOS4xCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gRnJpLCAzMCBNYXIgMjAxOCwgV2VpIExpdSB3cm90ZToKPiBPbiBGcmksIE1hciAzMCwgMjAx
+OCBhdCAwOToyNTozNEFNICswMTAwLCBXZWkgTGl1IHdyb3RlOgo+ID4gT24gVGh1LCBNYXIgMjks
+IDIwMTggYXQgMDM6MDc6MDBQTSAtMDcwMCwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4g
+PiBBZGQgcHZjYWxscyBzdXBwb3J0IHRvIGxpYnhsIGFuZCB4bC4gQ3JlYXRlIHRoZSBhcHByb3By
+aWF0ZSBwdmNhbGxzCj4gPiA+IGVudHJpZXMgaW4geGVuc3RvcmUuCj4gPiA+IAo+ID4gPiBTaWdu
+ZWQtb2ZmLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHN0ZWZhbm9AYXBvcmV0by5jb20+Cj4gPiAK
+PiA+IEFja2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+ID4gCj4gPiBQbGVh
+c2UgYWxzbyBzdWJtaXQgYSBkb2MgcGF0Y2guCj4gCj4gSSBhbHNvIHJlYWxpc2VkIHRoZXJlIHdh
+cyBubyBMSUJYTF9IQVZFIG1hY3JvIGRlZmluZWQgYWZ0ZXIgaGF2aW5nCj4gY29tbWl0dGVkIHRo
+aXMgcGF0Y2guIFBsZWFzZSBmaXggdGhhdCBhcyB3ZWxsLgoKVGhhbmsgeW91IGZvciBjb21taXR0
+aW5nIQoKU2VlIHRoaXMgcGF0Y2g6CgpodHRwczovL21hcmMuaW5mby8/bD14ZW4tZGV2ZWwmbT0x
+NTIyNDMxMTcwMTYxNDkKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
