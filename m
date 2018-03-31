@@ -1,21 +1,22 @@
-From: Jason Andryuk <jandryuk@gmail.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Subject: Re: [PATCH] x86/xen: Delay get_cpu_cap until stack
  canary is established
-Date: Sat, 31 Mar 2018 17:38:08 +0000
-Message-ID: <CAKf6xps0HJecKM0gYSK+3BGhKknYp9Ydxr3S0oWBThtXeytegw@mail.gmail.com>
+Date: Sat, 31 Mar 2018 14:10:49 -0400
+Message-ID: <ee25829c-e8de-1171-e54e-3b34206acc9e__6172.04999221048$1522520141$gmane$org@oracle.com>
 References: <20180319165804.10636-1-jandryuk@gmail.com>
  <c3075b0c-a60b-0809-e34b-223701a53b84@oracle.com>
+ <CAKf6xps0HJecKM0gYSK+3BGhKknYp9Ydxr3S0oWBThtXeytegw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1111327495290155208=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=eied=gv=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1f2KSM-0002Ht-6F
- for xen-devel@lists.xenproject.org; Sat, 31 Mar 2018 17:38:22 +0000
-Received: by mail-lf0-x22f.google.com with SMTP id t132-v6so16011877lfe.2
- for <xen-devel@lists.xenproject.org>; Sat, 31 Mar 2018 10:38:19 -0700 (PDT)
-In-Reply-To: <c3075b0c-a60b-0809-e34b-223701a53b84@oracle.com>
+ <srs0=lplb=gv=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1f2L3d-0004yj-RO
+ for xen-devel@lists.xenproject.org; Sat, 31 Mar 2018 18:16:53 +0000
+In-Reply-To: <CAKf6xps0HJecKM0gYSK+3BGhKknYp9Ydxr3S0oWBThtXeytegw@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,113 +25,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Juergen Gross <jgross@suse.com>, x86@kernel.org, linux-kernel@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: Juergen Gross <jgross@suse.com>, x86@kernel.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1111327495290155208==
-Content-Type: multipart/alternative; boundary="00000000000083b53e0568b8d20c"
-
---00000000000083b53e0568b8d20c
-Content-Type: text/plain; charset="UTF-8"
-
-On Wed, Mar 21, 2018, 5:12 PM Boris Ostrovsky <boris.ostrovsky@oracle.com>
-wrote:
-
-> On 03/19/2018 12:58 PM, Jason Andryuk wrote:
-> > Commit 2cc42bac1c79 ("x86-64/Xen: eliminate W+X mappings") introduced a
-> > call to get_cpu_cap, which is fstack-protected.  This is works on x86-64
-> > as commit 4f277295e54c ("x86/xen: init %gs very early to avoid page
-> > faults with stack protector") ensures the stack protector is configured,
-> > but it it did not cover x86-32.
-> >
-> > Delay calling get_cpu_cap until after xen_setup_gdt has initialized the
-> > stack canary.  Without this, a 32bit PV machine crashes early
-> > in boot.
-> > (XEN) Domain 0 (vcpu#0) crashed on cpu#0:
-> > (XEN) ----[ Xen-4.6.6-xc  x86_64  debug=n  Tainted:    C ]----
-> > (XEN) CPU:    0
-> > (XEN) RIP:    e019:[<00000000c10362f8>]
-> >
-> > And the PV kernel IP corresponds to init_scattered_cpuid_features
-> >    0xc10362f8 <+24>:    mov    %gs:0x14,%eax
-> >
-> > Fixes 2cc42bac1c79 ("x86-64/Xen: eliminate W+X mappings")
-> >
-> > Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
-> >
->
->
-> Applied to for-linus-4.17
->
-
-Thanks. If it's not too late, can this be cc: stable? If not, I'll submit
-the request after it is in Linus's tree.
-
--Jason
-
->
-
---00000000000083b53e0568b8d20c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><div class=3D"gmail_quote"><div dir=3D"ltr">On Wed, =
-Mar 21, 2018, 5:12 PM Boris Ostrovsky &lt;<a href=3D"mailto:boris.ostrovsky=
-@oracle.com">boris.ostrovsky@oracle.com</a>&gt; wrote:<br></div><blockquote=
- class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc soli=
-d;padding-left:1ex">On 03/19/2018 12:58 PM, Jason Andryuk wrote:<br>
-&gt; Commit 2cc42bac1c79 (&quot;x86-64/Xen: eliminate W+X mappings&quot;) i=
-ntroduced a<br>
-&gt; call to get_cpu_cap, which is fstack-protected.=C2=A0 This is works on=
- x86-64<br>
-&gt; as commit 4f277295e54c (&quot;x86/xen: init %gs very early to avoid pa=
-ge<br>
-&gt; faults with stack protector&quot;) ensures the stack protector is conf=
-igured,<br>
-&gt; but it it did not cover x86-32.<br>
-&gt;<br>
-&gt; Delay calling get_cpu_cap until after xen_setup_gdt has initialized th=
-e<br>
-&gt; stack canary.=C2=A0 Without this, a 32bit PV machine crashes early<br>
-&gt; in boot.<br>
-&gt; (XEN) Domain 0 (vcpu#0) crashed on cpu#0:<br>
-&gt; (XEN) ----[ Xen-4.6.6-xc=C2=A0 x86_64=C2=A0 debug=3Dn=C2=A0 Tainted:=
-=C2=A0 =C2=A0 C ]----<br>
-&gt; (XEN) CPU:=C2=A0 =C2=A0 0<br>
-&gt; (XEN) RIP:=C2=A0 =C2=A0 e019:[&lt;00000000c10362f8&gt;]<br>
-&gt;<br>
-&gt; And the PV kernel IP corresponds to init_scattered_cpuid_features<br>
-&gt;=C2=A0 =C2=A0 0xc10362f8 &lt;+24&gt;:=C2=A0 =C2=A0 mov=C2=A0 =C2=A0 %gs=
-:0x14,%eax<br>
-&gt;<br>
-&gt; Fixes 2cc42bac1c79 (&quot;x86-64/Xen: eliminate W+X mappings&quot;)<br=
->
-&gt;<br>
-&gt; Signed-off-by: Jason Andryuk &lt;<a href=3D"mailto:jandryuk@gmail.com"=
- target=3D"_blank" rel=3D"noreferrer">jandryuk@gmail.com</a>&gt;<br>
-&gt;<br>
-<br>
-<br>
-Applied to for-linus-4.17<br></blockquote></div></div><div dir=3D"auto"><br=
-></div><div dir=3D"auto">Thanks. If it&#39;s not too late, can this be cc: =
-stable? If not, I&#39;ll submit the request after it is in Linus&#39;s tree=
-.</div><div dir=3D"auto"><br></div><div dir=3D"auto">-Jason</div><div dir=
-=3D"auto"><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-</blockquote></div></div></div>
-
---00000000000083b53e0568b8d20c--
-
-
---===============1111327495290155208==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1111327495290155208==--
+CgpPbiAwMy8zMS8yMDE4IDAxOjM4IFBNLCBKYXNvbiBBbmRyeXVrIHdyb3RlOgo+IE9uIFdlZCwg
+TWFyIDIxLCAyMDE4LCA1OjEyIFBNIEJvcmlzIE9zdHJvdnNreSAKPiA8Ym9yaXMub3N0cm92c2t5
+QG9yYWNsZS5jb20gPG1haWx0bzpib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT4+IHdyb3RlOgo+
+IAo+ICAgICBPbiAwMy8xOS8yMDE4IDEyOjU4IFBNLCBKYXNvbiBBbmRyeXVrIHdyb3RlOgo+ICAg
+ICAgPiBDb21taXQgMmNjNDJiYWMxYzc5ICgieDg2LTY0L1hlbjogZWxpbWluYXRlIFcrWCBtYXBw
+aW5ncyIpCj4gICAgIGludHJvZHVjZWQgYQo+ICAgICAgPiBjYWxsIHRvIGdldF9jcHVfY2FwLCB3
+aGljaCBpcyBmc3RhY2stcHJvdGVjdGVkLsKgIFRoaXMgaXMgd29ya3Mgb24KPiAgICAgeDg2LTY0
+Cj4gICAgICA+IGFzIGNvbW1pdCA0ZjI3NzI5NWU1NGMgKCJ4ODYveGVuOiBpbml0ICVncyB2ZXJ5
+IGVhcmx5IHRvIGF2b2lkIHBhZ2UKPiAgICAgID4gZmF1bHRzIHdpdGggc3RhY2sgcHJvdGVjdG9y
+IikgZW5zdXJlcyB0aGUgc3RhY2sgcHJvdGVjdG9yIGlzCj4gICAgIGNvbmZpZ3VyZWQsCj4gICAg
+ICA+IGJ1dCBpdCBpdCBkaWQgbm90IGNvdmVyIHg4Ni0zMi4KPiAgICAgID4KPiAgICAgID4gRGVs
+YXkgY2FsbGluZyBnZXRfY3B1X2NhcCB1bnRpbCBhZnRlciB4ZW5fc2V0dXBfZ2R0IGhhcwo+ICAg
+ICBpbml0aWFsaXplZCB0aGUKPiAgICAgID4gc3RhY2sgY2FuYXJ5LsKgIFdpdGhvdXQgdGhpcywg
+YSAzMmJpdCBQViBtYWNoaW5lIGNyYXNoZXMgZWFybHkKPiAgICAgID4gaW4gYm9vdC4KPiAgICAg
+ID4gKFhFTikgRG9tYWluIDAgKHZjcHUjMCkgY3Jhc2hlZCBvbiBjcHUjMDoKPiAgICAgID4gKFhF
+TikgLS0tLVsgWGVuLTQuNi42LXhjwqAgeDg2XzY0wqAgZGVidWc9bsKgIFRhaW50ZWQ6wqAgwqAg
+QyBdLS0tLQo+ICAgICAgPiAoWEVOKSBDUFU6wqAgwqAgMAo+ICAgICAgPiAoWEVOKSBSSVA6wqAg
+wqAgZTAxOTpbPDAwMDAwMDAwYzEwMzYyZjg+XQo+ICAgICAgPgo+ICAgICAgPiBBbmQgdGhlIFBW
+IGtlcm5lbCBJUCBjb3JyZXNwb25kcyB0byBpbml0X3NjYXR0ZXJlZF9jcHVpZF9mZWF0dXJlcwo+
+ICAgICAgPsKgIMKgIDB4YzEwMzYyZjggPCsyND46wqAgwqAgbW92wqAgwqAgJWdzOjB4MTQsJWVh
+eAo+ICAgICAgPgo+ICAgICAgPiBGaXhlcyAyY2M0MmJhYzFjNzkgKCJ4ODYtNjQvWGVuOiBlbGlt
+aW5hdGUgVytYIG1hcHBpbmdzIikKPiAgICAgID4KPiAgICAgID4gU2lnbmVkLW9mZi1ieTogSmFz
+b24gQW5kcnl1ayA8amFuZHJ5dWtAZ21haWwuY29tCj4gICAgIDxtYWlsdG86amFuZHJ5dWtAZ21h
+aWwuY29tPj4KPiAgICAgID4KPiAKPiAKPiAgICAgQXBwbGllZCB0byBmb3ItbGludXMtNC4xNwo+
+IAo+IAo+IFRoYW5rcy4gSWYgaXQncyBub3QgdG9vIGxhdGUsIGNhbiB0aGlzIGJlIGNjOiBzdGFi
+bGU/IAoKCldlIGNhbiBhbHdheXMgdHJ5IDstKQoKVGhpcyBpcyA0LjE1IGFuZCA0LjE2IG9ubHks
+IEkgYmVsaWV2ZS4KCi1ib3JpcwoKCgo+IElmIG5vdCwgSSdsbCAKPiBzdWJtaXQgdGhlIHJlcXVl
+c3QgYWZ0ZXIgaXQgaXMgaW4gTGludXMncyB0cmVlLgo+IAo+IC1KYXNvbgo+IAoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
