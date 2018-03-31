@@ -1,16 +1,23 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [rumprun test] 121373: regressions - FAIL
-Date: Sat, 31 Mar 2018 08:47:12 +0000
-Message-ID: <osstest-121373-mainreport@xen.org>
+From: Julien Grall <julien.grall@gmail.com>
+Subject: Re: [PATCH v1] xen/arm: Add MVEBU UART driver for
+ Armada 3700 SoC
+Date: Sat, 31 Mar 2018 09:15:57 +0000
+Message-ID: <CAF3u54CEwSSt-M=+M+iEP=NXdx5S7X-xdubvdMN8vDQ+3vAGxg@mail.gmail.com>
+References: <1521221662-6782-1-git-send-email-amittomer25@gmail.com>
+ <89bac393-8535-d954-e6df-054fc647fb4b@arm.com>
+ <CABHD4K-3J4nWwFkTFfMnc3jKZ_MKbB95s8SrVfnZ42xfDAb5AQ@mail.gmail.com>
+ <alpine.DEB.2.10.1803300925130.15200@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2591634730444677692=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=hwnn=gv=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1f2CAO-00010Z-QG
- for xen-devel@lists.xenproject.org; Sat, 31 Mar 2018 08:47:16 +0000
+ <srs0=hl6e=gv=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1f2CcN-00032i-1p
+ for xen-devel@lists.xenproject.org; Sat, 31 Mar 2018 09:16:11 +0000
+Received: by mail-oi0-x242.google.com with SMTP id x9-v6so9392664oig.7
+ for <xen-devel@lists.xenproject.org>; Sat, 31 Mar 2018 02:16:09 -0700 (PDT)
+In-Reply-To: <alpine.DEB.2.10.1803300925130.15200@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,88 +26,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: tim@xen.org, wei.liu2@citrix.com, George Dunlap <George.Dunlap@eu.citrix.com>, =?UTF-8?Q?Andr=C3=A9_Przywara?= <andre.przywara@arm.com>, ian.jackson@eu.citrix.com, Amit Tomer <amittomer25@gmail.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, andrew.cooper3@citrix.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMTM3MyBydW1wcnVuIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjEzNzMvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3Rz
-IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMg
-d2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFtZDY0LXJ1bXBydW4gICAgICAgICAgIDYg
-cnVtcHJ1bi1idWlsZCAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEwNjc1NAogYnVpbGQtaTM4
-Ni1ydW1wcnVuICAgICAgICAgICAgNiBydW1wcnVuLWJ1aWxkICAgICAgICAgICAgZmFpbCBSRUdS
-LiB2cy4gMTA2NzU0CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJs
-b2NraW5nOgogdGVzdC1hbWQ2NC1pMzg2LXJ1bXBydW4taTM4NiAgMSBidWlsZC1jaGVjaygxKSAg
-ICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC1ydW1wcnVuLWFtZDY0
-ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRh
-cmdldGVkIGZvciB0ZXN0aW5nOgogcnVtcHJ1biAgICAgICAgICAgICAgOTRiZGYzMmFjNTdiODRj
-MWI0MjE1MGQyMWYwYWQ3OWIzYjVkZDk5YwpiYXNlbGluZSB2ZXJzaW9uOgogcnVtcHJ1biAgICAg
-ICAgICAgICAgYzdmMmYwMTZiZWNjMWNkMGU4NWRhNmUxYjI1YThlN2Y5ZmIyYWE3NAoKTGFzdCB0
-ZXN0IG9mIGJhc2lzICAgMTA2NzU0ICAyMDE3LTAzLTE4IDA0OjIxOjI1IFogIDM3OCBkYXlzClRl
-c3Rpbmcgc2FtZSBzaW5jZSAgIDEyMDM2MCAgMjAxOC0wMy0wOSAwNDoxOToyMCBaICAgMjIgZGF5
-cyAgIDE4IGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0
-ZXN0OgogIEtlbnQgTWNMZW9kIDxrZW50LW1jbGVvZEB1c2Vycy5ub3JlcGx5LmdpdGh1Yi5jb20+
-CiAgS2VudCBNY0xlb2QgPEtlbnQuTWNsZW9kQGRhdGE2MS5jc2lyby5hdT4KICBOYWphIE1lbGFu
-IDxuYWphbWVsYW5AYXV0aXN0aWNpLm9yZz4KICBTZWJhc3RpYW4gV2lja2kgPGdhbmRyb0BnbXgu
-bmV0PgogIFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1y
-dW1wcnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IGJ1aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1ydW1wcnVuLWFtZDY0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYtcnVtcHJ1bi1pMzg2
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKCgotLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0
-LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xv
-Z3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0
-Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5v
-cmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3Nz
-dGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIv
-P3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDov
-L3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hi
-PW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVu
-Yml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5n
-LgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tCmNvbW1pdCA5NGJkZjMyYWM1N2I4NGMxYjQyMTUwZDIxZjBhZDc5YjNiNWRkOTljCk1l
-cmdlOiA4ZmU0MGM4IGIzYzEwMzMKQXV0aG9yOiBLZW50IE1jTGVvZCA8a2VudC1tY2xlb2RAdXNl
-cnMubm9yZXBseS5naXRodWIuY29tPgpEYXRlOiAgIEZyaSBGZWIgMTYgMDk6MTU6NDUgMjAxOCAr
-MTEwMAoKICAgIE1lcmdlIHB1bGwgcmVxdWVzdCAjMTE4IGZyb20ga2VudC1tY2xlb2Qvc3RyZXRj
-aC1saW5raW5nLWRlZmF1bHRwaWUKICAgIAogICAgRml4IGxpbmtpbmcgb24gRGViaWFuIFN0cmV0
-Y2ggKGdjYy02KQoKY29tbWl0IGIzYzEwMzNiMDkwYjY1ZThlODY5OTlkZGQwNjNjMTc0NTAyYWEz
-ZjAKQXV0aG9yOiBLZW50IE1jTGVvZCA8S2VudC5NY2xlb2RAZGF0YTYxLmNzaXJvLmF1PgpEYXRl
-OiAgIFdlZCBGZWIgMTQgMTY6NDM6MTYgMjAxOCArMTEwMAoKICAgIEFkZCBmdXJ0aGVyIC1uby1w
-aWUgY2hlY2tzIHRvIFJ1bXBydW4gYnVpbGQgdG9vbHMKICAgIAogICAgVGhpcyBidWlsZHMgdXBv
-biB0aGUgcHJldmlvdXMgY29tbWl0IHRvIGFkZCAtbm8tcGllIGFueXdoZXJlIHRoZQogICAgcmVs
-b2NhdGFibGUgZmxhZyAoLVdsLC1yKSBpcyB1c2VkIHRvIGhhbmRsZSBjb21waWxlcnMgdGhhdCBl
-bmFibGUgLXBpZQogICAgYnkgZGVmYXVsdCAoU3VjaCBhcyBEZWJpYW4gU3RyZXRjaCkuCgpjb21t
-aXQgOGZlNDBjODRlZGRkZmJmNDcyYjRhN2NjZTk2MGRmNzQ5NzAxMTc0YwpNZXJnZTogYzdmMmYw
-MSA2ODVmNGFiCkF1dGhvcjogU2ViYXN0aWFuIFdpY2tpIDxnYW5kcm9AZ214Lm5ldD4KRGF0ZTog
-ICBGcmkgSmFuIDUgMTU6MDQ6MTggMjAxOCArMDEwMAoKICAgIE1lcmdlIHB1bGwgcmVxdWVzdCAj
-MTEyIGZyb20gbmFqYW1lbGFuL2J1Z2ZpeC9nY2M3LWZhbGx0aHJvdWdoCiAgICAKICAgIEFkZCB0
-aGUgLVdpbXBsaWNpdC1mYWxsdGhyb3VnaD0wIGZsYWcgdG8gYWxsb3cgY29tcGlsaW5nIHdpdGgg
-R0NDNwoKY29tbWl0IDY4NWY0YWIzYjc0YjZmMWUxYjQwYmRkM2QyYzQyZWZhNDRiZjM4NWQKQXV0
-aG9yOiBOYWphIE1lbGFuIDxuYWphbWVsYW5AYXV0aXN0aWNpLm9yZz4KRGF0ZTogICBUaHUgSmFu
-IDQgMTY6MDc6NDYgMjAxOCArMDAwMAoKICAgIE1ha2UgdGhlIGRpc2FibGluZyBvZiB0aGUgZmFs
-bHRocm91Z2ggd2FybmluZyBkZXBlbmRlbnQgb24gR0NDIHZlcnNpb24KICAgIAogICAgVGhpcyBz
-aG91bGQgcHJldmVudCBvbGRlciBnY2MgdmVyc2lvbnMgZnJvbSBjaG9raW5nIG9uIHVua25vd24g
-YXJndW1lbnQuCiAgICAKICAgIEkgaGF2ZSBub3QgdGVzdGVkIHRoaXMsIGp1c3Qgd3JvdGUgdGhl
-IGNvZGUgZGlyZWN0bHkgb24gZ2l0aHViLiBVc2Ugd2l0aCBjYXV0aW9uLgoKY29tbWl0IDM0MDU2
-NDUxMTc0ZTg3MjJiOTcyMjI5ZmVmYzFiZjllMGI4OWE3ZGEKQXV0aG9yOiBOYWphIE1lbGFuIDxu
-YWphbWVsYW5AYXV0aXN0aWNpLm9yZz4KRGF0ZTogICBXZWQgSmFuIDMgMTg6NTc6NTAgMjAxOCAr
-MDAwMAoKICAgIEFkZCB0aGUgLVdpbXBsaWNpdC1mYWxsdGhyb3VnaD0wIGZsYWcgdG8gYWxsb3cg
-Y29tcGlsaW5nIHdpdGggR0NDNwogICAgCiAgICBHQ0M3IGNvbWVzIHdpdGggYSBuZXcgd2Fybmlu
-ZyAiaW1wbGljaXQtZmFsbHRocm91Z2giIHdoaWNoIHdpbGwgcHJldmVudCBidWlsZGluZyB0aGUg
-bmV0YnNkLXNyYy4KICAgIAogICAgRm9yIG1vcmUgaW5mb3JtYXRpb246IGh0dHBzOi8vZHpvbmUu
-Y29tL2FydGljbGVzL2ltcGxpY2l0LWZhbGx0aHJvdWdoLWluLWdjYy03Cgpjb21taXQgMzVkODEx
-OTRiN2ZlYjc1ZDIwYWYzYmE0ZmRiNDVlYTc2MjMwODUyZgpBdXRob3I6IFdlaSBMaXUgPHdlaS5s
-aXUyQGNpdHJpeC5jb20+CkRhdGU6ICAgV2VkIEp1biA3IDE2OjMwOjAwIDIwMTcgKzAxMDAKCiAg
-ICBGaXggbGlua2luZyBvbiBEZWJpYW4gU3RyZXRjaAogICAgCiAgICBQcm92aWRlIGNjLW9wdGlv
-bi4gVXNlIHRoYXQgdG8gY2hlY2sgaWYgLW5vLXBpZSBpcyBhdmFpbGFibGUgYW5kCiAgICBhcHBl
-bmQgaXQgd2hlbiBuZWNlc3NhcnkuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdl
-aS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+--===============2591634730444677692==
+Content-Type: multipart/alternative; boundary="000000000000ac2d460568b1ce3b"
+
+--000000000000ac2d460568b1ce3b
+Content-Type: text/plain; charset="UTF-8"
+
+On Sat, 31 Mar 2018, 00:27 Stefano Stabellini, <sstabellini@kernel.org>
+wrote:
+
+> On Fri, 30 Mar 2018, Amit Tomer wrote:
+> > Hello,
+> >
+> > > I tested this on my board and it works like expected. I would very much
+> > > like to see this driver still in 4.11.
+> >
+> > Thanks for looking into it and Many Thanks for testing it out.
+>
+> FYI the deadline is the end of next week. If you submit a patch by then
+> addressing Andre's comment I would be happy to check it in.
+>
+
+I also had comments on the previous version. So it would be nice to give me
+sometimes to review it again.
+
+Cheers,
+
+
+>
+> > > Some (minor) comments on the code below.
+> > >
+> > > On 16/03/18 17:34, Amit Singh Tomar wrote:
+> > >> This patch adds driver for UART controller found on Armada 3700 SoC.
+> > >
+> > > Can you please mention "Marvell" in the subject?
+> >
+> > Ok.
+> >
+> > > These should be indented by one tab (plus two spaces for the help
+> text).
+> > > It's not obvious - I got this wrong myself the other day ;-), but it's
+> > > how the rest of the file works.
+> >
+> > Ok.
+> >
+> > > No need for the brackets.
+> >
+> > Ok.
+> >
+> > > Indentation.
+> >
+> > Ok.
+> >
+> > > So why do we need this include file, in a shared directory?
+> > > All those bits are private to the UART driver and don't need to be
+> > > exposed to Xen at all.
+> > > If it's about the earlyprintk support: that's just two values needed
+> > > there, nothing worth a new include file, I think.
+> > > So I would recommend to declare the required constants directly in the
+> > > driver file.
+> >
+> > Yes, I thought earlyprintk could also use a couple of common defines and
+> other
+> > drivers do the same way.
+> >
+> >
+> > Thanks
+> > -Amit
+> >
+>
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+--000000000000ac2d460568b1ce3b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Sat, 31 Mar 2018, 00=
+:27 Stefano Stabellini, &lt;<a href=3D"mailto:sstabellini@kernel.org">sstab=
+ellini@kernel.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote"=
+ style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On=
+ Fri, 30 Mar 2018, Amit Tomer wrote:<br>
+&gt; Hello,<br>
+&gt;<br>
+&gt; &gt; I tested this on my board and it works like expected. I would ver=
+y much<br>
+&gt; &gt; like to see this driver still in 4.11.<br>
+&gt;<br>
+&gt; Thanks for looking into it and Many Thanks for testing it out.<br>
+<br>
+FYI the deadline is the end of next week. If you submit a patch by then<br>
+addressing Andre&#39;s comment I would be happy to check it in.<br></blockq=
+uote></div><div><br></div><div>I also had comments on the previous version.=
+ So it would be nice to give me sometimes to review it again.</div><div><br=
+></div><div>Cheers,</div><div><br></div><div class=3D"gmail_quote"><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
+olid;padding-left:1ex">
+<br>
+<br>
+&gt; &gt; Some (minor) comments on the code below.<br>
+&gt; &gt;<br>
+&gt; &gt; On 16/03/18 17:34, Amit Singh Tomar wrote:<br>
+&gt; &gt;&gt; This patch adds driver for UART controller found on Armada 37=
+00 SoC.<br>
+&gt; &gt;<br>
+&gt; &gt; Can you please mention &quot;Marvell&quot; in the subject?<br>
+&gt;<br>
+&gt; Ok.<br>
+&gt;<br>
+&gt; &gt; These should be indented by one tab (plus two spaces for the help=
+ text).<br>
+&gt; &gt; It&#39;s not obvious - I got this wrong myself the other day ;-),=
+ but it&#39;s<br>
+&gt; &gt; how the rest of the file works.<br>
+&gt;<br>
+&gt; Ok.<br>
+&gt;<br>
+&gt; &gt; No need for the brackets.<br>
+&gt;<br>
+&gt; Ok.<br>
+&gt;<br>
+&gt; &gt; Indentation.<br>
+&gt;<br>
+&gt; Ok.<br>
+&gt;<br>
+&gt; &gt; So why do we need this include file, in a shared directory?<br>
+&gt; &gt; All those bits are private to the UART driver and don&#39;t need =
+to be<br>
+&gt; &gt; exposed to Xen at all.<br>
+&gt; &gt; If it&#39;s about the earlyprintk support: that&#39;s just two va=
+lues needed<br>
+&gt; &gt; there, nothing worth a new include file, I think.<br>
+&gt; &gt; So I would recommend to declare the required constants directly i=
+n the<br>
+&gt; &gt; driver file.<br>
+&gt;<br>
+&gt; Yes, I thought earlyprintk could also use a couple of common defines a=
+nd other<br>
+&gt; drivers do the same way.<br>
+&gt;<br>
+&gt;<br>
+&gt; Thanks<br>
+&gt; -Amit<br>
+&gt;<br>
+<br>
+_______________________________________________<br>
+Xen-devel mailing list<br>
+<a href=3D"mailto:Xen-devel@lists.xenproject.org" target=3D"_blank">Xen-dev=
+el@lists.xenproject.org</a><br>
+<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
+noreferrer" target=3D"_blank">https://lists.xenproject.org/mailman/listinfo=
+/xen-devel</a></blockquote></div>
+
+--000000000000ac2d460568b1ce3b--
+
+
+--===============2591634730444677692==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2591634730444677692==--
