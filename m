@@ -1,16 +1,26 @@
 From: Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: seabios regression in staging
-Date: Fri, 30 Mar 2018 20:40:50 -0500
-Message-ID: <e3cceee3-35d5-e976-7eb9-28a08414f586@cardoe.com>
-References: <20180329114243.GN30726@aepfle.de>
- <20180329142901.wuso5qz647kkmqhp@citrix.com>
- <20180329145341.GO30726@aepfle.de>
- <059c1674-9b79-d5c5-012d-94de3439c546@cardoe.com>
- <20180329200016.GA5388@aepfle.de>
+Subject: Re: Upping gcc requirement for x86
+Date: Fri, 30 Mar 2018 20:50:43 -0500
+Message-ID: <76b541de-3c2b-ff1e-daaf-60e50ddf5e87@cardoe.com>
+References: <20180329154523.nvxkzn5rhetphwki@citrix.com>
+ <CAFLBxZZJX1DPv-M8n_CDFf7OWfxmBwtXC9eDQb_WRXz9V5TYyA@mail.gmail.com>
+ <0f8d92f1-9be1-88cb-6711-02e1099b069b@cardoe.com>
+ <CAFLBxZYsHk2_soi7k-56medAyP_DyCyHxRhsFG4o0iuiGJmHEg@mail.gmail.com>
+ <3e261058-4939-41c2-1c74-17a4ef8c082d@cardoe.com>
+ <CAFLBxZZwH52iE1si3YMQkfk+nGfzKY+vi8Vxh+m2CxUWZ+R-iw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6685487731430391225=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180329200016.GA5388@aepfle.de>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=fyoy=gv=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
+ id 1f25fM-0006aA-GJ
+ for xen-devel@lists.xenproject.org; Sat, 31 Mar 2018 01:50:48 +0000
+Received: by mail-qt0-x22a.google.com with SMTP id j26so10811423qtl.11
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Mar 2018 18:50:46 -0700 (PDT)
+In-Reply-To: <CAFLBxZZwH52iE1si3YMQkfk+nGfzKY+vi8Vxh+m2CxUWZ+R-iw@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,100 +29,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: George Dunlap <dunlapg@umich.edu>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Olaf Hering <olaf@aepfle.de>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============6685487731430391225==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="cIKp9gnUgoNdTyasL1ed4kV37nd7wYVGW"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---cIKp9gnUgoNdTyasL1ed4kV37nd7wYVGW
-Content-Type: multipart/mixed; boundary="FY1nDwKQo337W6m95YoPKxWl9tYSR2hU4";
- protected-headers="v1"
-From: Doug Goldstein <cardoe@cardoe.com>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
-Message-ID: <e3cceee3-35d5-e976-7eb9-28a08414f586@cardoe.com>
-Subject: Re: [Xen-devel] seabios regression in staging
-References: <20180329114243.GN30726@aepfle.de>
- <20180329142901.wuso5qz647kkmqhp@citrix.com>
- <20180329145341.GO30726@aepfle.de>
- <059c1674-9b79-d5c5-012d-94de3439c546@cardoe.com>
- <20180329200016.GA5388@aepfle.de>
-In-Reply-To: <20180329200016.GA5388@aepfle.de>
-
---FY1nDwKQo337W6m95YoPKxWl9tYSR2hU4
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 3/29/18 3:00 PM, Olaf Hering wrote:
-> On Thu, Mar 29, Doug Goldstein wrote:
->=20
->> If you'd be willing to create a SLE11 Docker container, we can add tha=
-t
->> to the tree and start doing builds against it.
->=20
-> I do not know how to do that. Any pointers?
->=20
-> Olaf
->=20
-
-Find the base image for SLE11. I've for the openSUSE ones at
-https://hub.docker.com/r/library/opensuse/ so using those you would get
-the line:
-
-FROM opensuse:42.3
-
-Then take one of the existing ones in the tree under automation/build
-and change the FROM line and then update the commands that are
-installing dependencies.
-
---=20
-Doug Goldstein
-
-
---FY1nDwKQo337W6m95YoPKxWl9tYSR2hU4--
-
---cIKp9gnUgoNdTyasL1ed4kV37nd7wYVGW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQKTBAEBCgB9FiEE9hYXBLEKE2oJfXLwyIzUxt8kNl0FAlq+5yJfFIAAAAAALgAo
-aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEY2
-MTYxNzA0QjEwQTEzNkEwOTdENzJGMEM4OENENEM2REYyNDM2NUQACgkQyIzUxt8k
-Nl19FxAAocF5Xtb4TgjgZf0i0mG6nbPOwxt2WIGF71WN9VRmDc+LF3F6UHj/rgX2
-udOYqyMQfKR9JwhI/+ALlMwLlqLdhs+ZCq70bNAANj6D5mRINcvrJNw9/TCeBUd/
-9MgHqNg/EL//gx+HNn3VH0OH30WbSupnzde4GfdSE4GYhRz4Je+xzjA6hNTz09xp
-TF7NCoRaEQ1VcAVRR9oEQyXRmJ6jE6VmRYXOMW7raF6IiDf9+hEQ1ElS7Op1g1ha
-xMP57fIkGBCJJvbeHhJIyETqEVolosTQSpCBLYgzd6vH4f384Y9Sn2NMQWxf7UPE
-j0I3lX6eUZQ/b+uiA6zCetFqZNkj1+gTr4GWy/9gVJA/XoO//PQQah2I4sTQ1xfa
-Bir5xmMHmSzoo3pVmSkRs8IQVbdQZSi+vFPxlt2WfiHZEbaHB56J/jpd6neRhTGn
-u0be0jhtYCSiElw5faiLUPQW1ZYM9nOZ3U1XCXGoa22c02WNDwjSy93CNBN3aRZb
-QY3eBQqZG08vCIP0fuoe7yVU4UIuIMr1cZDOL8UXAwBiT43kQ4Al61RLzF1DKT3b
-dqn4rcX2Rgx/xgR5fY9CP/W/rAR5JMpWL2cohBe666EeLj6gQU9dF7dW7txvvM7t
-LDEW0JAt3rEXblkUnFprnS0Y6e0Obf1aYx6l7XyOWhgLz8E2Krc=
-=R1Vk
------END PGP SIGNATURE-----
-
---cIKp9gnUgoNdTyasL1ed4kV37nd7wYVGW--
-
-
---===============6685487731430391225==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6685487731430391225==--
+T24gMy8zMC8xOCAxMTozNyBBTSwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiBPbiBGcmksIE1hciAz
+MCwgMjAxOCBhdCA1OjExIFBNLCBEb3VnIEdvbGRzdGVpbiA8Y2FyZG9lQGNhcmRvZS5jb20+IHdy
+b3RlOgo+PiBPbiAzLzMwLzE4IDM6NTAgQU0sIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4+PiBPbiBU
+aHUsIE1hciAyOSwgMjAxOCBhdCA2OjQ3IFBNLCBEb3VnIEdvbGRzdGVpbiA8Y2FyZG9lQGNhcmRv
+ZS5jb20+IHdyb3RlOgo+Pj4+IE9uIDMvMjkvMTggMTI6MDUgUE0sIEdlb3JnZSBEdW5sYXAgd3Jv
+dGU6Cj4+Pj4+IE9uIFRodSwgTWFyIDI5LCAyMDE4IGF0IDQ6NDUgUE0sIFdlaSBMaXUgPHdlaS5s
+aXUyQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4+Pgo+Pj4+PiBMb25nIHRlcm0gSSB0aGluayB3ZSB3
+YW50IHRvIGdldCBhd2F5IGZyb20gYnVpbGRpbmcgc2VhYmlvcyBvdXJzZWx2ZXMKPj4+Pj4gYWx0
+b2dldGhlcjsgYnV0IGl0J3MgYSBiaXQgbGF0ZSBpbiB0aGUgcmVsZWFzZSBjeWNsZSB0byB3b3Jr
+IG91dCB0aGF0Cj4+Pj4+IGtpbmQgb2YgY2hhbmdlLgo+Pj4+Pgo+Pj4+PiBPbiB0aGUgd2hvbGUg
+SSdkIHByb2JhYmx5IGdvIHdpdGggIzMgYXQgdGhpcyBwb2ludC4KPj4+Pj4KPj4+Pj4gIC1HZW9y
+Z2UKPj4+Pj4KPj4+Pgo+Pj4+IFZpb2xlbnQgYWdyZWVtZW50IGhlcmUuIEV2ZXJ5IGRpc3RybyB3
+YW50cyB0byBzZWUgdGhpcyBzbyB0aGV5IGNhbiBzaGFyZQo+Pj4+IHRoZXNlIGJsb2JzLiBJdHMg
+d2hhdCBsZWFkIHRvIHRoZSBjaGFuZ2UgdG8gdHJhY2tpbmcgdGFncyBpbgo+Pj4+IDNkZDkyNmEy
+NWQ4NjYzNjRjZTZkNDZjMjFmOWFjMDVhODJmYTdmZmIgb3JpZ2luYWxseS4KPj4+Cj4+PiBJIGRv
+bid0IHVuZGVyc3RhbmQgd2hhdCB5b3UgbWVhbiAtLSBBRkFJSyB0aGVyZSdzIG5vICpkZXBlbmRl
+bmN5KiBmcm9tCj4+PiBYZW4gdG8gYW55IHBhcnRpY3VsYXIgdmVyc2lvbiBvZiBTZWFCSU9TICh1
+bmxpa2UgUUVNVSkuICBJZiAxLjkgd29uJ3QKPj4+IGNvbXBpbGUgd2l0aCBnY2MgNC40LCBidXQg
+MS44IGRvZXMsIHdlIGNhbiBqdXN0IHBvaW50IHRoZSB0YWcgdG8gNC40Lgo+Pj4gRGlzdHJvcyB3
+aWxsIGJlIGNvbXBpbGluZyB0aGVpciBvd24gU2VhQklPUyB2ZXJzaW9ucyBhbnl3YXksIG5vPwo+
+Pj4KPj4+IE9yIGFtIEkgbWlzc2luZyB5b3VyIHBvaW50IHNvbWVob3c/Cj4+Pgo+Pj4gIC1HZW9y
+Z2UKPj4+Cj4+Cj4+IE15IHBvaW50IHdhcyB3ZSBleHBsaWNpdGx5IG1vdmVkIHRvIHRlc3Rpbmcv
+c2hpcHBpbmcgdGFncyBzbyB0aGF0IHdlCj4+IGRpc3Ryb3MgY291bGQgc2F5ICJvaCB0aGlzIGlz
+IHdoYXQgdGhlIFhlbiBmb2xrcyB0ZXN0ZWQgd2l0aCBJIGhhdmUKPj4gY29uZmlkZW5jZSB0aGF0
+IGlmIHdlIHNoaXAgdGhlIHNhbWUgdmVyc2lvbiBpdCBzaG91bGQgd29yayBmb3IgdXNlcnMiLgo+
+Pgo+PiBJIHRoaW5rIHdlIHdhbnQgdG8gZ2V0IGF3YXkgZnJvbSBidWlsZGluZyBpdCBvdXJzZWx2
+ZXMgYW5kIGRlZmF1bHRpbmcgdG8KPj4gdGVsbGluZyBkaXN0cm9zIHRoZXkgbmVlZCB0byBwcm92
+aWRlIGl0Lgo+IAo+IFRob3NlIHNlZW0gbGlrZSBzb3J0IG9mIGNvbnRyYWRpY3RvcnkgZ29hbHMg
+dG8gbWUsIHBhcnRpY3VsYXJseSBpZiB0aGUKPiBnb2FsIG9mIGEgZGlzdHJvIGlzIHRvIHNoYXJl
+IHNlYWJpb3MgYmV0d2VlbiBLVk0gYW5kIFhlbi4KCkhhcmRseS4gQmFjayB3aGVuIEkgd2FzIG1v
+cmUgYWN0aXZlIGluIHBhY2thZ2luZyBiaXRzIEkgd291bGQgaGF2ZSBsaWtlZAp0byBzZWUgdGhh
+dCBhcyBJIGxpa2VseSB3b3VsZCBoYXZlIHVzZWQgdGhhdCBhcyBhIGJhc2VsaW5lLgoKPiAKPiBG
+V0lXIGZvciB0aGUgQ2VudE9TIFZpcnQgU0lHLCBJCj4gKiBidWlsZCBzZWFiaW9zIHNlcGFyYXRl
+bHkKPiAqIE9ubHkgdXBkYXRlIHdoZW4gdGhlIHZlcnNpb24gaW4gIkNlbnRPUyBjb3JlIiAoaS5l
+LiwgUkhFTCkgaXMgbGFyZ2VyCj4gdGhhbiB0aGUgdmVyc2lvbiBJJ3ZlIGJ1aWx0Cj4gKiBUaGVu
+IGp1c3QgcHVsbCB0aGUgbGF0ZXN0IHBhY2thZ2UgZnJvbSBGZWRvcmEuCgpJJ3ZlIGFsd2F5cyBi
+dWlsdCBTZWFCSU9TIHNlcGFyYXRlbHkgb24gR2VudG9vIGFuZCBmb3IgYXMgbG9uZyBhcyBJJ3Zl
+CnRvdWNoZWQgcmVjaXBlcyBpbiBZb2N0by4gSSd2ZSBhbHNvIGJ1aWx0IGl0IHNlcGFyYXRlbHkg
+YXQgdmFyaW91cwplbXBsb3llcnMuIFFFTVUgYW5kIFhlbiB0aGVuIGRlcGVuZGVkIG9uIHRoYXQg
+c2VwYXJhdGUgYnVpbGQuCgo+IAo+IFRoZSBvbmx5IHJlYXNvbiBJIGJ1aWxkIGEgc2VwYXJhdGUg
+b25lIGF0IGFsbCBpcyB0aGF0IHRoZSBvbmUgaW4KPiAiQ2VudE9TIENvcmUiIHNlZW1zIHRvIGhh
+dmUgc29tZSBLVk0tZm9jdXNlZCBwYXRjaGVzIHdoaWNoIGJyZWFrIGl0Cj4gdW5kZXIgWGVuLiAg
+SW4gYW4gaWRlYWwgd29ybGQgSSB3b3VsZCBnZXQgdGhhdCBmaXhlZCBhbmQganVzdCB1c2UgdGhl
+Cj4gc2VhYmlvcyBmcm9tIHRoZSBiYXNlIHZlcnNpb24gb2YgdGhlIE9TIC0tIHRoZSBzYW1lIGFz
+IEkgd291bGQgYW55Cj4gb3RoZXIgbGlicmFyeS4KPiAKPiBJZiB3ZSB3YW50IGRpc3Ryb3MgdG8g
+YnVpbGQgdGhlaXIgb3duIHZlcnNpb24gb2Ygc2VhYmlvcywgd2Ugc2hvdWxkCj4gYWxzbyBkZWNv
+dXBsZSB0aGUgZXhwZWN0YXRpb24gdGhhdCBhIGdpdmVuIHZlcnNpb24gb2YgWGVuIG1hdGNoZXMg
+KG9yCj4gbmVlZHMgdG8gbWF0Y2gpIGEgZ2l2ZW4gdmVyc2lvbiBvZiBzZWFiaW9zLgoKSGVuY2Ug
+bXkgcG9pbnQgb2YgdGVzdCBhZ2FpbnN0IGEgYmFzZWxpbmUgZXZlcnl0aGluZyBuZXdlciBpcyBz
+dXBwb3NlIHRvCmJlIGNvbXBhdGlibGUgYXMgdGhleSBhcmVuJ3QgcmVtb3ZpbmcgZXhpc3Rpbmcg
+WGVuIGZ1bmN0aW9uYWxpdHkuCgo+IAo+IEFGQUlLIHRoaXMgZGVjb3VwbGluZyBoYXMgYWxyZWFk
+eSB0YWtlbiBwbGFjZSwgaXQncyBqdXN0IHRoYXQgbm9ib2R5Cj4ga25vd3MgYWJvdXQgaXQuICBz
+ZWFiaW9zLW1hc3RlciBoYXMgYmVlbiB0ZXN0ZWQgd2l0aCBYZW4gZm9yIGFnZXMsIHNvCj4gYWxs
+IHZlcnNpb25zIG9mIHNlYWJpb3MgcmVsZWFzZWQgaW4gdGhlIGxhc3Qgc2V2ZXJhbCB5ZWFycyBz
+aG91bGQgSnVzdAo+IFdvcms+Cj4gVGhhdCdzIHdoeSBJIHNhaWQgdG8gZG93bmdyYWRlIHRvIDEu
+OCBpbiBvdXIgYnVpbGRlciAtLSBiZWNhdXNlIEkKPiBleHBlY3RlZCBkaXN0cm9zIHRvIGlnbm9y
+ZSB0aGF0IHZhbHVlIGFuZCB1c2UgMS4xMCBvciB3aGF0ZXZlciB0aGUKPiBuZXdlc3QgdmVyc2lv
+biBpcyBhbnl3YXkuCj4gCj4gQXJlIHlvdSBhd2FyZSBvZiBhbnkgc2VhYmlvcyAvIFhlbiBkZXBl
+bmRlbmNpZXMgLS0gcGFydGljdWxhciB2ZXJzaW9ucwo+IG9mIHZhbmlsbGEgc2VhYmlvcyB0aGF0
+IGRvbid0IHdvcmsgd2l0aCBwYXJ0aWN1bGFyIHZlcnNpb25zIG9mIFhlbj8KPiAKClRoZXJlIGhh
+dmUgYmVlbiBhIGZldyBvdmVyIHRoZSB5ZWFycy4gSSBjYW4ndCBleHBsaWNpdGx5IGVudW1lcmF0
+ZSB0aGVtCmJ1dCB0aGV5J3ZlIHVzdWFsbHkgYmVlbiAuMCByZWxlYXNlcy4KCi0tIApEb3VnIEdv
+bGRzdGVpbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
