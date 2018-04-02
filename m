@@ -1,15 +1,22 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: stubdom --disable-pv-grub has not effect
-Date: Mon, 2 Apr 2018 11:50:31 +0200
-Message-ID: <20180402115031.543fe0db.olaf@aepfle.de>
-References: <20180401201909.40cfc91d.olaf@aepfle.de>
- <20180401182943.26ontghhihrmnb7k@citrix.com>
- <20180402094054.GA16356@aepfle.de>
- <20180402094423.rrvovcg2fflxdgn4@citrix.com>
+From: Manish Jaggi <mjaggi@caviumnetworks.com>
+Subject: Re: [PATCH v2 07/17] arm64: vgic-v3: Add ICV_EOIR1_EL1
+ handler
+Date: Mon, 2 Apr 2018 16:33:12 +0530
+Message-ID: <19b0fb42-711b-aada-0eef-133c593824b1@caviumnetworks.com>
+References: <cover.1522135597.git.manish.jaggi@cavium.com>
+ <e7402c406f8c894ee469cd8f7f08c16c4c2e90ad.1522135597.git.manish.jaggi@cavium.com>
+ <05029e6f-6812-d02e-aa41-e5ff4f0c0cad@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0700959261893077269=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180402094423.rrvovcg2fflxdgn4@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=w0z9=gx=cavium.com=manish.jaggi@srs-us1.protection.inumbo.net>)
+ id 1f2xFf-0006AR-DU
+ for xen-devel@lists.xenproject.org; Mon, 02 Apr 2018 11:03:51 +0000
+In-Reply-To: <05029e6f-6812-d02e-aa41-e5ff4f0c0cad@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,52 +25,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xen.org
+To: Marc Zyngier <marc.zyngier@arm.com>, Manish Jaggi <manish.jaggi@cavium.com>, xen-devel@lists.xenproject.org, julien.grall@arm.com, sstabellini@kernel.org, andre.przywara@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============0700959261893077269==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/CJjll.aIhflxlS4n0txpsiF"; protocol="application/pgp-signature"
-
---Sig_/CJjll.aIhflxlS4n0txpsiF
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Mon, 2 Apr 2018 10:44:23 +0100
-schrieb Wei Liu <wei.liu2@citrix.com>:
-
-> I suppose you hit some sort of compile error because pv-grub has rotten?
-
-A post-build check scans the build log for warnings. Some of them are seen =
-as fatal, and the otherwise successful build is marked as FAIL, no rpm pack=
-age is provided. Since I have no need for pvgrub, disabling it seems like t=
-he obvious choice.
-
-Olaf
-
---Sig_/CJjll.aIhflxlS4n0txpsiF
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWsH85wAKCRBdQqD6ppg2
-fsXmAJ9xdMGs/UoIULukKcDqJiAzkngXGwCeOECf5PA8mT0CZcV5NXmCP4Ezh0U=
-=U/kS
------END PGP SIGNATURE-----
-
---Sig_/CJjll.aIhflxlS4n0txpsiF--
-
-
---===============0700959261893077269==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0700959261893077269==--
+Ck9uIDAzLzI3LzIwMTggMDM6NDggUE0sIE1hcmMgWnluZ2llciB3cm90ZToKPiBPbiAyNy8wMy8x
+OCAxMDowNywgTWFuaXNoIEphZ2dpIHdyb3RlOgo+PiBUaGlzIHBhdGNoIGlzIHBvcnRlZCB0byB4
+ZW4gZnJvbSBsaW51eCBjb21taXQKPj4gYjZmNDkwMzViNGJmNmUyNzA5ZjJhNWZlZDMxMDdmNTQz
+OGMxZmQwMgo+PiBLVk06IGFybTY0OiB2Z2ljLXYzOiBBZGQgSUNWX0VPSVIxX0VMMSBoYW5kbGVy
+Cj4+Cj4+IEFkZCBhIGhhbmRsZXIgZm9yIHdyaXRpbmcgdGhlIGd1ZXN0J3MgdmlldyBvZiB0aGUg
+SUNDX0VPSVIxX0VMMQo+PiByZWdpc3Rlci4gVGhpcyBpbnZvbHZlcyBkcm9wcGluZyB0aGUgcHJp
+b3JpdHkgb2YgdGhlIGludGVycnVwdCwKPj4gYW5kIGRlYWN0aXZhdGluZyBpdCBpZiByZXF1aXJl
+ZCAoRU9JbW9kZSA9PSAwKS4KPj4KPj4gU2lnbmVkLW9mZi1ieSA6IE1hbmlzaCBKYWdnaSA8bWFu
+aXNoLmphZ2dpQGNhdml1bS5jb20+Cj4+IC0tLQo+PiAgIHhlbi9hcmNoL2FybS9hcm02NC92Z2lj
+LXYzLXNyLmMgICAgIHwgMTM2ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+
+PiAgIHhlbi9pbmNsdWRlL2FzbS1hcm0vYXJtNjQvc3lzcmVncy5oIHwgICAxICsKPj4gICB4ZW4v
+aW5jbHVkZS9hc20tYXJtL2dpY192M19kZWZzLmggICB8ICAgNCArKwo+PiAgIDMgZmlsZXMgY2hh
+bmdlZCwgMTQxIGluc2VydGlvbnMoKykKPj4KPj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9h
+cm02NC92Z2ljLXYzLXNyLmMgYi94ZW4vYXJjaC9hcm0vYXJtNjQvdmdpYy12My1zci5jCj4+IGlu
+ZGV4IDAyNmQ2NDUwNmYuLmUzMmVjMDFmNTYgMTAwNjQ0Cj4+IC0tLSBhL3hlbi9hcmNoL2FybS9h
+cm02NC92Z2ljLXYzLXNyLmMKPj4gKysrIGIveGVuL2FyY2gvYXJtL2FybTY0L3ZnaWMtdjMtc3Iu
+Ywo+PiBAQCAtMzMsNiArMzMsNyBAQAo+PiAgIAo+PiAgICNkZWZpbmUgSUNDX0lBUjFfRUwxX1NQ
+VVJJT1VTICAgIDB4M2ZmCj4+ICAgI2RlZmluZSBWR0lDX01BWF9TUEkgICAgICAgICAgICAgMTAx
+OQo+PiArI2RlZmluZSBWR0lDX01JTl9MUEkgICAgICAgICAgICAgODE5Mgo+PiAgIAo+PiAgIHN0
+YXRpYyBpbnQgdmdpY192M19icHJfbWluKHZvaWQpCj4+ICAgewo+PiBAQCAtNDgyLDYgKzQ4Mywx
+MzcgQEAgc3RhdGljIHZvaWQgdnJlZ19lbXVsYXRlX2lhcihzdHJ1Y3QgY3B1X3VzZXJfcmVncyAq
+cmVncywgY29uc3QgdW5pb24gaHNyIGhzcikKPj4gICAgICAgdmdpY192M19yZWFkX2lhcihyZWdz
+LCBoc3IpOwo+PiAgIH0KPj4gICAKPj4gK3N0YXRpYyBpbnQgdmdpY192M19maW5kX2FjdGl2ZV9s
+cihpbnQgaW50aWQsIHVpbnQ2NF90ICpscl92YWwpCj4+ICt7Cj4+ICsgICAgaW50IGk7Cj4+ICsg
+ICAgdW5zaWduZWQgaW50IHVzZWRfbHJzID0gIGdpY19nZXRfbnVtX2xycygpOwo+IFRoaXMgaXMg
+cXVpdGUgYSBkZXBhcnR1cmUgZnJvbSB0aGUgZXhpc3RpbmcgY29kZS4gS1ZNIGFsd2F5cyBhbGxv
+Y2F0ZQo+IExScyBzZXF1ZW50aWFsbHksIGFuZCB1c2VkX2xycyByZXByZXNlbnRzIHRoZSBjdXJy
+ZW50IHVwcGVyIGJvdW5kLgpJSVVDLCBYZW4gdXNlcyBhIGZ1bmN0aW9uIGdpY19maW5kX3VudXNl
+ZF9sciB0byBmaW5kIGFuIHVudXNlZCBMUi4KCnhlbi9hcmNoL2FybS9naWMuYzoKZ2ljX3JhaXNl
+X2d1ZXN0X2lycQogwqDCoMKgIGdpY19maW5kX3VudXNlZF9scgo+IEhlcmUsCj4geW91IHNlZW0g
+dG8gYmUgbG9va2luZyBhdCAqYWxsKiB0aGUgTFJzLiBJcyB0aGF0IHNhZmU/CklJVUMgWGVuIGRv
+ZXMgbm90IG1haW50YWluIGEgdXNlZF9scnMsIGl0IGRvZXMgaGF2ZSBhbiBscl9tYXNrLCBidXQg
+dGhhdCAKaXMgc3RhdGljIGluIGdpYy5jCgpUbyBkbyBzb21ldGhpbmcgbGlrZQorZm9yX2VhY2hf
+c2V0X2JpdChpLCBscl9tYXNrLCBucl9scnMpCisgeworwqDCoMKgwqDCoCB1NjQgdmFsID0gX19n
+aWNfdjNfZ2V0X2xyKGkpOworwqDCoMKgwqDCoCB1OCBscl9wcmlvID0gKHZhbCAmIElDSF9MUl9Q
+UklPUklUWV9NQVNLKSA+PiBJQ0hfTFJfUFJJT1JJVFlfU0hJRlQ7CisgwqDCoMKgIC8qIE5vdCBw
+ZW5kaW5nIGluIHRoZSBzdGF0ZT8gKi8KK8KgwqDCoMKgIGlmICgodmFsICYgSUNIX0xSX1NUQVRF
+KSAhPSBJQ0hfTFJfUEVORElOR19CSVQpCivCoMKgwqDCoMKgwqDCoMKgIGNvbnRpbnVlOwoKCkkg
+bmVlZCB0byBkbyBzb21lIGp1Z2dsZXJ5IHRvIG1ha2UgbHJfbWFzayB2aXNpYmxlIG91dHNpZGUg
+b2YgCnhlbi9hcmNoL2FybS9naWMuYwpUaGUgZWFzaWVzdCB3b3VsZCBiZSB0byBhZGQgYW4gZXh0
+ZXJuIGZ1bmN0aW9uLCBoYXJkZXIgd2F5IHdvdWxkIGJlIHRvIAphZGQgaXQgaW4gZ2ljX2h3X29w
+ZXJhdGlvbnMKCi0gdmdpY192M19oaWdoZXN0X3ByaW9yaXR5X2xyIGl0ZXJhdGVzIGlzIGludGVy
+ZXN0ZWQgaW4gdXNlZCBMUidzIHdoaWNoIApzcmUgaW4gUGVuZGluZyBzdGF0ZS4KLSBlbXVsYXRp
+bmcgSUFSIGlzIGRvbmUgd2l0aCBpbnRlcnJ1cHRzIGRpc2FibGVkCi0gaXRlcmF0aW5nIG92ZXIg
+YWxsIHRoZSBMUnMgYW5kIGZpbmRpbmcgd2hpY2ggb25lcyBhcmUgaW4gUGVuZGluZy4KCgo+ICAg
+QXJlIHlvdQo+IGd1YXJhbnRlZWQgbm90IHRvIGhhdmUgYW55IHN0YWxlIHN0YXRlPwpJIHdvdWxk
+IHJlcXVlc3QgU3RlZmFuby9BbmRyZS9KdWxpZW4gdG8gY29tbWVudCBoZXJlLi4uCj4KPiBJbiBh
+bnkgY2FzZSwgdGhlIGNoYW5nZSBzaG91bGQgYmUgZG9jdW1lbnRlZC4KPgo+PiArCj4+ICsgICAg
+Zm9yICggaSA9IDA7IGkgPCB1c2VkX2xyczsgaSsrICkKPj4gKyAgICB7Cj4+ICsgICAgICAgIHVp
+bnQ2NF90IHZhbCA9IGdpY3YzX2ljaF9yZWFkX2xyKGkpOwo+PiArCj4+ICsgICAgICAgIGlmICgg
+KHZhbCAmIElDSF9MUl9WSVJUVUFMX0lEX01BU0spID09IGludGlkICYmCj4+ICsgICAgICAgICAg
+ICAodmFsICYgSUNIX0xSX0FDVElWRV9CSVQpICkKPj4gKyAgICAgICAgewo+PiArICAgICAgICAg
+ICAgKmxyX3ZhbCA9IHZhbDsKPj4gKyAgICAgICAgICAgIHJldHVybiBpOwo+PiArICAgICAgICB9
+Cj4+ICsgICAgfQo+PiArCj4+ICsgICAgKmxyX3ZhbCA9IElDQ19JQVIxX0VMMV9TUFVSSU9VUzsK
+Pj4gKyAgICByZXR1cm4gLTE7Cj4+ICt9Cj4gVGhhbmtzLAo+Cj4gCU0uCgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
