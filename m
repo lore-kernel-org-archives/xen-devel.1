@@ -1,16 +1,13 @@
-From: Zhenzhong Duan <zhenzhong.duan@oracle.com>
-Subject: Re: [PATCH v2] x86/boot: Disable IBRS in intr/nmi exit
- path at bootup stage
-Date: Mon, 2 Apr 2018 17:40:59 +0800
-Message-ID: <0aa22650-62f6-0fdf-0066-51418f058fd6@oracle.com>
-References: <6c76db4e-ebd1-401e-bb38-24e7ea057447@default>
- <5ABA226802000078001B6638@prv1-mh.provo.novell.com>
-Reply-To: zhenzhong.duan@oracle.com
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: stubdom --disable-pv-grub has not effect
+Date: Mon, 2 Apr 2018 11:40:54 +0200
+Message-ID: <20180402094054.GA16356@aepfle.de>
+References: <20180401201909.40cfc91d.olaf@aepfle.de>
+ <20180401182943.26ontghhihrmnb7k@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7682499809674265922=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5ABA226802000078001B6638@prv1-mh.provo.novell.com>
+In-Reply-To: <20180401182943.26ontghhihrmnb7k@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,67 +16,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper3 <andrew.cooper3@citrix.com>
-Cc: srinivas.eeda@oracle.com, boris.ostrovsky@oracle.com, Xen-Devel <xen-devel@lists.xen.org>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAxOC8zLzI3IDE2OjUyLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+PiBPbiAyNy4wMy4xOCBh
-dCAwNjo1MiwgPHpoZW56aG9uZy5kdWFuQG9yYWNsZS5jb20+IHdyb3RlOgo+PiBBZnRlciByZXNl
-dCwgSUJSUyBpcyBkaXNhYmxlZCBieSBwcm9jZXNzb3IsIGJ1dCBhIGNvbWluZyBpbnRyL25taSBs
-ZWF2ZSBJQlJTCj4+IGVuYWJsZWQgYWZ0ZXIgdGhlaXIgZXhpdC4gSXQncyBub3QgbmVjZXNzb3J5
-IGZvciBib290dXAgY29kZSB0byBydW4gaW4gbG93Cj4+IHBlcmZvcm1hbmNlIHdpdGggSUJSUyBl
-bmFibGVkLgo+Pgo+PiBPbiBPUkFDTEUgWDYtMig1MDBHQi84OCBjcHVzLCBkb20wIDExR0IvMjAg
-dmNwdXMpLCB3ZSBvYnNlcnZlZCBhbiAyMDBzKyBkZWxheQo+PiBpbiBjb25zdHJ1Y3RfZG9tMC4K
-Pj4KPj4gQnkgaW5pdGlhbGl6aW5nIHVzZV9zaGFkb3dfc3BlY19jdHJsIHdpdGggdGhlIHJlc3Vs
-dCBvZiAoc3lzdGVtX3N0YXRlIDwKPj4gU1lTX1NUQVRFX2FjdGl2ZSksIElCUlMgaXMgZGlzYWJs
-ZWQgaW4gaW50ci9ubWkgZXhpdCBwYXRoIGF0IGJvb3R1cCBzdGFnZS4KPj4gVGhlbiBkZWxheSBp
-biBjb25zdHJ1Y3RfZG9tMCBpcyB+NTBzLgo+Pgo+PiBXaGVuIGhvdC1vbmxpbmluZyBhIENQVSwg
-d2UgaW5pdGlhbGl6ZSBJQlJTIGVhcmx5IGFuZCBzZXQgdXNlX3NoYWRvd19zcGVjX2N0cmwKPj4g
-dG8gZmFsc2UgdG8gYXZvaWQgQnJhbmNoIFRhcmdldCBJbmplY3Rpb24gZnJvbSBzaWJsaW5nIHRo
-cmVhZHMuCj4+Cj4+IHYyOiBVc2UgKHN5c3RlbV9zdGF0ZSA8IFNZU19TVEFURV9hY3RpdmUpIHRv
-IGluaXRpYWxpemUgdXNlX3NoYWRvd19zcGVjX2N0cmwKPj4gaW5zdGVhZCBvZiBsaXRlcmFsIDEg
-cGVyIEphbi4KPiAKPiBQbGVhc2UgcGxhY2UgcmV2aXNpb24gaW5mb3JtYXRpb24gYmVsb3cgdGhl
-IGZpcnN0IC0tLSBtYXJrZXIuCj4gCj4+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS14ODYvc3BlY19j
-dHJsLmgKPj4gKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9zcGVjX2N0cmwuaAo+PiBAQCAtMzIs
-OCArMzIsMjIgQEAgZXh0ZXJuIHVpbnQ4X3QgZGVmYXVsdF9idGlfaXN0X2luZm87Cj4+ICAgc3Rh
-dGljIGlubGluZSB2b2lkIGluaXRfc2hhZG93X3NwZWNfY3RybF9zdGF0ZSh2b2lkKQo+PiAgIHsK
-Pj4gICAgICAgc3RydWN0IGNwdV9pbmZvICppbmZvID0gZ2V0X2NwdV9pbmZvKCk7Cj4+ICsgICAg
-dWludDMyX3QgdmFsID0gU1BFQ19DVFJMX0lCUlM7Cj4gCj4gV2h5IGRvIHlvdSBuZWVkIHRoaXMg
-dmFyaWFibGU/Cj4gCj4+ICsgICAgLyogSW5pdGlhbGl6ZSBJQTMyX1NQRUNfQ1RSTCBNU1IgZm9y
-IGhvdHBsdWdnaW5nIGNwdSBlYXJseSAqLwo+PiArICAgIGlmICggc3lzdGVtX3N0YXRlID49IFNZ
-U19TVEFURV9hY3RpdmUgKQo+PiArICAgICAgICBhc20gdm9sYXRpbGUgKEFMVEVSTkFUSVZFKEFT
-TV9OT1AzLCAid3Jtc3IiLCBYODZfRkVBVFVSRV9YRU5fSUJSU19TRVQpCj4+ICsgICAgICAgICAg
-ICAgICAgICAgICAgOjogImEiICh2YWwpLCAiYyIgKE1TUl9TUEVDX0NUUkwpLCAiZCIgKDApIDog
-Im1lbW9yeSIpOwo+IAo+IEkgY2FuIHNlZSB0aGUgcG9pbnQgb2YgZG9pbmcgdGhpcywgYnV0IHRo
-ZSB0aXRsZSBvZiB0aGUgcGF0Y2ggZG9lc24ndAo+IGNvdmVyIGl0IChJIHRoaW5rIHRoaXMgaGFz
-IGJlZW4gbWlzc2luZyBpbmRlcGVuZGVudCBvZiB5b3VyIGludGVycnVwdC8KPiBOTUkgcGF0aHMg
-Y29uc2lkZXJhdGlvbikuCj4gCj4gRnVydGhlciBJTklUIyAodW5saWtlIFJFU0VUIykgZG9lc24n
-dCBjbGVhciB0aGUgcmVnaXN0ZXIsIHNvIHlvdQo+IG1heSB3YW50L25lZWQgdG8gYWxzbyBjbGVh
-ciB0aGUgcmVnaXN0ZXIgaW4gdGhlCj4gWDg2X0ZFQVRVUkVfWEVOX0lCUlNfQ0xFQVIgY2FzZS4K
-PiAKPiBBbHNvIHlvdSBkb24ndCBuZWVkIEFTTV9OT1AzIGhlcmUgYWZ0ZXIgNDAwOGM3MWQ3YSAo
-Ing4Ni9hbHQ6Cj4gU3VwcG9ydCBmb3IgYXV0b21hdGljIHBhZGRpbmcgY2FsY3VsYXRpb25zIiku
-Cj4gCj4gQWRkaXRpb25hbGx5IEkgdGhpbmsgaXQgd291bGQgYmUgYmV0dGVyIHRvIGtlZXAgbG93
-IGFuZCBoaWdoIHBhcnRzCj4gb2YgdGhlIHZhbHVlIG5leHQgdG8gZWFjaCBvdGhlciBpbiB0aGUg
-Y29uc3RyYWludHMsIHJhdGhlciB0aGFuCj4gcHV0dGluZyB0aGUgTVNSIGluZGV4IGluIHRoZSBt
-aWRkbGUuCj4gCj4+IC0gICAgaW5mby0+c2hhZG93X3NwZWNfY3RybCA9IGluZm8tPnVzZV9zaGFk
-b3dfc3BlY19jdHJsID0gMDsKPj4gKyAgICBpbmZvLT5zaGFkb3dfc3BlY19jdHJsID0gMDsKPj4g
-KyAgICAvKgo+PiArICAgICAqIFdlIHdhbnQgdG8gbWFrZSBzdXJlIHdlIGNsZWFyIElCUlMgaW4g
-aW50ZXJydXB0IGV4aXQgcGF0aAo+PiArICAgICAqIChET19TUEVDX0NUUkxfRVhJVF9UT19YRU4p
-IHdoaWxlIGRvbTAgaXMgc3RpbGwgYm9vdGluZyB0bwo+PiArICAgICAqIGF2b2lkIHVubmVjZXNz
-YXJ5IHBlcmZvcm1hbmNlIGltcGFjdC4gQXMgc29vbiBhcyBkb20wIGhhcwo+PiArICAgICAqIGJv
-b3RlZCB1c2Vfc2hhZG93X3NwZWNfY3RybCB3aWxsIGJlIGNsZWFyZWQsIGZvciBleGFtcGxlLAo+
-PiArICAgICAqIGluIGlkbGUgcm91dGluZS4KPj4gKyAgICAgKi8KPj4gKyAgICBpbmZvLT51c2Vf
-c2hhZG93X3NwZWNfY3RybCA9IHN5c3RlbV9zdGF0ZSA8IFNZU19TVEFURV9hY3RpdmU7Cj4gCj4g
-SSB0aGluayB0aGUgY29kZSBvdmVyYWxsIHdvdWxkIGJlIG1vcmUgcmVhZGFibGUgaWYgeW91IGhh
-ZCBqdXN0IGEKPiBzaW5nbGUgY29uZGl0aW9uIChpbiBpZi9lbHNlIGZvcm0pLgo+IAo+IEFuZCB0
-aGVuIHRoZXJlIGlzIHRoZSBxdWVzdGlvbiBvZiB3aGV0aGVyIHRvIHVzZSA8IC8gPj0gb3IKPiAh
-PSAvID09IDogSW4gdGhlIHJlc3VtZSBjYXNlLCBub3QgZ3Vlc3QgdkNQVS1zIGFyZSBhY3RpdmUg
-KHlldCksCj4gc28gcGVyaGFwcyB0aGUgbGF0dGVyIHdvdWxkIGJlIGJldHRlci4KPiAKPiBJbiBh
-bnkgZXZlbnQgcGxlYXNlIGdpdmUgQW5kcmV3IGEgY2hhbmNlIHRvIHJlcGx5IGJlZm9yZSB5b3UK
-PiBzZW5kIGFub3RoZXIgdmVyc2lvbiwgYXMgaGUgbWF5IGhhdmUgYSBkaWZmZXJlbnQgb3Bpbmlv
-biBhbmQvb3IKPiBvdGhlciB2YWx1YWJsZSBpbnB1dC4KCkhpIEFuZHJldywKCk1heSBJIGhhdmUg
-eW91ciBjb21tZW50cz8gSWYgdGhlcmUgaXMgbm8gZnVydGhlciBzdWdnZXN0aW9ucyBmcm9tIHlv
-dSwgCkknbGwgcHJlcGFyZSB0byBtYWtlIHRoZSBuZXcgdmVyc2lvbi4KClRoYW5rcwpaaGVuemhv
-bmcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============7682499809674265922==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="XsQoSWH+UP9D9v3l"
+Content-Disposition: inline
+
+
+--XsQoSWH+UP9D9v3l
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Sun, Apr 01, Wei Liu wrote:
+
+> No. That's a bug in our build system.
+
+Thanks. For some reason only gcc48-4.8.3.rpm from SLE_11 is affected,
+not gcc43-4.3.4.rpm from SLE_11 nor gcc48-4.8.5.rpm from SLE_12.
+This fixes my packages for the time being:
+sed -i '/ stubdom install-grub/d' Makefile
+
+Olaf
+
+--XsQoSWH+UP9D9v3l
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWsH6ogAKCRBdQqD6ppg2
+fovAAKCCkjzLGft5XL52CYeUzYzA4ZRdqACdEeLbTmlBFzWrRPmPWlt97TKfnYw=
+=oUVu
+-----END PGP SIGNATURE-----
+
+--XsQoSWH+UP9D9v3l--
+
+
+--===============7682499809674265922==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7682499809674265922==--
