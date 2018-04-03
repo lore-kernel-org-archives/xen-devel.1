@@ -1,21 +1,19 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v4 1/8] x86: NOP out XPTI entry/exit code
- when it's not in use
-Date: Tue, 3 Apr 2018 19:48:17 +0200
-Message-ID: <c4ae0f15-8320-17ca-1ead-db709fafc8e4@suse.com>
-References: <5AAFC9E202000078001B36F7@prv-mh.provo.novell.com>
- <5AAFCB4202000078001B3707@suse.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [xen-unstable test] 121721: regressions - FAIL
+Date: Tue, 3 Apr 2018 18:52:47 +0100
+Message-ID: <20180403175247.qgujuixi55galrbk@citrix.com>
+References: <osstest-121721-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=eidr=gy=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1f3Q2h-0002rv-MZ
- for xen-devel@lists.xenproject.org; Tue, 03 Apr 2018 17:48:23 +0000
-In-Reply-To: <5AAFCB4202000078001B3707@suse.com>
-Content-Language: de-DE
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=0tpn=gy=citrix.com=prvs=624464b1e=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1f3Q72-0003Xw-3w
+ for xen-devel@lists.xenproject.org; Tue, 03 Apr 2018 17:52:52 +0000
+Content-Disposition: inline
+In-Reply-To: <osstest-121721-mainreport@xen.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,29 +22,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+To: osstest service owner <osstest-admin@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTkvMDMvMTggMTQ6MzcsIEphbiBCZXVsaWNoIHdyb3RlOgo+IEludHJvZHVjZSBhIHN5bnRo
-ZXRpYyBmZWF0dXJlIGZsYWcgdG8gdXNlIGFsdGVybmF0aXZlIGluc3RydWN0aW9uCj4gcGF0Y2hp
-bmcgdG8gTk9QIG91dCBhbGwgY29kZSBvbiBlbnRyeS9leGl0IHBhdGhzLiBIYXZpbmcgTk9QcyBo
-ZXJlIGlzCj4gZ2VuZXJhbGx5IGJldHRlciB0aGFuIHVzaW5nIGNvbmRpdGlvbmFsIGJyYW5jaGVz
-Lgo+IAo+IEFsc28gY2hhbmdlIHRoZSBsaW1pdCBvbiB0aGUgbnVtYmVyIG9mIGJ5dGVzIHdlIGNh
-biBwYXRjaCBpbiBvbmUgZ28gdG8KPiB0aGF0IHJlc3VsdGluZyBmcm9tIHRoZSBlbmNvZGluZyBp
-biBzdHJ1Y3QgYWx0X2luc3RyIC0gdGhlcmUncyBubyBwb2ludAo+IHJlZHVjaW5nIGl0IGJlbG93
-IHRoYXQgbGltaXQsIGFuZCB3aXRob3V0IGEgY2hlY2sgYmVpbmcgaW4gcGxhY2UgdGhhdAo+IHRo
-ZSBsaW1pdCBpc24ndCBhY3R1YWxseSBleGNlZWRlZCwgc3VjaCBhbiBhcnRpZmljaWFsIGJvdW5k
-YXJ5IGlzIGEKPiBsYXRlbnQgcmlzay4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8
-amJldWxpY2hAc3VzZS5jb20+CgpKdXN0IGRpZCBhIHBhcmFsbGVsIG1ha2Ugb2YgdGhlIGh5cGVy
-dmlzb3Igd2l0aCBhbmQgd2l0aG91dCB0aGUgcGF0Y2gsCndpdGggeHB0aT10cnVlIGFuZCB3aXRo
-IHhwdGk9ZmFsc2UgKHZhbHVlcyBpbiBicmFjZXMgYXJlIHN0ZGRldikuCgogICAgICAgICAgICAg
-ICAgICAgICAgIGVsYXBzZWQgICAgICAgICBzeXN0ZW0gICAgICAgICAgdXNlcgp1bnBhdGNoZWQs
-IHhwdGk9ZmFsc2U6IDExOC42OSAoIDEuNDApICAxNjguMzggKDEyLjY0KSAgMTg2LjExICggNS40
-OSkKdW5wYXRjaGVkLCB4cHRpPXRydWUgOiAxMjguMDIgKCA1Ljk3KSAgMjE5LjY2ICgyMy4wNikg
-IDE5Ny44NCAoIDQuNTMpCnBhdGNoZWQsICAgeHB0aT1mYWxzZTogIDkwLjY1ICggNi42MykgICA5
-OS41MCAoMTQuNzkpICAxODAuMzUgKCA1Ljk3KQpwYXRjaGVkLCAgIHhwdGk9dHJ1ZSA6IDExMS42
-OSAoIDkuOTMpICAxNjMuNjMgKDEzLjA1KSAgMTgxLjIyICggMy43MSkKCgpKdWVyZ2VuCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVHVlLCBBcHIgMDMsIDIwMTggYXQgMDU6MzY6MDdQTSArMDAwMCwgb3NzdGVzdCBzZXJ2aWNl
+IG93bmVyIHdyb3RlOgo+IGZsaWdodCAxMjE3MjEgeGVuLXVuc3RhYmxlIHJlYWwgW3JlYWxdCj4g
+aHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMTcyMS8K
+PiAKPiAgdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2NC14
+c20gMTAgZGViaWFuLWh2bS1pbnN0YWxsIGZhaWwgUkVHUi4gdnMuIDEyMTI3Mgo+ICB0ZXN0LWFt
+ZDY0LWkzODYteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNtIDEwIGRlYmlhbi1o
+dm0taW5zdGFsbCBmYWlsIFJFR1IuIHZzLiAxMjEyNzIKCk1pbmktb3MgaXMgYnVnZ3kuIEkgaGF2
+ZSByZXZlcnRlZCB0aGUgY2hhbmdlIHRvIENvbmZpZy5tay4KCldlaS4KCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
