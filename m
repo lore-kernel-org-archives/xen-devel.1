@@ -1,23 +1,16 @@
-From: Greg KH <gregkh@linuxfoundation.org>
-Subject: Re: Patches for stable
-Date: Wed, 4 Apr 2018 17:42:01 +0200
-Message-ID: <20180404154201.GA31981__8272.56621928445$1522856451$gmane$org@kroah.com>
-References: <a38538ef-d766-adb9-77d7-4624cf1dd749@suse.com>
- <20180404142702.GA20460@kroah.com>
- <e17d3e80-b019-ac09-d796-771ed38d91e5@suse.com>
- <20180404144644.GA22656@kroah.com>
- <c03563a8-8291-38a2-7bdb-12d6894c8fbd@suse.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v2] libxl: allow libxl_domain_suspend to
+ simply suspend a domain, without saving it
+Date: Wed, 4 Apr 2018 17:42:17 +0200
+Message-ID: <20180404154217.GC5817@mail-itl>
+References: <20180314143608.22615-1-marmarek@invisiblethingslab.com>
+ <20180321165210.b5b6xw2y5ogumhil@citrix.com>
+ <23227.31353.516795.789410@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5445749298155552137=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=2uyw=gz=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1f3kY0-0003Yr-HW
- for xen-devel@lists.xenproject.org; Wed, 04 Apr 2018 15:42:04 +0000
-Content-Disposition: inline
-In-Reply-To: <c03563a8-8291-38a2-7bdb-12d6894c8fbd@suse.com>
+In-Reply-To: <23227.31353.516795.789410@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,79 +19,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, stable <stable@vger.kernel.org>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: Marcus of Wetware Labs <marcus@wetwa.re>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBBcHIgMDQsIDIwMTggYXQgMDU6MTI6MzJQTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3
-cm90ZToKPiBPbiAwNC8wNC8xOCAxNjo0NiwgR3JlZyBLSCB3cm90ZToKPiA+IE9uIFdlZCwgQXBy
-IDA0LCAyMDE4IGF0IDA0OjMwOjMwUE0gKzAyMDAsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gPj4g
-T24gMDQvMDQvMTggMTY6MjcsIEdyZWcgS0ggd3JvdGU6Cj4gPj4+IE9uIFdlZCwgQXByIDA0LCAy
-MDE4IGF0IDEyOjM4OjQzUE0gKzAyMDAsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gPj4+PiBQbGVh
-c2UgYWRkIHRoZSBwYXRjaGVzOgo+ID4+Pj4KPiA+Pj4+IGNvbW1pdCAwMzhiYWMyYjAyOTg5YWNm
-MWZjOTM4Y2VkY2I3OTQ0YzAyNjcyYjlmIHVwc3RyZWFtCj4gPj4+PiBjb21taXQgZGZjOTMyN2Fi
-N2M5OWJjMTNlMTIxMDY0NDg2MTVlZmJhODMzODg2YiB1cHN0cmVhbQo+ID4+Pj4gY29tbWl0IGIx
-N2Q5ZDFkZjNjMzNhNGYxZDJiZjM5N2UyMjU3YWVjZjlkYzU2ZDQgdXBzdHJlYW0KPiA+Pj4+Cj4g
-Pj4+PiB0byB0aGUgNC4xNSBhbmQgNC4xNiBzdGFibGUga2VybmVscy4KPiA+Pj4+Cj4gPj4+PiBU
-aG9zZSBwYXRjaGVzIGFyZSBuZWVkZWQgdG8gYm9vdCBMaW51eCBhcyBQVkggZ3Vlc3Qgb24gcmVj
-ZW50IFhlbi4KPiA+Pj4KPiA+Pj4gU28gYSBuZXcgZmVhdHVyZT8gIFdoeSBpcyB0aGF0IG9rIGZv
-ciBzdGFibGUga2VybmVscz8KPiA+Pgo+ID4+IEl0IHdvcmtzIGZvciBrZXJuZWxzIHNpbmNlIGF0
-IGxlYXN0IDQuMTEgb24gWGVuIDQuMTAuCj4gPiAKPiA+IEdyZWF0LCBzbyB3aGF0IGNvbW1pdCBj
-YXVzZWQgdGhpcyB0byBmYWlsPwo+ID4gCj4gPiBTbyBmYXIsIGluIHJlYWRpbmcgdGhvc2UgY29t
-bWl0cywgaXQgc291bmRzIGxpa2UgdGhleSBhcmUgIm1ha2UgTGludXgKPiA+IHdvcmsgYWdhaW4g
-ZHVlIHRvIGNoYW5nZXMgaW4gWGVuIi4gIFRoYXQgc291bmRzIGxpa2UgYSBwcmV0dHkgYmFkIHRo
-aW5nCj4gPiB0aGF0IFhlbiBkaWQsIHdoeSBkbyB3ZSBoYXZlIHRvIGZpeCB1cCB0aGVpciBtZXNz
-Pwo+IAo+IFhlbiBkaWQgbm90aGluZyBiYWQuIEl0IHdhcyB0aGUgIm9sZCIga2VybmVsIGltcGxl
-bWVudGF0aW9uIHdoaWNoIHJlbGllZAo+IG9uIGFuIGFzc3VtcHRpb24gd2hpY2ggaGFwcGVuZWQg
-dG8gYmUgdHJ1ZSBieSBhY2NpZGVudC4gWGVuIGhhZCB0byBiZQo+IGNoYW5nZWQgaW4gb3JkZXIg
-dG8gZW5hYmxlIGdydWIyIHRvIHN1cHBvcnQgUFZIIG1vZGUuCj4gCj4gVGhlIFBWSCBpbnRlcmZh
-Y2Ugc3BlY2lmaWVzIHRoYXQgdGhlIFJTRFAgYWRkcmVzcyBpcyBhdmFpbGFibGUgdmlhIHRoZQo+
-IHN0YXJ0X2luZm8gc3RydWN0dXJlIGhhbmRlZCBvdmVyIHRvIHRoZSBQVkggYm9vdCBlbnRyeS4g
-VGhlIExpbnV4IGtlcm5lbAo+IGRpZG4ndCBsb29rIGF0IHRoYXQgYWRkcmVzcywgYnV0IHVzZWQg
-dGhlIGxlZ2FjeSBtZXRob2Qgc2Nhbm5pbmcgbG93Cj4gbWVtb3J5IGZvciB0aGUgUlNEUCB0YWJs
-ZS4gQXMgc29vbiBhcyBYZW4gbW92ZWQgdGhlIFJTRFAgdG8gYSBoaWdoZXIKPiBhZGRyZXNzICh3
-aGljaCBpcyBjb3ZlcmVkIGJ5IHRoZSBQVkggaW50ZXJmYWNlIHNwZWNpZmljYXRpb24pIHRoZSBr
-ZXJuZWwKPiBjb3VsZCBubyBsb25nZXIgYmUgYm9vdGVkLgo+IAo+IFNvIGl0IHdhcyBjbGVhcmx5
-IGEgZmF1bHQgb2YgdGhlIGtlcm5lbCBub3QgY29tcGx5aW5nIHRvIHRoZSBQVkgKPiBzcGVjaWZp
-Y2F0aW9uLgoKQnV0IGl0IHdvcmtlZCBwcmV2aW91c2x5LCBzbyB5b3UgY2FuJ3QgZmF1bHQgTGlu
-dXggaGVyZSA6KQoKSG93IG1hbnkgb3RoZXIgb3BlcmF0aW5nIHN5c3RlbXMgYnJva2Ugd2l0aCB0
-aGlzIGNoYW5nZT8KCj4gPj4+PiBJbiBQVkggbW9kZSB0aGVyZSBpcyBubyBndWFyYW50ZWUgdGhl
-IGtlcm5lbCBjYW4gZmluZCB0aGUgUlNEUCB0YWJsZQo+ID4+Pj4gYXQgdGhlIGxlZ2FjeSBsb2Nh
-dGlvbiBpbiBsb3cgbWVtb3J5LCB3aGljaCBpcyBhIHJlcXVpcmVtZW50IGZvciB0aGUKPiA+Pj4+
-IGtlcm5lbCB0byBib290IHN1Y2Nlc3NmdWwgd2l0aG91dCB0aG9zZSBwYXRjaGVzLgo+ID4+Pgo+
-ID4+PiBXaHkgbm90IGp1c3QgdXNlIG5ld2VyIGtlcm5lbHMgZm9yIG5ldyBYZW4gZmVhdHVyZXM/
-ICBUaGlzIHJlYWxseQo+ID4+PiBkb2Vzbid0IGxvb2sgbGlrZSBhIGJ1Z2ZpeCB0byBtZSwgZG9l
-cyBpdCB0byB5b3U/Cj4gPj4KPiA+PiBJdCBkb2VzLiBBIHdvcmtpbmcgc2V0dXAgd2lsbCBubyBs
-b25nZXIgd29yayBpZiBYZW4gdmVyc2lvbiBpcyB1cGdyYWRlZAo+ID4+IHRvIDQuMTEuCj4gPiAK
-PiA+IFdoeSBpc24ndCB0aGlzIGEgcmVncmVzc2lvbiBpbiBYZW4gdGhhdCB0aGV5IGZpeD8gIFdo
-eSBhcmUgd2UKPiA+IHJlc3BvbnNpYmxlIGZvciBhZGRpbmcgbmV3IGtlcm5lbCBmZWF0dXJlcyB0
-byB3b3JrIG9uIG5ld2VyIHZlcnNpb25zIG9mCj4gPiBYZW4gYW5kIGJhY2twb3J0IHRoZW0gdG8g
-b2xkZXIga2VybmVscz8KPiAKPiBJbiBjYXNlIGEgTGludXggdXNlciBwcm9ncmFtIHJlbGllcyBv
-biB1bmRvY3VtZW50ZWQgYmVoYXZpb3Igb2YgdGhlCj4ga2VybmVsIChlLmcuIGEgcmVnaXN0ZXIg
-YmVpbmcgbm9uLXplcm8gb24gcmV0dXJuIGZyb20gYSBzeXNjYWxsKSwgZG9lcwo+IHRoZSBrZXJu
-ZWwgaGF2ZSB0byBzdXBwb3J0IHRoYXQgYmVoYXZpb3IgZXRlcm5hbGx5PyBJIGRvbid0IHRoaW5r
-IHNvLgoKWWVzLCB0aGUga2VybmVsIGRvZXMgaGF2ZSB0byBzdXBwb3J0IGl0LiAgSXQncyBjYWxs
-ZWQgImRvIG5vdCBicmVhawp3b3JraW5nIHN5c3RlbXMiLCBvciBhcyBzb21lIGxpa2UgdG8gY2Fs
-bCBpdCwgdGhlICJDYW1icmlkZ2UgUHJvbWlzZSIKdGhhdCB3ZSBtYWRlIHRvIHVzZXJzcGFjZSB3
-ZWxsIG92ZXIgYSBkZWNhZGUgYWdvIGF0IGEga2VybmVsIHN1bW1pdCBpbgpDYW1icmlkZ2UuCgpX
-ZSBkbyB0aGlzIGFsbCB0aGUgdGltZSwgc29tZXRpbWVzIGdvaW5nIHRocm91Z2ggZ3JlYXQgZ3ly
-YXRpb25zIGluCm9yZGVyIHRvIGFjaGlldmUgaXQuICBPciBzb21ldGltZXMgd2UganVzdCAid2Fp
-dCBpdCBvdXQiIGFuZCBkZWxheSA0Kwp5ZWFycyB0byBtYWtlIHRoZXNlIHR5cGVzIG9mIGNoYW5n
-ZXMgdG8gYWxsb3cgZXZlcnlvbmUgdG8gdXBkYXRlIHRoZWlyCnVzZXJzcGFjZSBwcm9ncmFtcyBi
-ZWZvcmUgd2UgbWFrZSBhIGNoYW5nZSBsaWtlIHRoaXMuCgpJdCdzIHBhcnQgb2YgdGhlIGpvYiBv
-ZiBydW5uaW5nIGEgZ29vZCBzb2Z0d2FyZSBwcm9qZWN0IGJ5IG5vdCBicmVha2luZwp1c2VyJ3Mg
-c3lzdGVtcy4gIEkgc3VnZ2VzdCB0aGF0IFhlbiBhbHNvIGFkb3B0IHRoaXMgc2FtZSBiZWhhdmlv
-ciBpZgp0aGV5IHdhbnQgdG8ga2VlcCBhIGhhcHB5IHVzZXJiYXNlLiAgT3RoZXJ3aXNlIHdlIGNh
-biBqdXN0IHRlbGwgZXZlcnlvbmUKdG8gZ28gdXNlIEtWTSA6KQoKPiBUaGlzIGlzIGEgc2ltaWxh
-ciBjYXNlLgoKTm90IGF0IGFsbC4gIFdlIGhhdmUgYSB3b3JraW5nIGtlcm5lbCBoZXJlLiAgWGVu
-IGNoYW5nZWQgYW5kIGJyb2tlCndvcmtpbmcgTGludXggc3lzdGVtcy4gIE5vdyBJIHVuZGVyc3Rh
-bmQgdGhlIGdvYWwgb2Ygd2FudGluZyB0byBhbHNvCmNoYW5nZSBMaW51eCB0byB3b3JrIHByb3Bl
-cmx5LCBidXQgdGhlc2UgY2hhbmdlcyBhcmUgcmVhbGx5IGEgbmV3CmZlYXR1cmUgYWRkaXRpb24g
-aWYgeW91IHJlYWQgdGhlIHBhdGNoZXMuCgpTbyB3aHkgY2FuJ3QgWGVuIGp1c3QgdGVsbCBhbGwg
-TGludXggdXNlcnMgdG8gdXBkYXRlIHRvIGEgbW9yZSBtb2Rlcm4Ka2VybmVsLCBpLmUuIDQuMTcu
-eSBhbmQgbmV3ZXIsIGluIG9yZGVyIHRvIHJ1biB3aXRoIHRoZSBuZXcgWGVuIGtlcm5lbAppZiB0
-aGV5IHdhbnQgdG8gZW5mb3JjZSB0aGlzIHByZXZpb3VzbHkgd29ya2luZyBiZWhhdmlvcj8gIFdo
-eSBkb2VzCkxpbnV4IGhhdmUgdG8gYmUgdGhlIG9uZSB0byBjaGFuZ2UgaGVyZT8KCnRoYW5rcywK
-CmdyZWcgay1oCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============5445749298155552137==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="ieNMXl1Fr3cevapt"
+Content-Disposition: inline
+
+
+--ieNMXl1Fr3cevapt
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Mar 28, 2018 at 12:20:25PM +0100, Ian Jackson wrote:
+> Wei Liu writes ("Re: [PATCH v2] libxl: allow libxl_domain_suspend to simp=
+ly suspend a domain, without saving it"):
+> > On Wed, Mar 14, 2018 at 03:36:08PM +0100, Marek Marczykowski-G=C3=B3rec=
+ki wrote:
+> > > When LIBXL_SUSPEND_NO_SAVE flag is set, no savefile will be written, =
+but
+> > > the domain will still be suspended (but not destroyed). The main reas=
+on
+> > > for this functionality is to suspend the host while some domains are
+> > > running, potentially holding PCI devices. This will give a chance to a
+> > > driver in such a domain to properly suspend the device.
+> > >=20
+> ...
+> > > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethi=
+ngslab.com>
+> > > Signed-off-by: Marcus of Wetware Labs <marcus@wetwa.re>
+> >=20
+> > The code and idea look fine.
+> >=20
+> > I would like to give Ian a chance to voice his opinion (he's currently
+> > away).
+>=20
+> The API does seem a bit odd.  The intent is then that the domain will
+> be un-suspended afterwards ?  This doesn't seem to be documented
+> AFAICT in your patch.
+
+Yes, there is already libxl_domain_resume for that.
+
+> I don't think I agree with this part of the reaoning:
+>=20
+> > > It would be better to have a separate function for this, but in fact =
+it
+> > > should be named libxl_domain_suspend, then the current one renamed to
+> > > libxl_domain_save. Since that would break API compatibility, keep it =
+in
+> > > the same function.
+>=20
+> I agree that libxl_domain_suspend is an unfortunate name, but can't we
+> come up with an alternative new name ?  It does seem odd to bundle
+> this into _save.
+
+libxl_domain_just_suspend ?
+It isn't bundling it into _save. There is no _save function - that's the
+problem.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--ieNMXl1Fr3cevapt
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlrE8lkACgkQ24/THMrX
+1yyzNQf9GhjyutX9vC8jvqfZJcyKP6vLX9R7lRHHsnRVmcK2KF8wt52AzDFPwB/n
+Rho46Mufq3F3YEj4pli45C+i3IHTl9yvNdgahd3n0qzSbG8dEAKD1PVR5GxgY9Ji
+SflJc32c6RXk1ii9gtw7O9ISLdsdfah6DAGlwCFaD7i0+AXPIMCIlDo65tvnSsU1
+M9NwIkaTWp1cu7LgLaNv3gL8Zt5HkOJ5VlGCjd48aaUjUhf0mzCGEjF6iGoXlTLQ
+ycPf6HAIFKRQaoMaAuwk/m3vJjvUiQ05t9BaM5uSnLgVmpC4gaPZMmBvSIP/gx0e
+/xDhWaCLp6TwbGQ6eIfAKKHFWT04ig==
+=iaS4
+-----END PGP SIGNATURE-----
+
+--ieNMXl1Fr3cevapt--
+
+
+--===============5445749298155552137==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5445749298155552137==--
