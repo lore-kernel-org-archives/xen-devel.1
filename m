@@ -1,17 +1,19 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH v2] libxl: allow libxl_domain_suspend to
- simply suspend a domain, without saving it
-Date: Wed, 4 Apr 2018 16:45:51 +0100
-Message-ID: <23236.62255.704543.993528@mariner.uk.xensource.com>
-References: <20180314143608.22615-1-marmarek@invisiblethingslab.com>
- <20180321165210.b5b6xw2y5ogumhil@citrix.com>
- <23227.31353.516795.789410@mariner.uk.xensource.com>
- <20180404154217.GC5817@mail-itl>
+From: Pawel Wieczorkiewicz <wipawel@amazon.de>
+Subject: [PATCH 7/7] add sleep,
+ msleep and NOW() macros to time manager
+Date: Wed, 4 Apr 2018 15:50:54 +0000
+Message-ID: <20180404155054.99335-7-wipawel@amazon.de>
+References: <20180404155054.99335-1-wipawel@amazon.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180404154217.GC5817@mail-itl>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=ov0m=gz=amazon.de=prvs=6257b9c38=wipawel@srs-us1.protection.inumbo.net>)
+ id 1f3khJ-0004dg-7c
+ for xen-devel@lists.xenproject.org; Wed, 04 Apr 2018 15:51:41 +0000
+In-Reply-To: <20180404155054.99335-1-wipawel@amazon.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,18 +22,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: Marcus of Wetware Labs <marcus@wetwa.re>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org
+Cc: semelpaul@gmail.com, andrew.cooper3@citrix.com, wipawel@amazon.de
 List-Id: xen-devel@lists.xenproject.org
 
-TWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyaXRlcyAoIlJlOiBbUEFUQ0ggdjJdIGxpYnhs
-OiBhbGxvdyBsaWJ4bF9kb21haW5fc3VzcGVuZCB0byBzaW1wbHkgc3VzcGVuZCBhIGRvbWFpbiwg
-d2l0aG91dCBzYXZpbmcgaXQiKToKPiBPbiBXZWQsIE1hciAyOCwgMjAxOCBhdCAxMjoyMDoyNVBN
-ICswMTAwLCBJYW4gSmFja3NvbiB3cm90ZToKPiA+IEkgYWdyZWUgdGhhdCBsaWJ4bF9kb21haW5f
-c3VzcGVuZCBpcyBhbiB1bmZvcnR1bmF0ZSBuYW1lLCBidXQgY2FuJ3Qgd2UKPiA+IGNvbWUgdXAg
-d2l0aCBhbiBhbHRlcm5hdGl2ZSBuZXcgbmFtZSA/ICBJdCBkb2VzIHNlZW0gb2RkIHRvIGJ1bmRs
-ZQo+ID4gdGhpcyBpbnRvIF9zYXZlLgo+IAo+IGxpYnhsX2RvbWFpbl9qdXN0X3N1c3BlbmQgPwoK
-SG93IGFib3V0IGxpYnhsX2RvbWFpbl9zdXNwZW5kX29ubHkgPwoKSWFuLgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+RnJvbTogUGF1bCBTZW1lbCA8cGhlbnRleEBhbWF6b24uZGU+CgpTaWduZWQtb2ZmLWJ5OiBQYXVs
+IFNlbWVsIDxwaGVudGV4QGFtYXpvbi5kZT4KCmNyIGh0dHBzOi8vY29kZS5hbWF6b24uY29tL3Jl
+dmlld3MvQ1ItNzg2MjI4Ci0tLQogY29tbW9uL3RpbWUuYyAgICAgIHwgMTggKysrKysrKysrKysr
+KysrKysrCiBpbmNsdWRlL3h0Zi90aW1lLmggfCAxNiArKysrKysrKysrKysrKysrCiAyIGZpbGVz
+IGNoYW5nZWQsIDM0IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9jb21tb24vdGltZS5jIGIv
+Y29tbW9uL3RpbWUuYwppbmRleCA3NTc3Njk0Li4yYmQ0ZTdmIDEwMDY0NAotLS0gYS9jb21tb24v
+dGltZS5jCisrKyBiL2NvbW1vbi90aW1lLmMKQEAgLTE1Miw2ICsxNTIsMjQgQEAgc3RhdGljIGlu
+bGluZSB2b2lkIG1zcGluX3NsZWVwKHVpbnQ2NF90IHQpCiAgICAgbnNwaW5fc2xlZXAobnNlYyk7
+CiB9CiAKKyNpZiBkZWZpbmVkKF9faTM4Nl9fKQordm9pZCBzbGVlcCh1aW50MzJfdCB0KQorI2Vs
+c2UKK3ZvaWQgc2xlZXAodWludDY0X3QgdCkKKyNlbmRpZgoreworICAgIHNwaW5fc2xlZXAodCk7
+Cit9CisKKyNpZiBkZWZpbmVkKF9faTM4Nl9fKQordm9pZCBtc2xlZXAodWludDMyX3QgdCkKKyNl
+bHNlCit2b2lkIG1zbGVlcCh1aW50NjRfdCB0KQorI2VuZGlmCit7CisgICAgbXNwaW5fc2xlZXAo
+dCk7Cit9CisKIC8qCiAgKiBMb2NhbCB2YXJpYWJsZXM6CiAgKiBtb2RlOiBDCmRpZmYgLS1naXQg
+YS9pbmNsdWRlL3h0Zi90aW1lLmggYi9pbmNsdWRlL3h0Zi90aW1lLmgKaW5kZXggMTYzNTZlYi4u
+MjUyMjYzYSAxMDA2NDQKLS0tIGEvaW5jbHVkZS94dGYvdGltZS5oCisrKyBiL2luY2x1ZGUveHRm
+L3RpbWUuaApAQCAtMzAsMTQgKzMwLDMwIEBAIHN0cnVjdCB0aW1ldmFsIHsKIHVpbnQzMl90IHNp
+bmNlX2Jvb3RfdGltZSh2b2lkKTsKIAogdWludDMyX3QgY3VycmVudF90aW1lKHZvaWQpOworCisv
+KiBUaGlzIGZ1bmN0aW9uIHRha2VzIHNlY29uZHMgaW4gcGFyYW1ldGVyICovCit2b2lkIHNsZWVw
+KHVpbnQzMl90IGYpOworCisvKiBCZSBjYXJlZnVsLCB0aGlzIGZ1bmN0aW9uIHRha2VzIG1pbGxp
+c2Vjb25kcyBpbiBwYXJhbWV0ZXIsCisgKiBub3QgbWljcm9zZWNvbmRzICEKKyAqLwordm9pZCBt
+c2xlZXAodWludDMyX3QgZik7CiAjZWxzZQogdWludDY0X3Qgc2luY2VfYm9vdF90aW1lKHZvaWQp
+OwogCiB1aW50NjRfdCBjdXJyZW50X3RpbWUodm9pZCk7CisKK3ZvaWQgc2xlZXAodWludDY0X3Qg
+Zik7CisKK3ZvaWQgbXNsZWVwKHVpbnQ2NF90IGYpOwogI2VuZGlmCiAKIGludCBnZXR0aW1lb2Zk
+YXkoc3RydWN0IHRpbWV2YWwgKnRwKTsKIAorCisvKiBUaGlzIHJldHVybnMgdGhlIGN1cnJlbnQg
+ZXBvY2ggdGltZSAqLworI2RlZmluZSBOT1coKSBjdXJyZW50X3RpbWUoKQorCiAjZW5kaWYgLyog
+WFRGX1RJTUVfSCAqLwogCiAvKgotLSAKMi4xNi4yCgpBbWF6b24gRGV2ZWxvcG1lbnQgQ2VudGVy
+IEdlcm1hbnkgR21iSApCZXJsaW4gLSBEcmVzZGVuIC0gQWFjaGVuCm1haW4gb2ZmaWNlOiBLcmF1
+c2Vuc3RyLiAzOCwgMTAxMTcgQmVybGluCkdlc2NoYWVmdHNmdWVocmVyOiBEci4gUmFsZiBIZXJi
+cmljaCwgQ2hyaXN0aWFuIFNjaGxhZWdlcgpVc3QtSUQ6IERFMjg5MjM3ODc5CkVpbmdldHJhZ2Vu
+IGFtIEFtdHNnZXJpY2h0IENoYXJsb3R0ZW5idXJnIEhSQiAxNDkxNzMgQgoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
