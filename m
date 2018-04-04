@@ -1,18 +1,18 @@
-From: Pawel Wieczorkiewicz <wipawel@amazon.de>
-Subject: [PATCH 6/7] add mspin_sleep function to time manager
-Date: Wed, 4 Apr 2018 15:50:53 +0000
-Message-ID: <20180404155054.99335-6-wipawel@amazon.de>
-References: <20180404155054.99335-1-wipawel@amazon.de>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v2] libxl: allow libxl_domain_suspend to
+ simply suspend a domain, without saving it
+Date: Wed, 4 Apr 2018 17:53:02 +0200
+Message-ID: <20180404155302.GE3176@mail-itl>
+References: <20180314143608.22615-1-marmarek@invisiblethingslab.com>
+ <20180321165210.b5b6xw2y5ogumhil@citrix.com>
+ <23227.31353.516795.789410@mariner.uk.xensource.com>
+ <20180404154217.GC5817@mail-itl>
+ <23236.62255.704543.993528@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3450598356861639266=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ov0m=gz=amazon.de=prvs=6257b9c38=wipawel@srs-us1.protection.inumbo.net>)
- id 1f3khP-0004hE-QO
- for xen-devel@lists.xenproject.org; Wed, 04 Apr 2018 15:51:47 +0000
-In-Reply-To: <20180404155054.99335-1-wipawel@amazon.de>
+In-Reply-To: <23236.62255.704543.993528@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,27 +21,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: semelpaul@gmail.com, andrew.cooper3@citrix.com, wipawel@amazon.de
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: Marcus of Wetware Labs <marcus@wetwa.re>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogUGF1bCBTZW1lbCA8cGhlbnRleEBhbWF6b24uZGU+CgpTaWduZWQtb2ZmLWJ5OiBQYXVs
-IFNlbWVsIDxwaGVudGV4QGFtYXpvbi5kZT4KCmNyIGh0dHBzOi8vY29kZS5hbWF6b24uY29tL3Jl
-dmlld3MvQ1ItNzg2MjI3Ci0tLQogY29tbW9uL3RpbWUuYyB8IDE0ICsrKysrKysrKysrKysrCiAx
-IGZpbGUgY2hhbmdlZCwgMTQgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2NvbW1vbi90aW1l
-LmMgYi9jb21tb24vdGltZS5jCmluZGV4IDZhYTE2NDguLjc1Nzc2OTQgMTAwNjQ0Ci0tLSBhL2Nv
-bW1vbi90aW1lLmMKKysrIGIvY29tbW9uL3RpbWUuYwpAQCAtMTM4LDYgKzEzOCwyMCBAQCBzdGF0
-aWMgaW5saW5lIHZvaWQgc3Bpbl9zbGVlcCh1aW50NjRfdCB0KQogICAgIG5zcGluX3NsZWVwKG5z
-ZWMpOwogfQogCisjaWYgZGVmaW5lZChfX2kzODZfXykKK3N0YXRpYyBpbmxpbmUgdm9pZCBtc3Bp
-bl9zbGVlcCh1aW50MzJfdCB0KQorI2Vsc2UKK3N0YXRpYyBpbmxpbmUgdm9pZCBtc3Bpbl9zbGVl
-cCh1aW50NjRfdCB0KQorI2VuZGlmCit7CisjaWYgZGVmaW5lZChfX2kzODZfXykKKyAgICB1aW50
-MzJfdCBuc2VjID0gdCAqIDEwMDAwMDA7CisjZWxzZQorICAgIHVpbnQ2NF90IG5zZWMgPSB0ICog
-MTAwMDAwMHVsOworI2VuZGlmCisgICAgbnNwaW5fc2xlZXAobnNlYyk7Cit9CisKIC8qCiAgKiBM
-b2NhbCB2YXJpYWJsZXM6CiAgKiBtb2RlOiBDCi0tIAoyLjE2LjIKCkFtYXpvbiBEZXZlbG9wbWVu
-dCBDZW50ZXIgR2VybWFueSBHbWJICkJlcmxpbiAtIERyZXNkZW4gLSBBYWNoZW4KbWFpbiBvZmZp
-Y2U6IEtyYXVzZW5zdHIuIDM4LCAxMDExNyBCZXJsaW4KR2VzY2hhZWZ0c2Z1ZWhyZXI6IERyLiBS
-YWxmIEhlcmJyaWNoLCBDaHJpc3RpYW4gU2NobGFlZ2VyClVzdC1JRDogREUyODkyMzc4NzkKRWlu
-Z2V0cmFnZW4gYW0gQW10c2dlcmljaHQgQ2hhcmxvdHRlbmJ1cmcgSFJCIDE0OTE3MyBCCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3450598356861639266==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="o0ZfoUVt4BxPQnbU"
+Content-Disposition: inline
+
+
+--o0ZfoUVt4BxPQnbU
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Apr 04, 2018 at 04:45:51PM +0100, Ian Jackson wrote:
+> Marek Marczykowski-G=C3=B3recki writes ("Re: [PATCH v2] libxl: allow libx=
+l_domain_suspend to simply suspend a domain, without saving it"):
+> > On Wed, Mar 28, 2018 at 12:20:25PM +0100, Ian Jackson wrote:
+> > > I agree that libxl_domain_suspend is an unfortunate name, but can't we
+> > > come up with an alternative new name ?  It does seem odd to bundle
+> > > this into _save.
+> >=20
+> > libxl_domain_just_suspend ?
+>=20
+> How about libxl_domain_suspend_only ?
+
+Fine with me too.
+
+Should I add also #define HAVE_DOMAIN_SUSPEND_ONLY or such?
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--o0ZfoUVt4BxPQnbU
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlrE9N4ACgkQ24/THMrX
+1ywIGAf7BuzbqHHl88BqdfDOXrxrATHGhiwujnWZRujWXXq02BkXp7swcZE1cEJv
+u6tVRbzHZav8Q5+CgVWb1vIoHsA6LkLbrcYDVV18aDNbqM1CKf7D9KpmVLMDqZIP
+Y6lzNVG0+2eXYSYxYSHeMyy/DQYvC0sXBPMB6SeOosNiw8QsS9lxbbIKhPASQGfd
+DDT0lP9Hl4ZaF15HnaRAEomfycHUEJllUn8U1dinpKTca8U1s1Qfuunx0KkOiKEa
+sHc0RWUt9V8zLVbnmQG5rHnM2lAIEx+CwBFiSPL1HlK+E/8zQfVcOgxsMc759Rcc
+zYLqqhvsY/OWOCgkiPN/ymqdOTDuTg==
+=dsyJ
+-----END PGP SIGNATURE-----
+
+--o0ZfoUVt4BxPQnbU--
+
+
+--===============3450598356861639266==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3450598356861639266==--
