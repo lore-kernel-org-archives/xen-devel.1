@@ -1,19 +1,32 @@
-From: Maran Wilson <maran.wilson@oracle.com>
-Subject: [PATCH v6 7/7] KVM: x86: Allow Qemu/KVM to use PVH
- entry point
-Date: Wed,  4 Apr 2018 13:34:36 -0700
-Message-ID: <1522874076-18409-1-git-send-email-maran.wilson__8093.6785358519$1522874029$gmane$org@oracle.com>
-References: <1522873659-17572-1-git-send-email-maran.wilson@oracle.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: preparations for 4.9.2 and 4.7.5
+Date: Wed, 4 Apr 2018 14:02:48 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1804041354430.6016@sstabellini-ThinkPad-X260>
+References: <5A9EC2B002000078001AF157@prv-mh.provo.novell.com>
+ <alpine.DEB.2.10.1803061121200.7316@sstabellini-ThinkPad-X260>
+ <5A9FA44902000078001AF3AE@prv-mh.provo.novell.com>
+ <alpine.DEB.2.10.1803111345570.23583@sstabellini-ThinkPad-X260>
+ <b8564eac-ced8-66f7-d66d-69eb74ce7bcd@arm.com>
+ <f82fd9c5-e0d7-8d62-1730-610661c1ebaa@arm.com>
+ <alpine.DEB.2.10.1803141733580.13098@sstabellini-ThinkPad-X260>
+ <alpine.DEB.2.10.1803151649180.8251@sstabellini-ThinkPad-X260>
+ <f0bb1e5d-d4ff-1ce3-4fd9-bae59eeaa26e@arm.com>
+ <alpine.DEB.2.10.1803160929540.15548@sstabellini-ThinkPad-X260>
+ <81eb8430-e104-1f37-38ae-b9dffbf2f2cb@arm.com>
+ <7e341de1-3e5b-66a4-fb1f-7673f92258fd@arm.com>
+ <f0b1c2c1-4b6e-facb-81b4-a08ca3e790e1@arm.com>
+ <alpine.DEB.2.10.1804031654330.6016@sstabellini-ThinkPad-X260>
+ <e8f015e0-c63e-739e-0974-b5fd3413cc80@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-214444913-1522875427=:6016"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=hawa=gz=oracle.com=maran.wilson@srs-us1.protection.inumbo.net>)
- id 1f3p7P-0001vT-Dq
- for xen-devel@lists.xenproject.org; Wed, 04 Apr 2018 20:34:55 +0000
-In-Reply-To: <1522873659-17572-1-git-send-email-maran.wilson@oracle.com>
+ <srs0=t1bt=gz=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1f3pYS-00043p-9d
+ for xen-devel@lists.xenproject.org; Wed, 04 Apr 2018 21:02:52 +0000
+In-Reply-To: <e8f015e0-c63e-739e-0974-b5fd3413cc80@arm.com>
+Content-ID: <alpine.DEB.2.10.1804041358431.6016@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,101 +35,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: x86@kernel.org, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, kvm@vger.kernel.org, pbonzini@redhat.com, jgross@suse.com
-Cc: rkrcmar@redhat.com, maran.wilson@oracle.com, mingo@redhat.com, hpa@zytor.com, boris.ostrovsky@oracle.com, tglx@linutronix.de, roger.pau@citrix.com
+To: Julien Grall <julien.grall@arm.com>
+Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, andre.przywara@linaro.org, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, nd@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
-Rm9yIGNlcnRhaW4gYXBwbGljYXRpb25zIGl0IGlzIGRlc2lyYWJsZSB0byByYXBpZGx5IGJvb3Qg
-YSBLVk0gdmlydHVhbAptYWNoaW5lLiBJbiBjYXNlcyB3aGVyZSBsZWdhY3kgaGFyZHdhcmUgYW5k
-IHNvZnR3YXJlIHN1cHBvcnQgd2l0aGluIHRoZQpndWVzdCBpcyBub3QgbmVlZGVkLCBRZW11IHNo
-b3VsZCBiZSBhYmxlIHRvIGJvb3QgZGlyZWN0bHkgaW50byB0aGUKdW5jb21wcmVzc2VkIExpbnV4
-IGtlcm5lbCBiaW5hcnkgd2l0aG91dCB0aGUgbmVlZCB0byBydW4gZmlybXdhcmUuCgpUaGVyZSBh
-bHJlYWR5IGV4aXN0cyBhbiBBQkkgdG8gYWxsb3cgdGhpcyBmb3IgWGVuIFBWSCBndWVzdHMgYW5k
-IHRoZSBBQkkKaXMgc3VwcG9ydGVkIGJ5IExpbnV4IGFuZCBGcmVlQlNEOgoKICAgaHR0cHM6Ly94
-ZW5iaXRzLnhlbi5vcmcvZG9jcy91bnN0YWJsZS9taXNjL3B2aC5odG1sCgpUaGlzIHBhdGNoIGVu
-YWJsZXMgUWVtdSB0byB1c2UgdGhhdCBzYW1lIGVudHJ5IHBvaW50IGZvciBib290aW5nIEtWTQpn
-dWVzdHMuCgpTaWduZWQtb2ZmLWJ5OiBNYXJhbiBXaWxzb24gPG1hcmFuLndpbHNvbkBvcmFjbGUu
-Y29tPgpTdWdnZXN0ZWQtYnk6IEtvbnJhZCBSemVzenV0ZWsgV2lsayA8a29ucmFkLndpbGtAb3Jh
-Y2xlLmNvbT4KU3VnZ2VzdGVkLWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBv
-cmFjbGUuY29tPgpUZXN0ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9y
-YWNsZS5jb20+Ci0tLQogYXJjaC94ODYvS2J1aWxkICAgICAgICAgICAgICAgICAgIHwgIDIgKy0K
-IGFyY2gveDg2L0tjb25maWcgICAgICAgICAgICAgICAgICB8ICA4ICsrKysrKysrCiBhcmNoL3g4
-Ni9wbGF0Zm9ybS9wdmgvTWFrZWZpbGUgICAgfCAgNCArKy0tCiBhcmNoL3g4Ni9wbGF0Zm9ybS9w
-dmgvZW5saWdodGVuLmMgfCA0MyArKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0t
-LS0KIDQgZmlsZXMgY2hhbmdlZCwgNDMgaW5zZXJ0aW9ucygrKSwgMTQgZGVsZXRpb25zKC0pCgpk
-aWZmIC0tZ2l0IGEvYXJjaC94ODYvS2J1aWxkIGIvYXJjaC94ODYvS2J1aWxkCmluZGV4IDIwODll
-NDQxNDMwMC4uYzYyNWY1NzQ3MmY3IDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9LYnVpbGQKKysrIGIv
-YXJjaC94ODYvS2J1aWxkCkBAIC03LDcgKzcsNyBAQCBvYmotJChDT05GSUdfS1ZNKSArPSBrdm0v
-CiAjIFhlbiBwYXJhdmlydHVhbGl6YXRpb24gc3VwcG9ydAogb2JqLSQoQ09ORklHX1hFTikgKz0g
-eGVuLwogCi1vYmotJChDT05GSUdfWEVOX1BWSCkgKz0gcGxhdGZvcm0vcHZoLworb2JqLSQoQ09O
-RklHX1BWSCkgKz0gcGxhdGZvcm0vcHZoLwogCiAjIEh5cGVyLVYgcGFyYXZpcnR1YWxpemF0aW9u
-IHN1cHBvcnQKIG9iai0kKHN1YnN0IG0seSwkKENPTkZJR19IWVBFUlYpKSArPSBoeXBlcnYvCmRp
-ZmYgLS1naXQgYS9hcmNoL3g4Ni9LY29uZmlnIGIvYXJjaC94ODYvS2NvbmZpZwppbmRleCBlM2I4
-MzZkN2FkMDkuLjFlNmQ4M2UxODFiNSAxMDA2NDQKLS0tIGEvYXJjaC94ODYvS2NvbmZpZworKysg
-Yi9hcmNoL3g4Ni9LY29uZmlnCkBAIC03ODcsNiArNzg3LDE0IEBAIGNvbmZpZyBQVkgKIAkgIFRo
-aXMgb3B0aW9uIGVuYWJsZXMgdGhlIFBWSCBlbnRyeSBwb2ludCBmb3IgZ3Vlc3QgdmlydHVhbCBt
-YWNoaW5lcwogCSAgYXMgc3BlY2lmaWVkIGluIHRoZSB4ODYvSFZNIGRpcmVjdCBib290IEFCSS4K
-IAorY29uZmlnIEtWTV9HVUVTVF9QVkgKKwlib29sICJTdXBwb3J0IGZvciBydW5uaW5nIGFzIGEg
-S1ZNIFBWSCBndWVzdCIKKwlkZXBlbmRzIG9uIEtWTV9HVUVTVAorCXNlbGVjdCBQVkgKKwktLS1o
-ZWxwLS0tCisJICBUaGlzIG9wdGlvbiBlbmFibGVzIHN0YXJ0aW5nIEtWTSBndWVzdHMgdmlhIHRo
-ZSBQVkggZW50cnkgcG9pbnQgYXMKKwkgIHNwZWNpZmllZCBpbiB0aGUgeDg2L0hWTSBkaXJlY3Qg
-Ym9vdCBBQkkuCisKIGNvbmZpZyBLVk1fREVCVUdfRlMKIAlib29sICJFbmFibGUgZGVidWcgaW5m
-b3JtYXRpb24gZm9yIEtWTSBHdWVzdHMgaW4gZGVidWdmcyIKIAlkZXBlbmRzIG9uIEtWTV9HVUVT
-VCAmJiBERUJVR19GUwpkaWZmIC0tZ2l0IGEvYXJjaC94ODYvcGxhdGZvcm0vcHZoL01ha2VmaWxl
-IGIvYXJjaC94ODYvcGxhdGZvcm0vcHZoL01ha2VmaWxlCmluZGV4IDlmZDI1ZWZjZDJhMy4uNWRl
-YzUwNjdjOWZiIDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9wbGF0Zm9ybS9wdmgvTWFrZWZpbGUKKysr
-IGIvYXJjaC94ODYvcGxhdGZvcm0vcHZoL01ha2VmaWxlCkBAIC0xLDUgKzEsNSBAQAogIyBTUERY
-LUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMAogT0JKRUNUX0ZJTEVTX05PTl9TVEFOREFSRF9o
-ZWFkLm8gOj0geQogCi1vYmotJChDT05GSUdfWEVOX1BWSCkgKz0gZW5saWdodGVuLm8KLW9iai0k
-KENPTkZJR19YRU5fUFZIKSArPSBoZWFkLm8KK29iai0kKENPTkZJR19QVkgpICs9IGVubGlnaHRl
-bi5vCitvYmotJChDT05GSUdfUFZIKSArPSBoZWFkLm8KZGlmZiAtLWdpdCBhL2FyY2gveDg2L3Bs
-YXRmb3JtL3B2aC9lbmxpZ2h0ZW4uYyBiL2FyY2gveDg2L3BsYXRmb3JtL3B2aC9lbmxpZ2h0ZW4u
-YwppbmRleCBlZmJjZWJhOGRiNGYuLjgxNWEwOWFkNjI1YyAxMDA2NDQKLS0tIGEvYXJjaC94ODYv
-cGxhdGZvcm0vcHZoL2VubGlnaHRlbi5jCisrKyBiL2FyY2gveDg2L3BsYXRmb3JtL3B2aC9lbmxp
-Z2h0ZW4uYwpAQCAtOCw2ICs4LDkgQEAKICNpbmNsdWRlIDxhc20vZTgyMC9hcGkuaD4KICNpbmNs
-dWRlIDxhc20veDg2X2luaXQuaD4KIAorI2luY2x1ZGUgPGFzbS94ZW4vaW50ZXJmYWNlLmg+Cisj
-aW5jbHVkZSA8YXNtL3hlbi9oeXBlcmNhbGwuaD4KKwogI2luY2x1ZGUgPHhlbi9pbnRlcmZhY2Uv
-bWVtb3J5Lmg+CiAjaW5jbHVkZSA8eGVuL2ludGVyZmFjZS9odm0vc3RhcnRfaW5mby5oPgogCkBA
-IC00MCwxMSArNDMsMjggQEAgdm9pZCBfX2luaXQgX193ZWFrIG1lbV9tYXBfdmlhX2hjYWxsKHN0
-cnVjdCBib290X3BhcmFtcyAqcHRyIF9fbWF5YmVfdW51c2VkKQogCUJVRygpOwogfQogCi1zdGF0
-aWMgdm9pZCBfX2luaXQgaW5pdF9wdmhfYm9vdHBhcmFtcyh2b2lkKQorc3RhdGljIHZvaWQgX19p
-bml0IGluaXRfcHZoX2Jvb3RwYXJhbXMoYm9vbCB4ZW5fZ3Vlc3QpCiB7CiAJbWVtc2V0KCZwdmhf
-Ym9vdHBhcmFtcywgMCwgc2l6ZW9mKHB2aF9ib290cGFyYW1zKSk7CiAKLQltZW1fbWFwX3ZpYV9o
-Y2FsbCgmcHZoX2Jvb3RwYXJhbXMpOworCWlmICgocHZoX3N0YXJ0X2luZm8udmVyc2lvbiA+IDAp
-ICYmIChwdmhfc3RhcnRfaW5mby5tZW1tYXBfZW50cmllcykpIHsKKwkJc3RydWN0IGh2bV9tZW1t
-YXBfdGFibGVfZW50cnkgKmVwOworCQlpbnQgaTsKKworCQllcCA9IF9fdmEocHZoX3N0YXJ0X2lu
-Zm8ubWVtbWFwX3BhZGRyKTsKKwkJcHZoX2Jvb3RwYXJhbXMuZTgyMF9lbnRyaWVzID0gcHZoX3N0
-YXJ0X2luZm8ubWVtbWFwX2VudHJpZXM7CisKKwkJZm9yIChpID0gMDsgaSA8IHB2aF9ib290cGFy
-YW1zLmU4MjBfZW50cmllcyA7IGkrKywgZXArKykgeworCQkJcHZoX2Jvb3RwYXJhbXMuZTgyMF90
-YWJsZVtpXS5hZGRyID0gZXAtPmFkZHI7CisJCQlwdmhfYm9vdHBhcmFtcy5lODIwX3RhYmxlW2ld
-LnNpemUgPSBlcC0+c2l6ZTsKKwkJCXB2aF9ib290cGFyYW1zLmU4MjBfdGFibGVbaV0udHlwZSA9
-IGVwLT50eXBlOworCQl9CisJfSBlbHNlIGlmICh4ZW5fZ3Vlc3QpIHsKKwkJbWVtX21hcF92aWFf
-aGNhbGwoJnB2aF9ib290cGFyYW1zKTsKKwl9IGVsc2UgeworCQkvKiBOb24teGVuIGd1ZXN0cyBh
-cmUgbm90IHN1cHBvcnRlZCBieSB2ZXJzaW9uIDAgKi8KKwkJQlVHKCk7CisJfQogCiAJaWYgKHB2
-aF9ib290cGFyYW1zLmU4MjBfZW50cmllcyA8IEU4MjBfTUFYX0VOVFJJRVNfWkVST1BBR0UgLSAx
-KSB7CiAJCXB2aF9ib290cGFyYW1zLmU4MjBfdGFibGVbcHZoX2Jvb3RwYXJhbXMuZTgyMF9lbnRy
-aWVzXS5hZGRyID0KQEAgLTc1LDcgKzk1LDcgQEAgc3RhdGljIHZvaWQgX19pbml0IGluaXRfcHZo
-X2Jvb3RwYXJhbXModm9pZCkKIAkgKiBlbnZpcm9ubWVudCAoaS5lLiBoYXJkd2FyZV9zdWJhcmNo
-IDApLgogCSAqLwogCXB2aF9ib290cGFyYW1zLmhkci52ZXJzaW9uID0gMHgyMTI7Ci0JcHZoX2Jv
-b3RwYXJhbXMuaGRyLnR5cGVfb2ZfbG9hZGVyID0gKDkgPDwgNCkgfCAwOyAvKiBYZW4gbG9hZGVy
-ICovCisJcHZoX2Jvb3RwYXJhbXMuaGRyLnR5cGVfb2ZfbG9hZGVyID0gKCh4ZW5fZ3Vlc3QgPyAw
-eDkgOiAweGIpIDw8IDQpIHwgMDsKIAogCXg4Nl9pbml0LmFjcGkuZ2V0X3Jvb3RfcG9pbnRlciA9
-IHB2aF9nZXRfcm9vdF9wb2ludGVyOwogfQpAQCAtOTAsMTMgKzExMCwxMCBAQCB2b2lkIF9faW5p
-dCBfX3dlYWsgeGVuX3B2aF9pbml0KHZvaWQpCiAJQlVHKCk7CiB9CiAKLS8qCi0gKiBXaGVuIHdl
-IGFkZCBzdXBwb3J0IGZvciBvdGhlciBoeXBlcnZpc29ycyBsaWtlIFFlbXUvS1ZNLCB0aGlzIHJv
-dXRpbmUgY2FuCi0gKiBzZWxlY3RpdmVseSBpbnZva2UgdGhlIGFwcHJvcHJpYXRlIGluaXRpYWxp
-emF0aW9uIGJhc2VkIG9uIGd1ZXN0IHR5cGUuCi0gKi8KLXN0YXRpYyB2b2lkIGh5cGVydmlzb3Jf
-c3BlY2lmaWNfaW5pdCh2b2lkKQorc3RhdGljIHZvaWQgaHlwZXJ2aXNvcl9zcGVjaWZpY19pbml0
-KGJvb2wgeGVuX2d1ZXN0KQogewotCXhlbl9wdmhfaW5pdCgpOworCWlmICh4ZW5fZ3Vlc3QpCisJ
-CXhlbl9wdmhfaW5pdCgpOwogfQogCiAvKgpAQCAtMTA1LDEzICsxMjIsMTcgQEAgc3RhdGljIHZv
-aWQgaHlwZXJ2aXNvcl9zcGVjaWZpY19pbml0KHZvaWQpCiAgKi8KIHZvaWQgX19pbml0IHhlbl9w
-cmVwYXJlX3B2aCh2b2lkKQogeworCisJdTMyIG1zciA9IHhlbl9jcHVpZF9iYXNlKCk7CisJYm9v
-bCB4ZW5fZ3Vlc3QgPSAhIW1zcjsKKwogCWlmIChwdmhfc3RhcnRfaW5mby5tYWdpYyAhPSBYRU5f
-SFZNX1NUQVJUX01BR0lDX1ZBTFVFKSB7CiAJCXhlbl9yYXdfcHJpbnRrKCJFcnJvcjogVW5leHBl
-Y3RlZCBtYWdpYyB2YWx1ZSAoMHglMDh4KVxuIiwKIAkJCQlwdmhfc3RhcnRfaW5mby5tYWdpYyk7
-CiAJCUJVRygpOwogCX0KIAotCWh5cGVydmlzb3Jfc3BlY2lmaWNfaW5pdCgpOworCWh5cGVydmlz
-b3Jfc3BlY2lmaWNfaW5pdCh4ZW5fZ3Vlc3QpOwogCi0JaW5pdF9wdmhfYm9vdHBhcmFtcygpOwor
-CWluaXRfcHZoX2Jvb3RwYXJhbXMoeGVuX2d1ZXN0KTsKIH0KLS0gCjIuMTYuMQoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-214444913-1522875427=:6016
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1804041358432.6016@sstabellini-ThinkPad-X260>
+
+On Wed, 4 Apr 2018, Julien Grall wrote:
+> Hi Stefano,
+> 
+> On 04/04/18 00:55, Stefano Stabellini wrote:
+> > On Tue, 3 Apr 2018, Julien Grall wrote:
+> > > Hi,
+> > > 
+> > > On 16/03/18 17:15, Julien Grall wrote:
+> > > > 
+> > > > 
+> > > > On 16/03/2018 16:56, Julien Grall wrote:
+> > > > > Hi Stefano,
+> > > > > 
+> > > > > On 16/03/2018 16:33, Stefano Stabellini wrote:
+> > > > > > On Fri, 16 Mar 2018, Julien Grall wrote:
+> > > > > > > Hi Stefano,
+> > > > > > > 
+> > > > > > > On 15/03/18 23:52, Stefano Stabellini wrote:
+> > > > > > > > On Wed, 14 Mar 2018, Stefano Stabellini wrote:
+> > > > > > > > > After looking at the test results, which are good for arm, and
+> > > > > > > > > considering that master hasn't passed yet after 2 more days, I
+> > > > > > > > > agree
+> > > > > > > > > with Julien: I think we should not release 4.9.2 and 4.7.5
+> > > > > > > > > without
+> > > > > > > > > the
+> > > > > > > > > arm64 spectre patches. At this point, I'll proceed to backport
+> > > > > > > > > the
+> > > > > > > > > patches now.
+> > > > > > > > 
+> > > > > > > > Julien, Andre,
+> > > > > > > > 
+> > > > > > > > Please give a look at the following branches:
+> > > > > > > > 
+> > > > > > > > git://xenbits.xen.org/people/sstabellini/xen-unstable.git
+> > > > > > > > staging-4.7-spectre
+> > > > > > > > git://xenbits.xen.org/people/sstabellini/xen-unstable.git
+> > > > > > > > staging-4.8-spectre
+> > > > > > > > git://xenbits.xen.org/people/sstabellini/xen-unstable.git
+> > > > > > > > staging-4.9-spectre
+> > > > > > > 
+> > > > > > > For all of the tree above, as I said yesterday, I clearly don't
+> > > > > > > want
+> > > > > > > to see
+> > > > > > > the smccc framework backport for Xen 4.9 and older. This is a
+> > > > > > > massive
+> > > > > > > changes
+> > > > > > > of the interface that is not necessary for spectre. My main
+> > > > > > > concern is
+> > > > > > > making
+> > > > > > > SMC instruction available to the guest.
+> > > > > > > 
+> > > > > > > It would be just sufficient to emulate the few SMCCC function ID
+> > > > > > > we
+> > > > > > > care in
+> > > > > > > do_trap_psci (function can be renamed).
+> > > > > > > 
+> > > > > > > This is also clearly wrong to backport coding style or code
+> > > > > > > non-justified code
+> > > > > > > movement (sysreg) just to please the cherry-pick.
+> > > > > > > 
+> > > > > > > I am also worry to bump the version of the emulated PSCI (0.2 ->
+> > > > > > > 1.0)
+> > > > > > > for
+> > > > > > > those releases. Some guests may rely on a specific version and may
+> > > > > > > now
+> > > > > > > crashes.
+> > > > > > > 
+> > > > > > > Overall, the right way to support spectre in earlier releases is
+> > > > > > > custom patch
+> > > > > > > and only do minimal modification.
+> > > > > > > 
+> > > > > > > > git://xenbits.xen.org/people/sstabellini/xen-unstable.git
+> > > > > > > > staging-4.10-spectre
+> > > > > > > 
+> > > > > > > The patches below should not be part of spectre nor backport to
+> > > > > > > 4.10:
+> > > > > > >     - 82e29c87dc7f4f2a7e2f111c3646479da21a910a "ARM: remove
+> > > > > > > unneeded
+> > > > > > > gic.h
+> > > > > > > inclusions"
+> > > > > > >     - 79563717c9dd5383abcf0ba94d813de9b42e3793 "xen/arm: psci:
+> > > > > > > Prefix
+> > > > > > > with
+> > > > > > > static any functions not exported"
+> > > > > > >     - 6d0e9b21b1f7213c1994cc2d636448ee2d5372c2 "xen/arm: vpsci:
+> > > > > > > Update
+> > > > > > > the
+> > > > > > > return type for MIGRATE_INFO_TYPE"
+> > > > > > > 
+> > > > > > > The patches below should not be part of spectre but candidate to
+> > > > > > > 4.10:
+> > > > > > >     - c2d70f77cc7987be164cd87b76459782497fc540 "xen/arm: vpsci:
+> > > > > > > Rework
+> > > > > > > the logic
+> > > > > > > to start AArch32 vCPU in Thumb mode"
+> > > > > > > 
+> > > > > > > You will also want to backport [1] which address a relaxation of
+> > > > > > > the
+> > > > > > > ARM_SMCCC_ARCH_WORKAROUND_1.
+> > > > > > 
+> > > > > > I understand your concerns, in that case could you please provide
+> > > > > > the
+> > > > > > git branches?
+> > > > > 
+> > > > > That will have to wait when I have spare cycle. Most likely somewhere
+> > > > > in
+> > > > > April when I am done from the Xen 4.11 patches and back from holidays.
+> > > > > 
+> > > > > So It is probably the right time to put into contribution stakeholders
+> > > > > who
+> > > > > are using those Xen 4.* stable releases.
+> > > > 
+> > > > To be clear, for Xen 4.10 it is just a matter of dropping the 3 patches
+> > > > I
+> > > > suggested. There are actually no clash with the current code.
+> > > 
+> > > Gentle ping. Is there anything blocking to get those patches in Xen 4.10?
+> > 
+> > Done! Thanks for the ping!
+> 
+> It looks like the commit 6b270fae7ad462687550a875f714bff18d764416 "xen/arm:
+> Relax ARM_SMCCC_ARCH_WORKAROUND_1 discovery" is missing in Xen 4.10.
+
+Well spotted! The commit is missing from all my original backports as
+well. I pushed the cherry-pick to staging-4.10, as well as the other
+backports in my xen-unstable tree (staging-4.9-spectre
+staging-4.8-spectre staging-4.7-spectre).
+--8323329-214444913-1522875427=:6016
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-214444913-1522875427=:6016--
