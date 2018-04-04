@@ -1,24 +1,20 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: Xen development link
-Date: Wed, 4 Apr 2018 13:47:37 +0200
-Message-ID: <48FD89FE-E875-44D8-966A-05B327A901CB@xenproject.org>
-References: <CABcWhv4yyrPMRP4DV0EGQdCRPOxcCYGpNx4P3UURoa01YVJv-w@mail.gmail.com>
- <20180404074105.z66utemxkzwwlzfz@MacBook-Pro-de-Roger.local>
- <CABcWhv7dcjRxvLQ2+y9oo-AqwoFnTDVJS=qopDwxBdknN0M7fQ@mail.gmail.com>
- <CABcWhv6pc1TT=mWZ20zMEKo4C3yvAxGnkYHqkxre4yO07=FLbg@mail.gmail.com>
- <20180404102003.dckucykbai5sjphb@MacBook-Pro-de-Roger.local>
- <CABcWhv6RSc1bsbqyTQgZ7VageTeW_8WV2YowVKFPO=zzPqu0=w@mail.gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.3 \(3445.6.18\))
-Content-Type: multipart/mixed; boundary="===============7961268257393493026=="
+From: Jason Andryuk <jandryuk@gmail.com>
+Subject: Re: Xen-4.10 Domain-0 crashes at bootup
+Date: Wed, 4 Apr 2018 08:15:41 -0400
+Message-ID: <CAKf6xpuD6B9LG2P3oSkMRwykmSy_y4M_b4gx1xUSH3rx1Gs9Dw@mail.gmail.com>
+References: <CAHP4M8WiOD+RhbX2Eqk8z+1g=i0pcQNmJqM6X_hQ_u=K+A3ryw@mail.gmail.com>
+ <alpine.LFD.2.21.1804041102390.2498@algedi.dur.ac.uk>
+ <572b11f1-79f8-7e29-f340-e701543ea0b6@suse.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=epxr=gz=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1f3gtD-0002g7-8u
- for xen-devel@lists.xenproject.org; Wed, 04 Apr 2018 11:47:43 +0000
-Received: by mail-wm0-x22e.google.com with SMTP id o23so20910654wmf.0
- for <xen-devel@lists.xenproject.org>; Wed, 04 Apr 2018 04:47:41 -0700 (PDT)
-In-Reply-To: <CABcWhv6RSc1bsbqyTQgZ7VageTeW_8WV2YowVKFPO=zzPqu0=w@mail.gmail.com>
+ <srs0=jj/u=gz=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1f3hKL-0004m4-QC
+ for xen-devel@lists.xenproject.org; Wed, 04 Apr 2018 12:15:45 +0000
+In-Reply-To: <572b11f1-79f8-7e29-f340-e701543ea0b6@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,311 +23,193 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Praveen Kumar <kpraveen.lkml@gmail.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Lars Kurth <lars.kurth@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: minios-devel@lists.xenproject.org, xen-devel@lists.xenproject.org, Ajay Garg <ajaygargnsit@gmail.com>, M A Young <m.a.young@durham.ac.uk>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7961268257393493026==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_60BD2464-BE3B-48A1-AFC1-3A5CDD5FB343"
-
-
---Apple-Mail=_60BD2464-BE3B-48A1-AFC1-3A5CDD5FB343
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
-
-Hi Praveen,
-
-> On 4 Apr 2018, at 12:42, Praveen Kumar <kpraveen.lkml@gmail.com> =
-wrote:
->=20
-> On Wed, Apr 4, 2018 at 3:50 PM, Roger Pau Monn=C3=A9 =
-<roger.pau@citrix.com <mailto:roger.pau@citrix.com>> wrote:
->> On Wed, Apr 04, 2018 at 02:40:45PM +0530, Praveen Kumar wrote:
->>> On Wed, Apr 4, 2018 at 2:32 PM, Praveen Kumar =
-<kpraveen.lkml@gmail.com> wrote:
->>>> On Wed, Apr 4, 2018 at 1:11 PM, Roger Pau Monn=C3=A9 =
-<roger.pau@citrix.com> wrote:
->>>>> On Wed, Apr 04, 2018 at 10:08:29AM +0530, Praveen Kumar wrote:
->>>>>> Hi,
->>>>>>=20
->>>>>> I came across Xen development link (
->>>>>> https://xenorg.uservoice.com/forums/172169-xen-development ) =
-which was
->>>>>> lastly updated in Jul 2017 ( around ).
->>>>>> This looks great to me, but just wanted to check if we are still
->>>>>> following and updating the ideas ? Or is there any other link / =
-forum,
->>>>>> where we update and share.
->>>>>=20
->>>>> I think some maintainers use:
->>>>>=20
->>>>> https://xenproject.atlassian.net/projects/XEN/board
->>>>>=20
->>> Is this a closed / private portal ?
->>=20
->> What do you mean by closed?
->>=20
->> I can access it just fine without being logged in at all. AFAIK this
->> is to be used by maintainers to track items.
->=20
-> True, I am able to access the page. But tried the login option with my
-> email ( kpraveen.lkml@gmail. <mailto:kpraveen.lkml@gmail.com>
-> com <mailto:kpraveen.lkml@gmail.com>),
-> which mentioned access denied ! So thought of asking in the forum.
->=20
-> I was in a opinion that, there will be more details w.r.t. the items
-> mentioned, which will be shown,
-> when an individual login :-)
-
-The amount of information in the public/private instance is identical.
-A lot of the tickets are just headlines, depending on which maintainer =
-added it.
-
-Primarily only maintainers get write access, unless there is a very good =
-reason why someone else should have access.
-
->>> If that's not the case, and we can get the access, can you please
->>> guide whom to request for,
->>> as I am not able to get the administrator's email / link to approach
->>=20
->> Adding Lars.
-
-I would prefer if we didn't add non-maintainers, as this makes it hard =
-to maintain a list of why has access and why.
-
-> I came across Xen development link (
-> https://xenorg.uservoice.com/forums/172169-xen-development =
-<https://xenorg.uservoice.com/forums/172169-xen-development> ) which was
-> lastly updated in Jul 2017 ( around ).
-> This looks great to me, but just wanted to check if we are still
-> following and updating the ideas ? Or is there any other link / forum,
-> where we update and share.
-
-We tend to review the list at the beginning of a release cycle, and copy =
-interesting items to the Atlassian board
-
-Lars
-
-
---Apple-Mail=_60BD2464-BE3B-48A1-AFC1-3A5CDD5FB343
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=utf-8
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dutf-8"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">Hi =
-Praveen,<br class=3D""><div><br class=3D""><blockquote type=3D"cite" =
-class=3D""><div class=3D"">On 4 Apr 2018, at 12:42, Praveen Kumar &lt;<a =
-href=3D"mailto:kpraveen.lkml@gmail.com" =
-class=3D"">kpraveen.lkml@gmail.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><span =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">On Wed, Apr =
-4, 2018 at 3:50 PM, Roger Pau Monn=C3=A9 &lt;</span><a =
-href=3D"mailto:roger.pau@citrix.com" style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px;" class=3D"">roger.pau@citrix.com</a><span =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">&gt; =
-wrote:</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><blockquote type=3D"cite" style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px; text-decoration: none;" class=3D"">On =
-Wed, Apr 04, 2018 at 02:40:45PM +0530, Praveen Kumar wrote:<br =
-class=3D""><blockquote type=3D"cite" class=3D"">On Wed, Apr 4, 2018 at =
-2:32 PM, Praveen Kumar &lt;<a href=3D"mailto:kpraveen.lkml@gmail.com" =
-class=3D"">kpraveen.lkml@gmail.com</a>&gt; wrote:<br =
-class=3D""><blockquote type=3D"cite" class=3D"">On Wed, Apr 4, 2018 at =
-1:11 PM, Roger Pau Monn=C3=A9 &lt;<a href=3D"mailto:roger.pau@citrix.com" =
-class=3D"">roger.pau@citrix.com</a>&gt; wrote:<br class=3D""><blockquote =
-type=3D"cite" class=3D"">On Wed, Apr 04, 2018 at 10:08:29AM +0530, =
-Praveen Kumar wrote:<br class=3D""><blockquote type=3D"cite" =
-class=3D"">Hi,<br class=3D""><br class=3D"">I came across Xen =
-development link (<br class=3D""><a =
-href=3D"https://xenorg.uservoice.com/forums/172169-xen-development" =
-class=3D"">https://xenorg.uservoice.com/forums/172169-xen-development</a> =
-) which was<br class=3D"">lastly updated in Jul 2017 ( around ).<br =
-class=3D"">This looks great to me, but just wanted to check if we are =
-still<br class=3D"">following and updating the ideas ? Or is there any =
-other link / forum,<br class=3D"">where we update and share.<br =
-class=3D""></blockquote><br class=3D"">I think some maintainers use:<br =
-class=3D""><br class=3D""><a =
-href=3D"https://xenproject.atlassian.net/projects/XEN/board" =
-class=3D"">https://xenproject.atlassian.net/projects/XEN/board</a><br =
-class=3D""><br class=3D""></blockquote></blockquote>Is this a closed / =
-private portal ?<br class=3D""></blockquote><br class=3D"">What do you =
-mean by closed?<br class=3D""><br class=3D"">I can access it just fine =
-without being logged in at all. AFAIK this<br class=3D"">is to be used =
-by maintainers to track items.<br class=3D""></blockquote><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">True, I am =
-able to access the page. But tried the login option with my</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">email (<span =
-class=3D"Apple-converted-space">&nbsp;</span></span><a =
-href=3D"mailto:kpraveen.lkml@gmail.com" style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px;" =
-class=3D"">kpraveen.lkml@gmail.</a></div></blockquote><br =
-class=3D""><blockquote type=3D"cite" class=3D""><div class=3D""><a =
-href=3D"mailto:kpraveen.lkml@gmail.com" style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px;" class=3D"">com</a><span =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">),</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">which =
-mentioned access denied ! So thought of asking in the forum.</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">I was in a =
-opinion that, there will be more details w.r.t. the items</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">mentioned, =
-which will be shown,</span><br style=3D"caret-color: rgb(0, 0, 0); =
-font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">when an individual login :-)</span><br style=3D"caret-color: =
-rgb(0, 0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""></div></blockquote><div><br =
-class=3D""></div>The amount of information in the public/private =
-instance is identical.</div><div>A lot of the tickets are just =
-headlines, depending on which maintainer added it.</div><div><br =
-class=3D""></div><div>Primarily only maintainers get write access, =
-unless there is a very good reason why someone else should have =
-access.</div><div><br class=3D""><blockquote type=3D"cite" class=3D""><div=
- class=3D""><blockquote type=3D"cite" style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px; text-decoration: none;" =
-class=3D""><blockquote type=3D"cite" class=3D"">If that's not the case, =
-and we can get the access, can you please<br class=3D"">guide whom to =
-request for,<br class=3D"">as I am not able to get the administrator's =
-email / link to approach<br class=3D""></blockquote><br class=3D"">Adding =
-Lars.<br class=3D""></blockquote></div></blockquote></div><br =
-class=3D""><div class=3D"">I would prefer if we didn't add =
-non-maintainers, as this makes it hard to maintain a list of why has =
-access and why.</div><div class=3D""><br class=3D""></div><div =
-class=3D""><blockquote type=3D"cite" style=3D"font-family: =
-Menlo-Regular; font-size: 11px;" class=3D"">I came across Xen =
-development link (<br class=3D""><a =
-href=3D"https://xenorg.uservoice.com/forums/172169-xen-development" =
-class=3D"">https://xenorg.uservoice.com/forums/172169-xen-development</a>&=
-nbsp;) which was<br class=3D"">lastly updated in Jul 2017 ( around ).<br =
-class=3D"">This looks great to me, but just wanted to check if we are =
-still<br class=3D"">following and updating the ideas ? Or is there any =
-other link / forum,<br class=3D"">where we update and =
-share.</blockquote><br class=3D""></div><div class=3D"">We tend to =
-review the list at the beginning of a release cycle, and copy =
-interesting items to the Atlassian board</div><div class=3D""><br =
-class=3D""></div><div class=3D"">Lars</div><div class=3D""><br =
-class=3D""></div></body></html>=
-
---Apple-Mail=_60BD2464-BE3B-48A1-AFC1-3A5CDD5FB343--
-
-
---===============7961268257393493026==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7961268257393493026==--
+T24gV2VkLCBBcHIgNCwgMjAxOCBhdCA2OjI1IEFNLCBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
+ZS5jb20+IHdyb3RlOgo+IE9uIDA0LzA0LzE4IDEyOjA3LCBNIEEgWW91bmcgd3JvdGU6Cj4+IE9u
+IFdlZCwgNCBBcHIgMjAxOCwgQWpheSBHYXJnIHdyb3RlOgo+Pgo+Pj4gU2luY2UgSSBmYWlsZWQg
+dG8gZ2V0IGEgc2luZ2xlIHJlcGx5IG9uIG15IG9yaWdpbmFsIGlzc3VlIGFzIHBlcgo+Pj4gaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL21pbmlvcy1kZXZlbC8yMDE4
+LTA0L21zZzAwMDA0Lmh0bWwsCj4+PiBzbyBJIGhhZCBubyBvcHRpb24gYnV0IHRvIHRyeSBvbiBh
+IG5ld2VyIHhlbiB2ZXJzaW9uLgo+Pj4KPj4+IFNvLCBJIGNyZWF0ZWQgIGEgIG5ldyB2aXJ0dWFs
+Ym94LWd1ZXN0LCBhbmQgZm9sbG93ZWQgdGhlIHN0ZXBzIGFzIHBlcgo+Pj4gaHR0cHM6Ly9ibG9n
+LndlcmsyMS5kZS9lbi8yMDE4LzAyLzA4L2J1aWxkLXhlbi1oeXBlcnZpc29yLTQxMC1hbmQteGVu
+LXRvb2xzLXVidW50dS0xNjA0LXB2aAo+Pj4KPj4+IE5vdywgd2hlbiBzdGFydCB0aGUgZ3Vlc3Qg
+d2l0aCBYZW4taHlwZXJ2aXNvciBlbmFibGVkLCBpdCBkb2VzIG5vdCBjb21lIHVwLgo+Pj4gSSB0
+b29rIHNlcmlhbC1sb2dzIGF0IGJvb3R1cCB0aW1lLCB0aGV5IGFyZSBhcyBmb2xsb3dzIDoKPj4+
+Cj4+PiAjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwo+Pj4gIFhlbiA0LjEwLjEtcHJlCj4+PiAoWEVOKSBY
+ZW4gdmVyc2lvbiA0LjEwLjEtcHJlIChhamF5QCkgKGdjYyAoVWJ1bnR1Cj4+PiA1LjQuMC02dWJ1
+bnR1MX4xNi4wNC45KSA1LjQuMCAyMDE2MDYwOSkgZGVidWc9biAgV2VkIEFwciAgNCAxMjo1NDo1
+OAo+Pj4gSVNUIDIwMTgKPj4+IChYRU4pIExhdGVzdCBDaGFuZ2VTZXQ6IFR1ZSBNYXIgMjAgMTQ6
+MjM6MTQgMjAxOCArMDEwMCBnaXQ6MGY5Mjk2OAo+Pj4gKFhFTikgQm9vdGxvYWRlcjogR1JVQiAy
+LjAyfmJldGEyLTM2dWJ1bnR1My4xNwo+Pj4gKFhFTikgQ29tbWFuZCBsaW5lOiBwbGFjZWhvbGRl
+ciBjb25zb2xlPWNvbTEgY29tMT0xMTUyMDAsOG4xCj4+PiBsb2dsdmw9YWxsIGd1ZXN0X2xvZ2x2
+bD1hbGwKPj4+IChYRU4pIFhlbiBpbWFnZSBsb2FkIGJhc2UgYWRkcmVzczogMAo+Pj4gKFhFTikg
+VmlkZW8gaW5mb3JtYXRpb246Cj4+PiAoWEVOKSAgVkdBIGlzIHRleHQgbW9kZSA4MHgyNSwgZm9u
+dCA4eDE2Cj4+PiAoWEVOKSBEaXNjIGluZm9ybWF0aW9uOgo+Pj4gKFhFTikgIEZvdW5kIDEgTUJS
+IHNpZ25hdHVyZXMKPj4+IChYRU4pICBGb3VuZCAxIEVERCBpbmZvcm1hdGlvbiBzdHJ1Y3R1cmVz
+Cj4+PiAoWEVOKSBYZW4tZTgyMCBSQU0gbWFwOgo+Pj4gKFhFTikgIDAwMDAwMDAwMDAwMDAwMDAg
+LSAwMDAwMDAwMDAwMDlmYzAwICh1c2FibGUpCj4+PiAoWEVOKSAgMDAwMDAwMDAwMDA5ZmMwMCAt
+IDAwMDAwMDAwMDAwYTAwMDAgKHJlc2VydmVkKQo+Pj4gKFhFTikgIDAwMDAwMDAwMDAwZjAwMDAg
+LSAwMDAwMDAwMDAwMTAwMDAwIChyZXNlcnZlZCkKPj4+IChYRU4pICAwMDAwMDAwMDAwMTAwMDAw
+IC0gMDAwMDAwMDBiZmZmMDAwMCAodXNhYmxlKQo+Pj4gKFhFTikgIDAwMDAwMDAwYmZmZjAwMDAg
+LSAwMDAwMDAwMGMwMDAwMDAwIChBQ1BJIGRhdGEpCj4+PiAoWEVOKSAgMDAwMDAwMDBmZWMwMDAw
+MCAtIDAwMDAwMDAwZmVjMDEwMDAgKHJlc2VydmVkKQo+Pj4gKFhFTikgIDAwMDAwMDAwZmVlMDAw
+MDAgLSAwMDAwMDAwMGZlZTAxMDAwIChyZXNlcnZlZCkKPj4+IChYRU4pICAwMDAwMDAwMGZmZmMw
+MDAwIC0gMDAwMDAwMDEwMDAwMDAwMCAocmVzZXJ2ZWQpCj4+PiAoWEVOKSBOZXcgWGVuIGltYWdl
+IGJhc2UgYWRkcmVzczogMHhiZjgwMDAwMAo+Pj4gKFhFTikgU3lzdGVtIFJBTTogMzA3MU1CICgz
+MTQ1Mjc2a0IpCj4+PiAoWEVOKSBBQ1BJOiBSU0RQIDAwMEUwMDAwLCAwMDI0IChyMiBWQk9YICAp
+Cj4+PiAoWEVOKSBBQ1BJOiBYU0RUIEJGRkYwMDMwLCAwMDNDIChyMSBWQk9YICAgVkJPWFhTRFQg
+ICAgICAgIDEgQVNMICAgICAgICA2MSkKPj4+IChYRU4pIEFDUEk6IEZBQ1AgQkZGRjAwRjAsIDAw
+RjQgKHI0IFZCT1ggICBWQk9YRkFDUCAgICAgICAgMSBBU0wgICAgICAgIDYxKQo+Pj4gKFhFTikg
+QUNQSTogRFNEVCBCRkZGMDQ3MCwgMjFGRiAocjIgVkJPWCAgIFZCT1hCSU9TICAgICAgICAyIElO
+VEwgMjAxNjAxMDgpCj4+PiAoWEVOKSBBQ1BJOiBGQUNTIEJGRkYwMjAwLCAwMDQwCj4+PiAoWEVO
+KSBBQ1BJOiBBUElDIEJGRkYwMjQwLCAwMDU0IChyMiBWQk9YICAgVkJPWEFQSUMgICAgICAgIDEg
+QVNMICAgICAgICA2MSkKPj4+IChYRU4pIEFDUEk6IFNTRFQgQkZGRjAyQTAsIDAxQ0MgKHIxIFZC
+T1ggICBWQk9YQ1BVVCAgICAgICAgMiBJTlRMIDIwMTYwMTA4KQo+Pj4gKFhFTikgTm8gTlVNQSBj
+b25maWd1cmF0aW9uIGZvdW5kCj4+PiAoWEVOKSBGYWtpbmcgYSBub2RlIGF0IDAwMDAwMDAwMDAw
+MDAwMDAtMDAwMDAwMDBiZmZmMDAwMAo+Pj4gKFhFTikgRG9tYWluIGhlYXAgaW5pdGlhbGlzZWQK
+Pj4+IChYRU4pIENQVSBWZW5kb3I6IEludGVsLCBGYW1pbHkgNiAoMHg2KSwgTW9kZWwgMTQyICgw
+eDhlKSwgU3RlcHBpbmcgOQo+Pj4gKHJhdyAwMDA4MDZlOSkKPj4+IChYRU4pIGZvdW5kIFNNUCBN
+UC10YWJsZSBhdCAwMDA5ZmZmMAo+Pj4gKFhFTikgRE1JIDIuNSBwcmVzZW50Lgo+Pj4gKFhFTikg
+VXNpbmcgQVBJQyBkcml2ZXIgZGVmYXVsdAo+Pj4gKFhFTikgQUNQSTogUE0tVGltZXIgSU8gUG9y
+dDogMHg0MDA4ICgzMiBiaXRzKQo+Pj4gKFhFTikgQUNQSTogU0xFRVAgSU5GTzogcG0xeF9jbnRb
+MTo0MDA0LDE6MF0sIHBtMXhfZXZ0WzE6NDAwMCwxOjBdCj4+PiAoWEVOKSBBQ1BJOiAgICAgICAg
+ICAgICB3YWtldXBfdmVjW2JmZmYwMjBjXSwgdmVjX3NpemVbMjBdCj4+PiAoWEVOKSBBQ1BJOiBM
+b2NhbCBBUElDIGFkZHJlc3MgMHhmZWUwMDAwMAo+Pj4gKFhFTikgQUNQSTogTEFQSUMgKGFjcGlf
+aWRbMHgwMF0gbGFwaWNfaWRbMHgwMF0gZW5hYmxlZCkKPj4+IChYRU4pIEFDUEk6IElPQVBJQyAo
+aWRbMHgwMV0gYWRkcmVzc1sweGZlYzAwMDAwXSBnc2lfYmFzZVswXSkKPj4+IChYRU4pIElPQVBJ
+Q1swXTogYXBpY19pZCAxLCB2ZXJzaW9uIDMyLCBhZGRyZXNzIDB4ZmVjMDAwMDAsIEdTSSAwLTIz
+Cj4+PiAoWEVOKSBBQ1BJOiBJTlRfU1JDX09WUiAoYnVzIDAgYnVzX2lycSAwIGdsb2JhbF9pcnEg
+MiBkZmwgZGZsKQo+Pj4gKFhFTikgQUNQSTogSU5UX1NSQ19PVlIgKGJ1cyAwIGJ1c19pcnEgOSBn
+bG9iYWxfaXJxIDkgaGlnaCBsZXZlbCkKPj4+IChYRU4pIEFDUEk6IElSUTAgdXNlZCBieSBvdmVy
+cmlkZS4KPj4+IChYRU4pIEFDUEk6IElSUTIgdXNlZCBieSBvdmVycmlkZS4KPj4+IChYRU4pIEFD
+UEk6IElSUTkgdXNlZCBieSBvdmVycmlkZS4KPj4+IChYRU4pIEVuYWJsaW5nIEFQSUMgbW9kZTog
+IEZsYXQuICBVc2luZyAxIEkvTyBBUElDcwo+Pj4gKFhFTikgRVJTVCB0YWJsZSB3YXMgbm90IGZv
+dW5kCj4+PiAoWEVOKSBVc2luZyBBQ1BJIChNQURUKSBmb3IgU01QIGNvbmZpZ3VyYXRpb24gaW5m
+b3JtYXRpb24KPj4+IChYRU4pIFNNUDogQWxsb3dpbmcgMSBDUFVzICgwIGhvdHBsdWcgQ1BVcykK
+Pj4+IChYRU4pIElSUSBsaW1pdHM6IDI0IEdTSSwgMTg0IE1TSS9NU0ktWAo+Pj4gKFhFTikgTm90
+IGVuYWJsaW5nIHgyQVBJQzogZGVwZW5kcyBvbiBpb21tdV9zdXBwb3J0c19laW0uCj4+PiAoWEVO
+KSB4c3RhdGU6IHNpemU6IDB4NDQwIGFuZCBzdGF0ZXM6IDB4Nwo+Pj4gKFhFTikgQ1BVMDogTm8g
+TUNFIGJhbmtzIHByZXNlbnQuIE1hY2hpbmUgY2hlY2sgc3VwcG9ydCBkaXNhYmxlZAo+Pj4gKFhF
+TikgU3BlY3VsYXRpdmUgbWl0aWdhdGlvbiBmYWNpbGl0aWVzOgo+Pj4gKFhFTikgICBDb21waWxl
+ZC1pbiBzdXBwb3J0OiBJTkRJUkVDVF9USFVOSwo+Pj4gKFhFTikgQlRJIG1pdGlnYXRpb25zOiBU
+aHVuayBSRVRQT0xJTkUsIE90aGVyczogUlNCX05BVElWRSBSU0JfVk1FWElUCj4+PiAoWEVOKSBV
+c2luZyBzY2hlZHVsZXI6IFNNUCBDcmVkaXQgU2NoZWR1bGVyIChjcmVkaXQpCj4+PiAoWEVOKSBQ
+bGF0Zm9ybSB0aW1lciBpcyAzLjU3OU1IeiBBQ1BJIFBNIFRpbWVyCj4+PiAoWEVOKSBEZXRlY3Rl
+ZCAyNzEyLjAzNSBNSHogcHJvY2Vzc29yLgo+Pj4gKFhFTikgSW5pdGluZyBtZW1vcnkgc2hhcmlu
+Zy4KPj4+IChYRU4pIGFsdCB0YWJsZSBmZmZmODJkMDgwNDIxNzk4IC0+IGZmZmY4MmQwODA0MjMy
+NDQKPj4+IChYRU4pIEkvTyB2aXJ0dWFsaXNhdGlvbiBkaXNhYmxlZAo+Pj4gKFhFTikgbnJfc29j
+a2V0czogMQo+Pj4gKFhFTikgRU5BQkxJTkcgSU8tQVBJQyBJUlFzCj4+PiAoWEVOKSAgLT4gVXNp
+bmcgbmV3IEFDSyBtZXRob2QKPj4+IChYRU4pIC4uVElNRVI6IHZlY3Rvcj0weEYwIGFwaWMxPTAg
+cGluMT0yIGFwaWMyPS0xIHBpbjI9LTEKPj4+IChYRU4pIEFsbG9jYXRlZCBjb25zb2xlIHJpbmcg
+b2YgMTYgS2lCLgo+Pj4gKFhFTikgQnJvdWdodCB1cCAxIENQVXMKPj4+IChYRU4pIGJ1aWxkLWlk
+OiAwNzM0MDUwODA5ZTBjYjlmNTJlNjUzMjJhMGQzOTExZDA4MmUzNDhiCj4+PiAoWEVOKSBDUFVJ
+RExFOiBkaXNhYmxlZCBkdWUgdG8gbm8gSFBFVC4gRm9yY2UgZW5hYmxlIHdpdGggJ2NwdWlkbGUn
+Lgo+Pj4gKFhFTikgQUNQSSBzbGVlcCBtb2RlczogUzMKPj4+IChYRU4pIFZQTVU6IGRpc2FibGVk
+Cj4+PiAoWEVOKSB4ZW5vcHJvZjogSW5pdGlhbGl6YXRpb24gZmFpbGVkLiBJbnRlbCBwcm9jZXNz
+b3IgZmFtaWx5IDYgbW9kZWwKPj4+IDE0MiBpcyBub3Qgc3VwcG9ydGVkCj4+PiAoWEVOKSBEb20w
+IGhhcyBtYXhpbXVtIDIwOCBQSVJRcwo+Pj4gKFhFTikgTlggKEV4ZWN1dGUgRGlzYWJsZSkgcHJv
+dGVjdGlvbiBhY3RpdmUKPj4+IChYRU4pICoqKiBMT0FESU5HIERPTUFJTiAwICoqKgo+Pj4gKFhF
+TikgIFhlbiAga2VybmVsOiA2NC1iaXQsIGxzYiwgY29tcGF0MzIKPj4+IChYRU4pICBEb20wIGtl
+cm5lbDogNjQtYml0LCBQQUUsIGxzYiwgcGFkZHIgMHgxMDAwMDAwIC0+IDB4Mjk1NzAwMAo+Pj4g
+KFhFTikgUEhZU0lDQUwgTUVNT1JZIEFSUkFOR0VNRU5UOgo+Pj4gKFhFTikgIERvbTAgYWxsb2Mu
+OiAgIDAwMDAwMDAwYjQwMDAwMDAtPjAwMDAwMDAwYjgwMDAwMDAgKDcxNTMwOSBwYWdlcwo+Pj4g
+dG8gYmUgYWxsb2NhdGVkKQo+Pj4gKFhFTikgIEluaXQuIHJhbWRpc2s6IDAwMDAwMDAwYmM5MTUw
+MDAtPjAwMDAwMDAwYmY3ZmZlZDkKPj4+IChYRU4pIFZJUlRVQUwgTUVNT1JZIEFSUkFOR0VNRU5U
+Ogo+Pj4gKFhFTikgIExvYWRlZCBrZXJuZWw6IGZmZmZmZmZmODEwMDAwMDAtPmZmZmZmZmZmODI5
+NTcwMDAKPj4+IChYRU4pICBJbml0LiByYW1kaXNrOiAwMDAwMDAwMDAwMDAwMDAwLT4wMDAwMDAw
+MDAwMDAwMDAwCj4+PiAoWEVOKSAgUGh5cy1NYWNoIG1hcDogMDAwMDAwODAwMDAwMDAwMC0+MDAw
+MDAwODAwMDVhYzhjMAo+Pj4gKFhFTikgIFN0YXJ0IGluZm86ICAgIGZmZmZmZmZmODI5NTcwMDAt
+PmZmZmZmZmZmODI5NTc0YjQKPj4+IChYRU4pICBYZW5zdG9yZSByaW5nOiAwMDAwMDAwMDAwMDAw
+MDAwLT4wMDAwMDAwMDAwMDAwMDAwCj4+PiAoWEVOKSAgQ29uc29sZSByaW5nOiAgMDAwMDAwMDAw
+MDAwMDAwMC0+MDAwMDAwMDAwMDAwMDAwMAo+Pj4gKFhFTikgIFBhZ2UgdGFibGVzOiAgIGZmZmZm
+ZmZmODI5NTgwMDAtPmZmZmZmZmZmODI5NzEwMDAKPj4+IChYRU4pICBCb290IHN0YWNrOiAgICBm
+ZmZmZmZmZjgyOTcxMDAwLT5mZmZmZmZmZjgyOTcyMDAwCj4+PiAoWEVOKSAgVE9UQUw6ICAgICAg
+ICAgZmZmZmZmZmY4MDAwMDAwMC0+ZmZmZmZmZmY4MmMwMDAwMAo+Pj4gKFhFTikgIEVOVFJZIEFE
+RFJFU1M6IGZmZmZmZmZmODI0YTQxODAKPj4+IChYRU4pIERvbTAgaGFzIG1heGltdW0gMSBWQ1BV
+cwo+Pj4gKFhFTikgSW5pdGlhbCBsb3cgbWVtb3J5IHZpcnEgdGhyZXNob2xkIHNldCBhdCAweDQw
+MDAgcGFnZXMuCj4+PiAoWEVOKSBTY3J1YmJpbmcgRnJlZSBSQU0gb24gMSBub2RlcyB1c2luZyAx
+IENQVXMKPj4+IChYRU4pIC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLmRvbmUuCj4+PiAoWEVOKSBT
+dGQuIExvZ2xldmVsOiBBbGwKPj4+IChYRU4pIEd1ZXN0IExvZ2xldmVsOiBBbGwKPj4+IChYRU4p
+ICoqKiBTZXJpYWwgaW5wdXQgLT4gRE9NMCAodHlwZSAnQ1RSTC1hJyB0aHJlZSB0aW1lcyB0byBz
+d2l0Y2gKPj4+IGlucHV0IHRvIFhlbikKPj4+IChYRU4pIEZyZWVkIDQ2OGtCIGluaXQgbWVtb3J5
+Cj4+PiBtYXBwaW5nIGtlcm5lbCBpbnRvIHBoeXNpY2FsIG1lbW9yeQo+Pj4gYWJvdXQgdG8gZ2V0
+IHN0YXJ0ZWQuLi4KPj4+IChYRU4pIGQwdjAgVW5oYW5kbGVkIGludmFsaWQgb3Bjb2RlIGZhdWx0
+L3RyYXAgWyM2LCBlYz1mZmZmZmZmZl0KPj4+IChYRU4pIGRvbWFpbl9jcmFzaF9zeW5jIGNhbGxl
+ZCBmcm9tIGVudHJ5LlM6IGZhdWx0IGF0IGZmZmY4MmQwODAzNTUwMWYKPj4+IHg4Nl82NC9lbnRy
+eS5TI2NyZWF0ZV9ib3VuY2VfZnJhbWUrMHgxMzUvMHgxNjYKPj4+IChYRU4pIERvbWFpbiAwICh2
+Y3B1IzApIGNyYXNoZWQgb24gY3B1IzA6Cj4+PiAoWEVOKSAtLS0tWyBYZW4tNC4xMC4xLXByZSAg
+eDg2XzY0ICBkZWJ1Zz1uICAgTm90IHRhaW50ZWQgXS0tLS0KPj4+IChYRU4pIENQVTogICAgMAo+
+Pj4gKFhFTikgUklQOiAgICBlMDMzOls8ZmZmZmZmZmY4MjRiNDljZD5dCj4+PiAoWEVOKSBSRkxB
+R1M6IDAwMDAwMDAwMDAwMDAyODYgICBFTTogMSAgIENPTlRFWFQ6IHB2IGd1ZXN0IChkMHYwKQo+
+Pj4gKFhFTikgcmF4OiAwMDAwMDAwMDAwMDAwMDI5ICAgcmJ4OiAwMDAwMDAwMDAwMDAwMDBhICAg
+cmN4OiBmZmZmZmZmZjgyMjYxMWM4Cj4+PiAoWEVOKSByZHg6IDAwMDAwMDAwMDAwMDAwMDAgICBy
+c2k6IDAwMDAwMDAwMDAwMDAwMDAgICByZGk6IDAwMDAwMDAwMDAwMDAwMDAKPj4+IChYRU4pIHJi
+cDogZmZmZmZmZmY4MjIwM2UwMCAgIHJzcDogZmZmZmZmZmY4MjIwM2Q2OCAgIHI4OiAgNjU3NjYx
+NjU2YzIwNjc2ZQo+Pj4gKFhFTikgcjk6ICAwMDAwMDAwMDAwMDAwMDA3ICAgcjEwOiBmZmZmZmZm
+ZjgyMjAzZDg0ICAgcjExOiAwMDAwMDAwMDAwMDAwMDI5Cj4+PiAoWEVOKSByMTI6IDAwMDAwMDAw
+MDAwMDAxMDAgICByMTM6IDAwMDAwMDAwMDAwMDAzNDAgICByMTQ6IDAwMDAwMDAwMDAwMDA0NDAK
+Pj4+IChYRU4pIHIxNTogZmZmZmZmZmY4MjIwM2RjMCAgIGNyMDogMDAwMDAwMDA4MDA1MDAzMyAg
+IGNyNDogMDAwMDAwMDAwMDA0MDZhMAo+Pj4gKFhFTikgY3IzOiAwMDAwMDAwMGI2MjBhMDAwICAg
+Y3IyOiAwMDAwMDAwMDAwMDAwMDAwCj4+PiAoWEVOKSBmc2I6IDAwMDAwMDAwMDAwMDAwMDAgICBn
+c2I6IGZmZmZmZmZmODI0ODAwMDAgICBnc3M6IDAwMDAwMDAwMDAwMDAwMDAKPj4+IChYRU4pIGRz
+OiAwMDAwICAgZXM6IDAwMDAgICBmczogMDAwMCAgIGdzOiAwMDAwICAgc3M6IGUwMmIgICBjczog
+ZTAzMwo+Pj4gKFhFTikgR3Vlc3Qgc3RhY2sgdHJhY2UgZnJvbSByc3A9ZmZmZmZmZmY4MjIwM2Q2
+ODoKPj4+IChYRU4pICAgIGZmZmZmZmZmODIyNjExYzggMDAwMDAwMDAwMDAwMDAyOSBmZmZmZmZm
+ZjgyNGI0OWNkIDAwMDAwMDAxMDAwMGUwMzAKPj4+IChYRU4pICAgIDAwMDAwMDAwMDAwMTAwODYg
+ZmZmZmZmZmY4MjIwM2RhMCAwMDAwMDAwMDAwMDBlMDJiIDAwMDAwNDQwMDAwMDAwMDcKPj4+IChY
+RU4pICAgIDAwMDAwMDAwMDAwMDAzNDAgMDAwMDAwMDAwMDAwMDAyMCBmZmZmZmZmZjgyMjAzZGYw
+IDAwMDAwMjQwMDAwMDAxMDAKPj4+IChYRU4pICAgIDAwMDAwMDAwMDAwMDAwMDAgYTZmNmEyOTJh
+NmY2YTIwMCBmZmZmZmZmZjgyMjAzZTI4IGZmZmZmZmZmODFlMDhkODAKPj4+IChYRU4pICAgIDAw
+MDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwIGZmZmZmZmZm
+ODIyMDNlNjAKPj4+IChYRU4pICAgIGZmZmZmZmZmODI0YjQzNDIgZmZmZmZmZmY4MjIwM2UyOCBm
+ZmZmZmZmZjgxMDFmMmE2IGZmZmZmZmZmODIyMDNlMjgKPj4+IChYRU4pICAgIGZmZmZmZmZmODEw
+NDA5MDAgZmZmZmZmZmY4MTA0MGFlMiAwMDAwMDgwMDAwMDgwNmU5IDA3ODlkYmY1ZGVmODIyMDMK
+Pj4+IChYRU4pICAgIGE2ZjZhMjkyYTZmNmEyMDAgMDAwMDAwMDAwMDAwMDAxOCBmZmZmZmZmZjgy
+MjAzZTc4IGZmZmZmZmZmODIyMDNlODgKPj4+IChYRU4pICAgIGZmZmZmZmZmODI0YjU2YjAgZmZm
+ZmZmZmY4MjRiNTZiMCAwMDAwMDAwMDAxMDAwMDAwIGZmZmZmZmZmODIyMDNmMDAKPj4+IChYRU4p
+ICAgIGZmZmZmZmZmODIyMDNlZjAgZmZmZmZmZmY4MjRiMDdhYSBmZmZmZmZmZjAwMDAwMDEwIGZm
+ZmZmZmZmODIyMDNmMDAKPj4+IChYRU4pICAgIGZmZmZmZmZmODIyMDNlYjggYTZmNmEyOTJhNmY2
+YTIwMCBmZmZmZmZmZjgyMjAzZTY4IGE2ZjZhMjkyYTZmNmEyMDAKPj4+IChYRU4pICAgIGZmZmZm
+ZmZmODIyMDNmNjAgZmZmZmZmZmY4MjIwM2Y1YyAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAw
+MDAwMDAKPj4+IChYRU4pICAgIDAwMDAwMDAwMDAwMDAwMDAgZmZmZmZmZmY4MjIwM2YzMCBmZmZm
+ZmZmZjgyNGE0ZDBjIGE2ZjZhMjkyYTZmNmEyMDAKPj4+IChYRU4pICAgIDAwMDAwMDAwMDAwMDAw
+MDAgZmZmZmZmZmY4MjIwM2Y2MCBmZmZmZmZmZjgyMjAzZjVjIDAwMDAwMDAwMDAwMDAwMDAKPj4+
+IChYRU4pICAgIDAwMDAwMDAwMDAwMDAwMDAgZmZmZmZmZmY4MjIwM2Y0MCBmZmZmZmZmZjgyNGE0
+MmQ1IGZmZmZmZmZmODIyMDNmZjgKPj4+IChYRU4pICAgIGZmZmZmZmZmODI0YWQxNDUgMDAwODA2
+ZTkwMDAwMDAwMCAwMDAwMDAwMTAwMDAwODAwIDAzMDAwMDAxMDAwMDAwMzIKPj4+IChYRU4pICAg
+IDAwMDAwMDAwMDAwMDAwMDUgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwIDAwMDAw
+MDAwMDAwMDAwMDAKPj4+IChYRU4pICAgIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAw
+MCAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAwMDAKPj4+IChYRU4pICAgIDAwMDAwMDAw
+MDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAw
+MDAKPj4+IChYRU4pICAgIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAw
+MDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAwMDAKPj4+IChYRU4pIEhhcmR3YXJlIERvbTAgY3Jhc2hl
+ZDogcmVib290aW5nIG1hY2hpbmUgaW4gNSBzZWNvbmRzLgo+Pj4gKFhFTikgUmVzZXR0aW5nIHdp
+dGggQUNQSSBNRU1PUlkgb3IgSS9PIFJFU0VUX1JFRy4KPj4+ICMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+Cj4+Pgo+Pj4KPj4+IE9uZSB0aGluZyBpcyBmb3Igc3VyZSwgdGhhdCB0aGVyZSBpcyBubyB2aXJ0
+dWFsaXphdGlvbi1yZWxhdGVkIGlzc3VlLAo+Pj4gYXMgeGVuLWRvbTAgaXMgc3RhcnRpbmcgaW4g
+UFYgbW9kZSBvbmx5Lgo+Pgo+PiBJdCBpcyBhIGtlcm5lbCBwcm9ibGVtIHVuZGVyIHNvbWUgY29t
+cGlsZSBjb25kaXRpb25zLiBTZWUgZm9yIGV4YW1wbGUKPj4gaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE4LTAyL21zZzAwMDEwLmh0bWwKPj4g
+YW5kIHRoZSBwYXRjaCBhdAo+PiBodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL2FyY2hpdmVz
+L2h0bWwveGVuLWRldmVsLzIwMTgtMDIvbXNnMDAwNDUuaHRtbAo+Cj4gTm8sIHRob3NlIGFyZSBk
+aWZmZXJlbnQuCj4KPiBUaGVyZSBpcyBubyB3YXkgdG8gdGVsbCB3aGF0IGxlZCB0byB0aGUgY3Jh
+c2ggd2l0aG91dCBmdXJ0aGVyIGRhdGEKPiAoZG9tMCBrZXJuZWwgdmVyc2lvbiwga2VybmVsIGJv
+b3QgcGFyYW1ldGVycywgbWFwcGluZyBvZiBmdW5jdGlvbiBuYW1lcwo+IHRvIGtlcm5lbCBhZGRy
+ZXNzZXMgb24gdGhlIGd1ZXN0IHN0YWNrKS4KClllcywgbW9yZSBpbmZvcm1hdGlvbiBpcyBuZWVk
+ZWQuICBIb3dldmVyLCByOCBjb250YWlucwo2NTc2NjE2NTZjMjA2NzZlIHdoaWNoIGlzIGFzY2lp
+ICdldmFlbCBnbicgLT4gJ25nIGxlYXZlJwoKZ3JlcCAtciAnbmcgbGVhdmUnIGFyY2gveDg2Lwph
+cmNoL3g4Ni9rZXJuZWwvZnB1L3hzdGF0ZS5jOiAgICBpZiAoV0FSTl9PTkNFKHgsICJYU0FWRSBj
+b25zaXN0ZW5jeQpwcm9ibGVtLCBkdW1waW5nIGxlYXZlcyIpKSB7ICAgIFwKCj4gV2hhdCBjYW4g
+YmUgc2FpZCwgaG93ZXZlciwgaXMgdGhhdCBuZXN0ZWQgdmlydHVhbGl6YXRpb24gaXMgb2Z0ZW4g
+YQo+IHByb2JsZW0gYW5kIG1pZ2h0IGJlIHRoZSBjYXVzZSBoZXJlLCB0b28uCgpTbyBpdCB2ZXJ5
+IHdlbGwgbWF5IGJlIGFuIGlzc3VlIHdpdGggbmVzdGVkIHZpcnR1YWxpemF0aW9uIGFuZCB4c2F2
+ZS4KClJlZ2FyZHMsCkphc29uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
