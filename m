@@ -1,15 +1,37 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 121905: regressions - FAIL
-Date: Thu, 05 Apr 2018 18:19:59 +0000
-Message-ID: <osstest-121905-mainreport@xen.org>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: Patches for stable
+Date: Thu, 5 Apr 2018 14:33:42 -0400
+Message-ID: <1de5bc8e-4c63-f476-6a7b-aaa157487264@oracle.com>
+References: <a38538ef-d766-adb9-77d7-4624cf1dd749@suse.com>
+ <20180404142702.GA20460@kroah.com>
+ <e17d3e80-b019-ac09-d796-771ed38d91e5@suse.com>
+ <20180404144644.GA22656@kroah.com>
+ <c03563a8-8291-38a2-7bdb-12d6894c8fbd@suse.com>
+ <20180404154201.GA31981@kroah.com>
+ <9cd0be43-6380-f5a0-0427-7f75fca966a9@suse.com>
+ <20180405063314.GC5431@kroah.com>
+ <e6fa2f5e-30c9-7aa2-5705-c890f7538b62@suse.com>
+ <20180405071448.GA9183@kroah.com>
+ <d1b13a66-f31a-558c-7935-340e71bfa9a9@suse.com>
+ <CAFLBxZYpTSfkJ3KJg2-M5Pn5y_DiYzOaebCE8f3TkJD8XCOzrA@mail.gmail.com>
+ <950f2f68-04ef-bf4d-fa61-afa9bdc918e4@suse.com>
+ <ce82c767-cfb6-5bb7-1733-7b322a4360f2@oracle.com>
+ <4bf257f2-dad7-62d2-ad5b-8972c0311119@suse.com>
+ <CAFLBxZaAB8nEnYTtaG-qgps54ZZWxRL7ysTC7U7rA1fMKnjwdA@mail.gmail.com>
+ <9fb78740-33a1-76f8-4a7d-e7713c3b8078@suse.com>
+ <CAFLBxZaHR6dHgzULfKf9OPA9b9dtBy0DBEe5MTFhmMMw67A5Zw@mail.gmail.com>
+ <2fc861a4-c4e8-0a3b-ef92-af5308ed2a87@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0785891023988169467=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=sc4h=g2=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1f49UQ-0003eS-V2
- for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 18:20:02 +0000
+ <srs0=eoqv=g2=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1f49fv-0004kA-35
+ for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 18:31:55 +0000
+In-Reply-To: <2fc861a4-c4e8-0a3b-ef92-af5308ed2a87@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,157 +40,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Juergen Gross <jgross@suse.com>, George Dunlap <dunlapg@umich.edu>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============0785891023988169467==
-Content-Type: text/plain
-
-flight 121905 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/121905/
-
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-arm64-xsm               6 xen-build                fail REGR. vs. 121876
- build-armhf                   6 xen-build                fail REGR. vs. 121876
-
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
-
-version targeted for testing:
- xen                  c0d98b35714fb707217c9062b6518e158cd72eea
-baseline version:
- xen                  451004603247205467ec34b366b4cfa3814a5d95
-
-Last test of basis   121876  2018-04-05 10:04:25 Z    0 days
-Testing same since   121889  2018-04-05 13:02:10 Z    0 days    2 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Julien Grall <julien.grall@arm.com>
-  Kevin Tian <kevin.tian@intel.com>
-  Wei Liu <wei.liu2@citrix.com>
-
-jobs:
- build-arm64-xsm                                              fail    
- build-amd64                                                  pass    
- build-armhf                                                  fail    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          blocked 
- test-arm64-arm64-xl-xsm                                      blocked 
- test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit c0d98b35714fb707217c9062b6518e158cd72eea
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Thu Jan 25 15:45:37 2018 +0000
-
-    x86/vtx: Introduce a typed union for CR access exit information
-    
-    This reduces code volume, and has a minor improvement on compiled size,
-    probably due to the removal of several temporary variables.
-    
-      add/remove: 0/0 grow/shrink: 0/2 up/down: 0/-50 (-50)
-      function                                     old     new   delta
-      vmx_vmexit_handler                          6881    6878      -3
-      nvmx_n2_vmexit_handler                      3473    3426     -47
-    
-    Take the opportunity to make some style corrections, and add some
-    ASSERT_UNREACHABLE()s in appropriate places.
-    
-    No functional change.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Kevin Tian <kevin.tian@intel.com>
-
-commit 36bc5fc631b08bcf03c6977e79f026a459d76302
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Fri Mar 16 16:57:18 2018 +0000
-
-    xen/public: Rename xen_domctl_createdomain.config to arch
-    
-    This is a tools only hypercall so fine to change.  Altering the name avoids
-    having confusing code such as config->config all over the hypervisor and
-    toolstack.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Acked-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Julien Grall <julien.grall@arm.com>
-    Acked-by: Wei Liu <wei.liu2@citrix.com>
-
-commit 2649612686f968a52ce53d173f5c2a3088ad17dd
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Fri Mar 9 13:03:26 2018 +0000
-
-    tools/libxl: Don't prepare or save xc_config when soft resetting a domain
-    
-    xc_config is only used by xc_domain_create(), but by calling
-    libxl__arch_domain_{prepare,save}_config() we clobber the real settings with
-    the default settings.
-    
-    Move all data and calls relating to xc_domain_create() into the path which
-    calls it.
-    
-    As far as I can tell, soft_reset has always been broken for ARM domains using
-    LIBXL_GIC_VERSION_DEFAULT, which elicits a hard error out of
-    libxl__arch_domain_save_config(), and only works on x86 because this function
-    is a no-op.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Acked-by: Wei Liu <wei.liu2@citrix.com>
-
-commit 74fd984ae699727ae98f4fc36450ff76c8fc7ff3
-Author: Andrew Cooper <andrew.cooper3@citrix.com>
-Date:   Fri Mar 9 12:24:13 2018 +0000
-
-    tools/libxl: Drop xc_domain_configuration_t from libxl__domain_build_state
-    
-    The data it stores is initialised and exclusively used within
-    libxl__domain_make(), with the important details written back elsewhere by
-    libxl__arch_domain_save_config().  Prepare xc_config on libxl__domain_make()'s
-    stack, and drop the parameter.
-    
-    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-    Acked-by: Wei Liu <wei.liu2@citrix.com>
-(qemu changes not included)
-
-
---===============0785891023988169467==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0785891023988169467==--
+T24gMDQvMDUvMjAxOCAwMToxMSBQTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBPbiAwNS8wNC8x
+OCAxNjo1NiwgR2VvcmdlIER1bmxhcCB3cm90ZToKPj4gT24gVGh1LCBBcHIgNSwgMjAxOCBhdCAz
+OjA5IFBNLCBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+IHdyb3RlOgo+Pj4gT24gMDUv
+MDQvMTggMTU6NDIsIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4+Pj4gT24gVGh1LCBBcHIgNSwgMjAx
+OCBhdCAyOjA2IFBNLCBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+IHdyb3RlOgo+Pj4+
+PiBPbiAwNS8wNC8xOCAxNTowMCwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+Pj4+Pj4gT24gMDQv
+MDUvMjAxOCAwODoxOSBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPj4+Pj4+PiBPbiAwNS8wNC8x
+OCAxMjowNiwgR2VvcmdlIER1bmxhcCB3cm90ZToKPj4+Pj4+Pgo+Pj4+Pj4+PiBBcmVuJ3QgdGhl
+cmUgZmxhZ3MgaW4gdGhlIGJpbmFyeSBzb21ld2hlcmUgdGhhdCBjb3VsZCB0ZWxsIHRoZQo+Pj4+
+Pj4+PiB0b29sc3RhY2sgLyBYZW4gd2hldGhlciB0aGUga2VybmVsIGluIHF1ZXN0aW9uIG5lZWRz
+IHRoZSBSU0RQIHRhYmxlIGluCj4+Pj4+Pj4+IGxvd21lbSwgb3Igd2hldGhlciBpdCBjYW4gYmUg
+cHV0IGhpZ2hlcj8KPj4+Pj4+PiBOb3QgcmVhbGx5LiBBbmFseXppbmcgdGhlIGJpbmFyeSB3aGV0
+aGVyIGl0IGFjY2Vzc2VzIHRoZSByc2RwX2FkZHIgaW4KPj4+Pj4+PiB0aGUgc3RhcnRfaW5mbyBp
+c24ndCB0aGUgd2F5IHRvIGdvLCBJTU8uCj4+Pj4+Pj4KPj4+Pj4+PiBJJ3ZlIHNlbnQgYSBwYXRj
+aCB0byB4ZW4tZGV2ZWwgYWRkaW5nIGEgcXVpcmsgZmxhZyB0byB0aGUgZG9tYWluJ3MKPj4+Pj4+
+PiBjb25maWcgdG8gZW5hYmxlIHRoZSBhZG1pbiBzcGVjaWFsIGNhc2luZyBzdWNoIGFuICJvbGQi
+IGtlcm5lbC4KPj4+Pj4+IENhbiB3ZSBiYWNrcG9ydCBsYXRlc3Qgc3RydWN0IGh2bV9zdGFydF9p
+bmZvIGNoYW5nZXMgKHdoaWNoIGJ1bXBlZAo+Pj4+Pj4gaW50ZXJmYWNlIHZlcnNpb24pIHRvIDQu
+MTEgYW5kIHBhc3MgUlNEUCBvbmx5IGZvciB2ZXJzaW9ucyA+PTE/Cj4+Pj4+IEFuZCB0aGlzIHdv
+dWxkIGhlbHAgaG93Pwo+Pj4+Pgo+Pj4+PiBSU0RQIGFkZHJlc3MgaXMgcGFzc2VkIHRvZGF5LCB0
+aGUga2VybmVsIGp1c3QgZG9lc24ndCByZWFkIGl0LiBBbmQKPj4+Pj4gaG93IHNob3VsZCBYZW4g
+a25vdyB3aGljaCBpbnRlcmZhY2UgdmVyc2lvbiB0aGUga2VybmVsIGlzIHN1cHBvcnRpbmc/Cj4+
+Pj4+IEFuZCBYZW4gbmVlZHMgdG8ga25vdyB0aGF0IGluIGFkdmFuY2UgaW4gb3JkZXIgdG8gcGxh
+Y2UgdGhlIFJTRFAgaW4KPj4+Pj4gbG93IG1lbW9yeSBpbiBjYXNlIHRoZSBrZXJuZWwgaXNuJ3Qg
+cmVhZGluZyB0aGUgUlNEUCBhZGRyZXNzIGZyb20KPj4+Pj4gc3RhcnRfaW5mby4KPj4+PiBCdXQg
+dGhlIGtlcm5lbCBpbWFnZSBoYXMgRUxGIG5vdGVzLCByaWdodD8gIFlvdSBjYW4gcHV0IG9uZSB0
+aGF0Cj4+Pj4gaW5kaWNhdGVzIHRoYXQgdGhpcyBiaW5hcnkgKmRvZXMqIGtub3cgaG93IHRvIHJl
+YWQgdGhlIFJTRFAgZnJvbSB0aGUKPj4+PiBzdGFydF9pbmZvLCBhbmQgaWYgeW91IGRvbid0IGZp
+bmQgdGhhdCwgcHV0IGl0IGluIGxvd21lbS4KPj4+IFNvdyB5b3Ugd291bGQgaHVydCBCU0Qgd2hp
+Y2ggZG9lcyByZWFkIHRoZSBSU0RQIGFkZHJlc3MgY29ycmVjdGx5IGJ1dAo+Pj4gKHRvZGF5KSBo
+YXMgbm8gc3VjaCBFTEYgbm90ZS4KCgpUaGlzIGNhbiBiZSBwcmVkaWNhdGVkIG9uCsKgwqDCoCBF
+TEZOT1RFKFhlbiwgWEVOX0VMRk5PVEVfR1VFU1RfT1MswqDCoMKgwqDCoMKgIC5hc2NpeiAibGlu
+dXgiKQoKQlNEIHdpbGwgYmVoYXZlIGFzIGl0IGRvZXMgbm93LiBGb3IgbGludXggd2UgY291bGQg
+YWRkIGZlYXR1cmUgZmxhZyAob3IKZXJyYXRhIGZsYWcpLiBVbmZvcnR1bmF0ZWx5IEkgZG9uJ3Qg
+c2VlIGEgd2F5IHRvIGV4dHJhY3QgbWFqb3IubWlub3IKZnJvbSB0aGUgaGVhZGVycywgb3RoZXJ3
+aXNlIHdlIGNvdWxkIHVzZSB0aGF0LgoKLWJvcmlzCgoKPj4+Cj4+PiBJIHRoaW5rIGV4dGVuZGlu
+ZyB0aGUgUFZIIGludGVyZmFjZSBpbiBzdWNoIGEgd2F5IGlzIG5vIGdvb2QgaWRlYS4KPj4gT3B0
+aW9uIDE6IFB1dCB0aGUgUlNEUCBpbiBsb3dtZW0gdW5sZXNzIHdlIGtub3cgdGhlIGd1ZXN0IHdp
+bGwgdXNlIHRoZQo+PiBhZGRyZXNzIGluIHN0YXJ0X2luZm8KPj4gUHJvOiBFeGlzdGluZyBMaW51
+eCBpbnN0YW5jZXMgYm9vdAo+PiBDb246IEV4aXN0aW5nIEJTRCBpbnN0YW5jZXMgd2hvc2UgbWVt
+b3J5IGlzIGFuIGV4YWN0IG11bHRpcGxlIG9mIDEgR2lCCj4+IHdpbGwgaGF2ZSBzbGlnaHRseSBz
+bG93ZXIgVExCIG1pc3MgdGltZXMuCj4gLi4uIHdob3NlIG1lbW9yeSBpcyA+PTFHaUIgLi4uCj4K
+Pj4gT3B0aW9uIDI6IFB1dCB0aGUgUlNEUCBpbiBoaWdobWVtIHJlZ2FyZGxlc3MKPj4gUHJvOiBF
+eGlzdGluZyBCU0QgaW5zdGFuY2VzIHdob3NlIG1lbW9yeSBpcyBhbiBleGFjdCBtdWx0aXBsZSBv
+ZiAxR2lCCj4gLi4uIHdob3NlIG1lbW9yeSBpcyA+PTFHaUIgLi4uCj4KPj4gd2lsbCBoYXZlIHNs
+aWdodGx5IGZhc3RlciBUTEIgbWlzcyB0aW1lcwo+PiBDb246IEV4aXN0aW5nIExpbnV4IGluc3Rh
+bmNlcyBkb24ndCBib290IGF0IGFsbAo+IE9wdGlvbiAzOiBhZGQgYSBjb25maWcgaXRlbSB0byBk
+b21haW4gY29uZmlnIGZvciBzZWxlY3RpbmcgdGhlIFJTRFAKPiAgICAgICAgICAgcGxhY2VtZW50
+LCBkZWZhdWx0aW5nIHRvIGhpZ2htZW0gKG15IHBhdGNoKQo+IFBybzogRXhpc3RpbmcgQlNEIGFu
+ZCBuZXcgTGludXggaW5zdGFuY2VzIHdob3NlIG1lbW9yeSBpcyA+PTFHaUIgd2lsbAo+ICAgICAg
+aGF2ZSBzbGlnaHRseSBmYXN0ZXIgVExCIG1pc3MgdGltZXMKPiBQcm86IEV4aXN0aW5nIExpbnV4
+IGluc3RhbmNlcyBjYW4gYmUgbWFkZSBib290YWJsZSBieSBhZGRpbmcgYSBuZXcKPiAgICAgIGl0
+ZW0gdG8gdGhlaXIgZG9tYWluIGNvbmZpZwo+Cj4KCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
