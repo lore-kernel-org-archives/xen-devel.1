@@ -1,20 +1,23 @@
-From: =?UTF-8?Q?Andr=c3=a9_Przywara?= <andre.przywara@arm.com>
-Subject: Re: [PATCH v3 2/2] xen/arm: Add Marvell ARMADA 3700
- early printk support
-Date: Thu, 5 Apr 2018 20:38:43 +0100
-Message-ID: <d0e886cc-ca5a-17b4-bb64-bcf453ded7e6@arm.com>
-References: <1522923373-21039-1-git-send-email-amittomer25@gmail.com>
- <1522923373-21039-3-git-send-email-amittomer25@gmail.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 07/17] arm64: vgic-v3: Add ICV_EOIR1_EL1
+ handler
+Date: Thu, 5 Apr 2018 12:53:27 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1804051252040.6016@sstabellini-ThinkPad-X260>
+References: <cover.1522135597.git.manish.jaggi@cavium.com>
+ <e7402c406f8c894ee469cd8f7f08c16c4c2e90ad.1522135597.git.manish.jaggi@cavium.com>
+ <05029e6f-6812-d02e-aa41-e5ff4f0c0cad@arm.com>
+ <19b0fb42-711b-aada-0eef-133c593824b1@caviumnetworks.com>
+ <5694b771-3e26-8ec2-fb4d-322beb749a2f@caviumnetworks.com>
+ <fed8beaa-b00f-445c-d43b-1055f8a65b91@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1487743141-1522958008=:6016"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=jg93=g2=arm.com=andre.przywara@srs-us1.protection.inumbo.net>)
- id 1f4Aii-0000Xz-NW
- for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 19:38:52 +0000
-In-Reply-To: <1522923373-21039-3-git-send-email-amittomer25@gmail.com>
+ <srs0=lmv8=g2=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1f4Aws-0001uo-9n
+ for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 19:53:30 +0000
+In-Reply-To: <fed8beaa-b00f-445c-d43b-1055f8a65b91@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,77 +26,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Amit Singh Tomar <amittomer25@gmail.com>, xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, wei.liu2@citrix.com, George.Dunlap@eu.citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, julien.grall@arm.com, jbeulich@suse.com, andrew.cooper3@citrix.com
+To: Julien Grall <julien.grall@arm.com>
+Cc: sstabellini@kernel.org, Manish Jaggi <mjaggi@caviumnetworks.com>, Marc Zyngier <marc.zyngier@arm.com>, andre.przywara@arm.com, Manish Jaggi <manish.jaggi@cavium.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDUvMDQvMTggMTE6MTYsIEFtaXQgU2luZ2ggVG9tYXIgd3JvdGU6Cj4gU2lnbmVkLW9mZi1i
-eTogQW1pdCBTaW5naCBUb21hciA8YW1pdHRvbWVyMjVAZ21haWwuY29tPgoKQ29tcGlsZWQgd2l0
-aCBDT05GSUdfRUFSTFlfUFJJTlRLPW12ZWJ1LCBJIHNlZSBYZW4ncyBwcmUtRFQgYm9vdAptZXNz
-YWdlcy4gSW4gYWRkaXRpb24gdG8gbXkgUmV2aWV3ZWQtYnk6CgpUZXN0ZWQtYnk6IEFuZHJlIFBy
-enl3YXJhIDxhbmRyZS5wcnp5d2FyYUBhcm0uY29tPgoKQ2hlZXJzLApBbmRyZS4KCj4gLS0tCj4g
-Q2hhbmdlcyBzaW5jZSB2MjoKPiAgICAgKiBBZGRyZXNzZWQgQW5kcmUncyBjb21tZW50cy4KPiBD
-aGFuZ2VzIHNpbmNlIHYxOgo+ICAgICAqIFJlbW92ZWQgaGVhZGVyIGZpbGUgZGVwZW5kZW5jeS4K
-PiAtLS0KPiAgZG9jcy9taXNjL2FybS9lYXJseS1wcmludGsudHh0ICAgICB8ICAxICsKPiAgeGVu
-L2FyY2gvYXJtL1J1bGVzLm1rICAgICAgICAgICAgICB8ICAxICsKPiAgeGVuL2FyY2gvYXJtL2Fy
-bTY0L2RlYnVnLW12ZWJ1LmluYyB8IDUwICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrCj4gIDMgZmlsZXMgY2hhbmdlZCwgNTIgaW5zZXJ0aW9ucygrKQo+ICBjcmVhdGUgbW9k
-ZSAxMDA2NDQgeGVuL2FyY2gvYXJtL2FybTY0L2RlYnVnLW12ZWJ1LmluYwo+IAo+IGRpZmYgLS1n
-aXQgYS9kb2NzL21pc2MvYXJtL2Vhcmx5LXByaW50ay50eHQgYi9kb2NzL21pc2MvYXJtL2Vhcmx5
-LXByaW50ay50eHQKPiBpbmRleCAyMGE4YWY4Li5mNzY1ZjU5IDEwMDY0NAo+IC0tLSBhL2RvY3Mv
-bWlzYy9hcm0vZWFybHktcHJpbnRrLnR4dAo+ICsrKyBiL2RvY3MvbWlzYy9hcm0vZWFybHktcHJp
-bnRrLnR4dAo+IEBAIC00MSw2ICs0MSw3IEBAIHRoZSBuYW1lIG9mIHRoZSBtYWNoaW5lOgo+ICAg
-IC0ganVubzogcHJpbnRrIHdpdGggcGwwMTEgb24gSnVubyBwbGF0Zm9ybQo+ICAgIC0gbGFnZXI6
-IHByaW50ayB3aXRoIFNDSUYwIG9uIFJlbmVzYXMgUi1DYXIgSDIgcHJvY2Vzc29ycwo+ICAgIC0g
-bWlkd2F5OiBwcmludGsgd2l0aCB0aGUgcGwwMTEgb24gQ2FseGVkYSBNaWR3YXkgcHJvY2Vzc29y
-cwo+ICsgIC0gbXZlYnU6IHByaW50ayB3aXRoIHRoZSBNVkVCVSBmb3IgTWFydmVsbCBBcm1hZGEg
-MzcwMCBTb0NzCj4gICAgLSBvbWFwNTQzMjogcHJpbnRrIHdpdGggVUFSVDMgb24gVEkgT01BUDU0
-MzIgcHJvY2Vzc29ycwo+ICAgIC0gcmNhcjM6IHByaW50ayB3aXRoIFNDSUYyIG9uIFJlbmVzYXMg
-Ui1DYXIgR2VuMyBwcm9jZXNzb3JzCj4gICAgLSBzZWF0dGxlOiBwcmludGsgd2l0aCBwbDAxMSBm
-b3IgQU1EIFNlYXR0bGUgcHJvY2Vzc29yCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9SdWxl
-cy5tayBiL3hlbi9hcmNoL2FybS9SdWxlcy5tawo+IGluZGV4IGI2NmMxOWYuLmYyNjQ1OTIgMTAw
-NjQ0Cj4gLS0tIGEveGVuL2FyY2gvYXJtL1J1bGVzLm1rCj4gKysrIGIveGVuL2FyY2gvYXJtL1J1
-bGVzLm1rCj4gQEAgLTM2LDYgKzM2LDcgQEAgRUFSTFlfUFJJTlRLX2hpa2V5OTYwICAgICAgIDo9
-IHBsMDExLDB4ZmZmMzIwMDAKPiAgRUFSTFlfUFJJTlRLX2p1bm8gICAgICAgICAgIDo9IHBsMDEx
-LDB4N2ZmODAwMDAKPiAgRUFSTFlfUFJJTlRLX2xhZ2VyICAgICAgICAgIDo9IHNjaWYsMHhlNmU2
-MDAwMAo+ICBFQVJMWV9QUklOVEtfbWlkd2F5ICAgICAgICAgOj0gcGwwMTEsMHhmZmYzNjAwMAo+
-ICtFQVJMWV9QUklOVEtfbXZlYnUgICAgICAgICAgOj0gbXZlYnUsMHhkMDAxMjAwMAo+ICBFQVJM
-WV9QUklOVEtfb21hcDU0MzIgICAgICAgOj0gODI1MCwweDQ4MDIwMDAwLDIKPiAgRUFSTFlfUFJJ
-TlRLX3JjYXIzICAgICAgICAgIDo9IHNjaWYsMHhlNmU4ODAwMAo+ICBFQVJMWV9QUklOVEtfc2Vh
-dHRsZSAgICAgICAgOj0gcGwwMTEsMHhlMTAxMDAwMAo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9h
-cm0vYXJtNjQvZGVidWctbXZlYnUuaW5jIGIveGVuL2FyY2gvYXJtL2FybTY0L2RlYnVnLW12ZWJ1
-LmluYwo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj4gaW5kZXggMDAwMDAwMC4uMzU3OWVhNgo+IC0t
-LSAvZGV2L251bGwKPiArKysgYi94ZW4vYXJjaC9hcm0vYXJtNjQvZGVidWctbXZlYnUuaW5jCj4g
-QEAgLTAsMCArMSw1MCBAQAo+ICsvKgo+ICsgKiB4ZW4vYXJjaC9hcm0vYXJtNjQvZGVidWctbXZl
-YnUuaW5jCj4gKyAqCj4gKyAqIE1WRUJVIHNwZWNpZmljIGRlYnVnIGNvZGUuCj4gKyAqCj4gKyAq
-IENvcHlyaWdodCAoYykgMjAxOCwgQW1pdCBTaW5naCBUb21hciA8YW1pdHRvbWVyMjVAZ21haWwu
-Y29tPi4KPiArICoKPiArICogVGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBjYW4g
-cmVkaXN0cmlidXRlIGl0IGFuZC9vcgo+ICsgKiBtb2RpZnkgaXQgdW5kZXIgdGhlIHRlcm1zIGFu
-ZCBjb25kaXRpb25zIG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJsaWMKPiArICogTGljZW5zZSwgdmVy
-c2lvbiAyLCBhcyBwdWJsaXNoZWQgYnkgdGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbi4KPiAr
-ICoKPiArICogVGhpcyBwcm9ncmFtIGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQg
-d2lsbCBiZSB1c2VmdWwsCj4gKyAqIGJ1dCBXSVRIT1VUIEFOWSBXQVJSQU5UWTsgd2l0aG91dCBl
-dmVuIHRoZSBpbXBsaWVkIHdhcnJhbnR5IG9mCj4gKyAqIE1FUkNIQU5UQUJJTElUWSBvciBGSVRO
-RVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRS4gIFNlZSB0aGUgR05VCj4gKyAqIEdlbmVyYWwg
-UHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4KPiArICoKPiArICogWW91IHNob3VsZCBo
-YXZlIHJlY2VpdmVkIGEgY29weSBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljCj4gKyAqIExpY2Vu
-c2UgYWxvbmcgd2l0aCB0aGlzIHByb2dyYW07IElmIG5vdCwgc2VlIDxodHRwOi8vd3d3LmdudS5v
-cmcvbGljZW5zZXMvPi4KPiArICovCj4gKwo+ICsjZGVmaW5lIFVBUlRfU1RBVFVTX1JFRyAgICAg
-MHgwYwo+ICsjZGVmaW5lIFVBUlRfVFhfUkVHICAgICAgICAgMHgwNAo+ICsKPiArLyoKPiArICog
-TVZFQlUgVUFSVCB3YWl0IFVBUlQgdG8gYmUgcmVhZHkgdG8gdHJhbnNtaXQKPiArICogeGI6IHJl
-Z2lzdGVyIHdoaWNoIGNvbnRhaW5zIHRoZSBVQVJUIGJhc2UgYWRkcmVzcwo+ICsgKiBjOiBzY3Jh
-dGNoIHJlZ2lzdGVyCj4gKyAqLwo+ICsubWFjcm8gZWFybHlfdWFydF9yZWFkeSB4YiBjCj4gKzE6
-Cj4gKyAgICAgICAgbGRyaCAgIHdcYywgW1x4YiwgI1VBUlRfU1RBVFVTX1JFR10gIC8qIHN0YXR1
-cyByZWdpc3RlciAqLwo+ICsgICAgICAgIHRzdCAgICB3XGMsICMoMSA8PCAxMSkJCSAgICAgICAg
-IC8qIENoZWNrIFRYRklGTyBGVUxMIGJpdCAqLwo+ICsgICAgICAgIGIubmUgICAxYiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAvKiBXYWl0IGZvciB0aGUgVUFSVCB0byBiZSByZWFkeSAqLwo+
-ICsuZW5kbQo+ICsKPiArLyoKPiArICogTVZFQlUgVUFSVCB0cmFuc21pdCBjaGFyYWN0ZXIKPiAr
-ICogeGI6IHJlZ2lzdGVyIHdoaWNoIGNvbnRhaW5zIHRoZSBVQVJUIGJhc2UgYWRkcmVzcwo+ICsg
-KiB3dDogcmVnaXN0ZXIgd2hpY2ggY29udGFpbnMgdGhlIGNoYXJhY3RlciB0byB0cmFuc21pdAo+
-ICsgKi8KPiArLm1hY3JvIGVhcmx5X3VhcnRfdHJhbnNtaXQgeGIgd3QKPiArCXN0cmIgIFx3dCwg
-W1x4YiwgI1VBUlRfVFhfUkVHXQo+ICsuZW5kbQo+ICsKPiArLyoKPiArICogTG9jYWwgdmFyaWFi
-bGVzOgo+ICsgKiBtb2RlOiBBU00KPiArICogaW5kZW50LXRhYnMtbW9kZTogbmlsCj4gKyAqIEVu
-ZDoKPiArICovCj4gLS0KPiAxLjkuMQo+IAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1487743141-1522958008=:6016
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Thu, 5 Apr 2018, Julien Grall wrote:
+> On 02/04/18 12:17, Manish Jaggi wrote:
+> > 
+> > 
+> > On 04/02/2018 04:33 PM, Manish Jaggi wrote:
+> > > 
+> > > On 03/27/2018 03:48 PM, Marc Zyngier wrote:
+> > > > On 27/03/18 10:07, Manish Jaggi wrote:
+> > > > > This patch is ported to xen from linux commit
+> > > > > b6f49035b4bf6e2709f2a5fed3107f5438c1fd02
+> > > > > KVM: arm64: vgic-v3: Add ICV_EOIR1_EL1 handler
+> > > > > 
+> > > > > Add a handler for writing the guest's view of the ICC_EOIR1_EL1
+> > > > > register. This involves dropping the priority of the interrupt,
+> > > > > and deactivating it if required (EOImode == 0).
+> > > > > 
+> > > > > Signed-off-by : Manish Jaggi <manish.jaggi@cavium.com>
+> > > > > ---
+> > > > >   xen/arch/arm/arm64/vgic-v3-sr.c     | 136
+> > > > > ++++++++++++++++++++++++++++++++++++
+> > > > >   xen/include/asm-arm/arm64/sysregs.h |   1 +
+> > > > >   xen/include/asm-arm/gic_v3_defs.h   |   4 ++
+> > > > >   3 files changed, 141 insertions(+)
+> > > > > 
+> > > > > diff --git a/xen/arch/arm/arm64/vgic-v3-sr.c
+> > > > > b/xen/arch/arm/arm64/vgic-v3-sr.c
+> > > > > index 026d64506f..e32ec01f56 100644
+> > > > > --- a/xen/arch/arm/arm64/vgic-v3-sr.c
+> > > > > +++ b/xen/arch/arm/arm64/vgic-v3-sr.c
+> > > > > @@ -33,6 +33,7 @@
+> > > > >     #define ICC_IAR1_EL1_SPURIOUS    0x3ff
+> > > > >   #define VGIC_MAX_SPI             1019
+> > > > > +#define VGIC_MIN_LPI             8192
+> > > > >     static int vgic_v3_bpr_min(void)
+> > > > >   {
+> > > > > @@ -482,6 +483,137 @@ static void vreg_emulate_iar(struct
+> > > > > cpu_user_regs *regs, const union hsr hsr)
+> > > > >       vgic_v3_read_iar(regs, hsr);
+> > > > >   }
+> > > > >   +static int vgic_v3_find_active_lr(int intid, uint64_t *lr_val)
+> > > > > +{
+> > > > > +    int i;
+> > > > > +    unsigned int used_lrs =  gic_get_num_lrs();
+> > > > This is quite a departure from the existing code. KVM always allocate
+> > > > LRs sequentially, and used_lrs represents the current upper bound.
+> > > IIUC, Xen uses a function gic_find_unused_lr to find an unused LR.
+> > > 
+> > > xen/arch/arm/gic.c:
+> > > gic_raise_guest_irq
+> > >     gic_find_unused_lr
+> > > > Here,
+> > > > you seem to be looking at *all* the LRs. Is that safe?
+> > > IIUC Xen does not maintain a used_lrs, it does have an lr_mask, but that
+> > > is static in gic.c
+> > > 
+> > > To do something like
+> > > +for_each_set_bit(i, lr_mask, nr_lrs)
+> > > + {
+> > > +      u64 val = __gic_v3_get_lr(i);
+> > > +      u8 lr_prio = (val & ICH_LR_PRIORITY_MASK) >> ICH_LR_PRIORITY_SHIFT;
+> > > +     /* Not pending in the state? */
+> > > +     if ((val & ICH_LR_STATE) != ICH_LR_PENDING_BIT)
+> > > +         continue;
+> > > 
+> > > 
+> > > I need to do some jugglery to make lr_mask visible outside of
+> > > xen/arch/arm/gic.c
+> > > The easiest would be to add an extern function, harder way would be to add
+> > > it in gic_hw_operations
+> > > 
+> > > - vgic_v3_highest_priority_lr iterates is interested in used LR's which
+> > > sre in Pending state.
+> > > - emulating IAR is done with interrupts disabled
+> > > - iterating over all the LRs and finding which ones are in Pending.
+> > > 
+> > > 
+> > Just to add I was answering for using num_lrs for used_lrs, above was for
+> > IAR flow.
+> > This holds the same for EOIR flow as well.
+> > 
+> > The bigger point is unless I add some jugglery to access static value
+> > outside gic.c
+> > this is the only solution.
+> > 
+> > Stefano/Andre/Julien
+> > Please suggest if there is some better way...
+> 
+> lr_mask is already exported. So I am not sure what you need here.
+> 
+> However, despite the fact the variable is living in gic.c it is only used by
+> the old vGIC. Newer vGIC is based on KVM, so used_lrs would be fine to use.
+> 
+> For the old vGIC, see below.
+> 
+> > > >   Are you
+> > > > guaranteed not to have any stale state?
+> 
+> LRs are zeroed when unused and AFAICT they should always be accurate. Stefano
+> can you confirm it?
+> 
+> So it would be ok go through all the LRs (thought with a performance hit).
+
+Yes, in the old vgic LRs are always accurate (obvioulsy when read on the
+right pcpu).
+--8323329-1487743141-1522958008=:6016
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1487743141-1522958008=:6016--
