@@ -1,19 +1,31 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] python: xc: fix max_cpu_index sign error
-Date: Thu, 5 Apr 2018 13:54:03 +0100
-Message-ID: <20180405125403.yuapvd6hv3xh7tdv@citrix.com>
-References: <1522932563-89973-1-git-send-email-epetre@amazon.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: Patches for stable
+Date: Thu, 5 Apr 2018 09:00:30 -0400
+Message-ID: <ce82c767-cfb6-5bb7-1733-7b322a4360f2__39608.9384601966$1522933051$gmane$org@oracle.com>
+References: <a38538ef-d766-adb9-77d7-4624cf1dd749@suse.com>
+ <20180404142702.GA20460@kroah.com>
+ <e17d3e80-b019-ac09-d796-771ed38d91e5@suse.com>
+ <20180404144644.GA22656@kroah.com>
+ <c03563a8-8291-38a2-7bdb-12d6894c8fbd@suse.com>
+ <20180404154201.GA31981@kroah.com>
+ <9cd0be43-6380-f5a0-0427-7f75fca966a9@suse.com>
+ <20180405063314.GC5431@kroah.com>
+ <e6fa2f5e-30c9-7aa2-5705-c890f7538b62@suse.com>
+ <20180405071448.GA9183@kroah.com>
+ <d1b13a66-f31a-558c-7935-340e71bfa9a9@suse.com>
+ <CAFLBxZYpTSfkJ3KJg2-M5Pn5y_DiYzOaebCE8f3TkJD8XCOzrA@mail.gmail.com>
+ <950f2f68-04ef-bf4d-fa61-afa9bdc918e4@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=vgux=g2=citrix.com=prvs=626a3696d=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1f44P1-0004rt-GU
- for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 12:54:07 +0000
-Content-Disposition: inline
-In-Reply-To: <1522932563-89973-1-git-send-email-epetre@amazon.com>
+ <srs0=eoqv=g2=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1f44TT-00052e-VF
+ for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 12:58:43 +0000
+In-Reply-To: <950f2f68-04ef-bf4d-fa61-afa9bdc918e4@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,35 +34,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Petre Eftime <epetre@amazon.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+To: Juergen Gross <jgross@suse.com>, George Dunlap <dunlapg@umich.edu>
+Cc: Greg KH <gregkh@linuxfoundation.org>, stable <stable@vger.kernel.org>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Q0MgTWFyZWsKCk9uIFRodSwgQXByIDA1LCAyMDE4IGF0IDEyOjQ5OjIzUE0gKzAwMDAsIFBldHJl
-IEVmdGltZSB3cm90ZToKPiBXaGVuIDAtaW5kZXhpbmcsIG1heGltdW0gaW5kZXggaXMgbnVtX2Vu
-dHJpZXMgLSAxLiBUaGUgcHl0aG9uIHhjIGxpYnJhcnkgaGFkIGEKPiBzaWduIGVycm9yIHdoZXJl
-IHRoZSBtaW51cyB3YXMgcmVwbGFjZWQgYnkgYSBwbHVzLCBtYWtpbmcgdG9vbHMgdGhhdCBkZXBl
-bmRlZAo+IG9uIGl0IHRvIGxvb2sgZm9yIENQVXMgdGhhdCBkaWQgbm90IGV4aXN0Lgo+IAo+IFNp
-Z25lZC1vZmYtYnk6IFBldHJlIEVmdGltZSA8ZXBldHJlQGFtYXpvbi5jb20+Cj4gLS0tCj4gIHRv
-b2xzL3B5dGhvbi94ZW4vbG93bGV2ZWwveGMveGMuYyB8IDIgKy0KPiAgMSBmaWxlIGNoYW5nZWQs
-IDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3Rvb2xzL3B5
-dGhvbi94ZW4vbG93bGV2ZWwveGMveGMuYyBiL3Rvb2xzL3B5dGhvbi94ZW4vbG93bGV2ZWwveGMv
-eGMuYwo+IGluZGV4IGY1MDE3NjQuLjY5NGJmYTAgMTAwNjQ0Cj4gLS0tIGEvdG9vbHMvcHl0aG9u
-L3hlbi9sb3dsZXZlbC94Yy94Yy5jCj4gKysrIGIvdG9vbHMvcHl0aG9uL3hlbi9sb3dsZXZlbC94
-Yy94Yy5jCj4gQEAgLTEwNzksNyArMTA3OSw3IEBAIHN0YXRpYyBQeU9iamVjdCAqcHl4Y190b3Bv
-bG9neWluZm8oWGNPYmplY3QgKnNlbGYpCj4gICAgICAgICAgfQo+ICAgICAgfQo+ICAKPiAtICAg
-IHJldF9vYmogPSBQeV9CdWlsZFZhbHVlKCJ7czppfSIsICJtYXhfY3B1X2luZGV4IiwgbnVtX2Nw
-dXMgKyAxKTsKPiArICAgIHJldF9vYmogPSBQeV9CdWlsZFZhbHVlKCJ7czppfSIsICJtYXhfY3B1
-X2luZGV4IiwgbnVtX2NwdXMgLSAxKTsKPiAgCj4gICAgICBQeURpY3RfU2V0SXRlbVN0cmluZyhy
-ZXRfb2JqLCAiY3B1X3RvX2NvcmUiLCBjcHVfdG9fY29yZV9vYmopOwo+ICAgICAgUHlfREVDUkVG
-KGNwdV90b19jb3JlX29iaik7Cj4gLS0gCj4gMi43LjMuQU1aTgo+IAo+IAo+IAo+IAo+IEFtYXpv
-biBEZXZlbG9wbWVudCBDZW50ZXIgKFJvbWFuaWEpIFMuUi5MLiByZWdpc3RlcmVkIG9mZmljZTog
-MjdBIFNmLiBMYXphciBTdHJlZXQsIFVCQzUsIGZsb29yIDIsIElhc2ksIElhc2kgQ291bnR5LCA3
-MDAwNDUsIFJvbWFuaWEuIFJlZ2lzdGVyZWQgaW4gUm9tYW5pYS4gUmVnaXN0cmF0aW9uIG51bWJl
-ciBKMjIvMjYyMS8yMDA1Lgo+IAo+IAo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fCj4gWGVuLWRldmVsIG1haWxpbmcgbGlzdAo+IFhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwo+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+T24gMDQvMDUvMjAxOCAwODoxOSBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBPbiAwNS8wNC8x
+OCAxMjowNiwgR2VvcmdlIER1bmxhcCB3cm90ZToKPgo+PiBBcmVuJ3QgdGhlcmUgZmxhZ3MgaW4g
+dGhlIGJpbmFyeSBzb21ld2hlcmUgdGhhdCBjb3VsZCB0ZWxsIHRoZQo+PiB0b29sc3RhY2sgLyBY
+ZW4gd2hldGhlciB0aGUga2VybmVsIGluIHF1ZXN0aW9uIG5lZWRzIHRoZSBSU0RQIHRhYmxlIGlu
+Cj4+IGxvd21lbSwgb3Igd2hldGhlciBpdCBjYW4gYmUgcHV0IGhpZ2hlcj8KPiBOb3QgcmVhbGx5
+LiBBbmFseXppbmcgdGhlIGJpbmFyeSB3aGV0aGVyIGl0IGFjY2Vzc2VzIHRoZSByc2RwX2FkZHIg
+aW4KPiB0aGUgc3RhcnRfaW5mbyBpc24ndCB0aGUgd2F5IHRvIGdvLCBJTU8uCj4KPiBJJ3ZlIHNl
+bnQgYSBwYXRjaCB0byB4ZW4tZGV2ZWwgYWRkaW5nIGEgcXVpcmsgZmxhZyB0byB0aGUgZG9tYWlu
+J3MKPiBjb25maWcgdG8gZW5hYmxlIHRoZSBhZG1pbiBzcGVjaWFsIGNhc2luZyBzdWNoIGFuICJv
+bGQiIGtlcm5lbC4KCkNhbiB3ZSBiYWNrcG9ydCBsYXRlc3Qgc3RydWN0IGh2bV9zdGFydF9pbmZv
+IGNoYW5nZXMgKHdoaWNoIGJ1bXBlZAppbnRlcmZhY2UgdmVyc2lvbikgdG8gNC4xMSBhbmQgcGFz
+cyBSU0RQIG9ubHkgZm9yIHZlcnNpb25zID49MT8KCi1ib3JpcwoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
