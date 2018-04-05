@@ -1,19 +1,36 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH] python: xc: fix max_cpu_index sign error
-Date: Thu, 5 Apr 2018 18:45:25 +0200
-Message-ID: <20180405164525.GH3176@mail-itl>
-References: <1522932563-89973-1-git-send-email-epetre@amazon.com>
- <20180405125403.yuapvd6hv3xh7tdv@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: Patches for stable
+Date: Thu, 5 Apr 2018 19:11:58 +0200
+Message-ID: <2fc861a4-c4e8-0a3b-ef92-af5308ed2a87@suse.com>
+References: <a38538ef-d766-adb9-77d7-4624cf1dd749@suse.com>
+ <20180404142702.GA20460@kroah.com>
+ <e17d3e80-b019-ac09-d796-771ed38d91e5@suse.com>
+ <20180404144644.GA22656@kroah.com>
+ <c03563a8-8291-38a2-7bdb-12d6894c8fbd@suse.com>
+ <20180404154201.GA31981@kroah.com>
+ <9cd0be43-6380-f5a0-0427-7f75fca966a9@suse.com>
+ <20180405063314.GC5431@kroah.com>
+ <e6fa2f5e-30c9-7aa2-5705-c890f7538b62@suse.com>
+ <20180405071448.GA9183@kroah.com>
+ <d1b13a66-f31a-558c-7935-340e71bfa9a9@suse.com>
+ <CAFLBxZYpTSfkJ3KJg2-M5Pn5y_DiYzOaebCE8f3TkJD8XCOzrA@mail.gmail.com>
+ <950f2f68-04ef-bf4d-fa61-afa9bdc918e4@suse.com>
+ <ce82c767-cfb6-5bb7-1733-7b322a4360f2@oracle.com>
+ <4bf257f2-dad7-62d2-ad5b-8972c0311119@suse.com>
+ <CAFLBxZaAB8nEnYTtaG-qgps54ZZWxRL7ysTC7U7rA1fMKnjwdA@mail.gmail.com>
+ <9fb78740-33a1-76f8-4a7d-e7713c3b8078@suse.com>
+ <CAFLBxZaHR6dHgzULfKf9OPA9b9dtBy0DBEe5MTFhmMMw67A5Zw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4323354878601826302=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=yxdc=g2=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1f482V-0005ed-3u
- for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 16:47:07 +0000
-In-Reply-To: <20180405125403.yuapvd6hv3xh7tdv@citrix.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=n+lr=g2=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1f48Qd-0007eE-25
+ for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 17:12:03 +0000
+In-Reply-To: <CAFLBxZaHR6dHgzULfKf9OPA9b9dtBy0DBEe5MTFhmMMw67A5Zw@mail.gmail.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,103 +39,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Petre Eftime <epetre@amazon.com>
+To: George Dunlap <dunlapg@umich.edu>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4323354878601826302==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="tT3UgwmDxwvOMqfu"
-Content-Disposition: inline
-
-
---tT3UgwmDxwvOMqfu
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Apr 05, 2018 at 01:54:03PM +0100, Wei Liu wrote:
-> CC Marek
->=20
-> On Thu, Apr 05, 2018 at 12:49:23PM +0000, Petre Eftime wrote:
-> > When 0-indexing, maximum index is num_entries - 1. The python xc librar=
-y had a
-> > sign error where the minus was replaced by a plus, making tools that de=
-pended
-> > on it to look for CPUs that did not exist.
-> >=20
-> > Signed-off-by: Petre Eftime <epetre@amazon.com>
-
-Acked-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
-
-> > ---
-> >  tools/python/xen/lowlevel/xc/xc.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/tools/python/xen/lowlevel/xc/xc.c b/tools/python/xen/lowle=
-vel/xc/xc.c
-> > index f501764..694bfa0 100644
-> > --- a/tools/python/xen/lowlevel/xc/xc.c
-> > +++ b/tools/python/xen/lowlevel/xc/xc.c
-> > @@ -1079,7 +1079,7 @@ static PyObject *pyxc_topologyinfo(XcObject *self)
-> >          }
-> >      }
-> > =20
-> > -    ret_obj =3D Py_BuildValue("{s:i}", "max_cpu_index", num_cpus + 1);
-> > +    ret_obj =3D Py_BuildValue("{s:i}", "max_cpu_index", num_cpus - 1);
-> > =20
-> >      PyDict_SetItemString(ret_obj, "cpu_to_core", cpu_to_core_obj);
-> >      Py_DECREF(cpu_to_core_obj);
-> > --=20
-> > 2.7.3.AMZN
-> >=20
-> >=20
-> >=20
-> >=20
-> > Amazon Development Center (Romania) S.R.L. registered office: 27A Sf. L=
-azar Street, UBC5, floor 2, Iasi, Iasi County, 700045, Romania. Registered =
-in Romania. Registration number J22/2621/2005.
-> >=20
-> >=20
-> > _______________________________________________
-> > Xen-devel mailing list
-> > Xen-devel@lists.xenproject.org
-> > https://lists.xenproject.org/mailman/listinfo/xen-devel
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---tT3UgwmDxwvOMqfu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlrGUqUACgkQ24/THMrX
-1ywWawf/cpaExBjUv9E0ojhXoPj0+q+MChTBaS7OfVI60Qnn1/ai1UoHGkGj+Qca
-JFhqxFxMk71ukqagPiE/NpJzshPor3iMIPFUPCbOMCkR8kGngvSOi9KbAM/sB8DK
-9fRV4LzEMOotI8wpGspEJFWej4AuN5wbM52w39baLb2h11RGh34QCbN1cWxKteGG
-8hZyKA6e6jKS+d5egUjkElzWVlJX7d6G0JW6+lpvOpmy8eq2lu3/SqArCcv2vuFZ
-3l3eYsYE8lXPKgP62CNS6YR4Ho9UsbWIJxjc/xoxQOi7eJsbrd0wIUKgse+UWMiG
-qQGeGkndyAcDnjnBdBXTA0K9xm9v4A==
-=CiVN
------END PGP SIGNATURE-----
-
---tT3UgwmDxwvOMqfu--
-
-
---===============4323354878601826302==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4323354878601826302==--
+T24gMDUvMDQvMTggMTY6NTYsIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4gT24gVGh1LCBBcHIgNSwg
+MjAxOCBhdCAzOjA5IFBNLCBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+IHdyb3RlOgo+
+PiBPbiAwNS8wNC8xOCAxNTo0MiwgR2VvcmdlIER1bmxhcCB3cm90ZToKPj4+IE9uIFRodSwgQXBy
+IDUsIDIwMTggYXQgMjowNiBQTSwgSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPiB3cm90
+ZToKPj4+PiBPbiAwNS8wNC8xOCAxNTowMCwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+Pj4+PiBP
+biAwNC8wNS8yMDE4IDA4OjE5IEFNLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+Pj4+Pj4gT24gMDUv
+MDQvMTggMTI6MDYsIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4+Pj4+Pgo+Pj4+Pj4+IEFyZW4ndCB0
+aGVyZSBmbGFncyBpbiB0aGUgYmluYXJ5IHNvbWV3aGVyZSB0aGF0IGNvdWxkIHRlbGwgdGhlCj4+
+Pj4+Pj4gdG9vbHN0YWNrIC8gWGVuIHdoZXRoZXIgdGhlIGtlcm5lbCBpbiBxdWVzdGlvbiBuZWVk
+cyB0aGUgUlNEUCB0YWJsZSBpbgo+Pj4+Pj4+IGxvd21lbSwgb3Igd2hldGhlciBpdCBjYW4gYmUg
+cHV0IGhpZ2hlcj8KPj4+Pj4+IE5vdCByZWFsbHkuIEFuYWx5emluZyB0aGUgYmluYXJ5IHdoZXRo
+ZXIgaXQgYWNjZXNzZXMgdGhlIHJzZHBfYWRkciBpbgo+Pj4+Pj4gdGhlIHN0YXJ0X2luZm8gaXNu
+J3QgdGhlIHdheSB0byBnbywgSU1PLgo+Pj4+Pj4KPj4+Pj4+IEkndmUgc2VudCBhIHBhdGNoIHRv
+IHhlbi1kZXZlbCBhZGRpbmcgYSBxdWlyayBmbGFnIHRvIHRoZSBkb21haW4ncwo+Pj4+Pj4gY29u
+ZmlnIHRvIGVuYWJsZSB0aGUgYWRtaW4gc3BlY2lhbCBjYXNpbmcgc3VjaCBhbiAib2xkIiBrZXJu
+ZWwuCj4+Pj4+Cj4+Pj4+IENhbiB3ZSBiYWNrcG9ydCBsYXRlc3Qgc3RydWN0IGh2bV9zdGFydF9p
+bmZvIGNoYW5nZXMgKHdoaWNoIGJ1bXBlZAo+Pj4+PiBpbnRlcmZhY2UgdmVyc2lvbikgdG8gNC4x
+MSBhbmQgcGFzcyBSU0RQIG9ubHkgZm9yIHZlcnNpb25zID49MT8KPj4+Pgo+Pj4+IEFuZCB0aGlz
+IHdvdWxkIGhlbHAgaG93Pwo+Pj4+Cj4+Pj4gUlNEUCBhZGRyZXNzIGlzIHBhc3NlZCB0b2RheSwg
+dGhlIGtlcm5lbCBqdXN0IGRvZXNuJ3QgcmVhZCBpdC4gQW5kCj4+Pj4gaG93IHNob3VsZCBYZW4g
+a25vdyB3aGljaCBpbnRlcmZhY2UgdmVyc2lvbiB0aGUga2VybmVsIGlzIHN1cHBvcnRpbmc/Cj4+
+Pj4gQW5kIFhlbiBuZWVkcyB0byBrbm93IHRoYXQgaW4gYWR2YW5jZSBpbiBvcmRlciB0byBwbGFj
+ZSB0aGUgUlNEUCBpbgo+Pj4+IGxvdyBtZW1vcnkgaW4gY2FzZSB0aGUga2VybmVsIGlzbid0IHJl
+YWRpbmcgdGhlIFJTRFAgYWRkcmVzcyBmcm9tCj4+Pj4gc3RhcnRfaW5mby4KPj4+Cj4+PiBCdXQg
+dGhlIGtlcm5lbCBpbWFnZSBoYXMgRUxGIG5vdGVzLCByaWdodD8gIFlvdSBjYW4gcHV0IG9uZSB0
+aGF0Cj4+PiBpbmRpY2F0ZXMgdGhhdCB0aGlzIGJpbmFyeSAqZG9lcyoga25vdyBob3cgdG8gcmVh
+ZCB0aGUgUlNEUCBmcm9tIHRoZQo+Pj4gc3RhcnRfaW5mbywgYW5kIGlmIHlvdSBkb24ndCBmaW5k
+IHRoYXQsIHB1dCBpdCBpbiBsb3dtZW0uCj4+Cj4+IFNvdyB5b3Ugd291bGQgaHVydCBCU0Qgd2hp
+Y2ggZG9lcyByZWFkIHRoZSBSU0RQIGFkZHJlc3MgY29ycmVjdGx5IGJ1dAo+PiAodG9kYXkpIGhh
+cyBubyBzdWNoIEVMRiBub3RlLgo+Pgo+PiBJIHRoaW5rIGV4dGVuZGluZyB0aGUgUFZIIGludGVy
+ZmFjZSBpbiBzdWNoIGEgd2F5IGlzIG5vIGdvb2QgaWRlYS4KPiAKPiBPcHRpb24gMTogUHV0IHRo
+ZSBSU0RQIGluIGxvd21lbSB1bmxlc3Mgd2Uga25vdyB0aGUgZ3Vlc3Qgd2lsbCB1c2UgdGhlCj4g
+YWRkcmVzcyBpbiBzdGFydF9pbmZvCj4gUHJvOiBFeGlzdGluZyBMaW51eCBpbnN0YW5jZXMgYm9v
+dAo+IENvbjogRXhpc3RpbmcgQlNEIGluc3RhbmNlcyB3aG9zZSBtZW1vcnkgaXMgYW4gZXhhY3Qg
+bXVsdGlwbGUgb2YgMSBHaUIKPiB3aWxsIGhhdmUgc2xpZ2h0bHkgc2xvd2VyIFRMQiBtaXNzIHRp
+bWVzLgoKLi4uIHdob3NlIG1lbW9yeSBpcyA+PTFHaUIgLi4uCgo+IE9wdGlvbiAyOiBQdXQgdGhl
+IFJTRFAgaW4gaGlnaG1lbSByZWdhcmRsZXNzCj4gUHJvOiBFeGlzdGluZyBCU0QgaW5zdGFuY2Vz
+IHdob3NlIG1lbW9yeSBpcyBhbiBleGFjdCBtdWx0aXBsZSBvZiAxR2lCCgouLi4gd2hvc2UgbWVt
+b3J5IGlzID49MUdpQiAuLi4KCj4gd2lsbCBoYXZlIHNsaWdodGx5IGZhc3RlciBUTEIgbWlzcyB0
+aW1lcwo+IENvbjogRXhpc3RpbmcgTGludXggaW5zdGFuY2VzIGRvbid0IGJvb3QgYXQgYWxsCgpP
+cHRpb24gMzogYWRkIGEgY29uZmlnIGl0ZW0gdG8gZG9tYWluIGNvbmZpZyBmb3Igc2VsZWN0aW5n
+IHRoZSBSU0RQCiAgICAgICAgICBwbGFjZW1lbnQsIGRlZmF1bHRpbmcgdG8gaGlnaG1lbSAobXkg
+cGF0Y2gpClBybzogRXhpc3RpbmcgQlNEIGFuZCBuZXcgTGludXggaW5zdGFuY2VzIHdob3NlIG1l
+bW9yeSBpcyA+PTFHaUIgd2lsbAogICAgIGhhdmUgc2xpZ2h0bHkgZmFzdGVyIFRMQiBtaXNzIHRp
+bWVzClBybzogRXhpc3RpbmcgTGludXggaW5zdGFuY2VzIGNhbiBiZSBtYWRlIGJvb3RhYmxlIGJ5
+IGFkZGluZyBhIG5ldwogICAgIGl0ZW0gdG8gdGhlaXIgZG9tYWluIGNvbmZpZwoKPiBUaGlzIHNl
+ZW1zIGxpa2UgYSBuby1icmFpbmVyIHRvIG1lLiAgQnV0IGFueXdheSwgbWF5YmUgd2Ugc2hvdWxk
+IG1vdmUKPiB0aGUgZGlzY3Vzc2lvbiBlbHNld2hlcmUgYW5kIHN0b3AgYm90aGVyaW5nIEdyZWcu
+IDotKQoKR3JlZyBhbmQgc3RhYmxlIHJlbW92ZWQuCgoKSnVlcmdlbgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
