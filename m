@@ -1,19 +1,30 @@
-From: Steven Haigh <netwiz@crc.id.au>
-Subject: Re: Problem with Xen 4.7.5
-Date: Thu, 05 Apr 2018 20:02:57 +1000
-Message-ID: <2806674.HxMyK3gPeZ@wopr.lan.crc.id.au>
-References: <23237.2546.225198.36869@mariner.uk.xensource.com>
- <30b9ef708cf321c5975c07ce9d5dfba7@crc.id.au>
- <23237.59923.421239.170532@mariner.uk.xensource.com>
+From: George Dunlap <dunlapg@umich.edu>
+Subject: Re: Patches for stable
+Date: Thu, 5 Apr 2018 11:06:09 +0100
+Message-ID: <CAFLBxZYpTSfkJ3KJg2-M5Pn5y_DiYzOaebCE8f3TkJD8XCOzrA__11655.4615823135$1522922710$gmane$org@mail.gmail.com>
+References: <a38538ef-d766-adb9-77d7-4624cf1dd749@suse.com>
+ <20180404142702.GA20460@kroah.com>
+ <e17d3e80-b019-ac09-d796-771ed38d91e5@suse.com>
+ <20180404144644.GA22656@kroah.com>
+ <c03563a8-8291-38a2-7bdb-12d6894c8fbd@suse.com>
+ <20180404154201.GA31981@kroah.com>
+ <9cd0be43-6380-f5a0-0427-7f75fca966a9@suse.com>
+ <20180405063314.GC5431@kroah.com>
+ <e6fa2f5e-30c9-7aa2-5705-c890f7538b62@suse.com>
+ <20180405071448.GA9183@kroah.com>
+ <d1b13a66-f31a-558c-7935-340e71bfa9a9@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1283238140449792579=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=7gcu=g2=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
- id 1f41jf-0008AR-Ax
- for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 10:03:15 +0000
-In-Reply-To: <23237.59923.421239.170532@mariner.uk.xensource.com>
+ (envelope-from <srs0=axml=g2=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
+ id 1f41mW-0008Jl-5l
+ for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 10:06:12 +0000
+Received: by mail-qt0-x243.google.com with SMTP id s48so26234913qtb.10
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Apr 2018 03:06:10 -0700 (PDT)
+In-Reply-To: <d1b13a66-f31a-558c-7935-340e71bfa9a9@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,84 +33,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: xen-devel@lists.xenproject.org
+To: Juergen Gross <jgross@suse.com>
+Cc: Greg KH <gregkh@linuxfoundation.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, stable <stable@vger.kernel.org>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1283238140449792579==
-Content-Type: multipart/signed; boundary="nextPart2040747.DTKmF6RyLk"; micalg="pgp-sha256"; protocol="application/pgp-signature"
-
---nextPart2040747.DTKmF6RyLk
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-
-On Thursday, 5 April 2018 7:19:15 PM AEST Ian Jackson wrote:
-> Steven Haigh writes ("Re: Problem with Xen 4.7.5"):
-> > On 2018-04-05 03:22, Ian Jackson wrote:
-> > > Apologies for the inconvenience.
->=20
-> ...
->=20
-> > I'm wondering if the severity of this is high enough that I should
-> > withdraw the 4.7.5 packages from my repos.
-> >=20
-> > Is this a show-stopper? Security issue? Dom0 crash?
-> >=20
-> > I released 4.7.5 packages within an hour of the 4.7.5 release
-> > announcement - so there are quite a few user systems that have already
-> > grabbed them.
->=20
-> It's quite bad.  We don't understand the impact properly yet but it is
-> at least a domU crash in some situations.
->=20
-> I would withdraw the packages, yes.  Sorry.
-
-Thanks Ian, its all good - I've withdrawn them and I'll send an announcemen=
-t=20
-to my user list to get them to downgrade etc...
-
-=2D-=20
-Steven Haigh
-
-=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB http://www.crc.id.au
-=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
-
---nextPart2040747.DTKmF6RyLk
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAlrF9FEACgkQQa811Xp9
-MdxTSQ//bpSBGgdhXwsTpZFgpgfO+Kxl7pd4hd7sUu/Y0L+H6cVDUfXLcPLs2IK2
-vJJ3vVTKqKJGnvmKeBiBv0X6yM6xL7uza4H8M03rkeoT9HZTOSy6WwQ08LBYNP4E
-nbngHgBylJe+CxyWqC4ExG6z5xpxrjJ/gb3sZmM4h0XVRLQw2dyPKvzgeUG7pnDM
-hxaoEtwa4fW1cV8Ldyjx3B1jZZ/JUED03rEqlHWp0HKomu5fEjDeUDXwWxB2bjMG
-QIDziBCCGB04ho0TPUafr+My+rCJZJ/xtUXtW6e/FB2Pp/Y/I3ko2zqBsTnuBwa8
-rel9RBxguiSuKisv8/feBbmoeb0WNczFm+OoMsmsDCdebVRzFNiP2cYDeWid6U0Z
-KypS1Wn0ufghF8Z3VacqEMN6hl3QHvkoZ0MwOwnSaPi7YajZcnCr/gcPrFda//Hs
-zMB5lwH4DfnQLw0pr7M3MdvFdayBJktq9r+Nert8vXO+K0TUpSlNDcWKqHgpr7cR
-GdYeFMXt7MwWwXFPoKP0jaVp7boOGsFxwIUZyLCeucHAasXmftDShMlnFpcE3mfa
-/XNZaimKG9RhblkmuNXlaYHbzJgnvAegwA0DlQpu5hMv3xDFlf3ZXG0Q149EZFrM
-F/GKBbcbFOjC8YSHyDmRHLjqZWK/4UAMtEnZ3ZBAm4lSkHhOubs=
-=HFLe
------END PGP SIGNATURE-----
-
---nextPart2040747.DTKmF6RyLk--
-
-
-
-
-
---===============1283238140449792579==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1283238140449792579==--
+T24gVGh1LCBBcHIgNSwgMjAxOCBhdCA5OjAwIEFNLCBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
+ZS5jb20+IHdyb3RlOgo+PiBUaGVzZSBhcmUgbm90IGp1c3QgInBhdGNoZXMgdG8gZml4IHRoZSBp
+c3N1ZSIsIHRoZXkgYXJlICJwYXRjaGVzIHRvIGFkZAo+PiBuZXcgZmVhdHVyZXMiIHRoYXQgdG91
+Y2ggY29yZSBhY3BpIGJpdHMsIHJpZ2h0PyAgU3VwcG9ydCBmb3IgbmV3Cj4+IGhhcmR3YXJlIGFu
+ZCBwbGF0Zm9ybXMgYW5kIHN1Y2ggYXJlIG5vdCBub3JtYWxseSBwYXJ0IG9mIHRoZSBzdGFibGUK
+Pj4ga2VybmVsIHBhdGNoZXMgYXQgYWxsICh3aXRoIHRoZSBleGNlcHRpb25zIG9mIHRpbnkgcGF0
+Y2hlcyB0aGF0IGFkZAo+PiBkZXZpY2UgaWRzIGFuZCBxdWlya3MuKQo+Cj4gVGhlIHdheSB0aGUg
+cGF0Y2hlcyBhcmUgd3JpdHRlbiBhcmUgdGhlIHJlc3VsdCBvZiByZXF1ZXN0cyBvZiB0aGUKPiBt
+YWludGFpbmVycyAoeDg2LCBhY3BpKS4gVGhpcyB3YXkgdGhleSBkb24ndCBicmVhayBsYXllcmlu
+ZyBvZiB0aGUKPiBjb21wb25lbnRzLiBJJ2QgYmUgaGFwcHkgdG8gcmV3cml0ZSB0aGVtIGZvciBz
+dGFibGUga2VybmVscyBpZiB5b3UKPiBsaWtlIHRoYXQgYmV0dGVyLgo+Cj4+IFRoYXQncyBteSBt
+YWluIG9iamVjdGlvbiBoZXJlLCBjb21iaW5lZCB3aXRoIHRoZSBvYnZpb3VzIG9uZSBvZiAiWGVu
+Cj4+IGRvZXMgbm90IGNhcmUgYWJvdXQgdGhlaXIgdXNlcnMiLgo+Cj4gWGVuIGRvZXMgY2FyZS4g
+UFZIIHN1cHBvcnQgaW4gTGludXggaXMgcmVsYXRpdmVseSBuZXcgKHRoZSBmaXJzdCB3b3JraW5n
+Cj4ga2VybmVsIHdhcyA0LjExKSwgWGVuIGhhcyBmdWxsIFBWSCBndWVzdCBzdXBwb3J0IHNpbmNl
+IFhlbiA0LjEwLgo+Cj4gRm9yIGJlaW5nIGFibGUgdG8gcmVwbGFjZSBQViBtb2RlIGl0IGlzIG1h
+bmRhdG9yeSBmb3IgUFZIIHRvIG5vdCBhZGQKPiB1bm5lY2Vzc2FyeSBwZXJmb3JtYW5jZSBvdmVy
+aGVhZCwgYXMgcGVyZm9ybWFuY2UgaXMgdGhlIG1haW4gcmVhc29uIGZvcgo+IGN1c3RvbWVycyB0
+byBydW4gdGhlaXIgZ3Vlc3RzIGluIFBWIG1vZGUgKHllcywgUFYgZ3Vlc3RzIF9hcmVfIGZhc3Rl
+ciwKPiBlc3BlY2lhbGx5IHdpdGggbWFueSB2Y3B1cykuCgpJJ20gYWZyYWlkIEkgaGF2ZSB0byBh
+Z3JlZSB3aXRoIEdyZWcgaGVyZSByZWdhcmRpbmcgdGhlIG1lYW5pbmcgb2YKInN1cHBvcnRlZCI7
+IGFuZCBJIHJlbWVtYmVyIGV4cHJlc3NpbmcgYSBzaW1pbGFyIHNlbnRpbWVudCB3aGVuIEkKZGlz
+Y292ZXJlZCB0aGF0IGEgcmVjZW50IExpbnV4IGtlcm5lbCB3b3VsZG4ndCBib290IG9uIHRoZSBk
+ZXZlbG9wbWVudAp2ZXJzaW9uIG9mIFhlbi4gIEVpdGhlciB3ZSBkZWNsYXJlIFBWSCBpbiBMaW51
+eCA0LjExLTQuMTYgYXMKInN1cHBvcnRlZCIsIGluIHdoaWNoIGNhc2Ugd2UgaGF2ZSB0byBtYWlu
+dGFpbiBiYWNrd2FyZHMgY29tcGF0aWJpbGl0eQphbmQgYXR0ZW1wdCBub3QgdG8gYnJlYWsgaXQ7
+IG9yIHdlIGRlY2xhcmUgUFZIIGluIExpbnV4IDQuMTEtNC4xNiBhcwoidGVjaCBwcmV2aWV3IiAo
+cmV0cm9hY3RpdmVseSksIGFuZCBHcmVnIHNob3VsZCBmZWVsIGZyZWUgdG8gaWdub3JlCnRoZXNl
+IGJhY2twb3J0cy4KCkl0J3MgdW5mb3J0dW5hdGUgdGhhdCBMaW51eCA0LjExIGRpZG4ndCBmb2xs
+b3cgdGhlIHNwZWMsIGJ1dCB3aG9zZQpmYXVsdCBpcyB0aGF0PwoKVGhlIGZhY3QgaXMsIHRoYXQg
+YXMgaXQgc3RhbmRzLCBhIHVzZXIgY291bGQgaGF2ZSBhIHBlcmZlY3RseSB3b3JraW5nCnN5c3Rl
+bSB3aXRoIFhlbiA0LjEwIGFuZCBhIGxvYWQgb2YgUFZIIGd1ZXN0cyBydW5uaW5nIHN0b2NrIExp
+bnV4CjQuMTUsIGFuZCB0aGVuIHVwZ3JhZGUgdG8gWGVuIDQuMTEgYW5kIGhhdmUgYWxsIHRob3Nl
+IGd1ZXN0cyBicmVhayBmb3IKbm8gYXBwYXJlbnQgcmVhc29uLiAgVGhhdCdzIGEgcHJldHR5IG9i
+bm94aW91cyB0aGluZyB0byBkbywKcGFydGljdWxhcmx5IGFzIHdlIG1hZGUgc3VjaCBhIGZhbmZh
+cmUgYWJvdXQgWGVuIDQuMTAgZmluYWxseSBoYXZpbmcKUFZIIHN1cHBvcnQsIGFuZCBlbmNvdXJh
+Z2luZyBldmVyeW9uZSB0byBnbyBhbmQgdXNlIGl0LiAgSG93IGFyZSBhbGwKb2YgdGhvc2UgdXNl
+cnMgZ29pbmcgdG8gZmVlbCBhYm91dCBYZW4/CgpBcmVuJ3QgdGhlcmUgZmxhZ3MgaW4gdGhlIGJp
+bmFyeSBzb21ld2hlcmUgdGhhdCBjb3VsZCB0ZWxsIHRoZQp0b29sc3RhY2sgLyBYZW4gd2hldGhl
+ciB0aGUga2VybmVsIGluIHF1ZXN0aW9uIG5lZWRzIHRoZSBSU0RQIHRhYmxlIGluCmxvd21lbSwg
+b3Igd2hldGhlciBpdCBjYW4gYmUgcHV0IGhpZ2hlcj8KCiAtR2VvcmdlCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
