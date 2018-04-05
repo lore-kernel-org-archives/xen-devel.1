@@ -1,21 +1,14 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [OSSTEST PATCH 2/2] make-flight: Run some shadow
- paging tests (`hap=false')
-Date: Thu, 5 Apr 2018 14:47:52 +0100
-Message-ID: <20180405134752.trcbdn5avo2vcljd@citrix.com>
-References: <1522933458-17629-1-git-send-email-ian.jackson@eu.citrix.com>
- <1522933458-17629-2-git-send-email-ian.jackson@eu.citrix.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: X86 Community Call - Wed Apr 11,
+ 14:00 - 15:00 UTC - Call for Agenda Items
+Date: Thu, 5 Apr 2018 15:49:08 +0200
+Message-ID: <271830B1-BDCF-4225-9323-12CC6EC94E35@xenproject.org>
+References: <DAA777E6-B987-454D-9EFA-153391163E36@citrix.com>
+ <ace5e578-9557-f845-b823-f6daaeb455de@citrix.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.3 \(3445.6.18\))
+Content-Type: multipart/mixed; boundary="===============5699783005480128106=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=vgux=g2=citrix.com=prvs=626a3696d=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1f45F7-0000Lc-7N
- for xen-devel@lists.xenproject.org; Thu, 05 Apr 2018 13:47:57 +0000
-Content-Disposition: inline
-In-Reply-To: <1522933458-17629-2-git-send-email-ian.jackson@eu.citrix.com>
+In-Reply-To: <ace5e578-9557-f845-b823-f6daaeb455de@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,43 +17,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: George Dunlap <george.dunlap@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, "xen-devel@lists.xensource.com" <xen-devel@lists.xensource.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Daniel Kiper <daniel.kiper@oracle.com>, =?utf-8?Q?Roger_Pau_Monn=C3=A9?= <royger@freebsd.org>, Christopher Clark <christopher.w.clark@gmail.com>, Janakarajan Natarajan <jnataraj@amd.com>, Rich Persaud <persaur@gmail.com>, Tamas K Lengyel <tamas@tklengyel.com>, "committers@xenproject.org" <committers@xenproject.org>, 'Jan Beulich' <JBeulich@suse.com>, "intel-xen@intel.com" <intel-xen@intel.com>, Paul Durrant <Paul.Durrant@citrix.com>, Brian Woods <brian.woods@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBBcHIgMDUsIDIwMTggYXQgMDI6MDQ6MThQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
-dGU6Cj4gQWRkIGZvdXIgdGVzdHMgdG8gbW9zdCBmbGlnaHRzOgo+IAo+ICAgICB0ZXN0LWFtZDY0
-LWFtZDY0LXhsLXNoYWRvdwo+ICAgICB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2
-bS1hbWQ2NC1zaGFkb3cKPiAgICAgdGVzdC1hbWQ2NC1pMzg2LXhsLXNoYWRvdwo+ICAgICB0ZXN0
-LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdwo+IAo+IFRoZXNlIGFy
-ZSB0aGUgc2FtZSBhcyB0aGUgY29ycmVzcG9uZGluZyBvbmVzIHdpdGhvdXQgLXNoYWRvdywgZXhj
-ZXB0Cj4gdGhhdCB0aGV5IHNldCB4ZW5fYm9vdF9hcHBlbmQgdG8gYGhhcD1mYWxzZScsIHNvIHRo
-YXQgdGhhdCB3aWxsIGJlCj4gcGFzc2VkIHRvIHRoZSBoeXBlcnZpc29yIHRvIGZvcmNlIHNoYWRv
-dyBwYWdpbmcuCj4gCj4gQ0M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
-b20+Cj4gQ0M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPiBDQzogR2VvcmdlIER1
-bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgo+IFNpZ25lZC1vZmYtYnk6IElhbiBKYWNr
-c29uIDxJYW4uSmFja3NvbkBldS5jaXRyaXguY29tPgoKaGFwPWZhbHNlIGlzIGNvcnJlY3QuCgo+
-IC0tLQo+ICBtYWtlLWZsaWdodCB8IDEyICsrKysrKysrKysrKwo+ICAxIGZpbGUgY2hhbmdlZCwg
-MTIgaW5zZXJ0aW9ucygrKQo+IAo+IGRpZmYgLS1naXQgYS9tYWtlLWZsaWdodCBiL21ha2UtZmxp
-Z2h0Cj4gaW5kZXggMWE4ZjBhNi4uNmI1M2M5NCAxMDA3NTUKPiAtLS0gYS9tYWtlLWZsaWdodAo+
-ICsrKyBiL21ha2UtZmxpZ2h0Cj4gQEAgLTUwMCw2ICs1MDAsMTYgQEAgZG9fcnRkc190ZXN0cyAo
-KSB7Cj4gICAgICAgICAgICAgICRkZWJpYW5fcnVudmFycyBhbGxfaG9zdGZsYWdzPSRtb3N0X2hv
-c3RmbGFncwo+ICB9Cj4gIAo+ICtkb19zaGFkb3dfdGVzdHMgKCkgewo+ICsgIGpvYl9jcmVhdGVf
-dGVzdCB0ZXN0LSR4ZW5hcmNoJGtlcm4tJGRvbTBhcmNoLXhsLXNoYWRvdyAgICAgICAgICAgICAg
-XAo+ICsgICAgICAgdGVzdC1kZWJpYW4geGwgJHhlbmFyY2ggJGRvbTBhcmNoICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgXAo+ICsgICAgICAgICAgICBndWVzdHNfdmNwdXM9NCB4ZW5fYm9v
-dF9hcHBlbmQ9J2hhcD1mYWxzZScgICAgICAgICAgICAgICAgXAo+ICsgICAgICAgICAgICAkZGVi
-aWFuX3J1bnZhcnMgYWxsX2hvc3RmbGFncz0kbW9zdF9ob3N0ZmxhZ3MKPiArCj4gKyAgZG9faHZt
-X2RlYmlhbl90ZXN0X29uZSBkZWJpYW5odm0geGwgc2VhYmlvcyBmYWxzZSAnJyAtc2hhZG93IFwK
-PiArICAgICAgICAgICAgICAgICAgICAgICAgICJ4ZW5fYm9vdF9hcHBlbmQ9aGFwPWZhbHNlIgo+
-ICt9Cj4gKwo+ICBkb194dGZfdGVzdHMgKCkgewo+ICAgIGlmICEgYnJhbmNoX3dhbnRzX3h0Zl90
-ZXN0czsgdGhlbgo+ICAgICAgICByZXR1cm4KPiBAQCAtODQ4LDYgKzg1OCw4IEBAIHRlc3RfbWF0
-cml4X2RvX29uZSAoKSB7Cj4gICAgZG9fcHlncnViX3Rlc3RzCj4gICAgZG9fcHZncnViX3Rlc3Rz
-Cj4gIAo+ICsgIGRvX3NoYWRvd190ZXN0cwo+ICsKPiAgICBkb194dGZfdGVzdHMKPiAgICBkb19s
-aXZlcGF0Y2hfdGVzdHMKPiAgfQo+IC0tIAo+IDIuMS40Cj4gCj4gCj4gX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiBYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Cj4gWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCj4gaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbAoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5699783005480128106==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_50FF0C52-4E74-4801-A493-65BAF22A5C69"
+
+
+--Apple-Mail=_50FF0C52-4E74-4801-A493-65BAF22A5C69
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
+
+
+
+> On 28 Mar 2018, at 16:40, George Dunlap <george.dunlap@citrix.com> =
+wrote:
+>=20
+> On 03/22/2018 10:22 AM, Lars Kurth wrote:
+>> Hi all,
+>>=20
+>> please find attached
+>> a) Meeting details (just a link with timezones) =E2=80=93 the meeting =
+invite will follow when we have an agenda
+>>   Bridge details =E2=80=93 will be sent with the meeting invite
+>>   I am thinking of using GotoMeeting, but want to try this with a =
+Linux only user before I commit
+>> c) Call for agenda items
+>>=20
+>> A few suggestions were made, such as XPTI status (if applicable), PVH =
+status
+>> Also we have some left-overs from the last call: see =
+https://lists.xenproject.org/archives/html/xen-devel/2018-03/threads.html#=
+01571
+>>=20
+>> Regards
+>> Lars
+>>=20
+>> =3D=3D Meeting Details =3D=3D
+>> Wed April 11, 15:00 - 16:00 UTC
+>>=20
+>> International meeting times: =
+https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D2018&mon=
+th=3D4&day=3D11&hour=3D14&min=3D0&sec=3D0&p1=3D224&p2=3D24&p3=3D179&p4=3D1=
+36&p5=3D37&p6=3D33
+>=20
+> It looks like the above should say "15:00 - 16:00 BST"?
+>=20
+> I'll send agenda items closer to the time of the meeting.
+
+That's a copy and paste thing. Yes, it should say
+> 15:00 - 16:00 BST
+or
+> 14:00 - 15:00 UTC
+
+Please send agenda items by tomorrow
+
+Regards
+Lars=
+
+--Apple-Mail=_50FF0C52-4E74-4801-A493-65BAF22A5C69
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dutf-8"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
+class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 28 Mar 2018, at 16:40, George Dunlap &lt;<a =
+href=3D"mailto:george.dunlap@citrix.com" =
+class=3D"">george.dunlap@citrix.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><span =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">On 03/22/2018 =
+10:22 AM, Lars Kurth wrote:</span><br style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><blockquote type=3D"cite" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; orphans: auto; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; widows: auto; word-spacing: =
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D"">Hi all,<br class=3D""><br =
+class=3D"">please find attached<br class=3D"">a) Meeting details (just a =
+link with timezones) =E2=80=93 the meeting invite will follow when we =
+have an agenda<br class=3D"">&nbsp;&nbsp;Bridge details =E2=80=93 will =
+be sent with the meeting invite<br class=3D"">&nbsp;&nbsp;I am thinking =
+of using GotoMeeting, but want to try this with a Linux only user before =
+I commit<br class=3D"">c) Call for agenda items<br class=3D""><br =
+class=3D"">A few suggestions were made, such as XPTI status (if =
+applicable), PVH status<br class=3D"">Also we have some left-overs from =
+the last call: see <a =
+href=3D"https://lists.xenproject.org/archives/html/xen-devel/2018-03/threa=
+ds.html#01571" =
+class=3D"">https://lists.xenproject.org/archives/html/xen-devel/2018-03/th=
+reads.html#01571</a><br class=3D""><br class=3D"">Regards<br =
+class=3D"">Lars<br class=3D""><br class=3D"">=3D=3D Meeting Details =
+=3D=3D<br class=3D"">Wed April 11, 15:00 - 16:00 UTC<br class=3D""><br =
+class=3D"">International meeting times: <a =
+href=3D"https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D=
+2018&amp;month=3D4&amp;day=3D11&amp;hour=3D14&amp;min=3D0&amp;sec=3D0&amp;=
+p1=3D224&amp;p2=3D24&amp;p3=3D179&amp;p4=3D136&amp;p5=3D37&amp;p6=3D33" =
+class=3D"">https://www.timeanddate.com/worldclock/meetingdetails.html?year=
+=3D2018&amp;month=3D4&amp;day=3D11&amp;hour=3D14&amp;min=3D0&amp;sec=3D0&a=
+mp;p1=3D224&amp;p2=3D24&amp;p3=3D179&amp;p4=3D136&amp;p5=3D37&amp;p6=3D33<=
+/a><br class=3D""></blockquote><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">It looks like the above should say "15:00 - 16:00 =
+BST"?</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">I'll send =
+agenda items closer to the time of the meeting.</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""></div></blockquote></div><br class=3D""><div =
+class=3D"">That's a copy and paste thing. Yes, it should say</div><div =
+class=3D""><blockquote type=3D"cite" class=3D""><span class=3D"" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; display: inline =
+!important;">15:00 - 16:00 BST</span></blockquote>or</div><div =
+class=3D""><blockquote type=3D"cite" class=3D""><span class=3D"" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; display: inline =
+!important;">14:00 - 15:00 UTC</span></blockquote><br =
+class=3D""></div><div class=3D"">Please send agenda items by =
+tomorrow</div><div class=3D""><br class=3D""></div><div =
+class=3D"">Regards</div><div class=3D"">Lars</div></body></html>=
+
+--Apple-Mail=_50FF0C52-4E74-4801-A493-65BAF22A5C69--
+
+
+--===============5699783005480128106==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5699783005480128106==--
