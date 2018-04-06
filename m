@@ -1,19 +1,19 @@
-From: Lars Kurth <lars.kurth@citrix.com>
-Subject: Re: Xen and safety certification,
- Minutes of the meeting on Apr 4th
-Date: Fri, 6 Apr 2018 14:13:25 +0000
-Message-ID: <5D69D457-6EAB-4FF9-AF94-3D818F9035EC@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH 7/7] tools/kdd: mute spurious gcc warning
+Date: Fri, 6 Apr 2018 16:32:42 +0200
+Message-ID: <20180406143242.GM3176@mail-itl>
+References: <cover.c71341b28191a3808896e82914eb11c1472687b2.1522893038.git-series.marmarek@invisiblethingslab.com>
+ <5888eecca0c8de49a455b2ce9722760a3dbdf4d0.1522893038.git-series.marmarek@invisiblethingslab.com>
+ <3b81cb5f-4f64-4626-d105-bd58766807d0@oracle.com>
+ <20180406130728.ez7725vdsltorixu@citrix.com>
+ <dc5d9a85-ab9c-2cdb-9319-1284158e4596@oracle.com>
+ <20180406134117.cnw6taklnojynfn3@citrix.com>
+ <52a5c902-c75e-9cae-d447-10f2aefffa9a@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4629433374245628072=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ydgf=g3=citrix.com=prvs=62714f41b=lars.kurth@srs-us1.protection.inumbo.net>)
- id 1f4S7O-0000vZ-4W
- for xen-devel@lists.xenproject.org; Fri, 06 Apr 2018 14:13:30 +0000
-Content-Language: en-US
-Content-ID: <30A288A4AD2ADD46A4C20FB685103258@citrix.com>
+In-Reply-To: <52a5c902-c75e-9cae-d447-10f2aefffa9a@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,185 +22,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Artem Mygaiev <Artem_Mygaiev@epam.com>, "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "paul_luperto@prqa.com" <paul_luperto@prqa.com>, Denys Balatsko <denys.balatsko@globallogic.com>, Rich Persaud <persaur@gmail.com>, Jonathan Daugherty <jtd@galois.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, "julien.grall@arm.com" <julien.grall@arm.com>, "committers@xenproject.org" <committers@xenproject.org>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, Jarvis Roach <Jarvis.Roach@dornerworks.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgYWxsLA0KDQphZGRpbmcgYSBmZXcgbW9yZSBwZW9wbGUgd2hvIGFyZS9tYXkgYmUgaW50ZXJl
-c3RlZCBpbiBzYWZldHkgY2VydGlmaWNhdGlvbiwgaW5jbHVkaW5nIGNvbW1pdHRlcnMgKGJlY2F1
-c2UgaXRlbSAxIHdvdWxkIGhhdmUgYW4gaW1wYWN0KS4gU3BlY2lmaWNhbGx5OiBSaWNoIFBlcnNh
-dWQsIFBhdWwgTHVwZXJ0bywgSm9uYXRoYW4gRGF1Z2hlcnR5IGFuZCBEZW55cyBCYWxhdHNrby4N
-Cg0KVGhlcmUgYXJlIGEgZmV3IGxvb3NlIGVuZHMgYW5kIHVwZGF0ZXMgZnJvbSBvdGhlci9zaW1p
-bGFyIHJlbGF0ZWQgdGhyZWFkcyB0aGF0IHdlIHNob3VsZCBwdWxsIGludG8gdGhpcyB0aHJlYWQ6
-DQoNCmEpIEFHTCBXaGl0ZXBhcGVyDQpUaGlzIGlzIG91dCBhcyBmYXIgYXMgSSBjYW4gdGVsbA0K
-U2VlIGh0dHBzOi8vZG9jcy5nb29nbGUuY29tL2RvY3VtZW50L2QvMUhwWXpDbGgwbkRFb2NzVUhi
-MTdYMER4aWVoc0FiQ2d5V0UtUDJXa19STlUvZWRpdCMNClRoYW5rIHlvdSB0byBSaWNoIGZvciBk
-cml2aW5nIHRoaXMgYW5kIHRvIGFsbCB0aGUgY29udHJpYnV0b3JzIGZyb20gdGhlIFhlbiBDb21t
-dW5pdHkNCg0KUmVsYXRlZCB0byB0aGlzIGlzIHRoZSBmb2xsb3dpbmcgaXRlbSBmcm9tIHRoZSBv
-cmlnaW5hbCBtaW51dGVzDQo+IEFHTCB3aWxsIHNlbGVjdCAyIGh5cGVydmlzb3JzIG91dCBvZiB0
-aGUgbGlzdC4gQXJ0ZW0gaGFzIGFscmVhZHkgYW4NCj4gb3V0LW9mLXRoZS1ib3ggc29sdXRpb24g
-Zm9yIEFHTC4gQXJ0ZW0gd2lsbCBjaGFzZSB1cCBhbmQgbWFrZSBzdXJlIHRoYXQNCj4gWGVuIHdp
-bGwgYmUgb25lIG9mIHRoZSB0d28uDQoNCmIpIEdlbml2aSBBTU0gSHlwZXJ2aXNvciBXb3Jrc2hv
-cCwgQXByIDE5DQpBcnRlbSBhbmQgbWUgd2lsbCBiZSBzcGVha2luZyBvbiB2YXJpb3VzIFhlbiBy
-ZWxhdGVkIHByb2plY3RzLiBJIHdpbGwgc2VuZCBhIGRyYWZ0IFBERiB0byB0aGlzIGxpc3QgbGF0
-ZXIgdGhpcyB3ZWVrLg0KU2xvdHMgYXJlIHNob3J0OiAxMCBtaW51dGVzICsgcXVlc3Rpb25zIGVh
-Y2ggc2xvdA0KU2VlIGh0dHBzOi8vYXQucHJvamVjdHMuZ2VuaXZpLm9yZy93aWtpL2Rpc3BsYXkv
-RElSTy9IeXBlcnZpc29yK1dvcmtzaG9wK1RlYW0NCg0KYykgWGVuIFNwZWNpZmljIEF1dG9tb3Rp
-dmUgV2hpdGVwYXBlcg0KVGhpcyB3YXMgZGlzY3Vzc2VkIGR1cmluZyBhKSBhbmQgSSB0aGluayBp
-dCB3b3VsZCBiZSByZWxhdGl2ZWx5IGVhc3kgdG8gcHVsbCBzb21ldGhpbmcgdG9nZXRoZXIuIEl0
-IHdvdWxkIGJlIGdvb2QgaWYgc29tZW9uZSBlbHNlLCBidXQgbWUgY291bGQgbGVhZCB0aGlzLiBX
-ZSBoYXZlIGEgbG90IG9mIGluZm9ybWF0aW9uIGFscmVhZHksIGJ1dCBtb3JlIGdyb3VuZC13b3Jr
-IG9uIHNhZmV0eSBjZXJ0aWZpY2F0aW9uIG1heSBoZWxwLiBXb3VsZCB0aGVyZSBiZSBhIHZvbHVu
-dGVlciBkcml2aW5nIHRoaXM/IEkgY291bGQgYmUgdXNlZCBhcyBhIHZlaGljbGUgdG8gbW92ZSBz
-b21lIG9mIHRoZSBpdGVtcyBkaXNjdXNzZWQgaW4gdGhlIG1pbnV0ZXMgYWxvbmcuDQoNCmQpIEkg
-YWxzbyBjcmVhdGVkIGh0dHBzOi8vd2lraS54ZW5wcm9qZWN0Lm9yZy93aWtpL0NhdGVnb3J5OlNh
-ZmV0eV9DZXJ0aWZpY2F0aW9uIHRvIHN0YXJ0IHB1bGxpbmcgbWF0ZXJpYWwgcmVsZXZhbnQgdG8g
-c2FmZXR5IGFuZCBjb250ZXh0IGZvciBpdCBpbnRvIG9uZSBwbGFjZS4gDQpJdCdzIGEgbGl0dGxl
-IGNydWRlIGF0IHRoaXMgcG9pbnQgaW4gdGltZSBhbmQgSSBleHBlY3QgdGhpcyBkb2N1bWVudCB0
-byBldm9sdmUgYW5kIHNwbGl0IGludG8gc21hbGxlciBwYXJ0cy4NCkl0IHdvdWxkIGJlIGdvb2Qs
-IGlmIHNvbWVvbmUgb24gdGhpcyBsaXN0IGNvdWxkIGdvIG92ZXIgaHR0cHM6Ly93aWtpLnhlbnBy
-b2plY3Qub3JnL3dpa2kvQ2F0ZWdvcnk6U2FmZXR5X0NlcnRpZmljYXRpb24jQXV0b21vdGl2ZV9S
-ZXF1aXJlbWVudHMgYW5kIG1hcCB0aGUgcmVxdWlyZW1lbnRzIHRvIGZ1bmN0aW9uYWxpdHkgd2Ug
-YWxyZWFkeSBoYXZlLiBUaGlzIGNvdWxkIHRoZW4gZmVlZCBpbnRvIGMuDQoNCkFueSB0YWtlcnM/
-DQoNCj4gQXJ0ZW0gc3VnZ2VzdGVkIHRvIHdyaXRlIGEgd2hpdGVwYXBlciBhYm91dCBYZW4gcmVh
-bC10aW1lIGNhcGFiaWxpdGllcy4NCj4gU3RlZmFubyB2b2x1bnRlZXJlZCB0byBoZWxwLg0KSSBi
-ZWxpZXZlIHdlIGhhdmUgc29tZSBnYXBzIHdpdGggcmVnYXJkcyB0byByZWFsLXRpbWUgcmVxdWly
-ZW1lbnRzIGFuZCB0aGF0IHBhcGVyIGlzIGFpbWluZyB0byBoaWdobGlnaHQgdGhlc2UuDQpAQXJ0
-ZW06IG1heWJlIHRoaXMgd291bGQgYmUgYSBzdWl0YWJsZSB0b3BpYyBmb3IgdGhlIGRldmVsb3Bl
-ciBzdW1taXQgKGFtb25nc3Qgb3RoZXJzKQ0KQXMgYSByZW1pbmRlcjogdGhlIENmUCBmb3IgdGhl
-IHN1bW1pdCBjbG9zZXMgbmV4dCBGcmlkYXkNCg0KPiBJIGNvbnRhY3RlZCBMYXJzIChDQydlZCkg
-d2hvIHZvbHVudGVlcmVkIHRvIGhlbHAuDQpJIGFtIHZvbHVudGVlcmluZyB0byBhY3QgYXMgYSBw
-cm9ncmFtL3Byb2plY3QgbWFuYWdlciBmb3IgdGhpcyBhY3Rpdml0eS4gSW4gcGFydGljdWxhciB0
-byBib290c3RyYXAuDQoNCkkgdGhpbmsgdGhlIG9ubHkgcHJhY3RpY2FibGUgd2F5IHRvIG1ha2Ug
-cHJvZ3Jlc3MgaW4gdGhpcyBhcmVhLCBpcyB0byBzZXQgdXAgc29tZSBtZWNoYW5pc20gd2hpY2gg
-YWxsb3cgdXMgdG8gbWFrZSBwcm9ncmVzcyB0b3dhcmRzIHRoZSBnb2FsIG9mIG1ha2luZyBpdCBl
-YXNpZXIgYW5kIGNoZWFwZXIgdG8gYnVpbGQgc2FmZXR5IGNlcnRpZmllZCB2YXJpYW50cyBvZiBY
-ZW4uIEFzIGEgc2lkZS1lZmZlY3Qgb2YgdGhpcyBwcm9jZXNzIHdlIHNob3VsZCBnZXQgZGF0YSwg
-dG8gc2NvcGUgb3V0IHRoZSBzY2FsZSBvZiB0aGUgcHJvYmxlbSBmdXJ0aGVyLCB0aGF0IHNob3Vs
-ZCBlbmFibGUgZ2V0dGluZyBtb3JlIHZlbmRvcnMgaW50ZXJlc3RlZC4gDQogICAgDQo+IFRoZSBt
-YWluIHRvcGljIG9mIHRoZSBtZWV0aW5nIHdhcyBjZXJ0aWZpY2F0aW9ucyBmb3IgWGVuIG9uIEFS
-TS4gVGhlIGdhcA0KPiBhbmFseXNpcyBkb2N1bWVudCwgbWVudGlvbmVkIGluIHRoZSBwcmV2aW91
-cyBjYWxsLCBpcyBjb3B5cmlnaHRlZC4gSXQNCj4gbWlnaHQgbm90IGJlIHBvc3NpYmxlIHRvIHJl
-bGljZW5zZSBpdC4gUmVnYXJkbGVzcyBvZiB0aGUgZG9jdW1lbnQsIHdlDQo+IHN0YXJ0ZWQgZGlz
-Y3Vzc2luZyB0aGUgbWFqb3Igd29yayBpdGVtcyBhbmQgbmV4dCBzdGVwcy4NCg0KQFN0ZWZhbm86
-IFRoYW5rcyBmb3IgZHJpdmluZyB0aGlzIGRpc2N1c3Npb24NCkkgcmUtb3JkZXJlZCBzb21lIG9m
-IHRoZSBpdGVtcywgdG8gbWFrZSBpdCBtb3JlIHBhbGF0YWJsZQ0KDQo+IDIpIENyZWF0ZSBhIHN1
-YnNldCBvZiBmdW5jdGlvbnMgdGhhdCBuZWVkIHRvIGdvIHRocm91Z2ggY2VydGlmaWNhdGlvbnMN
-Cj4gTmV4dCBzdGVwOiBjcmVhdGUgYSBzbWFsbCBLY29uZmlnLiBXZSBjb3VsZCB1c2UgdGhlIFJl
-bmVzYXMgUmNhciBhcw0KPiByZWZlcmVuY2UuIFdlIG5lZWQgYSBkaXNjdXNzaW9uIGFib3V0IHRo
-ZSBmZWF0dXJlcyB3ZSBuZWVkLCBmb3IgZXhhbXBsZQ0KPiByZWFsLXRpbWUgc2NoZWR1bGVycywg
-ZG8gd2UgbmVlZCB0aGVtIG9yIG5vdD8NCg0KQFN0ZWZhbm8gYWdyZWVkIHRvIGRyaXZlIHRoaXMu
-DQpUaGUgbWluaW1hbCBjb25maWd1cmF0aW9uIGRvZXMgaW1wYWN0IDEgYW5kIDIsIHdoaWNoIGlz
-IHdoeSBJIG1vdmVkIHRoaXMgZmlyc3QuDQoNCldlIHNob3VsZCBwcm9iYWJseSBhZ3JlZSBhIGJh
-c2ljIHByb2Nlc3M6IGFrYQ0KKiBNZWFzdXJlIGJhc2VsaW5lIHNpemUgaW4gS1NMT0MNCiogUmVt
-b3ZlIHNvbWUgZmVhdHVyZQ0KKiBNZWFzdXJlIHJlZHVjdGlvbiBpbiBLU0xPQw0KQW5kIHJlY29y
-ZCB0aGUgZGF0YSBzb21ld2hlcmUgDQogDQo+IDEpIFJlcXVpcmVtZW50cyB0byB0aGUgY29kZSwg
-YSBzdWJzZXQgb2YgTUlTUkEgZm9yIEFTSUwgQg0KPiBOZXh0IHN0ZXA6IGdldCBtb3JlIGluZm9y
-bWF0aW9uIGFib3V0IHJlcXVpcmVtZW50cyBhbmQgcHVibGlzaCBpdCB0bw0KPiB4ZW4tZGV2ZWwu
-DQoNCkkgc2VlIGEgZmV3IHByb2JsZW1zIGhlcmU6DQoNCiogVGhlIE1JU0NSQSAyMDEyIHNwZWMg
-aGFzIHRvIGJlIGJvdWdodCBhbmQgaXQgaXMgcmF0aGVyIGJpZyAoMTAwJ3Mgb2YgcGFnZXMpOiAN
-CnNvLCBJIGRvbid0IHRoaW5rIGl0IGlzIHByYWN0aWNhbCB0byB3b3JrIGZyb20gdGhlIHNwZWMN
-Cg0KKiBTb21lIGNvZGluZyBzdHlsZSBwYXR0ZXJucyB3aWxsIGxpa2VseSBiZSBwZXJjZWl2ZWQg
-YXMgb2RkIGFuZCB1bnJlYXNvbmFibGUgDQpieSBjb21tdW5pdHkgbWVtYmVyczogYXMgc29tZSBj
-b21tb24gY29kZSB3b3VsZCBiZSBhZmZlY3RlZCB3ZSBjYW5ub3QgDQp0cmVhdCB0aGlzIGluIGlz
-b2xhdGlvbiBzYXkgb24gQVJNIG9ubHkuIEFsdGhvdWdoIGl0IGlzIHJlY29nbml6ZWQgdGhhdCBz
-b21lIG9mIA0KdGhlIGNvZGluZyBzdHlsZSBwYXR0ZXJucyBtYXkgbm90IG1ha2Ugc2Vuc2UsIGNv
-bXBsaWFuY2UgdG8gTUlTUkEgaXMgDQpuZWNlc3NhcnkgYW5kIGNhbm5vdCBub3JtYWxseSBiZSBk
-aXNjdXNzZWQgYXdheS4NCg0KKiBQUlFBIGhhcyBzZXQgdXAgYW4gZW52aXJvbm1lbnQgYW5kIGlu
-aXRpYWwgTUlTUkEgY29tcGxpYW5jZSByZXBvcnQgZm9yIGEgWGVuIG9uIEFSTSBidWlsZCANCioq
-IFRoZSBxdWVzdGlvbiBpcyB3aGF0IChpZiBhbnl0aGluZykgY2FuIGJlIHNoYXJlZCBwdWJsaWNs
-eQ0KKiogVGhlIG90aGVyIG9wZW4gcXVlc3Rpb24gaXMgd2hldGhlciB3ZSBjYW4gY29tZSB0byBz
-b21lIHNvcnQgb2YgbG9uZ2VyIHRlcm0gYWdyZWVtZW50IGJldHdlZW4gdGhlIFhlbiBQcm9qZWN0
-IGFuZCBQUlFBIHRvIHVzZSB0aGVpciB0b29scw0KKiogQXMgYW4gYXNpZGUsIHdoYXQgUFJRQSBo
-YXZlIGRvbmUgd291bGQgbmVlZCB0byByZWZsZWN0IHdoYXQgd2UgZG8gaW4gc3RlcCAyIGlzLiBX
-ZSBhbHNvIHdhbnQgdG8gbWluaW1pemUgdGhlIHdvcmsgZm9yIFBSUUE6IGluIG90aGVyIHdvcmRz
-LCBpdCBoYXMgdG8gYmUgdmVyeSBzaW1wbGUgdG8gZW5hYmxlIHRoZSBtaW5pbWFsIGNvbmZpZyBj
-b21pbmcgb3V0IG9mIHRhc2sgMiBzdWNoIHRoYXQgUFJRQSBjYW4gDQoqKiBBcyBmYXIgYXMgSSBy
-ZWNhbGwgOTAlIG9mIGFsbCBNSVNSQSB2aW9sYXRpb25zIGNvbWUgZG93biB0byBhcm91bmQgNzAg
-aXNzdWVzLiBBIGxhcmdlIG51bWJlciBhcmUgaW4gdG9vbHMNCioqIEFsc28sIEkgYmVsaWV2ZSB0
-aGF0IE1JU1JBIGNvbXBsaWFuY2UgdG9vbHMgd2lsbCBsaWtlbHkgbGVhZCB0byBhIGxhcmdlIGFt
-b3VudCBvZiBmYWxzZSBwb3NpdGl2ZXMsIGR1ZSB0byB0aGUgZGlzdHJpYnV0ZWQgbmF0dXJlIG9m
-IFhlbjogcHJvY2VzcyBib3VuZGFyaWVzLCBrZXJuZWwvdXNlciBzcGFjZSBib3VuZGFyaWVzLCBl
-dGMuIHdvdWxkIGFsbCBsZWFkIHRvIGZhbHNlIHBvc2l0aXZlcywgd2hpY2ggc29tZWhvdyBoYXZl
-IHRvIGJlIG1hbmFnZWQuDQoNCkFDVElPTiA9PiBMYXJzIHRvIGZvbGxvdyB1cCB3aXRoIFBhdWwg
-THVwZXJ0byBmcm9tIFBSUUENCg0KKiBBbiBhcHByb2FjaCB0aGF0IG1heSBiZSBtYW5hZ2VhYmxl
-IHdvdWxkIGJlIHRvIGxvb2sgYXQgdGhlIG1vc3QgY29tbW9uIE1JU1JBIHZpb2xhdGlvbnMgYW5k
-IHdvcmsgYmFja3dhcmRzIGZyb20gdGhlcmUuIA0KKiogVGhpcyB3b3VsZCBtYWtlIHRoZSBwcm9i
-bGVtIG1vcmUgbWFuYWdlYWJsZSBhbmQgbWVhbiBwZW9wbGUgd291bGRuJ3QgaGF2ZSB0byByZWFk
-IGEgbG9uZyBzcGVjDQoqKiBEaXNjdXNzaW5nIGEgc21hbGwgc2V0IG9mIGlzc3Vlcywgd291bGQg
-Z2l2ZSB1cyBhIHNlbnNlIG9mIHdoZXRoZXIvd2hhdCB0eXBlIG9mIGRpc2FncmVlbWVudHMgdGhl
-cmUgYXJlIGFuZCBob3cgd2UgcmVzb2x2ZSB0aGVtLiANCioqIFdlIHNob3VsZCBmb2N1cyBwcmlv
-cml0aXplIGJhc2VkIG9uOg0KYSkgQWRkcmVzcy9kaXNjdXNzIHRoZSBtb3N0IGZyZXF1ZW50bHkg
-b2NjdXJyaW5nIGlzc3VlcyBmaXJzdA0KYikgQWRkcmVzcy9kaXNjdXNzIGlzc3VlcyBpbiBjb21t
-b24gY29kZSBmaXJzdCANCg0KQXQgdGhlIHZlcnkgbGVhc3QgKGFuZCBmb3Igbm93IGluIGFic2Vu
-Y2Ugb2YgdGhlIGNhcGFiaWxpdHkgdG8gY2hlY2sgY29tcGxpYW5jZSksIEkgd291bGQgbmVlZCBz
-b21lb25lIHdobyBoYXMgYWNjZXNzIHRvIE1JU1JBIGNvbXBsaWFuY2UgdG9vbHMsIHRvIGRyaXZl
-IHN1Y2ggYW4gZWZmb3J0Lg0KDQo+IDMpIFVuZGVyc3RhbmQgaG93IHRvIGFkZHJlc3MgZG9tMC4g
-RnJlZVJUT1MgRG9tMCBzb3VuZHMgbGlrZSBhIGdvb2QNCj4gc29sdXRpb24uDQo+IE5leHQgc3Rl
-cDogcmVhY2ggb3V0IHRvIERvcm5lcndvcmtzIGFuZC9vciBvdGhlcnMgdGhhdCB3b3JrZWQgd2l0
-aA0KPiBGcmVlUlRPUyBvbiBYZW4gYmVmb3JlLiBGaWd1cmUgb3V0IHdoZXRoZXIgRnJlZVJUT1Mg
-aXMgYWN0dWFsbHkgYQ0KPiBzdWl0YWJsZSBzb2x1dGlvbiBhbmQgd2hhdCBuZWVkcyB0byBiZSBk
-b25lIHRvIHJ1biBGcmVlUlRPUyBhcyBEb20wLg0KDQpTb21lIHRoaW5ncyB0byBjaGVjayBhdCB0
-aGlzIHN0YWdlOg0KYSkgSSBiZWxpZXZlIHRoZXJlIGlzIGEgc2FmZXR5IGNlcnRpZmllZCB2ZXJz
-aW9uIG9mIEZyZWVSVE9TIC0gSSBjb3VsZCBub3QgZmluZCBtdWNoLCBleGNlcHQgZm9yIGh0dHBz
-Oi8vd3d3LmZyZWVydG9zLm9yZy9GcmVlUlRPUy1QbHVzL1NhZmV0eV9Dcml0aWNhbF9DZXJ0aWZp
-ZWQvU2FmZVJUT1MtU2FmZXR5LUNyaXRpY2FsLUNlcnRpZmljYXRpb24uc2h0bWwgLSB3aGljaCBk
-ZXNjcmliZXMgU2FmZVJUT1MgYSBjb21tZXJjaWFsIHNhZmV0eSBjZXJ0aWZpZWQgRnJlZVJUT1Mg
-YW5kIChtb3N0bHkpIEFQSSBjb21wbGlhbnQgdmVyc2lvbiBvZiBGcmVlUlRPUy4gT3IgYW0gSSBt
-aXNzaW5nIHNvbWV0aGluZyBoZXJlPw0KYikgVGhlcmUgaXMgYSBEb21VIGNhcGFibGUgdmVyc2lv
-biBmcm9tIEdhbG9pcyAoSm9uYXRoYW4gRG9jaGVydHkgQ0MnZWQpIC0gSSBkb24ndCBrbm93IHdo
-ZXRoZXIgb3RoZXJzIGFsc28gaGF2ZSBzdWNoIHZlcnNpb25zDQpjKSBUaGVyZSBpcyBhIFBPWElY
-IHdyYXBwZXIsIHdoaWNoIG1heSBiZSBuZWVkZWQsIGJ1dCBpdCBpcyB1bmNsZWFyIHdoYXQgdGhp
-cyB3b3VsZCBkbyB0byB0aGUgRnJlZVJUT1MgZm9vdHByaW50DQpkKSBJbiBvdGhlciB3b3Jkcywg
-d2hhdCB3ZSB3b3VsZCBoYXZlIHRvIGRvIGlzIHRvIGludmVzdGlnYXRlIHdoZXRoZXIgaXQgaXMg
-cG9zc2libGUgdG8gYnVpbGQgdG8gYSBEb20wIGNhcGFibGUgRnJlZVJUT1MNCg0KSSBzZWUgc2V2
-ZXJhbCB3YXlzIG9mIGFwcHJvYWNoaW5nIHRoaXM6DQphKSBBIHZlbmRvciAob3IgZ3JvdXBzIG9m
-IHZlbmRvcnMpIG9uIHRoaXMgbGlzdCBzdGVwcyB1cCANCmIpIFdlIGdvIGluaXRpYWxseSBmb3Ig
-YSBsb3dlciBiYXI6IGFrYSB3ZSB0cnkgYW5kIHNjb3BlIG91dCBhbmQgY29zdCB0aGUgY3JlYXRp
-b24gb2YgYSBEb20wIGNhcGFibGUgRnJlZVJUT1MgYW5kIHRoZW4gbG9vayBhdCBob3cgdGhlIHdv
-cmsgY2FuIGdldCBmdW5kZWQNCg0KQSB2ZXJ5IGdvb2Qgc3RhcnRpbmcgcG9pbnQgd291bGQgYmUg
-dG8gZ2V0IGEgbGlzdCBvZiBwYXJ0aWVzIHRoYXQgYXJlIGludGVyZXN0ZWQgaW4gaGF2aW5nIGFu
-ZCB1c2luZyBhIEZyZWVSVE9TIGJhc2VkIERvbTAgKHJlZ2FyZGxlc3Mgb2YgaG93IHdlIGdldCB0
-aGVyZSkuIEEgc2hvdyBvZiBoYW5kcyB3b3VsZCBiZSBnb29kLiANClNvbWUgaW5zaWdodHMgZnJv
-bSBhbnlvbmUgb24gdGhlIEZyZWVSVE9TL1NhZmVSVE9TIHJlbGF0aW9uc2hpcCBhbmQgcG9saXRp
-Y3Mgd291bGQgYmUgZ29vZCBhbHNvLiBVbmxlc3MgdGhlcmUgaXMgYSByb3V0ZSBmcm9tIEZyZWVS
-VE9TIHVwc3RyZWFtIHRvIHRoZSBjZXJ0aWZpZWQgdmVyc2lvbiwgc29tZW9uZSBpbiBvdXIgZWNv
-LXN5c3RlbSB3b3VsZCBoYXZlIHRvIHNhZmV0eSBjZXJ0aWZ5IEZyZWVSVE9TICh3aGljaCBtYXkg
-bm90IGJlIHN1Y2ggYSBiaWcgZGVhbCBnaXZlbiB0aGUgZmFpcmx5IHNtYWxsIHNpemUgb2YgRnJl
-ZVJUT1MpLg0KICAgIA0KPiA0KSBDcmVhdGUgYXJ0aWZhY3RzLCBzdWNoIGFzIGRvY3MsIGZhdWx0
-IGFuYWx5c2lzLCBwcm92ZSBmYXVsdCB0b2xlcmFuY2UsDQo+IHNhZmV0eSBtYW5hZ2VtZW50IGRv
-Y3MsIGRldmVsb3BtZW50IHByb2Nlc3Nlcy4NCj4gTmV4dCBzdGVwOiB3ZSBuZWVkIHRvIGJyaW5n
-IGluIGEgY29tcGFueSwgYSBjZXJ0aWZpY2F0aW9uIGJvZHksIHRvIGd1aWRlDQo+IHVzIHRocm91
-Z2ggdGhlIHByb2Nlc3MuDQoNCldlIGhhdmUgY29tcGFuaWVzIHN1Y2ggYXMgRG9ybmVyd29ya3Mg
-b24gdGhpcyBsaXN0IHdoaWNoIGFyZSBleHBlcmllbmNlZCB3aXRoIHNhZmV0eSBjZXJ0aWZpY2F0
-aW9uIG9uIFhlbiBmb3Igc29tZSBzYWZldHkgc3RhbmRhcmRzOiBpdCBpcyBub3QgY2xlYXIgdG8g
-bWUgaG93IG11Y2ggb2YgdGhpcyBpcyB0cmFuc2ZlcmFibGUgdG8gYXV0b21vdGl2ZS4gDQoNCkhl
-cmUgbXkgdW5kZXJzdGFuZGluZyBpcyB0aGF0IHdlIG5lZWQgYSBjZXJ0aWZpY2F0aW9uIHBhcnRu
-ZXIgbGlrZSBUw5xWLCBNSVJBIG9yIGEgY29tcGFueSBsaWtlIERvcm5lcndvcmtzIHdobyBhbHJl
-YWR5IGhhdmUgZXhwZXJpZW5jZSB3aXRoIFhlbi4gQnkgd29ya2luZyB3aXRoIGEgcGFydG5lciBl
-eHBlcmllbmNlZCBpbiBjZXJ0aWZpY2F0aW9uLCB0aGUgb3ZlcmFsbCBjb3N0IG9mIGNlcnRpZmlj
-YXRpb24gd291bGQgYmUgc2lnbmlmaWNhbnRseSByZWR1Y2VkLiBUaGUgZWxlcGhhbnQgaW4gdGhl
-IHJvb20gaXMgZnVuZGluZyBhbmQgYSBidXNpbmVzcyBtb2RlbCAoYWthIGFsbCB0aGUgaXRlbXMg
-bGlzdGVkIGluIGh0dHBzOi8vZG9jcy5nb29nbGUuY29tL2RvY3VtZW50L2QvMUhwWXpDbGgwbkRF
-b2NzVUhiMTdYMER4aWVoc0FiQ2d5V0UtUDJXa19STlUvZWRpdCBzZWN0aW9uIDQuMSkuIFRoZSBy
-ZWFsaXR5IGlzIHRoYXQgb3JnYW5pc2F0aW9ucyBzdWNoIGFzIFTDnFYsIE1JUkEsIERvcm5lcndv
-cmtzLCAuLi4gd2lsbCBuZWVkIHRvIGJlIHBhaWQgYnkgc29tZW9uZS4gV2hpY2gsIEkgdGhpbmsg
-d2UgbmVlZCB0byBwYXJrIGZvciBub3cuDQoNCldoYXQgSSB0aGluayBhcmUgc2Vuc2libGUgZ29h
-bHMgZm9yIG5vdyBhcmUNCmEpIEVzdGFibGlzaCBhIGxpc3Qgb2YgcG90ZW50aWFsIHBhcnRuZXJz
-IGFuZCBzdGFydCBlc3RhYmxpc2hpbmcgY29udGFjdHMgLSBzdWNoIGNvbnZlcnNhdGlvbnMgd291
-bGQgbmVlZCB0byBiZSBsZWQgYnkgYSB2ZW5kb3IsIG90aGVyd2lzZSBpdCB3aWxsIGdvIG5vd2hl
-cmUuIFdoYXQgd291bGQgYmUgZ29vZCB0aG91Z2ggaXMgdG8gaGF2ZSBhIHNoYXJlZCAoYnV0IHBv
-c3NpYmx5IHByaXZhdGUpIHJlcG9zaXRvcnkgb2YgaG93IHRoZXNlIGNvbnZlcnNhdGlvbnMgaGF2
-ZSBnb25lLg0KYikgT3RoZXJ3aXNlIGZvY3VzIG9uIHRhc2tzIDEtMyB3aGljaCBkZWFsIHdpdGgg
-c29tZSBpc3N1ZXMgbGlzdGVkIGluIGh0dHBzOi8vd3d3LnNsaWRlc2hhcmUubmV0L3hlbl9jb21f
-bWdyL2FydC1jZXJ0aWZpY2F0aW9uLCB3aGljaCBpcyBzdGlsbCB2ZXJ5IHZhbGlkDQpjKSBFbmdh
-Z2Uvd29yayB3aXRoIHdpdGggb3RoZXIgZ3JvdXBzIChBR0wsIEdlbml2aSwgTGluYXJvKSB3aG8g
-YXJlIGFsc28gbG9va2luZyBhdCB0aGlzIHByb2JsZW0NCg0KSXQgbWF5IGJlIHdvcnRoIGluIHRo
-ZSBtaWQtdGVybSB0byBjb25zaWRlciBzb21lIHNvcnQgb2YgcGlsb3QgYXJvdW5kIGEgc21hbGwg
-cG9ydGlvbiBvZiB0aGUgWGVuIGNvZGViYXNlOiB0aGUgYWltIHdvdWxkIGJlIHRvIGdhdGhlciBk
-YXRhIHRoYXQgaGVscHMgZXN0YWJsaXNoIHdoYXQgY2FuIGJlIGRvbmUgaW4gYSBjb2xsYWJvcmF0
-aXZlIEZPU1MgZW52aXJvbm1lbnQuIA0KDQpGZWVkYmFjay92aWV3cyBhcmUgdmVyeSB3ZWxjb21l
-DQoNClJlZ2FyZHMNCkxhcnMNCg0KICAgIA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+
+--===============4629433374245628072==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="VnOTrGv5LmZxna7m"
+Content-Disposition: inline
+
+
+--VnOTrGv5LmZxna7m
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Apr 06, 2018 at 09:56:05AM -0400, Boris Ostrovsky wrote:
+> On 04/06/2018 09:41 AM, Wei Liu wrote:
+> > On Fri, Apr 06, 2018 at 09:39:50AM -0400, Boris Ostrovsky wrote:
+> >> On 04/06/2018 09:07 AM, Wei Liu wrote:
+> >>> On Fri, Apr 06, 2018 at 08:39:53AM -0400, Boris Ostrovsky wrote:
+> >>>> On 04/04/2018 09:50 PM, Marek Marczykowski-G=C3=B3recki wrote:
+> >>>>> gcc-8 complains:
+> >>>>>
+> >>>>>     kdd.c:698:13: error: 'memcpy' offset [-204, -717] is out of the=
+ bounds [0, 216] of object 'ctrl' with type 'kdd_ctrl' {aka 'union <anonymo=
+us>'} [-Werror=3Darray-bounds]
+> >>>>>                  memcpy(buf, ((uint8_t *)&ctrl.c32) + offset, len);
+> >>>>>                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >>>>>     kdd.c: In function 'kdd_select_callback':
+> >>>>>     kdd.c:642:14: note: 'ctrl' declared here
+> >>>>>          kdd_ctrl ctrl;
+> >>>>>                   ^~~~
+> >>>>>
+> >>>>> But this is impossible - 'offset' is unsigned and correctly validat=
+ed
+> >>>>> few lines before.
+> >>>>>
+> >>>>> Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblet=
+hingslab.com>
+> >>>>> ---
+> >>>>>  tools/debugger/kdd/kdd.c | 3 +++
+> >>>>>  1 file changed, 3 insertions(+)
+> >>>>>
+> >>>>> diff --git a/tools/debugger/kdd/kdd.c b/tools/debugger/kdd/kdd.c
+> >>>>> index 1bd5dd5..61d769e 100644
+> >>>>> --- a/tools/debugger/kdd/kdd.c
+> >>>>> +++ b/tools/debugger/kdd/kdd.c
+> >>>>> @@ -695,7 +695,10 @@ static void kdd_handle_read_ctrl(kdd_state *s)
+> >>>>>              KDD_LOG(s, "Request outside of known control space\n");
+> >>>>>              len =3D 0;
+> >>>>>          } else {
+> >>>>> +#pragma GCC diagnostic push
+> >>>>> +#pragma GCC diagnostic ignored "-Warray-bounds"
+> >>>>>              memcpy(buf, ((uint8_t *)&ctrl.c32) + offset, len);
+> >>>>> +#pragma GCC diagnostic pop
+> >>>>>          }
+> >>>>>      }
+> >>>>> =20
+> >>>> Breaks 32-bit build, at least with my (ancient, gcc version 4.4.5
+> >>>> 20101112 (Red Hat 4.4.5-2) (GCC)) compiler:
+> >>>>
+> >>>>
+> >>>>
+> >>>> kdd.c: In function =E2=80=98kdd_handle_read_ctrl=E2=80=99:
+> >>>> kdd.c:698: error: #pragma GCC diagnostic not allowed inside functions
+> >>>> kdd.c:699: error: #pragma GCC diagnostic not allowed inside functions
+> >>>> kdd.c:701: error: #pragma GCC diagnostic not allowed inside functions
+> >>>> make[5]: *** [kdd.o] Error 1
+> >>>>
+> >>> Does moving the relevant #pragma's outside of the function fix it?
+> >> The additional problem with these pragmas is that apparently push/pop
+> >> have been introduced in gcc 4.6.0:
+> >>
+> >> https://gcc.gnu.org/onlinedocs/gcc-4.6.0/gcc/Diagnostic-Pragmas.html#D=
+iagnostic-Pragmas
+> >>
+> >> If you change release number to a lower one (e.g. 4.5.4) you won't see=
+ them.
+> >>
+> >> So I can move "diagnostic ignored" from inside the function and that
+> >> will clear the "GCC diagnostic not allowed inside functions" error. But
+> >> then push/pop are not recognized:
+> >>
+> >> cc1: warnings being treated as errors
+> >> kdd.c:639: error: expected [error|warning|ignored] after =E2=80=98#pra=
+gma GCC
+> >> diagnostic=E2=80=99
+> >> kdd.c:714: error: expected [error|warning|ignored] after =E2=80=98#pra=
+gma GCC
+> >> diagnostic=E2=80=99
+> >>
+> >> (Interestingly, my 64-bit build completed without issues)
+> > Hmm... this is messy.
+> >
+> > If you have information about which version does what we can try to
+> > enclose the #pragma's with #if __GCC__.
+>=20
+>=20
+> Can we instead pre-compute the pointer to pacify the compiler? I haven't
+> seen the original error so I can't test it, but something like
+
+Nope, it doesn't help. But adding "if (offset > 0)" before that "+=3D
+offset" does...=20
+For me it looks like a gcc bug. Not sure how to deal with this. Enclose
+#pragma with #if __GNUC__ >=3D 8 ?
+
+> diff --git a/tools/debugger/kdd/kdd.c b/tools/debugger/kdd/kdd.c
+> index 61d769e..1b048ac 100644
+> --- a/tools/debugger/kdd/kdd.c
+> +++ b/tools/debugger/kdd/kdd.c
+> @@ -688,6 +688,7 @@ static void kdd_handle_read_ctrl(kdd_state *s)
+> =C2=A0=C2=A0=C2=A0=C2=A0 } else {
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* 32-bit control-regist=
+er space starts at 0x[2]cc, for 84 bytes */
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint64_t offset =3D addr;
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 void *ptr =3D &ctrl.c32;
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (offset > 0x200)
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+offset -=3D 0x200;
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 offset -=3D 0xcc;
+> @@ -695,10 +696,8 @@ static void kdd_handle_read_ctrl(kdd_state *s)
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+KDD_LOG(s, "Request outside of known control space\n");
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+len =3D 0;
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else {
+> -#pragma GCC diagnostic push
+> -#pragma GCC diagnostic ignored "-Warray-bounds"
+> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 memcp=
+y(buf, ((uint8_t *)&ctrl.c32) + offset, len);
+> -#pragma GCC diagnostic pop
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ptr +=
+=3D offset;
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 memcp=
+y(buf, ptr, len);
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+> =C2=A0=C2=A0=C2=A0=C2=A0 }
+> =C2=A0
+> -boris
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--VnOTrGv5LmZxna7m
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlrHhQoACgkQ24/THMrX
+1yzrbAf9H7+yxJkH9fgjsvbY/Hxc7gL6XTj6dV6u19nBr8QKSir0WtRGEOIYNSEk
+hzJOkuuFHCs4X2Z4R9hmoWD+ouZEkfrfCnaJABM4n+DFXCvO351qpXcgxbOkFm0+
+pIWmNQqVzXi4IBFu5LltpGR26faYYhglO0nZLp11XNq6/YIFPoDV0NY29XYju87N
+Ql57Pm1zT/i35lvL4F7162JuSb58HOaXcqlQMldCHrWhdAJYAR/ouQP5U4lWVumz
+wkz0ECdMYGkH+akXfP/nKlz9loYlmspao5EmbkoFUzZDM8SFY7jUT14ZJLOFWpsR
+32aCldbS71GQIZcEijcq/EdDS+5LGQ==
+=PlSq
+-----END PGP SIGNATURE-----
+
+--VnOTrGv5LmZxna7m--
+
+
+--===============4629433374245628072==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4629433374245628072==--
