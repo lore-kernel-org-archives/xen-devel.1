@@ -1,15 +1,15 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH 7/7] tools/kdd: mute spurious gcc warning
-Date: Fri, 6 Apr 2018 08:39:53 -0400
-Message-ID: <3b81cb5f-4f64-4626-d105-bd58766807d0@oracle.com>
-References: <cover.c71341b28191a3808896e82914eb11c1472687b2.1522893038.git-series.marmarek@invisiblethingslab.com>
- <5888eecca0c8de49a455b2ce9722760a3dbdf4d0.1522893038.git-series.marmarek@invisiblethingslab.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 121971: regressions - FAIL
+Date: Fri, 06 Apr 2018 12:51:12 +0000
+Message-ID: <osstest-121971-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1480785833899109285=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5888eecca0c8de49a455b2ce9722760a3dbdf4d0.1522893038.git-series.marmarek@invisiblethingslab.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=+rjf=g3=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f4Qpn-0002ea-Jl
+ for xen-devel@lists.xenproject.org; Fri, 06 Apr 2018 12:51:15 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,41 +18,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org
-Cc: Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMDQvMjAxOCAwOTo1MCBQTSwgTWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyb3Rl
-Ogo+IGdjYy04IGNvbXBsYWluczoKPgo+ICAgICBrZGQuYzo2OTg6MTM6IGVycm9yOiAnbWVtY3B5
-JyBvZmZzZXQgWy0yMDQsIC03MTddIGlzIG91dCBvZiB0aGUgYm91bmRzIFswLCAyMTZdIG9mIG9i
-amVjdCAnY3RybCcgd2l0aCB0eXBlICdrZGRfY3RybCcge2FrYSAndW5pb24gPGFub255bW91cz4n
-fSBbLVdlcnJvcj1hcnJheS1ib3VuZHNdCj4gICAgICAgICAgICAgICAgICBtZW1jcHkoYnVmLCAo
-KHVpbnQ4X3QgKikmY3RybC5jMzIpICsgb2Zmc2V0LCBsZW4pOwo+ICAgICAgICAgICAgICAgICAg
-Xn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+ICAgICBr
-ZGQuYzogSW4gZnVuY3Rpb24gJ2tkZF9zZWxlY3RfY2FsbGJhY2snOgo+ICAgICBrZGQuYzo2NDI6
-MTQ6IG5vdGU6ICdjdHJsJyBkZWNsYXJlZCBoZXJlCj4gICAgICAgICAga2RkX2N0cmwgY3RybDsK
-PiAgICAgICAgICAgICAgICAgICBefn5+Cj4KPiBCdXQgdGhpcyBpcyBpbXBvc3NpYmxlIC0gJ29m
-ZnNldCcgaXMgdW5zaWduZWQgYW5kIGNvcnJlY3RseSB2YWxpZGF0ZWQKPiBmZXcgbGluZXMgYmVm
-b3JlLgo+Cj4gU2lnbmVkLW9mZi1ieTogTWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIDxtYXJt
-YXJla0BpbnZpc2libGV0aGluZ3NsYWIuY29tPgo+IC0tLQo+ICB0b29scy9kZWJ1Z2dlci9rZGQv
-a2RkLmMgfCAzICsrKwo+ICAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspCj4KPiBkaWZm
-IC0tZ2l0IGEvdG9vbHMvZGVidWdnZXIva2RkL2tkZC5jIGIvdG9vbHMvZGVidWdnZXIva2RkL2tk
-ZC5jCj4gaW5kZXggMWJkNWRkNS4uNjFkNzY5ZSAxMDA2NDQKPiAtLS0gYS90b29scy9kZWJ1Z2dl
-ci9rZGQva2RkLmMKPiArKysgYi90b29scy9kZWJ1Z2dlci9rZGQva2RkLmMKPiBAQCAtNjk1LDcg
-KzY5NSwxMCBAQCBzdGF0aWMgdm9pZCBrZGRfaGFuZGxlX3JlYWRfY3RybChrZGRfc3RhdGUgKnMp
-Cj4gICAgICAgICAgICAgIEtERF9MT0cocywgIlJlcXVlc3Qgb3V0c2lkZSBvZiBrbm93biBjb250
-cm9sIHNwYWNlXG4iKTsKPiAgICAgICAgICAgICAgbGVuID0gMDsKPiAgICAgICAgICB9IGVsc2Ug
-ewo+ICsjcHJhZ21hIEdDQyBkaWFnbm9zdGljIHB1c2gKPiArI3ByYWdtYSBHQ0MgZGlhZ25vc3Rp
-YyBpZ25vcmVkICItV2FycmF5LWJvdW5kcyIKPiAgICAgICAgICAgICAgbWVtY3B5KGJ1ZiwgKCh1
-aW50OF90ICopJmN0cmwuYzMyKSArIG9mZnNldCwgbGVuKTsKPiArI3ByYWdtYSBHQ0MgZGlhZ25v
-c3RpYyBwb3AKPiAgICAgICAgICB9Cj4gICAgICB9Cj4gIAoKCkJyZWFrcyAzMi1iaXQgYnVpbGQs
-IGF0IGxlYXN0IHdpdGggbXkgKGFuY2llbnQsIGdjYyB2ZXJzaW9uIDQuNC41CjIwMTAxMTEyIChS
-ZWQgSGF0IDQuNC41LTIpIChHQ0MpKSBjb21waWxlcjoKCgoKa2RkLmM6IEluIGZ1bmN0aW9uIOKA
-mGtkZF9oYW5kbGVfcmVhZF9jdHJs4oCZOgprZGQuYzo2OTg6IGVycm9yOiAjcHJhZ21hIEdDQyBk
-aWFnbm9zdGljIG5vdCBhbGxvd2VkIGluc2lkZSBmdW5jdGlvbnMKa2RkLmM6Njk5OiBlcnJvcjog
-I3ByYWdtYSBHQ0MgZGlhZ25vc3RpYyBub3QgYWxsb3dlZCBpbnNpZGUgZnVuY3Rpb25zCmtkZC5j
-OjcwMTogZXJyb3I6ICNwcmFnbWEgR0NDIGRpYWdub3N0aWMgbm90IGFsbG93ZWQgaW5zaWRlIGZ1
-bmN0aW9ucwptYWtlWzVdOiAqKiogW2tkZC5vXSBFcnJvciAxCgoKLWJvcmlzCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============1480785833899109285==
+Content-Type: text/plain
+
+flight 121971 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/121971/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 121876
+ build-armhf                   6 xen-build                fail REGR. vs. 121876
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ xen                  115fb8e345b9377b400b9e2e9bca1750362d284b
+baseline version:
+ xen                  451004603247205467ec34b366b4cfa3814a5d95
+
+Last test of basis   121876  2018-04-05 10:04:25 Z    1 days
+Failing since        121889  2018-04-05 13:02:10 Z    0 days    8 attempts
+Testing same since   121971  2018-04-06 10:01:23 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Juergen Gross <jgross@suse.com>
+  Julien Grall <julien.grall@arm.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Marcello Seri <marcello.seri@citrix.com>
+  Marcus of Wetware Labs <marcus@wetwa.re>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Petre Eftime <epetre@amazon.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 639 lines long.)
+
+
+--===============1480785833899109285==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1480785833899109285==--
