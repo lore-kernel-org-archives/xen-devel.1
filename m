@@ -1,23 +1,15 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH v3 0/5] sndif: add explicit back and front
- synchronization
-Date: Fri, 6 Apr 2018 12:18:39 +0300
-Message-ID: <835ef633-575c-63ec-e3b5-80d0f1dd4cf9__8621.12866384468$1523006252$gmane$org@gmail.com>
-References: <1521444144-12451-1-git-send-email-andr2000@gmail.com>
- <22b14d78-701d-f5c6-0b0b-b95b28bfe19c@suse.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 121960: regressions - FAIL
+Date: Fri, 06 Apr 2018 09:25:43 +0000
+Message-ID: <osstest-121960-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2825067378924223024=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=s0kp=g3=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1f4NW7-0000e8-Mh
- for xen-devel@lists.xenproject.org; Fri, 06 Apr 2018 09:18:43 +0000
-Received: by mail-wm0-x230.google.com with SMTP id g8so1900862wmd.2
- for <xen-devel@lists.xenproject.org>; Fri, 06 Apr 2018 02:18:42 -0700 (PDT)
-In-Reply-To: <22b14d78-701d-f5c6-0b0b-b95b28bfe19c@suse.com>
-Content-Language: en-US
+ <srs0=+rjf=g3=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f4Ncw-0001NC-L4
+ for xen-devel@lists.xenproject.org; Fri, 06 Apr 2018 09:25:46 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,61 +18,268 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, alsa-devel@alsa-project.org, xen-devel@lists.xenproject.org, konrad.wilk@oracle.com, tiwai@suse.de
-Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMDYvMjAxOCAxMjoxMyBQTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBPbiAxOS8wMy8x
-OCAwODoyMiwgT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gd3JvdGU6Cj4+IEZyb206IE9sZWtzYW5k
-ciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KPj4KPj4g
-SGVsbG8sIGFsbCEKPj4KPj4gSW4gb3JkZXIgdG8gcHJvdmlkZSBleHBsaWNpdCBzeW5jaHJvbml6
-YXRpb24gYmV0d2VlbiBiYWNrZW5kIGFuZAo+PiBmcm9udGVuZCB0aGUgZm9sbG93aW5nIGNoYW5n
-ZXMgYXJlIGludHJvZHVjZWQgaW4gdGhlIHByb3RvY29sOgo+PiAgIC0gYnVtcCBwcm90b2NvbCB2
-ZXJzaW9uIHRvIDIKPj4gICAtIGFkZCBuZXcgcmluZyBidWZmZXIgZm9yIHNlbmRpbmcgYXN5bmNo
-cm9ub3VzIGV2ZW50cyBmcm9tCj4+ICAgICBiYWNrZW5kIHRvIGZyb250ZW5kIHRvIHJlcG9ydCBu
-dW1iZXIgb2YgYnl0ZXMgcGxheWVkIGJ5IHRoZQo+PiAgICAgZnJvbnRlbmQgKFhFTlNORF9FVlRf
-Q1VSX1BPUykKPj4gICAtIGludHJvZHVjZSB0cmlnZ2VyIGV2ZW50cyBmb3IgcGxheWJhY2sgY29u
-dHJvbDogc3RhcnQvc3RvcC9wYXVzZS9yZXN1bWUKPj4gICAtIGFkZCAicmVxLSIgcHJlZml4IHRv
-IGV2ZW50LWNoYW5uZWwgYW5kIHJpbmctcmVmIHRvIHVuaWZ5IG5hbWluZwo+PiAgICAgb2YgdGhl
-IFhlbiBldmVudCBjaGFubmVscyBmb3IgcmVxdWVzdHMgYW5kIGV2ZW50cwo+PiAgIC0gYWRkIFhF
-TlNORF9PUF9IV19QQVJBTV9RVUVSWSByZXF1ZXN0IHRvIHJlYWQvdXBkYXRlCj4+ICAgICBzdHJl
-YW0gY29uZmlndXJhdGlvbiBzcGFjZTogcmVxdWVzdCBwYXNzZXMgZGVzaXJlZCBpbnRlcnZhbHMv
-Zm9ybWF0cyBmb3IKPj4gICAgIHRoZSBzdHJlYW0gcGFyYW1ldGVycyBhbmQgdGhlIHJlc3BvbnNl
-IHJldHVybnMgYWxsb3dlZCBpbnRlcnZhbHMgYW5kCj4+ICAgICBmb3JtYXRzIG1hc2sgdGhhdCBj
-YW4gYmUgdXNlZC4KPj4KPj4gQ2hhbmdlcyBzaW5jZSB2MjoKPj4gMS4gS29ucmFkJ3Mgci1iIHRh
-ZyBmb3IgdmVyc2lvbiBwYXRjaAo+PiAyLiBNQUpPUjogY2hhbmdlZCByZXEvcmVzcC9ldnQgcGFj
-a2V0IHNpemVzIGZyb20gMzIgdG8gNjQgb2N0ZXRzCj4+IDMuIFJld29ya2VkIFhFTlNORF9PUF9I
-V19QQVJBTV9RVUVSWSBzbyBpdCBub3cgc2VuZHMgYWxsCj4+ICAgICBwYXJhbWV0ZXJzIGF0IG9u
-Y2UsIGFsbG93aW5nIHRvIGNoZWNrIGFsbCB0aGUgY29uZmlndXJhdGlvbgo+PiAgICAgc3BhY2Uu
-Cj4+IDQuIE1pbm9yIGRvY3VtZW50YXRpb24gY2xlYW51cCAoYWRkZWQgbWlzc2VkICJyZXNlcnZl
-ZCIgZmllbGRzKQo+Pgo+PiBDaGFuZ2VzIHNpbmNlIHYxOgo+Pgo+PiAxLiBDaGFuZ2VkIHByb3Rv
-Y29sIHZlcnNpb24gZGVmaW5pdGlvbiBmcm9tIHN0cmluZyB0byBpbnRlZ2VyLAo+PiBzbyBpdCBj
-YW4gZWFzaWx5IGJlIHVzZWQgaW4gY29tcGFyaXNvbnMuCj4+IEtvbnJhZCwgSSBoYXZlIHJlbW92
-ZWQgeW91ciByLWIgdGFnIGZvciB0aGUgcmVhc29uIG9mIHRoaXMgY2hhbmdlLgo+Pgo+PiAyLiBJ
-biBvcmRlciB0byBwcm92aWRlIGV4cGxpY2l0IHN0cmVhbSBwYXJhbWV0ZXIgbmVnb3RpYXRpb24g
-YmV0d2Vlbgo+PiBiYWNrZW5kIGFuZCBmcm9udGVuZCB0aGUgZm9sbG93aW5nIGNoYW5nZXMgYXJl
-IGludHJvZHVjZWQgaW4gdGhlIHByb3RvY29sOgo+PiBhZGQgWEVOU05EX09QX0hXX1BBUkFNX1FV
-RVJZIHJlcXVlc3QgdG8gcmVhZC91cGRhdGUKPj4gY29uZmlndXJhdGlvbiBzcGFjZSBmb3IgdGhl
-IHBhcmFtZXRlciBnaXZlbjogcmVxdWVzdCBwYXNzZXMKPj4gZGVzaXJlZCBwYXJhbWV0ZXIgaW50
-ZXJ2YWwgKG1hc2spIGFuZCB0aGUgcmVzcG9uc2UgdG8gdGhpcyByZXF1ZXN0Cj4+IHJldHVybnMg
-bWluL21heCBpbnRlcnZhbCAobWFzaykgZm9yIHRoZSBwYXJhbWV0ZXIgdG8gYmUgdXNlZC4KPj4K
-Pj4gUGFyYW1ldGVycyBzdXBwb3J0ZWQgYnkgdGhpcyByZXF1ZXN0L3Jlc3BvbnNlOgo+PiAgIC0g
-Zm9ybWF0IG1hc2sKPj4gICAtIHNhbXBsZSByYXRlIGludGVydmFsCj4+ICAgLSBudW1iZXIgb2Yg
-Y2hhbm5lbHMgaW50ZXJ2YWwKPj4gICAtIGJ1ZmZlciBzaXplLCBpbnRlcnZhbCwgZnJhbWVzCj4+
-ICAgLSBwZXJpb2Qgc2l6ZSwgaW50ZXJ2YWwsIGZyYW1lcwo+Pgo+PiBPbGVrc2FuZHIgQW5kcnVz
-aGNoZW5rbyAoNSk6Cj4+ICAgIHNuZGlmOiBJbnRyb2R1Y2UgcHJvdG9jb2wgdmVyc2lvbgo+PiAg
-ICBzbmRpZjogRml4IG1pc3NlZCAicmVzZXJ2ZWQiIGZpZWxkcyBpbiBjb21tZW50cwo+PiAgICBz
-bmRpZjogTWFrZSByZXF1ZXN0cyBhbmQgcmVzcG9uc2VzIDY0IG9jdGV0cyBsb25nCj4+ICAgIHNu
-ZGlmOiBBZGQgZXhwbGljaXQgYmFjayBhbmQgZnJvbnQgc3luY2hyb25pemF0aW9uCj4+ICAgIHNu
-ZGlmOiBBZGQgZXhwbGljaXQgYmFjayBhbmQgZnJvbnQgcGFyYW1ldGVyIG5lZ290aWF0aW9uCj4+
-Cj4+ICAgeGVuL2luY2x1ZGUvcHVibGljL2lvL3NuZGlmLmggfCAzMjIgKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrLS0tCj4+ICAgMSBmaWxlIGNoYW5nZWQsIDMwNiBpbnNl
-cnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkKPj4KPiBXaXRoIEtvbnJhZCdzIGFjayB5b3UgY2Fu
-IGhhdmUgbXk6Cj4KPiBSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
-ZS5jb20+ClRoYW5rIHlvdQo+Cj4gZXZlbiBpZiB0aGUgY29tbWl0IGNhbid0IGJlIGRvbmUgYmVm
-b3JlIHRoZSBmcmVlemUuIFRoZSBoZWFkZXIgaXNuJ3QKPiB1c2VkIGluc2lkZSBYZW4gc28gdGhl
-IHJpc2sgZm9yIHRoZSByZWxlYXNlIGlzIHplcm8uClRoaXMgaXMgdHJ1ZQo+Cj4gSnVlcmdlbgpU
-aGFuayB5b3UsCk9sZWtzYW5kcgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+--===============2825067378924223024==
+Content-Type: text/plain
+
+flight 121960 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/121960/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 121876
+ build-armhf                   6 xen-build                fail REGR. vs. 121876
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ xen                  18d12056ccea435dca7fcbe2085fff15bca19046
+baseline version:
+ xen                  451004603247205467ec34b366b4cfa3814a5d95
+
+Last test of basis   121876  2018-04-05 10:04:25 Z    0 days
+Failing since        121889  2018-04-05 13:02:10 Z    0 days    7 attempts
+Testing same since   121920  2018-04-05 19:01:57 Z    0 days    5 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Juergen Gross <jgross@suse.com>
+  Julien Grall <julien.grall@arm.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit 18d12056ccea435dca7fcbe2085fff15bca19046
+Author: Julien Grall <julien.grall@arm.com>
+Date:   Wed Feb 21 13:46:25 2018 +0000
+
+    xen/pdx: Introduce helper to convert MFN <-> PDX
+    
+    This will avoid use of pfn_to_pdx(mfn_x(mfn)) over the code base.
+    
+    Signed-off-by: Julien Grall <julien.grall@arm.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit cf2239a6288c7095583d3351f5024ab8c1e37f87
+Author: Julien Grall <julien.grall@arm.com>
+Date:   Wed Feb 21 13:46:24 2018 +0000
+
+    xen/x86: mm: Switch x86/mm.c to use typesafe for virt_to_mfn
+    
+    No functional change intended.
+    
+    While we are here, use PFN_DOWN() rather than open coding it.
+    
+    Signed-off Julien Grall <julien.grall@arm.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit da588a0dbe76c52fdfd90582bf560643a1f9eb20
+Author: Julien Grall <julien.grall@arm.com>
+Date:   Wed Feb 21 13:46:24 2018 +0000
+
+    xen/x86: Remove unused override of page_to_mfn/mfn_to_page
+    
+    A few files override page_to_mfn/mfn_to_page but actually never use
+    those macros. So drop them.
+    
+    Signed-off-by: Julien Grall <julien.grall@arm.com>
+    Acked-by: George Dunlap <george.dunlap@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit acf92c83b58e404374300397801deb80fb8d883e
+Author: Wei Liu <wei.liu2@citrix.com>
+Date:   Fri Mar 9 17:20:14 2018 +0000
+
+    x86/mm: skip incrementing mfn if it is not a valid mfn
+    
+    In a follow-up patch, some callers will be switched to pass
+    INVALID_MFN instead of zero for non-present mappings. So skip
+    incrementing mfn if it is not a valid one.
+    
+    Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+    Signed-off-by: Julien Grall <julien.grall@arm.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 454efb2a31b64b98e3dd55c083ce41b87375faa6
+Author: Jan Beulich <JBeulich@suse.com>
+Date:   Mon Mar 19 07:40:12 2018 -0600
+
+    x86/XPTI: reduce .text.entry
+    
+    This exposes less code pieces and at the same time reduces the range
+    covered from slightly above 3 pages to a little below 2 of them.
+    
+    The code being moved is unchanged, except for the removal of trailing
+    blanks, insertion of blanks between operands, and a pointless q suffix
+    from "retq".
+    
+    A few more small pieces could be moved, but it seems better to me to
+    leave them where they are to not make it overly hard to follow code
+    paths.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+commit 442b303cdaf7d774c0be8096fe5dbab68701abd3
+Author: Jan Beulich <JBeulich@suse.com>
+Date:   Mon Mar 19 07:39:04 2018 -0600
+
+    x86: log XPTI enabled status
+    
+    At the same time also report the state of the two defined
+    ARCH_CAPABILITIES MSR bits. To avoid further complicating the
+    conditional around that printk(), drop it (it's a debug level one only
+    anyway).
+    
+    Issue the main message without any XENLOG_*, and also drop XENLOG_INFO
+    from the respective BTI message, to make sure they're visible at default
+    log level also in release builds.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Tested-by: Juergen Gross <jgross@suse.com>
+    Reviewed-by: Juergen Gross <jgross@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+
+commit bee0732d2066691d8204e418d10110930ee4d4f8
+Author: Jan Beulich <JBeulich@suse.com>
+Date:   Mon Mar 19 07:37:54 2018 -0600
+
+    x86: disable XPTI when RDCL_NO
+    
+    Use the respective ARCH_CAPABILITIES MSR bit, but don't expose the MSR
+    to guests yet.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Tested-by: Juergen Gross <jgross@suse.com>
+    Reviewed-by: Juergen Gross <jgross@suse.com>
+    Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit c0d98b35714fb707217c9062b6518e158cd72eea
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Thu Jan 25 15:45:37 2018 +0000
+
+    x86/vtx: Introduce a typed union for CR access exit information
+    
+    This reduces code volume, and has a minor improvement on compiled size,
+    probably due to the removal of several temporary variables.
+    
+      add/remove: 0/0 grow/shrink: 0/2 up/down: 0/-50 (-50)
+      function                                     old     new   delta
+      vmx_vmexit_handler                          6881    6878      -3
+      nvmx_n2_vmexit_handler                      3473    3426     -47
+    
+    Take the opportunity to make some style corrections, and add some
+    ASSERT_UNREACHABLE()s in appropriate places.
+    
+    No functional change.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Kevin Tian <kevin.tian@intel.com>
+
+commit 36bc5fc631b08bcf03c6977e79f026a459d76302
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Mar 16 16:57:18 2018 +0000
+
+    xen/public: Rename xen_domctl_createdomain.config to arch
+    
+    This is a tools only hypercall so fine to change.  Altering the name avoids
+    having confusing code such as config->config all over the hypervisor and
+    toolstack.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Julien Grall <julien.grall@arm.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 2649612686f968a52ce53d173f5c2a3088ad17dd
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Mar 9 13:03:26 2018 +0000
+
+    tools/libxl: Don't prepare or save xc_config when soft resetting a domain
+    
+    xc_config is only used by xc_domain_create(), but by calling
+    libxl__arch_domain_{prepare,save}_config() we clobber the real settings with
+    the default settings.
+    
+    Move all data and calls relating to xc_domain_create() into the path which
+    calls it.
+    
+    As far as I can tell, soft_reset has always been broken for ARM domains using
+    LIBXL_GIC_VERSION_DEFAULT, which elicits a hard error out of
+    libxl__arch_domain_save_config(), and only works on x86 because this function
+    is a no-op.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+
+commit 74fd984ae699727ae98f4fc36450ff76c8fc7ff3
+Author: Andrew Cooper <andrew.cooper3@citrix.com>
+Date:   Fri Mar 9 12:24:13 2018 +0000
+
+    tools/libxl: Drop xc_domain_configuration_t from libxl__domain_build_state
+    
+    The data it stores is initialised and exclusively used within
+    libxl__domain_make(), with the important details written back elsewhere by
+    libxl__arch_domain_save_config().  Prepare xc_config on libxl__domain_make()'s
+    stack, and drop the parameter.
+    
+    Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Wei Liu <wei.liu2@citrix.com>
+(qemu changes not included)
+
+
+--===============2825067378924223024==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2825067378924223024==--
