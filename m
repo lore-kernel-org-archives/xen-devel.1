@@ -1,16 +1,16 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH] tools/kdd: use mute -Warray-bounds only on
- new gcc version
-Date: Sat, 7 Apr 2018 00:39:15 +0200
-Message-ID: <20180406223915.GO3176@mail-itl>
-References: <20180406151246.c5s6zig3m73bcmb4@citrix.com>
- <20180406153258.29262-1-marmarek@invisiblethingslab.com>
- <20180406171250.23jdnyrg25ft4yhv@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 121990: regressions -
+ trouble: blocked/fail
+Date: Fri, 06 Apr 2018 23:00:44 +0000
+Message-ID: <osstest-121990-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5255238401600378611=="
+Content-Type: multipart/mixed; boundary="===============2758200662099766311=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180406171250.23jdnyrg25ft4yhv@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=+rjf=g3=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f4aLg-0007G5-Np
+ for xen-devel@lists.xenproject.org; Fri, 06 Apr 2018 23:00:48 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,94 +19,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
+--===============2758200662099766311==
+Content-Type: text/plain
 
---===============5255238401600378611==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="cmVHo2jXx4bdYlgS"
-Content-Disposition: inline
+flight 121990 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/121990/
 
+Regressions :-(
 
---cmVHo2jXx4bdYlgS
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 121876
+ build-amd64                   6 xen-build                fail REGR. vs. 121876
+ build-armhf                   6 xen-build                fail REGR. vs. 121876
 
-On Fri, Apr 06, 2018 at 06:12:50PM +0100, Wei Liu wrote:
-> On Fri, Apr 06, 2018 at 05:32:57PM +0200, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > "#pragma GCC diagnostic push" is supported only on gcc >=3D 4.6. But si=
-nce
-> > muting this the warning is needed only on gcc >=3D 8, do it only then,
-> > instead of tricking the compiler about this code (and making it less
-> > readable to the human too).
-> >=20
-> > This fixes 5888eecca0 "tools/kdd: mute spurious gcc warning".
-> >=20
-> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
-> > ---
-> >  tools/debugger/kdd/kdd.c | 4 ++++
-> >  1 file changed, 4 insertions(+)
-> >=20
-> > diff --git a/tools/debugger/kdd/kdd.c b/tools/debugger/kdd/kdd.c
-> > index 61d769ece9..95c3a949ec 100644
-> > --- a/tools/debugger/kdd/kdd.c
-> > +++ b/tools/debugger/kdd/kdd.c
-> > @@ -695,10 +695,14 @@ static void kdd_handle_read_ctrl(kdd_state *s)
-> >              KDD_LOG(s, "Request outside of known control space\n");
-> >              len =3D 0;
-> >          } else {
-> > +#if __GNUC__ >=3D 8
-> >  #pragma GCC diagnostic push
-> >  #pragma GCC diagnostic ignored "-Warray-bounds"
-> > +#endif
-> >              memcpy(buf, ((uint8_t *)&ctrl.c32) + offset, len);
-> > +#if __GNUC__ >=3D 8
-> >  #pragma GCC diagnostic pop
-> > +#endif
->=20
-> Oh thanks for the quick turnaround.
->=20
-> Since Tim thinks it is better to not disable the warning -- how about
-> using assert() to give the compiler a hint? Would that work?
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-xl-qemuu-debianhvm-i386  1 build-check(1)         blocked n/a
+ test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
 
-No, it doesn't.
+version targeted for testing:
+ xen                  33fcfac4ee76c8cfa31534e1d3eee960799b8554
+baseline version:
+ xen                  451004603247205467ec34b366b4cfa3814a5d95
 
-Changing offset type to uint32_t, or unsigned int works. Also adding
-"offset &=3D 0x2ff" helps (but changes behavior). And now I wonder if
-this warning isn't legitimate - maybe there is some int overflow case
-that I don't see?
+Last test of basis   121876  2018-04-05 10:04:25 Z    1 days
+Failing since        121889  2018-04-05 13:02:10 Z    1 days   12 attempts
+Testing same since   121986  2018-04-06 18:06:18 Z    0 days    2 attempts
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
+------------------------------------------------------------
+People who touched revisions under test:
+  Amit Singh Tomar <amittomer25@gmail.com>
+  Andre Przywara <andre.przywara@arm.com>
+  Andre Pzywara <andre.przywara@arm.com>
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Juergen Gross <jgross@suse.com>
+  Julien Grall <julien.grall@arm.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Marcello Seri <marcello.seri@citrix.com>
+  Marcus of Wetware Labs <marcus@wetwa.re>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Petre Eftime <epetre@amazon.com>
+  Razvan Cojocaru <rcojocaru@bitdefender.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Tim Deegan <tim@xen.org>
+  Wei Liu <wei.liu2@citrix.com>
 
---cmVHo2jXx4bdYlgS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlrH9xMACgkQ24/THMrX
-1yymyAf/bxY3WMp/ozmEz4vhtALya/GM6QW+azIhZH0df/Yhm/lwMNxEtEzwooR8
-KcR7FDunRqZ5EJ9UGNuXplWPC075Ji1WhSbsr8KEDFyZjRNhN6hBmeFhBYZ+UvM2
-RQLXCNSQEd8yY1AOgotMrYBSy89pqqxgBp0U17ZEG0o/djOaeygpsauv9p0CelU+
-VimL6DkKmLVxl8VZ336fgR5IBw+m3VFcSOiArb0Q6HJr2MpPPvRz3V67HkxhzPOW
-5jsKjzttYIcFxrpdsekhQHDplUK69JTAQzPeCucV+yW5hGhgcxpODS1UAjskuQHT
-9Qzf9qArGYIHWTqszFSzicDPvsVBqA==
-=ziGq
------END PGP SIGNATURE-----
-
---cmVHo2jXx4bdYlgS--
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  fail    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          blocked 
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     blocked 
+ test-amd64-amd64-libvirt                                     blocked 
 
 
---===============5255238401600378611==
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 700 lines long.)
+
+
+--===============2758200662099766311==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -116,4 +114,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5255238401600378611==--
+--===============2758200662099766311==--
