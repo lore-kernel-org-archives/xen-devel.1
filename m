@@ -1,18 +1,16 @@
-From: Tim Deegan <tim@xen.org>
-Subject: Re: [PATCH] tools/kdd: use mute -Warray-bounds only on
- new gcc version
-Date: Sat, 7 Apr 2018 08:36:40 +0100
-Message-ID: <20180407073640.GA25704@deinos.phlegethon.org>
-References: <20180406151246.c5s6zig3m73bcmb4@citrix.com>
- <20180406153258.29262-1-marmarek@invisiblethingslab.com>
- <20180406171250.23jdnyrg25ft4yhv@citrix.com>
- <20180406223915.GO3176@mail-itl>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 122025: regressions -
+ trouble: blocked/fail
+Date: Sat, 07 Apr 2018 08:14:31 +0000
+Message-ID: <osstest-122025-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8368295992167460396=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <20180406223915.GO3176@mail-itl>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=saea=g4=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f4ize-0002n8-Ab
+ for xen-devel@lists.xenproject.org; Sat, 07 Apr 2018 08:14:38 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,25 +19,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-QXQgMDA6MzkgKzAyMDAgb24gMDcgQXByICgxNTIzMDYxNTU1KSwgTWFyZWsgTWFyY3p5a293c2tp
-LUfDs3JlY2tpIHdyb3RlOgo+IE9uIEZyaSwgQXByIDA2LCAyMDE4IGF0IDA2OjEyOjUwUE0gKzAx
-MDAsIFdlaSBMaXUgd3JvdGU6Cj4gPiBPbiBGcmksIEFwciAwNiwgMjAxOCBhdCAwNTozMjo1N1BN
-ICswMjAwLCBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVja2kgd3JvdGU6Cj4gPiBPaCB0aGFua3Mg
-Zm9yIHRoZSBxdWljayB0dXJuYXJvdW5kLgo+ID4gCj4gPiBTaW5jZSBUaW0gdGhpbmtzIGl0IGlz
-IGJldHRlciB0byBub3QgZGlzYWJsZSB0aGUgd2FybmluZyAtLSBob3cgYWJvdXQKPiA+IHVzaW5n
-IGFzc2VydCgpIHRvIGdpdmUgdGhlIGNvbXBpbGVyIGEgaGludD8gV291bGQgdGhhdCB3b3JrPwo+
-IAo+IE5vLCBpdCBkb2Vzbid0Lgo+IAo+IENoYW5naW5nIG9mZnNldCB0eXBlIHRvIHVpbnQzMl90
-LCBvciB1bnNpZ25lZCBpbnQgd29ya3MuIEFsc28gYWRkaW5nCj4gIm9mZnNldCAmPSAweDJmZiIg
-aGVscHMgKGJ1dCBjaGFuZ2VzIGJlaGF2aW9yKS4gQW5kIG5vdyBJIHdvbmRlciBpZgo+IHRoaXMg
-d2FybmluZyBpc24ndCBsZWdpdGltYXRlIC0gbWF5YmUgdGhlcmUgaXMgc29tZSBpbnQgb3ZlcmZs
-b3cgY2FzZQo+IHRoYXQgSSBkb24ndCBzZWU/CgpIdWguICBJIGRvbid0IHNlZSBhbiBvdmVyZmxv
-dyAtIGlmIGFueXRoaW5nLCBoYXZpbmcgb2Zmc2V0IGJlIDY0Yml0CnNob3VsZCBtYWtlIGl0IHNh
-ZmVyLiAgQnV0IGhhdmluZyBvZmZzZXQgYmUgdWludDMyX3Qgc2hvdWxkIGJlIGZpbmUKdG9vLCBz
-byBpZiBpdCBtYWtlcyBnY2MgaGFwcHksIHRoYXQncyBmaW5lLgoKQ2hlZXJzLAoKVGltLgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============8368295992167460396==
+Content-Type: text/plain
+
+flight 122025 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/122025/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 121876
+ build-amd64                   6 xen-build                fail REGR. vs. 121876
+ build-armhf                   6 xen-build                fail REGR. vs. 121876
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-debianhvm-i386  1 build-check(1)         blocked n/a
+ test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+
+version targeted for testing:
+ xen                  33fcfac4ee76c8cfa31534e1d3eee960799b8554
+baseline version:
+ xen                  451004603247205467ec34b366b4cfa3814a5d95
+
+Last test of basis   121876  2018-04-05 10:04:25 Z    1 days
+Failing since        121889  2018-04-05 13:02:10 Z    1 days   16 attempts
+Testing same since   121986  2018-04-06 18:06:18 Z    0 days    6 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Amit Singh Tomar <amittomer25@gmail.com>
+  Andre Przywara <andre.przywara@arm.com>
+  Andre Pzywara <andre.przywara@arm.com>
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Juergen Gross <jgross@suse.com>
+  Julien Grall <julien.grall@arm.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Marcello Seri <marcello.seri@citrix.com>
+  Marcus of Wetware Labs <marcus@wetwa.re>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Petre Eftime <epetre@amazon.com>
+  Razvan Cojocaru <rcojocaru@bitdefender.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Tim Deegan <tim@xen.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  fail    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          blocked 
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     blocked 
+ test-amd64-amd64-libvirt                                     blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 700 lines long.)
+
+
+--===============8368295992167460396==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8368295992167460396==--
