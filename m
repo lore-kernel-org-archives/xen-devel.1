@@ -1,23 +1,15 @@
-From: "Fiona Li(BJ-RD)" <FionaLi@zhaoxin.com>
-Subject: Re: [PATCH] x86/cpu: Support a new cpu vendor,
- which is Shanghai. Shanghai cpu defines two msr registers to enable
- Random Number Generator and Advanced Cryprography Engine.The cpu supports
- iommu, which is designed according to Intel's speci...
-Date: Sun, 8 Apr 2018 01:14:15 +0000
-Message-ID: <5689398fab354af4b3e67bc3f13fe48c@zhaoxin.com>
-References: <1521804536-2852-1-git-send-email-lifang110@126.com>
- <20180323124136.zbypyljlusln34xx@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 122077: regressions - FAIL
+Date: Sun, 08 Apr 2018 06:02:01 +0000
+Message-ID: <osstest-122077-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6187319530760241719=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=tjvy=g5=zhaoxin.com=fionali@srs-us1.protection.inumbo.net>)
- id 1f4z9u-0002J2-Ey
- for xen-devel@lists.xenproject.org; Sun, 08 Apr 2018 01:30:18 +0000
-In-Reply-To: <20180323124136.zbypyljlusln34xx@citrix.com>
-Content-Language: zh-CN
+ <srs0=qvqj=g5=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f53Ow-0005RY-TR
+ for xen-devel@lists.xenproject.org; Sun, 08 Apr 2018 06:02:06 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,97 +18,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Wei Liu' <wei.liu2@citrix.com>
-Cc: "'xen-devel@lists.xenproject.org'" <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-V2VpLA0KICAgIFRoYW5rcyBmb3IgeW91ciByZXBseS4gSSB3aWxsIHJldmlzZSB0aGF0IGluIHRo
-ZSBuZXh0IHZlcnNpb24gb2YgdGhlIHBhdGNoLg0KICAgIFRvIHNvbHZlIHRoZSBwcm9ibGVtIHRo
-YXQgdGhlIG1haWwgYWRkcmVzcyBJIHNlbmQgZnJvbSB3YXMgbm90IGluIHN5bmMgdGhlIG9uZSBp
-biB0aGUgRnJvbSBhbmQgUy1vLWIuIEkgd2lsbCB1c2UgYW5vdGhlciBlbWFpbCBhZGRyZXNzKGRh
-dmlkd2FuZ0B6aGFveGluLmNvbSkgdG8gcmVzdWJtaXQgbXkgcGF0Y2guIElmIG5lY2Vzc2FyeSwg
-cGxlYXNlIGFiYW5kb24gY3VycmVudCBwYXRjaCBhbmQgc3ViamVjdC4gSSBhbSBzb3JyeSBmb3Ig
-dGhlIHRyb3VibGUuDQoNCi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBXZWkgTGl1
-IFttYWlsdG86d2VpLmxpdTJAY2l0cml4LmNvbV0NClNlbnQ6IEZyaWRheSwgTWFyY2ggMjMsIDIw
-MTggODo0MiBQTQ0KVG86IEZpb25hbGkgPGxpZmFuZzExMEAxMjYuY29tPg0KQ2M6IHhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZzsgRmlvbmEgTGkoQkotUkQpIDxGaW9uYUxpQHpoYW94aW4u
-Y29tPjsgamJldWxpY2hAc3VzZS5jb207IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+DQpT
-dWJqZWN0OiBSZTogW1hlbi1kZXZlbF0gW1BBVENIXSB4ODYvY3B1OiBTdXBwb3J0IGEgbmV3IGNw
-dSB2ZW5kb3IsIHdoaWNoIGlzIFNoYW5naGFpLiBTaGFuZ2hhaSBjcHUgZGVmaW5lcyB0d28gbXNy
-IHJlZ2lzdGVycyB0byBlbmFibGUgUmFuZG9tIE51bWJlciBHZW5lcmF0b3IgYW5kIEFkdmFuY2Vk
-IENyeXByb2dyYXBoeSBFbmdpbmUuVGhlIGNwdSBzdXBwb3J0cyBpb21tdSwgd2hpY2ggaXMgZGVz
-aWduZWQgYWNjb3JkaW5nIHRvIEludGVsJ3Mgc3BlY2kuLi4NCg0KT24gRnJpLCBNYXIgMjMsIDIw
-MTggYXQgMDc6Mjg6NTZQTSArMDgwMCwgRmlvbmFsaSB3cm90ZToNCj4gRnJvbTogRmlvbmFMaSA8
-RmlvbmFMaUB6aGFveGluLmNvbT4NCj4NCj4gU2lnbmVkLW9mZi1ieTogRmlvbmEgTGk8ZmlvbmFs
-aUB6aGFveGluLmNvbT4NCj4gLS0tDQo+ICB4ZW4vYXJjaC94ODYvY3B1L01ha2VmaWxlICAgICAg
-ICAgfCAgMSArDQo+ICB4ZW4vYXJjaC94ODYvY3B1L2NvbW1vbi5jICAgICAgICAgfCAgMSArDQo+
-ICB4ZW4vYXJjaC94ODYvY3B1L3NoYW5naGFpLmMgICAgICAgfCA2MSArKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysNCj4gIHhlbi9pbmNsdWRlL2FzbS14ODYvaW9tbXUuaCAg
-ICAgICB8ICAyICsrDQo+ICB4ZW4vaW5jbHVkZS9hc20teDg2L21zci1pbmRleC5oICAgfCAgNCAr
-KysNCj4gIHhlbi9pbmNsdWRlL2FzbS14ODYvc2V0dXAuaCAgICAgICB8ICAxICsNCj4gIHhlbi9p
-bmNsdWRlL2FzbS14ODYveDg2LXZlbmRvcnMuaCB8ICAzICstDQo+ICA3IGZpbGVzIGNoYW5nZWQs
-IDcyIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkgIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiB4
-ZW4vYXJjaC94ODYvY3B1L3NoYW5naGFpLmMNCj4NCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4
-Ni9jcHUvTWFrZWZpbGUgYi94ZW4vYXJjaC94ODYvY3B1L01ha2VmaWxlDQo+IGluZGV4IDc0ZjIz
-YWUuLjhmY2ZmZGQgMTAwNjQ0DQo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9jcHUvTWFrZWZpbGUNCj4g
-KysrIGIveGVuL2FyY2gveDg2L2NwdS9NYWtlZmlsZQ0KPiBAQCAtNSw2ICs1LDcgQEAgb2JqLXkg
-Kz0gYW1kLm8NCj4gIG9iai15ICs9IGNlbnRhdXIubw0KPiAgb2JqLXkgKz0gY29tbW9uLm8NCj4g
-IG9iai15ICs9IGludGVsLm8NCj4gK29iai15ICs9IHNoYW5naGFpLm8NCj4gIG9iai15ICs9IGlu
-dGVsX2NhY2hlaW5mby5vDQo+ICBvYmoteSArPSBtd2FpdC1pZGxlLm8NCj4gIG9iai15ICs9IHZw
-bXUubyB2cG11X2FtZC5vIHZwbXVfaW50ZWwubyBkaWZmIC0tZ2l0DQo+IGEveGVuL2FyY2gveDg2
-L2NwdS9jb21tb24uYyBiL3hlbi9hcmNoL3g4Ni9jcHUvY29tbW9uLmMgaW5kZXgNCj4gMGE0NTJh
-ZS4uMDI4NjNjOSAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gveDg2L2NwdS9jb21tb24uYw0KPiAr
-KysgYi94ZW4vYXJjaC94ODYvY3B1L2NvbW1vbi5jDQo+IEBAIC03MDksNiArNzA5LDcgQEAgdm9p
-ZCBfX2luaXQgZWFybHlfY3B1X2luaXQodm9pZCkNCj4gIGludGVsX2NwdV9pbml0KCk7DQo+ICBh
-bWRfaW5pdF9jcHUoKTsNCj4gIGNlbnRhdXJfaW5pdF9jcHUoKTsNCj4gK3NoYW5naGFpX2luaXRf
-Y3B1KCk7DQo+ICBlYXJseV9jcHVfZGV0ZWN0KCk7DQo+ICB9DQo+DQo+IGRpZmYgLS1naXQgYS94
-ZW4vYXJjaC94ODYvY3B1L3NoYW5naGFpLmMgYi94ZW4vYXJjaC94ODYvY3B1L3NoYW5naGFpLmMN
-Cj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQgaW5kZXggMDAwMDAwMC4uNzkxMGYwMw0KPiAtLS0gL2Rl
-di9udWxsDQo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9jcHUvc2hhbmdoYWkuYw0KPiBAQCAtMCwwICsx
-LDYxIEBADQo+ICsjaW5jbHVkZSA8eGVuL2xpYi5oPg0KPiArI2luY2x1ZGUgPHhlbi9pbml0Lmg+
-DQo+ICsjaW5jbHVkZSA8eGVuL2JpdG9wcy5oPg0KPiArI2luY2x1ZGUgPGFzbS9wcm9jZXNzb3Iu
-aD4NCj4gKyNpbmNsdWRlIDxhc20vbXNyLmg+DQo+ICsjaW5jbHVkZSA8YXNtL2U4MjAuaD4NCg0K
-VXNlIHRoZSBmb2xsb3dpbmcgb3JkZXIgcGxlYXNlOg0KDQogI2luY2x1ZGUgPHhlbi9iaXRvcHMu
-aD4NCiAjaW5jbHVkZSA8eGVuL2luaXQuaD4NCiAjaW5jbHVkZSA8eGVuL2xpYi5oPg0KDQogI2lu
-Y2x1ZGUgPGFzbS9lODIwLmg+DQogI2luY2x1ZGUgPGFzbS9tc3IuaD4NCiAjaW5jbHVkZSA8YXNt
-L3Byb2Nlc3Nvci5oPg0KDQo+ICsjaW5jbHVkZSAiY3B1LmgiDQo+ICsNCj4gKyNkZWZpbmUgQUNF
-X1BSRVNFTlQoeCkgICgoeCkmKDFVPDw2KSkNCg0KUGxlYXNlIGFkZCBzcGFjZXMgYXJvdW5kICIm
-IiBhbmQgIjw8Ii4NCg0KPiArI2RlZmluZSBBQ0VfRU5BQkxFRCh4KSAgKCh4KSYoMVU8PDcpKQ0K
-PiArI2RlZmluZSBBQ0VfRkNSKDFVIDw8IDI4KS8qIE1TUl9aWF9BQ0UgQWR2YW5jZWQgQ3J5cHJv
-Z3JhcGh5IEVuZ2luZSAqLw0KPiArDQo+ICsjZGVmaW5lIFJOR19QUkVTRU5UKHgpICAoKHgpJigx
-VTw8NikpICNkZWZpbmUgUk5HX0VOQUJMRUQoeCkNCj4gKygoeCkmKDFVPDw3KSkNCj4gKyNkZWZp
-bmUgUk5HX0VOQUJMRSgxVSA8PCA2KS8qIE1TUl9aWF9STkcgUmFuZG9tIE51bWJlciBHZW5lcmF0
-b3IgKi8NCj4gKw0KPiArDQo+ICsNCj4gK3N0YXRpYyB2b2lkIGluaXRfc2hhbmdoYWkoc3RydWN0
-IGNwdWluZm9feDg2ICpjKSB7DQo+ICt1aW50NjRfdCBtc3JfYWNlLG1zcl9ybmc7DQoNCkFkZCBh
-IGJsYW5rIGxpbmUgaGVyZS4NCg0KPiArLyogVGVzdCBmb3IgU2hhbmdoYWkgRXh0ZW5kZWQgQ1BV
-SUQgaW5mb3JtYXRpb24gKi8NCj4gK2lmIChjcHVpZF9lYXgoMHhDMDAwMDAwMCkgPj0gMHhDMDAw
-MDAwMSkgew0KDQpDb2Rpbmcgc3R5bGUuIFNob3VsZCBiZQ0KDQogICAgICAgIGlmICggWFhYWCAp
-DQp7DQoNClBsZWFzZSBmaXggYWxsIGluc3RhbmNlcy4NCg0KDQo+ICsvKkdldCBTaGFuZ2hhaSBF
-eHRlbmRlZCBmdW5jdGlvbiBudW1iZXIgKi8NCj4gK3UzMiBleHRlbnRlZF9mZWF0dXJlX2ZsYWdz
-ID0gY3B1aWRfZWR4KDB4QzAwMDAwMDEpOw0KPiArDQo+ICsvKiBlbmFibGUgQUNFLGlmIHN1cHBv
-cnQgQUNFIHVuaXQgKi8NCj4gK2lmKEFDRV9QUkVTRU5UKGV4dGVudGVkX2ZlYXR1cmVfZmxhZ3Mp
-ICYmICFBQ0VfRU5BQkxFRChleHRlbnRlZF9mZWF0dXJlX2ZsYWdzKSl7DQo+ICtyZG1zcmwoTVNS
-X1pYX0FDRSwgbXNyX2FjZSk7DQo+ICsvKiBlbmFibGUgQUNFICAqLw0KPiArd3Jtc3JsKE1TUl9a
-WF9BQ0UsIChtc3JfYWNlIHwgQUNFX0ZDUikpOw0KPiArcHJpbnRrKEtFUk5fSU5GTyAiQ1BVOiBF
-bmFibGVkIEFDRSBoL3cgY3J5cHRvXG4iKTsNCg0KRHJvcCBLRVJOX0lORk8gcGxlYXNlLg0KDQo+
-ICt9DQoNCkJsYW5rIGxpbmUgaGVyZSBwbGVhc2UuDQoNCj4gKy8qIGVuYWJsZSBSTkcsaWYgc3Vw
-cG9ydCBSTkcgdW5pdCAqLw0KPiAraWYgKFJOR19QUkVTRU5UKGV4dGVudGVkX2ZlYXR1cmVfZmxh
-Z3MpICYmICFSTkdfRU5BQkxFRChleHRlbnRlZF9mZWF0dXJlX2ZsYWdzKSkgew0KPiArcmRtc3Js
-KE1TUl9aWF9STkcsIG1zcl9ybmcpOw0KPiArLyogZW5hYmxlIFJORyAgKi8NCj4gK3dybXNybChN
-U1JfWlhfUk5HLCBtc3Jfcm5nIHwgUk5HX0VOQUJMRSk7DQo+ICtwcmludGsoS0VSTl9JTkZPICJD
-UFU6IEVuYWJsZWQgaC93IFJOR1xuIik7DQo+ICt9DQo+ICt9DQo+ICsNCj4gK2lmIChjLT54ODYg
-PT0gMHg2ICYmIGMtPng4Nl9tb2RlbCA+PSAweGYpIHsNCj4gK2MtPng4Nl9jYWNoZV9hbGlnbm1l
-bnQgPSBjLT54ODZfY2xmbHVzaF9zaXplICogMjsNCj4gK19fc2V0X2JpdChYODZfRkVBVFVSRV9D
-T05TVEFOVF9UU0MsIGMtPng4Nl9jYXBhYmlsaXR5KTsNCj4gK30NCg0KQmxhbmsgbGluZS4NCg0K
-PiArZ2V0X21vZGVsX25hbWUoYyk7DQo+ICtkaXNwbGF5X2NhY2hlaW5mbyhjKTsNCj4gK30NCg0K
-DQpXZWkuDQoNCg0K5L+d5a+G5aOw5piO77yaDQrmnKzpgq7ku7blkKvmnInkv53lr4bmiJbkuJPm
-nInkv6Hmga/vvIzku4XkvpvmjIflrprmlLbku7bkurrkvb/nlKjjgILkuKXnpoHlr7nmnKzpgq7k
-u7bmiJblhbblhoXlrrnlgZrku7vkvZXmnKrnu4/mjojmnYPnmoTmn6XpmIXjgIHkvb/nlKjjgIHl
-pI3liLbmiJbovazlj5HjgIINCkNPTkZJREVOVElBTCBOT1RFOg0KVGhpcyBlbWFpbCBjb250YWlu
-cyBjb25maWRlbnRpYWwgb3IgbGVnYWxseSBwcml2aWxlZ2VkIGluZm9ybWF0aW9uIGFuZCBpcyBm
-b3IgdGhlIHNvbGUgdXNlIG9mIGl0cyBpbnRlbmRlZCByZWNpcGllbnQuIEFueSB1bmF1dGhvcml6
-ZWQgcmV2aWV3LCB1c2UsIGNvcHlpbmcgb3IgZm9yd2FyZGluZyBvZiB0aGlzIGVtYWlsIG9yIHRo
-ZSBjb250ZW50IG9mIHRoaXMgZW1haWwgaXMgc3RyaWN0bHkgcHJvaGliaXRlZC4NCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============6187319530760241719==
+Content-Type: text/plain
+
+flight 122077 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/122077/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 121876
+ build-armhf                   6 xen-build                fail REGR. vs. 121876
+
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ xen                  e62e140daa393c89342f7ca19906e303ebedf8db
+baseline version:
+ xen                  451004603247205467ec34b366b4cfa3814a5d95
+
+Last test of basis   121876  2018-04-05 10:04:25 Z    2 days
+Failing since        121889  2018-04-05 13:02:10 Z    2 days   24 attempts
+Testing same since   122036  2018-04-07 15:01:18 Z    0 days    6 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Amit Singh Tomar <amittomer25@gmail.com>
+  Andre Przywara <andre.przywara@arm.com>
+  Andre Pzywara <andre.przywara@arm.com>
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Juergen Gross <jgross@suse.com>
+  Julien Grall <julien.grall@arm.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Marcello Seri <marcello.seri@citrix.com>
+  Marcus of Wetware Labs <marcus@wetwa.re>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Petre Eftime <epetre@amazon.com>
+  Razvan Cojocaru <rcojocaru@bitdefender.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Tim Deegan <tim@xen.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 712 lines long.)
+
+
+--===============6187319530760241719==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6187319530760241719==--
