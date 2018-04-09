@@ -1,19 +1,17 @@
-From: Jia-Ju Bai <baijiaju1990@gmail.com>
-Subject: [PATCH 4/4] xen: xen-pciback: Replace GFP_ATOMIC with
- GFP_KERNEL in xen_pcibk_config_quirks_init
-Date: Mon,  9 Apr 2018 23:04:25 +0800
-Message-ID: <1523286265-26501-1-git-send-email-baijiaju1990__10089.3050119796$1523286254$gmane$org@gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v8] new config option vtsc_tolerance_khz to
+ avoid TSC emulation
+Date: Mon, 09 Apr 2018 09:10:36 -0600
+Message-ID: <5ACB9E8C02000078001B9ADE@prv1-mh.provo.novell.com>
+References: <20180401202958.9173-1-olaf@aepfle.de>
+ <5ACB92A902000078001B9A2B@prv1-mh.provo.novell.com>
+ <20180409162608.2be5cb80.olaf@aepfle.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=nvpu=g6=gmail.com=baijiaju1990@srs-us1.protection.inumbo.net>)
- id 1f5YLS-0002LP-C1
- for xen-devel@lists.xenproject.org; Mon, 09 Apr 2018 15:04:34 +0000
-Received: by mail-pg0-x244.google.com with SMTP id o2so359038pgp.7
- for <xen-devel@lists.xenproject.org>; Mon, 09 Apr 2018 08:04:33 -0700 (PDT)
+In-Reply-To: <20180409162608.2be5cb80.olaf@aepfle.de>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,37 +20,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: boris.ostrovsky@oracle.com, jgross@suse.com, gregkh@linuxfoundation.org
-Cc: xen-devel@lists.xenproject.org, Jia-Ju Bai <baijiaju1990@gmail.com>, linux-kernel@vger.kernel.org
+To: Olaf Hering <olaf@aepfle.de>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, GeorgeDunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, =?UTF-8?Q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-eGVuX3BjaWJrX2NvbmZpZ19xdWlya3NfaW5pdCgpIGlzIG5ldmVyIGNhbGxlZCBpbiBhdG9taWMg
-Y29udGV4dC4KClRoZSBjYWxsIGNoYWlucyBlbmRpbmcgdXAgYXQgeGVuX3BjaWJrX2NvbmZpZ19x
-dWlya3NfaW5pdCgpIGFyZToKWzFdIHhlbl9wY2lia19jb25maWdfcXVpcmtzX2luaXQoKSA8LSB4
-ZW5fcGNpYmtfY29uZmlnX2luaXRfZGV2KCkgPC0gCglwY2lzdHViX2luaXRfZGV2aWNlKCkgPC0g
-cGNpc3R1Yl9zZWl6ZSgpIDwtIHBjaXN0dWJfcHJvYmUoKQpbMl0geGVuX3BjaWJrX2NvbmZpZ19x
-dWlya3NfaW5pdCgpIDwtIHhlbl9wY2lia19jb25maWdfaW5pdF9kZXYoKSA8LSAKCXBjaXN0dWJf
-aW5pdF9kZXZpY2UoKSA8LSBwY2lzdHViX2luaXRfZGV2aWNlc19sYXRlKCkgPC0gCgl4ZW5fcGNp
-YmtfaW5pdCgpCnBjaXN0dWJfcHJvYmUoKSBpcyBvbmx5IHNldCBhcyAiLnByb2JlIiBpbiBzdHJ1
-Y3QgcGNpX2RyaXZlci4KeGVuX3BjaWJrX2luaXQoKSBpcyBpcyBvbmx5IHNldCBhcyBhIHBhcmFt
-ZXRlciBvZiBtb2R1bGVfaW5pdCgpLgpUaGVzZSBmdW5jdGlvbnMgYXJlIG5vdCBjYWxsZWQgaW4g
-YXRvbWljIGNvbnRleHQuCgpEZXNwaXRlIG5ldmVyIGdldHRpbmcgY2FsbGVkIGZyb20gYXRvbWlj
-IGNvbnRleHQsCnhlbl9wY2lia19jb25maWdfcXVpcmtzX2luaXQoKSBjYWxscyBremFsbG9jKCkg
-d2l0aCBHRlBfQVRPTUlDLAp3aGljaCBkb2VzIG5vdCBzbGVlcCBmb3IgYWxsb2NhdGlvbi4KR0ZQ
-X0FUT01JQyBpcyBub3QgbmVjZXNzYXJ5IGFuZCBjYW4gYmUgcmVwbGFjZWQgd2l0aCBHRlBfS0VS
-TkVMLAp3aGljaCBjYW4gc2xlZXAgYW5kIGltcHJvdmUgdGhlIHBvc3NpYmlsaXR5IG9mIHN1Y2Vz
-c2Z1bCBhbGxvY2F0aW9uLgoKU2lnbmVkLW9mZi1ieTogSmlhLUp1IEJhaSA8YmFpamlhanUxOTkw
-QGdtYWlsLmNvbT4KLS0tCiBkcml2ZXJzL3hlbi94ZW4tcGNpYmFjay9jb25mX3NwYWNlX3F1aXJr
-cy5jIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0p
-CgpkaWZmIC0tZ2l0IGEvZHJpdmVycy94ZW4veGVuLXBjaWJhY2svY29uZl9zcGFjZV9xdWlya3Mu
-YyBiL2RyaXZlcnMveGVuL3hlbi1wY2liYWNrL2NvbmZfc3BhY2VfcXVpcmtzLmMKaW5kZXggNzQ3
-Njc5MS4uZTNkZjNmOSAxMDA2NDQKLS0tIGEvZHJpdmVycy94ZW4veGVuLXBjaWJhY2svY29uZl9z
-cGFjZV9xdWlya3MuYworKysgYi9kcml2ZXJzL3hlbi94ZW4tcGNpYmFjay9jb25mX3NwYWNlX3F1
-aXJrcy5jCkBAIC05NCw3ICs5NCw3IEBAIGludCB4ZW5fcGNpYmtfY29uZmlnX3F1aXJrc19pbml0
-KHN0cnVjdCBwY2lfZGV2ICpkZXYpCiAJc3RydWN0IHhlbl9wY2lia19jb25maWdfcXVpcmsgKnF1
-aXJrOwogCWludCByZXQgPSAwOwogCi0JcXVpcmsgPSBremFsbG9jKHNpemVvZigqcXVpcmspLCBH
-RlBfQVRPTUlDKTsKKwlxdWlyayA9IGt6YWxsb2Moc2l6ZW9mKCpxdWlyayksIEdGUF9LRVJORUwp
-OwogCWlmICghcXVpcmspIHsKIAkJcmV0ID0gLUVOT01FTTsKIAkJZ290byBvdXQ7Ci0tIAoxLjku
-MQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDA5LjA0LjE4IGF0IDE2OjU1LCA8b2xhZkBhZXBmbGUuZGU+IHdyb3RlOgo+IEFtIE1v
+biwgMDkgQXByIDIwMTggMDg6MTk6NTMgLTA2MDAKPiBzY2hyaWViICJKYW4gQmV1bGljaCIgPEpC
+ZXVsaWNoQHN1c2UuY29tPjoKPiAKPj4gSXMgdGhlcmUgYW55IGd1YXJhbnRlZSB0aGF0IG9sZCBo
+eXBlcnZpc29ycyB3aWxsIHNlbmQgdGhpcyBmaWVsZCBhcyB6ZXJvCj4+IChyYXRoZXIgdGhhbiBz
+b21lIHJhbmRvbSB2YWx1ZSk/IElmIHNvLCBJIHRoaW5rIHRoaXMgc2hvdWxkIGJlIHNhaWQKPj4g
+ZXhwbGljaXRseSBpbiB0aGUgY29tbWl0IG1lc3NhZ2UsIHRvZ2V0aGVyIHdpdGggdGhlIGZhY3Qg
+dGhhdCB5b3UKPj4gcmUtdXNlIHBhZGRpbmcgZmllbGRzLgo+IAo+IEkgaGF2ZSB0byBkb3VibGUg
+Y2hlY2ssIGJ1dCBJJ20gc3VyZSB0aGUgd2hvbGUgc2l6ZSBvZiB0aGUgc3RydWN0IGlzIAo+IGlu
+aXRpYWxpemVkIHdpdGggemVyby4gVGhlIGNvbW1pdCBtZXNzYWdlIGFscmVhZHkgaGFzICJFeGlz
+dGluZyBwYWRkaW5nIAo+IGZpZWxkcyBhcmUgcmV1c2VkIHRvIHN0b3JlIHZ0c2Nfa2h6X3RvbGVy
+YW5jZSBhcyB1MTYuIgoKSXQncyB0aGF0IHNlbnRlbmNlIHRoYXQgSSd2ZSByZWZlcnJlZCB0byAt
+IGl0IHRhbGtzIGFib3V0IHBhZGRpbmcsIGJ1dApkb2Vzbid0IG1ha2UgY2xlYXIgdGhhdCB0aGlz
+IHBhZGRpbmcgaXMgemVybyBhdCBhbGwgdGltZXMuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
