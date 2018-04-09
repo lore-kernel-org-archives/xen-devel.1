@@ -1,15 +1,15 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 122113: regressions - FAIL
-Date: Mon, 09 Apr 2018 00:02:14 +0000
-Message-ID: <osstest-122113-mainreport@xen.org>
+Subject: [xen-unstable-smoke test] 122117: regressions - FAIL
+Date: Mon, 09 Apr 2018 02:57:25 +0000
+Message-ID: <osstest-122117-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============9093508910234035840=="
+Content-Type: multipart/mixed; boundary="===============5718113995688803956=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=lcev=g6=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1f5KGK-0000Ye-03
- for xen-devel@lists.xenproject.org; Mon, 09 Apr 2018 00:02:20 +0000
+ id 1f5Mzq-0002fK-IT
+ for xen-devel@lists.xenproject.org; Mon, 09 Apr 2018 02:57:30 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,11 +21,11 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============9093508910234035840==
+--===============5718113995688803956==
 Content-Type: text/plain
 
-flight 122113 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/122113/
+flight 122117 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/122117/
 
 Regressions :-(
 
@@ -35,8 +35,8 @@ including tests which could not be run:
  build-armhf                   6 xen-build                fail REGR. vs. 121876
 
 Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
  test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
  test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
 
 version targeted for testing:
@@ -45,8 +45,8 @@ baseline version:
  xen                  451004603247205467ec34b366b4cfa3814a5d95
 
 Last test of basis   121876  2018-04-05 10:04:25 Z    3 days
-Failing since        121889  2018-04-05 13:02:10 Z    3 days   31 attempts
-Testing same since   122036  2018-04-07 15:01:18 Z    1 days   13 attempts
+Failing since        121889  2018-04-05 13:02:10 Z    3 days   32 attempts
+Testing same since   122036  2018-04-07 15:01:18 Z    1 days   14 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
@@ -100,7 +100,7 @@ Not pushing.
 (No revision log; it would be 712 lines long.)
 
 
---===============9093508910234035840==
+--===============5718113995688803956==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -110,4 +110,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============9093508910234035840==--
+--===============5718113995688803956==--
