@@ -1,22 +1,14 @@
-From: Paul Semel <semelpaul@gmail.com>
-Subject: Re: [PATCH v3 1/7] introduce time managment in xtf
-Date: Mon, 9 Apr 2018 17:12:46 +0200
-Message-ID: <ec9cc2f5-59b1-d76d-0137-40356cc4170a@gmail.com>
-References: <20180409143543.4568-1-semelpaul@gmail.com>
- <20180409143555.2rh7um6g7op2bvz3@MacBook-Pro-de-Roger.local>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v8] new config option vtsc_tolerance_khz to
+ avoid TSC emulation
+Date: Mon, 9 Apr 2018 16:55:12 +0200
+Message-ID: <20180409162608.2be5cb80.olaf@aepfle.de>
+References: <20180401202958.9173-1-olaf@aepfle.de>
+ <5ACB92A902000078001B9A2B@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4356475384031282166=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=he/8=g6=gmail.com=semelpaul@srs-us1.protection.inumbo.net>)
- id 1f5Y6H-0000fX-EH
- for xen-devel@lists.xenproject.org; Mon, 09 Apr 2018 14:48:53 +0000
-Received: by mail-wr0-x242.google.com with SMTP id y55so9887822wry.3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Apr 2018 07:48:51 -0700 (PDT)
-In-Reply-To: <20180409143555.2rh7um6g7op2bvz3@MacBook-Pro-de-Roger.local>
-Content-Language: en-US
+In-Reply-To: <5ACB92A902000078001B9A2B@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,72 +17,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Paul Semel <phentex@amazon.de>, andrew.cooper3@citrix.com, wipawel@amazon.de
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293c2tpLUfDs3Jl?= =?UTF-8?B?Y2tp?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMDkvMjAxOCAwNDozNSBQTSwgUm9nZXIgUGF1IE1vbm7DqSB3cm90ZToKPj4gdGhpcyBm
-aWxlIGlzIGludHJvZHVjZSB0byBiZSBhYmxlIHRvIGltcGxlbWVudCBhbiBpbnRlciBkb21haW4K
-Pj4gY29tbXVuaWNhdGlvbiBwcm90b2NvbCBvdmVyIHhlbnN0b3JlLiBGb3Igc3luY2hyb25pemF0
-aW9uIHB1cnBvc2UsIHdlIGRvCj4+IHJlYWxseSB3YW50IHRvIGJlIGFibGUgdG8gImNvbnRyb2wi
-IHRpbWUKPj4KPj4gY29tbW9uL3RpbWUuYzogc2luY2VfYm9vdF90aW1lIGdldHMgdGhlIHRpbWUg
-aW4gbmFub3NlY29uZHMgZnJvbSB0aGUKPj4gbW9tZW50IHRoZSBWTSBoYXMgYm9vdGVkCj4+Cj4+
-IFNpZ25lZC1vZmYtYnk6IFBhdWwgU2VtZWwgPHBoZW50ZXhAYW1hem9uLmRlPgo+PiAtLS0KPiAK
-PiBUaGlzIHNlZW1zIHRvIGJlIG1pc3NpbmcgYSBsaXN0IG9mIGNoYW5nZXMgYmV0d2VlbiB2MiBh
-bmQgdjMuIFBsZWFzZQo+IGFkZCBzdWNoIGEgbGlzdCB3aGVuIHBvc3RpbmcgbmV3IHZlcnNpb25z
-Lgo+IAo+PiArdWludDY0X3Qgc2luY2VfYm9vdF90aW1lKHZvaWQpCj4+ICt7Cj4+ICsgICAgdWlu
-dDY0X3QgdHNjOwo+PiArICAgIHVpbnQzMl90IHZlcjEsIHZlcjI7Cj4+ICsgICAgdWludDY0X3Qg
-c3lzdGVtX3RpbWU7Cj4+ICsgICAgdWludDY0X3Qgb2xkX3RzYzsKPj4gKwo+PiArICAgIGRvCj4+
-ICsgICAgewo+PiArICAgICAgICBkbwo+PiArICAgICAgICB7Cj4+ICsgICAgICAgICAgICB2ZXIx
-ID0gQUNDRVNTX09OQ0Uoc2hhcmVkX2luZm8udmNwdV9pbmZvWzBdLnRpbWUudmVyc2lvbik7Cj4+
-ICsgICAgICAgICAgICBzbXBfcm1iKCk7Cj4+ICsgICAgICAgIH0gd2hpbGUgKCAodmVyMSAmIDEp
-ID09IDEgKTsKPj4gKwo+PiArICAgICAgICBzeXN0ZW1fdGltZSA9IEFDQ0VTU19PTkNFKHNoYXJl
-ZF9pbmZvLnZjcHVfaW5mb1swXS50aW1lLnN5c3RlbV90aW1lKTsKPj4gKyAgICAgICAgb2xkX3Rz
-YyA9IEFDQ0VTU19PTkNFKHNoYXJlZF9pbmZvLnZjcHVfaW5mb1swXS50aW1lLnRzY190aW1lc3Rh
-bXApOwo+PiArICAgICAgICBzbXBfcm1iKCk7Cj4+ICsgICAgICAgIHZlcjIgPSBBQ0NFU1NfT05D
-RShzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS52ZXJzaW9uKTsKPj4gKyAgICAgICAgc21w
-X3JtYigpOwo+PiArICAgIH0gd2hpbGUgKCB2ZXIxICE9IHZlcjIgKTsKPiAKPiBUaGlzIGlzIHN0
-aWxsIG92ZXJseSBjb21wbGljYXRlZCBJTU8sIGFuZCB5b3UgaGF2ZSBub3QgcmVwbGllZCB0byBt
-eQo+IHF1ZXN0aW9uIG9mIHdoZXRoZXIgZG9pbmcgdGhlIHNjYWxlX2RlbHRhIGJlbG93IGlzIE9L
-LgoKQWJvdXQgdGhpcyBzY2FsZV9kZWx0YSwgd2UgZGlzY3Vzc2VkIHdpdGggQW5kcmV3LCBhbmQg
-d2UgYXJlIGdvaW5nIHRvIHVzZSAKYW5vdGhlciB2ZXJzaW9uIG9mIHRoZSBmdW5jdGlvbiBhcyBm
-YXIgYXMgSSByZW1lbWJlci4gVGhhdCdzIHdoeSBJIGFtIG5vdCB0YWtpbmcgCmNhcmUgb2YgaXQg
-Zm9yIHRoZSBtb21lbnQuCj4gCj4gQUZBSUNUIHVvdSBfY2Fubm90XyBhY2Nlc3MgYW55IG9mIHRo
-ZSB2Y3B1X3RpbWVfaW5mbyBmaWVsZHMgd2l0aG91dAo+IGNoZWNraW5nIGZvciB0aGUgdmVyc2lv
-biAoaW4gb3JkZXIgdG8gYXZvaWQgcmVhZGluZyBpbmNvbnNpc3RlbnQgZGF0YQo+IGR1cmluZyBh
-biB1cGRhdGUpLCB5ZXQgYmVsb3cgeW91IHJlYWQgdHNjX3RvX3N5c3RlbV9tdWwgYW5kCj4gdHNj
-X3NoaWZ0Lgo+IAoKSSdtIHNvcnJ5LCBJIGFtIHByb2JhYmx5IG5vdCBnZXR0aW5nIHlvdXIgcG9p
-bnQgaGVyZSwgYmVjYXVzZSBJIGFtIGFscmVhZHkgCmNoZWNraW5nIGZvciB0aGUgdmVyc2lvbi4g
-SSB3YXMgYWN0dWFsbHkgY2hlY2tpbmcgZm9yIHRoZSB3Y192ZXJzaW9uIHRvbyBpbiB0aGUgCmZp
-cnN0IHZlcnNpb24gb2YgdGhvc2UgcGF0Y2hlcywgYnV0IGFmdGVyIGNoYXR0aW5nIHdpdGggQW5k
-cmV3LCBJdCBhcHBlYXJlZCB0aGF0IAppdCB3YXMgbm90IG5lY2Vzc2FyeS4uCgo+IEkndmUgYWxy
-ZWFkeSBwb2ludGVkIG91dCB0aGUgY29kZSBhdDoKPiAKPiBodHRwczovL2dpdGh1Yi5jb20vZnJl
-ZWJzZC9mcmVlYnNkL2Jsb2IvbWFzdGVyL3N5cy94ODYveDg2L3B2Y2xvY2suYyNMMTQxCj4gCj4g
-QXMgYSBzaW1wbGVyIHJlZmVyZW5jZSBpbXBsZW1lbnRhdGlvbi4KPiAKPj4gKwo+PiArICAgIHJk
-dHNjKHRzYyk7Cj4+ICsKPj4gKyAgICBzeXN0ZW1fdGltZSArPSBzY2FsZV9kZWx0YSh0c2MgLSBv
-bGRfdHNjLAo+PiArICAgICAgICAgICAgICAgICAgIEFDQ0VTU19PTkNFKHNoYXJlZF9pbmZvLnZj
-cHVfaW5mb1swXS50aW1lLnRzY190b19zeXN0ZW1fbXVsKSwKPj4gKyAgICAgICAgICAgICAgICAg
-ICBBQ0NFU1NfT05DRShzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS50c2Nfc2hpZnQpKTsK
-Pj4gKwo+PiArICAgIHJldHVybiBzeXN0ZW1fdGltZTsKPj4gK30KPj4gKwo+PiArLyoKPj4gKyAq
-IExvY2FsIHZhcmlhYmxlczoKPj4gKyAqIG1vZGU6IEMKPj4gKyAqIGMtZmlsZS1zdHlsZTogIkJT
-RCIKPj4gKyAqIGMtYmFzaWMtb2Zmc2V0OiA0Cj4+ICsgKiB0YWItd2lkdGg6IDQKPj4gKyAqIGlu
-ZGVudC10YWJzLW1vZGU6IG5pbAo+PiArICogRW5kOgo+PiArICovCj4+IGRpZmYgLS1naXQgYS9p
-bmNsdWRlL3h0Zi90aW1lLmggYi9pbmNsdWRlL3h0Zi90aW1lLmgKPj4gbmV3IGZpbGUgbW9kZSAx
-MDA2NDQKPj4gaW5kZXggMDAwMDAwMC4uYjg4ZGE2Mwo+PiAtLS0gL2Rldi9udWxsCj4+ICsrKyBi
-L2luY2x1ZGUveHRmL3RpbWUuaAo+PiBAQCAtMCwwICsxLDMxIEBACj4+ICsvKioKPj4gKyAqIEBm
-aWxlIGluY2x1ZGUveHRmL3RpbWUuaAo+PiArICoKPj4gKyAqIFRpbWUgbWFuYWdlbWVudAo+PiAr
-ICovCj4+ICsjaWZuZGVmIFhURl9USU1FX0gKPj4gKyMgZGVmaW5lIFhURl9USU1FX0gKPj4gKwo+
-PiArI2luY2x1ZGUgPHh0Zi90eXBlcy5oPgo+PiArCj4+ICsjZGVmaW5lIHJkdHNjKHRzYykge1wK
-Pj4gKyAgICB1aW50MzJfdCBsbywgaGk7XAo+PiArICAgIF9fYXNtX18gdm9sYXRpbGUoInJkdHNj
-IjogIj1hIihsbyksICI9ZCIoaGkpKTtcCj4gCj4gUGxlYXNlIG1ha2Ugc3VyZSB5b3Ugb25seSBz
-ZW5kIGEgbmV3IHZlcnNpb24gYWZ0ZXIgaGF2aW5nIGZpeGVkIGFsbAo+IHRoZSBjb21tZW50cywg
-dGhpcyBpcyBzdGlsbCBtaXNzaW5nIHRoZSBzZXJpYWxpemF0aW9uIHJlcXVpcmVtZW50cwo+IG1l
-bnRpb25lZCBpbiB0aGUgcmV2aWV3LCBhbmQgaXQncyBhbHNvIHRoZSB3cm9uZyBmaWxlIHRvIHBs
-YWNlIHRoaXMKPiBoZWxwZXI6Cj4gCgpJIGFtIHNvcnJ5LCBJIHdhcyByZWFsbHkgY29udmluY2Vk
-IHRoYXQgdGhpcyB2ZXJzaW9uIGRpZG4ndCBuZWVkIHJldmlzaW9uIAphbnltb3JlIChhbmQgSSBz
-dGlsbCBkb24ndCBzZWUgd2hhdCBJIHNob3VsZCBjaGFuZ2UpLgoKPiBodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMTgtMDQvbXNnMDA1NDYuaHRt
-bAo+IAo+IFJvZ2VyLgo+IAoKVGhhbmtzLAoKLS0gClBhdWwKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============4356475384031282166==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/VKYJbqzmLUnx.0IjYyp.8.f"; protocol="application/pgp-signature"
+
+--Sig_/VKYJbqzmLUnx.0IjYyp.8.f
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 09 Apr 2018 08:19:53 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> Is there any guarantee that old hypervisors will send this field as zero
+> (rather than some random value)? If so, I think this should be said
+> explicitly in the commit message, together with the fact that you
+> re-use padding fields.
+
+I have to double check, but I'm sure the whole size of the struct is initia=
+lized with zero. The commit message already has "Existing padding fields ar=
+e reused to store vtsc_khz_tolerance as u16."
+
+Thanks,
+
+Olaf
+
+--Sig_/VKYJbqzmLUnx.0IjYyp.8.f
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWst+0AAKCRBdQqD6ppg2
+fhhMAJ9aenrH61jzs38fuJzg2OofpJRogACgsNvjTjzDauIwApRd+UiRGM+vVvM=
+=0K5k
+-----END PGP SIGNATURE-----
+
+--Sig_/VKYJbqzmLUnx.0IjYyp.8.f--
+
+
+--===============4356475384031282166==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4356475384031282166==--
