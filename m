@@ -1,20 +1,15 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v3] xen/privcmd: add
- IOCTL_PRIVCMD_MMAP_RESOURCE
-Date: Mon, 9 Apr 2018 12:36:25 -0400
-Message-ID: <bd84cd4b-1834-b631-303c-3e190ad7676d__41319.595979485$1523291638$gmane$org@oracle.com>
-References: <20180409093629.9621-1-paul.durrant@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 122136: regressions - FAIL
+Date: Mon, 09 Apr 2018 16:35:59 +0000
+Message-ID: <osstest-122136-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8374743541032243292=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=phip=g6=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1f5Zl0-0001lj-6n
- for xen-devel@lists.xenproject.org; Mon, 09 Apr 2018 16:35:02 +0000
-In-Reply-To: <20180409093629.9621-1-paul.durrant@citrix.com>
-Content-Language: en-US
+ <srs0=lcev=g6=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f5Zm2-0001qc-0T
+ for xen-devel@lists.xenproject.org; Mon, 09 Apr 2018 16:36:06 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,26 +18,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>, xen-devel@lists.xenproject.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMDkvMjAxOCAwNTozNiBBTSwgUGF1bCBEdXJyYW50IHdyb3RlOgo+IE15IHJlY2VudCBY
-ZW4gcGF0Y2ggc2VyaWVzIGludHJvZHVjZXMgYSBuZXcgSFlQRVJWSVNPUl9tZW1vcnlfb3AgdG8K
-PiBzdXBwb3J0IGRpcmVjdCBwcml2LW1hcHBpbmcgb2YgY2VydGFpbiBndWVzdCByZXNvdXJjZXMg
-KHN1Y2ggYXMgaW9yZXEKPiBwYWdlcywgdXNlZCBieSBlbXVsYXRvcnMpIGJ5IGEgdG9vbHMgZG9t
-YWluLCByYXRoZXIgdGhhbiBoYXZpbmcgdG8gYWNjZXNzCj4gc3VjaCByZXNvdXJjZXMgdmlhIHRo
-ZSBndWVzdCBQMk0uCj4KPiBUaGlzIHBhdGNoIGFkZHMgdGhlIG5lY2Vzc2FyeSBpbmZyYXN0cnVj
-dHVyZSB0byB0aGUgcHJpdmNtZCBkcml2ZXIgYW5kCj4gWGVuIE1NVSBjb2RlIHRvIHN1cHBvcnQg
-ZGlyZWN0IHJlc291cmNlIG1hcHBpbmcuCj4KPiBOT1RFOiBUaGUgYWRqdXN0bWVudCBpbiB0aGUg
-TU1VIGNvZGUgaXMgcGFydGlhbGx5IGNvc21ldGljLiBYZW4gd2lsbCBub3cKPiAgICAgICBhbGxv
-dyBhIFBWIHRvb2xzIGRvbWFpbiB0byBtYXAgZ3Vlc3QgcGFnZXMgZWl0aGVyIGJ5IEdGTiBvciBN
-Rk4sIHRodXMKPiAgICAgICB0aGUgdGVybSAnbWZuJyBoYXMgYmVlbiBzd2FwcGVkIGZvciAncGZu
-JyBpbiB0aGUgbG93ZXIgbGF5ZXJzIG9mIHRoZQo+ICAgICAgIHJlbWFwIGNvZGUuCj4KPiBTaWdu
-ZWQtb2ZmLWJ5OiBQYXVsIER1cnJhbnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPgoKUmV2aWV3
-ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+CgpJIHRo
-aW5rIHRoaXMgd2lsbCBoYXZlIHRvIHdhaXQgdW50aWwgNC4xOCB0aG91Z2gsIGl0J3Mgc29tZXdo
-YXQgbGF0ZSBmb3IKY3VycmVudCBtZXJnZSB3aW5kb3cgcmlnaHQgbm93LgoKLWJvcmlzCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============8374743541032243292==
+Content-Type: text/plain
+
+flight 122136 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/122136/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 121876
+ build-armhf                   6 xen-build                fail REGR. vs. 121876
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ xen                  dba899de14989b3dff78009404ed891da7fefdc1
+baseline version:
+ xen                  451004603247205467ec34b366b4cfa3814a5d95
+
+Last test of basis   121876  2018-04-05 10:04:25 Z    4 days
+Failing since        121889  2018-04-05 13:02:10 Z    4 days   37 attempts
+Testing same since   122136  2018-04-09 14:02:06 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Amit Singh Tomar <amittomer25@gmail.com>
+  Andre Przywara <andre.przywara@arm.com>
+  Andre Pzywara <andre.przywara@arm.com>
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Juergen Gross <jgross@suse.com>
+  Julien Grall <julien.grall@arm.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Marcello Seri <marcello.seri@citrix.com>
+  Marcus of Wetware Labs <marcus@wetwa.re>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Petre Eftime <epetre@amazon.com>
+  Razvan Cojocaru <rcojocaru@bitdefender.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Tim Deegan <tim@xen.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  pass    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386                     pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 750 lines long.)
+
+
+--===============8374743541032243292==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8374743541032243292==--
