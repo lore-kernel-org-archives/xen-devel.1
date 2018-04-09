@@ -1,21 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 2/2] vhpet: add support for level
- triggered interrupts
-Date: Mon, 09 Apr 2018 09:51:17 -0600
-Message-ID: <5ACBA81502000078001B9B49@prv1-mh.provo.novell.com>
-References: <20180330123600.22716-1-roger.pau@citrix.com>
- <20180330123600.22716-3-roger.pau@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v2] x86/PVH/libxl: Check whether Linux guest
+ can handle RSDP at 4G boundary
+Date: Mon, 9 Apr 2018 18:04:52 +0200
+Message-ID: <1cdcf47a-7af6-4e5d-341a-b98b8d7293a9@suse.com>
+References: <20180409142459.2096-1-boris.ostrovsky@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=shlr=g6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1f5Z4m-0006Ra-6F
- for xen-devel@lists.xenproject.org; Mon, 09 Apr 2018 15:51:24 +0000
-In-Reply-To: <20180330123600.22716-3-roger.pau@citrix.com>
-Content-Disposition: inline
+ (envelope-from <srs0=rfzc=g6=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1f5ZHs-0007l5-SQ
+ for xen-devel@lists.xenproject.org; Mon, 09 Apr 2018 16:04:56 +0000
+In-Reply-To: <20180409142459.2096-1-boris.ostrovsky@oracle.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,35 +23,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Stefan Bader <stefan.bader@canonical.com>, xen-devel@lists.xenproject.org
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org, wei.liu2@citrix.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, julien.grall@arm.com, jbeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDMwLjAzLjE4IGF0IDE0OjM2LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IExldmVsIHRyaWdnZXJlZCBpbnRlcnJ1cHRzIGFyZSBub3QgYW4gb3B0aW9uYWwgZmVhdHVyZSBv
-ZiBIUEVULCBhbmQKPiBtdXN0IGJlIGltcGxlbWVudGVkIGluIG9yZGVyIHRvIGNvbXBseSB3aXRo
-IHRoZSBIUEVUIHNwZWNpZmljYXRpb24uCj4gCj4gSW1wbGVtZW50IHRoZW0gYnkgYWRkaW5nIGEg
-Y2FsbGJhY2sgdG8gdGhlIHRpbWVyIHdoaWNoIHNldHMgdGhlCj4gaW50ZXJydXB0IGJpdCBpbiB0
-aGUgZ2VuZXJhbCBpbnRlcnJ1cHQgc3RhdHVzIHJlZ2lzdGVyLiBGdXJ0aGVyCj4gaW50ZXJydXB0
-cyAoaW4gY2FzZSBvZiBwZXJpb2RpYyBtb2RlKSB3aWxsIG5vdCBiZSBpbmplY3RlZCB1bnRpbCB0
-aGUKPiBiaXQgaXMgY2xlYXJlZC4KPiAKPiBJbiBvcmRlciB0byByZXNldCB0aGUgaW50ZXJydXB0
-cyB3aGVuIHRoZSBzdGF0dXMgYml0IGlzIGNsZWFyIFhlbiBtdXN0Cj4gYWxzbyBkZXRlY3QgYWNj
-ZXNzZXMgdG8gc3VjaCByZWdpc3Rlci4KCnMvZGV0ZWN0L2hhbmRsZS8gYW5kIHMvc3VjaC90aGUg
-c3RhdHVzLyA/Cgo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vaHBldC5jCj4gKysrIGIveGVuL2Fy
-Y2gveDg2L2h2bS9ocGV0LmMKPiBAQCAtMjIwLDYgKzIyMCwxNyBAQCBzdGF0aWMgdm9pZCBocGV0
-X3N0b3BfdGltZXIoSFBFVFN0YXRlICpoLCB1bnNpZ25lZCBpbnQgdG4sCj4gICAgICBocGV0X2dl
-dF9jb21wYXJhdG9yKGgsIHRuLCBndWVzdF90aW1lKTsKPiAgfQo+ICAKPiArc3RhdGljIHZvaWQg
-aHBldF90aW1lcl9maXJlZChzdHJ1Y3QgdmNwdSAqdiwgdm9pZCAqZGF0YSkKCk5vIG5lZWQgZm9y
-IHRoZSBocGV0XyBwcmVmaXggd2hlbiB0aGUgZnVuY3Rpb24gaXMgc3RhdGljLgoKPiArewo+ICsg
-ICAgdW5zaWduZWQgaW50IHRuID0gKHVuc2lnbmVkIGludClkYXRhOwoKTW9zdCBnY2MgdmVyc2lv
-bnMgSSdtIGF3YXJlIG9mIHdpbGwgd2FybiBhYm91dCBjYXN0cyBiZXR3ZWVuCnBvaW50ZXJzIGFu
-ZCBpbnRlZ2VycyBvZiBkaWZmZXJlbnQgc2l6ZSAtIHRoZSBjYXN0IG5lZWRzIHRvIGJlIHRvCnVu
-c2lnbmVkIGxvbmcgKHdoaWxlIHRoZSB2YXJpYWJsZSB0eXBlIGNhbiByZW1haW4gYXMgaXMpLiBP
-ZGRseQplbm91Z2ggeW91IGdvIHRocm91Z2ggdW5zaWduZWQgbG9uZyB3aGVuIGNhc3RpbmcgaW4g
-dGhlIG90aGVyCmRpcmVjdGlvbi4KCj4gQEAgLTM2MCw2ICszNzcsMTkgQEAgc3RhdGljIGludCBo
-cGV0X3dyaXRlKAo+ICAgICAgICAgIH0KPiAgICAgICAgICBicmVhazsKPiAgCj4gKyAgICBjYXNl
-IEhQRVRfU1RBVFVTOgo+ICsgICAgICAgIC8qIHdyaXRlIDEgdG8gY2xlYXIuICovCj4gKyAgICAg
-ICAgd2hpbGUgKG5ld192YWwpCgpNaXNzaW5nIGJsYW5rcy4KCkphbgoKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDkvMDQvMTggMTY6MjQsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiBDb21taXQgNGE1NzMz
+NzcxZTZmICgibGlieGw6IHB1dCBSU0RQIGZvciBQVkggZ3Vlc3QgbmVhciA0R0IiKSBicmVha3MK
+PiBwcmUtNC4xNyBMaW51eCBndWVzdHMgc2luY2UgdGhleSBkbyBub3QgdXNlIHN0YXJ0X2luZm8n
+cyByc2RwX3BhZGRyCj4gcG9pbnRlciBhbmQgaW5zdHJlYWQgc2NhbiBCSU9TIG1lbW9yeSBmb3Ig
+UlNEUCBzaWduYXR1cmUuCj4gCj4gSW50cm9kdWNlIFhFTkZFQVRfcnNkcF91bnJlc3RyaWN0ZWQg
+ZmVhdHVyZSBmbGFnIHRoYXQgaW5kaWNhdGVzIHdoZXRoZXIKPiB0aGUgZ3Vlc3QgY2FuIGhhbmRs
+ZSBSU0RQIGF0IGxvY2F0aW9ucyBwb2ludGVkIHRvIGJ5IHJzZHBfcGFkZHIuCj4gCj4gU2luY2Ug
+b25seSBMaW51eCBQVkggZ3Vlc3RzIHN1ZmZlciBmcm9tIHRoaXMgcHJvYmxlbSAoQlNEIGhhcyBh
+bHdheXMKPiByZWxpZWQgb24gcnNkcF9wYWRkcikgd2UgY2hlY2sgdGhpcyBmbGFnIGp1c3QgZm9y
+IHRob3NlIGd1ZXN0cy4gSWYgdGhlCj4gZmxhZyBpcyBub3Qgc2V0IHdlIHBsYWNlIFJTRFAgaW4g
+QklPUywgYXMgYmVmb3JlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9y
+aXMub3N0cm92c2t5QG9yYWNsZS5jb20+Cj4gLS0tCj4gdjI6Cj4gKiBSZW5hbWVkIGZsYWcgdG8g
+WEVORkVBVF9saW51eF9yc2RwX3VucmVzdHJpY3RlZAo+ICogQ2xhcmlmaWVkIGNvbW1lbnQgaW4g
+ZmVhdHVyZXMuaAo+IAo+IEkgZGlkIG5vdCBpbmNsdWRlIHRhZ3MgYmVjYXVzZSBvZiB0aGUgY2hh
+bmdlcyBidXQganVzdCBpbiBjYXNlIC0tLQo+IGhlcmUgdGhleSBhcmU6Cj4gCj4gQWNrZWQtYnk6
+IEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KClNvIGFnYWluOgoKUmV2
+aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KUmVsZWFzZS1hY2tlZC1i
+eTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4KCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
