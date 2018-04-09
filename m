@@ -1,8 +1,8 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+From: Juergen Gross <jgross@suse.com>
 Subject: Re: [PATCH for-4.11] x86/pv: Fix up erroneous segments
  for 32bit syscall entry
-Date: Mon, 9 Apr 2018 11:46:26 +0100
-Message-ID: <e2a15ff3-114b-7c65-60e5-ad63b7e30295@citrix.com>
+Date: Mon, 9 Apr 2018 12:47:30 +0200
+Message-ID: <da8339ec-da06-d863-e94b-a385e3f375d7@suse.com>
 References: <1523267087-4375-1-git-send-email-andrew.cooper3@citrix.com>
  <20180409104416.eepcbkyy6nhtd2ue@citrix.com>
 Mime-Version: 1.0
@@ -10,7 +10,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 In-Reply-To: <20180409104416.eepcbkyy6nhtd2ue@citrix.com>
-Content-Language: en-GB
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,11 +19,11 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDkvMDQvMTggMTE6NDQsIFdlaSBMaXUgd3JvdGU6Cj4gT24gTW9uLCBBcHIgMDksIDIwMTgg
+T24gMDkvMDQvMTggMTI6NDQsIFdlaSBMaXUgd3JvdGU6Cj4gT24gTW9uLCBBcHIgMDksIDIwMTgg
 YXQgMTA6NDQ6NDdBTSArMDEwMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4gVGhlIGV4aXN0aW5n
 IEZMQVRfS0VSTkVMX1NTIGV4cGFuZHMgdG8gdGhlIGNvcnJlY3QgdmFsdWUsIDB4ZTAyYiwgYnV0
 IGlzIHRoZQo+PiB3cm9uZyBjb25zdGFudCB0byB1c2UuICBTd2l0Y2ggdG8gRkxBVF9VU0VSX1NT
@@ -65,14 +65,12 @@ SU5faXNfMzJiaXRfcHYoJXJjeCkKPj4gICAgICAgICAgamUgICAgc3dpdGNoX3RvX2tlcm5lbAo+
 PiArCj4+ICsgICAgICAgIC8qIEZpeCB1cCByZXBvcnRlZCAlY3MvJXNzIGZvciBjb21wYXQgZG9t
 YWlucy4gKi8KPj4gKyAgICAgICAgbW92bCAgJDB4ZTAzMywgVVJFR1Nfc3MoJXJzcCkgLyogQ29t
 cGF0IEZMQVRfUklORzNfU1MgKi8KPj4gKyAgICAgICAgbW92bCAgJDB4ZTAyYiwgVVJFR1NfY3Mo
-JXJzcCkgLyogQ29tcGF0IEZMQVRfUklORzNfQ1MgKi8KPiBJIHdvbmRlciBpZiBpdCB3b3VsZCBi
-ZSBiZXR0ZXIgdG8gaW50cm9kdWNlIENPTVBBVF9GTEFUX1JJTkczXyogaW4KPiB4ZW4teDg2XzY0
-Lmg/Cj4KPiBJbiBhbnkgY2FzZSwgdGhlIHJlYXNvbmluZyBhbmQgY29kZSBsb29rcyBjb3JyZWN0
-IHRvIG1lOgo+Cj4gUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpJ
-IGNvbnNpZGVyZWQgdGhhdCwgYW5kIGFtIG9wZW4gdG8gc3VnZ2VzdGlvbnMuwqAgVGhlIHByb2Js
-ZW0gaXMgdGhhdCB3ZQpkb24ndCB3YW50IHRvIHB1dCBDT01QQVQgZGVmaW5pdGlvbnMgaW4gdGhh
-dCBoZWFkZXIgZmlsZSwgYmVjYXVzZSB0aGV5CmFyZSBpbmFwcGxpY2FibGUgdG8gNjRiaXQgUFYg
-Z3Vlc3RzLCB3aG8gYXJlIGludGVuZGVkIGNvbnN1bWVycy4KCn5BbmRyZXcKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+JXJzcCkgLyogQ29tcGF0IEZMQVRfUklORzNfQ1MgKi8KPiAKPiBJIHdvbmRlciBpZiBpdCB3b3Vs
+ZCBiZSBiZXR0ZXIgdG8gaW50cm9kdWNlIENPTVBBVF9GTEFUX1JJTkczXyogaW4KPiB4ZW4teDg2
+XzY0Lmg/CgpUaGF0IHdhcyBteSBmaXJzdCB0aG91Z2h0LCB0b28uCgo+IAo+IEluIGFueSBjYXNl
+LCB0aGUgcmVhc29uaW5nIGFuZCBjb2RlIGxvb2tzIGNvcnJlY3QgdG8gbWU6Cj4gCj4gUmV2aWV3
+ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpSZWxlYXNlLWFja2VkLWJ5OiBK
+dWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
