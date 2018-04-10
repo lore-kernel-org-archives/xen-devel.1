@@ -1,13 +1,23 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Tue, 10 Apr 2018 21:03:02 +0200
-Message-ID: <20180410190302.GC7177@aepfle.de>
-References: <20180410085729.GA472@aepfle.de> <20180410155949.GB7177@aepfle.de>
- <ebdd4cb871b2d754959e8358641810d61b3d0856.camel@suse.com>
+From: Venu Busireddy <venu.busireddy@oracle.com>
+Subject: Re: [PATCH v3 1/2] libxl: Implement the handler to
+ handle unrecoverable AER errors [and 1 more messages]
+Date: Tue, 10 Apr 2018 14:50:58 -0500
+Message-ID: <20180410195058.GA2936@vbusired-dt>
+References: <20180402162536.3134-1-venu.busireddy@oracle.com>
+ <20170807235457.3943-1-venu.busireddy@oracle.com>
+ <20170807235457.3943-2-venu.busireddy@oracle.com>
+ <20170808143301.5kyqlbomcyr3wa4o@citrix.com>
+ <20170808145136.GA15728@vbusired-lt>
+ <22979.62230.829267.882579@mariner.uk.xensource.com>
+ <23235.39017.980437.46925@mariner.uk.xensource.com>
+ <20180403152910.GA6444@vbusired-dt>
+ <23235.45350.400959.982565@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4279517000793581048=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <ebdd4cb871b2d754959e8358641810d61b3d0856.camel@suse.com>
+Content-Disposition: inline
+In-Reply-To: <23235.45350.400959.982565@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,76 +26,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>
-Cc: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xen.org
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: Elena Ufimtseva <elena.ufimtseva@oracle.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wim Ten Have <wim.ten.have@oracle.com>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4279517000793581048==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="O3RTKUHj+75w1tg5"
-Content-Disposition: inline
-
-
---O3RTKUHj+75w1tg5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Tue, Apr 10, Dario Faggioli wrote:
-
-> On Tue, 2018-04-10 at 17:59 +0200, Olaf Hering wrote:
-> > memory=4444
-> > vcpus=36
-> > cpu="nodes:1,^node:0"
-> > cpu_soft="nodes:1,^node:0"
-> As said, its cpus= and cpus_soft=, and you probably just need
-> cpus="node:1"
-> cpus_soft="node:1"
-> Or, even just:
-> cpus="node:1"
-> as, if soft-affinity is set to be equal to hard, it is just ignored.
-
-Well, that was a noop. But xl.cfg states "nodes:0-3,^node:2", so this
-should work:
-cpus="nodes:3,^node:0"
-cpus_soft="nodes:3,^node:0"
-
-xl create -f fv_sles12sp1.f.tst.cfg
-libxl: error: libxl_sched.c:62:libxl__set_vcpuaffinity: Domain 16:Setting vcpu affinity: Invalid argument
-libxl: error: libxl_dom.c:461:libxl__build_pre: setting affinity failed on vcpu `0'
-libxl: error: libxl_create.c:1265:domcreate_rebuild_done: Domain 16:cannot (re-)build domain: -3
-libxl: error: libxl_domain.c:1034:libxl__destroy_domid: Domain 16:Non-existant domain
-libxl: error: libxl_domain.c:993:domain_destroy_callback: Domain 16:Unable to destroy guest
-libxl: error: libxl_domain.c:920:domain_destroy_cb: Domain 16:Destruction of domain failed
-
-Same for nodes:2..., just nodes:1... works.
-
-And after some attempts, cpus="nodes:2/3" fails too.
-There is no indication what is invalid.
-
-Olaf
-
---O3RTKUHj+75w1tg5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWs0KYwAKCRBdQqD6ppg2
-fivcAKCgndLnTTKqK39oFftkmxncZbn0GgCfWFIIq1LTef5kb63ATZ8bCT2bwW0=
-=S+79
------END PGP SIGNATURE-----
-
---O3RTKUHj+75w1tg5--
-
-
---===============4279517000793581048==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4279517000793581048==--
+T24gMjAxOC0wNC0wMyAxNzo1MTo1MCArMDEwMCwgSWFuIEphY2tzb24gd3JvdGU6Cj4gVmVudSBC
+dXNpcmVkZHkgd3JpdGVzICgiUmU6IFtQQVRDSCB2MyAxLzJdIGxpYnhsOiBJbXBsZW1lbnQgdGhl
+IGhhbmRsZXIgdG8gaGFuZGxlIHVucmVjb3ZlcmFibGUgQUVSIGVycm9ycyBbYW5kIDEgbW9yZSBt
+ZXNzYWdlc10iKToKPiA+IE9uIDIwMTgtMDQtMDMgMTY6MDY6MTcgKzAxMDAsIElhbiBKYWNrc29u
+IHdyb3RlOgo+ID4gPiBJYW4gSmFja3NvbiB3cml0ZXMgKCJSZTogW1BBVENIIHYzIDEvMl0gbGli
+eGw6IEltcGxlbWVudCB0aGUgaGFuZGxlciB0byBoYW5kbGUgdW5yZWNvdmVyYWJsZSBBRVIgZXJy
+b3JzIik6Cj4gPiA+ID4gSSdtIGFmcmFpZCB0aGF0IEkgc3RpbGwgaGF2ZSByZXNlcnZhdGlvbnMg
+YWJvdXQgdGhlIGRlc2lnbiBxdWVzdGlvbnMuCj4gPiA+ID4gRXZpZGVudGx5IEkgZGlkbid0IG1h
+a2UgbXkgcXVlc3Rpb25zIGNsZWFyIGVub3VnaC4KPiA+ID4gPiAKPiA+ID4gPiBbIDY0IGxpbmVz
+IG9mIGRldGFpbGVkIGRpc2N1c3Npb24gZWxpZGVkIF0KPiA+ID4gCj4gPiA+IEkgaGF2ZW4ndCBz
+ZWVuIGEgcmVwbHkgdG8gdGhhdC4KPiA+IAo+ID4gUmVwbHkgdG8gdGhhdCBpcyB0aGUgdjUgcGF0
+Y2guIFlvdXIgY29uY2VybiBpbiB2NCB3YXMsICJ3aHkgaXMgdGhpcwo+ID4gZXJyb3IgaGFuZGxp
+bmcgZG9uZSBvbmx5IGluIHNvbWUgY2FzZXM/IiBNZWFuaW5nLCB0aGUgZXJyb3IgaGFuZGxpbmcK
+PiA+IGhhcHBlbnMgb25seSBmb3IgZ3Vlc3RzIGNyZWF0ZWQgdXNpbmcgeGwsIGJ1dCBpdCBkb2Vz
+IG5vdCBoYXBwZW4gZm9yCj4gPiBndWVzdHMgY3JlYXRlZCB1c2luZyBsaWJ2aXJ0LiBJIGFkZHJl
+c3NlZCB0aGF0IGluIHRoZSB2NSBwYXRjaC4gUGxlYXNlCj4gPiBzZWUgYmVsb3cgZm9yIG1vcmUg
+ZGV0YWlscy4KPiAKPiBPaC4gIEkgc2VlLgo+IAo+ID4gPiBJJ20gY29uZnVzZWQgYnkgdGhlIHJl
+c3BvbnNlcyBpbiB0aGUgdGhyZWFkIHdoaWNoIHJlbGF0ZSB0byBsaWJ2aXJ0Lgo+ID4gPiBJU1RN
+IHRoYXQgYSBsaWJ2aXJ0IHBhdGNoIGlzIGFsc28gcmVxdWlyZWQuICBEbyB5b3UgbWVhbiB0aGF0
+IGluIHY1Cj4gPiA+IHRoZXJlIGlzIGFsc28gYSBsaWJ2aXJ0IHBhdGNoID8KPiA+IAo+ID4gbGli
+dmlydCBlbmRzIHVwIGNhbGxpbmcgZG9fZG9tYWluX2NyZWF0ZSgpIGluIHRvb2xzL2xpYnhsL2xp
+YnhsX2NyZWF0ZS5jLAo+ID4gYW5kIHRoYXQgaXMgd2hlcmUgSSBhbSByZWdpc3RlcmluZyB0aGUg
+ZXJyb3IgaGFuZGxlci4gVGhhdCBjaGFuZ2UgdGFrZXMKPiA+IGNhcmUgb2YgZ3Vlc3RzIGNyZWF0
+ZWQgdXNpbmcgeGwgY29tbWFuZCBhcyB3ZWxsIGFzIGxpYnZpcnQuIEhlbmNlIHRoZXJlCj4gPiBp
+cyBubyBjaGFuZ2UgaW4gbGlidmlydC4KPiAKPiBJJ20gc29ycnkgdG8gc2F5IHRoYXQgdGhpcyBp
+cyBjb21wbGV0ZWx5IHdyb25nLiAgSSBkaWRuJ3Qgc3BvdCB0aGF0Cj4gaHVuayBpbiB0aGUgdjUg
+Mi8yIHBhdGNoLiAgSSBkb24ndCB0aGluayB5b3VyIGRlc2NyaXB0aW9uIGluIHlvdXIgdjQKPiB0
+byB2NSBjaGFuZ2VzIHN1bW1hcnkgcmVhbGx5IGhpZ2hsaWdodHMgdGhlIHN1YnN0YW50aWFsIGRl
+c2lnbiBjaGFuZ2UuCj4gCj4gSSB0aGluayBpdCB3b3VsZCBoYXZlIGJlZW4gYmV0dGVyIHRvIHJl
+cGx5IHRvIG15IHByb3NlIGVtYWlsLiAgV2UKPiB3b3VsZCBoYXZlIGJlZW4gYWJsZSB0byBleHBs
+b3JlIHRoZSBkZXNpZ24gcG9zc2liaWxpdGllcy4KPiAKPiBXaGF0IHlvdSBoYXZlIGRvbmUgaXMg
+d3JvbmcgYmVjYXVzZToKPiAKPiAgKiBZb3UgaGF2ZSByZW1vdmVkIHRoZSBsaWJ4bF9fYWVyX3dh
+dGNoIGZyb20gdGhlCj4gICAgbGlieGxfcmVnX2Flcl9ldmVudHNfaGFuZGxlciBBUEkgd2hpY2gg
+bWVhbnMgdGhlIGVmZmVjdCBpcyBub3cKPiAgICBnbG9iYWwgZm9yIHRoZSBjdHguICBUaGlzIGlz
+IG5vdCBjb3JyZWN0IGZvciBhIGxpYnhsIGV2ZW50Cj4gICAgZ2VuZXJhdGlvbiByZXF1ZXN0IGZ1
+bmN0aW9uLiAgKEFsdGhvdWdoIHRoaXMgaXNuJ3Qgb25lLikKPiAKPiAgKiBOb3QgYWxsIGNhbGxl
+cnMgb2YgbGlieGwgd2lsbCBuZWNlc3NhcmlseSByZXRhaW4gdGhlIHByb2Nlc3MsIG9yCj4gICAg
+dGhlIGN0eCwgaW4gd2hpY2ggdGhleSBjYWxsZWQgbGlieGxfZG9tYWluX2NyZWF0ZS4gIEkgdGhp
+bmsgbGlidmlydAo+ICAgIGRvZXMgKGJ1dCBJJ20gbm90IHN1cmUpLCBhbmQgeGwgdXN1YWxseSBk
+b2VzLCBidXQgaXQncyBub3QKPiAgICBndWFyYW50ZWVkLgo+IAo+ICAqIEl0J3MgcXVpdGUgdW5j
+bGVhciB3aHkgdGhpcyBmdW5jdGlvbiBpcyBhIHB1YmxpYyBvbmUuCj4gCj4gVGhlIGVudGlyZSBh
+cHByb2FjaCBpcyB3cm9uZywgSSdtIGFmcmFpZC4KPiAKPiBXZSBuZWVkIHRvIGdvIGJhY2sgdG8g
+dGhlIGRlc2lnbi4gIFBsZWFzZSB3b3VsZCB5b3UgcmVwbHkgdG8gbXkgbWFpbAo+IGZyb20gU2Vw
+dGVtYmVyLgoKU3VyZS4gSSB3aWxsIHJlcGx5IHRvIHlvdXIgZW1haWwgZnJvbSBTZXB0ZW1iZXIu
+CgpWZW51Cgo+IFRoYW5rcywKPiBJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
