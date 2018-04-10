@@ -1,26 +1,13 @@
-From: Paul Semel <semelpaul@gmail.com>
-Subject: Re: [PATCH v3 1/7] introduce time managment in xtf
-Date: Tue, 10 Apr 2018 12:32:23 +0200
-Message-ID: <544f6c07-c5db-1fee-51f4-63b6ddede101@gmail.com>
-References: <20180409143543.4568-1-semelpaul@gmail.com>
- <20180409143555.2rh7um6g7op2bvz3@MacBook-Pro-de-Roger.local>
- <ec9cc2f5-59b1-d76d-0137-40356cc4170a@gmail.com>
- <20180410080801.cpgvjqahlugfq6jx@MacBook-Pro-de-Roger.local>
- <2e105554-78f7-0412-549b-34d084566b14@gmail.com>
- <20180410100502.fm7bmdxivyuqp2bz@MacBook-Pro-de-Roger.local>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: crash in csched_load_balance after xl vcpu-pin
+Date: Tue, 10 Apr 2018 12:33:20 +0200
+Message-ID: <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
+References: <20180410085729.GA472@aepfle.de>
+ <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6181891034185227054=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=l6up=g7=gmail.com=semelpaul@srs-us1.protection.inumbo.net>)
- id 1f5qZf-00055o-Q3
- for xen-devel@lists.xenproject.org; Tue, 10 Apr 2018 10:32:27 +0000
-Received: by mail-wr0-x22b.google.com with SMTP id 80so12286441wrb.2
- for <xen-devel@lists.xenproject.org>; Tue, 10 Apr 2018 03:32:26 -0700 (PDT)
-In-Reply-To: <20180410100502.fm7bmdxivyuqp2bz@MacBook-Pro-de-Roger.local>
-Content-Language: en-US
+In-Reply-To: <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,81 +16,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, wipawel@amazon.de
+To: George Dunlap <George.Dunlap@citrix.com>, Olaf Hering <olaf@aepfle.de>
+Cc: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMTAvMjAxOCAxMjowNSBQTSwgUm9nZXIgUGF1IE1vbm7DqSB3cm90ZToKPj4+Pj4+IHRo
-aXMgZmlsZSBpcyBpbnRyb2R1Y2UgdG8gYmUgYWJsZSB0byBpbXBsZW1lbnQgYW4gaW50ZXIgZG9t
-YWluCj4+Pj4+PiBjb21tdW5pY2F0aW9uIHByb3RvY29sIG92ZXIgeGVuc3RvcmUuIEZvciBzeW5j
-aHJvbml6YXRpb24gcHVycG9zZSwgd2UgZG8KPj4+Pj4+IHJlYWxseSB3YW50IHRvIGJlIGFibGUg
-dG8gImNvbnRyb2wiIHRpbWUKPj4+Pj4+Cj4+Pj4+PiBjb21tb24vdGltZS5jOiBzaW5jZV9ib290
-X3RpbWUgZ2V0cyB0aGUgdGltZSBpbiBuYW5vc2Vjb25kcyBmcm9tIHRoZQo+Pj4+Pj4gbW9tZW50
-IHRoZSBWTSBoYXMgYm9vdGVkCj4+Pj4+Pgo+Pj4+Pj4gU2lnbmVkLW9mZi1ieTogUGF1bCBTZW1l
-bCA8cGhlbnRleEBhbWF6b24uZGU+Cj4+Pj4+PiAtLS0KPj4+Pj4KPj4+Pj4gVGhpcyBzZWVtcyB0
-byBiZSBtaXNzaW5nIGEgbGlzdCBvZiBjaGFuZ2VzIGJldHdlZW4gdjIgYW5kIHYzLiBQbGVhc2UK
-Pj4+Pj4gYWRkIHN1Y2ggYSBsaXN0IHdoZW4gcG9zdGluZyBuZXcgdmVyc2lvbnMuCj4+Pj4+Cj4+
-Pj4+PiArdWludDY0X3Qgc2luY2VfYm9vdF90aW1lKHZvaWQpCj4+Pj4+PiArewo+Pj4+Pj4gKyAg
-ICB1aW50NjRfdCB0c2M7Cj4+Pj4+PiArICAgIHVpbnQzMl90IHZlcjEsIHZlcjI7Cj4+Pj4+PiAr
-ICAgIHVpbnQ2NF90IHN5c3RlbV90aW1lOwo+Pj4+Pj4gKyAgICB1aW50NjRfdCBvbGRfdHNjOwo+
-Pj4+Pj4gKwo+Pj4+Pj4gKyAgICBkbwo+Pj4+Pj4gKyAgICB7Cj4+Pj4+PiArICAgICAgICBkbwo+
-Pj4+Pj4gKyAgICAgICAgewo+Pj4+Pj4gKyAgICAgICAgICAgIHZlcjEgPSBBQ0NFU1NfT05DRShz
-aGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS52ZXJzaW9uKTsKPj4+Pj4+ICsgICAgICAgICAg
-ICBzbXBfcm1iKCk7Cj4+Pj4+PiArICAgICAgICB9IHdoaWxlICggKHZlcjEgJiAxKSA9PSAxICk7
-Cj4+Pj4+PiArCj4+Pj4+PiArICAgICAgICBzeXN0ZW1fdGltZSA9IEFDQ0VTU19PTkNFKHNoYXJl
-ZF9pbmZvLnZjcHVfaW5mb1swXS50aW1lLnN5c3RlbV90aW1lKTsKPj4+Pj4+ICsgICAgICAgIG9s
-ZF90c2MgPSBBQ0NFU1NfT05DRShzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS50c2NfdGlt
-ZXN0YW1wKTsKPj4+Pj4+ICsgICAgICAgIHNtcF9ybWIoKTsKPj4+Pj4+ICsgICAgICAgIHZlcjIg
-PSBBQ0NFU1NfT05DRShzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS52ZXJzaW9uKTsKPj4+
-Pj4+ICsgICAgICAgIHNtcF9ybWIoKTsKPj4+Pj4+ICsgICAgfSB3aGlsZSAoIHZlcjEgIT0gdmVy
-MiApOwo+Pj4+Pgo+Pj4+PiBUaGlzIGlzIHN0aWxsIG92ZXJseSBjb21wbGljYXRlZCBJTU8sIGFu
-ZCB5b3UgaGF2ZSBub3QgcmVwbGllZCB0byBteQo+Pj4+PiBxdWVzdGlvbiBvZiB3aGV0aGVyIGRv
-aW5nIHRoZSBzY2FsZV9kZWx0YSBiZWxvdyBpcyBPSy4KPj4+Pgo+Pj4+IEFib3V0IHRoaXMgc2Nh
-bGVfZGVsdGEsIHdlIGRpc2N1c3NlZCB3aXRoIEFuZHJldywgYW5kIHdlIGFyZSBnb2luZyB0byB1
-c2UKPj4+PiBhbm90aGVyIHZlcnNpb24gb2YgdGhlIGZ1bmN0aW9uIGFzIGZhciBhcyBJIHJlbWVt
-YmVyLiBUaGF0J3Mgd2h5IEkgYW0gbm90Cj4+Pj4gdGFraW5nIGNhcmUgb2YgaXQgZm9yIHRoZSBt
-b21lbnQuCj4+Pgo+Pj4gWW91IHNob3VsZCBzZW5kIHRoYXQgdmVyc2lvbiB0aGVuIDopLgo+Pj4K
-Pj4+Pj4KPj4+Pj4gQUZBSUNUIHVvdSBfY2Fubm90XyBhY2Nlc3MgYW55IG9mIHRoZSB2Y3B1X3Rp
-bWVfaW5mbyBmaWVsZHMgd2l0aG91dAo+Pj4+PiBjaGVja2luZyBmb3IgdGhlIHZlcnNpb24gKGlu
-IG9yZGVyIHRvIGF2b2lkIHJlYWRpbmcgaW5jb25zaXN0ZW50IGRhdGEKPj4+Pj4gZHVyaW5nIGFu
-IHVwZGF0ZSksIHlldCBiZWxvdyB5b3UgcmVhZCB0c2NfdG9fc3lzdGVtX211bCBhbmQKPj4+Pj4g
-dHNjX3NoaWZ0Lgo+Pj4+Pgo+Pj4+Cj4+Pj4gSSdtIHNvcnJ5LCBJIGFtIHByb2JhYmx5IG5vdCBn
-ZXR0aW5nIHlvdXIgcG9pbnQgaGVyZSwgYmVjYXVzZSBJIGFtIGFscmVhZHkKPj4+PiBjaGVja2lu
-ZyBmb3IgdGhlIHZlcnNpb24uIEkgd2FzIGFjdHVhbGx5IGNoZWNraW5nIGZvciB0aGUgd2NfdmVy
-c2lvbiB0b28gaW4KPj4+PiB0aGUgZmlyc3QgdmVyc2lvbiBvZiB0aG9zZSBwYXRjaGVzLCBidXQg
-YWZ0ZXIgY2hhdHRpbmcgd2l0aCBBbmRyZXcsIEl0Cj4+Pj4gYXBwZWFyZWQgdGhhdCBpdCB3YXMg
-bm90IG5lY2Vzc2FyeS4uCj4+Pgo+Pj4gQUZBSUNUIHRoZSBmb2xsb3dpbmcgc2hvdWxkIHdvcms6
-Cj4+Pgo+Pj4gZG8KPj4+IHsKPj4+ICAgICAgIHZlcjEgPSBzaGFyZWRfaW5mby52Y3B1X2luZm9b
-MF0udGltZS52ZXJzaW9uOwo+Pj4gICAgICAgc21wX3JtYigpOwo+Pj4KPj4+ICAgICAgIHN5c3Rl
-bV90aW1lID0gc2hhcmVkX2luZm8udmNwdV9pbmZvWzBdLnRpbWUuc3lzdGVtX3RpbWU7Cj4+PiAg
-ICAgICB0c2NfdGltZXN0YW1wID0gc2hhcmVkX2luZm8udmNwdV9pbmZvWzBdLnRpbWUudHNjX3Rp
-bWVzdGFtcDsKPj4+ICAgICAgIHRzY190b19zeXN0ZW1fbXVsID0gc2hhcmVkX2luZm8udmNwdV9p
-bmZvWzBdLnRpbWUudHNjX3RvX3N5c3RlbV9tdWw7Cj4+PiAgICAgICB0c2Nfc2hpZnQgPSBzaGFy
-ZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS50c2Nfc2hpZnQ7Cj4+PiAgICAgICB0c2MgPSByZHRz
-Y19vcmRlcmVkKCk7Cj4+PiAgICAgICAvKiBOQjogdGhpcyBiYXJyaWVyIGlzIHByb2JhYmx5IG5v
-dCBuZWVkZWQgaWYgcmR0c2MgaXMgc2VyaWFsaXppbmcuICovCj4+PiAgICAgICBzbXBfcm1iKCk7
-Cj4+Pgo+Pj4gICAgICAgdmVyMiA9IEFDQ0VTU19PTkNFKHNoYXJlZF9pbmZvLnZjcHVfaW5mb1sw
-XS50aW1lLnZlcnNpb24pOwo+Pj4gfSB3aGlsZSAoIHZlcjIgJiAxIHx8IHZlcjEgIT0gdmVyMiAp
-Owo+Pj4KPj4KPj4gSnVzdCBhIChwcm9iYWJseSBkdW1iKSBxdWVzdGlvbi4gV2h5IGFyZW4ndCB5
-b3UgZG9pbmcgQUNDRVNTX09OQ0Ugb24gZXZlcnkKPj4gc2hhcmVkX2luZm8gZmllbGQgYWNjZXNz
-ZXMgPwo+PiBBcyBmYXIgYXMgSSB1bmRlcnN0YW5kLCB3ZSBuZWVkIHRvIGRvIHRoaXMgYXMgbW9z
-dCBhcyB3ZSBjYW4gdG8gYXZvaWQgaGF2aW5nCj4+IGNvbXBsZXRlbHkgYnJva2VuIGRhdGEgKG9y
-IHNlY3VyaXR5IGlzc3VlcykuIEFtIEkgbWlzc2luZyBzb21ldGhpbmcgPwo+IAo+IEFDQ0VTU19P
-TkNFIHByZXZlbnRzIHRoZSByZW9yZGVyaW5nIG9mIHRoZSByZWFkcywgYnV0IGhlcmUgQUZBSUNU
-IHdlCj4gZG9uJ3QgcmVhbGx5IGNhcmUgYWJvdXQgdGhlIG9yZGVyIGluIHdoaWNoIHdheSB0aGV5
-IGFyZSBwZXJmb3JtZWQgYXMKPiBsb25nIGFzIHRoZXkgYXJlIGFsbCBkb25lIGJlZm9yZSB0aGUg
-cmVhZCBiYXJyaWVyIChzbXBfcm1iKS4KPiAKPiBOb3RlIHRoYXQgSSB1c2VkIEFDQ0VTU19PTkNF
-IGZvciB0aGUgbGFzdCBhY2Nlc3MgdG8gdGhlIHZlcnNpb24gZmllbGQuCj4gSSd2ZSBkb25lIHRo
-YXQgdG8gcHJldmVudCB0aGUgY29tcGlsZXIgZnJvbSBvcHRpbWl6aW5nIHRoZSBjb2RlIGFzOgo+
-IAo+IH0gd2hpbGUgKCBzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS52ZXJzaW9uICYgMSB8
-fAo+ICAgICAgICAgICAgdmVyMSAhPSBzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS52ZXJz
-aW9uICk7Cj4gCj4gV2hpY2ggd291bGQgYmUgaW5jb3JyZWN0LCBzaW5jZSB3ZSB3YW50IHRvIHVz
-ZSB0aGUgc2FtZSB2ZXJzaW9uIGRhdGEKPiBmb3IgYm90aCBjaGVja3MgaW4gdGhlIHdoaWxlIGxv
-b3AgY29uZGl0aW9uLgo+IAoKT2theSwgSSByZWFsbHkgdGhvdWdodCB0aGF0IGl0IHdhcyBhbHNv
-IHVzZWQgdG8gZW5zdXJlIHRoYXQgdGhlIGFjY2Vzc2VzIAphcmUgbm90IHNwbGl0dGVkIGludG8g
-bXVsdGlwbGUgaW5zdHJ1Y3Rpb25zIChmb3Igb3B0aW1pemF0aW9ucyBiZWNhdXNlIApvZiB0aGUg
-bG9vcCksIGFuZCB0aHVzIHB1dCB1cyBpbiB0cm91YmxlIGlmIHRoZSBzaGFyZWQgbWVtb3J5IHdh
-cyAKbW9kaWZpZWQgaW4gYmV0d2Vlbi4KClRoYW5rIHlvdSB2ZXJ5IG11Y2ggIQoKLS0gClBhdWwK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============6181891034185227054==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-saUfEpPsSLk3XgxxsqS4"
+
+
+--=-saUfEpPsSLk3XgxxsqS4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 2018-04-10 at 09:34 +0000, George Dunlap wrote:
+> Assuming the bug is this one:
+>=20
+> BUG_ON( cpu !=3D snext->vcpu->processor );
+>=20
+Yes, it is that one.
+
+Another stack trace, this time from a debug=3Dy built hypervisor, of what
+we are thinking it is the same bug (although reproduced in a slightly
+different way) is this:
+
+(XEN) ----[ Xen-4.7.2_02-36.1.12847.11.PTF  x86_64  debug=3Dy  Not tainted =
+]----
+(XEN) CPU:    45
+(XEN) RIP:    e008:[<ffff82d08012508f>] sched_credit.c#csched_schedule+0x36=
+1/0xaa9
+...
+(XEN) Xen call trace:
+(XEN)    [<ffff82d08012508f>] sched_credit.c#csched_schedule+0x361/0xaa9
+(XEN)    [<ffff82d08012c233>] schedule.c#schedule+0x109/0x5d6
+(XEN)    [<ffff82d08012fb5f>] softirq.c#__do_softirq+0x7f/0x8a
+(XEN)    [<ffff82d08012fbb4>] do_softirq+0x13/0x15
+(XEN)    [<ffff82d0801fd5c5>] vmx_asm_do_vmentry+0x25/0x2a
+
+(I can provide it all, if necessary.)
+
+I've done some analysis, although when we still were not entirely sure
+that changing the affinities was the actual cause (or, at least, what
+is triggering the whole thing).
+
+In the specific case of this stack trace, the current vcpu running on
+CPU 45 is d3v11. It is not in the runqueue, because it has been
+removed, and not added back to it, and the reason is it is not runnable
+(it has VPF_migrating on in pause_flags).
+
+The runqueue of pcpu 45 looks fine (i.e., it is not corrupt or anything
+like that), it has d3v10,d9v1,d32767v45 in it (in this order)
+
+d3v11->processor is 45, so that is also fine.
+
+Basically, d3v11 wants to move away from pcpu 45, and this might (but
+that's not certain) be the reson because we're rescheduling. The fact
+that there are vcpus wanting to migrate can very well be the cause of
+affinity being changed.
+
+Now, the problem is that, looking into the runqueue, I found out that
+d3v10->processor=3D32. I.e., d3v10 is queued in pcpu 45's runqueue, with
+processor=3D32, which really shouldn't happen.
+
+This leads to the bug triggering, as, in csched_schedule(), we read the
+head of the runqueue with:
+
+snext =3D __runq_elem(runq->next);
+
+and then we pass snext to csched_load_balance(), where the BUG_ON is.
+
+Another thing that I've found out, is that all "misplaced" vcpus (i.e.,
+in this and also in other manifestations of this bug) have their
+csched_vcpu.flags=3D4, which is CSCHED_FLAGS_VCPU_MIGRATING.
+
+This, basically, is again a sign of vcpu_migrate() having been called,
+on d3v10 as well, which in turn has called csched_vcpu_pick().
+
+> a nasty race condition=E2=80=A6 a vcpu has just been taken off the runque=
+ue
+> of the current pcpu, but it=E2=80=99s apparently been assigned to a diffe=
+rent
+> cpu.
+>=20
+Nasty indeed. I've been looking into this on and off, but so far I
+haven't found the root cause.
+
+Now that we know for sure that it is changing affinity that trigger it,
+the field of the investigation can be narrowed a little bit... But I
+still am finding hard to spot where the race happens.
+
+I'll look more into this later in the afternoon. I'll let know if
+something comes to mind.
+
+> Let me take a look.
+>=20
+Thanks! :-)
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-saUfEpPsSLk3XgxxsqS4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrMkvEACgkQFkJ4iaW4
+c+6S5g//UsRYoSJk68SGmPopjAjTG0vVdCOVQBTjU69uwocrrG8GgucVMAHXV9iH
+fR3pVLDMXADwViMZYewi2uAeX613yyCKfOj6UfJWHGlPRKlc7kCQSL8v6/+Rer2l
+4gHkdhTpUoMKTS3wN/uSPZaNde4X7nujsYg686+PuOOAV9OURqRSwgzV+/wfMV9D
+ZwO4Rscar4OteZYB1WfMtnXgVxfVsN980fntyU7NQxSqzfIWwp/+2l/PLPARm+G9
+NqprmX7oa+ULsr1ZQie/QSAQlCFl6fjvHds7ClbUAGD4du/USIRflOo7S3ceH+T0
+SGF4dqL3/snBLhQlG6owcGDTmAwVAfKovBi3YUBOY+WxXxRxdS3qrYkaovq9etTY
+2bhq3xzIosaWz8N08SjJpYyk0rsT1/AUsvSOkMCw3NeGJ2Q6v8bQkls7B1dxn5FT
+r54MQsdflZPdspCEFH8DGcJnnb43NlXiT9yfbyGgBsNtzuE5vtBu6vAFtf3x8qSl
+f0AZ8hAfJxvM/iXi+OaMULUHfrjjSKV+ATZdJ72INfMUVPI4lySeEJeKEgW7xofb
+Pj8nFI9WPoqqj7iJCpXtW7d04RIFf6kEEgcPHwm0EKkr9tqT3fdQFF+kygJ311QE
+vX9J2D/DFbudfToXTjyw+yhjoKjiX1Ghz4eTqMrZ9IYQXqyRMGo=
+=zh+n
+-----END PGP SIGNATURE-----
+
+--=-saUfEpPsSLk3XgxxsqS4--
+
+
+
+--===============6181891034185227054==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6181891034185227054==--
