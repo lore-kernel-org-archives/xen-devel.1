@@ -1,13 +1,25 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Tue, 10 Apr 2018 12:33:20 +0200
-Message-ID: <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
-References: <20180410085729.GA472@aepfle.de>
- <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v3 1/7] introduce time managment in xtf
+Date: Tue, 10 Apr 2018 11:36:26 +0100
+Message-ID: <20180410103626.qxgrrp3gwm2imcvn@MacBook-Pro-de-Roger.local>
+References: <20180409143543.4568-1-semelpaul@gmail.com>
+ <20180409143555.2rh7um6g7op2bvz3@MacBook-Pro-de-Roger.local>
+ <ec9cc2f5-59b1-d76d-0137-40356cc4170a@gmail.com>
+ <20180410080801.cpgvjqahlugfq6jx@MacBook-Pro-de-Roger.local>
+ <2e105554-78f7-0412-549b-34d084566b14@gmail.com>
+ <20180410100502.fm7bmdxivyuqp2bz@MacBook-Pro-de-Roger.local>
+ <544f6c07-c5db-1fee-51f4-63b6ddede101@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6181891034185227054=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=duoi=g7=citrix.com=prvs=6315598cf=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1f5qdf-0005Or-C6
+ for xen-devel@lists.xenproject.org; Tue, 10 Apr 2018 10:36:35 +0000
+Content-Disposition: inline
+In-Reply-To: <544f6c07-c5db-1fee-51f4-63b6ddede101@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,142 +28,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <George.Dunlap@citrix.com>, Olaf Hering <olaf@aepfle.de>
-Cc: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Paul Semel <semelpaul@gmail.com>
+Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, wipawel@amazon.de
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6181891034185227054==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-saUfEpPsSLk3XgxxsqS4"
-
-
---=-saUfEpPsSLk3XgxxsqS4
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2018-04-10 at 09:34 +0000, George Dunlap wrote:
-> Assuming the bug is this one:
->=20
-> BUG_ON( cpu !=3D snext->vcpu->processor );
->=20
-Yes, it is that one.
-
-Another stack trace, this time from a debug=3Dy built hypervisor, of what
-we are thinking it is the same bug (although reproduced in a slightly
-different way) is this:
-
-(XEN) ----[ Xen-4.7.2_02-36.1.12847.11.PTF  x86_64  debug=3Dy  Not tainted =
-]----
-(XEN) CPU:    45
-(XEN) RIP:    e008:[<ffff82d08012508f>] sched_credit.c#csched_schedule+0x36=
-1/0xaa9
-...
-(XEN) Xen call trace:
-(XEN)    [<ffff82d08012508f>] sched_credit.c#csched_schedule+0x361/0xaa9
-(XEN)    [<ffff82d08012c233>] schedule.c#schedule+0x109/0x5d6
-(XEN)    [<ffff82d08012fb5f>] softirq.c#__do_softirq+0x7f/0x8a
-(XEN)    [<ffff82d08012fbb4>] do_softirq+0x13/0x15
-(XEN)    [<ffff82d0801fd5c5>] vmx_asm_do_vmentry+0x25/0x2a
-
-(I can provide it all, if necessary.)
-
-I've done some analysis, although when we still were not entirely sure
-that changing the affinities was the actual cause (or, at least, what
-is triggering the whole thing).
-
-In the specific case of this stack trace, the current vcpu running on
-CPU 45 is d3v11. It is not in the runqueue, because it has been
-removed, and not added back to it, and the reason is it is not runnable
-(it has VPF_migrating on in pause_flags).
-
-The runqueue of pcpu 45 looks fine (i.e., it is not corrupt or anything
-like that), it has d3v10,d9v1,d32767v45 in it (in this order)
-
-d3v11->processor is 45, so that is also fine.
-
-Basically, d3v11 wants to move away from pcpu 45, and this might (but
-that's not certain) be the reson because we're rescheduling. The fact
-that there are vcpus wanting to migrate can very well be the cause of
-affinity being changed.
-
-Now, the problem is that, looking into the runqueue, I found out that
-d3v10->processor=3D32. I.e., d3v10 is queued in pcpu 45's runqueue, with
-processor=3D32, which really shouldn't happen.
-
-This leads to the bug triggering, as, in csched_schedule(), we read the
-head of the runqueue with:
-
-snext =3D __runq_elem(runq->next);
-
-and then we pass snext to csched_load_balance(), where the BUG_ON is.
-
-Another thing that I've found out, is that all "misplaced" vcpus (i.e.,
-in this and also in other manifestations of this bug) have their
-csched_vcpu.flags=3D4, which is CSCHED_FLAGS_VCPU_MIGRATING.
-
-This, basically, is again a sign of vcpu_migrate() having been called,
-on d3v10 as well, which in turn has called csched_vcpu_pick().
-
-> a nasty race condition=E2=80=A6 a vcpu has just been taken off the runque=
-ue
-> of the current pcpu, but it=E2=80=99s apparently been assigned to a diffe=
-rent
-> cpu.
->=20
-Nasty indeed. I've been looking into this on and off, but so far I
-haven't found the root cause.
-
-Now that we know for sure that it is changing affinity that trigger it,
-the field of the investigation can be narrowed a little bit... But I
-still am finding hard to spot where the race happens.
-
-I'll look more into this later in the afternoon. I'll let know if
-something comes to mind.
-
-> Let me take a look.
->=20
-Thanks! :-)
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-saUfEpPsSLk3XgxxsqS4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrMkvEACgkQFkJ4iaW4
-c+6S5g//UsRYoSJk68SGmPopjAjTG0vVdCOVQBTjU69uwocrrG8GgucVMAHXV9iH
-fR3pVLDMXADwViMZYewi2uAeX613yyCKfOj6UfJWHGlPRKlc7kCQSL8v6/+Rer2l
-4gHkdhTpUoMKTS3wN/uSPZaNde4X7nujsYg686+PuOOAV9OURqRSwgzV+/wfMV9D
-ZwO4Rscar4OteZYB1WfMtnXgVxfVsN980fntyU7NQxSqzfIWwp/+2l/PLPARm+G9
-NqprmX7oa+ULsr1ZQie/QSAQlCFl6fjvHds7ClbUAGD4du/USIRflOo7S3ceH+T0
-SGF4dqL3/snBLhQlG6owcGDTmAwVAfKovBi3YUBOY+WxXxRxdS3qrYkaovq9etTY
-2bhq3xzIosaWz8N08SjJpYyk0rsT1/AUsvSOkMCw3NeGJ2Q6v8bQkls7B1dxn5FT
-r54MQsdflZPdspCEFH8DGcJnnb43NlXiT9yfbyGgBsNtzuE5vtBu6vAFtf3x8qSl
-f0AZ8hAfJxvM/iXi+OaMULUHfrjjSKV+ATZdJ72INfMUVPI4lySeEJeKEgW7xofb
-Pj8nFI9WPoqqj7iJCpXtW7d04RIFf6kEEgcPHwm0EKkr9tqT3fdQFF+kygJ311QE
-vX9J2D/DFbudfToXTjyw+yhjoKjiX1Ghz4eTqMrZ9IYQXqyRMGo=
-=zh+n
------END PGP SIGNATURE-----
-
---=-saUfEpPsSLk3XgxxsqS4--
-
-
-
---===============6181891034185227054==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6181891034185227054==--
+T24gVHVlLCBBcHIgMTAsIDIwMTggYXQgMTI6MzI6MjNQTSArMDIwMCwgUGF1bCBTZW1lbCB3cm90
+ZToKPiBPbiAwNC8xMC8yMDE4IDEyOjA1IFBNLCBSb2dlciBQYXUgTW9ubsOpIHdyb3RlOgo+ID4g
+PiA+ID4gPiA+IHRoaXMgZmlsZSBpcyBpbnRyb2R1Y2UgdG8gYmUgYWJsZSB0byBpbXBsZW1lbnQg
+YW4gaW50ZXIgZG9tYWluCj4gPiA+ID4gPiA+ID4gY29tbXVuaWNhdGlvbiBwcm90b2NvbCBvdmVy
+IHhlbnN0b3JlLiBGb3Igc3luY2hyb25pemF0aW9uIHB1cnBvc2UsIHdlIGRvCj4gPiA+ID4gPiA+
+ID4gcmVhbGx5IHdhbnQgdG8gYmUgYWJsZSB0byAiY29udHJvbCIgdGltZQo+ID4gPiA+ID4gPiA+
+IAo+ID4gPiA+ID4gPiA+IGNvbW1vbi90aW1lLmM6IHNpbmNlX2Jvb3RfdGltZSBnZXRzIHRoZSB0
+aW1lIGluIG5hbm9zZWNvbmRzIGZyb20gdGhlCj4gPiA+ID4gPiA+ID4gbW9tZW50IHRoZSBWTSBo
+YXMgYm9vdGVkCj4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gU2lnbmVkLW9mZi1ieTogUGF1
+bCBTZW1lbCA8cGhlbnRleEBhbWF6b24uZGU+Cj4gPiA+ID4gPiA+ID4gLS0tCj4gPiA+ID4gPiA+
+IAo+ID4gPiA+ID4gPiBUaGlzIHNlZW1zIHRvIGJlIG1pc3NpbmcgYSBsaXN0IG9mIGNoYW5nZXMg
+YmV0d2VlbiB2MiBhbmQgdjMuIFBsZWFzZQo+ID4gPiA+ID4gPiBhZGQgc3VjaCBhIGxpc3Qgd2hl
+biBwb3N0aW5nIG5ldyB2ZXJzaW9ucy4KPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gK3VpbnQ2
+NF90IHNpbmNlX2Jvb3RfdGltZSh2b2lkKQo+ID4gPiA+ID4gPiA+ICt7Cj4gPiA+ID4gPiA+ID4g
+KyAgICB1aW50NjRfdCB0c2M7Cj4gPiA+ID4gPiA+ID4gKyAgICB1aW50MzJfdCB2ZXIxLCB2ZXIy
+Owo+ID4gPiA+ID4gPiA+ICsgICAgdWludDY0X3Qgc3lzdGVtX3RpbWU7Cj4gPiA+ID4gPiA+ID4g
+KyAgICB1aW50NjRfdCBvbGRfdHNjOwo+ID4gPiA+ID4gPiA+ICsKPiA+ID4gPiA+ID4gPiArICAg
+IGRvCj4gPiA+ID4gPiA+ID4gKyAgICB7Cj4gPiA+ID4gPiA+ID4gKyAgICAgICAgZG8KPiA+ID4g
+PiA+ID4gPiArICAgICAgICB7Cj4gPiA+ID4gPiA+ID4gKyAgICAgICAgICAgIHZlcjEgPSBBQ0NF
+U1NfT05DRShzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS52ZXJzaW9uKTsKPiA+ID4gPiA+
+ID4gPiArICAgICAgICAgICAgc21wX3JtYigpOwo+ID4gPiA+ID4gPiA+ICsgICAgICAgIH0gd2hp
+bGUgKCAodmVyMSAmIDEpID09IDEgKTsKPiA+ID4gPiA+ID4gPiArCj4gPiA+ID4gPiA+ID4gKyAg
+ICAgICAgc3lzdGVtX3RpbWUgPSBBQ0NFU1NfT05DRShzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0u
+dGltZS5zeXN0ZW1fdGltZSk7Cj4gPiA+ID4gPiA+ID4gKyAgICAgICAgb2xkX3RzYyA9IEFDQ0VT
+U19PTkNFKHNoYXJlZF9pbmZvLnZjcHVfaW5mb1swXS50aW1lLnRzY190aW1lc3RhbXApOwo+ID4g
+PiA+ID4gPiA+ICsgICAgICAgIHNtcF9ybWIoKTsKPiA+ID4gPiA+ID4gPiArICAgICAgICB2ZXIy
+ID0gQUNDRVNTX09OQ0Uoc2hhcmVkX2luZm8udmNwdV9pbmZvWzBdLnRpbWUudmVyc2lvbik7Cj4g
+PiA+ID4gPiA+ID4gKyAgICAgICAgc21wX3JtYigpOwo+ID4gPiA+ID4gPiA+ICsgICAgfSB3aGls
+ZSAoIHZlcjEgIT0gdmVyMiApOwo+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gVGhpcyBpcyBzdGls
+bCBvdmVybHkgY29tcGxpY2F0ZWQgSU1PLCBhbmQgeW91IGhhdmUgbm90IHJlcGxpZWQgdG8gbXkK
+PiA+ID4gPiA+ID4gcXVlc3Rpb24gb2Ygd2hldGhlciBkb2luZyB0aGUgc2NhbGVfZGVsdGEgYmVs
+b3cgaXMgT0suCj4gPiA+ID4gPiAKPiA+ID4gPiA+IEFib3V0IHRoaXMgc2NhbGVfZGVsdGEsIHdl
+IGRpc2N1c3NlZCB3aXRoIEFuZHJldywgYW5kIHdlIGFyZSBnb2luZyB0byB1c2UKPiA+ID4gPiA+
+IGFub3RoZXIgdmVyc2lvbiBvZiB0aGUgZnVuY3Rpb24gYXMgZmFyIGFzIEkgcmVtZW1iZXIuIFRo
+YXQncyB3aHkgSSBhbSBub3QKPiA+ID4gPiA+IHRha2luZyBjYXJlIG9mIGl0IGZvciB0aGUgbW9t
+ZW50Lgo+ID4gPiA+IAo+ID4gPiA+IFlvdSBzaG91bGQgc2VuZCB0aGF0IHZlcnNpb24gdGhlbiA6
+KS4KPiA+ID4gPiAKPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+IEFGQUlDVCB1b3UgX2Nhbm5vdF8g
+YWNjZXNzIGFueSBvZiB0aGUgdmNwdV90aW1lX2luZm8gZmllbGRzIHdpdGhvdXQKPiA+ID4gPiA+
+ID4gY2hlY2tpbmcgZm9yIHRoZSB2ZXJzaW9uIChpbiBvcmRlciB0byBhdm9pZCByZWFkaW5nIGlu
+Y29uc2lzdGVudCBkYXRhCj4gPiA+ID4gPiA+IGR1cmluZyBhbiB1cGRhdGUpLCB5ZXQgYmVsb3cg
+eW91IHJlYWQgdHNjX3RvX3N5c3RlbV9tdWwgYW5kCj4gPiA+ID4gPiA+IHRzY19zaGlmdC4KPiA+
+ID4gPiA+ID4gCj4gPiA+ID4gPiAKPiA+ID4gPiA+IEknbSBzb3JyeSwgSSBhbSBwcm9iYWJseSBu
+b3QgZ2V0dGluZyB5b3VyIHBvaW50IGhlcmUsIGJlY2F1c2UgSSBhbSBhbHJlYWR5Cj4gPiA+ID4g
+PiBjaGVja2luZyBmb3IgdGhlIHZlcnNpb24uIEkgd2FzIGFjdHVhbGx5IGNoZWNraW5nIGZvciB0
+aGUgd2NfdmVyc2lvbiB0b28gaW4KPiA+ID4gPiA+IHRoZSBmaXJzdCB2ZXJzaW9uIG9mIHRob3Nl
+IHBhdGNoZXMsIGJ1dCBhZnRlciBjaGF0dGluZyB3aXRoIEFuZHJldywgSXQKPiA+ID4gPiA+IGFw
+cGVhcmVkIHRoYXQgaXQgd2FzIG5vdCBuZWNlc3NhcnkuLgo+ID4gPiA+IAo+ID4gPiA+IEFGQUlD
+VCB0aGUgZm9sbG93aW5nIHNob3VsZCB3b3JrOgo+ID4gPiA+IAo+ID4gPiA+IGRvCj4gPiA+ID4g
+ewo+ID4gPiA+ICAgICAgIHZlcjEgPSBzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS52ZXJz
+aW9uOwo+ID4gPiA+ICAgICAgIHNtcF9ybWIoKTsKPiA+ID4gPiAKPiA+ID4gPiAgICAgICBzeXN0
+ZW1fdGltZSA9IHNoYXJlZF9pbmZvLnZjcHVfaW5mb1swXS50aW1lLnN5c3RlbV90aW1lOwo+ID4g
+PiA+ICAgICAgIHRzY190aW1lc3RhbXAgPSBzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS50
+c2NfdGltZXN0YW1wOwo+ID4gPiA+ICAgICAgIHRzY190b19zeXN0ZW1fbXVsID0gc2hhcmVkX2lu
+Zm8udmNwdV9pbmZvWzBdLnRpbWUudHNjX3RvX3N5c3RlbV9tdWw7Cj4gPiA+ID4gICAgICAgdHNj
+X3NoaWZ0ID0gc2hhcmVkX2luZm8udmNwdV9pbmZvWzBdLnRpbWUudHNjX3NoaWZ0Owo+ID4gPiA+
+ICAgICAgIHRzYyA9IHJkdHNjX29yZGVyZWQoKTsKPiA+ID4gPiAgICAgICAvKiBOQjogdGhpcyBi
+YXJyaWVyIGlzIHByb2JhYmx5IG5vdCBuZWVkZWQgaWYgcmR0c2MgaXMgc2VyaWFsaXppbmcuICov
+Cj4gPiA+ID4gICAgICAgc21wX3JtYigpOwo+ID4gPiA+IAo+ID4gPiA+ICAgICAgIHZlcjIgPSBB
+Q0NFU1NfT05DRShzaGFyZWRfaW5mby52Y3B1X2luZm9bMF0udGltZS52ZXJzaW9uKTsKPiA+ID4g
+PiB9IHdoaWxlICggdmVyMiAmIDEgfHwgdmVyMSAhPSB2ZXIyICk7Cj4gPiA+ID4gCj4gPiA+IAo+
+ID4gPiBKdXN0IGEgKHByb2JhYmx5IGR1bWIpIHF1ZXN0aW9uLiBXaHkgYXJlbid0IHlvdSBkb2lu
+ZyBBQ0NFU1NfT05DRSBvbiBldmVyeQo+ID4gPiBzaGFyZWRfaW5mbyBmaWVsZCBhY2Nlc3NlcyA/
+Cj4gPiA+IEFzIGZhciBhcyBJIHVuZGVyc3RhbmQsIHdlIG5lZWQgdG8gZG8gdGhpcyBhcyBtb3N0
+IGFzIHdlIGNhbiB0byBhdm9pZCBoYXZpbmcKPiA+ID4gY29tcGxldGVseSBicm9rZW4gZGF0YSAo
+b3Igc2VjdXJpdHkgaXNzdWVzKS4gQW0gSSBtaXNzaW5nIHNvbWV0aGluZyA/Cj4gPiAKPiA+IEFD
+Q0VTU19PTkNFIHByZXZlbnRzIHRoZSByZW9yZGVyaW5nIG9mIHRoZSByZWFkcywgYnV0IGhlcmUg
+QUZBSUNUIHdlCj4gPiBkb24ndCByZWFsbHkgY2FyZSBhYm91dCB0aGUgb3JkZXIgaW4gd2hpY2gg
+d2F5IHRoZXkgYXJlIHBlcmZvcm1lZCBhcwo+ID4gbG9uZyBhcyB0aGV5IGFyZSBhbGwgZG9uZSBi
+ZWZvcmUgdGhlIHJlYWQgYmFycmllciAoc21wX3JtYikuCj4gPiAKPiA+IE5vdGUgdGhhdCBJIHVz
+ZWQgQUNDRVNTX09OQ0UgZm9yIHRoZSBsYXN0IGFjY2VzcyB0byB0aGUgdmVyc2lvbiBmaWVsZC4K
+PiA+IEkndmUgZG9uZSB0aGF0IHRvIHByZXZlbnQgdGhlIGNvbXBpbGVyIGZyb20gb3B0aW1pemlu
+ZyB0aGUgY29kZSBhczoKPiA+IAo+ID4gfSB3aGlsZSAoIHNoYXJlZF9pbmZvLnZjcHVfaW5mb1sw
+XS50aW1lLnZlcnNpb24gJiAxIHx8Cj4gPiAgICAgICAgICAgIHZlcjEgIT0gc2hhcmVkX2luZm8u
+dmNwdV9pbmZvWzBdLnRpbWUudmVyc2lvbiApOwo+ID4gCj4gPiBXaGljaCB3b3VsZCBiZSBpbmNv
+cnJlY3QsIHNpbmNlIHdlIHdhbnQgdG8gdXNlIHRoZSBzYW1lIHZlcnNpb24gZGF0YQo+ID4gZm9y
+IGJvdGggY2hlY2tzIGluIHRoZSB3aGlsZSBsb29wIGNvbmRpdGlvbi4KPiA+IAo+IAo+IE9rYXks
+IEkgcmVhbGx5IHRob3VnaHQgdGhhdCBpdCB3YXMgYWxzbyB1c2VkIHRvIGVuc3VyZSB0aGF0IHRo
+ZSBhY2Nlc3NlcyBhcmUKPiBub3Qgc3BsaXR0ZWQgaW50byBtdWx0aXBsZSBpbnN0cnVjdGlvbnMg
+KGZvciBvcHRpbWl6YXRpb25zIGJlY2F1c2Ugb2YgdGhlCj4gbG9vcCksIGFuZCB0aHVzIHB1dCB1
+cyBpbiB0cm91YmxlIGlmIHRoZSBzaGFyZWQgbWVtb3J5IHdhcyBtb2RpZmllZCBpbgo+IGJldHdl
+ZW4uCgpJZiB0aGUgbWVtb3J5IGlzIG1vZGlmaWVkIGluIGJldHdlZW4gZWl0aGVyICh2ZXIyICYg
+MSkgPT0gMSBvciB2ZXIxICE9CnZlcjIgYmVjYXVzZSB0aGF0J3MgdGhlIHByb3RvY29sIGJldHdl
+ZW4gdGhlIGh5cGVydmlzb3IgYW5kIHRoZSBndWVzdAppbiBvcmRlciB0byB1cGRhdGUgdnBjdV90
+aW1lX2luZm8sIHNvIHdlIHdpbGwgZGlzY2FyZCB0aGUgcmVhZCBkYXRhCmFuZCBzdGFydCB0aGUg
+bG9vcCBhZ2Fpbi4KClJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
