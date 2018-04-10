@@ -1,17 +1,12 @@
-From: Dario Faggioli <dfaggioli@suse.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Tue, 10 Apr 2018 17:36:25 +0200
-Message-ID: <0e6a5bedd2fbbdb87f14f9317badcae88af24870.camel@suse.com>
+Date: Tue, 10 Apr 2018 17:59:49 +0200
+Message-ID: <20180410155949.GB7177@aepfle.de>
 References: <20180410085729.GA472@aepfle.de>
- <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
- <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
- <95482342-8b80-e295-badf-6b20ad09276f@citrix.com>
- <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
- <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3867180755462381525=="
+Content-Type: multipart/mixed; boundary="===============7500183254499642252=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
+In-Reply-To: <20180410085729.GA472@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,93 +15,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, Olaf Hering <olaf@aepfle.de>
-Cc: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: xen-devel@lists.xen.org
+Cc: George Dunlap <george.dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============3867180755462381525==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-dZKnS79jvw75LvxvCF0G"
+--===============7500183254499642252==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="WYTEVAkct0FjGQmd"
+Content-Disposition: inline
 
 
---=-dZKnS79jvw75LvxvCF0G
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--WYTEVAkct0FjGQmd
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Tue, 2018-04-10 at 16:25 +0100, George Dunlap wrote:
-> On 04/10/2018 12:29 PM, Dario Faggioli wrote:
-> >=20
-> whenever that is.  (Possibly at the end of the current call to
-> vcpu_migrate(), possibly at the end of a vcpu_migrate() triggered in
-> context_saved() due to VPF_migrating.)
->=20
-> vcpu_migrate() is called from:
->  - vcpu_force_reschedule(), which is called from
-> VCPUOP_{set,stop}_periodic_timer
->  - cpu_disable_schedler(), when doing hotplug or cpupool operations
-> on a cpu
->  - vcpu_set_affinity()
->  - vcpu_pin_override()
->=20
-> But in any case, v->processor is only set from vcpu_move_locked(),
-> which
-> is only called if v->is_running is false; if v->is_running is false,
-> then one way or another v can't be on any runqueue.  And if v isn't
-> on
-> any runqueue, and we hold v's current processor lock, then it's safe
-> to
-> modify v->processor.
->=20
-Indeed.
+On Tue, Apr 10, Olaf Hering wrote:
 
-> But obviously there's a flaw in that logic somewhere. :-)
->=20
-frustratingly, yes. :-/
+> (XEN) Xen BUG at sched_credit.c:1694
 
-> One thing we might consider doing is implementing the migrate()
-> callback
-> for the Credit scheduler, and just have it make a bunch of sanity
-> checks
-> (v->processor lock held, new_cpu lock held, vcpu not on any runqueue,
-> &c).
->=20
-Yep, and in fact, this is exactly what the debug patch that I will send
-to Olaf (after I'll be out of a meeting) does. :-)
+And another one with debug=y and this config:
+memory=4444
+vcpus=36
+cpu="nodes:1,^node:0"
+cpu_soft="nodes:1,^node:0"
+(nodes=1 cycles between 1-3 for each following domU).
 
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-dZKnS79jvw75LvxvCF0G
+(XEN) Assertion 'CSCHED_PCPU(cpu)->nr_runnable >= 1' failed at sched_credit.c:269
+(XEN) ----[ Xen-4.11.20180407T144959.e62e140daa-4.bug1087289_411  x86_64  debug=y   Not tainted ]----
+(XEN) CPU:    18
+(XEN) RIP:    e008:[<ffff82d08022b2e8>] sched_credit.c#csched_schedule+0x8fe/0xd42
+(XEN) RFLAGS: 0000000000010046   CONTEXT: hypervisor (d0v18)
+(XEN) rax: ffff830779e9e970   rbx: ffff83007ba44000   rcx: 0000000000000046
+(XEN) rdx: 00000036f953b080   rsi: ffff83077a738140   rdi: ffff830779e9a18e
+(XEN) rbp: ffff83077a737e18   rsp: ffff83077a737d18   r8:  000000000000000b
+(XEN) r9:  ffff83077a7383c0   r10: 0000000000000000   r11: 0000017e70349000
+(XEN) r12: ffff8309d55879f0   r13: 0000000000000044   r14: ffff830779eae188
+(XEN) r15: ffff8309d55879f0   cr0: 000000008005003b   cr4: 00000000001526e0
+(XEN) cr3: 0000000dd1056000   cr2: 0000557e1f370028
+(XEN) fsb: 0000000000000000   gsb: ffff880885080000   gss: 0000000000000000
+(XEN) ds: 002b   es: 002b   fs: 0000   gs: 0000   ss: e010   cs: e008
+(XEN) Xen code around <ffff82d08022b2e8> (sched_credit.c#csched_schedule+0x8fe/0xd42):
+(XEN)  10 18 83 78 18 00 75 02 <0f> 0b 48 8d 05 0f 3e 73 00 48 8b 44 10 18 83 68
+(XEN) Xen stack trace from rsp=ffff83077a737d18:
+(XEN)    0000000000000004 00000000ef047000 ffff82d08095f0e0 ffff830779eae188
+(XEN)    0000017e6f25c71c ffff82d08095f0c0 0000000100000044 ffff82d08095f0c0
+(XEN)    0000000001c9c380 ffff83077a737e60 ffff83077ffe7720 ffff82d08095f100
+(XEN)    ffff83077a6c59e0 ffff82d08095f0c0 0000001200000000 ffff83077a73c570
+(XEN)    ffff82d08095f100 0000000100000028 ffff830700000046 0000004400000012
+(XEN)    ffff82d08023d5f0 ffff83077a7381a0 7ffb5fe000000000 00000000000000bd
+(XEN)    0000000000000000 0000000000000000 0000000000000092 ffff830060ae3000
+(XEN)    ffff82d08095f100 ffff83077a738188 0000017e6f25c71c 0000000000000012
+(XEN)    ffff83077a737ea8 ffff82d080236406 ffff82d080372434 ffff83077a7381a0
+(XEN)    0000001200737ef8 ffff83077a738180 ffff83077a737ee8 ffff82d08036a04a
+(XEN)    02ff82d080372434 0000000000000001 0000000000000000 deadbeefdeadf00d
+(XEN)    deadbeefdeadf00d ffff82d080934500 ffff82d080933c00 ffffffffffffffff
+(XEN)    ffff83077a737fff 0000000000000000 ffff83077a737ed8 ffff82d080239ec5
+(XEN)    ffff830060ae3000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    ffff83077a737ee8 ffff82d080239f1a 00007cf8858c80e7 ffff82d08036e566
+(XEN)    ffff880181710000 ffff880181710000 ffff880181710000 0000000000000000
+(XEN)    0000000000000012 ffffffff81d4c180 0000000000000246 0000000000007ff0
+(XEN)    0000000000000001 0000000000000000 0000000000000000 ffffffff810013aa
+(XEN)    0000000000000012 deadbeefdeadf00d deadbeefdeadf00d 0000010000000000
+(XEN)    ffffffff810013aa 000000000000e033 0000000000000246 ffff880181713ee0
+(XEN) Xen call trace:
+(XEN)    [<ffff82d08022b2e8>] sched_credit.c#csched_schedule+0x8fe/0xd42
+(XEN)    [<ffff82d080236406>] schedule.c#schedule+0x107/0x627
+(XEN)    [<ffff82d080239ec5>] softirq.c#__do_softirq+0x85/0x90
+(XEN)    [<ffff82d080239f1a>] do_softirq+0x13/0x15
+(XEN)    [<ffff82d08036e566>] x86_64/entry.S#process_softirqs+0x6/0x10
+(XEN) ****************************************
+(XEN) Panic on CPU 18:
+(XEN) Assertion 'CSCHED_PCPU(cpu)->nr_runnable >= 1' failed at sched_credit.c:269
+(XEN) ****************************************
+(XEN) Reboot in five seconds...
+
+
+
+dom0 is still alive after that attempt to reboot and for some reason triple
+ctrl-a appears to work. But it seems 'R' still fails.
+
+Olaf
+
+--WYTEVAkct0FjGQmd
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrM2fkACgkQFkJ4iaW4
-c+4GihAAlpnnmKj7j7xYwsCQkwCLSOZyEBb20w3aDeW5KrvXK+eYwD4vj1DwlYjJ
-DzZKZzljsDNZXc1GZsCqu/UBf96zuOEnS64os5xa0lombG4JWIxjLVTrdV9T2ygh
-nqzjLNsMXlPlWs8cdZ7gbYNxQlWc+XFuGKReZF2D2Z1+c+TK5Sg75AtK12ypLqCe
-w6txWmtwSFj7yUzPG4r0MozOcQw0Mm43BfNzQPgiIUhJhPvImn7bHjKpunOufMbW
-aiYllOWmkwCw6rJIl6RaJK2WTUv9Z+GhQU6a2OSJQV6E+g9G86GhC6FX5nxmu9uE
-LJ1PNhTGmveLSDrfpUl2O1dLMjprA37NlybUR8k0jVCSHaucuWTSVu8GDMgncqWa
-YeDJTs51q/q1Q7P2G0GZTmAlP9fuQF2EB8/PV1Sxe6nMgV7WfK5t1VmHyGqhQCoG
-37CPeLwWA17JUC+SGWfb4tlpOvoDmuIDp/qWmOJqIwjFi7pkKGJBGy4pSbNYoq5N
-tie7+VTqmIVW4oQg6YFqeh1Abk6f0HFHVb+9k/y8KLrXlMfNF2bOIRK0FM5Dkhf0
-tDD80Yuhx6sb2qXmdFI3CLfNaEhWbt4Lg9mFGCCWB5Lm6IbWrpyZD6tcuzQJSYyK
-/OlWdZJBJ/7sVqM4p5VD4JArtDVtd/bLZQlEXtbc1K7h6M/1hr0=
-=GGZH
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWszfcgAKCRBdQqD6ppg2
+fo42AKDtNZwOX9EpPpbsKqXE93dgO8wquQCeLfB05Tlt6rgRUtKcTuEly5LCm8Q=
+=rDxN
 -----END PGP SIGNATURE-----
 
---=-dZKnS79jvw75LvxvCF0G--
+--WYTEVAkct0FjGQmd--
 
 
-
---===============3867180755462381525==
+--===============7500183254499642252==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -116,4 +120,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============3867180755462381525==--
+--===============7500183254499642252==--
