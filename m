@@ -1,19 +1,14 @@
-From: Venu Busireddy <venu.busireddy@oracle.com>
-Subject: Re: [PATCH v3 1/2] libxl: Implement the handler to
- handle unrecoverable AER errors
-Date: Tue, 10 Apr 2018 14:52:02 -0500
-Message-ID: <20180410195202.GB2936@vbusired-dt>
-References: <20170807235457.3943-1-venu.busireddy@oracle.com>
- <20170807235457.3943-2-venu.busireddy@oracle.com>
- <20170808143301.5kyqlbomcyr3wa4o@citrix.com>
- <20170808145136.GA15728@vbusired-lt>
- <22979.62230.829267.882579@mariner.uk.xensource.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: crash in csched_load_balance after xl vcpu-pin
+Date: Tue, 10 Apr 2018 22:02:15 +0200
+Message-ID: <42c5d682348a351420290dc1ecf5b1e2a60b98be.camel@suse.com>
+References: <20180410085729.GA472@aepfle.de> <20180410155949.GB7177@aepfle.de>
+ <ebdd4cb871b2d754959e8358641810d61b3d0856.camel@suse.com>
+ <20180410190302.GC7177@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4854819226999338133=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <22979.62230.829267.882579@mariner.uk.xensource.com>
+In-Reply-To: <20180410190302.GC7177@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,112 +17,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
+To: Olaf Hering <olaf@aepfle.de>
+Cc: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAxNy0wOS0yMSAxODoxMjo1NCArMDEwMCwgSWFuIEphY2tzb24gd3JvdGU6Cj4gVmVudSBC
-dXNpcmVkZHkgd3JpdGVzICgiUmU6IFtQQVRDSCB2MyAxLzJdIGxpYnhsOiBJbXBsZW1lbnQgdGhl
-IGhhbmRsZXIgdG8gaGFuZGxlIHVucmVjb3ZlcmFibGUgQUVSIGVycm9ycyIpOgo+ID4gT24gMjAx
-Ny0wOC0wOCAxNTozMzowMSArMDEwMCwgV2VpIExpdSB3cm90ZToKPiA+ID4gSSB0aGluayBhIGJp
-Z2dlciBxdWVzdGlvbiBpcyB3aGV0aGVyIHlvdSBhZ3JlZSB3aXRoIElhbidzIGNvbW1lbnRzCj4g
-PiA+IHJlZ2FyZGluZyBBUEkgZGVzaWduIGFuZCB3aGV0aGVyIHlvdSBoYXZlIG1vcmUgcXVlc3Rp
-b25zPwo+ID4gCj4gPiBJYW4gc3VnZ2VzdGVkIHRoYXQgSSBkb2N1bWVudCB0aGUgdXNlIG9mIHRo
-ZSBBUEkgKGFib3V0IHRoZSBldmVudCBsb29wKSwKPiA+IGFuZCBJIGJlbGlldmUgSSBhZGRyZXNz
-ZWQgaXQuIEkgZG9uJ3QgaGF2ZSBhbnkgbW9yZSBxdWVzdGlvbnMuIEp1c3QKPiA+IHdhaXRpbmcg
-Zm9yIElhbidzICJBY2siLCBvciBtb3JlIGNvbW1lbnRzLgo+IAo+IEknbSBhZnJhaWQgdGhhdCBJ
-IHN0aWxsIGhhdmUgcmVzZXJ2YXRpb25zIGFib3V0IHRoZSBkZXNpZ24gcXVlc3Rpb25zLgo+IEV2
-aWRlbnRseSBJIGRpZG4ndCBtYWtlIG15IHF1ZXN0aW9ucyBjbGVhciBlbm91Z2guCj4gCj4gVGhl
-IG1vc3QgaW1wb3J0YW50IHF1ZXN0aW9uIHRoYXQgc2VlbXMgdW5hbnN3ZXJlZCB0byBtZSBpcyB0
-aGlzOgo+IAo+ICAgV2h5IGlzIHRoaXMgb25seSBzb21ldGltZXMgdGhlIHJpZ2h0IHRoaW5nIHRv
-IGRvID8gIE9uIHdoYXQgYmFzaXMKPiAgIG1pZ2h0IGEgdXNlciBjaG9vc2UgPwo+IAo+IFRvIHdo
-aWNoIHlvdSBhbnN3ZXJlZDoKPiAKPiAgIFRoaXMgaXMgbm90IGFuICJvbmx5IHNvbWV0aW1lcyIg
-dGhpbmcuIFVzZXIgZG9lc24ndCBjaG9vc2UgaXQuIFdlIGFsd2F5cwo+ICAgd2FudCB0byB3YXRj
-aCBmb3IgQUVSIGVycm9ycy4KPiAKPiBCdXQgdGhpcyBsZWFkcyB0byBtb3JlIGZ1bmRhbWVudGFs
-IHF1ZXN0aW9ucy4KPiAKPiBJZiB0aGlzIGJlaGF2aW91ciBpcyBhbHdheXMgcmVxdWlyZWQsIHdo
-eSBkbyB3ZSBoYXZlIGFuIEFQSSBjYWxsIHRvCj4gcmVxdWVzdCBpdCA/ICBJdCBzb3VuZHMgbGlr
-ZSBub3QgY2FsbGluZyB0aGlzIG5ldyBmdW5jdGlvbiBvZiB5b3VycyBpcwo+IGFsd2F5cyBhIG1p
-c3Rha2UuICBJZSB0aGlzIGZ1bmN0aW9uICh3aGljaCBoYXMgYW4gb2JzY3VyZSBuYW1lKSBpcwoK
-WWVzLCB0aGlzIGJlaGF2aW9yIGlzIGFsd2F5cyByZXF1aXJlZC4gSSB3aWxsIHJlbW92ZSB0aGUg
-QVBJIGNhbGxzLAphbmQgaW4gdGhlaXIgcGxhY2UsIGNyZWF0ZSB3cmFwcGVyIGZ1bmN0aW9ucyB0
-aGF0IGNhbiBiZSBjYWxsZWQgZnJvbQpkaWZmZXJlbnQgcGxhY2VzIGluIGxpYnhlbmxpZ2h0IGFz
-IG5lZWRlZC4KCmxpYnhsX3JlZ19hZXJfZXZlbnRzX2hhbmRsZXIoKSB3aWxsIGJlIGNyZWF0ZWQg
-YXMgYSB3cmFwcGVyIGZ1bmN0aW9uCnRoYXQgaGlkZXMgdGhlIGludGVybmFsIGRldGFpbHMgb2Yg
-Y2FsbGluZyBsaWJ4bF9fZXZfeHN3YXRjaF9yZWdpc3RlcigpLgoKbGlieGxfdW5yZWdfYWVyX2V2
-ZW50c19oYW5kbGVyKCkgd2lsbCBiZSBjcmVhdGVkIGFzIGEgd3JhcHBlciBmdW5jdGlvbgp0aGF0
-IGhpZGVzIHRoZSBpbnRlcm5hbCBkZXRhaWxzIG9mIGNhbGxpbmcgbGlieGxfX2V2X3hzd2F0Y2hf
-ZGVyZWdpc3RlcigpLgoKPiBsaWtlICJJQUMgRE9OVCBSQU5ET01ZLUxPU0UiIChzZWUgUkZDNzQ4
-LCBmcm9tIDFzdCBBcHJpbCAxOTc4KQo+IGV4Y2VwdCB0aGF0IHlvdSBhcmUgbWFraW5nIERPIFJB
-TkRPTUxZLUxPU0UgdGhlIGRlZmF1bHQgKGluIHZpb2xhdGlvbgo+IG9mIHRoZSBSRkMsIHNob3Vs
-ZCBhbnlvbmUgdGFsayB0byB0aGUgc2VydmVyIG92ZXIgdGVsbmV0Li4uKQo+IAo+IElmIHlvdSBh
-cmUgaW52ZW50aW5nIGEgbmV3IGtpbmQgb2YgbW9uaXRvcmluZyBwcm9jZXNzIHRoYXQgbXVzdCBi
-ZSBydW4KPiBmb3IgYWxsIGRvbWFpbnMsIHRoYXQgaXMgYSB0aGluZyB0aGF0IGxpYnhsIGRvZXMg
-bm90IGhhdmUgcmlnaHQgbm93Lgo+IEF0IGxlYXN0LCBpdCBkb2Vzbid0IGhhdmUgaXQgaW4gdGhp
-cyBmb3JtLiAgKHhsIGhhcyB0aGUgcmVib290Cj4gbW9uaXRvciwgYW5kIHRoaXMgaXMgZG9uZSBk
-aWZmZXJlbnRseSBpbiBsaWJ2aXJ0LikKCkkgYW0gbm90IGludmVudGluZyBhIG5ldyBraW5kIG9m
-IG1vbml0b3JpbmcgcHJvY2Vzcy4gTXkgdW5kZXJzdGFuZGluZwppcyB0aGF0IGVhY2ggZG9tYWlu
-IGFscmVhZHkgaGFzIGl0cyBvd24gbW9uaXRvcmluZyBwcm9jZXNzLgoKSWYgdGhlIHRvb2xzdGFj
-ayB1c2VkIGlzIHhsLCBJIGFtIHByb3Bvc2luZyB0byB1c2UgdGhlICd4bCcgY29tbWFuZCBhcwp0
-aGUgbW9uaXRvcmluZyBwcm9jZXNzICh3aGV0aGVyIGRhZW1vbml6ZWQgb3Igbm90KS4KCklmIHRo
-ZSB0b29sc3RhY2sgdXNlZCBpcyBsaWJ2aXJ0L3ZpcnNoLCBJIGFtIHByb3Bvc2luZyB0byB1c2Ug
-dGhlIGRhZW1vbgonbGlidmlydGQnIGFzIHRoZSBtb25pdG9yaW5nIHByb2Nlc3MuIFRoYXQgcHJv
-Y2VzcyBhbHdheXMgc3RheXMgYXJvdW5kLgoKPiBJdCB3YXMgaW5kZWVkIGEgZGVzaWduIHByaW5j
-aXBsZSBvZiBsaWJ4bCB0aGF0IGl0IHNob3VsZCAoYXQgbGVhc3QsCj4gd2hlcmV2ZXIgcG9zc2li
-bGUpIGJlIHBvc3NpYmxlIHRvIHJ1biBhIGRvbWFpbiBfd2l0aG91dF8gYSBtb25pdG9yaW5nCj4g
-cHJvY2VzcyBpbXBvc2VkIGJ5IGxpYnhsLgo+IAo+IFNvOiB3aHkgaXMgd2hhdCB0aGlzIEFQSSBj
-YWxsIHJlcXVlc3RzLCBub3QgZG9uZSBhdXRvbWF0aWNhbGx5IGJ5Cj4gcGNpYmFjayBvciBieSBY
-ZW4gPwoKV2hlbiB5b3Ugc2F5ICJYZW4iLCBJIGFtIGFzc3VtaW5nIHlvdSBtZWFudCAibGlieGVu
-bGlnaHQuIiBJZiBzbywgdGhlCmFuc3dlciBpcyBZZXMuIEkgYW0gcHJvcG9zaW5nIHRvIHJlZ2lz
-dGVyL3VucmVnaXN0ZXIgdGhlIGV2ZW50IGhhbmRsZXIKaW4gbGlieGVubGlnaHQsIHNvIHRoYXQg
-YWxsIHRvb2xzdGFja3MgY2FuIG1ha2UgdXNlIG9mIHRoZSBtb25pdG9yaW5nLgoKPiBBbmQ6IGlm
-IHlvdSBhcmUgaW52ZW50aW5nIGEgbmV3IG1vbml0b3JpbmcgcHJvY2VzcyB0aGF0IG11c3QgYmUg
-cnVuCj4gZm9yIGV2ZXJ5IGRvbWFpbiwgeW91IHNob3VsZCBjYWxsIHRoaXMgb3V0IG11Y2ggbW9y
-ZSBleHBsaWNpdGx5IGFzIGEKPiBmdW5kYW1lbnRhbCBkZXNpZ24gY2hhbmdlLgo+IAo+IFdlIHdp
-bGwgdGhlbiBoYXZlIHRvIHRoaW5rIGFib3V0IG1vcmUgcXVlc3Rpb25zOiBzaG91bGQgdGhpcyBw
-cm9jZXNzCj4gYmUgcnVuIGF1dG9tYXRpY2FsbHkgYnkgbGlieGwsIHdpdGhvdXQgc3BlY2lhbCBh
-cHBsaWNhdGlvbiByZXF1ZXN0Cj4gKGxpa2UgdGhlIHdheSB0aGF0IGxpYnhsIHJ1bnMgcWVtdSkg
-PwoKSSBhbSBub3QgaW52ZW50aW5nIGEgbmV3IG1vbml0b3JpbmcgcHJvY2VzcywgYW5kIGhlbmNl
-LCB0aGlzIGlzbid0CmFwcGxpY2FibGUuCgo+IElmIG5vdCwgaG93IGRvIHdlIGVuc3VyZSB0aGF0
-IGV4YWN0bHkgb25lIG9mIHRoZXNlIHByb2Nlc3NlcyBpcwo+IHJ1bm5pbmcgZm9yIGVhY2ggZ3Vl
-c3QgPwoKQXMgSSBtZW50aW9uZWQgaW4gdGhlIGVhcmxpZXIgcGFyYWdyYXBocyBhYm92ZSwgdGhl
-cmUgd2lsbCBvbmx5IGJlIG9uZQpwcm9jZXNzIHBlciBkb21haW4uIE5ldmVyIG1vcmUgdGhhbiBv
-bmUgcHJvY2VzcyBwZXIgZG9tYWluLiBXaGVuIHVzaW5nCnRoZSB4bCB0b29sc3RhY2ssIHRoYXQg
-b25lIHByb2Nlc3MgcGVyIGRvbWFpbiBpcyB0aGUgJ3hsJyBjb21tYW5kLiBXaGVuCnVzaW5nIHRo
-ZSBsaWJ2aXJ0L3ZpcnNoIHRvb2xzdGFjaywgdGhlbiB0aGVyZSBpcyBvbmx5IG9uZSBwcm9jZXNz
-ICh0aGUKJ2xpYnZpcnRkJyBkYWVtb24pIHRoYXQgaXMgbW9uaXRvcmluZyBhbGwgdGhlIGRvbWFp
-bnMuIFRoZXJlZm9yZSwgdGhlcmUKd2lsbCBuZXZlciBiZSBtb3JlIHRoYW4gcHJvY2VzcyBwZXIg
-ZG9tYWluLgoKPiBJZiB5b3VyIG5ldyBkZXNpZ24gaW52b2x2ZXMgbmV3IGJlaGF2aW91ciBpbiBj
-YWxsZXJzIG9mIGxpYnhsLCBkbyB5b3UKPiBpbnRlbmQgdG8gc2VuZCBwYXRjaGVzIGZvciBsaWJ2
-aXJ0IHRvIGVuYWJsZSBpdCA/CgpUaGUgbmV3IGRlc2lnbiBkb2VzIG5vdCBpbnZvbHZlIGFueSBu
-ZXcgYmVoYXZpb3IgaW4gdGhlIGNhbGxlcnMgb2YKbGlieGwuIFJlZ2lzdHJhdGlvbiBvZiB0aGUg
-ZXZlbnQgaGFuZGxlciBoYXBwZW5zIHRyYW5zcGFyZW50bHksIHdpdGhvdXQKYW55IGV4cGxpY2l0
-IHJlcXVlc3QgZnJvbSB0aGUgbGlieGwgY2FsbGVycy4KCj4gTG9va2luZyBhdCB0aGUgY29kZToK
-PiAKPiBZb3UgaGFuZGxlIGVycm9ycyBieSBsb2dnaW5nIGFuZCBjb250aW51aW5nLiAgV2h5IGlz
-IHRoYXQgY29ycmVjdCA/CgpJbiB0aGUgdW5saWtlbHkgY2FzZSBvZiBmYWlsdXJlIHRvIHJlZ2lz
-dGVyIHRoZSBldmVudCBoYW5kbGVyLCB3ZSBmZWx0CnRoYXQgaXQgaXMgYmV0dGVyIHRvIGNvbnRp
-bnVlIHdpdGggdGhlIGNyZWF0aW9uIG9mIHRoZSBndWVzdCB3aXRob3V0Cm1vbml0b3JpbmcgKHdo
-aWNoIGlzIHdoYXQgaGFwcGVucyB0b2RheSkuIEJ1dCBpZiB5b3Ugd291bGQgbGlrZSB0byBzZWUg
-dGhlCmNyZWF0aW9uIG9mIHRoZSBndWVzdCBmYWlsLCB0aGF0IGlzIGFuIGVhc3kgY2hhbmdlIHRv
-IGFjY29tbW9kYXRlLiBXb3VsZAp5b3UgbGlrZSB0byBmYWlsIHRoZSBjcmVhdGlvbiBvZiB0aGUg
-Z3Vlc3Q/Cgo+IElmIHdlIGFyZSB0byBrZWVwIHRoZSBjdXJyZW50IEFQSSBmb3IgdGhlIGNsaWVu
-dCwgaXQgbmVlZHMgdG8gaGF2ZQo+IGJldHRlciBkb2MgY29tbWVudHMuCgpJIHdpbGwgYmUgcmVt
-b3ZpbmcgdGhlIEFQSSwgYW5kIGhlbmNlLCBubyBkb2MgY29tbWVudHMuCgo+IElzIHRoZSB4ZW5z
-dG9yZSB3YXRjaCBpbXBsZW1lbnRhdGlvbiB2dWxuZXJhYmxlIHRvIHVuZXhwZWN0ZWQgcGF0aHMK
-PiBhcHBlYXJpbmcgaW4gd2F0Y2ggZXZlbnRzID8KClRoZSBldmVudCBoYW5kbGVyIGxvb2tzIGZv
-ciBzcGVjaWZpYyBwYXRocyB3aXRoIHNwZWNpZmljIGZvcm1hdHMgdG8gZXhpc3QKaW4gdGhlIHhl
-bnN0b3JlLiBVbmxlc3MgYW4gdXNlciB3aXRoIGFkbWluaXN0cmF0aXZlIHByaXZpbGVnZSBhZGRz
-IGVudHJpZXMKdG8geGVuc3RvcmUsIHN1Y2ggcGF0aHMgc2hvdWxkIG5vdCBjb21lIGludG8gZXhp
-c3RlbmNlIGluIHhlbnN0b3JlLgoKPiBXaHkgaXMgdGhlIEFQSSBub3QgYSBuZXZlci1jb21wbGV0
-aW5nIGFvID8gIE9yLCB3aHkgaXMgaXQgbm90IGFuCj4gZXZyZWcgPwoKSSB3aWxsIGJlIHJlbW92
-aW5nIHRoZSBBUEksIGFuZCBoZW5jZSwgdGhpcyBpc24ndCBhcHBsaWNhYmxlLgoKPiBCdXQgdGhl
-IGZ1bmRhbWVudGFsIGRlc2lnbiBxdWVzdGlvbnMgbmVlZCBhbnN3ZXJpbmcgZmlyc3QuCgpJbiB2
-NSBvZiB0aGUgcGF0Y2gsIHRoZSBkZXNpZ24gaW5jb3Jwb3JhdGVzIGFsbCBvZiB0aGUgYWJvdmUg
-YXNwZWN0cy4gVGhlCkFQSSBpcyByZW1vdmVkLiBFeGlzdGluZyBwcm9jZXNzZXMgYXJlIHVzZWQg
-dG8gbW9uaXRvciBmb3IgdGhlIGV2ZW50cy4gSW4KY2FzZSBvZiBsaWJ2aXJ0ZCB3aGVyZSBvbmUg
-cHJvY2VzcyBtb25pdG9ycyBhbGwgdGhlIGRvbWFpbnMsIEkgYW0KbWFpbnRhaW5pbmcgYSBsaXN0
-IG9mIGhhbmRsZXJzIHdpdGhpbiB0aGF0IG9uZSBzaW5nbGUgJ2N0eCcuIFRoZSBuZXcKZGVzaWdu
-IGFsc28gdGFrZXMgY2FyZSBvZiB0aGUgbW9uaXRvcmluZyBpcnJlc3BlY3RpdmUgb2Ygd2hpY2gg
-dG9vbHN0YWNrCmlzIHVzZWQgdG8gY3JlYXRlIHRoZSBndWVzdC4KClJlZ2FyZHMsCgpWZW51CgoK
+
+--===============4854819226999338133==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-Vn/tusENuLox6jN5zoyh"
+
+
+--=-Vn/tusENuLox6jN5zoyh
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 2018-04-10 at 21:03 +0200, Olaf Hering wrote:
+> On Tue, Apr 10, Dario Faggioli wrote:
+>=20
+> > As said, its cpus=3D and cpus_soft=3D, and you probably just need
+> > cpus=3D"node:1"
+> > cpus_soft=3D"node:1"
+> > Or, even just:
+> > cpus=3D"node:1"
+> > as, if soft-affinity is set to be equal to hard, it is just
+> > ignored.
+>=20
+> Well, that was a noop. But xl.cfg states "nodes:0-3,^node:2", so this
+> should work:
+> cpus=3D"nodes:3,^node:0"
+> cpus_soft=3D"nodes:3,^node:0"
+>=20
+Well, but "nodes:0-3,^node:2" is a way to say that you want nodes 0, 1
+and 3. I.e., you are defining a set made up of 0,1,2,3, and then you
+remove 2.
+
+With "nodes:3,^node:0", you're saying that you want node 3, but not
+node 0. I.e., basically, you are creating a set with 3 in it, and then
+trying to remove 0... I agree this is not technically wrong, but it
+does not make much sense. Why you're not using
+"node:3,^node:0,^node:1,^node:2" then?
+
+So, really, the way to achieve what you seem to me to be wanting to
+achieve is:
+
+cpus=3D"node:3"
+
+All that being said, yes, "nodes:3,^node:0" should work (and behave
+exactly as "node:3" :-) ).
+
+And in fact...
+
+> xl create -f fv_sles12sp1.f.tst.cfg
+>
+... parsing, at the xl level, worked, or xl itself would have errored
+out, with its own message.
+
+> libxl: error: libxl_sched.c:62:libxl__set_vcpuaffinity: Domain
+> 16:Setting vcpu affinity: Invalid argument
+> libxl: error: libxl_dom.c:461:libxl__build_pre: setting affinity
+> failed on vcpu `0'
+>
+This is xc_vcpu_setaffinity() failing with EINVAL, in
+libxl__set_vcpuaffinity().
+
+> Same for nodes:2..., just nodes:1... works.
+>=20
+> And after some attempts, cpus=3D"nodes:2/3" fails too.
+>
+"nodes:2/3" is not supported.
+
+> There is no indication what is invalid.
+>=20
+Mmm... I seem to recall having tested the parser against various corner
+cases and/or ill-defined input. Still, my guess is that using ^ like
+that (i.e., excluding something which was not there in the first
+place), may result in a weird/corrupted cpumask.
+
+If that is the case, it indeed would be a bug. I'll check the code
+tomorrow.
+
+In the meanwhile --let me repeat myself-- just go ahead with "node:2",
+"node:3", etc. :-D
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-Vn/tusENuLox6jN5zoyh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrNGEgACgkQFkJ4iaW4
+c+73HxAAomR6xnJvZeqXymUwb4eIKoBWeVbn5b+gUbvWKOak9mm0WWYdPZRafrfi
+zqfIjS45CuHyrGVrJHfz6lYWg9V/6Kn/nyJ+qKxsccg6dDRa8tv2PdpSUBhRlzlP
+2DzqGeNQP+IZrVFfNxOpEjsnYiUZ4V/ajkhplNY1kw1c9lIZ2nRbeQCAJoFYt8El
+YtH+PU+0n+mtwzhsE76QSjOE9NBmPsDV9XR6dVrEyILJYkLJn1y4AnRlFykVwcoF
+yEQMKTryneSKpO8Ad6c8NS/HU5j3b99nxzV+gKND3Gs1P3kCV5VNni2pH3Cx7pDi
+43uX6c85LM9Mc88hRw4QFLWOps9eAQUGx1XzvfDvxr6Z9BZPsntHVBhaq/45U3qJ
+tFutpzN4Isapx9uIDyvA5a59yBmDQpM8alpAYSEACUQecFEIBcUG3N/kggERrvJP
+n9vwUu31BVILfxhAUdCUeMR46ks69PO/u22sbhf5n4EyeBgEPLqJ7kpuTs1B1fAY
+RqAePtzQeFZjeY8LfNANldSykdmYGF5kiLuQ/XtdBOMO79OH1j3urq3eFWHQmdnF
+Ww3950/i8mBWe480scUqkkzeQdR4ShIdAf5ZMLf+Lmabyo/caSdVqLIUoJ9Ydt0O
+Y47c0zCwkIliu//5qPh9dWUpr32Yps4oRHQseJ29IosbbOwl6ms=
+=CPJh
+-----END PGP SIGNATURE-----
+
+--=-Vn/tusENuLox6jN5zoyh--
+
+
+
+--===============4854819226999338133==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4854819226999338133==--
