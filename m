@@ -1,19 +1,21 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+From: Jia-Ju Bai <baijiaju1990@gmail.com>
 Subject: Re: [PATCH 1/4] xen: xen-pciback: Replace GFP_ATOMIC
  with GFP_KERNEL in pcistub_probe
-Date: Tue, 10 Apr 2018 10:27:29 -0400
-Message-ID: <b07f0a27-f09d-1617-ab9e-ebbc761cb3a4@oracle.com>
+Date: Tue, 10 Apr 2018 22:31:28 +0800
+Message-ID: <74fe5dd3-fb85-bed8-82b6-a9fb7a3a376d@gmail.com>
 References: <1523286216-26345-1-git-send-email-baijiaju1990@gmail.com>
+ <b07f0a27-f09d-1617-ab9e-ebbc761cb3a4@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3910732310806314489=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=nhop=g7=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1f5uDO-0007Jc-B1
- for xen-devel@lists.xenproject.org; Tue, 10 Apr 2018 14:25:42 +0000
-In-Reply-To: <1523286216-26345-1-git-send-email-baijiaju1990@gmail.com>
+ <srs0=wsdt=g7=gmail.com=baijiaju1990@srs-us1.protection.inumbo.net>)
+ id 1f5uJJ-0007zD-3E
+ for xen-devel@lists.xenproject.org; Tue, 10 Apr 2018 14:31:49 +0000
+Received: by mail-pl0-x22c.google.com with SMTP id c7-v6so4378915plr.5
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Apr 2018 07:31:47 -0700 (PDT)
+In-Reply-To: <b07f0a27-f09d-1617-ab9e-ebbc761cb3a4@oracle.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,33 +25,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jia-Ju Bai <baijiaju1990@gmail.com>, jgross@suse.com, gregkh@linuxfoundation.org
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, jgross@suse.com, gregkh@linuxfoundation.org
 Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMDkvMjAxOCAxMTowMyBBTSwgSmlhLUp1IEJhaSB3cm90ZToKPiBwY2lzdHViX3Byb2Jl
-KCkgaXMgbmV2ZXIgY2FsbGVkIGluIGF0b21pYyBjb250ZXh0Lgo+IFRoaXMgZnVuY3Rpb24gaXMg
-b25seSBzZXQgYXMgIi5wcm9iZSIgaW4gc3RydWN0IHBjaV9kcml2ZXIuCj4KPiBEZXNwaXRlIG5l
-dmVyIGdldHRpbmcgY2FsbGVkIGZyb20gYXRvbWljIGNvbnRleHQsCj4gcGNpc3R1Yl9wcm9iZSgp
-IGNhbGxzIGttYWxsb2MoKSB3aXRoIEdGUF9BVE9NSUMsCj4gd2hpY2ggZG9lcyBub3Qgc2xlZXAg
-Zm9yIGFsbG9jYXRpb24uCj4gR0ZQX0FUT01JQyBpcyBub3QgbmVjZXNzYXJ5IGFuZCBjYW4gYmUg
-cmVwbGFjZWQgd2l0aCBHRlBfS0VSTkVMLAo+IHdoaWNoIGNhbiBzbGVlcCBhbmQgaW1wcm92ZSB0
-aGUgcG9zc2liaWxpdHkgb2Ygc3VjZXNzZnVsIGFsbG9jYXRpb24uCj4KPiBUaGlzIGlzIGZvdW5k
-IGJ5IGEgc3RhdGljIGFuYWx5c2lzIHRvb2wgbmFtZWQgRENOUyB3cml0dGVuIGJ5IG15c2VsZi4K
-PiBBbmQgSSBhbHNvIG1hbnVhbGx5IGNoZWNrIGl0Lgo+Cj4gU2lnbmVkLW9mZi1ieTogSmlhLUp1
-IEJhaSA8YmFpamlhanUxOTkwQGdtYWlsLmNvbT4KCldoYXQgYWJvdXQgdXNlIG9mIEdGUF9BVE9N
-SUMgaW4gcGNpc3R1Yl9yZWdfYWRkKCk/CgotYm9yaXMKCj4gLS0tCj4gIGRyaXZlcnMveGVuL3hl
-bi1wY2liYWNrL3BjaV9zdHViLmMgfCAyICstCj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlv
-bigrKSwgMSBkZWxldGlvbigtKQo+Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMveGVuL3hlbi1wY2li
-YWNrL3BjaV9zdHViLmMgYi9kcml2ZXJzL3hlbi94ZW4tcGNpYmFjay9wY2lfc3R1Yi5jCj4gaW5k
-ZXggOWU0ODBmZC4uOTVlNmRkZCAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3hlbi94ZW4tcGNpYmFj
-ay9wY2lfc3R1Yi5jCj4gKysrIGIvZHJpdmVycy94ZW4veGVuLXBjaWJhY2svcGNpX3N0dWIuYwo+
-IEBAIC01NzcsNyArNTc3LDcgQEAgc3RhdGljIGludCBwY2lzdHViX3Byb2JlKHN0cnVjdCBwY2lf
-ZGV2ICpkZXYsIGNvbnN0IHN0cnVjdCBwY2lfZGV2aWNlX2lkICppZCkKPiAgCQl9Cj4gIAo+ICAJ
-CWlmICghbWF0Y2gpIHsKPiAtCQkJcGNpX2Rldl9pZCA9IGttYWxsb2Moc2l6ZW9mKCpwY2lfZGV2
-X2lkKSwgR0ZQX0FUT01JQyk7Cj4gKwkJCXBjaV9kZXZfaWQgPSBrbWFsbG9jKHNpemVvZigqcGNp
-X2Rldl9pZCksIEdGUF9LRVJORUwpOwo+ICAJCQlpZiAoIXBjaV9kZXZfaWQpIHsKPiAgCQkJCWVy
-ciA9IC1FTk9NRU07Cj4gIAkJCQlnb3RvIG91dDsKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+This is a multi-part message in MIME format.
+--===============3910732310806314489==
+Content-Type: multipart/alternative;
+ boundary="------------AF3D0B8D06F849620D9261CF"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------AF3D0B8D06F849620D9261CF
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+
+
+On 2018/4/10 22:27, Boris Ostrovsky wrote:
+> On 04/09/2018 11:03 AM, Jia-Ju Bai wrote:
+>> pcistub_probe() is never called in atomic context.
+>> This function is only set as ".probe" in struct pci_driver.
+>>
+>> Despite never getting called from atomic context,
+>> pcistub_probe() calls kmalloc() with GFP_ATOMIC,
+>> which does not sleep for allocation.
+>> GFP_ATOMIC is not necessary and can be replaced with GFP_KERNEL,
+>> which can sleep and improve the possibility of sucessful allocation.
+>>
+>> This is found by a static analysis tool named DCNS written by myself.
+>> And I also manually check it.
+>>
+>> Signed-off-by: Jia-Ju Bai<baijiaju1990@gmail.com>
+> What about use of GFP_ATOMIC in pcistub_reg_add()?
+
+Thanks for your reply :)
+I find pcistub_reg_add() is called by pcistub_quirk_add().
+And pcistub_quirk_add() is called in the macro DRIVER_ATTR().
+I am not sure whether DRIVER_ATTR() can make the function called in 
+atomic context,
+so I do not analyze it in my tool.
+
+
+Best wishes,
+Jia-Ju Bai
+
+--------------AF3D0B8D06F849620D9261CF
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <p><br>
+    </p>
+    <br>
+    <div class="moz-cite-prefix">On 2018/4/10 22:27, Boris Ostrovsky
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:b07f0a27-f09d-1617-ab9e-ebbc761cb3a4@oracle.com">
+      <pre wrap="">On 04/09/2018 11:03 AM, Jia-Ju Bai wrote:
+</pre>
+      <blockquote type="cite" style="color: #000000;">
+        <pre wrap="">pcistub_probe() is never called in atomic context.
+This function is only set as ".probe" in struct pci_driver.
+
+Despite never getting called from atomic context,
+pcistub_probe() calls kmalloc() with GFP_ATOMIC,
+which does not sleep for allocation.
+GFP_ATOMIC is not necessary and can be replaced with GFP_KERNEL,
+which can sleep and improve the possibility of sucessful allocation.
+
+This is found by a static analysis tool named DCNS written by myself.
+And I also manually check it.
+
+Signed-off-by: Jia-Ju Bai <a class="moz-txt-link-rfc2396E" href="mailto:baijiaju1990@gmail.com" moz-do-not-send="true">&lt;baijiaju1990@gmail.com&gt;</a>
+</pre>
+      </blockquote>
+      <pre wrap="">What about use of GFP_ATOMIC in pcistub_reg_add()?</pre>
+    </blockquote>
+    <br>
+    Thanks for your reply :)<br>
+    I find pcistub_reg_add() is called by pcistub_quirk_add().<br>
+    And pcistub_quirk_add() is called in the macro DRIVER_ATTR().<br>
+    I am not sure whether DRIVER_ATTR() can make the function called in
+    atomic context, <br>
+    so I do not analyze it in my tool.<br>
+    <br>
+    <br>
+    Best wishes,<br>
+    Jia-Ju Bai<br>
+  </body>
+</html>
+
+--------------AF3D0B8D06F849620D9261CF--
+
+
+--===============3910732310806314489==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3910732310806314489==--
