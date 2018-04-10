@@ -1,12 +1,19 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Tue, 10 Apr 2018 18:28:58 +0200
-Message-ID: <ebdd4cb871b2d754959e8358641810d61b3d0856.camel@suse.com>
-References: <20180410085729.GA472@aepfle.de> <20180410155949.GB7177@aepfle.de>
+From: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [PATCH 7/7] docs/Makefile: Format SUPPORT.md into the
+ toplevel
+Date: Tue, 10 Apr 2018 18:22:53 +0100
+Message-ID: <1523380973-15979-8-git-send-email-ian.jackson@eu.citrix.com>
+References: <1523380973-15979-1-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1636298864904622536=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180410155949.GB7177@aepfle.de>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=93ll=g7=citrix.com=prvs=6314176a9=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1f5wzK-0004L6-0M
+ for xen-devel@lists.xenproject.org; Tue, 10 Apr 2018 17:23:22 +0000
+In-Reply-To: <1523380973-15979-1-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,124 +22,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xen.org
-Cc: George Dunlap <george.dunlap@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1636298864904622536==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-qkiEBORWwzwuiqoLCP/U"
-
-
---=-qkiEBORWwzwuiqoLCP/U
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2018-04-10 at 17:59 +0200, Olaf Hering wrote:
-> On Tue, Apr 10, Olaf Hering wrote:
->=20
-> > (XEN) Xen BUG at sched_credit.c:1694
->=20
-> And another one with debug=3Dy and this config:
->
-Wow...
-
-> memory=3D4444
-> vcpus=3D36
-> cpu=3D"nodes:1,^node:0"
-> cpu_soft=3D"nodes:1,^node:0"
->
-As said, its cpus=3D and cpus_soft=3D, and you probably just need
-
-cpus=3D"node:1"
-cpus_soft=3D"node:1"
-
-Or, even just:
-
-cpus=3D"node:1"
-
-as, if soft-affinity is set to be equal to hard, it is just ignored.
-
-> (nodes=3D1 cycles between 1-3 for each following domU).
->=20
-> (XEN) Assertion 'CSCHED_PCPU(cpu)->nr_runnable >=3D 1' failed at
-> sched_credit.c:269
-> (XEN) ----[ Xen-4.11.20180407T144959.e62e140daa-
-> 4.bug1087289_411  x86_64  debug=3Dy   Not tainted ]----
-> (XEN) CPU:    18
-> (XEN) RIP:    e008:[<ffff82d08022b2e8>]
-> sched_credit.c#csched_schedule+0x8fe/0xd42
-> (XEN) RFLAGS: 0000000000010046   CONTEXT: hypervisor (d0v18)
-> ...
-> (XEN) Xen call trace:
-> (XEN)    [<ffff82d08022b2e8>]
-> sched_credit.c#csched_schedule+0x8fe/0xd42
-> (XEN)    [<ffff82d080236406>] schedule.c#schedule+0x107/0x627
-> (XEN)    [<ffff82d080239ec5>] softirq.c#__do_softirq+0x85/0x90
-> (XEN)    [<ffff82d080239f1a>] do_softirq+0x13/0x15
-> (XEN)    [<ffff82d08036e566>]
-> x86_64/entry.S#process_softirqs+0x6/0x10
->
-Yeah, thanks for trying with debugging on. Unfortunately, stack traces
-in these case are not very helpful, as they only tell us that
-schedule() is being called by do_softirq()... :-P
-
-Still...
-
-> (XEN) ****************************************
-> (XEN) Panic on CPU 18:
-> (XEN) Assertion 'CSCHED_PCPU(cpu)->nr_runnable >=3D 1' failed at
-> sched_credit.c:269
->
-...it is another, different, one, this time when removing (or not
-reinserting) the vcpu from the runqueue.
-
-What would be helpful, would be to catch the other side of the race,
-i.e., the point when the vcpu is being re-insterted in the runqueue, or
-when v->processor of a vcpu in the runqueue is changed.... Let's see if
-the debug patch will help with this.
-
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-qkiEBORWwzwuiqoLCP/U
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrM5koACgkQFkJ4iaW4
-c+4eSA//eB2STjBMZqzbsTWJbWirTlg2D9pKjfB/UUiyjG/akzrh1Ulwq+lzHuyw
-5Vgl1q+cRHZaCNgMucNUVtI4b/usFEp5z2h/TEesy9aHLKVtDjWEQSj5x48e3Fau
-bHc3c4HWtkDU4+JJa8tyEofsTrBl3trZW9a5eAAnALC5n0FG3hsDi+ZPMTJQ9hZr
-hbUnr5IT8pQ+ecB7yj7t1vYjJOu9e5VIDly0M/J7rU9Mw23Y/o1FH/MezhXFAW2V
-9ETvPQteShdw/tWuaX/rAfjIlCHo1rnQQ/G8kNIKb3WK5GXZwPNvu4lUuLi1ZQrh
-srKUKxdfeexDptSPQcQpcZZmRttKkHCZmUrkfmkvOvHsPZCoo98WMvb0+hrsznfd
-PQJYvg9QvZJzNvs7r7NVW63Vr6uZCoDZQ006PVi8U6lWklv+76v/iS0/Qf+nOa47
-uMoBYtrL+ppt/VJYwpDwm/uauxKq0q/fc3cOoImsCEsoENypmYlJRpnIdvFhED3Z
-kopCgPTyz9E/PFHvQSyJ3GbCG4JIGpfU5umYGq0TkReq5E0WWfx/RXbyi5JA8CZY
-VH6+6bnNabjrEIHhGIpNg12fpl7L9S1lhyxEXlaghycwasjLVdev6EMSk+cRLT//
-Z3q4JrzHRi1It37GHcwpnMX0dwdgpChaUEyJGRT9s8aUTSaaxhs=
-=jWdc
------END PGP SIGNATURE-----
-
---=-qkiEBORWwzwuiqoLCP/U--
-
-
-
---===============1636298864904622536==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1636298864904622536==--
+U2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPElhbi5KYWNrc29uQGV1LmNpdHJpeC5jb20+Ci0t
+LQogZG9jcy9NYWtlZmlsZSB8IDUgKysrKy0KIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlvbnMo
+KyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9kb2NzL01ha2VmaWxlIGIvZG9jcy9NYWtl
+ZmlsZQppbmRleCBkODI0NjNmLi5iMzAwYmI2IDEwMDY0NAotLS0gYS9kb2NzL01ha2VmaWxlCisr
+KyBiL2RvY3MvTWFrZWZpbGUKQEAgLTI4LDcgKzI4LDggQEAgRE9DX01BTjcgOj0gJChwYXRzdWJz
+dCBtYW4vJS5wb2QuNyxtYW43LyUuNywkKE1BTjdTUkMteSkpIFwKIAkgICAgICAgICQocGF0c3Vi
+c3QgbWFuLyUubWFya2Rvd24uNyxtYW43LyUuNywkKE1BTjdTUkMteSkpCiBET0NfTUFOOCA6PSAk
+KHBhdHN1YnN0IG1hbi8lLnBvZC44LG1hbjgvJS44LCQoTUFOOFNSQy15KSkgXAogCSAgICAgICAg
+JChwYXRzdWJzdCBtYW4vJS5tYXJrZG93bi44LG1hbjgvJS44LCQoTUFOOFNSQy15KSkKLURPQ19I
+VE1MIDo9ICQocGF0c3Vic3QgJS5tYXJrZG93bixodG1sLyUuaHRtbCwkKE1BUktET1dOU1JDLXkp
+KSBcCitET0NfSFRNTCA6PSBodG1sL1NVUFBPUlQuaHRtbCBcCisgICAgICAgICAgICAkKHBhdHN1
+YnN0ICUubWFya2Rvd24saHRtbC8lLmh0bWwsJChNQVJLRE9XTlNSQy15KSkgXAogICAgICAgICAg
+ICAgJChwYXRzdWJzdCAlLnBhbmRvYyxodG1sLyUuaHRtbCwkKFBBTkRPQ1NSQy15KSkgXAogICAg
+ICAgICAgICAgJChwYXRzdWJzdCBtYW4vJS5tYXJrZG93bi4xLGh0bWwvbWFuLyUuMS5odG1sLCQo
+TUFOMVNSQy15KSkgXAogICAgICAgICAgICAgJChwYXRzdWJzdCBtYW4vJS5tYXJrZG93bi41LGh0
+bWwvbWFuLyUuNS5odG1sLCQoTUFONVNSQy15KSkgXApAQCAtMjU1LDYgKzI1Niw4IEBAICQoZXZh
+bCAkKGNhbGwgR0VORVJBVEVfUEFORE9DX1JVTEUsdHh0LHBhbmRvYykpICAgIyB0eHQvJS50eHQ6
+ICUucGFuZG9jCiAkKGV2YWwgJChjYWxsIEdFTkVSQVRFX1BBTkRPQ19SVUxFLGh0bWwscGFuZG9j
+KSkgICMgaHRtbC8lLmh0bWw6ICUucGFuZG9jCiAkKGV2YWwgJChjYWxsIEdFTkVSQVRFX1BBTkRP
+Q19SVUxFLHBkZixtYXJrZG93bikpICMgcGRmLyUucGRmOiAlLm1hcmtkb3duCiAKKyQoZXZhbCAk
+KGNhbGwgR0VORVJBVEVfUEFORE9DX1JVTEVfUkFXLGh0bWwvU1VQUE9SVC5odG1sLCQoWEVOX1JP
+T1QpL1NVUFBPUlQubWQpKSAjIHBkZi8lLnBkZjogJS5tYXJrZG93bgorCiBpZmVxICgsJChmaW5k
+c3RyaW5nIGNsZWFuLCQoTUFLRUNNREdPQUxTKSkpCiAkKFhFTl9ST09UKS9jb25maWcvRG9jcy5t
+azoKIAkkKGVycm9yIFlvdSBoYXZlIHRvIHJ1biAuL2NvbmZpZ3VyZSBiZWZvcmUgYnVpbGRpbmcg
+ZG9jcykKLS0gCjIuMS40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
