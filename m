@@ -1,19 +1,15 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Wed, 11 Apr 2018 00:59:08 +0200
-Message-ID: <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
-References: <20180410085729.GA472@aepfle.de>
- <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
- <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
- <95482342-8b80-e295-badf-6b20ad09276f@citrix.com>
- <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
- <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
- <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
- <20180410203741.GF7177@aepfle.de>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [qemu-mainline test] 122144: tolerable FAIL - PUSHED
+Date: Tue, 10 Apr 2018 23:17:19 +0000
+Message-ID: <osstest-122144-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5135219738528110142=="
+Content-Type: multipart/mixed; boundary="===============4674522239577590789=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180410203741.GF7177@aepfle.de>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=vik5=g7=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f62Vx-00067Z-JJ
+ for xen-devel@lists.xenproject.org; Tue, 10 Apr 2018 23:17:25 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,152 +18,335 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: George Dunlap <george.dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
+--===============4674522239577590789==
+Content-Type: text/plain
 
---===============5135219738528110142==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-TDyc1MJIN7h11qx9Z68L"
+flight 122144 qemu-mainline real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/122144/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt-xsm 14 saverestore-support-check    fail  like 120095
+ test-amd64-amd64-xl-qemuu-win7-amd64 17 guest-stop            fail like 120095
+ test-amd64-i386-xl-qemuu-win7-amd64 17 guest-stop             fail like 120095
+ test-armhf-armhf-libvirt-raw 13 saverestore-support-check    fail  like 120095
+ test-armhf-armhf-libvirt     14 saverestore-support-check    fail  like 120095
+ test-amd64-amd64-xl-qemuu-ws16-amd64 17 guest-stop            fail like 120095
+ test-amd64-i386-xl-pvshim    12 guest-start                  fail   never pass
+ test-amd64-amd64-xl-pvhv2-intel 12 guest-start                 fail never pass
+ test-amd64-amd64-xl-pvhv2-amd 12 guest-start                  fail  never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-amd64-qemuu-nested-amd 17 debian-hvm-install/l1/l2  fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-cubietruck 13 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 14 saverestore-support-check    fail never pass
+ test-armhf-armhf-xl-xsm      13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-rtds     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-multivcpu 13 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-rtds     14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-multivcpu 14 saverestore-support-check    fail  never pass
+ test-armhf-armhf-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-raw 12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      12 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      13 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt     13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-arndale  13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  14 saverestore-support-check    fail   never pass
+ test-amd64-i386-xl-qemuu-ws16-amd64 17 guest-stop              fail never pass
+ test-amd64-i386-xl-qemuu-win10-i386 10 windows-install         fail never pass
+ test-amd64-amd64-xl-qemuu-win10-i386 10 windows-install        fail never pass
+
+version targeted for testing:
+ qemuu                915d34c5f99b0ab91517c69f54272bfdb6ca2b32
+baseline version:
+ qemuu                6697439794f72b3501ee16bb95d16854f9981421
+
+Last test of basis   120095  2018-02-28 13:46:33 Z   41 days
+Failing since        120146  2018-03-02 10:10:57 Z   39 days   27 attempts
+Testing same since   122144  2018-04-09 19:01:09 Z    1 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Alberto Garcia <berto@igalia.com>
+  Alex BennÃ©e <alex.bennee@linaro.org>
+  Alex Bennée <alex.bennee@linaro.org>
+  Alex Williamson <alex.williamson@redhat.com>
+  Alexandro Sanchez Bach <alexandro@phi.nz>
+  Alexey Kardashevskiy <aik@ozlabs.ru>
+  Alistair Francis <alistair.francis@xilinx.com>
+  Alistair Francis <alistair@alistair23.me>
+  Andrew Jones <drjones@redhat.com>
+  Andrey Smirnov <andrew.smirnov@gmail.com>
+  Anton Nefedov <anton.nefedov@virtuozzo.com>
+  BALATON Zoltan <balaton@eik.bme.hu>
+  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+  Bastian Koppelmann <kbastian@mail.uni-paderborn.de> (tricore)
+  Bill Paul <wpaul@windriver.com>
+  Brijesh Singh <brijesh.singh@amd.com>
+  Bruce Rogers <brogers@suse.com>
+  Changpeng Liu <changpeng.liu@intel.com>
+  Chao Peng <chao.p.peng@linux.intel.com>
+  Christian Borntraeger <borntraeger@de.ibm.com>
+  Christophe Fergeau <cfergeau@redhat.com>
+  Claudio Imbrenda <imbrenda@linux.vnet.ibm.com>
+  Collin L. Walling <walling@linux.vnet.ibm.com>
+  Corey Minyard <cminyard@mvista.com>
+  Cornelia Huck <cohuck@redhat.com>
+  Cédric Le Goater <clg@kaod.org>
+  Daire McNamara <daire.mcnamara@emdalo.com>
+  Daniel Henrique Barboza <danielhb@linux.vnet.ibm.com>
+  Daniel P. Berrange <berrange@redhat.com>
+  Daniel P. Berrangé <berrange@redhat.com>
+  David Brenken <david.brenken@efs-auto.de>
+  David Engraf <david.engraf@sysgo.com>
+  David Gibson <david@gibson.dropbear.id.au>
+  David Gibson <david@gibson.dropbear.id.au> (hw/ppc)
+  David Gibson <david@gibson.dropbear.id.au> (ppc)
+  David Gibson <david@gibson.dropbear.id.au> for ppc part
+  David Hildenbrand <david@redhat.com>
+  Deepa Srinivasan <deepa.srinivasan@oracle.com>
+  Dr. David Alan Gilbert <dgilbert@redhat.com>
+  Eduardo Habkost <ehabkost@redhat.com>
+  Elie Tournier <elie.tournier@collabora.com>
+  Elie Tournier <tournier.elie@gmail.com>
+  Emilio G. Cota <cota@braap.org>
+  Eric Auger <eric.auger@redhat.com>
+  Eric Blake <eblake@redhat.com>
+  Eugene Minibaev <mail@kitsu.me>
+  Fabiano Rosas <farosas@linux.vnet.ibm.com>
+  Fam Zheng <famz@redhat.com>
+  Florian Artmeier <florian.artmeier@efs-auto.de>
+  Francisco Iglesias <frasse.iglesias@gmail.com>
+  François Revol <revol@free.fr>
+  Georg Hofstetter <georg.hofstetter@efs-auto.de>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Gonglei <arei.gonglei@huawei.com>
+  Greg Kurz <groug@kaod.org>
+  Guenter Roeck <linux@roeck-us.net>
+  Halil Pasic <pasic@linux.vnet.ibm.com>
+  Haozhong Zhang <haozhong.zhang@intel.com>
+  Howard Spoelstra <hsp.cat7@gmail.com>
+  Huaitong Han <huanhuaitong@didichuxing.com>
+  Ian Jackson <ian.jackson@eu.citrix.com>
+  Igor Mammedov <imammedo@redhat.com>
+  Ivan Griffin <ivan.griffin@emdalo.com>
+  Jack Schwartz <jack.schwartz@oracle.com>
+  Jan Kiszka <jan.kiszka@siemens.com>
+  Janosch Frank <frankja@linux.vnet.ibm.com>
+  Jason Baron <jbaron@akamai.com>
+  Jason Wang <jasowang@redhat.com>
+  Jay Zhou <jianjay.zhou@huawei.com>
+  Jeff Cody <jcody@redhat.com>
+  Jia He <hejianet@gmail.com>
+  Jia He <jia.he@hxt-semitech.com>
+  John Snow <jsnow@redhat.com>
+  Julia Suvorova <jusual@mail.ru>
+  Julia Suvorova via Qemu-devel <qemu-devel@nongnu.org>
+  Justin Terry (VM) <juterry@microsoft.com>
+  Justin Terry (VM) via Qemu-devel <qemu-devel@nongnu.org>
+  Kashyap Chamarthy <kchamart@redhat.com>
+  Kevin Wolf <kwolf@redhat.com>
+  KONRAD Frederic <frederic.konrad@adacore.com>
+  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+  Laurent Vivier <laurent@vivier.eu>
+  Laurent Vivier <lvivier@redhat.com>
+  Liang Li <liliang.opensource@gmail.com>
+  Liang Li <liliangleo@didichuxing.com>
+  Lidong Chen <jemmy858585@gmail.com>
+  Lidong Chen <lidongchen@tencent.com>
+  Linus Walleij <linus.walleij@linaro.org>
+  linzhecheng <linzhecheng@huawei.com>
+  Liran Alon <liran.alon@oracle.com>
+  Longpeng(Mike) <longpeng2@huawei.com>
+  Luiz Capitulino <lcapitulino@redhat.com>
+  Luke Shumaker <lukeshu@parabola.nu>
+  Lukáš Doktor <ldoktor@redhat.com>
+  Luwei Kang <luwei.kang@intel.com>
+  Marc-AndrÃ© Lureau <marcandre.lureau@redhat.com>
+  Marc-André Lureau <marcandre.lureau@redhat.com>
+  Marcel Apfelbaum <marcel@redhat.com>
+  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+  Markus Armbruster <armbru@redhat.com>
+  Matthew Rosato <mjrosato@linux.vnet.ibm.com>
+  Max Filippov <jcmvbkbc@gmail.com>
+  Max Reitz <mreitz@redhat.com>
+  Maxime Coquelin <maxime.coquelin@redhat.com>
+  Michael Chapman <mike@very.puzzling.org>
+  Michael Clark <mjc@sifive.com>
+  Michael S. Tsirkin <mst@redhat.com>
+  Michal Privoznik <mprivozn@redhat.com>
+  Miroslav Rezanina <mrezanin@redhat.com>
+  Nia Alarie <nia.alarie@gmail.com>
+  Nikunj A Dadhania <nikunj@linux.vnet.ibm.com>
+  Palmer Dabbelt <palmer@sifive.com>
+  Paolo Bonzini <pbonzini@redhat.com>
+  Pavel Dovgalyuk <Pavel.Dovgaluk@ispras.ru>
+  Peer Adelt <peer.adelt@hni.uni-paderborn.de>
+  Peter Lieven <pl@kamp.de>
+  Peter Maydell <peter.maydell@linaro.org>
+  Peter Xu <peterx@redhat.com>
+  Philippe Mathieu-Daudé <f4bug@amsat.org>
+  Pierre Morel <pmorel@linux.vnet.ibm.com>
+  R. Nageswara Sastry <nasastry@in.ibm.com>
+  Richard Henderson <richard.henderson@linaro.org>
+  Richard W.M. Jones <rjones@redhat.com>
+  Roman Kagan <rkagan@virtuozzo.com>
+  Ross Lagerwall <ross.lagerwall@citrix.com>
+  Sagar Karandikar <sagark@eecs.berkeley.edu>
+  Satheesh Rajendran <sathnaga@linux.vnet.ibm.com>
+  Sergio Lopez <slp@redhat.com>
+  Shea Levy <shea@shealevy.com>
+  Simon Guo <wei.guo.simon@gmail.com>
+  Stef O'Rear <sorear2@gmail.com>
+  Stefan Berger <stefanb@linux.vnet.ibm.com>
+  Stefan Hajnoczi <stefanha@redhat.com>
+  Stefan O'Rear <sorear2@gmail.com>
+  Su Hang <suhang16@mails.ucas.ac.cn>
+  Suraj Jitindar Singh <sjitindarsingh@gmail.com>
+  Thomas Huth <thuth@redhat.com>
+  Tomáš Golembiovský <tgolembi@redhat.com>
+  Trent Piepho <tpiepho@impinj.com>
+  Victor Kamensky <kamensky@cisco.com>
+  Viktor Mihajlovski <mihajlov@linux.vnet.ibm.com>
+  Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+  Wang Xin <wangxinxin.wang@huawei.com>
+  Wanpeng Li <wanpengli@tencent.com>
+  Wei Huang <wei@redhat.com>
+  Yasmin Beatriz <yasmins@linux.vnet.ibm.com>
+  Yi Min Zhao <zyimin@linux.vnet.ibm.com>
+  yuchenlin <yuchenlin@synology.com>
+  Yuval Shaia <yuval.shaia@oracle.com>
+  zhangjixiang <jixiang_zhang@h3c.com>
+  zhenwei.pi <zhenwei.pi@youruncloud.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-armhf-armhf-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     pass    
+ test-amd64-i386-freebsd10-amd64                              pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-i386-freebsd10-i386                               pass    
+ test-amd64-amd64-xl-qemuu-win10-i386                         fail    
+ test-amd64-i386-xl-qemuu-win10-i386                          fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-amd64-amd64-amd64-pvgrub                                pass    
+ test-amd64-amd64-i386-pvgrub                                 pass    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-i386-xl-pvshim                                    fail    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              pass    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-amd64-i386-xl-shadow                                    pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
 
---=-TDyc1MJIN7h11qx9Z68L
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-[Adding Andrew, not because I expect anything, but just because we've=20
- chatted about this issue on IRC :-) ]
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-On Tue, 2018-04-10 at 22:37 +0200, Olaf Hering wrote:
-> On Tue, Apr 10, Dario Faggioli wrote:
->=20
->     BUG_ON(__vcpu_on_runq(CSCHED_VCPU(vc)));
->
-> (XEN) Xen BUG at sched_credit.c:876
-> (XEN) ----[ Xen-4.11.20180410T125709.50f8ba84a5-
-> 3.bug1087289_411  x86_64  debug=3Dy   Not tainted ]----
-> (XEN) CPU:    118
-> (XEN) RIP:    e008:[<ffff82d080229ab4>]
-> sched_credit.c#csched_vcpu_migrate+0x27/0x51
-> ...
-> (XEN) Xen call trace:
-> (XEN)    [<ffff82d080229ab4>]
-> sched_credit.c#csched_vcpu_migrate+0x27/0x51
-> (XEN)    [<ffff82d080236348>] schedule.c#vcpu_move_locked+0xbb/0xc2
-> (XEN)    [<ffff82d08023764c>] schedule.c#vcpu_migrate+0x226/0x25b
-> (XEN)    [<ffff82d08023935f>] context_saved+0x8d/0x94
-> (XEN)    [<ffff82d08027797d>] context_switch+0xe66/0xeb0
-> (XEN)    [<ffff82d080236943>] schedule.c#schedule+0x5f4/0x627
-> (XEN)    [<ffff82d080239f15>] softirq.c#__do_softirq+0x85/0x90
-> (XEN)    [<ffff82d080239f6a>] do_softirq+0x13/0x15
-> (XEN)    [<ffff82d08031f5db>] vmx_asm_do_vmentry+0x2b/0x30
->
-Hey... unless I've really put there a totally bogous BUG_ON(), this
-looks interesting and potentially useful.
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-It says that the vcpu which is being context switched out, and on which
-we are calling vcpu_migrate() on, because we found it to be
-VPF_migrating, is actually in the runqueue already when we actually get
-to execute vcpu_migrate()->vcpu_move_locked().
-
-Mmm... let's see.
-
- CPU A                                  CPU B
- .                                      .
- schedule(current =3D=3D v)                 vcpu_set_affinity(v)
-  prev =3D current     // =3D=3D v             .
-  schedule_lock(CPU A)                   .
-   csched_schedule()                     schedule_lock(CPU A)
-   if (runnable(v))  //YES               x
-    runq_insert(v)                       x
-   return next !=3D v                      x
-  schedule_unlock(CPU A)                 x // takes the lock
-  context_switch(prev,next)              set_bit(v, VPF_migrating)  [*]
-   context_saved(prev) // still =3D=3D v     .
-    v->is_running =3D 0                    schedule_unlock(CPU A)
-    SMP_MB                               .
-    if (test_bit(v, VPF_migrating)) // YES!!
-     vcpu_migrate(v)                     .
-      for {                              .
-       schedule_lock(CPU A)              .
-       SCHED_OP(v, pick_cpu)             .
-        set_bit(v, CSCHED_MIGRATING)     .
-        return CPU C                     .
-       pick_called =3D 1                   .
-       schedule_unlock(CPU A)            .
-       schedule_lock(CPU A + CPU C)      .
-       if (pick_called && ...) // YES    .
-        break                            .
-      }                                  .
-      // v->is_running is 0              .
-      //!test_and_clear(v, VPF_migrating)) is false!!
-      clear_bit(v, VPF_migrating)        .
-      vcpu_move_locked(v, CPU C)         .
-      BUG_ON(__vcpu_on_runq(v))          .
-
-[*] after this point, and until someone manages to call vcpu_sleep(), =20
-      v sits in CPU A's runqueue with the VPF_migrating pause flag set
-
-So, basically, the race is between context_saved() and
-vcpu_set_affinity(). Basically, vcpu_set_affinity() sets the
-VPF_migrating pause flags on a vcpu in a runqueue, with the intent of
-letting either a vcpu_sleep_nosync() or a reschedule remove it from
-there, but context_saved() manage to see the flag, before the removal
-can happen.
-
-And I think this explains also the original BUG at sched_credit.c:1694
-(it's just a bit more involved).
-
-As it can be seen above (and also in the code comment in ) there is a
-barrier (which further testify that this is indeed a tricky passage),
-but I guess it is not that effective! :-/
-
-TBH, I have actually never fully understood what that comment really
-meant, what the barrier was protecting, and how... e.g., isn't it
-missing its paired one? In fact, there's another comment, clearly
-related, right in vcpu_set_affinity(). But again I'm a bit at loss at
-properly figuring out what the big idea is.
-
-George, what do you think? Does this make sense?
-
-Well, I'll think more about this, and to a possible fix, tomorrow
-morning.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-TDyc1MJIN7h11qx9Z68L
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrNQbwACgkQFkJ4iaW4
-c+4cOxAA3DzxEtATsCO+PWbPIiT0FZzlcxcCdSAbsfaZ33M8JbqiqVdiwIFdOW0K
-3jlNblw/GjcZoEDge21eWqoxeLtS672GN2m1P7hMUWYs+xsFXrRY2MVwDVX42i4E
-xvtK0gYIKCRsxkYuWgHxCj7NMhKly5anHr+n2FSdptRn/VYNyf5yKDkWlmUqKE2E
-cMWI32Np79NJ7fYhZnO28VToFRf25ixn1lR70geeBMhfEtwwxizCSTCi5iWvDL8d
-RzcVk8IsFAjvfF+JFFafH9V2ncdwvqTPElfcwCmWICR08IFOrtLNcx9ScKnFhDGy
-q4Bk/bdMQpOA1AswoStnFfBBa3SIDrVD3PfbEKDObN6prJVMKCGwiDYA5wHpW7th
-lkqeXFLqnBQYJFxzrhR8vftpn8w8UOoCBHaCqAXWdI56Xv4RvKF5f6OYbGyMdFJr
-gAesSn23Em1ShUMqRRHwQJ4xD1jYrp2+QGgkunonifEojzAtIYnczfuy3TnwmAE4
-8bC84nwPICu24bnG7/lSvJhSZsIS6jRx4Rn9TK+zcWk78aqguknDm2wbWLITD2sq
-XsJ7uB5+8GkGyK2NvsMGsRZnCFGRPTCcdLiLRmWTNvkHEm4mM3qFMxmdKexzwtgi
-Mb6b+uCxnZEZEMiiJTxLB64dR90oJ4JQ4cjX4bE3I5nTRnPNjvI=
-=y7qR
------END PGP SIGNATURE-----
-
---=-TDyc1MJIN7h11qx9Z68L--
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
+Pushing revision :
 
---===============5135219738528110142==
+To xenbits.xen.org:/home/xen/git/qemu-xen.git
+   6697439794..915d34c5f9  915d34c5f99b0ab91517c69f54272bfdb6ca2b32 -> upstream-tested
+
+
+--===============4674522239577590789==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -177,4 +356,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5135219738528110142==--
+--===============4674522239577590789==--
