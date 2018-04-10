@@ -1,13 +1,13 @@
 From: Dario Faggioli <dfaggioli@suse.com>
 Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Tue, 10 Apr 2018 13:29:45 +0200
-Message-ID: <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
+Date: Tue, 10 Apr 2018 13:30:35 +0200
+Message-ID: <d2def575c98a3eab5f010e7ec4866d01ad01ce39.camel@suse.com>
 References: <20180410085729.GA472@aepfle.de>
  <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
  <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
  <95482342-8b80-e295-badf-6b20ad09276f@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2354095959624983397=="
+Content-Type: multipart/mixed; boundary="===============0134291327246082525=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 In-Reply-To: <95482342-8b80-e295-badf-6b20ad09276f@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -23,12 +23,12 @@ Cc: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============2354095959624983397==
+--===============0134291327246082525==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-7bZOT1uttbHHlNGiJbUa"
+	protocol="application/pgp-signature"; boundary="=-NXa8F1mA5Esl7GjHjIQW"
 
 
---=-7bZOT1uttbHHlNGiJbUa
+--=-NXa8F1mA5Esl7GjHjIQW
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -176,33 +176,33 @@ Dario
 -----------------------------------------------------------------
 Dario Faggioli, Ph.D, http://about.me/dario.faggioli
 Software Engineer @ SUSE https://www.suse.com/
---=-7bZOT1uttbHHlNGiJbUa
+--=-NXa8F1mA5Esl7GjHjIQW
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrMoCoACgkQFkJ4iaW4
-c+5EAhAAiVUqp1tgi5ZgnU5bWokQLdb8J+feQs2h5qfYSIfjKl2EvhWayiVIN8zO
-1Vae6XtZ34RDmGJgvm/a9pJTJ4VVvc6pk3Ypr7nwVXvBbKft6Z+V3TiKSYng1IeZ
-ZI6nI8GrQfB5Y4SRBaFiOI3HYdk2hdYij+Rt1ae87FjkKZSGFs6x2yz+U4ZtZDxK
-mz2qkGVOdHilYWBhKcO89PL/SdxSI8qZQIFaDceB6lLMj39GtX/p5yUKviBSRgg9
-neUBAcFOUBrkltR0bpu0AM9GA180FBx2TtK5yxZcGB5Z/XpzK/lQ9/oSQip6zUp+
-nYg5oUuk0sB6U+Nq/eJwXJDGZy0oaQa78Wl6yCanWWifgZ8KQT2N90oRwSMqeqDn
-uxVNXbg2oOldmwyAEgbvqRrcfqUrlsNPur0eCL5NC+xNOFZi2QzSPBp0kzNQ/NiP
-8yF1T1EtBbfdBdtC5FdpxfdL3TCD2lzDj39CB4G99vFUw0BdbKOdg51AxfYq8Uda
-E/wVp6EawCctKx8c+Z4R5inaT+0h8f6aSqKLA3GhPfMTIGGa1GPq2gsfQz5UBzbt
-uR/CE5Ub2IkkavRCjqNOiDtkcBfblOucHlkenaAhPkaDkt3tGRVcSlTAi2ive0H1
-gHXP5TVx5FFPrZ8bN2xZxbzL0slSzSyhOj2qvByeN9ffmhHB9xs=
-=omBC
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrMoFsACgkQFkJ4iaW4
+c+793w/+L3IMbIH4JpM44miJ1821YgIh/xhr7xKSp4zEazCURDTUxb1F3LzFAHJu
+c4t3mbYCX9Kso0D3lN+vuHxkHf2oSz4qQkaC7vvLpBu02fNKCqwXe7JYKgWM7XRw
+5MiVjEz7/PuHe5PyrmVgiL6ps6A4phyn3SpEXQ68cO8ZO1INoeEP2S9cAye74nDE
+Htn0vCYN8jtvSWBlHqQ8qyMQCZJ1Y3oRBQnE1jw8pxv5FDKkjGqbaFw/TQ7m3z9e
+b5ibmbI40dxErxlE2PFua0AkJzqtDQUJ2uns64UqVv6sn4jh6IvL3Q3Nn/JSTIJH
+JuKFSSE53HkyOrtxXLDtmmPLwPrjt/i7PYWk1fP3mFe7GGAkvNkbjqvAUtj5N13F
+imV1MkUNfonOSY9EZgElNoHfzvt2SzY9QBVwNxfJ6cXm/QcQseNP14F0d1wPpZVs
+1AwKxfQMmGDmZ6OXsi6C72iQeQCwzbW+V3aHn4nKCvLKheVGRDQlyrDyVYcZU/zP
+DLKCL422bUPLYOszgcKwFkSi/qonf63Ht+DBAjSN4Gulck9NfD0V1yJWhvpDuVaT
+D714SO9kwLJcfedjYavFavVymrTDdKd1wMf1ee3W0+EEw0friN6gqlC4idojA5ia
+4mY7TcJxTtKBNFEn1WDKGaPawQPD515KUf8wjCHpohx5KlrhgmE=
+=MJMQ
 -----END PGP SIGNATURE-----
 
---=-7bZOT1uttbHHlNGiJbUa--
+--=-NXa8F1mA5Esl7GjHjIQW--
 
 
 
---===============2354095959624983397==
+--===============0134291327246082525==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -212,4 +212,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============2354095959624983397==--
+--===============0134291327246082525==--
