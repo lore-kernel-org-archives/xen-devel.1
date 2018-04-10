@@ -1,21 +1,21 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: BUG - 'xl restore' does not overwrite HVM
-Date: Tue, 10 Apr 2018 10:01:31 +0100
-Message-ID: <20180410090131.45p2irtnyzsl4gny@citrix.com>
-References: <SLXP216MB0400FAF0B3B6F63F1C26830EFBBE0@SLXP216MB0400.KORP216.PROD.OUTLOOK.COM>
- <20180410084426.ha2b7u4qx67pceh3@citrix.com>
- <SLXP216MB0400FAC3A91143808D845971FBBE0@SLXP216MB0400.KORP216.PROD.OUTLOOK.COM>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v6 2/9] xen/x86: add a function for
+ modifying cr3
+Date: Tue, 10 Apr 2018 03:03:35 -0600
+Message-ID: <5ACC9A0702000078001B9D1C@prv1-mh.provo.novell.com>
+References: <20180410075843.6822-1-jgross@suse.com>
+ <20180410075843.6822-3-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=bvrd=g7=citrix.com=prvs=6314ed9c2=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1f5p9j-0004Xf-JK
- for xen-devel@lists.xenproject.org; Tue, 10 Apr 2018 09:01:35 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=ay0c=g7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1f5pBm-0004ho-CB
+ for xen-devel@lists.xenproject.org; Tue, 10 Apr 2018 09:03:42 +0000
+In-Reply-To: <20180410075843.6822-3-jgross@suse.com>
 Content-Disposition: inline
-In-Reply-To: <SLXP216MB0400FAC3A91143808D845971FBBE0@SLXP216MB0400.KORP216.PROD.OUTLOOK.COM>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,38 +24,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Peter McLaren <petermclaren_aus@hotmail.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: andrew.cooper3@citrix.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-KEFkZCBiYWNrIHhlbi1kZXZlbCkKCkhlbGxvIFBldGVyCgpQbGVhc2UgZG9uJ3QgdG9wLXBvc3Qu
-CgpPbiBUdWUsIEFwciAxMCwgMjAxOCBhdCAwODo1MjoxMEFNICswMDAwLCBQZXRlciBNY0xhcmVu
-IHdyb3RlOgo+IEhpIFdlaQo+IEkgd291bGQgbGlrZSB0aGUgcmVzdG9yZSBjb21tYW5kIHRvIHJl
-dHVybiB0aGUgSFZNIHRvIHRoZSBleGFjdCBzdGF0ZSBpdCB3YXMgYXQgd2hlbiB0aGUgc2F2ZSBj
-b21tYW5kIHdhcyBwZXJmb3JtZWQuCj4gVGhhbmtzCj4gUGV0ZXIKCkkgdGhpbmsgd2hhdCB5b3Ug
-bmVlZCBpcyBkaXNrIHNuYXBzaG90IC0tIGJlY2F1c2UgeW91IHdhbnQgeW91ciBkaXNrIHRvCnJl
-dHVybiB0byBpdHMgcHJldmlvdXMgc3RhdGUuCgpJIGRvbid0IHRoaW5rIHhlbiA0LjQgc3VwcG9y
-dHMgdGhhdC4gSUlSQyBldmVuIHRoZSBsYXRlc3QgdmVyc2lvbiBvZiBYZW4KZG9lc24ndCBoYXZl
-IGRpc2sgc25hcHNob3Qgc3VwcG9ydC4gWW91IHdpbGwgaGF2ZSB0byBtYW51YWxseSBzbmFwc2hv
-dAp5b3VyIGRpc2sgKGxpa2UgdXNpbmcgbHZtIHNuYXBzaG90KS4KCldlaS4KCj4gCj4gR2V0IE91
-dGxvb2sgZm9yIEFuZHJvaWQ8aHR0cHM6Ly9ha2EubXMvZ2hlaTM2Pgo+IAo+IF9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fCj4gRnJvbTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNv
-bT4KPiBTZW50OiBUdWVzZGF5LCBBcHJpbCAxMCwgMjAxOCA2OjQ0OjI2IFBNCj4gVG86IFBldGVy
-IE1jTGFyZW4KPiBDYzogeGVuLWRldmVsQGxpc3RzLnhlbi5vcmc7IFdlaSBMaXUKPiBTdWJqZWN0
-OiBSZTogW1hlbi1kZXZlbF0gQlVHIC0gJ3hsIHJlc3RvcmUnIGRvZXMgbm90IG92ZXJ3cml0ZSBI
-Vk0KPiAKPiBPbiBUdWUsIEFwciAxMCwgMjAxOCBhdCAwNjowNzoxMkFNICswMDAwLCBQZXRlciBN
-Y0xhcmVuIHdyb3RlOgo+ID4gSGkKPiA+IHdpdGggYXQgbGVhc3QgMSB2ZXJzaW9uIG9mIFdpbmRv
-d3MgMTAgKGJ1aWxkIDE2Mjk5KSwgdGhlICd4bCByZXN0b3JlJyBjb21tYW5kIGRvZXMgbm90IG92
-ZXJ3cml0ZSB0aGUgcHJldmlvdXNseSBydW5uaW5nIEhWTS4gVGhlIHN5bXB0b21zIGFyZToKPiA+
-IDEpIHRoZSByZXN0b3JlIGFwcGVhcnMgdG8gcmFwaWRseSBjb21wbGV0ZSBhZnRlciBhcHByb3gg
-NTAlIG9mIHRoZSB0aW1lCj4gPiAyKSAgZmlsZXMgY3JlYXRlZCBhZnRlciB0aGUgc2F2ZSBpbiB0
-aGUgcnVubmluZyBIVk0gYXJlIHByZXNlbnQgYWZ0ZXIgdGhlIHJlc3RvcmUKPiA+IDMpIHRoZSBX
-aW5kb3dzIHN5c3RlbSB0cmllcyB0byByZWNvdmVyLgo+ID4KPiA+IEkgaGF2ZSB0cmllZCByZXN0
-b3JpbmcgYm90aCB3aXRoIGEgc2h1dGRvd24gb2YgdGhlIFdpbmRvd3Mgc3lzdGVtIG9yIGEgZGVz
-dHJveS4gSW4gYm90aCBjYXNlcyB0aGUgcmVzdWx0cyBhcmUgdGhlIHNhbWUuCj4gPgo+ID4gSSBo
-YXZlIGxpc3RlZCBzb21lIHJlbGV2YW50IGluZm8gYmVsb3cuIEFueSBoZWxwIHdvdWxkIGJlIGFw
-cHJlY2lhdGVkLgo+IAo+IFdoYXQgZG8geW91IG1lYW4gYnkgIm92ZXJ3cml0ZSBIVk0iPyBXaGF0
-IGRvIHlvdSB3YW50IHRvIGFjaGlldmU/Cj4gCj4gV2VpLgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDEwLjA0LjE4IGF0IDA5OjU4LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBJbnN0
+ZWFkIG9mIGhhdmluZyBtdWx0aXBsZSBwbGFjZXMgd2l0aCBtb3JlIG9yIGxlc3MgaWRlbnRpY2Fs
+IGFzbQo+IHN0YXRlbWVudHMganVzdCBoYXZlIG9uZSBmdW5jdGlvbiBkb2luZyBhIHdyaXRlIHRv
+IGNyMy4KPiAKPiBBcyB0aGlzIGZ1bmN0aW9uIHNob3VsZCBiZSBuYW1lZCB3cml0ZV9jcjMoKSBy
+ZW5hbWUgdGhlIGN1cnJlbnQKPiB3cml0ZV9jcjMoKSBmdW5jdGlvbiB0byBzd2l0Y2hfY3IzKCku
+Cj4gCj4gU3VnZ2VzdGVkLWJ5OiBBbmRyZXcgQ29wcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXgu
+Y29tPgo+IFNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KClJl
+dmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
