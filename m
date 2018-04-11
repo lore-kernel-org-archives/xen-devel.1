@@ -1,21 +1,24 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Wed, 11 Apr 2018 17:03:12 +0200
-Message-ID: <20180411150312.GL7177@aepfle.de>
-References: <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
- <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
- <95482342-8b80-e295-badf-6b20ad09276f@citrix.com>
- <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
- <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
- <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
- <20180410203741.GF7177@aepfle.de>
- <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
- <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
- <20180411100006.GI7177@aepfle.de>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: Resume from suspend to RAM broken when using early
+ microcode updates
+Date: Wed, 11 Apr 2018 16:05:16 +0100
+Message-ID: <3c086ec2-a960-ec2f-bbc4-ce19a4aad6ea@citrix.com>
+References: <c91218e2-d793-4e1d-343f-c4a566e66b47@invisiblethingslab.com>
+ <6fbc10ea-d222-94e0-0a60-76cbc6ba1ab2@citrix.com>
+ <d8da2a1f-b2e8-f8c3-4e33-bc84ac0cc7d4@invisiblethingslab.com>
+ <f587c412-68a7-4f19-c52a-1bb0c3c1a54f@citrix.com>
+ <20180411144948.GA4556@char.us.oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6310065490846351239=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180411100006.GI7177@aepfle.de>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=rlyf=ha=citrix.com=prvs=6327ebc18=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1f6HJj-0007Su-Kl
+ for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 15:05:47 +0000
+In-Reply-To: <20180411144948.GA4556@char.us.oracle.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,109 +27,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6310065490846351239==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="yaap9KN+GmBP785v"
-Content-Disposition: inline
-
-
---yaap9KN+GmBP785v
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Apr 11, Olaf Hering wrote:
-
-> On Wed, Apr 11, Dario Faggioli wrote:
->=20
-> > Olaf, can you give it a try? It should be fine to run it on top of the
-> > last debug patch (the one that produced this crash).
->=20
-> Yes, with both changes it did >4k iterations already. Thanks.
-
-That was with sched=3Dcredit2, sorry for that.
-Now with just that second patch I got this after a few iterations, in __vmr=
-ead().
-We have seen such crashes a few times with 4.7 already.
-
-
-(XEN) Xen BUG at ...0f8ba84a5/non-dbg/xen/include/asm/hvm/vmx/vmx.h:390
-(XEN) ----[ Xen-4.11.20180410T125709.50f8ba84a5-6.bug1087289_411  x86_64  d=
-ebug=3Dn   Not tainted ]----
-(XEN) CPU:    71
-(XEN) RIP:    e008:[<ffff82d08030aa55>] vmx.c#arch/x86/hvm/vmx/vmx.o.unlike=
-ly+0/0x15b
-(XEN) RFLAGS: 0000000000010203   CONTEXT: hypervisor (d16v0)
-(XEN) rax: 0000000000004824   rbx: ffff83007ba44000   rcx: ffffffffffffef76
-(XEN) rdx: ffff830e7aa77fff   rsi: 000000000000f305   rdi: ffff83007ba44000
-(XEN) rbp: 000000000000f305   rsp: ffff830e7aa77e60   r8:  0000000015c23047
-(XEN) r9:  000004489c4a4a69   r10: 000001b7ca057c00   r11: 0000000000000000
-(XEN) r12: 000000000000f305   r13: 0000000000004016   r14: ffff830779e92180
-(XEN) r15: 00000000ffffffff   cr0: 000000008005003b   cr4: 00000000001526e0
-(XEN) cr3: 000000067083a000   cr2: 00007fedb9f6c000
-(XEN) fsb: 0000000000000000   gsb: 0000000000000000   gss: 0000000000000000
-(XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: 0000   cs: e008
-(XEN) Xen code around <ffff82d08030aa55> (vmx.c#arch/x86/hvm/vmx/vmx.o.unli=
-kely):
-(XEN)  44 24 0c e9 82 fd ff ff <0f> 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b 0f 0b =
-0f 0b
-(XEN) Xen stack trace from rsp=3Dffff830e7aa77e60:
-(XEN)    ffff82d0802e1442 ffff83007ba44000 000000000000f305 000000000000f305
-(XEN)    ffff82d0802ff477 ffff82d08030f9ab 000000f37aa77ef8 ffffffffffffffff
-(XEN)    ffff830e7aa77fff ffff82d080933c00 ffff830779e92180 ffff82d08026d870
-(XEN)    ffff83007ba44000 ffff83007ba44000 ffff830779e92188 000001b7c8fec61b
-(XEN)    ffff830779e92180 ffff82d08094a480 ffff82d08030f9e7 ffffffff81c00000
-(XEN)    ffffffff81c00000 ffffffff81c00000 0000000000000000 0000000000000000
-(XEN)    ffffffff81d4c180 0000000000000400 0000000000000400 0000000000000000
-(XEN)    0000000000000000 ffffffff81020e50 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 000000fc00000000 ffffffff81060182
-(XEN)    0000000000000000 0000000000000246 ffffffff81c03f00 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000047 ffff83007ba44000 00000036f9533080 00000000001526e0
-(XEN)    0000000000000000 0000000779e90000 0000040000000000 0000000000000000
-(XEN) Xen call trace:
-(XEN)    [<ffff82d08030aa55>] vmx.c#arch/x86/hvm/vmx/vmx.o.unlikely+0/0x15b
-(XEN)    [<ffff82d0802e1442>] hvm_interrupt_blocked+0x82/0xd0
-(XEN)    [<ffff82d0802ff477>] vmx_intr_assist+0x137/0x490
-(XEN)    [<ffff82d08030f9ab>] vmx_asm_vmexit_handler+0xab/0x240
-(XEN)    [<ffff82d08026d870>] domain.c#vcpu_kick_softirq+0/0x10
-(XEN)    [<ffff82d08030f9e7>] vmx_asm_vmexit_handler+0xe7/0x240
-(XEN)
-(XEN)
-(XEN) ****************************************
-(XEN) Panic on CPU 71:
-(XEN) Xen BUG at ...0f8ba84a5/non-dbg/xen/include/asm/hvm/vmx/vmx.h:390
-(XEN) ****************************************
-
-
-Olaf
-
---yaap9KN+GmBP785v
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWs4jrQAKCRBdQqD6ppg2
-fquaAKCUYrbDq8i/7QakEieWPxfJmnuALQCfeniTgsX8WvROPZrVA+Ga8XYk8AQ=
-=9DbA
------END PGP SIGNATURE-----
-
---yaap9KN+GmBP785v--
-
-
---===============6310065490846351239==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6310065490846351239==--
+T24gMTEvMDQvMTggMTU6NDksIEtvbnJhZCBSemVzenV0ZWsgV2lsayB3cm90ZToKPiBPbiBXZWQs
+IEFwciAxMSwgMjAxOCBhdCAwMToxMjo1MVBNICswMTAwLCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+
+PiBPbiAxMS8wNC8xOCAxMzowMSwgU2ltb24gR2Fpc2VyIHdyb3RlOgo+Pj4gQW5kcmV3IENvb3Bl
+cjoKPj4+PiBPbiAxMS8wNC8xOCAxMjo0OCwgU2ltb24gR2Fpc2VyIHdyb3RlOgo+Pj4+PiBIaSwK
+Pj4+Pj4KPj4+Pj4gd2hlbiBJIHVzZSBlYXJseSBtaWNyb2NvZGUgbG9hZGluZyB3aXRoIHRoZSBt
+aWNyb2NvZGUgdXBkYXRlIHdpdGggdGhlCj4+Pj4+IEJUSSBtaXRpZ2F0aW9ucywgcmVzdW1pbmcg
+ZnJvbSBzdXNwZW5kIHRvIFJBTSBpcyBicm9rZW4uCj4+Pj4+Cj4+Pj4+IEJhc2VkIG9uIGFkZGVk
+IGxvZ2dpbmcgdG8gZW50ZXJfc3RhdGUoKSAoZnJvbSBwb3dlci5jKSBpdCBkb2Vzbid0Cj4+Pj4+
+IHN1cnZpdmUgdGhlIGxvY2FsX2lycV9yZXN0b3JlKGZsYWdzKSBjYWxsIChhdCBsZWFzdCBhIHBy
+aW50aygpIGFmdGVyIHRoZQo+Pj4+PiBjYWxsIGRvZXNuJ3Qgb3V0cHV0IGFueXRoaW5nIG9uIHRo
+ZSBzZXJpYWwgY29uc29sZSkuCj4+Pj4+Cj4+Pj4+IEkgZ3Vlc3MgdGhhdCBzb21lIGlycSBoYW5k
+bGVyIHRyaWVzIHRvIHVzZSBJQlJTL0lCUEIuIEJ1dCB0aGUgbWljcm9jb2RlCj4+Pj4+IGlzIG9u
+bHkgbG9hZGVkIGxhdGVyLgo+Pj4+Pgo+Pj4+PiBJZiBJIHNpbXBseSBtb3ZlIHRoZSBtaWNyb2Nv
+ZGVfcmVzdW1lX2NwdSgwKSBkaXJlY3RseSBiZWZvcmUgdGhlCj4+Pj4+IGxvY2FsX2lycV9yZXN0
+b3JlKGZsYWdzKSBldmVyeXRoaW5nIHNlZW1zIHRvIHdvcmsgZmluZS4gQnV0IEknbSBub3Qgc3Vy
+ZQo+Pj4+PiBpZiB0aGlzIGhhcyB1bmludGVuZGVkIGNvbnNlcXVlbmNlcy4KPj4+Pj4KPj4+Pj4g
+SSB0ZXN0ZWQgdGhlIGFib3ZlIHdpdGggWGVuIDQuOC4zIGZyb20gUXViZXMgd2hpY2ggaW5jbHVk
+ZXMgdGhlIEJUSSBhbmQKPj4+Pj4gbWljcm9jb2RlIHBhdGNoZXMgZnJvbSBzdGFnaW5nLTQuOC4g
+QUZBSUNTIHRoZXJlIGFyZSBubyBjb21taXRzIHdoaWNoCj4+Pj4+IGNoYW5nZXMgdGhlIGFmZmVj
+dGVkIGNvZGUgb3Igb3RoZXIgY29tbWl0cyB3aGljaCBzb3VuZCByZWxldmFudCBzbyB0aGlzCj4+
+Pj4+IHByb2JhYmx5IGFmZmVjdGVkIGFsc28gYWxsIHRoZSBuZXdlciBicmFuY2hlcy4KPj4+PiBT
+MyBzdXBwb3J0IGlzIGEgdmVyeSB1bmxvdmVkIGFyZWEgb2YgdGhlIGh5cGVydmlzb3IuCj4+Pj4K
+Pj4+PiBZZXMgLSB3ZSBkZWZpbml0ZWx5IG5lZWQgdG8gZ2V0IG1pY3JvY29kZSByZWxvYWRlZCBi
+ZWZvcmUgaW50ZXJydXB0cyBhcmUKPj4+PiBlbmFibGVkLgo+Pj4gRG8geW91IHNlZSBhbnkgcHJv
+YmxlbXMgd2l0aCBzaW1wbHkgbW92aW5nIG1pY3JvY29kZV9yZXN1bWVfY3B1KDApCj4+PiBkaXJl
+Y3RseSBiZWZvcmUgdGhlIGxvY2FsX2lycV9yZXN0b3JlKGZsYWdzKSBjYWxsPyAoSSdtIG5vdCBm
+YW1pbGlhcgo+Pj4gd2l0aCB0aGUgY29kZSBhdCBhbGwgYW5kIChlYXJseSkgcmVzdW1lIGhhbmRs
+aW5nIHNvdW5kcyBsaWtlIHNvbWV0aGluZwo+Pj4gd2hpY2ggaXMgZWFzeSB0byBicmVhayBpbiBu
+b24gb2J2aW91cyB3YXlzKQo+PiBKdWRnaW5nIGJ5IHdoYXQgaXMgZ29pbmcgb24sIGl0IHdhbnRz
+IHRvIGJlIGJldHdlZW4gdGJvb3RfczNfZXJyb3IoKSBhbmQKPj4gdGhlIGRvbmUgbGFiZWwuCj4+
+Cj4+IFdlIG9ubHkgbmVlZCB0byByZXN0b3JlIG1pY3JvY29kZSBpZiB3ZSBzdWNjZXNzZnVsbHkg
+d2VudCBpbnRvIFMzLsKgIFRoZQo+PiBkb25lIGFuZCBlbmFibGVfY3B1IGxhYmVscyBhcmUgb25s
+eSB1c2VkIGJ5IHBhdGhzIHdoaWNoIGRvbid0IG5lZWQgdG8KPj4gcmVzdG9yZSBtaWNyb2NvZGUu
+Cj4+Cj4+IE9UT0gsIHlvdSBzaG91bGQgY2hlY2sgdGhlIHJldHVybiB2YWx1ZSBhbmQgcGFuaWMg
+aWYgcmVzdG9yYXRpb24KPj4gZmFpbGVkLsKgIEFzIHlvdSd2ZSBzZWVuLCB0aGUgc3lzdGVtIHdv
+bid0IHN1cnZpdmUgdHJ5aW5nIHRvIGJsaW5kbHkKPj4gY29udGludWUgcmVzdW1pbmcuCj4+Cj4+
+Pj4gVGhhdCBzYWlkLCBJIHdvdWxkIGhhdmUgZXhwZWN0ZWQgYSBiYWNrdHJhY2UgY29tcGxhaW5p
+bmcgYWJvdXQKPj4+PiBhIEdQIGZhdWx0IGlmIHdlIGhhZCBoaXQgdGhlIHVzZSBvZiBJQlJTL0lC
+UEIgYmVmb3JlIHRoZSBtaWNyb2NvZGUgd2FzCj4+Pj4gcmVsb2FkZWQuCj4+PiBZZWFoLCBub3Qg
+c3VyZSB3aGF0J3MgaGFwcGVuaW5nIGhlcmUuIEkgZG9uJ3QgZ2V0IGFueSBvdXRwdXQgZnJvbSBh
+ZnRlcgo+Pj4gbG9jYWxfaXJxX3Jlc3RvcmUoZmxhZ3MpLiBJZiB5b3UgaGF2ZSBzb21lIGlkZWFz
+IGZvciBtb3JlIGRlYnVnIG91dHB1dCBJCj4+PiBjYW4gZWFzaWx5IHRlc3QgaXQuCj4+IEluIGhp
+bmRzaWdodCwgSSBhbS7CoCBXZSB0YWtlIGEgI0dQIGZhdWx0IGJlY2F1c2Ugb2YgYSBiYWQgTVNS
+LCBhbmQgYXQKPj4gdGhlIGhlYWQgb2YgdGhlIGV4Y2VwdGlvbiBoYW5kbGVyIHRyeSB0byB1c2Ug
+dGhlIHNhbWUgYmFkIE1TUi7CoCBJdCB3aWxsCj4+IHJlcGVhdGVkbHkgZmF1bHQgdW50aWwgaGl0
+dGluZyBhIGd1YXJkIHBhZ2UgKG9yIG90aGVyIHJlYWQtb25seSBwYWdlKSwKPj4gYXQgd2hpY2gg
+cG9pbnQgd2UgdGFrZSBhIGRvdWJsZSBmYXVsdCwgYW5kIHN1ZmZlciBhICNHUCB5ZXQgYWdhaW4u
+wqAKPj4gVGFraW5nIGEgI0RGIHdpbGwgcmVzZXQgdGhlIHN0YWNrIHRvIGEgbW9kZXJhdGVseSBz
+YW5lIHZhbHVlLCBhbmQgdGhlCj4+IHN5c3RlbSB3aWxsIGxpdmVsb2NrIHRha2luZyBmYXVsdHMu
+Cj4+Cj4+IFRoaXMgaXMgYW4gdW5mb3J0dW5hdGUgY29uc2VxdWVuY2Ugb2YgaGF2aW5nICRNQUdJ
+QyBpbiB0aGUgZXhjZXB0aW9uCj4+IGhhbmRsZXJzLgo+IFdlIGNhbiBqdXN0IGRpc2FibGUgSUJS
+UyBiZWZvcmUgZ29pbmcgdG8gc2xlZXA/CgpUaGUgcHJvYmxlbSBpcyB0aGUgdXNlIG9mIE1TUl9T
+UEVDX0NUUkwvTVNSX1BSRURfQ01EIGJlZm9yZSB3ZSd2ZQpyZWxvYWRlZCB0aGUgbWljcm9jb2Rl
+IHdoaWNoIGNhdXNlcyB0aG9zZSBNU1JzIHRvIG1hZ2ljIHRoZW1zZWx2ZXMgaW50bwpleGlzdGVu
+Y2UuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
