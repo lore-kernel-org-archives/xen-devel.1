@@ -1,16 +1,20 @@
-From: Simon Gaiser <simon@invisiblethingslab.com>
-Subject: Resume from suspend to RAM broken when using early
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: Resume from suspend to RAM broken when using early
  microcode updates
-Date: Wed, 11 Apr 2018 11:48:00 +0000
-Message-ID: <c91218e2-d793-4e1d-343f-c4a566e66b47@invisiblethingslab.com>
+Date: Wed, 11 Apr 2018 12:51:26 +0100
+Message-ID: <6fbc10ea-d222-94e0-0a60-76cbc6ba1ab2@citrix.com>
+References: <c91218e2-d793-4e1d-343f-c4a566e66b47@invisiblethingslab.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5942728723879895275=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=lz4q=ha=invisiblethingslab.com=simon@srs-us1.protection.inumbo.net>)
- id 1f6EEP-00051M-RT
- for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 11:48:06 +0000
+ <srs0=rlyf=ha=citrix.com=prvs=6327ebc18=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1f6EHj-0005g5-VR
+ for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 11:51:31 +0000
+In-Reply-To: <c91218e2-d793-4e1d-343f-c4a566e66b47@invisiblethingslab.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,90 +23,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>
+To: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5942728723879895275==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="HvsWX5uFCI1L7suDBz1pboGXuxizbsLeF"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---HvsWX5uFCI1L7suDBz1pboGXuxizbsLeF
-Content-Type: multipart/mixed; boundary="6GBW8cWSzeSY4HDo7XlWQ17gSgPs1cSLQ";
- protected-headers="v1"
-From: Simon Gaiser <simon@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <c91218e2-d793-4e1d-343f-c4a566e66b47@invisiblethingslab.com>
-Subject: Resume from suspend to RAM broken when using early microcode updates
-
---6GBW8cWSzeSY4HDo7XlWQ17gSgPs1cSLQ
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-when I use early microcode loading with the microcode update with the
-BTI mitigations, resuming from suspend to RAM is broken.
-
-Based on added logging to enter_state() (from power.c) it doesn't
-survive the local_irq_restore(flags) call (at least a printk() after the
-call doesn't output anything on the serial console).
-
-I guess that some irq handler tries to use IBRS/IBPB. But the microcode
-is only loaded later.
-
-If I simply move the microcode_resume_cpu(0) directly before the
-local_irq_restore(flags) everything seems to work fine. But I'm not sure
-if this has unintended consequences.
-
-I tested the above with Xen 4.8.3 from Qubes which includes the BTI and
-microcode patches from staging-4.8. AFAICS there are no commits which
-changes the affected code or other commits which sound relevant so this
-probably affected also all the newer branches.
-
-Simon
-
-
---6GBW8cWSzeSY4HDo7XlWQ17gSgPs1cSLQ--
-
---HvsWX5uFCI1L7suDBz1pboGXuxizbsLeF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlrN9gcACgkQkO9xfO/x
-ly+fNw/+IJHfW7yDf/GF3BOG1Q+rLkEMlvzTKnIYrdhjEXBW47RtCLY/aDG8SMJh
-mT7l8YSaT60BsqzUBsbP/TYb2LTAhXdmKQlX4nm6uBKediABj88/75lHVZ2oNltk
-7f8fqyy/CT6NgEDRgoC4JVCfHLQwfzrlPyGxdM6YL3K664EYaJ5xnl4ls1DKnSor
-JKiMVLA6YDkSPCZH25BUj1YkZNbtaBmD7Uyfh2xV0yjrp+v8SRsv3VKTJ0cGvLZ0
-GB3bWjCkuLu7rQGb5MHTxYkIQKd+fRLIx2TPIzi30bRlBBuKJTD+9E2D9irEzzQW
-WhfGSVhLQvnyMvuiNCrkfOnpvYHu5oKiTKBxO0q2DOtHVp/Xv79tJLcA0a2JKLIe
-1KQEvhNpY2Bkt/PFZJpX+ZnyocOHxpgYrXQK+jFywyp0tvgaIAvlIf95lTmbp2Dz
-nDJMShXWMrDEsNqGJjMf3+I9HCKH6HBpnLdP5y7H7LoLZNKl2HYnia5lcX71zgTp
-617AJY5X/XQv9ZDw7HeNtJINc20jJAgVIiIhGw5KjBHXz+0q1MhZsxsSJvlrnjVV
-wyKI2ifc9UdfyI2NnCK9iq6k6iP4xWDeW7m8uudt4LMAaILrjqWkdrxz0bZyS5dy
-6eceVnjARSEJPOBYGN1WpA9rDtn1IPN9+YjXj0ylWhihJ+6yaRA=
-=LNhn
------END PGP SIGNATURE-----
-
---HvsWX5uFCI1L7suDBz1pboGXuxizbsLeF--
-
-
---===============5942728723879895275==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5942728723879895275==--
+T24gMTEvMDQvMTggMTI6NDgsIFNpbW9uIEdhaXNlciB3cm90ZToKPiBIaSwKPgo+IHdoZW4gSSB1
+c2UgZWFybHkgbWljcm9jb2RlIGxvYWRpbmcgd2l0aCB0aGUgbWljcm9jb2RlIHVwZGF0ZSB3aXRo
+IHRoZQo+IEJUSSBtaXRpZ2F0aW9ucywgcmVzdW1pbmcgZnJvbSBzdXNwZW5kIHRvIFJBTSBpcyBi
+cm9rZW4uCj4KPiBCYXNlZCBvbiBhZGRlZCBsb2dnaW5nIHRvIGVudGVyX3N0YXRlKCkgKGZyb20g
+cG93ZXIuYykgaXQgZG9lc24ndAo+IHN1cnZpdmUgdGhlIGxvY2FsX2lycV9yZXN0b3JlKGZsYWdz
+KSBjYWxsIChhdCBsZWFzdCBhIHByaW50aygpIGFmdGVyIHRoZQo+IGNhbGwgZG9lc24ndCBvdXRw
+dXQgYW55dGhpbmcgb24gdGhlIHNlcmlhbCBjb25zb2xlKS4KPgo+IEkgZ3Vlc3MgdGhhdCBzb21l
+IGlycSBoYW5kbGVyIHRyaWVzIHRvIHVzZSBJQlJTL0lCUEIuIEJ1dCB0aGUgbWljcm9jb2RlCj4g
+aXMgb25seSBsb2FkZWQgbGF0ZXIuCj4KPiBJZiBJIHNpbXBseSBtb3ZlIHRoZSBtaWNyb2NvZGVf
+cmVzdW1lX2NwdSgwKSBkaXJlY3RseSBiZWZvcmUgdGhlCj4gbG9jYWxfaXJxX3Jlc3RvcmUoZmxh
+Z3MpIGV2ZXJ5dGhpbmcgc2VlbXMgdG8gd29yayBmaW5lLiBCdXQgSSdtIG5vdCBzdXJlCj4gaWYg
+dGhpcyBoYXMgdW5pbnRlbmRlZCBjb25zZXF1ZW5jZXMuCj4KPiBJIHRlc3RlZCB0aGUgYWJvdmUg
+d2l0aCBYZW4gNC44LjMgZnJvbSBRdWJlcyB3aGljaCBpbmNsdWRlcyB0aGUgQlRJIGFuZAo+IG1p
+Y3JvY29kZSBwYXRjaGVzIGZyb20gc3RhZ2luZy00LjguIEFGQUlDUyB0aGVyZSBhcmUgbm8gY29t
+bWl0cyB3aGljaAo+IGNoYW5nZXMgdGhlIGFmZmVjdGVkIGNvZGUgb3Igb3RoZXIgY29tbWl0cyB3
+aGljaCBzb3VuZCByZWxldmFudCBzbyB0aGlzCj4gcHJvYmFibHkgYWZmZWN0ZWQgYWxzbyBhbGwg
+dGhlIG5ld2VyIGJyYW5jaGVzLgoKUzMgc3VwcG9ydCBpcyBhIHZlcnkgdW5sb3ZlZCBhcmVhIG9m
+IHRoZSBoeXBlcnZpc29yLgoKWWVzIC0gd2UgZGVmaW5pdGVseSBuZWVkIHRvIGdldCBtaWNyb2Nv
+ZGUgcmVsb2FkZWQgYmVmb3JlIGludGVycnVwdHMgYXJlCmVuYWJsZWQuwqAgVGhhdCBzYWlkLCBJ
+IHdvdWxkIGhhdmUgZXhwZWN0ZWQgYSBiYWNrdHJhY2UgY29tcGxhaW5pbmcgYWJvdXQKYSBHUCBm
+YXVsdCBpZiB3ZSBoYWQgaGl0IHRoZSB1c2Ugb2YgSUJSUy9JQlBCIGJlZm9yZSB0aGUgbWljcm9j
+b2RlIHdhcwpyZWxvYWRlZC4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
