@@ -1,20 +1,17 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH for-4.11 0/7] SUPPORT.md: Format as part of
- html docs
-Date: Wed, 11 Apr 2018 06:28:57 +0200
-Message-ID: <761b62cc-241b-812c-58e6-9f4937884236@suse.com>
-References: <1523380973-15979-1-git-send-email-ian.jackson@eu.citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: crash in csched_load_balance after xl vcpu-pin
+Date: Wed, 11 Apr 2018 08:23:06 +0200
+Message-ID: <20180411062306.GG7177@aepfle.de>
+References: <20180410085729.GA472@aepfle.de> <20180410155949.GB7177@aepfle.de>
+ <ebdd4cb871b2d754959e8358641810d61b3d0856.camel@suse.com>
+ <20180410190302.GC7177@aepfle.de>
+ <42c5d682348a351420290dc1ecf5b1e2a60b98be.camel@suse.com>
+ <20180410200958.GD7177@aepfle.de> <20180410201315.GE7177@aepfle.de>
+ <CAAWQecsriGDV9g+m2q5Y79477HGOUN4VDCwmt2hxKF6=8A-kpA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3169258705358190429=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=9j1x=ha=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1f67NW-00028F-Va
- for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 04:29:03 +0000
-In-Reply-To: <1523380973-15979-1-git-send-email-ian.jackson@eu.citrix.com>
-Content-Language: de-DE
+In-Reply-To: <CAAWQecsriGDV9g+m2q5Y79477HGOUN4VDCwmt2hxKF6=8A-kpA@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,24 +20,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
-Cc: Lars Kurth <lars.kurth@citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: Dario Faggioli <dfaggioli@suse.com>
+Cc: George Dunlap <george.dunlap@citrix.com>, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTAvMDQvMTggMTk6MjIsIElhbiBKYWNrc29uIHdyb3RlOgo+IFRoZSBTVVBQT1JULm1kIGRv
-Y3VtZW50IChpbnRyb2R1Y2VkIGluIDQuMTApIGRvZXMgbm90IGFwcGVhciBoZXJlCj4gICBodHRw
-Oi8veGVuYml0cy54ZW4ub3JnL2RvY3MvCj4gSW4gdGhpcyBzZXJpZXMgSSBmaXggdGhpcy4KPiAK
-PiBUaGlzIGlzIGEgcHJlcmVxdWlzaXRlIGZvciBteSB3b3JrIHRvIGdlbmVyYXRlIGEgbWF0cml4
-IHJlcHJlc2VudGluZwo+IHRoZSBjcm9zcy12ZXJzaW9uIGZlYXR1cmUgc3VwcG9ydCBzdGF0dXMs
-IGJlY2F1c2UgdGhhdCBjcm9zcy12ZXJzaW9uCj4gbWF0cml4IHdhbnRzIHRvIGNvbnRhaW4gaHlw
-ZXJsaW5rcyBpbnRvIHRoZSBhcHByb3ByaWF0ZSBiaXRzIG9mIChodG1sKQo+IFNVUFBPUlQubWQu
-Cj4gCj4gVGhpcyBzZXJpZXMgc2hvdWxkIGJlIGJhY2twb3J0ZWQgdG8gNC4xMC4gIElmIGFuZCB3
-aGVuIGEgU1VQUE9SVC5tZCBpcwo+IHByb3ZpZGVkIGZvciBlYXJsaWVyIHJlbGVhc2VzLCBpdCBz
-aG91bGQgYmUgYmFja3BvcnRlZCB0byB0aG9zZSB0b28uCj4gCj4gVGhlcmUgYXJlIHRocmVlIHBh
-dGNoZXMgZml4aW5nIG1pbm9yIHN5bnRheCB0cm91YmxlIGluIFNVUFBPUlQubWQsIGFuZAo+IGZv
-dXIgYnVpbGQgc3lzdGVtIGNoYW5nZXMuICBJIGhvcGUgdGhlIHJlbGVhc2UgYWNrIHdpbGwgYmUg
-YSBmb3JtYWxpdHkKPiA6LSkuCj4gCj4gSWFuLgo+IAoKRm9yIHRoZSBzZXJpZXM6CgpSZWxlYXNl
-LWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CgoKSnVlcmdlbgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3169258705358190429==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gm5TwAJMO0F2iVRz"
+Content-Disposition: inline
+
+
+--gm5TwAJMO0F2iVRz
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Tue, Apr 10, Dario Faggioli wrote:
+
+> I remember specifically wanting for it to support not only "nodes:", but also
+> "node:", because I thought that, e.g., "nodes:3" would have sound weird to
+> users.
+
+It turned out that I had a typo all the time in my template, it used
+'cpu=' rather than 'cpus='. On this system none of this works:
+#pus="node:${node}"
+cpus="nodes:${node}"
+#pus="nodes:${node},^node:0"
+#pus_soft="nodes:${node},^node:0"
+
+Only 'cpus=node:1' or 'cpus=nodes:1' works, cpus=node:2 or node:3 does
+not. There is room for domUs:
+numa_info              :
+node:    memsize    memfree    distances
+   0:     30720       1912      10,21,21,21
+   1:     28672      22355      21,10,21,21
+   2:     24576      24502      21,21,10,21
+   3:     32768      31760      21,21,21,10
+
+But, that is a separate issue. The BUG triggers without the cpus= knob.
+
+Olaf
+
+--gm5TwAJMO0F2iVRz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWs2pxgAKCRBdQqD6ppg2
+fkmQAJ9CUFHV0zRaWeM/xOQWk7WR0YAyzgCgi0z2TU6geqFJz8xK88Nw1nPqFHE=
+=4uAr
+-----END PGP SIGNATURE-----
+
+--gm5TwAJMO0F2iVRz--
+
+
+--===============3169258705358190429==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3169258705358190429==--
