@@ -1,20 +1,17 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Wed, 11 Apr 2018 12:20:40 +0200
-Message-ID: <f2b8d7e2f47b8667382ba920c7b34184c910913a.camel@suse.com>
-References: <20180410085729.GA472@aepfle.de> <20180410155949.GB7177@aepfle.de>
- <ebdd4cb871b2d754959e8358641810d61b3d0856.camel@suse.com>
- <20180410190302.GC7177@aepfle.de>
- <42c5d682348a351420290dc1ecf5b1e2a60b98be.camel@suse.com>
- <20180410200958.GD7177@aepfle.de> <20180410201315.GE7177@aepfle.de>
- <CAAWQecsriGDV9g+m2q5Y79477HGOUN4VDCwmt2hxKF6=8A-kpA@mail.gmail.com>
- <20180411062306.GG7177@aepfle.de>
- <c730538a94b5de4b83aa76883fa050abd5737b94.camel@suse.com>
- <20180411084829.GH7177@aepfle.de>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 122171: tolerable all pass -
+ PUSHED
+Date: Wed, 11 Apr 2018 10:55:13 +0000
+Message-ID: <osstest-122171-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5520327730641070235=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180411084829.GH7177@aepfle.de>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=3vqk=ha=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f6DPI-0000rk-5z
+ for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 10:55:16 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,85 +20,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: George Dunlap <george.dunlap@citrix.com>, xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5520327730641070235==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-zRVCMdSrpGoxLc2VvWcR"
-
-
---=-zRVCMdSrpGoxLc2VvWcR
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2018-04-11 at 10:48 +0200, Olaf Hering wrote:
-> On Wed, Apr 11, Dario Faggioli wrote:
-> > So, now, when you say 'does not work', do you mean 'domain creation
-> > is
-> > aborted with errors' or 'domain is created, but memory is not where
-> > it
-> > should be'.
->=20
-> domU can not be created due to "libxl__set_vcpuaffinity: setting vcpu
-> affinity: Invalid argument". I guess something is special on this
-> system.
->
-Looks like it. :-O
-
-If you're interested in figuring out, I'd like to see:
-- full output of `xl info -n'
-- output of `xl debug-key u'
-- xl vcpu-list
-- xl list -n
-
-right before trying to create the domain.
-
-And I guess having also a look at `xl dmesg' won't hurt.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-zRVCMdSrpGoxLc2VvWcR
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrN4XkACgkQFkJ4iaW4
-c+6Y0g//ZsfVuUSkqOsUKJgjCsDWZ3bNr1DzL7qQcUeUd7akXnCssPHarLQLwOdi
-lQhQ0hv+K1oXF2ClLAkOOzGjPV8n/7p0G4CvXmVayp00zU+1+umWA6hOfulV1+wC
-OYBJJd9n7uYIffzol/Fj6f3T4evGs1+P2Wr0LrMz8yhXbMPJXx3z7sDX3H7tnoUl
-GBsEV7M4xrNrGwIVP65VrH7Fof78y+4Cbtoe17QiDFWpb8ydXNb0doA3a6Rq3aJI
-VJ+J6Z3KH5VBRYyvXZZEPnC04f6HyDfw0u8ULkMNvC9PcIpkTA9x5tGKcR5ZSC6k
-QbYpZp6mHA4LUa7SHjAoWDVhLbP+tHP4pX6+NE2OSzhFBGPOrxNHEbx9ezxz6Qaa
-DZhDzvuMm0gkT6aYhoRwu7tCXqXmkMmyAM7hCiF9cMMsV6F61evXweod+qAd0ew7
-T91HuBheoGgU8durHvyIwVLdoc7VNeOJjphTMhj6ZBU7TS+x5RJ0A/E2z/llOJm2
-RdixoLWmVn/fHLPNTEWFnfY0AQfoimKS2NZUGIpBEp/BljVu6oUxrxn/VvyEpEiP
-2fZ0D6dsSWoozVY3vgwmfeoeUOCCWrLnC5e5BbujMzEfnKUJKSe9OL9ORohAKdOS
-a2yX7RcSrXzcqTQnhGvkufr5BvLUyXK7Orhn27ep0N23coyDY48=
-=Behn
------END PGP SIGNATURE-----
-
---=-zRVCMdSrpGoxLc2VvWcR--
-
-
-
---===============5520327730641070235==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5520327730641070235==--
+ZmxpZ2h0IDEyMjE3MSB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMjE3MS8KCkZhaWx1cmVzIDot
+LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
+cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
+LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
+LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
+ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
+LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
+ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
+ICAgICAgICAgICAgICA5MWFmYjgxMzlmOTU0YTA2ZTU2NGQ0OTE1YmM3ZDZhODU3NWUyODEyCmJh
+c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICA1MGY4YmE4NGE1MGViZjgwZGQy
+MjA2N2EwNDA2MmRiYWFmMjYyMWZmCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjIxNjIgIDIwMTgt
+MDQtMTAgMTQ6MDE6MjMgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTIyMTcxICAy
+MDE4LTA0LTExIDA5OjAxOjU5IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
+d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgSmFuIEJldWxpY2ggPGpiZXVsaWNo
+QHN1c2UuY29tPgoKam9iczoKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1o
+ZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
+YW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWkzODYgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxh
+Yi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dz
+L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0
+dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRp
+b24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAg
+IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJF
+QURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9w
+PW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2Rl
+IGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0
+ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9y
+ZzovaG9tZS94ZW4vZ2l0L3hlbi5naXQKICAgNTBmOGJhODRhNS4uOTFhZmI4MTM5ZiAgOTFhZmI4
+MTM5Zjk1NGEwNmU1NjRkNDkxNWJjN2Q2YTg1NzVlMjgxMiAtPiBzbW9rZQoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
