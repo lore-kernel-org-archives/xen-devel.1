@@ -1,10 +1,20 @@
 From: Olaf Hering <olaf@aepfle.de>
-Subject: bug in _shadow_prealloc during migration of PV domU
-Date: Wed, 11 Apr 2018 22:32:44 +0200
-Message-ID: <20180411203244.GN7177@aepfle.de>
+Subject: Re: crash in csched_load_balance after xl vcpu-pin
+Date: Wed, 11 Apr 2018 22:43:59 +0200
+Message-ID: <20180411204359.GP7177@aepfle.de>
+References: <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
+ <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
+ <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
+ <20180410203741.GF7177@aepfle.de>
+ <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
+ <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
+ <20180411100006.GI7177@aepfle.de> <20180411150312.GL7177@aepfle.de>
+ <20180411152745.GM7177@aepfle.de>
+ <eb978b7160b9e2d54f56c088e0e7a24f1ec813c3.camel@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1413113443111550447=="
+Content-Type: multipart/mixed; boundary="===============7659080389187225482=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <eb978b7160b9e2d54f56c088e0e7a24f1ec813c3.camel@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,129 +23,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Dario Faggioli <dfaggioli@suse.com>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============1413113443111550447==
+--===============7659080389187225482==
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Sr6hGnsCY8KeifOY"
+	protocol="application/pgp-signature"; boundary="sBcizk6cgRZY6rnJ"
 Content-Disposition: inline
 
 
---Sr6hGnsCY8KeifOY
+--sBcizk6cgRZY6rnJ
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-I was testing 'virsh migrate domU host' and did some libvirtd debugging
-on 'host'. This means the migration was attempted a few times, but did
-not actually start because libvirtd was in gdb. Not sure if libvirt on
-the sender does anything with the domU before a connection to the remote
-host is fully established.
+On Wed, Apr 11, Dario Faggioli wrote:
 
-Finally I installed the fixed libvirtd on 'host' and started the
-migration again. This time the sender died like this:
+> It will crash, again, possibly with the same stack trace, but I think
+> it's worth a try.
 
--- 22:anonymi -- time-stamp -- 2018-04-11 22:18:11 --
-(XEN) sh error: _shadow_prealloc(): Can't pre-allocate 1 shadow pages!
-(XEN)   shadow pages total =3D 5, free =3D 0, p2m=3D0
-(XEN) Xen BUG at common.c:1315
-(XEN) ----[ Xen-4.11.20180410T125709.50f8ba84a5-4.xen_unstable  x86_64  deb=
-ug=3Dn   Not tainted ]----
-(XEN) CPU:    1
-(XEN) RIP:    e008:[<ffff82d08032bdd8>] common.c#_shadow_prealloc+0x478/0x4=
-f0
-(XEN) RFLAGS: 0000000000010292   CONTEXT: hypervisor (d0v0)
-(XEN) rax: ffff83043dd8e02c   rbx: ffff8303393e9000   rcx: 0000000000000000
-(XEN) rdx: ffff83043dd87fff   rsi: 000000000000000a   rdi: ffff82d08043c6b8
-(XEN) rbp: 0000000000000001   rsp: ffff83043dd87b78   r8:  ffff83043dd90000
-(XEN) r9:  0000000000008000   r10: 0000000000000000   r11: 0000000000000001
-(XEN) r12: 0000000000000020   r13: 0000000000000000   r14: ffff82d08057ffd8
-(XEN) r15: ffff83043dd87fff   cr0: 0000000080050033   cr4: 00000000000026e0
-(XEN) cr3: 000000039253f000   cr2: ffff8800a2b6c1b0
-(XEN) fsb: 00007f80c8424700   gsb: ffff880140400000   gss: 0000000000000000
-(XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: e010   cs: e008
-(XEN) Xen code around <ffff82d08032bdd8> (common.c#_shadow_prealloc+0x478/0=
-x4f0):
-(XEN)  ea 31 c0 e8 d8 08 f2 ff <0f> 0b 31 c9 e9 c3 fe ff ff 31 c9 e9 ad fe =
-ff ff
-(XEN) Xen stack trace from rsp=3Dffff83043dd87b78:
-(XEN)    0000000000000000 ffff83043dd87b90 0000000000000000 0000000000000000
-(XEN)    000000003dd87fff ffff8300bf1f4000 ffff8303393e9000 0000000000000008
-(XEN)    ffff82d0803abf40 ffff83043dd87fff ffffffffffffffff ffff82d08032ea78
-(XEN)    0000000000101000 ffff8300bf1f4000 0000000000101000 ffff8303393e9650
-(XEN)    ffff82d08057ffc0 ffff82d08032ef18 ffff83043dd16000 ffff8303393e9000
-(XEN)    ffff82d08057ffc0 ffff82d08032f059 ffff8303393e9000 0000000000000001
-(XEN)    0000000000000024 ffff83043dd16000 00007f80c8439004 ffff82d0803125b5
-(XEN)    ffff83043dd16000 ffff8303393e9000 ffff83043dd87d98 ffff82d08026db1e
-(XEN)    0000000000000000 0000000000000000 000000000000000c 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 ffff8300bf1fb000
-(XEN)    ffff83043dd28188 ffff82d08056a500 0000000000000246 ffff82d08057f180
-(XEN)    0000000000000206 ffff82d0802344ea 0000000000000000 ffff83043dd16000
-(XEN)    000000000038b83c 00007f80c8439004 ffff83043dd87d98 0000000000000024
-(XEN)    0000000000000000 ffff8303393e9000 ffffffffffffffff ffff82d080205f5e
-(XEN)    ffff8300bf583000 ffff83043ddb00d0 0000000000000000 ffff82d08020c535
-(XEN)    ffff83043ddb00d0 ffff83043ddb00c0 ffff83043ddb0010 07ff82d000000003
-(XEN)    ffff82d08035781b ffff82d08020bc8a 0000000000000000 ffff82d080553c80
-(XEN)    000000100000000a 0000000000000002 0000000000000002 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+    BUG_ON(__vcpu_on_runq(CSCHED_VCPU(vc)));
+
+(XEN) grant_table.c:1769:d15v18 Expanding d15 grant table from 12 to 13 frames
+(XEN) grant_table.c:1769:d15v20 Expanding d15 grant table from 13 to 14 frames
+(XEN) grant_table.c:1769:d15v21 Expanding d15 grant table from 14 to 15 frames
+(XEN) traps.c:1569: GPF (0000): ffff82d080315d5f [vmx.c#vmx_msr_read_intercept+0x375/0x3e2] -> ffff82d08037594a
+(XEN) grant_table.c:1769:d16v19 Expanding d16 grant table from 9 to 10 frames
+(XEN) grant_table.c:1769:d16v22 Expanding d16 grant table from 10 to 11 frames
+(XEN) grant_table.c:1769:d16v27 Expanding d16 grant table from 11 to 12 frames
+(XEN) grant_table.c:1769:d16v21 Expanding d16 grant table from 12 to 13 frames
+(XEN) grant_table.c:1769:d16v21 Expanding d16 grant table from 13 to 14 frames
+(XEN) grant_table.c:1769:d16v20 Expanding d16 grant table from 14 to 15 frames
+(XEN) Xen BUG at sched_credit.c:876
+(XEN) ----[ Xen-4.11.20180410T125709.50f8ba84a5-7.bug1087289_411  x86_64  debug=y   Not tainted ]----
+(XEN) CPU:    108
+(XEN) RIP:    e008:[<ffff82d080229ab4>] sched_credit.c#csched_vcpu_migrate+0x27/0x54
+(XEN) RFLAGS: 0000000000010006   CONTEXT: hypervisor
+(XEN) rax: ffff8308990cb230   rbx: ffff830779d28188   rcx: ffff82d080803640
+(XEN) rdx: 000000000000006e   rsi: ffff83007ba44000   rdi: ffff82d080803640
+(XEN) rbp: ffff831c7d80fd18   rsp: ffff831c7d80fd18   r8:  0000000000000004
+(XEN) r9:  0000000000000000   r10: 0000000000000001   r11: 0000ffff0000ffff
+(XEN) r12: ffff830779d28188   r13: 000000000000006e   r14: 000000000000006c
+(XEN) r15: ffff83007ba44000   cr0: 000000008005003b   cr4: 00000000001526e0
+(XEN) cr3: 00000015a589c000   cr2: 00007f163e153d00
+(XEN) fsb: 0000000000000000   gsb: 0000000000000000   gss: 0000000000000000
+(XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: 0000   cs: e008
+(XEN) Xen code around <ffff82d080229ab4> (sched_credit.c#csched_vcpu_migrate+0x27/0x54):
+(XEN)  00 00 00 48 3b 00 74 02 <0f> 0b 48 8d 0d 43 56 73 00 4c 63 46 04 48 8d 3d
+(XEN) Xen stack trace from rsp=ffff831c7d80fd18:
+(XEN)    ffff831c7d80fd28 ffff82d080236348 ffff831c7d80fda8 ffff82d08023764c
+(XEN)    ffff831c7d80fd58 ffff82d08095f0e0 ffff82d08095f100 ffff830779d12188
+(XEN)    ffff83007ba44000 0000006e01236fbe ffff83077ffe7720 0000000000000296
+(XEN)    ffff83077a6c59e0 ffff83007ba44000 ffff83007ba44000 ffff83077a6c4000
+(XEN)    000000000000006c ffff8308bc78e000 ffff831c7d80fdc8 ffff82d080239367
+(XEN)    ffff83077a6c4000 ffff83005d1da000 ffff831c7d80fe18 ffff82d08027797d
+(XEN)    ffff831c7d80fde8 ffff82d0802a4f50 ffff831c7d80fe18 ffff83007ba44000
+(XEN)    ffff83005d1da000 ffff830779d28188 0000112defdf0971 0000000000000003
+(XEN)    ffff831c7d80fea8 ffff82d080236943 ffff831c7d80fe68 ffff830779d281a0
+(XEN)    0000006c0080fe68 ffff830779d28180 000000000000f305 000000000000f305
+(XEN)    ffff83007ba44000 ffff83005d1da000 ffffffffffffffff ffff83005d1da000
+(XEN)    ffff831c7d80fee8 ffff82d080937200 ffff82d080933c00 ffffffffffffffff
+(XEN)    ffff831c7d80ffff ffff83077a6c4000 ffff831c7d80fed8 ffff82d080239f15
+(XEN)    ffff83007ba44000 ffff83005d1da000 ffff8308bc78e000 000000000000006c
+(XEN)    ffff831c7d80fee8 ffff82d080239f6a ffff831c7d80fda0 ffff82d08031f5db
+(XEN)    ffffffff81c00000 ffffffff81c00000 ffffffff81c00000 0000000000000000
+(XEN)    0000000000000000 ffffffff81d4c180 ffffffff821cf188 00000005da10c197
+(XEN)    0000000000000001 0000000000000000 ffffffff81020e50 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000beef0000beef
+(XEN)    ffffffff81060182 000000bf0000beef 0000000000000246 ffffffff81c03f00
 (XEN) Xen call trace:
-(XEN)    [<ffff82d08032bdd8>] common.c#_shadow_prealloc+0x478/0x4f0
-(XEN)    [<ffff82d08032ea78>] common.c#sh_update_paging_modes+0x1f8/0x390
-(XEN)    [<ffff82d08032ef18>] common.c#shadow_one_bit_enable+0x88/0x110
-(XEN)    [<ffff82d08032f059>] common.c#sh_enable_log_dirty+0xb9/0x120
-(XEN)    [<ffff82d0803125b5>] paging_log_dirty_enable+0x45/0x60
-(XEN)    [<ffff82d08026db1e>] arch_do_domctl+0xcee/0x2450
-(XEN)    [<ffff82d0802344ea>] vcpu_wake+0x12a/0x390
-(XEN)    [<ffff82d080205f5e>] do_domctl+0xcce/0x17e0
-(XEN)    [<ffff82d08020c535>] event_fifo.c#evtchn_fifo_set_pending+0x235/0x=
-350
-(XEN)    [<ffff82d08035781b>] common_interrupt+0x9b/0x110
-(XEN)    [<ffff82d08020bc8a>] evtchn_check_pollers+0x1a/0xa0
-(XEN)    [<ffff82d08035742e>] lstar_enter+0xae/0x120
-(XEN)    [<ffff82d080205290>] do_domctl+0/0x17e0
-(XEN)    [<ffff82d080351318>] pv_hypercall+0x138/0x200
-(XEN)    [<ffff82d08035742e>] lstar_enter+0xae/0x120
-(XEN)    [<ffff82d080357422>] lstar_enter+0xa2/0x120
-(XEN)    [<ffff82d08035742e>] lstar_enter+0xae/0x120
-(XEN)    [<ffff82d080357422>] lstar_enter+0xa2/0x120
-(XEN)    [<ffff82d08035742e>] lstar_enter+0xae/0x120
-(XEN)    [<ffff82d080357422>] lstar_enter+0xa2/0x120
-(XEN)    [<ffff82d08035742e>] lstar_enter+0xae/0x120
-(XEN)    [<ffff82d080357422>] lstar_enter+0xa2/0x120
-(XEN)    [<ffff82d08035742e>] lstar_enter+0xae/0x120
-(XEN)    [<ffff82d080357422>] lstar_enter+0xa2/0x120
-(XEN)    [<ffff82d08035742e>] lstar_enter+0xae/0x120
-(XEN)    [<ffff82d08035748f>] lstar_enter+0x10f/0x120
-(XEN)=20
-(XEN)=20
+(XEN)    [<ffff82d080229ab4>] sched_credit.c#csched_vcpu_migrate+0x27/0x54
+(XEN)    [<ffff82d080236348>] schedule.c#vcpu_move_locked+0xbb/0xc2
+(XEN)    [<ffff82d08023764c>] schedule.c#vcpu_migrate+0x226/0x25b
+(XEN)    [<ffff82d080239367>] context_saved+0x95/0x9c
+(XEN)    [<ffff82d08027797d>] context_switch+0xe66/0xeb0
+(XEN)    [<ffff82d080236943>] schedule.c#schedule+0x5f4/0x627
+(XEN)    [<ffff82d080239f15>] softirq.c#__do_softirq+0x85/0x90
+(XEN)    [<ffff82d080239f6a>] do_softirq+0x13/0x15
+(XEN)    [<ffff82d08031f5db>] vmx_asm_do_vmentry+0x2b/0x30
 (XEN) ****************************************
-(XEN) Panic on CPU 1:
-(XEN) Xen BUG at common.c:1315
+(XEN) Panic on CPU 108:
+(XEN) Xen BUG at sched_credit.c:876
 (XEN) ****************************************
-(XEN)=20
 (XEN) Reboot in five seconds...
 
-I will see if I can reproduce it.
 
 Olaf
 
---Sr6hGnsCY8KeifOY
+--sBcizk6cgRZY6rnJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWs5w6QAKCRBdQqD6ppg2
-fknhAKDaH06btdArvr5q3cBj4IDUe8yejwCgjlj6BwHxJ2blbbdQP4JZU3ayOvk=
-=HKz7
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWs5zjwAKCRBdQqD6ppg2
+frqyAKDEfASay+TuE3hf1+fqIAGZuNJ3FACeKKILI9G+wTGMNwtynzYf9rJqf7w=
+=e/28
 -----END PGP SIGNATURE-----
 
---Sr6hGnsCY8KeifOY--
+--sBcizk6cgRZY6rnJ--
 
 
---===============1413113443111550447==
+--===============7659080389187225482==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -145,4 +134,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============1413113443111550447==--
+--===============7659080389187225482==--
