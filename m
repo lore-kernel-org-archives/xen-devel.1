@@ -1,16 +1,21 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 122173: all pass - PUSHED
-Date: Wed, 11 Apr 2018 09:57:47 +0000
-Message-ID: <osstest-122173-mainreport@xen.org>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: crash in csched_load_balance after xl vcpu-pin
+Date: Wed, 11 Apr 2018 12:00:06 +0200
+Message-ID: <20180411100006.GI7177@aepfle.de>
+References: <20180410085729.GA472@aepfle.de>
+ <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
+ <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
+ <95482342-8b80-e295-badf-6b20ad09276f@citrix.com>
+ <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
+ <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
+ <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
+ <20180410203741.GF7177@aepfle.de>
+ <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
+ <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5776006662887685681=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=3vqk=ha=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1f6CVj-0003a3-0M
- for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 09:57:51 +0000
+In-Reply-To: <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,49 +24,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Dario Faggioli <dfaggioli@suse.com>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMjE3MyB4ZW4tdW5zdGFibGUtY292ZXJpdHkgcmVhbCBbcmVhbF0KaHR0cDovL2xv
-Z3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMjE3My8KClBlcmZlY3Qg
-Oi0pCkFsbCB0ZXN0cyBpbiB0aGlzIGZsaWdodCBwYXNzZWQgYXMgcmVxdWlyZWQKdmVyc2lvbiB0
-YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIDUwZjhiYTg0YTUwZWJm
-ODBkZDIyMDY3YTA0MDYyZGJhYWYyNjIxZmYKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAg
-ICAgICAgICAgIDkxM2FjYzFhYTAxOTA1NDc0MjIxNzkyNmRlYTA4MjdlN2E5ZGYwMmUKCkxhc3Qg
-dGVzdCBvZiBiYXNpcyAgIDEyMTc2NyAgMjAxOC0wNC0wNCAwOTozOToxOSBaICAgIDcgZGF5cwpG
-YWlsaW5nIHNpbmNlICAgICAgICAxMjIwODggIDIwMTgtMDQtMDggMDk6MjU6MTMgWiAgICAzIGRh
-eXMgICAgMiBhdHRlbXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMjIxNzMgIDIwMTgtMDQtMTEg
-MDk6MTk6NTIgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hl
-ZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbWl0IFNpbmdoIFRvbWFyIDxhbWl0dG9tZXIyNUBn
-bWFpbC5jb20+CiAgQW5kcmUgUHJ6eXdhcmEgPGFuZHJlLnByenl3YXJhQGFybS5jb20+CiAgQW5k
-cmUgUHp5d2FyYSA8YW5kcmUucHJ6eXdhcmFAYXJtLmNvbT4KICBBbmRyZXcgQ29vcGVyIDxhbmRy
-ZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5
-QG9yYWNsZS5jb20+CiAgR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgog
-IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NA
-c3VzZS5jb20+CiAgSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KICBLZXZpbiBU
-aWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KICBNYXJjZWxsbyBTZXJpIDxtYXJjZWxsby5zZXJp
-QGNpdHJpeC5jb20+CiAgTWFyY3VzIG9mIFdldHdhcmUgTGFicyA8bWFyY3VzQHdldHdhLnJlPgog
-IE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFi
-LmNvbT4KICBQZXRyZSBFZnRpbWUgPGVwZXRyZUBhbWF6b24uY29tPgogIFBldHJlIFBpcmNhbGFi
-dSA8cHBpcmNhbGFidUBiaXRkZWZlbmRlci5jb20+CiAgUmF6dmFuIENvam9jYXJ1IDxyY29qb2Nh
-cnVAYml0ZGVmZW5kZXIuY29tPgogIFNlcmdleSBEeWFzbGkgPHNlcmdleS5keWFzbGlAY2l0cml4
-LmNvbT4KICBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CiAgVGlt
-IERlZWdhbiA8dGltQHhlbi5vcmc+CiAgV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCmpv
-YnM6CiBjb3Zlcml0eS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3Qt
-bGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xv
-Z3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAg
-aHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5h
-dGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAog
-ICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9
-UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIv
-P3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNv
-ZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9z
-c3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1c2hpbmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4u
-b3JnOi9ob21lL3hlbi9naXQveGVuLmdpdAogICA5MTNhY2MxYWEwLi41MGY4YmE4NGE1ICA1MGY4
-YmE4NGE1MGViZjgwZGQyMjA2N2EwNDA2MmRiYWFmMjYyMWZmIC0+IGNvdmVyaXR5LXRlc3RlZC9z
-bW9rZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5776006662887685681==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="N8NGGaQn1mzfvaPg"
+Content-Disposition: inline
+
+
+--N8NGGaQn1mzfvaPg
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Wed, Apr 11, Dario Faggioli wrote:
+
+> Olaf, can you give it a try? It should be fine to run it on top of the
+> last debug patch (the one that produced this crash).
+
+Yes, with both changes it did >4k iterations already. Thanks.
+
+Olaf
+
+--N8NGGaQn1mzfvaPg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWs3cowAKCRBdQqD6ppg2
+fnJAAJ4n6QSRFUhI5flBgTlZgiV1Eyn89wCg9ZUD7lKCsHTPXMDwr70RCy0iD5M=
+=gBog
+-----END PGP SIGNATURE-----
+
+--N8NGGaQn1mzfvaPg--
+
+
+--===============5776006662887685681==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5776006662887685681==--
