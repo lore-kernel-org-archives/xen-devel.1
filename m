@@ -1,21 +1,24 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Wed, 11 Apr 2018 12:00:06 +0200
-Message-ID: <20180411100006.GI7177@aepfle.de>
-References: <20180410085729.GA472@aepfle.de>
- <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
- <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
- <95482342-8b80-e295-badf-6b20ad09276f@citrix.com>
- <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
- <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
- <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
- <20180410203741.GF7177@aepfle.de>
- <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
- <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
+From: George Dunlap <dunlapg@umich.edu>
+Subject: Re: [PATCH 3/7] SUPPORT.md: Syntax: Provide a title
+ rather than a spurious empty section
+Date: Wed, 11 Apr 2018 11:51:23 +0100
+Message-ID: <CAFLBxZadKV4recrr8jZ8Y+EwvHnKtU4AU-3xa7tDQgSwsaOaHA@mail.gmail.com>
+References: <1523380973-15979-1-git-send-email-ian.jackson@eu.citrix.com>
+ <1523380973-15979-4-git-send-email-ian.jackson@eu.citrix.com>
+ <CAFLBxZb4PwTBkEaRXZCiHXqXowe51x3fY0f6RAFf7hk71_Q5kg@mail.gmail.com>
+ <23245.58738.465895.326190@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5776006662887685681=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=jjbs=ha=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
+ id 1f6DLa-0000cy-Is
+ for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 10:51:26 +0000
+Received: by mail-qt0-x22b.google.com with SMTP id z23so1357605qti.5
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Apr 2018 03:51:24 -0700 (PDT)
+In-Reply-To: <23245.58738.465895.326190@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,51 +27,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Lars Kurth <lars.kurth@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5776006662887685681==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="N8NGGaQn1mzfvaPg"
-Content-Disposition: inline
-
-
---N8NGGaQn1mzfvaPg
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Wed, Apr 11, Dario Faggioli wrote:
-
-> Olaf, can you give it a try? It should be fine to run it on top of the
-> last debug patch (the one that produced this crash).
-
-Yes, with both changes it did >4k iterations already. Thanks.
-
-Olaf
-
---N8NGGaQn1mzfvaPg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWs3cowAKCRBdQqD6ppg2
-fnJAAJ4n6QSRFUhI5flBgTlZgiV1Eyn89wCg9ZUD7lKCsHTPXMDwr70RCy0iD5M=
-=gBog
------END PGP SIGNATURE-----
-
---N8NGGaQn1mzfvaPg--
-
-
---===============5776006662887685681==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5776006662887685681==--
+T24gV2VkLCBBcHIgMTEsIDIwMTggYXQgMTE6MzcgQU0sIElhbiBKYWNrc29uIDxpYW4uamFja3Nv
+bkBjaXRyaXguY29tPiB3cm90ZToKPiBHZW9yZ2UgRHVubGFwIHdyaXRlcyAoIlJlOiBbWGVuLWRl
+dmVsXSBbUEFUQ0ggMy83XSBTVVBQT1JULm1kOiBTeW50YXg6IFByb3ZpZGUgYSB0aXRsZSByYXRo
+ZXIgdGhhbiBhIHNwdXJpb3VzIGVtcHR5IHNlY3Rpb24iKToKPj4gT24gVHVlLCBBcHIgMTAsIDIw
+MTggYXQgNjoyMiBQTSwgSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+IHdy
+b3RlOgo+PiA+IC0jIFN1cHBvcnQgc3RhdGVtZW50IGZvciB0aGlzIHJlbGVhc2UKPj4gPiArJSBT
+dXBwb3J0IHN0YXRlbWVudCBmb3IgdGhpcyByZWxlYXNlCj4+Cj4+IEJ5IGRvaW5nIHRoaXMgd2Un
+cmUgbW9yZSBvciBsZXNzIGNvbW1pdHRpbmcgdG8gcGFuZG9jJ3MgZGlhbGVjdCBvZgo+PiBNYXJr
+ZG93biwgeWVzPwo+Cj4gSSB0aGluayBzbywgeWVzLiAgVGhlcmUgZG9lc24ndCBzZWVtIHRvIGJl
+IGEgd2F5IHRvIGRlZmluZSB0aGUKPiBkb2N1bWVudCB0aXRsZSBpbiBhIHdheSB0aGF0J3MgdGhl
+IHNhbWUgYWNyb3NzIG1hcmtkb3duIHByb2Nlc3NvcnMuCj4KPiBtYXJrZG93bigxKSBqdXN0IHNw
+aXRzIHRoZSBgJScgb3V0IGFzIGEgbGl0ZXJhbCAoYW5kIGluZGVlZCBpdCBkb2Vzbid0Cj4gZ2Vu
+ZXJhdGUgYSA8aGVhZD4gZWxlbWVudCBhdCBhbGwpLgo+Cj4gSSBzaG91bGQgcGVyaGFwcyBoYXZl
+IG1lbnRpb25lZCB0aGlzIGlzc3VlIGluIHRoZSBjb21taXQgbWVzc2FnZS4KPgo+IFdlIGFscmVh
+ZHkgaGF2ZSBhIGxvdCBvZiAucGFuZG9jIGZpbGVzIGluIGRvY3MvLiAgRG8geW91IHRoaW5rIHRo
+aXMgaXMKPiBiYWQgZm9yIFNVUFBPUlQubWQgPwoKV2VsbCBJJ3ZlIGJlZW4gcG9raW5nIGFyb3Vu
+ZCBhIGJpdCwgYW5kIG5vdyBJJ20gcGVyc3VhZGVkIHRoYXQgcGFuZG9jCm1hcmtkb3duIGlzIGEg
+cmVhc29uYWJsZSBkaWFsZWN0IHRvIGNvbW1pdCB0by4gOi0pICBBcyB5b3Ugc2F5LCB3ZQp3YW50
+IHRvIGhhdmUgYSB0aXRsZSBhbmQgdGhlcmUgZG9lc24ndCBzZWVtIHRvIGJlIGEgd2F5IHRvIGRv
+IHRoYXQKd2hpY2ggaXMgY29tbW9uIGFjcm9zcyBtYXJrZG93biBkaWFsZWN0cy4KCiAtR2Vvcmdl
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
