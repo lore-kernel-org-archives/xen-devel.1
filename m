@@ -1,16 +1,16 @@
-From: "Tian, Kevin" <kevin.tian@intel.com>
-Subject: Re: [PATCH for-4.11] x86/VT-x: Fix determination of
- EFER.LMA in vmcs_dump_vcpu()
-Date: Wed, 11 Apr 2018 02:15:47 +0000
-Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D1910E3666@SHSMSX101.ccr.corp.intel.com>
-References: <1523296591-5414-1-git-send-email-andrew.cooper3@citrix.com>
- <5ACC955902000078001B9CD4@prv1-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [libvirt test] 122154: regressions - trouble:
+ blocked/broken/pass
+Date: Wed, 11 Apr 2018 03:16:12 +0000
+Message-ID: <osstest-122154-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0856147578219828375=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5ACC955902000078001B9CD4@prv1-mh.provo.novell.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=3vqk=ha=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f66F7-0005Xj-Fb
+ for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 03:16:17 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,33 +19,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, "Nakajima, Jun" <jun.nakajima@intel.com>, Xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-PiBGcm9tOiBKYW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+IFNlbnQ6IFR1
-ZXNkYXksIEFwcmlsIDEwLCAyMDE4IDQ6NDQgUE0KPiAKPiA+Pj4gT24gMDkuMDQuMTggYXQgMTk6
-NTYsIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToKPiA+IC0tLSBhL3hlbi9hcmNo
-L3g4Ni9odm0vdm14L3ZtY3MuYwo+ID4gKysrIGIveGVuL2FyY2gveDg2L2h2bS92bXgvdm1jcy5j
-Cj4gPiBAQCAtMTc4OCw3ICsxNzg4LDEwIEBAIHZvaWQgdm1jc19kdW1wX3ZjcHUoc3RydWN0IHZj
-cHUgKnYpCj4gPiAgICAgIHZtZW50cnlfY3RsID0gdm1yMzIoVk1fRU5UUllfQ09OVFJPTFMpLAo+
-ID4gICAgICB2bWV4aXRfY3RsID0gdm1yMzIoVk1fRVhJVF9DT05UUk9MUyk7Cj4gPiAgICAgIGNy
-NCA9IHZtcihHVUVTVF9DUjQpOwo+ID4gLSAgICBlZmVyID0gdm1yKEdVRVNUX0VGRVIpOwo+ID4g
-Kwo+ID4gKyAgICAvKiBFRkVSLkxNQSBpcyByZWFkIGFzIHplcm8sIGFuZCBpcyBsb2FkZWQgZnJv
-bSB2bWVudHJ5X2N0bCBvbiBlbnRyeS4KPiAqLwo+ID4gKyAgICBCVUlMRF9CVUdfT04oVk1fRU5U
-UllfSUEzMkVfTU9ERSA8PCAxICE9IEVGRVJfTE1BKTsKPiA+ICsgICAgZWZlciA9IHZtcihHVUVT
-VF9FRkVSKSB8ICgodm1lbnRyeV9jdGwgJiBWTV9FTlRSWV9JQTMyRV9NT0RFKQo+IDw8IDEpOwo+
-IAo+IEkgaGF2ZSB0byBhZG1pdCB0aGF0IC0gZGVzcGl0ZSB0aGUgQlVJTERfQlVHX09OKCkgLSBJ
-IGRpc2xpa2UgdGhlCj4gbGl0ZXJhbCAxIGhlcmUsIHdoaWNoIHdvdWxkIGJldHRlciBiZQo+IChf
-RUZFUl9MTUEgLSBfVk1fRU5UUllfSUEzMkVfTU9ERSksIGFsYmVpdCB0aGUgbGF0dGVyIGRvZXNu
-J3QKPiBleGlzdCwgc28gcGVyaGFwcwo+IAo+ICAgICBlZmVyID0gdm1yKEdVRVNUX0VGRVIpIHwg
-KCh2bWVudHJ5X2N0bCAmIFZNX0VOVFJZX0lBMzJFX01PREUpICoKPiAoRUZFUl9MTUEgLyBWTV9F
-TlRSWV9JQTMyRV9NT0RFKSk7Cj4gCj4gb3IgdGhlIHNhbWUgZXhwcmVzc2VkIHRocm91Z2ggTUFT
-S19FWFRSKCkgLyBNQVNLX0lOU1IoKT8gQnV0Cj4gaXQncyB0aGUgVk1YIG1haW50YWluZXJzIHRv
-IGp1ZGdlIGFueXdheS4KPiAKCnVzaW5nIDEgaXMgZmluZSB0byBtZSwgd2l0aCBpbnRlbnRpb24g
-d2VsbCBleHBsYWluZWQgd2l0aCBCVUlMRF9CVUdfT04uCmFzIGxvbmcgYXMgQlVJTERfQlVHX09O
-IGlzIHN0aWxsIGEgdmFsaWQgdXNhZ2UsIEknbSBPSyB3aXRoIGN1cnJlbnQgb25lOgoKQWNrZWQt
-Ynk6IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgoKVGhhbmtzCmtldmluCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============0856147578219828375==
+Content-Type: text/plain
+
+flight 122154 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/122154/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-armhf                     <job status>                 broken
+ build-armhf                   5 host-build-prep          fail REGR. vs. 122005
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-xsm  1 build-check(1)               blocked  n/a
+ build-armhf-libvirt           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt-xsm  13 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-amd64-i386-libvirt      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt     14 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 13 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 14 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 11 migrate-support-check fail never pass
+ test-arm64-arm64-libvirt-qcow2 12 migrate-support-check        fail never pass
+ test-arm64-arm64-libvirt-qcow2 13 saverestore-support-check    fail never pass
+ test-amd64-amd64-libvirt-vhd 12 migrate-support-check        fail   never pass
+
+version targeted for testing:
+ libvirt              3f204e4de401d8263f9d790cd55f1579d959f94f
+baseline version:
+ libvirt              4300a56378cb4401ac2b66be5da985e94a4ca90c
+
+Last test of basis   122005  2018-04-07 03:34:15 Z    3 days
+Testing same since   122154  2018-04-10 04:23:02 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrea Bolognani <abologna@redhat.com>
+  Daniel P. Berrangé <berrange@redhat.com>
+  Erik Skultety <eskultet@redhat.com>
+  Jim Fehlig <jfehlig@suse.com>
+  John Ferlan <jferlan@redhat.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-armhf-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  broken  
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          blocked 
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-armhf-armhf-libvirt-xsm                                 blocked 
+ test-amd64-i386-libvirt-xsm                                  pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-arm64-arm64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     blocked 
+ test-amd64-i386-libvirt                                      pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 pass    
+ test-arm64-arm64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-raw                                 blocked 
+ test-amd64-amd64-libvirt-vhd                                 pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job build-armhf broken
+
+Not pushing.
+
+(No revision log; it would be 306 lines long.)
+
+
+--===============0856147578219828375==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0856147578219828375==--
