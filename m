@@ -1,17 +1,28 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Wed, 11 Apr 2018 08:23:06 +0200
-Message-ID: <20180411062306.GG7177@aepfle.de>
-References: <20180410085729.GA472@aepfle.de> <20180410155949.GB7177@aepfle.de>
- <ebdd4cb871b2d754959e8358641810d61b3d0856.camel@suse.com>
- <20180410190302.GC7177@aepfle.de>
- <42c5d682348a351420290dc1ecf5b1e2a60b98be.camel@suse.com>
- <20180410200958.GD7177@aepfle.de> <20180410201315.GE7177@aepfle.de>
- <CAAWQecsriGDV9g+m2q5Y79477HGOUN4VDCwmt2hxKF6=8A-kpA@mail.gmail.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: Weird altp2m behaviour when switching early to a
+ new view
+Date: Wed, 11 Apr 2018 09:39:37 +0300
+Message-ID: <b21c7573-7ca0-9ccc-eac7-5ff351fc54ce@bitdefender.com>
+References: <a592fcb3-c2c6-bd83-01a4-0ac7ba9f3fa5@bitdefender.com>
+ <d0ae9d3e-31ee-a03b-dc9d-b86ceb92fe52@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3169258705358190429=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAAWQecsriGDV9g+m2q5Y79477HGOUN4VDCwmt2hxKF6=8A-kpA@mail.gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=exhm=ha=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1f69QL-0003xZ-PS
+ for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 06:40:05 +0000
+Received: from mx-sr.buh.bitdefender.com (mx-sr.buh.bitdefender.biz
+ [10.17.80.103])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id CBDDC308629B
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Apr 2018 10:56:05 +0300 (EEST)
+Received: from smtp03.buh.bitdefender.org (smtp.bitdefender.biz [10.17.80.77])
+ by mx-sr.buh.bitdefender.com (Postfix) with ESMTP id 5F01F7FC62
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Apr 2018 09:40:02 +0300 (EEST)
+In-Reply-To: <d0ae9d3e-31ee-a03b-dc9d-b86ceb92fe52@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,68 +31,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>
-Cc: George Dunlap <george.dunlap@citrix.com>, xen-devel <xen-devel@lists.xen.org>
+To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tian,
+ Kevin" <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>, Tim Deegan <tim@xen.org>, Jun Nakajima <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3169258705358190429==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="gm5TwAJMO0F2iVRz"
-Content-Disposition: inline
-
-
---gm5TwAJMO0F2iVRz
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Tue, Apr 10, Dario Faggioli wrote:
-
-> I remember specifically wanting for it to support not only "nodes:", but also
-> "node:", because I thought that, e.g., "nodes:3" would have sound weird to
-> users.
-
-It turned out that I had a typo all the time in my template, it used
-'cpu=' rather than 'cpus='. On this system none of this works:
-#pus="node:${node}"
-cpus="nodes:${node}"
-#pus="nodes:${node},^node:0"
-#pus_soft="nodes:${node},^node:0"
-
-Only 'cpus=node:1' or 'cpus=nodes:1' works, cpus=node:2 or node:3 does
-not. There is room for domUs:
-numa_info              :
-node:    memsize    memfree    distances
-   0:     30720       1912      10,21,21,21
-   1:     28672      22355      21,10,21,21
-   2:     24576      24502      21,21,10,21
-   3:     32768      31760      21,21,21,10
-
-But, that is a separate issue. The BUG triggers without the cpus= knob.
-
-Olaf
-
---gm5TwAJMO0F2iVRz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWs2pxgAKCRBdQqD6ppg2
-fkmQAJ9CUFHV0zRaWeM/xOQWk7WR0YAyzgCgi0z2TU6geqFJz8xK88Nw1nPqFHE=
-=4uAr
------END PGP SIGNATURE-----
-
---gm5TwAJMO0F2iVRz--
-
-
---===============3169258705358190429==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3169258705358190429==--
+T24gMDQvMDkvMjAxOCAwNToxMiBQTSwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiBUaGUgb2J2aW91
+cyBwbGFjZSB0byBsb29rIGlzIHRoZSBsb2dkaXJ0eXZyYW0gZnVuY3Rpb25hbGl0eSwgd2hpY2gg
+aXMKPiB1c2VkIHRvIG1ha2UgaXQgZWFzaWVyIGZvciBRRU1VIHRvIGZpZ3VyZSBvdXQgd2hpY2gg
+Yml0cyBvZiB0aGUgZGlzcGxheQo+IGJ1ZmZlciBoYXZlIGJlZW4gbW9kaWZpZWQuICBPbmUgb2Yg
+dGhlIGJpZyByZWFzb25zIHRoZSBhbHRwMm0KPiBmdW5jdGlvbmFsaXR5IGlzIHN0aWxsIGNvbnNp
+ZGVyZWQgImV4cGVyaW1lbnRhbCIgaXMgdGhhdCB0aGVzZSBzb3J0cyBvZgo+IGludGVyYWN0aW9u
+cyB3ZXJlIG5ldmVyIGNhcmVmdWxseSB0aG91Z2h0IG91dC4KCkdlb3JnZSAoYW5kIEFsZXhleSks
+IHRoYW5rcyBmb3IgdGhlIGhlbHAhCgpJJ3ZlIG1hbmFnZWQgdG8gZmluZCBvdXQgd2h5IHRoaXMg
+aXMgaGFwcGVuaW5nLCB0aG91Z2ggSSBkb24ndCB5ZXQgaGF2ZQphIHNvbHV0aW9uIGZvciBpdC4g
+QWZ0ZXIgbXVjaCBkZWJ1Z2dpbmcsIGl0IHR1cm5zIG91dCB0aGF0IHRoZQoicDJtX2lzX3JhbShw
+Mm10KSIgdGVzdCBpbiBodm1faGFwX25lc3RlZF9wYWdlX2ZhdWx0KCkgZmFpbHMgaWYgSSBzd2l0
+Y2gKdG8gdGhlIG5ldyBhbHRwMm0gdmlldyBmYXN0IGVub3VnaCwgYW5kIHRoYXQgaW4gdHVybiBk
+aXNhYmxlcyB0aGUKbG9nZGlydHkgcHJvY2Vzc2luZyBnYXRlZCBvbiBpdDoKCi8qIFNwdXJpb3Vz
+IGZhdWx0PyBQb0QgYW5kIGxvZy1kaXJ0eSBhbHNvIHRha2UgdGhpcyBwYXRoLiAqLwppZiAoIHAy
+bV9pc19yYW0ocDJtdCkgKQp7CiAgICByYyA9IDE7CiAgICAvKgogICAgICogUGFnZSBsb2cgZGly
+dHkgaXMgYWx3YXlzIGRvbmUgd2l0aCBvcmRlciAwLiBJZiB0aGlzIG1mbiByZXNpZGVzCiAgICAg
+KiBpbiBhIGxhcmdlIHBhZ2UsIHdlIGRvIG5vdCBjaGFuZ2Ugb3RoZXIgcGFnZXMgdHlwZSB3aXRo
+aW4gdGhhdAogICAgICogbGFyZ2UgcGFnZS4KICAgICAqLwogICAgaWYgKCBucGZlYy53cml0ZV9h
+Y2Nlc3MgKQogICAgewogICAgICAgIHBhZ2luZ19tYXJrX3Bmbl9kaXJ0eShjdXJyZCwgX3Bmbihn
+Zm4pKTsKICAgICAgICAvKgogICAgICAgICAqIElmIHAybSBpcyByZWFsbHkgYW4gYWx0cDJtLCB1
+bmxvY2sgaGVyZSB0byBhdm9pZCBsb2NrCiAgICAgICAgICogb3JkZXJpbmcgdmlvbGF0aW9uIHdo
+ZW4gdGhlIGNoYW5nZSBiZWxvdyBpcyBwcm9wYWdhdGVkCiAgICAgICAgICogZnJvbSBob3N0IHAy
+bS4KICAgICAgICAgKi8KICAgICAgICBpZiAoIGFwMm1fYWN0aXZlICkKICAgICAgICAgICAgX19w
+dXRfZ2ZuKHAybSwgZ2ZuKTsKICAgICAgICBwMm1fY2hhbmdlX3R5cGVfb25lKGN1cnJkLCBnZm4s
+IHAybV9yYW1fbG9nZGlydHksIHAybV9yYW1fcncpOwogICAgICAgIF9fcHV0X2dmbihhcDJtX2Fj
+dGl2ZSA/IGhvc3RwMm0gOiBwMm0sIGdmbik7CgogICAgICAgIGdvdG8gb3V0OwogICAgfQogICAg
+Z290byBvdXRfcHV0X2dmbjsKfQoKSSB0aGluayB0aGlzIGlzIGxpa2VseSBiZWNhdXNlIHN3aXRj
+aGluZyB0byB0aGUgbmV3IEVQVCB2aWV3IGxvc2VzCmluZm9ybWF0aW9uIHN0b3JlZCB3aGVuIHBy
+ZXZpb3VzbHkgd29ya2luZyB3aXRoIHRoZSBkZWZhdWx0IG9uZSwgaW4gdGhpcwpjYXNlIHdoaWxl
+IHRoYXQgd29yayBoYXMgbm90IGZpbmlzaGVkIChpZiB0aGF0J3MgdGhlIGNhc2UsIGNyZWF0aW5n
+IGEKbmV3IGFsdHAybSB2aWV3IHNob3VsZCBhbHNvIHNvbWVob3cgaW5oZXJpdCB0aGUgaGlzdG9y
+eSBvZiB2aWV3IDAgLSB3aGVuCmRvaW5nIHNldF9hY2Nlc3MoKSBvbiB2aWV3IDAgdGhlIGNoYW5n
+ZXMgcHJvcGFnYXRlIHRvIGFsbCBleGlzdGVudAphbHRwMm0gdmlld3MsIGJ1dCBJIGRvbid0IHRo
+aW5rIHRoYXQgaGFwcGVucyB3aGVuIGEgbmV3IHZpZXcgaXMgY3JlYXRlZDoKdGhhdCBzdGFydHMg
+d2l0aCBhIGNsZWFuIHNsYXRlKS4KCkFsc28gcmVsYXRlZCB0byB0aGlzIHBhcnQgb2YgdGhlIGFs
+dHAybSBkZXNpZ24sIEkndmUgYWxzbyBub3RpY2VkIHRoYXQKY3JlYXRpbmcgYSBuZXcgRVBUIHZp
+ZXcgd2l0aCBsaWJ4YyBpbnZvbHZlcyB0aGlzIGZ1bmN0aW9uOgoKaW50IHhjX2FsdHAybV9jcmVh
+dGVfdmlldyh4Y19pbnRlcmZhY2UgKmhhbmRsZSwgdWludDMyX3QgZG9taWQsCiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgeGVubWVtX2FjY2Vzc190IGRlZmF1bHRfYWNjZXNzLAogICAgICAgICAg
+ICAgICAgICAgICAgICAgIHVpbnQxNl90ICp2aWV3X2lkKTsKCkhvd2V2ZXIsIGRlZmF1bHRfYWNj
+ZXNzIGlzIGNvbXBsZXRlbHkgaWdub3JlZC4gSWYgdGhpcyB3YXMgbWVhbnQgdG8KcmVzZXQgYWxs
+IHBhZ2VzIHRvIHRoYXQgYWNjZXNzIGl0J3MgdHJpdmlhbCB0byB3aXJlIGl0IGluIGludG8gdGhl
+Cmh5cGVydmlzb3IgKHdlIGNvdWxkIGp1c3QgaXRlcmF0ZSB0aHJvdWdoIGFsbCBndWVzdCBwYWdl
+cyBmcm9tIDAgdG8KbWF4X2dwZm4gYW5kIHNldCB0aGUgYWNjZXNzKSAtIGJ1dCBpbiBsaWdodCBv
+ZiB0aGlzIGlzc3VlIHRoYXQncyBub3QgYQpnb29kIHRoaW5nIHRvIGRvLiBPciwgcmF0aGVyLCBp
+dCB3YXMgbWVhbnQgdG8gc3BlY2lmeSB0aGUgZGVmYXVsdF9hY2Nlc3MKZm9yIG5ldyBwYWdlcyB3
+aGVyZSBpdCBpcyBub3QgZXhwbGljaXRseSBzcGVjaWZpZWQ/CgpFaXRoZXIgd2F5LCB0aGUgYXJn
+dW1lbnQgaXMgbm90IHVzZWQ6CgpjYXNlIEhWTU9QX2FsdHAybV9jcmVhdGVfcDJtOgogICAgaWYg
+KCAhKHJjID0gcDJtX2luaXRfbmV4dF9hbHRwMm0oZCwgJmEudS52aWV3LnZpZXcpKSApCiAgICAg
+ICAgcmMgPSBfX2NvcHlfdG9fZ3Vlc3QoYXJnLCAmYSwgMSkgPyAtRUZBVUxUIDogMDsKICAgIGJy
+ZWFrOwoKVGhhdCdzIHRoZSBwcm9ncmVzcyBzbyBmYXIuCgoKVGhhbmtzLApSYXp2YW4KCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
