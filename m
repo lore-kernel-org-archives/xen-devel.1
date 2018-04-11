@@ -1,7 +1,7 @@
-From: Dario Faggioli <dfaggioli@suse.com>
+From: George Dunlap <george.dunlap@citrix.com>
 Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Wed, 11 Apr 2018 13:00:55 +0200
-Message-ID: <df3133033961e04956c4e56a4509dbf2930cfb7d.camel@suse.com>
+Date: Wed, 11 Apr 2018 12:02:39 +0100
+Message-ID: <672aa7a1-7e0c-4209-4fbd-649cdb983dc5@citrix.com>
 References: <20180410085729.GA472@aepfle.de>
  <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
  <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
@@ -11,11 +11,15 @@ References: <20180410085729.GA472@aepfle.de>
  <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
  <20180410203741.GF7177@aepfle.de>
  <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
- <9c857d1a-d592-8db5-827c-30fbc97477e0@citrix.com>
+ <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
+ <20180411100006.GI7177@aepfle.de>
+ <298ec681a9c38eb7618e6b3e226486691e9eab4d.camel@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4956395313648519396=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <9c857d1a-d592-8db5-827c-30fbc97477e0@citrix.com>
+In-Reply-To: <298ec681a9c38eb7618e6b3e226486691e9eab4d.camel@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,108 +28,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, Olaf Hering <olaf@aepfle.de>
-Cc: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Dario Faggioli <dfaggioli@suse.com>, Olaf Hering <olaf@aepfle.de>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4956395313648519396==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-P8KKCBo0/7PV+avAz8+J"
-
-
---=-P8KKCBo0/7PV+avAz8+J
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2018-04-11 at 11:37 +0100, George Dunlap wrote:
-> On 04/10/2018 11:59 PM, Dario Faggioli wrote:
-> >=20
-> > So, basically, the race is between context_saved() and
-> > vcpu_set_affinity(). Basically, vcpu_set_affinity() sets the
-> > VPF_migrating pause flags on a vcpu in a runqueue, with the intent
-> > of
-> > letting either a vcpu_sleep_nosync() or a reschedule remove it from
-> > there, but context_saved() manage to see the flag, before the
-> > removal
-> > can happen.
-> >=20
-> Yep, that looks correct.  I had considered some sort of race between
-> set_affinity() and context_switch(), but just never noticed that it
-> could omit to take the vcpu off the runqueue.
->=20
-Yeah, it's very subtle. IN fact, when I considered that race, I was
-assuming that, if we are in context_saved() with VPF_migrating set, the
-vcpu can't be in any runqueue, as the scheduler would have seen it was
-not runnable, and not queue it.
-
-I was missing the fact that someone could raise the flag on a vcpu
-which is already in the runqueue, between when the scheduler lock is
-dropped, and this check in context_saved()!
-
-> > TBH, I have actually never fully understood what that comment
-> > really
-> > meant, what the barrier was protecting, and how... e.g., isn't it
-> > missing its paired one? In fact, there's another comment, clearly
-> > related, right in vcpu_set_affinity(). But again I'm a bit at loss
-> > at
-> > properly figuring out what the big idea is.
->=20
-> I think the idea is to make sure that the change to v->is_running
-> happens before whatever happens to come next (i.e., that the compiler
-> doesn't reorder the write as part of its normal optimization
-> activities).  As it happens nothing that comes next looks like it
-> really
-> needs such ordering (particularly as you can't reorder things over a
-> function call, AFAIUI), but it's good to have those in place in case
-> anybody *does* add that sort of thing.
->=20
-Sure, I wasn't planning to remove them. I was curious, and in
-particular, I was curious of whether they were actually meant at trying
-to prevent this (or a similar) race... I'll do a bit of archeology, if
-I find some time.
-
-Thanks and Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-P8KKCBo0/7PV+avAz8+J
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrN6ucACgkQFkJ4iaW4
-c+7Jqw//XLrgTtmMVFbG/MH/ScT6Zid0J1A2kua9UM1Sj8VWoo9yyA0oGieveb6R
-qpfIwDN9AqMAJLI5hVtUixbN+UPnuBCgLc6duO3vyta7g6CmyQCJYYzr0CjwM6xb
-YC10QvW6m7gHksSvPoKs8Wy8CAe2iwnKcHCE3IV54iTLYXTMc3lcnXj2OUYS5FKG
-2sxpITPHEQgiRg3r3W3p2UkeOtqzxE0gOD6aKjIRD0sXTYZmCJmrO7oiO7AZNvnH
-qQsw/T6bFtahkXJ8Up8FM6+9QR1Xx3b1QQHnMjR7ebOBO50OjGIRKObsnUAO7aot
-marOnew+x6vli/Auxa6CM7i02xB4y9I/5XeD1pEonVIIsmCckCZyWCxCoW97OWTu
-5zu1+J42uTBjK4zoF+RWGmsepSra+oF3G/wWCLgLGtFDXCnZkyNlov4Afdfpo+F7
-/R8qoaNlCoQcJOSgnaac3L4AM4tYqRvDjM2fK6G5S2853JWNBIYlhgFCMMgAXhKe
-mePuly+qGICcfJ49nCDaxLTqE5PrbkOnNzMoFHDz14dizP4saaaWN9D299CTJKUJ
-U4PCJ+rfL4pDndrfZf495zhuagByY+zjQm3BGWXJvuA/QVFEGOAWdPemvSg5damc
-XQyJDNzf5yhRACfeeGW0p89wabgufvqi81PBYrpvjtGFpO9FxD8=
-=id4U
------END PGP SIGNATURE-----
-
---=-P8KKCBo0/7PV+avAz8+J--
-
-
-
---===============4956395313648519396==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4956395313648519396==--
+T24gMDQvMTEvMjAxOCAxMToxNyBBTSwgRGFyaW8gRmFnZ2lvbGkgd3JvdGU6Cj4gT24gV2VkLCAy
+MDE4LTA0LTExIGF0IDEyOjAwICswMjAwLCBPbGFmIEhlcmluZyB3cm90ZToKPj4gT24gV2VkLCBB
+cHIgMTEsIERhcmlvIEZhZ2dpb2xpIHdyb3RlOgo+Pgo+Pj4gT2xhZiwgY2FuIHlvdSBnaXZlIGl0
+IGEgdHJ5PyBJdCBzaG91bGQgYmUgZmluZSB0byBydW4gaXQgb24gdG9wIG9mCj4+PiB0aGUKPj4+
+IGxhc3QgZGVidWcgcGF0Y2ggKHRoZSBvbmUgdGhhdCBwcm9kdWNlZCB0aGlzIGNyYXNoKS4KPj4K
+Pj4gWWVzLCB3aXRoIGJvdGggY2hhbmdlcyBpdCBkaWQgPjRrIGl0ZXJhdGlvbnMgYWxyZWFkeS4g
+VGhhbmtzLgo+Pgo+IFRoYXQncyBncmVhdCB0byBoZWFyISA6LUQKPiAKPiBOb3csIEkgdGhpbmsg
+SSdsbCBzdWJtaXQgaXQgYXMgYSBwcm9wZXIgcGF0Y2ggaW4gdGhlIHZhcmlhbnQgdGhhdAo+IEp1
+ZXJnZW4gc3VnZ2VzdGVkLCBhbmQgdGhhdCBJIGFsc28gd2VyZSB0aGlua2luZyB0byB1c2UuCj4g
+Cj4gR2VvcmdlLCBhbnkgb3Bpbmlvbj8gSSdtIGdvaW5nIHNvbWV3aGVyZSBub3cuIElmIEkgZG9u
+J3QgaGVhciBhbnkKPiBwdXNoYmFjaywgSSdsbCBkbyB0aGF0IGFzIHNvb24gYXMgYmFjay4KCkkg
+dGhpbmsgZm9yIHNpbXBsaWNpdHkgLyByZWxpYWJpbGl0eSBvZiBiYWNrcG9ydGluZywgd2Ugc2hv
+dWxkIHN0YXJ0CndpdGggYSBwYXRjaCBsaWtlIHRoZSBvbmUgeW91IGdhdmUgdG8gT2xhZiAoaS5l
+LiwgYWRkaW5nIHRoZSAibWlzc2luZyIKdmNwdV9zbGVlcF9ub3N5bmMoKSkuCgpNb3ZpbmcgZm9y
+d2FyZCB3ZSBzaG91bGQgZGVmaW5pdGVseSBtb3ZlIHRoaW5ncyBhcm91bmQgc28gdGhhdCB0aGVy
+ZSdzCm5vIHJpc2sgb2YgYWNjaWRlbnRhbGx5IGZvcmdldHRpbmcgdG8gdGFrZSB0aGUgdmNwdSBv
+ZmYgdGhlIHJ1bnF1ZXVlLApidXQgdGhlcmUgYXJlIHNvbWUgb3RoZXIgY2hhbmdlcyBpdCBtaWdo
+dCBiZSBuaWNlIHRvIG1ha2UgYXMgd2VsbDsgZm9yCmluc3RhbmNlLCBpdCBsb29rcyBsaWtlIG9u
+IGEgYnVzeSBzeXN0ZW0gdGhlcmUgbWF5IGJlIGEgZmFpciBhbW91bnQgb2YKZHVwbGljYXRlIGNw
+dV9waWNrKCkgY2FsY3VsYXRpb25zOyBpdCB3b3VsZCBiZSBuaWNlIHRvIGF2b2lkIHRoYXQuCgpC
+dXQgdGhvc2UgcHJvYmFibHkgc2hvdWxkbid0IGJlIGRvbmUgZHVyaW5nIHRoZSBmZWF0dXJlIGZy
+ZWV6ZS4KCiAtR2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
