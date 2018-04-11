@@ -1,7 +1,7 @@
 From: Dario Faggioli <dfaggioli@suse.com>
 Subject: Re: crash in csched_load_balance after xl vcpu-pin
 Date: Wed, 11 Apr 2018 12:20:40 +0200
-Message-ID: <c94a6f9e273acae94c833e7465cb7f1e32ea19f6.camel@suse.com>
+Message-ID: <f2b8d7e2f47b8667382ba920c7b34184c910913a.camel@suse.com>
 References: <20180410085729.GA472@aepfle.de> <20180410155949.GB7177@aepfle.de>
  <ebdd4cb871b2d754959e8358641810d61b3d0856.camel@suse.com>
  <20180410190302.GC7177@aepfle.de>
@@ -12,7 +12,7 @@ References: <20180410085729.GA472@aepfle.de> <20180410155949.GB7177@aepfle.de>
  <c730538a94b5de4b83aa76883fa050abd5737b94.camel@suse.com>
  <20180411084829.GH7177@aepfle.de>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4083046370921094608=="
+Content-Type: multipart/mixed; boundary="===============5520327730641070235=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 In-Reply-To: <20180411084829.GH7177@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -28,12 +28,12 @@ Cc: George Dunlap <george.dunlap@citrix.com>, xen-devel <xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============4083046370921094608==
+--===============5520327730641070235==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-2Enl10owWTYQB1229Ozt"
+	protocol="application/pgp-signature"; boundary="=-zRVCMdSrpGoxLc2VvWcR"
 
 
---=-2Enl10owWTYQB1229Ozt
+--=-zRVCMdSrpGoxLc2VvWcR
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -68,33 +68,33 @@ Dario
 -----------------------------------------------------------------
 Dario Faggioli, Ph.D, http://about.me/dario.faggioli
 Software Engineer @ SUSE https://www.suse.com/
---=-2Enl10owWTYQB1229Ozt
+--=-zRVCMdSrpGoxLc2VvWcR
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrN4XgACgkQFkJ4iaW4
-c+6T9hAAgvuMxOAgy9/vvf5/D7ey97yCINJ/wT0ZRa6ZojjTLalpH8olL/4HVbQ7
-4BhEmv/VgUkc4iWF2H1nsQtu3le6bd2hBdcaZACWFK7tg8grISGfwYq+WrjrKZbK
-kzHpkMXn1mCUH/p9s3voPJv86EDVRRltdlq6W5WCpQjQ2CHsUhuaI89InxDDuGJW
-wn87mHaKACp2OWiz6FMYzTv/TM0PcOB0oOx7Ke6V4cRIUcJXtcLTWGLov2QXHLSd
-xVzZAsiCLQAq6dBIf8E58noyMws8+MNxPcGELQHCln+l0mcvdOBZsENwhlDKvDNQ
-yjvsPq0+8I9zAgSwX5tSrgupZ9gvTsu/5nboLRg6SeevhPVIqydAaPn7M5Dgemru
-fFyu/Ux3ImCGIhUeJsAurtlKV8C8/SJGtZSqeTZyejiDkIT4SdnEkCtOWTcnHmDa
-RSGyohiXv3Jdxlx0SFSP/heMWEvwrqPXO2l+yh9/zOSLkDMhJupFP66hWkBtEUK0
-DkhhpeNZElLP48fV2A6n+nCJ0/VWZeuvvAzesZX0CgkELFEkPx8GHtS0W+W1KYS6
-1Yy6DXZx8jYdKJeAqcdbDBdj4CiMC3Njr5ofGjI62UUP9RIorkqXsqVj0YgBFBkQ
-j7DJ2HWbpypHN5cG937c7c4Osuk03qS516YgswvD2k0rgK4F0og=
-=5Pgz
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrN4XkACgkQFkJ4iaW4
+c+6Y0g//ZsfVuUSkqOsUKJgjCsDWZ3bNr1DzL7qQcUeUd7akXnCssPHarLQLwOdi
+lQhQ0hv+K1oXF2ClLAkOOzGjPV8n/7p0G4CvXmVayp00zU+1+umWA6hOfulV1+wC
+OYBJJd9n7uYIffzol/Fj6f3T4evGs1+P2Wr0LrMz8yhXbMPJXx3z7sDX3H7tnoUl
+GBsEV7M4xrNrGwIVP65VrH7Fof78y+4Cbtoe17QiDFWpb8ydXNb0doA3a6Rq3aJI
+VJ+J6Z3KH5VBRYyvXZZEPnC04f6HyDfw0u8ULkMNvC9PcIpkTA9x5tGKcR5ZSC6k
+QbYpZp6mHA4LUa7SHjAoWDVhLbP+tHP4pX6+NE2OSzhFBGPOrxNHEbx9ezxz6Qaa
+DZhDzvuMm0gkT6aYhoRwu7tCXqXmkMmyAM7hCiF9cMMsV6F61evXweod+qAd0ew7
+T91HuBheoGgU8durHvyIwVLdoc7VNeOJjphTMhj6ZBU7TS+x5RJ0A/E2z/llOJm2
+RdixoLWmVn/fHLPNTEWFnfY0AQfoimKS2NZUGIpBEp/BljVu6oUxrxn/VvyEpEiP
+2fZ0D6dsSWoozVY3vgwmfeoeUOCCWrLnC5e5BbujMzEfnKUJKSe9OL9ORohAKdOS
+a2yX7RcSrXzcqTQnhGvkufr5BvLUyXK7Orhn27ep0N23coyDY48=
+=Behn
 -----END PGP SIGNATURE-----
 
---=-2Enl10owWTYQB1229Ozt--
+--=-zRVCMdSrpGoxLc2VvWcR--
 
 
 
---===============4083046370921094608==
+--===============5520327730641070235==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -104,4 +104,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============4083046370921094608==--
+--===============5520327730641070235==--
