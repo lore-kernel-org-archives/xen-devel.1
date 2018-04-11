@@ -1,21 +1,23 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH 3/9] SUPPORT.md: Syntax: Provide a title
- rather than a spurious empty section
-Date: Wed, 11 Apr 2018 16:48:24 +0100
-Message-ID: <23246.11848.140985.140278@mariner.uk.xensource.com>
-References: <1523460939-15013-1-git-send-email-ian.jackson@eu.citrix.com>
- <1523460939-15013-4-git-send-email-ian.jackson@eu.citrix.com>
- <509d0e54-8f3a-69db-4c86-1e6c547642fd@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: crash in csched_load_balance after xl vcpu-pin
+Date: Wed, 11 Apr 2018 17:48:33 +0200
+Message-ID: <20180411174833.5055c04b.olaf@aepfle.de>
+References: <1FC4A4E4-BA31-4B3A-9D3A-7E31CAAC9AE5@citrix.com>
+ <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
+ <95482342-8b80-e295-badf-6b20ad09276f@citrix.com>
+ <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
+ <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
+ <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
+ <20180410203741.GF7177@aepfle.de>
+ <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
+ <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
+ <20180411100006.GI7177@aepfle.de> <20180411150312.GL7177@aepfle.de>
+ <5ACE23DF0200002D03781F6A@prv1-mh.provo.novell.com>
+ <5ACE483302000078001BA5FF@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6069077259884368772=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=97mu=ha=citrix.com=prvs=63276c6f0=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1f6Hz3-00049N-8y
- for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 15:48:29 +0000
-In-Reply-To: <509d0e54-8f3a-69db-4c86-1e6c547642fd@citrix.com>
+In-Reply-To: <5ACE483302000078001BA5FF@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,21 +26,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Lars Kurth <lars.kurth@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>, Jun Nakajima <jun.nakajima@intel.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-R2VvcmdlIER1bmxhcCB3cml0ZXMgKCJSZTogW1BBVENIIDMvOV0gU1VQUE9SVC5tZDogU3ludGF4
-OiBQcm92aWRlIGEgdGl0bGUgcmF0aGVyIHRoYW4gYSBzcHVyaW91cyBlbXB0eSBzZWN0aW9uIik6
-Cj4gT24gMDQvMTEvMjAxOCAwNDozNSBQTSwgSWFuIEphY2tzb24gd3JvdGU6Cj4gPiBJIHRlc3Rl
-ZCBmZWVkaW5nIHRoZSBkb2N1bWVudCB0byBtYXJrZG93bigxKSBvbiBEZWJpYW4gamVzc2llIGFu
-ZCBpdAo+ID4gcmVwcm9kdWNlZCB0aGUgJSBsaW5lIGFzIGlmIGl0IHdlcmUgc2ltcGxlIHRleHQu
-ICBJIGd1ZXNzIG1hbnkgb3RoZXIKPiA+IG1hcmtkb3duIHByb2Nlc3NvcnMgd2lsbCBkbyBzb21l
-dGhpbmcgc2ltaWxhcmx5IHRvbGVyYWJsZS4gIE15Cj4gPiBpbnRlcm5ldCBzZWFyY2hlcyBkaWQg
-bm90IGRpc2NvdmVyIGEgbWFya2Rvd24gcHJvY2Vzc29yIHRoYXQgdXNlZAo+ID4gbGluZXMgc3Rh
-cnRpbmcgd2l0aCAmIGZvciBzb21ldGhpbmcgZWxzZS4KPiAKPiBzLyYvJS8/CgpPb3BzLCB5ZXMu
-Cgo+IEluIGFueSBjYXNlOgo+IAo+IEFja2VkLWJ5OiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVu
-bGFwQGNpdHJpeC5jb20+CgpUaGFua3MsCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+--===============6069077259884368772==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/+A773BR.zEfbeQ5Y4pS9nlp"; protocol="application/pgp-signature"
+
+--Sig_/+A773BR.zEfbeQ5Y4pS9nlp
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 11 Apr 2018 09:38:59 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> And till now I had assumed we've taken care of them with earlier
+> fixes (all 4.7 reports were with old packages, like 4.7.2 based
+> ones). Can you repro this with a debug hypervisor (so we can
+> both trust the stack trace and know whether any earlier
+> assertion would trigger)?
+
+I have seen it only once, with debug=3Dn.
+
+Olaf
+
+--Sig_/+A773BR.zEfbeQ5Y4pS9nlp
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWs4uUQAKCRBdQqD6ppg2
+frjYAJ9KOxMUHVaV7JmLBOioElgz8J1FjACfZqU63+IOjhXWRgN7RuR1Rky6tPs=
+=tCOL
+-----END PGP SIGNATURE-----
+
+--Sig_/+A773BR.zEfbeQ5Y4pS9nlp--
+
+
+--===============6069077259884368772==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6069077259884368772==--
