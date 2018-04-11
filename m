@@ -1,23 +1,15 @@
-From: Artem Mygaiev <artem_mygaiev@epam.com>
-Subject: Re: Xen and safety certification,
- Minutes of the meeting on Apr 4th
-Date: Wed, 11 Apr 2018 19:19:25 +0300
-Message-ID: <52b7c124-3094-ae28-d3bc-16cdb60d6b5a@epam.com>
-References: <5D69D457-6EAB-4FF9-AF94-3D818F9035EC@citrix.com>
- <4d359a64b6bc43b9a489a0754c4b4ae8@dornerworks.com>
- <999c02cc-31b1-c404-7f88-84789c0d84b0@epam.com>
- <alpine.DEB.2.10.1804061323500.6016@sstabellini-ThinkPad-X260>
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
+Subject: Re: [PATCH 0/7] xen/arm: CPU hotplug fixes
+Date: Wed, 11 Apr 2018 18:37:52 +0200
+Message-ID: <CAKPH-Ng+4QM+06msM1cxJpQ5uRvsRWc6Y1mhotPXRdF4nvh0aA@mail.gmail.com>
+References: <20180411131927.27083-1-mirela.simonovic@aggios.com>
+ <d43d06af-a981-3156-bf3b-0d79d219dae1@arm.com>
+ <61809e61-d4be-9000-2d5c-2e8b7770d525@aggios.com>
+ <ac3d0857-0313-7f83-fa6e-c926636ec7d5@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8754947827285500206=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wy2p=ha=epam.com=artem_mygaiev@srs-us1.protection.inumbo.net>)
- id 1f6ITG-0007Q6-Ce
- for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 16:19:43 +0000
-In-Reply-To: <alpine.DEB.2.10.1804061323500.6016@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+In-Reply-To: <ac3d0857-0313-7f83-fa6e-c926636ec7d5@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,80 +18,241 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Lars Kurth <lars.kurth@citrix.com>, "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "paul_luperto@prqa.com" <paul_luperto@prqa.com>, Denys Balatsko <denys.balatsko@globallogic.com>, Rich Persaud <persaur@gmail.com>, Jonathan Daugherty <jtd@galois.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, "julien.grall@arm.com" <julien.grall@arm.com>, "committers@xenproject.org" <committers@xenproject.org>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, Jarvis Roach <Jarvis.Roach@dornerworks.com>
+To: Julien Grall <julien.grall@arm.com>
+Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgU3RlZmFubwoKT24gMDYuMDQuMTggMjM6NDcsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToK
-PiBPbiBGcmksIDYgQXByIDIwMTgsIEFydGVtIE15Z2FpZXYgd3JvdGU6Cj4+Pj4+IDIpIENyZWF0
-ZSBhIHN1YnNldCBvZiBmdW5jdGlvbnMgdGhhdCBuZWVkIHRvIGdvIHRocm91Z2ggY2VydGlmaWNh
-dGlvbnMKPj4+Pj4gTmV4dCBzdGVwOiBjcmVhdGUgYSBzbWFsbCBLY29uZmlnLiBXZSBjb3VsZCB1
-c2UgdGhlIFJlbmVzYXMgUmNhciBhcwo+Pj4+PiByZWZlcmVuY2UuIFdlIG5lZWQgYSBkaXNjdXNz
-aW9uIGFib3V0IHRoZSBmZWF0dXJlcyB3ZSBuZWVkLCBmb3IKPj4+Pj4gZXhhbXBsZSByZWFsLXRp
-bWUgc2NoZWR1bGVycywgZG8gd2UgbmVlZCB0aGVtIG9yIG5vdD8KPj4+Pgo+Pj4KPj4+IElkZW50
-aWZ5aW5nIHRoaXMgc3Vic2V0IGlzIHZlcnkgaW1wb3J0YW50LiBNeSByZWNvbW1lbmRhdGlvbiB3
-b3VsZCBiZSB0bwo+Pj4gaWRlbnRpZnkgdGhlIHZlcnkgc21hbGxlc3Qgc3Vic2V0IHRvIHN0YXJ0
-IHdpdGggdGhhdCBzdXBwb3J0cyBhIHNpbmdsZSwgaGlnaAo+Pj4gdmFsdWUgdXNlIGNhc2UsIHdo
-aWNoIEkgd291bGQgc3VnZ2VzdCBpcyBjb25zb2xpZGF0aW9uIG9mIExpbnV4IGFuZAo+Pj4gcmVh
-bC10aW1lIGFwcGxpY2F0aW9ucyB3aXRoIG1peGVkIGNyaXRpY2FsaXR5LCBidXQgbm90IG5lY2Vz
-c2FyaWx5IHNoYXJlZC9QVgo+Pj4gSS9PLCBvbnRvIGEgc2luZ2xlIHByb2Nlc3NpbmcgY2x1c3Rl
-ci4gSWRlbnRpZnlpbmcgdGhlIGhpZ2hlc3QgcmVhc29uYWJsZQo+Pj4gc2FmZXR5IGNyaXRpY2Fs
-aXR5IHRvIHN1cHBvcnQgd291bGQgYWxzbyBiZSB2ZXJ5IGhlbHBmdWwuCj4+Pgo+Pgo+PiBVbmZv
-cnR1bmF0ZWx5IGluIG1peGVkIGNyaXRpY2FsaXR5IHN5c3RlbXMgKGF0IGxlYXN0IGluIGF1dG9t
-b3RpdmUpIHdlIHNlZSBhCj4+IGxvdCBvZiBhdHRlbnRpb24gdG8gcGVyZm9ybWFuY2UgYW5kICwg
-c28gcHJvY2Vzc2luZyBjbHVzdGVyIHBhcnRpdGlvbmluZyBtYXkKPj4gbm90IGJlIHdlbGwgYWNj
-ZXB0ZWQgaW4gdGhlIGluZHVzdHJ5Cj4gCj4gU29ycnksIEkgZGlkbid0IHF1aXRlIHVuZGVyc3Rh
-bmQgeW91ciBjb21tZW50LiBBcmUgeW91IHNheWluZyB0aGF0Cj4gc3RhdGljYWxseSBwYXJ0aXRp
-b25pbmcgYSBjbHVzdGVyIGludG8gVk1zLCBmb3IgZXhhbXBsZSB3aXRoCj4gdmNwdS1waW5uaW5n
-IG9yIHRoZSBudWxsIHNjaGVkdWxlciwgaW4gYSB3YXkgdG8gaGF2ZSBhIHRvdGFsIG51bWJlciBv
-Zgo+IHZjcHVzIGVxdWFsIHRvIHRoZSB0b3RhbCBudW1iZXIgb2YgcGNwdXMsIGlzIG5vdCBhY2Nl
-cHRhYmxlIGJlY2F1c2UgaXQKPiBsZWFkcyB0byBsb3dlciBoYXJkd2FyZSB1dGlsaXphdGlvbj8g
-V2UgbmVlZCBucl92Y3B1cyA+IG5yX3BjcHVzPwo+IApZZXAuIEluIG90aGVyIHdvcmRzLCBPRU1z
-IHdhbnQgdG8gdXNlIGFzIG11Y2ggYXMgcG9zc2libGUgb2YgSFcgdGhleSBoYXZlLgo+IAo+Pj4g
-QXQgdGhlIFhlbiBsZXZlbCwgeW91IG1pZ2h0IGdldCBhd2F5IHdpdGgganVzdCB0aGUgbnVsbCBz
-Y2hlZHVsZXIgaWYgVk1zIGFyZQo+Pj4gcGlubmVkIHRvIHRoZWlyIG93biBjb3JlcyAoYW5kIGpp
-dHRlciBjYXVzZWQgYnkgY29udGVudGlvbiBvbiB0aGUgYnVzIGFuZCBpbgo+Pj4gdGhlIGNhY2hl
-IGlzIGFjY2VwdGFibGUpLiBIb3dldmVyLCB0byBkbyBDQVNULTMyYSB0eXBlIHNjaGVkdWxpbmcK
-Pj4+IChlZmZlY3RpdmVseSB0aW1lIHNsaWNpbmcgdGhlIFNvQyBiZXR3ZWVuIHlvdXIgVk1zKSwg
-YW4gdXBkYXRlZCBBUklOQy02NTMKPj4+IHNjaGVkdWxlciB3b3VsZCBiZSBuZWVkZWQuCj4+Pgo+
-Pgo+PiBXZSBhcmUgbm93IGxvb2tpbmcgaW50byBSVERTIGFzIGEgcG9zc2libGUgc29sdXRpb24g
-Zm9yIGluZHVzdHJpYWwgb3IKPj4gYXV0b21vdGl2ZSBkb21haW5zLiBBbHNvICwgZnJvbSBvdXIg
-ZXhwZXJpZW5jZSBidXMvY2FjaGUgY29udGVudGlvbiBpbiBzeXN0ZW1zCj4+IHdpdGggaGlnaCBs
-b2FkIGlzIGFjdHVhbGx5IGFuIGlzc3VlLi4uIExvb2tpbmcgaW50byB0aGF0LCB0b28KPiAKPiBC
-dXMvY2FjaGUgY29udGVudGlvbiBpcyB3aGVyZSBpc3N1ZXMgY2FuIGJlY29tZSB2ZXJ5IGJvYXJk
-IHNwZWNpZmljLiBJdAo+IGlzIGFsc28gd2h5IHdlJ2xsIG5lZWQgdG8gbmFycm93IGRvd24gYSBz
-bWFsbCBzZXQgb2YgYm9hcmRzIGluaXRpYWxseS4KPiAKV2UnZCBsaWtlIHRvIGRvIGEgYml0IG1v
-cmUgYW5hbHlzaXMgYmVmb3JlIGRlY2lkaW5nLi4uIEkgYW0gbm90IHZlcnkgCmNvbnZpbmNlZCB3
-aXRoIG51bWJlcnMgeWV0LgoKPj4+IFNpbmNlIEkgZG8gbm90IHRoaW5rIHRoYXQgYSBwcmV2aW91
-c2x5IGNlcnRpZmllZCBPUyB3aWxsIGJlIGF2YWlsYWJsZSBmb3IKPj4+IGZyZWUsIEkgc2VlIDMg
-Z2VuZXJhbCBhcHByb2FjaGVzIHdydCBkb20wOgo+Pj4gMSkgRmluZCBhbmQgY2VydGlmeSBhbiBv
-cGVuIHNvdXJjZSBPUy4gTXkgZ3Vlc3MgaXMgdGhpcyB3aWxsIG5vdCBiZSBMaW51eAo+Pj4gZHVl
-IHRvIGNvZGUgYmFzZSBzaXplLiBQT1NJWCBzdXBwb3J0IGEgcGx1cy4KPj4+IDIpIFVzZSBhIGNv
-bW1lcmNpYWxseSBhdmFpbGFibGUsIHByZXZpb3VzbHkgY2VydGlmaWVkIE9TIGZvciBkb20wLiBE
-VyBwb3J0ZWQKPj4+IFZ4V29ya3MgdG8gcnVuIG9uIFhlbiBpbiAyMDE3IGFuZCB1Yy9PUy1JSUkg
-aW4gMjAxNi4KPj4+IDMpIEdvIHdpdGggYSBkb20wLWxlc3Mgc29sdXRpb247IGJvb3Rsb2FkZXIg
-c3RhcnRzIHVwIHRoZSBuZWNlc3NhcnkgVk1zCj4+PiBiYXNlZCBvbiBhIHN0YXRpYyBjb25maWd1
-cmF0aW9uLgo+Pj4KPj4+IFRoZSBYTCB0b29sc3RhY2sgaW4gaXRzIGN1cnJlbnQgZm9ybSB3aWxs
-IGxpa2VseSBjYXVzZSBjZXJ0IGlzc3VlcyBhbmQgd2lsbAo+Pj4gcHJvYmFibHkgbmVlZCB0byBi
-ZSBzdHJpcHBlZCBkb3duIGFuZC9vciByZXdyaXR0ZW4uCj4+PiBCb290bG9hZGVyIChVLUJvb3Qs
-IEdSVUIsIG9yIHdoYXRldmVyKSB3aWxsIGFsc28gbmVlZCB0byBiZSBjZXJ0aWZpZWQuCj4+Pgo+
-Pgo+PiBXZSdkIGxpa2UgdG8gZXhwbG9yZSBib3RoIEZyZWVSVE9TIGluIGRvbTAgYW5kIGRvbTAt
-bGVzcyBvcHRpb25zLiBJIHRoaW5rCj4+IHRoZXJlIHdlcmUgc29tZSBwYXRjaGVzIHdoaWxlIGFn
-byBmb3IgZG9tMC1sZXNzIHhlbi4KPiAKPiAiRG9tMC1sZXNzIiBpcyBhIGdyZWF0IG5hbWUgYWN0
-dWFsbHkgOi0pCj4gCj4gVXAgdW50aWwgbm93LCB3ZSBkaXNjdXNzZWQgdGhpcyB0b3BpYyB1bmRl
-ciB0aGUgbmFtZSBvZiAiY3JlYXRlIG11bHRpcGxlCj4gZ3Vlc3RzIGZyb20gZGV2aWNlIHRyZWUi
-LiBUaGVyZSBhcmUgbm8gcGF0Y2hlcyAoYXMgZmFyIGFzIEkga25vdyksIGJ1dAo+IGl0IHdhcyBz
-dWJtaXR0ZWQgYXMgdGhlIFhlbiBvbiBBUk0gcHJvamVjdCBmb3IgT3V0cmVhY2h5IHRoaXMgeWVh
-ci4KPiBUaGVyZSBhcmUgcGF0Y2hlcyBmb3IgYSBkaWZmZXJlbnQgcHJvamVjdCB0byBzZXR1cCBz
-aGFyZWQgbWVtb3J5IHJlZ2lvbnMKPiBmcm9tIHRoZSB4bCBjb25maWcgZmlsZSAobm8gbmVlZCBm
-b3IgZ3JhbnQgdGFibGUgb3IgeGVuYnVzIHN1cHBvcnQpLgo+IApEbyB5b3UgaGF2ZSBhbnlvbmUg
-aW50ZXJlc3RlZCBpbiB0YWtpbmcgdGhpcyB0YXNrPwoKPiAKPj4gV2UgcGxhbiB0byBhbmFseXpl
-IGVmZm9ydHMgdG8gcG9ydCBGcmVlUlRPUyBhcyBkb20wIE9TCj4gCj4gR3JlYXQhIEkgdGhpbmsg
-aXQgbWFrZXMgc2Vuc2UgdG8gc3RhcnQgZnJvbSB0aGF0LiBJIHdyb3RlICJBcnRlbSIgZG93bgo+
-IGluIHRoZSB3aWtpcGFnZQo+IChodHRwczovL3dpa2kueGVucHJvamVjdC5vcmcvd2lraS9TYWZl
-dHlfQ2VydGlmaWNhdGlvbl9DaGFsbGVuZ2VzKSBhcwo+IHRoZSByZWZlcmVuY2UgY29udGFjdCBm
-b3IgdGhlIGRvbTAgc3R1ZmYuIEtlZXAgdXMgaW4gdGhlIGxvb3AgYXMgSnVsaWVuCj4gYW5kIEkg
-YXJlIHZlcnkgaW50ZXJlc3RlZCBpbiBpdC4KPiAKU3VyZSEKCiAgLS0gQXJ0ZW0KCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============8754947827285500206==
+Content-Type: multipart/alternative; boundary="001a114abe80b0253f056995422a"
+
+--001a114abe80b0253f056995422a
+Content-Type: text/plain; charset="UTF-8"
+
+Hi Julien,
+
+On Wed, Apr 11, 2018 at 6:02 PM, Julien Grall <julien.grall@arm.com> wrote:
+
+> Hi,
+>
+> On 11/04/18 16:58, Mirela Simonovic wrote:
+>
+>> On 04/11/2018 05:07 PM, Julien Grall wrote:
+>>
+>>> On 11/04/18 14:19, Mirela Simonovic wrote:
+>>>
+>> Migrating interrupts when turning off a CPU already works. However, when
+>> a CPU is turned back on there is no interrupt migration back to the
+>> hotplugged CPU - all interrupts will remain routed to the CPU#0.
+>> Patch 7/7 fixes this
+>>
+>
+> What do you mean by all interrupts? Interrupts routed to guest will always
+> follow the vCPU. So are you sure they are going to be migrated when that
+> vCPU is paused/off?
+>
+>
+Just to make sure we're on the same page - this is about hotplugging
+physical CPUs. Hotplugging vCPUs using virtual PSCI CPU_OFF interface is
+already implemented and unrelated to this series.
+
+Assuming that system has 2 pCPUs by 'all interrupts' I mean interrupts that
+were targeted to the pCPU#0 and pCPU#1 prior to doing any hotplug.
+
+For example, if a guest is pinned to pCPU#1 an interrupt of a device it
+owns will be targeted to pCPU#1.
+When pCPU#1 is turned off that interrupt will be migrated to pCPU#0. pCPU#0
+finalizes the suspend and receives wake-up interrupts. However, when CPU#1
+is turned back on that interrupt will remain targeted to the CPU#0, which I
+assumed is wrong.
+The scenario described here is also how I tested this.
+
+
+
+> Can you give the path in Xen doing that?
+>
+>
+Sure, here is a backtrace (dumped on the CPU being turned off):
+
+    0  0x2603dc arch_move_irqs(): vgic.c, line 309
+    1  0x22ee58 sched_move_irqs()+20: schedule.c, line 303
+    2  0x2318e8 cpu_disable_scheduler()+1000: schedule.c, line 586
+    3  0x2318e8 cpu_disable_scheduler()+1000: schedule.c, line 586
+    4  0x25aff8 __cpu_disable()+96: smpboot.c, line 386
+    5  0x201608 take_cpu_down()+52: cpu.c, line 75
+    6  0x23426c stopmachine_action()+188: stop_machine.c, line 159
+    7  0x235858 do_tasklet_work()+176: tasklet.c, line 94
+    8  0x235c80 do_tasklet()+104: tasklet.c, line 126
+    9  0x24daec idle_loop()+144: domain.c, line 72
+   10  0x25b1f8 start_secondary()+404: smpboot.c, line 368
+
+
+
+>
+>>
+>>>> Calls to enable/disable_nonboot_cpus() functions currently don't exist
+>>>> in
+>>>> Xen ARM code. This will be added with the suspend to RAM support for
+>>>> ARM.
+>>>>
+>>>
+>>> What would be the way to test that series?
+>>>
+>>>
+>> I tested/developed the series on Xilinx Zynq UltraScale+ MPSoC (ZCU102
+>> board), but how would others test that - I don't know. We will have to ask
+>> Xilinx for detailed answer to this question.
+>>
+>
+> I am not sure to understand your answer. What I asked, is how did you did
+> turned off the CPU? Did you hack Xen or do you rely on another series?
+>
+>
+I rely on the suspend to RAM series that will be submitted after this one
+is done. Not complete suspend to RAM support is needed in order to do the
+testing.
+Essentially, I have triggered suspend to RAM from Dom0 and the minimum in
+Xen is to have the suspend support for secondary CPUs (calls to
+disable/enable_nonboot_cpus).
+
+
+> If the former, it would be nice to get the code you used. If the latter,
+> then having a hack patch to test that code would be nice. Ideally, you want
+> to plug that in the SYSCTL interface for out-of-box testing.
+>
+>
+Ok, I have never used that but I'll try to figure it out. I may come up
+with additional questions.
+
+Thanks,
+Mirela
+
+
+
+> Cheers,
+>
+> --
+> Julien Grall
+>
+
+--001a114abe80b0253f056995422a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi Julien,<div class=3D"gmail_extra"><br><div class=3D"gma=
+il_quote">On Wed, Apr 11, 2018 at 6:02 PM, Julien Grall <span dir=3D"ltr">&=
+lt;<a href=3D"mailto:julien.grall@arm.com" target=3D"_blank">julien.grall@a=
+rm.com</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"=
+margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
+t:1ex">Hi,<span class=3D"gmail-"><br>
+<br>
+On 11/04/18 16:58, Mirela Simonovic wrote:<br>
+</span><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
+border-left:1px solid rgb(204,204,204);padding-left:1ex"><span class=3D"gma=
+il-">
+On 04/11/2018 05:07 PM, Julien Grall wrote:<br>
+</span><span class=3D"gmail-"><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
+1ex">
+On 11/04/18 14:19, Mirela Simonovic wrote:<br>
+</blockquote></span><span class=3D"gmail-">
+Migrating interrupts when turning off a CPU already works. However, when a =
+CPU is turned back on there is no interrupt migration back to the hotplugge=
+d CPU - all interrupts will remain routed to the CPU#0.<br>
+Patch 7/7 fixes this<br>
+</span></blockquote>
+<br>
+What do you mean by all interrupts? Interrupts routed to guest will always =
+follow the vCPU. So are you sure they are going to be migrated when that vC=
+PU is paused/off?<br>
+<br></blockquote><div><br></div><div>Just to make sure we&#39;re on the sam=
+e page - this is about hotplugging physical CPUs. Hotplugging vCPUs using v=
+irtual PSCI CPU_OFF interface is already implemented and unrelated to this =
+series.</div><div><br></div><div>Assuming that system has 2 pCPUs by &#39;a=
+ll interrupts&#39; I mean interrupts that were targeted to the pCPU#0 and p=
+CPU#1 prior to doing any hotplug.</div><div><br></div><div>For example, if =
+a guest is pinned to pCPU#1 an interrupt of a device it owns will be target=
+ed to pCPU#1.</div><div>When pCPU#1 is turned off that interrupt will be mi=
+grated to pCPU#0. pCPU#0 finalizes the suspend and receives wake-up interru=
+pts. However, when CPU#1 is turned back on that interrupt will remain targe=
+ted to the CPU#0, which I assumed is wrong.</div><div>The scenario describe=
+d here is also how I tested this.</div><div><br></div><div>=C2=A0</div><blo=
+ckquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left=
+:1px solid rgb(204,204,204);padding-left:1ex">
+Can you give the path in Xen doing that?<span class=3D"gmail-"><br>
+<br></span></blockquote><div><br></div><div>Sure, here is a backtrace (dump=
+ed on the CPU being turned off):</div><div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0=C2=A0</div><div>=C2=A0 =C2=A0 0=C2=A0 0x2603dc arch_move_irqs(): vg=
+ic.c, line 309</div><div>=C2=A0 =C2=A0 1=C2=A0 0x22ee58 sched_move_irqs()+2=
+0: schedule.c, line 303</div><div>=C2=A0 =C2=A0 2=C2=A0 0x2318e8 cpu_disabl=
+e_scheduler()+1000: schedule.c, line 586</div><div>=C2=A0 =C2=A0 3=C2=A0 0x=
+2318e8 cpu_disable_scheduler()+1000: schedule.c, line 586</div><div>=C2=A0 =
+=C2=A0 4=C2=A0 0x25aff8 __cpu_disable()+96: smpboot.c, line 386</div><div>=
+=C2=A0 =C2=A0 5=C2=A0 0x201608 take_cpu_down()+52: cpu.c, line 75</div><div=
+>=C2=A0 =C2=A0 6=C2=A0 0x23426c stopmachine_action()+188: stop_machine.c, l=
+ine 159</div><div>=C2=A0 =C2=A0 7=C2=A0 0x235858 do_tasklet_work()+176: tas=
+klet.c, line 94</div><div>=C2=A0 =C2=A0 8=C2=A0 0x235c80 do_tasklet()+104: =
+tasklet.c, line 126</div><div>=C2=A0 =C2=A0 9=C2=A0 0x24daec idle_loop()+14=
+4: domain.c, line 72</div><div>=C2=A0 =C2=A010=C2=A0 0x25b1f8 start_seconda=
+ry()+404: smpboot.c, line 368</div></div><div><br></div><div>=C2=A0<br></di=
+v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
+r-left:1px solid rgb(204,204,204);padding-left:1ex"><span class=3D"gmail-">
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left:1px solid rgb(204,204,204);padding-left:1ex"><blockquote class=3D"gmai=
+l_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,20=
+4,204);padding-left:1ex">
+<br>
+Calls to enable/disable_nonboot_cpus() functions currently don&#39;t exist =
+in<br>
+Xen ARM code. This will be added with the suspend to RAM support for ARM.<b=
+r>
+</blockquote>
+<br>
+What would be the way to test that series?<br>
+<br>
+</blockquote>
+<br>
+I tested/developed the series on Xilinx Zynq UltraScale+ MPSoC (ZCU102 boar=
+d), but how would others test that - I don&#39;t know. We will have to ask =
+Xilinx for detailed answer to this question.<br>
+</blockquote>
+<br></span>
+I am not sure to understand your answer. What I asked, is how did you did t=
+urned off the CPU? Did you hack Xen or do you rely on another series?<br>
+<br></blockquote><div><br></div><div>I rely on the suspend to RAM series th=
+at will be submitted after this one is done. Not complete suspend to RAM su=
+pport is needed in order to do the testing.</div><div>Essentially, I have t=
+riggered suspend to RAM from Dom0 and the minimum in Xen is to have the sus=
+pend support for secondary CPUs (calls to disable/enable_nonboot_cpus).</di=
+v><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
+x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+If the former, it would be nice to get the code you used. If the latter, th=
+en having a hack patch to test that code would be nice. Ideally, you want t=
+o plug that in the SYSCTL interface for out-of-box testing.<br>
+<br></blockquote><div><br></div><div>Ok, I have never used that but I&#39;l=
+l try to figure it out. I may come up with additional questions.</div><div>=
+<br></div><div>Thanks,</div><div>Mirela</div><div><br></div><div>=C2=A0</di=
+v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
+r-left:1px solid rgb(204,204,204);padding-left:1ex">
+Cheers,<span class=3D"gmail-HOEnZb"><font color=3D"#888888"><br>
+<br>
+-- <br>
+Julien Grall<br>
+</font></span></blockquote></div><br></div></div>
+
+--001a114abe80b0253f056995422a--
+
+
+--===============8754947827285500206==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8754947827285500206==--
