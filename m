@@ -1,20 +1,25 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: crash in csched_load_balance after xl vcpu-pin
-Date: Wed, 11 Apr 2018 17:27:45 +0200
-Message-ID: <20180411152745.GM7177@aepfle.de>
-References: <fb3c729d6f2f98e8663287fcd4746bd2c11994e1.camel@suse.com>
- <95482342-8b80-e295-badf-6b20ad09276f@citrix.com>
- <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
- <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
- <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
- <20180410203741.GF7177@aepfle.de>
- <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
- <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
- <20180411100006.GI7177@aepfle.de> <20180411150312.GL7177@aepfle.de>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: Resume from suspend to RAM broken when using early
+ microcode updates
+Date: Wed, 11 Apr 2018 09:32:30 -0600
+Message-ID: <5ACE46AE02000078001BA5DB@prv1-mh.provo.novell.com>
+References: <c91218e2-d793-4e1d-343f-c4a566e66b47@invisiblethingslab.com>
+ <6fbc10ea-d222-94e0-0a60-76cbc6ba1ab2@citrix.com>
+ <d8da2a1f-b2e8-f8c3-4e33-bc84ac0cc7d4@invisiblethingslab.com>
+ <f587c412-68a7-4f19-c52a-1bb0c3c1a54f@citrix.com>
+ <20180411144948.GA4556@char.us.oracle.com>
+ <3c086ec2-a960-ec2f-bbc4-ce19a4aad6ea@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0386628642463460656=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180411150312.GL7177@aepfle.de>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=mmvf=ha=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1f6Hjf-0001cN-TH
+ for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 15:32:35 +0000
+In-Reply-To: <3c086ec2-a960-ec2f-bbc4-ce19a4aad6ea@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,101 +28,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0386628642463460656==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="K4LMwn8CgX2KMboP"
-Content-Disposition: inline
-
-
---K4LMwn8CgX2KMboP
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Wed, Apr 11, Olaf Hering wrote:
-
-> On Wed, Apr 11, Olaf Hering wrote:
-> > On Wed, Apr 11, Dario Faggioli wrote:
-> > > Olaf, can you give it a try? It should be fine to run it on top of the
-> > > last debug patch (the one that produced this crash).
-> > Yes, with both changes it did >4k iterations already. Thanks.
-> That was with sched=credit2, sorry for that.
-> Now with just that second patch ...
-
-Still BUG in csched_load_balance.
-
-(XEN) Xen BUG at sched_credit.c:1694
-(XEN) ----[ Xen-4.11.20180410T125709.50f8ba84a5-6.bug1087289_411  x86_64  debug=y   Not tainted ]----
-(XEN) CPU:    135
-(XEN) RIP:    e008:[<ffff82d08022ae34>] sched_credit.c#csched_schedule+0x44a/0xd42
-(XEN) RFLAGS: 0000000000010006   CONTEXT: hypervisor
-(XEN) rax: ffff83077ffe76d0   rbx: ffff830779c26da0   rcx: ffff8309d55ff290
-(XEN) rdx: ffff83007ba44000   rsi: 0000000000000087   rdi: ffff8309d55ff290
-(XEN) rbp: ffff831c3f77fdf0   rsp: ffff831c3f77fcf0   r8:  ffff8309d55ff290
-(XEN) r9:  0000000000000010   r10: 0000000000000001   r11: 0000ffff0000ffff
-(XEN) r12: ffff830779c26e00   r13: 000002effe563d4d   r14: 000002effe56f067
-(XEN) r15: 0000000000000087   cr0: 000000008005003b   cr4: 00000000001526e0
-(XEN) cr3: 00000015a5932000   cr2: 00007f889333f000
-(XEN) fsb: 0000000000000000   gsb: 0000000000000000   gss: 0000000000000000
-(XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: 0000   cs: e008
-(XEN) Xen code around <ffff82d08022ae34> (sched_credit.c#csched_schedule+0x44a/0xd42):
-(XEN)  8b 51 28 3b 72 04 74 02 <0f> 0b 48 8d 15 43 d9 5d 00 48 85 c0 74 04 48 8b
-(XEN) Xen stack trace from rsp=ffff831c3f77fcf0:
-(XEN)    ffff830890972000 000000033f77fd28 ffff830779c1a188 ffff830779c1a188
-(XEN)    000002effe56f067 0000000000000087 ffff83007ba44000 ffff831c3f77fda8
-(XEN)    0000000001c9c380 ffff831c3f77fe38 ffff82d08095f0e0 ffff82d08095f100
-(XEN)    ffff83077a6c59e0 ffff83007ba44000 0000008700000000 ffff8309d55ff290
-(XEN)    0000000000000000 0000000000000000 0000000000000086 ffff82d000000087
-(XEN)    ffff830060aff000 ffff830779c1a1a0 ffff831c3f77fdf0 0000000000000046
-(XEN)    ffff830890972000 ffff830779c1a1c8 0000000000000082 ffff830060aff000
-(XEN)    ffff82d08095f100 ffff830779c1a188 000002effe56f067 0000000000000087
-(XEN)    ffff831c3f77fe80 ffff82d080236406 ffff830779c1a188 ffff830779c1a1a0
-(XEN)    0000008700000001 ffff830779c1a180 ffff82d0802368f3 ffff82d08031f3c1
-(XEN)    ffff830779c1a1a0 0000008700972000 ffff830779c1a180 ffff831c3f77fe68
-(XEN)    ffff82d0802f8f83 ffff82d080937f80 ffff82d080933c00 ffffffffffffffff
-(XEN)    ffff831c3f77ffff ffff830890972000 ffff831c3f77feb0 ffff82d080239ec5
-(XEN)    0000000000000087 ffff82d080933c00 ffff82d08095f1f0 ffff831c3f77ffff
-(XEN)    ffff831c3f77fec0 ffff82d080239f1a ffff831c3f77fef0 ffff82d0802738f0
-(XEN)    ffff830060aff000 ffff83007ba44000 ffff83077a6c4000 0000000000000087
-(XEN)    ffff831c3f77fdc8 ffffffff81c00000 ffffffff81c00000 ffffffff81c00000
-(XEN)    0000000000000000 0000000000000000 ffffffff81d4c180 0000000000000005
-(XEN)    0000000000000000 ffff88011da42660 0000000000000000 ffffffff81020e50
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN) Xen call trace:
-(XEN)    [<ffff82d08022ae34>] sched_credit.c#csched_schedule+0x44a/0xd42
-(XEN)    [<ffff82d080236406>] schedule.c#schedule+0x107/0x627
-(XEN)    [<ffff82d080239ec5>] softirq.c#__do_softirq+0x85/0x90
-(XEN)    [<ffff82d080239f1a>] do_softirq+0x13/0x15
-(XEN)    [<ffff82d0802738f0>] domain.c#idle_loop+0xac/0xbe
-
-
-Olaf
-
---K4LMwn8CgX2KMboP
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWs4pbgAKCRBdQqD6ppg2
-fnqGAKCie1bOSVZ+QyHN4MBqERqe0VDnugCfQiZLroy4DqAUOxLVVCofD0Fz108=
-=faMT
------END PGP SIGNATURE-----
-
---K4LMwn8CgX2KMboP--
-
-
---===============0386628642463460656==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0386628642463460656==--
+Pj4+IE9uIDExLjA0LjE4IGF0IDE3OjA1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMTEvMDQvMTggMTU6NDksIEtvbnJhZCBSemVzenV0ZWsgV2lsayB3cm90ZToKPj4g
+T24gV2VkLCBBcHIgMTEsIDIwMTggYXQgMDE6MTI6NTFQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPj4+IE9uIDExLzA0LzE4IDEzOjAxLCBTaW1vbiBHYWlzZXIgd3JvdGU6Cj4+Pj4gQW5k
+cmV3IENvb3BlcjoKPj4+Pj4gT24gMTEvMDQvMTggMTI6NDgsIFNpbW9uIEdhaXNlciB3cm90ZToK
+Pj4+Pj4+IEhpLAo+Pj4+Pj4KPj4+Pj4+IHdoZW4gSSB1c2UgZWFybHkgbWljcm9jb2RlIGxvYWRp
+bmcgd2l0aCB0aGUgbWljcm9jb2RlIHVwZGF0ZSB3aXRoIHRoZQo+Pj4+Pj4gQlRJIG1pdGlnYXRp
+b25zLCByZXN1bWluZyBmcm9tIHN1c3BlbmQgdG8gUkFNIGlzIGJyb2tlbi4KPj4+Pj4+Cj4+Pj4+
+PiBCYXNlZCBvbiBhZGRlZCBsb2dnaW5nIHRvIGVudGVyX3N0YXRlKCkgKGZyb20gcG93ZXIuYykg
+aXQgZG9lc24ndAo+Pj4+Pj4gc3Vydml2ZSB0aGUgbG9jYWxfaXJxX3Jlc3RvcmUoZmxhZ3MpIGNh
+bGwgKGF0IGxlYXN0IGEgcHJpbnRrKCkgYWZ0ZXIgdGhlCj4+Pj4+PiBjYWxsIGRvZXNuJ3Qgb3V0
+cHV0IGFueXRoaW5nIG9uIHRoZSBzZXJpYWwgY29uc29sZSkuCj4+Pj4+Pgo+Pj4+Pj4gSSBndWVz
+cyB0aGF0IHNvbWUgaXJxIGhhbmRsZXIgdHJpZXMgdG8gdXNlIElCUlMvSUJQQi4gQnV0IHRoZSBt
+aWNyb2NvZGUKPj4+Pj4+IGlzIG9ubHkgbG9hZGVkIGxhdGVyLgo+Pj4+Pj4KPj4+Pj4+IElmIEkg
+c2ltcGx5IG1vdmUgdGhlIG1pY3JvY29kZV9yZXN1bWVfY3B1KDApIGRpcmVjdGx5IGJlZm9yZSB0
+aGUKPj4+Pj4+IGxvY2FsX2lycV9yZXN0b3JlKGZsYWdzKSBldmVyeXRoaW5nIHNlZW1zIHRvIHdv
+cmsgZmluZS4gQnV0IEknbSBub3Qgc3VyZQo+Pj4+Pj4gaWYgdGhpcyBoYXMgdW5pbnRlbmRlZCBj
+b25zZXF1ZW5jZXMuCj4+Pj4+Pgo+Pj4+Pj4gSSB0ZXN0ZWQgdGhlIGFib3ZlIHdpdGggWGVuIDQu
+OC4zIGZyb20gUXViZXMgd2hpY2ggaW5jbHVkZXMgdGhlIEJUSSBhbmQKPj4+Pj4+IG1pY3JvY29k
+ZSBwYXRjaGVzIGZyb20gc3RhZ2luZy00LjguIEFGQUlDUyB0aGVyZSBhcmUgbm8gY29tbWl0cyB3
+aGljaAo+Pj4+Pj4gY2hhbmdlcyB0aGUgYWZmZWN0ZWQgY29kZSBvciBvdGhlciBjb21taXRzIHdo
+aWNoIHNvdW5kIHJlbGV2YW50IHNvIHRoaXMKPj4+Pj4+IHByb2JhYmx5IGFmZmVjdGVkIGFsc28g
+YWxsIHRoZSBuZXdlciBicmFuY2hlcy4KPj4+Pj4gUzMgc3VwcG9ydCBpcyBhIHZlcnkgdW5sb3Zl
+ZCBhcmVhIG9mIHRoZSBoeXBlcnZpc29yLgo+Pj4+Pgo+Pj4+PiBZZXMgLSB3ZSBkZWZpbml0ZWx5
+IG5lZWQgdG8gZ2V0IG1pY3JvY29kZSByZWxvYWRlZCBiZWZvcmUgaW50ZXJydXB0cyBhcmUKPj4+
+Pj4gZW5hYmxlZC4KPj4+PiBEbyB5b3Ugc2VlIGFueSBwcm9ibGVtcyB3aXRoIHNpbXBseSBtb3Zp
+bmcgbWljcm9jb2RlX3Jlc3VtZV9jcHUoMCkKPj4+PiBkaXJlY3RseSBiZWZvcmUgdGhlIGxvY2Fs
+X2lycV9yZXN0b3JlKGZsYWdzKSBjYWxsPyAoSSdtIG5vdCBmYW1pbGlhcgo+Pj4+IHdpdGggdGhl
+IGNvZGUgYXQgYWxsIGFuZCAoZWFybHkpIHJlc3VtZSBoYW5kbGluZyBzb3VuZHMgbGlrZSBzb21l
+dGhpbmcKPj4+PiB3aGljaCBpcyBlYXN5IHRvIGJyZWFrIGluIG5vbiBvYnZpb3VzIHdheXMpCj4+
+PiBKdWRnaW5nIGJ5IHdoYXQgaXMgZ29pbmcgb24sIGl0IHdhbnRzIHRvIGJlIGJldHdlZW4gdGJv
+b3RfczNfZXJyb3IoKSBhbmQKPj4+IHRoZSBkb25lIGxhYmVsLgo+Pj4KPj4+IFdlIG9ubHkgbmVl
+ZCB0byByZXN0b3JlIG1pY3JvY29kZSBpZiB3ZSBzdWNjZXNzZnVsbHkgd2VudCBpbnRvIFMzLiAg
+VGhlCj4+PiBkb25lIGFuZCBlbmFibGVfY3B1IGxhYmVscyBhcmUgb25seSB1c2VkIGJ5IHBhdGhz
+IHdoaWNoIGRvbid0IG5lZWQgdG8KPj4+IHJlc3RvcmUgbWljcm9jb2RlLgo+Pj4KPj4+IE9UT0gs
+IHlvdSBzaG91bGQgY2hlY2sgdGhlIHJldHVybiB2YWx1ZSBhbmQgcGFuaWMgaWYgcmVzdG9yYXRp
+b24KPj4+IGZhaWxlZC4gIEFzIHlvdSd2ZSBzZWVuLCB0aGUgc3lzdGVtIHdvbid0IHN1cnZpdmUg
+dHJ5aW5nIHRvIGJsaW5kbHkKPj4+IGNvbnRpbnVlIHJlc3VtaW5nLgo+Pj4KPj4+Pj4gVGhhdCBz
+YWlkLCBJIHdvdWxkIGhhdmUgZXhwZWN0ZWQgYSBiYWNrdHJhY2UgY29tcGxhaW5pbmcgYWJvdXQK
+Pj4+Pj4gYSBHUCBmYXVsdCBpZiB3ZSBoYWQgaGl0IHRoZSB1c2Ugb2YgSUJSUy9JQlBCIGJlZm9y
+ZSB0aGUgbWljcm9jb2RlIHdhcwo+Pj4+PiByZWxvYWRlZC4KPj4+PiBZZWFoLCBub3Qgc3VyZSB3
+aGF0J3MgaGFwcGVuaW5nIGhlcmUuIEkgZG9uJ3QgZ2V0IGFueSBvdXRwdXQgZnJvbSBhZnRlcgo+
+Pj4+IGxvY2FsX2lycV9yZXN0b3JlKGZsYWdzKS4gSWYgeW91IGhhdmUgc29tZSBpZGVhcyBmb3Ig
+bW9yZSBkZWJ1ZyBvdXRwdXQgSQo+Pj4+IGNhbiBlYXNpbHkgdGVzdCBpdC4KPj4+IEluIGhpbmRz
+aWdodCwgSSBhbS4gIFdlIHRha2UgYSAjR1AgZmF1bHQgYmVjYXVzZSBvZiBhIGJhZCBNU1IsIGFu
+ZCBhdAo+Pj4gdGhlIGhlYWQgb2YgdGhlIGV4Y2VwdGlvbiBoYW5kbGVyIHRyeSB0byB1c2UgdGhl
+IHNhbWUgYmFkIE1TUi4gIEl0IHdpbGwKPj4+IHJlcGVhdGVkbHkgZmF1bHQgdW50aWwgaGl0dGlu
+ZyBhIGd1YXJkIHBhZ2UgKG9yIG90aGVyIHJlYWQtb25seSBwYWdlKSwKPj4+IGF0IHdoaWNoIHBv
+aW50IHdlIHRha2UgYSBkb3VibGUgZmF1bHQsIGFuZCBzdWZmZXIgYSAjR1AgeWV0IGFnYWluLiAK
+Pj4+IFRha2luZyBhICNERiB3aWxsIHJlc2V0IHRoZSBzdGFjayB0byBhIG1vZGVyYXRlbHkgc2Fu
+ZSB2YWx1ZSwgYW5kIHRoZQo+Pj4gc3lzdGVtIHdpbGwgbGl2ZWxvY2sgdGFraW5nIGZhdWx0cy4K
+Pj4+Cj4+PiBUaGlzIGlzIGFuIHVuZm9ydHVuYXRlIGNvbnNlcXVlbmNlIG9mIGhhdmluZyAkTUFH
+SUMgaW4gdGhlIGV4Y2VwdGlvbgo+Pj4gaGFuZGxlcnMuCj4+IFdlIGNhbiBqdXN0IGRpc2FibGUg
+SUJSUyBiZWZvcmUgZ29pbmcgdG8gc2xlZXA/Cj4gCj4gVGhlIHByb2JsZW0gaXMgdGhlIHVzZSBv
+ZiBNU1JfU1BFQ19DVFJML01TUl9QUkVEX0NNRCBiZWZvcmUgd2UndmUKPiByZWxvYWRlZCB0aGUg
+bWljcm9jb2RlIHdoaWNoIGNhdXNlcyB0aG9zZSBNU1JzIHRvIG1hZ2ljIHRoZW1zZWx2ZXMgaW50
+bwo+IGV4aXN0ZW5jZS4KCldlbGwsIEtvbnJhZCBjZXJ0YWlubHkgaGFzIGEgcG9pbnQ6IEp1c3Qg
+bGlrZSB3ZSBjb3VsZCBtYWtlClNQRUNfQ1RSTF9FTlRSWV9GUk9NX0lOVFJfSVNUIHNraXAgdGhl
+IFdSTVNSIGJ5IGNsZWFyaW5nCkJUSV9JU1RfV1JNU1IsIHdlIGNvdWxkIGFkZCBhIGNvbmRpdGlv
+bmFsIGJyYW5jaCB0bwpET19TUEVDX0NUUkxfRU5UUlkncyBtYXliZXhlbiBjYXNlLiBUaGUgZm9y
+bWVyIHdvdWxkIGFsc28KYWxsb3cgdG8gZGVhbCB3aXRoIGFuIGVhcmx5IChhZnRlciByZXN1bWUp
+IE5NSSBvciAjTUMuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
