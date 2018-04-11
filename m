@@ -1,24 +1,20 @@
-From: George Dunlap <dunlapg@umich.edu>
-Subject: Re: [PATCH 3/7] SUPPORT.md: Syntax: Provide a title
- rather than a spurious empty section
-Date: Wed, 11 Apr 2018 11:51:23 +0100
-Message-ID: <CAFLBxZadKV4recrr8jZ8Y+EwvHnKtU4AU-3xa7tDQgSwsaOaHA@mail.gmail.com>
-References: <1523380973-15979-1-git-send-email-ian.jackson@eu.citrix.com>
- <1523380973-15979-4-git-send-email-ian.jackson@eu.citrix.com>
- <CAFLBxZb4PwTBkEaRXZCiHXqXowe51x3fY0f6RAFf7hk71_Q5kg@mail.gmail.com>
- <23245.58738.465895.326190@mariner.uk.xensource.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: crash in csched_load_balance after xl vcpu-pin
+Date: Wed, 11 Apr 2018 12:20:40 +0200
+Message-ID: <c94a6f9e273acae94c833e7465cb7f1e32ea19f6.camel@suse.com>
+References: <20180410085729.GA472@aepfle.de> <20180410155949.GB7177@aepfle.de>
+ <ebdd4cb871b2d754959e8358641810d61b3d0856.camel@suse.com>
+ <20180410190302.GC7177@aepfle.de>
+ <42c5d682348a351420290dc1ecf5b1e2a60b98be.camel@suse.com>
+ <20180410200958.GD7177@aepfle.de> <20180410201315.GE7177@aepfle.de>
+ <CAAWQecsriGDV9g+m2q5Y79477HGOUN4VDCwmt2hxKF6=8A-kpA@mail.gmail.com>
+ <20180411062306.GG7177@aepfle.de>
+ <c730538a94b5de4b83aa76883fa050abd5737b94.camel@suse.com>
+ <20180411084829.GH7177@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4083046370921094608=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=jjbs=ha=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
- id 1f6DLa-0000cy-Is
- for xen-devel@lists.xenproject.org; Wed, 11 Apr 2018 10:51:26 +0000
-Received: by mail-qt0-x22b.google.com with SMTP id z23so1357605qti.5
- for <xen-devel@lists.xenproject.org>; Wed, 11 Apr 2018 03:51:24 -0700 (PDT)
-In-Reply-To: <23245.58738.465895.326190@mariner.uk.xensource.com>
+In-Reply-To: <20180411084829.GH7177@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,30 +23,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Lars Kurth <lars.kurth@citrix.com>
+To: Olaf Hering <olaf@aepfle.de>
+Cc: George Dunlap <george.dunlap@citrix.com>, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBBcHIgMTEsIDIwMTggYXQgMTE6MzcgQU0sIElhbiBKYWNrc29uIDxpYW4uamFja3Nv
-bkBjaXRyaXguY29tPiB3cm90ZToKPiBHZW9yZ2UgRHVubGFwIHdyaXRlcyAoIlJlOiBbWGVuLWRl
-dmVsXSBbUEFUQ0ggMy83XSBTVVBQT1JULm1kOiBTeW50YXg6IFByb3ZpZGUgYSB0aXRsZSByYXRo
-ZXIgdGhhbiBhIHNwdXJpb3VzIGVtcHR5IHNlY3Rpb24iKToKPj4gT24gVHVlLCBBcHIgMTAsIDIw
-MTggYXQgNjoyMiBQTSwgSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+IHdy
-b3RlOgo+PiA+IC0jIFN1cHBvcnQgc3RhdGVtZW50IGZvciB0aGlzIHJlbGVhc2UKPj4gPiArJSBT
-dXBwb3J0IHN0YXRlbWVudCBmb3IgdGhpcyByZWxlYXNlCj4+Cj4+IEJ5IGRvaW5nIHRoaXMgd2Un
-cmUgbW9yZSBvciBsZXNzIGNvbW1pdHRpbmcgdG8gcGFuZG9jJ3MgZGlhbGVjdCBvZgo+PiBNYXJr
-ZG93biwgeWVzPwo+Cj4gSSB0aGluayBzbywgeWVzLiAgVGhlcmUgZG9lc24ndCBzZWVtIHRvIGJl
-IGEgd2F5IHRvIGRlZmluZSB0aGUKPiBkb2N1bWVudCB0aXRsZSBpbiBhIHdheSB0aGF0J3MgdGhl
-IHNhbWUgYWNyb3NzIG1hcmtkb3duIHByb2Nlc3NvcnMuCj4KPiBtYXJrZG93bigxKSBqdXN0IHNw
-aXRzIHRoZSBgJScgb3V0IGFzIGEgbGl0ZXJhbCAoYW5kIGluZGVlZCBpdCBkb2Vzbid0Cj4gZ2Vu
-ZXJhdGUgYSA8aGVhZD4gZWxlbWVudCBhdCBhbGwpLgo+Cj4gSSBzaG91bGQgcGVyaGFwcyBoYXZl
-IG1lbnRpb25lZCB0aGlzIGlzc3VlIGluIHRoZSBjb21taXQgbWVzc2FnZS4KPgo+IFdlIGFscmVh
-ZHkgaGF2ZSBhIGxvdCBvZiAucGFuZG9jIGZpbGVzIGluIGRvY3MvLiAgRG8geW91IHRoaW5rIHRo
-aXMgaXMKPiBiYWQgZm9yIFNVUFBPUlQubWQgPwoKV2VsbCBJJ3ZlIGJlZW4gcG9raW5nIGFyb3Vu
-ZCBhIGJpdCwgYW5kIG5vdyBJJ20gcGVyc3VhZGVkIHRoYXQgcGFuZG9jCm1hcmtkb3duIGlzIGEg
-cmVhc29uYWJsZSBkaWFsZWN0IHRvIGNvbW1pdCB0by4gOi0pICBBcyB5b3Ugc2F5LCB3ZQp3YW50
-IHRvIGhhdmUgYSB0aXRsZSBhbmQgdGhlcmUgZG9lc24ndCBzZWVtIHRvIGJlIGEgd2F5IHRvIGRv
-IHRoYXQKd2hpY2ggaXMgY29tbW9uIGFjcm9zcyBtYXJrZG93biBkaWFsZWN0cy4KCiAtR2Vvcmdl
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============4083046370921094608==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-2Enl10owWTYQB1229Ozt"
+
+
+--=-2Enl10owWTYQB1229Ozt
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-04-11 at 10:48 +0200, Olaf Hering wrote:
+> On Wed, Apr 11, Dario Faggioli wrote:
+> > So, now, when you say 'does not work', do you mean 'domain creation
+> > is
+> > aborted with errors' or 'domain is created, but memory is not where
+> > it
+> > should be'.
+>=20
+> domU can not be created due to "libxl__set_vcpuaffinity: setting vcpu
+> affinity: Invalid argument". I guess something is special on this
+> system.
+>
+Looks like it. :-O
+
+If you're interested in figuring out, I'd like to see:
+- full output of `xl info -n'
+- output of `xl debug-key u'
+- xl vcpu-list
+- xl list -n
+
+right before trying to create the domain.
+
+And I guess having also a look at `xl dmesg' won't hurt.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-2Enl10owWTYQB1229Ozt
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrN4XgACgkQFkJ4iaW4
+c+6T9hAAgvuMxOAgy9/vvf5/D7ey97yCINJ/wT0ZRa6ZojjTLalpH8olL/4HVbQ7
+4BhEmv/VgUkc4iWF2H1nsQtu3le6bd2hBdcaZACWFK7tg8grISGfwYq+WrjrKZbK
+kzHpkMXn1mCUH/p9s3voPJv86EDVRRltdlq6W5WCpQjQ2CHsUhuaI89InxDDuGJW
+wn87mHaKACp2OWiz6FMYzTv/TM0PcOB0oOx7Ke6V4cRIUcJXtcLTWGLov2QXHLSd
+xVzZAsiCLQAq6dBIf8E58noyMws8+MNxPcGELQHCln+l0mcvdOBZsENwhlDKvDNQ
+yjvsPq0+8I9zAgSwX5tSrgupZ9gvTsu/5nboLRg6SeevhPVIqydAaPn7M5Dgemru
+fFyu/Ux3ImCGIhUeJsAurtlKV8C8/SJGtZSqeTZyejiDkIT4SdnEkCtOWTcnHmDa
+RSGyohiXv3Jdxlx0SFSP/heMWEvwrqPXO2l+yh9/zOSLkDMhJupFP66hWkBtEUK0
+DkhhpeNZElLP48fV2A6n+nCJ0/VWZeuvvAzesZX0CgkELFEkPx8GHtS0W+W1KYS6
+1Yy6DXZx8jYdKJeAqcdbDBdj4CiMC3Njr5ofGjI62UUP9RIorkqXsqVj0YgBFBkQ
+j7DJ2HWbpypHN5cG937c7c4Osuk03qS516YgswvD2k0rgK4F0og=
+=5Pgz
+-----END PGP SIGNATURE-----
+
+--=-2Enl10owWTYQB1229Ozt--
+
+
+
+--===============4083046370921094608==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4083046370921094608==--
