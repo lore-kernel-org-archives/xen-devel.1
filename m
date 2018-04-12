@@ -1,22 +1,18 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: X86 Community Call: Wed March 14,
- 15:00 - 16:00 UTC - Meeting Minutes
-Date: Thu, 12 Apr 2018 09:22:58 +0100
-Message-ID: <92DCBECD-1C7A-46F6-9DF9-73EB3AAF3370@xenproject.org>
-References: <F3DB153A-A358-4DFE-A054-D436270FC8B9@citrix.com>
- <20180412011831.GA177943@skl-4s-chao.sh.intel.com>
- <46762923-FAE4-428D-9AD7-D8551D676085@citrix.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.3 \(3445.6.18\))
-Content-Type: multipart/mixed; boundary="===============0813339584615928046=="
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH 0/7] xen/arm: CPU hotplug fixes
+Date: Thu, 12 Apr 2018 09:43:17 +0100
+Message-ID: <b70f2bc6-9fcd-880b-d891-236e0e92e0c4@arm.com>
+References: <20180411131927.27083-1-mirela.simonovic@aggios.com>
+ <d43d06af-a981-3156-bf3b-0d79d219dae1@arm.com>
+ <61809e61-d4be-9000-2d5c-2e8b7770d525@aggios.com>
+ <ac3d0857-0313-7f83-fa6e-c926636ec7d5@arm.com>
+ <CAKPH-Ng+4QM+06msM1cxJpQ5uRvsRWc6Y1mhotPXRdF4nvh0aA@mail.gmail.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=zrxr=hb=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1f6XVX-00038t-Vd
- for xen-devel@lists.xenproject.org; Thu, 12 Apr 2018 08:23:04 +0000
-Received: by mail-wm0-x234.google.com with SMTP id l16so4351096wmh.2
- for <xen-devel@lists.xenproject.org>; Thu, 12 Apr 2018 01:23:01 -0700 (PDT)
-In-Reply-To: <46762923-FAE4-428D-9AD7-D8551D676085@citrix.com>
+In-Reply-To: <CAKPH-Ng+4QM+06msM1cxJpQ5uRvsRWc6Y1mhotPXRdF4nvh0aA@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,160 +21,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, "Peng,
- Chao P" <chao.p.peng@intel.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <dunlapg@umich.edu>, =?utf-8?Q?Roger_Pau_Monn=C3=A9?= <royger@freebsd.org>, Christopher Clark <christopher.w.clark@gmail.com>, "Ji,
- John" <john.ji@intel.com>, Rich Persaud <persaur@gmail.com>, Tamas K Lengyel <tamas@tklengyel.com>, "committers@xenproject.org" <committers@xenproject.org>, 'Jan Beulich' <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Janakarajan Natarajan <jnataraj@amd.com>, Brian Woods <brian.woods@amd.com>, Daniel Kiper <daniel.kiper@oracle.com>, Paul Durrant <Paul.Durrant@citrix.com>, Chao Gao <chao.gao@intel.com>
+To: Mirela Simonovic <mirela.simonovic@aggios.com>
+Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0813339584615928046==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_CB97AF09-A379-4FE8-B12F-A19C4E9BDE24"
-
-
---Apple-Mail=_CB97AF09-A379-4FE8-B12F-A19C4E9BDE24
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
-
-
-
-> On 12 Apr 2018, at 08:32, George Dunlap <george.dunlap@citrix.com> =
-wrote:
->=20
->=20
->=20
->> On Apr 12, 2018, at 2:18 AM, Chao Gao <chao.gao@intel.com> wrote:
->>=20
->> On Wed, Apr 11, 2018 at 05:10:40PM +0000, Lars Kurth wrote:
->>> ## Longer Term - Agreed to Pause
->>>=20
->>> ### [PATCH v4 00/28] add vIOMMU support with irq remapping function =
-of
->>> ### virtual VT-d
->>>=20
->>> Sent in for meeting agenda by George
->>> v3 posted by Lan Tianyu on 22 September 2017: =
-=E2=80=8Bmarc.info/?l=3Dxen-devel&m=3D
->>> v4 posted by Chao Gao: =
-=E2=80=8Bhttps://xen.markmail.org/thread/wfyorbn3nzsio6s
->>> **Seems to have had review by Roger Pau Monne (1 ACK)
->>> No issues**
->>> Primarily needs George as reviewer
->>> Agreed to park this, because NVDIMM work is more important
->>=20
->> I want to clarify that I will continue to working on this, i.e. send =
-out
->> patches and respond to comments. "Pause" here only means review will =
-be
->> paused because George and Roger who are willing to review this series
->> have to finish NVDIMM work first.
->=20
-> Er, I think this comment was misplaced =E2=80=94 it was the SPP series =
-that I need to be the primary reviewer on.  I wasn=E2=80=99t aware that =
-the vIOMMU series had anything specific to do with the mm code.
-
-I may have recorded this incorrectly in that Royger would be the primary =
-reviewer. I can't recall. In any case, the effect is the same, as Royger =
-is also on the critical path for NVDIMM
-
-@John, @Chao: I agree with your clarification: that is what I meant. I =
-recorded it inaccurately.
-
-As an aside, I will take the replies to this thread and copy it into the =
-google doc (but I won't send out PDFs for it)
-
-Regards
-Lars=
-
---Apple-Mail=_CB97AF09-A379-4FE8-B12F-A19C4E9BDE24
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=utf-8
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dutf-8"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
-class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
-class=3D"">On 12 Apr 2018, at 08:32, George Dunlap &lt;<a =
-href=3D"mailto:george.dunlap@citrix.com" =
-class=3D"">george.dunlap@citrix.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><blockquote type=3D"cite" style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px; text-decoration: none;" class=3D"">On =
-Apr 12, 2018, at 2:18 AM, Chao Gao &lt;<a =
-href=3D"mailto:chao.gao@intel.com" class=3D"">chao.gao@intel.com</a>&gt; =
-wrote:<br class=3D""><br class=3D"">On Wed, Apr 11, 2018 at 05:10:40PM =
-+0000, Lars Kurth wrote:<br class=3D""><blockquote type=3D"cite" =
-class=3D"">## Longer Term - Agreed to Pause<br class=3D""><br =
-class=3D"">### [PATCH v4 00/28] add vIOMMU support with irq remapping =
-function of<br class=3D"">### virtual VT-d<br class=3D""><br =
-class=3D"">Sent in for meeting agenda by George<br class=3D"">v3 posted =
-by Lan Tianyu on 22 September 2017: =E2=80=8B<a =
-href=3D"http://marc.info/?l=3Dxen-devel&amp;m=3D" =
-class=3D"">marc.info/?l=3Dxen-devel&amp;m=3D</a><br class=3D"">v4 posted =
-by Chao Gao: =E2=80=8B<a =
-href=3D"https://xen.markmail.org/thread/wfyorbn3nzsio6s" =
-class=3D"">https://xen.markmail.org/thread/wfyorbn3nzsio6s</a><br =
-class=3D"">**Seems to have had review by Roger Pau Monne (1 ACK)<br =
-class=3D"">No issues**<br class=3D"">Primarily needs George as =
-reviewer<br class=3D"">Agreed to park this, because NVDIMM work is more =
-important<br class=3D""></blockquote><br class=3D"">I want to clarify =
-that I will continue to working on this, i.e. send out<br =
-class=3D"">patches and respond to comments. "Pause" here only means =
-review will be<br class=3D"">paused because George and Roger who are =
-willing to review this series<br class=3D"">have to finish NVDIMM work =
-first.<br class=3D""></blockquote><br style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">Er, I think this comment was misplaced =E2=80=94 it was the =
-SPP series that I need to be the primary reviewer on. &nbsp;I wasn=E2=80=99=
-t aware that the vIOMMU series had anything specific to do with the mm =
-code.</span><br class=3D""></div></blockquote><br class=3D""></div><div>I =
-may have recorded this incorrectly in that Royger would be the primary =
-reviewer. I can't recall. In any case, the effect is the same, as Royger =
-is also on the critical path for NVDIMM</div><div><br =
-class=3D""></div><div>@John, @Chao: I agree with your clarification: =
-that is what I meant. I recorded it inaccurately.</div><div><br =
-class=3D""></div><div>As an aside, I will take the replies to this =
-thread and copy it into the google doc (but I won't send out PDFs for =
-it)</div><div><br class=3D""></div>Regards<div =
-class=3D"">Lars</div></body></html>=
-
---Apple-Mail=_CB97AF09-A379-4FE8-B12F-A19C4E9BDE24--
-
-
---===============0813339584615928046==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0813339584615928046==--
+CgpPbiAxMS8wNC8xOCAxNzozNywgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPiBIaSBKdWxpZW4s
+CgpIaSwKCk1heSBJIGFzayB5b3UgdG8gY29uZmlndXJlIHlvdXIgbWFpbCBjbGllbnQgdG8gdXNl
+ID4gZm9yIHF1b3RpbmcgYW5kIHVzZSAKcGxhaW4gdGV4dD8gT3RoZXJ3aXNlLCB0aGlzIGlzIGdv
+aW5nIHRvIGJlIHJlYWxseSBkaWZmaWN1bHQgdG8gZm9sbG93IAp0aGUgZGlzY3Vzc2lvbiBhZnRl
+ciBmZXcgcm91bmQgKHNlZSBhbHJlYWR5IGJlbG93KS4KCj4gT24gV2VkLCBBcHIgMTEsIDIwMTgg
+YXQgNjowMiBQTSwgSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbSAKPiA8bWFpbHRv
+Omp1bGllbi5ncmFsbEBhcm0uY29tPj4gd3JvdGU6Cj4gCj4gICAgIEhpLAo+IAo+ICAgICBPbiAx
+MS8wNC8xOCAxNjo1OCwgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPiAKPiAgICAgICAgIE9uIDA0
+LzExLzIwMTggMDU6MDcgUE0sIEp1bGllbiBHcmFsbCB3cm90ZToKPiAKPiAgICAgICAgICAgICBP
+biAxMS8wNC8xOCAxNDoxOSwgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPiAKPiAgICAgICAgIE1p
+Z3JhdGluZyBpbnRlcnJ1cHRzIHdoZW4gdHVybmluZyBvZmYgYSBDUFUgYWxyZWFkeSB3b3Jrcy4K
+PiAgICAgICAgIEhvd2V2ZXIsIHdoZW4gYSBDUFUgaXMgdHVybmVkIGJhY2sgb24gdGhlcmUgaXMg
+bm8gaW50ZXJydXB0Cj4gICAgICAgICBtaWdyYXRpb24gYmFjayB0byB0aGUgaG90cGx1Z2dlZCBD
+UFUgLSBhbGwgaW50ZXJydXB0cyB3aWxsCj4gICAgICAgICByZW1haW4gcm91dGVkIHRvIHRoZSBD
+UFUjMC4KPiAgICAgICAgIFBhdGNoIDcvNyBmaXhlcyB0aGlzCj4gCj4gCj4gICAgIFdoYXQgZG8g
+eW91IG1lYW4gYnkgYWxsIGludGVycnVwdHM/IEludGVycnVwdHMgcm91dGVkIHRvIGd1ZXN0IHdp
+bGwKPiAgICAgYWx3YXlzIGZvbGxvdyB0aGUgdkNQVS4gU28gYXJlIHlvdSBzdXJlIHRoZXkgYXJl
+IGdvaW5nIHRvIGJlCj4gICAgIG1pZ3JhdGVkIHdoZW4gdGhhdCB2Q1BVIGlzIHBhdXNlZC9vZmY/
+Cj4gCj4gCj4gSnVzdCB0byBtYWtlIHN1cmUgd2UncmUgb24gdGhlIHNhbWUgcGFnZSAtIHRoaXMg
+aXMgYWJvdXQgaG90cGx1Z2dpbmcgCj4gcGh5c2ljYWwgQ1BVcy4gSG90cGx1Z2dpbmcgdkNQVXMg
+dXNpbmcgdmlydHVhbCBQU0NJIENQVV9PRkYgaW50ZXJmYWNlIGlzIAo+IGFscmVhZHkgaW1wbGVt
+ZW50ZWQgYW5kIHVucmVsYXRlZCB0byB0aGlzIHNlcmllcy4KClllcywgd2UgYXJlIG9uIHRoZSBz
+YW1lIHBhZ2UgOikuIEkgd2FzIGp1c3Qgd29uZGVyaW5nIHdoYXQgaGFwcGVuIHRvIAppbnRlcnJ1
+cHQgcm91dGVkIHRvIHRoYXQgcENQVS4KCj4gCj4gQXNzdW1pbmcgdGhhdCBzeXN0ZW0gaGFzIDIg
+cENQVXMgYnkgJ2FsbCBpbnRlcnJ1cHRzJyBJIG1lYW4gaW50ZXJydXB0cyAKPiB0aGF0IHdlcmUg
+dGFyZ2V0ZWQgdG8gdGhlIHBDUFUjMCBhbmQgcENQVSMxIHByaW9yIHRvIGRvaW5nIGFueSBob3Rw
+bHVnLgo+IAo+IEZvciBleGFtcGxlLCBpZiBhIGd1ZXN0IGlzIHBpbm5lZCB0byBwQ1BVIzEgYW4g
+aW50ZXJydXB0IG9mIGEgZGV2aWNlIGl0IAo+IG93bnMgd2lsbCBiZSB0YXJnZXRlZCB0byBwQ1BV
+IzEuCj4gV2hlbiBwQ1BVIzEgaXMgdHVybmVkIG9mZiB0aGF0IGludGVycnVwdCB3aWxsIGJlIG1p
+Z3JhdGVkIHRvIHBDUFUjMC4gCj4gcENQVSMwIGZpbmFsaXplcyB0aGUgc3VzcGVuZCBhbmQgcmVj
+ZWl2ZXMgd2FrZS11cCBpbnRlcnJ1cHRzLiBIb3dldmVyLCAKPiB3aGVuIENQVSMxIGlzIHR1cm5l
+ZCBiYWNrIG9uIHRoYXQgaW50ZXJydXB0IHdpbGwgcmVtYWluIHRhcmdldGVkIHRvIHRoZSAKPiBD
+UFUjMCwgd2hpY2ggSSBhc3N1bWVkIGlzIHdyb25nLgo+IFRoZSBzY2VuYXJpbyBkZXNjcmliZWQg
+aGVyZSBpcyBhbHNvIGhvdyBJIHRlc3RlZCB0aGlzLgo+IAo+ICAgICBDYW4geW91IGdpdmUgdGhl
+IHBhdGggaW4gWGVuIGRvaW5nIHRoYXQ/Cj4gCj4gCj4gU3VyZSwgaGVyZSBpcyBhIGJhY2t0cmFj
+ZSAoZHVtcGVkIG9uIHRoZSBDUFUgYmVpbmcgdHVybmVkIG9mZik6Cj4gIMKgIMKgIDDCoCAweDI2
+MDNkYyBhcmNoX21vdmVfaXJxcygpOiB2Z2ljLmMsIGxpbmUgMzA5Cj4gIMKgIMKgIDHCoCAweDIy
+ZWU1OCBzY2hlZF9tb3ZlX2lycXMoKSsyMDogc2NoZWR1bGUuYywgbGluZSAzMDMKPiAgwqAgwqAg
+MsKgIDB4MjMxOGU4IGNwdV9kaXNhYmxlX3NjaGVkdWxlcigpKzEwMDA6IHNjaGVkdWxlLmMsIGxp
+bmUgNTg2Cj4gIMKgIMKgIDPCoCAweDIzMThlOCBjcHVfZGlzYWJsZV9zY2hlZHVsZXIoKSsxMDAw
+OiBzY2hlZHVsZS5jLCBsaW5lIDU4Ngo+ICDCoCDCoCA0wqAgMHgyNWFmZjggX19jcHVfZGlzYWJs
+ZSgpKzk2OiBzbXBib290LmMsIGxpbmUgMzg2Cj4gIMKgIMKgIDXCoCAweDIwMTYwOCB0YWtlX2Nw
+dV9kb3duKCkrNTI6IGNwdS5jLCBsaW5lIDc1Cj4gIMKgIMKgIDbCoCAweDIzNDI2YyBzdG9wbWFj
+aGluZV9hY3Rpb24oKSsxODg6IHN0b3BfbWFjaGluZS5jLCBsaW5lIDE1OQo+ICDCoCDCoCA3wqAg
+MHgyMzU4NTggZG9fdGFza2xldF93b3JrKCkrMTc2OiB0YXNrbGV0LmMsIGxpbmUgOTQKPiAgwqAg
+wqAgOMKgIDB4MjM1YzgwIGRvX3Rhc2tsZXQoKSsxMDQ6IHRhc2tsZXQuYywgbGluZSAxMjYKPiAg
+wqAgwqAgOcKgIDB4MjRkYWVjIGlkbGVfbG9vcCgpKzE0NDogZG9tYWluLmMsIGxpbmUgNzIKPiAg
+wqAgwqAxMMKgIDB4MjViMWY4IHN0YXJ0X3NlY29uZGFyeSgpKzQwNDogc21wYm9vdC5jLCBsaW5l
+IDM2OAoKClNvIHRoaXMgY292ZXIgaW50ZXJydXB0IHJvdXRlZCB0byBhIHZpcnR1YWwgQ1BVLiBI
+b3dldmVyLCB0aGlzIGRvZXMgbm90IApoYW5kbGUgaW50ZXJydXB0cyB1c2VkIGJ5IFhlbi4gSG93
+IGRvIHlvdSBoYW5kbGUgdGhlbT8KCkZvciBpbnN0YW5jZSBTTU1VcyBJUlEgbWlnaHQgYmUgcm91
+dGVkIHRvIG90aGVyIGludGVycnVwdCB0aGFuIENQVSAjMC4KClsuLi5dCgo+IAo+ICAgICBJZiB0
+aGUgZm9ybWVyLCBpdCB3b3VsZCBiZSBuaWNlIHRvIGdldCB0aGUgY29kZSB5b3UgdXNlZC4gSWYg
+dGhlCj4gICAgIGxhdHRlciwgdGhlbiBoYXZpbmcgYSBoYWNrIHBhdGNoIHRvIHRlc3QgdGhhdCBj
+b2RlIHdvdWxkIGJlIG5pY2UuCj4gICAgIElkZWFsbHksIHlvdSB3YW50IHRvIHBsdWcgdGhhdCBp
+biB0aGUgU1lTQ1RMIGludGVyZmFjZSBmb3IKPiAgICAgb3V0LW9mLWJveCB0ZXN0aW5nLgo+IAo+
+IAo+IE9rLCBJIGhhdmUgbmV2ZXIgdXNlZCB0aGF0IGJ1dCBJJ2xsIHRyeSB0byBmaWd1cmUgaXQg
+b3V0LiBJIG1heSBjb21lIHVwIAo+IHdpdGggYWRkaXRpb25hbCBxdWVzdGlvbnMuCgpZb3UgbWln
+aHQgd2FudCB0byBoYXZlIGEgbG9vayBhdCB0aGUgeDg2IHZlcnNpb24gWEVOX1NZU0NUTF9jcHVf
+aG90cGx1ZyAKaW4geDg2L3N5c3RjbC5jLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
