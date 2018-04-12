@@ -1,14 +1,22 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 7/7] xen/arm: Restore IRQ affinity after
- hotplugging a CPU
-Date: Thu, 12 Apr 2018 18:49:21 +0200
-Message-ID: <3c33657b63a04a466028b02ce52d8777bbbfbf04.camel@suse.com>
-References: <20180411131927.27083-1-mirela.simonovic@aggios.com>
- <20180411131927.27083-8-mirela.simonovic@aggios.com>
+From: Lars Kurth <lars.kurth@citrix.com>
+Subject: Re: Setting up a call to discuss PCI Emulation - Future
+ Direction
+Date: Thu, 12 Apr 2018 16:50:00 +0000
+Message-ID: <6CF72FA0-688A-4D44-A87E-547DBCE4204D@citrix.com>
+References: <4767D7C8-BB78-4B2E-8C9F-AE97CE5F02B5@citrix.com>
+ <20180412164104.ymrule7rkdr2w4sb@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0833053541457870984=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180411131927.27083-8-mirela.simonovic@aggios.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=2hb8=hb=citrix.com=prvs=633e78632=lars.kurth@srs-us1.protection.inumbo.net>)
+ id 1f6fQC-0005RP-9z
+ for xen-devel@lists.xenproject.org; Thu, 12 Apr 2018 16:50:04 +0000
+In-Reply-To: <20180412164104.ymrule7rkdr2w4sb@MacBook-Pro-de-Roger.local>
+Content-Language: en-US
+Content-ID: <72F3BD53C2770F49A287A74BC1763D82@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,127 +25,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>, xen-devel@lists.xen.org
-Cc: edgar.iglesias@xilinx.com, sstabellini@kernel.org, dm@aggios.com, julien.grall@arm.org
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Daniel Smith <dpsmith@apertussolutions.com>, Christopher Clark <christopher.w.clark@gmail.com>, Rich Persaud <persaur@gmail.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <Paul.Durrant@citrix.com>, Alexey G <x1917x@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0833053541457870984==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-6lnU5lRo1K2impfO8knK"
-
-
---=-6lnU5lRo1K2impfO8knK
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2018-04-11 at 15:19 +0200, Mirela Simonovic wrote:
-> Secondary pCPUs will be offlined on system suspend and hotplugged
-> on resume. When offlining secondary CPUs all interrupts targeted
-> to those CPUs will be routed to the boot CPU. The boot CPU
-> is responsible for finalizing suspend procedure. All wake-up
-> interrupts are therefore targeted to the boot CPU.=20
->
-There is no wake-up interrupt involved in the process of unpausing
-domains during resume. So, I that that what you mean is "the interrups
-that the vcpus receive once they're running again. And even in that
-case, rather than "All", is it "The interrupts received until the first
-time the vcpu goes through vcpu_migrate()", as vcpu_migrate() does call
-sched_move_irq()?
-
-Note that I'm not (trying to) being picky, I'm just trying to
-undestand. :-)
-
-> Existing code
-> was missing the restoration of interrupts affinity after
-> hotplugging a CPU.
->
-Either use hot-unplug and hotplug, or offline and online. I think the
-latter is better in this case.
-
->  This patch restores the IRQ affinity after
-> a CPU is hotplugged.
->=20
-> Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-
-> diff --git a/xen/common/schedule.c b/xen/common/schedule.c
-> index 343ab6306e..e3956019bc 100644
-> --- a/xen/common/schedule.c
-> +++ b/xen/common/schedule.c
-> @@ -724,6 +725,9 @@ void restore_vcpu_affinity(struct domain *d)
->          lock =3D vcpu_schedule_lock_irq(v);
->          v->processor =3D SCHED_OP(vcpu_scheduler(v), pick_cpu, v);
->          spin_unlock_irq(lock);
-> +
-> +        if ( affinity_was_broken )
-> +            sched_move_irqs(v);
->
-But I guess that, more than on whether or not the affinity was broken,
-you are interested in whether or not v->processor changed.
-
-In fact, for the vcpus that had 0 in v->processor at the beginning of
-this function, and also have 0 in there now, there is no need to call
-sched_move_irq(), is there?
-
-Similarly, if the affinity of a vcpu has not been broken, but pick_cpu
-end up selecting a different v->processor, you do want to call
-sched_move_irq(), I think.
-
-If I'm right, I think it would be better to do, at the beginning of the
-for:
-
- unsigned int old_cpu =3D v->processor;
-
-And here:
-
- if (old_cpu !=3D v->processor)
-   sched_move_irqs(v);
-
-And I'd also add a comment (above the if()), briefly saying how this is
-necessary to match/undo the call work of vcpu_move_nosched() in
-cpu_disable_scheduler().=20
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-6lnU5lRo1K2impfO8knK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrPjhIACgkQFkJ4iaW4
-c+6Ouw/8C+svOznABT4N5Ta3nJ4NCr4VhLJI+Ajjg5nx1QqRr4jXe3nN5CRe2ms5
-iufUnFlMybY2j+UkqdBzFyps86i95uwQ8wrT5y1yDd0+3DXmQNsp+yyXC9wMbf77
-rj8/Qq8QZ4JTXh1xyhP6yczTI1qLmNlvaouscnzqeu+asQnDoWCIYqIaT+FhMnA+
-JzE4qFIwHDxRXP6/GfdEtm6qG+CdX5dfUOkCj8mN/VOENTJDuvHn0jlVb/9NMtzG
-WOmgQuyYPnPwXe4xdDT4/7JW97vJSImJYT6uEd5HIHBi72WGi/tj6k1EEO6qrPcK
-gYix9Bsq65jLN+uoAEX4k4acmjwdTeKgbDrrA+stAYeRePVphHEfB3Qc2W5zz5J0
-W9SzIeOriqux91ufKjh7yF9j25LeYobABnj0y82vy5CORIj0AZFq3oxULWemPbd9
-F7j0m6EzSikv8WgybTWf60ukLA310zdG3jqUPYxTndbF2iiTaAGuLlhL+LrZ97fJ
-Dyn8EC/PfHTeaAHkl7f8KR2jXmV3KI6q7EzVOgFmBF9Z5AjTWbeMnCywqt3Bm4fJ
-YBR7pRdhh9ATrAr6DqFEDYGCQfknOOWezMPMrx9Ji7/69omXHmIB8Thi+ES+/cDU
-Hdb+0E8bc9VJOvG61JKJRAtX776ety20PajUHgeyetBClAQbRWM=
-=DEGY
------END PGP SIGNATURE-----
-
---=-6lnU5lRo1K2impfO8knK--
-
-
-
---===============0833053541457870984==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0833053541457870984==--
+DQoNCu+7v09uIDEyLzA0LzIwMTgsIDE3OjQxLCAiUm9nZXIgUGF1IE1vbm5lIiA8cm9nZXIucGF1
+QGNpdHJpeC5jb20+IHdyb3RlOg0KDQogICAgT24gVGh1LCBBcHIgMTIsIDIwMTggYXQgMDU6MzI6
+NTdQTSArMDEwMCwgTGFycyBLdXJ0aCB3cm90ZToNCg0KDQogICAgPiAgICBtYXkgd29yay4gRm9y
+IG1lIE1vbiwgV2VkIGFuZCBGcmnigJlzIGdlbmVyYWxseSB3b3JrIGF0IHRob3NlIHRpbWUtc2xv
+dHMuDQogICAgPiAgICBOZXh0IHdlZWsgaXMgYSBsaXR0bGUgYnVzeSBmb3IgbWUsIHNvIEkgd291
+bGQgcHJlZmVyIHRoZSBmb2xsb3dpbmcgd2Vlay4NCiAgICA+ICAgIElmIHlvdSBjb3VsZCBmaWxs
+IG91dCB0aGUgZm9sbG93aW5nIEdvb2dsZSBwb2xsLCBpZiB0aGlzIHdlZWsgd29ya3MgdGhhdA0K
+ICAgID4gICAgd291bGQgYmUgZ3JlYXQuIE90aGVyd2lzZSBwbGVhc2Ugc2NyZWFtLg0KICAgIA0K
+ICAgIEknbSBhZnJhaWQgSSdtIG9uIHZhY2F0aW9ucyBmcm9tIHRoZSAyMXN0IHRvIHRoZSAyOXRo
+IG9mIEFwcmlsLCBzbyBJDQogICAgd29uJ3QgYmUgYWJsZSB0byBqb2luIHRoZSBtZWV0aW5nIHVu
+bGVzcyB3ZSBtb3ZlIGl0IHRvIHRoZSB3ZWVrIGFmdGVyLg0KICAgIExldCdzIHNlZSB3aGF0IHBl
+b3BsZSB0aGluayBvZiB0aGUgY3VycmVudCBkYXRlcy4NCiAgICANCiAgICBSb2dlci4NCiAgICAN
+CkhpLCBJIGNoYW5nZWQgdGhlIGRhdGVzIHRvIHRoZSB3ZWVrIGFmdGVyLiBQb2xsIHNvIGZhciBo
+YXMgYmVlbiBpbnZhbGlkYXRlZC4NCg0KU2VlIGh0dHBzOi8vZG9vZGxlLmNvbS9wb2xsL2dkbm1j
+cnZuaWJtdzU2M24NCg0KTGFycw0KDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
