@@ -1,19 +1,25 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 5/7] xen/arm: Remove __initdata and __init
- to enable CPU hotplug
-Date: Thu, 12 Apr 2018 13:56:13 +0100
-Message-ID: <8cddc1a2-4a30-6fe1-ee54-6cae7498ecbb@arm.com>
-References: <20180411131927.27083-1-mirela.simonovic@aggios.com>
- <20180411131927.27083-6-mirela.simonovic@aggios.com>
- <alpine.DEB.2.10.1804111648180.3304@sstabellini-ThinkPad-X260>
- <c2411a64-831a-4492-5335-db3632147d05@arm.com>
- <CAKPH-NjPCqAxsG4NiU2rrxGN3xLP9gzKiHHSiexpO6Oo6HCzWg@mail.gmail.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: crash in csched_load_balance after xl vcpu-pin
+Date: Thu, 12 Apr 2018 15:15:05 +0200
+Message-ID: <95725e3ecc825da13f9c0ab01ba74b11ed678d33.camel@suse.com>
+References: <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
+ <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
+ <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
+ <20180410203741.GF7177@aepfle.de>
+ <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
+ <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
+ <20180411100006.GI7177@aepfle.de> <20180411150312.GL7177@aepfle.de>
+ <20180411152745.GM7177@aepfle.de>
+ <eb978b7160b9e2d54f56c088e0e7a24f1ec813c3.camel@suse.com>
+ <20180411204359.GP7177@aepfle.de>
+ <CAAWQectJz5nGbMQJMsgv2MVE4DRwAw5DOA+roT5TFadO06TTHg@mail.gmail.com>
+ <862386BF-2092-428A-AE9E-766D109EF7DC@citrix.com>
+ <b4e178344a2923404528bd0af07d583fc011b9ab.camel@suse.com>
+ <20180412144553.74da01bc.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0111642023278671473=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAKPH-NjPCqAxsG4NiU2rrxGN3xLP9gzKiHHSiexpO6Oo6HCzWg@mail.gmail.com>
-Content-Language: en-US
+In-Reply-To: <20180412144553.74da01bc.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,45 +28,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen Devel <xen-devel@lists.xen.org>, Davorin Mista <dm@aggios.com>, julien.grall@arm.org
+To: Olaf Hering <olaf@aepfle.de>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <George.Dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAxMi8wNC8xOCAxMzo1MCwgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPiBIaSwKPiAK
-PiBPbiBUaHUsIEFwciAxMiwgMjAxOCBhdCAxMTowMyBBTSwgSnVsaWVuIEdyYWxsIDxqdWxpZW4u
-Z3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+IEhpLAo+Pgo+PiBPbiAxMi8wNC8xOCAwMTowNywgU3Rl
-ZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+Pj4KPj4+IE9uIFdlZCwgMTEgQXByIDIwMTgsIE1pcmVs
-YSBTaW1vbm92aWMgd3JvdGU6Cj4+Pj4KPj4+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3Nt
-cGJvb3QuYyBiL3hlbi9hcmNoL2FybS9zbXBib290LmMKPj4+PiBpbmRleCA1NjY2ZWZjZDNhLi5k
-MTVlYThkZjVlIDEwMDY0NAo+Pj4+IC0tLSBhL3hlbi9hcmNoL2FybS9zbXBib290LmMKPj4+PiAr
-KysgYi94ZW4vYXJjaC9hcm0vc21wYm9vdC5jCj4+Pj4gQEAgLTUyLDggKzUyLDggQEAgbm9kZW1h
-c2tfdCBfX3JlYWRfbW9zdGx5IG5vZGVfb25saW5lX21hcCA9IHsgeyBbMF0gPQo+Pj4+IDFVTCB9
-IH07Cj4+Pj4gICAgc3RhdGljIHVuc2lnbmVkIGNoYXIgX19pbml0ZGF0YSBjcHUwX2Jvb3Rfc3Rh
-Y2tbU1RBQ0tfU0laRV0KPj4+PiAgICAgICAgICAgX19hdHRyaWJ1dGVfXygoX19hbGlnbmVkX18o
-U1RBQ0tfU0laRSkpKTsKPj4+PiAgICAtLyogSW5pdGlhbCBib290IGNwdSBkYXRhICovCj4+Pj4g
-LXN0cnVjdCBpbml0X2luZm8gX19pbml0ZGF0YSBpbml0X2RhdGEgPQo+Pj4+ICsvKiBCb290IGNw
-dSBkYXRhICovCj4+Pj4gK3N0cnVjdCBpbml0X2luZm8gaW5pdF9kYXRhID0KPj4+PiAgICB7Cj4+
-Pj4gICAgICAgIC5zdGFjayA9IGNwdTBfYm9vdF9zdGFjaywKPj4+PiAgICB9Owo+Pj4KPj4+Cj4+
-PiBEb24ndCB5b3UgYWxzbyB3YW50IHRvIHJlbW92ZSBfX2luaXRkYXRhIGZyb20gY3B1MF9ib290
-X3N0YWNrPwo+Pgo+IAo+IFNvbWVob3cgSSBkaWRuJ3Qgb2JzZXJ2ZSB0aGlzIGFzIGEgcHJvYmxl
-bS4uLiBBZnRlciB0YWtpbmcgYSBkZWVwZXIKPiBsb29rIG5vdyBJIHVuZGVyc3RhbmQgdGhhdCBz
-ZWNvbmRhcnkgQ1BVcyByZXVzZSB0aGlzIHN0YWNrIHRvIGJvb3QuIFNvCj4gSSBhZ3JlZSwgX19p
-bml0ZGF0YSBmcm9tIGNwdTBfYm9vdF9zdGFjayBzaG91bGQgYmUgcmVtb3ZlZC4KCk5vIGl0IHNo
-b3VsZCBub3QgYmUgcmVtb3ZlZC4gY3B1MF9ib290X3N0YWNrIGlzIG9ubHkgdXNlZCBmb3IgWGVu
-IGlzIApib290ZWQgKGUuZyBDUFUwIGp1bXBpbmcgYXQgX3N0YXJ0KS4gSW4gdGhlIHN1c3BlbmQv
-cmVzdW1lIGNhc2UgeW91IGFyZSAKbm90IGdvaW5nIHRvIHVzZSB0aGF0IHBhdGNoIGZvciBDUFUw
-LgoKPiAKPj4KPj4gSSBhbSBub3Qgc3VyZSBhYm91dCB0aGlzLiBXaGVuIHlvdSBnbyBpZGxlLCB5
-b3UgY291bGQgcmUtdXNlIHRoZQo+PiBpZGxlX3ZjcHVbMF0tPmFyY2guc3RhY2suIFNvIHlvdSBz
-YXZlIDEySyBpbiByZXNpZGVudCBtZW1vcnkuCj4+Cj4gCj4gSSdtIG5vdCBzdXJlIEkgZm9sbG93
-IHRoaXMsIG1heWJlIFN0ZWZhbm8gY2FuIGNvbW1lbnQuCgpFYWNoIENQVSBoYXZlIGFuIGFzc29j
-aWF0ZWQgaWRsZSB2Q1BVIHVzZWQgZm9yIGNvbnRleHQgc3dpdGNoIGFuZCAKcnVubmluZyBpZGxl
-IG1vZGUuIFRoYXQgaWRsZSB2Q1BVIGNvbnRhaW5zIHRoZSBzdGFjayB0aGF0IGlzIHVzZWQgZm9y
-IApib290IENQVS4KCkluIHRoZSBjYXNlIG9mIENQVTAsIHlvdSBjYW4gbm90IHVzZSBpZGxlIHZD
-UFUgc3RhY2sgd2hlbiBib290aW5nIApiZWNhdXNlIGl0IGlzIG5vdCBpbml0aWFsaXplZC4gSG93
-ZXZlciBkdXJpbmcgc3VzcGVuZC9yZXN1bWUgY2FzZSwgeW91IAp3aWxsIGFscmVhZHkgaGF2ZSB0
-aGUgaWRsZV92Y3B1WzBdLT5zdGFjayBpbiBoYW5kLiBTbyB0aGVyZSBhcmUgbm8gbmVlZCAKdG8g
-dXNlIGNwdTBfYm9vdF9zdGFjay4KCkhvd2V2ZXIsIGRvIHlvdSByZWFsbHkgbmVlZCB0byBzZXR1
-cCB0aGUgc3RhY2sgb24gcmVzdW1lPwoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0111642023278671473==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-WsBpf8mHz9e897S2m3/R"
+
+
+--=-WsBpf8mHz9e897S2m3/R
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2018-04-12 at 14:45 +0200, Olaf Hering wrote:
+> Am Thu, 12 Apr 2018 12:16:34 +0200
+> schrieb Dario Faggioli <dfaggioli@suse.com>:
+>=20
+> > Olaf, new patch. Please, remove _everything_ and apply _only_ this
+> > one.
+>=20
+> dies after the first iteration.
+>=20
+>         BUG_ON(!test_bit(_VPF_migrating, &prev->pause_flags));
+>=20
+So, VPF_migrating is set, when we enter the if() and decide to call
+vcpu_sleep_nosync() and vcpu_migrate(), but is not set here, once we
+have taken the lock.
+
+Interestingly, we did not hit BUG_ON(vcpu_runnable(prev)), right before
+that...
+
+Anyway, there is only once place where VPF_migrating is reset, and that
+is in vcpu_migrate().
+
+So, basing on our theory that we are running concurrently with
+vcpu_set_affinity(), it's the call to vcpu_migrate() from
+vcpu_set_affinity() that resets it.
+
+I need to think a bit more (I'm trying to picture the exact scenario)
+but as of now, it still does not make sense... As it looks to me that
+now it is the call to vcpu_sleep_nosync(), also from
+vcpu_set_affinity(), that should have removed prev from the runqueue.
+
+True that vcpu_migrate() ends with vcpu_wake(), which put is back in a
+runqueue, but then again the our vcpu_migrate(), here in
+context_saved(), finding that VPF_migrate() is off, should *not* call
+vcpu_move_locked().
+
+This is getting insane (or I am)... :-O
+
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-WsBpf8mHz9e897S2m3/R
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrPW9kACgkQFkJ4iaW4
+c+5ZuxAAuCq6BPxO+oto3Ihikgy3uKok/8CSMhkRsjLXHfPkGYC1L3gotpK0Of43
+1XNVjIjX0DG39nvTw+70phEaAdm2aDdg5fUzoyIHuK3yWm1dcMnTh6W3UQS5G4ZK
+tJBcSyD/MRCysp4Z78wNvd0hGxCwE2RaVRelz+LqkSW+AYSisfrjIQ0ZM7h1Oq5O
+ARijdiukpEngkJ2CXRcCyF+LasSJoE42BkzRuSuUUX1HRcuB1mZT1QjMcLYOLQkZ
+MjZZkLSMF4kQSHQKQ5gQH6HxpkYHErPg6L+smpnHgusr6gnazFyiSisH/Ti3EBbc
+L+xS38JCmBRJzvlws6Od7qWTG57KUoqJT4qH/1a19234Gs0lqPIZ5r+Gt2MdKDwp
+GYKUmHV0yLptpZxHFPsexeQNDoqXexzSb7xHxREyqY2inSZ9fpIIBQjzQbcpSeA5
+PoryPmvjBAJMXL+5WIZPStUVJLfTMLt5kn+t2w14IrSUSaLEMw2LLjTsq7Pc+/dm
+ImDYN6I3aoh+OQXUNXh5GguPJkzJJbS965jq8HZz6awbi95BZ6RA+vS5Yvdi2Dr+
+o/+DcbHC+420bZgEutDkg9S0VG/zr63s77mI604H6EP5cDImaXyMJBuF9UO+wb6H
+bsBIezyL7d3yhjX5tQWo2XtJphTNK3ArnJYjOc7Ylns8v4ze7sw=
+=JEs5
+-----END PGP SIGNATURE-----
+
+--=-WsBpf8mHz9e897S2m3/R--
+
+
+
+--===============0111642023278671473==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0111642023278671473==--
