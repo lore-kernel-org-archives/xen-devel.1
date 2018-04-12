@@ -1,22 +1,12 @@
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: Re: [PATCH 0/5] for-linux/sndif: add explicit back and
- front synchronization
-Date: Thu, 12 Apr 2018 19:55:04 +0300
-Message-ID: <db3ee9fb-d0ab-5f17-a1ec-7bb8ec5cf75f__39106.9154874005$1523552052$gmane$org@epam.com>
-References: <20180412160102.15833-1-oleksandr_andrushchenko@epam.com>
- <d5ede3f5-200e-f1c7-71f4-4ebfb938ca48@gmail.com>
- <43348cf5-d2f8-9d7d-0390-2273eef8f67d@oracle.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH for-4.11 0/3] x86/pv: Fixes to debug register
+ handling
+Date: Thu, 12 Apr 2018 17:55:53 +0100
+Message-ID: <1523552156-20866-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ulak=hb=epam.com=oleksandr_andrushchenko@srs-us1.protection.inumbo.net>)
- id 1f6fVP-00063g-05
- for xen-devel@lists.xenproject.org; Thu, 12 Apr 2018 16:55:27 +0000
-In-Reply-To: <43348cf5-d2f8-9d7d-0390-2273eef8f67d@oracle.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,22 +15,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Oleksandr Andrushchenko <andr2000@gmail.com>, konrad.wilk@oracle.com, tiwai@suse.de
-Cc: jgross@suse.com, xen-devel@lists.xenproject.org, alsa-devel@alsa-project.org, linux-kernel@vger.kernel.org
+To: Xen-devel <xen-devel@lists.xen.org>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMTIvMjAxOCAwNzo1NSBQTSwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDA0LzEy
-LzIwMTggMTI6MTEgUE0sIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdyb3RlOgo+PiBIZWxsbywg
-S29ucmFkLCBUYWthc2hpIQo+Pgo+PiBDb3VsZCB5b3UgcGxlYXNlIHJldmlldyB0aGUgKkxpbnV4
-IEtlcm5lbCogdmVyc2lvbiBvZiB0aGUgY2hhbmdlcz8KPj4gQXMgSSBzYWlkIGluIHRoZSBjb3Zl
-ciBsZXR0ZXIgYmVsb3cgdGhlcmUgaXMgbm8gZnVuY3Rpb25hbCBjaGFuZ2VzCj4+IGNvbXBhcmlu
-ZyB0byB0aGUgY29ycmVzcG9uZGluZyBYZW4gdmVyc2lvbiwgYnV0IHNwYWNlcyB0byB0YWJzLgo+
-PiBTdGlsbCwgZm9ybWFsbHksIEkgaGF2ZSB0byBkcm9wIHRoZSBSLWIgdGFncyBhbmQgcmVxdWVz
-dCBmb3IgdGhlIG5ldwo+PiByZXZpZXcuCj4gSXMgdGhlcmUgYW55IHJlYXNvbiB3aHkgdGhpcyBh
-bGwgY2FuJ3QgYmUgZG9uZSBpbiBhIHNpbmdsZSBwYXRjaD8KSnVzdCB0byBwcmVzZXJ2ZSB0aGUg
-aGlzdG9yeSBvZiB0aGUgY2hhbmdlcz8KPiBUaGlzIGlzIGp1c3Qgc3luY2luZyB1cCB3aXRoIHRo
-ZSBjYW5vbmljYWwgZGVmaW5pdGlvbiBpbiBYZW4uCkRvIHlvdSB3YW50IG1lIHRvIHNxdWFzaCBh
-bmQgcmVzZW5kPwo+IC1ib3Jpcwo+Cj4KVGhhbmsgeW91LApPbGVrc2FuZHIKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+QXQgdGhpcyBwb2ludCwgSSB0aGluayB0aGVzZSBwYXRjaGVzIGFyZSBwbGF1c2libGUgY2FuZGlk
+YXRlcyBmb3IgaW5jbHVzaW9uCmludG8gNC4xMS4gIFdoZXRoZXIgdGhleSB3YW50IGJhY2twb3J0
+aW5nIGlzIGEgc2xpZ2h0bHkgaGFyZGVyIG1hdHRlciwgYXMKdGhlc2UgcGF0Y2hlcyBuZWNlc3Nl
+cmlseSBhbHRlciBzb21lIGVycm9yIHZhbHVlcyBmb3IgdGhlIGdldC9zZXRfZGVidWdfcmVnKCkK
+aHlwZXJjYWxscy4KCklmIGhvd2V2ZXIgdGhlcmUgaXMgb2JqZWN0aW9uIHRvIHRoZXNlIGdvaW5n
+IGludG8gNC4xMSwgdGhleSBjYW4gc2l0IGluCng4Ni1uZXh0IHVudGlsIHRoZSA0LjEyIHdpbmRv
+dyBvcGVucy4KCkFuZHJldyBDb29wZXIgKDMpOgogIHg4Ni9wdjogSW50cm9kdWNlIGFuZCB1c2Ug
+eDg2ZW11bF9yZWFkX2RyKCkKICB4ODYvcHY6IEludHJvZHVjZSBhbmQgdXNlIHg4NmVtdWxfd3Jp
+dGVfZHIoKQogIHg4Ni90cmFwczogTWlzYyBub24tZnVuY3Rpb25hbCBpbXByb3ZlbWVudHMgdG8g
+c2V0X2RlYnVncmVnKCkKCiB4ZW4vYXJjaC94ODYvcHYvZW11bC1wcml2LW9wLmMgICAgICAgICB8
+IDI0ICstLS0tLS0tLS0tCiB4ZW4vYXJjaC94ODYvcHYvbWlzYy1oeXBlcmNhbGxzLmMgICAgICB8
+IDE4ICsrLS0tLS0tLQogeGVuL2FyY2gveDg2L3RyYXBzLmMgICAgICAgICAgICAgICAgICAgfCA2
+NyArKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tCiB4ZW4vYXJjaC94ODYveDg2X2VtdWxh
+dGUuYyAgICAgICAgICAgICB8IDczICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysK
+IHhlbi9hcmNoL3g4Ni94ODZfZW11bGF0ZS94ODZfZW11bGF0ZS5oIHwgIDUgKysrCiA1IGZpbGVz
+IGNoYW5nZWQsIDEyNyBpbnNlcnRpb25zKCspLCA2MCBkZWxldGlvbnMoLSkKCi0tIAoyLjEuNAoK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
