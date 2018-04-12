@@ -1,29 +1,22 @@
-From: Ingo Molnar <mingo@kernel.org>
-Subject: Re: [PATCH] x86/xen: zero MSR_IA32_SPEC_CTRL before
- suspend
-Date: Thu, 12 Apr 2018 10:08:44 +0200
-Message-ID: <20180412080844.mof7ukyeuhd3dsoq__9187.46178872443$1523520451$gmane$org@gmail.com>
-References: <20180226140818.4849-1-jgross@suse.com>
- <5AA8F00302000078001B15EE@suse.com>
- <6b59ac31-7e90-1c18-2467-d7d294da6e5b@suse.com>
- <5ACDEE5B02000078001BA2DE@prv1-mh.provo.novell.com>
- <20180411115350.lvx5yaevoq6arwg3@gmail.com>
- <5ACE149E02000078001BA424@prv1-mh.provo.novell.com>
- <20180412073219.2h5fqc7megvepoa6@gmail.com>
- <5ACF2CB002000078001BA984@prv1-mh.provo.novell.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: X86 Community Call: Wed March 14,
+ 15:00 - 16:00 UTC - Meeting Minutes
+Date: Thu, 12 Apr 2018 09:22:58 +0100
+Message-ID: <92DCBECD-1C7A-46F6-9DF9-73EB3AAF3370@xenproject.org>
+References: <F3DB153A-A358-4DFE-A054-D436270FC8B9@citrix.com>
+ <20180412011831.GA177943@skl-4s-chao.sh.intel.com>
+ <46762923-FAE4-428D-9AD7-D8551D676085@citrix.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.3 \(3445.6.18\))
+Content-Type: multipart/mixed; boundary="===============0813339584615928046=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gjam=hb=gmail.com=mingo.kernel.org@srs-us1.protection.inumbo.net>)
- id 1f6XHm-0001f4-4g
- for xen-devel@lists.xenproject.org; Thu, 12 Apr 2018 08:08:50 +0000
-Received: by mail-wr0-x244.google.com with SMTP id c24so4152324wrc.6
- for <xen-devel@lists.xenproject.org>; Thu, 12 Apr 2018 01:08:48 -0700 (PDT)
-Content-Disposition: inline
-In-Reply-To: <5ACF2CB002000078001BA984@prv1-mh.provo.novell.com>
+ <srs0=zrxr=hb=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1f6XVX-00038t-Vd
+ for xen-devel@lists.xenproject.org; Thu, 12 Apr 2018 08:23:04 +0000
+Received: by mail-wm0-x234.google.com with SMTP id l16so4351096wmh.2
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Apr 2018 01:23:01 -0700 (PDT)
+In-Reply-To: <46762923-FAE4-428D-9AD7-D8551D676085@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -32,35 +25,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Juergen Gross <jgross@suse.com>, x86@kernel.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org, mingo@redhat.com, hpa@zytor.com, xen-devel@lists.xenproject.org, tglx@linutronix.de, boris.ostrovsky@oracle.com
+To: George Dunlap <george.dunlap@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, "Peng,
+ Chao P" <chao.p.peng@intel.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <dunlapg@umich.edu>, =?utf-8?Q?Roger_Pau_Monn=C3=A9?= <royger@freebsd.org>, Christopher Clark <christopher.w.clark@gmail.com>, "Ji,
+ John" <john.ji@intel.com>, Rich Persaud <persaur@gmail.com>, Tamas K Lengyel <tamas@tklengyel.com>, "committers@xenproject.org" <committers@xenproject.org>, 'Jan Beulich' <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Janakarajan Natarajan <jnataraj@amd.com>, Brian Woods <brian.woods@amd.com>, Daniel Kiper <daniel.kiper@oracle.com>, Paul Durrant <Paul.Durrant@citrix.com>, Chao Gao <chao.gao@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CiogSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1c2UuY29tPiB3cm90ZToKCj4gPj4+IE9uIDEyLjA0
-LjE4IGF0IDA5OjMyLCA8bWluZ29Aa2VybmVsLm9yZz4gd3JvdGU6Cj4gCj4gPiAqIEphbiBCZXVs
-aWNoIDxKQmV1bGljaEBzdXNlLmNvbT4gd3JvdGU6Cj4gPiAKPiA+PiA+Pj4gT24gMTEuMDQuMTgg
-YXQgMTM6NTMsIDxtaW5nb0BrZXJuZWwub3JnPiB3cm90ZToKPiA+PiA+ICogSmFuIEJldWxpY2gg
-PEpCZXVsaWNoQHN1c2UuY29tPiB3cm90ZToKPiA+PiA+IAo+ID4+ID4+IEFkZGl0aW9uYWxseSwg
-eDg2IG1haW50YWluZXJzOiBpcyB0aGVyZSBhIHBhcnRpY3VsYXIgcmVhc29uIHRoaXMgKG9yCj4g
-Pj4gPj4gYW55IGZ1bmN0aW9uYWxseSBlcXVpdmFsZW50IHBhdGNoKSBpc24ndCB1cHN0cmVhbSB5
-ZXQ/IEFzIGluZGljYXRlZAo+ID4+ID4+IGJlZm9yZSwgSSBoYWQgbm90IGJlZW4gYWJsZSB0byBm
-aW5kIGFueSBkaXNjdXNzaW9uLCBhbmQgaGVuY2UgSQo+ID4+ID4+IHNlZSBubyByZWFzb24gd2h5
-IHRoaXMgaXMgYSBwYXRjaCB3ZSBlZmZlY3RpdmVseSBjYXJyeSBwcml2YXRlbHkgaW4KPiA+PiA+
-PiBvdXIgZGlzdHJvIGJyYW5jaGVzIChhbmQgbGlrZWx5IG90aGVyIGRpc3Ryb3MgZG8gc28gdG9v
-KS4KPiA+PiA+IAo+ID4+ID4gVGhlIHBhdGNoIHdhcyBtZXJnZWQgNiB3ZWVrcyBhZ28gYW5kIGlz
-IG5vdyB1cHN0cmVhbToKPiA+PiA+IAo+ID4+ID4gICA3MWMyMDhkZDU0YWI6IHg4Ni94ZW46IFpl
-cm8gTVNSX0lBMzJfU1BFQ19DVFJMIGJlZm9yZSBzdXNwZW5kCj4gPj4gCj4gPj4gSSdtIHNvcnJ5
-LCBidXQgbm8sIHRoaXMgaXNuJ3QgdGhlIHBhdGNoIEkgd2FzIGlucXVpcmluZyBhYm91dC4KPiA+
-PiBJbnN0ZWFkIEknbSB3b25kZXJpbmcgb2YgdGhlIGRpc3Bvc2l0aW9uIG9mIHRoZSBwYXRjaCBk
-aXNhYmxpbmcKPiA+PiBJQlJTIGFyb3VuZCBhIENQVSBnb2luZyBpZGxlLgo+ID4gCj4gPiBHb3Qg
-YW55IHNwZWNpZmljIGxpbmsgb3Igc3ViamVjdCBsaW5lIGZvciB0aGF0IHN1Ym1pc3Npb24/Cj4g
-Cj4gU3VyZSwgYXMgd3JpdHRlbiBpbiB0aGUgb3JpZ2luYWwgcmVzcG9uc2UgdG8gSsO8cmdlbidz
-IHBhdGNoOgo+IGh0dHBzOi8vcGF0Y2h3b3JrLmtlcm5lbC5vcmcvcGF0Y2gvMTAxNTM4NDMvCgpB
-cmdoLCBpbmRlZWQgeW91IGRpZCEKCkluIGFueSBjYXNlLCB0aGlzIHN1Ym1pc3Npb24gZnJvbSBU
-aW0gQ2hlbjoKCiAgIFtQQVRDSCB2MyAwLzVdIElCUlMgcGF0Y2ggc2VyaWVzCgpDb250YWluZWQg
-YSBnbGFyaW5nIGJ1ZyBpbiBwYXRjaCAjMiB3aGljaCBUaG9tYXMgcG9pbnRlZCBvdXQsIGFuZCBB
-RkFJQ1MgdGhlIApzZXJpZXMgd2FzIG5ldmVyIHJlc3VibWl0dGVkIHRvIGxrbWwgc28gaXQgZ290
-IGxvc3QuCgpJbiBhbnkgY2FzZSB0aGFua3MgZm9yIHRoZSByZW1pbmRlciEKClRoYW5rcywKCglJ
-bmdvCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============0813339584615928046==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_CB97AF09-A379-4FE8-B12F-A19C4E9BDE24"
+
+
+--Apple-Mail=_CB97AF09-A379-4FE8-B12F-A19C4E9BDE24
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
+
+
+
+> On 12 Apr 2018, at 08:32, George Dunlap <george.dunlap@citrix.com> =
+wrote:
+>=20
+>=20
+>=20
+>> On Apr 12, 2018, at 2:18 AM, Chao Gao <chao.gao@intel.com> wrote:
+>>=20
+>> On Wed, Apr 11, 2018 at 05:10:40PM +0000, Lars Kurth wrote:
+>>> ## Longer Term - Agreed to Pause
+>>>=20
+>>> ### [PATCH v4 00/28] add vIOMMU support with irq remapping function =
+of
+>>> ### virtual VT-d
+>>>=20
+>>> Sent in for meeting agenda by George
+>>> v3 posted by Lan Tianyu on 22 September 2017: =
+=E2=80=8Bmarc.info/?l=3Dxen-devel&m=3D
+>>> v4 posted by Chao Gao: =
+=E2=80=8Bhttps://xen.markmail.org/thread/wfyorbn3nzsio6s
+>>> **Seems to have had review by Roger Pau Monne (1 ACK)
+>>> No issues**
+>>> Primarily needs George as reviewer
+>>> Agreed to park this, because NVDIMM work is more important
+>>=20
+>> I want to clarify that I will continue to working on this, i.e. send =
+out
+>> patches and respond to comments. "Pause" here only means review will =
+be
+>> paused because George and Roger who are willing to review this series
+>> have to finish NVDIMM work first.
+>=20
+> Er, I think this comment was misplaced =E2=80=94 it was the SPP series =
+that I need to be the primary reviewer on.  I wasn=E2=80=99t aware that =
+the vIOMMU series had anything specific to do with the mm code.
+
+I may have recorded this incorrectly in that Royger would be the primary =
+reviewer. I can't recall. In any case, the effect is the same, as Royger =
+is also on the critical path for NVDIMM
+
+@John, @Chao: I agree with your clarification: that is what I meant. I =
+recorded it inaccurately.
+
+As an aside, I will take the replies to this thread and copy it into the =
+google doc (but I won't send out PDFs for it)
+
+Regards
+Lars=
+
+--Apple-Mail=_CB97AF09-A379-4FE8-B12F-A19C4E9BDE24
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dutf-8"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
+class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 12 Apr 2018, at 08:32, George Dunlap &lt;<a =
+href=3D"mailto:george.dunlap@citrix.com" =
+class=3D"">george.dunlap@citrix.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><blockquote type=3D"cite" style=3D"font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
+-webkit-text-stroke-width: 0px; text-decoration: none;" class=3D"">On =
+Apr 12, 2018, at 2:18 AM, Chao Gao &lt;<a =
+href=3D"mailto:chao.gao@intel.com" class=3D"">chao.gao@intel.com</a>&gt; =
+wrote:<br class=3D""><br class=3D"">On Wed, Apr 11, 2018 at 05:10:40PM =
++0000, Lars Kurth wrote:<br class=3D""><blockquote type=3D"cite" =
+class=3D"">## Longer Term - Agreed to Pause<br class=3D""><br =
+class=3D"">### [PATCH v4 00/28] add vIOMMU support with irq remapping =
+function of<br class=3D"">### virtual VT-d<br class=3D""><br =
+class=3D"">Sent in for meeting agenda by George<br class=3D"">v3 posted =
+by Lan Tianyu on 22 September 2017: =E2=80=8B<a =
+href=3D"http://marc.info/?l=3Dxen-devel&amp;m=3D" =
+class=3D"">marc.info/?l=3Dxen-devel&amp;m=3D</a><br class=3D"">v4 posted =
+by Chao Gao: =E2=80=8B<a =
+href=3D"https://xen.markmail.org/thread/wfyorbn3nzsio6s" =
+class=3D"">https://xen.markmail.org/thread/wfyorbn3nzsio6s</a><br =
+class=3D"">**Seems to have had review by Roger Pau Monne (1 ACK)<br =
+class=3D"">No issues**<br class=3D"">Primarily needs George as =
+reviewer<br class=3D"">Agreed to park this, because NVDIMM work is more =
+important<br class=3D""></blockquote><br class=3D"">I want to clarify =
+that I will continue to working on this, i.e. send out<br =
+class=3D"">patches and respond to comments. "Pause" here only means =
+review will be<br class=3D"">paused because George and Roger who are =
+willing to review this series<br class=3D"">have to finish NVDIMM work =
+first.<br class=3D""></blockquote><br style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">Er, I think this comment was misplaced =E2=80=94 it was the =
+SPP series that I need to be the primary reviewer on. &nbsp;I wasn=E2=80=99=
+t aware that the vIOMMU series had anything specific to do with the mm =
+code.</span><br class=3D""></div></blockquote><br class=3D""></div><div>I =
+may have recorded this incorrectly in that Royger would be the primary =
+reviewer. I can't recall. In any case, the effect is the same, as Royger =
+is also on the critical path for NVDIMM</div><div><br =
+class=3D""></div><div>@John, @Chao: I agree with your clarification: =
+that is what I meant. I recorded it inaccurately.</div><div><br =
+class=3D""></div><div>As an aside, I will take the replies to this =
+thread and copy it into the google doc (but I won't send out PDFs for =
+it)</div><div><br class=3D""></div>Regards<div =
+class=3D"">Lars</div></body></html>=
+
+--Apple-Mail=_CB97AF09-A379-4FE8-B12F-A19C4E9BDE24--
+
+
+--===============0813339584615928046==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0813339584615928046==--
