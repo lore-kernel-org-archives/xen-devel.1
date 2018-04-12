@@ -1,17 +1,14 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 122191: regressions -
- trouble: blocked/fail
-Date: Thu, 12 Apr 2018 16:43:30 +0000
-Message-ID: <osstest-122191-mainreport@xen.org>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 7/7] xen/arm: Restore IRQ affinity after
+ hotplugging a CPU
+Date: Thu, 12 Apr 2018 18:49:21 +0200
+Message-ID: <3c33657b63a04a466028b02ce52d8777bbbfbf04.camel@suse.com>
+References: <20180411131927.27083-1-mirela.simonovic@aggios.com>
+ <20180411131927.27083-8-mirela.simonovic@aggios.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0833053541457870984=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=12jj=hb=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1f6fJv-0004te-4Z
- for xen-devel@lists.xenproject.org; Thu, 12 Apr 2018 16:43:35 +0000
+In-Reply-To: <20180411131927.27083-8-mirela.simonovic@aggios.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,122 +17,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Mirela Simonovic <mirela.simonovic@aggios.com>, xen-devel@lists.xen.org
+Cc: edgar.iglesias@xilinx.com, sstabellini@kernel.org, dm@aggios.com, julien.grall@arm.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMjE5MSB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMjE5MS8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYXJtNjQteHNtICAgICAg
-ICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyMTc0
-CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAgICAgICAgICAg
-ICBmYWlsIFJFR1IuIHZzLiAxMjIxNzQKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgIDYg
-eGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjE3NAoKVGVzdHMgd2hp
-Y2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYXJtaGYtYXJt
-aGYteGwgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBu
-L2EKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWkzODYgIDEgYnVpbGQtY2hl
-Y2soMSkgICAgICAgICBibG9ja2VkIG4vYQogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAg
-MSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hcm02NC1h
-cm02NC14bC14c20gICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQg
-IG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAg
-ICAgICAgICAgIGJsb2NrZWQgIG4vYQoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhl
-biAgICAgICAgICAgICAgICAgIGYyNDZkNDI2NjVhNjAyM2MyNDhjNWIzZTM3NGRhNTY5MWRmNjNm
-NmYKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIDgyNTQwYjY2Y2ViOTMx
-OGFhMTg1ZjI0ODhjYmJiZTQ3OTY5NGRlOGYKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEyMjE3NCAg
-MjAxOC0wNC0xMSAxMTowMToxNyBaICAgIDEgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMjIx
-OTEgIDIwMTgtMDQtMTIgMTY6MDE6MzAgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoKLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBl
-b3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBHZW9yZ2UgRHVubGFwIDxn
-ZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CiAgSWFuIEphY2tzb24gPElhbi5KYWNrc29uQGV1LmNp
-dHJpeC5jb20+CiAgTGFycyBLdXJ0aCA8bGFycy5rdXJ0aEBjaXRyaXguY29tPgoKam9iczoKIGJ1
-aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIGJ1aWxkLWFtZDY0LWxpYnZp
-cnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVz
-dC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IGJsb2NrZWQgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFu
-aHZtLWkzODYgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC1s
-aWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCgoKLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-CnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dz
-OiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmln
-IGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywg
-YW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
-cmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIK
-ICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtm
-PVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAg
-aHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpO
-b3QgcHVzaGluZy4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLQpjb21taXQgZjI0NmQ0MjY2NWE2MDIzYzI0OGM1YjNlMzc0ZGE1Njkx
-ZGY2M2Y2ZgpBdXRob3I6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgpE
-YXRlOiAgIEZyaSBBcHIgNiAxODoxMzo1MCAyMDE4ICswMTAwCgogICAgZG9jcy9NYWtlZmlsZTog
-Rm9ybWF0IFNVUFBPUlQubWQgaW50byB0aGUgdG9wbGV2ZWwKICAgIAogICAgU2lnbmVkLW9mZi1i
-eTogSWFuIEphY2tzb24gPElhbi5KYWNrc29uQGV1LmNpdHJpeC5jb20+CiAgICBSZWxlYXNlLWFj
-a2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CiAgICBBY2tlZC1ieTogTGFy
-cyBLdXJ0aCA8bGFycy5rdXJ0aEBjaXRyaXguY29tPgoKY29tbWl0IDUzOWY5Mzk0NWNhZDA2ZmQ5
-MDc4NDcxNmJlMWRjOGQyNjI0YjZmNjYKQXV0aG9yOiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25A
-ZXUuY2l0cml4LmNvbT4KRGF0ZTogICBGcmkgQXByIDYgMTg6MTI6MzcgMjAxOCArMDEwMAoKICAg
-IGRvY3MvTWFrZWZpbGU6IEludHJvZHVjZSBHRU5FUkFURV9QQU5ET0NfUlVMRV9SQVcKICAgIAog
-ICAgV2UgYXJlIGdvaW5nIHRvIHdhbnQgdG8gZm9ybWF0IFNVUFBPUlQubWQgd2hpY2ggZG9lcyBu
-b3QgbWF0Y2ggdGhlCiAgICBmaWxlbmFtZSBwYXR0ZXJucyBpbiBkb2NzLy4gIFNvIHByb3ZpZGUg
-YSB3YXkgdG8gbWFrZSBhbiBhZC1ob2MgcnVsZQogICAgdXNpbmcgcGFuZG9jIHdpdGggdGhlIHN0
-YW5kYXJkIG9wdGlvbnMuCiAgICAKICAgIE5vIGZ1bmN0aW9uYWwgY2hhbmdlIGluIHRoaXMgcGF0
-Y2guCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IElhbiBKYWNrc29uIDxJYW4uSmFja3NvbkBldS5j
-aXRyaXguY29tPgogICAgUmVsZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1
-c2UuY29tPgogICAgQWNrZWQtYnk6IExhcnMgS3VydGggPGxhcnMua3VydGhAY2l0cml4LmNvbT4K
-CmNvbW1pdCAxZTRhODM0YThmNWQ5NzBlNjhjZmY2ZDljMTY3MTAxOTRiYzQ2NTM3CkF1dGhvcjog
-SWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CkRhdGU6ICAgRnJpIEFwciA2
-IDE5OjA5OjE2IDIwMTggKzAxMDAKCiAgICBkb2NzL2dlbi1odG1sLWluZGV4OiBTdXBwb3J0IGRv
-Y3VtZW50cyBhdCB0aGUgdG9wbGV2ZWwKICAgIAogICAgVGhlcmUgYXJlIG5vbmUgeWV0LgogICAg
-CiAgICBTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8SWFuLkphY2tzb25AZXUuY2l0cml4LmNv
-bT4KICAgIFJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4K
-ICAgIEFja2VkLWJ5OiBMYXJzIEt1cnRoIDxsYXJzLmt1cnRoQGNpdHJpeC5jb20+Cgpjb21taXQg
-Nzc4MmRiOTI2MGQ0YzY0OTk0NThkZTRlOGQ5ODY2YmMwNDI3ZTE0MwpBdXRob3I6IElhbiBKYWNr
-c29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgpEYXRlOiAgIEZyaSBBcHIgNiAxOTowOTow
-MiAyMDE4ICswMTAwCgogICAgZG9jcy9nZW4taHRtbC1pbmRleDogRXh0cmFjdCB0aXRsZXMgZnJv
-bSBIVE1MIGRvY3VtZW50cwogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8SWFu
-LkphY2tzb25AZXUuY2l0cml4LmNvbT4KICAgIFJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jv
-c3MgPGpncm9zc0BzdXNlLmNvbT4KICAgIEFja2VkLWJ5OiBMYXJzIEt1cnRoIDxsYXJzLmt1cnRo
-QGNpdHJpeC5jb20+Cgpjb21taXQgYTU2OWM2ZjgxNWZiNmExOGM2NGI4ZjEyMmY1ZTJiYmVjZDQ0
-NDQzMgpBdXRob3I6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgpEYXRl
-OiAgIEZyaSBBcHIgNiAxODoxNjozNSAyMDE4ICswMTAwCgogICAgU1VQUE9SVC5tZDogU3ludGF4
-OiBQcm92aWRlIGEgdGl0bGUgcmF0aGVyIHRoYW4gYSBzcHVyaW91cyBlbXB0eSBzZWN0aW9uCiAg
-ICAKICAgIFRoaXMgY29tbWl0cyAobW9yZSBvciBsZXNzKSB0aGlzIGZpbGUgdG8gYmUgcHJvY2Vz
-c2VkIHdpdGggcGFuZG9jLAogICAgcmF0aGVyIHRoYW4gb3RoZXIgbWFya2Rvd24gcHJvY2Vzc29y
-cy4gIFRoZXJlIGlzLCB1bmZvcnR1bmF0ZWx5LCBubwogICAgd2lkZWx5LWFjY2VwdGVkIHdheSB0
-byBkZWNsYXJlIGEgdGl0bGUgZm9yIHRoZSBkb2N1bWVudC4KICAgIAogICAgSSB0ZXN0ZWQgZmVl
-ZGluZyB0aGUgZG9jdW1lbnQgdG8gbWFya2Rvd24oMSkgb24gRGViaWFuIGplc3NpZSBhbmQgaXQK
-ICAgIHJlcHJvZHVjZWQgdGhlICUgbGluZSBhcyBpZiBpdCB3ZXJlIHNpbXBsZSB0ZXh0LiAgSSBn
-dWVzcyBtYW55IG90aGVyCiAgICBtYXJrZG93biBwcm9jZXNzb3JzIHdpbGwgZG8gc29tZXRoaW5n
-IHNpbWlsYXJseSB0b2xlcmFibGUuICBNeQogICAgaW50ZXJuZXQgc2VhcmNoZXMgZGlkIG5vdCBk
-aXNjb3ZlciBhIG1hcmtkb3duIHByb2Nlc3NvciB0aGF0IHVzZWQKICAgIGxpbmVzIHN0YXJ0aW5n
-IHdpdGggJSBmb3Igc29tZXRoaW5nIGVsc2UuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IElhbiBK
-YWNrc29uIDxJYW4uSmFja3NvbkBldS5jaXRyaXguY29tPgogICAgUmVsZWFzZS1hY2tlZC1ieTog
-SnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgogICAgQWNrZWQtYnk6IEdlb3JnZSBEdW5s
-YXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5OiBMYXJzIEt1cnRoIDxs
-YXJzLmt1cnRoQGNpdHJpeC5jb20+Cgpjb21taXQgZWJiZDAyOTkwODlhNjk4YzM5ZDRjZWQ5NjZk
-ZjU4MzE5NDRiNDMwNQpBdXRob3I6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXgu
-Y29tPgpEYXRlOiAgIEZyaSBBcHIgNiAxNToyMDoyMiAyMDE4ICswMTAwCgogICAgU1VQUE9SVC5t
-ZDogU3ludGF4OiBGaXggYSB0eXBvICJTdGF0ZXMiCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IElh
-biBKYWNrc29uIDxJYW4uSmFja3NvbkBldS5jaXRyaXguY29tPgogICAgUmVsZWFzZS1hY2tlZC1i
-eTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgogICAgQWNrZWQtYnk6IEdlb3JnZSBE
-dW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5OiBMYXJzIEt1cnRo
-IDxsYXJzLmt1cnRoQGNpdHJpeC5jb20+Cgpjb21taXQgMDExNDNiNjI3M2JjMzVhMzVhZmRlMTU0
-YjJiYjI0MTU5NDFiZWE4OQpBdXRob3I6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRy
-aXguY29tPgpEYXRlOiAgIFRodSBBcHIgNSAxNzoxOTozMSAyMDE4ICswMTAwCgogICAgU1VQUE9S
-VC5tZDogU3ludGF4OiBGaXggc29tZSBidWxsZXQgbGlzdHMKICAgIAogICAgQ29udGludWF0aW9u
-cyBvZiBidWxsZXQgbGlzdCBpdGVtcyBtdXN0IGJlIGluZGVudGVkIGJ5IGV4YWN0bHkgNAogICAg
-c3BhY2VzIChhY2NvcmRpbmcgdG8gcGFuZG9jX21hcmtkb3duKDUpIG9uIERlYmlhbiBqZXNzaWUp
-LgogICAgCiAgICBUaGlzIGlzIG1vc3QgZWFzaWx5IGFjaGlldmVkIGJ5IG1ha2luZyB0aGUgYnVs
-bGV0IGxpc3QgaXRlbXMgaGF2ZSB0d28KICAgIHNwYWNlcyBiZWZvcmUgdGhlIGAqJy4KICAgIAog
-ICAgU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPElhbi5KYWNrc29uQGV1LmNpdHJpeC5jb20+
-CiAgICBSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CiAg
-ICBBY2tlZC1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgogICAg
-QWNrZWQtYnk6IExhcnMgS3VydGggPGxhcnMua3VydGhAY2l0cml4LmNvbT4KKHFlbXUgY2hhbmdl
-cyBub3QgaW5jbHVkZWQpCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+
+--===============0833053541457870984==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-6lnU5lRo1K2impfO8knK"
+
+
+--=-6lnU5lRo1K2impfO8knK
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-04-11 at 15:19 +0200, Mirela Simonovic wrote:
+> Secondary pCPUs will be offlined on system suspend and hotplugged
+> on resume. When offlining secondary CPUs all interrupts targeted
+> to those CPUs will be routed to the boot CPU. The boot CPU
+> is responsible for finalizing suspend procedure. All wake-up
+> interrupts are therefore targeted to the boot CPU.=20
+>
+There is no wake-up interrupt involved in the process of unpausing
+domains during resume. So, I that that what you mean is "the interrups
+that the vcpus receive once they're running again. And even in that
+case, rather than "All", is it "The interrupts received until the first
+time the vcpu goes through vcpu_migrate()", as vcpu_migrate() does call
+sched_move_irq()?
+
+Note that I'm not (trying to) being picky, I'm just trying to
+undestand. :-)
+
+> Existing code
+> was missing the restoration of interrupts affinity after
+> hotplugging a CPU.
+>
+Either use hot-unplug and hotplug, or offline and online. I think the
+latter is better in this case.
+
+>  This patch restores the IRQ affinity after
+> a CPU is hotplugged.
+>=20
+> Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
+
+> diff --git a/xen/common/schedule.c b/xen/common/schedule.c
+> index 343ab6306e..e3956019bc 100644
+> --- a/xen/common/schedule.c
+> +++ b/xen/common/schedule.c
+> @@ -724,6 +725,9 @@ void restore_vcpu_affinity(struct domain *d)
+>          lock =3D vcpu_schedule_lock_irq(v);
+>          v->processor =3D SCHED_OP(vcpu_scheduler(v), pick_cpu, v);
+>          spin_unlock_irq(lock);
+> +
+> +        if ( affinity_was_broken )
+> +            sched_move_irqs(v);
+>
+But I guess that, more than on whether or not the affinity was broken,
+you are interested in whether or not v->processor changed.
+
+In fact, for the vcpus that had 0 in v->processor at the beginning of
+this function, and also have 0 in there now, there is no need to call
+sched_move_irq(), is there?
+
+Similarly, if the affinity of a vcpu has not been broken, but pick_cpu
+end up selecting a different v->processor, you do want to call
+sched_move_irq(), I think.
+
+If I'm right, I think it would be better to do, at the beginning of the
+for:
+
+ unsigned int old_cpu =3D v->processor;
+
+And here:
+
+ if (old_cpu !=3D v->processor)
+   sched_move_irqs(v);
+
+And I'd also add a comment (above the if()), briefly saying how this is
+necessary to match/undo the call work of vcpu_move_nosched() in
+cpu_disable_scheduler().=20
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-6lnU5lRo1K2impfO8knK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrPjhIACgkQFkJ4iaW4
+c+6Ouw/8C+svOznABT4N5Ta3nJ4NCr4VhLJI+Ajjg5nx1QqRr4jXe3nN5CRe2ms5
+iufUnFlMybY2j+UkqdBzFyps86i95uwQ8wrT5y1yDd0+3DXmQNsp+yyXC9wMbf77
+rj8/Qq8QZ4JTXh1xyhP6yczTI1qLmNlvaouscnzqeu+asQnDoWCIYqIaT+FhMnA+
+JzE4qFIwHDxRXP6/GfdEtm6qG+CdX5dfUOkCj8mN/VOENTJDuvHn0jlVb/9NMtzG
+WOmgQuyYPnPwXe4xdDT4/7JW97vJSImJYT6uEd5HIHBi72WGi/tj6k1EEO6qrPcK
+gYix9Bsq65jLN+uoAEX4k4acmjwdTeKgbDrrA+stAYeRePVphHEfB3Qc2W5zz5J0
+W9SzIeOriqux91ufKjh7yF9j25LeYobABnj0y82vy5CORIj0AZFq3oxULWemPbd9
+F7j0m6EzSikv8WgybTWf60ukLA310zdG3jqUPYxTndbF2iiTaAGuLlhL+LrZ97fJ
+Dyn8EC/PfHTeaAHkl7f8KR2jXmV3KI6q7EzVOgFmBF9Z5AjTWbeMnCywqt3Bm4fJ
+YBR7pRdhh9ATrAr6DqFEDYGCQfknOOWezMPMrx9Ji7/69omXHmIB8Thi+ES+/cDU
+Hdb+0E8bc9VJOvG61JKJRAtX776ety20PajUHgeyetBClAQbRWM=
+=DEGY
+-----END PGP SIGNATURE-----
+
+--=-6lnU5lRo1K2impfO8knK--
+
+
+
+--===============0833053541457870984==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0833053541457870984==--
