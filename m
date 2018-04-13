@@ -1,17 +1,19 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 2/3] x86/pv: Introduce and use
- x86emul_write_dr()
-Date: Fri, 13 Apr 2018 05:55:25 -0600
-Message-ID: <5AD09AAD02000078001BB0E0@prv1-mh.provo.novell.com>
-References: <1523552156-20866-1-git-send-email-andrew.cooper3@citrix.com>
- <1523552156-20866-3-git-send-email-andrew.cooper3@citrix.com>
- <5AD06CAC02000078001BAFAA@prv1-mh.provo.novell.com>
- <3ce7dfa8-5682-27be-332a-de4458d34f48@citrix.com>
+Subject: [PATCH 1/3] x86: correct ordering of operations during
+ S3 resume
+Date: Fri, 13 Apr 2018 05:56:16 -0600
+Message-ID: <5AD09AE002000078001BB0E3@prv1-mh.provo.novell.com>
+References: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <3ce7dfa8-5682-27be-332a-de4458d34f48@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=gr51=hc=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1f6xJS-0008Iv-Ji
+ for xen-devel@lists.xenproject.org; Fri, 13 Apr 2018 11:56:18 +0000
+In-Reply-To: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -21,30 +23,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross <jgross@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEzLjA0LjE4IGF0IDEzOjM3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTMvMDQvMTggMDk6MzksIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAxMi4w
-NC4xOCBhdCAxODo1NSwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gQEAg
-LTIwMjksNyArMjAzNSwxNyBAQCBsb25nIHNldF9kZWJ1Z3JlZyhzdHJ1Y3QgdmNwdSAqdiwgdW5z
-aWduZWQgaW50IHJlZywgCj4gdW5zaWduZWQgbG9uZyB2YWx1ZSkKPj4+ICAgICAgICAgIGlmICgg
-diA9PSBjdXJyICkKPj4+ICAgICAgICAgICAgICB3cml0ZV9kZWJ1Z3JlZygzLCB2YWx1ZSk7Cj4+
-PiAgICAgICAgICBicmVhazsKPj4+ICsKPj4+ICsgICAgY2FzZSA0Ogo+Pj4gKyAgICAgICAgaWYg
-KCB2LT5hcmNoLnB2X3ZjcHUuY3RybHJlZ1s0XSAmIFg4Nl9DUjRfREUgKQo+Pj4gKyAgICAgICAg
-ICAgIHJldHVybiAtRU5PREVWOwo+Pj4gKwo+Pj4gKyAgICAgICAgLyogRmFsbHRocm91Z2ggKi8K
-Pj4+ICAgICAgY2FzZSA2Ogo+Pj4gKyAgICAgICAgLyogVGhlIHVwcGVyIDMyIGJpdHMgYXJlIHN0
-cmljdGx5IHJlc2VydmVkLiAqLwo+Pj4gKyAgICAgICAgaWYgKCB2YWx1ZSAhPSAodWludDMyX3Qp
-dmFsdWUgKQo+Pj4gKyAgICAgICAgICAgIHJldHVybiAtRUlOVkFMOwo+Pj4gKwo+Pj4gICAgICAg
-ICAgLyoKPj4+ICAgICAgICAgICAqIERSNjogQml0cyA0LTExLDE2LTMxIHJlc2VydmVkIChzZXQg
-dG8gMSkuCj4+PiAgICAgICAgICAgKiAgICAgIEJpdCAxMiByZXNlcnZlZCAoc2V0IHRvIDApLgo+
-PiBIb3cgYXJlIHRoZSB1cHBlciAzMiBiaXRzIGRpZmZlcmVudCBmcm9tIHRoZSBvdGhlciByZXNl
-cnZlZCBiaXRzIChuYW1lZCBpbiB0aGUKPj4gY29tbWVudCB2aXNpYmxlIGhlcmUpPwo+IAo+IFRo
-ZSB1cHBlciAzMiBiaXRzIGFyZSBNQlogYW5kIHdpbGwgcmFpc2UgI0dQIGlmIHNldC4gIFRoZSBs
-b3dlciByZXNlcnZlZAo+IGJpdHMgYXJlIHdyaXRlLWlnbm9yZWQuCgpPaCwgaW5kZWVkLCBJIGRp
-ZG4ndCByZWNhbGwgdGhhdC4KClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3Vz
-ZS5jb20+CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+TWljcm9jb2RlIGxvYWRpbmcgbmVlZHMgdG8gaGFwcGVuIGJlZm9yZSByZS1lbmFibGluZyBpbnRl
+cnJ1cHRzLCBpbiBjYXNlCm9ubHkgdXBkYXRlZCBtaWNyb2NvZGUgYWxsb3dzIHRoZSB1c2Ugb2Yg
+ZS5nLiB0aGUgU1BFQ197Q1RSTCxDTUR9IE1TUnMuCk90b2ggaXQgZG9lc24ndCBuZWVkIHRvIGhh
+cHBlbiBhdCBhbGwgd2hlbiB3ZSBkaWRuJ3Qgc3VzcGVuZCBpbiB0aGUKZmlyc3QgcGxhY2UuIEl0
+IG5lZWRzIHRvIGhhcHBlbiBiZWZvcmUgc3Bpbl9kZWJ1Z19lbmFibGUoKSB0aG91Z2gsIGFzIGl0
+CmFjcXVpcmVzIGEgbG9jayBhbmQgaGVuY2Ugd291bGQgb3RoZXJ3aXNlIG1ha2UKY29tbW9uL3Nw
+aW5sb2NrLmM6Y2hlY2tfbG9jaygpIHVuaGFwcHkuIEFzIG1pY3Jjb2RlIGxvYWRpbmcgY2FuIGJl
+CnByZXR0eSB2ZXJib3NlLCBhbHNvIG1ha2Ugc3VyZSBpdCBvbmx5IHJ1bnMgYWZ0ZXIgY29uc29s
+ZV9lbmRfc3luYygpLgoKY3B1ZnJlcV9hZGRfY3B1KCkgZG9lc24ndCBuZWVkIGNhbGxpbmcgb24g
+dGhlIG9ubHkgImdvdG8gZW5hYmxlX2NwdSIKcGF0aCwgd2hpY2ggc2l0cyBhaGVhZCBvZiBjcHVm
+cmVxX2RlbF9jcHUoKS4KClJlcG9ydGVkLWJ5OiBTaW1vbiBHYWlzZXIgPHNpbW9uQGludmlzaWJs
+ZXRoaW5nc2xhYi5jb20+ClNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNl
+LmNvbT4KCi0tLSBhL3hlbi9hcmNoL3g4Ni9hY3BpL3Bvd2VyLmMKKysrIGIveGVuL2FyY2gveDg2
+L2FjcGkvcG93ZXIuYwpAQCAtMjAzLDYgKzIwMyw3IEBAIHN0YXRpYyBpbnQgZW50ZXJfc3RhdGUo
+dTMyIHN0YXRlKQogICAgICAgICBwcmludGsoWEVOTE9HX0VSUiAiU29tZSBkZXZpY2VzIGZhaWxl
+ZCB0byBwb3dlciBkb3duLiIpOwogICAgICAgICBzeXN0ZW1fc3RhdGUgPSBTWVNfU1RBVEVfcmVz
+dW1lOwogICAgICAgICBkZXZpY2VfcG93ZXJfdXAoZXJyb3IpOworICAgICAgICBjb25zb2xlX2Vu
+ZF9zeW5jKCk7CiAgICAgICAgIGVycm9yID0gLUVJTzsKICAgICAgICAgZ290byBkb25lOwogICAg
+IH0KQEAgLTI0MywxNyArMjQ0LDE5IEBAIHN0YXRpYyBpbnQgZW50ZXJfc3RhdGUodTMyIHN0YXRl
+KQogICAgIGlmICggKHN0YXRlID09IEFDUElfU1RBVEVfUzMpICYmIGVycm9yICkKICAgICAgICAg
+dGJvb3RfczNfZXJyb3IoZXJyb3IpOwogCisgICAgY29uc29sZV9lbmRfc3luYygpOworCisgICAg
+bWljcm9jb2RlX3Jlc3VtZV9jcHUoMCk7CisKICBkb25lOgogICAgIHNwaW5fZGVidWdfZW5hYmxl
+KCk7CiAgICAgbG9jYWxfaXJxX3Jlc3RvcmUoZmxhZ3MpOwotICAgIGNvbnNvbGVfZW5kX3N5bmMo
+KTsKICAgICBhY3BpX3NsZWVwX3Bvc3Qoc3RhdGUpOwogICAgIGlmICggaHZtX2NwdV91cCgpICkK
+ICAgICAgICAgQlVHKCk7CisgICAgY3B1ZnJlcV9hZGRfY3B1KDApOwogCiAgZW5hYmxlX2NwdToK
+LSAgICBjcHVmcmVxX2FkZF9jcHUoMCk7Ci0gICAgbWljcm9jb2RlX3Jlc3VtZV9jcHUoMCk7CiAg
+ICAgcmN1X2JhcnJpZXIoKTsKICAgICBtdHJyX2Fwc19zeW5jX2JlZ2luKCk7CiAgICAgZW5hYmxl
+X25vbmJvb3RfY3B1cygpOwoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
