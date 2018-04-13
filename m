@@ -1,16 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 2/2] x86/microcode: Do not upload microcode
- if CPUs are offline
-Date: Fri, 13 Apr 2018 09:57:25 -0600
-Message-ID: <5AD0D36502000078001BB2B4@prv1-mh.provo.novell.com>
-References: <1522393141-90344-1-git-send-email-chao.gao@intel.com>
- <1522393141-90344-2-git-send-email-chao.gao@intel.com>
+From: Michal Hocko <mhocko@kernel.org>
+Subject: Re: [PATCH RFC 7/8] mm: allow to control
+ onlining/offlining of memory by a driver
+Date: Fri, 13 Apr 2018 17:59:43 +0200
+Message-ID: <20180413155943.GY17484__37179.3680861176$1523635110$gmane$org@dhcp22.suse.cz>
+References: <20180413131632.1413-1-david@redhat.com>
+ <20180413133334.3612-1-david@redhat.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1522393141-90344-2-git-send-email-chao.gao@intel.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=8rna=hc=kernel.org=mhocko@srs-us1.protection.inumbo.net>)
+ id 1f7177-0001Kz-G5
+ for xen-devel@lists.xenproject.org; Fri, 13 Apr 2018 15:59:49 +0000
 Content-Disposition: inline
+In-Reply-To: <20180413133334.3612-1-david@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,29 +24,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Chao Gao <chao.gao@intel.com>, xen-devel@lists.xen.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Ashok Raj <ashok.raj@intel.com>, Jun Nakajima <jun.nakajima@intel.com>
+To: David Hildenbrand <david@redhat.com>
+Cc: Juergen Gross <jgross@suse.com>, open list <linux-kernel@vger.kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Dan Williams <dan.j.williams@intel.com>, Pavel Tatashin <pasha.tatashin@oracle.com>, Reza Arbab <arbab@linux.vnet.ibm.com>, Ingo Molnar <mingo@kernel.org>, linux-mm@kvack.org, Thomas Gleixner <tglx@linutronix.de>, "moderated list:XEN HYPERVISOR INTERFACE" <xen-devel@lists.xenproject.org>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Andrew Morton <akpm@linux-foundation.org>, Vlastimil Babka <vbabka@suse.cz>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDMwLjAzLjE4IGF0IDA4OjU5LCA8Y2hhby5nYW9AaW50ZWwuY29tPiB3cm90ZToKPiBU
-aGlzIHBhdGNoIGlzIHRvIGJhY2twb3J0IHRoZSBwYXRjaCBiZWxvdyBmcm9tIGxpbnV4IGtlcm5l
-bC4KPiAKPiAgICAgY29tbWl0IDMwZWMyNmRhOTk2N2QwZDc4NWFiYzI0MDczMTI5YTM0YzMyMTE3
-NzcKPiAgICAgQXV0aG9yOiBBc2hvayBSYWogPGFzaG9rLnJhakBpbnRlbC5jb20+Cj4gICAgIERh
-dGU6ICAgV2VkIEZlYiAyOCAxMToyODo0MyAyMDE4ICswMTAwCj4gCj4gICAgICAgICB4ODYvbWlj
-cm9jb2RlOiBEbyBub3QgdXBsb2FkIG1pY3JvY29kZSBpZiBDUFVzIGFyZSBvZmZsaW5lCj4gCj4g
-ICAgICAgICBBdm9pZCBsb2FkaW5nIG1pY3JvY29kZSBpZiBhbnkgb2YgdGhlIENQVXMgYXJlIG9m
-ZmxpbmUsIGFuZCBpc3N1ZSBhCj4gICAgICAgICB3YXJuaW5nLiBIYXZpbmcgZGlmZmVyZW50IG1p
-Y3JvY29kZSByZXZpc2lvbnMgb24gdGhlIHN5c3RlbSBhdCBhbnkgdGltZQo+ICAgICAgICAgaXMg
-b3V0cmlnaHQgZGFuZ2Vyb3VzLgoKSSdtIGFmcmFpZCBJIGRvbid0IGZ1bGx5IGFncmVlIC0gbm90
-IGFwcGx5aW5nIGFuIHVjb2RlIHVwZGF0ZSB0byB0aGUgb25saW5lCkNQVXMgYmVjYXVzZSBzb21l
-IGFyZSBvZmZsaW5lIGlzbid0IGFueSBiZXR0ZXIuIFBsdXMgKHdoaWxlIHVwZGF0aW5nKQp0aGVy
-ZSdzIGFsd2F5cyBnb2luZyB0byBiZSBzb21lIGRpc2NyZXBhbmN5IGJldHdlZW4gdWNvZGUgdmVy
-c2lvbnMuCkFzIGxvbmcgYXMgd2UgYXBwbHkgdXBkYXRlcyB3aGlsZSBicmluZ2luZyBhIENQVSBv
-bmxpbmUsIEkgdGhpbmsgd2UncmUgZmluZS4KCkFsc28gcGxlYXNlIGNvbnNpZGVyIHZhbGlkIGNh
-c2VzIHlvdSBtYWtlIG5vdCB3b3JrIGFueW1vcmUsIGxpa2Ugc29tZW9uZQpoYXZpbmcgYnJvdWdo
-dCBvZmZsaW5lIGFsbCBzaWJsaW5nIGh5cGVydGhyZWFkcywgd2l0aCBlYWNoIGNvcmUgc3RpbGwg
-aGF2aW5nCm9uZSB0aHJlYWQgYWN0aXZlLiBJbiB0aGF0IGNhc2UgYW4gdWNvZGUgdXBkYXRlIHdp
-bGwgaW1wbGljaXRseSB1cGRhdGUgYWxsCm9mZmxpbmUgdGhyZWFkcyBhcyB3ZWxsLgoKSmFuCgoK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gRnJpIDEzLTA0LTE4IDE1OjMzOjI4LCBEYXZpZCBIaWxkZW5icmFuZCB3cm90ZToKPiBTb21l
+IGRldmljZXMgKGVzcC4gcGFyYXZpcnR1YWxpemVkKSBtaWdodCB3YW50IHRvIGNvbnRyb2wKPiAt
+IHdoZW4gdG8gb25saW5lL29mZmxpbmUgYSBtZW1vcnkgYmxvY2sKPiAtIGhvdyB0byBvbmxpbmUg
+bWVtb3J5IChNT1ZBQkxFL05PUk1BTCkKPiAtIGluIHdoaWNoIGdyYW51bGFyaXR5IHRvIG9ubGlu
+ZS9vZmZsaW5lIG1lbW9yeQo+IAo+IFNvIGxldCdzIGFkZCBhIG5ldyBmbGFnICJkcml2ZXJfbWFu
+YWdlZCIgYW5kIGRpc2FsbG93IHRvIGNoYW5nZSB0aGUKPiBzdGF0ZSBieSB1c2VyIHNwYWNlLiBE
+ZXZpY2Ugb25saW5pbmcvb2ZmbGluaW5nIHdpbGwgc3RpbGwgd29yaywgaG93ZXZlcgo+IHRoZSBt
+ZW1vcnkgd2lsbCBub3QgYmUgYWN0dWFsbHkgb25saW5lZC9vZmZsaW5lZC4gVGhhdCBoYXMgdG8g
+YmUgaGFuZGxlZAo+IGJ5IHRoZSBkZXZpY2UgZHJpdmVyIHRoYXQgb3ducyB0aGUgbWVtb3J5LgoK
+SXMgdGhlcmUgYW55IHJlYXNvbiB0byBjcmVhdGUgdGhlIG1lbWJsb2NrIHN5c2ZzIGludGVyZmFj
+ZSB0byB0aGlzCm1lbW9yeSBhdCBhbGw/IFpPTkVfREVWSUNFIG1lbSBob3RwbHVnIHVzZXJzIGN1
+cnJlbnRseSBkbyBub3QgZG8gdGhhdAphbmQgbWFuYWdlIHRoZSBtZW1vcnkgdGhlbXNlbHZlcy4g
+SXQgc2VlbXMgeW91IHdhbnQgdG8gYWNoaWV2ZSB0aGUgc2FtZQp0aGluZywgbm8/Ci0tIApNaWNo
+YWwgSG9ja28KU1VTRSBMYWJzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
