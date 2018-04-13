@@ -1,18 +1,21 @@
 From: Simon Gaiser <simon@invisiblethingslab.com>
-Subject: Re: [PATCH 3/3] x86: check feature flags after resume
-Date: Fri, 13 Apr 2018 18:29:00 +0000
-Message-ID: <1c5ff5c3-3178-8d42-08ca-4711c7507ac1@invisiblethingslab.com>
+Subject: Re: [PATCH 2/3] x86: suppress BTI mitigations around S3
+ suspend/resume
+Date: Fri, 13 Apr 2018 18:34:00 +0000
+Message-ID: <09e872a9-43c7-3220-49d1-4037f0e880f5@invisiblethingslab.com>
 References: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
- <5AD09B5102000078001BB0F7@prv1-mh.provo.novell.com>
+ <5AD09B2B02000078001BB0F4@prv1-mh.provo.novell.com>
+ <93d8078e-b0c6-81a6-ab28-aa856c9ef0d5@invisiblethingslab.com>
+ <14156d42-af09-3f51-6b5f-69aa654757d2@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5406513095022189902=="
+Content-Type: multipart/mixed; boundary="===============3762555724062612271=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=cx/4=hc=invisiblethingslab.com=simon@srs-us1.protection.inumbo.net>)
- id 1f73Rz-0005ea-CI
- for xen-devel@lists.xenproject.org; Fri, 13 Apr 2018 18:29:31 +0000
-In-Reply-To: <5AD09B5102000078001BB0F7@prv1-mh.provo.novell.com>
+ id 1f73X9-0006OD-Qo
+ for xen-devel@lists.xenproject.org; Fri, 13 Apr 2018 18:34:51 +0000
+In-Reply-To: <14156d42-af09-3f51-6b5f-69aa654757d2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,218 +24,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5406513095022189902==
+--===============3762555724062612271==
 Content-Type: multipart/signed; micalg=pgp-sha512;
  protocol="application/pgp-signature";
- boundary="ZnhcFQ1P9I0yAAjwhrISEQMgA771IH6Qr"
+ boundary="fbXNOYkvKYIWxX7EAzRzaV8EKdg4ik4Px"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---ZnhcFQ1P9I0yAAjwhrISEQMgA771IH6Qr
-Content-Type: multipart/mixed; boundary="xk5bLDdCVuYZb4RD5cYG3Vvtd3PrzRcjk";
+--fbXNOYkvKYIWxX7EAzRzaV8EKdg4ik4Px
+Content-Type: multipart/mixed; boundary="QfBthV6BLOFJbC7jDujZUmN1Q0XMp855Y";
  protected-headers="v1"
 From: Simon Gaiser <simon@invisiblethingslab.com>
-To: Jan Beulich <JBeulich@suse.com>,
- xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross <jgross@suse.com>
-Message-ID: <1c5ff5c3-3178-8d42-08ca-4711c7507ac1@invisiblethingslab.com>
-Subject: Re: [PATCH 3/3] x86: check feature flags after resume
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+ <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>
+Message-ID: <09e872a9-43c7-3220-49d1-4037f0e880f5@invisiblethingslab.com>
+Subject: Re: [PATCH 2/3] x86: suppress BTI mitigations around S3
+ suspend/resume
 References: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
- <5AD09B5102000078001BB0F7@prv1-mh.provo.novell.com>
-In-Reply-To: <5AD09B5102000078001BB0F7@prv1-mh.provo.novell.com>
+ <5AD09B2B02000078001BB0F4@prv1-mh.provo.novell.com>
+ <93d8078e-b0c6-81a6-ab28-aa856c9ef0d5@invisiblethingslab.com>
+ <14156d42-af09-3f51-6b5f-69aa654757d2@citrix.com>
+In-Reply-To: <14156d42-af09-3f51-6b5f-69aa654757d2@citrix.com>
 
---xk5bLDdCVuYZb4RD5cYG3Vvtd3PrzRcjk
+--QfBthV6BLOFJbC7jDujZUmN1Q0XMp855Y
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-Jan Beulich:
-> Make sure no previously present features are missing after resume (and
-> the re-loading of microcode), to avoid later crashes or (likely silent)=
+Andrew Cooper:
+> On 13/04/18 19:25, Simon Gaiser wrote:
+>> Jan Beulich:
+>>> NMI and #MC can occur at any time after S3 resume, yet the MSR_SPEC_C=
+TRL
+>>> may become available only once we're reloaded microcode. Make
+>>> SPEC_CTRL_ENTRY_FROM_INTR_IST and DO_SPEC_CTRL_EXIT_TO_XEN no-ops for=
 
-> hangs / live locks. This doesn't go beyond checking x86_capability[],
-> but this should be good enough for the immediate need of making sure
-> that the BIT mitigation MSRs are still available.
+>>> the critical period of time.
+>>>
+>>> Also set the MSR back to its intended value.
+>>>
+>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>>
+>>> --- a/xen/arch/x86/acpi/power.c
+>>> +++ b/xen/arch/x86/acpi/power.c
+>>> @@ -28,6 +28,7 @@
+>>>  #include <asm/tboot.h>
+>>>  #include <asm/apic.h>
+>>>  #include <asm/io_apic.h>
+>>> +#include <asm/spec_ctrl.h>
+>>>  #include <acpi/cpufreq/cpufreq.h>
+>>> =20
+>>>  uint32_t system_reset_counter =3D 1;
+>>> @@ -163,6 +164,7 @@ static int enter_state(u32 state)
+>>>  {
+>>>      unsigned long flags;
+>>>      int error;
+>>> +    struct cpu_info *ci;
+>>>      unsigned long cr4;
+>>> =20
+>>>      if ( (state <=3D ACPI_STATE_S0) || (state > ACPI_S_STATES_MAX) )=
+
+>>> @@ -210,6 +212,10 @@ static int enter_state(u32 state)
+>>>      else
+>>>          error =3D 0;
+>>> =20
+>>> +    ci =3D get_cpu_info();
+>>> +    ci->use_shadow_spec_ctrl =3D 0;
+>>> +    ci->bti_ist_info =3D 0;
+>>> +
+>>>      ACPI_FLUSH_CPU_CACHE();
+>>> =20
+>>>      switch ( state )
+>>> @@ -248,6 +254,11 @@ static int enter_state(u32 state)
+>>> =20
+>>>      microcode_resume_cpu(0);
+>>> =20
+>>> +    ci->bti_ist_info =3D default_bti_ist_info;
+>>> +    asm volatile (ALTERNATIVE("", "wrmsr", X86_FEATURE_XEN_IBRS_SET)=
+
+>> This does not compile for me:
+>>
+>>   power.c: Assembler messages:
+>>   power.c:272: Error: value of 257 too large for field of 1 bytes at 0=
+
+>>
+>> Changing the alternative based on the other "wrmsr" calls fixes it:
+>>
+>>   asm volatile (ALTERNATIVE(ASM_NOP3, "wrmsr", X86_FEATURE_XEN_IBRS_SE=
+T)
 >=20
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Ah - you're presumably back-porting this to 4.8?
 >=20
-> --- a/xen/arch/x86/acpi/power.c
-> +++ b/xen/arch/x86/acpi/power.c
-> @@ -254,6 +254,9 @@ static int enter_state(u32 state)
-> =20
->      microcode_resume_cpu(0);
-> =20
-> +    if ( !recheck_cpu_features(0) )
-> +        panic("Missing previously available feature(s).");
-> +
->      ci->bti_ist_info =3D default_bti_ist_info;
->      asm volatile (ALTERNATIVE("", "wrmsr", X86_FEATURE_XEN_IBRS_SET)
->                    :: "a" (SPEC_CTRL_IBRS), "c" (MSR_SPEC_CTRL), "d" (0=
-)
-> --- a/xen/arch/x86/cpu/common.c
-> +++ b/xen/arch/x86/cpu/common.c
-> @@ -501,6 +501,9 @@ void identify_cpu(struct cpuinfo_x86 *c)
->  	printk("\n");
->  #endif
-> =20
-> +	if (system_state =3D=3D SYS_STATE_resume)
-> +		return;
-> +
->  	/*
->  	 * On SMP, boot_cpu_data holds the common feature set between
->  	 * all CPUs; so make sure that we indicate which features are
-> --- a/xen/arch/x86/cpuid.c
-> +++ b/xen/arch/x86/cpuid.c
-> @@ -473,6 +473,28 @@ void __init init_guest_cpuid(void)
->      calculate_hvm_max_policy();
->  }
-> =20
-> +bool recheck_cpu_features(unsigned int cpu)
-> +{
-> +    bool okay =3D true;
-> +    struct cpuinfo_x86 c;
-> +    const struct cpuinfo_x86 *bsp =3D &boot_cpu_data;
-> +    unsigned int i;
-> +
-> +    identify_cpu(&c);
+> Jan's code is correct for staging, and your version here is correct for=
 
-This runs into a bug in identify_cpu(). x86_vendor_id does not get
-zeroed, so the x86_vendor_id is not null terminated and the vendor
-identification fails.
+> all currently-released versions of Xen.  (I've done quite a lot of
+> playing with alternatives generation for 4.11.)
 
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 4feaa2ceb6..5750d26216 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -366,8 +366,8 @@ void identify_cpu(struct cpuinfo_x86 *c)
-        c->x86_vendor =3D X86_VENDOR_UNKNOWN;
-        c->cpuid_level =3D -1;    /* CPUID not detected */
-        c->x86_model =3D c->x86_mask =3D 0; /* So far unknown... */
--       c->x86_vendor_id[0] =3D '\0'; /* Unset */
--       c->x86_model_id[0] =3D '\0';  /* Unset */
-+       memset(&c->x86_vendor_id, 0, sizeof(c->x86_vendor_id));
-+       memset(&c->x86_model_id, 0, sizeof(c->x86_model_id));
-        c->x86_max_cores =3D 1;
-        c->x86_num_siblings =3D 1;
-        c->x86_clflush_size =3D 0;
-
-With this patch it works for me.
-
-> +
-> +    for ( i =3D 0; i < NCAPINTS; ++i )
-> +    {
-> +        if ( !(~c.x86_capability[i] & bsp->x86_capability[i]) )
-> +            continue;
-> +
-> +        printk(XENLOG_ERR "CPU%u: cap[%2u] is %08x (expected %08x)\n",=
-
-> +               cpu, i, c.x86_capability[i], bsp->x86_capability[i]);
-> +        okay =3D false;
-> +    }
-> +
-> +    return okay;
-> +}
-> +
->  const uint32_t *lookup_deep_deps(uint32_t feature)
->  {
->      static const struct {
-> --- a/xen/arch/x86/smpboot.c
-> +++ b/xen/arch/x86/smpboot.c
-> @@ -90,11 +90,14 @@ void initialize_cpu_data(unsigned int cp
->      cpu_data[cpu] =3D boot_cpu_data;
->  }
-> =20
-> -static void smp_store_cpu_info(int id)
-> +static bool smp_store_cpu_info(unsigned int id)
->  {
->      unsigned int socket;
-> =20
-> -    identify_cpu(&cpu_data[id]);
-> +    if ( system_state !=3D SYS_STATE_resume )
-> +        identify_cpu(&cpu_data[id]);
-> +    else if ( !recheck_cpu_features(id) )
-> +        return false;
-> =20
->      socket =3D cpu_to_socket(id);
->      if ( !socket_cpumask[socket] )
-> @@ -102,6 +105,8 @@ static void smp_store_cpu_info(int id)
->          socket_cpumask[socket] =3D secondary_socket_cpumask;
->          secondary_socket_cpumask =3D NULL;
->      }
-> +
-> +    return true;
->  }
-> =20
->  /*
-> @@ -187,12 +192,19 @@ static void smp_callin(void)
->      setup_local_APIC();
-> =20
->      /* Save our processor parameters. */
-> -    smp_store_cpu_info(cpu);
-> +    if ( !smp_store_cpu_info(cpu) )
-> +    {
-> +        printk("CPU%u: Failed to validate features - not coming back o=
-nline\n",
-> +               cpu);
-> +        cpu_error =3D -ENXIO;
-> +        goto halt;
-> +    }
-> =20
->      if ( (rc =3D hvm_cpu_up()) !=3D 0 )
->      {
->          printk("CPU%d: Failed to initialise HVM. Not coming online.\n"=
-, cpu);
->          cpu_error =3D rc;
-> +    halt:
->          clear_local_APIC();
->          spin_debug_enable();
->          cpu_exit_clear(cpu);
-> --- a/xen/include/asm-x86/cpuid.h
-> +++ b/xen/include/asm-x86/cpuid.h
-> @@ -253,6 +253,9 @@ static inline void cpuid_featureset_to_p
->  extern struct cpuid_policy raw_cpuid_policy, host_cpuid_policy,
->      pv_max_cpuid_policy, hvm_max_cpuid_policy;
-> =20
-> +/* Check that all previously present features are still available. */
-> +bool recheck_cpu_features(unsigned int cpu);
-> +
->  /* Allocate and initialise a CPUID policy suitable for the domain. */
->  int init_domain_cpuid_policy(struct domain *d);
-> =20
+Yeah, sorry, I should have checked if it works with staging.
 
 
---xk5bLDdCVuYZb4RD5cYG3Vvtd3PrzRcjk--
+--QfBthV6BLOFJbC7jDujZUmN1Q0XMp855Y--
 
---ZnhcFQ1P9I0yAAjwhrISEQMgA771IH6Qr
+--fbXNOYkvKYIWxX7EAzRzaV8EKdg4ik4Px
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlrQ9xUACgkQkO9xfO/x
-ly8IehAAncbA3zlH0iQsII029x1V4bjqcFr7N3DXHrwX/QtOhawD7jDAlwVtt5P4
-DJT/FWP9vp5OuToeQ31I19RnAC7pm/eweO7hYkirA3nEe429103q7mQKnr+hx1rT
-Y1vPqbcTknlk790jBtR6vcUH3f1aPfuZoQIN8J9dwPkOMV9ppBmI+WehafrLZKLH
-RDFBf37pf6g95gx8FsAYviETN+3VOD36AdiZChm/pa9YVkOozFNpIg/k7KID6u1x
-oHEcX+oHl8nwkT9ufRcQ2Vg7j4u12cpfHtkho08mm8OFBqZxT2CK6e8wJwF3tNHK
-Y9G21aAefJxO3nGJN3r/bXzOLDooR6yahUmMEvY+pRCHOisN3gaC5Rb54cGKdO4B
-TKaiyBPzivQtaJbAL7rlMhstaAsNsjbMERGgmQ0UuiS/nx/SpkEYCb/isaEq4AEf
-VHWqZNCn7JHC8hAtQBHnzNfyNXWHczTDqXfc5UKZHgUDwt9WuBTZpeWrXl/3XmMP
-E6mB8QpeqUkNuUNbzM/ITVDYnCTiYcHBkRfSVqw1UqJEUXlFnaPU7hC19Ypu/amd
-1U14noDb42oS/7YHRDVor++YjQd+2If8JELb/zsSgEGA4T0KTN2r6JbpORzhaQpM
-afKMrhzMLB65d/tQ4ObNyM+KWbvbhQk8HXT6C2eud0spJiG75HY=
-=sNjp
+iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlrQ+FQACgkQkO9xfO/x
+ly/1jw/+NpR9XP8QvY7Vu6aygOQSAUOBBReu2DaoWPlzFvewjigF7VstgdROswsT
+5BTjpVh/HhPPjVulLViK/ERornH6dUoXxYjM5Aa4velI0pj+VDWb03+SRGuOrP3t
+qA/H2Cilbb/gJTVAkldsm3uEBwOPpCfN7jUobyG9tsMvhgz3HssIcqKWPuJq+r6f
+Jt+45MIPZPu1dbw3/X2RaRheyc8dPn4btYXSbzhOOwm0IWzg+eM9VzVwGj3743Nd
+yUXd9bWYu+XolyjgCEKZmYQg/SVrzqXRuYEqrFGjcVwFzPDWSF2Ipw29IuMMRFnF
+8koynM9iZtmTgstR5DptRrwHiY6ZSRjfBumdk53LRmvKIX0ShfThbt/6G697UlJY
+t5i/I3Dqrf0ULAB6hA4G3GnaFKZbwRTKz0BK7y1SZxgPE4lZYGj5FhN+Jm6FiVUC
+KgepI2uUl7kpbmAVoyBLSjuzXshrtMhqQrPHC2Vyg/cm9I2c5C2WsvsLEdKZZca5
++h9gYqhKYD5CH0hOvyX/at35iMdsc5txdYoWHZBeHO5LfYj9qdwvrnbhZma/uUvE
+9Yrh0MifV3J8RGOxnKpRnn/x2hskf+tT8sQ/wSq2DuJtw2FmiCXppS9xKwYH7AEG
+2+kHRBG0i5KAO2p5fus3tUSRW9uP+pkgdiCFXLNIAT/ctjeaw38=
+=nXHK
 -----END PGP SIGNATURE-----
 
---ZnhcFQ1P9I0yAAjwhrISEQMgA771IH6Qr--
+--fbXNOYkvKYIWxX7EAzRzaV8EKdg4ik4Px--
 
 
---===============5406513095022189902==
+--===============3762555724062612271==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -242,4 +165,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5406513095022189902==--
+--===============3762555724062612271==--
