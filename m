@@ -1,12 +1,29 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [distros-debian-jessie test] 74590: trouble:
- blocked/broken
-Date: Fri, 13 Apr 2018 10:22:47 +0100
-Message-ID: <osstest-74590-mainreport@xen.org>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: crash in csched_load_balance after xl vcpu-pin
+Date: Fri, 13 Apr 2018 11:25:42 +0200
+Message-ID: <4533b7d93e3249dad4f830cea2c27d3e3088e9b6.camel@suse.com>
+References: <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
+ <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
+ <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
+ <20180410203741.GF7177@aepfle.de>
+ <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
+ <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
+ <20180411100006.GI7177@aepfle.de> <20180411150312.GL7177@aepfle.de>
+ <20180411152745.GM7177@aepfle.de>
+ <eb978b7160b9e2d54f56c088e0e7a24f1ec813c3.camel@suse.com>
+ <20180411204359.GP7177@aepfle.de>
+ <CAAWQectJz5nGbMQJMsgv2MVE4DRwAw5DOA+roT5TFadO06TTHg@mail.gmail.com>
+ <862386BF-2092-428A-AE9E-766D109EF7DC@citrix.com>
+ <b4e178344a2923404528bd0af07d583fc011b9ab.camel@suse.com>
+ <20180412144553.74da01bc.olaf@aepfle.de>
+ <95725e3ecc825da13f9c0ab01ba74b11ed678d33.camel@suse.com>
+ <a6057cd8eadc20b04797a4a8fc9cb5570d44544d.camel@suse.com>
+ <6b119ba762dbad0c1949bf814694ffbfd39d16c4.camel@suse.com>
+ <070DC511-31E1-4C0C-BFD0-C49590FDE54B@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7041709634677879606=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <070DC511-31E1-4C0C-BFD0-C49590FDE54B@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,80 +32,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
+To: George Dunlap <George.Dunlap@citrix.com>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, Olaf Hering <olaf@aepfle.de>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDc0NTkwIGRpc3Ryb3MtZGViaWFuLWplc3NpZSByZWFsIFtyZWFsXQpodHRwOi8vb3Nz
-dGVzdC54cy5jaXRyaXRlLm5ldC9+b3NzdGVzdC90ZXN0bG9ncy9sb2dzLzc0NTkwLwoKRmFpbHVy
-ZXMgYW5kIHByb2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2Nl
-ZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBy
-dW46CiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAg
-ICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3Rh
-dHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hcm02NCAgICAgICAgICAgICAgICAg
-ICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hbWQ2NC1wdm9w
-cyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWls
-ZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAg
-YnJva2VuCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAg
-ICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIDxqb2Ig
-c3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAg
-ICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1hcm1oZiAg
-ICAgICAgICAgICAgICAgICAyIGhvc3RzLWFsbG9jYXRlICAgICAgICAgIGJyb2tlbiBSRUdSLiB2
-cy4gNzQzMDAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgIDIgaG9zdHMtYWxsb2NhdGUg
-ICAgICAgICAgYnJva2VuIFJFR1IuIHZzLiA3NDMwMAogYnVpbGQtaTM4NiAgICAgICAgICAgICAg
-ICAgICAgMiBob3N0cy1hbGxvY2F0ZSAgICAgICAgICBicm9rZW4gUkVHUi4gdnMuIDc0MzAwCiBi
-dWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAyIGhvc3RzLWFsbG9jYXRlICAgICAgICAgIGJy
-b2tlbiBSRUdSLiB2cy4gNzQzMDAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgIDIgaG9z
-dHMtYWxsb2NhdGUgICAgICAgICAgYnJva2VuIFJFR1IuIHZzLiA3NDMwMAogYnVpbGQtYW1kNjQg
-ICAgICAgICAgICAgICAgICAgMiBob3N0cy1hbGxvY2F0ZSAgICAgICAgICBicm9rZW4gUkVHUi4g
-dnMuIDc0MzAwCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAzIGNhcHR1cmUtbG9ncyAg
-ICAgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gNzQzMDAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAg
-ICAgICAgIDMgY2FwdHVyZS1sb2dzICAgICAgICAgICAgYnJva2VuIFJFR1IuIHZzLiA3NDMwMAog
-YnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgMyBjYXB0dXJlLWxvZ3MgICAgICAgICAgICBi
-cm9rZW4gUkVHUi4gdnMuIDc0MzAwCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAzIGNh
-cHR1cmUtbG9ncyAgICAgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gNzQzMDAKClRlc3RzIHdoaWNo
-IGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWkzODYt
-aTM4Ni1qZXNzaWUtbmV0Ym9vdC1wdmdydWIgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgYmxvY2tl
-ZCBuL2EKIHRlc3QtYW1kNjQtaTM4Ni1hbWQ2NC1qZXNzaWUtbmV0Ym9vdC1weWdydWIgIDEgYnVp
-bGQtY2hlY2soMSkgICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LWplc3Np
-ZS1uZXRib290LXB5Z3J1YiAgMSBidWlsZC1jaGVjaygxKSAgICAgIGJsb2NrZWQgbi9hCiB0ZXN0
-LWFybWhmLWFybWhmLWFybWhmLWplc3NpZS1uZXRib290LXB5Z3J1YiAgMSBidWlsZC1jaGVjaygx
-KSAgICAgYmxvY2tlZCBuL2EKIHRlc3QtYXJtNjQtYXJtNjQtYXJtaGYtamVzc2llLW5ldGJvb3Qt
-cHlncnViICAxIGJ1aWxkLWNoZWNrKDEpICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1hbWQ2
-NC1hbWQ2NC1qZXNzaWUtbmV0Ym9vdC1wdmdydWIgIDEgYnVpbGQtY2hlY2soMSkgICAgIGJsb2Nr
-ZWQgbi9hCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAyIGhvc3RzLWFsbG9jYXRlICAg
-ICAgICAgYnJva2VuIGJsb2NrZWQgaW4gNzQzMDAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAg
-ICAgIDIgaG9zdHMtYWxsb2NhdGUgICAgICAgICBicm9rZW4gYmxvY2tlZCBpbiA3NDMwMAogYnVp
-bGQtYXJtNjQgICAgICAgICAgICAgICAgICAgMyBjYXB0dXJlLWxvZ3MgICAgICAgICAgIGJyb2tl
-biBibG9ja2VkIGluIDc0MzAwCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAzIGNhcHR1
-cmUtbG9ncyAgICAgICAgICAgYnJva2VuIGJsb2NrZWQgaW4gNzQzMDAKIGJ1aWxkLWFybWhmICAg
-ICAgICAgICAgICAgICAgIDMgY2FwdHVyZS1sb2dzICAgICAgICAgICAgICAgICBicm9rZW4gbGlr
-ZSA3NDMwMAogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAgMyBjYXB0dXJlLWxvZ3MgICAg
-ICAgICAgICAgICAgIGJyb2tlbiBsaWtlIDc0MzAwCgpiYXNlbGluZSB2ZXJzaW9uOgogZmxpZ2h0
-ICAgICAgICAgICAgICAgNzQzMDAKCmpvYnM6CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFybTY0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAog
-YnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGJyb2tlbiAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtYXJtNjQtcHZv
-cHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBi
-dWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgYnJva2VuICAKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBicm9rZW4gIAogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1qZXNzaWUt
-bmV0Ym9vdC1wdmdydWIgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYt
-aTM4Ni1qZXNzaWUtbmV0Ym9vdC1wdmdydWIgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRl
-c3QtYW1kNjQtaTM4Ni1hbWQ2NC1qZXNzaWUtbmV0Ym9vdC1weWdydWIgICAgICAgICAgICAgICAg
-ICBibG9ja2VkIAogdGVzdC1hcm02NC1hcm02NC1hcm1oZi1qZXNzaWUtbmV0Ym9vdC1weWdydWIg
-ICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFybWhmLWFybWhmLWFybWhmLWplc3NpZS1u
-ZXRib290LXB5Z3J1YiAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQt
-aTM4Ni1qZXNzaWUtbmV0Ym9vdC1weWdydWIgICAgICAgICAgICAgICAgICBibG9ja2VkIAoKCi0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QueHMuY2l0cml0ZS5uZXQKbG9nczogL2hvbWUv
-b3NzdGVzdC9sb2dzCmltYWdlczogL2hvbWUvb3NzdGVzdC9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBm
-aWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vb3NzdGVzdC54cy5jaXRyaXRl
-Lm5ldC9+b3NzdGVzdC90ZXN0bG9ncy9sb2dzCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91
-bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbnNvdXJjZS5jb20vZ2l0d2ViP3A9b3NzdGVzdC5n
-aXQ7YT1zdW1tYXJ5CgoKUHVzaCBub3QgYXBwbGljYWJsZS4KCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============7041709634677879606==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-RsUAtbQsMmkU9+MXOlqg"
+
+
+--=-RsUAtbQsMmkU9+MXOlqg
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-04-13 at 09:03 +0000, George Dunlap wrote:
+> > On Apr 12, 2018, at 6:25 PM, Dario Faggioli <dfaggioli@suse.com>
+> > wrote:
+> >=20
+> I think the bottom line is, for this test to be valid, then at this
+> point test_bit(VPF_migrating) *must* imply !vcpu_on_runqueue(v), but
+> at this point it doesn=E2=80=99t: If someone else has come by and cleared=
+ the
+> bit, done migration, and woken it up, and then someone *else* set the
+> bit again without taking it off the runqueue, it may still be on the
+> runqueue.
+>=20
+> My series which calls vcpu_sleep_nosync_locked() after setting
+> VPF_migrating should help with this.
+>=20
+Yes. In fact, Olaf, I still think that doing a run with George's RFC
+applied, would be useful, if only as a data point.
+
+> Or, alternately, instead of baking all this implicit  knowledge about
+> credit into the scheduler, we should just implement
+> credit_vcpu_migrate(), and have it remove it from one runqueue and
+> put it on another.
+>=20
+But it's not really "baking Credit implicit knowledge", IMO. It is that
+we have an invariant which we are failing to enforce.
+
+That's why your series goes in the right direction, because by calling
+sleep() in the same critical section of where the bit is set, it
+improves how we enforce the invariant.
+
+Implementing a csched_vcpu_migrate(), looks to me like "relaxing" the
+invariant, which is right the opposite direction. :-)
+
+We may well decide to _get_rid_ of the invariant, but I'm not sure that
+implementing csched_vcpu_migrate() would be all that this takes and, in
+general, I don't think that something like this:
+ - is an approapriate thing to do at this point of 4.11 cycle;
+ - will be easy to backport (while, despite the look of it,=20
+   backporting patch 1 and 2 of your series might not be too terrible).
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-RsUAtbQsMmkU9+MXOlqg
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrQd5YACgkQFkJ4iaW4
+c+7SPxAA0wShHXLPEhL3/MUR6PzOtG+i7SOSdieufSuEMC75EhK42igCQx0Gczlp
+ZBeHZRHGGJPTWZ/PqDSCira9kkY+FHRQRTC8vf6DxR8ohaq/euCjuKBZm9V+5cbl
+kFYdwZx9MIEVf6jCdIaI4gJx+nB54Wc3vTXzjGoMoSPm8rh6u9uVnF2kNvyt8t1z
+Mkl9rKDnLGHEgCzABvMyyclfKEeXXINm8Nwac1hzKYIGOXAuMdwnrff3d3GhRoO5
+IesA3dhESZiI6QZzlh/nObNRwhwto2wbn7Omu/S5V3Vhjapezqlff6vxd2wiCFKT
+zHVBuv6SZkZY9xrFfiDh6PrPTTwSnw7X7D1cHEq9utD4Zzw8K3H0ozVRu9ltCDuA
+BnW+o29joEm2Gmt7L8E/ikREjvMEyT54sBXfHKqVRV4o8bG6ljRJgsJvTy8KcElB
+TEMRLM8pu0hQDKuXrCjJTGVd7GhUdCYT0Yj6BY6RHNQVOgUIBZD2joOUGHhVbpqF
+QqOfiDoDr2JPCmK5mYCzUryKTeomaMm/o6v13e0GbkeWHkHoj6I5mga+xarldZd3
+j2SzVP4mhceYKHPcQCS/jqD8Me11udGJ+NBiBiyKrdcm/8ZB1PZtzovisjXEG6Vj
+AEVd787WZAU3EVmC3WADYHF4A64JIpnXUYMlqhsHHx7gFWPp1Bo=
+=q9c3
+-----END PGP SIGNATURE-----
+
+--=-RsUAtbQsMmkU9+MXOlqg--
+
+
+
+--===============7041709634677879606==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7041709634677879606==--
