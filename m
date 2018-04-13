@@ -1,18 +1,31 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/3] x86/pv: Introduce and use
- x86emul_read_dr()
-Date: Fri, 13 Apr 2018 05:39:59 -0600
-Message-ID: <5AD0970F02000078001BB0B3@prv1-mh.provo.novell.com>
-References: <1523552156-20866-1-git-send-email-andrew.cooper3@citrix.com>
- <1523552156-20866-2-git-send-email-andrew.cooper3@citrix.com>
- <5AD06AEC02000078001BAF9A@prv1-mh.provo.novell.com>
- <5e53ca51-416e-77c3-9429-ae485d87cc77@citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: crash in csched_load_balance after xl vcpu-pin
+Date: Fri, 13 Apr 2018 13:41:17 +0200
+Message-ID: <d12f9045c4e455c20ff7a6998de5c31c4ba77629.camel@suse.com>
+References: <6924f2c528355dd77a4876c5dd51b3e4b0c948f7.camel@suse.com>
+ <f4b652f2-4bc5-d3e7-31a1-18cfb0c6bd4d@citrix.com>
+ <960702b6d9dfb67bfae72ae02ae502210695416b.camel@suse.com>
+ <20180410203741.GF7177@aepfle.de>
+ <67eef3b540612c6161131160da08323858ae979e.camel@suse.com>
+ <1fa7f9b8ff690cde4308da4ffb5f5ec5508f9420.camel@suse.com>
+ <20180411100006.GI7177@aepfle.de> <20180411150312.GL7177@aepfle.de>
+ <20180411152745.GM7177@aepfle.de>
+ <eb978b7160b9e2d54f56c088e0e7a24f1ec813c3.camel@suse.com>
+ <20180411204359.GP7177@aepfle.de>
+ <CAAWQectJz5nGbMQJMsgv2MVE4DRwAw5DOA+roT5TFadO06TTHg@mail.gmail.com>
+ <862386BF-2092-428A-AE9E-766D109EF7DC@citrix.com>
+ <b4e178344a2923404528bd0af07d583fc011b9ab.camel@suse.com>
+ <20180412144553.74da01bc.olaf@aepfle.de>
+ <95725e3ecc825da13f9c0ab01ba74b11ed678d33.camel@suse.com>
+ <a6057cd8eadc20b04797a4a8fc9cb5570d44544d.camel@suse.com>
+ <6b119ba762dbad0c1949bf814694ffbfd39d16c4.camel@suse.com>
+ <070DC511-31E1-4C0C-BFD0-C49590FDE54B@citrix.com>
+ <4533b7d93e3249dad4f830cea2c27d3e3088e9b6.camel@suse.com>
+ <9A9ED35B-FC55-4DF7-B93A-444EA2DDDD02@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6406238925013353187=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5e53ca51-416e-77c3-9429-ae485d87cc77@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <9A9ED35B-FC55-4DF7-B93A-444EA2DDDD02@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,59 +34,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: George Dunlap <George.Dunlap@citrix.com>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, Olaf Hering <olaf@aepfle.de>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEzLjA0LjE4IGF0IDEzOjE3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTMvMDQvMTggMDk6MzEsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAxMi4w
-NC4xOCBhdCAxODo1NSwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gZG9f
-Z2V0X2RlYnVncmVnKCkgaGFzIHNldmVyYWwgYnVnczoKPj4+Cj4+PiAgKiBUaGUgJWNyNC5kZSBj
-b25kaXRpb24gaXMgaW52ZXJ0ZWQuICAlZHI0LzUgc2hvdWxkIGJlIGFjY2Vzc2libGUgb25seSB3
-aGVuCj4+PiAgICAlY3I0LmRlIGlzIGRpc2FibGVkLgo+Pj4gICogV2hlbiAlY3I0LmRlIGlzIGRp
-c2FibGVkLCBlbXVsYXRpb24gc2hvdWxkIHlpZWxkICNVRCByYXRoZXIgdGhhbiBjb21wbGV0ZQo+
-Pj4gICAgd2l0aCB6ZXJvLgo+Pj4gICogVXNpbmcgLUVJTlZBTCBmb3IgZXJyb3JzIGlzIGEgYnJv
-a2VuIEFCSSwgYXMgaXQgb3ZlcmxhcHMgd2l0aCB2YWxpZCB2YWx1ZXMKPj4+ICAgIG5lYXIgdGhl
-IHRvcCBvZiB0aGUgYWRkcmVzcyBzcGFjZS4KPj4+Cj4+PiBJbnRyb2R1Y2UgYSBjb21tb24geDg2
-ZW11bF9yZWFkX2RyKCkgaGFuZGxlciAoYXMgd2Ugd2lsbCBldmVudHVhbGx5IHdhbnQgdG8KPj4+
-IGFkZCBIVk0gc3VwcG9ydCkgd2hpY2ggc2VwYXJhdGVzIGl0cyBzdWNjZXNzL2ZhaWx1cmUgaW5k
-aWNhdGlvbiBmcm9tIHRoZSBkYXRhCj4+PiB2YWx1ZSwgYW5kIGhhdmUgZG9fZ2V0X2RlYnVncmVn
-KCkgY2FsbCBpbnRvIHRoZSBoYW5kbGVyLgo+PiBUaGUgSFZNIHBhcnQgaGVyZSBpcyBzb3J0IG9m
-IHF1ZXN0aW9uYWJsZSBiZWNhdXNlIG9mIHlvdXIgdXNlIG9mCj4+IGN1cnItPmFyY2gucHZfdmNw
-dS5jdHJscmVnWzRdLgo+IAo+IFRoYXQgaXMgd2hhdCB0aGUgIm5lZWRzIGZ1cnRoZXIgcGx1bWJp
-bmciIHJlZmVycyB0bywgYXMgd2VsbCBhcyBuZWVkaW5nCj4gaG9va3MgdG8gZ2V0L21vZGlmeSAl
-ZHI2LzcgZnJvbSB0aGUgVk1DQi9WTUNTLgo+IAo+IEhvd2V2ZXIsIHdlIGFyZSBnYWluaW5nIGFu
-IGluY3JlYXNpbmcgYW1vdW50IG9mIGNvbW1vbiB4ODYgY29kZSB3aGljaAo+IG5lZWRzIHRvIHJl
-YWQgY29udHJvbCByZWdpc3RlciB2YWx1ZXMsIGFuZCBJJ3ZlIGdvdCBhIHBsYW4gdG8gcmVmYWN0
-b3IKPiBhY3Jvc3MgdGhlIGJvYXJkIHRvIHYtPmFyY2guY3I0IChhbmQgc2ltaWxhcikuICBUaGVy
-ZSBpcyBubyBwb2ludCBoYXZpbmcKPiBpZGVudGljYWwgaW5mb3JtYXRpb24gaW4gZGlmZmVyZW50
-IHBhcnRzIG9mIHN1Yi11bmlvbnMuCgpJIGFncmVlLgoKPj4gVGhpcyBpcyBhcHByb3ByaWF0ZSBm
-b3IgdGhlIE5VTEwgY3R4dCBjYXNlLAo+PiBidXQgaXQncyBhbHJlYWR5IGEgbGF5ZXJpbmcgdmlv
-bGF0aW9uIGZvciB0aGUgdXNlIG9mIHRoZSBmdW5jdGlvbiBpbgo+PiBwcml2X29wX29wcywgd2hl
-cmUgdGhlIHJlYWRfY3IoKSBob29rIHNob3VsZCBiZSB1c2VkIGluc3RlYWQuCj4gCj4gSG1tIC0g
-ZG9pbmcgdGhpcywgd2hpbGUgcHJvYmFibHkgdGhlIGJldHRlciBsb25nIHRlbXIgY291cnNlIG9m
-IGFjdGlvbiwKPiB3b3VsZCByZXF1aXJlIHBhc3NpbmcgdGhlIG9wcyBzdHJ1Y3R1cmVzIGRvd24g
-aW50byB0aGUgY2FsbGJhY2tzLgoKVGhhdCBkb2Vzbid0IHNvdW5kIGxpa2UgYSBwcm9ibGVtLCB0
-aG91Z2ggLSB0aGUgaHlwZXJjYWxsIHBhdGggd291bGQKcGFzcyBOVUxMIHRoZXJlIGFzIHdlbGwu
-Cgo+Pj4gK2ludCB4ODZlbXVsX3JlYWRfZHIodW5zaWduZWQgaW50IHJlZywgdW5zaWduZWQgbG9u
-ZyAqdmFsLAo+Pj4gKyAgICAgICAgICAgICAgICAgICAgc3RydWN0IHg4Nl9lbXVsYXRlX2N0eHQg
-KmN0eHQpCj4+PiArewo+Pj4gKyAgICBzdHJ1Y3QgdmNwdSAqY3VyciA9IGN1cnJlbnQ7Cj4+PiAr
-Cj4+PiArICAgIC8qIEhWTSBzdXBwb3J0IHJlcXVpcmVzIGEgYml0IG1vcmUgcGx1bWJpbmcgYmVm
-b3JlIGl0IHdpbGwgd29yay4gKi8KPj4+ICsgICAgQVNTRVJUKGlzX3B2X3ZjcHUoY3VycikpOwo+
-Pj4gKwo+Pj4gKyAgICBzd2l0Y2ggKCByZWcgKQo+Pj4gKyAgICB7Cj4+PiArICAgIGNhc2UgMCAu
-Li4gMzoKPj4+ICsgICAgY2FzZSA2Ogo+Pj4gKyAgICAgICAgKnZhbCA9IGN1cnItPmFyY2guZGVi
-dWdyZWdbcmVnXTsKPj4+ICsgICAgICAgIGJyZWFrOwo+Pj4gKwo+Pj4gKyAgICBjYXNlIDc6Cj4+
-PiArICAgICAgICAqdmFsID0gKGN1cnItPmFyY2guZGVidWdyZWdbN10gfAo+Pj4gKyAgICAgICAg
-ICAgICAgICBjdXJyLT5hcmNoLmRlYnVncmVnWzVdKTsKPj4+ICsgICAgICAgIGJyZWFrOwo+Pj4g
-Kwo+Pj4gKyAgICBjYXNlIDQgLi4uIDU6Cj4+PiArICAgICAgICBpZiAoICEoY3Vyci0+YXJjaC5w
-dl92Y3B1LmN0cmxyZWdbNF0gJiBYODZfQ1I0X0RFKSApCj4+PiArICAgICAgICB7Cj4+PiArICAg
-ICAgICAgICAgKnZhbCA9IGN1cnItPmFyY2guZGVidWdyZWdbcmVnICsgMl07Cj4+PiArICAgICAg
-ICAgICAgYnJlYWs7Cj4+IE9uY2UgYXQgaXQsIHdvdWxkbid0IHlvdSBiZXR0ZXIgYWxzbyBmaXgg
-dGhlIG1pc3NpbmcgT1Jpbmcgb2YgWzVdIGludG8gdGhlIERSNyAocmVhbGx5Cj4+IERSNSkgdmFs
-dWUgaGVyZT8KPiAKPiBbNV0gaXMgemVybyB3aGVuICVjcjQuZGUgaXMgY2xlYXIgKHN1YmplY3Qg
-dG8gYSBidWdmaXggaW4gdGhlIHN1YnNlcXVlbnQKPiBwYXRjaCksIGFzIElPIGJyZWFrcG9pbnRz
-IGFyZSBvbmx5IHZhbGlkIHRvIHVzZSB3aGVuICVjcjQuZGUgaXMgZW5hYmxlZC4KCk9oLCByaWdo
-dCB5b3UgYXJlLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+
+--===============6406238925013353187==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-1FVg5eY6AC7CZNinSl2W"
+
+
+--=-1FVg5eY6AC7CZNinSl2W
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-04-13 at 11:29 +0000, George Dunlap wrote:
+> I think as far as backports go, my current RFC would be
+> fine.  Another possibility, though, would be to simply add a
+> migrate() callback to remove the vcpu from the runqueue before
+> switching v->processor, *without* removing any of the current song
+> and dance about vcpu_sleep_nosync().  That should be fairly simple
+> and straightforward to backport, and won=E2=80=99t make anything worse (s=
+ince
+> in theory it should have been removed by that point anyway).  Then
+> for 4.12 we can figure out what we want to do going forward.
+>=20
+FYI, adapting (but then I haven't even compiled) the first two patches
+to as far as 4.7 was rather easy.
+
+And, modulo the fact that I still have to properly review them (which
+I'll do... but I looked at them, and they seem fine), I do prefer the
+series, to the Credit1 migrate callback.
+
+*Especially* if you are right, and the invariant is entirely Credit1
+specific. In fact, that means here might be other code paths, in
+sched_credit.c, that relies on it, and hence I'd prefer for it to be
+enforced better, rather than relaxed, at this point in the cycle.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-1FVg5eY6AC7CZNinSl2W
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrQl10ACgkQFkJ4iaW4
+c+4KjBAAlWbkel5yYISrwf77xGcQHKXOQc4OZa4DpSNvdwtumgBD1owHJ0997H+U
+qZJmG4FI8iCjQD2MsHgFHTJlrg4M+745iamafESDedFUJQjNWQKGSHaPEqD/9p0j
+6JXz1LiPWnB9wPeE/zb4M0AWlKOxNL75x0bG7WjnGkdiPAyoSjXRo7yGiaGfrD0k
+N/BbdDOmYLSjlvjOrRA9tWGEQCDTQ/lqMxCLr2hq8Dk3x/CLI4mA4xpM3uxIvGC9
+4e8M4DUfu2NHeOVGWA4R/vE6tEbcoVhWsMD+AOUCC5AOfYW8jvf+4P8HeA5JZdmx
+O6SZjEQlYMGqbQHk2IpYGvbwS1RBTq8Cb2PsZtX/k3fEUEdTum+aheRF7UFkaHBw
+/36ISRig+aUhurvmzhTAu/znuYvVnfYvmTnvJQwxxgm5ugaKpE8BC7pYuQGcXuYG
+m4weTgdc2FEAsdh0uVpl+u8kt0eM1oXM99vybzc1iscT5a6aNeJ2pshw6Gv62nZz
+H+T0Fpe+C04dkSlzqal6QLrlJwRWf1Z4EQg5szwwk0qiRYSkhzT5nh+yAVdJhKj3
+NLsxpYi8ImpM/WT/3bNcaGsyzO8LzMetGUR28wAI3E5BJZkXiiYKwLAA0WcNHleE
+Aytj+zT4ZhWhChP0cRYRA34d8Eom36mjUrXa/lGtOA0TEvRkoWw=
+=QH1f
+-----END PGP SIGNATURE-----
+
+--=-1FVg5eY6AC7CZNinSl2W--
+
+
+
+--===============6406238925013353187==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6406238925013353187==--
