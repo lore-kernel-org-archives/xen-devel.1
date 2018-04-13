@@ -1,16 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 7/8] x86/SVM: Introduce svm command line
- option
-Date: Fri, 13 Apr 2018 19:04:12 +0100
-Message-ID: <a1138712-f41f-3244-3fd5-9e7c2bb358d1@citrix.com>
-References: <cover.1522794651.git.Janakarajan.Natarajan@amd.com>
- <2c27991e266f80ee1704ae6ce3cfca60ab0ee380.1522794651.git.Janakarajan.Natarajan@amd.com>
+From: Simon Gaiser <simon@invisiblethingslab.com>
+Subject: Re: [PATCH 2/3] x86: suppress BTI mitigations around S3
+ suspend/resume
+Date: Fri, 13 Apr 2018 18:25:00 +0000
+Message-ID: <93d8078e-b0c6-81a6-ab28-aa856c9ef0d5@invisiblethingslab.com>
+References: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
+ <5AD09B2B02000078001BB0F4@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2783106552119014615=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <2c27991e266f80ee1704ae6ce3cfca60ab0ee380.1522794651.git.Janakarajan.Natarajan@amd.com>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=cx/4=hc=invisiblethingslab.com=simon@srs-us1.protection.inumbo.net>)
+ id 1f73NZ-0005Ir-PV
+ for xen-devel@lists.xenproject.org; Fri, 13 Apr 2018 18:24:57 +0000
+In-Reply-To: <5AD09B2B02000078001BB0F4@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,68 +22,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Janakarajan Natarajan <Janakarajan.Natarajan@amd.com>, xen-devel@lists.xen.org
-Cc: Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMDQvMTggMDA6MDEsIEphbmFrYXJhamFuIE5hdGFyYWphbiB3cm90ZToKPiBGcm9tOiBT
-dXJhdmVlIFN1dGhpa3VscGFuaXQgPHN1cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPgo+Cj4g
-VGhpcyBwYXRjaCBpbnRyb2R1Y2VzIGEgbmV3IFhlbiBjb21tYW5kIGxpbmUgb3B0aW9uIHRvIGVu
-YWJsZS9kaXNhYmxlCj4gU1ZNIHN1Yi1vcHRpb25zLiBDdXJyZW50bHksIGl0IHN1cHBvcnQgc3Vi
-LW9wdGlvbiAiYXZpYyIsIHdoaWNoIGNhbgo+IGJlIHVzZWQgdG8gZW5hYmxlL2Rpc2FibGUgU1ZN
-IEFWSUMgZmVhdHVyZS4KPgo+IFNpZ25lZC1vZmYtYnk6IFN1YXZlZSBTdXRoaWt1bHBhbnQgPHN1
-cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPgo+IFNpZ25lZC1vZmYtYnk6IEphbmFrYXJhamFu
-IE5hdGFyYWphbiA8SmFuYWthcmFqYW4uTmF0YXJhamFuQGFtZC5jb20+Cj4gLS0tCj4gIGRvY3Mv
-bWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3duIHwgMTYgKysrKysrKysrKysrKysrKwo+ICB4
-ZW4vYXJjaC94ODYvaHZtL3N2bS9zdm0uYyAgICAgICAgICB8IDMyICsrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrCj4gIDIgZmlsZXMgY2hhbmdlZCwgNDggaW5zZXJ0aW9ucygrKQo+Cj4g
-ZGlmZiAtLWdpdCBhL2RvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3duIGIvZG9jcy9t
-aXNjL3hlbi1jb21tYW5kLWxpbmUubWFya2Rvd24KPiBpbmRleCBiMzUzMzUyYWRmLi42MGExMDA1
-YzQyIDEwMDY0NAo+IC0tLSBhL2RvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3duCj4g
-KysrIGIvZG9jcy9taXNjL3hlbi1jb21tYW5kLWxpbmUubWFya2Rvd24KPiBAQCAtMTczMCw2ICsx
-NzMwLDIyIEBAIGVuZm9yY2VzIHRoZSBtYXhpbXVtIHRoZW9yZXRpY2FsbHkgbmVjZXNzYXJ5IHRp
-bWVvdXQgb2YgNjcwbXMuIEFueSBudW1iZXIKPiAgaXMgYmVpbmcgaW50ZXJwcmV0ZWQgYXMgYSBj
-dXN0b20gdGltZW91dCBpbiBtaWxsaXNlY29uZHMuIFplcm8gb3IgYm9vbGVhbgo+ICBmYWxzZSBk
-aXNhYmxlIHRoZSBxdWlyayB3b3JrYXJvdW5kLCB3aGljaCBpcyBhbHNvIHRoZSBkZWZhdWx0Lgo+
-ICAKPiArIyMjIHN2bQo+ICs+IGA9IExpc3Qgb2YgWyBhdmljIF1gCj4gKwo+ICs+IFN1Yi1vcHRp
-b25zOgo+ICsKPiArPiBBbGwgc3ViLW9wdGlvbnMgYXJlIG9mIGJvb2xlYW4ga2luZCBhbmQgY2Fu
-IGJlIHByZWZpeGVkIHdpdGggYG5vLWAgdG8KPiArPiBlZmZlY3QgdGhlIGludmVyc2UgbWVhbmlu
-Zy4KPiArCj4gKz4gYGF2aWNgCj4gKwo+ICs+IERlZmF1bHQ6IGBmYWxzZWAKPiArCj4gKz4+IFRo
-aXMgb3B0aW9uIGVuYWJsZXMgQWR2YW5jZWQgVmlydHVhbCBJbnRlcnJ1cHQgQ29udHJvbGxlciAo
-QVZJQyksCj4gKz4+IHdoaWNoIGlzIGFuIGV4dGVuc2lvbiBvZiBBTUQgU2VjdXJlIFZpcnR1YWwg
-TWFjaGluZSAoU1ZNKSB0byB2aXJ0dWFsaXplCj4gKz4+IGxvY2FsIEFQSUMgZm9yIGd1ZXN0IFZN
-Lgo+ICsKPiAgIyMjIHN5bmNcX2NvbnNvbGUKPiAgPiBgPSA8Ym9vbGVhbj5gCj4gIAo+IGRpZmYg
-LS1naXQgYS94ZW4vYXJjaC94ODYvaHZtL3N2bS9zdm0uYyBiL3hlbi9hcmNoL3g4Ni9odm0vc3Zt
-L3N2bS5jCj4gaW5kZXggZmRiZThlMzAwOC4uMGM1YzI2Y2NlOCAxMDA2NDQKPiAtLS0gYS94ZW4v
-YXJjaC94ODYvaHZtL3N2bS9zdm0uYwo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vc3ZtL3N2bS5j
-Cj4gQEAgLTY0LDYgKzY0LDE2IEBACj4gICNpbmNsdWRlIDxhc20vbW9uaXRvci5oPgo+ICAjaW5j
-bHVkZSA8YXNtL3hzdGF0ZS5oPgo+ICAKPiArc3RhdGljIGludCBwYXJzZV9zdm1fcGFyYW0oY29u
-c3QgY2hhciAqcyk7Cj4gKwo+ICsvKgo+ICsgKiBUaGUgJ3N2bScgcGFyYW1ldGVyIGVuL2Rpcy1h
-YmxlcyB2YXJpb3VzIFNWTSBmZWF0dXJlcy4KPiArICogT3B0aW9uYWwgY29tbWEgc2VwYXJhdGVk
-IHZhbHVlIG1heSBjb250YWluOgo+ICsgKgo+ICsgKiAgIGF2aWMgLSBFbmFibGUgU1ZNIEFkdmFu
-Y2VkIFZpcnR1YWwgSW50ZXJydXB0IENvbnRyb2xsZXIgKEFWSUMpCj4gKyAqLwo+ICtjdXN0b21f
-cGFyYW0oInN2bSIsIHBhcnNlX3N2bV9wYXJhbSk7CgpNb3ZlIHRoaXMgY3VzdG9tX3BhcmFtIHRv
-IGJlbG93IHRoZSBkZWZpbml0aW9uLCBhbmQgZHJvcCB0aGUgZm9yd2FyZApkZWNsYXJhdGlvbi7C
-oCBZb3UgY2FuIGRyb3AgdGhlIGNvbW1lbnQgaGVyZSwgYmVjYXVzZSB0aGUgaW1wb3J0YW50Cmlu
-Zm9ybWF0aW9uIGlzIGluIHRoZSByZWFsIGNvbW1hbmQgbGluZSBkb2MuCgo+ICsKPiAgdm9pZCBz
-dm1fYXNtX2RvX3Jlc3VtZSh2b2lkKTsKPiAgCj4gIHUzMiBzdm1fZmVhdHVyZV9mbGFnczsKPiBA
-QCAtODksNiArOTksMjggQEAgc3RhdGljIGJvb2xfdCBhbWRfZXJyYXR1bTM4M19mb3VuZCBfX3Jl
-YWRfbW9zdGx5Owo+ICBzdGF0aWMgdWludDY0X3Qgb3N2d19sZW5ndGgsIG9zdndfc3RhdHVzOwo+
-ICBzdGF0aWMgREVGSU5FX1NQSU5MT0NLKG9zdndfbG9jayk7Cj4gIAo+ICtzdGF0aWMgaW50IF9f
-aW5pdCBwYXJzZV9zdm1fcGFyYW0oY29uc3QgY2hhciAqcykKPiArewo+ICsgICAgY2hhciAqc3M7
-Cj4gKyAgICBpbnQgdmFsOwo+ICsKPiArICAgIGRvIHsKPiArICAgICAgICB2YWwgPSAhIXN0cm5j
-bXAocywgIm5vLSIsIDMpOwo+ICsgICAgICAgIGlmICggIXZhbCApCj4gKyAgICAgICAgICAgIHMg
-Kz0gMzsKPiArCj4gKyAgICAgICAgc3MgPSBzdHJjaHIocywgJywnKTsKPiArICAgICAgICBpZiAo
-IHNzICkKPiArICAgICAgICAgICAgKnNzID0gJ1wwJzsKClRoaXMgaXMgd3JpdGluZyB0byBhIGNv
-bnN0IHBvaW50ZXIuwqAgc3RyY2hyKCkgaXMgYSBwYXJ0aWN1bGFybHkgZXZpbApwYXJ0IG9mIHRo
-ZSBDIHN0YW5kYXJkIGxpYnJhcnksIGJlY2F1c2UgaXQgZHJvcHMgY29uc3QgZnJvbSBpdHMgaW5w
-dXQKcGFyYW1ldGVyLgoKU2VlIHBhcnNlX3hlbl9jcHVpZCgpIGZvciBhIHNpbWlsYXIgcGllY2Ug
-b2YgZnVuY3Rpb25hbGl0eSwgYW5kIHBsZWFzZQp1c2UgdGhlIHBhcnNlX2Jvb2xlYW4oKSBoZWxw
-ZXIuCgp+QW5kcmV3Cgo+ICsKPiArICAgICAgICBpZiAoICFzdHJjbXAocywgImF2aWMiKSApCj4g
-KyAgICAgICAgICAgIHN2bV9hdmljID0gdmFsOwo+ICsKPiArICAgICAgICBzID0gc3MgKyAxOwo+
-ICsgICAgfSB3aGlsZSAoIHNzICk7Cj4gKwo+ICsgICAgcmV0dXJuIDA7Cj4gK30KPiAgLyogT25s
-eSBjcmFzaCB0aGUgZ3Vlc3QgaWYgdGhlIHByb2JsZW0gb3JpZ2luYXRlcyBpbiBrZXJuZWwgbW9k
-ZS4gKi8KPiAgc3RhdGljIHZvaWQgc3ZtX2NyYXNoX29yX2ZhdWx0KHN0cnVjdCB2Y3B1ICp2KQo+
-ICB7CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============2783106552119014615==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="sxooTzC4hlIywygfMmfJfTIhsA7k5YSQw"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--sxooTzC4hlIywygfMmfJfTIhsA7k5YSQw
+Content-Type: multipart/mixed; boundary="3zaPUIBPS8QaQoforATtueXEfsAgBhGmx";
+ protected-headers="v1"
+From: Simon Gaiser <simon@invisiblethingslab.com>
+To: Jan Beulich <JBeulich@suse.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross <jgross@suse.com>
+Message-ID: <93d8078e-b0c6-81a6-ab28-aa856c9ef0d5@invisiblethingslab.com>
+Subject: Re: [PATCH 2/3] x86: suppress BTI mitigations around S3
+ suspend/resume
+References: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
+ <5AD09B2B02000078001BB0F4@prv1-mh.provo.novell.com>
+In-Reply-To: <5AD09B2B02000078001BB0F4@prv1-mh.provo.novell.com>
+
+--3zaPUIBPS8QaQoforATtueXEfsAgBhGmx
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Jan Beulich:
+> NMI and #MC can occur at any time after S3 resume, yet the MSR_SPEC_CTR=
+L
+> may become available only once we're reloaded microcode. Make
+> SPEC_CTRL_ENTRY_FROM_INTR_IST and DO_SPEC_CTRL_EXIT_TO_XEN no-ops for
+> the critical period of time.
+>=20
+> Also set the MSR back to its intended value.
+>=20
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>=20
+> --- a/xen/arch/x86/acpi/power.c
+> +++ b/xen/arch/x86/acpi/power.c
+> @@ -28,6 +28,7 @@
+>  #include <asm/tboot.h>
+>  #include <asm/apic.h>
+>  #include <asm/io_apic.h>
+> +#include <asm/spec_ctrl.h>
+>  #include <acpi/cpufreq/cpufreq.h>
+> =20
+>  uint32_t system_reset_counter =3D 1;
+> @@ -163,6 +164,7 @@ static int enter_state(u32 state)
+>  {
+>      unsigned long flags;
+>      int error;
+> +    struct cpu_info *ci;
+>      unsigned long cr4;
+> =20
+>      if ( (state <=3D ACPI_STATE_S0) || (state > ACPI_S_STATES_MAX) )
+> @@ -210,6 +212,10 @@ static int enter_state(u32 state)
+>      else
+>          error =3D 0;
+> =20
+> +    ci =3D get_cpu_info();
+> +    ci->use_shadow_spec_ctrl =3D 0;
+> +    ci->bti_ist_info =3D 0;
+> +
+>      ACPI_FLUSH_CPU_CACHE();
+> =20
+>      switch ( state )
+> @@ -248,6 +254,11 @@ static int enter_state(u32 state)
+> =20
+>      microcode_resume_cpu(0);
+> =20
+> +    ci->bti_ist_info =3D default_bti_ist_info;
+> +    asm volatile (ALTERNATIVE("", "wrmsr", X86_FEATURE_XEN_IBRS_SET)
+
+This does not compile for me:
+
+  power.c: Assembler messages:
+  power.c:272: Error: value of 257 too large for field of 1 bytes at 0
+
+Changing the alternative based on the other "wrmsr" calls fixes it:
+
+  asm volatile (ALTERNATIVE(ASM_NOP3, "wrmsr", X86_FEATURE_XEN_IBRS_SET)
+
+> +                  :: "a" (SPEC_CTRL_IBRS), "c" (MSR_SPEC_CTRL), "d" (0=
+)
+> +                  : "memory");
+> +
+>   done:
+>      spin_debug_enable();
+>      local_irq_restore(flags);
+
+
+--3zaPUIBPS8QaQoforATtueXEfsAgBhGmx--
+
+--sxooTzC4hlIywygfMmfJfTIhsA7k5YSQw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlrQ9gIACgkQkO9xfO/x
+ly+tCw//YhOn/P4VWURPPQAahFZr7Qm1GUlHBdS9sKDw/yTXihAH1gy6gwz5aXDW
+5LpOlmAc1YuGEkA0lOVK7Bodt7lzOgUd3HHYrwCKddwM+UM0Fw6GoI2fOoEAyvF2
+vMEPuwysJ4zgQqgqfX00cUx1zBeqx/GywvyMJ+vSiGnhHJkoW2uMg8ThNZXaJ3G/
+udZQVgxJ1HUG02LY1ULmXGXkXbw3oTSEhTvvIHFYFqBHyMl+EX1mjmGCeolDeFMr
+LFZqpkdWTl64HmG8uwERzVDHksfhUmsodngWIj+MWwWSc4EBxoPhVXvkBQk0MDng
+Gcg9Jak1nC3TXQfubZdL5nLZ886pfEmBwU+vWGgLfDJEU1PoJdHALrWTe7HTs1aR
+Ty7sb8V6pehio/+47EXD+Dhvopok3uwCsFK3hHHgMQKxCuC239ShM2KBcHyU9bV1
+HDCeTGn3lXV9bc9DLQzYhi1hbhR4yJ24fPFUdtJQWTlx7jlrDnxaPZGJlWUcrHro
+mSiG6/L0SgYNQ3oVgFvm+QAJbTeK9woHGxevkyI+r26PGRFwtjv2n6tgCobXID68
+Al0XppWyjD4OFtuZiOkkvKm6ENU+/J9GYAIqSrH1cd2JpdslzHsXgFvzdwQgL/Lt
+6dcctii3oFKlALzvKtkIMpgY2YzddSUWVBjT3ej/qReD3uSz0Jc=
+=Nbme
+-----END PGP SIGNATURE-----
+
+--sxooTzC4hlIywygfMmfJfTIhsA7k5YSQw--
+
+
+--===============2783106552119014615==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2783106552119014615==--
