@@ -1,18 +1,19 @@
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
-Subject: Re: [PATCH 0/7] xen/arm: CPU hotplug fixes
-Date: Fri, 13 Apr 2018 12:19:33 +0200
-Message-ID: <CAKPH-Niz=ZVovfPRjU1_hunCV8=jLxHA-rQjuA=+z9xiEH9Hsg@mail.gmail.com>
-References: <20180411131927.27083-1-mirela.simonovic@aggios.com>
- <d43d06af-a981-3156-bf3b-0d79d219dae1@arm.com>
- <61809e61-d4be-9000-2d5c-2e8b7770d525@aggios.com>
- <ac3d0857-0313-7f83-fa6e-c926636ec7d5@arm.com>
- <CAKPH-Ng+4QM+06msM1cxJpQ5uRvsRWc6Y1mhotPXRdF4nvh0aA@mail.gmail.com>
- <b70f2bc6-9fcd-880b-d891-236e0e92e0c4@arm.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v7 0/9] xen/x86: various XPTI speedups
+Date: Fri, 13 Apr 2018 12:29:25 +0200
+Message-ID: <35e9dc0e-3756-cdaf-e632-57c4b60e015a@suse.com>
+References: <20180412180944.31735-1-jgross@suse.com>
+ <61c5b514-2198-e13e-e349-d13f72935e55@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="------------1706D2688DC7C7B79E2B727F"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <b70f2bc6-9fcd-880b-d891-236e0e92e0c4@arm.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=adv8=hc=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1f6vxR-00013a-ME
+ for xen-devel@lists.xenproject.org; Fri, 13 Apr 2018 10:29:29 +0000
+In-Reply-To: <61c5b514-2198-e13e-e349-d13f72935e55@citrix.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,81 +22,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSnVsaWVuLAoKT24gVGh1LCBBcHIgMTIsIDIwMTggYXQgMTA6NDMgQU0sIEp1bGllbiBHcmFs
-bCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+Cj4KPiBPbiAxMS8wNC8xOCAxNzozNywg
-TWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPj4KPj4gSGkgSnVsaWVuLAo+Cj4KPiBIaSwKPgo+IE1h
-eSBJIGFzayB5b3UgdG8gY29uZmlndXJlIHlvdXIgbWFpbCBjbGllbnQgdG8gdXNlID4gZm9yIHF1
-b3RpbmcgYW5kIHVzZQo+IHBsYWluIHRleHQ/IE90aGVyd2lzZSwgdGhpcyBpcyBnb2luZyB0byBi
-ZSByZWFsbHkgZGlmZmljdWx0IHRvIGZvbGxvdyB0aGUKPiBkaXNjdXNzaW9uIGFmdGVyIGZldyBy
-b3VuZCAoc2VlIGFscmVhZHkgYmVsb3cpLgo+Cj4+IE9uIFdlZCwgQXByIDExLCAyMDE4IGF0IDY6
-MDIgUE0sIEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20KPj4gPG1haWx0bzpqdWxp
-ZW4uZ3JhbGxAYXJtLmNvbT4+IHdyb3RlOgo+Pgo+PiAgICAgSGksCj4+Cj4+ICAgICBPbiAxMS8w
-NC8xOCAxNjo1OCwgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPj4KPj4gICAgICAgICBPbiAwNC8x
-MS8yMDE4IDA1OjA3IFBNLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+Cj4+ICAgICAgICAgICAgIE9u
-IDExLzA0LzE4IDE0OjE5LCBNaXJlbGEgU2ltb25vdmljIHdyb3RlOgo+Pgo+PiAgICAgICAgIE1p
-Z3JhdGluZyBpbnRlcnJ1cHRzIHdoZW4gdHVybmluZyBvZmYgYSBDUFUgYWxyZWFkeSB3b3Jrcy4K
-Pj4gICAgICAgICBIb3dldmVyLCB3aGVuIGEgQ1BVIGlzIHR1cm5lZCBiYWNrIG9uIHRoZXJlIGlz
-IG5vIGludGVycnVwdAo+PiAgICAgICAgIG1pZ3JhdGlvbiBiYWNrIHRvIHRoZSBob3RwbHVnZ2Vk
-IENQVSAtIGFsbCBpbnRlcnJ1cHRzIHdpbGwKPj4gICAgICAgICByZW1haW4gcm91dGVkIHRvIHRo
-ZSBDUFUjMC4KPj4gICAgICAgICBQYXRjaCA3LzcgZml4ZXMgdGhpcwo+Pgo+Pgo+PiAgICAgV2hh
-dCBkbyB5b3UgbWVhbiBieSBhbGwgaW50ZXJydXB0cz8gSW50ZXJydXB0cyByb3V0ZWQgdG8gZ3Vl
-c3Qgd2lsbAo+PiAgICAgYWx3YXlzIGZvbGxvdyB0aGUgdkNQVS4gU28gYXJlIHlvdSBzdXJlIHRo
-ZXkgYXJlIGdvaW5nIHRvIGJlCj4+ICAgICBtaWdyYXRlZCB3aGVuIHRoYXQgdkNQVSBpcyBwYXVz
-ZWQvb2ZmPwo+Pgo+Pgo+PiBKdXN0IHRvIG1ha2Ugc3VyZSB3ZSdyZSBvbiB0aGUgc2FtZSBwYWdl
-IC0gdGhpcyBpcyBhYm91dCBob3RwbHVnZ2luZwo+PiBwaHlzaWNhbCBDUFVzLiBIb3RwbHVnZ2lu
-ZyB2Q1BVcyB1c2luZyB2aXJ0dWFsIFBTQ0kgQ1BVX09GRiBpbnRlcmZhY2UgaXMKPj4gYWxyZWFk
-eSBpbXBsZW1lbnRlZCBhbmQgdW5yZWxhdGVkIHRvIHRoaXMgc2VyaWVzLgo+Cj4KPiBZZXMsIHdl
-IGFyZSBvbiB0aGUgc2FtZSBwYWdlIDopLiBJIHdhcyBqdXN0IHdvbmRlcmluZyB3aGF0IGhhcHBl
-biB0bwo+IGludGVycnVwdCByb3V0ZWQgdG8gdGhhdCBwQ1BVLgo+Cj4+Cj4+IEFzc3VtaW5nIHRo
-YXQgc3lzdGVtIGhhcyAyIHBDUFVzIGJ5ICdhbGwgaW50ZXJydXB0cycgSSBtZWFuIGludGVycnVw
-dHMKPj4gdGhhdCB3ZXJlIHRhcmdldGVkIHRvIHRoZSBwQ1BVIzAgYW5kIHBDUFUjMSBwcmlvciB0
-byBkb2luZyBhbnkgaG90cGx1Zy4KPj4KPj4gRm9yIGV4YW1wbGUsIGlmIGEgZ3Vlc3QgaXMgcGlu
-bmVkIHRvIHBDUFUjMSBhbiBpbnRlcnJ1cHQgb2YgYSBkZXZpY2UgaXQKPj4gb3ducyB3aWxsIGJl
-IHRhcmdldGVkIHRvIHBDUFUjMS4KPj4gV2hlbiBwQ1BVIzEgaXMgdHVybmVkIG9mZiB0aGF0IGlu
-dGVycnVwdCB3aWxsIGJlIG1pZ3JhdGVkIHRvIHBDUFUjMC4KPj4gcENQVSMwIGZpbmFsaXplcyB0
-aGUgc3VzcGVuZCBhbmQgcmVjZWl2ZXMgd2FrZS11cCBpbnRlcnJ1cHRzLiBIb3dldmVyLCB3aGVu
-Cj4+IENQVSMxIGlzIHR1cm5lZCBiYWNrIG9uIHRoYXQgaW50ZXJydXB0IHdpbGwgcmVtYWluIHRh
-cmdldGVkIHRvIHRoZSBDUFUjMCwKPj4gd2hpY2ggSSBhc3N1bWVkIGlzIHdyb25nLgo+PiBUaGUg
-c2NlbmFyaW8gZGVzY3JpYmVkIGhlcmUgaXMgYWxzbyBob3cgSSB0ZXN0ZWQgdGhpcy4KPj4KPj4g
-ICAgIENhbiB5b3UgZ2l2ZSB0aGUgcGF0aCBpbiBYZW4gZG9pbmcgdGhhdD8KPj4KPj4KPj4gU3Vy
-ZSwgaGVyZSBpcyBhIGJhY2t0cmFjZSAoZHVtcGVkIG9uIHRoZSBDUFUgYmVpbmcgdHVybmVkIG9m
-Zik6Cj4+ICAgICAgMCAgMHgyNjAzZGMgYXJjaF9tb3ZlX2lycXMoKTogdmdpYy5jLCBsaW5lIDMw
-OQo+PiAgICAgIDEgIDB4MjJlZTU4IHNjaGVkX21vdmVfaXJxcygpKzIwOiBzY2hlZHVsZS5jLCBs
-aW5lIDMwMwo+PiAgICAgIDIgIDB4MjMxOGU4IGNwdV9kaXNhYmxlX3NjaGVkdWxlcigpKzEwMDA6
-IHNjaGVkdWxlLmMsIGxpbmUgNTg2Cj4+ICAgICAgMyAgMHgyMzE4ZTggY3B1X2Rpc2FibGVfc2No
-ZWR1bGVyKCkrMTAwMDogc2NoZWR1bGUuYywgbGluZSA1ODYKPj4gICAgICA0ICAweDI1YWZmOCBf
-X2NwdV9kaXNhYmxlKCkrOTY6IHNtcGJvb3QuYywgbGluZSAzODYKPj4gICAgICA1ICAweDIwMTYw
-OCB0YWtlX2NwdV9kb3duKCkrNTI6IGNwdS5jLCBsaW5lIDc1Cj4+ICAgICAgNiAgMHgyMzQyNmMg
-c3RvcG1hY2hpbmVfYWN0aW9uKCkrMTg4OiBzdG9wX21hY2hpbmUuYywgbGluZSAxNTkKPj4gICAg
-ICA3ICAweDIzNTg1OCBkb190YXNrbGV0X3dvcmsoKSsxNzY6IHRhc2tsZXQuYywgbGluZSA5NAo+
-PiAgICAgIDggIDB4MjM1YzgwIGRvX3Rhc2tsZXQoKSsxMDQ6IHRhc2tsZXQuYywgbGluZSAxMjYK
-Pj4gICAgICA5ICAweDI0ZGFlYyBpZGxlX2xvb3AoKSsxNDQ6IGRvbWFpbi5jLCBsaW5lIDcyCj4+
-ICAgICAxMCAgMHgyNWIxZjggc3RhcnRfc2Vjb25kYXJ5KCkrNDA0OiBzbXBib290LmMsIGxpbmUg
-MzY4Cj4KPgo+Cj4gU28gdGhpcyBjb3ZlciBpbnRlcnJ1cHQgcm91dGVkIHRvIGEgdmlydHVhbCBD
-UFUuIEhvd2V2ZXIsIHRoaXMgZG9lcyBub3QKPiBoYW5kbGUgaW50ZXJydXB0cyB1c2VkIGJ5IFhl
-bi4gSG93IGRvIHlvdSBoYW5kbGUgdGhlbT8KPgo+IEZvciBpbnN0YW5jZSBTTU1VcyBJUlEgbWln
-aHQgYmUgcm91dGVkIHRvIG90aGVyIGludGVycnVwdCB0aGFuIENQVSAjMC4KCkludGVycnVwdHMg
-dXNlZCBieSBYZW4gc2hvdWxkIG5vdCB3YWtlLXVwIHRoZSBzeXN0ZW0gYW5kIHdpbGwgYmUKZGlz
-YWJsZWQgd2hlbiB3ZSBzdXNwZW5kIHRoZSBkZXZpY2VzIHVzZWQgYnkgWGVuLgpIb3dldmVyLCBJ
-IG5lZWQgdG8gZG91YmxlIGNoZWNrIHRoYXQgc3VjaCBpbnRlcnJ1cHRzIGdldCBlbmFibGVkIG9u
-CnRoZSByaWdodCBDUFUgb24gcmVzdW1lLiBDb3VsZCB5b3UgcGxlYXNlIHRlbGwgbWUgd2hpY2gg
-bWVjaGFuaXNtIGluClhlbiBpcyB1c2VkIHRvIHRhcmdldCBzdWNoIGFuIGludGVycnVwdCB0byBh
-IHNlY29uZGFyeSBDUFUgb25seT8gSXMKdGhhdCBldmVuIHBvc3NpYmxlIGFuZCB3aHkgd291bGQg
-dGhhdCBiZSB1c2VkPwpDdXJyZW50bHksIEkgaGF2ZSBubyB3YXkgdG8gdHJ5IG91dCBTTU1VIGJ1
-dCBJIGNvdWxkIHRyeSBVQVJULgoKVGhhbmtzLApNaXJlbGEKCj4KPiBbLi4uXQo+Cj4+Cj4+ICAg
-ICBJZiB0aGUgZm9ybWVyLCBpdCB3b3VsZCBiZSBuaWNlIHRvIGdldCB0aGUgY29kZSB5b3UgdXNl
-ZC4gSWYgdGhlCj4+ICAgICBsYXR0ZXIsIHRoZW4gaGF2aW5nIGEgaGFjayBwYXRjaCB0byB0ZXN0
-IHRoYXQgY29kZSB3b3VsZCBiZSBuaWNlLgo+PiAgICAgSWRlYWxseSwgeW91IHdhbnQgdG8gcGx1
-ZyB0aGF0IGluIHRoZSBTWVNDVEwgaW50ZXJmYWNlIGZvcgo+PiAgICAgb3V0LW9mLWJveCB0ZXN0
-aW5nLgo+Pgo+Pgo+PiBPaywgSSBoYXZlIG5ldmVyIHVzZWQgdGhhdCBidXQgSSdsbCB0cnkgdG8g
-ZmlndXJlIGl0IG91dC4gSSBtYXkgY29tZSB1cAo+PiB3aXRoIGFkZGl0aW9uYWwgcXVlc3Rpb25z
-Lgo+Cj4KPiBZb3UgbWlnaHQgd2FudCB0byBoYXZlIGEgbG9vayBhdCB0aGUgeDg2IHZlcnNpb24g
-WEVOX1NZU0NUTF9jcHVfaG90cGx1ZyBpbgo+IHg4Ni9zeXN0Y2wuYy4KPgo+IENoZWVycywKPgo+
-IC0tCj4gSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+This is a multi-part message in MIME format.
+--------------1706D2688DC7C7B79E2B727F
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+On 13/04/18 11:59, Andrew Cooper wrote:
+> On 12/04/18 19:09, Juergen Gross wrote:
+>> This patch series aims at reducing the overhead of the XPTI Meltdown
+>> mitigation.
+> 
+> Sadly, there are still problems. 
+> 
+> (XEN) [   13.486805] Dom0 has maximum 2 VCPUs
+> (XEN) [   13.486824] ----[ Xen-4.11.0-5.0.3-d  x86_64  debug=y   Not tainted ]----
+> (XEN) [   13.486826] CPU:    0
+> (XEN) [   13.486828] RIP:    e008:[<ffff82d0802885f4>] switch_cr3_cr4+0x58/0x116
+> (XEN) [   13.486833] RFLAGS: 0000000000010086   CONTEXT: hypervisor
+> (XEN) [   13.486836] rax: 00000000000000df   rbx: 0000000000000282   rcx: ffff82d0804b7fff
+> (XEN) [   13.486839] rdx: 0000000000152660   rsi: 00000000001526e0   rdi: 8000001071d4a000
+> (XEN) [   13.486841] rbp: ffff82d0804b78d8   rsp: ffff82d0804b78a8   r8:  0000000000000000
+> (XEN) [   13.486844] r9:  0000ffff0000ffff   r10: 00ff00ff00ff00ff   r11: 0f0f0f0f0f0f0f0f
+> (XEN) [   13.486847] r12: 8000001071d4a000   r13: 0000000057ea8000   r14: 00000000001526e0
+> (XEN) [   13.486849] r15: ffff83107326f000   cr0: 000000008005003b   cr4: 0000000000152660
+> (XEN) [   13.486851] cr3: 0000000057ea8000   cr2: 0000000000000000
+> (XEN) [   13.486853] fsb: 0000000000000000   gsb: 0000000000000000   gss: 0000000000000000
+> (XEN) [   13.486855] ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: 0000   cs: e008
+> (XEN) [   13.486859] Xen code around <ffff82d0802885f4> (switch_cr3_cr4+0x58/0x116):
+> (XEN) [   13.486860]  00 00 66 0f 38 82 4d d0 <41> 0f 22 dc 4c 39 f2 75 56 4c 89 ea 81 e2 ff 0f
+> (XEN) [   13.486869] Xen stack trace from rsp=ffff82d0804b78a8:
+> (XEN) [   13.486870]    ffff82d0804b78d8 ffff82d0804466a2 ffff83005a1f1000 0000000000000002
+> (XEN) [   13.486874]    ffffffff82000000 ffff830000060fa0 ffff82d0804b7d68 ffff82d08044349e
+> (XEN) [   13.486878]    0000000000000000 ffff830000060fa0 ffffffff82000000 0000000000000ff0
+> (XEN) [   13.486881]    0000000000000000 0000001071d4c000 ffff831071d4b000 ffff831071d4c000
+> (XEN) [   13.486884]    ffffffff81d49000 0000000000000000 0000000000000013 ffff831071d4dff8
+> (XEN) [   13.486887]    0000001071d5c000 ffff831071d4d000 ffffffff81d5e000 ffffffff81000000
+> (XEN) [   13.486891]    0000000001072000 0000001071d5d000 ffffffff81d4a000 ffffffff81d49000
+> (XEN) [   13.486894]    ffff831071d4c080 0000000000002000 0000000001070000 ffffffff81d49000
+> (XEN) [   13.486897]    ffffffff82000000 ffff831071d4aff8 0000000000002000 0000000000000001
+> (XEN) [   13.486900]    0000008000200000 0000008000000000 000000000000570a 0000000000040000
+> (XEN) [   13.486903]    0000000000000000 ffffffff80000000 ffff831071d4dff0 ffff82d080485580
+> (XEN) [   13.486907]    ffff83005a1f1000 0000000005709ac2 0000000000000000 ffff832079bd182c
+> (XEN) [   13.486910]    ffff832079bd19e8 0000000000000000 0000000000000000 0000000000000000
+> (XEN) [   13.486913]    0000000000000001 ffff82d0803fd5e8 ffffffff81b051f0 0000000000000001
+> (XEN) [   13.486916]    ffff82d0803fd436 ffffffff81001000 0000000000000001 ffff82d0803fd410
+> (XEN) [   13.486919]    ffffffff80000000 0000000000000001 ffff82d0803fd429 0000000000000000
+> (XEN) [   13.486923]    0000000000000002 ffff82d0803fd578 ffff832079bd1868 0000000000000002
+> (XEN) [   13.486926]    ffff82d0803fd3d4 ffff832079bd183c 0000000000000002 ffff82d0803fd584
+> (XEN) [   13.486929]    ffff832079bd1854 0000000000000002 ffff82d0803fd3cd ffff832079bd1944
+> (XEN) [   13.486933]    0000000000000002 ffff82d0803fd592 ffff832079bd1930 0000000000000002
+> (XEN) [   13.486936] Xen call trace:
+> (XEN) [   13.486938]    [<ffff82d0802885f4>] switch_cr3_cr4+0x58/0x116
+> (XEN) [   13.486942]    [<ffff82d08044349e>] dom0_construct_pv+0x1bb1/0x29e3
+> (XEN) [   13.486945]    [<ffff82d0804470ba>] construct_dom0+0x8c/0xb86
+> (XEN) [   13.486949]    [<ffff82d080437fd3>] __start_xen+0x23c4/0x2629
+> (XEN) [   13.486952]    [<ffff82d0802000f3>] __high_start+0x53/0x58
+> (XEN) [   13.486954]
+> (XEN) [   14.047278]
+> (XEN) [   14.049274] ****************************************
+> (XEN) [   14.054734] Panic on CPU 0:
+> (XEN) [   14.058026] GENERAL PROTECTION FAULT
+> (XEN) [   14.062099] [error_code=0000]
+> (XEN) [   14.065565] ****************************************
+> (XEN) [   14.071024]
+> (XEN) [   14.073018] Reboot in five seconds...
+> 
+> The faulting instruction is `mov %r12, %cr3` which is trying to use
+> noflush while %cr4.pcide is clear.
+
+While I can see how that happened I'm not sure why I didn't hit this
+when testing my series. Could it be some cpus won't GP in this case?
+
+Could you try the series without the last patch? Maybe it would be
+possible to commit some of the patches at least.
+
+I'm just about to leave for the Linux root conference in Kiev, so the
+patch attached is only compile tested. You might want to try that.
+
+
+Juergen
+
+
+--------------1706D2688DC7C7B79E2B727F
+Content-Type: text/x-patch;
+ name="fixup.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="fixup.patch"
+
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index 22c5150444..34c77bcbe4 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -718,7 +718,7 @@ int __init dom0_construct_pv(struct domain *d,
+         update_cr3(v);
+ 
+     /* We run on dom0's page tables for the final part of the build process. */
+-    switch_cr3_cr4(v->arch.cr3, read_cr4());
++    switch_cr3_cr4(cr3_pa(v->arch.cr3), read_cr4());
+     mapcache_override_current(v);
+ 
+     /* Copy the OS image and free temporary buffer. */
+
+--------------1706D2688DC7C7B79E2B727F
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--------------1706D2688DC7C7B79E2B727F--
