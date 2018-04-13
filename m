@@ -1,10 +1,10 @@
 From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [ovmf baseline-only test] 74580: trouble: blocked/broken
-Date: Fri, 13 Apr 2018 01:11:27 +0100
-Message-ID: <osstest-74580-mainreport@xen.org>
+Subject: [xen-unstable baseline-only test] 74582: trouble:
+ blocked/broken
+Date: Fri, 13 Apr 2018 01:23:48 +0100
+Message-ID: <osstest-74582-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4280507843764768023=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -17,113 +17,367 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xensource.com, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
-NDU4MCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhzLmNpdHJpdGUubmV0L35vc3N0
-ZXN0L3Rlc3Rsb2dzL2xvZ3MvNzQ1ODAvCgpGYWlsdXJlcyBhbmQgcHJvYmxlbXMgd2l0aCB0ZXN0
-cyA6LSgKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNs
-dWRpbmcgdGVzdHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFtZDY0LXhzbSAgICAg
-ICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1aWxkLWkz
-ODYgICAgICAgICAgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9r
-ZW4KIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAg
-ICAgICAgICBicm9rZW4KIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgPGpvYiBzdGF0
-dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAg
-ICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1aWxkLWFtZDY0ICAgICAg
-ICAgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1aWxk
-LWkzODYteHNtICAgICAgICAgICAgICAgIDIgaG9zdHMtYWxsb2NhdGUgICAgICAgICAgYnJva2Vu
-IFJFR1IuIHZzLiA3NDU3NgogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgMiBob3N0cy1h
-bGxvY2F0ZSAgICAgICAgICBicm9rZW4gUkVHUi4gdnMuIDc0NTc2CiBidWlsZC1pMzg2ICAgICAg
-ICAgICAgICAgICAgICAyIGhvc3RzLWFsbG9jYXRlICAgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4g
-NzQ1NzYKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgIDIgaG9zdHMtYWxsb2NhdGUgICAg
-ICAgICAgYnJva2VuIFJFR1IuIHZzLiA3NDU3NgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAg
-ICAgMiBob3N0cy1hbGxvY2F0ZSAgICAgICAgICBicm9rZW4gUkVHUi4gdnMuIDc0NTc2CiBidWls
-ZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAyIGhvc3RzLWFsbG9jYXRlICAgICAgICAgIGJyb2tl
-biBSRUdSLiB2cy4gNzQ1NzYKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBu
-b3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQgIDEgYnVp
-bGQtY2hlY2soMSkgICAgICAgICAgICAgYmxvY2tlZCBuL2EKIGJ1aWxkLWFtZDY0LWxpYnZpcnQg
-ICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAg
-ICAgICAgICBibG9ja2VkIG4vYQogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgMSBidWls
-ZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogYnVpbGQtYW1kNjQteHNtICAg
-ICAgICAgICAgICAgMyBjYXB0dXJlLWxvZ3MgICAgICAgICAgIGJyb2tlbiBibG9ja2VkIGluIDc0
-NTc2CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAzIGNhcHR1cmUtbG9ncyAgICAgICAg
-ICAgYnJva2VuIGJsb2NrZWQgaW4gNzQ1NzYKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAg
-IDMgY2FwdHVyZS1sb2dzICAgICAgICAgICBicm9rZW4gYmxvY2tlZCBpbiA3NDU3NgogYnVpbGQt
-YW1kNjQtcHZvcHMgICAgICAgICAgICAgMyBjYXB0dXJlLWxvZ3MgICAgICAgICAgIGJyb2tlbiBi
-bG9ja2VkIGluIDc0NTc2CiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAzIGNhcHR1cmUt
-bG9ncyAgICAgICAgICAgYnJva2VuIGJsb2NrZWQgaW4gNzQ1NzYKIGJ1aWxkLWkzODYtcHZvcHMg
-ICAgICAgICAgICAgIDMgY2FwdHVyZS1sb2dzICAgICAgICAgICBicm9rZW4gYmxvY2tlZCBpbiA3
-NDU3NgoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIG92bWYgICAgICAgICAgICAgICAg
-IDhiMGU2NzgyMWJkNjZhZjcwNDMzZWU0YmI4NTgzMjVmMzAzMzYwOWEKYmFzZWxpbmUgdmVyc2lv
-bjoKIG92bWYgICAgICAgICAgICAgICAgIDEzZDkwOWY4OWEzY2VlMWMxZjZiODUxYTRjZGE3YmQx
-YTQ0ZTkwYWUKCkxhc3QgdGVzdCBvZiBiYXNpcyAgICA3NDU3NiAgMjAxOC0wNC0xMSAwNDo1NDo0
-MiBaICAgIDEgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2UgICAgNzQ1ODAgIDIwMTgtMDQtMTIgMDA6
-NDk6NDUgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCBy
-ZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBMYXN6bG8gRXJzZWsgPGxlcnNla0ByZWRoYXQuY29tPgog
-IFlvbmdob25nIFpodSA8eW9uZ2hvbmcuemh1QGludGVsLmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2
-NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2Vu
-ICAKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBicm9rZW4gIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFtZDY0
-LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2Vk
-IAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGJsb2NrZWQgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQg
-CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgYmxvY2tlZCAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnhzLmNpdHJp
-dGUubmV0CmxvZ3M6IC9ob21lL29zc3Rlc3QvbG9ncwppbWFnZXM6IC9ob21lL29zc3Rlc3QvaW1h
-Z2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDov
-L29zc3Rlc3QueHMuY2l0cml0ZS5uZXQvfm9zc3Rlc3QvdGVzdGxvZ3MvbG9ncwoKVGVzdCBoYXJu
-ZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW5zb3VyY2UuY29t
-L2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKYnJva2VuLWpvYiBidWlsZC1hbWQ2NC14
-c20gYnJva2VuCmJyb2tlbi1qb2IgYnVpbGQtaTM4NiBicm9rZW4KYnJva2VuLWpvYiBidWlsZC1h
-bWQ2NC1wdm9wcyBicm9rZW4KYnJva2VuLWpvYiBidWlsZC1pMzg2LXB2b3BzIGJyb2tlbgpicm9r
-ZW4tam9iIGJ1aWxkLWkzODYteHNtIGJyb2tlbgpicm9rZW4tam9iIGJ1aWxkLWFtZDY0IGJyb2tl
-bgpicm9rZW4tc3RlcCBidWlsZC1pMzg2LXhzbSBob3N0cy1hbGxvY2F0ZQpicm9rZW4tc3RlcCBi
-dWlsZC1hbWQ2NC1wdm9wcyBob3N0cy1hbGxvY2F0ZQpicm9rZW4tc3RlcCBidWlsZC1pMzg2IGhv
-c3RzLWFsbG9jYXRlCmJyb2tlbi1zdGVwIGJ1aWxkLWkzODYtcHZvcHMgaG9zdHMtYWxsb2NhdGUK
-YnJva2VuLXN0ZXAgYnVpbGQtYW1kNjQteHNtIGhvc3RzLWFsbG9jYXRlCmJyb2tlbi1zdGVwIGJ1
-aWxkLWFtZDY0IGhvc3RzLWFsbG9jYXRlCmJyb2tlbi1zdGVwIGJ1aWxkLWFtZDY0LXhzbSBjYXB0
-dXJlLWxvZ3MKYnJva2VuLXN0ZXAgYnVpbGQtYW1kNjQgY2FwdHVyZS1sb2dzCmJyb2tlbi1zdGVw
-IGJ1aWxkLWkzODYgY2FwdHVyZS1sb2dzCmJyb2tlbi1zdGVwIGJ1aWxkLWFtZDY0LXB2b3BzIGNh
-cHR1cmUtbG9ncwpicm9rZW4tc3RlcCBidWlsZC1pMzg2LXhzbSBjYXB0dXJlLWxvZ3MKYnJva2Vu
-LXN0ZXAgYnVpbGQtaTM4Ni1wdm9wcyBjYXB0dXJlLWxvZ3MKClB1c2ggbm90IGFwcGxpY2FibGUu
-CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0KY29tbWl0IDhiMGU2NzgyMWJkNjZhZjcwNDMzZWU0YmI4NTgzMjVmMzAzMzYwOWEKQXV0
-aG9yOiBZb25naG9uZyBaaHUgPHlvbmdob25nLnpodUBpbnRlbC5jb20+CkRhdGU6ICAgVHVlIEFw
-ciAxMCAyMToyNjozMiAyMDE4ICswODAwCgogICAgQmFzZVRvb2xzOiBGaXggdGhlIGJ1aWxkIGVy
-cm9yIGNhdXNlZCBieSBlY2E5ODBjMGM4OTkKICAgIAogICAgUm9sbCBiYWNrIHRoZSBmaXhlZCBh
-dCBidWlsZCBwY2QgY29sbGVjdGlvbiB0byBpbmNsdWRlIHRoZSBwY2QgaW4KICAgIE1vZHVsZSBh
-bmQgTGlicmFyeS4KICAgIAogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmli
-dXRpb24gQWdyZWVtZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTogWW9uZ2hvbmcgWmh1IDx5b25n
-aG9uZy56aHVAaW50ZWwuY29tPgogICAgVGVzdGVkLWJ5OiBMYXN6bG8gRXJzZWsgPGxlcnNla0By
-ZWRoYXQuY29tPgogICAgUmV2aWV3ZWQtYnk6IExpbWluZyBHYW8gPGxpbWluZy5nYW9AaW50ZWwu
-Y29tPgoKY29tbWl0IDYzMDFkMmUyNGFiNjc3ODZmYTM2YTZkODdlN2EwZjY2MjVlN2I4MzEKQXV0
-aG9yOiBMYXN6bG8gRXJzZWsgPGxlcnNla0ByZWRoYXQuY29tPgpEYXRlOiAgIFR1ZSBBcHIgMTAg
-MTk6MzQ6NTAgMjAxOCArMDIwMAoKICAgIE92bWZQa2c6IHJlbW92ZSBCTE9DS19NTUlPX1BST1RP
-Q09MIGFuZCBCbG9ja01taW9Ub0Jsb2NrSW9EeGUKICAgIAogICAgQkxPQ0tfTU1JT19QUk9UT0NP
-TCBhbmQgQmxvY2tNbWlvVG9CbG9ja0lvRHhlIHdlcmUgaW50cm9kdWNlZCB0byBPdm1mUGtnCiAg
-ICBpbiBNYXJjaCAyMDEwLCBpbiBhZGphY2VudCBjb21taXRzIGIwZjUxNDQ2NzZmYSBhbmQgZWZk
-ODJjNTc5NGVjLiBJbiB0aGUKICAgIHBhc3QgZWlnaHQgeWVhcnMsIG5vIGRyaXZlciBvciBhcHBs
-aWNhdGlvbiBzZWVtcyB0byBoYXZlIG1hdGVyaWFsaXplZCB0aGF0CiAgICBwcm9kdWNlZCBCTE9D
-S19NTUlPX1BST1RPQ09MIGluc3RhbmNlcy4gTWVhbndoaWxlIHRoZSBVRUZJIHNwZWMgaGFzCiAg
-ICBkZXZlbG9wZWQgdGhlIEVGSV9SQU1fRElTS19QUk9UT0NPTCwgd2hpY2ggZWRrMiBpbXBsZW1l
-bnRzIChhbmQgT1ZNRgogICAgaW5jbHVkZXMpIGFzIFJhbURpc2tEeGUuCiAgICAKICAgIFJhdGhl
-ciB0aGFuIGZpeGluZyBpc3N1ZXMgaW4gdGhlIHVudXNlZCBCbG9ja01taW9Ub0Jsb2NrSW9EeGUg
-ZHJpdmVyLAogICAgcmVtb3ZlIHRoZSBkcml2ZXIsIHRvZ2V0aGVyIHdpdGggdGhlIEJMT0NLX01N
-SU9fUFJPVE9DT0wgZGVmaW5pdGlvbiB0aGF0CiAgICBub3cgYmVjb21lcyB1bnVzZWQgdG9vLgog
-ICAgCiAgICBDYzogQXJkIEJpZXNoZXV2ZWwgPGFyZC5iaWVzaGV1dmVsQGxpbmFyby5vcmc+CiAg
-ICBDYzogSm9yZGFuIEp1c3RlbiA8am9yZGFuLmwuanVzdGVuQGludGVsLmNvbT4KICAgIENjOiBT
-dGV2ZW4gU2hpIDxzdGV2ZW4uc2hpQGludGVsLmNvbT4KICAgIFJlZjogaHR0cHM6Ly9idWd6aWxs
-YS50aWFub2NvcmUub3JnL3Nob3dfYnVnLmNnaT9pZD05MjYKICAgIFJlcG9ydGVkLWJ5OiBTdGV2
-ZW4gU2hpIDxzdGV2ZW4uc2hpQGludGVsLmNvbT4KICAgIENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFu
-b0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAxLjEKICAgIFNpZ25lZC1vZmYtYnk6IExhc3ps
-byBFcnNlayA8bGVyc2VrQHJlZGhhdC5jb20+CiAgICBSZXZpZXdlZC1ieTogSm9yZGFuIEp1c3Rl
-biA8am9yZGFuLmwuanVzdGVuQGludGVsLmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+--===============4280507843764768023==
+Content-Type: text/plain
+
+This run is configured for baseline tests only.
+
+flight 74582 xen-unstable real [real]
+http://osstest.xs.citrite.net/~osstest/testlogs/logs/74582/
+
+Failures and problems with tests :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64-prev                <job status>                 broken
+ build-armhf-pvops               <job status>                 broken
+ build-arm64-xsm                 <job status>                 broken
+ build-amd64-xtf                 <job status>                 broken
+ build-amd64-xsm                 <job status>                 broken
+ build-i386-pvops                <job status>                 broken
+ build-arm64-pvops               <job status>                 broken
+ build-armhf-xsm                 <job status>                 broken
+ build-i386-prev                 <job status>                 broken
+ build-arm64                     <job status>                 broken
+ build-amd64                     <job status>                 broken
+ build-i386                      <job status>                 broken
+ build-i386-xsm                  <job status>                 broken
+ build-amd64-pvops               <job status>                 broken
+ build-armhf                     <job status>                 broken
+ build-i386                    2 hosts-allocate          broken REGR. vs. 74558
+ build-i386-pvops              2 hosts-allocate          broken REGR. vs. 74558
+ build-armhf                   2 hosts-allocate          broken REGR. vs. 74558
+ build-i386-xsm                2 hosts-allocate          broken REGR. vs. 74558
+ build-armhf-pvops             2 hosts-allocate          broken REGR. vs. 74558
+ build-i386-prev               2 hosts-allocate          broken REGR. vs. 74558
+ build-amd64-pvops             2 hosts-allocate          broken REGR. vs. 74558
+ build-amd64                   2 hosts-allocate          broken REGR. vs. 74558
+ build-armhf-xsm               2 hosts-allocate          broken REGR. vs. 74558
+ build-amd64-xsm               2 hosts-allocate          broken REGR. vs. 74558
+ build-amd64-xtf               2 hosts-allocate          broken REGR. vs. 74558
+ build-amd64-prev              2 hosts-allocate          broken REGR. vs. 74558
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-i386-freebsd10-i386  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-qemuu-nested-intel  1 build-check(1)              blocked n/a
+ test-xtf-amd64-amd64-1        1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm  1 build-check(1)     blocked n/a
+ test-amd64-i386-xl-qemut-debianhvm-amd64-xsm  1 build-check(1)     blocked n/a
+ build-arm64-libvirt           1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-xsm   1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-multivcpu  1 build-check(1)               blocked  n/a
+ test-amd64-i386-qemut-rhel6hvm-intel  1 build-check(1)             blocked n/a
+ test-amd64-i386-freebsd10-amd64  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-pair         1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-win7-amd64  1 build-check(1)             blocked n/a
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ test-amd64-amd64-pygrub       1 build-check(1)               blocked  n/a
+ test-xtf-amd64-amd64-2        1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-qemuu-debianhvm-amd64  1 build-check(1)         blocked n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-pair  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-credit2   1 build-check(1)               blocked  n/a
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-rumprun-amd64  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm  1 build-check(1)    blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
+ test-xtf-amd64-amd64-3        1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-raw        1 build-check(1)               blocked  n/a
+ test-amd64-amd64-i386-pvgrub  1 build-check(1)               blocked  n/a
+ test-amd64-i386-qemuu-rhel6hvm-amd  1 build-check(1)               blocked n/a
+ test-arm64-arm64-xl           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ws16-amd64  1 build-check(1)             blocked n/a
+ build-armhf-libvirt           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-pair  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-examine      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-vhd       1 build-check(1)               blocked  n/a
+ test-amd64-i386-migrupgrade   1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-pvhv2-amd  1 build-check(1)               blocked  n/a
+ test-amd64-i386-qemut-rhel6hvm-amd  1 build-check(1)               blocked n/a
+ test-amd64-amd64-xl-rtds      1 build-check(1)               blocked  n/a
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64  1 build-check(1)        blocked n/a
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ test-armhf-armhf-xl-midway    1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
+ test-amd64-amd64-migrupgrade  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ test-amd64-i386-xl-qemut-win10-i386  1 build-check(1)              blocked n/a
+ test-amd64-i386-xl-qemuu-win10-i386  1 build-check(1)              blocked n/a
+ test-arm64-arm64-examine      1 build-check(1)               blocked  n/a
+ test-amd64-i386-examine       1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-qemut-ws16-amd64  1 build-check(1)              blocked n/a
+ test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemut-win10-i386  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemut-debianhvm-amd64  1 build-check(1)         blocked n/a
+ test-armhf-armhf-xl-credit2   1 build-check(1)               blocked  n/a
+ build-i386-rumprun            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-win10-i386  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ws16-amd64  1 build-check(1)              blocked n/a
+ test-amd64-amd64-xl-qcow2     1 build-check(1)               blocked  n/a
+ test-amd64-amd64-amd64-pvgrub  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemut-win7-amd64  1 build-check(1)             blocked n/a
+ build-amd64-rumprun           1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-xsm  1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl            1 build-check(1)               blocked  n/a
+ test-xtf-amd64-amd64-4        1 build-check(1)               blocked  n/a
+ test-amd64-i386-livepatch     1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-amd64-libvirt-vhd  1 build-check(1)               blocked  n/a
+ test-arm64-arm64-libvirt-xsm  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-multivcpu  1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-xsm        1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemut-ws16-amd64  1 build-check(1)             blocked n/a
+ test-xtf-amd64-amd64-5        1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-pvhv2-intel  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-xsm  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-i386-qemuu-rhel6hvm-intel  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-win7-amd64  1 build-check(1)              blocked n/a
+ test-arm64-arm64-xl-credit2   1 build-check(1)               blocked  n/a
+ test-amd64-i386-pair          1 build-check(1)               blocked  n/a
+ test-amd64-i386-rumprun-i386  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-qemuu-nested-amd  1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ test-amd64-i386-xl-qemut-win7-amd64  1 build-check(1)              blocked n/a
+ test-amd64-amd64-examine      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-rtds      1 build-check(1)               blocked  n/a
+ test-amd64-amd64-livepatch    1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemut-debianhvm-amd64-xsm  1 build-check(1)    blocked n/a
+ test-amd64-amd64-xl-qemut-debianhvm-amd64  1 build-check(1)        blocked n/a
+ test-armhf-armhf-xl-xsm       1 build-check(1)               blocked  n/a
+ build-armhf                   3 capture-logs           broken blocked in 74558
+ build-armhf-pvops             3 capture-logs           broken blocked in 74558
+ build-armhf-xsm               3 capture-logs           broken blocked in 74558
+ build-amd64-xsm               3 capture-logs           broken blocked in 74558
+ build-amd64                   3 capture-logs           broken blocked in 74558
+ build-amd64-prev              3 capture-logs           broken blocked in 74558
+ build-i386-pvops              3 capture-logs           broken blocked in 74558
+ build-amd64-xtf               3 capture-logs           broken blocked in 74558
+ build-i386                    3 capture-logs           broken blocked in 74558
+ build-i386-xsm                3 capture-logs           broken blocked in 74558
+ build-amd64-pvops             3 capture-logs           broken blocked in 74558
+ build-i386-prev               3 capture-logs           broken blocked in 74558
+ build-arm64-xsm               2 hosts-allocate               broken never pass
+ build-arm64                   2 hosts-allocate               broken never pass
+ build-arm64-xsm               3 capture-logs                 broken never pass
+ build-arm64                   3 capture-logs                 broken never pass
+ build-arm64-pvops             2 hosts-allocate               broken never pass
+ build-arm64-pvops             3 capture-logs                 broken never pass
+
+version targeted for testing:
+ xen                  50f8ba84a50ebf80dd22067a04062dbaaf2621ff
+baseline version:
+ xen                  451004603247205467ec34b366b4cfa3814a5d95
+
+Last test of basis    74558  2018-04-07 18:31:04 Z    5 days
+Testing same since    74582  2018-04-12 07:46:44 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Amit Singh Tomar <amittomer25@gmail.com>
+  Andre Przywara <andre.przywara@arm.com>
+  Andre Pzywara <andre.przywara@arm.com>
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Boris Ostrovsky <boris.ostrovsky@oracle.com>
+  George Dunlap <george.dunlap@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Juergen Gross <jgross@suse.com>
+  Julien Grall <julien.grall@arm.com>
+  Kevin Tian <kevin.tian@intel.com>
+  Marcello Seri <marcello.seri@citrix.com>
+  Marcus of Wetware Labs <marcus@wetwa.re>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Petre Eftime <epetre@amazon.com>
+  Razvan Cojocaru <rcojocaru@bitdefender.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Tim Deegan <tim@xen.org>
+  Wei Liu <wei.liu2@citrix.com>
+
+jobs:
+ build-amd64-xsm                                              broken  
+ build-arm64-xsm                                              broken  
+ build-armhf-xsm                                              broken  
+ build-i386-xsm                                               broken  
+ build-amd64-xtf                                              broken  
+ build-amd64                                                  broken  
+ build-arm64                                                  broken  
+ build-armhf                                                  broken  
+ build-i386                                                   broken  
+ build-amd64-libvirt                                          blocked 
+ build-arm64-libvirt                                          blocked 
+ build-armhf-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-prev                                             broken  
+ build-i386-prev                                              broken  
+ build-amd64-pvops                                            broken  
+ build-arm64-pvops                                            broken  
+ build-armhf-pvops                                            broken  
+ build-i386-pvops                                             broken  
+ build-amd64-rumprun                                          blocked 
+ build-i386-rumprun                                           blocked 
+ test-xtf-amd64-amd64-1                                       blocked 
+ test-xtf-amd64-amd64-2                                       blocked 
+ test-xtf-amd64-amd64-3                                       blocked 
+ test-xtf-amd64-amd64-4                                       blocked 
+ test-xtf-amd64-amd64-5                                       blocked 
+ test-amd64-amd64-xl                                          blocked 
+ test-arm64-arm64-xl                                          blocked 
+ test-armhf-armhf-xl                                          blocked 
+ test-amd64-i386-xl                                           blocked 
+ test-amd64-amd64-xl-qemut-debianhvm-amd64-xsm                blocked 
+ test-amd64-i386-xl-qemut-debianhvm-amd64-xsm                 blocked 
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           blocked 
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-xsm                blocked 
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-xsm                 blocked 
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        blocked 
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         blocked 
+ test-amd64-amd64-libvirt-xsm                                 blocked 
+ test-arm64-arm64-libvirt-xsm                                 blocked 
+ test-armhf-armhf-libvirt-xsm                                 blocked 
+ test-amd64-i386-libvirt-xsm                                  blocked 
+ test-amd64-amd64-xl-xsm                                      blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-armhf-armhf-xl-xsm                                      blocked 
+ test-amd64-i386-xl-xsm                                       blocked 
+ test-amd64-amd64-qemuu-nested-amd                            blocked 
+ test-amd64-amd64-xl-pvhv2-amd                                blocked 
+ test-amd64-i386-qemut-rhel6hvm-amd                           blocked 
+ test-amd64-i386-qemuu-rhel6hvm-amd                           blocked 
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    blocked 
+ test-amd64-i386-xl-qemut-debianhvm-amd64                     blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    blocked 
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     blocked 
+ test-amd64-i386-freebsd10-amd64                              blocked 
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+ test-amd64-amd64-rumprun-amd64                               blocked 
+ test-amd64-amd64-xl-qemut-win7-amd64                         blocked 
+ test-amd64-i386-xl-qemut-win7-amd64                          blocked 
+ test-amd64-amd64-xl-qemuu-win7-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-win7-amd64                          blocked 
+ test-amd64-amd64-xl-qemut-ws16-amd64                         blocked 
+ test-amd64-i386-xl-qemut-ws16-amd64                          blocked 
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ws16-amd64                          blocked 
+ test-amd64-amd64-xl-credit2                                  blocked 
+ test-arm64-arm64-xl-credit2                                  blocked 
+ test-armhf-armhf-xl-credit2                                  blocked 
+ test-amd64-amd64-examine                                     blocked 
+ test-arm64-arm64-examine                                     blocked 
+ test-armhf-armhf-examine                                     blocked 
+ test-amd64-i386-examine                                      blocked 
+ test-amd64-i386-freebsd10-i386                               blocked 
+ test-amd64-i386-rumprun-i386                                 blocked 
+ test-amd64-amd64-xl-qemut-win10-i386                         blocked 
+ test-amd64-i386-xl-qemut-win10-i386                          blocked 
+ test-amd64-amd64-xl-qemuu-win10-i386                         blocked 
+ test-amd64-i386-xl-qemuu-win10-i386                          blocked 
+ test-amd64-amd64-qemuu-nested-intel                          blocked 
+ test-amd64-amd64-xl-pvhv2-intel                              blocked 
+ test-amd64-i386-qemut-rhel6hvm-intel                         blocked 
+ test-amd64-i386-qemuu-rhel6hvm-intel                         blocked 
+ test-amd64-amd64-libvirt                                     blocked 
+ test-armhf-armhf-libvirt                                     blocked 
+ test-amd64-i386-libvirt                                      blocked 
+ test-amd64-amd64-livepatch                                   blocked 
+ test-amd64-i386-livepatch                                    blocked 
+ test-armhf-armhf-xl-midway                                   blocked 
+ test-amd64-amd64-migrupgrade                                 blocked 
+ test-amd64-i386-migrupgrade                                  blocked 
+ test-amd64-amd64-xl-multivcpu                                blocked 
+ test-armhf-armhf-xl-multivcpu                                blocked 
+ test-amd64-amd64-pair                                        blocked 
+ test-amd64-i386-pair                                         blocked 
+ test-amd64-amd64-libvirt-pair                                blocked 
+ test-amd64-i386-libvirt-pair                                 blocked 
+ test-amd64-amd64-amd64-pvgrub                                blocked 
+ test-amd64-amd64-i386-pvgrub                                 blocked 
+ test-amd64-amd64-pygrub                                      blocked 
+ test-amd64-amd64-xl-qcow2                                    blocked 
+ test-armhf-armhf-libvirt-raw                                 blocked 
+ test-amd64-i386-xl-raw                                       blocked 
+ test-amd64-amd64-xl-rtds                                     blocked 
+ test-armhf-armhf-xl-rtds                                     blocked 
+ test-amd64-amd64-libvirt-vhd                                 blocked 
+ test-armhf-armhf-xl-vhd                                      blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.xs.citrite.net
+logs: /home/osstest/logs
+images: /home/osstest/images
+
+Logs, config files, etc. are available at
+    http://osstest.xs.citrite.net/~osstest/testlogs/logs
+
+Test harness code can be found at
+    http://xenbits.xensource.com/gitweb?p=osstest.git;a=summary
+
+broken-job build-amd64-prev broken
+broken-job build-armhf-pvops broken
+broken-job build-arm64-xsm broken
+broken-job build-amd64-xtf broken
+broken-job build-amd64-xsm broken
+broken-job build-i386-pvops broken
+broken-job build-arm64-pvops broken
+broken-job build-armhf-xsm broken
+broken-job build-i386-prev broken
+broken-job build-arm64 broken
+broken-job build-amd64 broken
+broken-job build-i386 broken
+broken-job build-i386-xsm broken
+broken-job build-amd64-pvops broken
+broken-job build-armhf broken
+broken-step build-armhf capture-logs
+broken-step build-armhf-pvops capture-logs
+broken-step build-armhf-xsm capture-logs
+broken-step build-amd64-xsm capture-logs
+broken-step build-amd64 capture-logs
+broken-step build-amd64-prev capture-logs
+broken-step build-i386-pvops capture-logs
+broken-step build-amd64-xtf capture-logs
+broken-step build-i386 capture-logs
+broken-step build-i386-xsm capture-logs
+broken-step build-amd64-pvops capture-logs
+broken-step build-arm64-xsm hosts-allocate
+broken-step build-i386 hosts-allocate
+broken-step build-i386-pvops hosts-allocate
+broken-step build-armhf hosts-allocate
+broken-step build-i386-xsm hosts-allocate
+broken-step build-armhf-pvops hosts-allocate
+broken-step build-i386-prev hosts-allocate
+broken-step build-amd64-pvops hosts-allocate
+broken-step build-amd64 hosts-allocate
+broken-step build-armhf-xsm hosts-allocate
+broken-step build-amd64-xsm hosts-allocate
+broken-step build-arm64 hosts-allocate
+broken-step build-amd64-xtf hosts-allocate
+broken-step build-arm64-xsm capture-logs
+broken-step build-amd64-prev hosts-allocate
+broken-step build-arm64 capture-logs
+broken-step build-arm64-pvops hosts-allocate
+broken-step build-arm64-pvops capture-logs
+broken-step build-i386-prev capture-logs
+
+Push not applicable.
+
+(No revision log; it would be 813 lines long.)
+
+
+--===============4280507843764768023==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4280507843764768023==--
