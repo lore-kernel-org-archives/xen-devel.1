@@ -1,25 +1,17 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: Setting up a call to discuss PCI Emulation - Future
- Direction
-Date: Sat, 14 Apr 2018 05:02:45 +0000
-Message-ID: <5cb6841c689543c28405ce6bf56055bb@AMSPEX02CL03.citrite.net>
-References: <4767D7C8-BB78-4B2E-8C9F-AE97CE5F02B5@citrix.com>
- <20180412164104.ymrule7rkdr2w4sb@MacBook-Pro-de-Roger.local>
- <6CF72FA0-688A-4D44-A87E-547DBCE4204D@citrix.com>
- <20180413100149.33jiaddx5spfblmd@MacBook-Pro-de-Roger.local>
- <A2852301-A0AF-45E2-BCC3-42A2F6090BA1@citrix.com>
- <20180413175302.hy7xoakd2lwuu2jq@MacBook-Pro-de-Roger.local>
+From: Simon Gaiser <simon@invisiblethingslab.com>
+Subject: Re: [PATCH 0/3] x86: S3 resume adjustments
+Date: Sat, 14 Apr 2018 05:49:00 +0000
+Message-ID: <0bfe793f-272c-a98c-95eb-ee75f5ee6218@invisiblethingslab.com>
+References: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5051437120493957314=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=zr55=hd=citrix.com=prvs=6358c6095=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1f7DKq-0005yB-Nt
- for xen-devel@lists.xenproject.org; Sat, 14 Apr 2018 05:02:48 +0000
-In-Reply-To: <20180413175302.hy7xoakd2lwuu2jq@MacBook-Pro-de-Roger.local>
-Content-Language: en-US
+ <srs0=4r7u=hd=invisiblethingslab.com=simon@srs-us1.protection.inumbo.net>)
+ id 1f7E40-0000HB-Fw
+ for xen-devel@lists.xenproject.org; Sat, 14 Apr 2018 05:49:28 +0000
+In-Reply-To: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,58 +20,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, Lars Kurth <lars.kurth@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Daniel Smith <dpsmith@apertussolutions.com>, Christopher Clark <christopher.w.clark@gmail.com>, Rich Persaud <persaur@gmail.com>, Julien Grall <julien.grall@arm.com>, Alexey G <x1917x@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBSb2dlciBQYXUgTW9ubmUNCj4g
-U2VudDogMTMgQXByaWwgMjAxOCAyMDo1Mw0KPiBUbzogTGFycyBLdXJ0aCA8bGFycy5rdXJ0aEBj
-aXRyaXguY29tPg0KPiBDYzogeGVuLWRldmVsIDx4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmc+OyBEYW5pZWwgU21pdGgNCj4gPGRwc21pdGhAYXBlcnR1c3NvbHV0aW9ucy5jb20+OyBBbGV4
-ZXkgRyA8eDE5MTd4QGdtYWlsLmNvbT47IFN0ZWZhbm8NCj4gU3RhYmVsbGluaSA8c3N0YWJlbGxp
-bmlAa2VybmVsLm9yZz47IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+OyBQYXVs
-DQo+IER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPjsgQ2hyaXN0b3BoZXIgQ2xhcmsN
-Cj4gPGNocmlzdG9waGVyLncuY2xhcmtAZ21haWwuY29tPjsgUmljaCBQZXJzYXVkIDxwZXJzYXVy
-QGdtYWlsLmNvbT4NCj4gU3ViamVjdDogUmU6IFNldHRpbmcgdXAgYSBjYWxsIHRvIGRpc2N1c3Mg
-UENJIEVtdWxhdGlvbiAtIEZ1dHVyZSBEaXJlY3Rpb24NCj4gDQo+IE9uIEZyaSwgQXByIDEzLCAy
-MDE4IGF0IDEyOjU5OjE1UE0gKzAxMDAsIExhcnMgS3VydGggd3JvdGU6DQo+ID4NCj4gPg0KPiA+
-IO+7v09uIDEzLzA0LzIwMTgsIDExOjAxLCAiUm9nZXIgUGF1IE1vbm5lIiA8cm9nZXIucGF1QGNp
-dHJpeC5jb20+IHdyb3RlOg0KPiA+DQo+ID4gICAgIE9uIFRodSwgQXByIDEyLCAyMDE4IGF0IDA1
-OjUwOjAwUE0gKzAxMDAsIExhcnMgS3VydGggd3JvdGU6DQo+ID4gICAgID4NCj4gPiAgICAgPg0K
-PiA+ICAgICA+IE9uIDEyLzA0LzIwMTgsIDE3OjQxLCAiUm9nZXIgUGF1IE1vbm5lIiA8cm9nZXIu
-cGF1QGNpdHJpeC5jb20+DQo+IHdyb3RlOg0KPiA+ICAgICA+DQo+ID4gICAgID4gICAgIE9uIFRo
-dSwgQXByIDEyLCAyMDE4IGF0IDA1OjMyOjU3UE0gKzAxMDAsIExhcnMgS3VydGggd3JvdGU6DQo+
-ID4gICAgID4NCj4gPiAgICAgPg0KPiA+ICAgICA+ICAgICA+ICAgIG1heSB3b3JrLiBGb3IgbWUg
-TW9uLCBXZWQgYW5kIEZyaeKAmXMgZ2VuZXJhbGx5IHdvcmsgYXQgdGhvc2UNCj4gdGltZS1zbG90
-cy4NCj4gPiAgICAgPiAgICAgPiAgICBOZXh0IHdlZWsgaXMgYSBsaXR0bGUgYnVzeSBmb3IgbWUs
-IHNvIEkgd291bGQgcHJlZmVyIHRoZSBmb2xsb3dpbmcNCj4gd2Vlay4NCj4gPiAgICAgPiAgICAg
-PiAgICBJZiB5b3UgY291bGQgZmlsbCBvdXQgdGhlIGZvbGxvd2luZyBHb29nbGUgcG9sbCwgaWYg
-dGhpcyB3ZWVrIHdvcmtzDQo+IHRoYXQNCj4gPiAgICAgPiAgICAgPiAgICB3b3VsZCBiZSBncmVh
-dC4gT3RoZXJ3aXNlIHBsZWFzZSBzY3JlYW0uDQo+ID4gICAgID4NCj4gPiAgICAgPiAgICAgSSdt
-IGFmcmFpZCBJJ20gb24gdmFjYXRpb25zIGZyb20gdGhlIDIxc3QgdG8gdGhlIDI5dGggb2YgQXBy
-aWwsIHNvIEkNCj4gPiAgICAgPiAgICAgd29uJ3QgYmUgYWJsZSB0byBqb2luIHRoZSBtZWV0aW5n
-IHVubGVzcyB3ZSBtb3ZlIGl0IHRvIHRoZSB3ZWVrDQo+IGFmdGVyLg0KPiA+ICAgICA+ICAgICBM
-ZXQncyBzZWUgd2hhdCBwZW9wbGUgdGhpbmsgb2YgdGhlIGN1cnJlbnQgZGF0ZXMuDQo+ID4gICAg
-ID4NCj4gPiAgICAgPiAgICAgUm9nZXIuDQo+ID4gICAgID4NCj4gPiAgICAgPiBIaSwgSSBjaGFu
-Z2VkIHRoZSBkYXRlcyB0byB0aGUgd2VlayBhZnRlci4gUG9sbCBzbyBmYXIgaGFzIGJlZW4NCj4g
-aW52YWxpZGF0ZWQuDQo+ID4gICAgID4NCj4gPiAgICAgPiBTZWUgaHR0cHM6Ly9kb29kbGUuY29t
-L3BvbGwvZ2RubWNydm5pYm13NTYzbg0KPiA+DQo+ID4gICAgIFRoYW5rcyEgSSd2ZSBhbHJlYWR5
-IGZpeGVkIG15IHZvdGUuDQo+ID4NCj4gPiAgICAgSSBndWVzcyB0aGlzIHdpbGwgY29tZSBsYXRl
-ciwgYnV0IHdlIG5lZWQgYSBjbGVhciBhZ2VuZGEgb2YgaXRlbXMNCj4gPiAgICAgYmVjYXVzZSB0
-aGUgeDg2IGFuZCBBUk0gdG9waWNzIGFyZSBwcm9iYWJseSBnb2luZyB0byBiZSBjb21wbGV0ZWx5
-DQo+ID4gICAgIGRpZmZlcmVudCAoYWxiZWl0IGFsbCByZWxhdGVkIHRvIFBDSSkuDQo+ID4NCj4g
-PiBSb3lnZXI6IEkgYW0gT0sgd2l0aCB0cnlpbmcgdG8gZ2V0IGEgZHJhZnQgYWdlbmRhIGluIHBs
-YWNlIGluIHRoaXMgZS1tYWlsDQo+IHRocmVhZC4gQnV0IEkgY2FuJ3QgZHJpdmUgdGhpcywgYXMg
-SSBkb27igJl0IHVuZGVyc3RhbmQgdGhlIGlzc3Vlcy4gQnV0IEkgYW0gaGFwcHkNCj4gdG8gY29s
-bGF0ZSBldmVyeXRoaW5nIGFzIGZvciB0aGUgeDg2IGNhbGwgYW5kIHdyaXRlIHVwIG1pbnV0ZXMN
-Cj4gDQo+IE9uIHRoZSB4ODYgc2lkZToNCj4gDQo+ICAtIFEzNSBIVk0gZW11bGF0aW9uLCBhZGRp
-bmcgTUNGRyBzdXBwb3J0IHRvIGd1ZXN0cy4NCg0KT25lIG9mIHRoZSBpc3N1ZXMgaGVyZSBpcyBz
-dXBwb3J0IGZvciBtdWx0aXBsZSBleHRlcm5hbCBlbXVsYXRvcnMgdy5yLnQuIGNvbmZpZyBzcGFj
-ZSBhY2Nlc3MuDQoNCj4gIC0gUFZIIGd1ZXN0IHBjaS1wYXNzdGhyb3VnaDogdXNpbmcgdGhlIGlu
-dGVybmFsIHZQQ0kgaW5mcmFzdHJ1Y3R1cmUuDQoNCkxldCdzIG5vdCBkaXN0aW5ndWlzaCBiZXR3
-ZWVuIEhWTSBvciBQVkggaGVyZS4gV2Ugd2FudCB0byB1c2UgdGhlIHNhbWUgcGFzc3Rocm91Z2gg
-bWVjaGFuaXNtcyBmb3IgYm90aC4NCg0KQ2hlZXJzLA0KDQogIFBhdWwNCg0KPiANCj4gQXQgbGVh
-c3QgdGhhdCBJIGNhbiB0aGluayBvZiBBVE0uDQo+IA0KPiBSb2dlci4NCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============5051437120493957314==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="QzkExfehBobXtt1alqr7Y8K1ont7Fhxbb"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--QzkExfehBobXtt1alqr7Y8K1ont7Fhxbb
+Content-Type: multipart/mixed; boundary="s5YGoaFBzZlt2AVsNEs3fsgy3iPPE8uin";
+ protected-headers="v1"
+From: Simon Gaiser <simon@invisiblethingslab.com>
+To: Jan Beulich <JBeulich@suse.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross <jgross@suse.com>
+Message-ID: <0bfe793f-272c-a98c-95eb-ee75f5ee6218@invisiblethingslab.com>
+Subject: Re: [PATCH 0/3] x86: S3 resume adjustments
+References: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
+In-Reply-To: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
+
+--s5YGoaFBzZlt2AVsNEs3fsgy3iPPE8uin
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Jan Beulich:
+> 1: correct ordering of operations during S3 resume
+> 2: suppress BTI mitigations around S3 suspend/resume
+> 3: check feature flags after resume
+>=20
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>=20
+> Simon, could you give this a try please?
+
+Backported to 4.8 it works fine with the two fixes I sent earlier.
+
+I now also tried staging. Resume is broken even without IBRS/IBPB. It
+panics about a double fault somewhere after it starts to enable the
+non-boot CPUs. Since the IBRS/IPBP problem happens before that point I
+could test the patches anyway. With them it gets again to the point
+where it double faults. So the patches are most likely fine.
+
+I didn't really looked yet at the cause of the double fault.
+
+Simon
+
+
+--s5YGoaFBzZlt2AVsNEs3fsgy3iPPE8uin--
+
+--QzkExfehBobXtt1alqr7Y8K1ont7Fhxbb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlrRlnIACgkQkO9xfO/x
+ly9MkRAAxjrgadmA78MltapyPtm3Aw76F2OhL24uFUmutVm4UXRiwURsgjAi3lGl
++eLQ16bPsKYgezRI0ftxwcMe+At6Rl7ETm/oj8aP9td8PbzBWXjdTecIC/ghus/K
+kIsHWgmbkL+zJL3H/f/muQTv0B5IpIIhN8JP9HwuPg6ju8ElJ9uLriSj2OMjj9v+
+W+E9AMlBdos7pf4EcMwn6M0dF+x+Q1zpsOXWmfsQtftz9VAoTrjtDRazm/G+eIov
+A+B4x6TbBL1B9udttK3etIMzF/KnOYVfQ5UVcejTSlz9/kkZyQ6NubWZnlRiNQC7
+OseKmy2x2XVxNUwSKqCQA2ic4kOdW1e3bm2xermnsbFGVYagLyhVLaKUJ4ndxFnI
+Rv7kaiEFLC+50KYF7V+R+vDDM7BiiZ/gYU1tR3EEFY7+z2GaN3SWiPvw2Tym+6Ho
+Xj53ROoAIYARYXGgCHH/CEYKu4Y7n9A8j0oDoYJPLuLDgRgtmPiWodMmjxjL582q
+dolkw3/pTzoBG566PLpmfiZsAPovKUSSEfhVFpel8tmT5UBrjukCLDncx8ADtMMo
+ydWwpeDZ27N2ylGtFJN+kaYrmr6ilpnyAfGOTrDmCGdSNV+UqSKv9UG+W2Ao0eey
+6f4xjGz0A0Xqlxnu6Gh0daM3vht8cJy6asn1kcQs9mr+dJBSLkU=
+=zwTu
+-----END PGP SIGNATURE-----
+
+--QzkExfehBobXtt1alqr7Y8K1ont7Fhxbb--
+
+
+--===============5051437120493957314==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5051437120493957314==--
