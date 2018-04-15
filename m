@@ -1,19 +1,20 @@
-From: Souptick Joarder <jrdr.linux@gmail.com>
-Subject: [PATCH] xen: Change return type to vm_fault_t
-Date: Sun, 15 Apr 2018 00:45:42 +0530
-Message-ID: <20180414191542.GA19820@jordon-HP-15-Notebook-PC>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 0/3] x86: S3 resume adjustments
+Date: Sun, 15 Apr 2018 14:08:31 +0100
+Message-ID: <dff5dbde-0eea-c626-22dd-c8192927f9da@citrix.com>
+References: <5AD0993002000078001BB0D0@prv1-mh.provo.novell.com>
+ <0bfe793f-272c-a98c-95eb-ee75f5ee6218@invisiblethingslab.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=bk9j=hd=gmail.com=jrdr.linux@srs-us1.protection.inumbo.net>)
- id 1f7QcS-0004PB-Va
- for xen-devel@lists.xenproject.org; Sat, 14 Apr 2018 19:13:53 +0000
-Received: by mail-pf0-x243.google.com with SMTP id y69so8612307pfb.5
- for <xen-devel@lists.xenproject.org>; Sat, 14 Apr 2018 12:13:51 -0700 (PDT)
-Content-Disposition: inline
+ <srs0=0gin=he=citrix.com=prvs=6365dd825=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1f7hOU-0007dk-SS
+ for xen-devel@lists.xenproject.org; Sun, 15 Apr 2018 13:08:34 +0000
+In-Reply-To: <0bfe793f-272c-a98c-95eb-ee75f5ee6218@invisiblethingslab.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,24 +23,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: boris.ostrovsky@oracle.com, jgross@suse.com
-Cc: xen-devel@lists.xenproject.org, willy@infradead.org
+To: Simon Gaiser <simon@invisiblethingslab.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VXNlIG5ldyByZXR1cm4gdHlwZSB2bV9mYXVsdF90IGZvciBmYXVsdCBoYW5kbGVyCmluIHN0cnVj
-dCB2bV9vcGVyYXRpb25zX3N0cnVjdC4KClNpZ25lZC1vZmYtYnk6IFNvdXB0aWNrIEpvYXJkZXIg
-PGpyZHIubGludXhAZ21haWwuY29tPgpSZXZpZXdlZC1ieTogTWF0dGhldyBXaWxjb3ggPG1hd2ls
-Y294QG1pY3Jvc29mdC5jb20+Ci0tLQogZHJpdmVycy94ZW4vcHJpdmNtZC5jIHwgMiArLQogMSBm
-aWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEv
-ZHJpdmVycy94ZW4vcHJpdmNtZC5jIGIvZHJpdmVycy94ZW4vcHJpdmNtZC5jCmluZGV4IDFjOTA5
-MTguLjBhNzc4ZDMgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMveGVuL3ByaXZjbWQuYworKysgYi9kcml2
-ZXJzL3hlbi9wcml2Y21kLmMKQEAgLTgwMSw3ICs4MDEsNyBAQCBzdGF0aWMgdm9pZCBwcml2Y21k
-X2Nsb3NlKHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1hKQogCWtmcmVlKHBhZ2VzKTsKIH0KCi1z
-dGF0aWMgaW50IHByaXZjbWRfZmF1bHQoc3RydWN0IHZtX2ZhdWx0ICp2bWYpCitzdGF0aWMgdm1f
-ZmF1bHRfdCBwcml2Y21kX2ZhdWx0KHN0cnVjdCB2bV9mYXVsdCAqdm1mKQogewogCXByaW50ayhL
-RVJOX0RFQlVHICJwcml2Y21kX2ZhdWx0OiB2bWE9JXAgJWx4LSVseCwgcGdvZmY9JWx4LCB1dj0l
-cFxuIiwKIAkgICAgICAgdm1mLT52bWEsIHZtZi0+dm1hLT52bV9zdGFydCwgdm1mLT52bWEtPnZt
-X2VuZCwKLS0KMS45LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+T24gMTQvMDQvMTggMDY6NDksIFNpbW9uIEdhaXNlciB3cm90ZToKPiBKYW4gQmV1bGljaDoKPj4g
+MTogY29ycmVjdCBvcmRlcmluZyBvZiBvcGVyYXRpb25zIGR1cmluZyBTMyByZXN1bWUKPj4gMjog
+c3VwcHJlc3MgQlRJIG1pdGlnYXRpb25zIGFyb3VuZCBTMyBzdXNwZW5kL3Jlc3VtZQo+PiAzOiBj
+aGVjayBmZWF0dXJlIGZsYWdzIGFmdGVyIHJlc3VtZQo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBKYW4g
+QmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4+Cj4+IFNpbW9uLCBjb3VsZCB5b3UgZ2l2ZSB0
+aGlzIGEgdHJ5IHBsZWFzZT8KPiBCYWNrcG9ydGVkIHRvIDQuOCBpdCB3b3JrcyBmaW5lIHdpdGgg
+dGhlIHR3byBmaXhlcyBJIHNlbnQgZWFybGllci4KPgo+IEkgbm93IGFsc28gdHJpZWQgc3RhZ2lu
+Zy4gUmVzdW1lIGlzIGJyb2tlbiBldmVuIHdpdGhvdXQgSUJSUy9JQlBCLiBJdAo+IHBhbmljcyBh
+Ym91dCBhIGRvdWJsZSBmYXVsdCBzb21ld2hlcmUgYWZ0ZXIgaXQgc3RhcnRzIHRvIGVuYWJsZSB0
+aGUKPiBub24tYm9vdCBDUFVzLiBTaW5jZSB0aGUgSUJSUy9JUEJQIHByb2JsZW0gaGFwcGVucyBi
+ZWZvcmUgdGhhdCBwb2ludCBJCj4gY291bGQgdGVzdCB0aGUgcGF0Y2hlcyBhbnl3YXkuIFdpdGgg
+dGhlbSBpdCBnZXRzIGFnYWluIHRvIHRoZSBwb2ludAo+IHdoZXJlIGl0IGRvdWJsZSBmYXVsdHMu
+IFNvIHRoZSBwYXRjaGVzIGFyZSBtb3N0IGxpa2VseSBmaW5lLgo+Cj4gSSBkaWRuJ3QgcmVhbGx5
+IGxvb2tlZCB5ZXQgYXQgdGhlIGNhdXNlIG9mIHRoZSBkb3VibGUgZmF1bHQuCgpEbyB5b3UgYXQg
+bGVhc3QgaGF2ZSB0aGUgY3Jhc2ggbG9nIGZyb20gdGhlIGF0dGVtcHQ/Cgp+QW5kcmV3Cgo+Cj4g
+U2ltb24KPgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
