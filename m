@@ -1,20 +1,16 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/3] x86/pv: Introduce and use
- x86emul_read_dr()
-Date: Mon, 16 Apr 2018 06:32:20 -0600
-Message-ID: <5AD497D402000078001BBB23@prv1-mh.provo.novell.com>
-References: <1523552156-20866-1-git-send-email-andrew.cooper3@citrix.com>
- <1523552156-20866-2-git-send-email-andrew.cooper3@citrix.com>
- <5AD06AEC02000078001BAF9A@prv1-mh.provo.novell.com>
- <5e53ca51-416e-77c3-9429-ae485d87cc77@citrix.com>
- <5AD0970F02000078001BB0B3@prv1-mh.provo.novell.com>
- <b1f2acd6-2e25-7f44-4c5e-2da3ccabcb5f@citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 7/7] xen/arm: Restore IRQ affinity after
+ hotplugging a CPU
+Date: Mon, 16 Apr 2018 14:38:52 +0200
+Message-ID: <4cd710a787e5668a98b83e8e53ea1ca1d7c5407c.camel@suse.com>
+References: <20180411131927.27083-1-mirela.simonovic@aggios.com>
+ <20180411131927.27083-8-mirela.simonovic@aggios.com>
+ <3c33657b63a04a466028b02ce52d8777bbbfbf04.camel@suse.com>
+ <CAKPH-Ngu7i+M2HPTG4WZ5hg5ZOKd=va5dECSK+W-=EnwBzR1zA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2844623852610008268=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <b1f2acd6-2e25-7f44-4c5e-2da3ccabcb5f@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <CAKPH-Ngu7i+M2HPTG4WZ5hg5ZOKd=va5dECSK+W-=EnwBzR1zA@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,69 +19,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Mirela Simonovic <mirela.simonovic@aggios.com>
+Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, julien.grall@arm.org, Xen Devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE2LjA0LjE4IGF0IDE0OjE4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTMvMDQvMTggMTI6MzksIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAxMy4w
-NC4xOCBhdCAxMzoxNywgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gT24g
-MTMvMDQvMTggMDk6MzEsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4+IE9uIDEyLjA0LjE4IGF0
-IDE4OjU1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+Pj4+IGRvX2dldF9k
-ZWJ1Z3JlZygpIGhhcyBzZXZlcmFsIGJ1Z3M6Cj4+Pj4+Cj4+Pj4+ICAqIFRoZSAlY3I0LmRlIGNv
-bmRpdGlvbiBpcyBpbnZlcnRlZC4gICVkcjQvNSBzaG91bGQgYmUgYWNjZXNzaWJsZSBvbmx5IHdo
-ZW4KPj4+Pj4gICAgJWNyNC5kZSBpcyBkaXNhYmxlZC4KPj4+Pj4gICogV2hlbiAlY3I0LmRlIGlz
-IGRpc2FibGVkLCBlbXVsYXRpb24gc2hvdWxkIHlpZWxkICNVRCByYXRoZXIgdGhhbiBjb21wbGV0
-ZQo+Pj4+PiAgICB3aXRoIHplcm8uCj4+Pj4+ICAqIFVzaW5nIC1FSU5WQUwgZm9yIGVycm9ycyBp
-cyBhIGJyb2tlbiBBQkksIGFzIGl0IG92ZXJsYXBzIHdpdGggdmFsaWQgdmFsdWVzCj4+Pj4+ICAg
-IG5lYXIgdGhlIHRvcCBvZiB0aGUgYWRkcmVzcyBzcGFjZS4KPj4+Pj4KPj4+Pj4gSW50cm9kdWNl
-IGEgY29tbW9uIHg4NmVtdWxfcmVhZF9kcigpIGhhbmRsZXIgKGFzIHdlIHdpbGwgZXZlbnR1YWxs
-eSB3YW50IHRvCj4+Pj4+IGFkZCBIVk0gc3VwcG9ydCkgd2hpY2ggc2VwYXJhdGVzIGl0cyBzdWNj
-ZXNzL2ZhaWx1cmUgaW5kaWNhdGlvbiBmcm9tIHRoZSBkYXRhCj4+Pj4+IHZhbHVlLCBhbmQgaGF2
-ZSBkb19nZXRfZGVidWdyZWcoKSBjYWxsIGludG8gdGhlIGhhbmRsZXIuCj4+Pj4gVGhlIEhWTSBw
-YXJ0IGhlcmUgaXMgc29ydCBvZiBxdWVzdGlvbmFibGUgYmVjYXVzZSBvZiB5b3VyIHVzZSBvZgo+
-Pj4+IGN1cnItPmFyY2gucHZfdmNwdS5jdHJscmVnWzRdLgo+Pj4gVGhhdCBpcyB3aGF0IHRoZSAi
-bmVlZHMgZnVydGhlciBwbHVtYmluZyIgcmVmZXJzIHRvLCBhcyB3ZWxsIGFzIG5lZWRpbmcKPj4+
-IGhvb2tzIHRvIGdldC9tb2RpZnkgJWRyNi83IGZyb20gdGhlIFZNQ0IvVk1DUy4KPj4+Cj4+PiBI
-b3dldmVyLCB3ZSBhcmUgZ2FpbmluZyBhbiBpbmNyZWFzaW5nIGFtb3VudCBvZiBjb21tb24geDg2
-IGNvZGUgd2hpY2gKPj4+IG5lZWRzIHRvIHJlYWQgY29udHJvbCByZWdpc3RlciB2YWx1ZXMsIGFu
-ZCBJJ3ZlIGdvdCBhIHBsYW4gdG8gcmVmYWN0b3IKPj4+IGFjcm9zcyB0aGUgYm9hcmQgdG8gdi0+
-YXJjaC5jcjQgKGFuZCBzaW1pbGFyKS4gIFRoZXJlIGlzIG5vIHBvaW50IGhhdmluZwo+Pj4gaWRl
-bnRpY2FsIGluZm9ybWF0aW9uIGluIGRpZmZlcmVudCBwYXJ0cyBvZiBzdWItdW5pb25zLgo+PiBJ
-IGFncmVlLgo+Pgo+Pj4+IFRoaXMgaXMgYXBwcm9wcmlhdGUgZm9yIHRoZSBOVUxMIGN0eHQgY2Fz
-ZSwKPj4+PiBidXQgaXQncyBhbHJlYWR5IGEgbGF5ZXJpbmcgdmlvbGF0aW9uIGZvciB0aGUgdXNl
-IG9mIHRoZSBmdW5jdGlvbiBpbgo+Pj4+IHByaXZfb3Bfb3BzLCB3aGVyZSB0aGUgcmVhZF9jcigp
-IGhvb2sgc2hvdWxkIGJlIHVzZWQgaW5zdGVhZC4KPj4+IEhtbSAtIGRvaW5nIHRoaXMsIHdoaWxl
-IHByb2JhYmx5IHRoZSBiZXR0ZXIgbG9uZyB0ZW1yIGNvdXJzZSBvZiBhY3Rpb24sCj4+PiB3b3Vs
-ZCByZXF1aXJlIHBhc3NpbmcgdGhlIG9wcyBzdHJ1Y3R1cmVzIGRvd24gaW50byB0aGUgY2FsbGJh
-Y2tzLgo+PiBUaGF0IGRvZXNuJ3Qgc291bmQgbGlrZSBhIHByb2JsZW0sIHRob3VnaCAtIHRoZSBo
-eXBlcmNhbGwgcGF0aCB3b3VsZAo+PiBwYXNzIE5VTEwgdGhlcmUgYXMgd2VsbC4KClRoaXMgLi4u
-Cgo+Pj4+PiAraW50IHg4NmVtdWxfcmVhZF9kcih1bnNpZ25lZCBpbnQgcmVnLCB1bnNpZ25lZCBs
-b25nICp2YWwsCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB4ODZfZW11bGF0ZV9j
-dHh0ICpjdHh0KQo+Pj4+PiArewo+Pj4+PiArICAgIHN0cnVjdCB2Y3B1ICpjdXJyID0gY3VycmVu
-dDsKPj4+Pj4gKwo+Pj4+PiArICAgIC8qIEhWTSBzdXBwb3J0IHJlcXVpcmVzIGEgYml0IG1vcmUg
-cGx1bWJpbmcgYmVmb3JlIGl0IHdpbGwgd29yay4gKi8KPj4+Pj4gKyAgICBBU1NFUlQoaXNfcHZf
-dmNwdShjdXJyKSk7Cj4+Pj4+ICsKPj4+Pj4gKyAgICBzd2l0Y2ggKCByZWcgKQo+Pj4+PiArICAg
-IHsKPj4+Pj4gKyAgICBjYXNlIDAgLi4uIDM6Cj4+Pj4+ICsgICAgY2FzZSA2Ogo+Pj4+PiArICAg
-ICAgICAqdmFsID0gY3Vyci0+YXJjaC5kZWJ1Z3JlZ1tyZWddOwo+Pj4+PiArICAgICAgICBicmVh
-azsKPj4+Pj4gKwo+Pj4+PiArICAgIGNhc2UgNzoKPj4+Pj4gKyAgICAgICAgKnZhbCA9IChjdXJy
-LT5hcmNoLmRlYnVncmVnWzddIHwKPj4+Pj4gKyAgICAgICAgICAgICAgICBjdXJyLT5hcmNoLmRl
-YnVncmVnWzVdKTsKPj4+Pj4gKyAgICAgICAgYnJlYWs7Cj4+Pj4+ICsKPj4+Pj4gKyAgICBjYXNl
-IDQgLi4uIDU6Cj4+Pj4+ICsgICAgICAgIGlmICggIShjdXJyLT5hcmNoLnB2X3ZjcHUuY3RybHJl
-Z1s0XSAmIFg4Nl9DUjRfREUpICkKPj4+Pj4gKyAgICAgICAgewo+Pj4+PiArICAgICAgICAgICAg
-KnZhbCA9IGN1cnItPmFyY2guZGVidWdyZWdbcmVnICsgMl07Cj4+Pj4+ICsgICAgICAgICAgICBi
-cmVhazsKPj4+PiBPbmNlIGF0IGl0LCB3b3VsZG4ndCB5b3UgYmV0dGVyIGFsc28gZml4IHRoZSBt
-aXNzaW5nIE9SaW5nIG9mIFs1XSBpbnRvIHRoZSBEUjcgKHJlYWxseQo+Pj4+IERSNSkgdmFsdWUg
-aGVyZT8KPj4+IFs1XSBpcyB6ZXJvIHdoZW4gJWNyNC5kZSBpcyBjbGVhciAoc3ViamVjdCB0byBh
-IGJ1Z2ZpeCBpbiB0aGUgc3Vic2VxdWVudAo+Pj4gcGF0Y2gpLCBhcyBJTyBicmVha3BvaW50cyBh
-cmUgb25seSB2YWxpZCB0byB1c2Ugd2hlbiAlY3I0LmRlIGlzIGVuYWJsZWQuCj4+IE9oLCByaWdo
-dCB5b3UgYXJlLgo+IAo+IFNvLCBhcmUgeW91ciBjb21tZW50cyBzdWl0YWJseSBhZGRyZXNzZWQ/
-ICBJdCBpcyB1bmNsZWFyIHdoZXRoZXIgeW91Cj4gd2FudCBhbnkgY2hhbmdlcyB0byBiZSBtYWRl
-LgoKLi4uIGlzIHdoYXQgSSdkIHByZWZlciB0byBiZSB0YWtlbiBjYXJlIG9mIHdpdGhvdXQgZGVs
-YXlpbmcgdG8gdGhlIHRpbWUgd2hlbgp3ZSBtYWtlIHRoaXMgd29yayBmb3IgSFZNIGFzIHdlbGwu
-IFVubGVzcyB5b3UgZmVlbCByZWFsbHkgc3Ryb25nbHkgYWJvdXQgaXQKYmVpbmcgYmV0dGVyIHRo
-ZSB3YXkgeW91IGhhdmUgaXQsIGluIHdoaWNoIGNhc2UgeW91IG1heSBmZWVsIGZyZWUgdG8gYWRk
-Cm15IGFjay4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+
+--===============2844623852610008268==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-r6li7tow5xxm+xeObTFv"
+
+
+--=-r6li7tow5xxm+xeObTFv
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-04-13 at 12:11 +0200, Mirela Simonovic wrote:
+> Hi Dario,
+>=20
+Hi,
+
+> On Thu, Apr 12, 2018 at 6:49 PM, Dario Faggioli <dfaggioli@suse.com>
+> wrote:
+> No worries, my commit message should be more understandable and your
+> answer helps me identify what's unclear. I'll try to explain below.
+>=20
+> This is about suspend/resume implementation for ARM that is based on
+> PSCI and targeted for embedded systems as well. Each guest could have
+> its own wake-up devices/interrupts (passthrough) that could trigger
+> the resume. So the wake-up interrupt in this context triggers the
+> resume. By 'all interrupts' I meant interrupts that are left enabled
+> by guests upon suspend (those interrupts could wake-up the system).
+> Here is the PSCI-based suspend to RAM design spec:
+> https://lists.xenproject.org/archives/html/xen-devel/2017-12/msg01574
+> .html
+>=20
+Ah, so you are talking about suspend/resume of _the_guest_! This was
+actually the bit of information that I was missing. :-)
+
+This was, probbly, partly due to me not being familiar with ARM, and to
+the fact that I haven't really looked at the rest of the series
+probably.
+
+Still, I think it would not hurt for the changelog to be a bit more
+explitic and clear.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-r6li7tow5xxm+xeObTFv
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrUmVwACgkQFkJ4iaW4
+c+7otQ//cY4g+ddSNLhtKiUPULZlEoBAKGEKljxm0T8aAw7SX7Am47m8ug/hxVgk
+f5J4R7B9Zi4ecsxJfW7nG6yoIb06s5g0+nmCtzBxq8ZbV+EwgHeVCbO2VRPyxoK9
+UiKumpCw0ObqW8c9yD9xSLDU1KQZPu4pY4y18ZzCGr90foVranW5luTRf07wCCf1
+K491/GP2UMiuJD7kNSOqsEuvdLRbQcnvI5buWTmyM43utnHj+2RTAAaatlTGFyav
+untPBnB+0/RM7tl56ZabwMeaGWWHBfSxWVUkcJd0Pl5Fula34MG1oOsYvM3o3UGm
+7pVm3Io/y2RnZhBjXDNW4eD57dJiXNXTuGe4hhjHOxamGjlhiIM0le6Q0H5f8fzB
+XuAPtWsXWHLaUIeaSjNt/Pv1Lz/yXPpWeDwf7L2ZCiwCFCmGpN2TTP8DVltEaITi
+Naksg6RXlaSS3yWqyxaKOf0WGzBmdj6maVFvXsHfgmiwCJZuQYJ3Zswgvu/vXClL
+FR9MZfa0nKpVpP/sFuTccIYdfXoTe20bxmb3vrvq4NzKlAVjALDkqSaNPM2Qr0NA
+p+KwFFss281zokcvoFZhDfFyB0V3qumCS6hS7plWhO/KqyCpSYRWw8cTsS32voCf
+/bPKsGliRGEBVv3i1TzMNUztfU7+zHhsaEDl1wRcmSe3ClQYfBM=
+=vWAL
+-----END PGP SIGNATURE-----
+
+--=-r6li7tow5xxm+xeObTFv--
+
+
+
+--===============2844623852610008268==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2844623852610008268==--
