@@ -1,22 +1,12 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 0/7] xen/arm: CPU hotplug fixes
-Date: Mon, 16 Apr 2018 16:05:09 +0100
-Message-ID: <f73b88fa-0277-70b0-e928-c8e3fc6b41e7@arm.com>
-References: <20180411131927.27083-1-mirela.simonovic@aggios.com>
- <d43d06af-a981-3156-bf3b-0d79d219dae1@arm.com>
- <61809e61-d4be-9000-2d5c-2e8b7770d525@aggios.com>
- <ac3d0857-0313-7f83-fa6e-c926636ec7d5@arm.com>
- <CAKPH-Ng+4QM+06msM1cxJpQ5uRvsRWc6Y1mhotPXRdF4nvh0aA@mail.gmail.com>
- <b70f2bc6-9fcd-880b-d891-236e0e92e0c4@arm.com>
- <CAKPH-Niz=ZVovfPRjU1_hunCV8=jLxHA-rQjuA=+z9xiEH9Hsg@mail.gmail.com>
- <e26eb32d-c4f2-4a84-1a86-f52e5dba6a84@arm.com>
- <CAKPH-Ni3YvxmtcARQCvuHb4gbKnrJ+qXHQWnvvTs40uQf7pZgw@mail.gmail.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Xen inside KVM on AMD: Linux HVM/PVH crashes on AP
+ bring up
+Date: Mon, 16 Apr 2018 17:14:03 +0200
+Message-ID: <20180416151403.GA2208@mail-itl>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2250143717369728147=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAKPH-Ni3YvxmtcARQCvuHb4gbKnrJ+qXHQWnvvTs40uQf7pZgw@mail.gmail.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,52 +15,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
+To: xen-devel <xen-devel@lists.xen.org>, kvm@vger.kernel.org, Joerg Roedel <joro@8bytes.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgTWlyZWxhLAoKT24gMTYvMDQvMTggMTU6MDYsIE1pcmVsYSBTaW1vbm92aWMgd3JvdGU6Cj4g
-T24gTW9uLCBBcHIgMTYsIDIwMTggYXQgMTozMyBQTSwgSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3Jh
-bGxAYXJtLmNvbT4gd3JvdGU6Cj4+IE9uIDEzLzA0LzE4IDExOjE5LCBNaXJlbGEgU2ltb25vdmlj
-IHdyb3RlOgo+Pj4gT24gVGh1LCBBcHIgMTIsIDIwMTggYXQgMTA6NDMgQU0sIEp1bGllbiBHcmFs
-bCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4+Pj4gT24gMTEvMDQvMTggMTc6MzcsIE1pcmVsYSBT
-aW1vbm92aWMgd3JvdGU6Cj4+Pj4+IE9uIFdlZCwgQXByIDExLCAyMDE4IGF0IDY6MDIgUE0sIEp1
-bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20KPj4+Pj4gPG1haWx0bzpqdWxpZW4uZ3Jh
-bGxAYXJtLmNvbT4+IHdyb3RlOgo+Pj4+IFNvIHRoaXMgY292ZXIgaW50ZXJydXB0IHJvdXRlZCB0
-byBhIHZpcnR1YWwgQ1BVLiBIb3dldmVyLCB0aGlzIGRvZXMgbm90Cj4+Pj4gaGFuZGxlIGludGVy
-cnVwdHMgdXNlZCBieSBYZW4uIEhvdyBkbyB5b3UgaGFuZGxlIHRoZW0/Cj4+Pj4KPj4+PiBGb3Ig
-aW5zdGFuY2UgU01NVXMgSVJRIG1pZ2h0IGJlIHJvdXRlZCB0byBvdGhlciBpbnRlcnJ1cHQgdGhh
-biBDUFUgIzAuCj4+Pgo+Pj4KPj4+IEludGVycnVwdHMgdXNlZCBieSBYZW4gc2hvdWxkIG5vdCB3
-YWtlLXVwIHRoZSBzeXN0ZW0gYW5kIHdpbGwgYmUKPj4+IGRpc2FibGVkIHdoZW4gd2Ugc3VzcGVu
-ZCB0aGUgZGV2aWNlcyB1c2VkIGJ5IFhlbi4KPj4KPj4gSGVyZSB5b3Ugb25seSBzcGVhayBhYm91
-dCB0aGUgc3VzcGVuZCB1c2UgY2FzZS4gV2hpbGUgSSB1bmRlcnN0YW5kIHlvdXIKPj4gdWx0aW1h
-dGUgZ29hbCBpcyBzdXNwZW5kL3Jlc3VtZSwgdGhpcyBzZXJpZXMgaXMgYWJvdXQgQ1BVIGhvdHBs
-dWcuCj4+Cj4gCj4gQUZBSUssIHRoZSBvbmx5IHdheSBhbmQgb2NjYXNpb24gdG8gaG90cGx1ZyBh
-IENQVSBpcyB1c2luZyA+IGRpc2FibGUvZW5hYmxlX25vbmJvb3RfY3B1cygpIHdpdGhpbiB0aGUg
-WGVuIHN1c3BlbmQvcmVzdW1lIHByb2NlZHVyZS4KCkFzIEkgbWVudGlvbiBpbiBhIHByZXZpb3Vz
-IGUtbWFpbCwgc3VzcGVuZC9yZXN1bWUgaXMgbm90IHRoZSBvbmx5IHdheSB0byAKaG90cGx1ZyBh
-IENQVS4gVGhlcmUgYXJlIGFuIGludGVyZmFjZSAoc2VlIFhFTl9TWVNDVExfY3B1X2hvdHBsdWcp
-IHRvIAphbGxvdyB0aGF0IGZyb20gdGhlIHVzZXJsYW5kLgoKQnV0IEkgYWdyZWUgdGhhdCBpdCBp
-cyBub3QgaW1wbGVtZW50ZWQgb24gQXJtLCBzbyBzdXNwZW5kL3Jlc3VtZSB3b3VsZCAKYmUgdGhl
-IG9ubHkgd2F5IHRvIHNvIGZhci4gVG8gYmUgY2xlYXIsIEkgYW0gbm90IGFza2luZyB5b3UgdG8g
-aW1wbGVtZW50IApYRU5fU1lTQ1RMX2NwdV9ob3RwbHVnLiBBbHRob3VndGggaXQgc2hvdWxkIGJl
-IGVhc3kgdG8gZG8gaXQgYW5kIGVhc3kgCmZvciB0ZXN0aW5nIENQVSBvZmZsaW5lL29ubGluZS4K
-Cj4gV2UgYXJlIGltcGxlbWVudGluZyBDUFUgaG90cGx1ZyBvbmx5IHRvIGVuYWJsZSBYZW4gc3Vz
-cGVuZC9yZXN1bWUuCiA+Cj4gVGhpcyBpcyBob3cgaXQgaXMgYWxzbyBkb25lIGZvciB4ODYgYW5k
-IHdlIHdhbnRlZCB0byBpbXBsZW1lbnQgdGhlCj4gZXF1aXZhbGVudCBiZWhhdmlvciBmb3IgQVJN
-Lgo+IElmIHRoZSBjb3Zlci1sZXR0ZXIgaXMgbWlzbGVhZGluZyBwbGVhc2UgbGV0IG1lIGtub3cg
-d2hhdCB3b3VsZCBiZQo+IG1vcmUgYXBwcm9wcmlhdGUgdGl0bGUuCgpXZSBoYXZlIG11bHRpcGxl
-IHBsYWNlcyBpbiBYZW4gdGhhdCBjb3VsZCB1c2UgY3B1X3VwL2NwdV9kb3duIGhlbHBlcnMuIAog
-RnJvbSB0aGUgY292ZXIgbGV0dGVyLCBpdCBpcyBxdWl0ZSB1bmNsZWFyIHRoYXQgeW91IGFyZSBv
-bmx5IGxvb2tpbmcgCmFmdGVyIHN1c3BlbmQvcmVzdW1lLgoKVGhlIFNZU0NUTCBpbnRlcmZhY2Ug
-aXMgb25lIG9mIHRoZSBvdGhlciB1c2UgY2FzZS4gV2hpbGUgbW9zdCBvZiB0aGUgCmNvZGUgY2Fu
-IGJlIHNoYXJlZCwgc29tZSBvZiB0aGVtIG1heSBub3QgbWFrZSBzZW5zZS4KCkZvciBpbnN0YW5j
-ZSwgaW4gdGhlIHN1c3BlbmQvcmVzdW1lIGNhc2Ugcm91dGluZyB0aGUgaW50ZXJydXB0IGFzc2ln
-bmVkIAp0byBYZW4gdG8gQ1BVIzAgbWF5IG5vdCBiZSBuZWNlc3NhcnkgYmVjYXVzZSBhbGwgQ1BV
-cyBzaG91bGQgY29tZSBiYWNrIApsYXRlciBvbi4gSG93ZXZlciwgdGhpcyBzaG91bGQgYmUgbmVj
-ZXNzYXJ5IHdoZW4gb2ZmbGluaW5nIGEgdkNQVSB3aXRoIApTWVNDVEwgaW50ZXJmYWNlLgoKVGhh
-dCdzIHdoeSBJIGFza2VkIGl0IGFuZCBJIHRoaW5rIGl0IHNob3VsZCBiZSBjbGFyaWZpZWQgaW4g
-dGhlIGNvdmVyIApsZXR0ZXIuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============2250143717369728147==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="FL5UXtIhxfXey3p5"
+Content-Disposition: inline
+
+
+--FL5UXtIhxfXey3p5
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+I' trying to boot Linux PVH on Xen, which is running inside KVM on AMD
+hardware. As soon as secondary CPU is starting, domain crashes.
+Strangely, without printing any related messages on the console. The
+last message is "x86: Booting SMP configuration:".
+This happens for both PVH and HVM with 2 vcpus. PVH/HVM domains with 1
+vcpu works fine(*), as well as PV domains with multiple vcpus.
+
+Using gdbsx I've managed to get the point where it crashes:
+
+    (gdb) f 12
+    #12 0xffffffff81025101 in do_error_trap (regs=3D0xffffc9000037fe78, err=
+or_code=3D-2401053088876204019,=20
+        str=3D0x40 <irq_stack_union+64> <error: Cannot access memory at add=
+ress 0x40>, trapnr=3D6, signr=3D-2)
+        at arch/x86/kernel/traps.c:302
+    302	arch/x86/kernel/traps.c: No such file or directory.
+    (gdb) p/x *regs
+    $8 =3D {r15 =3D 0x0, r14 =3D 0x0, r13 =3D 0x0, r12 =3D 0x0, bp =3D 0x1,=
+ bx =3D 0xffff88007fd0f040, r11 =3D 0x0,=20
+      r10 =3D 0x0, r9 =3D 0x38, r8 =3D 0x0, ax =3D 0xffffffe4, cx =3D 0xfff=
+fffff82251e68, dx =3D 0x0, si =3D 0x96,=20
+      di =3D 0x82, orig_ax =3D 0xffffffffffffffff, ip =3D 0xffffffff81036bd=
+3, cs =3D 0x10, flags =3D 0x10086,=20
+      sp =3D 0xffffc9000037ff20, ss =3D 0x0}
+    (gdb) info symbol 0xffffffff81036bd3
+    identify_secondary_cpu + 83 in section .text
+
+It is BUG_ON(c =3D=3D &boot_cpu_data). If I read it correctly, "c" is 0x82,
+which indeed isn't &boot_cpu_data (0xffffffff8234fe00).
+
+Any idea?
+
+Version info:
+Linux (L0, KVM): 4.4.114-42 (OpenSUSE Leap 42.3)
+Xen (L1): 4.8.3
+Linux dom0 (L1): 4.14.18
+Linux guest: 4.14.18
+
+(*) besides some 20s+ delay on flush_work in deferred_probe_initcall,
+before actually calling deferred_probe_work_func.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--FL5UXtIhxfXey3p5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlrRz/kACgkQ24/THMrX
+1yzsQAf/Wf/zIy0iR9RfdvOy3W5nU6gkUQZwLVgddvpDE2g4r8+MGMwy8U6Gpc4X
+tk9fjB/IMFuLbyBGmAvZ4n6+/aUEH2RVRKH72tMeyeL9X0ot9FgGkxDxVDcgaIwa
+tH5oWX2j5hZnzbXKuOvLnvZ0E0cwSCs4kplkX9cvC6O8NDkm8VZvRciHy4lohgNN
+VsVvqFkLl1DUhN9lVuPBBkJOcdNyEIw8A4qiyghmH6XjDizZvXAJLkuEuNgBpErT
+7ye1lDsjmQvdU3jnc28Q+xypbaArYaBt4e+3TaMEYL5iUHaBgd3OKkXvsVhYEvY3
+PtxvhpqbMYlr8j8/zQxDUu/LBJVxdA==
+=47wD
+-----END PGP SIGNATURE-----
+
+--FL5UXtIhxfXey3p5--
+
+
+--===============2250143717369728147==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2250143717369728147==--
