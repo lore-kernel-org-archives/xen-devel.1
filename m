@@ -1,17 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH for-4.11] x86/msr: Correct the emulation
- behaviour of MSR_PRED_CMD
-Date: Mon, 16 Apr 2018 05:26:01 -0600
-Message-ID: <5AD4884902000078001BBA0D@prv1-mh.provo.novell.com>
-References: <1523876188-14872-1-git-send-email-andrew.cooper3@citrix.com>
- <5AD4851602000078001BB9D6@prv1-mh.provo.novell.com>
- <ffec6ffb-17e3-3941-1139-626acd5b7e77@citrix.com>
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+Subject: [PATCH v1] xen: Fix emfn calculation in
+ init_domheap_pages()
+Date: Mon, 16 Apr 2018 14:29:12 +0300
+Message-ID: <1523878152-13818-1-git-send-email-olekstysh@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <ffec6ffb-17e3-3941-1139-626acd5b7e77@citrix.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=5cp6=hf=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1f82K3-0000ES-3F
+ for xen-devel@lists.xenproject.org; Mon, 16 Apr 2018 11:29:23 +0000
+Received: by mail-lf0-x244.google.com with SMTP id q5-v6so21481782lff.12
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Apr 2018 04:29:21 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,24 +22,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE2LjA0LjE4IGF0IDEzOjE5LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTYvMDQvMTggMTI6MTIsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAxNi4w
-NC4xOCBhdCAxMjo1NiwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gVGhl
-IGJlaGF2aW91ciBvZiByZXNlcnZlZCBiaXRzIGluIE1TUl9QUkVEX0NNRCBjaGFuZ2VkIGJldHdl
-ZW4gYmV0YSBhbmQKPj4+IHByb2R1Y3Rpb24gbWljcm9jb2RlLCBhbmQgbm93IHJhaXNlcyBhICNH
-UCBmYXVsdCBmb3Igc2V0IHJlc2VydmVkIGJpdHMuCj4+IEludGVyZXN0aW5nIC0gcXVpdGUgdW5m
-b3J0dW5hdGUgYSBjaGFuZ2UuIFBsdXMgLSBJIGNhbid0IGZpbmQgd2hlcmUgdGhpcyBpcyBiZWlu
-Zwo+PiBzYWlkLgo+IAo+IEl0cyBub3QsIGJ1dCB0aGUgbmV3IGJlaGF2aW91ciBjYW4gYmUgZGVt
-b25zdHJhdGVkIGVhc2lseS4gIFRob3NlIHdpdGgKPiB0aGUgYmV0YSBtaWNyb2NvZGUgY2FuIGNv
-bmZpcm0gdGhhdCB0aGUgb2xkIGJlaGF2aW91ciB3YXMgdG8gaWdub3JlLgo+IAo+IEZXSVcsIGln
-bm9yaW5nIHJlc2VydmVkIGJpdHMgd2FzIGFsd2F5cyBkdWJpb3VzLCBhbmQgSSBvbmx5IGltcGxl
-bWVudGVkCj4gaXQgbGlrZSB0aGF0IHRvIG1hdGNoIGhvdyBoYXJkd2FyZSBiZWhhdmVkLiAgVGhp
-cyBuZXcgYmVoYXZpb3VyIGlzIGZhcgo+IG1vcmUgc2FuZS4KCkZ1bGx5IGFncmVlIC0gc2hvdWxk
-IGhhdmUgYmVlbiB0aGF0IHdheSBmcm9tIHRoZSBiZWdpbm5pbmcuCgpKYW4KCgoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+RnJvbTogT2xla3NhbmRyIFR5c2hjaGVua28gPG9sZWtzYW5kcl90eXNoY2hlbmtvQGVwYW0uY29t
+PgoKVGhlICJlbmQiIGFkZHJlc3MgbXVzdCBiZSByb3VuZGVkIGRvd24gYmVmb3JlIHNoaWZ0aW5n
+LApvdGhlcndpc2Ugd2Ugd2lsbCBpbnNlcnQgd3JvbmcgcGFnZSByYW5nZSB0byBhIGhlYXAgaWYg
+YWRkcmVzcyBpc24ndApwYWdlIGFsaWduZWQuCgpJdCBzZWVtcyB0aGF0IGEgY29weS1wYXN0ZSBt
+aXN0YWtlIHRvb2sgcGxhY2UgaW4gdGhlIGZvbGxvd2luZyBjb21taXQ6CjBjMTI5NzJlMzRiMjBh
+MjZmMmI0MjA0NGI5OGJmMTJkYjdlZDYyYjYKeGVuL21tOiBTd2l0Y2ggc29tZSBvZiBwYWdlX2Fs
+bG9jLmMgdG8gdHlwZXNhZmUgTUZOCgpTaWduZWQtb2ZmLWJ5OiBPbGVrc2FuZHIgVHlzaGNoZW5r
+byA8b2xla3NhbmRyX3R5c2hjaGVua29AZXBhbS5jb20+CkNDOiBBbmRyZXcgQ29vcGVyIDxhbmRy
+ZXcuY29vcGVyM0BjaXRyaXguY29tPgpDQzogR2VvcmdlIER1bmxhcCA8R2VvcmdlLkR1bmxhcEBl
+dS5jaXRyaXguY29tPgpDQzogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+
+CkNDOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CkNDOiBKdWxpZW4gR3JhbGwgPGp1
+bGllbi5ncmFsbEBhcm0uY29tPgpDQzogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQud2ls
+a0BvcmFjbGUuY29tPgpDQzogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwu
+b3JnPgpDQzogVGltIERlZWdhbiA8dGltQHhlbi5vcmc+CkNDOiBXZWkgTGl1IDx3ZWkubGl1MkBj
+aXRyaXguY29tPgpDQzogeGVuLWRldmVsQGxpc3RzLnhlbi5vcmcKLS0tCiB4ZW4vY29tbW9uL3Bh
+Z2VfYWxsb2MuYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxl
+dGlvbigtKQoKZGlmZiAtLWdpdCBhL3hlbi9jb21tb24vcGFnZV9hbGxvYy5jIGIveGVuL2NvbW1v
+bi9wYWdlX2FsbG9jLmMKaW5kZXggMTg2YjM5YS4uMjBlZTFlNCAxMDA2NDQKLS0tIGEveGVuL2Nv
+bW1vbi9wYWdlX2FsbG9jLmMKKysrIGIveGVuL2NvbW1vbi9wYWdlX2FsbG9jLmMKQEAgLTIxNjYs
+NyArMjE2Niw3IEBAIHZvaWQgaW5pdF9kb21oZWFwX3BhZ2VzKHBhZGRyX3QgcHMsIHBhZGRyX3Qg
+cGUpCiAgICAgQVNTRVJUKCFpbl9pcnEoKSk7CiAKICAgICBzbWZuID0gbWFkZHJfdG9fbWZuKHJv
+dW5kX3BndXAocHMpKTsKLSAgICBlbWZuID0gbWFkZHJfdG9fbWZuKHJvdW5kX3BndXAocGUpKTsK
+KyAgICBlbWZuID0gbWFkZHJfdG9fbWZuKHJvdW5kX3BnZG93bihwZSkpOwogCiAgICAgaWYgKCBt
+Zm5feChlbWZuKSA8PSBtZm5feChzbWZuKSApCiAgICAgICAgIHJldHVybjsKLS0gCjIuNy40CgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
