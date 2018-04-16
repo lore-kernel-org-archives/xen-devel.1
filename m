@@ -1,12 +1,17 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Xen inside KVM on AMD: Linux HVM/PVH crashes on AP
- bring up
-Date: Mon, 16 Apr 2018 17:14:03 +0200
-Message-ID: <20180416151403.GA2208@mail-itl>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 122331: tolerable all pass -
+ PUSHED
+Date: Mon, 16 Apr 2018 15:18:19 +0000
+Message-ID: <osstest-122331-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2250143717369728147=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=ljot=hf=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1f85te-0003by-Ep
+ for xen-devel@lists.xenproject.org; Mon, 16 Apr 2018 15:18:22 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,97 +20,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xen.org>, kvm@vger.kernel.org, Joerg Roedel <joro@8bytes.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2250143717369728147==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="FL5UXtIhxfXey3p5"
-Content-Disposition: inline
-
-
---FL5UXtIhxfXey3p5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-I' trying to boot Linux PVH on Xen, which is running inside KVM on AMD
-hardware. As soon as secondary CPU is starting, domain crashes.
-Strangely, without printing any related messages on the console. The
-last message is "x86: Booting SMP configuration:".
-This happens for both PVH and HVM with 2 vcpus. PVH/HVM domains with 1
-vcpu works fine(*), as well as PV domains with multiple vcpus.
-
-Using gdbsx I've managed to get the point where it crashes:
-
-    (gdb) f 12
-    #12 0xffffffff81025101 in do_error_trap (regs=3D0xffffc9000037fe78, err=
-or_code=3D-2401053088876204019,=20
-        str=3D0x40 <irq_stack_union+64> <error: Cannot access memory at add=
-ress 0x40>, trapnr=3D6, signr=3D-2)
-        at arch/x86/kernel/traps.c:302
-    302	arch/x86/kernel/traps.c: No such file or directory.
-    (gdb) p/x *regs
-    $8 =3D {r15 =3D 0x0, r14 =3D 0x0, r13 =3D 0x0, r12 =3D 0x0, bp =3D 0x1,=
- bx =3D 0xffff88007fd0f040, r11 =3D 0x0,=20
-      r10 =3D 0x0, r9 =3D 0x38, r8 =3D 0x0, ax =3D 0xffffffe4, cx =3D 0xfff=
-fffff82251e68, dx =3D 0x0, si =3D 0x96,=20
-      di =3D 0x82, orig_ax =3D 0xffffffffffffffff, ip =3D 0xffffffff81036bd=
-3, cs =3D 0x10, flags =3D 0x10086,=20
-      sp =3D 0xffffc9000037ff20, ss =3D 0x0}
-    (gdb) info symbol 0xffffffff81036bd3
-    identify_secondary_cpu + 83 in section .text
-
-It is BUG_ON(c =3D=3D &boot_cpu_data). If I read it correctly, "c" is 0x82,
-which indeed isn't &boot_cpu_data (0xffffffff8234fe00).
-
-Any idea?
-
-Version info:
-Linux (L0, KVM): 4.4.114-42 (OpenSUSE Leap 42.3)
-Xen (L1): 4.8.3
-Linux dom0 (L1): 4.14.18
-Linux guest: 4.14.18
-
-(*) besides some 20s+ delay on flush_work in deferred_probe_initcall,
-before actually calling deferred_probe_work_func.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---FL5UXtIhxfXey3p5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlrRz/kACgkQ24/THMrX
-1yzsQAf/Wf/zIy0iR9RfdvOy3W5nU6gkUQZwLVgddvpDE2g4r8+MGMwy8U6Gpc4X
-tk9fjB/IMFuLbyBGmAvZ4n6+/aUEH2RVRKH72tMeyeL9X0ot9FgGkxDxVDcgaIwa
-tH5oWX2j5hZnzbXKuOvLnvZ0E0cwSCs4kplkX9cvC6O8NDkm8VZvRciHy4lohgNN
-VsVvqFkLl1DUhN9lVuPBBkJOcdNyEIw8A4qiyghmH6XjDizZvXAJLkuEuNgBpErT
-7ye1lDsjmQvdU3jnc28Q+xypbaArYaBt4e+3TaMEYL5iUHaBgd3OKkXvsVhYEvY3
-PtxvhpqbMYlr8j8/zQxDUu/LBJVxdA==
-=47wD
------END PGP SIGNATURE-----
-
---FL5UXtIhxfXey3p5--
-
-
---===============2250143717369728147==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2250143717369728147==--
+ZmxpZ2h0IDEyMjMzMSB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMjMzMS8KCkZhaWx1cmVzIDot
+LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
+cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
+LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
+LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
+ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
+LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
+ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
+ICAgICAgICAgICAgICBhNmFhNjc4ZmEzODBlOTM2OWNjNDQ3MDFhMTgxMTQyMzIyYjNhNGIwCmJh
+c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICAxNmZiNGI1YTlhNzlmOTVkZjE3
+ZjEwYmE2MmU5ZjQ0ZDIxY2Y4OWI1CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjIyNjQgIDIwMTgt
+MDQtMTMgMTk6NTg6NDUgWiAgICAyIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTIyMzMxICAy
+MDE4LTA0LTE2IDEzOjEwOjMxIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
+d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3IENvb3BlciA8YW5kcmV3
+LmNvb3BlcjNAY2l0cml4LmNvbT4KICBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAg
+T2xla3NhbmRyIFR5c2hjaGVua28gPG9sZWtzYW5kcl90eXNoY2hlbmtvQGVwYW0uY29tPgoKam9i
+czoKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0
+LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
+ZGViaWFuaHZtLWkzODYgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
+bWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9y
+Zwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywg
+Y29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3Qt
+bGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVw
+b3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRz
+Lnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1t
+YXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9
+YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBh
+dAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1h
+cnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94ZW4vZ2l0
+L3hlbi5naXQKICAgMTZmYjRiNWE5YS4uYTZhYTY3OGZhMyAgYTZhYTY3OGZhMzgwZTkzNjljYzQ0
+NzAxYTE4MTE0MjMyMmIzYTRiMCAtPiBzbW9rZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
