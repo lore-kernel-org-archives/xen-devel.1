@@ -1,16 +1,20 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 7/7] xen/arm: Restore IRQ affinity after
- hotplugging a CPU
-Date: Mon, 16 Apr 2018 14:38:52 +0200
-Message-ID: <4cd710a787e5668a98b83e8e53ea1ca1d7c5407c.camel@suse.com>
-References: <20180411131927.27083-1-mirela.simonovic@aggios.com>
- <20180411131927.27083-8-mirela.simonovic@aggios.com>
- <3c33657b63a04a466028b02ce52d8777bbbfbf04.camel@suse.com>
- <CAKPH-Ngu7i+M2HPTG4WZ5hg5ZOKd=va5dECSK+W-=EnwBzR1zA@mail.gmail.com>
+From: Marek Marczykowski <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH] tools/kdd: silence gcc 8 warning a
+ different way
+Date: Mon, 16 Apr 2018 14:43:32 +0200
+Message-ID: <20180416124332.GK27518@mail-itl>
+References: <5ACF678102000078001BAA8E@prv1-mh.provo.novell.com>
+ <20180416103332.jqap6zhrsm3aul3z@citrix.com>
+ <5AD4906502000078001BBABF@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2844623852610008268=="
+Content-Type: multipart/mixed; boundary="===============6857069312579491840=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAKPH-Ngu7i+M2HPTG4WZ5hg5ZOKd=va5dECSK+W-=EnwBzR1zA@mail.gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=uc13=hf=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1f83Vc-0007c3-Lg
+ for xen-devel@lists.xenproject.org; Mon, 16 Apr 2018 12:45:24 +0000
+In-Reply-To: <5AD4906502000078001BBABF@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,84 +23,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, julien.grall@arm.org, Xen Devel <xen-devel@lists.xen.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============2844623852610008268==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-r6li7tow5xxm+xeObTFv"
+--===============6857069312579491840==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="2fjX3cMESU3XgGmZ"
+Content-Disposition: inline
 
 
---=-r6li7tow5xxm+xeObTFv
-Content-Type: text/plain; charset="UTF-8"
+--2fjX3cMESU3XgGmZ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2018-04-13 at 12:11 +0200, Mirela Simonovic wrote:
-> Hi Dario,
+On Mon, Apr 16, 2018 at 06:00:37AM -0600, Jan Beulich wrote:
+> >>> On 16.04.18 at 12:33, <wei.liu2@citrix.com> wrote:
+> > On Thu, Apr 12, 2018 at 06:04:49AM -0600, Jan Beulich wrote:
+> >> Older gcc doesn't like "#pragma GCC diagnostic" inside functions.
+> >>=20
+> >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> >>=20
+> >> --- a/tools/debugger/kdd/kdd.c
+> >> +++ b/tools/debugger/kdd/kdd.c
+> >> @@ -695,10 +695,10 @@ static void kdd_handle_read_ctrl(kdd_sta
+> >>              KDD_LOG(s, "Request outside of known control space\n");
+> >>              len =3D 0;
+> >>          } else {
+> >> -#pragma GCC diagnostic push
+> >> -#pragma GCC diagnostic ignored "-Warray-bounds"
+> >> -            memcpy(buf, ((uint8_t *)&ctrl.c32) + offset, len);
+> >> -#pragma GCC diagnostic pop
+> >> +            /* Suppress bogus gcc 8 "out of bounds" warning. */
+> >> +            const uint8_t *src;
+> >> +            asm ("" : "=3Dg" (src) : "0" ((uint8_t *)&ctrl.c32 + offs=
+et));
+> >> +            memcpy(buf, src, len);
+> >=20
+> > The code looks correct to me:
+> >=20
+> > Reviewed-by: Wei Liu <wei.liu2@citrix.com>
+> >=20
+> > This will hopefully also fix the issue Boris reported that some older
+> > gcc (<4.6) doesn't support push and pop.
+> >=20
+> > This is the first time I see inline assembly is used to silence gcc.
+> > ;-)
 >=20
-Hi,
+> And I'm not overly happy about it, but couldn't think of a better way
+> without disabling said warning (or -Werror) altogether for the CU. If
+> Ian's sketched out approach worked, I'd be quite happy to drop the
+> patch here.
 
-> On Thu, Apr 12, 2018 at 6:49 PM, Dario Faggioli <dfaggioli@suse.com>
-> wrote:
-> No worries, my commit message should be more understandable and your
-> answer helps me identify what's unclear. I'll try to explain below.
->=20
-> This is about suspend/resume implementation for ARM that is based on
-> PSCI and targeted for embedded systems as well. Each guest could have
-> its own wake-up devices/interrupts (passthrough) that could trigger
-> the resume. So the wake-up interrupt in this context triggers the
-> resume. By 'all interrupts' I meant interrupts that are left enabled
-> by guests upon suspend (those interrupts could wake-up the system).
-> Here is the PSCI-based suspend to RAM design spec:
-> https://lists.xenproject.org/archives/html/xen-devel/2017-12/msg01574
-> .html
->=20
-Ah, so you are talking about suspend/resume of _the_guest_! This was
-actually the bit of information that I was missing. :-)
+What about changing offset type to uint32_t (or similar), which also
+mute the warning?
 
-This was, probbly, partly due to me not being familiar with ARM, and to
-the fact that I haven't really looked at the rest of the series
-probably.
-
-Still, I think it would not hurt for the changelog to be a bit more
-explitic and clear.
-
-Regards,
-Dario
 --=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-r6li7tow5xxm+xeObTFv
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--2fjX3cMESU3XgGmZ
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrUmVwACgkQFkJ4iaW4
-c+7otQ//cY4g+ddSNLhtKiUPULZlEoBAKGEKljxm0T8aAw7SX7Am47m8ug/hxVgk
-f5J4R7B9Zi4ecsxJfW7nG6yoIb06s5g0+nmCtzBxq8ZbV+EwgHeVCbO2VRPyxoK9
-UiKumpCw0ObqW8c9yD9xSLDU1KQZPu4pY4y18ZzCGr90foVranW5luTRf07wCCf1
-K491/GP2UMiuJD7kNSOqsEuvdLRbQcnvI5buWTmyM43utnHj+2RTAAaatlTGFyav
-untPBnB+0/RM7tl56ZabwMeaGWWHBfSxWVUkcJd0Pl5Fula34MG1oOsYvM3o3UGm
-7pVm3Io/y2RnZhBjXDNW4eD57dJiXNXTuGe4hhjHOxamGjlhiIM0le6Q0H5f8fzB
-XuAPtWsXWHLaUIeaSjNt/Pv1Lz/yXPpWeDwf7L2ZCiwCFCmGpN2TTP8DVltEaITi
-Naksg6RXlaSS3yWqyxaKOf0WGzBmdj6maVFvXsHfgmiwCJZuQYJ3Zswgvu/vXClL
-FR9MZfa0nKpVpP/sFuTccIYdfXoTe20bxmb3vrvq4NzKlAVjALDkqSaNPM2Qr0NA
-p+KwFFss281zokcvoFZhDfFyB0V3qumCS6hS7plWhO/KqyCpSYRWw8cTsS32voCf
-/bPKsGliRGEBVv3i1TzMNUztfU7+zHhsaEDl1wRcmSe3ClQYfBM=
-=vWAL
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlrRrLIACgkQ24/THMrX
+1yy71Af+OxLjE/Po2BOXJTR19xR/cyGqf/Se340J+BUVgNEabpWDyd7qKf1lB/n6
+U2HIE98RRdxLPE0HFQfL+bOfED/XbFgrbCuFyDgcIhCU5jXW0LFY3xZlch1sByB6
+a8MDiKmHy+0buoYZmbtXoFPGyH9RVHynfMUDJrPIU3YTaZwHT2mHwlTT6L1GJUYN
+3IEIysIf0EjNsESH2+XTu6UlENNUKO6yK63loBOBUUXyg37qihQ9nuXUXIz6XOD8
+s8QKqjaED0IMUHJAotOlZnLHLfuQZFzXgU8Ek64y58qPvR+TW4lvj/X8aq5ngl6m
+76IaA7SMFWe8AuZwCCDzeg9H7QwbtA==
+=5GLz
 -----END PGP SIGNATURE-----
 
---=-r6li7tow5xxm+xeObTFv--
+--2fjX3cMESU3XgGmZ--
 
 
-
---===============2844623852610008268==
+--===============6857069312579491840==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -106,4 +115,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============2844623852610008268==--
+--===============6857069312579491840==--
