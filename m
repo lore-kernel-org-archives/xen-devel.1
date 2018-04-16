@@ -1,17 +1,20 @@
-From: Davidwang <Davidwang@zhaoxin.com>
-Subject: [PATCH] x86/hpet: add a lock when cpu clear cpumask in
- hpet_broadcast_exit();
-Date: Mon, 16 Apr 2018 16:00:45 +0800
-Message-ID: <1523865645-4911-1-git-send-email-Davidwang@zhaoxin.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] tools/kdd: silence gcc 8 warning a
+ different way
+Date: Mon, 16 Apr 2018 09:29:49 +0100
+Message-ID: <20180416082948.g6yhqwilqlorfciw@citrix.com>
+References: <5ACF678102000078001BAA8E@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=dcgl=hf=zhaoxin.com=davidwang@srs-us1.protection.inumbo.net>)
- id 1f7zF4-0002KS-Jw
- for xen-devel@lists.xenproject.org; Mon, 16 Apr 2018 08:12:02 +0000
+ <srs0=9bxm=hf=citrix.com=prvs=6379ded41=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1f7zWL-0003Ph-RZ
+ for xen-devel@lists.xenproject.org; Mon, 16 Apr 2018 08:29:53 +0000
+Content-Disposition: inline
+In-Reply-To: <5ACF678102000078001BAA8E@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,28 +23,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: fionali@zhaoxin.com, jbeulich@suse.com
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, tim@xen.org, Marek Marczykowski <marmarek@invisiblethingslab.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogRGF2aWQgV2FuZyA8ZGF2aWR3YW5nQHpoYW94aW4uY29tPgoKQnkgdGhlIGhwZXRfZ2V0
-X2NoYW5uZWwoKSwgY3B1cyBzaGFyZSBhbiBpbi11c2UgY2hhbm5lbCBzb210aW1lLgpTbywgY29y
-ZSBzaG91bGRuJ3QgY2xlYXIgY3B1bWFzayB3aGlsZSBvdGhlcnMgYXJlIGdldHRpbmcgZmlyc3QK
-Y3B1bWFzay4gSWYgY29yZSB6ZXJvIGFuZCBjb3JlIG9uZSBzaGFyZSBhbiBjaGFubmVsLCB0aGUg
-Y3B1bWFzawppcyAweDMuIENvcmUgemVybyBjbGVhciBjcHVtYXNrIGJldHdlZW4gY29yZSBvbmUg
-ZXhlY3V0aW5nCmNwdW1hc2tfZW1wdHkoKSBhbmQgY3B1bWFza19maXJzdCgpLiBUaGUgcmV0dXJu
-IG9mIGNwdW1hc2tfZmlyc3QoKQppcyBucl9jcHVfaWRzLiBUaGF0IHdvdWxkIGxlYWQgdG8gQVNT
-RVJUKGNwdSA8IG5yX2NwdV9pZHMpLgoKU2lnbmVkLW9mZi1ieTogRGF2aWQgV2FuZyA8ZGF2aWR3
-YW5nQHpoYW94aW4uY29tPgotLS0KIHhlbi9hcmNoL3g4Ni9ocGV0LmMgfCAyICsrCiAxIGZpbGUg
-Y2hhbmdlZCwgMiBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2hwZXQu
-YyBiL3hlbi9hcmNoL3g4Ni9ocGV0LmMKaW5kZXggYmM3YTg1MS4uNjlhN2IzYSAxMDA2NDQKLS0t
-IGEveGVuL2FyY2gveDg2L2hwZXQuYworKysgYi94ZW4vYXJjaC94ODYvaHBldC5jCkBAIC03NDAs
-NyArNzQwLDkgQEAgdm9pZCBocGV0X2Jyb2FkY2FzdF9leGl0KHZvaWQpCiAgICAgaWYgKCAhcmVw
-cm9ncmFtX3RpbWVyKGRlYWRsaW5lKSApCiAgICAgICAgIHJhaXNlX3NvZnRpcnEoVElNRVJfU09G
-VElSUSk7CiAKKyAgICBzcGluX2xvY2tfaXJxKCZjaC0+bG9jayk7CiAgICAgY3B1bWFza19jbGVh
-cl9jcHUoY3B1LCBjaC0+Y3B1bWFzayk7CisgICAgc3Bpbl91bmxvY2tfaXJxKCZjaC0+bG9jayk7
-CiAKICAgICBpZiAoICEoY2gtPmZsYWdzICYgSFBFVF9FVlRfTEVHQUNZKSApCiAgICAgICAgIGhw
-ZXRfZGV0YWNoX2NoYW5uZWwoY3B1LCBjaCk7Ci0tIAoyLjcuNAoKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Q2MgVGltCgpPbiBUaHUsIEFwciAxMiwgMjAxOCBhdCAwNjowNDo0OUFNIC0wNjAwLCBKYW4gQmV1
+bGljaCB3cm90ZToKPiBPbGRlciBnY2MgZG9lc24ndCBsaWtlICIjcHJhZ21hIEdDQyBkaWFnbm9z
+dGljIiBpbnNpZGUgZnVuY3Rpb25zLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxq
+YmV1bGljaEBzdXNlLmNvbT4KPiAKPiAtLS0gYS90b29scy9kZWJ1Z2dlci9rZGQva2RkLmMKPiAr
+KysgYi90b29scy9kZWJ1Z2dlci9rZGQva2RkLmMKPiBAQCAtNjk1LDEwICs2OTUsMTAgQEAgc3Rh
+dGljIHZvaWQga2RkX2hhbmRsZV9yZWFkX2N0cmwoa2RkX3N0YQo+ICAgICAgICAgICAgICBLRERf
+TE9HKHMsICJSZXF1ZXN0IG91dHNpZGUgb2Yga25vd24gY29udHJvbCBzcGFjZVxuIik7Cj4gICAg
+ICAgICAgICAgIGxlbiA9IDA7Cj4gICAgICAgICAgfSBlbHNlIHsKPiAtI3ByYWdtYSBHQ0MgZGlh
+Z25vc3RpYyBwdXNoCj4gLSNwcmFnbWEgR0NDIGRpYWdub3N0aWMgaWdub3JlZCAiLVdhcnJheS1i
+b3VuZHMiCj4gLSAgICAgICAgICAgIG1lbWNweShidWYsICgodWludDhfdCAqKSZjdHJsLmMzMikg
+KyBvZmZzZXQsIGxlbik7Cj4gLSNwcmFnbWEgR0NDIGRpYWdub3N0aWMgcG9wCj4gKyAgICAgICAg
+ICAgIC8qIFN1cHByZXNzIGJvZ3VzIGdjYyA4ICJvdXQgb2YgYm91bmRzIiB3YXJuaW5nLiAqLwo+
+ICsgICAgICAgICAgICBjb25zdCB1aW50OF90ICpzcmM7Cj4gKyAgICAgICAgICAgIGFzbSAoIiIg
+OiAiPWciIChzcmMpIDogIjAiICgodWludDhfdCAqKSZjdHJsLmMzMiArIG9mZnNldCkpOwo+ICsg
+ICAgICAgICAgICBtZW1jcHkoYnVmLCBzcmMsIGxlbik7Cj4gICAgICAgICAgfQo+ICAgICAgfQo+
+ICAKPiAKPiAKPiAKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
