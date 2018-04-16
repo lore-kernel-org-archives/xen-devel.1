@@ -1,19 +1,14 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86/hpet: add a lock when cpu clear cpumask
- in hpet_broadcast_exit();
-Date: Mon, 16 Apr 2018 05:48:03 -0600
-Message-ID: <5AD48D7302000078001BBA58@prv1-mh.provo.novell.com>
-References: <1523865645-4911-1-git-send-email-Davidwang@zhaoxin.com>
+Subject: Re: [PATCH v1] xen: Fix emfn calculation in
+ init_domheap_pages()
+Date: Mon, 16 Apr 2018 05:52:16 -0600
+Message-ID: <5AD48E7002000078001BBA6A@prv1-mh.provo.novell.com>
+References: <1523878152-13818-1-git-send-email-olekstysh@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ulgz=hf=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1f82c6-00029I-5b
- for xen-devel@lists.xenproject.org; Mon, 16 Apr 2018 11:48:02 +0000
-In-Reply-To: <1523865645-4911-1-git-send-email-Davidwang@zhaoxin.com>
+In-Reply-To: <1523878152-13818-1-git-send-email-olekstysh@gmail.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,37 +18,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Davidwang <Davidwang@zhaoxin.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, "Fiona Li(BJ-RD)" <FionaLi@zhaoxin.com>
+To: olekstysh@gmail.com
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, oleksandr_tyshchenko@epam.com, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE2LjA0LjE4IGF0IDEwOjAwLCA8RGF2aWR3YW5nQHpoYW94aW4uY29tPiB3cm90ZToK
-PiBCeSB0aGUgaHBldF9nZXRfY2hhbm5lbCgpLCBjcHVzIHNoYXJlIGFuIGluLXVzZSBjaGFubmVs
-IHNvbXRpbWUuCj4gU28sIGNvcmUgc2hvdWxkbid0IGNsZWFyIGNwdW1hc2sgd2hpbGUgb3RoZXJz
-IGFyZSBnZXR0aW5nIGZpcnN0Cj4gY3B1bWFzay4gSWYgY29yZSB6ZXJvIGFuZCBjb3JlIG9uZSBz
-aGFyZSBhbiBjaGFubmVsLCB0aGUgY3B1bWFzawo+IGlzIDB4My4gQ29yZSB6ZXJvIGNsZWFyIGNw
-dW1hc2sgYmV0d2VlbiBjb3JlIG9uZSBleGVjdXRpbmcKPiBjcHVtYXNrX2VtcHR5KCkgYW5kIGNw
-dW1hc2tfZmlyc3QoKS4gVGhlIHJldHVybiBvZiBjcHVtYXNrX2ZpcnN0KCkKPiBpcyBucl9jcHVf
-aWRzLiBUaGF0IHdvdWxkIGxlYWQgdG8gQVNTRVJUKGNwdSA8IG5yX2NwdV9pZHMpLgoKSSBjYW4g
-c2VlIHlvdXIgcG9pbnQsIGJ1dCB0aGF0J3MgaW4gaHBldF9kZXRhY2hfY2hhbm5lbCgpIGFmYWlj
-cywKd2hpY2ggeW91ciBkZXNjcmlwdGlvbiBkb2Vzbid0IG1lbnRpb24gYXQgYWxsLiBBbmQgdGhl
-IGFzc2VydGlvbgp3b3VsZCAtIGFmYWljdCAtIGhhcHBlbiB0aHJvdWdoIGhwZXRfZGV0YWNoX2No
-YW5uZWwoKSAtPgpzZXRfY2hhbm5lbF9pcnFfYWZmaW5pdHkoKSAtPiBjcHVtYXNrX29mKCkgKGFz
-IG9mIGU4YmY1YWRkYzkpLgoKUGxlYXNlIHJlYWxpemUgdGhhdCBpdCBoZWxwcyByZXZpZXcgcXVp
-dGUgYSBiaXQgaWYgeW91IHdyaXRlIGNvbmNpc2UKZGVzY3JpcHRpb25zIGZvciB5b3VyIGNoYW5n
-ZXMuCgo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9ocGV0LmMKPiArKysgYi94ZW4vYXJjaC94ODYvaHBl
-dC5jCj4gQEAgLTc0MCw3ICs3NDAsOSBAQCB2b2lkIGhwZXRfYnJvYWRjYXN0X2V4aXQodm9pZCkK
-PiAgICAgIGlmICggIXJlcHJvZ3JhbV90aW1lcihkZWFkbGluZSkgKQo+ICAgICAgICAgIHJhaXNl
-X3NvZnRpcnEoVElNRVJfU09GVElSUSk7Cj4gIAo+ICsgICAgc3Bpbl9sb2NrX2lycSgmY2gtPmxv
-Y2spOwo+ICAgICAgY3B1bWFza19jbGVhcl9jcHUoY3B1LCBjaC0+Y3B1bWFzayk7Cj4gKyAgICBz
-cGluX3VubG9ja19pcnEoJmNoLT5sb2NrKTsKClJhdGhlciB0aGFuIHRoaXMsIGhvdyBhYm91dCBl
-bGltaW5hdGluZyB0aGUgY3B1bWFza19lbXB0eSgpIGNhbGwKaW4gZmF2b3Igb2YganVzdCB0aGUg
-Y3B1bWFza19maXJzdCgpIG9uZSBpbiBocGV0X2RldGFjaF9jaGFubmVsKCkKKHdpdGggYSBsb2Nh
-bCB2YXJpYWJsZSBzdG9yaW5nIHRoZSBpbnRlcm1lZGlhdGUgcmVzdWx0KT8gT3IgaWYgYWNxdWly
-aW5nCnRoZSBsb2NraW5nIGNhbid0IGJlIGF2b2lkZWQgaGVyZSwgeW91IHdvdWxkIHBlcmhhcHMg
-YmV0dGVyIG5vdApkcm9wIGl0IGJlZm9yZSBjYWxsaW5nIGhwZXRfZGV0YWNoX2NoYW5uZWwoKSAo
-d2hpY2ggaGFzIG9ubHkgdGhpcwpzaW5nbGUgY2FsbCBzaXRlIGFuZCBoZW5jZSB3b3VsZCBiZSBz
-dHJhaWdodGZvcndhcmQgdG8gYWRqdXN0KS4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDE2LjA0LjE4IGF0IDEzOjI5LCA8b2xla3N0eXNoQGdtYWlsLmNvbT4gd3JvdGU6Cj4g
+RnJvbTogT2xla3NhbmRyIFR5c2hjaGVua28gPG9sZWtzYW5kcl90eXNoY2hlbmtvQGVwYW0uY29t
+Pgo+IAo+IFRoZSAiZW5kIiBhZGRyZXNzIG11c3QgYmUgcm91bmRlZCBkb3duIGJlZm9yZSBzaGlm
+dGluZywKPiBvdGhlcndpc2Ugd2Ugd2lsbCBpbnNlcnQgd3JvbmcgcGFnZSByYW5nZSB0byBhIGhl
+YXAgaWYgYWRkcmVzcyBpc24ndAo+IHBhZ2UgYWxpZ25lZC4KPiAKPiBJdCBzZWVtcyB0aGF0IGEg
+Y29weS1wYXN0ZSBtaXN0YWtlIHRvb2sgcGxhY2UgaW4gdGhlIGZvbGxvd2luZyBjb21taXQ6Cj4g
+MGMxMjk3MmUzNGIyMGEyNmYyYjQyMDQ0Yjk4YmYxMmRiN2VkNjJiNgo+IHhlbi9tbTogU3dpdGNo
+IHNvbWUgb2YgcGFnZV9hbGxvYy5jIHRvIHR5cGVzYWZlIE1GTgo+IAo+IFNpZ25lZC1vZmYtYnk6
+IE9sZWtzYW5kciBUeXNoY2hlbmtvIDxvbGVrc2FuZHJfdHlzaGNoZW5rb0BlcGFtLmNvbT4KClJl
+dmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
