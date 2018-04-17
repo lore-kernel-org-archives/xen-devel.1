@@ -1,19 +1,22 @@
-From: Daniel Reichelt <hacking@nachtgeist.net>
-Subject: Re: [PATCH] x86/xen: init %gs very early to avoid page
- faults with stack protector
-Date: Mon, 16 Apr 2018 22:15:31 +0200
-Message-ID: <8fd1c8ae-081c-a3fb-a643-b23e70c68798@nachtgeist.net>
-References: <cfd09166-352d-cbcf-961e-a3070831a713@nachtgeist.net>
- <ec006143-70a1-0554-d352-daf6b08af4c8@suse.com>
+From: David Wang <DavidWang@zhaoxin.com>
+Subject: =?utf-8?b?562U5aSNOiBbUEFUQ0hdIHg4Ni9ocGV0OiBhZGQg?=
+ =?utf-8?q?a_lock_when_cpu_clear_cpumask_in_hpet=5Fbroadcast=5Fexit=28=29?=
+ =?utf-8?q?=3B?=
+Date: Tue, 17 Apr 2018 05:44:43 +0000
+Message-ID: <59396553a00d4d55a2ff120bdbfb5943@zhaoxin.com>
+References: <1523865645-4911-1-git-send-email-Davidwang@zhaoxin.com>,
+ <5AD48D7302000078001BBA58@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6332113871906213717=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=x6vl=hf=nachtgeist.net=hacking@srs-us1.protection.inumbo.net>)
- id 1f8AXJ-0002xo-BZ
- for xen-devel@lists.xenproject.org; Mon, 16 Apr 2018 20:15:37 +0000
-In-Reply-To: <ec006143-70a1-0554-d352-daf6b08af4c8@suse.com>
+ <srs0=10av=hg=zhaoxin.com=davidwang@srs-us1.protection.inumbo.net>)
+ id 1f8Jaa-0002fh-4p
+ for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 05:55:36 +0000
+In-Reply-To: <5AD48D7302000078001BBA58@prv1-mh.provo.novell.com>
+Content-Language: zh-CN
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,78 +25,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, "Fiona Li(BJ-RD)" <FionaLi@zhaoxin.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============6332113871906213717==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="oHa849YxkViirsegBNeUboSW0A53lGo5p"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---oHa849YxkViirsegBNeUboSW0A53lGo5p
-Content-Type: multipart/mixed; boundary="kdor7A6QfYmKnOldshmh0KQv4DY3dr4Fl";
- protected-headers="v1"
-From: Daniel Reichelt <hacking@nachtgeist.net>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Message-ID: <8fd1c8ae-081c-a3fb-a643-b23e70c68798@nachtgeist.net>
-Subject: Re: [Xen-devel] [PATCH] x86/xen: init %gs very early to avoid page
- faults with stack protector
-References: <cfd09166-352d-cbcf-961e-a3070831a713@nachtgeist.net>
- <ec006143-70a1-0554-d352-daf6b08af4c8@suse.com>
-In-Reply-To: <ec006143-70a1-0554-d352-daf6b08af4c8@suse.com>
-
---kdor7A6QfYmKnOldshmh0KQv4DY3dr4Fl
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
-Content-Transfer-Encoding: quoted-printable
-
-> Upstream commit 36104cb9012a82e73c32a3b709257766b16bcd1d fixed that. It=
-
-> needs to be added to stable as well.
-
-Thanks for the ptr!
-
-Daniel
-
-
---kdor7A6QfYmKnOldshmh0KQv4DY3dr4Fl--
-
---oHa849YxkViirsegBNeUboSW0A53lGo5p
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQJLBAEBCAA1FiEEg2wMpOXGvc4nunsZnjl+Rc/8gF8FAlrVBGMXHGhhY2tpbmdA
-bmFjaHRnZWlzdC5uZXQACgkQnjl+Rc/8gF/+5hAAuiJgxCvDmAdNGvghdscIZT/k
-9HcU7Gpn1ziveHFzrtvPoA7q4CqwodDBE+slX0tm5gVQDq59uH4s2ouUFg/uAu0R
-lWTZI1AOZHbbDe4RDE6m0efBLJfmQI8nJSKIoblxPi7RwnIROt79Nri8zr01Rt60
-rByea66QEvgb64EB4qSoLYrbK0tWsd7tlKNBPuuYwQhs8+DAQQGToz0SPDh7ocFg
-R6g7nqC3mm4ub6EC0WEnQgcvry083oI1guSq9FDjSsPxXXRtyUTplzCZWEWh3/j4
-TyCTV/g1Bi+qQfSJ+9c+q65sCpRxfSIRlM2nIvjfuKdi18yNAG7Ov3lGgjfj8Cpr
-BaHyWPcYxftbDkFm5wxw0z2G80zbLu0TMrEngSCGokA9mA8y6+h52bkeODzCmfF+
-tkI86DIWwR3/pv+3dHorgzkulZH21Y+fDDGRdOk0Dm5KhCOdr1O6LWxnlvK0v5PD
-BeUCoVksb68yhMM5bs0BdqPs0fGluF96Dv0aiGEHg+46hkXrhM18as8hohWH/8YP
-U5ieB9LGNLQL+fBkjRxZcRyAog9bjLPLcrR2QV5e+uyJ2TGnw0JkbGjZhnRr/Y4L
-ZOXeiX+Hp7e42cnAJg4huEtVu4chfcD3aLNvEssnisfx/EV2zEgJURarKoGTdF/i
-CSVzn9bugWU2bXTJp9w=
-=OPpv
------END PGP SIGNATURE-----
-
---oHa849YxkViirsegBNeUboSW0A53lGo5p--
-
-
---===============6332113871906213717==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6332113871906213717==--
+DQoNCkhpIEphbg0KwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFRoYW5rIHlvdSBmb3Ig
+cG9pbnRpbmcgb3V0IG15IHByb2JsZW0uIEkgd2lsbMKgIHJldmlzZSB0aGF0LiDCoEFuc3dlciB0
+aGUgZm9sbG93aW5nLg0KDQrlj5Hku7bkuro6IEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNv
+bT4NCuWPkemAgeaXtumXtDogMjAxOOW5tDTmnIgxNuaXpSAxOTo0OA0K5pS25Lu25Lq6OiBEYXZp
+ZCBXYW5nDQrmioTpgIE6IHhlbi1kZXZlbDsgRmlvbmEgTGkoQkotUkQpDQrkuLvpopg6IFJlOiBb
+UEFUQ0hdIHg4Ni9ocGV0OiBhZGQgYSBsb2NrIHdoZW4gY3B1IGNsZWFyIGNwdW1hc2sgaW4gaHBl
+dF9icm9hZGNhc3RfZXhpdCgpOw0KwqAgICANCj4+PiBPbiAxNi4wNC4xOCBhdCAxMDowMCwgPERh
+dmlkd2FuZ0B6aGFveGluLmNvbT4gd3JvdGU6DQo+IEJ5IHRoZSBocGV0X2dldF9jaGFubmVsKCks
+IGNwdXMgc2hhcmUgYW4gaW4tdXNlIGNoYW5uZWwgc29tdGltZS4NCj4gU28sIGNvcmUgc2hvdWxk
+bid0IGNsZWFyIGNwdW1hc2sgd2hpbGUgb3RoZXJzIGFyZSBnZXR0aW5nIGZpcnN0DQo+IGNwdW1h
+c2suIElmIGNvcmUgemVybyBhbmQgY29yZSBvbmUgc2hhcmUgYW4gY2hhbm5lbCwgdGhlIGNwdW1h
+c2sNCj4gaXMgMHgzLiBDb3JlIHplcm8gY2xlYXIgY3B1bWFzayBiZXR3ZWVuIGNvcmUgb25lIGV4
+ZWN1dGluZw0KPiBjcHVtYXNrX2VtcHR5KCkgYW5kIGNwdW1hc2tfZmlyc3QoKS4gVGhlIHJldHVy
+biBvZiBjcHVtYXNrX2ZpcnN0KCkNCj4gaXMgbnJfY3B1X2lkcy4gVGhhdCB3b3VsZCBsZWFkIHRv
+IEFTU0VSVChjcHUgPCBucl9jcHVfaWRzKS4NCg0KSSBjYW4gc2VlIHlvdXIgcG9pbnQsIGJ1dCB0
+aGF0J3MgaW4gaHBldF9kZXRhY2hfY2hhbm5lbCgpIGFmYWljcywNCndoaWNoIHlvdXIgZGVzY3Jp
+cHRpb24gZG9lc24ndCBtZW50aW9uIGF0IGFsbC4gQW5kIHRoZSBhc3NlcnRpb24NCndvdWxkIC0g
+YWZhaWN0IC0gaGFwcGVuIHRocm91Z2ggaHBldF9kZXRhY2hfY2hhbm5lbCgpIC0+DQpzZXRfY2hh
+bm5lbF9pcnFfYWZmaW5pdHkoKSAtPiBjcHVtYXNrX29mKCkgKGFzIG9mIGU4YmY1YWRkYzkpLg0K
+DQpQbGVhc2UgcmVhbGl6ZSB0aGF0IGl0IGhlbHBzIHJldmlldyBxdWl0ZSBhIGJpdCBpZiB5b3Ug
+d3JpdGUgY29uY2lzZQ0KZGVzY3JpcHRpb25zIGZvciB5b3VyIGNoYW5nZXMuDQoNCltEYXZpZFdh
+bmddOiBPaywgcmV2aXNlIGl0IGFuZCB0aGFua3MuDQogDQoNCj4gLS0tIGEveGVuL2FyY2gveDg2
+L2hwZXQuYw0KPiArKysgYi94ZW4vYXJjaC94ODYvaHBldC5jDQo+IEBAIC03NDAsNyArNzQwLDkg
+QEAgdm9pZCBocGV0X2Jyb2FkY2FzdF9leGl0KHZvaWQpDQo+wqDCoMKgwqDCoCBpZiAoICFyZXBy
+b2dyYW1fdGltZXIoZGVhZGxpbmUpICkNCj7CoMKgwqDCoMKgwqDCoMKgwqAgcmFpc2Vfc29mdGly
+cShUSU1FUl9TT0ZUSVJRKTsNCj7CoCANCj4gK8KgwqDCoCBzcGluX2xvY2tfaXJxKCZjaC0+bG9j
+ayk7DQo+wqDCoMKgwqDCoCBjcHVtYXNrX2NsZWFyX2NwdShjcHUsIGNoLT5jcHVtYXNrKTsNCj4g
+K8KgwqDCoCBzcGluX3VubG9ja19pcnEoJmNoLT5sb2NrKTsNCg0KUmF0aGVyIHRoYW4gdGhpcywg
+aG93IGFib3V0IGVsaW1pbmF0aW5nIHRoZSBjcHVtYXNrX2VtcHR5KCkgY2FsbA0KaW4gZmF2b3Ig
+b2YganVzdCB0aGUgY3B1bWFza19maXJzdCgpIG9uZSBpbiBocGV0X2RldGFjaF9jaGFubmVsKCkN
+Cih3aXRoIGEgbG9jYWwgdmFyaWFibGUgc3RvcmluZyB0aGUgaW50ZXJtZWRpYXRlIHJlc3VsdCk/
+IE9yIGlmIGFjcXVpcmluZw0KdGhlIGxvY2tpbmcgY2FuJ3QgYmUgYXZvaWRlZCBoZXJlLCB5b3Ug
+d291bGQgcGVyaGFwcyBiZXR0ZXIgbm90DQpkcm9wIGl0IGJlZm9yZSBjYWxsaW5nIGhwZXRfZGV0
+YWNoX2NoYW5uZWwoKSAod2hpY2ggaGFzIG9ubHkgdGhpcw0Kc2luZ2xlIGNhbGwgc2l0ZSBhbmQg
+aGVuY2Ugd291bGQgYmUgc3RyYWlnaHRmb3J3YXJkIHRvIGFkanVzdCkuDQoNCltEYXZpZFdhbmdd
+OiDCoFRoZSBleHBlcmltZW50IHByb3ZlZCB0aGF0IGEgbG9jYWwgdmFyaWFibGUgc3RvcmluZyB0
+aGUgaW50ZXJtZWRpYXRlIHJlc3VsdCDCoGNhbiBzbG92ZSB0aGUgcHJvYmxlbS4gT24gb25lIGhh
+bmQgYSBsb2NhbCB2YXJpYWJsZSBpcyBtb3JlIGVmZmljaWVudCB0aGFuIGFkZGluZyBsb2NrLCBP
+biB0aGUgb3RoZXIgaXQgaXMgbm90IHZlcnkgY2xlYXIgZm9yIHJlYWRpbmcuIEluIGZhY3QsIElu
+IGhwZXRfZGV0YWNoX2NoYW5uZWwoKSwgYSBsb2NrIGZvciBjaC0+bG9jayB3aWxsIGJlIGFkZGVk
+LiDCoENhbiB3ZSBtb3ZlIHRoZSBsb2NrKCBpbiBocGV0X2RldGFjaF9jaGFubmVsKCkpIGJhY2t3
+YXJkIMKgdG8gY2FsbGluZyBjcHVtYXNrX2NsZWFyX2NwdSgpIMKgYW5kIGRyb3AgaXQgaW4gZnVu
+Y3Rpb24gKGhwZXRfZGV0YWNoX2NoYW5uZWwoKSkgPw0KTG9va2luZyBmb3J3YXJkIHRvIHlvdXIg
+c3VnZ2VzdGlvbi4NCiAgDQoNCg0KDQogICAgCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
