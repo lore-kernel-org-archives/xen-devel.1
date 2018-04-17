@@ -1,13 +1,35 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [RFC PATCH 1/1] xen: credit2: rb-tree for runqueues
-Date: Tue, 17 Apr 2018 12:46:11 +0200
-Message-ID: <e70b5f0797a7636de199e61290f6d769d88d2b63.camel@suse.com>
-References: <20180403165505.8441-1-kpraveen.lkml@gmail.com>
- <20180403165505.8441-2-kpraveen.lkml@gmail.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: Weird altp2m behaviour when switching early to a
+ new view
+Date: Tue, 17 Apr 2018 13:49:16 +0300
+Message-ID: <359f9be1-b425-7569-d507-97beee8ec69d@bitdefender.com>
+References: <a592fcb3-c2c6-bd83-01a4-0ac7ba9f3fa5@bitdefender.com>
+ <d0ae9d3e-31ee-a03b-dc9d-b86ceb92fe52@citrix.com>
+ <b21c7573-7ca0-9ccc-eac7-5ff351fc54ce@bitdefender.com>
+ <3bc816d7-2426-470a-36a3-83e2cd5c81ad@bitdefender.com>
+ <3076ce00-8655-81fe-6dc1-b891da638ea2@bitdefender.com>
+ <efaa504e-bc4f-243d-f558-cab3dc31b472@citrix.com>
+ <de3ffdd5-a3ba-d89a-5ebc-6f17006ae75b@bitdefender.com>
+ <CAFLBxZbjif+AeMPrc1CkbyjEiSGHJEW3tGNmMqZtCvp+3pOGeg@mail.gmail.com>
+ <00b52489-51e5-6bc8-ccc2-7b44d2dec107@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2252172649545153763=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180403165505.8441-2-kpraveen.lkml@gmail.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=5zw6=hg=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1f8OAr-00012O-Uw
+ for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 10:49:21 +0000
+Received: from mx-sr.buh.bitdefender.com (mx-sr.buh.bitdefender.biz
+ [10.17.80.103])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id 696463086295
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Apr 2018 15:05:23 +0300 (EEST)
+Received: from smtp03.buh.bitdefender.org (smtp.bitdefender.biz [10.17.80.77])
+ by mx-sr.buh.bitdefender.com (Postfix) with ESMTP id BE5F87FB58
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Apr 2018 13:49:18 +0300 (EEST)
+In-Reply-To: <00b52489-51e5-6bc8-ccc2-7b44d2dec107@bitdefender.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,202 +38,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Praveen Kumar <kpraveen.lkml@gmail.com>, xen-devel@lists.xen.org
-Cc: george.dunlap@eu.citrix.com
+To: George Dunlap <dunlapg@umich.edu>
+Cc: "Tian, Kevin" <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Tim Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2252172649545153763==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-dUbJ1Y+T9mJaCvHMKH/G"
-
-
---=-dUbJ1Y+T9mJaCvHMKH/G
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2018-04-03 at 22:25 +0530, Praveen Kumar wrote:
-> The patch optimized the sorted credit2 runq from simple linked list
-> to
-> rb-tree implementation. This way we will gain performance and
-> scalability when the number of vCPUs are huge.
->=20
-> Signed-off-by: Praveen Kumar <kpraveen.lkml@gmail.com>
-
-> --- a/xen/common/sched_credit2.c
-> +++ b/xen/common/sched_credit2.c
-> @@ -600,6 +601,29 @@ static inline bool has_cap(const struct
-> csched2_vcpu *svc)
->      return svc->budget !=3D STIME_MAX;
->  }
-> =20
-> +static void runq_insert_rb(struct rb_root *root,
-> +                           struct csched2_vcpu *svc,
-> +                           int *pos)
->
-I'd call this rb_insert() or rb_runq_insert(), but that's taste (and
-it's certainly a minor thing).
-
-> +{
-> +    struct csched2_vcpu *entry =3D NULL;
-> +    struct rb_node **node =3D &root->rb_node;
-> +    struct rb_node *parent =3D NULL;
-> +
-> +    while (*node) {
-> +        parent =3D *node;
-> +        entry =3D rb_entry(parent, struct csched2_vcpu, runq_elem);
-> +        // Check if we are maintaining the sorted
->
-Pointless comment. I'd leave the line blank (but that's taste again).
-
-> +        if ( svc->credit < entry->credit )
-> +            node =3D &parent->rb_left;
-> +        else
-> +            node =3D &parent->rb_right;
-> +
-> +        (*pos)++;
-> +    }
-> +    rb_link_node(&svc->runq_elem, parent, node);
-> +    rb_insert_color(&svc->runq_elem, root);
-> +}
->
-Wait, where's the part where we cache which element is the one with the
-highest credits? (And the same applies to the tree-removal function, of
-course.)
-
-In fact, we need a field for storing such a cache in the runqueue data
-structure as well, and we need to keep it updated.
-
-Linux (recently) added an rb-tree variant that do this internally, see
-cd9e61ed1eebb "rbtree: cache leftmost node internally", and how such a
-variant is used, e.g. 2161573ecd693 "sched/deadline: replace earliest
-dl and rq leftmost caching".
-
-So, I'd say that we either import that from there, or do the caching of
-leftmost element explicitly where needed. Note that, however, that
-Linux's variant caches leftmost, because they always use rb-trees for
-structures where the head of the queue is the element with the
-_smallest_ key.
-
-In our case here, we want the queue ordered in descending credit order,
-so it must be thought carefully whether or not we could use the new
-variant (maybe "just" inverting the binary search tree relationship),
-or we'd need another one that caches righmost.
-
-I would suggest we do not try to use the rb_*_cached() functions, and
-cache rightmost explicitly in runqueue_data.
-
-> @@ -3201,17 +3225,21 @@ csched2_runtime(const struct scheduler *ops,
-> int cpu,
->       * 2) If there's someone waiting whose credit is positive,
->       *    run until your credit ~=3D his.
->       */
-> -    if ( ! list_empty(runq) )
-> +    if ( ! RB_EMPTY_ROOT(runq) )
->      {
-> -        struct csched2_vcpu *swait =3D runq_elem(runq->next);
-> +        // Find the left most element, which is the most probable
-> candidate
-> +        struct rb_node *node =3D rb_first(runq);
->=20
-Err... is it? Isn't the leftmost element the one with the _least_
-credits? It looks to me that we want rb_last().
-
-And IAC, we don't want to have to traverse the tree to get the runnable
-vcpu with the highest credit, we want it available in O(1) time.
-
-That's why we want to cache it.
-
-> +        // TODO Can we take rb_next ?
-> +        //struct rb_node *node =3D &rb_next(root->rb_node);
-> +
-What do you mean here?
-
-> +        struct csched2_vcpu *swait =3D runq_elem(node);
->          if ( ! is_idle_vcpu(swait->vcpu)
->               && swait->credit > 0 )
->          {
->              rt_credit =3D snext->credit - swait->credit;
->          }
->      }
-
-> @@ -3345,9 +3373,8 @@ runq_candidate(struct csched2_runqueue_data
-> *rqd,
->          snext =3D csched2_vcpu(idle_vcpu[cpu]);
-> =20
->   check_runq:
-> -    list_for_each_safe( iter, temp, &rqd->runq )
-> -    {
-> -        struct csched2_vcpu * svc =3D list_entry(iter, struct
-> csched2_vcpu, runq_elem);
-> +    for (iter =3D rb_first(&rqd->runq); iter !=3D NULL; iter =3D
-> rb_next(iter)) {
-> +        struct csched2_vcpu * svc =3D rb_entry(iter, struct
-> csched2_vcpu, runq_elem);
->
-Same as above. I don't think this is from where we want to start. And
-no matter whether we want to start from rb_first() or rb_last(), we
-certainly don't want to have to traverse the tree to get to there.
-
-> @@ -3761,8 +3789,8 @@ csched2_dump(const struct scheduler *ops)
->              dump_pcpu(ops, j);
-> =20
->          printk("RUNQ:\n");
-> -        list_for_each( iter, runq )
-> -        {
-> +
-> +        for (iter =3D rb_first(runq); iter !=3D NULL; iter =3D
-> rb_next(iter)) {
->
-And the same applies here as well. I think that, if we want the
-runqueue printed in the proper order, we need to start from the
-righmost, and use rb_prev().
-
-Oh, and about caching, I'd say it is okay if you want to turn this into
-a series, the first patch of which does not have it, and you introduce
-it in the second patch.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-dUbJ1Y+T9mJaCvHMKH/G
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrV0HQACgkQFkJ4iaW4
-c+68CBAA0eK9axhS/Vny+Tm3Df5oXqrmxZvQt4De0Y3jZs9T8IdF7PvgPrXjl87V
-ZB34fV/0hWaGNJxy92AqhBUFlY951LZ+6EYvHYOnwAk+AndlKUZMQkayVO8Uzo8f
-MxXZCArPxkUgV3NenzB//Ir+YN3cmA6AnIKJyNsmOc8F1aU/Q+l+0kU2uQomHaLg
-N59AlO0VFbBJT2PruF8RqeQ22Lvc0Ukw8YHCl3/KIuaHYZCzqFb1CqCsS8JUnlbn
-0FzJ1gjHW6Wn/p7YXsL++jKyyMRsn5P/oInVdvRxGe28mADAKWQXkTnjmWWcg9ap
-iduJJUv5ZtAAlwyL14oxKeBTGzq42gmQwrRv+Vl+KGDPO1RCeMC9uhD52cwWGWgV
-S53b1TuT2T2JYGdX5dRzhvEUrE+qj6Fvq+fn7bYrYFV0L81dJmD9VEP8w+x1v/7O
-HJnZ5R7zJ4fwYqF7enCk6g70irL96pcGtrnd1Zxh/k8SaNe75YWStTwZktmLdAd7
-1CNEj7AFUqj+efMgO7nHQhlO5AUf3QdZLZb/ySCyxiRsYw8ksl706Qy/pbD4b7ak
-NtmCSLvEVKoZtqA7efDDKtQhhqyePFg5taOj1xvexkhhMmZJwMVTwB3nBQwh2JdR
-CZSBE6LVpoY98W1DTJAz9yDKt2CzYlLsYTNISmz/0c8Tqhc8ME0=
-=ucwZ
------END PGP SIGNATURE-----
-
---=-dUbJ1Y+T9mJaCvHMKH/G--
-
-
-
---===============2252172649545153763==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2252172649545153763==--
+T24gMDQvMTcvMjAxOCAxMToyNCBBTSwgUmF6dmFuIENvam9jYXJ1IHdyb3RlOgo+IE9uIDA0LzE2
+LzIwMTggMTE6MjEgUE0sIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4+IE9uIE1vbiwgQXByIDE2LCAy
+MDE4IGF0IDc6NDYgUE0sIFJhenZhbiBDb2pvY2FydQo+PiA8cmNvam9jYXJ1QGJpdGRlZmVuZGVy
+LmNvbT4gd3JvdGU6Cj4+PiBPbiAwNC8xNi8yMDE4IDA4OjQ3IFBNLCBHZW9yZ2UgRHVubGFwIHdy
+b3RlOgo+Pj4+IE9uIDA0LzEzLzIwMTggMDM6NDQgUE0sIFJhenZhbiBDb2pvY2FydSB3cm90ZToK
+Pj4+Pj4gT24gMDQvMTEvMjAxOCAxMTowNCBBTSwgUmF6dmFuIENvam9jYXJ1IHdyb3RlOgo+Pj4+
+Pj4gRGVidWdnaW5nIGNvbnRpbnVlcy4KPj4+Pj4KPj4+Pj4gRmluYWxseSwgdGhlIGF0dGFjaGVk
+IHBhdGNoIHNlZW1zIHRvIGdldCB0aGUgZGlzcGxheSB1bnN0dWNrIGluIG15Cj4+Pj4+IHNjZW5h
+cmlvLCBhbHRob3VnaCBmb3Igb25lIGd1ZXN0IEkgZ2V0Ogo+Pj4+Pgo+Pj4+PiAoWEVOKSBkMnYw
+IFVuZXhwZWN0ZWQgdm1leGl0OiByZWFzb24gNDkKPj4+Pj4gKFhFTikgZG9tYWluX2NyYXNoIGNh
+bGxlZCBmcm9tIHZteC5jOjQxMjAKPj4+Pj4gKFhFTikgRG9tYWluIDIgKHZjcHUjMCkgY3Jhc2hl
+ZCBvbiBjcHUjMToKPj4+Pj4gKFhFTikgLS0tLVsgWGVuLTQuMTEtdW5zdGFibGUgIHg4Nl82NCAg
+ZGVidWc9eSAgIE5vdCB0YWludGVkIF0tLS0tCj4+Pj4+IChYRU4pIENQVTogICAgMQo+Pj4+PiAo
+WEVOKSBSSVA6ICAgIDAwMTA6WzxmZmZmZjk2MDAwODQyMzU0Pl0KPj4+Pj4gKFhFTikgUkZMQUdT
+OiAwMDAwMDAwMDAwMDEwMjQ2ICAgQ09OVEVYVDogaHZtIGd1ZXN0IChkMnYwKQo+Pj4+PiAoWEVO
+KSByYXg6IGZmZmZmODgwMDMwMDAwMDAgICByYng6IGZmZmZmOTAwYzAwODNkYjAgICByY3g6IDAw
+MDAwMDAwYWE1NWFhNTUKPj4+Pj4gKFhFTikgcmR4OiBmZmZmZmE4MDA0MWJkYzQxICAgcnNpOiBm
+ZmZmZjkwMGMwMGM2OWEwICAgcmRpOiAwMDAwMDAwMDAwMDAwMDAxCj4+Pj4+IChYRU4pIHJicDog
+MDAwMDAwMDAwMDAwMDAwMCAgIHJzcDogZmZmZmY4ODAwMmVlOWVmMCAgIHI4OiAgZmZmZmZhODAw
+NDFiZGM0MAo+Pj4+PiAoWEVOKSByOTogIGZmZmZmODAwMDE4MTBlODAgICByMTA6IGZmZmZmYTgw
+MDM0MmFhNzAgICByMTE6IGZmZmZmODgwMDJlZTllODAKPj4+Pj4gKFhFTikgcjEyOiAwMDAwMDAw
+MDAwMDAwMDA1ICAgcjEzOiAwMDAwMDAwMDAwMDAwMDAxICAgcjE0OiBmZmZmZjkwMGMwMGMwOGIw
+Cj4+Pj4+IChYRU4pIHIxNTogMDAwMDAwMDAwMDAwMDAwMSAgIGNyMDogMDAwMDAwMDA4MDA1MDAz
+MSAgIGNyNDogMDAwMDAwMDAwMDA0MDZmOAo+Pj4+PiAoWEVOKSBjcjM6IDAwMDAwMDAwZWY3NzEw
+MDAgICBjcjI6IGZmZmZmOTAwYzAwYzgwMDAKPj4+Pj4gKFhFTikgZnNiOiAwMDAwMDAwMGZmZmRl
+MDAwICAgZ3NiOiBmZmZmZjgwMDAxODEwZDAwICAgZ3NzOiAwMDAwMDdmZmZmZmRjMDAwCj4+Pj4+
+IChYRU4pIGRzOiAwMDJiICAgZXM6IDAwMmIgICBmczogMDA1MyAgIGdzOiAwMDJiICAgc3M6IDAw
+MTggICBjczogMDAxMAo+Pj4+Pgo+Pj4+PiBpLmUuIEVYSVRfUkVBU09OX0VQVF9NSVNDT05GSUcg
+LSBzbyBub3Qgb2YgdGhlIHdvb2RzIHlldC4gSSBhbSBob3BpbmcKPj4+Pj4gc29tZWJvZHkgbW9y
+ZSBmYW1pbGlhciB3aXRoIHRoZSBjb2RlIGNhbiBwb2ludCB0byBhIG1vcmUgZWxlZ2FudAo+Pj4+
+PiBzb2x1dGlvbiBpZiBvbmUgZXhpc3RzLgo+Pj4+Cj4+Pj4gSSB0aGluayBJIGhhdmUgYW4gaWRl
+YSB3aGF0J3MgZ29pbmcgb24sIGJ1dCBpdCdzIGNvbXBsaWNhdGVkLiA6LSkKPj4+Pgo+Pj4+IEJh
+c2ljYWxseSwgdGhlIGxvZ2RpcnR5IGZ1bmN0aW9uYWxpdHkgaXNuJ3Qgc2ltcGxlLCBhbmQgbmVl
+ZHMgY2FyZWZ1bAo+Pj4+IHRob3VnaHQgb24gaG93IHRvIGludGVncmF0ZSBpdC4gIEknbGwgd3Jp
+dGUgc29tZSBtb3JlIHRvbW9ycm93LCBhbmQgc2VlCj4+Pj4gaWYgSSBjYW4gY29tZSB1cCB3aXRo
+IGEgc29sdXRpb24uCj4+Pgo+Pj4gSSB0aGluayBJIGtub3cgd2h5IHRoaXMgaGFwcGVucyBmb3Ig
+dGhlIG9uZSBndWVzdCAtIHRoZSBvdGhlciBndWVzdHMKPj4+IHN0YXJ0IGF0IGEgY2VydGFpbiBy
+ZXNvbHV0aW9uIGRpc3BsYXktd2lzZSBhbmQgc3RheSB0aGF0IHdheSB1bnRpbCBzaHV0ZG93bi4K
+Pj4+Cj4+PiBUaGlzIHBhcnRpY3VsYXIgZ3Vlc3Qgc3RhcnRzIHdpdGggYSBsYXJnZXIgc2NyZWVu
+LCB0aGVuIGdvZXMgdG8gcm91Z2hseQo+Pj4gMi8zcmRzIG9mIGl0LCB0aGVuIHRyaWVzIHRvIGdv
+IGJhY2sgdG8gdGhlIGluaXRpYWwgbGFyZ2VyIG9uZSAtIGF0IHdoaWNoCj4+PiBwb2ludCB0aGUg
+YWJvdmUgaGFwcGVucy4gSSBhc3N1bWUgdGhpcyBjb3JyZXNwb25kcyB0byBzb21lIHBhZ2VzIGJl
+aW5nCj4+PiByZW1vdmVkIGFuZC9vciBhZGRlZC4gSSdsbCB0ZXN0IHRoaXMgdGhlb3J5IG1vcmUg
+dG9tb3Jyb3cgLSBpZiBpdCdzCj4+PiBjb3JyZWN0IEkgc2hvdWxkIGJlIGFibGUgdG8gcmVwcm9k
+dWNlIHRoZSBjcmFzaCAod2l0aCB0aGUgcGF0Y2gpIGJ5Cj4+PiBzaW1wbHkgcmVzZXR0aW5nIHRo
+ZSBzY3JlZW4gcmVzb2x1dGlvbiAoaW5jcmVhc2luZyBpdCkuCj4+Cj4+IFRoZSB0cmljayBpcyB0
+aGF0IHAybV9jaGFuZ2VfdHlwZSBkb2Vzbid0IGFjdHVhbGx5IGl0ZXJhdGUgb3ZlciB0aGUKPj4g
+ZW50aXJlIHAybSByYW5nZSwgaW5kaXZpZHVhbGx5IGNoYW5naW5nIGVudHJpZXMgYXMgaXQgZ29l
+cy4gIEluc3RlYWQKPj4gaXQgbWlzY29uZmlndXJlcyB0aGUgZW50cmllcyBhdCB0aGUgdG9wLWxl
+dmVsLCB3aGljaCBjYXVzZXMgdGhlIGtpbmRzCj4+IG9mIGZhdWx0cyBzaG93biBhYm92ZS4gIEFz
+IGl0IGdldHMgZmF1bHRzIGZvciBlYWNoIGVudHJ5LCBpdCBjaGVja3MKPj4gdGhlIGN1cnJlbnQg
+dHlwZSwgdGhlIGxvZ2RpcnR5IHJhbmdlcywgYW5kIHRoZSBnbG9iYWwgbG9nZGlydHkgYml0IHRv
+Cj4+IGRldGVybWluZSB3aGF0IHRoZSBuZXcgdHlwZXMgc2hvdWxkIGJlLgo+Pgo+PiBZb3VyIHBh
+dGNoIG1ha2VzIGl0IHNvIHRoYXQgYWxsIHRoZSBhbHRwMm1zIG5vdyBnZXQgdGhlCj4+IG1pc2Nv
+bmZpZ3VyYXRpb24gd2hlbiB0aGUgbG9nZGlydHkgcmFuZ2UgaXMgY2hhbmdlZDsgYnV0IGNsZWFy
+bHkKPj4gaGFuZGxpbmcgdGhlIG1pc2NvbmZpZ3VyYXRpb24gaXNuJ3QgaW50ZWdyYXRlZCBwcm9w
+ZXJseSB3aXRoIHRoZQo+PiBhbHRwMm0gc3lzdGVtIHlldC4gIERvaW5nIGl0IHJpZ2h0IG1heSB0
+YWtlIHNvbWUgdGhvdWdodC4KPiAKPiBGV0lXLCB0aGUgYXR0YWNoZWQgcGF0Y2ggaGFzIHNvbHZl
+ZCB0aGUgbWlzY29uZmlnLXJlbGF0ZWQgZG9tYWluIGNyYXNoCj4gZm9yIG1lICh0aG91Z2ggSSdt
+IHZlcnkgbGlrZWx5IG1pc3Npbmcgc29tZSBzdWJ0bGV0aWVzKS4gSXQgYWxsIHNlZW1zIHRvCj4g
+d29yayBhcyBleHBlY3RlZCB3aGVuIGVuYWJsaW5nIGFsdHAybSBhbmQgc3dpdGNoaW5nIGVhcmx5
+IHRvIGEgbmV3IHZpZXcuCj4gSG93ZXZlciwgbm93IEkgaGF2ZSBkb21VcyB3aXRoIGEgZnJvemVu
+IGRpc3BsYXkgd2hlbiBJIGRpc2Nvbm5lY3QgdGhlCj4gaW50cm9zcGVjdGlvbiBhcHBsaWNhdGlv
+biAodGhhdCBpcywgYWZ0ZXIgSSBzd2l0Y2ggYmFjayB0byB0aGUgZGVmYXVsdAo+IHZpZXcgYW5k
+IGRpc2FibGUgYWx0cDJtIG9uIHRoZSBkb21haW4pLgoKVGhlIGZvcigpIGxvb3AgaW4gdGhlIHBy
+ZXZpb3VzIHBhdGNoIGlzIHVubmVjZXNzYXJ5LCBzbyBoZXJlJ3MgYSBuZXcKKGNsZWFuZXIpIHBh
+dGNoLiBJIGNhbid0IGdldCB0aGUgZ3Vlc3QgdG8gZnJlZXplIHRoZSBkaXNwbGF5IHdoZW4KZGV0
+YWNoaW5nIGFueW1vcmUgLSB1bnJlbGF0ZWQgdG8gdGhlIGZvcigpIC0gKHNvIGl0IG1pZ2h0IGhh
+dmUgYmVlbgpzb21ldGhpbmcgZWxzZSBpbiBteSBzZXR1cCksIGJ1dCBJJ2xsIHdhdGNoIGZvciBp
+dCBpbiB0aGUgZm9sbG93aW5nIGRheXMuCgpIb3BlZnVsbHkgdGhpcyBpcyBlaXRoZXIgYSByZWFz
+b25hYmxlIGZpeCBvciBhIGJhc2lzIGZvciBvbmUuCgoKVGhhbmtzLApSYXp2YW4KCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
