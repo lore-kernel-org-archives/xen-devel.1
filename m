@@ -1,10 +1,9 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v7 7/7] KVM: x86: Allow Qemu/KVM to use PVH
- entry point
-Date: Tue, 17 Apr 2018 08:41:39 +0200
-Message-ID: <12a7d9fc-2cff-821c-68c3-05d61c2640e2__34562.8015850254$1523947238$gmane$org@suse.com>
-References: <1523920175-27287-1-git-send-email-maran.wilson@oracle.com>
- <1523920430-27952-1-git-send-email-maran.wilson@oracle.com>
+Subject: Re: [PATCH] x86/xen: Remove use of VLAs
+Date: Tue, 17 Apr 2018 09:16:41 +0200
+Message-ID: <e63f261b-9ef3-5750-20df-555291a8a0d8__5683.49609752676$1523949352$gmane$org@suse.com>
+References: <20180413221146.28476-1-labbott@redhat.com>
+ <7cf66c00-74c2-62bb-81f5-4332313a5a6e@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,10 +11,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=hi3k=hg=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1f8KJD-0006sd-Tg
- for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 06:41:43 +0000
-In-Reply-To: <1523920430-27952-1-git-send-email-maran.wilson@oracle.com>
-Content-Language: de-DE
+ id 1f8Kr8-0000sh-1w
+ for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 07:16:46 +0000
+In-Reply-To: <7cf66c00-74c2-62bb-81f5-4332313a5a6e@oracle.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,28 +23,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Maran Wilson <maran.wilson@oracle.com>, x86@kernel.org, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, kvm@vger.kernel.org, pbonzini@redhat.com
-Cc: rkrcmar@redhat.com, mingo@redhat.com, hpa@zytor.com, boris.ostrovsky@oracle.com, tglx@linutronix.de, roger.pau@citrix.com
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Laura Abbott <labbott@redhat.com>
+Cc: kernel-hardening@lists.openwall.com, x86@kernel.org, linux-kernel@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTcvMDQvMTggMDE6MTMsIE1hcmFuIFdpbHNvbiB3cm90ZToKPiBGb3IgY2VydGFpbiBhcHBs
-aWNhdGlvbnMgaXQgaXMgZGVzaXJhYmxlIHRvIHJhcGlkbHkgYm9vdCBhIEtWTSB2aXJ0dWFsCj4g
-bWFjaGluZS4gSW4gY2FzZXMgd2hlcmUgbGVnYWN5IGhhcmR3YXJlIGFuZCBzb2Z0d2FyZSBzdXBw
-b3J0IHdpdGhpbiB0aGUKPiBndWVzdCBpcyBub3QgbmVlZGVkLCBRZW11IHNob3VsZCBiZSBhYmxl
-IHRvIGJvb3QgZGlyZWN0bHkgaW50byB0aGUKPiB1bmNvbXByZXNzZWQgTGludXgga2VybmVsIGJp
-bmFyeSB3aXRob3V0IHRoZSBuZWVkIHRvIHJ1biBmaXJtd2FyZS4KPiAKPiBUaGVyZSBhbHJlYWR5
-IGV4aXN0cyBhbiBBQkkgdG8gYWxsb3cgdGhpcyBmb3IgWGVuIFBWSCBndWVzdHMgYW5kIHRoZSBB
-QkkKPiBpcyBzdXBwb3J0ZWQgYnkgTGludXggYW5kIEZyZWVCU0Q6Cj4gCj4gICAgaHR0cHM6Ly94
-ZW5iaXRzLnhlbi5vcmcvZG9jcy91bnN0YWJsZS9taXNjL3B2aC5odG1sCj4gCj4gVGhpcyBwYXRj
-aCBlbmFibGVzIFFlbXUgdG8gdXNlIHRoYXQgc2FtZSBlbnRyeSBwb2ludCBmb3IgYm9vdGluZyBL
-Vk0KPiBndWVzdHMuCj4gCj4gU2lnbmVkLW9mZi1ieTogTWFyYW4gV2lsc29uIDxtYXJhbi53aWxz
-b25Ab3JhY2xlLmNvbT4KPiBTdWdnZXN0ZWQtYnk6IEtvbnJhZCBSemVzenV0ZWsgV2lsayA8a29u
-cmFkLndpbGtAb3JhY2xlLmNvbT4KPiBTdWdnZXN0ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9y
-aXMub3N0cm92c2t5QG9yYWNsZS5jb20+Cj4gVGVzdGVkLWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJv
-cmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgoKUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpn
-cm9zc0BzdXNlLmNvbT4KCllvdSBtaWdodCB3YW50IHRvIHNlbmQgYSBmb2xsb3ctdXAgcGF0Y2gg
-dG8gcmVuYW1lIHRoZSBmdW5jdGlvbnMgaW4KYXJjaC94ODYvcGxhdGZvcm0vcHZoLyogZnJvbSB4
-ZW5fKiB0byBwdmhfKi4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+T24gMTYvMDQvMTggMTU6MjcsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiBPbiAwNC8xMy8yMDE4
+IDA2OjExIFBNLCBMYXVyYSBBYmJvdHQgd3JvdGU6Cj4+IFRoZXJlJ3MgYW4gb25nb2luZyBlZmZv
+cnQgdG8gcmVtb3ZlIFZMQXNbMV0gZnJvbSB0aGUga2VybmVsIHRvIGV2ZW50dWFsbHkKPj4gdHVy
+biBvbiAtV3ZsYS4gVGhlIGZldyBWTEFzIGluIHVzZSBoYXZlIGFuIHVwcGVyIGJvdW5kIGJhc2Vk
+IG9uIGEgc2l6ZQo+PiBvZiA2NEsuIFRoaXMgZG9lc24ndCBwcm9kdWNlIGFuIGV4Y2Vzc2l2ZWx5
+IGxhcmdlIHN0YWNrIHNvIGp1c3Qgc3dpdGNoCj4+IHRoZSB1cHBlciBib3VuZC4KPj4KPj4gWzFd
+IGh0dHBzOi8vbGttbC5vcmcvbGttbC8yMDE4LzMvNy82MjEKPj4KPj4gU2lnbmVkLW9mZi1ieTog
+TGF1cmEgQWJib3R0IDxsYWJib3R0QHJlZGhhdC5jb20+Cj4+IC0tLQo+PiAgYXJjaC94ODYveGVu
+L2VubGlnaHRlbl9wdi5jIHwgNiArKy0tLS0KPj4gIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlv
+bnMoKyksIDQgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS9hcmNoL3g4Ni94ZW4vZW5s
+aWdodGVuX3B2LmMgYi9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMKPj4gaW5kZXggYzM2ZDIz
+YWE2YzM1Li5kOTZhNWE1MzVjYmIgMTAwNjQ0Cj4+IC0tLSBhL2FyY2gveDg2L3hlbi9lbmxpZ2h0
+ZW5fcHYuYwo+PiArKysgYi9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMKPj4gQEAgLTQyMSw4
+ICs0MjEsNyBAQCBzdGF0aWMgdm9pZCB4ZW5fbG9hZF9nZHQoY29uc3Qgc3RydWN0IGRlc2NfcHRy
+ICpkdHIpCj4+ICB7Cj4+ICAJdW5zaWduZWQgbG9uZyB2YSA9IGR0ci0+YWRkcmVzczsKPj4gIAl1
+bnNpZ25lZCBpbnQgc2l6ZSA9IGR0ci0+c2l6ZSArIDE7Cj4+IC0JdW5zaWduZWQgcGFnZXMgPSBE
+SVZfUk9VTkRfVVAoc2l6ZSwgUEFHRV9TSVpFKTsKPiAKPiAKPiAKPiBJc24ndCBkdHItPnNpemUg
+YWx3YXlzIGVpdGhlciBHRFRfU0laRSBvciAwPwoKR0RUX1NJWkUgLSAxIDotKQoKPj4gLQl1bnNp
+Z25lZCBsb25nIGZyYW1lc1twYWdlc107Cj4+ICsJdW5zaWduZWQgbG9uZyBmcmFtZXNbRElWX1JP
+VU5EX1VQKFNaXzY0SywgUEFHRV9TSVpFKV07CgpTbyB3ZSBjb3VsZCBqdXN0IGdvIHdpdGggb25l
+IGZyYW1lIGFuZCBtb2RpZnkgdGhlIEJVR19PTigpIGZ1cnRoZXIgYmVsb3cKYWNjb3JkaW5nbHku
+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
