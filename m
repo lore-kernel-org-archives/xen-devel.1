@@ -1,18 +1,34 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [RFC PATCH 2/3] xen: Refactor migration
-Date: Tue, 17 Apr 2018 09:20:33 +0200
-Message-ID: <b7df732fe16bd1fa91608837371a37cc2233f5ec.camel@suse.com>
-References: <20180411122518.26270-1-george.dunlap@citrix.com>
- <20180411122518.26270-3-george.dunlap@citrix.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: Weird altp2m behaviour when switching early to a
+ new view
+Date: Tue, 17 Apr 2018 10:24:36 +0300
+Message-ID: <a47a4373-7b57-bde3-cb35-d4d3a5b05678@bitdefender.com>
+References: <a592fcb3-c2c6-bd83-01a4-0ac7ba9f3fa5@bitdefender.com>
+ <d0ae9d3e-31ee-a03b-dc9d-b86ceb92fe52@citrix.com>
+ <b21c7573-7ca0-9ccc-eac7-5ff351fc54ce@bitdefender.com>
+ <3bc816d7-2426-470a-36a3-83e2cd5c81ad@bitdefender.com>
+ <3076ce00-8655-81fe-6dc1-b891da638ea2@bitdefender.com>
+ <efaa504e-bc4f-243d-f558-cab3dc31b472@citrix.com>
+ <de3ffdd5-a3ba-d89a-5ebc-6f17006ae75b@bitdefender.com>
+ <CAFLBxZbjif+AeMPrc1CkbyjEiSGHJEW3tGNmMqZtCvp+3pOGeg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7211195849941985921=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=yslv=hg=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1f8Kv8-0001Xz-PH
- for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 07:20:54 +0000
-In-Reply-To: <20180411122518.26270-3-george.dunlap@citrix.com>
+ <srs0=5zw6=hg=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1f8Kyo-0001iu-4t
+ for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 07:24:42 +0000
+Received: from mx-sr.buh.bitdefender.com (mx-sr.buh.bitdefender.biz
+ [10.17.80.103])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id F2D3E310C60A
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Apr 2018 11:40:43 +0300 (EEST)
+Received: from smtp03.buh.bitdefender.org (smtp.bitdefender.biz [10.17.80.77])
+ by mx-sr.buh.bitdefender.com (Postfix) with ESMTP id 585317FC40
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Apr 2018 10:24:39 +0300 (EEST)
+In-Reply-To: <CAFLBxZbjif+AeMPrc1CkbyjEiSGHJEW3tGNmMqZtCvp+3pOGeg@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,136 +37,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Olaf Hering <olaf@aepfle.de>
+To: George Dunlap <dunlapg@umich.edu>
+Cc: "Tian, Kevin" <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Tim Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7211195849941985921==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-T7LVN8/c9F3m5miRBoyB"
-
-
---=-T7LVN8/c9F3m5miRBoyB
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2018-04-11 at 13:25 +0100, George Dunlap wrote:
-> The current sequence to initiate vcpu migration is inefficent and
-> error-prone:
->=20
-> - The initiator sets VPF_migraging with the lock held, then drops the
->   lock and calls vcpu_sleep_nosync(), which immediately grabs the
-> lock
->   again
->=20
-> - A number of places unnecessarily check for v->pause_flags in
-> between
->   those two
->=20
-> - Every call to vcpu_migrate() must be prefaced with
->   vcpu_sleep_nosync() or introduce a race condition; this code
->   duplication is error-prone
->=20
-It's not only error prone, it's the cause of actual bugs! :-P
-
-That's why I would also change the subject of the series into something
-like "fix races happening during vcpu migration"
-
-> - In the event that v->is_running is true at the beginning of
->   vcpu_migrate(), it's almost certain that vcpu_migrate() will end up
->   being called in context_switch() as well; we might as well simply
->   let it run there and save the duplicated effort (which will be
->   non-negligible).
->=20
-> Instead, introduce vcpu_migrate_start() to initiate the process.
-> vcpu_migrate_start() is called with the scheduling lock held.  It not
-> only sets VPF_migrating, but also calls vcpu_sleep_nosync_locked()
-> (which will automatically do nothing if there's nothing to do).
->=20
-> Rename vcpu_migrate() to vcpu_migrate_finish().  Check for v-
-> >is_running and
-> pause_flags & VPF_migrating at the top and return if appropriate.
->=20
-> Then the way to initiate migration is consistently:
->=20
-> * Grab lock
-> * vcpu_migrate_start()
-> * Release lock
-> * vcpu_migrate_finish()
->=20
-> Signed-off-by: George Dunlap <george.dunlap@citrix.com>
-
-> --- a/xen/common/schedule.c
-> +++ b/xen/common/schedule.c
-> @@ -593,13 +593,33 @@ static void vcpu_move_nosched(struct vcpu *v,
-> unsigned int new_cpu)
->      sched_move_irqs(v);
->  }
-> =20
-> -static void vcpu_migrate(struct vcpu *v)
-> +/*
-> + * Initiating migration
-> + *=20
-> + * In order to migrate, we need the vcpu in question to have stopped
-> + * running and be taken off the runqueues; we also need to hold the
-> lock=20
-> + */
->
-Perhaps "and SCHED_OP(sleep) to have been called on it", instead of
-"and be taken off the runqueues", if we don't want to even mention
-runqueues in schedule.c.
-
-And there are a couple of instances of whitespace damaging.
-
-Nevertheless,
-
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-And I guess we can add a 'Tested-by: Olaf Hering', as he actually did
-that, what do you say Olaf?
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-T7LVN8/c9F3m5miRBoyB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrVoEEACgkQFkJ4iaW4
-c+4UUhAA5zPwspYWYIq62Ck4OQGBv3tV6emx74yGy8edvyHc8Ai318mMK3wbk4vU
-RRd1dMkUUXKRyB7nTDCbG+tEJ+NRJaJkRVWfM84/RsKcXM4AceBwC7/I6CI/LfgM
-v5p5NlQ0AuOufDs7qPse7RKJO0JOgGtC/ejWpKgC9BWtyc6W33FAbFkA3YiPHw0J
-xCjjkKnV0nvWdsLcNk4ND63BnalyEH8cwNMpt6v23/4fpKUNiKDny4pFLa5grWez
-7nXo61ijf3S0kqXx+Rx6x56+w2jea0l7hWUMfLvGTwdjx3cdmHrzTaRfn0N+Kftx
-ujwQ0yvwIzodXP8cqYT4MMp8dLBDwx1HoHiZV3v5Xnnig1JpYzyUBK8ayD8v0ZuI
-u9LN3QtsN1vHkc7Rjn0AIwcGgnaf8G2K8RtOv6TNzfjY3h+pv2QMo1sm8K09YSKj
-0/W2MwJ/MuazNueEJrRdpz1yzMrT1c6SF7QBpeLwUXITCTUpG6PQbyWvRqM8CB6U
-Vyoah15jywZlh75ly4zdorLyJnWp0DrbMPNdj5yRGD2N8Ot3jmecve+TJ+yEDfok
-CfhkRvdnOjHY7sjaWLX6ihxBXLin9NayrGpXuwOObER1dtk90gRcQmFN2P/Hqjs7
-ujOQ3Ekl/IIyA4aQnNQnyFPtJu7WJb581D7c8fTT4y5xO1bu8aE=
-=IUi4
------END PGP SIGNATURE-----
-
---=-T7LVN8/c9F3m5miRBoyB--
-
-
-
---===============7211195849941985921==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7211195849941985921==--
+CgpPbiAwNC8xNi8yMDE4IDExOjIxIFBNLCBHZW9yZ2UgRHVubGFwIHdyb3RlOgo+IE9uIE1vbiwg
+QXByIDE2LCAyMDE4IGF0IDc6NDYgUE0sIFJhenZhbiBDb2pvY2FydQo+IDxyY29qb2NhcnVAYml0
+ZGVmZW5kZXIuY29tPiB3cm90ZToKPj4gT24gMDQvMTYvMjAxOCAwODo0NyBQTSwgR2VvcmdlIER1
+bmxhcCB3cm90ZToKPj4+IE9uIDA0LzEzLzIwMTggMDM6NDQgUE0sIFJhenZhbiBDb2pvY2FydSB3
+cm90ZToKPj4+PiBPbiAwNC8xMS8yMDE4IDExOjA0IEFNLCBSYXp2YW4gQ29qb2NhcnUgd3JvdGU6
+Cj4+Pj4+IERlYnVnZ2luZyBjb250aW51ZXMuCj4+Pj4KPj4+PiBGaW5hbGx5LCB0aGUgYXR0YWNo
+ZWQgcGF0Y2ggc2VlbXMgdG8gZ2V0IHRoZSBkaXNwbGF5IHVuc3R1Y2sgaW4gbXkKPj4+PiBzY2Vu
+YXJpbywgYWx0aG91Z2ggZm9yIG9uZSBndWVzdCBJIGdldDoKPj4+Pgo+Pj4+IChYRU4pIGQydjAg
+VW5leHBlY3RlZCB2bWV4aXQ6IHJlYXNvbiA0OQo+Pj4+IChYRU4pIGRvbWFpbl9jcmFzaCBjYWxs
+ZWQgZnJvbSB2bXguYzo0MTIwCj4+Pj4gKFhFTikgRG9tYWluIDIgKHZjcHUjMCkgY3Jhc2hlZCBv
+biBjcHUjMToKPj4+PiAoWEVOKSAtLS0tWyBYZW4tNC4xMS11bnN0YWJsZSAgeDg2XzY0ICBkZWJ1
+Zz15ICAgTm90IHRhaW50ZWQgXS0tLS0KPj4+PiAoWEVOKSBDUFU6ICAgIDEKPj4+PiAoWEVOKSBS
+SVA6ICAgIDAwMTA6WzxmZmZmZjk2MDAwODQyMzU0Pl0KPj4+PiAoWEVOKSBSRkxBR1M6IDAwMDAw
+MDAwMDAwMTAyNDYgICBDT05URVhUOiBodm0gZ3Vlc3QgKGQydjApCj4+Pj4gKFhFTikgcmF4OiBm
+ZmZmZjg4MDAzMDAwMDAwICAgcmJ4OiBmZmZmZjkwMGMwMDgzZGIwICAgcmN4OiAwMDAwMDAwMGFh
+NTVhYTU1Cj4+Pj4gKFhFTikgcmR4OiBmZmZmZmE4MDA0MWJkYzQxICAgcnNpOiBmZmZmZjkwMGMw
+MGM2OWEwICAgcmRpOiAwMDAwMDAwMDAwMDAwMDAxCj4+Pj4gKFhFTikgcmJwOiAwMDAwMDAwMDAw
+MDAwMDAwICAgcnNwOiBmZmZmZjg4MDAyZWU5ZWYwICAgcjg6ICBmZmZmZmE4MDA0MWJkYzQwCj4+
+Pj4gKFhFTikgcjk6ICBmZmZmZjgwMDAxODEwZTgwICAgcjEwOiBmZmZmZmE4MDAzNDJhYTcwICAg
+cjExOiBmZmZmZjg4MDAyZWU5ZTgwCj4+Pj4gKFhFTikgcjEyOiAwMDAwMDAwMDAwMDAwMDA1ICAg
+cjEzOiAwMDAwMDAwMDAwMDAwMDAxICAgcjE0OiBmZmZmZjkwMGMwMGMwOGIwCj4+Pj4gKFhFTikg
+cjE1OiAwMDAwMDAwMDAwMDAwMDAxICAgY3IwOiAwMDAwMDAwMDgwMDUwMDMxICAgY3I0OiAwMDAw
+MDAwMDAwMDQwNmY4Cj4+Pj4gKFhFTikgY3IzOiAwMDAwMDAwMGVmNzcxMDAwICAgY3IyOiBmZmZm
+ZjkwMGMwMGM4MDAwCj4+Pj4gKFhFTikgZnNiOiAwMDAwMDAwMGZmZmRlMDAwICAgZ3NiOiBmZmZm
+ZjgwMDAxODEwZDAwICAgZ3NzOiAwMDAwMDdmZmZmZmRjMDAwCj4+Pj4gKFhFTikgZHM6IDAwMmIg
+ICBlczogMDAyYiAgIGZzOiAwMDUzICAgZ3M6IDAwMmIgICBzczogMDAxOCAgIGNzOiAwMDEwCj4+
+Pj4KPj4+PiBpLmUuIEVYSVRfUkVBU09OX0VQVF9NSVNDT05GSUcgLSBzbyBub3Qgb2YgdGhlIHdv
+b2RzIHlldC4gSSBhbSBob3BpbmcKPj4+PiBzb21lYm9keSBtb3JlIGZhbWlsaWFyIHdpdGggdGhl
+IGNvZGUgY2FuIHBvaW50IHRvIGEgbW9yZSBlbGVnYW50Cj4+Pj4gc29sdXRpb24gaWYgb25lIGV4
+aXN0cy4KPj4+Cj4+PiBJIHRoaW5rIEkgaGF2ZSBhbiBpZGVhIHdoYXQncyBnb2luZyBvbiwgYnV0
+IGl0J3MgY29tcGxpY2F0ZWQuIDotKQo+Pj4KPj4+IEJhc2ljYWxseSwgdGhlIGxvZ2RpcnR5IGZ1
+bmN0aW9uYWxpdHkgaXNuJ3Qgc2ltcGxlLCBhbmQgbmVlZHMgY2FyZWZ1bAo+Pj4gdGhvdWdodCBv
+biBob3cgdG8gaW50ZWdyYXRlIGl0LiAgSSdsbCB3cml0ZSBzb21lIG1vcmUgdG9tb3Jyb3csIGFu
+ZCBzZWUKPj4+IGlmIEkgY2FuIGNvbWUgdXAgd2l0aCBhIHNvbHV0aW9uLgo+Pgo+PiBJIHRoaW5r
+IEkga25vdyB3aHkgdGhpcyBoYXBwZW5zIGZvciB0aGUgb25lIGd1ZXN0IC0gdGhlIG90aGVyIGd1
+ZXN0cwo+PiBzdGFydCBhdCBhIGNlcnRhaW4gcmVzb2x1dGlvbiBkaXNwbGF5LXdpc2UgYW5kIHN0
+YXkgdGhhdCB3YXkgdW50aWwgc2h1dGRvd24uCj4+Cj4+IFRoaXMgcGFydGljdWxhciBndWVzdCBz
+dGFydHMgd2l0aCBhIGxhcmdlciBzY3JlZW4sIHRoZW4gZ29lcyB0byByb3VnaGx5Cj4+IDIvM3Jk
+cyBvZiBpdCwgdGhlbiB0cmllcyB0byBnbyBiYWNrIHRvIHRoZSBpbml0aWFsIGxhcmdlciBvbmUg
+LSBhdCB3aGljaAo+PiBwb2ludCB0aGUgYWJvdmUgaGFwcGVucy4gSSBhc3N1bWUgdGhpcyBjb3Jy
+ZXNwb25kcyB0byBzb21lIHBhZ2VzIGJlaW5nCj4+IHJlbW92ZWQgYW5kL29yIGFkZGVkLiBJJ2xs
+IHRlc3QgdGhpcyB0aGVvcnkgbW9yZSB0b21vcnJvdyAtIGlmIGl0J3MKPj4gY29ycmVjdCBJIHNo
+b3VsZCBiZSBhYmxlIHRvIHJlcHJvZHVjZSB0aGUgY3Jhc2ggKHdpdGggdGhlIHBhdGNoKSBieQo+
+PiBzaW1wbHkgcmVzZXR0aW5nIHRoZSBzY3JlZW4gcmVzb2x1dGlvbiAoaW5jcmVhc2luZyBpdCku
+Cj4gCj4gVGhlIHRyaWNrIGlzIHRoYXQgcDJtX2NoYW5nZV90eXBlIGRvZXNuJ3QgYWN0dWFsbHkg
+aXRlcmF0ZSBvdmVyIHRoZQo+IGVudGlyZSBwMm0gcmFuZ2UsIGluZGl2aWR1YWxseSBjaGFuZ2lu
+ZyBlbnRyaWVzIGFzIGl0IGdvZXMuICBJbnN0ZWFkCj4gaXQgbWlzY29uZmlndXJlcyB0aGUgZW50
+cmllcyBhdCB0aGUgdG9wLWxldmVsLCB3aGljaCBjYXVzZXMgdGhlIGtpbmRzCj4gb2YgZmF1bHRz
+IHNob3duIGFib3ZlLiAgQXMgaXQgZ2V0cyBmYXVsdHMgZm9yIGVhY2ggZW50cnksIGl0IGNoZWNr
+cwo+IHRoZSBjdXJyZW50IHR5cGUsIHRoZSBsb2dkaXJ0eSByYW5nZXMsIGFuZCB0aGUgZ2xvYmFs
+IGxvZ2RpcnR5IGJpdCB0bwo+IGRldGVybWluZSB3aGF0IHRoZSBuZXcgdHlwZXMgc2hvdWxkIGJl
+Lgo+IAo+IFlvdXIgcGF0Y2ggbWFrZXMgaXQgc28gdGhhdCBhbGwgdGhlIGFsdHAybXMgbm93IGdl
+dCB0aGUKPiBtaXNjb25maWd1cmF0aW9uIHdoZW4gdGhlIGxvZ2RpcnR5IHJhbmdlIGlzIGNoYW5n
+ZWQ7IGJ1dCBjbGVhcmx5Cj4gaGFuZGxpbmcgdGhlIG1pc2NvbmZpZ3VyYXRpb24gaXNuJ3QgaW50
+ZWdyYXRlZCBwcm9wZXJseSB3aXRoIHRoZQo+IGFsdHAybSBzeXN0ZW0geWV0LiAgRG9pbmcgaXQg
+cmlnaHQgbWF5IHRha2Ugc29tZSB0aG91Z2h0LgoKVGhhbmtzIGZvciBpbnZlc3RpZ2F0aW5nISBT
+dXJlIGVub3VnaCwgbXkgc3VzcGljaW9uIHdhcyBjb3JyZWN0IC0gYWxsIGl0CnRha2VzIHRvIGdl
+dCB0aGF0IGRvbWFpbiBjcmFzaCBpcyB0byBjaGFuZ2UgdGhlIFZNIHNjcmVlbiByZXNvbHV0aW9u
+LgoKClRoYW5rcywKUmF6dmFuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
