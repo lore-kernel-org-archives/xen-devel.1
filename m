@@ -1,21 +1,19 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
-Subject: Re: [PATCH] xen/pt: use address_space_memory object for
- memory region hooks
-Date: Tue, 17 Apr 2018 15:37:23 +0100
-Message-ID: <20180417143723.GN2208__35515.6233454638$1523975773$gmane$org@perard>
-References: <c7d408cb-454c-2322-3812-a7cacecdbe5f@citrix.com>
+From: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [PATCH v2 0/7] SUPPORT.md: Distinguish descriptions
+ from caveats
+Date: Tue, 17 Apr 2018 15:46:55 +0100
+Message-ID: <1523976422-19799-1-git-send-email-ian.jackson@eu.citrix.com>
+References: <fa4e69bb-8278-4aec-960b-c0db32ef5503@cardoe.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=3xac=hg=citrix.com=prvs=63880a4e9=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1f8Rjb-0003Yf-Er
- for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 14:37:27 +0000
-Content-Disposition: inline
-In-Reply-To: <c7d408cb-454c-2322-3812-a7cacecdbe5f@citrix.com>
- <635d45e1-2d97-6313-2348-1e2bc9061d8b@citrix.com>
+ <srs0=uw82=hg=citrix.com=prvs=638ae18cd=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1f8Rt0-0004Is-DN
+ for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 14:47:10 +0000
+In-Reply-To: <fa4e69bb-8278-4aec-960b-c0db32ef5503@cardoe.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,32 +22,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Igor Druzhinin <igor.druzhinin@citrix.com>
-Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, qemu-devel@nongnu.org, ross.lagerwall@citrix.com
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, George Dunlap <george.dunlap@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBBcHIgMTcsIDIwMTggYXQgMDM6MTg6NTVQTSArMDEwMCwgSWdvciBEcnV6aGluaW4g
-d3JvdGU6Cj4gT24gMTcvMDQvMTggMTU6MTUsIEFudGhvbnkgUEVSQVJEIHdyb3RlOgo+ID4gT24g
-RnJpLCBBcHIgMDYsIDIwMTggYXQgMTA6MjE6MjNQTSArMDEwMCwgSWdvciBEcnV6aGluaW4gd3Jv
-dGU6Cj4gPj4gVGhlIGlzc3VlIHRoYXQgdGhlIG9yaWdpbmFsIHBhdGNoIHRyaWVkIHRvIHdvcmth
-cm91bmQgKHVuZXZlbiBudW1iZXIgb2YKPiA+PiByZWdpb25fYWRkL2RlbCBjYWxscyBvbiBkZXZp
-Y2UgYXR0YWNoL2RldGFjaCkgd2FzIGZpeGVkIGluIGxhdGVyIFFFTVUKPiA+PiB2ZXJzaW9ucy4K
-PiA+IAo+ID4gRG8geW91IGtub3cgd2hlbiB0aGUgaXNzdWUgd2FzIGZpeGVkPwo+ID4gCj4gCj4g
-SSBoYXZlbid0IHRyYWNrZWQgZG93biBhIHBhcnRpY3VsYXIgdmVyc2lvbiBidXQgdGhlIHByZXZp
-b3VzIGJlaGF2aW9yIG9mCj4gbWVtb3J5X2xpc3RlbmVyX3VucmVnaXN0ZXIoKSB3YXMgdG8gcmVt
-b3ZlIHRoZSBsaXN0ZW5lciBmcm9tIHRoZSBsaXN0Cj4gd2l0aG91dCBjYWxsaW5nIHRoZSBjYWxs
-YmFjay4gSXQgaGFzIGNoYW5nZWQgc2luY2UgdGhlbiBhbmQgbm93IHRoZQo+IGNhbGxiYWNrIGlz
-IGNhbGxlZCBpbiBsaXN0ZW5lcl9kZWxfYWRkcmVzc19zcGFjZSgpLgoKT24gVHVlLCBBcHIgMTcs
-IDIwMTggYXQgMDM6Mjk6NDJQTSArMDEwMCwgSWdvciBEcnV6aGluaW4gd3JvdGU6Cj4gSSB0aGlu
-ayBpdCdzIHRoaXMgY29tbWl0Ogo+IAo+IGNvbW1pdCBkMjU4MzZjYWZkNzUwODA5MGQyMTFlOTdh
-Y2ZjMGFiYzVhZTg4ZGFhCj4gQXV0aG9yOiBQZXRlciBYdSA8cGV0ZXJ4QHJlZGhhdC5jb20+Cj4g
-RGF0ZTogICBNb24gSmFuIDIyIDE0OjAyOjQ0IDIwMTggKzA4MDAKPiAKPiAgICAgbWVtb3J5OiBk
-byBleHBsaWNpdCBjbGVhbnVwIHdoZW4gcmVtb3ZlIGxpc3RlbmVycwoKCkkgdGhpbmsgdGhlc2Ug
-aW5mb3JtYXRpb24gb3VnaHQgdG8gYmUgaW4gdGhlIGNvbW1pdCBtZXNzYWdlLCBpbgpwYXJ0aWN1
-bGFyIHRoZSBmYWN0IHRoYXQgdGhlIGNhbGxiYWNrIHdhc24ndCBjYWxsIG9uIGRldGFjaC4gQW5k
-IHdpdGgKdGhlIGNvbW1pdCBtZXNzYWdlIHVwZGF0ZWQsIHlvdSBjYW4gYWRkIG15OgpBY2tlZC1i
-eTogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+CgpUaGFua3MsCgot
-LSAKQW50aG9ueSBQRVJBUkQKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+VGhlIG5ldyBzdXBwb3J0IG1hdHJpeCBvdXRwdXQgcHV0cyBhIFsqXSBhZnRlciBlYWNoIGVudHJ5
+IGluIHRoZQpzdXBwb3J0IG1hdHJpeCBpbiBtYW55IGNhc2VzIHdoZXJlIHRoZSBsaW5rZWQtdG8g
+dGV4dCBpcyBzaW1wbHkgYQpsb25nZXIgZGVzY3JpcHRpb24gb2YgdGhlIGZlYXR1cmUuCgpSZW1l
+ZHkgdGhpcyBieSBkaXN0aW5ndWlzaGluZyB0ZXh0IHdoaWNoIGV4cGFuZHMgb24gYSBmZWF0dXJl
+CmRlc2NyaXB0aW9uIGZyb20gdGV4dCB3aGljaCBxdWFsaWZpZXMgaXRzIHN1cHBvcnQgc3RhdHVz
+LgoKVGhlcmUgYXJlIDMgcGF0Y2hlcyB0byBwcm9jZXNzaW5nIG1hY2hpbmVyeSwgZm9sbG93ZWQg
+YnkgdHdvIHBhdGNoZXMKdG8gU1VQUE9SVC5tZCAob25lIHRvIG1ha2UgdGhlIGRpc3RpbmN0aW9u
+LCB0aHJvdWdob3V0LCBhbmQgb25lIHRvCmRvY3VtZW50IGl0KTsgZm9sbG93ZWQgYnkgdHdvIHBh
+dGNoZXMgdG8gZml4IGEgYnVnIChsb2dpY2FsbHkgdGhlc2UKc2hvdWxkIGNvbWUgZmlyc3QsIGJ1
+dCByZWJhc2luZyB0aGVtIGlzIGFubm95aW5nKS4KClRoZSBwYXRjaGVzIHRvIFNVUFBPUlQubWQg
+d291bGQgaWRlYWxseSBnbyB0byA0LjEwIHRvby4KCkV4YW1wbGUgb3V0cHV0OgogIGh0dHBzOi8v
+eGVuYml0cy54ZW4ub3JnL3Blb3BsZS9pd2ovMjAxOC9zdXBwb3J0LW1hdHJpeC1leGFtcGxlLUIt
+djIvdC5odG1sCgogICByIDEvNyAgZG9jcy9wYXJzZS1zdXBwb3J0LW1kOiBpbnRlcm5hbHM6IElu
+dHJvZHVjZSBkb2NyZWZfYQogICByIDIvNyAgZG9jcy9wYXJzZS1zdXBwb3J0LW1kOiBpbnRlcm5h
+bHM6IFJlbmFtZSBIYXNUZXh0IHRvCiAgIHIgMy83ICBTVVBQT1JULm1kLCBzdXBwb3J0IG1hdHJp
+eDogVHJlYXQgY29tbWVudGFyeSBiZWZvcmUKICAqciA0LzcgIFNVUFBPUlQubWQ6IE1vdmUgZGVz
+Y3JpcHRpb25zIHVwIGJlZm9yZSBTdGF0dXMgaW5mbwogYSByIDUvNyAgU1VQUE9SVC5tZDogRG9j
+dW1lbnQgdGhlIG5ldyB0ZXh0IG9yZGVyaW5nIHJ1bGUKICArICA2LzcgIGRvY3MvcGFyc2Utc3Vw
+cG9ydC5tZDogQWRkIHNvbWUgbmV3bGluZXMgdG8gdGhlIHRhYmxlCiAgKyAgNy83ICBkb2NzL3Bh
+cnNlLXN1cHBvcnQtbWQ6IENvcnJlY3RseSBoYW5kbGUgZm9vdG5vdGVzIGZvcgoKICsgPSBOZXcg
+cGF0Y2ggaW4gdjIKICogPSBBbWVuZGVkIHBhdGNoIGluIHYyCiByID0gUmVsZWFzZS1hY2tlZAog
+YSA9IEFja2VkIGJ5IGFwcHJvcHJpYXRlIG1haW50YWluZXIgYW5kL29yIGNvbW11bml0eSBtYW5h
+Z2VyCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
