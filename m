@@ -1,24 +1,32 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH 0/1] drm/xen-zcopy: Add Xen zero-copy helper
- DRM driver
-Date: Tue, 17 Apr 2018 11:19:22 +0300
-Message-ID: <be725bee-21ed-6ae2-8b6f-2d7f8101ed4a__6700.74830200082$1523953116$gmane$org@gmail.com>
-References: <20180329131931.29957-1-andr2000@gmail.com>
- <5d8fec7f-956c-378f-be90-f45029385740@gmail.com>
- <20180416192905.GA18096@downor-Z87X-UD5H>
- <20180417075928.GT31310@phenom.ffwll.local>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: Weird altp2m behaviour when switching early to a
+ new view
+Date: Tue, 17 Apr 2018 11:24:58 +0300
+Message-ID: <00b52489-51e5-6bc8-ccc2-7b44d2dec107@bitdefender.com>
+References: <a592fcb3-c2c6-bd83-01a4-0ac7ba9f3fa5@bitdefender.com>
+ <d0ae9d3e-31ee-a03b-dc9d-b86ceb92fe52@citrix.com>
+ <b21c7573-7ca0-9ccc-eac7-5ff351fc54ce@bitdefender.com>
+ <3bc816d7-2426-470a-36a3-83e2cd5c81ad@bitdefender.com>
+ <3076ce00-8655-81fe-6dc1-b891da638ea2@bitdefender.com>
+ <efaa504e-bc4f-243d-f558-cab3dc31b472@citrix.com>
+ <de3ffdd5-a3ba-d89a-5ebc-6f17006ae75b@bitdefender.com>
+ <CAFLBxZbjif+AeMPrc1CkbyjEiSGHJEW3tGNmMqZtCvp+3pOGeg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="------------08B53AE38CF9E9DD1ACBD651"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wy12=hg=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1f8Lpn-0006iF-64
- for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 08:19:27 +0000
-Received: by mail-lf0-x243.google.com with SMTP id r125-v6so9279816lfe.2
- for <xen-devel@lists.xenproject.org>; Tue, 17 Apr 2018 01:19:25 -0700 (PDT)
-In-Reply-To: <20180417075928.GT31310@phenom.ffwll.local>
+ <srs0=5zw6=hg=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1f8LvD-0007PJ-K8
+ for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 08:25:03 +0000
+Received: from mx-sr.buh.bitdefender.com (mx-sr.buh.bitdefender.biz
+ [10.17.80.103])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id D7F7F310C60A
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Apr 2018 12:41:05 +0300 (EEST)
+Received: from smtp03.buh.bitdefender.org (smtp.bitdefender.biz [10.17.80.77])
+ by mx-sr.buh.bitdefender.com (Postfix) with ESMTP id 468337FB58
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Apr 2018 11:25:01 +0300 (EEST)
+In-Reply-To: <CAFLBxZbjif+AeMPrc1CkbyjEiSGHJEW3tGNmMqZtCvp+3pOGeg@mail.gmail.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,155 +36,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dongwon Kim <dongwon.kim@intel.com>, jgross@suse.com, Artem Mygaiev <Artem_Mygaiev@epam.com>, konrad.wilk@oracle.com, airlied@linux.ie, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, "Potrola, MateuszX" <mateuszx.potrola@intel.com>, daniel.vetter@intel.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+To: George Dunlap <dunlapg@umich.edu>
+Cc: "Tian, Kevin" <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Tim Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMTcvMjAxOCAxMDo1OSBBTSwgRGFuaWVsIFZldHRlciB3cm90ZToKPiBPbiBNb24sIEFw
-ciAxNiwgMjAxOCBhdCAxMjoyOTowNVBNIC0wNzAwLCBEb25nd29uIEtpbSB3cm90ZToKPj4gWWVh
-aCwgSSBkZWZpbml0ZWx5IGFncmVlIG9uIHRoZSBpZGVhIG9mIGV4cGFuZGluZyB0aGUgdXNlIGNh
-c2UgdG8gdGhlCj4+IGdlbmVyYWwgZG9tYWluIHdoZXJlIGRtYWJ1ZiBzaGFyaW5nIGlzIHVzZWQu
-IEhvd2V2ZXIsIHdoYXQgeW91IGFyZQo+PiB0YXJnZXR0aW5nIHdpdGggcHJvcG9zZWQgY2hhbmdl
-cyBpcyBpZGVudGljYWwgdG8gdGhlIGNvcmUgZGVzaWduIG9mCj4+IGh5cGVyX2RtYWJ1Zi4KPj4K
-Pj4gT24gdG9wIG9mIHRoaXMgYmFzaWMgZnVuY3Rpb25hbGl0aWVzLCBoeXBlcl9kbWFidWYgaGFz
-IGRyaXZlciBsZXZlbAo+PiBpbnRlci1kb21haW4gY29tbXVuaWNhdGlvbiwgdGhhdCBpcyBuZWVk
-ZWQgZm9yIGRtYS1idWYgcmVtb3RlIHRyYWNraW5nCj4+IChubyBmZW5jZSBmb3J3YXJkaW5nIHRo
-b3VnaCksIGV2ZW50IHRyaWdnZXJpbmcgYW5kIGV2ZW50IGhhbmRsaW5nLCBleHRyYQo+PiBtZXRh
-IGRhdGEgZXhjaGFuZ2UgYW5kIGh5cGVyX2RtYWJ1Zl9pZCB0aGF0IHJlcHJlc2VudHMgZ3JlZnMK
-Pj4gKGdyZWZzIGFyZSBzaGFyZWQgaW1wbGljaXRseSBvbiBkcml2ZXIgbGV2ZWwpCj4gVGhpcyBy
-ZWFsbHkgaXNuJ3QgYSBwb3NpdGl2ZSBkZXNpZ24gYXNwZWN0IG9mIGh5cGVyZG1hYnVmIGltby4g
-VGhlIGNvcmUKPiBjb2RlIGluIHhlbi16Y29weSAoaWdub3JpbmcgdGhlIGlvY3RsIHNpZGUsIHdo
-aWNoIHdpbGwgYmUgY2xlYW5lZCB1cCkgaXMKPiB2ZXJ5IHNpbXBsZSAmIGNsZWFuLgo+Cj4gSWYg
-dGhlcmUncyBhIGNsZWFyIG5lZWQgbGF0ZXIgb24gd2UgY2FuIGV4dGVuZCB0aGF0LiBCdXQgZm9y
-IG5vdyB4ZW4temNvcHkKPiBzZWVtcyB0byBjb3ZlciB0aGUgYmFzaWMgdXNlLWNhc2UgbmVlZHMs
-IHNvIGdldHMgdGhlIGpvYiBkb25lLgpBZnRlciB3ZSBkZWNpZGVkIHRvIHJlbW92ZSBEUk0gUFJJ
-TUUgY29kZSBmcm9tIHRoZSB6Y29weSBkcml2ZXIKSSB0aGluayB3ZSBjYW4gZXh0ZW5kIHRoZSBl
-eGlzdGluZyBYZW4gZHJpdmVycyBpbnN0ZWFkIG9mIGludHJvZHVjaW5nCmEgbmV3IG9uZToKZ250
-ZGV2IFsxXSwgWzJdIC0gdG8gaGFuZGxlIGV4cG9ydC9pbXBvcnQgb2YgdGhlIGRtYS1idWZzIHRv
-L2Zyb20gZ3JlZnMKYmFsbG9vbiBbM10gLSB0byBhbGxvdyBhbGxvY2F0aW5nIENNQSBidWZmZXJz
-Cj4+IEFsc28gaXQgaXMgZGVzaWduZWQgd2l0aCBmcm9udGVuZCAoY29tbW9uIGNvcmUgZnJhbWV3
-b3JrKSArIGJhY2tlbmQKPj4gKGh5cGVyIHZpc29yIHNwZWNpZmljIGNvbW0gYW5kIG1lbW9yeSBz
-aGFyaW5nKSBzdHJ1Y3R1cmUgZm9yIHBvcnRhYmlsaXR5Lgo+PiBXZSBqdXN0IGNhbid0IGxpbWl0
-IHRoaXMgZmVhdHVyZSB0byBYZW4gYmVjYXVzZSB3ZSB3YW50IHRvIHVzZSB0aGUgc2FtZQo+PiB1
-YXBpcyBub3Qgb25seSBmb3IgWGVuIGJ1dCBhbHNvIG90aGVyIGFwcGxpY2FibGUgaHlwZXJ2aXNv
-ciwgbGlrZSBBQ09STi4KPiBTZWUgdGhlIGRpc2N1c3Npb24gYXJvdW5kIHVkbWFidWYgYW5kIHRo
-ZSBuZWVkcyBmb3Iga3ZtLiBJIHRoaW5rIHRyeWluZyB0bwo+IG1ha2UgYW4gaW9jdGwvdWFwaSB0
-aGF0IHdvcmtzIGZvciBtdWx0aXBsZSBoeXBlcnZpc29ycyBpcyBtaXNndWlkZWQgLSBpdAo+IGxp
-a2VseSB3b24ndCB3b3JrLgo+Cj4gT24gdG9wIG9mIHRoYXQgdGhlIDJuZCBoeXBlcnZpc29yIHlv
-dSdyZSBhaW1pbmcgdG8gc3VwcG9ydCBpcyBBQ1JOLiBUaGF0J3MKPiBub3QgZXZlbiB1cHN0cmVh
-bSB5ZXQsIG5vciBoYXZlIEkgc2VlbiBhbnkgcGF0Y2hlcyBwcm9wb3NpbmcgdG8gbGFuZCBsaW51
-eAo+IHN1cHBvcnQgZm9yIEFDUk4uIFNpbmNlIGl0J3Mgbm90IHVwc3RyZWFtLCBpdCBkb2Vzbid0
-IHJlYWxseSBtYXR0ZXIgZm9yCj4gdXBzdHJlYW0gY29uc2lkZXJhdGlvbi4gSSdtIGRvdWJ0aW5n
-IHRoYXQgQUNSTiB3aWxsIHVzZSB0aGUgc2FtZSBncmFudAo+IHJlZmVyZW5jZXMgYXMgeGVuLCBz
-byB0aGUgc2FtZSB1YXBpIHdvbid0IHdvcmsgb24gQUNSTiBhcyBvbiBYZW4gYW55d2F5Lgo+Cj4+
-IFNvIEkgYW0gd29uZGVyaW5nIHdlIGNhbiBzdGFydCB3aXRoIHRoaXMgaHlwZXJfZG1hYnVmIHRo
-ZW4gbW9kaWZ5IGl0IGZvcgo+PiB5b3VyIHVzZS1jYXNlIGlmIG5lZWRlZCBhbmQgcG9saXNoIGFu
-ZCBmaXggYW55IGdsaXRjaGVzIGlmIHdlIHdhbnQgdG8KPj4gdG8gdXNlIHRoaXMgZm9yIGFsbCBn
-ZW5lcmFsIGRtYS1idWYgdXNlY2FzZXMuCj4gSW1vIHhlbi16Y29weSBpcyBhIG11Y2ggbW9yZSBy
-ZWFzb25hYmxlIHN0YXJ0aW5nIHBvaW50IGZvciB1cHN0cmVhbSwgd2hpY2gKPiBjYW4gdGhlbiBi
-ZSBleHRlbmRlZCAoaWYgcmVhbGx5IHByb3ZlbiB0byBiZSBuZWNlc3NhcnkpLgo+Cj4+IEFsc28s
-IEkgc3RpbGwgaGF2ZSBvbmUgdW5yZXNvbHZlZCBxdWVzdGlvbiByZWdhcmRpbmcgdGhlIGV4cG9y
-dC9pbXBvcnQgZmxvdwo+PiBpbiBib3RoIG9mIGh5cGVyX2RtYWJ1ZiBhbmQgeGVuLXpjb3B5Lgo+
-Pgo+PiBAZGFudmV0OiBXb3VsZCB0aGlzIGZsb3cgKGd1ZXN0MS0+aW1wb3J0IGV4aXN0aW5nIGRt
-YWJ1Zi0+c2hhcmUgdW5kZXJseWluZwo+PiBwYWdlcy0+Z3Vlc3QyLT5tYXAgc2hhcmVkIHBhZ2Vz
-LT5jcmVhdGUvZXhwb3J0IGRtYWJ1ZikgYmUgYWNjZXB0YWJsZSBub3c/Cj4gSSB0aGluayBpZiB5
-b3UganVzdCBsb29rIGF0IHRoZSBwYWdlcywgYW5kIG1ha2Ugc3VyZSB5b3UgaGFuZGxlIHRoZQo+
-IHNnX3BhZ2UgPT0gTlVMTCBjYXNlIGl0J3Mgb2staXNoLiBJdCdzIG5vdCBncmVhdCwgYnV0IG1v
-c3RseSBpdCBzaG91bGQKPiB3b3JrLiBUaGUgcmVhbCB0cm91YmxlIHdpdGggaHlwZXJkbWFidWYg
-d2FzIHRoZSBmb3J3YXJkaW5nIG9mIGFsbCB0aGVzZQo+IGNhbGxzLCBpbnN0ZWFkIG9mIGp1c3Qg
-cGFzc2luZyBhcm91bmQgYSBsaXN0IG9mIGdyYW50IHJlZmVyZW5jZXMuCj4gLURhbmllbAo+Cj4+
-IFJlZ2FyZHMsCj4+IERXCj4+ICAgCj4+IE9uIE1vbiwgQXByIDE2LCAyMDE4IGF0IDA1OjMzOjQ2
-UE0gKzAzMDAsIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdyb3RlOgo+Pj4gSGVsbG8sIGFsbCEK
-Pj4+Cj4+PiBBZnRlciBkaXNjdXNzaW5nIHhlbi16Y29weSBhbmQgaHlwZXItZG1hYnVmIFsxXSBh
-cHByb2FjaGVzCkV2ZW4gbW9yZSBjb250ZXh0IGZvciB0aGUgZGlzY3Vzc2lvbiBbNF0sIHNvIFhl
-biBjb21tdW5pdHkgY2FuCmNhdGNoIHVwCj4+PiBpdCBzZWVtcyB0aGF0IHhlbi16Y29weSBjYW4g
-YmUgbWFkZSBub3QgZGVwZW5kIG9uIERSTSBjb3JlIGFueSBtb3JlCj4+Pgo+Pj4gYW5kIGJlIGRt
-YS1idWYgY2VudHJpYyAod2hpY2ggaXQgaW4gZmFjdCBpcykuCj4+Pgo+Pj4gVGhlIERSTSBjb2Rl
-IHdhcyBtb3N0bHkgdGhlcmUgZm9yIGRtYS1idWYncyBGRCBpbXBvcnQvZXhwb3J0Cj4+Pgo+Pj4g
-d2l0aCBEUk0gUFJJTUUgVUFQSSBhbmQgd2l0aCBEUk0gdXNlLWNhc2VzIGluIG1pbmQsIGJ1dCBp
-dCBjb21lcyBvdXQgdGhhdCBpZgo+Pj4KPj4+IHRoZSBwcm9wb3NlZCAyIElPQ1RMcyAoRFJNX1hF
-Tl9aQ09QWV9EVU1CX0ZST01fUkVGUyBhbmQKPj4+IERSTV9YRU5fWkNPUFlfRFVNQl9UT19SRUZT
-KQo+Pj4KPj4+IGFyZSBleHRlbmRlZCB0byBhbHNvIHByb3ZpZGUgYSBmaWxlIGRlc2NyaXB0b3Ig
-b2YgdGhlIGNvcnJlc3BvbmRpbmcgZG1hLWJ1ZiwKPj4+IHRoZW4KPj4+Cj4+PiBQUklNRSBzdHVm
-ZiBpbiB0aGUgZHJpdmVyIGlzIG5vdCBuZWVkZWQgYW55bW9yZS4KPj4+Cj4+PiBUaGF0IGJlaW5n
-IHNhaWQsIHhlbi16Y29weSBjYW4gc2FmZWx5IGJlIGRldGFjaGVkIGZyb20gRFJNIGFuZCBtb3Zl
-ZCBmcm9tCj4+Pgo+Pj4gZHJpdmVycy9ncHUvZHJtL3hlbiBpbnRvIGRyaXZlcnMveGVuL2RtYS1i
-dWYtYmFja2VuZCg/KS4KPj4+Cj4+PiBUaGlzIGRyaXZlciB0aGVuIGJlY29tZXMgYSB1bml2ZXJz
-YWwgd2F5IHRvIHR1cm4gYW55IHNoYXJlZCBidWZmZXIgYmV0d2Vlbgo+Pj4gRG9tMC9Eb21ECj4+
-Pgo+Pj4gYW5kIERvbVUocykgaW50byBhIGRtYS1idWYsIGUuZy4gb25lIGNhbiBjcmVhdGUgYSBk
-bWEtYnVmIGZyb20gYW55IGdyYW50Cj4+PiByZWZlcmVuY2VzCj4+Pgo+Pj4gb3IgcmVwcmVzZW50
-IGEgZG1hLWJ1ZiBhcyBncmFudC1yZWZlcmVuY2VzIGZvciBleHBvcnQuCj4+Pgo+Pj4gVGhpcyB3
-YXkgdGhlIGRyaXZlciBjYW4gYmUgdXNlZCBub3Qgb25seSBmb3IgRFJNIHVzZS1jYXNlcywgYnV0
-IGFsc28gZm9yCj4+PiBvdGhlcgo+Pj4KPj4+IHVzZS1jYXNlcyB3aGljaCBtYXkgcmVxdWlyZSB6
-ZXJvIGNvcHlpbmcgYmV0d2VlbiBkb21haW5zLgo+Pj4KPj4+IEZvciBleGFtcGxlLCB0aGUgdXNl
-LWNhc2VzIHdlIGFyZSBhYm91dCB0byB3b3JrIGluIHRoZSBuZWFyZXN0IGZ1dHVyZSB3aWxsCj4+
-PiB1c2UKPj4+Cj4+PiBWNEwsIGUuZy4gd2UgcGxhbiB0byBzdXBwb3J0IGNhbWVyYXMsIGNvZGVj
-cyBldGMuIGFuZCBhbGwgdGhlc2Ugd2lsbCBiZW5lZml0Cj4+Pgo+Pj4gZnJvbSB6ZXJvIGNvcHlp
-bmcgbXVjaC4gUG90ZW50aWFsbHksIGV2ZW4gYmxvY2svbmV0IGRldmljZXMgbWF5IGJlbmVmaXQs
-Cj4+Pgo+Pj4gYnV0IHRoaXMgbmVlZHMgc29tZSBldmFsdWF0aW9uLgo+Pj4KPj4+Cj4+PiBJIHdv
-dWxkIGxvdmUgdG8gaGVhciBjb21tZW50cyBmb3IgYXV0aG9ycyBvZiB0aGUgaHlwZXItZG1hYnVm
-Cj4+Pgo+Pj4gYW5kIFhlbiBjb21tdW5pdHksIGFzIHdlbGwgYXMgRFJJLURldmVsIGFuZCBvdGhl
-ciBpbnRlcmVzdGVkIHBhcnRpZXMuCj4+Pgo+Pj4KPj4+IFRoYW5rIHlvdSwKPj4+Cj4+PiBPbGVr
-c2FuZHIKPj4+Cj4+Pgo+Pj4gT24gMDMvMjkvMjAxOCAwNDoxOSBQTSwgT2xla3NhbmRyIEFuZHJ1
-c2hjaGVua28gd3JvdGU6Cj4+Pj4gRnJvbTogT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gPG9sZWtz
-YW5kcl9hbmRydXNoY2hlbmtvQGVwYW0uY29tPgo+Pj4+Cj4+Pj4gSGVsbG8hCj4+Pj4KPj4+PiBX
-aGVuIHVzaW5nIFhlbiBQViBEUk0gZnJvbnRlbmQgZHJpdmVyIHRoZW4gb24gYmFja2VuZCBzaWRl
-IG9uZSB3aWxsIG5lZWQKPj4+PiB0byBkbyBjb3B5aW5nIG9mIGRpc3BsYXkgYnVmZmVycycgY29u
-dGVudHMgKGZpbGxlZCBieSB0aGUKPj4+PiBmcm9udGVuZCdzIHVzZXItc3BhY2UpIGludG8gYnVm
-ZmVycyBhbGxvY2F0ZWQgYXQgdGhlIGJhY2tlbmQgc2lkZS4KPj4+PiBUYWtpbmcgaW50byBhY2Nv
-dW50IHRoZSBzaXplIG9mIGRpc3BsYXkgYnVmZmVycyBhbmQgZnJhbWVzIHBlciBzZWNvbmRzCj4+
-Pj4gaXQgbWF5IHJlc3VsdCBpbiB1bm5lZWRlZCBodWdlIGRhdGEgYnVzIG9jY3VwYXRpb24gYW5k
-IHBlcmZvcm1hbmNlIGxvc3MuCj4+Pj4KPj4+PiBUaGlzIGhlbHBlciBkcml2ZXIgYWxsb3dzIGlt
-cGxlbWVudGluZyB6ZXJvLWNvcHlpbmcgdXNlLWNhc2VzCj4+Pj4gd2hlbiB1c2luZyBYZW4gcGFy
-YS12aXJ0dWFsaXplZCBmcm9udGVuZCBkaXNwbGF5IGRyaXZlciBieQo+Pj4+IGltcGxlbWVudGlu
-ZyBhIERSTS9LTVMgaGVscGVyIGRyaXZlciBydW5uaW5nIG9uIGJhY2tlbmQncyBzaWRlLgo+Pj4+
-IEl0IHV0aWxpemVzIFBSSU1FIGJ1ZmZlcnMgQVBJIHRvIHNoYXJlIGZyb250ZW5kJ3MgYnVmZmVy
-cyB3aXRoCj4+Pj4gcGh5c2ljYWwgZGV2aWNlIGRyaXZlcnMgb24gYmFja2VuZCdzIHNpZGU6Cj4+
-Pj4KPj4+PiAgIC0gYSBkdW1iIGJ1ZmZlciBjcmVhdGVkIG9uIGJhY2tlbmQncyBzaWRlIGNhbiBi
-ZSBzaGFyZWQKPj4+PiAgICAgd2l0aCB0aGUgWGVuIFBWIGZyb250ZW5kIGRyaXZlciwgc28gaXQg
-ZGlyZWN0bHkgd3JpdGVzCj4+Pj4gICAgIGludG8gYmFja2VuZCdzIGRvbWFpbiBtZW1vcnkgKGlu
-dG8gdGhlIGJ1ZmZlciBleHBvcnRlZCBmcm9tCj4+Pj4gICAgIERSTS9LTVMgZHJpdmVyIG9mIGEg
-cGh5c2ljYWwgZGlzcGxheSBkZXZpY2UpCj4+Pj4gICAtIGEgZHVtYiBidWZmZXIgYWxsb2NhdGVk
-IGJ5IHRoZSBmcm9udGVuZCBjYW4gYmUgaW1wb3J0ZWQKPj4+PiAgICAgaW50byBwaHlzaWNhbCBk
-ZXZpY2UgRFJNL0tNUyBkcml2ZXIsIHRodXMgYWxsb3dpbmcgdG8KPj4+PiAgICAgYWNoaWV2ZSBu
-byBjb3B5aW5nIGFzIHdlbGwKPj4+Pgo+Pj4+IEZvciB0aGF0IHJlYXNvbiBudW1iZXIgb2YgSU9D
-VExzIGFyZSBpbnRyb2R1Y2VkOgo+Pj4+ICAgLSAgRFJNX1hFTl9aQ09QWV9EVU1CX0ZST01fUkVG
-Uwo+Pj4+ICAgICAgVGhpcyB3aWxsIGNyZWF0ZSBhIERSTSBkdW1iIGJ1ZmZlciBmcm9tIGdyYW50
-IHJlZmVyZW5jZXMgcHJvdmlkZWQKPj4+PiAgICAgIGJ5IHRoZSBmcm9udGVuZAo+Pj4+ICAgLSBE
-Uk1fWEVOX1pDT1BZX0RVTUJfVE9fUkVGUwo+Pj4+ICAgICBUaGlzIHdpbGwgZ3JhbnQgcmVmZXJl
-bmNlcyB0byBhIGR1bWIvZGlzcGxheSBidWZmZXIncyBtZW1vcnkgcHJvdmlkZWQKPj4+PiAgICAg
-YnkgdGhlIGJhY2tlbmQKPj4+PiAgIC0gRFJNX1hFTl9aQ09QWV9EVU1CX1dBSVRfRlJFRQo+Pj4+
-ICAgICBUaGlzIHdpbGwgYmxvY2sgdW50aWwgdGhlIGR1bWIgYnVmZmVyIHdpdGggdGhlIHdhaXQg
-aGFuZGxlIHByb3ZpZGVkCj4+Pj4gICAgIGJlIGZyZWVkCj4+Pj4KPj4+PiBXaXRoIHRoaXMgaGVs
-cGVyIGRyaXZlciBJIHdhcyBhYmxlIHRvIGRyb3AgQ1BVIHVzYWdlIGZyb20gMTclIHRvIDMlCj4+
-Pj4gb24gUmVuZXNhcyBSLUNhciBNMyBib2FyZC4KPj4+Pgo+Pj4+IFRoaXMgd2FzIHRlc3RlZCB3
-aXRoIFJlbmVzYXMnIFdheWxhbmQtS01TIGFuZCBiYWNrZW5kIHJ1bm5pbmcgYXMgRFJNIG1hc3Rl
-ci4KPj4+Pgo+Pj4+IFRoYW5rIHlvdSwKPj4+PiBPbGVrc2FuZHIKPj4+Pgo+Pj4+IE9sZWtzYW5k
-ciBBbmRydXNoY2hlbmtvICgxKToKPj4+PiAgICBkcm0veGVuLXpjb3B5OiBBZGQgWGVuIHplcm8t
-Y29weSBoZWxwZXIgRFJNIGRyaXZlcgo+Pj4+Cj4+Pj4gICBEb2N1bWVudGF0aW9uL2dwdS9kcml2
-ZXJzLnJzdCAgICAgICAgICAgICAgIHwgICAxICsKPj4+PiAgIERvY3VtZW50YXRpb24vZ3B1L3hl
-bi16Y29weS5yc3QgICAgICAgICAgICAgfCAgMzIgKwo+Pj4+ICAgZHJpdmVycy9ncHUvZHJtL3hl
-bi9LY29uZmlnICAgICAgICAgICAgICAgICB8ICAyNSArCj4+Pj4gICBkcml2ZXJzL2dwdS9kcm0v
-eGVuL01ha2VmaWxlICAgICAgICAgICAgICAgIHwgICA1ICsKPj4+PiAgIGRyaXZlcnMvZ3B1L2Ry
-bS94ZW4veGVuX2RybV96Y29weS5jICAgICAgICAgfCA4ODAgKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKwo+Pj4+ICAgZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX3pjb3B5X2JhbGxvb24u
-YyB8IDE1NCArKysrKwo+Pj4+ICAgZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX3pjb3B5X2Jh
-bGxvb24uaCB8ICAzOCArKwo+Pj4+ICAgaW5jbHVkZS91YXBpL2RybS94ZW5femNvcHlfZHJtLmgg
-ICAgICAgICAgICB8IDEyOSArKysrCj4+Pj4gICA4IGZpbGVzIGNoYW5nZWQsIDEyNjQgaW5zZXJ0
-aW9ucygrKQo+Pj4+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IERvY3VtZW50YXRpb24vZ3B1L3hlbi16
-Y29weS5yc3QKPj4+PiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0veGVuL3hl
-bl9kcm1femNvcHkuYwo+Pj4+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS94
-ZW4veGVuX2RybV96Y29weV9iYWxsb29uLmMKPj4+PiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2
-ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1femNvcHlfYmFsbG9vbi5oCj4+Pj4gICBjcmVhdGUgbW9k
-ZSAxMDA2NDQgaW5jbHVkZS91YXBpL2RybS94ZW5femNvcHlfZHJtLmgKPj4+Pgo+Pj4gWzFdCj4+
-PiBodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIw
-MTgtMDIvbXNnMDEyMDIuaHRtbAo+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwo+PiBkcmktZGV2ZWwgbWFpbGluZyBsaXN0Cj4+IGRyaS1kZXZlbEBsaXN0
-cy5mcmVlZGVza3RvcC5vcmcKPj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1h
-bi9saXN0aW5mby9kcmktZGV2ZWwKWzFdIApodHRwczovL2VsaXhpci5ib290bGluLmNvbS9saW51
-eC92NC4xNy1yYzEvc291cmNlL2luY2x1ZGUvdWFwaS94ZW4vZ250ZGV2LmgKWzJdIGh0dHBzOi8v
-ZWxpeGlyLmJvb3RsaW4uY29tL2xpbnV4L3Y0LjE3LXJjMS9zb3VyY2UvZHJpdmVycy94ZW4vZ250
-ZGV2LmMKWzNdIGh0dHBzOi8vZWxpeGlyLmJvb3RsaW4uY29tL2xpbnV4L3Y0LjE3LXJjMS9zb3Vy
-Y2UvZHJpdmVycy94ZW4vYmFsbG9vbi5jCls0XSBodHRwczovL2xrbWwub3JnL2xrbWwvMjAxOC80
-LzE2LzM1NQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+This is a multi-part message in MIME format.
+--------------08B53AE38CF9E9DD1ACBD651
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+On 04/16/2018 11:21 PM, George Dunlap wrote:
+> On Mon, Apr 16, 2018 at 7:46 PM, Razvan Cojocaru
+> <rcojocaru@bitdefender.com> wrote:
+>> On 04/16/2018 08:47 PM, George Dunlap wrote:
+>>> On 04/13/2018 03:44 PM, Razvan Cojocaru wrote:
+>>>> On 04/11/2018 11:04 AM, Razvan Cojocaru wrote:
+>>>>> Debugging continues.
+>>>>
+>>>> Finally, the attached patch seems to get the display unstuck in my
+>>>> scenario, although for one guest I get:
+>>>>
+>>>> (XEN) d2v0 Unexpected vmexit: reason 49
+>>>> (XEN) domain_crash called from vmx.c:4120
+>>>> (XEN) Domain 2 (vcpu#0) crashed on cpu#1:
+>>>> (XEN) ----[ Xen-4.11-unstable  x86_64  debug=y   Not tainted ]----
+>>>> (XEN) CPU:    1
+>>>> (XEN) RIP:    0010:[<fffff96000842354>]
+>>>> (XEN) RFLAGS: 0000000000010246   CONTEXT: hvm guest (d2v0)
+>>>> (XEN) rax: fffff88003000000   rbx: fffff900c0083db0   rcx: 00000000aa55aa55
+>>>> (XEN) rdx: fffffa80041bdc41   rsi: fffff900c00c69a0   rdi: 0000000000000001
+>>>> (XEN) rbp: 0000000000000000   rsp: fffff88002ee9ef0   r8:  fffffa80041bdc40
+>>>> (XEN) r9:  fffff80001810e80   r10: fffffa800342aa70   r11: fffff88002ee9e80
+>>>> (XEN) r12: 0000000000000005   r13: 0000000000000001   r14: fffff900c00c08b0
+>>>> (XEN) r15: 0000000000000001   cr0: 0000000080050031   cr4: 00000000000406f8
+>>>> (XEN) cr3: 00000000ef771000   cr2: fffff900c00c8000
+>>>> (XEN) fsb: 00000000fffde000   gsb: fffff80001810d00   gss: 000007fffffdc000
+>>>> (XEN) ds: 002b   es: 002b   fs: 0053   gs: 002b   ss: 0018   cs: 0010
+>>>>
+>>>> i.e. EXIT_REASON_EPT_MISCONFIG - so not of the woods yet. I am hoping
+>>>> somebody more familiar with the code can point to a more elegant
+>>>> solution if one exists.
+>>>
+>>> I think I have an idea what's going on, but it's complicated. :-)
+>>>
+>>> Basically, the logdirty functionality isn't simple, and needs careful
+>>> thought on how to integrate it.  I'll write some more tomorrow, and see
+>>> if I can come up with a solution.
+>>
+>> I think I know why this happens for the one guest - the other guests
+>> start at a certain resolution display-wise and stay that way until shutdown.
+>>
+>> This particular guest starts with a larger screen, then goes to roughly
+>> 2/3rds of it, then tries to go back to the initial larger one - at which
+>> point the above happens. I assume this corresponds to some pages being
+>> removed and/or added. I'll test this theory more tomorrow - if it's
+>> correct I should be able to reproduce the crash (with the patch) by
+>> simply resetting the screen resolution (increasing it).
+> 
+> The trick is that p2m_change_type doesn't actually iterate over the
+> entire p2m range, individually changing entries as it goes.  Instead
+> it misconfigures the entries at the top-level, which causes the kinds
+> of faults shown above.  As it gets faults for each entry, it checks
+> the current type, the logdirty ranges, and the global logdirty bit to
+> determine what the new types should be.
+> 
+> Your patch makes it so that all the altp2ms now get the
+> misconfiguration when the logdirty range is changed; but clearly
+> handling the misconfiguration isn't integrated properly with the
+> altp2m system yet.  Doing it right may take some thought.
+
+FWIW, the attached patch has solved the misconfig-related domain crash
+for me (though I'm very likely missing some subtleties). It all seems to
+work as expected when enabling altp2m and switching early to a new view.
+However, now I have domUs with a frozen display when I disconnect the
+introspection application (that is, after I switch back to the default
+view and disable altp2m on the domain).
+
+
+Thanks,
+Razvan
+
+--------------08B53AE38CF9E9DD1ACBD651
+Content-Type: text/x-patch;
+ name="altp2m_logdirty2.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="altp2m_logdirty2.patch"
+
+diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
+index 14b5939..4530689 100644
+--- a/xen/arch/x86/mm/p2m-ept.c
++++ b/xen/arch/x86/mm/p2m-ept.c
+@@ -17,6 +17,7 @@
+ 
+ #include <xen/domain_page.h>
+ #include <xen/sched.h>
++#include <asm/altp2m.h>
+ #include <asm/current.h>
+ #include <asm/paging.h>
+ #include <asm/types.h>
+@@ -652,17 +653,38 @@ static int resolve_misconfig(struct p2m_domain *p2m, unsigned long gfn)
+ bool_t ept_handle_misconfig(uint64_t gpa)
+ {
+     struct vcpu *curr = current;
+-    struct p2m_domain *p2m = p2m_get_hostp2m(curr->domain);
++    struct domain *d = curr->domain;
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     bool_t spurious;
+-    int rc;
+-
+-    p2m_lock(p2m);
++    int rc = 0;
++    unsigned int i;
+ 
+     spurious = curr->arch.hvm_vmx.ept_spurious_misconfig;
+-    rc = resolve_misconfig(p2m, PFN_DOWN(gpa));
+-    curr->arch.hvm_vmx.ept_spurious_misconfig = 0;
+ 
+-    p2m_unlock(p2m);
++    if ( altp2m_active(d) )
++    {
++       for ( i = 0; i < MAX_ALTP2M; i++ )
++            if ( d->arch.altp2m_eptp[i] != mfn_x(INVALID_MFN) )
++            {
++                p2m = d->arch.altp2m_p2m[i];
++
++                p2m_lock(p2m);
++
++                rc = resolve_misconfig(p2m, PFN_DOWN(gpa));
++                curr->arch.hvm_vmx.ept_spurious_misconfig = 0;
++
++                p2m_unlock(p2m);
++            }
++    }
++    else
++    {
++        p2m_lock(p2m);
++
++        rc = resolve_misconfig(p2m, PFN_DOWN(gpa));
++        curr->arch.hvm_vmx.ept_spurious_misconfig = 0;
++
++        p2m_unlock(p2m);
++    }
+ 
+     return spurious ? (rc >= 0) : (rc > 0);
+ }
+@@ -1375,8 +1397,15 @@ void setup_ept_dump(void)
+ void p2m_init_altp2m_ept(struct domain *d, unsigned int i)
+ {
+     struct p2m_domain *p2m = d->arch.altp2m_p2m[i];
++    struct p2m_domain *hostp2m = p2m_get_hostp2m(d);
+     struct ept_data *ept;
+ 
++    p2m->max_mapped_pfn = hostp2m->max_mapped_pfn;
++    p2m->default_access = hostp2m->default_access;
++    p2m->domain = hostp2m->domain;
++    p2m->logdirty_ranges = hostp2m->logdirty_ranges;
++    p2m->global_logdirty = hostp2m->global_logdirty;
++
+     p2m->min_remapped_gfn = gfn_x(INVALID_GFN);
+     p2m->max_remapped_gfn = 0;
+     ept = &p2m->ept;
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index c53cab4..00f85e1 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -28,6 +28,7 @@
+ #include <xen/vm_event.h>
+ #include <xen/event.h>
+ #include <public/vm_event.h>
++#include <asm/altp2m.h>
+ #include <asm/domain.h>
+ #include <asm/page.h>
+ #include <asm/paging.h>
+@@ -248,7 +249,6 @@ int p2m_init(struct domain *d)
+ int p2m_is_logdirty_range(struct p2m_domain *p2m, unsigned long start,
+                           unsigned long end)
+ {
+-    ASSERT(p2m_is_hostp2m(p2m));
+     if ( p2m->global_logdirty ||
+          rangeset_contains_range(p2m->logdirty_ranges, start, end) )
+         return 1;
+@@ -964,12 +964,12 @@ int p2m_change_type_one(struct domain *d, unsigned long gfn_l,
+ }
+ 
+ /* Modify the p2m type of a range of gfns from ot to nt. */
+-void p2m_change_type_range(struct domain *d, 
+-                           unsigned long start, unsigned long end,
+-                           p2m_type_t ot, p2m_type_t nt)
++static void _p2m_change_type_range(struct p2m_domain *p2m,
++                                   unsigned long start, unsigned long end,
++                                   p2m_type_t ot, p2m_type_t nt)
+ {
++    struct domain *d = p2m->domain;
+     unsigned long gfn = start;
+-    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     int rc = 0;
+ 
+     ASSERT(ot != nt);
+@@ -1022,6 +1022,23 @@ void p2m_change_type_range(struct domain *d,
+     p2m_unlock(p2m);
+ }
+ 
++void p2m_change_type_range(struct domain *d,
++                           unsigned long start, unsigned long end,
++                           p2m_type_t ot, p2m_type_t nt)
++{
++    unsigned int i;
++
++    if ( !altp2m_active(d) )
++    {
++        _p2m_change_type_range(p2m_get_hostp2m(d), start, end, ot, nt);
++        return;
++    }
++
++    for ( i = 0; i < MAX_ALTP2M; i++ )
++        if ( d->arch.altp2m_eptp[i] != mfn_x(INVALID_MFN) )
++            _p2m_change_type_range(d->arch.altp2m_p2m[i], start, end, ot, nt);
++}
++
+ /*
+  * Finish p2m type change for gfns which are marked as need_recalc in a range.
+  * Returns: 0/1 for success, negative for failure
+
+--------------08B53AE38CF9E9DD1ACBD651
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--------------08B53AE38CF9E9DD1ACBD651--
