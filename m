@@ -1,20 +1,18 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] x86/xen: Remove use of VLAs
-Date: Tue, 17 Apr 2018 09:16:41 +0200
-Message-ID: <e63f261b-9ef3-5750-20df-555291a8a0d8__5683.49609752676$1523949352$gmane$org@suse.com>
-References: <20180413221146.28476-1-labbott@redhat.com>
- <7cf66c00-74c2-62bb-81f5-4332313a5a6e@oracle.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [RFC PATCH 2/3] xen: Refactor migration
+Date: Tue, 17 Apr 2018 09:20:33 +0200
+Message-ID: <b7df732fe16bd1fa91608837371a37cc2233f5ec.camel@suse.com>
+References: <20180411122518.26270-1-george.dunlap@citrix.com>
+ <20180411122518.26270-3-george.dunlap@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7211195849941985921=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=hi3k=hg=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1f8Kr8-0000sh-1w
- for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 07:16:46 +0000
-In-Reply-To: <7cf66c00-74c2-62bb-81f5-4332313a5a6e@oracle.com>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=yslv=hg=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1f8Kv8-0001Xz-PH
+ for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 07:20:54 +0000
+In-Reply-To: <20180411122518.26270-3-george.dunlap@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,31 +21,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Laura Abbott <labbott@redhat.com>
-Cc: kernel-hardening@lists.openwall.com, x86@kernel.org, linux-kernel@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>
+To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Olaf Hering <olaf@aepfle.de>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTYvMDQvMTggMTU6MjcsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiBPbiAwNC8xMy8yMDE4
-IDA2OjExIFBNLCBMYXVyYSBBYmJvdHQgd3JvdGU6Cj4+IFRoZXJlJ3MgYW4gb25nb2luZyBlZmZv
-cnQgdG8gcmVtb3ZlIFZMQXNbMV0gZnJvbSB0aGUga2VybmVsIHRvIGV2ZW50dWFsbHkKPj4gdHVy
-biBvbiAtV3ZsYS4gVGhlIGZldyBWTEFzIGluIHVzZSBoYXZlIGFuIHVwcGVyIGJvdW5kIGJhc2Vk
-IG9uIGEgc2l6ZQo+PiBvZiA2NEsuIFRoaXMgZG9lc24ndCBwcm9kdWNlIGFuIGV4Y2Vzc2l2ZWx5
-IGxhcmdlIHN0YWNrIHNvIGp1c3Qgc3dpdGNoCj4+IHRoZSB1cHBlciBib3VuZC4KPj4KPj4gWzFd
-IGh0dHBzOi8vbGttbC5vcmcvbGttbC8yMDE4LzMvNy82MjEKPj4KPj4gU2lnbmVkLW9mZi1ieTog
-TGF1cmEgQWJib3R0IDxsYWJib3R0QHJlZGhhdC5jb20+Cj4+IC0tLQo+PiAgYXJjaC94ODYveGVu
-L2VubGlnaHRlbl9wdi5jIHwgNiArKy0tLS0KPj4gIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlv
-bnMoKyksIDQgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS9hcmNoL3g4Ni94ZW4vZW5s
-aWdodGVuX3B2LmMgYi9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMKPj4gaW5kZXggYzM2ZDIz
-YWE2YzM1Li5kOTZhNWE1MzVjYmIgMTAwNjQ0Cj4+IC0tLSBhL2FyY2gveDg2L3hlbi9lbmxpZ2h0
-ZW5fcHYuYwo+PiArKysgYi9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMKPj4gQEAgLTQyMSw4
-ICs0MjEsNyBAQCBzdGF0aWMgdm9pZCB4ZW5fbG9hZF9nZHQoY29uc3Qgc3RydWN0IGRlc2NfcHRy
-ICpkdHIpCj4+ICB7Cj4+ICAJdW5zaWduZWQgbG9uZyB2YSA9IGR0ci0+YWRkcmVzczsKPj4gIAl1
-bnNpZ25lZCBpbnQgc2l6ZSA9IGR0ci0+c2l6ZSArIDE7Cj4+IC0JdW5zaWduZWQgcGFnZXMgPSBE
-SVZfUk9VTkRfVVAoc2l6ZSwgUEFHRV9TSVpFKTsKPiAKPiAKPiAKPiBJc24ndCBkdHItPnNpemUg
-YWx3YXlzIGVpdGhlciBHRFRfU0laRSBvciAwPwoKR0RUX1NJWkUgLSAxIDotKQoKPj4gLQl1bnNp
-Z25lZCBsb25nIGZyYW1lc1twYWdlc107Cj4+ICsJdW5zaWduZWQgbG9uZyBmcmFtZXNbRElWX1JP
-VU5EX1VQKFNaXzY0SywgUEFHRV9TSVpFKV07CgpTbyB3ZSBjb3VsZCBqdXN0IGdvIHdpdGggb25l
-IGZyYW1lIGFuZCBtb2RpZnkgdGhlIEJVR19PTigpIGZ1cnRoZXIgYmVsb3cKYWNjb3JkaW5nbHku
-CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7211195849941985921==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-T7LVN8/c9F3m5miRBoyB"
+
+
+--=-T7LVN8/c9F3m5miRBoyB
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-04-11 at 13:25 +0100, George Dunlap wrote:
+> The current sequence to initiate vcpu migration is inefficent and
+> error-prone:
+>=20
+> - The initiator sets VPF_migraging with the lock held, then drops the
+>   lock and calls vcpu_sleep_nosync(), which immediately grabs the
+> lock
+>   again
+>=20
+> - A number of places unnecessarily check for v->pause_flags in
+> between
+>   those two
+>=20
+> - Every call to vcpu_migrate() must be prefaced with
+>   vcpu_sleep_nosync() or introduce a race condition; this code
+>   duplication is error-prone
+>=20
+It's not only error prone, it's the cause of actual bugs! :-P
+
+That's why I would also change the subject of the series into something
+like "fix races happening during vcpu migration"
+
+> - In the event that v->is_running is true at the beginning of
+>   vcpu_migrate(), it's almost certain that vcpu_migrate() will end up
+>   being called in context_switch() as well; we might as well simply
+>   let it run there and save the duplicated effort (which will be
+>   non-negligible).
+>=20
+> Instead, introduce vcpu_migrate_start() to initiate the process.
+> vcpu_migrate_start() is called with the scheduling lock held.  It not
+> only sets VPF_migrating, but also calls vcpu_sleep_nosync_locked()
+> (which will automatically do nothing if there's nothing to do).
+>=20
+> Rename vcpu_migrate() to vcpu_migrate_finish().  Check for v-
+> >is_running and
+> pause_flags & VPF_migrating at the top and return if appropriate.
+>=20
+> Then the way to initiate migration is consistently:
+>=20
+> * Grab lock
+> * vcpu_migrate_start()
+> * Release lock
+> * vcpu_migrate_finish()
+>=20
+> Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+
+> --- a/xen/common/schedule.c
+> +++ b/xen/common/schedule.c
+> @@ -593,13 +593,33 @@ static void vcpu_move_nosched(struct vcpu *v,
+> unsigned int new_cpu)
+>      sched_move_irqs(v);
+>  }
+> =20
+> -static void vcpu_migrate(struct vcpu *v)
+> +/*
+> + * Initiating migration
+> + *=20
+> + * In order to migrate, we need the vcpu in question to have stopped
+> + * running and be taken off the runqueues; we also need to hold the
+> lock=20
+> + */
+>
+Perhaps "and SCHED_OP(sleep) to have been called on it", instead of
+"and be taken off the runqueues", if we don't want to even mention
+runqueues in schedule.c.
+
+And there are a couple of instances of whitespace damaging.
+
+Nevertheless,
+
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+And I guess we can add a 'Tested-by: Olaf Hering', as he actually did
+that, what do you say Olaf?
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-T7LVN8/c9F3m5miRBoyB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrVoEEACgkQFkJ4iaW4
+c+4UUhAA5zPwspYWYIq62Ck4OQGBv3tV6emx74yGy8edvyHc8Ai318mMK3wbk4vU
+RRd1dMkUUXKRyB7nTDCbG+tEJ+NRJaJkRVWfM84/RsKcXM4AceBwC7/I6CI/LfgM
+v5p5NlQ0AuOufDs7qPse7RKJO0JOgGtC/ejWpKgC9BWtyc6W33FAbFkA3YiPHw0J
+xCjjkKnV0nvWdsLcNk4ND63BnalyEH8cwNMpt6v23/4fpKUNiKDny4pFLa5grWez
+7nXo61ijf3S0kqXx+Rx6x56+w2jea0l7hWUMfLvGTwdjx3cdmHrzTaRfn0N+Kftx
+ujwQ0yvwIzodXP8cqYT4MMp8dLBDwx1HoHiZV3v5Xnnig1JpYzyUBK8ayD8v0ZuI
+u9LN3QtsN1vHkc7Rjn0AIwcGgnaf8G2K8RtOv6TNzfjY3h+pv2QMo1sm8K09YSKj
+0/W2MwJ/MuazNueEJrRdpz1yzMrT1c6SF7QBpeLwUXITCTUpG6PQbyWvRqM8CB6U
+Vyoah15jywZlh75ly4zdorLyJnWp0DrbMPNdj5yRGD2N8Ot3jmecve+TJ+yEDfok
+CfhkRvdnOjHY7sjaWLX6ihxBXLin9NayrGpXuwOObER1dtk90gRcQmFN2P/Hqjs7
+ujOQ3Ekl/IIyA4aQnNQnyFPtJu7WJb581D7c8fTT4y5xO1bu8aE=
+=IUi4
+-----END PGP SIGNATURE-----
+
+--=-T7LVN8/c9F3m5miRBoyB--
+
+
+
+--===============7211195849941985921==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7211195849941985921==--
