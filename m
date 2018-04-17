@@ -1,17 +1,22 @@
-From: Igor Druzhinin <igor.druzhinin@citrix.com>
-Subject: [PATCH v2] xen/pt: use address_space_memory object for
- memory region hooks
-Date: Tue, 17 Apr 2018 15:54:15 +0100
-Message-ID: <1523976855-15234-1-git-send-email-igor.druzhinin__17637.6761556186$1523976787$gmane$org@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 6/7] docs/parse-support.md: Add some
+ newlines to the table output
+Date: Tue, 17 Apr 2018 16:57:19 +0200
+Message-ID: <2aac4141-c71d-b0f1-5654-d77c37d634b5@suse.com>
+References: <fa4e69bb-8278-4aec-960b-c0db32ef5503@cardoe.com>
+ <1523976422-19799-1-git-send-email-ian.jackson@eu.citrix.com>
+ <1523976422-19799-7-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=pwjg=hg=citrix.com=prvs=63820fd2d=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1f8Rzw-0005k5-Ul
- for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 14:54:20 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=hi3k=hg=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1f8S2t-0005u3-6u
+ for xen-devel@lists.xenproject.org; Tue, 17 Apr 2018 14:57:23 +0000
+In-Reply-To: <1523976422-19799-7-git-send-email-ian.jackson@eu.citrix.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,37 +25,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, qemu-devel@nongnu.org
-Cc: anthony.perard@citrix.com, ross.lagerwall@citrix.com, sstabellini@kernel.org, Igor Druzhinin <igor.druzhinin@citrix.com>
+To: Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
+Cc: Lars Kurth <lars.kurth@citrix.com>, George Dunlap <george.dunlap@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Q29tbWl0IDk5NjA1MTc1YyAoeGVuLXB0OiBGaXggUENJIGRldmljZXMgcmUtYXR0YWNoIGZhaWxl
-ZCkgaW50cm9kdWNlZAphIHN1YnRsZSBidWcuIEFzIHNvb24gYXMgdGhlIGd1ZXN0IHN3aXRjaGVz
-IG9mZiBCdXMgTWFzdGVyaW5nIG9uIHRoZQpkZXZpY2UgaXQgaW1tZWRpYXRlbHkgY2F1c2VzIGFs
-bCB0aGUgQkFScyBiZSB1bm1hcHBlZCBkdWUgdG8gdGhlIERNQQphZGRyZXNzIHNwYWNlIG9mIHRo
-ZSBkZXZpY2UgYmVpbmcgY2hhbmdlZC4gVGhpcyBpcyB1bmRlc2lyZWQgYmVoYXZpb3IKYmVjYXVz
-ZSB0aGUgZ3Vlc3QgbWF5IHRyeSB0byBjb21tdW5pY2F0ZSB3aXRoIHRoZSBkZXZpY2UgYWZ0ZXIg
-dGhhdAp3aGljaCB0cmlnZ2VycyB0aGUgZm9sbG93aW5nIGVycm9ycyBpbiB0aGUgbG9nczoKClsw
-MDowNS4wXSB4ZW5fcHRfYmFyX3JlYWQ6IEVycm9yOiBTaG91bGQgbm90IHJlYWQgQkFSIHRocm91
-Z2ggUUVNVS4gQDB4MDAwMDAwMDAwMDAwMDIwMApbMDA6MDUuMF0geGVuX3B0X2Jhcl93cml0ZTog
-RXJyb3I6IFNob3VsZCBub3Qgd3JpdGUgQkFSIHRocm91Z2ggUUVNVS4gQDB4MDAwMDAwMDAwMDAw
-MDIwMAoKVGhlIGlzc3VlIHRoYXQgdGhlIG9yaWdpbmFsIHBhdGNoIHRyaWVkIHRvIHdvcmthcm91
-bmQgKHVuZXZlbiBudW1iZXIgb2YKcmVnaW9uX2FkZC9kZWwgY2FsbHMgb24gZGV2aWNlIGF0dGFj
-aC9kZXRhY2gpIHdhcyBmaXhlZCBpbiBkMjU4MzZjYWZkCihtZW1vcnk6IGRvIGV4cGxpY2l0IGNs
-ZWFudXAgd2hlbiByZW1vdmUgbGlzdGVuZXJzKS4KClNpZ25lZC1vZmYtYnk6IElnb3IgRHJ1emhp
-bmluIDxpZ29yLmRydXpoaW5pbkBjaXRyaXguY29tPgpSZXBvcnRlZC1ieTogUm9zcyBMYWdlcndh
-bGwgPHJvc3MubGFnZXJ3YWxsQGNpdHJpeC5jb20+CkFja2VkLWJ5OiBBbnRob255IFBFUkFSRCA8
-YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KLS0tCkNoYW5nZXMgaW4gdjI6Ciogc3BlY2lmeSB0
-aGUgZXhhY3QgZml4aW5nIGNvbW1pdCBpbiB0aGUgY29tbWl0IG1lc3NhZ2UKLS0tCiBody94ZW4v
-eGVuX3B0LmMgfCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRp
-b24oLSkKCmRpZmYgLS1naXQgYS9ody94ZW4veGVuX3B0LmMgYi9ody94ZW4veGVuX3B0LmMKaW5k
-ZXggOWI3YTk2MC4uZTVhNmVmZiAxMDA2NDQKLS0tIGEvaHcveGVuL3hlbl9wdC5jCisrKyBiL2h3
-L3hlbi94ZW5fcHQuYwpAQCAtOTA3LDcgKzkwNyw3IEBAIG91dDoKICAgICAgICAgfQogICAgIH0K
-IAotICAgIG1lbW9yeV9saXN0ZW5lcl9yZWdpc3Rlcigmcy0+bWVtb3J5X2xpc3RlbmVyLCAmcy0+
-ZGV2LmJ1c19tYXN0ZXJfYXMpOworICAgIG1lbW9yeV9saXN0ZW5lcl9yZWdpc3Rlcigmcy0+bWVt
-b3J5X2xpc3RlbmVyLCAmYWRkcmVzc19zcGFjZV9tZW1vcnkpOwogICAgIG1lbW9yeV9saXN0ZW5l
-cl9yZWdpc3Rlcigmcy0+aW9fbGlzdGVuZXIsICZhZGRyZXNzX3NwYWNlX2lvKTsKICAgICBzLT5s
-aXN0ZW5lcl9zZXQgPSB0cnVlOwogICAgIFhFTl9QVF9MT0coZCwKLS0gCjIuNy40CgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMTcvMDQvMTggMTY6NDcsIElhbiBKYWNrc29uIHdyb3RlOgo+IFRoaXMgbWFrZXMgdGhlIHJl
+c3VsdCBlYXNpZXIgZm9yIGh1bWFucyB0byByZWFkLgo+IAo+IFNpZ25lZC1vZmYtYnk6IElhbiBK
+YWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgoKUmVsZWFzZS1hY2tlZC1ieTogSnVl
+cmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
