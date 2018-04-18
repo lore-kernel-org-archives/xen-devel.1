@@ -1,21 +1,16 @@
-From: Linus Walleij <linus.walleij@linaro.org>
-Subject: Re: [PATCH v7 0/7] KVM: x86: Allow Qemu/KVM to use PVH
- entry point
-Date: Wed, 18 Apr 2018 10:11:58 +0200
-Message-ID: <CACRpkdZNm54ukoggpta4o5XfALryHSO4Ptx0EhzNDG5HLLSSRw__30862.9275685691$1524039233$gmane$org@mail.gmail.com>
-References: <1523920175-27287-1-git-send-email-maran.wilson@oracle.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [distros-debian-squeeze test] 74632: tolerable FAIL
+Date: Wed, 18 Apr 2018 09:15:39 +0100
+Message-ID: <osstest-74632-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=h0mg=hh=linaro.org=linus.walleij@srs-us1.protection.inumbo.net>)
- id 1f8iC9-0001a9-AW
- for xen-devel@lists.xenproject.org; Wed, 18 Apr 2018 08:12:01 +0000
-Received: by mail-io0-x229.google.com with SMTP id a7-v6so1375596ioc.12
- for <xen-devel@lists.xenproject.org>; Wed, 18 Apr 2018 01:11:59 -0700 (PDT)
-In-Reply-To: <1523920175-27287-1-git-send-email-maran.wilson@oracle.com>
+ <srs0=7rsn=hh=xenproject.org=prvs=63998b17d=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1f8iFk-0001nO-3i
+ for xen-devel@lists.xenproject.org; Wed, 18 Apr 2018 08:15:44 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,16 +19,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Maran Wilson <maran.wilson@oracle.com>
-Cc: kvm@vger.kernel.org, rkrcmar@redhat.com, dave.hansen@linux.intel.com, "H. Peter Anvin" <hpa@zytor.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, x86@kernel.org, Christoph Hellwig <hch@infradead.org>, Ingo Molnar <mingo@redhat.com>, xen-devel@lists.xenproject.org, bp@suse.de, thomas.lendacky@amd.com, luto@kernel.org, Josh Poimboeuf <jpoimboe@redhat.com>, Thomas Gleixner <tglx@linutronix.de>, Mauro Carvalho Chehab <mchehab@kernel.org>, jgross@suse.com, Greg KH <gregkh@linuxfoundation.org>, Randy Dunlap <rdunlap@infradead.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, pbonzini@redhat.com, "David S. Miller" <davem@davemloft.net>, kirill.shutemov@linux.intel.com, roger.pau@citrix.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SSB3b25kZXIgd2h5IEkgYW0gc3RhcnRpbmcgdG8gZ2V0IENDZWQgb24gWGVuIHBhdGNoZXMgYWxs
-IG9mIGEgc3VkZGVuLgoKSSBoYXBwZW5lZCB0byBydW4gaW50byBKw7xyZ2VuIGF0IGEgY29uZmVy
-ZW5jZSBvbmx5IGxhc3Qgd2Vla2VuZCwgYnV0Ckkgc3RpbGwgZG9uJ3Qga25vdyBhbnl0aGluZyB3
-aGF0c29ldmVyIGFib3V0IFhlbiBvciBob3cgaXQgd29ya3MuCgpJZiBnZXRfbWFpbnRhaW5lci5w
-bCBoYXMgc3RhcnRlZCB0byByZXR1cm4gbXkgbmFtZSBvbiB0aGlzIHN0dWZmIEkKcmVhbGx5IHdh
-bnQgdG8ga25vdyB3aHkgOi8KCllvdXJzLApMaW51cyBXYWxsZWlqCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+ZmxpZ2h0IDc0NjMyIGRpc3Ryb3MtZGViaWFuLXNxdWVlemUgcmVhbCBbcmVhbF0KaHR0cDovL29z
+c3Rlc3QueHMuY2l0cml0ZS5uZXQvfm9zc3Rlc3QvdGVzdGxvZ3MvbG9ncy83NDYzMi8KCkZhaWx1
+cmVzIDotLyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQs
+IGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXNxdWVlemUtbmV0
+Ym9vdC1weWdydWIgMTAgZGViaWFuLWRpLWluc3RhbGwgZmFpbCBsaWtlIDc0NTc3CiB0ZXN0LWFt
+ZDY0LWkzODYtaTM4Ni1zcXVlZXplLW5ldGJvb3QtcHlncnViIDEwIGRlYmlhbi1kaS1pbnN0YWxs
+IGZhaWwgbGlrZSA3NDU3NwogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1zcXVlZXplLW5ldGJvb3Qt
+cHlncnViIDEwIGRlYmlhbi1kaS1pbnN0YWxsIGZhaWwgbGlrZSA3NDU3NwogdGVzdC1hbWQ2NC1p
+Mzg2LWFtZDY0LXNxdWVlemUtbmV0Ym9vdC1weWdydWIgMTAgZGViaWFuLWRpLWluc3RhbGwgZmFp
+bCBsaWtlIDc0NTc3CgpiYXNlbGluZSB2ZXJzaW9uOgogZmxpZ2h0ICAgICAgICAgICAgICAgNzQ1
+NzcKCmpvYnM6CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
+ZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWFt
+ZDY0LXNxdWVlemUtbmV0Ym9vdC1weWdydWIgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
+YW1kNjQtaTM4Ni1hbWQ2NC1zcXVlZXplLW5ldGJvb3QtcHlncnViICAgICAgICAgICAgICAgICBm
+YWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXNxdWVlemUtbmV0Ym9vdC1weWdydWIgICAg
+ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtaTM4Ni1zcXVlZXplLW5ldGJv
+b3QtcHlncnViICAgICAgICAgICAgICAgICAgZmFpbCAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdo
+dCBvbiBvc3N0ZXN0LnhzLmNpdHJpdGUubmV0CmxvZ3M6IC9ob21lL29zc3Rlc3QvbG9ncwppbWFn
+ZXM6IC9ob21lL29zc3Rlc3QvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2
+YWlsYWJsZSBhdAogICAgaHR0cDovL29zc3Rlc3QueHMuY2l0cml0ZS5uZXQvfm9zc3Rlc3QvdGVz
+dGxvZ3MvbG9ncwoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8v
+eGVuYml0cy54ZW5zb3VyY2UuY29tL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1
+c2ggbm90IGFwcGxpY2FibGUuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
