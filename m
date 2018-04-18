@@ -1,18 +1,25 @@
-From: Laura Abbott <labbott@redhat.com>
-Subject: [PATCHv2] x86/xen: Remove use of VLAs
-Date: Wed, 18 Apr 2018 10:08:32 -0700
-Message-ID: <20180418170832.8798-1-labbott__12398.6780680299$1524071254$gmane$org@redhat.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: Setting up a call to discuss PCI Emulation - Future
+ Direction
+Date: Wed, 18 Apr 2018 10:48:05 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1804181042420.17714@sstabellini-ThinkPad-X260>
+References: <4767D7C8-BB78-4B2E-8C9F-AE97CE5F02B5@citrix.com>
+ <20180412164104.ymrule7rkdr2w4sb@MacBook-Pro-de-Roger.local>
+ <6CF72FA0-688A-4D44-A87E-547DBCE4204D@citrix.com>
+ <20180413100149.33jiaddx5spfblmd@MacBook-Pro-de-Roger.local>
+ <A2852301-A0AF-45E2-BCC3-42A2F6090BA1@citrix.com>
+ <20180413175302.hy7xoakd2lwuu2jq@MacBook-Pro-de-Roger.local>
+ <5cb6841c689543c28405ce6bf56055bb@AMSPEX02CL03.citrite.net>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-2017897903-1524073417=:17714"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=7fwi=hh=redhat.com=labbott@srs-us1.protection.inumbo.net>)
- id 1f8qZW-0003Qj-MA
- for xen-devel@lists.xenproject.org; Wed, 18 Apr 2018 17:08:42 +0000
-Received: by mail-ot0-f194.google.com with SMTP id y46-v6so2738778otd.4
- for <xen-devel@lists.xenproject.org>; Wed, 18 Apr 2018 10:08:40 -0700 (PDT)
+ <srs0=kt56=hh=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1f8rBi-0006GY-6D
+ for xen-devel@lists.xenproject.org; Wed, 18 Apr 2018 17:48:10 +0000
+In-Reply-To: <5cb6841c689543c28405ce6bf56055bb@AMSPEX02CL03.citrite.net>
+Content-ID: <alpine.DEB.2.10.1804181047240.17714@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,77 +28,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>
-Cc: kernel-hardening@lists.openwall.com, x86@kernel.org, linux-kernel@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>, Laura Abbott <labbott@redhat.com>
+To: Paul Durrant <Paul.Durrant@citrix.com>
+Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Daniel Smith <dpsmith@apertussolutions.com>, Christopher Clark <christopher.w.clark@gmail.com>, Rich Persaud <persaur@gmail.com>, Julien Grall <julien.grall@arm.com>, Alexey G <x1917x@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ClRoZXJlJ3MgYW4gb25nb2luZyBlZmZvcnQgdG8gcmVtb3ZlIFZMQXNbMV0gZnJvbSB0aGUga2Vy
-bmVsIHRvIGV2ZW50dWFsbHkKdHVybiBvbiAtV3ZsYS4gSXQgdHVybnMgb3V0LCB0aGUgZmV3IFZM
-QXMgaW4gdXNlIGluIFhlbiBwcm9kdWNlIG9ubHkgYQpzaW5nbGUgZW50cnkgYXJyYXkgdGhhdCBp
-cyBhbHdheXMgYm91bmRlZCBieSBHRFRfU0laRS4gQ2xlYW4gdXAgdGhlIGNvZGUgdG8KZ2V0IHJp
-ZCBvZiB0aGUgVkxBIGFuZCB0aGUgbG9vcC4KClsxXSBodHRwczovL2xrbWwub3JnL2xrbWwvMjAx
-OC8zLzcvNjIxCgpTaWduZWQtb2ZmLWJ5OiBMYXVyYSBBYmJvdHQgPGxhYmJvdHRAcmVkaGF0LmNv
-bT4KLS0tCnYyOiBVcGRhdGVkIHRoZSBjb2RlIHRvIHJlZmxlY3QgdGhhdCB3ZSBrbm93IHNpemUg
-aXMgYWx3YXlzIGJvdW5kZWQgYnkKR0RUX1NJWkUuIFRoaXMgZ2V0cyByaWQgb2YgdGhlIGFycmF5
-IGFuZCB0aGUgbG9vcC4gSSBjYW4gdGhyb3cgYSBmZXcKbW9yZSBjb21tZW50cyBpbiB0aGVyZSBp
-ZiBzb21lb25lIHRoaW5rcyB0aGV5IG5lZWQgdG8gYmUgdXBkYXRlZC4KLS0tCiBhcmNoL3g4Ni94
-ZW4vZW5saWdodGVuX3B2LmMgfCA4NCArKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAyOSBpbnNlcnRpb25zKCspLCA1NSBkZWxldGlv
-bnMoLSkKCmRpZmYgLS1naXQgYS9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMgYi9hcmNoL3g4
-Ni94ZW4vZW5saWdodGVuX3B2LmMKaW5kZXggYzM2ZDIzYWE2YzM1Li4xMjU0ZjJmYTNhODkgMTAw
-NjQ0Ci0tLSBhL2FyY2gveDg2L3hlbi9lbmxpZ2h0ZW5fcHYuYworKysgYi9hcmNoL3g4Ni94ZW4v
-ZW5saWdodGVuX3B2LmMKQEAgLTQyMSw0NSArNDIxLDMyIEBAIHN0YXRpYyB2b2lkIHhlbl9sb2Fk
-X2dkdChjb25zdCBzdHJ1Y3QgZGVzY19wdHIgKmR0cikKIHsKIAl1bnNpZ25lZCBsb25nIHZhID0g
-ZHRyLT5hZGRyZXNzOwogCXVuc2lnbmVkIGludCBzaXplID0gZHRyLT5zaXplICsgMTsKLQl1bnNp
-Z25lZCBwYWdlcyA9IERJVl9ST1VORF9VUChzaXplLCBQQUdFX1NJWkUpOwotCXVuc2lnbmVkIGxv
-bmcgZnJhbWVzW3BhZ2VzXTsKLQlpbnQgZjsKLQotCS8qCi0JICogQSBHRFQgY2FuIGJlIHVwIHRv
-IDY0ayBpbiBzaXplLCB3aGljaCBjb3JyZXNwb25kcyB0byA4MTkyCi0JICogOC1ieXRlIGVudHJp
-ZXMsIG9yIDE2IDRrIHBhZ2VzLi4KLQkgKi8KKwl1bnNpZ25lZCBsb25nIHBmbiwgbWZuOworCWlu
-dCBsZXZlbDsKKwlwdGVfdCAqcHRlcDsKKwl2b2lkICp2aXJ0OwogCi0JQlVHX09OKHNpemUgPiA2
-NTUzNik7CisJQlVHX09OKHNpemUgPiBHRFRfU0laRSk7CiAJQlVHX09OKHZhICYgflBBR0VfTUFT
-Syk7CiAKLQlmb3IgKGYgPSAwOyB2YSA8IGR0ci0+YWRkcmVzcyArIHNpemU7IHZhICs9IFBBR0Vf
-U0laRSwgZisrKSB7Ci0JCWludCBsZXZlbDsKLQkJcHRlX3QgKnB0ZXA7Ci0JCXVuc2lnbmVkIGxv
-bmcgcGZuLCBtZm47Ci0JCXZvaWQgKnZpcnQ7Ci0KLQkJLyoKLQkJICogVGhlIEdEVCBpcyBwZXIt
-Y3B1IGFuZCBpcyBpbiB0aGUgcGVyY3B1IGRhdGEgYXJlYS4KLQkJICogVGhhdCBjYW4gYmUgdmly
-dHVhbGx5IG1hcHBlZCwgc28gd2UgbmVlZCB0byBkbyBhCi0JCSAqIHBhZ2Utd2FsayB0byBnZXQg
-dGhlIHVuZGVybHlpbmcgTUZOIGZvciB0aGUKLQkJICogaHlwZXJjYWxsLiAgVGhlIHBhZ2UgY2Fu
-IGFsc28gYmUgaW4gdGhlIGtlcm5lbCdzCi0JCSAqIGxpbmVhciByYW5nZSwgc28gd2UgbmVlZCB0
-byBSTyB0aGF0IG1hcHBpbmcgdG9vLgotCQkgKi8KLQkJcHRlcCA9IGxvb2t1cF9hZGRyZXNzKHZh
-LCAmbGV2ZWwpOwotCQlCVUdfT04ocHRlcCA9PSBOVUxMKTsKLQotCQlwZm4gPSBwdGVfcGZuKCpw
-dGVwKTsKLQkJbWZuID0gcGZuX3RvX21mbihwZm4pOwotCQl2aXJ0ID0gX192YShQRk5fUEhZUyhw
-Zm4pKTsKKwkvKgorCSAqIFRoZSBHRFQgaXMgcGVyLWNwdSBhbmQgaXMgaW4gdGhlIHBlcmNwdSBk
-YXRhIGFyZWEuCisJICogVGhhdCBjYW4gYmUgdmlydHVhbGx5IG1hcHBlZCwgc28gd2UgbmVlZCB0
-byBkbyBhCisJICogcGFnZS13YWxrIHRvIGdldCB0aGUgdW5kZXJseWluZyBNRk4gZm9yIHRoZQor
-CSAqIGh5cGVyY2FsbC4gIFRoZSBwYWdlIGNhbiBhbHNvIGJlIGluIHRoZSBrZXJuZWwncworCSAq
-IGxpbmVhciByYW5nZSwgc28gd2UgbmVlZCB0byBSTyB0aGF0IG1hcHBpbmcgdG9vLgorCSAqLwor
-CXB0ZXAgPSBsb29rdXBfYWRkcmVzcyh2YSwgJmxldmVsKTsKKwlCVUdfT04ocHRlcCA9PSBOVUxM
-KTsKIAotCQlmcmFtZXNbZl0gPSBtZm47CisJcGZuID0gcHRlX3BmbigqcHRlcCk7CisJbWZuID0g
-cGZuX3RvX21mbihwZm4pOworCXZpcnQgPSBfX3ZhKFBGTl9QSFlTKHBmbikpOwogCi0JCW1ha2Vf
-bG93bWVtX3BhZ2VfcmVhZG9ubHkoKHZvaWQgKil2YSk7Ci0JCW1ha2VfbG93bWVtX3BhZ2VfcmVh
-ZG9ubHkodmlydCk7Ci0JfQorCW1ha2VfbG93bWVtX3BhZ2VfcmVhZG9ubHkoKHZvaWQgKil2YSk7
-CisJbWFrZV9sb3dtZW1fcGFnZV9yZWFkb25seSh2aXJ0KTsKIAotCWlmIChIWVBFUlZJU09SX3Nl
-dF9nZHQoZnJhbWVzLCBzaXplIC8gc2l6ZW9mKHN0cnVjdCBkZXNjX3N0cnVjdCkpKQorCWlmIChI
-WVBFUlZJU09SX3NldF9nZHQoJm1mbiwgc2l6ZSAvIHNpemVvZihzdHJ1Y3QgZGVzY19zdHJ1Y3Qp
-KSkKIAkJQlVHKCk7CiB9CiAKQEAgLTQ3MCwzNCArNDU3LDIxIEBAIHN0YXRpYyB2b2lkIF9faW5p
-dCB4ZW5fbG9hZF9nZHRfYm9vdChjb25zdCBzdHJ1Y3QgZGVzY19wdHIgKmR0cikKIHsKIAl1bnNp
-Z25lZCBsb25nIHZhID0gZHRyLT5hZGRyZXNzOwogCXVuc2lnbmVkIGludCBzaXplID0gZHRyLT5z
-aXplICsgMTsKLQl1bnNpZ25lZCBwYWdlcyA9IERJVl9ST1VORF9VUChzaXplLCBQQUdFX1NJWkUp
-OwotCXVuc2lnbmVkIGxvbmcgZnJhbWVzW3BhZ2VzXTsKLQlpbnQgZjsKLQotCS8qCi0JICogQSBH
-RFQgY2FuIGJlIHVwIHRvIDY0ayBpbiBzaXplLCB3aGljaCBjb3JyZXNwb25kcyB0byA4MTkyCi0J
-ICogOC1ieXRlIGVudHJpZXMsIG9yIDE2IDRrIHBhZ2VzLi4KLQkgKi8KKwl1bnNpZ25lZCBsb25n
-IHBmbiwgbWZuOworCXB0ZV90IHB0ZTsKIAotCUJVR19PTihzaXplID4gNjU1MzYpOworCUJVR19P
-TihzaXplID4gR0RUX1NJWkUpOwogCUJVR19PTih2YSAmIH5QQUdFX01BU0spOwogCi0JZm9yIChm
-ID0gMDsgdmEgPCBkdHItPmFkZHJlc3MgKyBzaXplOyB2YSArPSBQQUdFX1NJWkUsIGYrKykgewot
-CQlwdGVfdCBwdGU7Ci0JCXVuc2lnbmVkIGxvbmcgcGZuLCBtZm47CisJcGZuID0gdmlydF90b19w
-Zm4odmEpOworCW1mbiA9IHBmbl90b19tZm4ocGZuKTsKIAotCQlwZm4gPSB2aXJ0X3RvX3Bmbih2
-YSk7Ci0JCW1mbiA9IHBmbl90b19tZm4ocGZuKTsKKwlwdGUgPSBwZm5fcHRlKHBmbiwgUEFHRV9L
-RVJORUxfUk8pOwogCi0JCXB0ZSA9IHBmbl9wdGUocGZuLCBQQUdFX0tFUk5FTF9STyk7Ci0KLQkJ
-aWYgKEhZUEVSVklTT1JfdXBkYXRlX3ZhX21hcHBpbmcoKHVuc2lnbmVkIGxvbmcpdmEsIHB0ZSwg
-MCkpCi0JCQlCVUcoKTsKLQotCQlmcmFtZXNbZl0gPSBtZm47Ci0JfQorCWlmIChIWVBFUlZJU09S
-X3VwZGF0ZV92YV9tYXBwaW5nKCh1bnNpZ25lZCBsb25nKXZhLCBwdGUsIDApKQorCQlCVUcoKTsK
-IAotCWlmIChIWVBFUlZJU09SX3NldF9nZHQoZnJhbWVzLCBzaXplIC8gc2l6ZW9mKHN0cnVjdCBk
-ZXNjX3N0cnVjdCkpKQorCWlmIChIWVBFUlZJU09SX3NldF9nZHQoJm1mbiwgc2l6ZSAvIHNpemVv
-ZihzdHJ1Y3QgZGVzY19zdHJ1Y3QpKSkKIAkJQlVHKCk7CiB9CiAKLS0gCjIuMTQuMwoKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-2017897903-1524073417=:17714
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1804181047241.17714@sstabellini-ThinkPad-X260>
+
+On Sat, 14 Apr 2018, Paul Durrant wrote:
+> > -----Original Message-----
+> > From: Roger Pau Monne
+> > Sent: 13 April 2018 20:53
+> > To: Lars Kurth <lars.kurth@citrix.com>
+> > Cc: xen-devel <xen-devel@lists.xenproject.org>; Daniel Smith
+> > <dpsmith@apertussolutions.com>; Alexey G <x1917x@gmail.com>; Stefano
+> > Stabellini <sstabellini@kernel.org>; Julien Grall <julien.grall@arm.com>; Paul
+> > Durrant <Paul.Durrant@citrix.com>; Christopher Clark
+> > <christopher.w.clark@gmail.com>; Rich Persaud <persaur@gmail.com>
+> > Subject: Re: Setting up a call to discuss PCI Emulation - Future Direction
+> > 
+> > On Fri, Apr 13, 2018 at 12:59:15PM +0100, Lars Kurth wrote:
+> > >
+> > >
+> > > ﻿On 13/04/2018, 11:01, "Roger Pau Monne" <roger.pau@citrix.com> wrote:
+> > >
+> > >     On Thu, Apr 12, 2018 at 05:50:00PM +0100, Lars Kurth wrote:
+> > >     >
+> > >     >
+> > >     > On 12/04/2018, 17:41, "Roger Pau Monne" <roger.pau@citrix.com>
+> > wrote:
+> > >     >
+> > >     >     On Thu, Apr 12, 2018 at 05:32:57PM +0100, Lars Kurth wrote:
+> > >     >
+> > >     >
+> > >     >     >    may work. For me Mon, Wed and Fri’s generally work at those
+> > time-slots.
+> > >     >     >    Next week is a little busy for me, so I would prefer the following
+> > week.
+> > >     >     >    If you could fill out the following Google poll, if this week works
+> > that
+> > >     >     >    would be great. Otherwise please scream.
+> > >     >
+> > >     >     I'm afraid I'm on vacations from the 21st to the 29th of April, so I
+> > >     >     won't be able to join the meeting unless we move it to the week
+> > after.
+> > >     >     Let's see what people think of the current dates.
+> > >     >
+> > >     >     Roger.
+> > >     >
+> > >     > Hi, I changed the dates to the week after. Poll so far has been
+> > invalidated.
+> > >     >
+> > >     > See https://doodle.com/poll/gdnmcrvnibmw563n
+> > >
+> > >     Thanks! I've already fixed my vote.
+> > >
+> > >     I guess this will come later, but we need a clear agenda of items
+> > >     because the x86 and ARM topics are probably going to be completely
+> > >     different (albeit all related to PCI).
+> > >
+> > > Royger: I am OK with trying to get a draft agenda in place in this e-mail
+> > thread. But I can't drive this, as I don’t understand the issues. But I am happy
+> > to collate everything as for the x86 call and write up minutes
+> > 
+> > On the x86 side:
+> > 
+> >  - Q35 HVM emulation, adding MCFG support to guests.
+> 
+> One of the issues here is support for multiple external emulators w.r.t. config space access.
+>
+> >  - PVH guest pci-passthrough: using the internal vPCI infrastructure.
+> 
+> Let's not distinguish between HVM or PVH here. We want to use the same passthrough mechanisms for both.
+
+Ideally, we'll use the same mechanism for ARM too.
+--8323329-2017897903-1524073417=:17714
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-2017897903-1524073417=:17714--
