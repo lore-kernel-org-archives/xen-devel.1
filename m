@@ -1,23 +1,16 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86/cpu: Support a new cpu vendor,
- which is Shanghai
-Date: Wed, 18 Apr 2018 04:51:52 -0600
-Message-ID: <5AD7234802000078001BC5E0@prv1-mh.provo.novell.com>
-References: <1521804536-2852-1-git-send-email-lifang110@126.com>
- <5AB52C1602000078001B59B8@gwmail.emea.novell.com>
- <bff3a4ea8e834e2c9d8847ee9ba8a05b@zhaoxin.com>
- <5ACC5B00020000780012CAE3@prv1-mh.provo.novell.com>
- <e56a088e7b57446a9a697fb0ea299bec@zhaoxin.com>
+Subject: Re: [PATCH] x86/p2m: fixed p2m_change_type_range()
+ start / end check
+Date: Wed, 18 Apr 2018 04:53:43 -0600
+Message-ID: <5AD723B702000078001BC5E3@prv1-mh.provo.novell.com>
+References: <1523985391-4557-1-git-send-email-rcojocaru@bitdefender.com>
+ <5AD6F5E802000078001BC3EE@prv1-mh.provo.novell.com>
+ <06afcce1-0390-c26b-d654-63c866329df4@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=iali=hh=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1f8kgo-0000P5-14
- for xen-devel@lists.xenproject.org; Wed, 18 Apr 2018 10:51:50 +0000
-In-Reply-To: <e56a088e7b57446a9a697fb0ea299bec@zhaoxin.com>
+In-Reply-To: <06afcce1-0390-c26b-d654-63c866329df4@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -27,20 +20,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Fiona Li(BJ-RD)" <FionaLi@zhaoxin.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: george.dunlap@citrix.com
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE4LjA0LjE4IGF0IDEyOjI1LCA8RmlvbmFMaUB6aGFveGluLmNvbT4gd3JvdGU6Cj4g
-W0Zpb25hTGldIDogSSBhbSBzb3JyeS4gSSB1bmRlcnN0b29kIHdyb25nbHkuIFRoZSBDMDAweHh4
-eCByYW5nZSBhcmUgCj4gZXh0ZW5zaW9ucywgd2hpY2ggcHJvdmlkZSBzb21lIGFkZGl0aW9uYWwg
-ZmVhdHVyZSBkaWZmZXJlbnQgZnJvbSBJbnRlbC4gIEFzIAo+IHlvdSBzdWdnZXN0ZWQsIHdlIHdp
-bGwgZW5hYmxlIHRob3NlIGZlYXR1cmVzIGluIGd1ZXN0IE9TZXMgYW5kIHJlbW92ZSB0aGVzZSAK
-PiBjb2RlIGZyb20gcGF0Y2guIENhbiB3ZSBzdXBwb3J0IHRoZSBDUFVJRCBsZWF2ZXMgYW5kIGVt
-dWxhdGUgdGhlIE1TUiAgd2l0aCAKPiBhbm90aGVyIHN1Ym1pdD8KCldpdGggYW5vdGhlciBwYXRj
-aCB5b3UgbWVhbj8gWWVzIHBsZWFzZSAtIGlmIGF0IGFsbCBwb3NzaWJsZSBwdXQgc2VwYXJhdGUK
-c2V0cyBvZiBjaGFuZ2VzIGludG8gc2VwYXJhdGUgcGF0Y2hlcywgY29tYmluZWQgaW50byBhIHNl
-cmllcyBpZiB0aGVyZSBhcmUKZGVwZW5kZW5jaWVzIGJldHdlZW4gdGhlbS4KCkphbgoKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDE4LjA0LjE4IGF0IDEyOjIzLCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPiB3cm90
+ZToKPiBUaGF0IGlzLCBzZW5zaWJsZSBpbnB1dCBsb29rcyBsaWtlOgo+ICogc3RhcnQgPCBlbmQK
+PiAqIEZvciBob3N0cDJtczoKPiAgLSBzdGFydCA8PSBtYXhfbWFwcGVkX3Bmbgo+ICAtIGVpdGhl
+ciBlbmQgPD0gbWF4X21hcHBlZF9wZm4sIG9yIGVuZCA9PSB+MFVMCj4gKEJ1dCBmb3IgYWx0cDJt
+cywgc3RhcnQgb3IgZW5kID4gbWF4X21hcHBlZF9wZm4gaXMgZmluZS4pCgpTbyBJIGd1ZXNzIHRo
+YXQncyBwYXJ0IG9mIHRoZSBkaWZmaWN1bHR5IEknbSBoYXZpbmcgd2l0aCB0aGUgb3JpZ2luYWwg
+c3VnZ2VzdGlvbjoKV2h5IHdvdWxkIHN1Y2ggaW5wdXQgYmUgb2theSBmb3IgYWx0ZXJuYXRpdmUg
+cDJtLXM/CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
