@@ -1,8 +1,8 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [PATCH 01/16] checkpatch: Add xendevicemodel_handle to
- the list of types
-Date: Thu, 19 Apr 2018 17:45:04 +0100
-Message-ID: <1524156319-11465-2-git-send-email-ian.jackson@eu.citrix.com>
+Subject: [PATCH 06/16] xen: destroy_hvm_domain: Move reason into
+ a variable
+Date: Thu, 19 Apr 2018 17:45:09 +0100
+Message-ID: <1524156319-11465-7-git-send-email-ian.jackson@eu.citrix.com>
 References: <1524156319-11465-1-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +11,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=jxfj=hi=citrix.com=prvs=6403088e3=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1f9Cgv-0004FK-2D
- for xen-devel@lists.xenproject.org; Thu, 19 Apr 2018 16:45:49 +0000
+ id 1f9Cgz-0004GG-KB
+ for xen-devel@lists.xenproject.org; Thu, 19 Apr 2018 16:45:53 +0000
 In-Reply-To: <1524156319-11465-1-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,32 +23,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: qemu-devel@nongnu.org
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, "Daniel P. Berrange" <berrange@redhat.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, Paolo Bonzini <pbonzini@redhat.com>, Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Eric Blake <eblake@redhat.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBhdm9pZHMgY2hlY2twYXRjaCBtaXNwYXJzaW5nIChhcyBzdGF0ZW1lbnRzKSBsb25nIGZ1
-bmN0aW9uCmRlZmluaXRpb25zIG9yIGRlY2xhcmF0aW9ucywgd2hpY2ggc29tZXRpbWVzIHN0YXJ0
-IHdpdGggY29uc3RydWN0cwpsaWtlIHRoaXM6CgogIHN0YXRpYyBpbmxpbmUgaW50IHhlbmRldmlj
-ZW1vZGVsX3JlbG9jYXRlX21lbW9yeSgKICAgICAgeGVuZGV2aWNlbW9kZWxfaGFuZGxlICpkbW9k
-LCBkb21pZF90IGRvbWlkLCAuLi4KClRoZSB0eXBlIHhlbmRldmljZW1vZGVsX2hhbmRsZSBkb2Vz
-IG5vdCBjb25mb3JtIHRvIFFlbXUgQ09ESU5HX1NUWUxFLAp3aGljaCB3b3VsZCBzdWdnZXN0IENh
-bWVsQ2FzZS4gIEhvd2V2ZXIsIGl0IGlzIGEgdHlwZSBkZWZpbmVkIGJ5IHRoZQpYZW4gUHJvamVj
-dCBpbiB4ZW4uZ2l0LiAgSXQgd291bGQgYmUgcG9zc2libGUgdG8gaW50cm9kdWNlIGEgdHlwZWRl
-Zgp0byBhbGxvdyB0aGUgcWVtdSBjb2RlIHRvIHJlZmVyIHRvIGl0IGJ5IGEgZGlmZmVyZW50bHkt
-c3BlbGxlZCBuYW1lLApidXQgdGhhdCB3b3VsZCBvYmZ1c2NhdGUgbW9yZSB0aGFuIGl0IHdvdWxk
-IGNsYXJpZnkuCgpDQzogRXJpYyBCbGFrZSA8ZWJsYWtlQHJlZGhhdC5jb20+CkNDOiBQYW9sbyBC
-b256aW5pIDxwYm9uemluaUByZWRoYXQuY29tPgpDQzogRGFuaWVsIFAuIEJlcnJhbmdlIDxiZXJy
-YW5nZUByZWRoYXQuY29tPgpTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8SWFuLkphY2tzb25A
-ZXUuY2l0cml4LmNvbT4KLS0tCnY3OiBBZGRlZCBjb21tZW50IHRvIGNvbW1pdCBtZXNzYWdlIGFi
-b3V0IHdoeSB3ZSBhcmUgbm90IHJlbmFtaW5nCiAgICB0aGlzIHR5cGUgdG8gQ2FtZWxDYXNlLgp2
-Ni4xOiBOZXcgcGF0Y2gKLS0tCiBzY3JpcHRzL2NoZWNrcGF0Y2gucGwgfCAxICsKIDEgZmlsZSBj
-aGFuZ2VkLCAxIGluc2VydGlvbigrKQoKZGlmZiAtLWdpdCBhL3NjcmlwdHMvY2hlY2twYXRjaC5w
-bCBiL3NjcmlwdHMvY2hlY2twYXRjaC5wbAppbmRleCBkNTIyMDdhLi41Yjg3MzVkIDEwMDc1NQot
-LS0gYS9zY3JpcHRzL2NoZWNrcGF0Y2gucGwKKysrIGIvc2NyaXB0cy9jaGVja3BhdGNoLnBsCkBA
-IC0yNjYsNiArMjY2LDcgQEAgb3VyIEB0eXBlTGlzdCA9ICgKIAlxcnt0YXJnZXRfKD86dSk/bG9u
-Z30sCiAJcXJ7aHdhZGRyfSwKIAlxcnt4bWwke0lkZW50fX0sCisJcXJ7eGVuZGV2aWNlbW9kZWxf
-aGFuZGxlfSwKICk7CiAKICMgVGhpcyBjYW4gYmUgbW9kaWZpZWQgYnkgc3ViIHBvc3NpYmxlLiAg
-U2luY2UgaXQgY2FuIGJlIGVtcHR5LCBiZSBjYXJlZnVsCi0tIAoyLjEuNAoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+V2UgYXJlIGdvaW5nIHRvIHdhbnQgdG8gcmV1c2UgdGhpcy4KCk5vIGZ1bmN0aW9uYWwgY2hhbmdl
+LgoKU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPElhbi5KYWNrc29uQGV1LmNpdHJpeC5jb20+
+ClJldmlld2VkLWJ5OiBBbnRob255IFBFUkFSRCA8YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4K
+QWNrZWQtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KLS0t
+CiBody9pMzg2L3hlbi94ZW4taHZtLmMgfCA1ICsrKy0tCiAxIGZpbGUgY2hhbmdlZCwgMyBpbnNl
+cnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2h3L2kzODYveGVuL3hlbi1o
+dm0uYyBiL2h3L2kzODYveGVuL3hlbi1odm0uYwppbmRleCA5YzNiNmIzLi4zNTkwZDk5IDEwMDY0
+NAotLS0gYS9ody9pMzg2L3hlbi94ZW4taHZtLmMKKysrIGIvaHcvaTM4Ni94ZW4veGVuLWh2bS5j
+CkBAIC0xMzg3LDEyICsxMzg3LDEzIEBAIHZvaWQgZGVzdHJveV9odm1fZG9tYWluKGJvb2wgcmVi
+b290KQogICAgIHhjX2ludGVyZmFjZSAqeGNfaGFuZGxlOwogICAgIGludCBzdHM7CiAKKyAgICB1
+bnNpZ25lZCBpbnQgcmVhc29uID0gcmVib290ID8gU0hVVERPV05fcmVib290IDogU0hVVERPV05f
+cG93ZXJvZmY7CisKICAgICB4Y19oYW5kbGUgPSB4Y19pbnRlcmZhY2Vfb3BlbigwLCAwLCAwKTsK
+ICAgICBpZiAoeGNfaGFuZGxlID09IE5VTEwpIHsKICAgICAgICAgZnByaW50ZihzdGRlcnIsICJD
+YW5ub3QgYWNxdWlyZSB4ZW5jdHJsIGhhbmRsZVxuIik7CiAgICAgfSBlbHNlIHsKLSAgICAgICAg
+c3RzID0geGNfZG9tYWluX3NodXRkb3duKHhjX2hhbmRsZSwgeGVuX2RvbWlkLAotICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcmVib290ID8gU0hVVERPV05fcmVib290IDogU0hVVERP
+V05fcG93ZXJvZmYpOworICAgICAgICBzdHMgPSB4Y19kb21haW5fc2h1dGRvd24oeGNfaGFuZGxl
+LCB4ZW5fZG9taWQsIHJlYXNvbik7CiAgICAgICAgIGlmIChzdHMgIT0gMCkgewogICAgICAgICAg
+ICAgZnByaW50ZihzdGRlcnIsICJ4Y19kb21haW5fc2h1dGRvd24gZmFpbGVkIHRvIGlzc3VlICVz
+LCAiCiAgICAgICAgICAgICAgICAgICAgICJzdHMgJWQsICVzXG4iLCByZWJvb3QgPyAicmVib290
+IiA6ICJwb3dlcm9mZiIsCi0tIAoyLjEuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
