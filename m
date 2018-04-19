@@ -1,17 +1,19 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 4/6] arm: add a small kconfig for Renesas
- RCar H3
-Date: Thu, 19 Apr 2018 16:00:22 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1804191548030.3303@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1804181324400.17714@sstabellini-ThinkPad-X260>
- <1524089752-22174-4-git-send-email-sstabellini@kernel.org>
- <6a80e2e4-4063-fb5a-36b5-8980344b38fd@citrix.com>
- <2e905223-37f8-f1c8-d685-a133572bfc09@suse.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH 4/8] x86/SVM: Add vcpu scheduling support
+ for AVIC
+Date: Thu, 19 Apr 2018 19:04:19 -0400
+Message-ID: <ab0f1d8a-d3de-fa12-92ae-d7379029f013@oracle.com>
+References: <cover.1522794651.git.Janakarajan.Natarajan@amd.com>
+ <5d6f4ad92f0ef62afedbc0a111ec2d4fe8286c43.1522794651.git.Janakarajan.Natarajan@amd.com>
+ <47fc298a-02f5-0f30-61e3-c7fdf038337d@citrix.com>
+ <40d464fb-9ed0-209f-8bbf-45537a3194ec@amd.com>
+ <75701443-3aa5-b647-2214-4f026fd05b97@citrix.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-493203042-1524178133=:3303"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <2e905223-37f8-f1c8-d685-a133572bfc09@suse.com>
-Content-ID: <alpine.DEB.2.10.1804191549070.3303@sstabellini-ThinkPad-X260>
+In-Reply-To: <75701443-3aa5-b647-2214-4f026fd05b97@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,69 +22,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: artem_mygaiev@epam.com, Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org, julien.grall@arm.com, volodymyr_babchuk@epam.com
+To: Andrew Cooper <andrew.cooper3@citrix.com>, "Natarajan, Janakarajan" <jnataraj@amd.com>, Janakarajan Natarajan <Janakarajan.Natarajan@amd.com>, xen-devel@lists.xen.org
+Cc: Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-493203042-1524178133=:3303
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1804191549071.3303@sstabellini-ThinkPad-X260>
-
-On Thu, 19 Apr 2018, Juergen Gross wrote:
-> On 19/04/18 10:06, Andrew Cooper wrote:
-> > On 18/04/2018 23:15, Stefano Stabellini wrote:
-> >>  xen/arch/arm/configs/renesas.config | 80 +++++++++++++++++++++++++++++++++++++
-> >>  1 file changed, 80 insertions(+)
-> >>  create mode 100644 xen/arch/arm/configs/renesas.config
-> >>
-> >> diff --git a/xen/arch/arm/configs/renesas.config b/xen/arch/arm/configs/renesas.config
-> >> new file mode 100644
-> >> index 0000000..7ad3f1c
-> >> --- /dev/null
-> >> +++ b/xen/arch/arm/configs/renesas.config
-> >> @@ -0,0 +1,80 @@
-> >> +#
-> >> +# Automatically generated file; DO NOT EDIT.
-> >> +# Xen/arm 4.11-unstable Configuration
-> >> +#
-> > 
-> > This is now the second Kconfig file we've got added into the tree.  As
-> > with the PV-shim config, keeping it up to date is going to be a little
-> > tricky.
-> > 
-> > I think we either need a script to keep all of the embedded configs up
-> > to date, or switch to a model (similar to the travis randconfig target)
-> > where it becomes a `make defaultconfig` with certain specific options
-> > forced one way or another (similar to `make {tiny,kvm,xen}config` in
-> > Linux).  The latter means that we only store the specific delta
-> > applicable for purpose, and it will probably change less frequently.
->
-> I think the easiest way would be to have a config file with only the
-> required non-default options being specified and then run
-> "make olddefconfig" against that (or better: a copy of that in order
-> to avoid modifying a source from git).
-> 
-> I'm just writing a patch to do that for the shim config as it is nasty
-> to remove shim.config from my patches in case it has been modified by
-> the build (again) and STGit has picked it up.
-
-Given that the goal of this kconfig is to provide the smallest possible
-kconfig for a given board, I think that your suggestion wouldn't end up
-improving things much in this case because most options will have to be
-specified as "disabled", otherwise "make olddefconfig" would end up
-enabling some of them by default, which is not what we want.
---8323329-493203042-1524178133=:3303
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-493203042-1524178133=:3303--
+T24gMDQvMTkvMjAxOCAwMjoxOCBQTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAxOS8wNC8x
+OCAxNjo1NCwgTmF0YXJhamFuLCBKYW5ha2FyYWphbiB3cm90ZToKPj4gT24gNC8xMy8yMDE4IDEy
+OjU3IFBNLCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+Pj4gT24gMDQvMDQvMTggMDA6MDEsIEphbmFr
+YXJhamFuIE5hdGFyYWphbiB3cm90ZToKPj4+PiBAQCAtNjMsNiArNjQsNTQgQEAgYXZpY19nZXRf
+cGh5c2ljYWxfaWRfZW50cnkoc3RydWN0IHN2bV9kb21haW4gKmQsCj4+Pj4gdW5zaWduZWQgaW50
+IGluZGV4KQo+Pj4+IMKgwqDCoMKgwqAgcmV0dXJuICZkLT5hdmljX3BoeXNpY2FsX2lkX3RhYmxl
+W2luZGV4XTsKPj4+PiDCoCB9Cj4+Pj4gwqAgK3N0YXRpYyB2b2lkIGF2aWNfdmNwdV9sb2FkKHN0
+cnVjdCB2Y3B1ICp2KQo+Pj4+ICt7Cj4+Pj4gK8KgwqDCoCB1bnNpZ25lZCBsb25nIHRtcDsKPj4+
+PiArwqDCoMKgIHN0cnVjdCBhcmNoX3N2bV9zdHJ1Y3QgKnMgPSAmdi0+YXJjaC5odm1fc3ZtOwo+
+Pj4+ICvCoMKgwqAgaW50IGhfcGh5X2FwaWNfaWQ7Cj4+Pj4gK8KgwqDCoCBzdHJ1Y3QgYXZpY19w
+aHlzaWNhbF9pZF9lbnRyeSAqZW50cnkgPSAoc3RydWN0Cj4+Pj4gYXZpY19waHlzaWNhbF9pZF9l
+bnRyeSAqKSZ0bXA7Cj4+Pj4gKwo+Pj4+ICvCoMKgwqAgQVNTRVJUKCF0ZXN0X2JpdChfVlBGX2Js
+b2NrZWQsICZ2LT5wYXVzZV9mbGFncykpOwo+Pj4+ICsKPj4+PiArwqDCoMKgIC8qCj4+Pj4gK8Kg
+wqDCoMKgICogTm90ZTogQVBJQyBJRCA9IDB4ZmYgaXMgdXNlZCBmb3IgYnJvYWRjYXN0Lgo+Pj4+
+ICvCoMKgwqDCoCAqwqDCoMKgwqDCoMKgIEFQSUMgSUQgPiAweGZmIGlzIHJlc2VydmVkLgo+Pj4+
+ICvCoMKgwqDCoCAqLwo+Pj4+ICvCoMKgwqAgaF9waHlfYXBpY19pZCA9IGNwdV9kYXRhW3YtPnBy
+b2Nlc3Nvcl0uYXBpY2lkOwo+Pj4+ICvCoMKgwqAgQVNTRVJUKGhfcGh5X2FwaWNfaWQgPCBBVklD
+X1BIWV9BUElDX0lEX01BWCk7Cj4+Pj4gKwo+Pj4+ICvCoMKgwqAgdG1wID0gcmVhZF9hdG9taWMo
+KHU2NCopKHMtPmF2aWNfbGFzdF9waHlfaWQpKTsKPj4+PiArwqDCoMKgIGVudHJ5LT5ob3N0X3Bo
+eV9hcGljX2lkID0gaF9waHlfYXBpY19pZDsKPj4+PiArwqDCoMKgIGVudHJ5LT5pc19ydW5uaW5n
+ID0gMTsKPj4+PiArwqDCoMKgIHdyaXRlX2F0b21pYygodTY0Kikocy0+YXZpY19sYXN0X3BoeV9p
+ZCksIHRtcCk7Cj4+PiBXaGF0IGlzIHRoZSBwdXJwb3NlIG9mIHMtPmF2aWNfbGFzdF9waHlfaWQg
+Pwo+Pj4KPj4+IEFzIGZhciBhcyBJIGNhbiB0ZWxsLCBpdCBpcyBhbHdheXMgYW4gdW5jaGFuZ2lu
+ZyBwb2ludGVyIGludG8gdGhlCj4+PiBwaHlzaWNhbCBJRCB0YWJsZSwgd2hpY2ggaXMgb25seSBl
+dmVyIHVwZGF0ZWQgc3luY2hyb25vdXNseSBpbiBjdXJyZW50Cj4+PiBjb250ZXh0Lgo+Pj4KPj4+
+IElmIHNvLCBJIGRvbid0IHNlZSB3aHkgaXQgbmVlZHMgYW55IG9mIHRoZXNlIGhvb3BzIHRvIGJl
+IGp1bXBlZCB0aG91Z2guCj4+IHMtPmF2aWNfbGFzdF9waHlfaWQgaXMgdXNlZCB0byBxdWlja2x5
+IGFjY2VzcyB0aGUgZW50cnkgaW4gdGhlIHRhYmxlLgo+Pgo+PiBXaGVuIHRoZSBjb2RlIHdhcyBw
+dXNoZWQgZm9yIExpbnV4LCBtZW1vcnkgYmFycmllcnMgd2VyZSB1c2VkIGFuZCBpdAo+PiB3YXMg
+c3VnZ2VzdGVkIHRoYXQgYXRvbWljIG9wZXJhdGlvbnMKPj4gYmUgdXNlZCBpbnN0ZWFkIHRvIGVu
+c3VyZSBjb21waWxlciBvcmRlcmluZy4gVGhlIHNhbWUgaXMgZG9uZSBoZXJlLgo+IE9rIC0gc3Vt
+bWluZyB1cCBhIGNvbnZlcnNhdGlvbiBvbiBJUkMsIGFuZCBzb21lIGRpZ2dpbmcgYXJvdW5kIHRo
+ZSBtYW51YWwuCj4KPiBQZXIgVk0sIHRoZXJlIGlzIGEgc2luZ2xlIFBoeXNpY2FsIEFQSUMgVGFi
+bGUsIHdoaWNoIGxpdmVzIGluIGEgNGsKPiBwYWdlLsKgIFRoaXMgdGFibGUgaXMgcmVmZXJlbmNl
+ZCBieSB0aGUgVk1DQiwgYW5kIHJlYWQgYnkgaGFyZHdhcmUgd2hlbgo+IHByb2Nlc3NpbmcgZ3Vl
+c3QgYWN0aW9ucy4KPgo+IFRoZSBjb250ZW50cyBvZiB0aGlzIHRhYmxlIGEgbGlzdCBvZiA2NGJp
+dCBlbnRyaWVzLAo+Cj4gc3RydWN0IF9fcGFja2VkIGF2aWNfcGh5c2ljYWxfaWRfZW50cnkgewo+
+ICAgICB1NjQgaG9zdF9waHlfYXBpY19pZCAgOiA4Owo+ICAgICB1NjQgcmVzMSAgICAgICAgICAg
+ICAgOiA0Owo+ICAgICB1NjQgYmtfcGdfcHRyX21mbiAgICAgOiA0MDsKPiAgICAgdTY0IHJlczIg
+ICAgICAgICAgICAgIDogMTA7Cj4gICAgIHU2NCBpc19ydW5uaW5nICAgICAgICA6IDE7Cj4gICAg
+IHU2NCB2YWxpZCAgICAgICAgICAgICA6IDE7Cj4gfTsKPgo+IHdoaWNoIGFyZSBpbmRleGVkIGJ5
+IGd1ZXN0IEFQSUNfSUQuCj4KPiBBTUQgaGFyZHdhcmUgYWxsb3dzIHdyaXRlcyB0byB0aGUgQVBJ
+Q19JRCByZWdpc3RlciwgYnV0IE9TZXMgZG9uJ3QgZG8KPiB0aGlzIGluIHByYWN0aWNlICh0aGUg
+cmVnaXN0ZXIgaXMgcmVhZC9kaXNjYXJkIG9uIHNvbWUgaGFyZHdhcmUsIGFuZAo+IHN0cmljdGx5
+IHJlYWQtb25seSBpbiB4MmFwaWMpLsKgIFRoZSBpbXBsZW1lbnRhdGlvbiBpbiBYZW4gaXMgdG8g
+Y3Jhc2gKPiB0aGUgZG9tYWluIGlmIHdlIHNlZSBhIHdyaXRlIGhlcmUsIGFuZCB0aGF0IGlzIHJl
+YXNvbmFibGUgYmVoYXZpb3VyCj4gd2hpY2ggSSBkb24ndCBleHBlY3QgdG8gY2hhbmdlIGdvaW5n
+IGZvcndhcmRzLgo+Cj4gQXMgYSByZXN1bHQsIHRoZSBsYXlvdXQgb2YgdGhlIFBoeXNpY2FsIEFQ
+SUMgVGFibGUgaXMgZml4ZWQgYmFzZWQgb24gdGhlCj4gQVBJQyBhc3NpZ25tZW50IGR1cmluZyBk
+b21haW4gY3JlYXRpb24uwqAgQWxzbywgdGhlIGJrX3BnX3B0cl9tZm4gYW5kIGl0cwo+IHZhbGlk
+IGJpdCAodmFsaWQpIGFyZSBzZXQgdXAgZHVyaW5nIGNvbnN0cnVjdGlvbiwgYW5kIHJlbWFpbiB1
+bmNoYW5nZWQKPiBmb3IgdGhlIGxpZmV0aW1lIG9mIHRoZSBkb21haW4uCj4KPiBUaGUgb25seSBm
+aWVsZHMgd2hpY2ggY2hhbmdlIGR1cmluZyBydW50aW1lIGFyZSB0aGUgaG9zdF9waHlzX2FwaWNf
+aWQsCj4gYW5kIGl0cyB2YWxpZCBiaXQgKGlzX3J1bm5pbmcpLCBhbmQgdGhlc2UgY2hhbmdlIG9u
+IHZjcHUgY29udGV4dCBzd2l0Y2guCj4KPiBUaGVyZWZvcmUsIG9uIGN0eHRfc3dpdGNoX2Zyb20o
+KSwgd2Ugd2FudCBhIHN0cmFpZ2h0IF9fY2xlYXJfYml0KCkgb24KPiBlLT5pc19ydW5uaW5nIHRv
+IHNpZ25pZnkgdGhhdCB0aGUgdmNwdSBpc24ndCBhbGxvY2F0ZWQgdG8gYSBwY3B1Lgo+Cj4gT24g
+Y3R4dF9zd2l0Y2hfdG8oKSwgd2Ugd2FudCBhIHNpbXBsZQo+Cj4gZS0+aG9zdF9waHlfYXBpY19p
+ZCA9IHRoaXNfcGNwdV9hcGljX2lkOwo+IHNtcF93bWIoKTsKPiBfX3NldF9iaXQoZS0+aXNfcnVu
+bmluZyk7Cj4KPiB3aGljaCBndWFyYW50ZWVzIHRoYXQgdGhlIGhvc3QgcGh5c2ljYWwgYXBpYyBp
+ZCBmaWVsZCBpcyB2YWxpZCBhbmQgdXAgdG8KPiBkYXRlLCBiZWZvcmUgaGFyZHdhcmUgc2VlcyBp
+dCBiZWluZyByZXBvcnRlZCBhcyB2YWxpZC7CoCBBcyB0aGVzZSBjaGFuZ2VzCj4gYXJlIG9ubHkg
+bWFkZSBpbiBjdXJyZW50IGNvbnRleHQsIHRoZXJlIGFyZSBubyBvdGhlciBvcmRlcmluZyBvcgo+
+IGF0b21pY2l0eSBjb25jZXJucy4KPgo+IFRoaXMgdGFibGUgaXMgZXhwZWN0ZWQgdG8gbGl2ZSBp
+biByZWd1bGFyIFdCIFJBTSwgYW5kIHRoZSBtYW51YWwgaGFzIG5vCj4gY29tbWVudC9yZWZlcmVu
+Y2UgdG8gcmVxdWlyaW5nIHNwZWNpYWwgYWNjZXNzZXMuwqAgVGhlcmVmb3JlLCBJJ20KPiBtb2Rl
+cmF0ZWx5IGNvbmZpZGVudCB0aGF0IHRoZSBhYm92ZSBvcmRlcmluZyBpcyBzdWZmaWNpZW50IGZv
+ciBjb3JyZWN0Cj4gYmVoYXZpb3VyLCBhbmQgbm8gZXhwbGljaXRseSBhdG9taWMgYWN0aW9ucyBh
+cmUgcmVxdWlyZWQuCj4KPiBUaG91Z2h0cy9jb21tZW50cy9zdWdnZXN0aW9ucz8KCgpUaGUgZW50
+cnkgY2FuIGFsc28gYmUgd3JpdHRlbiBhcyBhIHNpbmdsZSByYXcgNjQtYml0IHZhbHVlIChJIHRo
+aW5rIHlvdQpzdWdnZXN0ZWQgaW4gb25lIG9mIHRoZSByZXZpZXdzIHRvIG1ha2UgaXQgYSB1bmlv
+biB3aXRoIGEgdWludDY0X3QpLgoKLWJvcmlzCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
