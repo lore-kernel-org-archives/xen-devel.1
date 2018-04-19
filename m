@@ -1,17 +1,17 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 0/6] arm: more kconfig configurability and
- small default configs
-Date: Thu, 19 Apr 2018 15:45:58 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1804191434580.3303@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH 4/6] arm: add a small kconfig for Renesas
+ RCar H3
+Date: Thu, 19 Apr 2018 16:00:22 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1804191548030.3303@sstabellini-ThinkPad-X260>
 References: <alpine.DEB.2.10.1804181324400.17714@sstabellini-ThinkPad-X260>
- <9c436ac6-b056-f6a2-54fc-849620429aec@arm.com>
- <23099924-3B7D-41CC-B5C2-91FE52C91AA2@citrix.com>
+ <1524089752-22174-4-git-send-email-sstabellini@kernel.org>
+ <6a80e2e4-4063-fb5a-36b5-8980344b38fd@citrix.com>
+ <2e905223-37f8-f1c8-d685-a133572bfc09@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-493203042-1524178133=:3303"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <23099924-3B7D-41CC-B5C2-91FE52C91AA2@citrix.com>
-Content-ID: <alpine.DEB.2.10.1804191440171.3303@sstabellini-ThinkPad-X260>
+In-Reply-To: <2e905223-37f8-f1c8-d685-a133572bfc09@suse.com>
+Content-ID: <alpine.DEB.2.10.1804191549070.3303@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,58 +20,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth@citrix.com>
-Cc: "artem_mygaiev@epam.com" <artem_mygaiev@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <George.Dunlap@citrix.com>, "dfaggioli@suse.com" <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, Ian Jackson <Ian.Jackson@citrix.com>, Wei Liu <wei.liu2@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: artem_mygaiev@epam.com, Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org, julien.grall@arm.com, volodymyr_babchuk@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCAxOSBBcHIgMjAxOCwgTGFycyBLdXJ0aCB3cm90ZToKPiAxOS8wNC8yMDE4LCAxNzoz
-MiwgIkp1bGllbiBHcmFsbCIgPGp1bGllbi5ncmFsbEBhcm0uY29tPiB3cm90ZToKPiAKPiAgICAg
-Cj4gICAgIAo+ICAgICBPbiAxOC8wNC8xOCAyMzoxNSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3Rl
-Ogo+ICAgICA+IEhpIGFsbCwKPiAgICAgCj4gICAgIEhpLAo+ICAgICAKPiAgICAgPiBUaGlzIHBh
-dGNoIHNlcmllcyBpcyB0aGUgZmlyc3Qgc3RlcCB0b3dhcmQgYnVpbGRpbmcgYSBzbWFsbCBjZXJ0
-aWZpYWJsZQo+ICAgICA+IFhlbiBoeXBlcnZpc29yIGZvciBBUk0gYm9hcmRzLgo+ICAgICA+IAo+
-ICAgICA+IEZpcnN0LCB0aGUgc2VyaWVzIG1ha2VzIGEgZmV3IGNoYW5nZXMgdG8gYWxsb3cgZGlz
-YWJsaW5nIG1vcmUga2NvbmZpZwo+ICAgICA+IG9wdGlvbnM6IG1vc3Qgb2YgdGhlbSBhbHJlYWR5
-IGV4aXN0IGJ1dCBjYW5ub3QgYmUgZGlzYWJsZWQuCj4gICAgID4gCj4gICAgID4gVGhlbiwgaXQg
-aW50cm9kdWNlcyBhIHJlZmVyZW5jZSBrY29uZmlnIGZvciBSZW5lc2FzIFJDYXIgKGR1ZSB0byBw
-b3B1bGFyCj4gICAgID4gZGVtYW5kLCBjYW5kaWRhdGUgZm9yIGNlcnRpZmljYXRpb25zKSBhbmQg
-Zm9yIFFFTVUgYWFyY2g2NCAobm90IGZvcgo+ICAgICA+IGNlcnRpZmljYXRpb25zLCBidXQgdXNl
-ZnVsIGZvciBkZWJ1Z2dpbmcpLgo+ICAgICAKPiAgICAgV2hpbGUgSSBjb3VsZCBiZSB0ZW1wdCBi
-eSBtb3JlIG9wdGlvbiB0byBiZSBjb25maWd1cmFibGUgaW4gS2NvbmZpZyB3aXRoIAo+ICAgICBz
-b21lIGNhdmVhdHMgKHNlZSBiZWxvdyksIEkgcXVpdGUgZGlzbGlrZSB0aGUgaWRlYSBvZiBwcm92
-aWRpbmcgYSBjb25maWcgCj4gICAgIHBlciBib2FyZC4gQSBmZXcgcmVhc29uczoKPiAgICAgCS0g
-V2hlcmUgZG8gd2UgZHJhdyB0aGUgbGluZSBvbiBjb25maWcgd2UgYWNjZXB0IGZvciBhIGdpdmVu
-IGJvYXJkPwo+ICAgICAJLSBEbyB3ZSBoYXZlIHRvIHRlc3QgdGhlbSBldmVyeSByZWxlYXNlPwo+
-ICAgICAJLSBXaGF0IGlmIHdlIGFkZCBhIG5ldyBvcHRpb24/CgpJIGRpc2N1c3NlZCB0aGlzIHRv
-cGljIHdpdGggSnVsaWVuIG92ZXIgYSBjYWxsIHRoaXMgbW9ybmluZy4gSXQgc2VlbXMgdG8KdXMg
-dGhhdCB0aGUgYmVzdCB3YXkgZm9yd2FyZCBpcyB0byBmb2xsb3cgdGhpcyBzaW1wbGUgcnVsZToK
-CiogT25seSBhY2NlcHQgYW5kIGtlZXAga2NvbmZpZyB0aGF0IGFyZSByZWd1bGFybHkgdGVzdGVk
-IGZvciBlYWNoIHJlbGVhc2UgKgoKV2UgYWxyZWFkeSBtYWludGFpbiBhIHRhYmxlIG9mIHN1cHBv
-cnRlZCBib2FyZHMgZm9yIFhlbiBvbiBBUk0uIFdlIGFzawptZW1iZXJzIG9mIHRoZSBjb21tdW5p
-dHkgdG8gdGVzdCBYZW4gb24gdGhlc2UgYm9hcmRzIGR1cmluZyB0aGUgY29kZQpmcmVlemUuIFdl
-IG1hcmsgYXMgc3VwcG9ydGVkIG9ubHkgdGhlIG9uZXMgZm9yIHdoaWNoIHdlIGdldCBwb3NpdGl2
-ZQpyZXNwb25zZXMuCgpJbiB0aGlzIGNhc2UsIGlmIG5vYm9keSBzdGVwcyB1cCB0byB0ZXN0IFhl
-biB3aXRoIGEgc3BlY2lmaWMga2NvbmZpZwpkdXJpbmcgdGhlIGNvZGUgZnJlZXplLCB0aGUga2Nv
-bmZpZyB3aWxsIGJlIGRyb3BwZWQuCgoKPiAgICAgCS0gV2hhdCBkb2VzIGl0IG1lYW4gaW4gdGVy
-bSBvZiBzZWN1cml0eSBzdXBwb3J0PwoKSSByZXBsaWVkIHRvIHRoaXMgcXVlc3Rpb24gaGVyZToK
-Cmh0dHBzOi8vbWFyYy5pbmZvLz9sPXhlbi1kZXZlbCZtPTE1MjQxNzc5MTQyNjEzMAoKCj4gICAg
-IFJlZ2FyZGluZyB0aGUgS2NvbmZpZywgYWxsb3dpbmcgbW9yZSBvcHRpb24gdG8gYmUgc2VsZWN0
-ZWQgYnkgdGhlIHVzZXIgCj4gICAgIG1lYW5zIHRoYXQgaXQgd2lsbCBpbmNyZWFzaW5nbHkgYmUg
-bW9yZSBkaWZmaWN1bHQgZm9yIHRoZSBjb21tdW5pdHkgdG8gCj4gICAgIGhlbHAgdXNlciBpbiBk
-ZWJ1Zy4gTW9yZSB0aGF0IHdlIHRvZGF5IGRvbid0IHByb3ZpZGUgYSB3YXkgdG8gZW1iZWQgdGhl
-IAo+ICAgICAuY29uZmlnIGluIFhlbiBiaW5hcnkuIFNvIGlmIHlvdSBoYXBwZW4gdG8gY2xlYW4g
-eW91IHJlcG8sIHRoZW4geW91IGFyZSAKPiAgICAgc2NyZXcgdG8gcmVwcm9kdWNlIGl0Lgo+ICAg
-ICAKPiAgICAgRnVydGhlcm1vcmUsIGlmIHdlIGRlY2lkZSB0byBpbXBvc2UgQ09ORklHX1hFTl9F
-WFBFUlQ9eSB3aGVuIHVzaW5nIHRob3NlIAo+ICAgICAuY29uZmlnLCB0aGVuIHlvdSBoYXBwZW4g
-dG8gZHJvcCBvbmUgYnkgbWlzdGFrZSB5b3UgZW5kIHVwIHJld3JpdGUgeW91IAo+ICAgICAuY29u
-ZmlnIHdoaWNoIGlzIG5vdCByZWFsbHkgbmljZS4KPiAgICAgCj4gTWF5YmUgdGhlIGVhc2llc3Qg
-d2F5IHRvIHNvbHZlIHRoaXMgaXMgdG8gZW1pdCB0aGUgY29uZmlnIGludG8gdGhlIHNlcmlhbCBv
-dXRwdXQuIFRoYXQgc2hvdWxkIGJlIGVhc3kgZW5vdWdoIHRvIGltcGxlbWVudCB3aGlsZSBub3Qg
-cmVxdWlyaW5nIGFueSBBQkkvaW50ZXJmYWNlIGNoYW5nZXMKCldlIGhhdmUgYSBiZXR0ZXIgaWRl
-YTogd2UgY2FuIGVtYmVkZGVkIHRoZSBrY29uZmlnIGludG8gdGhlIFhlbiBiaW5hcnkuCkluIGZh
-Y3QsIHdlIGV2ZW4gaGF2ZSBhIEppcmEgdGlja2V0IGZvciBpdCBhbHJlYWR5OgoKaHR0cHM6Ly94
-ZW5wcm9qZWN0LmF0bGFzc2lhbi5uZXQvYnJvd3NlL1hFTi0zOAoKSSdsbCB0cnkgdG8gY29tZSB1
-cCB3aXRoIGEgcGF0Y2ggYW5kIG1ha2UgaXQgcGFydCBvZiB0aGlzIHNlcmllcy4KCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-493203042-1524178133=:3303
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1804191549071.3303@sstabellini-ThinkPad-X260>
+
+On Thu, 19 Apr 2018, Juergen Gross wrote:
+> On 19/04/18 10:06, Andrew Cooper wrote:
+> > On 18/04/2018 23:15, Stefano Stabellini wrote:
+> >>  xen/arch/arm/configs/renesas.config | 80 +++++++++++++++++++++++++++++++++++++
+> >>  1 file changed, 80 insertions(+)
+> >>  create mode 100644 xen/arch/arm/configs/renesas.config
+> >>
+> >> diff --git a/xen/arch/arm/configs/renesas.config b/xen/arch/arm/configs/renesas.config
+> >> new file mode 100644
+> >> index 0000000..7ad3f1c
+> >> --- /dev/null
+> >> +++ b/xen/arch/arm/configs/renesas.config
+> >> @@ -0,0 +1,80 @@
+> >> +#
+> >> +# Automatically generated file; DO NOT EDIT.
+> >> +# Xen/arm 4.11-unstable Configuration
+> >> +#
+> > 
+> > This is now the second Kconfig file we've got added into the tree.  As
+> > with the PV-shim config, keeping it up to date is going to be a little
+> > tricky.
+> > 
+> > I think we either need a script to keep all of the embedded configs up
+> > to date, or switch to a model (similar to the travis randconfig target)
+> > where it becomes a `make defaultconfig` with certain specific options
+> > forced one way or another (similar to `make {tiny,kvm,xen}config` in
+> > Linux).  The latter means that we only store the specific delta
+> > applicable for purpose, and it will probably change less frequently.
+>
+> I think the easiest way would be to have a config file with only the
+> required non-default options being specified and then run
+> "make olddefconfig" against that (or better: a copy of that in order
+> to avoid modifying a source from git).
+> 
+> I'm just writing a patch to do that for the shim config as it is nasty
+> to remove shim.config from my patches in case it has been modified by
+> the build (again) and STGit has picked it up.
+
+Given that the goal of this kconfig is to provide the smallest possible
+kconfig for a given board, I think that your suggestion wouldn't end up
+improving things much in this case because most options will have to be
+specified as "disabled", otherwise "make olddefconfig" would end up
+enabling some of them by default, which is not what we want.
+--8323329-493203042-1524178133=:3303
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-493203042-1524178133=:3303--
