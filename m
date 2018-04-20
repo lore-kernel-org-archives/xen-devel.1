@@ -1,18 +1,25 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 3/6] arm: make it possible to disable the
- SMMU driver
-Date: Fri, 20 Apr 2018 03:41:06 -0600
-Message-ID: <5AD9B5B202000078001BCE49@prv1-mh.provo.novell.com>
-References: <alpine.DEB.2.10.1804181324400.17714@sstabellini-ThinkPad-X260>
- <1524089752-22174-3-git-send-email-sstabellini@kernel.org>
- <5AD8496102000078001BC8E6@prv1-mh.provo.novell.com>
- <alpine.DEB.2.10.1804191501280.3303@sstabellini-ThinkPad-X260>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] shim: don't let build modify shim.config
+Date: Fri, 20 Apr 2018 11:47:33 +0200
+Message-ID: <7baa5487-cee0-10f4-1227-e9a7cd7225c3@suse.com>
+References: <20180419103024.14731-1-jgross@suse.com>
+ <5AD873C502000078001BCA14@suse.com>
+ <be2a5e99-6695-aa53-7690-0d19b2b76a09@suse.com>
+ <20180419145453.ahbpxclr5isbhdcm@citrix.com>
+ <d0111f15-f50a-3d58-b210-520c4fe85a90@citrix.com>
+ <20180419162227.vo7cgh6tqe5npu3w@citrix.com>
+ <20180420092832.7uwpwgiaq4ak7inh@MacBook-Pro-de-Roger.local>
+ <aed28c38-1ca3-6253-3f3a-86ab93e1477d@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="------------A45D5DF3FCE420E2EE1F4AD4"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1804191501280.3303@sstabellini-ThinkPad-X260>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=7tp6=hj=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1f9Sdo-000829-1u
+ for xen-devel@lists.xenproject.org; Fri, 20 Apr 2018 09:47:40 +0000
+In-Reply-To: <aed28c38-1ca3-6253-3f3a-86ab93e1477d@citrix.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,52 +28,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIwLjA0LjE4IGF0IDAwOjQzLCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6
-Cj4gT24gVGh1LCAxOSBBcHIgMjAxOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+ID4+PiBPbiAxOS4w
-NC4xOCBhdCAwMDoxNSwgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+IHdyb3RlOgo+PiA+IC0tLSAv
-ZGV2L251bGwKPj4gPiArKysgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9hcm0vS2NvbmZpZwo+
-PiA+IEBAIC0wLDAgKzEsNyBAQAo+PiA+ICsKPj4gPiArY29uZmlnIEhBU19TTU1VdjIKPj4gPiAr
-CWJvb2wgIkFSTSBTTU1VdjIgZHJpdmVyIgo+PiA+ICsJZGVmYXVsdCB5Cj4+ID4gKwlkZXBlbmRz
-IG9uIEFSTQo+PiA+ICsJLS0taGVscC0tLQo+PiA+ICsJICBEcml2ZXIgZm9yIHRoZSBBUk0gU01N
-VSB2ZXJzaW9uIDIsIGEgcG9wdWxhciBJT01NVSBieSBBUk0uCj4+IAo+PiBUaGlzIGJlaW5nIHVz
-ZXItdmlzaWJsZSBidXQgbm90IGRlcGVuZGVudCB1cG9uIEVYUEVSVCAtIHdoYXQncyB0aGUKPj4g
-c3VwcG9ydCBzdGF0dXMgb2YgYSBoeXBlcnZpc29yIGJ1aWx0IHdpdGhvdXQgdGhhdCBvcHRpb24/
-Cj4gCj4gTGV0IG1lIHRha2UgYSBzdGVwIGJhY2sgdG8gZ2l2ZSB5b3UgYSBiaXQgb2YgY29udGV4
-dCB0byB0aGlzIHdvcmssIHdoaWNoCj4gd2lsbCBoZWxwIHVzIGRlY2lkZSB0aGUgYmVzdCB3YXkg
-Zm9yd2FyZCBpbiB0ZXJtcyBvZiBzZWN1cml0eSBzdXBwb3J0LiBJCj4gYW0gQ0MnaW5nIHRoZSBS
-RVNUIG1haW50YWluZXJzIGFzIHdlbGwuCj4gCj4gV2l0aCBYZW4gb24gQVJNIHRha2luZyBvZmYg
-aW4gZW1iZWRkZWQsIElvVCwgYW5kIGF1dG9tb3RpdmUsIHdlIGFyZQo+IHNlZWluZyBtb3JlIGFu
-ZCBtb3JlIHVzZXMgb2YgWGVuIGluIGNvbnN0cmFpbmVkIGVudmlyb25tZW50cy4gVXNlcnMgYW5k
-Cj4gc3lzdGVtIGludGVncmF0b3JzIHdhbnQgdGhlIHNtYWxsZXN0IFhlbiBhbmQgRG9tMCBjb25m
-aWd1cmF0aW9ucy4gU29tZQo+IG9mIHRoZXNlIGRlcGxveW1lbnRzIHJlcXVpcmUgY2VydGlmaWNh
-dGlvbnMsIHdoZXJlIHlvdSBkZWZpbml0ZWx5IHdhbnQKPiB0aGUgc21hbGxlc3QgbGluZXMgb2Yg
-Y29kZSBjb3VudC4gSSBwcm92aWRlZCBhIHBhdGNoIHRvIGdpdmUgdXMgdGhlCj4gbGluZXMgb2Yg
-Y29kZSBjb3VudCBleGFjdGx5IGZvciB0aGF0IHB1cnBvc2UuIEZvciByZWZlcmVuY2UsIG9uZSBv
-ZiB0aGUKPiBzZWxsaW5nIHBvaW50cyBvZiBBQ1JOIGlzIHRoZSBzbWFsbCBjb2RlIHNpemUgWzBd
-Lgo+IAo+IEkgZXhwZWN0IGtjb25maWcgb3B0aW9ucyB0byBwcm9saWZlcmF0ZSBhbmQsIGdlbmVy
-YWxseSwgYWxsLXB1cnBvc2UKPiBrY29uZmlncyBiZWNvbWluZyBsZXNzIGF0dHJhY3RpdmUgZ29p
-bmcgZm9yd2FyZC4gIEhhdmluZyBrY29uZmlnIG9wdGlvbnMKPiBmb3IgZHJpdmVycyB0aGF0IHNo
-b3VsZCBiZSBzZWN1cml0eSBzdXBwb3J0ZWQgb3RoZXJ3aXNlIGlzIGluZXZpdGFibGUuCj4gCj4g
-Cj4gTGV0J3MgdGFrZSB0aGlzIGV4YW1wbGU6IFNNTVV2Mi4gVGhlIGRyaXZlciBpcyBkZWNlbnRs
-eSBxdWFsaXR5LCBhbmQKPiBkZWZpbml0ZWx5IHNvbWUgYm9hcmRzIHdpbGwgcmVxdWlyZSBpdC4g
-SXQgbWFrZXMgc2Vuc2UgdG8gc2VjdXJpdHkKPiBzdXBwb3J0IGl0LiBIb3dldmVyLCBzb21lIGJv
-YXJkcyBkb24ndCBjb21lIHdpdGggYW4gU01NVSBhdCBhbGwsIHN1Y2ggYXMKPiBQaW5lNjQsIG9y
-IGhhdmUgYSBkaWZmZXJlbnQgU01NVSwgc3VjaCBhcyB0aGUgUmVuZXNhcyBSQ2FyLiBDZXJ0YWlu
-bHksCj4gdGhlIHNtYWxsZXN0IGtjb25maWcgZm9yIFBpbmU2NC9SZW5lc2FzIFJjYXIgc2hvdWxk
-bid0IGhhdmUgdGhlIFNNTVV2Mgo+IGRyaXZlciBbMV0uIEkgdGhpbmsgaXQgbWFrZXMgc2Vuc2Ug
-dG8gYWxsb3cgdGhlIFNNTVV2MiBkcml2ZXIgdG8gYmUKPiBkaXNhYmxlZCBieSB1c2Vycy4gVGhl
-IHNhbWUgYXJndW1lbnQgZ29lcyBmb3IgYWxsIG9mIHRoZSBVQVJUIGRyaXZlcnM6Cj4gZWFjaCBi
-b2FyZCBoYXMgb25seSBvbmUgdHlwZSBvZiBVQVJULCBpdCBkb2Vzbid0IG1ha2Ugc2Vuc2UgdG8g
-ZW5hYmxlCj4gbW9yZSB0aGFuIG9uZSBpbiBhIGtjb25maWcgWzJdLgo+IAo+IEkgdGhpbmsgaXQg
-aXMgT0sgKm5vdCogdG8gc2VjdXJpdHkgc3VwcG9ydCBhbnkgb3B0aW9uIHRoYXQgZGVwZW5kcyBv
-bgo+IEVYUEVSVC4gQnV0IEkgYWxzbyB0aGluayB3ZSBzaG91bGQgYWxsb3cgZm9yIG9wdGlvbnMg
-dGhhdCBhcmUKPiB1c2VyLXZpc2libGUgKmFuZCogc2VjdXJpdHkgc3VwcG9ydGVkLgo+IAo+IFdo
-YXQgZG8geW91IGd1eXMgdGhpbms/CgpIb3cgYWJvdXQgYSBsaW1pdGVkIHNldCBvZiAiY2FubmVk
-IiBjb25maWd1cmF0aW9ucyB3aGljaCBhcmUgc2VjdXJpdHkKc3VwcG9ydGVkPwoKSmFuCgoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+This is a multi-part message in MIME format.
+--------------A45D5DF3FCE420E2EE1F4AD4
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+On 20/04/18 11:33, Andrew Cooper wrote:
+> On 20/04/18 10:28, Roger Pau Monné wrote:
+>> On Thu, Apr 19, 2018 at 05:22:28PM +0100, Wei Liu wrote:
+>>> On Thu, Apr 19, 2018 at 05:14:38PM +0100, Andrew Cooper wrote:
+>>>> On 19/04/18 15:54, Wei Liu wrote:
+>>>>> On Thu, Apr 19, 2018 at 01:01:53PM +0200, Juergen Gross wrote:
+>>>>>> On 19/04/18 12:47, Jan Beulich wrote:
+>>>>>>>>>> On 19.04.18 at 12:30, <jgross@suse.com> wrote:
+>>>>>>>> --- a/tools/firmware/xen-dir/Makefile
+>>>>>>>> +++ b/tools/firmware/xen-dir/Makefile
+>>>>>>>> @@ -41,21 +41,22 @@ linkfarm.stamp: $(DEP_DIRS) $(DEP_FILES) FORCE
+>>>>>>>>  $(D): linkfarm.stamp
+>>>>>>>>  	$(MAKE) -C $(D)/xen distclean
+>>>>>>>>  
+>>>>>>>> -.PHONY: shim-%config
+>>>>>>>> -shim-%config: $(D) FORCE
+>>>>>>>> -	$(MAKE) -C $(D)/xen $*config \
+>>>>>>> I think there was a reason for the % and $*.
+>>>>>> The only one I could think of is the possibility to do
+>>>>>>
+>>>>>> make shim-defaultconfig
+>>>>>>
+>>>>>> or similar calls. Question is who will ever need that. In case it is
+>>>>>> believed to be valuable I can keep it.
+>>>>> Not likely I think.
+>>>> Using `make shim-menuconfig` was a specific usecase for my original
+>>>> version, but with this difference in representation, the usecase has
+>>>> mostly gone away.
+>>>>
+>>>> With this change in place, what is the expected workflow for making an
+>>>> update to the configuration?
+>>>>
+>>> Just commit the must-have's to the tracked file and let Xen's build
+>>> system handle the rest?
+>> +1. As a bare minimum:
+>>
+>> CONFIG_XEN_GUEST=y
+>> CONFIG_PVH_GUEST=y
+>> CONFIG_PV_SHIM=y
+>> CONFIG_PV_SHIM_EXCLUSIVE=y
+>>
+>> But I expect some more might be needed.
+> 
+> CONFIG_SHADOW_PAGING=n
+> CONFIG_NR_CPUS=32
+> CONFIG_VIDEO=n
+> CONFIG_HVM_FEP=n
+> CONFIG_TBOOT=n
+> CONFIG_KEXEC=n
+> CONFIG_TMEM=n
+> CONFIG_XENOPROF=n
+> 
+> Remember that shim also wants to be as much of a slimline build as possible
+
+Attached is the minimal shim.config to be fed into "make olddefconfig"
+resulting in the current config used for the shim.
+
+
+Juergen
+
+--------------A45D5DF3FCE420E2EE1F4AD4
+Content-Type: application/x-config;
+ name="shim.config"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="shim.config"
+
+Q09ORklHX05SX0NQVVM9MzIKIyBDT05GSUdfU0hBRE9XX1BBR0lORyBpcyBub3Qgc2V0CiMg
+Q09ORklHX1RCT09UIGlzIG5vdCBzZXQKQ09ORklHX1hFTl9HVUVTVD15CkNPTkZJR19QVkhf
+R1VFU1Q9eQpDT05GSUdfUFZfU0hJTT15CkNPTkZJR19QVl9TSElNX0VYQ0xVU0lWRT15CiMg
+Q09ORklHX0tFWEVDIGlzIG5vdCBzZXQKIyBDT05GSUdfVE1FTSBpcyBub3Qgc2V0CiMgQ09O
+RklHX1hFTk9QUk9GIGlzIG5vdCBzZXQKIyBDT05GSUdfU0NIRURfQ1JFRElUMiBpcyBub3Qg
+c2V0CiMgQ09ORklHX1NDSEVEX1JURFMgaXMgbm90IHNldAojIENPTkZJR19TQ0hFRF9BUklO
+QzY1MyBpcyBub3Qgc2V0CiMgQ09ORklHX1NDSEVEX05VTEwgaXMgbm90IHNldAojIENPTkZJ
+R19MSVZFUEFUQ0ggaXMgbm90IHNldAojIENPTkZJR19TVVBQUkVTU19EVVBMSUNBVEVfU1lN
+Qk9MX1dBUk5JTkdTIGlzIG5vdCBzZXQKIyBDT05GSUdfREVCVUcgaXMgbm90IHNldAo=
+--------------A45D5DF3FCE420E2EE1F4AD4
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--------------A45D5DF3FCE420E2EE1F4AD4--
