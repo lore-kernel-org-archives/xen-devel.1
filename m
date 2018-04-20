@@ -1,21 +1,17 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 1/3] xen: add generic fault injection
- facility
-Date: Fri, 20 Apr 2018 12:59:17 +0200
-Message-ID: <03a333dc-e505-e254-f39d-e68b1453a6f3__27453.5164157443$1524221907$gmane$org@suse.com>
-References: <20180420104603.17823.31095.stgit@dev-dsk-staskins-1a-ca5afbf2.eu-west-1.amazon.com>
- <20180420104726.17823.40147.stgit@dev-dsk-staskins-1a-ca5afbf2.eu-west-1.amazon.com>
+From: Yessine Daoud <da.yessine@gmail.com>
+Subject: EVTCHNOP_failure / xen 4.11
+Date: Fri, 20 Apr 2018 12:05:45 +0100
+Message-ID: <CABLtV0DecLru5y4M=tYTL7aq4Wk8vfL-h=tcZ4eUB0GN2s2KMA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2840302580472453897=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=7tp6=hj=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1f9TlD-0005sT-9T
- for xen-devel@lists.xenproject.org; Fri, 20 Apr 2018 10:59:23 +0000
-In-Reply-To: <20180420104726.17823.40147.stgit@dev-dsk-staskins-1a-ca5afbf2.eu-west-1.amazon.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=9ga1=hj=gmail.com=da.yessine@srs-us1.protection.inumbo.net>)
+ id 1f9TrQ-0006b3-6A
+ for xen-devel@lists.xenproject.org; Fri, 20 Apr 2018 11:05:48 +0000
+Received: by mail-it0-x22c.google.com with SMTP id m134-v6so2072170itb.3
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Apr 2018 04:05:46 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,77 +20,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stanislav Kinsburskii <staskins@amazon.com>
-Cc: jakub.kicinski@netronome.com, mcroce@redhat.com, hpa@zytor.com, boris.ostrovsky@oracle.com, daniel@iogearbox.net, x86@kernel.org, mingo@redhat.com, xen-devel@lists.xenproject.org, linux-block@vger.kernel.org, paul.durrant@citrix.com, stefanha@redhat.com, dsa@cumulusnetworks.com, tglx@linutronix.de, ggarcia@abra.uab.cat, axboe@kernel.dk, amir.jer.levy@intel.com, wei.liu2@citrix.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, davem@davemloft.net, dwmw@amazon.co.uk, roger.pau@citrix.com
+To: xen-devel@lists.xenproject.org, xen-users@lists.xensource.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAvMDQvMTggMTI6NDcsIFN0YW5pc2xhdiBLaW5zYnVyc2tpaSB3cm90ZToKPiBUaGUgb3Zl
-cmFsbCBpZGVhIG9mIHRoaXMgcGF0Y2ggaXMgdG8gYWRkIGEgZ2VuZXJpYyBmYXVsdCBpbmplY3Rp
-b24gZmFjaWxpdHkKPiB0byBYZW4sIHdoaWNoIGxhdGVyIGNhbiBiZSB1c2VkIGluIHZhcmlvdXMg
-cGxhY2VzIGJ5IGRpZmZlcmVudCBYZW4gcGFydHMuCj4gCj4gQ29yZSBpbXBsZW1lbnRhdGlvbiBp
-ZGVhczoKPiAKPiAtIFRoZSBmYWNpbGl0eSBidWlsZCBpcyBjb250cm9sbGVkIGJ5IGJvb2xlYW4g
-Y29uZmlnCj4gICBDT05GSUdfWEVOX0ZBVUxUX0lOSkVDVElPTiBvcHRpb24gKCJOIiBieSBkZWZh
-dWx0KS4KPiAKPiAtIEFsbCBmYXVsdCBpbmplY3Rpb24gbG9naWMgaXMgbG9jYXRlZCBpbiBhbiBv
-cHRpb25hbGx5IGNvbXBpbGVkIHNlcGFyYXRlZAo+ICAgZmlsZS4KPiAKPiAtIEZhdWx0IGluamVj
-dGlvbiBhdHRyaWJ1dGUgYW5kIGNvbnRyb2wgZGlyZWN0b3J5IGNyZWF0aW9uIGFuZCBkZXN0cnVj
-dGlvbgo+ICAgYXJlIHdyYXBwZWQgd2l0aCBoZWxwZXJzLCBwcm9kdWNpbmcgYW5kIGFjY2VwdGlu
-ZyBhIHBvaW50ZXIgdG8gYW4gb3BhcXVlCj4gICBvYmplY3QgdGh1cyBtYWtpbmcgYWxsIHRoZSBy
-ZXN0IG9mIGNvZGUgaW5kZXBlbmRlbnQgb24gZmF1bHQgaW5qZWN0aW9uCj4gICBlbmdpbmUuCj4g
-Cj4gV2hlbiBlbmFibGVkIFhlbiByb290IGZhdWx0IGluamVjdGlvbiBkaXJlY3RvcnkgYXBwZWFy
-czoKPiAKPiAtIC9zeXMva2VybmVsL2RlYnVnL3hlbi9mYXVsdF9pbmplY3QvCj4gCj4gVGhlIGZh
-bGljaXR5IHByb3ZpZGVzIHRoZSBmb2xsb3dpbmcgaGVscGVycyAoZXhwb3J0ZWQgdG8gYmUgYWNj
-ZXNzaWJsZSBpbgo+IG1vZHVsZXMpOgo+IAo+IC0geGVuX2ZpX2FkZChuYW1lKSAtIGFkZHMgZmF1
-bHQgaW5qZWN0aW9uIGNvbnRyb2wgZGlyZWN0b3J5ICJuYW1lIiB0byBYZW4KPiAgIHJvb3QgZmF1
-bHQgaW5qZWN0aW9uIGRpcmVjdG9yeQo+IAo+IC0geGVuX2ZpX2Rpcl9jcmVhdGUobmFtZSkgLSBh
-bGxvd3MgdG8gY3JlYXRlIGEgc3ViZGlyZWN0b3J5ICJuYW1lIiBpbiBYZW4KPiAgIHJvb3QgZmF1
-bHQgaW5qZWN0aW9uIGRpcmVjdG9yeS4KPiAKPiAtIHhlbl9maV9kaXJfYWRkKGRpciwgbmFtZSkg
-LSBhZGRzIGZhdWx0IGluamVjdGlvbiBjb250cm9sIGRpcmVjdG9yeSAibmFtZSIKPiAgIHRvIGRp
-cmVjdG9yeSAiZGlyIgo+IAo+IC0geGVuX3Nob3VsZF9mYWlsKGZpKSAtIGNoZWNrIHdoZXRoZXIg
-ZmkgaGF2IHRvIGZhaWwuCj4gCj4gU2lnbmVkLW9mZi1ieTogU3RhbmlzbGF2IEtpbnNidXJza2lp
-IDxzdGFza2luc0BhbWF6b24uY29tPgo+IENDOiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJv
-dnNreUBvcmFjbGUuY29tPgo+IENDOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cj4g
-Q0M6IFRob21hcyBHbGVpeG5lciA8dGdseEBsaW51dHJvbml4LmRlPgo+IENDOiBJbmdvIE1vbG5h
-ciA8bWluZ29AcmVkaGF0LmNvbT4KPiBDQzogIkguIFBldGVyIEFudmluIiA8aHBhQHp5dG9yLmNv
-bT4KPiBDQzogeDg2QGtlcm5lbC5vcmcKPiBDQzogeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCj4gQ0M6IGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5vcmcKPiBDQzogU3RhbmlzbGF2IEtp
-bnNidXJza2lpIDxzdGFza2luc0BhbWF6b24uY29tPgo+IENDOiBEYXZpZCBXb29kaG91c2UgPGR3
-bXdAYW1hem9uLmNvLnVrPgo+IC0tLQo+ICBhcmNoL3g4Ni94ZW4vS2NvbmZpZyAgICAgICAgfCAg
-ICA3ICsrKwo+ICBhcmNoL3g4Ni94ZW4vTWFrZWZpbGUgICAgICAgfCAgICAxIAo+ICBhcmNoL3g4
-Ni94ZW4vZmF1bHRfaW5qZWN0LmMgfCAgMTA5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysKPiAgaW5jbHVkZS94ZW4vZmF1bHRfaW5qZWN0LmggIHwgICA0NSArKysr
-KysrKysrKysrKysrKysKPiAgNCBmaWxlcyBjaGFuZ2VkLCAxNjIgaW5zZXJ0aW9ucygrKQo+ICBj
-cmVhdGUgbW9kZSAxMDA2NDQgYXJjaC94ODYveGVuL2ZhdWx0X2luamVjdC5jCj4gIGNyZWF0ZSBt
-b2RlIDEwMDY0NCBpbmNsdWRlL3hlbi9mYXVsdF9pbmplY3QuaAo+IAo+IGRpZmYgLS1naXQgYS9h
-cmNoL3g4Ni94ZW4vS2NvbmZpZyBiL2FyY2gveDg2L3hlbi9LY29uZmlnCj4gaW5kZXggYzFmOThm
-My4uNDgzZmMxNiAxMDA2NDQKPiAtLS0gYS9hcmNoL3g4Ni94ZW4vS2NvbmZpZwo+ICsrKyBiL2Fy
-Y2gveDg2L3hlbi9LY29uZmlnCj4gQEAgLTc3LDMgKzc3LDEwIEBAIGNvbmZpZyBYRU5fUFZICj4g
-IAlib29sICJTdXBwb3J0IGZvciBydW5uaW5nIGFzIGEgUFZIIGd1ZXN0Igo+ICAJZGVwZW5kcyBv
-biBYRU4gJiYgWEVOX1BWSFZNICYmIEFDUEkKPiAgCWRlZl9ib29sIG4KPiArCj4gK2NvbmZpZyBY
-RU5fRkFVTFRfSU5KRUNUSU9OCj4gKwlib29sICJFbmFibGUgWGVuIGZhdWx0IGluamVjdGlvbiIK
-PiArCWRlcGVuZHMgb24gRkFVTFRfSU5KRUNUSU9OX0RFQlVHX0ZTCj4gKwlkZWZhdWx0IG4KPiAr
-CWhlbHAKPiArCSAgRW5hYmxlIFhlbiBmYXVsdCBpbmplY3Rpb24gZmFjaWxpdHkKCldoeSBmb3Ig
-eDg2IG9ubHk/IEknZCByYXRoZXIgYWRkIHRoaXMgdW5kZXIgZHJpdmVycy94ZW4KCj4gZGlmZiAt
-LWdpdCBhL2FyY2gveDg2L3hlbi9NYWtlZmlsZSBiL2FyY2gveDg2L3hlbi9NYWtlZmlsZQo+IGlu
-ZGV4IGQ4M2NiNTQuLjMxNThmZTEgMTAwNjQ0Cj4gLS0tIGEvYXJjaC94ODYveGVuL01ha2VmaWxl
-Cj4gKysrIGIvYXJjaC94ODYveGVuL01ha2VmaWxlCj4gQEAgLTM0LDMgKzM0LDQgQEAgb2JqLSQo
-Q09ORklHX1hFTl9ET00wKQkJKz0gdmdhLm8KPiAgb2JqLSQoQ09ORklHX1NXSU9UTEJfWEVOKQkr
-PSBwY2ktc3dpb3RsYi14ZW4ubwo+ICBvYmotJChDT05GSUdfWEVOX0VGSSkJCSs9IGVmaS5vCj4g
-IG9iai0kKENPTkZJR19YRU5fUFZIKQkgCSs9IHhlbi1wdmgubwo+ICtvYmotJChDT05GSUdfWEVO
-X0ZBVUxUX0lOSkVDVElPTikJKz0gZmF1bHRfaW5qZWN0Lm8KPiBkaWZmIC0tZ2l0IGEvYXJjaC94
-ODYveGVuL2ZhdWx0X2luamVjdC5jIGIvYXJjaC94ODYveGVuL2ZhdWx0X2luamVjdC5jCj4gbmV3
-IGZpbGUgbW9kZSAxMDA2NDQKPiBpbmRleCAwMDAwMDAwLi5lY2YwZjdjCj4gLS0tIC9kZXYvbnVs
-bAo+ICsrKyBiL2FyY2gveDg2L3hlbi9mYXVsdF9pbmplY3QuYwo+IEBAIC0wLDAgKzEsMTA5IEBA
-Cj4gKy8qCj4gKyAqIEZhdWl0IGluamVjdGlvbiBpbnRlcmZhY2UgZm9yIFhlbiB2aXJ0dWFsIGJs
-b2NrIGRldmljZXMKPiArICoKPiArICogQ29weXJpZ2h0IDIwMTggQW1hem9uLmNvbSwgSW5jLiBv
-ciBpdHMgYWZmaWxpYXRlcy4gQWxsIFJpZ2h0cyBSZXNlcnZlZC4KPiArICoKPiArICogVGhpcyBw
-cm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBjYW4gcmVkaXN0cmlidXRlIGl0IGFuZC9vcgo+
-ICsgKiBtb2RpZnkgaXQgdW5kZXIgdGhlIHRlcm1zIG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJsaWMg
-TGljZW5zZSB2ZXJzaW9uIDIKPiArICogYXMgcHVibGlzaGVkIGJ5IHRoZSBGcmVlIFNvZnR3YXJl
-IEZvdW5kYXRpb247IG9yLCB3aGVuIGRpc3RyaWJ1dGVkCj4gKyAqIHNlcGFyYXRlbHkgZnJvbSB0
-aGUgTGludXgga2VybmVsIG9yIGluY29ycG9yYXRlZCBpbnRvIG90aGVyCj4gKyAqIHNvZnR3YXJl
-IHBhY2thZ2VzLCBzdWJqZWN0IHRvIHRoZSBmb2xsb3dpbmcgbGljZW5zZToKClBsZWFzZSB1c2Ug
-dGhlIGFwcHJvcHJpYXRlIFNQRFggaGVhZGVyIGluc3RlYWQgb2YgdGhlIGZ1bGwgR1BMMgpib2ls
-ZXJwbGF0ZS4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+--===============2840302580472453897==
+Content-Type: multipart/alternative; boundary="000000000000833ba2056a45abe6"
+
+--000000000000833ba2056a45abe6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+When I upgrade to Xen 4.11, I got the following when creating any guest:
+
+(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22
+(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22
+(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22
+(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22
+(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22
+(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22
+(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22
+(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22
+(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22
+(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22
+
+This behavior is not seen when using Xen 4.10-stable.
+Any idea?
+
+Best Regards,
+Yessine daoud
+=E1=90=A7
+
+--000000000000833ba2056a45abe6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi,</div><div><br></div><div>When I upgrade to Xen 4.=
+11, I got the following when creating any guest:</div><div><br></div><div>(=
+XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22</div><d=
+iv>(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22</di=
+v><div>(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error_-22=
+</div><div>(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_error=
+_-22</div><div>(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_1,_e=
+rror_-22</div><div>(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_domain_=
+1,_error_-22</div><div>(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:_dom=
+ain_1,_error_-22</div><div>(XEN)_event_channel.c:319:d0v3_EVTCHNOP_failure:=
+_domain_1,_error_-22</div><div>(XEN)_event_channel.c:319:d0v3_EVTCHNOP_fail=
+ure:_domain_1,_error_-22</div><div>(XEN)_event_channel.c:319:d0v3_EVTCHNOP_=
+failure:_domain_1,_error_-22</div><div><br></div><div>This behavior is not =
+seen when using Xen 4.10-stable.</div><div>Any idea?</div><div><br></div><d=
+iv>Best Regards,</div><div>Yessine daoud</div></div><div hspace=3D"streak-p=
+t-mark" style=3D"max-height:1px"><img alt=3D"" style=3D"width:0px;max-heigh=
+t:0px;overflow:hidden" src=3D"https://mailfoogae.appspot.com/t?sender=3DaZG=
+EueWVzc2luZUBnbWFpbC5jb20%3D&amp;type=3Dzerocontent&amp;guid=3D20185354-858=
+3-402b-884f-370108ab19ef"><font color=3D"#ffffff" size=3D"1">=E1=90=A7</fon=
+t></div>
+
+--000000000000833ba2056a45abe6--
+
+
+--===============2840302580472453897==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2840302580472453897==--
