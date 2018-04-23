@@ -1,21 +1,15 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH 2/3] xen netback: add fault injection
- facility
-Date: Mon, 23 Apr 2018 10:58:59 +0100
-Message-ID: <20180423095859.vdi7f7r267urodlx__7233.07911907813$1524477479$gmane$org@citrix.com>
-References: <20180420104603.17823.31095.stgit@dev-dsk-staskins-1a-ca5afbf2.eu-west-1.amazon.com>
- <20180420104731.17823.97617.stgit@dev-dsk-staskins-1a-ca5afbf2.eu-west-1.amazon.com>
+Subject: Re: [PATCH v5] x86/mm: Suppresses vm_events caused by
+ page-walks
+Date: Mon, 23 Apr 2018 11:14:55 +0100
+Message-ID: <20180423101455.xzi7qbpga4gkpri3@citrix.com>
+References: <1524470450-18952-1-git-send-email-aisaila@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=flmh=hm=citrix.com=prvs=6441587ed=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fAYFU-0000MK-4M
- for xen-devel@lists.xenproject.org; Mon, 23 Apr 2018 09:59:04 +0000
 Content-Disposition: inline
-In-Reply-To: <20180420104731.17823.97617.stgit@dev-dsk-staskins-1a-ca5afbf2.eu-west-1.amazon.com>
+In-Reply-To: <1524470450-18952-1-git-send-email-aisaila@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,30 +18,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stanislav Kinsburskii <staskins@amazon.com>
-Cc: jakub.kicinski@netronome.com, mcroce@redhat.com, hpa@zytor.com, boris.ostrovsky@oracle.com, daniel@iogearbox.net, x86@kernel.org, mingo@redhat.com, xen-devel@lists.xenproject.org, jgross@suse.com, amir.jer.levy@intel.com, paul.durrant@citrix.com, stefanha@redhat.com, dsa@cumulusnetworks.com, tglx@linutronix.de, ggarcia@abra.uab.cat, axboe@kernel.dk, linux-block@vger.kernel.org, wei.liu2@citrix.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, davem@davemloft.net, dwmw@amazon.co.uk, roger.pau@citrix.com
+To: Alexandru Isaila <aisaila@bitdefender.com>
+Cc: tim@xen.org, sstabellini@kernel.org, wei.liu2@citrix.com, rcojocaru@bitdefender.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, xen-devel@lists.xen.org, tamas@tklengyel.com, jbeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBBcHIgMjAsIDIwMTggYXQgMTA6NDc6MzFBTSArMDAwMCwgU3RhbmlzbGF2IEtpbnNi
-dXJza2lpIHdyb3RlOgo+ICAKPiAgI2luY2x1ZGUgPGxpbnV4L2t0aHJlYWQuaD4KPiAgI2luY2x1
-ZGUgPGxpbnV4L2lmX3ZsYW4uaD4KPiBAQCAtMTY0OSw2ICsxNjUwLDcgQEAgc3RhdGljIGludCBf
-X2luaXQgbmV0YmFja19pbml0KHZvaWQpCj4gIAkJCVBUUl9FUlIoeGVuX25ldGJhY2tfZGJnX3Jv
-b3QpKTsKPiAgI2VuZGlmIC8qIENPTkZJR19ERUJVR19GUyAqLwo+ICAKPiArCSh2b2lkKSB4ZW5f
-bmV0YmtfZmlfaW5pdCgpOwoKSWYgeW91IGNhcmUgYWJvdXQgdGhlIHJldHVybiB2YWx1ZSwgcGxl
-YXNlIHByb3BhZ2F0ZSBpdCB0bwpuZXRiYWNrX2luaXQncyBjYWxsZXIuIE90aGVyd2lzZSB5b3Ug
-Y2FuIGp1c3QgbWFrZSB0aGUgZnVuY3Rpb24gcmV0dXJuCnZvaWQuCgo+ICsKPiAraW50IHhlbnZp
-Zl9maV9pbml0KHN0cnVjdCB4ZW52aWYgKnZpZikKPiArewo+ICsJc3RydWN0IGRlbnRyeSAqcGFy
-ZW50Owo+ICsJc3RydWN0IHhlbnZpZl9maSAqdmZpOwo+ICsJaW50IGZpLCBlcnIgPSAtRU5PTUVN
-Owo+ICsKPiArCXBhcmVudCA9IHZpZl9maV9kaXI7Cj4gKwlpZiAoIXBhcmVudCkKPiArCQlyZXR1
-cm4gLUVOT01FTTsKPiArCj4gKwl2ZmkgPSBrbWFsbG9jKHNpemVvZigqdmZpKSwgR0ZQX0tFUk5F
-TCk7Cj4gKwlpZiAoIXZmaSkKPiArCQlyZXR1cm4gLUVOT01FTTsKPiArCj4gKwl2ZmktPmRpciA9
-IGRlYnVnZnNfY3JlYXRlX2Rpcih2aWYtPmRldi0+bmFtZSwgcGFyZW50KTsKPiArCWlmICghdmZp
-LT5kaXIpCj4gKwkJZ290byBlcnJfZGlyOwo+ICsKPiArCWZvciAoZmkgPSAwOyBmaSA8IFhFTlZJ
-Rl9GSV9NQVg7IGZpKyspIHsKPiArCQl2ZmktPmZhdWx0c1tmaV0gPSB4ZW5fZmlfZGlyX2FkZCh2
-ZmktPmRpciwKPiArCQkJCXhlbnZpZl9maV9uYW1lc1tmaV0pOwo+ICsJCWlmICghdmZpLT5mYXVs
-dHNbZmldKQo+ICsJCQlnb3RvIGVycl9mYXVsdDsKPiArCX0KPiArCj4gKwl2aWYtPmZpX2luZm8g
-PSB2Zmk7Cj4gKwlyZXR1cm4gMDsKPiArCj4gK2Vycl9mYXVsdDoKPiArCWZvciAoOyBmaSA+IDA7
-IGZpLS0pCgpmaSA+PSAwCgpXZWkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+T24gTW9uLCBBcHIgMjMsIDIwMTggYXQgMTE6MDA6NTBBTSArMDMwMCwgQWxleGFuZHJ1IElzYWls
+YSB3cm90ZToKPiBUaGlzIHBhdGNoIGlzIGFkZGluZyBhIHdheSB0byBlbmFibGUvZGlzYWJsZSBp
+bmd1ZXN0IHBhZ2VmYXVsdAo+IGV2ZW50cy4gSXQgaW50cm9kdWNlcyB0aGUgeGNfbW9uaXRvcl9p
+bmd1ZXN0X3BhZ2VmYXVsdCBmdW5jdGlvbgo+IGFuZCBhZGRzIHRoZSBpbmd1ZXN0X3BhZ2VmYXVs
+dF9kaXNhYmxlZCBpbiB0aGUgbW9uaXRvciBzdHJ1Y3R1cmUuCj4gVGhpcyBpcyBuZWVkZWQgYnkg
+dGhlIGludHJvc3BlY3Rpb24gc28gaXQgd2lsbCBvbmx5IGdldCBnbGEKPiBmYXVsdHMgYW5kIG5v
+dCBnZXQgc3BhbW1lZCB3aXRoIG90aGVyIGZhdWx0cy4KPiBJbiBwMm1fbWVtX2FjY2Vzc19jaGVj
+aygpIHdlIGVtdWxhdGUgc28gbm8gZXZlbnQgd2lsbCBnZXQgc2VudC4KPiAKPiBTaWduZWQtb2Zm
+LWJ5OiBBbGV4YW5kcnUgSXNhaWxhIDxhaXNhaWxhQGJpdGRlZmVuZGVyLmNvbT4KPiAKPiAtLS0K
+PiBDaGFuZ2VzIHNpbmNlIFY0Ogo+IAktIEFkZGVkIHRoZSBodm1fZW11bGF0ZV9vbmVfdm1fZXZl
+bnQoKSBjYWxsIGluCj4gCSAgcDJtX21lbV9hY2Nlc3NfY2hlY2soKQo+ICAgICAgICAgLSBSZW1v
+dmVkIHAybV9zZXRfYWRfYml0cygpLgo+IC0tLQo+ICB0b29scy9saWJ4Yy9pbmNsdWRlL3hlbmN0
+cmwuaCB8ICAyICsrCj4gIHRvb2xzL2xpYnhjL3hjX21vbml0b3IuYyAgICAgIHwgMTQgKysrKysr
+KysrKysrKysKCkFja2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
