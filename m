@@ -1,21 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH RFC 03/10] x86/passthrough: io.c is used for
- HVM only
-Date: Mon, 23 Apr 2018 09:37:08 -0600
-Message-ID: <5ADDFDA402000078001BDA2B@prv1-mh.provo.novell.com>
-References: <20180221214701.1646-1-wei.liu2@citrix.com>
- <20180221214701.1646-4-wei.liu2@citrix.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH 12/16] xen: Remove now-obsolete
+ xen_xc_domain_add_to_physmap
+Date: Mon, 23 Apr 2018 16:38:12 +0100
+Message-ID: <20180423153812.GD1980__17565.8046188348$1524497829$gmane$org@perard>
+References: <1524156319-11465-1-git-send-email-ian.jackson@eu.citrix.com>
+ <1524156319-11465-13-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=jo30=hm=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fAdWi-00030M-OH
- for xen-devel@lists.xenproject.org; Mon, 23 Apr 2018 15:37:12 +0000
-In-Reply-To: <20180221214701.1646-4-wei.liu2@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=l+ue=hm=citrix.com=prvs=644fc49e2=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1fAdXw-00035d-AX
+ for xen-devel@lists.xenproject.org; Mon, 23 Apr 2018 15:38:28 +0000
 Content-Disposition: inline
+In-Reply-To: <1524156319-11465-13-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIxLjAyLjE4IGF0IDIyOjQ2LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
-U2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KPiAtLS0KPiBUaGlz
-IGZpbGUgaGFzIGEgZmV3IGZ1bmN0aW9ucyB0aGF0IGFyZSBjYWxsZWQgaW4gb3RoZXIgcGxhY2Vz
-LiBXZSBuZWVkCj4gdG8gcHJvdmlkZSBzdHVicyBmb3IgdGhlbSBhdCBzb21lIHBvaW50LiBDdXJy
-ZW50bHkgdGhlIGRlY2xhcmF0aW9ucwo+IGFyZSBpbiBkaWZmZXJlbnQgcGxhY2VzLiBXaGF0IGlz
-IHRoZSBwcmVmZXJyZWQgbmFtZSAvIGxvY2F0aW9uIGZvciB0aGUKPiBzdHVicz8KClBlcmhhcHMg
-ZHBjaS5oLCBhbmQgbWF5YmUgdGhpcyBmaWxlIHNob3VsZCBhbHNvIGJlIG5hbWVkIGRwY2kuYz8g
-SSd2ZQpuZXZlciB1bmRlcnN0b29kIG9uIHdoYXQgZ3JvdW5kcyBpdHMgY3VycmVudCBuYW1lIHdh
-cyBjaG9zZW4uCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+T24gVGh1LCBBcHIgMTksIDIwMTggYXQgMDU6NDU6MTVQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
+dGU6Cj4gVGhlIGxhc3QgdXNlciB3YXMganVzdCByZW1vdmVkOyByZW1vdmUgdGhpcyBmdW5jdGlv
+biwgYWNjb3JkaW5nbHkuCj4gCj4gU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPElhbi5KYWNr
+c29uQGV1LmNpdHJpeC5jb20+CgpBY2tlZC1ieTogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVy
+YXJkQGNpdHJpeC5jb20+CgotLSAKQW50aG9ueSBQRVJBUkQKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
