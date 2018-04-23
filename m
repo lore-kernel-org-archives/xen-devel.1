@@ -1,27 +1,16 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: osstest outage,
-Date: Mon, 23 Apr 2018 12:02:55 +0100
-Message-ID: <23261.48479.402370.54447@mariner.uk.xensource.com>
-References: <23193.33276.834923.421617@mariner.uk.xensource.com>
- <5A9E5F0F02000078001AED83@prv-mh.provo.novell.com>
- <23198.60604.72583.53459@mariner.uk.xensource.com>
- <5A9FAA3002000078001AF3C1@prv-mh.provo.novell.com>
- <23201.9924.443629.987357@mariner.uk.xensource.com>
- <23202.45096.90866.563420@mariner.uk.xensource.com>
- <C5469BFD-2A76-4E62-BA95-914DBCBC31F1@gmail.com>
- <A67E7192-8EA0-49CB-9603-E6B10E660020@gmail.com>
- <23226.23136.54324.747989@mariner.uk.xensource.com>
- <23252.31274.512160.520166@mariner.uk.xensource.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v2 01/10] xen/arm64: Added handling of the
+ trapped access to OSLSR register
+Date: Mon, 23 Apr 2018 12:13:50 +0100
+Message-ID: <85e2b847-5b0d-c841-d1d0-7bc83b08e873@arm.com>
+References: <20180420122513.27292-1-mirela.simonovic@aggios.com>
+ <20180420122513.27292-2-mirela.simonovic@aggios.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=n26l=hm=citrix.com=prvs=644ea31d5=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1fAZFT-0005eW-Sy
- for xen-devel@lists.xenproject.org; Mon, 23 Apr 2018 11:03:07 +0000
-In-Reply-To: <23252.31274.512160.520166@mariner.uk.xensource.com>
+In-Reply-To: <20180420122513.27292-2-mirela.simonovic@aggios.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,14 +19,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth.xen@gmail.com>, 'Jan Beulich' <JBeulich@suse.com>, committers@xenproject.org, security@xenproject.org, Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Mirela Simonovic <mirela.simonovic@aggios.com>, xen-devel@lists.xen.org
+Cc: edgar.iglesias@xilinx.com, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIHdvcmsgaXMgY29tcGxldGUgYW5kIGEgdGVzdCBqb2Igc2VlbXMgdG8gaGF2ZSBnb25lIHdl
-bGwuICBJIGhhdmUKdGhlcmVmb3JlIHVuLXN0b3BwZWQgaXQuICBUaGUgWGVuIFByb2plY3Qgb3Nz
-dGVzdCBpcyBub3cgb3BlcmF0aW9uYWwKYW5kIHdpbGwgc3RhcnQgcGlja2luZyB1cCB3b3JrIGZy
-b20gdGhlIHN0YWdpbmcgYnJhbmNoZXMuCgpQbGVhc2UgbGV0IG1lIGtub3cgaWYgeW91IHNwb3Qg
-YW55dGhpbmcgdW50b3dhcmQuCgpJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+SGkgTWlyZWxhLAoKT24gMjAvMDQvMTggMTM6MjUsIE1pcmVsYSBTaW1vbm92aWMgd3JvdGU6Cj4g
+TGludXgvZG9tMCBhY2Nlc3NlcyBPU0xTUiByZWdpc3RlciB3aGVuIHNhdmluZyBDUFUgY29udGV4
+dCBkdXJpbmcgdGhlCj4gc3VzcGVuZCBwcm9jZWR1cmUuIFhlbiB0cmFwcyBhY2Nlc3MgdG8gdGhp
+cyByZWdpc3RlciwgYnV0IGhhcyBubyBoYW5kbGluZwo+IGZvciBpdC4gQ29uc2VxdWVudGx5LCBY
+ZW4gaW5qZWN0cyB1bmRlZiBleGNlcHRpb24gdG8gbGludXgsIGNhdXNpbmcgaXQgdG8KPiBjcmFz
+aC4gVGhpcyBwYXRjaCBhZGRzIGhhbmRsaW5nIG9mIHRoZSB0cmFwcGVkIGFjY2VzcyB0byBPU0xT
+UiBhcyByby9yYXouCj4gCj4gU2lnbmVkLW9mZi1ieTogTWlyZWxhIFNpbW9ub3ZpYyA8bWlyZWxh
+LnNpbW9ub3ZpY0BhZ2dpb3MuY29tPgo+IFJldmlld2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkg
+PHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CgpBY2tlZC1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4u
+Z3JhbGxAYXJtLmNvbT4KCkNoZWVycywKCj4gCj4gLS0tCj4gQ0M6IFN0ZWZhbm8gU3RhYmVsbGlu
+aSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KPiBDQzogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3Jh
+bGxAYXJtLmNvbT4KPiAtLS0KPiBDaGFuZ2VzIGluIHYyOgo+IC0gQ29tbWl0IG1lc3NhZ2UgZml4
+IChhcm02NCByZWxhdGVkIGNoYW5nZSBpbnN0ZWFkIG9mIGFybSkKPiAtIEFkZCBTdGVmYW5vJ3Mg
+cmV2aWV3ZWQtYnkKPiAtLS0KPiAgIHhlbi9hcmNoL2FybS9hcm02NC92c3lzcmVnLmMgfCAzICsr
+LQo+ICAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQo+IAo+
+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vYXJtNjQvdnN5c3JlZy5jIGIveGVuL2FyY2gvYXJt
+L2FybTY0L3ZzeXNyZWcuYwo+IGluZGV4IGM1N2FjMTI1MDMuLjhmODBlMTczNWUgMTAwNjQ0Cj4g
+LS0tIGEveGVuL2FyY2gvYXJtL2FybTY0L3ZzeXNyZWcuYwo+ICsrKyBiL3hlbi9hcmNoL2FybS9h
+cm02NC92c3lzcmVnLmMKPiBAQCAtNTcsMTMgKzU3LDE0IEBAIHZvaWQgZG9fc3lzcmVnKHN0cnVj
+dCBjcHVfdXNlcl9yZWdzICpyZWdzLAo+ICAgICAgICAqIEFSTXY4IChEREkgMDQ4N0EuZCk6IEQx
+LTE1MDkgVGFibGUgRDEtNTgKPiAgICAgICAgKgo+ICAgICAgICAqIFVuaGFuZGxlZDoKPiAtICAg
+ICAqICAgIE9TTFNSX0VMMQo+ICAgICAgICAqICAgIERCR1BSQ1JfRUwxCj4gICAgICAgICovCj4g
+ICAgICAgY2FzZSBIU1JfU1lTUkVHX09TTEFSX0VMMToKPiAgICAgICAgICAgcmV0dXJuIGhhbmRs
+ZV93b193aShyZWdzLCByZWdpZHgsIGhzci5zeXNyZWcucmVhZCwgaHNyLCAxKTsKPiAgICAgICBj
+YXNlIEhTUl9TWVNSRUdfT1NETFJfRUwxOgo+ICAgICAgICAgICByZXR1cm4gaGFuZGxlX3Jhel93
+aShyZWdzLCByZWdpZHgsIGhzci5zeXNyZWcucmVhZCwgaHNyLCAxKTsKPiArICAgIGNhc2UgSFNS
+X1NZU1JFR19PU0xTUl9FTDE6Cj4gKyAgICAgICAgcmV0dXJuIGhhbmRsZV9yb19yYXoocmVncywg
+cmVnaWR4LCBoc3Iuc3lzcmVnLnJlYWQsIGhzciwgMSk7Cj4gICAKPiAgICAgICAvKgo+ICAgICAg
+ICAqIE1EQ1JfRUwyLlREQQo+IAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
