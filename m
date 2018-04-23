@@ -1,22 +1,22 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
+From: Ian Jackson <ian.jackson@citrix.com>
 Subject: Re: [RFC v2 8/9] HACK libxl_exec: Check QEMU status via
  QMP instead of xenstore
-Date: Mon, 23 Apr 2018 17:54:53 +0100
-Message-ID: <20180423165453.GH1980@perard>
+Date: Mon, 23 Apr 2018 17:56:14 +0100
+Message-ID: <23262.4142.975460.333571@mariner.uk.xensource.com>
 References: <20180416173227.22671-1-anthony.perard@citrix.com>
  <20180416173227.22671-9-anthony.perard@citrix.com>
  <23258.13149.123196.867924@mariner.uk.xensource.com>
+ <20180423165453.GH1980@perard>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=l+ue=hm=citrix.com=prvs=644fc49e2=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1fAejy-0001wF-Eo
- for xen-devel@lists.xenproject.org; Mon, 23 Apr 2018 16:54:58 +0000
-Content-Disposition: inline
-In-Reply-To: <23258.13149.123196.867924@mariner.uk.xensource.com>
+ <srs0=n26l=hm=citrix.com=prvs=644ea31d5=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1fAelH-00021A-II
+ for xen-devel@lists.xenproject.org; Mon, 23 Apr 2018 16:56:19 +0000
+In-Reply-To: <20180423165453.GH1980@perard>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,45 +25,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
+To: Anthony PERARD <anthony.perard@citrix.com>
 Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBBcHIgMjAsIDIwMTggYXQgMDc6Mzc6MTdQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
-dGU6Cj4gQW50aG9ueSBQRVJBUkQgd3JpdGVzICgiW1JGQyB2MiA4LzldIEhBQ0sgbGlieGxfZXhl
-YzogQ2hlY2sgUUVNVSBzdGF0dXMgdmlhIFFNUCBpbnN0ZWFkIG9mIHhlbnN0b3JlIik6Cj4gPiBX
-aGVuIFFFTVUgaXMgcmVzdHJpY3RlZCwgdGhlIHFlbXUgb24gdGhlIHJlY2VpdmluZyBzaWRlIGNh
-bm4ndCB3cml0ZQo+ID4gYW55dGhpbmcgdG8geGVuc3RvcmUgb25jZSB0aGUgbWlncmF0aW9uIGlz
-IHN0YXJ0ZWQuIFNvIGl0IGNhbm4ndCB0ZWxsCj4gPiBsaWJ4bCB0aGF0IGl0IGlzIHJlYWR5IHRv
-IGNvbnRpbnVlIHJ1bm5pbmcgdGhlIGd1ZXN0Lgo+IC4uLgo+ID4gVGhpcyBwYXRjaCBjcmVhdGVz
-IGEgcGlwZSwgZ2l2ZSB0aGUgd3JpdGUtZW5kIHRvIHFlbXUsIGFuZCB3YWl0IGZvcgo+ID4gc29t
-ZXRoaW5nIHRvIGJlIHdyaXR0ZW4gdG8gaXQuIChXZSBjb3VsZCBjaGVjayBpZiBpdCBpcyBhY3R1
-YWxseSB0aGUgUU1QCj4gPiBncmVldGluZyBtZXNzYWdlLikKPiAKPiBUaGlzIGlzIGluZGVlZCB0
-aGUga2luZCBvZiB0aGluZyBJIGhhZCBpbiBtaW5kIGluIG91ciBJUkwKPiBjb252ZXJzYXRpb24u
-CgpHb29kLCB3aGVyZSBhcmUgaGVhZGluZyBpbiB0aGUgcmlnaHQgZGlyZWN0aW9uLgoKPiA+IFFF
-TVUgaXMgYXNrZWQgdG8gc2V0dXAgYSBRTVAgc2VydmVyIG9uIHRoaXMgcGlwZSwgYnV0IGV2ZW4g
-aWYgaXQgaXMgYQo+ID4gb25lLXdheSBvbmx5LCBxZW11IHdpbGwgd3JpdGUgdGhlIFFNUCBncmVl
-dGluZyBtZXNzYWdlIHRvIHRoZSBwaXBlLgo+ID4gVGhpcyBpcyBkb25lIHdpdGg6Cj4gPiAtYWRk
-LWZkLCB0byBjcmVhdGUgYSBmZHNldCB3aGljaCBpcyB1c2UgbGF0ZXIuCj4gPiAtY2hhcmRldiAn
-ZmlsZSxwYXRoPS9kZXYvZmRzZXQvMSxhcHBlbmQ9dHJ1ZScsIHRoaXMgb3BlbiBhIGNoYXIgZGV2
-aWNlCj4gPiBvbiB0aGUgd3JpdGUtZW5kIG9mIHRoZSBwaXBlLCB0ZWxsIHFlbXUgdGhhdCB0aGUg
-RkQgaXMgd3JpdGUtb25seSwgYW5kCj4gPiBub3QgdG8gcnVuIHRydW5jYXRlIG9uIGl0Lgo+ID4g
-LW1vbiwganVzdCBzdGFydCB0aGUgUU1QIHNlcnZlciBvbiB0aGlzIG5ldyBjaGFyZGV2Lgo+IAo+
-IEhhdmUgeW91IGNvbnNpZGVyZWQgc29ja2V0cGFpcigpID8gIFRoYXQgYXZvaWRzIHRoZSBvZGRu
-ZXMgb2YgcGFzc2luZwo+IHFlbXUgYSB3cml0ZS1vbmx5IGZkLgoKSSBkaWQgY29uc2lkZXJlZCB0
-byBwYXNzIGFuIG9wZW4gc29ja2V0IHRvIFFFTVUsIEkgZGlkbid0IGtub3cgdGhhdApzb2NrZXRw
-YWlyKCkgZXhpc3RlZC4gQnV0IEkgZG9uJ3QgdGhpbmsgdGhhdCB3b3VsZCBoZWxwIHdpdGggdGhl
-IGN1cnJlbnQKdmVyc2lvbiBvZiBRRU1VICgyLjExIGFuZCBvbGRlcikuIFRoZXJlIGFyZSBvbmx5
-IHR3byB3YXlzIHRvIGdpdmUgYQpmaWxlIGRlc2NyaXB0b3IgdG8gcWVtdSwgdGhlc2UgYXJlOgog
-IC1jaGFyZGV2IHBpcGUsLi4KICAtY2hhcmRldiBmaWxlLC4uLgpBbmQgaW4gYm90aCBjYXNlLCBR
-RU1VIGlzIG9ubHkgZ29pbmcgdG8gd3JpdGUgdG8gdGhlIGZkIGFueXdheS4KCkJ1dCwgd2l0aCB0
-aGUgdG8gYmUgcmVsZWFzZSBRRU1VIDIuMTIsIHRoZXJlIGlzIGEgbmV3IGludGVyZmFjZSB0aGF0
-CmFsbG93IHRvIHByZS1vcGVuIGEgc29ja2V0OgogIC1jaGFyZGV2IHNvY2tldCxmZD0/ClNlZSBo
-dHRwczovL2dpdC5xZW11Lm9yZy8/cD1xZW11LmdpdDthPWNvbW1pdDtoPTA5MzU3MDBmODU0NDAz
-M2ViYmQ0MWUxZjEzY2Q1MjhmOGE1OGQyNGQKCldpdGggdGhhdCwgd2UgY291bGQgb3BlbiBvdXIg
-dXN1YWwgIi92YXIvcnVuL3hlbi9xbXAtbGlieGwtJGRvbWlkIgpzb2NrZXQgZm9yIFFFTVUuIFRo
-YXQgd291bGQgd29yayB3aGVuIHRoZSByZXRyaWN0ZWQgZm9uY3Rpb25uYWxpdHkgaXMKYWxzbyBh
-dmFpbGFibGUuIEJ1dCB0aGF0IGNhbm4ndCBiZSB1c2UgdW5jb25kaXRpb25uYWx5LgoKLS0gCkFu
-dGhvbnkgUEVSQVJECgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+QW50aG9ueSBQRVJBUkQgd3JpdGVzICgiUmU6IFtSRkMgdjIgOC85XSBIQUNLIGxpYnhsX2V4ZWM6
+IENoZWNrIFFFTVUgc3RhdHVzIHZpYSBRTVAgaW5zdGVhZCBvZiB4ZW5zdG9yZSIpOgo+IEJ1dCwg
+d2l0aCB0aGUgdG8gYmUgcmVsZWFzZSBRRU1VIDIuMTIsIHRoZXJlIGlzIGEgbmV3IGludGVyZmFj
+ZSB0aGF0Cj4gYWxsb3cgdG8gcHJlLW9wZW4gYSBzb2NrZXQ6Cj4gICAtY2hhcmRldiBzb2NrZXQs
+ZmQ9Pwo+IFNlZSBodHRwczovL2dpdC5xZW11Lm9yZy8/cD1xZW11LmdpdDthPWNvbW1pdDtoPTA5
+MzU3MDBmODU0NDAzM2ViYmQ0MWUxZjEzY2Q1MjhmOGE1OGQyNGQKPiAKPiBXaXRoIHRoYXQsIHdl
+IGNvdWxkIG9wZW4gb3VyIHVzdWFsICIvdmFyL3J1bi94ZW4vcW1wLWxpYnhsLSRkb21pZCIKPiBz
+b2NrZXQgZm9yIFFFTVUuIFRoYXQgd291bGQgd29yayB3aGVuIHRoZSByZXRyaWN0ZWQgZm9uY3Rp
+b25uYWxpdHkgaXMKPiBhbHNvIGF2YWlsYWJsZS4gQnV0IHRoYXQgY2Fubid0IGJlIHVzZSB1bmNv
+bmRpdGlvbm5hbHkuCgpSaWdodC4KCkl0J3MgYSBiaXQgdWdseSBoYXZpbmcgdHdvIG1ldGhvZHMg
+YnV0IHRoYXQncyB0aGUgcHJpY2Ugb2YKY29tcGF0aWJpbGl0eS4KCklhbi4KCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
