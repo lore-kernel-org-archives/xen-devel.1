@@ -1,8 +1,8 @@
 From: Andrii Anisov <andrii_anisov@epam.com>
 Subject: Re: [PATCH 0/6] arm: more kconfig configurability and
  small default configs
-Date: Mon, 23 Apr 2018 21:05:07 +0300
-Message-ID: <5cf65324-a772-11b7-2709-3e162546dde3@epam.com>
+Date: Mon, 23 Apr 2018 21:08:55 +0300
+Message-ID: <96ea4d9d-e1bb-c821-baf2-02a93e41e6a1@epam.com>
 References: <alpine.DEB.2.10.1804181324400.17714@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
