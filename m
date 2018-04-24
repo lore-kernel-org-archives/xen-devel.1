@@ -1,16 +1,19 @@
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH] cr-for-branches: Add linux-4.14
-Date: Tue, 24 Apr 2018 13:52:32 +0100
-Message-ID: <1524574352-25872-1-git-send-email-ian.jackson@eu.citrix.com>
+From: Luc Van Oostenryck <luc.vanoostenryck@gmail.com>
+Subject: [PATCH] xen-netfront: fix xennet_start_xmit()'s return
+ type
+Date: Tue, 24 Apr 2018 15:18:14 +0200
+Message-ID: <20180424131815.5064-1-luc.vanoostenryck@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rvks=hn=citrix.com=prvs=6454bde7c=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1fAxR8-0004ZO-66
- for xen-devel@lists.xenproject.org; Tue, 24 Apr 2018 12:52:46 +0000
+ <srs0=+4n8=hn=gmail.com=luc.vanoostenryck@srs-us1.protection.inumbo.net>)
+ id 1fAxpq-00064B-6u
+ for xen-devel@lists.xenproject.org; Tue, 24 Apr 2018 13:18:18 +0000
+Received: by mail-wm0-x242.google.com with SMTP id o78so809985wmg.0
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Apr 2018 06:18:17 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,39 +22,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>
+To: linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Luc Van Oostenryck <luc.vanoostenryck@gmail.com>, netdev@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-U2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPElhbi5KYWNrc29uQGV1LmNpdHJpeC5jb20+Ci0t
-LQogY3ItZm9yLWJyYW5jaGVzIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCsp
-LCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvY3ItZm9yLWJyYW5jaGVzIGIvY3ItZm9yLWJy
-YW5jaGVzCmluZGV4IGNmNDgzOTAuLmM0ZGU1MmYgMTAwNzU1Ci0tLSBhL2NyLWZvci1icmFuY2hl
-cworKysgYi9jci1mb3ItYnJhbmNoZXMKQEAgLTMxLDcgKzMxLDcgQEAgc2NyaXB0b3B0aW9ucz0i
-JDEiOyBzaGlmdAogTE9HRklMRT10bXAvY3ItZm9yLWJyYW5jaGVzLmxvZwogZXhwb3J0IExPR0ZJ
-TEUKIAotOiAke0JSQU5DSEVTOj1vc3N0ZXN0IHhlbi00LjAtdGVzdGluZyB4ZW4tNC4xLXRlc3Rp
-bmcgeGVuLTQuMi10ZXN0aW5nIHhlbi00LjMtdGVzdGluZyB4ZW4tNC40LXRlc3RpbmcgeGVuLTQu
-NS10ZXN0aW5nIHhlbi00LjYtdGVzdGluZyB4ZW4tNC43LXRlc3RpbmcgeGVuLTQuOC10ZXN0aW5n
-IHhlbi00LjktdGVzdGluZyB4ZW4tNC4xMC10ZXN0aW5nIHhlbi11bnN0YWJsZSBxZW11LW1haW5s
-aW5lIHFlbXUtdXBzdHJlYW0tdW5zdGFibGUgcWVtdS11cHN0cmVhbS00LjItdGVzdGluZyBxZW11
-LXVwc3RyZWFtLTQuMy10ZXN0aW5nIHFlbXUtdXBzdHJlYW0tNC40LXRlc3RpbmcgcWVtdS11cHN0
-cmVhbS00LjUtdGVzdGluZyBxZW11LXVwc3RyZWFtLTQuNi10ZXN0aW5nIHFlbXUtdXBzdHJlYW0t
-NC43LXRlc3RpbmcgcWVtdS11cHN0cmVhbS00LjgtdGVzdGluZyBxZW11LXVwc3RyZWFtLTQuOS10
-ZXN0aW5nIHFlbXUtdXBzdHJlYW0tNC4xMC10ZXN0aW5nIGxpbnV4LWxpbnVzIGxpbnV4LTQuOSBs
-aW51eC00LjEgbGludXgtMy4xOCBsaW51eC0zLjE2IGxpbnV4LTMuMTQgbGludXgtMy4xMCBsaW51
-eC0zLjQgbGludXgtYXJtLXhlbiBzZWFiaW9zIG92bWYgeHRmICR7RVhUUkFfQlJBTkNIRVN9fQor
-OiAke0JSQU5DSEVTOj1vc3N0ZXN0IHhlbi00LjAtdGVzdGluZyB4ZW4tNC4xLXRlc3RpbmcgeGVu
-LTQuMi10ZXN0aW5nIHhlbi00LjMtdGVzdGluZyB4ZW4tNC40LXRlc3RpbmcgeGVuLTQuNS10ZXN0
-aW5nIHhlbi00LjYtdGVzdGluZyB4ZW4tNC43LXRlc3RpbmcgeGVuLTQuOC10ZXN0aW5nIHhlbi00
-LjktdGVzdGluZyB4ZW4tNC4xMC10ZXN0aW5nIHhlbi11bnN0YWJsZSBxZW11LW1haW5saW5lIHFl
-bXUtdXBzdHJlYW0tdW5zdGFibGUgcWVtdS11cHN0cmVhbS00LjItdGVzdGluZyBxZW11LXVwc3Ry
-ZWFtLTQuMy10ZXN0aW5nIHFlbXUtdXBzdHJlYW0tNC40LXRlc3RpbmcgcWVtdS11cHN0cmVhbS00
-LjUtdGVzdGluZyBxZW11LXVwc3RyZWFtLTQuNi10ZXN0aW5nIHFlbXUtdXBzdHJlYW0tNC43LXRl
-c3RpbmcgcWVtdS11cHN0cmVhbS00LjgtdGVzdGluZyBxZW11LXVwc3RyZWFtLTQuOS10ZXN0aW5n
-IHFlbXUtdXBzdHJlYW0tNC4xMC10ZXN0aW5nIGxpbnV4LWxpbnVzIGxpbnV4LTQuMTQgbGludXgt
-NC45IGxpbnV4LTQuMSBsaW51eC0zLjE4IGxpbnV4LTMuMTYgbGludXgtMy4xNCBsaW51eC0zLjEw
-IGxpbnV4LTMuNCBsaW51eC1hcm0teGVuIHNlYWJpb3Mgb3ZtZiB4dGYgJHtFWFRSQV9CUkFOQ0hF
-U319CiBleHBvcnQgQlJBTkNIRVMKIAogZmV0Y2h3bGVtPSR3bGVtCi0tIAoyLjEuNAoKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+VGhlIG1ldGhvZCBuZG9fc3RhcnRfeG1pdCgpIGlzIGRlZmluZWQgYXMgcmV0dXJuaW5nIGFuICdu
+ZXRkZXZfdHhfdCcsCndoaWNoIGlzIGEgdHlwZWRlZiBmb3IgYW4gZW51bSB0eXBlLCBidXQgdGhl
+IGltcGxlbWVudGF0aW9uIGluIHRoaXMKZHJpdmVyIHJldHVybnMgYW4gJ2ludCcuCgpGaXggdGhp
+cyBieSByZXR1cm5pbmcgJ25ldGRldl90eF90JyBpbiB0aGlzIGRyaXZlciB0b28uCgpTaWduZWQt
+b2ZmLWJ5OiBMdWMgVmFuIE9vc3RlbnJ5Y2sgPGx1Yy52YW5vb3N0ZW5yeWNrQGdtYWlsLmNvbT4K
+LS0tCiBkcml2ZXJzL25ldC94ZW4tbmV0ZnJvbnQuYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAx
+IGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvbmV0L3hl
+bi1uZXRmcm9udC5jIGIvZHJpdmVycy9uZXQveGVuLW5ldGZyb250LmMKaW5kZXggNGRkMDY2ODAw
+Li42NzlkYTFhYmQgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jCisrKyBi
+L2RyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jCkBAIC01NjQsNyArNTY0LDcgQEAgc3RhdGljIHUx
+NiB4ZW5uZXRfc2VsZWN0X3F1ZXVlKHN0cnVjdCBuZXRfZGV2aWNlICpkZXYsIHN0cnVjdCBza19i
+dWZmICpza2IsCiAKICNkZWZpbmUgTUFYX1hFTl9TS0JfRlJBR1MgKDY1NTM2IC8gWEVOX1BBR0Vf
+U0laRSArIDEpCiAKLXN0YXRpYyBpbnQgeGVubmV0X3N0YXJ0X3htaXQoc3RydWN0IHNrX2J1ZmYg
+KnNrYiwgc3RydWN0IG5ldF9kZXZpY2UgKmRldikKK3N0YXRpYyBuZXRkZXZfdHhfdCB4ZW5uZXRf
+c3RhcnRfeG1pdChzdHJ1Y3Qgc2tfYnVmZiAqc2tiLCBzdHJ1Y3QgbmV0X2RldmljZSAqZGV2KQog
+ewogCXN0cnVjdCBuZXRmcm9udF9pbmZvICpucCA9IG5ldGRldl9wcml2KGRldik7CiAJc3RydWN0
+IG5ldGZyb250X3N0YXRzICp0eF9zdGF0cyA9IHRoaXNfY3B1X3B0cihucC0+dHhfc3RhdHMpOwot
+LSAKMi4xNy4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
