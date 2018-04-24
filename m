@@ -1,24 +1,22 @@
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+From: Eric Blake <eblake@redhat.com>
 Subject: Re: [Qemu-devel] [PATCH 15/16] os-posix: cleanup:
  Replace perror with error_report
-Date: Tue, 24 Apr 2018 16:18:30 +0100
-Message-ID: <20180424151830.GI20310@redhat.com>
+Date: Tue, 24 Apr 2018 10:40:47 -0500
+Message-ID: <baa5df1e-3e65-4213-045a-ca064fb69c3f@redhat.com>
 References: <1524156319-11465-1-git-send-email-ian.jackson@eu.citrix.com>
  <1524156319-11465-16-git-send-email-ian.jackson@eu.citrix.com>
  <b8d20908-c76c-1dc2-2c14-31c185abbbfc@amsat.org>
  <23263.17660.17771.980752@mariner.uk.xensource.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+ <20180424151830.GI20310@redhat.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8090971530676088213=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=/1ys=hn=redhat.com=berrange@srs-us1.protection.inumbo.net>)
- id 1fAziL-0007pn-Co
- for xen-devel@lists.xenproject.org; Tue, 24 Apr 2018 15:18:41 +0000
-Content-Disposition: inline
-In-Reply-To: <23263.17660.17771.980752@mariner.uk.xensource.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=cepz=hn=redhat.com=eblake@srs-us1.protection.inumbo.net>)
+ id 1fB03n-0001IU-D4
+ for xen-devel@lists.xenproject.org; Tue, 24 Apr 2018 15:40:51 +0000
+In-Reply-To: <20180424151830.GI20310@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,35 +25,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Markus Armbruster <armbru@redhat.com>, Michael Tokarev <mjt@tls.msk.ru>, qemu-devel@nongnu.org, Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>, Ross Lagerwall <ross.lagerwall@citrix.com>, Paolo Bonzini <pbonzini@redhat.com>, Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Alistair Francis <alistair.francis@xilinx.com>
+To: "=?UTF-8?Q?Daniel_P._Berrang=c3=a9?=" <berrange@redhat.com>, Ian Jackson <ian.jackson@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-devel@nongnu.org, Michael Tokarev <mjt@tls.msk.ru>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>, Markus Armbruster <armbru@redhat.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@citrix.com>, Paolo Bonzini <pbonzini@redhat.com>, Alistair Francis <alistair.francis@xilinx.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBBcHIgMjQsIDIwMTggYXQgMDM6NTM6NDhQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
-dGU6Cj4gUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgd3JpdGVzICgiUmU6IFtRZW11LWRldmVsXSBb
-UEFUQ0ggMTUvMTZdIG9zLXBvc2l4OiBjbGVhbnVwOiBSZXBsYWNlIHBlcnJvciB3aXRoIGVycm9y
-X3JlcG9ydCIpOgo+ID4gT24gMDQvMTkvMjAxOCAwMTo0NSBQTSwgSWFuIEphY2tzb24gd3JvdGU6
-Cj4gPiA+IC0gICAgICAgIHBlcnJvcigibWxvY2thbGwiKTsKPiA+ID4gKyAgICAgICAgZXJyb3Jf
-cmVwb3J0KCJtbG9ja2FsbDogJXMiLCBzdHJlcnJvcihlcnJubykpOwo+ID4gPiAgICAgIH0KPiA+
-ID4gIAo+ID4gPiAgICAgIHJldHVybiByZXQ7Cj4gPiAKPiA+IFRoaW5raW5nIGxvdWRseSwgbWF5
-YmUgd2UgY2FuIHJlZmFjdG9yIGFzIGVycm9yX3JlcG9ydF9lcnJubyhjb25zdCBjaGFyCj4gPiAq
-ZGVzYykuLi4KPiAKPiBnaXQtZ3JlcCAnZXJyb3JfcmVwb3J0LiplcnJubycgc2hvd3MgYSBsb3Qg
-b2YgY2FsbCBzaXRlcyB0aGF0IGRvCj4gc29tZXRoaW5nIG1vcmUgZXhjaXRpbmcgdGhhbiBjb25z
-dCBjaGFyICpkZXNjIHdvdWxkIHN1cHBvcnQuCj4gCj4gSSB0aGluayB0aGUgcmlnaHQgYXBwcm9h
-Y2ggd291bGQgYmUKPiAKPiAgLSBzdGF0aWMgdm9pZCB2cmVwb3J0KHJlcG9ydF90eXBlIHR5cGUs
-IGNvbnN0IGNoYXIgKmZtdCwgdmFfbGlzdCBhcCkKPiAgKyBzdGF0aWMgdm9pZCB2cmVwb3J0KHJl
-cG9ydF90eXBlIHR5cGUsIGludCBlcnJub3ZhbCwgY29uc3QgY2hhciAqZm10LCB2YV9saXN0IGFw
-KQo+IC4uLgo+ICArICAgICBpZiAoZXJybm92YWwgPj0gMCkgewo+ICArICAgICAgICAgZXJyb3Jf
-cHJpbnRmKCI6ICVzIiwgc3RyZXJyb3IoZXJybm92YWwpOwo+ICArICAgICB9Cj4gCj4gYW5kIHRo
-ZW4gYWRkIGJvdGgKPiAgIGVycm9yX3JlcG9ydF9lcnJubwo+ICAgZXJyb3JfdnJlcG9ydF9lcnJu
-bwo+IHdpdGggdGhlIG9idmlvdXMgc2VtYW50aWNzLgoKVGhhdCB3b3VsZCBiZSBuaWNlLCBiZWNh
-dXNlIHRoZW4gd2UgY2FuIG1ha2UgdGhlc2UgdHdvIGZ1bmN0aW9ucyBhY3R1YWxseQp1c2Ugc3Ry
-ZXJyb3JfcigpIGluc3RlYWQgb2Ygc3RyZXJyb3IoKSwgZm9yIHRocmVhZCBzYWZldHkgb24gYWxs
-IHBsYXRmb3Jtcy4KClJlZ2FyZHMsCkRhbmllbAotLSAKfDogaHR0cHM6Ly9iZXJyYW5nZS5jb20g
-ICAgICAtby0gICAgaHR0cHM6Ly93d3cuZmxpY2tyLmNvbS9waG90b3MvZGJlcnJhbmdlIDp8Cnw6
-IGh0dHBzOi8vbGlidmlydC5vcmcgICAgICAgICAtby0gICAgICAgICAgICBodHRwczovL2ZzdG9w
-MTM4LmJlcnJhbmdlLmNvbSA6fAp8OiBodHRwczovL2VudGFuZ2xlLXBob3RvLm9yZyAgICAtby0g
-ICAgaHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9kYmVycmFuZ2UgOnwKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============8090971530676088213==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="fmYDIuWfduDk9WEwCPmLVKeDUzgSDn7Re"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--fmYDIuWfduDk9WEwCPmLVKeDUzgSDn7Re
+Content-Type: multipart/mixed; boundary="GyiGjqzIibE0oZ4VEnQQzKCrqOLkCkdhS";
+ protected-headers="v1"
+From: Eric Blake <eblake@redhat.com>
+To: =?UTF-8?Q?Daniel_P._Berrang=c3=a9?= <berrange@redhat.com>,
+ Ian Jackson <ian.jackson@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Markus Armbruster <armbru@redhat.com>, Michael Tokarev <mjt@tls.msk.ru>,
+ qemu-devel@nongnu.org, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
+ <f4bug@amsat.org>, Ross Lagerwall <ross.lagerwall@citrix.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
+ Alistair Francis <alistair.francis@xilinx.com>
+Message-ID: <baa5df1e-3e65-4213-045a-ca064fb69c3f@redhat.com>
+Subject: Re: [Qemu-devel] [PATCH 15/16] os-posix: cleanup: Replace perror with
+ error_report
+References: <1524156319-11465-1-git-send-email-ian.jackson@eu.citrix.com>
+ <1524156319-11465-16-git-send-email-ian.jackson@eu.citrix.com>
+ <b8d20908-c76c-1dc2-2c14-31c185abbbfc@amsat.org>
+ <23263.17660.17771.980752@mariner.uk.xensource.com>
+ <20180424151830.GI20310@redhat.com>
+In-Reply-To: <20180424151830.GI20310@redhat.com>
+
+--GyiGjqzIibE0oZ4VEnQQzKCrqOLkCkdhS
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+On 04/24/2018 10:18 AM, Daniel P. Berrang=C3=A9 wrote:
+
+>>  - static void vreport(report_type type, const char *fmt, va_list ap)
+>>  + static void vreport(report_type type, int errnoval, const char *fmt=
+, va_list ap)
+>> ...
+>>  +     if (errnoval >=3D 0) {
+>>  +         error_printf(": %s", strerror(errnoval);
+>>  +     }
+>>
+>> and then add both
+>>   error_report_errno
+>>   error_vreport_errno
+>> with the obvious semantics.
+>=20
+> That would be nice, because then we can make these two functions actual=
+ly
+> use strerror_r() instead of strerror(), for thread safety on all platfo=
+rms.
+
+Except that strerror_r() is a bear to use portably, given that glibc's
+default declaration differs from the POSIX requirement (you can force
+glibc to give you the POSIX version, but doing so causes you to lose
+access to many other useful extensions).  It's rather telling that 'git
+grep strerror_r' currently comes up empty.
+
+--=20
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3266
+Virtualization:  qemu.org | libvirt.org
+
+
+--GyiGjqzIibE0oZ4VEnQQzKCrqOLkCkdhS--
+
+--fmYDIuWfduDk9WEwCPmLVKeDUzgSDn7Re
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Comment: Public key at http://people.redhat.com/eblake/eblake.gpg
+Comment: Using GnuPG with Thunderbird - http://www.enigmail.net/
+
+iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAlrfT/8ACgkQp6FrSiUn
+Q2oaZAf/SxDhoSZ/QNAqJkm7aiSEIriAtOUYIWB4oT9Pb8JOMx6qJxz3SrjtBwfk
+xtkyMbBBxsn57PqHVUnFqc3f14BhZr0RvBMWoE0wMpBMyCqKmw8+1t9HVr5zRIpB
+Z/6qJCfgAYPiZ1+ZDB2Ik2yFyoSFUro16lkrFXw51FZSm6Kt4Egy9HNsmzdaMQrB
+lS4bWR3wbA8n7ypL2ZTgN943dFx3XeTMRZ3nUbY8GV0HoWWayOdCISBGdUVY/NMp
+VvidvAXNvMf1B46a5IPNUYK2Q7WnGQiTnFRPfFzj6xAWPnsRLm6p/+ItXn2bUcHm
+dHNXTB7+7YRF7zSFmPaLkM9nXXLXlQ==
+=9Suj
+-----END PGP SIGNATURE-----
+
+--fmYDIuWfduDk9WEwCPmLVKeDUzgSDn7Re--
+
+
+--===============8090971530676088213==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8090971530676088213==--
