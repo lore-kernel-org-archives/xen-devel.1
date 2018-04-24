@@ -1,16 +1,24 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-linus test] 122358: regressions - FAIL
-Date: Tue, 24 Apr 2018 16:39:47 +0000
-Message-ID: <osstest-122358-mainreport@xen.org>
+From: Manuel Bouyer <bouyer@antioche.eu.org>
+Subject: 4.11.0 RC1 panic
+Date: Tue, 24 Apr 2018 18:06:31 +0200
+Message-ID: <20180424160631.GA7526@mail.soc.lip6.fr>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="uAKRQypu60I7Lcqm"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=hcfj=hn=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fB0yt-0006SE-5G
- for xen-devel@lists.xenproject.org; Tue, 24 Apr 2018 16:39:51 +0000
+ <srs0=2pqh=hn=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
+ id 1fB0zF-0006ze-Ur
+ for xen-devel@lists.xenproject.org; Tue, 24 Apr 2018 16:40:14 +0000
+Received: from asim.lip6.fr (asim.lip6.fr [132.227.86.2])
+ by isis.lip6.fr (8.15.2/lip6) with ESMTP id w3OGe63l011726
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Apr 2018 18:40:06 +0200 (CEST)
+Received: from armandeche.soc.lip6.fr (armandeche [132.227.63.133])
+ by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id w3OGe6E2014576
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Apr 2018 18:40:06 +0200 (MEST)
+Resent-Message-ID: <20180424164006.GA6735@mail.soc.lip6.fr>
+Resent-To: xen-devel@lists.xenproject.org
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,226 +27,336 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xenproject.org
+Cc: julien.grall@linaro.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMjM1OCBsaW51eC1saW51cyByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0LWxh
-Yi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTIyMzU4LwoKUmVncmVzc2lvbnMgOi0oCgpU
-ZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRl
-c3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNw
-dSAxMCBkZWJpYW4taW5zdGFsbCAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMTgzMjQKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgMTAgZGViaWFuLWluc3RhbGwgICAgICAgICAgIGZhaWwg
-UkVHUi4gdnMuIDExODMyNAogdGVzdC1hcm1oZi1hcm1oZi14bC14c20gICAgICAxMCBkZWJpYW4t
-aW5zdGFsbCAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTE4MzI0CiB0ZXN0LWFybWhmLWFybWhm
-LXhsLWN1YmlldHJ1Y2sgMTAgZGViaWFuLWluc3RhbGwgICAgICAgICBmYWlsIFJFR1IuIHZzLiAx
-MTgzMjQKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTAgZGViaWFuLWluc3RhbGwgICAg
-ICAgICAgIGZhaWwgUkVHUi4gdnMuIDExODMyNAoKUmVncmVzc2lvbnMgd2hpY2ggYXJlIHJlZ2Fy
-ZGVkIGFzIGFsbG93YWJsZSAobm90IGJsb2NraW5nKToKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRk
-cyAgICAgMTAgZGViaWFuLWluc3RhbGwgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDExODMyNAoK
-VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3Qt
-YXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTMgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBm
-YWlsICBsaWtlIDExODMyNAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAxNCBzYXZlcmVz
-dG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTE4MzI0CiB0ZXN0LWFtZDY0LWkzODYt
-eGwtcWVtdXQtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAx
-MTgzMjQKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9w
-ICAgICAgICAgICAgZmFpbCBsaWtlIDExODMyNAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13
-aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTE4MzI0CiB0ZXN0
-LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAg
-IGZhaWwgbGlrZSAxMTgzMjQKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd3MxNi1hbWQ2NCAx
-NyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDExODMyNAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2Ug
-MTE4MzI0CiB0ZXN0LWFtZDY0LWkzODYteGwtcHZzaGltICAgIDEyIGd1ZXN0LXN0YXJ0ICAgICAg
-ICAgICAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhz
-bSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgIDEzIG1pZ3Jh
-dGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1k
-NjQtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAxMyBtaWdyYXRlLXN1cHBvcnQt
-Y2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAg
-ICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAxNCBzYXZl
-cmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFy
-bTY0LXhsLWNyZWRpdDIgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwtY3JlZGl0MiAgMTQgc2F2ZXJlc3RvcmUtc3Vw
-cG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0
-LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
-ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJp
-YW5odm0tYW1kNjQteHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MK
-IHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWln
-cmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11
-dS1uZXN0ZWQtYW1kIDE3IGRlYmlhbi1odm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNz
-CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAg
-ICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTIg
-bWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1o
-Zi1hcm1oZi14bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwg
-ICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDE0IHNhdmVyZXN0b3Jl
-LXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwg
-ICAgICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFz
-cwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNo
-ZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNtIDEz
-IG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJt
-aGYtYXJtaGYteGwtdmhkICAgICAgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWls
-ICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAxMyBzYXZlcmVzdG9y
-ZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwt
-cWVtdXUtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgICBmYWlsIG5ldmVyIHBh
-c3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAg
-ICAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEw
-LWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICBm
-YWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3
-aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBw
-YXNzCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogbGludXggICAgICAgICAgICAgICAg
-NmQwOGIwNmU2N2NkMTE3ZjY5OTJjNDY2MTFkZmI0Y2UyNjdjZDcxZQpiYXNlbGluZSB2ZXJzaW9u
-OgogbGludXggICAgICAgICAgICAgICAgNWI3ZDI3OTY3ZGFiZmIxN2MyMWIwZDk4YjI5MTUzYjll
-M2VlNzFlNQoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTE4MzI0ICAyMDE4LTAxLTI1IDA3OjMxOjI0
-IFogICA4OSBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDExODM2MiAgMjAxOC0wMS0yNiAxNjo1
-NjoxNyBaICAgODcgZGF5cyAgIDcyIGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEyMjM1
-OCAgMjAxOC0wNC0yMyAxMToxMjozMSBaICAgIDEgZGF5cyAgICAxIGF0dGVtcHRzCgotLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KMzM0
-MSBwZW9wbGUgdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdCwKbm90IGxpc3RpbmcgdGhlbSBh
-bGwKCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYteHNtICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
-ZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1saWJ2aXJ0ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLWxpYnZpcnQg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-aTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXB2b3BzICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYtcHZvcHMgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1p
-Mzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFtZDY0LXJ1bXBydW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1ydW1wcnVuICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJt
-NjQtYXJtNjQteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
-dXQtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2
-bS1hbWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNt
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXN0dWJkb20tZGViaWFu
-aHZtLWFtZDY0LXhzbSAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQt
-eHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQt
-YXJtNjQtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwteHNtICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1h
-cm02NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0
-ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXB2aHYyLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRl
-Ymlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1k
-NjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2NCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43
-LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-eGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYt
-YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14
-bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFybTY0LWFybTY0LXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWV4
-YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YXJtNjQtYXJtNjQtZXhhbWluZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1leGFtaW5lICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZXhhbWluZSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVl
-YnNkMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1pMzg2LXJ1bXBydW4taTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgICAgICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW4xMC1pMzg2
-ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
-ZW11dS13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgZmFp
-bCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWludGVsICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1pbnRlbCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXQt
-cmhlbDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcGFpciAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXBhaXIgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1wdmdydWIgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWkzODYtcHZn
-cnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcHZzaGltICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXB2c2hpbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWNvdzIg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1h
-cm1oZi1saWJ2aXJ0LXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWkzODYteGwtcmF3ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcnRkcyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC1zaGFkb3cgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1zaGFkb3cgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtc2hhZG93ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQtbGlidmlydC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54
-ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2lt
-YWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6
-Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24g
-b2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0
-dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURN
-RS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9z
-c3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNh
-biBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0
-LmdpdDthPXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCihObyByZXZpc2lvbiBsb2c7IGl0IHdvdWxk
-IGJlIDU0ODIzMiBsaW5lcyBsb25nLikKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+
+--uAKRQypu60I7Lcqm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Hello,
+I tested xen 4.11.0 rc1 with NetBSD as dom0.
+I could boot a NetBSD PV domU without problem, but at shutdown time (poweroff
+in the domU), I got a Xen panic:
+(XEN) Assertion 'cpu < nr_cpu_ids' failed at ...1/work/xen-4.11.0-rc1/xen/include/xen/cpumask.h:97
+
+A xl destroy instead of poweroff gives the same result.
+
+This happens with both 32bitsPAE and 64bits domU. This doens't seem to
+happen with HVM domUs.
+
+Attached are a cut-n-paste of the panic, and the output of xl demsg.
+
+-- 
+Manuel Bouyer <bouyer@antioche.eu.org>
+     NetBSD: 26 ans d'experience feront toujours la difference
+--
+
+--uAKRQypu60I7Lcqm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=xen-panic
+
+(XEN) Assertion 'cpu < nr_cpu_ids' failed at ...1/work/xen-4.11.0-rc1/xen/include/xen/cpumask.h:97
+(XEN) ----[ Xen-4.11-rcnb0  x86_64  debug=y   Tainted:  C   ]----
+(XEN) CPU:    0
+(XEN) RIP:    e008:[<ffff82d080289333>] put_page_from_l1e+0x1a3/0x1f0
+(XEN) RFLAGS: 0000000000010282   CONTEXT: hypervisor (d0v0)
+(XEN) rax: 00000000ffffffff   rbx: ffff8300beaad000   rcx: 0000000000000004
+(XEN) rdx: ffff8300bf077fff   rsi: 007fffffffffffff   rdi: ffff8300beaad5d0
+(XEN) rbp: ffff82d080382380   rsp: ffff8300bf0779b8   r8:  0000000000000000
+(XEN) r9:  0000000000000200   r10: 4000000000000000   r11: ffff82e004207040
+(XEN) r12: ffff830213404000   r13: ffff82e004207040   r14: ffff830213404000
+(XEN) r15: 1000000000000000   cr0: 000000008005003b   cr4: 00000000000026e0
+(XEN) cr3: 000000022f0f6000   cr2: 00007f7ff60ce7a0
+(XEN) fsb: 00007f7ff7ff36c0   gsb: ffffffff80ca42c0   gss: 0000000000000000
+(XEN) ds: 003f   es: 003f   fs: 0000   gs: 0000   ss: e010   cs: e008
+(XEN) Xen code around <ffff82d080289333> (put_page_from_l1e+0x1a3/0x1f0):
+(XEN)  3b 05 cf 9c 1c 00 72 02 <0f> 0b 89 c2 83 e2 3f 48 8d 7a 01 48 c1 e7 05 48
+(XEN) Xen stack trace from rsp=ffff8300bf0779b8:
+(XEN)    0000000000000050 ffff820040016000 ffff830213404000 0000000000000000
+(XEN)    10ffffffffffffff ffff82d080288780 0000001600000000 0000000100000000
+(XEN)    0000000001000000 2400000000000001 ffff82e0042070a0 ffff82e004207080
+(XEN)    00ffffffffffffff 10ffffffffffffff 1000000000000000 ffff82d080288e07
+(XEN)    00000000002070c0 ffff8300bf077fff ffff830213404000 ffff82e0042070a0
+(XEN)    ffff82e004207080 ffff830213404000 0000000000000001 ffff82004001e000
+(XEN)    0200000000000000 ffff82d08028945f 0000000000000000 ffff82e004207080
+(XEN)    ffff82d080288869 0000000000210384 0000000000000206 ffff8300bf077fff
+(XEN)    4100000000000001 ffff82e004207080 ffff82e004207060 00ffffffffffffff
+(XEN)    10ffffffffffffff 1000000000000000 ffff82d080288e07 000000010100ff22
+(XEN)    ffff8300bf077fff ffff8300bedfc000 ffff82e004207080 ffff82e004207060
+(XEN)    ffff830213404000 ffff820040011000 00000000ffffffff ffff820040011000
+(XEN)    ffff82d080288540 0000000000000000 ffff82e004207060 ffff830213404000
+(XEN)    ffff820040011000 ffff82d0802889eb 0000000000210383 ffff830213404000
+(XEN)    ffff82d080280c49 6100000000000001 ffff82e004207060 ffff82e00411a0c0
+(XEN)    00ffffffffffffff 10ffffffffffffff 1000000000000000 ffff82d080288e07
+(XEN)    000000010136d82b ffff8300bf077fff 0000000000000000 ffff82e004207060
+(XEN)    ffff82e00411a0c0 0000000000208d06 0000000000000000 00000000ffffffff
+(XEN)    ffff830213404000 ffff82d080289146 0000000000000140 ffff82e00411a0c0
+(XEN)    ffff82d080288b95 ffff820040001000 ffffffffffffffc0 0000000000000000
+(XEN) Xen call trace:
+(XEN)    [<ffff82d080289333>] put_page_from_l1e+0x1a3/0x1f0
+(XEN)    [<ffff82d080288780>] free_page_type+0x210/0x790
+(XEN)    [<ffff82d080288e07>] mm.c#_put_page_type+0x107/0x340
+(XEN)    [<ffff82d08028945f>] mm.c#put_page_from_l2e+0xdf/0x110
+(XEN)    [<ffff82d080288869>] free_page_type+0x2f9/0x790
+(XEN)    [<ffff82d080288e07>] mm.c#_put_page_type+0x107/0x340
+(XEN)    [<ffff82d080288540>] mm.c#put_page_from_l3e+0x1a0/0x1d0
+(XEN)    [<ffff82d0802889eb>] free_page_type+0x47b/0x790
+(XEN)    [<ffff82d080280c49>] do_IRQ+0x5e9/0x630
+(XEN)    [<ffff82d080288e07>] mm.c#_put_page_type+0x107/0x340
+(XEN)    [<ffff82d080289146>] mm.c#put_page_from_l4e+0x106/0x130
+(XEN)    [<ffff82d080288b95>] free_page_type+0x625/0x790
+(XEN)    [<ffff82d080288e07>] mm.c#_put_page_type+0x107/0x340
+(XEN)    [<ffff82d08028949f>] put_page_type_preemptible+0xf/0x10
+(XEN)    [<ffff82d080272b3b>] domain.c#relinquish_memory+0xab/0x460
+(XEN)    [<ffff82d0802810d7>] pirq_guest_eoi+0x27/0x30
+(XEN)    [<ffff82d080276b43>] domain_relinquish_resources+0x203/0x290
+(XEN)    [<ffff82d0802068bd>] domain_kill+0xbd/0x150
+(XEN)    [<ffff82d0802039e3>] do_domctl+0x7d3/0x1a90
+(XEN)    [<ffff82d08026ee50>] do_physdev_op_compat+0/0x70
+(XEN)    [<ffff82d080203210>] do_domctl+0/0x1a90
+(XEN)    [<ffff82d080367145>] pv_hypercall+0x1f5/0x430
+(XEN)    [<ffff82d08036d432>] lstar_enter+0xa2/0x120
+(XEN)    [<ffff82d08036d43e>] lstar_enter+0xae/0x120
+(XEN)    [<ffff82d08036d432>] lstar_enter+0xa2/0x120
+(XEN)    [<ffff82d08036d43e>] lstar_enter+0xae/0x120
+(XEN)    [<ffff82d08036d432>] lstar_enter+0xa2/0x120
+(XEN)    [<ffff82d08036d43e>] lstar_enter+0xae/0x120
+(XEN)    [<ffff82d08036d49f>] lstar_enter+0x10f/0x120
+(XEN)
+(XEN)
+(XEN) ****************************************
+(XEN) Panic on CPU 0:
+(XEN) Assertion 'cpu < nr_cpu_ids' failed at ...1/work/xen-4.11.0-rc1/xen/include/xen/cpumask.h:97
+(XEN) ****************************************
+(XEN)
+(XEN) Reboot in five seconds...
+
+--uAKRQypu60I7Lcqm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=xen-dmesg
+
+(XEN) parameter "gnttab_max_nr_frames" unknown!
+ Xen 4.11-rcnb0
+(XEN) Xen version 4.11-rcnb0 (bouyer@) (gcc (nb2 20150115) 4.8.5) debug=y  Tue Apr 24 16:10:25 MEST 2018
+(XEN) Latest ChangeSet: 
+(XEN) Console output is synchronous.
+(XEN) Bootloader: unknown
+(XEN) Command line: dom0_mem=512M console=com1 com1=9600,8n1 loglvl=all guest_loglvl=all gnttab_max_nr_frames=64 sync_console=1
+(XEN) Xen image load base address: 0
+(XEN) Video information:
+(XEN)  VGA is text mode 80x25, font 8x16
+(XEN)  VBE/DDC methods: none; EDID transfer time: 0 seconds
+(XEN)  EDID info not retrieved because no DDC retrieval method detected
+(XEN) Disc information:
+(XEN)  Found 1 MBR signatures
+(XEN)  Found 2 EDD information structures
+(XEN) Xen-e820 RAM map:
+(XEN)  0000000000000000 - 000000000009ec00 (usable)
+(XEN)  00000000000f0000 - 0000000000100000 (reserved)
+(XEN)  0000000000100000 - 00000000bf3ff800 (usable)
+(XEN)  00000000bf3ff800 - 00000000bf453c00 (ACPI NVS)
+(XEN)  00000000bf453c00 - 00000000bf455c00 (ACPI data)
+(XEN)  00000000bf455c00 - 00000000c0000000 (reserved)
+(XEN)  00000000e0000000 - 00000000fed00400 (reserved)
+(XEN)  00000000fed20000 - 00000000feda0000 (reserved)
+(XEN)  00000000fee00000 - 00000000fef00000 (reserved)
+(XEN)  00000000ffb00000 - 0000000100000000 (reserved)
+(XEN)  0000000100000000 - 0000000238000000 (usable)
+(XEN) New Xen image base address: 0xbec00000
+(XEN) ACPI: RSDP 000FEC00, 0024 (r2 DELL  )
+(XEN) ACPI: XSDT 000FC5BB, 0074 (r1 DELL    B9K           15 ASL        61)
+(XEN) ACPI: FACP 000FC6EB, 00F4 (r3 DELL    B9K           15 ASL        61)
+(XEN) ACPI: DSDT FFF789A5, 45A0 (r1   DELL    dt_ex     1000 INTL 20050624)
+(XEN) ACPI: FACS BF3FF800, 0040
+(XEN) ACPI: SSDT FFF7D064, 00AA (r1   DELL    st_ex     1000 INTL 20050624)
+(XEN) ACPI: APIC 000FC7DF, 0092 (r1 DELL    B9K           15 ASL        61)
+(XEN) ACPI: BOOT 000FC871, 0028 (r1 DELL    B9K           15 ASL        61)
+(XEN) ACPI: ASF! 000FC899, 0096 (r32 DELL    B9K           15 ASL        61)
+(XEN) ACPI: MCFG 000FC92F, 003E (r1 DELL    B9K           15 ASL        61)
+(XEN) ACPI: HPET 000FC96D, 0038 (r1 DELL    B9K           15 ASL        61)
+(XEN) ACPI: TCPA 000FCBC9, 0032 (r1 DELL    B9K           15 ASL        61)
+(XEN) ACPI: DMAR 000FCBFB, 0118 (r1 DELL    B9K           15 ASL        61)
+(XEN) ACPI: SLIC 000FC9A5, 00C0 (r1 DELL    B9K           15 ASL        61)
+(XEN) System RAM: 8051MB (8244852kB)
+(XEN) No NUMA configuration found
+(XEN) Faking a node at 0000000000000000-0000000238000000
+(XEN) Domain heap initialised
+(XEN) CPU Vendor: Intel, Family 6 (0x6), Model 15 (0xf), Stepping 11 (raw 000006fb)
+(XEN) found SMP MP-table at 000fe710
+(XEN) DMI 2.5 present.
+(XEN) Using APIC driver default
+(XEN) ACPI: PM-Timer IO Port: 0x808 (32 bits)
+(XEN) ACPI: SLEEP INFO: pm1x_cnt[1:804,1:0], pm1x_evt[1:800,1:0]
+(XEN) ACPI:             wakeup_vec[bf3ff80c], vec_size[20]
+(XEN) ACPI: Local APIC address 0xfee00000
+(XEN) ACPI: LAPIC (acpi_id[0x01] lapic_id[0x00] enabled)
+(XEN) ACPI: LAPIC (acpi_id[0x02] lapic_id[0x01] enabled)
+(XEN) ACPI: LAPIC (acpi_id[0x03] lapic_id[0x05] disabled)
+(XEN) ACPI: LAPIC (acpi_id[0x04] lapic_id[0x07] disabled)
+(XEN) ACPI: LAPIC (acpi_id[0x05] lapic_id[0x00] disabled)
+(XEN) ACPI: LAPIC (acpi_id[0x06] lapic_id[0x01] disabled)
+(XEN) ACPI: LAPIC (acpi_id[0x07] lapic_id[0x02] disabled)
+(XEN) ACPI: LAPIC (acpi_id[0x08] lapic_id[0x03] disabled)
+(XEN) ACPI: LAPIC_NMI (acpi_id[0xff] high level lint[0x1])
+(XEN) ACPI: IOAPIC (id[0x08] address[0xfec00000] gsi_base[0])
+(XEN) IOAPIC[0]: apic_id 8, version 32, address 0xfec00000, GSI 0-23
+(XEN) ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+(XEN) ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+(XEN) ACPI: IRQ0 used by override.
+(XEN) ACPI: IRQ2 used by override.
+(XEN) ACPI: IRQ9 used by override.
+(XEN) Enabling APIC mode:  Flat.  Using 1 I/O APICs
+(XEN) ACPI: HPET id: 0x8086a301 base: 0xfed00000
+(XEN) ERST table was not found
+(XEN) Using ACPI (MADT) for SMP configuration information
+(XEN) SMP: Allowing 8 CPUs (6 hotplug CPUs)
+(XEN) IRQ limits: 24 GSI, 376 MSI/MSI-X
+(XEN) mce_intel.c:782: MCA Capability: firstbank 1, extended MCE MSR 0, BCAST
+(XEN) CPU0: Intel machine check reporting enabled
+(XEN) Speculative mitigation facilities:
+(XEN)   Hardware features:
+(XEN) BTI mitigations: Thunk N/A, Others: RSB_NATIVE RSB_VMEXIT
+(XEN) XPTI: enabled
+(XEN) Using scheduler: SMP Credit Scheduler (credit)
+(XEN) Platform timer is 14.318MHz HPET
+(XEN) Detected 2327.503 MHz processor.
+(XEN) Initing memory sharing.
+(XEN) alt table ffff82d0804505b8 -> ffff82d080452252
+(XEN) PCI: MCFG configuration 0: base e0000000 segment 0000 buses 00 - ff
+(XEN) PCI: MCFG area at e0000000 reserved in E820
+(XEN) PCI: Using MCFG for segment 0000 bus 00-ff
+(XEN) Intel VT-d iommu 2 supported page sizes: 4kB.
+(XEN) traps.c:1569: GPF (0000): ffff82d0803f78fb [intel_vtd_setup+0x13b/0x4d0] -> ffff82d08036f2c0
+(XEN) Intel VT-d iommu 1 supported page sizes: 4kB.
+(XEN) traps.c:1569: GPF (0000): ffff82d0803f78fb [intel_vtd_setup+0x13b/0x4d0] -> ffff82d08036f2c0
+(XEN) Intel VT-d iommu 0 supported page sizes: 4kB.
+(XEN) traps.c:1569: GPF (0000): ffff82d0803f78fb [intel_vtd_setup+0x13b/0x4d0] -> ffff82d08036f2c0
+(XEN) Intel VT-d iommu 3 supported page sizes: 4kB.
+(XEN) traps.c:1569: GPF (0000): ffff82d0803f78fb [intel_vtd_setup+0x13b/0x4d0] -> ffff82d08036f2c0
+(XEN) Intel VT-d Snoop Control not enabled.
+(XEN) Intel VT-d Dom0 DMA Passthrough not enabled.
+(XEN) Intel VT-d Queued Invalidation not enabled.
+(XEN) Intel VT-d Interrupt Remapping not enabled.
+(XEN) Intel VT-d Posted Interrupt not enabled.
+(XEN) Intel VT-d Shared EPT tables not enabled.
+(XEN) I/O virtualisation enabled
+(XEN)  - Dom0 mode: Relaxed
+(XEN) Interrupt remapping disabled
+(XEN) nr_sockets: 4
+(XEN) ENABLING IO-APIC IRQs
+(XEN)  -> Using new ACK method
+(XEN) ..TIMER: vector=0xF0 apic1=0 pin1=2 apic2=-1 pin2=-1
+(XEN) Allocated console ring of 16 KiB.
+(XEN) mwait-idle: does not run on family 6 model 15
+(XEN) VMX: Supported advanced features:
+(XEN)  - APIC MMIO access virtualisation
+(XEN)  - APIC TPR shadow
+(XEN)  - Virtual NMI
+(XEN)  - MSR direct-access bitmap
+(XEN) HVM: ASIDs disabled.
+(XEN) HVM: VMX enabled
+(XEN) HVM: Hardware Assisted Paging (HAP) not detected
+(XEN) Brought up 2 CPUs
+(XEN) build-id: 58c1c38138780bc01086b1f3d58e825ea87f2dc1
+(XEN) Running stub recovery selftests...
+(XEN) traps.c:1569: GPF (0000): ffff82d0bffff041 [ffff82d0bffff041] -> ffff82d08036f3f2
+(XEN) traps.c:754: Trap 12: ffff82d0bffff040 [ffff82d0bffff040] -> ffff82d08036f3f2
+(XEN) traps.c:1096: Trap 3: ffff82d0bffff041 [ffff82d0bffff041] -> ffff82d08036f3f2
+(XEN) HPET: 0 timers usable for broadcast (4 total)
+(XEN) ACPI sleep modes: S3
+(XEN) VPMU: disabled
+(XEN) mcheck_poll: Machine check polling timer started.
+(XEN) Dom0 has maximum 400 PIRQs
+(XEN) grant_table.c:1769:IDLEv0 Expanding d0 grant table from 0 to 1 frames
+(XEN) NX (Execute Disable) protection active
+(XEN) *** Building a PV Dom0 ***
+(XEN) ELF: phdr: paddr=0xffffffff80000000 memsz=0xb828b8
+(XEN) ELF: phdr: paddr=0xffffffff80c828c0 memsz=0x24e740
+(XEN) ELF: memory: 0xffffffff80000000 -> 0xffffffff80ed1000
+(XEN) ELF: __xen_guest: "GUEST_OS=NetBSD,GUEST_VER=4.99,XEN_VER=xen-3.0,LOADER=generic,VIRT_BASE=0xffffffff80000000,ELF_PADDR_OFFSET=0xffffffff80000000,VIRT_ENTRY=0xffffffff80100000,HYPERCALL_PAGE=0x00000101,BSD_SYMTAB=yes"
+(XEN) ELF: GUEST_OS="NetBSD"
+(XEN) ELF: GUEST_VER="4.99"
+(XEN) ELF: XEN_VER="xen-3.0"
+(XEN) ELF: LOADER="generic"
+(XEN) ELF: VIRT_BASE="0xffffffff80000000"
+(XEN) ELF: ELF_PADDR_OFFSET="0xffffffff80000000"
+(XEN) ELF: VIRT_ENTRY="0xffffffff80100000"
+(XEN) ELF: HYPERCALL_PAGE="0x00000101"
+(XEN) ELF: BSD_SYMTAB="yes"
+(XEN) ELF: addresses:
+(XEN)     virt_base        = 0xffffffff80000000
+(XEN)     elf_paddr_offset = 0xffffffff80000000
+(XEN)     virt_offset      = 0x0
+(XEN)     virt_kstart      = 0xffffffff80000000
+(XEN)     virt_kend        = 0xffffffff80ff4510
+(XEN)     virt_entry       = 0xffffffff80100000
+(XEN)     p2m_base         = 0xffffffffffffffff
+(XEN)  Xen  kernel: 64-bit, lsb, compat32
+(XEN)  Dom0 kernel: 64-bit, lsb, paddr 0xffffffff80000000 -> 0xffffffff80ed1000
+(XEN)  Dom0 symbol map 0xffffffff80ed1000 -> 0xffffffff80ff4510
+(XEN) PHYSICAL MEMORY ARRANGEMENT:
+(XEN)  Dom0 alloc.:   000000022e000000->0000000230000000 (122880 pages to be allocated)
+(XEN) VIRTUAL MEMORY ARRANGEMENT:
+(XEN)  Loaded kernel: ffffffff80000000->ffffffff80ff4510
+(XEN)  Init. ramdisk: ffffffff80ff5000->ffffffff80ff5000
+(XEN)  Phys-Mach map: ffffffff80ff5000->ffffffff810f5000
+(XEN)  Start info:    ffffffff810f5000->ffffffff810f54b4
+(XEN)  Xenstore ring: 0000000000000000->0000000000000000
+(XEN)  Console ring:  0000000000000000->0000000000000000
+(XEN)  Page tables:   ffffffff810f6000->ffffffff81103000
+(XEN)  Boot stack:    ffffffff81103000->ffffffff81104000
+(XEN)  TOTAL:         ffffffff80000000->ffffffff81400000
+(XEN)  ENTRY ADDRESS: ffffffff80100000
+(XEN) Dom0 has maximum 2 VCPUs
+(XEN) ELF: phdr 0 at 0xffffffff80000000 -> 0xffffffff80b828b8
+(XEN) ELF: phdr 1 at 0xffffffff80c828c0 -> 0xffffffff80d1a578
+(XEN) Initial low memory virq threshold set at 0x4000 pages.
+(XEN) Scrubbing Free RAM on 1 nodes using 2 CPUs
+(XEN) ....................................done.
+(XEN) Std. Loglevel: All
+(XEN) Guest Loglevel: All
+(XEN) ***************************************************
+(XEN) WARNING: CONSOLE OUTPUT IS SYNCHRONOUS
+(XEN) This option is intended to aid debugging of Xen by ensuring
+(XEN) that all output is synchronously delivered on the serial line.
+(XEN) However it can introduce SIGNIFICANT latencies and affect
+(XEN) timekeeping. It is NOT recommended for production use!
+(XEN) ***************************************************
+(XEN) 3... 2... 1... 
+(XEN) *** Serial input -> DOM0 (type 'CTRL-a' three times to switch input to Xen)
+(XEN) Freed 444kB init memory
+(XEN) io_apic.c:2384: IO-APIC: apic=0, pin=0, irq=0
+(XEN) IO-APIC: new_entry=000109f0
+(XEN) IO-APIC: old_entry=00010000 pirq=-1
+(XEN) IO-APIC: Attempt to modify IO-APIC pin for in-use IRQ!
+(XEN) io_apic.c:2384: IO-APIC: apic=0, pin=2, irq=0
+(XEN) IO-APIC: new_entry=000109f0
+(XEN) IO-APIC: old_entry=000009f0 pirq=-1
+(XEN) IO-APIC: Attempt to modify IO-APIC pin for in-use IRQ!
+(XEN) io_apic.c:2384: IO-APIC: apic=0, pin=4, irq=4
+(XEN) IO-APIC: new_entry=000109f1
+(XEN) IO-APIC: old_entry=000009f1 pirq=-1
+(XEN) IO-APIC: Attempt to modify IO-APIC pin for in-use IRQ!
+(XEN) allocated vector b8 for irq 16
+(XEN) allocated vector c0 for irq 17
+(XEN) allocated vector c8 for irq 18
+(XEN) allocated vector d0 for irq 19
+(XEN) allocated vector d8 for irq 20
+(XEN) allocated vector 21 for irq 21
+(XEN) allocated vector 29 for irq 22
+(XEN) allocated vector 31 for irq 23
+
+--uAKRQypu60I7Lcqm
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--uAKRQypu60I7Lcqm--
