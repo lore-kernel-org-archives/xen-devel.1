@@ -1,16 +1,21 @@
-From: George Dunlap <dunlapg@umich.edu>
-Subject: Re: RFC Xen signature verification for kexec
-Date: Tue, 24 Apr 2018 10:46:38 +0100
-Message-ID: <CAFLBxZZPkJU-iifT7037AQzLEd9_uHm8S6FWhP_U1WypMwexyQ@mail.gmail.com>
-References: <81714431-9776-7247-86db-c035fa3d2ce6@oracle.com>
- <5ADD837102000078001BD675@prv1-mh.provo.novell.com>
- <20180423102500.GI6312@olila.local.net-space.pl>
- <5ADDB67002000078001BD805@prv1-mh.provo.novell.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [RFC v2 6/9] libxl: Have QEMU save its state to a
+ file descriptor
+Date: Tue, 24 Apr 2018 10:46:49 +0100
+Message-ID: <20180424094649.jiu5c755nn4ialvs@citrix.com>
+References: <20180416173227.22671-1-anthony.perard@citrix.com>
+ <20180416173227.22671-7-anthony.perard@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5ADDB67002000078001BD805@prv1-mh.provo.novell.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=y+rf=hn=citrix.com=prvs=645aa2f63=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1fAuXE-0006f5-Om
+ for xen-devel@lists.xenproject.org; Tue, 24 Apr 2018 09:46:52 +0000
+Content-Disposition: inline
+In-Reply-To: <20180416173227.22671-7-anthony.perard@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,40 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Daniel Kiper <daniel.kiper@oracle.com>, Eric DeVolder <eric.devolder@oracle.com>, kexec@lists.infradead.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBBcHIgMjMsIDIwMTggYXQgMTE6MzMgQU0sIEphbiBCZXVsaWNoIDxKQmV1bGljaEBz
-dXNlLmNvbT4gd3JvdGU6Cj4+Pj4gT24gMjMuMDQuMTggYXQgMTI6MjUsIDxkYW5pZWwua2lwZXJA
-b3JhY2xlLmNvbT4gd3JvdGU6Cj4+IE9uIE1vbiwgQXByIDIzLCAyMDE4IGF0IDEyOjU1OjQ1QU0g
-LTA2MDAsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4gPj4+IE9uIDIwLjA0LjE4IGF0IDIxOjEyLCA8
-ZXJpYy5kZXZvbGRlckBvcmFjbGUuY29tPiB3cm90ZToKPj4+ID4gVHdvIG9wdGlvbnMgZm9yIHNp
-Z25hdHVyZSB2ZXJpZmljYXRpb24gaW4gWGVuCj4+PiA+Cj4+PiA+IFRoaXMgcHJvcG9zYWwgb3V0
-bGluZXMgdHdvIG9wdGlvbnMgdW5kZXIgY29uc2lkZXJhdGlvbiBmb3IgZW5oYW5jaW5nCj4+PiA+
-IFhlbiB0byBzdXBwb3J0IHNpZ25hdHVyZSB2ZXJpZmljYXRpb24gb2Yga2V4ZWMgbG9hZGVkIGlt
-YWdlcy4gVGhlCj4+PiA+IGZpcnN0IG9wdGlvbiBpcyBlc3NlbnRpYWxseSB0byBtaXJyb3IgTGlu
-dXggc2lnbmF0dXJlIHZlcmlmaWNhdGlvbgo+Pj4gPiBjb2RlIGludG8gWGVuLiBUaGUgc2Vjb25k
-IG9wdGlvbiB1dGlsaXplcyBjb21wb25lbnRzIGZyb20gc291cmNlcwo+Pj4gPiBvdGhlciB0aGFu
-IExpbnV4IChmb3IgZXhhbXBsZSwgbGliZ2NyeXB0IHJhdGhlciB0aGFuIGxpbnV4L2NyeXB0byku
-Cj4+PiA+Cj4+PiA+IE5PVEU6IEFuIG9wdGlvbiB0byB1dGlsaXplIGRvbTAga2VybmVsIHNpZ25h
-dHVyZSB2ZXJpZmljYXRpb24gZG9lcyBub3QKPj4+ID4gcHJldmVudCB0aGUgZXhwbG9pdCBhcyB1
-c2VyIHNwYWNlIGNhbiBpbnZva2UgdGhlIGh5cGVyY2FsbCBkaXJlY3RseSwKPj4+ID4gYnlwYXNz
-aW5nIGRvbTAuCj4+Pgo+Pj4gTm90IGV4YWN0bHkgLSB0aGlzIG9wdGlvbiBuZXZlcnRoZWxlc3Mg
-ZXhpc3RzLCBhbGJlaXQgaXMgcGVyaGFwcwo+Pj4gdW5hdHRyYWN0aXZlOiBObyB1c2VyIHNwYWNl
-IGNvbXBvbmVudCBjYW4gaXNzdWUgaHlwZXJjYWxscwo+Pj4gZGlyZWN0bHksIHRoZXkgYWx3YXlz
-IGdvIHRocm91Z2ggdGhlIHByaXZjbWQgZHJpdmVyLiBIZW5jZSB0aGUKPj4+IGRyaXZlciBjb2xk
-IHNub29wIHRoZSBrZXhlYyBoeXBlcmNhbGwuCj4+Cj4+IEhtbW0uLi4gSXMgbm90IGl0IGEgcHJv
-YmxlbSBmcm9tIHNlY3VyaXR5IHBvaW50IG9mIHZpZXcgZm9yIHVzIGluIHRoaXMKPj4gY2FzZT8g
-SXQgc2hvdWxkIG5vdCBpZiBkb20wIGtlcm5lbCBpcyBzaWduZWQuIEl0IGhhdmUgdG8gYmUgc2ln
-bmVkIGhlcmUuCj4+IEp1c3QgdGhpbmtpbmcgYSBsb3VkLi4uCj4KPiBJJ20gYWZyYWlkIEkgZG9u
-J3QgdW5kZXJzdGFuZDogSWYgdGhlIERvbTAga2VybmVsIGlzbid0IHNpZ25lZCAob3IgaGFzbid0
-Cj4gYmVlbiB2ZXJpZmllZCksIHRoZSBzeXN0ZW0gaXMgaW5zZWN1cmUgaW4gdGhlIGZpcnN0IHBs
-YWNlLiBObyByZWFzb24gdG8KPiBib3RoZXIgbWVhc3VyaW5nIHRoZSBrZXhlYyBrZXJuZWwgdGhl
-bi4KCkkgdGhpbmsgeW91J3JlIGJvdGggc2F5aW5nIHRoZSBzYW1lIHRoaW5nLgoKRldJVyBJIHdv
-dWxkbid0IG1pbmQgY29taW5nIHVwIHdpdGggYSBoeXBlcmNhbGwgdGhhdCB0aGUgcHJpdmNtZApk
-cml2ZXIgcmVmdXNlcyB0byBwYXNzLXRocm91Z2ggYXMtaXMsIGFuZCBoYXZpbmcgc29tZSB3YXkg
-Zm9yIHRoZQp0b29scyB0byBhc2sgdGhlIGtlcm5lbCB0byBjaGVjayB0aGUgc2lnbmF0dXJlLgoK
-IC1HZW9yZ2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gTW9uLCBBcHIgMTYsIDIwMTggYXQgMDY6MzI6MjRQTSArMDEwMCwgQW50aG9ueSBQRVJBUkQg
+d3JvdGU6Cj4gSW4gY2FzZSBRRU1VIGhhdmUgcmVzdHJpY3RlZCBhY2Nlc3MgdG8gdGhlIHN5c3Rl
+bSwgb3BlbiB0aGUgZmlsZSBmb3IgaXQsCj4gYW5kIFFFTVUgd2lsbCBzYXZlIGl0cyBzdGF0ZSB0
+byB0aGlzIGZpbGUgZGVzY3JpdG9yLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFudGhvbnkgUEVSQVJE
+IDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUy
+QGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
