@@ -1,19 +1,18 @@
-From: Juergen Gross <jgross@suse.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: bogus wrap check in xen-netback
-Date: Wed, 25 Apr 2018 09:28:38 +0200
-Message-ID: <ec157759-b859-32e3-dc90-75fd8dce669d@suse.com>
+Date: Wed, 25 Apr 2018 09:39:24 +0200
+Message-ID: <20180425093924.13c56296.olaf@aepfle.de>
 References: <20180425091956.7e4c98bc.olaf@aepfle.de>
+ <ec157759-b859-32e3-dc90-75fd8dce669d@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6345517923789077225=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ddll=ho=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fBEr5-00012d-Ih
- for xen-devel@lists.xenproject.org; Wed, 25 Apr 2018 07:28:43 +0000
-In-Reply-To: <20180425091956.7e4c98bc.olaf@aepfle.de>
-Content-Language: de-DE
+ (envelope-from <srs0=vzh0=ho=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fBF1f-0001o4-3S
+ for xen-devel@lists.xenproject.org; Wed, 25 Apr 2018 07:39:39 +0000
+In-Reply-To: <ec157759-b859-32e3-dc90-75fd8dce669d@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,32 +21,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Paul Durrant <paul.durrant@citrix.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjUvMDQvMTggMDk6MTksIE9sYWYgSGVyaW5nIHdyb3RlOgo+IFdpdGggY29tbWl0IDQ4ODU2
-Mjg2YjY0ZSAoInhlbi9uZXRiYWNrOiBzaHV0ZG93biB0aGUgcmluZyBpZiBpdCBjb250YWlucyBn
-YXJiYWdlLiIpIGEgbmV3IGNoZWNrIHdhcyBhZGRlZCB0byB4ZW4tbmV0YmFjaywgd2hpY2ggdHJp
-Z2dlcnMgZm9yIG1lLgo+IAo+IFNpbmNlIHRoZXJlIGFyZSBidWdzIGluIHJpbmcgYnVmZmVyIGhh
-bmRsaW5nIEkgdHJpZWQgdG8gdHJpZ2dlciB0aGVtIGVhcmxpZXIgYnkgY2hhbmdpbmcgUklOR19J
-RFggZnJvbSB1MzIgdG8gdTE2LiBOb3cgSSBmb3VuZCBhbm90aGVyIG9uZSwgYW5kIEkgd29uZGVy
-IGlmIHRoZSBlcnJvciBiZWxvdyBjb3VsZCBwb3RlbnRpYWxseSBhbHNvIGhpdCB3aXRoIHUzMjoK
-PiAKPiAuLi4KPiBbICA2MjQuMTg2NDkyXSBicjA6IHBvcnQgMyh2aWYyLjApIGVudGVyZWQgZm9y
-d2FyZGluZyBzdGF0ZQo+IFsgIDYyNC4xODY1MjJdIGJyMDogcG9ydCAzKHZpZjIuMCkgZW50ZXJl
-ZCBmb3J3YXJkaW5nIHN0YXRlCj4gWyAgNjgwLjg2NTM5OF0gdmlmIHZpZi0xLTAgdmlmMS4wOiBJ
-bXBvc3NpYmxlIG51bWJlciBvZiByZXF1ZXN0cy4gcmVxX3Byb2QgMCwgcmVxX2NvbnMgNjU0MDAs
-IHNpemUgMjU2Cj4gWyAgNjgwLjg2NTQwMl0gdmlmIHZpZi0xLTAgdmlmMS4wOiBmYXRhbCBlcnJv
-cjsgZGlzYWJsaW5nIGRldmljZQo+IFsgIDY4MC44NjU0OTVdIGJyMDogcG9ydCAyKHZpZjEuMCkg
-ZW50ZXJlZCBkaXNhYmxlZCBzdGF0ZQo+IFsgIDY4OS40MzM4NDldIHZpZiB2aWYtMi0wIHZpZjIu
-MDogSW1wb3NzaWJsZSBudW1iZXIgb2YgcmVxdWVzdHMuIHJlcV9wcm9kIDAsIHJlcV9jb25zIDY1
-NTI3LCBzaXplIDI1Ngo+IFsgIDY4OS40MzM4NTddIHZpZiB2aWYtMi0wIHZpZjIuMDogZmF0YWwg
-ZXJyb3I7IGRpc2FibGluZyBkZXZpY2UKPiBbICA2ODkuNDMzOTQ1XSBicjA6IHBvcnQgMyh2aWYy
-LjApIGVudGVyZWQgZGlzYWJsZWQgc3RhdGUKPiBbICA2OTAuOTMwNTEyXSBwa3RnZW46IFBhY2tl
-dCBHZW5lcmF0b3IgZm9yIHBhY2tldCBwZXJmb3JtYW5jZSB0ZXN0aW5nLiBWZXJzaW9uOiAyLjc1
-Cj4gLi4uCj4gCj4gV2hhdCBleGFjdGx5IGlzIHRoYXQgY2hlY2sgaW4geGVudmlmX3R4X2J1aWxk
-X2dvcHMgdHJ5aW5nIHRvIGFjaGlldmU/IFN1YnRyYWN0aW5nIGEgbm9uLXplcm8gdmFsdWUgZnJv
-bSB6ZXJvIHdpbGwgYWx3YXlzIGNyZWF0ZSBzb21ldGhpbmcgbGFyZ2VyIHRoYW4gWEVOX05FVElG
-X1RYX1JJTkdfU0laRS4KCldoeT8gKHUxNikwIC0gKHUxNik2NTQwMCA9PSAxMzYKCgpKdWVyZ2Vu
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============6345517923789077225==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/7tBBv4stzdp9/G7HFiz=TnO"; protocol="application/pgp-signature"
+
+--Sig_/7tBBv4stzdp9/G7HFiz=TnO
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 25 Apr 2018 09:28:38 +0200
+schrieb Juergen Gross <jgross@suse.com>:
+
+> Why? (u16)0 - (u16)65400 =3D=3D 136
+
+My helloworld.c shows that ushort gets promoted to uint, unless it is done =
+like that:
+
+-               if (queue->tx.sring->req_prod - queue->tx.req_cons >
+-                   XEN_NETIF_TX_RING_SIZE) {
++               idx =3D queue->tx.sring->req_prod - queue->tx.req_cons;=20
++               if ( idx > XEN_NETIF_TX_RING_SIZE) {
+
+Olaf
+
+--Sig_/7tBBv4stzdp9/G7HFiz=TnO
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWuAwrAAKCRBdQqD6ppg2
+fnC5AJ9gzkBEUC4J8hr+W3OIh4+W6o2bMQCfcB8tAqA+yQXzaqAECaXpqaNtUIg=
+=O86w
+-----END PGP SIGNATURE-----
+
+--Sig_/7tBBv4stzdp9/G7HFiz=TnO--
+
+
+--===============6345517923789077225==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6345517923789077225==--
