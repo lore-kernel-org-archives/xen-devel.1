@@ -1,24 +1,17 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: bogus wrap check in xen-netback
-Date: Wed, 25 Apr 2018 12:35:11 +0200
-Message-ID: <20180425123511.0f66639d.olaf@aepfle.de>
-References: <20180425091956.7e4c98bc.olaf@aepfle.de>
- <ec157759-b859-32e3-dc90-75fd8dce669d@suse.com>
- <20180425093924.13c56296.olaf@aepfle.de>
- <20180425085923.k6bxc5j4nhoadhzl@citrix.com>
- <20180425110426.1427b6ab.olaf@aepfle.de>
- <20180425100653.64qclgt6i6cgculn@citrix.com>
- <5AE057BE02000078001BE50B@prv1-mh.provo.novell.com>
- <20180425103125.kllxadyujbqbiamq@citrix.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v2 08/10] xen/arm: Release timer interrupts
+ when CPU is hot-unplugged
+Date: Wed, 25 Apr 2018 11:38:10 +0100
+Message-ID: <9265e63e-c0b9-0348-37cc-c2ceb59c8d19@arm.com>
+References: <20180420122513.27292-1-mirela.simonovic@aggios.com>
+ <20180420122513.27292-9-mirela.simonovic@aggios.com>
+ <CAKPH-NhYh-rfg-xgFiJSTk3YuH-ic1iZqPnnxku5-tSMmu136w@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8585894316475603170=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=vzh0=ho=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1fBHll-0007js-UP
- for xen-devel@lists.xenproject.org; Wed, 25 Apr 2018 10:35:26 +0000
-In-Reply-To: <20180425103125.kllxadyujbqbiamq@citrix.com>
+In-Reply-To: <CAKPH-NhYh-rfg-xgFiJSTk3YuH-ic1iZqPnnxku5-tSMmu136w@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,53 +20,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: Mirela Simonovic <mirela.simonovic@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
+Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============8585894316475603170==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/p6r2=FU9RbhFxP219avTZeq"; protocol="application/pgp-signature"
-
---Sig_/p6r2=FU9RbhFxP219avTZeq
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Wed, 25 Apr 2018 11:31:25 +0100
-schrieb Wei Liu <wei.liu2@citrix.com>:
-
-> My bad. Yes, they are converted to int, not unsigned int.
-
-Hopefully that happens only if the target is int, not if all involved varia=
-bles are short.
-
-Unless there are objections I will prepare a patch to deal with RING_IDX be=
-ing u16.
-
-Olaf
-
---Sig_/p6r2=FU9RbhFxP219avTZeq
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWuBZ3wAKCRBdQqD6ppg2
-frMVAJ4/BM8cjX1hZdic4Ck3zVAW7aFlYwCgqgiA2n1op2gfuTYc8Z4Q6JxAof0=
-=SXCe
------END PGP SIGNATURE-----
-
---Sig_/p6r2=FU9RbhFxP219avTZeq--
-
-
---===============8585894316475603170==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+CgpPbiAyNS8wNC8xOCAxMTozNCwgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPiBIaSBKdWxpZW4s
+Cj4gCj4gWW91IG1heSBoYXZlIG1pc3NlZCB0aGlzIG9uZS4gU2hvdWxkIHdlIHRyeSB1c2luZyBu
+b3RpZmllcnMgaGVyZSBhcyB3ZWxsPwoKWWVzLCBJIGFzc3VtZWQgdGhpcyB3YXMgaW1wbGllZCBi
+eSBteSBjb21tZW50cyBwcmV2aW91c2x5LCBzbyBJIHNraXBwZWQgCnRoZSBwYXRjaC4gU29ycnkg
+Zm9yIHRoYXQuCgpDaGVlcnMsCgo+IAo+IFRoYW5rcywKPiBNaXJlbGEKPiAKPiBPbiBGcmksIEFw
+ciAyMCwgMjAxOCBhdCAyOjI1IFBNLCBNaXJlbGEgU2ltb25vdmljCj4gPG1pcmVsYS5zaW1vbm92
+aWNAYWdnaW9zLmNvbT4gd3JvdGU6Cj4+IFdoZW4gYSBDUFUgaXMgaG90LXVucGx1Z2dlZCB0aW1l
+ciBpbnRlcnJ1cHRzIGhhdmUgdG8gYmUgcmVsZWFzZWQKPj4gaW4gb3JkZXIgdG8gZnJlZSB0aGUg
+bWVtb3J5IHRoYXQgd2FzIGFsbG9jYXRlZCB3aGVuIHRoZSBpbnRlcnJ1cHRzCj4+IHdlcmUgcmVx
+dWVzdGVkICh1c2luZyByZXF1ZXN0X2lycSgpKS4gVGhlIHJlcXVlc3RfaXJxIGlzIGNhbGxlZAo+
+PiBmb3IgZWFjaCB0aW1lciBpbnRlcnJ1cHQgd2hlbiB0aGUgQ1BVIGdldHMgaG90cGx1Z2dlZAo+
+PiAoc3RhcnRfc2Vjb25kYXJ5LT5pbml0X3RpbWVyX2ludGVycnVwdC0+cmVxdWVzdF9pcnEpLgo+
+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBNaXJlbGEgU2ltb25vdmljIDxtaXJlbGEuc2ltb25vdmljQGFn
+Z2lvcy5jb20+Cj4+Cj4+IC0tLQo+PiBDQzogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGlu
+aUBrZXJuZWwub3JnPgo+PiBDQzogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4K
+Pj4gLS0tCj4+ICAgeGVuL2FyY2gvYXJtL3NtcGJvb3QuYyAgICAgfCAxICsKPj4gICB4ZW4vYXJj
+aC9hcm0vdGltZS5jICAgICAgICB8IDcgKysrKysrKwo+PiAgIHhlbi9pbmNsdWRlL2FzbS1hcm0v
+dGltZS5oIHwgNiArKysrKysKPj4gICAzIGZpbGVzIGNoYW5nZWQsIDE0IGluc2VydGlvbnMoKykK
+Pj4KPj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9zbXBib290LmMgYi94ZW4vYXJjaC9hcm0v
+c21wYm9vdC5jCj4+IGluZGV4IDQ0OWZlZmM3N2QuLmI0ZWQ0NzlkYzYgMTAwNjQ0Cj4+IC0tLSBh
+L3hlbi9hcmNoL2FybS9zbXBib290LmMKPj4gKysrIGIveGVuL2FyY2gvYXJtL3NtcGJvb3QuYwo+
+PiBAQCAtMzg2LDYgKzM4Niw3IEBAIHZvaWQgX19jcHVfZGlzYWJsZSh2b2lkKQo+PiAgICAgICAg
+KiBpbiByZXNwZWN0aXZlIGluaXQgaW50ZXJydXB0IGZ1bmN0aW9ucyBjYWxsZWQgZnJvbSBzdGFy
+dF9zZWNvbmRhcnkpCj4+ICAgICAgICAqLwo+PiAgICAgICBkZWluaXRfbWFpbnRlbmFuY2VfaW50
+ZXJydXB0KCk7Cj4+ICsgICAgZGVpbml0X3RpbWVyX2ludGVycnVwdCgpOwo+Pgo+PiAgICAgICAv
+KiBJdCdzIG5vdyBzYWZlIHRvIHJlbW92ZSB0aGlzIHByb2Nlc3NvciBmcm9tIHRoZSBvbmxpbmUg
+bWFwICovCj4+ICAgICAgIGNwdW1hc2tfY2xlYXJfY3B1KGNwdSwgJmNwdV9vbmxpbmVfbWFwKTsK
+Pj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS90aW1lLmMgYi94ZW4vYXJjaC9hcm0vdGltZS5j
+Cj4+IGluZGV4IGMxMWZjZmVhZGQuLjFkOWRjMTZmODkgMTAwNjQ0Cj4+IC0tLSBhL3hlbi9hcmNo
+L2FybS90aW1lLmMKPj4gKysrIGIveGVuL2FyY2gvYXJtL3RpbWUuYwo+PiBAQCAtMzEyLDYgKzMx
+MiwxMyBAQCB2b2lkIGluaXRfdGltZXJfaW50ZXJydXB0KHZvaWQpCj4+ICAgICAgIGNoZWNrX3Rp
+bWVyX2lycV9jZmcodGltZXJfaXJxW1RJTUVSX1BIWVNfTk9OU0VDVVJFX1BQSV0sICJOUy1waHlz
+aWNhbCIpOwo+PiAgIH0KPj4KPj4gK3ZvaWQgZGVpbml0X3RpbWVyX2ludGVycnVwdCh2b2lkKQo+
+PiArewo+PiArICAgIHJlbGVhc2VfaXJxKHRpbWVyX2lycVtUSU1FUl9IWVBfUFBJXSwgTlVMTCk7
+Cj4+ICsgICAgcmVsZWFzZV9pcnEodGltZXJfaXJxW1RJTUVSX1ZJUlRfUFBJXSwgTlVMTCk7Cj4+
+ICsgICAgcmVsZWFzZV9pcnEodGltZXJfaXJxW1RJTUVSX1BIWVNfTk9OU0VDVVJFX1BQSV0sIE5V
+TEwpOwo+PiArfQo+PiArCj4+ICAgLyogV2FpdCBhIHNldCBudW1iZXIgb2YgbWljcm9zZWNvbmRz
+ICovCj4+ICAgdm9pZCB1ZGVsYXkodW5zaWduZWQgbG9uZyB1c2VjcykKPj4gICB7Cj4+IGRpZmYg
+LS1naXQgYS94ZW4vaW5jbHVkZS9hc20tYXJtL3RpbWUuaCBiL3hlbi9pbmNsdWRlL2FzbS1hcm0v
+dGltZS5oCj4+IGluZGV4IDViOWEzMWRlOTEuLjZmYTRjNDc1MzIgMTAwNjQ0Cj4+IC0tLSBhL3hl
+bi9pbmNsdWRlL2FzbS1hcm0vdGltZS5oCj4+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS1hcm0vdGlt
+ZS5oCj4+IEBAIC0zNCw2ICszNCwxMiBAQCB1bnNpZ25lZCBpbnQgdGltZXJfZ2V0X2lycShlbnVt
+IHRpbWVyX3BwaSBwcGkpOwo+PiAgIC8qIFNldCB1cCB0aGUgdGltZXIgaW50ZXJydXB0IG9uIHRo
+aXMgQ1BVICovCj4+ICAgZXh0ZXJuIHZvaWQgaW5pdF90aW1lcl9pbnRlcnJ1cHQodm9pZCk7Cj4+
+Cj4+ICsvKgo+PiArICogUmV2ZXJ0IGFjdGlvbnMgZG9uZSBpbiBpbml0X3RpbWVyX2ludGVycnVw
+dCB0aGF0IGFyZSByZXF1aXJlZCB0byBwcm9wZXJseQo+PiArICogZGlzYWJsZSB0aGlzIENQVS4K
+Pj4gKyAqLwo+PiArZXh0ZXJuIHZvaWQgZGVpbml0X3RpbWVyX2ludGVycnVwdCh2b2lkKTsKPj4g
+Kwo+PiAgIC8qIENvdW50ZXIgdmFsdWUgYXQgYm9vdCB0aW1lICovCj4+ICAgZXh0ZXJuIHVpbnQ2
+NF90IGJvb3RfY291bnQ7Cj4+Cj4+IC0tCj4+IDIuMTMuMAo+PgoKLS0gCkp1bGllbiBHcmFsbAoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8585894316475603170==--
