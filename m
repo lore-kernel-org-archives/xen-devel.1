@@ -1,16 +1,15 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: [PATCH for-4.11] x86/SVM: Fix intercepted {RD,
- WR}MSR for the SYS{CALL, ENTER} MSRs
-Date: Wed, 25 Apr 2018 10:18:26 +0300
-Message-ID: <53356c37-10ec-92cc-f508-b4f1cdbe6d4e@bitdefender.com>
-References: <1524595891-4030-1-git-send-email-andrew.cooper3@citrix.com>
- <5AE0250302000078001BE396@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: bogus wrap check in xen-netback
+Date: Wed, 25 Apr 2018 09:19:56 +0200
+Message-ID: <20180425091956.7e4c98bc.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6047793034699956024=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5AE0250302000078001BE396@prv1-mh.provo.novell.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=vzh0=ho=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fBEit-0000nL-LM
+ for xen-devel@lists.xenproject.org; Wed, 25 Apr 2018 07:20:16 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,32 +18,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, brian.woods@amd.com, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMjUvMjAxOCAwOTo0OSBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMjQuMDQu
-MTggYXQgMjA6NTEsIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToKPj4gLS0tIGEv
-eGVuL2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMKPj4gKysrIGIveGVuL2FyY2gveDg2L2h2bS9zdm0v
-c3ZtLmMKPj4gQEAgLTE4ODMsNiArMTg4MywyMiBAQCBzdGF0aWMgaW50IHN2bV9tc3JfcmVhZF9p
-bnRlcmNlcHQodW5zaWduZWQgaW50IG1zciwgdWludDY0X3QgKm1zcl9jb250ZW50KQo+PiAgICAg
-ICBzd2l0Y2ggKCBtc3IgKQo+PiAgICAgICB7Cj4+ICAgICAgIGNhc2UgTVNSX0lBMzJfU1lTRU5U
-RVJfQ1M6Cj4+ICsgICAgY2FzZSBNU1JfSUEzMl9TWVNFTlRFUl9FU1A6Cj4+ICsgICAgY2FzZSBN
-U1JfSUEzMl9TWVNFTlRFUl9FSVA6Cj4gCj4gVGhlc2UgdGhyZWUgZG8gbm90IHJlcXVpcmUgc3lu
-Yy1pbmcsIGFzIHRoZWlyIHZhbHVlcyBhcmVuJ3QgcmVhZCBmcm9tIHRoZSBWTUNCLgo+IChUaGV5
-IGRvIHJlcXVpcmUgc3luYy1pbmcgb24gdGhlIHdyaXRlIHBhdGgpLgo+IAo+IEkgYWxzbyBkb24n
-dCB0aGluayB0aGlzIGlzIGdvaW5nIHRvIGZ1bGx5IHJlc29sdmUgUmF6dmFuJ3MgaXNzdWUgKG5v
-dCB0aGUgbGVhc3QKPiBiZWNhdXNlIHRoZSBjb2RlIHBhdGhzIHlvdSBhZGp1c3QgYXJlbid0IGlu
-dm9sdmVkIGluIGhpcyBzY2VuYXJpbyk6IEFzCj4gcG9pbnRlZCBvdXQgaW4gYSBwcml2YXRlIG1h
-aWwsIEkgdGhpbmsgdm1jYl9pbl9zeW5jIG5lZWRzIHRvIHN0YXJ0IG91dCBhcwo+IHRydWUgZm9y
-IGEgdkNQVSwgYW5kIG1heSBuZWVkIHNldHRpbmcgdG8gdHJ1ZSB1cG9uIGNvbnRleHQgc2V0IGFu
-ZC9vcgo+IHJlc2V0L2luaXQgZW11bGF0aW9uLgoKSXQgaW5kZWVkIGRvZXMgbm90IHNvbHZlIHRo
-ZSB3aG9sZSBpc3N1ZSAtIEkndmUgdGVzdGVkIHRoZSBwYXRjaCBhcyBzb29uIAphcyBpdCB3YXMg
-cG9zdGVkIChhbmQgSSd2ZSB0cmllZCBhIHNpbWlsYXIgc3RyYXRlZ3kgZm9yIExTVEFSIGFsb25l
-IGFzIApwYXJ0IG9mIGRlYnVnZ2luZyBiZWZvcmUgbm90aWZ5aW5nIG9mIHRoZSBpc3N1ZSkuIEJ1
-dCBJIHRoaW5rIEFuZHJldyAKbWVhbnQgaXQgYXMgYSBzZXBhcmF0ZSBwYXRjaCwgZml4aW5nIG9u
-bHkgdGhlIGludGVyY2VwdCBwYXJ0LgoKSSdsbCB0ZXN0IHRoZSB2bWNiX2luX3N5bmMgc3VnZ2Vz
-dGlvbiBBU0FQLgoKClRoYW5rcywKUmF6dmFuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+--===============6047793034699956024==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/QYE2sQyN7.BF37kmwX.ewSe"; protocol="application/pgp-signature"
+
+--Sig_/QYE2sQyN7.BF37kmwX.ewSe
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+With commit 48856286b64e ("xen/netback: shutdown the ring if it contains ga=
+rbage.") a new check was added to xen-netback, which triggers for me.
+
+Since there are bugs in ring buffer handling I tried to trigger them earlie=
+r by changing RING_IDX from u32 to u16. Now I found another one, and I wond=
+er if the error below could potentially also hit with u32:
+
+...
+[  624.186492] br0: port 3(vif2.0) entered forwarding state
+[  624.186522] br0: port 3(vif2.0) entered forwarding state
+[  680.865398] vif vif-1-0 vif1.0: Impossible number of requests. req_prod =
+0, req_cons 65400, size 256
+[  680.865402] vif vif-1-0 vif1.0: fatal error; disabling device
+[  680.865495] br0: port 2(vif1.0) entered disabled state
+[  689.433849] vif vif-2-0 vif2.0: Impossible number of requests. req_prod =
+0, req_cons 65527, size 256
+[  689.433857] vif vif-2-0 vif2.0: fatal error; disabling device
+[  689.433945] br0: port 3(vif2.0) entered disabled state
+[  690.930512] pktgen: Packet Generator for packet performance testing. Ver=
+sion: 2.75
+...
+
+What exactly is that check in xenvif_tx_build_gops trying to achieve? Subtr=
+acting a non-zero value from zero will always create something larger than =
+XEN_NETIF_TX_RING_SIZE.
+
+Olaf
+
+--Sig_/QYE2sQyN7.BF37kmwX.ewSe
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWuAsHAAKCRBdQqD6ppg2
+fsHjAJ9JHq4qgVPdx8xkn0kIk3iI2+9OCgCg1nOH3AiMDcPyc79MlMmdjurRZM8=
+=AX5L
+-----END PGP SIGNATURE-----
+
+--Sig_/QYE2sQyN7.BF37kmwX.ewSe--
+
+
+--===============6047793034699956024==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6047793034699956024==--
