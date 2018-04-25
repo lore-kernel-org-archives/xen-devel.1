@@ -1,16 +1,26 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: [PATCH-for-4.10] adapt SUPPORT.md to match 4.11
-Date: Wed, 25 Apr 2018 16:02:09 +0200
-Message-ID: <20180425140209.18825-1-jgross@suse.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH for-4.11 0/2] SUPPORT.md matrix fixes
+ (series "C")
+Date: Wed, 25 Apr 2018 15:08:12 +0100
+Message-ID: <23264.35788.837518.464514@mariner.uk.xensource.com>
+References: <1524661493-7296-1-git-send-email-ian.jackson@eu.citrix.com>
+ <95327a28-5e75-0ce4-3d25-040bba8144b8@suse.com>
+ <23264.32986.122346.969856@mariner.uk.xensource.com>
+ <f6c18dbd-7f4f-0295-684b-a8de44aeb01c@suse.com>
+ <5B354671-C97B-46AD-8B13-FF751684BC76@citrix.com>
+ <b99560ec-30ca-b8ae-ba98-efb305875b00@suse.com>
+ <23264.34974.654080.119458@mariner.uk.xensource.com>
+ <5c561e2a-45c4-17cf-c708-a465dc5b55f4@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ddll=ho=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fBKzt-00026V-Ar
- for xen-devel@lists.xenproject.org; Wed, 25 Apr 2018 14:02:13 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=fg/1=ho=citrix.com=prvs=6464c4f88=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1fBL5k-0002LR-Lg
+ for xen-devel@lists.xenproject.org; Wed, 25 Apr 2018 14:08:16 +0000
+In-Reply-To: <5c561e2a-45c4-17cf-c708-a465dc5b55f4@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,28 +29,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, sstabellini@kernel.org, wei.liu2@citrix.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, jbeulich@suse.com
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, George Dunlap <George.Dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>, Lars Kurth <lars.kurth@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-U29tZSB0YWdzIGhhdmUgYmVlbiBjaGFuZ2VkIGluIDQuMTEuIEFkYXB0IHRoZSA0LjEwIG9uZXMg
-dG8gbWF0Y2ggaW4Kb3JkZXIgdG8gcHJvZHVjZSBhbiBlYXNpZXIgdG8gcmVhZCBzdXBwb3J0IEhU
-TUwgdGFibGUuCgpTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+
-Ci0tLQogU1VQUE9SVC5tZCB8IDggKysrKy0tLS0KIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlv
-bnMoKyksIDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvU1VQUE9SVC5tZCBiL1NVUFBPUlQu
-bWQKaW5kZXggY2I4NjJiNTM4ZC4uMmIwZDU4ZmViMyAxMDA2NDQKLS0tIGEvU1VQUE9SVC5tZAor
-KysgYi9TVVBQT1JULm1kCkBAIC03NCwxNSArNzQsMTUgQEAgTm8gaGFyZHdhcmUgcmVxdWlyZW1l
-bnRzCiAKICMjIyB4ODYvSFZNCiAKLSAgICBTdGF0dXM6IFN1cHBvcnRlZAorICAgIFN0YXR1cywg
-ZG9tVTogU3VwcG9ydGVkCiAKIEZ1bGx5IHZpcnR1YWxpc2VkIGd1ZXN0IHVzaW5nIGhhcmR3YXJl
-IHZpcnR1YWxpc2F0aW9uIGV4dGVuc2lvbnMKIAogUmVxdWlyZXMgaGFyZHdhcmUgdmlydHVhbGlz
-YXRpb24gc3VwcG9ydCAoSW50ZWwgVk1YIC8gQU1EIFNWTSkKIAotIyMjIHg4Ni9QVkggZ3Vlc3QK
-KyMjIyB4ODYvUFZICiAKLSAgICBTdGF0dXM6IFN1cHBvcnRlZAorICAgIFN0YXR1cywgZG9tVTog
-U3VwcG9ydGVkCiAKIFBWSCBpcyBhIG5leHQtZ2VuZXJhdGlvbiBwYXJhdmlydHVhbGl6ZWQgbW9k
-ZQogZGVzaWduZWQgdG8gdGFrZSBhZHZhbnRhZ2Ugb2YgaGFyZHdhcmUgdmlydHVhbGl6YXRpb24g
-c3VwcG9ydCB3aGVuIHBvc3NpYmxlLgpAQCAtOTAsNyArOTAsNyBAQCBEdXJpbmcgZGV2ZWxvcG1l
-bnQgdGhpcyB3YXMgc29tZXRpbWVzIGNhbGxlZCBIVk1MaXRlIG9yIFBWSHYyLgogCiBSZXF1aXJl
-cyBoYXJkd2FyZSB2aXJ0dWFsaXNhdGlvbiBzdXBwb3J0IChJbnRlbCBWTVggLyBBTUQgU1ZNKQog
-Ci0jIyMgQVJNIGd1ZXN0CisjIyMgQVJNCiAKICAgICBTdGF0dXM6IFN1cHBvcnRlZAogCi0tIAoy
-LjEzLjYKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+SnVlcmdlbiBHcm9zcyB3cml0ZXMgKCJSZTogW1BBVENIIGZvci00LjExIDAvMl0gU1VQUE9SVC5t
+ZCBtYXRyaXggZml4ZXMgKHNlcmllcyAiQyIpIik6Cj4gQWFoLCBzbyBvbiBBUk0gd2UgaGF2ZSBu
+byBkb20wIHN1cHBvcnQ/CgpObywgdGhhdCBpcyBhIG1pc3Rha2UuCgpJYW4uCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
