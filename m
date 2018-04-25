@@ -1,30 +1,20 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH v2 3/5] ALSA: xen-front: Implement Xen event
- channel handling
-Date: Wed, 25 Apr 2018 12:04:35 +0300
-Message-ID: <72af8fdb-586f-6c5c-72af-071682ceab7d__5289.97530132091$1524647003$gmane$org@gmail.com>
-References: <20180416062453.24743-1-andr2000@gmail.com>
- <20180416062453.24743-4-andr2000@gmail.com> <s5ho9i8sn25.wl-tiwai@suse.de>
- <af277f77-5b22-58e3-4ea6-cde34e3181d3@gmail.com>
- <s5hlgdcsmdm.wl-tiwai@suse.de>
- <f37a8eb9-8733-eae9-4c3e-312d864592fc@gmail.com>
- <s5h604gsl44.wl-tiwai@suse.de>
- <a8d3c2d2-25ec-0dc1-c26c-20eb6fbb4e3e@gmail.com>
- <04e313e5-4fdb-9f7b-43e3-f1551f582db2@gmail.com>
- <s5hpo2nveu8.wl-tiwai@suse.de>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: bogus wrap check in xen-netback
+Date: Wed, 25 Apr 2018 11:04:26 +0200
+Message-ID: <20180425110426.1427b6ab.olaf@aepfle.de>
+References: <20180425091956.7e4c98bc.olaf@aepfle.de>
+ <ec157759-b859-32e3-dc90-75fd8dce669d@suse.com>
+ <20180425093924.13c56296.olaf@aepfle.de>
+ <20180425085923.k6bxc5j4nhoadhzl@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1243454223338880717=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=al+6=ho=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1fBGLx-0000sV-9y
- for xen-devel@lists.xenproject.org; Wed, 25 Apr 2018 09:04:41 +0000
-Received: by mail-lf0-x229.google.com with SMTP id m18-v6so7054848lfb.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Apr 2018 02:04:39 -0700 (PDT)
-In-Reply-To: <s5hpo2nveu8.wl-tiwai@suse.de>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=vzh0=ho=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fBGLr-0000rd-CS
+ for xen-devel@lists.xenproject.org; Wed, 25 Apr 2018 09:04:36 +0000
+In-Reply-To: <20180425085923.k6bxc5j4nhoadhzl@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -33,77 +23,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Takashi Iwai <tiwai@suse.de>
-Cc: Juergen Gross <jgross@suse.com>, alsa-devel@alsa-project.org, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, perex@perex.cz, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMjUvMjAxOCAxMjowMiBQTSwgVGFrYXNoaSBJd2FpIHdyb3RlOgo+IE9uIFdlZCwgMjUg
-QXByIDIwMTggMTA6MjY6MzQgKzAyMDAsCj4gT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gd3JvdGU6
-Cj4+IE9uIDA0LzI0LzIwMTggMDc6MjMgUE0sIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdyb3Rl
-Ogo+Pj4gT24gMDQvMjQvMjAxOCAwNjowMiBQTSwgVGFrYXNoaSBJd2FpIHdyb3RlOgo+Pj4+IE9u
-IFR1ZSwgMjQgQXByIDIwMTggMTY6NTg6NDMgKzAyMDAsCj4+Pj4gT2xla3NhbmRyIEFuZHJ1c2hj
-aGVua28gd3JvdGU6Cj4+Pj4+IE9uIDA0LzI0LzIwMTggMDU6MzUgUE0sIFRha2FzaGkgSXdhaSB3
-cm90ZToKPj4+Pj4+IE9uIFR1ZSwgMjQgQXByIDIwMTggMTY6Mjk6MTUgKzAyMDAsCj4+Pj4+PiBP
-bGVrc2FuZHIgQW5kcnVzaGNoZW5rbyB3cm90ZToKPj4+Pj4+PiBPbiAwNC8yNC8yMDE4IDA1OjIw
-IFBNLCBUYWthc2hpIEl3YWkgd3JvdGU6Cj4+Pj4+Pj4+IE9uIE1vbiwgMTYgQXByIDIwMTggMDg6
-MjQ6NTEgKzAyMDAsCj4+Pj4+Pj4+IE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdyb3RlOgo+Pj4+
-Pj4+Pj4gK3N0YXRpYyBpcnFyZXR1cm5fdCBldnRjaG5sX2ludGVycnVwdF9yZXEoaW50IGlycSwg
-dm9pZCAqZGV2X2lkKQo+Pj4+Pj4+Pj4gK3sKPj4+Pj4+Pj4+ICvCoMKgwqAgc3RydWN0IHhlbl9z
-bmRfZnJvbnRfZXZ0Y2hubCAqY2hhbm5lbCA9IGRldl9pZDsKPj4+Pj4+Pj4+ICvCoMKgwqAgc3Ry
-dWN0IHhlbl9zbmRfZnJvbnRfaW5mbyAqZnJvbnRfaW5mbyA9IGNoYW5uZWwtPmZyb250X2luZm87
-Cj4+Pj4+Pj4+PiArwqDCoMKgIHN0cnVjdCB4ZW5zbmRfcmVzcCAqcmVzcDsKPj4+Pj4+Pj4+ICvC
-oMKgwqAgUklOR19JRFggaSwgcnA7Cj4+Pj4+Pj4+PiArwqDCoMKgIHVuc2lnbmVkIGxvbmcgZmxh
-Z3M7Cj4+Pj4+Pj4+PiArCj4+Pj4+Pj4+PiArwqDCoMKgIGlmICh1bmxpa2VseShjaGFubmVsLT5z
-dGF0ZSAhPSBFVlRDSE5MX1NUQVRFX0NPTk5FQ1RFRCkpCj4+Pj4+Pj4+PiArwqDCoMKgwqDCoMKg
-wqAgcmV0dXJuIElSUV9IQU5ETEVEOwo+Pj4+Pj4+Pj4gKwo+Pj4+Pj4+Pj4gK8KgwqDCoCBzcGlu
-X2xvY2tfaXJxc2F2ZSgmZnJvbnRfaW5mby0+aW9fbG9jaywgZmxhZ3MpOwo+Pj4+Pj4+Pj4gKwo+
-Pj4+Pj4+Pj4gK2FnYWluOgo+Pj4+Pj4+Pj4gK8KgwqDCoCBycCA9IGNoYW5uZWwtPnUucmVxLnJp
-bmcuc3JpbmctPnJzcF9wcm9kOwo+Pj4+Pj4+Pj4gK8KgwqDCoCAvKiBlbnN1cmUgd2Ugc2VlIHF1
-ZXVlZCByZXNwb25zZXMgdXAgdG8gcnAgKi8KPj4+Pj4+Pj4+ICvCoMKgwqAgcm1iKCk7Cj4+Pj4+
-Pj4+PiArCj4+Pj4+Pj4+PiArwqDCoMKgIGZvciAoaSA9IGNoYW5uZWwtPnUucmVxLnJpbmcucnNw
-X2NvbnM7IGkgIT0gcnA7IGkrKykgewo+Pj4+Pj4+PiBJJ20gbm90IGZhbWlsaWFyIHdpdGggWGVu
-IHN0dWZmIGluIGdlbmVyYWwsIGJ1dCB0aHJvdWdoIGEgcXVpY2sKPj4+Pj4+Pj4gZ2xhbmNlLCB0
-aGlzIGtpbmQgb2YgY29kZSB3b3JyaWVzIG1lIGEgYml0Lgo+Pj4+Pj4+Pgo+Pj4+Pj4+PiBJZiBj
-aGFubmVsLT51LnJlcS5yaW5nLnJzcF9jb25zIGhhcyBhIGJvZ3VzIG51bWJlciwgdGhpcyBtYXkK
-Pj4+Pj4+Pj4gbGVhZCB0byBhCj4+Pj4+Pj4+IHZlcnkgbG9uZyBsb29wLCBubz/CoCBCZXR0ZXIg
-dG8gaGF2ZSBhIHNhbml0eSBjaGVjayBvZiB0aGUgcmluZwo+Pj4+Pj4+PiBidWZmZXIKPj4+Pj4+
-Pj4gc2l6ZS4KPj4+Pj4+PiBJbiB0aGlzIGxvb3AgSSBoYXZlOgo+Pj4+Pj4+IHJlc3AgPSBSSU5H
-X0dFVF9SRVNQT05TRSgmY2hhbm5lbC0+dS5yZXEucmluZywgaSk7Cj4+Pj4+Pj4gYW5kIHRoZSBS
-SU5HX0dFVF9SRVNQT05TRSBtYWNybyBpcyBkZXNpZ25lZCBpbiB0aGUgd2F5IHRoYXQKPj4+Pj4+
-PiBpdCB3cmFwcyBhcm91bmQgd2hlbiAqaSogaW4gdGhlIHF1ZXN0aW9uIGdldHMgYmlnZ2VyIHRo
-YW4KPj4+Pj4+PiB0aGUgcmluZyBzaXplOgo+Pj4+Pj4+Cj4+Pj4+Pj4gI2RlZmluZSBSSU5HX0dF
-VF9SRVFVRVNUKF9yLCBfaWR4KcKgwqDCoCDCoMKgwqAgwqDCoMKgIMKgwqDCoCDCoMKgwqAgXAo+
-Pj4+Pj4+ICDCoCDCoMKgwqAgKCYoKF9yKS0+c3JpbmctPnJpbmdbKChfaWR4KSAmIChSSU5HX1NJ
-WkUoX3IpIC0gMSkpXS5yZXEpKQo+Pj4+Pj4+Cj4+Pj4+Pj4gU28sIGV2ZW4gaWYgdGhlIGNvdW50
-ZXIgaGFzIGEgYm9ndXMgbnVtYmVyIGl0IHdpbGwgbm90IGxhc3QgbG9uZwo+Pj4+Pj4gSG0sIHRo
-aXMgcHJldmVudHMgZnJvbSBhY2Nlc3Npbmcgb3V0c2lkZSB0aGUgcmluZyBidWZmZXIsIGJ1dCBk
-b2VzIGl0Cj4+Pj4+PiBjaGFuZ2UgdGhlIGxvb3AgYmVoYXZpb3I/Cj4+Pj4+IG5vLCBpdCBkb2Vz
-bid0Cj4+Pj4+PiBTdXBwb3NlIGNoYW5uZWwtPnUucmVxLnJpbmdfcnNwX2NvbnMgPSAxLCBhbmQg
-cnAgPSAwLCB0aGUgbG9vcCBiZWxvdwo+Pj4+Pj4gd291bGQgc3RpbGwgY29uc3VtZSB0aGUgd2hv
-bGUgMzJiaXQgY291bnRzLCBubz8KPj4+Pj4+Cj4+Pj4+PiAgwqDCoMKgwqBmb3IgKGkgPSBjaGFu
-bmVsLT51LnJlcS5yaW5nLnJzcF9jb25zOyBpICE9IHJwOyBpKyspIHsKPj4+Pj4+ICDCoMKgwqDC
-oMKgwqDCoCByZXNwID0gUklOR19HRVRfUkVTUE9OU0UoJmNoYW5uZWwtPnUucmVxLnJpbmcsIGkp
-Owo+Pj4+Pj4gIMKgwqDCoMKgwqDCoMKgIC4uLgo+Pj4+Pj4gIMKgwqDCoMKgfQo+Pj4+PiBZb3Ug
-YXJlIHJpZ2h0IGhlcmUgYW5kIHRoZSBjb21tZW50IGlzIHRvdGFsbHkgdmFsaWQuCj4+Pj4+IEkn
-bGwgcHV0IGFuIGFkZGl0aW9uYWwgY2hlY2sgbGlrZSBoZXJlIFsxXSBhbmQgaGVyZSBbMl0KPj4+
-Pj4gV2lsbCB0aGlzIGFkZHJlc3MgeW91ciBjb21tZW50Pwo+Pj4+IFllcCwgdGhpcyBraW5kIG9m
-IHNhbml0eSBjaGVja3Mgc2hvdWxkIHdvcmsuCj4+Pj4KPj4+IEdyZWF0LCB3aWxsIGltcGxlbWVu
-dCB0aGUgY2hlY2tzIHRoaXMgd2F5IHRoZW4KPj4gV2VsbCwgYWZ0ZXIgdGhpbmtpbmcgYSBiaXQg
-bW9yZSBvbiB0aGF0IGFuZCBjaGF0dGluZyBvbiAjeGVuZGV2ZWwgSVJDCj4+IHdpdGggSnVlcmdl
-biAoaGUgaXMgb24gQ0MgbGlzdCksIGl0IHNlZW1zIHRoYXQgdGhlIHdheSB0aGUgY29kZSBpcyBu
-b3cKPj4gaXQgaXMgYWxsIGZpbmUgd2l0aG91dCB0aGUgY2hlY2tzOiB0aGUgYXNzdW1wdGlvbiBo
-ZXJlIGlzIHRoYXQKPj4gdGhlIGJhY2tlbmQgaXMgdHJ1c3RlZCB0byBhbHdheXMgd3JpdGUgc2Fu
-ZSB2YWx1ZXMgdG8gdGhlIHJpbmcgY291bnRlcnMsCj4+IHRodXMgbm8gb3ZlcmZsb3cgY2hlY2tz
-IG9uIGZyb250ZW5kIHNpZGUgYXJlIHJlcXVpcmVkLgo+PiBFdmVuIGlmIEkgaW1wbGVtZW50IHRo
-ZSBjaGVja3MgdGhlbiBJIGhhdmUgbm8gbWVhbnMgdG8gcmVjb3ZlciwgYnV0Cj4+IGp1c3QgcHJp
-bnQKPj4gYW4gZXJyb3IgbWVzc2FnZSBhbmQgYmFpbCBvdXQgbm90IGhhbmRsaW5nIGFueSByZXNw
-b25zZXMuCj4+IFRoaXMgaXMgcHJvYmFibHkgd2h5IHRoZSBjaGVja3MgWzFdIGFuZCBbMl0gYXJl
-IG9ubHkgaW1wbGVtZW50ZWQgZm9yIHRoZQo+PiBiYWNrZW5kIHNpZGUgYW5kIHRoZXJlIGFyZSBu
-byBzdWNoIG1hY3JvcyBmb3IgdGhlIGZyb250ZW5kIHNpZGUuCj4+Cj4+IFRha2FzaGksIHBsZWFz
-ZSBsZXQgbWUga25vdyBpZiB0aGUgYWJvdmUgc291bmRzIHJlYXNvbmFibGUgYW5kCj4+IGFkZHJl
-c3NlcyB5b3VyIGNvbW1lbnRzLgo+IElmIGl0J3MgZ3VhcmFudGVlZCB0byB3b3JrLCB0aGF0J3Mg
-T0suCj4gQnV0IG1heWJlIGl0J3Mgd29ydGggdG8gY29tbWVudCBmb3IgcmVhZGVycy4Kb2ssIHdp
-bGwgcHV0IGEgY29tbWVudCBvbiB0aGF0Cj4KPiB0aGFua3MsCj4KPiBUYWthc2hpClRoYW5rIHlv
-dSwKT2xla3NhbmRyCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============1243454223338880717==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/QDPTG0Om80n=+mQGowMc07h"; protocol="application/pgp-signature"
+
+--Sig_/QDPTG0Om80n=+mQGowMc07h
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 25 Apr 2018 09:59:23 +0100
+schrieb Wei Liu <wei.liu2@citrix.com>:
+
+> Do you have the full diff of your changes?=20
+
+Not right now. But without 'val', or val being uint, the same error happens=
+ in f():
+
+#include <stdio.h>
+void f(void)
+{
+        unsigned short req_prod =3D 0, req_cons =3D 65400;
+        unsigned short val;
+        val =3D req_prod - req_cons;
+        printf("req_prod - req_cons %u\n", val);
+        printf("req_prod - req_cons %x\n", val);
+}
+
+int main(void)
+{
+#if 1
+        unsigned nr_ents =3D 0x100U, req_prod_pvt =3D 0x14U, rsp_cons =3D 0=
+xffffffeeU, req_prod =3D 0xfffffffeU;
+        unsigned rx_target =3D 0x40U, qlen =3D 0x1aU;
+#else
+        unsigned nr_ents =3D 0x100U, req_prod_pvt =3D 0x00U, rsp_cons =3D 0=
+xffffffeeU, req_prod =3D 0xfffffffeU;
+        unsigned rx_target =3D 0x40U, qlen =3D 0x1aU;
+#endif
+        printf("batch_target %u, skb_queue_len %u, rx_target %u\n", rx_targ=
+et - (req_prod_pvt - rsp_cons), qlen, rx_target);
+        printf("nr_ents %u\n", nr_ents);
+        printf("req_prod_pvt - rsp_cons %u\n", req_prod_pvt - rsp_cons);
+        printf("req_prod_pvt - req_prod %u\n", req_prod_pvt - req_prod);
+        printf("%u\n", nr_ents - (req_prod_pvt - rsp_cons));
+        printf("%u\n", nr_ents - (req_prod_pvt - rsp_cons));
+        f();
+        return 0;
+}
+
+--Sig_/QDPTG0Om80n=+mQGowMc07h
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWuBEmgAKCRBdQqD6ppg2
+ft+CAJ0UyYYTVDa4O+Aoq5gSp6n8FQFgsQCg1LESBfGiTWxStgoUwS9M/hv+RhI=
+=8PXs
+-----END PGP SIGNATURE-----
+
+--Sig_/QDPTG0Om80n=+mQGowMc07h--
+
+
+--===============1243454223338880717==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1243454223338880717==--
