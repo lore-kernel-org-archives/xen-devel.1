@@ -1,7 +1,7 @@
-From: "Jan Beulich" <JBeulich@suse.com>
+From: Wei Liu <wei.liu2@citrix.com>
 Subject: Re: bogus wrap check in xen-netback
-Date: Wed, 25 Apr 2018 03:48:17 -0600
-Message-ID: <5AE04EE102000078001BE4B4@prv1-mh.provo.novell.com>
+Date: Wed, 25 Apr 2018 11:06:53 +0100
+Message-ID: <20180425100653.64qclgt6i6cgculn@citrix.com>
 References: <20180425091956.7e4c98bc.olaf@aepfle.de>
  <ec157759-b859-32e3-dc90-75fd8dce669d@suse.com>
  <20180425093924.13c56296.olaf@aepfle.de>
@@ -11,13 +11,13 @@ Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=adps=ho=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fBH2F-0003m9-IL
- for xen-devel@lists.xenproject.org; Wed, 25 Apr 2018 09:48:23 +0000
-In-Reply-To: <20180425110426.1427b6ab.olaf@aepfle.de>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=bryb=ho=citrix.com=prvs=64605ddc1=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1fBHKE-0005FA-RX
+ for xen-devel@lists.xenproject.org; Wed, 25 Apr 2018 10:06:58 +0000
 Content-Disposition: inline
+In-Reply-To: <20180425110426.1427b6ab.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,21 +26,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>, Wei Liu <wei.liu2@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>
+To: Olaf Hering <olaf@aepfle.de>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI1LjA0LjE4IGF0IDExOjA0LCA8b2xhZkBhZXBmbGUuZGU+IHdyb3RlOgo+IEFtIFdl
-ZCwgMjUgQXByIDIwMTggMDk6NTk6MjMgKzAxMDAKPiBzY2hyaWViIFdlaSBMaXUgPHdlaS5saXUy
-QGNpdHJpeC5jb20+Ogo+IAo+PiBEbyB5b3UgaGF2ZSB0aGUgZnVsbCBkaWZmIG9mIHlvdXIgY2hh
-bmdlcz8gCj4gCj4gTm90IHJpZ2h0IG5vdy4gQnV0IHdpdGhvdXQgJ3ZhbCcsIG9yIHZhbCBiZWlu
-ZyB1aW50LCB0aGUgc2FtZSBlcnJvciBoYXBwZW5zIAo+IGluIGYoKToKPiAKPiAjaW5jbHVkZSA8
-c3RkaW8uaD4KPiB2b2lkIGYodm9pZCkKPiB7Cj4gICAgICAgICB1bnNpZ25lZCBzaG9ydCByZXFf
-cHJvZCA9IDAsIHJlcV9jb25zID0gNjU0MDA7Cj4gICAgICAgICB1bnNpZ25lZCBzaG9ydCB2YWw7
-Cj4gICAgICAgICB2YWwgPSByZXFfcHJvZCAtIHJlcV9jb25zOwo+ICAgICAgICAgcHJpbnRmKCJy
-ZXFfcHJvZCAtIHJlcV9jb25zICV1XG4iLCB2YWwpOwo+ICAgICAgICAgcHJpbnRmKCJyZXFfcHJv
-ZCAtIHJlcV9jb25zICV4XG4iLCB2YWwpOwo+IH0KCldlbGwsIG9mIGNvdXJzZSAtIGFueXRoaW5n
-IG1vcmUgbmFycm93IHRoYW4gaW50IHdpbGwgYmUgcHJvbW90ZWQgdG8gaW50IGZpcnN0LgoKSmFu
-CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBBcHIgMjUsIDIwMTggYXQgMTE6MDQ6MjZBTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
+dGU6Cj4gQW0gV2VkLCAyNSBBcHIgMjAxOCAwOTo1OToyMyArMDEwMAo+IHNjaHJpZWIgV2VpIExp
+dSA8d2VpLmxpdTJAY2l0cml4LmNvbT46Cj4gCj4gPiBEbyB5b3UgaGF2ZSB0aGUgZnVsbCBkaWZm
+IG9mIHlvdXIgY2hhbmdlcz8gCj4gCj4gTm90IHJpZ2h0IG5vdy4gQnV0IHdpdGhvdXQgJ3ZhbCcs
+IG9yIHZhbCBiZWluZyB1aW50LCB0aGUgc2FtZSBlcnJvciBoYXBwZW5zIGluIGYoKToKPiAKPiAj
+aW5jbHVkZSA8c3RkaW8uaD4KPiB2b2lkIGYodm9pZCkKPiB7Cj4gICAgICAgICB1bnNpZ25lZCBz
+aG9ydCByZXFfcHJvZCA9IDAsIHJlcV9jb25zID0gNjU0MDA7Cj4gICAgICAgICB1bnNpZ25lZCBz
+aG9ydCB2YWw7Cj4gICAgICAgICB2YWwgPSByZXFfcHJvZCAtIHJlcV9jb25zOwo+ICAgICAgICAg
+cHJpbnRmKCJyZXFfcHJvZCAtIHJlcV9jb25zICV1XG4iLCB2YWwpOwo+ICAgICAgICAgcHJpbnRm
+KCJyZXFfcHJvZCAtIHJlcV9jb25zICV4XG4iLCB2YWwpOwo+IH0KCldoYXQgSmFuIHNhaWQuCgpJ
+bnRlZ2VyIHByb21vdGlvbiBtYWtlcyB1bnNpZ25lZCBzaG9ydCBpbnRvIHVuc2lnbmVkIGludCBm
+aXJzdCB0aGVuIGRvCnRoZSBjYWxjdWxhdGlvbi4gQXNzaWduaW5nIHRoZSByZXN1bHQgdG8gdmFs
+IHRydW5jYXRlcyBpdCBiYWNrIHRvCnVuc2lnbmVkIHNob3J0LgoKRm9yIHRoZSBvcmlnaW5hbCBj
+b2RlLCBpZHggaXMgb2YgdHlwZSB1bnNpZ25lZCBpbnQuIE5vIHByb21vdGlvbiBvcgp0cnVuY2F0
+aW9uIGlzIG5lZWRlZCBzbyB0aGUgZW5kIHJlc3VsdCBpcyBjb3JyZWN0LgoKV2VpLgoKPiAKPiBp
+bnQgbWFpbih2b2lkKQo+IHsKPiAjaWYgMQo+ICAgICAgICAgdW5zaWduZWQgbnJfZW50cyA9IDB4
+MTAwVSwgcmVxX3Byb2RfcHZ0ID0gMHgxNFUsIHJzcF9jb25zID0gMHhmZmZmZmZlZVUsIHJlcV9w
+cm9kID0gMHhmZmZmZmZmZVU7Cj4gICAgICAgICB1bnNpZ25lZCByeF90YXJnZXQgPSAweDQwVSwg
+cWxlbiA9IDB4MWFVOwo+ICNlbHNlCj4gICAgICAgICB1bnNpZ25lZCBucl9lbnRzID0gMHgxMDBV
+LCByZXFfcHJvZF9wdnQgPSAweDAwVSwgcnNwX2NvbnMgPSAweGZmZmZmZmVlVSwgcmVxX3Byb2Qg
+PSAweGZmZmZmZmZlVTsKPiAgICAgICAgIHVuc2lnbmVkIHJ4X3RhcmdldCA9IDB4NDBVLCBxbGVu
+ID0gMHgxYVU7Cj4gI2VuZGlmCj4gICAgICAgICBwcmludGYoImJhdGNoX3RhcmdldCAldSwgc2ti
+X3F1ZXVlX2xlbiAldSwgcnhfdGFyZ2V0ICV1XG4iLCByeF90YXJnZXQgLSAocmVxX3Byb2RfcHZ0
+IC0gcnNwX2NvbnMpLCBxbGVuLCByeF90YXJnZXQpOwo+ICAgICAgICAgcHJpbnRmKCJucl9lbnRz
+ICV1XG4iLCBucl9lbnRzKTsKPiAgICAgICAgIHByaW50ZigicmVxX3Byb2RfcHZ0IC0gcnNwX2Nv
+bnMgJXVcbiIsIHJlcV9wcm9kX3B2dCAtIHJzcF9jb25zKTsKPiAgICAgICAgIHByaW50ZigicmVx
+X3Byb2RfcHZ0IC0gcmVxX3Byb2QgJXVcbiIsIHJlcV9wcm9kX3B2dCAtIHJlcV9wcm9kKTsKPiAg
+ICAgICAgIHByaW50ZigiJXVcbiIsIG5yX2VudHMgLSAocmVxX3Byb2RfcHZ0IC0gcnNwX2NvbnMp
+KTsKPiAgICAgICAgIHByaW50ZigiJXVcbiIsIG5yX2VudHMgLSAocmVxX3Byb2RfcHZ0IC0gcnNw
+X2NvbnMpKTsKPiAgICAgICAgIGYoKTsKPiAgICAgICAgIHJldHVybiAwOwo+IH0KCgoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
