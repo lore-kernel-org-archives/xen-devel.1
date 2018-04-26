@@ -1,20 +1,21 @@
-From: Eric Blake <eblake@redhat.com>
-Subject: Re: [PATCH 01/16] checkpatch: Add xendevicemodel_handle
- to the list of types
-Date: Thu, 26 Apr 2018 09:21:40 -0500
-Message-ID: <0b6d4152-f949-6c7a-6855-baa8e7124407@redhat.com>
-References: <1524592709-6553-1-git-send-email-ian.jackson@eu.citrix.com>
- <1524592709-6553-2-git-send-email-ian.jackson@eu.citrix.com>
- <23265.45771.760936.993507@mariner.uk.xensource.com>
+From: Tim Deegan <tim@xen.org>
+Subject: Re: [PATCH v2 07/10] xen/arm: Release maintenance
+ interrupt when CPU is hot-unplugged
+Date: Thu, 26 Apr 2018 15:23:48 +0100
+Message-ID: <20180426142348.GB12602@deinos.phlegethon.org>
+References: <20180420122513.27292-1-mirela.simonovic@aggios.com>
+ <20180420122513.27292-8-mirela.simonovic@aggios.com>
+ <a41aff24-17f1-3d63-9811-198da6a8b31f@arm.com>
+ <CAKPH-Ni8ydJBwdWdDRZWKSC4dd9Ymw=U4jy6_tFejfSZEWVR5Q@mail.gmail.com>
+ <59700476-d077-2d59-9738-89afe02225bc@arm.com>
+ <CAKPH-NgPkLRazeMJj6Z3ubyxF=_Q8yOo+3Lp_wF_ULjeiqVvxQ@mail.gmail.com>
+ <c369f9a7-e820-2dde-4d09-2668a2b80c6f@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2905397196035071654=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=f6am=hp=redhat.com=eblake@srs-us1.protection.inumbo.net>)
- id 1fBhmM-0007aj-4v
- for xen-devel@lists.xenproject.org; Thu, 26 Apr 2018 14:21:46 +0000
-In-Reply-To: <23265.45771.760936.993507@mariner.uk.xensource.com>
+Content-Disposition: inline
+In-Reply-To: <c369f9a7-e820-2dde-4d09-2668a2b80c6f@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,127 +24,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>, qemu-devel@nongnu.org, Ross Lagerwall <ross.lagerwall@citrix.com>, Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org, Paolo Bonzini <pbonzini@redhat.com>, "Daniel P. Berrange" <berrange@redhat.com>
-Cc: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>, Markus Armbruster <armbru@redhat.com>
+To: Julien Grall <julien.grall@arm.com>
+Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Andre Przywara <andre.przywara@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Mirela Simonovic <mirela.simonovic@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============2905397196035071654==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="lmyUUm0ZaacsFGyYKsFAJfFuW70UXRhPY"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---lmyUUm0ZaacsFGyYKsFAJfFuW70UXRhPY
-Content-Type: multipart/mixed; boundary="UFBl6c1T4Q5bco66lKJKQ4Uk5vI9S64Vy";
- protected-headers="v1"
-From: Eric Blake <eblake@redhat.com>
-To: Ian Jackson <ian.jackson@citrix.com>, qemu-devel@nongnu.org,
- Ross Lagerwall <ross.lagerwall@citrix.com>,
- Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org,
- Paolo Bonzini <pbonzini@redhat.com>, "Daniel P. Berrange"
- <berrange@redhat.com>
-Cc: Markus Armbruster <armbru@redhat.com>,
- Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-Message-ID: <0b6d4152-f949-6c7a-6855-baa8e7124407@redhat.com>
-Subject: Re: [PATCH 01/16] checkpatch: Add xendevicemodel_handle to the list
- of types
-References: <1524592709-6553-1-git-send-email-ian.jackson@eu.citrix.com>
- <1524592709-6553-2-git-send-email-ian.jackson@eu.citrix.com>
- <23265.45771.760936.993507@mariner.uk.xensource.com>
-In-Reply-To: <23265.45771.760936.993507@mariner.uk.xensource.com>
-
---UFBl6c1T4Q5bco66lKJKQ4Uk5vI9S64Vy
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 04/26/2018 06:06 AM, Ian Jackson wrote:
-> (expanding the CC to include everyone that get_maintainer suggests)
->=20
-> Ian Jackson writes ("[PATCH 01/16] checkpatch: Add xendevicemodel_handl=
-e to the list of types"):
->> This avoids checkpatch misparsing (as statements) long function
->> definitions or declarations, which sometimes start with constructs
->> like this:
->>
->>   static inline int xendevicemodel_relocate_memory(
->>       xendevicemodel_handle *dmod, domid_t domid, ...
->>
->> The type xendevicemodel_handle does not conform to Qemu CODING_STYLE,
->> which would suggest CamelCase.  However, it is a type defined by the
->> Xen Project in xen.git.  It would be possible to introduce a typedef
->> to allow the qemu code to refer to it by a differently-spelled name,
->> but that would obfuscate more than it would clarify.
->=20
-> This patch has been posted in substantially similar form quite a few
-> times now.  Paolo Bonzini understandably suggested that renaming the
-> variable would be better but that's not within qemu's bailiwick as I
-> say above.
->=20
-> I think everything else in this series has a review and/or an ack.
-> So I would like to send a pull request.
->=20
-> Does someone want to review this patch ?  Should I drop it and just
-> let checkpatch complain ?  Shold I include it in my pull request
-> anyway ?
-
-If no one has commented on what seems pretty trivial (especially since
-checkpatch.pl has no official maintainer, but is more of a
-"whoever-touched-it-last" file at the moment), then including the patch
-in your pull request is perfectly acceptable.  As a maintainer, it is
-also perfectly acceptable for you to ignore false positives from
-checkpatch (although documenting it in the commit message and/or cover
-letter never hurts, when you are intentionally ignoring a false positive)=
-=2E
-
-But, as there has also been a recent patch to teach checkpatch about
-glib types [1], your patch makes sense (any merge conflict between your
-patch and that one will be obvious to resolve).  So on that grounds,
-
-Reviewed-by: Eric Blake <eblake@redhat.com>
-
-[1] https://lists.gnu.org/archive/html/qemu-devel/2018-04/msg04179.html
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3266
-Virtualization:  qemu.org | libvirt.org
-
-
---UFBl6c1T4Q5bco66lKJKQ4Uk5vI9S64Vy--
-
---lmyUUm0ZaacsFGyYKsFAJfFuW70UXRhPY
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Comment: Public key at http://people.redhat.com/eblake/eblake.gpg
-Comment: Using GnuPG with Thunderbird - http://www.enigmail.net/
-
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAlrh4HQACgkQp6FrSiUn
-Q2o9Pgf/QD1GCLDjXRIcYdVkE1tpfzvGQJcBYkBcSdxDXD0r3pJr8s0AsaiHiay+
-mPCJiuLasUaIsvCdorbqcS3ycTxIOerDrRb5yy32UTKYk39GPUOnzi7V9OL5pYhx
-oswr365Pdm+zBkaAvcbzqh8XLYk1sfVvI4SN+8EYqpPUKmTAWxG7aW2Hrub78aBZ
-NRUN2QH5yureliDU63z6TVLYGGzE2dNtiEpTdMUWDcRtXO/EuQVh9kV+xgSMEA0f
-PkKM+0GuPEPkHv9vElpZWO3Y08vm2BSnyssv6lY7K2Ig6FJ68FjHB1WJkmub7HUc
-rno2pHqsQ0S0s1kzvAYRys7+wNNQOg==
-=sg5w
------END PGP SIGNATURE-----
-
---lmyUUm0ZaacsFGyYKsFAJfFuW70UXRhPY--
-
-
---===============2905397196035071654==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2905397196035071654==--
+QXQgMTE6MDggKzAxMDAgb24gMjYgQXByICgxNTI0NzQwOTIxKSwgSnVsaWVuIEdyYWxsIHdyb3Rl
+Ogo+ID4+Pj4gT24gMjAvMDQvMTggMTM6MjUsIE1pcmVsYSBTaW1vbm92aWMgd3JvdGU6Cj4gPj4g
+VGhpcyBsb29rcyBhIGJpdCB3ZWlyZC4gQUZBSVUsIGlmIHlvdSBkaXNhYmxlIHRoZSBDUFUgaW50
+ZXJmYWNlLCB0aGVuIHlvdQo+ID4+IHNob3VsZCBuZXZlciByZWNlaXZlIGludGVycnVwdCBhZnRl
+ci4gU28gd2h5IHdvdWxkIHlvdSByZS1lbmFibGUgdGhlbT8KPiA+Pgo+ID4+IEkgcmVhbGl6ZSB0
+aGUgY29kZSBpbiBfX2NwdV9kaXNiYWxlIGRvIHRoYXQsIGJ1dCB0aGlzIGxvb2tzIHF1aXRlIHdy
+b25nIHRvCj4gPj4gbWUuIFRoZXJlIGFyZSBubyB3YXkgdG8gcmVjZWl2ZSBxdWV1ZWQgdGltZXIg
+aW50ZXJydXB0IGFmdGVyd2FyZHMuCj4gPj4KPiA+IAo+ID4gVGhhdCBpcyB3aGF0IEkgdG9vayBh
+cyBhIHJlZmVyZW5jZSwgYnV0IEkgYXNrZWQgbXlzZWxmIHRoZSBzYW1lLgo+ID4gVGhlcmUgaXMg
+KGV4dHJlbWVseSBzbWFsbCwgYnV0IGl0IGV4aXN0cykgdGltZSB3aW5kb3cgYmV0d2Vlbgo+ID4g
+ZGlzYWJsaW5nIGlycSBsb2NhbGx5IGFuZCBkaXNhYmxpbmcgQ1BVIGludGVyZmFjZS4gQW4gaW50
+ZXJydXB0Cj4gPiByZWNlaXZlZCBpbiB0aGF0IHRpbWUgd2luZG93IHdvdWxkIHByb3BhZ2F0ZSB0
+byB0aGUgQ1BVIGJ1dCBJJ20gbm90Cj4gPiBzdXJlIHdvdWxkIGhhcHBlbiBhZnRlciB0aGUgR0lD
+IENQVSBpbnRlcmZhY2UgaXMgZGlzYWJsZWQgYW5kCj4gPiBpbnRlcnJ1cHRzIGFyZSBsb2NhbGx5
+IGVuYWJsZWQuIFRoYXQgaXMgdGhlIG9ubHkgZXhwbGFuYXRpb24gSSBjYW4KPiA+IGNvbWUgdXAg
+d2l0aCwgYWx0aG91Z2ggSSBiZWxpZXZlIHRoZSBhbnN3ZXIgaXMgbm90aGluZy4gU2luY2UgeW91
+J3JlCj4gPiBhdCBBUk0geW91IGNvdWxkIGNoZWNrIHRoaXMgaW50ZXJuYWxseS4KPiAKPiBTcGVh
+a2luZyB3aXRoIEFuZHJlIChpbiBDQyksIHRoZSBHSUMgQ1BVIGludGVyZmFjZSBtYXkgaGF2ZSBm
+b3J3YXJkZWQgYW4gCj4gaW50ZXJydXB0IHRvIHRoZSBwcm9jZXNzb3IgYmVmb3JlIGl0IGdldHMg
+ZGlzYWJsZWQuIFNvIHdoZW4gdGhlIAo+IGludGVycnVwdCB3aWxsIGJlIHJlLWVuYWJsZWQsIHRo
+ZSBwcm9jZXNzb3Igd2lsbCBqdW1wIHRvIHRoZSBpbnRlcnJ1cHQgCj4gZXhjZXB0aW9uIGVudHJ5
+Lgo+IAo+IEhvd2V2ZXIsIGxvb2tpbmcgYXQgdGhlIHNwZWMgKDQtNzggaW4gQVJNIElISSAwMDQ4
+Qi5iKSwgWGVuIHdpbGwgcmVhZCBhIAo+IHNwdXJpb3VzIGludGVycnVwdCBJRCBmcm9tIEdJQ0Nf
+SUFSLiBTbyBJIGFtIG5vdCBzdXJlIHdoYXQgdGhlIHBvaW50IG9mIAo+IHRoYXQgY29kZS4gSXQg
+bG9va3MgbGlrZSBpdCBoYXMgYmVlbiB0YWtlbiBmcm9tIHg4NiwgYnV0IHNvbWUgYml0cyBhcmUg
+Cj4gbWlzc2luZy4KPiAKPiBBRkFJVSwgeDg2IHdpbGwgb25seSBzdXNwZW5kIHRoZSB0aW1lciBh
+ZnRlcndhcmRzIChzZWUgdGltZV9zdXNwZW5kKS4gSSAKPiBhbSBub3QgZnVsbHkgc3VyZSB3aHkg
+dGhpcyBjb2RlIGlzIHRoZXJlIG9uIEFybS4gV2hldGhlciB3ZSBleHBlY3QgYSAKPiB0aW1lciBp
+bnRlcnJ1cHQgdG8gY29tZSB1cC4gU3RlZmFubywgVGltLCBkbyB5b3UgaGF2ZSBhbnkgaW5zaWdo
+dCBvbiAKPiB0aGF0IGNvZGU/CgpTb3JyeSwgbm8uICBJIHByZXR0eSBjbGVhcmx5IGNvcGllZCB0
+aGlzIGxvZ2ljIGZyb20geDg2LCB3aGljaCBjb3BpZWQKaXQgZGlyZWN0bHkgZnJvbSBMaW51eCBh
+dCBzb21lIHBvaW50IGluIHRoZSBwYXN0LiAgSSBkb24ndCBrbm93IHdoeQp4ODYgZG9lcyBpdCB0
+aGlzIHdheSwgYW5kIEkgaGF2ZW4ndCBkaXZlZCBpbnRvIGxpbnV4IHRvIGZpbmQgb3V0LiA6KQpC
+dXQgZHJhaW5pbmcgdGhlIG91dHN0YW5kaW5nIElSUXMgc2VlbXMgbGlrZSBhIHBvbGl0ZSB0aGlu
+ZyB0byBkbyBpZgp5b3UncmUgZXZlciBnb2luZyB0byByZS1lbmFibGUgdGhpcyBDUFUgKGF0IGxl
+YXN0IHdpdGhvdXQgcmVzZXR0aW5nCml0IGZpcnN0KS4KCkNoZWVycywKClRpbS4KCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
