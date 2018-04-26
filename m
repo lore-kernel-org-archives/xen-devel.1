@@ -1,21 +1,16 @@
-From: Tim Deegan <tim@xen.org>
-Subject: Re: [PATCH v2 07/10] xen/arm: Release maintenance
- interrupt when CPU is hot-unplugged
-Date: Thu, 26 Apr 2018 15:23:48 +0100
-Message-ID: <20180426142348.GB12602@deinos.phlegethon.org>
-References: <20180420122513.27292-1-mirela.simonovic@aggios.com>
- <20180420122513.27292-8-mirela.simonovic@aggios.com>
- <a41aff24-17f1-3d63-9811-198da6a8b31f@arm.com>
- <CAKPH-Ni8ydJBwdWdDRZWKSC4dd9Ymw=U4jy6_tFejfSZEWVR5Q@mail.gmail.com>
- <59700476-d077-2d59-9738-89afe02225bc@arm.com>
- <CAKPH-NgPkLRazeMJj6Z3ubyxF=_Q8yOo+3Lp_wF_ULjeiqVvxQ@mail.gmail.com>
- <c369f9a7-e820-2dde-4d09-2668a2b80c6f@arm.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: xenbits DSA ssh keys to be disabled
+Date: Thu, 26 Apr 2018 15:30:08 +0100
+Message-ID: <23265.57968.764230.96973@mariner.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <c369f9a7-e820-2dde-4d09-2668a2b80c6f@arm.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=pghr=hp=citrix.com=prvs=647a3a28a=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1fBhuX-0008RV-Qe
+ for xen-devel@lists.xenproject.org; Thu, 26 Apr 2018 14:30:13 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,46 +19,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Andre Przywara <andre.przywara@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Mirela Simonovic <mirela.simonovic@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: committers@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-QXQgMTE6MDggKzAxMDAgb24gMjYgQXByICgxNTI0NzQwOTIxKSwgSnVsaWVuIEdyYWxsIHdyb3Rl
-Ogo+ID4+Pj4gT24gMjAvMDQvMTggMTM6MjUsIE1pcmVsYSBTaW1vbm92aWMgd3JvdGU6Cj4gPj4g
-VGhpcyBsb29rcyBhIGJpdCB3ZWlyZC4gQUZBSVUsIGlmIHlvdSBkaXNhYmxlIHRoZSBDUFUgaW50
-ZXJmYWNlLCB0aGVuIHlvdQo+ID4+IHNob3VsZCBuZXZlciByZWNlaXZlIGludGVycnVwdCBhZnRl
-ci4gU28gd2h5IHdvdWxkIHlvdSByZS1lbmFibGUgdGhlbT8KPiA+Pgo+ID4+IEkgcmVhbGl6ZSB0
-aGUgY29kZSBpbiBfX2NwdV9kaXNiYWxlIGRvIHRoYXQsIGJ1dCB0aGlzIGxvb2tzIHF1aXRlIHdy
-b25nIHRvCj4gPj4gbWUuIFRoZXJlIGFyZSBubyB3YXkgdG8gcmVjZWl2ZSBxdWV1ZWQgdGltZXIg
-aW50ZXJydXB0IGFmdGVyd2FyZHMuCj4gPj4KPiA+IAo+ID4gVGhhdCBpcyB3aGF0IEkgdG9vayBh
-cyBhIHJlZmVyZW5jZSwgYnV0IEkgYXNrZWQgbXlzZWxmIHRoZSBzYW1lLgo+ID4gVGhlcmUgaXMg
-KGV4dHJlbWVseSBzbWFsbCwgYnV0IGl0IGV4aXN0cykgdGltZSB3aW5kb3cgYmV0d2Vlbgo+ID4g
-ZGlzYWJsaW5nIGlycSBsb2NhbGx5IGFuZCBkaXNhYmxpbmcgQ1BVIGludGVyZmFjZS4gQW4gaW50
-ZXJydXB0Cj4gPiByZWNlaXZlZCBpbiB0aGF0IHRpbWUgd2luZG93IHdvdWxkIHByb3BhZ2F0ZSB0
-byB0aGUgQ1BVIGJ1dCBJJ20gbm90Cj4gPiBzdXJlIHdvdWxkIGhhcHBlbiBhZnRlciB0aGUgR0lD
-IENQVSBpbnRlcmZhY2UgaXMgZGlzYWJsZWQgYW5kCj4gPiBpbnRlcnJ1cHRzIGFyZSBsb2NhbGx5
-IGVuYWJsZWQuIFRoYXQgaXMgdGhlIG9ubHkgZXhwbGFuYXRpb24gSSBjYW4KPiA+IGNvbWUgdXAg
-d2l0aCwgYWx0aG91Z2ggSSBiZWxpZXZlIHRoZSBhbnN3ZXIgaXMgbm90aGluZy4gU2luY2UgeW91
-J3JlCj4gPiBhdCBBUk0geW91IGNvdWxkIGNoZWNrIHRoaXMgaW50ZXJuYWxseS4KPiAKPiBTcGVh
-a2luZyB3aXRoIEFuZHJlIChpbiBDQyksIHRoZSBHSUMgQ1BVIGludGVyZmFjZSBtYXkgaGF2ZSBm
-b3J3YXJkZWQgYW4gCj4gaW50ZXJydXB0IHRvIHRoZSBwcm9jZXNzb3IgYmVmb3JlIGl0IGdldHMg
-ZGlzYWJsZWQuIFNvIHdoZW4gdGhlIAo+IGludGVycnVwdCB3aWxsIGJlIHJlLWVuYWJsZWQsIHRo
-ZSBwcm9jZXNzb3Igd2lsbCBqdW1wIHRvIHRoZSBpbnRlcnJ1cHQgCj4gZXhjZXB0aW9uIGVudHJ5
-Lgo+IAo+IEhvd2V2ZXIsIGxvb2tpbmcgYXQgdGhlIHNwZWMgKDQtNzggaW4gQVJNIElISSAwMDQ4
-Qi5iKSwgWGVuIHdpbGwgcmVhZCBhIAo+IHNwdXJpb3VzIGludGVycnVwdCBJRCBmcm9tIEdJQ0Nf
-SUFSLiBTbyBJIGFtIG5vdCBzdXJlIHdoYXQgdGhlIHBvaW50IG9mIAo+IHRoYXQgY29kZS4gSXQg
-bG9va3MgbGlrZSBpdCBoYXMgYmVlbiB0YWtlbiBmcm9tIHg4NiwgYnV0IHNvbWUgYml0cyBhcmUg
-Cj4gbWlzc2luZy4KPiAKPiBBRkFJVSwgeDg2IHdpbGwgb25seSBzdXNwZW5kIHRoZSB0aW1lciBh
-ZnRlcndhcmRzIChzZWUgdGltZV9zdXNwZW5kKS4gSSAKPiBhbSBub3QgZnVsbHkgc3VyZSB3aHkg
-dGhpcyBjb2RlIGlzIHRoZXJlIG9uIEFybS4gV2hldGhlciB3ZSBleHBlY3QgYSAKPiB0aW1lciBp
-bnRlcnJ1cHQgdG8gY29tZSB1cC4gU3RlZmFubywgVGltLCBkbyB5b3UgaGF2ZSBhbnkgaW5zaWdo
-dCBvbiAKPiB0aGF0IGNvZGU/CgpTb3JyeSwgbm8uICBJIHByZXR0eSBjbGVhcmx5IGNvcGllZCB0
-aGlzIGxvZ2ljIGZyb20geDg2LCB3aGljaCBjb3BpZWQKaXQgZGlyZWN0bHkgZnJvbSBMaW51eCBh
-dCBzb21lIHBvaW50IGluIHRoZSBwYXN0LiAgSSBkb24ndCBrbm93IHdoeQp4ODYgZG9lcyBpdCB0
-aGlzIHdheSwgYW5kIEkgaGF2ZW4ndCBkaXZlZCBpbnRvIGxpbnV4IHRvIGZpbmQgb3V0LiA6KQpC
-dXQgZHJhaW5pbmcgdGhlIG91dHN0YW5kaW5nIElSUXMgc2VlbXMgbGlrZSBhIHBvbGl0ZSB0aGlu
-ZyB0byBkbyBpZgp5b3UncmUgZXZlciBnb2luZyB0byByZS1lbmFibGUgdGhpcyBDUFUgKGF0IGxl
-YXN0IHdpdGhvdXQgcmVzZXR0aW5nCml0IGZpcnN0KS4KCkNoZWVycywKClRpbS4KCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+RFNBIGtleXMgKCJkc3MiKSBhcmUgMTAyNC1iaXQgYW5kIG5vdCByZWFsbHkgY29uc2lkZXJlZCBn
+b29kIHByYWN0aWNlCmFueSBtb3JlLiAgQnkgZGVmYXVsdCBpbiBEZWJpYW4ncyBvcGVuc3NoLXNl
+cnZlciwgdGhleSBhcmUgbm93CmRpc2FibGVkLgoKV2UgYXJlIGdvaW5nIHRvIGRpc2FibGUgdGhl
+c2Ugc29vbi4gIENhbiB5b3UgcGxlYXNlIG1ha2Ugc3VyZSB0aGF0IHRoZQpzc2gga2V5cyB5b3Ug
+dXNlIHRvIGFjY2VzcyB4ZW5iaXRzIGFyZSBub3QgRFNBIGtleXMgPyAgRFNBIGtleXMgc3RhcnQK
+d2l0aAogIHNzaC1kc3MgLi4uCmluIHlvdXIgLnNzaC9hdXRob3JpemVkX2tleXMuCgpBZnRlciB3
+ZSBkaXNhYmxlIHRoZSBEU0Ega2V5cyB5b3UgbWlnaHQgaGF2ZSB0byBnZXQgdXMgdG8gbWFudWFs
+bHkKdXBkYXRlIHlvdXIga2V5LCBpZiB5b3UgZG9uJ3QgaGF2ZSBhbm90aGVyIGtleSB5b3UgY2Fu
+IHVzZS4KClRoYW5rcywKSWFuLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
