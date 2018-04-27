@@ -1,16 +1,17 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [distros-debian-jessie test] 74644: tolerable FAIL
-Date: Fri, 27 Apr 2018 09:38:23 +0100
-Message-ID: <osstest-74644-mainreport@xen.org>
+From: "Kang, Luwei" <luwei.kang@intel.com>
+Subject: Re: [PATCH RESEND v1 5/7] x86: Implement Intel
+ Processor Trace context switch
+Date: Fri, 27 Apr 2018 08:53:30 +0000
+Message-ID: <82D7661F83C1A047AF7DC287873BF1E167F673ED@SHSMSX101.ccr.corp.intel.com>
+References: <1516039953-2988-1-git-send-email-luwei.kang@intel.com>
+ <1516039953-2988-6-git-send-email-luwei.kang@intel.com>
+ <20180426121148.36sxgfj2cjdbkhzn@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=pk7h=hq=xenproject.org=prvs=648ee8b62=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1fBytg-0001ZU-HX
- for xen-devel@lists.xenproject.org; Fri, 27 Apr 2018 08:38:28 +0000
+In-Reply-To: <20180426121148.36sxgfj2cjdbkhzn@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,35 +20,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: "Tian, Kevin" <kevin.tian@intel.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>, "jbeulich@suse.com" <jbeulich@suse.com>, "George.Dunlap@eu.citrix.com" <George.Dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "tim@xen.org" <tim@xen.org>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, "Nakajima,
+ Jun" <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDc0NjQ0IGRpc3Ryb3MtZGViaWFuLWplc3NpZSByZWFsIFtyZWFsXQpodHRwOi8vb3Nz
-dGVzdC54cy5jaXRyaXRlLm5ldC9+b3NzdGVzdC90ZXN0bG9ncy9sb2dzLzc0NjQ0LwoKRmFpbHVy
-ZXMgOi0vIGJ1dCBubyByZWdyZXNzaW9ucy4KClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwg
-YnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFybWhmLWFybWhmLWFybWhmLWplc3NpZS1uZXRi
-b290LXB5Z3J1YiAxMCBkZWJpYW4tZGktaW5zdGFsbCBmYWlsIGxpa2UgNzQ2MzQKCmJhc2VsaW5l
-IHZlcnNpb246CiBmbGlnaHQgICAgICAgICAgICAgICA3NDYzNAoKam9iczoKIGJ1aWxkLWFtZDY0
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYt
-cHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtamVzc2llLW5ldGJvb3QtcHZn
-cnViICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWkzODYtamVzc2ll
-LW5ldGJvb3QtcHZncnViICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkz
-ODYtYW1kNjQtamVzc2llLW5ldGJvb3QtcHlncnViICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYXJtaGYtYXJtaGYtYXJtaGYtamVzc2llLW5ldGJvb3QtcHlncnViICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LWplc3NpZS1uZXRib290LXB5Z3J1
-YiAgICAgICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3Nz
-dGVzdC54cy5jaXRyaXRlLm5ldApsb2dzOiAvaG9tZS9vc3N0ZXN0L2xvZ3MKaW1hZ2VzOiAvaG9t
-ZS9vc3N0ZXN0L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUg
-YXQKICAgIGh0dHA6Ly9vc3N0ZXN0LnhzLmNpdHJpdGUubmV0L35vc3N0ZXN0L3Rlc3Rsb2dzL2xv
-Z3MKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMu
-eGVuc291cmNlLmNvbS9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoIG5vdCBh
-cHBsaWNhYmxlLgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+PiA+IExvYWQvU3RvcmUgSW50ZWwgcHJvY2Vzc29yIHRyYWNlIHJlZ2lzdGVyIGluIGNvbnRleHQg
+c3dpdGNoLgo+ID4gTVNSIElBMzJfUlRJVF9DVEwgaXMgbG9hZGVkL3N0b3JlZCBhdXRvbWF0aWNh
+bGx5IGZyb20gVk1DUy4KPiA+IFdoZW4gSW50ZWwgUFQgaXMgc3VwcG9ydGVkIGluIGd1ZXN0LCB3
+ZSBuZWVkIGxvYWQvcmVzdG9yZSBQVCBNU1JzIG9ubHkKPiA+IHdoZW4gUFQgaXMgZW5hYmxlZCBp
+biBndWVzdC4KPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBMdXdlaSBLYW5nIDxsdXdlaS5rYW5nQGlu
+dGVsLmNvbT4KPiAKPiBJcyB0aGVyZSBhIHJlYXNvbiB0byBub3QgdXNlIHhzYXZlcy94cnN0b3Jz
+IHdoZW4gdGhleSBhcmUgYXZhaWxhYmxlPwo+IApUaGVyZSBoYXZlIHR3byBtZXRob2QgdG8gaW1w
+bGVtZW50IGNvbnRleHQgc3dpdGNoKG1hbnVhbCBhbmQgeHNhdmUveHJzdG9ycykuClRoZSBmaXJz
+dCBtZXRob2QgaXMgbW9yZSBkaXJlY3RseSBhbmQgYWxzbyB3b24ndCBoYXZlIGFueSBwZXJmb3Jt
+YW5jZSBvdmVyaGVhZCBpZiBpbnRlbCBQVCBpcyBkaXNhYmxlZC4KSWYgdXNlIHhzYXZlL3hyc3Rv
+cnMgd2UgbmVlZCB0byBjaGVjayBpZiBpdCBhdmFpbGFibGUgYW5kIHdoZXRoZXIgUFQgaXMgc3Vw
+cG9ydGVkICBpbiBYU1MgKENQVUlELjBEKGVjeD0xKS5lY3gpLgpJIHdpbGwgdGhpbmsgYWJvdXQg
+dGhpcyBzY2VuYXJpbyBhbmQgbWF5IG1ha2UgYW4gaW5kZXBlbmRlbnQgcGF0Y2ggdG8gZW5hYmxl
+IGl0LiAKQnV0IEkgdGhpbmsgbWFudWFsIHNhdmUvcmVzdG9yZSB3aWxsIGFsc28gbmVlZGVkIGlu
+IGNhc2UgeHNhdmUvcnN0b3JlcyBub3QgYXZhaWxhYmxlLCBhbHRob3VnaCBJIHRoaW5rIHRoaXMg
+bWF5IGNhbid0IGJlIGhhcHBlbmVkLgoKVGhhbmtzLApMdXdlaSBLYW5nCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
