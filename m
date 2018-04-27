@@ -1,17 +1,19 @@
-From: Mathieu Tarral <mathieu.tarral@protonmail.com>
-Subject: [BUG] Xen failed to emulate lfence instruction
-Date: Fri, 27 Apr 2018 05:16:23 -0400
-Message-ID: <mb9t0QqQOQtZ-i1HqPoqBwpgw1N3xMZvazY8oZcBTuI4AM0VKkwF-dPUD9K7JPeMMLoFm7jzJu1XbzaSUYLDbK50vuco_-8XkuZlzIuZLLA=@protonmail.com>
-Reply-To: Mathieu Tarral <mathieu.tarral@protonmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [BUG] Xen failed to emulate lfence instruction
+Date: Fri, 27 Apr 2018 10:23:22 +0100
+Message-ID: <2688a370-4acd-692f-5682-f6c3e5cfbf6c@citrix.com>
+References: <mb9t0QqQOQtZ-i1HqPoqBwpgw1N3xMZvazY8oZcBTuI4AM0VKkwF-dPUD9K7JPeMMLoFm7jzJu1XbzaSUYLDbK50vuco_-8XkuZlzIuZLLA=@protonmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=dyul=hq=protonmail.com=mathieu.tarral@srs-us1.protection.inumbo.net>)
- id 1fBzUX-0004Tu-Vq
- for xen-devel@lists.xenproject.org; Fri, 27 Apr 2018 09:16:34 +0000
+ <srs0=95ya=hq=citrix.com=prvs=64868680e=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1fBzbD-0005B0-74
+ for xen-devel@lists.xenproject.org; Fri, 27 Apr 2018 09:23:27 +0000
+In-Reply-To: <mb9t0QqQOQtZ-i1HqPoqBwpgw1N3xMZvazY8oZcBTuI4AM0VKkwF-dPUD9K7JPeMMLoFm7jzJu1XbzaSUYLDbK50vuco_-8XkuZlzIuZLLA=@protonmail.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,24 +22,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Mathieu Tarral <mathieu.tarral@protonmail.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgIQoKV2hpbGUgd29ya2luZyBvbiBhIFZNSSBhcHAgdGhhdCBpcyBzdXBwb3NlZCB0byBpbnRl
-cmNlcHRlZCBhIHNwZWNpZmljIHByb2Nlc3MsCmFuZCBzZXQgYSBicmVha3BvaW50IG9uIE50UmVz
-dW1lVGhyZWFkIGluIFdpbmRvd3MsIGkgZ290IGEgQlNPRC4KCkFuYWx5emluZyB0aGlzIEJTT0Qg
-d2l0aCB3aW5kYmcgcmV2ZWFscyB0aGF0IEkgd2FzIGluIHRoaXMgbG9jYXRpb246CgogICAgRkFV
-TFRJTkdfSVA6IAogICAgbnQhUHNMb29rdXBUaHJlYWRCeVRocmVhZElkKzgyCiAgICBmZmZmZjgw
-MGAwMmJjYzY0MiAwZmFlZTggICAgICAgICAgbGZlbmNlCgoKQW5kIHRoZSBlcnJvciBjb2RlIGlz
-IGFuIGlsbGVnYWwgaW5zdHJ1Y3Rpb24uCgpBbHNvLCBpIGNhbiBjb25maXJtIHRoYXQgaSB3YXMg
-dHJ5aW5nIHRvIGVtdWxhdGUgdGhpcyBpbnN0cnVjdGlvbiwgc2luY2UgaSB3YXMKaW5zaWRlIG15
-IGxpYnZtaSBldmVudCBjYWxsYmFjayB3aGVyZSBpIGluc3RydWN0ZWQgdG8KVk1JX0VWRU5UX1JF
-U1BPTlNFX0VNVUxBVEUuCgpJIG9wZW5lZCBhbiBpc3N1ZSBvbiBteSBHaXRodWIgcmVwbzoKaHR0
-cHM6Ly9naXRodWIuY29tL1dlbnplbC9yMnZtaS9pc3N1ZXMvMTEKCi0+IGNvdWxkIGl0IGJlIHBv
-c3NpYmxlIHRoYXQgdGhlIFhlbiBlbXVsYXRvciBmYWlsZWQgb24gbGZlbmNlLCBldmVuIHRob3Vn
-aAppdCdzIGEgcXVpdGUgY29tbW9uIGluc3RydWN0aW9uID8KClBsYXRmb3JtOiBVYnVudHUgMTYu
-MDQgTFRTIChYZW4gNC42KQoKVGhhbmtzICEKCuKAiy0tCk1hdGhpZXUgVGFycmFsCgpTZW50IHdp
-dGggUHJvdG9uTWFpbCBTZWN1cmUgRW1haWwu4oCLCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+T24gMjcvMDQvMTggMTA6MTYsIE1hdGhpZXUgVGFycmFsIHdyb3RlOgo+IEhpICEKPgo+IFdoaWxl
+IHdvcmtpbmcgb24gYSBWTUkgYXBwIHRoYXQgaXMgc3VwcG9zZWQgdG8gaW50ZXJjZXB0ZWQgYSBz
+cGVjaWZpYyBwcm9jZXNzLAo+IGFuZCBzZXQgYSBicmVha3BvaW50IG9uIE50UmVzdW1lVGhyZWFk
+IGluIFdpbmRvd3MsIGkgZ290IGEgQlNPRC4KPgo+IEFuYWx5emluZyB0aGlzIEJTT0Qgd2l0aCB3
+aW5kYmcgcmV2ZWFscyB0aGF0IEkgd2FzIGluIHRoaXMgbG9jYXRpb246Cj4KPiAgICAgRkFVTFRJ
+TkdfSVA6IAo+ICAgICBudCFQc0xvb2t1cFRocmVhZEJ5VGhyZWFkSWQrODIKPiAgICAgZmZmZmY4
+MDBgMDJiY2M2NDIgMGZhZWU4ICAgICAgICAgIGxmZW5jZQo+Cj4KPiBBbmQgdGhlIGVycm9yIGNv
+ZGUgaXMgYW4gaWxsZWdhbCBpbnN0cnVjdGlvbi4KPgo+IEFsc28sIGkgY2FuIGNvbmZpcm0gdGhh
+dCBpIHdhcyB0cnlpbmcgdG8gZW11bGF0ZSB0aGlzIGluc3RydWN0aW9uLCBzaW5jZSBpIHdhcwo+
+IGluc2lkZSBteSBsaWJ2bWkgZXZlbnQgY2FsbGJhY2sgd2hlcmUgaSBpbnN0cnVjdGVkIHRvCj4g
+Vk1JX0VWRU5UX1JFU1BPTlNFX0VNVUxBVEUuCj4KPiBJIG9wZW5lZCBhbiBpc3N1ZSBvbiBteSBH
+aXRodWIgcmVwbzoKPiBodHRwczovL2dpdGh1Yi5jb20vV2VuemVsL3Iydm1pL2lzc3Vlcy8xMQo+
+Cj4gLT4gY291bGQgaXQgYmUgcG9zc2libGUgdGhhdCB0aGUgWGVuIGVtdWxhdG9yIGZhaWxlZCBv
+biBsZmVuY2UsIGV2ZW4gdGhvdWdoCj4gaXQncyBhIHF1aXRlIGNvbW1vbiBpbnN0cnVjdGlvbiA/
+CgpUaGUgWGVuIGVtdWxhdG9yIGlzIGZhciBmcm9tIGNvbXBsZXRlLCBidXQgd2UgYXJlIHdvcmtp
+bmcgb24gdHJ5aW5nIHRvCmltcHJvdmUgaXQuwqAgT3JpZ2luYWxseSwgaXQgb25seSBpbXBsZW1l
+bnRlZCBpbnN0cnVjdGlvbnMgd2l0aCBtZW1vcnkKb3BlcmFuZHMsIGJlY2F1c2UgdGhvc2Ugd2Vy
+ZSB0aGUgb25seSBvbmVzIHdoaWNoIHRyYXBwZWQgZm9yIE1NSU8uCgpTdXBwb3J0IGZvciBsZmVu
+Y2Ugd2FzIGFkZGVkIGluIEphbnVhcnksIGFuZCB3aWxsIGJlIHByZXNlbnQgaW4gWGVuIDQuMTEK
+d2hlbiBpdCBnZXRzIHJlbGVhc2VkLgoKSWYgeW91J3JlIHBsYXlpbmcgd2l0aCBWTUksIEknZCBy
+ZWNvbW1lbmQgdXNpbmcgYW4gdXBzdHJlYW0gYnVpbGQgb2YgWGVuLgoKfkFuZHJldwoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
