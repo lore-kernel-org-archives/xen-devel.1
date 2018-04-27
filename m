@@ -1,17 +1,17 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH] x86emul: VMOVNTDQA should raise #GP(0) on
- mis-alignment
-Date: Fri, 27 Apr 2018 06:10:22 -0600
-Message-ID: <5AE3132E02000078001BF183@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH RESEND v1 1/7] x86: add a flag to enable
+ Intel processor trace
+Date: Fri, 27 Apr 2018 06:15:12 -0600
+Message-ID: <5AE3145002000078001BF199@prv1-mh.provo.novell.com>
+References: <1516039953-2988-1-git-send-email-luwei.kang@intel.com>
+ <1516039953-2988-2-git-send-email-luwei.kang@intel.com>
+ <5AE1C63A02000078001BEC72@prv1-mh.provo.novell.com>
+ <82D7661F83C1A047AF7DC287873BF1E167F67428@SHSMSX101.ccr.corp.intel.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=kfj1=hq=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fC2Cp-0000dy-32
- for xen-devel@lists.xenproject.org; Fri, 27 Apr 2018 12:10:27 +0000
+In-Reply-To: <82D7661F83C1A047AF7DC287873BF1E167F67428@SHSMSX101.ccr.corp.intel.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -21,30 +21,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Luwei Kang <luwei.kang@intel.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xen.org, Jun Nakajima <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Q29tbWl0IDUwYjczMTE4ZDUgaW50cm9kdWNlZCBlbXVsYXRpb24gb2YgdGhlIGluc24gd2l0aG91
-dCBleHRlbmRpbmcgdGhlCnNldCBvZiBvcGNvZGVzIHJlcXVpcmluZyBzcGVjaWFsIGFsaWdubWVu
-dCByZWxhdGVkICNHUCBiZWhhdmlvci4KClNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1
-bGljaEBzdXNlLmNvbT4KCi0tLSBhL3hlbi9hcmNoL3g4Ni94ODZfZW11bGF0ZS94ODZfZW11bGF0
-ZS5jCisrKyBiL3hlbi9hcmNoL3g4Ni94ODZfZW11bGF0ZS94ODZfZW11bGF0ZS5jCkBAIC04NTE5
-LDExICs4NTE5LDEyIEBAIHg4Nl9lbXVsYXRlKAogCiAgICAgICAgICAgICBpZiAoIG9wX2J5dGVz
-IDwgMTYgfHwKICAgICAgICAgICAgICAgICAgKHZleC5vcGN4Ci0gICAgICAgICAgICAgICAgICA/
-IC8qIHZtb3Z7e2EsbnR9cHtzLGR9LGRxYSxudGRxfSBhcmUgZXhjZXB0aW9ucy4gKi8KLSAgICAg
-ICAgICAgICAgICAgICAgZXh0ICE9IGV4dF8wZiB8fAotICAgICAgICAgICAgICAgICAgICAoKGIg
-fCAxKSAhPSAweDI5ICYmIGIgIT0gMHgyYiAmJgotICAgICAgICAgICAgICAgICAgICAgKChiIHwg
-MHgxMCkgIT0gMHg3ZiB8fCB2ZXgucGZ4ICE9IHZleF82NikgJiYKLSAgICAgICAgICAgICAgICAg
-ICAgIGIgIT0gMHhlNykKKyAgICAgICAgICAgICAgICAgID8gLyogdm1vdnt7YSxudH1we3MsZH0s
-eyxudH1kcWEsbnRkcX0gYXJlIGV4Y2VwdGlvbnMuICovCisgICAgICAgICAgICAgICAgICAgIGV4
-dCA9PSBleHRfMGYKKyAgICAgICAgICAgICAgICAgICAgPyAoKGIgfCAxKSAhPSAweDI5ICYmIGIg
-IT0gMHgyYiAmJgorICAgICAgICAgICAgICAgICAgICAgICAoKGIgfCAweDEwKSAhPSAweDdmIHx8
-IHZleC5wZnggIT0gdmV4XzY2KSAmJgorICAgICAgICAgICAgICAgICAgICAgICBiICE9IDB4ZTcp
-CisgICAgICAgICAgICAgICAgICAgIDogKGV4dCAhPSBleHRfMGYzOCB8fCBiICE9IDB4MmEpCiAg
-ICAgICAgICAgICAgICAgICA6IC8qIG1vdnVwe3MsZH0sIHssbWFza31tb3ZkcXUsIGFuZCBsZGRx
-dSBhcmUgZXhjZXB0aW9ucy4gKi8KICAgICAgICAgICAgICAgICAgICAgZXh0ID09IGV4dF8wZiAm
-JgogICAgICAgICAgICAgICAgICAgICAoKGIgfCAxKSA9PSAweDExIHx8CgoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDI3LjA0LjE4IGF0IDExOjAxLCA8bHV3ZWkua2FuZ0BpbnRlbC5jb20+IHdyb3RlOgo+
+ICAgIFRoYW5rcyBmb3IgeW91IHJldmlldy4gInB0cmFjZSIgbWFrZSBtZSBhc3NvY2lhdGUgInN0
+cmFjZSIsICJmdHJhY2UiLiAKPiBBbHRob3VnaCB0aGV5IGFyZSBjb21wbGV0ZSAgZGlmZmVyZW50
+IHRoaW5ncyBidXQgSSB0aGluayAicHRyYWNlIiBpcyBub3QgZ29vZCAKPiBlbm91Z2ggdG8gcHJl
+c2VudCAiSW50ZWwgUHJvY2Vzc29yIFRyYWNlIi4KClRoZW4gaG93IGFib3V0IGlwdCBpbnN0ZWFk
+IG9mIGp1c3QgcHQ/CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
