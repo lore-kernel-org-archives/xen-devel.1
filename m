@@ -1,16 +1,10 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 122509: all pass - PUSHED
-Date: Sun, 29 Apr 2018 09:55:52 +0000
-Message-ID: <osstest-122509-mainreport@xen.org>
+From: Minjun Hong <nickeysgo@gmail.com>
+Subject: where can I find the 'address translation' code in Xen?
+Date: Sun, 29 Apr 2018 19:11:30 +0900
+Message-ID: <CAFX_q-EPQuiEV4SBSFnCagEhx8pgTBWe6K-1FUP0sfMaLA5Kmw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5145412462683802226=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gkhl=hs=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fCj3k-0005TI-88
- for xen-devel@lists.xenproject.org; Sun, 29 Apr 2018 09:55:56 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,38 +13,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMjUwOSB4ZW4tdW5zdGFibGUtY292ZXJpdHkgcmVhbCBbcmVhbF0KaHR0cDovL2xv
-Z3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMjUwOS8KClBlcmZlY3Qg
-Oi0pCkFsbCB0ZXN0cyBpbiB0aGlzIGZsaWdodCBwYXNzZWQgYXMgcmVxdWlyZWQKdmVyc2lvbiB0
-YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIGVmZjJmYmU0ZGQ3MWIz
-ZTRmZTJkYmIyNjk2ODgyMjUyYzFjYzc4OTcKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAg
-ICAgICAgICAgIDI3MTcwYWRiNTRhNTU4ZTExZGVmY2Q1MTk4OTMyNmE5YmViOTVhZmUKCkxhc3Qg
-dGVzdCBvZiBiYXNpcyAgIDEyMjQwOSAgMjAxOC0wNC0yNSAwOToxODo0MCBaICAgIDQgZGF5cwpU
-ZXN0aW5nIHNhbWUgc2luY2UgICAxMjI1MDkgIDIwMTgtMDQtMjkgMDk6MTg6NTEgWiAgICAwIGRh
-eXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIg
-dGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEFudGhv
-bnkgUEVSQVJEIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPgogIEdlb3JnZSBEdW5sYXAgPGdl
-b3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KICBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0
-cml4LmNvbT4KICBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgSnVlcmdlbiBHcm9z
-cyA8amdyb3NzQHN1c2UuY29tPgogIFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpqb2Jz
-OgogY292ZXJpdHktYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxh
-Yi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dz
-L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0
-dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRp
-b24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAg
-IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJF
-QURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9w
-PW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2Rl
-IGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0
-ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9y
-ZzovaG9tZS94ZW4vZ2l0L3hlbi5naXQKICAgMjcxNzBhZGI1NC4uZWZmMmZiZTRkZCAgZWZmMmZi
-ZTRkZDcxYjNlNGZlMmRiYjI2OTY4ODIyNTJjMWNjNzg5NyAtPiBjb3Zlcml0eS10ZXN0ZWQvc21v
-a2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============5145412462683802226==
+Content-Type: multipart/alternative; boundary="001a114561d40728ac056af9f63a"
+
+--001a114561d40728ac056af9f63a
+Content-Type: text/plain; charset="UTF-8"
+
+Hi.
+I'm looking for a point where address translation (guest virtual address to
+machine address) occurs in Xen.
+Of course, I mean when TLB miss has occured.
+I'm using a PV guest and I've found 'guest_walk_tables()' function in
+"xen/arch/x86/mm/guest_walk.c".
+However, in the comment of the function, it says "Walk the guest
+pagetables, after the manner of a hardware walker".
+I'm confused because I'm not sure if the function is called after the
+'hardware page table walker'.
+
+My question is,
+
+1. Is it sure that the function will be called even though the HW already
+translates the address and populates the TLB entry?
+
+2. I'm just asking, is there any code in Xen that is related to the
+behavior of the 'hardware walker'?
+
+Thanks for your reading.
+
+--001a114561d40728ac056af9f63a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi.</div><div>I&#39;m looking for a point where addre=
+ss translation (guest virtual address to machine address) occurs in Xen.</d=
+iv><div>Of course, I mean when TLB miss has occured.</div><div>I&#39;m usin=
+g a PV guest and I&#39;ve found &#39;guest_walk_tables()&#39; function in &=
+quot;xen/arch/x86/mm/guest_walk.c&quot;.</div><div>However, in the comment =
+of the function, it says &quot;Walk the guest pagetables, after the manner =
+of a hardware walker&quot;.</div><div>I&#39;m confused because I&#39;m not =
+sure if the function is called after the &#39;hardware page table walker&#3=
+9;.</div><div><br></div><div>My question is,</div><div><br></div><div>1. Is=
+ it sure that the function will be called even though the HW already transl=
+ates the address and populates the TLB entry?<br></div><div><br></div><div>=
+2. I&#39;m just asking, is there any code in Xen that is related to the beh=
+avior of the &#39;hardware walker&#39;?</div><div><br></div><div>Thanks for=
+ your reading.</div><div><br></div><div><br></div></div>
+
+--001a114561d40728ac056af9f63a--
+
+
+--===============5145412462683802226==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5145412462683802226==--
