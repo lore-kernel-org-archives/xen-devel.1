@@ -1,16 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-next test] 122463: regressions - FAIL
-Date: Sun, 29 Apr 2018 03:16:25 +0000
-Message-ID: <osstest-122463-mainreport@xen.org>
+From: Ajay Garg <ajaygargnsit@gmail.com>
+Subject: Re: [cubieboard2] Bringing up dom0
+Date: Sun, 29 Apr 2018 11:30:38 +0530
+Message-ID: <CAHP4M8UUEwyG9NgmAiT6WXBbD_gmbJXQP03n3pH58eoGrwPAuQ@mail.gmail.com>
+References: <CAHP4M8XeGY0S-HyLprND0R26hQsNd9k4-upM7MFDrodx0vomqA@mail.gmail.com>
+ <7c64b5a9-d11e-414b-52df-4db92d992526@citrix.com>
+ <CAHP4M8WzCwcmr8rL459B0LjkdC0Eb2C+hQM8nzKF=A7PEpx=ZQ@mail.gmail.com>
+ <23a0e88b-95c6-9d55-32e1-0c7834999f98@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7316867688815957159=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gkhl=hs=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fCcpB-00036X-Vt
- for xen-devel@lists.xenproject.org; Sun, 29 Apr 2018 03:16:30 +0000
+ <srs0=fcsy=hs=gmail.com=ajaygargnsit@srs-us1.protection.inumbo.net>)
+ id 1fCfO8-0006Jt-CB
+ for xen-devel@lists.xenproject.org; Sun, 29 Apr 2018 06:00:44 +0000
+In-Reply-To: <23a0e88b-95c6-9d55-32e1-0c7834999f98@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,219 +23,343 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Xen-users@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMjQ2MyBsaW51eC1uZXh0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFi
-LnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjI0NjMvCgpSZWdyZXNzaW9ucyA6LSgKClRl
-c3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVz
-dHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtZGVi
-aWFuaHZtLWFtZDY0IDE2IGd1ZXN0LWxvY2FsbWlncmF0ZS94MTAgZmFpbCBSRUdSLiB2cy4gMTIy
-Mzk1CiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgICA3IHhlbi1ib290ICAgICAgICAgICAg
-ICAgICBmYWlsIFJFR1IuIHZzLiAxMjIzOTUKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAg
-IDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjM5NQogdGVzdC1h
-cm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgZmFpbCBS
-RUdSLiB2cy4gMTIyMzk1CiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgICA3IHhlbi1ib290
-ICAgICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjIzOTUKIHRlc3QtYXJtaGYtYXJtaGYt
-eGwtY3ViaWV0cnVjayAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEy
-MjM5NQogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAgNyB4ZW4tYm9vdCAgICAgICAgICAg
-ICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyMzk1CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQs
-IGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAxMCBk
-ZWJpYW4taW5zdGFsbCAgICAgICAgICAgICAgIGZhaWwgIGxpa2UgMTIyMzU4CiB0ZXN0LWFybWhm
-LWFybWhmLXhsLXJ0ZHMgICAgIDEwIGRlYmlhbi1pbnN0YWxsICAgICAgICAgICAgICAgZmFpbCAg
-bGlrZSAxMjIzNTgKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2NCAxNyBndWVz
-dC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyMjM5NQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV1LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTIyMzk1
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAg
-ICAgICAgIGZhaWwgbGlrZSAxMjIzOTUKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1h
-bWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyMjM5NQogdGVzdC1hcm1o
-Zi1hcm1oZi1saWJ2aXJ0LXhzbSAxMCBkZWJpYW4taW5zdGFsbCAgICAgICAgICAgICAgIGZhaWwg
-IGxpa2UgMTIyMzk1CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgMTcgZ3Vl
-c3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMjIzOTUKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dC13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDEyMjM5
-NQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAg
-ICAgICAgICBmYWlsIGxpa2UgMTIyMzk1CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQteHNtIDEz
-IG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1k
-NjQtYW1kNjQtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWls
-ICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAxMyBtaWdyYXRlLXN1
-cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGli
-dmlydCAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBh
-c3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
-ICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAx
-MyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
-bTY0LWFybTY0LWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFp
-bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwtY3JlZGl0MiAgMTQgc2F2ZXJlc3Rv
-cmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14
-bC14c20gICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQt
-Y2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAg
-MTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-cm02NC1hcm02NC14bCAgICAgICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZh
-aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZt
-LWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0
-LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1pZ3JhdGUt
-c3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAg
-ICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1hbWQgMTcg
-ZGViaWFuLWh2bS1pbnN0YWxsL2wxL2wyICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1k
-NjQtbGlidmlydC12aGQgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC14c20gICAgICAxMyBtaWdyYXRlLXN1cHBvcnQt
-Y2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAg
-ICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgMTIgZ3Vlc3Qtc3RhcnQgICAgICAgICAgICAgICAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdzMTYtYW1kNjQg
-MTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgICBmYWlsIG5l
-dmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luMTAtaTM4NiAxMCB3aW5kb3dz
-LWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
-LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAg
-ICAgICBmYWlsIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiBsaW51
-eCAgICAgICAgICAgICAgICA2NzljMGFhZGRjYzZjYjkyZDIyZWM5M2ZlNmM4YmM1YjlmMmQ2MmM1
-CmJhc2VsaW5lIHZlcnNpb246CiBsaW51eCAgICAgICAgICAgICAgICA2ZDA4YjA2ZTY3Y2QxMTdm
-Njk5MmM0NjYxMWRmYjRjZTI2N2NkNzFlCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAgICAgICAgICAg
-ICAgICAgICAgICAgIChub3QgZm91bmQpICAgICAKRmFpbGluZyBzaW5jZSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAobm90IGZvdW5kKSAgICAgClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEy
-MjQ2MyAgMjAxOC0wNC0yNyAwOToxODo1MCBaICAgIDEgZGF5cyAgICAxIGF0dGVtcHRzCgpqb2Jz
-OgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXhzbSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14
-c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGli
-dmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9w
-cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1hbWQ2NC1ydW1wcnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0
-LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlh
-bmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14
-bC1xZW11dC1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQt
-eHNtICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFu
-aHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2
-NC14c20gICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxp
-YnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YXJtaGYtYXJtaGYtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXhzbSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwt
-eHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-cm1oZi1hcm1oZi14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1w
-dmh2Mi1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYtcWVtdXQtcmhlbDZodm0tYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1kZWJpYW5odm0t
-YW1kNjQgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVt
-dXQtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWFtZDY0ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
-dXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXJ1bXBydW4tYW1kNjQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2NCAg
-ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
-LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAg
-ICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAg
-ICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0ICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQt
-d3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0
-MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1h
-cm02NC14bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1leGFtaW5lICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFy
-bTY0LWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYXJtaGYtYXJtaGYtZXhhbWluZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWV4YW1pbmUgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWkz
-ODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni1ydW1wcnVuLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2lu
-MTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2
-LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0
-ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItaW50ZWwgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV0LXJoZWw2aHZt
-LWludGVsICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-cWVtdXUtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-eGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1s
-aWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWkzODYtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZncnViICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXB2c2hpbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdydWIgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFjb3cyICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGli
-dmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1h
-bWQ2NC1pMzg2LXhsLXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
-ZW11dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtc2hhZG93ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXNoYWRvdyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZp
-cnQtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJt
-aGYtYXJtaGYteGwtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
-ICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVj
-dC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxv
-Z3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50
-ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNl
-IHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVu
-Yml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7
-aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0Lmdp
-dDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91
-bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1z
-dW1tYXJ5CgoKUHVzaCBub3QgYXBwbGljYWJsZS4KCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+--===============7316867688815957159==
+Content-Type: multipart/alternative; boundary="000000000000e90ab6056af674bc"
+
+--000000000000e90ab6056af674bc
+Content-Type: text/plain; charset="UTF-8"
+
+I changed the /chosen node in the dts file to
+
+#######################################
+    chosen {
+        stdout-path = "serial0:115200n8";
+        xen,xen-bootargs = "dom0_mem=752M console=dtuart dtuart=serial0
+dom0_max_vcpus=4";
+        xen,dom0-bootargs = "console=ttyS0,115200 rw root=/dev/mmcblk0p2
+ignore_loglevel cma=128M";
+        modules {
+            #address-cells = <2>;
+            #size-cells = <2>;
+            module@1 {
+                compatible = "xen,linux-zimage", "xen,multiboot-module";
+                reg = <0x0 0x7a000000 0x0 0x02000000>;
+            };
+        };
+    };
+#######################################
+
+
+
+Also, the xen-related features in the kernel are as follows (created by
+default after selecting "Kernel features => Xen guest support on ARM" in
+menuconfig) :
+
+#######################################
+  CONFIG_XEN_DOM0=y
+  CONFIG_XEN=y
+  CONFIG_XEN_BLKDEV_FRONTEND=y
+  CONFIG_XEN_NETDEV_FRONTEND=y
+  CONFIG_INPUT_XEN_KBDDEV_FRONTEND=y
+  CONFIG_HVC_XEN=y
+  CONFIG_HVC_XEN_FRONTEND=y
+  CONFIG_XEN_FBDEV_FRONTEND=y
+  CONFIG_XEN_BALLOON=y
+  CONFIG_XEN_SCRUB_PAGES=y
+  CONFIG_XEN_DEV_EVTCHN=y
+  CONFIG_XEN_BACKEND=y
+  CONFIG_XENFS=y
+  CONFIG_XEN_COMPAT_XENFS=y
+  CONFIG_XEN_SYS_HYPERVISOR=y
+  CONFIG_XEN_XENBUS_FRONTEND=y
+  CONFIG_XEN_GNTDEV=m
+  CONFIG_XEN_GRANT_DEV_ALLOC=m
+  CONFIG_SWIOTLB_XEN=y
+  CONFIG_XEN_PRIVCMD=y
+  CONFIG_XEN_AUTO_XLATE=y
+
+
+  # CONFIG_XEN_BLKDEV_BACKEND is not set
+  # CONFIG_XEN_SCSI_FRONTEND is not set
+  # CONFIG_XEN_NETDEV_BACKEND is not set
+  # CONFIG_XEN_WDT is not set
+  # CONFIG_XEN_PVCALLS_FRONTEND is not set
+  # CONFIG_XEN_PVCALLS_BACKEND is not set
+#######################################
+
+However, I see absolutely no change in the observations; no xen-related log
+on the serial-console, and "sudo xl list" gives the same error messages.
+
+What am I lacking?
+
+
+On Sat, Apr 28, 2018 at 11:06 PM, Andrew Cooper <andrew.cooper3@citrix.com>
+wrote:
+
+> On 28/04/18 18:34, Ajay Garg wrote:
+>
+> Hi Andrew.
+>
+> Thanks for the reply.
+>
+> On Sat, Apr 28, 2018 at 10:57 PM, Andrew Cooper <andrew.cooper3@citrix.com
+> > wrote:
+>
+>> On 28/04/18 18:12, Ajay Garg wrote:
+>>
+>> Hi All.
+>>
+>> We have brought up the cubieboard2 from almost scratch, following are the
+>> steps done :
+>>
+>> <snip>
+>>
+>> == getting xen ready ==
+>>
+>> i)
+>> Compiled xen on cubieboard itself, via :
+>>
+>>    * git clone git://xenbits.xen.org/xen.git
+>>    * cd xen
+>> .  * ./configure --libdir=/usr/lib
+>>    * make debball CONFIG_EARLY_PRINTK=sun7i -j4
+>>    * sudo dpkg -i dist/xen-upstream-4.11-unstable.deb
+>>    * sudo reboot
+>>
+>> ii)
+>> Upon reboot, "sudo xl list" gives following :
+>>
+>> ##################################################################
+>> debian@debian-armhf:~$ sudo  xl list
+>> [sudo] password for debian:
+>> xencall: error: Could not obtain handle on privileged command interface:
+>> No such file or directory
+>> libxl: error: libxl.c:102:libxl_ctx_alloc: cannot open libxc handle: No
+>> such file or directory
+>> cannot init xl context
+>> ##################################################################
+>>
+>>
+>> This means that /dev/xen/privcmd (or the legacy /proc/xen/privcmd) device
+>> isn't available.
+>>
+>> First check that you have actually booted Xen with Linux as dom0.  You
+>> don't show any logs in this final section, and simply installing the
+>> debball and rebooting won't typically cause Xen to be the head of the boot
+>> list.
+>>
+>
+> Yes, I haven't been able to setup xen bootup.
+>
+> That's why, requested help regarding the changes that are required in
+> https://github.com/torvalds/linux/blob/master/arch/arm/boot/dts/sun7i-a20-
+> cubieboard2.dts, that would cause dom0 to boot up.
+>
+>
+> Sorry for the confusion.
+>
+>
+> Ah - sorry.  I misunderstood.  I'm afraid you're going to have to wait for
+> some people more knowledge about ARM to answer.
+>
+> ~Andrew
+>
+
+
+
+-- 
+Regards,
+Ajay
+
+--000000000000e90ab6056af674bc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><div><div><div>I changed the /chosen node in the dts =
+file to <br><br>#######################################<br>=C2=A0=C2=A0=C2=
+=A0 chosen {<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 stdout-path =3D =
+&quot;serial0:115200n8&quot;;<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+ xen,xen-bootargs =3D &quot;dom0_mem=3D752M console=3Ddtuart dtuart=3Dseria=
+l0 dom0_max_vcpus=3D4&quot;;<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+xen,dom0-bootargs =3D &quot;console=3DttyS0,115200 rw root=3D/dev/mmcblk0p2=
+ ignore_loglevel cma=3D128M&quot;;<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 modules {<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 #address-cells =3D &lt;2&gt;;<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 #size-cells =3D &lt;2&gt;;<br>=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 module@1 {<=
+br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 compatible =3D &quot;xen,linux-zimage&quot;, &quot;xen,m=
+ultiboot-module&quot;;<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 reg =3D &lt;0x0 0x7a000000 0x0 0=
+x02000000&gt;;<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 };<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 };<br>=C2=A0=C2=
+=A0=C2=A0 };<br>#######################################<br><br></div><br><b=
+r></div>Also, the xen-related features in the kernel are as follows (create=
+d by default after selecting &quot;Kernel features =3D&gt; Xen guest suppor=
+t on ARM&quot; in menuconfig) :<br><br>####################################=
+###<br>=C2=A0 CONFIG_XEN_DOM0=3Dy<br>=C2=A0 CONFIG_XEN=3Dy<br>=C2=A0 CONFIG=
+_XEN_BLKDEV_FRONTEND=3Dy<br>=C2=A0 CONFIG_XEN_NETDEV_FRONTEND=3Dy<br>=C2=A0=
+ CONFIG_INPUT_XEN_KBDDEV_FRONTEND=3Dy<br>=C2=A0 CONFIG_HVC_XEN=3Dy<br>=C2=
+=A0 CONFIG_HVC_XEN_FRONTEND=3Dy<br>=C2=A0 CONFIG_XEN_FBDEV_FRONTEND=3Dy<br>=
+=C2=A0 CONFIG_XEN_BALLOON=3Dy<br>=C2=A0 CONFIG_XEN_SCRUB_PAGES=3Dy<br>=C2=
+=A0 CONFIG_XEN_DEV_EVTCHN=3Dy<br>=C2=A0 CONFIG_XEN_BACKEND=3Dy<br>=C2=A0 CO=
+NFIG_XENFS=3Dy<br>=C2=A0 CONFIG_XEN_COMPAT_XENFS=3Dy<br>=C2=A0 CONFIG_XEN_S=
+YS_HYPERVISOR=3Dy<br>=C2=A0 CONFIG_XEN_XENBUS_FRONTEND=3Dy<br>=C2=A0 CONFIG=
+_XEN_GNTDEV=3Dm<br>=C2=A0 CONFIG_XEN_GRANT_DEV_ALLOC=3Dm<br>=C2=A0 CONFIG_S=
+WIOTLB_XEN=3Dy<br>=C2=A0 CONFIG_XEN_PRIVCMD=3Dy<br>=C2=A0 CONFIG_XEN_AUTO_X=
+LATE=3Dy<br><br><br>=C2=A0 # CONFIG_XEN_BLKDEV_BACKEND is not set<br>=C2=A0=
+ # CONFIG_XEN_SCSI_FRONTEND is not set<br>=C2=A0 # CONFIG_XEN_NETDEV_BACKEN=
+D is not set<br>=C2=A0 # CONFIG_XEN_WDT is not set<br>=C2=A0 # CONFIG_XEN_P=
+VCALLS_FRONTEND is not set<br>=C2=A0 # CONFIG_XEN_PVCALLS_BACKEND is not se=
+t<br>#######################################<br><br></div>However, I see ab=
+solutely no change in the observations; no xen-related log on the serial-co=
+nsole, and &quot;sudo xl list&quot; gives the same error messages.<br><br><=
+/div>What am I lacking?<br><div><div><br></div></div></div><div class=3D"gm=
+ail_extra"><br><div class=3D"gmail_quote">On Sat, Apr 28, 2018 at 11:06 PM,=
+ Andrew Cooper <span dir=3D"ltr">&lt;<a href=3D"mailto:andrew.cooper3@citri=
+x.com" target=3D"_blank">andrew.cooper3@citrix.com</a>&gt;</span> wrote:<br=
+><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1=
+px #ccc solid;padding-left:1ex">
+ =20
+   =20
+ =20
+  <div text=3D"#000000" bgcolor=3D"#FFFFFF"><div><div class=3D"h5">
+    <div class=3D"m_-8566150150470179879moz-cite-prefix">On 28/04/18 18:34,=
+ Ajay Garg wrote:<br>
+    </div>
+    <blockquote type=3D"cite">
+     =20
+      <div dir=3D"ltr">
+        <div>Hi Andrew.<br>
+          <br>
+        </div>
+        Thanks for the reply.<br>
+        <div class=3D"gmail_extra"><br>
+          <div class=3D"gmail_quote">On Sat, Apr 28, 2018 at 10:57 PM,
+            Andrew Cooper <span dir=3D"ltr">&lt;<a href=3D"mailto:andrew.co=
+oper3@citrix.com" target=3D"_blank">andrew.cooper3@citrix.com</a>&gt;</span=
+>
+            wrote:<br>
+            <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
+.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+              <div bgcolor=3D"#FFFFFF"><span class=3D"m_-856615015047017987=
+9gmail-">
+                  <div class=3D"m_-8566150150470179879gmail-m_-452170792736=
+8275737moz-cite-prefix">On
+                    28/04/18 18:12, Ajay Garg wrote:<br>
+                  </div>
+                </span>
+                <blockquote type=3D"cite">
+                  <div dir=3D"ltr">
+                    <div><span class=3D"m_-8566150150470179879gmail-">Hi Al=
+l.<br>
+                        <br>
+                        We have brought up the cubieboard2 from almost
+                        scratch, following are the steps done :<br>
+                        <br>
+                      </span> &lt;snip&gt;</div>
+                    <span class=3D"m_-8566150150470179879gmail-">
+                      <div><br>
+                        =3D=3D getting xen ready =3D=3D<br>
+                        <br>
+                      </div>
+                      <div>i)<br>
+                      </div>
+                      <div>Compiled xen on cubieboard itself, via :<br>
+                        <br>
+                        =C2=A0=C2=A0 * git clone git://<a href=3D"http://xe=
+nbits.xen.org/xen.git" target=3D"_blank">xenbits.xen.org/xen.git</a><br>
+                        =C2=A0=C2=A0 * cd xen<br>
+                        .=C2=A0 * ./configure --libdir=3D/usr/lib<br>
+                        =C2=A0=C2=A0 * make debball CONFIG_EARLY_PRINTK=3Ds=
+un7i -j4<br>
+                      </div>
+                      <div>=C2=A0=C2=A0 * sudo dpkg -i dist/xen-upstream-4.=
+11-unstabl<wbr>e.deb<br>
+                      </div>
+                      <div>=C2=A0=C2=A0 * sudo reboot<br>
+                        <br>
+                      </div>
+                      <div>ii)<br>
+                      </div>
+                      <div>Upon reboot, &quot;sudo xl list&quot; gives foll=
+owing :<br>
+                        <br>
+                        ##############################<wbr>################=
+##############<wbr>######<br>
+                        debian@debian-armhf:~$ sudo=C2=A0 xl list<br>
+                        [sudo] password for debian:<br>
+                        xencall: error: Could not obtain handle on
+                        privileged command interface: No such file or
+                        directory<br>
+                        libxl: error: libxl.c:102:libxl_ctx_alloc:
+                        cannot open libxc handle: No such file or
+                        directory<br>
+                        cannot init xl context<br>
+                        ##############################<wbr>################=
+##############<wbr>######<br>
+                      </div>
+                    </span></div>
+                </blockquote>
+                <br>
+                This means that /dev/xen/privcmd (or the legacy
+                /proc/xen/privcmd) device isn&#39;t available.<br>
+                <br>
+                First check that you have actually booted Xen with Linux
+                as dom0.=C2=A0 You don&#39;t show any logs in this final se=
+ction,
+                and simply installing the debball and rebooting won&#39;t
+                typically cause Xen to be the head of the boot list.<br>
+              </div>
+            </blockquote>
+            <div><br>
+            </div>
+            <div>Yes, I haven&#39;t been able to setup xen bootup.<br>
+              <br>
+            </div>
+            <div>That&#39;s why, requested help regarding the changes that
+              are required in <a href=3D"https://github.com/torvalds/linux/=
+blob/master/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts" target=3D"_blank">=
+https://github.com/torvalds/<wbr>linux/blob/master/arch/arm/<wbr>boot/dts/s=
+un7i-a20-<wbr>cubieboard2.dts</a>,
+              that would cause dom0 to boot up.<br>
+              <br>
+              <br>
+            </div>
+            <div>Sorry for the confusion.<br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </blockquote>
+    <br></div></div>
+    Ah - sorry.=C2=A0 I misunderstood.=C2=A0 I&#39;m afraid you&#39;re goin=
+g to have to
+    wait for some people more knowledge about ARM to answer.<span class=3D"=
+HOEnZb"><font color=3D"#888888"><br>
+    <br>
+    ~Andrew
+  </font></span></div>
+
+</blockquote></div><br><br clear=3D"all"><br>-- <br><div class=3D"gmail_sig=
+nature" data-smartmail=3D"gmail_signature">Regards,<br>Ajay<br></div>
+</div>
+
+--000000000000e90ab6056af674bc--
+
+
+--===============7316867688815957159==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7316867688815957159==--
