@@ -1,17 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v5] x86/mm: Suppresses vm_events caused by
- page-walks
-Date: Mon, 30 Apr 2018 02:11:32 -0600
-Message-ID: <5AE6CFB402000078001BF7C8@prv1-mh.provo.novell.com>
-References: <1524470450-18952-1-git-send-email-aisaila@bitdefender.com>
- <CABfawhkryyTYFk004dZbnU6kz9HwApavu9Yp=eJjKd-X2dO-gg@mail.gmail.com>
- <0ed540d3-3d9b-1869-610e-7f2391a1be01@bitdefender.com>
+From: Minjun Hong <nickeysgo@gmail.com>
+Subject: Re: where can I find the 'address translation' code in
+ Xen?
+Date: Mon, 30 Apr 2018 17:17:36 +0900
+Message-ID: <CAFX_q-GXHqHaR8ZjXG7Lkuwbr9NN6ePS6L30WJ=EO_7jWc8zMQ@mail.gmail.com>
+References: <CAFX_q-EPQuiEV4SBSFnCagEhx8pgTBWe6K-1FUP0sfMaLA5Kmw@mail.gmail.com>
+ <20180430084416.0a482950@ezekiel.suse.cz>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5666061356435475905=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <0ed540d3-3d9b-1869-610e-7f2391a1be01@bitdefender.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=ugn4=ht=gmail.com=nickeysgo@srs-us1.protection.inumbo.net>)
+ id 1fD40B-0003nI-3P
+ for xen-devel@lists.xenproject.org; Mon, 30 Apr 2018 08:17:39 +0000
+Received: by mail-vk0-x235.google.com with SMTP id 10-v6so4605908vkh.5
+ for <xen-devel@lists.xenproject.org>; Mon, 30 Apr 2018 01:17:38 -0700 (PDT)
+In-Reply-To: <20180430084416.0a482950@ezekiel.suse.cz>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,39 +24,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>, tamas@tklengyel.com, aisaila@bitdefender.com
+To: Petr Tesarik <ptesarik@suse.cz>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI4LjA0LjE4IGF0IDA4OjEzLCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3Jv
-dGU6Cj4gT24gMDQvMjgvMjAxOCAxMjozMCBBTSwgVGFtYXMgSyBMZW5neWVsIHdyb3RlOgo+PiBP
-biBNb24sIEFwciAyMywgMjAxOCBhdCAyOjAwIEFNLCBBbGV4YW5kcnUgSXNhaWxhCj4+IDxhaXNh
-aWxhQGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4+PiBUaGlzIHBhdGNoIGlzIGFkZGluZyBhIHdh
-eSB0byBlbmFibGUvZGlzYWJsZSBpbmd1ZXN0IHBhZ2VmYXVsdAo+Pj4gZXZlbnRzLiBJdCBpbnRy
-b2R1Y2VzIHRoZSB4Y19tb25pdG9yX2luZ3Vlc3RfcGFnZWZhdWx0IGZ1bmN0aW9uCj4+PiBhbmQg
-YWRkcyB0aGUgaW5ndWVzdF9wYWdlZmF1bHRfZGlzYWJsZWQgaW4gdGhlIG1vbml0b3Igc3RydWN0
-dXJlLgo+Pj4gVGhpcyBpcyBuZWVkZWQgYnkgdGhlIGludHJvc3BlY3Rpb24gc28gaXQgd2lsbCBv
-bmx5IGdldCBnbGEKPj4+IGZhdWx0cyBhbmQgbm90IGdldCBzcGFtbWVkIHdpdGggb3RoZXIgZmF1
-bHRzLgo+Pj4gSW4gcDJtX21lbV9hY2Nlc3NfY2hlY2soKSB3ZSBlbXVsYXRlIHNvIG5vIGV2ZW50
-IHdpbGwgZ2V0IHNlbnQuCj4+IAo+PiBUaGlzIGxvb2tzIGdvb2QgdG8gbWUsIGJ1dCBpcyB0aGUg
-ZW11bGF0b3IgYWJsZSB0byBoYW5kbGUgYWxsCj4+IGluc3RydWN0aW9ucyB0aGF0IG1heSB0cmln
-Z2VyIGl0IGhlcmU/Cj4gCj4gVGhhdCdzIGEgdmVyeSBnb29kIHF1ZXN0aW9uLiBXZSB0aGluayBu
-b3QsIGJ1dCB3ZSBub3cgaGF2ZSB0aGUgCj4gVU5JTVBMRU1FTlRFRCBlbXVsYXRvciBldmVudC4g
-VGhlIHRob3VnaHQgaGVyZSBpcyB0aGF0IHRoZSBlbXVsYXRvciAKPiB3b3VsZCBiZSBhYmxlIHRv
-IGhhbmRsZSBtb3N0IGNhc2VzLCBhbmQgdGhlbiB0aGUgb25lcyBpdCBjYW4ndCBoYW5kbGUgd2Ug
-Cj4gY2FuIGhhbmRsZSB3aXRoIGFsdHAybS4KPiAKPiBPZiBjb3Vyc2UsIGl0J3Mgbm90IGlkZWFs
-IC0gd2UnZCByYXRoZXIgaGF2ZSBhIG1lY2hhbmlzbSB0aGF0J3MgCj4gY29uc2lzdGVudGx5IGZv
-b2xwcm9vZiwgYnV0IEkgYmVsaWV2ZSB0aGF0IEphbidzIG9iamVjdGlvbiBpcyBjb3JyZWN0OiAK
-PiB3ZSBjYW4ndCByZWFsbHkgYmUgc3VyZSB0aGF0IHRoZSBmaXJzdCB0aW1lIHdlIGdldCBpbnRv
-IGFjY2Vzc19jaGVjaygpIAo+IHdpdGggYSBzcGVjaWZpYyBbUklQOkdMQV0gcGFpciB3ZSBuZWVk
-IHRvIHNldCB0aGUgQSBiaXQgYW5kIHRoZSBzZWNvbmQgCj4gdGltZSB0aGUgRCBiaXQgKGludGVy
-cnVwdHMgbWF5IHRyaXAgdGhpcyBsb2dpYyB1cCkuCgpJbnRlcnJ1cHRzIGFyZSBvbmx5IG9uZSBh
-c3BlY3QuIEluc25zIHNlbnQgYmFjayB0byBndWVzdCBjb250ZXh0IGZvcgpyZXRyeSAobGlrZSBB
-VlgyIGdhdGhlcnMgd291bGQgY29tbW9ubHkgZG8pIGFyZSBhbm90aGVyIGFmYWljdC4KCj4gRnVy
-dGhlcm1vcmUsIHdpdGggCj4gU1ZNIHRoZSBHTEEgaXMgbm90IGF2YWlsYWJsZSBmb3IgcGFnZSBm
-YXVsdHMgKGFsdGhvdWdoIHRoYXQncyBmaXhhYmxlIGJ5IAo+IGNvbXBhcmluZyBHUEFzKS4KCkkg
-bWF5IG5vdCBoYXZlIGVub3VnaCBjb250ZXh0IGhlcmUsIGJ1dCBpcyB0aGF0IHRydWUgd2hlbiBt
-dWx0aXBsZQpsaW5lYXIgYWRkcmVzc2VzIGFyZSBtYXBwZWQgdG8gdGhlIHNhbWUgcGh5c2ljYWwg
-cGFnZT8KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============5666061356435475905==
+Content-Type: multipart/alternative; boundary="0000000000009387ad056b0c7cb3"
+
+--0000000000009387ad056b0c7cb3
+Content-Type: text/plain; charset="UTF-8"
+
+On Mon, Apr 30, 2018 at 3:44 PM, Petr Tesarik <ptesarik@suse.cz> wrote:
+
+> Hi Minjun,
+>
+> On Sun, 29 Apr 2018 19:11:30 +0900
+> Minjun Hong <nickeysgo@gmail.com> wrote:
+>
+> >[...]
+> > My question is,
+> >
+> > 1. Is it sure that the function will be called even though the HW already
+> > translates the address and populates the TLB entry?
+>
+> I think you miss the point. The hardware page tables for PV domains
+> already contain machine addresses. In other words, virtual addresses
+> get translated directly to machine addresses by the hardware page table
+> walker.
+>
+> > 2. I'm just asking, is there any code in Xen that is related to the
+> > behavior of the 'hardware walker'?
+>
+> Not sure what you mean. Maybe this question is no longer pertinent
+> given the explanation above?
+>
+> HTH,
+> Petr T
+>
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+
+
+Thanks for your kind answer, Petr.
+
+In your answer on my first question, I was wondering why the function (
+guest_walk_tables()) should be called even after the address translation
+and TLB filling has been completed by the hardware page table walker.
+As you mentioned, original goal (address translation) is achieved by the
+hardware. If so, is its role like bottom half of interrupt?
+
+I want to know this function is always called after the translation by the
+hardware page walker.
+
+--0000000000009387ad056b0c7cb3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On M=
+on, Apr 30, 2018 at 3:44 PM, Petr Tesarik <span dir=3D"ltr">&lt;<a href=3D"=
+mailto:ptesarik@suse.cz" target=3D"_blank">ptesarik@suse.cz</a>&gt;</span> =
+wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
+ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi Minjun,<br>
+<br>
+On Sun, 29 Apr 2018 19:11:30 +0900<br>
+Minjun Hong &lt;<a href=3D"mailto:nickeysgo@gmail.com">nickeysgo@gmail.com<=
+/a>&gt; wrote:<br>
+<br>
+&gt;[...]<br>
+<span class=3D"gmail-">&gt; My question is,<br>
+&gt; <br>
+&gt; 1. Is it sure that the function will be called even though the HW alre=
+ady<br>
+&gt; translates the address and populates the TLB entry?<br>
+<br>
+</span>I think you miss the point. The hardware page tables for PV domains<=
+br>
+already contain machine addresses. In other words, virtual addresses<br>
+get translated directly to machine addresses by the hardware page table<br>
+walker.<br>
+<span class=3D"gmail-"><br>
+&gt; 2. I&#39;m just asking, is there any code in Xen that is related to th=
+e<br>
+&gt; behavior of the &#39;hardware walker&#39;?<br>
+<br>
+</span>Not sure what you mean. Maybe this question is no longer pertinent<b=
+r>
+given the explanation above?<br>
+<br>
+HTH,<br>
+Petr T<br>
+<br>
+______________________________<wbr>_________________<br>
+Xen-devel mailing list<br>
+<a href=3D"mailto:Xen-devel@lists.xenproject.org">Xen-devel@lists.xenprojec=
+t.org</a><br>
+<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
+noreferrer" target=3D"_blank">https://lists.xenproject.org/<wbr>mailman/lis=
+tinfo/xen-devel</a></blockquote></div><br></div><div class=3D"gmail_extra">=
+<br></div><div class=3D"gmail_extra">Thanks for your kind answer, Petr.</di=
+v><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">In your a=
+nswer on my first question, I was wondering why the function (<span style=
+=3D"color:rgb(34,34,34);font-family:arial,sans-serif;font-size:12.8px;font-=
+style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-we=
+ight:400;letter-spacing:normal;text-align:start;text-indent:0px;text-transf=
+orm:none;white-space:normal;word-spacing:0px;background-color:rgb(255,255,2=
+55);text-decoration-style:initial;text-decoration-color:initial;float:none;=
+display:inline">guest_walk_tables</span>()) should be called even after the=
+ address translation and TLB filling has been completed by the hardware pag=
+e table walker.</div><div class=3D"gmail_extra">As you mentioned, original =
+goal (address translation) is achieved by the hardware. If so, is its role =
+like bottom half of interrupt?</div><div class=3D"gmail_extra"><br></div><d=
+iv class=3D"gmail_extra">I want to know this function is always called afte=
+r the translation by the hardware page walker.</div></div>
+
+--0000000000009387ad056b0c7cb3--
+
+
+--===============5666061356435475905==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5666061356435475905==--
