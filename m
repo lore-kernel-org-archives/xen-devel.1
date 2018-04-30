@@ -1,21 +1,17 @@
-From: Petr Tesarik <ptesarik@suse.cz>
-Subject: Re: where can I find the 'address translation' code in
- Xen?
-Date: Mon, 30 Apr 2018 11:29:55 +0200
-Message-ID: <20180430112955.527061af@ezekiel.suse.cz>
-References: <CAFX_q-EPQuiEV4SBSFnCagEhx8pgTBWe6K-1FUP0sfMaLA5Kmw@mail.gmail.com>
- <20180430084416.0a482950@ezekiel.suse.cz>
- <CAFX_q-GXHqHaR8ZjXG7Lkuwbr9NN6ePS6L30WJ=EO_7jWc8zMQ@mail.gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH v2 0/2] SVM: guest state handling adjustments
+Date: Mon, 30 Apr 2018 04:17:07 -0600
+Message-ID: <5AE6ED2302000078001BF867@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=lxs7=ht=suse.cz=ptesarik@srs-us1.protection.inumbo.net>)
- id 1fD58G-0000fL-2n
- for xen-devel@lists.xenproject.org; Mon, 30 Apr 2018 09:30:04 +0000
-In-Reply-To: <CAFX_q-GXHqHaR8ZjXG7Lkuwbr9NN6ePS6L30WJ=EO_7jWc8zMQ@mail.gmail.com>
+ (envelope-from <srs0=xfxw=ht=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fD5rs-0003y2-O9
+ for xen-devel@lists.xenproject.org; Mon, 30 Apr 2018 10:17:12 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,43 +20,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Minjun Hong <nickeysgo@gmail.com>
-Cc: xen-devel@lists.xenproject.org
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgTWluanVuLAoKT24gTW9uLCAzMCBBcHIgMjAxOCAxNzoxNzozNiArMDkwMApNaW5qdW4gSG9u
-ZyA8bmlja2V5c2dvQGdtYWlsLmNvbT4gd3JvdGU6Cgo+IE9uIE1vbiwgQXByIDMwLCAyMDE4IGF0
-IDM6NDQgUE0sIFBldHIgVGVzYXJpayA8cHRlc2FyaWtAc3VzZS5jej4gd3JvdGU6Cj4gCj4gPiBI
-aSBNaW5qdW4sCj4gPgo+ID4gT24gU3VuLCAyOSBBcHIgMjAxOCAxOToxMTozMCArMDkwMAo+ID4g
-TWluanVuIEhvbmcgPG5pY2tleXNnb0BnbWFpbC5jb20+IHdyb3RlOgo+ID4gIAo+ID4gPlsuLi5d
-Cj4gPiA+IE15IHF1ZXN0aW9uIGlzLAo+ID4gPgo+ID4gPiAxLiBJcyBpdCBzdXJlIHRoYXQgdGhl
-IGZ1bmN0aW9uIHdpbGwgYmUgY2FsbGVkIGV2ZW4gdGhvdWdoIHRoZSBIVyBhbHJlYWR5Cj4gPiA+
-IHRyYW5zbGF0ZXMgdGhlIGFkZHJlc3MgYW5kIHBvcHVsYXRlcyB0aGUgVExCIGVudHJ5PyAgCj4g
-Pgo+ID4gSSB0aGluayB5b3UgbWlzcyB0aGUgcG9pbnQuIFRoZSBoYXJkd2FyZSBwYWdlIHRhYmxl
-cyBmb3IgUFYgZG9tYWlucwo+ID4gYWxyZWFkeSBjb250YWluIG1hY2hpbmUgYWRkcmVzc2VzLiBJ
-biBvdGhlciB3b3JkcywgdmlydHVhbCBhZGRyZXNzZXMKPiA+IGdldCB0cmFuc2xhdGVkIGRpcmVj
-dGx5IHRvIG1hY2hpbmUgYWRkcmVzc2VzIGJ5IHRoZSBoYXJkd2FyZSBwYWdlIHRhYmxlCj4gPiB3
-YWxrZXIuCj4gPiAgCj4gPiA+IDIuIEknbSBqdXN0IGFza2luZywgaXMgdGhlcmUgYW55IGNvZGUg
-aW4gWGVuIHRoYXQgaXMgcmVsYXRlZCB0byB0aGUKPiA+ID4gYmVoYXZpb3Igb2YgdGhlICdoYXJk
-d2FyZSB3YWxrZXInPyAgCj4gPgo+ID4gTm90IHN1cmUgd2hhdCB5b3UgbWVhbi4gTWF5YmUgdGhp
-cyBxdWVzdGlvbiBpcyBubyBsb25nZXIgcGVydGluZW50Cj4gPiBnaXZlbiB0aGUgZXhwbGFuYXRp
-b24gYWJvdmU/Cj4gPgo+ID4gSFRILAo+ID4gUGV0ciBUCj4gPgo+ID4gX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiA+IFhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKPiA+IFhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwo+ID4gaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbCAgCj4gCj4gCj4gCj4gVGhh
-bmtzIGZvciB5b3VyIGtpbmQgYW5zd2VyLCBQZXRyLgo+IAo+IEluIHlvdXIgYW5zd2VyIG9uIG15
-IGZpcnN0IHF1ZXN0aW9uLCBJIHdhcyB3b25kZXJpbmcgd2h5IHRoZSBmdW5jdGlvbiAoCj4gZ3Vl
-c3Rfd2Fsa190YWJsZXMoKSkgc2hvdWxkIGJlIGNhbGxlZCBldmVuIGFmdGVyIHRoZSBhZGRyZXNz
-IHRyYW5zbGF0aW9uCj4gYW5kIFRMQiBmaWxsaW5nIGhhcyBiZWVuIGNvbXBsZXRlZCBieSB0aGUg
-aGFyZHdhcmUgcGFnZSB0YWJsZSB3YWxrZXIuCj4gQXMgeW91IG1lbnRpb25lZCwgb3JpZ2luYWwg
-Z29hbCAoYWRkcmVzcyB0cmFuc2xhdGlvbikgaXMgYWNoaWV2ZWQgYnkgdGhlCj4gaGFyZHdhcmUu
-IElmIHNvLCBpcyBpdHMgcm9sZSBsaWtlIGJvdHRvbSBoYWxmIG9mIGludGVycnVwdD8KCkFoLCBu
-b3cgSSdtIHN0YXJ0aW5nIHRvIGdldCB5b3VyIHBvaW50LiBTbywgeW91J3JlIGludGVyZXN0ZWQg
-aW4Kd2hhdCBoYXBwZW5zIGFmdGVyIGd1ZXN0IHBhZ2UgdGFibGVzIGFyZSB1cGRhdGVkLgoKPiBJ
-IHdhbnQgdG8ga25vdyB0aGlzIGZ1bmN0aW9uIGlzIGFsd2F5cyBjYWxsZWQgYWZ0ZXIgdGhlIHRy
-YW5zbGF0aW9uCj4gYnkgdGhlIGhhcmR3YXJlIHBhZ2Ugd2Fsa2VyLgoKSXQgc2VlbXMgdG8gbWUg
-dGhhdCB0aGVyZSBhcmUgcXVpdGUgYSBmZXcgd2F5cyB0byBhdm9pZCBhIGZ1bGwgcGFnZQp0YWJs
-ZSB3YWxrLCBidXQgSSdtIG5vdCBhbiBleHBlcnQgb24gdGhpcyB0b3BpYywgc29ycnkuCgpQZXRy
-IFQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T25seSBwYXRjaCAxIGlzIGNsZWFybHkgbWVhbnQgZm9yIDQuMTEuIFRoZSBzZWNvbmQgcGF0Y2gs
+IGhvd2V2ZXIsIGVsaW1pbmF0ZXMKYSAodGhlb3JldGljYWwpIHdpbmRvdyB0aGUgZmlyc3QgcGF0
+Y2ggc3RpbGwgbGVhdmVzLCBzbyBzaG91bGQgYXQgbGVhc3QgYmUgY29uc2lkZXJlZC4KCjE6IHJl
+LXdvcmsgVk1DQiBzeW5jLWluZwoyOiBpbnRyb2R1Y2UgYSBWTSBlbnRyeSBoZWxwZXIKClNpZ25l
+ZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
