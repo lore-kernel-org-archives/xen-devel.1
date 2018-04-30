@@ -1,20 +1,12 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH 1/6] xen: Add RING_COPY_RESPONSE()
-Date: Mon, 30 Apr 2018 17:41:05 -0400
-Message-ID: <cb0c0525-dac2-c26f-77ed-21128ecb623d__23384.2372698293$1525124232$gmane$org@oracle.com>
-References: <cover.7ee732ab822b728ec486a3118ec12e9c06f0f325.1525122026.git-series.marmarek@invisiblethingslab.com>
- <ba8ed01b01a81d79f6d1c59e08a318dc0309a95d.1525122026.git-series.marmarek@invisiblethingslab.com>
- <7bd2ff07-9d29-8dea-6f55-5ff24ddd433c@oracle.com>
- <20180430212719.GF1124@mail-itl>
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: [PATCH] xen: Add RING_COPY_RESPONSE()
+Date: Mon, 30 Apr 2018 23:54:36 +0200
+Message-ID: <20180430215436.21062-1-marmarek@invisiblethingslab.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3448373459866330568=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=zpnp=ht=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1fDGV7-0002EP-Gi
- for xen-devel@lists.xenproject.org; Mon, 30 Apr 2018 21:38:25 +0000
-In-Reply-To: <20180430212719.GF1124@mail-itl>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,95 +15,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, open list <linux-kernel@vger.kernel.org>, stable@vger.kernel.org, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xen.org
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============3448373459866330568==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="vNzrufIOtU6vFxFMAPnjOdrkLyvUdqrgl"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---vNzrufIOtU6vFxFMAPnjOdrkLyvUdqrgl
-Content-Type: multipart/mixed; boundary="V9HnKD6siNJ7JnWUPpd02LYyzf9t7aucO";
- protected-headers="v1"
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
- <marmarek@invisiblethingslab.com>
-Cc: xen-devel@lists.xenproject.org, stable@vger.kernel.org,
- Juergen Gross <jgross@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- open list <linux-kernel@vger.kernel.org>
-Message-ID: <cb0c0525-dac2-c26f-77ed-21128ecb623d@oracle.com>
-Subject: Re: [PATCH 1/6] xen: Add RING_COPY_RESPONSE()
-References: <cover.7ee732ab822b728ec486a3118ec12e9c06f0f325.1525122026.git-series.marmarek@invisiblethingslab.com>
- <ba8ed01b01a81d79f6d1c59e08a318dc0309a95d.1525122026.git-series.marmarek@invisiblethingslab.com>
- <7bd2ff07-9d29-8dea-6f55-5ff24ddd433c@oracle.com>
- <20180430212719.GF1124@mail-itl>
-In-Reply-To: <20180430212719.GF1124@mail-itl>
-
---V9HnKD6siNJ7JnWUPpd02LYyzf9t7aucO
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
-Content-Language: en-US
-
-T24gMDQvMzAvMjAxOCAwNToyNyBQTSwgTWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdy
-b3RlOgo+IE9uIE1vbiwgQXByIDMwLCAyMDE4IGF0IDA1OjI1OjUyUE0gLTA0MDAsIEJvcmlz
-IE9zdHJvdnNreSB3cm90ZToKPj4gQWxzbywgcGVyaGFwcyB0aGUgdHdvIGNhbiBiZSBjb2xs
-YXBzZWQgdG9nZXRoZXIsIGFsb25nIHRoZSBsaW5lcyBvZgo+Pgo+PiAjZGVmaW5lIFJJTkdf
-Q09QWV8oYWN0aW9uLCBfciwgX2lkeCwgX21zZykgZG8ge8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gwqDCoMKgwqDCoMKgwqAgLyog
-VXNlIHZvbGF0aWxlIHRvIGZvcmNlIHRoZSBjb3B5IGludG8gX21zZy4gKi/CoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBcCj4+IMKgwqDCoMKgwqDCoMKgICooX21zZykgPSAq
-KHZvbGF0aWxlIHR5cGVvZihfbXNnKSlSSU5HX0dFVF8jI2FjdGlvbihfciwgX2lkeCk7wqDC
-oCBcCj4+IH0gd2hpbGUgKDApCj4+Cj4+ICNkZWZpbmUgUklOR19DT1BZX1JFUVVFU1QoX3Is
-IF9pZHgsIF9yZXEpwqAgUklOR19DT1BZXyhSRVFVRVNULCBfciwgX2lkeCwKPj4gX3JlcSkK
-Pj4gI2RlZmluZSBSSU5HX0NPUFlfUkVTUE9OU0UoX3IsIF9pZHgsIF9yc3ApwqAgUklOR19D
-T1BZXyhSRVNQT05TRSwgX3IsCj4+IF9pZHgsIF9yc3ApCj4+Cj4+Cj4+IChJIGhhdmUgbm90
-IHRyaWVkIHRvIGNvbXBpbGUgdGhpcyBzbyBpdCBtYXkgd2VsbCBiZSB3cm9uZykKPiBJdCB3
-b3JrcywgdGhhbmtzIDopCj4gSSdsbCB3YWl0IHdpdGggdjIgdW50aWwgSSBnZXQgZmVlZGJh
-Y2sgb24gb3RoZXIgcGF0Y2hlcy4KPgoKCk9oLCBhbmQgb25lIG1vcmUgdGhpbmcgLS0tIHRo
-ZSBjYW5vbmljYWwgdmVyc2lvbiBvZiB0aGlzIGZpbGUgbGl2ZXMgaW4KWGVuIChpbmNsdWRl
-L3B1YmxpYy9pby9yaW5nLmgpIHNvIGl0IG5lZWRzIGZpcnN0IHRvIGJlIGFjY2VwdGVkIGJ5
-IFhlbgptYWludGFpbmVycy4KCi1ib3Jpcwo=
-
---V9HnKD6siNJ7JnWUPpd02LYyzf9t7aucO--
-
---vNzrufIOtU6vFxFMAPnjOdrkLyvUdqrgl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEExAVKDNg/TOdD61Yyit52kIbKwbIFAlrnjXEACgkQit52kIbK
-wbIRvg/8Dud/7NIaJ+XBtdzL3C7Qu5zfGAM+8E0UATljwYRBiMlam9aKnu2Cycgv
-SJEpVVJhDcAfCB93/rLeN9okwkJrqxpQcl9+8hghwsmbhM1+CM6YreFqzEc8iLJp
-Ni0qu2HKq5Gp9z8Pdxw7/wq6GhWwHCRAwK6ODhshV+I9SdOX0qmaTdhPWttaj4iW
-hs3+jQZr2t8rHWypPlx/RX43LENZVIdcOzwp6meYycxm1Hf6RZvHkj/RrP98m7jl
-WDHZ3l+oQIE8Yht5FJF3YyoyWroUOMgYlIe5/Nogb8QpbbYN+9MnyejrbhXLkNTT
-GM+nKe3lmPnc/JKnAPHMTM0sGAm5KpsN39Zsg4e985rZPitr+6B+Cu1qbGrWTjPc
-xO8C45p9K62Mr+iD9dV6Le1UVoslhGeCNt8naw4E1rxZbI1d+dDknV0ZAaI+MO+s
-wV3TooUX3vhD8UTbYUy9j44qAfqfI+J0PYSpxJa51jqmgXntdKfrOvKuDdfGz04+
-GeIr02KaxJ6cA907+Dqkqq372XuBFjdpbAzxq33nMnkt0lvsMJWHmBJddTwTwZ9l
-yEu0UCmd4N/re09vYNqelzrjz+3T7Sjg+Wk995xdZZcR7FF+oPTLUU6zuIx0IoYS
-+5Sp1huBpR0g4z9G8zznauXXjBGJoWF/04SnnJ3XzkGO1ayl5NU=
-=VPEN
------END PGP SIGNATURE-----
-
---vNzrufIOtU6vFxFMAPnjOdrkLyvUdqrgl--
-
-
---===============3448373459866330568==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3448373459866330568==--
+VXNpbmcgUklOR19HRVRfUkVTUE9OU0UoKSBvbiBhIHNoYXJlZCByaW5nIGlzIGVhc3kgdG8gdXNl
+IGluY29ycmVjdGx5CihpLmUuLCBieSBub3QgY29uc2lkZXJpbmcgdGhhdCB0aGUgb3RoZXIgZW5k
+IG1heSBhbHRlciB0aGUgZGF0YSBpbiB0aGUKc2hhcmVkIHJpbmcgd2hpbGUgaXQgaXMgYmVpbmcg
+aW5zcGVjdGVkKS4gIFNhZmUgdXNhZ2Ugb2YgYSByZXNwb25zZQpnZW5lcmFsbHkgcmVxdWlyZXMg
+dGFraW5nIGEgbG9jYWwgY29weS4KClByb3ZpZGUgYSBSSU5HX0NPUFlfUkVTUE9OU0UoKSBtYWNy
+byB0byB1c2UgaW5zdGVhZCBvZgpSSU5HX0dFVF9SRVNQT05TRSgpIGFuZCBhbiBvcGVuLWNvZGVk
+IG1lbWNweSgpLiAgVGhpcyB0YWtlcyBjYXJlIG9mCmVuc3VyaW5nIHRoYXQgdGhlIGNvcHkgaXMg
+ZG9uZSBjb3JyZWN0bHkgcmVnYXJkbGVzcyBvZiBhbnkgcG9zc2libGUKY29tcGlsZXIgb3B0aW1p
+emF0aW9ucy4KClVzZSBhIHZvbGF0aWxlIHNvdXJjZSB0byBwcmV2ZW50IHRoZSBjb21waWxlciBm
+cm9tIHJlb3JkZXJpbmcgb3IKb21pdHRpbmcgdGhlIGNvcHkuCgpUaGlzIGlzIGNvbXBsZW1lbnRh
+cnkgdG8gWFNBMTU1LgoKU2lnbmVkLW9mZi1ieTogTWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tp
+IDxtYXJtYXJla0BpbnZpc2libGV0aGluZ3NsYWIuY29tPgotLS0KIHhlbi9pbmNsdWRlL3B1Ymxp
+Yy9pby9yaW5nLmggfCAxNyArKysrKysrKysrLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDEwIGlu
+c2VydGlvbnMoKyksIDcgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvcHVi
+bGljL2lvL3JpbmcuaCBiL3hlbi9pbmNsdWRlL3B1YmxpYy9pby9yaW5nLmgKaW5kZXggMzAzNDJm
+YzhjMC4uMjMwZmMzNGNiYSAxMDA2NDQKLS0tIGEveGVuL2luY2x1ZGUvcHVibGljL2lvL3Jpbmcu
+aAorKysgYi94ZW4vaW5jbHVkZS9wdWJsaWMvaW8vcmluZy5oCkBAIC0yMjcsMjIgKzIyNywyNSBA
+QCB0eXBlZGVmIHN0cnVjdCBfX25hbWUjI19iYWNrX3JpbmcgX19uYW1lIyNfYmFja19yaW5nX3QK
+ICNkZWZpbmUgUklOR19HRVRfUkVRVUVTVChfciwgX2lkeCkgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIFwKICAgICAoJigoX3IpLT5zcmluZy0+cmluZ1soKF9pZHgpICYgKFJJ
+TkdfU0laRShfcikgLSAxKSldLnJlcSkpCiAKKyNkZWZpbmUgUklOR19HRVRfUkVTUE9OU0UoX3Is
+IF9pZHgpICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKKyAgICAoJigoX3Ip
+LT5zcmluZy0+cmluZ1soKF9pZHgpICYgKFJJTkdfU0laRShfcikgLSAxKSldLnJzcCkpCisKIC8q
+Ci0gKiBHZXQgYSBsb2NhbCBjb3B5IG9mIGEgcmVxdWVzdC4KKyAqIEdldCBhIGxvY2FsIGNvcHkg
+b2YgYSByZXF1ZXN0L3Jlc3BvbnNlLgogICoKLSAqIFVzZSB0aGlzIGluIHByZWZlcmVuY2UgdG8g
+UklOR19HRVRfUkVRVUVTVCgpIHNvIGFsbCBwcm9jZXNzaW5nIGlzCi0gKiBkb25lIG9uIGEgbG9j
+YWwgY29weSB0aGF0IGNhbm5vdCBiZSBtb2RpZmllZCBieSB0aGUgb3RoZXIgZW5kLgorICogVXNl
+IHRoaXMgaW4gcHJlZmVyZW5jZSB0byBSSU5HX0dFVF9SRVFVRVNUKCkvUklOR19HRVRfUkVTUE9O
+U0UoKSBzbyBhbGwKKyAqIHByb2Nlc3NpbmcgaXMgZG9uZSBvbiBhIGxvY2FsIGNvcHkgdGhhdCBj
+YW5ub3QgYmUgbW9kaWZpZWQgYnkgdGhlIG90aGVyIGVuZC4KICAqCiAgKiBOb3RlIHRoYXQgaHR0
+cHM6Ly9nY2MuZ251Lm9yZy9idWd6aWxsYS9zaG93X2J1Zy5jZ2k/aWQ9NTgxNDUgbWF5IGNhdXNl
+IHRoaXMKICAqIHRvIGJlIGluZWZmZWN0aXZlIHdoZXJlIF9yZXEgaXMgYSBzdHJ1Y3Qgd2hpY2gg
+Y29uc2lzdHMgb2Ygb25seSBiaXRmaWVsZHMuCiAgKi8KLSNkZWZpbmUgUklOR19DT1BZX1JFUVVF
+U1QoX3IsIF9pZHgsIF9yZXEpIGRvIHsJCQkJXAorI2RlZmluZSBSSU5HX0NPUFlfKGFjdGlvbiwg
+X3IsIF9pZHgsIF9yZXEpIGRvIHsJCQkJXAogCS8qIFVzZSB2b2xhdGlsZSB0byBmb3JjZSB0aGUg
+Y29weSBpbnRvIF9yZXEuICovCQkJXAotCSooX3JlcSkgPSAqKHZvbGF0aWxlIHR5cGVvZihfcmVx
+KSlSSU5HX0dFVF9SRVFVRVNUKF9yLCBfaWR4KTsJXAorCSooX3JlcSkgPSAqKHZvbGF0aWxlIHR5
+cGVvZihfcmVxKSlSSU5HX0dFVF8jI2FjdGlvbihfciwgX2lkeCk7CVwKIH0gd2hpbGUgKDApCiAK
+LSNkZWZpbmUgUklOR19HRVRfUkVTUE9OU0UoX3IsIF9pZHgpICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIFwKLSAgICAoJigoX3IpLT5zcmluZy0+cmluZ1soKF9pZHgpICYgKFJJ
+TkdfU0laRShfcikgLSAxKSldLnJzcCkpCisjZGVmaW5lIFJJTkdfQ09QWV9SRVFVRVNUKF9yLCBf
+aWR4LCBfcmVxKSBSSU5HX0NPUFlfKFJFUVVFU1QsIF9yLCBfaWR4LCBfcmVxKQorI2RlZmluZSBS
+SU5HX0NPUFlfUkVTUE9OU0UoX3IsIF9pZHgsIF9yZXEpIFJJTkdfQ09QWV8oUkVTUE9OU0UsIF9y
+LCBfaWR4LCBfcmVxKQogCiAvKiBMb29wIHRlcm1pbmF0aW9uIGNvbmRpdGlvbjogV291bGQgdGhl
+IHNwZWNpZmllZCBpbmRleCBvdmVyZmxvdyB0aGUgcmluZz8gKi8KICNkZWZpbmUgUklOR19SRVFV
+RVNUX0NPTlNfT1ZFUkZMT1coX3IsIF9jb25zKSAgICAgICAgICAgICAgICAgICAgICAgICAgIFwK
+LS0gCjIuMTMuNgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
