@@ -1,14 +1,16 @@
-From: Minjun Hong <nickeysgo@gmail.com>
-Subject: Re: where can I find the 'address translation' code in
- Xen?
-Date: Tue, 1 May 2018 21:54:05 +0900
-Message-ID: <CAFX_q-E7CE4=PO9c15NBwZ1QSv1FgoemKpnpqGY+ekDAi4qfLw@mail.gmail.com>
-References: <CAFX_q-EPQuiEV4SBSFnCagEhx8pgTBWe6K-1FUP0sfMaLA5Kmw@mail.gmail.com>
- <54e4ae9f-d831-9721-abd7-62dfc54dd919@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [libvirt test] 122527: tolerable all pass - PUSHED
+Date: Tue, 01 May 2018 12:59:42 +0000
+Message-ID: <osstest-122527-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0743864856038846969=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <54e4ae9f-d831-9721-abd7-62dfc54dd919@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=kqcl=hu=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fDUsk-00084r-Ei
+ for xen-devel@lists.xenproject.org; Tue, 01 May 2018 12:59:46 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,146 +19,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0743864856038846969==
-Content-Type: multipart/alternative; boundary="f4f5e80c2a28328bd2056b2477a1"
-
---f4f5e80c2a28328bd2056b2477a1
-Content-Type: text/plain; charset="UTF-8"
-
-On Mon, Apr 30, 2018 at 10:13 PM, Andrew Cooper <andrew.cooper3@citrix.com>
-wrote:
-
-> On 29/04/18 11:11, Minjun Hong wrote:
-> > Hi.
-> > I'm looking for a point where address translation (guest virtual
-> > address to machine address) occurs in Xen.
-> > Of course, I mean when TLB miss has occured.
->
-> This question makes me wonder whether you are more familiar with PowerPC
-> than x86.  In x86, the TLB is automatically maintained by hardware, and
-> new entries will be populated as necessary.  All pagetable related
-> errors result in a pagefault exception, which Xen handles.
->
-> > I'm using a PV guest and I've found 'guest_walk_tables()' function in
-> > "xen/arch/x86/mm/guest_walk.c".
-> > However, in the comment of the function, it says "Walk the guest
-> > pagetables, after the manner of a hardware walker".
-> > I'm confused because I'm not sure if the function is called after the
-> > 'hardware page table walker'.
->
-> "after the manner" is an uncommon phrase in English, which AFAICT
-> derives from Latin originally.  It means "in the style of", "in the same
-> way as", etc.
->
-> guest_walk_tables() is a function which tries to match the behaviour of
-> the hardware pagewalker.  However, it is only used for cases where we
-> can't use regular hardware support, such as emulation of instructions.
->
-> ~Andrew
->
-
-Thank you, Andrew.
-Your answer is very helpful for me.
-
-It appears that there is no code to be executed when address translations
-of the guest occurs in Xen.
-Frankly, I was expecting there may be an address translation when accessing
-guest memory, and I wanted to find the code used in Xen at that time.
-Is there any code I can use for this purpose in Xen? No matter how I look,
-I could not find it in Xen with my background knowledge right now. So that
-I need your help.
-
---f4f5e80c2a28328bd2056b2477a1
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On M=
-on, Apr 30, 2018 at 10:13 PM, Andrew Cooper <span dir=3D"ltr">&lt;<a href=
-=3D"mailto:andrew.cooper3@citrix.com" target=3D"_blank">andrew.cooper3@citr=
-ix.com</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"=
-margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><span class=
-=3D"">On 29/04/18 11:11, Minjun Hong wrote:<br>
-&gt; Hi.<br>
-&gt; I&#39;m looking for a point where address translation (guest virtual<b=
-r>
-&gt; address to machine address) occurs in Xen.<br>
-&gt; Of course, I mean when TLB miss has occured.<br>
-<br>
-</span>This question makes me wonder whether you are more familiar with Pow=
-erPC<br>
-than x86.=C2=A0 In x86, the TLB is automatically maintained by hardware, an=
-d<br>
-new entries will be populated as necessary.=C2=A0 All pagetable related<br>
-errors result in a pagefault exception, which Xen handles.<br>
-<span class=3D""><br>
-&gt; I&#39;m using a PV guest and I&#39;ve found &#39;guest_walk_tables()&#=
-39; function in<br>
-&gt; &quot;xen/arch/x86/mm/guest_walk.c&quot;<wbr>.<br>
-&gt; However, in the comment of the function, it says &quot;Walk the guest<=
-br>
-&gt; pagetables, after the manner of a hardware walker&quot;.<br>
-&gt; I&#39;m confused because I&#39;m not sure if the function is called af=
-ter the<br>
-&gt; &#39;hardware page table walker&#39;.<br>
-<br>
-</span>&quot;after the manner&quot; is an uncommon phrase in English, which=
- AFAICT<br>
-derives from Latin originally.=C2=A0 It means &quot;in the style of&quot;, =
-&quot;in the same<br>
-way as&quot;, etc.<br>
-<br>
-guest_walk_tables() is a function which tries to match the behaviour of<br>
-the hardware pagewalker.=C2=A0 However, it is only used for cases where we<=
-br>
-can&#39;t use regular hardware support, such as emulation of instructions.<=
-br>
-<span class=3D"HOEnZb"><font color=3D"#888888"><br>
-~Andrew<br>
-</font></span></blockquote></div><br></div><div class=3D"gmail_extra">
-
-<span style=3D"color:rgb(34,34,34);font-family:arial,sans-serif;font-size:s=
-mall;font-style:normal;font-variant-ligatures:normal;font-variant-caps:norm=
-al;font-weight:400;letter-spacing:normal;text-align:start;text-indent:0px;t=
-ext-transform:none;white-space:normal;word-spacing:0px;background-color:rgb=
-(255,255,255);text-decoration-style:initial;text-decoration-color:initial;f=
-loat:none;display:inline">Thank you, Andrew.</span><div style=3D"color:rgb(=
-34,34,34);font-family:arial,sans-serif;font-size:small;font-style:normal;fo=
-nt-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter=
--spacing:normal;text-align:start;text-indent:0px;text-transform:none;white-=
-space:normal;word-spacing:0px;text-decoration-style:initial;text-decoration=
--color:initial">Your answer is very helpful for me.<br></div><div style=3D"=
-color:rgb(34,34,34);font-family:arial,sans-serif;font-size:small;font-style=
-:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:=
-400;letter-spacing:normal;text-align:start;text-indent:0px;text-transform:n=
-one;white-space:normal;word-spacing:0px;text-decoration-style:initial;text-=
-decoration-color:initial"><br></div><div style=3D"color:rgb(34,34,34);font-=
-family:arial,sans-serif;font-size:small;font-style:normal;font-variant-liga=
-tures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal=
-;text-align:start;text-indent:0px;text-transform:none;white-space:normal;wo=
-rd-spacing:0px;text-decoration-style:initial;text-decoration-color:initial"=
-><div>It appears that there is no code to be executed when address translat=
-ions of the guest occurs in Xen.</div><div>Frankly, I was expecting there m=
-ay be an address translation when accessing guest memory, and I wanted to f=
-ind the code used in Xen at that time.</div><div>Is there any code I can us=
-e for this purpose in Xen? No matter how I look, I could not find it in Xen=
- with my background knowledge right now. So that I need your help.</div></d=
-iv></div></div>
-
---f4f5e80c2a28328bd2056b2477a1--
-
-
---===============0743864856038846969==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0743864856038846969==--
+ZmxpZ2h0IDEyMjUyNyBsaWJ2aXJ0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
+bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjI1MjcvCgpGYWlsdXJlcyA6LS8gYnV0IG5vIHJl
+Z3Jlc3Npb25zLgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9j
+a2luZzoKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICBsaWtlIDEyMjQ1NQogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhz
+bSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTIyNDU1CiB0ZXN0
+LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3IDEzIHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
+ZmFpbCAgbGlrZSAxMjI0NTUKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgMTMgbWlncmF0
+ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2
+LWxpYnZpcnQgICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZl
+ciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
+aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14
+c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
+dC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
+IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtIDE0IHNhdmVy
+ZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1k
+NjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1j
+aGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlh
+bmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwog
+dGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXFjb3cyIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAg
+ICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQtcWNvdzIgMTMg
+c2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
+YW1kNjQtbGlidmlydC12aGQgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAg
+bmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBv
+cnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZp
+cnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MK
+IHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAg
+ICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0ICAgICAxMyBt
+aWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0
+LWFybTY0LWxpYnZpcnQgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAg
+IG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiBsaWJ2aXJ0ICAgICAg
+ICAgICAgICBjZTVhZWJlYWNkMTBhMWMxNWNiM2VlNDZhNTljOGI1ZmYyMzU1ODllCmJhc2VsaW5l
+IHZlcnNpb246CiBsaWJ2aXJ0ICAgICAgICAgICAgICBmOTRlNWIyMTU3MjBjOTFjNjAyMTlmMTY5
+NDc4M2E2MDNmMGI2MTljCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjI0NTUgIDIwMTgtMDQtMjYg
+MTg6Mjc6MzIgWiAgICA0IGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTIyNDk0ICAyMDE4LTA0
+LTI4IDEwOjI2OjU1IFogICAgMyBkYXlzICAgIDIgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRv
+dWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQ2hyaXN0aWFuIEVocmhhcmR0IDxjaHJpc3Rp
+YW4uZWhyaGFyZHRAY2Fub25pY2FsLmNvbT4KICBEYW5pZWwgUC4gQmVycmFuZ8OpIDxiZXJyYW5n
+ZUByZWRoYXQuY29tPgogIExhaW5lIFN0dW1wIDxsYWluZUBsYWluZS5vcmc+CiAgUGV0ZXIgS3Jl
+bXBhIDxwa3JlbXBhQHJlZGhhdC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02
+NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIGJ1aWxkLWFybWhmLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQt
+bGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiBidWlsZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1w
+dm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVt
+dXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
+Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAog
+dGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20g
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2
+LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
+ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYt
+bGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
+c3QtYW1kNjQtYW1kNjQtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQtcWNvdzIg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYt
+bGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
+dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5w
+cm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdl
+cwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9s
+b2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2Yg
+dGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6
+Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5l
+bWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rl
+c3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBi
+ZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0Lmdp
+dDthPXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9t
+ZS94ZW4vZ2l0L2xpYnZpcnQuZ2l0CiAgIGY5NGU1YjIxNTcuLmNlNWFlYmVhY2QgIGNlNWFlYmVh
+Y2QxMGExYzE1Y2IzZWU0NmE1OWM4YjVmZjIzNTU4OWUgLT4geGVuLXRlc3RlZC1tYXN0ZXIKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
