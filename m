@@ -1,23 +1,16 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 4/4] xen/PVH: Remove reserved entry in PVH
- GDT
-Date: Wed, 02 May 2018 02:26:53 -0600
-Message-ID: <5AE9764D02000078001C00BE__21500.48799017$1525249585$gmane$org@prv1-mh.provo.novell.com>
-References: <20180430162339.17143-1-boris.ostrovsky@oracle.com>
- <20180430162339.17143-5-boris.ostrovsky@oracle.com>
- <20180501080009.wnjmno5pietptixo@MacBook-Pro-de-Roger.local>
- <5a357f3d-b66e-ca55-0601-18a89b549f4a@oracle.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [distros-debian-squeeze test] 74658: tolerable FAIL
+Date: Wed, 2 May 2018 09:32:22 +0100
+Message-ID: <osstest-74658-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=toke=hv=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fDn6v-0001Zm-Qu
- for xen-devel@lists.xenproject.org; Wed, 02 May 2018 08:27:37 +0000
-In-Reply-To: <5a357f3d-b66e-ca55-0601-18a89b549f4a@oracle.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=4fnv=hv=xenproject.org=prvs=65393527a=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1fDnBa-0002Em-Pe
+ for xen-devel@lists.xenproject.org; Wed, 02 May 2018 08:32:26 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,25 +19,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, linux-kernel@vger.kernel.org, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDAxLjA1LjE4IGF0IDE0OjM0LCA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+IHdy
-b3RlOgo+IE9uIDA1LzAxLzIwMTggMDQ6MDAgQU0sIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6Cj4+
-IE9uIE1vbiwgQXByIDMwLCAyMDE4IGF0IDEyOjIzOjM5UE0gLTA0MDAsIEJvcmlzIE9zdHJvdnNr
-eSB3cm90ZToKPj4+IEFuZCB3aXRob3V0IGl0IHdlIGNhbid0IHVzZSBfQk9PVF9YWCBtYWNyb3Mg
-YW55IGxvbmdlciBzbyBkZWZpbmUgbmV3IG9uZXMuCj4+IAo+PiBOb3QgYmVpbmcgdGhhdCBmYW1p
-bGlhciB3aXRoIExpbnV4IGludGVybmFscyBJJ20gbm90IHN1cmUgSSBzZWUgdGhlCj4+IGJlbmVm
-aXQgb2YgdGhpcy4gSXNuJ3QgdGhlcmUgYSByaXNrIHRoYXQgc29tZSBvdGhlciBjb2RlIGlzIGdv
-aW5nIHRvCj4+IHVzZSB0aGUgX19CT09UX1hYIGRlZmluZXM/Cj4gCj4gVGhlIHN0YXJ0dXAgY29k
-ZSB3ZSBhcmUganVtcGluZyB0byBsb2FkcyB0aGVpciBvd24gR0RUIGFuZCBJIGRvbid0IHNlZSAK
-PiBhbnkgZXhwbGljaXQgcmVmZXJlbmNlcyB0byBzZWdtZW50cy4KCk5vIGV4cGxpY2l0IHJlZmVy
-ZW5jZXMgdG8gc2VnbWVudHMgaXNuJ3QgZW5vdWdoOiBZb3UgYWxzbyBuZWVkIHRvIG1ha2UKc3Vy
-ZSBubyBleGNlcHRpb25zIGF0IGFsbCBjYW4gb2NjdXIgd2hpbGUgbG9hZGVkIHNlbGVjdG9ycyBh
-bmQgR0RUIGFyZQpvdXQgb2Ygc3luYyAtIGluIHBhcnRpY3VsYXIgTk1JIG1pZ2h0IGJlIG9mIGNv
-bmNlcm4gaGVyZSAodGhpcyBpc24ndCBQVgphZnRlciBhbGwsIHdoZXJlIG5vdCBoYXZpbmcgYSBj
-YWxsYmFjayByZWdpc3RlcmVkIGVmZmVjdGl2ZWx5IG1hc2tzIE5NSSkuCgpKYW4KCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+ZmxpZ2h0IDc0NjU4IGRpc3Ryb3MtZGViaWFuLXNxdWVlemUgcmVhbCBbcmVhbF0KaHR0cDovL29z
+c3Rlc3QueHMuY2l0cml0ZS5uZXQvfm9zc3Rlc3QvdGVzdGxvZ3MvbG9ncy83NDY1OC8KCkZhaWx1
+cmVzIDotLyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQs
+IGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXNxdWVlemUtbmV0
+Ym9vdC1weWdydWIgMTAgZGViaWFuLWRpLWluc3RhbGwgZmFpbCBsaWtlIDc0NjQxCiB0ZXN0LWFt
+ZDY0LWkzODYtaTM4Ni1zcXVlZXplLW5ldGJvb3QtcHlncnViIDEwIGRlYmlhbi1kaS1pbnN0YWxs
+IGZhaWwgbGlrZSA3NDY0MQogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1zcXVlZXplLW5ldGJvb3Qt
+cHlncnViIDEwIGRlYmlhbi1kaS1pbnN0YWxsIGZhaWwgbGlrZSA3NDY0MQogdGVzdC1hbWQ2NC1p
+Mzg2LWFtZDY0LXNxdWVlemUtbmV0Ym9vdC1weWdydWIgMTAgZGViaWFuLWRpLWluc3RhbGwgZmFp
+bCBsaWtlIDc0NjQxCgpiYXNlbGluZSB2ZXJzaW9uOgogZmxpZ2h0ICAgICAgICAgICAgICAgNzQ2
+NDEKCmpvYnM6CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
+ZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWFt
+ZDY0LXNxdWVlemUtbmV0Ym9vdC1weWdydWIgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
+YW1kNjQtaTM4Ni1hbWQ2NC1zcXVlZXplLW5ldGJvb3QtcHlncnViICAgICAgICAgICAgICAgICBm
+YWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXNxdWVlemUtbmV0Ym9vdC1weWdydWIgICAg
+ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtaTM4Ni1zcXVlZXplLW5ldGJv
+b3QtcHlncnViICAgICAgICAgICAgICAgICAgZmFpbCAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdo
+dCBvbiBvc3N0ZXN0LnhzLmNpdHJpdGUubmV0CmxvZ3M6IC9ob21lL29zc3Rlc3QvbG9ncwppbWFn
+ZXM6IC9ob21lL29zc3Rlc3QvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2
+YWlsYWJsZSBhdAogICAgaHR0cDovL29zc3Rlc3QueHMuY2l0cml0ZS5uZXQvfm9zc3Rlc3QvdGVz
+dGxvZ3MvbG9ncwoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8v
+eGVuYml0cy54ZW5zb3VyY2UuY29tL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1
+c2ggbm90IGFwcGxpY2FibGUuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
