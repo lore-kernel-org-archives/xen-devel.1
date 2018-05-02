@@ -1,9 +1,9 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH for-4.11 1/3] xen/schedule.c: Fix up
- whitespace
-Date: Wed, 2 May 2018 12:24:57 +0200
-Message-ID: <ac9c9222-1984-b2b1-a76e-1b9b24b400e5@suse.com>
-References: <20180502101642.14002-1-george.dunlap@citrix.com>
+Subject: Re: [PATCH] x86: fix return value checks of
+ set_guest_{machinecheck, nmi}_trapbounce
+Date: Wed, 2 May 2018 12:25:28 +0200
+Message-ID: <fc6446f8-7dcc-7b03-e0af-50b7029e796c@suse.com>
+References: <5AE97E9C02000078001C00D5@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -11,9 +11,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=jzy7=hv=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fDowY-0003EK-Ji
- for xen-devel@lists.xenproject.org; Wed, 02 May 2018 10:25:02 +0000
-In-Reply-To: <20180502101642.14002-1-george.dunlap@citrix.com>
+ id 1fDox1-0003Fs-4Q
+ for xen-devel@lists.xenproject.org; Wed, 02 May 2018 10:25:31 +0000
+In-Reply-To: <5AE97E9C02000078001C00D5@suse.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,14 +23,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDIvMDUvMTggMTI6MTYsIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4gRGVsZXRlIHRhYnMgYW5k
-IHRyYWlsaW5nIHdoaXRlc3BhY2UuCj4gCj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuCj4gCj4gU2ln
-bmVkLW9mZi1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgoKUmVs
-ZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4K
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDIvMDUvMTggMTE6MDIsIEphbiBCZXVsaWNoIHdyb3RlOgo+IENvbW1pdCAwMTQyMDY0NDIx
+ICgieDg2L3RyYXBzOiBtb3ZlIHNldF9ndWVzdF97bWFjaGluZSxubWl9X3RyYXBib3VuY2UiKQo+
+IGNvbnZlcnRlZCB0aGUgZnVuY3Rpb25zJyByZXR1cm4gdHlwZXMgZnJvbSBpbnQgdG8gYm9vbCB3
+aXRob3V0IGFsc28KPiBjb3JyZWN0aW5nIHRoZSBjaGVja3MgaW4gYXNzZW1ibHkgY29kZTogVGhl
+IEFCSSBkb2VzIG5vdCBndWFyYW50ZWUgc3ViLQo+IDMyLWJpdCByZXR1cm4gdmFsdWVzIHRvIGJl
+IHByb21vdGVkIHRvIDMyIGJpdHMuCj4gCj4gVGFrZSB0aGUgbGliZXJ0eSBhbmQgYWxzbyBhZGp1
+c3QgdGhlIG51bWJlciBvZiBzcGFjZXMgdXNlZCBpbiB0aGUgY29tcGF0Cj4gY29kZSwgc3VjaCB0
+aGF0IGJvdGggY29kZSBzZXF1ZW5jZXMgZW5kIHVwIHNpbWlsYXIgKHRoZXkgYWxyZWFkeSBhcmUg
+aW4KPiB0aGUgbm9uLWNvbXBhdCBjYXNlKS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGlj
+aCA8amJldWxpY2hAc3VzZS5jb20+CgpSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxq
+Z3Jvc3NAc3VzZS5jb20+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
