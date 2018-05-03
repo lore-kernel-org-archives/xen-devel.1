@@ -1,13 +1,16 @@
-From: Marek Marczykowski <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH] xen: Add RING_COPY_RESPONSE()
-Date: Thu, 3 May 2018 01:45:50 +0200
-Message-ID: <20180502234550.GN1124@mail-itl>
-References: <20180430215436.21062-1-marmarek@invisiblethingslab.com>
- <5AE966A902000078001BFF07@prv1-mh.provo.novell.com>
+From: "Kang, Luwei" <luwei.kang@intel.com>
+Subject: Re: [PATCH RESEND v1 0/7] Intel Processor Trace
+ virtulization enabling
+Date: Thu, 3 May 2018 04:06:57 +0000
+Message-ID: <82D7661F83C1A047AF7DC287873BF1E167F6D53E@SHSMSX101.ccr.corp.intel.com>
+References: <1516039953-2988-1-git-send-email-luwei.kang@intel.com>
+ <20180426121208.qje53f7mbkz5i24f@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5275438014556598578=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5AE966A902000078001BFF07@prv1-mh.provo.novell.com>
+In-Reply-To: <20180426121208.qje53f7mbkz5i24f@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,82 +19,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel@lists.xen.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: "Tian, Kevin" <kevin.tian@intel.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>, "jbeulich@suse.com" <jbeulich@suse.com>, "George.Dunlap@eu.citrix.com" <George.Dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "tim@xen.org" <tim@xen.org>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, "Nakajima,
+ Jun" <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5275438014556598578==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="mGCtrYeZ202LI9ZG"
-Content-Disposition: inline
-
-
---mGCtrYeZ202LI9ZG
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, May 02, 2018 at 01:20:09AM -0600, Jan Beulich wrote:
-> >>> On 30.04.18 at 23:54, <marmarek@invisiblethingslab.com> wrote:
-> > Using RING_GET_RESPONSE() on a shared ring is easy to use incorrectly
-> > (i.e., by not considering that the other end may alter the data in the
-> > shared ring while it is being inspected).  Safe usage of a response
-> > generally requires taking a local copy.
-> >=20
-> > Provide a RING_COPY_RESPONSE() macro to use instead of
-> > RING_GET_RESPONSE() and an open-coded memcpy().  This takes care of
-> > ensuring that the copy is done correctly regardless of any possible
-> > compiler optimizations.
-> >=20
-> > Use a volatile source to prevent the compiler from reordering or
-> > omitting the copy.
-> >=20
-> > This is complementary to XSA155.
-> >=20
-> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
->=20
-> Please don't forget to Cc maintainers of files you change.
-
-According to MAINTAINERS, Konrad is the only one responsible for this
-file (PUBLIC I/O INTERFACES AND PV DRIVERS DESIGNS). I have plugged
-get_maintainer.pl to my git send-email, so this is automated.
-Is anyone missing there?
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---mGCtrYeZ202LI9ZG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlrqTa0ACgkQ24/THMrX
-1yyD+wf9EQiaylJofkNAl7ylrOvMNiXBiP0QzYTcOjbvYys/PzKNEuG2tDTiBCum
-PPmCFG/H6qTZEh1skmyZ+eejXl/FLYcvnieumKhcFPSa6tLm+MA7YC3LScrD8y3F
-WsWNH5ruyynibS4RsrlnZERP67eSCI4UT7IehnH92jtpzvMiWntFDmFyVGCYoMbo
-C/RJgUOZMsnBrp3PwbW0PpQmcYWE2SCvFY5PQwECUEZNa52EHuS9JHI9WlVayGop
-KqBHq8ycPtrxebE7IypENq/mYL+TaesCLI3Jz9dv9b/WNMwOh4mEX3YU/yOm5zzs
-x08GvOTkXjHXuIyHfZNYPXDfvemt4A==
-=MPW9
------END PGP SIGNATURE-----
-
---mGCtrYeZ202LI9ZG--
-
-
---===============5275438014556598578==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5275438014556598578==--
+PiA+IEhlcmUgaXMgYSBwYXRjaC1zZXJpZXMgd2hpY2ggYWRkaW5nIFByb2Nlc3NvciBUcmFjZSBl
+bmFibGluZyBpbiBYRU4gZ3Vlc3QuIFlvdSBjYW4gZ2V0IEl0J3Mgc29mdHdhcmUgZGV2ZWxvcGVy
+IG1hbnVhbHMgZnJvbToNCj4gPiBodHRwczovL3NvZnR3YXJlLmludGVsLmNvbS9zaXRlcy9kZWZh
+dWx0L2ZpbGVzL21hbmFnZWQvYzUvMTUvYXJjaGl0ZWN0DQo+ID4gdXJlLWluc3RydWN0aW9uLXNl
+dC1leHRlbnNpb25zLXByb2dyYW1taW5nLXJlZmVyZW5jZS5wZGYNCj4gPiBJbiBDaGFwdGVyIDUg
+SU5URUwgUFJPQ0VTU09SIFRSQUNFOiBWTVggSU1QUk9WRU1FTlRTLg0KPiA+DQo+ID4gSW50cm9k
+dWN0aW9uOg0KPiA+IEludGVsIFByb2Nlc3NvciBUcmFjZSAoSW50ZWwgUFQpIGlzIGFuIGV4dGVu
+c2lvbiBvZiBJbnRlbCBBcmNoaXRlY3R1cmUgdGhhdCBjYXB0dXJlcyBpbmZvcm1hdGlvbiBhYm91
+dCBzb2Z0d2FyZSBleGVjdXRpb24gdXNpbmcNCj4gZGVkaWNhdGVkIGhhcmR3YXJlIGZhY2lsaXRp
+ZXMgdGhhdCBjYXVzZSBvbmx5IG1pbmltYWwgcGVyZm9ybWFuY2UgcGVydHVyYmF0aW9uIHRvIHRo
+ZSBzb2Z0d2FyZSBiZWluZyB0cmFjZWQuIERldGFpbHMgb24gdGhlIEludGVsIFBUDQo+IGluZnJh
+c3RydWN0dXJlIGFuZCB0cmFjZSBjYXBhYmlsaXRpZXMgY2FuIGJlIGZvdW5kIGluIHRoZSBJbnRl
+bCA2NCBhbmQgSUEtMzIgQXJjaGl0ZWN0dXJlcyBTb2Z0d2FyZSBEZXZlbG9wZXLigJlzIE1hbnVh
+bCwgVm9sdW1lIDNDLg0KPiA+DQo+ID4gVGhlIHN1aXRlIG9mIGFyY2hpdGVjdHVyZSBjaGFuZ2Vz
+IHNlcnZlIHRvIHNpbXBsaWZ5IHRoZSBwcm9jZXNzIG9mIHZpcnR1YWxpemluZyBJbnRlbCBQVCBm
+b3IgdXNlIGJ5IGEgZ3Vlc3Qgc29mdHdhcmUuIFRoZXJlIGFyZSB0d28NCj4gcHJpbWFyeSBlbGVt
+ZW50cyB0byB0aGlzIG5ldyBhcmNoaXRlY3R1cmUgc3VwcG9ydCBmb3IgVk1YIHN1cHBvcnQgaW1w
+cm92ZW1lbnRzIG1hZGUgZm9yIEludGVsIFBULg0KPiA+IDEuIEFkZGl0aW9uIG9mIGEgbmV3IGd1
+ZXN0IElBMzJfUlRJVF9DVEwgdmFsdWUgZmllbGQgdG8gdGhlIFZNQ1MuDQo+ID4gICDigJQgVGhp
+cyBzZXJ2ZXMgdG8gc3BlZWQgYW5kIHNpbXBsaWZ5IHRoZSBwcm9jZXNzIG9mIGRpc2FibGluZyB0
+cmFjZSBvbiBWTSBleGl0LCBhbmQgcmVzdG9yaW5nIGl0IG9uIFZNIGVudHJ5Lg0KPiA+IDIuIEVu
+YWJsaW5nIHVzZSBvZiBFUFQgdG8gcmVkaXJlY3QgUFQgb3V0cHV0Lg0KPiA+ICAg4oCUIFRoaXMg
+ZW5hYmxlcyB0aGUgVk1NIHRvIGVsZWN0IHRvIHZpcnR1YWxpemUgdGhlIFBUIG91dHB1dCBidWZm
+ZXIgdXNpbmcgRVBULiBJbiB0aGlzIG1vZGUsIHRoZSBDUFUgd2lsbCB0cmVhdCBQVCBvdXRwdXQN
+Cj4gYWRkcmVzc2VzIGFzIEd1ZXN0IFBoeXNpY2FsIEFkZHJlc3NlcyAoR1BBcykgYW5kIHRyYW5z
+bGF0ZSB0aGVtIHVzaW5nIEVQVC4gVGhpcyBtZWFucyB0aGF0IEludGVsIFBUIG91dHB1dCByZWFk
+cyAob2YgdGhlIFRvUEENCj4gdGFibGUpIGFuZCB3cml0ZXMgKG9mIHRyYWNlIG91dHB1dCkgY2Fu
+IGNhdXNlIEVQVCB2aW9sYXRpb25zLCBhbmQgb3RoZXIgb3V0cHV0IGV2ZW50cy4NCj4gPg0KPiAN
+Cj4gQSBoaWdoIGxldmVsIHF1ZXN0aW9uLCBTRE0gdm9sIDMgIkVtdWxhdGlvbiBvZiBJbnRlbCBQ
+VCBUcmFjZWQgU3RhdGUiDQo+IHNheXM6DQo+IA0KPiAiSWYgYSBWTU0gZW11bGF0ZXMgYW4gZWxl
+bWVudCBvZiBwcm9jZXNzb3Igc3RhdGUgYnkgdGFraW5nIGEgVk0gZXhpdCBvbiByZWFkcyBhbmQv
+b3Igd3JpdGVzIHRvIHRoYXQgcGllY2Ugb2Ygc3RhdGUsIGFuZCB0aGUgc3RhdGUNCj4gZWxlbWVu
+dCBpbXBhY3RzIEludGVsIFBUIHBhY2tldCBnZW5lcmF0aW9uIG9yIHZhbHVlcywgaXQgbWF5IGJl
+IGluY3VtYmVudCB1cG9uIHRoZSBWTU0gdG8gaW5zZXJ0IG9yIG1vZGlmeSB0aGUgb3V0cHV0IHRy
+YWNlDQo+IGRhdGEuIg0KPiANCj4gVGhlIGltbWVkaWF0ZWx5IGZvbGxvd3MgdGhhdCBwYXJhZ3Jh
+cGggaXMgYW4gZXhhbXBsZSBvZiBDUjMgY2F1c2luZyB2bWV4aXQgd2hpY2ggbGVhZHMgdG8gbWlz
+c2luZyBwYWNrZXQuIElJUkMgWGVuIGRvZXMgdGhhdCwNCj4gaG93ZXZlciB0aGUgY29kZSBhcyBp
+cyBkb2Vzbid0IHNlZW0gdG8gaGFuZGxlIHRoYXQgYXQgYWxsLg0KDQpZZXMsIEkgbmVlZCBhZGQg
+c29tZSBjb2RlIG9uIHRoaXMuIEkgcHJvcG9zZSBpZiB0aGlzIGNhbiBiZSBoYW5kbGVkIGJ5IGhh
+cmR3YXJlIGJ1dC4uLg0KDQo+IA0KPiBBbm90aGVyIHRoaW5nIGlzIFhlbidzIHZtZXZlbnQgYWxs
+b3dzIGludGVyY2VwdGluZyBzZXZlcmFsIG90aGVyIHRyYWNlZCBzdGF0ZXMuIEl0IHNlZW1zIHRo
+YXQgYSBtb3JlIGdlbmVyaWMgZnJhbWV3b3JrIGlzIG5lZWRlZCB0bw0KPiBtYWtlIFBUIHdvcmsg
+d2l0aCB2bWV2ZW50IHN1YnN5c3RlbT8gV2hhdCBpcyB5b3VyIHRob3VnaHQgb24gdGhhdD8NCg0K
+SGkgV2VpLA0KICAgIEkgYW0gbm90IGZ1bGx5IGNsZWFyIHdoYXQgaXMgdGhlICJ2bWV2ZW50IHN1
+YnN5c3RlbSIgYW5kIHdoYXQgaXMgeW91ciBtZWFuIG9mICIgc2V2ZXJhbCBvdGhlciB0cmFjZWQg
+c3RhdGVzICIuIA0KICAgIEkgZ3Vlc3Mgdm1ldmVudCBpcyB1c2UgVlBNVSBjb2xsZWN0IHBlcmZv
+cm1hbmNlIGNvdW50ZXI/IGFuZCBzYXZlL2xvYWQgdnBtdSBNU1JzIHdoZW4gaXQncyBzY2hlZHVs
+ZWQ/DQoNClRoYW5rcywNCkx1d2VpIEthbmcNCg0KPiANCj4gV2VpLg0KX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
