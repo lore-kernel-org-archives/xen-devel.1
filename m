@@ -1,10 +1,22 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: migration regression in xen-4.11 and qemu-2.11 and qcow2
-Date: Mon, 7 May 2018 17:19:47 +0200
-Message-ID: <20180507151940.GA31926@aepfle.de>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v3 2/2] SVM: introduce a VM entry helper
+Date: Mon, 07 May 2018 09:25:09 -0600
+Message-ID: <5AF06FD502000078001C152D@prv1-mh.provo.novell.com>
+References: <5AEC773002000078001C0BCE@prv1-mh.provo.novell.com>
+ <5AEC782902000078001C0BEE@prv1-mh.provo.novell.com>
+ <5AF05E9902000078001C14C2@prv1-mh.provo.novell.com>
+ <c04e08e0-1cce-765c-0a5a-582b166e0ad4@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2530843129493773213=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=f+xl=h2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fFi0p-0002r7-22
+ for xen-devel@lists.xenproject.org; Mon, 07 May 2018 15:25:15 +0000
+In-Reply-To: <c04e08e0-1cce-765c-0a5a-582b166e0ad4@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,77 +25,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2530843129493773213==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SLDf9lqlvOQaIe6s"
-Content-Disposition: inline
-
-
---SLDf9lqlvOQaIe6s
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-I assume OSS test does not test realworld live migration,
-therefore the following regression remained unnoticed:
-
-name="hvm"
-builder="hvm"
-memory=555
-vcpus=4
-serial="pty"
-boot="c"
-disk=[ 'qcow2:/nfs/vdisk.qcow2,hda,w', ]
-device_model_version="qemu-xen"
-
-xl create -cf hvm.cfg
-sleep N
-xl migrate hvm $host
-
-On $host the domU becomes unusable, qemu reports:
-xen be: qdisk-768: xen be: qdisk-768: error: Failed to get "write" lock
-
-With qemu-2.10 the sender noticed the error somehow, and migration was aborted:
-qemu-system-i386: Failed to get "write" lock
-
-With qemu-2.11 the sender thinks everything is alright and the domU is moved.
-
-What I gathered during debugging so far is that somehow qemu on the receiving side locks a region twice:
-
-2018-05-07T09:49:45.810930Z qemu-system-i386: qemu_lock_fcntl: 39 c9 1 F_UNLCK>F_UNLCK 0 Success
-2018-05-07T09:49:45.813717Z qemu-system-i386: qemu_lock_fcntl: 39 c9 1 F_RDLCK>F_RDLCK 0 Success
-2018-05-07T09:49:45.814591Z qemu-system-i386: qemu_lock_fd_test: 39 c9 1 F_WRLCK>F_RDLCK 0 Success
-raw_check_lock_bytes: fcntl on 39 returned -11/0
-
-I do not know how raw_apply_lock_bytes() is supposed to be used. In its current form it does not work.
-Anyone else seeing this?
-
-Olaf
-
---SLDf9lqlvOQaIe6s
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvBuiQAKCRBdQqD6ppg2
-fuKxAJwPzOZGm7vqwPmlFE8dMy4BXwfbeQCg4ur5nLmPOONqwki8G/vd4nUyx2Y=
-=Cv/q
------END PGP SIGNATURE-----
-
---SLDf9lqlvOQaIe6s--
-
-
---===============2530843129493773213==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2530843129493773213==--
+Pj4+IE9uIDA3LjA1LjE4IGF0IDE2OjE5LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMDcvMDUvMTggMTU6MTEsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAwNC4w
+NS4xOCBhdCAxNzoxMSwgPEpCZXVsaWNoQHN1c2UuY29tPiB3cm90ZToKPj4+IC0tLSBhL3hlbi9h
+cmNoL3g4Ni9odm0vc3ZtL2VudHJ5LlMKPj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vc3ZtL2Vu
+dHJ5LlMKPj4+IEBAIC02MSwyMyArNjEsOCBAQCBVTkxJS0VMWV9TVEFSVChuZSwgbnN2bV9oYXAp
+Cj4+PiAgICAgICAgICBqbXAgIC5Mc3ZtX2RvX3Jlc3VtZQo+Pj4gIF9fVU5MSUtFTFlfRU5EKG5z
+dm1faGFwKQo+Pj4gIAo+Pj4gLSAgICAgICAgY2FsbCBzdm1fYXNpZF9oYW5kbGVfdm1ydW4KPj4+
+IC0KPj4+IC0gICAgICAgIGNtcGIgJDAsdGJfaW5pdF9kb25lKCVyaXApCj4+PiAtVU5MSUtFTFlf
+U1RBUlQobnosIHN2bV90cmFjZSkKPj4+IC0gICAgICAgIGNhbGwgc3ZtX3RyYWNlX3ZtZW50cnkK
+Pj4+IC1VTkxJS0VMWV9FTkQoc3ZtX3RyYWNlKQo+Pj4gLQo+Pj4gLSAgICAgICAgbW92ICBWQ1BV
+X3N2bV92bWNiKCVyYngpLCVyY3gKPj4+IC0gICAgICAgIG1vdiAgVVJFR1NfcmF4KCVyc3ApLCVy
+YXgKPj4+IC0gICAgICAgIG1vdiAgJXJheCxWTUNCX3JheCglcmN4KQo+Pj4gLSAgICAgICAgbW92
+ICBVUkVHU19yaXAoJXJzcCksJXJheAo+Pj4gLSAgICAgICAgbW92ICAlcmF4LFZNQ0JfcmlwKCVy
+Y3gpCj4+PiAtICAgICAgICBtb3YgIFVSRUdTX3JzcCglcnNwKSwlcmF4Cj4+PiAtICAgICAgICBt
+b3YgICVyYXgsVk1DQl9yc3AoJXJjeCkKPj4+IC0gICAgICAgIG1vdiAgVVJFR1NfZWZsYWdzKCVy
+c3ApLCVyYXgKPj4+IC0gICAgICAgIG9yICAgJFg4Nl9FRkxBR1NfTUJTLCVyYXgKPj4+IC0gICAg
+ICAgIG1vdiAgJXJheCxWTUNCX3JmbGFncyglcmN4KQo+Pj4gKyAgICAgICAgbW92ICAlcnNwLCAl
+cmRpCj4+PiArICAgICAgICBjYWxsIHN2bV92bWVudGVyX2hlbHBlcgo+PiBXaGlsZSBJIGhhZCBj
+b21taXR0ZWQgdGhpcyBlYXJsaWVyIHRvZGF5LCB0aGVyZSdzIG9uZSBjb25jZXJuIEkndmUganVz
+dCBjb21lCj4+IHRvIHRoaW5rIG9mOiBOb3cgdGhhdCB3ZSdyZSBjYWxsaW5nIGludG8gQyBsYW5k
+IHdpdGggQ0xHSSBpbiBlZmZlY3QgKGZvciAKPiBtb3JlCj4+IHRoYW4ganVzdCB0aGUgdHJpdmlh
+bCBzdm1fdHJhY2Vfdm1lbnRyeSgpKSB3ZSBhcmUgYXQgcmlzayBvZiBjb25mdXNpbmcKPj4gcGFy
+dGllcyB1c2luZyBsb2NhbF9pcnFfaXNfZW5hYmxlZCgpLCBmaXJzdCBhbmQgZm9yZW1vc3QKPj4g
+Y29tbW9uL3NwaW5sb2NrLmM6Y2hlY2tfbG9jaygpLiBXaGlsZSBpdCdzIHNvbWUgZXh0cmEgb3Zl
+cmhlYWQsIEkgd29uZGVyCj4+IHdoZXRoZXIgdGhlIGNhbGwgd291bGRuJ3QgYmV0dGVyIGJlIGZy
+YW1lZCBieSBhIENMSS9TVEkgcGFpci4KPiAKPiBJIGNhbid0IHNlZSB3aHkgdGhlIFNWTSB2bWVu
+dHJ5IHBhdGggdXNlcyBDTEdJL1NUR0kgaW4gdGhlIGZpcnN0IHBsYWNlLgo+IAo+IFRoZSBWTVgg
+cGF0aCB1c2VzIHBsYWluIGNsaS9zdGkgYW5kIG91ciBOTUkvTUNFIGhhbmRsZXJzIGNhbiBjb3Bl
+LiAKPiBGdXJ0aGVybW9yZSwgcHJvY2Vzc2luZyBOTUlzL01DRXMgYXQgdGhpcyBwb2ludCB3aWxs
+IGJlIG1vcmUgZWZmaWNpZW50Cj4gdGhhdCB0YWtpbmcgYSB2bWVudHJ5IHRoZW4gaW1tZWRpYXRl
+bHkgZXhpdGluZyBhZ2Fpbi4KClBlcmhhcHMgeW91J3JlIHJpZ2h0LCBpLmUuIHdlIGNvdWxkIHJl
+cGxhY2UgYWxsIGN1cnJlbnQgQ0xHSS9TVEdJIGJ5CkNMSS9TVEksIGFkZGluZyBhIHNpbmdsZSBT
+VEdJIHJpZ2h0IGFmdGVyIFZNUlVOLgoKPiBBcyBmb3IgcnVubmluZyB3aXRoIGludGVycnVwdHMg
+ZGlzYWJsZWQsIHRoYXQgaXMgYWxyZWFkeSB0aGUgY2FzZSBvbiB0aGUKPiBWTVggc2lkZSwgYW5k
+IEkgZG9uJ3Qgc2VlIHdoeSB0aGUgU1ZNIHNpZGUgbmVlZHMgdG8gYmUgZGlmZmVyZW50LgoKU3Vy
+ZSwgYXMgZG9lcyBTVk0gLSBDTEdJIGlzIGEgc3VwZXJzZXQgb2YgQ0xJLCBhZnRlciBhbGwuIE15
+IG9ic2VydmF0aW9uCndhcyBqdXN0IHRoYXQgdGhpcyBzdGF0ZSBvZiBpbnRlcnJ1cHRzIGJlaW5n
+IGRpc2FibGVkIGNhbid0IGJlIG9ic2VydmVkIGJ5CnVzZXJzIG9mIHRoZSBub3JtYWwgaW5mcmFz
+dHJ1Y3R1cmUgKGluc3BlY3RpbmcgRUZMQUdTLklGKS4KCkphbgoKCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
