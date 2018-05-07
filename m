@@ -1,10 +1,17 @@
-From: =?UTF-8?Q?Charles_Gon=C3=A7alves?= <charles.fg@gmail.com>
-Subject: domain_crash_sync vs "plain crash"
-Date: Mon, 07 May 2018 01:06:49 +0000
-Message-ID: <CAAQRGoCRJch7OLrCyOUUx9gUWpB07_+LBawXkTbCWZ1eii7Qtw@mail.gmail.com>
+From: Davidwang <Davidwang@zhaoxin.com>
+Subject: [PATCH v4] x86/cpu: Add supports for zhaoxin x86
+ platform
+Date: Mon, 7 May 2018 09:37:32 +0800
+Message-ID: <1525657052-3871-1-git-send-email-Davidwang@zhaoxin.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1311648562996130667=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=5/i4=h2=zhaoxin.com=davidwang@srs-us1.protection.inumbo.net>)
+ id 1fFVH5-0000cB-2V
+ for xen-devel@lists.xenproject.org; Mon, 07 May 2018 01:49:11 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,60 +20,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: fionali@zhaoxin.com, jbeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============1311648562996130667==
-Content-Type: multipart/alternative; boundary="00000000000075b45f056b9349c7"
-
---00000000000075b45f056b9349c7
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-When I'm performing some hypercalls with some "unexpected" parameters
-(robustness test) sometimes the guest is explicitly  "killed" by xen
-calling the domain_crash(), but sometimes the guest just crash without any
-explicit message on dmesg or logs.
-
-Are those "plain crashes" an expected behavior by design on Xen or are they
-some untreated parameter checking or something else?
-
-Can someone comment about it?
-
-Thanks!
-
-
---=20
-Atenciosamente,
-Charles F.'. Gon=C3=A7alves
-
---00000000000075b45f056b9349c7
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>When I&#39;m performing some hypercalls with some &qu=
-ot;unexpected&quot; parameters (robustness test) sometimes the guest is exp=
-licitly=C2=A0 &quot;killed&quot; by xen calling the=C2=A0domain_crash(), bu=
-t sometimes the guest just crash without any explicit message on dmesg or l=
-ogs.<br></div><div><br></div><div>Are those &quot;plain crashes&quot; an ex=
-pected behavior by design on Xen or are they some untreated parameter check=
-ing or something else?</div><div><br></div><div>Can someone comment about i=
-t?</div><div><br></div><div>Thanks!</div><div><br></div><div><br></div></di=
-v>-- <br><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail=
-_signature"><div dir=3D"ltr"><div>Atenciosamente,=C2=A0</div>Charles F.&#39=
-;. Gon=C3=A7alves</div></div>
-
---00000000000075b45f056b9349c7--
-
-
---===============1311648562996130667==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1311648562996130667==--
+RnJvbTogRGF2aWRXYW5nIDxkYXZpZHdhbmdAemhhb3hpbi5jb20+CgpaaGFveGluIGlzIGEgeDg2
+IElDIGRlc2lnbmVyLiBJdHMgU09DIHByb2R1Y3RzIHN1cHBvcnQgYm90aCBDUFUKdmlydHVhbGl6
+YXRpb24gYW5kIEkvTyB2aXJ0dWFsaXphdGlvbiwgd2hpY2ggYXJlIGNvbXBhdGlibGUgd2l0aCBJ
+bnRlbApWTVggYW5kIFZULWQgcmVzcGVjdGl2ZWx5LiBaaGFveGluIGhhcyAnU2hhbmdoYWknIENQ
+VSB2ZW5kb3IgSUQuCgpTaWduZWQtb2ZmLWJ5OiBEYXZpZFdhbmcgPGRhdmlkd2FuZ0B6aGFveGlu
+LmNvbT4KLS0tCkRlbGV0ZSBhbiB1bm5lY2Vzc2FyeSB2YXJpYWJsZS4KIHhlbi9hcmNoL3g4Ni9j
+cHUvTWFrZWZpbGUgICAgICAgICAgfCAgMSArCiB4ZW4vYXJjaC94ODYvY3B1L2NvbW1vbi5jICAg
+ICAgICAgIHwgIDEgKwogeGVuL2FyY2gveDg2L2NwdS9pbnRlbF9jYWNoZWluZm8uYyB8ICA0ICsr
+Ky0KIHhlbi9hcmNoL3g4Ni9jcHUvc2hhbmdoYWkuYyAgICAgICAgfCAyOCArKysrKysrKysrKysr
+KysrKysrKysrKysrKysrCiB4ZW4vaW5jbHVkZS9hc20teDg2L3NldHVwLmggICAgICAgIHwgIDEg
+KwogeGVuL2luY2x1ZGUvYXNtLXg4Ni94ODYtdmVuZG9ycy5oICB8ICAzICsrLQogNiBmaWxlcyBj
+aGFuZ2VkLCAzNiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQogY3JlYXRlIG1vZGUgMTAw
+NjQ0IHhlbi9hcmNoL3g4Ni9jcHUvc2hhbmdoYWkuYwoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4
+Ni9jcHUvTWFrZWZpbGUgYi94ZW4vYXJjaC94ODYvY3B1L01ha2VmaWxlCmluZGV4IDc0ZjIzYWUu
+LjM0YTAxY2EgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9jcHUvTWFrZWZpbGUKKysrIGIveGVu
+L2FyY2gveDg2L2NwdS9NYWtlZmlsZQpAQCAtNyw0ICs3LDUgQEAgb2JqLXkgKz0gY29tbW9uLm8K
+IG9iai15ICs9IGludGVsLm8KIG9iai15ICs9IGludGVsX2NhY2hlaW5mby5vCiBvYmoteSArPSBt
+d2FpdC1pZGxlLm8KK29iai15ICs9IHNoYW5naGFpLm8KIG9iai15ICs9IHZwbXUubyB2cG11X2Ft
+ZC5vIHZwbXVfaW50ZWwubwpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2NwdS9jb21tb24uYyBi
+L3hlbi9hcmNoL3g4Ni9jcHUvY29tbW9uLmMKaW5kZXggMGE0NTJhZS4uMDI4NjNjOSAxMDA2NDQK
+LS0tIGEveGVuL2FyY2gveDg2L2NwdS9jb21tb24uYworKysgYi94ZW4vYXJjaC94ODYvY3B1L2Nv
+bW1vbi5jCkBAIC03MDksNiArNzA5LDcgQEAgdm9pZCBfX2luaXQgZWFybHlfY3B1X2luaXQodm9p
+ZCkKIAlpbnRlbF9jcHVfaW5pdCgpOwogCWFtZF9pbml0X2NwdSgpOwogCWNlbnRhdXJfaW5pdF9j
+cHUoKTsKKwlzaGFuZ2hhaV9pbml0X2NwdSgpOwogCWVhcmx5X2NwdV9kZXRlY3QoKTsKIH0KIApk
+aWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2NwdS9pbnRlbF9jYWNoZWluZm8uYyBiL3hlbi9hcmNo
+L3g4Ni9jcHUvaW50ZWxfY2FjaGVpbmZvLmMKaW5kZXggMTAxZTI5Ny4uMTg0M2MyZSAxMDA2NDQK
+LS0tIGEveGVuL2FyY2gveDg2L2NwdS9pbnRlbF9jYWNoZWluZm8uYworKysgYi94ZW4vYXJjaC94
+ODYvY3B1L2ludGVsX2NhY2hlaW5mby5jCkBAIC0xNzYsNyArMTc2LDkgQEAgdW5zaWduZWQgaW50
+IGluaXRfaW50ZWxfY2FjaGVpbmZvKHN0cnVjdCBjcHVpbmZvX3g4NiAqYykKIAkgKiBEb24ndCB1
+c2UgY3B1aWQyIGlmIGNwdWlkNCBpcyBzdXBwb3J0ZWQuIEZvciBQNCwgd2UgdXNlIGNwdWlkMiBm
+b3IKIAkgKiB0cmFjZSBjYWNoZQogCSAqLwotCWlmICgobnVtX2NhY2hlX2xlYXZlcyA9PSAwIHx8
+IGMtPng4NiA9PSAxNSkgJiYgYy0+Y3B1aWRfbGV2ZWwgPiAxKSB7CisJaWYgKCAobnVtX2NhY2hl
+X2xlYXZlcyA9PSAwIHx8IGMtPng4NiA9PSAxNSkgJiYgYy0+Y3B1aWRfbGV2ZWwgPiAxICYmCisJ
+CWMtPng4Nl92ZW5kb3IgIT0gWDg2X1ZFTkRPUl9TSEFOR0hBSSApCisJewogCQkvKiBzdXBwb3J0
+cyBlYXg9MiAgY2FsbCAqLwogCQlpbnQgaSwgaiwgbjsKIAkJaW50IHJlZ3NbNF07CmRpZmYgLS1n
+aXQgYS94ZW4vYXJjaC94ODYvY3B1L3NoYW5naGFpLmMgYi94ZW4vYXJjaC94ODYvY3B1L3NoYW5n
+aGFpLmMKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uOTE1NmM4NQotLS0gL2Rl
+di9udWxsCisrKyBiL3hlbi9hcmNoL3g4Ni9jcHUvc2hhbmdoYWkuYwpAQCAtMCwwICsxLDI4IEBA
+CisjaW5jbHVkZSA8eGVuL2JpdG9wcy5oPgorI2luY2x1ZGUgPHhlbi9pbml0Lmg+CisjaW5jbHVk
+ZSA8YXNtL3Byb2Nlc3Nvci5oPgorI2luY2x1ZGUgImNwdS5oIgorCitzdGF0aWMgdm9pZCBpbml0
+X3NoYW5naGFpKHN0cnVjdCBjcHVpbmZvX3g4NiAqYykKK3sKKyAgICBpZiAoIGNwdV9oYXMoYywg
+WDg2X0ZFQVRVUkVfSVRTQykgKQorICAgIHsKKyAgICAgICAgX19zZXRfYml0KFg4Nl9GRUFUVVJF
+X0NPTlNUQU5UX1RTQywgYy0+eDg2X2NhcGFiaWxpdHkpOworICAgICAgICBfX3NldF9iaXQoWDg2
+X0ZFQVRVUkVfTk9OU1RPUF9UU0MsIGMtPng4Nl9jYXBhYmlsaXR5KTsKKyAgICAgICAgX19zZXRf
+Yml0KFg4Nl9GRUFUVVJFX1RTQ19SRUxJQUJMRSwgYy0+eDg2X2NhcGFiaWxpdHkpOworICAgIH0K
+KworICAgIGluaXRfaW50ZWxfY2FjaGVpbmZvKGMpOworfQorCitzdGF0aWMgY29uc3Qgc3RydWN0
+IGNwdV9kZXYgc2hhbmdoYWlfY3B1X2RldiA9IHsKKyAgICAuY192ZW5kb3IgICA9ICIgIFNoYW5n
+IiwKKyAgICAuY19pZGVudCAgICA9IHsiICBTaGFuZ2hhaSAgIn0sCisgICAgLmNfaW5pdCAgICAg
+PSBpbml0X3NoYW5naGFpLAorfTsKKworaW50IF9faW5pdCBzaGFuZ2hhaV9pbml0X2NwdSh2b2lk
+KQoreworICAgIGNwdV9kZXZzW1g4Nl9WRU5ET1JfU0hBTkdIQUldID0gJnNoYW5naGFpX2NwdV9k
+ZXY7CisgICAgcmV0dXJuIDA7Cit9CmRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L3Nl
+dHVwLmggYi94ZW4vaW5jbHVkZS9hc20teDg2L3NldHVwLmgKaW5kZXggMTkyMzJhZi4uMmMyZDlm
+ZCAxMDA2NDQKLS0tIGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9zZXR1cC5oCisrKyBiL3hlbi9pbmNs
+dWRlL2FzbS14ODYvc2V0dXAuaApAQCAtMjMsNiArMjMsNyBAQCBpbnQgY3lyaXhfaW5pdF9jcHUo
+dm9pZCk7CiBpbnQgbnNjX2luaXRfY3B1KHZvaWQpOwogaW50IGNlbnRhdXJfaW5pdF9jcHUodm9p
+ZCk7CiBpbnQgdHJhbnNtZXRhX2luaXRfY3B1KHZvaWQpOworaW50IHNoYW5naGFpX2luaXRfY3B1
+KHZvaWQpOwogCiB2b2lkIHNldF9ucl9jcHVfaWRzKHVuc2lnbmVkIGludCBtYXhfY3B1cyk7CiAK
+ZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS14ODYveDg2LXZlbmRvcnMuaCBiL3hlbi9pbmNs
+dWRlL2FzbS14ODYveDg2LXZlbmRvcnMuaAppbmRleCBjYWU1NTA3Li5jNTNkMGI5IDEwMDY0NAot
+LS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L3g4Ni12ZW5kb3JzLmgKKysrIGIveGVuL2luY2x1ZGUv
+YXNtLXg4Ni94ODYtdmVuZG9ycy5oCkBAIC03LDcgKzcsOCBAQAogI2RlZmluZSBYODZfVkVORE9S
+X0lOVEVMIDAKICNkZWZpbmUgWDg2X1ZFTkRPUl9BTUQgMQogI2RlZmluZSBYODZfVkVORE9SX0NF
+TlRBVVIgMgotI2RlZmluZSBYODZfVkVORE9SX05VTSAzCisjZGVmaW5lIFg4Nl9WRU5ET1JfU0hB
+TkdIQUkgMworI2RlZmluZSBYODZfVkVORE9SX05VTSA0CiAjZGVmaW5lIFg4Nl9WRU5ET1JfVU5L
+Tk9XTiAweGZmCiAKICNlbmRpZgkvKiBfX1hFTl9YODZfVkVORE9SU19IX18gKi8KLS0gCjEuOC4z
+LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
