@@ -1,24 +1,11 @@
-From: "van der Linden, Frank" <fllinden@amazon.com>
-Subject: Re: [PATCH 1/1] x86/xen: Reset VCPU0 info pointer after
- shared_info remap
-Date: Mon, 7 May 2018 19:12:22 +0000
-Message-ID: <93859B55-41C2-4AF2-9CD7-C8A8AB11097F__20659.7931137823$1525720288$gmane$org@amazon.com>
-References: <C508E5F5-024E-4F71-A91E-7BB0BE046F5D@amazon.com>
- <965354d1-e2e7-1764-a14e-bb4258b9ed13@oracle.com>
- <B3C02FE4-651D-4A89-90BB-78E389764688@amazon.com>
- <ab71bf69-5074-ca7d-ceb5-1b42b0a70457@oracle.com>
+From: Jason Andryuk <jandryuk@gmail.com>
+Subject: [RFC PATCH] x86/pagewalk: Honor SMAP_CHECK_DISABLED
+Date: Mon,  7 May 2018 15:57:01 -0400
+Message-ID: <20180507195701.14292-1-jandryuk@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wlnj=h2=amazon.com=prvs=65821367d=fllinden@srs-us1.protection.inumbo.net>)
- id 1fFlYi-0003H9-8y
- for xen-devel@lists.xenproject.org; Mon, 07 May 2018 19:12:28 +0000
-In-Reply-To: <ab71bf69-5074-ca7d-ceb5-1b42b0a70457@oracle.com>
-Content-Language: en-US
-Content-ID: <A27F10D3DA154B41A56CB4DB1BFAD916@amazon.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,15 +14,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Cc: "jgross@suse.com" <jgross@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, stable <stable@vger.kernel.org>
+To: George Dunlap <george.dunlap@eu.citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>, Jason Andryuk <jandryuk@gmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
-DQoNCu+7v09uIDUvNy8xOCwgMTE6NTQgQU0sICJCb3JpcyBPc3Ryb3Zza3kiIDxib3Jpcy5vc3Ry
-b3Zza3lAb3JhY2xlLmNvbT4gd3JvdGU6DQoNCiAgICANCiAgICBPSywgZmFpciBlbm91Z2guIFRo
-aXMgc2hvdWxkIGdvIHRvIHN0YWJsZSBhcyB3ZWxsIEkgdGhpbmsgKDQuMTIrKSwNCiAgICBjb3B5
-aW5nIHRoZW0uDQogICAgDQogICAgUmV2aWV3ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMu
-b3N0cm92c2t5QG9yYWNsZS5jb20+DQogICAgDQpHcmVhdCwgdGhhbmtzIEJvcmlzLg0KDQpGcmFu
-aw0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Y29tbWl0IDRjNWQ3OGExMGRjODk0MjcxNDBhNTBhMWRmNWEwYjhlOWYwNzNlODIgKHg4Ni9wYWdl
+d2FsazoKUmUtaW1wbGVtZW50IHRoZSBwYWdldGFibGUgd2Fsa2VyKSByZW1vdmVkIGhvbm9yaW5n
+IHRoZQpzbWFwX2NoZWNrX3BvbGljeSBvZiB0aGUgcnVubmluZyBWQ1BVLiAgZ3Vlc3Rfd2Fsa190
+YWJsZXMgaXMgdXNlZCBieQpjb3B5X3t0byxmcm9tfV9ndWVzdCBmb3IgSFZNcywgc28gaXQgaXMg
+Y2FsbGVkIHdoZW4gdGhlIGh5cGVydmlzb3IgaXMKY29weWluZyBkYXRhIGFuZCBTTUFQIGlzIGlu
+YXBwcm9wcmlhdGUgdG8gZW5mb3JjZS4KClRoZSBvdXQtb2YtdHJlZSB2NHYgaHlwZXJjYWxsIGNv
+cGllcyBhIGRvbWFpbidzIHNvdXJjZSBidWZmZXIgaW50byBhCmRpZmZlcmVudCBkb21haW4ncyBk
+ZXN0aW5hdGlvbiByaW5nLiAgRm9yIGFuIEhWTSwgdGhlIGtlcm5lbCBtYWtlcyB0aGUKaHlwZXJj
+YWxsIGZyb20gcmluZyAwLCBzbyB0aGUgdXNlcnNwYWNlIGJ1ZmZlciBhY2Nlc3MgbG9va3MgbGlr
+ZSBhIFNNQVAKdmlvbGF0aW9uLiAgSW4gWGVuIDQuNiwgdjR2IGNvdWxkIHNldCBTTUFQX0NIRUNL
+X0RJU0FCTEVEIHRvIGF2b2lkIHRoaXMKU01BUCBmYWlsdXJlLCBidXQgdGhhdCBubyBsb25nZXIg
+d29ya3Mgc2luY2UgdGhlIHJlLXdyaXRlLgoKU2lnbmVkLW9mZi1ieTogSmFzb24gQW5kcnl1ayA8
+amFuZHJ5dWtAZ21haWwuY29tPgotLS0KY29tbWl0IDMxYWU1ODdlNmYwMTgxYmYxZjdkMTk2ZmUx
+YjQ5MzU3Yzg5MjJlNjAgKHg4Ni9odm06IGFsd2F5cyBkbyBTTUFQCmNoZWNrIHdoZW4gdXBkYXRp
+bmcgcnVuc3RhdGVfZ3Vlc3QodikpIGFkZGVkIHNtYXBfY2hlY2tfcG9saWN5Cm9yaWdpbmFsbHku
+ICBJdCBjb250YWluZWQgU01BUF9DSEVDS19FTkFCTEVELCBTTUFQX0NIRUNLX0RJU0FCTEVELCBh
+bmQKU01BUF9DSEVDS19IT05PUl9DUExfQUMuICBTTUFQX0NIRUNLX0hPTk9SX0NQTF9BQyBpcyB0
+aGUgZGVmYXVsdCBhbmQKY29uZGl0aW9uYWxpemVkIHRoZSBTTUFQIGNoZWNrIG9uIHRoZSBDUEwg
+YW5kIEVGTEFHUy5BQy4KU01BUF9DSEVDS19FTkFCTEVEIGFsd2F5cyB0dXJuZWQgb24gdGhlIFNN
+QVAgY2hlY2suCgpndWVzdF93YWxrX3RhYmxlcyBubyBsb25nZXIgaGFzIGEgQ1BMIGNoZWNrLiAg
+VGhpcyBzZWVtcyB0byBiZSBzZXQgYnkKZW11bGF0aW9uIGNvZGUgdGhyb3VnaCB0aGUgUEZFQ191
+c2VyX21vZGUgb3IgUEZFQ19pbXBsaWNpdCB3YWxrCmFyZ3VtZW50cy4gIEFsc28gd2l0aCB0aGUg
+cmUtd3JpdGUsIHRoZSBFRkxBR1MuQUMgY2hlY2sgaXMgYWx3YXlzCmVuZm9yY2VkLiAgU28gdXBk
+YXRlX3J1bnN0YXRlX2FyZWEgYW5kIHVwZGF0ZV9zZWNvbmRhcnlfc3lzdGVtX3RpbWUgbWF5Cm5v
+IGxvbmdlciBuZWVkIHRoZSBzbWFwIHBvbGljeSBjaGFuZ2U/ICBTTUFQX0NIRUNLX0hPTk9SX0NQ
+TF9BQyBjb3VsZApwcm9iYWJseSBiZSBkcm9wcGVkIGFzIHdlbGwgaWYgdGhhdCBpcyB0aGUgY2Fz
+ZS4KCiB4ZW4vYXJjaC94ODYvbW0vZ3Vlc3Rfd2Fsay5jIHwgMSArCiAxIGZpbGUgY2hhbmdlZCwg
+MSBpbnNlcnRpb24oKykKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvbW0vZ3Vlc3Rfd2Fsay5j
+IGIveGVuL2FyY2gveDg2L21tL2d1ZXN0X3dhbGsuYwppbmRleCA2MDU1ZmVjMWFkLi42MjdiN2Y5
+MWU4IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvbW0vZ3Vlc3Rfd2Fsay5jCisrKyBiL3hlbi9h
+cmNoL3g4Ni9tbS9ndWVzdF93YWxrLmMKQEAgLTQxNiw2ICs0MTYsNyBAQCBndWVzdF93YWxrX3Rh
+YmxlcyhzdHJ1Y3QgdmNwdSAqdiwgc3RydWN0IHAybV9kb21haW4gKnAybSwKICAgICAgICAgICAg
+ICAgICBnb3RvIG91dDsKIAogICAgICAgICAgICAgaWYgKCAhKHdhbGsgJiBQRkVDX2luc25fZmV0
+Y2gpICYmIGd1ZXN0X3NtYXBfZW5hYmxlZCh2KSAmJgorICAgICAgICAgICAgICAgICB2LT5hcmNo
+LnNtYXBfY2hlY2tfcG9saWN5ICE9IFNNQVBfQ0hFQ0tfRElTQUJMRUQgJiYKICAgICAgICAgICAg
+ICAgICAgKCh3YWxrICYgUEZFQ19pbXBsaWNpdCkgfHwKICAgICAgICAgICAgICAgICAgICEoZ3Vl
+c3RfY3B1X3VzZXJfcmVncygpLT5lZmxhZ3MgJiBYODZfRUZMQUdTX0FDKSkgKQogICAgICAgICAg
+ICAgICAgIC8qIFVzZXIgZGF0YSBhY2Nlc3MgYW5kIHNtYXA/IEZhaWwuICovCi0tIAoyLjE0LjMK
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
