@@ -1,22 +1,24 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+From: "van der Linden, Frank" <fllinden@amazon.com>
 Subject: Re: [PATCH 1/1] x86/xen: Reset VCPU0 info pointer after
  shared_info remap
-Date: Mon, 7 May 2018 14:57:27 -0400
-Message-ID: <ab71bf69-5074-ca7d-ceb5-1b42b0a70457__10682.2554175325$1525719207$gmane$org@oracle.com>
+Date: Mon, 7 May 2018 19:12:22 +0000
+Message-ID: <93859B55-41C2-4AF2-9CD7-C8A8AB11097F__20659.7931137823$1525720288$gmane$org@amazon.com>
 References: <C508E5F5-024E-4F71-A91E-7BB0BE046F5D@amazon.com>
  <965354d1-e2e7-1764-a14e-bb4258b9ed13@oracle.com>
  <B3C02FE4-651D-4A89-90BB-78E389764688@amazon.com>
+ <ab71bf69-5074-ca7d-ceb5-1b42b0a70457@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=0hr2=h2=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1fFlHL-0001rM-Sn
- for xen-devel@lists.xenproject.org; Mon, 07 May 2018 18:54:31 +0000
-In-Reply-To: <B3C02FE4-651D-4A89-90BB-78E389764688@amazon.com>
+ <srs0=wlnj=h2=amazon.com=prvs=65821367d=fllinden@srs-us1.protection.inumbo.net>)
+ id 1fFlYi-0003H9-8y
+ for xen-devel@lists.xenproject.org; Mon, 07 May 2018 19:12:28 +0000
+In-Reply-To: <ab71bf69-5074-ca7d-ceb5-1b42b0a70457@oracle.com>
 Content-Language: en-US
+Content-ID: <A27F10D3DA154B41A56CB4DB1BFAD916@amazon.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,45 +27,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "van der Linden, Frank" <fllinden@amazon.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
 Cc: "jgross@suse.com" <jgross@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, stable <stable@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDUvMDcvMjAxOCAwMjowMCBQTSwgdmFuIGRlciBMaW5kZW4sIEZyYW5rIHdyb3RlOgo+IEhp
-IEJvcmlzLAo+Cj4gVGhhbmtzIGZvciB0aGUgZmVlZGJhY2suCj4KPiDvu79PbiA1LzcvMTgsIDg6
-MTMgQU0sICJCb3JpcyBPc3Ryb3Zza3kiIDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT4gd3Jv
-dGU6Cj4KPiAgICAgPiBkaWZmIC0tZ2l0IGEvYXJjaC94ODYveGVuL2VubGlnaHRlbl9odm0uYyBi
-L2FyY2gveDg2L3hlbi9lbmxpZ2h0ZW5faHZtLmMKPiAgICAgPiBpbmRleCA2YjQyNGRhMWNlNzUu
-LmM3OGIzZThmYjJlNSAxMDA2NDQKPiAgICAgPiAtLS0gYS9hcmNoL3g4Ni94ZW4vZW5saWdodGVu
-X2h2bS5jCj4gICAgID4gKysrIGIvYXJjaC94ODYveGVuL2VubGlnaHRlbl9odm0uYwo+ICAgICA+
-IEBAIC03MSw2ICs3MSwxOSBAQCBzdGF0aWMgdm9pZCBfX2luaXQgeGVuX2h2bV9pbml0X21lbV9t
-YXBwaW5nKHZvaWQpCj4gICAgID4gIHsKPiAgICAgPiAgCWVhcmx5X21lbXVubWFwKEhZUEVSVklT
-T1Jfc2hhcmVkX2luZm8sIFBBR0VfU0laRSk7Cj4gICAgID4gIAlIWVBFUlZJU09SX3NoYXJlZF9p
-bmZvID0gX192YShQRk5fUEhZUyhzaGFyZWRfaW5mb19wZm4pKTsKPiAgICAgPiArCj4gICAgID4g
-KwkvKgo+ICAgICA+ICsJICogVGhlIHZpcnR1YWwgYWRkcmVzcyBvZiB0aGUgc2hhcmVkX2luZm8g
-cGFnZSBoYXMgY2hhbmdlZCwgc28KPiAgICAgPiArCSAqIHRoZSB2Y3B1X2luZm8gcG9pbnRlciBm
-b3IgVkNQVSAwIGlzIG5vdyBzdGFsZS4KPiAgICAgCj4gICAgIElzIGl0ICJoYXMgY2hhbmdlZCIg
-b3IgImhhcyBjaGFuZ2VkIGlmIGthc2xyIGlzIG9uIj8KPgo+IEl0J3MgImhhcyBjaGFuZ2VkIi4g
-IFNlZSBjb21taXQgNGNhODNkY2Y0ZTNiYzBjOTg4MzZkYmI5NzU1Mzc5MmNhN2VhNTQyOSAuICBJ
-dCdzIGEgd2F5IHRvIG1ha2Uga2FzbHIgd29yaywgYnV0IGl0J3MgZG9uZSByZWdhcmRsZXNzIG9m
-IHdoZXRoZXIgaXQncyBlbmFibGVkIG9yIG5vdC4KCgpJIGNvbXBsZXRlbHkgZm9yZ290IGFib3V0
-IHRoaXMgb25lLgoKCj4gIAo+ICAgICA+ICsJICoKPiAgICAgPiArCSAqIFRoZSBwcmVwYXJlX2Jv
-b3RfY3B1IGNhbGxiYWNrIHdpbGwgcmUtaW5pdGlhbGl6ZSBpdCB2aWEKPiAgICAgPiArCSAqIHhl
-bl92Y3B1X3NldHVwLCBidXQgd2UgY2FuJ3QgcmVseSBvbiB0aGF0IHRvIGJlIGNhbGxlZCBmb3IK
-PiAgICAgPiArCSAqIG9sZCBYZW4gdmVyc2lvbnMgKHhlbl9oYXZlX3ZlY3Rvcl9jYWxsYmFjayA9
-PSAwKS4KPiAgICAgPiArCSAqCj4gICAgID4gKwkgKiBJdCBpcywgaW4gYW55IGNhc2UsIGJhZCB0
-byBoYXZlIGEgc3RhbGUgdmNwdV9pbmZvIHBvaW50ZXIKPiAgICAgPiArCSAqIHNvIHJlc2V0IGl0
-IG5vdy4KPiAgICAgPiArCSAqLwo+ICAgICA+ICsJeGVuX3ZjcHVfaW5mb19yZXNldCgwKTsKPiAg
-ICAgCj4gICAgIAo+ICAgICBXaHkgbm90IHhlbl92Y3B1X3NldHVwKDApPwo+ICAgICAKPiBCYXNp
-Y2FsbHksIEkgd2FudGVkIHRvIGJlIG1pbmltYWxseSBpbnZhc2l2ZS4geGVuX3ZjcHVfc2V0dXAg
-ZG9lcyBhIGxpdHRsZSBtb3JlIHdvcmsgKHRyaWVzIHRvIGRvIHRoZSBWQ1BVIHBsYWNlbWVudCBo
-eXBlcmNhbGwpLCBhbmQgd2lsbCBiZSBjYWxsZWQgbGF0ZXIgaW4gYW55IGNhc2UuIFNvIGRvaW5n
-IGp1c3QgdGhlIGJhc2ljIHhlbl92Y3B1X2luZm9fcmVzZXQgZm9yIFZDUFUgMCBzZWVtcyBsaWtl
-IHRoZSBiZXN0IHdheSB0byBkbyBpdDsgaXQganVzdCByZS1pdGVyYXRlcyB3aGF0IGlzIGRvbmUg
-Zm9yIFZDUFUgMCBlYXJsaWVyIGluIGJvb3QsIHdoaWNoIGlzIGFsc28gYSB2Y3B1X2luZm9fcmVz
-ZXQuCgoKT0ssIGZhaXIgZW5vdWdoLiBUaGlzIHNob3VsZCBnbyB0byBzdGFibGUgYXMgd2VsbCBJ
-IHRoaW5rICg0LjEyKyksCmNvcHlpbmcgdGhlbS4KClJldmlld2VkLWJ5OiBCb3JpcyBPc3Ryb3Zz
-a3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgoKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+DQoNCu+7v09uIDUvNy8xOCwgMTE6NTQgQU0sICJCb3JpcyBPc3Ryb3Zza3kiIDxib3Jpcy5vc3Ry
+b3Zza3lAb3JhY2xlLmNvbT4gd3JvdGU6DQoNCiAgICANCiAgICBPSywgZmFpciBlbm91Z2guIFRo
+aXMgc2hvdWxkIGdvIHRvIHN0YWJsZSBhcyB3ZWxsIEkgdGhpbmsgKDQuMTIrKSwNCiAgICBjb3B5
+aW5nIHRoZW0uDQogICAgDQogICAgUmV2aWV3ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMu
+b3N0cm92c2t5QG9yYWNsZS5jb20+DQogICAgDQpHcmVhdCwgdGhhbmtzIEJvcmlzLg0KDQpGcmFu
+aw0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
