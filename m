@@ -1,20 +1,15 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v3 2/2] SVM: introduce a VM entry helper
-Date: Mon, 7 May 2018 08:31:18 +0200
-Message-ID: <e75cb5d7-c764-bd73-8e68-d1e05b4deed3@suse.com>
-References: <5AEC773002000078001C0BCE@prv1-mh.provo.novell.com>
- <5AEC782902000078001C0BEE@suse.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH for-4.11] x86/pv: Unconditionally hide
+ EFER.SVME from PV guests
+Date: Mon, 07 May 2018 01:03:34 -0600
+Message-ID: <5AEFFA4602000078001C1125@prv1-mh.provo.novell.com>
+References: <1525454911-26552-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=25p9=h2=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fFZg8-0004Nm-IG
- for xen-devel@lists.xenproject.org; Mon, 07 May 2018 06:31:20 +0000
-In-Reply-To: <5AEC782902000078001C0BEE@suse.com>
-Content-Language: de-DE
+In-Reply-To: <1525454911-26552-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,22 +18,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, brian.woods@amd.com, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMDUvMTggMTc6MTEsIEphbiBCZXVsaWNoIHdyb3RlOgo+IE5laXRoZXIgdGhlIHJlZ2lz
-dGVyIHZhbHVlcyBjb3B5aW5nIG5vciB0aGUgdHJhY2UgZW50cnkgZ2VuZXJhdGlvbiBuZWVkCj4g
-ZG9pbmcgaW4gYXNzZW1ibHkuIFRoZSBWTUxPQUQgaW52b2NhdGlvbiBjYW4gYWxzbyBiZSBmdXJ0
-aGVyIGRlZmVycmVkCj4gKGFuZCBjZW50cmFsaXplZCkuIFRoZXJlZm9yZSByZXBsYWNlIHRoZSBz
-dm1fYXNpZF9oYW5kbGVfdm1ydW4oKQo+IGludm9jYXRpb24gd2l0aCBvbmUgb2YgdGhlIG5ldyBo
-ZWxwZXIuCj4gCj4gU2ltaWxhcmx5IG1vdmUgdGhlIFZNIGV4aXQgc2lkZSByZWdpc3RlciB2YWx1
-ZSBjb3B5aW5nIGludG8KPiBzdm1fdm1leGl0X2hhbmRsZXIoKS4KPiAKPiBOb3cgdGhhdCB3ZSBh
-bHdheXMgbWFrZSBpdCBvdXQgdG8gZ3Vlc3QgY29udGV4dCBhZnRlciBWTUxPQUQsCj4gc3ZtX3N5
-bmNfdm1jYigpIG5vIGxvbmdlciBvdmVycmlkZXMgdm1jYl9uZWVkc192bXNhdmUsIG1ha2luZwo+
-IHN2bV92bWV4aXRfaGFuZGxlcigpIHNldHRpbmcgdGhlIGZpZWxkIGVhcmx5IHVubmVjZXNzYXJ5
-Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KClJl
-bGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCgpKdWVyZ2Vu
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDA0LjA1LjE4IGF0IDE5OjI4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gLS0tIGEveGVuL2FyY2gveDg2L3B2L2VtdWwtcHJpdi1vcC5jCj4gKysrIGIveGVuL2Fy
+Y2gveDg2L3B2L2VtdWwtcHJpdi1vcC5jCj4gQEAgLTg2Nyw3ICs4NjcsOSBAQCBzdGF0aWMgaW50
+IHJlYWRfbXNyKHVuc2lnbmVkIGludCByZWcsIHVpbnQ2NF90ICp2YWwsCj4gICAgICAgICAgcmV0
+dXJuIFg4NkVNVUxfT0tBWTsKPiAgCj4gICAgICBjYXNlIE1TUl9FRkVSOgo+IC0gICAgICAgICp2
+YWwgPSByZWFkX2VmZXIoKTsKPiArICAgICAgICAvKiBIaWRlIHVua25vd24gYml0cywgYW5kIHVu
+Y29uZGl0aW9uYWxseSBoaWRlIFNWTUUgZnJvbSBndWVzdHMuICovCj4gKyAgICAgICAgKnZhbCA9
+IHJlYWRfZWZlcigpICYgRUZFUl9LTk9XTl9NQVNLICYgfkVGRVJfU1ZNRTsKPiArICAgICAgICAv
+KiBIaWRlIHRoZSA2NC1iaXQgZmVhdHVyZXMgZnJvbSAzMi1iaXQgZ3Vlc3RzLiAqLwo+ICAgICAg
+ICAgIGlmICggaXNfcHZfMzJiaXRfZG9tYWluKGN1cnJkKSApCj4gICAgICAgICAgICAgICp2YWwg
+Jj0gfihFRkVSX0xNRSB8IEVGRVJfTE1BIHwgRUZFUl9MTVNMRSk7CgpXb3VsZG4ndCBpdCBiZSBi
+ZXR0ZXIgdGhlbiB0byBhbHNvIG1vdmUgdGhlIExNU0xFIGhpZGluZyB1cD8gQW5kIHdoYXQgYWJv
+dXQKU0NFPyBQViBndWVzdHMgbm90IGJlaW5nIGFsbG93ZWQgdG8gd3JpdGUgRUZFUiwgSSB3b3Vs
+ZCB0aGluayB0aGV5IHNob3VsZG4ndApzZWUgYml0cyB0aGV5IGFyZW4ndCBzdXBwb3NlZCB0byBj
+YXJlIGFib3V0IGFuZCBhcmVuJ3QgYWJsZSB0byBzZXQuIElmIHdlCndlcmUgdG8gYWxsb3cgc3Vj
+aCB3cml0ZXMsIEkgYXNzdW1lIGl0IHdvdWxkIG9ubHkgYmUgTlggYW5kIG1heWJlIEZGWFNFCndo
+aWNoIHdlJ2QgcGVybWl0IHRoZSBndWVzdCB0byBjb250cm9sLiBPYnZpb3VzbHkgKEkgdGhpbmsp
+IExNRSBhbmQgTE1BIG91Z2h0CnRvIGJlIHNlZW4gc2V0IGJ5IDY0LWJpdCBndWVzdHMuCgpKYW4K
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
