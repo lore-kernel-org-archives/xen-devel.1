@@ -1,17 +1,14 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH] x86/domain: Drop the only-written
- smap_check_policy infrastructure
-Date: Tue, 8 May 2018 17:26:41 +0100
-Message-ID: <9842f7ca-d82f-16e8-b01c-2d16e4bec720@arm.com>
-References: <1525784584-6812-1-git-send-email-andrew.cooper3@citrix.com>
- <20180508161056.qfqdfrf75ajlwobg@MacBook-Pro-de-Roger.local>
- <dc096ec0-3880-7965-7d45-8c7caea29113@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
+ qcow2
+Date: Tue, 8 May 2018 18:40:26 +0200
+Message-ID: <20180508184026.4f0af76a.olaf@aepfle.de>
+References: <20180507151940.GA31926@aepfle.de>
+ <20180508133143.77e209f2.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0786139232546930344=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <dc096ec0-3880-7965-7d45-8c7caea29113@citrix.com>
-Content-Language: en-US
+In-Reply-To: <20180508133143.77e209f2.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,45 +17,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Jason Andryuk <jandryuk@gmail.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAwOC8wNS8xOCAxNzoyMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAwOC8wNS8x
-OCAxNzoxMCwgUm9nZXIgUGF1IE1vbm7DqSB3cm90ZToKPj4gT24gVHVlLCBNYXkgMDgsIDIwMTgg
-YXQgMDI6MDM6MDRQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4+IGMvcyA0YzVkNzhh
-MTBkICJ4ODYvcGFnZXdhbGs6IFJlLWltcGxlbWVudCB0aGUgcGFnZXRhYmxlIHdhbGtlciIgZHJv
-cHBlZCB0aGUKPj4+IGNvbnN1bWVyIG9mIHNtYXBfcG9saWN5LiAgTG9va2luZyBhdCBjL3MgMzFh
-ZTU4N2U2ZiB3aGljaCBpbnRyb2R1Y2VkIHRoZQo+Pj4gc21hcF9jaGVjayBsb2dpYywgaXQgZXhp
-c3RzIG9ubHkgdG8gd29yayBhcm91bmQgYSBidWcgaW4gZ3Vlc3Rfd2Fsa190YWJsZXMoKQo+Pj4g
-d2FzIHJlc29sdmVkIGJ5IHRoZSBhZm9ybWVudGlvbmVkIGNvbW1pdC4KPj4+Cj4+PiBSZW1vdmUg
-dGhlIHVudXNlZCB2YXJpYWJsZXMgYW5kIGFzc29jaWF0ZWQgaW5mcmFzdHJ1Y3R1cmUuCj4+Pgo+
-Pj4gUmVwb3J0ZWQtYnk6IEphc29uIEFuZHJ5dWsgPGphbmRyeXVrQGdtYWlsLmNvbT4KPj4+IFNp
-Z25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cj4+
-IFJldmlld2VkLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KPj4K
-Pj4+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L2RvbWFpbi5oIGIveGVuL2luY2x1
-ZGUvYXNtLXg4Ni9kb21haW4uaAo+Pj4gaW5kZXggOGI2NjA5Ni4uMTk3ZjhkNiAxMDA2NDQKPj4+
-IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS14ODYvZG9tYWluLmgKPj4+ICsrKyBiL3hlbi9pbmNsdWRl
-L2FzbS14ODYvZG9tYWluLmgKPj4+IEBAIC01OTUsNyArNTgzLDYgQEAgc3RydWN0IGFyY2hfdmNw
-dQo+Pj4gICAKPj4+ICAgc3RydWN0IGd1ZXN0X21lbW9yeV9wb2xpY3kKPj4+ICAgewo+Pj4gLSAg
-ICBzbWFwX2NoZWNrX3BvbGljeV90IHNtYXBfcG9saWN5Owo+Pj4gICAgICAgYm9vbCBuZXN0ZWRf
-Z3Vlc3RfbW9kZTsKPj4gTWF5YmUgZ3Vlc3RfbWVtb3J5X3BvbGljeSBjb3VsZCBiZSBkcm9wcGVk
-IGFuZAo+PiB1cGRhdGVfZ3Vlc3RfbWVtb3J5X3BvbGljeSB1cGRhdGVkIHRvIHRha2UgYSBib29s
-IG5lc3RlZF9tb2RlCj4+IHBhcmFtZXRlcj8KPiAKPiB1cGRhdGVfZ3Vlc3RfbWVtb3J5X3BvbGlj
-eSgpIHN0b3JlcyB0aGUgb2xkIHZhbHVlIGluIHRoZSBwYXNzZWQKPiBzdHJ1Y3R1cmUsIGFuZCB3
-b3VsZCBtb3JlIGFjY3VyYXRlbHkgYmUgdG9nZ2xlX2d1ZXN0X21lbW9yeV9wb2xpY3koKQo+IHdo
-ZW4gaXQgY2FtZSB0byBndWVzdCBtb2RlLgo+IAo+PiBPciB0aGUgZnVuY3Rpb24gY2FuIGJlIGRy
-b3BwZWQgYWx0b2dldGhlciBsaWtlbHkuCj4gCj4gU2FkbHkgbm90IHlldC7CoCBUaGlzIGV4aXN0
-cyBiZWNhdXNlIG9mIFhlbidzIHZpcnR1YWwtYWRkcmVzcyBiYXNlZCBBUEkKPiBmb3IgdGhlIHNo
-YXJlZCBpbmZvIGFuZCB0aW1lIG1hcHBpbmdzLsKgIFRoaXMgQVBJIGlzIGJhZCBhbmQgd3Jvbmcg
-YW5kCj4gd2FudHMgZml4aW5nLsKgIElTVFIgSnVlcmdlbiBhbmQgSnVsaWVuIGhhdmluZyBwbGFu
-cyB0byBkZWFsIHdpdGggdGhpcz8KClRoaXMgc2hvdWxkIGluZGVlZCBiZSBmaXhlZCBwcm9wZXJs
-eSwgSSB3YXMgd2FpdGluZyBzb21lIGFuc3dlciBvbiBteSAKcXVlc3Rpb25zIGJlZm9yZSBhdHRl
-bXB0aW5nIHRvIGdvIGZ1cnRoZXIgb24gYSBmaXggKHNlZSBbMV0gYW5kIFsyXSkuIEkgCmRpZG4n
-dCBoYXZlIGJhbmR3aWR0aCBzbyBmYXIgdG8gcGluZyBvbiB0aGUgc3ViamVjdC4KCkNoZWVycywK
-ClsxXSAKaHR0cHM6Ly93d3cubWFpbC1hcmNoaXZlLmNvbS94ZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcvbXNnMDg4MzYuaHRtbApbMl0gCmh0dHBzOi8vd3d3Lm1haWwtYXJjaGl2ZS5jb20v
-eGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnL21zZzA4ODM1Lmh0bWwKCi0tIApKdWxpZW4g
-R3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============0786139232546930344==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/B.88+wD6yi2RDw0FXoG_Bq9"; protocol="application/pgp-signature"
+
+--Sig_/B.88+wD6yi2RDw0FXoG_Bq9
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Tue, 8 May 2018 13:31:43 +0200
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> On the sending side offset 0xc9 is unlocked on the other fd, which allows=
+ F_WRLCK to succeed:
+>=20
+> It seems on the receiving side some code forgets to unclock offset 0xc9, =
+which causes F_WRLCK to fail:
+
+It looks like the IDE unplug is not permanent.
+On the receiving side the IDE disk is reattached, and it keeps the qcow2 im=
+age busy.
+Does anyone happen to know how to make the unplug permanent, at least for t=
+he blocklayer?
+
+Olaf
+
+--Sig_/B.88+wD6yi2RDw0FXoG_Bq9
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvHS+gAKCRBdQqD6ppg2
+fu9wAKDyf3VPsrgamZFCyeKPfnBJs/VfZwCgp+tLVPW29ptVk07un4c6fpSokS4=
+=0Oh+
+-----END PGP SIGNATURE-----
+
+--Sig_/B.88+wD6yi2RDw0FXoG_Bq9--
+
+
+--===============0786139232546930344==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0786139232546930344==--
