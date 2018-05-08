@@ -1,26 +1,13 @@
-From: Lars Kurth <lars.kurth@citrix.com>
-Subject: Re: [PATCH for-4.11 v3 1/1] Add new add_maintainers.pl
- script to optimise the workflow when using git format-patch with
- get_maintainer.pl
-Date: Tue, 8 May 2018 11:25:14 +0000
-Message-ID: <D025B6D5-AD5B-49D9-9261-AAB813181544@citrix.com>
-References: <cover.1525421849.git.lars.kurth@citrix.com>
- <de27a6551f975c91ff38d625063e843b7612afb5.1525421849.git.lars.kurth@citrix.com>
- <23276.39898.414930.954246@mariner.uk.xensource.com>
- <0C602399-CAE0-450F-A91F-54FC8EE6FB39@citrix.com>
- <23281.32907.141131.652712@mariner.uk.xensource.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
+ qcow2
+Date: Tue, 8 May 2018 13:31:43 +0200
+Message-ID: <20180508133143.77e209f2.olaf@aepfle.de>
+References: <20180507151940.GA31926@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1897634968725594642=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rn6r=h3=citrix.com=prvs=6599bf3a2=lars.kurth@srs-us1.protection.inumbo.net>)
- id 1fG0ke-0005mj-Bs
- for xen-devel@lists.xenproject.org; Tue, 08 May 2018 11:25:48 +0000
-In-Reply-To: <23281.32907.141131.652712@mariner.uk.xensource.com>
-Content-Language: en-US
-Content-ID: <99C4B3C252B98241B654D423C78A8DFD@citrix.com>
+In-Reply-To: <20180507151940.GA31926@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,78 +16,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <Ian.Jackson@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, George Dunlap <George.Dunlap@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-DQoNCu+7v09uIDA4LzA1LzIwMTgsIDExOjQ4LCAiSWFuIEphY2tzb24iIDxpYW4uamFja3NvbkBj
-aXRyaXguY29tPiB3cm90ZToNCg0KICAgIExhcnMgS3VydGggd3JpdGVzICgiUmU6IFtQQVRDSCBm
-b3ItNC4xMSB2MyAxLzFdIEFkZCBuZXcgYWRkX21haW50YWluZXJzLnBsIHNjcmlwdCB0byBvcHRp
-bWlzZSB0aGUgd29ya2Zsb3cgd2hlbiB1c2luZyBnaXQgZm9ybWF0LXBhdGNoIHdpdGggZ2V0X21h
-aW50YWluZXIucGwiKToNCiAgICA+IE9uIDA0LzA1LzIwMTgsIDE4OjQzLCAiSWFuIEphY2tzb24i
-IDxpYW4uamFja3NvbkBjaXRyaXguY29tPiB3cm90ZToNCiAgICA+ICAgICA+ICtteSAkcGF0Y2hf
-cHJlZml4ID0gIjAiOyAjIFVzZSBhIDAsIHN1Y2ggdGhhdCB2KiBkb2VzIG5vdCBnZXQgcGlja2Vk
-IHVwDQogICAgPiAgICAgPiArICAgICAgICAgICAgICAgICAgICAgICAgIyBPYnZpb3VzbHkgdGhp
-cyB3aWxsIG9ubHkgd29yayBmb3Igc2VyaWVzIHdpdGgNCiAgICA+ICAgICA+ICsgICAgICAgICAg
-ICAgICAgICAgICAgICAjIDwgOTk5IHBhdGNoZXMsIHdoaWNoIHNob3VsZCBiZSBmaW5lDQogICAg
-PiAgICAgDQogICAgPiAgICAgSSBkb24ndCB1bmRlcnN0YW5kIHRoZSBwdXJwb3NlIG9mIHRoaXM6
-DQogICAgPiAgDQogICAgPiBUaGlzIGlzIGEgYml0IG9mIGEgaGFjayEgDQogICAgPiANCiAgICA+
-IFRoZXJlIGFyZSBzZXZlcmFsIGRpZmZlcmVudCB1c2FnZSBwYXR0ZXJucyBmb3IgZy1mLXAgd2hl
-biB3b3JraW5nIG9uIGEgc2VyaWVzLA0KICAgID4gd2hpY2ggcmVzdWx0IGluICRwYXRjaF9kaXIg
-YmVpbmcgdXNlZCBkaWZmZXJlbnRseS4gSW4gb25lIGNhc2UNCiAgICA+IGEpIHRoZSB1c2VyIHN0
-b3JlcyBwYXRjaGVzIGZvciBtdWx0aXBsZSBzZXJpZXMgaW4gJHBhdGNoX2Rpcg0KICAgID4gVGh1
-cywgJHBhdGNoZGlyIG1heSBjb250YWluIGZpbGVzIHN0YXJ0aW5nIHdpdGggMDAwMCosIDAwMDEq
-LCAuLi4gdjEtMDAwKiwgdjItMDAwKg0KICAgIA0KICAgIE9NRy4gIEl0IGhhZCBub3QgZXZlbiBv
-Y2N1cnJlZCB0byBtZSB0aGF0IGFueW9uZSB3b3VsZCBkbyB0aGF0LiAgQnV0IEkNCiAgICB0aGlu
-ayB0aGlzIHdvcmtmbG93IGNob2ljZSBpcyBpbmRlcGVuZGVudCBvZiAtLXJlcm9sbC1jb3VudCwg
-d2hpY2ggaXMNCiAgICBtYWlubHkgdXNlZCB0byBjb250cm9sIHBhdGNoIHN1YmplY3QgbGluZXMu
-DQogICAgDQogICAgQSB3b3JrZmxvdyB3aGVyZSAqZGlmZmVyZW50KiBwYXRjaCBzZXJpZXMgYXJl
-IG1pbmdsZWQgaW4gdGhlIHNhbWUNCiAgICBkaXJlY3RvcnkgY2Fubm90IGJlIHN1cHBvcnRlZCwg
-YmVjYXVzZSB3aGF0IHdoZW4gdGhlaXIgcmVyb2xsIGNvdW50cw0KICAgIGNvbGxpZGU/ICBTbyB0
-aGVzZSBtdXN0IGJlIGRpZmZlcmVudCB2ZXJzaW9ucyAoZGlmZmVyZW50IHJlcm9sbHMpIG9mDQog
-ICAgdGhlIHNhbWUgc2VyaWVzLg0KICAgIA0KICAgIEkgc3VnZ2VzdCB0aGUgZm9sbG93aW5nIGFw
-cHJvYWNoOg0KICAgIA0KICAgIFRlc3Qgd2hldGhlciB2PHJlcm9sbC1jb3VudD4tMDAwMC1jb3Zl
-ci1sZXR0ZXIucGF0Y2ggZXhpc3RzLiAgSWYgaXQNCiAgICBkb2VzLCBleHBlY3QgZXZlcnkgcGF0
-Y2ggdG8gc3RhcnQgd2l0aCB2PHJlcm9sbC1jb3VudD4uICBJZiBpdCBkb2VzDQogICAgbm90LCBl
-eHBlY3Qgc2ltcGx5IDAwMDAtY292ZXItbGV0dGVyLnBhdGNoIHRvIGV4aXN0LCBhbmQgZXZlcnkg
-cGF0Y2gNCiAgICB0byBzdGFydCB3aXRoIGp1c3QgdGhlIHBhdGNoIG51bWJlci4NCiAgICANCiAg
-ICBTbyBJIGd1ZXNzICRwYXRjaF9wcmVmaXggd291bGQgYmUgJ1swLTldJyBvciAidiR7cmVyb2xs
-X2NvdW50fS1bMC05XSIuDQoNClRoYXQgbWFrZXMgc2Vuc2UNCiAgICANCiAgICA+ICAgICA+ICtp
-ZiAoJHJlcm9sbGNvdW50ID4gMCkgew0KICAgID4gICAgID4gKyAgICAkcGF0Y2hfcHJlZml4ID0g
-InYiLiRyZXJvbGxjb3VudDsNCiAgICA+ICAgICA+ICt9DQogICAgPiAgICAgLi4uDQogICAgPiAg
-ICAgPiArbXkgJHBhdHRlcm4gPSAkcGF0Y2hfZGlyLicvJy4kcGF0Y2hfcHJlZml4LicqJy4kcGF0
-Y2hfZXh0Ow0KICAgID4gICAgID4gK3ByaW50ICJUaGVuIHBlcmZvcm06XG4iLg0KICAgID4gICAg
-ID4gKyAgICAgICJnaXQgc2VuZC1lbWFpbCAtdG8geGVuLWRldmVsXEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZyAiLg0KICAgID4gICAgID4gKyAgICAgICRwYXRjaF9kaXIuJy8nLiRwYXRjaF9wcmVmaXgu
-IioucGF0Y2giLiJcbiI7DQogICAgPiAgICAgDQogICAgPiAgICAgV2hhdCBmaWxlcyBtYXRjaGlu
-ZyAqLnBhdGNoIGV4aXN0IGhlcmUgdGhhdCBzaG91bGQgbm90IGJlIHByb2Nlc3NlZCA/DQogICAg
-PiAgICAgSWYgdGhlIGFuc3dlciBpcyBub25lIHRoZW4gJHBhdGNoX3ByZWZpeCBpcyByZWR1bmRh
-bnQsIEkgdGhpbmsgPw0KICAgID4gDQogICAgPiBXZWxsLCBpdCBkZXBlbmRzLiBHLXMtbSB3aWxs
-IHNlbmQgZXZlcnl0aGluZyBpbiAkcGF0Y2hfZGlyLg0KICAgID4gSSBoYXZlIG5vdCBjaGVja2Vk
-IHdoZXRoZXIgaXQgaWdub3JlcyBiYWNrdXBzICh+IC5iYWspLCBidXQgSSBhc3N1bWUgaXQgZG9l
-cy4NCiAgICA+IEluIGFueSBjYXNlLCBmb3Igc2NlbmFyaW8gYTEpIGFuZCBhMikgSSBkbyBuZWVk
-IHRvIHNlbGVjdCB3aGljaCBmaWxlcw0KICAgID4gdG8gc2VsZWN0IGluIGctcy1lLg0KICAgIA0K
-ICAgIEZvciB0aGUgcHVycG9zZXMgb2YgZG9jdW1lbnRhdGlvbiBhbmQgaW5mb3JtYXRpdmUgbWVz
-c2FnZXMgbGlrZSB0aGlzDQogICAgb25lLCBJIHRoaW5rIHlvdSBjYW4gYXNzdW1lIHdvcmtmbG93
-IChiKS4gIEkgdGhpbmsgd29ya2Zsb3cgKGEpIGlzIG5vdA0KICAgIHRvIGJlIHJlY29tbWVuZGVk
-Lg0KICAgIA0KICAgIChBbnl3YXksIHdobyBrZWVwcyB0aGVpciBnLWYtcCBvdXRwdXQgZGlyZWN0
-b3JpZXMgPyAgSSBkb24ndC4uLikNCg0KU3VyZTogSSB0aGluayByaWdodCBub3cgdGhlIGRvY3Vt
-ZW50YXRpb24gYW5kIG1lc3NhZ2VzIGRvbid0IGNvdmVyIHRoaXMuIFNvIGlmIHdlIG1vdmUgdG8g
-dGhlIGFwcHJvYWNoIHlvdSBzdWdnZXN0ZWQsIGFsbCBzaG91bGQgYmUgZmluZS4NCiAgICANCiAg
-ICA+ICAgICA+ICsgICAgaWYgKCEgLWUgJGdldF9tYWludGFpbmVyKSB7DQogICAgPiAgICAgPiAr
-ICAgICAgICBkaWUgIiR0b29sOiBUaGUgdG9vbCByZXF1aXJlcyAkZ2V0X21haW50YWluZXJcbiI7
-DQogICAgPiAgICAgDQogICAgPiAgICAgSSBzdGlsbCBkb24ndCBsaWtlIHRoaXMgY2hlY2suICBX
-aGF0IGlmIHRoZSB1c2VyIHNwZWNpZmllcyBhbg0KICAgID4gICAgIGltcGxlbWVudGF0aW9uIG9m
-ICRnZXRfbWFpbnRhaW5lciB3aGljaCBpcyBvbiB0aGUgUEFUSCA/DQogICAgPiANCiAgICA+IFRo
-ZSB3YXkgZ2V0X21haW50YWluZXIucGwgd29ya3MgaXMgdGhhdCBpdCBoYXMgdG8gYmUgY2FsbGVk
-IGluIHRoZSByb290DQogICAgPiBkaXJlY3Rvcnkgb2YgdGhlIFhlbiBhbmQgTGludXggdHJlZXMu
-IFRoZXJlIGFyZSBzb21lIGNoZWNrcyBpbiB0aGUNCiAgICA+IHRvb2wgdGhhdCB0aHJvdyBhbiBl
-cnJvciB3aGVuIHlvdSBjYWxsIGl0IGZyb20gYW5vdGhlciBsb2NhdGlvbi4NCiAgICANCiAgICBZ
-b3UgaGF2ZSBtaXN1bmRlcnN0b29kIG15IHJlbWFyay4gIEkgYW0gbm90IHRhbGtpbmcgYWJvdXQg
-dGhlIGN3ZC4NCiAgICANCiAgICBJIG1lYW4sIGlmIHRoZSB1c2VyIHNheXMgLS1nZXQtbWFpbnRh
-aW5lcj1nZW5lcmljLWdldC1tYWludGFpZW5yDQogICAgd2hlcmUgL3Vzci9iaW4vZ2VuZXJpYy1n
-ZXQtbWFpbnRhaWVuciBleGlzdHMuDQoNCk9LOiBzaW1wbHkgcmVtb3ZpbmcgdGhlIGNoZWNrIHdv
-dWxkIGp1c3QgZG8gdGhpcw0KDQpMYXJzIA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+--===============1897634968725594642==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/_Sj4PCLc8OxRmZEACcEZkAY"; protocol="application/pgp-signature"
+
+--Sig_/_Sj4PCLc8OxRmZEACcEZkAY
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 7 May 2018 17:19:46 +0200
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> What I gathered during debugging so far is that somehow qemu on the recei=
+ving side locks a region twice:
+
+After further debugging with many wild printfs:
+On the receiving side blockdev_init sets BDRV_O_INACTIVE because RUN_STATE_=
+INMIGRATE is true.
+BDRV_O_INACTIVE causes bdrv_is_writable to return false.
+As a result bdrv_format_default_perms does not set BLK_PERM_WRITE in perms.
+
+On the sending side offset 0xc9 is unlocked on the other fd, which allows F=
+_WRLCK to succeed:
+2018-05-08T11:20:54.491168Z qemu-system-i386: qemu_lock_fcntl: 28 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:20:54.492162Z qemu-system-i386: qemu_lock_fd_test: 28 c9 1 F_=
+WRLCK>F_UNLCK 0 Success
+2018-05-08T11:20:54.494752Z qemu-system-i386: qemu_lock_fcntl: 28 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.189455Z qemu-system-i386: qemu_lock_fcntl: 28 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.190460Z qemu-system-i386: qemu_lock_fd_test: 28 c9 1 F_=
+WRLCK>F_UNLCK 0 Success
+2018-05-08T11:21:05.192726Z qemu-system-i386: qemu_lock_fcntl: 28 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.194298Z qemu-system-i386: qemu_lock_fcntl: 28 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.195079Z qemu-system-i386: qemu_lock_fd_test: 28 c9 1 F_=
+WRLCK>F_UNLCK 0 Success
+2018-05-08T11:21:05.197123Z qemu-system-i386: qemu_lock_fcntl: 28 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.199378Z qemu-system-i386: qemu_lock_fcntl: 28 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.201108Z qemu-system-i386: qemu_lock_fcntl: 28 c9 1 F_UN=
+LCK>F_UNLCK 0 Success
+2018-05-08T11:21:05.344335Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_UN=
+LCK>F_UNLCK 0 Success
+2018-05-08T11:21:05.345969Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.346836Z qemu-system-i386: qemu_lock_fd_test: 27 c9 1 F_=
+WRLCK>F_UNLCK 0 Success
+2018-05-08T11:21:05.348937Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.359691Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.360632Z qemu-system-i386: qemu_lock_fd_test: 27 c9 1 F_=
+WRLCK>F_UNLCK 0 Success
+2018-05-08T11:21:05.363221Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.364781Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:05.365607Z qemu-system-i386: qemu_lock_fd_test: 27 c9 1 F_=
+WRLCK>F_UNLCK 0 Success
+2018-05-08T11:21:05.367794Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+
+It seems on the receiving side some code forgets to unclock offset 0xc9, wh=
+ich causes F_WRLCK to fail:
+2018-05-08T11:21:52.108809Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_UN=
+LCK>F_UNLCK 0 Success
+2018-05-08T11:21:52.112193Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:52.113028Z qemu-system-i386: qemu_lock_fd_test: 27 c9 1 F_=
+WRLCK>F_UNLCK 0 Success
+2018-05-08T11:21:52.115401Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:52.122037Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:52.122886Z qemu-system-i386: qemu_lock_fd_test: 27 c9 1 F_=
+WRLCK>F_UNLCK 0 Success
+2018-05-08T11:21:52.125189Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:52.126969Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:52.127801Z qemu-system-i386: qemu_lock_fd_test: 27 c9 1 F_=
+WRLCK>F_UNLCK 0 Success
+2018-05-08T11:21:52.130109Z qemu-system-i386: qemu_lock_fcntl: 27 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:52.859199Z qemu-system-i386: qemu_lock_fcntl: 39 c9 1 F_UN=
+LCK>F_UNLCK 0 Success
+2018-05-08T11:21:52.862010Z qemu-system-i386: qemu_lock_fcntl: 39 c9 1 F_RD=
+LCK>F_RDLCK 0 Success
+2018-05-08T11:21:52.862673Z qemu-system-i386: qemu_lock_fd_test: 39 c9 1 F_=
+WRLCK>F_RDLCK 0 Success
+2018-05-08T11:21:53.112935Z qemu-system-i386: qemu_lock_fd_test: 39 c9 1 F_=
+WRLCK>F_RDLCK 0 Success
+2018-05-08T11:21:53.363246Z qemu-system-i386: qemu_lock_fd_test: 39 c9 1 F_=
+WRLCK>F_RDLCK 0 Success
+2018-05-08T11:21:53.615668Z qemu-system-i386: qemu_lock_fcntl: 39 c9 1 F_UN=
+LCK>F_UNLCK 0 Success
+2018-05-08T11:21:53.616426Z qemu-system-i386: qemu_lock_fcntl: 39 c9 1 F_UN=
+LCK>F_UNLCK 0 Success
+2018-05-08T11:21:53.616816Z qemu-system-i386: qemu_lock_fcntl: 39 c9 1 F_UN=
+LCK>F_UNLCK 0 Success
+
+
+It is unclear why that was never noticed in xen-4.10, qemu-2.9 did not have=
+ that bug.
+Also, if a KVM or Xen guest is migrated should make zero difference for the=
+ qcow2 driver...
+
+
+Olaf
+
+--Sig_/_Sj4PCLc8OxRmZEACcEZkAY
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvGKnwAKCRBdQqD6ppg2
+fuhDAJ45iT5aqW2ySWDdSvYDzxMCCmg2QACgtZkgms38Ngl0P406Y5Yd8dBgths=
+=OJpN
+-----END PGP SIGNATURE-----
+
+--Sig_/_Sj4PCLc8OxRmZEACcEZkAY--
+
+
+--===============1897634968725594642==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1897634968725594642==--
