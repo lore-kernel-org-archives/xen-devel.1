@@ -1,19 +1,19 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 3/3] xen: share start flags between PV
- and PVH
-Date: Wed, 9 May 2018 14:47:26 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1805091447150.9199__18372.1767076806$1525902372$gmane$org@sstabellini-ThinkPad-X260>
-References: <20180509102129.14832-1-roger.pau@citrix.com>
- <20180509102129.14832-4-roger.pau@citrix.com>
+From: John Thomson <lists@johnthomson.fastmail.com.au>
+Subject: staging GCC 8.1.0 build warnings
+Date: Thu, 10 May 2018 09:38:26 +1000
+Message-ID: <1525909106.2372757.1366819088.5605C10E@webmail.messagingengine.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1392289433-1525902447=:9199"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ecyh=h4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fGWvo-0003Db-EB
- for xen-devel@lists.xenproject.org; Wed, 09 May 2018 21:47:28 +0000
-In-Reply-To: <20180509102129.14832-4-roger.pau@citrix.com>
+ <srs0=wtz3=h4=johnthomson.fastmail.com.au=lists@srs-us1.protection.inumbo.net>)
+ id 1fGYfF-0003OX-F2
+ for xen-devel@lists.xenproject.org; Wed, 09 May 2018 23:38:30 +0000
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.nyi.internal (Postfix) with ESMTP id E504C21BC7
+ for <xen-devel@lists.xenproject.org>; Wed,  9 May 2018 19:38:26 -0400 (EDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,139 +22,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1392289433-1525902447=:9199
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Wed, 9 May 2018, Roger Pau Monne wrote:
-> Use a global variable to store the start flags for both PV and PVH.
-> This allows the xen_initial_domain macro to work properly on PVH.
-> 
-> Note that ARM is also switched to use the new variable.
-> 
-> Signed-off-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> ---
-> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-> Cc: Juergen Gross <jgross@suse.com>
-> Cc: Stefano Stabellini <sstabellini@kernel.org>
-> Cc: xen-devel@lists.xenproject.org
-> ---
-> Changes since v1:
->  - Switch ARM to also use the new xen_start_flags.
-
-The ARM side looks good
-
-
-> ---
->  arch/arm/xen/enlighten.c     | 7 ++++---
->  arch/x86/xen/enlighten.c     | 7 +++++++
->  arch/x86/xen/enlighten_pv.c  | 1 +
->  arch/x86/xen/enlighten_pvh.c | 1 +
->  include/xen/xen.h            | 4 +++-
->  5 files changed, 16 insertions(+), 4 deletions(-)
-> 
-> diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
-> index ba7f4c8f5c3e..a99d5edf7bdf 100644
-> --- a/arch/arm/xen/enlighten.c
-> +++ b/arch/arm/xen/enlighten.c
-> @@ -59,6 +59,9 @@ struct xen_memory_region xen_extra_mem[XEN_EXTRA_MEM_MAX_REGIONS] __initdata;
->  
->  static __read_mostly unsigned int xen_events_irq;
->  
-> +uint32_t xen_start_flags;
-> +EXPORT_SYMBOL(xen_start_flags);
-> +
->  int xen_remap_domain_gfn_array(struct vm_area_struct *vma,
->  			       unsigned long addr,
->  			       xen_pfn_t *gfn, int nr,
-> @@ -282,9 +285,7 @@ void __init xen_early_init(void)
->  	xen_setup_features();
->  
->  	if (xen_feature(XENFEAT_dom0))
-> -		xen_start_info->flags |= SIF_INITDOMAIN|SIF_PRIVILEGED;
-> -	else
-> -		xen_start_info->flags &= ~(SIF_INITDOMAIN|SIF_PRIVILEGED);
-> +		xen_start_flags |= SIF_INITDOMAIN|SIF_PRIVILEGED;
->  
->  	if (!console_set_on_cmdline && !xen_initial_domain())
->  		add_preferred_console("hvc", 0, NULL);
-> diff --git a/arch/x86/xen/enlighten.c b/arch/x86/xen/enlighten.c
-> index c9081c6671f0..3b5318505c69 100644
-> --- a/arch/x86/xen/enlighten.c
-> +++ b/arch/x86/xen/enlighten.c
-> @@ -64,6 +64,13 @@ struct shared_info xen_dummy_shared_info;
->  __read_mostly int xen_have_vector_callback;
->  EXPORT_SYMBOL_GPL(xen_have_vector_callback);
->  
-> +/*
-> + * NB: needs to live in .data because it's used by xen_prepare_pvh which runs
-> + * before clearing the bss.
-> + */
-> +uint32_t xen_start_flags __attribute__((section(".data"))) = 0;
-> +EXPORT_SYMBOL(xen_start_flags);
-> +
->  /*
->   * Point at some empty memory to start with. We map the real shared_info
->   * page as soon as fixmap is up and running.
-> diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-> index c36d23aa6c35..04a6914b8b85 100644
-> --- a/arch/x86/xen/enlighten_pv.c
-> +++ b/arch/x86/xen/enlighten_pv.c
-> @@ -1227,6 +1227,7 @@ asmlinkage __visible void __init xen_start_kernel(void)
->  		return;
->  
->  	xen_domain_type = XEN_PV_DOMAIN;
-> +	xen_start_flags = xen_start_info->flags;
->  
->  	xen_setup_features();
->  
-> diff --git a/arch/x86/xen/enlighten_pvh.c b/arch/x86/xen/enlighten_pvh.c
-> index e039d1809809..2653eb9b5dd8 100644
-> --- a/arch/x86/xen/enlighten_pvh.c
-> +++ b/arch/x86/xen/enlighten_pvh.c
-> @@ -98,6 +98,7 @@ void __init xen_prepare_pvh(void)
->  	}
->  
->  	xen_pvh = 1;
-> +	xen_start_flags = pvh_start_info.flags;
->  
->  	wrmsr_safe(MSR_MTRRdefType, 0x800 | MTRR_TYPE_WRBACK, 0);
->  
-> diff --git a/include/xen/xen.h b/include/xen/xen.h
-> index 9d4340c907d1..15fa01c50a53 100644
-> --- a/include/xen/xen.h
-> +++ b/include/xen/xen.h
-> @@ -29,8 +29,10 @@ extern bool xen_pvh;
->  #include <xen/interface/xen.h>
->  #include <asm/xen/hypervisor.h>
->  
-> +extern uint32_t xen_start_flags;
-> +
->  #define xen_initial_domain()	(xen_domain() && \
-> -				 xen_start_info && xen_start_info->flags & SIF_INITDOMAIN)
-> +				 (xen_start_flags & SIF_INITDOMAIN))
->  #else  /* !CONFIG_XEN_DOM0 */
->  #define xen_initial_domain()	(0)
->  #endif	/* CONFIG_XEN_DOM0 */
-> -- 
-> 2.17.0
-> 
---8323329-1392289433-1525902447=:9199
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1392289433-1525902447=:9199--
+SGksClRyeWluZyB0byBidWlsZCBYZW4gc3RhZ2luZyB3aXRoIEdDQyA4LjEuMCBhbmQgZmFjaW5n
+IHNvbWUgb2YgdGhlIG5ldyB3YXJuaW5nczoKCkZvciBPVk1GLCBJIHVzZWQgdGhlc2UgdGhyZWUg
+Y29tbWl0czoKaHR0cHM6Ly9naXRodWIuY29tL3RpYW5vY29yZS9lZGsyL2NvbXBhcmUvMWQyMTJh
+ODNkZjBlYWYzMmE2ZjVkNDE1OWJlYjJkNzc4MzJlMDIzMV4uLi45ZGUzMDY3MDEzMTJmOTg2Yzk2
+MzhjYjgxOWQzZjFmODQ4ZDU1Y2FiLnBhdGNoCjFkMjEyYTgzZGYwZWFmMzJhNmY1ZDQxNTliZWIy
+ZDc3ODMyZTAyMzEKOTIyMjE1NGFlN2IzZWVmNzVhZTg4Y2RiNTYxNTgyNTYyMjdjYjkyOQo5ZGUz
+MDY3MDEzMTJmOTg2Yzk2MzhjYjgxOWQzZjFmODQ4ZDU1Y2FiCgoKRm9yIElQWEUsIG9uZSBvZiB0
+aGVzZSBwYXRjaGVzOgpodHRwOi8vbGlzdHMuaXB4ZS5vcmcvcGlwZXJtYWlsL2lweGUtZGV2ZWwv
+MjAxOC1BcHJpbC8wMDYxNDYuaHRtbApodHRwczovL2J1aWxkLm9wZW5zdXNlLm9yZy9wYWNrYWdl
+L3ZpZXdfZmlsZS9vcGVuU1VTRTpGYWN0b3J5L3FlbXUvaXB4ZS1lZmktZ3VhcmQtc3RybmNweS13
+aXRoLWdjYy13YXJuaW5nLWlnbm9yZS1wcmFnbWEucGF0Y2g/ZXhwYW5kPTEKCkkgd2FzIHN0aWxs
+IHVuYWJsZSB0byBidWlsZCBJUFhFIGF0IHRoZSBYZW4gc2VsZWN0ZWQgY29tbWl0IGluIHRvb2xz
+L2Zpcm13YXJlL2V0aGVyYm9vdC9NYWtlZmlsZTpJUFhFX0dJVF9UQUcsIHdpdGggRXJyb3JzOgpb
+QlVJTERdIGJpbi9uZXRkZXZpY2UubwpBc3NlbWJsZXIgbWVzc2FnZXMKanVuayBhdCBlbmQgb2Yg
+bGluZSwgZmlyc3QgdW5yZWNvZ25pemVkIGNoYXJhY3RlciBpcyBgQCcKY2FuJ3QgcmVzb2x2ZSBg
+X190YWJsZV9lbnRyaWVzLjI3MjAnIHsudGJsLm5ldF9kZXZpY2VfY29uZmlndXJhdG9ycy45OSBz
+ZWN0aW9ufSAtIGBfX3RhYmxlX2VudHJpZXMuMjcyMicgey50YmwubmV0X2RldmljZV9jb25maWd1
+cmF0b3JzLjAwIHNlY3Rpb259CmNhbid0IHJlc29sdmUgYF9fdGFibGVfZW50cmllcy4yNzk2JyB7
+LnRibC5uZXRfZGV2aWNlX2NvbmZpZ3VyYXRvcnMuOTkgc2VjdGlvbn0gLSBgX190YWJsZV9lbnRy
+aWVzLjI3OTgnIHsudGJsLm5ldF9kZXZpY2VfY29uZmlndXJhdG9ycy4wMCBzZWN0aW9ufQoKSSBl
+bmRlZCB1cCB1c2luZyBJUFhFIG1hc3RlciBhbmQgdGhlIE9wZW5TVVNFIGlweGUtZWZpLWd1YXJk
+LXN0cm5jcHktd2l0aC1nY2Mtd2FybmluZy1pZ25vcmUtcHJhZ21hLnBhdGNoCkkgaGF2ZSBub3Qg
+Zm9sbG93ZWQgdGhpcyB1cCB0byBmaW5kIHdoaWNoIGNvbW1pdCBmaXhlcyBteSBidWlsZCB5ZXQu
+CgpIb3cgY2xvc2UgdG8gcmVhZHkgYXJlIHRoZSBzdGFuZGFsb25lIElQWEUgcGF0Y2hlcz8KCkZv
+ciBRRU1VLCB0aGlzIGNvbW1pdDoKaHR0cHM6Ly9naXRodWIuY29tL3FlbXUvcWVtdS9jb21taXQv
+ODRjODY4ZjZiOGY4YzFiZTlkM2Q2NWRmOTNjZjAwYjMwODIxNDAxYy5wYXRjaAo4NGM4NjhmNmI4
+ZjhjMWJlOWQzZDY1ZGY5M2NmMDBiMzA4MjE0MDFjCgoKSW4gdG9vbHMvb2NhbWwvbGlicy94Yy94
+ZW5jdHJsX3N0dWJzLmMKY2hhciBlcnJvcl9zdHJbMTAyOF07CgogQ0MgICAgICAgeGVuY3RybF9z
+dHVicy5vCnhlbmN0cmxfc3R1YnMuYzogSW4gZnVuY3Rpb24gJ2ZhaWx3aXRoX3hjJzoKeGVuY3Ry
+bF9zdHVicy5jOjY1OjE3OiBlcnJvcjogJ3NucHJpbnRmJyBvdXRwdXQgbWF5IGJlIHRydW5jYXRl
+ZCBiZWZvcmUgdGhlIGxhc3QgZm9ybWF0IGNoYXJhY3RlciBbLVdlcnJvcj1mb3JtYXQtdHJ1bmNh
+dGlvbj1dCiAgICAgICIlZDogJXM6ICVzIiwgZXJyb3ItPmNvZGUsCiAgICAgICAgICAgICAgICAg
+Xgp4ZW5jdHJsX3N0dWJzLmM6NjQ6NDogbm90ZTogJ3NucHJpbnRmJyBvdXRwdXQgNiBvciBtb3Jl
+IGJ5dGVzIChhc3N1bWluZyAxMDI5KSBpbnRvIGEgZGVzdGluYXRpb24gb2Ygc2l6ZSAxMDI4CiAg
+ICBzbnByaW50ZihlcnJvcl9zdHIsIHNpemVvZihlcnJvcl9zdHIpLAogICAgXn5+fn5+fn5+fn5+
+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KICAgICAgIiVkOiAlczogJXMiLCBlcnJvci0+Y29k
+ZSwKICAgICAgfn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KICAgICAgeGNfZXJyb3JfY29kZV90
+b19kZXNjKGVycm9yLT5jb2RlKSwKICAgICAgfn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+
+fn5+fn4KICAgICAgZXJyb3ItPm1lc3NhZ2UpOwogICAgICB+fn5+fn5+fn5+fn5+fn4KY2MxOiBh
+bGwgd2FybmluZ3MgYmVpbmcgdHJlYXRlZCBhcyBlcnJvcnMKCkkgY2hhbmdlZCB0aGVzZSwgYnV0
+IGFtIG5vdCBzdXJlIGlmIHRoaXMgaXMgY29ycmVjdD8KY2hhciBlcnJvcl9zdHJbWENfTUFYX0VS
+Uk9SX01TR19MRU4gKyA2XQpzaXplb2YoZXJyb3Jfc3RyKSAtIDEgaW4gdGhlIHRocmVlIHNucHJp
+bnRmCgoKL2J1aWxkL3hlbi1naXQvc3JjL3hlbi9zdHViZG9tL3RwbV9lbXVsYXRvci14ODZfNjQv
+dHBtL3RwbV9kZXByZWNhdGVkLmM6NDM3Ojc6IGVycm9yOiAnbWVtY21wJyByZWFkaW5nIDIwIGJ5
+dGVzIGZyb20gYSByZWdpb24gb2Ygc2l6ZSA4IFstV2Vycm9yPXN0cmluZ29wLW92ZXJmbG93PV0K
+ICAgaWYgKG1lbWNtcCgmYjEsICZuZXdBdXRoTGluaywgc2l6ZW9mKFRQTV9ITUFDKSkpIHsKICAg
+ICAgIF5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KCk5vdCBzdXJl
+IGhvdyB0byBhcHByb2FjaCB0aGlzLCBJIGRpc2FibGVkIHRoZSB2dHBtIHN0dWJkb21zIGluIG15
+IGJ1aWxkcyBmb3Igbm93LgoKCgpDaGVlcnMsCi0tIAogIEpvaG4gVGhvbXNvbgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
