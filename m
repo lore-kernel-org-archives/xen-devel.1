@@ -1,23 +1,19 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH v3 10/10] xen/arm: Enable errata for
- secondary CPU on hotplug after the boot
-Date: Thu, 10 May 2018 18:24:28 +0200
-Message-ID: <6c0ba4fadcdb650e3a8651f13781da9caaae251e.camel@suse.com>
-References: <20180427171258.28852-1-mirela.simonovic@aggios.com>
- <20180427171258.28852-11-mirela.simonovic@aggios.com>
- <ffc6351e-350c-b1c9-ea3e-fd4936701eb1@arm.com>
- <CAKPH-NiTLoOdYgpcWiM1qXHXaC=znAvMp0HHGQo-9mfegz2LcA@mail.gmail.com>
- <c713cc00-ace2-f528-563f-175657dccb12@arm.com>
- <CAKPH-NhUyxO1vOJnJPFayw71F5SfY87vWchoQybcH1e6Z4Mg2A@mail.gmail.com>
- <CAKPH-NhZhcvAdnZ_PyCUe3oSEokZnoBi8aPwfYbpPHioGgU9KA@mail.gmail.com>
- <4dec77ef3b2a940453e1bc112e6dae21cb99af18.camel@suse.com>
- <CAKPH-NicJOBS7mLYSvo-Z62yxNuFbMZfZR7BdfUfJvEcoGoZOA@mail.gmail.com>
- <300e3466-8214-764a-6c33-ce8aaea31ed9@arm.com>
- <CAKPH-NgvzykBMx1jouMV-fBbLN8=oHmb3zFhy+pPQTwcQdf2Vg@mail.gmail.com>
+From: Roger Pau Monne <roger.pau@citrix.com>
+Subject: [PATCH 4/5] libxc/pvh: set default MTRR type to
+ write-back
+Date: Thu, 10 May 2018 18:15:04 +0100
+Message-ID: <20180510171505.37309-5-roger.pau@citrix.com>
+References: <20180510171505.37309-1-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5076559389200703495=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAKPH-NgvzykBMx1jouMV-fBbLN8=oHmb3zFhy+pPQTwcQdf2Vg@mail.gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=tie0=h5=citrix.com=prvs=66130e668=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fGpAP-0006qr-E3
+ for xen-devel@lists.xenproject.org; Thu, 10 May 2018 17:15:45 +0000
+In-Reply-To: <20180510171505.37309-1-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,75 +22,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>, Julien Grall <julien.grall@arm.com>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5076559389200703495==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-Ms8tkhjzjfe0tCy7piWn"
-
-
---=-Ms8tkhjzjfe0tCy7piWn
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2018-05-10 at 17:49 +0200, Mirela Simonovic wrote:
-> Regardless of the fact that the notifier returns an error or not, I
-> believe it would be good and safe to set priority and document that
-> priority zero would cause racing issue in the scenario I debugged
-> today. I'm pretty sure that this discussion would be forgotten soon
-> and it really should be documented in code/comment.
->=20
-I may very well be missing or misunderstanding something, but I
-continue to think that the problem here is that CPU_STARTING can't,
-right now, fail, while you need it to be able to.
-
-If that is the case, giving different priorities to the notifier, is
-not a solution.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-Ms8tkhjzjfe0tCy7piWn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlr0cjwACgkQFkJ4iaW4
-c+5H+g//agkyskaPoiRKxeM8Jtb8ig6okFKfxmAkMRiYEpZi8QzJtM0V4HEQZRcf
-EKCRgRkoMkRaPsVMfS5D6XDznxxktFvZR8cEXhyu/SA289mDKl3dSBclEFgWkWsy
-7ASnalaXefFXqPFkSA9zIIROGIvLIE5lTwjHzXwy1WAzWBZ41ipUqkrbWuhFY2A3
-VEWc2HXCC9hVi0iL7GEPY0/TGHJ0vHBLcErqYhCRRCsO5CXoRBJpdpyX8xYrFPod
-416DCHl8XTKOLcEEEDWOyfHkp+pJfuBg9moQzPw0JPO79DBc9g9zNK2IENNc5zsM
-/nJuwtbkZgpqE/f+oMrS8Dc7Xsu41o6QHHNOIk1QqaNcC3EFLdjarGJr0DiGGOtK
-P4PGkwsjfZRZhS/y3A3gTbjV0VqF1pGIplLlX/PZgYjs7A0NxhK0f3OfHx+QpXsr
-iwlSnn5p4HAgHqtw5ktBrFgN5zW5Kn3eB9Q9Q7ZUjLKrcVtPfvKWWaK57NHwG0Ei
-qnDaxW6x9cBWLWxIlmnEtJOzAEeivZS2kQ0DEsf6owPtGVzFCt3jwIR9KUR/eSqE
-Pp9PpTyXKwp36kDzEhUEuPx+9gL+eNY5uN47E88J6vGwe1RdLmLN3kXwcBm5F3nF
-f6QGhghJCh5yQMWH/57m6Y4XXXSvg+nFJZezwBHLYd3nVNtmUFE=
-=xVSe
------END PGP SIGNATURE-----
-
---=-Ms8tkhjzjfe0tCy7piWn--
-
-
-
---===============5076559389200703495==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5076559389200703495==--
+QW5kIGVuYWJsZSBNVFJSLiBUaGlzIGFsbG93cyB0byBwcm92aWRlIGEgc2FuZSBpbml0aWFsIE1U
+UlIgc3RhdGUgZm9yClBWSCBEb21Vcy4gVGhpcyB3aWxsIGhhdmUgdG8gYmUgZXhwYW5kZWQgd2hl
+biBwY2ktcGFzc3Rocm91Z2ggc3VwcG9ydAppcyBhZGRlZCB0byBQVkggZ3Vlc3RzLCBzbyB0aGF0
+IE1NSU8gcmVnaW9ucyBvZiBkZXZpY2VzIGFyZSBzZXQgYXMKVUMuCgpOb3RlIHRoYXQgaW5pdGlh
+bCBNVFJSIHNldHVwIGlzIGRvbmUgYnkgaHZtbG9hZGVyIGZvciBIVk0gZ3Vlc3RzLAp0aGF0J3Mg
+bm90IHVzZWQgYnkgUFZIIGd1ZXN0cy4KClNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kg
+PHJvZ2VyLnBhdUBjaXRyaXguY29tPgotLS0tCkNjOiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25A
+ZXUuY2l0cml4LmNvbT4KQ2M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CkNjOiBKYW4g
+QmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CkNjOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29v
+cGVyM0BjaXRyaXguY29tPgotLS0KIHRvb2xzL2xpYnhjL3hjX2RvbV94ODYuYyB8IDQ0ICsrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKIDEgZmlsZSBjaGFuZ2VkLCA0NCBp
+bnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvdG9vbHMvbGlieGMveGNfZG9tX3g4Ni5jIGIvdG9v
+bHMvbGlieGMveGNfZG9tX3g4Ni5jCmluZGV4IGUzM2EyODg0N2QuLmQyOGZmNGQ3ZTkgMTAwNjQ0
+Ci0tLSBhL3Rvb2xzL2xpYnhjL3hjX2RvbV94ODYuYworKysgYi90b29scy9saWJ4Yy94Y19kb21f
+eDg2LmMKQEAgLTUzLDYgKzUzLDkgQEAKICNkZWZpbmUgWDg2X0NSMF9QRSAweDAxCiAjZGVmaW5l
+IFg4Nl9DUjBfRVQgMHgxMAogCisjZGVmaW5lIE1UUlJfVFlQRV9XUkJBQ0sgICAgIDYKKyNkZWZp
+bmUgTVRSUl9ERUZfVFlQRV9FTkFCTEUgKDF1IDw8IDExKQorCiAjZGVmaW5lIFNQRUNJQUxQQUdF
+X1BBR0lORyAgIDAKICNkZWZpbmUgU1BFQ0lBTFBBR0VfQUNDRVNTICAgMQogI2RlZmluZSBTUEVD
+SUFMUEFHRV9TSEFSSU5HICAyCkBAIC05MzEsNiArOTM0LDIwIEBAIHN0YXRpYyBpbnQgdmNwdV94
+ODZfNjQoc3RydWN0IHhjX2RvbV9pbWFnZSAqZG9tKQogICAgIHJldHVybiByYzsKIH0KIAorY29u
+c3Qgc3RhdGljIHZvaWQgKmh2bV9nZXRfc2F2ZV9yZWNvcmQoY29uc3Qgdm9pZCAqY3R4LCB1bnNp
+Z25lZCBpbnQgdHlwZSwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVu
+c2lnbmVkIGludCBpbnN0YW5jZSkKK3sKKyAgICBjb25zdCBzdHJ1Y3QgaHZtX3NhdmVfZGVzY3Jp
+cHRvciAqaGVhZGVyOworCisgICAgZm9yICggaGVhZGVyID0gY3R4OworICAgICAgICAgIGhlYWRl
+ci0+dHlwZWNvZGUgIT0gSFZNX1NBVkVfQ09ERShFTkQpOworICAgICAgICAgIGN0eCArPSBzaXpl
+b2YoKmhlYWRlcikgKyBoZWFkZXItPmxlbmd0aCwgaGVhZGVyID0gY3R4ICkKKyAgICAgICAgaWYg
+KCBoZWFkZXItPnR5cGVjb2RlID09IHR5cGUgJiYgaGVhZGVyLT5pbnN0YW5jZSA9PSBpbnN0YW5j
+ZSApCisgICAgICAgICAgICByZXR1cm4gY3R4ICsgc2l6ZW9mKCpoZWFkZXIpOworCisgICAgcmV0
+dXJuIE5VTEw7Cit9CisKIHN0YXRpYyBpbnQgdmNwdV9odm0oc3RydWN0IHhjX2RvbV9pbWFnZSAq
+ZG9tKQogewogICAgIHN0cnVjdCB7CkBAIC05MzgsOSArOTU1LDEyIEBAIHN0YXRpYyBpbnQgdmNw
+dV9odm0oc3RydWN0IHhjX2RvbV9pbWFnZSAqZG9tKQogICAgICAgICBIVk1fU0FWRV9UWVBFKEhF
+QURFUikgaGVhZGVyOwogICAgICAgICBzdHJ1Y3QgaHZtX3NhdmVfZGVzY3JpcHRvciBjcHVfZDsK
+ICAgICAgICAgSFZNX1NBVkVfVFlQRShDUFUpIGNwdTsKKyAgICAgICAgc3RydWN0IGh2bV9zYXZl
+X2Rlc2NyaXB0b3IgbXRycl9kOworICAgICAgICBIVk1fU0FWRV9UWVBFKE1UUlIpIG10cnI7CiAg
+ICAgICAgIHN0cnVjdCBodm1fc2F2ZV9kZXNjcmlwdG9yIGVuZF9kOwogICAgICAgICBIVk1fU0FW
+RV9UWVBFKEVORCkgZW5kOwogICAgIH0gYnNwX2N0eDsKKyAgICBjb25zdCBIVk1fU0FWRV9UWVBF
+KE1UUlIpICptdHJyX3JlY29yZDsKICAgICB1aW50OF90ICpmdWxsX2N0eCA9IE5VTEw7CiAgICAg
+aW50IHJjOwogCkBAIC0xMDE0LDYgKzEwMzQsMzAgQEAgc3RhdGljIGludCB2Y3B1X2h2bShzdHJ1
+Y3QgeGNfZG9tX2ltYWdlICpkb20pCiAgICAgaWYgKCBkb20tPnN0YXJ0X2luZm9fc2VnLnBmbiAp
+CiAgICAgICAgIGJzcF9jdHguY3B1LnJieCA9IGRvbS0+c3RhcnRfaW5mb19zZWcucGZuIDw8IFBB
+R0VfU0hJRlQ7CiAKKyAgICAvKiBTZXQgdGhlIE1UUlIuICovCisgICAgYnNwX2N0eC5tdHJyX2Qu
+dHlwZWNvZGUgPSBIVk1fU0FWRV9DT0RFKE1UUlIpOworICAgIGJzcF9jdHgubXRycl9kLmluc3Rh
+bmNlID0gMDsKKyAgICBic3BfY3R4Lm10cnJfZC5sZW5ndGggPSBIVk1fU0FWRV9MRU5HVEgoTVRS
+Uik7CisKKyAgICBtdHJyX3JlY29yZCA9IGh2bV9nZXRfc2F2ZV9yZWNvcmQoZnVsbF9jdHgsIEhW
+TV9TQVZFX0NPREUoTVRSUiksIDApOworICAgIGlmICggIW10cnJfcmVjb3JkICkKKyAgICB7Cisg
+ICAgICAgIHhjX2RvbV9wYW5pYyhkb20tPnhjaCwgWENfSU5URVJOQUxfRVJST1IsCisgICAgICAg
+ICAgICAgICAgICAgICAiJXM6IHVuYWJsZSB0byBnZXQgTVRSUiBzYXZlIHJlY29yZCIsIF9fZnVu
+Y19fKTsKKyAgICAgICAgZ290byBvdXQ7CisgICAgfQorCisgICAgbWVtY3B5KCZic3BfY3R4Lm10
+cnIsIG10cnJfcmVjb3JkLCBzaXplb2YoYnNwX2N0eC5tdHJyKSk7CisKKyAgICAvKiBUT0RPOiBt
+YXliZSB0aGlzIHNob3VsZCBiZSBhIGZpcm13YXJlIG9wdGlvbiBpbnN0ZWFkPyAqLworICAgIGlm
+ICggIWRvbS0+ZGV2aWNlX21vZGVsICkKKyAgICAgICAgLyoKKyAgICAgICAgICogRW5hYmxlIE1U
+UlIsIHNldCBkZWZhdWx0IHR5cGUgdG8gV0IuCisgICAgICAgICAqIFRPRE86IGFkZCBNTUlPIGFy
+ZWFzIGFzIFVDIHdoZW4gcGFzc3Rocm91Z2ggaXMgc3VwcG9ydGVkLgorICAgICAgICAgKi8KKyAg
+ICAgICAgYnNwX2N0eC5tdHJyLm1zcl9tdHJyX2RlZl90eXBlID0gTVRSUl9UWVBFX1dSQkFDSyB8
+CisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1UUlJfREVGX1RZUEVf
+RU5BQkxFOworCiAgICAgLyogU2V0IHRoZSBlbmQgZGVzY3JpcHRvci4gKi8KICAgICBic3BfY3R4
+LmVuZF9kLnR5cGVjb2RlID0gSFZNX1NBVkVfQ09ERShFTkQpOwogICAgIGJzcF9jdHguZW5kX2Qu
+aW5zdGFuY2UgPSAwOwotLSAKMi4xNy4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
