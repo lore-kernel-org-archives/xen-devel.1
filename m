@@ -1,7 +1,9 @@
 From: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH 0/5] PVH MTRR initial state
-Date: Thu, 10 May 2018 18:15:00 +0100
-Message-ID: <20180510171505.37309-1-roger.pau@citrix.com>
+Subject: [PATCH 1/5] hvm/mtrr: add emacs local variables block
+ with formatting info
+Date: Thu, 10 May 2018 18:15:01 +0100
+Message-ID: <20180510171505.37309-2-roger.pau@citrix.com>
+References: <20180510171505.37309-1-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -9,8 +11,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=tie0=h5=citrix.com=prvs=66130e668=roger.pau@srs-us1.protection.inumbo.net>)
- id 1fGpAO-0006qX-2e
+ id 1fGpAO-0006qW-3R
  for xen-devel@lists.xenproject.org; Thu, 10 May 2018 17:15:44 +0000
+In-Reply-To: <20180510171505.37309-1-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,24 +23,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8sCgpUaGUgZm9sbG93aW5nIHBhdGNoZXMgc2V0IGEgc2FuZSBpbml0aWFsIE1UUlIgc3Rh
-dGUgZm9yIGJvdGggRG9tMCBhbmQKRG9tVSBQVkggZ3Vlc3RzLiBOb3RlIHRoYXQgZm9yIERvbTAg
-dGhlIGhvc3QgTVRSUiBzdGF0ZSBpcyB1c2VkLCBPVE9ICmZvciBEb21VIHRoZSBkZWZhdWx0IE1U
-UlIgdHlwZSBpcyBzZXQgdG8gd3JpdGUtYmFjay4KClRoaXMgc2hvdWxkIGF2b2lkIGd1ZXN0cyBo
-YXZpbmcgdG8gc2V0dXAgc29tZSBraW5kIG9mIE1UUlIgc3RhdGUgaW4Kb3JkZXIgdG8gYm9vdC4K
-ClRoYW5rcywgUm9nZXIuCgpSb2dlciBQYXUgTW9ubmUgKDUpOgogIGh2bS9tdHJyOiBhZGQgZW1h
-Y3MgbG9jYWwgdmFyaWFibGVzIGJsb2NrIHdpdGggZm9ybWF0dGluZyBpbmZvCiAgaHZtL210cnI6
-IHVzZSB0aGUgaGFyZHdhcmUgbnVtYmVyIG9mIHZhcmlhYmxlIHJhbmdlcyBmb3IgRG9tMAogIGh2
-bS9tdHJyOiBjb3B5IGhhcmR3YXJlIHN0YXRlIGZvciBEb20wCiAgbGlieGMvcHZoOiBzZXQgZGVm
-YXVsdCBNVFJSIHR5cGUgdG8gd3JpdGUtYmFjawogIGRvY3MvcHZoOiBkb2N1bWVudCBpbml0aWFs
-IE1UUlIgc3RhdGUKCiBkb2NzL21pc2MvcHZoLm1hcmtkb3duICAgfCAxNSArKysrKysrKysrKysr
-CiB0b29scy9saWJ4Yy94Y19kb21feDg2LmMgfCA0NCArKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKwogeGVuL2FyY2gveDg2L2h2bS9tdHJyLmMgIHwgNDYgKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKystLQogMyBmaWxlcyBjaGFuZ2VkLCAxMDMgaW5zZXJ0
-aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCi0tIAoyLjE3LjAKCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+U2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Ci0t
+LQpDYzogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpDYzogQW5kcmV3IENvb3BlciA8
+YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KLS0tCiB4ZW4vYXJjaC94ODYvaHZtL210cnIuYyB8
+IDEwICsrKysrKysrKysKIDEgZmlsZSBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCspCgpkaWZmIC0t
+Z2l0IGEveGVuL2FyY2gveDg2L2h2bS9tdHJyLmMgYi94ZW4vYXJjaC94ODYvaHZtL210cnIuYwpp
+bmRleCBiNzIxYzYzMzBmLi5iM2MwOGMzOTc3IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvaHZt
+L210cnIuYworKysgYi94ZW4vYXJjaC94ODYvaHZtL210cnIuYwpAQCAtODUzLDMgKzg1MywxMyBA
+QCBpbnQgZXB0ZV9nZXRfZW50cnlfZW10KHN0cnVjdCBkb21haW4gKmQsIHVuc2lnbmVkIGxvbmcg
+Z2ZuLCBtZm5fdCBtZm4sCiAKICAgICByZXR1cm4gTVRSUl9UWVBFX1VOQ0FDSEFCTEU7CiB9CisK
+Ky8qCisgKiBMb2NhbCB2YXJpYWJsZXM6CisgKiBtb2RlOiBDCisgKiBjLWZpbGUtc3R5bGU6ICJC
+U0QiCisgKiBjLWJhc2ljLW9mZnNldDogNAorICogdGFiLXdpZHRoOiA0CisgKiBpbmRlbnQtdGFi
+cy1tb2RlOiBuaWwKKyAqIEVuZDoKKyAqLwotLSAKMi4xNy4wCgoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
