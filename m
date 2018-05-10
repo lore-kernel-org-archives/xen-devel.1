@@ -1,20 +1,20 @@
-From: Eric Blake <eblake@redhat.com>
-Subject: Re: [PATCH v2 2/3] checkpatch: generalize xen handle
- matching in the list of types
-Date: Thu, 10 May 2018 08:26:58 -0500
-Message-ID: <dd5e2ec4-d809-3a06-0e06-21c88e5d5d7e__8080.27858515761$1525958751$gmane$org@redhat.com>
-References: <20180510091518.28199-1-paul.durrant@citrix.com>
- <20180510091518.28199-3-paul.durrant@citrix.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v3 10/10] xen/arm: Enable errata for
+ secondary CPU on hotplug after the boot
+Date: Thu, 10 May 2018 14:29:56 +0100
+Message-ID: <eec66fbe-5faa-3213-182a-5de560a52d46@arm.com>
+References: <20180427171258.28852-1-mirela.simonovic@aggios.com>
+ <20180427171258.28852-11-mirela.simonovic@aggios.com>
+ <ffc6351e-350c-b1c9-ea3e-fd4936701eb1@arm.com>
+ <CAKPH-NiTLoOdYgpcWiM1qXHXaC=znAvMp0HHGQo-9mfegz2LcA@mail.gmail.com>
+ <c713cc00-ace2-f528-563f-175657dccb12@arm.com>
+ <CAKPH-NhUyxO1vOJnJPFayw71F5SfY87vWchoQybcH1e6Z4Mg2A@mail.gmail.com>
+ <CAKPH-NhZhcvAdnZ_PyCUe3oSEokZnoBi8aPwfYbpPHioGgU9KA@mail.gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=w2kk=h5=redhat.com=eblake@srs-us1.protection.inumbo.net>)
- id 1fGlb4-0003ef-Uk
- for xen-devel@lists.xenproject.org; Thu, 10 May 2018 13:27:02 +0000
-In-Reply-To: <20180510091518.28199-3-paul.durrant@citrix.com>
+In-Reply-To: <CAKPH-NhZhcvAdnZ_PyCUe3oSEokZnoBi8aPwfYbpPHioGgU9KA@mail.gmail.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,43 +24,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>, qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>, "Daniel P . Berrange" <berrange@redhat.com>
+To: Mirela Simonovic <mirela.simonovic@aggios.com>, Dario Faggioli <dfaggioli@suse.com>
+Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDUvMTAvMjAxOCAwNDoxNSBBTSwgUGF1bCBEdXJyYW50IHdyb3RlOgo+IEFsbCB0aGUgeGVu
-IHN0YWJsZSBBUElzIGRlZmluZSBoYW5kbGUgdHlwZXMgb2YgdGhlIGZvcm06Cj4gCj4gPG5hbWUg
-b2YgQVBJPl9oYW5kbGUKPiAKPiBhbmQgc29tZSBkZWZpbmUgYWRkaXRpb25hbCBoYW5kbGUgdHlw
-ZXMgb2YgdGhlIGZvcm06Cj4gCj4gPG5hbWUgb2YgQVBJPl88cHVycG9zZSBvZiBoYW5kbGU+X2hh
-bmRsZQoKTWF5YmUgd29ydGggbWVudGlvbmluZyB0aGF0IDxuYW1lIG9mIEFQST4gYWx3YXlzIGhh
-cyBhICd4ZW4nIHByZWZpeCwgCmFuZC9vciBzcGVsbGluZyBpdDoKCnhlbjxuYW1lIG9mIG9iamVj
-dD5faGFuZGxlCnhlbjxuYW1lIG9mIG9iamVjdD5fPHB1cnBvc2U+X2hhbmRsZQoKPiAKPiBFeGFt
-cGxlcyBvZiB0aGVzZSBhcmUgeGVuZm9yZWlnbm1lbW9yeV9oYW5kbGUgYW5kCj4geGVuZm9yZWln
-bm1lbW9yeV9yZXNvdXJjZV9oYW5kbGUuCj4gCj4gQm90aCBvZiB0aGVzZSB0eXBlcyB3aWxsIGJl
-IG1pc3BhcnNlZCBieSBjaGVja3BhdGNoIGlmIHRoZXkgYXBwZWFyIGFzIHRoZQo+IGZpcnN0IHRv
-a2VuIGluIGEgbGluZSBzaW5jZSwgYXMgdHlwZXMgZGVmaW5lZCBieSBhbiBleHRlcm5hbCBsaWJy
-YXJ5LCB0aGV5Cj4gZG8gbm90IGNvbmZvcm0gdG8gdGhlIFFFTVUgQ09ESU5HX1NUWUxFLCB3aGlj
-aCBzdWdnZXN0cyBDYW1lbENhc2UuCj4gCj4gQSBwcmV2aW91cyBwYXRjaCAoNWFjMDY3YTI0YTgp
-IGFkZGVkIHhlbmRldmljZW1vZGVsX2hhbmRsZSB0byB0aGUgbGlzdAo+IG9mIHR5cGVzLiBUaGlz
-IHBhdGNoIGNoYW5nZXMgdGhhdCB0byB4ZW5cdytfaGFuZGxlIHN1Y2ggdGhhdCBpdCB3aWxsCj4g
-bWF0Y2ggYWxsIFhlbiBzdGFibGUgQVBJIGhhbmRsZXMgb2YgdGhlIGZvcm1zIGRldGFpbGVkIGFi
-b3ZlLgoKTmljZSB1c2Ugb2YgYSByZWdleC4KCj4gCj4gU2lnbmVkLW9mZi1ieTogUGF1bCBEdXJy
-YW50IDxwYXVsLmR1cnJhbnRAY2l0cml4LmNvbT4KPiAtLS0KPiBDYzogRXJpYyBCbGFrZSA8ZWJs
-YWtlQHJlZGhhdC5jb20+Cj4gQ2M6IFBhb2xvIEJvbnppbmkgPHBib256aW5pQHJlZGhhdC5jb20+
-Cj4gQ2M6IERhbmllbCBQLiBCZXJyYW5nZSA8YmVycmFuZ2VAcmVkaGF0LmNvbT4KPiAKPiB2MjoK
-PiAgIC0gTmV3IGluIHRoaXMgdmVyc2lvbgoKUmV2aWV3ZWQtYnk6IEVyaWMgQmxha2UgPGVibGFr
-ZUByZWRoYXQuY29tPgoKPiAtLS0KPiAgIHNjcmlwdHMvY2hlY2twYXRjaC5wbCB8IDIgKy0KPiAg
-IDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+IAo+IGRpZmYg
-LS1naXQgYS9zY3JpcHRzL2NoZWNrcGF0Y2gucGwgYi9zY3JpcHRzL2NoZWNrcGF0Y2gucGwKPiBp
-bmRleCA1Yjg3MzVkZWZiLi45OGVkNzk5ZjI5IDEwMDc1NQo+IC0tLSBhL3NjcmlwdHMvY2hlY2tw
-YXRjaC5wbAo+ICsrKyBiL3NjcmlwdHMvY2hlY2twYXRjaC5wbAo+IEBAIC0yNjYsNyArMjY2LDcg
-QEAgb3VyIEB0eXBlTGlzdCA9ICgKPiAgIAlxcnt0YXJnZXRfKD86dSk/bG9uZ30sCj4gICAJcXJ7
-aHdhZGRyfSwKPiAgIAlxcnt4bWwke0lkZW50fX0sCj4gLQlxcnt4ZW5kZXZpY2Vtb2RlbF9oYW5k
-bGV9LAo+ICsJcXJ7eGVuXHcrX2hhbmRsZX0sCj4gICApOwo+ICAgCj4gICAjIFRoaXMgY2FuIGJl
-IG1vZGlmaWVkIGJ5IHN1YiBwb3NzaWJsZS4gIFNpbmNlIGl0IGNhbiBiZSBlbXB0eSwgYmUgY2Fy
-ZWZ1bAo+IAoKLS0gCkVyaWMgQmxha2UsIFByaW5jaXBhbCBTb2Z0d2FyZSBFbmdpbmVlcgpSZWQg
-SGF0LCBJbmMuICAgICAgICAgICArMS05MTktMzAxLTMyNjYKVmlydHVhbGl6YXRpb246ICBxZW11
-Lm9yZyB8IGxpYnZpcnQub3JnCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+SGksCgpPbiAwNS8xMC8yMDE4IDAyOjI0IFBNLCBNaXJlbGEgU2ltb25vdmljIHdyb3RlOgo+IE9u
+IFRodSwgTWF5IDEwLCAyMDE4IGF0IDE6NTcgUE0sIE1pcmVsYSBTaW1vbm92aWMKPiA8bWlyZWxh
+LnNpbW9ub3ZpY0BhZ2dpb3MuY29tPiB3cm90ZToKCj4gSSBoYXZlIHRlc3RlZCB0aGUgdHVuZWQg
+c2NlbmFyaW8gd2hlcmUgZW5hYmxpbmcgY2FwYWJpbGl0aWVzIGZhaWxzIC0KPiB0aGUgZXJyb25l
+b3VzIENQVSBpcyBzdG9wcGVkL3Bvd2VyZWQgZG93biBhbmQgdGhlIHN5c3RlbSBjb250aW51ZXMg
+dG8KPiB3b3JrIGZpbmUgd2l0aG91dCBpdC4gQWx0aG91Z2ggSSBzdGlsbCBkb24ndCB1bmRlcnN0
+YW5kIHdoeSBpbmRlZWQgSQo+IG5lZWRlZCB0byBkZWJ1ZyB0aGlzIEknbGwgYWRkIHRoZSBmaXgg
+aW4gdjQuCgpJIGRvbid0IHVuZGVyc3RhbmQgeW91ciBsYXN0IHNlbnRlbmNlLiBXaGF0IGRpZCB5
+b3UgbWVhbj8KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
