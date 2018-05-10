@@ -1,19 +1,14 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
- qcow2
-Date: Thu, 10 May 2018 08:04:11 +0200
-Message-ID: <20180510080411.1c7845b5.olaf@aepfle.de>
-References: <20180507151940.GA31926@aepfle.de>
- <20180508133143.77e209f2.olaf@aepfle.de>
- <20180508184026.4f0af76a.olaf@aepfle.de>
- <20180509142316.66171ffd.olaf@aepfle.de>
- <alpine.DEB.2.10.1805091405040.9199@sstabellini-ThinkPad-X260>
- <20180509231336.7f962d11.olaf@aepfle.de>
- <alpine.DEB.2.10.1805091416310.9199@sstabellini-ThinkPad-X260>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH v3 06/10] xen/common: Restore IRQ affinity
+ when hotplugging a pCPU
+Date: Thu, 10 May 2018 09:33:18 +0200
+Message-ID: <ec82f39caaae39ba9530cf41e373bb6f1546adb5.camel@suse.com>
+References: <20180427171258.28852-1-mirela.simonovic@aggios.com>
+ <20180427171258.28852-7-mirela.simonovic@aggios.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5968729381432454016=="
+Content-Type: multipart/mixed; boundary="===============2539950937348947155=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1805091416310.9199@sstabellini-ThinkPad-X260>
+In-Reply-To: <20180427171258.28852-7-mirela.simonovic@aggios.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,53 +17,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: anthony.perard@citrix.com, jgross@suse.com, boris.ostrovsky@oracle.com, xen-devel@lists.xen.org
+To: Mirela Simonovic <mirela.simonovic@aggios.com>, xen-devel@lists.xen.org
+Cc: edgar.iglesias@xilinx.com, George Dunlap <george.dunlap@eu.citrix.com>, julien.grall@arm.com, sstabellini@kernel.org, dm@aggios.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============5968729381432454016==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/akbVIaaTohVPkPmETGiutjB"; protocol="application/pgp-signature"
 
---Sig_/akbVIaaTohVPkPmETGiutjB
-Content-Type: text/plain; charset=US-ASCII
+--===============2539950937348947155==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-yHAiMbkzQhzQoIkcIe2F"
+
+
+--=-yHAiMbkzQhzQoIkcIe2F
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Wed, 9 May 2018 14:43:17 -0700 (PDT)
-schrieb Stefano Stabellini <sstabellini@kernel.org>:
+On Fri, 2018-04-27 at 19:12 +0200, Mirela Simonovic wrote:
+> Non-boot pCPUs are being hot-unplugged during the system suspend to
+> RAM and hotplugged during the resume. When non-boot pCPUs are
+> hot-unplugged the interrupts that were targeted to them are migrated
+> to the boot pCPU.
+> On suspend, each guest could have its own wake-up devices/interrupts
+> (passthrough) that could trigger the system resume. These interrupts
+> could be targeted to a non-boot pCPU, e.g. if the guest's vCPU is
+> pinned to a non-boot pCPU. Due to the hot-unplug of non-boot pCPUs
+> during the suspend such interrupts will be migrated from non-boot
+> pCPUs
+> to the boot pCPU (this is fine). However, when non-boot pCPUs are
+> hotplugged on resume, these interrupts are not migrated back to non-
+> boot
+> pCPUs, i.e. IRQ affinity is not restored on resume (this is wrong).
+> This patch adds the restoration of IRQ affinity when a pCPU is
+> hotplugged.
+>=20
+> Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
+>=20
+> ---
+> CC: George Dunlap <george.dunlap@eu.citrix.com>
+> CC: Dario Faggioli <dfaggioli@suse.com>
+>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
 
-> 512b109ec962 is a very old commit: why is it causing problems to Xen
-> 4.10 and Xen 4.11 HVM migration? What is the error exactly? Sorry, I
-> might be missing some context.
-
-It is papering over the real issue, thats why one can still migrate a
-pvops HVM domU with current toolstack. Upstream kernel simply does the
-work that is supposed to be done by qemu itself. Since the xenlinux based
-kernel does not do that work (it never had a need to do the unplug twice),
-migration fails.
-
-qemu has to carry the unplug state from one dom0 to another dom0 during
-migration, simply because unplug is a one-time operation that can not=20
-be undone. I wonder how to do that, if qemu already has code to carry its
-state.
-
-Olaf
-
---Sig_/akbVIaaTohVPkPmETGiutjB
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-yHAiMbkzQhzQoIkcIe2F
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvPg2wAKCRBdQqD6ppg2
-fgqiAJoCO/885E0UVsHVrDoP8yj3zFnt/QCdGEHgUxPtSFxJ+cy4xqeCxaWZ9RI=
-=/69J
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlrz9b4ACgkQFkJ4iaW4
+c+54Xg//WlTM/psHaOMYIzcL7ViM2ErvHN6Yb99mB3o24p7TmgThS83cKJRwjR31
+Z/duT4tI29zwYvXQYonMU0Q5lHSeJiurSrVz0tktPoUAOVouhXIc2gnfiYlNj4oo
+faEtUgX5g1y4ZYggzyI1ZoYiVE6mby78DfnDik7F74EquJotHLhI7QTu03+dEbXm
+0N/SlnnIshJHkyIrA/NL8ZTbeVX307rbZfhfvjQIdf+0gYSFaZigaQllnIzSaASO
+j951WT5CLyjR3AOIUlxRYOsHZgPtaNEbng0042JyIyD02hLp8ZnPBWdDv+3V5g0d
+U+uGBw1kP4Cw9sLYx0sJJdC9T3B17qKWppZseoIooX+LUDHOTcblkicM8RD1P5Pg
+ITQXOUfNW5BR2451g5iHwVJmaA5rDeBYL/LhrVYopNSE6jXODq8WnBPaq0VXS3FO
+JgHVFtf55CBLhr2WOXDi+eaY3nxUgtUCK05kI7uPDYuXRbqRADnGp3B32rl8EF9z
+l7sxccwmxBAHG87k3FjJ7Ltg+1nQ8rSh9hZXqgW2ATAUmlRKCf78pElQ7/TOkndp
+dR/UyDDE/G4dB7bZZuXZNuwwhOhsN5FIgHyTX8vhlzO8ngrUOGikxLPW3TrN/0rJ
+nAM5UlGHke0lgvrXhx1Qb8wjkWWfLnC4eHPsiVjuRK8sDKNAp+I=
+=mXLR
 -----END PGP SIGNATURE-----
 
---Sig_/akbVIaaTohVPkPmETGiutjB--
+--=-yHAiMbkzQhzQoIkcIe2F--
 
 
---===============5968729381432454016==
+
+--===============2539950937348947155==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -78,4 +100,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5968729381432454016==--
+--===============2539950937348947155==--
