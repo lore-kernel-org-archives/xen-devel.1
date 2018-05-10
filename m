@@ -1,27 +1,19 @@
-From: Praveen Kumar <kpraveen.lkml@gmail.com>
-Subject: Re: Xen and safety certification,
- Minutes of the meeting on Apr 4th
-Date: Thu, 10 May 2018 04:55:20 +0000
-Message-ID: <CABcWhv4qY62_0vhAVGOz1y0hsqkRn4WQ8=UW_JnEXk5NhpTVDA@mail.gmail.com>
-References: <5D69D457-6EAB-4FF9-AF94-3D818F9035EC@citrix.com>
- <4d359a64b6bc43b9a489a0754c4b4ae8@dornerworks.com>
- <999c02cc-31b1-c404-7f88-84789c0d84b0@epam.com>
- <alpine.DEB.2.10.1804061323500.6016@sstabellini-ThinkPad-X260>
- <alpine.DEB.2.10.1805071708060.4953@sstabellini-ThinkPad-X260>
- <78c07b55-c301-598e-3894-009f2bdda1ac@arm.com>
- <alpine.DEB.2.10.1805080841580.4953@sstabellini-ThinkPad-X260>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
+ qcow2
+Date: Thu, 10 May 2018 08:04:11 +0200
+Message-ID: <20180510080411.1c7845b5.olaf@aepfle.de>
+References: <20180507151940.GA31926@aepfle.de>
+ <20180508133143.77e209f2.olaf@aepfle.de>
+ <20180508184026.4f0af76a.olaf@aepfle.de>
+ <20180509142316.66171ffd.olaf@aepfle.de>
+ <alpine.DEB.2.10.1805091405040.9199@sstabellini-ThinkPad-X260>
+ <20180509231336.7f962d11.olaf@aepfle.de>
+ <alpine.DEB.2.10.1805091416310.9199@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5968729381432454016=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=k9iy=h5=gmail.com=kpraveen.lkml@srs-us1.protection.inumbo.net>)
- id 1fGdc4-0001vQ-6Q
- for xen-devel@lists.xenproject.org; Thu, 10 May 2018 04:55:32 +0000
-Received: by mail-io0-x231.google.com with SMTP id z4-v6so1588046iof.5
- for <xen-devel@lists.xenproject.org>; Wed, 09 May 2018 21:55:31 -0700 (PDT)
-In-Reply-To: <alpine.DEB.2.10.1805080841580.4953@sstabellini-ThinkPad-X260>
+In-Reply-To: <alpine.DEB.2.10.1805091416310.9199@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,86 +23,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Artem Mygaiev <artem_mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, Davorin Mista <davorin.mista@aggios.com>, "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, paul_luperto@prqa.com, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Rich Persaud <persaur@gmail.com>, =?UTF-8?Q?Mirela_Simonovi=C4=87?= <mirela.simonovic@aggios.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, julien.grall@arm.com, robin.randhawa@arm.com, committers@xenproject.org, anastassios.nanos@onapp.com, xen-devel <xen-devel@lists.xenproject.org>, Jonathan Daugherty <jtd@galois.com>, Denys Balatsko <denys.balatsko@globallogic.com>, vfachin@de.adit-jv.com, Jarvis Roach <Jarvis.Roach@dornerworks.com>
+Cc: anthony.perard@citrix.com, jgross@suse.com, boris.ostrovsky@oracle.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiBUdWUsIE1heSA4LCAyMDE4IGF0IDk6MjAgUE0gU3RlZmFubyBTdGFiZWxsaW5pIDxz
-c3RhYmVsbGluaUBrZXJuZWwub3JnPgp3cm90ZToKCj4gT24gVHVlLCA4IE1heSAyMDE4LCBKdWxp
-ZW4gR3JhbGwgd3JvdGU6Cj4gPiBIaSBTdGVmYW5vLAo+ID4KPiA+IE9uIDA4LzA1LzE4IDAxOjEx
-LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiA+IE9uIEZyaSwgNiBBcHIgMjAxOCwgU3Rl
-ZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4gPiA+ID4gPiA+ID4gMykgVW5kZXJzdGFuZCBob3cg
-dG8gYWRkcmVzcyBkb20wLiBGcmVlUlRPUyBEb20wIHNvdW5kcwpsaWtlIGEKPiA+ID4gPiA+ID4g
-PiA+IGdvb2QKPiA+ID4gPiA+ID4gPiA+IHNvbHV0aW9uLgo+ID4gPiA+ID4gPiA+ID4gTmV4dCBz
-dGVwOiByZWFjaCBvdXQgdG8gRG9ybmVyd29ya3MgYW5kL29yIG90aGVycyB0aGF0CndvcmtlZCB3
-aXRoCj4gPiA+ID4gPiA+ID4gPiBGcmVlUlRPUyBvbiBYZW4gYmVmb3JlLiBGaWd1cmUgb3V0IHdo
-ZXRoZXIgRnJlZVJUT1MgaXMKYWN0dWFsbHkgYQo+ID4gPiA+ID4gPiA+ID4gc3VpdGFibGUgc29s
-dXRpb24gYW5kIHdoYXQgbmVlZHMgdG8gYmUgZG9uZSB0byBydW4gRnJlZVJUT1MKYXMKPiA+ID4g
-PiA+ID4gPiA+IERvbTAuCj4gPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gPiBTb21lIHRoaW5ncyB0
-byBjaGVjayBhdCB0aGlzIHN0YWdlOgo+ID4gPiA+ID4gPiA+IGEpIEkgYmVsaWV2ZSB0aGVyZSBp
-cyBhIHNhZmV0eSBjZXJ0aWZpZWQgdmVyc2lvbiBvZiBGcmVlUlRPUwotIEkKPiA+ID4gPiA+ID4g
-PiBjb3VsZCBub3QKPiA+ID4gPiA+ID4gPiBmaW5kCj4gPiA+ID4gPiA+ID4gbXVjaCwgZXhjZXB0
-IGZvciBodHRwczovL3d3dy5mcmVlcnRvcy5vcmcvRnJlZVJUT1MtCj4gPiA+ID4gPiA+ID4KUGx1
-cy9TYWZldHlfQ3JpdGljYWxfQ2VydGlmaWVkL1NhZmVSVE9TLVNhZmV0eS1Dcml0aWNhbC1DZXJ0
-aWZpY2F0aW9uLnNodG1sCj4gPiA+ID4gPiA+ID4gLQo+ID4gPiA+ID4gPiA+IHdoaWNoIGRlc2Ny
-aWJlcyBTYWZlUlRPUyBhIGNvbW1lcmNpYWwgc2FmZXR5IGNlcnRpZmllZApGcmVlUlRPUyBhbmQK
-PiA+ID4gPiA+ID4gPiAobW9zdGx5KSBBUEkgY29tcGxpYW50IHZlcnNpb24gb2YgRnJlZVJUT1Mu
-IE9yIGFtIEkgbWlzc2luZwo+ID4gPiA+ID4gPiA+IHNvbWV0aGluZwo+ID4gPiA+ID4gPiA+IGhl
-cmU/Cj4gPiA+ID4gPiA+ID4gYikgVGhlcmUgaXMgYSBEb21VIGNhcGFibGUgdmVyc2lvbiBmcm9t
-IEdhbG9pcyAoSm9uYXRoYW4KRG9jaGVydHkKPiA+ID4gPiA+ID4gPiBDQydlZCkgLQo+ID4gPiA+
-ID4gPiA+IEkgZG9uJ3Qga25vdyB3aGV0aGVyIG90aGVycyBhbHNvIGhhdmUgc3VjaCB2ZXJzaW9u
-cwo+ID4gPiA+ID4gPgo+ID4gPiA+ID4gPiBJIHBvcnRlZCB0aGUgdmVyc2lvbiBvZiBGcmVlUlRP
-UyB0aGF0IFhpbGlueCBkaXN0cmlidXRlcyB3aXRoCnRoZWlyCj4gPiA+ID4gPiA+IFNESyB0bwo+
-ID4gPiA+ID4gPiBydW4gYXMgYSBkb21VIG9uIHRoZSBaVVMrIGluIDIwMTYgYW5kIHJvdW5kIHRy
-aXBwZWQgdGhlIGNoYW5nZQpzZXQKPiA+ID4gPiA+ID4gYmFjayB0bwo+ID4gPiA+ID4gPiBSaWNo
-YXJkIEJhcnJ5Lgo+ID4gPiA+ID4gPiBJJ3ZlIGFsc28gaGVhcmQgaW50ZXJlc3QgaW4gcnVubmlu
-ZyBSVEVNUyBhcyBhIGd1ZXN0IE9TLgo+ID4gPiA+ID4gPgo+ID4gPiA+ID4KPiA+ID4gPiA+IFdl
-J3ZlIGhhZCBleHBlcmllbmNlIGluIHJ1bm5pbmcgUU5YIGluIGRvbXUsIGJ1dCB0aGF0IHdhcyBu
-b3QgdmVyeQo+ID4gPiA+ID4gd2VsY29tZWQgYnkKPiA+ID4gPiA+IEJCIFFTU0wgZm9sa3MgYmFj
-ayB0aGVuIDopIFRoZXkgZG9udCByZWFsbHkgbGlrZSBPU1MKPiA+ID4KPiA+ID4gT25lIG1vcmUg
-b3B0aW9uIChhcHBhcmVudGx5IHRha2VuIGJ5IG90aGVycykgaXMgdG8gZGVtb25zdHJhdGUgdGhh
-dAo+ID4gPiBhZnRlciBib290IERvbTAgY2Fubm90IGFmZmVjdCB0aGUgc3lzdGVtIGFueW1vcmUu
-Cj4gPgo+ID4gQ2FuIHlvdSBkZXNjcmliZSB3aGF0IHlvdSBtZWFuIGJ5ICJhZmZlY3RpbmcgdGhl
-IHN5c3RlbSBhbnltb3JlIi4KCj4gSSBkb24ndCBhY3R1YWxseSBrbm93OiBJIGhhdmUgYmVlbiB0
-b2xkIHRoYXQgdGhpcyBpcyBhIHN0cmF0ZWd5IHB1cnN1ZWQKPiBieSBvdGhlciBoeXBlcnZpc29y
-cy4gSSBndWVzcyB3ZSdsbCBmaW5kIG91dCBtb3JlIGRldGFpbHMgYXMgd2UgZ2V0IG1vcmUKPiBm
-YW1pbGlhciB3aXRoIHRoZSBjZXJ0aWZpY2F0aW9uIHJlcXVpcmVtZW50cy4KCgo+ID4gPiBUbyBk
-byB0aGF0LCB3ZSB3b3VsZAo+ID4gPiBoYXZlIHRvIGdldCByaWQgb2YgRG9tMCBlbnRpcmVseSBh
-ZnRlciBib290aW5nIGFsbCBkb21haW5zLCBvciwKPiA+ID4gZGVwcml2aWxlZ2UvcmVzdHJpY3Qg
-aXRzIHBvc3NpYmxlIGVmZmVjdHMgb24gdGhlIHN5c3RlbS4gU29tZXRoaW5nCmxpa2UKPiA+ID4g
-dHVybmluZyBEb20wIGludG8gYSBEb21VIGFmdGVyIGJvb3RpbmcgYWxsIHRoZSBvdGhlciBndWVz
-dHMuCj4gPiA+IFRoaXMgbWlnaHQgYWN0dWFsbHkgYmUgZWFzaWVyIHRvIGFjaGlldmUgdGhhbiAi
-ZG9tMC1sZXNzIiBvciB1c2luZwo+ID4gPiBGcmVlUlRPUyBhcyBkb20wLgo+ID4KPiA+IE90aGVy
-IHRoYW4gYWNjZXNzaW5nIHRoZSBoeXBlcmNhbGwsIHRoZXJlIGFyZSBmZXcgb3RoZXIgd2F5IGZv
-ciBEb20wIHRvCmFmZmVjdAo+ID4gdGhlIHBsYXRmb3JtOgo+ID4gICAgICAgLSBEb20wIGJ5IGRl
-ZmF1bHQgaGFzIGFjY2VzcyB0byBhbGwgdGhlIGhhcmR3YXJlIGJ1dCB0aGUgb25lCmFzc2lnbmVk
-Cj4gPiB0byBEb21Vcy4gVGhvc2UgaGFyZHdhcmUgbWF5IGdpdmUgdGhlIHBvc3NpYmlsaXR5IHRv
-IGFmZmVjdCB0aGUKPiA+IHBsYXRmb3JtIGlycmV2ZXJzaWJseSAob3IgZXZlbiByZWJvb3Rpbmcp
-Lgo+ID4gICAgICAgLSBOb3QgYWxsIERNQS1jYXBhYmxlIGRldmljZXMgYXJlIHRvZGF5IHByb3Rl
-Y3RlZCBieSBhbiBJT01NVQo+ID4KPiA+IFlvdSBwcm9iYWJseSBjYW4gY3JlYXRlIHNvbWV0aGlu
-ZyBzaW1pbGFyIHRvIHRoZSBoYXJkd2FyZSBkb21haW4gYXMgb24KeDg2Cj4gPiAoaS5lIGFsbCB0
-aGUgaGFyZHdhcmUgaXMgb3duZWQgYnkgYSBzZXBhcmF0ZSBkb21haW4gb3RoZXIgdGhhbiBEb20w
-KSwKYnV0IHRoZW4KPiA+IGl0IGlzIG9ubHkgc2hpZnRpbmcgdGhlIHByb2JsZW0uCgo+IFllYWgs
-IHlvdSBhcmUgcmlnaHQuIEl0IGxvb2tzIGxpa2UgdHVybmluZyBEb20wIGludG8gYSBEb21VIGlz
-IG5vdCBnb29kCj4gZW5vdWdoLiBNYXliZSBmb3IgdGhpcyBvcHRpb24gdG8gYmUgdmlhYmxlIHdl
-IHdvdWxkIGFjdHVhbGx5IGhhdmUgdG8KPiB0ZXJtaW5hdGUgKG9yIHBhdXNlIGFuZCBuZXZlciB1
-bnBhdXNlPykgZG9tMCBhZnRlciBib290LgoKSnVzdCBhIHRob3VnaHQgIQpIb3cgYWJvdXQga2Vl
-cGluZyBEb20wIHN0aWxsIGJlIHRoZXJlLCBidXQgRG9tVXMgZ2l2ZW4gRG9tMCBwcml2aWxlZ2Us
-IHdpdGgKcmVzdHJpY3RlZCBwZXJtaXNzaW9uIG9uIG1pc3Npb24gY3JpdGljYWwgcmVzb3VyY2Vz
-ID8gQW5kIGlmIGFueWhvdyBEb20wCmNyYXNoZXMsCnRoZSBiZXN0IGNvbnRlbmRlZCBhbW9uZyB0
-aGUgZXhpc3RpbmcgRG9tVXMgdGFrZSB0aGUgb3duZXJzaGlwIG9mIERvbTAgPwoKCj4gPiBIb3dl
-dmVyLCB5b3Ugc3VyZWx5IG5lZWQgYW4gZW50aXR5IHRvIGhhbmRsZSBkb21haW4gY3Jhc2guIFlv
-dSBkb24ndAp3YW50IHRvCj4gPiByZWJvb3QgeW91ciBwbGF0Zm9ybSAoYW5kIHRoZXJlZm9yZSB5
-b3Ugc2FmZXR5IGNyaXRpY2FsIGRvbWFpbikgZm9yIGEKY3Jhc2hlZAo+ID4gVUksIHJpZ2h0PyBT
-byBob3cgdGhpcyBpcyBnb2luZyB0byBiZSBoYW5kbGVkIGluIHlvdXIgb3B0aW9uPwoKPiBXZSBu
-ZWVkIHRvIHVuZGVyc3RhbmQgdGhlIGNlcnRpZmljYXRpb24gcmVxdWlyZW1lbnRzIGJldHRlciB0
-byBrbm93IHRoZQo+IGFuc3dlciB0byB0aGlzLiBJIGFtIGd1ZXNzaW5nIHRoYXQgVUkgY3Jhc2hl
-cyBhcmUgbm90IGhhbmRsZWQgZnJvbSB0aGUKPiBjZXJ0aWZpY2F0aW9uIHBvaW50IG9mIHZpZXcg
-LS0gbWF5YmUgd2Ugb25seSBuZWVkIHRvIGRlbW9uc3RyYXRlIHRoYXQKPiB0aGUgc3lzdGVtIGlz
-IG5vdCBhZmZlY3RlZCBieSB0aGVtPwoKV2hlcmUgY2FuIHdlIGZpbmQgdGhlIGNlcnRpZmljYXRp
-b24gcmVxdWlyZW1lbnRzIGRldGFpbHMgPwo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCj4gWGVuLWRldmVsIG1haWxpbmcgbGlzdAo+IFhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwo+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+--===============5968729381432454016==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/akbVIaaTohVPkPmETGiutjB"; protocol="application/pgp-signature"
+
+--Sig_/akbVIaaTohVPkPmETGiutjB
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 9 May 2018 14:43:17 -0700 (PDT)
+schrieb Stefano Stabellini <sstabellini@kernel.org>:
+
+> 512b109ec962 is a very old commit: why is it causing problems to Xen
+> 4.10 and Xen 4.11 HVM migration? What is the error exactly? Sorry, I
+> might be missing some context.
+
+It is papering over the real issue, thats why one can still migrate a
+pvops HVM domU with current toolstack. Upstream kernel simply does the
+work that is supposed to be done by qemu itself. Since the xenlinux based
+kernel does not do that work (it never had a need to do the unplug twice),
+migration fails.
+
+qemu has to carry the unplug state from one dom0 to another dom0 during
+migration, simply because unplug is a one-time operation that can not=20
+be undone. I wonder how to do that, if qemu already has code to carry its
+state.
+
+Olaf
+
+--Sig_/akbVIaaTohVPkPmETGiutjB
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvPg2wAKCRBdQqD6ppg2
+fgqiAJoCO/885E0UVsHVrDoP8yj3zFnt/QCdGEHgUxPtSFxJ+cy4xqeCxaWZ9RI=
+=/69J
+-----END PGP SIGNATURE-----
+
+--Sig_/akbVIaaTohVPkPmETGiutjB--
+
+
+--===============5968729381432454016==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5968729381432454016==--
