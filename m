@@ -1,31 +1,16 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH v3 10/10] xen/arm: Enable errata for
- secondary CPU on hotplug after the boot
-Date: Fri, 11 May 2018 16:14:17 +0200
-Message-ID: <42c8cdb9516f357c1d4a90c7972b92ebb7b24636.camel@suse.com>
-References: <20180427171258.28852-1-mirela.simonovic@aggios.com>
- <20180427171258.28852-11-mirela.simonovic@aggios.com>
- <ffc6351e-350c-b1c9-ea3e-fd4936701eb1@arm.com>
- <CAKPH-NiTLoOdYgpcWiM1qXHXaC=znAvMp0HHGQo-9mfegz2LcA@mail.gmail.com>
- <c713cc00-ace2-f528-563f-175657dccb12@arm.com>
- <CAKPH-NhUyxO1vOJnJPFayw71F5SfY87vWchoQybcH1e6Z4Mg2A@mail.gmail.com>
- <CAKPH-NhZhcvAdnZ_PyCUe3oSEokZnoBi8aPwfYbpPHioGgU9KA@mail.gmail.com>
- <4dec77ef3b2a940453e1bc112e6dae21cb99af18.camel@suse.com>
- <CAKPH-NicJOBS7mLYSvo-Z62yxNuFbMZfZR7BdfUfJvEcoGoZOA@mail.gmail.com>
- <300e3466-8214-764a-6c33-ce8aaea31ed9@arm.com>
- <CAKPH-NgvzykBMx1jouMV-fBbLN8=oHmb3zFhy+pPQTwcQdf2Vg@mail.gmail.com>
- <6c0ba4fadcdb650e3a8651f13781da9caaae251e.camel@suse.com>
- <CAKPH-NiZtBwioY1hfzx2PSgzKB6eQxjw0hXUzLg94+u+OVpL+Q@mail.gmail.com>
- <51febc3c-c55a-6512-1d32-0d2bb0a64df7@arm.com>
- <CAKPH-NjhQA+aUsD97M3WFNHWR+QeEMP1e86HNCGQNQv=YpK6DA@mail.gmail.com>
- <CAKPH-NgZ37E6J6fc17tV+XAfDeFO4bPpFTDkY01J4tzX1qH6nA@mail.gmail.com>
- <26274a25-7135-9f0a-4d22-5d6b49e35653@arm.com>
- <7b0b49ef8b71d691904daafe4353737b8f0d0510.camel@suse.com>
- <CAKPH-Nj2znmdcjZEfFf83WmrcBS_u4R33yPOxAPWw37RHVZ38g@mail.gmail.com>
+From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Subject: Re: [PATCH 01/10] x86/spec_ctrl: Read
+ MSR_ARCH_CAPABILITIES only once
+Date: Fri, 11 May 2018 10:32:44 -0400
+Message-ID: <20180511143244.GU19972@char.us.oracle.com>
+References: <1526035094-14343-1-git-send-email-andrew.cooper3@citrix.com>
+ <1526035094-14343-2-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8262609151277676287=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAKPH-Nj2znmdcjZEfFf83WmrcBS_u4R33yPOxAPWw37RHVZ38g@mail.gmail.com>
+Content-Disposition: inline
+In-Reply-To: <1526035094-14343-2-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -34,128 +19,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8262609151277676287==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-aovs8U2Q4eEeBOmizgg9"
-
-
---=-aovs8U2Q4eEeBOmizgg9
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2018-05-11 at 15:44 +0200, Mirela Simonovic wrote:
-> Hi Dario and Julien,
->=20
-Err... you've dropped the list and everyone else but me. Re-adding...
-
-> Thanks for the feedback to both.=20
->
-You're welcome. :-)=20
-
-> I think we need to roll back here. I
-> believe the root cause of this is an attempt to do errata workarounds
-> using notifiers.
-> But let me try to enumerate all the options I see as possible
-> solutions:
->=20
-> 1) Don't use notifiers to do errata workaround. Do it before
-> CPU_STARTING fires, essentially from start_secondary() before calling
-> notify_cpu_starting(). But we need to stop the CPU within
-> start_secondary() if enabling errata fails. In start_secondary()
-> stop_cpu is already done so I don't see why would an additional call
-> be a problem.
->=20
-I'm no expert of ARM's start_secondary(). Indeed it looks like it can
-fail already, so what you say seems to make sense, but really, I better
-don't comment on this and leave it to ARM people.
-
-> 2) Still try to use notifiers. We have few options here:
-> 2.a) Enabling capability must not fail because a notifier at this
-> stage should not fail. This would mean that function to which
-> 'enable'
-> ptr points (defined in struct arm_cpu_capabilities) has to return
-> void
-> instead of int. This doesn't seem right to me.
->
-It's not.
-
-> 2.b) Change scheduler and whatever else is needed (right place to
-> refer to escalation of the scope of series :) in order to make
-> CPU_STARTING possible to fail.=20
->
-Nope, this is just as wrong as 2.a.
-
-> I'm not the person to do that since it
-> affects way beyond what I suppose to do. Please note here that I'm
-> not
-> running away from doing the job. I'm just concerned that this will
-> compromise the actual work I suppose to do from the funding/time
-> perspective.
-> 2.c) Return an error and hit BUG_ON. Add comments as Dario proposed.
-> I
-> need to state here that I probably won't be the one to implement the
-> following series that allows CPU_STARTING to fail.
->=20
-Yes, this is correct, from the point of view of ARM vs common code
-interaction.
-
-Whether or not it is ok to leave this pending, is again up to ARM
-people, IMO, as it would be ARM that risks panicing, if the notifier
-fails.
-
-> Option 1) or 2.c) sounds like a good compromise to me. What do you
-> think?
->=20
-Well, all I can say is that you should stay away from notifiers
-priority --especially of the one of cpu_schedule_callback(). As long as
-you do that, I won't be on your way. :-D
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-aovs8U2Q4eEeBOmizgg9
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlr1pToACgkQFkJ4iaW4
-c+6e6w/9EnAE0kOBQE+pKVAtNL5J6mh12mzLnG1AqoZi0M1LAGgBy4drs4rcj2V0
-Y0vwvEC2RZH39NGRfj+PncpCJ5YKUFzMwlO9+kLRCqc2BF4SjqMNzAWkdpm0DVeW
-15y8bbsVZPaLrcIXqP43l7Fj7JY9oKPgJLCE5FFIURv43IsM2eAtlQePges9dkJh
-bcC3G1+zRft0u+dHWPCIv7fAtdJSXsV2xOgJc9URDNMu0A/3jEWvuB5YgnUCPeN7
-fXCi54d051yMUY0EdDLakYxLYP2MsRRd5zvaW3yGA4Ot8c7MwLcnoAGvcmRQJEbI
-VZ3HRZ8vRgJOQdpyGgFOAYRRfF1MBTLr2xAlykn+ucYEp4xOehGTD/dMr5/EUx6M
-Nqo5ft/6Gz65JxtKAeIYuM14EvKwEtRRPZsH1TtflNmnXG6c/aeRnCbV0qbWsHDS
-UHUZZT2S7eRyDUDI2PtOt8lIsiAI4AHI3xrPQfcSG6GOwfX3SM5UcxfQtRYzrAMn
-2uyQkV8nRShkozk0e9Ey6IJHNMmOkMN4wpr3vregRN79aU1Hyx0vUzIXtvCDS9js
-rBT+AOfOP9SCrgDU7O75h3KmxtOLE+v2yuq/ocD0Laln9tTZlpsi4RydGMgB5axb
-A2xjH7umOOGjQrABxmlIFW5E5piGXvhzzlbSPxvZ1pfw4JN2XOs=
-=mgeV
------END PGP SIGNATURE-----
-
---=-aovs8U2Q4eEeBOmizgg9--
-
-
-
---===============8262609151277676287==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+T24gRnJpLCBNYXkgMTEsIDIwMTggYXQgMTE6Mzg6MDVBTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBNYWtlIGl0IGF2YWlsYWJsZSBmcm9tIHRoZSBiZWdpbm5pbmcgb2YgaW5pdF9zcGVj
+dWxhdGlvbl9taXRpZ2F0aW9ucygpLCBhbmQKPiBwYXNzIGl0IGludG8gYXBwcm9wcmlhdGUgZnVu
+Y3Rpb25zLiAgRml4IGFuIFJTQkEgdHlwbyB3aGlsZSBtb3ZpbmcgdGhlCj4gYWZmZWN0ZWQgY29t
+bWVudC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0Bj
+aXRyaXguY29tPgpSZXZpZXdlZC1ieTogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQud2ls
+a0BvcmFjbGUuY29tPgoKVGhhbmsgeW91IQo+IC0tLQo+IENDOiBKYW4gQmV1bGljaCA8SkJldWxp
+Y2hAc3VzZS5jb20+Cj4gQ0M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4gQ0M6IFJv
+Z2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgo+IENDOiBKdWVyZ2VuIEdyb3Nz
+IDxqZ3Jvc3NAc3VzZS5jb20+Cj4gLS0tCj4gIHhlbi9hcmNoL3g4Ni9zcGVjX2N0cmwuYyB8IDM0
+ICsrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0KPiAgMSBmaWxlIGNoYW5nZWQsIDE0
+IGluc2VydGlvbnMoKyksIDIwIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vYXJj
+aC94ODYvc3BlY19jdHJsLmMgYi94ZW4vYXJjaC94ODYvc3BlY19jdHJsLmMKPiBpbmRleCAwMzdl
+ODRkLi40YWIwZjUwIDEwMDY0NAo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9zcGVjX2N0cmwuYwo+ICsr
+KyBiL3hlbi9hcmNoL3g4Ni9zcGVjX2N0cmwuYwo+IEBAIC05NywxOCArOTcsMTUgQEAgc3RhdGlj
+IGludCBfX2luaXQgcGFyc2VfYnRpKGNvbnN0IGNoYXIgKnMpCj4gIH0KPiAgY3VzdG9tX3BhcmFt
+KCJidGkiLCBwYXJzZV9idGkpOwo+ICAKPiAtc3RhdGljIHZvaWQgX19pbml0IHByaW50X2RldGFp
+bHMoZW51bSBpbmRfdGh1bmsgdGh1bmspCj4gK3N0YXRpYyB2b2lkIF9faW5pdCBwcmludF9kZXRh
+aWxzKGVudW0gaW5kX3RodW5rIHRodW5rLCB1aW50NjRfdCBjYXBzKQo+ICB7Cj4gICAgICB1bnNp
+Z25lZCBpbnQgXzdkMCA9IDAsIGU4YiA9IDAsIHRtcDsKPiAtICAgIHVpbnQ2NF90IGNhcHMgPSAw
+Owo+ICAKPiAgICAgIC8qIENvbGxlY3QgZGlhZ25vc3RpY3MgYWJvdXQgYXZhaWxhYmxlIG1pdGln
+YXRpb25zLiAqLwo+ICAgICAgaWYgKCBib290X2NwdV9kYXRhLmNwdWlkX2xldmVsID49IDcgKQo+
+ICAgICAgICAgIGNwdWlkX2NvdW50KDcsIDAsICZ0bXAsICZ0bXAsICZ0bXAsICZfN2QwKTsKPiAg
+ICAgIGlmICggYm9vdF9jcHVfZGF0YS5leHRlbmRlZF9jcHVpZF9sZXZlbCA+PSAweDgwMDAwMDA4
+ICkKPiAgICAgICAgICBjcHVpZCgweDgwMDAwMDA4LCAmdG1wLCAmZThiLCAmdG1wLCAmdG1wKTsK
+PiAtICAgIGlmICggXzdkMCAmIGNwdWZlYXRfbWFzayhYODZfRkVBVFVSRV9BUkNIX0NBUFMpICkK
+PiAtICAgICAgICByZG1zcmwoTVNSX0FSQ0hfQ0FQQUJJTElUSUVTLCBjYXBzKTsKPiAgCj4gICAg
+ICBwcmludGsoWEVOTE9HX0RFQlVHICJTcGVjdWxhdGl2ZSBtaXRpZ2F0aW9uIGZhY2lsaXRpZXM6
+XG4iKTsKPiAgCj4gQEAgLTE0Miw3ICsxMzksNyBAQCBzdGF0aWMgdm9pZCBfX2luaXQgcHJpbnRf
+ZGV0YWlscyhlbnVtIGluZF90aHVuayB0aHVuaykKPiAgfQo+ICAKPiAgLyogQ2FsY3VsYXRlIHdo
+ZXRoZXIgUmV0cG9saW5lIGlzIGtub3duLXNhZmUgb24gdGhpcyBDUFUuICovCj4gLXN0YXRpYyBi
+b29sIF9faW5pdCByZXRwb2xpbmVfc2FmZSh2b2lkKQo+ICtzdGF0aWMgYm9vbCBfX2luaXQgcmV0
+cG9saW5lX3NhZmUodWludDY0X3QgY2FwcykKPiAgewo+ICAgICAgdW5zaWduZWQgaW50IHVjb2Rl
+X3JldiA9IHRoaXNfY3B1KHVjb2RlX2NwdV9pbmZvKS5jcHVfc2lnLnJldjsKPiAgCj4gQEAgLTE1
+MywxOSArMTUwLDEyIEBAIHN0YXRpYyBib29sIF9faW5pdCByZXRwb2xpbmVfc2FmZSh2b2lkKQo+
+ICAgICAgICAgICBib290X2NwdV9kYXRhLng4NiAhPSA2ICkKPiAgICAgICAgICByZXR1cm4gZmFs
+c2U7Cj4gIAo+IC0gICAgaWYgKCBib290X2NwdV9oYXMoWDg2X0ZFQVRVUkVfQVJDSF9DQVBTKSAp
+Cj4gLSAgICB7Cj4gLSAgICAgICAgdWludDY0X3QgY2FwczsKPiAtCj4gLSAgICAgICAgcmRtc3Js
+KE1TUl9BUkNIX0NBUEFCSUxJVElFUywgY2Fwcyk7Cj4gLQo+IC0gICAgICAgIC8qCj4gLSAgICAg
+ICAgICogUkJTQSBtYXkgYmUgc2V0IGJ5IGEgaHlwZXJ2aXNvciB0byBpbmRpY2F0ZSB0aGF0IHdl
+IG1heSBtb3ZlIHRvIGEKPiAtICAgICAgICAgKiBwcm9jZXNzb3Igd2hpY2ggaXNuJ3QgcmV0cG9s
+aW5lLXNhZmUuCj4gLSAgICAgICAgICovCj4gLSAgICAgICAgaWYgKCBjYXBzICYgQVJDSF9DQVBT
+X1JTQkEgKQo+IC0gICAgICAgICAgICByZXR1cm4gZmFsc2U7Cj4gLSAgICB9Cj4gKyAgICAvKgo+
+ICsgICAgICogUlNCQSBtYXkgYmUgc2V0IGJ5IGEgaHlwZXJ2aXNvciB0byBpbmRpY2F0ZSB0aGF0
+IHdlIG1heSBtb3ZlIHRvIGEKPiArICAgICAqIHByb2Nlc3NvciB3aGljaCBpc24ndCByZXRwb2xp
+bmUtc2FmZS4KPiArICAgICAqLwo+ICsgICAgaWYgKCBjYXBzICYgQVJDSF9DQVBTX1JTQkEgKQo+
+ICsgICAgICAgIHJldHVybiBmYWxzZTsKPiAgCj4gICAgICBzd2l0Y2ggKCBib290X2NwdV9kYXRh
+Lng4Nl9tb2RlbCApCj4gICAgICB7Cj4gQEAgLTI5OSw2ICsyODksMTAgQEAgdm9pZCBfX2luaXQg
+aW5pdF9zcGVjdWxhdGlvbl9taXRpZ2F0aW9ucyh2b2lkKQo+ICB7Cj4gICAgICBlbnVtIGluZF90
+aHVuayB0aHVuayA9IFRIVU5LX0RFRkFVTFQ7Cj4gICAgICBib29sIGlicnMgPSBmYWxzZTsKPiAr
+ICAgIHVpbnQ2NF90IGNhcHMgPSAwOwo+ICsKPiArICAgIGlmICggYm9vdF9jcHVfaGFzKFg4Nl9G
+RUFUVVJFX0FSQ0hfQ0FQUykgKQo+ICsgICAgICAgIHJkbXNybChNU1JfQVJDSF9DQVBBQklMSVRJ
+RVMsIGNhcHMpOwo+ICAKPiAgICAgIC8qCj4gICAgICAgKiBIYXMgdGhlIHVzZXIgc3BlY2lmaWVk
+IGFueSBjdXN0b20gQlRJIG1pdGlnYXRpb25zPyAgSWYgc28sIGZvbGxvdyB0aGVpcgo+IEBAIC0z
+MjcsNyArMzIxLDcgQEAgdm9pZCBfX2luaXQgaW5pdF9zcGVjdWxhdGlvbl9taXRpZ2F0aW9ucyh2
+b2lkKQo+ICAgICAgICAgICAgICAgKiBPbiBJbnRlbCBoYXJkd2FyZSwgd2UnZCBsaWtlIHRvIHVz
+ZSByZXRwb2xpbmUgaW4gcHJlZmVyZW5jZSB0bwo+ICAgICAgICAgICAgICAgKiBJQlJTLCBidXQg
+b25seSBpZiBpdCBpcyBzYWZlIG9uIHRoaXMgaGFyZHdhcmUuCj4gICAgICAgICAgICAgICAqLwo+
+IC0gICAgICAgICAgICBlbHNlIGlmICggcmV0cG9saW5lX3NhZmUoKSApCj4gKyAgICAgICAgICAg
+IGVsc2UgaWYgKCByZXRwb2xpbmVfc2FmZShjYXBzKSApCj4gICAgICAgICAgICAgICAgICB0aHVu
+ayA9IFRIVU5LX1JFVFBPTElORTsKPiAgICAgICAgICAgICAgZWxzZSBpZiAoIGJvb3RfY3B1X2hh
+cyhYODZfRkVBVFVSRV9JQlJTQikgKQo+ICAgICAgICAgICAgICAgICAgaWJycyA9IHRydWU7Cj4g
+QEAgLTQxOCw3ICs0MTIsNyBAQCB2b2lkIF9faW5pdCBpbml0X3NwZWN1bGF0aW9uX21pdGlnYXRp
+b25zKHZvaWQpCj4gICAgICBlbHNlCj4gICAgICAgICAgc2V0dXBfY2xlYXJfY3B1X2NhcChYODZf
+RkVBVFVSRV9OT19YUFRJKTsKPiAgCj4gLSAgICBwcmludF9kZXRhaWxzKHRodW5rKTsKPiArICAg
+IHByaW50X2RldGFpbHModGh1bmssIGNhcHMpOwo+ICB9Cj4gIAo+ICBzdGF0aWMgdm9pZCBfX2lu
+aXQgX19tYXliZV91bnVzZWQgYnVpbGRfYXNzZXJ0aW9ucyh2b2lkKQo+IC0tIAo+IDIuMS40Cj4g
+Cj4gCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiBY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Cj4gWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCj4g
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbAoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8262609151277676287==--
