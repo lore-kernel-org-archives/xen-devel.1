@@ -1,8 +1,8 @@
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
+From: Dario Faggioli <dfaggioli@suse.com>
 Subject: Re: [PATCH v3 10/10] xen/arm: Enable errata for
  secondary CPU on hotplug after the boot
-Date: Fri, 11 May 2018 14:20:08 +0200
-Message-ID: <CAKPH-NgZ37E6J6fc17tV+XAfDeFO4bPpFTDkY01J4tzX1qH6nA@mail.gmail.com>
+Date: Fri, 11 May 2018 15:01:01 +0200
+Message-ID: <7544f7eaf9f2c079fe8d1294fbabe935c8e99f59.camel@suse.com>
 References: <20180427171258.28852-1-mirela.simonovic@aggios.com>
  <20180427171258.28852-11-mirela.simonovic@aggios.com>
  <ffc6351e-350c-b1c9-ea3e-fd4936701eb1@arm.com>
@@ -16,13 +16,10 @@ References: <20180427171258.28852-1-mirela.simonovic@aggios.com>
  <CAKPH-NgvzykBMx1jouMV-fBbLN8=oHmb3zFhy+pPQTwcQdf2Vg@mail.gmail.com>
  <6c0ba4fadcdb650e3a8651f13781da9caaae251e.camel@suse.com>
  <CAKPH-NiZtBwioY1hfzx2PSgzKB6eQxjw0hXUzLg94+u+OVpL+Q@mail.gmail.com>
- <51febc3c-c55a-6512-1d32-0d2bb0a64df7@arm.com>
- <CAKPH-NjhQA+aUsD97M3WFNHWR+QeEMP1e86HNCGQNQv=YpK6DA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4226141910544521140=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAKPH-NjhQA+aUsD97M3WFNHWR+QeEMP1e86HNCGQNQv=YpK6DA@mail.gmail.com>
+In-Reply-To: <CAKPH-NiZtBwioY1hfzx2PSgzKB6eQxjw0hXUzLg94+u+OVpL+Q@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,82 +28,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen Devel <xen-devel@lists.xen.org>, Davorin Mista <dm@aggios.com>, Dario Faggioli <dfaggioli@suse.com>
+To: Mirela Simonovic <mirela.simonovic@aggios.com>
+Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, Xen Devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiBGcmksIE1heSAxMSwgMjAxOCBhdCAyOjA3IFBNLCBNaXJlbGEgU2ltb25vdmljCjxt
-aXJlbGEuc2ltb25vdmljQGFnZ2lvcy5jb20+IHdyb3RlOgo+IEhpIEp1bGllbiwKPgo+IE9uIEZy
-aSwgTWF5IDExLCAyMDE4IGF0IDEyOjU0IFBNLCBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBh
-cm0uY29tPiB3cm90ZToKPj4KPj4KPj4gT24gMTEvMDUvMTggMTE6NDEsIE1pcmVsYSBTaW1vbm92
-aWMgd3JvdGU6Cj4+Pgo+Pj4gSGkgRGFyaW8sCj4+Pgo+Pj4gT24gVGh1LCBNYXkgMTAsIDIwMTgg
-YXQgNjoyNCBQTSwgRGFyaW8gRmFnZ2lvbGkgPGRmYWdnaW9saUBzdXNlLmNvbT4KPj4+IHdyb3Rl
-Ogo+Pj4+Cj4+Pj4gT24gVGh1LCAyMDE4LTA1LTEwIGF0IDE3OjQ5ICswMjAwLCBNaXJlbGEgU2lt
-b25vdmljIHdyb3RlOgo+Pj4+Pgo+Pj4+PiBSZWdhcmRsZXNzIG9mIHRoZSBmYWN0IHRoYXQgdGhl
-IG5vdGlmaWVyIHJldHVybnMgYW4gZXJyb3Igb3Igbm90LCBJCj4+Pj4+IGJlbGlldmUgaXQgd291
-bGQgYmUgZ29vZCBhbmQgc2FmZSB0byBzZXQgcHJpb3JpdHkgYW5kIGRvY3VtZW50IHRoYXQKPj4+
-Pj4gcHJpb3JpdHkgemVybyB3b3VsZCBjYXVzZSByYWNpbmcgaXNzdWUgaW4gdGhlIHNjZW5hcmlv
-IEkgZGVidWdnZWQKPj4+Pj4gdG9kYXkuIEknbSBwcmV0dHkgc3VyZSB0aGF0IHRoaXMgZGlzY3Vz
-c2lvbiB3b3VsZCBiZSBmb3Jnb3R0ZW4gc29vbgo+Pj4+PiBhbmQgaXQgcmVhbGx5IHNob3VsZCBi
-ZSBkb2N1bWVudGVkIGluIGNvZGUvY29tbWVudC4KPj4+Pj4KPj4+PiBJIG1heSB2ZXJ5IHdlbGwg
-YmUgbWlzc2luZyBvciBtaXN1bmRlcnN0YW5kaW5nIHNvbWV0aGluZywgYnV0IEkKPj4+PiBjb250
-aW51ZSB0byB0aGluayB0aGF0IHRoZSBwcm9ibGVtIGhlcmUgaXMgdGhhdCBDUFVfU1RBUlRJTkcg
-Y2FuJ3QsCj4+Pj4gcmlnaHQgbm93LCBmYWlsLCB3aGlsZSB5b3UgbmVlZCBpdCB0byBiZSBhYmxl
-IHRvLgo+Pj4+Cj4+Pj4gSWYgdGhhdCBpcyB0aGUgY2FzZSwgZ2l2aW5nIGRpZmZlcmVudCBwcmlv
-cml0aWVzIHRvIHRoZSBub3RpZmllciwgaXMKPj4+PiBub3QgYSBzb2x1dGlvbi4KPj4+Pgo+Pj4K
-Pj4+IExldCBtZSB0cnkgdG8gY2xhcmlmeS4gVGhlIGFzc3VtcHRpb24gaXMgdGhhdCB0aGUgc3Rh
-cnRpbmcgQ1BVIGNhbgo+Pj4gZmFpbC4gQWRkaXRpb25hbCByZXF1aXJlbWVudCBzZXQgYnkgSnVs
-aWVuIGlzIHRoYXQgcGFuaWMgb3IgQlVHX09OIGlzCj4+PiBub3QgYWNjZXB0YWJsZS4KPj4KPj4K
-Pj4gUGxlYXNlIGRvbid0IHR3aXN0IG15IHdvcmQuIEkgbmV2ZXIgc2FpZCBpdCB3YXMgbm90IGFj
-Y2VwdGFibGUgdG8gaGF2ZSB0aGUKPj4gQlVHX09OIGluIG5vdGlmeV9jcHVfc3RhcnRpbmcoKS4K
-Pgo+IEkgZGlkbid0IHNheSB0aGF0IGVpdGhlci4gWW91IHJlZmVyZW5jZWQgbm90aWZ5X2NwdV9z
-dGFydGluZygpIGhlcmUsIG5vdCBtZS4KPiBCVFcsIGlmIHlvdSBnZXQgdGhlIGltcHJlc3Npb24g
-dGhhdCBJJ20gdHdpc3Rpbmcgd29yZHMgdGhlbiB3ZSBoYXZlIGEKPiBtaXN1bmRlcnN0YW5kaW5n
-IGFuZCB5b3VyIGFwcHJvYWNoIGlzIG5vdCB0aGUgYmVzdCB3YXkgdG93YXJkCj4gY2xhcmlmeWlu
-ZyBpdC4gUGxlYXNlIGhhdmUgdGhhdCBpbiBtaW5kIG5leHQgdGltZSwgYmVjYXVzZSBJIGRvIG5v
-dAo+IGhhdmUgc3VjaCBhbiBpbnRlbnQgYW5kIEkgbmV2ZXIgd2lsbC4KPgo+IEkgcmVmZXJyZWQg
-dG8gcGFuaWMvQlVHX09OIGluIHRoaXMgc2NlbmFyaW8gcmVnYXJkbGVzcyBvZiB0aGUgcGxhY2UK
-PiBmcm9tIHdoaWNoIGl0IHdvdWxkIGJlIGludm9rZWQuIE15IHVuZGVyc3RhbmRpbmcgZnJvbSB5
-b3VyIHByZXZpb3VzCj4gYW5zd2VycyBpcyB0aGF0IHlvdSB0aGluayB0aGUgc3lzdGVtIHNob3Vs
-ZCBub3QgcGFuaWMvQlVHX09OIGluIHRoaXMKPiBzY2VuYXJpbywgYmVjYXVzZSB0aGlzIGtpbmQg
-b2YgZXJyb3IgdGhlIHN5c3RlbSBzaG91bGQgYmUgYWJsZSB0bwo+IHN1cnZpdmUuCj4KPj4KPj4g
-SSBhbSBnb2luZyB0byByZXBlYXQgdGhlIGNvbnRlbnQgb2YgbXkgYW5zd2VyIHRvIHlvdXIgbGFz
-dCBlLW1haWw6Cj4+Cj4+IEkgd2FzIGF3YXJlIGFib3V0IGl0IHNpbmNlIHRoZSBiZWdpbm5pbmcu
-IFRoZSB3aG9sZSBwb2ludCBvZiB0aGUKPj4gY29udmVyc2F0aW9uIHdhcyB3ZSBzaG91bGQgYXZv
-aWQgdG8gdGFrZSB0aGUgZGVjaXNpb24gYXQgdGhlIGxvd2VyIGxldmVsIGFuZAo+PiBsZXQgdGhl
-IHVwcGVyIGxheWVyIGRlY2lkZSB3aGF0IHRvIGRvLgo+Pgo+PiBJZiB0aGUgc3lzdGVtIGlzIGZh
-aWxpbmcgdG9kYXkgdGhlbiB0aGF0J3MgZmluZSBhbmQgc3RpbGwgZml0IHdoYXQgSSBzYWlkIGlu
-Cj4+IG15IGZpcnN0IGUtbWFpbCBvZiB0aGF0IHRocmVhZC4gRm9yIHJlbWluZGVyOgo+Pgo+PiAi
-V2Ugc2hvdWxkIHJlYWxseSBhdm9pZCB0byB1c2UgcGFuaWMoLi4uKSBpZiB0aGlzIGlzIHNvbWV0
-aGluZyB0aGUgc3lzdGVtCj4+IGNhbiBzdXJ2aXZlLiBJbiB0aGF0IHNwZWNpZmljIGNhc2UsIGl0
-IHdvdWxkIG9ubHkgYWZmZWN0IHRoZSBjdXJyZW50IENQVS4gU28KPj4gaXQgd291bGQgYmUgYmV0
-dGVyIHRvIHJldHVybiBhbiBlcnJvciBhbmQgbGV0IHRoZSBjYWxsZXIgZGVjaWRlIHdoYXQgdG8g
-ZG8uIgo+Pgo+PiBUbyBzdW1tYXJpemU6Cj4+ICAgICAgICAgMSkgTm90aWZpZXJzIHNob3VsZCBv
-bmx5IHJlcG9ydCBhbiBlcnJvciBhbmQgbGV0IHRoZSB1cHBlciBjYWxsZXIKPj4gKGhlcmUgbm90
-aWZ5X2NwdV9zdGFydGluZygpKSBkZWNpZGluZyB3aGF0IHRvIGRvLgo+PiAgICAgICAgIDIpIEkg
-YW0gT0sgd2l0aCB0aGUgQlVHX09OIGluIG5vdGlmeV9jcHVfc3RhcnRpbmcoKSBmb3Igbm93Lgo+
-Cj4gSSBhZ3JlZSB3aXRoIEJVR19PTiBpbiBub3RpZnlfY3B1X3N0YXJ0aW5nKCkuCj4KPj4KPgo+
-IExldCBtZSBqdXN0IGNsYXJpZnkgY29uc2VxdWVuY2Ugb2YgeW91ciBwcm9wb3NhbCBhY2NvcmRp
-bmcgdG8gbXkKPiB1bmRlcnN0YW5kaW5nLiBJZiBpbnN0ZWFkIG9mIHN0b3BwaW5nIHRoZSBDUFUg
-d2hlbiBlbmFibGluZyBhCj4gY2FwYWJpbGl0eSBmYWlscyB0aGUgbm90aWZpZXIgcmV0dXJucyBh
-biBlcnJvciwgdGhlIGVycm9yIHdpbGwKPiBwcm9wYWdhdGUgdG8gbm90aWZ5X2NwdV9zdGFydGlu
-ZygpIGFuZCBCVUdfT04gd2lsbCBjcmFzaCB0aGUgc3lzdGVtLgo+IFRoZSBwcm9wb3NhbCB3aXRo
-IHN0b3BfY3B1KCkgaW4gdGhlIGVuYWJsZV9ub25ib290X2NwdV9jYXBzKCkgaW5zdGVhZAo+IG9m
-IHBhbmljIHRoYXQgaXMgc3VibWl0dGVkIGluIHRoaXMgcGF0Y2ggd291bGQgc3RvcCBvbmx5IHRo
-ZSBlcnJvbmVvdXMKPiBDUFUuIFRoZSByZXN0IG9mIHRoZSBzeXN0ZW0gd2lsbCBjb250aW51ZSB0
-byB3b3JrIGFuZCBJIHRob3VnaCB0aGF0IGlzCj4gd2hhdCdzIHRoZSBnb2FsIHNpbmNlIHdlIGRv
-bid0IHdhbnQgdG8gcGFuaWMvQlVHX09OLgo+IEZyb20gdGhhdCBwZXJzcGVjdGl2ZSBJIGJlbGll
-dmUgc3RvcF9jcHUoKSBpbgo+IGVuYWJsZV9ub25ib290X2NwdV9jYXBzKCkgaXMgYmV0dGVyIGNv
-bXBhcmVkIHRvIHJldHVybmluZyBhbiBlcnJvcgo+IGZyb20gdGhlIG5vdGlmaWVyLgo+Cj4gWW91
-IHNhaWQgYWJvdmUgIkkgd291bGQgYmUgb2sgaGF2aW5nIHN0b3BfY3B1IGNhbGxlZCBoZXJlIiBh
-bmQgSSBkaWQKPiBzbyAoc3RvcF9jcHUoKSBpbiBlbmFibGVfbm9uYm9vdF9jcHVfY2FwcygpIGlu
-c3RlYWQgb2YgcGFuaWMgdGhhdAo+IHN1Ym1pdHRlZCBpbiB0aGlzIHBhdGNoKS4KPgo+IElmIHlv
-dSBiZWxpZXZlIG15IHVuZGVyc3RhbmRpbmcgaXMgbm90IGNvcnJlY3QsIGlmIEkgbWlzc2VkIHNv
-bWV0aGluZwo+IG9yIHlvdSBoYXZlIGFub3RoZXIgcHJvcG9zYWwgcGxlYXNlIGxldCBtZSBrbm93
-Lgo+CgpBbHNvLCBpZiB5b3UganVzdCB3YW50IHRvIGNvbnZlcnQgcGFuaWMgZnJvbSB0aGlzIHBh
-dGNoIGludG8gcHJpbnQgSQpkb24ndCBiZWxpZXZlIGl0J3MgYSBnb29kIGFwcHJvYWNoLCBidXQg
-SSBjYW4gZG8gdGhhdC4KCj4gVGhhbmtzLAo+IE1pcmVsYQo+Cj4+IENoZWVycywKPj4KPj4gLS0K
-Pj4gSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+
+--===============4226141910544521140==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-PH19arlUWJErBIrO0N6n"
+
+
+--=-PH19arlUWJErBIrO0N6n
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-05-11 at 12:41 +0200, Mirela Simonovic wrote:
+> Hi Dario,
+>=20
+Hi,
+
+> On Thu, May 10, 2018 at 6:24 PM, Dario Faggioli <dfaggioli@suse.com>
+> wrote:
+> > I may very well be missing or misunderstanding something, but I
+> > continue to think that the problem here is that CPU_STARTING can't,
+> > right now, fail, while you need it to be able to.
+> >=20
+> > If that is the case, giving different priorities to the notifier,
+> > is
+> > not a solution.
+> >=20
+> Let me try to clarify. The assumption is that the starting CPU can
+> fail. Additional requirement set by Julien is that panic or BUG_ON is
+> not acceptable.=20
+>
+So, currently, in Xen, CPU bringup can't fail at the CPU_STARTING
+phase. This is the point of the BUG_ON().
+
+It is you that need it to change this, and make it possible for CPU
+bringup to fail during CPU_STARTING. This is fine, but require changes,
+which, IMO, are not limited to removing the BUG_ON() or trading it with
+something else.
+
+> There are 2 ways to deal with this scenario:
+>=20
+> 1) Ignore and report the error, and let the erroneous CPU become
+> online.
+> This cannot be done without changing the logic in either scheduler or
+> notify_cpu_starting(), or I least I don't see how would that be done.
+> In previous email when I said "escalating this to who knows where" I
+> did not refer to error escalation but the escalation of the scope of
+> this series.
+>=20
+How can that be an option? If CPU bringup failed, how is it possible to
+let it go online?
+
+To me, it's not that "we can't let a CPU for which bringup failed
+continue without changing the scheduler or notify_cpu_starting()". It's
+rather "we must not a CPU for which bringup faile continue. Period.".
+
+Which is to say, you need to change things (in common code!) in such a
+way that CPU bringup can fail during the CPU_STARTING phase.
+
+> 2) Stop the erroneous CPU.
+> Taking this approach requires setting the priority for the notifier.
+>
+No! Stop the CPU if the bringup fails duting the CPU_STARTING phase
+does not require setting the priorities of the CPU_STARTING notifier.=20
+
+It requires to changing things (in common code) in such a way that CPU
+bringup can fail during the CPU_STARTING phase. (Did I say that
+already? :-) )
+
+I understand that, if you set the priority, your series work. But that
+does not mean that it is a proper solution to the problem. It means
+that it is an hack that...well... makes your series work. :-)
+
+> The key point is that notify_cpu_starting() and scheduler do not have
+> to be changed. If errata notifier has higher priority than
+> scheduler's
+> notifier in the case of an error the CPU will not return into
+> notify_cpu_starting() and it will never execute BUG_ON because it
+> will
+> be stopped. The rest of the system will continue to function without
+> that CPU.
+>=20
+Right. But now we have and architecture (ARM) for which CPU bringup can
+fail at the CPU_STARTING phase. And yet, looking at common code, we see
+that the CPU_STARTING notifier has a BUG_ON() if it ever fails. How
+would people looking at this in 2 years time from now make sense of
+this?
+
+No, I don't think there really is a sensible workaround here. If you
+need the CPU_STARTING phase of CPU bringup to be able to fail, you need
+to make all the changes required to make that happen properly.
+
+Which does involve changing common code, and which should therefore be
+discussed with the other arches and core hypervisor maintainers.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-PH19arlUWJErBIrO0N6n
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlr1lA0ACgkQFkJ4iaW4
+c+7AvQ/7BMIMrDEdV4DGuTFN8/LbS4VS7jJUJoxChFNKTGtwHAkd7zR/Wjodn2V5
+lbhc6olBhE0HCxvex1+PU8PARoQK+j6sNs0F5x3xNNucGBoJpG3BL5SaG3Ilv2/u
+9wAHxoWAFIH4bpqqhqRdchiU3ZXqdSYN0hdLhWCPyIISXEczYODaCwQa+OyJBynN
+n/GxnjFA5nQubprEbK7W+CAAZBsiAXEGJtk78LizIxkTDhZCpjzNOTnwTRGZIoL+
+2UOCh+gYnLjOdWh6HMfiUNSsn4R9f9nJ/2K3HnePy47Gk8gPTFmGBBXiFTFYf0Iy
+oSN2ctNlq6C5AfEz7jSxYZg/RxB2c9sfkmR/fD6oALl42sijjgVH71RiO40KGm22
+JGX1KbZhAA7uHE2IPPv212rnEzaPE+pskGN4s/6xV0X2MrgqAMeCl6nrg56jn5Sm
+nS2H0aG7T+nDFWP8xdHjAgoQYxQHkWe31w2x3CTU5kAM6yD07v74FXuAk+i6xu1U
+B9sqFhe8/b5ra53p4kLYvOPJlNIjrkMrzjUJgk4HnKOgUIZqK7KWK9ynQSBeKcDu
+Umn0l6/miC4sgfGLWirIZwYzJAu5Z/GFf7T4gQobesbxx9OqKM5afzLe4QTos6uf
+ljqL4/D2j56QTqtHQwqsppZ76KS6MfTuuFX9TlkhTpv8hYdWEiM=
+=17hH
+-----END PGP SIGNATURE-----
+
+--=-PH19arlUWJErBIrO0N6n--
+
+
+
+--===============4226141910544521140==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4226141910544521140==--
