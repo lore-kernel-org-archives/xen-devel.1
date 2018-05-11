@@ -1,29 +1,13 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v3 10/10] xen/arm: Enable errata for
- secondary CPU on hotplug after the boot
-Date: Fri, 11 May 2018 14:47:36 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1805111446430.10749@sstabellini-ThinkPad-X260>
-References: <20180427171258.28852-1-mirela.simonovic@aggios.com>
- <CAKPH-NiTLoOdYgpcWiM1qXHXaC=znAvMp0HHGQo-9mfegz2LcA@mail.gmail.com>
- <c713cc00-ace2-f528-563f-175657dccb12@arm.com>
- <CAKPH-NhUyxO1vOJnJPFayw71F5SfY87vWchoQybcH1e6Z4Mg2A@mail.gmail.com>
- <CAKPH-NhZhcvAdnZ_PyCUe3oSEokZnoBi8aPwfYbpPHioGgU9KA@mail.gmail.com>
- <4dec77ef3b2a940453e1bc112e6dae21cb99af18.camel@suse.com>
- <CAKPH-NicJOBS7mLYSvo-Z62yxNuFbMZfZR7BdfUfJvEcoGoZOA@mail.gmail.com>
- <300e3466-8214-764a-6c33-ce8aaea31ed9@arm.com>
- <CAKPH-NgvzykBMx1jouMV-fBbLN8=oHmb3zFhy+pPQTwcQdf2Vg@mail.gmail.com>
- <6c0ba4fadcdb650e3a8651f13781da9caaae251e.camel@suse.com>
- <CAKPH-NiZtBwioY1hfzx2PSgzKB6eQxjw0hXUzLg94+u+OVpL+Q@mail.gmail.com>
- <51febc3c-c55a-6512-1d32-0d2bb0a64df7@arm.com>
- <CAKPH-NjhQA+aUsD97M3WFNHWR+QeEMP1e86HNCGQNQv=YpK6DA@mail.gmail.com>
- <CAKPH-NgZ37E6J6fc17tV+XAfDeFO4bPpFTDkY01J4tzX1qH6nA@mail.gmail.com>
- <26274a25-7135-9f0a-4d22-5d6b49e35653@arm.com>
- <7b0b49ef8b71d691904daafe4353737b8f0d0510.camel@suse.com>
+From: =?UTF-8?Q?Charles_Gon=C3=A7alves?= <charles.fg@gmail.com>
+Subject: Re: domain_crash_sync vs "plain crash"
+Date: Fri, 11 May 2018 19:43:58 -0300
+Message-ID: <CAAQRGoCa4nVvx-kCK+tSAJ105QL1YpJ+pKBYMDaEA5=E_6KMag@mail.gmail.com>
+References: <CAAQRGoCRJch7OLrCyOUUx9gUWpB07_+LBawXkTbCWZ1eii7Qtw@mail.gmail.com>
+ <5AEFFB9A02000078001C1134@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3895228186706379972=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <7b0b49ef8b71d691904daafe4353737b8f0d0510.camel@suse.com>
+In-Reply-To: <5AEFFB9A02000078001C1134@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -32,30 +16,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Davorin Mista <dm@aggios.com>, Xen Devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Mirela Simonovic <mirela.simonovic@aggios.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCAxMSBNYXkgMjAxOCwgRGFyaW8gRmFnZ2lvbGkgd3JvdGU6Cj4gT24gRnJpLCAyMDE4
-LTA1LTExIGF0IDE0OjA4ICswMTAwLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gPiBUaGUgd2hvbGUg
-aWRlYSBoZXJlIGlzIHdlIGhhdmUgb25seSBvbmUgcGxhY2UgdGFraW5nIHRoZSBkZWNpc2lvbiBh
-bmQKPiA+IHdlIAo+ID4gZG9uJ3Qgc3ByZWFkIEJVR19PTigpL3BhbmljL3N0b3BfY3B1IGV2ZXJ5
-d2hlcmUuIFRoZSBiZW5lZml0IGlzCj4gPiBoYXZpbmcgCj4gPiBvbmx5IG9uZSBwbGFjZSB0byBm
-aXggb3ZlciBtdWx0aXBsZSBvbmUgYmVjYXVzZSB2ZXJ5IGxpa2VseSB0aGUKPiA+IGRlY2lzaW9u
-IAo+ID4gaXMgdGhlIHNhbWUgZXZlcnl3aGVyZS4KPiA+IAo+ID4gSSBhZ3JlZSB0aGF0IHRvZGF5
-IGl0IHdpbGwgZW5kIHVwIHRvIGNyYXNoaW5nIHRoZSBzeXN0ZW0gYmVjYXVzZSBvZgo+ID4gdGhl
-IAo+ID4gQlVHX09OLiBCdXQgdGhhdCdzIGEgc2VwYXJhdGUgdG9waWMuCj4gPiAKPiBZZXMhISEg
-Oi1ECj4gCj4gSS5lLiwgYXMgSSd2ZSBzYWlkIGNvdW50bGVzcyB0aW1lcywgSSB3b3VsZCB0aGlu
-ayB0aGF0IGEgc2VyaWVzIHdoaWNoCj4gaW50cm9kdWNlcyBhIENQVV9TVEFSVElORyBub3RpZmll
-ciB0aGF0IGZhaWxzLCBzaG91bGQgYWxzbyBkZWFsIHdpdGgKPiBhZGp1c3RpbmcgdGhlIENQVSBw
-cm9jZXNzIGFjY29yZGluZ2x5Lgo+IAo+ICpCVVQqIGlmIHlvdSBBUk0gcGVvcGxlIGFyZSBvayB3
-aXRoIGFyY2gvYXJtLyBjb2RlIHRoYXQgZG9lcyB0aGF0LAo+IHBlcmhhcHMgd2l0aCBhIGNvbW1l
-bnQgc2F5aW5nIHNvbWV0aGluZyBsaWtlOgo+IAo+ICJUaGlzIHdpbGwgY2F1c2UgdXMgdG8gaGl0
-IHRoZSBCVUdfT04oKSBpbiBub3RpZnlfY3B1X3N0YXJ0aW5nKCkuIFRvCj4gZml4IHRoYXQsIHdl
-IG5lZWQgdG8gcHJvcGVybHkgY2hhbmdlIHRoZSBDUFUgYnJpbmd1cCBjb2RlLCB3aGljaCB3aWxs
-Cj4gaGFwcGVuIGluIGEgbGV0ZXIgc2VyaWVzLiIKPiAKPiB0aGF0IHdvdWxkIGFsc28gd29yaywg
-SSBndWVzcy4gOi0pCgpZZXMsIEkgdGhpbmsgdGhhdCByZXR1cm5pbmcgZXJyb3Igd2l0aCBhbiBp
-bi1jb2RlIGNvbW1lbnQgb24gdG9wIGlzIHRoZQpiZXN0IHNvbHV0aW9uLgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============3895228186706379972==
+Content-Type: multipart/alternative; boundary="000000000000db7068056bf5df7e"
+
+--000000000000db7068056bf5df7e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+"That is, without (physical
+or virtual, depending on component) serial console you're often unlikely to
+actually observe any messages connected to the crash."
+
+I do not have any experience with serial console interaction on linux.
+Can you list some examples for both cases (virtual| physical), I'll glad to
+fully report any suspicious problem.
+
+Thanks!
+
+--=20
+Atenciosamente,
+Charles F.'. Gon=C3=A7alves
+
+--000000000000db7068056bf5df7e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span style=3D"color:rgb(33,33,33);font-size:13px">&q=
+uot;</span><span style=3D"color:rgb(33,33,33);font-size:13px">That is, with=
+out (physical</span></div><span style=3D"font-size:13px;color:rgb(33,33,33)=
+">or virtual, depending on component) serial console you&#39;re often unlik=
+ely to</span><br style=3D"font-size:13px;color:rgb(33,33,33)"><span style=
+=3D"font-size:13px;color:rgb(33,33,33)">actually observe any messages conne=
+cted to the crash.&quot;=C2=A0</span><div><span style=3D"color:rgb(33,33,33=
+);font-size:13px"><br></span></div><div><span style=3D"color:rgb(33,33,33);=
+font-size:13px">I do not have any experience with serial console interactio=
+n on linux.=C2=A0 =C2=A0</span></div><div><font color=3D"#212121">Can you l=
+ist some examples for both cases (virtual| physical), I&#39;ll glad to full=
+y report any suspicious problem.</font></div><div><div class=3D"gmail_quote=
+"><div><br></div><div>Thanks!</div><div>=C2=A0</div></div></div></div>-- <b=
+r><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signat=
+ure"><div dir=3D"ltr"><div>Atenciosamente,=C2=A0</div>Charles F.&#39;. Gon=
+=C3=A7alves</div></div>
+
+--000000000000db7068056bf5df7e--
+
+
+--===============3895228186706379972==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3895228186706379972==--
