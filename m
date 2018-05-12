@@ -1,17 +1,28 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-next test] 122672: regressions - trouble:
- broken/fail/pass
-Date: Sat, 12 May 2018 16:35:52 +0000
-Message-ID: <osstest-122672-mainreport@xen.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Rich Persaud <persaur@gmail.com>
+Subject: Re: Xen and safety certification,
+ Minutes of the meeting on Apr 4th
+Date: Sat, 12 May 2018 13:38:36 -0400
+Message-ID: <49358881-974F-4949-8FF7-9B0F804A9632@gmail.com>
+References: <5D69D457-6EAB-4FF9-AF94-3D818F9035EC@citrix.com>
+ <4d359a64b6bc43b9a489a0754c4b4ae8@dornerworks.com>
+ <999c02cc-31b1-c404-7f88-84789c0d84b0@epam.com>
+ <alpine.DEB.2.10.1804061323500.6016@sstabellini-ThinkPad-X260>
+ <alpine.DEB.2.10.1805071708060.4953@sstabellini-ThinkPad-X260>
+ <78c07b55-c301-598e-3894-009f2bdda1ac@arm.com>
+ <alpine.DEB.2.10.1805080841580.4953@sstabellini-ThinkPad-X260>
+ <CABcWhv4qY62_0vhAVGOz1y0hsqkRn4WQ8=UW_JnEXk5NhpTVDA@mail.gmail.com>
+ <alpine.DEB.2.10.1805101244360.9199@sstabellini-ThinkPad-X260>
+Mime-Version: 1.0 (1.0)
+Content-Type: multipart/mixed; boundary="===============2568748233628509131=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=cgt8=h7=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fHXV1-0003A0-1e
- for xen-devel@lists.xenproject.org; Sat, 12 May 2018 16:35:59 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=gm94=h7=gmail.com=persaur@srs-us1.protection.inumbo.net>)
+ id 1fHYTf-0008KE-Ln
+ for xen-devel@lists.xenproject.org; Sat, 12 May 2018 17:38:39 +0000
+Received: by mail-qk0-x235.google.com with SMTP id d125-v6so6917271qkb.8
+ for <xen-devel@lists.xenproject.org>; Sat, 12 May 2018 10:38:38 -0700 (PDT)
+In-Reply-To: <alpine.DEB.2.10.1805101244360.9199@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,222 +31,166 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Artem Mygaiev <artem_mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, Davorin Mista <davorin.mista@aggios.com>, "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, dgdegra@tycho.nsa.gov, paul_luperto@prqa.com, Denys Balatsko <denys.balatsko@globallogic.com>, julien.grall@arm.com, Rich Persaud <persaur@gmail.com>, vfachin@de.adit-jv.com, anastassios.nanos@onapp.com, Praveen Kumar <kpraveen.lkml@gmail.com>, robin.randhawa@arm.com, committers@xenproject.org, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xenproject.org>, Jonathan Daugherty <jtd@galois.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, =?utf-8?Q?Mirela_Simonovi=C4=87?= <mirela.simonovic@aggios.com>, Jarvis Roach <Jarvis.Roach@dornerworks.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMjY3MiBsaW51eC1uZXh0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFi
-LnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjI2NzIvCgpSZWdyZXNzaW9ucyA6LSgKClRl
-c3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVz
-dHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAg
-ICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIHRlc3QtYXJtNjQtYXJtNjQt
-eGwgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIHRlc3Qt
-YXJtNjQtYXJtNjQtbGlidmlydC14c20gICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBi
-cm9rZW4KIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItaW50ZWwgMTIgZ3Vlc3Qtc3RhcnQgICAg
-ICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjYzMAogdGVzdC1hcm1oZi1hcm1oZi1leGFtaW5lICAg
-ICAgOCByZWJvb3QgICAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyNjMwCiB0ZXN0
-LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICBmYWls
-IFJFR1IuIHZzLiAxMjI2MzAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgIDcgeGVuLWJv
-b3QgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjYzMAogdGVzdC1hcm1oZi1hcm1o
-Zi1saWJ2aXJ0ICAgICAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4g
-MTIyNjMwCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgICA3IHhlbi1ib290ICAgICAgICAg
-ICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjI2MzAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0
-cnVjayAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjYzMAogdGVz
-dC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFp
-bCBSRUdSLiB2cy4gMTIyNjMwCiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgIDEwIGRlYmlh
-bi1pbnN0YWxsICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjI2MzAKIHRlc3QtYXJtaGYtYXJt
-aGYtbGlidmlydC14c20gMTAgZGViaWFuLWluc3RhbGwgICAgICAgICAgIGZhaWwgUkVHUi4gdnMu
-IDEyMjYzMAoKUmVncmVzc2lvbnMgd2hpY2ggYXJlIHJlZ2FyZGVkIGFzIGFsbG93YWJsZSAobm90
-IGJsb2NraW5nKToKIHRlc3QtYW1kNjQtaTM4Ni1ydW1wcnVuLWkzODYgMTcgcnVtcHJ1bi1kZW1v
-LXhlbnN0b3JlbHMveGVuc3RvcmVscy5yZXBlYXQgZmFpbCBSRUdSLiB2cy4gMTIyNjMwCgpUZXN0
-cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hcm02
-NC1hcm02NC14bCAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJsb2Nr
-ZWQgaW4gMTIyNjMwCiB0ZXN0LWFybTY0LWFybTY0LWV4YW1pbmUgICAgICA1IGhvc3QtaW5zdGFs
-bCAgICAgICAgICBicm9rZW4gYmxvY2tlZCBpbiAxMjI2MzAKIHRlc3QtYXJtNjQtYXJtNjQteGwt
-eHNtICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgIGJyb2tlbiBibG9ja2VkIGluIDEyMjYz
-MAogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAgNCBob3N0LWluc3RhbGwoNCkgICAgICAg
-YnJva2VuIGJsb2NrZWQgaW4gMTIyNjMwCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjct
-YW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMjI2MzAKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFp
-bCBsaWtlIDEyMjYzMAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1
-ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTIyNjMwCiB0ZXN0LWFtZDY0LWkzODYteGwt
-cWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMjI2
-MzAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTAgZGViaWFuLWluc3RhbGwgICAgICAg
-ICAgICAgICBmYWlsICBsaWtlIDEyMjYzMAogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAx
-MCBkZWJpYW4taW5zdGFsbCAgICAgICAgICAgICAgIGZhaWwgIGxpa2UgMTIyNjMwCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZh
-aWwgbGlrZSAxMjI2MzAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW43LWFtZDY0IDE3IGd1
-ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDEyMjYzMAogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTIy
-NjMwCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVj
-ayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAg
-MTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-bWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZh
-aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcHZzaGltICAgIDEyIGd1ZXN0LXN0
-YXJ0ICAgICAgICAgICAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1s
-aWJ2aXJ0ICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIg
-cGFzcwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hl
-Y2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDIg
-IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-YW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1z
-dXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFl
-bXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2
-ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxMyBtaWdyYXRlLXN1cHBvcnQt
-Y2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMg
-ICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
-c3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAxNyBkZWJpYW4taHZtLWluc3RhbGwvbDEv
-bDIgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZoZCAxMiBtaWdy
-YXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXQtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgICBmYWlsIG5l
-dmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW4xMC1pMzg2IDEwIHdpbmRvd3Mt
-aW5zdGFsbCAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dC13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAg
-ICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW4xMC1pMzg2
-IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJn
-ZXRlZCBmb3IgdGVzdGluZzoKIGxpbnV4ICAgICAgICAgICAgICAgIGNiYjQyZjc5ZDYyZTFkYmI2
-MzQyOGQwMjI1MGJkNDQ3MzI1NTU1ZDgKYmFzZWxpbmUgdmVyc2lvbjoKIGxpbnV4ICAgICAgICAg
-ICAgICAgIDcwMWUzOWQwNTExOTIyOWI5MmVjY2E0YWRkN2I3ZWQyMTkzNjIyYzMKCkxhc3QgdGVz
-dCBvZiBiYXNpcyAgICAgICAgICAgICAgICAgICAgICAgICAgKG5vdCBmb3VuZCkgICAgIApGYWls
-aW5nIHNpbmNlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChub3QgZm91bmQpICAgICAK
-VGVzdGluZyBzYW1lIHNpbmNlICAgMTIyNjcyICAyMDE4LTA1LTA5IDA5OjE5OjI0IFogICAgMyBk
-YXlzICAgIDEgYXR0ZW1wdHMKCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXhzbSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
-bGQtYXJtaGYteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
-ZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1saWJ2aXJ0
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXB2b3BzICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-YXJtaGYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXJ1bXBydW4gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1ydW1wcnVuICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBicm9rZW4gIAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFu
-aHZtLWFtZDY0LXhzbSAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0
-LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtc3R1YmRvbS1kZWJp
-YW5odm0tYW1kNjQteHNtICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
-LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBicm9rZW4gIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14
-c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGJyb2tlbiAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC1xZW11dS1uZXN0ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2
-aHZtLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGVi
-aWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni1mcmVlYnNkMTAtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2
-NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1xZW11dC13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0
-ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjct
-YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFlbXV0LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYt
-eGwtYXJuZGFsZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi14
-bC1jdWJpZXRydWNrICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQtZXhhbWluZSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi1leGFtaW5lICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtZXhh
-bWluZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtaTM4Ni1mcmVlYnNkMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXJ1bXBydW4taTM4NiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkz
-ODYgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dS13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWludGVs
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1w
-dmh2Mi1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYtcWVtdXQtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZp
-cnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
-NjQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcGFpciAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXBhaXIgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1w
-dmdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LWkzODYtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZzaGltICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXB2c2hpbSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWNvdzIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcmF3ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcnRkcyAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1h
-cm1oZi14bC1ydGRzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC1zaGFkb3cgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQt
-c2hhZG93ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1zaGFkb3cg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtc2hhZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3Nz
-dGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2Vz
-OiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFi
-bGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9n
-cwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJh
-bCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0
-O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
-cmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3Qg
-aGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9n
-aXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoIG5vdCBhcHBsaWNhYmxlLgoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============2568748233628509131==
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-8B4FD762-74AA-404D-A66D-5721AD6831A8
+Content-Transfer-Encoding: 7bit
+
+
+--Apple-Mail-8B4FD762-74AA-404D-A66D-5721AD6831A8
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+> On May 10, 2018, at 15:51, Stefano Stabellini <sstabellini@kernel.org> wro=
+te:
+>=20
+> On Thu, 10 May 2018, Praveen Kumar wrote:
+>>> Yeah, you are right. It looks like turning Dom0 into a DomU is not good
+>>> enough. Maybe for this option to be viable we would actually have to
+>>> terminate (or pause and never unpause?) dom0 after boot.
+>>=20
+>> Just a thought !
+>> How about keeping Dom0 still be there, but DomUs given Dom0 privilege, wi=
+th
+>> restricted permission on mission critical resources ? And if anyhow Dom0
+>> crashes,
+>> the best contended among the existing DomUs take the ownership of Dom0 ?
+>=20
+> I don't think this is easily doable, also it wouldn't solve the issue of
+> removing dom0 from the system. But see below.
+>=20
+>=20
+>>>> However, you surely need an entity to handle domain crash. You don't
+>> want to
+>>>> reboot your platform (and therefore you safety critical domain) for a
+>> crashed
+>>>> UI, right? So how this is going to be handled in your option?
+>>=20
+>>> We need to understand the certification requirements better to know the
+>>> answer to this. I am guessing that UI crashes are not handled from the
+>>> certification point of view -- maybe we only need to demonstrate that
+>>> the system is not affected by them?
+>>=20
+>> Where can we find the certification requirements details ?
+>=20
+> Yes, I think we need to understand the requirements better to figure out
+> the right way forward for Dom0.
+>=20
+> For instance, here is another idea: we could have Xen boot multiple
+> domains at boot time from device tree, as suggested in the dom0-less
+> approach. All of the domains booted from Xen are "mission-critical". The
+> first domain could still be dom0. Once booted, Dom0 can start other VMs,
+> however, Xen would restrict Dom0 from doing any operations affecting the
+> first set of mission-critical domains.
+>=20
+> This way, we would get the flexibility of being able to start/stop
+> domains at run time, but at the same time we might still be able to
+> avoid certifications for Dom0, because Dom0 cannot affect the mission
+> critical applications.
+>=20
+> Is this approach actually feasible? We need to read the requirements to
+> know. I am hoping Artem will chime in on this :-)
+
+Is any of the x86 hardware domain (non dom0) work applicable to Arm?
+https://lists.xenproject.org/archives/html/xen-devel/2014-03/msg00314.html
+
+Daniel is giving a talk on TCB reduction with a Xen hardware domain:
+http://platformsecuritysummit.com/#degraaf
+
+Rich=
+
+--Apple-Mail-8B4FD762-74AA-404D-A66D-5721AD6831A8
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><div><span></span></div><div><meta http-equ=
+iv=3D"content-type" content=3D"text/html; charset=3Dutf-8"><div><span></span=
+></div><div><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"><div><span></span></div><div><meta http-equiv=3D"content-type" conten=
+t=3D"text/html; charset=3Dutf-8"><div><span></span></div><div><div></div><di=
+v>On May 10, 2018, at 15:51, Stefano Stabellini &lt;<a href=3D"mailto:sstabe=
+llini@kernel.org">sstabellini@kernel.org</a>&gt; wrote:</div><div><br></div>=
+<blockquote type=3D"cite"><span>On Thu, 10 May 2018, Praveen Kumar wrote:</s=
+pan><br><blockquote type=3D"cite"><blockquote type=3D"cite"><span>Yeah, you a=
+re right. It looks like turning Dom0 into a DomU is not good</span><br></blo=
+ckquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><sp=
+an>enough. Maybe for this option to be viable we would actually have to</spa=
+n><br></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D=
+"cite"><span>terminate (or pause and never unpause?) dom0 after boot.</span>=
+<br></blockquote></blockquote><blockquote type=3D"cite"><span></span><br></b=
+lockquote><blockquote type=3D"cite"><span>Just a thought !</span><br></block=
+quote><blockquote type=3D"cite"><span>How about keeping Dom0 still be there,=
+ but DomUs given Dom0 privilege, with</span><br></blockquote><blockquote typ=
+e=3D"cite"><span>restricted permission on mission critical resources ? And i=
+f anyhow Dom0</span><br></blockquote><blockquote type=3D"cite"><span>crashes=
+,</span><br></blockquote><blockquote type=3D"cite"><span>the best contended a=
+mong the existing DomUs take the ownership of Dom0 ?</span><br></blockquote>=
+<span></span><br><span>I don't think this is easily doable, also it wouldn't=
+ solve the issue of</span><br><span>removing dom0 from the system. But see b=
+elow.</span><br><span></span><br><span></span><br><blockquote type=3D"cite">=
+<blockquote type=3D"cite"><blockquote type=3D"cite"><span>However, you surel=
+y need an entity to handle domain crash. You don't</span><br></blockquote></=
+blockquote></blockquote><blockquote type=3D"cite"><span>want to</span><br></=
+blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote t=
+ype=3D"cite"><span>reboot your platform (and therefore you safety critical d=
+omain) for a</span><br></blockquote></blockquote></blockquote><blockquote ty=
+pe=3D"cite"><span>crashed</span><br></blockquote><blockquote type=3D"cite"><=
+blockquote type=3D"cite"><blockquote type=3D"cite"><span>UI, right? So how t=
+his is going to be handled in your option?</span><br></blockquote></blockquo=
+te></blockquote><blockquote type=3D"cite"><span></span><br></blockquote><blo=
+ckquote type=3D"cite"><blockquote type=3D"cite"><span>We need to understand t=
+he certification requirements better to know the</span><br></blockquote></bl=
+ockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><span>answer to=
+ this. I am guessing that UI crashes are not handled from the</span><br></bl=
+ockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><s=
+pan>certification point of view -- maybe we only need to demonstrate that</s=
+pan><br></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=
+=3D"cite"><span>the system is not affected by them?</span><br></blockquote><=
+/blockquote><blockquote type=3D"cite"><span></span><br></blockquote><blockqu=
+ote type=3D"cite"><span>Where can we find the certification requirements det=
+ails ?</span><br></blockquote><span></span><br><span>Yes, I think we need to=
+ understand the requirements better to figure out</span><br><span>the right w=
+ay forward for Dom0.</span><br><span></span><br><span>For instance, here is a=
+nother idea: we could have Xen boot multiple</span><br><span>domains at boot=
+ time from device tree, as suggested in the dom0-less</span><br><span>approa=
+ch. All of the domains booted from Xen are "mission-critical". The</span><br=
+><span>first domain could still be dom0. Once booted, Dom0 can start other V=
+Ms,</span><br><span>however, Xen would restrict Dom0 from doing any operatio=
+ns affecting the</span><br><span>first set of mission-critical domains.</spa=
+n><br><span></span><br><span>This way, we would get the flexibility of being=
+ able to start/stop</span><br><span>domains at run time, but at the same tim=
+e we might still be able to</span><br><span>avoid certifications for Dom0, b=
+ecause Dom0 cannot affect the mission</span><br><span>critical applications.=
+</span><br><span></span><br><span>Is this approach actually feasible? We nee=
+d to read the requirements to</span><br><span>know. I am hoping Artem will c=
+hime in on this :-)</span><br></blockquote><br><div>Is any of the x86 hardwa=
+re domain (non dom0) work applicable to Arm?</div><div><a href=3D"https://li=
+sts.xenproject.org/archives/html/xen-devel/2014-03/msg00314.html">https://li=
+sts.xenproject.org/archives/html/xen-devel/2014-03/msg00314.html</a></div><d=
+iv><br></div><div>Daniel is giving a talk on TCB reduction with a Xen hardwa=
+re domain:</div><div><a href=3D"http://platformsecuritysummit.com/#degraaf">=
+http://platformsecuritysummit.com/#degraaf</a></div><div><br></div><div>Rich=
+</div></div></div></div></div></body></html>=
+
+--Apple-Mail-8B4FD762-74AA-404D-A66D-5721AD6831A8--
+
+
+--===============2568748233628509131==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2568748233628509131==--
