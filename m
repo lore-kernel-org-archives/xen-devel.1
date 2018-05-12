@@ -1,10 +1,17 @@
-From: Kun Cheng <chengkunck@gmail.com>
-Subject: need help when libxenlight.so is used
-Date: Sat, 12 May 2018 20:55:46 +0800
-Message-ID: <CAO3v1VT9Hu2vxnNtFKZ1npaau9tZ4NJ6rXk2TAF0govFW2unqQ@mail.gmail.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [linux-next test] 122672: regressions - trouble:
+ broken/fail/pass
+Date: Sat, 12 May 2018 16:35:52 +0000
+Message-ID: <osstest-122672-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8059282907274090120=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=cgt8=h7=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fHXV1-0003A0-1e
+ for xen-devel@lists.xenproject.org; Sat, 12 May 2018 16:35:59 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,297 +20,222 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============8059282907274090120==
-Content-Type: multipart/alternative; boundary="000000000000a00946056c01c683"
-
---000000000000a00946056c01c683
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hello Xen devs,
-
-I'm learning code in xen-4.10.0/tools/xl to find out how to program with
-libxl.
-
-I've trying to use libxenlight.so (compiled and installed from xen 4.10.0
-source code) to control my vms from my own code until I met this issue.
-Now my test code follows xl_vmmcontrol.c and tries to create a VM from its
-config file (file can be used to successfully create a vm with 'xl create')=
-.
-
-My Xen make is successful and I can use 'xl' to manage all vms.
-
-When I test my own code, I got such an error in dmesg"
-
-test[16678]: segfault at 18 ip 00007f69fa6526ad sp 00007ffe1eadedf0 error 4
-in libxenlight.so.4.10.0[7f69fa61a000+bc000] in dmesg
-
-and also segmentation fault in my terminal.
-
-I dumped my debugging info, hoping could give everyone some clue.
-
-FYI, my program was compiled with:
-
-gcc -m64 -pthread -std=3Dgnu99  -g xl_executor.c xl_parse.c  xl_utils.c
-xl_nic.c -lxenlight -lxlutil -lxentoollog  -lyajl  -o test
-
-where xl_executor.c is my code of creating a vm, all other c file are
-copied from tools/xl/
-
-GDB bebugging info:
-
-Breakpoint 3, parse_config_data (config_source=3D0x7fffffffe360
-"/data/chengkun/vms/vm4/vm4.cfg",
-    config_data=3D0x6155f0 "# ", '=3D' <repeats 69 times>, "\n# Example HVM
-guest configuration\n# ", '=3D' <repeats 69 times>, "\n#\n# This is a fairl=
-y
-m"..., config_len=3D1543,
-    d_config=3D0x7fffffffdde0) at xl_parse.c:993
-
-993         if (libxl_cpu_bitmap_alloc(ctx, &b_info->avail_vcpus, l)) {
-
-(gdb) p *c_info
-$3 =3D {type =3D LIBXL_DOMAIN_TYPE_HVM, hap =3D {val =3D 0}, oos =3D {val =
-=3D 0},
-ssidref =3D 0, ssid_label =3D 0x0, name =3D 0x6154f0 "test_vm", uuid =3D {
-    uuid =3D "O\374\032\231+\330A\265\213rV=DE=90\375\020\270"}, xsdata =3D=
- 0x0,
-platformdata =3D 0x0, poolid =3D 0, pool_name =3D 0x0, run_hotplug_scripts =
-=3D {val
-=3D 1}, driver_domain =3D {
-    val =3D 0}}
-
-(gdb) p *b_info
-$4 =3D {max_vcpus =3D 0, avail_vcpus =3D {size =3D 0, map =3D 0x0}, cpumap =
-=3D {size =3D
-0, map =3D 0x0}, nodemap =3D {size =3D 0, map =3D 0x0}, num_vcpu_hard_affin=
-ity =3D 0,
-  vcpu_hard_affinity =3D 0x0, num_vcpu_soft_affinity =3D 0, vcpu_soft_affin=
-ity
-=3D 0x0, numa_placement =3D {val =3D 0}, tsc_mode =3D LIBXL_TSC_MODE_DEFAUL=
-T,
-max_memkb =3D 4194304,
-  target_memkb =3D 2097152, video_memkb =3D 18446744073709551615, shadow_me=
-mkb
-=3D 18446744073709551615, rtc_timeoffset =3D 0, exec_ssidref =3D 0,
-exec_ssid_label =3D 0x0,
-  localtime =3D {val =3D 0}, disable_migrate =3D {val =3D 0}, cpuid =3D 0x0=
-,
-blkdev_start =3D 0x0, num_vnuma_nodes =3D 0, vnuma_nodes =3D 0x0,
-max_grant_frames =3D 32,
-  max_maptrack_frames =3D 1024, device_model_version =3D
-LIBXL_DEVICE_MODEL_VERSION_UNKNOWN, device_model_stubdomain =3D {val =3D 0}=
-,
-device_model =3D 0x0, device_model_ssidref =3D 0,
-  device_model_ssid_label =3D 0x0, device_model_user =3D 0x0, extra =3D 0x0=
-,
-extra_pv =3D 0x0, extra_hvm =3D 0x0, sched_params =3D {sched =3D
-LIBXL_SCHEDULER_UNKNOWN, weight =3D -1,
-    cap =3D -1, period =3D -1, budget =3D -1, extratime =3D -1, slice =3D -=
-1, latency
-=3D -1}, num_ioports =3D 0, ioports =3D 0x0, num_irqs =3D 0, irqs =3D 0x0, =
-num_iomem
-=3D 0, iomem =3D 0x0,
-  claim_mode =3D {val =3D 0}, event_channels =3D 0, kernel =3D 0x0, cmdline=
- =3D 0x0,
-ramdisk =3D 0x0, device_tree =3D 0x0, acpi =3D {val =3D 0}, bootloader =3D =
-0x0,
-bootloader_args =3D 0x0,
-  timer_mode =3D LIBXL_TIMER_MODE_UNKNOWN, nested_hvm =3D {val =3D 0}, apic=
- =3D
-{val =3D 0}, dm_restrict =3D {val =3D 0}, type =3D LIBXL_DOMAIN_TYPE_HVM, u=
- =3D {hvm
-=3D {firmware =3D 0x0,
-      bios =3D LIBXL_BIOS_TYPE_UNKNOWN, pae =3D {val =3D 0}, apic =3D {val =
-=3D 0},
-acpi =3D {val =3D 0}, acpi_s3 =3D {val =3D 0}, acpi_s4 =3D {val =3D 0},
-acpi_laptop_slate =3D {val =3D 0}, nx =3D {
-        val =3D 0}, viridian =3D {val =3D 0}, viridian_enable =3D {size =3D=
- 0, map =3D
-0x0}, viridian_disable =3D {size =3D 0, map =3D 0x0}, timeoffset =3D 0x0, h=
-pet =3D
-{val =3D 0}, vpt_align =3D {
-        val =3D 0}, mmio_hole_memkb =3D 18446744073709551615, timer_mode =
-=3D
-LIBXL_TIMER_MODE_UNKNOWN, nested_hvm =3D {val =3D 0}, altp2m =3D {val =3D 0=
-},
-system_firmware =3D 0x0,
-      smbios_firmware =3D 0x0, acpi_firmware =3D 0x0, hdtype =3D
-LIBXL_HDTYPE_IDE, nographic =3D {val =3D 0}, vga =3D {kind =3D
-LIBXL_VGA_INTERFACE_TYPE_UNKNOWN}, vnc =3D {enable =3D {
-          val =3D 0}, listen =3D 0x0, passwd =3D 0x0, display =3D 0, findun=
-used =3D
-{val =3D 0}}, keymap =3D 0x0, sdl =3D {enable =3D {val =3D 0}, opengl =3D {=
-val =3D 0},
-display =3D 0x0,
-        xauthority =3D 0x0}, spice =3D {enable =3D {val =3D 0}, port =3D 0,=
- tls_port
-=3D 0, host =3D 0x0, disable_ticketing =3D {val =3D 0}, passwd =3D 0x0, age=
-nt_mouse =3D
-{val =3D 0},
-        vdagent =3D {val =3D 0}, clipboard_sharing =3D {val =3D 0}, usbredi=
-rection
-=3D 0, image_compression =3D 0x0, streaming_video =3D 0x0}, gfx_passthru =
-=3D {val =3D
-0},
-      gfx_passthru_kind =3D LIBXL_GFX_PASSTHRU_KIND_DEFAULT, serial =3D 0x0=
-,
-boot =3D 0x0, usb =3D {val =3D 0}, usbversion =3D 0, usbdevice =3D 0x0, sou=
-ndhw =3D
-0x0, xen_platform_pci =3D {
-        val =3D 0}, usbdevice_list =3D 0x0, vendor_device =3D
-LIBXL_VENDOR_DEVICE_NONE, ms_vm_genid =3D {bytes =3D '\000' <repeats 15
-times>}, serial_list =3D 0x0, rdm =3D {
-        strategy =3D LIBXL_RDM_RESERVE_STRATEGY_IGNORE, policy =3D
-LIBXL_RDM_RESERVE_POLICY_INVALID}, rdm_mem_boundary_memkb =3D
-18446744073709551615, mca_caps =3D 0}, pv =3D {
-      kernel =3D 0x0, slack_memkb =3D 0, bootloader =3D 0x0, bootloader_arg=
-s =3D
-0x0, cmdline =3D 0x0, ramdisk =3D 0x0, features =3D 0x0, e820_host =3D {val=
- =3D 0}}},
-arch_arm =3D {
-    gic_version =3D LIBXL_GIC_VERSION_DEFAULT, vuart =3D
-LIBXL_VUART_TYPE_UNKNOWN}, altp2m =3D LIBXL_ALTP2M_MODE_DISABLED}
-
-(gdb) p ctx
-$5 =3D (libxl_ctx *) 0x0
-
-(gdb) p *ctx
-$6 =3D <incomplete type>
-
-(gdb) s
-
-Program received signal SIGSEGV, Segmentation fault.
-0x00007ffff7b476ad in libxl.ptr_add () from
-/usr/local/lib/libxenlight.so.4.10
-
-
-Is that related to my compiling cmd?
-Any help is appreciated.
-
-Thanks,
-K
-
---000000000000a00946056c01c683
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hello Xen devs,<br><br>
-
-<span style=3D"color:rgb(34,34,34);font-family:arial,sans-serif;font-size:s=
-mall;font-style:normal;font-variant-ligatures:normal;font-variant-caps:norm=
-al;font-weight:400;letter-spacing:normal;text-align:start;text-indent:0px;t=
-ext-transform:none;white-space:normal;word-spacing:0px;background-color:rgb=
-(255,255,255);text-decoration-style:initial;text-decoration-color:initial;f=
-loat:none;display:inline">I&#39;m learning code in xen-4.10.0/tools/xl to f=
-ind out how to program with libxl.=C2=A0</span>=C2=A0<div>=C2=A0
-<br>I&#39;ve trying to use libxenlight.so (compiled and installed from xen =
-4.10.0 source code) to control my vms from my own code until I met this iss=
-ue.=C2=A0</div><div>Now my test code follows xl_vmmcontrol.c and tries to c=
-reate a VM from its config file (file can be used to successfully create a =
-vm with &#39;xl create&#39;).</div><div><br><div>My Xen make is successful =
-and I can use &#39;xl&#39; to manage all vms.</div><div><br></div><div>When=
- I test my own code, I got such an error in dmesg&quot;</div><div><br></div=
-><div>test[16678]: segfault at 18 ip 00007f69fa6526ad sp 00007ffe1eadedf0 e=
-rror 4 in libxenlight.so.4.10.0[7f69fa61a000+bc000] in dmesg<br></div><div>=
-<br></div><div>and also segmentation fault in my terminal.</div><div><br></=
-div><div>I dumped my debugging info, hoping could give everyone some clue.<=
-br><div><br></div><div>FYI, my program was compiled with:</div><div><br></d=
-iv><div>gcc -m64 -pthread -std=3Dgnu99=C2=A0 -g xl_executor.c xl_parse.c=C2=
-=A0 xl_utils.c xl_nic.c -lxenlight -lxlutil -lxentoollog=C2=A0 -lyajl=C2=A0=
- -o test</div><div><br></div><div>where xl_executor.c is my code of creatin=
-g a vm, all other c file are copied from tools/xl/=C2=A0</div><div><br></di=
-v><div>GDB bebugging info:<br><br>Breakpoint 3, parse_config_data (config_s=
-ource=3D0x7fffffffe360 &quot;/data/chengkun/vms/vm4/vm4.cfg&quot;, <br>=C2=
-=A0 =C2=A0 config_data=3D0x6155f0 &quot;# &quot;, &#39;=3D&#39; &lt;repeats=
- 69 times&gt;, &quot;\n# Example HVM guest configuration\n# &quot;, &#39;=
-=3D&#39; &lt;repeats 69 times&gt;, &quot;\n#\n# This is a fairly m&quot;...=
-, config_len=3D1543, <br>=C2=A0 =C2=A0 d_config=3D0x7fffffffdde0) at xl_par=
-se.c:993<div><br>993 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (libxl_cpu_bitmap_alloc=
-(ctx, &amp;b_info-&gt;avail_vcpus, l)) {</div><div><br>(gdb) p *c_info</div=
-><div>$3 =3D {type =3D LIBXL_DOMAIN_TYPE_HVM, hap =3D {val =3D 0}, oos =3D =
-{val =3D 0}, ssidref =3D 0, ssid_label =3D 0x0, name =3D 0x6154f0 &quot;tes=
-t_vm&quot;, uuid =3D {<br>=C2=A0 =C2=A0 uuid =3D &quot;O\374\032\231+\330A\=
-265\213rV=DE=90\375\020\270&quot;}, xsdata =3D 0x0, platformdata =3D 0x0, p=
-oolid =3D 0, pool_name =3D 0x0, run_hotplug_scripts =3D {val =3D 1}, driver=
-_domain =3D {<br>=C2=A0 =C2=A0 val =3D 0}}</div><div><br>(gdb) p *b_info</d=
-iv><div>$4 =3D {max_vcpus =3D 0, avail_vcpus =3D {size =3D 0, map =3D 0x0},=
- cpumap =3D {size =3D 0, map =3D 0x0}, nodemap =3D {size =3D 0, map =3D 0x0=
-}, num_vcpu_hard_affinity =3D 0, <br>=C2=A0 vcpu_hard_affinity =3D 0x0, num=
-_vcpu_soft_affinity =3D 0, vcpu_soft_affinity =3D 0x0, numa_placement =3D {=
-val =3D 0}, tsc_mode =3D LIBXL_TSC_MODE_DEFAULT, max_memkb =3D 4194304, <br=
->=C2=A0 target_memkb =3D 2097152, video_memkb =3D 18446744073709551615, sha=
-dow_memkb =3D 18446744073709551615, rtc_timeoffset =3D 0, exec_ssidref =3D =
-0, exec_ssid_label =3D 0x0, <br>=C2=A0 localtime =3D {val =3D 0}, disable_m=
-igrate =3D {val =3D 0}, cpuid =3D 0x0, blkdev_start =3D 0x0, num_vnuma_node=
-s =3D 0, vnuma_nodes =3D 0x0, max_grant_frames =3D 32, <br>=C2=A0 max_maptr=
-ack_frames =3D 1024, device_model_version =3D LIBXL_DEVICE_MODEL_VERSION_UN=
-KNOWN, device_model_stubdomain =3D {val =3D 0}, device_model =3D 0x0, devic=
-e_model_ssidref =3D 0, <br>=C2=A0 device_model_ssid_label =3D 0x0, device_m=
-odel_user =3D 0x0, extra =3D 0x0, extra_pv =3D 0x0, extra_hvm =3D 0x0, sche=
-d_params =3D {sched =3D LIBXL_SCHEDULER_UNKNOWN, weight =3D -1, <br>=C2=A0 =
-=C2=A0 cap =3D -1, period =3D -1, budget =3D -1, extratime =3D -1, slice =
-=3D -1, latency =3D -1}, num_ioports =3D 0, ioports =3D 0x0, num_irqs =3D 0=
-, irqs =3D 0x0, num_iomem =3D 0, iomem =3D 0x0, <br>=C2=A0 claim_mode =3D {=
-val =3D 0}, event_channels =3D 0, kernel =3D 0x0, cmdline =3D 0x0, ramdisk =
-=3D 0x0, device_tree =3D 0x0, acpi =3D {val =3D 0}, bootloader =3D 0x0, boo=
-tloader_args =3D 0x0, <br>=C2=A0 timer_mode =3D LIBXL_TIMER_MODE_UNKNOWN, n=
-ested_hvm =3D {val =3D 0}, apic =3D {val =3D 0}, dm_restrict =3D {val =3D 0=
-}, type =3D LIBXL_DOMAIN_TYPE_HVM, u =3D {hvm =3D {firmware =3D 0x0, <br>=
-=C2=A0 =C2=A0 =C2=A0 bios =3D LIBXL_BIOS_TYPE_UNKNOWN, pae =3D {val =3D 0},=
- apic =3D {val =3D 0}, acpi =3D {val =3D 0}, acpi_s3 =3D {val =3D 0}, acpi_=
-s4 =3D {val =3D 0}, acpi_laptop_slate =3D {val =3D 0}, nx =3D {<br>=C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 val =3D 0}, viridian =3D {val =3D 0}, viridian_enable =
-=3D {size =3D 0, map =3D 0x0}, viridian_disable =3D {size =3D 0, map =3D 0x=
-0}, timeoffset =3D 0x0, hpet =3D {val =3D 0}, vpt_align =3D {<br>=C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 val =3D 0}, mmio_hole_memkb =3D 18446744073709551615, tim=
-er_mode =3D LIBXL_TIMER_MODE_UNKNOWN, nested_hvm =3D {val =3D 0}, altp2m =
-=3D {val =3D 0}, system_firmware =3D 0x0, <br>=C2=A0 =C2=A0 =C2=A0 smbios_f=
-irmware =3D 0x0, acpi_firmware =3D 0x0, hdtype =3D LIBXL_HDTYPE_IDE, nograp=
-hic =3D {val =3D 0}, vga =3D {kind =3D LIBXL_VGA_INTERFACE_TYPE_UNKNOWN}, v=
-nc =3D {enable =3D {<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 val =3D 0}, list=
-en =3D 0x0, passwd =3D 0x0, display =3D 0, findunused =3D {val =3D 0}}, key=
-map =3D 0x0, sdl =3D {enable =3D {val =3D 0}, opengl =3D {val =3D 0}, displ=
-ay =3D 0x0, <br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 xauthority =3D 0x0}, spice =3D =
-{enable =3D {val =3D 0}, port =3D 0, tls_port =3D 0, host =3D 0x0, disable_=
-ticketing =3D {val =3D 0}, passwd =3D 0x0, agent_mouse =3D {val =3D 0}, <br=
->=C2=A0 =C2=A0 =C2=A0 =C2=A0 vdagent =3D {val =3D 0}, clipboard_sharing =3D=
- {val =3D 0}, usbredirection =3D 0, image_compression =3D 0x0, streaming_vi=
-deo =3D 0x0}, gfx_passthru =3D {val =3D 0}, <br>=C2=A0 =C2=A0 =C2=A0 gfx_pa=
-ssthru_kind =3D LIBXL_GFX_PASSTHRU_KIND_DEFAULT, serial =3D 0x0, boot =3D 0=
-x0, usb =3D {val =3D 0}, usbversion =3D 0, usbdevice =3D 0x0, soundhw =3D 0=
-x0, xen_platform_pci =3D {<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 val =3D 0}, usbde=
-vice_list =3D 0x0, vendor_device =3D LIBXL_VENDOR_DEVICE_NONE, ms_vm_genid =
-=3D {bytes =3D &#39;\000&#39; &lt;repeats 15 times&gt;}, serial_list =3D 0x=
-0, rdm =3D {<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 strategy =3D LIBXL_RDM_RESERVE_=
-STRATEGY_IGNORE, policy =3D LIBXL_RDM_RESERVE_POLICY_INVALID}, rdm_mem_boun=
-dary_memkb =3D 18446744073709551615, mca_caps =3D 0}, pv =3D {<br>=C2=A0 =
-=C2=A0 =C2=A0 kernel =3D 0x0, slack_memkb =3D 0, bootloader =3D 0x0, bootlo=
-ader_args =3D 0x0, cmdline =3D 0x0, ramdisk =3D 0x0, features =3D 0x0, e820=
-_host =3D {val =3D 0}}}, arch_arm =3D {<br>=C2=A0 =C2=A0 gic_version =3D LI=
-BXL_GIC_VERSION_DEFAULT, vuart =3D LIBXL_VUART_TYPE_UNKNOWN}, altp2m =3D LI=
-BXL_ALTP2M_MODE_DISABLED}</div><div><br>(gdb) p ctx<br>$5 =3D (libxl_ctx *)=
- 0x0</div><div><br>(gdb) p *ctx<br>$6 =3D &lt;incomplete type&gt;</div><div=
-><br>(gdb) s<br><br>Program received signal SIGSEGV, Segmentation fault.<br=
->0x00007ffff7b476ad in libxl.ptr_add () from /usr/local/lib/libxenlight.so.=
-4.10<br></div></div></div></div><div><br></div><div><br></div><div>Is that =
-related to my compiling cmd?=C2=A0</div><div>Any help is appreciated.</div>=
-<div><br></div><div>Thanks,</div><div>K</div></div>
-
---000000000000a00946056c01c683--
-
-
---===============8059282907274090120==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8059282907274090120==--
+ZmxpZ2h0IDEyMjY3MiBsaW51eC1uZXh0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFi
+LnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjI2NzIvCgpSZWdyZXNzaW9ucyA6LSgKClRl
+c3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVz
+dHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAg
+ICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIHRlc3QtYXJtNjQtYXJtNjQt
+eGwgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIHRlc3Qt
+YXJtNjQtYXJtNjQtbGlidmlydC14c20gICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBi
+cm9rZW4KIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItaW50ZWwgMTIgZ3Vlc3Qtc3RhcnQgICAg
+ICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjYzMAogdGVzdC1hcm1oZi1hcm1oZi1leGFtaW5lICAg
+ICAgOCByZWJvb3QgICAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyNjMwCiB0ZXN0
+LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICBmYWls
+IFJFR1IuIHZzLiAxMjI2MzAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgIDcgeGVuLWJv
+b3QgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjYzMAogdGVzdC1hcm1oZi1hcm1o
+Zi1saWJ2aXJ0ICAgICAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4g
+MTIyNjMwCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgICA3IHhlbi1ib290ICAgICAgICAg
+ICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjI2MzAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0
+cnVjayAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjYzMAogdGVz
+dC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFp
+bCBSRUdSLiB2cy4gMTIyNjMwCiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgIDEwIGRlYmlh
+bi1pbnN0YWxsICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjI2MzAKIHRlc3QtYXJtaGYtYXJt
+aGYtbGlidmlydC14c20gMTAgZGViaWFuLWluc3RhbGwgICAgICAgICAgIGZhaWwgUkVHUi4gdnMu
+IDEyMjYzMAoKUmVncmVzc2lvbnMgd2hpY2ggYXJlIHJlZ2FyZGVkIGFzIGFsbG93YWJsZSAobm90
+IGJsb2NraW5nKToKIHRlc3QtYW1kNjQtaTM4Ni1ydW1wcnVuLWkzODYgMTcgcnVtcHJ1bi1kZW1v
+LXhlbnN0b3JlbHMveGVuc3RvcmVscy5yZXBlYXQgZmFpbCBSRUdSLiB2cy4gMTIyNjMwCgpUZXN0
+cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hcm02
+NC1hcm02NC14bCAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJsb2Nr
+ZWQgaW4gMTIyNjMwCiB0ZXN0LWFybTY0LWFybTY0LWV4YW1pbmUgICAgICA1IGhvc3QtaW5zdGFs
+bCAgICAgICAgICBicm9rZW4gYmxvY2tlZCBpbiAxMjI2MzAKIHRlc3QtYXJtNjQtYXJtNjQteGwt
+eHNtICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgIGJyb2tlbiBibG9ja2VkIGluIDEyMjYz
+MAogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAgNCBob3N0LWluc3RhbGwoNCkgICAgICAg
+YnJva2VuIGJsb2NrZWQgaW4gMTIyNjMwCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjct
+YW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMjI2MzAKIHRlc3QtYW1k
+NjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFp
+bCBsaWtlIDEyMjYzMAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1
+ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTIyNjMwCiB0ZXN0LWFtZDY0LWkzODYteGwt
+cWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMjI2
+MzAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTAgZGViaWFuLWluc3RhbGwgICAgICAg
+ICAgICAgICBmYWlsICBsaWtlIDEyMjYzMAogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAx
+MCBkZWJpYW4taW5zdGFsbCAgICAgICAgICAgICAgIGZhaWwgIGxpa2UgMTIyNjMwCiB0ZXN0LWFt
+ZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZh
+aWwgbGlrZSAxMjI2MzAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW43LWFtZDY0IDE3IGd1
+ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDEyMjYzMAogdGVzdC1hbWQ2NC1pMzg2LXhs
+LXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTIy
+NjMwCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVj
+ayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAg
+MTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
+bWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZh
+aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcHZzaGltICAgIDEyIGd1ZXN0LXN0
+YXJ0ICAgICAgICAgICAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1s
+aWJ2aXJ0ICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIg
+cGFzcwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hl
+Y2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDIg
+IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
+YW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1z
+dXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFl
+bXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2
+ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxMyBtaWdyYXRlLXN1cHBvcnQt
+Y2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMg
+ICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
+c3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAxNyBkZWJpYW4taHZtLWluc3RhbGwvbDEv
+bDIgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZoZCAxMiBtaWdy
+YXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkz
+ODYteGwtcWVtdXQtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgICBmYWlsIG5l
+dmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW4xMC1pMzg2IDEwIHdpbmRvd3Mt
+aW5zdGFsbCAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
+dC13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0
+ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAg
+ICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW4xMC1pMzg2
+IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJn
+ZXRlZCBmb3IgdGVzdGluZzoKIGxpbnV4ICAgICAgICAgICAgICAgIGNiYjQyZjc5ZDYyZTFkYmI2
+MzQyOGQwMjI1MGJkNDQ3MzI1NTU1ZDgKYmFzZWxpbmUgdmVyc2lvbjoKIGxpbnV4ICAgICAgICAg
+ICAgICAgIDcwMWUzOWQwNTExOTIyOWI5MmVjY2E0YWRkN2I3ZWQyMTkzNjIyYzMKCkxhc3QgdGVz
+dCBvZiBiYXNpcyAgICAgICAgICAgICAgICAgICAgICAgICAgKG5vdCBmb3VuZCkgICAgIApGYWls
+aW5nIHNpbmNlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChub3QgZm91bmQpICAgICAK
+VGVzdGluZyBzYW1lIHNpbmNlICAgMTIyNjcyICAyMDE4LTA1LTA5IDA5OjE5OjI0IFogICAgMyBk
+YXlzICAgIDEgYXR0ZW1wdHMKCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXhzbSAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
+bGQtYXJtaGYteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHBhc3MgICAgCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
+ZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1saWJ2aXJ0
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
+LWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
+YXNzICAgIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXB2b3BzICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
+YXJtaGYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXJ1bXBydW4gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1ydW1wcnVuICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
+ZDY0LWFtZDY0LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBicm9rZW4gIAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
+NjQtYW1kNjQteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFu
+aHZtLWFtZDY0LXhzbSAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0
+LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
+NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtc3R1YmRvbS1kZWJp
+YW5odm0tYW1kNjQteHNtICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
+LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
+LWFtZDY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBicm9rZW4gIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14
+c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
+YW1kNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGJyb2tlbiAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
+bWQ2NC1xZW11dS1uZXN0ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
+CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2
+aHZtLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
+ZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGVi
+aWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
+Ni1mcmVlYnNkMTAtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
+dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2
+NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
+NC14bC1xZW11dC13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0
+ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
+ICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAg
+ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjct
+YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
+LXhsLXFlbXV0LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
+c3QtYW1kNjQtaTM4Ni14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
+ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAg
+ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1h
+bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYt
+eGwtYXJuZGFsZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
+dC1hbWQ2NC1hbWQ2NC14bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi14
+bC1jdWJpZXRydWNrICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
+LWFtZDY0LWFtZDY0LWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQtZXhhbWluZSAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi1leGFtaW5lICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtZXhh
+bWluZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
+YW1kNjQtaTM4Ni1mcmVlYnNkMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
+YXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXJ1bXBydW4taTM4NiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkz
+ODYgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
+ZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1h
+bWQ2NC1hbWQ2NC14bC1xZW11dS13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZh
+aWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAg
+ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWludGVs
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1w
+dmh2Mi1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
+ZDY0LWkzODYtcWVtdXQtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZp
+cnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
+NjQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcGFpciAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
+NC1pMzg2LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXBhaXIgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1w
+dmdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
+LWFtZDY0LWkzODYtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZzaGltICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXB2c2hpbSAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
+YW1kNjQteGwtcWNvdzIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcmF3ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcnRkcyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1h
+cm1oZi14bC1ydGRzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC1zaGFkb3cgICAgICAg
+ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQt
+c2hhZG93ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1zaGFkb3cg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkz
+ODYteGwtc2hhZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3Nz
+dGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2Vz
+OiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFi
+bGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9n
+cwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJh
+bCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0
+O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
+cmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3Qg
+aGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9n
+aXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoIG5vdCBhcHBsaWNhYmxlLgoKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
