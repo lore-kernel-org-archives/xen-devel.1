@@ -1,21 +1,15 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 2/5] hvm/mtrr: use the hardware number of
- variable ranges for Dom0
-Date: Mon, 14 May 2018 08:14:31 -0600
-Message-ID: <5AF999C702000078001C2828@prv1-mh.provo.novell.com>
-References: <20180510171505.37309-1-roger.pau@citrix.com>
- <20180510171505.37309-3-roger.pau@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
+ qcow2
+Date: Mon, 14 May 2018 16:15:22 +0200
+Message-ID: <20180514161522.21a527f9.olaf@aepfle.de>
+References: <20180507151940.GA31926@aepfle.de>
+ <20180508133143.77e209f2.olaf@aepfle.de>
+ <20180510104018.GA2057@perard.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5031821011442786089=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=r2k+=ib=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fIEFH-0002pz-MO
- for xen-devel@lists.xenproject.org; Mon, 14 May 2018 14:14:35 +0000
-In-Reply-To: <20180510171505.37309-3-roger.pau@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <20180510104018.GA2057@perard.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,28 +18,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEwLjA1LjE4IGF0IDE5OjE1LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IC0tLQo+ICB4ZW4vYXJjaC94ODYvaHZtL210cnIuYyB8IDEzICsrKysrKysrKysrLS0KPiAgMSBm
-aWxlIGNoYW5nZWQsIDExIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpXaGF0IGFib3V0
-IGh2bV9tc3Jfe3JlYWQsd3JpdGV9X2ludGVyY2VwdCgpJ3MgdXNlcyBvZiBNVFJSX1ZDTlQ/Cgo+
-IEBAIC02ODMsNiArNjg2LDkgQEAgc3RhdGljIGludCBodm1fc2F2ZV9tdHJyX21zcihzdHJ1Y3Qg
-ZG9tYWluICpkLCBodm1fZG9tYWluX2NvbnRleHRfdCAqaCkKPiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICB8IChtdHJyX3N0YXRlLT5lbmFibGVkIDw8IDEwKTsKPiAgICAgICAgICBo
-d19tdHJyLm1zcl9tdHJyX2NhcCA9IG10cnJfc3RhdGUtPm10cnJfY2FwOwo+ICAKPiArICAgICAg
-ICBpZiAoIChtdHJyX3N0YXRlLT5tdHJyX2NhcCAmIDB4ZmYpICE9IE1UUlJfVkNOVCApCj4gKyAg
-ICAgICAgICAgIHJldHVybiAtRUlOVkFMOwoKSSBjZXJ0YWlubHkgYWdyZWUgd2l0aCB0aGlzIG9u
-ZSwgYnV0IC4uLgoKPiBAQCAtNzI3LDYgKzczMyw5IEBAIHN0YXRpYyBpbnQgaHZtX2xvYWRfbXRy
-cl9tc3Ioc3RydWN0IGRvbWFpbiAqZCwgaHZtX2RvbWFpbl9jb250ZXh0X3QgKmgpCj4gIAo+ICAg
-ICAgbXRycl9zdGF0ZS0+bXRycl9jYXAgPSBod19tdHJyLm1zcl9tdHJyX2NhcDsKPiAgCj4gKyAg
-ICBpZiAoIChtdHJyX3N0YXRlLT5tdHJyX2NhcCAmIDB4ZmYpICE9IE1UUlJfVkNOVCApCj4gKyAg
-ICAgICAgcmV0dXJuIC1FSU5WQUw7CgouLi4gaXNuJ3QgdGhpcyBtb3JlIHN0cmljdCB0aGFuIGl0
-IG5lZWRzIHRvIGJlPyBBIHNtYWxsZXIgaW5jb21pbmcgY291bnQKb3VnaHQgdG8gYmUgb2theSBJ
-IHdvdWxkIHRoaW5rLiBSZWxheGluZyB0aGluZ3MgaGVyZSB3b3VsZCB0aGVuIG9mCmNvdXJzZSBh
-bHNvIHJlcXVpcmUgcmVsYXhpbmcgdGhpbmdzIG9uIHRoZSBzYXZlIHNpZGUuCgpKYW4KCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============5031821011442786089==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/.t.w/CNb5JwzHrafkGL0MM7"; protocol="application/pgp-signature"
+
+--Sig_/.t.w/CNb5JwzHrafkGL0MM7
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 10 May 2018 11:40:18 +0100
+schrieb Anthony PERARD <anthony.perard@citrix.com>:
+
+> I'm not sure if that information is going to help, but that what I have
+> for now about the lock of block images.
+
+I think the issue is not with two dom0s locking the same file, but with one=
+ qemu process trying to lock the same region within a file twice. That woul=
+d not happen if an 'unplug' happens before the PV driver within qemu takes =
+control. I'm sure migration with qcow2 will fail with a pvops domU if 512b1=
+09ec962 gets reverted.
+
+I will look into vmstate_xen_platform, as suggested by Stefano, to preserve=
+ the unplug state during the lifetime of a domU. I think that is the correc=
+t approach, and 512b109ec962 should have never ever go upstream.
+
+Olaf
+
+--Sig_/.t.w/CNb5JwzHrafkGL0MM7
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvmZ+gAKCRBdQqD6ppg2
+frf4AKDHRd0rRwU3V9ZhDO706OTQhznGJQCcD0v2O6gRWDfvo6I4hyeAoyfsUnw=
+=lXHc
+-----END PGP SIGNATURE-----
+
+--Sig_/.t.w/CNb5JwzHrafkGL0MM7--
+
+
+--===============5031821011442786089==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5031821011442786089==--
