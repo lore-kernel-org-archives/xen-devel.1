@@ -1,15 +1,21 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
- qcow2
-Date: Mon, 14 May 2018 16:15:22 +0200
-Message-ID: <20180514161522.21a527f9.olaf@aepfle.de>
-References: <20180507151940.GA31926@aepfle.de>
- <20180508133143.77e209f2.olaf@aepfle.de>
- <20180510104018.GA2057@perard.uk.xensource.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH 1/2] vpci/msi: split code to bind pirq
+Date: Mon, 14 May 2018 15:15:35 +0100
+Message-ID: <20180514141535.5nlnghuxlo7erlap@MacBook-Pro-de-Roger.local>
+References: <20180508092359.6829-1-roger.pau@citrix.com>
+ <20180508092516.6958-1-roger.pau@citrix.com>
+ <5AF9800502000078001C278D@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5031821011442786089=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180510104018.GA2057@perard.uk.xensource.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=xph0=ib=citrix.com=prvs=66538a94f=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fIEGt-000305-OP
+ for xen-devel@lists.xenproject.org; Mon, 14 May 2018 14:16:15 +0000
+Content-Disposition: inline
+In-Reply-To: <5AF9800502000078001C278D@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,58 +24,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: xen-devel@lists.xen.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5031821011442786089==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/.t.w/CNb5JwzHrafkGL0MM7"; protocol="application/pgp-signature"
-
---Sig_/.t.w/CNb5JwzHrafkGL0MM7
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 10 May 2018 11:40:18 +0100
-schrieb Anthony PERARD <anthony.perard@citrix.com>:
-
-> I'm not sure if that information is going to help, but that what I have
-> for now about the lock of block images.
-
-I think the issue is not with two dom0s locking the same file, but with one=
- qemu process trying to lock the same region within a file twice. That woul=
-d not happen if an 'unplug' happens before the PV driver within qemu takes =
-control. I'm sure migration with qcow2 will fail with a pvops domU if 512b1=
-09ec962 gets reverted.
-
-I will look into vmstate_xen_platform, as suggested by Stefano, to preserve=
- the unplug state during the lifetime of a domU. I think that is the correc=
-t approach, and 512b109ec962 should have never ever go upstream.
-
-Olaf
-
---Sig_/.t.w/CNb5JwzHrafkGL0MM7
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvmZ+gAKCRBdQqD6ppg2
-frf4AKDHRd0rRwU3V9ZhDO706OTQhznGJQCcD0v2O6gRWDfvo6I4hyeAoyfsUnw=
-=lXHc
------END PGP SIGNATURE-----
-
---Sig_/.t.w/CNb5JwzHrafkGL0MM7--
-
-
---===============5031821011442786089==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5031821011442786089==--
+T24gTW9uLCBNYXkgMTQsIDIwMTggYXQgMDY6MjQ6MzdBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDA4LjA1LjE4IGF0IDExOjI1LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdy
+b3RlOgo+ID4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS92bXNpLmMKPiA+ICsrKyBiL3hlbi9hcmNo
+L3g4Ni9odm0vdm1zaS5jCj4gPiBAQCAtNjYzLDYgKzY2Myw0MiBAQCB2b2lkIHZwY2lfbXNpX2Fy
+Y2hfbWFzayhzdHJ1Y3QgdnBjaV9tc2kgKm1zaSwgY29uc3Qgc3RydWN0IHBjaV9kZXYgKnBkZXYs
+Cj4gPiAgICAgIHZwY2lfbWFza19waXJxKHBkZXYtPmRvbWFpbiwgbXNpLT5hcmNoLnBpcnEgKyBl
+bnRyeSwgbWFzayk7Cj4gPiAgfQo+ID4gIAo+ID4gK3N0YXRpYyBpbnQgdnBjaV9tc2lfdXBkYXRl
+KGNvbnN0IHN0cnVjdCBwY2lfZGV2ICpwZGV2LCB1aW50MzJfdCBkYXRhLAo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHVpbnQ2NF90IGFkZHJlc3MsIHVuc2lnbmVkIGludCB2ZWN0b3Jz
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGludCBwaXJxLCB1aW50
+MzJfdCBtYXNrKQo+ID4gK3sKPiA+ICsgICAgdW5zaWduZWQgaW50IGk7Cj4gPiArCj4gPiArICAg
+IEFTU0VSVChwY2lkZXZzX2xvY2tlZCgpKTsKPiA+ICsKPiA+ICsgICAgZm9yICggaSA9IDA7IGkg
+PCB2ZWN0b3JzOyBpKysgKQo+ID4gKyAgICB7Cj4gPiArICAgICAgICB1aW50OF90IHZlY3RvciA9
+IE1BU0tfRVhUUihkYXRhLCBNU0lfREFUQV9WRUNUT1JfTUFTSyk7Cj4gPiArICAgICAgICB1aW50
+OF90IHZlY3Rvcl9tYXNrID0gMHhmZiA+PiAoOCAtIGZscyh2ZWN0b3JzKSArIDEpOwo+ID4gKyAg
+ICAgICAgc3RydWN0IHhlbl9kb21jdGxfYmluZF9wdF9pcnEgYmluZCA9IHsKPiA+ICsgICAgICAg
+ICAgICAubWFjaGluZV9pcnEgPSBwaXJxICsgaSwKPiA+ICsgICAgICAgICAgICAuaXJxX3R5cGUg
+PSBQVF9JUlFfVFlQRV9NU0ksCj4gPiArICAgICAgICAgICAgLnUubXNpLmd2ZWMgPSAodmVjdG9y
+ICYgfnZlY3Rvcl9tYXNrKSB8Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAoKHZlY3Rv
+ciArIGkpICYgdmVjdG9yX21hc2spLAo+ID4gKyAgICAgICAgICAgIC51Lm1zaS5nZmxhZ3MgPSBt
+c2lfZ2ZsYWdzKGRhdGEsIGFkZHJlc3MsIChtYXNrID4+IGkpICYgMSksCj4gPiArICAgICAgICB9
+Owo+ID4gKyAgICAgICAgaW50IHJjID0gcHRfaXJxX2NyZWF0ZV9iaW5kKHBkZXYtPmRvbWFpbiwg
+JmJpbmQpOwo+ID4gKwo+ID4gKyAgICAgICAgaWYgKCByYyApCj4gPiArICAgICAgICB7Cj4gPiAr
+ICAgICAgICAgICAgZ2RwcmludGsoWEVOTE9HX0VSUiwKPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAiJTA0eDolMDJ4OiUwMnguJXU6IGZhaWxlZCB0byBiaW5kIFBJUlEgJXU6ICVkXG4iLAo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgIHBkZXYtPnNlZywgcGRldi0+YnVzLCBQQ0lfU0xPVChwZGV2
+LT5kZXZmbiksCj4gPiArICAgICAgICAgICAgICAgICAgICAgUENJX0ZVTkMocGRldi0+ZGV2Zm4p
+LCBwaXJxICsgaSwgcmMpOwo+ID4gKyAgICAgICAgICAgIHdoaWxlICggYmluZC5tYWNoaW5lX2ly
+cS0tICkKPiA+ICsgICAgICAgICAgICAgICAgcHRfaXJxX2Rlc3Ryb3lfYmluZChwZGV2LT5kb21h
+aW4sICZiaW5kKTsKPiAKPiBJIHJlYWxpemUgdGhpcyBpcyBqdXN0IGNvZGUgbW92ZW1lbnQsIGJ1
+dCBpcyB0aGlzIHdoaWxlKCkgY29ycmVjdD8gSSB0aGluayBpdAo+IGNhbiBvbmx5IGJlIGNvcnJl
+Y3QgaWYgcGlycSAod2hpY2ggYmluZC5tYWNoaW5lX2lycSBnZXRzIGluaXRpYWxpemVkIGZyb20p
+Cj4gd2FzIGFsd2F5cyB6ZXJvLCB5ZXQgdGhhdCBkb2Vzbid0IGxvb2sgdG8gYmUgdGhlIGNhc2Uu
+Cj4gCj4gSWYgeW91IGFncmVlLCBJJ2QgcHJlZmVyIGZpeGVkIGNvZGUgdG8gYmUgbW92ZWQgKHJl
+YWQ6IHdhbnRzIGEgcHJlcmVxCj4gcGF0Y2gpLCBvciBmb3IgdGhlIGZpeCB0byBiZSBhcHBsaWVk
+IHdoaWxlIG1vdmluZyB0aGUgY29kZSAoc3VpdGFibHkKPiByZWFzb25lZCBhYm91dCBpbiB0aGUg
+ZGVzY3JpcHRpb24pLgoKUmlnaHQsIHRoaXMgc2hvdWxkIGJlOgoKd2hpbGUgKCBiaW5kLm1hY2hp
+bmVfaXJxLS0gPj0gcGlycSApCiAgICBwdF9pcnFfZGVzdHJveV9iaW5kKHBkZXYtPmRvbWFpbiwg
+JmJpbmQpOwoKV2lsbCBmaXggYmVmb3JlIG1vdmluZyB0aGUgY29kZS4KClRoYW5rcywgUm9nZXIu
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
