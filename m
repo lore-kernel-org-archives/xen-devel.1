@@ -1,21 +1,24 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 1/2] xen/PVH: Set up GS segment for stack
- canary
-Date: Mon, 14 May 2018 06:50:52 -0600
-Message-ID: <5AF9862C02000078001C27B5__39671.4616952979$1526302180$gmane$org@prv1-mh.provo.novell.com>
-References: <20180509203318.2611-1-boris.ostrovsky@oracle.com>
- <20180509203318.2611-2-boris.ostrovsky@oracle.com>
+From: Jiri Slaby <jslaby@suse.cz>
+Subject: Re: [PATCH -resend 01/27] linkage: new macros for
+ assembler symbols
+Date: Mon, 14 May 2018 14:54:43 +0200
+Message-ID: <09b38f5b-6dfb-c12f-5d77-249c4c9f484a__36064.6982132041$1526302415$gmane$org@suse.cz>
+References: <20180510080644.19752-1-jslaby@suse.cz>
+ <20180510080644.19752-2-jslaby@suse.cz>
+ <e5e17ecd-0e74-7766-e730-333004ada199@infradead.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=r2k+=ib=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fICwM-0004bs-4o
- for xen-devel@lists.xenproject.org; Mon, 14 May 2018 12:50:58 +0000
-In-Reply-To: <20180509203318.2611-2-boris.ostrovsky@oracle.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=82t+=ib=gmail.com=jirislaby@srs-us1.protection.inumbo.net>)
+ id 1fID04-0004mU-NI
+ for xen-devel@lists.xenproject.org; Mon, 14 May 2018 12:54:48 +0000
+Received: by mail-wm0-f54.google.com with SMTP id w194-v6so13247279wmf.2
+ for <xen-devel@lists.xenproject.org>; Mon, 14 May 2018 05:54:46 -0700 (PDT)
+In-Reply-To: <e5e17ecd-0e74-7766-e730-333004ada199@infradead.org>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,20 +27,12 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, linux-kernel@vger.kernel.org
+To: Randy Dunlap <rdunlap@infradead.org>, mingo@redhat.com
+Cc: linux-arch@vger.kernel.org, Juergen Gross <jgross@suse.com>, x86@kernel.org, Peter Zijlstra <a.p.zijlstra@chello.nl>, Len Brown <len.brown@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-pm@vger.kernel.org, jpoimboe@redhat.com, "Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-kernel@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, Pavel Machek <pavel@ucw.cz>, hpa@zytor.com, xen-devel@lists.xenproject.org, Andrew Morton <akpm@linux-foundation.org>, Linus Torvalds <torvalds@linux-foundation.org>, Ingo Molnar <mingo@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA5LjA1LjE4IGF0IDIyOjMzLCA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+IHdy
-b3RlOgo+IEBAIC02NCw2ICs2NywxNyBAQCBFTlRSWShwdmhfc3RhcnRfeGVuKQo+ICAJbW92ICVl
-YXgsJWVzCj4gIAltb3YgJWVheCwlc3MKPiAgCj4gKwkvKiBTZXQgYmFzZSBhZGRyZXNzIGluIHN0
-YWNrIGNhbmFyeSBkZXNjcmlwdG9yLiAqLwo+ICsJbW92bCBfcGEoZ2R0X3N0YXJ0KSwlZWF4Cj4g
-Kwltb3ZsICRfcGEoY2FuYXJ5KSwlZWN4Cj4gKwltb3Z3ICVjeCwgKFBWSF9HRFRfRU5UUllfQ0FO
-QVJZICogOCkgKyAwKCVlYXgpCj4gKwlzaHJsICQxNiwgJWVjeAo+ICsJbW92YiAlY2wsIChQVkhf
-R0RUX0VOVFJZX0NBTkFSWSAqIDgpICsgMiglZWF4KQo+ICsJbW92YiAlY2gsIChQVkhfR0RUX0VO
-VFJZX0NBTkFSWSAqIDgpICsgNSglZWF4KQoKSXMgdGhpcyBtZWFuaW5nZnVsIC8gY29ycmVjdCBm
-b3IgdGhlIDY0LWJpdCBjYXNlPyBJJ2QgcmF0aGVyIGV4cGVjdCB5b3UgdG8Kd3JpdGUgdGhlIEdT
-IGJhc2UgYWRkcmVzcyBNU1IgdGhlcmUuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMDUvMTQvMjAxOCwgMDU6MDQgQU0sIFJhbmR5IER1bmxhcCB3cm90ZToKPiBIVEguCgpEZWZp
+bml0ZWx5LCB0aGFua3MgZm9yIHByb29mLXJlYWRpbmcuCgotLSAKanMKc3VzZSBsYWJzCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
