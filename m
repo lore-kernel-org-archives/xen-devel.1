@@ -1,23 +1,20 @@
-From: Ingo Molnar <mingo@kernel.org>
-Subject: Re: [PATCH -resend 01/27] linkage: new macros for
- assembler symbols
-Date: Mon, 14 May 2018 10:03:05 +0200
-Message-ID: <20180514080305.GA6607__21401.7617902302$1526284947$gmane$org@gmail.com>
-References: <20180510080644.19752-1-jslaby@suse.cz>
- <20180510080644.19752-2-jslaby@suse.cz>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [xen-unstable test] 122660: regressions - trouble:
+ blocked/broken/fail/pass
+Date: Mon, 14 May 2018 10:34:11 +0200
+Message-ID: <84a1cf3a-9e52-08f9-191e-b3469c851d2b@suse.com>
+References: <osstest-122660-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rr70=ib=gmail.com=mingo.kernel.org@srs-us1.protection.inumbo.net>)
- id 1fI8Rq-0004R8-Ni
- for xen-devel@lists.xenproject.org; Mon, 14 May 2018 08:03:10 +0000
-Received: by mail-wr0-x241.google.com with SMTP id h5-v6so11220969wrm.4
- for <xen-devel@lists.xenproject.org>; Mon, 14 May 2018 01:03:09 -0700 (PDT)
-Content-Disposition: inline
-In-Reply-To: <20180510080644.19752-2-jslaby@suse.cz>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=f8fs=ib=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fI8vx-0001jl-AF
+ for xen-devel@lists.xenproject.org; Mon, 14 May 2018 08:34:17 +0000
+In-Reply-To: <osstest-122660-mainreport@xen.org>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,18 +23,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jiri Slaby <jslaby@suse.cz>
-Cc: linux-arch@vger.kernel.org, Juergen Gross <jgross@suse.com>, x86@kernel.org, Peter Zijlstra <a.p.zijlstra@chello.nl>, Len Brown <len.brown@intel.com>, linux-pm@vger.kernel.org, jpoimboe@redhat.com, "Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-kernel@vger.kernel.org, mingo@redhat.com, Thomas Gleixner <tglx@linutronix.de>, Pavel Machek <pavel@ucw.cz>, hpa@zytor.com, xen-devel@lists.xenproject.org, Andrew Morton <akpm@linux-foundation.org>, Linus Torvalds <torvalds@linux-foundation.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: xen-devel@lists.xenproject.org
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CiogSmlyaSBTbGFieSA8anNsYWJ5QHN1c2UuY3o+IHdyb3RlOgoKPiAgRG9jdW1lbnRhdGlvbi9h
-c20tYW5ub3RhdGlvbnMucnN0IHwgMjE4ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-Cj4gIGFyY2gveDg2L2luY2x1ZGUvYXNtL2xpbmthZ2UuaCAgICB8ICAxMCArLQo+ICBpbmNsdWRl
-L2xpbnV4L2xpbmthZ2UuaCAgICAgICAgICAgfCAyNTcgKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrLS0KPiAgMyBmaWxlcyBjaGFuZ2VkLCA0NzUgaW5zZXJ0aW9ucygrKSwgMTAg
-ZGVsZXRpb25zKC0pCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBEb2N1bWVudGF0aW9uL2FzbS1hbm5v
-dGF0aW9ucy5yc3QKCkNvdWxkIHlvdSBwbGVhc2Ugc3BsaXQgdGhlIGRvY3VtZW50YXRpb24gcGF0
-Y2ggZnJvbSB0aGUgaGVhZGVyIGZpbGUgY2hhbmdlcz8KClRoYW5rcywKCglJbmdvCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTIvMDUvMTggMDM6MzYsIG9zc3Rlc3Qgc2VydmljZSBvd25lciB3cm90ZToKPiBmbGlnaHQg
+MTIyNjYwIHhlbi11bnN0YWJsZSByZWFsIFtyZWFsXQo+IGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
+bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjI2NjAvCj4gCj4gUmVncmVzc2lvbnMgOi0oCj4g
+Cj4gVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCj4gaW5jbHVk
+aW5nIHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46Cj4gIHRlc3QtYW1kNjQtaTM4Ni14bC1x
+ZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgIGJyb2tl
+bgo+ICB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgICAgPGpvYiBzdGF0dXM+
+ICAgICAgICAgICAgICAgICBicm9rZW4KPiAgdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2
+LWFtZDY0IDQgaG9zdC1pbnN0YWxsKDQpIGJyb2tlbiBSRUdSLiB2cy4gMTIyNTgwCj4gIHRlc3Qt
+YW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDQgaG9zdC1pbnN0YWxsKDQp
+IGJyb2tlbiBSRUdSLiB2cy4gMTIyNTgwCgpJcyBpdCBqdXN0IGJhZCBsdWNrIHRoYXQgdGhlIGZh
+aWxpbmcgdGVzdHMgd2VyZSBvbiB0aGUgc2FtZSBob3N0CihyaW1hdmEpID8KCj4gIGJ1aWxkLWFy
+bWhmLXB2b3BzICAgICAgICAgICAgIDYga2VybmVsLWJ1aWxkICAgICAgICAgICAgIGZhaWwgUkVH
+Ui4gdnMuIDEyMjU4MAoKRmxha3kgaGFyZHdhcmUgYWdhaW4/CgoKSnVlcmdlbgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
