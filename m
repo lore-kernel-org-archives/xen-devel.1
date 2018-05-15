@@ -1,21 +1,12 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 1/4] libxc: Drop declarations of
- osdep_privcmd_open and _close
-Date: Tue, 15 May 2018 09:49:04 +0100
-Message-ID: <20180515084904.hclsdhiwvfyibzqu@MacBook-Pro-de-Roger.local>
-References: <1526317739-17572-1-git-send-email-ian.jackson@eu.citrix.com>
- <1526317739-17572-2-git-send-email-ian.jackson@eu.citrix.com>
+From: Colin King <colin.king@canonical.com>
+Subject: [PATCH][next] drm/xen-front: fix spelling mistake:
+ "conector" -> "connector"
+Date: Tue, 15 May 2018 09:54:33 +0100
+Message-ID: <20180515085433.8245-1-colin.king__38424.5956120596$1526374404$gmane$org@canonical.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=zhs+=ic=citrix.com=prvs=666baa678=roger.pau@srs-us1.protection.inumbo.net>)
- id 1fIVdy-0003Pc-UH
- for xen-devel@lists.xenproject.org; Tue, 15 May 2018 08:49:14 +0000
-Content-Disposition: inline
-In-Reply-To: <1526317739-17572-2-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,16 +15,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
+To: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, David Airlie <airlied@linux.ie>, dri-devel@lists.freedesktop.org, xen-devel@lists.xen.org
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBNYXkgMTQsIDIwMTggYXQgMDY6MDg6NTZQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
-dGU6Cj4gVGhlc2UgZnVuY3Rpb25zIGFyZSBubyBsb25nZXIgZGVmaW5lZCBvciB1c2VkIGFueXdo
-ZXJlLiAgVGhlCj4gZGVjbGFyYXRpb25zIHNob3VsZCBoYXZlIGJlZW4gZGVsZXRlZCB3aGVuIHRo
-ZSBkZWZpbml0aW9ucyB3ZXJlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IElhbiBKYWNrc29uIDxJYW4u
-SmFja3NvbkBldS5jaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJv
-Z2VyLnBhdUBjaXRyaXguY29tPgoKVGhhbmtzLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+RnJvbTogQ29saW4gSWFuIEtpbmcgPGNvbGluLmtpbmdAY2Fub25pY2FsLmNvbT4KClRyaXZpYWwg
+Zml4IHRvIHNwZWxsaW5nIG1pc3Rha2UgaW4gRFJNX0lORk8gbWVzc2FnZS4KClNpZ25lZC1vZmYt
+Ynk6IENvbGluIElhbiBLaW5nIDxjb2xpbi5raW5nQGNhbm9uaWNhbC5jb20+Ci0tLQogZHJpdmVy
+cy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250LmMgfCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBp
+bnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0v
+eGVuL3hlbl9kcm1fZnJvbnQuYyBiL2RyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udC5j
+CmluZGV4IDBlNDg2Y2IxYzEwYy4uMzcyNWRlNGM0ZGE4IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dw
+dS9kcm0veGVuL3hlbl9kcm1fZnJvbnQuYworKysgYi9kcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9k
+cm1fZnJvbnQuYwpAQCAtNjIzLDcgKzYyMyw3IEBAIHN0YXRpYyBpbnQgZGlzcGxiYWNrX2luaXR3
+YWl0KHN0cnVjdCB4ZW5fZHJtX2Zyb250X2luZm8gKmZyb250X2luZm8pCiAJaWYgKHJldCA8IDAp
+CiAJCXJldHVybiByZXQ7CiAKLQlEUk1fSU5GTygiSGF2ZSAlZCBjb25lY3RvcihzKVxuIiwgY2Zn
+LT5udW1fY29ubmVjdG9ycyk7CisJRFJNX0lORk8oIkhhdmUgJWQgY29ubmVjdG9yKHMpXG4iLCBj
+ZmctPm51bV9jb25uZWN0b3JzKTsKIAkvKiBDcmVhdGUgZXZlbnQgY2hhbm5lbHMgZm9yIGFsbCBj
+b25uZWN0b3JzIGFuZCBwdWJsaXNoICovCiAJcmV0ID0geGVuX2RybV9mcm9udF9ldnRjaG5sX2Ny
+ZWF0ZV9hbGwoZnJvbnRfaW5mbyk7CiAJaWYgKHJldCA8IDApCi0tIAoyLjE3LjAKCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
