@@ -1,7 +1,7 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
 Subject: Re: [PATCH 5/5] docs/pvh: document initial MTRR state
-Date: Tue, 15 May 2018 09:30:47 +0100
-Message-ID: <20180515083047.4gp6k3s2j6pe5iao@MacBook-Pro-de-Roger.local>
+Date: Tue, 15 May 2018 09:30:44 +0100
+Message-ID: <20180515083044.ncbsofqx2qholan4@citrix.com>
 References: <20180510171505.37309-1-roger.pau@citrix.com>
  <20180510171505.37309-6-roger.pau@citrix.com>
  <20180514160352.3niqmzctpntjhoeg@citrix.com>
@@ -14,9 +14,9 @@ Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=zhs+=ic=citrix.com=prvs=666baa678=roger.pau@srs-us1.protection.inumbo.net>)
- id 1fIVME-0001iq-8Y
- for xen-devel@lists.xenproject.org; Tue, 15 May 2018 08:30:54 +0000
+ <srs0=gfjq=ic=citrix.com=prvs=666122f4f=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1fIVMA-0001id-2K
+ for xen-devel@lists.xenproject.org; Tue, 15 May 2018 08:30:50 +0000
 Content-Disposition: inline
 In-Reply-To: <5AFA916702000078001C2BCB@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -28,7 +28,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 T24gVHVlLCBNYXkgMTUsIDIwMTggYXQgMDE6NTE6MDNBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
@@ -67,15 +67,15 @@ bGlzaGluZyBzb21lIHNhbmUgKGkuZS4gcmVhc29uYWJsZSBmb3IgYW4gT1MgdG8gZXhwZWN0KSBz
 dGF0ZSwgaW5zdGVhZAo+IG9mIGEgZmlybSAidGhpcyB3aWxsIGFsd2F5cyBiZSB0aGlzIHdheSIg
 b25lLiBGdXJ0aGVybW9yZSBPU2VzIGdlbmVyYWxseQo+IHNob3VsZG4ndCBmaW5kIGEgbmVlZCB0
 byBmaWRkbGUgd2l0aCBNVFJScywgcHJvdmlkZWQgZmlybXdhcmUgaGFzIGRvbmUgYQo+IHByb3Bl
-ciBqb2Igc2V0dGluZyB0aGVtIHVwLgoKSW5kZWVkIHRoYXQncyB0aGUgcHVycG9zZS4gTW9zdCBP
-U2VzIGRvbid0IHJlYWxseSBjYXJlIGFib3V0IHRoZQpkZXRhaWxzIG9mIHRoZSBNVFJSIHNldHVw
-LCBhbmQgdGhleSBqdXN0IGV4cGVjdCBSQU0gcmVnaW9ucyB0byBiZSBzZXQKdG8gV0IgYW5kIE1N
-SU8gaG9sZXMgdG8gVUMgQUZBSUNULgoKSSBkb24ndCB0aGluayBYZW4gaGFzIHRvIHByb3ZpZGUg
-YW55IGd1YXJhbnRlZSBhYm91dCB0aGUgZGV0YWlscyBvZgp0aGUgTVRSUiBzdGF0ZSwgYXBhcnQg
-ZnJvbSBzdGF0aW5nIHRoYXQgUkFNIHdpbGwgYmUgV0IgYW5kIE1NSU8gVUMuCgpJIGNhbiBsZWF2
-ZSB0aGUgdGV4dCBhcy1pcywgb3IgYWRkIHRoZSBwYXJhZ3JhcGggc3VnZ2VzdGVkIGluIGFub3Ro
-ZXIKZW1haWwgdG8gY2xhcmlmeSBpZiB0aGUgY3VycmVudCB3cml0aW5nIGlzIHByb25lIHRvIG1p
-c3VuZGVyc3RhbmRpbmcuCgpSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+ciBqb2Igc2V0dGluZyB0aGVtIHVwLgoKQUlVSSB0aGlzIHNlcmllcyBpcyB0aGUgcmVzdWx0IG9m
+IGRpc2N1c3Npb24gb2YgIFtQQVRDSCB2MiAxLzNdIHhlbi9wdmg6CmVuYWJsZSBhbmQgc2V0IGRl
+ZmF1bHQgTVRSUiB0eXBlLgoKSXQgYXBwZWFycyBiZWNhdXNlIHRoZSBkZWZhdWx0IGlzIG5vdCBz
+YW5lLCBvdGhlciBwaWVjZXMgb2Ygc29mdHdhcmUKKGh2bWxvYWRlciwgb3ZtZiwgbm93IFBWSCBr
+ZXJuZWwpIGhhdmUgdG8gc2V0IGl0IGFnYWluIGFuZCBhZ2FpbiBhbmQKYWdhaW4uCgpGdW5kYW1l
+bnRhbGx5IEkgZG9uJ3QgdGhpbmsgd2UgZGlzYWdyZWUgd2l0aCBlYWNoIG90aGVyLiBJZiB3ZSBn
+byB3aXRoClJvZ2VyJ3Mgc3VnZ2VzdGlvbiBpbiB0aGUgb3RoZXIgc3ViLXRocmVhZCwgd2UgY2Fu
+IGVuc3VyZSBzYW5lIHR5cGVzIGZvcgpSQU0gYW5kIE1NSU8gYW5kIGF2b2lkIGRlYmF0aW5nIGhl
+cmUgYXQgYWxsLgoKV2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
