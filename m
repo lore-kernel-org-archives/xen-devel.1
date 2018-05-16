@@ -1,19 +1,21 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: Clarification Meltdown for vulnerability between
- 64-bit PV guests
-Date: Wed, 16 May 2018 13:56:31 +0100
-Message-ID: <34b64728-8618-01f0-b83d-f157aa63a8d5@citrix.com>
-References: <063ab1cd-bf1f-5753-d3f8-719a1a4a8567@suse.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v2 1/3] vpci/msi: fix unbind loop
+Date: Wed, 16 May 2018 15:10:17 +0200
+Message-ID: <0a7c5f9c-655f-f445-6132-3857bd48bea0@suse.com>
+References: <20180515141008.69320-1-roger.pau@citrix.com>
+ <20180515141008.69320-2-roger.pau@citrix.com>
+ <5AFC281502000078001C336B@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2905722055377077151=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=6zah=id=citrix.com=prvs=667472785=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1fIvz2-0006ml-Ri
- for xen-devel@lists.xenproject.org; Wed, 16 May 2018 12:56:44 +0000
-In-Reply-To: <063ab1cd-bf1f-5753-d3f8-719a1a4a8567@suse.com>
-Content-Language: en-GB
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=xwnu=id=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fIwCD-0008JM-Mw
+ for xen-devel@lists.xenproject.org; Wed, 16 May 2018 13:10:21 +0000
+In-Reply-To: <5AFC281502000078001C336B@suse.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,87 +24,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: John Wang <xgwang@suse.com>, xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2905722055377077151==
-Content-Type: multipart/alternative;
-	boundary="------------4153FDA19A70D65F6E22A6A8"
-Content-Language: en-GB
-
---------------4153FDA19A70D65F6E22A6A8
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 16/05/18 09:37, John Wang wrote:
->
-> Hi:
->
-> 64 bit PV guest can attack hypervisor by SP3
->
-
-Yes.
-
-> whether it still can attack others 64 bit PV guest by SP3?
->
-
-Meltdown attacks only operate within a single address space.  You can't
-attack a separate address space with it.
-
-That said, the VM => VM attack with Meltdown is due to the fact that
-other VMs are mapped into Xen's directmap, so available by attacking the
-hypervisor.
-
-~Andrew
-
---------------4153FDA19A70D65F6E22A6A8
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 16/05/18 09:37, John Wang wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:063ab1cd-bf1f-5753-d3f8-719a1a4a8567@suse.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <p>Hi:</p>
-      <p>64 bit PV guest can attack hypervisor by SP3</p>
-    </blockquote>
-    <br>
-    Yes.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:063ab1cd-bf1f-5753-d3f8-719a1a4a8567@suse.com">
-      <p><span class="op_dict_text2">whether</span> it still can attack
-        others 64 bit PV guest by SP3?</p>
-    </blockquote>
-    <br>
-    Meltdown attacks only operate within a single address space.  You
-    can't attack a separate address space with it.<br>
-    <br>
-    That said, the VM =&gt; VM attack with Meltdown is due to the fact
-    that other VMs are mapped into Xen's directmap, so available by
-    attacking the hypervisor.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------4153FDA19A70D65F6E22A6A8--
-
-
---===============2905722055377077151==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2905722055377077151==--
+T24gMTYvMDUvMTggMTQ6NDYsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDE1LjA1LjE4IGF0
+IDE2OjEwLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+PiBUaGUgY3VycmVudCB1bmJp
+bmQgbG9vcCBvbiBmYWlsdXJlIGluIHZwY2lfbXNpX2VuYWJsZSBpcyB3cm9uZyBhbmQKPj4gd2ls
+bCBvbmx5IHdvcmsgY29ycmVjdGx5IGlmIHRoZSBpbml0aWFsIHBpcnEgaXMgMC4gRml4IHRoaXMg
+YnkgYWRkaW5nCj4+IGEgcHJvcGVyIGJvdW5kLgo+Pgo+PiBSZXBvcnRlZC1ieTogSmFuIEJldWxp
+Y2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+PiBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOp
+IDxyb2dlci5wYXVAY2l0cml4LmNvbT4KPiAKPiBSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpi
+ZXVsaWNoQHN1c2UuY29tPgo+IAo+IErDvHJnZW4sCj4gCj4gYW55IHRob3VnaHRzIG9uIHRha2lu
+ZyB0aGlzIG9uZSBmb3IgNC4xMT8KClJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpn
+cm9zc0BzdXNlLmNvbT4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
