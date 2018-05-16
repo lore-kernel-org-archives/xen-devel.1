@@ -1,21 +1,22 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
- qcow2
-Date: Wed, 16 May 2018 15:13:48 +0200
-Message-ID: <20180516151348.5ebe25e5.olaf@aepfle.de>
-References: <20180507151940.GA31926@aepfle.de>
- <20180508133143.77e209f2.olaf@aepfle.de>
- <20180508184026.4f0af76a.olaf@aepfle.de>
- <20180509142316.66171ffd.olaf@aepfle.de>
- <alpine.DEB.2.10.1805091405040.9199@sstabellini-ThinkPad-X260>
- <20180509231336.7f962d11.olaf@aepfle.de>
- <alpine.DEB.2.10.1805091416310.9199@sstabellini-ThinkPad-X260>
- <20180510080411.1c7845b5.olaf@aepfle.de>
- <alpine.DEB.2.10.1805100901170.9199@sstabellini-ThinkPad-X260>
+From: George Dunlap <dunlapg@umich.edu>
+Subject: Re: backporting considerations (Re: [PATCH v9 0/9]
+ xen/x86: various XPTI speedups)
+Date: Wed, 16 May 2018 14:18:57 +0100
+Message-ID: <CAFLBxZY5d=sArakZNm7gSbe2-kuQXu3v33uH9HS2bVgs-v6ZiQ@mail.gmail.com>
+References: <20180426113318.21838-1-jgross@suse.com>
+ <5AFBF47E02000078001C3211@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6183096409926430602=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1805100901170.9199@sstabellini-ThinkPad-X260>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=8rxm=id=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
+ id 1fIwKb-0000V5-4H
+ for xen-devel@lists.xenproject.org; Wed, 16 May 2018 13:19:01 +0000
+Received: by mail-qt0-x243.google.com with SMTP id h2-v6so922672qtp.7
+ for <xen-devel@lists.xenproject.org>; Wed, 16 May 2018 06:18:59 -0700 (PDT)
+In-Reply-To: <5AFBF47E02000078001C3211@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,365 +25,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, Anthony PERARD <anthony.perard@citrix.com>
-Cc: jgross@suse.com, boris.ostrovsky@oracle.com, xen-devel@lists.xen.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============6183096409926430602==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_//22wwpoZ3_fcOETKZ47Bl1u"; protocol="application/pgp-signature"
-
---Sig_//22wwpoZ3_fcOETKZ47Bl1u
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 10 May 2018 09:03:30 -0700 (PDT)
-schrieb Stefano Stabellini <sstabellini@kernel.org>:
-
-> You could add a property to vmstate_xen_platform of xen_platform.c, but
-> you need to pay attention to legacy compatibility. Inevitably, there
-> will be older versions that do not have the new vmstate_xen_platform
-> field or do not set it properly.
-
-Doing the unplug on the other side works if it is done from blk_connect.
-At the point xen_platform_post_load is called, qemu is still in the middle =
-of=20
-initializing. Doing it from there causes weird failures.
-
-Any idea what the proper place is to call platform_do_unplug?
-
-Olaf
-
---- a/hw/block/xen_disk.c
-+++ b/hw/block/xen_disk.c
-@@ -31,6 +31,7 @@
- #include "qapi/error.h"
- #include "qapi/qmp/qdict.h"
- #include "qapi/qmp/qstring.h"
-+#include "qemu/error-report.h"
-=20
- /* ------------------------------------------------------------- */
-=20
-@@ -1074,6 +1075,9 @@ static int blk_connect(struct XenDevice
-     unsigned int i;
-     uint32_t *domids;
-=20
-+    error_report("%s", __func__);
-+    xen_unplug_after_migration();
-+
-     /* read-only ? */
-     if (blkdev->directiosafe) {
-         qflags =3D BDRV_O_NOCACHE | BDRV_O_NATIVE_AIO;
---- a/hw/i386/xen/xen_platform.c
-+++ b/hw/i386/xen/xen_platform.c
-@@ -62,6 +62,7 @@ typedef struct PCIXenPlatformState {
-     uint8_t flags; /* used only for version_id =3D=3D 2 */
-     int drivers_blacklisted;
-     uint16_t driver_product_version;
-+    uint32_t unplug_val;
-=20
-     /* Log from guest drivers */
-     char log_buffer[4096];
-@@ -132,8 +133,13 @@ static void del_nic_peer(NICState *nic,
-         qemu_del_net_client(nc->peer);
- }
-=20
-+static bool pci_unplug_nics_done;
- static void pci_unplug_nics(PCIBus *bus)
- {
-+    error_report("%s", __func__);
-+    if (pci_unplug_nics_done)
-+        return;
-+    pci_unplug_nics_done =3D true;
-     qemu_foreach_nic(del_nic_peer, NULL);
-     pci_for_each_device(bus, 0, unplug_nic, NULL);
- }
-@@ -170,30 +176,43 @@ static void unplug_disks(PCIBus *b, PCID
-     }
- }
-=20
-+static bool pci_unplug_disks_done;
- static void pci_unplug_disks(PCIBus *bus, uint32_t flags)
- {
-+    error_report("%s", __func__);
-+    if (pci_unplug_disks_done)
-+        return;
-+    pci_unplug_disks_done =3D true;
-     pci_for_each_device(bus, 0, unplug_disks, &flags);
- }
-=20
-+static void platform_do_unplug(PCIXenPlatformState *s, uint32_t val)
-+{
-+    PCIDevice *pci_dev =3D PCI_DEVICE(s);
-+
-+    error_report("%s %x", __func__, val);
-+    /* Unplug devices. See comment above flag definitions */
-+    if (val & (UNPLUG_IDE_SCSI_DISKS | UNPLUG_AUX_IDE_DISKS |
-+               UNPLUG_NVME_DISKS)) {
-+        DPRINTF("unplug disks\n");
-+        pci_unplug_disks(pci_dev->bus, val);
-+    }
-+    if (val & UNPLUG_ALL_NICS) {
-+        DPRINTF("unplug nics\n");
-+        pci_unplug_nics(pci_dev->bus);
-+    }
-+}
-+
- static void platform_fixed_ioport_writew(void *opaque, uint32_t addr, uint=
-32_t val)
- {
-     PCIXenPlatformState *s =3D opaque;
-=20
-+    error_report("%s %x %x", __func__, addr, val);
-     switch (addr) {
--    case 0: {
--        PCIDevice *pci_dev =3D PCI_DEVICE(s);
--        /* Unplug devices. See comment above flag definitions */
--        if (val & (UNPLUG_IDE_SCSI_DISKS | UNPLUG_AUX_IDE_DISKS |
--                   UNPLUG_NVME_DISKS)) {
--            DPRINTF("unplug disks\n");
--            pci_unplug_disks(pci_dev->bus, val);
--        }
--        if (val & UNPLUG_ALL_NICS) {
--            DPRINTF("unplug nics\n");
--            pci_unplug_nics(pci_dev->bus);
--        }
-+    case 0:
-+        s->unplug_val |=3D val;
-+        platform_do_unplug(s, val);
-         break;
--    }
-     case 2:
-         switch (val) {
-         case 1:
-@@ -332,8 +351,20 @@ static const MemoryRegionOps platform_fi
-     .endianness =3D DEVICE_LITTLE_ENDIAN,
- };
-=20
-+static void *PCIXenPlatformState_for_unplug_after_migration;
-+void xen_unplug_after_migration(void)
-+{
-+    PCIXenPlatformState *s =3D PCIXenPlatformState_for_unplug_after_migrat=
-ion;
-+    error_report("%s", __func__);
-+    if (s)
-+        platform_do_unplug(s, s->unplug_val);
-+    PCIXenPlatformState_for_unplug_after_migration =3D NULL;
-+}
-+
- static void platform_fixed_ioport_init(PCIXenPlatformState* s)
- {
-+    error_report("%s", __func__);
-+    PCIXenPlatformState_for_unplug_after_migration =3D s;
-     memory_region_init_io(&s->fixed_io, OBJECT(s), &platform_fixed_io_ops,=
- s,
-                           "xen-fixed", 16);
-     memory_region_add_subregion(get_system_io(), XEN_PLATFORM_IOPORT,
-@@ -356,7 +387,7 @@ static void xen_platform_ioport_writeb(v
-                                        uint64_t val, unsigned int size)
- {
-     PCIXenPlatformState *s =3D opaque;
--    PCIDevice *pci_dev =3D PCI_DEVICE(s);
-+    uint32_t unplug_val =3D 0;
-=20
-     switch (addr) {
-     case 0: /* Platform flags */
-@@ -372,17 +403,16 @@ static void xen_platform_ioport_writeb(v
-              * If VMDP was to control both disk and LAN it would use 4.
-              * If it controlled just disk or just LAN, it would use 8 belo=
-w.
-              */
--            pci_unplug_disks(pci_dev->bus, UNPLUG_IDE_SCSI_DISKS);
--            pci_unplug_nics(pci_dev->bus);
-+            unplug_val |=3D UNPLUG_IDE_SCSI_DISKS | UNPLUG_ALL_NICS;
-         }
-         break;
-     case 8:
-         switch (val) {
-         case 1:
--            pci_unplug_disks(pci_dev->bus, UNPLUG_IDE_SCSI_DISKS);
-+            unplug_val |=3D UNPLUG_IDE_SCSI_DISKS;
-             break;
-         case 2:
--            pci_unplug_nics(pci_dev->bus);
-+            unplug_val |=3D UNPLUG_ALL_NICS;
-             break;
-         default:
-             log_writeb(s, (uint32_t)val);
-@@ -392,6 +422,10 @@ static void xen_platform_ioport_writeb(v
-     default:
-         break;
-     }
-+    if (unplug_val) {
-+        s->unplug_val |=3D unplug_val;
-+        platform_do_unplug(s, unplug_val);
-+    }
- }
-=20
- static const MemoryRegionOps xen_pci_io_ops =3D {
-@@ -440,19 +474,23 @@ static int xen_platform_post_load(void *
- {
-     PCIXenPlatformState *s =3D opaque;
-=20
-+    error_report("%s %x", __func__, version_id);
-     platform_fixed_ioport_writeb(s, 0, s->flags);
-+    if (0)
-+    platform_do_unplug(s, s->unplug_val);
-=20
-     return 0;
- }
-=20
- static const VMStateDescription vmstate_xen_platform =3D {
-     .name =3D "platform",
--    .version_id =3D 4,
-+    .version_id =3D 5,
-     .minimum_version_id =3D 4,
-     .post_load =3D xen_platform_post_load,
-     .fields =3D (VMStateField[]) {
-         VMSTATE_PCI_DEVICE(parent_obj, PCIXenPlatformState),
-         VMSTATE_UINT8(flags, PCIXenPlatformState),
-+        VMSTATE_UINT32(unplug_val, PCIXenPlatformState),
-         VMSTATE_END_OF_LIST()
-     }
- };
-@@ -468,6 +506,8 @@ static void xen_platform_realize(PCIDevi
-         return;
-     }
-=20
-+    error_report("%s", __func__);
-+
-     pci_conf =3D dev->config;
-=20
-     pci_set_word(pci_conf + PCI_COMMAND, PCI_COMMAND_IO | PCI_COMMAND_MEMO=
-RY);
---- a/include/migration/vmstate.h
-+++ b/include/migration/vmstate.h
-@@ -29,6 +29,7 @@
-=20
- #include "migration/qjson.h"
-=20
-+extern void xen_unplug_after_migration(void);
- typedef struct VMStateInfo VMStateInfo;
- typedef struct VMStateDescription VMStateDescription;
- typedef struct VMStateField VMStateField;
---- a/migration/savevm.c
-+++ b/migration/savevm.c
-@@ -2265,6 +2265,7 @@ void qmp_xen_save_devices_state(const ch
-     int saved_vm_running;
-     int ret;
-=20
-+    error_report("%s %s %x %x", __func__, filename, has_live, live);
-     if (!has_live) {
-         /* live default to true so old version of Xen tool stack can have a
-          * successfull live migration */
-@@ -2284,6 +2285,7 @@ void qmp_xen_save_devices_state(const ch
-     object_unref(OBJECT(ioc));
-     ret =3D qemu_save_device_state(f);
-     qemu_fclose(f);
-+    error_report("%s %x", __func__, ret);
-     if (ret < 0) {
-         error_setg(errp, QERR_IO_ERROR);
-     } else {
-@@ -2293,6 +2295,7 @@ void qmp_xen_save_devices_state(const ch
-          * So call bdrv_inactivate_all (release locks) here to let the oth=
-er
-          * side of the migration take controle of the images.
-          */
-+        error_report("%s %x saved_vm_running %x", __func__, live, saved_vm=
-_running);
-         if (live && !saved_vm_running) {
-             ret =3D bdrv_inactivate_all();
-             if (ret) {
---- a/hw/i386/xen/xen-hvm.c
-+++ b/hw/i386/xen/xen-hvm.c
-@@ -1240,6 +1240,7 @@ void xen_hvm_init(PCMachineState *pcms,
-     evtchn_port_t bufioreq_evtchn;
-     XenIOState *state;
-=20
-+    error_report("%s", __func__);
-     state =3D g_malloc0(sizeof (XenIOState));
-=20
-     state->xce_handle =3D xenevtchn_open(NULL, 0);
---- a/hw/xen/xen_backend.c
-+++ b/hw/xen/xen_backend.c
-@@ -588,6 +588,7 @@ int xen_be_register(const char *type, st
-=20
- void xen_be_register_common(void)
- {
-+    error_report("%s", __func__);
-     xen_set_dynamic_sysbus();
-=20
-     xen_be_register("console", &xen_console_ops);
---- a/hw/xenpv/xen_machine_pv.c
-+++ b/hw/xenpv/xen_machine_pv.c
-@@ -34,6 +34,7 @@ static void xen_init_pv(MachineState *ma
-     DriveInfo *dinfo;
-     int i;
-=20
-+    error_report("%s", __func__);
-     /* Initialize backend core & drivers */
-     if (xen_be_init() !=3D 0) {
-         fprintf(stderr, "%s: xen backend core setup failed\n", __FUNCTION_=
-_);
---- a/util/osdep.c
-+++ b/util/osdep.c
-@@ -338,6 +338,7 @@ int qemu_open(const char *name, int flag
-         qemu_set_cloexec(ret);
-     }
- #endif
-+    error_report("%s %d =3D %s", __func__, ret, name);
-=20
- #ifdef O_DIRECT
-     if (ret =3D=3D -1 && errno =3D=3D EINVAL && (flags & O_DIRECT)) {
-@@ -353,6 +354,7 @@ int qemu_close(int fd)
- {
-     int64_t fdset_id;
-=20
-+    error_report("%s %d", __func__, fd);
-     /* Close fd that was dup'd from an fdset */
-     fdset_id =3D monitor_fdset_dup_fd_find(fd);
-     if (fdset_id !=3D -1) {
---- a/hw/i386/pc_piix.c
-+++ b/hw/i386/pc_piix.c
-@@ -87,6 +87,7 @@ static void pc_init1(MachineState *machi
-     MemoryRegion *rom_memory;
-     ram_addr_t lowmem;
-=20
-+    error_report("%s e", __func__);
-     /*
-      * Calculate ram split, for memory below and above 4G.  It's a bit
-      * complicated for backward compatibility reasons ...
-@@ -302,6 +303,7 @@ static void pc_init1(MachineState *machi
-         nvdimm_init_acpi_state(&pcms->acpi_nvdimm_state, system_io,
-                                pcms->fw_cfg, OBJECT(pcms));
-     }
-+    error_report("%s l", __func__);
- }
-=20
- /* Looking for a pc_compat_2_4() function? It doesn't exist.
-
---Sig_//22wwpoZ3_fcOETKZ47Bl1u
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvwujAAKCRBdQqD6ppg2
-fnqrAJ9kGI3SdyM1q1RdKWXOeyTtlw2/wQCeO/zSQ2oJz5Wzunm93uPKA58LZOE=
-=wpwi
------END PGP SIGNATURE-----
-
---Sig_//22wwpoZ3_fcOETKZ47Bl1u--
-
-
---===============6183096409926430602==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6183096409926430602==--
+T24gV2VkLCBNYXkgMTYsIDIwMTggYXQgMTA6MDYgQU0sIEphbiBCZXVsaWNoIDxKQmV1bGljaEBz
+dXNlLmNvbT4gd3JvdGU6Cj4+Pj4gT24gMjYuMDQuMTggYXQgMTM6MzMsIDxqZ3Jvc3NAc3VzZS5j
+b20+IHdyb3RlOgo+PiBKdWVyZ2VuIEdyb3NzICg5KToKPj4gICB4ODYveHB0aTogYXZvaWQgY29w
+eWluZyBMNCBwYWdlIHRhYmxlIGNvbnRlbnRzIHdoZW4gcG9zc2libGUKPj4gICB4ZW4veDg2OiBh
+ZGQgYSBmdW5jdGlvbiBmb3IgbW9kaWZ5aW5nIGNyMwo+PiAgIHhlbi94ODY6IHN1cHBvcnQgcGVy
+LWRvbWFpbiBmbGFnIGZvciB4cHRpCj4+ICAgeGVuL3g4NjogdXNlIGludnBjaWQgZm9yIGZsdXNo
+aW5nIHRoZSBUTEIKPj4gICB4ZW4veDg2OiBkaXNhYmxlIGdsb2JhbCBwYWdlcyBmb3IgZG9tYWlu
+cyB3aXRoIFhQVEkgYWN0aXZlCj4+ICAgeGVuL3g4NjogdXNlIGZsYWcgYnl0ZSBmb3IgZGVjaXNp
+b24gd2hldGhlciB4ZW5fY3IzIGlzIHZhbGlkCj4+ICAgeGVuL3g4NjogY29udmVydCBwdl9ndWVz
+dF9jcjRfdG9fcmVhbF9jcjQoKSB0byBhIGZ1bmN0aW9uCj4+ICAgeGVuL3g4NjogYWRkIHNvbWUg
+Y3IzIGhlbHBlcnMKPj4gICB4ZW4veDg2OiB1c2UgUENJRCBmZWF0dXJlCj4KPiBUaGlzIGJlaW5n
+IGEgcGVyZm9ybWFuY2UgaW1wcm92ZW1lbnQgcmF0aGVyIHRoYW4gYSBwbGFpbiBidWcgZml4IHNl
+cmllcywKPiBJJ20gbm90IGVudGlyZWx5IGNlcnRhaW4gYWJvdXQgYmFja3BvcnRpbmcgaGVyZS4g
+TXkgY3VycmVudCB0aGlua2luZyBpcyB0bwo+IHB1dCB0aGlzIGludG8gNC4xMCAoSsO8cmdlbiB3
+YXMga2luZCBlbm91Z2ggdG8gZG8gdGhlIGJhY2twb3J0aW5nIHdvcmsKPiBhbHJlYWR5KSwgYnV0
+IG5vdCBpbnRvIGFueSBvbGRlciB0cmVlcy4gT3RvaCBhdCBTVVNFIHdlIGFscmVhZHkgaGF2ZQo+
+IHRoaXMgaW4gb3VyIDQuOS1iYXNlZCBicmFuY2ggYXMgd2VsbCwgYW5kIGlmIG90aGVyIGNvbnN1
+bWVycyBvZiB0aGF0IG9yCj4gdGhlIDQuOCBicmFuY2ggd291bGQgbW9zdGx5IGFncmVlIGl0IHNo
+b3VsZCBnbyB0aGVyZSwgSSBjb3VsZCBjZXJ0YWlubHkKPiBiZSBjb252aW5jZWQuCgpUdXJuaW5n
+IG9uIFhQVEkgY2F1c2VzIGEgcHJldHR5IGxhcmdlIHJlZ3Jlc3Npb24gaW4gcGVyZm9ybWFuY2U7
+IGFuZAp0aGVzZSByZWR1Y2UgdGhhdCByZWdyZXNzaW9uIHNpZ25pZmljYW50bHkuICBJJ20gcHJl
+dHR5IHN1cmUgdGhhdCBtb3N0CmRvd25zdHJlYW1zIHdpbGwgZW5kIHVwIGJhY2twb3J0aW5nIHRo
+ZXNlIGFueXdheSAoSSdtIHN1cmUgQ2VudE9TCndpbGwpOyBpdCdzIG11Y2ggYmV0dGVyIHRvIGRv
+IGl0IG9mZmljaWFsbHkgb25jZSwgcmF0aGVyIHRoYW4gaGF2ZQppbmRpdmlkdWFsIGRvd25zdHJl
+YW1zIChtb3N0IG9mIHdob20gZG8gbm90IGhhdmUgaHlwZXJ2aXNvciBkZXZlbG9wZXJzCm1haW50
+YWluaW5nIHBhY2thZ2VzKSBhbGwgZG8gaXQgc2VwYXJhdGVseS4KCj4gSXQgaXMgaW1vIG91dCBv
+ZiBxdWVzdGlvbiBvZiBwdXR0aW5nIGl0IGludG8gNC43IG9yIG9sZGVyLgoKSXMgdGhhdCBiZWNh
+dXNlIG9mIHRoZSBjb21wbGV4aXR5PyAgT3IgYmVjYXVzZSA0LjcgaXMgaW4gInNlY3VyaXR5LW9u
+bHkiIG1vZGU/CgpJZiB0aGUgbGF0dGVyLCBJIHRoaW5rIHRoZSBzYW1lIGFyZ3VtZW50IGFwcGxp
+ZXM6IHR1cm5pbmcgb24gWFBUSSBpcyBhCnJlcXVpcmVtZW50IGZvciBtYW55IHBlb3BsZSwgYW5k
+IHRodXMgcmVwcmVzZW50cyBhIHByZXR0eSBoZWZ0eQpwZXJmb3JtYW5jZSByZWdyZXNzaW9uLiAg
+V2hpbGUgd2UgZG9uJ3QgbmVlZCB0byBiYWNrcG9ydCBub3JtYWwgZml4ZXMKdG8gc2VjdXJpdHkt
+b25seSByZWxlYXNlcywgd2Ugc2hvdWxkIGNlcnRhaW5seSB0cnkgdG8gYXZvaWQKcmVncmVzc2lv
+bnMuCgooTm90ZSB0aGF0IHRoaXMgZG9lc24ndCBtZWFuIHlvdSBwZXJzb25hbGx5IGhhdmUgdG8g
+ZG8gdGhlIHdvcmsgaWYgeW91CnRoaW5rIGl0J3Mgbm90IHdvcnRoIHlvdXIgdGltZS4pCgogLUdl
+b3JnZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
