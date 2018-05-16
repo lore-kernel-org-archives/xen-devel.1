@@ -1,25 +1,11 @@
-From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Subject: Re: [PATCH v3 2/2] Input: xen-kbdfront - allow better
- run-time configuration
-Date: Wed, 16 May 2018 14:08:17 -0700
-Message-ID: <20180516210817.GF21971__11276.3184741654$1526504847$gmane$org@dtor-ws>
-References: <20180514144029.16019-1-andr2000@gmail.com>
- <20180514144029.16019-2-andr2000@gmail.com>
- <20180516171528.GD21971@dtor-ws>
- <e9882c52-3641-7c32-1f64-dd9c4f35de5f@gmail.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Test for osstest, features used in Qubes OS
+Date: Wed, 16 May 2018 23:54:25 +0200
+Message-ID: <20180516215425.GB11683@mail-itl>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5328994843413501949=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=j/rf=id=gmail.com=dmitry.torokhov@srs-us1.protection.inumbo.net>)
- id 1fJ3eq-0004XT-2w
- for xen-devel@lists.xenproject.org; Wed, 16 May 2018 21:08:24 +0000
-Received: by mail-pl0-x244.google.com with SMTP id i5-v6so1144225plt.2
- for <xen-devel@lists.xenproject.org>; Wed, 16 May 2018 14:08:21 -0700 (PDT)
-Content-Disposition: inline
-In-Reply-To: <e9882c52-3641-7c32-1f64-dd9c4f35de5f@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,64 +14,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr Andrushchenko <andr2000@gmail.com>
-Cc: jgross@suse.com, lyan@suse.com, andrii_chepurnyi@epam.com, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, linux-input@vger.kernel.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+To: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBNYXkgMTYsIDIwMTggYXQgMDg6NDc6MzBQTSArMDMwMCwgT2xla3NhbmRyIEFuZHJ1
-c2hjaGVua28gd3JvdGU6Cj4gT24gMDUvMTYvMjAxOCAwODoxNSBQTSwgRG1pdHJ5IFRvcm9raG92
-IHdyb3RlOgo+ID4gSGkgT2xla3NhbmRyLAo+ID4gCj4gPiBPbiBNb24sIE1heSAxNCwgMjAxOCBh
-dCAwNTo0MDoyOVBNICswMzAwLCBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyB3cm90ZToKPiA+ID4g
-QEAgLTIxMSw5MyArMjIwLDExNCBAQCBzdGF0aWMgaW50IHhlbmtiZF9wcm9iZShzdHJ1Y3QgeGVu
-YnVzX2RldmljZSAqZGV2LAo+ID4gPiAgIAlpZiAoIWluZm8tPnBhZ2UpCj4gPiA+ICAgCQlnb3Rv
-IGVycm9yX25vbWVtOwo+ID4gPiAtCS8qIFNldCBpbnB1dCBhYnMgcGFyYW1zIHRvIG1hdGNoIGJh
-Y2tlbmQgc2NyZWVuIHJlcyAqLwo+ID4gPiAtCWFicyA9IHhlbmJ1c19yZWFkX3Vuc2lnbmVkKGRl
-di0+b3RoZXJlbmQsCj4gPiA+IC0JCQkJICAgWEVOS0JEX0ZJRUxEX0ZFQVRfQUJTX1BPSU5URVIs
-IDApOwo+ID4gPiAtCXB0cl9zaXplW0tQQVJBTV9YXSA9IHhlbmJ1c19yZWFkX3Vuc2lnbmVkKGRl
-di0+b3RoZXJlbmQsCj4gPiA+IC0JCQkJCQkgIFhFTktCRF9GSUVMRF9XSURUSCwKPiA+ID4gLQkJ
-CQkJCSAgcHRyX3NpemVbS1BBUkFNX1hdKTsKPiA+ID4gLQlwdHJfc2l6ZVtLUEFSQU1fWV0gPSB4
-ZW5idXNfcmVhZF91bnNpZ25lZChkZXYtPm90aGVyZW5kLAo+ID4gPiAtCQkJCQkJICBYRU5LQkRf
-RklFTERfSEVJR0hULAo+ID4gPiAtCQkJCQkJICBwdHJfc2l6ZVtLUEFSQU1fWV0pOwo+ID4gPiAt
-CWlmIChhYnMpIHsKPiA+ID4gLQkJcmV0ID0geGVuYnVzX3dyaXRlKFhCVF9OSUwsIGRldi0+bm9k
-ZW5hbWUsCj4gPiA+IC0JCQkJICAgWEVOS0JEX0ZJRUxEX1JFUV9BQlNfUE9JTlRFUiwgIjEiKTsK
-PiA+ID4gLQkJaWYgKHJldCkgewo+ID4gPiAtCQkJcHJfd2FybigieGVua2JkOiBjYW4ndCByZXF1
-ZXN0IGFicy1wb2ludGVyXG4iKTsKPiA+ID4gLQkJCWFicyA9IDA7Cj4gPiA+IC0JCX0KPiA+ID4g
-LQl9Cj4gPiA+ICsJLyoKPiA+ID4gKwkgKiBUaGUgYmVsb3cgYXJlIHJldmVyc2UgbG9naWMsIGUu
-Zy4gaWYgdGhlIGZlYXR1cmUgaXMgc2V0LCB0aGVuCj4gPiA+ICsJICogZG8gbm90IGV4cG9zZSB0
-aGUgY29ycmVzcG9uZGluZyB2aXJ0dWFsIGRldmljZS4KPiA+ID4gKwkgKi8KPiA+ID4gKwl3aXRo
-X2tiZCA9ICF4ZW5idXNfcmVhZF91bnNpZ25lZChkZXYtPm5vZGVuYW1lLAo+ID4gPiArCQkJCQkg
-WEVOS0JEX0ZJRUxEX0ZFQVRfRFNCTF9LRVlCUkQsIDApOwo+ID4gPiAtCXRvdWNoID0geGVuYnVz
-X3JlYWRfdW5zaWduZWQoZGV2LT5ub2RlbmFtZSwKPiA+ID4gLQkJCQkgICAgIFhFTktCRF9GSUVM
-RF9GRUFUX01UT1VDSCwgMCk7Cj4gPiA+IC0JaWYgKHRvdWNoKSB7Cj4gPiA+ICsJd2l0aF9wdHIg
-PSAheGVuYnVzX3JlYWRfdW5zaWduZWQoZGV2LT5ub2RlbmFtZSwKPiA+ID4gKwkJCQkJIFhFTktC
-RF9GSUVMRF9GRUFUX0RTQkxfUE9JTlRFUiwgMCk7Cj4gPiA+ICsKPiA+ID4gKwkvKiBEaXJlY3Qg
-bG9naWM6IGlmIHNldCwgdGhlbiBjcmVhdGUgbXVsdGktdG91Y2ggZGV2aWNlLiAqLwo+ID4gPiAr
-CXdpdGhfbXRvdWNoID0geGVuYnVzX3JlYWRfdW5zaWduZWQoZGV2LT5ub2RlbmFtZSwKPiA+ID4g
-KwkJCQkJICAgWEVOS0JEX0ZJRUxEX0ZFQVRfTVRPVUNILCAwKTsKPiA+ID4gKwlpZiAod2l0aF9t
-dG91Y2gpIHsKPiA+ID4gICAJCXJldCA9IHhlbmJ1c193cml0ZShYQlRfTklMLCBkZXYtPm5vZGVu
-YW1lLAo+ID4gPiAgIAkJCQkgICBYRU5LQkRfRklFTERfUkVRX01UT1VDSCwgIjEiKTsKPiA+ID4g
-ICAJCWlmIChyZXQpIHsKPiA+ID4gICAJCQlwcl93YXJuKCJ4ZW5rYmQ6IGNhbid0IHJlcXVlc3Qg
-bXVsdGktdG91Y2giKTsKPiA+ID4gLQkJCXRvdWNoID0gMDsKPiA+ID4gKwkJCXdpdGhfbXRvdWNo
-ID0gMDsKPiA+ID4gICAJCX0KPiA+ID4gICAJfQo+ID4gRG9lcyBpdCBtYWtlIHNlbnNlIHRvIHN0
-aWxsIGVuZCB1cCBjYWxsaW5nIHhlbmtiZF9jb25uZWN0X2JhY2tlbmQoKSB3aGVuCj4gPiBhbGwg
-aW50ZXJmYWNlcyAoa2V5Ym9hcmQsIHBvaW50ZXIsIGFuZCBtdWx0aXRvdWNoKSBhcmUgZGlzYWJs
-ZWQ/IFNob3VsZAo+ID4gd2UgZG86Cj4gPiAKPiA+IAlpZiAoISh3aXRoX2tiZCB8fCB8fCB3aXRo
-X3B0ciB8fCB3aXRoX210b3VjaCkpCj4gPiAJCXJldHVybiAtRU5YSU87Cj4gPiAKPiA+ID8KPiBJ
-dCBkb2VzIG1ha2Ugc2Vuc2UuIFRoZW4gd2UgcHJvYmFibHkgbmVlZCB0byBtb3ZlIGFsbCB4ZW5i
-dXNfcmVhZF91bnNpZ25lZAo+IGNhbGxzIHRvIHRoZSB2ZXJ5IGJlZ2lubmluZyBvZiB0aGUgLnBy
-b2JlLCBzbyBubyBtZW1vcnkgYWxsb2NhdGlvbnMgYXJlIG1hZGUKPiB3aGljaCB3aWxsIGJlIHVz
-ZWxlc3MgaWYgd2UgcmV0dXJuIC1FTlhJTywgZS5nLiBzb21ldGhpbmcgbGlrZQo+IAo+IHN0YXRp
-YyBpbnQgeGVua2JkX3Byb2JlKHN0cnVjdCB4ZW5idXNfZGV2aWNlICpkZXYsCj4gwqDCoMKgIMKg
-wqDCoCDCoMKgwqAgwqDCoMKgIMKgIGNvbnN0IHN0cnVjdCB4ZW5idXNfZGV2aWNlX2lkICppZCkK
-PiB7Cj4gwqDCoMKgIGludCByZXQsIGk7Cj4gwqDCoMKgIGJvb2wgd2l0aF9tdG91Y2gsIHdpdGhf
-a2JkLCB3aXRoX3B0cjsKPiDCoMKgwqAgc3RydWN0IHhlbmtiZF9pbmZvICppbmZvOwo+IMKgwqDC
-oCBzdHJ1Y3QgaW5wdXRfZGV2ICprYmQsICpwdHIsICptdG91Y2g7Cj4gCj4gPHJlYWQgd2l0aF9t
-dG91Y2gsIHdpdGhfa2JkLCB3aXRoX3B0ciBoZXJlPgo+IAo+IGlmICghKHdpdGhfa2JkIHwgd2l0
-aF9wdHIgfCB3aXRoX210b3VjaCkpCj4gwqDCoMKgIMKgwqDCoCByZXR1cm4gLUVOWElPOwo+IAo+
-IERvZXMgdGhlIGFib3ZlIGxvb2tzIG9rPwoKWWVzLiBBbm90aGVyIG9wdGlvbiBpcyB0byBrZWVw
-IHRoZSBjaGVjayB3aGVyZSBJIHN1Z2dlc3RlZCBhbmQgZG8KCglpZiAoLi4uKSB7CgkJcmV0ID0g
-LUVOWElPOwoJCWdvdG8gZXJyb3I7Cgl9CgpXaGljaGV2ZXIgeW91IHByZWZlciBpcyBmaW5lIHdp
-dGggbWUuCgpUaGFua3MuCgotLSAKRG1pdHJ5CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+
+--===============5328994843413501949==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="BOKacYhQ+x31HxR3"
+Content-Disposition: inline
+
+
+--BOKacYhQ+x31HxR3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+As discussed some time ago, I'd like to help with adding tests for some
+features we use in Qubes OS.
+
+IMO the easiest thing to test is host suspend. You just need to execute
+"rtcwake -s 30 -m mem", and see if the host is back to live after ~30s.
+Right now I know it works on Xen 4.8, but supposedly is broken on
+staging (haven't tested the most recent version).
+Next step would be the same while having some domains running.
+
+How the test should look like (where to add this? etc)?
+
+Next things would be mostly related to PCI passthrough:
+ - PCI passthrough with qemu in stubdomain
+ - the same as above, but with Linux-based stubdomain (we need cleanup
+   and send patches for that first, probably 4.12 material)
+ - guest suspend (recently added libxl_domain_suspend_only), for
+   different guest types (PV, PVH, HVM), also with/without PCI device
+
+For this, the machine obviously need to have IOMMU (I assume at least
+some of the hardware used in test lab have it), and some spare PCI
+device. I use sound card for some of such tests. But testing on USB
+controllers would be more useful (from out experience, one of the most
+problematic devices for suspend, sadly also lacking FLR or such...).
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--BOKacYhQ+x31HxR3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlr8qJEACgkQ24/THMrX
+1yyM6Qf9FBRzPGo5yf5P3lO5CIRC6GuFtMv6eghA3UrUnTNGSs37EchY06Zjkaip
+vxFSCFYwxW5cE2B3CSg9ma+U5eBStPKHlokznxEn6lx++V/swVl3AisezoGE/dxC
+CB8/136cUtI6NK3+OUKiqj7k70b4m3U9LKpOC2FN7Vd6mdDtt+FIBETl8a6/MRYi
+7IE8xbGIy41btE8uaUe9rQo/3HZN71se6XOUijdJJ4R99YIGTiV0nZx6FoodABW+
+zVc4QJyaaJpPcgHlcL/YLEPQi5I1LM0xpXRmBxnLoPG1u1/1NEbVrcXnRQjWQ+zX
+gHGAGq/JYmFqlw10muASakreAM2JqQ==
+=G/d9
+-----END PGP SIGNATURE-----
+
+--BOKacYhQ+x31HxR3--
+
+
+--===============5328994843413501949==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5328994843413501949==--
