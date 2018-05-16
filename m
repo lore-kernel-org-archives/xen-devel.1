@@ -1,15 +1,21 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
- qcow2
-Date: Wed, 16 May 2018 16:53:28 +0200
-Message-ID: <20180516165328.73d2a86a.olaf@aepfle.de>
-References: <20180507151940.GA31926@aepfle.de>
- <20180508133143.77e209f2.olaf@aepfle.de>
- <20180510104018.GA2057@perard.uk.xensource.com>
+From: Mathieu Poirier <mathieu.poirier@linaro.org>
+Subject: Re: [PATCH v2 09/11] docs: Fix some broken references
+Date: Wed, 16 May 2018 09:12:56 -0600
+Message-ID: <CANLsYkwXUGJ-DM4M48SXuy+31r6sC7_Q3fc9Rgue6wFdeMQv6g@mail.gmail.com>
+References: <cover.1525870886.git.mchehab+samsung@kernel.org>
+ <e959f23d6f6905ee606fadfda13e2bb37deed017.1525870886.git.mchehab+samsung@kernel.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1844536511975099720=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180510104018.GA2057@perard.uk.xensource.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=okv/=id=linaro.org=mathieu.poirier@srs-us1.protection.inumbo.net>)
+ id 1fIy6t-0002bE-8Y
+ for xen-devel@lists.xenproject.org; Wed, 16 May 2018 15:12:59 +0000
+Received: by mail-wm0-x241.google.com with SMTP id n10-v6so2721516wmc.1
+ for <xen-devel@lists.xenproject.org>; Wed, 16 May 2018 08:12:57 -0700 (PDT)
+In-Reply-To: <e959f23d6f6905ee606fadfda13e2bb37deed017.1525870886.git.mchehab+samsung@kernel.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,51 +24,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: xen-devel@lists.xen.org
+To: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc: Catalin Marinas <catalin.marinas@arm.com>, Linus Walleij <linus.walleij@linaro.org>, Will Deacon <will.deacon@arm.com>, dri-devel@lists.freedesktop.org, Jaroslav Kysela <perex@perex.cz>, Eric Paris <eparis@parisplace.org>, linux-clk@vger.kernel.org, James Morris <jmorris@namei.org>, Alan Stern <stern@rowland.harvard.edu>, xen-devel@lists.xenproject.org, Boqun Feng <boqun.feng@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, Sean Paul <seanpaul@chromium.org>, Thomas Gleixner <tglx@linutronix.de>, Antoine Jacquet <royale@zerezo.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Li Zefan <lizefan@huawei.com>, linux-crypto@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, alsa-devel@alsa-project.org, Linux Doc Mailing List <linux-doc@vger.kernel.org>, David Airlie <airlied@linux.ie>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1844536511975099720==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/1ir2caURImpqzXWfHXdsmm6"; protocol="application/pgp-signature"
-
---Sig_/1ir2caURImpqzXWfHXdsmm6
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 10 May 2018 11:40:18 +0100
-schrieb Anthony PERARD <anthony.perard@citrix.com>:
-
-> I did fix the bug in QEMU 2.11 (5d6c599fe1d69a1bf8c5c4d3c58be2b31cd625ad)
-> so Xen 4.11 does include it it the qemu-xen tree.
-
-Is this supposed to be called also for PV? In my testing qmp_xen_save_devic=
-es_state shows up only on HVM.
-
-Olaf
-
---Sig_/1ir2caURImpqzXWfHXdsmm6
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvxF6AAKCRBdQqD6ppg2
-flAjAJwJvS9Gcqai1nxNlKY4I+7ytpz2ngCgpN1N857FfD6TfqFWZCbF+GxBOvg=
-=IT22
------END PGP SIGNATURE-----
-
---Sig_/1ir2caURImpqzXWfHXdsmm6--
-
-
---===============1844536511975099720==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+T24gOSBNYXkgMjAxOCBhdCAwNzoxOCwgTWF1cm8gQ2FydmFsaG8gQ2hlaGFiCjxtY2hlaGFiK3Nh
+bXN1bmdAa2VybmVsLm9yZz4gd3JvdGU6Cj4gQXMgd2UgbW92ZSBzdHVmZiBhcm91bmQsIHNvbWUg
+ZG9jIHJlZmVyZW5jZXMgYXJlIGJyb2tlbi4gRml4IHNvbWUgb2YKPiB0aGVtIHZpYSB0aGlzIHNj
+cmlwdDoKPiAgICAgICAgIC4vc2NyaXB0cy9kb2N1bWVudGF0aW9uLWZpbGUtcmVmLWNoZWNrIC0t
+Zml4LXJzdAo+Cj4gTWFudWFsbHkgY2hlY2tlZCBpZiB0aGUgcHJvZHVjZWQgcmVzdWx0IGlzIHZh
+bGlkLCByZW1vdmluZyBhIGZldwo+IGZhbHNlLXBvc2l0aXZlcy4KPgo+IFNpZ25lZC1vZmYtYnk6
+IE1hdXJvIENhcnZhbGhvIENoZWhhYiA8bWNoZWhhYitzYW1zdW5nQGtlcm5lbC5vcmc+Cj4gLS0t
+Cgo+Cj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vdHJhY2UvY29yZXNpZ2h0LnR4dCBiL0Rv
+Y3VtZW50YXRpb24vdHJhY2UvY29yZXNpZ2h0LnR4dAo+IGluZGV4IDFkNzRhZDAyMDJiNi4uZWZi
+YzgzMjE0NmU3IDEwMDY0NAo+IC0tLSBhL0RvY3VtZW50YXRpb24vdHJhY2UvY29yZXNpZ2h0LnR4
+dAo+ICsrKyBiL0RvY3VtZW50YXRpb24vdHJhY2UvY29yZXNpZ2h0LnR4dAo+IEBAIC00MjYsNSAr
+NDI2LDUgQEAgcm9vdEBnZW5lcmljYXJtdjg6fiMKPiAgRGV0YWlscyBvbiBob3cgdG8gdXNlIHRo
+ZSBnZW5lcmljIFNUTSBBUEkgY2FuIGJlIGZvdW5kIGhlcmUgWzJdLgo+Cj4gIFsxXS4gRG9jdW1l
+bnRhdGlvbi9BQkkvdGVzdGluZy9zeXNmcy1idXMtY29yZXNpZ2h0LWRldmljZXMtc3RtCj4gLVsy
+XS4gRG9jdW1lbnRhdGlvbi90cmFjZS9zdG0udHh0Cj4gK1syXS4gRG9jdW1lbnRhdGlvbi90cmFj
+ZS9zdG0ucnN0Cj4gIFszXS4gaHR0cHM6Ly9naXRodWIuY29tL0xpbmFyby9wZXJmLW9wZW5jc2QK
+CkFja2VkLWJ5OiBNYXRoaWV1IFBvaXJpZXIgPG1hdGhpZXUucG9pcmllckBsaW5hcm8ub3JnPgoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1844536511975099720==--
