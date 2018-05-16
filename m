@@ -1,20 +1,14 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 3/3] vpci/msi: fix update of bound MSI
- interrupts
-Date: Wed, 16 May 2018 06:50:41 -0600
-Message-ID: <5AFC292102000078001C3374@prv1-mh.provo.novell.com>
-References: <20180515141008.69320-1-roger.pau@citrix.com>
- <20180515141008.69320-4-roger.pau@citrix.com>
+Subject: Re: [Patch v3 1/2] x86/smp: count the number of online
+ physical processor in the system
+Date: Wed, 16 May 2018 06:54:35 -0600
+Message-ID: <5AFC2A0B02000078001C33D3@prv1-mh.provo.novell.com>
+References: <1525816893-36669-1-git-send-email-chao.gao@intel.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=iqfx=id=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fIvtG-0006QV-Oa
- for xen-devel@lists.xenproject.org; Wed, 16 May 2018 12:50:46 +0000
-In-Reply-To: <20180515141008.69320-4-roger.pau@citrix.com>
+In-Reply-To: <1525816893-36669-1-git-send-email-chao.gao@intel.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,26 +18,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Chao Gao <chao.gao@intel.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE1LjA1LjE4IGF0IDE2OjEwLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IEN1cnJlbnQgdXBkYXRlIHByb2Nlc3Mgb2YgYWxyZWFkeSBib3VuZCBNU0kgaW50ZXJydXB0cyBp
-cyB3cm9uZwo+IGJlY2F1c2UgdW5tYXBfZG9tYWluX3BpcnEgY2FsbHMgcGNpX2Rpc2FibGVfbXNp
-LCB3aGljaCBkaXNhYmxlcyBNU0kKPiBpbnRlcnJ1cHRzIG9uIHRoZSBkZXZpY2UuIE9uIHRoZSBv
-dGhlciBoYW5kIG1hcF9kb21haW5fcGlycSBkb2Vzbid0Cj4gZW5hYmxlIE1TSSwgc28gdGhlIGN1
-cnJlbnQgdXBkYXRlIHByb2Nlc3Mgb2YgYWxyZWFkeSBlbmFibGVkIE1TSQo+IGVudHJpZXMgaXMg
-d3JvbmcgYmVjYXVzZSBNU0kgY29udHJvbCBiaXQgd2lsbCBiZSBkaXNhYmxlZCBieQo+IHVubWFw
-X2RvbWFpbl9waXJxIGFuZCBub3QgcmUtZW5hYmxlZCBieSBtYXBfZG9tYWluX3BpcnEuCj4gCj4g
-SW4gb3JkZXIgdG8gZml4IHRoaXMgYXZvaWQgdW5tYXBwaW5nIHRoZSBQSVJRcyBhbmQganVzdCB1
-cGRhdGUgdGhlCj4gYmluZGluZyBvZiB0aGUgUElSUS4gQSBuZXcgYXJjaCBoZWxwZXIgdG8gZG8g
-dGhhdCBpcyBpbnRyb2R1Y2VkLgo+IAo+IE5vdGUgdGhhdCBNU0ktWCBpcyBub3QgYWZmZWN0ZWQg
-YmVjYXVzZSB1bm1hcF9kb21haW5fcGlycSBvbmx5Cj4gZGlzYWJsZXMgdGhlIE1TSSBlbmFibGUg
-Y29udHJvbCBiaXQgZm9yIHRoZSBNU0kgY2FzZSwgZm9yIE1TSS1YIHRoZQo+IGJpdCBpcyBsZWZ0
-IHVudG91Y2hlZCBieSB1bm1hcF9kb21haW5fcGlycS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBSb2dl
-ciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBKYW4gQmV1bGlj
-aCA8amJldWxpY2hAc3VzZS5jb20+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+Pj4+IE9uIDA5LjA1LjE4IGF0IDAwOjAxLCA8Y2hhby5nYW9AaW50ZWwuY29tPiB3cm90ZToKPiBN
+YWlubHkgZm9yIHRoZSBwYXRjaCBiZWhpbmQgd2hpY2ggcmVsaWVzIG9uICducl9waHlzX2NwdXMn
+IHRvIGVzdGltYXRlCj4gdGhlIHRpbWUgbmVlZGVkIGZvciBtaWNyb2NvZGUgdXBkYXRlIGluIHRo
+ZSB3b3JzdCBjYXNlLgoKTGVhdmluZyBhc2lkZSB0aGUgYXNwZWN0IG9mICJucl9waHlzX2NwdXMi
+IG5vdCBiZWluZyBhIHN1aXRhYmxlIG5hbWUKKCJucl9vbmxpbmVfY29yZXMiIHdvdWxkIGNvbWUg
+Y2xvc2VyIGltbykgSSdtIG5vdCBjb252aW5jZWQgdXNpbmcgYQpnbG9iYWwgdmFyaWFibGUgaXMg
+dGhlIHdheSB0byBnbyBoZXJlLCB3aXRoIGp1c3QgdGhhdCBzcGVjaWFsIHB1cnBvc2UKY29uc3Vt
+ZXIgaW4gdGhlIG5leHQgcGF0Y2guIFdoeSBjYW4ndCB5b3Ugd29yayBvdXQgdGhpcyBjb3VudCBy
+aWdodAp0aGVyZT8KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
