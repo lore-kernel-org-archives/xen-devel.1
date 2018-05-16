@@ -1,24 +1,15 @@
-From: George Dunlap <dunlapg@umich.edu>
-Subject: Re: backporting considerations (Re: [PATCH v9 0/9]
- xen/x86: various XPTI speedups)
-Date: Wed, 16 May 2018 15:53:12 +0100
-Message-ID: <CAFLBxZYyspzYvD=hDq8aK5G2OFT+7nGFGE0dTy3hYpirS8uwMg@mail.gmail.com>
-References: <20180426113318.21838-1-jgross@suse.com>
- <5AFBF47E02000078001C3211@prv1-mh.provo.novell.com>
- <CAFLBxZY5d=sArakZNm7gSbe2-kuQXu3v33uH9HS2bVgs-v6ZiQ@mail.gmail.com>
- <5AFC399E02000078001C3466@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
+ qcow2
+Date: Wed, 16 May 2018 16:53:28 +0200
+Message-ID: <20180516165328.73d2a86a.olaf@aepfle.de>
+References: <20180507151940.GA31926@aepfle.de>
+ <20180508133143.77e209f2.olaf@aepfle.de>
+ <20180510104018.GA2057@perard.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1844536511975099720=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=8rxm=id=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
- id 1fIxnn-0000tA-DP
- for xen-devel@lists.xenproject.org; Wed, 16 May 2018 14:53:15 +0000
-Received: by mail-qt0-x22f.google.com with SMTP id e8-v6so1407681qth.0
- for <xen-devel@lists.xenproject.org>; Wed, 16 May 2018 07:53:13 -0700 (PDT)
-In-Reply-To: <5AFC399E02000078001C3466@prv1-mh.provo.novell.com>
+In-Reply-To: <20180510104018.GA2057@perard.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,83 +18,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBNYXkgMTYsIDIwMTggYXQgMzowMSBQTSwgSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1
-c2UuY29tPiB3cm90ZToKPj4+PiBPbiAxNi4wNS4xOCBhdCAxNToxOCwgPGR1bmxhcGdAdW1pY2gu
-ZWR1PiB3cm90ZToKPj4gT24gV2VkLCBNYXkgMTYsIDIwMTggYXQgMTA6MDYgQU0sIEphbiBCZXVs
-aWNoIDxKQmV1bGljaEBzdXNlLmNvbT4gd3JvdGU6Cj4+Pj4+PiBPbiAyNi4wNC4xOCBhdCAxMzoz
-MywgPGpncm9zc0BzdXNlLmNvbT4gd3JvdGU6Cj4+Pj4gSnVlcmdlbiBHcm9zcyAoOSk6Cj4+Pj4g
-ICB4ODYveHB0aTogYXZvaWQgY29weWluZyBMNCBwYWdlIHRhYmxlIGNvbnRlbnRzIHdoZW4gcG9z
-c2libGUKPj4+PiAgIHhlbi94ODY6IGFkZCBhIGZ1bmN0aW9uIGZvciBtb2RpZnlpbmcgY3IzCj4+
-Pj4gICB4ZW4veDg2OiBzdXBwb3J0IHBlci1kb21haW4gZmxhZyBmb3IgeHB0aQo+Pj4+ICAgeGVu
-L3g4NjogdXNlIGludnBjaWQgZm9yIGZsdXNoaW5nIHRoZSBUTEIKPj4+PiAgIHhlbi94ODY6IGRp
-c2FibGUgZ2xvYmFsIHBhZ2VzIGZvciBkb21haW5zIHdpdGggWFBUSSBhY3RpdmUKPj4+PiAgIHhl
-bi94ODY6IHVzZSBmbGFnIGJ5dGUgZm9yIGRlY2lzaW9uIHdoZXRoZXIgeGVuX2NyMyBpcyB2YWxp
-ZAo+Pj4+ICAgeGVuL3g4NjogY29udmVydCBwdl9ndWVzdF9jcjRfdG9fcmVhbF9jcjQoKSB0byBh
-IGZ1bmN0aW9uCj4+Pj4gICB4ZW4veDg2OiBhZGQgc29tZSBjcjMgaGVscGVycwo+Pj4+ICAgeGVu
-L3g4NjogdXNlIFBDSUQgZmVhdHVyZQo+Pj4KPj4+IFRoaXMgYmVpbmcgYSBwZXJmb3JtYW5jZSBp
-bXByb3ZlbWVudCByYXRoZXIgdGhhbiBhIHBsYWluIGJ1ZyBmaXggc2VyaWVzLAo+Pj4gSSdtIG5v
-dCBlbnRpcmVseSBjZXJ0YWluIGFib3V0IGJhY2twb3J0aW5nIGhlcmUuIE15IGN1cnJlbnQgdGhp
-bmtpbmcgaXMgdG8KPj4+IHB1dCB0aGlzIGludG8gNC4xMCAoSsO8cmdlbiB3YXMga2luZCBlbm91
-Z2ggdG8gZG8gdGhlIGJhY2twb3J0aW5nIHdvcmsKPj4+IGFscmVhZHkpLCBidXQgbm90IGludG8g
-YW55IG9sZGVyIHRyZWVzLiBPdG9oIGF0IFNVU0Ugd2UgYWxyZWFkeSBoYXZlCj4+PiB0aGlzIGlu
-IG91ciA0LjktYmFzZWQgYnJhbmNoIGFzIHdlbGwsIGFuZCBpZiBvdGhlciBjb25zdW1lcnMgb2Yg
-dGhhdCBvcgo+Pj4gdGhlIDQuOCBicmFuY2ggd291bGQgbW9zdGx5IGFncmVlIGl0IHNob3VsZCBn
-byB0aGVyZSwgSSBjb3VsZCBjZXJ0YWlubHkKPj4+IGJlIGNvbnZpbmNlZC4KPj4KPj4gVHVybmlu
-ZyBvbiBYUFRJIGNhdXNlcyBhIHByZXR0eSBsYXJnZSByZWdyZXNzaW9uIGluIHBlcmZvcm1hbmNl
-OyBhbmQKPj4gdGhlc2UgcmVkdWNlIHRoYXQgcmVncmVzc2lvbiBzaWduaWZpY2FudGx5LiAgSSdt
-IHByZXR0eSBzdXJlIHRoYXQgbW9zdAo+PiBkb3duc3RyZWFtcyB3aWxsIGVuZCB1cCBiYWNrcG9y
-dGluZyB0aGVzZSBhbnl3YXkgKEknbSBzdXJlIENlbnRPUwo+PiB3aWxsKTsgaXQncyBtdWNoIGJl
-dHRlciB0byBkbyBpdCBvZmZpY2lhbGx5IG9uY2UsIHJhdGhlciB0aGFuIGhhdmUKPj4gaW5kaXZp
-ZHVhbCBkb3duc3RyZWFtcyAobW9zdCBvZiB3aG9tIGRvIG5vdCBoYXZlIGh5cGVydmlzb3IgZGV2
-ZWxvcGVycwo+PiBtYWludGFpbmluZyBwYWNrYWdlcykgYWxsIGRvIGl0IHNlcGFyYXRlbHkuCj4K
-PiBUaGFua3MsIHJlY29yZGVkIGFzIGEgZGF0YSBwb2ludC4gSSBkb24ndCwgaG93ZXZlciwgY29u
-c2lkZXIgImRvIG5vdAo+IGhhdmUgaHlwZXJ2aXNvciBkZXZlbG9wZXJzIiBhcyBhIHZhbGlkIGV4
-Y3VzZS4gUGFja2FnZSBtYWludGFpbmVycwo+IG91Z2h0IHRvIGJlIHVuZGVyc3RhbmRpbmcgdGhl
-aXIgcGFja2FnZXMgd2VsbCBlbm91Z2ggdG8gYmUgY2FwYWJsZSBvZgo+IGRvaW5nIHN1Y2ggYmFj
-a3BvcnRzIGlmIHRoZXkgcmVhbGx5IHRoaW5rIHRoZXkgbmVlZCB0aGVtLiBCYXNpY2FsbHkgdGhp
-cwo+IGdvZXMgYmFjayB0byB0aGVyZSBiZWluZyAodG9vIG1hbnk/KSBkb3duc3RyZWFtcyB3aG8g
-ZG9uJ3QgY2FyZSBhdAo+IGFsbCB0byBjb250cmlidXRlIGFueXRoaW5nIGJhY2suCgpJJ20gbm90
-IHN1cmUgZXhhY3RseSB3aG8geW91IGhhdmUgaW4gbWluZCBoZXJlOyBtYXliZSB5b3UgbWVhbgpk
-b3duc3RyZWFtcyBsaWtlIFN1U0UgYW5kIFhlblNlcnZlciB0aGF0IHNlbGwgYSBwcm9kdWN0IHdp
-dGggWGVuCmluc2lkZS4gIFN1Y2ggY29tcGFuaWVzIGNlcnRhaW5seSBzaG91bGQgaGF2ZSBlbmdp
-bmVlcnMgd2hvc2Ugam9iIGl0CmlzIHRvIGtub3cgdGhlIGNvZGUgdG8gb25lIG9mIHRoZWlyIGtl
-eSBjb21wb25lbnRzLgoKSSBoYWQgaW4gbWluZCBkb3duc3RyZWFtcyBsaWtlIEZlZG9yYSwgRGVi
-aWFuLCBDZW50T1MsIEFyY2hMaW51eCwKWGVuTWFkZUVhc3ksIGFuZCBzbyBvbjsgYW5kL29yIGVu
-ZCB1c2VycyB3aG8gcmVjb21waWxlIHRoZWlyIG93bgpwYWNrYWdlcyBiYXNlZCBvbiB0aG9zZTsg
-ZXZlbiBzbWFsbCBwcm9qZWN0cyBsaWtlIFF1YmVzT1MuICBNb3N0IG9mCnRob3NlIHBlb3BsZSBr
-bm93IEMgYW5kIGNhbiBtYWtlIGEgZ29vZCBzdGFiIGF0IGZpeGluZyBhIHBhdGNoIHdoaWNoCmRv
-ZXNuJ3QgYXBwbHkuICBCdXQgaXQncyBub3QgcmVhc29uYWJsZSB0byBleHBlY3Qgdm9sdW50ZWVy
-cwptYWludGFpbmluZyBwYWNrYWdlcyBmb3IgZnJlZSwgb3IgZW5kIHVzZXJzLCB0byBiZSBleHBl
-cnRzIGluIHRoZQpoeXBlcnZpc29yIC0tIGVhY2ggc3VjaCBwb3J0IGludHJvZHVjZXMgYSByaXNr
-IHRoYXQgdGhlcmUgd2lsbCBiZSBhCm1pc3Rha2UuICBBbmQgYW55d2F5LCBpdCBzZWVtcyBsaWtl
-IGEgd2FzdGUgb2YgdGltZSB0byBtYWtlIGVhY2gKZG93bnN0cmVhbSB1c2luZyAoc2F5KSA0Ljgg
-ZHVwbGljYXRlIHRoZWlyIGVmZm9ydCwgaW5zdGVhZCBvZiBkb2luZyBpdApvbmNlIGFuZCBsZXR0
-aW5nIHRoZW0gYWxsIHNoYXJlIHRoZSByZXN1bHRzLgoKSGF2aW5nIHhlbiBwYWNrYWdlcyBhdmFp
-bGFibGUgZm9yIGVuZC11c2VycyB0byB1c2UgKmRvZXMqIGNvbnRyaWJ1dGUKYmFjayB0byB0aGUg
-WGVuIHByb2plY3Q7IGFuZCBtYW55IG9mIHRoZSBkb3duc3RyZWFtcyBkbyBjb250cmlidXRlCmJh
-Y2sgaW4gbWFueSB3YXlzLCBpbmNsdWRpbmcgYWN0dWFsIGNvZGUgLS0ganVzdCB0eXBpY2FsbHkg
-bm90IGNvZGUgaW4KdGhlIGh5cGVydmlzb3IuCgo+PiBJZiB0aGUgbGF0dGVyLCBJIHRoaW5rIHRo
-ZSBzYW1lIGFyZ3VtZW50IGFwcGxpZXM6IHR1cm5pbmcgb24gWFBUSSBpcyBhCj4+IHJlcXVpcmVt
-ZW50IGZvciBtYW55IHBlb3BsZSwgYW5kIHRodXMgcmVwcmVzZW50cyBhIHByZXR0eSBoZWZ0eQo+
-PiBwZXJmb3JtYW5jZSByZWdyZXNzaW9uLiAgV2hpbGUgd2UgZG9uJ3QgbmVlZCB0byBiYWNrcG9y
-dCBub3JtYWwgZml4ZXMKPj4gdG8gc2VjdXJpdHktb25seSByZWxlYXNlcywgd2Ugc2hvdWxkIGNl
-cnRhaW5seSB0cnkgdG8gYXZvaWQKPj4gcmVncmVzc2lvbnMuCj4KPiBJIGRvbid0IHRoaW5rIHdl
-IHdvdWxkIGhhdmUgYWRkcmVzc2VkIG5vbi1zZWN1cml0eSBmYWxsb3V0IChvciBvdGhlcgo+IHRo
-YW4gcmVhbGx5IHNldmVyZSByZWdyZXNzaW9ucykgZnJvbSBvdGhlciBzZWN1cml0eSBwYXRjaGVz
-IGluIHRoZQo+IHBhc3Qgb24gc2VjdXJpdHkgb25seSBicmFuY2hlcy4gUGVvcGxlIGNhcmluZyBh
-Ym91dCBwZXJmb3JtYW5jZQo+IHNob3VsZCB1cGdyYWRlLgoKSWYgYSBzZWN1cml0eSBwYXRjaCwg
-d2hlbiBiYWNrcG9ydGVkIHRvIDQuNiwgYnJva2Ugc29tZSBmYWlybHkKY3JpdGljYWwgYml0IG9m
-IGZ1bmN0aW9uYWxpdHkgKHNheSwgIG9wZW52c3dpdGNoIHN1cHBvcnQpLCB5b3Ugd291bGQKb3Bw
-b3NlIGEgc3Vic2VxdWVudCBwYXRjaCB3aGljaCB3b3VsZCBmaXggdGhhdCByZWdyZXNzaW9uPwoK
-VGhhdCBkb2Vzbid0IHNlZW0gdmVyeSByZWFzb25hYmxlIHRvIG1lLiAgVXNlcnMgc2hvdWxkbid0
-IGhhdmUgdG8KY2hvb3NlIGJldHdlZW4gYmVpbmcgdnVsbmVyYWJsZSB0byBhIHNlY3VyaXR5IGlz
-c3VlIGFuZCBsb3NpbmcKZnVuY3Rpb25hbGl0eSB3aGljaCB3YXMgd29ya2luZyBhdCB0aGUgbGFz
-dCByZWxlYXNlLiAgT3RoZXJ3aXNlLAp3aGF0J3MgdGhlIHBvaW50IG9mIGhhdmluZyAic2VjdXJp
-dHkgc3VwcG9ydGVkIiByZWxlYXNlcz8KCiAtR2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+--===============1844536511975099720==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/1ir2caURImpqzXWfHXdsmm6"; protocol="application/pgp-signature"
+
+--Sig_/1ir2caURImpqzXWfHXdsmm6
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 10 May 2018 11:40:18 +0100
+schrieb Anthony PERARD <anthony.perard@citrix.com>:
+
+> I did fix the bug in QEMU 2.11 (5d6c599fe1d69a1bf8c5c4d3c58be2b31cd625ad)
+> so Xen 4.11 does include it it the qemu-xen tree.
+
+Is this supposed to be called also for PV? In my testing qmp_xen_save_devic=
+es_state shows up only on HVM.
+
+Olaf
+
+--Sig_/1ir2caURImpqzXWfHXdsmm6
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvxF6AAKCRBdQqD6ppg2
+flAjAJwJvS9Gcqai1nxNlKY4I+7ytpz2ngCgpN1N857FfD6TfqFWZCbF+GxBOvg=
+=IT22
+-----END PGP SIGNATURE-----
+
+--Sig_/1ir2caURImpqzXWfHXdsmm6--
+
+
+--===============1844536511975099720==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1844536511975099720==--
