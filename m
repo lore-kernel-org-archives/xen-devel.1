@@ -1,17 +1,20 @@
-From: John Wang <xgwang@suse.com>
-Subject: Clarification Meltdown for vulnerability between 64-bit
- PV guests
-Date: Wed, 16 May 2018 16:37:47 +0800
-Message-ID: <063ab1cd-bf1f-5753-d3f8-719a1a4a8567@suse.com>
+From: Charles Keepax <ckeepax@opensource.cirrus.com>
+Subject: Re: [PATCH v2 09/11] docs: Fix some broken references
+Date: Wed, 16 May 2018 10:09:15 +0100
+Message-ID: <20180516090915.GZ20410@imbe.wolfsonmicro.main>
+References: <cover.1525870886.git.mchehab+samsung@kernel.org>
+ <e959f23d6f6905ee606fadfda13e2bb37deed017.1525870886.git.mchehab+samsung@kernel.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7510607256789255273=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ygjo=id=suse.com=xgwang@srs-us1.protection.inumbo.net>)
- id 1fIrwe-00029p-1d
- for xen-devel@lists.xenproject.org; Wed, 16 May 2018 08:38:00 +0000
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=3463=id=opensource.cirrus.com=ckeepax@srs-us1.protection.inumbo.net>)
+ id 1fIsRv-00059h-SA
+ for xen-devel@lists.xenproject.org; Wed, 16 May 2018 09:10:19 +0000
+Content-Disposition: inline
+In-Reply-To: <e959f23d6f6905ee606fadfda13e2bb37deed017.1525870886.git.mchehab+samsung@kernel.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,71 +23,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc: Catalin Marinas <catalin.marinas@arm.com>, Linus Walleij <linus.walleij@linaro.org>, Will Deacon <will.deacon@arm.com>, dri-devel@lists.freedesktop.org, Jaroslav Kysela <perex@perex.cz>, Eric Paris <eparis@parisplace.org>, linux-clk@vger.kernel.org, James Morris <jmorris@namei.org>, Alan Stern <stern@rowland.harvard.edu>, xen-devel@lists.xenproject.org, Boqun Feng <boqun.feng@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, Sean Paul <seanpaul@chromium.org>, Thomas Gleixner <tglx@linutronix.de>, Antoine Jacquet <royale@zerezo.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, Li Zefan <lizefan@huawei.com>, linux-crypto@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, alsa-devel@alsa-project.org, Linux Doc Mailing List <linux-doc@vger.kernel.org>, David Airlie <airlied@linux.ie>, Gustavo Padovan <gustavo@pa>
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---===============7510607256789255273==
-Content-Type: multipart/alternative;
- boundary="------------3F57344440D278CA01746EBF"
-Content-Language: en-US
-
-This is a multi-part message in MIME format.
---------------3F57344440D278CA01746EBF
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-Hi:
-
-64 bit PV guest can attack hypervisor  by SP3, whether it still can 
-attack others 64 bit PV guest by SP3 ? If yes, whether the xpti enable 
-on hypervisor can prevent  vulnerability?  if no, what operations need 
-to be done on 64 PV guest or hypervisor?
-
-
--- 
-Thanks
-APACII QA
-John(XiaoGen Wang)
-
-
---------------3F57344440D278CA01746EBF
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <p>Hi:</p>
-    <p>64 bit PV guest can attack hypervisor  by SP3, <span
-        class="op_dict_text2">whether</span> it still can attack others
-      64 bit PV guest by SP3 ? If yes, whether the xpti enable on
-      hypervisor can prevent  vulnerability?  if no, what operations
-      need to be done on 64 PV guest or hypervisor?<br>
-    </p>
-    <p>    <br>
-    </p>
-    <pre class="moz-signature" cols="72">-- 
-Thanks
-APACII QA 
-John(XiaoGen Wang)</pre>
-  </body>
-</html>
-
---------------3F57344440D278CA01746EBF--
-
-
---===============7510607256789255273==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7510607256789255273==--
+T24gV2VkLCBNYXkgMDksIDIwMTggYXQgMTA6MTg6NTJBTSAtMDMwMCwgTWF1cm8gQ2FydmFsaG8g
+Q2hlaGFiIHdyb3RlOgo+IEFzIHdlIG1vdmUgc3R1ZmYgYXJvdW5kLCBzb21lIGRvYyByZWZlcmVu
+Y2VzIGFyZSBicm9rZW4uIEZpeCBzb21lIG9mCj4gdGhlbSB2aWEgdGhpcyBzY3JpcHQ6Cj4gCS4v
+c2NyaXB0cy9kb2N1bWVudGF0aW9uLWZpbGUtcmVmLWNoZWNrIC0tZml4LXJzdAo+IAo+IE1hbnVh
+bGx5IGNoZWNrZWQgaWYgdGhlIHByb2R1Y2VkIHJlc3VsdCBpcyB2YWxpZCwgcmVtb3ZpbmcgYSBm
+ZXcKPiBmYWxzZS1wb3NpdGl2ZXMuCj4gCj4gU2lnbmVkLW9mZi1ieTogTWF1cm8gQ2FydmFsaG8g
+Q2hlaGFiIDxtY2hlaGFiK3NhbXN1bmdAa2VybmVsLm9yZz4KPiAtLS0KPiAgZHJpdmVycy9pbnB1
+dC90b3VjaHNjcmVlbi93bTk3eHgtY29yZS5jICAgICAgIHwgIDIgKy0KCkFja2VkLWJ5OiBDaGFy
+bGVzIEtlZXBheCA8Y2tlZXBheEBvcGVuc291cmNlLndvbGZzb25taWNyby5jb20+CgpUaGFua3Ms
+CkNoYXJsZXMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
