@@ -1,17 +1,21 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [xen-4.6-testing baseline-only test] 74719: regressions
- - FAIL
-Date: Wed, 16 May 2018 14:13:12 +0100
-Message-ID: <osstest-74719-mainreport@xen.org>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
+ qcow2
+Date: Wed, 16 May 2018 15:13:48 +0200
+Message-ID: <20180516151348.5ebe25e5.olaf@aepfle.de>
+References: <20180507151940.GA31926@aepfle.de>
+ <20180508133143.77e209f2.olaf@aepfle.de>
+ <20180508184026.4f0af76a.olaf@aepfle.de>
+ <20180509142316.66171ffd.olaf@aepfle.de>
+ <alpine.DEB.2.10.1805091405040.9199@sstabellini-ThinkPad-X260>
+ <20180509231336.7f962d11.olaf@aepfle.de>
+ <alpine.DEB.2.10.1805091416310.9199@sstabellini-ThinkPad-X260>
+ <20180510080411.1c7845b5.olaf@aepfle.de>
+ <alpine.DEB.2.10.1805100901170.9199@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6183096409926430602=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=pd/l=id=xenproject.org=prvs=667d9c8de=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1fIwF5-000075-LS
- for xen-devel@lists.xenproject.org; Wed, 16 May 2018 13:13:19 +0000
+In-Reply-To: <alpine.DEB.2.10.1805100901170.9199@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,333 +24,365 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Stefano Stabellini <sstabellini@kernel.org>, Anthony PERARD <anthony.perard@citrix.com>
+Cc: jgross@suse.com, boris.ostrovsky@oracle.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
-NDcxOSB4ZW4tNC42LXRlc3RpbmcgcmVhbCBbcmVhbF0KaHR0cDovL29zc3Rlc3QueHMuY2l0cml0
-ZS5uZXQvfm9zc3Rlc3QvdGVzdGxvZ3MvbG9ncy83NDcxOS8KClJlZ3Jlc3Npb25zIDotKAoKVGVz
-dHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0
-cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC14dGYtYW1kNjQtYW1kNjQtNSAgICAyMSB4
-dGYvdGVzdC1odm0zMi1pbnZscGd+c2hhZG93IGZhaWwgUkVHUi4gdnMuIDc0NjQ3CiB0ZXN0LWFt
-ZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgZmFpbCBS
-RUdSLiB2cy4gNzQ2NDcKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTUgMzYgeHRmL3Rlc3QtaHZtMzJw
-YWUtaW52bHBnfnNoYWRvdyBmYWlsIFJFR1IuIHZzLiA3NDY0NwogdGVzdC14dGYtYW1kNjQtYW1k
-NjQtNSAgICA0OSB4dGYvdGVzdC1odm02NC1pbnZscGd+c2hhZG93IGZhaWwgUkVHUi4gdnMuIDc0
-NjQ3CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAxMCB3aW5kb3dzLWluc3Rh
-bGwgICAgZmFpbCBSRUdSLiB2cy4gNzQ2NDcKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1m
-LWFtZDY0IDIxIGxlYWstY2hlY2svY2hlY2sgICBmYWlsIFJFR1IuIHZzLiA3NDY0NwoKVGVzdHMg
-d2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QteHRmLWFt
-ZDY0LWFtZDY0LTQgICAgICAgMjEgeHRmL3Rlc3QtaHZtMzItaW52bHBnfnNoYWRvdyBmYWlsICAg
-bGlrZSA3NDY0NwogdGVzdC14dGYtYW1kNjQtYW1kNjQtNCAgICAgIDM2IHh0Zi90ZXN0LWh2bTMy
-cGFlLWludmxwZ35zaGFkb3cgZmFpbCBsaWtlIDc0NjQ3CiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC00
-ICAgICAgIDQ5IHh0Zi90ZXN0LWh2bTY0LWludmxwZ35zaGFkb3cgZmFpbCAgIGxpa2UgNzQ2NDcK
-IHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gMTIgZ3Vlc3Qtc3RhcnQgICAgICAgICAgICAg
-ICAgICBmYWlsICAgbGlrZSA3NDY0NwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAxMiBn
-dWVzdC1zdGFydCAgICAgICAgICAgICAgICAgIGZhaWwgICBsaWtlIDc0NjQ3CiB0ZXN0LWFybWhm
-LWFybWhmLXhsLXhzbSAgICAgIDEyIGd1ZXN0LXN0YXJ0ICAgICAgICAgICAgICAgICAgZmFpbCAg
-IGxpa2UgNzQ2NDcKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1IDEyIGd1ZXN0LXN0YXJ0
-ICAgICAgICAgICAgICAgICAgZmFpbCAgbGlrZSA3NDY0NwogdGVzdC1hcm1oZi1hcm1oZi14bC1t
-aWR3YXkgICAxMiBndWVzdC1zdGFydCAgICAgICAgICAgICAgICAgIGZhaWwgICBsaWtlIDc0NjQ3
-CiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDEyIGd1ZXN0LXN0YXJ0ICAgICAgICAgICAg
-ICAgICAgZmFpbCAgIGxpa2UgNzQ2NDcKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTIg
-Z3Vlc3Qtc3RhcnQgICAgICAgICAgICAgICAgICBmYWlsICAgbGlrZSA3NDY0NwogdGVzdC1hcm1o
-Zi1hcm1oZi14bC1ydGRzICAgICAxMiBndWVzdC1zdGFydCAgICAgICAgICAgICAgICAgIGZhaWwg
-ICBsaWtlIDc0NjQ3CiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAxNCB4ZW4t
-Ym9vdC9sMSAgICAgICAgICAgICBmYWlsIGxpa2UgNzQ2NDcKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dC13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwgbGlrZSA3NDY0
-NwogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAxMCBkZWJpYW4tZGktaW5zdGFsbCAgICAg
-ICAgICAgIGZhaWwgICBsaWtlIDc0NjQ3CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjct
-YW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgNzQ2NDcKIHRlc3QtYXJt
-aGYtYXJtaGYtbGlidmlydC1yYXcgMTAgZGViaWFuLWRpLWluc3RhbGwgICAgICAgICAgICBmYWls
-ICAgbGlrZSA3NDY0NwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgMTcgZ3Vl
-c3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBsaWtlIDc0NjQ3CiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgNzQ2
-NDcKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTIgICAgICAgMzcgeHRmL3Rlc3QtaHZtMzJwYWUtbWVt
-b3Atc2VnICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4x
-MC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LXh0
-Zi1hbWQ2NC1hbWQ2NC0yICAgICAgIDUyIHh0Zi90ZXN0LWh2bTY0LW1lbW9wLXNlZyAgICAgZmFp
-bCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW4xMC1pMzg2IDEwIHdp
-bmRvd3MtaW5zdGFsbCAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC14dGYtYW1kNjQtYW1k
-NjQtMiAgICAgICA3NiB4dGYvdGVzdC1wdjMycGFlLXhzYS0xOTQgICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC0xICAgICAgIDM3IHh0Zi90ZXN0LWh2bTMycGFlLW1l
-bW9wLXNlZyAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTMgICAgICAg
-MzcgeHRmL3Rlc3QtaHZtMzJwYWUtbWVtb3Atc2VnICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC14
-dGYtYW1kNjQtYW1kNjQtMSAgICAgICA1MiB4dGYvdGVzdC1odm02NC1tZW1vcC1zZWcgICAgIGZh
-aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgMTAg
-d2luZG93cy1pbnN0YWxsICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QteHRmLWFtZDY0LWFt
-ZDY0LTMgICAgICAgNTIgeHRmL3Rlc3QtaHZtNjQtbWVtb3Atc2VnICAgICBmYWlsICAgbmV2ZXIg
-cGFzcwogdGVzdC14dGYtYW1kNjQtYW1kNjQtNCAgICAgICAzNyB4dGYvdGVzdC1odm0zMnBhZS1t
-ZW1vcC1zZWcgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC01ICAgICAg
-IDM3IHh0Zi90ZXN0LWh2bTMycGFlLW1lbW9wLXNlZyAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-eHRmLWFtZDY0LWFtZDY0LTEgICAgICAgNzYgeHRmL3Rlc3QtcHYzMnBhZS14c2EtMTk0ICAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC14dGYtYW1kNjQtYW1kNjQtMyAgICAgICA3NiB4dGYvdGVz
-dC1wdjMycGFlLXhzYS0xOTQgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LXh0Zi1hbWQ2NC1h
-bWQ2NC00ICAgICAgIDUyIHh0Zi90ZXN0LWh2bTY0LW1lbW9wLXNlZyAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTUgICAgICAgNTIgeHRmL3Rlc3QtaHZtNjQtbWVt
-b3Atc2VnICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC14dGYtYW1kNjQtYW1kNjQtNCAgICAg
-ICA3NiB4dGYvdGVzdC1wdjMycGFlLXhzYS0xOTQgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LXh0Zi1hbWQ2NC1hbWQ2NC01ICAgICAgIDc2IHh0Zi90ZXN0LXB2MzJwYWUteHNhLTE5NCAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgMTMgbWlncmF0
-ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1xZW11dS13czE2LWFtZDY0IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgZmFpbCBuZXZl
-ciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhz
-bSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFu
-aHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0
-ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1pZ3Jh
-dGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmly
-dC12aGQgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwog
-dGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRlYmlhbi1odm0taW5zdGFsbC9s
-MS9sMiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkz
-ODYgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwg
-bmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAg
-ICAgICAgIDZhNzRmNGUzMWRjMjhmYjBkNWM5ZTU2YjU0ZDRiMmFhZjliNDZiYmUKYmFzZWxpbmUg
-dmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIDkyN2FjYTcwMDExZjgzYzQ0Mjk0ZjkwMjc1
-YzE4YTBiM2Y3ZDcxNjkKCkxhc3QgdGVzdCBvZiBiYXNpcyAgICA3NDY0NyAgMjAxOC0wNC0yOCAy
-Mjo0NzowOSBaICAgMTcgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2UgICAgNzQ3MTkgIDIwMTgtMDUt
-MTYgMDE6MTc6NDEgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91
-Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVy
-M0BjaXRyaXguY29tPgogIEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICBSb2dlciBQ
-YXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KICBYZW4gUHJvamVjdCBTZWN1cml0eSBU
-ZWFtIDxzZWN1cml0eUB4ZW5wcm9qZWN0Lm9yZz4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWFybWhmLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC14dGYgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-YXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYtbGlidmlydCAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1p
-Mzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFtZDY0LXByZXYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wcmV2ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFy
-bWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1ydW1wcnVuICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcnVtcHJ1biAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC14dGYt
-YW1kNjQtYW1kNjQtMSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC0yICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTMgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtNCAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1h
-bWQ2NC1hbWQ2NC01ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZt
-LWFtZDY0LXhzbSAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFl
-bXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5o
-dm0tYW1kNjQteHNtICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXN0
-dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXhzbSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJt
-aGYteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1hbWQgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2
-bS1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2
-LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJp
-YW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-eGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-cnVtcHJ1bi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAg
-ZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFt
-ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwt
-cWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWkzODYgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1ydW1w
-cnVuLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4
-NiAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFp
-bCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWludGVs
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZp
-cnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJt
-aGYtYXJtaGYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLW1pZHdheSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbWlncnVw
-Z3JhZGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LW1pZ3J1cGdyYWRlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLW11bHRpdmNwdSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1wYWlyICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWkzODYtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcGFpciAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWFtZDY0LXB2
-Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQtaTM4Ni1wdmdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFjb3cyICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1y
-YXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1k
-ZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtc2hhZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXNoYWRvdyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhk
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJt
-aGYteGwtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAoK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QueHMuY2l0cml0ZS5uZXQKbG9nczogL2hv
-bWUvb3NzdGVzdC9sb2dzCmltYWdlczogL2hvbWUvb3NzdGVzdC9pbWFnZXMKCkxvZ3MsIGNvbmZp
-ZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vb3NzdGVzdC54cy5jaXRy
-aXRlLm5ldC9+b3NzdGVzdC90ZXN0bG9ncy9sb2dzCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUg
-Zm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbnNvdXJjZS5jb20vZ2l0d2ViP3A9b3NzdGVz
-dC5naXQ7YT1zdW1tYXJ5CgoKUHVzaCBub3QgYXBwbGljYWJsZS4KCi0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgNmE3NGY0
-ZTMxZGMyOGZiMGQ1YzllNTZiNTRkNGIyYWFmOWI0NmJiZQpBdXRob3I6IEFuZHJldyBDb29wZXIg
-PGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgV2VkIE1heSA5IDE4OjA2OjQ2IDIw
-MTggKzAxMDAKCiAgICB4ODYvZW11bDogRml4IGVtdWxhdG9yIHRlc3QgaGFybmVzcyBidWlsZCBm
-b2xsb3dpbmcgYSBiYWNrcG9ydCBvZiA3YzUwODYxMgogICAgCiAgICBUaGUgeDg2IGVtdWxhdG9y
-IGRvZXNuJ3QgbmVlZCB0byBlbXBsb3kgYW55IFNwZWN0cmUgdjIgbWl0aWdhdGlvbnMuCiAgICAK
-ICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
-b20+Cgpjb21taXQgNTI3OGE5YTY3ZDVkZDhlZjk1NDExZjFmMTMwODEyYjExNDZkN2ViNgpBdXRo
-b3I6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgV2Vk
-IE1heSA5IDE2OjU0OjMyIDIwMTggKzAxMDAKCiAgICB4ODYvZW11bDogRml4IGVtdWxhdG9yIHRl
-c3QgaGFybmVzcyBidWlsZCBmb2xsb3dpbmcgdGhlIGJhY2twb3J0IG9mIGZmNTU1ZDU5ZThhCiAg
-ICAKICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJp
-eC5jb20+Cgpjb21taXQgYzUzNjYzYTIyM2FiM2NkNjAwODU1NzQ2NjczZmU5MjJmZmZiODNlOQpB
-dXRob3I6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KRGF0ZTogICBUdWUgTWF5IDgg
-MTg6Mjg6MjAgMjAxOCArMDEwMAoKICAgIHg4Ni9IVk06IGd1YXJkIGFnYWluc3QgZW11bGF0b3Ig
-ZHJpdmluZyBpb3JlcSBzdGF0ZSBpbiB3ZWlyZCB3YXlzCiAgICAKICAgIEluIHRoZSBjYXNlIHdo
-ZXJlIGh2bV93YWl0X2Zvcl9pbygpIGNhbGxzIHdhaXRfb25feGVuX2V2ZW50X2NoYW5uZWwoKSwK
-ICAgIHAtPnN0YXRlIGVuZHMgdXAgYmVpbmcgcmVhZCB0d2ljZSBpbiBzdWNjZXNzaW9uOiBvbmNl
-IHRvIGRldGVybWluZSB0aGF0CiAgICBzdGF0ZSAhPSBwLT5zdGF0ZSwgYW5kIHRoZW4gYWdhaW4g
-YXQgdGhlIHRvcCBvZiB0aGUgbG9vcC4gIFRoaXMgZ2l2ZXMgYQogICAgY29tcHJvbWlzZWQgZW11
-bGF0b3IgYSBjaGFuY2UgdG8gY2hhbmdlIHRoZSBzdGF0ZSBiYWNrIGJldHdlZW4gdGhlIHR3bwog
-ICAgcmVhZHMsIHBvdGVudGlhbGx5IGtlZXBpbmcgWGVuIGluIGEgbG9vcCBpbmRlZmluaXRlbHku
-CiAgICAKICAgIEluc3RlYWQ6CiAgICAqIFJlYWQgcC0+c3RhdGUgb25jZSBpbiBlYWNoIG9mIHRo
-ZSB3YWl0X29uX3hlbl9ldmVudF9jaGFubmVsKCkgdGVzdHMsCiAgICAqIHJlLXVzZSB0aGF0IHZh
-bHVlIHRoZSBuZXh0IHRpbWUgYXJvdW5kLAogICAgKiBhbmQgaW5zaXN0IHRoYXQgdGhlIHN0YXRl
-cyBjb250aW51ZSB0byB0cmFuc2l0aW9uICJmb3J3YXJkIiAod2l0aCB0aGUKICAgICAgZXhjZXB0
-aW9uIG9mIHRoZSB0cmFuc2l0aW9uIHRvIFNUQVRFX0lPUkVRX05PTkUpLgogICAgCiAgICBUaGlz
-IGlzIFhTQS0yNjIuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGlj
-aEBzdXNlLmNvbT4KICAgIFJldmlld2VkLWJ5OiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFw
-QGNpdHJpeC5jb20+Cgpjb21taXQgYzUzMzljNTk0NzA4NDY4MzEwNTY0Nzg0MTU5ZThmOTgyMjQx
-ZDcwMgpBdXRob3I6IFhlbiBQcm9qZWN0IFNlY3VyaXR5IFRlYW0gPHNlY3VyaXR5QHhlbnByb2pl
-Y3Qub3JnPgpEYXRlOiAgIE1vbiBBcHIgMjMgMTY6NTY6NDcgMjAxOCArMDEwMAoKICAgIHg4Ni92
-cHQ6IGFkZCBzdXBwb3J0IGZvciBJTy1BUElDIHJvdXRlZCBpbnRlcnJ1cHRzCiAgICAKICAgIEFu
-ZCBtb2RpZnkgdGhlIEhQRVQgY29kZSB0byBtYWtlIHVzZSBvZiBpdC4gQ3VycmVudGx5IEhQRVQg
-aW50ZXJydXB0cwogICAgYXJlIGFsd2F5cyB0cmVhdGVkIGFzIElTQSBhbmQgdGh1cyBpbmplY3Rl
-ZCB0aHJvdWdoIHRoZSB2UElDLiBUaGlzIGlzCiAgICB3cm9uZyBiZWNhdXNlIEhQRVQgaW50ZXJy
-dXB0cyB3aGVuIG5vdCBpbiBsZWdhY3kgbW9kZSBzaG91bGQgYmUKICAgIGluamVjdGVkIGZyb20g
-dGhlIElPLUFQSUMuCiAgICAKICAgIFRvIG1ha2UgdGhpbmdzIHdvcnNlLCB0aGUgc3VwcG9ydGVk
-IGludGVycnVwdCByb3V0aW5nIHZhbHVlcyBhcmUgc2V0CiAgICB0byBbMjAuLjIzXSwgd2hpY2gg
-Y2xlYXJseSBmYWxscyBvdXRzaWRlIG9mIHRoZSBJU0EgcmFuZ2UsIHRodXMKICAgIGxlYWRpbmcg
-dG8gYW4gQVNTRVJUIGluIGRlYnVnIGJ1aWxkcyBvciBtZW1vcnkgY29ycnVwdGlvbiBpbiBub24t
-ZGVidWcKICAgIGJ1aWxkcyBiZWNhdXNlIHRoZSBpbnRlcnJ1cHQgaW5qZWN0aW9uIGNvZGUgd2ls
-bCB3cml0ZSBvdXQgb2YgdGhlCiAgICBib3VuZHMgb2YgdGhlIGFyY2guaHZtX2RvbWFpbi52cGlj
-IGFycmF5LgogICAgCiAgICBTaW5jZSB0aGUgSFBFVCBpbnRlcnJ1cHQgc291cmNlIGNhbiBjaGFu
-Z2UgYmV0d2VlbiBJU0EgYW5kIElPLUFQSUMKICAgIGFsd2F5cyBkZXN0cm95IHRoZSB0aW1lciBi
-ZWZvcmUgY2hhbmdpbmcgdGhlIG1vZGUsIG9yIGVsc2UgWGVuIHJpc2tzCiAgICBjaGFuZ2luZyBp
-dCB3aGlsZSB0aGUgdGltZXIgaXMgYWN0aXZlLgogICAgCiAgICBOb3RlIHRoYXQgdnB0IGludGVy
-cnVwdCBpbmplY3Rpb24gaXMgcmFjeSBpbiB0aGUgc2Vuc2UgdGhhdCB0aGUKICAgIHZJTy1BUElD
-IFJURSBlbnRyeSBjYW4gYmUgd3JpdHRlbiBieSB0aGUgZ3Vlc3QgaW4gYmV0d2VlbiB0aGUgY2Fs
-bCB0bwogICAgcHRfaXJxX21hc2tlZCBhbmQgaHZtX2lvYXBpY19hc3NlcnQsIG9yIHRoZSBjYWxs
-IHRvIHB0X3VwZGF0ZV9pcnEgYW5kCiAgICBwdF9pbnRyX3Bvc3QuIFRob3NlIGFyZSBub3QgZGVl
-bWVkIHRvIGJlIHNlY3VyaXR5IGlzc3VlcywgYnV0IHJhdGhlcgogICAgcXVpcmtzIG9mIHRoZSBj
-dXJyZW50IGltcGxlbWVudGF0aW9uLiBJbiB0aGUgd29yc2UgY2FzZSB0aGUgZ3Vlc3QKICAgIG1p
-Z2h0IGxvc2UgaW50ZXJydXB0cyBvciBnZXQgbXVsdGlwbGUgaW50ZXJydXB0IHZlY3RvcnMgaW5q
-ZWN0ZWQgZm9yCiAgICB0aGUgc2FtZSB0aW1lciBzb3VyY2UuCiAgICAKICAgIFRoaXMgaXMgcGFy
-dCBvZiBYU0EtMjYxLgogICAgCiAgICBBZGRyZXNzIGFjdHVhbCBhbmQgcG90ZW50aWFsIGNvbXBp
-bGVyIHdhcm5pbmdzLiBGaXggZm9ybWF0dGluZy4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogUm9n
-ZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBK
-YW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cgpjb21taXQgM2I5NjY3NjMyZDUyOTk1YmRm
-NTc2ZTYyN2JjOGVhOTk0ZDY5NDFlZQpBdXRob3I6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29w
-ZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgVHVlIE1heSA4IDE4OjI4OjAzIDIwMTggKzAxMDAKCiAg
-ICB4ODYvdHJhcHM6IEZpeCBoYW5kbGluZyBvZiAjREIgZXhjZXB0aW9ucyBpbiBoeXBlcnZpc29y
-IGNvbnRleHQKICAgIAogICAgVGhlIFdBUk5fT04oKSBjYW4gYmUgdHJpZ2dlcmVkIGJ5IGd1ZXN0
-IGFjdGl2aXRpZXMsIGFuZCBlbWl0cyBhIGZ1bGwgc3RhY2sKICAgIHRyYWNlIHdpdGhvdXQgcmF0
-ZSBsaW1pdGluZy4gIFN3YXAgaXQgb3V0IGZvciBhIHJhdGVsaW1pdGVkIHByaW50ayB3aXRoIGp1
-c3QKICAgIGVub3VnaCBpbmZvcm1hdGlvbiB0byB3b3JrIG91dCB3aGF0IGlzIGdvaW5nIG9uLgog
-ICAgCiAgICBOb3QgYWxsICNEQiBleGNlcHRpb25zIGFyZSB0cmFwcywgc28gYmxpbmRseSBjb250
-aW51aW5nIGlzIG5vdCBhIHNhZmUgYWN0aW9uCiAgICB0byB0YWtlLiAgV2UgZG9uJ3QgbGV0IFBW
-IGd1ZXN0cyBzZWxlY3QgdGhlc2Ugc2V0dGluZ3MgaW4gdGhlIHJlYWwgJWRyNyB0bwogICAgYmVn
-aW4gd2l0aCwgYnV0IGZvciBhZGRlZCBzYWZldHkgYWdhaW5zdCB1bmV4cGVjdGVkIHNpdHVhdGlv
-bnMsIGRldGVjdCB0aGUKICAgIGZhdWx0IGNhc2VzIGFuZCBjcmFzaCBpbiBhbiBvYnZpb3VzIG1h
-bm5lci4KICAgIAogICAgVGhpcyBpcyBwYXJ0IG9mIFhTQS0yNjAgLyBDVkUtMjAxOC04ODk3Lgog
-ICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRy
-aXguY29tPgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4K
-CmNvbW1pdCAyZjNjZGUzMzA0OWUxNTliMzM0Y2JkYmVhNGU1OWE0ODYxMzhlZGVhCkF1dGhvcjog
-QW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KRGF0ZTogICBUdWUgTWF5
-IDggMTg6Mjg6MDMgMjAxOCArMDEwMAoKICAgIHg4Ni90cmFwczogVXNlIGFuIEludGVycnVwdCBT
-dGFjayBUYWJsZSBmb3IgI0RCCiAgICAKICAgIFBWIGd1ZXN0cyBjYW4gdXNlIGFyY2hpdGVjdHVy
-YWwgY29ybmVyIGNhc2VzIHRvIGNhdXNlICNEQiB0byBiZSByYWlzZWQgYWZ0ZXIKICAgIHRyYW5z
-aXRpb25pbmcgaW50byBzdXBlcnZpc29yIG1vZGUuCiAgICAKICAgIFVzZSBhbiBpbnRlcnJ1cHQg
-c3RhY2sgdGFibGUgZm9yICNEQiB0byBwcmV2ZW50IHRoZSBleGNlcHRpb24gYmVpbmcgdGFrZW4g
-d2l0aAogICAgYSBndWVzdCBjb250cm9sbGVkIHN0YWNrIHBvaW50ZXIuCiAgICAKICAgIFRoaXMg
-aXMgcGFydCBvZiBYU0EtMjYwIC8gQ1ZFLTIwMTgtODg5Ny4KICAgIAogICAgU2lnbmVkLW9mZi1i
-eTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIFJldmlld2Vk
-LWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cgpjb21taXQgYWNkODY2MTFkYzdk
-MmNmOGZjOWZmNjYwNjczNDFmMzU5MWFkMzFmZQpBdXRob3I6IEFuZHJldyBDb29wZXIgPGFuZHJl
-dy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgVHVlIE1heSA4IDE4OjI4OjAzIDIwMTggKzAx
-MDAKCiAgICB4ODYvcHY6IE1vdmUgZXhjZXB0aW9uIGluamVjdGlvbiBpbnRvIHssY29tcGF0X310
-ZXN0X2FsbF9ldmVudHMoKQogICAgCiAgICBUaGlzIGFsbG93cyBwYXRocyB0byBqdW1wIHN0cmFp
-Z2h0IHRvIHssY29tcGF0X310ZXN0X2FsbF9ldmVudHMoKSBhbmQgaGF2ZQogICAgaW5qZWN0aW9u
-IG9mIHBlbmRpbmcgZXhjZXB0aW9ucyBoYXBwZW4gYXV0b21hdGljYWxseSwgcmF0aGVyIHRoYW4g
-cmVxdWlyaW5nCiAgICBhbGwgY2FsbGluZyBwYXRocyB0byBoYW5kbGUgZXhjZXB0aW9ucyB0aGVt
-c2VsdmVzLgogICAgCiAgICBUaGUgbm9ybWFsIGV4Y2VwdGlvbiBwYXRoIGlzIHNpbXBsaWZpZWQg
-YXMgYSByZXN1bHQsIGFuZAogICAgY29tcGF0X3Bvc3RfaGFuZGxlX2V4Y2VwdGlvbigpIGlzIHJl
-bW92ZWQgZW50aXJlbHkuCiAgICAKICAgIFRoaXMgaXMgcGFydCBvZiBYU0EtMjYwIC8gQ1ZFLTIw
-MTgtODg5Ny4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT4KICAgIFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hA
-c3VzZS5jb20+Cgpjb21taXQgNWRkYzNmODNiNGJlYjAyZWI4MjI3ZGM5Mzg4ODhkMzA3NjAyNzJj
-MwpBdXRob3I6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6
-ICAgVHVlIE1heSA4IDE4OjI4OjAzIDIwMTggKzAxMDAKCiAgICB4ODYvdHJhcHM6IEZpeCAlZHI2
-IGhhbmRpbmcgaW4gI0RCIGhhbmRsZXIKICAgIAogICAgTW9zdCBiaXRzIGluICVkcjYgYWNjdW11
-bGF0ZSwgcmF0aGVyIHRoYW4gYmVpbmcgc2V0IGRpcmVjdGx5IGJhc2VkIG9uIHRoZQogICAgY3Vy
-cmVudCBzb3VyY2Ugb2YgI0RCLiAgSGF2ZSB0aGUgaGFuZGxlciBmb2xsb3cgdGhlIG1hbnVhbHMg
-Z3VpZGFuY2UsIHdoaWNoCiAgICBhdm9pZHMgbGVha2luZyBoeXBlcnZpc29yIGRlYnVnZ2luZyBh
-Y3Rpdml0aWVzIGludG8gZ3Vlc3QgY29udGV4dC4KICAgIAogICAgVGhpcyBpcyBwYXJ0IG9mIFhT
-QS0yNjAgLyBDVkUtMjAxOC04ODk3LgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29v
-cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVs
-aWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KKHFlbXUgY2hhbmdlcyBub3QgaW5jbHVkZWQpCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============6183096409926430602==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_//22wwpoZ3_fcOETKZ47Bl1u"; protocol="application/pgp-signature"
+
+--Sig_//22wwpoZ3_fcOETKZ47Bl1u
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 10 May 2018 09:03:30 -0700 (PDT)
+schrieb Stefano Stabellini <sstabellini@kernel.org>:
+
+> You could add a property to vmstate_xen_platform of xen_platform.c, but
+> you need to pay attention to legacy compatibility. Inevitably, there
+> will be older versions that do not have the new vmstate_xen_platform
+> field or do not set it properly.
+
+Doing the unplug on the other side works if it is done from blk_connect.
+At the point xen_platform_post_load is called, qemu is still in the middle =
+of=20
+initializing. Doing it from there causes weird failures.
+
+Any idea what the proper place is to call platform_do_unplug?
+
+Olaf
+
+--- a/hw/block/xen_disk.c
++++ b/hw/block/xen_disk.c
+@@ -31,6 +31,7 @@
+ #include "qapi/error.h"
+ #include "qapi/qmp/qdict.h"
+ #include "qapi/qmp/qstring.h"
++#include "qemu/error-report.h"
+=20
+ /* ------------------------------------------------------------- */
+=20
+@@ -1074,6 +1075,9 @@ static int blk_connect(struct XenDevice
+     unsigned int i;
+     uint32_t *domids;
+=20
++    error_report("%s", __func__);
++    xen_unplug_after_migration();
++
+     /* read-only ? */
+     if (blkdev->directiosafe) {
+         qflags =3D BDRV_O_NOCACHE | BDRV_O_NATIVE_AIO;
+--- a/hw/i386/xen/xen_platform.c
++++ b/hw/i386/xen/xen_platform.c
+@@ -62,6 +62,7 @@ typedef struct PCIXenPlatformState {
+     uint8_t flags; /* used only for version_id =3D=3D 2 */
+     int drivers_blacklisted;
+     uint16_t driver_product_version;
++    uint32_t unplug_val;
+=20
+     /* Log from guest drivers */
+     char log_buffer[4096];
+@@ -132,8 +133,13 @@ static void del_nic_peer(NICState *nic,
+         qemu_del_net_client(nc->peer);
+ }
+=20
++static bool pci_unplug_nics_done;
+ static void pci_unplug_nics(PCIBus *bus)
+ {
++    error_report("%s", __func__);
++    if (pci_unplug_nics_done)
++        return;
++    pci_unplug_nics_done =3D true;
+     qemu_foreach_nic(del_nic_peer, NULL);
+     pci_for_each_device(bus, 0, unplug_nic, NULL);
+ }
+@@ -170,30 +176,43 @@ static void unplug_disks(PCIBus *b, PCID
+     }
+ }
+=20
++static bool pci_unplug_disks_done;
+ static void pci_unplug_disks(PCIBus *bus, uint32_t flags)
+ {
++    error_report("%s", __func__);
++    if (pci_unplug_disks_done)
++        return;
++    pci_unplug_disks_done =3D true;
+     pci_for_each_device(bus, 0, unplug_disks, &flags);
+ }
+=20
++static void platform_do_unplug(PCIXenPlatformState *s, uint32_t val)
++{
++    PCIDevice *pci_dev =3D PCI_DEVICE(s);
++
++    error_report("%s %x", __func__, val);
++    /* Unplug devices. See comment above flag definitions */
++    if (val & (UNPLUG_IDE_SCSI_DISKS | UNPLUG_AUX_IDE_DISKS |
++               UNPLUG_NVME_DISKS)) {
++        DPRINTF("unplug disks\n");
++        pci_unplug_disks(pci_dev->bus, val);
++    }
++    if (val & UNPLUG_ALL_NICS) {
++        DPRINTF("unplug nics\n");
++        pci_unplug_nics(pci_dev->bus);
++    }
++}
++
+ static void platform_fixed_ioport_writew(void *opaque, uint32_t addr, uint=
+32_t val)
+ {
+     PCIXenPlatformState *s =3D opaque;
+=20
++    error_report("%s %x %x", __func__, addr, val);
+     switch (addr) {
+-    case 0: {
+-        PCIDevice *pci_dev =3D PCI_DEVICE(s);
+-        /* Unplug devices. See comment above flag definitions */
+-        if (val & (UNPLUG_IDE_SCSI_DISKS | UNPLUG_AUX_IDE_DISKS |
+-                   UNPLUG_NVME_DISKS)) {
+-            DPRINTF("unplug disks\n");
+-            pci_unplug_disks(pci_dev->bus, val);
+-        }
+-        if (val & UNPLUG_ALL_NICS) {
+-            DPRINTF("unplug nics\n");
+-            pci_unplug_nics(pci_dev->bus);
+-        }
++    case 0:
++        s->unplug_val |=3D val;
++        platform_do_unplug(s, val);
+         break;
+-    }
+     case 2:
+         switch (val) {
+         case 1:
+@@ -332,8 +351,20 @@ static const MemoryRegionOps platform_fi
+     .endianness =3D DEVICE_LITTLE_ENDIAN,
+ };
+=20
++static void *PCIXenPlatformState_for_unplug_after_migration;
++void xen_unplug_after_migration(void)
++{
++    PCIXenPlatformState *s =3D PCIXenPlatformState_for_unplug_after_migrat=
+ion;
++    error_report("%s", __func__);
++    if (s)
++        platform_do_unplug(s, s->unplug_val);
++    PCIXenPlatformState_for_unplug_after_migration =3D NULL;
++}
++
+ static void platform_fixed_ioport_init(PCIXenPlatformState* s)
+ {
++    error_report("%s", __func__);
++    PCIXenPlatformState_for_unplug_after_migration =3D s;
+     memory_region_init_io(&s->fixed_io, OBJECT(s), &platform_fixed_io_ops,=
+ s,
+                           "xen-fixed", 16);
+     memory_region_add_subregion(get_system_io(), XEN_PLATFORM_IOPORT,
+@@ -356,7 +387,7 @@ static void xen_platform_ioport_writeb(v
+                                        uint64_t val, unsigned int size)
+ {
+     PCIXenPlatformState *s =3D opaque;
+-    PCIDevice *pci_dev =3D PCI_DEVICE(s);
++    uint32_t unplug_val =3D 0;
+=20
+     switch (addr) {
+     case 0: /* Platform flags */
+@@ -372,17 +403,16 @@ static void xen_platform_ioport_writeb(v
+              * If VMDP was to control both disk and LAN it would use 4.
+              * If it controlled just disk or just LAN, it would use 8 belo=
+w.
+              */
+-            pci_unplug_disks(pci_dev->bus, UNPLUG_IDE_SCSI_DISKS);
+-            pci_unplug_nics(pci_dev->bus);
++            unplug_val |=3D UNPLUG_IDE_SCSI_DISKS | UNPLUG_ALL_NICS;
+         }
+         break;
+     case 8:
+         switch (val) {
+         case 1:
+-            pci_unplug_disks(pci_dev->bus, UNPLUG_IDE_SCSI_DISKS);
++            unplug_val |=3D UNPLUG_IDE_SCSI_DISKS;
+             break;
+         case 2:
+-            pci_unplug_nics(pci_dev->bus);
++            unplug_val |=3D UNPLUG_ALL_NICS;
+             break;
+         default:
+             log_writeb(s, (uint32_t)val);
+@@ -392,6 +422,10 @@ static void xen_platform_ioport_writeb(v
+     default:
+         break;
+     }
++    if (unplug_val) {
++        s->unplug_val |=3D unplug_val;
++        platform_do_unplug(s, unplug_val);
++    }
+ }
+=20
+ static const MemoryRegionOps xen_pci_io_ops =3D {
+@@ -440,19 +474,23 @@ static int xen_platform_post_load(void *
+ {
+     PCIXenPlatformState *s =3D opaque;
+=20
++    error_report("%s %x", __func__, version_id);
+     platform_fixed_ioport_writeb(s, 0, s->flags);
++    if (0)
++    platform_do_unplug(s, s->unplug_val);
+=20
+     return 0;
+ }
+=20
+ static const VMStateDescription vmstate_xen_platform =3D {
+     .name =3D "platform",
+-    .version_id =3D 4,
++    .version_id =3D 5,
+     .minimum_version_id =3D 4,
+     .post_load =3D xen_platform_post_load,
+     .fields =3D (VMStateField[]) {
+         VMSTATE_PCI_DEVICE(parent_obj, PCIXenPlatformState),
+         VMSTATE_UINT8(flags, PCIXenPlatformState),
++        VMSTATE_UINT32(unplug_val, PCIXenPlatformState),
+         VMSTATE_END_OF_LIST()
+     }
+ };
+@@ -468,6 +506,8 @@ static void xen_platform_realize(PCIDevi
+         return;
+     }
+=20
++    error_report("%s", __func__);
++
+     pci_conf =3D dev->config;
+=20
+     pci_set_word(pci_conf + PCI_COMMAND, PCI_COMMAND_IO | PCI_COMMAND_MEMO=
+RY);
+--- a/include/migration/vmstate.h
++++ b/include/migration/vmstate.h
+@@ -29,6 +29,7 @@
+=20
+ #include "migration/qjson.h"
+=20
++extern void xen_unplug_after_migration(void);
+ typedef struct VMStateInfo VMStateInfo;
+ typedef struct VMStateDescription VMStateDescription;
+ typedef struct VMStateField VMStateField;
+--- a/migration/savevm.c
++++ b/migration/savevm.c
+@@ -2265,6 +2265,7 @@ void qmp_xen_save_devices_state(const ch
+     int saved_vm_running;
+     int ret;
+=20
++    error_report("%s %s %x %x", __func__, filename, has_live, live);
+     if (!has_live) {
+         /* live default to true so old version of Xen tool stack can have a
+          * successfull live migration */
+@@ -2284,6 +2285,7 @@ void qmp_xen_save_devices_state(const ch
+     object_unref(OBJECT(ioc));
+     ret =3D qemu_save_device_state(f);
+     qemu_fclose(f);
++    error_report("%s %x", __func__, ret);
+     if (ret < 0) {
+         error_setg(errp, QERR_IO_ERROR);
+     } else {
+@@ -2293,6 +2295,7 @@ void qmp_xen_save_devices_state(const ch
+          * So call bdrv_inactivate_all (release locks) here to let the oth=
+er
+          * side of the migration take controle of the images.
+          */
++        error_report("%s %x saved_vm_running %x", __func__, live, saved_vm=
+_running);
+         if (live && !saved_vm_running) {
+             ret =3D bdrv_inactivate_all();
+             if (ret) {
+--- a/hw/i386/xen/xen-hvm.c
++++ b/hw/i386/xen/xen-hvm.c
+@@ -1240,6 +1240,7 @@ void xen_hvm_init(PCMachineState *pcms,
+     evtchn_port_t bufioreq_evtchn;
+     XenIOState *state;
+=20
++    error_report("%s", __func__);
+     state =3D g_malloc0(sizeof (XenIOState));
+=20
+     state->xce_handle =3D xenevtchn_open(NULL, 0);
+--- a/hw/xen/xen_backend.c
++++ b/hw/xen/xen_backend.c
+@@ -588,6 +588,7 @@ int xen_be_register(const char *type, st
+=20
+ void xen_be_register_common(void)
+ {
++    error_report("%s", __func__);
+     xen_set_dynamic_sysbus();
+=20
+     xen_be_register("console", &xen_console_ops);
+--- a/hw/xenpv/xen_machine_pv.c
++++ b/hw/xenpv/xen_machine_pv.c
+@@ -34,6 +34,7 @@ static void xen_init_pv(MachineState *ma
+     DriveInfo *dinfo;
+     int i;
+=20
++    error_report("%s", __func__);
+     /* Initialize backend core & drivers */
+     if (xen_be_init() !=3D 0) {
+         fprintf(stderr, "%s: xen backend core setup failed\n", __FUNCTION_=
+_);
+--- a/util/osdep.c
++++ b/util/osdep.c
+@@ -338,6 +338,7 @@ int qemu_open(const char *name, int flag
+         qemu_set_cloexec(ret);
+     }
+ #endif
++    error_report("%s %d =3D %s", __func__, ret, name);
+=20
+ #ifdef O_DIRECT
+     if (ret =3D=3D -1 && errno =3D=3D EINVAL && (flags & O_DIRECT)) {
+@@ -353,6 +354,7 @@ int qemu_close(int fd)
+ {
+     int64_t fdset_id;
+=20
++    error_report("%s %d", __func__, fd);
+     /* Close fd that was dup'd from an fdset */
+     fdset_id =3D monitor_fdset_dup_fd_find(fd);
+     if (fdset_id !=3D -1) {
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -87,6 +87,7 @@ static void pc_init1(MachineState *machi
+     MemoryRegion *rom_memory;
+     ram_addr_t lowmem;
+=20
++    error_report("%s e", __func__);
+     /*
+      * Calculate ram split, for memory below and above 4G.  It's a bit
+      * complicated for backward compatibility reasons ...
+@@ -302,6 +303,7 @@ static void pc_init1(MachineState *machi
+         nvdimm_init_acpi_state(&pcms->acpi_nvdimm_state, system_io,
+                                pcms->fw_cfg, OBJECT(pcms));
+     }
++    error_report("%s l", __func__);
+ }
+=20
+ /* Looking for a pc_compat_2_4() function? It doesn't exist.
+
+--Sig_//22wwpoZ3_fcOETKZ47Bl1u
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWvwujAAKCRBdQqD6ppg2
+fnqrAJ9kGI3SdyM1q1RdKWXOeyTtlw2/wQCeO/zSQ2oJz5Wzunm93uPKA58LZOE=
+=wpwi
+-----END PGP SIGNATURE-----
+
+--Sig_//22wwpoZ3_fcOETKZ47Bl1u--
+
+
+--===============6183096409926430602==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6183096409926430602==--
