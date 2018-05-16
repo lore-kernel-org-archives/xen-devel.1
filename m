@@ -1,11 +1,21 @@
-From: Rishi <2rushikeshj@gmail.com>
-Subject: Unable to compile blktap-3.2.0.xs1086 against kernel
- 4.16.8
-Date: Wed, 16 May 2018 15:34:02 +0530
-Message-ID: <CAO9XypX8Z_8egURF=pq27jz34FpTJOjmk7p2Un+CwzgRJ9C0xA@mail.gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 06/10] x86/spec_ctrl: Split
+ X86_FEATURE_SC_MSR into PV and HVM variants
+Date: Wed, 16 May 2018 11:56:11 +0100
+Message-ID: <b314b068-5032-99c7-8048-6e225232223c@citrix.com>
+References: <1526035094-14343-1-git-send-email-andrew.cooper3@citrix.com>
+ <1526035094-14343-7-git-send-email-andrew.cooper3@citrix.com>
+ <5AF9AAF602000078001C28FC@prv1-mh.provo.novell.com>
+ <bc7e6072-3bfb-2b87-f3b1-c85387ec0664@citrix.com>
+ <5AFBD1E102000078001C3182@prv1-mh.provo.novell.com>
+ <826e615b-fb58-6231-f15a-0cbfda1f1dae@citrix.com>
+ <5AFC0CC302000078001C3295@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7854693744683324053=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <5AFC0CC302000078001C3295@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,325 +24,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7854693744683324053==
-Content-Type: multipart/alternative; boundary="00000000000055fd4b056c4fd7bf"
-
---00000000000055fd4b056c4fd7bf
-Content-Type: text/plain; charset="UTF-8"
-
-Dear All,
-
-I'm trying to rebuild the blktap module from xenserver. I'm getting
-following compile errors, any help or direction would be appreciated.
-
-make[2]: Entering directory
-`/root/rpmbuild/BUILD/blktap-3.2.0.xs1086/drivers'
-
-/bin/sh ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.
--I..  -D_GNU_SOURCE
--I../include  -Wall -Werror -DXC_WANT_COMPAT_EVTCHN_API
--DXC_WANT_COMPAT_GNTTAB_API -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2
--fexceptions -fstack-protector-strong --param=ssp-buffer-size=4
--grecord-gcc-switches   -m64 -mtune=generic -c -o td-req.lo td-req.c
-
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -D_GNU_SOURCE -I../include
--Wall -Werror -DXC_WANT_COMPAT_EVTCHN_API -DXC_WANT_COMPAT_GNTTAB_API -O2
--g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions
--fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches
--m64 -mtune=generic -c td-req.c  -fPIC -DPIC -o .libs/td-req.o
-
-*td-req.c:* In function '*guest_copy2*':
-
-*td-req.c:359:18:* *error: *'*struct gntdev_grant_copy_segment*' has no
-member named '*iov*'
-
-         gcopy_seg->iov.iov_base = tapreq->vma + (i << PAGE_SHIFT) +
-(blkif_seg->first_sect << SECTOR_SHIFT);
-
-*                  ^*
-
-*td-req.c:360:18:* *error: *'*struct gntdev_grant_copy_segment*' has no
-member named '*iov*'
-
-         gcopy_seg->iov.iov_len = (blkif_seg->last_sect -
-blkif_seg->first_sect + 1) << SECTOR_SHIFT;
-
-*                  ^*
-
-*td-req.c:361:18:* *error: *'*struct gntdev_grant_copy_segment*' has no
-member named '*ref*'
-
-         gcopy_seg->ref = blkif_seg->gref;
-
-*                  ^*
-
-*td-req.c:362:18:* *error: *'*struct gntdev_grant_copy_segment*' has no
-member named '*offset*'
-
-         gcopy_seg->offset = blkif_seg->first_sect << SECTOR_SHIFT;
-
-*                  ^*
-
-*td-req.c:365:10:* *error: *'*struct ioctl_gntdev_grant_copy*' has no
-member named '*dir*'
-
-     gcopy.dir = blkif_rq_wr(&tapreq->msg);
-
-*          ^*
-
-*td-req.c:366:10:* *error: *'*struct ioctl_gntdev_grant_copy*' has no
-member named '*domid*'
-
-     gcopy.domid = blkif->domid;
-
-*          ^*
-
-make[2]: *** [td-req.lo] Error 1
-
-make[2]: Leaving directory
-`/root/rpmbuild/BUILD/blktap-3.2.0.xs1086/drivers'
-
-make[1]: *** [all-recursive] Error 1
-
-make[1]: Leaving directory `/root/rpmbuild/BUILD/blktap-3.2.0.xs1086'
-
-make: *** [all] Error 2
-
-
-I can share updated structures on Xen side but not sure how to modify above
-code to let it adhere to latest xen.
-
-
-Thank you.
-
---00000000000055fd4b056c4fd7bf
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Dear All,<div><br></div><div>I&#39;m trying to rebuild the=
- blktap module from xenserver. I&#39;m getting following compile errors, an=
-y help or direction would be appreciated.</div><div><br></div><div>
-
-
-
-
-<span></span>
-
-
-
-
-
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
->make[2]: Entering directory `/root/rpmbuild/BUILD/blktap-3.2.0.xs1086/driv=
-ers&#39;</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
->/bin/sh ../libtool<span class=3D"gmail-Apple-converted-space">=C2=A0 </spa=
-n>--tag=3DCC <span class=3D"gmail-Apple-converted-space">=C2=A0 </span>--mo=
-de=3Dcompile gcc -DHAVE_CONFIG_H -I. -I..<span class=3D"gmail-Apple-convert=
-ed-space">=C2=A0 </span>-D_GNU_SOURCE -I../include<span class=3D"gmail-Appl=
-e-converted-space">=C2=A0 </span>-Wall -Werror -DXC_WANT_COMPAT_EVTCHN_API =
--DXC_WANT_COMPAT_GNTTAB_API -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=3D2 -f=
-exceptions -fstack-protector-strong --param=3Dssp-buffer-size=3D4 -grecord-=
-gcc-switches <span class=3D"gmail-Apple-converted-space">=C2=A0 </span>-m64=
- -mtune=3Dgeneric -c -o td-req.lo td-req.c</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
->libtool: compile:<span class=3D"gmail-Apple-converted-space">=C2=A0 </span=
->gcc -DHAVE_CONFIG_H -I. -I.. -D_GNU_SOURCE -I../include -Wall -Werror -DXC=
-_WANT_COMPAT_EVTCHN_API -DXC_WANT_COMPAT_GNTTAB_API -O2 -g -pipe -Wall -Wp,=
--D_FORTIFY_SOURCE=3D2 -fexceptions -fstack-protector-strong --param=3Dssp-b=
-uffer-size=3D4 -grecord-gcc-switches -m64 -mtune=3Dgeneric -c td-req.c<span=
- class=3D"gmail-Apple-converted-space">=C2=A0 </span>-fPIC -DPIC -o .libs/t=
-d-req.o</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><b>td-req.c:</b> In function &#39;<b>guest_copy2</b>&#39;:</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><b>td-req.c:359:18:</b> </span><span class=3D"gmail-s2" style=3D"font-vari=
-ant-ligatures:no-common-ligatures;color:rgb(195,55,32)"><b>error: </b></spa=
-n><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res">&#39;<b>struct gntdev_grant_copy_segment</b>&#39; has no member named =
-&#39;<b>iov</b>&#39;</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><span class=3D"gmail-Apple-converted-space">=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 </span>gcopy_seg-&gt;iov.iov_base =3D tapreq-&gt;vma + (i &lt;&lt; PAGE=
-_SHIFT) + (blkif_seg-&gt;first_sect &lt;&lt; SECTOR_SHIFT);</span></p>
-<p class=3D"gmail-p2" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(52,188,38);background-color:rgb(255,255,255)=
-"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res"><b><span class=3D"gmail-Apple-converted-space">=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 </span>^</b></span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><b>td-req.c:360:18:</b> </span><span class=3D"gmail-s2" style=3D"font-vari=
-ant-ligatures:no-common-ligatures;color:rgb(195,55,32)"><b>error: </b></spa=
-n><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res">&#39;<b>struct gntdev_grant_copy_segment</b>&#39; has no member named =
-&#39;<b>iov</b>&#39;</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><span class=3D"gmail-Apple-converted-space">=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 </span>gcopy_seg-&gt;iov.iov_len =3D (blkif_seg-&gt;last_sect - blkif_s=
-eg-&gt;first_sect + 1) &lt;&lt; SECTOR_SHIFT;</span></p>
-<p class=3D"gmail-p2" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(52,188,38);background-color:rgb(255,255,255)=
-"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res"><b><span class=3D"gmail-Apple-converted-space">=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 </span>^</b></span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><b>td-req.c:361:18:</b> </span><span class=3D"gmail-s2" style=3D"font-vari=
-ant-ligatures:no-common-ligatures;color:rgb(195,55,32)"><b>error: </b></spa=
-n><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res">&#39;<b>struct gntdev_grant_copy_segment</b>&#39; has no member named =
-&#39;<b>ref</b>&#39;</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><span class=3D"gmail-Apple-converted-space">=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 </span>gcopy_seg-&gt;ref =3D blkif_seg-&gt;gref;</span></p>
-<p class=3D"gmail-p2" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(52,188,38);background-color:rgb(255,255,255)=
-"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res"><b><span class=3D"gmail-Apple-converted-space">=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 </span>^</b></span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><b>td-req.c:362:18:</b> </span><span class=3D"gmail-s2" style=3D"font-vari=
-ant-ligatures:no-common-ligatures;color:rgb(195,55,32)"><b>error: </b></spa=
-n><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res">&#39;<b>struct gntdev_grant_copy_segment</b>&#39; has no member named =
-&#39;<b>offset</b>&#39;</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><span class=3D"gmail-Apple-converted-space">=C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 </span>gcopy_seg-&gt;offset =3D blkif_seg-&gt;first_sect &lt;&lt; SECTO=
-R_SHIFT;</span></p>
-<p class=3D"gmail-p2" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(52,188,38);background-color:rgb(255,255,255)=
-"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res"><b><span class=3D"gmail-Apple-converted-space">=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 </span>^</b></span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><b>td-req.c:365:10:</b> </span><span class=3D"gmail-s2" style=3D"font-vari=
-ant-ligatures:no-common-ligatures;color:rgb(195,55,32)"><b>error: </b></spa=
-n><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res">&#39;<b>struct ioctl_gntdev_grant_copy</b>&#39; has no member named &#=
-39;<b>dir</b>&#39;</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><span class=3D"gmail-Apple-converted-space">=C2=A0=C2=A0 =C2=A0 </span>gco=
-py.dir =3D blkif_rq_wr(&amp;tapreq-&gt;msg);</span></p>
-<p class=3D"gmail-p2" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(52,188,38);background-color:rgb(255,255,255)=
-"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res"><b><span class=3D"gmail-Apple-converted-space">=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 </span>^</b></span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><b>td-req.c:366:10:</b> </span><span class=3D"gmail-s2" style=3D"font-vari=
-ant-ligatures:no-common-ligatures;color:rgb(195,55,32)"><b>error: </b></spa=
-n><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res">&#39;<b>struct ioctl_gntdev_grant_copy</b>&#39; has no member named &#=
-39;<b>domid</b>&#39;</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
-><span class=3D"gmail-Apple-converted-space">=C2=A0=C2=A0 =C2=A0 </span>gco=
-py.domid =3D blkif-&gt;domid;</span></p>
-<p class=3D"gmail-p2" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(52,188,38);background-color:rgb(255,255,255)=
-"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatu=
-res"><b><span class=3D"gmail-Apple-converted-space">=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 </span>^</b></span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
->make[2]: *** [td-req.lo] Error 1</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
->make[2]: Leaving directory `/root/rpmbuild/BUILD/blktap-3.2.0.xs1086/drive=
-rs&#39;</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
->make[1]: *** [all-recursive] Error 1</span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
->make[1]: Leaving directory `/root/rpmbuild/BUILD/blktap-3.2.0.xs1086&#39;<=
-/span></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-style:normal;font-variant:no=
-rmal;font-weight:normal;font-stretch:normal;font-size:11px;line-height:norm=
-al;font-family:Menlo;color:rgb(0,0,0);background-color:rgb(255,255,255)"><s=
-pan class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-ligatures"=
->make: *** [all] Error 2</span></p>
-
-
-<br></div><div><br></div><div>I can share updated structures on Xen side bu=
-t not sure how to modify above code to let it adhere to latest xen.</div><d=
-iv><br></div><div><br></div><div>Thank you.</div><div><br></div></div>
-
---00000000000055fd4b056c4fd7bf--
-
-
---===============7854693744683324053==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7854693744683324053==--
+T24gMTYvMDUvMTggMTE6NDksIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDE2LjA1LjE4IGF0
+IDEyOjI4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IE9uIDE2LzA1LzE4
+IDA3OjM4LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4+IE9uIDE1LjA1LjE4IGF0IDIxOjUyLCA8
+YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+Pj4gT24gMTQvMDUvMTggMTY6Mjcs
+IEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4+PiBPbiAxMS4wNS4xOCBhdCAxMjozOCwgPGFuZHJl
+dy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4+Pj4gLS0tIGEveGVuL2FyY2gveDg2L3Nw
+ZWNfY3RybC5jCj4+Pj4+PiArKysgYi94ZW4vYXJjaC94ODYvc3BlY19jdHJsLmMKPj4+Pj4+IEBA
+IC0xMjgsNyArMTI4LDggQEAgc3RhdGljIHZvaWQgX19pbml0IHByaW50X2RldGFpbHMoZW51bSBp
+bmRfdGh1bmsgdGh1bmssIAo+PiB1aW50NjRfdCBjYXBzKQo+Pj4+Pj4gICAgICAgICAgICAgdGh1
+bmsgPT0gVEhVTktfUkVUUE9MSU5FID8gIlJFVFBPTElORSIgOgo+Pj4+Pj4gICAgICAgICAgICAg
+dGh1bmsgPT0gVEhVTktfTEZFTkNFICAgID8gIkxGRU5DRSIgOgo+Pj4+Pj4gICAgICAgICAgICAg
+dGh1bmsgPT0gVEhVTktfSk1QICAgICAgID8gIkpNUCIgOiAiPyIsCj4+Pj4+PiAtICAgICAgICAg
+ICBib290X2NwdV9oYXMoWDg2X0ZFQVRVUkVfU0NfTVNSKSA/Cj4+Pj4+PiArICAgICAgICAgICAo
+Ym9vdF9jcHVfaGFzKFg4Nl9GRUFUVVJFX1NDX01TUl9QVikgfHwKPj4+Pj4+ICsgICAgICAgICAg
+ICBib290X2NwdV9oYXMoWDg2X0ZFQVRVUkVfU0NfTVNSX0hWTSkpID8KPj4+Pj4+ICAgICAgICAg
+ICAgIGRlZmF1bHRfeGVuX3NwZWNfY3RybCAmIFNQRUNfQ1RSTF9JQlJTICAgID8gIiBJQlJTKyIg
+Ogo+Pj4+Pj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAiIElCUlMtIiAgICAgIDogIiIsCj4+Pj4+PiAgICAgICAgICAgICBvcHRfaWJwYiAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA/ICIgSUJQQiIgICAgICAgOiAiIiwKPj4+
+Pj4+IEBAIC0zNjcsNyArMzY4LDggQEAgdm9pZCBfX2luaXQgaW5pdF9zcGVjdWxhdGlvbl9taXRp
+Z2F0aW9ucyh2b2lkKQo+Pj4+Pj4gICAgICAgICAgICogbmVlZCB0aGUgSUJSUyBlbnRyeS9leGl0
+IGxvZ2ljIHRvIHZpcnR1YWxpc2UgSUJSUyBzdXBwb3J0IGZvcgo+Pj4+Pj4gICAgICAgICAgICog
+Z3Vlc3RzLgo+Pj4+Pj4gICAgICAgICAgICovCj4+Pj4+PiAtICAgICAgICBzZXR1cF9mb3JjZV9j
+cHVfY2FwKFg4Nl9GRUFUVVJFX1NDX01TUik7Cj4+Pj4+PiArICAgICAgICBzZXR1cF9mb3JjZV9j
+cHVfY2FwKFg4Nl9GRUFUVVJFX1NDX01TUl9QVik7Cj4+Pj4+PiArICAgICAgICBzZXR1cF9mb3Jj
+ZV9jcHVfY2FwKFg4Nl9GRUFUVVJFX1NDX01TUl9IVk0pOwo+Pj4+PiBCZXNpZGVzIHRoZXNlIHNv
+cnQgb2Ygb3BlbiBjb2RpbmcgYWx0ZXJuYXRpdmVfaW9fMigpICh5b3UnZCByZWFsbHkgd2FudCBh
+bgo+Pj4+PiBvdXRwdXQtbGVzcyB2YXJpYW50IGhlcmUsIEkgYWdyZWUpIHRoZXNlIGFyZSBzbGln
+aHRseSBiZW5kaW5nIHRoZSBydWxlcyBvZgo+Pj4+PiB3aGVuL2hvdyB0byB1c2UgbXVsdGlwbGUg
+YWx0ZXJuYXRpdmVzOiBUaGUgYWJvdmUgZW5kcyB1cCBjb3JyZWN0IG9ubHkKPj4+Pj4gYmVjYXVz
+ZSBvZiBib3RoIHJlcGxhY2VtZW50cyBiZWluZyBpZGVudGljYWwuCj4+Pj4gQWN0dWFsbHksIGJ5
+IHJlb3JkZXJpbmcgcGF0Y2ggMTAgYWhlYWQgb2YgdGhpcyBwYXRjaCwgd2UgbmV2ZXIgZ2V0IHRv
+Cj4+Pj4gbmVlZGluZyB0aGUgQUxURVJOQVRJVkVfMigpJ3MgaW4gdGhlIGZpcnN0IHBsYWNlLCBh
+bmQgbG9zZSBhbnkgY29uY2VybnMKPj4+PiB3aXRoIGJlbmRpbmcgdGhlIHJ1bGVzIGFsb25nIHRo
+ZSBzZXJpZXMuCj4+PiBBaCB5ZXMsIGluZGVlZC4gQW5kIHlvdSB3b3VsZCBiZXR0ZXIgdXNlIGFs
+dGVybmF0aXZlX2lucHV0KCkgdGhlcmUgdGhlbiwKPj4+IGluc3RlYWQgb2Ygb3BlbiBjb2Rpbmcg
+aXQuCj4+IFRoZSByZWFzb24gdGhpcyBkb2Vzbid0IHVzZSBhbHRlcm5hdGl2ZV9pbnB1dCgpIGF0
+IHRoZSBtb21lbnQgaXMgYmVjYXVzZQo+PiBvZiB0aGUgbWVtb3J5IGNsb2JiZXIuICAoQW5kIHRo
+ZSBsYWNrIG9mIGEgbWVtb3J5IGNsb2JiZXIgaXMgY2FsbGVkIG91dAo+PiBhcyBhIHBlY3VsaWFy
+aXR5IGluIGNvbW1lbnQpLiAgVGhlIGN1cnJlbnQgY29kZSBsb29rcyBkYW5nZXJvdXNseQo+PiBp
+bmNvbnNpc3RlbnQgV1JUIGJhcnJpZXJzLgo+Pgo+PiBBcyBmb3IgYmVuZGluZyB0aGUgcnVsZXMs
+IEkgbm93IGRpc2FncmVlIHdpdGggeW91ciBhc3Nlc3NtZW50LiAgVGhlCj4+IGFsdGVybmF0aXZl
+XyooKSB3cmFwcGVycyBkbyBub3RoaW5nIGJ1dCBtYWtlIGl0IGhhcmRlciB0byBleHByZXNzIHRo
+ZQo+PiBwYXJhbWV0ZXJzLCBhcyBwZXJmZWN0bHkgZGVtb25zdHJhdGVkIGJ5IHRoZSBBU01fT1VU
+UFVUMigpIGJvZGdlLgo+IFRoZSAiYmVuZGluZyB0aGUgcnVsZXMiIGNvbW1lbnQgd2FzIHVucmVs
+YXRlZCB0byBhbHRlcm5hdGl2ZV8qKCkgdnMKPiBBTFRFUk5BVElWRSooKSB1c2UsIGFuZCBpbnN0
+ZWFkIHdhcyBzb2xlbHkgcmVsYXRlZCB0byB0aGVyZSBiZWluZyBhCj4gZGVwZW5kZW5jeSBoZXJl
+IG9uIGJvdGggcGllY2VzIG9mIHJlcGxhY2VtZW50IGNvZGUgYmVpbmcgaWRlbnRpY2FsLgo+Cj4+
+IEkgZG9uJ3Qgc2VlIHRoZWlyIHZhbHVlLCBhbmQgdGhleSBoYXZlIGEgY29zdCBvZiBtYWtpbmcg
+YW4gYXNtIHZvbGF0aWxlCj4+IHN0YXRlbWVudCBub3QgbG9vayBhbmQgd29yayBxdWl0ZSBhcyBh
+biBhc20gdm9sYXRpbGUgc3RhdGVtZW50IGRvZXMgaW4KPj4gYWxsIG90aGVyIGNhbGxzaXRlcy4K
+PiBJIGRvbid0IG1pbmQgY29uc2lzdGVuY3kgYmVpbmcgYWNoaWV2ZWQgdG8gb3RoZXIgd2F5IGFy
+b3VuZCAoaS5lLiBieQo+IGRyb3BwaW5nIHRob3NlIHdyYXBwZXJzKS4gQnV0IEknZCBwcmVmZXIg
+aWYgd2UgZGlkbid0IG1peCB0aGluZ3MgdW5sZXNzCj4gdGhlcmUncyBhIGNvbXBlbGxpbmcgcmVh
+c29uIHRvIGRvIHNvLgoKSSdsbCBzZWUgYWJvdXQgZG9pbmcgc29tZSBjbGVhbnVwIG9mIHRoZSBv
+dmVyYWxsIHRyZWUgZm9yIDQuMTIuwqAgRm9yCm5vdywgaXRzIGFscmVhZHkgbWl4ZWQsIGFuZCB0
+aGlzIGRvZXNuJ3QgbWFrZSBhbnl0aGluZyB3b3JzZS4KCn5BbmRyZXcKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
