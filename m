@@ -1,13 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: migration regression in xen-4.11 and qemu-2.11 and
- qcow2
-Date: Thu, 17 May 2018 10:31:06 +0200
-Message-ID: <20180517103106.350a410e.olaf@aepfle.de>
-References: <20180507151940.GA31926@aepfle.de>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2 for-4.7/4.8] x86: Fix "x86: further CPUID
+ handling adjustments"
+Date: Thu, 17 May 2018 02:40:36 -0600
+Message-ID: <5AFD400402000078001C382B@prv1-mh.provo.novell.com>
+References: <1526406880-23398-1-git-send-email-andrew.cooper3@citrix.com>
+ <1526491620-23172-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0852778484775253489=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180507151940.GA31926@aepfle.de>
+In-Reply-To: <1526491620-23172-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,52 +19,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============0852778484775253489==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/3o.F.GyeaBadkCT2Tld6hmU"; protocol="application/pgp-signature"
-
---Sig_/3o.F.GyeaBadkCT2Tld6hmU
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Mon, 7 May 2018 17:19:46 +0200
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> With qemu-2.11 the sender thinks everything is alright and the domU is mo=
-ved.
-
-Another case of breakage in qemu-2.11:
-if the targethost does not even have access to the diskimage the sender sti=
-ll thinks everything is alright. qemu does not propagate the error to libxl=
- to allow it to abort the migration.
-
-Olaf
-
---Sig_/3o.F.GyeaBadkCT2Tld6hmU
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iFwEARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWv09ygAKCRBdQqD6ppg2
-foJvAKCdx3tzFxJZTu9ELzrLn2KtNP7lZwCXXrzO2Hvbv6n4dcICWucvFU57UQ==
-=3pHe
------END PGP SIGNATURE-----
-
---Sig_/3o.F.GyeaBadkCT2Tld6hmU--
-
-
---===============0852778484775253489==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0852778484775253489==--
+Pj4+IE9uIDE2LjA1LjE4IGF0IDE5OjI3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gYy9zIGY5NjE2ODg0ZSAoYSBiYWNrcG9ydCBvZiBjL3MgMGQ3MDNhNzAxICJ4ODYvZmVh
+dHVyZTogRGVmaW5pdGlvbnMgZm9yCj4gSW5kaXJlY3QgQnJhbmNoIENvbnRyb2xzIikgbWlzc2Vk
+IGEgQ1BVSUQgYWRqdXN0bWVudCB3aGVuIGNhbGN1bGF0aW5nIHRoZSByYXcKPiBmZWF0dXJlc2V0
+LiAgVGhpcyBpbXBhY3RzIGhvc3QgYWRtaW5pc3RyYXRvciBkaWFnbm9zdGljcy4KPiAKPiBTaWdu
+ZWQtb2ZmLWJ5OiBTZXJnZXkgRHlhc2xpIDxzZXJnZXkuZHlhc2xpQGNpdHJpeC5jb20+CgpJIGNv
+bnRpbnVlIHRvIHRoaW5rIHRoaXMgc2hvdWxkIHJlbWFpbiB0byBiZSBhIHNlcGFyYXRlIHBhdGNo
+LgoKPiBjL3MgNjJiMTg3OTY5ICJ4ODY6IGZ1cnRoZXIgQ1BVSUQgaGFuZGxpbmcgYWRqdXN0bWVu
+dHMiIG1ha2Ugc29tZSBhZGp1c3RtZW50cy4KPiBIb3dldmVyLCBpdCBicmVha3MgbGV2ZWxsaW5n
+IG9mIGd1ZXN0cywgbWFraW5nIGl0IGltcG9zc2libGUgZm9yIHRoZSB0b29sc3RhY2sKPiB0byBo
+aWRlIFNUSUJQIG9yIElCUEIgZnJvbSBndWVzdHMgb24gaGFyZHdhcmUgd2l0aCB1cC10by1kYXRl
+IG1pY3JvY29kZS4KPiAKPiBUaGUgZG9tMCBpc3N1ZSByZWZlcmVuY2VkIGluIHRoZSBjb21taXQg
+bWVzc2FnZSB3YXMgZml4ZWQgYnkgdGhlIGh1bmsKPiBhZGp1c3RpbmcgdGhlIHplcm9pbmcgYWxv
+bmUuICBTVElCUCBhbmQgSUJQQiBkb24ndCBuZWVkIChhbmQgaW5kZWVkLCBtdXN0IG5vdAo+IGJl
+IGZvciBsZXZlbGxpbmcgcHVycG9zZXMpIE9SJ2QgaW50byB0aGUgbGVhZi4KPiAKPiBPbmUgZmlu
+YWwgaXRlbSB3aGljaCB3YXMgbWlzc2VkIGluIGJhY2twb3J0IHdhcyB0aGUgbmVlZCB0byBpZ25v
+cmUgdGhlCj4gdG9vbHN0YWNrIGNob2ljZSBvZiBTVElCUCwgYW5kIHNldCBpdCBlcXVhbCB0byBJ
+QlJTQi4gIFRoaXMgbmVlZHMgZG9pbmcgYWZ0ZXIKPiB0aGUgbWFzayBoYXMgYmVlbiBhcHBsaWVk
+LgoKVGhpcyBsYXN0IHBhcmFncmFwaCBhdCBsZWFzdCBwYXJ0bHkgY29udHJhZGljdHMgdGhlIGZp
+cnN0IHRhbGtpbmcgYWJvdXQgdG9vbCBzdGFjawpjaG9zZW4gaGlkaW5nIG9mIFNUSUJQLiBUaGUg
+aW50ZW5kZWQgbmV0IGVmZmVjdCwgYWl1aSwgaXMKLSBleHBvc2UgU1RJQlAgaW5kZXBlbmRlbnQg
+b2YgdG9vbCBzdGFjayBjaG9pY2Ugd2hlbiB0aGUgdG9vbCBzdGFjayBoYXMKICBlbGVjdGVkIHRv
+IGV4cG9zZSBJQlJTQiwKLSBoaWRlIFNUSUJQIGFjY29yZGluZyB0byB0b29sIHN0YWNrIGNob2lj
+ZSB3aGVuIElCUlNCIGlzIGFsc28gaGlkZGVuLgoKQSBzaW1pbGFyIGltcGxpY2F0aW9uIChhcyBt
+ZW50aW9uZWQgYmVmb3JlLCBhbmQgc2VlIGJlbG93KSBpcyBzdXBwb3NlZCB0bwpleGlzdCBmcm9t
+IElCUlNCIHRvIElCUEIsIEkgdGhpbmsuCgpBbHNvIHRoaXMgYXNwZWN0IHdhc24ndCBtaXNzZWQg
+aW4gdGhlIG9yaWdpbmFsIGJhY2twb3J0LCBidXQgZG9uZSB3cm9uZ2x5OiBUaGUKT1JpbmcgaW4g
+YWhlYWQgb2YgdGhlIG1hc2tpbmcgd2FzIG1lYW50IHRvIHRha2UgY2FyZSBvZiB0aGlzLCB1dGls
+aXppbmcgd2hhdApjYWxjdWxhdGVfe2h2bSxwdn1fZmVhdHVyZXNldCgpIGRvIChvdmVybG9va2lu
+ZyB0aGUgZmFjdCB0aGF0IHRoZSBmZWF0dXJlIHNldHMKbWF5IGhhdmUgdGhlIGJpdHMgc2V0IHdo
+aWxlIHRoZSB0b29sIHN0YWNrIG1heSBoYXZlIGNsZWFyZWQgdGhlbSBmb3IgdGhlIGdpdmVuCmRv
+bWFpbikuCgo+IEBAIC0xMTg4LDcgKzExOTEsNiBAQCB2b2lkIHB2X2NwdWlkKHN0cnVjdCBjcHVf
+dXNlcl9yZWdzICpyZWdzKQo+ICAKPiAgICAgIGNhc2UgMHg4MDAwMDAwODoKPiAgICAgICAgICBh
+ID0gcGFkZHJfYml0cyB8ICh2YWRkcl9iaXRzIDw8IDgpOwo+IC0gICAgICAgIGIgfD0gY3B1ZmVh
+dF9tYXNrKFg4Nl9GRUFUVVJFX0lCUEIpOwo+ICAgICAgICAgIGIgJj0gcHZfZmVhdHVyZXNldFtG
+RUFUVVJFU0VUX2U4Yl07Cj4gICAgICAgICAgYnJlYWs7CgpZb3UgZGlkbid0IGFkZHJlc3MgbXkg
+cmVzcGVjdGl2ZSB2MSByZXZpZXcgY29tbWVudCwgbmVpdGhlciBieSBhZGRpbmcgY29kZQpoZXJl
+LCBub3IgdmVyYmFsbHk6IEhvdyBpcyBEb20wIHN1cHBvc2VkIHRvIGtub3cgb2YgSUJQQiBiZWlu
+ZyBhdmFpbGFibGUgaWYKSUJTUkIgaXMgKGluIGhhcmR3YXJlKSwgYnV0IElCUEIgaXNuJ3Q/IFRo
+ZSB3aG9sZSBwdXJwb3NlIG9mIHRoZSByZXNwZWN0aXZlCmNodW5rIG9mIGNvZGUgaW4gY2FsY3Vs
+YXRlX3B2X2ZlYXR1cmVzZXQoKSBpcyBqdXN0IHRoYXQuIEFuZCBpZiB3ZSAgSSB0aGluayB0aGlz
+IHNpbWlsYXJseQpzaG91bGQgYmUgZG9uZSBmb3IgRG9tVS1zLCBpLmUuIGFsc28gaW4gdGhlIEhW
+TSB2YXJpYW50IG9mIHRoaXMgY29kZS4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
