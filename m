@@ -1,20 +1,21 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH for-4.11] x86/cacheattr: fix
- mtrr_pat_not_equal
-Date: Thu, 17 May 2018 11:55:47 +0200
-Message-ID: <229de4a4-c8f0-34f0-e843-a5be1c08eb2b@suse.com>
-References: <20180517094809.80469-1-roger.pau@citrix.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH v3 5/8] xen_disk: remove use of grant
+ map/unmap
+Date: Thu, 17 May 2018 11:31:05 +0100
+Message-ID: <20180517103105.GJ2057__11578.7791241475$1526553010$gmane$org@perard.uk.xensource.com>
+References: <1525461967-32174-1-git-send-email-paul.durrant@citrix.com>
+ <1525461967-32174-6-git-send-email-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ents=ie=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fJFdY-0003ai-J0
- for xen-devel@lists.xenproject.org; Thu, 17 May 2018 09:55:52 +0000
-In-Reply-To: <20180517094809.80469-1-roger.pau@citrix.com>
-Content-Language: de-DE
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=kmnw=ie=citrix.com=prvs=6682a862c=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1fJGBh-0006WY-H6
+ for xen-devel@lists.xenproject.org; Thu, 17 May 2018 10:31:09 +0000
+Content-Disposition: inline
+In-Reply-To: <1525461967-32174-6-git-send-email-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,22 +24,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Kevin Wolf <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTcvMDUvMTggMTE6NDgsIFJvZ2VyIFBhdSBNb25uZSB3cm90ZToKPiBUaGUgZnVuY3Rpb24g
-aXMgc3VwcG9zZWQgdG8gcmV0dXJuIHdoZXRoZXIgdGhlIE1UUlIgYW5kIFBBVCBzdGF0ZSBvZgo+
-IHR3byBDUFVzIG1hdGNoLiBDdXJyZW50bHkgdGhpcyBpcyBub3QgcHJvcGVybHkgZG9uZSBiZWNh
-dXNlIHRoZSB0ZXN0Cj4gZm9yIHRoZSBkZWZ0eXBlIGFuZCB0aGUgZW5hYmxlIGJpdHMgcmVxdWly
-ZWQgYm90aCB0aGUgZGVmdHlwZSBhbmQgdGhlCj4gZW5hYmxlIGJpdHMgdG8gYmUgZGlmZmVyZW50
-LCB3aGlsZSBqdXN0IG9uZSBvZiB0aG9zZSBmaWVsZHMgYmVpbmcKPiBkaWZmZXJlbnQgY2FuIGFs
-cmVhZHkgY2F1c2UgdGhlIE1UUlIgc3RhdGVzIG9uIHRoZSB2Q1BVIHRvIG5vdCBtYXRjaC4KPiAK
-PiBGaXggdGhpcyBieSBjaGFuZ2luZyB0aGUgQU5EIGludG8gYW4gT1IgaW5zdGVhZCwgc28gdGhh
-dCBlaXRoZXIgdGhlCj4gZGVmdHlwZSBvciB0aGUgZW5hYmxlZCBiaXRzIGJlaW5nIGRpZmZlcmVu
-dCB3aWxsIGNhdXNlIHRoZSBmdW5jdGlvbiB0bwo+IHJldHVybiBtaXNtYXRjaGluZyBzdGF0ZS4K
-PiAKPiBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNv
-bT4KClJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCgpK
-dWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gRnJpLCBNYXkgMDQsIDIwMTggYXQgMDg6MjY6MDRQTSArMDEwMCwgUGF1bCBEdXJyYW50IHdy
+b3RlOgo+IE5vdyB0aGF0IHRoZSAobmF0aXZlIG9yIGVtdWxhdGVkKSB4ZW5fYmVfY29weV9ncmFu
+dF9yZWZzKCkgaGVscGVyIGlzCj4gYWx3YXlzIGF2YWlsYWJsZSwgdGhlIHhlbl9kaXNrIGNvZGUg
+Y2FuIGJlIHNpZ25pZmljYW50bHkgc2ltcGxpZmllZCBieQo+IHJlbW92aW5nIGRpcmVjdCB1c2Ug
+b2YgZ3JhbnQgbWFwIGFuZCB1bm1hcCBvcGVyYXRpb25zLgo+IAo+IFNpZ25lZC1vZmYtYnk6IFBh
+dWwgRHVycmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+CgpBY2tlZC1ieTogQW50aG9ueSBQ
+RVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+CgotLSAKQW50aG9ueSBQRVJBUkQKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
