@@ -1,17 +1,18 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 122898: tolerable all pass -
- PUSHED
-Date: Thu, 17 May 2018 16:40:00 +0000
-Message-ID: <osstest-122898-mainreport@xen.org>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [RFC][PATCH] KVM: APPLES can improve the
+ performance of applications and virtualized systems by up to 49%
+Date: Thu, 17 May 2018 18:52:23 +0200
+Message-ID: <88678a872bfdd8d7477c374a2ab1ee9dd9324ec0.camel__8731.50193733654$1526575905$gmane$org@suse.com>
+References: <CA+scX6kYH8Y9_f1PLcMHG-MD9bhXgd4gGpkJanjzvwwj9L=aOQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1259006745001859623=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=d7+l=ie=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fJLwg-0000Qg-LC
- for xen-devel@lists.xenproject.org; Thu, 17 May 2018 16:40:02 +0000
+ <srs0=qvf9=ie=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1fJM8w-0001iz-CY
+ for xen-devel@lists.xenproject.org; Thu, 17 May 2018 16:52:42 +0000
+In-Reply-To: <CA+scX6kYH8Y9_f1PLcMHG-MD9bhXgd4gGpkJanjzvwwj9L=aOQ@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,48 +21,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Weiwei Jia <harrynjit@gmail.com>, linux-kernel@vger.kernel.org
+Cc: xen-devel@lists.xenproject.org, Weiwei Jia <harryxiyou@gmail.com>, jianchen.shan@gmail.com, kvm@vger.kernel.org, dingxn@gmail.com
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMjg5OCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMjg5OC8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
-ICAgICAgICAgICAgICA4Zjg1M2RiYzA2MzYxNDE2YmIxZmFhNmNhNzcyMWUzOTgyYWRiZjM4CmJh
-c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICBlMWY5MTJjYmY3MTc4Nzk4YjA2
-NDZjN2QwNzUzYjhkNjdlMTM5ZTc1CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjI4ODggIDIwMTgt
-MDUtMTYgMTg6MDI6MDggWiAgICAwIGRheXMKRmFpbGluZyBzaW5jZSAgICAgICAgMTIyODk4ICAy
-MDE4LTA1LTE3IDE1OjAwOjI5IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKVGVzdGluZyBzYW1l
-IHNpbmNlICAgICAgICAgICAgICAgICAgICAgICAgICAobm90IGZvdW5kKSAgICAgICAgIDAgYXR0
-ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgS29u
-cmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQud2lsa0BvcmFjbGUuY29tPgogIE9sZWtzYW5kciBB
-bmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KCmpvYnM6CiB0
-ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJp
-YW5odm0taTM4NiAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgot
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxv
-Z3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25m
-aWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIu
-eGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRz
-LCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVu
-Lm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3Rl
-cgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9i
-O2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAg
-ICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoK
-ClB1c2hpbmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9naXQveGVu
-LmdpdAogICBlMWY5MTJjYmY3Li44Zjg1M2RiYzA2ICA4Zjg1M2RiYzA2MzYxNDE2YmIxZmFhNmNh
-NzcyMWUzOTgyYWRiZjM4IC0+IHNtb2tlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+
+--===============1259006745001859623==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-Rln2LqRGYgWnOYaKsWpQ"
+
+
+--=-Rln2LqRGYgWnOYaKsWpQ
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, 2018-05-12 at 16:27 +0800, Weiwei Jia wrote:
+> We already have a prototype implementation based on KVM (Linux Kernel
+> 3.19.8). Our patch for Linux Kernel 3.19.8 and the paper describing
+> our idea are available in Github repository [1][2][3]. We are pleased
+> to revise our patch in order to merge it into Linux/KVM and XEN. We
+> hope that you can test and adopt our approach/techniques. We are
+> pleased to get some comments/suggestions on the approach and on how
+> the idea can be adopted/tested by Linux/KVM and XEN. Thank you.
+>=20
+To see how this is being handled in Xen currently, I suggest you to
+grep for:
+ ple_gap
+ ple_window
+ SECONDARY_EXEC_PAUSE_LOOP_EXITING
+ EXIT_REASON_PAUSE_INSTRUCTION
+ pauseloop_exits
+
+I am aware of your paper, but I haven't got to being able to read it
+carefully yet. I'll do that (but can't promise when).
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-Rln2LqRGYgWnOYaKsWpQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlr9s0cACgkQFkJ4iaW4
+c+4tjQ//VgJIZVqN6Z5TzS7FkTfoILjNro/0A9ht0LcIaLMgpfRVArXgiEvJhuDJ
+M8PVtW5A7nj/bGRH2TdLgcpszqXzpojtDJmvSbYd/Eeo+HbLk5T/hy+n94ttu2Fc
+5layirUFu84vVzNLseLIuFfNWafPLx8pWCKqLdQtOJQsfi55vgGpC62+mcsjb7Op
+3UcSB9PIeXbuzKDSnUe0x+nIpnOXMJ3v774ENAueHWuYZPhR+I5+/IJzfikUpOJy
+P8kxpJa7fAKkBbBQw3cEK//oWoJcyoI+SnoKBFgkuj1BoEdvByafFwgPu9lave0m
+UeudyDsA//7ua4zaQjTCjOza+pUsglHEmHOhKxZkbT7pqKkpM0c29xvneY8DKKjo
+n4zLIeo2r4hbwT/LqZM96QysJH6EdrhUAPoBjEpIFqwYX6rRfXsGbsXK27cZx2eX
+vWraLTZUplooT1Y8vNpScVUeoJhGUwfnC9V/NaG1wZpHBtpXEMwRkO7g8YDZwmCZ
+vgfTErv7/3L7pPTUB5ygoqrLj15HRSmMzmHhFbgNTr5XikoL6pdZOacg7V0dEvjQ
+IH78HfGAqurFspVbsg28I3yRgtkFD78ozpjlzJzwqvbGYypf2xgHG/nhgQO6atFA
+11YyIX8RDjcwrJ9mKiUfezyl8yu9gzxFTp9iUE8vfuEGUHAUr2g=
+=kKIQ
+-----END PGP SIGNATURE-----
+
+--=-Rln2LqRGYgWnOYaKsWpQ--
+
+
+
+--===============1259006745001859623==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1259006745001859623==--
