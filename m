@@ -1,14 +1,21 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: Test for osstest, features used in Qubes OS
-Date: Thu, 17 May 2018 16:59:22 +0200
-Message-ID: <20180517145922.GA20125@mail-itl>
-References: <20180516215425.GB11683@mail-itl>
- <23293.29942.645249.704280@mariner.uk.xensource.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v3 1/2] xen/PVH: Set up GS segment for stack
+ canary
+Date: Thu, 17 May 2018 09:02:44 -0600
+Message-ID: <5AFD999402000078001C3B29__27257.6680094518$1526569296$gmane$org@prv1-mh.provo.novell.com>
+References: <20180517144723.21585-1-boris.ostrovsky@oracle.com>
+ <20180517144723.21585-2-boris.ostrovsky@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0723993979263142406=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <23293.29942.645249.704280@mariner.uk.xensource.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=rtgu=ie=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fJKQa-0007IB-NB
+ for xen-devel@lists.xenproject.org; Thu, 17 May 2018 15:02:48 +0000
+In-Reply-To: <20180517144723.21585-2-boris.ostrovsky@oracle.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,127 +24,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: xen-devel <xen-devel@lists.xen.org>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0723993979263142406==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="lrZ03NoBR/3+SXJZ"
-Content-Disposition: inline
-
-
---lrZ03NoBR/3+SXJZ
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, May 17, 2018 at 01:26:30PM +0100, Ian Jackson wrote:
-> Marek Marczykowski-G=C3=B3recki writes ("Test for osstest, features used =
-in Qubes OS"):
-> > As discussed some time ago, I'd like to help with adding tests for some
-> > features we use in Qubes OS.
-> >=20
-> > IMO the easiest thing to test is host suspend. You just need to execute
-> > "rtcwake -s 30 -m mem", and see if the host is back to live after ~30s.
-> > Right now I know it works on Xen 4.8, but supposedly is broken on
-> > staging (haven't tested the most recent version).
-> > Next step would be the same while having some domains running.
-> >=20
-> > How the test should look like (where to add this? etc)?
->=20
-> I guess this should be a new
->   ts-host-suspend-test
-> script.
->=20
-> Is it likely that this will depend on non-buggy host firmware ?  If so
-> then we need to make arrangements to test it and only do it on hosts
-> which are not buggy.  In practice this probably means wiring it up to
-> the automatic host examiner.
-
-Yes, probably.
-
-> > Next things would be mostly related to PCI passthrough:
-> >  - PCI passthrough with qemu in stubdomain
-> >  - the same as above, but with Linux-based stubdomain (we need cleanup
-> >    and send patches for that first, probably 4.12 material)
-> >  - guest suspend (recently added libxl_domain_suspend_only), for
-> >    different guest types (PV, PVH, HVM), also with/without PCI device
-> >=20
-> > For this, the machine obviously need to have IOMMU (I assume at least
-> > some of the hardware used in test lab have it), and some spare PCI
-> > device. I use sound card for some of such tests. But testing on USB
-> > controllers would be more useful (from out experience, one of the most
-> > problematic devices for suspend, sadly also lacking FLR or such...).
->=20
-> I doubt any of our x86 machines have sound cards. ...  Just looked at
-> one and it says
->   00:03.0 Audio device: Intel Corporation Xeon E3-1200 v3/4th Gen Core
->   Processor HD Audio Controller (rev 06)
-> which is obviously mad.
->=20
-> I'm pretty sure they all have usb controllers.  Almost all of them
-> have multiple NICs, often on different pci devices, although it is
-> difficult to tell if a NIC not connected to anything is working.
->=20
-> Eg,
->=20
->   02:00.0 Ethernet controller: Intel Corporation I210 Gigabit Network
->   Connection (rev 03)
->=20
->   03:00.0 Ethernet controller: Intel Corporation I210 Gigabit Network
->   Connection (rev 03)
->=20
-> Is there some kind of cheap USB HID, that is interactable-with, which
-> we could plug into each machine's USB port ?  I'm slightly concerned
-> that plugging in a storage device, or connecting the other NIC, might
-> interfere with booting.
-
-I use mass storage for tests... But if you use network boot, it
-shouldn't really interfere, no?
-
-> If you want to get pci passthrough tests working I would suggest
-> testing it with non-stubdom first.  I assume the config etc. is the
-> same, so having got that working, osstest would be able to test it for
-> the stubdom tests too.
-
-Oh, I though there are already tests for that...
-Yes, good idea.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---lrZ03NoBR/3+SXJZ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlr9mMoACgkQ24/THMrX
-1ywUnAf/S30LnmFNbxQFba8P3y+2rbDuV6Amsaf7JQL0uFxFTx0OyW2p+AvaHgFg
-JxXcylHrH9x/4xcMvY9LEl++BPaXigdi6kWyVCOPZg0udbzYqzVKWskJOESZJzb8
-L/uYrJCb6M50ad3OTJU+77hY7GIZKzsw7qenOJFc0DElyinuhK/RzGW1RsJTgxFB
-hGMCJkwxmvq6t1r0XrDAf1ayHc3jZyjY6uqkGjNTdy7UiUMT7o4mgQpvVFNNhG98
-37B8WH3dk2BwpM8LoLs2sreQ+O9nWKKc2n9PO7RpdZmzrPS1636x2WI4F+X1bx5H
-wQVddrjda13yai41WeadjKbIwKSYgw==
-=RZct
------END PGP SIGNATURE-----
-
---lrZ03NoBR/3+SXJZ--
-
-
---===============0723993979263142406==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0723993979263142406==--
+Pj4+IE9uIDE3LjA1LjE4IGF0IDE2OjQ3LCA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+IHdy
+b3RlOgo+IEBAIC02NCw2ICs2Nyw5IEBAIEVOVFJZKHB2aF9zdGFydF94ZW4pCj4gIAltb3YgJWVh
+eCwlZXMKPiAgCW1vdiAlZWF4LCVzcwo+ICAKPiArCW1vdiAkUFZIX0NBTkFSWV9TRUwsJWVheAo+
+ICsJbW92ICVlYXgsJWdzCgpJIGRvdWJ0IHRoaXMgaXMgbmVlZGVkIGZvciA2NC1iaXQgKHlvdSBj
+b3VsZCBlcXVhbGx5IHdlbGwgbG9hZCB6ZXJvIG9yIGxlYXZlCmluIHBsYWNlIHdoYXQncyB0aGVy
+ZSBpbiB0aGF0IGNhc2UpLCBhbmQgbG9hZGluZyB0aGUgc2VsZWN0b3IgYmVmb3JlIHNldHRpbmcK
+dGhlIGJhc2UgYWRkcmVzcyBpbiB0aGUgZGVzY3JpcHRvciB3b24ndCBoYXZlIHRoZSBpbnRlbmRl
+ZCBlZmZlY3QuCgo+IEBAIC0xNTAsOSArMTcwLDEyIEBAIGdkdF9zdGFydDoKPiAgCS5xdWFkIEdE
+VF9FTlRSWSgweGMwOWEsIDAsIDB4ZmZmZmYpIC8qIF9fS0VSTkVMX0NTICovCj4gICNlbmRpZgo+
+ICAJLnF1YWQgR0RUX0VOVFJZKDB4YzA5MiwgMCwgMHhmZmZmZikgLyogX19LRVJORUxfRFMgKi8K
+PiArCS5xdWFkIEdEVF9FTlRSWSgweDQwOTAsIDAsIDB4MTgpICAgIC8qIFBWSF9DQU5BUllfU0VM
+ICovCj4gIGdkdF9lbmQ6Cj4gIAo+IC0JLmJhbGlnbiA0Cj4gKwkuYmFsaWduIDE2Cj4gK2NhbmFy
+eToKPiArCS5maWxsIDI0LCAxLCAwCgpUaGlzIGlzIHRvbyBsaXR0bGUgc3BhY2UgZm9yIDY0LWJp
+dCBhZmFpY3QgKHRoZSBjYW5hcnkgbGl2ZXMgYXQgb2Zmc2V0IDQwIHRoZXJlCmlmIEkgY2FuIHRy
+dXN0IGFzbS9wcm9jZXNzb3IuaCkuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
