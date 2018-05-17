@@ -1,18 +1,16 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [RFC][PATCH] KVM: APPLES can improve the
- performance of applications and virtualized systems by up to 49%
-Date: Thu, 17 May 2018 18:52:23 +0200
-Message-ID: <88678a872bfdd8d7477c374a2ab1ee9dd9324ec0.camel__8731.50193733654$1526575905$gmane$org@suse.com>
-References: <CA+scX6kYH8Y9_f1PLcMHG-MD9bhXgd4gGpkJanjzvwwj9L=aOQ@mail.gmail.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [distros-debian-wheezy test] 74722: all pass
+Date: Thu, 17 May 2018 18:00:29 +0100
+Message-ID: <osstest-74722-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1259006745001859623=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=qvf9=ie=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1fJM8w-0001iz-CY
- for xen-devel@lists.xenproject.org; Thu, 17 May 2018 16:52:42 +0000
-In-Reply-To: <CA+scX6kYH8Y9_f1PLcMHG-MD9bhXgd4gGpkJanjzvwwj9L=aOQ@mail.gmail.com>
+ <srs0=kpnb=ie=xenproject.org=prvs=6684fd169=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1fJMGZ-0002b0-OY
+ for xen-devel@lists.xenproject.org; Thu, 17 May 2018 17:00:35 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,81 +19,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Weiwei Jia <harrynjit@gmail.com>, linux-kernel@vger.kernel.org
-Cc: xen-devel@lists.xenproject.org, Weiwei Jia <harryxiyou@gmail.com>, jianchen.shan@gmail.com, kvm@vger.kernel.org, dingxn@gmail.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1259006745001859623==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-Rln2LqRGYgWnOYaKsWpQ"
-
-
---=-Rln2LqRGYgWnOYaKsWpQ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, 2018-05-12 at 16:27 +0800, Weiwei Jia wrote:
-> We already have a prototype implementation based on KVM (Linux Kernel
-> 3.19.8). Our patch for Linux Kernel 3.19.8 and the paper describing
-> our idea are available in Github repository [1][2][3]. We are pleased
-> to revise our patch in order to merge it into Linux/KVM and XEN. We
-> hope that you can test and adopt our approach/techniques. We are
-> pleased to get some comments/suggestions on the approach and on how
-> the idea can be adopted/tested by Linux/KVM and XEN. Thank you.
->=20
-To see how this is being handled in Xen currently, I suggest you to
-grep for:
- ple_gap
- ple_window
- SECONDARY_EXEC_PAUSE_LOOP_EXITING
- EXIT_REASON_PAUSE_INSTRUCTION
- pauseloop_exits
-
-I am aware of your paper, but I haven't got to being able to read it
-carefully yet. I'll do that (but can't promise when).
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-Rln2LqRGYgWnOYaKsWpQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlr9s0cACgkQFkJ4iaW4
-c+4tjQ//VgJIZVqN6Z5TzS7FkTfoILjNro/0A9ht0LcIaLMgpfRVArXgiEvJhuDJ
-M8PVtW5A7nj/bGRH2TdLgcpszqXzpojtDJmvSbYd/Eeo+HbLk5T/hy+n94ttu2Fc
-5layirUFu84vVzNLseLIuFfNWafPLx8pWCKqLdQtOJQsfi55vgGpC62+mcsjb7Op
-3UcSB9PIeXbuzKDSnUe0x+nIpnOXMJ3v774ENAueHWuYZPhR+I5+/IJzfikUpOJy
-P8kxpJa7fAKkBbBQw3cEK//oWoJcyoI+SnoKBFgkuj1BoEdvByafFwgPu9lave0m
-UeudyDsA//7ua4zaQjTCjOza+pUsglHEmHOhKxZkbT7pqKkpM0c29xvneY8DKKjo
-n4zLIeo2r4hbwT/LqZM96QysJH6EdrhUAPoBjEpIFqwYX6rRfXsGbsXK27cZx2eX
-vWraLTZUplooT1Y8vNpScVUeoJhGUwfnC9V/NaG1wZpHBtpXEMwRkO7g8YDZwmCZ
-vgfTErv7/3L7pPTUB5ygoqrLj15HRSmMzmHhFbgNTr5XikoL6pdZOacg7V0dEvjQ
-IH78HfGAqurFspVbsg28I3yRgtkFD78ozpjlzJzwqvbGYypf2xgHG/nhgQO6atFA
-11YyIX8RDjcwrJ9mKiUfezyl8yu9gzxFTp9iUE8vfuEGUHAUr2g=
-=kKIQ
------END PGP SIGNATURE-----
-
---=-Rln2LqRGYgWnOYaKsWpQ--
-
-
-
---===============1259006745001859623==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+ZmxpZ2h0IDc0NzIyIGRpc3Ryb3MtZGViaWFuLXdoZWV6eSByZWFsIFtyZWFsXQpodHRwOi8vb3Nz
+dGVzdC54cy5jaXRyaXRlLm5ldC9+b3NzdGVzdC90ZXN0bG9ncy9sb2dzLzc0NzIyLwoKUGVyZmVj
+dCA6LSkKQWxsIHRlc3RzIGluIHRoaXMgZmxpZ2h0IHBhc3NlZCBhcyByZXF1aXJlZApiYXNlbGlu
+ZSB2ZXJzaW9uOgogZmxpZ2h0ICAgICAgICAgICAgICAgNzQ3MDIKCmpvYnM6CiBidWlsZC1hbWQ2
+NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhm
+LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWFtZDY0LXdoZWV6eS1uZXRib290LXB2
+Z3J1YiAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1pMzg2LXdoZWV6
+eS1uZXRib290LXB2Z3J1YiAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
+Mzg2LWFtZDY0LXdoZWV6eS1uZXRib290LXB5Z3J1YiAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LWFtZDY0LWFtZDY0LWkzODYtd2hlZXp5LW5ldGJvb3QtcHlncnViICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnhzLmNpdHJp
+dGUubmV0CmxvZ3M6IC9ob21lL29zc3Rlc3QvbG9ncwppbWFnZXM6IC9ob21lL29zc3Rlc3QvaW1h
+Z2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDov
+L29zc3Rlc3QueHMuY2l0cml0ZS5uZXQvfm9zc3Rlc3QvdGVzdGxvZ3MvbG9ncwoKVGVzdCBoYXJu
+ZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW5zb3VyY2UuY29t
+L2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1c2ggbm90IGFwcGxpY2FibGUuCgoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1259006745001859623==--
