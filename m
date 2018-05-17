@@ -1,14 +1,23 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: how to recognize in libxl that a domU has qemu-xen
- attached?
-Date: Thu, 17 May 2018 14:55:10 +0200
-Message-ID: <f4845c2b-d967-7b3b-b567-d83e18fb6f66@suse.com>
-References: <20180517143352.1227b39e.olaf@aepfle.de>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH v3 2/2] Input: xen-kbdfront - allow better
+ run-time configuration
+Date: Thu, 17 May 2018 09:08:59 -0400
+Message-ID: <d35b6720-62e3-e9d4-dbe5-a04d75dde0b7__29002.4762544364$1526562282$gmane$org@oracle.com>
+References: <20180514144029.16019-1-andr2000@gmail.com>
+ <20180514144029.16019-2-andr2000@gmail.com> <20180516171528.GD21971@dtor-ws>
+ <e9882c52-3641-7c32-1f64-dd9c4f35de5f@gmail.com>
+ <20180516210817.GF21971@dtor-ws>
+ <7cecb5d1-5cd3-b63d-d6eb-d1e2dfba9ca6@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180517143352.1227b39e.olaf@aepfle.de>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=o0py=ie=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1fJIbR-0003yE-VD
+ for xen-devel@lists.xenproject.org; Thu, 17 May 2018 13:05:53 +0000
+In-Reply-To: <7cecb5d1-5cd3-b63d-d6eb-d1e2dfba9ca6@gmail.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -18,28 +27,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xen.org
+To: Oleksandr Andrushchenko <andr2000@gmail.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: jgross@suse.com, lyan@suse.com, andrii_chepurnyi@epam.com, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, linux-input@vger.kernel.org, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTcvMDUvMTggMTQ6MzMsIE9sYWYgSGVyaW5nIHdyb3RlOgo+IEluIHRoZSBvdGhlciB0aHJl
-YWQgYWJvdXQgdGhlIHVuc29sdmVkIG1pZ3JhdGlvbiBidWdzIGluIHFlbXUteGVuIGl0IGJlY2Ft
-ZSBjbGVhciB0aGF0ICJ4ZW4tc2F2ZS1kZXZpY2VzLXN0YXRlIiBtdXN0IG5vdCBvbmx5IGJlIGNh
-bGxlZCBmb3IgSFZNLCBidXQgZm9yIGV2ZXJ5IGRvbVUgdGhhdCBoYXMgcWVtdS14ZW4gYXR0YWNo
-ZWQgdG8gaXQuIEkgd29uZGVyIGhvdyB0byBjaGVjayBmb3IgdGhhdCBmYWN0IGZyb20gdGhlIG1p
-Z3JhdGlvbiBjb2RlLiBXaGlsZSBpdCBjYW4gY29udGludWUgdG8gcmVseSBvbiBMSUJYTF9ET01B
-SU5fVFlQRV9IVk0gbWFrZSB0aGF0IGNhbGwsIGZvciAgTElCWExfRE9NQUlOX1RZUEVfUFYgaXQg
-aXMgYXBwYXJlbnRseSBub3QgdGhhdCBlYXN5LiBJcyBsaWJ4bF9fbmVlZF94ZW5wdl9xZW11IHRo
-ZSBBUEkgdG8gdXNlIGZvciB0aGUgZGVjaXNpb24gaWYgbGlieGxfX3FtcF9zdG9wL2xpYnhsX19x
-bXBfc2F2ZS9saWJ4bF9fcW1wX3Jlc3VtZSBoYXZlIHRvIGJlIGNhbGxlZCBkdXJpbmcgbWlncmF0
-aW9uPwoKbGlieGxfX25lZWRfeGVucHZfcWVtdSgpIGlzIHVzZWQgdG8gZGV0ZXJtaW5lIHdoZXRo
-ZXIgYSBwdiBkb21haW4gbmVlZHMKYSBxZW11IHByb2Nlc3MgZm9yIGF0IGxlYXN0IG9uZSBiYWNr
-ZW5kLiBUbyBjaGVjayBmb3IgdGhlIGNvcnJlY3QgcWVtdQp0eXBlIHlvdSBuZWVkIHRvIGNhbGwg
-bGlieGxfX2RldmljZV9tb2RlbF92ZXJzaW9uX3J1bm5pbmcoKSBhbmQgdGVzdCB0aGUKcmV0dXJu
-IHZhbHVlIGJlaW5nIExJQlhMX0RFVklDRV9NT0RFTF9WRVJTSU9OX1FFTVVfWEVOLiBTbyB5b3Ug
-bmVlZDoKCmlmIChsaWJ4bF9fbmVlZF94ZW5wdl9xZW11KGdjLCBkX2NvbmZpZykgJiYKICAgIGxp
-YnhsX19kZXZpY2VfbW9kZWxfdmVyc2lvbl9ydW5uaW5nKGdjLCBkb21pZCkgPT0KICAgICAgICBM
-SUJYTF9ERVZJQ0VfTU9ERUxfVkVSU0lPTl9RRU1VX1hFTikKICAgIGxpYnhsX19xbXBfc3RvcCgu
-Li4pOwoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+T24gMDUvMTcvMjAxOCAwMTozMSBBTSwgT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gd3JvdGU6Cj4g
+SSB3aWxsIGdvIHdpdGggdGhlIGNoYW5nZSB5b3Ugc3VnZ2VzdGVkIGFuZAo+IEknbGwgc2VuZCB2
+NCB0b21vcnJvdyB0aGVuLgoKCgpQbGVhc2UgbWFrZSBzdXJlIHlvdXIgY2hhbmdlcyB0byBrYmRp
+Zi5oIGFyZSBpbiBYZW4gZmlyc3QuIEkgYmVsaWV2ZSB5b3UKc3VibWl0dGVkIGEgcGF0Y2ggdGhl
+cmUgYnV0IEkgZG9uJ3Qgc2VlIGl0IGluIHRoZSBzdGFnaW5nIHRyZWUgeWV0LgoKLWJvcmlzCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
