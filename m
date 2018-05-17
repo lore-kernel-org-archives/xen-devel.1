@@ -1,15 +1,15 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: how to recognize in libxl that a domU has qemu-xen
- attached?
-Date: Thu, 17 May 2018 17:09:33 +0200
-Message-ID: <20180517170933.17ef54dc.olaf@aepfle.de>
-References: <20180517143352.1227b39e.olaf@aepfle.de>
- <f4845c2b-d967-7b3b-b567-d83e18fb6f66@suse.com>
- <20180517165400.6b9b9825.olaf@aepfle.de>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: Test for osstest, features used in Qubes OS
+Date: Thu, 17 May 2018 16:12:09 +0100
+Message-ID: <23293.39881.793095.966171@mariner.uk.xensource.com>
+References: <20180516215425.GB11683@mail-itl>
+ <23293.29942.645249.704280@mariner.uk.xensource.com>
+ <20180517145922.GA20125@mail-itl>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6707654393760656354=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180517165400.6b9b9825.olaf@aepfle.de>
+In-Reply-To: <20180517145922.GA20125@mail-itl>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,54 +18,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xen.org
+To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+Cc: xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============6707654393760656354==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_//bmZQJ8Evd4UzIBk894iZ5L"; protocol="application/pgp-signature"
-
---Sig_//bmZQJ8Evd4UzIBk894iZ5L
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 17 May 2018 16:54:00 +0200
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> Thanks. Too bad, d_config is not available in that context. It is probabl=
-y known somewhere by the callers. I guess such caller needs to pass a bool =
-down to suspend/resume.
-
-It seems nothing inside libxl knows about libxl_domain_config, only callers=
- of the public libxl_domain_suspend API do actually create it once. AFAICS =
-only the LIBXL_SUSPEND_* 'flags' would allow to pass something down to the =
-relevant code. But the resumer may not know about them...
-
-Olaf
-
---Sig_//bmZQJ8Evd4UzIBk894iZ5L
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWv2bLQAKCRBdQqD6ppg2
-fhu+AKCalqMnhl5/JVLuwjMkuvAysEuMqQCfV3RUhs7K1vg/o7YNDjiLhhIZcHs=
-=f0/v
------END PGP SIGNATURE-----
-
---Sig_//bmZQJ8Evd4UzIBk894iZ5L--
-
-
---===============6707654393760656354==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6707654393760656354==--
+TWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyaXRlcyAoIlJlOiBUZXN0IGZvciBvc3N0ZXN0
+LCBmZWF0dXJlcyB1c2VkIGluIFF1YmVzIE9TIik6Cj4gT24gVGh1LCBNYXkgMTcsIDIwMTggYXQg
+MDE6MjY6MzBQTSArMDEwMCwgSWFuIEphY2tzb24gd3JvdGU6Cj4gPiBJcyBpdCBsaWtlbHkgdGhh
+dCB0aGlzIHdpbGwgZGVwZW5kIG9uIG5vbi1idWdneSBob3N0IGZpcm13YXJlID8gIElmIHNvCj4g
+PiB0aGVuIHdlIG5lZWQgdG8gbWFrZSBhcnJhbmdlbWVudHMgdG8gdGVzdCBpdCBhbmQgb25seSBk
+byBpdCBvbiBob3N0cwo+ID4gd2hpY2ggYXJlIG5vdCBidWdneS4gIEluIHByYWN0aWNlIHRoaXMg
+cHJvYmFibHkgbWVhbnMgd2lyaW5nIGl0IHVwIHRvCj4gPiB0aGUgYXV0b21hdGljIGhvc3QgZXhh
+bWluZXIuCj4gCj4gWWVzLCBwcm9iYWJseS4KClRoYXQncyBub3QgZW50aXJlbHkgdHJpdmlhbCB0
+aGVuLCBlc3BlY2lhbGx5IGZvciB5b3UsIHVubGVzcyB5b3Ugd2FudAp0byBzZXQgdXAgeW91ciBv
+d24gb3NzdGVzdCBwcm9kdWN0aW9uIGluc3RhbmNlLiAgSG93ZXZlciwgSSBjYW4KcHJvYmFibHkg
+ZG8gdGhlIG9zc3Rlc3QtbWFjaGluZXJ5IHdvcmsgaWYgeW91IHdpbGwgaGVscCBkZWJ1ZyBpdCwK
+cmV2aWV3IGxvZ3MsIHRlbGwgbWUgd2hhdCB0byBkbyBuZXh0LCBldGMuIDotKS4KCj4gPiBJcyB0
+aGVyZSBzb21lIGtpbmQgb2YgY2hlYXAgVVNCIEhJRCwgdGhhdCBpcyBpbnRlcmFjdGFibGUtd2l0
+aCwgd2hpY2gKPiA+IHdlIGNvdWxkIHBsdWcgaW50byBlYWNoIG1hY2hpbmUncyBVU0IgcG9ydCA/
+ICBJJ20gc2xpZ2h0bHkgY29uY2VybmVkCj4gPiB0aGF0IHBsdWdnaW5nIGluIGEgc3RvcmFnZSBk
+ZXZpY2UsIG9yIGNvbm5lY3RpbmcgdGhlIG90aGVyIE5JQywgbWlnaHQKPiA+IGludGVyZmVyZSB3
+aXRoIGJvb3RpbmcuCj4gCj4gSSB1c2UgbWFzcyBzdG9yYWdlIGZvciB0ZXN0cy4uLiBCdXQgaWYg
+eW91IHVzZSBuZXR3b3JrIGJvb3QsIGl0Cj4gc2hvdWxkbid0IHJlYWxseSBpbnRlcmZlcmUsIG5v
+PwoKV2UgZG8gYm90aCBuZXR3b3JrIGJvb3QgYW5kIGRpc2sgYm9vdC4gIEkgdGhpbmsgdGhlIEJJ
+T1MgZGlzayBib290IGhhcwp0byBjb250aW51ZSB0byB3b3JrIGFuZCBib290IHRoZSBIREQuCgo+
+ID4gSWYgeW91IHdhbnQgdG8gZ2V0IHBjaSBwYXNzdGhyb3VnaCB0ZXN0cyB3b3JraW5nIEkgd291
+bGQgc3VnZ2VzdAo+ID4gdGVzdGluZyBpdCB3aXRoIG5vbi1zdHViZG9tIGZpcnN0LiAgSSBhc3N1
+bWUgdGhlIGNvbmZpZyBldGMuIGlzIHRoZQo+ID4gc2FtZSwgc28gaGF2aW5nIGdvdCB0aGF0IHdv
+cmtpbmcsIG9zc3Rlc3Qgd291bGQgYmUgYWJsZSB0byB0ZXN0IGl0IGZvcgo+ID4gdGhlIHN0dWJk
+b20gdGVzdHMgdG9vLgo+IAo+IE9oLCBJIHRob3VnaCB0aGVyZSBhcmUgYWxyZWFkeSB0ZXN0cyBm
+b3IgdGhhdC4uLgoKVGhlcmUgYXJlIG5vIFBDSSBwYXNzdGhyb3VnaCB0ZXN0cyBhdCBhbGwuICBG
+b3IgYSB3aGlsZSB3ZSBoYWQgc29tZQpTUklPViBOSUMgdGVzdHMgd2hpY2ggd2VyZSByZXF1ZXN0
+ZWQgYnkgSW50ZWwuICBCdXQgdGhleSBhbHdheXMgZmFpbGVkCmdpdmluZyBrZXJuZWwgc3RhY2sg
+ZHVtcHMuICBXZSBrZXB0IHBva2luZyBJbnRlbCB0byBnZXQgdGhlbSB0byBmaXgKdGhlbSwgb3Ig
+dGVsbCB1cyBob3cgdGhlIHRlc3RzIHdlcmUgd3JvbmcsIGJ1dCB0byBubyBhdmFpbC4gIFNvIHdl
+CmRyb3BwZWQgdGhlbS4KClNvIGFueSB3b3JrIGluIHRoaXMgYXJlYSB3b3VsZCBiZSBncmVhdGx5
+IGFwcHJlY2lhdGVkIQoKSWFuLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
