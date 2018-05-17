@@ -1,11 +1,21 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: how to recognize in libxl that a domU has qemu-xen
- attached?
-Date: Thu, 17 May 2018 14:33:52 +0200
-Message-ID: <20180517143352.1227b39e.olaf@aepfle.de>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [OSSTEST PATCH 06/10] Perl @INC path: fix a few
+ more scripts to use BEGIN
+Date: Thu, 17 May 2018 13:53:33 +0100
+Message-ID: <20180517125333.dso2qkmcgukmy7bt@MacBook-Pro-de-Roger.local>
+References: <1526555819-29883-1-git-send-email-ian.jackson@eu.citrix.com>
+ <1526555819-29883-7-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8026866371658741577=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=xtgg=ie=citrix.com=prvs=668872ca3=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fJIPc-0002sP-Ox
+ for xen-devel@lists.xenproject.org; Thu, 17 May 2018 12:53:40 +0000
+Content-Disposition: inline
+In-Reply-To: <1526555819-29883-7-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,50 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============8026866371658741577==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/OPqqG1halUwS+tnx=rc2Di3"; protocol="application/pgp-signature"
-
---Sig_/OPqqG1halUwS+tnx=rc2Di3
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-In the other thread about the unsolved migration bugs in qemu-xen it became=
- clear that "xen-save-devices-state" must not only be called for HVM, but f=
-or every domU that has qemu-xen attached to it. I wonder how to check for t=
-hat fact from the migration code. While it can continue to rely on LIBXL_DO=
-MAIN_TYPE_HVM make that call, for  LIBXL_DOMAIN_TYPE_PV it is apparently no=
-t that easy. Is libxl__need_xenpv_qemu the API to use for the decision if l=
-ibxl__qmp_stop/libxl__qmp_save/libxl__qmp_resume have to be called during m=
-igration?
-
-Olaf
-
---Sig_/OPqqG1halUwS+tnx=rc2Di3
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWv12sAAKCRBdQqD6ppg2
-foiKAKDH/6VaWtN5FY8VgkV/RpAcilTzqACg6QjeHXimxjnDjokXyhfsto+0wzg=
-=Jh3y
------END PGP SIGNATURE-----
-
---Sig_/OPqqG1halUwS+tnx=rc2Di3--
-
-
---===============8026866371658741577==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8026866371658741577==--
+T24gVGh1LCBNYXkgMTcsIDIwMTggYXQgMTI6MTY6NTVQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
+dGU6Cj4gVGhyZWUgbW9yZSBmaWxlcyB3aGljaCBtaXNzZWQgb3V0IG9uCj4gICBkZWE5ODdjNWFi
+MTEgIlBFUkxMSUIsIEBJTkM6IFVzZSBCRUdJTiB7IH0iCj4gCj4gU2lnbmVkLW9mZi1ieTogSWFu
+IEphY2tzb24gPElhbi5KYWNrc29uQGV1LmNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogUm9nZXIg
+UGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
