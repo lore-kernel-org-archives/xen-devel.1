@@ -1,21 +1,15 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [OSSTEST PATCH 06/10] Perl @INC path: fix a few
- more scripts to use BEGIN
-Date: Thu, 17 May 2018 13:53:33 +0100
-Message-ID: <20180517125333.dso2qkmcgukmy7bt@MacBook-Pro-de-Roger.local>
-References: <1526555819-29883-1-git-send-email-ian.jackson@eu.citrix.com>
- <1526555819-29883-7-git-send-email-ian.jackson@eu.citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: how to recognize in libxl that a domU has qemu-xen
+ attached?
+Date: Thu, 17 May 2018 14:55:10 +0200
+Message-ID: <f4845c2b-d967-7b3b-b567-d83e18fb6f66@suse.com>
+References: <20180517143352.1227b39e.olaf@aepfle.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xtgg=ie=citrix.com=prvs=668872ca3=roger.pau@srs-us1.protection.inumbo.net>)
- id 1fJIPc-0002sP-Ox
- for xen-devel@lists.xenproject.org; Thu, 17 May 2018 12:53:40 +0000
-Content-Disposition: inline
-In-Reply-To: <1526555819-29883-7-git-send-email-ian.jackson@eu.citrix.com>
+In-Reply-To: <20180517143352.1227b39e.olaf@aepfle.de>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,15 +18,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: xen-devel@lists.xenproject.org
+To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBNYXkgMTcsIDIwMTggYXQgMTI6MTY6NTVQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
-dGU6Cj4gVGhyZWUgbW9yZSBmaWxlcyB3aGljaCBtaXNzZWQgb3V0IG9uCj4gICBkZWE5ODdjNWFi
-MTEgIlBFUkxMSUIsIEBJTkM6IFVzZSBCRUdJTiB7IH0iCj4gCj4gU2lnbmVkLW9mZi1ieTogSWFu
-IEphY2tzb24gPElhbi5KYWNrc29uQGV1LmNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogUm9nZXIg
-UGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTcvMDUvMTggMTQ6MzMsIE9sYWYgSGVyaW5nIHdyb3RlOgo+IEluIHRoZSBvdGhlciB0aHJl
+YWQgYWJvdXQgdGhlIHVuc29sdmVkIG1pZ3JhdGlvbiBidWdzIGluIHFlbXUteGVuIGl0IGJlY2Ft
+ZSBjbGVhciB0aGF0ICJ4ZW4tc2F2ZS1kZXZpY2VzLXN0YXRlIiBtdXN0IG5vdCBvbmx5IGJlIGNh
+bGxlZCBmb3IgSFZNLCBidXQgZm9yIGV2ZXJ5IGRvbVUgdGhhdCBoYXMgcWVtdS14ZW4gYXR0YWNo
+ZWQgdG8gaXQuIEkgd29uZGVyIGhvdyB0byBjaGVjayBmb3IgdGhhdCBmYWN0IGZyb20gdGhlIG1p
+Z3JhdGlvbiBjb2RlLiBXaGlsZSBpdCBjYW4gY29udGludWUgdG8gcmVseSBvbiBMSUJYTF9ET01B
+SU5fVFlQRV9IVk0gbWFrZSB0aGF0IGNhbGwsIGZvciAgTElCWExfRE9NQUlOX1RZUEVfUFYgaXQg
+aXMgYXBwYXJlbnRseSBub3QgdGhhdCBlYXN5LiBJcyBsaWJ4bF9fbmVlZF94ZW5wdl9xZW11IHRo
+ZSBBUEkgdG8gdXNlIGZvciB0aGUgZGVjaXNpb24gaWYgbGlieGxfX3FtcF9zdG9wL2xpYnhsX19x
+bXBfc2F2ZS9saWJ4bF9fcW1wX3Jlc3VtZSBoYXZlIHRvIGJlIGNhbGxlZCBkdXJpbmcgbWlncmF0
+aW9uPwoKbGlieGxfX25lZWRfeGVucHZfcWVtdSgpIGlzIHVzZWQgdG8gZGV0ZXJtaW5lIHdoZXRo
+ZXIgYSBwdiBkb21haW4gbmVlZHMKYSBxZW11IHByb2Nlc3MgZm9yIGF0IGxlYXN0IG9uZSBiYWNr
+ZW5kLiBUbyBjaGVjayBmb3IgdGhlIGNvcnJlY3QgcWVtdQp0eXBlIHlvdSBuZWVkIHRvIGNhbGwg
+bGlieGxfX2RldmljZV9tb2RlbF92ZXJzaW9uX3J1bm5pbmcoKSBhbmQgdGVzdCB0aGUKcmV0dXJu
+IHZhbHVlIGJlaW5nIExJQlhMX0RFVklDRV9NT0RFTF9WRVJTSU9OX1FFTVVfWEVOLiBTbyB5b3Ug
+bmVlZDoKCmlmIChsaWJ4bF9fbmVlZF94ZW5wdl9xZW11KGdjLCBkX2NvbmZpZykgJiYKICAgIGxp
+YnhsX19kZXZpY2VfbW9kZWxfdmVyc2lvbl9ydW5uaW5nKGdjLCBkb21pZCkgPT0KICAgICAgICBM
+SUJYTF9ERVZJQ0VfTU9ERUxfVkVSU0lPTl9RRU1VX1hFTikKICAgIGxpYnhsX19xbXBfc3RvcCgu
+Li4pOwoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
