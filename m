@@ -1,17 +1,21 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: Test for osstest, features used in Qubes OS
-Date: Fri, 18 May 2018 17:44:10 +0200
-Message-ID: <20180518154410.GD11683@mail-itl>
-References: <20180516215425.GB11683@mail-itl>
- <23293.29942.645249.704280@mariner.uk.xensource.com>
- <20180517145922.GA20125@mail-itl>
- <23293.39881.793095.966171@mariner.uk.xensource.com>
- <333a22af-9b93-4460-12f7-b848e8887488@eikelenboom.it>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH for-next 4/5] tools: load IPXE from
+ standalone file
+Date: Fri, 18 May 2018 09:49:07 -0600
+Message-ID: <5AFEF5F302000078001C424A@prv1-mh.provo.novell.com>
+References: <20180515182243.3339-1-wei.liu2@citrix.com>
+ <20180515182243.3339-5-wei.liu2@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3475864019895168174=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <333a22af-9b93-4460-12f7-b848e8887488@eikelenboom.it>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=ji1r=if=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fJhcz-0001td-1B
+ for xen-devel@lists.xenproject.org; Fri, 18 May 2018 15:49:09 +0000
+In-Reply-To: <20180515182243.3339-5-wei.liu2@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,140 +24,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Sander Eikelenboom <linux@eikelenboom.it>
-Cc: Ian Jackson <ian.jackson@citrix.com>, xen-devel <xen-devel@lists.xen.org>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3475864019895168174==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="PuGuTyElPB9bOcsM"
-Content-Disposition: inline
-
-
---PuGuTyElPB9bOcsM
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, May 17, 2018 at 08:00:38PM +0200, Sander Eikelenboom wrote:
-> Marek / Ian,
->=20
-> Nice to see PCI-passthrough getting some attention again.
->=20
-> On 17/05/18 17:12, Ian Jackson wrote:
-> > Marek Marczykowski-G=C3=B3recki writes ("Re: Test for osstest, features=
- used in Qubes OS"):
-> >> On Thu, May 17, 2018 at 01:26:30PM +0100, Ian Jackson wrote:
-> >>> Is there some kind of cheap USB HID, that is interactable-with, which
-> >>> we could plug into each machine's USB port ?  I'm slightly concerned
-> >>> that plugging in a storage device, or connecting the other NIC, might
-> >>> interfere with booting.
-> >>
-> >> I use mass storage for tests... But if you use network boot, it
-> >> shouldn't really interfere, no?
-> >=20
-> > We do both network boot and disk boot.  I think the BIOS disk boot has
-> > to continue to work and boot the HDD.
-
-In fact, using any device should be enough for the start. USB mouse for
-example. Just reading USB descriptor involve some communication with the
-controller, so it should be some indication about its state.
-
-> As a user of pci-passthrough for quite some time and reporting some pci-p=
-assthrough bugs in the past,
-> I do have some comments:
->=20
-> - First of all it would be very nice to get some autotesting :).
-> - But if you want to thoroughly test pci-passthrough,=20
->   it will be far from easy since there is quite a multi-dimensional suppo=
-rt matrix
->   (I'm not implying that everything should be done or it won't be valuabl=
-e if any is missing,
->    it's only meant for reference):
->   1) Guest side implementation:=20
->      - PV guest (pcifront)
->      - HVM (qemu-traditional)=20
->      - HVM (qemu-xen)=20
->      - HVM (qemu-upstream)=20
->      - perhaps PVH support for pci passthrough coming around the corner.
->=20
->   2) (Un)Binding method to pciback:
->      - binding pci devices to pciback on host boot (command line)=20
->      - de/re/unbinding devices from dom0 while running.
-> =20
->   3) (Un)binding to guest:
->      - On guest start (guest.cfg pci=3D[...])
->      - After the guest has been started with 'xl pci-*' commands
->   3) Device interrupts: legacy versus MSI versus MSI-X
->   4) Other pci device features: roms, BAR sizes, etc.
->   5) AMD versus Intel IOMMU
->=20
-> From the past reports, I know (1) and (3) did matter (problems being isol=
-ated to one of these variants only).
-
-Yes, that's right, my experience is similar in that matter. Especially
-point 3 is tricky/problematic, as some devices (or rather: drivers)
-doesn't correctly fallback to legacy interrupts if MSI/MSI-X isn't
-available.
-So, the ideal test should check those things too - if the guest driver
-really use what it's expected to use. But lets start with something
-first. I don't know how osstest handle it yet, but I'd expect adding
-more guest configurations to run the same test on should be easy.
-
-> As for restarting guests and reassigning pci-devices again to other guest=
-s the current pciback reset support lacks
-> the bus-reset patches at present in upstream linux kernels. Passthrough o=
-f AMD Radeon graphics adapters works only one
-> time without it (if you stop and restart a guest it doesn't work anymore =
-and you need to reboot the host).=20
-> With the bus-reset patches (which have been posted to the list and seem t=
-o be in both Qubes and Xenserver=20
-> in some form but not in upstream linux). Someone from Oracle had picked t=
-hem up to get them upstream some time ago,
-> but that effort seems to have stalled.
-
-Can you point specifically what patches are you talking about? In Qubes
-in most cases device reset is handled by libvirt...
-
-> The code in libxl seems to be quite messy for pci-passthrough especially =
-for handling all the guest side implementations (1)
-> and xenstore interactions that go with it (or don't for qemu).
->=20
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---PuGuTyElPB9bOcsM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlr+9MoACgkQ24/THMrX
-1yxwrAgAlJqvMbwQXS/jkp/4zT3bTYZ76pzjgkqW+MDpm6Kp5MuDpre20uFI8G31
-WDiKW8wKz4FPbYFmWLW7Kf4nvB9juCxxSd2uN7Y6c9oeHlMqtTTVCVXcC9BX0DLg
-uZn/fwnWCNyJVV5lLjBDmXk/RSjtgbi6vXGiUgKPLsadqMQZqUbEF5Zg6Ov0Y84z
-ksEWJKikKo+NBrNsBAKVtWwJgqxaUhjztE50i9f8gZPejaM/LGfxWr6dvbs+yuXZ
-ZMlVS82pHkQFS8yuy4pUMRyEj67O+FgHUd8R5gk0WtAcUiLkTDZl03eiUaFmQgoV
-1hu6Y3aIEpUB74q5An7J0Ftog+TIJQ==
-=zTBu
------END PGP SIGNATURE-----
-
---PuGuTyElPB9bOcsM--
-
-
---===============3475864019895168174==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3475864019895168174==--
+Pj4+IE9uIDE1LjA1LjE4IGF0IDIwOjIyLCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+QEAgLTk1LDEzICs5NywxNyBAQCBzdGF0aWMgdm9pZCByb21iaW9zX2xvYWRfcm9tcyh2b2lkKQo+
+ICAgICAgZXRoZXJib290X3BoeXNfYWRkciA9IFZHQUJJT1NfUEhZU0lDQUxfQUREUkVTUyArIHZn
+YWJpb3Nfc3o7Cj4gICAgICBpZiAoIGV0aGVyYm9vdF9waHlzX2FkZHIgPCBPUFRJT05ST01fUEhZ
+U0lDQUxfQUREUkVTUyApCj4gICAgICAgICAgZXRoZXJib290X3BoeXNfYWRkciA9IE9QVElPTlJP
+TV9QSFlTSUNBTF9BRERSRVNTOwo+IC0gICAgZXRoZXJib290X3N6ID0gc2Nhbl9ldGhlcmJvb3Rf
+bmljKE9QVElPTlJPTV9QSFlTSUNBTF9FTkQsCj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgZXRoZXJib290X3BoeXNfYWRkciwKPiAtICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBldGhlcmJvb3QpOwo+ICAKPiAtICAgIG9wdGlvbl9yb21fcGh5c19h
+ZGRyID0gZXRoZXJib290X3BoeXNfYWRkciArIGV0aGVyYm9vdF9zejsKPiAtICAgIG9wdGlvbl9y
+b21fc3ogPSBwY2lfbG9hZF9vcHRpb25fcm9tcyhPUFRJT05ST01fUEhZU0lDQUxfRU5ELAo+IC0g
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG9wdGlvbl9yb21fcGh5c19h
+ZGRyKTsKPiArICAgIGlmICggaXB4ZV9tb2R1bGVfYWRkciApCj4gKyAgICB7Cj4gKyAgICAgICAg
+ZXRoZXJib290X3N6ID0gc2Nhbl9ldGhlcmJvb3RfbmljKE9QVElPTlJPTV9QSFlTSUNBTF9FTkQs
+Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGV0aGVyYm9vdF9w
+aHlzX2FkZHIsCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlw
+eGVfbW9kdWxlX2FkZHIpOwo+ICsKPiArICAgICAgICBvcHRpb25fcm9tX3BoeXNfYWRkciA9IGV0
+aGVyYm9vdF9waHlzX2FkZHIgKyBldGhlcmJvb3Rfc3o7Cj4gKyAgICAgICAgb3B0aW9uX3JvbV9z
+eiA9IHBjaV9sb2FkX29wdGlvbl9yb21zKE9QVElPTlJPTV9QSFlTSUNBTF9FTkQsCj4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG9wdGlvbl9yb21fcGh5c19h
+ZGRyKTsKPiArICAgIH0KCkkgZ3Vlc3MgeW91IHdhbnQgdG8gYWx0ZXIgZXhpc3RpbmcgbG9naWMg
+YXMgbGl0dGxlIGFzIHBvc3NpYmxlLCBoZW5jZSB5b3UKZG9uJ3Qgd2FudCB0byBsZXZlcmFnZSB0
+aGUgZmFjdCB0aGF0IHlvdSAoY291bGQpIGdldCB0aGUgc2l6ZSBwYXNzZWQgLi4uCgo+IEBAIC0x
+MzMsNiArMTM5LDkgQEAgc3RhdGljIHZvaWQgcm9tYmlvc19sb2FkKGNvbnN0IHN0cnVjdCBiaW9z
+X2NvbmZpZyAqY29uZmlnLAo+ICAKPiAgICAgIGluZm8gPSAoc3RydWN0IHJvbWJpb3NfaW5mbyAq
+KUJJT1NfSU5GT19QSFlTSUNBTF9BRERSRVNTOwo+ICAgICAgaW5mby0+YmlvczMyX2VudHJ5ID0g
+Ymlvc2hpZ2g7Cj4gKwo+ICsgICAgLyogU3Rhc2ggaXB4ZSBhZGRyZXNzICovCj4gKyAgICBpcHhl
+X21vZHVsZV9hZGRyID0gaXB4ZV9hZGRyOwo+ICB9CgouLi4gaGVyZSAoYnV0IHlvdSBpZ25vcmUg
+aXQpLiBJZiB0aGUgc2l6ZSB3YXMgdXNlZCwgc2Nhbl9vcHRpb25fcm9tKCkgY291bGQgYmUKbWFk
+ZSBub3QgZXZlbiBsb29rIGF0IG5vbi1vcHRpb24tUk9Ncy4KCkJ1dCBvbiB0aGUgYmFzaXMgdGhh
+dCB5b3Ugc2ltcGx5IHJldGFpbiBleGlzdGluZyBmdW5jdGlvbmFsaXR5CkFja2VkLWJ5OiBKYW4g
+QmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CmZvciB0aGUgaHZtbG9hZGVyIHBhcnRzLgoKSmFu
+CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
+bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
