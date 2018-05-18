@@ -1,14 +1,17 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v1] libxl: always call qemus
- xen-save-devices-state in suspend/resume
-Date: Fri, 18 May 2018 21:09:10 +0200
-Message-ID: <20180518210910.02c83631.olaf@aepfle.de>
-References: <20180517155108.4624-1-olaf@aepfle.de>
- <20180518170142.5q2773ivsfjt2b4y@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke baseline test] 122944: tolerable
+ all pass
+Date: Fri, 18 May 2018 19:26:00 +0000
+Message-ID: <osstest-122944-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7071209978669386239=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180518170142.5q2773ivsfjt2b4y@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=vzov=if=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fJl0w-0007vI-7l
+ for xen-devel@lists.xenproject.org; Fri, 18 May 2018 19:26:06 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,53 +20,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Anthony PERARD <anthony.perard@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============7071209978669386239==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/tXmc0M5+b.tEAWhBIDdX7Bc"; protocol="application/pgp-signature"
-
---Sig_/tXmc0M5+b.tEAWhBIDdX7Bc
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Fri, 18 May 2018 18:01:42 +0100
-schrieb Wei Liu <wei.liu2@citrix.com>:
-
-> You don't need to test if the guest is HVM anymore. You only need to
-> know if QEMU upstream is running.
-
-libxl__domain_suspend_device_model handles qemu-xen and qemu-xen-trad.
-That function can not be called unconditionally I think.
-Perhaps I should adjust the commit message.
-
-
-Olaf
-
---Sig_/tXmc0M5+b.tEAWhBIDdX7Bc
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWv8k1gAKCRBdQqD6ppg2
-fhiHAJ0eaocQylVRBjpekLBzTT4yt9n6PgCgxKqslk0gBQgvrtlUKZOeP7y0MvM=
-=+0kY
------END PGP SIGNATURE-----
-
---Sig_/tXmc0M5+b.tEAWhBIDdX7Bc--
-
-
---===============7071209978669386239==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7071209978669386239==--
+Ik9sZCIgdGVzdGVkIHZlcnNpb24gaGFkIG5vdCBhY3R1YWxseSBiZWVuIHRlc3RlZDsgdGhlcmVm
+b3JlIGluIHRoaXMKZmxpZ2h0IHdlIHRlc3QgaXQsIHJhdGhlciB0aGFuIGEgbmV3IGNhbmRpZGF0
+ZS4gIFRoZSBiYXNlbGluZSwgaWYKYW55LCBpcyB0aGUgbW9zdCByZWNlbnQgYWN0dWFsbHkgdGVz
+dGVkIHJldmlzaW9uLgoKZmxpZ2h0IDEyMjk0NCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVh
+bF0KaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMjk0
+NC8KCkZhaWx1cmVzIDotLyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90
+IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0
+ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
+ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
+ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2
+ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
+cm1oZi14bCAgICAgICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBu
+ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1
+cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRl
+c3Rpbmc6CiB4ZW4gICAgICAgICAgICAgICAgICA4Zjg1M2RiYzA2MzYxNDE2YmIxZmFhNmNhNzcy
+MWUzOTgyYWRiZjM4CmJhc2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICBlMWY5
+MTJjYmY3MTc4Nzk4YjA2NDZjN2QwNzUzYjhkNjdlMTM5ZTc1CgpMYXN0IHRlc3Qgb2YgYmFzaXMg
+ICAxMjI4ODggIDIwMTgtMDUtMTYgMTg6MDI6MDggWiAgICAyIGRheXMKRmFpbGluZyBzaW5jZSAg
+ICAgICAgMTIyODk4ICAyMDE4LTA1LTE3IDE1OjAwOjI5IFogICAgMSBkYXlzICAgMTQgYXR0ZW1w
+dHMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTIyOTQ0ICAyMDE4LTA1LTE4IDE2OjAxOjI3IFogICAg
+MCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVu
+ZGVyIHRlc3Q6CiAgS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQud2lsa0BvcmFjbGUuY29t
+PgogIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFt
+LmNvbT4KCmpvYnM6CiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
+dWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtcHZvcHMgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1wdm9w
+cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
+c3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlh
+bmh2bS1pMzg2ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
+bGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9n
+czogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZp
+ZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54
+ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMs
+IGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4u
+b3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVy
+CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7
+Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAg
+IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoK
+UHVzaCBub3QgYXBwbGljYWJsZS4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgOGY4NTNkYmMwNjM2MTQxNmJiMWZhYTZj
+YTc3MjFlMzk4MmFkYmYzOApBdXRob3I6IE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2Fu
+ZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KRGF0ZTogICBXZWQgTWF5IDIgMTc6NDk6MTkgMjAx
+OCArMDMwMAoKICAgIHhlbi9rYmRpZjogQWRkIGZlYXR1cmVzIHRvIGRpc2FibGUga2V5Ym9hcmQg
+YW5kIHBvaW50ZXIKICAgIAogICAgSXQgaXMgbm93IG5vdCBmdWxseSBwb3NzaWJsZSB0byBjb250
+cm9sIGlmIGFuZCB3aGljaCB2aXJ0dWFsIGRldmljZXMKICAgIGFyZSBjcmVhdGVkIGJ5IHRoZSBm
+cm9udGVuZCwgZS5nLiBrZXlib2FyZCBhbmQgcG9pbnRlciBkZXZpY2VzCiAgICBhcmUgYWx3YXlz
+IGNyZWF0ZWQgYW5kIG11bHRpLXRvdWNoIGRldmljZSBpcyBjcmVhdGVkIGlmIHRoZQogICAgYmFj
+a2VuZCBhZHZlcnRpc2VzIG11bHRpLXRvdWNoIHN1cHBvcnQuIEluIHNvbWUgY2FzZXMgdGhpcwog
+ICAgYmVoYXZpb3IgaXMgbm90IGRlc2lyYWJsZSBhbmQgYmV0dGVyIGNvbnRyb2wgb3ZlciB0aGUg
+ZnJvbnRlbmQncwogICAgY29uZmlndXJhdGlvbiBpcyByZXF1aXJlZC4KICAgIAogICAgQWRkIG5l
+dyBYZW5TdG9yZSBmZWF0dXJlIGZpZWxkcywgc28gaXQgaXMgcG9zc2libGUgdG8gaW5kaXZpZHVh
+bGx5CiAgICBjb250cm9sIHNldCBvZiBleHBvc2VkIHZpcnR1YWwgZGV2aWNlcyBmb3IgZWFjaCBn
+dWVzdCBPUzoKICAgICAtIHNldCBmZWF0dXJlLWRpc2FibGUta2V5Ym9hcmQgdG8gMSBpZiBubyBr
+ZXlib2FyZCBkZXZpY2UgbmVlZHMKICAgICAgIHRvIGJlIGNyZWF0ZWQKICAgICAtIHNldCBmZWF0
+dXJlLWRpc2FibGUtcG9pbnRlciB0byAxIGlmIG5vIHBvaW50ZXIgZGV2aWNlIG5lZWRzCiAgICAg
+ICB0byBiZSBjcmVhdGVkCiAgICAKICAgIEtlZXAgb2xkIGJlaGF2aW9yIGJ5IGRlZmF1bHQuCiAg
+ICAKICAgIFNpZ25lZC1vZmYtYnk6IE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJf
+YW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KICAgIFJldmlld2VkLWJ5OiBLb25yYWQgUnplc3p1dGVr
+IFdpbGsgPGtvbnJhZC53aWxrQG9yYWNsZS5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBLb25yYWQg
+Unplc3p1dGVrIFdpbGsgPGtvbnJhZC53aWxrQG9yYWNsZS5jb20+CiAgICBSZWxlYXNlLWFja2Vk
+LWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CihxZW11IGNoYW5nZXMgbm90IGlu
+Y2x1ZGVkKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
