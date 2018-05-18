@@ -1,14 +1,17 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v1] libxl: always call qemus
- xen-save-devices-state in suspend/resume
-Date: Fri, 18 May 2018 10:02:10 +0200
-Message-ID: <20180518100210.0ae4231f.olaf@aepfle.de>
-References: <20180517155108.4624-1-olaf@aepfle.de>
- <0821043c-56d8-0046-4c4e-772afdeb3d5c@suse.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke baseline test] 122913: tolerable
+ all pass
+Date: Fri, 18 May 2018 08:13:12 +0000
+Message-ID: <osstest-122913-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============9112055757931606864=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <0821043c-56d8-0046-4c4e-772afdeb3d5c@suse.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=vzov=if=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fJaVq-0003SH-Gn
+ for xen-devel@lists.xenproject.org; Fri, 18 May 2018 08:13:18 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,51 +20,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============9112055757931606864==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/UznMk_ugS/mTv0Sm0bhAQS="; protocol="application/pgp-signature"
-
---Sig_/UznMk_ugS/mTv0Sm0bhAQS=
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Fri, 18 May 2018 09:25:07 +0200
-schrieb Juergen Gross <jgross@suse.com>:
-
-> debianhvm
-
-The patch is for non-HVM, so perhaps these failures are something else.
-To me it was not clear from the faillog what exactly failed.
-
-
-Olaf
-
---Sig_/UznMk_ugS/mTv0Sm0bhAQS=
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWv6IggAKCRBdQqD6ppg2
-fgtEAKCIHmenqnDOT9UfzjdoY2JkTtmNcwCgxRFKItlP1H0uc8NOA8sjBmW17ho=
-=G9R4
------END PGP SIGNATURE-----
-
---Sig_/UznMk_ugS/mTv0Sm0bhAQS=--
-
-
---===============9112055757931606864==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============9112055757931606864==--
+Ik9sZCIgdGVzdGVkIHZlcnNpb24gaGFkIG5vdCBhY3R1YWxseSBiZWVuIHRlc3RlZDsgdGhlcmVm
+b3JlIGluIHRoaXMKZmxpZ2h0IHdlIHRlc3QgaXQsIHJhdGhlciB0aGFuIGEgbmV3IGNhbmRpZGF0
+ZS4gIFRoZSBiYXNlbGluZSwgaWYKYW55LCBpcyB0aGUgbW9zdCByZWNlbnQgYWN0dWFsbHkgdGVz
+dGVkIHJldmlzaW9uLgoKZmxpZ2h0IDEyMjkxMyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVh
+bF0KaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMjkx
+My8KCkZhaWx1cmVzIDotLyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90
+IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0
+ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
+ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
+ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2
+ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
+cm1oZi14bCAgICAgICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBu
+ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1
+cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRl
+c3Rpbmc6CiB4ZW4gICAgICAgICAgICAgICAgICA4Zjg1M2RiYzA2MzYxNDE2YmIxZmFhNmNhNzcy
+MWUzOTgyYWRiZjM4CmJhc2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICBlMWY5
+MTJjYmY3MTc4Nzk4YjA2NDZjN2QwNzUzYjhkNjdlMTM5ZTc1CgpMYXN0IHRlc3Qgb2YgYmFzaXMg
+ICAxMjI4ODggIDIwMTgtMDUtMTYgMTg6MDI6MDggWiAgICAxIGRheXMKRmFpbGluZyBzaW5jZSAg
+ICAgICAgMTIyODk4ICAyMDE4LTA1LTE3IDE1OjAwOjI5IFogICAgMCBkYXlzICAgMTAgYXR0ZW1w
+dHMKVGVzdGluZyBzYW1lIHNpbmNlICAgICAgICAgICAgICAgICAgICAgICAgICAobm90IGZvdW5k
+KSAgICAgICAgIDAgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVu
+ZGVyIHRlc3Q6CiAgS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQud2lsa0BvcmFjbGUuY29t
+PgogIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFt
+LmNvbT4KCmpvYnM6CiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
+NC14bC1xZW11dS1kZWJpYW5odm0taTM4NiAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
+ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhl
+bnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1h
+Z2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDov
+L2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBv
+ZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0
+cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1F
+LmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3Nz
+dGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2Fu
+IGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3Qu
+Z2l0O2E9c3VtbWFyeQoKClB1c2ggbm90IGFwcGxpY2FibGUuCgotLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KY29tbWl0IDhmODUzZGJj
+MDYzNjE0MTZiYjFmYWE2Y2E3NzIxZTM5ODJhZGJmMzgKQXV0aG9yOiBPbGVrc2FuZHIgQW5kcnVz
+aGNoZW5rbyA8b2xla3NhbmRyX2FuZHJ1c2hjaGVua29AZXBhbS5jb20+CkRhdGU6ICAgV2VkIE1h
+eSAyIDE3OjQ5OjE5IDIwMTggKzAzMDAKCiAgICB4ZW4va2JkaWY6IEFkZCBmZWF0dXJlcyB0byBk
+aXNhYmxlIGtleWJvYXJkIGFuZCBwb2ludGVyCiAgICAKICAgIEl0IGlzIG5vdyBub3QgZnVsbHkg
+cG9zc2libGUgdG8gY29udHJvbCBpZiBhbmQgd2hpY2ggdmlydHVhbCBkZXZpY2VzCiAgICBhcmUg
+Y3JlYXRlZCBieSB0aGUgZnJvbnRlbmQsIGUuZy4ga2V5Ym9hcmQgYW5kIHBvaW50ZXIgZGV2aWNl
+cwogICAgYXJlIGFsd2F5cyBjcmVhdGVkIGFuZCBtdWx0aS10b3VjaCBkZXZpY2UgaXMgY3JlYXRl
+ZCBpZiB0aGUKICAgIGJhY2tlbmQgYWR2ZXJ0aXNlcyBtdWx0aS10b3VjaCBzdXBwb3J0LiBJbiBz
+b21lIGNhc2VzIHRoaXMKICAgIGJlaGF2aW9yIGlzIG5vdCBkZXNpcmFibGUgYW5kIGJldHRlciBj
+b250cm9sIG92ZXIgdGhlIGZyb250ZW5kJ3MKICAgIGNvbmZpZ3VyYXRpb24gaXMgcmVxdWlyZWQu
+CiAgICAKICAgIEFkZCBuZXcgWGVuU3RvcmUgZmVhdHVyZSBmaWVsZHMsIHNvIGl0IGlzIHBvc3Np
+YmxlIHRvIGluZGl2aWR1YWxseQogICAgY29udHJvbCBzZXQgb2YgZXhwb3NlZCB2aXJ0dWFsIGRl
+dmljZXMgZm9yIGVhY2ggZ3Vlc3QgT1M6CiAgICAgLSBzZXQgZmVhdHVyZS1kaXNhYmxlLWtleWJv
+YXJkIHRvIDEgaWYgbm8ga2V5Ym9hcmQgZGV2aWNlIG5lZWRzCiAgICAgICB0byBiZSBjcmVhdGVk
+CiAgICAgLSBzZXQgZmVhdHVyZS1kaXNhYmxlLXBvaW50ZXIgdG8gMSBpZiBubyBwb2ludGVyIGRl
+dmljZSBuZWVkcwogICAgICAgdG8gYmUgY3JlYXRlZAogICAgCiAgICBLZWVwIG9sZCBiZWhhdmlv
+ciBieSBkZWZhdWx0LgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBPbGVrc2FuZHIgQW5kcnVzaGNo
+ZW5rbyA8b2xla3NhbmRyX2FuZHJ1c2hjaGVua29AZXBhbS5jb20+CiAgICBSZXZpZXdlZC1ieTog
+S29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQud2lsa0BvcmFjbGUuY29tPgogICAgU2lnbmVk
+LW9mZi1ieTogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQud2lsa0BvcmFjbGUuY29tPgog
+ICAgUmVsZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoocWVt
+dSBjaGFuZ2VzIG5vdCBpbmNsdWRlZCkKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
