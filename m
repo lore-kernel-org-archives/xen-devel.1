@@ -1,20 +1,21 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v4 1/2] xen/kbdif: Sync up with the
- canonical definition in Xen
-Date: Fri, 18 May 2018 13:17:59 +0200
-Message-ID: <0fa7b3d6-10fc-9b13-959e-fa83a016ceec__21562.2484604411$1526642213$gmane$org@suse.com>
-References: <20180518095935.26740-1-andr2000@gmail.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Subject: Re: [PATCH v7 0/7] KVM: x86: Allow Qemu/KVM to use PVH
+ entry point
+Date: Fri, 18 May 2018 13:31:49 +0200
+Message-ID: <911f4739-1a92-8ad3-4c0c-5541312c39fb__17007.0808999755$1526643057$gmane$org@redhat.com>
+References: <1523920175-27287-1-git-send-email-maran.wilson@oracle.com>
+ <505290b7-416f-cc97-35ff-e416ceb532c2@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=vvqy=if=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fJdOi-0005Ce-73
- for xen-devel@lists.xenproject.org; Fri, 18 May 2018 11:18:08 +0000
-In-Reply-To: <20180518095935.26740-1-andr2000@gmail.com>
-Content-Language: de-DE
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=ajns=if=redhat.com=pbonzini@srs-us1.protection.inumbo.net>)
+ id 1fJdc4-0006jF-Qp
+ for xen-devel@lists.xenproject.org; Fri, 18 May 2018 11:31:56 +0000
+In-Reply-To: <505290b7-416f-cc97-35ff-e416ceb532c2@oracle.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,25 +24,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr Andrushchenko <andr2000@gmail.com>, xen-devel@lists.xenproject.org, linux-input@vger.kernel.org, linux-kernel@vger.kernel.org, dmitry.torokhov@gmail.com, lyan@suse.com, boris.ostrovsky@oracle.com
-Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, andrii_chepurnyi@epam.com
+To: Maran Wilson <maran.wilson@oracle.com>, x86@kernel.org, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org, jgross@suse.com, hpa@zytor.com, mingo@redhat.com, tglx@linutronix.de
+Cc: thomas.lendacky@amd.com, mchehab@kernel.org, rkrcmar@redhat.com, gregkh@linuxfoundation.org, dave.hansen@linux.intel.com, hch@infradead.org, rdunlap@infradead.org, luto@kernel.org, jpoimboe@redhat.com, boris.ostrovsky@oracle.com, bp@suse.de, davem@davemloft.net, kirill.shutemov@linux.intel.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTgvMDUvMTggMTE6NTksIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdyb3RlOgo+IEZyb206
-IE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNv
-bT4KPiAKPiBUaGlzIGlzIHRoZSBzeW5jIHVwIHdpdGggdGhlIGNhbm9uaWNhbCBkZWZpbml0aW9u
-IG9mIHRoZSBrZXlib2FyZAo+IHByb3RvY29sIGluIFhlbjoKPiAxLiBBZGQgbWlzc2luZyBzdHJp
-bmcgY29uc3RhbnRzIGZvciB7ZmVhdHVyZXxyZXF1ZXN0fS1yYXctcG9pbnRlcgo+ICAgIHRvIGFs
-aWduIHdpdGggdGhlIHJlc3Qgb2YgdGhlIGludGVyZmFjZSBmaWxlLgo+IAo+IDIuIEFkZCBuZXcg
-WGVuU3RvcmUgZmVhdHVyZSBmaWVsZHMsIHNvIGl0IGlzIHBvc3NpYmxlIHRvIGluZGl2aWR1YWxs
-eQo+ICAgIGNvbnRyb2wgc2V0IG9mIGV4cG9zZWQgdmlydHVhbCBkZXZpY2VzIGZvciBlYWNoIGd1
-ZXN0IE9TOgo+ICAgICAgLSBzZXQgZmVhdHVyZS1kaXNhYmxlLWtleWJvYXJkIHRvIDEgaWYgbm8g
-a2V5Ym9hcmQgZGV2aWNlIG5lZWRzCj4gICAgICAgIHRvIGJlIGNyZWF0ZWQKPiAgICAgIC0gc2V0
-IGZlYXR1cmUtZGlzYWJsZS1wb2ludGVyIHRvIDEgaWYgbm8gcG9pbnRlciBkZXZpY2UgbmVlZHMK
-PiAgICAgICAgdG8gYmUgY3JlYXRlZAo+IAo+IFNpZ25lZC1vZmYtYnk6IE9sZWtzYW5kciBBbmRy
-dXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KPiBDYzogS29ucmFk
-IFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQud2lsa0BvcmFjbGUuY29tPgoKUmV2aWV3ZWQtYnk6IEp1
-ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTYvMDUvMjAxOCAyMjoyNywgTWFyYW4gV2lsc29uIHdyb3RlOgo+IEZyaWVuZGx5IHBpbmcu
+IEkgYW0gaG9wZWZ1bCBvbmUgb2YgdGhlIHg4NiBhbmQvb3IgS1ZNIG1haW50YWluZXJzIGhhcyBh
+Cj4gZmV3IGN5Y2xlcyB0byBzcGFyZSB0byBsb29rIHRoaXMgb3Zlci4KPiAKPiBBbmQgdGhhbmtz
+IHRvIGV2ZXJ5b25lIHdobyBoYXMgaGVscGVkIHRodXMgZmFyIGJ5IHByb3ZpZGluZyB2YWx1YWJs
+ZQo+IGZlZWRiYWNrIGFuZCByZXZpZXdpbmcuCj4gCj4gwqDCoCBodHRwczovL2xrbWwub3JnL2xr
+bWwvMjAxOC80LzE2LzEwMDIKCktWTSBiaXRzIGxvb2sgZmluZS4gIFRoaXMgd291bGQgYmUgdGhl
+IHJpZ2h0IHRpbWUgdG8gcG9zdCB0aGUgUUVNVQpwYXRjaGVzLi4uCgpQYW9sbwoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
