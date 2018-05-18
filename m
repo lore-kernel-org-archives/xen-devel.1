@@ -1,15 +1,14 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: [PATCH v1 1/2] x86/mm: Add mem access rights to NPT
-Date: Fri, 18 May 2018 21:30:41 +0300
-Message-ID: <98b0d49b-07ba-1703-e25e-ceae271038fe@bitdefender.com>
-References: <1526037083-29920-1-git-send-email-aisaila@bitdefender.com>
- <5AFEF17C02000078001C4210@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] libxl: always call qemus
+ xen-save-devices-state in suspend/resume
+Date: Fri, 18 May 2018 21:09:10 +0200
+Message-ID: <20180518210910.02c83631.olaf@aepfle.de>
+References: <20180517155108.4624-1-olaf@aepfle.de>
+ <20180518170142.5q2773ivsfjt2b4y@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7071209978669386239=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5AFEF17C02000078001C4210@prv1-mh.provo.novell.com>
-Content-Language: en-US
+In-Reply-To: <20180518170142.5q2773ivsfjt2b4y@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,32 +17,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, aisaila@bitdefender.com
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, tamas@tklengyel.com, xen-devel@lists.xen.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDUvMTgvMjAxOCAwNjozMCBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMTEuMDUu
-MTggYXQgMTM6MTEsIDxhaXNhaWxhQGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4+IFRoaXMgcGF0
-Y2ggYWRkcyBhY2Nlc3MgcmlnaHRzIGZvciB0aGUgTlBUIHBhZ2VzLiBUaGUgYWNjZXNzIHJpZ2h0
-cyBhcmUKPj4gc2F2ZWQgaW4gYml0cyA1OTo1NiBvZiBwdGUgdGhhdCBhcmUgbWFuaXB1bGF0ZWQg
-dGhyb3VnaCBwMm1fc2V0X2FjY2VzcygpCj4+IGFuZCBwMm1fZ2V0X2FjY2VzcygpIGZ1bmN0aW9u
-cy4KPiAKPiBZb3UgZG9uJ3QgZ2l2ZSBhbnkgcmF0aW9uYWxlIGZvciB0aGUgY2hvaWNlIG9mIGJp
-dHMuIFJpZ2h0IG5vdyBwMm0tcHQuYyBzdGlsbAo+IGFzc3VtZXMgdGhhdCBDUFUgYW5kIElPTU1V
-IHBhZ2UgdGFibGVzIG1pZ2h0IGJlIHNoYXJlZCwgZGVzcGl0ZQo+IGFtZF9pb21tdV9pbml0KCkg
-dW5jb25kaXRpb25hbGx5IHR1cm5pbmcgdGhpcyBmdW5jdGlvbmFsaXR5IG9mZi4gQXMgbG9uZyBh
-cyB0aGUKPiBvcHRpb24gZm9yIHRoYXQgbW9kZSBoYXNuJ3QgYmVlbiByZW1vdmVkIGZyb20gcDJt
-LXB0LmMsIEkgdGhpbmsgYml0cyB1c2VkCj4gYnkgdGhlIElPTU1VIChoZXJlOiBiaXQgNTkpIHNo
-b3VsZCBub3QgYmUgdXNlZCBmb3Igc29mdHdhcmUgcHVycG9zZXMuIFRoZQo+IGFsdGVybmF0aXZl
-IHRoZXJlZm9yZSBpcyBmb3IgeW91IHRvIHN1cHBseSBhIHByZXJlcSBwYXRjaCBwdXJnaW5nIHRo
-ZSBzaGFyaW5nCj4gZnVuY3Rpb25hbGl0eSBmcm9tIHAybS1wdC5jIGFuZCBwcmVmZXJhYmx5IGFs
-c28gZnJvbSB0aGUgQU1EIElPTU1VIGNvZGUuCj4gVGhhdCdzIG9mIGNvdXJzZSBvbmx5IGFuIG9w
-dGlvbiBpZiB3ZSBkb24ndCBmb3Jlc2VlIGFueSBtZWFucyBieSB3aGljaCB0aGlzCj4gbW9kZSBt
-YXkgYmVjb21lIHVzYWJsZSBhZ2Fpbi4KClRoZSBjaG9pY2Ugb2YgYml0cyB3YXMgb3VyIGludGVy
-cHJldGF0aW9uIG9mIEFuZHJldydzIHJlcGx5IGhlcmU6CgpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMTgtMDUvbXNnMDA1NzMuaHRtbAoKSGF2
-ZSB3ZSBtaXNyZWFkIGl0PwoKV2UndmUgYWxzbyB0aG91Z2h0IGFib3V0IHB1dHRpbmcgdGhlIGlu
-Zm9ybWF0aW9uIGluIGEgbmV3IGZpZWxkIG9mCnN0cnVjdCBwYWdlX2luZm8uIFdvdWxkIHRoYXQg
-cGVyaGFwcyBiZSBwcmVmZXJhYmxlPwoKClRoYW5rcywKUmF6dmFuCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7071209978669386239==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/tXmc0M5+b.tEAWhBIDdX7Bc"; protocol="application/pgp-signature"
+
+--Sig_/tXmc0M5+b.tEAWhBIDdX7Bc
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Fri, 18 May 2018 18:01:42 +0100
+schrieb Wei Liu <wei.liu2@citrix.com>:
+
+> You don't need to test if the guest is HVM anymore. You only need to
+> know if QEMU upstream is running.
+
+libxl__domain_suspend_device_model handles qemu-xen and qemu-xen-trad.
+That function can not be called unconditionally I think.
+Perhaps I should adjust the commit message.
+
+
+Olaf
+
+--Sig_/tXmc0M5+b.tEAWhBIDdX7Bc
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWv8k1gAKCRBdQqD6ppg2
+fhiHAJ0eaocQylVRBjpekLBzTT4yt9n6PgCgxKqslk0gBQgvrtlUKZOeP7y0MvM=
+=+0kY
+-----END PGP SIGNATURE-----
+
+--Sig_/tXmc0M5+b.tEAWhBIDdX7Bc--
+
+
+--===============7071209978669386239==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7071209978669386239==--
