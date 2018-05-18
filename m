@@ -1,17 +1,17 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH for-4.11] Config.mk: Update QEMU to include
- build fixes
-Date: Fri, 18 May 2018 17:17:54 +0100
-Message-ID: <20180518161754.16361-1-anthony.perard@citrix.com>
+From: Marek Marczykowski <marmarek@invisiblethingslab.com>
+Subject: Re: Test for osstest, features used in Qubes OS
+Date: Fri, 18 May 2018 18:19:25 +0200
+Message-ID: <20180518161925.GE11683@mail-itl>
+References: <20180516215425.GB11683@mail-itl>
+ <23293.29942.645249.704280@mariner.uk.xensource.com>
+ <20180517145922.GA20125@mail-itl>
+ <23293.39881.793095.966171@mariner.uk.xensource.com>
+ <20180518153344.GC11683@mail-itl>
+ <5AFEF73D02000078001C425D@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7122949990424284750=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ktro=if=citrix.com=prvs=6693598a1=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1fJi5c-0005ap-Bz
- for xen-devel@lists.xenproject.org; Fri, 18 May 2018 16:18:44 +0000
+In-Reply-To: <5AFEF73D02000078001C425D@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,28 +20,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, Ian Jackson <ian.jackson@citrix.com>, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyB0YWcgaW5jbHVkZXMgdHdvIGJ1aWxkIGZpeGVzOgotIGR1bXA6IEZpeCBidWlsZCB3aXRo
-IG5ld2VyIGdjYwogICAgRml4IGJ1aWxkIHdpdGggR0NDLTgKLSBGaXggbGlidXNiLTEuMC4yMiBk
-ZXByZWNhdGVkIGxpYnVzYl9zZXRfZGVidWcgd2l0aCBsaWJ1c2Jfc2V0X29wdGlvbgoKU2lnbmVk
-LW9mZi1ieTogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+Ci0tLQpG
-WUksIEkndmUgYWxyZWFkeSBhc2sgd2l0aCB0aGlzIG1haWw6Cj4gUUVNVSBidWlsZCBmaXhlcyBm
-b3IgWGVuLTQuMTEKPiA8MjAxODA1MTAxMzU0MzguR0IyMDU3QHBlcmFyZC51ay54ZW5zb3VyY2Uu
-Y29tPgo+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2
-ZWwvMjAxOC0wNS9tc2cwMDU3OS5odG1sCgpSZWdhcmRzLAotLS0KIENvbmZpZy5tayB8IDIgKy0K
-IDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdp
-dCBhL0NvbmZpZy5tayBiL0NvbmZpZy5tawppbmRleCA3ZThhYzIxOWM5Li45MTgzNDk2YmJlIDEw
-MDY0NAotLS0gYS9Db25maWcubWsKKysrIGIvQ29uZmlnLm1rCkBAIC0yNzUsNyArMjc1LDcgQEAg
-U0VBQklPU19VUFNUUkVBTV9VUkwgPz0gZ2l0Oi8veGVuYml0cy54ZW4ub3JnL3NlYWJpb3MuZ2l0
-CiBNSU5JT1NfVVBTVFJFQU1fVVJMID89IGdpdDovL3hlbmJpdHMueGVuLm9yZy9taW5pLW9zLmdp
-dAogZW5kaWYKIE9WTUZfVVBTVFJFQU1fUkVWSVNJT04gPz0gOTQ3ZjM3MzdhYmY2NWZkYTYzZjNm
-ZmQ5N2ZkZGZhNjk4Njk4Njg2OAotUUVNVV9VUFNUUkVBTV9SRVZJU0lPTiA/PSBxZW11LXhlbi00
-LjExLjAtcmMxCitRRU1VX1VQU1RSRUFNX1JFVklTSU9OID89IHFlbXUteGVuLTQuMTEuMC1yYzYK
-IE1JTklPU19VUFNUUkVBTV9SRVZJU0lPTiA/PSB4ZW4tNC4xMS4wLXJjMS4xCiAKIFNFQUJJT1Nf
-VVBTVFJFQU1fUkVWSVNJT04gPz0gcmVsLTEuMTEuMQotLSAKQW50aG9ueSBQRVJBUkQKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============7122949990424284750==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="OROCMA9jn6tkzFBc"
+Content-Disposition: inline
+
+
+--OROCMA9jn6tkzFBc
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, May 18, 2018 at 09:54:37AM -0600, Jan Beulich wrote:
+> >>> On 18.05.18 at 17:33, <marmarek@invisiblethingslab.com> wrote:
+> > Yes, I'm happy to help with that. As I've said, the basic test is very
+> > simple (rtcwake command) and already very useful. The fact that it is(?)
+> > broken on staging doesn't make it easier,
+>=20
+> Details on the breakage would be appreciated (on a separate thread),
+> unless you plan to address it yourself. I recall Simon(?) mentioning this=
+ as
+> well, but also not providing sufficient data to consider looking into it
+> (perhaps simply because it wasn't easy to obtain useful data, as
+> frequently is the case with S3 resume). I think it would be nice if we co=
+uld
+> release 4.11 without a regression here.
+
+I only know that Simon have tested it and it fails. Cc'ing him.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--OROCMA9jn6tkzFBc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlr+/Q0ACgkQ24/THMrX
+1ywK4AgAjv9AQRH/Xnju1PpBJNnA+LN1pjE/mxDTeYgqef9wTyUfDHbxvetIkaHi
+bkf+ZPpbvqu70Q7Gfz9CdrmCzY1+lFOZunHPJBibLNRbDwcMs6BfPcdPvmHacs3t
+wkd7LmTuNxznIHqukHOV4radGqzGgI3oO51KK2KBq1xOBAIrh9d+QNDaVxZtJJhO
++KSWUvnDcT3dxkwMIgS0HWxy+sFGY+equmNTeDFCIVe3OH+CSX6cDpM4Gd6EcbBW
+aYnn4jMFILatQw3DpwGMOGDrGLjkqLF1zhrDuei37aZZ//zWurJ1C2lXQ4Pa5Vpq
+lTH7wE7DZsmT1oHjvl+nyow2pG24Xg==
+=ZjrU
+-----END PGP SIGNATURE-----
+
+--OROCMA9jn6tkzFBc--
+
+
+--===============7122949990424284750==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7122949990424284750==--
