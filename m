@@ -1,26 +1,20 @@
-From: Sameer Goel <sameer.goel@linaro.org>
-Subject: Re: [PATCH 6/7] drivers/passthrough/arm: Refactor code
- for arm smmu drivers
-Date: Fri, 18 May 2018 17:00:46 -0600
-Message-ID: <7ce91d38-f5b2-21ed-865f-be251e92eb3f@linaro.org>
-References: <20180209031055.21926-1-sameer.goel@linaro.org>
- <20180209031055.21926-7-sameer.goel@linaro.org>
- <20180209104337.mo37jo2v56qil7l6@MacBook-Pro-de-Roger.local>
- <175537d7-cd3d-069a-cd7a-dccd68107561@arm.com>
- <20180209110237.gslwnzwqw5zbsih4@MacBook-Pro-de-Roger.local>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [MirageOS-devel] ViryaOS: proposal for a new Xen
+ Project sub-project
+Date: Fri, 18 May 2018 17:15:10 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1805181346260.4520__7040.05880184031$1526688878$gmane$org@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1805141008200.8839@sstabellini-ThinkPad-X260>
+ <8871A069-486C-47E4-BE2B-DAF5DABCCDD1@xenproject.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1099481016-1526676397=:4520"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=d17f=if=linaro.org=sameer.goel@srs-us1.protection.inumbo.net>)
- id 1fJoMl-00047p-A2
- for xen-devel@lists.xenproject.org; Fri, 18 May 2018 23:00:51 +0000
-Received: by mail-pf0-x243.google.com with SMTP id w129-v6so4410282pfd.3
- for <xen-devel@lists.xenproject.org>; Fri, 18 May 2018 16:00:49 -0700 (PDT)
-In-Reply-To: <20180209110237.gslwnzwqw5zbsih4@MacBook-Pro-de-Roger.local>
-Content-Language: en-US
+ <srs0=xhg0=ig=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1fJpX6-0003So-BT
+ for xen-devel@lists.xenproject.org; Sat, 19 May 2018 00:15:36 +0000
+In-Reply-To: <8871A069-486C-47E4-BE2B-DAF5DABCCDD1@xenproject.org>
+Content-ID: <alpine.DEB.2.10.1805181715000.4520@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,71 +23,245 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, shankerd@codeaurora.org, mjaggi@caviumnetworks.com
+To: Lars Kurth <lars.kurth.xen@gmail.com>
+Cc: lars.kurth@citrix.com, rajiv.ranganath@atihita.com, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, xen-api@lists.xenproject.org, minios-devel@lists.xenproject.org, julien.grall@arm.com, Committers <committers@xenproject.org>, mirageos-devel@lists.xenproject.org, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAyLzkvMjAxOCA0OjAyIEFNLCBSb2dlciBQYXUgTW9ubsOpIHdyb3RlOgo+IE9uIEZyaSwg
-RmViIDA5LCAyMDE4IGF0IDEwOjUxOjAxQU0gKzAwMDAsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4g
-SGksCj4+Cj4+IE9uIDAyLzA5LzIwMTggMTA6NDMgQU0sIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6
-Cj4+Pj4gKyAgICB1bnNpZ25lZCBpbnQgdHlwZTsKPj4+PiArfTsKPj4+PiArCj4+Pj4gKyNkZWZp
-bmUgcmVzb3VyY2Vfc2l6ZShyZXMpICgocmVzKS0+c2l6ZSkKPj4+PiArCj4+Pj4gKyNkZWZpbmUg
-cGxhdGZvcm1fZGV2aWNlIGRldmljZQo+Pj4+ICsKPj4+PiArI2RlZmluZSBJT1JFU09VUkNFX01F
-TSAwCj4+Pj4gKyNkZWZpbmUgSU9SRVNPVVJDRV9JUlEgMQo+Pj4+ICsKPj4+PiArLyogU3R1YiBv
-dXQgRE1BIGRvbWFpbiByZWxhdGVkIGZ1bmN0aW9ucyAqLwo+Pj4+ICsjZGVmaW5lIGlvbW11X2dl
-dF9kbWFfY29va2llKGRvbSkgMAo+Pj4+ICsjZGVmaW5lIGlvbW11X3B1dF9kbWFfY29va2llKGRv
-bSkKPj4+PiArCj4+Pj4gKyNkZWZpbmUgVkFfQklUUwkJMCAvKiBPbmx5IHVzZWQgZm9yIGNvbmZp
-Z3VyaW5nIHN0YWdlLTEgaW5wdXQgc2l6ZSAqLwo+Pj4+ICsKPj4+PiArI2RlZmluZSBNT0RVTEVf
-REVWSUNFX1RBQkxFKHR5cGUsIG5hbWUpCj4+Pj4gKyNkZWZpbmUgbW9kdWxlX3BhcmFtX25hbWVk
-KG5hbWUsIHZhbHVlLCB0eXBlLCBwZXJtKQo+Pj4+ICsjZGVmaW5lIE1PRFVMRV9QQVJNX0RFU0Mo
-X3Bhcm0sIGRlc2MpCj4+Pj4gKwo+Pj4+ICsjZGVmaW5lIGRtYV9zZXRfbWFza19hbmRfY29oZXJl
-bnQoZCwgYikJMAo+Pj4+ICsjZGVmaW5lIG9mX2RtYV9pc19jb2hlcmVudChuKQkwCj4+Pj4gKwo+
-Pj4+ICtzdGF0aWMgdm9pZCBfX2lvbWVtICpkZXZtX2lvcmVtYXBfcmVzb3VyY2Uoc3RydWN0IGRl
-dmljZSAqZGV2LAo+Pj4+ICsJCQkJCSAgIHN0cnVjdCByZXNvdXJjZSAqcmVzKQo+Pj4gQWxpZ21l
-bnQsIHBsZWFzZSB1c2Ugc3BhY2VzLgo+Pj4KPj4+IEFsc28sIGlzIF9faW9tZW0gbmVlZGVkIGhl
-cmUgYXQgYWxsPwo+PiBPbiBBcm0sIHdlIHRlbmQgdG8gYWRkIGtlZXAgX19pb21lbSBvbiBwb2lu
-dGVyIGRlYWxpbmcgd2l0aCBNTUlPLgo+IEkgdW5kZXJzdGFuZCB0aGF0IHlvdSBrZWVwIGl0IHdo
-ZW4gZGlyZWN0bHkgaW1wb3J0aW5nIGNvZGUgZnJvbSBMaW51eCwKPiBidXQgdGhpcyBpcyBYZW4g
-Y29kZSwgc28gdW5sZXNzIHRoaXMgaXMgZG9uZSBtZXJlbHkgZm9yIGNvbnNpc3RlbmN5IGl0Cj4g
-c2VlbXMgcXVpdGUgcG9pbnRsZXNzIChfX2lvbWVtIGlzIGRlZmluZWQgdG8gbm90aGluZyBBRkFJ
-Q1QpLgo+Cj4+IFsuLi5dCj4+Cj4+Pj4gKwo+Pj4+ICsjZW5kaWYgLyogX19BUk1fU01NVV9IX18g
-Ki8KPj4+PiArCj4+Pj4gZGlmZiAtLWdpdCBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FybS9z
-bW11LXYzLmMgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9hcm0vc21tdS12My5jCj4+Pj4gaW5k
-ZXggZjQzNDg1ZmU2ZS4uZjBhNjE1MjFmYiAxMDA2NDQKPj4+PiAtLS0gYS94ZW4vZHJpdmVycy9w
-YXNzdGhyb3VnaC9hcm0vc21tdS12My5jCj4+Pj4gKysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91
-Z2gvYXJtL3NtbXUtdjMuYwo+Pj4+IEBAIC00OSwyOCArNDksNyBAQAo+Pj4+ICAgI2luY2x1ZGUg
-PGFzbS9pby5oPgo+Pj4+ICAgI2luY2x1ZGUgPGFzbS9wbGF0Zm9ybS5oPgo+Pj4+IC0vKiBBbGlh
-cyB0byBYZW4gZGV2aWNlIHRyZWUgaGVscGVycyAqLwo+Pj4+IC0jZGVmaW5lIGRldmljZV9ub2Rl
-IGR0X2RldmljZV9ub2RlCj4+Pj4gLSNkZWZpbmUgb2ZfcGhhbmRsZV9hcmdzIGR0X3BoYW5kbGVf
-YXJncwo+Pj4+IC0jZGVmaW5lIG9mX2RldmljZV9pZCBkdF9kZXZpY2VfbWF0Y2gKPj4+PiAtI2Rl
-ZmluZSBvZl9tYXRjaF9ub2RlIGR0X21hdGNoX25vZGUKPj4+PiAtI2RlZmluZSBvZl9wcm9wZXJ0
-eV9yZWFkX3UzMihucCwgcG5hbWUsIG91dCkgKCFkdF9wcm9wZXJ0eV9yZWFkX3UzMihucCwgcG5h
-bWUsIG91dCkpCj4+Pj4gLSNkZWZpbmUgb2ZfcHJvcGVydHlfcmVhZF9ib29sIGR0X3Byb3BlcnR5
-X3JlYWRfYm9vbAo+Pj4+IC0jZGVmaW5lIG9mX3BhcnNlX3BoYW5kbGVfd2l0aF9hcmdzIGR0X3Bh
-cnNlX3BoYW5kbGVfd2l0aF9hcmdzCj4+Pj4gLQo+Pj4+IC0vKiBYZW46IEhlbHBlcnMgdG8gZ2V0
-IGRldmljZSBNTUlPIGFuZCBJUlFzICovCj4+Pj4gLXN0cnVjdCByZXNvdXJjZSB7Cj4+Pj4gLQl1
-NjQgYWRkcjsKPj4+PiAtCXU2NCBzaXplOwo+Pj4+IC0JdW5zaWduZWQgaW50IHR5cGU7Cj4+Pj4g
-LX07Cj4+Pj4gLQo+Pj4+IC0jZGVmaW5lIHJlc291cmNlX3NpemUocmVzKSAoKHJlcyktPnNpemUp
-Cj4+Pj4gLQo+Pj4+IC0jZGVmaW5lIHBsYXRmb3JtX2RldmljZSBkZXZpY2UKPj4+PiAtCj4+Pj4g
-LSNkZWZpbmUgSU9SRVNPVVJDRV9NRU0gMAo+Pj4+IC0jZGVmaW5lIElPUkVTT1VSQ0VfSVJRIDEK
-Pj4+IFlvdSBpbnRyb2R1Y2UgdGhlIGFib3ZlIGNvZGUgaW4gcGF0Y2ggNSwgYW5kIHJlbW92ZSBp
-dCBpbiBwYXRjaCA2LCBpcwo+Pj4gdGhpcyByZWFsbHkgbmVlZGVkPwo+Pj4KPj4+IEllOiB3aHkg
-bm90IHNpbXBseSBpbnRyb2R1Y2UgdGhpcyBjb2RlIGRpcmVjdGx5IGluIHRoaXMgcGF0Y2g/Cj4+
-IFNlZSBodHRwczovL2xpc3RzLnhlbi5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOC0w
-MS9tc2cwMjA2Ni5odG1sCj4gSG0sIE9LLCBJJ20gbm90IHN1cmUgSSBmb2xsb3cgdGhhdC4KPgo+
-IEFGQUlDVCB0aGUgYWJvdmUgY29kZSBpcyBhZGRlZCBpbiBwYXRjaCA1IHNvIHRoYXQgdGhlIGRy
-aXZlciBjYW4gYmUKPiBob29rZWQgdXAgaW50byB0aGUgYnVpbGQgc3lzdGVtLiBDb3VsZCB3ZSBq
-dXN0IGhvbGQgb2ZmIGhvb2tpbmcgdGhlCj4gZHJpdmVyIHRvIHRoZSBidWlsZCBzeXN0ZW0gdW50
-aWwgcGF0Y2ggNiwgaW4gb3JkZXIgdG8gYXZvaWQgc3VjaAo+IGFkZGl0aW9uIGFuZCByZW1vdmFs
-IG9mIGNvZGU/CkkganVzdCB3YW50ZWQgdGhpcyBwYXRjaCB0byBiZSB0aGUgdW5pZnlpbmcgY2hh
-bmdlIGJldHdlZW4gdGhlIFNNTVV2MiBhbmQgU01NVXYzIGphcmdvbi4gVGhpcyBhbGxvd3MgbWUg
-dG8ga2VlcCBzb21lIHZhcmlhYmxlIG5hbWVzIGFzIGlzIGZyb20gTGludXgga2VybmVsIGZvciB0
-aGUgZmlyc3QgY2hlY2tpbi4KCkkgYWdyZWUgdGhhdCBJIGNhbiBzaHVmZmxlIGFyb3VuZCBzb21l
-IHZhcmlhYmxlcyBidXQgc2luY2UgSSB3YXMgaW50cm9kdWNpbmcgdGhpcyBwYXRjaCBJIHJlZnJh
-aW5lZCBmcm9tIGl0LgoKPgo+IFRoYW5rcywgUm9nZXIuCj4KPiBfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+IFhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKPiBY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKPiBodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVsCgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1099481016-1526676397=:4520
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1805181715001.4520@sstabellini-ThinkPad-X260>
+
+Thank you, Lars.
+
+On Fri, 18 May 2018, Lars Kurth wrote:
+> Hi Stefano,
+> what we also need for the project proposal are
+> 
+> Sponsor: A sponsor can be a member of the project leadership team of a mature project, a member of the advisory board or the
+> community manager. This ensures that a distinguished community member supports the idea behind the project.
+> I would suggest that maybe someone from ARM (e.g. Thomas - member of the AB, or Julien - leadership team member) sponsors the
+> project. There is no work involved.
+> 
+> Mentor: I am happy to pick this up
+> 
+> Regards
+> Lars
+> 
+> 
+>       On 17 May 2018, at 23:31, Stefano Stabellini <sstabellini@kernel.org> wrote:
+> 
+> Hi all,
+> 
+> Following up from previous conversations with the committers, I am
+> appending a proposal for a new Xen Project sub-project aimed at embedded
+> and IoT. Let me know if you have questions or suggestions. Also,
+> sponsors are very welcome! :-)
+> 
+> 
+> What do you mean by sponsors in this context? A sponsor as required by the process, or a show of hand as to who would be
+> interested in participating in the effort? Or something else?
+> 
+> 
+>       FYI, I also have a presentation on ViryaOS at Xen Developer Summit, I am
+>       looking forward to it!
+> 
+>       Cheers,
+> 
+>       Stefano
+> 
+>       ---
+> 
+> 
+>       # ViryaOS
+> 
+>       ## Mission
+> 
+>       To create and support open source Xen based tools that help users build
+>       end-to-end secure embedded systems.
+> 
+> 
+>       ## The Problem
+> 
+>       Xen enables highly secure, flexible architectures, suitable for widely
+>       different embedded use-cases, from industrial to IoT and cloud. However,
+>       putting a Xen based system together is still a complex endeavor. It is
+>       even harder to configure it to be as secure as possible. In the Xen
+>       ecosystem, we lack a unifying effort to help with the integration
+>       challenges that anybody building Xen-based systems is facing. Setting up
+>       a Xen based system takes too long and it is too hard for both users and
+>       developers.
+> 
+>       Today, many of us are spending time, effort and money to maintain their
+>       own build systems and techniques for generating VM configurations,
+>       resulting in significant duplication of efforts. These scripts and tools
+>       could be more powerful if we worked on them together. It would cost
+>       less to maintain them as a shared project, and eventually, they would be
+>       more flexible and of better quality.
+> 
+> 
+>       ## The Solution
+> 
+>       The solution is to unify our efforts behind a single open source
+>       project, that will focus our collective development efforts on a shared
+>       set of components.
+> 
+>       The new project is ViryaOS, a multi-vendor open source collaborative
+>       effort. ViryaOS will create a highly secure easy-to-use development
+>       platform for Xen based systems aimed at IoT and embedded environments.
+>       It will make it easier for engineers to develop secure Xen-based
+>       platforms. In addition, ViryaOS will produce ready-to-use binary images
+>       to help users and system integrators get started with Xen
+>       on embedded systems.
+> 
+>       ViryaOS will provide the space for us and others to collaborate. As a
+>       unified group, it will be easier to approach hardware vendors and
+>       partners to discuss support for ViryaOS.
+> 
+>       Users will be able to build and deploy Xen-based disaggregated
+>       architectures quickly and easily on x86 and ARM SoCs. ViryaOS will support
+>       as many hardware platforms as possible, as many guest operating systems
+>       as possible (including RTOSes and proprietary OSes), and highly
+>       heterogeneous environments. ViryaOS will meet low power consumption
+>       requirements.
+> 
+>       ViryaOS will be secure out of the box. Unlike traditional operating
+>       system designs based on a monolithic kernel, ViryaOS takes a microkernel
+>       approach. ViryaOS will come with driver and service domains. The
+>       security and manageability of the platform are achieved through security
+>       by compartmentalization and privilege separation to minimize the attack
+>       surface of the "supervisor" component (the part of the system capable of
+>       unconstrained access to the underlying hardware).
+> 
+>       All workloads will be supported. Virtual machines, containers, baremetal
+>       applications and unikernels will all be first-class "applications"
+>       running on ViryaOS. ViryaOS will support running containers natively and
+>       securely by transparently spawning Xen virtual machines for isolation.
+> 
+> 
+>       ## Build and Output
+> 
+>       ViryaOS will come with the tools to build Xen, Dom0, multiple VMs (with
+>       or without device assignement) and assemble the complete system. The
+>       build will rely on containers to shorten the build time and to make it
+>       easier to reuse any single component. The output will include the
+>       following binaries:
+> 
+>       * Xen
+>       * the Dom0 kernel (Linux)
+>       * the Dom0 filesystem
+>       * a disaggregated set of Service Domains, including their kernels,
+>        disk images and configurations (Service Domains include drivers
+>        domains and management VMs)
+>       * any number of user-provided containers and VMs
+> 
+>       The result will be a ready-to-use system image with all the pieces
+>       already included. The image will be small, suitable for embedded systems
+>       and IoT.
+> 
+>       Users will be able to select different components and configurations at
+>       build time, resulting in different outputs. Cross-compilation will be
+>       supported.
+> 
+>       ViryaOS will be able to use Yocto and/or existing distros such as Alpine
+>       Linux to build some, or all, of its components. Anything could be used
+>       as long as it can be built inside a container and the output follows a
+>       specified format.
+> 
+>       As the key enabler for Service Domains, device assignment will be
+>       supported on both ARM and x86 to the best of the capabilities of the
+>       hardware. The image will contain all the necessary configurations
+>       (device tree manipulations, Xen command line arguments, etc) to make
+>       device assignment work out of the box.
+> 
+> 
+>       ## Security
+> 
+>       Security is one of ViryaOS's key attributes. The hardware capabilities
+>       can differ for different boards, with some having TPM support and other
+>       TEE (trusted execution environment) support. When the hardware supports
+>       it, ViryaOS will use secure/measured boot on Intel and ARM, using the
+>       best technologies available in hardware (such as Intel TXT and ARM
+>       TrustZone).
+> 
+> 
+>       ## Hardware Support
+> 
+>       ViryaOS will support as many hardware platforms as possible, x86 and ARM
+>       (ARMv8). Given that TPM and VT-d are (almost) ubiquitous on Intel
+>       platform, they can be requirements for ViryaOS. On the ARM side, many
+>       SoCs don't have equivalent functionalities yet (SMMU and TEE). ViryaOS
+>       will support running on them, although with limited functionalities.
+> 
+>       ### x86 Requirements
+>       * Intel VT-x or AMD-V
+>       * 1G RAM
+>       * Intel VT-d or AMD-Vi
+>       * Intel TPM
+>       * 1 serial port for development
+> 
+>       ### ARM Requirements
+>       #### Hard Requirements
+>       * ARMv8 (Xen 64-bit)
+>       * 1G RAM or better
+>       * 1 network interface
+> 
+>       #### Soft Requirements
+>       * SMMU and a Xen driver, for device assignment (today only ARM
+>        SMMUv1 and SMMUv2 are supported in Xen)
+>       * TPM-like functionalities for secure key storage and secure boot
+>       * 1 serial port for development
+>       * Device Tree for firmware tables
+> 
+> 
+>       ## Open Source
+> 
+>       ViryaOS is a multi-vendor collaborative open source project. ViryaOS
+>       will consume other upstream projects, such as the Linux kernel, Xen
+>       Project, Alpine Linux, and Yocto. For convenience, ViryaOS might use
+>       private clones of these repositories, but ViryaOS will not diverge from
+>       upstream in any meaningful way. Changes to ViryaOS's private clones of
+>       upstream repositories will only be temporary, small-scoped and
+>       inconsequential.  ViryaOS will remain as close as possible to upstream
+>       Xen and Linux.
+> 
+> 
+>       ## Certifications
+> 
+>       For many ViryaOS use-cases safety certifications are critical. As an
+>       open source project, ViryaOS will attempt at producing an easily
+>       certifiable software stack.
+> 
+> 
+>       ## License
+> 
+>       A permissive license is the best fit for this project. Apache 2.0 is the
+>       option of choice because of the clause covering patents.
+> 
+> 
+>       ## Roles
+> 
+>       Project Lead: Stefano Stabellini <sstabellini@kernel.org>
+> 
+>       _______________________________________________
+>       MirageOS-devel mailing list
+>       MirageOS-devel@lists.xenproject.org
+>       https://lists.xenproject.org/mailman/listinfo/mirageos-devel
+> 
+> 
+> 
+> 
+--8323329-1099481016-1526676397=:4520
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1099481016-1526676397=:4520--
