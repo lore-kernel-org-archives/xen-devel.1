@@ -1,12 +1,15 @@
-From: David Woodhouse <dwmw2@infradead.org>
-Subject: Re: xen vtd : set msi guest_masked 0 by default
-Date: Mon, 21 May 2018 12:46:19 +0100
-Message-ID: <1526903179.8186.43.camel@infradead.org>
-References: <1453772092-24866-1-git-send-email-changjzh@gmail.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: Test for osstest, features used in Qubes OS
+Date: Mon, 21 May 2018 13:49:45 +0200
+Message-ID: <5c2a2ec2dcf22598af90bba788140170c4a52dc2.camel@suse.com>
+References: <20180516215425.GB11683@mail-itl>
+ <23293.29942.645249.704280@mariner.uk.xensource.com>
+ <20180517145922.GA20125@mail-itl>
+ <23293.39881.793095.966171@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7452596768033763587=="
+Content-Type: multipart/mixed; boundary="===============5366357950381623866=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1453772092-24866-1-git-send-email-changjzh@gmail.com>
+In-Reply-To: <23293.39881.793095.966171@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,185 +18,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Jianzhong,Chang" <changjzh@gmail.com>, keir@xen.org, jbeulich@suse.com, andrew.cooper3@citrix.com, xen-devel@lists.xen.org
-Cc: Andra-Irina Paraschiv <andraprs@amazon.com>
+To: Ian Jackson <ian.jackson@citrix.com>, Marek =?ISO-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+Cc: xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============7452596768033763587==
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/x-pkcs7-signature"; boundary="=-qqcxRpd5az5ar3ij5oYi"
+--===============5366357950381623866==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-JH+3W9HzrnrstOm8cYO4"
 
 
---=-qqcxRpd5az5ar3ij5oYi
+--=-JH+3W9HzrnrstOm8cYO4
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2016-01-26 at 09:34 +0800, Jianzhong,Chang wrote:
-> There are some problems when msi guest_masked is set to 1 by default.
-> When guest os is windows 2008 r2 server,
-> the device(eg X540-AT2 vf) is not initialized correctly.
-> Host will always receive message like this :"VF Reset msg received from v=
-f".
-> Guest has network connectivity issues,
-> and can not correctly receive/send the packet.
+On Thu, 2018-05-17 at 16:12 +0100, Ian Jackson wrote:
+> Marek Marczykowski-G=C3=B3recki writes ("Re: Test for osstest, features
+> used in Qubes OS"):
+> > On Thu, May 17, 2018 at 01:26:30PM +0100, Ian Jackson wrote:
+> > > Is it likely that this will depend on non-buggy host firmware
+> > > ?  If so
+> > > then we need to make arrangements to test it and only do it on
+> > > hosts
+> > > which are not buggy.  In practice this probably means wiring it
+> > > up to
+> > > the automatic host examiner.
+> >=20
+> > Yes, probably.
+>=20
+> That's not entirely trivial then, especially for you, unless you want
+> to set up your own osstest production instance.  However, I can
+> probably do the osstest-machinery work if you will help debug it,
+> review logs, tell me what to do next, etc. :-).
+>=20
+I'm not sure what 'non-bugs' in the firmware we're talking about, but I
+problem I had when trying to do something like testing S3
+suspend/resume in osstest, was that most server class hardware I could
+find, did not support that.
 
-In other words "the guest doesn't get any interrupts from the NIC".
+If that's the bug you're talking about, yes, I agree it's not trivial.
+:-) (although, I did not actually check the boxes in the MA colo, they
+were just servers from Citrix's lab).
 
-> So, guest_masked is set to 0 by default.
+There's a (non-perfect) workaround, though, as George suggests, which
+would allow us to run a "quasi-suspend" test at every flight on every
+hardware.
 
-This seems consistent with the PCI spec, which says that "After reset,
-the state of all implemented Mask and Pending bits is 0 (no vectors are
-masked and no messages are pending)."
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+--=-JH+3W9HzrnrstOm8cYO4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
 
-That's what we *used* to have in Xen, before these commits changed it
-to assume that IRQs were guest-masked by default:
+-----BEGIN PGP SIGNATURE-----
 
-https://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dcommitdiff;h=3Dad28e42bd1d2=
-8d746988ed71654e8aa670629753
-https://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dcommitdiff;h=3D84d6add5593d=
-865736831d150da7c38588f669f6
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlsCsl8ACgkQFkJ4iaW4
+c+7+mg//YQISYIPFwvoT/ECPfXg5GYhr9UpcWB2ZLMzw4T4VUiSThMy27nAc9vXZ
+ivohcrxEY1l89RsQ5yVClehPdgM6FSm4btnAzEePuijEKtpLKebp6Jto9AQJVoLH
+vq0d/3/REojgMJ+r3ngkXMfdethnJtn4GXv+nAm6JQ1BvZGZkWm/b9tNE4gNMNwK
+yPbfoXK6Gtwb5BdABxoErnVAMyp7mQWSKuJ/s/bydaUZsbOuj1PtnVL5tEQwAKCR
+VOTauB44G/ya4eUUNbRm/2h3BgJQRoYirK7XfFeEXjDBzi1ny4+TrpmSqgtpA+11
+H/cEYw1ZoJW+R2DlGfm9sNpa2vTRmQVrQa4UmX7RcBhx6LMzyvFxJvEdSY1TgGM5
+t8PzNoOaYe9b09qUkEee8onBvryI5lpa4BSRr5uBe1Lmcxgjy0DK7SZwUT9oQWoE
+d+23PlIXxVpQsICO2fgAoSRNfKYF1mM2GsZz9/+7RQkQg6/crBsFaQ6SUN7BgAEY
+Rb2IwGvZvQXE7ciK/MeseclsC/WKXxBns7pWSdIRqh/ZA1M9BgrLgQwRUcOe0u98
+FgJnhZFd9lvxreuZAZUaspieLx12ayTwF4J0XOOrqFkz3pX+CiAMDOjolGF/EO2/
+hdqyXvZWDtqTgDRH1rGc1NfxOAH1e9vBfcxfZWRbb1QOe8cKP0o=
+=8m8c
+-----END PGP SIGNATURE-----
 
-> --- a/xen/arch/x86/msi.c
-> +++ b/xen/arch/x86/msi.c
-> @@ -512,7 +512,7 @@ void guest_mask_msi_irq(struct irq_desc *desc, bool_t=
- mask)
-> =C2=A0
-> =C2=A0static unsigned int startup_msi_irq(struct irq_desc *desc)
-> =C2=A0{
-> -=C2=A0=C2=A0=C2=A0=C2=A0if ( unlikely(!msi_set_mask_bit(desc, 0, !!(desc=
-->status & IRQ_GUEST))) )
-> +=C2=A0=C2=A0=C2=A0=C2=A0if ( unlikely(!msi_set_mask_bit(desc, 0, 0) ))
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0WARN();
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return 0;
-> =C2=A0}
-
-In testing, this part actually seems to make the difference in
-practice. Interrupts now work, and Windows guests have connectivity
-again.
-
-> @@ -972,7 +972,7 @@ static int msix_capability_init(struct pci_dev *dev,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0entry->msi_attrib.e=
-ntry_nr =3D msi->entry_nr;
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0entry->msi_attrib.m=
-askbit =3D 1;
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0entry->msi_attrib.h=
-ost_masked =3D 1;
-> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0entry->msi_attrib.guest_=
-masked =3D 1;
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0entry->msi_attrib.guest_=
-masked =3D 0;
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0entry->msi_attrib.p=
-os =3D pos;
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0entry->irq =3D msi-=
->irq;
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0entry->dev =3D dev;
-
-That also seems correct though, since it reflects the actual state we
-intend to emulate.
---=-qqcxRpd5az5ar3ij5oYi
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCEFQw
-ggUxMIIEGaADAgECAhBNRhEyk/HZ7naOeTHWrzuAMA0GCSqGSIb3DQEBCwUAMIGXMQswCQYDVQQG
-EwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRowGAYD
-VQQKExFDT01PRE8gQ0EgTGltaXRlZDE9MDsGA1UEAxM0Q09NT0RPIFJTQSBDbGllbnQgQXV0aGVu
-dGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQTAeFw0xNzEyMjEwMDAwMDBaFw0xODEyMjEyMzU5
-NTlaMCQxIjAgBgkqhkiG9w0BCQEWE2R3bXcyQGluZnJhZGVhZC5vcmcwggEiMA0GCSqGSIb3DQEB
-AQUAA4IBDwAwggEKAoIBAQDgzLNWa18DNpGUj/ZeH0Sgz53ESIbzdPw3OJeuNP6jZhxZojbyfxbM
-hETscxI/Hj6UZ4a7sHm5BkVjlsB1Af2Za/PXUt8MmLAcPMHkMPGunvkUibEvblDvpqMkQZlaZM+t
-5PqFmWkbehLaEvbpNY7dmEAAeKh4klTzJzrr5AAzaCQ32cA2e3+DEIv5O5l9ViMIjy/JM+xMQrfX
-3PZ0chY1PaVWjg59d4Uno+5LRDbgCnPkKJX4ysBGadibjBGQGJEZCjh94iiEebn2KsRLvtrJ72Ph
-3W2HDEdngW3YP0wujFQVs81U7L8XN3kdPRsa9zNqGtYQP/+1KMMJQ57hnfi9AgMBAAGjggHpMIIB
-5TAfBgNVHSMEGDAWgBSCr2yM+MX+lmF86B89K3FIXsSLwDAdBgNVHQ4EFgQUpL+/5lli9jmj2KHj
-ryyhnB2xRt0wDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwIAYDVR0lBBkwFwYIKwYBBQUH
-AwQGCysGAQQBsjEBAwUCMBEGCWCGSAGG+EIBAQQEAwIFIDBGBgNVHSAEPzA9MDsGDCsGAQQBsjEB
-AgEBATArMCkGCCsGAQUFBwIBFh1odHRwczovL3NlY3VyZS5jb21vZG8ubmV0L0NQUzBaBgNVHR8E
-UzBRME+gTaBLhklodHRwOi8vY3JsLmNvbW9kb2NhLmNvbS9DT01PRE9SU0FDbGllbnRBdXRoZW50
-aWNhdGlvbmFuZFNlY3VyZUVtYWlsQ0EuY3JsMIGLBggrBgEFBQcBAQR/MH0wVQYIKwYBBQUHMAKG
-SWh0dHA6Ly9jcnQuY29tb2RvY2EuY29tL0NPTU9ET1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5k
-U2VjdXJlRW1haWxDQS5jcnQwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmNvbW9kb2NhLmNvbTAe
-BgNVHREEFzAVgRNkd213MkBpbmZyYWRlYWQub3JnMA0GCSqGSIb3DQEBCwUAA4IBAQCK28BdbVJ9
-QKQqTDfXwogAYiRBEGptfE1Bjy4F5vC6eWJqOJ15vunxjLwdbZYb4L0qrJlh+ZHHHlbIK8uEZu7N
-XHUntmWMbGbZiu7JgrbSXJK1ct9gxrN/sdWYJ+JDjVHg7GfDTvTTPa26JMRqJsO1TjjyDX7A3K39
-TjV8C0hqXvwF9BsNf+qBeWO6GVzJ5572awY221hc1umibmZaKV4fg+7fS7qscx5TSuIc6uvMBQhm
-7NQiCq6euMMWBDUDlotQCDW0ilm0OuLW3IVLuZCm6Msc+6hT9+dCT4JUvxTHZnnO7uLCxV+Ujad+
-PH3itRm38i96p2zvwgLr8vwWA0ckMIIFMTCCBBmgAwIBAgIQTUYRMpPx2e52jnkx1q87gDANBgkq
-hkiG9w0BAQsFADCBlzELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQ
-MA4GA1UEBxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQxPTA7BgNVBAMTNENP
-TU9ETyBSU0EgQ2xpZW50IEF1dGhlbnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1haWwgQ0EwHhcNMTcx
-MjIxMDAwMDAwWhcNMTgxMjIxMjM1OTU5WjAkMSIwIAYJKoZIhvcNAQkBFhNkd213MkBpbmZyYWRl
-YWQub3JnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4MyzVmtfAzaRlI/2Xh9EoM+d
-xEiG83T8NziXrjT+o2YcWaI28n8WzIRE7HMSPx4+lGeGu7B5uQZFY5bAdQH9mWvz11LfDJiwHDzB
-5DDxrp75FImxL25Q76ajJEGZWmTPreT6hZlpG3oS2hL26TWO3ZhAAHioeJJU8yc66+QAM2gkN9nA
-Nnt/gxCL+TuZfVYjCI8vyTPsTEK319z2dHIWNT2lVo4OfXeFJ6PuS0Q24Apz5CiV+MrARmnYm4wR
-kBiRGQo4feIohHm59irES77aye9j4d1thwxHZ4Ft2D9MLoxUFbPNVOy/Fzd5HT0bGvczahrWED//
-tSjDCUOe4Z34vQIDAQABo4IB6TCCAeUwHwYDVR0jBBgwFoAUgq9sjPjF/pZhfOgfPStxSF7Ei8Aw
-HQYDVR0OBBYEFKS/v+ZZYvY5o9ih468soZwdsUbdMA4GA1UdDwEB/wQEAwIFoDAMBgNVHRMBAf8E
-AjAAMCAGA1UdJQQZMBcGCCsGAQUFBwMEBgsrBgEEAbIxAQMFAjARBglghkgBhvhCAQEEBAMCBSAw
-RgYDVR0gBD8wPTA7BgwrBgEEAbIxAQIBAQEwKzApBggrBgEFBQcCARYdaHR0cHM6Ly9zZWN1cmUu
-Y29tb2RvLm5ldC9DUFMwWgYDVR0fBFMwUTBPoE2gS4ZJaHR0cDovL2NybC5jb21vZG9jYS5jb20v
-Q09NT0RPUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFpbENBLmNybDCBiwYIKwYB
-BQUHAQEEfzB9MFUGCCsGAQUFBzAChklodHRwOi8vY3J0LmNvbW9kb2NhLmNvbS9DT01PRE9SU0FD
-bGllbnRBdXRoZW50aWNhdGlvbmFuZFNlY3VyZUVtYWlsQ0EuY3J0MCQGCCsGAQUFBzABhhhodHRw
-Oi8vb2NzcC5jb21vZG9jYS5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5mcmFkZWFkLm9yZzANBgkq
-hkiG9w0BAQsFAAOCAQEAitvAXW1SfUCkKkw318KIAGIkQRBqbXxNQY8uBebwunliajideb7p8Yy8
-HW2WG+C9KqyZYfmRxx5WyCvLhGbuzVx1J7ZljGxm2YruyYK20lyStXLfYMazf7HVmCfiQ41R4Oxn
-w0700z2tuiTEaibDtU448g1+wNyt/U41fAtIal78BfQbDX/qgXljuhlcyeee9msGNttYXNbpom5m
-WileH4Pu30u6rHMeU0riHOrrzAUIZuzUIgqunrjDFgQ1A5aLUAg1tIpZtDri1tyFS7mQpujLHPuo
-U/fnQk+CVL8Ux2Z5zu7iwsVflI2nfjx94rUZt/Iveqds78IC6/L8FgNHJDCCBeYwggPOoAMCAQIC
-EGqb4Tg7/ytrnwHV2binUlYwDQYJKoZIhvcNAQEMBQAwgYUxCzAJBgNVBAYTAkdCMRswGQYDVQQI
-ExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBD
-QSBMaW1pdGVkMSswKQYDVQQDEyJDT01PRE8gUlNBIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MB4X
-DTEzMDExMDAwMDAwMFoXDTI4MDEwOTIzNTk1OVowgZcxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJH
-cmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBM
-aW1pdGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2Vj
-dXJlIEVtYWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvrOeV6wodnVAFsc4
-A5jTxhh2IVDzJXkLTLWg0X06WD6cpzEup/Y0dtmEatrQPTRI5Or1u6zf+bGBSyD9aH95dDSmeny1
-nxdlYCeXIoymMv6pQHJGNcIDpFDIMypVpVSRsivlJTRENf+RKwrB6vcfWlP8dSsE3Rfywq09N0Zf
-xcBa39V0wsGtkGWC+eQKiz4pBZYKjrc5NOpG9qrxpZxyb4o4yNNwTqzaaPpGRqXB7IMjtf7tTmU2
-jqPMLxFNe1VXj9XB1rHvbRikw8lBoNoSWY66nJN/VCJv5ym6Q0mdCbDKCMPybTjoNCQuelc0IAaO
-4nLUXk0BOSxSxt8kCvsUtQIDAQABo4IBPDCCATgwHwYDVR0jBBgwFoAUu69+Aj36pvE8hI6t7jiY
-7NkyMtQwHQYDVR0OBBYEFIKvbIz4xf6WYXzoHz0rcUhexIvAMA4GA1UdDwEB/wQEAwIBhjASBgNV
-HRMBAf8ECDAGAQH/AgEAMBEGA1UdIAQKMAgwBgYEVR0gADBMBgNVHR8ERTBDMEGgP6A9hjtodHRw
-Oi8vY3JsLmNvbW9kb2NhLmNvbS9DT01PRE9SU0FDZXJ0aWZpY2F0aW9uQXV0aG9yaXR5LmNybDBx
-BggrBgEFBQcBAQRlMGMwOwYIKwYBBQUHMAKGL2h0dHA6Ly9jcnQuY29tb2RvY2EuY29tL0NPTU9E
-T1JTQUFkZFRydXN0Q0EuY3J0MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5jb21vZG9jYS5jb20w
-DQYJKoZIhvcNAQEMBQADggIBAHhcsoEoNE887l9Wzp+XVuyPomsX9vP2SQgG1NgvNc3fQP7TcePo
-7EIMERoh42awGGsma65u/ITse2hKZHzT0CBxhuhb6txM1n/y78e/4ZOs0j8CGpfb+SJA3GaBQ+39
-4k+z3ZByWPQedXLL1OdK8aRINTsjk/H5Ns77zwbjOKkDamxlpZ4TKSDMKVmU/PUWNMKSTvtlenlx
-Bhh7ETrN543j/Q6qqgCWgWuMAXijnRglp9fyadqGOncjZjaaSOGTTFB+E2pvOUtY+hPebuPtTbq7
-vODqzCM6ryEhNhzf+enm0zlpXK7q332nXttNtjv7VFNYG+I31gnMrwfHM5tdhYF/8v5UY5g2xANP
-ECTQdu9vWPoqNSGDt87b3gXb1AiGGaI06vzgkejL580ul+9hz9D0S0U4jkhJiA7EuTecP/CFtR72
-uYRBcunwwH3fciPjviDDAI9SnC/2aPY8ydehzuZutLbZdRJ5PDEJM/1tyZR2niOYihZ+FCbtf3D9
-mB12D4ln9icgc7CwaxpNSCPt8i/GqK2HsOgkL3VYnwtx7cJUmpvVdZ4ognzgXtgtdk3ShrtOS1iA
-N2ZBXFiRmjVzmehoMof06r1xub+85hFQzVxZx5/bRaTKTlL8YXLI8nAbR9HWdFqzcOoB/hxfEyIQ
-px9/s81rgzdEZOofSlZHynoSMYIDxzCCA8MCAQEwgawwgZcxCzAJBgNVBAYTAkdCMRswGQYDVQQI
-ExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBD
-QSBMaW1pdGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQg
-U2VjdXJlIEVtYWlsIENBAhBNRhEyk/HZ7naOeTHWrzuAMA0GCWCGSAFlAwQCAQUAoIIB6zAYBgkq
-hkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xODA1MjExMTQ2MTlaMC8GCSqG
-SIb3DQEJBDEiBCBwHyCtHNa8llRjmC0pukD8iDvWx4ide95u0HkGFAssxDCBvQYJKwYBBAGCNxAE
-MYGvMIGsMIGXMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYD
-VQQHEwdTYWxmb3JkMRowGAYDVQQKExFDT01PRE8gQ0EgTGltaXRlZDE9MDsGA1UEAxM0Q09NT0RP
-IFJTQSBDbGllbnQgQXV0aGVudGljYXRpb24gYW5kIFNlY3VyZSBFbWFpbCBDQQIQTUYRMpPx2e52
-jnkx1q87gDCBvwYLKoZIhvcNAQkQAgsxga+ggawwgZcxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJH
-cmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBM
-aW1pdGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2Vj
-dXJlIEVtYWlsIENBAhBNRhEyk/HZ7naOeTHWrzuAMA0GCSqGSIb3DQEBAQUABIIBAIOGN4VdcTl7
-MNIus+arBux5nIqtxa6+MEWSKnh6CE0PgFOOEyM9CbQHf+LZVGRs/2MkWhqO0i2Y9VTXZNMT+xxy
-wsxWCE52SRrBnz+V4IGpoHQyloaJF5JLEqWg8zH6avG3pDyda3vFnFQ3S6KoXAoIeK2yCV3sO6Ku
-GZxA0wmSfID2clAate5Pb2SA169Mki9BqlvJtZ890GLB1XfS8CMRWACiOAByPEkqb80RE9MHp5FI
-RiAmBJk3yITqv5SDsf1nEkbvNSx4AEJjnHqxtmEgUkCF6/SfuStwUHMQ6/BRW6W4jztPxwcp7LoQ
-TWuyPX2jbmA/SOiH243Kyt3d+LsAAAAAAAA=
-
-
---=-qqcxRpd5az5ar3ij5oYi--
+--=-JH+3W9HzrnrstOm8cYO4--
 
 
 
---===============7452596768033763587==
+--===============5366357950381623866==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -203,4 +107,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============7452596768033763587==--
+--===============5366357950381623866==--
