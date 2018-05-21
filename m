@@ -1,16 +1,15 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: Test for osstest, features used in Qubes OS
-Date: Mon, 21 May 2018 13:52:15 +0200
-Message-ID: <b713974db1f90fcf450ce232761dab0defb3ee8a.camel@suse.com>
-References: <20180516215425.GB11683@mail-itl>
- <23293.29942.645249.704280@mariner.uk.xensource.com>
- <20180517145922.GA20125@mail-itl>
- <23293.39881.793095.966171@mariner.uk.xensource.com>
- <CAFLBxZbubeqBGJ3=qhzxKVoQGakyaY2Hi8dMfXz+QeGLtZZeNA@mail.gmail.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: xen vtd : set msi guest_masked 0 by default
+Date: Mon, 21 May 2018 14:10:19 +0200
+Message-ID: <20180521121019.3qvjlqhg5u3g5xi4@MacBook-Pro-de-Roger.local>
+References: <1453772092-24866-1-git-send-email-changjzh@gmail.com>
+ <1526903179.8186.43.camel@infradead.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0065334788697761467=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAFLBxZbubeqBGJ3=qhzxKVoQGakyaY2Hi8dMfXz+QeGLtZZeNA@mail.gmail.com>
+Content-Disposition: inline
+In-Reply-To: <1526903179.8186.43.camel@infradead.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,100 +18,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <dunlapg@umich.edu>, Ian Jackson <ian.jackson@citrix.com>
-Cc: Marek =?ISO-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>, xen-devel <xen-devel@lists.xen.org>
+To: David Woodhouse <dwmw2@infradead.org>
+Cc: keir@xen.org, Andra-Irina Paraschiv <andraprs@amazon.com>, andrew.cooper3@citrix.com, xen-devel@lists.xen.org, jbeulich@suse.com, "Jianzhong, Chang" <changjzh@gmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0065334788697761467==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-VEjlm+qXlhokfzaZSahL"
-
-
---=-VEjlm+qXlhokfzaZSahL
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 2018-05-21 at 12:04 +0100, George Dunlap wrote:
-> On Thu, May 17, 2018 at 4:12 PM, Ian Jackson <ian.jackson@citrix.com>
-> wrote:
-> > That's not entirely trivial then, especially for you, unless you
-> > want
-> > to set up your own osstest production instance.  However, I can
-> > probably do the osstest-machinery work if you will help debug it,
-> > review logs, tell me what to do next, etc. :-).
->=20
-> I'm pretty sure it would be possible to test the Xen "get ready for
-> suspend" and "resume from suspend" functionality without actually
-> needing to interact with ACPI -- we just get it to the point where it
-> would start interacting with ACPI, and then have it return instead.
-> From a "I'm positive this will continue to work" point of view it's
-> not as satisfying as actually doing the suspend; but from a practical
-> point of view, it will catch the vast majority of bugs in Xen (as
-> opposed to hardware-specific quirks); and it will run on any hardware
-> (which means not having to do reliability testing).
->=20
-> IIRC Dario actually had a patch for something like this for his own
-> testing at some point -- Dario, anything to add?
->=20
-Indeed I had a patch (it's originally from Ben, actually). I sent it,
-so it can be found in list archives. And, in any case, I still have it
-around and can resend it.
-
-I did catch quite a few bugs with it back then.
-
-> What if we 1) have two versions of the test -- "Fake suspend" and
-> "Real Suspend"; 2) only run "Real suspend" on hardware specifically
-> marked as having a suspend that works reliably; 3) default all
-> hardware to 'false' until we do some testing to find out how reliable
-> it is?
->=20
-> That way we get suspend testing 95% effective as quickly as possible,
-> and we can complete it as we have time.
->=20
-That sounds a very good plan to me, FWIW.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
---=-VEjlm+qXlhokfzaZSahL
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlsCsu8ACgkQFkJ4iaW4
-c+4XZRAAgM8/aH+r/8Pc2hrnsI+F/DokJEPSETp2n68oYvP9U150iZvZaKE5lSx1
-H2lpRrZt5rg73aDzttLKm/NNp3oMjVc/C4FNZhX/CKCbAZRm02NTjIZJ+0o1yN7u
-ZAlOk8YPlW/R1yTGdX+zXcFaGxRRXcWF5RzEm63qa+G0W69dDMKonZPQxRU1gZ8w
-4eM/Id0tyoWPhQQ0aJw5uMiZnxgWniKcFPcC9LnAILhwb2uv6of5QvFQOCs+WpVg
-WKipbdFB2NzelZsBWouzQdPXcckYK0AkUXfBSk7gKsjTubjpEsn9bNoHQvol/ZUI
-WxG9xj+3xbuPVQ6d3FEvvRTIZ49SA8qexP5acdd7vzibnX+7RPOwCiSkxwOGWc/x
-nLWvByaDfUFDE9gcnJfKx5nnmtyuDsWnAO3654381pWYrT5o+6lPTR80Re6lvGgP
-GhU8FEO19XSP5EIyLrERhLKSTWnQq0SuRdT84y1V/ng85dYE9eoSOY7GuCMs96/r
-PaveY4OofZZEpJTzwimlZcKgzPx4LnCn7OOjlbTP4oH5REYH+2Pfwx/VLyD5j7YU
-PNW1OASnqFUhPBKsoxAxzIt0VjZsOd82yuvlX7pd3C58wtCkKY/GQO5qH7Mr7bhm
-lEg7tsrxU5xqQFVLq77yWlP+3bk7XecQOWiDkNQum5+FR2br51Y=
-=yqIS
------END PGP SIGNATURE-----
-
---=-VEjlm+qXlhokfzaZSahL--
-
-
-
---===============0065334788697761467==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0065334788697761467==--
+T24gTW9uLCBNYXkgMjEsIDIwMTggYXQgMTI6NDY6MTlQTSArMDEwMCwgRGF2aWQgV29vZGhvdXNl
+IHdyb3RlOgo+IE9uIFR1ZSwgMjAxNi0wMS0yNiBhdCAwOTozNCArMDgwMCwgSmlhbnpob25nLENo
+YW5nIHdyb3RlOgo+ID4gVGhlcmUgYXJlIHNvbWUgcHJvYmxlbXMgd2hlbiBtc2kgZ3Vlc3RfbWFz
+a2VkIGlzIHNldCB0byAxIGJ5IGRlZmF1bHQuCj4gPiBXaGVuIGd1ZXN0IG9zIGlzIHdpbmRvd3Mg
+MjAwOCByMiBzZXJ2ZXIsCj4gPiB0aGUgZGV2aWNlKGVnIFg1NDAtQVQyIHZmKSBpcyBub3QgaW5p
+dGlhbGl6ZWQgY29ycmVjdGx5Lgo+ID4gSG9zdCB3aWxsIGFsd2F5cyByZWNlaXZlIG1lc3NhZ2Ug
+bGlrZSB0aGlzIDoiVkYgUmVzZXQgbXNnIHJlY2VpdmVkIGZyb20gdmYiLgo+ID4gR3Vlc3QgaGFz
+IG5ldHdvcmsgY29ubmVjdGl2aXR5IGlzc3VlcywKPiA+IGFuZCBjYW4gbm90IGNvcnJlY3RseSBy
+ZWNlaXZlL3NlbmQgdGhlIHBhY2tldC4KPiAKPiBJbiBvdGhlciB3b3JkcyAidGhlIGd1ZXN0IGRv
+ZXNuJ3QgZ2V0IGFueSBpbnRlcnJ1cHRzIGZyb20gdGhlIE5JQyIuCj4gCj4gPiBTbywgZ3Vlc3Rf
+bWFza2VkIGlzIHNldCB0byAwIGJ5IGRlZmF1bHQuCj4gCj4gVGhpcyBzZWVtcyBjb25zaXN0ZW50
+IHdpdGggdGhlIFBDSSBzcGVjLCB3aGljaCBzYXlzIHRoYXQgIkFmdGVyIHJlc2V0LAo+IHRoZSBz
+dGF0ZSBvZiBhbGwgaW1wbGVtZW50ZWQgTWFzayBhbmQgUGVuZGluZyBiaXRzIGlzIDAgKG5vIHZl
+Y3RvcnMgYXJlCj4gbWFza2VkIGFuZCBubyBtZXNzYWdlcyBhcmUgcGVuZGluZykuIgo+IAo+IFRo
+YXQncyB3aGF0IHdlICp1c2VkKiB0byBoYXZlIGluIFhlbiwgYmVmb3JlIHRoZXNlIGNvbW1pdHMg
+Y2hhbmdlZCBpdAo+IHRvIGFzc3VtZSB0aGF0IElSUXMgd2VyZSBndWVzdC1tYXNrZWQgYnkgZGVm
+YXVsdDoKPiAKPiBodHRwczovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9eGVuLmdpdDthPWNv
+bW1pdGRpZmY7aD1hZDI4ZTQyYmQxZDI4ZDc0Njk4OGVkNzE2NTRlOGFhNjcwNjI5NzUzCj4gaHR0
+cHM6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhlbi5naXQ7YT1jb21taXRkaWZmO2g9ODRk
+NmFkZDU1OTNkODY1NzM2ODMxZDE1MGRhN2MzODU4OGY2NjlmNgo+IAo+ID4gLS0tIGEveGVuL2Fy
+Y2gveDg2L21zaS5jCj4gPiArKysgYi94ZW4vYXJjaC94ODYvbXNpLmMKPiA+IEBAIC01MTIsNyAr
+NTEyLDcgQEAgdm9pZCBndWVzdF9tYXNrX21zaV9pcnEoc3RydWN0IGlycV9kZXNjICpkZXNjLCBi
+b29sX3QgbWFzaykKPiA+IMKgCj4gPiDCoHN0YXRpYyB1bnNpZ25lZCBpbnQgc3RhcnR1cF9tc2lf
+aXJxKHN0cnVjdCBpcnFfZGVzYyAqZGVzYykKPiA+IMKgewo+ID4gLcKgwqDCoMKgaWYgKCB1bmxp
+a2VseSghbXNpX3NldF9tYXNrX2JpdChkZXNjLCAwLCAhIShkZXNjLT5zdGF0dXMgJiBJUlFfR1VF
+U1QpKSkgKQo+ID4gK8KgwqDCoMKgaWYgKCB1bmxpa2VseSghbXNpX3NldF9tYXNrX2JpdChkZXNj
+LCAwLCAwKSApKQo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgV0FSTigpOwo+ID4gwqDCoMKgwqDCoHJl
+dHVybiAwOwo+ID4gwqB9Cj4gCj4gSW4gdGVzdGluZywgdGhpcyBwYXJ0IGFjdHVhbGx5IHNlZW1z
+IHRvIG1ha2UgdGhlIGRpZmZlcmVuY2UgaW4KPiBwcmFjdGljZS4gSW50ZXJydXB0cyBub3cgd29y
+aywgYW5kIFdpbmRvd3MgZ3Vlc3RzIGhhdmUgY29ubmVjdGl2aXR5Cj4gYWdhaW4uCj4gCj4gPiBA
+QCAtOTcyLDcgKzk3Miw3IEBAIHN0YXRpYyBpbnQgbXNpeF9jYXBhYmlsaXR5X2luaXQoc3RydWN0
+IHBjaV9kZXYgKmRldiwKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoGVudHJ5LT5tc2lfYXR0cmliLmVu
+dHJ5X25yID0gbXNpLT5lbnRyeV9ucjsKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoGVudHJ5LT5tc2lf
+YXR0cmliLm1hc2tiaXQgPSAxOwo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgZW50cnktPm1zaV9hdHRy
+aWIuaG9zdF9tYXNrZWQgPSAxOwo+ID4gLcKgwqDCoMKgwqDCoMKgwqBlbnRyeS0+bXNpX2F0dHJp
+Yi5ndWVzdF9tYXNrZWQgPSAxOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqBlbnRyeS0+bXNpX2F0dHJp
+Yi5ndWVzdF9tYXNrZWQgPSAwOwo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgZW50cnktPm1zaV9hdHRy
+aWIucG9zID0gcG9zOwo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgZW50cnktPmlycSA9IG1zaS0+aXJx
+Owo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgZW50cnktPmRldiA9IGRldjsKPiAKPiBUaGF0IGFsc28g
+c2VlbXMgY29ycmVjdCB0aG91Z2gsIHNpbmNlIGl0IHJlZmxlY3RzIHRoZSBhY3R1YWwgc3RhdGUg
+d2UKPiBpbnRlbmQgdG8gZW11bGF0ZS4KCkhtLCBJIHRoaW5rIEkgbWlnaHQgaGF2ZSBmaXhlZCB0
+aGlzIGlzc3VlLCBzZWU6CgpodHRwczovL2dpdC5xZW11Lm9yZy8/cD1xZW11LmdpdDthPWNvbW1p
+dDtoPWE4MDM2MzM2NjA5ZDJlMTg0ZmMzNTQzYTRjNDM5YzBiYTdkN2YzYTIKCkFuZCB0aGUgWGVu
+IHNpZGU6CgpodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD14ZW4uZ2l0O2E9Y29tbWl0
+O2g9NjlkOTlkMWIyMjNmYzUwODI0MDAzNzQ2OThkZGQ3NDg2ZTVlYTk1MwoKVGhlIG9yaWdpbmFs
+IHJlcG9ydCBvZiB0aGUgaXNzdWUgaXMgYXQ6CgpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMTctMDcvbXNnMDA5MTUuaHRtbAoKUm9nZXIuCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
