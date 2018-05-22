@@ -1,19 +1,21 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v2 05/10] arm: make it possible to
- enable/disable UART drivers
-Date: Tue, 22 May 2018 10:25:17 +0100
-Message-ID: <558552aa-02f5-ec9a-e68a-4ed20c540f08@arm.com>
-References: <alpine.DEB.2.10.1805211743440.4520@sstabellini-ThinkPad-X260>
- <1526950408-18219-5-git-send-email-sstabellini@kernel.org>
- <5B03B9E5020000780013088E@prv1-mh.provo.novell.com>
- <1e655140-2a62-145c-6bcd-7e09676eea9b@arm.com>
- <5B03E15602000078001C484D@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [Patch v3 2/2] x86/microcode: Synchronize late
+ microcode loading
+Date: Tue, 22 May 2018 03:26:06 -0600
+Message-ID: <5B03E22E02000078001C486D@prv1-mh.provo.novell.com>
+References: <1525816893-36669-1-git-send-email-chao.gao@intel.com>
+ <1525816893-36669-2-git-send-email-chao.gao@intel.com>
+ <5AFC2DB802000078001C33ED@prv1-mh.provo.novell.com>
+ <d11a6abe-6ee7-30a5-db07-2fa09f596064@citrix.com>
+ <5AFC364802000078001C3436@prv1-mh.provo.novell.com>
+ <20180518072113.GA65239@skl-4s-chao.sh.intel.com>
+ <20180522085945.GA137528@skl-4s-chao.sh.intel.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B03E15602000078001C484D@prv1-mh.provo.novell.com>
-Content-Language: en-US
+In-Reply-To: <20180522085945.GA137528@skl-4s-chao.sh.intel.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,33 +24,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Artem Mygaiev <artem_mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, Dario Faggioli <dfaggioli@suse.com>, xen-devel@lists.xen.org
+To: Chao Gao <chao.gao@intel.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Ashok Raj <ashok.raj@intel.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org, Jun Nakajima <jun.nakajima@intel.com>, tglx@linutronix.de, Borislav Petkov <bp@suse.de>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSmFuLAoKT24gMDUvMjIvMjAxOCAxMDoyMiBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4g
-T24gMjIuMDUuMTggYXQgMTA6NTEsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+IE9u
-IDA1LzIyLzIwMTggMDc6MzQgQU0sIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4gU3RlZmFubyBT
-dGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPiAwNS8yMi8xOCAyOjUzIEFNID4+Pgo+
-Pj4+IEBAIC01Myw3ICs1Myw4IEBAIGNvbmZpZyBIQVNfU0NJRgo+Pj4+IG9yIFJlbmVzYXMgUi1D
-YXIgR2VuIDIvMyBiYXNlZCBib2FyZCBzYXkgWS4KPj4+ICAgID4KPj4+PiBjb25maWcgSEFTX0VI
-Q0kKPj4+PiAtCWJvb2wKPj4+PiArCWJvb2wgIkVIQ0kgVUFSVCBkcml2ZXIiCj4+Pgo+Pj4gLi4u
-IGhlcmUgaWlyYyBKdWxpZW4gaGFkIGFscmVhZHkgcG9pbnRlZCBvdXQgdGhhdCB0aGUgZHJpdmVy
-cyBzaG91bGQgbm90IGJlY29tZQo+Pj4gb3B0aW9uYWwgb24geDg2LCBpLmUuIGluIHRoZSBmb3Jt
-ZXIgY2FzZSB5b3Ugd2FudCB0byBhdHRhY2ggYSBjb25kaXRpb25hbCB0byB0aGUKPj4+IHByb21w
-dCB3aGlsZSBpbiB0aGUgbGF0dGVyIGNhc2UgSSBkb24ndCBzZWUgd2h5IHlvdSBhZGQgdGhlIHBy
-b21wdCBpbiB0aGUgZmlyc3QKPj4+IHBsYWNlIGlmIHlvdSBtZWFuIHRvIG1ha2UgaXQgeDg2LXNw
-ZWNpZmljLiBXaGljaCBieSBpdHNlbGYgaXMgcXVlc3Rpb25hYmxlCj4+PiB0aG91Z2g6IFdoeSB3
-b3VsZCB0aGlzIGRyaXZlciBiZSB4ODYtc3BlY2lmaWMsIHdoZW4gc28gZmFyIGl0IChjb25zY2lv
-dXNseSkKPj4+IGhhc24ndCBiZWVuPyBJZiBhbnl0aGluZyBJIGNvdWxkIHNlZSBpdCBkZXBlbmQg
-b24gSEFTX1BDSS4KPj4KPj4gSSBkb24ndCBleHBlY3QgdGhpcyBwaWVjZSBvZiBoYXJkd2FyZSB0
-byBjb21lIHVwIG9uIEFybS4KPiAKPiBJIGNhbiByZWFkIHR3byBtZWFuaW5ncyBpbnRvIHRoaXM6
-IFlvdSBleHBlY3QgdGhlIGRyaXZlciB0byBub3Qgd29yayBvbgo+IEFSTSwgb3IgeW91J3JlIGNv
-bmZpZGVudCB0aGUgRUhDSSBwcm90b2NvbCBvZiBhY2Nlc3NpbmcgVVNCIGhvc3QKPiBjb250cm9s
-bGVyIGhhcmR3YXJlIG5vdCB1c2VkIGFueXdoZXJlIGluIGRldmljZXMgdXNlZCBvbiBBUk0uIFdo
-aWNoCj4gb2YgdGhlIHR3byB5b3UgbWVhbiBkZXRlcm1pbmVzIHdoYXQgdGhlIGNvcnJlY3QgYXBw
-cm9hY2ggaGVyZSBpcy4KCkkgYW0gcXVpdGUgY29uZmlkZW50IHRoZSBFSENJIHByb3RvY29sIGlz
-IG5vdCB1c2VkIG9uIEFybS4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDIyLjA1LjE4IGF0IDEwOjU5LCA8Y2hhby5nYW9AaW50ZWwuY29tPiB3cm90ZToKPiBE
+byB5b3UgdGhpbmsgaXQgaXMgYWNjZXB0YWJsZSB0aGF0IHdlIGp1c3QgZm9sbG93IGxpbnV4IGtl
+cm5lbCBhdCBwcmVzZW50Cj4gYW5kIHdvcmsgb3V0IG9wdGltaXphdGlvbnMgbGF0ZXI/CgpJbiB0
+aGUgd29yc3QgY2FzZSBJIGNvdWxkIGxpdmUgd2l0aCBpdCwgYnV0IEknZCBiZSBmYXIgZnJvbSBo
+YXBweSBpZiBzby4gU2FkbHkKZXhwZXJpZW5jZSAoaW4gZ2VuZXJhbCwgbm90IHdpdGggeW91IHBl
+cnNvbmFsbHkpIGhhcyB0b2xkIG1lIHRoYXQgaWYgd2UgbGV0CnRoaW5ncyBnbyBpbiB0aGlzIHdh
+eSByaWdodCBub3csIHRoZXJlJ3MgYSBoaWdoIHJpc2sgdGhhdCB5b3UnZCBuZXZlciBmb2xsb3cK
+dXAgd2l0aCB0aGUgc3Vic2VxdWVudCBvcHRpbWl6YXRpb24gb2YgdGhlIHByb2Nlc3MuCgpGdXJ0
+aGVybW9yZSwgaW4gTGludXgsIHdhcyB0aGUgZGVjaXNpb24gdG8gZ28gdGhlIHByZXNlbnRlZCBy
+b3V0ZSByZWFsbHkKdGFrZW4gd2l0aCBLVk0gYW5kIGl0cyBwb3NzaWJseSBhY3RpdmUgZ3Vlc3Rz
+IGluIG1pbmQ/IE5vdCB0byBzcGVhayBvZgpvcmRpbmFyeSBhcHBsaWNhdGlvbnMgdGhhdCBtYXkg
+YmUgbGF0ZW5jeSBzZW5zaXRpdmUuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
