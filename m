@@ -1,16 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v1] libxl: always call qemus
- xen-save-devices-state in suspend/resume
-Date: Tue, 22 May 2018 10:52:20 +0200
-Message-ID: <20180522105220.607f3f48.olaf@aepfle.de>
-References: <20180517155108.4624-1-olaf@aepfle.de>
- <20180518170142.5q2773ivsfjt2b4y@citrix.com>
- <20180518210910.02c83631.olaf@aepfle.de>
- <20180521081820.2eue7occ26ouxzb3@citrix.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v2 07/10] arm: make it possible to disable
+ the SMMU driver
+Date: Tue, 22 May 2018 10:03:14 +0100
+Message-ID: <a016ffb8-550d-609f-8edd-a2ca23f56c21@arm.com>
+References: <alpine.DEB.2.10.1805211743440.4520@sstabellini-ThinkPad-X260>
+ <1526950408-18219-7-git-send-email-sstabellini@kernel.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0142435525533131939=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180521081820.2eue7occ26ouxzb3@citrix.com>
+In-Reply-To: <1526950408-18219-7-git-send-email-sstabellini@kernel.org>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,60 +19,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Anthony PERARD <anthony.perard@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: artem_mygaiev@epam.com, lars.kurth@citrix.com, andrii_anisov@epam.com, dfaggioli@suse.com, jbeulich@suse.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0142435525533131939==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/xY9BQV_HPWR1SOks3bxiX5."; protocol="application/pgp-signature"
-
---Sig_/xY9BQV_HPWR1SOks3bxiX5.
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Mon, 21 May 2018 09:18:20 +0100
-schrieb Wei Liu <wei.liu2@citrix.com>:
-
-> What I mean is: now you seem to want to call
-> libxl__domain_suspend_device_model when QEMU upstream is running,
-> regardless of whether a guest is HVM or PV, so the check for HVM should
-> be gone.
-
-libxl__domain_suspend_device_model calls libxl__device_model_version_runnin=
-g,
-which may return LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN_TRADITIONAL in case
-"dm-version" does not exist.
-Is it valid to assume that a non-existant "dm-version" means qemu-trad?
-So far I have not tested a PV domU with qemu-trad, not sure if that can work
-anyway.
-
-Also, libxl__device_model_version_running may return -1. Is that valid?
-
-Olaf
-
---Sig_/xY9BQV_HPWR1SOks3bxiX5.
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWwPaRAAKCRBdQqD6ppg2
-fhtMAKDIk2iDNRlXrxrbh+78Iv/U69jsCgCgj7NSOH7V1yH3pAN21N5E3WGzOD8=
-=LZfR
------END PGP SIGNATURE-----
-
---Sig_/xY9BQV_HPWR1SOks3bxiX5.--
-
-
---===============0142435525533131939==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0142435525533131939==--
+SGksCgpPbiAwNS8yMi8yMDE4IDAxOjUzIEFNLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4g
+SW50cm9kdWNlIGEgS2NvbmZpZyBvcHRpb24gZm9yIHRoZSBBUk0gU01NVXYxIGFuZCBTTU1VdjIg
+ZHJpdmVyLgo+IAo+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxp
+bmlAa2VybmVsLm9yZz4KPiBDQzogamJldWxpY2hAc3VzZS5jb20KPiAKPiAtLS0KPiBDaGFuZ2Vz
+IGluIHYyOgo+IC0gcmVuYW1lIEhBU19TTU1VdjIgdG8gU01NVXYyCj4gLSBtb3ZlIFNNTVV2MiB0
+byB4ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9LY29uZmlnCj4gLS0tCj4gICB4ZW4vZHJpdmVycy9w
+YXNzdGhyb3VnaC9LY29uZmlnICAgICAgfCA4ICsrKysrKysrCj4gICB4ZW4vZHJpdmVycy9wYXNz
+dGhyb3VnaC9hcm0vTWFrZWZpbGUgfCAyICstCj4gICAyIGZpbGVzIGNoYW5nZWQsIDkgaW5zZXJ0
+aW9ucygrKSwgMSBkZWxldGlvbigtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vZHJpdmVycy9wYXNz
+dGhyb3VnaC9LY29uZmlnIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvS2NvbmZpZwo+IGluZGV4
+IDhkOTBiNjcuLjliZGNlNjUgMTAwNjQ0Cj4gLS0tIGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gv
+S2NvbmZpZwo+ICsrKyBiL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL0tjb25maWcKPiBAQCAtMSwz
+ICsxLDExIEBACj4gICAKPiAgIGNvbmZpZyBIQVNfUEFTU1RIUk9VR0gKPiAgIAlib29sCj4gKwo+
+ICtjb25maWcgU01NVXYyCgpJdCB3b3VsZCBtYWtlIHNlbnNlIHRvIGhhdmUgQVJNIGluIHRoZSBu
+YW1lIGJlY2F1c2UgdGhlcmUgYXJlIG90aGVyIAp1c2luZyBTTU1VIGluIHRoZWlyIGRldmljZSBu
+YW1lIChzZWUgVGVncmEpLiBGdXJ0aGVybW9yZSB0aGlzIGlzIG5vdCAKb25seSB2MiBzcGVjaWZp
+Yy4KCkEgYmV0dGVyIG5hbWUgd291bGQgYmUgQVJNX1NNTVUuCgo+ICsJYm9vbCAiQVJNIFNNTVV2
+MSBhbmQgdjIgZHJpdmVyIgo+ICsJZGVmYXVsdCB5Cj4gKwlkZXBlbmRzIG9uIEFSTQo+ICsJLS0t
+aGVscC0tLQo+ICsJICBEcml2ZXIgZm9yIHRoZSBBUk0gU01NVSB2ZXJzaW9uIDEgYW5kIDIsIGEg
+cG9wdWxhciBJT01NVSBieQo+ICsJICBBUk0uCgpUaGUgZHJpdmVyIGVuYWJsZXMgc3VwcG9ydCBm
+b3IgYW55IElPTU1VIGJhc2VkIG9uIHRoZSBBUk0gU3lzdGVtIE1NVSAKYXJjaGl0ZWN0dXJlIHZl
+cnNpb25zIDEgYW5kIDIuIEFSTSBwcm92aWRlcyBpbXBsZW1lbnRhdGlvbiAoU01NVS00MDAsIApT
+TU1VLTQwMSwgU01NVS01MDAgJiBjbykgYnV0IHRoZXJlIGFyZSBvdGhlciBleGlzdGluZyBpbiB0
+aGUgd2lsZCAoZS5nIApDYXZpdW0gb25lKS4KCkFsc28sIGluIGdlbmVyYWwgaXQgd291bGQgYmUg
+dXNlZnVsIHRvIHN0YXRlIHdoeSBzb21lb25lIHdvdWxkIHdhbnQgdG8gCmVuYWJsZSBhIGRyaXZl
+ci4gU28gSSB3b3VsZCByZXdvcmsgdGhpcyBtZXNzYWdlIGFzOgoKIlN1cHBvcnQgZm9yIGltcGxl
+bWVudGF0aW9ucyBvZiB0aGUgQVJNIFN5c3RlbSBNTVUgYXJjaGl0ZWN0dXJlIHZlcnNpb25zIAox
+IGFuZCAyLgoKU2F5IFkgaGVyZSBpZiB5b3VyIFNvQyBpbmNsdWRlcyBhbiBJT01NVSBkZXZpY2Ug
+aW1wbGVtZW50aW5nIHRoZSBBUk0gClNNTVUgYXJjaGl0ZWN0dXJlIi4KCkNoZWVycywKCi0tIApK
+dWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
