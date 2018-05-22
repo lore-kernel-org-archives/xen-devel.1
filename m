@@ -1,16 +1,15 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 07/10] arm: make it possible to disable
- the SMMU driver
-Date: Tue, 22 May 2018 13:05:33 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1805221303300.24793@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH v2 10/10] xen: add cloc target
+Date: Tue, 22 May 2018 13:08:47 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1805221307040.24793@sstabellini-ThinkPad-X260>
 References: <alpine.DEB.2.10.1805211743440.4520@sstabellini-ThinkPad-X260>
- <1526950408-18219-7-git-send-email-sstabellini@kernel.org>
- <5B03BAFF02000078001308AF@prv1-mh.provo.novell.com>
+ <1526950408-18219-10-git-send-email-sstabellini@kernel.org>
+ <5B03DE1102000078001C480E@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B03BAFF02000078001308AF@prv1-mh.provo.novell.com>
+In-Reply-To: <5B03DE1102000078001C480E@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,25 +18,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: artem_mygaiev@epam.com, lars.kurth@citrix.com, sstabellini@kernel.org, andrii_anisov@epam.com, xen-devel@lists.xen.org, julien.grall@arm.com, Dario Faggioli <dfaggioli@suse.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Artem Mygaiev <artem_mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Dario Faggioli <dfaggioli@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCAyMiBNYXkgMjAxOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gPi0tLSBhL3hlbi9kcml2
-ZXJzL3Bhc3N0aHJvdWdoL0tjb25maWcKPiA+KysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gv
-S2NvbmZpZwo+ID5AQCAtMSwzICsxLDExIEBACj4gID4KPiA+Y29uZmlnIEhBU19QQVNTVEhST1VH
-SAo+ID5ib29sCj4gPisKPiA+K2NvbmZpZyBTTU1VdjIKPiA+Kwlib29sICJBUk0gU01NVXYxIGFu
-ZCB2MiBkcml2ZXIiCj4gPisJZGVmYXVsdCB5Cj4gPisJZGVwZW5kcyBvbiBBUk0KPiAKPiBBbnRp
-Y2lwYXRpbmcgZnVydGhlciBhZGRpdGlvbnMgaGVyZSwgSSB3b3VsZCBwcmVmZXIgdGhlICJpZiBB
-Uk0iIGZvcm0sIGJ1dCBhcyBpdAo+IGRvZXNuJ3QgcmVhbGx5IG1hdHRlciByaWdodCBub3cgSSB3
-b24ndCBpbnNpc3QuCgpJJ2xsIG1ha2UgdGhlIGNoYW5nZQoKIAo+ID4tLS0gYS94ZW4vZHJpdmVy
-cy9wYXNzdGhyb3VnaC9hcm0vTWFrZWZpbGUKPiA+KysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91
-Z2gvYXJtL01ha2VmaWxlCj4gPkBAIC0xLDIgKzEsMiBAQAo+ID5vYmoteSArPSBpb21tdS5vCj4g
-Pi1vYmoteSArPSBzbW11Lm8KPiA+K29iai0kKFNNTVV2MikgKz0gc21tdS5vCj4gCj4gSXMgaW9t
-bXUubyBpbiBhbnkgd2F5IHVzZWZ1bCB3aXRob3V0IHNtbXUubz8KClRoaW5ncyBsaWtlIGlvbW11
-X2RvbWFpbl9pbml0IGFyZSBjYWxsZWQgdW5jb25kaXRpb25hbGx5IGZyb20gQVJNIGNvZGUKYXQg
-dGhlIG1vbWVudCwgaXQgaXMgbm90IHF1aXRlIHBvc3NpYmxlIHRvIHNraXAgY29tcGlsYXRpb24g
-dG9kYXkuIEFsc28sCml0IGlzIHNtYWxsLCBzbyBpdCBpcyBub3Qgd29ydGggaXQgSSB0aGluay4K
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCAyMiBNYXkgMjAxOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gPj4+IE9uIDIyLjA1LjE4
+IGF0IDAyOjUzLCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6Cj4gPiAtLS0gYS94ZW4v
+TWFrZWZpbGUKPiA+ICsrKyBiL3hlbi9NYWtlZmlsZQo+ID4gQEAgLTI2NywzICsyNjcsMTQgQEAg
+JChLQ09ORklHX0NPTkZJRyk6Cj4gPiAgaW5jbHVkZS9jb25maWcvYXV0by5jb25mLmNtZDogOwo+
+ID4gIAo+ID4gIC1pbmNsdWRlICQoQkFTRURJUikvaW5jbHVkZS9jb25maWcvYXV0by5jb25mLmNt
+ZAo+ID4gKwo+ID4gKy5QSE9OWTogY2xvYwo+ID4gK2Nsb2M6IGJ1aWxkCj4gCj4gTm90IHN1cmUg
+aGVyZSAtIHdvdWxkbid0IGl0IGJlIHJlYXNvbmFibGUgdG8gaGF2ZSBubyBkZXBlbmRlbmN5IGhl
+cmUgYXQKPiBhbGwsIGFuZCBqdXN0IGhhdmUgdGhlIHJ1bGUgYWN0IG9uIHdoYXRldmVyIGlzIGlu
+IHRoZSB0cmVlIGF0IHByZXNlbnQgKGZyb20KPiB3aGF0ZXZlciBwcmlvciBpbnZvY2F0aW9uIG9m
+IG1ha2UpPwoKVGhpcyBpcyBhIHRhcmdldCBmb3IgcGVvcGxlIHRoYXQga25vdyB3aGF0IHRoZXkg
+YXJlIGRvaW5nLCBzbyBpdCBtYWtlcwpzZW5zZS4gSSdsbCByZW1vdmUgYnVpbGQgYXMgZGVwZW5k
+ZW5jeS4KCgo+ID4gKwkkKGV2YWwgdG1wZmlsZSA6PSAkKHNoZWxsIG1rdGVtcCkpCj4gPiArCSQo
+Zm9yZWFjaCBmLCAkKHNoZWxsIGZpbmQgJChCQVNFRElSKSAtbmFtZSAqLm8uZCksIFwKPiA+ICsJ
+CSQoZXZhbCBwYXRoIDo9ICQoZGlyICQoZikpKSBcCj4gPiArCQkkKGV2YWwgbmFtZSA6PSAkKHNo
+ZWxsIGNhdCAkKGYpIHwgaGVhZCAtMSB8IGN1dCAtZCAiICIgLWYgMikpIFwKPiA+ICsJCSQoc2hl
+bGwgaWYgdGVzdCAtZiAkKHBhdGgpLyQobmFtZSkgOyB0aGVuIGVjaG8gJChwYXRoKS8kKG5hbWUp
+ID4+ICQodG1wZmlsZSk7IGZpOykpCj4gPiArCWNsb2MgLS1saXN0LWZpbGU9JCh0bXBmaWxlKQo+
+ID4gKwlybSAkKHRtcGZpbGUpCj4gCj4gSSB0aGluayB5b3UgYWxzbyB3YW50IHRvICJybSAtZiAk
+KHRtcGZpbGUpIiBmaXJzdCB0aGluZyBpbiBjYXNlIGEgcHJpb3IgIm1ha2UgY2xvYyIKPiB3YXMg
+aW50ZXJydXB0ZWQuCgpUaGUgaXNzdWUgaXMgdGhhdCB0bXBmaWxlIHdpbGwgYmUgZGlmZmVyZW50
+IHRoZSBzZWNvbmQgdGltZSBhcm91bmQKKG1rdGVtcCByZXR1cm5pbmcgYSBuZXcgbmFtZSkgc28g
+aXQgaXMgbm90IHF1aXRlIHBvc3NpYmxlIHRvIHJlbW92ZSB0aGUKb2xkIHRtcGZpbGUuCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
