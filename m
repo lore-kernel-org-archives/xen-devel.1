@@ -1,24 +1,28 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v4 1/2] xen/PVH: Set up GS segment for stack
- canary
-Date: Tue, 22 May 2018 10:10:53 -0600
-Message-ID: <5B04410D02000078001C4CC5__39721.9913699248$1527005382$gmane$org@prv1-mh.provo.novell.com>
-References: <20180522035445.16911-1-boris.ostrovsky@oracle.com>
- <20180522035445.16911-2-boris.ostrovsky@oracle.com>
- <CAMzpN2iMrEqee+8yGP_qk-qAuXf+_o6vrOUSDTvX=8JAUDT5Fg@mail.gmail.com>
- <5B0421E502000078001C4B91@prv1-mh.provo.novell.com>
- <CAMzpN2gRvYMmaf2+Fpi2wkAV_rcH=uDfM8sQQaaGGK2U=7XqMA@mail.gmail.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH v2] xen: Add acpu_sleep=s3_fake command-line
+ option for testing
+Date: Tue, 22 May 2018 17:13:12 +0100
+Message-ID: <da1245ab-a89a-9fef-68fe-b3f1c47e3c6c@citrix.com>
+References: <20180522133504.11859-1-george.dunlap@citrix.com>
+ <5B041DC202000078001C4B2A@prv1-mh.provo.novell.com>
+ <a7b19732-c3a3-c918-2a00-29de0b5b87eb@citrix.com>
+ <01515f54-ad31-f7ea-3cf9-d14b9ab0f26a@citrix.com>
+ <f0879b1f-ad9f-d930-d256-0ec22daf9ed2@citrix.com>
+ <1914f090-235b-28a1-bb68-59fdad2c7736@citrix.com>
+ <5B0437F002000078001C4C26@prv1-mh.provo.novell.com>
+ <4d6380f4-0f14-2e60-60da-85af5810210c@citrix.com>
+ <5B043FAE02000078001C4C9B@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=qj7d=ij=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fL9sJ-00031W-B5
- for xen-devel@lists.xenproject.org; Tue, 22 May 2018 16:10:59 +0000
-In-Reply-To: <CAMzpN2gRvYMmaf2+Fpi2wkAV_rcH=uDfM8sQQaaGGK2U=7XqMA@mail.gmail.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=sjxm=ij=citrix.com=prvs=67362c789=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1fL9uW-0003Bs-OA
+ for xen-devel@lists.xenproject.org; Tue, 22 May 2018 16:13:16 +0000
+In-Reply-To: <5B043FAE02000078001C4C9B@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,29 +31,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: brgerst@gmail.com
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, Dario Faggioli <dfaggioli@suse.com>, Ian Jackson <ian.jackson@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIyLjA1LjE4IGF0IDE3OjE1LCA8YnJnZXJzdEBnbWFpbC5jb20+IHdyb3RlOgo+IE9u
-IFR1ZSwgTWF5IDIyLCAyMDE4IGF0IDk6NTcgQU0sIEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNl
-LmNvbT4gd3JvdGU6Cj4+Pj4+IE9uIDIyLjA1LjE4IGF0IDE1OjQ1LCA8YnJnZXJzdEBnbWFpbC5j
-b20+IHdyb3RlOgo+Pj4gT24gTW9uLCBNYXkgMjEsIDIwMTggYXQgMTE6NTQgUE0sIEJvcmlzIE9z
-dHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+IHdyb3RlOgo+Pj4+IEBAIC05OCw2
-ICsxMDEsMTIgQEAgRU5UUlkocHZoX3N0YXJ0X3hlbikKPj4+PiAgICAgICAgIC8qIDY0LWJpdCBl
-bnRyeSBwb2ludC4gKi8KPj4+PiAgICAgICAgIC5jb2RlNjQKPj4+PiAgMToKPj4+PiArICAgICAg
-IC8qIFNldCBiYXNlIGFkZHJlc3MgaW4gc3RhY2sgY2FuYXJ5IGRlc2NyaXB0b3IuICovCj4+Pj4g
-KyAgICAgICBtb3YgJE1TUl9HU19CQVNFLCVlY3gKPj4+PiArICAgICAgIG1vdiAkY2FuYXJ5LCAl
-cmF4Cj4+Pj4gKyAgICAgICBjZHEKPj4+PiArICAgICAgIHdybXNyCj4+Pgo+Pj4gQ0RRIG9ubHkg
-c2lnbi1leHRlbmRzIEVBWCB0byBSQVguICBXaGF0IHlvdSByZWFsbHkgd2FudCBpcyB0byBtb3Zl
-IHRoZQo+Pj4gaGlnaCAzMi1iaXRzIHRvIEVEWCAob3IgemVybyBFRFggaWYgd2UgY2FuIGd1YXJh
-bnRlZSBpdCBpcyBsb2FkZWQKPj4+IGJlbG93IDRHKS4KPj4KPj4gV2hhdCB5b3UgZGVzY3JpYmUg
-aXMgQ0RRRSAoQVQmVCBuYW1lOiBDTFREKTsgQ0RRIChBVCZUOiBDTFRRKQo+PiBzaWduLWV4dGVu
-ZHMgRUFYIHRvIEVEWDpFQVguCj4gCj4gQnV0IHRoYXQgd291bGQgc3RpbGwgYmUgd3JvbmcsIGFz
-IGl0IHdvdWxkIHNldCBFRFggdG8gMHhGRkZGRkZGRiBpZgo+IHRoZSBrZXJuZWwgd2FzIGxvYWRl
-ZCBiZXR3ZWVuIDJHIGFuZCA0Ry4gIExvb2tpbmcgY2xvc2VyIGF0IHRoZSBjb2RlLAo+IHdlIGp1
-c3QgbGVmdCAzMi1iaXQgbW9kZSwgc28gd2UgbXVzdCBoYXZlIGJlZW4gbG9hZGVkIGJlbG93IDRH
-LAo+IHRoZXJlZm9yZSBFRFggbXVzdCBiZSB6ZXJvLgoKQWgsIHllcywgaW5kZWVkLgoKSmFuCgoK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDUvMjIvMjAxOCAwNTowNSBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMjIuMDUu
+MTggYXQgMTc6NDYsIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gQnR3LCBz
+byBmYXIgeW91J3ZlIG9ubHkgbWVudGlvbmVkIFhQVEkgYW5kIEJUSSBjb2xsZWN0aXZlbHkgZW5h
+YmxlZCBvcgo+Pj4gZGlzYWJsZWQuIEhhdmUgeW91IHRyaWVkIHdpdGggb25lIG9mIHRoZW0gb24g
+YW5kIHRoZSBvdGhlciBvZmY/Cj4+Cj4+IEp1c3QgdHJpZWQgaXQuICBidGk9b2ZmIGNyYXNoZXMu
+ICB4cHRpPW9mZiB3b3Jrcy4KPiAKPiAid29ya3MiIGFzIGluIHByb2R1Y2VzIGEgcmVnaXN0ZXIg
+ZHVtcCwgSSBhc3N1bWU/CgpObywgeHB0aT1vZmYgc3VjY2Vzc2Z1bGx5IGdvZXMgaW50byByZWFs
+IFMzIGFuZCBjb21lcyBiYWNrLiA6LSkKCiAtR2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
