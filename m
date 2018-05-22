@@ -1,20 +1,18 @@
 From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] xen: Add fake_s3 command-line option for
- testing
-Date: Tue, 22 May 2018 09:47:25 +0200
-Message-ID: <ac2347d4bccbe26e47fc5cce233fa288364bbde3.camel@suse.com>
-References: <20180521141600.5516-1-george.dunlap@citrix.com>
- <72b85eed-79e8-25da-0558-c431e71761b9@citrix.com>
- <7328297b-69c8-3a86-633f-27a29b1f1bc1@citrix.com>
+Subject: Re: Test for osstest, features used in Qubes OS
+Date: Tue, 22 May 2018 09:51:46 +0200
+Message-ID: <da85648bddae3bd73a4dc09c2aa507a0d08d6859.camel@suse.com>
+References: <20180516215425.GB11683@mail-itl>
+ <23293.29942.645249.704280@mariner.uk.xensource.com>
+ <20180517145922.GA20125@mail-itl>
+ <23293.39881.793095.966171@mariner.uk.xensource.com>
+ <CAFLBxZbubeqBGJ3=qhzxKVoQGakyaY2Hi8dMfXz+QeGLtZZeNA@mail.gmail.com>
+ <b713974db1f90fcf450ce232761dab0defb3ee8a.camel@suse.com>
+ <23298.53323.921955.538239@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3685679227870698973=="
+Content-Type: multipart/mixed; boundary="===============6250476990725976712=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gir7=ij=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1fL21Q-0005jn-PP
- for xen-devel@lists.xenproject.org; Tue, 22 May 2018 07:47:52 +0000
-In-Reply-To: <7328297b-69c8-3a86-633f-27a29b1f1bc1@citrix.com>
+In-Reply-To: <23298.53323.921955.538239@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,39 +21,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@citrix.com>, Ben Guthro <benjamin.guthro@citrix.com>, Marek =?ISO-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>, Jan Beulich <jbeulich@suse.com>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: George Dunlap <dunlapg@umich.edu>, Marek =?ISO-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============3685679227870698973==
+--===============6250476990725976712==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-F8PbePl0x0gFRk+6z7ZH"
+	protocol="application/pgp-signature"; boundary="=-K6YhiVB3CEfiiZBRuEYR"
 
 
---=-F8PbePl0x0gFRk+6z7ZH
+--=-K6YhiVB3CEfiiZBRuEYR
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2018-05-21 at 16:33 +0100, George Dunlap wrote:
-> On 05/21/2018 03:28 PM, Andrew Cooper wrote:
-> > On 21/05/18 15:16, George Dunlap wrote:
-> > > Most server-class hardware doesn't support ACPI S3 suspend; but
-> > > most
-> > > bugs we'll run across won't need actual S3 to trigger.  Add a
-> > > command-line parameter for a "fake" S3, which will do everything
-> > > during suspend/restore except actually calling into the ACPI S3
-> > > handler.
+On Mon, 2018-05-21 at 14:57 +0100, Ian Jackson wrote:
+> > On Mon, 2018-05-21 at 12:04 +0100, George Dunlap wrote:
+> > > What if we 1) have two versions of the test -- "Fake suspend" and
+> > > "Real Suspend"; 2) only run "Real suspend" on hardware
+> > > specifically
+> > > marked as having a suspend that works reliably; 3) default all
+> > > hardware to 'false' until we do some testing to find out how
+> > > reliable
+> > > it is?
 > > >=20
-> > bool_t =3D> bool, drop the redundant initialiser, and you need to
-> > patch
-> > xen-command-line.markdown.
+>
+> OK, for starters, how about we add the fake suspend test to every
+> flight.
 >=20
-> Hmm, actually -- would it make more sense to add this as an option to
-> acpi_sleep?  e.g., "acpi_sleep=3Ds3_fake"?  (Along with s3_bios and
-> s3_mode?)
+> Do we want or need to do that test with a guest running ?
 >=20
-This actually seems a good idea to me.
+Doing it with a guest running would be more complete, I think.
+
+I think the best would be to do both, i.e.:
+- suspend without any guest
+- (when resumed) start a guest
+- suspend with a guest
 
 Dario
 --=20
@@ -63,33 +64,33 @@ Dario
 -----------------------------------------------------------------
 Dario Faggioli, Ph.D, http://about.me/dario.faggioli
 Software Engineer @ SUSE https://www.suse.com/
---=-F8PbePl0x0gFRk+6z7ZH
+--=-K6YhiVB3CEfiiZBRuEYR
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlsDyw0ACgkQFkJ4iaW4
-c+4NQA//Y+m+Y3DAyjpI14PDTs5AsKmbH0jj3TKPUujLzxATyxdTu/AiCe2Bm3Bb
-I7MdQV/c3G7/1iTQj0CqbIM6/+iZ5VpjBiumltepjpkDeUXvCh4FBcmSZub6J/vj
-nGc/687llib8BSTvvHJqaHJRKuLn6yEUTn9TYfnp+QK7fU2rdsTs9R4hktIkFS5G
-ARoKARwr+wBkPK2YnXagU0fAffEtPMOejaPBMjUMUqkDvEaMlyHoagkdN6K4/Hfd
-V/6em7l3sioTOUwIOQ9RLpnfTEq2AwuFr3u4QTfP1f/CyiFJE8Kc7nX/0W6cbDyq
-ZtL8yLm4Yoc+cvECLkOuGNkqg+oSo2Wukc5EYDObiBYiRruBruE8NEbsm5aMqKfB
-ZViQdXOrVmtRWY2NTwXjaacZUvARfHYDR9L2/P/0sh2kwH1aQbMOQ8mLpn0EslkX
-opGJo9rfSxGA3iMG3vT/N1SeYUFta+ZVBqLn1pfe2FlRadE7nIN0yP6UJ4WOo7jl
-xH3pxyKJVAnRJi23Pu/A2A+1BXQBQIotrtlJeaZglEE8fybBBXw4n7d++9gWe374
-fxzlc/mufOLbqylrTDq/nw6BcTlGDmCwZZ3yXPpYjMHcxfoxnJ2dKzBJMJIghG1+
-3Ju0UOT/gqeVyT+6fq+kGfQ3dRRR0G8jNQX/OIDAMoal0L8xrbE=
-=+OZ8
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlsDzBIACgkQFkJ4iaW4
+c+4avxAAmFkeB0DSfyI6HoT0iHxp0lTdo7b4a7qLeTKSWHLjcNDXaYg2imisd2tX
+bup5c1sEfSKsgJ/W/LdHPqBqBASXqVl3jIcPfHZsGmxsZVDm6V011fWeBPnMwB7V
+t6EZWfYvDWd9p7rLnjPjOjiBI1XiFkOEcVKGmZp0jMqEyL1wQ22iVzur9DqvwG/S
+6ZDvEr6R5DxreOfJrbMrBAavVbHE6qschXI6ULLgoqab/mHngZ5Cq6YjyCSBsw0k
+Y1jwxKfX3/VawXwLsGXcRIiTIgMSlyTyTyDpNNAAZd8Linf6WawhS2bFxAEymph6
+F3HwJzWO+NsIRSv6jDhymoj9Lm9oMT5ctAgF7nD4e58EuHZ0xK2Y1+qMAHAatKxZ
+iJ7PHjwONlYV8pdOH7Th3ePLegKipUSOnWTe09eka4DpyVLQ8M17nuTj32qC9p+f
+3sGloUEYpwFhfomk97/yHHSXB6ebz7dhWegYAkQ/bBKu1AnYsZ2tnDTLZe8QAKRb
+x5VqdBQG/Gk36+5by96rkgk18qNIzMDYWN/hwdEd0TND50d/g/dOcd2gLM5NJ5Ad
+YwjynMZ6PFwtp8Vi3pyI7C9xfh5q+zfqM7DRff75ppLVz5AQveqlat3xdmGkxwAX
+ytGzB/8K/GrXHoD3s5KLpr9nnl9hsuEBmV9KwVQ3sIWsMNfPMfs=
+=Hkim
 -----END PGP SIGNATURE-----
 
---=-F8PbePl0x0gFRk+6z7ZH--
+--=-K6YhiVB3CEfiiZBRuEYR--
 
 
 
---===============3685679227870698973==
+--===============6250476990725976712==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -99,4 +100,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============3685679227870698973==--
+--===============6250476990725976712==--
