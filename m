@@ -1,20 +1,20 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: Xen Project Security Whitepaper v1 is ready for
- community review
-Date: Tue, 22 May 2018 04:11:38 -0600
-Message-ID: <5B03ECDA02000078001C48FA@prv1-mh.provo.novell.com>
-References: <6011F946-60DB-4EF0-B335-5333D3F56F74@citrix.com>
- <37237830.PBcEiU9Ln4@wopr.lan.crc.id.au> <20180518175334.GB2731@mail-itl>
+Subject: Re: [PATCH v4 1/2] xen/PVH: Set up GS segment for stack
+ canary
+Date: Tue, 22 May 2018 04:13:30 -0600
+Message-ID: <5B03ED4A02000078001C48FD__6699.79546587474$1526983938$gmane$org@prv1-mh.provo.novell.com>
+References: <20180522035445.16911-1-boris.ostrovsky@oracle.com>
+ <20180522035445.16911-2-boris.ostrovsky@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=qj7d=ij=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fL4Ge-0002Kb-4v
- for xen-devel@lists.xenproject.org; Tue, 22 May 2018 10:11:44 +0000
-In-Reply-To: <20180518175334.GB2731@mail-itl>
+ id 1fL4IS-0002Wd-2e
+ for xen-devel@lists.xenproject.org; Tue, 22 May 2018 10:13:36 +0000
+In-Reply-To: <20180522035445.16911-2-boris.ostrovsky@oracle.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,19 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek Marczykowski <marmarek@invisiblethingslab.com>
-Cc: Lars Kurth <lars.kurth@citrix.com>, Steven Haigh <netwiz@crc.id.au>, xen-devel <xen-devel@lists.xenproject.org>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE4LjA1LjE4IGF0IDE5OjUzLCA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNv
-bT4gd3JvdGU6Cj4gQWx0ZXJuYXRpdmUgd29ya2Fyb3VuZCBmb3IgdGhpcyB3b3VsZCBiZSBtb3Jl
-IGZyZXF1ZW50IHBvaW50IHJlbGVhc2VzIGJ5Cj4gZGVmYXVsdCAobWF5YmUgd2l0aCBhYmlsaXR5
-IHRvIGRlbGF5IGl0IHZlcnkgZmV3IGNvbW1pdHMgYXJlIHF1ZXVlZCkuCj4gRm9yIGV4YW1wbGUg
-ZXZlcnkgMyBtb250aHMuIEl0IHdvdWxkbid0IHNvbHZlIGFsbCB0aGUgY2FzZXMsIGJ1dCBJIHRo
-aW5rCj4gd2lsbCBtYWtlIGl0IGVhc2llciBtb3N0IG9mIHRoZSB0aW1lLgoKSXMgZXZlcnkgMyBt
-b250aHMgc28gbXVjaCBiZXR0ZXIgdGhhbiBldmVyeSA0IG1vbnRocz8gR3JhbnRlZCB3ZQpiYXNp
-Y2FsbHkgbmV2ZXIgbWFuYWdlIHRvIG1ha2UgaXQgZXhhY3RseSA0IG1vbnRocywgYnV0IG9uIHRo
-ZSBhdmVyYWdlCkkgdGhpbmsgd2UncmUgbm90IHRvbyBmYXIgb2ZmLgoKSmFuCgoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDIyLjA1LjE4IGF0IDA1OjU0LCA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+IHdy
+b3RlOgo+IFdlIGFyZSBtYWtpbmcgY2FsbHMgdG8gQyBjb2RlIChlLmcuIHhlbl9wcmVwYXJlX3B2
+aCgpKSB3aGljaCBtYXkgdXNlCj4gc3RhY2sgY2FuYXJ5IChzdG9yZWQgaW4gR1Mgc2VnbWVudCku
+Cj4gCj4gU2lnbmVkLW9mZi1ieTogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3Jh
+Y2xlLmNvbT4KClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
