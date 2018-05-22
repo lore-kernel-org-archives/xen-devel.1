@@ -1,12 +1,21 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH for-4.11] x86/spec-ctrl: Rename
- ARCH_CAPS.SSBD_NO to SSB_NO
-Date: Tue, 22 May 2018 10:27:48 +0100
-Message-ID: <1526981268-20501-1-git-send-email-andrew.cooper3@citrix.com>
+From: Christoph Hellwig <hch@infradead.org>
+Subject: Re: [RFC PATCH v2 02/12] arch/x86/kernel/amd_gart_64:
+ update usage of address zone modifiers
+Date: Tue, 22 May 2018 02:38:06 -0700
+Message-ID: <20180522093806.GA25671__11588.999865535$1526981831$gmane$org@infradead.org>
+References: <1526916033-4877-1-git-send-email-yehs2007@gmail.com>
+ <1526916033-4877-3-git-send-email-yehs2007@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=al8k=ij=bombadil.srs.infradead.org=batv+a8c6d037863aa87ae187+5385+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1fL3kM-0007I5-8v
+ for xen-devel@lists.xenproject.org; Tue, 22 May 2018 09:38:22 +0000
+Content-Disposition: inline
+In-Reply-To: <1526916033-4877-3-git-send-email-yehs2007@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,40 +24,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: Huaisheng Ye <yehs2007@gmail.com>
+Cc: kstewart@linuxfoundation.org, mhocko@suse.com, Huaisheng Ye <yehs1@lenovo.com>, hehy1@lenovo.com, gregkh@linuxfoundation.org, "H. Peter Anvin" <hpa@zytor.com>, linux-kernel@vger.kernel.org, willy@infradead.org, alexander.levin@verizon.com, linux-mm@kvack.org, iommu@lists.linux-foundation.org, Ingo Molnar <mingo@redhat.com>, linux-btrfs@vger.kernel.org, chengnt@lenovo.com, xen-devel@lists.xenproject.org, akpm@linux-foundation.org, colyli@suse.de, mgorman@techsingularity.net, Thomas Gleixner <tglx@linutronix.de>, vbabka@suse.cz, Robin Murphy <robin.murphy@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-QSBsYXN0LW1pbnV0ZSByZW5hbWUgb2YgdGhlIGZlYXR1cmUgb2NjdXJlZCwgYW5kIHRoZSBwYXRj
-aCBjb21taXR0ZWQgdG8Kc3RhZ2luZyB3YXMgdW5mb3J0dW5hdGVseSBzdGFsZS4gIENvcnJlY3Qg
-aXQuCgpTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXgu
-Y29tPgotLS0KQ0M6IEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT4KQ0M6IEp1ZXJnZW4g
-R3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KClRoaXMgd2FudHMgdG8gYmUgdGFrZW4gZm9yIDQuMTEK
-LS0tCiB4ZW4vYXJjaC94ODYvc3BlY19jdHJsLmMgICAgICAgIHwgMiArLQogeGVuL2luY2x1ZGUv
-YXNtLXg4Ni9tc3ItaW5kZXguaCB8IDIgKy0KIDIgZmlsZXMgY2hhbmdlZCwgMiBpbnNlcnRpb25z
-KCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9zcGVjX2N0cmwu
-YyBiL3hlbi9hcmNoL3g4Ni9zcGVjX2N0cmwuYwppbmRleCAyY2NhZGEyLi43ZGI2ZTUxIDEwMDY0
-NAotLS0gYS94ZW4vYXJjaC94ODYvc3BlY19jdHJsLmMKKysrIGIveGVuL2FyY2gveDg2L3NwZWNf
-Y3RybC5jCkBAIC0yMTYsNyArMjE2LDcgQEAgc3RhdGljIHZvaWQgX19pbml0IHByaW50X2RldGFp
-bHMoZW51bSBpbmRfdGh1bmsgdGh1bmssIHVpbnQ2NF90IGNhcHMpCiAgICAgICAgICAgIChjYXBz
-ICYgQVJDSF9DQVBBQklMSVRJRVNfSUJSU19BTEwpICAgICAgPyAiIElCUlNfQUxMIiAgOiAiIiwK
-ICAgICAgICAgICAgKGNhcHMgJiBBUkNIX0NBUEFCSUxJVElFU19SRENMX05PKSAgICAgICA/ICIg
-UkRDTF9OTyIgICA6ICIiLAogICAgICAgICAgICAoY2FwcyAmIEFSQ0hfQ0FQU19SU0JBKSAgICAg
-ICAgICAgICAgICAgID8gIiBSU0JBIiAgICAgIDogIiIsCi0gICAgICAgICAgIChjYXBzICYgQVJD
-SF9DQVBTX1NTQkRfTk8pICAgICAgICAgICAgICAgPyAiIFNTQkRfTk8iICAgOiAiIik7CisgICAg
-ICAgICAgIChjYXBzICYgQVJDSF9DQVBTX1NTQl9OTykgICAgICAgICAgICAgICAgPyAiIFNTQl9O
-TyIgICAgOiAiIik7CiAKICAgICAvKiBDb21waWxlZC1pbiBzdXBwb3J0IHdoaWNoIHBlcnRhaW5z
-IHRvIEJUSSBtaXRpZ2F0aW9ucy4gKi8KICAgICBpZiAoIElTX0VOQUJMRUQoQ09ORklHX0lORElS
-RUNUX1RIVU5LKSApCmRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L21zci1pbmRleC5o
-IGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9tc3ItaW5kZXguaAppbmRleCAwNjEyYTk2Li44ZmJjY2M4
-IDEwMDY0NAotLS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L21zci1pbmRleC5oCisrKyBiL3hlbi9p
-bmNsdWRlL2FzbS14ODYvbXNyLWluZGV4LmgKQEAgLTQ3LDcgKzQ3LDcgQEAKICNkZWZpbmUgQVJD
-SF9DQVBBQklMSVRJRVNfUkRDTF9OTwkoX0FDKDEsIFVMTCkgPDwgMCkKICNkZWZpbmUgQVJDSF9D
-QVBBQklMSVRJRVNfSUJSU19BTEwJKF9BQygxLCBVTEwpIDw8IDEpCiAjZGVmaW5lIEFSQ0hfQ0FQ
-U19SU0JBCQkJKF9BQygxLCBVTEwpIDw8IDIpCi0jZGVmaW5lIEFSQ0hfQ0FQU19TU0JEX05PCQko
-X0FDKDEsIFVMTCkgPDwgNCkKKyNkZWZpbmUgQVJDSF9DQVBTX1NTQl9OTwkJKF9BQygxLCBVTEwp
-IDw8IDQpCiAKIC8qIEludGVsIE1TUnMuIFNvbWUgYWxzbyBhdmFpbGFibGUgb24gb3RoZXIgQ1BV
-cyAqLwogI2RlZmluZSBNU1JfSUEzMl9QRVJGQ1RSMAkJMHgwMDAwMDBjMQotLSAKMi4xLjQKCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
-bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
-LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+VGhpcyBjb2RlIGRvZXNuJ3QgZXhpc3QgaW4gY3VycmVudCBtYWlubGluZS4gIFdoYXQga2VybmVs
+IHZlcnNpb24KaXMgeW91ciBwYXRjaCBhZ2FpbnN0PwoKT24gTW9uLCBNYXkgMjEsIDIwMTggYXQg
+MTE6MjA6MjNQTSArMDgwMCwgSHVhaXNoZW5nIFllIHdyb3RlOgo+IEZyb206IEh1YWlzaGVuZyBZ
+ZSA8eWVoczFAbGVub3ZvLmNvbT4KPiAKPiBVc2UgX19HRlBfWk9ORV9NQVNLIHRvIHJlcGxhY2Ug
+KF9fR0ZQX0RNQSB8IF9fR0ZQX0hJR0hNRU0gfCBfX0dGUF9ETUEzMikuCj4gCj4gX19fR0ZQX0RN
+QSwgX19fR0ZQX0hJR0hNRU0gYW5kIF9fX0dGUF9ETUEzMiBoYXZlIGJlZW4gZGVsZXRlZCBmcm9t
+IEdGUAo+IGJpdG1hc2tzLCB0aGUgYm90dG9tIHRocmVlIGJpdHMgb2YgR0ZQIG1hc2sgaXMgcmVz
+ZXJ2ZWQgZm9yIHN0b3JpbmcKPiBlbmNvZGVkIHpvbmUgbnVtYmVyLgo+IF9fR0ZQX0RNQSwgX19H
+RlBfSElHSE1FTSBhbmQgX19HRlBfRE1BMzIgc2hvdWxkIG5vdCBiZSBvcGVyYXRlZCBieSBPUi4K
+CklmIHRoZXkgaGF2ZSBhbHJlYWR5IGJlZW4gZGVsZXRlZCB0aGUgaWRlbnRpZmllciBzaG91bGQg
+bm90IGV4aXN0CmFueW1vcmUsIHNvIGVpdGhlciB5b3VyIHBhdGNoIGhhcyBpc3N1ZXMsIG9yIGF0
+IGxlYXN0IHRoZSBkZXNjcmlwdGlvbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
