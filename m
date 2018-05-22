@@ -1,21 +1,21 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH] xen: Add fake_s3 command-line option for
- testing
-Date: Tue, 22 May 2018 12:21:47 +0100
-Message-ID: <d32ad719-9b1d-55b7-cd8f-308806484e12@citrix.com>
-References: <20180521141600.5516-1-george.dunlap@citrix.com>
- <5B03F63302000078001C4961@prv1-mh.provo.novell.com>
+From: Matthew Wilcox <willy@infradead.org>
+Subject: Re: [RFC PATCH v2 10/12] mm/zsmalloc: update usage of
+ address zone modifiers
+Date: Tue, 22 May 2018 04:22:30 -0700
+Message-ID: <20180522112230.GA5412__43520.5194204629$1526988084$gmane$org@bombadil.infradead.org>
+References: <1526916033-4877-1-git-send-email-yehs2007@gmail.com>
+ <1526916033-4877-11-git-send-email-yehs2007@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=sjxm=ij=citrix.com=prvs=67362c789=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1fL5MV-00018H-QJ
- for xen-devel@lists.xenproject.org; Tue, 22 May 2018 11:21:51 +0000
-In-Reply-To: <5B03F63302000078001C4961@prv1-mh.provo.novell.com>
-Content-Language: en-US
+ <srs0=3nhg=ij=infradead.org=willy@srs-us1.protection.inumbo.net>)
+ id 1fL5NL-0001PT-4W
+ for xen-devel@lists.xenproject.org; Tue, 22 May 2018 11:22:43 +0000
+Content-Disposition: inline
+In-Reply-To: <1526916033-4877-11-git-send-email-yehs2007@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,25 +24,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Ben Guthro <benjamin.guthro@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, Dario Faggioli <dfaggioli@suse.com>, Ian Jackson <ian.jackson@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Huaisheng Ye <yehs2007@gmail.com>
+Cc: kstewart@linuxfoundation.org, mhocko@suse.com, Nitin Gupta <ngupta@vflare.org>, Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>, Huaisheng Ye <yehs1@lenovo.com>, hehy1@lenovo.com, gregkh@linuxfoundation.org, Minchan Kim <minchan@kernel.org>, linux-kernel@vger.kernel.org, alexander.levin@verizon.com, linux-mm@kvack.org, iommu@lists.linux-foundation.org, linux-btrfs@vger.kernel.org, chengnt@lenovo.com, xen-devel@lists.xenproject.org, akpm@linux-foundation.org, colyli@suse.de, mgorman@techsingularity.net, vbabka@suse.cz
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDUvMjIvMjAxOCAxMTo1MSBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMjEuMDUu
-MTggYXQgMTY6MTYsIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+IHdyb3RlOgo+PiBNb3N0IHNl
-cnZlci1jbGFzcyBoYXJkd2FyZSBkb2Vzbid0IHN1cHBvcnQgQUNQSSBTMyBzdXNwZW5kOwo+IAo+
-IElzIHRoYXQgcmVhbGx5IHRoZSBjYXNlPyBJIHRob3VnaCBTMyB3YXMgcHJldHR5ICJub3JtYWwi
-IHRoZXNlIGRheXMuCj4gCj4+IGJ1dCBtb3N0IGJ1Z3Mgd2UnbGwgcnVuIGFjcm9zcyB3b24ndCBu
-ZWVkIGFjdHVhbCBTMyB0byB0cmlnZ2VyLgo+IAo+IE5vdCBzdXJlIGFib3V0IHRoaXMgb25lIGVp
-dGhlcjogSW4gcGFydGljdWxhciB0aGUgbWljcm9jb2RlIGlzc3VlCj4gYWRkcmVzc2VkIHJlY2Vu
-dGx5IGRvZXMgcmVxdWlyZSBhY3R1YWwgUzMgdG8gc3VyZmFjZS4gSSdtIG5vdAo+IG1lYW5pbmcg
-dG8gcHV0IHVuZGVyIHF1ZXN0aW9uIHRoZSB1c2VmdWxuZXNzIG9mIHRoaXMgb3B0aW9uLAo+IHRo
-b3VnaC4gSSdkIGp1c3QgbGlrZSB0aGUgZGVzY3JpcHRpb24gdG8gbm90IGxlYWQgdG8gcGVvcGxl
-IGRyYXdpbmcKPiB3cm9uZyBjb25jbHVzaW9ucy4KClJlIFMzIHN1cHBvcnQsIEkgd2FzIGp1c3Qg
-cmVwZWF0aW5nIHdoYXQgSSdkIGhlYXJkLiAgTXkganVkZ2VtZW50IGlzCnN0aWxsIHRoYXQgIm1v
-c3QiIGJ1Z3Mgd2UgZW5kIHVwIGVuY291bnRlcmluZyB3aWxsIGJlIG9uIHRoZSBYZW4gc2lkZTsK
-YnV0IEknbSBoYXBweSB0byByZXdvcmQgaXQgdG8gdGFrZSBvdXQgLyBtb2RlcmF0ZSBib3RoIGlt
-cGxpY2F0aW9ucy4KCiAtR2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+T24gTW9uLCBNYXkgMjEsIDIwMTggYXQgMTE6MjA6MzFQTSArMDgwMCwgSHVhaXNoZW5nIFllIHdy
+b3RlOgo+IEBAIC0zNDMsNyArMzQzLDcgQEAgc3RhdGljIHZvaWQgZGVzdHJveV9jYWNoZShzdHJ1
+Y3QgenNfcG9vbCAqcG9vbCkKPiAgc3RhdGljIHVuc2lnbmVkIGxvbmcgY2FjaGVfYWxsb2NfaGFu
+ZGxlKHN0cnVjdCB6c19wb29sICpwb29sLCBnZnBfdCBnZnApCj4gIHsKPiAgCXJldHVybiAodW5z
+aWduZWQgbG9uZylrbWVtX2NhY2hlX2FsbG9jKHBvb2wtPmhhbmRsZV9jYWNoZXAsCj4gLQkJCWdm
+cCAmIH4oX19HRlBfSElHSE1FTXxfX0dGUF9NT1ZBQkxFKSk7Cj4gKwkJCWdmcCAmIH5fX0dGUF9a
+T05FX01PVkFCTEUpOwo+ICB9CgpUaGlzIHNob3VsZCBiZSAmIH5HRlBfWk9ORU1BU0sKCkFjdHVh
+bGx5LCB3ZSBzaG91bGQgcHJvYmFibHkgaGF2ZSBhIGZ1bmN0aW9uIHRvIGNsZWFyIHRob3NlIGJp
+dHMgcmF0aGVyCnRoYW4gaGF2ZSBldmVyeSBkcml2ZXIgbWFuaXB1bGF0aW5nIHRoZSBnZnAgbWFz
+ayBsaWtlIHRoaXMuICBNYXliZQoKI2RlZmluZSBnZnBfbm9ybWFsKGdmcCkJCSgoZ2ZwKSAmIH5H
+RlBfWk9ORU1BU0spCgoJcmV0dXJuICh1bnNpZ25lZCBsb25nKWttZW1fY2FjaGVfYWxsb2MocG9v
+bC0+aGFuZGxlX2NhY2hlcCwKLQkJCWdmcCAmIH4oX19HRlBfSElHSE1FTXxfX0dGUF9NT1ZBQkxF
+KSk7CisJCQlnZnBfbm9ybWFsKGdmcCkpOwoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
