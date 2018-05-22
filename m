@@ -1,17 +1,16 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v2 05/10] arm: make it possible to
- enable/disable UART drivers
-Date: Tue, 22 May 2018 09:51:11 +0100
-Message-ID: <1e655140-2a62-145c-6bcd-7e09676eea9b@arm.com>
-References: <alpine.DEB.2.10.1805211743440.4520@sstabellini-ThinkPad-X260>
- <1526950408-18219-5-git-send-email-sstabellini@kernel.org>
- <5B03B9E5020000780013088E@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] libxl: always call qemus
+ xen-save-devices-state in suspend/resume
+Date: Tue, 22 May 2018 10:52:20 +0200
+Message-ID: <20180522105220.607f3f48.olaf@aepfle.de>
+References: <20180517155108.4624-1-olaf@aepfle.de>
+ <20180518170142.5q2773ivsfjt2b4y@citrix.com>
+ <20180518210910.02c83631.olaf@aepfle.de>
+ <20180521081820.2eue7occ26ouxzb3@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0142435525533131939=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B03B9E5020000780013088E@prv1-mh.provo.novell.com>
-Content-Language: en-US
+In-Reply-To: <20180521081820.2eue7occ26ouxzb3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,36 +19,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <jbeulich@suse.com>, sstabellini@kernel.org
-Cc: artem_mygaiev@epam.com, lars.kurth@citrix.com, Dario Faggioli <dfaggioli@suse.com>, andrii_anisov@epam.com, xen-devel@lists.xen.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGl0bGU6IFRoaXMgaXMgbm90aGluZyB2ZXJ5IHNwZWNpZmljIHRvIGFybS4KCk9uIDA1LzIyLzIw
-MTggMDc6MzQgQU0sIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IFN0ZWZhbm8gU3RhYmVsbGluaSA8
-c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gMDUvMjIvMTggMjo1MyBBTSA+Pj4KPj4gQWxsIHRoZSBV
-QVJUIGRyaXZlcnMgYXJlIHNpbGVudCBvcHRpb25zLiBBZGQgb25lIGxpbmUgZGVzY3JpcHRpb25z
-IHNvCj4+IHRoYXQgY2FuIGJlIGRlL3NlbGVjdGVkIHZpYSBtZW51Y29uZmlnLgo+Pgo+PiBTaWdu
-ZWQtb2ZmLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+Cj4g
-Cj4gUGxlYXNlIGRvbid0IGZvcmdldCB0byBDYyBtYWludGFpbmVycy4KPiAKPiAKPj4gLS0tIGEv
-eGVuL2RyaXZlcnMvY2hhci9LY29uZmlnCj4+ICsrKyBiL3hlbi9kcml2ZXJzL2NoYXIvS2NvbmZp
-Zwo+PiBAQCAtMSwxMSArMSwxMSBAQAo+PiBjb25maWcgSEFTX05TMTY1NTAKPj4gLQlib29sCj4+
-ICsJYm9vbCAiTlMxNjU1MCBVQVJUIGRyaXZlciIKPiAKPiBIZXJlIGFzIHdlbGwgYXMgLi4uCj4g
-Cj4gCj4+IEBAIC01Myw3ICs1Myw4IEBAIGNvbmZpZyBIQVNfU0NJRgo+PiBvciBSZW5lc2FzIFIt
-Q2FyIEdlbiAyLzMgYmFzZWQgYm9hcmQgc2F5IFkuCj4gICA+Cj4+IGNvbmZpZyBIQVNfRUhDSQo+
-PiAtCWJvb2wKPj4gKwlib29sICJFSENJIFVBUlQgZHJpdmVyIgo+IAo+IC4uLiBoZXJlIGlpcmMg
-SnVsaWVuIGhhZCBhbHJlYWR5IHBvaW50ZWQgb3V0IHRoYXQgdGhlIGRyaXZlcnMgc2hvdWxkIG5v
-dCBiZWNvbWUKPiBvcHRpb25hbCBvbiB4ODYsIGkuZS4gaW4gdGhlIGZvcm1lciBjYXNlIHlvdSB3
-YW50IHRvIGF0dGFjaCBhIGNvbmRpdGlvbmFsIHRvIHRoZQo+IHByb21wdCB3aGlsZSBpbiB0aGUg
-bGF0dGVyIGNhc2UgSSBkb24ndCBzZWUgd2h5IHlvdSBhZGQgdGhlIHByb21wdCBpbiB0aGUgZmly
-c3QKPiBwbGFjZSBpZiB5b3UgbWVhbiB0byBtYWtlIGl0IHg4Ni1zcGVjaWZpYy4gV2hpY2ggYnkg
-aXRzZWxmIGlzIHF1ZXN0aW9uYWJsZQo+IHRob3VnaDogV2h5IHdvdWxkIHRoaXMgZHJpdmVyIGJl
-IHg4Ni1zcGVjaWZpYywgd2hlbiBzbyBmYXIgaXQgKGNvbnNjaW91c2x5KQo+IGhhc24ndCBiZWVu
-PyBJZiBhbnl0aGluZyBJIGNvdWxkIHNlZSBpdCBkZXBlbmQgb24gSEFTX1BDSS4KCkkgZG9uJ3Qg
-ZXhwZWN0IHRoaXMgcGllY2Ugb2YgaGFyZHdhcmUgdG8gY29tZSB1cCBvbiBBcm0uIEZ1cnRoZXJt
-b3JlIApIQVNfUENJIHdpbGwgZ2V0IHNlbGVjdGVkIGF0IHNvbWUgcG9pbnQgYnkgQXJtLiBCdXQg
-d2UgbmVlZCB0byBhdm9pZCAKc2VsZWN0aW5nIHRoYXQgZHJpdmVyLiBUaGUgc29sdXRpb24gSSBj
-YW4gc2VlIGhlcmUgaXMga2VlcGluZyB0aGUgCmFyY2hpdGVjdHVyZSBzZWxlY3RpbmcgdGhlIG9w
-dGlvbiBhcyBpdCBpcyBkb25lIHRvZGF5LgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============0142435525533131939==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/xY9BQV_HPWR1SOks3bxiX5."; protocol="application/pgp-signature"
+
+--Sig_/xY9BQV_HPWR1SOks3bxiX5.
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 21 May 2018 09:18:20 +0100
+schrieb Wei Liu <wei.liu2@citrix.com>:
+
+> What I mean is: now you seem to want to call
+> libxl__domain_suspend_device_model when QEMU upstream is running,
+> regardless of whether a guest is HVM or PV, so the check for HVM should
+> be gone.
+
+libxl__domain_suspend_device_model calls libxl__device_model_version_runnin=
+g,
+which may return LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN_TRADITIONAL in case
+"dm-version" does not exist.
+Is it valid to assume that a non-existant "dm-version" means qemu-trad?
+So far I have not tested a PV domU with qemu-trad, not sure if that can work
+anyway.
+
+Also, libxl__device_model_version_running may return -1. Is that valid?
+
+Olaf
+
+--Sig_/xY9BQV_HPWR1SOks3bxiX5.
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWwPaRAAKCRBdQqD6ppg2
+fhtMAKDIk2iDNRlXrxrbh+78Iv/U69jsCgCgj7NSOH7V1yH3pAN21N5E3WGzOD8=
+=LZfR
+-----END PGP SIGNATURE-----
+
+--Sig_/xY9BQV_HPWR1SOks3bxiX5.--
+
+
+--===============0142435525533131939==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0142435525533131939==--
