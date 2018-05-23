@@ -1,14 +1,20 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] tools/kdd: alternative way of muting
- spurious gcc warning
-Date: Wed, 23 May 2018 06:02:45 +0200
-Message-ID: <1bf1a8df-c0ae-8ce0-2fe8-835da1463c64@suse.com>
-References: <20180522194745.25806-1-marmarek@invisiblethingslab.com>
+Subject: Re: [for-4.11] Re: [PATCH 00/13] xen/arm: SSBD (aka
+ Spectre-v4) mitigation (XSA-263)
+Date: Wed, 23 May 2018 06:07:10 +0200
+Message-ID: <d52052a3-f28e-b9ff-cd1b-d8f94881d406@suse.com>
+References: <20180522174254.27551-1-julien.grall@arm.com>
+ <6ab63bf7-d700-93ee-6a86-f7e33820c17b@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180522194745.25806-1-marmarek@invisiblethingslab.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=xj/t=ik=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fLL3T-0000Og-Hx
+ for xen-devel@lists.xenproject.org; Wed, 23 May 2018 04:07:15 +0000
+In-Reply-To: <6ab63bf7-d700-93ee-6a86-f7e33820c17b@arm.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -18,20 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+Cc: andre.przywara@arm.com, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjIvMDUvMTggMjE6NDcsIE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSB3cm90ZToKPiBP
-bGRlciBnY2MgZG9lcyBub3Qgc3VwcG9ydCAjcHJhZ21hIEdDQyBkaWFnbm9zdGljcywgc28gdXNl
-IGFsdGVybmF0aXZlCj4gYXBwcm9hY2ggLSBjaGFuZ2UgdmFyaWFibGUgdHlwZSB0byB1aW50MzJf
-dCAodGhpcyBjb2RlIGhhbmRsZSAzMi1iaXQKPiByZXF1ZXN0cyBvbmx5IGFueXdheSksIHdoaWNo
-IGFwcGFyZW50bHkgYWxzbyBhdm9pZCBnY2MgY29tcGxhaW5pbmcgYWJvdXQKPiB0aGlzIChvdGhl
-cndpc2UgY29ycmVjdCkgY29kZS4KPiAKPiBGaXhlcyA0MzdlMDBmZWEwNGJlY2M5MWMxYjZiYzFj
-MGJhYTYzNmIwNjdhNWNjICJ0b29scy9rZGQ6IG11dGUgc3B1cmlvdXMKPiBnY2Mgd2FybmluZyIK
-PiAKPiBTaWduZWQtb2ZmLWJ5OiBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVja2kgPG1hcm1hcmVr
-QGludmlzaWJsZXRoaW5nc2xhYi5jb20+CgpSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3Nz
-IDxqZ3Jvc3NAc3VzZS5jb20+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+T24gMjIvMDUvMTggMTk6NDYsIEp1bGllbiBHcmFsbCB3cm90ZToKPiBJIGZvcmdvdCB0byBDQyBK
+dWVyZ2VuIGFzIFJNLiBUaGlzIHNlcmllcyBpcyBjYW5kaWRhdGUgZm9yIFhlbiA0LjExIGFzCj4g
+cGFydCBvZiBYU0EtMjYzLgoKRm9yIFhTQSBwYXRjaGVzIEkgZG9uJ3QgdGhpbmsgeW91IG5lZWQg
+aXQsIGJ1dCB5b3UgY2FuIGhhdmUgbXkKClJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3Mg
+PGpncm9zc0BzdXNlLmNvbT4KCmZvciB0aGUgc2VyaWVzLCBvZiBjb3Vyc2UuCgoKSnVlcmdlbgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
