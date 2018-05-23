@@ -1,8 +1,8 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH v2 06/23] README.dev: Discuss setting
- Firmware for UEFI machines
-Date: Wed, 23 May 2018 17:15:53 +0100
-Message-ID: <1527092170-4111-7-git-send-email-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH v2 16/23] Debian.pm: debian_overlays: Do
+ not make $func callback for nonexistent dirs
+Date: Wed, 23 May 2018 17:16:03 +0100
+Message-ID: <1527092170-4111-17-git-send-email-ian.jackson@eu.citrix.com>
 References: <1527092170-4111-1-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +11,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=gdxj=ik=citrix.com=prvs=674fbe803=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1fLWR4-0000O8-Is
- for xen-devel@lists.xenproject.org; Wed, 23 May 2018 16:16:22 +0000
+ id 1fLWR6-0000Pe-81
+ for xen-devel@lists.xenproject.org; Wed, 23 May 2018 16:16:24 +0000
 In-Reply-To: <1527092170-4111-1-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,20 +26,23 @@ To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBtdXN0IG9jY3VyIGJlZm9yZSBta25ldGJvb3RkaXIsIG9yIG1rbmV0Ym9vdGRpciBkb2Vz
-IG5vdCBzZXQKdGhpbmdzIHVwIGZvciBVRUZJIGJvb3RpbmcuCgpTaWduZWQtb2ZmLWJ5OiBJYW4g
-SmFja3NvbiA8SWFuLkphY2tzb25AZXUuY2l0cml4LmNvbT4KLS0tCiBSRUFETUUuZGV2IHwgNiAr
-KysrKy0KIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKCmRp
-ZmYgLS1naXQgYS9SRUFETUUuZGV2IGIvUkVBRE1FLmRldgppbmRleCBkZTA0Yjk4Li5hMmU0NmY5
-IDEwMDY0NAotLS0gYS9SRUFETUUuZGV2CisrKyBiL1JFQURNRS5kZXYKQEAgLTk3LDcgKzk3LDEx
-IEBAIEZvciBleGFtcGxlLCBvbmUgbWlnaHQgbmVlZCBzb21ldGhpbmcgbGlrZSB0aGlzOgogKE1h
-bnkgb2YgdGhlc2UgdGhpbmdzIGFyZSBub3QgbmVlZGVkIGluIE1hc3NhY2h1c2V0dHMgYXMgdGhl
-IGFuc2libGUKIHBsYXlib29rIHdpbGwgcHJvdmlkZSBpdCB2aWEgYW4gYXV0b2dlbmVyYXRlZCBj
-b25maWcgZmlsZSAtIHNlZSBhYm92ZS4pCiAKLUNyZWF0ZSB0aGUgdGZ0cCBkaXJlY3Rvcnk6CitT
-ZXQgdGhlIGZpcm13YXJlLCBpZiBpdCdzIFVFRkk6CisKKyAkIC4vbWctaG9zdHMgc2V0cHJvcHMg
-YWxiYW5hezAsMX0gLS0gRmlybXdhcmUgdWVmaQorCitDcmVhdGUgdGhlIHRmdHAgZGlyZWN0b3J5
-IChtdXN0IGJlIGRvbmUgYWZ0ZXIgZmlybXdhcmUgaXMgc2V0KToKIAogICQgLi9tZy1ob3N0cyBt
-a25ldGJvb3RkaXIgbXVkY2FrZXswLDF9CiAKLS0gCjIuMS40CgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+VGhpcyBtZWFucyB0aGF0IGl0IGlzIG5vdyBPSyBub3QgdG8gaGF2ZSBhbiBgb3ZlcmxheS1sb2Nh
+bCcuCgpTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8SWFuLkphY2tzb25AZXUuY2l0cml4LmNv
+bT4KLS0tCiBPc3N0ZXN0L0RlYmlhbi5wbSB8IDE1ICsrKysrKysrKysrKystLQogMSBmaWxlIGNo
+YW5nZWQsIDEzIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvT3Nz
+dGVzdC9EZWJpYW4ucG0gYi9Pc3N0ZXN0L0RlYmlhbi5wbQppbmRleCAwMTg1NzYxLi4xMjVkNDk5
+IDEwMDY0NAotLS0gYS9Pc3N0ZXN0L0RlYmlhbi5wbQorKysgYi9Pc3N0ZXN0L0RlYmlhbi5wbQpA
+QCAtODE4LDggKzgxOCwxOSBAQCBFTkQKIAogc3ViIGRlYmlhbl9vdmVybGF5cyAoJCQpIHsKICAg
+ICBteSAoJGhvLCAkZnVuYykgPSBAXzsKLSAgICAkZnVuYy0+KCRje092ZXJsYXlMb2NhbH0sICdv
+dmVybGF5LWxvY2FsLnRhcicpOwotICAgICRmdW5jLT4oJ292ZXJsYXknLCAnb3ZlcmxheS50YXIn
+KTsKKyAgICAjIGNhbGxzICRmdW5jLT4oJGxvY2FsX2RpciwgJHRhcmJhbGxfbGVhZm5hbWUpOwor
+ICAgIG15ICRtYXliZSA9IHN1YiB7CisJbXkgKCRsb2NhbF9kaXIsICR0YXJiYWxsX2xlYWZuYW1l
+KSA9IEBfOworCWlmIChzdGF0ICRsb2NhbF9kaXIpIHsKKwkgICAgJGZ1bmMtPigkbG9jYWxfZGly
+LCAkdGFyYmFsbF9sZWFmbmFtZSk7CisJfSBlbHNpZiAoJCEgPT0gRU5PRU5UKSB7CisJICAgICMg
+b2sKKwl9IGVsc2UgeworCSAgICBkaWUgImRlYmlhbl9vdmVybGF5cyBjYW5ub3QgY2hlY2sgJGxv
+Y2FsX2RpcjogJCEiOworCX0KKyAgICB9OworICAgICRtYXliZS0+KCRje092ZXJsYXlMb2NhbH0s
+ICdvdmVybGF5LWxvY2FsLnRhcicpOworICAgICRtYXliZS0+KCdvdmVybGF5JywgJ292ZXJsYXku
+dGFyJyk7CiB9CiAKIHN1YiBwcmVzZWVkX2Jhc2UgKCQkJDtAKSB7Ci0tIAoyLjEuNAoKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
