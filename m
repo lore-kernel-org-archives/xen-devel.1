@@ -1,20 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86: suppress sync when XPTI is disabled
- for a domain
-Date: Wed, 23 May 2018 16:41:31 +0100
-Message-ID: <15f80ca9-18d7-ab7c-f5b4-884e69e1e26a@citrix.com>
-References: <5B0579AF02000078001C51CB@prv1-mh.provo.novell.com>
+From: Huaisheng Ye <yehs2007@163.com>
+Subject: [RFC PATCH v3 8/9] include/linux/highmem.h: update
+ usage of movableflags
+Date: Wed, 23 May 2018 22:57:53 +0800
+Message-ID: <1527087474-93986-9-git-send-email-yehs2007__18277.7120302946$1527090323$gmane$org@163.com>
+References: <1527087474-93986-1-git-send-email-yehs2007@163.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=lmm1=ik=citrix.com=prvs=674cdb2fc=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1fLVtV-0005Wq-EM
- for xen-devel@lists.xenproject.org; Wed, 23 May 2018 15:41:41 +0000
-In-Reply-To: <5B0579AF02000078001C51CB@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=sepi=ik=163.com=yehs2007@srs-us1.protection.inumbo.net>)
+ id 1fLVyB-0005r4-LO
+ for xen-devel@lists.xenproject.org; Wed, 23 May 2018 15:46:32 +0000
+In-Reply-To: <1527087474-93986-1-git-send-email-yehs2007@163.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,16 +22,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Juergen Gross <jgross@suse.com>
+To: akpm@linux-foundation.org, linux-mm@kvack.org
+Cc: kstewart@linuxfoundation.org, mhocko@suse.com, Huaisheng Ye <yehs1@lenovo.com>, hehy1@lenovo.com, gregkh@linuxfoundation.org, Philippe Ombredanne <pombredanne@nexb.com>, linux-kernel@vger.kernel.org, willy@infradead.org, colyli@suse.de, Christoph Hellwig <hch@infradead.org>, iommu@lists.linux-foundation.org, linux-btrfs@vger.kernel.org, chengnt@lenovo.com, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>, mgorman@techsingularity.net, hch@lst.de, vbabka@suse.cz
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjMvMDUvMTggMTU6MjQsIEphbiBCZXVsaWNoIHdyb3RlOgo+IE5vdyB0aGF0IHdlIGhhdmUg
-YSBwZXItZG9tYWluIGZsYWcgd2UgY2FuIGFuZCBzaG91bGQgY29udHJvbCBzeW5jLWluZyBpbgo+
-IGEgbW9yZSBmaW5lIGdyYWluZWQgbWFubmVyOiBPbmx5IGRvbWFpbnMgaGF2aW5nIFhQVEkgZW5h
-YmxlZCBuZWVkIHRoZQo+IHN5bmMgdG8gb2NjdXIuCj4KPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1
-bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5k
-cmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+RnJvbTogSHVhaXNoZW5nIFllIDx5ZWhzMUBsZW5vdm8uY29tPgoKR0ZQX0hJR0hVU0VSX01PVkFC
+TEUgZG9lc24ndCBlcXVhbCB0byBHRlBfSElHSFVTRVIgfCBfX0dGUF9NT1ZBQkxFLAptb2RpZnkg
+aXQgdG8gYWRhcHQgcGF0Y2ggb2YgZ2V0dGluZyByaWQgb2YgR0ZQX1pPTkVfVEFCTEUvQkFELgoK
+U2lnbmVkLW9mZi1ieTogSHVhaXNoZW5nIFllIDx5ZWhzMUBsZW5vdm8uY29tPgpDYzogS2F0ZSBT
+dGV3YXJ0IDxrc3Rld2FydEBsaW51eGZvdW5kYXRpb24ub3JnPgpDYzogR3JlZyBLcm9haC1IYXJ0
+bWFuIDxncmVna2hAbGludXhmb3VuZGF0aW9uLm9yZz4KQ2M6IFRob21hcyBHbGVpeG5lciA8dGds
+eEBsaW51dHJvbml4LmRlPgpDYzogUGhpbGlwcGUgT21icmVkYW5uZSA8cG9tYnJlZGFubmVAbmV4
+Yi5jb20+CkNjOiBDaHJpc3RvcGggSGVsbHdpZyA8aGNoQGluZnJhZGVhZC5vcmc+Ci0tLQogaW5j
+bHVkZS9saW51eC9oaWdobWVtLmggfCA0ICsrLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlv
+bnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9oaWdobWVt
+LmggYi9pbmNsdWRlL2xpbnV4L2hpZ2htZW0uaAppbmRleCAwNjkwNjc5Li41MzgzYzllIDEwMDY0
+NAotLS0gYS9pbmNsdWRlL2xpbnV4L2hpZ2htZW0uaAorKysgYi9pbmNsdWRlL2xpbnV4L2hpZ2ht
+ZW0uaApAQCAtMTU5LDggKzE1OSw4IEBAIHN0YXRpYyBpbmxpbmUgdm9pZCBjbGVhcl91c2VyX2hp
+Z2hwYWdlKHN0cnVjdCBwYWdlICpwYWdlLCB1bnNpZ25lZCBsb25nIHZhZGRyKQogCQkJc3RydWN0
+IHZtX2FyZWFfc3RydWN0ICp2bWEsCiAJCQl1bnNpZ25lZCBsb25nIHZhZGRyKQogewotCXN0cnVj
+dCBwYWdlICpwYWdlID0gYWxsb2NfcGFnZV92bWEoR0ZQX0hJR0hVU0VSIHwgbW92YWJsZWZsYWdz
+LAotCQkJdm1hLCB2YWRkcik7CisJc3RydWN0IHBhZ2UgKnBhZ2UgPSBhbGxvY19wYWdlX3ZtYSht
+b3ZhYmxlZmxhZ3MgPworCQlHRlBfSElHSFVTRVJfTU9WQUJMRSA6IEdGUF9ISUdIVVNFUiwgdm1h
+LCB2YWRkcik7CiAKIAlpZiAocGFnZSkKIAkJY2xlYXJfdXNlcl9oaWdocGFnZShwYWdlLCB2YWRk
+cik7Ci0tIAoxLjguMy4xCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
