@@ -1,21 +1,20 @@
-From: Jens Axboe <axboe@kernel.dk>
-Subject: Re: [PATCH] block drivers/block: Use octal not symbolic
- permissions
-Date: Wed, 23 May 2018 15:27:11 -0600
-Message-ID: <6bf44255-145f-bf14-e254-860731ff9296__26001.0747159415$1527110763$gmane$org@kernel.dk>
-References: <5e97a292c1ba38a6b5a0caa271d85dc3de1b2aa7.1527105857.git.joe@perches.com>
+From: Randy Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH v3 23/27] x86/modules: Adapt module loading
+ for PIE support
+Date: Wed, 23 May 2018 14:26:51 -0700
+Message-ID: <168ebedb-7c27-d1f3-c2f9-223d44186a52__35131.4617706977$1527110764$gmane$org@infradead.org>
+References: <20180523195421.180248-1-thgarnie@google.com>
+ <20180523195421.180248-24-thgarnie@google.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=otse=ik=kernel.dk=axboe@srs-us1.protection.inumbo.net>)
- id 1fLbHz-0007T4-0c
- for xen-devel@lists.xenproject.org; Wed, 23 May 2018 21:27:19 +0000
-Received: by mail-io0-x242.google.com with SMTP id e12-v6so24543213iob.8
- for <xen-devel@lists.xenproject.org>; Wed, 23 May 2018 14:27:16 -0700 (PDT)
-In-Reply-To: <5e97a292c1ba38a6b5a0caa271d85dc3de1b2aa7.1527105857.git.joe@perches.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=phfy=ik=infradead.org=rdunlap@srs-us1.protection.inumbo.net>)
+ id 1fLbHr-0007Se-82
+ for xen-devel@lists.xenproject.org; Wed, 23 May 2018 21:27:11 +0000
+In-Reply-To: <20180523195421.180248-24-thgarnie@google.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,20 +24,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Joe Perches <joe@perches.com>, "Ed L. Cashin" <ed.cashin@acm.org>, Philipp Reisner <philipp.reisner@linbit.com>, Lars Ellenberg <lars.ellenberg@linbit.com>, Jiri Kosina <jikos@kernel.org>, Josef Bacik <josef@toxicpanda.com>, linux-block@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>, Sage Weil <sage@redhat.com>, Alex Elder <elder@kernel.org>, Joshua Morris <josh.h.morris@us.ibm.com>, Philip Kelleher <pjk1939@linux.vnet.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>
-Cc: linux-kernel@vger.kernel.org, nbd@other.debian.org, xen-devel@lists.xenproject.org, ceph-devel@vger.kernel.org, virtualization@lists.linux-foundation.org, drbd-dev@lists.linbit.com
+To: Thomas Garnier <thgarnie@google.com>, Herbert Xu <herbert@gondor.apana.org.au>, "David S . Miller" <davem@davemloft.net>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, "H . Peter Anvin" <hpa@zytor.com>, Peter Zijlstra <peterz@infradead.org>, Josh Poimboeuf <jpoimboe@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Philippe Ombredanne <pombredanne@nexb.com>, Kate Stewart <kstewart@linuxfoundation.org>, Arnaldo Carvalho de Melo <acme@redhat.com>, Yonghong Song <yhs@fb.com>, Andrey Ryabinin <aryabinin@virtuozzo.com>, Kees Cook <keescook@chromium.org>, Tom Lendacky <thomas.lendacky@amd.com>, "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>, Andy Lutomirski <luto@kernel.org>, Dominik Brodowski <linux@dominikbrodowski.net>, Borislav Petkov <bp@alien8.de>, Borislav Petkov <bp@suse.de>, "Rafael J . Wysocki" <rjw@rjwysocki.net>Len
+Cc: linux-arch@vger.kernel.org, kvm@vger.kernel.org, linux-pm@vger.kernel.org, x86@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org, linux-sparse@vger.kernel.org, linux-crypto@vger.kernel.org, kernel-hardening@lists.openwall.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gNS8yMy8xOCAyOjA1IFBNLCBKb2UgUGVyY2hlcyB3cm90ZToKPiBDb252ZXJ0IHRoZSBTXzxG
-T08+IHN5bWJvbGljIHBlcm1pc3Npb25zIHRvIHRoZWlyIG9jdGFsIGVxdWl2YWxlbnRzIGFzCj4g
-dXNpbmcgb2N0YWwgYW5kIG5vdCBzeW1ib2xpYyBwZXJtaXNzaW9ucyBpcyBwcmVmZXJyZWQgYnkg
-bWFueSBhcyBtb3JlCj4gcmVhZGFibGUuCj4gCj4gc2VlOiBodHRwczovL2xrbWwub3JnL2xrbWwv
-MjAxNi84LzIvMTk0NQo+IAo+IERvbmUgd2l0aCBhdXRvbWF0ZWQgY29udmVyc2lvbiB2aWE6Cj4g
-JCAuL3NjcmlwdHMvY2hlY2twYXRjaC5wbCAtZiAtLXR5cGVzPVNZTUJPTElDX1BFUk1TIC0tZml4
-LWlucGxhY2UgPGZpbGVzLi4uPgo+IAo+IE1pc2NlbGxhbmVhOgo+IAo+IG8gV3JhcHBlZCBtb2Rp
-ZmllZCBtdWx0aS1saW5lIGNhbGxzIHRvIGEgc2luZ2xlIGxpbmUgd2hlcmUgYXBwcm9wcmlhdGUK
-PiBvIFJlYWxpZ24gbW9kaWZpZWQgbXVsdGktbGluZSBjYWxscyB0byBvcGVuIHBhcmVudGhlc2lz
-CgpIb25lc3RseSwgSSBzZWUgdGhpcyBhcyBwcmV0dHkgbmVlZGxlc3MgY2h1cm4uCgotLSAKSmVu
-cyBBeGJvZQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+SGksCgooZm9yIHNldmVyYWwgcGF0Y2hlcyBpbiB0aGlzIHNlcmllczopClRoZSBjb21taXQgbWVz
+c2FnZSBpcyBjb25mdXNpbmcuICBTZWUgYmVsb3cuCgoKT24gMDUvMjMvMjAxOCAxMjo1NCBQTSwg
+VGhvbWFzIEdhcm5pZXIgd3JvdGU6Cj4gQWRhcHQgbW9kdWxlIGxvYWRpbmcgdG8gc3VwcG9ydCBQ
+SUUgcmVsb2NhdGlvbnMuIEdlbmVyYXRlIGR5bmFtaWMgR09UIGlmCj4gYSBzeW1ib2wgcmVxdWly
+ZXMgaXQgYnV0IG5vIGVudHJ5IGV4aXN0IGluIHRoZSBrZXJuZWwgR09ULgoKICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgZXhpc3RzCgo+IAo+IFBvc2l0aW9uIEluZGVwZW5kZW50
+IEV4ZWN1dGFibGUgKFBJRSkgc3VwcG9ydCB3aWxsIGFsbG93IHRvIGV4dGVuZGVkIHRoZQoKICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2lsbCBhbGxvdyB1
+cyB0byBleHRlbmQgdGhlCgo+IEtBU0xSIHJhbmRvbWl6YXRpb24gcmFuZ2UgYmVsb3cgdGhlIC0y
+RyBtZW1vcnkgbGltaXQuCgpEb2VzIHRoYXQgc2F5ICJiZWxvdyB0aCBuZWdhdGl2ZSAyRyBtZW1v
+cnkgbGltaXQiPwpJIGRvbid0IGdldCBpdC4KCgo+IAo+IFNpZ25lZC1vZmYtYnk6IFRob21hcyBH
+YXJuaWVyIDx0aGdhcm5pZUBnb29nbGUuY29tPgo+IC0tLQo+ICBhcmNoL3g4Ni9NYWtlZmlsZSAg
+ICAgICAgICAgICAgIHwgICA0ICsKPiAgYXJjaC94ODYvaW5jbHVkZS9hc20vbW9kdWxlLmggICB8
+ICAxMSArKwo+ICBhcmNoL3g4Ni9pbmNsdWRlL2FzbS9zZWN0aW9ucy5oIHwgICA0ICsKPiAgYXJj
+aC94ODYva2VybmVsL21vZHVsZS5jICAgICAgICB8IDE4MSArKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrLQo+ICBhcmNoL3g4Ni9rZXJuZWwvbW9kdWxlLmxkcyAgICAgIHwgICAzICsKPiAg
+NSBmaWxlcyBjaGFuZ2VkLCAxOTggaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlvbnMoLSkKPiAgY3Jl
+YXRlIG1vZGUgMTAwNjQ0IGFyY2gveDg2L2tlcm5lbC9tb2R1bGUubGRzCgoKVGhhbmtzLAotLSAK
+flJhbmR5CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
