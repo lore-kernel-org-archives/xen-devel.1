@@ -1,21 +1,15 @@
-From: Takashi Sakamoto <o-takashi@sakamocchi.jp>
-Subject: Re: [PATCH v3 5/6] ALSA: xen-front: Implement ALSA
- virtual sound driver
-Date: Wed, 23 May 2018 13:00:45 +0900
-Message-ID: <510b107c-c136-7748-0cfa-9de849887c61__46476.5193094083$1527047994$gmane$org@sakamocchi.jp>
-References: <20180514062742.25879-1-andr2000@gmail.com>
- <20180514062742.25879-6-andr2000@gmail.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] tools/kdd: alternative way of muting
+ spurious gcc warning
+Date: Wed, 23 May 2018 06:02:45 +0200
+Message-ID: <1bf1a8df-c0ae-8ce0-2fe8-835da1463c64@suse.com>
+References: <20180522194745.25806-1-marmarek@invisiblethingslab.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=g2zu=ik=sakamocchi.jp=o-takashi@srs-us1.protection.inumbo.net>)
- id 1fLKxG-00005J-9w
- for xen-devel@lists.xenproject.org; Wed, 23 May 2018 04:00:50 +0000
-In-Reply-To: <20180514062742.25879-6-andr2000@gmail.com>
-Content-Language: en-US
+In-Reply-To: <20180522194745.25806-1-marmarek@invisiblethingslab.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,42 +18,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr Andrushchenko <andr2000@gmail.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, alsa-devel@alsa-project.org, jgross@suse.com, boris.ostrovsky@oracle.com, konrad.wilk@oracle.com, perex@perex.cz, tiwai@suse.com
-Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiBNYXkgMTQgMjAxOCAxNToyNywgT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gd3JvdGU6
-CiA+IGRpZmYgLS1naXQgYS9zb3VuZC94ZW4veGVuX3NuZF9mcm9udF9hbHNhLmMgCmIvc291bmQv
-eGVuL3hlbl9zbmRfZnJvbnRfYWxzYS5jCiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0CiA+IGluZGV4
-IDAwMDAwMDAwMDAwMC4uNTA0MWY4M2U5OGQyCiA+IC0tLSAvZGV2L251bGwKID4gKysrIGIvc291
-bmQveGVuL3hlbl9zbmRfZnJvbnRfYWxzYS5jCiA+IC4uLgogPiArLyoKID4gKyAqIEZJWE1FOiBU
-aGUgbW1hcGVkIGRhdGEgdHJhbnNmZXIgaXMgYXN5bmNocm9ub3VzIGFuZCB0aGVyZSBpcyBubwog
-PiArICogYWNrIHNpZ25hbCBmcm9tIHVzZXItc3BhY2Ugd2hlbiBpdCBpcyBkb25lLiBUaGlzIGlz
-IHRoZQogPiArICogcmVhc29uIGl0IGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgUFYgZHJpdmVy
-IGFzIHdlIGRvIG5lZWQKID4gKyAqIHRvIGtub3cgd2hlbiB0aGUgYnVmZmVyIGNhbiBiZSB0cmFu
-c2ZlcnJlZCB0byB0aGUgYmFja2VuZC4KID4gKyAqLwogPiAuLi4KCkluIEFMU0EgUENNIGludGVy
-ZmFjZSB2Mi4wLjE0IG9yIGxhdGVyLCBTTkRSVl9QQ01fSU5GT19TWU5DX0FQUExQVFIgaXMKYXZh
-aWxhYmxlLiBUaGlzIGZsYWcgZXhwcmVzcyB0aGF0IHVzZXJzcGFjZSBhcHBsaWNhdGlvbnMgYXJl
-IGV4cGVjdGVkIHRvCmNhbGwgaW9jdGwoMikgd2l0aCAnU05EUlZfUENNX0lPQ1RMX1NZTkNfUFRS
-JyBldmVuIGlmIHRoZXkgb3ByYXRlIHRvCm1lbW9yeSBtYXBwZWQgcGFnZSBmcmFtZXMgZm9yIFBD
-TSBzYW1wbGVzLiBGb3IgZGV0YWlsLCBwbGVhc2UgcmVmZXIgdG8gYQpjb21taXQgNDJmOTQ1OTcw
-YWY5ICgnQUxTQTogcGNtOiBBZGQgdGhlIGV4cGxpY2l0IGFwcGxfcHRyIHN5bmMKc3VwcG9ydCcp
-WzFdLgoKQXMgYSBzdXBwbGVtZW50LCBwbGVhc2UgcmVmZXIgdG8gYmVsb3cgY29tbWl0czoKICAq
-IDRiNjcxZjU3NzQ3NCAoJ0FMU0E6IHBjbTogQWRkIGFuIGlvY3RsIHRvIHNwZWNpZnkgdGhlIHN1
-cHBvcnRlZAogICAgcHJvdG9jb2wgdmVyc2lvbicpWzJdCiAgKiBiNjAyYWE4ZWIxYTAgKCdBTFNB
-OiBwY206IERpc2FibGUgb25seSBjb250cm9sIG1tYXAgZm9yIGV4cGxpY2l0CiAgICBhcHBsX3B0
-ciBzeW5jJylbM10KCkFsc2EtbGliIHYxLjEuNSBvciBsYXRlciBzdXBwb3J0cyB0aGlzIGZsYWcg
-YW5kIGV4aXN0ZW50IGFwcGxpY2F0aW9ucwpjYW4gcnVuIHRyYW5zcGFyZW50bHkuCgpGb3IgZGV2
-ZWxvcGVycywgYSB0cmFjZXBvaW50IG1heSBiZSB1c2VmdWw6CiAgKiBmY2NmNTM4ODFlOWIgKCdB
-TFNBOiBwY206IGFkZCAnYXBwbHB0cicgZXZlbnQgb2YgdHJhY2Vwb2ludCcpWzRdCgpGb3IgeW91
-ciBpbmZvcm1hdGlvbi4KClsxXSAKaHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4
-L2tlcm5lbC9naXQvdG9ydmFsZHMvbGludXguZ2l0L2NvbW1pdC8/aWQ9NDJmOTQ1OTcwYWY5Clsy
-XSAKaHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvdG9ydmFs
-ZHMvbGludXguZ2l0L2NvbW1pdC8/aWQ9NGI2NzFmNTc3NDc0ClszXSAKaHR0cHM6Ly9naXQua2Vy
-bmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvdG9ydmFsZHMvbGludXguZ2l0L2NvbW1p
-dC8/aWQ9YjYwMmFhOGViMWEwCls0XSAKaHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xp
-bnV4L2tlcm5lbC9naXQvdG9ydmFsZHMvbGludXguZ2l0L2NvbW1pdC8/aWQ9ZmNjZjUzODgxZTli
-CgoKUmVnYXJkcwoKVGFrYXNoaSBTYWthbW90bwoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+T24gMjIvMDUvMTggMjE6NDcsIE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSB3cm90ZToKPiBP
+bGRlciBnY2MgZG9lcyBub3Qgc3VwcG9ydCAjcHJhZ21hIEdDQyBkaWFnbm9zdGljcywgc28gdXNl
+IGFsdGVybmF0aXZlCj4gYXBwcm9hY2ggLSBjaGFuZ2UgdmFyaWFibGUgdHlwZSB0byB1aW50MzJf
+dCAodGhpcyBjb2RlIGhhbmRsZSAzMi1iaXQKPiByZXF1ZXN0cyBvbmx5IGFueXdheSksIHdoaWNo
+IGFwcGFyZW50bHkgYWxzbyBhdm9pZCBnY2MgY29tcGxhaW5pbmcgYWJvdXQKPiB0aGlzIChvdGhl
+cndpc2UgY29ycmVjdCkgY29kZS4KPiAKPiBGaXhlcyA0MzdlMDBmZWEwNGJlY2M5MWMxYjZiYzFj
+MGJhYTYzNmIwNjdhNWNjICJ0b29scy9rZGQ6IG11dGUgc3B1cmlvdXMKPiBnY2Mgd2FybmluZyIK
+PiAKPiBTaWduZWQtb2ZmLWJ5OiBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVja2kgPG1hcm1hcmVr
+QGludmlzaWJsZXRoaW5nc2xhYi5jb20+CgpSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3Nz
+IDxqZ3Jvc3NAc3VzZS5jb20+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
 X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
 dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
 c3RpbmZvL3hlbi1kZXZlbA==
