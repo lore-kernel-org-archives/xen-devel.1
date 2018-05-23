@@ -1,18 +1,18 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH v2 0/2] Release process: lesson to learn
-Date: Wed, 23 May 2018 15:35:54 +0100
-Message-ID: <23301.31818.673880.898367@mariner.uk.xensource.com>
-References: <1527007523-23576-1-git-send-email-ian.jackson@eu.citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH] x86: suppress sync when XPTI is disabled for a
+ domain
+Date: Wed, 23 May 2018 08:24:47 -0600
+Message-ID: <5B0579AF02000078001C51CB@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gdxj=ik=citrix.com=prvs=674fbe803=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1fLUs4-0008Au-Eh
- for xen-devel@lists.xenproject.org; Wed, 23 May 2018 14:36:08 +0000
-In-Reply-To: <1527007523-23576-1-git-send-email-ian.jackson@eu.citrix.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=f/rg=ik=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fLV0a-0000XL-UL
+ for xen-devel@lists.xenproject.org; Wed, 23 May 2018 14:44:56 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,16 +21,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>
-Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SWFuIEphY2tzb24gd3JpdGVzICgiW1BBVENIIHYyIDAvMl0gUmVsZWFzZSBwcm9jZXNzOiBsZXNz
-b24gdG8gbGVhcm4iKToKPiBUaGlzIGlzIG15IHRoaXJkIGF0dGVtcHQgdG8gZ2V0IGNvbnNlbnN1
-cyBmb3IgdGhpcy4gIFdlIGhhZCBhCj4gZGlzY3Vzc2lvbiBhYm91dCB0aGlzIGluIERlY2VtYmVy
-IGFuZCBhZ2FpbiBpbiBBcHJpbC4KCkkgdGhpbmsgSSBoYXZlIGVub3VnaCBhY2tzIG5vdywgc28g
-SSBpbnRlbmQgdG8gcHVzaCB0aGlzIHN0YWdpbmcsCnN1YmplY3QgdG8gY2hlY2tpbmcgd2l0aCBK
-dWVyZ2VuIGFib3V0IHRoZSB0aW1pbmcuCgpJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+Tm93IHRoYXQgd2UgaGF2ZSBhIHBlci1kb21haW4gZmxhZyB3ZSBjYW4gYW5kIHNob3VsZCBjb250
+cm9sIHN5bmMtaW5nIGluCmEgbW9yZSBmaW5lIGdyYWluZWQgbWFubmVyOiBPbmx5IGRvbWFpbnMg
+aGF2aW5nIFhQVEkgZW5hYmxlZCBuZWVkIHRoZQpzeW5jIHRvIG9jY3VyLgoKU2lnbmVkLW9mZi1i
+eTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKLS0tIGEveGVuL2FyY2gveDg2L21t
+LmMKKysrIGIveGVuL2FyY2gveDg2L21tLmMKQEAgLTM3NjUsNyArMzc2NSw3IEBACiAgICAgICAg
+ICAgICAgICAgICAgICAgICBicmVhazsKICAgICAgICAgICAgICAgICAgICAgcmMgPSBtb2RfbDRf
+ZW50cnkodmEsIGw0ZV9mcm9tX2ludHB0ZShyZXEudmFsKSwgbWZuLAogICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBjbWQgPT0gTU1VX1BUX1VQREFURV9QUkVTRVJWRV9BRCwg
+dik7Ci0gICAgICAgICAgICAgICAgICAgIGlmICggIXJjICYmICFjcHVfaGFzX25vX3hwdGkgKQor
+ICAgICAgICAgICAgICAgICAgICBpZiAoICFyYyAmJiB2LT5kb21haW4tPmFyY2gucHZfZG9tYWlu
+LnhwdGkgKQogICAgICAgICAgICAgICAgICAgICB7CiAgICAgICAgICAgICAgICAgICAgICAgICBi
+b29sIGxvY2FsX2luX3VzZSA9IGZhbHNlOwogCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
