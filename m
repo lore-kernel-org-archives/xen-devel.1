@@ -1,20 +1,20 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v4 1/2] xen/PVH: Set up GS segment for stack
- canary
-Date: Wed, 23 May 2018 14:54:43 +0200
-Message-ID: <20be47a1-e9ab-9789-d702-6d8f8fb02dcf__7844.80505758456$1527080022$gmane$org@suse.com>
+Subject: Re: [PATCH v4 2/2] xen/PVH: Make GDT selectors
+ PVH-specific
+Date: Wed, 23 May 2018 14:58:09 +0200
+Message-ID: <62d76299-a8a2-7b05-df0b-7d9637e58e0b__43026.941168546$1527080220$gmane$org@suse.com>
 References: <20180522035445.16911-1-boris.ostrovsky@oracle.com>
- <20180522035445.16911-2-boris.ostrovsky@oracle.com>
+ <20180522035445.16911-3-boris.ostrovsky@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=xj/t=ik=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fLTHz-0008HD-CR
- for xen-devel@lists.xenproject.org; Wed, 23 May 2018 12:54:47 +0000
-In-Reply-To: <20180522035445.16911-2-boris.ostrovsky@oracle.com>
+ id 1fLTLI-0008Ta-U0
+ for xen-devel@lists.xenproject.org; Wed, 23 May 2018 12:58:12 +0000
+In-Reply-To: <20180522035445.16911-3-boris.ostrovsky@oracle.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,12 +28,14 @@ To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xenproject.org
 Cc: JBeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjIvMDUvMTggMDU6NTQsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiBXZSBhcmUgbWFraW5n
-IGNhbGxzIHRvIEMgY29kZSAoZS5nLiB4ZW5fcHJlcGFyZV9wdmgoKSkgd2hpY2ggbWF5IHVzZQo+
-IHN0YWNrIGNhbmFyeSAoc3RvcmVkIGluIEdTIHNlZ21lbnQpLgo+IAo+IFNpZ25lZC1vZmYtYnk6
-IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+CgpXaXRoIHRoZSBj
-bGVhcmluZyBvZiBFRFggKGluc3RlYWQgdXNpbmcgQ0RRKSB5b3UgY2FuIGFkZCBteQoKUmV2aWV3
-ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCgpKdWVyZ2VuCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMjIvMDUvMTggMDU6NTQsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiBXZSBkb24ndCBuZWVk
+IHRvIHNoYXJlIFBWSCBHRFQgbGF5b3V0IHdpdGggb3RoZXIgR0RUcywgZXNwZWNpYWxseQo+IHNp
+bmNlIHdlIG5vdyBoYXZlIGEgUFZILXNwZWNpaWZpYyBlbnRyeSAoZm9yIHN0YWNrIGNhbmFyeSBz
+ZWdtZW50KS4KPiAKPiBEZWZpbmUgUFZIJ3Mgb3duIHNlbGVjdG9ycy4KPiAKPiAoQXMgYSBzaWRl
+IGVmZmVjdCBvZiB0aGlzIGNoYW5nZSB3ZSBhcmUgYWxzbyBmaXhpbmcgaW1wcm9wZXIKPiByZWZl
+cmVuY2UgdG8gX19LRVJORUxfQ1MpCj4gCj4gU2lnbmVkLW9mZi1ieTogQm9yaXMgT3N0cm92c2t5
+IDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT4KClJldmlld2VkLWJ5OiBKdWVyZ2VuIEdyb3Nz
+IDxqZ3Jvc3NAc3VzZS5jb20+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
