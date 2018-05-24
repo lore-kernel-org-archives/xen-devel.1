@@ -1,19 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: MSR_SPEC_CTRL intercept
-Date: Thu, 24 May 2018 04:23:58 -0600
-Message-ID: <5B0692BE02000078001C57C6@prv1-mh.provo.novell.com>
-References: <574af9a8-864b-e45e-1c5d-86a13c9ac799@oracle.com>
- <e2c1e06d-239d-1ba8-1180-34c47caa1065@citrix.com>
- <8a74c779-8f9b-eec7-8d3b-2f2baaa3dcfd@oracle.com>
- <6a4a2b9d-270a-26df-077b-b3409042d46a@citrix.com>
- <5B06742B02000078001C570A@prv1-mh.provo.novell.com>
- <a2d33841-8159-fb72-0049-765dae4c18fc@citrix.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: Likely build race, "/usr/bin/ld: cannot find -lvirt"
+Date: Thu, 24 May 2018 11:27:51 +0100
+Message-ID: <23302.37799.818992.987166__41114.7176790566$1527157597$gmane$org@mariner.uk.xensource.com>
+References: <23301.35254.157281.663042@mariner.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <a2d33841-8159-fb72-0049-765dae4c18fc@citrix.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=gtij=il=citrix.com=prvs=675dd8bac=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1fLnTR-0006O2-Iw
+ for xen-devel@lists.xenproject.org; Thu, 24 May 2018 10:27:57 +0000
+In-Reply-To: <23301.35254.157281.663042@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,38 +21,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel <xen-devel@lists.xen.org>
+To: libvir-list@redhat.com
+Cc: xen-devel@lists.xenproject.org, Jim Fehlig <jfehlig@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI0LjA1LjE4IGF0IDEyOjEzLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMjQvMDUvMTggMDk6MTMsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAyNC4w
-NS4xOCBhdCAwMDowOSwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gSXQg
-aXMsIGFzIGRvY3VtZW50ZWQsIG5vdCBjb21wbGV0ZWx5IHN0cmljdGx5IHRydWUgKGFjY29yZGlu
-ZyB0byB0aGUKPj4+IGxhdGVzdCByZXZpc2lvbiBvZiB0aGUgc3BlYyksIGJ1dCBpcyB0aGVyZSBk
-ZWxpYmVyYXRlbHkgdG8gc2ltcGx5IHNvIHdlCj4+PiBkb24ndCBnaXZlIHRoZSBndWVzdCBpbXBs
-YXVzaWJsZSBjb25maWd1cmF0aW9ucy4gIFRoZXJlIGlzIG5vdCBhCj4+PiBwcm9jZXNzb3Igd2l0
-aCBTVElCUCBidXQgd2l0aG91dCBJQlJTQiwgbm9yIGlzIHRoZXJlIG9uZSB3aXRoIFNTQkQKPj4+
-IHdpdGhvdXQgU1RJQlAgb3IgSUJSU0IsIGFuZCBpdCBpcyB1bmxpa2VseSB0aGF0IGZ1dHVyZSBw
-cm9jZXNzb3JzIHdvdWxkCj4+PiBjaGFuZ2UgdGhpcyBhcnJhbmdlbWVudC4KPj4gQXMgcG9pbnRl
-ZCBvdXQgZWxzZXdoZXJlIEkgYmVsaWV2ZSB0aGlzIGlzIGEgd3JvbmcgZGVwZW5kZW5jeSB0byBt
-YWtlLAo+PiBldmVuIGlmIHBlcmhhcHMgY3VycmVudCBvciBwYXN0IEludGVsIGRvY3Mgc3VnZ2Vz
-dCBzbyAoQU1EIG9uZXMgZG9uJ3QKPj4gZm9yIHRoZWlyIHZlcnNpb25zIG9mIHRoZSBmZWF0dXJl
-cykuIFdpbGUgaXQgbWF5IGJlIHRoZSBjYXNlIHRoYXQgdGhlcmUncwo+PiBjdXJyZW50bHkgbm8g
-Y2FzZSBpbiBwcmFjdGljZSB3aXRoIFNTQkQgYnV0IG5vIElCUlNCLCBJIGRvbid0IHNlZSB3aHkK
-Pj4gdGhpcyB3b3VsZCBuZWVkIHRvIHJlbWFpbiB0aGF0IHdheS4gVGhlIHR3byB0aGluZ3MgYXJl
-IHN0cmljdGx5Cj4+IGluZGVwZW5kZW50Lgo+IAo+IEZlYXR1cmVzIHdpbGwgbmV2ZXIgZGlzYXBw
-ZWFyLiAgeDg2LCBtb3JlIHRoYW4gbW9zdCwgbWFpbnRhaW5zIGl0cwo+IGJhY2t3YXJkcyBjb21w
-YXRpYmlsaXR5LgoKU2VlIGhvdyAzZE5vdyBpbnNucyBoYXZlIGRpc2FwcGVhcmVkPyBDUFVJRCBm
-bGFncyBleGlzdCBmb3IgdGhlCnZlcnkgcHVycG9zZSBvZiBhbGxvd2luZyBwaWVjZXMgdG8gZXhp
-c3QgLyBub3QgZXhpc3QgaW5kZXBlbmRlbnQgb2YKb25lIGFub3RoZXIuIEZvciB0aGUgY2FzZSBo
-ZXJlLCBqdXN0IGNvbnNpZGVyIHRoZSBjYXNlIG9mIEludGVsIGZpbmRpbmcKdGhhdCBzb21lIG9m
-IHRoZWlyIG1pY3JvLWFyY2hpdGVjdHVyZSBpcyB2dWxuZXJhYmxlIHRvIHY0IGJ1dCBub3QgdjIu
-CldoeSB3b3VsZCB0aGV5IGFkZCBJQlJTQiB0byB0aGUgcmVzcGVjdGl2ZSBtaWNyb2NvZGUsIHdo
-ZW4gYWxsCnRoZXknZCBuZWVkIHRoZXJlIGlzIFNTQkQ/IChPZiBjb3Vyc2UsIGxlYXZpbmcgYXNp
-ZGUgdGhlIGNvbnNpZGVyYXRpb24KdGhhdCB0aGV5IGhhZCBzcGVjaWZpZWQgc3VjaCBhIGRlcGVu
-ZGVuY3kgdGhlbXNlbHZlcywgYW5kIGlpcmMgdGhleQpzdGlsbCBkbyB0byBhdCBsZWFzdCBzb21l
-IGRlZ3JlZS4pCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+SWFuIEphY2tzb24gd3JpdGVzICgiTGlrZWx5IGJ1aWxkIHJhY2UsICIvdXNyL2Jpbi9sZDogY2Fu
+bm90IGZpbmQgLWx2aXJ0IiIpOgo+IHRsO2RyOgo+IAo+IEkgdGhpbmsgdGhlcmUgaXMgYSBidWcg
+aW4gbGlidmlydCdzIGJ1aWxkIHN5c3RlbSB3aGljaCwgd2l0aAo+IGxvdyBwcm9iYWJpbGl0eSwg
+Y2F1c2VzIGEgYnVpbGQgZmFpbHVyZSBjb250YWluaW5nIHRoaXMgbWVzc2FnZToKPiAgIC91c3Iv
+YmluL2xkOiBjYW5ub3QgZmluZCAtbHZpcnQKPiAKPiBDb21wbGV0ZSBidWlsZCBsb2dzIG9mIHR3
+byBhdHRlbXB0czoKPiAKPiAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29z
+c3Rlc3QvbG9ncy8xMjMwNDYvYnVpbGQtaTM4Ni1saWJ2aXJ0LzYudHMtbGlidmlydC1idWlsZC5s
+b2cKPiAKPiAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9n
+cy8xMjMwOTYvYnVpbGQtaTM4Ni1saWJ2aXJ0LzYudHMtbGlidmlydC1idWlsZC5sb2cKCkkgaGF2
+ZSBydW4gYSBudW1iZXIgb2YgYXR0ZW1wdHMuICBPdXQgb2YgNSBtb3JlLCAxIHN1Y2NlZWRlZC4g
+IFNvIG91dApvZiBhIHRvdGFsIG9mIDcgYXR0ZW1wdHMsIDEgc3VjY2VlZGVkLiAgVGhpcyByZXBy
+byByYXRlIGlzIGFuIElNTwpleGNlbGxlbnQgb3Bwb3J0dW5pdHkgdG8gZGVidWcgdGhpcyByYWNl
+IDotKS4KCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
