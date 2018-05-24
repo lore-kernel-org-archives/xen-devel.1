@@ -1,22 +1,20 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [v2 6/6] xen/smmu: Add a new config define for
- legacy SMMU
-Date: Thu, 24 May 2018 09:52:01 +0100
-Message-ID: <79aff7e2-2f0b-6b6e-de54-2087b98638c8@arm.com>
-References: <20180524004620.23828-1-sameer.goel@linaro.org>
- <20180524004620.23828-7-sameer.goel@linaro.org>
- <5B0670D002000078001C56CF@prv1-mh.provo.novell.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v3 18/27] xen: Adapt assembly for PIE support
+Date: Thu, 24 May 2018 11:11:44 +0200
+Message-ID: <73524c81-ba3f-8245-9795-f2aebacd8403__48177.7563960806$1527153102$gmane$org@suse.com>
+References: <20180523195421.180248-1-thgarnie@google.com>
+ <20180523195421.180248-19-thgarnie@google.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=kwxg=il=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1fLlyh-0006eV-L2
- for xen-devel@lists.xenproject.org; Thu, 24 May 2018 08:52:07 +0000
-In-Reply-To: <5B0670D002000078001C56CF@prv1-mh.provo.novell.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=6gbh=il=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fLmIb-0008NX-AJ
+ for xen-devel@lists.xenproject.org; Thu, 24 May 2018 09:12:41 +0000
+In-Reply-To: <20180523195421.180248-19-thgarnie@google.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,23 +23,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, sameer.goel@linaro.org
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, shankerd@codeaurora.org, Manish Jaggi <mjaggi@caviumnetworks.com>
+To: Thomas Garnier <thgarnie@google.com>, Herbert Xu <herbert@gondor.apana.org.au>, "David S . Miller" <davem@davemloft.net>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, "H . Peter Anvin" <hpa@zytor.com>, Peter Zijlstra <peterz@infradead.org>, Josh Poimboeuf <jpoimboe@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Philippe Ombredanne <pombredanne@nexb.com>, Kate Stewart <kstewart@linuxfoundation.org>, Arnaldo Carvalho de Melo <acme@redhat.com>, Yonghong Song <yhs@fb.com>, Andrey Ryabinin <aryabinin@virtuozzo.com>, Kees Cook <keescook@chromium.org>, Tom Lendacky <thomas.lendacky@amd.com>, "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>, Andy Lutomirski <luto@kernel.org>, Dominik Brodowski <linux@dominikbrodowski.net>, Borislav Petkov <bp@alien8.de>, Borislav Petkov <bp@suse.de>, "Rafael J . Wysocki" <rjw@rjwysocki.net>Len
+Cc: linux-arch@vger.kernel.org, kvm@vger.kernel.org, linux-pm@vger.kernel.org, x86@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org, linux-sparse@vger.kernel.org, linux-crypto@vger.kernel.org, kernel-hardening@lists.openwall.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSmFuLAoKT24gMjQvMDUvMTggMDg6NTksIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDI0
-LjA1LjE4IGF0IDAyOjQ2LCA8c2FtZWVyLmdvZWxAbGluYXJvLm9yZz4gd3JvdGU6Cj4+IC0tLSBh
-L3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FybS9NYWtlZmlsZQo+PiArKysgYi94ZW4vZHJpdmVy
-cy9wYXNzdGhyb3VnaC9hcm0vTWFrZWZpbGUKPj4gQEAgLTEsMyArMSwzIEBACj4+ICAgb2JqLXkg
-Kz0gaW9tbXUubwo+PiAtb2JqLXkgKz0gc21tdS5vCj4+ICtvYmotJChDT05GSUdfQVJNX1NNTVUp
-ICs9IHNtbXUubwo+PiAgIG9iai0kKENPTkZJR19BUk1fU01NVV92MykgKz0gc21tdS12My5vCj4g
-Cj4gU2FtZSBxdWVzdGlvbiBhcyB0byBTdGVmYW5vIHRoZSBvdGhlciBkYXk6IFdoYXQgdXNlIGlm
-IGlvbW11Lm8gd2hlbiBib3RoCj4gY29uZmlnIG9wdGlvbnMgYXJlIG9mZj8KClRoZSBhbnN3ZXIg
-aGFzIG5vdCBjaGFuZ2VkIGhlcmUuIFNvIEkgd2lsbCBqdXN0IGNvcHkgaGlzIGFuc3dlcjoKCiJU
-aGluZ3MgbGlrZSBpb21tdV9kb21haW5faW5pdCBhcmUgY2FsbGVkIHVuY29uZGl0aW9uYWxseSBm
-cm9tIEFSTSBjb2RlCmF0IHRoZSBtb21lbnQsIGl0IGlzIG5vdCBxdWl0ZSBwb3NzaWJsZSB0byBz
-a2lwIGNvbXBpbGF0aW9uIHRvZGF5LiBBbHNvLAppdCBpcyBzbWFsbCwgc28gaXQgaXMgbm90IHdv
-cnRoIGl0IEkgdGhpbmsuIgoKQ2hlZXJzLAoKPiAKPiBKYW4KPiAKPiAKCi0tIApKdWxpZW4gR3Jh
-bGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMjMvMDUvMTggMjE6NTQsIFRob21hcyBHYXJuaWVyIHdyb3RlOgo+IENoYW5nZSB0aGUgYXNz
+ZW1ibHkgY29kZSB0byB1c2UgdGhlIG5ldyBfQVNNX01PVkFCUyBtYWNybyB3aGljaCBnZXQgYQo+
+IHN5bWJvbCByZWZlcmVuY2Ugd2hpbGUgYmVpbmcgUElFIGNvbXBhdGlibGUuIEFkYXB0IHRoZSBy
+ZWxvY2F0aW9uIHRvb2wKPiB0byBpZ25vcmUgMzItYml0IFhlbiBjb2RlLgo+IAo+IFBvc2l0aW9u
+IEluZGVwZW5kZW50IEV4ZWN1dGFibGUgKFBJRSkgc3VwcG9ydCB3aWxsIGFsbG93IHRvIGV4dGVu
+ZGVkIHRoZQo+IEtBU0xSIHJhbmRvbWl6YXRpb24gcmFuZ2UgYmVsb3cgdGhlIC0yRyBtZW1vcnkg
+bGltaXQuCj4gCj4gU2lnbmVkLW9mZi1ieTogVGhvbWFzIEdhcm5pZXIgPHRoZ2FybmllQGdvb2ds
+ZS5jb20+CgpSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKCkp1
+ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
