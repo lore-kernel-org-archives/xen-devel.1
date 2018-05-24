@@ -1,20 +1,28 @@
-From: Simon Gaiser <simon@invisiblethingslab.com>
-Subject: Re: [PATCH] x86/XPTI: fix S3 resume (and CPU offlining
- in general)
-Date: Thu, 24 May 2018 14:14:00 +0000
-Message-ID: <5413b93f-ae2d-0b5b-fc52-2a7c3735e42b@invisiblethingslab.com>
-References: <5B06C0F902000078001C5925@prv1-mh.provo.novell.com>
- <5946c6fe-73f0-bfbb-bc0b-2026d1231f79@invisiblethingslab.com>
- <5B06C76402000078001C5983@prv1-mh.provo.novell.com>
+From: Lars Kurth <lars.kurth@citrix.com>
+Subject: Re: Xen Project Security Whitepaper v1 is ready for
+ community review
+Date: Thu, 24 May 2018 14:14:32 +0000
+Message-ID: <B9A45323-7A8B-4BD0-BF5E-F445EAF49A9B@citrix.com>
+References: <6011F946-60DB-4EF0-B335-5333D3F56F74@citrix.com>
+ <20180518175334.GB2731@mail-itl>
+ <5B03ECDA02000078001C48FA@prv1-mh.provo.novell.com>
+ <13396780.xA7tpI257g@wopr.lan.crc.id.au>
+ <3f15a301eeb7504913f263cbaf0c0dd9@crc.id.au>
+ <BC6B1AA4-BC54-4918-B0BE-2D0CDFD64621@citrix.com>
+ <5B06C31C02000090039F5AB8@prv1-mh.provo.novell.com>
+ <5B06C58102000078001C5955@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2998652039746993675=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wtyo=il=invisiblethingslab.com=simon@srs-us1.protection.inumbo.net>)
- id 1fLr1C-0003iY-MC
- for xen-devel@lists.xenproject.org; Thu, 24 May 2018 14:15:02 +0000
-In-Reply-To: <5B06C76402000078001C5983@prv1-mh.provo.novell.com>
+ <srs0=za9r=il=citrix.com=prvs=675891a50=lars.kurth@srs-us1.protection.inumbo.net>)
+ id 1fLr1Z-0003l3-IJ
+ for xen-devel@lists.xenproject.org; Thu, 24 May 2018 14:15:25 +0000
+In-Reply-To: <5B06C58102000078001C5955@prv1-mh.provo.novell.com>
+Content-Language: en-US
+Content-ID: <A1FC70D99C256E47ACA0F4FC31E4B49E@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,126 +32,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Steven Haigh <netwiz@crc.id.au>, Marek Marczykowski <marmarek@invisiblethingslab.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============2998652039746993675==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="2YkzMPJbHfKAdqs36U8Ldo3pnYYkdBRsd"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---2YkzMPJbHfKAdqs36U8Ldo3pnYYkdBRsd
-Content-Type: multipart/mixed; boundary="5G3UJr0QEXy07uzhyi6AvHePEj8k2xwzV";
- protected-headers="v1"
-From: Simon Gaiser <simon@invisiblethingslab.com>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- xen-devel <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.com>
-Message-ID: <5413b93f-ae2d-0b5b-fc52-2a7c3735e42b@invisiblethingslab.com>
-Subject: Re: [PATCH] x86/XPTI: fix S3 resume (and CPU offlining in general)
-References: <5B06C0F902000078001C5925@prv1-mh.provo.novell.com>
- <5946c6fe-73f0-bfbb-bc0b-2026d1231f79@invisiblethingslab.com>
- <5B06C76402000078001C5983@prv1-mh.provo.novell.com>
-In-Reply-To: <5B06C76402000078001C5983@prv1-mh.provo.novell.com>
-
---5G3UJr0QEXy07uzhyi6AvHePEj8k2xwzV
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Jan Beulich:
->>>> On 24.05.18 at 16:00, <simon@invisiblethingslab.com> wrote:
->> Jan Beulich:
->>> In commit d1d6fc97d6 ("x86/xpti: really hide almost all of Xen image"=
-)
->>> I've failed to remember the fact that multiple CPUs share a stub
->>> mapping page. Therefore it is wrong to unconditionally zap the mappin=
-g
->>> when bringing down a CPU; it may only be unmapped when no other onlin=
-e
->>> CPU uses that same page.
->>>
->>> Reported-by: Simon Gaiser <simon@invisiblethingslab.com>
->>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>>
->>> --- a/xen/arch/x86/smpboot.c
->>> +++ b/xen/arch/x86/smpboot.c
->>> @@ -876,7 +876,21 @@ static void cleanup_cpu_root_pgt(unsigne
->>> =20
->>>      free_xen_pagetable(rpt);
->>> =20
->>> -    /* Also zap the stub mapping for this CPU. */
->>> +    /*
->>> +     * Also zap the stub mapping for this CPU, if no other online on=
-e uses
->>> +     * the same page.
->>> +     */
->>> +    if ( stub_linear )
->>> +    {
->>> +        unsigned int other;
->>> +
->>> +        for_each_online_cpu(other)
->>> +            if ( !((per_cpu(stubs.addr, other) ^ stub_linear) >> PAG=
-E_SHIFT) )
->>> +            {
->>> +                stub_linear =3D 0;
->>> +                break;
->>> +            }
->>> +    }
->>>      if ( stub_linear )
->>>      {
->>>          l3_pgentry_t *l3t =3D l4e_to_l3e(common_pgt);
->>
->> Tried this on-top of staging (fc5805daef) and I still get the same
->> double fault.
->=20
-> Hmm, it worked for me offlining (and later re-onlining) several pCPU-s.=
- What
-> size a system are you testing on? Mine has got only 12 CPUs, i.e. all s=
-tubs
-> are in the same page (and I'd never unmap anything here at all).
-
-4 cores + HT, so 8 CPUs from Xen's PoV.
-
-
---5G3UJr0QEXy07uzhyi6AvHePEj8k2xwzV--
-
---2YkzMPJbHfKAdqs36U8Ldo3pnYYkdBRsd
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlsGyNsACgkQkO9xfO/x
-ly9Egg/+Odj/F9qqmest30eYctnVvXVy/HI8kbVnVHmXBj6XiHq3KVEGtvdN30fz
-1E9ekDHnpQQu8uI66O3WQxEUVnNMELkuzQ0F0QJtyRAbMoutd7PTVqeUYOdfv6YQ
-6R31OIjKuBs87yfJbXpQNW7mZ8Af1X05lU8EIK0ftCaaJkaMWNxDCHqbM4Gx+bB8
-sW34aLHKHLGl4Diya9OHWBx70yfwI2Fxs0kRLQUQEpxI+0eZuxs/IQKq1IpjCRSy
-iz3GOoC3vp2AfCp94iCgu1a91647FPB8ILGAa4BUTzrHrrHM9kDFxwGEWHyv0WxF
-xyYXpUN1j6JE96ey7ydkBT0+AzOfFIgjrPey95AY7BUXQeHwRpkHGay9/AXAo6FG
-QTS9JeKe1k/oRX//AQZrZO3TwdwWnDMiuObKQIrXbyoB4YG6oeSEHiDtdzWeWCzY
-ZUm+AIblW7UXHrQaRfDLY5HViaeydqi3iixqh4dMn+iIzkuBNdOuOLMZV75xcix3
-KteoTTzoerYoc0C400FdoaGTZJSflQna+UyF3n4clzoYRdKYPKtYGBsillXU0tHz
-xmlt2PK9i/n2NH9j3zVIA3TgtYHpcxyfYmwC+hY3eW8R8xdlQBuuBLfYrYUq6vEZ
-WK/J7LU6a5n7/I/rgYOU8xxgrwhiAZsY111i+44RtdKARRuo77Y=
-=hrQ9
------END PGP SIGNATURE-----
-
---2YkzMPJbHfKAdqs36U8Ldo3pnYYkdBRsd--
-
-
---===============2998652039746993675==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2998652039746993675==--
+DQoNCu+7v09uIDI0LzA1LzIwMTgsIDEwOjAwLCAiSmFuIEJldWxpY2giIDxKQmV1bGljaEBzdXNl
+LmNvbT4gd3JvdGU6DQoNCiAgICA+Pj4gT24gMjQuMDUuMTggYXQgMTU6NTAsIDxsYXJzLmt1cnRo
+QGNpdHJpeC5jb20+IHdyb3RlOg0KICAgIA0KICAgID4gDQogICAgPiBPbiAyNC8wNS8yMDE4LCAw
+MTo0OCwgIlN0ZXZlbiBIYWlnaCIgPG5ldHdpekBjcmMuaWQuYXU+IHdyb3RlOg0KICAgID4gDQog
+ICAgPiAgICAgT24gMjAxOC0wNS0yMiAyMDo1MiwgU3RldmVuIEhhaWdoIHdyb3RlOg0KICAgID4g
+ICAgID4gT24gVHVlc2RheSwgMjIgTWF5IDIwMTggODoxMTozOCBQTSBBRVNUIEphbiBCZXVsaWNo
+IHdyb3RlOg0KICAgID4gICAgID4+ID4+PiBPbiAxOC4wNS4xOCBhdCAxOTo1MywgPG1hcm1hcmVr
+QGludmlzaWJsZXRoaW5nc2xhYi5jb20+IHdyb3RlOg0KICAgID4gICAgID4+ID4gQWx0ZXJuYXRp
+dmUgd29ya2Fyb3VuZCBmb3IgdGhpcyB3b3VsZCBiZSBtb3JlIGZyZXF1ZW50IHBvaW50IHJlbGVh
+c2VzIA0KICAgID4gYnkNCiAgICA+ICAgICA+PiA+IGRlZmF1bHQgKG1heWJlIHdpdGggYWJpbGl0
+eSB0byBkZWxheSBpdCB2ZXJ5IGZldyBjb21taXRzIGFyZSBxdWV1ZWQpLg0KICAgID4gICAgID4+
+ID4gRm9yIGV4YW1wbGUgZXZlcnkgMyBtb250aHMuIEl0IHdvdWxkbid0IHNvbHZlIGFsbCB0aGUg
+Y2FzZXMsIGJ1dCBJIA0KICAgID4gdGhpbmsNCiAgICA+ICAgICA+PiA+IHdpbGwgbWFrZSBpdCBl
+YXNpZXIgbW9zdCBvZiB0aGUgdGltZS4NCiAgICA+ICAgICA+PiANCiAgICA+ICAgICA+PiBJcyBl
+dmVyeSAzIG1vbnRocyBzbyBtdWNoIGJldHRlciB0aGFuIGV2ZXJ5IDQgbW9udGhzPyBHcmFudGVk
+IHdlDQogICAgPiAgICAgPj4gYmFzaWNhbGx5IG5ldmVyIG1hbmFnZSB0byBtYWtlIGl0IGV4YWN0
+bHkgNCBtb250aHMsIGJ1dCBvbiB0aGUgYXZlcmFnZQ0KICAgID4gICAgID4+IEkgdGhpbmsgd2Un
+cmUgbm90IHRvbyBmYXIgb2ZmLg0KICAgID4gICAgID4gDQogICAgPiAgICAgPiBJIHRoaW5rIHRo
+ZSBiaWcgdGhpbmcgaXMgcmVkdWNpbmcgdGhlIGRlbHRhIGJldHdlZW4gdGhlIHN0YWdpbmcgYnJh
+bmNoIA0KICAgID4gICAgID4gYW5kIHRoZQ0KICAgID4gICAgID4gcmVsZWFzZS4gSSBjYW4gb25s
+eSBhc3N1bWUgdGhhdCB3b3VsZCByZWR1Y2UgdGhlIG51bWJlciBvZiBpc3N1ZXMgdGhhdCANCiAg
+ICA+ICAgICA+IG9jY3VyDQogICAgPiAgICAgPiB3aXRoIHBhdGNoaW5nIHZzIHJlbGVhc2UgdGFy
+YmFsbHMgLSBob3BlZnVsbHkgbWFraW5nIHRoZSBzZWN1cml0eSB0ZWFtcyANCiAgICA+IA0KICAg
+ID4gICAgID4gam9iIGENCiAgICA+ICAgICA+IGxpdHRsZSBlYXNpZXIuDQogICAgPiAgICAgPiAN
+CiAgICA+ICAgICA+IFRoYXQgYmVpbmcgc2FpZCwgaWYgYW4gYXBwcm9hY2ggb2YgcmVsZWFzaW5n
+IGEgbmV3IGJ1aWxkIHdoZW4gd2UgY29tZSANCiAgICA+ICAgICA+IGFjcm9zcw0KICAgID4gICAg
+ID4gYnJva2VuIHBhdGNoIHNldHMgZm9yIFhTQXMgKGxpa2UgdGhlIGN1cnJlbnQgNC45LjEgdnMg
+WFNBcywgYW5kIHByaW9yIA0KICAgID4gICAgID4gNC4xMC4wDQogICAgPiAgICAgPiB2cyBYU0Fz
+KSwgdGhlbiBJIHRoaW5rIHRoaXMgcGFydCBiZWNvbWVzIGlycmVsZXZhbnQuDQogICAgPiAgICAg
+DQogICAgPiAgICAgQXMgYW5vdGhlciBleGFtcGxlIGZvciB0aGlzLCB0aGUgcGF0Y2hlcyBmb3Ig
+WFNBMjYzIGRvIG5vdCBhcHBseSB0byANCiAgICA+ICAgICAqYW55KiByZWxlYXNlZCB0YXJiYWxs
+IHZlcnNpb24gb2YgWGVuLg0KICAgID4gICAgIA0KICAgID4gICAgIFNvIGZhciwgdGhlIHBhdGNo
+ZXMgaW5jbHVkZWQgd2l0aCB0aGUgYW5ub3VuY2VtZW50IGZhaWwgb24gNC42LCA0LjcsIDQuOSAN
+CiAgICA+IA0KICAgID4gICAgIGFuZCA0LjEwLg0KICAgID4gICAgIA0KICAgID4gICAgIEkgY2Fu
+IG9ubHkgYXNzdW1lIHRoYXQgdGhpcyBtZWFucyBhbGwgdGhlIFhTQSBwYXRjaGVzIHJlcXVpcmUg
+Y29tbWl0cyANCiAgICA+ICAgICB0aGF0IGFyZSBjdXJyZW50bHkgaW4gdmFyaW91cyBzdGFnaW5n
+IGdpdCB0cmVlcyB0aGF0IGhhdmUgbm90IGJlZW4gDQogICAgPiAgICAgcmVsZWFzZWQgaW4gYW55
+IGZvcm1hbCBtYW5uZXIgdmlhIGEgcG9pbnQgcmVsZWFzZS4NCiAgICA+ICAgICANCiAgICA+IFRo
+aW5raW5nIGFib3V0IHRoaXMsIHdlIGFyZSBlc3NlbnRpYWxseSBleHBvc2luZyBvdXJzZWx2ZXMg
+dG8gdGhpcywgYmVjYXVzZSANCiAgICA+IG9mIGJhY2twb3J0cyBvZiBpc3N1ZXMgd2hpY2ggaGFw
+cGVuIGF0IGFueSByYW5kb20gcG9pbnQgaW4gdGltZSBkdXJpbmcgYSANCiAgICA+IHBvaW50IHJl
+bGVhc2UgY3ljbGUsIGUuZy4gNC44LjIuID0+IDQuOC4zDQogICAgPiANCiAgICA+IEluIG90aGVy
+IHdvcmRzLCB3ZSBtYXkgZ2V0IGEgc2VxdWVuY2Ugb2YgYmFja3BvcnQsIFhTQSwgWFNBLCBiYWNr
+cG9ydCwgLi4uDQogICAgPiANCiAgICA+IEkgYW0gd29uZGVyaW5nIHdoZXRoZXIgdGltZS1zZXF1
+ZW5jaW5nIG1heSBiZSB0aGUgYW5zd2VyIGhlcmUuIEluIG90aGVyIA0KICAgID4gd29yZHMsIGxl
+dCdzIGFzc3VtZSB3ZSBoYXZlIGEgNC1tb250aCB3aW5kb3c6IGZvciB0aGUgZmlyc3QgMyBtb250
+aHMsIHdlIA0KICAgID4gZG9uJ3QgYWxsb3cgYnVnLWZpeCBiYWNrcG9ydHMgaW50byBpbiB0aGlz
+IGNhc2Ugc3RhYmxlLTQuOCwgd2Ugb25seSBhbGxvdyANCiAgICA+IFhTQXMuIFRoZW4gd2UgaGF2
+ZSBhIDItd2VlayBtZXJnZSB3aW5kb3cgd2hlcmUgd2UgaGFuZGxlIGFsbCBiYWNrcG9ydHMgYW5k
+IA0KICAgID4gcHJlcGFyZSB0aGUgcmVsZWFzZSBhbmQgY3V0IHRoZSByZWxlYXNlLiBUaGlzIG1l
+YW5zIHRoYXQgZm9yIG1vc3Qgb2YgdGhlIA0KICAgID4gdGltZSwgWFNBcyB3b3VsZCBhcHBseSBj
+bGVhbmx5IG9udG8gc3RhZ2luZyBhbmQgdGhlIHJlbGVhc2VkIHRhcmJhbGwuDQogICAgDQogICAg
+SSdtIHNpbmNlcmVseSBhZ2FpbnN0IHN1Y2ggYSBtb2RlbDogVGhlIGxhcmdlciBhIGJhdGNoIG9m
+IGNvbW1pdHMsIHRoZSBtb3JlDQogICAgbGlrZWx5IHRoYXQgc29tZSB0aGVuLW5vLWxvbmdlci1l
+YXN5LXRvLXNwb3QgcmVncmVzc2lvbiBtYXkgY3JlZXAgaW4sIGFuZA0KICAgIHRoZSBsZXNzIHRp
+bWUgdGhlcmUgaXMgZm9yIG9zc3Rlc3QgYW5kIHBlb3BsZSB0byB0ZXN0LiBJIGRvIGFwcHJlY2lh
+dGUgc29tZQ0KICAgIGJhdGNoaW5nLCBidXQganVzdCBsaWtlIHdpdGggWFNBcyBJIHRoaW5rIHRo
+ZSBiYXRjaCBzaXplIHNob3VsZCByZW1haW4gc2Vuc2libGUNCiAgICBhbHNvIGZvciBjb21taXRz
+IHRvIHN0YWJsZSB0cmVlcy4NCiAgICANCkhvdyBtYW55IGJ1Zy1maXhlcyB2cy4gWFNBcyBhcmUg
+dHlwaWNhbGx5IGluIGEgc3RhYmxlIGJyYW5jaD8gSSB3YXMgdW5kZXIgdGhlIGltcHJlc3Npb24g
+dGhhdCBoaXN0b3JpY2FsbHksIHRoZSB2YXN0IG1ham9yaXR5IHVzZWQgdG8gYmUgWFNBcyB3aXRo
+IHZlcnkgZmV3IGJhY2twb3J0cy4NCkhvd2V2ZXIsIHRoaXMgeWVhciB0aGlzIGhhcyByZWFsbHkg
+Y2hhbmdlZCBiZWNhdXNlIFNwZWN0cmUgYW5kIE1lbHRkb3duIHJlbGF0ZWQgZml4ZXMgd2VyZSBk
+ZXZlbG9wZWQgaW4gcHVibGljIGFuZCB0aGV5IGxvb2sgbGlrZSBmZWF0dXJlIGJhY2twb3J0cw0K
+V2hpY2ggaXMgd2h5IHdlIHNlZSBtb3JlIG9mIHRoZXNlIGlzc3Vlcw0KDQpMYXJzICAgIA0KICAg
+IA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
