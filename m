@@ -1,18 +1,16 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/CPUID: don't override tool stack decision
- to hide STIBP
-Date: Thu, 24 May 2018 17:44:50 +0100
-Message-ID: <2f901854-77d3-2d28-08cc-97d62630fc13@citrix.com>
-References: <5B03F1F202000078001C4942@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH 9/9] x86/vmx: Don't leak EFER.NXE into guest
+ context
+Date: Thu, 24 May 2018 17:48:35 +0100
+Message-ID: <c5b1d88f-00bf-65c3-2b8f-2cf3458dee50@citrix.com>
+References: <1526988046-22948-1-git-send-email-andrew.cooper3@citrix.com>
+ <1526988046-22948-10-git-send-email-andrew.cooper3@citrix.com>
+ <20180524160141.fgvw6enzcmy5g2dd@MacBook-Pro-de-Roger.local>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8813566297236706610=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=bvjw=il=citrix.com=prvs=675476172=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1fLtMF-0004rW-6q
- for xen-devel@lists.xenproject.org; Thu, 24 May 2018 16:44:55 +0000
-In-Reply-To: <5B03F1F202000078001C4942@prv1-mh.provo.novell.com>
+In-Reply-To: <20180524160141.fgvw6enzcmy5g2dd@MacBook-Pro-de-Roger.local>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,171 +20,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Juergen Gross <jgross@suse.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>, Jun Nakajima <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============8813566297236706610==
-Content-Type: multipart/alternative;
-	boundary="------------C169E6C0F7576E0E7025AD42"
-Content-Language: en-GB
-
---------------C169E6C0F7576E0E7025AD42
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 22/05/18 11:33, Jan Beulich wrote:
-> Other than in the feature sets, where we indeed want to offer the
-> feature even if not enumerated on hardware, we shouldn't dictate the
-> feature being available if tool stack or host admin have decided not
-> to expose it (for whatever [questionable?] reason).
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> This is effectively accompanying the discussion rooted at the 4.8/4.7
-> patch at
-> https://lists.xenproject.org/archives/html/xen-devel/2018-05/msg01028.html 
-> dealing with a feature leveling issue.
->
-> --- a/xen/arch/x86/cpuid.c
-> +++ b/xen/arch/x86/cpuid.c
-> @@ -642,14 +642,6 @@ void recalculate_cpuid_policy(struct dom
->      recalculate_xstate(p);
->      recalculate_misc(p);
->  
-> -    /*
-> -     * Override STIBP to match IBRS.  Guests can safely use STIBP
-> -     * functionality on non-HT hardware, but can't necesserily protect
-> -     * themselves from SP2/Spectre/Branch Target Injection if STIBP is hidden
-> -     * on HT-capable hardware.
-> -     */
-> -    p->feat.stibp = p->feat.ibrsb;
-
-You've deleted a comment explaining why this is needed for safety
-reasons, without addressing the safety argument.  Simply "because we
-shouldn't override the toolstack" isn't a reasonable argument.
-
-With the SP2 microcode, we have the following situations which can occur:
- * No mitigations
- * IBRSB visible
- * IBRSB and STIBP visible
-
-IBSRB enumerates MSR_SPEC_CTRL, MSR_SPEC_CTRL.IBRS, and MSR_PRED_CMD.
-STIBP enumerates MSR_SPEC_CTRL.STIBP
-
-SPEC_CTRL.STIBP is specified as usable (albeit, as a nop) even if STIBP
-isn't enumerated.  This is deliberately and explicitly for heterogeneous
-migration scenarios, as it won't be a nop on other processors.  In
-practice, this is so hypervisors can offer the feature unilaterally, and
-have it usable on non-HT hardware.
-
-However, to safely level it, dom0 needs to see it set in the information
-used to construct the guest policies.  In principle, this should just be
-in the guest policy which needs adjusting.
-
-However, due to still not having got the CPUID policy improvements
-finished, dom0 is still excluded from cpuid faulting for the exclusive
-benefit of the CPUID logic in the domain builder, because it uses native
-CPUID to construct the guests CPUID policy.  Therefore, dom0 is unable
-to create a safe CPUID policy for the guest, and Xen must override the
-setting.
-
-If you try and make this change, you will introduce a guest security
-issue on some hardware by hiding STIBP which is necessary for safety.
-
-~Andrew
-
---------------C169E6C0F7576E0E7025AD42
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 22/05/18 11:33, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:5B03F1F202000078001C4942@prv1-mh.provo.novell.com">
-      <pre wrap="">Other than in the feature sets, where we indeed want to offer the
-feature even if not enumerated on hardware, we shouldn't dictate the
-feature being available if tool stack or host admin have decided not
-to expose it (for whatever [questionable?] reason).
-
-Signed-off-by: Jan Beulich <a class="moz-txt-link-rfc2396E" href="mailto:jbeulich@suse.com">&lt;jbeulich@suse.com&gt;</a>
----
-This is effectively accompanying the discussion rooted at the 4.8/4.7
-patch at
-<a class="moz-txt-link-freetext" href="https://lists.xenproject.org/archives/html/xen-devel/2018-05/msg01028.html">https://lists.xenproject.org/archives/html/xen-devel/2018-05/msg01028.html</a> 
-dealing with a feature leveling issue.
-
---- a/xen/arch/x86/cpuid.c
-+++ b/xen/arch/x86/cpuid.c
-@@ -642,14 +642,6 @@ void recalculate_cpuid_policy(struct dom
-     recalculate_xstate(p);
-     recalculate_misc(p);
- 
--    /*
--     * Override STIBP to match IBRS.  Guests can safely use STIBP
--     * functionality on non-HT hardware, but can't necesserily protect
--     * themselves from SP2/Spectre/Branch Target Injection if STIBP is hidden
--     * on HT-capable hardware.
--     */
--    p-&gt;feat.stibp = p-&gt;feat.ibrsb;
-</pre>
-    </blockquote>
-    <br>
-    You've deleted a comment explaining why this is needed for safety
-    reasons, without addressing the safety argument.  Simply "because we
-    shouldn't override the toolstack" isn't a reasonable argument.<br>
-    <br>
-    With the SP2 microcode, we have the following situations which can
-    occur:<br>
-     * No mitigations<br>
-     * IBRSB visible<br>
-     * IBRSB and STIBP visible<br>
-    <br>
-    IBSRB enumerates MSR_SPEC_CTRL, MSR_SPEC_CTRL.IBRS, and
-    MSR_PRED_CMD.<br>
-    STIBP enumerates MSR_SPEC_CTRL.STIBP<br>
-    <br>
-    SPEC_CTRL.STIBP is specified as usable (albeit, as a nop) even if
-    STIBP isn't enumerated.  This is deliberately and explicitly for
-    heterogeneous migration scenarios, as it won't be a nop on other
-    processors.  In practice, this is so hypervisors can offer the
-    feature unilaterally, and have it usable on non-HT hardware.<br>
-    <br>
-    However, to safely level it, dom0 needs to see it set in the
-    information used to construct the guest policies.  In principle,
-    this should just be in the guest policy which needs adjusting.<br>
-    <br>
-    However, due to still not having got the CPUID policy improvements
-    finished, dom0 is still excluded from cpuid faulting for the
-    exclusive benefit of the CPUID logic in the domain builder, because
-    it uses native CPUID to construct the guests CPUID policy. 
-    Therefore, dom0 is unable to create a safe CPUID policy for the
-    guest, and Xen must override the setting.<br>
-    <br>
-    If you try and make this change, you will introduce a guest security
-    issue on some hardware by hiding STIBP which is necessary for
-    safety.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------C169E6C0F7576E0E7025AD42--
-
-
---===============8813566297236706610==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8813566297236706610==--
+T24gMjQvMDUvMTggMTc6MDEsIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6Cj4gT24gVHVlLCBNYXkg
+MjIsIDIwMTggYXQgMTI6MjA6NDZQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4gSW50
+ZWwgaGFyZHdhcmUgb25seSB1c2VzIDQgYml0cyBpbiBNU1JfRUZFUi4gIENoYW5nZXMgdG8gTE1F
+IGFuZCBMTUEgYXJlCj4+IGhhbmRsZWQgYXV0b21hdGljYWxseSB2aWEgdGhlIFZNRU5UUllfQ1RM
+Uy5JQTMyRV9NT0RFIGJpdC4KPj4KPj4gU0NFIGlzIGhhbmRsZWQgYnkgYWQtaG9jIGxvZ2ljIGlu
+IGNvbnRleHRfc3dpdGNoKCksIHZteF9yZXN0b3JlX2d1ZXN0X21zcnMoKQo+PiBhbmQgdm14X3Vw
+ZGF0ZV9ndWVzdF9lZmVyKCksIGFuZCB3b3JrcyBieSBhbHRlcmluZyB0aGUgaG9zdCBTQ0UgdmFs
+dWUgdG8gbWF0Y2gKPj4gdGhlIHNldHRpbmcgdGhlIGd1ZXN0IHdhbnRzLiAgVGhpcyB3b3JrcyBi
+ZWNhdXNlLCBpbiBIVk0gdmNwdSBjb250ZXh0LCBYZW4KPj4gbmV2ZXIgbmVlZHMgdG8gZXhlY3V0
+ZSBhIFNZU0NBTEwgb3IgU1lTUkVUIGluc3RydWN0aW9uLgo+Pgo+PiBIb3dldmVyLCBOWEUgaGFz
+IG5ldmVyIGJlZW4gY29udGV4dCBzd2l0Y2hlZC4gIFVubGlrZSBTQ0UsIE5YRSBjYW5ub3QgYmUK
+Pj4gY29udGV4dCBzd2l0Y2hlZCBhdCB2Y3B1IGJvdW5kYXJpZXMgYmVjYXVzZSBkaXNhYmxpbmcg
+TlhFIG1ha2VzIFBURS5OWCBiaXRzCj4+IHJlc2VydmVkIGFuZCBjYXVzZSBhIHBhZ2VmYXVsdCB3
+aGVuIGVuY291bnRlcmVkLiAgVGhpcyBtZWFucyB0aGF0IHRoZSBndWVzdAo+PiBhbHdheXMgaGFz
+IFhlbidzIHNldHRpbmcgaW4gZWZmZWN0LCBpcnJlc3BlY3RpdmUgb2YgdGhlIGJpdCBpdCBjYW4g
+c2VlIGFuZAo+PiBtb2RpZnkgaW4gaXRzIHZpcnR1YWxpc2VkIHZpZXcgb2YgTVNSX0VGRVIuCj4+
+Cj4+IFRoaXMgaXNuJ3QgYSBtYWpvciBwcm9ibGVtIGZvciBwcm9kdWN0aW9uIG9wZXJhdGluZyBz
+eXN0ZW1zIGJlY2F1c2UgdGhleSwgbGlrZQo+PiBYZW4sIGFsd2F5cyB0dXJuIHRoZSBOWEUgb24g
+d2hlbiBpdCBpcyBhdmFpbGFibGUuICBIb3dldmVyLCBpdCBkb2VzIGhhdmUgYW4KPj4gb2JzZXJ2
+YWJsZSBlZmZlY3Qgb24gd2hpY2ggZ3Vlc3QgUFRFIGJpdHMgYXJlIHZhbGlkLCBhbmQgd2hldGhl
+cgo+PiBQRkVDX2luc25fZmV0Y2ggaXMgdmlzaWJsZSBpbiBhICNQRiBlcnJvciBjb2RlLgo+Pgo+
+PiBTZWNvbmQgZ2VuZXJhdGlvbiBWVC14IGhhcmR3YXJlIGhhcyBob3N0IGFuZCBndWVzdCBFRkVS
+IGZpZWxkcyBpbiB0aGUgVk1DUywKPj4gYW5kIHN1cHBvcnQgZm9yIGxvYWRpbmcgYW5kIHNhdmlu
+ZyB0aGVtIGF1dG9tYXRpY2FsbHkuICBGaXJzdCBnZW5lcmF0aW9uIFZULXgKPj4gaGFyZHdhcmUg
+bmVlZHMgdG8gdXNlIE1TUiBsb2FkL3NhdmUgbGlzdHMgdG8gY2F1c2UgYW4gYXRvbWljIHN3aXRj
+aCBvZgo+PiBNU1JfRUZFUiBvbiB2bWVudHJ5L2V4aXQuCj4+Cj4+IFRoZXJlZm9yZSB3ZSB1cGRh
+dGUgdm14X2luaXRfdm1jc19jb25maWcoKSB0byBmaW5kIGFuZCB1c2UgZ3Vlc3QvaG9zdCBFRkVS
+Cj4+IHN1cHBvcnQgd2hlbiBhdmFpbGFibGUgKGFuZCBNU1IgbG9hZC9zYXZlIGxpc3RzIG9uIG9s
+ZGVyIGhhcmR3YXJlKSBhbmQgZHJvcAo+PiBhbGwgYWQtaG9jIGFsdGVyYXRpb24gb2YgU0NFLgo+
+Pgo+PiBUaGVyZSBhcmUgdHdvIGNvbXBsaWNhdGlvbnMgZm9yIHNoYWRvdyBndWVzdHMuICBOWEUs
+IGJlaW5nIGEgcGFnaW5nIHNldHRpbmcKPj4gbmVlZHMgdG8gcmVtYWluIHVuZGVyIGhvc3QgY29u
+dHJvbCwgYnV0IHRoYXQgaXMgZmluZSBhcyBpdCBpcyBhbHNvIFhlbiB3aGljaAo+PiBoYW5kbGVz
+IHRoZSBwYWdlZmF1bHRzLiAgQWxzbywgaXQgdHVybnMgb3V0IHRoYXQgd2l0aG91dCBFUFQgZW5h
+YmxlZCwgaGFyZHdhcmUKPj4gd29uJ3QgdG9sZXJhdGUgTE1FIGFuZCBMTUEgYmVpbmcgZGlmZmVy
+ZW50IHZpYSBlaXRoZXIgdGhlIEdVRVNUX0VGRVIgVk1DUwo+PiBzZXR0aW5nLCBvciB2aWEgdGhl
+IGd1ZXN0IGxvYWQgbGlzdC4gIFRoaXMgZG9lc24ndCBtYXR0ZXIgaW4gcHJhY3RpY2UgYXMgd2UK
+Pj4gaW50ZXJjZXB0IGFsbCB3cml0ZXMgdG8gQ1IwIGFuZCByZWFkcyBmcm9tIE1TUl9FRkVSLCBz
+byBjYW4gcHJvdmlkZQo+PiBhcmNoaXRlY3R1cmFsbHkgY29uc2lzdGVudCBiZWhhdmlvdXIgZnJv
+bSB0aGUgZ3Vlc3RzIHBvaW50IG9mIHZpZXcuCj4+Cj4+IEFzIGEgcmVzdWx0IG9mIGZpeGluZyBF
+RkVSIGNvbnRleHQgc3dpdGNoaW5nLCB3ZSBjYW4gcmVtb3ZlIHRoZSBJbnRlbC1zcGVjaWFsCj4+
+IGNhc2UgZnJvbSBodm1fbnhfZW5hYmxlZCgpIGFuZCBsZXQgZ3Vlc3Rfd2Fsa190YWJsZXMoKSB3
+b3JrIHdpdGggdGhlIHJlYWwKPj4gZ3Vlc3QgcGFnaW5nIHNldHRpbmdzLgo+Pgo+PiBTaWduZWQt
+b2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgo+IExHVE06
+Cj4KPiBSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+
+Cj4KPiBPbmUgcXVlc3Rpb24gYmVsb3cgdGhvdWdoLgo+Cj4+IGRpZmYgLS1naXQgYS94ZW4vaW5j
+bHVkZS9hc20teDg2L2h2bS92bXgvdm1jcy5oIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vdm14
+L3ZtY3MuaAo+PiBpbmRleCBjZmQxNzRjLi42YzY4OTdjIDEwMDY0NAo+PiAtLS0gYS94ZW4vaW5j
+bHVkZS9hc20teDg2L2h2bS92bXgvdm1jcy5oCj4+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYv
+aHZtL3ZteC92bWNzLmgKPj4gQEAgLTMwNiw2ICszMDYsOCBAQCBleHRlcm4gdTY0IHZteF9lcHRf
+dnBpZF9jYXA7Cj4+ICAgICAgKHZteF9jcHVfYmFzZWRfZXhlY19jb250cm9sICYgQ1BVX0JBU0VE
+X01PTklUT1JfVFJBUF9GTEFHKQo+PiAgI2RlZmluZSBjcHVfaGFzX3ZteF9wYXQgXAo+PiAgICAg
+ICh2bXhfdm1lbnRyeV9jb250cm9sICYgVk1fRU5UUllfTE9BRF9HVUVTVF9QQVQpCj4+ICsjZGVm
+aW5lIGNwdV9oYXNfdm14X2VmZXIgXAo+PiArICAgICh2bXhfdm1lbnRyeV9jb250cm9sICYgVk1f
+RU5UUllfTE9BRF9HVUVTVF9FRkVSKQo+IERvbid0IHlvdSBhbHNvIG5lZWQgYSB2bXhfdm1leGl0
+X2NvbnRyb2wgJiBWTV9FWElUX1NBVkVfR1VFU1RfRUZFUiBhbmQKPiB2bXhfdm1leGl0X2NvbnRy
+b2wgJiBWTV9FWElUX0xPQURfSE9TVF9FRkVSPwo+Cj4gT3IgY2FuIHRoZSBwcmVzZW5jZSBvZiB0
+aG9zZSB0d28gYmUgaW5mZXJyZWQgZnJvbQo+IFZNX0VOVFJZX0xPQURfR1VFU1RfRUZFUj8KClRo
+ZXkgd2VyZSBpbnRyb2R1Y2VkIGF0IHRoZSBzYW1lIHRpbWUgaW50byBoYXJkd2FyZSwgc28gdGhl
+c2Ugc2V0dGluZ3MKd2lsbCBiZSB0aGUgc2FtZSBpbiBwcmFjdGljZS4KCn5BbmRyZXcKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
