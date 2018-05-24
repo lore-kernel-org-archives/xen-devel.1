@@ -1,24 +1,16 @@
-From: Simon Gaiser <simon@invisiblethingslab.com>
-Subject: Re: [PATCH] x86/XPTI: fix S3 resume (and CPU offlining
- in general)
-Date: Thu, 24 May 2018 16:12:00 +0000
-Message-ID: <7323393c-9ade-3ab9-3d6e-a38be2f68ed0@invisiblethingslab.com>
-References: <5B06C0F902000078001C5925@prv1-mh.provo.novell.com>
- <5946c6fe-73f0-bfbb-bc0b-2026d1231f79@invisiblethingslab.com>
- <5B06C76402000078001C5983@prv1-mh.provo.novell.com>
- <5413b93f-ae2d-0b5b-fc52-2a7c3735e42b@invisiblethingslab.com>
- <5B06CBFA02000078001C59EC@prv1-mh.provo.novell.com>
- <9ad3d985-58a3-085b-f898-d1079dee4e37@invisiblethingslab.com>
- <5B06DE6602000078001C5ACC@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 7/9] x86/vmx: Support load-only guest MSR
+ list entries
+Date: Thu, 24 May 2018 09:19:48 -0600
+Message-ID: <5B06D81402000078001C5A72@prv1-mh.provo.novell.com>
+References: <1526988046-22948-1-git-send-email-andrew.cooper3@citrix.com>
+ <1526988046-22948-8-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7335573197534090342=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wtyo=il=invisiblethingslab.com=simon@srs-us1.protection.inumbo.net>)
- id 1fLsr2-0001n5-6c
- for xen-devel@lists.xenproject.org; Thu, 24 May 2018 16:12:40 +0000
-In-Reply-To: <5B06DE6602000078001C5ACC@prv1-mh.provo.novell.com>
+In-Reply-To: <1526988046-22948-8-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,217 +19,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============7335573197534090342==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="07Fpqz6KjUHP22R6LuWMBLJuT0jGjJ0y2"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---07Fpqz6KjUHP22R6LuWMBLJuT0jGjJ0y2
-Content-Type: multipart/mixed; boundary="vMvfYyqGFFR5uxHuRig1pKqvz0nojt9yk";
- protected-headers="v1"
-From: Simon Gaiser <simon@invisiblethingslab.com>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- xen-devel <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.com>
-Message-ID: <7323393c-9ade-3ab9-3d6e-a38be2f68ed0@invisiblethingslab.com>
-Subject: Re: [PATCH] x86/XPTI: fix S3 resume (and CPU offlining in general)
-References: <5B06C0F902000078001C5925@prv1-mh.provo.novell.com>
- <5946c6fe-73f0-bfbb-bc0b-2026d1231f79@invisiblethingslab.com>
- <5B06C76402000078001C5983@prv1-mh.provo.novell.com>
- <5413b93f-ae2d-0b5b-fc52-2a7c3735e42b@invisiblethingslab.com>
- <5B06CBFA02000078001C59EC@prv1-mh.provo.novell.com>
- <9ad3d985-58a3-085b-f898-d1079dee4e37@invisiblethingslab.com>
- <5B06DE6602000078001C5ACC@prv1-mh.provo.novell.com>
-In-Reply-To: <5B06DE6602000078001C5ACC@prv1-mh.provo.novell.com>
-
---vMvfYyqGFFR5uxHuRig1pKqvz0nojt9yk
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Jan Beulich:
->>>> On 24.05.18 at 17:10, <simon@invisiblethingslab.com> wrote:
->> Jan Beulich:
->>>>>> On 24.05.18 at 16:14, <simon@invisiblethingslab.com> wrote:
->>>> Jan Beulich:
->>>>>>>> On 24.05.18 at 16:00, <simon@invisiblethingslab.com> wrote:
->>>>>> Jan Beulich:
->>>>>>> In commit d1d6fc97d6 ("x86/xpti: really hide almost all of Xen im=
-age")
->>>>>>> I've failed to remember the fact that multiple CPUs share a stub
->>>>>>> mapping page. Therefore it is wrong to unconditionally zap the ma=
-pping
->>>>>>> when bringing down a CPU; it may only be unmapped when no other o=
-nline
->>>>>>> CPU uses that same page.
->>>>>>>
->>>>>>> Reported-by: Simon Gaiser <simon@invisiblethingslab.com>
->>>>>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>>>>>>
->>>>>>> --- a/xen/arch/x86/smpboot.c
->>>>>>> +++ b/xen/arch/x86/smpboot.c
->>>>>>> @@ -876,7 +876,21 @@ static void cleanup_cpu_root_pgt(unsigne
->>>>>>> =20
->>>>>>>      free_xen_pagetable(rpt);
->>>>>>> =20
->>>>>>> -    /* Also zap the stub mapping for this CPU. */
->>>>>>> +    /*
->>>>>>> +     * Also zap the stub mapping for this CPU, if no other onlin=
-e one uses
->>>>>>> +     * the same page.
->>>>>>> +     */
->>>>>>> +    if ( stub_linear )
->>>>>>> +    {
->>>>>>> +        unsigned int other;
->>>>>>> +
->>>>>>> +        for_each_online_cpu(other)
->>>>>>> +            if ( !((per_cpu(stubs.addr, other) ^ stub_linear) >>=
- PAGE_SHIFT)=20
->> )
->>>>>>> +            {
->>>>>>> +                stub_linear =3D 0;
->>>>>>> +                break;
->>>>>>> +            }
->>>>>>> +    }
->>>>>>>      if ( stub_linear )
->>>>>>>      {
->>>>>>>          l3_pgentry_t *l3t =3D l4e_to_l3e(common_pgt);
->>>>>>
->>>>>> Tried this on-top of staging (fc5805daef) and I still get the same=
-
->>>>>> double fault.
->>>>>
->>>>> Hmm, it worked for me offlining (and later re-onlining) several pCP=
-U-s. What
->>>>> size a system are you testing on? Mine has got only 12 CPUs, i.e. a=
-ll stubs
->>>>> are in the same page (and I'd never unmap anything here at all).
->>>>
->>>> 4 cores + HT, so 8 CPUs from Xen's PoV.
->>>
->>> May I ask you to do two things:
->>> 1) confirm that you can offline CPUs successfully using xen-hptool,
->>> 2) add a printk() to the code above making clear whether/when any
->>> of the mappings actually get zapped?
->>
->> There seem to be two failure modes now. It seems that both can be
->> triggered either by offlining a cpu or by suspend. Using cpu offlining=
-
->> below since during suspend I often loose part of the serial output.
->>
->> Failure mode 1, the double fault as before:
->>
->> root@localhost:~# xen-hptool cpu-offline 3
->> Prepare to offline CPU 3
->> (XEN) Broke affinity for irq 9
->> (XEN) Broke affinity for irq 29
->> (XEN) dbg: stub_linear't1 =3D 18446606431818858880
->> (XEN) dbg: first stub_linear if
->> (XEN) dbg: stub_linear't2 =3D 18446606431818858880
->> (XEN) dbg: second stub_linear if
->> CPU 3 offlined successfully
->> root@localhost:~# (XEN) *** DOUBLE FAULT ***
->> (XEN) ----[ Xen-4.11-rc  x86_64  debug=3Dy   Not tainted ]----
->> (XEN) CPU:    0
->> (XEN) RIP:    e008:[<ffff82d08037b964>] handle_exception+0x9c/0xff
->> (XEN) RFLAGS: 0000000000010006   CONTEXT: hypervisor
->> (XEN) rax: ffffc90040cdc0a8   rbx: 0000000000000000   rcx: 00000000000=
-00006
->> (XEN) rdx: 0000000000000000   rsi: 0000000000000000   rdi: 00000000000=
-00000
->> (XEN) rbp: 000036ffbf323f37   rsp: ffffc90040cdc000   r8:  00000000000=
-00000
->> (XEN) r9:  0000000000000000   r10: 0000000000000000   r11: 00000000000=
-00000
->> (XEN) r12: 0000000000000000   r13: 0000000000000000   r14: ffffc90040c=
-dffff
->> (XEN) r15: 0000000000000000   cr0: 000000008005003b   cr4: 00000000000=
-42660
->> (XEN) cr3: 0000000128109000   cr2: ffffc90040cdbff8
->> (XEN) fsb: 00007fc01c3c6dc0   gsb: ffff88021e700000   gss: 00000000000=
-00000
->> (XEN) ds: 002b   es: 002b   fs: 0000   gs: 0000   ss: e010   cs: e008
->> (XEN) Xen code around <ffff82d08037b964> (handle_exception+0x9c/0xff):=
-
->> (XEN)  00 f3 90 0f ae e8 eb f9 <e8> 07 00 00 00 f3 90 0f ae e8 eb f9 8=
-3 e9 01=20
->> 75
->> (XEN) Current stack base ffffc90040cd8000 differs from expected=20
->> ffff8300cec88000
->> (XEN) Valid stack range: ffffc90040cde000-ffffc90040ce0000,=20
->> sp=3Dffffc90040cdc000, tss.rsp0=3Dffff8300cec8ffa0
->> (XEN) No stack overflow detected. Skipping stack trace.
->> (XEN)=20
->> (XEN) ****************************************
->> (XEN) Panic on CPU 0:
->> (XEN) DOUBLE FAULT -- system shutdown
->> (XEN) ****************************************
->> (XEN)=20
->> (XEN) Reboot in five seconds...
->=20
-> Oh, so CPU 0 gets screwed by offlining CPU 3. How about this alternativ=
-e
-> (but so far untested) patch:
->=20
-> --- unstable.orig/xen/arch/x86/smpboot.c
-> +++ unstable/xen/arch/x86/smpboot.c
-> @@ -874,7 +874,7 @@ static void cleanup_cpu_root_pgt(unsigne
->          l2_pgentry_t *l2t =3D l3e_to_l2e(l3t[l3_table_offset(stub_line=
-ar)]);
->          l1_pgentry_t *l1t =3D l2e_to_l1e(l2t[l2_table_offset(stub_line=
-ar)]);
-> =20
-> -        l1t[l2_table_offset(stub_linear)] =3D l1e_empty();
-> +        l1t[l1_table_offset(stub_linear)] =3D l1e_empty();
->      }
->  }
-> =20
-
-Yes, this fixes cpu on-/offlining and suspend for me on staging.
-
-
---vMvfYyqGFFR5uxHuRig1pKqvz0nojt9yk--
-
---07Fpqz6KjUHP22R6LuWMBLJuT0jGjJ0y2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlsG5GkACgkQkO9xfO/x
-ly9qyhAAsBjdVB8Uykh/DjqiZhZ6gR1i8MhiqqGyrhd28IujU3p21FayW5X3KJvu
-Rbu8NQuEGCT8umrRaE79ZqAvK04snQLHmOlIfgmVMbQQiA2uLtEXSIZ+LnnR5dNz
-R8W28/b41labfAb9c2CcZAKytoD2EHk2Ib3rC0g7hH8OGlply15/cXKQSW6JFlid
-geRvUePPAqI+r9mFxOmxsSkFtu32cfIWbwSBaGRDzrI7vKWXHqQdAxCNDC3k1kHX
-L5pmUYCEJQLsItbr9CdGLNRTNY18Cjp+eaGgDsRU/7Yzb0h/pXX4NqQyba8LgCmZ
-SqwWfQvjZb5Lwt52uCQmNNy8ZgkN5IyQuIsRaTTjtt7XNjJnzI2/ABmySKK5pj0D
-s8nmD6gYks6Wgnt8vb2QTTX4XkhQ95Qyttpt4JLuxJctQ7oJnVMKY+lpX5B1hhVw
-L3kVPxc38wNYfuq+zcu4Njb+R4rXfHzmIzYNhJBscpQXdfKB7ZBgEToEcu6yR1Jr
-5y2Kgc68kj+MMU/CDHnDztRqrPs3vn+nkPeV+4t48MpgVTCd6kBfH9t3Z1b6s6gF
-zlt7a6kY+e90R/w9ofiuQrQ9+AvRPSd859KJVm9av2/V191VZ562SW/f8kcNCkQe
-KXspydlMYZW4i8idi9wBZj/dw/6JrQBk8vWq4Eoiw1JDWOKnEEI=
-=mA4F
------END PGP SIGNATURE-----
-
---07Fpqz6KjUHP22R6LuWMBLJuT0jGjJ0y2--
-
-
---===============7335573197534090342==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7335573197534090342==--
+Pj4+IE9uIDIyLjA1LjE4IGF0IDEzOjIwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gQ3VycmVudGx5LCB0aGUgVk1YX01TUl9HVUVTVCB0eXBlIG1haW50YWlucyBjb21wbGV0
+ZWx5IHN5bW1ldHJpYyBndWVzdCBsb2FkCj4gYW5kIHNhdmUgbGlzdHMsIGJ5IHBvaW50aW5nIFZN
+X0VYSVRfTVNSX1NUT1JFX0FERFIgYW5kIAo+IFZNX0VOVFJZX01TUl9MT0FEX0FERFIKPiBhdCB0
+aGUgc2FtZSBwYWdlLCBhbmQgc2V0dGluZyBWTV9FWElUX01TUl9TVE9SRV9DT1VOVCBhbmQKPiBW
+TV9FTlRSWV9NU1JfTE9BRF9DT1VOVCB0byB0aGUgc2FtZSB2YWx1ZS4KPiAKPiBIb3dldmVyLCBm
+b3IgTVNScyB3aGljaCB3ZSB3b24ndCBsZXQgdGhlIGd1ZXN0IGhhdmUgZGlyZWN0IGFjY2VzcyB0
+bywgaGF2aW5nCj4gaGFyZHdhcmUgc2F2ZSB0aGUgY3VycmVudCB2YWx1ZSBvbiBWTUV4aXQgaXMg
+dW5uZWNlc3Nhcnkgb3ZlcmhlYWQuCj4gCj4gVG8gYXZvaWQgdGhpcyBvdmVyaGVhZCwgd2UgbXVz
+dCBtYWtlIHRoZSBsb2FkIGFuZCBzYXZlIGxpc3RzIGFzeW1tZXRyaWMuICBCeQo+IG1ha2luZyB0
+aGUgZW50cnkgbG9hZCBjb3VudCBncmVhdGVyIHRoYW4gdGhlIGV4aXQgc3RvcmUgY291bnQsIHdl
+IGNhbiBtYWludGFpbgo+IHR3byBhZGphY2VudCBsaXN0cyBvZiBNU1JzLCB0aGUgZmlyc3Qgb2Yg
+d2hpY2ggaXMgc2F2ZWQgYW5kIHJlc3RvcmVkLCBhbmQgdGhlCj4gc2Vjb25kIG9mIHdoaWNoIGlz
+IG9ubHkgcmVzdG9yZWQgb24gVk1FbnRyeS4KPiAKPiBGb3Igc2ltcGxpY2l0eToKPiAgKiBCb3Ro
+IGFkamFjZW50IGxpc3RzIGFyZSBzdGlsbCBzb3J0ZWQgYnkgTVNSIGluZGV4Lgo+ICAqIEl0IHVu
+ZGVmaW5lZCBiZWhhdmlvdXIgdG8gaW5zZXJ0IHRoZSBzYW1lIE1TUiBpbnRvIGJvdGggbGlzdHMu
+CgpJIGd1ZXNzIGZvciBub3cgdGhhdCdzIGdvb2QgZW5vdWdoLiBJZGVhbGx5LCBpbnNlcnRpbmcg
+YSBsb2FkL3NhdmUgZW50cnkKd291bGQgcHVyZ2UgYSBwb3NzaWJsZSBsb2FkLW9ubHkgZW50cnks
+IGFuZCBpbnNlcnRpbmcgYSBsb2FkLW9ubHkgZW50cnkKd291bGQgYmUgYSBuby1vcCB3aGVuIGEg
+bG9hZC9zYXZlIG9uZSBhbHJlYWR5IGV4aXN0cy4gT3RoZXJ3aXNlCmRpZmZlcmVudCBwaWVjZXMg
+b2YgY29kZSBkZWFsaW5nIHdpdGggZGlmZmVyZW50IHBhcnRzIG9mIGFuIE1TUiAoaWYgd2UKZXZl
+ciBnYWluIHN1Y2gpIHdvdWxkIG5lZWQgdG8gYmUgdGlnaHRseSBhd2FyZSBvZiBvbmUgYW5vdGhl
+ciAoYW5kIGluCnBhcnRpY3VsYXIgY29uZGl0aW9uYWxzIGFyb3VuZCB0aGUgaW5zZXJ0aW9ucyB3
+b3VsZCBuZWVkIHRvIGJlIGtlcHQgaW4Kc3luYykuCgo+ICAqIFRoZSB0b3RhbCBzaXplIG9mIGJv
+dGggbGlzdHMgaXMgc3RpbGwgbGltaXRlZCBhdCAyNTYgZW50cmllcyAob25lIDRrIHBhZ2UpLgo+
+IAo+IFNwbGl0IHRoZSBjdXJyZW50IG1zcl9jb3VudCBmaWVsZCBpbnRvIG1zcl97bG9hZCxzYXZl
+fV9jb3VudCwgYW5kIGludHJvZHVjZSBhCj4gbmV3IFZNWF9NU1JfR1VFU1RfTE9BRE9OTFkgdHlw
+ZSwgYW5kIHVwZGF0ZSB2bXhfe2FkZCxmaW5kfV9tc3IoKSB0byBjYWxjdWxhdGUKPiB3aGljaCBz
+dWJsaXN0IHRvIHNlYXJjaCwgYmFzZWQgb24gdHlwZS4gIFZNWF9NU1JfSE9TVCBoYXMgbm8gbG9n
+aWNhbCBzdWJsaXN0LAo+IHdoZXJlYXMgVk1YX01TUl9HVUVTVCBoYXMgYSBzdWJsaXN0IGJldHdl
+ZW4gMCBhbmQgdGhlIHNhdmUgY291bnQsIHdoaWxlCj4gVk1YX01TUl9HVUVTVF9MT0FET05MWSBo
+YXMgYSBzdWJsaXN0IGJldHdlZW4gdGhlIHNhdmUgY291bnQgYW5kIHRoZSBsb2FkCj4gY291bnQu
+Cj4gCj4gT25lIHN1YnRsZSBwb2ludCBpcyB0aGF0IGluc2VydGluZyBhbiBNU1IgaW50byB0aGUg
+bG9hZC1zYXZlIGxpc3QgaW52b2x2ZXMKPiBtb3ZpbmcgdGhlIGVudGlyZSBsb2FkLW9ubHkgbGlz
+dCwgYW5kIHVwZGF0aW5nIGJvdGggY291bnRzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBD
+b29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogSmFuIEJldWxp
+Y2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
