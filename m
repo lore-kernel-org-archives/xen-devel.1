@@ -1,18 +1,26 @@
-From: Simon Gaiser <simon@invisiblethingslab.com>
-Subject: Re: [PATCH] x86/XPTI: fix S3 resume (and CPU offlining
- in general)
-Date: Thu, 24 May 2018 14:00:00 +0000
-Message-ID: <5946c6fe-73f0-bfbb-bc0b-2026d1231f79@invisiblethingslab.com>
-References: <5B06C0F902000078001C5925@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: Xen Project Security Whitepaper v1 is ready for
+ community review
+Date: Thu, 24 May 2018 08:00:33 -0600
+Message-ID: <5B06C58102000078001C5955@prv1-mh.provo.novell.com>
+References: <6011F946-60DB-4EF0-B335-5333D3F56F74@citrix.com>
+ <20180518175334.GB2731@mail-itl>
+ <5B03ECDA02000078001C48FA@prv1-mh.provo.novell.com>
+ <13396780.xA7tpI257g@wopr.lan.crc.id.au>
+ <3f15a301eeb7504913f263cbaf0c0dd9@crc.id.au>
+ <BC6B1AA4-BC54-4918-B0BE-2D0CDFD64621@citrix.com>
+ <5B06C31C02000090039F5AB8@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7849888585820055712=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wtyo=il=invisiblethingslab.com=simon@srs-us1.protection.inumbo.net>)
- id 1fLqnT-0002C1-BE
- for xen-devel@lists.xenproject.org; Thu, 24 May 2018 14:00:51 +0000
-In-Reply-To: <5B06C0F902000078001C5925@prv1-mh.provo.novell.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=y5hq=il=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fLqnH-0002Ba-Qh
+ for xen-devel@lists.xenproject.org; Thu, 24 May 2018 14:00:39 +0000
+In-Reply-To: <5B06C31C02000090039F5AB8@prv1-mh.provo.novell.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,112 +29,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross <jgross@suse.com>
+To: Lars Kurth <lars.kurth@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Steven Haigh <netwiz@crc.id.au>, Marek Marczykowski <marmarek@invisiblethingslab.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============7849888585820055712==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="f9bw0nwiSfHyKuqTf3Gjoang5OXojMF6e"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---f9bw0nwiSfHyKuqTf3Gjoang5OXojMF6e
-Content-Type: multipart/mixed; boundary="dp0TekvS7jIByBlb3oGFdsHTBAvt3qf6q";
- protected-headers="v1"
-From: Simon Gaiser <simon@invisiblethingslab.com>
-To: Jan Beulich <JBeulich@suse.com>,
- xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>, Juergen Gross <jgross@suse.com>
-Message-ID: <5946c6fe-73f0-bfbb-bc0b-2026d1231f79@invisiblethingslab.com>
-Subject: Re: [PATCH] x86/XPTI: fix S3 resume (and CPU offlining in general)
-References: <5B06C0F902000078001C5925@prv1-mh.provo.novell.com>
-In-Reply-To: <5B06C0F902000078001C5925@prv1-mh.provo.novell.com>
-
---dp0TekvS7jIByBlb3oGFdsHTBAvt3qf6q
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Jan Beulich:
-> In commit d1d6fc97d6 ("x86/xpti: really hide almost all of Xen image")
-> I've failed to remember the fact that multiple CPUs share a stub
-> mapping page. Therefore it is wrong to unconditionally zap the mapping
-> when bringing down a CPU; it may only be unmapped when no other online
-> CPU uses that same page.
->=20
-> Reported-by: Simon Gaiser <simon@invisiblethingslab.com>
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->=20
-> --- a/xen/arch/x86/smpboot.c
-> +++ b/xen/arch/x86/smpboot.c
-> @@ -876,7 +876,21 @@ static void cleanup_cpu_root_pgt(unsigne
-> =20
->      free_xen_pagetable(rpt);
-> =20
-> -    /* Also zap the stub mapping for this CPU. */
-> +    /*
-> +     * Also zap the stub mapping for this CPU, if no other online one =
-uses
-> +     * the same page.
-> +     */
-> +    if ( stub_linear )
-> +    {
-> +        unsigned int other;
-> +
-> +        for_each_online_cpu(other)
-> +            if ( !((per_cpu(stubs.addr, other) ^ stub_linear) >> PAGE_=
-SHIFT) )
-> +            {
-> +                stub_linear =3D 0;
-> +                break;
-> +            }
-> +    }
->      if ( stub_linear )
->      {
->          l3_pgentry_t *l3t =3D l4e_to_l3e(common_pgt);
-
-Tried this on-top of staging (fc5805daef) and I still get the same
-double fault.
-
-
---dp0TekvS7jIByBlb3oGFdsHTBAvt3qf6q--
-
---f9bw0nwiSfHyKuqTf3Gjoang5OXojMF6e
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlsGxYYACgkQkO9xfO/x
-ly+J/RAArn4Wo4THh16dn6pJypGSnhem5HkpgM5H1aBOinK65cR0QuE9RnnBp3Lb
-I/KqsEXqU3+ZzBCuNeZ15bcvQoIKU0v7gVx850nNKsTt5wibXcVlzoXKHlos7eGl
-s+TUFB3bEzi/VNGxAu4JtRiSwgEHjMdVWFEw3eUoS7517TEPqzb7vqWVWZwds7lF
-3Dfrc6tj1RgNXAtOZYA+H7/5NADNU1Gi8pC7bIrnOaZyqvhPyqGT/KSLXd13C0dZ
-J0QFP/GFl0loFTXJTXoq1YUXOwGJvffJL4CGVYQdPhwYVFgj3Z0CY+23UZQoNj2r
-bA8vFmY0PSg7xegmmwS15tnaat/s/H4Hwdc6zOUKcSJMxPFLil5uEFBviiZs2dax
-DIWC6jVSUIZQVosjedgtHqsKgVasmk+aJXeanVTsFZs0wzatjtByORvEVfwF7RhR
-466Zs1KYL3CjXB4UuhSLRPCim2dUfYlnnbbaDvXAZF8AuwBXAX+oxB6u4RqApQkl
-xUd56RoayeAcxrjvyfA6v7vk5YaDeO6sGjqFLHH53gJ2YdK1kS1Ae3K/fwWuFcld
-DYrtiB9kLIPvBhcjuBeGkyZxtk0ZHRVjla9gq7+qKcE6LF/+0UUJbHsoDA/IuVO/
-S5weHDZEOp+D7z1l4qU59zCRvNjuC4lb4oiGjI7VakTjxkVz7FQ=
-=Tnnt
------END PGP SIGNATURE-----
-
---f9bw0nwiSfHyKuqTf3Gjoang5OXojMF6e--
-
-
---===============7849888585820055712==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7849888585820055712==--
+Pj4+IE9uIDI0LjA1LjE4IGF0IDE1OjUwLCA8bGFycy5rdXJ0aEBjaXRyaXguY29tPiB3cm90ZToK
+Cj4gCj4g77u/T24gMjQvMDUvMjAxOCwgMDE6NDgsICJTdGV2ZW4gSGFpZ2giIDxuZXR3aXpAY3Jj
+LmlkLmF1PiB3cm90ZToKPiAKPiAgICAgT24gMjAxOC0wNS0yMiAyMDo1MiwgU3RldmVuIEhhaWdo
+IHdyb3RlOgo+ICAgICA+IE9uIFR1ZXNkYXksIDIyIE1heSAyMDE4IDg6MTE6MzggUE0gQUVTVCBK
+YW4gQmV1bGljaCB3cm90ZToKPiAgICAgPj4gPj4+IE9uIDE4LjA1LjE4IGF0IDE5OjUzLCA8bWFy
+bWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNvbT4gd3JvdGU6Cj4gICAgID4+ID4gQWx0ZXJuYXRp
+dmUgd29ya2Fyb3VuZCBmb3IgdGhpcyB3b3VsZCBiZSBtb3JlIGZyZXF1ZW50IHBvaW50IHJlbGVh
+c2VzIAo+IGJ5Cj4gICAgID4+ID4gZGVmYXVsdCAobWF5YmUgd2l0aCBhYmlsaXR5IHRvIGRlbGF5
+IGl0IHZlcnkgZmV3IGNvbW1pdHMgYXJlIHF1ZXVlZCkuCj4gICAgID4+ID4gRm9yIGV4YW1wbGUg
+ZXZlcnkgMyBtb250aHMuIEl0IHdvdWxkbid0IHNvbHZlIGFsbCB0aGUgY2FzZXMsIGJ1dCBJIAo+
+IHRoaW5rCj4gICAgID4+ID4gd2lsbCBtYWtlIGl0IGVhc2llciBtb3N0IG9mIHRoZSB0aW1lLgo+
+ICAgICA+PiAKPiAgICAgPj4gSXMgZXZlcnkgMyBtb250aHMgc28gbXVjaCBiZXR0ZXIgdGhhbiBl
+dmVyeSA0IG1vbnRocz8gR3JhbnRlZCB3ZQo+ICAgICA+PiBiYXNpY2FsbHkgbmV2ZXIgbWFuYWdl
+IHRvIG1ha2UgaXQgZXhhY3RseSA0IG1vbnRocywgYnV0IG9uIHRoZSBhdmVyYWdlCj4gICAgID4+
+IEkgdGhpbmsgd2UncmUgbm90IHRvbyBmYXIgb2ZmLgo+ICAgICA+IAo+ICAgICA+IEkgdGhpbmsg
+dGhlIGJpZyB0aGluZyBpcyByZWR1Y2luZyB0aGUgZGVsdGEgYmV0d2VlbiB0aGUgc3RhZ2luZyBi
+cmFuY2ggCj4gICAgID4gYW5kIHRoZQo+ICAgICA+IHJlbGVhc2UuIEkgY2FuIG9ubHkgYXNzdW1l
+IHRoYXQgd291bGQgcmVkdWNlIHRoZSBudW1iZXIgb2YgaXNzdWVzIHRoYXQgCj4gICAgID4gb2Nj
+dXIKPiAgICAgPiB3aXRoIHBhdGNoaW5nIHZzIHJlbGVhc2UgdGFyYmFsbHMgLSBob3BlZnVsbHkg
+bWFraW5nIHRoZSBzZWN1cml0eSB0ZWFtcyAKPiAKPiAgICAgPiBqb2IgYQo+ICAgICA+IGxpdHRs
+ZSBlYXNpZXIuCj4gICAgID4gCj4gICAgID4gVGhhdCBiZWluZyBzYWlkLCBpZiBhbiBhcHByb2Fj
+aCBvZiByZWxlYXNpbmcgYSBuZXcgYnVpbGQgd2hlbiB3ZSBjb21lIAo+ICAgICA+IGFjcm9zcwo+
+ICAgICA+IGJyb2tlbiBwYXRjaCBzZXRzIGZvciBYU0FzIChsaWtlIHRoZSBjdXJyZW50IDQuOS4x
+IHZzIFhTQXMsIGFuZCBwcmlvciAKPiAgICAgPiA0LjEwLjAKPiAgICAgPiB2cyBYU0FzKSwgdGhl
+biBJIHRoaW5rIHRoaXMgcGFydCBiZWNvbWVzIGlycmVsZXZhbnQuCj4gICAgIAo+ICAgICBBcyBh
+bm90aGVyIGV4YW1wbGUgZm9yIHRoaXMsIHRoZSBwYXRjaGVzIGZvciBYU0EyNjMgZG8gbm90IGFw
+cGx5IHRvIAo+ICAgICAqYW55KiByZWxlYXNlZCB0YXJiYWxsIHZlcnNpb24gb2YgWGVuLgo+ICAg
+ICAKPiAgICAgU28gZmFyLCB0aGUgcGF0Y2hlcyBpbmNsdWRlZCB3aXRoIHRoZSBhbm5vdW5jZW1l
+bnQgZmFpbCBvbiA0LjYsIDQuNywgNC45IAo+IAo+ICAgICBhbmQgNC4xMC4KPiAgICAgCj4gICAg
+IEkgY2FuIG9ubHkgYXNzdW1lIHRoYXQgdGhpcyBtZWFucyBhbGwgdGhlIFhTQSBwYXRjaGVzIHJl
+cXVpcmUgY29tbWl0cyAKPiAgICAgdGhhdCBhcmUgY3VycmVudGx5IGluIHZhcmlvdXMgc3RhZ2lu
+ZyBnaXQgdHJlZXMgdGhhdCBoYXZlIG5vdCBiZWVuIAo+ICAgICByZWxlYXNlZCBpbiBhbnkgZm9y
+bWFsIG1hbm5lciB2aWEgYSBwb2ludCByZWxlYXNlLgo+ICAgICAKPiBUaGlua2luZyBhYm91dCB0
+aGlzLCB3ZSBhcmUgZXNzZW50aWFsbHkgZXhwb3Npbmcgb3Vyc2VsdmVzIHRvIHRoaXMsIGJlY2F1
+c2UgCj4gb2YgYmFja3BvcnRzIG9mIGlzc3VlcyB3aGljaCBoYXBwZW4gYXQgYW55IHJhbmRvbSBw
+b2ludCBpbiB0aW1lIGR1cmluZyBhIAo+IHBvaW50IHJlbGVhc2UgY3ljbGUsIGUuZy4gNC44LjIu
+ID0+IDQuOC4zCj4gCj4gSW4gb3RoZXIgd29yZHMsIHdlIG1heSBnZXQgYSBzZXF1ZW5jZSBvZiBi
+YWNrcG9ydCwgWFNBLCBYU0EsIGJhY2twb3J0LCAuLi4KPiAKPiBJIGFtIHdvbmRlcmluZyB3aGV0
+aGVyIHRpbWUtc2VxdWVuY2luZyBtYXkgYmUgdGhlIGFuc3dlciBoZXJlLiBJbiBvdGhlciAKPiB3
+b3JkcywgbGV0J3MgYXNzdW1lIHdlIGhhdmUgYSA0LW1vbnRoIHdpbmRvdzogZm9yIHRoZSBmaXJz
+dCAzIG1vbnRocywgd2UgCj4gZG9uJ3QgYWxsb3cgYnVnLWZpeCBiYWNrcG9ydHMgaW50byBpbiB0
+aGlzIGNhc2Ugc3RhYmxlLTQuOCwgd2Ugb25seSBhbGxvdyAKPiBYU0FzLiBUaGVuIHdlIGhhdmUg
+YSAyLXdlZWsgbWVyZ2Ugd2luZG93IHdoZXJlIHdlIGhhbmRsZSBhbGwgYmFja3BvcnRzIGFuZCAK
+PiBwcmVwYXJlIHRoZSByZWxlYXNlIGFuZCBjdXQgdGhlIHJlbGVhc2UuIFRoaXMgbWVhbnMgdGhh
+dCBmb3IgbW9zdCBvZiB0aGUgCj4gdGltZSwgWFNBcyB3b3VsZCBhcHBseSBjbGVhbmx5IG9udG8g
+c3RhZ2luZyBhbmQgdGhlIHJlbGVhc2VkIHRhcmJhbGwuCgpJJ20gc2luY2VyZWx5IGFnYWluc3Qg
+c3VjaCBhIG1vZGVsOiBUaGUgbGFyZ2VyIGEgYmF0Y2ggb2YgY29tbWl0cywgdGhlIG1vcmUKbGlr
+ZWx5IHRoYXQgc29tZSB0aGVuLW5vLWxvbmdlci1lYXN5LXRvLXNwb3QgcmVncmVzc2lvbiBtYXkg
+Y3JlZXAgaW4sIGFuZAp0aGUgbGVzcyB0aW1lIHRoZXJlIGlzIGZvciBvc3N0ZXN0IGFuZCBwZW9w
+bGUgdG8gdGVzdC4gSSBkbyBhcHByZWNpYXRlIHNvbWUKYmF0Y2hpbmcsIGJ1dCBqdXN0IGxpa2Ug
+d2l0aCBYU0FzIEkgdGhpbmsgdGhlIGJhdGNoIHNpemUgc2hvdWxkIHJlbWFpbiBzZW5zaWJsZQph
+bHNvIGZvciBjb21taXRzIHRvIHN0YWJsZSB0cmVlcy4KCkkgY2FuIHNlZSB0aGF0IGluIHBhcnRp
+Y3VsYXIgZm9yIFhTQS0yNjMgaXQgd291bGQgaGF2ZSBiZWVuIHVzZWZ1bCBpZiB3ZSBoYWQKZW51
+bWVyYXRlZCB0aGUgcHJlcmVxcyAoaXQgd2FzIGluIGZhY3QgaW50ZW50aW9uYWwgdGhhdCB3ZSBo
+YWQgZGVjaWRlZCB0bwpjb21taXQgc29tZSBvZiB0aGVtIGFoZWFkIG9mIHRpbWUsIHNvIHRoYXQg
+dGhlIGFkdmlzb3J5IGl0c2VsZiB3b3VsZCBiZQptb3JlIG1hbmFnZWFibGUgaW4gc2l6ZSBhbmQg
+b3RoZXJ3aXNlKS4gQnV0IGZhY2UgaXQgLSBjb21waWxpbmcgc3VjaCBhIGxpc3QKZG9lcyBhZGQg
+bm9uLW5lZ2xpZ2libGUgZXh0cmEgd29yayBvbiB0aGUgc2VjdXJpdHkgdGVhbSdzIHBhcnQuCgpK
+YW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
