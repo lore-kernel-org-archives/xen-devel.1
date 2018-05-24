@@ -1,22 +1,20 @@
-From: Steven Haigh <netwiz@crc.id.au>
-Subject: Re: Xen Project Security Whitepaper v1 is ready for
- community review
-Date: Thu, 24 May 2018 15:47:35 +1000
-Message-ID: <3f15a301eeb7504913f263cbaf0c0dd9@crc.id.au>
-References: <6011F946-60DB-4EF0-B335-5333D3F56F74@citrix.com>
- <20180518175334.GB2731@mail-itl>
- <5B03ECDA02000078001C48FA@prv1-mh.provo.novell.com>
- <13396780.xA7tpI257g@wopr.lan.crc.id.au>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86: suppress sync when XPTI is disabled
+ for a domain
+Date: Thu, 24 May 2018 00:04:32 -0600
+Message-ID: <5B0655F002000078001C5657@prv1-mh.provo.novell.com>
+References: <5B0579AF02000078001C51CB@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=yszt=il=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
- id 1fLj6F-0007NK-Gu
- for xen-devel@lists.xenproject.org; Thu, 24 May 2018 05:47:44 +0000
-In-Reply-To: <13396780.xA7tpI257g@wopr.lan.crc.id.au>
+ (envelope-from <srs0=y5hq=il=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fLjMb-0000UQ-Pe
+ for xen-devel@lists.xenproject.org; Thu, 24 May 2018 06:04:37 +0000
+In-Reply-To: <5B0579AF02000078001C51CB@prv1-mh.provo.novell.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,38 +23,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Lars Kurth <lars.kurth@citrix.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, Jan Beulich <JBeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAxOC0wNS0yMiAyMDo1MiwgU3RldmVuIEhhaWdoIHdyb3RlOgo+IE9uIFR1ZXNkYXksIDIy
-IE1heSAyMDE4IDg6MTE6MzggUE0gQUVTVCBKYW4gQmV1bGljaCB3cm90ZToKPj4gPj4+IE9uIDE4
-LjA1LjE4IGF0IDE5OjUzLCA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNvbT4gd3JvdGU6
-Cj4+ID4gQWx0ZXJuYXRpdmUgd29ya2Fyb3VuZCBmb3IgdGhpcyB3b3VsZCBiZSBtb3JlIGZyZXF1
-ZW50IHBvaW50IHJlbGVhc2VzIGJ5Cj4+ID4gZGVmYXVsdCAobWF5YmUgd2l0aCBhYmlsaXR5IHRv
-IGRlbGF5IGl0IHZlcnkgZmV3IGNvbW1pdHMgYXJlIHF1ZXVlZCkuCj4+ID4gRm9yIGV4YW1wbGUg
-ZXZlcnkgMyBtb250aHMuIEl0IHdvdWxkbid0IHNvbHZlIGFsbCB0aGUgY2FzZXMsIGJ1dCBJIHRo
-aW5rCj4+ID4gd2lsbCBtYWtlIGl0IGVhc2llciBtb3N0IG9mIHRoZSB0aW1lLgo+PiAKPj4gSXMg
-ZXZlcnkgMyBtb250aHMgc28gbXVjaCBiZXR0ZXIgdGhhbiBldmVyeSA0IG1vbnRocz8gR3JhbnRl
-ZCB3ZQo+PiBiYXNpY2FsbHkgbmV2ZXIgbWFuYWdlIHRvIG1ha2UgaXQgZXhhY3RseSA0IG1vbnRo
-cywgYnV0IG9uIHRoZSBhdmVyYWdlCj4+IEkgdGhpbmsgd2UncmUgbm90IHRvbyBmYXIgb2ZmLgo+
-IAo+IEkgdGhpbmsgdGhlIGJpZyB0aGluZyBpcyByZWR1Y2luZyB0aGUgZGVsdGEgYmV0d2VlbiB0
-aGUgc3RhZ2luZyBicmFuY2ggCj4gYW5kIHRoZQo+IHJlbGVhc2UuIEkgY2FuIG9ubHkgYXNzdW1l
-IHRoYXQgd291bGQgcmVkdWNlIHRoZSBudW1iZXIgb2YgaXNzdWVzIHRoYXQgCj4gb2NjdXIKPiB3
-aXRoIHBhdGNoaW5nIHZzIHJlbGVhc2UgdGFyYmFsbHMgLSBob3BlZnVsbHkgbWFraW5nIHRoZSBz
-ZWN1cml0eSB0ZWFtcyAKPiBqb2IgYQo+IGxpdHRsZSBlYXNpZXIuCj4gCj4gVGhhdCBiZWluZyBz
-YWlkLCBpZiBhbiBhcHByb2FjaCBvZiByZWxlYXNpbmcgYSBuZXcgYnVpbGQgd2hlbiB3ZSBjb21l
-IAo+IGFjcm9zcwo+IGJyb2tlbiBwYXRjaCBzZXRzIGZvciBYU0FzIChsaWtlIHRoZSBjdXJyZW50
-IDQuOS4xIHZzIFhTQXMsIGFuZCBwcmlvciAKPiA0LjEwLjAKPiB2cyBYU0FzKSwgdGhlbiBJIHRo
-aW5rIHRoaXMgcGFydCBiZWNvbWVzIGlycmVsZXZhbnQuCgpBcyBhbm90aGVyIGV4YW1wbGUgZm9y
-IHRoaXMsIHRoZSBwYXRjaGVzIGZvciBYU0EyNjMgZG8gbm90IGFwcGx5IHRvIAoqYW55KiByZWxl
-YXNlZCB0YXJiYWxsIHZlcnNpb24gb2YgWGVuLgoKU28gZmFyLCB0aGUgcGF0Y2hlcyBpbmNsdWRl
-ZCB3aXRoIHRoZSBhbm5vdW5jZW1lbnQgZmFpbCBvbiA0LjYsIDQuNywgNC45IAphbmQgNC4xMC4K
-CkkgY2FuIG9ubHkgYXNzdW1lIHRoYXQgdGhpcyBtZWFucyBhbGwgdGhlIFhTQSBwYXRjaGVzIHJl
-cXVpcmUgY29tbWl0cyAKdGhhdCBhcmUgY3VycmVudGx5IGluIHZhcmlvdXMgc3RhZ2luZyBnaXQg
-dHJlZXMgdGhhdCBoYXZlIG5vdCBiZWVuIApyZWxlYXNlZCBpbiBhbnkgZm9ybWFsIG1hbm5lciB2
-aWEgYSBwb2ludCByZWxlYXNlLgoKLS0gClN0ZXZlbiBIYWlnaAoKPyBuZXR3aXpAY3JjLmlkLmF1
-ICAgICA/IGh0dHBzOi8vd3d3LmNyYy5pZC5hdQo/ICs2MSAoMykgOTAwMSA2MDkwICAgID8gMDQx
-MiA5MzUgODk3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDIzLjA1LjE4IGF0IDE2OjI0LCA8SkJldWxpY2hAc3VzZS5jb20+IHdyb3RlOgo+IE5v
+dyB0aGF0IHdlIGhhdmUgYSBwZXItZG9tYWluIGZsYWcgd2UgY2FuIGFuZCBzaG91bGQgY29udHJv
+bCBzeW5jLWluZyBpbgo+IGEgbW9yZSBmaW5lIGdyYWluZWQgbWFubmVyOiBPbmx5IGRvbWFpbnMg
+aGF2aW5nIFhQVEkgZW5hYmxlZCBuZWVkIHRoZQo+IHN5bmMgdG8gb2NjdXIuCj4gCj4gU2lnbmVk
+LW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+IAo+IC0tLSBhL3hlbi9h
+cmNoL3g4Ni9tbS5jCj4gKysrIGIveGVuL2FyY2gveDg2L21tLmMKPiBAQCAtMzc2NSw3ICszNzY1
+LDcgQEAKPiAgICAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7Cj4gICAgICAgICAgICAgICAg
+ICAgICAgcmMgPSBtb2RfbDRfZW50cnkodmEsIGw0ZV9mcm9tX2ludHB0ZShyZXEudmFsKSwgbWZu
+LAo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNtZCA9PSBNTVVfUFRf
+VVBEQVRFX1BSRVNFUlZFX0FELCB2KTsKPiAtICAgICAgICAgICAgICAgICAgICBpZiAoICFyYyAm
+JiAhY3B1X2hhc19ub194cHRpICkKPiArICAgICAgICAgICAgICAgICAgICBpZiAoICFyYyAmJiB2
+LT5kb21haW4tPmFyY2gucHZfZG9tYWluLnhwdGkgKQoKSSd2ZSBtZWFud2hpbGUgcmVhbGl6ZWQg
+dGhhdCBpbnN0ZWFkIG9mIHYtPmRvbWFpbiB0aGlzIHdvdWxkIGJldHRlciBiZQpwdF9kb20gLSBJ
+IHRha2UgaXQgdGhhdCB0aGlzIGRvZXNuJ3QgaW52YWxpZGF0ZSB5b3VyIFItYi4KCkphbgoKCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
