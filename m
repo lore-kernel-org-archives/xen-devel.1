@@ -1,22 +1,20 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 13/13] xen/arm: Avoid to use current
- everywhere in enter_hypervisor_head
-Date: Thu, 24 May 2018 11:46:04 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1805241145480.25719@sstabellini-ThinkPad-X260>
-References: <20180522174254.27551-1-julien.grall@arm.com>
- <20180522174254.27551-14-julien.grall@arm.com>
- <alpine.DEB.2.10.1805231646151.15101@sstabellini-ThinkPad-X260>
- <a8064360-34ad-cec6-07e5-3cb82a13d859@arm.com>
+Subject: Re: [PATCH v2] arm: clean-up: correct find_*_bit()
+ functions use
+Date: Thu, 24 May 2018 11:56:02 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1805241152000.25719@sstabellini-ThinkPad-X260>
+References: <07610208-7c29-f8b4-3146-6bd36a994d33@epam.com>
+ <18802f31-3c8a-5c6e-213b-32718690bb8a@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1031641540-1527187967=:25719"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=rlfa=il=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fLvFX-0006Hj-OA
- for xen-devel@lists.xenproject.org; Thu, 24 May 2018 18:46:07 +0000
-In-Reply-To: <a8064360-34ad-cec6-07e5-3cb82a13d859@arm.com>
+ id 1fLvPA-00075M-LN
+ for xen-devel@lists.xenproject.org; Thu, 24 May 2018 18:56:04 +0000
+In-Reply-To: <18802f31-3c8a-5c6e-213b-32718690bb8a@arm.com>
+Content-ID: <alpine.DEB.2.10.1805241155340.25719@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,60 +24,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@arm.com
+Cc: Artem Mygaiev <artem_mygaiev@epam.com>, xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, Andre Przywara <andre.przywara@linaro.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCAyNCBNYXkgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIFN0ZWZhbm8sCj4g
-Cj4gT24gMjQvMDUvMTggMDA6NDcsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IE9uIFR1
-ZSwgMjIgTWF5IDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gVXNpbmcgY3VycmVudCBp
-cyBmYWlybHkgZXhwZW5zaXZlLCBzbyBzYXZlIHVwIGludG8gYSB2YXJpYWJsZS4KPiA+ID4gCj4g
-PiA+IFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4g
-PiAKPiA+IEdvb2QgaWRlYS4gSSBhbSBjdXJpb3VzIHRvIGtub3cgYWN0dWFsbHkgaG93IG11Y2gg
-dGhpcyBwYXRjaCB3b3VsZCBzYXZlCj4gPiBidXQgSSBhbSBub3QgZ29pbmcgdG8gYXNrIHlvdSBy
-dW4gdGhlIHRlc3RzLgo+IAo+IEkgaGF2ZW4ndCBiZW5jaG1hcmsgaXQgYnV0IGxvb2tlZCBhdCB0
-aGUgcmVzdWx0aW5nIGFzc2VtYmx5IGNvZGUuIFRoaXMgcmVkdWNlcwo+IGJ5IGFib3V0IH4yMCUg
-dGhlIG51bWJlciBvZiBpbnN0cnVjdGlvbnMgaW4gdGhlIGZ1bmN0aW9uLgo+IAo+IEFGQUlVLCB0
-aGlzIGlzIGJlY2F1c2Ugb2YgdGhlIHdheSBwZXItY3B1IGFjY2VzcyBoYXZlIGJlZW4gaW1wbGVt
-ZW50ZWQuIFRoZQo+IHBlci1jcHUgb2Zmc2V0IGlzIHN0b3JlZCBpbiBhIHN5c3RlbSByZWdpc3Rl
-ciAoVFBJRFJfRUwyKSwgYWxsIHRoZSByZWFkIHRvIGl0Cj4gY2Fubm90IGJlIG9wdGltaXplZCAo
-YWNjZXNzIHVzaW5nIHZvbGF0aWxlKS4KPiAKPiBTbyBldmVyeSBkaXJlY3QgdXNlIG9mICJjdXJy
-ZW50IiB3aWxsIHJlcXVpcmUgYXQgbGVhc3QgYSBzeXN0ZW0gcmVnaXN0ZXIKPiBhY2Nlc3MgYW5k
-IHRoZW4gYSBsb2FkIGZyb20gbWVtb3J5LgoKVmVyeSBuaWNlLCB0aGFuayB5b3UhCgoKPiAKPiA+
-IAo+ID4gUmV2aWV3ZWQtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVs
-Lm9yZz4KPiA+IAo+ID4gPiAtLS0KPiA+ID4gICB4ZW4vYXJjaC9hcm0vdHJhcHMuYyB8IDE0ICsr
-KysrKysrLS0tLS0tCj4gPiA+ICAgMSBmaWxlIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgNiBk
-ZWxldGlvbnMoLSkKPiA+ID4gCj4gPiA+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vdHJhcHMu
-YyBiL3hlbi9hcmNoL2FybS90cmFwcy5jCj4gPiA+IGluZGV4IDAyMGIwYjhlZWYuLmIxNTQ2ZjY5
-MDcgMTAwNjQ0Cj4gPiA+IC0tLSBhL3hlbi9hcmNoL2FybS90cmFwcy5jCj4gPiA+ICsrKyBiL3hl
-bi9hcmNoL2FybS90cmFwcy5jCj4gPiA+IEBAIC0yMDI0LDggKzIwMjQsMTAgQEAgc3RhdGljIHZv
-aWQgZW50ZXJfaHlwZXJ2aXNvcl9oZWFkKHN0cnVjdAo+ID4gPiBjcHVfdXNlcl9yZWdzICpyZWdz
-KQo+ID4gPiAgIHsKPiA+ID4gICAgICAgaWYgKCBndWVzdF9tb2RlKHJlZ3MpICkKPiA+ID4gICAg
-ICAgewo+ID4gPiArICAgICAgICBzdHJ1Y3QgdmNwdSAqdiA9IGN1cnJlbnQ7Cj4gPiA+ICsKPiA+
-ID4gICAgICAgICAgIC8qIElmIHRoZSBndWVzdCBoYXMgZGlzYWJsZWQgdGhlIHdvcmthcm91bmQs
-IGJyaW5nIGl0IGJhY2sgb24uCj4gPiA+ICovCj4gPiA+IC0gICAgICAgIGlmICggbmVlZHNfc3Ni
-ZF9mbGlwKGN1cnJlbnQpICkKPiA+ID4gKyAgICAgICAgaWYgKCBuZWVkc19zc2JkX2ZsaXAodikg
-KQo+ID4gPiAgICAgICAgICAgICAgIGFybV9zbWNjY18xXzFfc21jKEFSTV9TTUNDQ19BUkNIX1dP
-UktBUk9VTkRfMl9GSUQsIDEsIE5VTEwpOwo+ID4gPiAgICAgICAgICAgICAvKgo+ID4gPiBAQCAt
-MjAzNCw4ICsyMDM2LDggQEAgc3RhdGljIHZvaWQgZW50ZXJfaHlwZXJ2aXNvcl9oZWFkKHN0cnVj
-dAo+ID4gPiBjcHVfdXNlcl9yZWdzICpyZWdzKQo+ID4gPiAgICAgICAgICAgICogYnV0IHRoZSBj
-cnVjaWFsIGJpdCBpcyAiT24gdGFraW5nIGEgdlNFcnJvciBpbnRlcnJ1cHQsCj4gPiA+IEhDUl9F
-TDIuVlNFCj4gPiA+ICAgICAgICAgICAgKiAoYWxpYXMgb2YgSENSLlZBKSBpcyBjbGVhcmVkIHRv
-IDAuIgo+ID4gPiAgICAgICAgICAgICovCj4gPiA+IC0gICAgICAgIGlmICggY3VycmVudC0+YXJj
-aC5oY3JfZWwyICYgSENSX1ZBICkKPiA+ID4gLSAgICAgICAgICAgIGN1cnJlbnQtPmFyY2guaGNy
-X2VsMiA9IFJFQURfU1lTUkVHKEhDUl9FTDIpOwo+ID4gPiArICAgICAgICBpZiAoIHYtPmFyY2gu
-aGNyX2VsMiAmIEhDUl9WQSApCj4gPiA+ICsgICAgICAgICAgICB2LT5hcmNoLmhjcl9lbDIgPSBS
-RUFEX1NZU1JFRyhIQ1JfRUwyKTsKPiA+ID4gICAgICNpZmRlZiBDT05GSUdfTkVXX1ZHSUMKPiA+
-ID4gICAgICAgICAgIC8qCj4gPiA+IEBAIC0yMDQ1LDExICsyMDQ3LDExIEBAIHN0YXRpYyB2b2lk
-IGVudGVyX2h5cGVydmlzb3JfaGVhZChzdHJ1Y3QKPiA+ID4gY3B1X3VzZXJfcmVncyAqcmVncykK
-PiA+ID4gICAgICAgICAgICAqIFRPRE86IEludmVzdGlnYXRlIHdoZXRoZXIgdGhpcyBpcyBuZWNl
-c3NhcnkgdG8gZG8gb24gZXZlcnkKPiA+ID4gICAgICAgICAgICAqIHRyYXAgYW5kIGhvdyBpdCBj
-YW4gYmUgb3B0aW1pc2VkLgo+ID4gPiAgICAgICAgICAgICovCj4gPiA+IC0gICAgICAgIHZ0aW1l
-cl91cGRhdGVfaXJxcyhjdXJyZW50KTsKPiA+ID4gLSAgICAgICAgdmNwdV91cGRhdGVfZXZ0Y2hu
-X2lycShjdXJyZW50KTsKPiA+ID4gKyAgICAgICAgdnRpbWVyX3VwZGF0ZV9pcnFzKHYpOwo+ID4g
-PiArICAgICAgICB2Y3B1X3VwZGF0ZV9ldnRjaG5faXJxKHYpOwo+ID4gPiAgICNlbmRpZgo+ID4g
-PiAgIC0gICAgICAgIHZnaWNfc3luY19mcm9tX2xycyhjdXJyZW50KTsKPiA+ID4gKyAgICAgICAg
-dmdpY19zeW5jX2Zyb21fbHJzKHYpOwo+ID4gPiAgICAgICB9Cj4gPiA+ICAgfQo+ID4gPiAgIAo+
-ID4gPiAtLSAKPiA+ID4gMi4xMS4wCj4gPiA+IAo+IAo+IC0tIAo+IEp1bGllbiBHcmFsbAo+IAoK
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1031641540-1527187967=:25719
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1805241155341.25719@sstabellini-ThinkPad-X260>
+
+On Thu, 24 May 2018, Julien Grall wrote:
+> Hi Artem,
+> 
+> Title: It would be good to specify the subsystem you modify.
+> 
+> arm: vgic: ...
+> 
+> On 24/05/18 16:24, Artem Mygaiev wrote:
+> > vgic_vcpu_pending_irq() uses find_next_bit() library function with single
+> > 'unsigned long' variable, while it is designed to work with memory regions
+> > and offsets. It would be more correct to use the find_first_bit() function
+> > instead.
+> 
+> The commit message sounds like it is wrong to use find_next_bit(). However, as
+> I mentioned earlier, find_first_bit() is just a wrapper of find_next_bit() on
+> Arm64.
+> 
+> So I would reword the commit message as:
+> 
+> "arm: vgic: Use find_first_bit instead of find_next_bit when possible
+> 
+> find_next_bit(foo, sz, 0) is equivalent to find_first_bit(foo, sz). The latter
+> is easier to understand. Some architecture may also have a optimized version
+> of find_first_bit(...). So replace the occurrence of find_next_bit in
+> vgic_vcpu_pending_irq()."
+
+I was going to fix the commit message while committing the patch, using
+Julien's wording, but we have a commit moratorium at the moment. I'll
+commit when the tree reopens.
+
+
+> 
+> > 
+> > Signed-off-by: Artem Mygaiev <artem_mygaiev@epam.com>
+> > 
+> > diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c
+> > index d831b35525..fd63906e9b 100644
+> > --- a/xen/arch/arm/gic-vgic.c
+> > +++ b/xen/arch/arm/gic-vgic.c
+> > @@ -362,7 +362,7 @@ int vgic_vcpu_pending_irq(struct vcpu *v)
+> >       ASSERT(v == current);
+> > 
+> >       mask_priority = gic_hw_ops->read_vmcr_priority();
+> > -    active_priority = find_next_bit(&apr, 32, 0);
+> > +    active_priority = find_first_bit(&apr, 32);
+> > 
+> >       spin_lock_irqsave(&v->arch.vgic.lock, flags);
+> > 
+> 
+> -- 
+> Julien Grall
+> 
+--8323329-1031641540-1527187967=:25719
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1031641540-1527187967=:25719--
