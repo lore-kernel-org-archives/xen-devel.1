@@ -1,25 +1,19 @@
-From: thg <nospam@godawa.de>
-Subject: Developmentstatus for Xen with Ceph as replicated
- storage
-Date: Thu, 24 May 2018 13:01:21 +0200
-Message-ID: <bf48aa4d-6c87-0f08-11ec-c93600e54824@godawa.de>
+From: Pavel Machek <pavel@ucw.cz>
+Subject: Re: [PATCH v3 09/27] x86/acpi: Adapt assembly for PIE
+ support
+Date: Thu, 24 May 2018 13:03:06 +0200
+Message-ID: <20180524110306.GA20225__22092.1498760164$1527159718$gmane$org@amd>
+References: <20180523195421.180248-1-thgarnie@google.com>
+ <20180523195421.180248-10-thgarnie@google.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8086342848764042541=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=e8q3=il=godawa.de=nospam@srs-us1.protection.inumbo.net>)
- id 1fLnzq-0001Ox-5E
- for xen-devel@lists.xenproject.org; Thu, 24 May 2018 11:01:26 +0000
-Received: from mactptg02.local by smtp.strato.de (RZmta 43.8 AUTH)
- with ESMTPSA id 60849bu4OB1LvlY
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
- 521 ECDH bits, eq. 15360 bits RSA))
- (Client did not present a certificate)
- for <xen-devel@lists.xenproject.org>;
- Thu, 24 May 2018 13:01:21 +0200 (CEST)
-Content-Language: en-GB
+ (envelope-from <srs0=yumc=il=ucw.cz=pavel@srs-us1.protection.inumbo.net>)
+ id 1fLo1X-0001Xf-I4
+ for xen-devel@lists.xenproject.org; Thu, 24 May 2018 11:03:11 +0000
+In-Reply-To: <20180523195421.180248-10-thgarnie@google.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,20 +22,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Thomas Garnier <thgarnie@google.com>
+Cc: Kate Stewart <kstewart@linuxfoundation.org>, Nicolas Pitre <nicolas.pitre@linaro.org>, x86@kernel.org, Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>, Petr Mladek <pmladek@suse.com>, Len Brown <len.brown@intel.com>, Peter Zijlstra <peterz@infradead.org>, Yonghong Song <yhs@fb.com>, Christopher Li <sparse@chrisli.org>, Dave Hansen <dave.hansen@linux.intel.com>, Dominik Brodowski <linux@dominikbrodowski.net>, linux-kernel@vger.kernel.org, Masahiro Yamada <yamada.masahiro@socionext.com>, Jan Beulich <JBeulich@suse.com>, "H . Peter Anvin" <hpa@zytor.com>, kernel-hardening@lists.openwall.com, Christoph Lameter <cl@linux.com>, Alok Kataria <akataria@vmware.com>, linux-doc@vger.kernel.org, linux-arch@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>, Herbert Xu <herbert@gondor.apana.org.au>, Baoquan He <bhe@redhat.com>, David Woodhouse <dwmw@amazon.co.uk>, Boris
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgZXZlcnlib2R5LAoKaW4gMjAxMyB0aGVyZSB3YXMgYW4gYW5ub3VuY21lbnQsIHRoYXQgWGVu
-U2VydmVyIHdpbGwgZnVsbHkgc3VwcG9ydCB0aGUKUkJEcyBmcm9tIENlcGgsIHRvIHVzZSB0aGVt
-IGFzIGJsb2NrZGV2aWNlIGZvciBWTXMgKHNlZQo8aHR0cHM6Ly9jZXBoLmNvbS9nZWVuLWNhdGVn
-b3JpZS94ZW5zZXJ2ZXItc3VwcG9ydC1mb3ItcmJkLz4pCgpXaGF0IGlzIGFib3V0IFhlbiBpdHNl
-bGYsIGhvdyBpdCBpcyBzdXBwb3J0ZWQ/IEkga25vdyB0aGF0IHlvdSBjYW4gbWFwCmFuIFJCRCBh
-cyBkZXZpY2UgYW5kIHVzZSBpdCBmb3IgcHV0dGluZyBhIFZNLWltYWdlIG9uIGl0LiBCdXQgdGhp
-cyBpcyBhCiJtYW51YWwiIHByb2Nlc3MgYW5kIHRodXMgbm90IHVzYWJsZSBmb3IgY2xvdWQtc2Vy
-dmVycyB3aXRoIG1hbnkgVk1zLgoKQW55Ym9keSB3aG8gaGFzIGV4cGVyaWVuY2VzIHdpdGggdGhp
-cyBvciBhbiBvdGhlciAod29ya2luZykgb3B0aW9uPwoKVXNpbmcgbGlidmlydCBzaG91bGQgd29y
-aywgYnV0IEkgZG9uJ3QgZ2V0IGl0IHJ1bm5pbmcgYW5kIGEgc29sdXRpb24gZm9yCnRoZSBYTC1z
-dGFjayB3b3VsZCBiZSBldmVuIGJldHRlci4KCgpUaGFua3MgYSBsb3QsCi0tIAoKa2luZCByZWdh
-cmRzLAoKdGhnCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============8086342848764042541==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="UlVJffcvxoiEqYs2"
+Content-Disposition: inline
+
+
+--UlVJffcvxoiEqYs2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed 2018-05-23 12:54:03, Thomas Garnier wrote:
+> Change the assembly code to use only relative references of symbols for t=
+he
+> kernel to be PIE compatible.
+>=20
+> Position Independent Executable (PIE) support will allow to extended the
+> KASLR randomization range below the -2G memory limit.
+
+What testing did this get?
+
+> diff --git a/arch/x86/kernel/acpi/wakeup_64.S b/arch/x86/kernel/acpi/wake=
+up_64.S
+> index 50b8ed0317a3..472659c0f811 100644
+> --- a/arch/x86/kernel/acpi/wakeup_64.S
+> +++ b/arch/x86/kernel/acpi/wakeup_64.S
+> @@ -14,7 +14,7 @@
+>  	 * Hooray, we are in Long 64-bit mode (but still running in low memory)
+>  	 */
+>  ENTRY(wakeup_long64)
+> -	movq	saved_magic, %rax
+> +	movq	saved_magic(%rip), %rax
+>  	movq	$0x123456789abcdef0, %rdx
+>  	cmpq	%rdx, %rax
+>  	jne	bogus_64_magic
+
+Because, as comment says, this is rather tricky code.
+									Pavel
+
+--=20
+(english) http://www.livejournal.com/~pavelmachek
+(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
+g.html
+
+--UlVJffcvxoiEqYs2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iEYEARECAAYFAlsGm+oACgkQMOfwapXb+vLLAACeNw4n8p5ND1PjVeejcndbG7LD
+PnoAn03Gtm+qB4eRF6elILLNbit31Tp4
+=fVC7
+-----END PGP SIGNATURE-----
+
+--UlVJffcvxoiEqYs2--
+
+
+--===============8086342848764042541==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8086342848764042541==--
