@@ -1,17 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH for-4.11] tools: set DEBUG_DIR from configure
-Date: Fri, 25 May 2018 17:19:03 +0200
-Message-ID: <20180525151903.GA21503@aepfle.de>
-References: <20180327161344.94634-1-roger.pau@citrix.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: [PATCH] xen/svm: don't clear interception for MSRs
+ required for introspection
+Date: Fri, 25 May 2018 18:25:51 +0300
+Message-ID: <f5038544-fe02-78b0-5f8e-09aac8749b42@bitdefender.com>
+References: <1527251902-2523-1-git-send-email-rcojocaru@bitdefender.com>
+ <70932389-9820-c2ca-ea20-939e6d051717@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2263103617733392459=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=zfce=im=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1fMEUq-0006m7-I4
- for xen-devel@lists.xenproject.org; Fri, 25 May 2018 15:19:13 +0000
-In-Reply-To: <20180327161344.94634-1-roger.pau@citrix.com>
+In-Reply-To: <70932389-9820-c2ca-ea20-939e6d051717@oracle.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,53 +19,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org, Roger Pau Monne <roger.pau@citrix.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xen.org
+Cc: andrew.cooper3@citrix.com, brian.woods@amd.com, jbeulich@suse.com, suravee.suthikulpanit@amd.com
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2263103617733392459==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="opJtzjQTFsWo+cga"
-Content-Disposition: inline
-
-
---opJtzjQTFsWo+cga
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Tue, Mar 27, Roger Pau Monne wrote:
-
-> Allow the path to be set from a configure command line option.
-
-Please backport 641f9ce2fa to 4.10 ASAP. See
-https://lists.xenproject.org/archives/html/xen-devel/2018-02/msg02749.html
-
-Thanks.
-
-Olaf
-
---opJtzjQTFsWo+cga
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWwgpZAAKCRBdQqD6ppg2
-fpcZAJ46iI/C0TuXVAH0GmwVmg+I8amFvgCfaijmFfaI2ziy171KAAHmniRkrYQ=
-=hPMp
------END PGP SIGNATURE-----
-
---opJtzjQTFsWo+cga--
-
-
---===============2263103617733392459==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2263103617733392459==--
+T24gMDUvMjUvMjAxOCAwNjoxOSBQTSwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDA1LzI1
+LzIwMTggMDg6MzggQU0sIFJhenZhbiBDb2pvY2FydSB3cm90ZToKPj4gVGhpcyBwYXRjaCBtaXJy
+b3JzIHRoZSBWTVggY29kZSB0aGF0IGRvZXNuJ3QgYWxsb3cKPj4gdm14X2Rpc2FibGVfaW50ZXJj
+ZXB0X2Zvcl9tc3IoKSAKPiAKPiB2bXhfY2xlYXJfbXNyX2ludGVyY2VwdCgpID8KPiAKPj4gdG8g
+Y2xlYXIgaW50ZXJjZXB0aW9uIG9mIE1TUnMgdGhhdAo+PiBhbiBpbnRyb3NwZWN0aW9uIGFnZW50
+IGlzIHRyeWluZyB0byBtb25pdG9yLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBSYXp2YW4gQ29qb2Nh
+cnUgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+Cj4gCj4gV2l0aCB0aGF0IGZpeGVkLAo+IAo+
+IFJldmlld2VkLWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29t
+PgoKQXBvbG9naWVzLCB5b3UncmUgcmlnaHQuIEkgd2FzIGxvb2tpbmcgYXQgdGhlIG9yaWdpbmFs
+IHBhdGNoLCB3aGVyZQp0aGVyZSdzIHZteF9kaXNhYmxlX2ludGVyY2VwdF9mb3JfbXNyKCk6Cgpo
+dHRwczovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9eGVuLmdpdDthPWNvbW1pdGRpZmY7aD00
+OTBhMzlhMWRiYzc0MDY3NzYzNDRmMzZlMWIyN2MzM2MyYWRhNjNkCgpJJ2xsIHN1Ym1pdCBWMiB3
+aXRoIHRoYXQgY29ycmVjdGVkICh1bmxlc3MgaXQncyBwcmVmZXJyYWJsZSBmb3IgdGhhdCB0bwpi
+ZSBjaGFuZ2VkIG9uIGNvbW1pdD8pLgoKClRoYW5rcywKUmF6dmFuCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
