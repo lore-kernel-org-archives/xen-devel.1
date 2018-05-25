@@ -1,23 +1,17 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86/CPUID: don't override tool stack
- decision to hide STIBP
-Date: Fri, 25 May 2018 08:35:10 -0600
-Message-ID: <5B081F1E02000078001C5F3C@prv1-mh.provo.novell.com>
-References: <5B03F1F202000078001C4942@prv1-mh.provo.novell.com>
- <2f901854-77d3-2d28-08cc-97d62630fc13@citrix.com>
- <5B07B87802000078001C5D70@prv1-mh.provo.novell.com>
- <1104da6d-0cda-9785-1a9c-f2094dec50fc@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH for-4.11] tools: set DEBUG_DIR from configure
+Date: Fri, 25 May 2018 17:19:03 +0200
+Message-ID: <20180525151903.GA21503@aepfle.de>
+References: <20180327161344.94634-1-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2263103617733392459=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=uj/n=im=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fMERJ-0006Xs-G5
- for xen-devel@lists.xenproject.org; Fri, 25 May 2018 15:15:33 +0000
-In-Reply-To: <1104da6d-0cda-9785-1a9c-f2094dec50fc@citrix.com>
-Content-Disposition: inline
+ (envelope-from <srs0=zfce=im=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fMEUq-0006m7-I4
+ for xen-devel@lists.xenproject.org; Fri, 25 May 2018 15:19:13 +0000
+In-Reply-To: <20180327161344.94634-1-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,76 +20,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI1LjA1LjE4IGF0IDE1OjUyLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMjUvMDUvMTggMDg6MTcsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAyNC4w
-NS4xOCBhdCAxODo0NCwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gT24g
-MjIvMDUvMTggMTE6MzMsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE90aGVyIHRoYW4gaW4gdGhl
-IGZlYXR1cmUgc2V0cywgd2hlcmUgd2UgaW5kZWVkIHdhbnQgdG8gb2ZmZXIgdGhlCj4+Pj4gZmVh
-dHVyZSBldmVuIGlmIG5vdCBlbnVtZXJhdGVkIG9uIGhhcmR3YXJlLCB3ZSBzaG91bGRuJ3QgZGlj
-dGF0ZSB0aGUKPj4+PiBmZWF0dXJlIGJlaW5nIGF2YWlsYWJsZSBpZiB0b29sIHN0YWNrIG9yIGhv
-c3QgYWRtaW4gaGF2ZSBkZWNpZGVkIG5vdAo+Pj4+IHRvIGV4cG9zZSBpdCAoZm9yIHdoYXRldmVy
-IFtxdWVzdGlvbmFibGU/XSByZWFzb24pLgo+Pj4+Cj4+Pj4gU2lnbmVkLW9mZi1ieTogSmFuIEJl
-dWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+Pj4+IC0tLQo+Pj4+IFRoaXMgaXMgZWZmZWN0aXZl
-bHkgYWNjb21wYW55aW5nIHRoZSBkaXNjdXNzaW9uIHJvb3RlZCBhdCB0aGUgNC44LzQuNwo+Pj4+
-IHBhdGNoIGF0Cj4+Pj4gaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1s
-L3hlbi1kZXZlbC8yMDE4LTA1L21zZzAxMDI4Lmh0bWwgCj4+Pj4gZGVhbGluZyB3aXRoIGEgZmVh
-dHVyZSBsZXZlbGluZyBpc3N1ZS4KPj4+Pgo+Pj4+IC0tLSBhL3hlbi9hcmNoL3g4Ni9jcHVpZC5j
-Cj4+Pj4gKysrIGIveGVuL2FyY2gveDg2L2NwdWlkLmMKPj4+PiBAQCAtNjQyLDE0ICs2NDIsNiBA
-QCB2b2lkIHJlY2FsY3VsYXRlX2NwdWlkX3BvbGljeShzdHJ1Y3QgZG9tCj4+Pj4gICAgICByZWNh
-bGN1bGF0ZV94c3RhdGUocCk7Cj4+Pj4gICAgICByZWNhbGN1bGF0ZV9taXNjKHApOwo+Pj4+ICAK
-Pj4+PiAtICAgIC8qCj4+Pj4gLSAgICAgKiBPdmVycmlkZSBTVElCUCB0byBtYXRjaCBJQlJTLiAg
-R3Vlc3RzIGNhbiBzYWZlbHkgdXNlIFNUSUJQCj4+Pj4gLSAgICAgKiBmdW5jdGlvbmFsaXR5IG9u
-IG5vbi1IVCBoYXJkd2FyZSwgYnV0IGNhbid0IG5lY2Vzc2VyaWx5IHByb3RlY3QKPj4+PiAtICAg
-ICAqIHRoZW1zZWx2ZXMgZnJvbSBTUDIvU3BlY3RyZS9CcmFuY2ggVGFyZ2V0IEluamVjdGlvbiBp
-ZiBTVElCUCBpcyBoaWRkZW4KPj4+PiAtICAgICAqIG9uIEhULWNhcGFibGUgaGFyZHdhcmUuCj4+
-Pj4gLSAgICAgKi8KPj4+PiAtICAgIHAtPmZlYXQuc3RpYnAgPSBwLT5mZWF0LmlicnNiOwo+Pj4g
-WW91J3ZlIGRlbGV0ZWQgYSBjb21tZW50IGV4cGxhaW5pbmcgd2h5IHRoaXMgaXMgbmVlZGVkIGZv
-ciBzYWZldHkKPj4+IHJlYXNvbnMsIHdpdGhvdXQgYWRkcmVzc2luZyB0aGUgc2FmZXR5IGFyZ3Vt
-ZW50LiAgU2ltcGx5ICJiZWNhdXNlIHdlCj4+PiBzaG91bGRuJ3Qgb3ZlcnJpZGUgdGhlIHRvb2xz
-dGFjayIgaXNuJ3QgYSByZWFzb25hYmxlIGFyZ3VtZW50Lgo+PiBJdCB2ZXJ5IG11Y2ggaXM6IFBv
-bGljeSBkZWNpc2lvbnMgYmVsb25nLCBhcyBmYXIgYXMgcG9zc2libGUsIGluIHRoZSB0b29sCj4+
-IHN0YWNrIHJhdGhlciB0aGFuIHRoZSBoeXBlcnZpc29yLCBhbmQgaW4gdGhlIGFkbWluJ3MgaGFu
-ZHMgcmF0aGVyIHRoYW4KPj4gcHJlLXByb2dyYW1tZWQgdG9vbCBzdGFjayBiZWhhdmlvci4KPiAK
-PiBQb2xpY3kgZGVjaXNpb25zLCBhYnNvbHV0ZWx5LCBidXQgYSBwYXRjaCBsaWtlIHRoaXMgbmVl
-ZHMganVzdGlmeSB3aHkgaXQKPiBpcyBkZWxldGluZyBhIHNhZmV0eSBjaGVjay4gIE9uZSB2YWxp
-ZCBqdXN0aWZpY2F0aW9uIHdvdWxkIGJlICJ0aGUKPiBzYWZldHkgcHJvcGVydHkgdGhpcyBvdmVy
-cmlkZSBpcyB0cnlpbmcgdG8gYWNoaWV2ZSBpcyBhY3R1YWxseSBhbHJlYWR5Cj4gc2FmZSBiZWNh
-dXNlIG9mICRYIi4KClRoYXQncyB3aGF0IEkgd291bGQgaGF2ZSBob3BlZCB0aGUgaW5pdGlhbCBw
-YXJ0IG9mIHRoZSBkZXNjcmlwdGlvbiBjb252ZXlzLgoKPiBIb3dldmVyLCBpZiB5b3UgYXJlIGdv
-aW5nIHRvIG1ha2UgdGhpcyBjaGFuZ2UsIHRoZW4geW91J3JlIG1pc3NpbmcgdGhlCj4gZm9sbG93
-aW5nIGh1bms6Cj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL3B1YmxpYy9hcmNoLXg4Ni9j
-cHVmZWF0dXJlc2V0LmggCj4gYi94ZW4vaW5jbHVkZS9wdWJsaWMvYXJjaC14ODYvY3B1ZmVhdHVy
-ZXNldC5oCj4gaW5kZXggYzcyMWMxMi4uZjFhNWVkOSAxMDA2NDQKPiAtLS0gYS94ZW4vaW5jbHVk
-ZS9wdWJsaWMvYXJjaC14ODYvY3B1ZmVhdHVyZXNldC5oCj4gKysrIGIveGVuL2luY2x1ZGUvcHVi
-bGljL2FyY2gteDg2L2NwdWZlYXR1cmVzZXQuaAo+IEBAIC0yNDMsNyArMjQzLDcgQEAgWEVOX0NQ
-VUZFQVRVUkUoSUJQQiwgICAgICAgICAgOCozMisxMikgLypBICBJQlBCIHN1cHBvcnQgb25seSAo
-bm8gSUJSUywgdXNlZCBieQo+ICBYRU5fQ1BVRkVBVFVSRShBVlg1MTJfNFZOTklXLCA5KjMyKyAy
-KSAvKkEgIEFWWDUxMiBOZXVyYWwgTmV0d29yayBJbnN0cnVjdGlvbnMgKi8KPiAgWEVOX0NQVUZF
-QVRVUkUoQVZYNTEyXzRGTUFQUywgOSozMisgMykgLypBICBBVlg1MTIgTXVsdGlwbHkgQWNjdW11
-bGF0aW9uIFNpbmdsZSBQcmVjaXNpb24gKi8KPiAgWEVOX0NQVUZFQVRVUkUoSUJSU0IsICAgICAg
-ICAgOSozMisyNikgLypBICBJQlJTIGFuZCBJQlBCIHN1cHBvcnQgKHVzZWQgYnkgSW50ZWwpICov
-Cj4gLVhFTl9DUFVGRUFUVVJFKFNUSUJQLCAgICAgICAgIDkqMzIrMjcpIC8qQSEgU1RJQlAgKi8K
-PiArWEVOX0NQVUZFQVRVUkUoU1RJQlAsICAgICAgICAgOSozMisyNykgLypBICBTVElCUCAqLwo+
-ICBYRU5fQ1BVRkVBVFVSRShBUkNIX0NBUFMsICAgICA5KjMyKzI5KSAvKiAgIElBMzJfQVJDSF9D
-QVBBQklMSVRJRVMgTVNSICovCj4gIFhFTl9DUFVGRUFUVVJFKFNTQkQsICAgICAgICAgIDkqMzIr
-MzEpIC8qQSAgTVNSX1NQRUNfQ1RSTC5TU0JEIGF2YWlsYWJsZSAqLwo+ICAKPiAKPiB3aGljaCBp
-cyB0aGUgc2lnbmFsIHRoYXQ6Cj4gCj4gLi4uCj4gICogU3BlY2lhbDogJyEnCj4gICogICBUaGlz
-IGJpdCBoYXMgc3BlY2lhbCBwcm9wZXJ0aWVzIGFuZCBpcyBub3QgYSBzdHJhaWdodCBpbmRpY2F0
-aW9uIG9mIGEKPiAgKiAgIHBpZWNlIG9mIG5ldyBmdW5jdGlvbmFsaXR5LiAgWGVuIHdpbGwgaGFu
-ZGxlIHRoZXNlIGRpZmZlcmVudGx5LAo+ICAqICAgYW5kIG1heSBvdmVycmlkZSB0b29sc3RhY2sg
-c2V0dGluZ3MgY29tcGxldGVseS4KPiAuLi4KCkkgZGlkIGNvbnNpZGVyIHRoaXMgYmVmb3JlIHN1
-Ym1pdHRpbmcsIGJ1dCB0aGUgc3BlY2lhbCBjYXNpbmcgaW4gdGhlIGZlYXR1cmUgc2V0CmNvbnN0
-cnVjdGlvbiBsZWZ0IG1lIHVuY2VydGFpbiBob3cgc3BlY2lhbCAic3BlY2lhbCIgcmVhbGx5IG1l
-YW5zLiBJIG5vdGljZSBJCmZvcmdvdCB0byBhZGQgYSByZXNwZWN0aXZlIHJlbWFyayBhZnRlciB0
-aGUgLS0tIG1hcmtlci4gSSdtIGZpbmUgZHJvcHBpbmcgdGhlICEuCgpOb3cgdGhhdCBJIHRoaW5r
-IHdlJ3ZlIG1hbmFnZWQgdG8gc2V0dGxlIG9uIGEgd2F5IGZvcndhcmQgZm9yIHRoaXMgcGF0Y2gs
-CndoYXQgYWJvdXQgdGhlIHByb3Bvc2VkIGFsdGVybmF0aXZlIHBhdGNoIGZvciA0LjggYW5kIDQu
-Nz8gSXQgaGFzIHRoZSBzYW1lCm5ldCBlZmZlY3QgYXMgdGhlIG9uZSBoZXJlLCBhZnRlciBhbGwg
-KGFuZCBhZmFpY3QpLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+
+--===============2263103617733392459==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="opJtzjQTFsWo+cga"
+Content-Disposition: inline
+
+
+--opJtzjQTFsWo+cga
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Tue, Mar 27, Roger Pau Monne wrote:
+
+> Allow the path to be set from a configure command line option.
+
+Please backport 641f9ce2fa to 4.10 ASAP. See
+https://lists.xenproject.org/archives/html/xen-devel/2018-02/msg02749.html
+
+Thanks.
+
+Olaf
+
+--opJtzjQTFsWo+cga
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWwgpZAAKCRBdQqD6ppg2
+fpcZAJ46iI/C0TuXVAH0GmwVmg+I8amFvgCfaijmFfaI2ziy171KAAHmniRkrYQ=
+=hPMp
+-----END PGP SIGNATURE-----
+
+--opJtzjQTFsWo+cga--
+
+
+--===============2263103617733392459==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2263103617733392459==--
