@@ -1,24 +1,21 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [v2 4/6] xen/iommu: smmu-v3: Add Xen specific code
- to enable the ported driver
-Date: Fri, 25 May 2018 09:45:42 +0100
-Message-ID: <3ff48bc8-8d38-db9e-8833-320a6acbcb17@arm.com>
-References: <20180524004620.23828-1-sameer.goel@linaro.org>
- <20180524004620.23828-5-sameer.goel@linaro.org>
- <d08fe9e3-3f32-8342-00c1-3a457fe14098@caviumnetworks.com>
- <1df9c9aa-bb75-94db-d88f-53229e740e18@linaro.org>
- <9900a2ad-65d4-357f-b54d-01ba76476d1a@caviumnetworks.com>
+From: Pavel Machek <pavel@ucw.cz>
+Subject: Re: [PATCH v3 11/27] x86/power/64: Adapt assembly for
+ PIE support
+Date: Fri, 25 May 2018 11:10:24 +0200
+Message-ID: <20180525091024.GA9666__23052.8432912708$1527239385$gmane$org@amd>
+References: <20180523195421.180248-1-thgarnie@google.com>
+ <20180523195421.180248-12-thgarnie@google.com>
+ <20180524110341.GB20225@amd>
+ <CAJcbSZEnRhFDvYCG4ORH71LrcH2bAzOU5yF-oa9KkLpKo5UuSQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5009765470106809347=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=jndo=im=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1fM8M7-00016H-UH
- for xen-devel@lists.xenproject.org; Fri, 25 May 2018 08:45:47 +0000
-In-Reply-To: <9900a2ad-65d4-357f-b54d-01ba76476d1a@caviumnetworks.com>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=jxrn=im=ucw.cz=pavel@srs-us1.protection.inumbo.net>)
+ id 1fM8k4-00038U-5Y
+ for xen-devel@lists.xenproject.org; Fri, 25 May 2018 09:10:32 +0000
+In-Reply-To: <CAJcbSZEnRhFDvYCG4ORH71LrcH2bAzOU5yF-oa9KkLpKo5UuSQ@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,24 +24,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Manish Jaggi <mjaggi@caviumnetworks.com>, Sameer Goel <sameer.goel@linaro.org>, xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, shankerd@codeaurora.org, roger.pau@citrix.com
+To: Thomas Garnier <thgarnie@google.com>
+Cc: Kate Stewart <kstewart@linuxfoundation.org>, Nicolas Pitre <nicolas.pitre@linaro.org>, the arch/x86 maintainers <x86@kernel.org>, Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>, Petr Mladek <pmladek@suse.com>, Len Brown <len.brown@intel.com>, Peter Zijlstra <peterz@infradead.org>, Yonghong Song <yhs@fb.com>, Christopher Li <sparse@chrisli.org>, Dave Hansen <dave.hansen@linux.intel.com>, Dominik Brodowski <linux@dominikbrodowski.net>, LKML <linux-kernel@vger.kernel.org>, Masahiro Yamada <yamada.masahiro@socionext.com>, Jan Beulich <JBeulich@suse.com>, "H . Peter Anvin" <hpa@zytor.com>, Kernel Hardening <kernel-hardening@lists.openwall.com>, Christoph Lameter <cl@linux.com>, Alok Kataria <akataria@vmware.com>, Linux Doc Mailing List <linux-doc@vger.kernel.org>, linux-arch <linux-arch@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>, Herbert Xu <herbert@gondor.a>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAyNS8wNS8xOCAwNTo0MSwgTWFuaXNoIEphZ2dpIHdyb3RlOgo+IAo+IAo+IE9uIDA1
-LzI1LzIwMTggMDE6NTkgQU0sIFNhbWVlciBHb2VsIHdyb3RlOgo+Pgo+Pgo+PiBPbiAwNS8yMy8y
-MDE4IDEwOjQ4IFBNLCBNYW5pc2ggSmFnZ2kgd3JvdGU6Cj4+PiBIaSBTYW1lZXIsCj4+Pgo+Pj4g
-R2VuZXJhbCBDb21tZW50LCBwbGVhc2UgdXNlIGFwcHJvcHJpYXRlIHZhcmlhYmxlIG5hbWVzIGZv
-ciBYWFhfZG9tYWluIAo+Pj4gc3RydWN0dXJlcyBpbiBjb2RlIHdoaWNoIGlzIHhlbiBzcGVjaWZp
-Yy4KPj4gSSB0aG91Z2h0IHRoYXQgd2UgaGFkIGRpc2N1c3NlZCB0aGlzIGJlZm9yZSBvbiBvbmUg
-b2YgdGhlIFJGQ3MuCj4gWWVzIGFuZCBubyBvbmUgcmVwbGllZCB0byBteSBsYXN0IGNvbW1lbnQg
-dGhhdCB0aGUgdmFyIG5hbWVzIGhhdmUgdG8gYmUgCj4gbm9uIGNvbmZ1c2luZyBpbiBYZW4gc3Bl
-Y2lmaWMgY29kZS4KClJhdGhlciB0aGFuIGp1c3Qgc2F5aW5nICJ5b3UgaGF2ZW4ndCByZXBsaWVk
-IHRvIG15IGxhc3QgY29tbWVudCIsIGhvdyAKYWJvdXQgZ2l2aW5nIGEgcG9pbnRlciB0byB0aGF0
-IGUtbWFpbD8KCkFGQUlDVCwgdGhlIGxhc3QgYW5zd2VyIHdhcyBhIHJlcGx5IGZyb20gbWUgdG8g
-eW91ciBlLW1haWwuIEFzIEkgd3JvdGUgCnRoZXJlIGlmIGl0IGlzIHVzZWQgYnkgWGVuIG9ubHkg
-Y29kZSwgdGhlbiBpdCBzaG91bGQgYmUgYWxyaWdodC4gQnV0IApMaW51eCBjb2RlICpzaG91bGQg
-bm90KiBiZSBjaGFuZ2VkLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5009765470106809347==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="UlVJffcvxoiEqYs2"
+Content-Disposition: inline
+
+
+--UlVJffcvxoiEqYs2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu 2018-05-24 09:37:20, Thomas Garnier wrote:
+> On Thu, May 24, 2018 at 4:04 AM Pavel Machek <pavel@ucw.cz> wrote:
+>=20
+> > On Wed 2018-05-23 12:54:05, Thomas Garnier wrote:
+> > > Change the assembly code to use only relative references of symbols f=
+or
+> the
+> > > kernel to be PIE compatible.
+> > >
+> > > Position Independent Executable (PIE) support will allow to extended =
+the
+> > > KASLR randomization range below the -2G memory limit.
+> > >
+> > > Signed-off-by: Thomas Garnier <thgarnie@google.com>
+>=20
+> > Again, was this tested?
+>=20
+> Hibernation was tested as much as I can with qemu and my dedicated
+>machine.
+
+Ok, good.
+
+Acked-by: Pavel Machek <pavel@ucw.cz>
+
+> Any specific test you think I should use?
+
+Hibernation working should be good enough test for this.
+
+Thanks,
+								Pavel
+
+--=20
+(english) http://www.livejournal.com/~pavelmachek
+(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
+g.html
+
+--UlVJffcvxoiEqYs2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iEYEARECAAYFAlsH0wAACgkQMOfwapXb+vJiPACbB1beNmXz4oS4/mXx8V6gi+hn
+3BMAmwQL+v/Mq6QFOs5pWL0flhKjfSRY
+=e7mZ
+-----END PGP SIGNATURE-----
+
+--UlVJffcvxoiEqYs2--
+
+
+--===============5009765470106809347==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5009765470106809347==--
