@@ -1,22 +1,12 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH 1/5] x86: move definition of struct
- cpuid_leaf to cpuid.h
-Date: Fri, 25 May 2018 13:03:09 +0100
-Message-ID: <20180525120309.6j743pvgwucldvxp@citrix.com>
-References: <20180524160522.757-1-wei.liu2@citrix.com>
- <20180524160522.757-2-wei.liu2@citrix.com>
- <5B07F87402000078001C5E96@prv1-mh.provo.novell.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: [PATCH] xen/svm: don't clear interception for MSRs
+ required for introspection
+Date: Fri, 25 May 2018 15:38:22 +0300
+Message-ID: <1527251902-2523-1-git-send-email-rcojocaru@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=alxt=im=citrix.com=prvs=6765399a5=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fMBRB-0008M7-Vw
- for xen-devel@lists.xenproject.org; Fri, 25 May 2018 12:03:14 +0000
-Content-Disposition: inline
-In-Reply-To: <5B07F87402000078001C5E96@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,21 +15,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xen.org
+Cc: suravee.suthikulpanit@amd.com, Razvan Cojocaru <rcojocaru@bitdefender.com>, andrew.cooper3@citrix.com, jbeulich@suse.com, boris.ostrovsky@oracle.com, brian.woods@amd.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBNYXkgMjUsIDIwMTggYXQgMDU6NTA6MTJBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gPj4+IE9uIDI0LjA1LjE4IGF0IDE4OjA1LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gPiBUaGlzIGlzIGEgc3RlcCB0b3dhcmRzIGNvbnNvbGlkYXRpbmcgcmVsZXZhbnQgZGF0
-YSBzdHJ1Y3R1cmVzIGFuZAo+ID4gZGVmaW5lcyB0byBvbmUgbG9jYXRpb24uCj4gCj4gU29ydCBv
-ZiBjb250cmFyeSB0byB3aGF0IHRoZSBwYXRjaCBkb2VzIC0gaXQgY29udmVydHMgb25lIGluc3Rh
-bmNlIG9mIHRoZQo+IHN0cnVjdHVyZSB0byB0d28gb2YgdGhlbS4KCkJ1dCBpc24ndCB0aGlzIHRl
-c3QgaGFybmVzcyBhbiBleGNlcHRpb24gdG8gaG93IHRoaW5ncyBhcmUgbm9ybWFsbHkKZG9uZT8g
-SSBkb24ndCB0aGluayB4ODYgaW5zbiBlbXVsYXRvciBpcyBhcyBzdGFuZGFsb25lIGFzIG90aGVy
-CmNvbXBvbmVudHMuCgpJIG5ldmVyIHVuZGVyc3Rvb2Qgd2h5IGNwdWlkX2xlYWYgd2FzIHB1dCBp
-bnRvIHg4Nl9lbXVsYXRlLmggaW4gdGhlCmZpcnN0IHBsYWNlLiBJIHRyaWVkIHRvIGNvbnZlcnQg
-aXQgdG8gdXNlIGNwdWlkLmggYnV0IHRoYXQgb3BlbmVkIGFuCmV2ZW4gYmlnZ2VyIGNhbiBvZiB3
-b3Jtcy4KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+VGhpcyBwYXRjaCBtaXJyb3JzIHRoZSBWTVggY29kZSB0aGF0IGRvZXNuJ3QgYWxsb3cKdm14X2Rp
+c2FibGVfaW50ZXJjZXB0X2Zvcl9tc3IoKSB0byBjbGVhciBpbnRlcmNlcHRpb24gb2YgTVNScyB0
+aGF0CmFuIGludHJvc3BlY3Rpb24gYWdlbnQgaXMgdHJ5aW5nIHRvIG1vbml0b3IuCgpTaWduZWQt
+b2ZmLWJ5OiBSYXp2YW4gQ29qb2NhcnUgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+Ci0tLQog
+eGVuL2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMgfCA1ICsrKy0tCiAxIGZpbGUgY2hhbmdlZCwgMyBp
+bnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9o
+dm0vc3ZtL3N2bS5jIGIveGVuL2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMKaW5kZXggNjczYTM4Yy4u
+ZDMxM2IzZiAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMKKysrIGIveGVu
+L2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMKQEAgLTE0OCw2ICsxNDgsNyBAQCBzdm1fbXNyYml0KHVu
+c2lnbmVkIGxvbmcgKm1zcl9iaXRtYXAsIHVpbnQzMl90IG1zcikKIHZvaWQgc3ZtX2ludGVyY2Vw
+dF9tc3Ioc3RydWN0IHZjcHUgKnYsIHVpbnQzMl90IG1zciwgaW50IGZsYWdzKQogewogICAgIHVu
+c2lnbmVkIGxvbmcgKm1zcl9iaXQ7CisgICAgY29uc3Qgc3RydWN0IGRvbWFpbiAqZCA9IHYtPmRv
+bWFpbjsKIAogICAgIG1zcl9iaXQgPSBzdm1fbXNyYml0KHYtPmFyY2guaHZtX3N2bS5tc3JwbSwg
+bXNyKTsKICAgICBCVUdfT04obXNyX2JpdCA9PSBOVUxMKTsKQEAgLTE1NSwxMiArMTU2LDEyIEBA
+IHZvaWQgc3ZtX2ludGVyY2VwdF9tc3Ioc3RydWN0IHZjcHUgKnYsIHVpbnQzMl90IG1zciwgaW50
+IGZsYWdzKQogCiAgICAgaWYgKCBmbGFncyAmIE1TUl9JTlRFUkNFUFRfUkVBRCApCiAgICAgICAg
+ICBfX3NldF9iaXQobXNyICogMiwgbXNyX2JpdCk7Ci0gICAgZWxzZQorICAgIGVsc2UgaWYgKCAh
+bW9uaXRvcmVkX21zcihkLCBtc3IpICkKICAgICAgICAgIF9fY2xlYXJfYml0KG1zciAqIDIsIG1z
+cl9iaXQpOwogCiAgICAgaWYgKCBmbGFncyAmIE1TUl9JTlRFUkNFUFRfV1JJVEUgKQogICAgICAg
+ICBfX3NldF9iaXQobXNyICogMiArIDEsIG1zcl9iaXQpOwotICAgIGVsc2UKKyAgICBlbHNlIGlm
+ICggIW1vbml0b3JlZF9tc3IoZCwgbXNyKSApCiAgICAgICAgIF9fY2xlYXJfYml0KG1zciAqIDIg
+KyAxLCBtc3JfYml0KTsKIH0KIAotLSAKMi43LjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
