@@ -1,22 +1,20 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH 1/5] x86: move definition of struct
- cpuid_leaf to cpuid.h
-Date: Fri, 25 May 2018 10:35:29 +0100
-Message-ID: <20180525093529.3izjhiiojh4hd7pk@citrix.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH 2/5] x86: split out cpuid objects and helpers
+Date: Fri, 25 May 2018 11:41:04 +0200
+Message-ID: <20180525094104.5ogk4qzcya5pfucc@MacBook-Pro-de-Roger.local>
 References: <20180524160522.757-1-wei.liu2@citrix.com>
- <20180524160522.757-2-wei.liu2@citrix.com>
- <20180525093117.ixgfd6ejsxhzfy26@MacBook-Pro-de-Roger.local>
+ <20180524160522.757-3-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=alxt=im=citrix.com=prvs=6765399a5=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fM98K-0004rn-1k
- for xen-devel@lists.xenproject.org; Fri, 25 May 2018 09:35:36 +0000
+ <srs0=ifz/=im=citrix.com=prvs=676f710cf=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fM9Dn-0005YP-0G
+ for xen-devel@lists.xenproject.org; Fri, 25 May 2018 09:41:15 +0000
 Content-Disposition: inline
-In-Reply-To: <20180525093117.ixgfd6ejsxhzfy26@MacBook-Pro-de-Roger.local>
+In-Reply-To: <20180524160522.757-3-wei.liu2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,34 +23,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, sergey.dyasli@citrix.com
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, sergey.dyasli@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBNYXkgMjUsIDIwMTggYXQgMTE6MzE6MTdBTSArMDIwMCwgUm9nZXIgUGF1IE1vbm7D
-qSB3cm90ZToKPiBPbiBUaHUsIE1heSAyNCwgMjAxOCBhdCAwNTowNToxOFBNICswMTAwLCBXZWkg
-TGl1IHdyb3RlOgo+ID4gVGhpcyBpcyBhIHN0ZXAgdG93YXJkcyBjb25zb2xpZGF0aW5nIHJlbGV2
-YW50IGRhdGEgc3RydWN0dXJlcyBhbmQKPiA+IGRlZmluZXMgdG8gb25lIGxvY2F0aW9uLgo+ID4g
-Cj4gPiBJdCB0aGVuIHJlcXVpcmVzIGRlZmluaW5nIGNwdWlkX2xlYWYgaW4gdXNlciBzcGFjZSBo
-YXJuZXNzIGhlYWRlcnMgdG8KPiA+IG1ha2UgdGhlbSBjb250aW51ZSB0byBjb21waWxlLgo+ID4g
-Cj4gPiBObyBmdW5jdGlvbmFsIGNoYW5nZS4KPiA+IAo+ID4gU2lnbmVkLW9mZi1ieTogV2VpIExp
-dSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KPiA+IC0tLQo+ID4gQ2M6IEphbiBCZXVsaWNoIDxqYmV1
-bGljaEBzdXNlLmNvbT4KPiA+IENjOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRy
-aXguY29tPgo+ID4gLS0tCj4gPiAgdG9vbHMvdGVzdHMveDg2X2VtdWxhdG9yL3g4Ni1lbXVsYXRl
-LmggfCA2ICsrKysrKwo+ID4gIHhlbi9hcmNoL3g4Ni94ODZfZW11bGF0ZS94ODZfZW11bGF0ZS5o
-IHwgNiArLS0tLS0KPiA+ICB4ZW4vaW5jbHVkZS9hc20teDg2L2NwdWlkLmggICAgICAgICAgICB8
-IDQgKysrKwo+ID4gIDMgZmlsZXMgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlv
-bnMoLSkKPiA+IAo+ID4gZGlmZiAtLWdpdCBhL3Rvb2xzL3Rlc3RzL3g4Nl9lbXVsYXRvci94ODYt
-ZW11bGF0ZS5oIGIvdG9vbHMvdGVzdHMveDg2X2VtdWxhdG9yL3g4Ni1lbXVsYXRlLmgKPiA+IGlu
-ZGV4IGM1ZTg1ZGUzYTIuLjhhZTMxYTJmOWEgMTAwNjQ0Cj4gPiAtLS0gYS90b29scy90ZXN0cy94
-ODZfZW11bGF0b3IveDg2LWVtdWxhdGUuaAo+ID4gKysrIGIvdG9vbHMvdGVzdHMveDg2X2VtdWxh
-dG9yL3g4Ni1lbXVsYXRlLmgKPiA+IEBAIC03OSw2ICs3OSwxMiBAQCBXUkFQKHB1dHMpOwo+ID4g
-IAo+ID4gICN1bmRlZiBXUkFQCj4gPiAgCj4gPiArI2lmbmRlZiBjcHVpZF9sZWFmCj4gPiArc3Ry
-dWN0IGNwdWlkX2xlYWYgewo+ID4gKyAgICB1aW50MzJfdCBhLCBiLCBjLCBkOwo+ID4gK307Cj4g
-PiArI2VuZGlmCj4gCj4gRG8geW91IHJlYWxseSBuZWVkIHRoZSBpZm5kZWY/IEFGQUlDVCB0aGlz
-IGhlYWRlciB3aWxsIGFsd2F5cyBiZQo+IGluY2x1ZGVkIGZyb20gdGhlIHRlc3QgaGFybmVzcywg
-d2hpY2ggaGFzIG5vIGRlZmluaXRpb24gb2YgY3B1aWRfbGVhZi4KCkl0IGlzIG5vdCBzdHJpY3Rs
-eSByZXF1aXJlZC4KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+T24gVGh1LCBNYXkgMjQsIDIwMTggYXQgMDU6MDU6MTlQTSArMDEwMCwgV2VpIExpdSB3cm90ZToK
+PiBUaGV5IGFyZSBtb3ZlZCB0byBhIG5ldyBoZWFkZXIgd2hpY2ggaXMgZ29pbmcgdG8gYmUgY29u
+c3VtZWQgYnkgYm90aAo+IHRoZSBoeXBlcnZpc29yIGFuZCB0b29sc3RhY2suCj4gCj4gQ3JlYXRl
+IGEgbmV3IGRpcmVjdG9yeSBmb3IgdGhpcyBraW5kIG9mIGhlYWRlcnMgaW4gYW50aWNpcGF0aW9u
+IG9mCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIF50aGF0Pwo+IG1vcmUgd2lsbCBjb21lLgo+IAo+IE5vIGZ1bmN0aW9uYWwg
+Y2hhbmdlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+
+Cj4gLS0tCj4gQ2M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPiBDYzogQW5kcmV3
+IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPiAKPiBBbnkgc3VnZ2VzdGlvbiBv
+biB0aGUgZGlyZWN0b3J5IG5hbWU/Cj4gLS0tCj4gIHhlbi9pbmNsdWRlL2FzbS14ODYvYXJjaC1z
+aGFyZWQvY3B1aWQuaCB8IDIxMyArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+ICB4
+ZW4vaW5jbHVkZS9hc20teDg2L2NwdWlkLmggICAgICAgICAgICAgfCAyMTAgKy0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLQoKSSB3b3VsZCBoYXZlIHBsYWNlZCB0aG9zZSBpbnNpZGUgb2Y6
+Cgp4ZW4vaW5jbHVkZS9wdWJsaWMvYXJjaC14ODYvY3B1aWQuaAoKUHJvdGVjdGVkIHdpdGggYSAj
+aWYgZGVmaW5lZChfX1hFTl9fKSB8fCBkZWZpbmVkKF9fWEVOX1RPT0xTX18pPwoKVGhhdCdzIGhv
+dyBzdHJ1Y3R1cmVzIGFyZSBnZW5lcmFsbHkgc2hhcmVkIGJldHdlZW4gdGhlIHRvb2xzdGFjayBh
+bmQKdGhlIGh5cGVydmlzb3IuIEJ1dCB0aGVuIHRoYXQgd291bGQgYWxzbyByZXF1aXJlIHlvdSB0
+byBwcmVmaXggdGhvc2UKc3RydWN0dXJlcyB3aXRoICd4ZW5fJywgd2hpY2ggd2lsbCBhZGQgbW9y
+ZSBjaHVybiB0byB0aGUgcGF0Y2guLi4KClJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
