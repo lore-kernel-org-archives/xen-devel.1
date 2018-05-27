@@ -1,17 +1,17 @@
-From: Huaisheng Ye <yehs2007@zoho.com>
-Subject: [RFC PATCH v3 6/9] mm/vmpressure: update usage of zone
- modifiers
-Date: Thu, 24 May 2018 23:20:53 +0800
-Message-ID: <20180524152053.1248-1-yehs2007__35355.2783876241$1527481595$gmane$org@zoho.com>
+From: Chaitanya Deshpande <chaitanyagd11@gmail.com>
+Subject: Query for running Xen on ARM
+Date: Sun, 27 May 2018 10:48:35 -0700
+Message-ID: <CA+a_UndTaAP0XCssMCqTHVcGT1wnbmZHaohkfx33=tDU6Bq2Dw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6830862178670334141=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=gi4z=il=zoho.com=yehs2007@srs-us1.protection.inumbo.net>)
- id 1fLs4Z-0003Mx-6h
- for xen-devel@lists.xenproject.org; Thu, 24 May 2018 15:22:35 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=wcbl=io=gmail.com=chaitanyagd11@srs-us1.protection.inumbo.net>)
+ id 1fMzmY-0002ga-D1
+ for xen-devel@lists.xenproject.org; Sun, 27 May 2018 17:48:38 +0000
+Received: by mail-ot0-x22e.google.com with SMTP id 15-v6so11229535otn.12
+ for <xen-devel@lists.xenproject.org>; Sun, 27 May 2018 10:48:36 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,35 +20,256 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: akpm@linux-foundation.org, linux-mm@kvack.org
-Cc: kstewart@linuxfoundation.org, mhocko@suse.com, Huaisheng Ye <yehs1@lenovo.com>, hehy1@lenovo.com, gregkh@linuxfoundation.org, David Rientjes <rientjes@google.com>, linux-kernel@vger.kernel.org, willy@infradead.org, colyli@suse.de, Christoph Hellwig <hch@infradead.org>, Minchan Kim <minchan@kernel.org>, iommu@lists.linux-foundation.org, zhongjiang <zhongjiang@huawei.com>, linux-btrfs@vger.kernel.org, chengnt@lenovo.com, xen-devel@lists.xenproject.org, Dan Carpenter <dan.carpenter@oracle.com>, mgorman@techsingularity.net, hch@lst.de, vbabka@suse.cz
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogSHVhaXNoZW5nIFllIDx5ZWhzMUBsZW5vdm8uY29tPgoKVXNlIF9fR0ZQX1pPTkVfTU9W
-QUJMRSB0byByZXBsYWNlIChfX0dGUF9ISUdITUVNIHwgX19HRlBfTU9WQUJMRSkuCgpfX19HRlBf
-RE1BLCBfX19HRlBfSElHSE1FTSBhbmQgX19fR0ZQX0RNQTMyIGhhdmUgYmVlbiBkZWxldGVkIGZy
-b20gR0ZQCmJpdG1hc2tzLCB0aGUgYm90dG9tIHRocmVlIGJpdHMgb2YgR0ZQIG1hc2sgaXMgcmVz
-ZXJ2ZWQgZm9yIHN0b3JpbmcKZW5jb2RlZCB6b25lIG51bWJlci4KCl9fR0ZQX1pPTkVfTU9WQUJM
-RSBjb250YWlucyBlbmNvZGVkIFpPTkVfTU9WQUJMRSBhbmQgX19HRlBfTU9WQUJMRSBmbGFnLgoK
-V2l0aCBHRlBfWk9ORV9UQUJMRSwgX19HRlBfSElHSE1FTSBPUmluZyBfX0dGUF9NT1ZBQkxFIG1l
-YW5zIGdmcF96b25lCnNob3VsZCByZXR1cm4gWk9ORV9NT1ZBQkxFLiBJbiBvcmRlciB0byBrZWVw
-IHRoYXQgY29tcGF0aWJsZSB3aXRoCkdGUF9aT05FX1RBQkxFLCByZXBsYWNlIChfX0dGUF9ISUdI
-TUVNIHwgX19HRlBfTU9WQUJMRSkgd2l0aApfX0dGUF9aT05FX01PVkFCTEUuCgpTaWduZWQtb2Zm
-LWJ5OiBIdWFpc2hlbmcgWWUgPHllaHMxQGxlbm92by5jb20+CkNjOiBBbmRyZXcgTW9ydG9uIDxh
-a3BtQGxpbnV4LWZvdW5kYXRpb24ub3JnPgpDYzogemhvbmdqaWFuZyA8emhvbmdqaWFuZ0BodWF3
-ZWkuY29tPgpDYzogTWluY2hhbiBLaW0gPG1pbmNoYW5Aa2VybmVsLm9yZz4KQ2M6IERhbiBDYXJw
-ZW50ZXIgPGRhbi5jYXJwZW50ZXJAb3JhY2xlLmNvbT4KQ2M6IERhdmlkIFJpZW50amVzIDxyaWVu
-dGplc0Bnb29nbGUuY29tPgpDYzogQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBpbmZyYWRlYWQub3Jn
-PgotLS0KIG1tL3ZtcHJlc3N1cmUuYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlv
-bigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL21tL3ZtcHJlc3N1cmUuYyBiL21tL3Zt
-cHJlc3N1cmUuYwppbmRleCA4NTM1MGNlLi4zMGE0MGUyIDEwMDY0NAotLS0gYS9tbS92bXByZXNz
-dXJlLmMKKysrIGIvbW0vdm1wcmVzc3VyZS5jCkBAIC0yNTYsNyArMjU2LDcgQEAgdm9pZCB2bXBy
-ZXNzdXJlKGdmcF90IGdmcCwgc3RydWN0IG1lbV9jZ3JvdXAgKm1lbWNnLCBib29sIHRyZWUsCiAJ
-ICogSW5kaXJlY3QgcmVjbGFpbSAoa3N3YXBkKSBzZXRzIHNjLT5nZnBfbWFzayB0byBHRlBfS0VS
-TkVMLCBzbwogCSAqIHdlIGFjY291bnQgaXQgdG9vLgogCSAqLwotCWlmICghKGdmcCAmIChfX0dG
-UF9ISUdITUVNIHwgX19HRlBfTU9WQUJMRSB8IF9fR0ZQX0lPIHwgX19HRlBfRlMpKSkKKwlpZiAo
-IShnZnAgJiAoX19HRlBfWk9ORV9NT1ZBQkxFIHwgX19HRlBfSU8gfCBfX0dGUF9GUykpKQogCQly
-ZXR1cm47CiAKIAkvKgotLSAKMS44LjMuMQoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+--===============6830862178670334141==
+Content-Type: multipart/alternative; boundary="00000000000044137a056d339c37"
+
+--00000000000044137a056d339c37
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+
+
+I am Chaitanya, pursuing my master=E2=80=99s degree from Portland State Uni=
+versity
+in Embedded Systems.
+
+
+
+I have started working on Xen Project and I am beginner in this field.
+
+
+
+I have followed all the steps which are given in this link =E2=80=93
+
+
+
+https://wiki.xenproject.org/wiki/Xen_ARM_with_Virtualization_Extensions/qem=
+u-system-aarch64
+
+
+
+https://wiki.xenproject.org/wiki/Xen_ARM_with_Virtualization_Extensions#Bui=
+lding_Xen_on_ARM
+
+
+1) I have used buildroot(rootfs.cpio) for building Linux.
+
+2) I have succeeded in booting Linux on Qemu (qemu-system-.aarch64)
+
+3) Used make dist-xen XEN_TARGET_ARCH=3Darm64
+CROSS_COMPILE=3Daarch64-linux-gnu-  for cross compiling and getting Xen
+binary.
+
+4) My root is root - root=3D/dev/sda1
+
+
+After running the  last step UEFI Prompt opens and it gives me this error.
+
+
+
+error: no such device: root.
+
+Press any key to continue...
+EFI stub: Booting Linux Kernel...
+EFI stub: Using DTB from configuration table
+EFI stub: Exiting boot services and installing virtual address map...
+[   11.231789] acpi PNP0A08:00: Bus 0000:00 not present in PCI namespace
+[   41.972816] NMI watchdog: BUG: soft lockup - CPU#1 stuck for 23s!
+[swapper/0:1]
+[  229.940369] NMI watchdog: BUG: soft lockup - CPU#0 stuck for 23s!
+[swapper/0:1]
+[  257.939966] NMI watchdog: BUG: soft lockup - CPU#0 stuck for 23s!
+[swapper/0:1]
+[  290.035395] NMI watchdog: BUG: soft lockup - CPU#3 stuck for 23s!
+[swapper/0:1]
+[  303.595373] kvm [1]: error: no compatible GIC node found
+[  303.619405] kvm [1]: error initializing Hyp mode: -19
+
+
+
+
+
+I am unable to find the root cause of this issue. Please can anyone help me
+with this.
+
+
+
+Thanks,
+
+Chaitanya
+
+--00000000000044137a056d339c37
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif">Hi,<span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span>=C2=A0</span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif">I am Chaitanya, pursuing my master=E2=80=99s de=
+gree from Portland
+State University in Embedded Systems.<span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span>=C2=A0</span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif">I have started working on Xen Project and I am =
+beginner in
+this field. <span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span>=C2=A0</span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span>I have followed all the steps which are
+given in this link =E2=80=93 <span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span><span>=C2=A0</span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span><a href=3D"https://wiki.xenproject.org/wi=
+ki/Xen_ARM_with_Virtualization_Extensions/qemu-system-aarch64"><span style=
+=3D"color:rgb(5,99,193)">https://wiki.xenproject.org/wiki/Xen_ARM_with_Virt=
+ualization_Extensions/qemu-system-aarch64</span></a><span></span></span></p=
+>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span><span>=C2=A0</span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span><span style=3D"color:rgb(5,99,193)"><a hr=
+ef=3D"https://wiki.xenproject.org/wiki/Xen_ARM_with_Virtualization_Extensio=
+ns#Building_Xen_on_ARM">https://wiki.xenproject.org/wiki/Xen_ARM_with_Virtu=
+alization_Extensions#Building_Xen_on_ARM</a></span><span></span></span></p>=
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span><br></span></p><p class=3D"MsoNormal" sty=
+le=3D"margin:0in 0in 0.0001pt;font-size:11pt;font-family:Calibri,sans-serif=
+"><span>1) I have used buildroot(rootfs.cpio) for building Linux.</span></p=
+><p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;fon=
+t-family:Calibri,sans-serif">2) I have succeeded in booting Linux on Qemu (=
+qemu-system-.aarch64)</p><p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0=
+001pt;font-size:11pt;font-family:Calibri,sans-serif">3) Used make dist-xen =
+XEN_TARGET_ARCH=3Darm64 CROSS_COMPILE=3Daarch64-linux-gnu-=C2=A0 for cross =
+compiling and getting Xen binary.</p><p class=3D"MsoNormal" style=3D"margin=
+:0in 0in 0.0001pt;font-size:11pt;font-family:Calibri,sans-serif">4) My root=
+ is root - root=3D/dev/sda1</p><p class=3D"MsoNormal" style=3D"margin:0in 0=
+in 0.0001pt;font-size:11pt;font-family:Calibri,sans-serif"><br></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span>After running the =C2=A0last step UEFI
+Prompt opens and it gives me this error.<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span><span>=C2=A0</span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span style=3D"font-size:9.5pt;font-family:Aria=
+l,sans-serif;color:rgb(34,34,34);background:white">error: no such device: r=
+oot.</span><span style=3D"font-size:9.5pt;font-family:Arial,sans-serif;colo=
+r:rgb(34,34,34)"><br>
+<br>
+<span style=3D"background:white">Press any key to continue...</span><br>
+<span style=3D"background:white">EFI stub: Booting Linux Kernel...</span><b=
+r>
+<span style=3D"background:white">EFI stub: Using DTB from configuration tab=
+le</span><br>
+<span style=3D"background:white">EFI stub: Exiting boot services and instal=
+ling
+virtual address map...</span><br>
+<span style=3D"background:white">[=C2=A0=C2=A0 11.231789] acpi PNP0A08:00: =
+Bus
+0000:00 not present in PCI namespace</span><br>
+<span style=3D"background:white">[=C2=A0=C2=A0 41.972816] NMI watchdog: BUG=
+: soft
+lockup - CPU#1 stuck for 23s! [swapper/0:1]</span><br>
+<span style=3D"background:white">[=C2=A0 229.940369] NMI watchdog: BUG: sof=
+t
+lockup - CPU#0 stuck for 23s! [swapper/0:1]</span><br>
+<span style=3D"background:white">[=C2=A0 257.939966] NMI watchdog: BUG: sof=
+t
+lockup - CPU#0 stuck for 23s! [swapper/0:1]</span><br>
+<span style=3D"background:white">[=C2=A0 290.035395] NMI watchdog: BUG: sof=
+t
+lockup - CPU#3 stuck for 23s! [swapper/0:1]</span><br>
+<span style=3D"background:white">[=C2=A0 303.595373] kvm [1]: error: no
+compatible GIC node found</span><br>
+<span style=3D"background:white">[=C2=A0 303.619405] kvm [1]: error initial=
+izing
+Hyp mode: -19<span></span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span style=3D"font-size:9.5pt;font-family:Aria=
+l,sans-serif;color:rgb(34,34,34);background:white"><span>=C2=A0</span></spa=
+n></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span style=3D"font-size:9.5pt;font-family:Aria=
+l,sans-serif;color:rgb(34,34,34);background:white"><span>=C2=A0</span></spa=
+n></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span>I am unable to find the root cause of
+this issue. Please can anyone help me
+with this.<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span><span>=C2=A0</span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span>Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span>Chaitanya<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"margin:0in 0in 0.0001pt;font-size:11pt;font=
+-family:Calibri,sans-serif"><span>=C2=A0</span></p>
+
+
+
+
+
+<br></div>
+
+--00000000000044137a056d339c37--
+
+
+--===============6830862178670334141==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6830862178670334141==--
