@@ -1,19 +1,18 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH for-4.11] tools: set DEBUG_DIR from configure
-Date: Mon, 28 May 2018 08:06:11 +0200
-Message-ID: <20180528060611.GA7595@aepfle.de>
-References: <20180327161344.94634-1-roger.pau@citrix.com>
- <20180525151903.GA21503@aepfle.de>
- <23304.12272.757552.289764@mariner.uk.xensource.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH v2] x86/CPUID: don't override tool stack
+ decision to hide STIBP
+Date: Mon, 28 May 2018 01:08:01 -0600
+Message-ID: <5B0BAAD102000078001C6463@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7302884128194090934=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=bc41=ip=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1fNBIT-0002wn-Ho
- for xen-devel@lists.xenproject.org; Mon, 28 May 2018 06:06:22 +0000
-In-Reply-To: <23304.12272.757552.289764@mariner.uk.xensource.com>
+ (envelope-from <srs0=ns5b=ip=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fNCZg-0000xr-JX
+ for xen-devel@lists.xenproject.org; Mon, 28 May 2018 07:28:12 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,55 +21,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7302884128194090934==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WIyZ46R2i8wDzkSu"
-Content-Disposition: inline
-
-
---WIyZ46R2i8wDzkSu
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Fri, May 25, Ian Jackson wrote:
-
-> Can you please provide that information ?  That should really have
-> been in your commit message, as the git commit id.  TBH, most of what
-> is in that email could profitably have been in your commit message...
-
-Perhaps 641f9ce2fa should have been more verbose.
-
-Do you want me to provide a verbose backport, or would that be against
-the rules of how backporting from master is supposed to be done?
-
-Olaf
-
---WIyZ46R2i8wDzkSu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWwucUAAKCRBdQqD6ppg2
-fuyZAKCGTljvMvbNu+0Sxq2gOkbsFVPypQCg1jBSBhTU2lu77KtIvhqjdrRyx+k=
-=DALi
------END PGP SIGNATURE-----
-
---WIyZ46R2i8wDzkSu--
-
-
---===============7302884128194090934==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7302884128194090934==--
+T3RoZXIgdGhhbiBpbiB0aGUgZmVhdHVyZSBzZXRzLCB3aGVyZSB3ZSBpbmRlZWQgd2FudCB0byBv
+ZmZlciB0aGUKZmVhdHVyZSBldmVuIGlmIG5vdCBlbnVtZXJhdGVkIG9uIGhhcmR3YXJlLCB3ZSBz
+aG91bGRuJ3QgZGljdGF0ZSB0aGUKZmVhdHVyZSBiZWluZyBhdmFpbGFibGUgaWYgdG9vbCBzdGFj
+ayBvciBob3N0IGFkbWluIGhhdmUgZGVjaWRlZCB0byBub3QKZXhwb3NlIGl0IChmb3Igd2hhdGV2
+ZXIgW3F1ZXN0aW9uYWJsZT9dIHJlYXNvbikuIFRoYXQgZmVhdHVyZSBzZXQgc2lkZQpvdmVycmlk
+ZSBpcyBzdWZmaWNpZW50IHRvIGFjaGlldmUgdGhlIGludGVuZGVkIGd1ZXN0IHNpZGUgc2FmZXR5
+CnByb3BlcnR5IChpbiBvZmZlcmluZyAtIGJ5IGRlZmF1bHQgLSBTVElCUCBpbmRlcGVuZGVudCBv
+ZiBhY3R1YWwKYXZhaWxhYmlsaXR5IGluIGhhcmR3YXJlKS4KClNpZ25lZC1vZmYtYnk6IEphbiBC
+ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KLS0tCnYyOiBEcm9wICEgZnJvbSBTVElCUCBmZWF0
+dXJlIGRlY2xhcmF0aW9uLgotLS0KVGhpcyBpcyBlZmZlY3RpdmVseSBhY2NvbXBhbnlpbmcgdGhl
+IGRpc2N1c3Npb24gcm9vdGVkIGF0IHRoZSA0LjgvNC43CnBhdGNoIGF0Cmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOC0wNS9tc2cwMTAyOC5o
+dG1sIApkZWFsaW5nIHdpdGggYSBmZWF0dXJlIGxldmVsaW5nIGlzc3VlLgoKLS0tIGEveGVuL2Fy
+Y2gveDg2L2NwdWlkLmMKKysrIGIveGVuL2FyY2gveDg2L2NwdWlkLmMKQEAgLTY0MiwxNCArNjQy
+LDYgQEAgdm9pZCByZWNhbGN1bGF0ZV9jcHVpZF9wb2xpY3koc3RydWN0IGRvbQogICAgIHJlY2Fs
+Y3VsYXRlX3hzdGF0ZShwKTsKICAgICByZWNhbGN1bGF0ZV9taXNjKHApOwogCi0gICAgLyoKLSAg
+ICAgKiBPdmVycmlkZSBTVElCUCB0byBtYXRjaCBJQlJTLiAgR3Vlc3RzIGNhbiBzYWZlbHkgdXNl
+IFNUSUJQCi0gICAgICogZnVuY3Rpb25hbGl0eSBvbiBub24tSFQgaGFyZHdhcmUsIGJ1dCBjYW4n
+dCBuZWNlc3NlcmlseSBwcm90ZWN0Ci0gICAgICogdGhlbXNlbHZlcyBmcm9tIFNQMi9TcGVjdHJl
+L0JyYW5jaCBUYXJnZXQgSW5qZWN0aW9uIGlmIFNUSUJQIGlzIGhpZGRlbgotICAgICAqIG9uIEhU
+LWNhcGFibGUgaGFyZHdhcmUuCi0gICAgICovCi0gICAgcC0+ZmVhdC5zdGlicCA9IHAtPmZlYXQu
+aWJyc2I7Ci0KICAgICBmb3IgKCBpID0gMDsgaSA8IEFSUkFZX1NJWkUocC0+Y2FjaGUucmF3KTsg
+KytpICkKICAgICB7CiAgICAgICAgIGlmICggcC0+Y2FjaGUuc3VibGVhZltpXS50eXBlID49IDEg
+JiYKLS0tIGEveGVuL2luY2x1ZGUvcHVibGljL2FyY2gteDg2L2NwdWZlYXR1cmVzZXQuaAorKysg
+Yi94ZW4vaW5jbHVkZS9wdWJsaWMvYXJjaC14ODYvY3B1ZmVhdHVyZXNldC5oCkBAIC0yNDMsNyAr
+MjQzLDcgQEAgWEVOX0NQVUZFQVRVUkUoSUJQQiwgICAgICAgICAgOCozMisxMikgLwogWEVOX0NQ
+VUZFQVRVUkUoQVZYNTEyXzRWTk5JVywgOSozMisgMikgLypBICBBVlg1MTIgTmV1cmFsIE5ldHdv
+cmsgSW5zdHJ1Y3Rpb25zICovCiBYRU5fQ1BVRkVBVFVSRShBVlg1MTJfNEZNQVBTLCA5KjMyKyAz
+KSAvKkEgIEFWWDUxMiBNdWx0aXBseSBBY2N1bXVsYXRpb24gU2luZ2xlIFByZWNpc2lvbiAqLwog
+WEVOX0NQVUZFQVRVUkUoSUJSU0IsICAgICAgICAgOSozMisyNikgLypBICBJQlJTIGFuZCBJQlBC
+IHN1cHBvcnQgKHVzZWQgYnkgSW50ZWwpICovCi1YRU5fQ1BVRkVBVFVSRShTVElCUCwgICAgICAg
+ICA5KjMyKzI3KSAvKkEhIFNUSUJQICovCitYRU5fQ1BVRkVBVFVSRShTVElCUCwgICAgICAgICA5
+KjMyKzI3KSAvKkEgIFNUSUJQICovCiBYRU5fQ1BVRkVBVFVSRShBUkNIX0NBUFMsICAgICA5KjMy
+KzI5KSAvKiAgIElBMzJfQVJDSF9DQVBBQklMSVRJRVMgTVNSICovCiBYRU5fQ1BVRkVBVFVSRShT
+U0JELCAgICAgICAgICA5KjMyKzMxKSAvKkEgIE1TUl9TUEVDX0NUUkwuU1NCRCBhdmFpbGFibGUg
+Ki8KIAoKCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
