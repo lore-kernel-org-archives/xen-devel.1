@@ -1,7 +1,7 @@
 From: Juergen Gross <jgross@suse.com>
 Subject: Commit moratorium is lifted
-Date: Mon, 28 May 2018 07:05:09 +0200
-Message-ID: <0c43f0c6-83f5-e5ca-9c60-81ae9974b53a@suse.com>
+Date: Mon, 28 May 2018 16:17:30 +0200
+Message-ID: <b022a7b5-d886-9733-0879-5efad35ab0c3@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -9,8 +9,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=jm/y=ip=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fNKHs-00061r-9q
- for xen-devel@lists.xenproject.org; Mon, 28 May 2018 15:42:20 +0000
+ id 1fNKHq-00061l-Ur
+ for xen-devel@lists.xenproject.org; Mon, 28 May 2018 15:42:18 +0000
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
