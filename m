@@ -1,13 +1,16 @@
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
-Subject: Re: [PATCH v4 00/10] xen/arm64: Suspend preconditions
- and CPU hotplug fixes
-Date: Mon, 28 May 2018 12:15:04 +0200
-Message-ID: <CAKPH-NhQFucKoGg6j84E1tMBDHSvVXSeGto7nQUA3CApBFEoVw@mail.gmail.com>
-References: <20180515114419.7296-1-mirela.simonovic@aggios.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [linux-4.9 test] 123257: regressions - FAIL
+Date: Mon, 28 May 2018 10:18:25 +0000
+Message-ID: <osstest-123257-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7627626492503469751=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180515114419.7296-1-mirela.simonovic@aggios.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=bs1d=ip=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fNFEU-0005rA-Cz
+ for xen-devel@lists.xenproject.org; Mon, 28 May 2018 10:18:30 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,362 +19,362 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen Devel <xen-devel@lists.xen.org>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <george.dunlap@eu.citrix.com>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Mirela Simonovic <mirela.simonovic@aggios.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============7627626492503469751==
-Content-Type: multipart/alternative; boundary="0000000000003161da056d41647e"
-
---0000000000003161da056d41647e
-Content-Type: text/plain; charset="UTF-8"
-
-Hi,
-
-Could you please provide feedback for the remaining patches?
-
-Thanks,
-Mirela
-
-On Tue, May 15, 2018 at 1:44 PM, Mirela Simonovic <
-mirela.simonovic@aggios.com> wrote:
-
-> This patch set contains fixes that are required as precondition for
-> suspend to
-> RAM support, including the CPU hotplug which is required to suspend
-> non-boot
-> CPUs.
-> The first two patches in this series:
-> 1) xen/arm64: Added handling of the trapped access to OSLSR register
-> 2) xen/arm: Ignore write to GICD_ISACTIVERn registers (vgic-v2)
-> are required to avoid Dom0 crashes when Dom0 performs its own suspend. This
-> patch set does not include the implementation of virtual PSCI system
-> suspend
-> call that would allow guests to finalize their suspend procedures. This
-> will
-> be submitted in the following series.
->
-> Remaining of the patches are related to enabling CPU hotplug for non-boot
-> CPUs is resume scenario. CPU hotplug of non-boot CPUs will be used for
-> suspend
-> to RAM support for ARM. In suspend procedure, the hot-unplug of non-boot
-> CPUs
-> will be triggered with disable_nonboot_cpus(), while the hotplug is
-> triggered
-> with enable_nonboot_cpus(). Using these calls, the physical non-boot CPUs
-> could
-> be powered down/up on suspend/resume, respectively, if the underlying
-> firmware
-> allows so. Calls to enable/disable_nonboot_cpus() functions currently do
-> not
-> exist in Xen ARM code. This will be added with the suspend to RAM support
-> for
-> ARM.
->
-> When non-boot pCPUs are hot-unplugged their interrupts are migrated to the
-> boot
-> pCPU. This series also includes a fix that would restore the interrupts
-> affinity
-> once non-boot pCPUs are hotplugged. Here only SPIs used by guests are
-> covered.
-> Migration of Xen internal SPIs is not covered. According to my
-> understanding
-> Xen internal SPIs are routed to the boot CPU which initializes the
-> respective
-> devices. Therefore, there is no need to migrate Xen internal SPIs.
->
-> The code is tested on Xilinx Zynq UltraScale+ MPSoC/ZCU102 board (includes
-> physical power down/up of non-boot CPUs). The testing requires additional
-> patches for issuing system suspend. These patches and instructions for
-> testing
-> will be submitted later, when we get closer to the final version of the
-> series.
->
-> ---
-> Changes in v2:
-> -Rename cover-letter title and emphasize that 2 patches from this series
-> are not
-> specific to CPU hotplug (my initial fault, splitting it now could be
-> confusing)
-> -Fix cover-letter explanations
-> -Address all the issues and comments as discussed on mailing list for v1
-> -Add 3 patches to ensure that suspend/resume does not cause any memory
-> leaks.
-> All the memory allocated when a CPU was hotplugged is now freed when the
-> CPU is
-> hot-unplugged.
-> -Remove from the v1 series the patch which incorrectly dealt with an issue:
-> [PATCH 4/7] xen/arm: When CPU dies, free percpu area immediatelly
-> One solution to the issue addressed by the patch above is to add
-> rcu_barrier()
-> prior to calling enable_nonboot_cpus() during the suspend. This is how it
-> is
-> done in x86 suspend implementation. Until the discussion here
-> https://lists.xenproject.org/archives/html/xen-devel/2018-04/msg01199.html
-> doesn't conclude differently, I need to assume that adding rcu_barrier()
-> prior
-> to calling enable_nonboot_cpus() as it is done for x86 is the right way to
-> go.
-> Therefore, the fix to the issue will be part of the suspend to RAM series.
->
-> Changes in v3:
-> -Add acked-by where needed
-> -Fix CPU_OFF PSCI implementation (physical interface)
-> -Use notifiers to implement freeing memory and releasing interrupts on CPU
-> hotplug
-> -Use notifier to trigger setup of virtual paging for non-boot CPUs on CPU
-> hotplug
-> -Add enabling errata workarounds on CPU hotplug, also based on a notifier
-> -Remove patch:
-> [PATCH v2 10/10] xen/arm: Call check_local_cpu_errata for secondary CPU
-> only on boot
->
-> Changes in v4:
-> -Add acked-by/reviewed-by where needed
-> -Cleanup: use smp_processor_id() instead of get_processor_id(), fixed
->  indentation, add includes alphabetically, add newline before return, etc.
-> -Disable timers prior to releasing timer interrupts
-> -Initialize cpu_smpboot notifier at presmp_init rather than init phase
-> -In the last patch of the series errata notifier now returns an error
->
-> ---
-> CC: Stefano Stabellini <sstabellini@kernel.org>
-> CC: Julien Grall <julien.grall@arm.com>
-> CC: George Dunlap <george.dunlap@eu.citrix.com>
-> CC: Dario Faggioli <dfaggioli@suse.com>
-> ---
->
-> Mirela Simonovic (10):
->   xen/arm64: Added handling of the trapped access to OSLSR register
->   xen/arm: Ignore write to GICD_ISACTIVERn registers (vgic-v2)
->   xen/arm: Implement CPU_OFF PSCI call (physical interface)
->   xen/arm: Remove __initdata and __init to enable CPU hotplug
->   xen/arm: Setup virtual paging for non-boot CPUs on hotplug/resume
->   xen/common: Restore IRQ affinity when hotplugging a pCPU
->   xen/arm: Release maintenance interrupt when CPU is hot-unplugged
->   xen/arm: Disable timers and release their interrupts on CPU hot-unplug
->   xen/arm: Free memory allocated for sibling/core maps on CPU hot-unplug
->   xen/arm: Enable errata for secondary CPU on hotplug after the boot
->
->  xen/arch/arm/arm64/smpboot.c     |  2 +-
->  xen/arch/arm/arm64/vsysreg.c     |  3 ++-
->  xen/arch/arm/cpuerrata.c         | 49 ++++++++++++++++++++++++++++++
-> +++++++
->  xen/arch/arm/cpufeature.c        | 29 ++++++++++++++++++++++
->  xen/arch/arm/gic.c               | 31 +++++++++++++++++++++++
->  xen/arch/arm/irq.c               |  2 +-
->  xen/arch/arm/p2m.c               | 53 ++++++++++++++++++++++++++++++
-> ++++++----
->  xen/arch/arm/processor.c         |  2 +-
->  xen/arch/arm/psci.c              | 13 ++++++++++
->  xen/arch/arm/smpboot.c           | 42 +++++++++++++++++++++++++++++--
->  xen/arch/arm/time.c              | 45 ++++++++++++++++++++++++++++++++++
->  xen/arch/arm/vgic-v2.c           |  2 ++
->  xen/common/schedule.c            |  4 +++
->  xen/include/asm-arm/cpufeature.h |  1 +
->  xen/include/asm-arm/procinfo.h   |  4 +--
->  xen/include/asm-arm/psci.h       |  1 +
->  16 files changed, 270 insertions(+), 13 deletions(-)
->
-> --
-> 2.13.0
->
->
-
---0000000000003161da056d41647e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi,<div><br></div><div>Could you please provide feedback f=
-or the remaining patches?</div><div><br></div><div>Thanks,</div><div>Mirela=
-</div></div><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">On Tu=
-e, May 15, 2018 at 1:44 PM, Mirela Simonovic <span dir=3D"ltr">&lt;<a href=
-=3D"mailto:mirela.simonovic@aggios.com" target=3D"_blank">mirela.simonovic@=
-aggios.com</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" style=
-=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">This pat=
-ch set contains fixes that are required as precondition for suspend to<br>
-RAM support, including the CPU hotplug which is required to suspend non-boo=
-t<br>
-CPUs.<br>
-The first two patches in this series:<br>
-1) xen/arm64: Added handling of the trapped access to OSLSR register<br>
-2) xen/arm: Ignore write to GICD_ISACTIVERn registers (vgic-v2)<br>
-are required to avoid Dom0 crashes when Dom0 performs its own suspend. This=
-<br>
-patch set does not include the implementation of virtual PSCI system suspen=
-d<br>
-call that would allow guests to finalize their suspend procedures. This wil=
-l<br>
-be submitted in the following series.<br>
-<br>
-Remaining of the patches are related to enabling CPU hotplug for non-boot<b=
-r>
-CPUs is resume scenario. CPU hotplug of non-boot CPUs will be used for susp=
-end<br>
-to RAM support for ARM. In suspend procedure, the hot-unplug of non-boot CP=
-Us<br>
-will be triggered with disable_nonboot_cpus(), while the hotplug is trigger=
-ed<br>
-with enable_nonboot_cpus(). Using these calls, the physical non-boot CPUs c=
-ould<br>
-be powered down/up on suspend/resume, respectively, if the underlying firmw=
-are<br>
-allows so. Calls to enable/disable_nonboot_cpus() functions currently do no=
-t<br>
-exist in Xen ARM code. This will be added with the suspend to RAM support f=
-or<br>
-ARM.<br>
-<br>
-When non-boot pCPUs are hot-unplugged their interrupts are migrated to the =
-boot<br>
-pCPU. This series also includes a fix that would restore the interrupts aff=
-inity<br>
-once non-boot pCPUs are hotplugged. Here only SPIs used by guests are cover=
-ed.<br>
-Migration of Xen internal SPIs is not covered. According to my understandin=
-g<br>
-Xen internal SPIs are routed to the boot CPU which initializes the respecti=
-ve<br>
-devices. Therefore, there is no need to migrate Xen internal SPIs.<br>
-<br>
-The code is tested on Xilinx Zynq UltraScale+ MPSoC/ZCU102 board (includes<=
-br>
-physical power down/up of non-boot CPUs). The testing requires additional<b=
-r>
-patches for issuing system suspend. These patches and instructions for test=
-ing<br>
-will be submitted later, when we get closer to the final version of the ser=
-ies.<br>
-<br>
----<br>
-Changes in v2:<br>
--Rename cover-letter title and emphasize that 2 patches from this series ar=
-e not<br>
-specific to CPU hotplug (my initial fault, splitting it now could be confus=
-ing)<br>
--Fix cover-letter explanations<br>
--Address all the issues and comments as discussed on mailing list for v1<br=
->
--Add 3 patches to ensure that suspend/resume does not cause any memory leak=
-s.<br>
-All the memory allocated when a CPU was hotplugged is now freed when the CP=
-U is<br>
-hot-unplugged.<br>
--Remove from the v1 series the patch which incorrectly dealt with an issue:=
-<br>
-[PATCH 4/7] xen/arm: When CPU dies, free percpu area immediatelly<br>
-One solution to the issue addressed by the patch above is to add rcu_barrie=
-r()<br>
-prior to calling enable_nonboot_cpus() during the suspend. This is how it i=
-s<br>
-done in x86 suspend implementation. Until the discussion here<br>
-<a href=3D"https://lists.xenproject.org/archives/html/xen-devel/2018-04/msg=
-01199.html" rel=3D"noreferrer" target=3D"_blank">https://lists.xenproject.o=
-rg/<wbr>archives/html/xen-devel/2018-<wbr>04/msg01199.html</a><br>
-doesn&#39;t conclude differently, I need to assume that adding rcu_barrier(=
-) prior<br>
-to calling enable_nonboot_cpus() as it is done for x86 is the right way to =
-go.<br>
-Therefore, the fix to the issue will be part of the suspend to RAM series.<=
-br>
-<br>
-Changes in v3:<br>
--Add acked-by where needed<br>
--Fix CPU_OFF PSCI implementation (physical interface)<br>
--Use notifiers to implement freeing memory and releasing interrupts on CPU<=
-br>
-hotplug<br>
--Use notifier to trigger setup of virtual paging for non-boot CPUs on CPU<b=
-r>
-hotplug<br>
--Add enabling errata workarounds on CPU hotplug, also based on a notifier<b=
-r>
--Remove patch:<br>
-[PATCH v2 10/10] xen/arm: Call check_local_cpu_errata for secondary CPU onl=
-y on boot<br>
-<br>
-Changes in v4:<br>
--Add acked-by/reviewed-by where needed<br>
--Cleanup: use smp_processor_id() instead of get_processor_id(), fixed<br>
-=C2=A0indentation, add includes alphabetically, add newline before return, =
-etc.<br>
--Disable timers prior to releasing timer interrupts<br>
--Initialize cpu_smpboot notifier at presmp_init rather than init phase<br>
--In the last patch of the series errata notifier now returns an error<br>
-<br>
----<br>
-CC: Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org">sstabe=
-llini@kernel.org</a>&gt;<br>
-CC: Julien Grall &lt;<a href=3D"mailto:julien.grall@arm.com">julien.grall@a=
-rm.com</a>&gt;<br>
-CC: George Dunlap &lt;<a href=3D"mailto:george.dunlap@eu.citrix.com">george=
-.dunlap@eu.citrix.com</a>&gt;<br>
-CC: Dario Faggioli &lt;<a href=3D"mailto:dfaggioli@suse.com">dfaggioli@suse=
-.com</a>&gt;<br>
----<br>
-<br>
-Mirela Simonovic (10):<br>
-=C2=A0 xen/arm64: Added handling of the trapped access to OSLSR register<br=
->
-=C2=A0 xen/arm: Ignore write to GICD_ISACTIVERn registers (vgic-v2)<br>
-=C2=A0 xen/arm: Implement CPU_OFF PSCI call (physical interface)<br>
-=C2=A0 xen/arm: Remove __initdata and __init to enable CPU hotplug<br>
-=C2=A0 xen/arm: Setup virtual paging for non-boot CPUs on hotplug/resume<br=
->
-=C2=A0 xen/common: Restore IRQ affinity when hotplugging a pCPU<br>
-=C2=A0 xen/arm: Release maintenance interrupt when CPU is hot-unplugged<br>
-=C2=A0 xen/arm: Disable timers and release their interrupts on CPU hot-unpl=
-ug<br>
-=C2=A0 xen/arm: Free memory allocated for sibling/core maps on CPU hot-unpl=
-ug<br>
-=C2=A0 xen/arm: Enable errata for secondary CPU on hotplug after the boot<b=
-r>
-<br>
-=C2=A0xen/arch/arm/arm64/smpboot.c=C2=A0 =C2=A0 =C2=A0|=C2=A0 2 +-<br>
-=C2=A0xen/arch/arm/arm64/vsysreg.c=C2=A0 =C2=A0 =C2=A0|=C2=A0 3 ++-<br>
-=C2=A0xen/arch/arm/cpuerrata.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 49 ++++++=
-++++++++++++++++++++++++<wbr>+++++++<br>
-=C2=A0xen/arch/arm/cpufeature.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 29 +++++++++++=
-+++++++++++<br>
-=C2=A0xen/arch/arm/gic.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0| 31 +++++++++++++++++++++++<br>
-=C2=A0xen/arch/arm/irq.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0|=C2=A0 2 +-<br>
-=C2=A0xen/arch/arm/p2m.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0| 53 ++++++++++++++++++++++++++++++<wbr>++++++----<br>
-=C2=A0xen/arch/arm/processor.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 2 +=
--<br>
-=C2=A0xen/arch/arm/psci.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
- 13 ++++++++++<br>
-=C2=A0xen/arch/arm/smpboot.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 42 +=
-++++++++++++++++++++++++++++-<wbr>-<br>
-=C2=A0xen/arch/arm/time.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
- 45 ++++++++++++++++++++++++++++++<wbr>++++<br>
-=C2=A0xen/arch/arm/vgic-v2.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
-=A0 2 ++<br>
-=C2=A0xen/common/schedule.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
-=A0 4 +++<br>
-=C2=A0xen/include/asm-arm/<wbr>cpufeature.h |=C2=A0 1 +<br>
-=C2=A0xen/include/asm-arm/procinfo.h=C2=A0 =C2=A0|=C2=A0 4 +--<br>
-=C2=A0xen/include/asm-arm/psci.h=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 1 +<br>
-=C2=A016 files changed, 270 insertions(+), 13 deletions(-)<br>
-<span class=3D"HOEnZb"><font color=3D"#888888"><br>
--- <br>
-2.13.0<br>
-<br>
-</font></span></blockquote></div><br></div>
-
---0000000000003161da056d41647e--
-
-
---===============7627626492503469751==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7627626492503469751==--
+ZmxpZ2h0IDEyMzI1NyBsaW51eC00LjkgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVzdC1sYWIu
+eGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMzI1Ny8KClJlZ3Jlc3Npb25zIDotKAoKVGVz
+dHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0
+cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAg
+NiB4ZW4taW5zdGFsbCAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFy
+bTY0LWFybTY0LXhsLXhzbSAgICAgICA2IHhlbi1pbnN0YWxsICAgICAgICAgICAgICBmYWlsIFJF
+R1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWNvdzIgICAgIDcgeGVuLWJvb3Qg
+ICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC1x
+ZW11dS1uZXN0ZWQtYW1kICA3IHhlbi1ib290ICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIy
+OTY5CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAgNyB4ZW4tYm9vdCAgICAgICAgICAg
+ICAgICBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQtcHlncnViICAgICAg
+IDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjk2OQogdGVzdC1h
+bWQ2NC1hbWQ2NC14bC14c20gICAgICAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBS
+RUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgIDEwIHhlbi1ib290
+L3NyY19ob3N0ICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQt
+cGFpciAgICAgICAgMTEgeGVuLWJvb3QvZHN0X2hvc3QgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEy
+Mjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC14bCAgICAgICAgICAgNyB4ZW4tYm9vdCAgICAgICAgICAg
+ICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRl
+Ymlhbmh2bS1hbWQ2NC14c20gNyB4ZW4tYm9vdCBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKIHRlc3Qt
+YW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1ICA3IHhlbi1ib290ICAgICAgICAgICAgICAgIGZhaWwg
+UkVHUi4gdnMuIDEyMjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2
+bS1hbWQ2NC14c20gNyB4ZW4tYm9vdCBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKClRlc3RzIHdoaWNo
+IGFyZSBmYWlsaW5nIGludGVybWl0dGVudGx5IChub3QgYmxvY2tpbmcpOgogdGVzdC1hcm1oZi1h
+cm1oZi14bC1hcm5kYWxlICAgNyB4ZW4tYm9vdCAgICAgICAgIGZhaWwgaW4gMTIzMjA5IHBhc3Mg
+aW4gMTIzMjU3CiB0ZXN0LWFtZDY0LWFtZDY0LWV4YW1pbmUgICAgICA4IHJlYm9vdCAgICAgICAg
+ICAgICAgICAgICAgIGZhaWwgcGFzcyBpbiAxMjMyMDkKClJlZ3Jlc3Npb25zIHdoaWNoIGFyZSBy
+ZWdhcmRlZCBhcyBhbGxvd2FibGUgKG5vdCBibG9ja2luZyk6CiB0ZXN0LWFtZDY0LWFtZDY0LXhs
+LXJ0ZHMgICAgICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjI5
+NjkKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0
+ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAg
+ICAgIGZhaWwgbGlrZSAxMjI5NjkKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW43LWFtZDY0
+IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDEyMjk2OQogdGVzdC1hbWQ2NC1h
+bWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxp
+a2UgMTIyOTY5CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1z
+dG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
+dXUtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyMjk2OQog
+dGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1pbnRlbCAxMiBndWVzdC1zdGFydCAgICAgICAgICAg
+ICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgIDEzIG1p
+Z3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
+aTM4Ni14bC1wdnNoaW0gICAgMTIgZ3Vlc3Qtc3RhcnQgICAgICAgICAgICAgICAgICBmYWlsICAg
+bmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBv
+cnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmly
+dC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MK
+IHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAg
+ICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAxMyBt
+aWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0
+LWFybTY0LXhsLWNyZWRpdDIgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAg
+IG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgMTMgbWlncmF0ZS1zdXBw
+b3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1h
+cm5kYWxlICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNz
+CiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1p
+Z3JhdGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGli
+dmlydC12aGQgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFz
+cwogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVj
+ayAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWN1YmlldHJ1Y2sg
+MTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYXJt
+aGYtYXJtaGYteGwtcnRkcyAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWls
+ICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1
+cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhs
+LXJ0ZHMgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBh
+c3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1j
+aGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAx
+MyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
+bWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFp
+bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1IDEzIG1pZ3JhdGUt
+c3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1s
+aWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBw
+YXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQt
+Y2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1
+IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1h
+cm1oZi1hcm1oZi14bC14c20gICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZh
+aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0
+b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYt
+eGwtY3JlZGl0MiAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIg
+cGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQyICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0
+LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdz
+MTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3Qt
+YW1kNjQtaTM4Ni14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAg
+IGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcg
+Z3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
+LXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJh
+dyAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
+LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3IDEzIHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
+ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgMTIgbWlncmF0
+ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1o
+Zi14bC12aGQgICAgICAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZl
+ciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93cy1p
+bnN0YWxsICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
+d2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVz
+dC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAg
+ICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAx
+MCB3aW5kb3dzLWluc3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0
+ZWQgZm9yIHRlc3Rpbmc6CiBsaW51eCAgICAgICAgICAgICAgICBhYTRiNGFjZTljZTAyY2YxNjRl
+MDk4MjczOWU5NTY1ZDYyMTRjZmE5CmJhc2VsaW5lIHZlcnNpb246CiBsaW51eCAgICAgICAgICAg
+ICAgICA2YmE4OWI1MmJhNjkxNmJjN2EzZDM5MGQ3MDk1MWU5OTJjMGNhMzllCgpMYXN0IHRlc3Qg
+b2YgYmFzaXMgICAxMjI5NjkgIDIwMTgtMDUtMTkgMTY6Mzk6NTkgWiAgICA4IGRheXMKRmFpbGlu
+ZyBzaW5jZSAgICAgICAgMTIzMDc0ICAyMDE4LTA1LTIyIDE3OjEwOjA4IFogICAgNSBkYXlzICAg
+IDQgYXR0ZW1wdHMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTIzMjA5ICAyMDE4LTA1LTI2IDA2OjIy
+OjQ0IFogICAgMiBkYXlzICAgIDIgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2
+aXNpb25zIHVuZGVyIHRlc3Q6CiAgQWwgVmlybyA8dmlyb0B6ZW5pdi5saW51eC5vcmcudWs+CiAg
+QWxhbiBTdGVybiA8c3Rlcm5Acm93bGFuZC5oYXJ2YXJkLmVkdT4KICBBbGV4YW5kZXIgTW9uYWtv
+diA8YW1vbmFrb3ZAaXNwcmFzLnJ1PgogIEFsZXhhbmRlciBQb3RhcGVua28gPGdsaWRlckBnb29n
+bGUuY29tPgogIEFsZXhhbmRyZSBCZWxsb25pIDxhbGV4YW5kcmUuYmVsbG9uaUBib290bGluLmNv
+bT4KICBBbmFuZCBKYWluIDxhbmFuZC5qYWluQG9yYWNsZS5jb20+CiAgQW5kcmUgUHJ6eXdhcmEg
+PGFuZHJlLnByenl3YXJhQGFybS5jb20+CiAgQW5kcmV3IE1vcnRvbiA8YWtwbUBsaW51eC1mb3Vu
+ZGF0aW9uLm9yZz4KICBBbmRyemVqIEhhamRhIDxhLmhhamRhQHNhbXN1bmcuY29tPgogIEFuZHkg
+U2hldmNoZW5rbyA8YW5kcml5LnNoZXZjaGVua29AbGludXguaW50ZWwuY29tPgogIEFyZCBCaWVz
+aGV1dmVsIDxhcmQuYmllc2hldXZlbEBsaW5hcm8ub3JnPgogIEFybmQgQmVyZ21hbm4gPGFybmRA
+YXJuZGIuZGU+CiAgQXN1dG9zaCBEYXMgPGFzdXRvc2hkQGNvZGVhdXJvcmEub3JnPgogIEJhb3F1
+YW4gSGUgPGJoZUByZWRoYXQuY29tPgogIEJhcnQgVmFuIEFzc2NoZSA8YmFydC52YW5hc3NjaGVA
+d2RjLmNvbT4KICBCZW4gR2FyZG5lciA8Z2FyZG5lci5iZW5AZ21haWwuY29tPgogIEJlbmphbWlu
+IEhlcnJlbnNjaG1pZHQgPGJlbmhAa2VybmVsLmNyYXNoaW5nLm9yZz4KICBCb3Jpc2xhdiBQZXRr
+b3YgPGJwQHN1c2UuZGU+CiAgQnJhZCBMb3ZlIDxicmFkQG5leHRkaW1lbnNpb24uY2M+CiAgQnJp
+YW4gTm9ycmlzIDxicmlhbm5vcnJpc0BjaHJvbWl1bS5vcmc+CiAgQnJ5YW4gTydEb25vZ2h1ZSA8
+cHVyZS5sb2dpY0BuZXh1cy1zb2Z0d2FyZS5pZT4KICBDaGFkIER1cHVpcyA8Y2hhZC5kdXB1aXNA
+Y2F2aXVtLmNvbT4KICBDaGFud29vIENob2kgPGN3MDAuY2hvaUBzYW1zdW5nLmNvbT4KICBDaHJp
+cyBEaWNrZW5zIDxjaHJpc3RvcGhlci5hLmRpY2tlbnNAZ21haWwuY29tPgogIENocmlzdG9mZmVy
+IERhbGwgPGNocmlzdG9mZmVyLmRhbGxAYXJtLmNvbT4KICBDb2xpbiBJYW4gS2luZyA8Y29saW4u
+a2luZ0BjYW5vbmljYWwuY29tPgogIERhbiBDYXJwZW50ZXIgPGRhbi5jYXJwZW50ZXJAb3JhY2xl
+LmNvbT4KICBEYXZlIENhcnJvbGwgPGRhdmlkLmNhcnJvbGxAbWljcm9zZW1pLmNvbT4KICBEYXZl
+IEhhbnNlbiA8ZGF2ZS5oYW5zZW5AbGludXguaW50ZWwuY29tPgogIERhdmlkIFMuIE1pbGxlciA8
+ZGF2ZW1AZGF2ZW1sb2Z0Lm5ldD4KICBEYXZpZCBTdGVyYmEgPGRzdGVyYmFAc3VzZS5jb20+CiAg
+RGF2aWQgV29vZGhvdXNlIDxkd213QGFtYXpvbi5jby51az4KICBEZXh1YW4gQ3VpIDxkZWN1aUBt
+aWNyb3NvZnQuY29tPgogIERpY2sgS2VubmVkeSA8ZGljay5rZW5uZWR5QGJyb2FkY29tLmNvbT4K
+ICBEb21pbmlrIEJvemVrIDxkb21pbmlreC5ib3pla0BpbnRlbC5jb20+CiAgRG91Z2xhcyBHaWxi
+ZXJ0IDxkZ2lsYmVydEBpbnRlcmxvZy5jb20+CiAgRXJpYyBEdW1hemV0IDxlZHVtYXpldEBnb29n
+bGUuY29tPgogIEZlZGVyaWNvIEN1ZWxsbyA8ZmVkdXhAZmVkdXguY29tLmFyPgogIEZlbGlwZSBC
+YWxiaSA8ZmVsaXBlLmJhbGJpQGxpbnV4LmludGVsLmNvbT4KICBGaWxpcGUgTWFuYW5hIDxmZG1h
+bmFuYUBzdXNlLmNvbT4KICBGbG9yaWFuIFdlc3RwaGFsIDxmd0BzdHJsZW4uZGU+CiAgRnJlZHJp
+ayBOb3JpbmcgPG5vcmluZ0Bub2NyZXcub3JnPgogIEdlZXJ0IFV5dHRlcmhvZXZlbiA8Z2VlcnQr
+cmVuZXNhc0BnbGlkZXIuYmU+CiAgR2l1c2VwcGUgTGlwcG9saXMgPGdpdS5saXBwb2xpc0BnbWFp
+bC5jb20+CiAgR3JlZyBLcm9haC1IYXJ0bWFuIDxncmVna2hAbGludXhmb3VuZGF0aW9uLm9yZz4K
+ICBHcmlnb3IgVG92bWFzeWFuIDxHcmlnb3IuVG92bWFzeWFuQHN5bm9wc3lzLmNvbT4KICBHcmln
+b3IgVG92bWFzeWFuIDx0b3ZtYXN5YUBzeW5vcHN5cy5jb20+CiAgSGFubmVzIFJlaW5lY2tlIDxo
+YXJlQHN1c2UuY29tPgogIEhhbm5lcyBSZWluZWNrZSA8aGFyZUBzdXNlLmRlPgogIEhhbnMgZGUg
+R29lZGUgPGhkZWdvZWRlQHJlZGhhdC5jb20+CiAgSGFucyBWZXJrdWlsIDxoYW5zLnZlcmt1aWxA
+Y2lzY28uY29tPgogIEhhbnMgVmVya3VpbCA8aHZlcmt1aWxAeHM0YWxsLm5sPgogIEhlaWtvIFN0
+dWVibmVyIDxoZWlrb0BzbnRlY2guZGU+CiAgSGVuZHJpayBCcnVlY2tuZXIgPGJydWVja25lckBs
+aW51eC5pYm0uY29tPgogIEhlcmJlcnQgWHUgPGhlcmJlcnRAZ29uZG9yLmFwYW5hLm9yZy5hdT4K
+ICBIaW1hbnNodSBNYWRoYW5pIDxoaW1hbnNodS5tYWRoYW5pQGNhdml1bS5jb20+CiAgSG9uIFdl
+bmcgQ2hvbmcgPGhvbndjaG9uZ0BnbWFpbC5jb20+CiAgaHByZWdAdm13YXJlLmNvbSA8aHByZWdA
+dm13YXJlLmNvbT4KICBJbmdvIE1vbG5hciA8bWluZ29Aa2VybmVsLm9yZz4KICBKYW1lcyBTbWFy
+dCA8amFtZXMuc21hcnRAYnJvYWRjb20uY29tPgogIEphbWVzIFNtYXJ0IDxqc21hcnQyMDIxQGdt
+YWlsLmNvbT4KICBKYXJra28gTmlrdWxhIDxqYXJra28ubmlrdWxhQGxpbnV4LmludGVsLmNvbT4K
+ICBKYXNvbiBZYW4gPHlhbmFpamllQGh1YXdlaS5jb20+CiAgSmVucyBSZW11cyA8anJlbXVzQGxp
+bnV4LmlibS5jb20+CiAgSmVyZW15IENsaW5lIDxqZXJlbXlAamNsaW5lLm9yZz4KICBKZXJvbWUg
+QnJ1bmV0IDxqYnJ1bmV0QGJheWxpYnJlLmNvbT4KICBKaW0gTWF0dHNvbiA8am1hdHRzb25AZ29v
+Z2xlLmNvbT4KICBKaXJpIEtvc2luYSA8amtvc2luYUBzdXNlLmN6PgogIEpvaGFubmVzIEJlcmcg
+PGpvaGFubmVzLmJlcmdAaW50ZWwuY29tPgogIEpvaG4gS2VlcGluZyA8am9obkBtZXRhbmF0ZS5j
+b20+CiAgSm9obiBZb3VuIDxqb2hueW91bkBzeW5vcHN5cy5jb20+CiAgSm9uIEh1bnRlciA8am9u
+YXRoYW5oQG52aWRpYS5jb20+CiAgSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgogIEp1
+bGlhbiBXaWVkbWFubiA8andpQGxpbnV4LmlibS5jb20+CiAgSsO2cmcgT3R0ZSA8anJnLm90dGVA
+Z21haWwuY29tPgogIEsuIFkuIFNyaW5pdmFzYW4gPGt5c0BtaWNyb3NvZnQuY29tPgogIEthbWFs
+IERhc3UgPGtkYXN1LmtkZXZAZ21haWwuY29tPgogIEtlZXMgQ29vayA8a2Vlc2Nvb2tAY2hyb21p
+dW0ub3JnPgogIEtvbnJhZCBSemVzenV0ZWsgV2lsayA8a29ucmFkLndpbGtAb3JhY2xlLmNvbT4K
+ICBLcnp5c3p0b2YgS296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+CiAgS3VwcHVzd2FteSBTYXRo
+eWFuYXJheWFuYW4gPHNhdGh5YW5hcmF5YW5hbi5rdXBwdXN3YW15QGxpbnV4LmludGVsLmNvbT4K
+ICBLeWxlIEh1ZXkgPGtodWV5QGt5bGVodWV5LmNvbT4KICBLeWxlIEh1ZXkgPG1lQGt5bGVodWV5
+LmNvbT4KICBMYXJyeSBGaW5nZXIgPExhcnJ5LkZpbmdlckBsd2Zpbmdlci5uZXQ+CiAgTGFycy1Q
+ZXRlciBDbGF1c2VuIDxsYXJzQG1ldGFmb28uZGU+CiAgTGF1cmVuY2UgT2Jlcm1hbiA8bG9iZXJt
+YW5AcmVkaGF0LmNvbT4KICBMaW51cyBUb3J2YWxkcyA8dG9ydmFsZHNAbGludXgtZm91bmRhdGlv
+bi5vcmc+CiAgTGl1IEJvIDxiby5saXVAbGludXguYWxpYmFiYS5jb20+CiAgTWFuaXNoIFJhbmdh
+bmthciA8bWFuaXNoLnJhbmdhbmthckBjYXZpdW0uY29tPgogIE1hbnUgR2F1dGFtIDxtZ2F1dGFt
+QGNvZGVhdXJvcmEub3JnPgogIE1hcmNlbCBIb2x0bWFubiA8bWFyY2VsQGhvbHRtYW5uLm9yZz4K
+ICBNYXJjZWwgWmlzd2lsZXIgPG1hcmNlbC56aXN3aWxlckB0b3JhZGV4LmNvbT4KICBNYXJjZWwg
+Wmlzd2lsZXIgPG1hcmNlbEB6aXN3aWxlci5jb20+CiAgTWFyayBCcm93biA8YnJvb25pZUBrZXJu
+ZWwub3JnPgogIE1hcnRpbiBLLiBQZXRlcnNlbiA8bWFydGluLnBldGVyc2VuQG9yYWNsZS5jb20+
+CiAgTWFydGluIFNjaHdpZGVmc2t5IDxzY2h3aWRlZnNreUBkZS5pYm0uY29tPgogIE1hc2FtaSBI
+aXJhbWF0c3UgPG1oaXJhbWF0QGtlcm5lbC5vcmc+CiAgTWF0aGlhcyBOeW1hbiA8bWF0aGlhcy5u
+eW1hbkBsaW51eC5pbnRlbC5jb20+CiAgTWF0dGhldyBXaWxjb3ggPG1hd2lsY294QG1pY3Jvc29m
+dC5jb20+CiAgTWF1cm8gQ2FydmFsaG8gQ2hlaGFiIDxtY2hlaGFiQHMtb3BlbnNvdXJjZS5jb20+
+CiAgTWVlbGlzIFJvb3MgPG1yb29zQGxpbnV4LmVlPgogIE1lbCBHb3JtYW4gPG1nb3JtYW5Ac3Vz
+ZS5kZT4KICBNaWNoYWVsIEVsbGVybWFuIDxtcGVAZWxsZXJtYW4uaWQuYXU+CiAgTWljaGFlbCBL
+ZWxsZXkgKEVPU0cpIDxNaWNoYWVsLkguS2VsbGV5QG1pY3Jvc29mdC5jb20+CiAgTWljaGFlbCBL
+ZWxsZXkgPG1pa2VsbGV5QG1pY3Jvc29mdC5jb20+CiAgTWljaGFsIEhvY2tvIDxtaG9ja29Ac3Vz
+ZS5jb20+CiAgTWljaGFsIFN1Y2hhbmVrIDxtc3VjaGFuZWtAc3VzZS5kZT4KICBNaW5hcyBIYXJ1
+dHl1bnlhbiA8aG1pbmFzQHN5bm9wc3lzLmNvbT4KICBOZWFsIENhcmR3ZWxsIDxuY2FyZHdlbGxA
+Z29vZ2xlLmNvbT4KICBOZWlsQnJvd24gPG5laWxiQHN1c2UuY29tPgogIE5pY2hvbGFzIFBpZ2dp
+biA8bnBpZ2dpbkBnbWFpbC5jb20+CiAgTmlrb2xheSBCb3Jpc292IDxuYm9yaXNvdkBzdXNlLmNv
+bT4KICBOb2J1dGFrYSBPa2FiZSA8bm9iNzc0MTNAZ21haWwuY29tPgogIE9sZWcgTmVzdGVyb3Yg
+PG9sZWdAcmVkaGF0LmNvbT4KICBPbGl2ZXIgTmV1a3VtIDxvbmV1a3VtQHN1c2UuY29tPgogIFBh
+YmxvIE5laXJhIEF5dXNvIDxwYWJsb0BuZXRmaWx0ZXIub3JnPgogIFBhb2xvIEJvbnppbmkgPHBi
+b256aW5pQHJlZGhhdC5jb20+CiAgUGF2ZWwgVGF0YXNoaW4gPHBhc2hhLnRhdGFzaGluQG9yYWNs
+ZS5jb20+CiAgUGV0ZXIgUm9iaW5zb24gPHBicm9iaW5zb25AZ21haWwuY29tPgogIFJhbmphbmkg
+U3JpZGhhcmFuIDxyYW5qYW5pLnNyaWRoYXJhbkBsaW51eC5pbnRlbC5jb20+CiAgUmVnaXMgRHVj
+aGVzbmUgPGhwcmVnQHZtd2FyZS5jb20+CiAgUm9nZXIgUXVhZHJvcyA8cm9nZXJxQHRpLmNvbT4K
+ICBSb25hayBEb3NoaSA8ZG9zaGlyQHZtd2FyZS5jb20+CiAgUnVzc2VsbCBLaW5nIDxybWsra2Vy
+bmVsQGFybWxpbnV4Lm9yZy51az4KICBTYWthcmkgQWlsdXMgPHNha2FyaS5haWx1c0BsaW51eC5p
+bnRlbC5jb20+CiAgU2FzaGEgTGV2aW4gPGFsZXhhbmRlci5sZXZpbkBtaWNyb3NvZnQuY29tPgog
+IFNoYXduIEd1byA8c2hhd24uZ3VvQGxpbmFyby5vcmc+CiAgU2hhd24gTGluIDxzaGF3bi5saW5A
+cm9jay1jaGlwcy5jb20+CiAgU2h1YWggS2hhbiAoU2Ftc3VuZyBPU0cpIDxzaHVhaEBrZXJuZWwu
+b3JnPgogIFNodWFoIEtoYW4gPHNodWFoa2hAb3NnLnNhbXN1bmcuY29tPgogIFNyZWVrYW50aCBS
+ZWRkeSA8U3JlZWthbnRoLlJlZGR5QGJyb2FkY29tLmNvbT4KICBTdGVmYW4gQWduZXIgPHN0ZWZh
+bkBhZ25lci5jaD4KICBTdGVmZmVuIE1haWVyIDxtYWllckBsaW51eC5pYm0uY29tPgogIFN0ZXBo
+ZW4gQm95ZCA8c2JveWRAa2VybmVsLm9yZz4KICBTdGV2ZW4gUm9zdGVkdCAoVk13YXJlKSA8cm9z
+dGVkdEBnb29kbWlzLm9yZz4KICBTdWJoYXNoIEphZGF2YW5pIDxzdWJoYXNoakBjb2RlYXVyb3Jh
+Lm9yZz4KICBTdWppdCBSZWRkeSBUaHVtbWEgPHN0aHVtbWFAY29kZWF1cm9yYS5vcmc+CiAgU3ls
+d2VzdGVyIE5hd3JvY2tpIDxzLm5hd3JvY2tpQHNhbXN1bmcuY29tPgogIFRha2FzaGkgSXdhaSA8
+dGl3YWlAc3VzZS5kZT4KICBUYXJpY2sgQmVkZWlyIDx0YXJpY2tAZ29vZ2xlLmNvbT4KICBUZXRz
+dW8gSGFuZGEgPHBlbmd1aW4ta2VybmVsQEktbG92ZS5TQUtVUkEubmUuanA+CiAgVGhpZXJyeSBS
+ZWRpbmcgPHRyZWRpbmdAbnZpZGlhLmNvbT4KICBUaGluaCBOZ3V5ZW4gPFRoaW5oLk5ndXllbkBz
+eW5vcHN5cy5jb20+CiAgVGhpbmggTmd1eWVuIDx0aGluaG5Ac3lub3BzeXMuY29tPgogIFRob21h
+cyBHbGVpeG5lciA8dGdseEBsaW51dHJvbml4LmRlPgogIFRvbSBMZW5kYWNreSA8dGhvbWFzLmxl
+bmRhY2t5QGFtZC5jb20+CiAgVG9tYXN6IEZpZ2EgPHRvbWFzei5maWdhQGdtYWlsLmNvbT4KICBU
+b3JzdGVuIEhpbGJyaWNoIDx0b3JzdGVuLmhpbGJyaWNoQHNlY3VuZXQuY29tPgogIFZhcmRhbiBN
+aWtheWVseWFuIDxtdmFyZGFuQHN5bm9wc3lzLmNvbT4KICBWaWNlbnRlIEJlcmdhcyA8dmljZW5j
+YkBnbWFpbC5jb20+CiAgVmlnbmVzaCBSIDx2aWduZXNockB0aS5jb20+CiAgV2FpbWFuIExvbmcg
+PFdhaW1hbi5Mb25nQGhwZS5jb20+CiAgV2Vud2VuIFdhbmcgPHdhbmc2NDk1QHVtbi5lZHU+CiAg
+V2lsZnJpZWQgV2Vpc3NtYW5uIDx3aWxmcmllZC53ZWlzc21hbm5AZ214LmF0PgogIFdpbGxlbSBk
+ZSBCcnVpam4gPHdpbGxlbWJAZ29vZ2xlLmNvbT4KICBXb2xmcmFtIFNhbmcgPHdzYStyZW5lc2Fz
+QHNhbmctZW5naW5lZXJpbmcuY29tPgogIFdvbGZyYW0gU2FuZyA8d3NhQHRoZS1kcmVhbXMuZGU+
+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXhzbSAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
+aTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1p
+Mzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1saWJ2aXJ0ICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
+ODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4
+Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiBidWlsZC1hbWQ2NC1ydW1wcnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bCAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybTY0
+LWFybTY0LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0
+LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
+aTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAg
+ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0t
+YW1kNjQteHNtICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
+ZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1p
+Mzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAg
+ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2
+bS1hbWQ2NC14c20gICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhz
+bSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFy
+bTY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
+IHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXhzbSAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtNjQtYXJt
+NjQteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
+dGVzdC1hcm1oZi1hcm1oZi14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwteHNtICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVk
+LWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2
+NC14bC1wdmh2Mi1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0
+ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhlbDZodm0tYW1kICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1hbWQgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1kZWJp
+YW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYt
+eGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
+c3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAg
+ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAg
+ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWFtZDY0
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
+eGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
+dC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAg
+IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXJ1bXBydW4tYW1kNjQgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1h
+bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
+LXFlbXV0LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
+LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAg
+ZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAg
+ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFt
+ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwt
+cWVtdXQtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
+YW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBm
+YWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
+Y3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
+cm02NC1hcm02NC14bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1leGFt
+aW5lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFy
+bTY0LWFybTY0LWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtZXhhbWluZSAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWV4YW1pbmUgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJz
+ZDEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
+NjQtaTM4Ni1ydW1wcnVuLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAg
+ICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAg
+ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
+dXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2
+NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwg
+ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItaW50ZWwgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV0LXJo
+ZWw2aHZtLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
+LWkzODYtcWVtdXUtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
+YW1kNjQteGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
+IAogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
+bWQ2NC1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZncnViICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1
+YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
+ZDY0LXhsLXB2c2hpbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IHRlc3QtYW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdydWIgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFjb3cyICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJt
+aGYtbGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
+dGVzdC1hbWQ2NC1pMzg2LXhsLXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
+NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAgICAgIHBhc3MgICAgCiB0
+ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAgICAgICAg
+ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtc2hhZG93ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXNoYWRvdyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
+LWxpYnZpcnQtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
+c3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVu
+cHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFn
+ZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8v
+bG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9m
+IHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRw
+Oi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUu
+ZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0
+ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4g
+YmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5n
+aXQ7YT1zdW1tYXJ5CgoKTm90IHB1c2hpbmcuCgooTm8gcmV2aXNpb24gbG9nOyBpdCB3b3VsZCBi
+ZSA1MDE1IGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
