@@ -1,20 +1,25 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2] x86/XPTI: fix S3 resume (and CPU
- offlining in general)
-Date: Mon, 28 May 2018 06:33:32 +0200
-Message-ID: <b19b185f-8f4d-abd6-8940-31e7481698b4@suse.com>
-References: <5B07A70402000078001C5D20@suse.com>
+From: Michal Hocko <mhocko@kernel.org>
+Subject: Re: [RFC PATCH v2 00/12] get rid of GFP_ZONE_TABLE/BAD
+Date: Mon, 28 May 2018 15:33:22 +0200
+Message-ID: <20180528133322.GE27180@dhcp22.suse.cz>
+References: <1526916033-4877-1-git-send-email-yehs2007@gmail.com>
+ <20180522183728.GB20441@dhcp22.suse.cz>
+ <20180524051919.GA9819@bombadil.infradead.org>
+ <20180524122323.GH20441@dhcp22.suse.cz>
+ <20180524151818.GA21245@bombadil.infradead.org>
+ <20180524152943.GA11881@dhcp22.suse.cz>
+ <20180525120044.GA4649@bombadil.infradead.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=jm/y=ip=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fNKTI-00071R-S3
- for xen-devel@lists.xenproject.org; Mon, 28 May 2018 15:54:08 +0000
-In-Reply-To: <5B07A70402000078001C5D20@suse.com>
-Content-Language: de-DE
+ (envelope-from <srs0=rzmy=ip=kernel.org=mhocko@srs-us1.protection.inumbo.net>)
+ id 1fNKTd-00074t-FB
+ for xen-devel@lists.xenproject.org; Mon, 28 May 2018 15:54:29 +0000
+Content-Disposition: inline
+In-Reply-To: <20180525120044.GA4649@bombadil.infradead.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,15 +28,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Simon Gaiser <simon@invisiblethingslab.com>
+To: Matthew Wilcox <willy@infradead.org>
+Cc: kstewart@linuxfoundation.org, Huaisheng Ye <yehs1@lenovo.com>, hehy1@lenovo.com, gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org, alexander.levin@verizon.com, linux-mm@kvack.org, iommu@lists.linux-foundation.org, linux-btrfs@vger.kernel.org, Huaisheng Ye <yehs2007@gmail.com>, chengnt@lenovo.com, xen-devel@lists.xenproject.org, akpm@linux-foundation.org, colyli@suse.de, mgorman@techsingularity.net, vbabka@suse.cz
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjUvMDUvMTggMDg6MDIsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFdlIHNob3VsZCBpbmRleCBh
-biBMMSB0YWJsZSB3aXRoIGFuIEwxIGluZGV4Lgo+IAo+IFJlcG9ydGVkLWJ5OiBTaW1vbiBHYWlz
-ZXIgPHNpbW9uQGludmlzaWJsZXRoaW5nc2xhYi5jb20+Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJl
-dWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKUmVsZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9z
-cyA8amdyb3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+T24gRnJpIDI1LTA1LTE4IDA1OjAwOjQ0LCBNYXR0aGV3IFdpbGNveCB3cm90ZToKPiBPbiBUaHUs
+IE1heSAyNCwgMjAxOCBhdCAwNToyOTo0M1BNICswMjAwLCBNaWNoYWwgSG9ja28gd3JvdGU6Cj4g
+PiA+IGllIGlmIHdlIGhhZCBtb3JlLAo+ID4gPiBjb3VsZCB3ZSBzb2x2ZSBvdXIgcGFpbiBieSBt
+YWtpbmcgdGhlbSBtb3JlIGdlbmVyaWM/Cj4gPiAKPiA+IFdlbGwsIGlmIHlvdSBoYXZlIG1vcmUg
+eW91IHdpbGwgY29uc3VtZSBtb3JlIGJpdHMgaW4gdGhlIHN0cnVjdCBwYWdlcywKPiA+IHJpZ2h0
+Pwo+IAo+IE5vdCBuZWNlc3NhcmlseSAuLi4gdGhlIHpvbmUgbnVtYmVyIGlzIHN0b3JlZCBpbiB0
+aGUgc3RydWN0IHBhZ2UKPiBjdXJyZW50bHksIHNvIGVpdGhlciB0d28gb3IgdGhyZWUgYml0cyBh
+cmUgdXNlZCByaWdodCBub3cuICBJbiBteQo+IHByb3Bvc2FsLCBvbmUgY2FuIGluZmVyIHRoZSB6
+b25lIG9mIGEgcGFnZSBmcm9tIGl0cyBQRk4sIGV4Y2VwdCBmb3IKPiBaT05FX01PVkFCTEUuICBT
+byB3ZSBjb3VsZCB0cmltIGRvd24gdG8ganVzdCBvbmUgYml0IHBlciBzdHJ1Y3QgcGFnZQo+IGZv
+ciAzMi1iaXQgbWFjaGluZXMgd2hpbGUgdXNpbmcgMyBiaXRzIG9uIDY0LWJpdCBtYWNoaW5lcywg
+d2hlcmUgdGhlcmUKPiBpcyBwbGVudHkgb2Ygc3BhY2UuCgpKdXN0IGJlIHdhcm5lZCB0aGF0IHBh
+Z2Vfem9uZSBpcyBjYWxsZWQgZnJvbSBtYW55IGhvdCBwYXRocy4gSSBhbSBub3QKc3VyZSBhZGRp
+bmcgc29tZXRoaW5nIG1vcmUgY29tcGxleCB0aGVyZSBpcyBnb2luZyB0byBmbHkuCgo+ID4gPiBp
+dCBtb3JlLW9yLWxlc3Mgc3Vja3MgdGhhdCB0aGUgZGV2aWNlcyB3aXRoIDI4LWJpdCBETUEgbGlt
+aXRzIGFyZSBmb3JjZWQKPiA+ID4gdG8gYWxsb2NhdGUgZnJvbSB0aGUgbG93IDE2TUIgd2hlbiB0
+aGV5J3JlIHBlcmZlY3RseSBjYXBhYmxlIG9mIHVzaW5nIHRoZQo+ID4gPiBsb3cgMjU2TUIuCj4g
+PiAKPiA+IERvIHdlIGFjdHVhbGx5IGNhcmUgYWxsIHRoYXQgbXVjaCBhYm91dCB0aG9zZT8gSWYg
+eWVzIHRoZW4gd2Ugc2hvdWxkCj4gPiBwcm9iYWJseSBmb2xsb3cgdGhlIFpPTkVfRE1BICh4ODYp
+IHBhdGggYW5kIHVzZSBhIENNQSByZWdpb24gZm9yIHRoZW0uCj4gPiBJIG1lYW4gbW9zdCBkZXZp
+Y2VzIHNob3VsZCBiZSBnb29kIHdpdGggdmVyeSBsaW1pdGVkIGFkZHJlc3NhYmlsaXR5IG9yCj4g
+PiBiZWxvdyA0Rywgbm8/Cj4gCj4gU3VyZS4gIE9uZSBvdGhlciB0aGluZyBJIG1lYW50IHRvIG1l
+bnRpb24gd2FzIHRoZSBtZWRpYSBkZXZpY2VzCj4gKFRWIGNhcHR1cmUgY2FyZHMgYW5kIHNvIG9u
+KSB3aGljaCB3YW50IGEgdm1hbGxvY18zMigpIGFsbG9jYXRpb24uCj4gT24gMzItYml0IG1hY2hp
+bmVzIHJpZ2h0IG5vdywgd2UgYWxsb2NhdGUgZnJvbSBMT1dNRU0sIHdoZW4gd2UgcmVhbGx5Cj4g
+c2hvdWxkIGJlIGFsbG9jYXRpbmcgZnJvbSB0aGUgMUdCLTRHQiByZWdpb24uICAzMi1iaXQgbWFj
+aGluZXMgZ2VuZXJhbGx5Cj4gZG9uJ3QgaGF2ZSBhIFpPTkVfRE1BMzIgdG9kYXkuCgpXZWxsLCBf
+SV8gdGhpbmsgdGhhdCB2bWFsbG9jIG9uIDMyYiBpcyBqdXN0IGxvc3QgY2FzZS4uLgoKLS0gCk1p
+Y2hhbCBIb2NrbwpTVVNFIExhYnMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
