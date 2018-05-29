@@ -1,20 +1,15 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: Building xen-hypervisor 4.10 and xen-tools on
- Ubuntu 16.04 for PVH
-Date: Tue, 29 May 2018 09:27:15 +0200
-Message-ID: <20180529072715.i56w4htgqcg2nyxf@MacBook-Pro-de-Roger.local>
-References: <CAAKQd5yo=koeeRvThzG_bYkZOb2-+UNUKGWY03o_ZmP-5zSuqQ@mail.gmail.com>
+From: Arnd Bergmann <arnd@arndb.de>
+Subject: Re: [PATCH 3/8] drm/xen-front: fix 32-bit build warning
+Date: Tue, 29 May 2018 09:59:46 +0200
+Message-ID: <CAK8P3a0_PgaQV-gK0aX6p45cvCXh4t_CYCgxqk2ERp1pt7uojA__19832.1324344308$1527580728$gmane$org@mail.gmail.com>
+References: <20180525155030.3667352-1-arnd@arndb.de>
+ <20180525155030.3667352-3-arnd@arndb.de>
+ <d08e0200-f431-8713-0286-cd5bbf3441c8@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=779k=iq=citrix.com=prvs=6800cb5ef=roger.pau@srs-us1.protection.inumbo.net>)
- id 1fNZ2U-0002lu-W8
- for xen-devel@lists.xenproject.org; Tue, 29 May 2018 07:27:27 +0000
-Content-Disposition: inline
-In-Reply-To: <CAAKQd5yo=koeeRvThzG_bYkZOb2-+UNUKGWY03o_ZmP-5zSuqQ@mail.gmail.com>
+In-Reply-To: <d08e0200-f431-8713-0286-cd5bbf3441c8@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,27 +18,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: ".. .." <abhijeetpatil8848@gmail.com>
-Cc: xen-devel@lists.xenproject.org
+To: Oleksandr Andrushchenko <andr2000@gmail.com>
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel.vetter@ffwll.ch>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, dri-devel <dri-devel@lists.freedesktop.org>, xen-devel@lists.xen.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Dan Carpenter <dan.carpenter@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBNYXkgMjksIDIwMTggYXQgMDM6MzI6NDBBTSArMDAwMCwgLi4gLi4gd3JvdGU6Cj4g
-SGVsbG8sCj4gCj4gSSBhbSBkb2luZyBhIHN0dWR5IG9uIFZpcnR1YWwgTWFjaGluZSBJbnRyb3Nw
-ZWN0aW9uIG9uIEludGVsIFNHWCBiYXNlZAo+IHN5c3RlbSB1c2luZyBYZW4gYmFzZWQgVk1zLgo+
-IAo+IEkgZm9sbG93ZWQgdGhlIGFydGljbGUgIC0KPiAKPiBodHRwczovL3dpa2kueGVucHJvamVj
-dC5vcmcvd2lraS9MaW51eF9QVkgKPiA8aHR0cHM6Ly9ibG9nLndlcmsyMS5kZS9lbi8yMDE4LzAy
-LzA4L2J1aWxkLXhlbi1oeXBlcnZpc29yLTQxMC1hbmQteGVuLXRvb2xzLXVidW50dS0xNjA0LXB2
-aD4KPiAKPiAsIGluIG9yZGVyIHRvIGJ1aWxkIHhlbi1oeXBlcnZpc29yIDQuMTAgYW5kIHhlbi10
-b29scyBvbiBVYnVudHUgMTYuMDQgZm9yCj4gUFZILgo+IAo+IEhvd2V2ZXIsIGFmdGVyIGluc3Rh
-bGxpbmcgeGVuLXRvb2xzIGFuZCByZWJvdGluZywgbXkgbWFjaGluZSwgVWJ1bnR1IDE2LjQKPiBp
-cyBzdHVjayBpbiBhIGxvZ2luIGxvb3AuIEkgYW0gYWJsZSB0byBsb2cgaW4gYnV0IGFmdGVyIGEg
-ZmV3IHNlY29uZHMgaXQKPiBsb2dzIG91dCBhbmQgZ29lcyBiYWNrIHRvIGxvZ2luIHNjcmVlbi4K
-CkhtLCB0aGF0IGRvZXNuJ3Qgc2VlbSByZWxhdGVkIHRvIFhlbi4gRG9lcyBpdCB3b3JrIGZpbmUg
-aWYgeW91IGJvb3QKdGhlIHNhbWUgc3lzdGVtIHdpdGhvdXQgWGVuPwoKPiBBbHNvLCBkdXJpbmcg
-dGhlIHNlcnZpY2UgZW5hYmxpbmcgc3RlcHMsIGFsbCBleGNlcHQgeGVuc3RvcmVkLnNlcnZpY2Ug
-d2VyZQo+IGVuYWJsZWQuIFNvIEkgYW0gbm90IHN1cmUgaWYgdGhlIGxvZ2luIGxvb3AgaXNzdWUg
-aXMgZHVlIHRvIHRoYXQuCgpXaGF0IGVycm9yIGRvIHlvdSBnZXQgZnJvbSB0aGUgeGVuc3RvcmVk
-IHNlcnZpY2U/IENhbiB5b3UgcHJvdmlkZSB0aGUKbG9ncyBvZiBib290aW5nIFhlbiBhbmQgTGlu
-dXg/CgpSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCBNYXkgMjksIDIwMTggYXQgNzo1OCBBTSwgT2xla3NhbmRyIEFuZHJ1c2hjaGVua28K
+PGFuZHIyMDAwQGdtYWlsLmNvbT4gd3JvdGU6Cj4gT24gMDUvMjUvMjAxOCAwNjo1MCBQTSwgQXJu
+ZCBCZXJnbWFubiB3cm90ZToKCj4+IGIvZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250
+X3NoYnVmLmMKPj4gaW5kZXggODA5OWNiMzQzYWUzLi5kMzMzYjY3Y2MxYTAgMTAwNjQ0Cj4+IC0t
+LSBhL2RyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9zaGJ1Zi5jCj4+ICsrKyBiL2Ry
+aXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9zaGJ1Zi5jCj4+IEBAIC0xMjIsNyArMTIy
+LDcgQEAgc3RhdGljIHZvaWQgZ3Vlc3RfY2FsY19udW1fZ3JlZnMoc3RydWN0Cj4+IHhlbl9kcm1f
+ZnJvbnRfc2hidWYgKmJ1ZikKPj4gICB9Cj4+ICAgICAjZGVmaW5lIHhlbl9wYWdlX3RvX3ZhZGRy
+KHBhZ2UpIFwKPj4gLSAgICAgICAgICAgICAgICgocGh5c19hZGRyX3QpcGZuX3RvX2thZGRyKHBh
+Z2VfdG9feGVuX3BmbihwYWdlKSkpCj4+ICsgICAgICAgICAgICAgICAoKHVpbnRwdHJfdClwZm5f
+dG9fa2FkZHIocGFnZV90b194ZW5fcGZuKHBhZ2UpKSkKPj4gICAgIHN0YXRpYyBpbnQgYmFja2Vu
+ZF91bm1hcChzdHJ1Y3QgeGVuX2RybV9mcm9udF9zaGJ1ZiAqYnVmKQo+PiAgIHsKPgo+IFRoYW5r
+IHlvdSBmb3IgeW91ciBwYXRjaDogdGhpcyBpc3N1ZSB3YXMgYWxyZWFkeSBkaXNjdXNzZWQgWzFd
+IGFuZCBhcHBsaWVkCj4gWzJdIHRvCj4gZHJtLW1pc2MtbmV4dC4KCk9rLCB0aGFua3MsIGFuZCBz
+b3JyeSBmb3IgdGhlIGR1cGxpY2F0ZS4gTGludXgtbmV4dCByZWxlYXNlcyBoYXZlIGJlZW4KYSBi
+aXQgc3BvcmFkaWMgcmVjZW50bHkgc28gSSBkaWRuJ3QgcnVuIHRoZSBsYXRlc3QgdHJlZSBmb3Ig
+YWxsIGNhc2VzLgoKICAgIEFybmQKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
