@@ -1,16 +1,24 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/6] x86: Improvements to ler debugging
-Date: Tue, 29 May 2018 19:09:31 +0100
-Message-ID: <01f4136c-cd8a-44f9-8709-bf024f127767@citrix.com>
-References: <1527517678-1779-1-git-send-email-andrew.cooper3@citrix.com>
- <1527517678-1779-3-git-send-email-andrew.cooper3@citrix.com>
- <5B0D3BFA02000078001C68D9@prv1-mh.provo.novell.com>
+From: Alexey G <x1917x@gmail.com>
+Subject: Re: [RFC PATCH 10/12] libacpi: build ACPI MCFG table if
+ requested
+Date: Wed, 30 May 2018 04:20:52 +1000
+Message-ID: <20180530042052.00003494@gmail.com>
+References: <cover.1520867740.git.x1917x@gmail.com>
+ <cover.1520867740.git.x1917x@gmail.com>
+ <c3d9fa4d606c1f506ff8709878c8754d02a3ea5f.1520867741.git.x1917x@gmail.com>
+ <5B0D658102000078001C6AAE@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B0D3BFA02000078001C68D9@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=fvsg=iq=gmail.com=x1917x@srs-us1.protection.inumbo.net>)
+ id 1fNjFK-0007Mj-Ih
+ for xen-devel@lists.xenproject.org; Tue, 29 May 2018 18:21:22 +0000
+Received: by mail-lf0-x241.google.com with SMTP id z142-v6so218037lff.5
+ for <xen-devel@lists.xenproject.org>; Tue, 29 May 2018 11:21:21 -0700 (PDT)
+In-Reply-To: <5B0D658102000078001C6AAE@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,22 +28,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjkvMDUvMTggMTI6MzksIEphbiBCZXVsaWNoIHdyb3RlOgo+ICA+Pj4gT24gMjguMDUuMTgg
-YXQgMTY6MjcsIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToKPj4gKiBDb21tYW5k
-IGxpbmUgZG9jdW1lbnRhdGlvbiBmb3Igd2hhdCB0aGUgb3B0aW9uIGRvZXMuCj4+ICAqIEltcGxl
-bWVudCBhIGNhbm9uaWNhbGlzZV9hZGRyKCkgaGVscGVyIGFuZCByZXBsYWNlIHRoZSBvcGVuY29k
-ZWQgdXNlIGluCj4+ICAgIHNpZ25fZXh0ZW5kX21zcigpCj4+ICAqIENhbm9uaWNhbGlzZSB0aGUg
-bGVyIHBvaW50ZXJzIGFuZCBwcmludCBzeW1ib2wgaW5mb3JtYXRpb24uCj4+Cj4+IFNpZ25lZC1v
-ZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cj4gUmV2aWV3
-ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KClRoYW5rcywKCj4gd2l0aCBv
-bmUgcmVtYXJrOgo+Cj4+IC0tLSBhL2RvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3du
-Cj4+ICsrKyBiL2RvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3duCj4+IEBAIC0xMjQ1
-LDYgKzEyNDUsMTIgQEAgaWYgbGVmdCBkaXNhYmxlZCBieSB0aGUgQklPUy4KPj4gICMjIyBsZXIg
-KHg4NikKPj4gID4gYD0gPGJvb2xlYW4+YAo+PiAgCj4+ICs+IERlZmF1bHQ6IDAKPiBQZXJoYXBz
-IGJldHRlciBgZmFsc2VgPwoKRml4ZWQuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVHVlLCAyOSBNYXkgMjAxOCAwODozNjo0OSAtMDYwMAoiSmFuIEJldWxpY2giIDxKQmV1bGlj
+aEBzdXNlLmNvbT4gd3JvdGU6Cgo+Pj4+IE9uIDEyLjAzLjE4IGF0IDE5OjMzLCA8eDE5MTd4QGdt
+YWlsLmNvbT4gd3JvdGU6ICAKPj4gLS0tIGEvdG9vbHMvbGliYWNwaS9hY3BpMl8wLmgKPj4gKysr
+IGIvdG9vbHMvbGliYWNwaS9hY3BpMl8wLmgKPj4gQEAgLTQyMiw2ICs0MjIsMjUgQEAgc3RydWN0
+IGFjcGlfMjBfc2xpdCB7Cj4+ICB9Owo+PiAgCj4+ICAvKgo+PiArICogUENJIEV4cHJlc3MgTWVt
+b3J5IE1hcHBlZCBDb25maWd1cmF0aW9uIERlc2NyaXB0aW9uIFRhYmxlCj4+ICsgKi8KPj4gK3N0
+cnVjdCBtY2ZnX3JhbmdlX2VudHJ5IHsKPj4gKyAgICB1aW50NjRfdCBiYXNlX2FkZHJlc3M7Cj4+
+ICsgICAgdWludDE2X3QgcGNpX3NlZ21lbnQ7Cj4+ICsgICAgdWludDhfdCAgc3RhcnRfcGNpX2J1
+c19udW07Cj4+ICsgICAgdWludDhfdCAgZW5kX3BjaV9idXNfbnVtOwo+PiArICAgIHVpbnQzMl90
+IHJlc2VydmVkOwo+PiArfTsKPj4gKwo+PiArc3RydWN0IGFjcGlfbWNmZyB7Cj4+ICsgICAgc3Ry
+dWN0IGFjcGlfaGVhZGVyIGhlYWRlcjsKPj4gKyAgICB1aW50OF90IHJlc2VydmVkWzhdOwo+PiAr
+ICAgIHN0cnVjdCBtY2ZnX3JhbmdlX2VudHJ5IGVudHJpZXNbMV07Cj4+ICt9Owo+PiArCj4+ICsj
+ZGVmaW5lIE1DRkdfU0laRV9UT19OVU1fQlVTRVMoc2l6ZSkgICgoc2l6ZSkgPj4gMjApICAKPgo+
+SW4gYSByZXNwb25zZSB0byBhIGNvbW1lbnQgZnJvbSBSb2dlciB5b3Ugc3VnZ2VzdGVkIHRvIG1v
+dmUgdGhpcyB0byBwY2lfcmVncy5oLgo+SSBkb24ndCBzZWUgd2h5IGl0IHdvdWxkIGJlbG9uZyB0
+aGVyZS4gSSB0aGluayBpZiBBQ1BJIHNwZWxscyBvdXQgc3VjaCBhIGZvcm11bGEKPnNvbWV3aGVy
+ZSwgaXQncyBmaW5lIHRvIGxpdmVyIGhlcmUuIE90aGVyd2lzZSwgc2luY2UgeW91IG5lZWQgaXQg
+aW4gYSBzaW5nbGUgZmlsZSBvbmx5LAo+cGxlYXNlIHB1dCBpdCBpbnRvIHRoZSAuYyBmaWxlLgoK
+QWdyZWUsIGl0IGlzIGN1cnJlbnRseSB1c2VkIGluIG9uZSBwbGFjZSBvbmx5LCBubyBuZWVkIGZv
+ciAuaAoKPj4gLS0tIGEvdG9vbHMvbGliYWNwaS9idWlsZC5jCj4+ICsrKyBiL3Rvb2xzL2xpYmFj
+cGkvYnVpbGQuYwo+PiBAQCAtMzAzLDYgKzMwMywzNyBAQCBzdGF0aWMgc3RydWN0IGFjcGlfMjBf
+c2xpdCAqY29uc3RydWN0X3NsaXQoc3RydWN0IAo+PiBhY3BpX2N0eHQgKmN0eHQsCj4+ICAgICAg
+cmV0dXJuIHNsaXQ7Cj4+ICB9Cj4+ICAKPj4gK3N0YXRpYyBzdHJ1Y3QgYWNwaV9tY2ZnICpjb25z
+dHJ1Y3RfbWNmZyhzdHJ1Y3QgYWNwaV9jdHh0ICpjdHh0LAo+PiArICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCBhY3BpX2NvbmZpZyAqY29uZmlnKQo+
+PiArewo+PiArICAgIHN0cnVjdCBhY3BpX21jZmcgKm1jZmc7Cj4+ICsKPj4gKyAgICAvKiBXYXJu
+aW5nOiB0aGlzIGNvZGUgZXhwZWN0cyB0aGF0IHdlIGhhdmUgb25seSBvbmUgUENJIHNlZ21lbnQg
+Ki8KPj4gKyAgICBtY2ZnID0gY3R4dC0+bWVtX29wcy5hbGxvYyhjdHh0LCBzaXplb2YoKm1jZmcp
+LCAxNik7Cj4+ICsgICAgaWYgKCFtY2ZnKQo+PiArICAgICAgICByZXR1cm4gTlVMTDsKPj4gKwo+
+PiArICAgIG1lbXNldChtY2ZnLCAwLCBzaXplb2YoKm1jZmcpKTsKPj4gKyAgICBtY2ZnLT5oZWFk
+ZXIuc2lnbmF0dXJlICAgID0gQUNQSV9NQ0ZHX1NJR05BVFVSRTsKPj4gKyAgICBtY2ZnLT5oZWFk
+ZXIucmV2aXNpb24gICAgID0gQUNQSV8xXzBfTUNGR19SRVZJU0lPTjsKPj4gKyAgICBmaXhlZF9z
+dHJjcHkobWNmZy0+aGVhZGVyLm9lbV9pZCwgQUNQSV9PRU1fSUQpOwo+PiArICAgIGZpeGVkX3N0
+cmNweShtY2ZnLT5oZWFkZXIub2VtX3RhYmxlX2lkLCBBQ1BJX09FTV9UQUJMRV9JRCk7Cj4+ICsg
+ICAgbWNmZy0+aGVhZGVyLm9lbV9yZXZpc2lvbiA9IEFDUElfT0VNX1JFVklTSU9OOwo+PiArICAg
+IG1jZmctPmhlYWRlci5jcmVhdG9yX2lkICAgPSBBQ1BJX0NSRUFUT1JfSUQ7Cj4+ICsgICAgbWNm
+Zy0+aGVhZGVyLmNyZWF0b3JfcmV2aXNpb24gPSBBQ1BJX0NSRUFUT1JfUkVWSVNJT047Cj4+ICsg
+ICAgbWNmZy0+aGVhZGVyLmxlbmd0aCA9IHNpemVvZigqbWNmZyk7Cj4+ICsKPj4gKyAgICBtY2Zn
+LT5lbnRyaWVzWzBdLmJhc2VfYWRkcmVzcyA9IGNvbmZpZy0+bW1jb25maWdfYWRkcjsKPj4gKyAg
+ICBtY2ZnLT5lbnRyaWVzWzBdLnBjaV9zZWdtZW50ID0gMDsKPj4gKyAgICBtY2ZnLT5lbnRyaWVz
+WzBdLnN0YXJ0X3BjaV9idXNfbnVtID0gMDsKPj4gKyAgICBtY2ZnLT5lbnRyaWVzWzBdLmVuZF9w
+Y2lfYnVzX251bSA9Cj4+ICsgICAgICAgIE1DRkdfU0laRV9UT19OVU1fQlVTRVMoY29uZmlnLT5t
+bWNvbmZpZ19sZW4pIC0gMTsKPj4gKwo+PiArICAgIHNldF9jaGVja3N1bShtY2ZnLCBvZmZzZXRv
+ZihzdHJ1Y3QgYWNwaV9oZWFkZXIsIGNoZWNrc3VtKSwgc2l6ZW9mKCptY2ZnKSk7ICAKPgo+RGVz
+cGl0ZSB0aGUgbnVtZXJvdXMgcHJlLWV4aXN0aW5nIGV4YW1wbGVzIHRoaXMgaXNuJ3QgcmVhbGx5
+IGNvcnJlY3QuCj5XaGF0IHlvdSBtZWFuIGlzIHNvbWV0aGluZyBsaWtlCj4KPiAgICBzZXRfY2hl
+Y2tzdW0obWNmZywgb2Zmc2V0b2YodHlwZW9mKCptY2ZnKSwgaGVhZGVyLmNoZWNrc3VtKSwgc2l6
+ZW9mKCptY2ZnKSk7CgpZZXMsIGFsbCB0aG9zZSBzZXRfY2hlY2tzdW0gY2FsbHMgcmVseSBvbiB0
+aGUgZmFjdCB0aGUgYWNwaV9oZWFkZXIKc3RydWN0dXJlIHdpbGwgYWx3YXlzIGJlIHRoZSBmaXJz
+dCBmaWVsZC4gSXQgd2lsbCBiZSwgYnV0IHRoZSBjb2RlIGlzCnRlY2huaWNhbGx5IHdyb25nIGFu
+eXdheS4KCkknbGwgdXBkYXRlIGFsbCBzdWNoIHNldF9jaGVja3N1bSguLi5jaGVja3N1bSkuLi4p
+IGluc3RhbmNlcyBpbiB0aGUKZmlsZSBmb3IgdGhlIG5leHQgdmVyc2lvbiwgdGhpcyBpcyBhIHRy
+aXZpYWwgY2hhbmdlLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
