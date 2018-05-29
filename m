@@ -1,8 +1,9 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: Pending patches for 4.11?
-Date: Tue, 29 May 2018 03:41:14 -0600
-Message-ID: <5B0D203A02000078001C67EE@prv1-mh.provo.novell.com>
-References: <9a4311bf-5113-4a08-0ac5-7c60efc42e9b@suse.com>
+Subject: Re: Question about patch "svm: fix incorrect TSC
+ scaling"
+Date: Tue, 29 May 2018 03:56:32 -0600
+Message-ID: <5B0D23D002000078001C67F9@prv1-mh.provo.novell.com>
+References: <386b302f-c1f3-49fa-9276-9db826401912@default>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -10,9 +11,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=gyld=iq=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fNb81-0000bm-RX
- for xen-devel@lists.xenproject.org; Tue, 29 May 2018 09:41:17 +0000
-In-Reply-To: <9a4311bf-5113-4a08-0ac5-7c60efc42e9b@suse.com>
+ id 1fNbMr-0001hC-8J
+ for xen-devel@lists.xenproject.org; Tue, 29 May 2018 09:56:37 +0000
+In-Reply-To: <386b302f-c1f3-49fa-9276-9db826401912@default>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,19 +23,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, committers@xenproject.org
+To: Dongli Zhang <dongli.zhang@oracle.com>
+Cc: Haozhong Zhang <haozhong.zhang@intel.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, brian.woods@amd.com, Joao Martins <joao.m.martins@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIyLjA1LjE4IGF0IDA4OjU3LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBBcmUg
-dGhlcmUgYW55IHBhdGNoZXMgZm9yIDQuMTEgc3RpbGwgcGVuZGluZz8KPiAKPiBBcmUgYW55IGlt
-cG9ydGFudCBwYXRjaGVzIG1pc3NpbmcgbXkgUmVsZWFzZS1hY2s/CgpsaWJ4Yy94ODYvUFY6IGRv
-bid0IGhhbmQgdGhyb3VnaCBDUFVJRCBsZWFmIDB4ODAwMDAwMDggYXMgaXMKeDg2OiBzdXBwcmVz
-cyBzeW5jIHdoZW4gWFBUSSBpcyBkaXNhYmxlZCBmb3IgYSBkb21haW4KeDg2OiBjb3JyZWN0IGRl
-ZmF1bHRfeGVuX3NwZWNfY3RybCBjYWxjdWxhdGlvbgp4ODYvQ1BVSUQ6IGRvbid0IG92ZXJyaWRl
-IHRvb2wgc3RhY2sgZGVjaXNpb24gdG8gaGlkZSBTVElCUAoKVGhlIDJuZCBpcyBvbmx5IGEgc21h
-bGwgb3B0aW1pemF0aW9uLCBzbyBtYXkgbm90IGJlIGFzIG11Y2ggb2YgYQpjYW5kaWRhdGUgYXMg
-dGhlIG90aGVyIHRocmVlLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+Pj4+IE9uIDI4LjA1LjE4IGF0IDE0OjI1LCA8ZG9uZ2xpLnpoYW5nQG9yYWNsZS5jb20+IHdyb3Rl
+Ogo+IEkgYW0gd3JpdGluZyB0byBhc2sgYWJvdXQgYmVsb3cgcGF0Y2ggYXMgSSBhbSBub3QgZmFt
+aWxpYXIgd2l0aCBBTUQgdHNjCj4gc2NhbGluZzoKPiAKPiAgY29tbWl0IDExZWVjYTY1MTI2ZTUx
+ZjAzYTg4MzkwNzc1MWQ1Y2NiZTRmMzVhYTMKPiAgQXV0aG9yOiBIYW96aG9uZyBaaGFuZyA8aGFv
+emhvbmcuemhhbmdAaW50ZWwuY29tPgo+ICBEYXRlOiAgIFR1ZSBEZWMgOCAwOTo0NjoxMiAyMDE1
+ICswMTAwCj4gCj4gICAgICBzdm06IGZpeCBpbmNvcnJlY3QgVFNDIHNjYWxpbmcKPiAgCj4gICAg
+ICBTVk0gVFNDIHJhdGlvIGlzIGluY29ycmVjdGx5IHVzZWQgaW4gdGhlIGN1cnJlbnQKPiAgICAg
+IHN2bV9nZXRfdHNjX29mZnNldCgpLiBUaGlzIHBhdGNoIHJlcGxhY2VzIHRoZSBzY2FsaW5nIGxv
+Z2ljIGluCj4gICAgICBzdm1fZ2V0X3RzY19vZmZzZXQoKSB3aXRoIGEgY29ycmVjdCBpbXBsZW1l
+bnRhdGlvbi4KPiAgCj4gICAgICBTaWduZWQtb2ZmLWJ5OiBIYW96aG9uZyBaaGFuZyA8aGFvemhv
+bmcuemhhbmdAaW50ZWwuY29tPgo+ICAgICAgUmV2aWV3ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8
+Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+Cj4gCj4gCj4gVGhlIGJlbG93IGVxdWF0aW9uIGlz
+IHVzZWQgaW4gdGhlIGFib3ZlIHBhdGNoOgo+IAo+IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0K
+PiBob3N0X3RzYyAqIHJhdGlvICogMl4tMzIuCj4gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+
+IAo+IAo+IFdoaWxlIHRoZSBiZWxvdyBpbmNvcnJlY3QgZXF1YXRpb24gKGluZGVlZCBjb2RlKSB3
+YXMgdXNlZCBiZWZvcmUgYWJvdmUgCj4gcGF0Y2g6Cj4gCj4gLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4gb2Zmc2V0ID0gKCgo
+aG9zdF90c2MgPj4gMzJVKSAqIChyYXRpbyA+PiAzMlUpKSA8PCAzMlUpICsKPiAgICAgICAgICAo
+aG9zdF90c2MgJiAweGZmZmZmZmZmVUxMKSAqIChyYXRpbyAmIDB4ZmZmZmZmZmZVTEwpOwo+IHJl
+dHVybiBndWVzdF90c2MgLSBvZmZzZXQ7Cj4gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4gCj4gQ2FuIEkgc3VtbWFyaXplIHRo
+ZSBhYm92ZSBjb2RlIGFzOgo+IAo+IHRzY19oICogbXVsdCAqIDJeMzIgKyB0c2NfbCAqIGZyYWcg
+b3IKPiAKPiB0c2NfaCAqIGludCAqIDJeMzIgKyB0c2NfbCAqIGZyYWcgPwo+IAo+IAo+IFdvdWxk
+IHlvdSBwbGVhc2UgaGVscCBjb25maXJtIHdoeSB0aGUgZXF1YXRpb24gaXMgcmVwbGFjZWQ/IE9y
+IHdvdWxkIHlvdSBwbGVhc2UKPiBoZWxwIGFuZCBsZXQgbWUga25vdyB0aGUgY2hhcHRlci9wYWdl
+IG9mIEFNRCByZWZlcmVuY2UgbWFudWFsIHNob3dpbmcgdGhlCj4gY29ycmVjdCBlcXVhdGlvbj8K
+ClRoaXMgaGFzIG5vdGhpbmcgdG8gZG8gd2l0aCBBTUQncyBkb2MsIGJ1dCBvbmx5IHdpdGggbWF0
+aHM6IFRvIHNwbGl0CmEgbXVsdGlwbGljYXRpb24geCAqIHkgd2hlbiBjb25zaWRlcmluZyB4ID0g
+eGggKyB4bCAoaGlnaCBhbmQgbG93IHBhcnRzKQphbmQgeSA9IHloICsgeWwgeW91IGdldCB4ICog
+eSA9IHhoICogeWggKyB4aCAqIHlsICsgeGwgKiB5aCArIHhsICogeGwuCldpZHRoIGNvbnN0cmFp
+bnRzIG1ha2UgaXQgdW5uZWNlc3NhcnkgdG8gY2FsY3VsYXRlIHRoZSB4aCAqIHloIHBhcnQKaGVy
+ZS4gVGhlIG9yaWdpbmFsIGV4cHJlc3Npb24sIGhvd2V2ZXIsIGNhbGN1bGF0ZWQgc29tZXRoaW5n
+IHJhdGhlcgpzdHJhbmdlIGluc3RlYWQgKG9ubHkgdGhlIHhsICogeWwgcGFydCB3YXMgYWN0dWFs
+bHkgY29ycmVjdCkuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
