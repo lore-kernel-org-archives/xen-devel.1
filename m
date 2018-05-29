@@ -1,16 +1,18 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 123328: regressions - FAIL
-Date: Tue, 29 May 2018 03:43:44 +0000
-Message-ID: <osstest-123328-mainreport@xen.org>
+From: ".. .." <abhijeetpatil8848@gmail.com>
+Subject: Building xen-hypervisor 4.10 and xen-tools on Ubuntu
+ 16.04 for PVH
+Date: Tue, 29 May 2018 03:32:40 +0000
+Message-ID: <CAAKQd5yo=koeeRvThzG_bYkZOb2-+UNUKGWY03o_ZmP-5zSuqQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7668119381532431318=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=jyc5=iq=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fNVY5-0001xz-Sc
- for xen-devel@lists.xenproject.org; Tue, 29 May 2018 03:43:49 +0000
+ <srs0=f11q=iq=gmail.com=abhijeetpatil8848@srs-us1.protection.inumbo.net>)
+ id 1fNVNf-0001FD-Si
+ for xen-devel@lists.xenproject.org; Tue, 29 May 2018 03:33:03 +0000
+Received: by mail-ua0-x22f.google.com with SMTP id c23-v6so2500284uan.3
+ for <xen-devel@lists.xenproject.org>; Mon, 28 May 2018 20:33:02 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,68 +21,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMzMyOCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMzMyOC8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hcm02NC1hcm02NC14bC14
-c20gICAgICAgNiB4ZW4taW5zdGFsbCAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIzMDcx
-CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVz
-dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDEzIG1pZ3Jh
-dGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJt
-aGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2
-ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAg
-ICAgIDQ3MTJjMGEyMzFmMDEwMjUzYTU0NzE1MzFlMzM1YTVhMTNkY2VjNzYKYmFzZWxpbmUgdmVy
-c2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIGZjNTgwNWRhZWYwOTEyNDBjZDVmYzA2NjM0YThi
-Y2RiMmYzYmI4NDMKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEyMzA3MSAgMjAxOC0wNS0yMiAxNTow
-MDoyOSBaICAgIDYgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMjMyOTYgIDIwMTgtMDUtMjgg
-MTA6MDE6MDYgWiAgICAwIGRheXMgICAgOCBhdHRlbXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAx
-MjMzMDYgIDIwMTgtMDUtMjggMTY6MDY6MDYgWiAgICAwIGRheXMgICAgNSBhdHRlbXB0cwoKLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-ClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbmRyZXcgQ29vcGVy
-IDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNl
-LmNvbT4KCmpvYnM6CiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFlbXV1LWRlYmlhbmh2bS1pMzg2ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVu
-cHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFn
-ZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8v
-bG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9m
-IHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRw
-Oi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUu
-ZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0
-ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4g
-YmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5n
-aXQ7YT1zdW1tYXJ5CgoKTm90IHB1c2hpbmcuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KY29tbWl0IDQ3MTJjMGEyMzFmMDEwMjUz
-YTU0NzE1MzFlMzM1YTVhMTNkY2VjNzYKQXV0aG9yOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29v
-cGVyM0BjaXRyaXguY29tPgpEYXRlOiAgIFRodSBNYXkgMjQgMTU6MDY6MTYgMjAxOCArMDEwMAoK
-ICAgIHg4Ni90cmFwczogRHVtcCB0aGUgaW5zdHJ1Y3Rpb24gc3RyZWFtIGV2ZW4gZm9yIGRvdWJs
-ZSBmYXVsdHMKICAgIAogICAgVGhpcyBoZWxwcyBkZWJ1ZyAjREYncyB3aGljaCBvY2N1ciBpbiBh
-bHRlcm5hdGl2ZSBwYXRjaGVzCiAgICAKICAgIFJlcG9ydGVkLWJ5OiBHZW9yZ2UgRHVubGFwIDxn
-ZW9yZ2UuZHVubGFwQGV1LmNpdHJpeC5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29v
-cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVs
-aWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICAgIFJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jv
-c3MgPGpncm9zc0BzdXNlLmNvbT4KCmNvbW1pdCA2Yjk1NjJkYWMxNzQ2MDE0YWIzNzZiZDJjZjhi
-YTQwMGFjZjM0YzZkCkF1dGhvcjogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpEYXRl
-OiAgIE1vbiBNYXkgMjggMTE6MjA6MjYgMjAxOCArMDIwMAoKICAgIHg4Ni9YUFRJOiBmaXggUzMg
-cmVzdW1lIChhbmQgQ1BVIG9mZmxpbmluZyBpbiBnZW5lcmFsKQogICAgCiAgICBXZSBzaG91bGQg
-aW5kZXggYW4gTDEgdGFibGUgd2l0aCBhbiBMMSBpbmRleC4KICAgIAogICAgUmVwb3J0ZWQtYnk6
-IFNpbW9uIEdhaXNlciA8c2ltb25AaW52aXNpYmxldGhpbmdzbGFiLmNvbT4KICAgIFNpZ25lZC1v
-ZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICAgIFJldmlld2VkLWJ5OiBB
-bmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogICAgUmVsZWFzZS1hY2tl
-ZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoocWVtdSBjaGFuZ2VzIG5vdCBp
-bmNsdWRlZCkKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============7668119381532431318==
+Content-Type: multipart/alternative; boundary="000000000000242597056d4fe443"
+
+--000000000000242597056d4fe443
+Content-Type: text/plain; charset="UTF-8"
+
+Hello,
+
+I am doing a study on Virtual Machine Introspection on Intel SGX based
+system using Xen based VMs.
+
+I followed the article  -
+
+https://wiki.xenproject.org/wiki/Linux_PVH
+<https://blog.werk21.de/en/2018/02/08/build-xen-hypervisor-410-and-xen-tools-ubuntu-1604-pvh>
+
+, in order to build xen-hypervisor 4.10 and xen-tools on Ubuntu 16.04 for
+PVH.
+
+However, after installing xen-tools and reboting, my machine, Ubuntu 16.4
+is stuck in a login loop. I am able to log in but after a few seconds it
+logs out and goes back to login screen.
+
+Also, during the service enabling steps, all except xenstored.service were
+enabled. So I am not sure if the login loop issue is due to that.
+
+I tried updating the grub, using recovery mode, but still the issue
+persists.
+I would be truly thankful if you could suggest me some solution.
+
+Thank You,
+Good Day.
+
+--000000000000242597056d4fe443
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><div><div><div><div><div>Hello,<br><br></div><div>I a=
+m doing a study on Virtual Machine Introspection on Intel SGX based system =
+using Xen based VMs.<br><br></div>I followed the article=C2=A0 - <br><br><a=
+ href=3D"https://blog.werk21.de/en/2018/02/08/build-xen-hypervisor-410-and-=
+xen-tools-ubuntu-1604-pvh" target=3D"_blank">https://wiki.xenproject.org/wi=
+ki/Linux_PVH</a> <br><br></div><div>, in order to build xen-hypervisor 4.10=
+ and xen-tools on Ubuntu 16.04 for PVH.<br></div><br></div>However, after i=
+nstalling
+ xen-tools and reboting, my machine, Ubuntu 16.4 is stuck in a login loop. =
+I am able=20
+to log in but after a few seconds it logs out and goes back to login=20
+screen.<br><br>Also, during the service enabling steps, all except xenstore=
+d.service=20
+were enabled. So I am not sure if the login loop issue is due to that. <br>=
+<div><div><div><div><br></div></div></div></div></div>I tried updating the =
+grub, using recovery mode, but still the issue persists.<br></div>I would b=
+e truly thankful if you could suggest me some solution. <br><br></div><div>=
+<div><div><div>Thank You,<br></div><div>Good Day.</div></div></div></div><b=
+r></div>
+
+--000000000000242597056d4fe443--
+
+
+--===============7668119381532431318==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7668119381532431318==--
