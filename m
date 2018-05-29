@@ -1,22 +1,22 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 03/13] xen/arm: setup: Check errata for boot
- CPU later on
-Date: Tue, 29 May 2018 14:30:41 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1805291430130.5563@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH 04/13] xen/arm: Add ARCH_WORKAROUND_2 probing
+Date: Tue, 29 May 2018 14:35:26 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1805291430490.5563@sstabellini-ThinkPad-X260>
 References: <20180522174254.27551-1-julien.grall@arm.com>
- <20180522174254.27551-4-julien.grall@arm.com>
- <alpine.DEB.2.10.1805231434360.15101@sstabellini-ThinkPad-X260>
- <903bccf0-ceb7-d184-2b6c-c44afbf223a0@arm.com>
+ <20180522174254.27551-5-julien.grall@arm.com>
+ <alpine.DEB.2.10.1805231437100.15101@sstabellini-ThinkPad-X260>
+ <8c536000-45a9-cb84-8410-6998971bdddf@arm.com>
+ <alpine.DEB.2.10.1805251222130.12008@sstabellini-ThinkPad-X260>
+ <68d78c21-0404-ec12-e08c-c379db27daf5@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-54272694-1527629727=:5563"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=g2yr=iq=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fNmCZ-00067y-8x
- for xen-devel@lists.xenproject.org; Tue, 29 May 2018 21:30:43 +0000
-In-Reply-To: <903bccf0-ceb7-d184-2b6c-c44afbf223a0@arm.com>
+ id 1fNmHB-0006L9-PX
+ for xen-devel@lists.xenproject.org; Tue, 29 May 2018 21:35:29 +0000
+In-Reply-To: <68d78c21-0404-ec12-e08c-c379db27daf5@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,43 +25,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@arm.com
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCAyNSBNYXkgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIFN0ZWZhbm8sCj4g
-Cj4gT24gMDUvMjMvMjAxOCAxMDozNCBQTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4g
-T24gVHVlLCAyMiBNYXkgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+ID4gPiBTb21lIGVycmF0
-YSB3aWxsIHJlbHkgb24gdGhlIFNNQ0NDIHZlcnNpb24gd2hpY2ggaXMgZGV0ZWN0ZWQgYnkKPiA+
-ID4gcHNjaV9pbml0KCkuCj4gPiA+IAo+ID4gPiBUaGlzIGlzIHBhcnQgb2YgWFNBLTI2My4KPiA+
-ID4gCj4gPiA+IFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5j
-b20+Cj4gPiAKPiA+IFJldmlld2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5p
-QGtlcm5lbC5vcmc+Cj4gCj4gVGhhbmsgeW91IGZvciB0aGUgcmV2aWV3LiBPbiBhbiBpbnRlcm5h
-bCByZXZpZXcgQW5kcmUncyBzdWdnZXN0ZWQgdG8gbW92ZQo+IHBzY2lfaW5pdCgpIG91dHNpZGUg
-c21wX2luaXRfY3B1cygpLiBTb21ldGhpbmcgbGlrZToKPiAKPiAgICBwcm9jZXNzb3JfaWQoKTsK
-PiAKPiAgICAgLyogTmVlZCBQU0NJIHZlcnNpb24gZm9yIGZpcm13YXJlIGJhc2VkIGVycmF0YSB3
-b3JrYXJvdW5kcyAqLwo+ICAgICBwc2NpX2luaXQoKTsKPiAKPiAgICAgY2hlY2tfbG9jYWxfY3B1
-X2VycmF0YSgpOwo+IAo+ICAgICBzbXBfaW5pdF9jcHVzKCk7Cj4gCj4gSSBhbSB3b25kZXJpbmcg
-d2hldGhlciBpdCB3b3VsZCBiZSBjbGVhcmVyIHRvIGhhdmUuIFdoYXQgZG8geW91IHRoaW5rPwoK
-VGhhdCBhbHNvIHdvcmtzLiBJIGFtIGZpbmUgZWl0aGVyIHdheSwgdGhleSBib3RoIGxvb2sgT0sg
-dG8gbWUuCgoKPiAKPiA+IAo+ID4gPiAtLS0KPiA+ID4gICB4ZW4vYXJjaC9hcm0vc2V0dXAuYyB8
-IDggKysrKysrLS0KPiA+ID4gICAxIGZpbGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCAyIGRl
-bGV0aW9ucygtKQo+ID4gPiAKPiA+ID4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9zZXR1cC5j
-IGIveGVuL2FyY2gvYXJtL3NldHVwLmMKPiA+ID4gaW5kZXggMWQ2ZjZiZjM3ZS4uYWM5M2RlNDc4
-NiAxMDA2NDQKPiA+ID4gLS0tIGEveGVuL2FyY2gvYXJtL3NldHVwLmMKPiA+ID4gKysrIGIveGVu
-L2FyY2gvYXJtL3NldHVwLmMKPiA+ID4gQEAgLTE3MSw4ICsxNzEsNiBAQCBzdGF0aWMgdm9pZCBf
-X2luaXQgcHJvY2Vzc29yX2lkKHZvaWQpCj4gPiA+ICAgICAgIH0KPiA+ID4gICAgICAgICBwcm9j
-ZXNzb3Jfc2V0dXAoKTsKPiA+ID4gLQo+ID4gPiAtICAgIGNoZWNrX2xvY2FsX2NwdV9lcnJhdGEo
-KTsKPiA+ID4gICB9Cj4gPiA+ICAgICB2b2lkIGR0X3VucmVzZXJ2ZWRfcmVnaW9ucyhwYWRkcl90
-IHMsIHBhZGRyX3QgZSwKPiA+ID4gQEAgLTc3OSw2ICs3NzcsMTIgQEAgdm9pZCBfX2luaXQgc3Rh
-cnRfeGVuKHVuc2lnbmVkIGxvbmcgYm9vdF9waHlzX29mZnNldCwKPiA+ID4gICAgICAgcHJpbnRr
-KFhFTkxPR19JTkZPICJTTVA6IEFsbG93aW5nICV1IENQVXNcbiIsIGNwdXMpOwo+ID4gPiAgICAg
-ICBucl9jcHVfaWRzID0gY3B1czsKPiA+ID4gICArICAgIC8qCj4gPiA+ICsgICAgICogU29tZSBl
-cnJhdGEgcmVsaWVzIG9uIFNNQ0NDIHZlcnNpb24gd2hpY2ggaXMgZGV0ZWN0ZWQgYnkKPiA+ID4g
-cHNjaV9pbml0KCkKPiA+ID4gKyAgICAgKiAoY2FsbGVkIGZyb20gc21wX2luaXRfY3B1cygpKS4K
-PiA+ID4gKyAgICAgKi8KPiA+ID4gKyAgICBjaGVja19sb2NhbF9jcHVfZXJyYXRhKCk7Cj4gPiA+
-ICsKPiA+ID4gICAgICAgaW5pdF94ZW5fdGltZSgpOwo+ID4gPiAgICAgICAgIGdpY19pbml0KCk7
-Cj4gPiA+IC0tIAo+ID4gPiAyLjExLjAKPiA+ID4gCj4gCj4gLS0gCj4gSnVsaWVuIEdyYWxsCj4g
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-54272694-1527629727=:5563
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Sat, 26 May 2018, Andrew Cooper wrote:
+> On 25/05/2018 21:51, Stefano Stabellini wrote:
+> > On Wed, 23 May 2018, Julien Grall wrote:
+> >> Hi,
+> >>
+> >> On 05/23/2018 10:57 PM, Stefano Stabellini wrote:
+> >>> On Tue, 22 May 2018, Julien Grall wrote:
+> >>>> As for Spectre variant-2, we rely on SMCCC 1.1 to provide the discovery
+> >>>> mechanism for detecting the SSBD mitigation.
+> >>>>
+> >>>> A new capability is also allocated for that purpose, and a config
+> >>>> option.
+> >>>>
+> >>>> This is part of XSA-263.
+> >>>>
+> >>>> Signed-off-by: Julien Grall <julien.grall@arm.com>
+> >>>> ---
+> >>>>   xen/arch/arm/Kconfig             | 10 ++++++++++
+> >>>>   xen/arch/arm/cpuerrata.c         | 39
+> >>>> +++++++++++++++++++++++++++++++++++++++
+> >>>>   xen/include/asm-arm/cpuerrata.h  | 21 +++++++++++++++++++++
+> >>>>   xen/include/asm-arm/cpufeature.h |  3 ++-
+> >>>>   xen/include/asm-arm/smccc.h      |  6 ++++++
+> >>>>   5 files changed, 78 insertions(+), 1 deletion(-)
+> >>>>
+> >>>> diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+> >>>> index 8174c0c635..0e2d027060 100644
+> >>>> --- a/xen/arch/arm/Kconfig
+> >>>> +++ b/xen/arch/arm/Kconfig
+> >>>> @@ -73,6 +73,16 @@ config SBSA_VUART_CONSOLE
+> >>>>   	  Allows a guest to use SBSA Generic UART as a console. The
+> >>>>   	  SBSA Generic UART implements a subset of ARM PL011 UART.
+> >>>>   +config ARM_SSBD
+> >>>> +	bool "Speculative Store Bypass Disable" if EXPERT = "y"
+> >>>> +	depends on HAS_ALTERNATIVE
+> >>>> +	default y
+> >>>> +	help
+> >>>> +	  This enables mitigation of bypassing of previous stores by
+> >>>> speculative
+> >>>> +	  loads.
+> >>> I would add a reference to spectre v4. What do you think of:
+> >>>
+> >>>    This enables the mitigation of Spectre v4 attacks based on bypassing
+> >>>    of previous memory stores by speculative loads.
+> >> Well, the real name is SSBD (Speculative Store Bypass Disable). AFAIK, Spectre
+> >> only refers to variant 1 and 2 so far. This one has no fancy name and the
+> >> specifications is using SSBD.
+> > Googling for Spectre Variant 4 returns twice as many results as Googling
+> > for Speculative Store Bypass Disable. It doesn't matter what is the
+> > official name for the security issue, I think we need to include a
+> > reference to the most common name for it.
+> 
+> "Speculative Store Bypass" is the agreed vendor-neutral name for the
+> issue.  This is why all the mitigation is SSBD, where the D on the end
+> is Disable.
+> 
+> Google SP4 is a common name (but only covers one reporter of the issue),
+> whereas Spectre has nothing to do with this issue, and is definitely
+> wrong to use.
+> 
+> If in doubt, use SSB(D).
+
+I think we should definitely call it SSBD, I was just saying that it
+might be helpful to include also "Variant 4" in the description, such
+as:
+
+ This is also known as Variant 4.
+
+to help users find the right results on Google. Anyway, given that you
+are certainly better informed than me about it, I won't insist on this
+point, I am OK without mentioning "Variant 4".
+--8323329-54272694-1527629727=:5563
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-54272694-1527629727=:5563--
