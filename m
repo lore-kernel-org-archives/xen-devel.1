@@ -1,22 +1,22 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 04/13] xen/arm: Add ARCH_WORKAROUND_2 probing
-Date: Tue, 29 May 2018 14:35:26 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1805291430490.5563@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH 10/13] xen/arm64: Implement a fast path for
+ handling SMCCC_ARCH_WORKAROUND_2
+Date: Tue, 29 May 2018 14:39:08 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1805291437380.5563@sstabellini-ThinkPad-X260>
 References: <20180522174254.27551-1-julien.grall@arm.com>
- <20180522174254.27551-5-julien.grall@arm.com>
- <alpine.DEB.2.10.1805231437100.15101@sstabellini-ThinkPad-X260>
- <8c536000-45a9-cb84-8410-6998971bdddf@arm.com>
- <alpine.DEB.2.10.1805251222130.12008@sstabellini-ThinkPad-X260>
- <68d78c21-0404-ec12-e08c-c379db27daf5@citrix.com>
+ <20180522174254.27551-11-julien.grall@arm.com>
+ <alpine.DEB.2.10.1805231648080.15101@sstabellini-ThinkPad-X260>
+ <51a38814-0254-9eac-3241-e28115690c13@arm.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-54272694-1527629727=:5563"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=g2yr=iq=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fNmHB-0006L9-PX
- for xen-devel@lists.xenproject.org; Tue, 29 May 2018 21:35:29 +0000
-In-Reply-To: <68d78c21-0404-ec12-e08c-c379db27daf5@citrix.com>
+ id 1fNmKp-0006a6-SD
+ for xen-devel@lists.xenproject.org; Tue, 29 May 2018 21:39:15 +0000
+In-Reply-To: <51a38814-0254-9eac-3241-e28115690c13@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,96 +25,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@arm.com
+To: Julien Grall <julien.grall@arm.com>
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-54272694-1527629727=:5563
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Sat, 26 May 2018, Andrew Cooper wrote:
-> On 25/05/2018 21:51, Stefano Stabellini wrote:
-> > On Wed, 23 May 2018, Julien Grall wrote:
-> >> Hi,
-> >>
-> >> On 05/23/2018 10:57 PM, Stefano Stabellini wrote:
-> >>> On Tue, 22 May 2018, Julien Grall wrote:
-> >>>> As for Spectre variant-2, we rely on SMCCC 1.1 to provide the discovery
-> >>>> mechanism for detecting the SSBD mitigation.
-> >>>>
-> >>>> A new capability is also allocated for that purpose, and a config
-> >>>> option.
-> >>>>
-> >>>> This is part of XSA-263.
-> >>>>
-> >>>> Signed-off-by: Julien Grall <julien.grall@arm.com>
-> >>>> ---
-> >>>>   xen/arch/arm/Kconfig             | 10 ++++++++++
-> >>>>   xen/arch/arm/cpuerrata.c         | 39
-> >>>> +++++++++++++++++++++++++++++++++++++++
-> >>>>   xen/include/asm-arm/cpuerrata.h  | 21 +++++++++++++++++++++
-> >>>>   xen/include/asm-arm/cpufeature.h |  3 ++-
-> >>>>   xen/include/asm-arm/smccc.h      |  6 ++++++
-> >>>>   5 files changed, 78 insertions(+), 1 deletion(-)
-> >>>>
-> >>>> diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-> >>>> index 8174c0c635..0e2d027060 100644
-> >>>> --- a/xen/arch/arm/Kconfig
-> >>>> +++ b/xen/arch/arm/Kconfig
-> >>>> @@ -73,6 +73,16 @@ config SBSA_VUART_CONSOLE
-> >>>>   	  Allows a guest to use SBSA Generic UART as a console. The
-> >>>>   	  SBSA Generic UART implements a subset of ARM PL011 UART.
-> >>>>   +config ARM_SSBD
-> >>>> +	bool "Speculative Store Bypass Disable" if EXPERT = "y"
-> >>>> +	depends on HAS_ALTERNATIVE
-> >>>> +	default y
-> >>>> +	help
-> >>>> +	  This enables mitigation of bypassing of previous stores by
-> >>>> speculative
-> >>>> +	  loads.
-> >>> I would add a reference to spectre v4. What do you think of:
-> >>>
-> >>>    This enables the mitigation of Spectre v4 attacks based on bypassing
-> >>>    of previous memory stores by speculative loads.
-> >> Well, the real name is SSBD (Speculative Store Bypass Disable). AFAIK, Spectre
-> >> only refers to variant 1 and 2 so far. This one has no fancy name and the
-> >> specifications is using SSBD.
-> > Googling for Spectre Variant 4 returns twice as many results as Googling
-> > for Speculative Store Bypass Disable. It doesn't matter what is the
-> > official name for the security issue, I think we need to include a
-> > reference to the most common name for it.
-> 
-> "Speculative Store Bypass" is the agreed vendor-neutral name for the
-> issue.  This is why all the mitigation is SSBD, where the D on the end
-> is Disable.
-> 
-> Google SP4 is a common name (but only covers one reporter of the issue),
-> whereas Spectre has nothing to do with this issue, and is definitely
-> wrong to use.
-> 
-> If in doubt, use SSB(D).
-
-I think we should definitely call it SSBD, I was just saying that it
-might be helpful to include also "Variant 4" in the description, such
-as:
-
- This is also known as Variant 4.
-
-to help users find the right results on Google. Anyway, given that you
-are certainly better informed than me about it, I won't insist on this
-point, I am OK without mentioning "Variant 4".
---8323329-54272694-1527629727=:5563
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-54272694-1527629727=:5563--
+T24gVHVlLCAyOSBNYXkgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIFN0ZWZhbm8sCj4g
+Cj4gT24gMjUvMDUvMTggMjA6MTgsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IE9uIFR1
+ZSwgMjIgTWF5IDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gVGhlIGZ1bmN0aW9uIEFS
+TV9TTUNDQ19BUkNIX1dPUktBUk9VTkRfMiB3aWxsIGJlIGNhbGxlZCBieSB0aGUgZ3Vlc3QgZm9y
+Cj4gPiA+IGVuYWJsaW5nL2Rpc2FibGluZyB0aGUgc3NiZCBtaXRpZ2F0aW9uLiBTbyB3ZSB3YW50
+IHRoZSBoYW5kbGluZyB0bwo+ID4gPiBiZSBhcyBmYXN0IGFzIHBvc3NpYmxlLgo+ID4gPiAKPiA+
+ID4gVGhlIG5ldyBzZXF1ZW5jZSB3aWxsIGZvcndhcmQgZ3Vlc3QncyBBUkNIX1dPUktBUk9VTkRf
+MiBjYWxsIHRvIEVMMyBhbmQKPiA+ID4gYWxzbyB0cmFjayB0aGUgc3RhdGUgb2YgdGhlIHdvcmth
+cm91bmQgcGVyLXZDUFUuCj4gPiA+IAo+ID4gPiBOb3RlIHRoYXQgc2luY2Ugd2UgbmVlZCB0byBl
+eGVjdXRlIGJyYW5jaGVzLCB0aGlzIGFsd2F5cyBleGVjdXRlcyBhZnRlcgo+ID4gPiB0aGUgc3Bl
+Y3RyZS12MiBtaXRpZ2F0aW9uLgo+ID4gPiAKPiA+ID4gVGhpcyBjb2RlIGlzIGJhc2VkIG9uIEtW
+TSBjb3VudGVycGFydCAiYXJtNjQ6IEtWTTogSGFuZGxlIGd1ZXN0J3MKPiA+ID4gQVJDSF9XT1JL
+QVJPVU5EXzIgcmVxdWVzdHMiIHdyaXR0ZW4gYnkgTWFyYyBaeW5naWVyLgo+ID4gPiAKPiA+ID4g
+VGhpcyBpcyBwYXJ0IG9mIFhTQS0yNjMuCj4gPiA+IAo+ID4gPiBTaWduZWQtb2ZmLWJ5OiBKdWxp
+ZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgo+ID4gCj4gPiBJIHRoaW5rIHRoZSBwYXRj
+aCB3b3JrcyBhcyBpbnRlbmRlZC4KPiA+IAo+ID4gCj4gPiA+IC0tLQo+ID4gPiAgIHhlbi9hcmNo
+L2FybS9hcm02NC9hc20tb2Zmc2V0cy5jIHwgIDIgKysKPiA+ID4gICB4ZW4vYXJjaC9hcm0vYXJt
+NjQvZW50cnkuUyAgICAgICB8IDQzCj4gPiA+ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKy0KPiA+ID4gICB4ZW4vYXJjaC9hcm0vY3B1ZXJyYXRhLmMgICAgICAgICB8IDE4
+ICsrKysrKysrKysrKysrKysrCj4gPiA+ICAgMyBmaWxlcyBjaGFuZ2VkLCA2MiBpbnNlcnRpb25z
+KCspLCAxIGRlbGV0aW9uKC0pCj4gPiA+IAo+ID4gPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJt
+L2FybTY0L2FzbS1vZmZzZXRzLmMKPiA+ID4gYi94ZW4vYXJjaC9hcm0vYXJtNjQvYXNtLW9mZnNl
+dHMuYwo+ID4gPiBpbmRleCBjZTI0ZTQ0NDczLi5mNWM2OTZkMDkyIDEwMDY0NAo+ID4gPiAtLS0g
+YS94ZW4vYXJjaC9hcm0vYXJtNjQvYXNtLW9mZnNldHMuYwo+ID4gPiArKysgYi94ZW4vYXJjaC9h
+cm0vYXJtNjQvYXNtLW9mZnNldHMuYwo+ID4gPiBAQCAtMjIsNiArMjIsNyBAQAo+ID4gPiAgIHZv
+aWQgX19kdW1teV9fKHZvaWQpCj4gPiA+ICAgewo+ID4gPiAgICAgIE9GRlNFVChVUkVHU19YMCwg
+c3RydWN0IGNwdV91c2VyX3JlZ3MsIHgwKTsKPiA+ID4gKyAgIE9GRlNFVChVUkVHU19YMSwgc3Ry
+dWN0IGNwdV91c2VyX3JlZ3MsIHgxKTsKPiA+ID4gICAgICBPRkZTRVQoVVJFR1NfTFIsIHN0cnVj
+dCBjcHVfdXNlcl9yZWdzLCBscik7Cj4gPiA+ICAgICAgICBPRkZTRVQoVVJFR1NfU1AsIHN0cnVj
+dCBjcHVfdXNlcl9yZWdzLCBzcCk7Cj4gPiA+IEBAIC00NSw2ICs0Niw3IEBAIHZvaWQgX19kdW1t
+eV9fKHZvaWQpCj4gPiA+ICAgICAgQkxBTksoKTsKPiA+ID4gICAgICAgIERFRklORShDUFVJTkZP
+X3NpemVvZiwgc2l6ZW9mKHN0cnVjdCBjcHVfaW5mbykpOwo+ID4gPiArICAgT0ZGU0VUKENQVUlO
+Rk9fZmxhZ3MsIHN0cnVjdCBjcHVfaW5mbywgZmxhZ3MpOwo+ID4gPiAgICAgICAgT0ZGU0VUKFZD
+UFVfYXJjaF9zYXZlZF9jb250ZXh0LCBzdHJ1Y3QgdmNwdSwgYXJjaC5zYXZlZF9jb250ZXh0KTsK
+PiA+ID4gICBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2FybTY0L2VudHJ5LlMgYi94ZW4vYXJj
+aC9hcm0vYXJtNjQvZW50cnkuUwo+ID4gPiBpbmRleCBlMjM0NGU1NjVmLi44ZTI1ZmYzOTk3IDEw
+MDY0NAo+ID4gPiAtLS0gYS94ZW4vYXJjaC9hcm0vYXJtNjQvZW50cnkuUwo+ID4gPiArKysgYi94
+ZW4vYXJjaC9hcm0vYXJtNjQvZW50cnkuUwo+ID4gPiBAQCAtMSw0ICsxLDYgQEAKPiA+ID4gICAj
+aW5jbHVkZSA8YXNtL2FzbV9kZWZucy5oPgo+ID4gPiArI2luY2x1ZGUgPGFzbS9jdXJyZW50Lmg+
+Cj4gPiA+ICsjaW5jbHVkZSA8YXNtL21hY3Jvcy5oPgo+ID4gPiAgICNpbmNsdWRlIDxhc20vcmVn
+cy5oPgo+ID4gPiAgICNpbmNsdWRlIDxhc20vYWx0ZXJuYXRpdmUuaD4KPiA+ID4gICAjaW5jbHVk
+ZSA8YXNtL3NtY2NjLmg+Cj4gPiA+IEBAIC0yNDEsNyArMjQzLDcgQEAgZ3Vlc3Rfc3luYzoKPiA+
+ID4gICAgICAgICAgICAqIGJlIGVuY29kZWQgYXMgYW4gaW1tZWRpYXRlIGZvciBjbXAuCj4gPiA+
+ICAgICAgICAgICAgKi8KPiA+ID4gICAgICAgICAgIGVvciAgICAgdzAsIHcwLCAjQVJNX1NNQ0ND
+X0FSQ0hfV09SS0FST1VORF8xX0ZJRAo+ID4gPiAtICAgICAgICBjYm56ICAgIHcwLCBndWVzdF9z
+eW5jX3Nsb3dwYXRoCj4gPiA+ICsgICAgICAgIGNibnogICAgdzAsIGNoZWNrX3dhMgo+ID4gPiAg
+ICAgICAgICAgICAvKgo+ID4gPiAgICAgICAgICAgICogQ2xvYmJlciBib3RoIHgwIGFuZCB4MSB0
+byBwcmV2ZW50IGxlYWthZ2UuIE5vdGUgdGhhdCB0aGFua3MKPiA+ID4gQEAgLTI1MCw2ICsyNTIs
+NDUgQEAgZ3Vlc3Rfc3luYzoKPiA+ID4gICAgICAgICAgIG1vdiAgICAgeDEsIHh6cgo+ID4gPiAg
+ICAgICAgICAgZXJldAo+ID4gPiAgICtjaGVja193YTI6Cj4gPiA+ICsgICAgICAgIC8qIEFSTV9T
+TUNDQ19BUkNIX1dPUktBUk9VTkRfMiBoYW5kbGluZyAqLwo+ID4gPiArICAgICAgICBlb3IgICAg
+IHcwLCB3MCwgI0FSTV9TTUNDQ19BUkNIX1dPUktBUk9VTkRfMV9GSUQKPiA+IAo+ID4gV2UgY29t
+ZSB0byBjaGVja193YTIgYWZ0ZXIgY2hlY2tpbmcgb24gI0FSTV9TTUNDQ19BUkNIX1dPUktBUk9V
+TkRfMV9GSUQsCj4gPiBzbyBtYXliZSB3ZSBjYW4gc2tpcCB0aGlzPwo+IAo+IFRoaXMgaXMgbmVj
+ZXNzYXJ5LiB3MCBjb250YWlucyAiZ3Vlc3QgeDAiIHhvcgo+ICJBUk1fU01DQ0NfQVJDSF9XT1JL
+QVJPVU5EXzFfRklEIi4gU28gd2UgZmlyc3QgbmVlZCB0byByZXZlcnQgYmFjayB0aGUgeG9yIHRv
+Cj4gZ2V0ICJndWVzdCB4MCIuCj4gCj4gTm90ZSwgaXQgd291bGQgYmUgcG9zc2libGUgdG8gY29t
+YmluZSB0aGUgMiB4b3IuIFNvbWV0aGluZyBsaWtlOgo+IAo+IGVvcgl3MCwgdzAsICMoQVJNX1NN
+Q0NDX0FSQ0hfV09SS0FST1VORF8xX0ZJRCBeCj4gQVJNX1NNQ0NDX0FSQ0hfV09SS0FST1VORF8y
+X0ZJRCkuCj4gCj4gV2hpY2ggdmVyc2lvbiBkbyB5b3UgcHJlZmVyPwoKSSB1bmRlcnN0YW5kIG5v
+dy4gTGV0J3MgY29tYmluZSB0aGUgdHdvIHhvci4KCgo+ID4gPiArICAgICAgICBlb3IgICAgIHcw
+LCB3MCwgI0FSTV9TTUNDQ19BUkNIX1dPUktBUk9VTkRfMl9GSUQKPiA+ID4gKyAgICAgICAgY2Ju
+eiAgICB3MCwgZ3Vlc3Rfc3luY19zbG93cGF0aAo+ID4gPiArI2lmZGVmIENPTkZJR19BUk1fU1NC
+RAo+ID4gPiArYWx0ZXJuYXRpdmVfY2IgYXJtX2VuYWJsZV93YTJfaGFuZGxpbmcKPiA+ID4gKyAg
+ICAgICAgYiAgICAgICB3YTJfZW5kCj4gPiA+ICthbHRlcm5hdGl2ZV9jYl9lbmQKPiA+ID4gKyAg
+ICAgICAgLyogU2FuaXRpemUgdGhlIGFyZ3VtZW50ICovCj4gPiA+ICsgICAgICAgIG1vdiAgICAg
+eDAsICMtKFVSRUdTX2tlcm5lbF9zaXplb2YgLSBVUkVHU19YMSkgIC8qIHgwIDo9IG9mZnNldAo+
+ID4gPiBvZiBndWVzdCdzIHgxIG9uIHRoZSBzdGFjayAqLwo+ID4gPiArICAgICAgICBsZHIgICAg
+IHgxLCBbc3AsIHgwXSAgICAgICAgICAgICAgICAgICAgICAgICAgICAvKiBMb2FkIGd1ZXN0J3MK
+PiA+ID4geDEgKi8KPiA+ID4gKyAgICAgICAgY21wICAgICB3MSwgd3pyCj4gPiA+ICsgICAgICAg
+IGNzZXQgICAgeDEsIG5lCj4gPiA+ICsKPiA+ID4gKyAgICAgICAgLyoKPiA+ID4gKyAgICAgICAg
+ICogVXBkYXRlIHRoZSBndWVzdCBmbGFnLiBBdCB0aGlzIHN0YWdlIHNwIHBvaW50IGFmdGVyIHRo
+ZSBmaWVsZAo+ID4gPiArICAgICAgICAgKiBndWVzdF9jcHVfdXNlcl9yZWdzIGluIGNwdV9pbmZv
+Lgo+ID4gPiArICAgICAgICAgKi8KPiA+ID4gKyAgICAgICAgYWRyX2NwdV9pbmZvIHgyCj4gPiA+
+ICsgICAgICAgIGxkciAgICAgeDAsIFt4MiwgI0NQVUlORk9fZmxhZ3NdCj4gPiA+ICsgICAgICAg
+IGJmaSAgICAgeDAsIHgxLCAjQ1BVSU5GT19XT1JLQVJPVU5EXzJfRkxBR19TSElGVCwgIzEKPiA+
+ID4gKyAgICAgICAgc3RyICAgICB4MCwgW3gyLCAjQ1BVSU5GT19mbGFnc10KPiA+ID4gKwo+ID4g
+PiArICAgICAgICAvKiBDaGVjayB0aGF0IHdlIGFjdHVhbGx5IG5lZWQgdG8gcGVyZm9ybSB0aGUg
+Y2FsbCAqLwo+ID4gPiArICAgICAgICBsZHJfdGhpc19jcHUgeDAsIHNzYmRfY2FsbGJhY2tfcmVx
+dWlyZWQsIHgyCj4gPiA+ICsgICAgICAgIGNieiAgICAgeDAsIHdhMl9lbmQKPiA+ID4gKyAgICAg
+ICAgbW92ICAgICB3MCwgI0FSTV9TTUNDQ19BUkNIX1dPUktBUk9VTkRfMl9GSUQKPiA+ID4gKyAg
+ICAgICAgc21jICAgICAjMAo+ID4gCj4gPiBTaG91bGRuJ3Qgd2UgbWFrZSB0aGUgY2FsbCBvbmx5
+IGlmIGdldF9jcHVfaW5mbygpLT5mbGFncyBjaGFuZ2VkPwo+IAo+IFRoZXJlIGFyZSBubyBoYXJt
+IHRvIGNhbGwgQVJDSF9XT1JLQVJPVU5EXzIgaWYgdGhlIGZsYWcgZGlkbid0IGNoYW5nZWQuCj4g
+SG93ZXZlciB0aGUgZ3Vlc3Qgc2hvdWxkIGFscmVhZHkgYXZvaWQgdG8gZG8gdGhlIGNhbGwgd2hl
+biBpdCBpcyBub3QKPiBuZWNlc3NhcnkuIFNvIHRoYXQncyBub3QgYSBjb21tb24gY2FzZSB0aGF0
+IHdlIHNob3VsZCBjYXJlLgoKQWxsIHJpZ2h0CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
