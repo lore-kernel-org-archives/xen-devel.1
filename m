@@ -1,20 +1,15 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v3 5/8] hvm/mtrr: use the hardware number of
- variable ranges for Dom0
-Date: Tue, 29 May 2018 06:41:47 -0600
-Message-ID: <5B0D4A8B02000078001C69CB@prv1-mh.provo.novell.com>
-References: <20180522154040.20581-1-roger.pau@citrix.com>
- <20180522154040.20581-6-roger.pau@citrix.com>
+Subject: Re: [PATCH 4/6] x86/vmx: Simplify PAT handling during
+ vcpu construction
+Date: Tue, 29 May 2018 05:41:49 -0600
+Message-ID: <5B0D3C7D02000078001C68EF@prv1-mh.provo.novell.com>
+References: <1527517678-1779-1-git-send-email-andrew.cooper3@citrix.com>
+ <1527517678-1779-5-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=gyld=iq=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fNdwm-00017l-7G
- for xen-devel@lists.xenproject.org; Tue, 29 May 2018 12:41:52 +0000
-In-Reply-To: <20180522154040.20581-6-roger.pau@citrix.com>
+In-Reply-To: <1527517678-1779-5-git-send-email-andrew.cooper3@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,20 +19,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIyLjA1LjE4IGF0IDE3OjQwLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IEBAIC00NDgsNiArNDYwLDkgQEAgYm9vbF90IG10cnJfdmFyX3JhbmdlX21zcl9zZXQoCj4gICAg
-ICB1aW50NjRfdCAqdmFyX3JhbmdlX2Jhc2UgPSAodWludDY0X3QqKW0tPnZhcl9yYW5nZXM7Cj4g
-IAo+ICAgICAgaW5kZXggPSBtc3IgLSBNU1JfSUEzMl9NVFJSX1BIWVNCQVNFKDApOwo+ICsgICAg
-aWYgKCAoaW5kZXggLyAyKSA+PSBNQVNLX0VYVFIobS0+bXRycl9jYXAsIE1UUlJjYXBfVkNOVCkg
-KQo+ICsgICAgICAgIHJldHVybiAwOwoKSSB0aGluayB0aGlzIHdvdWxkIGJldHRlciBnbyBpbnRv
-IGh2bV9tc3Jfd3JpdGVfaW50ZXJjZXB0KCksIHBhcmFsbGVsaW5nCnRoZSBodm1fbXNyX3JlYWRf
-aW50ZXJjZXB0KCkgYWRqdXN0bWVudCB5b3UgbWFrZS4gVGhlcmUgbWlnaHQgYmUgYW4KQVNTRVJU
-KCkgd2FycmFudGVkIGhlcmUgKHRoZSBvdGhlciBjYWxsZXIgaXMgaHZtX2xvYWRfbXRycl9tc3Io
-KSwKd2hpY2ggYnkgbm93IGhhcyBzdWl0YWJsZSBjaGVja2luZyBpbiBwbGFjZSBhZmFpY3QpLgoK
-SmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDI4LjA1LjE4IGF0IDE2OjI3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gVGhlIGhvc3QgUEFUIHZhbHVlIGlzIGEgY29tcGlsZSB0aW1lIGNvbnN0YW50LCBhbmQg
+ZG9lc24ndCBuZWVkIHRvIGJlIHJlYWQgb3V0Cj4gb2YgaGFyZHdhcmUuICBNZXJnZSB0aGlzIGlm
+IGJsb2NrIGludG8gdGhlIHByZXZpb3VzIGJsb2NrLCB3aGljaCBoYXMgYW4KPiBpZGVudGljYWwg
+Y29uZGl0aW9uLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29w
+ZXIzQGNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2Uu
+Y29tPgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
