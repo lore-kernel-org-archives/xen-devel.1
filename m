@@ -1,21 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH for 4.9 and older] x86: don't enable XPTI on
- idle domain
-Date: Wed, 30 May 2018 04:48:11 -0600
-Message-ID: <5B0E816B02000078001C6EEC@prv1-mh.provo.novell.com>
-References: <5B0E66EC02000078001C6E0D@prv1-mh.provo.novell.com>
- <32677965-a37a-b2c1-5635-f3a4877c57eb@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: [PATCH 1/3] x86/amd: revert commit 944e0fc51a89c9827b9
+Date: Wed, 30 May 2018 13:09:56 +0200
+Message-ID: <20180530110958.19413-2-jgross__32829.9327441075$1527678533$gmane$org@suse.com>
+References: <20180530110958.19413-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ai2o=ir=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fNyeQ-0007Yd-5m
- for xen-devel@lists.xenproject.org; Wed, 30 May 2018 10:48:18 +0000
-In-Reply-To: <32677965-a37a-b2c1-5635-f3a4877c57eb@citrix.com>
-Content-Disposition: inline
+ (envelope-from <srs0=v8ug=ir=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fNyzV-0001Mo-65
+ for xen-devel@lists.xenproject.org; Wed, 30 May 2018 11:10:05 +0000
+In-Reply-To: <20180530110958.19413-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,22 +21,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: stable@vger.kernel.org, xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, boris.ostrovsky@oracle.com, dwmw@amazon.co.uk
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDMwLjA1LjE4IGF0IDEyOjA0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMzAvMDUvMTggMDk6NTUsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBXaGlsZSB0aGUg
-aW52b2x2ZWQgY29kZSAoaW4gcHZfZG9tYWluX2luaXRpYWxpc2UoKSkgc2l0cyBiZWhpbmQgYW4K
-Pj4gIWlzX2lkbGVfZG9tYWluKCkgY2hlY2sgYWxyZWFkeSwgd2UgbmVlZCB0byBhZGQgb25lIGhl
-cmUuCj4gCj4gSSdtIGFmcmFpZCB0aGF0IEkgc3RydWdnbGVkIHRvIHVuZGVyc3RhbmQgd2hhdCB5
-b3UgbWVhbnQgaGVyZS4gIEFGQUNJVCwKPiB5b3UgbWVhbiB0aGF0IHRoZSBiYWNrcG9ydCBvdmVy
-IHRoZSBpbnRyb2R1Y3Rpb24gb2YKPiBwdl9kb21haW5faW5pdGlhbGlzZSgpIG5lZ2xlY3RlZCB0
-byBhY2NvdW50IGZvciB0aGUgZmFjdCB0aGF0IHRoZSBpZGxlCj4gZG9tYWluIGFsc28gd2FuZGVy
-cyB0aGlzIHBhdGggaW4gNC45IGFuZCBlYXJsaWVyPwoKT2gsIEkgc2VlIEkndmUgb21pdHRlZCAi
-aW4gNC4xMCIgYWhlYWQgb2YgdGhlIGNvbW1hLgoKPj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxp
-Y2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+IAo+IEVpdGhlciB3YXksIFJldmlld2VkLWJ5OiBBbmRy
-ZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKVGhhbmtzLCBKYW4KCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+UmV2ZXJ0IGNvbW1pdCA5NDRlMGZjNTFhODljOTgyN2I5ODgxM2Q2NWRjMDgzMjc0Nzc3YzdmICgi
+eDg2L2FtZDogZG9uJ3QKc2V0IFg4Nl9CVUdfU1lTUkVUX1NTX0FUVFJTIHdoZW4gcnVubmluZyB1
+bmRlciBYZW4iKSBhcyBpdCBpcyBsYWNraW5nCmEgcHJlcmVxdWlzaXRlIHBhdGNoIGFuZCBpcyBt
+YWtpbmcgdGhpbmdzIHdvcnNlLgoKU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3Nz
+QHN1c2UuY29tPgotLS0KIGFyY2gveDg2L2tlcm5lbC9jcHUvYW1kLmMgfCA1ICsrLS0tCiBhcmNo
+L3g4Ni94ZW4vZW5saWdodGVuLmMgIHwgNCArKystCiAyIGZpbGVzIGNoYW5nZWQsIDUgaW5zZXJ0
+aW9ucygrKSwgNCBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9hcmNoL3g4Ni9rZXJuZWwvY3B1
+L2FtZC5jIGIvYXJjaC94ODYva2VybmVsL2NwdS9hbWQuYwppbmRleCA0YzJiZTk5ZmEwZmIuLmNk
+MGFiZjhlZDMxNCAxMDA2NDQKLS0tIGEvYXJjaC94ODYva2VybmVsL2NwdS9hbWQuYworKysgYi9h
+cmNoL3g4Ni9rZXJuZWwvY3B1L2FtZC5jCkBAIC04NTcsOSArODU3LDggQEAgc3RhdGljIHZvaWQg
+aW5pdF9hbWQoc3RydWN0IGNwdWluZm9feDg2ICpjKQogCQlpZiAoY3B1X2hhcyhjLCBYODZfRkVB
+VFVSRV8zRE5PVykgfHwgY3B1X2hhcyhjLCBYODZfRkVBVFVSRV9MTSkpCiAJCQlzZXRfY3B1X2Nh
+cChjLCBYODZfRkVBVFVSRV8zRE5PV1BSRUZFVENIKTsKIAotCS8qIEFNRCBDUFVzIGRvbid0IHJl
+c2V0IFNTIGF0dHJpYnV0ZXMgb24gU1lTUkVULCBYZW4gZG9lcy4gKi8KLQlpZiAoIWNwdV9oYXMo
+YywgWDg2X0ZFQVRVUkVfWEVOUFYpKQotCQlzZXRfY3B1X2J1ZyhjLCBYODZfQlVHX1NZU1JFVF9T
+U19BVFRSUyk7CisJLyogQU1EIENQVXMgZG9uJ3QgcmVzZXQgU1MgYXR0cmlidXRlcyBvbiBTWVNS
+RVQgKi8KKwlzZXRfY3B1X2J1ZyhjLCBYODZfQlVHX1NZU1JFVF9TU19BVFRSUyk7CiB9CiAKICNp
+ZmRlZiBDT05GSUdfWDg2XzMyCmRpZmYgLS1naXQgYS9hcmNoL3g4Ni94ZW4vZW5saWdodGVuLmMg
+Yi9hcmNoL3g4Ni94ZW4vZW5saWdodGVuLmMKaW5kZXggMDgxNDM3YjVmMzgxLi4yYmVhODdjYzBm
+ZjIgMTAwNjQ0Ci0tLSBhL2FyY2gveDg2L3hlbi9lbmxpZ2h0ZW4uYworKysgYi9hcmNoL3g4Ni94
+ZW4vZW5saWdodGVuLmMKQEAgLTE5NzcsOCArMTk3NywxMCBAQCBFWFBPUlRfU1lNQk9MX0dQTCh4
+ZW5faHZtX25lZWRfbGFwaWMpOwogCiBzdGF0aWMgdm9pZCB4ZW5fc2V0X2NwdV9mZWF0dXJlcyhz
+dHJ1Y3QgY3B1aW5mb194ODYgKmMpCiB7Ci0JaWYgKHhlbl9wdl9kb21haW4oKSkKKwlpZiAoeGVu
+X3B2X2RvbWFpbigpKSB7CisJCWNsZWFyX2NwdV9idWcoYywgWDg2X0JVR19TWVNSRVRfU1NfQVRU
+UlMpOwogCQlzZXRfY3B1X2NhcChjLCBYODZfRkVBVFVSRV9YRU5QVik7CisJfQogfQogCiBzdGF0
+aWMgdm9pZCB4ZW5fcGluX3ZjcHUoaW50IGNwdSkKLS0gCjIuMTMuNgoKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
