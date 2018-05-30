@@ -1,23 +1,15 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v1 1/2] x86/mm: Add mem access rights to NPT
-Date: Wed, 30 May 2018 14:56:16 +0100
-Message-ID: <c9ff1b1a-5174-5072-34d5-1d5d2a7a0913@citrix.com>
-References: <1526037083-29920-1-git-send-email-aisaila@bitdefender.com>
- <5AFEF17C02000078001C4210@prv1-mh.provo.novell.com>
- <98b0d49b-07ba-1703-e25e-ceae271038fe@bitdefender.com>
- <5B03E7A702000078001C48B4@prv1-mh.provo.novell.com>
- <1526996127.25123.3.camel@bitdefender.com>
- <5B041ECB02000078001C4B3D@prv1-mh.provo.novell.com>
- <1527671092.25123.9.camel@bitdefender.com>
- <5B0E744002000078001C6E56@prv1-mh.provo.novell.com>
- <1527679210.25123.20.camel@bitdefender.com>
- <5B0E8B1202000078001C6F4F@prv1-mh.provo.novell.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v2 00/10] Intel Processor Trace
+ virtulization enabling
+Date: Wed, 30 May 2018 16:14:59 +0100
+Message-ID: <d4123fb7-293f-bf0e-1e7d-0d3184829023@arm.com>
+References: <1527686884-5917-1-git-send-email-luwei.kang@intel.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B0E8B1202000078001C6F4F@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+In-Reply-To: <1527686884-5917-1-git-send-email-luwei.kang@intel.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,41 +18,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, aisaila@bitdefender.com, Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, tamas@tklengyel.com, xen-devel@lists.xen.org
+To: Luwei Kang <luwei.kang@intel.com>, xen-devel@lists.xen.org
+Cc: kevin.tian@intel.com, sstabellini@kernel.org, wei.liu2@citrix.com, jun.nakajima@intel.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, jbeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMzAvMDUvMTggMTI6MjksIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDMwLjA1LjE4IGF0
-IDEzOjIwLCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3RlOgo+PiBPbiBNaSwgMjAxOC0w
-NS0zMCBhdCAwMzo1MiAtMDYwMCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+PiBPbiAzMC4wNS4x
-OCBhdCAxMTowNCwgPGFpc2FpbGFAYml0ZGVmZW5kZXIuY29tPiB3cm90ZToKPj4+PiBTb3JyeSBm
-b3IgdGhlIG1pc3VuZGVyc3RhbmRpbmcsIEkgd2FudGVkIHRvIGNsYXJpZnkgaWYgdGhlIDU5OjU2
-Cj4+Pj4gYml0cwo+Pj4+IGFyZSBmdWxseSBvayB0byBiZSB1c2VkIG9yIGlmIG5vdCB0aGVuIHdo
-ZXJlIHNob3VsZCBJIHVzZSA0IGJpdHMgdG8KPj4+PiBzdG9yZSB0aGUgbWVtIGFjY2VzcyBpbmZv
-Pwo+Pj4gSSB0aG91Z2h0IEkgaGFkIHN1ZmZpY2llbnRseSBleHBsYWluZWQgdGhpcyAtIHlvdSBo
-YXZlIHR3byBvcHRpb25zOgo+Pj4gMSkgTWFrZSBzdXJlICh2aWEgc29tZSBwcmVyZXEgcGF0Y2go
-ZXMpKSBiaXQgNTkgaGFzIG5vIG90aGVyIHVzZSwgYW5kCj4+PiAgICB0aGVuIHVzZSA1OTo1Ni4K
-Pj4+IDIpIFVzZSBhbm90aGVyIHJhbmdlIHRoYXQncyBwcm92YWJseSBoYXZpbmcgbm8gb3RoZXIg
-dXNlLCBlLmcuCj4+PiAgICA1ODo1NS4KPj4gSSd2ZSBjaGVja2VkIGFuZCBiaXRzIDQwOjUyIGFy
-ZSBkZWZpbmVkIGluIGFzbS9wYWdlLmggZm9yIHBhZ2UgZmxhZ3MuCj4gNDA6NTI/IEhhcmRseS4K
-Pgo+PiBJJ3ZlIHRyaWVkIGJpdHMgNTM6NTYgYW5kIHRoZXJlIHdoZXJlIHNvbWUgcHJvYmxlbXMg
-d2l0aCB0aGUgZ3Vlc3Qgbm90Cj4+IHN0YXJ0aW5nIG9yIHRoZSBpbWFnZSBmcmVlemluZywKPiBX
-ZWxsLCB5b3UnbGwgaGF2ZSB0byBleHBsYWluIHRoaXMgKHBlcmhhcHMganVzdCB0byB5b3Vyc2Vs
-ZikuCj4KPj4gYml0cyA2MiBhbmQgNjMgYXJlIG5vdCBmcmVlIHNvIDU5OjU2IGlzCj4+IHRoZSBv
-bmx5IHNwYWNlIHRvIGJlIHVzZWQgZm9yIHRoaXMgcHVycG9zZSBhbmQgaXMgc2VlbXMgdG8gZnVu
-Y3Rpb24KPj4gY29ycmVjdGx5Lgo+IFdlbGwgLSBhcyBzYWlkIGJlZm9yZSwgYml0IDU5IGlzIG5v
-dCBhdmFpbGFibGUgZm9yIHVzZSB3aXRob3V0IHNvbWUKPiBwcmVyZXEgd29yay4KClRoZXJlIGFy
-ZSBubyBzb2Z0d2FyZSBhdmFpbGFibGUgYml0cyBpbiB0aGUgdG9wIG9mIGFuIEFNRCBJT01NVSBQ
-VEUuwqAKQml0cyA1OTo2MiBhcmUgZGVmaW5lZCwgd2hpbGUgYml0cyA1Mjo1OCBhcmUgc3RyaWN0
-bHkgcmVzZXJ2ZWQgYW5kIGZhdWx0CmlmIHVzZWQuCgpJJ20gYWxzbyBub3QgY29udmluY2VkIG9m
-IHRoZSBzYWZldHkgb2Ygb3VyIGN1cnJlbnQgdXNlcyBvZiBiaXRzIDk6MTEKd2hpY2ggYXJlIHNv
-ZnR3YXJlIGF2YWlsYWJsZSBpbiB0aGUgcmVndWxhciBwYWdldGFibGVzLCBidXQgaGF2ZQpzcGVj
-aWZpYyBtZWFuaW5nIGluIHRoZSBJT01NVSBlbnRyaWVzLgoKSWYgdGhlIGNvZGUgSU9NTVUgY29k
-ZSBkaXNhYmxlcyBwYWdlIHNoYXJpbmcsIHRoZW4gbGV0cyBnbyBvbmUgc21hbGwKc3RlcCBmdXJ0
-aGVyIGFuZCBwcm9oaWJpdCBpdHMgdXNlIGVudGlyZWx5LsKgIFRoZXJlIGlzIG5vIHBvaW50IHRy
-eWluZyB0bwptYWludGFpbiBjb21wYXRpYmlsaXR5IGZvciBhbiBvcHRpb24gd2hpY2ggaXNuJ3Qg
-dXNlZCwgZXNwZWNpYWxseSBpZiBpdApnZXRzIGluIHRoZSB3YXkgb2YgaW1wcm92ZW1lbnRzIGxp
-a2UgdGhpcyBpbiB0aGUgU1ZNIGNvZGUuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+SGksCgpDYW4geW91IHBsZWFzZSBhdm9pZCBDQyBldmVyeW9uZSBvbiBlYWNoIHBhdGNoPyBZb3Ug
+Y2FuIHVzZSAKc2NyaXB0cy9nZXRfbWFpbnRhaW5lcnMucGwgb24gZWFjaCBwYXRjaCB0byBzZWUg
+d2hvIGlzIHJlcXVpcmVkIHRvIGJlIENDZWQuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
