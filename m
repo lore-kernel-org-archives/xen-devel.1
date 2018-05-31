@@ -1,30 +1,18 @@
-From: Julien Grall <julien.grall@gmail.com>
-Subject: Re: [PATCH 05/13] xen/arm: Add command line option to
- control SSBD mitigation
-Date: Thu, 31 May 2018 22:29:48 +0100
-Message-ID: <CAF3u54By5NfOwJewzoLzyi7pZO=7XrWPpW2JR-VFucnt=oCndA@mail.gmail.com>
-References: <20180522174254.27551-1-julien.grall@arm.com>
- <20180522174254.27551-6-julien.grall@arm.com>
- <alpine.DEB.2.10.1805231504320.15101@sstabellini-ThinkPad-X260>
- <614031dd-3825-5c69-9083-7ececc303f34@arm.com>
- <alpine.DEB.2.10.1805251234100.12008@sstabellini-ThinkPad-X260>
- <8eeddff3-07b4-48ea-b599-02b89ccf887c@arm.com>
- <alpine.DEB.2.10.1805291445240.5563@sstabellini-ThinkPad-X260>
- <dff77236-51d7-41bd-ad74-3b2ea6bcedcb@arm.com>
- <alpine.DEB.2.10.1805301228400.23991@sstabellini-ThinkPad-X260>
- <a0e8b612-b5c0-113a-9171-eda68f4abd18@arm.com>
- <alpine.DEB.2.10.1805311350430.23991@sstabellini-ThinkPad-X260>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v3 09/10] arm: add QEMU,
+ Rcar3 and MPSoC configs
+Date: Thu, 31 May 2018 14:38:45 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1805311417540.23991@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1805221719560.24793@sstabellini-ThinkPad-X260>
+ <1527035108-15051-9-git-send-email-sstabellini@kernel.org>
+ <9ef3b281-da0d-18a4-120f-9d5796dcd27e@arm.com>
+ <alpine.DEB.2.10.1805301339140.23991@sstabellini-ThinkPad-X260>
+ <4365a1d1-a3cd-6827-2084-b3ef52ab9ed2@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6146433107454824114=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=oktx=is=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1fOV91-0004E6-5R
- for xen-devel@lists.xenproject.org; Thu, 31 May 2018 21:30:03 +0000
-Received: by mail-ot0-x244.google.com with SMTP id q17-v6so16389940otg.2
- for <xen-devel@lists.xenproject.org>; Thu, 31 May 2018 14:30:01 -0700 (PDT)
-In-Reply-To: <alpine.DEB.2.10.1805311350430.23991@sstabellini-ThinkPad-X260>
+In-Reply-To: <4365a1d1-a3cd-6827-2084-b3ef52ab9ed2@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -33,246 +21,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: andre.przywara@arm.com, Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+To: Julien Grall <julien.grall@arm.com>
+Cc: artem_mygaiev@epam.com, lars.kurth@citrix.com, nd@arm.com, Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, dfaggioli@suse.com, xen-devel@lists.xen.org, volodymyr_babchuk@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============6146433107454824114==
-Content-Type: multipart/alternative; boundary="00000000000076d479056d872b5d"
-
---00000000000076d479056d872b5d
-Content-Type: text/plain; charset="UTF-8"
-
-(sorry for the formatting)
-
-On Thu, 31 May 2018, 22:00 Stefano Stabellini, <sstabellini@kernel.org>
-wrote:
-
-> On Thu, 31 May 2018, Julien Grall wrote:
-> > Hi,
-> >
-> > On 30/05/18 21:10, Stefano Stabellini wrote:
-> > > On Wed, 30 May 2018, Julien Grall wrote:
-> > > > On 05/29/2018 11:34 PM, Stefano Stabellini wrote:
-> > > > > On Tue, 29 May 2018, Julien Grall wrote:
-> > > > > > On 25/05/18 21:51, Stefano Stabellini wrote:
-> > > > > > > On Thu, 24 May 2018, Julien Grall wrote:
-> > > > > > > > On 23/05/18 23:34, Stefano Stabellini wrote:
-> > > > > > > > > On Tue, 22 May 2018, Julien Grall  >>>>
-> > > I should have read the spec more carefully, thanks for the pointer.
-> > > Sorry about that. Finally, these patches are starting to make sense :-)
-> > >
-> > > All right. I can see why ssbd_state and ssbd_callback_required are
-> > > separate and their purpose. Aside from adding more info to the commit
-> > > message, I'll make a couple of different suggestions:
-> > >
-> > > 1) Let's check if ssbd_state == ARM_SSBD_UNKNOWN || ssbd_state ==
-> > > ARM_SSBD_MITIGATED at the beginning of has_ssbd_mitigation and return
->
-> > > early in that case. This will help clarify the intended behavior and
-> > > mitigate broken firmware returning ARM_SMCCC_NOT_SUPPORTED only on some
-> > > cpus. This is just optional, I am fine either way.
-> > A vendor not able to do a simple return "ARM_SMCCC_NOT_SUPPORTED" in
-> their
-> > firmware are not worth to support it in Xen. Most likely, more important
-> bits
-> > of that firmware would be broken.
-> >
-> > >
-> > > 2) Can we turn ssbd_callback_required from a this_cpu variable to a
-> > > single cpu bitmask? It is not great to introduce a new per-cpu varible
-> > > for just one bit. It would save space and make it easier to access from
-> > > assembly as a bitmask as it would remove the need for the ldr_this_cpu
-> > > macro. If I am wrong and the bitmask makes things more complicated
-> > > rather than simpler, then keep the code as is and just mention it in
-> the
-> > > next version of the patch.
-> >
-> > I hope you are aware that this will only save 8 byte per-CPU. On most of
-> > embedded platform you will have less than 16 CPUs. So you would save at
-> most
-> > 128 bytes (woah!). If you are that tight in memory, then there are better
-> > place to reduce the footprint.
-> >
-> > I am also not sure to understand the problem of having ldr_this_cpu
-> around.
-> > The macro is simple and in any case, you would still require at least a
-> load
-> > for the bitmask.
-> >
-> > Feel free to suggest an assembly version for the bitmask.
->
-> OK, this is very simple, the first that came to mind, I am sure you can
-> improve it:
->
->         // 65 is the cpu number, in this example
->         MOV X1, #65
->
->         // X1 tells us which doubleword to consider
->         // X2 has the bit shift for right doubleword
->         // X3 is the shifted X2, we'll use it to check the bitmask
->         AND X2, X1, #(64-1)
->         LSR X1, X1, #3
->         MOV X3, #0x1
->         LSL X3, X3, X2
->
->         // we load the pointer to the bitmask in X4
->         LDR X4, =cpumask
->         // increase the pointer to point to the right doubleword
->         ADD X4, X4, X1
->         // load the doubleword
->         LDR X4, [X4]
->         // mask with X3, the result is in X1
->         AND X1, X4, X3
->
-
-Well, because of the SMCC v1.1 convention, you can only use x0-x3. So x4 is
-a no go.
-
-You also cannot use x1 because it contains the enable/disable boolean.
-
-Furthermore ldr_this_cpu is only 3 instructions. With your current
-solution, you have 9 instructions.
-Even optimized, I honestly doubt you will manage 3 instructions. This is
-30% more instructions!
-
-So you are maybe going to save few bytes in memory, but everytime you
-execute the SMC you will lose some time. As this is happening at every
-entry/exit from EL0, this will have a significant impact on your workload.
-
-At this stage, I will keep with the percpu variable. That's the best
-trade-off between performance and footprint.
-
-Cheers,
-
---00000000000076d479056d872b5d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<span>(sorry for the formatting)</span><br><br><div class=3D"gmail_quote"><=
-div dir=3D"ltr">On Thu, 31 May 2018, 22:00 Stefano Stabellini, &lt;<a href=
-=3D"mailto:sstabellini@kernel.org">sstabellini@kernel.org</a>&gt; wrote:<br=
-></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-=
-left:1px #ccc solid;padding-left:1ex">On Thu, 31 May 2018, Julien Grall wro=
-te:<br>
-&gt; Hi,<br>
-&gt; <br>
-&gt; On 30/05/18 21:10, Stefano Stabellini wrote:<br>
-&gt; &gt; On Wed, 30 May 2018, Julien Grall wrote:<br>
-&gt; &gt; &gt; On 05/29/2018 11:34 PM, Stefano Stabellini wrote:<br>
-&gt; &gt; &gt; &gt; On Tue, 29 May 2018, Julien Grall wrote:<br>
-&gt; &gt; &gt; &gt; &gt; On 25/05/18 21:51, Stefano Stabellini wrote:<br>
-&gt; &gt; &gt; &gt; &gt; &gt; On Thu, 24 May 2018, Julien Grall wrote:<br>
-&gt; &gt; &gt; &gt; &gt; &gt; &gt; On 23/05/18 23:34, Stefano Stabellini wr=
-ote:<br>
-&gt; &gt; &gt; &gt; &gt; &gt; &gt; &gt; On Tue, 22 May 2018, Julien Grall=
-=C2=A0 &gt;&gt;&gt;&gt;<br>
-&gt; &gt; I should have read the spec more carefully, thanks for the pointe=
-r.<br>
-&gt; &gt; Sorry about that. Finally, these patches are starting to make sen=
-se :-)<br>
-&gt; &gt; <br>
-&gt; &gt; All right. I can see why ssbd_state and ssbd_callback_required ar=
-e<br>
-&gt; &gt; separate and their purpose. Aside from adding more info to the co=
-mmit<br>
-&gt; &gt; message, I&#39;ll make a couple of different suggestions:<br>
-&gt; &gt; <br>
-&gt; &gt; 1) Let&#39;s check if ssbd_state =3D=3D ARM_SSBD_UNKNOWN || ssbd_=
-state =3D=3D<br>
-&gt; &gt; ARM_SSBD_MITIGATED at the beginning of has_ssbd_mitigation and re=
-turn=C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt; &gt; early in that case. This will help clarify the intended behavior =
-and<br>
-&gt; &gt; mitigate broken firmware returning ARM_SMCCC_NOT_SUPPORTED only o=
-n some<br>
-&gt; &gt; cpus. This is just optional, I am fine either way.<br>
-&gt; A vendor not able to do a simple return &quot;ARM_SMCCC_NOT_SUPPORTED&=
-quot; in their<br>
-&gt; firmware are not worth to support it in Xen. Most likely, more importa=
-nt bits<br>
-&gt; of that firmware would be broken.<br>
-&gt; <br>
-&gt; &gt; <br>
-&gt; &gt; 2) Can we turn ssbd_callback_required from a this_cpu variable to=
- a<br>
-&gt; &gt; single cpu bitmask? It is not great to introduce a new per-cpu va=
-rible<br>
-&gt; &gt; for just one bit. It would save space and make it easier to acces=
-s from<br>
-&gt; &gt; assembly as a bitmask as it would remove the need for the ldr_thi=
-s_cpu<br>
-&gt; &gt; macro. If I am wrong and the bitmask makes things more complicate=
-d<br>
-&gt; &gt; rather than simpler, then keep the code as is and just mention it=
- in the<br>
-&gt; &gt; next version of the patch.<br>
-&gt; <br>
-&gt; I hope you are aware that this will only save 8 byte per-CPU. On most =
-of<br>
-&gt; embedded platform you will have less than 16 CPUs. So you would save a=
-t most<br>
-&gt; 128 bytes (woah!). If you are that tight in memory, then there are bet=
-ter<br>
-&gt; place to reduce the footprint.<br>
-&gt; <br>
-&gt; I am also not sure to understand the problem of having ldr_this_cpu ar=
-ound.<br>
-&gt; The macro is simple and in any case, you would still require at least =
-a load<br>
-&gt; for the bitmask.<br>
-&gt; <br>
-&gt; Feel free to suggest an assembly version for the bitmask.<br>
-<br>
-OK, this is very simple, the first that came to mind, I am sure you can<br>
-improve it:<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 // 65 is the cpu number, in this example<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 MOV X1, #65<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 // X1 tells us which doubleword to consider<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 // X2 has the bit shift for right doubleword<br=
->
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 // X3 is the shifted X2, we&#39;ll use it to ch=
-eck the bitmask<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 AND X2, X1, #(64-1)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 LSR X1, X1, #3<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 MOV X3, #0x1<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 LSL X3, X3, X2<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 // we load the pointer to the bitmask in X4<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 LDR X4, =3Dcpumask<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 // increase the pointer to point to the right d=
-oubleword<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 ADD X4, X4, X1<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 // load the doubleword<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 LDR X4, [X4]<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 // mask with X3, the result is in X1<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 AND X1, X4, X3<br></blockquote></div><div><br><=
-/div><div>Well, because of the SMCC v1.1 convention, you can only use x0-x3=
-. So x4 is a no go.</div><div><br></div><div>You also cannot use x1 because=
- it contains the enable/disable boolean.</div><div><br></div><div>Furthermo=
-re ldr_this_cpu is only 3 instructions. With your current solution, you hav=
-e 9 instructions.</div><div>Even optimized, I honestly doubt you will manag=
-e 3 instructions. This is 30% more instructions!</div><div><br></div><div>S=
-o you are maybe going to save few bytes in memory, but everytime you execut=
-e the SMC you will lose some time. As this is happening at every entry/exit=
- from EL0, this will have a significant impact on your workload.</div><div>=
-<br></div><div>At this stage, I will keep with the percpu variable. That&#3=
-9;s the best trade-off between performance and footprint.</div><div><br></d=
-iv><div>Cheers,</div>
-
---00000000000076d479056d872b5d--
-
-
---===============6146433107454824114==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6146433107454824114==--
+T24gV2VkLCAzMCBNYXkgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IE9uIDMwLzA1LzIwMTgg
+MjI6MzksIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IE9uIFR1ZSwgMjkgTWF5IDIwMTgs
+IEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gSGkgU3RlZmFubywKPiA+ID4gCj4gPiA+IE9uIDIz
+LzA1LzE4IDAxOjI1LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiA+ID4gQWRkIGEgIlBs
+YXRmb3JtIFN1cHBvcnQiIG1lbnUgd2l0aCB0aHJlZSB1bWJyZWxsYSBrY29uZmlnIG9wdGlvbnM6
+IFFFTVUsCj4gPiA+ID4gUkNBUjMgYW5kIE1QU09DLiBUaGV5IGVuYWJsZSB0aGUgcmVxdWlyZWQg
+b3B0aW9ucyBmb3IgdGhlaXIgaGFyZHdhcmUKPiA+ID4gPiBwbGF0Zm9ybS4KPiA+ID4gPiAKPiA+
+ID4gPiBUaGV5IGFyZSBpbnRyb2R1Y2VkIGZvciBjb252aWVuY2U6IHRoZSB1c2VyIHdpbGwgYmUg
+YWJsZSB0byBzaW1wbHkgb3Blbgo+ID4gPiA+IHRoZSBtZW51IGFuZCBlbmFibGUgdGhlIHJpZ2h0
+IGNvbmZpZyBmb3IgaGVyIHBsYXRmb3JtLgo+ID4gPiA+IAo+ID4gPiA+IFNpZ25lZC1vZmYtYnk6
+IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KPiA+ID4gPiBDQzog
+YXJ0ZW1fbXlnYWlldkBlcGFtLmNvbQo+ID4gPiA+IENDOiB2b2xvZHlteXJfYmFiY2h1a0BlcGFt
+LmNvbQo+ID4gPiA+IAo+ID4gPiA+IC0tLQo+ID4gPiA+IE5vdGUgdGhhdCB0aGlzIGFwcHJvYWNo
+IGhhcyBhIGxpbWl0YXRpb246IGl0IGlzIG5vdCBwb3NzaWJsZSB0byAic2VsZWN0Cj4gPiA+ID4g
+YSByYW5nZSIuIEluIG90aGVyIHdvcmRzLCB1c2luZyB0aW55LmNvbmZpZyBOUl9DUFVTIGlzIHNl
+dCB0byA0LiBJdCBpcwo+ID4gPiA+IG5vdCBwb3NzaWJsZSB0byBpbmNyZWFzZSBpdCB0byA4IGZy
+b20gY29uZmlnIFJDQVIzLgo+ID4gPiAKPiA+ID4gV2hhdCB5b3UgY2FuIGRvIGlzOgo+ID4gPiAK
+PiA+ID4gY29uZmlnIE5SX0NQVVMKPiA+ID4gCXJhbmdlIC4uLgo+ID4gPiAJZGVmYXVsdCAiOCIg
+aWYgKFJDQVIzKQo+ID4gPiAgICAgICAgICBkZWZhdWx0ICJ4IiBpZiAoUUVNVSkKPiA+ID4gICAJ
+ZGVmYXVsdCA2NAo+ID4gPiAKPiA+ID4gVGhpcyB3b3VsZCBpbXBseSB0byBtb3ZlIE5SX0NQVVMg
+aW4gYXJjaC97YXJtLHg4Nn0vS2NvbmZpZy4KPiA+ID4gCj4gPiA+IFRoaXMgc29sdXRpb24gaXMg
+bm90IHZlcnkgbmljZSwgYnV0IGF0IGxlYXN0IHdvdWxkIHByb3ZpZGUgYSBiZXR0ZXIKPiA+ID4g
+ZXhwZXJpZW5jZQo+ID4gPiB0byB0aGUgdXNlci4KPiA+IAo+ID4gVW5mb3J0dW5hdGVseSwgbWFr
+ZSBvbGRkZWZjb25maWcgaXMgZXhlY3V0ZWQgYXV0b21hdGljYWxseSB3aGVuIG1ha2UgaXMKPiA+
+IGNhbGxlZCwgYWRkaW5nIENPTkZJR19OUl9DUFVTPTEyOC4gVGh1cywgdW5sZXNzIHRpbnkuY29u
+ZmlnIGhhcyBhbHJlYWR5Cj4gPiBDT05GSUdfUkNBUjMgaW4gaXQsIHRoZSBjb3JyZWN0IGRlZmF1
+bHQgd29uJ3QgYmUgYXBwbGllZC4KPiA+IAo+ID4gVGhpcyBzdWdnZXN0aW9ucyBvbmx5IG1ha2Ug
+c2Vuc2UgaWYgd2UgaW50cm9kdWNlIHBlci1wbGF0Zm9ybSBjb25maWdzLAo+ID4gc3VjaCBhcyB4
+ZW4vYXJjaC9hcm0vY29uZmlncy90aW55LXJjYXIzLmNvbmZpZy4KPiAKPiBUaGUgb3RoZXIgc29s
+dXRpb24gaXMgdG8gaW50cm9kdWNlIGEgbmV3IGNvbW1hbmQgKG9yIHNjcmlwdCkgdGhhdCB3aWxs
+IHNlbGVjdAo+IHRoZSBwbGF0Zm9ybSBhdCB0aGUgc2FtZSB0aW1lIGFzIG9sZGRlZmNvbmZpZy4K
+PiAKPiBUaGlzIHdvdWxkIGF2b2lkIHRvIGNyZWF0ZSBhIGNvbmZpZyBwZXIgYm9hcmQgYW5kIHN0
+aWxsIGtlZXBpbmcgb25seSBvbmUgdGlueQo+IGNvbmZpZy4KIApJIGFtIG5vdCBsb29raW5nIGZv
+cndhcmQgdG8gbWFraW5nIGNoYW5nZXMgdG8gdGhlIGtjb25maWcgY29tbWFuZHMsIGJ1dApmb3J0
+dW5hdGVseSBJIHdhcyB3cm9uZyBvbiBteSBwcmV2aW91cyByZXBseTogdGhlIGlzc3VlIHdhcyB0
+aGUgb3JkZXIgb2YKdGhlIGRlZmF1bHRzIGluIHRoZSByYW5nZSEgVG8gZml4IHRoZSBwcm9ibGVt
+IEkganVzdCBoYWQgdG86CgogICAgZGVmYXVsdCAiOCIgaWYgQVJNICYmIFJDQVIzCglkZWZhdWx0
+ICI0IiBpZiBBUk0gJiYgUUVNVQoJZGVmYXVsdCAiNCIgaWYgQVJNICYmIE1QU09DCglkZWZhdWx0
+ICIyNTYiIGlmIFg4NgoJZGVmYXVsdCAiMTI4IiBpZiBBUk0KCgo+ID4gPiA+IFN1Z2dlc3Rpb25z
+IGFyZSB3ZWxjb21lLgo+ID4gPiA+IC0tLQo+ID4gPiA+ICAgIHhlbi9hcmNoL2FybS9LY29uZmln
+ICAgICAgICAgICB8ICAyICsrCj4gPiA+ID4gICAgeGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9LY29u
+ZmlnIHwgMzAgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gPiA+ID4gICAgMiBmaWxl
+cyBjaGFuZ2VkLCAzMiBpbnNlcnRpb25zKCspCj4gPiA+ID4gICAgY3JlYXRlIG1vZGUgMTAwNjQ0
+IHhlbi9hcmNoL2FybS9wbGF0Zm9ybXMvS2NvbmZpZwo+ID4gPiA+IAo+ID4gPiA+IGRpZmYgLS1n
+aXQgYS94ZW4vYXJjaC9hcm0vS2NvbmZpZyBiL3hlbi9hcmNoL2FybS9LY29uZmlnCj4gPiA+ID4g
+aW5kZXggYTVhNjk0My4uYjVkZGQxMiAxMDA2NDQKPiA+ID4gPiAtLS0gYS94ZW4vYXJjaC9hcm0v
+S2NvbmZpZwo+ID4gPiA+ICsrKyBiL3hlbi9hcmNoL2FybS9LY29uZmlnCj4gPiA+ID4gQEAgLTI0
+NSw2ICsyNDUsOCBAQCBjb25maWcgQVJNNjRfSEFSREVOX0JSQU5DSF9QUkVESUNUT1IKPiA+ID4g
+PiAgICBjb25maWcgQVJNMzJfSEFSREVOX0JSQU5DSF9QUkVESUNUT1IKPiA+ID4gPiAgICAgICAg
+ZGVmX2Jvb2wgeSBpZiBBUk1fMzIgJiYgSEFSREVOX0JSQU5DSF9QUkVESUNUT1IKPiA+ID4gPiAg
+ICArc291cmNlICJhcmNoL2FybS9wbGF0Zm9ybXMvS2NvbmZpZyIKPiA+ID4gPiArCj4gPiA+ID4g
+ICAgc291cmNlICJjb21tb24vS2NvbmZpZyIKPiA+ID4gPiAgICAgIHNvdXJjZSAiZHJpdmVycy9L
+Y29uZmlnIgo+ID4gPiA+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vcGxhdGZvcm1zL0tjb25m
+aWcKPiA+ID4gPiBiL3hlbi9hcmNoL2FybS9wbGF0Zm9ybXMvS2NvbmZpZwo+ID4gPiA+IG5ldyBm
+aWxlIG1vZGUgMTAwNjQ0Cj4gPiA+ID4gaW5kZXggMDAwMDAwMC4uMGVhZmJlZgo+ID4gPiA+IC0t
+LSAvZGV2L251bGwKPiA+ID4gPiArKysgYi94ZW4vYXJjaC9hcm0vcGxhdGZvcm1zL0tjb25maWcK
+PiA+ID4gPiBAQCAtMCwwICsxLDMwIEBACj4gPiA+ID4gK21lbnUgIlBsYXRmb3JtIFN1cHBvcnQi
+Cj4gPiA+ID4gKwo+ID4gPiA+ICtjb25maWcgUUVNVQo+ID4gPiA+ICsJYm9vbCAiUUVNVSBhYXJj
+aCB2aXJ0IG1hY2hpbmUgc3VwcG9ydCIKPiA+ID4gPiArCWRlZmF1bHQgbgo+ID4gPiBUaGUgZGVm
+YXVsdCB2YWx1ZSBpcyBjb25mdXNpbmcgaGVyZS4gVGhlIGRlZmF1bHQgLmNvbmZpZyB3aWxsIHN1
+cHBvcnQgUUVNVQo+ID4gPiBidXQKPiA+ID4gbm90IHNlbGVjdCB0aGF0Lgo+ID4gPiAKPiA+ID4g
+V2hpbGUgSSBkb24ndCB5ZXQgYnV5IHRoZSBhcmd1bWVudCwgc29tZSB1c2VycyB3aWxsIGFsc28g
+d2FudCB0byByZW1vdmUKPiA+ID4gcGxhdGZvcm0gc3BlY2lmaWMgY29kZSAoQW5kcmlpIHN1Z2dl
+c3QgdGhhdCkuIFRoaXMgd291bGQgbWVhbnMgYnkgZGVmYXVsdAo+ID4gPiBzdXBwb3J0IGZvciBh
+IHNwZWNpZmljIHBsYXRmb3JtIHdpbGwgbm90IGJlIGluIFhlbi4KPiA+ID4gCj4gPiA+IEZ1cnRo
+ZXJtb3JlLCB2ZXJ5IGxpa2VseSwgdGhlIGVuZCB1c2VyIHdpbGwgc2VsZWN0IGVpdGhlciBvbmUg
+Ym9hcmQgKGUuZwo+ID4gPiBhdXRvbW90aXZlKSBvciBhbGwgb2YgdGhlbSAoZS5nIGRpc3RyaWJ1
+dGlvbikuCj4gPiA+IAo+ID4gPiBTbyBJIHRoaW5rIGl0IHdvdWxkIGJlIGJldHRlciB0byBkbyBh
+IGNob2ljZSBsaXN0Ogo+ID4gPiAJLSBBbGwgLT4gQm9hcmQgc3VwcG9ydCBmb3IgYWxsIGJvYXJk
+IGFkZGVkLiBEcml2ZXJzIHNlbGVjdGVkIGJ5IHRoZQo+ID4gPiB1c2VyCj4gPiA+IAktIE1QU09D
+IC0+IFNlbGVjdCBib2FyZCBzdXBwb3J0IGZvciBYaWxpbnggKyBhcHByb3ByaWF0ZSBkcml2ZXJz
+Cj4gPiA+IAktIFJDQVIzIC0+IFNlbGVjdCBib2FyZCBzdXBwb3J0IGZvciBSQ0FSMyArIGFwcHJv
+cHJpYXRlIGRyaXZlcnMKPiA+ID4gCj4gPiA+IFRoZSB0aW55LmNvbmZpZyB3b3VsZCBzZWxlY3Qg
+QUxMLiBUaGlzIGNvdWxkIHRoZW4gYmUgcmVmaW5lZCBieSBzZWxlY3RpbmcKPiA+ID4gYQo+ID4g
+PiBzcGVjaWZpYyBwbGF0Zm9ybS4KPiA+IAo+ID4gVGhlIGlkZWEgb2YgYW4gIkFMTCIgY29uZmln
+dXJhdGlvbiBpcyBpbnRlcmVzdGluZywgaG93ZXZlciwgYWxsIHRoZQo+ID4gb3B0aW9ucyB3ZSB3
+b3VsZCBzZWxlY3QgdW5kZXIgIkFMTCIgYWxyZWFkeSBkZWZhdWx0IHRvICJZIi4gRWZmZWN0aXZl
+bHksCj4gPiBpZiB3ZSByZW1vdmUgdGhlIGZvbGxvd2luZyBsaW5lcyBmcm9tIHRpbnkuY29uZmln
+Ogo+ID4gCj4gPiAjIENPTkZJR19HSUNWMyBpcyBub3Qgc2V0Cj4gPiAjIENPTkZJR19NRU1fQUND
+RVNTIGlzIG5vdCBzZXQKPiA+ICMgQ09ORklHX1NCU0FfVlVBUlRfQ09OU09MRSBpcyBub3Qgc2V0
+Cj4gPiAjIENPTkZJR19IQVNfTlMxNjU1MCBpcyBub3Qgc2V0Cj4gPiAjIENPTkZJR19IQVNfQ0FE
+RU5DRV9VQVJUIGlzIG5vdCBzZXQKPiA+ICMgQ09ORklHX0hBU19NVkVCVSBpcyBub3Qgc2V0Cj4g
+PiAjIENPTkZJR19IQVNfUEwwMTEgaXMgbm90IHNldAo+ID4gIyBDT05GSUdfSEFTX1NDSUYgaXMg
+bm90IHNldAo+ID4gIyBDT05GSUdfQVJNX1NNTVUgaXMgbm90IHNldAo+ID4gCj4gPiB0aGVuLCBp
+dCB3b3VsZCBiZSBhcyBpZiB0aW55LmNvbmZpZyBoYWQgQ09ORklHX0FMTD15LCBiZWNhdXNlIGFm
+dGVyCj4gPiBydW5uaW5nIGBtYWtlIG9sZGRlZmNvbmZpZycgaXQgd291bGQgZ2V0IGFsbCB0aGVz
+ZSBvcHRpb25zIHNldCB0byAiWSIuCj4gPiAKPiA+IEdpdmVuIHRoYXQgbWFrZSBvbGRkZWZjb25m
+aWcgaXMgYWx3YXlzIGV4ZWN1dGVkIGF1dG9tYXRpY2FsbHkgYnkgbWFrZSwgSQo+ID4gY2Fubm90
+IGV2ZW4gcmVtb3ZlIHRoZSAiaXMgbm90IHNldCIgb3B0aW9ucyBhYm92ZSBmcm9tIHRpbnkuY29u
+ZmlnCj4gPiBiZWNhdXNlIG90aGVyd2lzZSB0aGV5IHdpbGwgYWxsIGJlIGF1dG9tYXRpY2FsbHkg
+ZW5hYmxlZCBhbHdheXMgdW5sZXNzIEkKPiA+IGNoYW5nZSBhbGwgdGhlIGRlZmF1bHRzIGZyb20g
+WSB0byBOLgo+ID4gCj4gPiBJbiBmYWN0LCB0aGUgbWFpbiBpc3N1ZSBpcyB0aGF0IGl0IGlzIG5v
+dCBwb3NzaWJsZSB0byBkZXNlbGVjdCBLY29uZmlnCj4gPiBvcHRpb25zIHVzaW5nIHRoZSBLY29u
+ZmlnIGluZnJhc3RydWN0dXJlLiBTbywgaWYgYSB1c2VyIGhhcyBhCj4gPiBjb25maWcgd2l0aCBD
+T05GSUdfQUxMIGluIGl0LCB0aGVuIHNoZSBleGVjdXRlcyBgbWFrZSBtZW51Y29uZmlnJwo+ID4g
+dG8gc2VsZWN0IFJDQVIzIGFuZCByZWR1Y2UgdGhlIGNvbmZpZyBzaXplLCB0aGUgbWVudSB3b24n
+dCBhY3R1YWxseSBiZQo+ID4gYWJsZSB0byBkZXNlbGVjdCBhbnkgb3RoZXIgb3B0aW9uIGF1dG9t
+YXRpY2FsbHkuIFRoaXMgaXMgdmVyeQo+ID4gdW5mb3J0dW5hdGUuIEZvciBpbnN0YW5jZSwgaWYg
+dGhlIGNvbmZpZyBoYXMgQ0FERU5DRV9VQVJULCBhbmQgdGhlIHVzZXIKPiA+IHNlbGVjdHMgQ09O
+RklHX1JDQVIzIGZyb20gdGhlIG1lbnUsIHRoZSByZXN1bHRpbmcgY29uZmlnIHdpbGwgc3RpbGwg
+aGF2ZQo+ID4gQ0FERU5DRV9VQVJULCB1bmxlc3Mgc2hlIGdvZXMgdG8gcmVtb3ZlIGl0IGJ5IGhh
+bmQuCj4gPiAKPiA+IEdpdmVuIGFsbCB0aGlzLCBJIGRvbid0IGtub3cgaWYgaXQgaXMgd29ydGgg
+aW50cm9kdWNpbmcgQ09ORklHX0FMTC4gSQo+ID4gY291bGQgYWRkIHNvbWV0aGluZyBsaWtlOgo+
+ID4gCj4gPiArY29uZmlnIEFMTAo+ID4gKwlib29sICJTdXBwb3J0IGZvciBhbGwgcGxhdGZvcm1z
+Igo+ID4gKwlkZWZhdWx0IHkKPiA+ICsJc2VsZWN0IEdJQ3YzCj4gPiArCXNlbGVjdCBIQVNfTlMx
+NjU1MAo+ID4gKwlzZWxlY3QgSEFTX0NBREVOQ0VfVUFSVAo+ID4gKwlzZWxlY3QgSEFTX1BMMDEx
+Cj4gPiArCXNlbGVjdCBIQVNfRVhZTk9TNDIxMAo+ID4gKwlzZWxlY3QgSEFTX01WRUJVCj4gPiAr
+CXNlbGVjdCBIQVNfT01BUAo+ID4gKwlzZWxlY3QgSEFTX1NDSUYKPiA+ICsJc2VsZWN0IEFSTV9T
+TU1VCj4gPiArCS0tLWhlbHAtLS0KPiA+ICsJRW5hYmxlIHN1cHBvcnQgZm9yIGFsbCBwbGF0Zm9y
+bXMuIFRyaWdnZXJzIHRoZSBidWlsZCBvZiBhIGxhcmdlciBYZW4KPiA+ICsJYmluYXJ5IGJ1dCB3
+aXRoIG1vcmUgZHJpdmVycy4KPiA+ICsKPiA+ICsJSWYgdW5zdXJlLCBzYXkgWS4KPiA+IAo+ID4g
+YnV0IG15IHByZWZlcmVuY2Ugd291bGQgYmUgdG8gYXZvaWQgaXQgYmVjYXVzZSBpdCBqdXN0IGR1
+cGxpY2F0ZXMgdGhlCj4gPiBkZWZhdWx0IFkvTiBzZXR0aW5ncyBlbHNld2hlcmUuCj4gCj4gVGhp
+cyBpcyBub3Qgd2hhdCBJIHN1Z2dlc3RlZCBmb3IgYWxsLiBXaGF0IEkgc3VnZ2VzdGVkIGlzIHRo
+ZSBvcHRpb24gQWxsIHdpbGwKPiBzZWxlY3QgYWxsIHBsYXRmb3Jtcy8qLmMgZmlsZSB0byBidWls
+ZCBhbmQgZG9lcyBub3Qgc2VsZWN0IGFueSBkcml2ZXJzLiBUaGUKPiB1c2VyIHdpbGwgaGF2ZSB0
+byBjaG9zZSB0aGUgZHJpdmVycy4gWW91IGNhbiBzZWUgaXQgYXMgYSAiY3VzdG9tIiBvcHRpb24u
+Cj4gCj4gQWxzbywgYnkgYSBsaXN0IEkgbWVhbnQ6Cj4gCj4gY29uZmlnIFBMQVRGT1JNX1JDQVIz
+Cj4gICAgIC4uLgo+IAo+IGNob2ljZQo+ICAgIHByb21wdCAiTWFjaGluZSIKPiAgICBkZWZhdWx0
+IC4uLi4KPiAKPiBjb25maWcgQUxMCj4gICAgc2VsZWN0IFBMQVRGT1JNX1JDQVIzCj4gICAgc2Vs
+ZWN0IFBMQVRGT1JNX1hJTElOWAo+IAo+IGNvbmZpZyBSQ0FSMwo+ICAgIHByb21wdCAiUkNBUiAz
+IHN1cHBvcnQiCj4gICAgc2VsZWN0IFBMQVRGT1JNX1JDQVIzCj4gICAgc2VsZWN0IEhBU19QTDAx
+MQo+ICAgIHNlbGVjdCAuLi4KPiAKPiBlbmRjaG9pY2UuCj4gCj4gVGhlIGNvbmZpZyBQTEFURk9S
+TV8qIHdvdWxkIHRoZW4gYmUgdXNlZCBpbiB0aGUgTWFrZWZpbGUKPiAgICB4ZW4tJChDT05GSUdf
+UExBVEZPUk1fWElMSU5YKSArPSB4aWxpbngubwo+ICAgIC4uLgo+IAo+IEkgY2FuIGFsc28gdW5k
+ZXJzdGFuZCB0aGF0IHRoZXJlIG1pZ2h0IGJlIGlzc3VlIHdpdGggdGhlICJBbGwiIG9wdGlvbiBo
+ZW5jZQo+IHdoeSBJIHN1Z2dlc3RlZCB0aGUgIk5PTkUiIHBsYXRmb3JtLiBUaGlzIHdvdWxkIHNl
+bGVjdCBub25lIG9mIHRoZSBQTEFURk9STV8qLgoKVW5mb3J0dW5hdGVseSBpdCBkb2Vzbid0IHNl
+ZW0gcG9zc2libGUgdG8gaGF2ZSBhbiBvcHRpb24gdW5kZXIgYSBjaG9pY2UKbWVudSBpbiBrY29u
+ZmlnIHRoYXQgZW5hYmxlcyB0aGUgb3RoZXIgb3B0aW9ucy4gSSBnZXQgdGhpcyBlcnJvcjoKCiAg
+YXJjaC9hcm0vcGxhdGZvcm1zL0tjb25maWc6MTplcnJvcjogcmVjdXJzaXZlIGRlcGVuZGVuY3kg
+ZGV0ZWN0ZWQhCiAgYXJjaC9hcm0vcGxhdGZvcm1zL0tjb25maWc6MTogICBjaG9pY2UgPGNob2lj
+ZT4gY29udGFpbnMgc3ltYm9sIEFMTAogIGFyY2gvYXJtL3BsYXRmb3Jtcy9LY29uZmlnOjk6ICAg
+c3ltYm9sIEFMTCBkZXBlbmRzIG9uIFFFTVUKICBhcmNoL2FybS9wbGF0Zm9ybXMvS2NvbmZpZzox
+ODogIHN5bWJvbCBRRU1VIGlzIHBhcnQgb2YgY2hvaWNlIDxjaG9pY2U+CgpHaXZlbiB0aGUgbGFj
+ayBvZiBiZXR0ZXIgYWx0ZXJuYXRpdmVzLCBJJ2xsIHN0aWNrIHdpdGggd2hhdCBJIGhhZApiZWZv
+cmU6IGFsbCBwbGF0Zm9ybXMgY2FuIGJlIGVuYWJsZWQgbWFudWFsbHkgYnkgdGlja2luZyBhbGwg
+dGhlIHRocmVlCmJveGVzLCBob3dldmVyLCBJIGNoYW5nZWQgdGhlIGRlZmF1bHQgdG8geSwgc28g
+dGhhdCB0aGV5IHdpbGwgYWxsIGJlCnNlbGVjdGVkIGluIHRoZSBtZW51IGJ5IGRlZmF1bHQuIElm
+IHlvdSBoYXZlIGEgYmV0dGVyIHN1Z2dlc3Rpb24gcGxlYXNlCnJlcGx5IHRvIHRoZSBuZXcgcGF0
+Y2ggc2VyaWVzIEknbGwgc2VuZCBzaG9ydGx5LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
