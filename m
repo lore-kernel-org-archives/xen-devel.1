@@ -1,19 +1,17 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v4 01/10] xen/arm64: Added handling of the
- trapped access to OSLSR register
-Date: Thu, 31 May 2018 12:17:10 +0100
-Message-ID: <c401faf0-1ff7-73fe-102f-cd20365d3c8b@arm.com>
-References: <20180515114419.7296-1-mirela.simonovic@aggios.com>
- <20180515114419.7296-2-mirela.simonovic@aggios.com>
- <4d7e72a3-5b40-f073-4aa4-d8143f1ba71c@arm.com>
- <CAKPH-NhSXE8=hAqROOC84J2WKBDYjmUQqziLNWkEbvoZyKZGYg@mail.gmail.com>
- <CAKPH-NgEnbpQFjvrKzayt8RzHYvbF2zykoHf+S9U+9NKKpoCUw@mail.gmail.com>
+From: Marcello Seri <marcello.seri@citrix.com>
+Subject: [PATCH for-4.11 0/2] xenstore: reduce use of unsafe
+ conversions
+Date: Thu, 31 May 2018 14:05:35 +0100
+Message-ID: <20180531130537.5037-1-marcello.seri@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAKPH-NgEnbpQFjvrKzayt8RzHYvbF2zykoHf+S9U+9NKKpoCUw@mail.gmail.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=5sm8=is=citrix.com=prvs=6828164cc=marcello.seri@srs-us1.protection.inumbo.net>)
+ id 1fONGw-0006w6-7D
+ for xen-devel@lists.xenproject.org; Thu, 31 May 2018 13:05:42 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,25 +20,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>
-Cc: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen Devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Marcello Seri <marcello.seri@citrix.com>, Christian Lindig <christian.lindig@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgTWlyZWxhLAoKT24gMzAvMDUvMTggMTA6NTMsIE1pcmVsYSBTaW1vbm92aWMgd3JvdGU6Cj4g
-Cj4gCj4gT24gV2VkLCBNYXkgMzAsIDIwMTggYXQgMTE6NDggQU0sIE1pcmVsYSBTaW1vbm92aWMg
-Cj4gPG1pcmVsYS5zaW1vbm92aWNAYWdnaW9zLmNvbSA8bWFpbHRvOm1pcmVsYS5zaW1vbm92aWNA
-YWdnaW9zLmNvbT4+IHdyb3RlOgo+IFBsZWFzZSBub3RlIC0gSSdtIG5vdCBzdXJlIGhvdyBzaG91
-bGQgd3JpdGUgdG8gdGhpcyByZWdpc3RlciBiZSB0cmVhdGVkLiAKPiBJbiB0aGUgb3JpZ2luYWwg
-cGF0Y2ggKGhhbmRsZV9yb19yYXogaW1wbGVtZW50YXRpb24pIHVuZGVmIGV4Y2VwdGlvbiAKPiB3
-aWxsIGJlIHJhaXNlZC4gSSByZWFsaXplZCBpbiB3aGF0IEkgcHJvcG9zZWQgdGhhdCB3b3VsZG4n
-dCBiZSB0aGUgY2FzZSwgCj4gaXQncyBhIHdyaXRlLWlnbm9yZS4KCkkgdGhpbmsgeW91IHdhbnQg
-dG8ga2VlcCB0aGUgaW5qZWN0X3VuZGVmX2V4Y2VwdGlvbiBoZXJlIHRvIHN0YXkgCmNvbnNpc3Rl
-bnQgd2l0aCB0aGUgcmVzdCBvZiBSTyByZWdpc3RlciBpbXBsZW1lbnRhdGlvbi4gSSB3b3VsZCBz
-dWdnZXN0IAp0byBjcmVhdGUgYSBuZXcgaGVscGVyIGhhbmRsZV9yb19yZWFkX3ZhbCguLi4pIHRo
-YXQgd2lsbCB0YWtlIHRoZSB2YWx1ZSAKdG8gcmV0dXJuIGluIHBhcmFtZXRlci4KCmhhbmRsZV9y
-b19yYXogY291bGQgdGhlbiBiZSBpbXBsZW1lbnRlZCB1c2luZyB0aGUgbmV3IGhlbHBlci4KCkFs
-c28sIEkgd291bGQgcHJlZmVyIGlmIHlvdSB1c2UgMSA8PCAzIGFzIGl0IGlzIGNsZWFyZXIgdGhh
-dCBiaXQgMyBpcyBzZXQuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+V2hlbiB4ZW5zdG9yZSB3YXMgdXBkYXRlZCB0byBzdXBwb3J0IHNhZmUtc3RyaW5nLCBzb21lIHVu
+bmVjZXNzYXJ5CmNvcGllcyB3ZXJlIGludHJvZHVjZWQuIEEgZnVydGhlciBwYXRjaCByZWR1Y2Vk
+IHRoZSBjb3BpZXMgYXQgdGhlIHByaWNlCm9mIG1hbnkgY2FsbHMgdG8gdW5zYWZlIGNvbnZlcnNp
+b25zIGJldHdlZW4gYnl0ZXMgYW5kIHN0cmluZ3MuIEluIHRoZQpwb3J0IHdlIGFsc28gZGlkIG5v
+dCBub3RpY2UgdGhhdCBzb21lIEMgc3R1YnMgd2VyZSBzdGlsbCBpbmNvcnJlY3RseQp1c2luZyBv
+Y2FtbCBzdHJpbmdzIGFzIG11dGFibGUgcGF5bG9hZC4KClRoaXMgc2V0IG9mIHBhdGNoZXMgdXBk
+YXRlcyB0aGUgQyBzdHVicyB0aGF0IHVzZSBtdXRhYmxlIHBheWxvYWRzIHBhc3NlZApmcm9tIG9j
+YW1sLCBhbmQgcmVkdWNlcyB0aGUgYW1vdW50IG9mIHVuc2FmZSBjb252ZXJzaW9ucyB3aGVyZSBw
+b3NzaWJsZQp3aXRob3V0IGZ1cnRoZXIgaW5jcmVhc2luZyB0aGUgbnVtYmVyIG9mIGNvcGllcy4K
+ClRoaXMgc2VlbXMgYWxzbyB0byBmaXggc29tZSB1bmNsZWFyIGluc3RhYmlsaXRpZXMgdGhhdCBh
+cHBlYXJlZCBhZnRlcgp0aGUgZm9ybWVyIHBhdGNoIGludHJvZHVjaW5nIHRoZSB1bnNhZmUgY29u
+dmVyc2lvbiB3aXRoIHNvbWUgdmVyc2lvbiBvZgp0aGUgb2NhbWwgY29tcGlsZXIuCgpNYXJjZWxs
+byBTZXJpICgyKToKICBvY2FtbC9saWJzL3hiOiB1c2UgYnl0ZXMgaW4gcGxhY2Ugb2Ygc3RyaW5n
+cyBmb3IgbXV0YWJsZSBidWZmZXJzCiAgb2NhbWwveGVuc3RvcmVkOiByZWR1Y2UgdXNlIG9mIHVu
+c2FmZSBjb252ZXJzaW9ucwoKIHRvb2xzL29jYW1sL2xpYnMveGIveGIubWwgICAgICAgIHwgMTIg
+KysrKystLS0tLS0tCiB0b29scy9vY2FtbC9saWJzL3hiL3hiLm1saSAgICAgICB8ICAyICstCiB0
+b29scy9vY2FtbC9saWJzL3hiL3hzX3JpbmcubWwgICB8IDEyICsrKysrKystLS0tLQogdG9vbHMv
+b2NhbWwveGVuc3RvcmVkL2xvZ2dpbmcubWwgfCAxNiArKysrKystLS0tLS0tLS0tCiB0b29scy9v
+Y2FtbC94ZW5zdG9yZWQvc3RkZXh0Lm1sICB8ICAyICstCiB0b29scy9vY2FtbC94ZW5zdG9yZWQv
+dXRpbHMubWwgICB8ICA5ICsrKystLS0tLQogNiBmaWxlcyBjaGFuZ2VkLCAyNCBpbnNlcnRpb25z
+KCspLCAyOSBkZWxldGlvbnMoLSkKCi0tIAoyLjE3LjAKCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
