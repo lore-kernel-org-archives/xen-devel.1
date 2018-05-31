@@ -1,29 +1,16 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH 2/8] xen/balloon: Move common memory
- reservation routines to a module
-Date: Thu, 31 May 2018 10:51:45 +0300
-Message-ID: <b9046572-8802-b213-a74f-68f58a58ae6a__47905.2285234959$1527753056$gmane$org@gmail.com>
-References: <20180525153331.31188-1-andr2000@gmail.com>
- <20180525153331.31188-3-andr2000@gmail.com>
- <59ab73b0-967b-a82f-3b0d-95f1b0dc40a5@oracle.com>
- <89de7bdb-8759-419f-63bf-8ed0d57650f0@gmail.com>
- <edfa937b-3311-98db-2e6f-b4083598f796@oracle.com>
- <6ca7f428-eede-2c14-85fe-da4a20bcea0d@gmail.com>
- <5dd3378d-ac32-691e-1f80-7218a5d07fd6@oracle.com>
- <43c17501-8865-6e1f-1a92-d947755d8fa8@gmail.com>
- <c08c380d-17af-b668-acf2-8d8a94333aca@oracle.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [linux-4.14 test] 123382: tolerable FAIL - PUSHED
+Date: Thu, 31 May 2018 08:15:52 +0000
+Message-ID: <osstest-123382-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------7EDD12234581199609D9736A"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=z1r2=is=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1fOINC-0003Qf-Sy
- for xen-devel@lists.xenproject.org; Thu, 31 May 2018 07:51:51 +0000
-Received: by mail-lf0-x242.google.com with SMTP id q11-v6so8303060lfc.7
- for <xen-devel@lists.xenproject.org>; Thu, 31 May 2018 00:51:48 -0700 (PDT)
-In-Reply-To: <c08c380d-17af-b668-acf2-8d8a94333aca@oracle.com>
-Content-Language: en-US
+ <srs0=pvjp=is=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fOIkW-0005vk-F1
+ for xen-devel@lists.xenproject.org; Thu, 31 May 2018 08:15:56 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -32,462 +19,343 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, jgross@suse.com, konrad.wilk@oracle.com
-Cc: daniel.vetter@intel.com, matthew.d.roper@intel.com, dongwon.kim@intel.com, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---------------7EDD12234581199609D9736A
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-On 05/30/2018 10:24 PM, Boris Ostrovsky wrote:
-> On 05/30/2018 01:46 PM, Oleksandr Andrushchenko wrote:
->> On 05/30/2018 06:54 PM, Boris Ostrovsky wrote:
->>>
->>> BTW, I also think you can further simplify
->>> xenmem_reservation_va_mapping_* routines by bailing out right away if
->>> xen_feature(XENFEAT_auto_translated_physmap). In fact, you might even
->>> make them inlines, along the lines of
->>>
->>> inline void xenmem_reservation_va_mapping_reset(unsigned long count,
->>>                       struct page **pages)
->>> {
->>> #ifdef CONFIG_XEN_HAVE_PVMMU
->>>      if (!xen_feature(XENFEAT_auto_translated_physmap))
->>>          __xenmem_reservation_va_mapping_reset(...)
->>> #endif
->>> }
->> How about:
->>
->> #ifdef CONFIG_XEN_HAVE_PVMMU
->> static inline __xenmem_reservation_va_mapping_reset(struct page *page)
->> {
->> [...]
->> }
->> #endif
->>
->> and
->>
->> void xenmem_reservation_va_mapping_reset(unsigned long count,
->>                       struct page **pages)
->> {
->> #ifdef CONFIG_XEN_HAVE_PVMMU
->>      if (!xen_feature(XENFEAT_auto_translated_physmap)) {
->>          int i;
->>
->>          for (i = 0; i < count; i++)
->>              __xenmem_reservation_va_mapping_reset(pages[i]);
->>      }
->> #endif
->> }
->>
->> This way I can use __xenmem_reservation_va_mapping_reset(page);
->> instead of xenmem_reservation_va_mapping_reset(1, &page);
->
-> Sure, this also works.
-Could you please take look at the patch attached if this is what we want?
-> -boris
->
-Thank you,
-Oleksandr
-
---------------7EDD12234581199609D9736A
-Content-Type: text/x-patch;
- name="0001-xen-balloon-Share-common-memory-reservation-routines.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0001-xen-balloon-Share-common-memory-reservation-routines.pa";
- filename*1="tch"
-
->From d41751068ac80ca5a375909d6c01cb25716a4975 Mon Sep 17 00:00:00 2001
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Date: Wed, 23 May 2018 16:52:45 +0300
-Subject: [PATCH] xen/balloon: Share common memory reservation routines
-
-Memory {increase|decrease}_reservation and VA mappings update/reset
-code used in balloon driver can be made common, so other drivers can
-also re-use the same functionality without open-coding.
-Create a dedicated file for the shared code and export corresponding
-symbols for other kernel modules.
-
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
- drivers/xen/Makefile          |   1 +
- drivers/xen/balloon.c         |  71 ++-------------------
- drivers/xen/mem-reservation.c |  78 +++++++++++++++++++++++
- include/xen/mem-reservation.h | 114 ++++++++++++++++++++++++++++++++++
- 4 files changed, 199 insertions(+), 65 deletions(-)
- create mode 100644 drivers/xen/mem-reservation.c
- create mode 100644 include/xen/mem-reservation.h
-
-diff --git a/drivers/xen/Makefile b/drivers/xen/Makefile
-index 451e833f5931..3c87b0c3aca6 100644
---- a/drivers/xen/Makefile
-+++ b/drivers/xen/Makefile
-@@ -2,6 +2,7 @@
- obj-$(CONFIG_HOTPLUG_CPU)		+= cpu_hotplug.o
- obj-$(CONFIG_X86)			+= fallback.o
- obj-y	+= grant-table.o features.o balloon.o manage.o preempt.o time.o
-+obj-y	+= mem-reservation.o
- obj-y	+= events/
- obj-y	+= xenbus/
- 
-diff --git a/drivers/xen/balloon.c b/drivers/xen/balloon.c
-index 065f0b607373..1789be76e9c5 100644
---- a/drivers/xen/balloon.c
-+++ b/drivers/xen/balloon.c
-@@ -71,6 +71,7 @@
- #include <xen/balloon.h>
- #include <xen/features.h>
- #include <xen/page.h>
-+#include <xen/mem-reservation.h>
- 
- static int xen_hotplug_unpopulated;
- 
-@@ -157,13 +158,6 @@ static DECLARE_DELAYED_WORK(balloon_worker, balloon_process);
- #define GFP_BALLOON \
- 	(GFP_HIGHUSER | __GFP_NOWARN | __GFP_NORETRY | __GFP_NOMEMALLOC)
- 
--static void scrub_page(struct page *page)
--{
--#ifdef CONFIG_XEN_SCRUB_PAGES
--	clear_highpage(page);
--#endif
--}
--
- /* balloon_append: add the given page to the balloon. */
- static void __balloon_append(struct page *page)
- {
-@@ -463,11 +457,6 @@ static enum bp_state increase_reservation(unsigned long nr_pages)
- 	int rc;
- 	unsigned long i;
- 	struct page   *page;
--	struct xen_memory_reservation reservation = {
--		.address_bits = 0,
--		.extent_order = EXTENT_ORDER,
--		.domid        = DOMID_SELF
--	};
- 
- 	if (nr_pages > ARRAY_SIZE(frame_list))
- 		nr_pages = ARRAY_SIZE(frame_list);
-@@ -486,9 +475,7 @@ static enum bp_state increase_reservation(unsigned long nr_pages)
- 		page = balloon_next_page(page);
- 	}
- 
--	set_xen_guest_handle(reservation.extent_start, frame_list);
--	reservation.nr_extents = nr_pages;
--	rc = HYPERVISOR_memory_op(XENMEM_populate_physmap, &reservation);
-+	rc = xenmem_reservation_increase(nr_pages, frame_list);
- 	if (rc <= 0)
- 		return BP_EAGAIN;
- 
-@@ -496,29 +483,7 @@ static enum bp_state increase_reservation(unsigned long nr_pages)
- 		page = balloon_retrieve(false);
- 		BUG_ON(page == NULL);
- 
--#ifdef CONFIG_XEN_HAVE_PVMMU
--		/*
--		 * We don't support PV MMU when Linux and Xen is using
--		 * different page granularity.
--		 */
--		BUILD_BUG_ON(XEN_PAGE_SIZE != PAGE_SIZE);
--
--		if (!xen_feature(XENFEAT_auto_translated_physmap)) {
--			unsigned long pfn = page_to_pfn(page);
--
--			set_phys_to_machine(pfn, frame_list[i]);
--
--			/* Link back into the page tables if not highmem. */
--			if (!PageHighMem(page)) {
--				int ret;
--				ret = HYPERVISOR_update_va_mapping(
--						(unsigned long)__va(pfn << PAGE_SHIFT),
--						mfn_pte(frame_list[i], PAGE_KERNEL),
--						0);
--				BUG_ON(ret);
--			}
--		}
--#endif
-+		__xenmem_reservation_va_mapping_update(page, frame_list[i]);
- 
- 		/* Relinquish the page back to the allocator. */
- 		free_reserved_page(page);
-@@ -535,11 +500,6 @@ static enum bp_state decrease_reservation(unsigned long nr_pages, gfp_t gfp)
- 	unsigned long i;
- 	struct page *page, *tmp;
- 	int ret;
--	struct xen_memory_reservation reservation = {
--		.address_bits = 0,
--		.extent_order = EXTENT_ORDER,
--		.domid        = DOMID_SELF
--	};
- 	LIST_HEAD(pages);
- 
- 	if (nr_pages > ARRAY_SIZE(frame_list))
-@@ -553,7 +513,7 @@ static enum bp_state decrease_reservation(unsigned long nr_pages, gfp_t gfp)
- 			break;
- 		}
- 		adjust_managed_page_count(page, -1);
--		scrub_page(page);
-+		xenmem_reservation_scrub_page(page);
- 		list_add(&page->lru, &pages);
- 	}
- 
-@@ -575,25 +535,8 @@ static enum bp_state decrease_reservation(unsigned long nr_pages, gfp_t gfp)
- 		/* XENMEM_decrease_reservation requires a GFN */
- 		frame_list[i++] = xen_page_to_gfn(page);
- 
--#ifdef CONFIG_XEN_HAVE_PVMMU
--		/*
--		 * We don't support PV MMU when Linux and Xen is using
--		 * different page granularity.
--		 */
--		BUILD_BUG_ON(XEN_PAGE_SIZE != PAGE_SIZE);
--
--		if (!xen_feature(XENFEAT_auto_translated_physmap)) {
--			unsigned long pfn = page_to_pfn(page);
-+		__xenmem_reservation_va_mapping_reset(page);
- 
--			if (!PageHighMem(page)) {
--				ret = HYPERVISOR_update_va_mapping(
--						(unsigned long)__va(pfn << PAGE_SHIFT),
--						__pte_ma(0), 0);
--				BUG_ON(ret);
--			}
--			__set_phys_to_machine(pfn, INVALID_P2M_ENTRY);
--		}
--#endif
- 		list_del(&page->lru);
- 
- 		balloon_append(page);
-@@ -601,9 +544,7 @@ static enum bp_state decrease_reservation(unsigned long nr_pages, gfp_t gfp)
- 
- 	flush_tlb_all();
- 
--	set_xen_guest_handle(reservation.extent_start, frame_list);
--	reservation.nr_extents   = nr_pages;
--	ret = HYPERVISOR_memory_op(XENMEM_decrease_reservation, &reservation);
-+	ret = xenmem_reservation_decrease(nr_pages, frame_list);
- 	BUG_ON(ret != nr_pages);
- 
- 	balloon_stats.current_pages -= nr_pages;
-diff --git a/drivers/xen/mem-reservation.c b/drivers/xen/mem-reservation.c
-new file mode 100644
-index 000000000000..5347c17a08c1
---- /dev/null
-+++ b/drivers/xen/mem-reservation.c
-@@ -0,0 +1,78 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+/******************************************************************************
-+ * Xen memory reservation utilities.
-+ *
-+ * Copyright (c) 2003, B Dragovic
-+ * Copyright (c) 2003-2004, M Williamson, K Fraser
-+ * Copyright (c) 2005 Dan M. Smith, IBM Corporation
-+ * Copyright (c) 2010 Daniel Kiper
-+ * Copyright (c) 2018 Oleksandr Andrushchenko, EPAM Systems Inc.
-+ */
-+
-+#include <xen/mem-reservation.h>
-+
-+/*
-+ * Use one extent per PAGE_SIZE to avoid to break down the page into
-+ * multiple frame.
-+ */
-+#define EXTENT_ORDER (fls(XEN_PFN_PER_PAGE) - 1)
-+
-+#ifdef CONFIG_XEN_SCRUB_PAGES
-+void xenmem_reservation_scrub_page(struct page *page)
-+{
-+	clear_highpage(page);
-+}
-+EXPORT_SYMBOL_GPL(xenmem_reservation_scrub_page);
-+#endif
-+
-+#ifdef CONFIG_XEN_HAVE_PVMMU
-+void xenmem_reservation_va_mapping_update(unsigned long count,
-+					  struct page **pages,
-+					  xen_pfn_t *frames)
-+{
-+	int i;
-+
-+	for (i = 0; i < count; i++)
-+		__xenmem_reservation_va_mapping_update(pages[i], frames[i]);
-+}
-+EXPORT_SYMBOL_GPL(xenmem_reservation_va_mapping_update);
-+
-+void xenmem_reservation_va_mapping_reset(unsigned long count,
-+					 struct page **pages)
-+{
-+	int i;
-+
-+	for (i = 0; i < count; i++)
-+		__xenmem_reservation_va_mapping_reset(pages[i]);
-+}
-+EXPORT_SYMBOL_GPL(xenmem_reservation_va_mapping_reset);
-+#endif /* CONFIG_XEN_HAVE_PVMMU */
-+
-+int xenmem_reservation_increase(int count, xen_pfn_t *frames)
-+{
-+	struct xen_memory_reservation reservation = {
-+		.address_bits = 0,
-+		.extent_order = EXTENT_ORDER,
-+		.domid        = DOMID_SELF
-+	};
-+
-+	set_xen_guest_handle(reservation.extent_start, frames);
-+	reservation.nr_extents = count;
-+	return HYPERVISOR_memory_op(XENMEM_populate_physmap, &reservation);
-+}
-+EXPORT_SYMBOL_GPL(xenmem_reservation_increase);
-+
-+int xenmem_reservation_decrease(int count, xen_pfn_t *frames)
-+{
-+	struct xen_memory_reservation reservation = {
-+		.address_bits = 0,
-+		.extent_order = EXTENT_ORDER,
-+		.domid        = DOMID_SELF
-+	};
-+
-+	set_xen_guest_handle(reservation.extent_start, frames);
-+	reservation.nr_extents = count;
-+	return HYPERVISOR_memory_op(XENMEM_decrease_reservation, &reservation);
-+}
-+EXPORT_SYMBOL_GPL(xenmem_reservation_decrease);
-diff --git a/include/xen/mem-reservation.h b/include/xen/mem-reservation.h
-new file mode 100644
-index 000000000000..d44443cdd60e
---- /dev/null
-+++ b/include/xen/mem-reservation.h
-@@ -0,0 +1,114 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+
-+/*
-+ * Xen memory reservation utilities.
-+ *
-+ * Copyright (c) 2003, B Dragovic
-+ * Copyright (c) 2003-2004, M Williamson, K Fraser
-+ * Copyright (c) 2005 Dan M. Smith, IBM Corporation
-+ * Copyright (c) 2010 Daniel Kiper
-+ * Copyright (c) 2018 Oleksandr Andrushchenko, EPAM Systems Inc.
-+ */
-+
-+#ifndef _XENMEM_RESERVATION_H
-+#define _XENMEM_RESERVATION_H
-+
-+#include <linux/kernel.h>
-+#include <linux/slab.h>
-+
-+#include <asm/xen/hypercall.h>
-+#include <asm/tlb.h>
-+
-+#include <xen/interface/memory.h>
-+#include <xen/page.h>
-+
-+#ifdef CONFIG_XEN_SCRUB_PAGES
-+void xenmem_reservation_scrub_page(struct page *page);
-+#else
-+static inline void xenmem_reservation_scrub_page(struct page *page)
-+{
-+}
-+#endif
-+
-+static inline void
-+__xenmem_reservation_va_mapping_update(struct page *page, xen_pfn_t frame)
-+{
-+#ifdef CONFIG_XEN_HAVE_PVMMU
-+	BUG_ON(page == NULL);
-+
-+	/*
-+	 * We don't support PV MMU when Linux and Xen is using
-+	 * different page granularity.
-+	 */
-+	BUILD_BUG_ON(XEN_PAGE_SIZE != PAGE_SIZE);
-+
-+	if (!xen_feature(XENFEAT_auto_translated_physmap)) {
-+		unsigned long pfn = page_to_pfn(page);
-+
-+		set_phys_to_machine(pfn, frame);
-+
-+		/* Link back into the page tables if not highmem. */
-+		if (!PageHighMem(page)) {
-+			int ret;
-+
-+			ret = HYPERVISOR_update_va_mapping(
-+					(unsigned long)__va(pfn << PAGE_SHIFT),
-+					mfn_pte(frame, PAGE_KERNEL),
-+					0);
-+			BUG_ON(ret);
-+		}
-+	}
-+#endif
-+}
-+
-+static inline void
-+__xenmem_reservation_va_mapping_reset(struct page *page)
-+{
-+#ifdef CONFIG_XEN_HAVE_PVMMU
-+	/*
-+	 * We don't support PV MMU when Linux and Xen is using
-+	 * different page granularity.
-+	 */
-+	BUILD_BUG_ON(XEN_PAGE_SIZE != PAGE_SIZE);
-+
-+	if (!xen_feature(XENFEAT_auto_translated_physmap)) {
-+		unsigned long pfn = page_to_pfn(page);
-+
-+		if (!PageHighMem(page)) {
-+			int ret;
-+
-+			ret = HYPERVISOR_update_va_mapping(
-+					(unsigned long)__va(pfn << PAGE_SHIFT),
-+					__pte_ma(0), 0);
-+			BUG_ON(ret);
-+		}
-+		__set_phys_to_machine(pfn, INVALID_P2M_ENTRY);
-+	}
-+#endif
-+}
-+
-+#ifdef CONFIG_XEN_HAVE_PVMMU
-+void xenmem_reservation_va_mapping_update(unsigned long count,
-+					  struct page **pages,
-+					  xen_pfn_t *frames);
-+
-+void xenmem_reservation_va_mapping_reset(unsigned long count,
-+					 struct page **pages);
-+#else
-+static inline void xenmem_reservation_va_mapping_update(unsigned long count,
-+							struct page **pages,
-+							xen_pfn_t *frames)
-+{
-+}
-+
-+static inline void xenmem_reservation_va_mapping_reset(unsigned long count,
-+						       struct page **pages)
-+{
-+}
-+#endif
-+
-+int xenmem_reservation_increase(int count, xen_pfn_t *frames);
-+
-+int xenmem_reservation_decrease(int count, xen_pfn_t *frames);
-+
-+#endif
--- 
-2.17.0
-
-
---------------7EDD12234581199609D9736A
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------7EDD12234581199609D9736A--
+ZmxpZ2h0IDEyMzM4MiBsaW51eC00LjE0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFi
+LnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjMzODIvCgpGYWlsdXJlcyA6LS8gYnV0IG5v
+IHJlZ3Jlc3Npb25zLgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBi
+bG9ja2luZzoKIHRlc3QtYW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgMTIgZ3Vlc3Qtc3RhcnQgICAg
+ICAgICAgICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQg
+ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
+ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
+ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgMTMgbWln
+cmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1h
+cm02NC14bCAgICAgICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBu
+ZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9y
+dC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNt
+ICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwog
+dGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAg
+ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDIgIDE0IHNh
+dmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQt
+YXJtNjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAg
+bmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAxNCBzYXZlcmVzdG9yZS1z
+dXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZp
+cnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MK
+IHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAg
+ICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRl
+Ymlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFz
+cwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBt
+aWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXFl
+bXV1LW5lc3RlZC1hbWQgMTcgZGViaWFuLWh2bS1pbnN0YWxsL2wxL2wyICBmYWlsIG5ldmVyIHBh
+c3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAg
+ICAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZoZCAx
+MiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
+bWhmLWFybWhmLXhsLXJ0ZHMgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFp
+bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgMTQgc2F2ZXJlc3Rv
+cmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14
+bC14c20gICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBw
+YXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQt
+Y2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAg
+MTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
+cm1oZi1hcm1oZi14bC1jdWJpZXRydWNrIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
+ZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0
+b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYt
+eGwtY3ViaWV0cnVjayAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgbmV2ZXIg
+cGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hl
+Y2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNt
+IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
+YXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
+ZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
+LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
+LXhsLW11bHRpdmNwdSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQy
+ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
+LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
+ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAx
+NyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2
+NC14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBuZXZl
+ciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9w
+ICAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQt
+d2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVz
+dC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
+IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgIDEzIG1pZ3Jh
+dGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJt
+aGYteGwtdmhkICAgICAgMTMgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2
+ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAxNCBzYXZlcmVzdG9yZS1zdXBw
+b3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUt
+d3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRl
+c3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAg
+ICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdzMTYtYW1kNjQg
+MTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
+bWhmLWxpYnZpcnQtcmF3IDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
+dmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTMgc2F2ZXJlc3RvcmUtc3Vw
+cG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
+LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0
+ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAg
+ICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4
+NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1p
+Mzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBu
+ZXZlciBwYXNzCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogbGludXggICAgICAgICAg
+ICAgICAgMTAyYjk3ZDYyNDFkOTM4YWMxNTMxOTM1MDRhNTkzNmZjMGJlMjdlZApiYXNlbGluZSB2
+ZXJzaW9uOgogbGludXggICAgICAgICAgICAgICAgMWRmZjA4NDg1YjllODM1ZDAwYmZiMzRhNDM1
+YmM2ZjA3ZGFkYjZmZAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTIzMTQ3ICAyMDE4LTA1LTI0IDEz
+OjMwOjE2IFogICAgNiBkYXlzClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEyMzIwMSAgMjAxOC0wNS0y
+NiAwMTozMDowNSBaICAgIDUgZGF5cyAgICA1IGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3Vj
+aGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFraW5vYnUgTWl0YSA8YWtpbm9idS5taXRhQGdt
+YWlsLmNvbT4KICBBbCBWaXJvIDx2aXJvQHplbml2LmxpbnV4Lm9yZy51az4KICBBbGFuIFN0ZXJu
+IDxzdGVybkByb3dsYW5kLmhhcnZhcmQuZWR1PgogIEFsZXhhbmRlciBEdXljayA8YWxleGFuZGVy
+LmguZHV5Y2tAaW50ZWwuY29tPgogIEFsZXhhbmRlciBQb3RhcGVua28gPGdsaWRlckBnb29nbGUu
+Y29tPgogIEFsZXhhbmRyZSBCZWxsb25pIDxhbGV4YW5kcmUuYmVsbG9uaUBib290bGluLmNvbT4K
+ICBBbXJpdGhhIE5hbWJpYXIgPGFtcml0aGEubmFtYmlhckBpbnRlbC5jb20+CiAgQW5kcmV3IE1v
+cnRvbiA8YWtwbUBsaW51eC1mb3VuZGF0aW9uLm9yZz4KICBBbmRyZXcgVmFzcXVleiA8YW5kcmV3
+LnZhc3F1ZXpAY2F2aXVtLmNvbT4KICBBbmRyemVqIEhhamRhIDxhLmhhamRhQHNhbXN1bmcuY29t
+PgogIEFudG9pbmUgVGVuYXJ0IDxhbnRvaW5lLnRlbmFydEBib290bGluLmNvbT4KICBBcm5kIEJl
+cmdtYW5uIDxhcm5kQGFybmRiLmRlPgogIEFydmluZCBZYWRhdiA8YXJ2aW5kLnlhZGF2LmNzQGdt
+YWlsLmNvbT4KICBBc3V0b3NoIERhcyA8YXN1dG9zaGRAY29kZWF1cm9yYS5vcmc+CiAgQmFvcXVh
+biBIZSA8YmhlQHJlZGhhdC5jb20+CiAgQmFydCBWYW4gQXNzY2hlIDxiYXJ0LnZhbmFzc2NoZUB3
+ZGMuY29tPgogIEJlbiBIdXRjaGluZ3MgPGJlbkBkZWNhZGVudC5vcmcudWs+CiAgQnJhZCBMb3Zl
+IDxicmFkQG5leHRkaW1lbnNpb24uY2M+CiAgQnJpYW4gTm9ycmlzIDxicmlhbm5vcnJpc0BjaHJv
+bWl1bS5vcmc+CiAgQnJ5YW4gTydEb25vZ2h1ZSA8cHVyZS5sb2dpY0BuZXh1cy1zb2Z0d2FyZS5p
+ZT4KICBDaGFkIER1cHVpcyA8Y2hhZC5kdXB1aXNAY2F2aXVtLmNvbT4KICBDaGFud29vIENob2kg
+PGN3MDAuY2hvaUBzYW1zdW5nLmNvbT4KICBDaHJpcyBEaWNrZW5zIDxjaHJpc3RvcGhlci5hLmRp
+Y2tlbnNAZ21haWwuY29tPgogIENocmlzIExlZWNoIDxjbGVlY2hAcmVkaGF0LmNvbT4KICBDb2xp
+biBJYW4gS2luZyA8Y29saW4ua2luZ0BjYW5vbmljYWwuY29tPgogIERhbiBDYXJwZW50ZXIgPGRh
+bi5jYXJwZW50ZXJAb3JhY2xlLmNvbT4KICBEYXZlIENhcnJvbGwgPGRhdmlkLmNhcnJvbGxAbWlj
+cm9zZW1pLmNvbT4KICBEYXZpZCBTLiBNaWxsZXIgPGRhdmVtQGRhdmVtbG9mdC5uZXQ+CiAgRGF2
+aWRlIENhcmF0dGkgPGRjYXJhdHRpQHJlZGhhdC5jb20+CiAgRGljayBLZW5uZWR5IDxkaWNrLmtl
+bm5lZHlAYnJvYWRjb20uY29tPgogIERvbWluaWsgQm96ZWsgPGRvbWluaWt4LmJvemVrQGludGVs
+LmNvbT4KICBEb3VnbGFzIEdpbGJlcnQgPGRnaWxiZXJ0QGludGVybG9nLmNvbT4KICBFcmljIEJp
+Z2dlcnMgPGViaWdnZXJzQGdvb2dsZS5jb20+CiAgRXJpYyBEdW1hemV0IDxlZHVtYXpldEBnb29n
+bGUuY29tPgogIEV6ZXF1aWVsIEdhcmNpYSA8ZXplcXVpZWxAY29sbGFib3JhLmNvLnVrPgogIEZl
+bGlwZSBCYWxiaSA8ZmVsaXBlLmJhbGJpQGxpbnV4LmludGVsLmNvbT4KICBGcmVkcmlrIE5vcmlu
+ZyA8bm9yaW5nQG5vY3Jldy5vcmc+CiAgR2FyeSBSIEhvb2sgPGdhcnkuaG9va0BhbWQuY29tPgog
+IEdlZXJ0IFV5dHRlcmhvZXZlbiA8Z2VlcnQrcmVuZXNhc0BnbGlkZXIuYmU+CiAgR2l1c2VwcGUg
+TGlwcG9saXMgPGdpdS5saXBwb2xpc0BnbWFpbC5jb20+CiAgR3JlZyBLcm9haC1IYXJ0bWFuIDxn
+cmVna2hAbGludXhmb3VuZGF0aW9uLm9yZz4KICBHcmlnb3IgVG92bWFzeWFuIDxHcmlnb3IuVG92
+bWFzeWFuQHN5bm9wc3lzLmNvbT4KICBHcmlnb3IgVG92bWFzeWFuIDx0b3ZtYXN5YUBzeW5vcHN5
+cy5jb20+CiAgSGFpeWFuZyBaaGFuZyA8aGFpeWFuZ3pAbWljcm9zb2Z0LmNvbT4KICBIYW5uZXMg
+UmVpbmVja2UgPGhhcmVAc3VzZS5jb20+CiAgSGFubmVzIFJlaW5lY2tlIDxoYXJlQHN1c2UuZGU+
+CiAgSGFucyBWZXJrdWlsIDxoYW5zLnZlcmt1aWxAY2lzY28uY29tPgogIEhhbnMgVmVya3VpbCA8
+aHZlcmt1aWxAeHM0YWxsLm5sPgogIEhlaWtvIFN0dWVibmVyIDxoZWlrb0BzbnRlY2guZGU+CiAg
+SGVyYmVydCBYdSA8aGVyYmVydEBnb25kb3IuYXBhbmEub3JnLmF1PgogIEhpbWFuc2h1IE1hZGhh
+bmkgPGhpbWFuc2h1Lm1hZGhhbmlAY2F2aXVtLmNvbT4KICBIb24gV2VuZyBDaG9uZyA8aG9ud2No
+b25nQGdtYWlsLmNvbT4KICBocHJlZ0B2bXdhcmUuY29tIDxocHJlZ0B2bXdhcmUuY29tPgogIElv
+YW5hIFJhZHVsZXNjdSA8cnV4YW5kcmEucmFkdWxlc2N1QG54cC5jb20+CiAgSmFtYWwgSGFkaSBT
+YWxpbSA8amhzQG1vamF0YXR1LmNvbT4KICBKYW1lcyBIb2dhbiA8amhvZ2FuQGtlcm5lbC5vcmc+
+CiAgSmFtZXMgU21hcnQgPGphbWVzLnNtYXJ0QGJyb2FkY29tLmNvbT4KICBKYW1lcyBTbWFydCA8
+anNtYXJ0MjAyMUBnbWFpbC5jb20+CiAgSmFzb24gWWFuIDx5YW5haWppZUBodWF3ZWkuY29tPgog
+IEplbnMgQXhib2UgPGF4Ym9lQGtlcm5lbC5kaz4KICBKZW5zIFJlbXVzIDxqcmVtdXNAbGludXgu
+aWJtLmNvbT4KICBKZXJlbXkgQ2xpbmUgPGplcmVteUBqY2xpbmUub3JnPgogIEplcm9tZSBCcnVu
+ZXQgPGpicnVuZXRAYmF5bGlicmUuY29tPgogIEppYW5jaGFvIFdhbmcgPGppYW5jaGFvLncud2Fu
+Z0BvcmFjbGUuY29tPgogIEppcmkgS29zaW5hIDxqa29zaW5hQHN1c2UuY3o+CiAgSm9oYW5uZXMg
+QmVyZyA8am9oYW5uZXMuYmVyZ0BpbnRlbC5jb20+CiAgSm9obiBLZWVwaW5nIDxqb2huQG1ldGFu
+YXRlLmNvbT4KICBKb2huIFlvdW4gPGpvaG55b3VuQHN5bm9wc3lzLmNvbT4KICBKb24gSHVudGVy
+IDxqb25hdGhhbmhAbnZpZGlhLmNvbT4KICBKeXJpIFNhcmhhIDxqc2FyaGFAdGkuY29tPgogIEsu
+IFkuIFNyaW5pdmFzYW4gPGt5c0BtaWNyb3NvZnQuY29tPgogIEtpZXJhbiBCaW5naGFtIDxraWVy
+YW4uYmluZ2hhbStyZW5lc2FzQGlkZWFzb25ib2FyZC5jb20+CiAgS2llcmFuIEJpbmdoYW0gPGtp
+ZXJhbi5iaW5naGFtQGlkZWFzb25ib2FyZC5jb20+CiAgS2lyaWxsIE1hcmludXNoa2luIDxrLm1h
+cmludXNoa2luQGdtYWlsLmNvbT4KICBLcnp5c3p0b2YgS296bG93c2tpIDxrcnprQGtlcm5lbC5v
+cmc+CiAgS3VwcHVzd2FteSBTYXRoeWFuYXJheWFuYW4gPHNhdGh5YW5hcmF5YW5hbi5rdXBwdXN3
+YW15QGxpbnV4LmludGVsLmNvbT4KICBMYXJyeSBGaW5nZXIgPExhcnJ5LkZpbmdlckBsd2Zpbmdl
+ci5uZXQ+CiAgTGFycy1QZXRlciBDbGF1c2VuIDxsYXJzQG1ldGFmb28uZGU+CiAgTGF1cmVuY2Ug
+T2Jlcm1hbiA8bG9iZXJtYW5AcmVkaGF0LmNvbT4KICBMYXVyZW50IFBpbmNoYXJ0IDxsYXVyZW50
+LnBpbmNoYXJ0K3JlbmVzYXNAaWRlYXNvbmJvYXJkLmNvbT4KICBMZWUgRHVuY2FuIDxsZHVuY2Fu
+QHN1c2UuY29tPgogIExlb25hcmQgQ3Jlc3RleiA8bGVvbmFyZC5jcmVzdGV6QG54cC5jb20+CiAg
+TGludXMgVG9ydmFsZHMgPHRvcnZhbGRzQGxpbnV4LWZvdW5kYXRpb24ub3JnPgogIE1hbmlzaCBS
+YW5nYW5rYXIgPG1hbmlzaC5yYW5nYW5rYXJAY2F2aXVtLmNvbT4KICBNYW51IEdhdXRhbSA8bWdh
+dXRhbUBjb2RlYXVyb3JhLm9yZz4KICBNYXJjZWwgSG9sdG1hbm4gPG1hcmNlbEBob2x0bWFubi5v
+cmc+CiAgTWFyY2VsIFppc3dpbGVyIDxtYXJjZWwuemlzd2lsZXJAdG9yYWRleC5jb20+CiAgTWFy
+Y2VsIFppc3dpbGVyIDxtYXJjZWxAemlzd2lsZXIuY29tPgogIE1hcmsgQnJvd24gPGJyb29uaWVA
+a2VybmVsLm9yZz4KICBNYXJ0aW4gSy4gUGV0ZXJzZW4gPG1hcnRpbi5wZXRlcnNlbkBvcmFjbGUu
+Y29tPgogIE1hcnRpbiBTY2h3aWRlZnNreSA8c2Nod2lkZWZza3lAZGUuaWJtLmNvbT4KICBNYXNh
+bWkgSGlyYW1hdHN1IDxtaGlyYW1hdEBrZXJuZWwub3JnPgogIE1hdGhpYXMgTnltYW4gPG1hdGhp
+YXMubnltYW5AbGludXguaW50ZWwuY29tPgogIE1hdHRoZXcgV2lsY294IDxtYXdpbGNveEBtaWNy
+b3NvZnQuY29tPgogIE1hdXJvIENhcnZhbGhvIENoZWhhYiA8bWNoZWhhYkBzLW9wZW5zb3VyY2Uu
+Y29tPgogIE1lZWxpcyBSb29zIDxtcm9vc0BsaW51eC5lZT4KICBNaWNoYWVsIEtlbGxleSAoRU9T
+RykgPE1pY2hhZWwuSC5LZWxsZXlAbWljcm9zb2Z0LmNvbT4KICBNaWNoYWVsIEtlbGxleSA8bWlr
+ZWxsZXlAbWljcm9zb2Z0LmNvbT4KICBNaW5hcyBIYXJ1dHl1bnlhbiA8aG1pbmFzQHN5bm9wc3lz
+LmNvbT4KICBNb2hhbW1lZCBHYW1hbCA8bWdhbWFsQHJlZGhhdC5jb20+CiAgTmVhbCBDYXJkd2Vs
+bCA8bmNhcmR3ZWxsQGdvb2dsZS5jb20+CiAgTmVpbEJyb3duIDxuZWlsYkBzdXNlLmNvbT4KICBO
+aWxlc2ggSmF2YWxpIDxuaWxlc2guamF2YWxpQGNhdml1bS5jb20+CiAgTm9idXRha2EgT2thYmUg
+PG5vYjc3NDEzQGdtYWlsLmNvbT4KICBPbGl2ZXIgTmV1a3VtIDxvbmV1a3VtQHN1c2UuY29tPgog
+IE9tYXIgU2FuZG92YWwgPG9zYW5kb3ZAZmIuY29tPgogIFBhb2xvIEFiZW5pIDxwYWJlbmlAcmVk
+aGF0LmNvbT4KICBQZXRlciBSb2JpbnNvbiA8cGJyb2JpbnNvbkBnbWFpbC5jb20+CiAgUGV0ZXIg
+VWpmYWx1c2kgPHBldGVyLnVqZmFsdXNpQHRpLmNvbT4KICBRdWlubiBUcmFuIDxxdWlubi50cmFu
+QGNhdml1bS5jb20+CiAgUXV5dGVsZGEgS2FoamEgPHF1eXRlbGRhQHRhbWFsaW4ub3JnPgogIFJh
+bmphbmkgU3JpZGhhcmFuIDxyYW5qYW5pLnNyaWRoYXJhbkBsaW51eC5pbnRlbC5jb20+CiAgUmVn
+aXMgRHVjaGVzbmUgPGhwcmVnQHZtd2FyZS5jb20+CiAgUm9nZXIgUXVhZHJvcyA8cm9nZXJxQHRp
+LmNvbT4KICBSb25hayBEb3NoaSA8ZG9zaGlyQHZtd2FyZS5jb20+CiAgU2FrYXJpIEFpbHVzIDxz
+YWthcmkuYWlsdXNAbGludXguaW50ZWwuY29tPgogIFNhc2hhIExldmluIDxhbGV4YW5kZXIubGV2
+aW5AbWljcm9zb2Z0LmNvbT4KICBTZWJhc3RpYW4gQW5kcnplaiBTaWV3aW9yIDxiaWdlYXN5QGxp
+bnV0cm9uaXguZGU+CiAgU2hhd24gR3VvIDxzaGF3bi5ndW9AbGluYXJvLm9yZz4KICBTaGF3biBH
+dW8gPHNoYXduZ3VvQGtlcm5lbC5vcmc+CiAgU2hhd24gTGluIDxzaGF3bi5saW5Acm9jay1jaGlw
+cy5jb20+CiAgU3JlZWthbnRoIFJlZGR5IDxTcmVla2FudGguUmVkZHlAYnJvYWRjb20uY29tPgog
+IFN0ZWZhbiBBZ25lciA8c3RlZmFuQGFnbmVyLmNoPgogIFN0ZWZmZW4gTWFpZXIgPG1haWVyQGxp
+bnV4LmlibS5jb20+CiAgU3RlcGhlbiBCb3lkIDxzYm95ZEBrZXJuZWwub3JnPgogIFN0ZXBoZW4g
+SGVtbWluZ2VyIDxzdGVwaGVuQG5ldHdvcmtwbHVtYmVyLm9yZz4KICBTdGVwaGVuIEhlbW1pbmdl
+ciA8c3RoZW1taW5AbWljcm9zb2Z0LmNvbT4KICBTdWJoYXNoIEphZGF2YW5pIDxzdWJoYXNoakBj
+b2RlYXVyb3JhLm9yZz4KICBTdWdhbmF0aCBQcmFidSBTdWJyYW1hbmkgPHN1Z2FuYXRoLXByYWJ1
+LnN1YnJhbWFuaUBicm9hZGNvbS5jb20+CiAgU3VqaXQgUmVkZHkgVGh1bW1hIDxzdGh1bW1hQGNv
+ZGVhdXJvcmEub3JnPgogIFN5bHdlc3RlciBOYXdyb2NraSA8cy5uYXdyb2NraUBzYW1zdW5nLmNv
+bT4KICBUYWthc2hpIEl3YWkgPHRpd2FpQHN1c2UuZGU+CiAgVGFyaWNrIEJlZGVpciA8dGFyaWNr
+QGdvb2dsZS5jb20+CiAgVGV0c3VvIEhhbmRhIDxwZW5ndWluLWtlcm5lbEBJLWxvdmUuU0FLVVJB
+Lm5lLmpwPgogIFRoaWVycnkgUmVkaW5nIDx0cmVkaW5nQG52aWRpYS5jb20+CiAgVGhpbmggTmd1
+eWVuIDxUaGluaC5OZ3V5ZW5Ac3lub3BzeXMuY29tPgogIFRoaW5oIE5ndXllbiA8dGhpbmhuQHN5
+bm9wc3lzLmNvbT4KICBUaG9tYXMgR2xlaXhuZXIgPHRnbHhAbGludXRyb25peC5kZT4KICBUb2Jp
+YXMgS2xhdXNlciA8dGtsYXVzZXJAZGlzdGFuei5jaD4KICBUb2RvciBUb21vdiA8dG9kb3IudG9t
+b3ZAbGluYXJvLm9yZz4KICBUb21hcyBIZW56bCA8dGhlbnpsQHJlZGhhdC5jb20+CiAgVG9tYXN6
+IEZpZ2EgPHRvbWFzei5maWdhQGdtYWlsLmNvbT4KICBUb3JzdGVuIEhpbGJyaWNoIDx0b3JzdGVu
+LmhpbGJyaWNoQHNlY3VuZXQuY29tPgogIFV3ZSBLbGVpbmUtS8O2bmlnIDx1LmtsZWluZS1rb2Vu
+aWdAcGVuZ3V0cm9uaXguZGU+CiAgVmFyZGFuIE1pa2F5ZWx5YW4gPG12YXJkYW5Ac3lub3BzeXMu
+Y29tPgogIFZpY2VudGUgQmVyZ2FzIDx2aWNlbmNiQGdtYWlsLmNvbT4KICBWaWduZXNoIFIgPHZp
+Z25lc2hyQHRpLmNvbT4KICBWaXRhbHkgS3V6bmV0c292IDx2a3V6bmV0c0ByZWRoYXQuY29tPgog
+IFdpbGZyaWVkIFdlaXNzbWFubiA8d2lsZnJpZWQud2Vpc3NtYW5uQGdteC5hdD4KICBXaWxsZW0g
+ZGUgQnJ1aWpuIDx3aWxsZW1iQGdvb2dsZS5jb20+CiAgV29sZnJhbSBTYW5nIDx3c2ErcmVuZXNh
+c0BzYW5nLWVuZ2luZWVyaW5nLmNvbT4KICBZb3NoaWhpcm8gU2hpbW9kYSA8eW9zaGloaXJvLnNo
+aW1vZGEudWhAcmVuZXNhcy5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC14
+c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IGJ1aWxkLWFybWhmLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0ICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
+YnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtbGli
+dmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
+dWlsZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9w
+cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
+aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1ydW1wcnVuICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcnVtcHJ1
+biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
+dC1hbWQ2NC1hbWQ2NC14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
+LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAg
+cGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQteHNtICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRl
+Ymlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGli
+dmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
+YW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBw
+YXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXN0dWJkb20t
+ZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
+ZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICBwYXNzICAgIAogdGVzdC1h
+bWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZp
+cnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
+ZDY0LWFtZDY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC14c20gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwteHNt
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
+NjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
+ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1hbWQgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhlbDZodm0tYW1kICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1y
+aGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
+NC1hbWQ2NC14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFt
+ZDY0ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1
+LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
+LWkzODYtZnJlZWJzZDEwLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXJ1bXBydW4t
+YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
+YW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
+IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgICAg
+ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13
+aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1h
+bWQ2NC14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
+CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAg
+ICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAg
+ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdz
+MTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybWhmLWFy
+bWhmLXhsLWFybmRhbGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJt
+aGYteGwtY3ViaWV0cnVjayAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
+dGVzdC1hbWQ2NC1hbWQ2NC1leGFtaW5lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWV4YW1pbmUgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtZXhhbWluZSAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2
+LWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
+ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1ydW1wcnVuLWkzODYgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4x
+MC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYt
+eGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
+c3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAg
+ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAg
+ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1p
+bnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
+eGwtcHZodjItaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
+dC1hbWQ2NC1pMzg2LXFlbXV0LXJoZWw2aHZtLWludGVsICAgICAgICAgICAgICAgICAgICAgICAg
+IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0taW50ZWwgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1s
+aWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
+LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXBh
+aXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
+YW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
+YXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1wYWlyICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1k
+NjQtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
+bWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2c2hpbSAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdy
+dWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
+ZDY0LWFtZDY0LXhsLXFjb3cyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXJhdyAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0
+ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJt
+aGYtYXJtaGYteGwtcnRkcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93ICAg
+ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFt
+ZDY0LXNoYWRvdyAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtc2hh
+ZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
+NC1pMzg2LXhsLXNoYWRvdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9u
+IG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmlt
+YWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZh
+aWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0
+L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdl
+bmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0
+LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54
+ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpU
+ZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
+cmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpU
+byB4ZW5iaXRzLnhlbi5vcmc6L2hvbWUveGVuL2dpdC9saW51eC1wdm9wcy5naXQKICAgMWRmZjA4
+NDg1YjllLi4xMDJiOTdkNjI0MWQgIDEwMmI5N2Q2MjQxZDkzOGFjMTUzMTkzNTA0YTU5MzZmYzBi
+ZTI3ZWQgLT4gdGVzdGVkL2xpbnV4LTQuMTQKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
