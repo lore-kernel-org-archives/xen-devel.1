@@ -1,10 +1,19 @@
-From: "Hao, Xudong" <xudong.hao@intel.com>
-Subject: Re: Xen 4.11.0 RC5 test result
-Date: Tue, 5 Jun 2018 08:49:33 +0000
-Message-ID: <B8376D2DEA074F45BA033984477C453E3BA35846@shsmsx102.ccr.corp.intel.com>
+From: Manish Jaggi <mjaggi@caviumnetworks.com>
+Subject: Re: [PATCH v5 0/10] arm: more kconfig configurability
+ and small default configs
+Date: Tue, 5 Jun 2018 14:32:04 +0530
+Message-ID: <2c0182a6-bce6-6565-7bd3-cfb98f05de33@caviumnetworks.com>
+References: <alpine.DEB.2.10.1806041020340.23991@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1106659412488507916=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=+3gy=ix=cavium.com=manish.jaggi@srs-us1.protection.inumbo.net>)
+ id 1fQ7r8-0004dG-R8
+ for xen-devel@lists.xenproject.org; Tue, 05 Jun 2018 09:02:19 +0000
+In-Reply-To: <alpine.DEB.2.10.1806041020340.23991@sstabellini-ThinkPad-X260>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -14,458 +23,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
-Cc: Lars Kurth <lars.kurth.xen@gmail.com>, Juergen Gross <jgross@suse.com>, Julien Grall <julien.grall@arm.com>
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============1106659412488507916==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_B8376D2DEA074F45BA033984477C453E3BA35846shsmsx102ccrcor_"
-
---_000_B8376D2DEA074F45BA033984477C453E3BA35846shsmsx102ccrcor_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-+ Juergen
-
-Thanks,
--Xudong
-
-From: Hao, Xudong
-Sent: Tuesday, June 5, 2018 4:47 PM
-To: xen-devel@lists.xen.org
-Cc: Julien Grall <julien.grall@arm.com>; Lars Kurth <lars.kurth.xen@gmail.c=
-om>
-Subject: Xen 4.11.0 RC5 test result
-
-We performed Xen 4.11 RC5 testing on Intel Xeon Skylake, Broadwell server, =
-Intel Atom Denverton platforms, verified many functional features, which in=
-clude new feature MBA on Xen 4.11. We'd like to share the result out.
-
-Except Nested, other feature all passed of testing.
-https://wiki.xenproject.org/wiki/Nested_Virtualization_in_Xen
-
-We also integrated XTF into our testing, 65 xtf cases run pass on those Int=
-el platforms above.
-
-Features
-
-Test Result
-
-MBA
-
-Pass
-
-Local MCE
-
-Pass
-
-UMIP
-
-Pass
-
-AVX512
-
-Pass
-
-Protection keys
-
-Pass
-
-Altp2m
-
-Pass
-
-RDT(CMT, CAT, CDP, MBM, L2 CAT)
-
-Pass
-
-VT-d PI
-
-Pass
-
-XSAVES
-
-Pass
-
-MPX
-
-Pass
-
-PML (Page-modification Logging)
-
-Pass
-
-Nested
-
-Buggy
-
-VT-d/SR-IOV
-
-Pass
-
-RAS
-
-Pass
-
-ACPI
-
-Pass
-
-
-
-Best Regards,
-Xudong
-
-
-
-
-
-
---_000_B8376D2DEA074F45BA033984477C453E3BA35846shsmsx102ccrcor_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:SimSun;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-@font-face
-	{font-family:SimSun;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:#0563C1;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:#954F72;
-	text-decoration:underline;}
-p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
-	{mso-style-priority:99;
-	mso-style-link:"Plain Text Char";
-	margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-span.PlainTextChar
-	{mso-style-name:"Plain Text Char";
-	mso-style-priority:99;
-	mso-style-link:"Plain Text";
-	font-family:"Calibri",sans-serif;}
-span.EmailStyle19
-	{mso-style-type:personal-reply;
-	font-family:"Calibri",sans-serif;
-	color:#1F497D;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-size:10.0pt;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.25in 1.0in 1.25in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal"><a name=3D"_MailEndCompose"><span style=3D"color:#1F=
-497D">&#43; Juergen<o:p></o:p></span></a></p>
-<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
-n></p>
-<div>
-<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Thanks,<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span style=3D"color:#1F497D">-Xudong<o:p></o:p></sp=
-an></p>
-</div>
-<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
-n></p>
-<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
-4.0pt">
-<div>
-<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
-0in 0in">
-<p class=3D"MsoNormal"><a name=3D"_____replyseparator"></a><b>From:</b> Hao=
-, Xudong <br>
-<b>Sent:</b> Tuesday, June 5, 2018 4:47 PM<br>
-<b>To:</b> xen-devel@lists.xen.org<br>
-<b>Cc:</b> Julien Grall &lt;julien.grall@arm.com&gt;; Lars Kurth &lt;lars.k=
-urth.xen@gmail.com&gt;<br>
-<b>Subject:</b> Xen 4.11.0 RC5 test result<o:p></o:p></p>
-</div>
-</div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">We performed Xen 4.11 RC5 testing on Intel Xeon Skyl=
-ake, Broadwell server, Intel Atom Denverton platforms, verified many functi=
-onal features, which include new feature MBA on Xen 4.11. We&#8217;d like t=
-o share the result out.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Except Nested, other feature all passed of testing.<=
-o:p></o:p></p>
-<p class=3D"MsoNormal"><a href=3D"https://wiki.xenproject.org/wiki/Nested_V=
-irtualization_in_Xen">https://wiki.xenproject.org/wiki/Nested_Virtualizatio=
-n_in_Xen</a><o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">We also integrated XTF into our testing, 65 xtf case=
-s run pass on those Intel platforms above.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"0" cellpadding=
-=3D"0" width=3D"0" style=3D"width:388.0pt;margin-left:.2pt;border-collapse:=
-collapse">
-<tbody>
-<tr style=3D"height:15.0pt">
-<td width=3D"351" style=3D"width:263.2pt;border:solid windowtext 1.0pt;back=
-ground:#8EAADB;padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
-<p class=3D"MsoNormal"><b><span style=3D"color:black">Features<o:p></o:p></=
-span></b></p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border:solid black 1.0pt;border-le=
-ft:none;background:#8EAADB;padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
-<p class=3D"MsoNormal"><b><span style=3D"color:black">Test Result<o:p></o:p=
-></span></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">MBA<o:p></o:p></p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<o:p></o:p></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">Local MCE<o:p></o:p></p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<o:p></o:p></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">UMIP<o:p></o:p></p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<o:p></o:p></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">AVX512<span style=3D"color:black"><o:p></o:p></span>=
-</p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
-></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">Protection keys<span style=3D"color:black"><o:p></o:=
-p></span></p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
-></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">Altp2m<span style=3D"color:black"><o:p></o:p></span>=
-</p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
-></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">RDT(CMT, CAT, CDP, MBM, L2 CAT)<span style=3D"color:=
-black"><o:p></o:p></span></p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<span style=3D"color:#A6A6A6"><o:p></o:p></sp=
-an></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">VT-d PI<o:p></o:p></p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<o:p></o:p></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">XSAVES<span style=3D"color:black"><o:p></o:p></span>=
-</p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
-></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">MPX<span style=3D"color:black"><o:p></o:p></span></p=
->
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
-></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">PML (Page-modification Logging)<span style=3D"color:=
-black"><o:p></o:p></span></p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
-></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">Nested<span style=3D"color:black"><o:p></o:p></span>=
-</p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Buggy<span style=3D"color:black"><o:p></o:p></spa=
-n></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
-p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">VT-d/SR-IOV<span style=3D"color:black"><o:p></o:p></=
-span></p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
-ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
-></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border-top:none;border-left:solid =
-black 1.0pt;border-bottom:solid windowtext 1.0pt;border-right:solid black 1=
-.0pt;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">RAS<span style=3D"color:black"><o:p></o:p></span></p=
->
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;backgrou=
-nd:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
-></b></p>
-</td>
-</tr>
-<tr style=3D"height:.3in">
-<td width=3D"351" style=3D"width:263.2pt;border:solid windowtext 1.0pt;bord=
-er-top:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal">ACPI<span style=3D"color:black"><o:p></o:p></span></=
-p>
-</td>
-<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
-order-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;bac=
-kground:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
-<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
-></b></p>
-</td>
-</tr>
-</tbody>
-</table>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Best Regards,<o:p></o:p></p>
-<p class=3D"MsoNormal">Xudong<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
-</div>
-</div>
-</body>
-</html>
-
---_000_B8376D2DEA074F45BA033984477C453E3BA35846shsmsx102ccrcor_--
-
-
---===============1106659412488507916==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1106659412488507916==--
+SGkgU3RlZmFubywKCgpPbiAwNi8wNC8yMDE4IDEwOjUzIFBNLCBTdGVmYW5vIFN0YWJlbGxpbmkg
+d3JvdGU6Cj4gSGkgYWxsLAo+Cj4gVGhpcyBwYXRjaCBzZXJpZXMgaXMgdGhlIGZpcnN0IHN0ZXAg
+dG93YXJkIGJ1aWxkaW5nIGEgc21hbGwgY2VydGlmaWFibGUKPiBYZW4gaHlwZXJ2aXNvciBmb3Ig
+QVJNIGJvYXJkcy4KSG93IG11Y2ggY29kZSBzaXplIGNhbiBiZSByZWR1Y2VkID8gYW55IGJhbGxw
+YXJrIGZpZ3VyZQo+Cj4gRmlyc3QsIHRoZSBzZXJpZXMgbWFrZXMgYSBmZXcgY2hhbmdlcyB0byBh
+bGxvdyBkaXNhYmxpbmcgbW9yZSBrY29uZmlnCj4gb3B0aW9uczogbW9zdCBvZiB0aGVtIGFscmVh
+ZHkgZXhpc3QgYnV0IGNhbm5vdCBiZSBkaXNhYmxlZC4KPgo+IFRoZW4sIGl0IGludHJvZHVjZXMg
+YSByZWZlcmVuY2Uga2NvbmZpZyBmb3IgUmVuZXNhcyBSQ2FyIChkdWUgdG8gcG9wdWxhcgo+IGRl
+bWFuZCwgY2FuZGlkYXRlIGZvciBjZXJ0aWZpY2F0aW9ucyksIFhpbGlueCBNUFNvQywgYW5kIGZv
+ciBRRU1VCj4gYWFyY2g2NCAobm90IGZvciBjZXJ0aWZpY2F0aW9ucywgYnV0IHVzZWZ1bCBmb3Ig
+ZGVidWdnaW5nKS4KPgo+IFRoZSBsYXN0IHBhdGNoIGluIHRoZSBzZXJpZXMgYWRkcyBhIGNvbnZl
+bmllbnQgY2xvYyB0YXJnZXQgdG8gY291bnQgdGhlCj4gdG90YWwgbGluZXMgb2YgY29kZSBvZiB0
+aGUgc291cmNlIGZpbGVzIGJ1aWx0Lgo+Cj4gQXMgYSBjb25zZXF1ZW5jZSBvZiB0aGVzZSBjaGFu
+Z2VzLCBzb21lIG9wdGlvbnMgd2lsbCBiZWNvbWUgdXNlci12aXNpYmxlCj4gYW5kIG5vdCBkZXBl
+bmRlbnQgb24gQ09ORklHX0VYUEVSVC4gSXQgZG9lcyBub3QgbWVhbiB0aGF0IFhlbiBQcm9qZWN0
+Cj4gd2lsbCBzZWN1cml0eSBzdXBwb3J0IGFsbCBwb3NzaWJsZSBjb21iaW5hdGlvbnMgb2Yga2Nv
+bmZpZyBvcHRpb25zLgo+IEluc3RlYWQsIHRoZXJlIHdpbGwgYmUgYSBzbWFsbCBzZXQgb2YgcHJl
+LWNhbm5lZCBjb25maWd1cmF0aW9ucyB0aGF0Cj4gd2lsbCBiZSBzdXBwb3J0ZWQuICBTZWU6IGh0
+dHBzOi8vbWFyYy5pbmZvLz9sPXhlbi1kZXZlbCZtPTE1MjQyNDM4OTUxMjQzMgo+Cj4gQ2hlZXJz
+LAo+Cj4gU3RlZmFubwo+Cj4KPiBTdGVmYW5vIFN0YWJlbGxpbmkgKDEwKToKPiAgICAgICAgYXJt
+OiByZW1vdmUgdGhlIEFSTSBIRExDRCBkcml2ZXIKPiAgICAgICAgYXJtOiBtYWtlIGl0IHBvc3Np
+YmxlIHRvIGRpc2FibGUgSEFTX0dJQ1YzCj4gICAgICAgIGFybTogcmVuYW1lIEhBU19HSUNWMyB0
+byBHSUNWMwo+ICAgICAgICBNYWtlIE1FTV9BQ0NFU1MgY29uZmlndXJhYmxlCj4gICAgICAgIG1h
+a2UgaXQgcG9zc2libGUgdG8gZW5hYmxlL2Rpc2FibGUgVUFSVCBkcml2ZXJzCj4gICAgICAgIGFy
+bTogbWFrZSBpdCBwb3NzaWJsZSB0byBkaXNhYmxlIHRoZSBTTU1VIGRyaXZlcgo+ICAgICAgICBh
+cm06IGFkZCBhIHRpbnkga2NvbmZpZyBjb25maWd1cmF0aW9uCj4gICAgICAgIGFybTogYWRkIEFM
+TCwgUUVNVSwgUmNhcjMgYW5kIE1QU29DIGNvbmZpZ3MKPiAgICAgICAgeGVuOiBhZGQgcGVyLXBs
+YXRmb3JtIGRlZmF1bHRzIGZvciBOUl9DUFVTCj4gICAgICAgIHhlbjogYWRkIGNsb2MgdGFyZ2V0
+Cj4KPiAgIHRvb2xzL2Zpcm13YXJlL3hlbi1kaXIvc2hpbS5jb25maWcgICAgICAgfCAgIDIgKy0K
+PiAgIHhlbi9NYWtlZmlsZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTIgKysKPiAg
+IHhlbi9hcmNoL0tjb25maWcgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDQgKwo+ICAgeGVu
+L2FyY2gvYXJtL0tjb25maWcgICAgICAgICAgICAgICAgICAgICB8ICAxNyArLQo+ICAgeGVuL2Fy
+Y2gvYXJtL01ha2VmaWxlICAgICAgICAgICAgICAgICAgICB8ICAgNCArLQo+ICAgeGVuL2FyY2gv
+YXJtL2NvbmZpZ3MvdGlueS5jb25mICAgICAgICAgICB8ICA0MyArKysrKwo+ICAgeGVuL2FyY2gv
+YXJtL3BsYXRmb3Jtcy9LY29uZmlnICAgICAgICAgICB8ICA1NCArKysrKysKPiAgIHhlbi9hcmNo
+L2FybS9wbGF0Zm9ybXMvTWFrZWZpbGUgICAgICAgICAgfCAgIDIgKy0KPiAgIHhlbi9hcmNoL2Fy
+bS9wbGF0Zm9ybXMvdmV4cHJlc3MuYyAgICAgICAgfCAgMzUgLS0tLQo+ICAgeGVuL2FyY2gvYXJt
+L3ZnaWMuYyAgICAgICAgICAgICAgICAgICAgICB8ICAgMiArLQo+ICAgeGVuL2FyY2gvYXJtL3Zn
+aWMvdmdpYy5jICAgICAgICAgICAgICAgICB8ICAgMiArLQo+ICAgeGVuL2FyY2gveDg2L0tjb25m
+aWcgICAgICAgICAgICAgICAgICAgICB8ICAgMiArLQo+ICAgeGVuL2NvbW1vbi9LY29uZmlnICAg
+ICAgICAgICAgICAgICAgICAgICB8ICAxMCArLQo+ICAgeGVuL2NvbW1vbi9NYWtlZmlsZSAgICAg
+ICAgICAgICAgICAgICAgICB8ICAgMiArLQo+ICAgeGVuL2NvbW1vbi9kb21jdGwuYyAgICAgICAg
+ICAgICAgICAgICAgICB8ICAgMiArLQo+ICAgeGVuL2RyaXZlcnMvY2hhci9LY29uZmlnICAgICAg
+ICAgICAgICAgICB8ICAxNSArLQo+ICAgeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvS2NvbmZpZyAg
+ICAgICAgICB8ICAxMiArKwo+ICAgeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvYXJtL01ha2VmaWxl
+ICAgICB8ICAgMiArLQo+ICAgeGVuL2RyaXZlcnMvdmlkZW8vS2NvbmZpZyAgICAgICAgICAgICAg
+ICB8ICAgMyAtCj4gICB4ZW4vZHJpdmVycy92aWRlby9NYWtlZmlsZSAgICAgICAgICAgICAgIHwg
+ICAxIC0KPiAgIHhlbi9kcml2ZXJzL3ZpZGVvL2FybV9oZGxjZC5jICAgICAgICAgICAgfCAyODEg
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ICAgeGVuL2luY2x1ZGUvYXNtLWFybS9n
+aWMuaCAgICAgICAgICAgICAgICB8ICAgNCArLQo+ICAgeGVuL2luY2x1ZGUvYXNtLWFybS9wbGF0
+Zm9ybXMvdmV4cHJlc3MuaCB8ICAgNiAtCj4gICB4ZW4vaW5jbHVkZS9hc20tYXJtL3ZnaWMuaCAg
+ICAgICAgICAgICAgIHwgICA0ICstCj4gICB4ZW4vaW5jbHVkZS94ZW4vbWVtX2FjY2Vzcy5oICAg
+ICAgICAgICAgIHwgICA0ICstCj4gICB4ZW4vaW5jbHVkZS94c20vZHVtbXkuaCAgICAgICAgICAg
+ICAgICAgIHwgICAyICstCj4gICB4ZW4vaW5jbHVkZS94c20veHNtLmggICAgICAgICAgICAgICAg
+ICAgIHwgICA0ICstCj4gICB4ZW4veHNtL2R1bW15LmMgICAgICAgICAgICAgICAgICAgICAgICAg
+IHwgICAyICstCj4gICB4ZW4veHNtL2ZsYXNrL2hvb2tzLmMgICAgICAgICAgICAgICAgICAgIHwg
+ICA0ICstCj4gICAyOSBmaWxlcyBjaGFuZ2VkLCAxNzUgaW5zZXJ0aW9ucygrKSwgMzYyIGRlbGV0
+aW9ucygtKQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IHhlbi9hcmNoL2FybS9jb25maWdzL3Rpbnku
+Y29uZgo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IHhlbi9hcmNoL2FybS9wbGF0Zm9ybXMvS2NvbmZp
+Zwo+ICAgZGVsZXRlIG1vZGUgMTAwNjQ0IHhlbi9kcml2ZXJzL3ZpZGVvL2FybV9oZGxjZC5jCj4K
+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+IFhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKPiBYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKPiBodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVsCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
