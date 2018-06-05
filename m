@@ -1,16 +1,11 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-4.9 test] 123759: regressions - FAIL
-Date: Tue, 05 Jun 2018 08:48:50 +0000
-Message-ID: <osstest-123759-mainreport@xen.org>
+From: "Hao, Xudong" <xudong.hao@intel.com>
+Subject: Re: Xen 4.11.0 RC5 test result
+Date: Tue, 5 Jun 2018 08:49:33 +0000
+Message-ID: <B8376D2DEA074F45BA033984477C453E3BA35846@shsmsx102.ccr.corp.intel.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1106659412488507916=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=qzx4=ix=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fQ7e9-0002Yz-PD
- for xen-devel@lists.xenproject.org; Tue, 05 Jun 2018 08:48:53 +0000
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,262 +14,458 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: Lars Kurth <lars.kurth.xen@gmail.com>, Juergen Gross <jgross@suse.com>, Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMzc1OSBsaW51eC00LjkgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVzdC1sYWIu
-eGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMzc1OS8KClJlZ3Jlc3Npb25zIDotKAoKVGVz
-dHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0
-cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hbWQ2NC1hbWQ2NC1ydW1wcnVuLWFtZDY0
-ICA3IHhlbi1ib290ICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFjb3cyICAgICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBmYWlsIFJF
-R1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQtcHlncnViICAgICAgIDcgeGVuLWJvb3Qg
-ICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC14c20gICAgICAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIy
-OTY5CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAgNyB4ZW4tYm9vdCAgICAgICAgICAg
-ICAgICBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVk
-LWFtZCAgNyB4ZW4tYm9vdCAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjk2OQogdGVzdC1h
-bWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgMTAgeGVuLWJvb3Qvc3JjX2hvc3QgICAgICAgZmFpbCBS
-RUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcGFpciAxMSB4ZW4tYm9v
-dC9kc3RfaG9zdCAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQt
-eGwgICAgICAgICAgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEy
-Mjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDcgeGVu
-LWJvb3QgZmFpbCBSRUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAg
-IDEwIHhlbi1ib290L3NyY19ob3N0ICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKIHRlc3Qt
-YW1kNjQtYW1kNjQtcGFpciAgICAgICAgMTEgeGVuLWJvb3QvZHN0X2hvc3QgICAgICAgIGZhaWwg
-UkVHUi4gdnMuIDEyMjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1tdWx0aXZjcHUgIDcgeGVuLWJv
-b3QgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFtZDY0LWFtZDY0
-LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSA3IHhlbi1ib290IGZhaWwgUkVHUi4g
-dnMuIDEyMjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC1leGFtaW5lICAgICAgOCByZWJvb3QgICAgICAg
-ICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyOTY5CgpUZXN0cyB3aGljaCBhcmUgZmFpbGlu
-ZyBpbnRlcm1pdHRlbnRseSAobm90IGJsb2NraW5nKToKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZz
-aGltICAgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgICAgZmFpbCBwYXNzIGluIDEyMzY0OAog
-dGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgNiB4ZW4taW5zdGFsbCAgICAgICAgICAgICAg
-ICBmYWlsIHBhc3MgaW4gMTIzNjQ4CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92bWYtYW1k
-NjQgMTYgZ3Vlc3QtbG9jYWxtaWdyYXRlL3gxMCBmYWlsIHBhc3MgaW4gMTIzNjQ4CiB0ZXN0LWFt
-ZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAxNSBndWVzdC1zYXZlcmVzdG9yZS4yIGZhaWwg
-cGFzcyBpbiAxMjM2NDgKClJlZ3Jlc3Npb25zIHdoaWNoIGFyZSByZWdhcmRlZCBhcyBhbGxvd2Fi
-bGUgKG5vdCBibG9ja2luZyk6CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICA3IHhlbi1i
-b290ICAgICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKClRlc3RzIHdoaWNoIGRp
-ZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFybWhmLWFybWhmLXhs
-ICAgICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgaW4gMTIzNjQ4IG5ldmVyIHBh
-c3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sg
-ZmFpbCBpbiAxMjM2NDggbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYt
-YW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICBmYWlsIGluIDEyMzY0OCBuZXZlciBwYXNzCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZh
-aWwgbGlrZSAxMjI5NjkKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW43LWFtZDY0IDE3IGd1
-ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDEyMjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTIy
-OTY5CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAg
-ICAgICAgICAgIGZhaWwgbGlrZSAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3Mx
-Ni1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyMjk2OQogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1wdmh2Mi1pbnRlbCAxMiBndWVzdC1zdGFydCAgICAgICAgICAgICAgICAg
-ZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcHZzaGltICAgIDEyIGd1ZXN0LXN0
-YXJ0ICAgICAgICAgICAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQt
-bGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIg
-cGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hl
-Y2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20g
-IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-YW1kNjQtaTM4Ni1saWJ2aXJ0ICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNo
-ZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhz
-bSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsLWFybmRhbGUgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgMTQgc2F2ZXJl
-c3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2
-LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hl
-Y2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkIDEyIG1pZ3Jh
-dGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJt
-aGYtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAxNCBzYXZlcmVzdG9yZS1zdXBw
-b3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWN1Ymll
-dHJ1Y2sgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNr
-ICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxMyBtaWdy
-YXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLXJ0ZHMgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1IDEzIG1pZ3JhdGUtc3VwcG9y
-dC1jaGVjayAgICAgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0
-aXZjcHUgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICBuZXZlciBwYXNzCiB0
-ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwteHNtICAgICAgMTQgc2F2
-ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
-cm1oZi14bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBu
-ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDE0IHNhdmVyZXN0b3JlLXN1
-cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmly
-dC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwog
-dGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNr
-ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1k
-NjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwg
-bmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBv
-cnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNy
-ZWRpdDIgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MK
-IHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAg
-ICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAxNCBz
-YXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhm
-LWFybWhmLWxpYnZpcnQtcmF3IDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAg
-IG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTMgc2F2ZXJlc3RvcmUt
-c3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC12
-aGQgICAgICAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNz
-CiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEzIHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hl
-Y2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAt
-aTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgZmFp
-bCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5k
-b3dzLWluc3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dC13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgIGZhaWwgbmV2ZXIgcGFz
-cwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIGxpbnV4ICAgICAgICAgICAgICAgIDM3
-NjJiM2UyYWE2Yzg4NWVjZmJkYWY2ZmI5YjNmNmYwZWVmOTUwYjUKYmFzZWxpbmUgdmVyc2lvbjoK
-IGxpbnV4ICAgICAgICAgICAgICAgIDZiYTg5YjUyYmE2OTE2YmM3YTNkMzkwZDcwOTUxZTk5MmMw
-Y2EzOWUKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEyMjk2OSAgMjAxOC0wNS0xOSAxNjozOTo1OSBa
-ICAgMTYgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMjMwNzQgIDIwMTgtMDUtMjIgMTc6MTA6
-MDggWiAgIDEzIGRheXMgICAxMCBhdHRlbXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMjM1NDIg
-IDIwMTgtMDYtMDEgMDk6MjQ6NTQgWiAgICAzIGRheXMgICAgMyBhdHRlbXB0cwoKLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCjQ3NiBw
-ZW9wbGUgdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdCwKbm90IGxpc3RpbmcgdGhlbSBhbGwK
-CmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYteHNtICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1p
-Mzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
-ODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLWxpYnZpcnQgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4
-Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2
-LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIGJ1aWxkLWFtZDY0LXJ1bXBydW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1ydW1wcnVuICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtNjQt
-YXJtNjQteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQt
-ZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAg
-ICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1h
-bWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1k
-ZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNtICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXN0dWJkb20tZGViaWFuaHZt
-LWFtZDY0LXhzbSAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQteHNt
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJt
-NjQtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwteHNtICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm02NC1hcm02
-NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFybWhmLWFybWhmLXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQt
-YW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXB2aHYyLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlh
-bmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14
-bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1kNjQg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
-LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2NCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43LWFt
-ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwt
-cWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1k
-NjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1j
-cmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFy
-bTY0LWFybTY0LXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWV4YW1p
-bmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJt
-NjQtYXJtNjQtZXhhbWluZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hcm1oZi1hcm1oZi1leGFtaW5lICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZXhhbWluZSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNk
-MTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXJ1bXBydW4taTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW4xMC1pMzg2ICAg
-ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dS13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0
-LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWludGVsICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1pbnRlbCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhl
-bDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni1xZW11dS1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
-CiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcGFpciAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXBhaXIgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1wdmdydWIgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWkzODYtcHZncnVi
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcHZzaGltICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXB2c2hpbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWNvdzIgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1o
-Zi1saWJ2aXJ0LXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYteGwtcmF3ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcnRkcyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC1zaGFkb3cgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1zaGFkb3cgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtc2hhZG93ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-bGlidmlydC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5w
-cm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdl
-cwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9s
-b2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2Yg
-dGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6
-Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5l
-bWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rl
-c3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBi
-ZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0Lmdp
-dDthPXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCihObyByZXZpc2lvbiBsb2c7IGl0IHdvdWxkIGJl
-IDE2MzcxIGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+--===============1106659412488507916==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_B8376D2DEA074F45BA033984477C453E3BA35846shsmsx102ccrcor_"
+
+--_000_B8376D2DEA074F45BA033984477C453E3BA35846shsmsx102ccrcor_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
++ Juergen
+
+Thanks,
+-Xudong
+
+From: Hao, Xudong
+Sent: Tuesday, June 5, 2018 4:47 PM
+To: xen-devel@lists.xen.org
+Cc: Julien Grall <julien.grall@arm.com>; Lars Kurth <lars.kurth.xen@gmail.c=
+om>
+Subject: Xen 4.11.0 RC5 test result
+
+We performed Xen 4.11 RC5 testing on Intel Xeon Skylake, Broadwell server, =
+Intel Atom Denverton platforms, verified many functional features, which in=
+clude new feature MBA on Xen 4.11. We'd like to share the result out.
+
+Except Nested, other feature all passed of testing.
+https://wiki.xenproject.org/wiki/Nested_Virtualization_in_Xen
+
+We also integrated XTF into our testing, 65 xtf cases run pass on those Int=
+el platforms above.
+
+Features
+
+Test Result
+
+MBA
+
+Pass
+
+Local MCE
+
+Pass
+
+UMIP
+
+Pass
+
+AVX512
+
+Pass
+
+Protection keys
+
+Pass
+
+Altp2m
+
+Pass
+
+RDT(CMT, CAT, CDP, MBM, L2 CAT)
+
+Pass
+
+VT-d PI
+
+Pass
+
+XSAVES
+
+Pass
+
+MPX
+
+Pass
+
+PML (Page-modification Logging)
+
+Pass
+
+Nested
+
+Buggy
+
+VT-d/SR-IOV
+
+Pass
+
+RAS
+
+Pass
+
+ACPI
+
+Pass
+
+
+
+Best Regards,
+Xudong
+
+
+
+
+
+
+--_000_B8376D2DEA074F45BA033984477C453E3BA35846shsmsx102ccrcor_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{mso-style-priority:99;
+	mso-style-link:"Plain Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+span.PlainTextChar
+	{mso-style-name:"Plain Text Char";
+	mso-style-priority:99;
+	mso-style-link:"Plain Text";
+	font-family:"Calibri",sans-serif;}
+span.EmailStyle19
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:#1F497D;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><a name=3D"_MailEndCompose"><span style=3D"color:#1F=
+497D">&#43; Juergen<o:p></o:p></span></a></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Thanks,<o:p></o:p></sp=
+an></p>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D">-Xudong<o:p></o:p></sp=
+an></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
+n></p>
+<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
+4.0pt">
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><a name=3D"_____replyseparator"></a><b>From:</b> Hao=
+, Xudong <br>
+<b>Sent:</b> Tuesday, June 5, 2018 4:47 PM<br>
+<b>To:</b> xen-devel@lists.xen.org<br>
+<b>Cc:</b> Julien Grall &lt;julien.grall@arm.com&gt;; Lars Kurth &lt;lars.k=
+urth.xen@gmail.com&gt;<br>
+<b>Subject:</b> Xen 4.11.0 RC5 test result<o:p></o:p></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">We performed Xen 4.11 RC5 testing on Intel Xeon Skyl=
+ake, Broadwell server, Intel Atom Denverton platforms, verified many functi=
+onal features, which include new feature MBA on Xen 4.11. We&#8217;d like t=
+o share the result out.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Except Nested, other feature all passed of testing.<=
+o:p></o:p></p>
+<p class=3D"MsoNormal"><a href=3D"https://wiki.xenproject.org/wiki/Nested_V=
+irtualization_in_Xen">https://wiki.xenproject.org/wiki/Nested_Virtualizatio=
+n_in_Xen</a><o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">We also integrated XTF into our testing, 65 xtf case=
+s run pass on those Intel platforms above.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" width=3D"0" style=3D"width:388.0pt;margin-left:.2pt;border-collapse:=
+collapse">
+<tbody>
+<tr style=3D"height:15.0pt">
+<td width=3D"351" style=3D"width:263.2pt;border:solid windowtext 1.0pt;back=
+ground:#8EAADB;padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black">Features<o:p></o:p></=
+span></b></p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border:solid black 1.0pt;border-le=
+ft:none;background:#8EAADB;padding:0in 5.4pt 0in 5.4pt;height:15.0pt">
+<p class=3D"MsoNormal"><b><span style=3D"color:black">Test Result<o:p></o:p=
+></span></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">MBA<o:p></o:p></p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<o:p></o:p></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">Local MCE<o:p></o:p></p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<o:p></o:p></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">UMIP<o:p></o:p></p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<o:p></o:p></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">AVX512<span style=3D"color:black"><o:p></o:p></span>=
+</p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
+></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">Protection keys<span style=3D"color:black"><o:p></o:=
+p></span></p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
+></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">Altp2m<span style=3D"color:black"><o:p></o:p></span>=
+</p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
+></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">RDT(CMT, CAT, CDP, MBM, L2 CAT)<span style=3D"color:=
+black"><o:p></o:p></span></p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<span style=3D"color:#A6A6A6"><o:p></o:p></sp=
+an></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">VT-d PI<o:p></o:p></p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<o:p></o:p></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">XSAVES<span style=3D"color:black"><o:p></o:p></span>=
+</p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
+></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">MPX<span style=3D"color:black"><o:p></o:p></span></p=
+>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
+></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">PML (Page-modification Logging)<span style=3D"color:=
+black"><o:p></o:p></span></p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
+></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">Nested<span style=3D"color:black"><o:p></o:p></span>=
+</p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Buggy<span style=3D"color:black"><o:p></o:p></spa=
+n></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid black 1.0pt;border-to=
+p:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">VT-d/SR-IOV<span style=3D"color:black"><o:p></o:p></=
+span></p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid black 1.0pt;border-right:solid black 1.0pt;background:wh=
+ite;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
+></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border-top:none;border-left:solid =
+black 1.0pt;border-bottom:solid windowtext 1.0pt;border-right:solid black 1=
+.0pt;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">RAS<span style=3D"color:black"><o:p></o:p></span></p=
+>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;backgrou=
+nd:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
+></b></p>
+</td>
+</tr>
+<tr style=3D"height:.3in">
+<td width=3D"351" style=3D"width:263.2pt;border:solid windowtext 1.0pt;bord=
+er-top:none;background:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal">ACPI<span style=3D"color:black"><o:p></o:p></span></=
+p>
+</td>
+<td width=3D"166" style=3D"width:124.8pt;border-top:none;border-left:none;b=
+order-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;bac=
+kground:white;padding:0in 5.4pt 0in 5.4pt;height:.3in">
+<p class=3D"MsoNormal"><b>Pass<span style=3D"color:black"><o:p></o:p></span=
+></b></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Best Regards,<o:p></o:p></p>
+<p class=3D"MsoNormal">Xudong<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoPlainText"><o:p>&nbsp;</o:p></p>
+</div>
+</div>
+</body>
+</html>
+
+--_000_B8376D2DEA074F45BA033984477C453E3BA35846shsmsx102ccrcor_--
+
+
+--===============1106659412488507916==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1106659412488507916==--
