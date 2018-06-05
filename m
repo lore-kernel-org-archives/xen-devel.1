@@ -1,17 +1,15 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v5 01/10] xen/arm64: Added handling of the
- trapped access to OSLSR register
-Date: Tue, 5 Jun 2018 19:00:54 +0100
-Message-ID: <0ec51436-3d1e-9769-01ac-779dd02ddc63@arm.com>
-References: <20180601131750.16598-1-mirela.simonovic@aggios.com>
- <20180601131750.16598-2-mirela.simonovic@aggios.com>
- <1bc4389d-b5f4-6b60-153c-aecb467a4945@arm.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH for-4.11] scripts/add_maintainers.pl: Don't
+ call get_maintainers.pl with -f
+Date: Tue, 5 Jun 2018 20:15:15 +0200
+Message-ID: <cc7b7fa2-1504-f801-60fc-c3470091fc93@suse.com>
+References: <20180605163938.28090-1-julien.grall@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1bc4389d-b5f4-6b60-153c-aecb467a4945@arm.com>
-Content-Language: en-US
+In-Reply-To: <20180605163938.28090-1-julien.grall@arm.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,36 +18,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>, xen-devel@lists.xen.org
-Cc: edgar.iglesias@xilinx.com, sstabellini@kernel.org
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org, xen-devel@lists.xen.org
+Cc: lars.kurth@citrix.com, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwNS8wNi8xOCAxODoyNCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIE1pcmVsYSwKPiAK
-PiBPbiAwMS8wNi8xOCAxNDoxNywgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPj4gTGludXgvZG9t
-MCBhY2Nlc3NlcyBPU0xTUiByZWdpc3RlciB3aGVuIHNhdmluZyBDUFUgY29udGV4dCBkdXJpbmcg
-dGhlCj4+IHN1c3BlbmQgcHJvY2VkdXJlLiBYZW4gdHJhcHMgYWNjZXNzIHRvIHRoaXMgcmVnaXN0
-ZXIsIGJ1dCBoYXMgbm8gaGFuZGxpbmcKPj4gZm9yIGl0LiBDb25zZXF1ZW50bHksIFhlbiBpbmpl
-Y3RzIHVuZGVmIGV4Y2VwdGlvbiB0byBsaW51eCwgY2F1c2luZyBpdCB0bwo+PiBjcmFzaC4gVGhp
-cyBwYXRjaCBhZGRzIGhhbmRsaW5nIG9mIHRoZSB0cmFwcGVkIGFjY2VzcyB0byBPU0xTUiBhcyBy
-ZWFkCj4+IG9ubHkgYXMgYSBmaXhlZCB2YWx1ZS4KPiAKPiBDYW4geW91IHBsZWFzZSBtZW50aW9u
-IHRoYXQgeW91IGludHJvZHVjZWQgaGFuZGxlX3JvX3JlYWRfdmFsKCkgYW5kIAo+IHJld29yayBo
-YW5kbGVfcm9fcmF6KCk/Cj4gCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IE1pcmVsYSBTaW1vbm92aWMg
-PG1pcmVsYS5zaW1vbm92aWNAYWdnaW9zLmNvbT4KPj4gUmV2aWV3ZWQtYnk6IFN0ZWZhbm8gU3Rh
-YmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KPj4gQWNrZWQtYnk6IEp1bGllbiBHcmFs
-bCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4gCj4gVGhlIHJldmlld2VkLWJ5L2Fja2VkLWJ5IHRh
-Z3Mgc2hvdWxkIG9ubHkgYmUga2VwdCB3aGVuIHRoZXJlIGFyZSBtaW5vciAKPiBjaGFuZ2VzIGlu
-IHRoZSBjb2RlIChhbmQgdGhlIHJldmlld2VyIGlzIGhhcHB5IHdpdGggdGhlbSkuIFRoaXMgaXMg
-dmVyeSAKPiBpbXBvcnRhbnQgZm9yIHRoZSBmb3JtZXIgYXMgdGhlIHRhZyBtZWFucyB0aGUgcmV2
-aWV3ZXIgcmVhZCB5b3VyIGNvZGUgCj4gYW5kIGNvbmZpcm0gdGhpcyBpcyBjb3JyZWN0Lgo+IAo+
-IEFzIHlvdSBjaGFuZ2UgcXVpdGUgYSBiaXQgdGhlIHBhdGNoLCB0aG9zZSAyIHRhZ3Mgc2hvdWxk
-IGhhdmUgYmVlbiByZW1vdmVkLgo+IAo+IFN0ZWZhbm8sIGFyZSB5b3Ugc3RpbGwgaGFwcHkgd2l0
-aCB0aGUgUmV2aWV3ZWQtYnk/CgpTdGVmYW5vIG1lbnRpb25lZCBvbiBJUkMgaGUgd2FzIGhhcHB5
-IHdpdGggdGhlIHJldmlld2VkLWJ5IGtlcHQuCgpJIHdpbGwgZ28gYWhlYWQgd2l0aCBtZXJnaW5n
-IHRoZSBzZXJpZXMuIEZvciB0aGlzIHBhdGNoLCBJIHdpbGwgYWRkIHRoZSAKZm9sbG93aW5nIGlu
-IHRoZSBjb21taXQgbWVzc2FnZToKCiJGb3IgY29udmVuaWVuY2UsIGludHJvZHVjZSBhIG5ldyBo
-ZWxwZXIgaGFuZGxlX3JvX3JlYWRfdmFsKCkgYmFzZWQgb24gCmhhbmRsZV9yb19yYXooKSB0aGF0
-IHdpbGwgcmV0dXJuIGEgc3BlY2lmaWVkIHZhbHVlIG9uIHJlYWQgYW5kIApyZS1pbXBsZW1lbnQg
-aGFuZGxlX3JvX3JheigpIGJhc2VkIG9uIHRoZSBuZXcgaGVscGVyIi4KCkNoZWVycywKCi0tIApK
-dWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDUvMDYvMTggMTg6MzksIEp1bGllbiBHcmFsbCB3cm90ZToKPiBUaGUgb3B0aW9uIC1mIG9m
+IHNjcmlwdHMvZ2V0X21haW50YWluZXJzLnBsIHdpbGwgcmV0dXJuIHRoZSBtYWludGFpbmVycwo+
+IG9mIGEgZ2l2ZW4gZmlsZSwgKm5vdCogdGhlIGxpc3Qgb2YgbWFpbnRhaW5lcnMgaWYgdGhlIGZp
+bGUgd2FzIGEgcGF0Y2guCj4gCj4gVGhlIG91dHB1dCBleHBlY3RlZCBvZiBhZGRfbWFpbnRhaW5l
+cnMgaXMgdGhlIGxhdHRlciwgc28gZHJvcCB0aGUgb3B0aW9uCj4gLWYuCj4gCj4gU2lnbmVkLW9m
+Zi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KClJlbGVhc2UtYWNrZWQt
+Ynk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCgpKdWVyZ2VuCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
