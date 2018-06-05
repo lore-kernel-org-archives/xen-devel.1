@@ -1,21 +1,19 @@
-From: George Dunlap <dunlapg@umich.edu>
+From: Marek Marczykowski <marmarek@invisiblethingslab.com>
 Subject: Re: Xen Project Security Process Whitepaper v1 is ready
  for community review
-Date: Tue, 5 Jun 2018 11:34:28 +0100
-Message-ID: <CAFLBxZYho=m-1owS-KRodVvsirOvvz4pdNq_3bXJB0m+tmJzZw@mail.gmail.com>
+Date: Tue, 5 Jun 2018 13:03:50 +0200
+Message-ID: <20180605110350.GK23079@mail-itl>
 References: <2AF1AB1A-2DFE-429B-8F3B-0153D339EC5F@citrix.com>
+ <CAFLBxZYho=m-1owS-KRodVvsirOvvz4pdNq_3bXJB0m+tmJzZw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4939285042674237445=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=oya/=ix=gmail.com=dunlapg@srs-us1.protection.inumbo.net>)
- id 1fQ9IN-0008LX-B1
- for xen-devel@lists.xenproject.org; Tue, 05 Jun 2018 10:34:31 +0000
-Received: by mail-qk0-x231.google.com with SMTP id a195-v6so1138823qkg.3
- for <xen-devel@lists.xenproject.org>; Tue, 05 Jun 2018 03:34:29 -0700 (PDT)
-In-Reply-To: <2AF1AB1A-2DFE-429B-8F3B-0153D339EC5F@citrix.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=mqkl=ix=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1fQ9ks-0003gF-8p
+ for xen-devel@lists.xenproject.org; Tue, 05 Jun 2018 11:03:58 +0000
+In-Reply-To: <CAFLBxZYho=m-1owS-KRodVvsirOvvz4pdNq_3bXJB0m+tmJzZw@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,64 +22,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Steven Haigh <netwiz@crc.id.au>, Marek Marczykowski <marmarek@invisiblethingslab.com>, "committers@xenproject.org" <committers@xenproject.org>, "security@xenproject.org" <security@xenproject.org>, Jan Beulich <JBeulich@suse.com>, Andrew Halley <andrew.halley@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Ajey Kulkarni <Ajey.Kulkarni@rackspace.com>
+To: George Dunlap <dunlapg@umich.edu>
+Cc: Lars Kurth <lars.kurth@citrix.com>, Steven Haigh <netwiz@crc.id.au>, "committers@xenproject.org" <committers@xenproject.org>, "security@xenproject.org" <security@xenproject.org>, Jan Beulich <JBeulich@suse.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Halley <andrew.halley@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Ajey Kulkarni <Ajey.Kulkarni@rackspace.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKdW4gNCwgMjAxOCBhdCAzOjU1IFBNLCBMYXJzIEt1cnRoIDxsYXJzLmt1cnRoQGNp
-dHJpeC5jb20+IHdyb3RlOgoKPiAyLjIuMyBCLiBHaXQgYmFzZWxpbmUgb2YgcGF0Y2hlcwo+IFRo
-aXMgY3JlYXRlZCBxdWl0ZSBhIGJpdCBvZiBkaXNjdXNzaW9uIGFuZCB3ZSBkaWQgbGVhcm4gYSBm
-ZXcgdGhpbmdzOgo+ICogRnJvbSB0aGUgdGhyZWFkLCBoYXZpbmcgdG8gY2hlcnJ5IHBpY2sgYSBz
-bWFsbCAoYXJvdW5kIDUtNikgcGF0Y2hlcyBoYXZlIHRvIGJlIGNoZXJyeS1waWNrZWQgZm9yIFhT
-QXMgdG8gYXBwbHkgdG8gdGFyYmFsbHMgdGhpcyBhcHBlYXJzIHRvIGJlIHNlZW4gYXMgT0sgZm9y
-IG1vc3QgdXNlcnMuIE1vcmUgcGF0Y2hlcyBhcmUgYSBwcm9ibGVtCj4gKiBSZWNlbnRseSB0aGlz
-IGlzc3VlIGhhcyBiZWNvbWUgbXVjaCB3b3JzZSwgYmVjYXVzZSBzb21lIHNlY3VyaXR5IGZpeGVz
-IChvciBwcmUtcmVxdWlzaXRlcyBmb3IgdGhlbSkgaGF2ZSBiZWVuIGRldmVsb3BlZCBpbiBwdWJs
-aWMgYW5kIHNvbWUgWFNBcyByZXF1aXJlZCBzaWduaWZpY2FudCBiYWNrcG9ydGluZyB0byBiZSBh
-YmxlIHRvIGJlIHJ1bgo+ICogQSBwb2ludCByZWxlYXNlIGhhcyB1c3VhbGx5IDw1MCUgc2VjdXJp
-dHkgZml4ZXMKPiAqIFRoZXJlIGlzIG5vIGFwcGV0aXRlIGFtb25nc3QgZXhpc3RpbmcgcG9pbnQg
-cmVsZWFzZSBtYWludGFpbmVycyB0byBtYWludGFpbiBhIHN0YWdpbmcgYnJhbmNoIGFuZCBhbiBY
-U0EgKyBwcmUtcmVxdWlzaXRlcyBvbmx5IGJyYW5jaAo+Cj4gSW4gb3RoZXIgd29yZHMsIHdlIGFy
-ZSBhdCBhIHN0YWxlLW1hdGUuIEkgc2VlIHR3byB3YXlzIGFyb3VuZCBpdAo+IGEpIEZpbmQgYW4g
-YWRkaXRpb25hbCB2b2x1bnRlZXIgdG8gbWFpbnRhaW4gWFNBICsgcHJlLXJlcXVpc2l0ZXMgb25s
-eSBicmFuY2hlcyBmb3IgcmVsZWFzZXMKPiBiKSBGaW5kIHNvbWUgdG9vbGluZy90ZXN0IGJhc2Vk
-IHNvbHV0aW9uIHdoaWNoIGV4cG9zZXMgaXNzdWVzIGFwcGx5aW5nIFhTQXMgb24gdGhlIGxhc3Qg
-cmVsZWFzZXMgb2YgYSBzdGFnaW5nIGJyYW5jaCBmb3IgYSBwb2ludCByZWxlYXNlLiBUaGlzIGlz
-IGEgbGl0dGxlIGJpdCBvZiBhIGhhbGYtYmFrZWQgaWRlYSwgYnV0IGl0IG1heSBiZSB3b3J0aHdo
-aWxlIGxvb2tpbmcgaW50by4KPiBGb3IgZXhhbXBsZSwgd2UgY291bGQgY3JlYXRlIGFuIE9TU1RF
-U1QsIHRoYXQgY2hlY2tzIG91dCB0aGUgbGFzdCByZWxlYXNlZCBzdGFibGUgYnJhbmNoIGFuZCBh
-cHBsaWVzIG91dHN0YW5kaW5nIFhTQXMgYW5kIHByZS1yZXF1aXNpdGVzIGJhc2VkIG9uIHRoZSBt
-ZXRhLWluZm8gdG8gaXQgKGUuZy4gdmlhIHhzYXRvb2wgb3IgYSB2YXJpYW50IHRoZXJlb2YpLiBU
-aGlzIHRlc3Qgd291bGQgZmFpbCwgaWYgYW4gWFNBIGRvZXMgbm90IGFwcGx5LCB3aGljaCBpbXBs
-aWVzIHRoYXQgdGhlIHByZS1yZXF1aXNpdGVzIGFyZSBpbmNvbXBsZXRlLiBJZiBhbGwgWFNBcyBh
-cHBseSwgd2UgY2FuIHJ1biB0aGUgZnVsbCBPU1NURVNUIG9uIGl0LiBUaGUgdGVzdCBjb3VsZCBh
-bHNvIHByb2R1Y2UgYSBsaXN0IG9mIGdpdCBjb21taXRzIGZyb20gc3RhZ2luZyB0aGF0IGluY2x1
-ZGUgWFNBcyBhbmQgcHJlLXJlcXVpc2l0ZXMgdGhhdCBjYW4gYmUgYXBwbGllZCBpbiBvcmRlci4g
-VGhpcyBzaG91bGQgaW4gdGhlb3J5IC0gaWYgZG9hYmxlIC0gaGVscCBkb3duc3RyZWFtcyB3aGlj
-aCBhcmUgc3RydWdnbGluZyB3aXRoIHRoaXMgcHJvYmxlbSwgd2hpbGUgZmxhZ2dpbmcgdXAgcG90
-ZW50aWFsIGlzc3VlcyB0byBzdGFibGUgbWFpbnRhaW5lcnMgZWFybHkuIEFueSB0aG91Z2h0cz8g
-V291bGQgdGhpcyBiZSB3b3JrYWJsZSBhbmQgaWYgc28sIHdvdWxkIGl0IGFjdHVhbGx5IGhlbHA/
-CgpIZXJlJ3MgYSBxdWVzdGlvbjogIFdoYXQgd291bGQgaXQgdGFrZSBmb3IgbW9zdCBkb3duc3Ry
-ZWFtcyB0byB1cGRhdGUKdG8gc3RhZ2luZyB3aGVuIGEgcHVibGljIHJlbGVhc2Ugd2FzIG1hZGU/
-CgpTdXBwb3NlIHdlIGRpZCB0aGlzOgoxLiBXaGVuIHdlIHByZWRpc2Nsb3NlIGFuIGlzc3VlLCBm
-cmVlemUgdGhlIHN0YWJsZSBicmFuY2hlcyB1bnRpbCB0aGUKZW1iYXJnbyBsaWZ0cyAtLSBubyBi
-YWNrcG9ydHMuCjIuIFdoZW4gdGhlIGVtYmFyZ28gbGlmdHMsIGFkZGl0aW9uIHRvIHRoZSBwYXRj
-aGVzLCB3ZSByZWxlYXNlIGEgbmV3CnBvaW50IHJlbGVhc2UsIGNvbXBsZXRlIHdpdGggc2lnbmVk
-IHRhZyBhbmQgdGFyYmFsbC4KMy4gV2Ugb25seSBkbyBub24tc2VjdXJpdHkgcG9pbnQgcmVsZWFz
-ZXMgaWYgd2UgZ28gNCBtb250aHMgd2l0aG91dCBhCnNlY3VyaXR5LXByb21wdGVkIHBvaW50IHJl
-bGVhc2UuCgpBdCB0aGUgbW9tZW50IHRoZSByZWxlYXNlIHByb2Nlc3MgaXMgcXVpdGUgbWFudWFs
-LCB3aGljaCBpc24ndAp0ZXJyaWJsZSBmb3Igb25lIHBvaW50IHJlbGVhc2UgZXZlcnkgNCBtb250
-aHMgcGVyIHN1cHBvcnRlZCByZWxlYXNlLApidXQgd291bGQgc2lnbmlmaWNhbnRseSBpbmNyZWFz
-ZSB0aGUgd29ya2xvYWQgaWYgd2UgZGlkIGl0IGZvciBldmVyeQpzdXBwb3J0ZWQgdmVyc2lvbiBm
-b3IgZXZlcnkgWFNBLiAgV2UnZCBoYXZlIHRvIGludmVzdCBxdWl0ZSBhIGJpdCBpbgphdXRvbWF0
-aW5nIHRoYXQgcHJvY2Vzcywgd2hpY2ggd291bGQgbWFrZSBpdCBvbmx5IHdvcnRoIGl0IGlmIGEK
-c2lnbmlmaWNhbnQgbnVtYmVyIG9mIHBlb3BsZSB3b3VsZCBmaW5kIHRoYXQgdXNlZnVsLgoKVGhl
-IG90aGVyIHRoaW5nIHdlIGNvdWxkIHByb2JhYmx5IGRvIGlzIHdyaXRlIGEgdG9vbCB3aGljaCB3
-b3VsZAphdXRvbWF0aWNhbGx5IGRldGVybWluZSB0aGUgbWluaW11bSBudW1iZXIgb2YgJ2V4dHJh
-JyBwYXRjaGVzIHRvCmJhY2twb3J0IGZyb20gdGhlIHN0YWJsZSBicmFuY2ggdG8gYWxsb3cgdGhl
-IHBhdGNoIHRvIGFwcGx5IGFuZCBidWlsZC4KVGhlIGlzc3VlIHdpdGggdGhhdCwgb2YgY291cnNl
-LCBpcyB0aGF0IHN1Y2ggYSBicmFuY2ggd2lsbCBiZSBhbgphcnRpZmljaWFsIGJyYW5jaCB3aGlj
-aCBoYXMgYWxtb3N0IG5vIHRlc3RpbmcuCgogLUdlb3JnZQoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4939285042674237445==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="kbCYTQG2MZjuOjyn"
+Content-Disposition: inline
+
+
+--kbCYTQG2MZjuOjyn
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jun 05, 2018 at 11:34:28AM +0100, George Dunlap wrote:
+> On Mon, Jun 4, 2018 at 3:55 PM, Lars Kurth <lars.kurth@citrix.com> wrote:
+>=20
+> > 2.2.3 B. Git baseline of patches
+> > This created quite a bit of discussion and we did learn a few things:
+> > * From the thread, having to cherry pick a small (around 5-6) patches h=
+ave to be cherry-picked for XSAs to apply to tarballs this appears to be se=
+en as OK for most users. More patches are a problem
+> > * Recently this issue has become much worse, because some security fixe=
+s (or pre-requisites for them) have been developed in public and some XSAs =
+required significant backporting to be able to be run
+> > * A point release has usually <50% security fixes
+> > * There is no appetite amongst existing point release maintainers to ma=
+intain a staging branch and an XSA + pre-requisites only branch
+> >
+> > In other words, we are at a stale-mate. I see two ways around it
+> > a) Find an additional volunteer to maintain XSA + pre-requisites only b=
+ranches for releases
+> > b) Find some tooling/test based solution which exposes issues applying =
+XSAs on the last releases of a staging branch for a point release. This is =
+a little bit of a half-baked idea, but it may be worthwhile looking into.
+> > For example, we could create an OSSTEST, that checks out the last relea=
+sed stable branch and applies outstanding XSAs and pre-requisites based on =
+the meta-info to it (e.g. via xsatool or a variant thereof). This test woul=
+d fail, if an XSA does not apply, which implies that the pre-requisites are=
+ incomplete. If all XSAs apply, we can run the full OSSTEST on it. The test=
+ could also produce a list of git commits from staging that include XSAs an=
+d pre-requisites that can be applied in order. This should in theory - if d=
+oable - help downstreams which are struggling with this problem, while flag=
+ging up potential issues to stable maintainers early. Any thoughts? Would t=
+his be workable and if so, would it actually help?
+>=20
+> Here's a question:  What would it take for most downstreams to update
+> to staging when a public release was made?
+>=20
+> Suppose we did this:
+> 1. When we predisclose an issue, freeze the stable branches until the
+> embargo lifts -- no backports.
+> 2. When the embargo lifts, addition to the patches, we release a new
+> point release, complete with signed tag and tarball.
+> 3. We only do non-security point releases if we go 4 months without a
+> security-prompted point release.
+
+IMO this would significantly ease handling of XSAs, at least for us.
+This does mean we'll need to test things using stable branch (not
+previous point release) during embargo period - as the point release
+would be available only after lifting the embargo, but I think that's
+manageable.
+
+What if at the predisclose time there are some commits in staging (not
+stable), which breaks things (in terms of osstest)? Would them be
+bypassed (XSA applied on top of stable, then rebase staging on top of
+new stable)? Or something else?
+
+> At the moment the release process is quite manual, which isn't
+> terrible for one point release every 4 months per supported release,
+> but would significantly increase the workload if we did it for every
+> supported version for every XSA.  We'd have to invest quite a bit in
+> automating that process, which would make it only worth it if a
+> significant number of people would find that useful.
+
+Alternatively this could be triggered only if there are conflicting
+changes in stable branch, since last point release (but free stable
+anyway, to not leak info about the patches). This should reduce
+probability of very frequent point releases (the more recent point
+release is, the more likely XSA will apply without problems).
+This could be determined mostly automatically by trying to apply patches
+on the most recent point release.
+
+> The other thing we could probably do is write a tool which would
+> automatically determine the minimum number of 'extra' patches to
+> backport from the stable branch to allow the patch to apply and build.
+> The issue with that, of course, is that such a branch will be an
+> artificial branch which has almost no testing.
+
+I'm bit worried about such solution, although this is exactly what we do
+right now. With exception that a) it isn't automated b) we do testing on
+our own (and probably others do to, duplicating this work).
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--kbCYTQG2MZjuOjyn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlsWbhUACgkQ24/THMrX
+1yz0Egf/R7UPpqCOhbdE42PgBy3cMBUkLvmz6RHqLrI0dOBSWZqtJfhMx0CR2E9Y
+GAtyw1DpQs/gqmkuZXhF3NYo5f+mrwRYyQIpjTozOdYvgRK3kPMPVJhmQwX2sWSW
+BFr+vUUIdmnZioCyP8nDgUnsQ+IIln4luKYBYb2xRmlSJOFJSwEQSvIQC5CZk4Mb
+AR+uFjM1Clc9dL9fcZXfNPEirujDsyEQgKSA8QbA7kw1B/F84ovg+S2ZlQeTn7ic
+FxrUoWwY2LoL1CIb2pKUVRf8YnCN3NPTHD+2e42nPUob4DhydxORmupBATFKcSwj
+UgaCrMKPbaozSrzN/qwpD01fSmL9eQ==
+=tdi0
+-----END PGP SIGNATURE-----
+
+--kbCYTQG2MZjuOjyn--
+
+
+--===============4939285042674237445==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4939285042674237445==--
