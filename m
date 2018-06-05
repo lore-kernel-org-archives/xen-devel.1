@@ -1,12 +1,20 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: [PATCH for-4.11] scripts/add_maintainers.pl: Don't call
- get_maintainers.pl with -f
-Date: Tue,  5 Jun 2018 17:39:38 +0100
-Message-ID: <20180605163938.28090-1-julien.grall@arm.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [RFC] xen: Don't use
+ memory_region_init_ram_nomigrate() in pci_assign_dev_load_option_rom()
+Date: Tue, 5 Jun 2018 17:55:07 +0100
+Message-ID: <20180605165507.GB2165@perard.uk.xensource.com>
+References: <20180601175910.28146-1-peter.maydell@linaro.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=pctf=ix=citrix.com=prvs=687e870ee=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1fQFEl-0004uO-H0
+ for xen-devel@lists.xenproject.org; Tue, 05 Jun 2018 16:55:11 +0000
+Content-Disposition: inline
+In-Reply-To: <20180601175910.28146-1-peter.maydell@linaro.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,30 +23,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, xen-devel@lists.xen.org
-Cc: jgross@suse.com, lars.kurth@citrix.com, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, qemu-devel@nongnu.org, patches@linaro.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIG9wdGlvbiAtZiBvZiBzY3JpcHRzL2dldF9tYWludGFpbmVycy5wbCB3aWxsIHJldHVybiB0
-aGUgbWFpbnRhaW5lcnMKb2YgYSBnaXZlbiBmaWxlLCAqbm90KiB0aGUgbGlzdCBvZiBtYWludGFp
-bmVycyBpZiB0aGUgZmlsZSB3YXMgYSBwYXRjaC4KClRoZSBvdXRwdXQgZXhwZWN0ZWQgb2YgYWRk
-X21haW50YWluZXJzIGlzIHRoZSBsYXR0ZXIsIHNvIGRyb3AgdGhlIG9wdGlvbgotZi4KClNpZ25l
-ZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CgotLS0KICAgIFRo
-aXMgcGF0Y2ggaXMgY2FuZGlkYXRlIGZvciBYZW4gNC4xMS4gV2l0aG91dCBpdCBhZGRfbWFpbnRh
-aW5lcnMucGwKICAgIHdpbGwgbm90IHJldHVybiB0aGUgY29ycmVjdCBtYWludGFpbmVycy4gSUhN
-TywgaXQgc2hvdWxkIGJlIGZpeGVkCiAgICBBU0FQIHRvIGF2b2lkIHByb21vdGluZyBhIGJyb2tl
-biBzY3JpcHRzLgotLS0KIHNjcmlwdHMvYWRkX21haW50YWluZXJzLnBsIHwgMiArLQogMSBmaWxl
-IGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvc2Ny
-aXB0cy9hZGRfbWFpbnRhaW5lcnMucGwgYi9zY3JpcHRzL2FkZF9tYWludGFpbmVycy5wbAppbmRl
-eCA5OWU0NzI0MTEyLi4wOWU5ZjY2MDlmIDEwMDc1NQotLS0gYS9zY3JpcHRzL2FkZF9tYWludGFp
-bmVycy5wbAorKysgYi9zY3JpcHRzL2FkZF9tYWludGFpbmVycy5wbApAQCAtNDIwLDcgKzQyMCw3
-IEBAIHN1YiBpc21haWxpbmdsaXN0ICgkKSB7CiBzdWIgZ2V0bWFpbnRhaW5lcnMgKCQkJCkgewog
-ICAgIG15ICgkZmlsZSwgJHJ0bywgJHJjYykgPSBAXzsKICAgICBteSAkZmg7Ci0gICAgb3Blbigk
-ZmgsICItfCIsICRnZXRfbWFpbnRhaW5lciwgQGdldF9tYWludGFpbmVyX2FyZ3MsICctZicsICRm
-aWxlKQorICAgIG9wZW4oJGZoLCAiLXwiLCAkZ2V0X21haW50YWluZXIsIEBnZXRfbWFpbnRhaW5l
-cl9hcmdzLCAkZmlsZSkKICAgICAgICAgb3IgZGllICJGYWlsZWQgdG8gb3BlbiAnJGdldF9tYWlu
-dGFpbmVyJ1xuIjsKICAgICB3aGlsZShteSAkbGluZSA9IDwkZmg+KSB7CiAgICAgICAgIGNob21w
-ICRsaW5lOwotLSAKMi4xMS4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+T24gRnJpLCBKdW4gMDEsIDIwMTggYXQgMDY6NTk6MTBQTSArMDEwMCwgUGV0ZXIgTWF5ZGVsbCB3
+cm90ZToKPiBUaGUgeGVuIHBjaV9hc3NpZ25fZGV2X2xvYWRfb3B0aW9uX3JvbSgpIGN1cnJlbnRs
+eSBjcmVhdGVzIGEgUkFNCj4gbWVtb3J5IHJlZ2lvbiB3aXRoIG1lbW9yeV9yZWdpb25faW5pdF9y
+YW1fbm9taWdyYXRlKCksIGFuZCB0aGVuCj4gbWFudWFsbHkgcmVnaXN0ZXJzIGl0IHdpdGggdm1z
+dGF0ZV9yZWdpc3Rlcl9yYW0oKS4gSW4gZmFjdCBmb3IKPiBpdHMgb25seSBjYWxsc2l0ZSwgdGhl
+ICdvd25lcicgcG9pbnRlciB3ZSB1c2UgZm9yIHRoZSBpbml0IGNhbGwKPiBhbmQgdGhlICcmZGV2
+LT5xZGV2JyBwb2ludGVyIHdlIHVzZSBmb3IgdGhlIHZtc3RhdGVfcmVnaXN0ZXJfcmFtKCkKPiBj
+YWxsIHJlZmVyIHRvIHRoZSBzYW1lIG9iamVjdC4gU2ltcGxpZnkgdGhlIGZ1bmN0aW9uIHRvIG9u
+bHkKPiB0YWtlIGEgcG9pbnRlciB0byB0aGUgZGV2aWNlIG9uY2UgaW5zdGVhZCBvZiB0d2ljZSwg
+YW5kIHVzZQo+IG1lbW9yeV9yZWdpb25faW5pdF9yYW0oKSB3aGljaCBhdXRvbWF0aWNhbGx5IGRv
+ZXMgdGhlIHZtc3RhdGUKPiByZWdpc3RlciBmb3IgdXMuCj4gCj4gU2lnbmVkLW9mZi1ieTogUGV0
+ZXIgTWF5ZGVsbCA8cGV0ZXIubWF5ZGVsbEBsaW5hcm8ub3JnPgo+IC0tLQo+IFRoaXMgaXMgYSBm
+YWlybHkgdHJpdmlhbCBuby1iZWhhdmlvdXItY2hhbmdlIGNvZGUgY2xlYW51cCwgYnV0Cj4gSSd2
+ZSBtYXJrZWQgaXQgYXMgUkZDIGJlY2F1c2UgSSBkb24ndCBoYXZlIGEgc2V0dXAgZm9yIGRvaW5n
+Cj4gbW9yZSB0aGFuIGp1c3QgY29tcGlsZS10ZXN0aW5nIFhlbiByZWxhdGVkIHBhdGNoZXMuCj4g
+VGhpcyB3YXMgZm91bmQgYXMgcGFydCBvZiBhIHN3ZWVwIHRocm91Z2ggZm9yIGNvZGUgdXNpbmcK
+PiB0aGUgX25vbWlncmF0ZSB2ZXJzaW9ucyBvZiBmdW5jdGlvbnMuCgpUaGF0IHBhdGNoIGxvb2tz
+IGZpbmUsIGFuZCBzZWFtcyBmaW5lIGFmdGVyIGhhY2tpbmcgbXkgd2F5IGludG8gdGVzdGluZwp0
+aGUgY2hhbmdlLgoKQWNrZWQtYnk6IEFudGhvbnkgUEVSQVJEIDxhbnRob255LnBlcmFyZEBjaXRy
+aXguY29tPgoKVGhhbmtzLAoKLS0gCkFudGhvbnkgUEVSQVJECgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
