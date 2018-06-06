@@ -1,16 +1,16 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 06/11] x86: Reorganise and rename debug
- register fields in struct vcpu
-Date: Wed, 6 Jun 2018 18:22:12 +0200
-Message-ID: <20180606162212.dcoxdfng4c5o77vj@MacBook-Pro-de-Roger.local>
-References: <1528120755-17455-1-git-send-email-andrew.cooper3@citrix.com>
- <1528120755-17455-7-git-send-email-andrew.cooper3@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v5 09/10] xen: add per-platform defaults for
+ NR_CPUS
+Date: Wed, 6 Jun 2018 09:36:19 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1806060935510.1134@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1806041020340.23991@sstabellini-ThinkPad-X260>
+ <1528133051-924-9-git-send-email-sstabellini@kernel.org>
+ <5B17E10C02000078001C8BCB@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <1528120755-17455-7-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <5B17E10C02000078001C8BCB@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,38 +19,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Artem Mygaiev <artem_mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Dario Faggioli <dfaggioli@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKdW4gMDQsIDIwMTggYXQgMDI6NTk6MTBQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBSZXVzaW5nIGRlYnVncmVnWzVdIGZvciB0aGUgUFYgZW11bGF0ZWQgSU8gYnJlYWtw
-b2ludCBpbmZvcm1hdGlvbiBpcyBjb25mdXNpbmcKPiB0byByZWFkLiAgSW5zdGVhZCwgaW50cm9k
-dWNlIGEgZHI3X2VtdWwgZmllbGQgaW4gcHZfdmNwdSBmb3IgdGhlIHB1cG9zZS4KPiAKPiBXaXRo
-IHRoZSBQViBlbXVsYXRpb24gb3V0IG9mIHRoZSB3YXksIGRlYnVncmVnWzQsNV0gYXJlIGVudGly
-ZWx5IHVudXNlZCBhbmQKPiBkb24ndCBuZWVkIHRvIGJlIHN0b3JlZC4KPiAKPiBSZW5hbWUgZGVi
-dWdyZWdbMC4uM10gdG8gZHJbMC4uM10gdG8gcmVkdWNlIGNvZGUgdm9sdW1lLCBidXQga2VlcCB0
-aGVtIGFzIGFuCj4gYXJyYXkgYmVjYXVzZSB0aGVpciBiZWhhdmlvdXIgaXMgaWRlbnRpY2FsIGFu
-ZCB0aGlzIGhlbHBzIHNpbXBsZnkgc29tZSBvZiB0aGUKPiBQViBoYW5kbGluZy4gIEludHJvZHVj
-ZSBkcjYgYW5kIGRyNyBmaWVsZHMgdG8gcmVwbGFjZSBkZWJ1Z3JlZ1s2LDddIHdoaWNoCj4gcmVt
-b3ZlcyB0aGUgc3RvcmFnZSBmb3IgZGVidWdyZWdbNCw1XS4KPiAKPiBUd28gbWlub3IgYWx0ZXJh
-dGlvbnMgb24gdGhlIFBWIHNpZGUgaXMgdGhhdCBtZXJnaW5nIG9mIHRoZSBlbXVsYXRlZCBzdGF0
-ZQo+IGhhcHBlbnMgYWxvbmcgd2l0aCB0aGUgb3RoZXIgZHIgaGFuZGxpbmcsIHJhdGhlciB0aGFu
-IG11Y2ggbGF0ZXIsIGFuZAo+IGFyY2hfc2V0X2luZm9fZ3Vlc3QoKSBub3cgY2hlY2tzIHRoZSBy
-ZXR1cm4gdmFsdWUgZnJvbSBzZXRfZGVidWdyZWcoKSBmYWlscwo+IHRoZSBoeXBlcmNhbGwgcmF0
-aGVyIHRoYW4gc2lsZW50bHkgZGlzY2FyZGluZyB0aGUgdmFsdWVzLgo+IAo+IFNpZ25lZC1vZmYt
-Ynk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpSZXZpZXdlZC1i
-eTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cgo+IGRpZmYgLS1naXQg
-YS94ZW4vaW5jbHVkZS9hc20teDg2L2RvbWFpbi5oIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9kb21h
-aW4uaAo+IGluZGV4IDE5N2Y4ZDYuLjU5ZDVlNGEgMTAwNjQ0Cj4gLS0tIGEveGVuL2luY2x1ZGUv
-YXNtLXg4Ni9kb21haW4uaAo+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvZG9tYWluLmgKPiBA
-QCAtNTAwLDYgKzUwMCwxMiBAQCBzdHJ1Y3QgcHZfdmNwdQo+ICAgICAgdW5zaWduZWQgbG9uZyBz
-aGFkb3dfbGR0X21hcGNudDsKPiAgICAgIHNwaW5sb2NrX3Qgc2hhZG93X2xkdF9sb2NrOwo+ICAK
-PiArICAgIC8qCj4gKyAgICAgKiAlZHI3IGJpdHMgdGhlIGd1ZXN0IGhhcyBzZXQsIGJ1dCBhcmVu
-J3QgbG9hZGVkIGludG8gaGFyZHdhcmUsIGFuZCBhcmUKPiArICAgICAqIGNvbXBsZXRlbHkgZW11
-bGF0ZWQuCj4gKyAgICAgKi8KPiArICAgIHVpbnQzMl90IGRyN19lbXVsOwoKVXBwZXIgMzJiaXQg
-YXJlIHJlc2VydmVkIEFUTSwgYnV0IHdvbid0IGl0IGJlIGJldHRlciB0byBqdXN0IHVzZSBhCnVu
-c2lnbmVkIGxvbmcgKGxpa2UgaXQncyB1c2VkIGJlbG93IHRvIHN0b3JlIHRoZSByZWdpc3RlcnMp
-PwoKUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gV2VkLCA2IEp1biAyMDE4LCBKYW4gQmV1bGljaCB3cm90ZToKPiA+Pj4gT24gMDQuMDYuMTgg
+YXQgMTk6MjQsIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPiB3cm90ZToKPiA+IC0tLSBhL3hlbi9h
+cmNoL0tjb25maWcKPiA+ICsrKyBiL3hlbi9hcmNoL0tjb25maWcKPiA+IEBAIC0zLDYgKzMsMTAg
+QEAgY29uZmlnIE5SX0NQVVMKPiA+ICAJaW50ICJNYXhpbXVtIG51bWJlciBvZiBwaHlzaWNhbCBD
+UFVzIgo+ID4gIAlyYW5nZSAxIDQwOTUKPiA+ICAJZGVmYXVsdCAiMjU2IiBpZiBYODYKPiA+ICsJ
+ZGVmYXVsdCAiMTI4IiBpZiBBUk0gJiYgQUxMCj4gCj4gV2l0aCB0aGlzIGRyb3BwZWQsIGFzIHN1
+Z2dlc3RlZCBieSBKdWxpZW4sIGFuZCBvZiBjb3Vyc2UgdW5sZXNzIHRoZXJlJ3MKPiBhIGdvb2Qg
+cmVhc29uIGZvciB3aHkgaXQgJ3MgaGVyZSwKPiBBY2tlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVs
+aWNoQHN1c2UuY29tPgoKWWVzLCB0aGlzIGxpbmUgaXMgbm8gbG9uZ2VyIG5lY2Vzc2FyeSwgSSds
+bCByZW1vdmUgaXQuIFRoYW5rcy4KCgo+ID4gKwlkZWZhdWx0ICI4IiBpZiBBUk0gJiYgUkNBUjMK
+PiA+ICsJZGVmYXVsdCAiNCIgaWYgQVJNICYmIFFFTVUKPiA+ICsJZGVmYXVsdCAiNCIgaWYgQVJN
+ICYmIE1QU09DCj4gPiAgCWRlZmF1bHQgIjEyOCIgaWYgQVJNCj4gPiAgCS0tLWhlbHAtLS0KPiA+
+ICAJICBTcGVjaWZpZXMgdGhlIG1heGltdW0gbnVtYmVyIG9mIHBoeXNpY2FsIENQVXMgd2hpY2gg
+WGVuIHdpbGwgc3VwcG9ydC4KPiA+IC0tIAo+ID4gMS45LjEKPiAKPiAKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
