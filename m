@@ -1,18 +1,20 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v9] new config option vtsc_tolerance_khz to
- avoid TSC emulation
-Date: Thu, 7 Jun 2018 23:05:37 +0200
-Message-ID: <20180607210537.GA18894@aepfle.de>
-References: <20180607130829.18811-1-olaf@aepfle.de>
- <5B1933AE02000078001C91DA@prv1-mh.provo.novell.com>
- <20180607154743.0c8a808e.olaf@aepfle.de>
- <5B1944D902000078001C9279@prv1-mh.provo.novell.com>
- <20180607164949.7d9b3890.olaf@aepfle.de>
- <5B19477002000078001C9295@prv1-mh.provo.novell.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH] CODING_STYLE: discourage use of underscores
+ where alternatives exist
+Date: Thu, 7 Jun 2018 22:21:39 +0100
+Message-ID: <38a4efd1-db7a-4d2b-7c83-dd6dba072776@arm.com>
+References: <5B19399602000078001C9228@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4040399772731887317=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B19477002000078001C9295@prv1-mh.provo.novell.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=al+p=iz=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1fR2Lv-0008IN-Du
+ for xen-devel@lists.xenproject.org; Thu, 07 Jun 2018 21:21:51 +0000
+In-Reply-To: <5B19399602000078001C9228@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,59 +23,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, nd@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4040399772731887317==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="CE+1k2dSO48ffgeK"
-Content-Disposition: inline
-
-
---CE+1k2dSO48ffgeK
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Thu, Jun 07, Jan Beulich wrote:
-
-> >>> On 07.06.18 at 16:49, <olaf@aepfle.de> wrote:
-> > Am Thu, 07 Jun 2018 08:44:41 -0600
-> > schrieb "Jan Beulich" <JBeulich@suse.com>:
-> >> The re-use of the field is acceptable only if all existing senders reliably
-> >> fill zero in there.
-> > How do we know all senders? I just know about write_tsc_info from xen-4.6+.
-> I don't think we care about senders other than ones using libxc, so
-> by knowing whether all libxc versions conform to the requirement,
-> we could declare we're fine.
-
-Yes, I think we are fine. And if migration from pre-4.6 is supported
-anyway is another question. Most likely the answer is no.
-
-Olaf
-
---CE+1k2dSO48ffgeK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWxmeHQAKCRBdQqD6ppg2
-fmNmAKCg9/j9CQrzkAuw8KGzxQ9bVTQQmgCfampF1DqW1rTjH+iZPgWsN5tB6d4=
-=MImf
------END PGP SIGNATURE-----
-
---CE+1k2dSO48ffgeK--
-
-
---===============4040399772731887317==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4040399772731887317==--
+SGkgSmFuLAoKT24gMDcvMDYvMjAxOCAxNDo1NiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gVW5kZXJz
+Y29yZXMgY29tbW9ubHkgcmVxdWlyZSB0d28ga2V5cHJlc3NlcyB3aGlsZSBoeXBoZW4gLyBkYXNo
+IHJlcXVpcmVzCj4ganVzdCBvbmUsIGFuZCB0aGUgdmlzdWFsIHNlcGFyYXRpb24gZWZmZWN0IG9m
+IGJvdGggaXMgYmFzaWNhbGx5IHRoZSBzYW1lLgoKSSBkb24ndCBidXkgdGhpcyBhcmd1bWVudC4g
+QSBnb29kIHByb2dyYW1tZXIgaXMgbGF6eSBieSBkZWZpbml0aW9uIGJ1dCAKbm90IHRoYXQgbXVj
+aC4gQyBkb2VzIG5vdCBhbGxvdyBpZGVudGlmaWVycyB3aXRoIGh5cGhlbiwgc28geW91IGVuZCB1
+cCAKdG8gdXNlIHVuZGVyc2NvcmUgbW9zdCBvZiB0aW1lIGFzIHlvdSBkb24ndCBvZnRlbiBjcmVh
+dGUgbmV3IGZpbGVuYW1lIAphbmQgbW9zdCBvZiB0aGUgZWRpdG9ycyBoYXZlIGZpbGVuYW1lIGF1
+dG8tY29tcGxldGlvbi4KClRvIGJlIGhvbmVzdCwgbXkgbWluZCBoYXMgYWxzbyBiZWVuIHRyYWlu
+ZWQgdG8gcmVjb2duaXplIGVhc2lseSB0aGUgCnVuZGVyc2NvcmUgdmVyc2lvbiBhbmQgSSBmZWVs
+IHRoZSBoeXBoZW4gbW9yZSBkaWZmaWN1bHQgdG8gcGFyc2UuCgpDaGVlcnMsCgotLSAKSnVsaWVu
+IEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
