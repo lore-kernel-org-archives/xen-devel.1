@@ -1,16 +1,21 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-4.9 test] 123861: regressions - FAIL
-Date: Thu, 07 Jun 2018 20:14:22 +0000
-Message-ID: <osstest-123861-mainreport@xen.org>
+From: Liam Shepherd <liam@dancer.es>
+Subject: Re: PROBLEM: xen-netfront: ethtool settings changed in
+ 4.4.134 causing packet loss
+Date: Thu, 7 Jun 2018 21:33:28 +0100
+Message-ID: <CAB8B+d29S1hwanUwca3ByRigDW05DZ-UVREioYCSnDWhUAOp2Q@mail.gmail.com>
+References: <CAB8B+d34sEuoaHANbYdtD_YkdB=w52rDD4ppZtQQEFCJ6+Q8MA@mail.gmail.com>
+ <b253bb6e-034f-61ce-5716-41faba532bf4@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0337665675087919550=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=x5mx=iz=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fR1If-0000mI-Jj
- for xen-devel@lists.xenproject.org; Thu, 07 Jun 2018 20:14:25 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=2gr1=iz=dancer.es=liam@srs-us1.protection.inumbo.net>)
+ id 1fR1bM-0002xh-10
+ for xen-devel@lists.xenproject.org; Thu, 07 Jun 2018 20:33:44 +0000
+Received: by mail-yb0-x243.google.com with SMTP id v17-v6so3666430ybe.7
+ for <xen-devel@lists.xenproject.org>; Thu, 07 Jun 2018 13:33:41 -0700 (PDT)
+In-Reply-To: <b253bb6e-034f-61ce-5716-41faba532bf4@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,250 +24,202 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Ross Lagerwall <ross.lagerwall@citrix.com>
+Cc: xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com, Matthew Day <matthew.day@redmatter.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyMzg2MSBsaW51eC00LjkgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVzdC1sYWIu
-eGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyMzg2MS8KClJlZ3Jlc3Npb25zIDotKAoKVGVz
-dHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0
-cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1zaGFkb3cgICAg
-NyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFt
-ZDY0LWFtZDY0LWxpYnZpcnQteHNtICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBmYWlsIFJF
-R1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0
-ICA3IHhlbi1ib290ICAgIGZhaWwgUkVHUi4gdnMuIDEyMjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC1p
-Mzg2LXB2Z3J1YiAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIy
-OTY5CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgIDcgeGVuLWJvb3QgICAg
-ICAgICBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2lu
-Ny1hbWQ2NCAgNyB4ZW4tYm9vdCAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjk2OQogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1wdmh2Mi1pbnRlbCAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgZmFpbCBS
-RUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2
-NC1zaGFkb3cgNyB4ZW4tYm9vdCBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0ICA3IHhlbi1ib290ICAgIGZhaWwgUkVHUi4gdnMu
-IDEyMjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtaW50ZWwgIDcgeGVuLWJvb3Qg
-ICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0
-LXdpbjEwLWkzODYgIDcgeGVuLWJvb3QgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjI5NjkKIHRl
-c3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgIGZh
-aWwgUkVHUi4gdnMuIDEyMjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW4xMC1pMzg2
-ICA3IHhlbi1ib290ICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyOTY5CiB0ZXN0LWFtZDY0LWFt
-ZDY0LWxpYnZpcnQgICAgICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZz
-LiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MiAgIDcgeGVuLWJvb3QgICAgICAg
-ICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjk2OQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dS13aW43LWFtZDY0ICA3IHhlbi1ib290ICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTIyOTY5CiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdzMTYtYW1kNjQgIDcgeGVuLWJvb3QgICAgICAgICBm
-YWlsIFJFR1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtZGViaWFuaHZt
-LWFtZDY0LXhzbSA3IHhlbi1ib290IGZhaWwgUkVHUi4gdnMuIDEyMjk2OQogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2NC14c20gNyB4ZW4tYm9vdCBmYWls
-IFJFR1IuIHZzLiAxMjI5NjkKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAg
-NyB4ZW4tYm9vdCAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMjk2OQoKVGVzdHMgd2hpY2ggZGlk
-IG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dC13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDEyMjk2
-OQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAg
-ICAgICAgICBmYWlsIGxpa2UgMTIyOTY5CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAx
-MiBndWVzdC1zdGFydCAgICAgICAgICAgICAgICAgIGZhaWwgIG5ldmVyIHBhc3MKIHRlc3QtYW1k
-NjQtaTM4Ni14bC1wdnNoaW0gICAgMTIgZ3Vlc3Qtc3RhcnQgICAgICAgICAgICAgICAgICBmYWls
-ICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAxMyBtaWdyYXRlLXN1
-cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGli
-dmlydC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBh
-c3MKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
-ICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAx
-MyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
-bTY0LWFybTY0LWxpYnZpcnQteHNtIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFp
-bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3Rv
-cmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1s
-aWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
-IGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
-LXhsLWFybmRhbGUgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20g
-MTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2
-NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRlYmlhbi1odm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZl
-ciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAg
-ICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgIDE0IHNhdmVy
-ZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJt
-aGYteGwtY3ViaWV0cnVjayAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgbmV2
-ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrIDE0IHNhdmVyZXN0b3JlLXN1
-cHBvcnQtY2hlY2sgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMg
-ICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC14c20gICAgICAxMyBtaWdy
-YXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgMTMgbWlncmF0ZS1zdXBwb3J0
-LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVk
-aXQyICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
-ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gMTQgc2F2
-ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
-cm1oZi14bC1tdWx0aXZjcHUgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICBu
-ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAxNCBzYXZlcmVzdG9yZS1z
-dXBwb3J0LWNoZWNrICAgIGZhaWwgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11
-dC13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwog
-dGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAg
-ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDIgIDE0IHNh
-dmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwg
-bmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAxMyBtaWdyYXRlLXN1cHBv
-cnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsICAg
-ICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MK
-IHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAg
-ICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAxMyBz
-YXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhm
-LWFybWhmLXhsLXZoZCAgICAgIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAg
-IG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgMTMgc2F2ZXJlc3RvcmUt
-c3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNz
-CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwg
-ICAgICAgICBmYWlsIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiBs
-aW51eCAgICAgICAgICAgICAgICAzYzNkMDVmYzZlNjY1M2JkZjlmN2ZiM2ZiNjkyMmIxOTljN2Jh
-M2VjCmJhc2VsaW5lIHZlcnNpb246CiBsaW51eCAgICAgICAgICAgICAgICA2YmE4OWI1MmJhNjkx
-NmJjN2EzZDM5MGQ3MDk1MWU5OTJjMGNhMzllCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjI5Njkg
-IDIwMTgtMDUtMTkgMTY6Mzk6NTkgWiAgIDE5IGRheXMKRmFpbGluZyBzaW5jZSAgICAgICAgMTIz
-MDc0ICAyMDE4LTA1LTIyIDE3OjEwOjA4IFogICAxNiBkYXlzICAgMTIgYXR0ZW1wdHMKVGVzdGlu
-ZyBzYW1lIHNpbmNlICAgMTIzODYxICAyMDE4LTA2LTA2IDE3OjAwOjQ0IFogICAgMSBkYXlzICAg
-IDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLQo1MTMgcGVvcGxlIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Qs
-Cm5vdCBsaXN0aW5nIHRoZW0gYWxsCgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC14
-c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IGJ1aWxkLWFybWhmLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtbGli
-dmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9w
-cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1ydW1wcnVuICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcnVtcHJ1
-biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAg
-ZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQteHNtICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRl
-Ymlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGli
-dmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXN0dWJkb20t
-ZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC14c20gICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZp
-cnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC14c20gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwteHNt
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1hbWQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhlbDZodm0tYW1kICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1y
-aGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgIGZhaWwg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFt
-ZDY0ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1
-LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWkzODYtZnJlZWJzZDEwLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAg
-ICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXJ1bXBydW4t
-YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgICAg
-ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13
-aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
-CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdz
-MTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLWFybmRhbGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJt
-aGYteGwtY3ViaWV0cnVjayAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC1leGFtaW5lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWV4YW1pbmUgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtZXhhbWluZSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2
-LWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1ydW1wcnVuLWkzODYgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4x
-MC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-eGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1p
-bnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-eGwtcHZodjItaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
-dC1hbWQ2NC1pMzg2LXFlbXV0LXJoZWw2aHZtLWludGVsICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0taW50ZWwgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi1s
-aWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXBh
-aXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1wYWlyICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1k
-NjQtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2c2hpbSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdy
-dWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFjb3cyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXJhdyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0
-ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJt
-aGYtYXJtaGYteGwtcnRkcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93ICAg
-ICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFt
-ZDY0LXNoYWRvdyAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtc2hh
-ZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXhsLXNoYWRvdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9u
-IG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmlt
-YWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZh
-aWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0
-L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdl
-bmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0
-LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54
-ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpU
-ZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
-cmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKTm90IHB1c2hpbmcuCgooTm8gcmV2
-aXNpb24gbG9nOyBpdCB3b3VsZCBiZSAxODgwOSBsaW5lcyBsb25nLikKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============0337665675087919550==
+Content-Type: multipart/alternative; boundary="000000000000e42ac7056e133297"
+
+--000000000000e42ac7056e133297
+Content-Type: text/plain; charset="UTF-8"
+
+Thank you.
+
+As a side point David Vrabel is listed in the maintainers file for xen
+hypervisor interface in 4.4.135 but his email is no longer active it seems.
+
+On 7 Jun 2018 09:35, "Ross Lagerwall" <ross.lagerwall@citrix.com> wrote:
+
+On 06/05/2018 04:43 PM, Liam Shepherd wrote:
+> When upgrading from 4.4.132 to 4.4.135 I started observing about 3%
+> packet loss on PV on HVM domU interfaces. Specifically TX dropped
+> packets (As reported by ifconfig).
+>
+> It seems that the default ethtool settings have changed.
+>
+> Previously (4.4.132):
+> tx-checksumming: on
+>      tx-checksum-ipv4: on [fixed]
+>      tx-checksum-ip-generic: off [fixed]
+>      tx-checksum-ipv6: on
+>      tx-checksum-fcoe-crc: off [fixed]
+>      tx-checksum-sctp: off [fixed]
+> scatter-gather: on
+>      tx-scatter-gather: on
+>      tx-scatter-gather-fraglist: off [fixed]
+> tcp-segmentation-offload: on
+>      tx-tcp-segmentation: on
+>      tx-tcp-ecn-segmentation: off [fixed]
+>      tx-tcp6-segmentation: on
+> udp-fragmentation-offload: off [fixed]
+> generic-segmentation-offload: on
+>
+> Now (4.4.135):
+> tx-checksumming: on
+>      tx-checksum-ipv4: on [fixed]
+>      tx-checksum-ip-generic: off [fixed]
+>      tx-checksum-ipv6: off
+>      tx-checksum-fcoe-crc: off [fixed]
+>      tx-checksum-sctp: off [fixed]
+> scatter-gather: off
+>      tx-scatter-gather: off
+>      tx-scatter-gather-fraglist: off [fixed]
+> tcp-segmentation-offload: off
+>      tx-tcp-segmentation: off
+>      tx-tcp-ecn-segmentation: off [fixed]
+>      tx-tcp6-segmentation: off
+> udp-fragmentation-offload: off [fixed]
+> generic-segmentation-offload: off [requested on]
+>
+> Manually running 'ethtool -K INT tso on sg on' on all interfaces stops
+> the packet loss again. They're then set like this:
+> tx-checksumming: on
+>      tx-checksum-ipv4: on [fixed]
+>      tx-checksum-ip-generic: off [fixed]
+>      tx-checksum-ipv6: off
+>      tx-checksum-fcoe-crc: off [fixed]
+>      tx-checksum-sctp: off [fixed]
+> scatter-gather: on
+>      tx-scatter-gather: on
+>      tx-scatter-gather-fraglist: off [fixed]
+> tcp-segmentation-offload: on
+>      tx-tcp-segmentation: on
+>      tx-tcp-ecn-segmentation: off [fixed]
+>      tx-tcp6-segmentation: off [requested on]
+> udp-fragmentation-offload: off [fixed]
+> generic-segmentation-offload: on
+>
+> I've traced it to a commit in 4.4.134:
+> 6be4fe832954db3b359b72107a6c60e34d939b26
+> xen-netfront: Fix race between device setup and open
+> [ Upstream commit f599c64fdf7d9c108e8717fb04bc41c680120da4 ]
+> https://patchwork.kernel.org/patch/10328969/
+>
+> Once that is reverted on 4.4.135, the ethtool settings are as 4.4.132
+> and there is no packet loss.
+>
+Thanks for the bug report. Changing the ethtool settings was certainly
+not intended with that change. I'll take a look to see what has gone wrong.
+
+
+-- 
+Ross Lagerwall
+
+--000000000000e42ac7056e133297
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Thank you.<div dir=3D"auto"><br></div><div dir=3D"auto">A=
+s a side point David Vrabel is listed in the maintainers file for xen hyper=
+visor interface in 4.4.135 but his email is no longer active it seems.</div=
+></div><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">On 7 Jun 2=
+018 09:35, &quot;Ross Lagerwall&quot; &lt;<a href=3D"mailto:ross.lagerwall@=
+citrix.com">ross.lagerwall@citrix.com</a>&gt; wrote:<br type=3D"attribution=
+"><blockquote class=3D"quote" style=3D"margin:0 0 0 .8ex;border-left:1px #c=
+cc solid;padding-left:1ex"><div class=3D"elided-text">On 06/05/2018 04:43 P=
+M, Liam Shepherd wrote:<br>
+&gt; When upgrading from 4.4.132 to 4.4.135 I started observing about 3%<br=
+>
+&gt; packet loss on PV on HVM domU interfaces. Specifically TX dropped<br>
+&gt; packets (As reported by ifconfig).<br>
+&gt; <br>
+&gt; It seems that the default ethtool settings have changed.<br>
+&gt; <br>
+&gt; Previously (4.4.132):<br>
+&gt; tx-checksumming: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-ipv4: on [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-ip-generic: off [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-ipv6: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-fcoe-crc: off [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-sctp: off [fixed]<br>
+&gt; scatter-gather: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-scatter-gather: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-scatter-gather-fraglist: off [fixed]<br>
+&gt; tcp-segmentation-offload: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-tcp-segmentation: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-tcp-ecn-segmentation: off [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-tcp6-segmentation: on<br>
+&gt; udp-fragmentation-offload: off [fixed]<br>
+&gt; generic-segmentation-offload: on<br>
+&gt; <br>
+&gt; Now (4.4.135):<br>
+&gt; tx-checksumming: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-ipv4: on [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-ip-generic: off [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-ipv6: off<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-fcoe-crc: off [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-sctp: off [fixed]<br>
+&gt; scatter-gather: off<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-scatter-gather: off<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-scatter-gather-fraglist: off [fixed]<br>
+&gt; tcp-segmentation-offload: off<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-tcp-segmentation: off<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-tcp-ecn-segmentation: off [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-tcp6-segmentation: off<br>
+&gt; udp-fragmentation-offload: off [fixed]<br>
+&gt; generic-segmentation-offload: off [requested on]<br>
+&gt; <br>
+&gt; Manually running &#39;ethtool -K INT tso on sg on&#39; on all interfac=
+es stops<br>
+&gt; the packet loss again. They&#39;re then set like this:<br>
+&gt; tx-checksumming: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-ipv4: on [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-ip-generic: off [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-ipv6: off<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-fcoe-crc: off [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-checksum-sctp: off [fixed]<br>
+&gt; scatter-gather: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-scatter-gather: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-scatter-gather-fraglist: off [fixed]<br>
+&gt; tcp-segmentation-offload: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-tcp-segmentation: on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-tcp-ecn-segmentation: off [fixed]<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 tx-tcp6-segmentation: off [requested on]<br>
+&gt; udp-fragmentation-offload: off [fixed]<br>
+&gt; generic-segmentation-offload: on<br>
+&gt; <br>
+&gt; I&#39;ve traced it to a commit in 4.4.134:<br>
+&gt; 6be4fe832954db3b359b72107a6c60e34d939b26<br>
+&gt; xen-netfront: Fix race between device setup and open<br>
+&gt; [ Upstream commit f599c64fdf7d9c108e8717fb04bc41c680120da4 ]<br>
+&gt; <a href=3D"https://patchwork.kernel.org/patch/10328969/" rel=3D"norefe=
+rrer noreferrer" target=3D"_blank">https://patchwork.kernel.org/patch/10328=
+969/</a><br>
+&gt; <br>
+&gt; Once that is reverted on 4.4.135, the ethtool settings are as 4.4.132<=
+br>
+&gt; and there is no packet loss.<br>
+&gt; <br></div>
+Thanks for the bug report. Changing the ethtool settings was certainly <br>
+not intended with that change. I&#39;ll take a look to see what has gone wr=
+ong.<div class=3D"signature-text"><br>
+<br>
+-- <br>
+Ross Lagerwall<br>
+</div></blockquote></div><br></div>
+
+--000000000000e42ac7056e133297--
+
+
+--===============0337665675087919550==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0337665675087919550==--
