@@ -1,24 +1,14 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH 5/7] public / x86: introduce
- __HYPERCALL_iommu_op
-Date: Thu, 7 Jun 2018 14:45:29 +0100
-Message-ID: <ab6e3d25-f0dc-1e1a-0b11-522a36217b79@citrix.com>
-References: <20180212104714.1922-1-paul.durrant@citrix.com>
- <20180212104714.1922-6-paul.durrant@citrix.com>
- <5AABC5B402000078001B2C6B@prv-mh.provo.novell.com>
- <efc86f12783d4ab0b6ef15f50a7d59e2@AMSPEX02CL03.citrite.net>
- <5B19315402000078001C91C3@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v9] new config option vtsc_tolerance_khz to
+ avoid TSC emulation
+Date: Thu, 7 Jun 2018 15:47:43 +0200
+Message-ID: <20180607154743.0c8a808e.olaf@aepfle.de>
+References: <20180607130829.18811-1-olaf@aepfle.de>
+ <5B1933AE02000078001C91DA@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0285124461647402497=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=n3yb=iz=citrix.com=prvs=6892a49f8=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1fQvEN-0007U6-RE
- for xen-devel@lists.xenproject.org; Thu, 07 Jun 2018 13:45:35 +0000
-In-Reply-To: <5B19315402000078001C91C3@prv1-mh.provo.novell.com>
-Content-Language: en-US
+In-Reply-To: <5B1933AE02000078001C91DA@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,64 +17,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Paul Durrant <paul.durrant@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Daniel de Graaf <dgdegra@tycho.nsa.gov>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDYvMDcvMjAxOCAwMjoyMSBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMDcuMDYu
-MTggYXQgMTM6NDIsIDxQYXVsLkR1cnJhbnRAY2l0cml4LmNvbT4gd3JvdGU6Cj4+PiBGcm9tOiBK
-YW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+Pj4gU2VudDogMTYgTWFyY2gg
-MjAxOCAxMjoyNQo+Pj4+Pj4gT24gMTIuMDIuMTggYXQgMTE6NDcsIDxwYXVsLmR1cnJhbnRAY2l0
-cml4LmNvbT4gd3JvdGU6Cj4+Pj4gLS0tIGEveGVuL2FyY2gveDg2L01ha2VmaWxlCj4+Pj4gKysr
-IGIveGVuL2FyY2gveDg2L01ha2VmaWxlCj4+Pj4gQEAgLTMzLDYgKzMzLDcgQEAgb2JqLSQoQ09O
-RklHX0NSQVNIX0RFQlVHKSArPSBnZGJzdHViLm8KPj4+PiAgb2JqLXkgKz0gaHlwZXJjYWxsLm8K
-Pj4+PiAgb2JqLXkgKz0gaTM4Ny5vCj4+Pj4gIG9iai15ICs9IGk4MjU5Lm8KPj4+PiArb2JqLXkg
-Kz0gaW9tbXVfb3Aubwo+Pj4KPj4+IEFzIG1lbnRpb25lZCBpbiBvdGhlciBjb250ZXh0cywgSSdk
-IHByZWZlciBpZiB3ZSBzdG9wcGVkIHVzaW5nCj4+PiB1bmRlcnNjb3JlcyBpbiBwbGFjZXMgd2hl
-cmUgZGFzaGVzIChvciBvdGhlciBzZXBhcmF0b3JzIG5vdAo+Pj4gdXNhYmxlIGluIEMgaWRlbnRp
-ZmllcnMpIGFyZSBmaW5lLgo+Pgo+PiBJIGRvbid0IHNlZSBhbnkgZ3VpZGFuY2UgaW4gQ09ESU5H
-X1NUWUxFIG9yIGVsc2V3aGVyZSwgYW5kIGFsc28gdGhlIG1ham9yaXR5IAo+PiBvZiB0aGUgY29k
-ZWJhc2Ugc2VlbXMgdG8gcHJlZmVyIHVzaW5nIHVuZGVyc2NvcmVzIGluIG1vZHVsZSBuYW1lcy4g
-UGVyc29uYWxseSAKPj4gSSdkIHByZWZlciBuZXcgY29kZSByZW1haW4gY29uc2lzdGVudC4KPiAK
-PiBUaGUgbGFjayBvZiBzdGF0ZW1lbnQgdG8gdGhpcyBlZmZlY3QgaXMgd2h5IEkndmUgc2FpZCAi
-SSdkIHByZWZlciIuIFNlZQo+IGFsdGVybmF0aXZlLWFzbS5oLCB4ODYtZGVmbnMuaCwgb3IgeDg2
-LXZlbmRvcnMuaCBmb3IgX3JlY2VudF8KPiBleGFtcGxlcyBvZiBtb3ZpbmcgaW50byB0aGUgb3Ro
-ZXIgZGlyZWN0aW9uLiBPbiBhbGwga2V5Ym9hcmRzIEkndmUKPiBzZWVuIG9yIHVzZWQsIGFuIHVu
-ZGVyc2NvcmUgcmVxdWlyZXMgdHdvIGtleXMgdG8gYmUgcHJlc3NlZCwgd2hpbGUKPiBhIGRhc2gg
-dGFrZXMgb25seSBvbmUuIFRoaXMgaXNuJ3QgbXVjaCBmb3IgYW4gaW5kaXZpZHVhbCBpbnN0YW5j
-ZSwgYnV0Cj4gaXQgc3VtcyB1cC4gSXQncyB0aGUgc2FtZSByZWFzb24gd2h5IEknbSBhZHZvY2F0
-aW5nIGFnYWluc3QgdGhlIHVzZQo+IG9mIHVuZGVyc2NvcmVzIGluIG5ldyBjb21tYW5kIGxpbmUg
-b3B0aW9uIG5hbWVzLgo+IAo+IEluIHRoZSBlbmQsIGxvb2tpbmcgYXQgdGhlIGhpc3Rvcnkgb2Yg
-dHlwb2dyYXBoeSwgSSB0aGluayB1bmRlcnNjb3JlCj4gaXMgYSByZWxhdGl2ZWx5IGxhdGUgKGFu
-ZCBwcmVzdW1hYmx5IGFydGlmaWNpYWwpIGFkZGl0aW9uOyBpbiBwYXJ0aWN1bGFyIEkKPiBkb24n
-dCByZWNhbGwgbWVjaGFuaWNhbCB0eXBlIHdyaXRlcnMgdG8gZXZlbiBoYXZlIGEga2V5IGZvciBp
-dC4KCjxwZWRhbnRpYz5UaGUgbWVjaGFuaWNhbCB0eXBld3JpdGVycyBJIGxlYXJuZWQgb24gaGFk
-IGFuIHVuZGVyc2NvcmUgdG8KYWxsb3cgeW91IHRvIGdvIGJhY2sgYW5kIHVuZGVybGluZSB3b3Jk
-cy48L3BlZGFudGljPgoKPiBJdCdzCj4gdXNlIGFzIGEgdmlzdWFsIHNlcGFyYXRvciBpcyBuZWNl
-c3NhcnkgaW4gZS5nLiBwcm9ncmFtbWluZwo+IGxhbmd1YWdlcywgYXMgY29tbW9ubHkgZGFzaCBk
-ZXNpZ25hdGVkIHRoZSBvcGVyYXRvciBmb3IgIm1pbnVzIgo+IHRoZXJlLiBFeHRlbmRpbmcgc3Vj
-aCBuYW1pbmcgdG8gbm9uLWlkZW50aWZpZXJzIChmaWxlIHN5c3RlbSBuYW1lcwo+IGFuZCBjb21t
-YW5kIGxpbmUgb3B0aW9ucyBhcmUganVzdCBwcm9taW5lbnQgZXhhbXBsZXMpIGlzIHNpbXBseQo+
-IG1pc2d1aWRlZCBpbW8uCgpXZWxsIGluIGFueSBjYXNlLCBtYXliZSB0aGlzIHNob3VsZCBiZSBk
-aXNjdXNzZWQgaW4gYSBwYXRjaCB0bwpDT0RJTkdfU1RZTEUsIHJhdGhlciB0aGFuIGluIHRoZSBt
-aWRkbGUgb2YgYSBwYXRjaCBzZXJpZXMgYWJvdXQKc29tZXRoaW5nIGNvbXBsZXRlbHkgZGlmZmVy
-ZW50LgoKPj4+PiArI2lmbmRlZiBfX1hFTl9QVUJMSUNfSU9NTVVfT1BfSF9fCj4+Pj4gKyNkZWZp
-bmUgX19YRU5fUFVCTElDX0lPTU1VX09QX0hfXwo+Pj4KPj4+IFBsZWFzZSBjYW4geW91IGF2b2lk
-IGludHJvZHVjaW5nIGZ1cnRoZXIgbmFtZSBzcGFjZSB2aW9sYXRpb25zCj4+PiBpbnRvIHRoZSBw
-dWJsaWMgaGVhZGVycz8KPj4KPj4gSSBhc3N1bWUgeW91IG1lYW4gdGhlIGxlYWRpbmcgJ19fJz8g
-QWdhaW4sIEkgY2hvc2UgdGhlIG5hbWUgYmFzZWQgb24gCj4+IGNvbnNpc3RlbmN5IHdpdGggb3Ro
-ZXIgY29kZSBhbmQgSSdkIHByZWZlciB0byByZW1haW4gY29uc2lzdGVudC4gQ291bGQgeW91IAo+
-PiBleHBsYWluIHdoeSBoYXZpbmcgYSBsZWFkaW5nICdfXycgaXMgcHJvYmxlbWF0aWM/Cj4gCj4g
-TmFtZXMgc3RhcnRpbmcgd2l0aCBkb3VibGUgdW5kZXJzY29yZXMgYXJlIHJlc2VydmVkIChhcyBh
-cmUsIGJ0dywKPiBuYW1lcyBzdGFydGluZyB3aXRoIGEgc2luZ2xlIHVuZGVyc2NvcmUgYW5kIGFu
-IHVwcGVyIGNhc2UgbGV0dGVyKS4KPiBXaGlsZSBpdCdzIHVubGlrZWx5IGZvciBhIGNvbXBpbGVy
-IHRvIGV2ZXIgd2FudCB0byB1c2UKPiBfX1hFTl9QVUJMSUNfSU9NTVVfT1BfSF9fIGZvciBpdHMg
-aW50ZXJuYWwgcHVycG9zZXMsIHdlIGNvdWxkbid0Cj4gdmFsaWRseSBjb21wbGFpbiBpZiBvbmUg
-ZGlkLgoKSSdtIHdpdGggSmFuIG9uIHRoaXMgb25lLiAgQXQgdGhlIG1vbWVudCBJJ20gbm90IHN1
-cmUgYWJvdXQgdXNpbmcgZGFzaGVzCmluc3RlYWQgb2YgdW5kZXJzY29yZXMgZm9yIGZpbGVuYW1l
-cywgYnV0IGluIHRoaXMgY2FzZSB0aGUgZXh0cmEKdW5kZXJzY29yZXMgYXQgdGhlIGJlZ2lubmlu
-ZyBhbmQgZW5kIGFyZSByZWR1bmRhbnQ7IHRoZSAiWEVOXy4uLl9IIiBpcwpzdWZmaWNpZW50IHRv
-IG1ha2UgdGhlIGNvbnRlbnRzIHVuaXF1ZS4KCiAtR2VvcmdlCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============0285124461647402497==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/Ntl2AX1.GAsBwtSOLqDIk0A"; protocol="application/pgp-signature"
+
+--Sig_/Ntl2AX1.GAsBwtSOLqDIk0A
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 07 Jun 2018 07:31:26 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> Hmm, I find this description concerning. Is the field reliably zero when
+> coming from older Xen, or is it not?
+
+It depends on how old.
+If the other sending side has write_tsc_info from 4.6+, then _res1 is zero.
+If it is older, the XC_SAVE_ID_TSC_INFO is eventually not handled anymore.
+At least I could not find the relevant code, even in staging-4.6.
+But then, it is unlikely that migration from 4.5 to 4.6 did not work.
+
+Also, in general the input comes from "remote". So it is untrusted.
+
+Olaf
+
+--Sig_/Ntl2AX1.GAsBwtSOLqDIk0A
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWxk3fwAKCRBdQqD6ppg2
+fs9pAKCGmJKEtpRtZOWiPZlmc2NP5j7Q1QCgiahF92nFXcGCHJv4mrwMLVBJDdA=
+=o7Gd
+-----END PGP SIGNATURE-----
+
+--Sig_/Ntl2AX1.GAsBwtSOLqDIk0A--
+
+
+--===============0285124461647402497==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0285124461647402497==--
