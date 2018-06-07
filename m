@@ -1,13 +1,25 @@
-From: "Hao, Xudong" <xudong.hao@intel.com>
-Subject: Re: Xen 4.11.0 RC5 test result
-Date: Thu, 7 Jun 2018 06:25:45 +0000
-Message-ID: <B8376D2DEA074F45BA033984477C453E3BA373D8@shsmsx102.ccr.corp.intel.com>
-References: <B8376D2DEA074F45BA033984477C453E3BA35846@shsmsx102.ccr.corp.intel.com>
- <b8a780c2-8c9f-29ea-f76b-a2e9beb9c8d5@citrix.com>
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+Subject: Re: [PATCH v2 5/9] xen/gntdev: Allow mappings for DMA
+ buffers
+Date: Thu, 7 Jun 2018 09:39:03 +0300
+Message-ID: <30fa03c0-1b75-c0b1-b14f-8b52ea584e20__2097.60155198655$1528353476$gmane$org@gmail.com>
+References: <20180601114132.22596-1-andr2000@gmail.com>
+ <20180601114132.22596-6-andr2000@gmail.com>
+ <64facf05-0a51-c3d9-9d3b-780893248628@oracle.com>
+ <84217eac-b83b-710f-39ab-c93cad65bf9a@gmail.com>
+ <a172746d-7a97-159f-71a7-511b2d239089@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7114097624760857614=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <b8a780c2-8c9f-29ea-f76b-a2e9beb9c8d5@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=1i32=iz=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1fQoZg-0000SP-JF
+ for xen-devel@lists.xenproject.org; Thu, 07 Jun 2018 06:39:08 +0000
+Received: by mail-lf0-x241.google.com with SMTP id o9-v6so12865599lfk.1
+ for <xen-devel@lists.xenproject.org>; Wed, 06 Jun 2018 23:39:06 -0700 (PDT)
+In-Reply-To: <a172746d-7a97-159f-71a7-511b2d239089@oracle.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -17,198 +29,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
-Cc: Lars Kurth <lars.kurth.xen@gmail.com>, Juergen Gross <jgross@suse.com>, Julien Grall <julien.grall@arm.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, jgross@suse.com, konrad.wilk@oracle.com
+Cc: daniel.vetter@intel.com, matthew.d.roper@intel.com, dongwon.kim@intel.com, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7114097624760857614==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_B8376D2DEA074F45BA033984477C453E3BA373D8shsmsx102ccrcor_"
-
---_000_B8376D2DEA074F45BA033984477C453E3BA373D8shsmsx102ccrcor_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Nested Xen on Xen, KVM on Xen, VMware on Xen, and hyperv on Xen all failed.
-Already updated the result: https://wiki.xenproject.org/wiki/Nested_Virtual=
-ization_in_Xen
-
-
-Thanks,
--Xudong
-
-From: Andrew Cooper [mailto:andrew.cooper3@citrix.com]
-Sent: Tuesday, June 5, 2018 6:28 PM
-To: Hao, Xudong <xudong.hao@intel.com>; xen-devel@lists.xen.org
-Cc: Lars Kurth <lars.kurth.xen@gmail.com>; Juergen Gross <jgross@suse.com>;=
- Julien Grall <julien.grall@arm.com>
-Subject: Re: [Xen-devel] Xen 4.11.0 RC5 test result
-
-On 05/06/18 09:49, Hao, Xudong wrote:
-
-Except Nested, other feature all passed of testing.
-https://wiki.xenproject.org/wiki/Nested_Virtualization_in_Xen
-
-Do you have any further information?
-
-~Andrew
-
---_000_B8376D2DEA074F45BA033984477C453E3BA373D8shsmsx102ccrcor_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:x=3D"urn:schemas-microsoft-com:office:excel" xmlns:dt=3D"uuid:C2F4101=
-0-65B3-11d1-A29F-00AA00C14882" xmlns:m=3D"http://schemas.microsoft.com/offi=
-ce/2004/12/omml" xmlns=3D"http://www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:SimSun;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-@font-face
-	{font-family:SimSun;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;
-	color:black;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:#0563C1;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:#954F72;
-	text-decoration:underline;}
-p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
-	{mso-style-priority:99;
-	mso-style-link:"Plain Text Char";
-	margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;
-	color:black;}
-span.PlainTextChar
-	{mso-style-name:"Plain Text Char";
-	mso-style-priority:99;
-	mso-style-link:"Plain Text";
-	font-family:"Calibri",sans-serif;}
-span.EmailStyle19
-	{mso-style-type:personal;
-	font-family:"Calibri",sans-serif;
-	color:#1F497D;}
-span.EmailStyle20
-	{mso-style-type:personal-reply;
-	font-family:"Calibri",sans-serif;
-	color:#1F497D;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-size:10.0pt;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.25in 1.0in 1.25in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body bgcolor=3D"white" lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal"><a name=3D"_MailEndCompose"><span style=3D"color:#1F=
-497D">Nested Xen on Xen, KVM on Xen, VMware on Xen, and hyperv on Xen all f=
-ailed.<o:p></o:p></span></a></p>
-<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Already updated the re=
-sult: </span>
-<a href=3D"https://wiki.xenproject.org/wiki/Nested_Virtualization_in_Xen">h=
-ttps://wiki.xenproject.org/wiki/Nested_Virtualization_in_Xen</a><o:p></o:p>=
-</p>
-<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
-n></p>
-<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
-n></p>
-<div>
-<p class=3D"MsoNormal"><span style=3D"color:#1F497D">Thanks,<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span style=3D"color:#1F497D">-Xudong<o:p></o:p></sp=
-an></p>
-</div>
-<p class=3D"MsoNormal"><span style=3D"color:#1F497D"><o:p>&nbsp;</o:p></spa=
-n></p>
-<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
-4.0pt">
-<div>
-<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
-0in 0in">
-<p class=3D"MsoNormal"><a name=3D"_____replyseparator"></a><b><span style=
-=3D"color:windowtext">From:</span></b><span style=3D"color:windowtext"> And=
-rew Cooper [mailto:andrew.cooper3@citrix.com]
-<br>
-<b>Sent:</b> Tuesday, June 5, 2018 6:28 PM<br>
-<b>To:</b> Hao, Xudong &lt;xudong.hao@intel.com&gt;; xen-devel@lists.xen.or=
-g<br>
-<b>Cc:</b> Lars Kurth &lt;lars.kurth.xen@gmail.com&gt;; Juergen Gross &lt;j=
-gross@suse.com&gt;; Julien Grall &lt;julien.grall@arm.com&gt;<br>
-<b>Subject:</b> Re: [Xen-devel] Xen 4.11.0 RC5 test result<o:p></o:p></span=
-></p>
-</div>
-</div>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<div>
-<p class=3D"MsoNormal">On 05/06/18 09:49, Hao, Xudong wrote:<span style=3D"=
-font-size:12.0pt"><o:p></o:p></span></p>
-</div>
-<blockquote style=3D"margin-top:5.0pt;margin-bottom:5.0pt">
-<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0in 0in 0in =
-4.0pt">
-<p class=3D"MsoNormal">&nbsp;<o:p></o:p></p>
-<p class=3D"MsoNormal">Except Nested, other feature all passed of testing.<=
-o:p></o:p></p>
-<p class=3D"MsoNormal"><a href=3D"https://wiki.xenproject.org/wiki/Nested_V=
-irtualization_in_Xen">https://wiki.xenproject.org/wiki/Nested_Virtualizatio=
-n_in_Xen</a><o:p></o:p></p>
-</div>
-</blockquote>
-<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;font-family:&quot;Ti=
-mes New Roman&quot;,serif"><br>
-Do you have any further information?<br>
-<br>
-~Andrew<o:p></o:p></span></p>
-</div>
-</div>
-</body>
-</html>
-
---_000_B8376D2DEA074F45BA033984477C453E3BA373D8shsmsx102ccrcor_--
-
-
---===============7114097624760857614==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7114097624760857614==--
+T24gMDYvMDcvMjAxOCAxMjoxOSBBTSwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDA2LzA2
+LzIwMTggMDQ6MTQgQU0sIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdyb3RlOgo+PiBPbiAwNi8w
+NC8yMDE4IDExOjEyIFBNLCBCb3JpcyBPc3Ryb3Zza3kgd3JvdGU6Cj4+PiBPbiAwNi8wMS8yMDE4
+IDA3OjQxIEFNLCBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyB3cm90ZToKPj4+IEBAIC0xMjEsOCAr
+MTQ2LDI3IEBAIHN0YXRpYyB2b2lkIGdudGRldl9mcmVlX21hcChzdHJ1Y3QgZ3JhbnRfbWFwICpt
+YXApCj4+PiAgwqDCoMKgwqDCoCBpZiAobWFwID09IE5VTEwpCj4+PiAgwqDCoMKgwqDCoMKgwqDC
+oMKgIHJldHVybjsKPj4+ICDCoCArI2lmZGVmIENPTkZJR19YRU5fR1JBTlRfRE1BX0FMTE9DCipP
+cHRpb24gMToga2ZyZWUobWFwLT5mcmFtZXMpOyoKPj4+ICvCoMKgwqAgaWYgKG1hcC0+ZG1hX3Zh
+ZGRyKSB7Cj4+PiArwqDCoMKgwqDCoMKgwqAgc3RydWN0IGdudHRhYl9kbWFfYWxsb2NfYXJncyBh
+cmdzOwo+Pj4gKwo+Pj4gK8KgwqDCoMKgwqDCoMKgIGFyZ3MuZGV2ID0gbWFwLT5kbWFfZGV2Owo+
+Pj4gK8KgwqDCoMKgwqDCoMKgIGFyZ3MuY29oZXJlbnQgPSBtYXAtPmRtYV9mbGFncyAmIEdOVERF
+Vl9ETUFfRkxBR19DT0hFUkVOVDsKPj4+ICvCoMKgwqDCoMKgwqDCoCBhcmdzLm5yX3BhZ2VzID0g
+bWFwLT5jb3VudDsKPj4+ICvCoMKgwqDCoMKgwqDCoCBhcmdzLnBhZ2VzID0gbWFwLT5wYWdlczsK
+Pj4+ICvCoMKgwqDCoMKgwqDCoCBhcmdzLmZyYW1lcyA9IG1hcC0+ZnJhbWVzOwo+Pj4gK8KgwqDC
+oMKgwqDCoMKgIGFyZ3MudmFkZHIgPSBtYXAtPmRtYV92YWRkcjsKPj4+ICvCoMKgwqDCoMKgwqDC
+oCBhcmdzLmRldl9idXNfYWRkciA9IG1hcC0+ZG1hX2J1c19hZGRyOwo+Pj4gKwo+Pj4gK8KgwqDC
+oMKgwqDCoMKgIGdudHRhYl9kbWFfZnJlZV9wYWdlcygmYXJncyk7CipPcHRpb24gMjoga2ZyZWUo
+bWFwLT5mcmFtZXMpOyoKPj4+ICvCoMKgwqAgfSBlbHNlCj4+PiArI2VuZGlmCj4+PiAgwqDCoMKg
+wqDCoCBpZiAobWFwLT5wYWdlcykKPj4+ICDCoMKgwqDCoMKgwqDCoMKgwqAgZ250dGFiX2ZyZWVf
+cGFnZXMobWFwLT5jb3VudCwgbWFwLT5wYWdlcyk7Cj4+PiArCj4+PiArI2lmZGVmIENPTkZJR19Y
+RU5fR1JBTlRfRE1BX0FMTE9DCj4+PiArwqDCoMKgIGtmcmVlKG1hcC0+ZnJhbWVzKTsKPj4+ICsj
+ZW5kaWYKPj4+Cj4+PiBDYW4gdGhpcyBiZSBkb25lIHVuZGVyIGlmIChtYXAtPmRtYV92YWRkcikg
+Pwo+Pj4gIMKgIEluIG90aGVyIHdvcmRzLCBpcyBpdAo+Pj4gcG9zc2libGUgZm9yIGRtYV92YWRk
+ciB0byBiZSBOVUxMIGFuZCBzdGlsbCBoYXZlIHVuYWxsb2NhdGVkIGZyYW1lcwo+Pj4gcG9pbnRl
+cj8KPj4gSXQgaXMgcG9zc2libGUgdG8gaGF2ZSB2YWRkciA9PSBOVUxMIGFuZCBmcmFtZXMgIT0g
+TlVMTCBhcyB3ZQo+PiBhbGxvY2F0ZSBmcmFtZXMgb3V0c2lkZSBvZiBnbnR0YWJfZG1hX2FsbG9j
+X3BhZ2VzIHdoaWNoCj4+IG1heSBmYWlsLiBDYWxsaW5nIGtmcmVlIG9uIE5VTEwgcG9pbnRlciBp
+cyBzYWZlLAo+Cj4gSSBhbSBub3QgcXVlc3Rpb25pbmcgc2FmZXR5IG9mIHRoZSBjb2RlLCBJIHdv
+dWxkIGxpa2UgYXZvaWQgYW5vdGhlciBpZmRlZi4KQWgsIEkgbm93IHVuZGVyc3RhbmQsIHNvIHlv
+dSBhcmUgYXNraW5nIGlmIHdlIGNhbiBoYXZlCnRoYXQga2ZyZWUobWFwLT5mcmFtZXMpOyBpbiB0
+aGUgcGxhY2UgKk9wdGlvbiAyKiBJIG1hcmtlZCBhYm92ZS4KVW5mb3J0dW5hdGVseSBubzogbWFw
+LT5mcmFtZXMgaXMgYWxsb2NhdGVkIGJlZm9yZSB3ZSB0cnkgdG8KYWxsb2NhdGUgRE1BIG1lbW9y
+eSwgZS5nLiBiZWZvcmUgZG1hX3ZhZGRyIGlzIHNldDoKWy4uLl0KIMKgwqDCoCDCoMKgwqAgYWRk
+LT5mcmFtZXMgPSBrY2FsbG9jKGNvdW50LCBzaXplb2YoYWRkLT5mcmFtZXNbMF0pLAogwqDCoMKg
+IMKgwqDCoCDCoMKgwqAgwqDCoMKgIMKgwqDCoMKgwqAgR0ZQX0tFUk5FTCk7CiDCoMKgwqAgwqDC
+oMKgIGlmICghYWRkLT5mcmFtZXMpCiDCoMKgwqAgwqDCoMKgIMKgwqDCoCBnb3RvIGVycjsKClsu
+Li5dCiDCoMKgwqAgwqDCoMKgIGlmIChnbnR0YWJfZG1hX2FsbG9jX3BhZ2VzKCZhcmdzKSkKIMKg
+wqDCoCDCoMKgwqAgwqDCoMKgIGdvdG8gZXJyOwoKIMKgwqDCoCDCoMKgwqAgYWRkLT5kbWFfdmFk
+ZHIgPSBhcmdzLnZhZGRyOwpbLi4uXQplcnI6CiDCoMKgwqAgZ250ZGV2X2ZyZWVfbWFwKGFkZCk7
+CgpTbywgaXQgaXMgcG9zc2libGUgdG8gZW50ZXIgZ250ZGV2X2ZyZWVfbWFwIHdpdGgKZnJhbWVz
+ICE9IE5VTEwgYW5kIGRtYV92YWRkciA9PSBOVUxMLiBPcHRpb24gMSBhYm92ZSBjYW5ub3QgYmUg
+dXNlZAphcyBtYXAtPmZyYW1lcyBpcyBuZWVkZWQgZm9yIGdudHRhYl9kbWFfZnJlZV9wYWdlcygm
+YXJncyk7CmFuZCBPcHRpb24gMiBjYW5ub3QgYmUgdXNlZCBhcyBmcmFtZXMgIT0gTlVMTCBhbmQg
+ZG1hX3ZhZGRyID09IE5VTEwuClRodXMsIEkgdGhpbmsgdGhhdCB1bmZvcnR1bmF0ZWx5IHdlIG5l
+ZWQgdGhhdCAjaWZkZWYuCk9wdGlvbiAzIGJlbG93IGNhbiBhbHNvIGJlIGNvbnNpZGVyZWQsIGJ1
+dCB0aGF0IHNlZW1zIHRvIGJlIG5vdCBnb29kCmFzIHdlIGZyZWUgcmVzb3VyY2VzIGluIGRpZmZl
+cmVudCBwbGFjZXMgd2hpY2ggbG9va3MgaW5jb25zaXN0ZW50LgoKU29ycnkgaWYgSSdtIHN0aWxs
+IG1pc3NpbmcgeW91ciBwb2ludC4KPgo+PiBzbwo+PiBJIHNlZSBubyByZWFzb24gdG8gY2hhbmdl
+IHRoaXMgY29kZS4KPj4+PiAgwqDCoMKgwqDCoCBrZnJlZShtYXAtPnBhZ2VzKTsKPj4+PiAgwqDC
+oMKgwqDCoCBrZnJlZShtYXAtPmdyYW50cyk7Cj4+Pj4gIMKgwqDCoMKgwqAga2ZyZWUobWFwLT5t
+YXBfb3BzKTsKPj4+PiBAQCAtMTMyLDcgKzE3Niw4IEBAIHN0YXRpYyB2b2lkIGdudGRldl9mcmVl
+X21hcChzdHJ1Y3QgZ3JhbnRfbWFwICptYXApCj4+Pj4gIMKgwqDCoMKgwqAga2ZyZWUobWFwKTsK
+Pj4+PiAgwqAgfQo+Pj4+ICDCoCAtc3RhdGljIHN0cnVjdCBncmFudF9tYXAgKmdudGRldl9hbGxv
+Y19tYXAoc3RydWN0IGdudGRldl9wcml2Cj4+Pj4gKnByaXYsIGludCBjb3VudCkKPj4+PiArc3Rh
+dGljIHN0cnVjdCBncmFudF9tYXAgKmdudGRldl9hbGxvY19tYXAoc3RydWN0IGdudGRldl9wcml2
+ICpwcml2LAo+Pj4+IGludCBjb3VudCwKPj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIGludCBkbWFfZmxhZ3MpCj4+Pj4gIMKgIHsKPj4+PiAgwqDCoMKgwqDC
+oCBzdHJ1Y3QgZ3JhbnRfbWFwICphZGQ7Cj4+Pj4gIMKgwqDCoMKgwqAgaW50IGk7Cj4+Pj4gQEAg
+LTE1NSw2ICsyMDAsMzcgQEAgc3RhdGljIHN0cnVjdCBncmFudF9tYXAKPj4+PiAqZ250ZGV2X2Fs
+bG9jX21hcChzdHJ1Y3QgZ250ZGV2X3ByaXYgKnByaXYsIGludCBjb3VudCkKPj4+PiAgwqDCoMKg
+wqDCoMKgwqDCoMKgIE5VTEwgPT0gYWRkLT5wYWdlcykKPj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKg
+IGdvdG8gZXJyOwo+Pj4+ICDCoCArI2lmZGVmIENPTkZJR19YRU5fR1JBTlRfRE1BX0FMTE9DCj4+
+Pj4gK8KgwqDCoCBhZGQtPmRtYV9mbGFncyA9IGRtYV9mbGFnczsKPj4+PiArCj4+Pj4gK8KgwqDC
+oCAvKgo+Pj4+ICvCoMKgwqDCoCAqIENoZWNrIGlmIHRoaXMgbWFwcGluZyBpcyByZXF1ZXN0ZWQg
+dG8gYmUgYmFja2VkCj4+Pj4gK8KgwqDCoMKgICogYnkgYSBETUEgYnVmZmVyLgo+Pj4+ICvCoMKg
+wqDCoCAqLwo+Pj4+ICvCoMKgwqAgaWYgKGRtYV9mbGFncyAmIChHTlRERVZfRE1BX0ZMQUdfV0Mg
+fCBHTlRERVZfRE1BX0ZMQUdfQ09IRVJFTlQpKSB7Cj4+Pj4gK8KgwqDCoMKgwqDCoMKgIHN0cnVj
+dCBnbnR0YWJfZG1hX2FsbG9jX2FyZ3MgYXJnczsKPj4+PiArCj4+Pj4gK8KgwqDCoMKgwqDCoMKg
+IGFkZC0+ZnJhbWVzID0ga2NhbGxvYyhjb3VudCwgc2l6ZW9mKGFkZC0+ZnJhbWVzWzBdKSwKPj4+
+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIEdGUF9LRVJORUwp
+Owo+Pj4+ICvCoMKgwqDCoMKgwqDCoCBpZiAoIWFkZC0+ZnJhbWVzKQo+Pj4+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIGdvdG8gZXJyOwo+Pj4+ICsKPj4+PiArwqDCoMKgwqDCoMKgwqAgLyogUmVt
+ZW1iZXIgdGhlIGRldmljZSwgc28gd2UgY2FuIGZyZWUgRE1BIG1lbW9yeS4gKi8KPj4+PiArwqDC
+oMKgwqDCoMKgwqAgYWRkLT5kbWFfZGV2ID0gcHJpdi0+ZG1hX2RldjsKPj4+PiArCj4+Pj4gK8Kg
+wqDCoMKgwqDCoMKgIGFyZ3MuZGV2ID0gcHJpdi0+ZG1hX2RldjsKPj4+PiArwqDCoMKgwqDCoMKg
+wqAgYXJncy5jb2hlcmVudCA9IGRtYV9mbGFncyAmIEdOVERFVl9ETUFfRkxBR19DT0hFUkVOVDsK
+Pj4+PiArwqDCoMKgwqDCoMKgwqAgYXJncy5ucl9wYWdlcyA9IGNvdW50Owo+Pj4+ICvCoMKgwqDC
+oMKgwqDCoCBhcmdzLnBhZ2VzID0gYWRkLT5wYWdlczsKPj4+PiArwqDCoMKgwqDCoMKgwqAgYXJn
+cy5mcmFtZXMgPSBhZGQtPmZyYW1lczsKPj4+PiArCj4+Pj4gK8KgwqDCoMKgwqDCoMKgIGlmIChn
+bnR0YWJfZG1hX2FsbG9jX3BhZ2VzKCZhcmdzKSkKKk9wdGlvbiAzOiBrZnJlZShtYXAtPmZyYW1l
+cyk7Kgo+Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXJyOwo+Pj4+ICsKPj4+PiAr
+wqDCoMKgwqDCoMKgwqAgYWRkLT5kbWFfdmFkZHIgPSBhcmdzLnZhZGRyOwo+Pj4+ICvCoMKgwqDC
+oMKgwqDCoCBhZGQtPmRtYV9idXNfYWRkciA9IGFyZ3MuZGV2X2J1c19hZGRyOwo+Pj4+ICvCoMKg
+wqAgfSBlbHNlCj4+Pj4gKyNlbmRpZgo+Pj4+ICDCoMKgwqDCoMKgIGlmIChnbnR0YWJfYWxsb2Nf
+cGFnZXMoY291bnQsIGFkZC0+cGFnZXMpKQo+Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBl
+cnI7Cj4+Pj4gIMKgIEBAIC0zMjUsNiArNDAxLDE0IEBAIHN0YXRpYyBpbnQgbWFwX2dyYW50X3Bh
+Z2VzKHN0cnVjdCBncmFudF9tYXAKPj4+PiAqbWFwKQo+Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqAg
+bWFwLT51bm1hcF9vcHNbaV0uaGFuZGxlID0gbWFwLT5tYXBfb3BzW2ldLmhhbmRsZTsKPj4+PiAg
+wqDCoMKgwqDCoMKgwqDCoMKgIGlmICh1c2VfcHRlbW9kKQo+Pj4+ICDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCBtYXAtPmt1bm1hcF9vcHNbaV0uaGFuZGxlID0gbWFwLT5rbWFwX29wc1tpXS5o
+YW5kbGU7Cj4+Pj4gKyNpZmRlZiBDT05GSUdfWEVOX0dSQU5UX0RNQV9BTExPQwo+Pj4+ICvCoMKg
+wqDCoMKgwqDCoCBlbHNlIGlmIChtYXAtPmRtYV92YWRkcikgewo+Pj4+ICvCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIHVuc2lnbmVkIGxvbmcgbWZuOwo+Pj4+ICsKPj4+PiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCBtZm4gPSBfX3Bmbl90b19tZm4ocGFnZV90b19wZm4obWFwLT5wYWdlc1tpXSkpOwo+
+Pj4gTm90IHBmbl90b19tZm4oKT8KPj4gSSdkIGxvdmUgdG8sIGJ1dCBwZm5fdG9fbWZuIGlzIG9u
+bHkgZGVmaW5lZCBmb3IgeDg2LCBub3QgQVJNOiBbMV0gYW5kIFsyXQo+PiBUaHVzLAo+Pgo+PiBk
+cml2ZXJzL3hlbi9nbnRkZXYuYzo0MDg6MTA6IGVycm9yOiBpbXBsaWNpdCBkZWNsYXJhdGlvbiBv
+ZiBmdW5jdGlvbgo+PiDigJhwZm5fdG9fbWZu4oCZIFstV2Vycm9yPWltcGxpY2l0LWZ1bmN0aW9u
+LWRlY2xhcmF0aW9uXQo+PiAgwqDCoMKgIG1mbiA9IHBmbl90b19tZm4ocGFnZV90b19wZm4obWFw
+LT5wYWdlc1tpXSkpOwo+Pgo+PiBTbywgSSdsbCBrZWVwIF9fcGZuX3RvX21mbgo+Cj4gSG93IHdp
+bGwgdGhpcyB3b3JrIG9uIG5vbi1QViB4ODY/ClNvLCB5b3UgbWVhbiBJIG5lZWQ6CiNpZmRlZiBD
+T05GSUdfWDg2Cm1mbiA9IHBmbl90b19tZm4ocGFnZV90b19wZm4obWFwLT5wYWdlc1tpXSkpOwoj
+ZWxzZQptZm4gPSBfX3Bmbl90b19tZm4ocGFnZV90b19wZm4obWFwLT5wYWdlc1tpXSkpOwojZW5k
+aWYKPiAtYm9yaXMKPgo+ClRoYW5rIHlvdSwKT2xla3NhbmRyCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
