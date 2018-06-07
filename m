@@ -1,17 +1,17 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 06/11] x86: Reorganise and rename debug
- register fields in struct vcpu
-Date: Thu, 07 Jun 2018 04:59:13 -0600
-Message-ID: <5B19100102000078001C90F1@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH 02/11] x86/vmx: Don't clobber %dr6 while
+ debugging state is lazy
+Date: Thu, 07 Jun 2018 05:05:29 -0600
+Message-ID: <5B19117902000078001C9117@prv1-mh.provo.novell.com>
 References: <1528120755-17455-1-git-send-email-andrew.cooper3@citrix.com>
- <1528120755-17455-7-git-send-email-andrew.cooper3@citrix.com>
- <5B17F72302000078001C8D47@prv1-mh.provo.novell.com>
- <5ab9bca7-041d-aee9-f50b-ef8d450ab652@citrix.com>
+ <1528120755-17455-3-git-send-email-andrew.cooper3@citrix.com>
+ <5B17E6AE02000078001C8C0E@prv1-mh.provo.novell.com>
+ <74282cb2-58c1-b73a-adac-2385a8f3e3ec@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5ab9bca7-041d-aee9-f50b-ef8d450ab652@citrix.com>
+In-Reply-To: <74282cb2-58c1-b73a-adac-2385a8f3e3ec@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,25 +22,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Xen-devel <xen-devel@lists.xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, brian.woods@amd.com, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA2LjA2LjE4IGF0IDE3OjIxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMDYvMDYvMTggMTY6MDAsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAwNC4w
-Ni4xOCBhdCAxNTo1OSwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gQEAg
-LTUxOCw3ICs1MjQsMTAgQEAgc3RydWN0IGFyY2hfdmNwdQo+Pj4gICAgICB2b2lkICAgICAgICAg
-ICAgICAqZnB1X2N0eHQ7Cj4+PiAgICAgIHVuc2lnbmVkIGxvbmcgICAgICB2Z2NfZmxhZ3M7Cj4+
-PiAgICAgIHN0cnVjdCBjcHVfdXNlcl9yZWdzIHVzZXJfcmVnczsKPj4+IC0gICAgdW5zaWduZWQg
-bG9uZyAgICAgIGRlYnVncmVnWzhdOwo+Pj4gKwo+Pj4gKyAgICAvKiBEZWJ1ZyByZWdpc3RlcnMu
-ICovCj4+PiArICAgIHVuc2lnbmVkIGxvbmcgZHJbNF07Cj4+PiArICAgIHVuc2lnbmVkIGxvbmcg
-ZHI2LCBkcjc7Cj4+IFNpbmNlIHlvdSBtYWtlIHRoZSBsYXN0IHR3byBzZXBhcmF0ZSBmaWVsZHMs
-IGFuZCBzaW5jZSB0aGVpciB1cHBlcgo+PiAzMiBiaXRzIGFyZSByZXNlcnZlZC16ZXJvLCB3aHkg
-bm90IG1ha2UgdGhlbSB1aW50MzJfdCwganVzdCBsaWtlCj4+IGRyN19lbXVsIGlzPwo+IAo+IEJl
-Y2F1c2UgX192bXJlYWQoKSB0YWtlcyB1bnNpZ25lZCBsb25nICouCj4gCj4gSSBkaWQgaW5pdGlh
-bGx5IG1ha2UgdGhlbSB1aW50MzJfdCwgdGhlbiBoYWQgdGhlIGNvbXBpbGVyIGNvbXBsYWluIGF0
-Cj4gbWUuICBJIGluZGVudGVkIHRvIGxlYXZlIGEgbm90ZSBpbiB0aGUgY29tbWl0IG1lc3NhZ2Us
-IGJ1dCBJIGZvcmdvdC4gIFNvcnJ5LgoKVGhhdCdzIGZvciBkcjcgb25seSwgdGhlbi4gZHI2IGFu
-ZCBkcjdfZW11bCBjb3VsZCB0aGVuIHNoYXJlIHRoZSBvdGhlcgo2NC1iaXQgc2xvdC4KCkphbgoK
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDA2LjA2LjE4IGF0IDE2OjE2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMDYvMDYvMTggMTQ6NTAsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAwNC4w
+Ni4xOCBhdCAxNTo1OSwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gLS0t
+IGEveGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMKPj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0v
+dm14L3ZteC5jCj4+PiBAQCAtMzY5Niw2ICszNjk2LDcgQEAgdm9pZCB2bXhfdm1leGl0X2hhbmRs
+ZXIoc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJlZ3MpCj4+PiAgICAgICAgICAgICAgICovCj4+PiAg
+ICAgICAgICAgICAgX192bXJlYWQoRVhJVF9RVUFMSUZJQ0FUSU9OLCAmZXhpdF9xdWFsaWZpY2F0
+aW9uKTsKPj4+ICAgICAgICAgICAgICBIVk1UUkFDRV8xRChUUkFQX0RFQlVHLCBleGl0X3F1YWxp
+ZmljYXRpb24pOwo+Pj4gKyAgICAgICAgICAgIF9fcmVzdG9yZV9kZWJ1Z19yZWdpc3RlcnModik7
+Cj4+PiAgICAgICAgICAgICAgd3JpdGVfZGVidWdyZWcoNiwgZXhpdF9xdWFsaWZpY2F0aW9uIHwg
+RFJfU1RBVFVTX1JFU0VSVkVEX09ORSk7Cj4+IFRoZSBjaGFuZ2UgaXMgY2VydGFpbmx5IGNvcnJl
+Y3QgYXMgaXMsIGJ1dCBJJ2Qgc3RpbGwgbGlrZSB0byBwdXQgb3V0IGZvcgo+PiBkaXNjdXNzaW9u
+IHRoZSBhbHRlcm5hdGl2ZSBvcHRpb246Cj4+Cj4+ICAgICBpZiAoIHYtPmFyY2guaHZtX3ZjcHUu
+ZmxhZ19kcl9kaXJ0eSApCj4+ICAgICAgICAgd3JpdGVfZGVidWdyZWcoNiwgZXhpdF9xdWFsaWZp
+Y2F0aW9uIHwgRFJfU1RBVFVTX1JFU0VSVkVEX09ORSk7Cj4+ICAgICBlbHNlCj4+ICAgICAgICAg
+di0+YXJjaC5kZWJ1Z3JlZ1s2XSA9IGV4aXRfcXVhbGlmaWNhdGlvbiB8IERSX1NUQVRVU19SRVNF
+UlZFRF9PTkU7Cj4+Cj4+IEFmdGVyIGFsbCB0aGUgZ3Vlc3QgbWF5IGtub3cgaXQncyBzaW5nbGUg
+c3RlcHBpbmcsIGFuZCBtYXkgbm90IGNhcmUgdG8KPj4gcmVhZCBEUjYgYXQgYWxsLgo+IAo+IEFs
+bCBvZiB0aGlzIGNvZGUgY2hhbmdlcyBhY3Jvc3MgdGhlIHNlcmllcyAoc28gdGhpcyBzcGVjaWZp
+YyBzdWdnZXN0aW9uCj4gaXMgaW5jb3JyZWN0KSwgYnV0IHRvIHRoZSByZWNvbW1lbmRhdGlvbiBp
+biBnZW5lcmFsLi4uCgpXaGlsZSBJJ3ZlIG5vdCBtYWRlIGl0IHRocm91Z2ggdGhlIHNlY29uZCBo
+YWxmIG9mIHRoZSBzZXJpZXMgeWV0LAphbm90aGVyIGNvbnNpZGVyYXRpb246IFRvIGF2b2lkIHRo
+ZSBkb3VibGUgRFI2IHdyaXRlLCB5ZXQgc3RpbGwgYXZvaWQKYW4gaW1tZWRpYXRlIGZ1cnRoZXIg
+ZXhpdCB0byByZXN0b3JlIGRlYnVnIHJlZ2lzdGVycywgd2h5IG5vdAoKICAgIGlmICggdi0+YXJj
+aC5odm1fdmNwdS5mbGFnX2RyX2RpcnR5ICkKICAgICAgICB3cml0ZV9kZWJ1Z3JlZyg2LCBleGl0
+X3F1YWxpZmljYXRpb24gfCBEUl9TVEFUVVNfUkVTRVJWRURfT05FKTsKICAgIGVsc2UKICAgIHsK
+ICAgICAgICB2LT5hcmNoLmRlYnVncmVnWzZdID0gZXhpdF9xdWFsaWZpY2F0aW9uIHwgRFJfU1RB
+VFVTX1JFU0VSVkVEX09ORTsKICAgICAgICBfX3Jlc3RvcmVfZGVidWdfcmVnaXN0ZXJzKHYpOwog
+ICAgfQoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
