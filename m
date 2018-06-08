@@ -1,18 +1,18 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v3] xen: share start flags between PV and PVH
-Date: Fri, 8 Jun 2018 09:12:25 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1806080909320.14699__2228.37691330842$1528474273$gmane$org@sstabellini-ThinkPad-X260>
-References: <20180608084038.19344-1-roger.pau@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 03/11] x86: Initialise debug registers
+ correctly
+Date: Fri, 08 Jun 2018 10:14:28 -0600
+Message-ID: <5B1AAB6402000078001C999B@prv1-mh.provo.novell.com>
+References: <1528120755-17455-1-git-send-email-andrew.cooper3@citrix.com>
+ <1528120755-17455-4-git-send-email-andrew.cooper3@citrix.com>
+ <5B17E80A02000078001C8C1D@prv1-mh.provo.novell.com>
+ <4777cef1-20c9-5d68-f718-7cd7e511e732@citrix.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1478822903-1528474284=:14699"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=fhnu=i2=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fRK05-0008FI-6H
- for xen-devel@lists.xenproject.org; Fri, 08 Jun 2018 16:12:29 +0000
-In-Reply-To: <20180608084038.19344-1-roger.pau@citrix.com>
-Content-ID: <alpine.DEB.2.10.1806080911340.14699@sstabellini-ThinkPad-X260>
+In-Reply-To: <4777cef1-20c9-5d68-f718-7cd7e511e732@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,159 +21,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1478822903-1528474284=:14699
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1806080911341.14699@sstabellini-ThinkPad-X260>
-
-On Fri, 8 Jun 2018, Roger Pau Monne wrote:
-> Use a global variable to store the start flags for both PV and PVH.
-> This allows the xen_initial_domain macro to work properly on PVH.
-> 
-> Note that ARM is also switched to use the new variable.
-> 
-> Signed-off-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-
-As I already mentioned, the ARM part is OK. However, is the issue that
-xen_start_info is not available on PVH? We had the same problem on ARM
-and solved it by faking a xen_start_info page, see the top of
-arch/arm/xen/enlighten.c.
-
-I would love to get rid of that, but to do that, we also need to remove
-the xen_start_info referece at drivers/tty/hvc/hvc_xen.c:255:
-
-  if (!xen_start_info->console.domU.evtchn)
-		return -ENODEV;
-
-
-> ---
-> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-> Cc: Juergen Gross <jgross@suse.com>
-> Cc: Stefano Stabellini <sstabellini@kernel.org>
-> Cc: xen-devel@lists.xenproject.org
-> ---
-> Changes since v2:
->  - Declare xen_start_flags outside of the XEN_DOM0 guard and include
->    types.h.
-> 
-> Changes since v1:
->  - Switch ARM to also use the new xen_start_flags.
-> ---
->  arch/arm/xen/enlighten.c     | 7 ++++---
->  arch/x86/xen/enlighten.c     | 7 +++++++
->  arch/x86/xen/enlighten_pv.c  | 1 +
->  arch/x86/xen/enlighten_pvh.c | 1 +
->  include/xen/xen.h            | 6 +++++-
->  5 files changed, 18 insertions(+), 4 deletions(-)
-> 
-> diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
-> index ba7f4c8f5c3e..a99d5edf7bdf 100644
-> --- a/arch/arm/xen/enlighten.c
-> +++ b/arch/arm/xen/enlighten.c
-> @@ -59,6 +59,9 @@ struct xen_memory_region xen_extra_mem[XEN_EXTRA_MEM_MAX_REGIONS] __initdata;
->  
->  static __read_mostly unsigned int xen_events_irq;
->  
-> +uint32_t xen_start_flags;
-> +EXPORT_SYMBOL(xen_start_flags);
-> +
->  int xen_remap_domain_gfn_array(struct vm_area_struct *vma,
->  			       unsigned long addr,
->  			       xen_pfn_t *gfn, int nr,
-> @@ -282,9 +285,7 @@ void __init xen_early_init(void)
->  	xen_setup_features();
->  
->  	if (xen_feature(XENFEAT_dom0))
-> -		xen_start_info->flags |= SIF_INITDOMAIN|SIF_PRIVILEGED;
-> -	else
-> -		xen_start_info->flags &= ~(SIF_INITDOMAIN|SIF_PRIVILEGED);
-> +		xen_start_flags |= SIF_INITDOMAIN|SIF_PRIVILEGED;
->  
->  	if (!console_set_on_cmdline && !xen_initial_domain())
->  		add_preferred_console("hvc", 0, NULL);
-> diff --git a/arch/x86/xen/enlighten.c b/arch/x86/xen/enlighten.c
-> index c9081c6671f0..3b5318505c69 100644
-> --- a/arch/x86/xen/enlighten.c
-> +++ b/arch/x86/xen/enlighten.c
-> @@ -64,6 +64,13 @@ struct shared_info xen_dummy_shared_info;
->  __read_mostly int xen_have_vector_callback;
->  EXPORT_SYMBOL_GPL(xen_have_vector_callback);
->  
-> +/*
-> + * NB: needs to live in .data because it's used by xen_prepare_pvh which runs
-> + * before clearing the bss.
-> + */
-> +uint32_t xen_start_flags __attribute__((section(".data"))) = 0;
-> +EXPORT_SYMBOL(xen_start_flags);
-> +
->  /*
->   * Point at some empty memory to start with. We map the real shared_info
->   * page as soon as fixmap is up and running.
-> diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-> index 357969a3697c..8d4e2e1ae60b 100644
-> --- a/arch/x86/xen/enlighten_pv.c
-> +++ b/arch/x86/xen/enlighten_pv.c
-> @@ -1203,6 +1203,7 @@ asmlinkage __visible void __init xen_start_kernel(void)
->  		return;
->  
->  	xen_domain_type = XEN_PV_DOMAIN;
-> +	xen_start_flags = xen_start_info->flags;
->  
->  	xen_setup_features();
->  
-> diff --git a/arch/x86/xen/enlighten_pvh.c b/arch/x86/xen/enlighten_pvh.c
-> index aa1c6a6831a9..c85d1a88f476 100644
-> --- a/arch/x86/xen/enlighten_pvh.c
-> +++ b/arch/x86/xen/enlighten_pvh.c
-> @@ -97,6 +97,7 @@ void __init xen_prepare_pvh(void)
->  	}
->  
->  	xen_pvh = 1;
-> +	xen_start_flags = pvh_start_info.flags;
->  
->  	msr = cpuid_ebx(xen_cpuid_base() + 2);
->  	pfn = __pa(hypercall_page);
-> diff --git a/include/xen/xen.h b/include/xen/xen.h
-> index 9d4340c907d1..1e1d9bd0bd37 100644
-> --- a/include/xen/xen.h
-> +++ b/include/xen/xen.h
-> @@ -25,12 +25,16 @@ extern bool xen_pvh;
->  #define xen_hvm_domain()	(xen_domain_type == XEN_HVM_DOMAIN)
->  #define xen_pvh_domain()	(xen_pvh)
->  
-> +#include <linux/types.h>
-> +
-> +extern uint32_t xen_start_flags;
-> +
->  #ifdef CONFIG_XEN_DOM0
->  #include <xen/interface/xen.h>
->  #include <asm/xen/hypervisor.h>
->  
->  #define xen_initial_domain()	(xen_domain() && \
-> -				 xen_start_info && xen_start_info->flags & SIF_INITDOMAIN)
-> +				 (xen_start_flags & SIF_INITDOMAIN))
->  #else  /* !CONFIG_XEN_DOM0 */
->  #define xen_initial_domain()	(0)
->  #endif	/* CONFIG_XEN_DOM0 */
-> -- 
-> 2.17.1
-> 
---8323329-1478822903-1528474284=:14699
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1478822903-1528474284=:14699--
+Pj4+IE9uIDA4LjA2LjE4IGF0IDE3OjQyLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMDYvMDYvMTggMTQ6NTYsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAwNC4w
+Ni4xOCBhdCAxNTo1OSwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gLS0t
+IGEveGVuL2FyY2gveDg2L2RvbWFpbi5jCj4+PiArKysgYi94ZW4vYXJjaC94ODYvZG9tYWluLmMK
+Pj4+IEBAIC0zMjIsNiArMzIyLDE0IEBAIHZvaWQgZnJlZV92Y3B1X3N0cnVjdChzdHJ1Y3QgdmNw
+dSAqdikKPj4+ICAgICAgZnJlZV94ZW5oZWFwX3BhZ2Uodik7Cj4+PiAgfQo+Pj4gIAo+Pj4gK3N0
+YXRpYyB2b2lkIGluaXRpYWxpc2VfcmVnaXN0ZXJzKHN0cnVjdCB2Y3B1ICp2KQo+Pj4gK3sKPj4+
+ICsgICAgdi0+YXJjaC51c2VyX3JlZ3MuZWZsYWdzID0gWDg2X0VGTEFHU19NQlM7Cj4+IElmIHlv
+dSB1c2VkIC0+cmZsYWdzIGhlcmUsIHlvdSBjb3VsZCAoYW5kIGltbyBiZXR0ZXIgd291bGQpIGFs
+c28gLi4uCj4+Cj4+PiBAQCAtMzkwNyw3ICszOTA4LDEwIEBAIHZvaWQgaHZtX3ZjcHVfcmVzZXRf
+c3RhdGUoc3RydWN0IHZjcHUgKnYsIHVpbnQxNl90IAo+IGNzLCB1aW50MTZfdCBpcCkKPj4+ICAg
+ICAgdi0+YXJjaC51c2VyX3JlZ3MucmZsYWdzID0gWDg2X0VGTEFHU19NQlM7Cj4+PiAgICAgIHYt
+PmFyY2gudXNlcl9yZWdzLnJkeCA9IDB4MDAwMDBmMDA7Cj4+PiAgICAgIHYtPmFyY2gudXNlcl9y
+ZWdzLnJpcCA9IGlwOwo+Pj4gLSAgICBtZW1zZXQoJnYtPmFyY2guZGVidWdyZWcsIDAsIHNpemVv
+Zih2LT5hcmNoLmRlYnVncmVnKSk7Cj4+PiArCj4+PiArICAgIG1lbXNldCgmdi0+YXJjaC5kZWJ1
+Z3JlZywgMCwgc2l6ZW9mKHYtPmFyY2guZGVidWdyZWcpIC0gMTYpOwo+Pj4gKyAgICB2LT5hcmNo
+LmRlYnVncmVnWzZdID0gWDg2X0RSNl9ERUZBVUxUOwo+Pj4gKyAgICB2LT5hcmNoLmRlYnVncmVn
+WzddID0gWDg2X0RSN19ERUZBVUxUOwo+PiAuLi4gY2FsbCB0aGF0IGZ1bmN0aW9uIGZyb20gaGVy
+ZSAoZHJvcHBpbmcgdGhlIHNldHRpbmcgb2YgLnJmbGFncwo+PiB2aXNpYmxlIGluIGNvbnRleHQp
+Lgo+Pgo+PiBJZiB5b3UgZGVjaWRlIHRvIGdvIHRoYXQgcm91dGUsCj4+IFJldmlld2VkLWJ5OiBK
+YW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4gCj4gVW5mb3J1bmF0ZWx5LCBJIGRvbid0
+IGFncmVlLiAgTGFyZ2UgcXVhbnRpdGllcyBvZiBodm1fdmNwdV9yZXNldF9zdGF0ZSgpCj4gd291
+bGQgbG9naWNhbGx5IGxpdmUgaW4gaW5pdGlhbGlzZV9yZWdpc3RlcnMoKSwgYnV0IGRlZmluaXRl
+bHkgZG9uJ3QKPiB3YW50IHRvIGJlIGluIHRoZSB2Y3B1X2luaXRpYWxpc2UoKSBwYXRoIGF0IHRo
+aXMgcG9pbnQuCj4gCj4gaW5pdGlhbGlzZV9yZWdpc3RlcnMoKSBpcyByZXN0cmljdGVkIHRvIHRo
+ZSBzaW1wbGUgcmVnaXN0ZXJzLCBhbmQgaW4KPiBwYXJ0aWN1bGFyIGNhbm5vdCBjb3BlIHdpdGgg
+Y29udHJvbCByZWdpc3RlcnMgd2hpY2ggYXJlIHdpbGRseSBkaWZmZXJlbnQKPiBiZXR3ZWVuIFBW
+IGFuZCBIVk0gZ3Vlc3RzLgo+IAo+IEkgY2FuJ3QgZmluZCBhIHJlYXNvbmFibGUgc3BsaXQgKG9y
+IGZvciB0aGF0IG1hdHRlciwgbmFtZSkgb2YgYSBzaGFyZWQKPiBoZWxwZXIgZnVuY3Rpb24gYmV0
+d2VlbiBwYXJ0IG9mIGh2bV92Y3B1X3Jlc2V0X3N0YXRlKCkgYW5kIHRoZSB2Y3B1Cj4gY3JlYXRp
+b24gcGF0aC4gIEZvciB0aGUgc2FrZSBvZiB0d28gY29uc3RhbnRzLCBJJ20gbm90IHN1cmUgdHJ5
+aW5nIHRvCj4gY29tYmluZSB0aGUgcGF0aHMgaXMgdXNlZnVsLCB1bmxlc3MgeW91J3ZlIGdvdCBh
+IGJldHRlciBzdWdnZXN0aW9uLgoKV2hhdCdzIHdyb25nIHdpdGggdXRpbGl6aW5nIHRoZSBsaXR0
+bGUgYml0IG9mIHNoYXJpbmcgdGhhdCdzIHBvc3NpYmxlIGF0CnRoaXMgcG9pbnQsIGFuZCBleHRl
+bmQgaXQgKGlmIHN1aXRhYmxlKSBsYXRlcj8gQW55IGJpdCBvZiBhdm9pZGVkCnJlZHVuZGFuY3kg
+aXMgaGVscGZ1bCBpbW8uIExldCBtZSBzYXkgaXQgdGhhdCB3YXkgLSBJJ20gbm90IGdvaW5nIHRv
+Cm1ha2UgbXkgUi1iIGRlcGVuZGVudCBvbiB3aGljaCByb3V0ZSB5b3UgZ28sIGJ1dCBJJ2QgbGlr
+ZSB0byBhc2sKdGhhdCB5b3UgcGxlYXNlIGNvbnNpZGVyIHRoZSBzdWdnZXN0ZWQgYWx0ZXJuYXRp
+dmUgYW5vdGhlciB0aW1lLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
