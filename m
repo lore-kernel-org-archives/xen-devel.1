@@ -1,16 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 07/11] x86/emul: Add pending_dbg field to
- x86_event
-Date: Fri, 08 Jun 2018 06:34:13 -0600
-Message-ID: <5B1A77C502000078001C976F@prv1-mh.provo.novell.com>
-References: <1528120755-17455-1-git-send-email-andrew.cooper3@citrix.com>
- <1528120755-17455-8-git-send-email-andrew.cooper3@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v2 2/4] xen/kbdif: Add unique input device
+ identifier
+Date: Fri, 8 Jun 2018 14:40:58 +0200
+Message-ID: <55c529bd-0f88-e844-0cdf-b51e19d555e4@suse.com>
+References: <20180608060831.20194-1-andr2000@gmail.com>
+ <20180608060831.20194-3-andr2000@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1528120755-17455-8-git-send-email-andrew.cooper3@citrix.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=+jl5=i2=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fRGhS-0004R3-Kx
+ for xen-devel@lists.xenproject.org; Fri, 08 Jun 2018 12:41:02 +0000
+In-Reply-To: <20180608060831.20194-3-andr2000@gmail.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,39 +24,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, brian.woods@amd.com, Roger Pau Monne <roger.pau@citrix.com>
+To: Oleksandr Andrushchenko <andr2000@gmail.com>, xen-devel@lists.xenproject.org, konrad.wilk@oracle.com
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA0LjA2LjE4IGF0IDE1OjU5LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gQEAgLTgyLDkgKzgzLDE2IEBAIHZvaWQgcHZfaW5qZWN0X2V2ZW50KGNvbnN0IHN0cnVj
-dCB4ODZfZXZlbnQgKmV2ZW50KQo+ICAgICAgICAgICAgICBlcnJvcl9jb2RlIHw9IFBGRUNfdXNl
-cl9tb2RlOwo+ICAKPiAgICAgICAgICB0cmFjZV9wdl9wYWdlX2ZhdWx0KGV2ZW50LT5jcjIsIGVy
-cm9yX2NvZGUpOwo+IC0gICAgfQo+IC0gICAgZWxzZQo+ICsgICAgICAgIGJyZWFrOwo+ICsKPiAr
-ICAgIGNhc2UgVFJBUF9kZWJ1ZzoKPiArICAgICAgICBjdXJyLT5hcmNoLmRyNiB8PSBldmVudC0+
-cGVuZGluZ19kYmc7CgpDb25zaWRlcmluZyB3aGF0IHlvdSd2ZSBiZWVuIHRlbGxpbmcgbWUgb3Zl
-ciBhbmQgb3Zlciwgc2hvdWxkbid0CnlvdSBtYXNrIG91dCB0aGUgbG93IGZvdXIgYml0cyBoZXJl
-IGJlZm9yZSBPUmluZyBpbiBuZXcgc3RhdGU/Cgo+ICsgICAgICAgIC8qIEZhbGx0aHJvdWdoICov
-Cj4gKwo+ICsgICAgZGVmYXVsdDoKPiAgICAgICAgICB0cmFjZV9wdl90cmFwKHZlY3RvciwgcmVn
-cy0+cmlwLCB1c2VfZXJyb3JfY29kZSwgZXJyb3JfY29kZSk7CgpJIGFsc28gd29uZGVyIHdoZXRo
-ZXIgdHJhY2luZyB3b3VsZG4ndCBiZW5lZml0IGZyb20gYmVpbmcgaW5mb3JtZWQKYWJvdXQgcGVu
-ZGluZ19kYmcgaGVyZSBpbnN0ZWFkIG9mIHRoZSBlcnJvciBjb2RlLiBOb3Qgc29tZXRoaW5nCmZv
-ciB0aGlzIHBhdGNoIChvciBzZXJpZXMpIG9mIGNvdXJzZSwganVzdCBhcyBhIHJlbWFyay4KClNp
-bmNlIHRoZSBlcXVpdmFsZW50IEhWTSBjb2RlIGxvb2tzIHRvIGJlIG1pc3NpbmcsIEkgdGFrZSBp
-dCB0aGF0J3MKZ29pbmcgdG8gYmUgYWRkcmVzc2VkIGluIGxhdGVyIHBhdGNoZXMgb2YgdGhlIHNl
-cmllcz8KCj4gLS0tIGEveGVuL2FyY2gveDg2L3g4Nl9lbXVsYXRlL3g4Nl9lbXVsYXRlLmgKPiAr
-KysgYi94ZW4vYXJjaC94ODYveDg2X2VtdWxhdGUveDg2X2VtdWxhdGUuaAo+IEBAIC04OCw3ICs4
-OCwxMCBAQCBzdHJ1Y3QgeDg2X2V2ZW50IHsKPiAgICAgIHVpbnQ4X3QgICAgICAgdHlwZTsgICAg
-ICAgICAvKiBYODZfRVZFTlRUWVBFXyogKi8KPiAgICAgIHVpbnQ4X3QgICAgICAgaW5zbl9sZW47
-ICAgICAvKiBJbnN0cnVjdGlvbiBsZW5ndGggKi8KPiAgICAgIGludDMyX3QgICAgICAgZXJyb3Jf
-Y29kZTsgICAvKiBYODZfRVZFTlRfTk9fRUMgaWYgbi9hICovCj4gLSAgICB1bnNpZ25lZCBsb25n
-IGNyMjsgICAgICAgICAgLyogT25seSBmb3IgVFJBUF9wYWdlX2ZhdWx0IGgvdyBleGNlcHRpb24g
-Ki8KPiArICAgIHVuaW9uIHsKPiArICAgICAgICB1bnNpZ25lZCBsb25nIGNyMjsgICAgICAgICAv
-KiAjUEYgKi8KPiArICAgICAgICB1bnNpZ25lZCBsb25nIHBlbmRpbmdfZGJnOyAvKiAjREIgKG5l
-dyBEUjYgYml0cywgcG9zaXRpdmUgcG9sYXJpdHkpICovCj4gKyAgICB9Owo+ICB9OwoKU2VlaW5n
-IHRoYXQgdGhpcyBpcyB0aGUgb25seSB4ODZfZW11bGF0ZSogY2hhbmdlLCBJIGRvbid0IHN1cHBv
-c2UKeW91IGZhbmN5IG1ha2luZyB0aGUgZW11bGF0b3IgY29ycmVjdGx5IHJhaXNlIFg4Nl9EUjZf
-QkQgYXQgdGhlCnNhbWUgdGltZT8KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+T24gMDgvMDYvMTggMDg6MDgsIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdyb3RlOgo+IEZyb206
+IE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNv
+bT4KPiAKPiBJZiBmcm9udGVuZCBpcyBjb25maWd1cmVkIHRvIGV4cG9zZSBtdWx0aXBsZSBpbnB1
+dCBkZXZpY2UgaW5zdGFuY2VzCj4gdGhlbiBiYWNrZW5kIG1heSByZXF1aXJlIGEgd2F5IHRvIHVu
+aXF1ZWx5IGlkZW50aWZ5IGNvbmNyZXRlIGlucHV0Cj4gZGV2aWNlIHdpdGhpbiB0aGUgZnJvbnRl
+bmQuIFRoaXMgaXMgdXNlZnVsIGZvciB1c2UtY2FzZXMgd2hlcmUKPiB2aXJ0dWFsIGlucHV0IGRl
+dmljZSBuZWVkcyB0byBiZSBtYXRjaGVkIHRvIHBoeXNpY2FsIGlucHV0IGRldmljZS4KPiBBZGQg
+WGVuQnVzICJ1bmlxdWUtaWQiIG5vZGUgcGFyYW1ldGVyLCBzbyB0aGlzIHNvcnQgb2YgdXNlLWNh
+c2VzIGNhbgo+IGJlIGltcGxlbWVudGVkLgo+IAo+IFNpZ25lZC1vZmYtYnk6IE9sZWtzYW5kciBB
+bmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KPiBSZXZpZXdl
+ZC1ieTogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQud2lsa0BvcmFjbGUuY29tPgoKUmVs
+ZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4K
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
