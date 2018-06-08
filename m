@@ -1,16 +1,26 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [ovmf baseline-only test] 74807: all pass
-Date: Fri, 8 Jun 2018 18:30:26 +0100
-Message-ID: <osstest-74807-mainreport@xen.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 5/9] xen/gntdev: Allow mappings for DMA
+ buffers
+Date: Fri, 8 Jun 2018 10:59:07 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1806081025030.14699__36830.7808567353$1528480693$gmane$org@sstabellini-ThinkPad-X260>
+References: <20180601114132.22596-1-andr2000@gmail.com>
+ <20180601114132.22596-6-andr2000@gmail.com>
+ <64facf05-0a51-c3d9-9d3b-780893248628@oracle.com>
+ <84217eac-b83b-710f-39ab-c93cad65bf9a@gmail.com>
+ <a172746d-7a97-159f-71a7-511b2d239089@oracle.com>
+ <30fa03c0-1b75-c0b1-b14f-8b52ea584e20@gmail.com>
+ <78dc2fc4-cdac-05b7-2c34-22b69e7e009c@oracle.com>
+ <4be24882-185d-01e3-6aa1-751e341433c7@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1627656648-1528478825=:14699"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=1385=i2=xenproject.org=prvs=690cb3755=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1fRLDd-0006vC-GX
- for xen-devel@lists.xenproject.org; Fri, 08 Jun 2018 17:30:33 +0000
+ <srs0=fhnu=i2=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1fRLfL-0000SV-RY
+ for xen-devel@lists.xenproject.org; Fri, 08 Jun 2018 17:59:11 +0000
+In-Reply-To: <4be24882-185d-01e3-6aa1-751e341433c7@gmail.com>
+Content-ID: <alpine.DEB.2.10.1806081027100.14699@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,178 +29,234 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Oleksandr Andrushchenko <andr2000@gmail.com>
+Cc: jgross@suse.com, Stefano Stabellini <sstabellini@kernel.org>, dongwon.kim@intel.com, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, julien.grall@arm.com, daniel.vetter@intel.com, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, matthew.d.roper@intel.com, linux-media@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
-NDgwNyBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhzLmNpdHJpdGUubmV0L35vc3N0
-ZXN0L3Rlc3Rsb2dzL2xvZ3MvNzQ4MDcvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4gdGhpcyBm
-bGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiBv
-dm1mICAgICAgICAgICAgICAgICAyMzY2MDExMzZmZWE1ZGNmYWQ0YjU3Y2U0YTgxY2Y5ODBhMjJl
-MWY0CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICA5MWMzMWZmMDRhN2E3
-MmI0YjBlNDc2OTcyYWQzYzc2ZTAzYTEwNmEyCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAgNzQ3OTIg
-IDIwMTgtMDYtMDYgMTI6Mjc6MjIgWiAgICAyIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgIDc0
-ODA3ICAyMDE4LTA2LTA4IDA4OjQ5OjU4IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQ
-ZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgRGFuZGFuIEJpIDxkYW5k
-YW4uYmlAaW50ZWwuY29tPgogIEV6cmEgR29kZnJleSA8ZWdvZGZyZXkucWR0QHF1YWxjb21tZGF0
-YWNlbnRlci5jb20+CiAgTGltaW5nIEdhbyA8bGltaW5nLmdhb0BpbnRlbC5jb20+CiAgTWljaGFl
-bCBaaW1tZXJtYW5uIDxzaWdtYWVwc2lsb245MkBnbWFpbC5jb20+CiAgU3RhciBaZW5nIDxzdGFy
-LnplbmdAaW50ZWwuY29tPgogIFl1bmh1YSBGZW5nIDx5dW5odWF4LmZlbmdAaW50ZWwuY29tPgoK
-am9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
-ODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4
-Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9u
-IG9zc3Rlc3QueHMuY2l0cml0ZS5uZXQKbG9nczogL2hvbWUvb3NzdGVzdC9sb2dzCmltYWdlczog
-L2hvbWUvb3NzdGVzdC9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxh
-YmxlIGF0CiAgICBodHRwOi8vb3NzdGVzdC54cy5jaXRyaXRlLm5ldC9+b3NzdGVzdC90ZXN0bG9n
-cy9sb2dzCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5i
-aXRzLnhlbnNvdXJjZS5jb20vZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaCBu
-b3QgYXBwbGljYWJsZS4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgMjM2NjAxMTM2ZmVhNWRjZmFkNGI1N2NlNGE4MWNm
-OTgwYTIyZTFmNApBdXRob3I6IExpbWluZyBHYW8gPGxpbWluZy5nYW9AaW50ZWwuY29tPgpEYXRl
-OiAgIE1vbiBKdW4gNCAxMzozNjo0MCAyMDE4ICswODAwCgogICAgVWVmaUNwdVBrZzogUmVtb3Zl
-IFg4NiBBU00gYW5kIFMgZmlsZXMKICAgIAogICAgTkFTTSBoYXMgcmVwbGFjZWQgQVNNIGFuZCBT
-IGZpbGVzLgogICAgMS4gUmVtb3ZlIEFTTSBmcm9tIGFsbCBtb2R1bGVzIGV4cGVjdCBmb3IgdGhl
-IG9uZXMgaW4gUmVzZXRWZWN0b3IgZGlyZWN0b3J5LgogICAgVGhlIG9uZXMgaW4gUmVzZXRWZWN0
-b3IgZGlyZWN0b3J5IGFyZSBpbmNsdWRlZCBieSBWdGYwLm5hc21iLiBUaGV5IGFyZQogICAgYWxz
-byBuYXNtIHN0eWxlLgogICAgMi4gUmVtb3ZlIFMgZmlsZXMgZnJvbSB0aGUgZHJpdmVycyBvbmx5
-LgogICAgMy4gaHR0cHM6Ly9idWd6aWxsYS50aWFub2NvcmUub3JnL3Nob3dfYnVnLmNnaT9pZD04
-ODEKICAgIEFmdGVyIE5BU00gaXMgdXBkYXRlZCwgUyBmaWxlcyBjYW4gYmUgcmVtb3ZlZCBmcm9t
-IExpYnJhcnkuCiAgICAKICAgIENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0
-aW9uIEFncmVlbWVudCAxLjEKICAgIFNpZ25lZC1vZmYtYnk6IExpbWluZyBHYW8gPGxpbWluZy5n
-YW9AaW50ZWwuY29tPgogICAgUmV2aWV3ZWQtYnk6IEVyaWMgRG9uZyA8ZXJpYy5kb25nQGludGVs
-LmNvbT4KICAgIFJldmlld2VkLWJ5OiBMYXN6bG8gRXJzZWsgPGxlcnNla0ByZWRoYXQuY29tPgoK
-Y29tbWl0IGVjNTFjMDU5MzZlZTQ2ZjVhOGNjMTFlM2IxMjdlMTUzYWYzZTM5NDMKQXV0aG9yOiBM
-aW1pbmcgR2FvIDxsaW1pbmcuZ2FvQGludGVsLmNvbT4KRGF0ZTogICBNb24gSnVuIDQgMTM6MzY6
-MzAgMjAxOCArMDgwMAoKICAgIFNvdXJjZUxldmVsRGVidWdQa2c6IFJlbW92ZSBYODYgQVNNIGFu
-ZCBTIGZpbGVzCiAgICAKICAgIE5BU00gaGFzIHJlcGxhY2VkIEFTTSBhbmQgUyBmaWxlcy4KICAg
-IDEuIFJlbW92ZSBBU00gZnJvbSBhbGwgbW9kdWxlcy4KICAgIDIuIFJlbW92ZSBTIGZpbGVzIGZy
-b20gdGhlIGRyaXZlcnMgb25seS4KICAgIDMuIGh0dHBzOi8vYnVnemlsbGEudGlhbm9jb3JlLm9y
-Zy9zaG93X2J1Zy5jZ2k/aWQ9ODgxCiAgICBBZnRlciBOQVNNIGlzIHVwZGF0ZWQsIFMgZmlsZXMg
-Y2FuIGJlIHJlbW92ZWQgZnJvbSBMaWJyYXJ5LgogICAgCiAgICBDb250cmlidXRlZC11bmRlcjog
-VGlhbm9Db3JlIENvbnRyaWJ1dGlvbiBBZ3JlZW1lbnQgMS4xCiAgICBTaWduZWQtb2ZmLWJ5OiBM
-aW1pbmcgR2FvIDxsaW1pbmcuZ2FvQGludGVsLmNvbT4KICAgIFJldmlld2VkLWJ5OiBSdWl5dSBO
-aSA8cnVpeXUubmlAaW50ZWwuY29tPgoKY29tbWl0IGNjYmQ4ZDg0YTYwMjczOTRhNDFhYzk0MDE3
-N2Q2ZmZhNDE4YjIzODQKQXV0aG9yOiBMaW1pbmcgR2FvIDxsaW1pbmcuZ2FvQGludGVsLmNvbT4K
-RGF0ZTogICBNb24gSnVuIDQgMTM6MzY6MjAgMjAxOCArMDgwMAoKICAgIEludGVsRnJhbWV3b3Jr
-TW9kdWxlUGtnOiBSZW1vdmUgWDg2IEFTTSBhbmQgUyBmaWxlcwogICAgCiAgICBOQVNNIGhhcyBy
-ZXBsYWNlZCBBU00gYW5kIFMgZmlsZXMuCiAgICAxLiBSZW1vdmUgQVNNIGZyb20gYWxsIG1vZHVs
-ZXMuCiAgICAyLiBSZW1vdmUgUyBmaWxlcyBmcm9tIHRoZSBkcml2ZXJzIG9ubHkuCiAgICAzLiBo
-dHRwczovL2J1Z3ppbGxhLnRpYW5vY29yZS5vcmcvc2hvd19idWcuY2dpP2lkPTg4MQogICAgQWZ0
-ZXIgTkFTTSBpcyB1cGRhdGVkLCBTIGZpbGVzIGNhbiBiZSByZW1vdmVkIGZyb20gTGlicmFyeS4K
-ICAgIAogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmlidXRpb24gQWdyZWVt
-ZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTogTGltaW5nIEdhbyA8bGltaW5nLmdhb0BpbnRlbC5j
-b20+CiAgICBSZXZpZXdlZC1ieTogTWljaGFlbCBLaW5uZXkgPG1pY2hhZWwuZC5raW5uZXlAaW50
-ZWwuY29tPgoKY29tbWl0IDZkNjE0NjQ5YWJmYjRmYzgwZDMwMzQ2N2JjMWEzMDg1MWUxOTFmZGQK
-QXV0aG9yOiBMaW1pbmcgR2FvIDxsaW1pbmcuZ2FvQGludGVsLmNvbT4KRGF0ZTogICBNb24gSnVu
-IDQgMTM6MzU6NTggMjAxOCArMDgwMAoKICAgIE1kZU1vZHVsZVBrZzogUmVtb3ZlIFg4NiBBU00g
-YW5kIFMgZmlsZXMKICAgIAogICAgTkFTTSBoYXMgcmVwbGFjZWQgQVNNIGFuZCBTIGZpbGVzLgog
-ICAgMS4gUmVtb3ZlIEFTTSBmcm9tIGFsbCBtb2R1bGVzLgogICAgMi4gUmVtb3ZlIFMgZmlsZXMg
-ZnJvbSB0aGUgZHJpdmVycyBvbmx5LgogICAgMy4gaHR0cHM6Ly9idWd6aWxsYS50aWFub2NvcmUu
-b3JnL3Nob3dfYnVnLmNnaT9pZD04ODEKICAgIEFmdGVyIE5BU00gaXMgdXBkYXRlZCwgUyBmaWxl
-cyBjYW4gYmUgcmVtb3ZlZCBmcm9tIExpYnJhcnkuCiAgICAKICAgIENvbnRyaWJ1dGVkLXVuZGVy
-OiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAxLjEKICAgIFNpZ25lZC1vZmYtYnk6
-IExpbWluZyBHYW8gPGxpbWluZy5nYW9AaW50ZWwuY29tPgogICAgUmV2aWV3ZWQtYnk6IFN0YXIg
-WmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KCmNvbW1pdCAxMzY4ODkzMGFlOWFkNTEwMWYxMGQy
-OGY2NTAzODIwNThlNDQ5NjE2CkF1dGhvcjogTGltaW5nIEdhbyA8bGltaW5nLmdhb0BpbnRlbC5j
-b20+CkRhdGU6ICAgTW9uIEp1biA0IDEzOjI2OjIyIDIwMTggKzA4MDAKCiAgICBNZGVQa2c6IFJl
-bW92ZSBYODYgQVNNIGFuZCBTIGZpbGVzCiAgICAKICAgIE5BU00gaGFzIHJlcGxhY2VkIEFTTSBh
-bmQgUyBmaWxlcy4KICAgIDEuIFJlbW92ZSBBU00gZnJvbSBhbGwgbW9kdWxlcy4KICAgIDIuIFJl
-bW92ZSBTIGZpbGVzIGZyb20gdGhlIGRyaXZlcnMgb25seS4KICAgIDMuIGh0dHBzOi8vYnVnemls
-bGEudGlhbm9jb3JlLm9yZy9zaG93X2J1Zy5jZ2k/aWQ9ODgxCiAgICBBZnRlciBOQVNNIGlzIHVw
-ZGF0ZWQsIFMgZmlsZXMgY2FuIGJlIHJlbW92ZWQgZnJvbSBMaWJyYXJ5LgogICAgCiAgICBDb250
-cmlidXRlZC11bmRlcjogVGlhbm9Db3JlIENvbnRyaWJ1dGlvbiBBZ3JlZW1lbnQgMS4xCiAgICBT
-aWduZWQtb2ZmLWJ5OiBMaW1pbmcgR2FvIDxsaW1pbmcuZ2FvQGludGVsLmNvbT4KICAgIFJldmll
-d2VkLWJ5OiBNaWNoYWVsIEtpbm5leSA8bWljaGFlbC5kLmtpbm5leUBpbnRlbC5jb20+Cgpjb21t
-aXQgYjIwMDg1NDU0ZTkxYmIxZGVkODcwMDk3MjJjOTk5NGI0Njg0NDcyYwpBdXRob3I6IE1pY2hh
-ZWwgWmltbWVybWFubiA8c2lnbWFlcHNpbG9uOTJAZ21haWwuY29tPgpEYXRlOiAgIFRodSBKdW4g
-NyAwOTowOTowNyAyMDE4ICswMjAwCgogICAgQXJtUGtnL0FybURpc2Fzc2VtYmxlckxpYjogZml4
-IGNoZWNrIGZvciBNU1IgaW5zdHJ1Y3Rpb24KICAgIAogICAgR0NDOCByZXBvcnRlZCBpdCB3aXRo
-IHRoZSBmb2xsb3dpbmcgd2FybmluZzoKICAgIEFybVBrZy9MaWJyYXJ5L0FybURpc2Fzc2VtYmxl
-ckxpYi9Bcm1EaXNhc3NlbWJsZXIuYzogSW4gZnVuY3Rpb24gJ0Rpc2Fzc2VtYmxlQXJtSW5zdHJ1
-Y3Rpb24nOgogICAgQXJtUGtnL0xpYnJhcnkvQXJtRGlzYXNzZW1ibGVyTGliL0FybURpc2Fzc2Vt
-Ymxlci5jOjM5NzozMDogZXJyb3I6IGJpdHdpc2UKICAgIGNvbXBhcmlzb24gYWx3YXlzIGV2YWx1
-YXRlcyB0byBmYWxzZSBbLVdlcnJvcj10YXV0b2xvZ2ljYWwtY29tcGFyZV0KICAgIGlmICgoT3BD
-b2RlICAmIDB4MGRiMDAwMDApID09IDB4MDMyMDAwMDApIHsKICAgIAogICAgVGhpcyBjb25kaXRp
-b24gdHJpZXMgdG8gYmUgdHJ1ZSBmb3IgYm90aCB0aGUgaW1tZWRpYXRlIGFuZCB0aGUgcmVnaXN0
-ZXIKICAgIHZlcnNpb24gb2YgdGhlIE1TUiBpbnN0cnVjdGlvbi4gVGhleSBnZXQgaWRlbnRpZmll
-ZCBpbnNpZGUgdGhlIGlmLWJsb2NrCiAgICB1c2luZyB0aGUgdmFyaWFibGUgSSwgd2hpY2ggY29u
-dGFpbnMgdGhlIHZhbHVlIG9mIGJpdCAyNS4KICAgIAogICAgVGhlIHByb2JsZW0gd2l0aCB0aGUg
-Y29tcGFyaXNvbiByZXBvcnRlZCBieSBHQ0MgaXMgdGhhdCB0aGUKICAgIGJpdG1hc2sgZXhjbHVk
-ZXMgYml0IDI1LCB3aGlsZSB0aGUgdmFsdWUgcmVxdWlyZXMgaXQgdG8gYmUgc2V0IHRvIG9uZToK
-ICAgIDB4MGRiMDAwMDA6IDAwMDAgMTEwMTEgMCAxMSAwMCAwMCAwMDAwIDAwMDAwMDAwMDAwMAog
-ICAgMHgwMzIwMDAwMDogMDAwMCAwMDExMCAwIDEwIDAwIDAwIDAwMDAgMDAwMDAwMDAwMDAwCiAg
-ICAgICAgICAgICAgICAgICAgICAgXgogICAgU28gdGhlIHNvbHV0aW9uIGlzIHRvIGp1c3QgZG9u
-J3QgcmVxdWlyZSB0aGF0IGJpdCB0byBiZSBzZXQsIGJlY2F1c2UKICAgIGl0IGdldHMgY2hlY2tl
-ZCBsYXRlciB1c2luZyAnSScsIHdoaWNoIHJlc3VsdHMgaW4gdGhlIGZvbGxvd2luZyB2YWx1ZToK
-ICAgIDB4MDEyMDAwMDA6IDAwMDAgMDAwMTAgMCAxMCAwMCAwMCAwMDAwIDAwMDAwMDAwMDAwMAog
-ICAgCiAgICBDb250cmlidXRlZC11bmRlcjogVGlhbm9Db3JlIENvbnRyaWJ1dGlvbiBBZ3JlZW1l
-bnQgMS4xCiAgICBTaWduZWQtb2ZmLWJ5OiBNaWNoYWVsIFppbW1lcm1hbm4gPHNpZ21hZXBzaWxv
-bjkyQGdtYWlsLmNvbT4KICAgIFJldmlld2VkLWJ5OiBBcmQgQmllc2hldXZlbCA8YXJkLmJpZXNo
-ZXV2ZWxAbGluYXJvLm9yZz4KCmNvbW1pdCBlYzUwZjc1MzViYzU3NDdhOTVjNmVhZTNjMDkwN2Nj
-ZGM4ZWNlMWE1CkF1dGhvcjogRGFuZGFuIEJpIDxkYW5kYW4uYmlAaW50ZWwuY29tPgpEYXRlOiAg
-IFR1ZSBKdW4gNSAxMDowMTowNCAyMDE4ICswODAwCgogICAgTWRlTW9kdWxlUGtnL0Rpc3BsYXlV
-cGRhdGVQcm9ncmVzc0xpYjogRml4IEVDQyBpc3N1ZXMKICAgIAogICAgTWFrZSB0aGUgY29tbWVu
-dCBhbGlnbiB3aXRoIEVkazIgY29kaW5nIHN0eWxlLgogICAgCiAgICBDYzogU3RhciBaZW5nIDxz
-dGFyLnplbmdAaW50ZWwuY29tPgogICAgQ2M6IEVyaWMgRG9uZyA8ZXJpYy5kb25nQGludGVsLmNv
-bT4KICAgIENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVu
-dCAxLjEKICAgIFNpZ25lZC1vZmYtYnk6IERhbmRhbiBCaSA8ZGFuZGFuLmJpQGludGVsLmNvbT4K
-ICAgIFJldmlld2VkLWJ5OiBTdGFyIFplbmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+Cgpjb21taXQg
-Y2IwMDRlYjBhZDMwOGE0YmFjODYwMzdjZTY3YTU2ZDllZDkyNGU1MApBdXRob3I6IEV6cmEgR29k
-ZnJleSA8ZWdvZGZyZXkucWR0QHF1YWxjb21tZGF0YWNlbnRlci5jb20+CkRhdGU6ICAgTW9uIEFw
-ciAzMCAyMjozMzozMSAyMDE4ICswODAwCgogICAgQmFzZVRvb2xzL1ZvbEluZm86IFVwZGF0ZSBF
-RkkgRlYgRklMRVRZUEVTIGZvciBuZXcgTU0gdHlwZXMuCiAgICAKICAgIEFkZCBzdXBwb3J0IGZv
-ciB0aGUgZm9sbG93aW5nIHR5cGVzIHRvIFZvbEluZm86CiAgICAgIEVGSV9GVl9GSUxFVFlQRV9N
-TV9TVEFOREFMT05FCiAgICAgIEVGSV9GVl9GSUxFVFlQRV9NTV9DT1JFX1NUQU5EQUxPTkUKICAg
-IAogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmlidXRpb24gQWdyZWVtZW50
-IDEuMQogICAgU2lnbmVkLW9mZi1ieTogRXpyYSBHb2RmcmV5IDxlZ29kZnJleS5xZHRAcXVhbGNv
-bW1kYXRhY2VudGVyLmNvbT4KICAgIFJldmlld2VkLWJ5OiBKaWV3ZW4gWWFvIDxqaWV3ZW4ueWFv
-QGludGVsLmNvbT4KCmNvbW1pdCAxNzljMmY5N2Y5NDk1MDllYzU1ZjBlYzdjYjg0NDgwZmIwYzAx
-NWE3CkF1dGhvcjogWXVuaHVhIEZlbmcgPHl1bmh1YXguZmVuZ0BpbnRlbC5jb20+CkRhdGU6ICAg
-VGh1IE1heSAyNCAxMDoyNToyMSAyMDE4ICswODAwCgogICAgQmFzZVRvb2xzOiBEaXNwbGF5IGJv
-dGggSGV4IGFuZCBpbnRlZ2VyIHZhbHVlIGZvcm1hdCBvZiBQQ0QgdmFsdWUKICAgIAogICAgSWYg
-dGhlIFBDRCdzIGRhdHVtIHR5cGUgaXMgVUlOVDgsIFVJTlQxNiwgVUlOVDMyIG9yIFVJTlQ2NCwg
-dGhlbiBpbgogICAgdGhlIHJlcG9ydCB3aWxsIGRpc3BsYXkgYm90aCBoZXhhZGVjaW1hbCBmb3Jt
-YXQgYW5kIGludGVnZXIgZm9ybWF0CiAgICBvZiBQQ0QgdmFsdWUuCiAgICAKICAgIENjOiBMaW1p
-bmcgR2FvIDxsaW1pbmcuZ2FvQGludGVsLmNvbT4KICAgIENjOiBZb25naG9uZyBaaHUgPHlvbmdo
-b25nLnpodUBpbnRlbC5jb20+CiAgICBDb250cmlidXRlZC11bmRlcjogVGlhbm9Db3JlIENvbnRy
-aWJ1dGlvbiBBZ3JlZW1lbnQgMS4xCiAgICBTaWduZWQtb2ZmLWJ5OiBZdW5odWEgRmVuZyA8eXVu
-aHVheC5mZW5nQGludGVsLmNvbT4KICAgIFJldmlld2VkLWJ5OiBZb25naG9uZyBaaHUgPHlvbmdo
-b25nLnpodUBpbnRlbC5jb20+Cgpjb21taXQgMjM4ZDliNWM2NDUyMGFjZGQ3ODQ2NjdhMjkzMjY4
-MDRkZGU3ZWEzMQpBdXRob3I6IFl1bmh1YSBGZW5nIDx5dW5odWF4LmZlbmdAaW50ZWwuY29tPgpE
-YXRlOiAgIFRodSBNYXkgMjQgMTE6MjU6MjEgMjAxOCArMDgwMAoKICAgIEJhc2VUb29sczogU29y
-dCBQQ0QgYnkgdG9rZW4gc3BhY2UgZmlyc3QgdGhlbiBieSBQY2RDTmFtZQogICAgCiAgICBTb3J0
-IFBDRCBieSB0b2tlbiBzcGFjZSBmaXJzdCwgdGhlbiBieSBQY2RDTmFtZSBpbiB0aGUgYnVpbGQg
-cmVwb3J0LgogICAgCiAgICBDYzogTGltaW5nIEdhbyA8bGltaW5nLmdhb0BpbnRlbC5jb20+CiAg
-ICBDYzogWW9uZ2hvbmcgWmh1IDx5b25naG9uZy56aHVAaW50ZWwuY29tPgogICAgQ29udHJpYnV0
-ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmlidXRpb24gQWdyZWVtZW50IDEuMQogICAgU2lnbmVk
-LW9mZi1ieTogWXVuaHVhIEZlbmcgPHl1bmh1YXguZmVuZ0BpbnRlbC5jb20+CiAgICBSZXZpZXdl
-ZC1ieTogWW9uZ2hvbmcgWmh1IDx5b25naG9uZy56aHVAaW50ZWwuY29tPgoKY29tbWl0IDg2NTNl
-YTIwODhhMzg2MDc1YzBkNjViZmM4OTFhZDNjODA3MmRiOWYKQXV0aG9yOiBTdGFyIFplbmcgPHN0
-YXIuemVuZ0BpbnRlbC5jb20+CkRhdGU6ICAgVHVlIEp1biA1IDE2OjA0OjM4IDIwMTggKzA4MDAK
-CiAgICBJbnRlbFNpbGljb25Qa2cgSW50ZWxWVGREeGU6IEZpeCBpbmNvcnJlY3QgY29kZSB0byBj
-bGVhciBWVGQgZXJyb3IKICAgIAogICAgQWNjb3JkaW5nIHRvIFZUZCBzcGVjLCBTb2Z0d2FyZSB3
-cml0ZXMgdGhlIHZhbHVlIHJlYWQgZnJvbSB0aGlzCiAgICBmaWVsZCAoRikgdG8gQ2xlYXIgaXQu
-IEJ1dCBjdXJyZW50IGNvZGUgaXMgdXNpbmcgMCB0byBjbGVhciB0aGUKICAgIGZpZWxkLCB0aGF0
-IGlzIGluY29ycmVjdC4KICAgIAogICAgQW5kIFJfRlNUU19SRUcgcmVnaXN0ZXIgdmFsdWUgY2xl
-YXJpbmcgc2hvdWxkIGJlIG5vdCBpbiB0aGUgZm9yIGxvb3AuCiAgICAKICAgIFdpdGhvdXQgdGhp
-cyBwYXRjaCwgd2Ugd2lsbCBzZWUgc2FtZSBWVGQgZXJyb3IgbWVzc2FnZSBhcHBlYXJzIGFnYWlu
-CiAgICBhbmQgYWdhaW4gYWZ0ZXIgaXQgb2NjdXJzIGZpcnN0IHRpbWUuCiAgICAKICAgIENjOiBK
-aWV3ZW4gWWFvIDxqaWV3ZW4ueWFvQGludGVsLmNvbT4KICAgIENvbnRyaWJ1dGVkLXVuZGVyOiBU
-aWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAxLjEKICAgIFNpZ25lZC1vZmYtYnk6IFN0
-YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KICAgIFJldmlld2VkLWJ5OiBKaWV3ZW4gWWFv
-IDxqaWV3ZW4ueWFvQGludGVsLmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1627656648-1528478825=:14699
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1806081027101.14699@sstabellini-ThinkPad-X260>
+
+On Fri, 8 Jun 2018, Oleksandr Andrushchenko wrote:
+> On 06/08/2018 12:46 AM, Boris Ostrovsky wrote:
+> > (Stefano, question for you at the end)
+> > 
+> > On 06/07/2018 02:39 AM, Oleksandr Andrushchenko wrote:
+> > > On 06/07/2018 12:19 AM, Boris Ostrovsky wrote:
+> > > > On 06/06/2018 04:14 AM, Oleksandr Andrushchenko wrote:
+> > > > > On 06/04/2018 11:12 PM, Boris Ostrovsky wrote:
+> > > > > > On 06/01/2018 07:41 AM, Oleksandr Andrushchenko wrote:
+> > > > > > @@ -121,8 +146,27 @@ static void gntdev_free_map(struct grant_map
+> > > > > > *map)
+> > > > > >         if (map == NULL)
+> > > > > >             return;
+> > > > > >     +#ifdef CONFIG_XEN_GRANT_DMA_ALLOC
+> > > *Option 1: kfree(map->frames);*
+> > > > > > +    if (map->dma_vaddr) {
+> > > > > > +        struct gnttab_dma_alloc_args args;
+> > > > > > +
+> > > > > > +        args.dev = map->dma_dev;
+> > > > > > +        args.coherent = map->dma_flags & GNTDEV_DMA_FLAG_COHERENT;
+> > > > > > +        args.nr_pages = map->count;
+> > > > > > +        args.pages = map->pages;
+> > > > > > +        args.frames = map->frames;
+> > > > > > +        args.vaddr = map->dma_vaddr;
+> > > > > > +        args.dev_bus_addr = map->dma_bus_addr;
+> > > > > > +
+> > > > > > +        gnttab_dma_free_pages(&args);
+> > > *Option 2: kfree(map->frames);*
+> > > > > > +    } else
+> > > > > > +#endif
+> > > > > >         if (map->pages)
+> > > > > >             gnttab_free_pages(map->count, map->pages);
+> > > > > > +
+> > > > > > +#ifdef CONFIG_XEN_GRANT_DMA_ALLOC
+> > > > > > +    kfree(map->frames);
+> > > > > > +#endif
+> > > > > > 
+> > > > > > Can this be done under if (map->dma_vaddr) ?
+> > > > > >     In other words, is it
+> > > > > > possible for dma_vaddr to be NULL and still have unallocated frames
+> > > > > > pointer?
+> > > > > It is possible to have vaddr == NULL and frames != NULL as we
+> > > > > allocate frames outside of gnttab_dma_alloc_pages which
+> > > > > may fail. Calling kfree on NULL pointer is safe,
+> > > > I am not questioning safety of the code, I would like avoid another
+> > > > ifdef.
+> > > Ah, I now understand, so you are asking if we can have
+> > > that kfree(map->frames); in the place *Option 2* I marked above.
+> > > Unfortunately no: map->frames is allocated before we try to
+> > > allocate DMA memory, e.g. before dma_vaddr is set:
+> > > [...]
+> > >          add->frames = kcalloc(count, sizeof(add->frames[0]),
+> > >                        GFP_KERNEL);
+> > >          if (!add->frames)
+> > >              goto err;
+> > > 
+> > > [...]
+> > >          if (gnttab_dma_alloc_pages(&args))
+> > >              goto err;
+> > > 
+> > >          add->dma_vaddr = args.vaddr;
+> > > [...]
+> > > err:
+> > >      gntdev_free_map(add);
+> > > 
+> > > So, it is possible to enter gntdev_free_map with
+> > > frames != NULL and dma_vaddr == NULL. Option 1 above cannot be used
+> > > as map->frames is needed for gnttab_dma_free_pages(&args);
+> > > and Option 2 cannot be used as frames != NULL and dma_vaddr == NULL.
+> > > Thus, I think that unfortunately we need that #ifdef.
+> > > Option 3 below can also be considered, but that seems to be not good
+> > > as we free resources in different places which looks inconsistent.
+> > 
+> > I was only thinking of option 2. But if it is possible to have frames !=
+> > NULL and dma_vaddr == NULL then perhaps we indeed will have to live with
+> > the extra ifdef.
+> ok
+> > 
+> > > Sorry if I'm still missing your point.
+> > > > > so
+> > > > > I see no reason to change this code.
+> > > > > > >         kfree(map->pages);
+> > > > > > >         kfree(map->grants);
+> > > > > > >         kfree(map->map_ops);
+> > > > > > > @@ -132,7 +176,8 @@ static void gntdev_free_map(struct grant_map
+> > > > > > > *map)
+> > > > > > >         kfree(map);
+> > > > > > >     }
+> > > > > > >     -static struct grant_map *gntdev_alloc_map(struct gntdev_priv
+> > > > > > > *priv, int count)
+> > > > > > > +static struct grant_map *gntdev_alloc_map(struct gntdev_priv
+> > > > > > > *priv,
+> > > > > > > int count,
+> > > > > > > +                      int dma_flags)
+> > > > > > >     {
+> > > > > > >         struct grant_map *add;
+> > > > > > >         int i;
+> > > > > > > @@ -155,6 +200,37 @@ static struct grant_map
+> > > > > > > *gntdev_alloc_map(struct gntdev_priv *priv, int count)
+> > > > > > >             NULL == add->pages)
+> > > > > > >             goto err;
+> > > > > > >     +#ifdef CONFIG_XEN_GRANT_DMA_ALLOC
+> > > > > > > +    add->dma_flags = dma_flags;
+> > > > > > > +
+> > > > > > > +    /*
+> > > > > > > +     * Check if this mapping is requested to be backed
+> > > > > > > +     * by a DMA buffer.
+> > > > > > > +     */
+> > > > > > > +    if (dma_flags & (GNTDEV_DMA_FLAG_WC |
+> > > > > > > GNTDEV_DMA_FLAG_COHERENT)) {
+> > > > > > > +        struct gnttab_dma_alloc_args args;
+> > > > > > > +
+> > > > > > > +        add->frames = kcalloc(count, sizeof(add->frames[0]),
+> > > > > > > +                      GFP_KERNEL);
+> > > > > > > +        if (!add->frames)
+> > > > > > > +            goto err;
+> > > > > > > +
+> > > > > > > +        /* Remember the device, so we can free DMA memory. */
+> > > > > > > +        add->dma_dev = priv->dma_dev;
+> > > > > > > +
+> > > > > > > +        args.dev = priv->dma_dev;
+> > > > > > > +        args.coherent = dma_flags & GNTDEV_DMA_FLAG_COHERENT;
+> > > > > > > +        args.nr_pages = count;
+> > > > > > > +        args.pages = add->pages;
+> > > > > > > +        args.frames = add->frames;
+> > > > > > > +
+> > > > > > > +        if (gnttab_dma_alloc_pages(&args))
+> > > *Option 3: kfree(map->frames);*
+> > > > > > > +            goto err;
+> > > > > > > +
+> > > > > > > +        add->dma_vaddr = args.vaddr;
+> > > > > > > +        add->dma_bus_addr = args.dev_bus_addr;
+> > > > > > > +    } else
+> > > > > > > +#endif
+> > > > > > >         if (gnttab_alloc_pages(count, add->pages))
+> > > > > > >             goto err;
+> > > > > > >     @@ -325,6 +401,14 @@ static int map_grant_pages(struct
+> > > > > > > grant_map
+> > > > > > > *map)
+> > > > > > >             map->unmap_ops[i].handle = map->map_ops[i].handle;
+> > > > > > >             if (use_ptemod)
+> > > > > > >                 map->kunmap_ops[i].handle =
+> > > > > > > map->kmap_ops[i].handle;
+> > > > > > > +#ifdef CONFIG_XEN_GRANT_DMA_ALLOC
+> > > > > > > +        else if (map->dma_vaddr) {
+> > > > > > > +            unsigned long mfn;
+> > > > > > > +
+> > > > > > > +            mfn = __pfn_to_mfn(page_to_pfn(map->pages[i]));
+> > > > > > Not pfn_to_mfn()?
+> > > > > I'd love to, but pfn_to_mfn is only defined for x86, not ARM: [1]
+> > > > > and [2]
+> > > > > Thus,
+> > > > > 
+> > > > > drivers/xen/gntdev.c:408:10: error: implicit declaration of function
+> > > > > ‘pfn_to_mfn’ [-Werror=implicit-function-declaration]
+> > > > >       mfn = pfn_to_mfn(page_to_pfn(map->pages[i]));
+> > > > > 
+> > > > > So, I'll keep __pfn_to_mfn
+> > > > How will this work on non-PV x86?
+> > > So, you mean I need:
+> > > #ifdef CONFIG_X86
+> > > mfn = pfn_to_mfn(page_to_pfn(map->pages[i]));
+> > > #else
+> > > mfn = __pfn_to_mfn(page_to_pfn(map->pages[i]));
+> > > #endif
+> > > 
+> > I'd rather fix it in ARM code. Stefano, why does ARM uses the
+> > underscored version?
+> Do you want me to add one more patch for ARM to wrap __pfn_to_mfn
+> with static inline for ARM? e.g.
+> static inline ...pfn_to_mfn(...)
+> {
+>     __pfn_to_mfn();
+> }
+
+
+A Xen on ARM guest doesn't actually know the mfns behind its own
+pseudo-physical pages. This is why we stopped using pfn_to_mfn and
+started using pfn_to_bfn instead, which will generally return "pfn",
+unless the page is a foreign grant. See include/xen/arm/page.h.
+pfn_to_bfn was also introduced on x86. For example, see the usage of
+pfn_to_bfn in drivers/xen/swiotlb-xen.c. Otherwise, if you don't care
+about other mapped grants, you can just use pfn_to_gfn, that always
+returns pfn.
+
+
+Also, for your information, we support different page granularities in
+Linux as a Xen guest, see the comment at include/xen/arm/page.h:
+
+  /*
+   * The pseudo-physical frame (pfn) used in all the helpers is always based
+   * on Xen page granularity (i.e 4KB).
+   *
+   * A Linux page may be split across multiple non-contiguous Xen page so we
+   * have to keep track with frame based on 4KB page granularity.
+   *
+   * PV drivers should never make a direct usage of those helpers (particularly
+   * pfn_to_gfn and gfn_to_pfn).
+   */
+
+A Linux page could be 64K, but a Xen page is always 4K. A granted page
+is also 4K. We have helpers to take into account the offsets to map
+multiple Xen grants in a single Linux page, see for example
+drivers/xen/grant-table.c:gnttab_foreach_grant. Most PV drivers have
+been converted to be able to work with 64K pages correctly, but if I
+remember correctly gntdev.c is the only remaining driver that doesn't
+support 64K pages yet, so you don't have to deal with it if you don't
+want to.
+--8323329-1627656648-1528478825=:14699
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1627656648-1528478825=:14699--
