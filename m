@@ -1,20 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 02/11] x86/vmx: Don't clobber %dr6 while
- debugging state is lazy
-Date: Fri, 08 Jun 2018 10:10:08 -0600
-Message-ID: <5B1AAA6002000078001C9989@prv1-mh.provo.novell.com>
-References: <1528120755-17455-1-git-send-email-andrew.cooper3@citrix.com>
- <1528120755-17455-3-git-send-email-andrew.cooper3@citrix.com>
- <5B17E6AE02000078001C8C0E@prv1-mh.provo.novell.com>
- <74282cb2-58c1-b73a-adac-2385a8f3e3ec@citrix.com>
- <5B19117902000078001C9117@prv1-mh.provo.novell.com>
- <81318c8d-47ae-a126-3a1f-f55c65e09b41@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v3] xen: share start flags between PV and PVH
+Date: Fri, 8 Jun 2018 09:12:25 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1806080909320.14699__2228.37691330842$1528474273$gmane$org@sstabellini-ThinkPad-X260>
+References: <20180608084038.19344-1-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1478822903-1528474284=:14699"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <81318c8d-47ae-a126-3a1f-f55c65e09b41@citrix.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=fhnu=i2=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1fRK05-0008FI-6H
+ for xen-devel@lists.xenproject.org; Fri, 08 Jun 2018 16:12:29 +0000
+In-Reply-To: <20180608084038.19344-1-roger.pau@citrix.com>
+Content-ID: <alpine.DEB.2.10.1806080911340.14699@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,47 +21,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA4LjA2LjE4IGF0IDE3OjU4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMDcvMDYvMTggMTI6MDUsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAwNi4w
-Ni4xOCBhdCAxNjoxNiwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gT24g
-MDYvMDYvMTggMTQ6NTAsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4+IE9uIDA0LjA2LjE4IGF0
-IDE1OjU5LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+Pj4+IC0tLSBhL3hl
-bi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jCj4+Pj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vdm14
-L3ZteC5jCj4+Pj4+IEBAIC0zNjk2LDYgKzM2OTYsNyBAQCB2b2lkIHZteF92bWV4aXRfaGFuZGxl
-cihzdHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncykKPj4+Pj4gICAgICAgICAgICAgICAqLwo+Pj4+
-PiAgICAgICAgICAgICAgX192bXJlYWQoRVhJVF9RVUFMSUZJQ0FUSU9OLCAmZXhpdF9xdWFsaWZp
-Y2F0aW9uKTsKPj4+Pj4gICAgICAgICAgICAgIEhWTVRSQUNFXzFEKFRSQVBfREVCVUcsIGV4aXRf
-cXVhbGlmaWNhdGlvbik7Cj4+Pj4+ICsgICAgICAgICAgICBfX3Jlc3RvcmVfZGVidWdfcmVnaXN0
-ZXJzKHYpOwo+Pj4+PiAgICAgICAgICAgICAgd3JpdGVfZGVidWdyZWcoNiwgZXhpdF9xdWFsaWZp
-Y2F0aW9uIHwgRFJfU1RBVFVTX1JFU0VSVkVEX09ORSk7Cj4+Pj4gVGhlIGNoYW5nZSBpcyBjZXJ0
-YWlubHkgY29ycmVjdCBhcyBpcywgYnV0IEknZCBzdGlsbCBsaWtlIHRvIHB1dCBvdXQgZm9yCj4+
-Pj4gZGlzY3Vzc2lvbiB0aGUgYWx0ZXJuYXRpdmUgb3B0aW9uOgo+Pj4+Cj4+Pj4gICAgIGlmICgg
-di0+YXJjaC5odm1fdmNwdS5mbGFnX2RyX2RpcnR5ICkKPj4+PiAgICAgICAgIHdyaXRlX2RlYnVn
-cmVnKDYsIGV4aXRfcXVhbGlmaWNhdGlvbiB8IERSX1NUQVRVU19SRVNFUlZFRF9PTkUpOwo+Pj4+
-ICAgICBlbHNlCj4+Pj4gICAgICAgICB2LT5hcmNoLmRlYnVncmVnWzZdID0gZXhpdF9xdWFsaWZp
-Y2F0aW9uIHwgRFJfU1RBVFVTX1JFU0VSVkVEX09ORTsKPj4+Pgo+Pj4+IEFmdGVyIGFsbCB0aGUg
-Z3Vlc3QgbWF5IGtub3cgaXQncyBzaW5nbGUgc3RlcHBpbmcsIGFuZCBtYXkgbm90IGNhcmUgdG8K
-Pj4+PiByZWFkIERSNiBhdCBhbGwuCj4+PiBBbGwgb2YgdGhpcyBjb2RlIGNoYW5nZXMgYWNyb3Nz
-IHRoZSBzZXJpZXMgKHNvIHRoaXMgc3BlY2lmaWMgc3VnZ2VzdGlvbgo+Pj4gaXMgaW5jb3JyZWN0
-KSwgYnV0IHRvIHRoZSByZWNvbW1lbmRhdGlvbiBpbiBnZW5lcmFsLi4uCj4+IFdoaWxlIEkndmUg
-bm90IG1hZGUgaXQgdGhyb3VnaCB0aGUgc2Vjb25kIGhhbGYgb2YgdGhlIHNlcmllcyB5ZXQsCj4+
-IGFub3RoZXIgY29uc2lkZXJhdGlvbjogVG8gYXZvaWQgdGhlIGRvdWJsZSBEUjYgd3JpdGUsIHll
-dCBzdGlsbCBhdm9pZAo+PiBhbiBpbW1lZGlhdGUgZnVydGhlciBleGl0IHRvIHJlc3RvcmUgZGVi
-dWcgcmVnaXN0ZXJzLCB3aHkgbm90Cj4+Cj4+ICAgICBpZiAoIHYtPmFyY2guaHZtX3ZjcHUuZmxh
-Z19kcl9kaXJ0eSApCj4+ICAgICAgICAgd3JpdGVfZGVidWdyZWcoNiwgZXhpdF9xdWFsaWZpY2F0
-aW9uIHwgRFJfU1RBVFVTX1JFU0VSVkVEX09ORSk7Cj4+ICAgICBlbHNlCj4+ICAgICB7Cj4+ICAg
-ICAgICAgdi0+YXJjaC5kZWJ1Z3JlZ1s2XSA9IGV4aXRfcXVhbGlmaWNhdGlvbiB8IERSX1NUQVRV
-U19SRVNFUlZFRF9PTkU7Cj4+ICAgICAgICAgX19yZXN0b3JlX2RlYnVnX3JlZ2lzdGVycyh2KTsK
-Pj4gICAgIH0KPiAKPiBEbyB5b3UgcmVhbGx5IHRoaW5rIHRoZSBhZGRlZCBjb21wbGV4aXR5IGlz
-IHdvcnRoIHNoYXZpbmcgYSBmZXcgY3ljbGVzCj4gb2ZmIGFuIGFsbW9zdCB1bnVzZWQgY29sZCBw
-YXRoPyAgVGhlIGRvdWJsZSAlZHI2IHdyaXRlICh3aGljaCBpc24ndAo+IHNlcmlhbGlzaW5nKSBo
-YXBwZW5zIGF0IG1vc3Qgb25jZSBwZXIgdmNwdSBjb250ZXh0IHN3aXRjaCwgYW5kIG9ubHkgZXZl
-cgo+IHdoZW4gdGhlIGd1ZXN0IGlzIGRlYnVnZ2luZy4KClllYWgsIHlvdSdyZSByaWdodCAtIGtl
-ZXAgaXQgYXMgaXMuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1478822903-1528474284=:14699
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1806080911341.14699@sstabellini-ThinkPad-X260>
+
+On Fri, 8 Jun 2018, Roger Pau Monne wrote:
+> Use a global variable to store the start flags for both PV and PVH.
+> This allows the xen_initial_domain macro to work properly on PVH.
+> 
+> Note that ARM is also switched to use the new variable.
+> 
+> Signed-off-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+
+As I already mentioned, the ARM part is OK. However, is the issue that
+xen_start_info is not available on PVH? We had the same problem on ARM
+and solved it by faking a xen_start_info page, see the top of
+arch/arm/xen/enlighten.c.
+
+I would love to get rid of that, but to do that, we also need to remove
+the xen_start_info referece at drivers/tty/hvc/hvc_xen.c:255:
+
+  if (!xen_start_info->console.domU.evtchn)
+		return -ENODEV;
+
+
+> ---
+> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> Cc: Juergen Gross <jgross@suse.com>
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: xen-devel@lists.xenproject.org
+> ---
+> Changes since v2:
+>  - Declare xen_start_flags outside of the XEN_DOM0 guard and include
+>    types.h.
+> 
+> Changes since v1:
+>  - Switch ARM to also use the new xen_start_flags.
+> ---
+>  arch/arm/xen/enlighten.c     | 7 ++++---
+>  arch/x86/xen/enlighten.c     | 7 +++++++
+>  arch/x86/xen/enlighten_pv.c  | 1 +
+>  arch/x86/xen/enlighten_pvh.c | 1 +
+>  include/xen/xen.h            | 6 +++++-
+>  5 files changed, 18 insertions(+), 4 deletions(-)
+> 
+> diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
+> index ba7f4c8f5c3e..a99d5edf7bdf 100644
+> --- a/arch/arm/xen/enlighten.c
+> +++ b/arch/arm/xen/enlighten.c
+> @@ -59,6 +59,9 @@ struct xen_memory_region xen_extra_mem[XEN_EXTRA_MEM_MAX_REGIONS] __initdata;
+>  
+>  static __read_mostly unsigned int xen_events_irq;
+>  
+> +uint32_t xen_start_flags;
+> +EXPORT_SYMBOL(xen_start_flags);
+> +
+>  int xen_remap_domain_gfn_array(struct vm_area_struct *vma,
+>  			       unsigned long addr,
+>  			       xen_pfn_t *gfn, int nr,
+> @@ -282,9 +285,7 @@ void __init xen_early_init(void)
+>  	xen_setup_features();
+>  
+>  	if (xen_feature(XENFEAT_dom0))
+> -		xen_start_info->flags |= SIF_INITDOMAIN|SIF_PRIVILEGED;
+> -	else
+> -		xen_start_info->flags &= ~(SIF_INITDOMAIN|SIF_PRIVILEGED);
+> +		xen_start_flags |= SIF_INITDOMAIN|SIF_PRIVILEGED;
+>  
+>  	if (!console_set_on_cmdline && !xen_initial_domain())
+>  		add_preferred_console("hvc", 0, NULL);
+> diff --git a/arch/x86/xen/enlighten.c b/arch/x86/xen/enlighten.c
+> index c9081c6671f0..3b5318505c69 100644
+> --- a/arch/x86/xen/enlighten.c
+> +++ b/arch/x86/xen/enlighten.c
+> @@ -64,6 +64,13 @@ struct shared_info xen_dummy_shared_info;
+>  __read_mostly int xen_have_vector_callback;
+>  EXPORT_SYMBOL_GPL(xen_have_vector_callback);
+>  
+> +/*
+> + * NB: needs to live in .data because it's used by xen_prepare_pvh which runs
+> + * before clearing the bss.
+> + */
+> +uint32_t xen_start_flags __attribute__((section(".data"))) = 0;
+> +EXPORT_SYMBOL(xen_start_flags);
+> +
+>  /*
+>   * Point at some empty memory to start with. We map the real shared_info
+>   * page as soon as fixmap is up and running.
+> diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+> index 357969a3697c..8d4e2e1ae60b 100644
+> --- a/arch/x86/xen/enlighten_pv.c
+> +++ b/arch/x86/xen/enlighten_pv.c
+> @@ -1203,6 +1203,7 @@ asmlinkage __visible void __init xen_start_kernel(void)
+>  		return;
+>  
+>  	xen_domain_type = XEN_PV_DOMAIN;
+> +	xen_start_flags = xen_start_info->flags;
+>  
+>  	xen_setup_features();
+>  
+> diff --git a/arch/x86/xen/enlighten_pvh.c b/arch/x86/xen/enlighten_pvh.c
+> index aa1c6a6831a9..c85d1a88f476 100644
+> --- a/arch/x86/xen/enlighten_pvh.c
+> +++ b/arch/x86/xen/enlighten_pvh.c
+> @@ -97,6 +97,7 @@ void __init xen_prepare_pvh(void)
+>  	}
+>  
+>  	xen_pvh = 1;
+> +	xen_start_flags = pvh_start_info.flags;
+>  
+>  	msr = cpuid_ebx(xen_cpuid_base() + 2);
+>  	pfn = __pa(hypercall_page);
+> diff --git a/include/xen/xen.h b/include/xen/xen.h
+> index 9d4340c907d1..1e1d9bd0bd37 100644
+> --- a/include/xen/xen.h
+> +++ b/include/xen/xen.h
+> @@ -25,12 +25,16 @@ extern bool xen_pvh;
+>  #define xen_hvm_domain()	(xen_domain_type == XEN_HVM_DOMAIN)
+>  #define xen_pvh_domain()	(xen_pvh)
+>  
+> +#include <linux/types.h>
+> +
+> +extern uint32_t xen_start_flags;
+> +
+>  #ifdef CONFIG_XEN_DOM0
+>  #include <xen/interface/xen.h>
+>  #include <asm/xen/hypervisor.h>
+>  
+>  #define xen_initial_domain()	(xen_domain() && \
+> -				 xen_start_info && xen_start_info->flags & SIF_INITDOMAIN)
+> +				 (xen_start_flags & SIF_INITDOMAIN))
+>  #else  /* !CONFIG_XEN_DOM0 */
+>  #define xen_initial_domain()	(0)
+>  #endif	/* CONFIG_XEN_DOM0 */
+> -- 
+> 2.17.1
+> 
+--8323329-1478822903-1528474284=:14699
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1478822903-1528474284=:14699--
