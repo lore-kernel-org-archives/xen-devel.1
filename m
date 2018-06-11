@@ -1,28 +1,21 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 5/9] xen/gntdev: Allow mappings for DMA
- buffers
-Date: Mon, 11 Jun 2018 09:51:13 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1806110949050.14695__37666.9713332832$1528735811$gmane$org@sstabellini-ThinkPad-X260>
-References: <20180601114132.22596-1-andr2000@gmail.com>
- <20180601114132.22596-6-andr2000@gmail.com>
- <64facf05-0a51-c3d9-9d3b-780893248628@oracle.com>
- <84217eac-b83b-710f-39ab-c93cad65bf9a@gmail.com>
- <a172746d-7a97-159f-71a7-511b2d239089@oracle.com>
- <30fa03c0-1b75-c0b1-b14f-8b52ea584e20@gmail.com>
- <78dc2fc4-cdac-05b7-2c34-22b69e7e009c@oracle.com>
- <4be24882-185d-01e3-6aa1-751e341433c7@gmail.com>
- <alpine.DEB.2.10.1806081025030.14699@sstabellini-ThinkPad-X260>
- <c6e1820a-fb57-b213-aa2f-05787dae06ad@oracle.com>
- <06eff3fe-3ffc-47f6-6bd6-d8f2f823b382@gmail.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v2 3/8] tools: xencall, xengnttab,
+ xengntshr: Provide access to internal fds
+Date: Mon, 11 Jun 2018 18:59:47 +0200
+Message-ID: <20180611165947.45sy76htguuaiuej@mac>
+References: <1528726404-14924-1-git-send-email-ian.jackson@eu.citrix.com>
+ <1528726404-14924-4-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-656447964-1528735873=:14695"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=6gn7=i5=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fSQ2J-0000iQ-LH
- for xen-devel@lists.xenproject.org; Mon, 11 Jun 2018 16:51:19 +0000
-In-Reply-To: <06eff3fe-3ffc-47f6-6bd6-d8f2f823b382@gmail.com>
+ <srs0=qs0l=i5=citrix.com=prvs=6935148de=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fSQAg-0001in-E2
+ for xen-devel@lists.xenproject.org; Mon, 11 Jun 2018 16:59:58 +0000
+Content-Disposition: inline
+In-Reply-To: <1528726404-14924-4-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,124 +24,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr Andrushchenko <andr2000@gmail.com>
-Cc: jgross@suse.com, Stefano Stabellini <sstabellini@kernel.org>, dongwon.kim@intel.com, "Oleksandr_Andrushchenko@epam.com" <Oleksandr_Andrushchenko@epam.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, julien.grall@arm.com, daniel.vetter@intel.com, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, matthew.d.roper@intel.com, linux-media@vger.kernel.org
+To: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-656447964-1528735873=:14695
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Mon, 11 Jun 2018, Oleksandr Andrushchenko wrote:
-> On 06/08/2018 10:21 PM, Boris Ostrovsky wrote:
-> > On 06/08/2018 01:59 PM, Stefano Stabellini wrote:
-> > > > > > > > > >      @@ -325,6 +401,14 @@ static int map_grant_pages(struct
-> > > > > > > > > > grant_map
-> > > > > > > > > > *map)
-> > > > > > > > > >              map->unmap_ops[i].handle =
-> > > > > > > > > > map->map_ops[i].handle;
-> > > > > > > > > >              if (use_ptemod)
-> > > > > > > > > >                  map->kunmap_ops[i].handle =
-> > > > > > > > > > map->kmap_ops[i].handle;
-> > > > > > > > > > +#ifdef CONFIG_XEN_GRANT_DMA_ALLOC
-> > > > > > > > > > +        else if (map->dma_vaddr) {
-> > > > > > > > > > +            unsigned long mfn;
-> > > > > > > > > > +
-> > > > > > > > > > +            mfn = __pfn_to_mfn(page_to_pfn(map->pages[i]));
-> > > > > > > > > Not pfn_to_mfn()?
-> > > > > > > > I'd love to, but pfn_to_mfn is only defined for x86, not ARM:
-> > > > > > > > [1]
-> > > > > > > > and [2]
-> > > > > > > > Thus,
-> > > > > > > > 
-> > > > > > > > drivers/xen/gntdev.c:408:10: error: implicit declaration of
-> > > > > > > > function
-> > > > > > > > ‘pfn_to_mfn’ [-Werror=implicit-function-declaration]
-> > > > > > > >        mfn = pfn_to_mfn(page_to_pfn(map->pages[i]));
-> > > > > > > > 
-> > > > > > > > So, I'll keep __pfn_to_mfn
-> > > > > > > How will this work on non-PV x86?
-> > > > > > So, you mean I need:
-> > > > > > #ifdef CONFIG_X86
-> > > > > > mfn = pfn_to_mfn(page_to_pfn(map->pages[i]));
-> > > > > > #else
-> > > > > > mfn = __pfn_to_mfn(page_to_pfn(map->pages[i]));
-> > > > > > #endif
-> > > > > > 
-> > > > > I'd rather fix it in ARM code. Stefano, why does ARM uses the
-> > > > > underscored version?
-> > > > Do you want me to add one more patch for ARM to wrap __pfn_to_mfn
-> > > > with static inline for ARM? e.g.
-> > > > static inline ...pfn_to_mfn(...)
-> > > > {
-> > > >      __pfn_to_mfn();
-> > > > }
-> > > A Xen on ARM guest doesn't actually know the mfns behind its own
-> > > pseudo-physical pages. This is why we stopped using pfn_to_mfn and
-> > > started using pfn_to_bfn instead, which will generally return "pfn",
-> > > unless the page is a foreign grant. See include/xen/arm/page.h.
-> > > pfn_to_bfn was also introduced on x86. For example, see the usage of
-> > > pfn_to_bfn in drivers/xen/swiotlb-xen.c. Otherwise, if you don't care
-> > > about other mapped grants, you can just use pfn_to_gfn, that always
-> > > returns pfn.
-> > 
-> > I think then this code needs to use pfn_to_bfn().
-> Ok
-> > 
-> > 
-> > > Also, for your information, we support different page granularities in
-> > > Linux as a Xen guest, see the comment at include/xen/arm/page.h:
-> > > 
-> > >    /*
-> > >     * The pseudo-physical frame (pfn) used in all the helpers is always
-> > > based
-> > >     * on Xen page granularity (i.e 4KB).
-> > >     *
-> > >     * A Linux page may be split across multiple non-contiguous Xen page so
-> > > we
-> > >     * have to keep track with frame based on 4KB page granularity.
-> > >     *
-> > >     * PV drivers should never make a direct usage of those helpers
-> > > (particularly
-> > >     * pfn_to_gfn and gfn_to_pfn).
-> > >     */
-> > > 
-> > > A Linux page could be 64K, but a Xen page is always 4K. A granted page
-> > > is also 4K. We have helpers to take into account the offsets to map
-> > > multiple Xen grants in a single Linux page, see for example
-> > > drivers/xen/grant-table.c:gnttab_foreach_grant. Most PV drivers have
-> > > been converted to be able to work with 64K pages correctly, but if I
-> > > remember correctly gntdev.c is the only remaining driver that doesn't
-> > > support 64K pages yet, so you don't have to deal with it if you don't
-> > > want to.
-> > 
-> > I believe somewhere in this series there is a test for PAGE_SIZE vs.
-> > XEN_PAGE_SIZE. Right, Oleksandr?
-> Not in gntdev. You might have seen this in xen-drmfront/xen-sndfront,
-> but I didn't touch gntdev for that. Do you want me to add yet another patch
-> in the series to check for that?
-
-gntdev.c is already not capable of handling PAGE_SIZE != XEN_PAGE_SIZE,
-so you are not going to break anything that is not already broken :-) If
-your new gntdev.c code relies on PAGE_SIZE == XEN_PAGE_SIZE, it might be
-good to add an in-code comment about it, just to make it easier to fix
-the whole of gntdev.c in the future.
-
-
-
-> > Thanks for the explanation.
-
---8323329-656447964-1528735873=:14695
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-656447964-1528735873=:14695--
+T24gTW9uLCBKdW4gMTEsIDIwMTggYXQgMDM6MTM6MTlQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
+dGU6Cj4gSSB3YW50IHRoaXMgdG8gc3VwcG9ydCBteSBxZW11IGRlcHJpdiBkZXNjcmlwdG9yIGF1
+ZGl0IHRvb2wuCj4gCj4gU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPElhbi5KYWNrc29uQGV1
+LmNpdHJpeC5jb20+Cj4gQ0M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
+b20+CgpSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+
+Cgo+IGRpZmYgLS1naXQgYS90b29scy9saWJzL2NhbGwvbGlieGVuY2FsbC5tYXAgYi90b29scy9s
+aWJzL2NhbGwvbGlieGVuY2FsbC5tYXAKPiBpbmRleCAyZjk2MTQ0Li5jNmEwMTgxIDEwMDY0NAo+
+IC0tLSBhL3Rvb2xzL2xpYnMvY2FsbC9saWJ4ZW5jYWxsLm1hcAo+ICsrKyBiL3Rvb2xzL2xpYnMv
+Y2FsbC9saWJ4ZW5jYWxsLm1hcAo+IEBAIC0xNywzICsxNyw5IEBAIFZFUlNfMS4wIHsKPiAgCQl4
+ZW5jYWxsX2ZyZWVfYnVmZmVyX3BhZ2VzOwo+ICAJbG9jYWw6ICo7IC8qIERvIG5vdCBleHBvc2Ug
+YW55dGhpbmcgYnkgZGVmYXVsdCAqLwo+ICB9Owo+ICsKPiArVkVSU18xLjEgewo+ICsJZ2xvYmFs
+Ogo+ICsJCXhlbmNhbGxfZmQ7Cj4gKwkJCgpeIEV4dHJhIG5ld2xpbmU/CgpUaGFua3MsIFJvZ2Vy
+LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
