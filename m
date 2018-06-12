@@ -1,18 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2 8/9] x86/vmx: Support removing MSRs from
- the host/guest load/save lists
-Date: Tue, 12 Jun 2018 19:23:13 +0100
-Message-ID: <e07908e9-aa7b-5ff8-696b-1a96b495c93e@citrix.com>
-References: <1528483723-4128-1-git-send-email-andrew.cooper3@citrix.com>
- <1528483723-4128-9-git-send-email-andrew.cooper3@citrix.com>
- <5B1F83F802000078001CA440@prv1-mh.provo.novell.com>
- <ba237035-ce91-f068-238f-f37c4d12820b@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 1/7] xen/arm: Remove the variable
+ dom0_11_mapping and open-code the value
+Date: Tue, 12 Jun 2018 12:22:06 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1806121221130.14695@sstabellini-ThinkPad-X260>
+References: <20180605171237.30601-1-julien.grall@arm.com>
+ <20180605171237.30601-2-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <ba237035-ce91-f068-238f-f37c4d12820b@citrix.com>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=ywjr=i6=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1fSoro-0007St-0a
+ for xen-devel@lists.xenproject.org; Tue, 12 Jun 2018 19:22:08 +0000
+In-Reply-To: <20180605171237.30601-2-julien.grall@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,21 +23,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Roger Pau Monne <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Julien Grall <julien.grall@arm.com>
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTIvMDYvMTggMTg6NDAsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4gT24gMTIvMDYvMTggMDk6
-MjcsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4gKyAgICBlbmQgPSBzdGFydCArIHRvdGFsOwo+Pj4g
-KyAgICBlbnQgPSBsb2NhdGVfbXNyX2VudHJ5KHN0YXJ0ICsgc3Vic3RhcnQsIHN0YXJ0ICsgc3Vi
-ZW5kLCBtc3IpOwo+Pj4gKwo+Pj4gKyAgICBpZiAoIChlbnQgPT0gZW5kKSB8fCAoZW50LT5pbmRl
-eCAhPSBtc3IpICkKPj4+ICsgICAgICAgIHJldHVybiAtRVNSQ0g7Cj4+PiArCj4+PiArICAgIG1l
-bW1vdmUoZW50LCBlbnQgKyAxLCBzaXplb2YoKmVudCkgKiAoZW5kIC0gZW50KSk7Cj4+IEFyZW4n
-dCB5b3UgcnVubmluZyBvdmVyIHRoZSBlbmQgb2YgdGhlIGFycmF5IGJ5IDEgZW50cnkgaGVyZT8K
-PiBlbnQgPT0gZW5kIGlzIGFuIGVycm9yIGNvbmRpdGlvbiBhYm92ZS7CoCBCeSB0aGlzIHBvaW50
-LCBlbnQgaXMKPiBndWFyYW50ZWVkIHRvIGJlIDwgZW5kLgoKQWx0aG91Z2ggb24gZnVydGhlciBj
-b25zaWRlcmF0aW9uLCB0aGUgc2l6ZSBwYXJhbWV0ZXIgc2hvdWxkIGJlIChlbmQgLQplbnQgLSAx
-KSB0byBhdm9pZCBtb3ZpbmcgdGhlIGVudHJ5IGJleW9uZCB0aGUgZW5kIG9mIHRoZSBhcnJheS4K
-Cn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCA1IEp1biAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gRG9tMCAoYWthIGhhcmR3
+YXJlIGRvbWFpbiBvbiBBcm0pIGlzIGFsd2F5cyBkaXJlY3QgbWFwcGVkLiBSYXRoZXIgdGhhbgo+
+IHVzaW5nIGEgZ2xvYmFsIHZhcmlhYmxlIHRvIHN0b3JlIGEgY29uc3QsIGRpcmVjdGx5IG9wZW4t
+Y29kZSBpdCBvcgo+IHJlcGxhY2UgdGhlIHVzZSB3aXRoIGlzX2RvbWFpbl9kaXJlY3RfbWFwcGVk
+KC4uLikgbWFjcm9zLgo+IAo+IFRoaXMgd2lsbCBhbHNvIGhlbHAgYSBmb2xsb3ctdXAgcGF0Y2gg
+dG8gbW92ZSBhbGwgZG9tYWluX2J1aWxkLmMgaW4KPiBpbml0Lgo+IAo+IFNpZ25lZC1vZmYtYnk6
+IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CgpSZXZpZXdlZC1ieTogU3RlZmFu
+byBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgoKCj4gLS0tCj4gIHhlbi9hcmNo
+L2FybS9kb21haW5fYnVpbGQuYyAgfCA0ICstLS0KPiAgeGVuL2luY2x1ZGUvYXNtLWFybS9kb21h
+aW4uaCB8IDQgKystLQo+ICAyIGZpbGVzIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgNSBkZWxl
+dGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5jIGIv
+eGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5jCj4gaW5kZXggMTFjZGYwNTA5MS4uM2M0MTRjN2Y3
+MyAxMDA2NDQKPiAtLS0gYS94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMKPiArKysgYi94ZW4v
+YXJjaC9hcm0vZG9tYWluX2J1aWxkLmMKPiBAQCAtMjgsOCArMjgsNiBAQAo+ICBzdGF0aWMgdW5z
+aWduZWQgaW50IF9faW5pdGRhdGEgb3B0X2RvbTBfbWF4X3ZjcHVzOwo+ICBpbnRlZ2VyX3BhcmFt
+KCJkb20wX21heF92Y3B1cyIsIG9wdF9kb20wX21heF92Y3B1cyk7Cj4gIAo+IC1pbnQgZG9tMF8x
+MV9tYXBwaW5nID0gMTsKPiAtCj4gIHN0YXRpYyB1NjQgX19pbml0ZGF0YSBkb20wX21lbTsKPiAg
+Cj4gIHN0YXRpYyBpbnQgX19pbml0IHBhcnNlX2RvbTBfbWVtKGNvbnN0IGNoYXIgKnMpCj4gQEAg
+LTI2MSw3ICsyNTksNyBAQCBzdGF0aWMgdm9pZCBhbGxvY2F0ZV9tZW1vcnkoc3RydWN0IGRvbWFp
+biAqZCwgc3RydWN0IGtlcm5lbF9pbmZvICpraW5mbykKPiAgICAgICAqIFRPRE86IEltcGxlbWVu
+dCBtZW1vcnkgYmFuayBhbGxvY2F0aW9uIHdoZW4gRE9NMCBpcyBub3QgZGlyZWN0Cj4gICAgICAg
+KiBtYXBwZWQKPiAgICAgICAqLwo+IC0gICAgQlVHX09OKCFkb20wXzExX21hcHBpbmcpOwo+ICsg
+ICAgQlVHX09OKCFpc19kb21haW5fZGlyZWN0X21hcHBlZChkKSk7Cj4gIAo+ICAgICAgcHJpbnRr
+KCJBbGxvY2F0aW5nIDE6MSBtYXBwaW5ncyB0b3RhbGxpbmcgJWxkTUIgZm9yIGRvbTA6XG4iLAo+
+ICAgICAgICAgICAgIC8qIERvbid0IHdhbnQgZm9ybWF0IHRoaXMgYXMgUFJJcGFkZHIgKDE2IGRp
+Z2l0IGhleCkgKi8KPiBkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvYXNtLWFybS9kb21haW4uaCBi
+L3hlbi9pbmNsdWRlL2FzbS1hcm0vZG9tYWluLmgKPiBpbmRleCA3YmE2NTI4YTc0Li4yODBjMzk1
+MWZkIDEwMDY0NAo+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vZG9tYWluLmgKPiArKysgYi94
+ZW4vaW5jbHVkZS9hc20tYXJtL2RvbWFpbi5oCj4gQEAgLTMxLDggKzMxLDggQEAgZW51bSBkb21h
+aW5fdHlwZSB7Cj4gICNkZWZpbmUgaXNfNjRiaXRfZG9tYWluKGQpICgwKQo+ICAjZW5kaWYKPiAg
+Cj4gLWV4dGVybiBpbnQgZG9tMF8xMV9tYXBwaW5nOwo+IC0jZGVmaW5lIGlzX2RvbWFpbl9kaXJl
+Y3RfbWFwcGVkKGQpICgoZCkgPT0gaGFyZHdhcmVfZG9tYWluICYmIGRvbTBfMTFfbWFwcGluZykK
+PiArLyogVGhlIGhhcmR3YXJlIGRvbWFpbiBoYXMgYWx3YXlzIGl0cyBtZW1vcnkgZGlyZWN0IG1h
+cHBlZC4gKi8KPiArI2RlZmluZSBpc19kb21haW5fZGlyZWN0X21hcHBlZChkKSAoKGQpID09IGhh
+cmR3YXJlX2RvbWFpbikKPiAgCj4gIHN0cnVjdCB2dGltZXIgewo+ICAgICAgICAgIHN0cnVjdCB2
+Y3B1ICp2Owo+IC0tIAo+IDIuMTEuMAo+IAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
