@@ -1,20 +1,19 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [OSSTEST PATCH] cr-daily-branch,
- cr-publish-flight-logs: Tolerate failure to push harness
-Date: Wed, 13 Jun 2018 16:21:18 +0200
-Message-ID: <20180613142118.zibhr66kqj3h3lxm@mac>
-References: <1528897916-14744-1-git-send-email-ian.jackson@eu.citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: uapi header dependencies?
+Date: Wed, 13 Jun 2018 17:03:07 +0200
+Message-ID: <bba6e759-ef17-7da5-370b-82264a8493cd@suse.com>
+References: <5B211CC002000078001CAE37@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=v0sd=i7=citrix.com=prvs=695654bf1=roger.pau@srs-us1.protection.inumbo.net>)
- id 1fT6fs-0003Qt-Fv
- for xen-devel@lists.xenproject.org; Wed, 13 Jun 2018 14:23:00 +0000
-Content-Disposition: inline
-In-Reply-To: <1528897916-14744-1-git-send-email-ian.jackson@eu.citrix.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=qeqh=i7=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fT7Il-0001Hn-SE
+ for xen-devel@lists.xenproject.org; Wed, 13 Jun 2018 15:03:11 +0000
+In-Reply-To: <5B211CC002000078001CAE37@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,22 +22,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKdW4gMTMsIDIwMTggYXQgMDI6NTE6NTZQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
-dGU6Cj4gUHJvdmlkZSBjci1wdWJsaXNoLWZsaWdodC1sb2dzIC0tcHVzaC1oYXJuZXNzLXRyeSwg
-d2hpY2ggYXR0ZW1wdHMgdGhlCj4gcHVzaCBidXQgZG9lc24ndCBtaW5kIGlmIGl0IGZhaWxzLgo+
-IAo+IElmIHdlIGFyZSBub3QgLS1yZWFsLCB0b2xlcmF0ZSBmYWlsdXJlIHRvIHB1Ymxpc2ggdGhl
-IGZsaWdodCBsb2dzLgo+IAo+IEFsc28sIGhvbm91ciBPU1NURVNUX1BVU0hfSEFSTkVTUyB3aGlj
-aCBtaWdodCBjb250YWluICcnIG9yCj4gLS1wdXNoLWhhcm5lc3Mgb3IgLS1wdXNoLWhhcm5lc3Mt
-dHJ5Lgo+IAo+IENDOiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KPiBT
-aWduZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8SWFuLkphY2tzb25AZXUuY2l0cml4LmNvbT4KCkp1
-c3QgdGVzdGVkIHRoaXMgYnkgbWFudWFsbHkga2lsbGluZyBhIGNyLWRhaWx5LWJyYW5jaCBhbmQg
-aXQgd29ya2VkCnByb3Blcmx5LCBzZWU6CgpodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0
-Lm9yZy9vc3N0ZXN0L2xvZ3MvMTI0MTcxLwoKU286CgpUZXN0ZWQtYnk6IFJvZ2VyIFBhdSBNb25u
-w6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoKVGhhbmtzIQoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMTMvMDYvMTggMTU6MzEsIEphbiBCZXVsaWNoIHdyb3RlOgo+IErDvHJnZW4sIEJvcmlzLAo+
+IAo+IGFyZW4ndCBoZWFkZXJzIGluIHVhcGkvIGRpcmVjdG9yaWVzIHN1cHBvc2VkIHRvIGJlIHNl
+bGYgY29udGFpbmVkPwoKSG1tLCB0aGVyZSBhcmUgbWFueSB1YXBpIGhlYWRlcnMgaW5jbHVkaW5n
+IHN0dWZmIGZyb20gb3V0c2lkZSB1YXBpLgpJIGd1ZXNzIGl0IGlzIG9rYXkgdG8gaW5jbHVkZSBo
+ZWFkZXJzIHdoaWNoIGFyZSBhY2Nlc3NpYmxlIGluIHRoZQprZXJuZWwgX2FuZF8gdW5kZXIgL3Vz
+ci9pbmNsdWRlIG9yIHRvIHB1dCBzdWNoIGluY2x1ZGVzIHVuZGVyCiNpZmRlZiBfX0tFUk5FTF9f
+Cgo+IFRoZSBhZGRpdGlvbiBkb25lIGJ5IERhdmlkIGluIGZiYzg3MmMzOGMgY2xlYXJseSBpc24n
+dCwgYXMgdGhlcmUncwo+IG5vIGRvbWlkX3QgYW55d2hlcmUgaW4gb3RoZXIgdWFwaS8gaGVhZGVy
+cyBhZmFpY3QuIE5vIGlkZWEgaG93Cj4gdG8gcmVhc29uYWJseSBhZGp1c3QgdGhpczsgSSdkIGlu
+IHBhcnRpY3VsYXIgZGlzbGlrZSB1c2luZyBfX3UxNiB0aGVyZSwKPiBidXQgcGVyaGFwcyB0aGF0
+J3MgdGhlIG9ubHkgb3B0aW9uIHdlIGhhdmUuCgppbmNsdWRlL3VhcGkveGVuL3ByaXZjbWQuaCBp
+cyBlc3BlY2lhbGx5IGV2aWw6IGl0IGlzIGluY2x1ZGluZyB0aGUKa2VybmVsLW9ubHkgeGVuL2lu
+dGVyZmFjZS94ZW4uaAoKWGVuIHRvb2xzIGF2b2lkIHRoZSByZXN1bHRpbmcgcHJvYmxlbXMgYnkg
+dXNpbmcgYSBwcml2YXRlIGNvcHkgb2YgdGhhdApmaWxlIHdpdGhvdXQgdGhlIG9mZmVuZGluZyAj
+aW5jbHVkZS4gT01HIQoKCkp1ZXJnZW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
