@@ -1,27 +1,30 @@
-From: Manuel Bouyer <bouyer@antioche.eu.org>
-Subject: Re: 4.11.0 RC1 panic
-Date: Wed, 13 Jun 2018 10:57:36 +0200
-Message-ID: <20180613085736.GA8026@mail.soc.lip6.fr>
-References: <5B1CF56502000078001326FB@prv1-mh.provo.novell.com>
- <20180610105728.GA3492@antioche.eu.org>
- <5B1F7CEF02000078001CA402@prv1-mh.provo.novell.com>
- <20180612113905.GA25889@mail.soc.lip6.fr>
- <20180612153844.GB17270@mail.soc.lip6.fr>
- <20180612205540.GA9392@mail.soc.lip6.fr>
- <5B1FB0E5020000F903B0F0C2@prv1-mh.provo.novell.com>
- <5B1FE90D020000F804A5F2B5@prv1-mh.provo.novell.com>
- <5B20335B0200008603B30F33@prv1-mh.provo.novell.com>
- <5B20D0C102000078001CABB9@prv1-mh.provo.novell.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [xen-unstable test] 123379: regressions - FAIL
+Date: Wed, 13 Jun 2018 09:58:58 +0100
+Message-ID: <8b71c6fa-c8a2-9f64-6d25-45a713571ce8@citrix.com>
+References: <osstest-123379-mainreport@xen.org>
+ <84c7b21c-44ba-5532-f4d9-efcb745f9181@suse.com>
+ <8a5daddf-6cdc-8b8c-1b51-4d05c72ba412@suse.com>
+ <5B10FF6B02000078001C75FC@prv1-mh.provo.novell.com>
+ <e3203ea4-e31b-01c3-c7d1-b2b8e2c45e50@suse.com>
+ <23318.47113.805002.780159@mariner.uk.xensource.com>
+ <5B17AAE102000078001C8972@suse.com>
+ <cd072d2f-7289-2f3d-8807-6fcf0abbaaa2@suse.com>
+ <059f5b86-0ccd-80bd-fcfd-b4266c525226@suse.com>
+ <5706804e-d789-27e1-4a88-ce69423c2645@suse.com>
+ <b904a943-f097-6710-35ea-410fa5f15874@suse.com>
+ <6b39cd11-e2a6-0483-6c62-04a93d912ad2@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="M9NhX3UHpAaciwkO"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=otbb=i7=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
- id 1fT1b4-0005Qp-9w
- for xen-devel@lists.xenproject.org; Wed, 13 Jun 2018 08:57:42 +0000
-Content-Disposition: inline
-In-Reply-To: <5B20D0C102000078001CABB9@prv1-mh.provo.novell.com>
+ <srs0=bg59=i7=citrix.com=prvs=69572c345=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1fT1cL-0005X0-28
+ for xen-devel@lists.xenproject.org; Wed, 13 Jun 2018 08:59:01 +0000
+In-Reply-To: <6b39cd11-e2a6-0483-6c62-04a93d912ad2@suse.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,198 +33,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Juergen Gross <jgross@suse.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---M9NhX3UHpAaciwkO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Wed, Jun 13, 2018 at 02:07:29AM -0600, Jan Beulich wrote:
-> 
-> (XEN) Assertion '!page->linear_pt_count' failed at mm.c:596
-> 
-> In fact, there's no assertion with that expression anywhere I could
-> see. Do you have any local patches in place?
-
-Yes, 2 of them from you (the first one is where the assert is). See attached.
-
-> In any event, to take
-> care of the other assertion you've hit below an updated debugging
-> patch. I hope I didn't overlook any further (cascade) ones.
-
-Will rebuild with it, I'll keep you informed.
-
--- 
-Manuel Bouyer <bouyer@antioche.eu.org>
-     NetBSD: 26 ans d'experience feront toujours la difference
---
-
---M9NhX3UHpAaciwkO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename=patch-tmp
-
-(besides a more reliable confirmation - or otherwise - that this indeed
-is an issue with 32-bit guests only).
-
-While I think I have ruled out the TLB flush time stamp setting still
-happening too early / wrongly in certain cases, there's a small
-debugging patch that I would hope could help prove this one or the
-other way (see below).
-
-Btw: You've said earlier that there wouldn't be a domain number in
-the panic message. However,
-
-(XEN) RFLAGS: 0000000000010246   CONTEXT: hypervisor (d14v3)
-
-has it (at the end: domain 14, vCPU 3). Just in case this helps
-identifying further useful pieces of information.
-
-Jan
-
---- xen/arch/x86/mm.c.orig
-+++ xen/arch/x86/mm.c
-@@ -578,7 +578,11 @@ static inline void set_tlbflush_timestam
-      */
-     if ( !(page->count_info & PGC_page_table) ||
-          !shadow_mode_enabled(page_get_owner(page)) )
-+    {
-+        /* NB: This depends on WRAP_MASK in flushtlb.c to be <= 0xffff. */
-+        ASSERT(!page->linear_pt_count);
-         page_set_tlbflush_timestamp(page);
-+    }
- }
- 
- const char __section(".bss.page_aligned.const") __aligned(PAGE_SIZE)
-
-
-
---M9NhX3UHpAaciwkO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename=patch-tmp2
-
-$NetBSD: $
-
-Commit df8234fd2c ("replace vCPU's dirty CPU mask by numeric ID") was
-too lax in two respects: First of all it didn't consider the case of a
-vCPU not having a valid dirty CPU in the descriptor table TLB flush
-case. This is the issue Manual has run into with NetBSD.
-
-Additionally reads of ->dirty_cpu for other than the current vCPU are at
-risk of racing with scheduler actions, i.e. single atomic reads need to
-be used there. Obviously the non-init write sites then better also use
-atomic writes.
-
-Having to touch the descriptor table TLB flush code here anyway, take
-the opportunity and switch it to be at most one flush_tlb_mask()
-invocation.
-
-Reported-by: Manuel Bouyer <bouyer@antioche.eu.org>
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-
---- xen/arch/x86/domain.c.orig
-+++ xen/arch/x86/domain.c
-@@ -1631,7 +1631,7 @@ static void __context_switch(void)
-      */
-     if ( pd != nd )
-         cpumask_set_cpu(cpu, nd->dirty_cpumask);
--    n->dirty_cpu = cpu;
-+    write_atomic(&n->dirty_cpu, cpu);
- 
-     if ( !is_idle_domain(nd) )
-     {
-@@ -1687,7 +1687,7 @@ static void __context_switch(void)
- 
-     if ( pd != nd )
-         cpumask_clear_cpu(cpu, pd->dirty_cpumask);
--    p->dirty_cpu = VCPU_CPU_CLEAN;
-+    write_atomic(&p->dirty_cpu, VCPU_CPU_CLEAN);
- 
-     per_cpu(curr_vcpu, cpu) = n;
- }
---- xen/arch/x86/mm.c.orig
-+++ xen/arch/x86/mm.c
-@@ -1202,11 +1202,23 @@ void put_page_from_l1e(l1_pgentry_t l1e,
-              unlikely(((page->u.inuse.type_info & PGT_count_mask) != 0)) &&
-              (l1e_owner == pg_owner) )
-         {
-+            cpumask_t *mask = this_cpu(scratch_cpumask);
-+
-+            cpumask_clear(mask);
-+
-             for_each_vcpu ( pg_owner, v )
-             {
--                if ( pv_destroy_ldt(v) )
--                    flush_tlb_mask(cpumask_of(v->dirty_cpu));
-+                unsigned int cpu;
-+
-+                if ( !pv_destroy_ldt(v) )
-+                    continue;
-+                cpu = read_atomic(&v->dirty_cpu);
-+                if ( is_vcpu_dirty_cpu(cpu) )
-+                    __cpumask_set_cpu(cpu, mask);
-             }
-+
-+            if ( !cpumask_empty(mask) )
-+                flush_tlb_mask(mask);
-         }
-         put_page(page);
-     }
-@@ -2979,13 +2991,18 @@ static inline int vcpumask_to_pcpumask(
- 
-         while ( vmask )
-         {
-+            unsigned int cpu;
-+
-             vcpu_id = find_first_set_bit(vmask);
-             vmask &= ~(1UL << vcpu_id);
-             vcpu_id += vcpu_bias;
-             if ( (vcpu_id >= d->max_vcpus) )
-                 return 0;
--            if ( ((v = d->vcpu[vcpu_id]) != NULL) && vcpu_cpu_dirty(v) )
--                __cpumask_set_cpu(v->dirty_cpu, pmask);
-+            if ( (v = d->vcpu[vcpu_id]) == NULL )
-+                continue;
-+            cpu = read_atomic(&v->dirty_cpu);
-+            if ( is_vcpu_dirty_cpu(cpu) )
-+                __cpumask_set_cpu(cpu, pmask);
-         }
-     }
- }
---- xen/include/xen/sched.h.orig
-+++ xen/include/xen/sched.h
-@@ -795,10 +795,15 @@ static inline int vcpu_runnable(struct v
-              atomic_read(&v->domain->pause_count));
- }
- 
--static inline bool vcpu_cpu_dirty(const struct vcpu *v)
-+static inline bool is_vcpu_dirty_cpu(unsigned int cpu)
- {
-     BUILD_BUG_ON(NR_CPUS >= VCPU_CPU_CLEAN);
--    return v->dirty_cpu != VCPU_CPU_CLEAN;
-+    return cpu != VCPU_CPU_CLEAN;
-+}
-+
-+static inline bool vcpu_cpu_dirty(const struct vcpu *v)
-+{
-+    return is_vcpu_dirty_cpu(v->dirty_cpu);
- }
- 
- void vcpu_block(void);
-
-
-
-
---M9NhX3UHpAaciwkO
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---M9NhX3UHpAaciwkO--
+T24gMTMvMDYvMTggMDk6NTIsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gT24gMTIvMDYvMTggMTc6
+NTgsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+IE9uIDA4LzA2LzE4IDEyOjEyLCBKdWVyZ2VuIEdy
+b3NzIHdyb3RlOgo+Pj4gT24gMDcvMDYvMTggMTM6MzAsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+
+Pj4gT24gMDYvMDYvMTggMTE6NDAsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+Pj4+IE9uIDA2LzA2
+LzE4IDExOjM1LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4+Pj4+IE9uIDA1LjA2LjE4IGF0IDE4
+OjE5LCA8aWFuLmphY2tzb25AY2l0cml4LmNvbT4gd3JvdGU6Cj4+Pj4+Pj4+PiAgdGVzdC1hbWQ2
+NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxNCBndWVzdC1zYXZlcmVz
+dG9yZS4yIAo+Pj4+Pj4+IEkgdGhvdWdodCBJIHdvdWxkIHJlcGx5IGFnYWluIHdpdGggdGhlIGtl
+eSBwb2ludCBmcm9tIG15IGVhcmxpZXIgbWFpbAo+Pj4+Pj4+IGhpZ2hsaWdodGVkLCBhbmQgZ28g
+YSBiaXQgZnVydGhlci4gIFRoZSBmaXJzdCB0aGluZyB0byBnbyB3cm9uZyBpbgo+Pj4+Pj4+IHRo
+aXMgd2FzOgo+Pj4+Pj4+Cj4+Pj4+Pj4gMjAxOC0wNS0zMCAyMjoxMjo0OS4zMjArMDAwMDogeGM6
+IEZhaWxlZCB0byBnZXQgdHlwZXMgZm9yIHBmbiBiYXRjaCAoMTQgPSBCYWQgYWRkcmVzcyk6IElu
+dGVybmFsIGVycm9yCj4+Pj4+Pj4gMjAxOC0wNS0zMCAyMjoxMjo0OS40ODMrMDAwMDogeGM6IFNh
+dmUgZmFpbGVkICgxNCA9IEJhZCBhZGRyZXNzKTogSW50ZXJuYWwgZXJyb3IKPj4+Pj4+PiAyMDE4
+LTA1LTMwIDIyOjEyOjQ5LjY0OCswMDAwOiBsaWJ4bC1zYXZlLWhlbHBlcjogY29tcGxldGUgcj0t
+MTogQmFkIGFkZHJlc3MKPj4+Pj4+Pgo+Pj4+Pj4+IFlvdSBjYW4gc2VlIHNpbWlsYXIgbWVzc2Fn
+ZXMgaW4gdGhlIG90aGVyIGxvZ2ZpbGU6Cj4+Pj4+Pj4KPj4+Pj4+PiAyMDE4LTA1LTMwIDIyOjEy
+OjQ5LjY1MCswMDAwOiBsaWJ4bDogbGlieGxfc3RyZWFtX3dyaXRlLmM6MzUwOmxpYnhsX194Y19k
+b21haW5fc2F2ZV9kb25lOiBEb21haW4gMzpzYXZpbmcgZG9tYWluOiBkb21haW4gcmVzcG9uZGVk
+IHRvIHN1c3BlbmQgcmVxdWVzdDogQmFkIGFkZHJlc3MKPj4+Pj4+Pgo+Pj4+Pj4+IEFsbCBvZiB0
+aGVzZSBhcmUgcmVwb3J0cyBvZiB0aGUgc2FtZSB0aGluZzogeGNfZ2V0X3Bmbl90eXBlX2JhdGNo
+IGF0Cj4+Pj4+Pj4geGNfc3Jfc2F2ZS5jOjEzMyBmYWlsZWQgd2l0aCBFRkFVTFQuICBJJ20gYWZy
+YWlkIEkgZG9uJ3Qga25vdyB3aHkuCj4+Pj4+Pj4KPj4+Pj4+PiBUaGVyZSBpcyBubyBjb3JyZXNw
+b25kaW5nIG1lc3NhZ2UgaW4gdGhlIGhvc3QncyBzZXJpYWwgbG9nIG5vciB0aGUKPj4+Pj4+PiBk
+b20wIGtlcm5lbCBsb2cuCj4+Pj4+PiBJIHZhZ3VlbHkgcmVjYWxsIGZyb20gdGhlIHRpbWUgd2hl
+biBJIGhhZCBsb29rZWQgYXQgdGhlIHNpbWlsYXIgV2luZG93cwo+Pj4+Pj4gbWlncmF0aW9uIGlz
+c3VlcyB0aGF0IHRoZSBndWVzdCBpcyBhbHJlYWR5IGluIHRoZSBwcm9jZXNzIG9mIGJlaW5nIGNs
+ZWFuZWQKPj4+Pj4+IHVwIHdoZW4gdGhlc2Ugb2NjdXIuIENvbW1pdCAyZGJlOWMzY2QyICgieDg2
+L21tOiBzaWxlbmNlIGEgcG9pbnRsZXNzCj4+Pj4+PiB3YXJuaW5nIikgaW50ZW50aW9uYWxseSBz
+dXBwcmVzc2VkIGEgbG9nIG1lc3NhZ2UgaGVyZSwgYW5kIHRoZQo+Pj4+Pj4gaW1tZWRpYXRlbHkg
+Zm9sbG93aW5nIGRlYnVnZ2luZyBjb2RlICg5MzNmOTY2YmNkIHg4Ni9tbTogYWRkCj4+Pj4+PiB0
+ZW1wb3JhcnkgZGVidWdnaW5nIGNvZGUgdG8gZ2V0X3BhZ2VfZnJvbV9nZm5fcDJtKCkpIHdhcyBy
+ZXZlcnRlZAo+Pj4+Pj4gYSBsaXR0bGUgb3ZlciBhIG1vbnRoIGxhdGVyLiBUaGlzIHdhc24ndCBh
+cyBhIGZvbGxvdy11cCB0byBhbm90aGVyIHBhdGNoCj4+Pj4+PiAoZml4KSwgYnV0IGZvbGxvd2lu
+ZyB0aGUgZGlzY3Vzc2lvbiByb290ZWQgYXQKPj4+Pj4+IGh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxNy0wNi9tc2cwMDMyNC5odG1sCj4+Pj4+
+IFRoYXQgd2FzIC1FU1JDSCwgbm90IC1FRkFVTFQuCj4+Pj4gSSd2ZSBsb29rZWQgYSBsaXR0bGUg
+Yml0IG1vcmUgaW50byB0aGlzLgo+Pj4+Cj4+Pj4gQXMgd2UgYXJlIHNlZWluZyBFRkFVTFQgYmVp
+bmcgcmV0dXJuZWQgYnkgdGhlIGh5cGVydmlzb3IgdGhpcyBlaXRoZXIKPj4+PiBtZWFucyB0aGUg
+dG9vbHMgYXJlIHNwZWNpZnlpbmcgYW4gaW52YWxpZCBhZGRyZXNzIChxdWl0ZSB1bmxpa2VseSkK
+Pj4+PiBvciB0aGUgYnVmZmVycyBhcmUgbm90IGFzIE1BUF9MT0NLRUQgYXMgd2Ugd2lzaCB0aGVt
+IHRvIGJlLgo+Pj4+Cj4+Pj4gSXMgdGhlcmUgYSB3YXkgdG8gc2VlIHdoZXRoZXIgdGhlIGhvc3Qg
+d2FzIGV4cGVyaWVuY2luZyBzb21lIG1lbW9yeQo+Pj4+IHNob3J0YWdlLCBzbyB0aGUgYnVmZmVy
+cyBtaWdodCBoYXZlIGJlZW4gc3dhcHBlZCBvdXQ/Cj4+Pj4KPj4+PiBtYW4gbW1hcCB0ZWxscyBt
+ZTogIlRoaXMgaW1wbGVtZW50YXRpb24gd2lsbCB0cnkgdG8gcG9wdWxhdGUgKHByZWZhdWx0KQo+
+Pj4+IHRoZSB3aG9sZSByYW5nZSBidXQgdGhlIG1tYXAgY2FsbCBkb2Vzbid0IGZhaWwgd2l0aCBF
+Tk9NRU0gaWYgdGhpcwo+Pj4+IGZhaWxzLiBUaGVyZWZvcmUgbWFqb3IgZmF1bHRzIG1pZ2h0IGhh
+cHBlbiBsYXRlciBvbi4iCj4+Pj4KPj4+PiBBbmQ6ICJPbmUgc2hvdWxkIHVzZSBtbWFwKDIpIHBs
+dXMgbWxvY2soMikgd2hlbiBtYWpvciBmYXVsdHMgYXJlIG5vdAo+Pj4+IGFjY2VwdGFibGUgYWZ0
+ZXIgdGhlIGluaXRpYWxpemF0aW9uIG9mIHRoZSBtYXBwaW5nLiIKPj4+Pgo+Pj4+IFdpdGggb3Nk
+ZXBfYWxsb2NfcGFnZXMoKSBpbiB0b29scy9saWJzL2NhbGwvbGludXguYyB0b3VjaGluZyBhbGwg
+dGhlCj4+Pj4gaHlwZXJjYWxsIGJ1ZmZlciBwYWdlcyBiZWZvcmUgZG9pbmcgdGhlIGh5cGVyY2Fs
+bCBJJ20gbm90IHN1cmUgdGhpcwo+Pj4+IGNvdWxkIGJlIGFuIGlzc3VlLgo+Pj4+Cj4+Pj4gQW55
+IHRob3VnaHRzIG9uIHRoYXQ/Cj4+PiBJYW4sIGlzIHRoZXJlIGEgY2hhbmNlIHRvIGRlZGljYXRl
+IGEgbWFjaGluZSB0byBhIHNwZWNpZmljIHRlc3QgdHJ5aW5nCj4+PiB0byByZXByb2R1Y2UgdGhl
+IHByb2JsZW0/IEluIGNhc2Ugd2UgbWFuYWdlIHRvIGdldCB0aGlzIGZhaWx1cmUgaW4gYQo+Pj4g
+cmVhc29uYWJsZSB0aW1lIGZyYW1lIEkgZ3Vlc3MgdGhlIG1vc3QgcHJvbWlzaW5nIGFwcHJvYWNo
+IHdvdWxkIGJlIHRvCj4+PiB1c2UgYSB0ZXN0IGh5cGVydmlzb3IgcHJvZHVjaW5nIG1vcmUgZGVi
+dWcgZGF0YS4gSWYgeW91IHRoaW5rIHRoaXMgaXMKPj4+IHdvcnRoIGRvaW5nIEkgY2FuIHdyaXRl
+IGEgcGF0Y2guCj4+IFRyeWluZyB0byByZXByb2R1Y2UgdGhlIHByb2JsZW0gaW4gYSBsaW1pdGVk
+IHRlc3QgZW52aXJvbm1lbnQgZmluYWxseQo+PiB3b3JrZWQ6IGRvaW5nIGEgbG9vcCBvZiAieGwg
+c2F2ZSAtYyIgcHJvZHVjZWQgdGhlIHByb2JsZW0gYWZ0ZXIgMTk4Cj4+IGl0ZXJhdGlvbnMuCj4+
+Cj4+IEkgaGF2ZSBhc2tlZCBhIFNVU0UgZW5naW5lZXIgZG9pbmcga2VybmVsIG1lbW9yeSBtYW5h
+Z2VtZW50IGlmIGhlCj4+IGNvdWxkIHRoaW5rIG9mIHNvbWV0aGluZy4gSGlzIGlkZWEgaXMgdGhh
+dCBtYXliZSBzb21lIGt0aHJlYWQgY291bGQgYmUKPj4gdGhlIHJlYXNvbiBmb3Igb3VyIHByb2Js
+ZW0sIGUuZy4gdHJ5aW5nIHBhZ2UgbWlncmF0aW9uIG9yIGNvbXBhY3Rpb24KPj4gKGF0IGxlYXN0
+IG9uIHRoZSB0ZXN0IG1hY2hpbmUgSSd2ZSBsb29rZWQgYXQgY29tcGFjdGlvbiBvZiBtbG9ja2Vk
+Cj4+IHBhZ2VzIGlzIGFsbG93ZWQ6IC9wcm9jL3N5cy92bS9jb21wYWN0X3VuZXZpY3RhYmxlX2Fs
+bG93ZWQgaXMgMSkuCj4+Cj4+IEluIG9yZGVyIHRvIGJlIHJlYWxseSBzdXJlIG5vdGhpbmcgaW4g
+dGhlIGtlcm5lbCBjYW4gdGVtcG9yYXJpbHkKPj4gc3dpdGNoIGh5cGVyY2FsbCBidWZmZXIgcGFn
+ZXMgcmVhZC1vbmx5IG9yIGludmFsaWQgZm9yIHRoZSBoeXBlcnZpc29yCj4+IHdlJ2xsIGhhdmUg
+dG8gbW9kaWZ5IHRoZSBwcml2Y21kIGRyaXZlciBpbnRlcmZhY2U6IGl0IHdpbGwgaGF2ZSB0bwo+
+PiBnYWluIGtub3dsZWRnZSB3aGljaCBwYWdlcyBhcmUgaGFuZGVkIG92ZXIgdG8gdGhlIGh5cGVy
+dmlzb3IgYXMgYnVmZmVycwo+PiBpbiBvcmRlciB0byBiZSBhYmxlIHRvIGxvY2sgdGhlbSBhY2Nv
+cmRpbmdseSB2aWEgZ2V0X3VzZXJfcGFnZXMoKS4KPj4KPj4gV2hpbGUgdGhpcyBpcyBhIHBvc3Np
+YmxlIGV4cGxhbmF0aW9uIG9mIHRoZSBmYXVsdCB3ZSBhcmUgc2VlaW5nIGl0IG1pZ2h0Cj4+IGJl
+IHJlbGF0ZWQgdG8gYW5vdGhlciByZWFzb24uIFNvIEknbSBnb2luZyB0byBhcHBseSBzb21lIG1v
+ZGlmaWNhdGlvbnMKPj4gdG8gdGhlIGh5cGVydmlzb3IgdG8gZ2V0IHNvbWUgbW9yZSBkaWFnbm9z
+dGljcyBpbiBvcmRlciB0byB2ZXJpZnkgdGhlCj4+IHN1c3BlY3RlZCBrZXJuZWwgYmVoYXZpb3Ig
+aXMgcmVhbGx5IHRoZSByZWFzb24gZm9yIHRoZSBoeXBlcnZpc29yIHRvCj4+IHJldHVybiBFRkFV
+TFQuCj4gSSB3YXMgbHVja3kuIFRvb2sgb25seSAzOSBpdGVyYXRpb25zIHRoaXMgdGltZS4KPgo+
+IFRoZSBkZWJ1ZyBkYXRhIGNvbmZpcm1zIHRoZSB0aGVvcnkgdGhhdCB0aGUga2VybmVsIGlzIHNl
+dHRpbmcgdGhlIFBURSB0bwo+IGludmFsaWQgb3IgcmVhZCBvbmx5IGZvciBhIHNob3J0IGFtb3Vu
+dCBvZiB0aW1lOgo+Cj4gKFhFTikgZml4dXAgZm9yIGFkZHJlc3MgMDAwMDdmZmI5OTA0ZmU0NCwg
+ZXJyb3JfY29kZSAwMDAyOgo+IChYRU4pIFBhZ2V0YWJsZSB3YWxrIGZyb20gMDAwMDdmZmI5OTA0
+ZmU0NDoKPiAoWEVOKSAgTDRbMHgwZmZdID0gMDAwMDAwMDQ1OGRhNjA2NyAwMDAwMDAwMDAwMDE5
+MTkwCj4gKFhFTikgIEwzWzB4MWVlXSA9IDAwMDAwMDA0NTdkMjYwNjcgMDAwMDAwMDAwMDAxODIx
+MAo+IChYRU4pICBMMlsweDBjOF0gPSAwMDAwMDAwNDQ1YWIzMDY3IDAwMDAwMDAwMDAwMDYwODMK
+PiAoWEVOKSAgTDFbMHgwNGZdID0gODAwMDAwMDQ1OGNkYzEwNyAwMDAwMDAwMDAwMDE5MjVhCj4g
+KFhFTikgWGVuIGNhbGwgdHJhY2U6Cj4gKFhFTikgICAgWzxmZmZmODJkMDgwMmFiZTMxPl0gX19j
+b3B5X3RvX3VzZXJfbGwrMHgyNy8weDMwCj4gKFhFTikgICAgWzxmZmZmODJkMDgwMjcyZWRiPl0g
+YXJjaF9kb19kb21jdGwrMHg1YTgvMHgyNjQ4Cj4gKFhFTikgICAgWzxmZmZmODJkMDgwMjA2ZDVk
+Pl0gZG9fZG9tY3RsKzB4MThmYi8weDFjNGUKPiAoWEVOKSAgICBbPGZmZmY4MmQwODAzNmQxYmE+
+XSBwdl9oeXBlcmNhbGwrMHgxZjQvMHg0M2UKPiAoWEVOKSAgICBbPGZmZmY4MmQwODAzNzM0YTY+
+XSBsc3Rhcl9lbnRlcisweDExNi8weDEyMAo+Cj4gVGhlIHBhZ2Ugd2FzIHdyaXRhYmxlIGFnYWlu
+IHdoZW4gdGhlIHBhZ2Ugd2FsayBkYXRhIGhhcyBiZWVuIGNvbGxlY3RlZCwKPiBidXQgQSBhbmQg
+RCBiaXRzIHN0aWxsIGFyZSAwICh3aGljaCBzaG91bGQgbm90IGJlIHRoZSBjYXNlIGluIGNhc2Ug
+dGhlCj4ga2VybmVsIGRpZG4ndCB0b3VjaCB0aGUgUFRFLCBhcyB0aGUgaHlwZXJ2aXNvciByZWFk
+IGZyb20gdGhhdCBwYWdlIHNvbWUKPiBpbnN0cnVjdGlvbnMgYmVmb3JlIHRoZSBmYWlsZWQgd3Jp
+dGUpLgo+Cj4gU3RhcnRpbmcgd2l0aCB0aGUgWGVuIHBhdGNoZXMgbm93Li4uCgpHaXZlbiB0aGF0
+IHdhbGssIEknZCBleHBlY3QgdGhlIHNwdXJpb3VzIHBhZ2VmYXVsdCBsb2dpYyB0byBoYXZlIGtp
+Y2tlZAppbiwgYW5kIHJldHJpZWQuCgpQcmVzdW1hYmx5IHRoZSBzcHVyaW91cyB3YWxrIGxvZ2lj
+IHNhdyB0aGUgbm9uLXByZXNlbnQvcmVhZC1vbmx5IG1hcHBpbmdzPwoKfkFuZHJldwoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
