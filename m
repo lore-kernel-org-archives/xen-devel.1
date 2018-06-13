@@ -1,18 +1,23 @@
-From: =?UTF-8?Q?Kristaps_=C4=8Civkulis?= <kristaps.civkulis@gmail.com>
-Subject: strange behavior with Multiboot2 on EFI
-Date: Wed, 13 Jun 2018 02:09:45 +0300
-Message-ID: <CAJL+N=F2suXu7Uu0RWX2MBwVfFtdFrSv50ucqYr9jXRdB3Z--A@mail.gmail.com>
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+Subject: Re: [PATCH v5 3/3] Input: xen-kbdfront - allow better
+ run-time configuration
+Date: Wed, 13 Jun 2018 08:47:17 +0300
+Message-ID: <f9354bee-3e44-eb93-05bc-58b8a9078b72__31157.1941282184$1528868770$gmane$org@gmail.com>
+References: <20180612074856.28451-1-andr2000@gmail.com>
+ <20180612074856.28451-4-andr2000@gmail.com> <20180612220722.GA38773@dtor-ws>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=g1um=i6=gmail.com=kristaps.civkulis@srs-us1.protection.inumbo.net>)
- id 1fSsQ7-00074c-Eg
- for xen-devel@lists.xenproject.org; Tue, 12 Jun 2018 23:09:47 +0000
-Received: by mail-ot0-x241.google.com with SMTP id 92-v6so788764otw.9
- for <xen-devel@lists.xenproject.org>; Tue, 12 Jun 2018 16:09:46 -0700 (PDT)
+ <srs0=t8s0=i7=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1fSycs-0004Qb-FH
+ for xen-devel@lists.xenproject.org; Wed, 13 Jun 2018 05:47:22 +0000
+Received: by mail-lf0-x241.google.com with SMTP id t134-v6so1946003lff.6
+ for <xen-devel@lists.xenproject.org>; Tue, 12 Jun 2018 22:47:20 -0700 (PDT)
+In-Reply-To: <20180612220722.GA38773@dtor-ws>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,37 +26,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: jgross@suse.com, lyan@suse.com, andrii_chepurnyi@epam.com, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, linux-kernel@vger.kernel.org, linux-input@vger.kernel.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8sCgpJIGFtIGltcGxlbWVudGluZyBNdWx0aWJvb3QyIHN1cHBvcnQgZm9yIEZyZWVCU0Qg
-bG9hZGVyIHRvIGxvYWQgWGVuCmtlcm5lbC4gQ3VycmVudGx5IEkgcGFzcyBFRkkgNjQtYml0IHN5
-c3RlbSB0YWJsZSBwb2ludGVyIHRhZywgRUZJIGJvb3QKc2VydmljZXMgbm90IHRlcm1pbmF0ZWQg
-dGFnLCBFRkkgNjQtYml0IGltYWdlIGhhbmRsZSBwb2ludGVyIHRhZyBhbmQKSW1hZ2UgbG9hZCBi
-YXNlIHBoeXNpY2FsIGFkZHJlc3MgdGFnLgoKVGhlIHByb2JsZW0gaXMsIFhlbiBrZXJuZWwgZ2V0
-cyBzdHVjayBpbnRvIGluZmluaXRlIGxvb3AgYXQgYWRkcmVzcwpuZWFyIDB4N2ZhNDE5YmUgd2l0
-aG91dCBwcmludGluZyBhbnl0aGluZy4gU3lzdGVtIHRhYmxlIGlzIGF0CjB4N2ZiZWUwMTggYW5k
-IGltYWdlIGhhbmRsZSBpcyBhdCAweDdmMjJmZDk4LiBJZiBJIGRlYnVnZ2VkIGNvcnJlY3RseSwK
-aXQgZ290IGludG8gaW5maW5pdGUgbG9vcCBhZnRlciBmaXJzdCB0aW1lIGNhbGxpbmcgdm9pZApl
-ZmlfY29uc29sZV9zZXRfbW9kZSh2b2lkKSBbMF0gYmVjYXVzZSBpdCBkaWRuJ3QgcmV0dXJuIGZy
-b20gaXQuCgpOb3RlIHRoYXQgaWYgSSBkb24ndCBwYXNzIEVGSSA2NC1iaXQgc3lzdGVtIHRhYmxl
-IHBvaW50ZXIgdGFnLCBib290CnNlcnZpY2VzIG5vdCB0ZXJtaW5hdGVkIHRhZyBvciA2NC1iaXQg
-aW1hZ2UgaGFuZGxlIHBvaW50ZXIgdGFnIHRoZW4KWGVuIGtlcm5lbCBjb3JyZWN0bHkgcHJpbnRz
-IGVycm9yIG1lc3NhZ2UhCgpJcyB0aGlzIGJlaGF2aW9yIGludGVuZGVkPyBJZiBub3QsIHdoZXJl
-IGNvdWxkIGJlIGEgcHJvYmxlbT8KCkkgY29tcGlsZWQgWGVuIGtlcm5lbCBvbiBGcmVlQlNEIHdp
-dGggdGhpcyBjb21tYW5kOgoKIyBnbWFrZSAtajQgeGVuIGNsYW5nPXkgTEQ9L3Vzci9sb2NhbC9i
-aW4vbGQgQ0M9ImNjIC1CL3Vzci9sb2NhbC9iaW4iIFwKICBOTT0vdXNyL2xvY2FsL2Jpbi9ubQoK
-YW5kIEkgdGVzdCB3aXRoIHRoaXMgY29tbWFuZDoKCiQgcWVtdS1zeXN0ZW0teDg2XzY0IC1tIDIw
-NDggLWJpb3MgT1ZNRi1wdXJlLWVmaS5mZCAtaGRhIHRlc3RfZGlzay5pbWcKCk9WTUYtcHVyZS1l
-ZmkuZmQgaXMgdGFrZW4gZnJvbQplZGsyLmdpdC1vdm1mLXg2NC0wLTIwMTgwNjEyLjE1NS5nNWE1
-NmMwNDkzOS5ub2FyY2gucnBtIGF0IFsxXQoKSSBhbHNvIHRyaWVkIHRvIGxvYWQgWGVuIGtlcm5l
-bCBiYXJlLW1ldGFsIHdpdGggR3J1YjIuIEkgYWRkZWQKZm9sbG93aW5nIGxpbmVzIHRvIC9ib290
-L2dydWIvZ3J1Yi5jZmc6CgptZW51ZW50cnkgJ3hlbicgewogICAgc2V0IHJvb3Q9J2hkMCxncHQx
-JwogICAgbXVsdGlib290MiAveGVuCn0KCmFuZCBhZnRlciBsYXVuY2hpbmcgWGVuIGl0IGFsc28g
-ZGlkbid0IHByaW50IGFueXRoaW5nLgoKClRoYW5rcywgS3Jpc3RhcHMuCgpbMF0gaHR0cHM6Ly94
-ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhlbi5naXQ7YT1ibG9iO2Y9eGVuL2NvbW1vbi9lZmkv
-Ym9vdC5jO2g9NjRkMTI2ODVkMzU3NDdkMzczNGMxYWQ4YWMyNzYzNGU4M2JjZjdkYjtoYj1IRUFE
-I2w2OTcKWzFdIGh0dHBzOi8vd3d3LmtyYXhlbC5vcmcvcmVwb3MvamVua2lucy9lZGsyLwoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMDYvMTMvMjAxOCAwMTowNyBBTSwgRG1pdHJ5IFRvcm9raG92IHdyb3RlOgo+IE9uIFR1ZSwg
+SnVuIDEyLCAyMDE4IGF0IDEwOjQ4OjU2QU0gKzAzMDAsIE9sZWtzYW5kciBBbmRydXNoY2hlbmtv
+IHdyb3RlOgo+PiAgIAo+PiArCWlmICghKHdpdGhfa2JkIHwgd2l0aF9wdHIgfCB3aXRoX210b3Vj
+aCkpIHsKPiBJIGNoYW5nZWQgdGhpcyB0byBsb2dpY2FsICJPUiIgYW5kIGFwcGxpZWQsIHRoYW5r
+IHlvdS4KWWVzLCB0aGF0J3MgYmV0dGVyLCB0aGFuayB5b3UKPj4gKwkJcmV0ID0gLUVOWElPOwo+
+PiArCQlnb3RvIGVycm9yOwo+PiArCX0KPj4gKwo+PiAgIAlyZXQgPSB4ZW5rYmRfY29ubmVjdF9i
+YWNrZW5kKGRldiwgaW5mbyk7Cj4+ICAgCWlmIChyZXQgPCAwKQo+PiAgIAkJZ290byBlcnJvcjsK
+Pj4gLS0gCj4+IDIuMTcuMQo+PgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
