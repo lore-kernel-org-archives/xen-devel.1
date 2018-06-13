@@ -1,20 +1,28 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] xen: don't use privcmd_call() from
- xen_mc_flush()
-Date: Wed, 13 Jun 2018 04:05:32 -0600
-Message-ID: <5B20EC6C02000078001CACBA__49529.8460046344$1528884266$gmane$org@prv1-mh.provo.novell.com>
-References: <20180613095806.2978-1-jgross@suse.com>
+From: Manuel Bouyer <bouyer@antioche.eu.org>
+Subject: Re: 4.11.0 RC1 panic
+Date: Wed, 13 Jun 2018 12:07:35 +0200
+Message-ID: <20180613100735.GA8452@mail.soc.lip6.fr>
+References: <5B1FE90D020000F804A5F2B5@prv1-mh.provo.novell.com>
+ <5B20335B0200008603B30F33@prv1-mh.provo.novell.com>
+ <5B20D0C102000078001CABB9@prv1-mh.provo.novell.com>
+ <20180613085736.GA8026@mail.soc.lip6.fr>
+ <5B1FB0E5020000F903B0F0C2@prv1-mh.provo.novell.com>
+ <5B1FE90D020000F804A5F2B5@prv1-mh.provo.novell.com>
+ <5B20335B0200008603B30F33@prv1-mh.provo.novell.com>
+ <5B20D0C102000078001CABB9@prv1-mh.provo.novell.com>
+ <5B20DC910200000204A693B0@prv1-mh.provo.novell.com>
+ <5B20EAF702000078001CACA3@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=bhoq=i7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fT2en-0000eB-2q
- for xen-devel@lists.xenproject.org; Wed, 13 Jun 2018 10:05:37 +0000
-In-Reply-To: <20180613095806.2978-1-jgross@suse.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=otbb=i7=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
+ id 1fT2gm-0000mZ-Lu
+ for xen-devel@lists.xenproject.org; Wed, 13 Jun 2018 10:07:40 +0000
 Content-Disposition: inline
+In-Reply-To: <5B20EAF702000078001CACA3@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,18 +31,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEzLjA2LjE4IGF0IDExOjU4LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBVc2lu
-ZyBwcml2Y21kX2NhbGwoKSBmb3IgYSBzaW5nbGV0b24gbXVsdGljYWxsIHNlZW1zIHRvIGJlIHdy
-b25nLCBhcwo+IHByaXZjbWRfY2FsbCgpIGlzIHVzaW5nIHN0YWMoKS9jbGFjKCkgdG8gZW5hYmxl
-IGh5cGVydmlzb3IgYWNjZXNzIHRvCj4gTGludXggdXNlciBzcGFjZS4KPiAKPiBBZGQgYSBuZXcg
-eGVuX3NpbmdsZV9jYWxsKCkgZnVuY3Rpb24gdG8gYmUgdXNlIGZvciB0aGF0IHB1cnBvc2UuCj4g
-Cj4gUmVwb3J0ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPiBTaWduZWQt
-b2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CgpSZXZpZXdlZC1ieTogSmFu
-IEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+T24gV2VkLCBKdW4gMTMsIDIwMTggYXQgMDM6NTk6MTlBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDEzLjA2LjE4IGF0IDEwOjU3LCA8Ym91eWVyQGFudGlvY2hlLmV1Lm9yZz4g
+d3JvdGU6Cj4gPiBPbiBXZWQsIEp1biAxMywgMjAxOCBhdCAwMjowNzoyOUFNIC0wNjAwLCBKYW4g
+QmV1bGljaCB3cm90ZToKPiA+PiAKPiA+PiAoWEVOKSBBc3NlcnRpb24gJyFwYWdlLT5saW5lYXJf
+cHRfY291bnQnIGZhaWxlZCBhdCBtbS5jOjU5Ngo+ID4+IAo+ID4+IEluIGZhY3QsIHRoZXJlJ3Mg
+bm8gYXNzZXJ0aW9uIHdpdGggdGhhdCBleHByZXNzaW9uIGFueXdoZXJlIEkgY291bGQKPiA+PiBz
+ZWUuIERvIHlvdSBoYXZlIGFueSBsb2NhbCBwYXRjaGVzIGluIHBsYWNlPwo+ID4gCj4gPiBZZXMs
+IDIgb2YgdGhlbSBmcm9tIHlvdSAodGhlIGZpcnN0IG9uZSBpcyB3aGVyZSB0aGUgYXNzZXJ0IGlz
+KS4gU2VlIAo+ID4gYXR0YWNoZWQuCj4gCj4gT2gsIEkgaGFkIGxvbmcgZHJvcHBlZCB0aGF0IGZp
+cnN0IG9uZSwgYWZ0ZXIgeW91IGhhZCBzYWlkIHRoYXQgaXQgZGlkbid0Cj4gdHJpZ2dlciBpbiBh
+IGxvbmcgdGltZS4gSXQgdHJpZ2dlcmluZyB3aXRoIHRoZSBvdGhlciBkZWJ1Z2dpbmcgcGF0Y2gg
+aXMKPiBub3QgdW5leHBlY3RlZC4gU28gcGxlYXNlIGRyb3AgdGhhdCBwYXRjaCBhdCBsZWFzdCBm
+b3IgdGhlIHRpbWUgYmVpbmcuCgpPSywgcmVidWlsZGluZyBYZW4gcmlnaHQgbm93CgotLSAKTWFu
+dWVsIEJvdXllciA8Ym91eWVyQGFudGlvY2hlLmV1Lm9yZz4KICAgICBOZXRCU0Q6IDI2IGFucyBk
+J2V4cGVyaWVuY2UgZmVyb250IHRvdWpvdXJzIGxhIGRpZmZlcmVuY2UKLS0KCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
