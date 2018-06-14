@@ -1,16 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v6 12/13] xen: specify support for EXPERT
- and DEBUG Kconfig options
-Date: Thu, 14 Jun 2018 07:44:54 -0600
-Message-ID: <5B22715602000078001CB4C6@prv1-mh.provo.novell.com>
-References: <alpine.DEB.2.10.1806131409300.14695@sstabellini-ThinkPad-X260>
- <1528924492-6579-12-git-send-email-sstabellini@kernel.org>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [xen-4.8-testing test] 124100: regressions - FAIL
+Date: Thu, 14 Jun 2018 14:58:00 +0100
+Message-ID: <23330.29800.357191.113227@mariner.uk.xensource.com>
+References: <osstest-124100-mainreport@xen.org>
+ <23328.64927.289818.424470@mariner.uk.xensource.com>
+ <5B2113FE02000078001CADBC@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1528924492-6579-12-git-send-email-sstabellini@kernel.org>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=gk4f=ja=citrix.com=prvs=6963a51b9=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1fTSlJ-00017V-6J
+ for xen-devel@lists.xenproject.org; Thu, 14 Jun 2018 13:58:05 +0000
+In-Reply-To: <5B2113FE02000078001CADBC@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,23 +23,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Artem Mygaiev <artem_mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Dario Faggioli <dfaggioli@suse.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Jim Fehlig <JFEHLIG@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEzLjA2LjE4IGF0IDIzOjE0LCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6
-Cj4gLS0tIGEvU1VQUE9SVC5tZAo+ICsrKyBiL1NVUFBPUlQubWQKPiBAQCAtMTYsNiArMTYsMTMg
-QEAgZm9yIHRoZSBkZWZpbml0aW9ucyBvZiB0aGUgc3VwcG9ydCBzdGF0dXMgbGV2ZWxzIGV0Yy4K
-PiAgCj4gICMgRmVhdHVyZSBTdXBwb3J0Cj4gIAo+ICsjIyBLY29uZmlnCj4gKwo+ICtLY29uZmln
-IG9wdGlvbnMgdGhhdCBkZXBlbmQgb24gQ09ORklHX0VYUEVSVCBvciBDT05GSUdfREVCVUcgYXJl
-IG5vdAo+ICtzZWN1cml0eSBzdXBwb3J0ZWQuIE90aGVyIEtjb25maWcgb3B0aW9ucyB0aGF0IGRv
-IG5vdCBkZXBlbmQgb24KPiArQ09ORklHX0VYUEVSVCBvciBDT05GSUdfREVCVUcgYXJlIHN1cHBv
-cnRlZCwgaWYgdGhlIHJlbGF0ZWQgZmVhdHVyZXMgYXJlCj4gK21hcmtlZCBhcyBzdXBwb3J0ZWQg
-aW4gdGhpcyBkb2N1bWVudC4KCkdlbmVyYWxseSBmaW5lIHdpdGggbWUsIGV4Y2VwdCB0aGVyZSdz
-IG5vIENPTkZJR19FWFBFUlQuIEVYUEVSVCBpcyBhIHNwZWNpYWwKc2V0dGluZyB0aGF0IGNvbWVz
-IGZyb20gdGhlIGVudmlyb25tZW50LiBIZW5jZSBhbHNvIHRoZSBub24tc3RhbmRhcmQKRVhQRVJU
-ID0gInkiIGNoZWNrcy4gUGVyaGFwcyBiZXR0ZXIgdG8gdGFsayBhYm91dCB0aGUgIkVYUEVSVCBh
-bmQgREVCVUcKS2NvbmZpZyBvcHRpb25zIi4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+SmFuIEJldWxpY2ggd3JpdGVzICgiUmU6IFt4ZW4tNC44LXRlc3RpbmcgdGVzdF0gMTI0MTAwOiBy
+ZWdyZXNzaW9ucyAtIEZBSUwiKToKPiBJJ2QgZmF2b3IgYSBzdWZmaWNpZW50bHkganVzdGlmaWVk
+IChhcyBpdCBpcyBub3cpIGZvcmNlIHB1c2gsIGFuZCB0aGVuCj4gYW4gaW1tZWRpYXRlIHJlbGVh
+c2UuIEFzIHlvdSBzYXkgZWxzZXdoZXJlLCB0aGUgcHJvYmxlbSB3aXRoIGluCj4gcGFydGljdWxh
+ciB0aGUgYWxiYW5hcyBoYXMgYmVlbiBiYWQgZW5vdWdoIGZvciBpdCB0byBiZSBzdWZmaWNpZW50
+bHkKPiB1bnByZWRpY3RhYmxlIHdoZW4gYSBub3JtYWwgcHVzaCBtaWdodCBoYXBwZW4gKGluIGZh
+Y3QgSSB3YXMKPiBzdXJwcmlzZWQgYnkgaG93IHF1aWNrbHkgdGhpcyBoYXBwZW5lZCBvbiA0Ljcs
+IGFzIEkgaGFkIGFsc28KPiBleHByZXNzZWQgaW4gYSByZXBseSB0byB0aGF0IGZsaWdodCdzIHJl
+cG9ydCkuCj4gCj4gRm9yIHRoZSByZWxlYXNlIHlvdSdkIG5lZWQgdG8gdGFnIHFlbXUtdHJhZCBh
+bmQgKGFzIHdhcyBhc2tlZCBieQo+IFdlaSBpaXJjIG9uIGlyYykgbWluaS1vcywgc3VjaCB0aGF0
+IEkgY291bGQgdGhlbiBwdXNoIHRoZSB2ZXJzaW9uCj4gdXBkYXRlIG9uIHRoZSBtYWluIHRyZWUu
+CgpSaWdodC4gIFNvLCBJIGhhdmUgZm9yY2UgcHVzaGVkCjE1MjJhODFhY2VhNWM2MTA5ZjZmNzkx
+ZDUyOGZkODcyNDExN2ZiNjMuCgpJIGhhdmUgdGFnZ2VkIHhlbi00LjguNCBpbiBxZW11LXhlbi10
+cmFkaXRpb25hbCBhbmQgeGVuLVJFTEVBU0UtNC44LjQKaW4gbWluaS1vcy4KCklhbi4KCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
