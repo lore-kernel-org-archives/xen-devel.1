@@ -1,20 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH 2/2] x86/HVM: attempts to emulate FPU insns need
- to set fpu_initialised
-Date: Fri, 15 Jun 2018 02:58:43 -0600
-Message-ID: <5B237FC302000078001CB84E@prv1-mh.provo.novell.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 0/2] x86/HVM: XSA-267 follow-ups
+Date: Fri, 15 Jun 2018 10:27:33 +0100
+Message-ID: <10dde060-8cc6-719b-fec0-dd87f8d61a5e@citrix.com>
 References: <5B237D0B02000078001CB837@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=9pmr=jb=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fTkZD-0000DX-5J
- for xen-devel@lists.xenproject.org; Fri, 15 Jun 2018 08:58:47 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=stcz=jb=citrix.com=prvs=6971d5c5d=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1fTl17-0003EE-Jk
+ for xen-devel@lists.xenproject.org; Fri, 15 Jun 2018 09:27:37 +0000
 In-Reply-To: <5B237D0B02000078001CB837@prv1-mh.provo.novell.com>
-Content-Disposition: inline
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,22 +22,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-TXkgb3JpZ2luYWwgd2F5IG9mIHRoaW5raW5nIGhlcmUgd2FzIHRoYXQgdGhpcyB3b3VsZCBiZSBz
-ZXQgYW55d2F5IGF0CnRoZSBwb2ludCBzdGF0ZSBnZXRzIHJlbG9hZGVkIGFmdGVyIHRoZSBhZGp1
-c3RtZW50cyBodm1lbXVsX3B1dF9mcHUoKQpkb2VzLCBidXQgdGhlIGZsYWcgc2hvdWxkIGFscmVh
-ZHkgYmUgc2V0IGJlZm9yZSB0aGF0IC0gYWZ0ZXIgYWxsIHRoZQpndWVzdCBtYXkgbmV2ZXIgYWdh
-aW4gdG91Y2ggdGhlIEZQVSBiZWZvcmUgZS5nLiBnZXR0aW5nIG1pZ3JhdGVkL3NhdmVkLgoKU2ln
-bmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKLS0tIGEveGVuL2Fy
-Y2gveDg2L2h2bS9lbXVsYXRlLmMKKysrIGIveGVuL2FyY2gveDg2L2h2bS9lbXVsYXRlLmMKQEAg
-LTIwNTMsNiArMjA1Myw3IEBAIHN0YXRpYyBpbnQgaHZtZW11bF9nZXRfZnB1KAogICAgICAgICAg
-KiBtYXNraW5nIG9mIGFsbCBleGNlcHRpb25zIGJ5IEZOU1RFTlYuKQogICAgICAgICAgKi8KICAg
-ICAgICAgc2F2ZV9mcHVfZW5hYmxlKCk7CisgICAgICAgIGN1cnItPmZwdV9pbml0aWFsaXNlZCA9
-IHRydWU7CiAgICAgICAgIGN1cnItPmZwdV9kaXJ0aWVkID0gdHJ1ZTsKICAgICAgICAgaWYgKCAo
-ZnB1X2N0eHQtPmZjdyAmIDB4M2YpICE9IDB4M2YgKQogICAgICAgICB7CgoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTUvMDYvMTggMDk6NDcsIEphbiBCZXVsaWNoIHdyb3RlOgo+IEFzIGJvdGggWGVuUlQgYW5k
+IG9zc3Rlc3QgaGF2ZSBmb3VuZCwgdGhlIFhTQS0yNjcgcGF0Y2hlcyBvdmVybG9va2VkIGEKPiBz
+cGVjaWFsIGNhc2UgaW4gSFZNIGluc24gZW11bGF0aW9uLiBXaGlsZSBsb29raW5nIGludG8gdGhp
+cyBJJ3ZlIGFsc28gbm90aWNlZAo+IGFuIG9taXNzaW9uIGluIHRoZSBzaWJsaW5nIGZ1bmN0aW9u
+IHRvIHRoZSBvbmUgbmVlZGluZyB0byBiZSBjaGFuZ2VkLiBBdAo+IGxlYXN0IHBhdGNoIDEgc2hv
+dWxkIGJlIHN0cm9uZ2x5IGNvbnNpZGVyZWQgZm9yIDQuMTE7IHBhdGNoIDIgd2lsbCBuZWVkCj4g
+YmFja3BvcnRpbmcgYXMgd2VsbCwgYnV0IGRvZXNuJ3QgbG9vayBhcyB1cmdlbnQuCj4KPiAxOiBh
+Y2NvdW50IGZvciBmdWxseSBlYWdlciBGUFUgbW9kZSBpbiBlbXVsYXRpb24KPiAyOiBhdHRlbXB0
+cyB0byBlbXVsYXRlIEZQVSBpbnNucyBuZWVkIHRvIHNldCBmcHVfaW5pdGlhbGlzZWQKCkJvdGgg
+UmV2aWV3ZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpB
+dCB0aGlzIHBvaW50LCBJJ20gdGVtcHRlZCB0byBzdWdnZXN0IHRoYXQgd2UgcmVpc3N1ZSB0aGUg
+WFNBLTI2NwphZHZpc29yeSB0byBpbmNsdWRlIHBhdGNoIDEuCgp+QW5kcmV3CgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
