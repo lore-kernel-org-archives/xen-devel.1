@@ -1,22 +1,19 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
-Subject: Re: [RFC] xen: Don't use
- memory_region_init_ram_nomigrate() in pci_assign_dev_load_option_rom()
-Date: Fri, 15 Jun 2018 15:42:21 +0100
-Message-ID: <20180615144221.GD2165@perard.uk.xensource.com>
-References: <20180601175910.28146-1-peter.maydell@linaro.org>
- <20180605165507.GB2165@perard.uk.xensource.com>
- <CAFEAcA_X2V-YkM1ZeCHMPW3cQBk2=ZQ4BAgtcg67Eb+OuADbgQ@mail.gmail.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH] xen: add new hypercall buffer mapping device
+Date: Fri, 15 Jun 2018 10:43:03 -0400
+Message-ID: <ca081371-7b21-85d2-edcc-8b7273c09cb2__22061.2403042198$1529073717$gmane$org@oracle.com>
+References: <20180615131740.5037-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rb1j=jb=citrix.com=prvs=697eeffb9=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1fTpvm-0000ej-19
- for xen-devel@lists.xenproject.org; Fri, 15 Jun 2018 14:42:26 +0000
-Content-Disposition: inline
-In-Reply-To: <CAFEAcA_X2V-YkM1ZeCHMPW3cQBk2=ZQ4BAgtcg67Eb+OuADbgQ@mail.gmail.com>
+ <srs0=if9m=jb=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1fTpwf-0000sq-Ay
+ for xen-devel@lists.xenproject.org; Fri, 15 Jun 2018 14:43:21 +0000
+In-Reply-To: <20180615131740.5037-1-jgross@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,36 +22,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: "open list:X86" <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, QEMU Developers <qemu-devel@nongnu.org>, "patches@linaro.org" <patches@linaro.org>
+To: Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBKdW4gMTUsIDIwMTggYXQgMTE6MDY6NDdBTSArMDEwMCwgUGV0ZXIgTWF5ZGVsbCB3
-cm90ZToKPiBPbiA1IEp1bmUgMjAxOCBhdCAxNzo1NSwgQW50aG9ueSBQRVJBUkQgPGFudGhvbnku
-cGVyYXJkQGNpdHJpeC5jb20+IHdyb3RlOgo+ID4gT24gRnJpLCBKdW4gMDEsIDIwMTggYXQgMDY6
-NTk6MTBQTSArMDEwMCwgUGV0ZXIgTWF5ZGVsbCB3cm90ZToKPiA+PiBUaGUgeGVuIHBjaV9hc3Np
-Z25fZGV2X2xvYWRfb3B0aW9uX3JvbSgpIGN1cnJlbnRseSBjcmVhdGVzIGEgUkFNCj4gPj4gbWVt
-b3J5IHJlZ2lvbiB3aXRoIG1lbW9yeV9yZWdpb25faW5pdF9yYW1fbm9taWdyYXRlKCksIGFuZCB0
-aGVuCj4gPj4gbWFudWFsbHkgcmVnaXN0ZXJzIGl0IHdpdGggdm1zdGF0ZV9yZWdpc3Rlcl9yYW0o
-KS4gSW4gZmFjdCBmb3IKPiA+PiBpdHMgb25seSBjYWxsc2l0ZSwgdGhlICdvd25lcicgcG9pbnRl
-ciB3ZSB1c2UgZm9yIHRoZSBpbml0IGNhbGwKPiA+PiBhbmQgdGhlICcmZGV2LT5xZGV2JyBwb2lu
-dGVyIHdlIHVzZSBmb3IgdGhlIHZtc3RhdGVfcmVnaXN0ZXJfcmFtKCkKPiA+PiBjYWxsIHJlZmVy
-IHRvIHRoZSBzYW1lIG9iamVjdC4gU2ltcGxpZnkgdGhlIGZ1bmN0aW9uIHRvIG9ubHkKPiA+PiB0
-YWtlIGEgcG9pbnRlciB0byB0aGUgZGV2aWNlIG9uY2UgaW5zdGVhZCBvZiB0d2ljZSwgYW5kIHVz
-ZQo+ID4+IG1lbW9yeV9yZWdpb25faW5pdF9yYW0oKSB3aGljaCBhdXRvbWF0aWNhbGx5IGRvZXMg
-dGhlIHZtc3RhdGUKPiA+PiByZWdpc3RlciBmb3IgdXMuCj4gPj4KPiA+PiBTaWduZWQtb2ZmLWJ5
-OiBQZXRlciBNYXlkZWxsIDxwZXRlci5tYXlkZWxsQGxpbmFyby5vcmc+Cj4gPj4gLS0tCj4gPj4g
-VGhpcyBpcyBhIGZhaXJseSB0cml2aWFsIG5vLWJlaGF2aW91ci1jaGFuZ2UgY29kZSBjbGVhbnVw
-LCBidXQKPiA+PiBJJ3ZlIG1hcmtlZCBpdCBhcyBSRkMgYmVjYXVzZSBJIGRvbid0IGhhdmUgYSBz
-ZXR1cCBmb3IgZG9pbmcKPiA+PiBtb3JlIHRoYW4ganVzdCBjb21waWxlLXRlc3RpbmcgWGVuIHJl
-bGF0ZWQgcGF0Y2hlcy4KPiA+PiBUaGlzIHdhcyBmb3VuZCBhcyBwYXJ0IG9mIGEgc3dlZXAgdGhy
-b3VnaCBmb3IgY29kZSB1c2luZwo+ID4+IHRoZSBfbm9taWdyYXRlIHZlcnNpb25zIG9mIGZ1bmN0
-aW9ucy4KPiA+Cj4gPiBUaGF0IHBhdGNoIGxvb2tzIGZpbmUsIGFuZCBzZWFtcyBmaW5lIGFmdGVy
-IGhhY2tpbmcgbXkgd2F5IGludG8gdGVzdGluZwo+ID4gdGhlIGNoYW5nZS4KPiA+Cj4gPiBBY2tl
-ZC1ieTogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+Cj4gCj4gVGhh
-bmtzIGZvciB0aGUgcmV2aWV3LiBTdGVmYW5vLCBkbyB5b3Ugd2FudCB0byB0YWtlIGl0IHZpYSB0
-aGUKPiB4ZW4gc3VidHJlZT8KCkhpIFBldGVyLAoKV2UgZG9uJ3QgaGF2ZSBhbnkgb3RoZXIgcGF0
-Y2ggZm9yIHhlbiwgc28gZmVlbCBmcmVlIHRvIGNvbW1pdCB0aGlzCm9uZS4KCi0tIApBbnRob255
-IFBFUkFSRAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMDYvMTUvMjAxOCAwOToxNyBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiArc3RhdGljIGlu
+dCBwcml2Y21kX2J1Zl9tbWFwKHN0cnVjdCBmaWxlICpmaWxlLCBzdHJ1Y3Qgdm1fYXJlYV9zdHJ1
+Y3QgKnZtYSkKPiArewo+ICsJc3RydWN0IHByaXZjbWRfYnVmX3ByaXZhdGUgKmZpbGVfcHJpdiA9
+IGZpbGUtPnByaXZhdGVfZGF0YTsKPiArCXN0cnVjdCBwcml2Y21kX2J1Zl92bWFfcHJpdmF0ZSAq
+dm1hX3ByaXY7Cj4gKwl1bnNpZ25lZCBpbnQgY291bnQgPSB2bWFfcGFnZXModm1hKTsKPiArCXVu
+c2lnbmVkIGludCBpOwo+ICsJaW50IHJldCA9IDA7Cj4gKwo+ICsJaWYgKCEodm1hLT52bV9mbGFn
+cyAmIFZNX1NIQVJFRCkpIHsKPiArCQlwcl9lcnIoIk1hcHBpbmcgbXVzdCBiZSBzaGFyZWRcbiIp
+Owo+ICsJCXJldHVybiAtRUlOVkFMOwo+ICsJfQo+ICsKPiArCWlmIChmaWxlX3ByaXYtPmFsbG9j
+YXRlZCArIGNvdW50ID4gbGltaXQpIHsKPiArCQlwcl9lcnIoIk1hcHBpbmcgbGltaXQgcmVhY2hl
+ZCFcbiIpOwo+ICsJCXJldHVybiAtRU5PU1BDOwoKClRoaXMgZXJyb3IgKHdoaWNoIEkgdGhvdWdo
+dCBzaG91bGQgaGF2ZSBiZWVuIEUyQklHKSBpcyBub3QgaW4gdGhlIGxpc3QKb2YgYWxsb3dlZCBl
+cnJvciBjb2RlcyAocGVyIG1hbiBwYWdlKS4gSSB0aGluayBpdCBpdCdzIGVpdGhlciBFSU5WQUwg
+b3IKRU5PTUVNIChFSU5WQUwgc2VlbXMgbW9yZSBhcHByb3ByaWF0ZSB0byBtZSkuCgpJIGFtIGFs
+c28gbm90IHN1cmUgYWJvdXQgcHJfZXJyIGFzIHRoZSBjYWxsZXIgY2FuIGZvcmNlIGl0IChhbHRo
+b3VnaApwcmVzdW1hYmx5IHRoZSBmaWxlIGlzIG9ubHkgYWNjZXNzaWJsZSB0byBzdXBlcnVzZXIp
+LgoKLWJvcmlzCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
