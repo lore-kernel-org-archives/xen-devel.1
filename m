@@ -1,8 +1,8 @@
 From: <gregkh@linuxfoundation.org>
 Subject: Patch "x86/xen: Reset VCPU0 info pointer after
- shared_info remap" has been added to the 4.14-stable tree
-Date: Sun, 17 Jun 2018 13:23:32 +0200
-Message-ID: <1529234612108148@kroah.com>
+ shared_info remap" has been added to the 4.16-stable tree
+Date: Sun, 17 Jun 2018 13:23:54 +0200
+Message-ID: <1529234634103181@kroah.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -10,8 +10,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=nxds=jd=linuxfoundation.org=gregkh@kernel.org>)
- id 1fUVz9-0001Pw-RW
- for xen-devel@lists.xenproject.org; Sun, 17 Jun 2018 11:36:43 +0000
+ id 1fUWBx-0002De-AE
+ for xen-devel@lists.xenproject.org; Sun, 17 Jun 2018 11:49:57 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,15 +26,15 @@ List-Id: xen-devel@lists.xenproject.org
 
 ClRoaXMgaXMgYSBub3RlIHRvIGxldCB5b3Uga25vdyB0aGF0IEkndmUganVzdCBhZGRlZCB0aGUg
 cGF0Y2ggdGl0bGVkCgogICAgeDg2L3hlbjogUmVzZXQgVkNQVTAgaW5mbyBwb2ludGVyIGFmdGVy
-IHNoYXJlZF9pbmZvIHJlbWFwCgp0byB0aGUgNC4xNC1zdGFibGUgdHJlZSB3aGljaCBjYW4gYmUg
+IHNoYXJlZF9pbmZvIHJlbWFwCgp0byB0aGUgNC4xNi1zdGFibGUgdHJlZSB3aGljaCBjYW4gYmUg
 Zm91bmQgYXQ6CiAgICBodHRwOi8vd3d3Lmtlcm5lbC5vcmcvZ2l0Lz9wPWxpbnV4L2tlcm5lbC9n
 aXQvc3RhYmxlL3N0YWJsZS1xdWV1ZS5naXQ7YT1zdW1tYXJ5CgpUaGUgZmlsZW5hbWUgb2YgdGhl
 IHBhdGNoIGlzOgogICAgIHg4Ni14ZW4tcmVzZXQtdmNwdTAtaW5mby1wb2ludGVyLWFmdGVyLXNo
 YXJlZF9pbmZvLXJlbWFwLnBhdGNoCmFuZCBpdCBjYW4gYmUgZm91bmQgaW4gdGhlIHF1ZXVlLTQu
-MTQgc3ViZGlyZWN0b3J5LgoKSWYgeW91LCBvciBhbnlvbmUgZWxzZSwgZmVlbHMgaXQgc2hvdWxk
+MTYgc3ViZGlyZWN0b3J5LgoKSWYgeW91LCBvciBhbnlvbmUgZWxzZSwgZmVlbHMgaXQgc2hvdWxk
 IG5vdCBiZSBhZGRlZCB0byB0aGUgc3RhYmxlIHRyZWUsCnBsZWFzZSBsZXQgPHN0YWJsZUB2Z2Vy
 Lmtlcm5lbC5vcmc+IGtub3cgYWJvdXQgaXQuCgoKRnJvbSBmb29AYmF6IFN1biBKdW4gMTcgMTI6
-MTM6NDkgQ0VTVCAyMDE4CkZyb206ICJ2YW4gZGVyIExpbmRlbiwgRnJhbmsiIDxmbGxpbmRlbkBh
+MDc6MzQgQ0VTVCAyMDE4CkZyb206ICJ2YW4gZGVyIExpbmRlbiwgRnJhbmsiIDxmbGxpbmRlbkBh
 bWF6b24uY29tPgpEYXRlOiBGcmksIDQgTWF5IDIwMTggMTY6MTE6MDAgLTA0MDAKU3ViamVjdDog
 eDg2L3hlbjogUmVzZXQgVkNQVTAgaW5mbyBwb2ludGVyIGFmdGVyIHNoYXJlZF9pbmZvIHJlbWFw
 CgpGcm9tOiAidmFuIGRlciBMaW5kZW4sIEZyYW5rIiA8ZmxsaW5kZW5AYW1hem9uLmNvbT4KClsg
@@ -89,7 +89,7 @@ Ynk6IFNhc2hhIExldmluIDxhbGV4YW5kZXIubGV2aW5AbWljcm9zb2Z0LmNvbT4KU2lnbmVkLW9m
 Zi1ieTogR3JlZyBLcm9haC1IYXJ0bWFuIDxncmVna2hAbGludXhmb3VuZGF0aW9uLm9yZz4KLS0t
 CiBhcmNoL3g4Ni94ZW4vZW5saWdodGVuX2h2bS5jIHwgICAxMyArKysrKysrKysrKysrCiAxIGZp
 bGUgY2hhbmdlZCwgMTMgaW5zZXJ0aW9ucygrKQoKLS0tIGEvYXJjaC94ODYveGVuL2VubGlnaHRl
-bl9odm0uYworKysgYi9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX2h2bS5jCkBAIC02NCw2ICs2NCwx
+bl9odm0uYworKysgYi9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX2h2bS5jCkBAIC02NSw2ICs2NSwx
 OSBAQCBzdGF0aWMgdm9pZCBfX2luaXQgeGVuX2h2bV9pbml0X21lbV9tYXBwCiB7CiAJZWFybHlf
 bWVtdW5tYXAoSFlQRVJWSVNPUl9zaGFyZWRfaW5mbywgUEFHRV9TSVpFKTsKIAlIWVBFUlZJU09S
 X3NoYXJlZF9pbmZvID0gX192YShQRk5fUEhZUyhzaGFyZWRfaW5mb19wZm4pKTsKKworCS8qCisJ
@@ -102,7 +102,7 @@ YWxsYmFjayA9PSAwKS4KKwkgKgorCSAqIEl0IGlzLCBpbiBhbnkgY2FzZSwgYmFkIHRvIGhhdmUg
 YSBzdGFsZSB2Y3B1X2luZm8gcG9pbnRlcgorCSAqIHNvIHJlc2V0IGl0IG5vdy4KKwkgKi8KKwl4
 ZW5fdmNwdV9pbmZvX3Jlc2V0KDApOwogfQogCiBzdGF0aWMgdm9pZCBfX2luaXQgaW5pdF9odm1f
 cHZfaW5mbyh2b2lkKQoKClBhdGNoZXMgY3VycmVudGx5IGluIHN0YWJsZS1xdWV1ZSB3aGljaCBt
-aWdodCBiZSBmcm9tIGZsbGluZGVuQGFtYXpvbi5jb20gYXJlCgpxdWV1ZS00LjE0L3g4Ni14ZW4t
+aWdodCBiZSBmcm9tIGZsbGluZGVuQGFtYXpvbi5jb20gYXJlCgpxdWV1ZS00LjE2L3g4Ni14ZW4t
 cmVzZXQtdmNwdTAtaW5mby1wb2ludGVyLWFmdGVyLXNoYXJlZF9pbmZvLXJlbWFwLnBhdGNoCgpf
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
 bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
