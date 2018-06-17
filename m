@@ -1,16 +1,16 @@
-From: "Jan Beulich" <jbeulich@suse.com>
-Subject: [PATCH RFC] x86/resume: take care of fully eager FPU
- around system suspend
-Date: Sun, 17 Jun 2018 02:56:22 -0600
-Message-ID: <5B2622360200007800133021@prv1-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-coverity test] 124300: all pass - PUSHED
+Date: Sun, 17 Jun 2018 10:10:27 +0000
+Message-ID: <osstest-124300-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="=__Part112B6126.1__="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=vt1h=jd=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fUTU3-0007ED-44
- for xen-devel@lists.xenproject.org; Sun, 17 Jun 2018 08:56:27 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=k7fy=jd=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fUUdi-0004DM-9I
+ for xen-devel@lists.xenproject.org; Sun, 17 Jun 2018 10:10:30 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,73 +19,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, andrew.cooper3@citrix.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---=__Part112B6126.1__=
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-Just like in the HVM emulation and EFI runtime call cases we must not
-set CR0.TS here in fully eager mode. Note that idle vCPU-s never have
-->arch.fully_eager_fpu set (for their initialization not going through
-vcpu_init_fpu()), so we won't hit the respective ASSERT() in
-vcpu_restore_fpu_eager().=20
-
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-RFC: Not even compile tested, as I'm writing this from home. Also please
-         excuse the formatting (hence the attachment) - our mail web =
-frontend
-      doesn't allow anything better.
-
---- a/xen/arch/x86/acpi/suspend.c
-+++ b/xen/arch/x86/acpi/suspend.c
-@@ -92,8 +92,11 @@ void restore_rest_processor_state(void)
-         write_debugreg(7, curr->arch.debugreg[7]);
-     }
-=20
--    /* Reload FPU state on next FPU use. */
--    stts();
-+    /* Reload FPU state immediately or on next FPU use. */
-+    if ( curr->arch.fully_eager_fpu )
-+        vcpu_restore_fpu_eager(curr);
-+    else
-+        stts();
-=20
-     if (cpu_has_pat)
-         wrmsrl(MSR_IA32_CR_PAT, host_pat);
-
-
---=__Part112B6126.1__=
-Content-Type: text/plain; name="x86-resume-eager-FPU.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment; filename="x86-resume-eager-FPU.patch"
-
-x86/resume: take care of fully eager FPU around system suspend=0A=0AJust =
-like in the HVM emulation and EFI runtime call cases we must not=0Aset =
-CR0.TS here in fully eager mode. Note that idle vCPU-s never have=0A->arch.=
-fully_eager_fpu set (for their initialization not going through=0Avcpu_init=
-_fpu()), so we won't hit the respective ASSERT() in=0Avcpu_restore_fpu_eage=
-r(). =0A=0ASigned-off-by: Jan Beulich <jbeulich@suse.com>=0A---=0ARFC: Not =
-even compile tested, as I'm writing this from home.=0A=0A--- a/xen/arch/x86=
-/acpi/suspend.c=0A+++ b/xen/arch/x86/acpi/suspend.c=0A@@ -92,8 +92,11 @@ =
-void restore_rest_processor_state(void)=0A         write_debugreg(7, =
-curr->arch.debugreg[7]);=0A     }=0A =0A-    /* Reload FPU state on next =
-FPU use. */=0A-    stts();=0A+    /* Reload FPU state immediately or on =
-next FPU use. */=0A+    if ( curr->arch.fully_eager_fpu )=0A+        =
-vcpu_restore_fpu_eager(curr);=0A+    else=0A+        stts();=0A =0A     if =
-(cpu_has_pat)=0A         wrmsrl(MSR_IA32_CR_PAT, host_pat);=0A
---=__Part112B6126.1__=
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---=__Part112B6126.1__=--
+ZmxpZ2h0IDEyNDMwMCB4ZW4tdW5zdGFibGUtY292ZXJpdHkgcmVhbCBbcmVhbF0KaHR0cDovL2xv
+Z3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNDMwMC8KClBlcmZlY3Qg
+Oi0pCkFsbCB0ZXN0cyBpbiB0aGlzIGZsaWdodCBwYXNzZWQgYXMgcmVxdWlyZWQKdmVyc2lvbiB0
+YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIGUyM2QyMjM0ZTA4ODcy
+YWMxYzcxOWYzZTMzODk5NDU4MTQ4MzQ0MGYKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAg
+ICAgICAgICAgIDQxMzM5ZWNiNWYxOGNhN2VjN2IwYzkxNGM5NTJhMGUxNzE1YWU1MTEKCkxhc3Qg
+dGVzdCBvZiBiYXNpcyAgIDEyNDE2NiAgMjAxOC0wNi0xMyAwOToxODo1OSBaICAgIDQgZGF5cwpU
+ZXN0aW5nIHNhbWUgc2luY2UgICAxMjQzMDAgIDIwMTgtMDYtMTcgMDk6MTk6MDcgWiAgICAwIGRh
+eXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIg
+dGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEphbiBC
+ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCmpvYnM6CiBjb3Zlcml0eS1hbWQ2NCAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ct
+cmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9o
+b21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmls
+ZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJv
+amVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQg
+b2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9n
+aXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAg
+aHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVB
+RE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRw
+Oi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1c2hp
+bmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9naXQveGVuLmdpdAog
+ICA0MTMzOWVjYjVmLi5lMjNkMjIzNGUwICBlMjNkMjIzNGUwODg3MmFjMWM3MTlmM2UzMzg5OTQ1
+ODE0ODM0NDBmIC0+IGNvdmVyaXR5LXRlc3RlZC9zbW9rZQoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
