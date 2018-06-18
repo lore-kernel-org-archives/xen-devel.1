@@ -1,9 +1,9 @@
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: [PATCH 4.16 201/279] x86/xen: Reset VCPU0 info pointer
+Subject: [PATCH 4.14 131/189] x86/xen: Reset VCPU0 info pointer
  after shared_info remap
-Date: Mon, 18 Jun 2018 10:13:06 +0200
-Message-ID: <20180618080617.219989948__8289.58643037385$1529310225$gmane$org@linuxfoundation.org>
-References: <20180618080608.851973560@linuxfoundation.org>
+Date: Mon, 18 Jun 2018 10:13:47 +0200
+Message-ID: <20180618081214.494031535__43382.8334244483$1529310912$gmane$org@linuxfoundation.org>
+References: <20180618081209.254234434@linuxfoundation.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -11,9 +11,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=s00i=je=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1fUpSu-0006k7-PI
- for xen-devel@lists.xenproject.org; Mon, 18 Jun 2018 08:24:44 +0000
-In-Reply-To: <20180618080608.851973560@linuxfoundation.org>
+ id 1fUpe9-0007Y8-BR
+ for xen-devel@lists.xenproject.org; Mon, 18 Jun 2018 08:36:21 +0000
+In-Reply-To: <20180618081209.254234434@linuxfoundation.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,7 +26,7 @@ To: linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>, Vallish Vaidyeshwara <vallish@amazon.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Frank van der Linden <fllinden@amazon.com>, Eduardo Valentin <eduval@amazon.com>, stable@vger.kernel.org, Sasha Levin <alexander.levin@microsoft.com>, Alakesh Haloi <alakeshh@amazon.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-NC4xNi1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
+NC4xNC1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
 cGxlYXNlIGxldCBtZSBrbm93LgoKLS0tLS0tLS0tLS0tLS0tLS0tCgpGcm9tOiAidmFuIGRlciBM
 aW5kZW4sIEZyYW5rIiA8ZmxsaW5kZW5AYW1hem9uLmNvbT4KClsgVXBzdHJlYW0gY29tbWl0IGQx
 ZWNmYTlkMWY0MDIzNjZiMTc3NmZiZjg0ZTYzNTY3OGE1MTQxNGYgXQoKVGhpcyBwYXRjaCBmaXhl
@@ -80,7 +80,7 @@ bGV4YW5kZXIubGV2aW5AbWljcm9zb2Z0LmNvbT4KU2lnbmVkLW9mZi1ieTogR3JlZyBLcm9haC1I
 YXJ0bWFuIDxncmVna2hAbGludXhmb3VuZGF0aW9uLm9yZz4KLS0tCiBhcmNoL3g4Ni94ZW4vZW5s
 aWdodGVuX2h2bS5jIHwgICAxMyArKysrKysrKysrKysrCiAxIGZpbGUgY2hhbmdlZCwgMTMgaW5z
 ZXJ0aW9ucygrKQoKLS0tIGEvYXJjaC94ODYveGVuL2VubGlnaHRlbl9odm0uYworKysgYi9hcmNo
-L3g4Ni94ZW4vZW5saWdodGVuX2h2bS5jCkBAIC02NSw2ICs2NSwxOSBAQCBzdGF0aWMgdm9pZCBf
+L3g4Ni94ZW4vZW5saWdodGVuX2h2bS5jCkBAIC02NCw2ICs2NCwxOSBAQCBzdGF0aWMgdm9pZCBf
 X2luaXQgeGVuX2h2bV9pbml0X21lbV9tYXBwCiB7CiAJZWFybHlfbWVtdW5tYXAoSFlQRVJWSVNP
 Ul9zaGFyZWRfaW5mbywgUEFHRV9TSVpFKTsKIAlIWVBFUlZJU09SX3NoYXJlZF9pbmZvID0gX192
 YShQRk5fUEhZUyhzaGFyZWRfaW5mb19wZm4pKTsKKworCS8qCisJICogVGhlIHZpcnR1YWwgYWRk
