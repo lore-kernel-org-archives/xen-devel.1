@@ -1,20 +1,20 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v3] xen/scsiback: add error handling for
- xenbus_printf
-Date: Tue, 19 Jun 2018 14:52:57 +0200
-Message-ID: <f16b5ad8-1748-5b80-22a9-380bca79852b__39728.1224876226$1529412718$gmane$org@suse.com>
-References: <1528775185-39467-1-git-send-email-jiazhouyang09@gmail.com>
- <1529108077-60035-1-git-send-email-jiazhouyang09@gmail.com>
+Subject: Re: [PATCH v5] scsi: xen-scsifront: add error handling
+ for xenbus_printf
+Date: Tue, 19 Jun 2018 14:53:36 +0200
+Message-ID: <b47a3387-bc82-4030-a707-b6bb3a2ddf88__19888.1285884001$1529412737$gmane$org@suse.com>
+References: <1528774962-39173-1-git-send-email-jiazhouyang09@gmail.com>
+ <1529082301-59038-1-git-send-email-jiazhouyang09@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=4s9a=jf=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fVG86-0007Jo-UM
- for xen-devel@lists.xenproject.org; Tue, 19 Jun 2018 12:53:02 +0000
-In-Reply-To: <1529108077-60035-1-git-send-email-jiazhouyang09@gmail.com>
+ id 1fVG8h-0007La-91
+ for xen-devel@lists.xenproject.org; Tue, 19 Jun 2018 12:53:39 +0000
+In-Reply-To: <1529082301-59038-1-git-send-email-jiazhouyang09@gmail.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,10 +25,10 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Zhouyang Jia <jiazhouyang09@gmail.com>
-Cc: xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org, linux-scsi@vger.kernel.org
+Cc: "James E.J. Bottomley" <jejb@linux.vnet.ibm.com>, "Martin K. Petersen" <martin.petersen@oracle.com>, linux-scsi@vger.kernel.org, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTYvMDYvMTggMDI6MTQsIFpob3V5YW5nIEppYSB3cm90ZToKPiBXaGVuIHhlbmJ1c19wcmlu
+T24gMTUvMDYvMTggMTk6MDUsIFpob3V5YW5nIEppYSB3cm90ZToKPiBXaGVuIHhlbmJ1c19wcmlu
 dGYgZmFpbHMsIHRoZSBsYWNrIG9mIGVycm9yLWhhbmRsaW5nIGNvZGUgbWF5Cj4gY2F1c2UgdW5l
 eHBlY3RlZCByZXN1bHRzLgo+IAo+IFRoaXMgcGF0Y2ggYWRkcyBlcnJvci1oYW5kbGluZyBjb2Rl
 IGFmdGVyIGNhbGxpbmcgeGVuYnVzX3ByaW50Zi4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBaaG91eWFu
