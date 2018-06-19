@@ -1,19 +1,18 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2] xen: add error handling for xenbus_printf
-Date: Tue, 19 Jun 2018 15:02:56 +0200
-Message-ID: <4fb2ab48-f6a7-d379-063b-10bd2c91e390__34449.5286619805$1529413299$gmane$org@suse.com>
-References: <1528775073-39322-1-git-send-email-jiazhouyang09@gmail.com>
- <1529019293-55493-1-git-send-email-jiazhouyang09@gmail.com>
+Subject: Re: [PATCH v3] xen: share start flags between PV and PVH
+Date: Tue, 19 Jun 2018 15:03:24 +0200
+Message-ID: <9a24ea8f-c46c-0b2d-0a91-10b5cc4b47bc__13054.346634499$1529413330$gmane$org@suse.com>
+References: <20180608084038.19344-1-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=4s9a=jf=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fVGHk-0008Jg-J7
- for xen-devel@lists.xenproject.org; Tue, 19 Jun 2018 13:03:00 +0000
-In-Reply-To: <1529019293-55493-1-git-send-email-jiazhouyang09@gmail.com>
+ id 1fVGIC-0008Q4-3s
+ for xen-devel@lists.xenproject.org; Tue, 19 Jun 2018 13:03:28 +0000
+In-Reply-To: <20180608084038.19344-1-roger.pau@citrix.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,16 +22,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Zhouyang Jia <jiazhouyang09@gmail.com>
-Cc: xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org
+To: Roger Pau Monne <roger.pau@citrix.com>, linux-kernel@vger.kernel.org
+Cc: xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTUvMDYvMTggMDE6MzQsIFpob3V5YW5nIEppYSB3cm90ZToKPiBXaGVuIHhlbmJ1c19wcmlu
-dGYgZmFpbHMsIHRoZSBsYWNrIG9mIGVycm9yLWhhbmRsaW5nIGNvZGUgbWF5Cj4gY2F1c2UgdW5l
-eHBlY3RlZCByZXN1bHRzLgo+IAo+IFRoaXMgcGF0Y2ggYWRkcyBlcnJvci1oYW5kbGluZyBjb2Rl
-IGFmdGVyIGNhbGxpbmcgeGVuYnVzX3ByaW50Zi4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBaaG91eWFu
-ZyBKaWEgPGppYXpob3V5YW5nMDlAZ21haWwuY29tPgoKUHVzaGVkIHRvIHhlbi90aXAuZ2l0IGZv
-ci1saW51cy00LjE4CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+T24gMDgvMDYvMTggMTA6NDAsIFJvZ2VyIFBhdSBNb25uZSB3cm90ZToKPiBVc2UgYSBnbG9iYWwg
+dmFyaWFibGUgdG8gc3RvcmUgdGhlIHN0YXJ0IGZsYWdzIGZvciBib3RoIFBWIGFuZCBQVkguCj4g
+VGhpcyBhbGxvd3MgdGhlIHhlbl9pbml0aWFsX2RvbWFpbiBtYWNybyB0byB3b3JrIHByb3Blcmx5
+IG9uIFBWSC4KPiAKPiBOb3RlIHRoYXQgQVJNIGlzIGFsc28gc3dpdGNoZWQgdG8gdXNlIHRoZSBu
+ZXcgdmFyaWFibGUuCj4gCj4gU2lnbmVkLW9mZi1ieTogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5v
+c3Ryb3Zza3lAb3JhY2xlLmNvbT4KPiBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxy
+b2dlci5wYXVAY2l0cml4LmNvbT4KClB1c2hlZCB0byB4ZW4vdGlwLmdpdCBmb3ItbGludXMtNC4x
+OAoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
