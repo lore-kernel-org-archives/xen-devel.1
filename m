@@ -1,15 +1,13 @@
 From: Juergen Gross <jgross@suse.com>
 Subject: Re: Dom0 Failing to Boot with Recent Linux Kernels
  (Spectre Mitigations)
-Date: Wed, 20 Jun 2018 08:17:51 +0200
-Message-ID: <680f6857-6b54-bcf1-afc8-f93d8fc9aaa4@suse.com>
+Date: Wed, 20 Jun 2018 08:34:13 +0200
+Message-ID: <5c9bd39f-822b-ef73-1613-ffc38a49a5a8@suse.com>
 References: <20180619213038.GA29918@amd.com>
- <199006b6-a2f5-3750-2a15-449a5e831387@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="------------E6F915A2C81188AF82D26100"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <199006b6-a2f5-3750-2a15-449a5e831387@oracle.com>
+In-Reply-To: <20180619213038.GA29918@amd.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -19,26 +17,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, xen-devel@lists.xen.org
+To: Brian Woods <brian.woods@amd.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAvMDYvMTggMDU6MzEsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiAKPiAKPiBPbiAwNi8x
-OS8yMDE4IDA1OjMwIFBNLCBCcmlhbiBXb29kcyB3cm90ZToKPj4gSSdtIGN1cnJlbnRseSBzZWVp
-bmcgYW4gaXNzdWUgd2hlcmUgd2hlbiBib290aW5nIGZyb20gYSByZWNlbnQgTGludXgKPj4ga2Vy
-bmVsIHdpdGhvdXQgbm9zcGVjX3N0b3JlX2J5cGFzc19kaXNhYmxlLsKgIFRoZXJlJ3MgYSBOVUxM
-IHBvaW50ZXIKPj4gaGF2aW5nIHRvIGRvIHdpdGggYSBsb2NrLsKgIEkgcHV0IHNvbWUgcHJpbnRr
-cyBpbiBhbmQgaXQgc2VlbXMgdGhhdCBpbgo+PiBhcmNoL3g4Ni9rZXJuZWwvcHJvY2Vzcy5jCj4+
-IHRoYXQgc3BlY3VsYXRpdmVfc3RvcmVfYnlwYXNzX2h0X2luaXQgaXNuJ3QgZ2V0dGluZyBjYWxs
-ZWQgd2hpY2gKPj4gaW5pdGlhbGl6ZXMgdGhlIHNwaW4gbG9jay7CoCAKPiAKPiAKPiAKPiBzcGVj
-dWxhdGl2ZV9zdG9yZV9ieXBhc3NfaHRfaW5pdCgpIGlzIG5vdCBjYWxsZWQgb24gUFYuIEZvciBC
-U1AgaXQgaXMKPiBjYWxsZWQgZnJvbSBuYXRpdmVfc21wX3ByZXBhcmVfY3B1cygpIGFuZCBmb3Ig
-QVBzIGl0IGlzIGNhbGxlZCBmcm9tCj4gc3RhcnRfc2Vjb25kYXJ5KCksIG5laXRoZXIgb2Ygd2hp
-Y2ggaXMgaW4gUFYgY29kZSBwYXRoLgo+IAo+IEkgdGhpbmsgdGhlIG1vc3QgbG9naWNhbCBwbGFj
-ZSB0byBwdXQgaXQgaXMgaW4gY3B1X2luaXQoKS4KCkkgZG9uJ3QgdGhpbmsgc28uIHNwZWN1bGF0
-aXZlX3N0b3JlX2J5cGFzc19odF9pbml0KCkgcmVxdWlyZXMKdG9wb2xvZ3lfc2libGluZ19jcHVt
-YXNrIHRvIGJlIHNldHVwIHdoaWNoIGhhcHBlbnMgb25seSBhZnRlciB0aGUgY2FsbApvZiBjcHVf
-aW5pdCgpLgoKV2Ugc2hvdWxkIGFkZCB0aGUgY2FsbCB0byBjcHVfYnJpbmd1cCgpIGluIHNtcF9w
-di5jCgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+This is a multi-part message in MIME format.
+--------------E6F915A2C81188AF82D26100
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+On 19/06/18 23:30, Brian Woods wrote:
+> I'm currently seeing an issue where when booting from a recent Linux
+> kernel without nospec_store_bypass_disable.  There's a NULL pointer
+> having to do with a lock.  I put some printks in and it seems that in
+> arch/x86/kernel/process.c
+> that speculative_store_bypass_ht_init isn't getting called which
+> initializes the spin lock.
+
+Brian, would you please give the attached patch a try?
+
+
+Juergen
+
+--------------E6F915A2C81188AF82D26100
+Content-Type: text/x-patch;
+ name="0001-x86-xen-add-call-of-speculative_store_bypass_ht_init.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0001-x86-xen-add-call-of-speculative_store_bypass_ht_init.pa";
+ filename*1="tch"
+
+>From 90a49beee17fe77075a7fdf433c74c5672cfe0d2 Mon Sep 17 00:00:00 2001
+From: Juergen Gross <jgross@suse.com>
+Date: Wed, 20 Jun 2018 08:21:33 +0200
+Subject: [PATCH] x86/xen: add call of speculative_store_bypass_ht_init() to pv
+ paths
+
+Commit 1f50ddb4f4189243c05926b842dc1a0332195f31 ("x86/speculation:
+Handle HT correctly on AMD") added speculative_store_bypass_ht_init()
+to the per-cpu initialization sequence.
+
+speculative_store_bypass_ht_init() needs to be called on each cpu for
+pv guests, too.
+
+Reported-by: Brian Woods <brian.woods@amd.com>
+Fixes: 1f50ddb4f4189243c05926b842dc1a0332195f31 ("x86/speculation: Handle HT correctly on AMD")
+Cc: <stable@vger.kernel.org>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/xen/smp_pv.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/x86/xen/smp_pv.c b/arch/x86/xen/smp_pv.c
+index 2e20ae2fa2d6..e3b18ad49889 100644
+--- a/arch/x86/xen/smp_pv.c
++++ b/arch/x86/xen/smp_pv.c
+@@ -32,6 +32,7 @@
+ #include <xen/interface/vcpu.h>
+ #include <xen/interface/xenpmu.h>
+ 
++#include <asm/spec-ctrl.h>
+ #include <asm/xen/interface.h>
+ #include <asm/xen/hypercall.h>
+ 
+@@ -70,6 +71,8 @@ static void cpu_bringup(void)
+ 	cpu_data(cpu).x86_max_cores = 1;
+ 	set_cpu_sibling_map(cpu);
+ 
++	speculative_store_bypass_ht_init();
++
+ 	xen_setup_cpu_clockevents();
+ 
+ 	notify_cpu_starting(cpu);
+@@ -250,6 +253,8 @@ static void __init xen_pv_smp_prepare_cpus(unsigned int max_cpus)
+ 	}
+ 	set_cpu_sibling_map(0);
+ 
++	speculative_store_bypass_ht_init();
++
+ 	xen_pmu_init(0);
+ 
+ 	if (xen_smp_intr_init(0) || xen_smp_intr_init_pv(0))
+-- 
+2.13.7
+
+
+--------------E6F915A2C81188AF82D26100
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--------------E6F915A2C81188AF82D26100--
