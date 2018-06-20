@@ -1,16 +1,21 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [libvirt test] 124438: regressions - FAIL
-Date: Wed, 20 Jun 2018 22:00:40 +0000
-Message-ID: <osstest-124438-mainreport@xen.org>
+From: Liam Shepherd <liam@dancer.es>
+Subject: Re: BUG: jumbo frames broken after commit xen-netfront:
+ Fix race between device setup and open
+Date: Wed, 20 Jun 2018 23:15:29 +0100
+Message-ID: <CAB8B+d2qVWOq410pKuPu87pk83csZ=-saDFmhPfNkFSeOKDGRg@mail.gmail.com>
+References: <CAK=Wzwcjz5JKzfrdGpWNXhb6ZmTrpbNjSJxiivZt3HF8cKYi3Q@mail.gmail.com>
+ <CABxcv=mKA=Ueu6PmPs5OQgpU_jkG4BhDxNLwEpiiOSV5t8xzrg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1586218022168095206=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=kxig=jg=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fVl9g-0007bB-7K
- for xen-devel@lists.xenproject.org; Wed, 20 Jun 2018 22:00:44 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=hsux=jg=dancer.es=liam@srs-us1.protection.inumbo.net>)
+ id 1fVlO1-0008RK-8L
+ for xen-devel@lists.xenproject.org; Wed, 20 Jun 2018 22:15:33 +0000
+Received: by mail-yb0-x243.google.com with SMTP id h141-v6so446118ybg.4
+ for <xen-devel@lists.xenproject.org>; Wed, 20 Jun 2018 15:15:30 -0700 (PDT)
+In-Reply-To: <CABxcv=mKA=Ueu6PmPs5OQgpU_jkG4BhDxNLwEpiiOSV5t8xzrg@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,120 +24,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Javier Martinez Canillas <javier@dowhile0.org>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Jeddeloh <andrew.jeddeloh@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, dustymabe@redhat.com, stable@vger.kernel.org, Ross Lagerwall <ross.lagerwall@citrix.com>, netdev <netdev@vger.kernel.org>, xen-devel@lists.xenproject.org, Laura Abbott <labbott@redhat.com>, "David S. Miller" <davem@davemloft.net>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNDQzOCBsaWJ2aXJ0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjQ0MzgvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3Rz
-IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMg
-d2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgIDYg
-bGlidmlydC1idWlsZCAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMzgxNAogYnVpbGQtYW1k
-NjQtbGlidmlydCAgICAgICAgICAgNiBsaWJ2aXJ0LWJ1aWxkICAgICAgICAgICAgZmFpbCBSRUdS
-LiB2cy4gMTIzODE0CiBidWlsZC1hcm02NC1saWJ2aXJ0ICAgICAgICAgICA2IGxpYnZpcnQtYnVp
-bGQgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjM4MTQKIGJ1aWxkLWFybWhmLWxpYnZpcnQg
-ICAgICAgICAgIDYgbGlidmlydC1idWlsZCAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMzgx
-NAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRl
-c3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20gIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAg
-ICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQgIDEgYnVpbGQtY2hl
-Y2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0
-ICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3Qt
-YXJtNjQtYXJtNjQtbGlidmlydCAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBi
-bG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1wYWlyICAxIGJ1aWxkLWNoZWNr
-KDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1w
-YWlyICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFt
-ZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxIGJ1aWxkLWNoZWNr
-KDEpIGJsb2NrZWQgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAxIGJ1aWxkLWNo
-ZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZp
-cnQteHNtICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0
-LWFybTY0LWFybTY0LWxpYnZpcnQtcWNvdzIgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAg
-ICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1h
-bWQ2NC14c20gMSBidWlsZC1jaGVjaygxKSBibG9ja2VkIG4vYQogdGVzdC1hcm1oZi1hcm1oZi1s
-aWJ2aXJ0ICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQog
-dGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAg
-ICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgMSBidWlsZC1j
-aGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hcm1oZi1hcm1oZi1saWJ2
-aXJ0LXJhdyAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQoKdmVy
-c2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIGxpYnZpcnQgICAgICAgICAgICAgIDIyNjBmMThj
-ZDdlZTkzMmRhN2Q5OWQ3YTg4ZmU5ZWJmMGYzZDhjODQKYmFzZWxpbmUgdmVyc2lvbjoKIGxpYnZp
-cnQgICAgICAgICAgICAgIDA3NmEyYjQwOTY2N2RkOWY3MTZhMmEyMDg1ZTFmZmVhOWQ1OGZlOGIK
-Ckxhc3QgdGVzdCBvZiBiYXNpcyAgIDEyMzgxNCAgMjAxOC0wNi0wNSAwNDoxOToyMyBaICAgMTUg
-ZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMjM4NDAgIDIwMTgtMDYtMDYgMDQ6MTk6MjggWiAg
-IDE0IGRheXMgICAxNSBhdHRlbXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMjQ0MzggIDIwMTgt
-MDYtMjAgMTM6Mzg6NDggWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8g
-dG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbmRyZWEgQm9sb2duYW5pIDxhYm9sb2du
-YUByZWRoYXQuY29tPgogIEFueWEgSGFydGVyIDxhaGFydGVyQHJlZGhhdC5jb20+CiAgQnJpamVz
-aCBTaW5naCA8YnJpamVzaC5zaW5naEBhbWQuY29tPgogIENoZW4gSGFueGlhbyA8Y2hlbmhhbnhp
-YW9AZ21haWwuY29tPgogIENocmlzdGlhbiBFaHJoYXJkdCA8Y2hyaXN0aWFuLmVocmhhcmR0QGNh
-bm9uaWNhbC5jb20+CiAgQ29sZSBSb2JpbnNvbiA8Y3JvYmluc29AcmVkaGF0LmNvbT4KICBEYW5p
-ZWwgTmljb2xldHRpIDxkYW50dGkxMkBnbWFpbC5jb20+CiAgRGFuaWVsIFAuIEJlcnJhbmfDqSA8
-YmVycmFuZ2VAcmVkaGF0LmNvbT4KICBFcmlrIFNrdWx0ZXR5IDxlc2t1bHRldEByZWRoYXQuY29t
-PgogIEZhYmlhbm8gRmlkw6puY2lvIDxmYWJpYW5vQGZpZGVuY2lvLm9yZz4KICBGaWxpcCBBbGFj
-IDxmaWxpcGFsYWNAZ21haWwuY29tPgogIGludHJpZ2VyaSA8aW50cmlnZXJpK2xpYnZpcnRAYm91
-bS5vcmc+CiAgaW50cmlnZXJpIDxpbnRyaWdlcmlAYm91bS5vcmc+CiAgSmFtaWUgU3RyYW5kYm9n
-ZSA8amFtaWVAY2Fub25pY2FsLmNvbT4KICBKaXJpIERlbmVtYXJrIDxqZGVuZW1hckByZWRoYXQu
-Y29tPgogIEpvaG4gRmVybGFuIDxqZmVybGFuQHJlZGhhdC5jb20+CiAgSnVsaW8gRmFyYWNjbyA8
-amNmYXJhY2NvQGdtYWlsLmNvbT4KICBKw6FuIFRvbWtvIDxqdG9ta29AcmVkaGF0LmNvbT4KICBL
-YXRlcmluYSBLb3VraW91IDxra291a2lvdUByZWRoYXQuY29tPgogIExhc3psbyBFcnNlayA8bGVy
-c2VrQHJlZGhhdC5jb20+CiAgTHV5YW8gSHVhbmcgPGxodWFuZ0ByZWRoYXQuY29tPgogIE1hcmMg
-SGFydG1heWVyIDxtaGFydG1heUBsaW51eC5pYm0uY29tPgogIE1hcnRpbiBLbGV0emFuZGVyIDxt
-a2xldHphbkByZWRoYXQuY29tPgogIE1pY2hhbCBQcml2b3puaWsgPG1wcml2b3puQHJlZGhhdC5j
-b20+CiAgUGF2ZWwgSHJkaW5hIDxwaHJkaW5hQHJlZGhhdC5jb20+CiAgUGV0ZXIgS3JlbXBhIDxw
-a3JlbXBhQHJlZGhhdC5jb20+CiAgUmFkb3N0aW4gU3RveWFub3YgPHJzdG95YW5vdjFAZ21haWwu
-Y29tPgogIFJhbXkgRWxrZXN0IDxyYW15ZWxrZXN0QGdtYWlsLmNvbT4KICByYW15ZWxrZXN0IDxy
-YW15ZWxrZXN0QGdtYWlsLmNvbT4KICBSb21hbiBCb2dvcm9kc2tpeSA8Ym9nb3JvZHNraXlAZ21h
-aWwuY29tPgogIFN0ZWZhbiBCYWRlciA8c3RlZmFuLmJhZGVyQGNhbm9uaWNhbC5jb20+CiAgU3Rl
-ZmFuIEJlcmdlciA8c3RlZmFuYkBsaW51eC52bmV0LmlibS5jb20+Cgpqb2JzOgogYnVpbGQtYW1k
-NjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXhzbSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2
-NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0
-LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogYnVpbGQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiBidWlsZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtYW1kNjQt
-cHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgYmxvY2tlZCAK
-IHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAg
-ICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNt
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtaGYtYXJt
-aGYtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAog
-dGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hcm1oZi1hcm1o
-Zi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0
-ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1wYWlyICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcGFpciAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFybTY0LWFybTY0
-LWxpYnZpcnQtcWNvdzIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRl
-c3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZoZCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGJsb2NrZWQgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVz
-dC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAv
-aG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUg
-YXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoK
-RXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwg
-aXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9
-YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcv
-Z2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFy
-bmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3
-ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCihObyByZXZpc2lvbiBs
-b2c7IGl0IHdvdWxkIGJlIDQwOTcgbGluZXMgbG9uZy4pCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+--===============1586218022168095206==
+Content-Type: multipart/alternative; boundary="000000000000f7aa1c056f1a221e"
+
+--000000000000f7aa1c056f1a221e
+Content-Type: text/plain; charset="UTF-8"
+
+> The patch "xen-netfront: Fix race between device setup and open" seems
+> to have introduced a regression preventing setting MTU's larger than
+> 1500. We experienced this downstream with Container Linux and
+> confirmed with Fedora 28 as well.
+>
+> It's commit f599c64fdf7d9c108e8717fb04bc41c680120da4 in the linux-stable
+tree.
+> https://git.kernel.org/pub/scm/linux/kernel/git/stable/
+linux-stable.git/commit/?id=f599c64fdf7d9c108e8717fb04bc41c680120da4
+>
+> Downstream bugs:
+> https://github.com/coreos/bugs/issues/2443
+> https://bugzilla.redhat.com/show_bug.cgi?id=1584216
+>
+> We've confirmed that reverting that commit fixes the bug. It be
+> reliably can be reproduced on AWS with t2.micro instances (and
+> presumably other systems using the same driver). Both using
+> systemd-networkd to set the mtu and manual ip link commands cause the
+> link to repsond with "Invalid argument" when trying to set the MTU >
+> 1500.
+
+Sorry for the spam, but this issue I believe this issue is linked with:
+https://lists.xenproject.org/archives/html/xen-devel/2018-06/msg00254.html
+
+Thanks
+
+--000000000000f7aa1c056f1a221e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>&gt; The patch &quot;xen-netfront: Fix race between d=
+evice setup and open&quot; seems<br>
+&gt; to have introduced a regression preventing setting MTU&#39;s larger th=
+an<br>
+&gt; 1500. We experienced this downstream with Container Linux and<br>
+&gt; confirmed with Fedora 28 as well.<br>
+&gt;<br>
+&gt; It&#39;s commit f599c64fdf7d9c108e8717fb04bc41<wbr>c680120da4 in the l=
+inux-stable tree.<br>
+&gt; <a href=3D"https://git.kernel.org/pub/scm/linux/kernel/git/stable/linu=
+x-stable.git/commit/?id=3Df599c64fdf7d9c108e8717fb04bc41c680120da4" rel=3D"=
+noreferrer" target=3D"_blank">https://git.kernel.org/pub/<wbr>scm/linux/ker=
+nel/git/stable/<wbr>linux-stable.git/commit/?id=3D<wbr>f599c64fdf7d9c108e87=
+17fb04bc41<wbr>c680120da4</a><br>
+&gt;<br>
+&gt; Downstream bugs:<br>
+&gt; <a href=3D"https://github.com/coreos/bugs/issues/2443" rel=3D"noreferr=
+er" target=3D"_blank">https://github.com/coreos/<wbr>bugs/issues/2443</a><b=
+r>
+&gt; <a href=3D"https://bugzilla.redhat.com/show_bug.cgi?id=3D1584216" rel=
+=3D"noreferrer" target=3D"_blank">https://bugzilla.redhat.com/<wbr>show_bug=
+.cgi?id=3D1584216</a><br>
+&gt;<br>
+&gt; We&#39;ve confirmed that reverting that commit fixes the bug. It be<br=
+>
+&gt; reliably can be reproduced on AWS with t2.micro instances (and<br>
+&gt; presumably other systems using the same driver). Both using<br>
+&gt; systemd-networkd to set the mtu and manual ip link commands cause the<=
+br>
+&gt; link to repsond with &quot;Invalid argument&quot; when trying to set t=
+he MTU &gt;<br>
+&gt; 1500.<br></div><div><br></div><div>Sorry for the spam, but this issue =
+I believe this issue is linked with: <a href=3D"https://lists.xenproject.or=
+g/archives/html/xen-devel/2018-06/msg00254.html">https://lists.xenproject.o=
+rg/archives/html/xen-devel/2018-06/msg00254.html</a></div><div><br></div><d=
+iv class=3D"gmail_extra">Thanks<br></div></div>
+
+--000000000000f7aa1c056f1a221e--
+
+
+--===============1586218022168095206==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1586218022168095206==--
