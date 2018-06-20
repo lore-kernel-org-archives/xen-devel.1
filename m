@@ -1,16 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable test] 124372: regressions - FAIL
-Date: Tue, 19 Jun 2018 22:24:24 +0000
-Message-ID: <osstest-124372-mainreport@xen.org>
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Subject: RFC: Boot Domain, domB
+Date: Tue, 19 Jun 2018 17:58:45 -0700
+Message-ID: <CACMJ4Gai_dq5ZtA6cT5s8cv0MuKyTZw99D93FO7gNe_4G4y89g@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5455323085585968821=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rsgi=jf=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fVP36-0006xp-2f
- for xen-devel@lists.xenproject.org; Tue, 19 Jun 2018 22:24:28 +0000
+ <srs0=jami=jg=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
+ id 1fVRSV-0000uO-97
+ for xen-devel@lists.xenproject.org; Wed, 20 Jun 2018 00:58:51 +0000
+Received: by mail-lf0-x22c.google.com with SMTP id q11-v6so2281177lfc.7
+ for <xen-devel@lists.xenproject.org>; Tue, 19 Jun 2018 17:58:47 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,325 +20,327 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel <xen-devel@lists.xenproject.org>, openxt <openxt@googlegroups.com>
+Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Jason Andryuk <jandryuk@gmail.com>, Daniel Smith <dpsmith@apertussolutions.com>, Andrew Cooper <andrew.cooper3@citrix.com>, julien.grall@arm.com, Rich Persaud <persaur@gmail.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNDM3MiB4ZW4tdW5zdGFibGUgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVzdC1s
-YWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNDM3Mi8KClJlZ3Jlc3Npb25zIDotKAoK
-VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0
-ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1p
-bnRlbCAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI0MDkwCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLWNyZWRpdDIgICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBmYWls
-IFJFR1IuIHZzLiAxMjQwOTAKIHRlc3QtYW1kNjQtYW1kNjQteGwteHNtICAgICAgIDcgeGVuLWJv
-b3QgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyNDA5MAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1wdnNoaW0gICAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4g
-MTI0MDkwCiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICA2IGxpYnZpcnQtYnVpbGQgICAg
-ICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjQwOTAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAxNiBndWVzdC1sb2NhbG1pZ3JhdGUveDEwIGZhaWwgUkVH
-Ui4gdnMuIDEyNDA5MAogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAgNiBrZXJuZWwtYnVp
-bGQgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI0MDkwCgpSZWdyZXNzaW9ucyB3aGljaCBh
-cmUgcmVnYXJkZWQgYXMgYWxsb3dhYmxlIChub3QgYmxvY2tpbmcpOgogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1ydGRzICAgICAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4g
-MTI0MDkwCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5n
-OgogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAg
-ICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgIDEgYnVp
-bGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYt
-bGlidmlydC14c20gIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EK
-IHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAg
-ICAgICBibG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgIDEgYnVpbGQt
-Y2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYtbGli
-dmlydCAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRl
-c3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhzbSAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAg
-ICBibG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgIDEgYnVpbGQtY2hl
-Y2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhk
-ICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3Qt
-YW1kNjQtaTM4Ni1saWJ2aXJ0LXBhaXIgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBi
-bG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYtZXhhbWluZSAgICAgIDEgYnVpbGQtY2hlY2so
-MSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0
-cnVjayAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1h
-cm1oZi1hcm1oZi14bC14c20gICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJs
-b2NrZWQgIG4vYQogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAgMSBidWlsZC1jaGVjaygx
-KSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVt
-dXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxIGJ1aWxkLWNoZWNrKDEpIGJsb2NrZWQgbi9hCiB0ZXN0
-LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAg
-YmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vl
-c3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMjQwOTAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-cWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyNDA5
-MAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAg
-ICAgICAgICBmYWlsIGxpa2UgMTI0MDkwCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luNy1h
-bWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMjQwOTAKIHRlc3QtYW1k
-NjQtaTM4Ni14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFp
-bCBsaWtlIDEyNDA5MAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1
-ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTI0MDkwCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXFlbXV0LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMjQw
-OTAKIHRlc3QtYW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgMTIgZ3Vlc3Qtc3RhcnQgICAgICAgICAg
-ICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAx
-MyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
-bTY0LWFybTY0LXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFp
-bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwtY3JlZGl0MiAgMTMgbWlncmF0ZS1z
-dXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14
-bC1jcmVkaXQyICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVj
-ayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14c20g
-MTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-bWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1z
-dXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0
-ZWQtYW1kIDE3IGRlYmlhbi1odm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0
-LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20gMTMgbWlncmF0
-ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02
-NC1saWJ2aXJ0LXhzbSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZl
-ciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAg
-ICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAg
-ICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAx
-MCB3aW5kb3dzLWluc3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2
-ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2IDEwIHdpbmRvd3Mt
-aW5zdGFsbCAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQt
-d2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKCnZl
-cnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAgICAgICAgICAgICAgICA5ODhkNjZj
-Yjc4YzM1YzYyMGMyYTBlYjAxYmFjODQyZTRlOTliZjBlCmJhc2VsaW5lIHZlcnNpb246CiB4ZW4g
-ICAgICAgICAgICAgICAgICAxMTUzNWNkYmMwYWU1OTI1YTU1YjNlNzM1NDQ3YzMwZmFhYTZmNjNi
-CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjQwOTAgIDIwMTgtMDYtMTIgMDE6NTE6NDEgWiAgICA3
-IGRheXMKRmFpbGluZyBzaW5jZSAgICAgICAgMTI0MTQwICAyMDE4LTA2LTEyIDE3OjA2OjQ5IFog
-ICAgNyBkYXlzICAgIDYgYXR0ZW1wdHMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTI0MzcyICAyMDE4
-LTA2LTE4IDIxOjQ0OjA1IFogICAgMSBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hv
-IHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT4KICBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNv
-bT4KICBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgSnVlcmdlbiBHcm9zcyA8amdy
-b3NzQHN1c2UuY29tPgogIEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cgpqb2Jz
-OgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXhzbSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14
-c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1hbWQ2NC14dGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1saWJ2aXJ0ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLWxp
-YnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZhaWwgICAgCiBidWlsZC1hbWQ2NC1wcmV2ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHJldiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZv
-cHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1ydW1w
-cnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtMSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC0yICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QteHRmLWFtZDY0LWFt
-ZDY0LTMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC14dGYtYW1kNjQtYW1kNjQtNCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC01ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14
-bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-YmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1kZWJpYW5o
-dm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwt
-cWVtdXQtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhz
-bSAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2
-bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQt
-eHNtICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14c20gICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC1saWJ2
-aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFy
-bWhmLWFybWhmLWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxv
-Y2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC14c20gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhz
-bSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJt
-aGYtYXJtaGYteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9j
-a2VkIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1hbWQgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZo
-djItYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXFlbXV0LXJoZWw2aHZtLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0tYW1kICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtZGViaWFuaHZtLWFt
-ZDY0ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
-LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWZyZWVic2QxMC1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1
-LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1ydW1wcnVuLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjctYW1kNjQgICAg
-ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13
-aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
-CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd3MxNi1hbWQ2NCAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdz
-MTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLWNyZWRpdDIg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtNjQtYXJt
-NjQteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGJsb2NrZWQgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWN1YmlldHJ1Y2sgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQtZXhhbWluZSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02
-NC1leGFtaW5lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFybWhmLWFybWhmLWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni1leGFtaW5lICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWZyZWVic2QxMC1pMzg2
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-cnVtcHJ1bi1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjEwLWkzODYgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEw
-LWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14
-bC1xZW11dS13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWludGVsICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1p
-bnRlbCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFl
-bXV1LXJoZWw2aHZtLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LWxp
-dmVwYXRjaCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtaTM4Ni1saXZlcGF0Y2ggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1taWdydXBncmFkZSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbWlncnVwZ3JhZGUgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-bXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-cm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJs
-b2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2
-aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxv
-Y2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZncnViICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2
-c2hpbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
-NjQtaTM4Ni14bC1wdnNoaW0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFjb3cyICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmly
-dC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2
-NC1pMzg2LXhsLXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0
-LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtc2hhZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXNoYWRvdyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQt
-dmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYt
-YXJtaGYteGwtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2Vk
-IAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5v
-cmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3Ms
-IGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0
-LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJl
-cG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0
-cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9
-bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDth
-PWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQg
-YXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1t
-YXJ5CgoKTm90IHB1c2hpbmcuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KY29tbWl0IDk4OGQ2NmNiNzhjMzVjNjIwYzJhMGViMDFi
-YWM4NDJlNGU5OWJmMGUKQXV0aG9yOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CkRh
-dGU6ICAgTW9uIEp1biAxOCAwOToxODo1NiAyMDE4ICswMjAwCgogICAgdG9vbHMvbGlieGM6IHJl
-dHJ5IGh5cGVyY2FsbCBpbiBjYXNlIG9mIEVGQVVMVAogICAgCiAgICBBIGh5cGVyY2FsbCBpc3N1
-ZWQgdmlhIHRoZSBwcml2Y21kIGRyaXZlciBjYW4gdmVyeSByYXJlbHkgcmV0dXJuCiAgICAtRUZB
-VUxUIGV2ZW4gaWYgdGhlIGh5cGVyY2FsbCBidWZmZXJzIGFyZSBsb2NrZWQgaW4gbWVtb3J5LiBU
-aGlzCiAgICBoYXBwZW5zIGZvciBoeXBlcmNhbGwgYnVmZmVycyBpbiB1c2VyIG1lbW9yeSB3aGVu
-IHRoZSBMaW51eCBrZXJuZWwKICAgIGlzIGRvaW5nIG1lbW9yeSBzY2FucyBlLmcuIGZvciBwYWdl
-IG1pZ3JhdGlvbiBvciBjb21wYWN0aW9uLgogICAgCiAgICBSZXRyeSB0aGUgZ2V0cGFnZWZyYW1l
-aW5mbzMgaHlwZXJjYWxsIHVwIHRvIDIgdGltZXMgaW4gY2FzZQogICAgLUVGQVVMVCBpcyByZXR1
-cm5lZCBhbmQgdGhlIGh5cGVydmlzb3IgbWlnaHQgc2VlIGludmFsaWQgUFRFcyBmb3IKICAgIHVz
-ZXIgaHlwZXJjYWxsIGJ1ZmZlcnMgKHdoaWNoIHNob3VsZCBiZSB0aGUgY2FzZSBvbmx5IGlmIHRo
-ZSBrZXJuZWwKICAgIGRvZXNuJ3Qgb2ZmZXIgYSAvZGV2L3hlbi9oeXBlcmNhbGwgbm9kZSkuCiAg
-ICAKICAgIFNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KICAg
-IEFja2VkLWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KCmNvbW1p
-dCAxNzFkNmVjZWMxZWZjYTVhM2UzOTVhMDhhY2IyOTk0NTNhOTU3NTI4CkF1dGhvcjogSnVlcmdl
-biBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgpEYXRlOiAgIE1vbiBKdW4gMTggMDk6MTg6NTUgMjAx
-OCArMDIwMAoKICAgIHRvb2xzL2xpYnhlbmNhbGxzOiBhZGQgbmV3IGZ1bmN0aW9uIHRvIHF1ZXJ5
-IGh5cGVyY2FsbCBidWZmZXIgc2FmZXR5CiAgICAKICAgIEFkZCBhIG5ldyBmdW5jdGlvbiB0byBx
-dWVyeSB3aGV0aGVyIGh5cGVyY2FsbCBidWZmZXJzIGFyZSBhbHdheXMgc2FmZQogICAgdG8gYWNj
-ZXNzIGJ5IHRoZSBoeXBlcnZpc29yIG9yIG1pZ2h0IHJlc3VsdCBpbiBFRkFVTFQuCiAgICAKICAg
-IFNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KICAgIEFja2Vk
-LWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KCmNvbW1pdCAzM2Jl
-MmMzODU4MjNlNjdjNzczNTI3MzY2YTVkNWU4ZmZlNzhkMDQ2CkF1dGhvcjogSnVlcmdlbiBHcm9z
-cyA8amdyb3NzQHN1c2UuY29tPgpEYXRlOiAgIE1vbiBKdW4gMTggMDk6MTg6NTQgMjAxOCArMDIw
-MAoKICAgIHRvb2xzL2xpYnhlbmNhbGw6IHVzZSBoeXBlcmNhbGwgYnVmZmVyIGRldmljZSBpZiBh
-dmFpbGFibGUKICAgIAogICAgSW5zdGVhZCBvZiB1c2luZyBhbm9ueW1vdXMgbWVtb3J5IGZvciBo
-eXBlcmNhbGwgYnVmZmVycyB3aGljaCBpcyB0aGVuCiAgICBsb2NrZWQgaW50byBtZW1vcnksIHVz
-ZSB0aGUgaHlwZXJjYWxsIGJ1ZmZlciBkZXZpY2Ugb2YgdGhlIExpbnV4CiAgICBwcml2Y21kIGRy
-aXZlciBpZiBhdmFpbGFibGUuCiAgICAKICAgIFRoaXMgaGFzIHRoZSBhZHZhbnRhZ2Ugb2YgbmVl
-ZGluZyBqdXN0IGEgc2luZ2xlIG1tYXAoKSBmb3IgYWxsb2NhdGluZwogICAgdGhlIGJ1ZmZlciBh
-bmQgcGFnZSBtaWdyYXRpb24gb3IgY29tcGFjdGlvbiBjYW4ndCBtYWtlIHRoZSBidWZmZXIKICAg
-IHVuYWNjZXNzaWJsZSBmb3IgdGhlIGh5cGVydmlzb3IuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6
-IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KICAgIEFja2VkLWJ5OiBJYW4gSmFja3Nv
-biA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KCmNvbW1pdCBlMjNkMjIzNGUwODg3MmFjMWM3
-MTlmM2UzMzg5OTQ1ODE0ODM0NDBmCkF1dGhvcjogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2Uu
-Y29tPgpEYXRlOiAgIEZyaSBKdW4gMTUgMTE6NDk6MDYgMjAxOCArMDIwMAoKICAgIHg4Ni9IVk06
-IGFjY291bnQgZm9yIGZ1bGx5IGVhZ2VyIEZQVSBtb2RlIGluIGVtdWxhdGlvbgogICAgCiAgICBJ
-biBmdWxseSBlYWdlciBtb2RlIHdlIG11c3Qgbm90IGNsZWFyIGZwdV9kaXJ0aWVkLCBzZXQgQ1Iw
-LlRTLCBvciBpbnZva2UKICAgIHRoZSBmcHVfbGVhdmUoKSBob29rLiBJbnN0ZWFkIGRvIHdoYXQg
-dGhlIG1vZGUncyBuYW1lIHNheXM6IFJlc3RvcmUKICAgIHN0YXRlIHJpZ2h0IGF3YXkuCiAgICAK
-ICAgIFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICAgIFJl
-dmlld2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogICAg
-UmVsZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKY29tbWl0
-IDI0MzQzNWJmNjdlODE1OTQ5NTE5NGY2MjNiOWU0ZDhjOTAxNDAzODQKQXV0aG9yOiBBbmRyZXcg
-Q29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgpEYXRlOiAgIFRodSBKdW4gNyAxNzow
-MDozNyAyMDE4ICswMTAwCgogICAgeDg2L3NwZWMtY3RybDogTWl0aWdhdGlvbnMgZm9yIExhenlG
-UFUKICAgIAogICAgSW50ZWwgQ29yZSBwcm9jZXNzb3JzIHNpbmNlIGF0IGxlYXN0IE5laGFsZW0g
-c3BlY3VsYXRlIHBhc3QgI05NLCB3aGljaCBpcyB0aGUKICAgIG1lY2hhbmlzbSBieSB3aGljaCBs
-YXp5IEZQVSBjb250ZXh0IHN3aXRjaGluZyBpcyBpbXBsZW1lbnRlZC4KICAgIAogICAgT24gYWZm
-ZWN0ZWQgcHJvY2Vzc29ycywgWGVuIG11c3QgdXNlIGZ1bGx5IGVhZ2VyIEZQVSBjb250ZXh0IHN3
-aXRjaGluZyB0bwogICAgcHJldmVudCBndWVzdHMgZnJvbSBiZWluZyBhYmxlIHRvIHJlYWQgRlBV
-IHN0YXRlIChTU0UvQVZYL2V0YykgZnJvbSBwcmV2aW91c2x5CiAgICBzY2hlZHVsZWQgdmNwdXMu
-CiAgICAKICAgIFRoaXMgaXMgcGFydCBvZiBYU0EtMjY3IC8gQ1ZFLTIwMTgtMzY2NQogICAgCiAg
-ICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
-PgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCmNvbW1p
-dCAxNDZkZmU5Mjc3YzJiNGE4YzM5OWIyMjllMDBkODE5MDY1ZTMxNjdiCkF1dGhvcjogQW5kcmV3
-IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KRGF0ZTogICBUaHUgSnVuIDcgMTc6
-MDA6MzcgMjAxOCArMDEwMAoKICAgIHg4NjogU3VwcG9ydCBmdWxseSBlYWdlciBGUFUgY29udGV4
-dCBzd2l0Y2hpbmcKICAgIAogICAgVGhpcyBpcyBjb250cm9sbGVkIG9uIGEgcGVyLXZjcHUgYmFz
-ZXMgZm9yIGZsZXhpYmlsaXR5LgogICAgCiAgICBUaGlzIGlzIHBhcnQgb2YgWFNBLTI2NyAvIENW
-RS0yMDE4LTM2NjUKICAgIAogICAgU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxp
-Y2hAc3VzZS5jb20+Cgpjb21taXQgNDEzMzllY2I1ZjE4Y2E3ZWM3YjBjOTE0Yzk1MmEwZTE3MTVh
-ZTUxMQpBdXRob3I6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CkRhdGU6ICAg
-VHVlIEp1biA1IDE3OjM5OjM4IDIwMTggKzAxMDAKCiAgICBzY3JpcHRzL2FkZF9tYWludGFpbmVy
-cy5wbDogRG9uJ3QgY2FsbCBnZXRfbWFpbnRhaW5lcnMucGwgd2l0aCAtZgogICAgCiAgICBUaGUg
-b3B0aW9uIC1mIG9mIHNjcmlwdHMvZ2V0X21haW50YWluZXJzLnBsIHdpbGwgcmV0dXJuIHRoZSBt
-YWludGFpbmVycwogICAgb2YgYSBnaXZlbiBmaWxlLCAqbm90KiB0aGUgbGlzdCBvZiBtYWludGFp
-bmVycyBpZiB0aGUgZmlsZSB3YXMgYSBwYXRjaC4KICAgIAogICAgVGhlIG91dHB1dCBleHBlY3Rl
-ZCBvZiBhZGRfbWFpbnRhaW5lcnMgaXMgdGhlIGxhdHRlciwgc28gZHJvcCB0aGUgb3B0aW9uCiAg
-ICAtZi4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxA
-YXJtLmNvbT4KICAgIFJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNl
-LmNvbT4KICAgIFJldmlld2VkLWJ5OiBMYXJzIEt1cnRoIDxsYXJzLmt1cnRoQGNpdHJpeC5jb20+
-CiAgICBBY2tlZC1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+Cihx
-ZW11IGNoYW5nZXMgbm90IGluY2x1ZGVkKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+--===============5455323085585968821==
+Content-Type: multipart/alternative; boundary="00000000000002afbb056f084dc7"
+
+--00000000000002afbb056f084dc7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hello,
+
+Mixed-criticality and safety-critical systems under development need
+support for timely boot of multiple domains at system launch -- =E2=80=9CIn=
+itial
+Domains=E2=80=9D -- with static assignment of resources between them, each =
+isolated
+from the others and without runtime dependency on a =E2=80=9Cdom0=E2=80=9D-=
+type domain.
+
+The Xen hypervisor currently contains a section of fixed policy logic for
+creation of a single, highly-privileged domain =E2=80=9Cdom0=E2=80=9D at sy=
+stem boot.
+
+We would like to establish a shared understanding of best practice for
+configuration and deployment of disaggregated system launch with multiple
+domains, for production systems, on both x86 and ARM platforms.
+
+Correctness and integrity of system launch is fundamental to system
+security.
+
+Maximizing the commonality between deployed Xen systems enables pooling of
+risk and widens the applicability of testing that is performed.
+
+## Requirements:
+
+* Enable fast launch of multiple domains at system boot.
+* Obtain the boot materials for Initial Domains -- config, kernel image,
+optional ramdisk -- from host boot binaries.
+* A system initialization process that is appropriate for both ARM and x86.
+* Support minimization of audit work required for safety critical
+certification
+    * Favour reduction of code size and complexity of highest-privilege
+components.
+    * Decouple and isolate logic in support of simplifying validation by
+enabling reasoning about the interfaces between components.
+* Remove the policy logic for initial distribution of privileges from the
+hypervisor.
+    * Aim to simplify and consolidate the hypervisor code for system launch=
+.
+    * Allow flexibility of different initial domain configurations by
+disaggregation to an external component.
+    * Separate the mechanisms of privilege assignment, necessarily within
+the hypervisor, from the implementation of policy logic assigning them to
+specific domains.
+* Support measured launch (e.g. TXT/SKINIT) and verified launch (e.g.
+Secure Boot) to include the ability to measure/verify any or all Initial
+Domains.
+* Support for manageable processes for the system boot binaries.
+    * ie. Consider: creation of files, updates to files, build-time
+tooling, run-time tooling, dependencies of components.
+    * Note that Device Tree tooling is foreign for booting x86.
+* Do not make Initial Domain creation depend upon parsing complex data
+structures, such as a Device Tree, within the hypervisor.
+    * The parsing is unwanted attack surface.
+    * A static, unchanging Device Tree binary used just for
+hardware-enablement increases commonality across deployments, and is easier
+to place trust in than one that changes according to the specific installed
+software configuration.
+* Support configuration of XSM security labels for the Initial Domains.
+
+## Proposed approach:
+
+Provide support for the hypervisor launching an alternative configuration
+for the first domain launched, revising the all-privileged Dom0 to it being
+a more capability-constrained =E2=80=9CBoot Domain=E2=80=9D, DomB.
+
+DomB is responsible for starting a set of domains from the material it
+discovers within its ramdisk. Once they are running, DomB terminates with
+launch success status indicator, in a step we refer to as =E2=80=9CExit Xen=
+ Boot
+Services=E2=80=9D. The domain termination makes it easy to verify that all =
+DomB
+privileges have been dropped.
+
+The Boot Domain need not be granted hardware access capabilities itself;
+but it does require the capability to create a domain that has each
+privilege. Since DomB is granted no access to hardware, it is possible for
+DomB to operate as a PVH domain - and we would advocate for this.
+
+In a future iteration of the work: when DomB creates domains and delegates
+privileges to them, DomB will lose the ability to further delegate the same
+privileges to other domains. This atomic transfer will be enforced by the
+hypervisor: a ratchet of decreasing capability.
+
+The Boot Domain approach enables flexibility of configuration in system
+bring up, with the same approach applicable on both ARM and x86
+architectures, while minimizing increase in the hypervisor code base. DomB
+can be implemented in a small, single-purpose kernel, e.g. mini-os or LK,
+that can easily be audited for certification while maximizing the isolation
+of the platform launch process. It provides flexibility to support multiple
+models to include but not limited to: single, all privileged domain, in
+traditional dom0-style; split privileged domains (control/hardware
+domains); disaggregated domains; static partitioned domains; or high
+density, cloned domains (e.g. container farm or fast-fork honeypot).
+
+## Q: How does this change the system boot configuration files?
+
+#### Existing practice:
+
+The current dom0 initialization materials are:
+
+* optional entries on the Xen command line
+* an OS kernel image
+* an OS kernel command line, supplied by the bootloader
+* an optional OS kernel initial ramdisk image
+
+#### With the proposal:
+
+The domB initialization materials are:
+
+* optional entries on the Xen command line
+* an OS kernel image
+* an OS kernel command line, supplied by the bootloader
+* the domB initial ramdisk image
+
+The domB initial ramdisk image will contain:
+
+* For each Initial Domain:
+    * VM configuration file, including (amongst other things):
+        * any OS kernel command line
+        * standard VM config items, such as RAM allocation, vCPU
+configuration
+        * XSM security label for the domain
+    * For PV/PVH domains:
+        * an OS kernel image
+        * an optional ramdisk for the VM
+    * An init program to enable the domB kernel to start the Initial
+Domains.
+        * The domains may be started in parallel, or in sequence, as
+required - eg. some domains may depend upon storage backends being
+available, and so be started later in the sequence.
+
+The XSM policy will require updating for a domB system.
+
+For booting into the traditional highly-privileged dom0 model with this
+launch process, the most visible effect is migration of the dom0
+configuration state and kernel boot binaries into the domB ramdisk.
+Documentation will be necessary to communicate how to work with this
+configuration.
+
+## Q: How does this structure affect the TCB?
+
+The Xen system components that must be within the TCB of each Initial
+Domain are:
+
+* The hypervisor.
+* The Boot Domain, domB, which has exited and cannot be restarted without
+host reboot.
+
+It enables the start of VMs with a shorter chain of trust and substantially
+reduced volume of code in their TCB than available with the traditional
+dom0 model.
+Note that running VMs with privileges over other domains will impact the
+size of the TCB of the VMs that they have privilege over. XSM is able to
+perform fine-grained confinement which can address this.
+
+## References
+
+RFC for =E2=80=9Cdom0less step 1=E2=80=9D, with aim of preparation for Safe=
+ty Certification
+https://lists.xenproject.org/archives/html/xen-devel/2018-06/msg00982.html
+
+Domain Builder
+https://lists.xenproject.org/archives/html/xen-devel/2014-03/msg00320.html
+
+Hardware Domain support
+https://lists.xenproject.org/archives/html/xen-devel/2014-03/msg03556.html
+
+
+thanks,
+
+Christopher
+
+--00000000000002afbb056f084dc7
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hello,<br></div><div><br></div><div>Mixed-criticality=
+ and safety-critical systems under development need support for timely boot=
+ of multiple domains at system launch -- =E2=80=9CInitial Domains=E2=80=9D =
+-- with static assignment of resources between them, each isolated from the=
+ others and without runtime dependency on a =E2=80=9Cdom0=E2=80=9D-type dom=
+ain.</div><div><br></div><div>The Xen hypervisor currently contains a secti=
+on of fixed policy logic for creation of a single, highly-privileged domain=
+ =E2=80=9Cdom0=E2=80=9D at system boot.</div><div><br></div><div>We would l=
+ike to establish a shared understanding of best practice for configuration =
+and deployment of disaggregated system launch with multiple domains, for pr=
+oduction systems, on both x86 and ARM platforms.</div><div><br></div><div>C=
+orrectness and integrity of system launch is fundamental to system security=
+.</div><div><br></div><div>Maximizing the commonality between deployed Xen =
+systems enables pooling of risk and widens the applicability of testing tha=
+t is performed.</div><div><br></div><div>## Requirements:</div><div><br></d=
+iv><div>* Enable fast launch of multiple domains at system boot.</div><div>=
+* Obtain the boot materials for Initial Domains -- config, kernel image, op=
+tional ramdisk -- from host boot binaries.</div><div>* A system initializat=
+ion process that is appropriate for both ARM and x86.</div><div>* Support m=
+inimization of audit work required for safety critical certification</div><=
+div>=C2=A0 =C2=A0 * Favour reduction of code size and complexity of highest=
+-privilege components.</div><div>=C2=A0 =C2=A0 * Decouple and isolate logic=
+ in support of simplifying validation by enabling reasoning about the inter=
+faces between components.</div><div>* Remove the policy logic for initial d=
+istribution of privileges from the hypervisor.</div><div>=C2=A0 =C2=A0 * Ai=
+m to simplify and consolidate the hypervisor code for system launch.</div><=
+div>=C2=A0 =C2=A0 * Allow flexibility of different initial domain configura=
+tions by disaggregation to an external component.</div><div>=C2=A0 =C2=A0 *=
+ Separate the mechanisms of privilege assignment, necessarily within the hy=
+pervisor, from the implementation of policy logic assigning them to specifi=
+c domains.</div><div>* Support measured launch (e.g. TXT/SKINIT) and verifi=
+ed launch (e.g. Secure Boot) to include the ability to measure/verify any o=
+r all Initial Domains.</div><div>* Support for manageable processes for the=
+ system boot binaries.</div><div>=C2=A0 =C2=A0 * ie. Consider: creation of =
+files, updates to files, build-time tooling, run-time tooling, dependencies=
+ of components.</div><div>=C2=A0 =C2=A0 * Note that Device Tree tooling is =
+foreign for booting x86.</div><div>* Do not make Initial Domain creation de=
+pend upon parsing complex data structures, such as a Device Tree, within th=
+e hypervisor.</div><div>=C2=A0 =C2=A0 * The parsing is unwanted attack surf=
+ace.</div><div>=C2=A0 =C2=A0 * A static, unchanging Device Tree binary used=
+ just for hardware-enablement increases commonality across deployments, and=
+ is easier to place trust in than one that changes according to the specifi=
+c installed software configuration.</div><div>* Support configuration of XS=
+M security labels for the Initial Domains.</div><div><br></div><div>## Prop=
+osed approach:</div><div><br></div><div>Provide support for the hypervisor =
+launching an alternative configuration for the first domain launched, revis=
+ing the all-privileged Dom0 to it being a more capability-constrained =E2=
+=80=9CBoot Domain=E2=80=9D, DomB.</div><div><br></div><div>DomB is responsi=
+ble for starting a set of domains from the material it discovers within its=
+ ramdisk. Once they are running, DomB terminates with launch success status=
+ indicator, in a step we refer to as =E2=80=9CExit Xen Boot Services=E2=80=
+=9D. The domain termination makes it easy to verify that all DomB privilege=
+s have been dropped.</div><div><br></div><div>The Boot Domain need not be g=
+ranted hardware access capabilities itself; but it does require the capabil=
+ity to create a domain that has each privilege. Since DomB is granted no ac=
+cess to hardware, it is possible for DomB to operate as a PVH domain - and =
+we would advocate for this.</div><div><br></div><div>In a future iteration =
+of the work: when DomB creates domains and delegates privileges to them, Do=
+mB will lose the ability to further delegate the same privileges to other d=
+omains. This atomic transfer will be enforced by the hypervisor: a ratchet =
+of decreasing capability.</div><div><br></div><div>The Boot Domain approach=
+ enables flexibility of configuration in system bring up, with the same app=
+roach applicable on both ARM and x86 architectures, while minimizing increa=
+se in the hypervisor code base. DomB can be implemented in a small, single-=
+purpose kernel, e.g. mini-os or LK, that can easily be audited for certific=
+ation while maximizing the isolation of the platform launch process. It pro=
+vides flexibility to support multiple models to include but not limited to:=
+ single, all privileged domain, in traditional dom0-style; split privileged=
+ domains (control/hardware domains); disaggregated domains; static partitio=
+ned domains; or high density, cloned domains (e.g. container farm or fast-f=
+ork honeypot).</div><div><br></div><div>## Q: How does this change the syst=
+em boot configuration files?</div><div><br></div><div>#### Existing practic=
+e:</div><div><br></div><div>The current dom0 initialization materials are:<=
+/div><div><br></div><div>* optional entries on the Xen command line</div><d=
+iv>* an OS kernel image</div><div>* an OS kernel command line, supplied by =
+the bootloader</div><div>* an optional OS kernel initial ramdisk image</div=
+><div><br></div><div>#### With the proposal:</div><div><br></div><div>The d=
+omB initialization materials are:</div><div><br></div><div>* optional entri=
+es on the Xen command line</div><div>* an OS kernel image</div><div>* an OS=
+ kernel command line, supplied by the bootloader</div><div>* the domB initi=
+al ramdisk image</div><div><br></div><div>The domB initial ramdisk image wi=
+ll contain:</div><div><br></div><div>* For each Initial Domain:</div><div>=
+=C2=A0 =C2=A0 * VM configuration file, including (amongst other things):</d=
+iv><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 * any OS kernel command line</div><div>=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 * standard VM config items, such as RAM allocat=
+ion, vCPU configuration</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 * XSM securit=
+y label for the domain</div><div>=C2=A0 =C2=A0 * For PV/PVH domains:</div><=
+div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 * an OS kernel image</div><div>=C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 * an optional ramdisk for the VM</div><div>=C2=A0 =C2=A0 =
+* An init program to enable the domB kernel to start the Initial Domains.</=
+div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 * The domains may be started in parall=
+el, or in sequence, as required - eg. some domains may depend upon storage =
+backends being available, and so be started later in the sequence.</div><di=
+v><br></div><div>The XSM policy will require updating for a domB system.</d=
+iv><div><br></div><div>For booting into the traditional highly-privileged d=
+om0 model with this launch process, the most visible effect is migration of=
+ the dom0 configuration state and kernel boot binaries into the domB ramdis=
+k. Documentation will be necessary to communicate how to work with this con=
+figuration.</div><div><br></div><div>## Q: How does this structure affect t=
+he TCB?</div><div><br></div><div>The Xen system components that must be wit=
+hin the TCB of each Initial Domain are:</div><div><br></div><div>* The hype=
+rvisor.</div><div>* The Boot Domain, domB, which has exited and cannot be r=
+estarted without host reboot.</div><div><br></div><div>It enables the start=
+ of VMs with a shorter chain of trust and substantially reduced volume of c=
+ode in their TCB than available with the traditional dom0 model.</div><div>=
+Note that running VMs with privileges over other domains will impact the si=
+ze of the TCB of the VMs that they have privilege over. XSM is able to perf=
+orm fine-grained confinement which can address this.</div><div><br></div><d=
+iv>## References</div><div><br></div><div>RFC for =E2=80=9Cdom0less step 1=
+=E2=80=9D, with aim of preparation for Safety Certification</div><div><a hr=
+ef=3D"https://lists.xenproject.org/archives/html/xen-devel/2018-06/msg00982=
+.html">https://lists.xenproject.org/archives/html/xen-devel/2018-06/msg0098=
+2.html</a></div><div><br></div><div>Domain Builder</div><div><a href=3D"htt=
+ps://lists.xenproject.org/archives/html/xen-devel/2014-03/msg00320.html">ht=
+tps://lists.xenproject.org/archives/html/xen-devel/2014-03/msg00320.html</a=
+></div><div><br></div><div>Hardware Domain support</div><div><a href=3D"htt=
+ps://lists.xenproject.org/archives/html/xen-devel/2014-03/msg03556.html">ht=
+tps://lists.xenproject.org/archives/html/xen-devel/2014-03/msg03556.html</a=
+></div><div><br></div><div><br></div><div>thanks,</div><div><br></div><div>=
+Christopher</div></div>
+
+--00000000000002afbb056f084dc7--
+
+
+--===============5455323085585968821==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5455323085585968821==--
