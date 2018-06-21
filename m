@@ -1,19 +1,13 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [OSSTEST PATCH 0/4] FreeBSD fixups
-Date: Thu, 21 Jun 2018 16:53:43 +0200
-Message-ID: <20180621145343.aoi55vpllkzcnp6b@mac>
-References: <1529590160-25104-1-git-send-email-ian.jackson@eu.citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] libxl: always call qemus
+ xen-save-devices-state in suspend/resume
+Date: Thu, 21 Jun 2018 17:34:54 +0200
+Message-ID: <20180621173454.39fbf51f.olaf@aepfle.de>
+References: <20180517155108.4624-1-olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0258089340441195271=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=uiai=jh=citrix.com=prvs=703afe70e=roger.pau@srs-us1.protection.inumbo.net>)
- id 1fW0yd-0005PT-P8
- for xen-devel@lists.xenproject.org; Thu, 21 Jun 2018 14:54:23 +0000
-Content-Disposition: inline
-In-Reply-To: <1529590160-25104-1-git-send-email-ian.jackson@eu.citrix.com>
+In-Reply-To: <20180517155108.4624-1-olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,27 +16,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xen.org
+Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBKdW4gMjEsIDIwMTggYXQgMDM6MDk6MTZQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
-dGU6Cj4gRnJvbTogSWFuIEphY2tzb24gPElhbi5KYWNrc29uQGV1LmNpdHJpeC5jb20+Cj4gCj4g
-VGhlIEZyZWVCU0Qgc2VyaWVzIGRvZXMgbm90IHdvcmsgcHJvcGVybHkgb24gdG9wIG9mIGN1cnJl
-bnQgb3NzdGVzdAo+IHByb2R1Y3Rpb24sIGR1ZSB0byBhIHNlbWFudGljIGNvbmZsaWN0IHdpdGgg
-d29yayBkb25lIHRvIHN1cHBvcnQgcWVtdQo+IGRlcHJpdi4KPiAKPiBUaGVzZSBwYXRjaGVzLCBp
-biBjb21iaW5hdGlvbiwgcmVwcmVzZW50IHdoYXQgSSByb3VnaGx5IGludGVuZCB0byBkbwo+IHRv
-IGZpeCBpdC4gIEhvd2V2ZXIsIHRoZXkgbmVlZCByZWJhc2luZyBhbmQgbWVyZ2luZyBhbmQgc3F1
-YXNoaW5nIGludG8KPiB0aGUgRnJlZUJTRCBzZXJpZXMuICBBbHNvLCBub3RlIHRoYXQgdGhleSBj
-YW5ub3QgYmUgYXBwbGllZCBmcm9tIHRoaXMKPiBlbWFpbCBjaGFpbiBiZWNhdXNlIHR3byBvZiB0
-aGUgcGF0Y2hlcyBldmVuIGNvbmZsaWN0IQo+IAo+IElhbiBKYWNrc29uICgzKToKPiAgIFRlc3RT
-dXBwb3J0OiBSZW5hbWUgcGFja2FnZV9pbnN0YWxsX2NtZCB0bwo+ICAgICBwYWNrYWdlX2luc3Rh
-bGxfY21kXGIvcGtnX21hbmFnZXJfaW5zdGFsbF9jbWRfbGluZQo+ICAgVGVzdFN1cHBvcnQ6IEV4
-cG9ydCBwa2dfbWFuYWdlcl9pbnN0YWxsX2NtZF9saW5lCj4gICB0cy14ZW4taW5zdGFsbDogVXNl
-IHBrZ19tYW5hZ2VyX2luc3RhbGxfY21kX2xpbmUKPiAKPiBSb2dlciBQYXUgTW9ubsOpICgxKToK
-PiAgIFRlc3RTdXBwb3J0OiBIb25vdXIgJGZvcmNlIG9wdGlvbiB0byBwYWNrYWdlX2luc3RhbGxf
-Y21kCgpMR1RNLiBEbyB5b3Ugd2FudCBtZSB0byBtZXJnZSB0aGVtIGludG8gbXkgRnJlZUJTRCBz
-ZXJpZXM/IE9yIGFkZGluZwp0aGVtIG9uIHRvcCBpcyBmaW5lPwoKVGhhbmtzLCBSb2dlci4KCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============0258089340441195271==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/M5.=JZ3I_LM8d=v1RibR/sm"; protocol="application/pgp-signature"
+
+--Sig_/M5.=JZ3I_LM8d=v1RibR/sm
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 17 May 2018 17:51:08 +0200
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> @@ -377,7 +377,9 @@ static void domain_suspend_common_guest_suspended(lib=
+xl__egc *egc,
+> +        libxl__device_model_version_running(gc, dsps->domid) =3D=3D
+> +        LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN) {
+
+Please withdraw that patch. This condition is always true for PV.
+
+Olaf
+
+--Sig_/M5.=JZ3I_LM8d=v1RibR/sm
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWyvFngAKCRBdQqD6ppg2
+fgJ0AKC4nUDLphOhKPxlP5ryuH0L5AAwIQCeN4HWjc99fb/ByXsioBsM7I1RB8U=
+=eXBf
+-----END PGP SIGNATURE-----
+
+--Sig_/M5.=JZ3I_LM8d=v1RibR/sm--
+
+
+--===============0258089340441195271==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0258089340441195271==--
