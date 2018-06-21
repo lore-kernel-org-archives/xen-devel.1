@@ -1,10 +1,19 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: device_model_version is set unconditionally to qemu_xen
-Date: Thu, 21 Jun 2018 15:34:38 +0200
-Message-ID: <20180621153438.73a96d9a.olaf@aepfle.de>
+From: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 4/4] ts-xen-install: Use
+ pkg_manager_install_cmd_line
+Date: Thu, 21 Jun 2018 15:09:20 +0100
+Message-ID: <1529590160-25104-5-git-send-email-ian.jackson@eu.citrix.com>
+References: <1529590160-25104-1-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4931771204929266653=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=g66k=jh=citrix.com=prvs=70384805a=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1fW0HM-0001dt-8C
+ for xen-devel@lists.xenproject.org; Thu, 21 Jun 2018 14:09:40 +0000
+In-Reply-To: <1529590160-25104-1-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,51 +22,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org
+Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4931771204929266653==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/LucvyGtqevxVQJtlW+=XOFt"; protocol="application/pgp-signature"
-
---Sig_/LucvyGtqevxVQJtlW+=XOFt
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-libxl__domain_build_info_setdefault sets libxl_domain_build_info->device_mo=
-del_version unconditionally to LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN. This br=
-eaks domUs that do not have a qemu attached to it, like PV without vfb=3D a=
-nd without qdisk. While that bug does not trigger today, it will once https=
-://lists.xenproject.org/archives/html/xen-devel/2018-05/msg01077.html is me=
-rged.
-
-Why would it be a good idea to set ->device_model_version to a bogus value,=
- instead of introducing a concept of device_model_version=3DNONE?
-
-Olaf
-
---Sig_/LucvyGtqevxVQJtlW+=XOFt
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWyupbgAKCRBdQqD6ppg2
-fiYkAJ4ikz4/gRUh+geZQ43au0YUJyQuHgCgrfR247Ws5jUKaRZT2BlnmDIMK2o=
-=UCWZ
------END PGP SIGNATURE-----
-
---Sig_/LucvyGtqevxVQJtlW+=XOFt--
-
-
---===============4931771204929266653==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4931771204929266653==--
+UmF0aGVyIHRoYW4gdGFyZ2V0X3J1bl9hcHQsIHdoaWNoIHdlIGFyZSBhYm9saXNoaW5nIHNvb24u
+CgpTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8SWFuLkphY2tzb25AZXUuY2l0cml4LmNvbT4K
+LS0tCiB0cy14ZW4taW5zdGFsbCB8IDQgKysrLQogMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9u
+cygrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL3RzLXhlbi1pbnN0YWxsIGIvdHMteGVu
+LWluc3RhbGwKaW5kZXggOTkxM2U4NS4uZDU0YjJlNCAxMDA3NTUKLS0tIGEvdHMteGVuLWluc3Rh
+bGwKKysrIGIvdHMteGVuLWluc3RhbGwKQEAgLTk5LDcgKzk5LDkgQEAgc3ViIHNvbWVfZXh0cmFk
+ZWJzICgkKSB7CiAJdGFyZ2V0X2NtZF9yb290KCRobywKIAkJCSJkcGtnIC0tZm9yY2UtY29uZm9s
+ZCAkZHBrZ29wdHMgJG9udGFyZ2V0IDwvZGV2L251bGwiLAogCQkJMzAwKTsKLQl0YXJnZXRfcnVu
+X2FwdCgkaG8sIHF3KC1mIGluc3RhbGwpKTsKKwl0YXJnZXRfY21kX3Jvb3QoJGhvLAorCQkJcGtn
+X21hbmFnZXJfaW5zdGFsbF9jbWRfbGluZSgkaG8sMCwxKSwKKwkJCTMwMDApOwogICAgIH0KIH0K
+IAotLSAKMi4xLjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
