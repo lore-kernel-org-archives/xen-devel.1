@@ -1,16 +1,10 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 124466: all pass - PUSHED
-Date: Thu, 21 Jun 2018 13:18:37 +0000
-Message-ID: <osstest-124466-mainreport@xen.org>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: device_model_version is set unconditionally to qemu_xen
+Date: Thu, 21 Jun 2018 15:34:38 +0200
+Message-ID: <20180621153438.73a96d9a.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4931771204929266653=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=u36b=jh=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fVzU0-0006NV-J1
- for xen-devel@lists.xenproject.org; Thu, 21 Jun 2018 13:18:40 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,50 +13,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNDQ2NiBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjQ0NjYvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
-dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiBvdm1mICAgICAgICAgICAgICAgICA4NTVhYmUwMjA0Y2I5MzJjODA1OWE1NzNhMDZhNTlk
-ZGM3MTRjYTQ5CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICAxMWQwY2Qy
-M2RkMWJjMTVhNmU2YTE1OTgyNTBlYTJlMGM0YzM2ZTlhCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-MjQzNjEgIDIwMTgtMDYtMTggMTY6MTA6MjMgWiAgICAyIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
-ICAgMTI0NDAwICAyMDE4LTA2LTE5IDEyOjI2OjM0IFogICAgMiBkYXlzICAgIDMgYXR0ZW1wdHMK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQXJkIEJpZXNo
-ZXV2ZWwgPGFyZC5iaWVzaGV1dmVsQGxpbmFyby5vcmc+CiAgRXJpYyBEb25nIDxlcmljLmRvbmdA
-aW50ZWwuY29tPgogIEhhbyBXdSA8aGFvLmEud3VAaW50ZWwuY29tPgogIEppYW4gSiBXYW5nIDxq
-aWFuLmoud2FuZ0BpbnRlbC5jb20+CiAgTGVvIER1cmFuIDxsZW8uZHVyYW5AYW1kLmNvbT4KICBN
-YXJ2aW4gSD91c2VyIDxNYXJ2aW4uSGFldXNlckBvdXRsb29rLmNvbT4KICBNYXJ2aW4gSGFldXNl
-ciA8TWFydmluLkhhZXVzZXJAb3V0bG9vay5jb20+CiAgUnVpeXUgTmkgPHJ1aXl1Lm5pQGludGVs
-LmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1wdm9w
-cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZs
-aWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3Mv
-bG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4g
-YXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcv
-b3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVz
-dCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9
-b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hl
-bmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1h
-c3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0
-cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1c2hpbmcgcmV2aXNp
-b24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9naXQvb3NzdGVzdC9vdm1mLmdpdAog
-ICAxMWQwY2QyM2RkLi44NTVhYmUwMjA0ICA4NTVhYmUwMjA0Y2I5MzJjODA1OWE1NzNhMDZhNTlk
-ZGM3MTRjYTQ5IC0+IHhlbi10ZXN0ZWQtbWFzdGVyCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+--===============4931771204929266653==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/LucvyGtqevxVQJtlW+=XOFt"; protocol="application/pgp-signature"
+
+--Sig_/LucvyGtqevxVQJtlW+=XOFt
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+libxl__domain_build_info_setdefault sets libxl_domain_build_info->device_mo=
+del_version unconditionally to LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN. This br=
+eaks domUs that do not have a qemu attached to it, like PV without vfb=3D a=
+nd without qdisk. While that bug does not trigger today, it will once https=
+://lists.xenproject.org/archives/html/xen-devel/2018-05/msg01077.html is me=
+rged.
+
+Why would it be a good idea to set ->device_model_version to a bogus value,=
+ instead of introducing a concept of device_model_version=3DNONE?
+
+Olaf
+
+--Sig_/LucvyGtqevxVQJtlW+=XOFt
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWyupbgAKCRBdQqD6ppg2
+fiYkAJ4ikz4/gRUh+geZQ43au0YUJyQuHgCgrfR247Ws5jUKaRZT2BlnmDIMK2o=
+=UCWZ
+-----END PGP SIGNATURE-----
+
+--Sig_/LucvyGtqevxVQJtlW+=XOFt--
+
+
+--===============4931771204929266653==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4931771204929266653==--
