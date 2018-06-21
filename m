@@ -1,19 +1,20 @@
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH 2/2] xen-netfront: Update features after
- registering netdev
-Date: Thu, 21 Jun 2018 14:00:21 +0100
-Message-ID: <20180621130021.27029-3-ross.lagerwall__44106.4240098514$1529585981$gmane$org@citrix.com>
-References: <20180621130021.27029-1-ross.lagerwall@citrix.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH] x86/xen: add call of
+ speculative_store_bypass_ht_init() to pv paths
+Date: Thu, 21 Jun 2018 09:01:59 -0400
+Message-ID: <0637b981-c3cf-b1e7-5c1b-41f77bedc290__47099.5744843551$1529586061$gmane$org@oracle.com>
+References: <20180621084331.21228-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=evb4=jh=citrix.com=prvs=70385fc13=ross.lagerwall@srs-us1.protection.inumbo.net>)
- id 1fVzCY-0004qt-8N
- for xen-devel@lists.xenproject.org; Thu, 21 Jun 2018 13:00:38 +0000
-In-Reply-To: <20180621130021.27029-1-ross.lagerwall@citrix.com>
+ <srs0=dgab=jh=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1fVzEA-00052s-8y
+ for xen-devel@lists.xenproject.org; Thu, 21 Jun 2018 13:02:18 +0000
+In-Reply-To: <20180621084331.21228-1-jgross@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,35 +23,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: netdev@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>, Liam Shepherd <liam@dancer.es>, linux-kernel@vger.kernel.org, Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, "David S. Miller" <davem@davemloft.net>
+To: Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org
+Cc: tglx@linutronix.de, mingo@redhat.com, stable@vger.kernel.org, hpa@zytor.com
 List-Id: xen-devel@lists.xenproject.org
 
-VXBkYXRlIHRoZSBmZWF0dXJlcyBhZnRlciBjYWxsaW5nIHJlZ2lzdGVyX25ldGRldigpIG90aGVy
-d2lzZSB0aGUKZGV2aWNlIGZlYXR1cmVzIGFyZSBub3Qgc2V0IHVwIGNvcnJlY3RseSBhbmQgaXQg
-bm90IHBvc3NpYmxlIHRvIGNoYW5nZQp0aGUgTVRVIG9mIHRoZSBkZXZpY2UuIEFmdGVyIHRoaXMg
-Y2hhbmdlLCB0aGUgZmVhdHVyZXMgcmVwb3J0ZWQgYnkKZXRodG9vbCBtYXRjaCB0aGUgZGV2aWNl
-J3MgZmVhdHVyZXMgYmVmb3JlIHRoZSBjb21taXQgd2hpY2ggaW50cm9kdWNlZAp0aGUgaXNzdWUg
-YW5kIGl0IGlzIHBvc3NpYmxlIHRvIGNoYW5nZSB0aGUgZGV2aWNlJ3MgTVRVLgoKRml4ZXM6IGY1
-OTljNjRmZGY3ZCAoInhlbi1uZXRmcm9udDogRml4IHJhY2UgYmV0d2VlbiBkZXZpY2Ugc2V0dXAg
-YW5kIG9wZW4iKQpSZXBvcnRlZC1ieTogTGlhbSBTaGVwaGVyZCA8bGlhbUBkYW5jZXIuZXM+ClNp
-Z25lZC1vZmYtYnk6IFJvc3MgTGFnZXJ3YWxsIDxyb3NzLmxhZ2Vyd2FsbEBjaXRyaXguY29tPgot
-LS0KIGRyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jIHwgOCArKysrLS0tLQogMSBmaWxlIGNoYW5n
-ZWQsIDQgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJz
-L25ldC94ZW4tbmV0ZnJvbnQuYyBiL2RyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jCmluZGV4IGVl
-NGNiNmMuLmE1N2RhZWMgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jCisr
-KyBiL2RyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jCkBAIC0xOTUxLDEwICsxOTUxLDYgQEAgc3Rh
-dGljIGludCB4ZW5uZXRfY29ubmVjdChzdHJ1Y3QgbmV0X2RldmljZSAqZGV2KQogCS8qIHRhbGtf
-dG9fbmV0YmFjaygpIHNldHMgdGhlIGNvcnJlY3QgbnVtYmVyIG9mIHF1ZXVlcyAqLwogCW51bV9x
-dWV1ZXMgPSBkZXYtPnJlYWxfbnVtX3R4X3F1ZXVlczsKIAotCXJ0bmxfbG9jaygpOwotCW5ldGRl
-dl91cGRhdGVfZmVhdHVyZXMoZGV2KTsKLQlydG5sX3VubG9jaygpOwotCiAJaWYgKGRldi0+cmVn
-X3N0YXRlID09IE5FVFJFR19VTklOSVRJQUxJWkVEKSB7CiAJCWVyciA9IHJlZ2lzdGVyX25ldGRl
-dihkZXYpOwogCQlpZiAoZXJyKSB7CkBAIC0xOTY0LDYgKzE5NjAsMTAgQEAgc3RhdGljIGludCB4
-ZW5uZXRfY29ubmVjdChzdHJ1Y3QgbmV0X2RldmljZSAqZGV2KQogCQl9CiAJfQogCisJcnRubF9s
-b2NrKCk7CisJbmV0ZGV2X3VwZGF0ZV9mZWF0dXJlcyhkZXYpOworCXJ0bmxfdW5sb2NrKCk7CisK
-IAkvKgogCSAqIEFsbCBwdWJsaWMgYW5kIHByaXZhdGUgc3RhdGUgc2hvdWxkIG5vdyBiZSBzYW5l
-LiAgR2V0CiAJICogcmVhZHkgdG8gc3RhcnQgc2VuZGluZyBhbmQgcmVjZWl2aW5nIHBhY2tldHMg
-YW5kIGdpdmUgdGhlIGRyaXZlcgotLSAKMi45LjUKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+T24gMDYvMjEvMjAxOCAwNDo0MyBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBDb21taXQgMWY1
+MGRkYjRmNDE4OTI0M2MwNTkyNmI4NDJkYzFhMDMzMjE5NWYzMSAoIng4Ni9zcGVjdWxhdGlvbjoK
+PiBIYW5kbGUgSFQgY29ycmVjdGx5IG9uIEFNRCIpIGFkZGVkIHNwZWN1bGF0aXZlX3N0b3JlX2J5
+cGFzc19odF9pbml0KCkKPiB0byB0aGUgcGVyLWNwdSBpbml0aWFsaXphdGlvbiBzZXF1ZW5jZS4K
+Pgo+IHNwZWN1bGF0aXZlX3N0b3JlX2J5cGFzc19odF9pbml0KCkgbmVlZHMgdG8gYmUgY2FsbGVk
+IG9uIGVhY2ggY3B1IGZvcgo+IHB2IGd1ZXN0cywgdG9vLgo+Cj4gUmVwb3J0ZWQtYnk6IEJyaWFu
+IFdvb2RzIDxicmlhbi53b29kc0BhbWQuY29tPgo+IEZpeGVzOiAxZjUwZGRiNGY0MTg5MjQzYzA1
+OTI2Yjg0MmRjMWEwMzMyMTk1ZjMxICgieDg2L3NwZWN1bGF0aW9uOiBIYW5kbGUgSFQgY29ycmVj
+dGx5IG9uIEFNRCIpCj4gQ2M6IDxzdGFibGVAdmdlci5rZXJuZWwub3JnPgo+IFNpZ25lZC1vZmYt
+Ynk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KPiBUZXN0ZWQtYnk6IEJyaWFuIFdv
+b2RzIDxicmlhbi53b29kc0BhbWQuY29tPgo+CgoKClJldmlld2VkLWJ5OiBCb3JpcyBPc3Ryb3Zz
+a3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
