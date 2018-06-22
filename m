@@ -1,20 +1,20 @@
-From: Juergen Gross <jgross@suse.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 Subject: Re: [PATCH] xen: Remove unnecessary BUG_ON from
  __unbind_from_irq()
-Date: Fri, 22 Jun 2018 08:34:28 +0200
-Message-ID: <4f71ffde-2c0c-795f-665e-8b90076dd923__7571.13536024026$1529649219$gmane$org@suse.com>
+Date: Fri, 22 Jun 2018 09:09:20 +0200
+Message-ID: <20180622070920.wbawc3poyvwvguwu__46179.133866872$1529651312$gmane$org@mac>
 References: <1529602184-2861-1-git-send-email-boris.ostrovsky@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=cnp7=ji=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fWFeS-00049l-0B
- for xen-devel@lists.xenproject.org; Fri, 22 Jun 2018 06:34:32 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=33vo=ji=citrix.com=prvs=704d538d6=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fWGCL-0006Oq-4L
+ for xen-devel@lists.xenproject.org; Fri, 22 Jun 2018 07:09:33 +0000
+Content-Disposition: inline
 In-Reply-To: <1529602184-2861-1-git-send-email-boris.ostrovsky@oracle.com>
-Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,22 +23,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
-Cc: ben.hutchings@codethink.co.uk, stable@vger.kernel.org, roger.pau@citrix.com
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: jgross@suse.com, xen-devel@lists.xenproject.org, ben.hutchings@codethink.co.uk, linux-kernel@vger.kernel.org, stable@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjEvMDYvMTggMTk6MjksIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiBDb21taXQgOTEwZjhi
-ZWZkZjViICgieGVuL3BpcnE6IGZpeCBlcnJvciBwYXRoIGNsZWFudXAgd2hlbiBiaW5kaW5nCj4g
-TVNJcyIpIGZpeGVkIGEgY291cGxlIG9mIGVycm9ycyBpbiBlcnJvciBjbGVhbnVwIHBhdGggb2YK
-PiB4ZW5fYmluZF9waXJxX21zaV90b19pcnEoKS4gVGhpcyBjbGVhbnVwIGFsbG93ZWQgYSBjYWxs
-IHRvCj4gX191bmJpbmRfZnJvbV9pcnEoKSB3aXRoIGFuIHVuYm91bmQgaXJxLCB3aGljaCB3b3Vs
-ZCByZXN1bHQgaW4KPiB0cmlnZ2VyaW5nIHRoZSBCVUdfT04gdGhlcmUuCj4gCj4gU2luY2UgdGhl
-cmUgaXMgcmVhbGx5IG5vIHJlYXNvbiBmb3IgdGhlIEJVR19PTiAoeGVuX2ZyZWVfaXJxKCkgY2Fu
-Cj4gb3BlcmF0ZSBvbiB1bmJvdW5kIGlycXMpIHdlIGNhbiByZW1vdmUgaXQuCj4gCj4gUmVwb3J0
-ZWQtYnk6IEJlbiBIdXRjaGluZ3MgPGJlbi5odXRjaGluZ3NAY29kZXRoaW5rLmNvLnVrPgo+IFNp
-Z25lZC1vZmYtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+
-Cj4gQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcKClB1c2hlZCB0byB4ZW4vdGlwLmdpdCBmb3It
-bGludXMtNC4xOAoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+T24gVGh1LCBKdW4gMjEsIDIwMTggYXQgMDE6Mjk6NDRQTSAtMDQwMCwgQm9yaXMgT3N0cm92c2t5
+IHdyb3RlOgo+IENvbW1pdCA5MTBmOGJlZmRmNWIgKCJ4ZW4vcGlycTogZml4IGVycm9yIHBhdGgg
+Y2xlYW51cCB3aGVuIGJpbmRpbmcKPiBNU0lzIikgZml4ZWQgYSBjb3VwbGUgb2YgZXJyb3JzIGlu
+IGVycm9yIGNsZWFudXAgcGF0aCBvZgo+IHhlbl9iaW5kX3BpcnFfbXNpX3RvX2lycSgpLiBUaGlz
+IGNsZWFudXAgYWxsb3dlZCBhIGNhbGwgdG8KPiBfX3VuYmluZF9mcm9tX2lycSgpIHdpdGggYW4g
+dW5ib3VuZCBpcnEsIHdoaWNoIHdvdWxkIHJlc3VsdCBpbgo+IHRyaWdnZXJpbmcgdGhlIEJVR19P
+TiB0aGVyZS4KPiAKPiBTaW5jZSB0aGVyZSBpcyByZWFsbHkgbm8gcmVhc29uIGZvciB0aGUgQlVH
+X09OICh4ZW5fZnJlZV9pcnEoKSBjYW4KPiBvcGVyYXRlIG9uIHVuYm91bmQgaXJxcykgd2UgY2Fu
+IHJlbW92ZSBpdC4KPiAKPiBSZXBvcnRlZC1ieTogQmVuIEh1dGNoaW5ncyA8YmVuLmh1dGNoaW5n
+c0Bjb2RldGhpbmsuY28udWs+Cj4gU2lnbmVkLW9mZi1ieTogQm9yaXMgT3N0cm92c2t5IDxib3Jp
+cy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT4KClJldmlld2VkLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxy
+b2dlci5wYXVAY2l0cml4LmNvbT4KClRoYW5rcywgSSBoYWQgdGhpcyBvbiBteSBxdWV1ZSBvZiBU
+T0RPcy4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
