@@ -1,8 +1,8 @@
 From: Juergen Gross <jgross@suse.com>
 Subject: Re: [PATCH] xen: Remove unnecessary BUG_ON from
  __unbind_from_irq()
-Date: Fri, 22 Jun 2018 07:59:06 +0200
-Message-ID: <bbf57e79-e79c-baea-a22a-ffb57990c448__26600.6427155391$1529647082$gmane$org@suse.com>
+Date: Fri, 22 Jun 2018 08:34:28 +0200
+Message-ID: <4f71ffde-2c0c-795f-665e-8b90076dd923__7571.13536024026$1529649219$gmane$org@suse.com>
 References: <1529602184-2861-1-git-send-email-boris.ostrovsky@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +11,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=cnp7=ji=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fWF6E-0001Mh-06
- for xen-devel@lists.xenproject.org; Fri, 22 Jun 2018 05:59:10 +0000
+ id 1fWFeS-00049l-0B
+ for xen-devel@lists.xenproject.org; Fri, 22 Jun 2018 06:34:32 +0000
 In-Reply-To: <1529602184-2861-1-git-send-email-boris.ostrovsky@oracle.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -37,8 +37,8 @@ cmUgaXMgcmVhbGx5IG5vIHJlYXNvbiBmb3IgdGhlIEJVR19PTiAoeGVuX2ZyZWVfaXJxKCkgY2Fu
 Cj4gb3BlcmF0ZSBvbiB1bmJvdW5kIGlycXMpIHdlIGNhbiByZW1vdmUgaXQuCj4gCj4gUmVwb3J0
 ZWQtYnk6IEJlbiBIdXRjaGluZ3MgPGJlbi5odXRjaGluZ3NAY29kZXRoaW5rLmNvLnVrPgo+IFNp
 Z25lZC1vZmYtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+
-Cj4gQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcKClJldmlld2VkLWJ5OiBKdWVyZ2VuIEdyb3Nz
-IDxqZ3Jvc3NAc3VzZS5jb20+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+Cj4gQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcKClB1c2hlZCB0byB4ZW4vdGlwLmdpdCBmb3It
+bGludXMtNC4xOAoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
