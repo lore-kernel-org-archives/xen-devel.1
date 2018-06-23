@@ -1,22 +1,16 @@
-From: Steven Haigh <netwiz@crc.id.au>
-Subject: Xen crashes with Ryzen 7 CPUs
-Date: Sat, 23 Jun 2018 17:16:45 +1000
-Message-ID: <1675755.4ap3tzzQVs@wopr.lan.crc.id.au>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [ovmf test] 124618: all pass - PUSHED
+Date: Sat, 23 Jun 2018 08:20:42 +0000
+Message-ID: <osstest-124618-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1697728625198858684=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=8h5w=jj=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
- id 1fWcnA-00005E-Hm
- for xen-devel@lists.xenproject.org; Sat, 23 Jun 2018 07:17:06 +0000
-Received: from wopr.lan.crc.id.au
- (2407-e400-b000-201-99f-2048-53c8-43ff-cpe.spintel.net.au
- [IPv6:2407:e400:b000:201:99f:2048:53c8:43ff])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- by mail.crc.id.au (Postfix) with ESMTPSA id 1F95A20C93
- for <xen-devel@lists.xenproject.org>; Sat, 23 Jun 2018 17:16:55 +1000 (AEST)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=050z=jj=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fWdmo-0005GK-TU
+ for xen-devel@lists.xenproject.org; Sat, 23 Jun 2018 08:20:46 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,75 +19,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============1697728625198858684==
-Content-Type: multipart/signed; boundary="nextPart1659435.GrGiOsW0ln"; micalg="pgp-sha256"; protocol="application/pgp-signature"
-
---nextPart1659435.GrGiOsW0ln
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-
-Hi all,
-
-So I recently decided to upgrade the hardware on my home server from a good=
-=20
-old i5-2500k to a Ryzen 7 1700x - while throwing in 32Gb of DDR4 2400.
-
-I have noticed that every time I boot Xen on the Ryzen 7, within a couple o=
-f=20
-minutes, the system crashes.
-
-As this happens on both RHEL7 and Fedora 28, I figure theres something more=
-=20
-going on here.
-
-Does anyone have a set of recommendations or experiences of running Xen on =
-a=20
-Ryzen CPU?
-
-=2D-=20
-Steven Haigh
-
-=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB https://www.crc.id.au
-=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
---nextPart1659435.GrGiOsW0ln
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAlst890ACgkQQa811Xp9
-MdxzJQ//cNtrEjvigKcki8crPWma2eLbdjis8Ua2aH7WvMmJu4MeAAzgSuYlbtbt
-f3BYJNTZb1mzLBglzyRmxaPtSoVqaUIeh2BwyeocOol3lixs/gG3OyhDixXX0+5z
-C1K7QJcTL7AivqQXo7mefrYcH12MgL/66e4NBIZ4xn6wm4wyKk3eEP9pnSUeaqmy
-T2kvC6vI9YPahmjGNKsKEK2yvgq+f8LsaxrxaFIGkViSEmYge3CeERTaM1YS9jto
-t1miEM0PttNIQI+LvcKNFScet2NQN4E1Om4ud/fOYrNM2iTJ2Bf1WGm9qdP1wXEe
-lU1okeuDdibUDnQHTgqAlgOi8TEGYgbyQOgCSrDFilGfTV/Xr+bqvoz6VNaEBJu2
-SITiCc9RuNSiUP1h3v6r26H2MesrB5DmRPcjYntwY7Tw0CDGpOS9Qs7O06SY/OB3
-CIMxnuydkZJJReNTfyRjz/EN+qXA9UAj1D+6nhL9QTPUuyTJJ3PZ57Jm3g06hue1
-n3pdgB5CMmrTW6z9EIE73Bny6gKDAL4wZmtiunIAFMFkWNwyoPlphaNlV3F3QyJ7
-8uHvo2EW+uCGGPRpg6kurpO9gt6oBieNCCh4uGTNwzbElNpJ8Ly+FXo1bOpTu/we
-saeRi+nwSivK2/xCnWXkj/2DoiaOBJGAIxIg0SIHP9kxJScndlk=
-=D2Vu
------END PGP SIGNATURE-----
-
---nextPart1659435.GrGiOsW0ln--
-
-
-
-
-
---===============1697728625198858684==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1697728625198858684==--
+ZmxpZ2h0IDEyNDYxOCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjQ2MTgvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
+dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
+bmc6CiBvdm1mICAgICAgICAgICAgICAgICAzYjAzYjVlOTkwZjhiYjM0N2RmZGI5MTkyNmQ4ZWYw
+MTVkMGI2MDdlCmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICA4ZTU4NjI5
+NmMxMTRmNjMwMTg4Y2ZlNGM3NmRmOTFhMWUyYjdhNWIyCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
+MjQ1NzEgIDIwMTgtMDYtMjIgMDI6NDA6MzggWiAgICAxIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
+ICAgMTI0NjE4ICAyMDE4LTA2LTIyIDE5OjEwOjU3IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMK
+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgR2lyaXNoIFBh
+dGhhayA8Z2lyaXNoLnBhdGhha0Bhcm0uY29tPgogIFN1ZGVlcCBIb2xsYSA8c3VkZWVwLmhvbGxh
+QGFybS5jb20+CiAgWW9uZ2hvbmcgWmh1IDx5b25naG9uZy56aHVAaW50ZWwuY29tPgogIFl1bmh1
+YSBGZW5nIDx5dW5odWF4LmZlbmdAaW50ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
+bGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmly
+dCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
+ZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
+LXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
+YW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBw
+YXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJv
+amVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMK
+CkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9n
+cy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRo
+ZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8v
+eGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1h
+aWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0
+LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUg
+Zm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7
+YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhlbi5vcmc6L2hvbWUv
+eGVuL2dpdC9vc3N0ZXN0L292bWYuZ2l0CiAgIDhlNTg2Mjk2YzEuLjNiMDNiNWU5OTAgIDNiMDNi
+NWU5OTBmOGJiMzQ3ZGZkYjkxOTI2ZDhlZjAxNWQwYjYwN2UgLT4geGVuLXRlc3RlZC1tYXN0ZXIK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
