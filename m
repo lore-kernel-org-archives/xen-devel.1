@@ -1,17 +1,17 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [freebsd-master test] 124705: regressions - trouble:
+Subject: [freebsd-master test] 124706: regressions - trouble:
  blocked/fail
-Date: Mon, 25 Jun 2018 21:34:16 +0000
-Message-ID: <osstest-124705-mainreport@xen.org>
+Date: Mon, 25 Jun 2018 21:57:03 +0000
+Message-ID: <osstest-124706-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=/0ot=jl=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fXZ7u-0004Pc-KU
- for xen-devel@lists.xenproject.org; Mon, 25 Jun 2018 21:34:22 +0000
+ id 1fXZTv-0005tX-2H
+ for xen-devel@lists.xenproject.org; Mon, 25 Jun 2018 21:57:07 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,8 +23,8 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org, royger@FreeBSD.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNDcwNSBmcmVlYnNkLW1hc3RlciByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0
-LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTI0NzA1LwoKUmVncmVzc2lvbnMgOi0o
+ZmxpZ2h0IDEyNDcwNiBmcmVlYnNkLW1hc3RlciByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0
+LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTI0NzA2LwoKUmVncmVzc2lvbnMgOi0o
 CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5n
 IHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC1mcmVlYnNkICAgICAg
 ICAgICA3IGZyZWVic2QtYnVpbGQgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjQ2OTQKClRl
@@ -35,7 +35,7 @@ ICAgICAgN2JlM2I3OWQ1MDRiNDg2ZjU0MDY2MmU5MzRmMDgxYzg0OWZmMTk2YwpiYXNlbGluZSB2
 ZXJzaW9uOgogZnJlZWJzZCAgICAgICAgICAgICAgYzhiOGFlOTYwOWVkYWFhN2YxNzA0YzllZTlj
 N2NlZDZmZTE3Mjc0OQoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI0Njk0ICAyMDE4LTA2LTI1IDE0
 OjEwOjMwIFogICAgMCBkYXlzClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEyNDcwNSAgMjAxOC0wNi0y
-NSAyMToxNzowNiBaICAgIDAgZGF5cyAgICAxIGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0t
+NSAyMToxNzowNiBaICAgIDAgZGF5cyAgICAyIGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0t
 LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3Vj
 aGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIGFkcmlhbiA8YWRyaWFuQEZyZWVCU0Qub3JnPgog
 IGFkcmlkZyA8YWRyaWRnQEZyZWVCU0Qub3JnPgogIGFlIDxhZUBGcmVlQlNELm9yZz4KICBhayA8
