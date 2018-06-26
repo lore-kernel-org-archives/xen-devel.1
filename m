@@ -1,13 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v9] new config option vtsc_tolerance_khz to
- avoid TSC emulation
-Date: Tue, 26 Jun 2018 19:11:13 +0200
-Message-ID: <20180626191113.2d8e6876.olaf@aepfle.de>
-References: <20180607130829.18811-1-olaf@aepfle.de>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 4/6] x86/msr: Clean up the
+ MSR_FEATURE_CONTROL constants
+Date: Tue, 26 Jun 2018 18:59:27 +0100
+Message-ID: <34ffac65-61c9-f70b-a4b4-fb9015688841@citrix.com>
+References: <1530019098-7058-1-git-send-email-andrew.cooper3@citrix.com>
+ <1530019098-7058-5-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2165184238611073776=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180607130829.18811-1-olaf@aepfle.de>
+In-Reply-To: <1530019098-7058-5-git-send-email-andrew.cooper3@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,54 +19,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Xen-devel <xen-devel@lists.xen.org>
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2165184238611073776==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/wtvu/WGuZIF4S7Sx_o82fS_"; protocol="application/pgp-signature"
-
---Sig_/wtvu/WGuZIF4S7Sx_o82fS_
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu,  7 Jun 2018 15:08:29 +0200
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> Add an option to control when vTSC emulation will be activated for a
-> domU with tsc_mode=3Ddefault. Without such option each TSC access from
-> domU will be emulated, which causes a significant perfomance drop for
-> workloads that make use of rdtsc.
-
-Andrew,
-
-do you have any comments on this patch/approach?
-
-Olaf
-
---Sig_/wtvu/WGuZIF4S7Sx_o82fS_
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCWzJzsQAKCRBdQqD6ppg2
-fhxsAKCxE+Jx6EaO1aSpUbN3byMs+vfY8wCg5HUcECDEKtPHcnWAMF+Y6NX09yQ=
-=o+gH
------END PGP SIGNATURE-----
-
---Sig_/wtvu/WGuZIF4S7Sx_o82fS_--
-
-
---===============2165184238611073776==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2165184238611073776==--
+T24gMjYvMDYvMTggMTQ6MTgsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4gIHhlbi9hcmNoL3g4Ni9j
+cHUvbXdhaXQtaWRsZS5jICAgICAgIHwgIDQgKystLQoKSSBmb3Jnb3QgdG8gc2F5IHRoYXQgdGhp
+cyBwYXRjaCBhcyBzaG93biBtYXkgaW1wYWN0IHRoZSBlYXNlIG9mIHRha2luZwpuZXcgY29kZSBm
+cm9tIExpbnV4LgoKV2hpbGUgd2UgZG9uJ3Qgd2FudCB0byBwcm9saWZlcmF0ZSB0aGUgYnJva2Vu
+IEFQSXMgb2YgdGhlIGN1cnJlbnQKcmRtc3IoKSBpbmZyYXN0cnVjdHVyZSwgb25lIG9wdGlvbiB3
+ZSBjb3VsZCBkbyBpcyB0byBpbnRyb2R1Y2UgYQo8eGVuL2xpbnV4LWNvbXBhdC5oPiBmaWxlIGZv
+ciBpbmNsdWRpbmcgaW50byBjb2RlIGZyb20gTGludXgsIHRvIGVhc2UKdGhlIGRpZmZlcmVuY2Vz
+LgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
