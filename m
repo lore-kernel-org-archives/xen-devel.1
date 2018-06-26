@@ -1,14 +1,17 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: PCI passthrough performance loss with Skylake-SP
-Date: Tue, 26 Jun 2018 08:56:59 +0200
-Message-ID: <20180626065659.mpjdv7ewxlle5oj5@mac.bytemobile.com>
-References: <op.zk5748e9ollboj@kriftel>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH v5 0/2] x86: remaining XPTI follow-ups
+Date: Tue, 26 Jun 2018 01:13:37 -0600
+Message-ID: <5B31E7A102000078001CDCC5@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=x7n8=jm=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fXiAY-0002tu-Oa
+ for xen-devel@lists.xenproject.org; Tue, 26 Jun 2018 07:13:42 +0000
 Content-Disposition: inline
-In-Reply-To: <op.zk5748e9ollboj@kriftel>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,30 +20,12 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andreas Kinzler <hfp@posteo.de>
-Cc: Paul Durrant <paul.durrant@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKdW4gMjUsIDIwMTggYXQgMDU6MzI6NThQTSArMDIwMCwgQW5kcmVhcyBLaW56bGVy
-IHdyb3RlOgo+IEkgYW0gY3VycmVudGx5IHRlc3RpbmcgUENJIHBhc3N0aHJvdWdoIG9uIHRoZSBT
-a3lsYWtlLVNQIHBsYXRmb3JtIHVzaW5nIGEKPiBTdXBlcm1pY3JvIFgxMVNQaS1URiBtYWluYm9h
-cmQuIFVzaW5nIFBDSSBwYXNzdGhyb3VnaCAoYW4gTFNJIFNBUyBIQkEpCj4gY2F1c2VzIHNldmVy
-ZSBwZXJmb3JtYW5jZSBsb3NzIG9uIHRoZSBTa3lsYWtlLVNQIHBsYXRmb3JtIHdoaWxlIFhlb24g
-RTMgdjUKPiBpcyBub3QgYWZmZWN0ZWQgYXQgYWxsLiBUaGUgdGVzdCB1c2VzIHN0YW5kYXJkIGlw
-ZXJmMyBhcyBhIGNsaWVudCAtIHRoZQo+IHBhc3NlZCBQQ0kgZGV2aWNlIGlzIG5vdCB1c2VkIGlu
-IHRoZSB0ZXN0IC0gc28gdGhhdCBqdXN0IHRoZSBwcmVzZW5jZSBvZiB0aGUKPiBwYXNzZWQgZGV2
-aWNlIHdpbGwgY2F1c2UgdGhlIGlwZXJmMyBwZXJmb3JtYW5jZSB0byBkcm9wIGZyb20gNi41IGdi
-aXQvc2VjCj4gKG5vIHBhc3N0aHJvdWdoKSB0byA0LjUgZ2JpdC9zZWMuCgpJIGFzc3VtZSB0aGF0
-IHRoZSBuZXR3b3JrIGludGVyZmFjZSB0aGF0IHlvdSBhcmUgdGVzdGluZyBpcyBhIFBWCm5ldHdv
-cmsgaW50ZXJmYWNlPwoKPiBBbnkgZXhwbGFuYXRpb24vZml4ZXMgZm9yIHRoYXQ/CgpBcmUgYm90
-aCBzeXN0ZW1zIHVzaW5nIHRoZSBzYW1lIHZlcnNpb24gb2YgWGVuIGFuZCBMaW51eD8KClBhdWwg
-ZGlzY292ZXJlZCB0aGF0IChyZWNlbnQ/KSBMaW51eCB2ZXJzaW9ucyB0aGUgZ3JhbnQgdGFibGUg
-aXMKYWxsb2NhdGVkIGluIGEgTU1JTyBhcmVhLCB3aGljaCBoYXMgdGhlIG1lbW9yeSBjYWNoZSBh
-dHRyaWJ1dGUgc2V0IHRvCnVuY2FjaGVkLiBUaGlzIGhhcyBhIG5vdGljZWFibGUgaW1wYWN0IG9u
-IHBlcmZvcm1hbmNlIHdoZW4gdGhlIGd1ZXN0CmFsc28gaGFzIGEgcGFzc3Rocm91Z2ggZGV2aWNl
-LgoKTm90ZSB0aGF0IHRoaXMgaXMgbm90IGFuIGlzc3VlIHdpdGhvdXQgcGFzc3Rocm91Z2ggYmVj
-YXVzZSBYZW4gZm9yY2VzCnRoZSBjYWNoZSBhdHRyaWJ1dGVzIG9mIG1lbW9yeSB0byBXQiBpbiB0
-aGF0IGNhc2UsIHJlZ2FyZGxlc3Mgb2YgdGhlCmd1ZXN0IGNob2ljZS4KClJvZ2VyLgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+MTogdXNlICVyMTIgdG8gd3JpdGUgemVybyBpbnRvIHhlbl9jcjMKMjogZW5hYmxlIGludGVycnVw
+dHMgZWFybGllciB3aXRoIFhQVEkgZGlzYWJsZWQKCnY1OiBSZS1iYXNlLgoKSmFuCgoKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
