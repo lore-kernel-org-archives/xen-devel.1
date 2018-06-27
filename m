@@ -1,16 +1,20 @@
-From: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH 0/3] libxc/cpuid: minor fixes
-Date: Wed, 27 Jun 2018 16:32:11 +0200
-Message-ID: <20180627143214.35751-1-roger.pau@citrix.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH v3 11/31] libxl_qmp: Remove unused yajl_ctx
+ form handler
+Date: Wed, 27 Jun 2018 15:32:42 +0100
+Message-ID: <23347.40970.600893.563990@mariner.uk.xensource.com>
+References: <20180601143720.24637-1-anthony.perard@citrix.com>
+ <20180601143720.24637-12-anthony.perard@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=zznj=jn=citrix.com=prvs=709ecfd17=roger.pau@srs-us1.protection.inumbo.net>)
- id 1fYBVK-00066n-53
- for xen-devel@lists.xenproject.org; Wed, 27 Jun 2018 14:33:06 +0000
+ <srs0=7qrb=jn=citrix.com=prvs=709d59aa7=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1fYBVN-00067r-OG
+ for xen-devel@lists.xenproject.org; Wed, 27 Jun 2018 14:33:09 +0000
+In-Reply-To: <20180601143720.24637-12-anthony.perard@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,18 +23,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8sCgpUaGlzIHNlcmllcyBjb250YWluIHNvbWUgbWlub3IgZml4ZXMgZm9yIGNwdWlkIGhl
-YWRlciBmaWxlIGdlbmVyYXRpb24KYW5kIGEgY291cGxlIG9mIGZpeGVzIGZvciBsaWJ4YyByZWxh
-dGVkIGNwdWlkIGZ1bmN0aW9ucy4KClRoYW5rcywgUm9nZXIuCgpSb2dlciBQYXUgTW9ubmUgKDMp
-OgogIHg4Ni9jcHVpZDogZml4IGdlbmVyYXRpb24gb2YgYXV0byBjcHVpZCBoZWFkZXIKICBsaWJ4
-YzogZml4IHN0YWxlIFBWSCBjb21tZW50CiAgbGlieGM6IGRvIG5vdCByZXR1cm4gYSB2YWx1ZSBm
-cm9tIHhjX2NwdWlkX3BvbGljeQoKIHRvb2xzL2xpYnhjL3hjX2NwdWlkX3g4Ni5jIHwgMTQgKysr
-KysrLS0tLS0tLS0KIHhlbi9pbmNsdWRlL01ha2VmaWxlICAgICAgIHwgIDIgKy0KIDIgZmlsZXMg
-Y2hhbmdlZCwgNyBpbnNlcnRpb25zKCspLCA5IGRlbGV0aW9ucygtKQoKLS0gCjIuMTcuMQoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+QW50aG9ueSBQRVJBUkQgd3JpdGVzICgiW1BBVENIIHYzIDExLzMxXSBsaWJ4bF9xbXA6IFJlbW92
+ZSB1bnVzZWQgeWFqbF9jdHggZm9ybSBoYW5kbGVyIik6Cj4gU2lnbmVkLW9mZi1ieTogQW50aG9u
+eSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+CgpBY2tlZC1ieTogSWFuIEphY2tz
+b24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
