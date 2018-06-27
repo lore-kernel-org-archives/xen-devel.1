@@ -1,17 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH V4] x86/altp2m: Fix crash with
- INVALID_ALTP2M EPTP index
-Date: Wed, 27 Jun 2018 09:34:18 -0600
-Message-ID: <5B33AE7A02000078001CE797@prv1-mh.provo.novell.com>
-References: <1530105131-3804-1-git-send-email-rcojocaru@bitdefender.com>
- <5B33A76202000078001CE756@prv1-mh.provo.novell.com>
- <787b351b-b8fd-9a04-62e5-b890f44a34fd@bitdefender.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH v3 18/31] libxl_json:
+ libxl__json_object_to_json
+Date: Wed, 27 Jun 2018 16:51:21 +0100
+Message-ID: <23347.45689.23316.238116@mariner.uk.xensource.com>
+References: <20180601143720.24637-1-anthony.perard@citrix.com>
+ <20180601143720.24637-19-anthony.perard@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <787b351b-b8fd-9a04-62e5-b890f44a34fd@bitdefender.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=7qrb=jn=citrix.com=prvs=709d59aa7=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1fYCjH-0005S9-T5
+ for xen-devel@lists.xenproject.org; Wed, 27 Jun 2018 15:51:35 +0000
+In-Reply-To: <20180601143720.24637-19-anthony.perard@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,39 +23,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel@lists.xen.org
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI3LjA2LjE4IGF0IDE3OjI1LCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3Jv
-dGU6Cj4gT24gMDYvMjcvMjAxOCAwNjowNCBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9u
-IDI3LjA2LjE4IGF0IDE1OjEyLCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4+
-PiB4Y19hbHRwMm1fc2V0X3ZjcHVfZW5hYmxlX25vdGlmeSgpIGVuZHMgdXAgY2FsbGluZwo+Pj4g
-YWx0cDJtX3ZjcHVfdXBkYXRlX3ZtZnVuY192ZSgpLCB3aGljaCBzZXRzIHRoZQo+Pj4gU0VDT05E
-QVJZX0VYRUNfRU5BQkxFX1ZJUlRfRVhDRVBUSU9OUyBiaXQgb24KPj4+IHZteF9zZWNvbmRhcnlf
-ZXhlY19jb250cm9sLiBBIHN1YnNlcXVlbnQgY2FsbCB0bwo+Pj4geGNfYWx0cDJtX3NldF9kb21h
-aW5fc3RhdGUoLi4uLCBmYWxzZSkgKGkuZS4gZGlzYWJsaW5nIGFsdHAybQo+Pj4gZm9yIHRoZSBk
-b21haW4pIGVuZHMgdXAgY2FsbGluZyBhbHRwMm1fdmNwdV9kZXN0cm95KCksIHdoaWNoCj4+PiBj
-YWxscyAoaW4gdGhpcyBvcmRlcikgYWx0cDJtX3ZjcHVfcmVzZXQoKSAod2hpY2ggc2V0cyB0aGUK
-Pj4+IGN1cnJlbnQgRVBUUCBpbmRleCB0byBJTlZBTElEX0FMVFAyTSksIGFsdHAybV92Y3B1X3Vw
-ZGF0ZV9wMm0oKQo+Pj4gKHdoaWNoIF9fdm13cml0ZSgpcyBFUFRQX0lOREVYIGFzIElOVkFMSURf
-QUxUUDJNIGlmCj4+PiBTRUNPTkRBUllfRVhFQ19FTkFCTEVfVklSVF9FWENFUFRJT05TIGlzIHNl
-dCksIGFuZAo+Pj4gYWx0cDJtX3ZjcHVfdXBkYXRlX3ZtZnVuY192ZSgpICh3aGljaCBmaW5hbGx5
-IGNsZWFycwo+Pj4gU0VDT05EQVJZX0VYRUNfRU5BQkxFX1ZJUlRfRVhDRVBUSU9OUykuCj4+IAo+
-PiBJIGNvbnRpbnVlIHRvIGNvbnNpZGVyIHRoaXMgcGFyYWdyYXBoIHVucmVhZGFibGUsIGJ1dCBw
-ZXJoYXBzIGl0J3MKPj4ganVzdCBtZS4gVGhlIHJlc3Qgb2YgdGhlIGRlc2NyaXB0aW9uIGxvb2tz
-IHJlYXNvbmFibGUgdG8gbWUgbm93Lgo+IAo+IElmIHlvdSAob3IgYW55b25lIGVsc2UpIGhhdmUg
-c29tZXRoaW5nIHNwZWNpZmljIGluIG1pbmQgSSdkIGJlIGhhcHB5IHRvCj4gY2hhbmdlIGl0IHRv
-IHRoYXQsIG90aGVyd2lzZSBJIGNhbiBhbHNvIHRyeSBhZ2FpbiAodGhlIG9ubHkgY29uY2VybiBp
-cwo+IHRoYXQgSSBtaWdodCB1bndhbnRlZGx5IGNvbnRpbnVlIHRvIGJlIHVuYWJsZSB0byBndWVz
-cyBjb3JyZWN0bHkgYXQgdGhlCj4gZGVzaXJlZCBiYWxhbmNlIGJldHdlZW4gdGVjaG5pY2FsIGNs
-YXJpdHkgKGRldGFpbCkgYW5kIGdlbmVyYWwgcmVhZGFiaWxpdHkpLgo+IAo+IElzICJBIFZNIGVu
-dHJ5IGhhbmRsZXIgZXhlY3V0ZWQgaW1tZWRpYXRlbHkgYWZ0ZXIgZW5hYmxpbmcgI1ZFIG1pZ2h0
-Cj4gZmluZCBhIHN0YWxlIF9fdm1zYXZlKClkIEVQVFBfSU5ERVgsIHN0b3JlZCBieSBjYWxsaW5n
-Cj4gYWx0cDJtX3ZjcHVfZGVzdHJveSgpIHdoZW4gU0VDT05EQVJZX0VYRUNfRU5BQkxFX1ZJUlRf
-RVhDRVBUSU9OUyBoYWQKPiBiZWVuIHNldCBieSBhbHRwMm1fdmNwdV91cGRhdGVfdm1mdW5jX3Zl
-KCkuIiBhIGJldHRlciBmaXJzdCBwYXJhZ3JhcGgKPiBwZXJoYXBzPwoKVG8gbWUgcGVyc29uYWxs
-eSAtIHllcywgdmVyeSBtdWNoLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+QW50aG9ueSBQRVJBUkQgd3JpdGVzICgiW1BBVENIIHYzIDE4LzMxXSBsaWJ4bF9qc29uOiBsaWJ4
+bF9fanNvbl9vYmplY3RfdG9fanNvbiIpOgo+IEFsbG93IHRvIGdlbmVyYXRlIGEgSlNPTiBzdHJp
+bmcgZnJvbSBhIGxpYnhsX19qc29uX29iamVjdCwKPiB1c2VmdWxsIGZvciBkZWJ1Z2dpbmcuCgpB
+Y2tlZC1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
