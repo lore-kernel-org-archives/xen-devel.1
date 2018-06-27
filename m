@@ -1,15 +1,16 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH V2 1/2] xen/altp2m: set access_required
- properly for all altp2ms
-Date: Wed, 27 Jun 2018 15:09:42 +0100
-Message-ID: <20180627140942.sildrcteisptgsqf@citrix.com>
-References: <1528879939-11570-1-git-send-email-rcojocaru@bitdefender.com>
+Subject: Re: [PATCH RFC 02/15] xen/arm: move a few guest related
+ #defines to public/arch-arm.h
+Date: Wed, 27 Jun 2018 15:11:10 +0100
+Message-ID: <20180627141110.6foirpw5m7sli46y@citrix.com>
+References: <alpine.DEB.2.10.1806131457490.14695@sstabellini-ThinkPad-X260>
+ <1528928118-14960-2-git-send-email-sstabellini@kernel.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <1528879939-11570-1-git-send-email-rcojocaru@bitdefender.com>
+In-Reply-To: <1528928118-14960-2-git-send-email-sstabellini@kernel.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,42 +19,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: artem_mygaiev@epam.com, Stefano Stabellini <stefanos@xilinx.com>, andrii_anisov@epam.com, ian.jackson@eu.citrix.com, xen-devel@lists.xen.org, julien.grall@arm.com, wei.liu2@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKdW4gMTMsIDIwMTggYXQgMTE6NTI6MThBTSArMDMwMCwgUmF6dmFuIENvam9jYXJ1
-IHdyb3RlOgo+IC0tLQo+ICB4ZW4vYXJjaC9hcm0vbWVtX2FjY2Vzcy5jICAgIHwgIDUgKysrKysK
-PiAgeGVuL2FyY2gveDg2L21tL21lbV9hY2Nlc3MuYyB8IDE4ICsrKysrKysrKysrKysrKysrKwo+
-ICB4ZW4vYXJjaC94ODYvbW0vcDJtLmMgICAgICAgIHwgIDMgKystCj4gIHhlbi9jb21tb24vZG9t
-Y3RsLmMgICAgICAgICAgfCAgNCArKy0tCj4gIHhlbi9pbmNsdWRlL3hlbi9kb21haW4uaCAgICAg
-fCAgMiArKwo+ICA1IGZpbGVzIGNoYW5nZWQsIDI5IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25z
-KC0pCj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9tZW1fYWNjZXNzLmMgYi94ZW4vYXJj
-aC9hcm0vbWVtX2FjY2Vzcy5jCj4gaW5kZXggYWUyNjg2Zi4uYTU5YzZlZiAxMDA2NDQKPiAtLS0g
-YS94ZW4vYXJjaC9hcm0vbWVtX2FjY2Vzcy5jCj4gKysrIGIveGVuL2FyY2gvYXJtL21lbV9hY2Nl
-c3MuYwo+IEBAIC00NTMsNiArNDUzLDExIEBAIGludCBwMm1fZ2V0X21lbV9hY2Nlc3Moc3RydWN0
-IGRvbWFpbiAqZCwgZ2ZuX3QgZ2ZuLAo+ICAgICAgcmV0dXJuIHJldDsKPiAgfQo+ICAKPiArdm9p
-ZCBhcmNoX2RvbWFpbl9zZXRfYWNjZXNzX3JlcXVpcmVkKHN0cnVjdCBkb21haW4gKmQsIGJvb2wg
-YWNjZXNzX3JlcXVpcmVkKQo+ICt7Cj4gKyAgICBwMm1fZ2V0X2hvc3RwMm0oZCktPmFjY2Vzc19y
-ZXF1aXJlZCA9IGFjY2Vzc19yZXF1aXJlZDsKPiArfQo+ICsKPiAgLyoKPiAgICogTG9jYWwgdmFy
-aWFibGVzOgo+ICAgKiBtb2RlOiBDCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9tbS9tZW1f
-YWNjZXNzLmMgYi94ZW4vYXJjaC94ODYvbW0vbWVtX2FjY2Vzcy5jCj4gaW5kZXggYzBjZDAxNy4u
-NjgxMTU3MiAxMDA2NDQKPiAtLS0gYS94ZW4vYXJjaC94ODYvbW0vbWVtX2FjY2Vzcy5jCj4gKysr
-IGIveGVuL2FyY2gveDg2L21tL21lbV9hY2Nlc3MuYwo+IEBAIC00NjUsNiArNDY1LDI0IEBAIGlu
-dCBwMm1fZ2V0X21lbV9hY2Nlc3Moc3RydWN0IGRvbWFpbiAqZCwgZ2ZuX3QgZ2ZuLCB4ZW5tZW1f
-YWNjZXNzX3QgKmFjY2VzcykKPiAgICAgIHJldHVybiBfcDJtX2dldF9tZW1fYWNjZXNzKHAybSwg
-Z2ZuLCBhY2Nlc3MpOwo+ICB9Cj4gIAo+ICt2b2lkIGFyY2hfZG9tYWluX3NldF9hY2Nlc3NfcmVx
-dWlyZWQoc3RydWN0IGRvbWFpbiAqZCwgYm9vbCBhY2Nlc3NfcmVxdWlyZWQpCgphcmNoX3AybV9z
-ZXRfYWNjZXNzX3JlcXVpcmVkPwoKPiArewo+ICsgICAgdW5zaWduZWQgaW50IGk7Cj4gKwo+ICsg
-ICAgcDJtX2dldF9ob3N0cDJtKGQpLT5hY2Nlc3NfcmVxdWlyZWQgPSBhY2Nlc3NfcmVxdWlyZWQ7
-Cj4gKwo+ICsgICAgaWYgKCAhYWx0cDJtX2FjdGl2ZShkKSApCj4gKyAgICAgICAgcmV0dXJuOwo+
-ICsKPiArICAgIGZvciAoIGkgPSAwOyBpIDwgTUFYX0FMVFAyTTsgaSsrICkKPiArICAgIHsKPiAr
-ICAgICAgICBzdHJ1Y3QgcDJtX2RvbWFpbiAqcDJtID0gZC0+YXJjaC5hbHRwMm1fcDJtW2ldOwo+
-ICsKPiArICAgICAgICBpZiAoIHAybSApCj4gKyAgICAgICAgICAgIHAybS0+YWNjZXNzX3JlcXVp
-cmVkID0gYWNjZXNzX3JlcXVpcmVkOwo+ICsgICAgfQoKSXQgc2VlbXMgdG8gbWUgeW91IHNob3Vs
-ZCBjaGVjayBmb3IgZG9tYWluIHBhdXNlIGNvdW50IGF0IHRoZSBiZWdpbm5pbmcKb2YgdGhpcyBm
-dW5jdGlvbiB0byBhdm9pZCBtaXN0YWtlcy4KClRoZSByZXN0IG9mIGxvb2tzIGZpbmUgKHRvIG15
-IHVudHJhaW5lZCBleWUpLgoKV2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+T24gV2VkLCBKdW4gMTMsIDIwMTggYXQgMDM6MTU6MDVQTSAtMDcwMCwgU3RlZmFubyBTdGFiZWxs
+aW5pIHdyb3RlOgo+IE1vdmUgYSBmZXcgY29uc3RhbnRzIGRlZmluZWQgYnkgbGlieGxfYXJtLmMg
+dG8KPiB4ZW4vaW5jbHVkZS9wdWJsaWMvYXJjaC1hcm0uaCwgc28gdGhhdCB0aGV5IGFyZSB0b2dl
+dGhlciB3aXRoIHRoZSBvdGhlcgo+IGd1ZXN0IHJlbGF0ZWQgI2RlZmluZXMgc3VjaCBhcyBHVUVT
+VF9HSUNEX0JBU0UgYW5kIEdVRVNUX1ZQTDAxMV9TUEkuCj4gQWxzbywgdGhpcyB3YXkgdGhleSBj
+YW4gYmUgcmV1c2VkIGJ5IGh5cGVydmlzb3IgY29kZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBTdGVm
+YW5vIFN0YWJlbGxpbmkgPHN0ZWZhbm9zQHhpbGlueC5jb20+Cj4gQ0M6IHdlaS5saXUyQGNpdHJp
+eC5jb20KPiBDQzogaWFuLmphY2tzb25AZXUuY2l0cml4LmNvbQoKRkFPRCBJIHdpbGwgZGVmZXIg
+dGhpcyB0byBKdWxpZW4uCgpXZWkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
