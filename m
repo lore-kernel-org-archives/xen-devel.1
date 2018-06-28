@@ -1,18 +1,18 @@
 From: <gregkh@linuxfoundation.org>
 Subject: Patch "x86/xen: Add call of
  speculative_store_bypass_ht_init() to PV paths" has been added to the
- 4.14-stable tree
-Date: Thu, 28 Jun 2018 11:08:30 +0900
-Message-ID: <153015171020680@kroah.com>
+ 4.17-stable tree
+Date: Thu, 28 Jun 2018 11:08:50 +0900
+Message-ID: <15301517304346@kroah.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=ye8n=jo=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1fYMMk-0000K0-M7
- for xen-devel@lists.xenproject.org; Thu, 28 Jun 2018 02:08:58 +0000
+ id 1fYMN8-0000Ls-Ow
+ for xen-devel@lists.xenproject.org; Thu, 28 Jun 2018 02:09:22 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,12 +27,12 @@ List-Id: xen-devel@lists.xenproject.org
 
 ClRoaXMgaXMgYSBub3RlIHRvIGxldCB5b3Uga25vdyB0aGF0IEkndmUganVzdCBhZGRlZCB0aGUg
 cGF0Y2ggdGl0bGVkCgogICAgeDg2L3hlbjogQWRkIGNhbGwgb2Ygc3BlY3VsYXRpdmVfc3RvcmVf
-YnlwYXNzX2h0X2luaXQoKSB0byBQViBwYXRocwoKdG8gdGhlIDQuMTQtc3RhYmxlIHRyZWUgd2hp
+YnlwYXNzX2h0X2luaXQoKSB0byBQViBwYXRocwoKdG8gdGhlIDQuMTctc3RhYmxlIHRyZWUgd2hp
 Y2ggY2FuIGJlIGZvdW5kIGF0OgogICAgaHR0cDovL3d3dy5rZXJuZWwub3JnL2dpdC8/cD1saW51
 eC9rZXJuZWwvZ2l0L3N0YWJsZS9zdGFibGUtcXVldWUuZ2l0O2E9c3VtbWFyeQoKVGhlIGZpbGVu
 YW1lIG9mIHRoZSBwYXRjaCBpczoKICAgICB4ODYteGVuLWFkZC1jYWxsLW9mLXNwZWN1bGF0aXZl
 X3N0b3JlX2J5cGFzc19odF9pbml0LXRvLXB2LXBhdGhzLnBhdGNoCmFuZCBpdCBjYW4gYmUgZm91
-bmQgaW4gdGhlIHF1ZXVlLTQuMTQgc3ViZGlyZWN0b3J5LgoKSWYgeW91LCBvciBhbnlvbmUgZWxz
+bmQgaW4gdGhlIHF1ZXVlLTQuMTcgc3ViZGlyZWN0b3J5LgoKSWYgeW91LCBvciBhbnlvbmUgZWxz
 ZSwgZmVlbHMgaXQgc2hvdWxkIG5vdCBiZSBhZGRlZCB0byB0aGUgc3RhYmxlIHRyZWUsCnBsZWFz
 ZSBsZXQgPHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmc+IGtub3cgYWJvdXQgaXQuCgoKRnJvbSA3NDg5
 OWQ5MmU2NjY2M2RjNzY3MWE4MDE3YjMxNDZkY2Q0NzM1ZjNiIE1vbiBTZXAgMTcgMDA6MDA6MDAg
@@ -70,11 +70,12 @@ X2luaXQgeGVuX3B2X3NtcF9wcmVwYXJlX2NwCiAJfQogCXNldF9jcHVfc2libGluZ19tYXAoMCk7
 CiAKKwlzcGVjdWxhdGl2ZV9zdG9yZV9ieXBhc3NfaHRfaW5pdCgpOworCiAJeGVuX3BtdV9pbml0
 KDApOwogCiAJaWYgKHhlbl9zbXBfaW50cl9pbml0KDApIHx8IHhlbl9zbXBfaW50cl9pbml0X3B2
 KDApKQoKClBhdGNoZXMgY3VycmVudGx5IGluIHN0YWJsZS1xdWV1ZSB3aGljaCBtaWdodCBiZSBm
-cm9tIGpncm9zc0BzdXNlLmNvbSBhcmUKCnF1ZXVlLTQuMTQveDg2LXhlbi1hZGQtY2FsbC1vZi1z
+cm9tIGpncm9zc0BzdXNlLmNvbSBhcmUKCnF1ZXVlLTQuMTcveDg2LXhlbi1hZGQtY2FsbC1vZi1z
 cGVjdWxhdGl2ZV9zdG9yZV9ieXBhc3NfaHRfaW5pdC10by1wdi1wYXRocy5wYXRjaApxdWV1ZS00
-LjE0L3g4Ni1wbGF0Zm9ybS11di1hZGQta2VybmVsLXBhcmFtZXRlci10by1zZXQtbWVtb3J5LWJs
-b2NrLXNpemUucGF0Y2gKcXVldWUtNC4xNC94ODYtcGxhdGZvcm0tdXYtdXNlLW5ldy1zZXQtbWVt
-b3J5LWJsb2NrLXNpemUtZnVuY3Rpb24ucGF0Y2gKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+LjE3L3g4Ni1wbGF0Zm9ybS11di1hZGQta2VybmVsLXBhcmFtZXRlci10by1zZXQtbWVtb3J5LWJs
+b2NrLXNpemUucGF0Y2gKcXVldWUtNC4xNy94ODYtcGxhdGZvcm0tdXYtdXNlLW5ldy1zZXQtbWVt
+b3J5LWJsb2NrLXNpemUtZnVuY3Rpb24ucGF0Y2gKcXVldWUtNC4xNy94ODYtcGxhdGZvcm0tdXYt
+YWRkLWFkanVzdGFibGUtc2V0LW1lbW9yeS1ibG9jay1zaXplLWZ1bmN0aW9uLnBhdGNoCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
