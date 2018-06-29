@@ -1,21 +1,17 @@
 From: "Jan Beulich" <jbeulich@suse.com>
-Subject: Re:
- =?utf-8?q?Help=3A_a_xen_crash_of_4=2E8=2E2_version//?=
- =?utf-8?q?///=E7=AD=94=E5=A4=8D=3A_Is_there_a_faster_way_to_restore_Virtu?=
- =?utf-8?q?al_machine_status_in_Xen=3F?=
-Date: Thu, 28 Jun 2018 23:40:56 -0600
-Message-ID: <5B35C66802000078001350C7@prv1-mh.provo.novell.com>
-References: <193BC0700AA2F44A8843B8D1C1E6B618D51AA10D@nkgeml514-mbx.china.huawei.com>
+Subject: Re: [PATCH v2] x86/mm: Add mem access rights to NPT
+Date: Fri, 29 Jun 2018 00:13:09 -0600
+Message-ID: <5B35CDF502000078001350D8@prv1-mh.provo.novell.com>
+References: <1529335072-2141-1-git-send-email-aisaila@bitdefender.com>
+ <5B2D1B0002000078001CD08E@prv1-mh.provo.novell.com>
+ <1530195070.8880.9.camel@bitdefender.com>
+ <5B34F36C02000078001CEEA0@prv1-mh.provo.novell.com>
+ <1530197609.8880.14.camel@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=gccx=jp=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fYm9U-0008Uu-VI
- for xen-devel@lists.xenproject.org; Fri, 29 Jun 2018 05:41:01 +0000
-In-Reply-To: <193BC0700AA2F44A8843B8D1C1E6B618D51AA10D@nkgeml514-mbx.china.huawei.com>
+In-Reply-To: <1530197609.8880.14.camel@bitdefender.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,18 +21,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: chenjia09@huawei.com
-Cc: wangxu0@huawei.com, shentao8@huawei.com, zhaobingjian@huawei.com, xen-devel@lists.xenproject.org
+To: aisaila@bitdefender.com
+Cc: George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, tamas@tklengyel.com, rcojocaru@bitdefender.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+ICJDaGVuamlhIChDKSIgPGNoZW5qaWEwOUBodWF3ZWkuY29tPiAwNi8yOS8xOCA2OjI3IEFN
-ID4+Pgo+V2UgbWVldCBhIHhlbiBidWcgaW4gb3VyIHByb2plY3Qob3VyIHByb2plY3Qgam9iIGlz
-IGRlc2NyaXB0IGluIHRoZSBsYXN0IGVtYWlsKSwgIHRoZSBjcmFzaCBpbmZvcm1hdGlvbiBpcyB0
-aGlzOgoKQmVmb3JlIHNlbmRpbmcgYnVnIHJlcG9ydHMsIG1heSBJIGFzayB0aGF0IHlvdSB0ZXN0
-IGFnYWluc3QgbGF0ZXN0IGNvZGUgKGF0CnRoZSB2ZXJ5IGxlYXN0IHRoZSBsYXRlc3Qgb24gdGhl
-IGJyYW5jaCBpbiBxdWVzdGlvbikuIEluIHRoZSBwYXJ0aWN1bGFyIGNhc2UKaGVyZSBJJ2QgdmVy
-eSBtdWNoIGhvcGUgdGhhdCB5b3VyIHByb2JsZW0gd2FzIGFscmVhZHkgZml4ZWQgaW4gNC44LjMs
-IGNvbW1pdAo0NzJkNTk2MDQyLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+Pj4+IEFsZXhhbmRydSBTdGVmYW4gSVNBSUxBIDxhaXNhaWxhQGJpdGRlZmVuZGVyLmNvbT4gMDYv
+MjgvMTggNDo1MyBQTSA+Pj4KPk9uIEpvLCAyMDE4LTA2LTI4IGF0IDA4OjQwIC0wNjAwLCBKYW4g
+QmV1bGljaCB3cm90ZToKPj4gPiA+ID4gT24gMjguMDYuMTggYXQgMTY6MTAsIDxhaXNhaWxhQGJp
+dGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4+ID4gT24gVmksIDIwMTgtMDYtMjIgYXQgMDk6NTEgLTA2
+MDAsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiA+ID4gPiA+ID4gT24gMTguMDYuMTggYXQgMTc6MTcs
+IDxhaXNhaWxhQGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4+ID4gPiA+IEZyb206IElzYWlsYSBB
+bGV4YW5kcnUgPGFpc2FpbGFAYml0ZGVmZW5kZXIuY29tPgo+PiA+ID4gPgo+PiA+ID4gPiBUaGlz
+IHBhdGNoIGFkZHMgYWNjZXNzIHJpZ2h0cyBmb3IgdGhlIE5QVCBwYWdlcy4gVGhlIGFjY2Vzcwo+
+PiA+ID4gPiByaWdodHMKPj4gPiA+ID4gYXJlCj4+ID4gPiA+IHNhdmVkIGluIGEgcmFkaXggdHJl
+ZSB3aXRoIHRoZSByb290IHNhdmVkIGluIHAybV9kb21haW4uCj4+ID4gPiBTb3VuZHMgcmVzb3Vy
+Y2UgaW50ZW5zaXZlLiBIb3cgbWFueSBub2RlcyB3b3VsZCBzdWNoIGEgcmFkaXggdHJlZQo+PiA+
+ID4gaGF2ZQo+PiA+ID4gb24gYXZlcmFnZT8KPj4gPiBUaGUgYXZlcmFnZSBpcyBhcm91bmQgMTQ3
+ODg5MCBmb3IgYSBtYWNoaW5lIHdpdGggNEdCIG9mIHJhbS4KPj4gSXMgdGhpcyB3aXRoIC4uLgo+
+Pgo+PiA+ID4gPiArc3RhdGljIHZvaWQgcDJtX3NldF9hY2Nlc3Moc3RydWN0IHAybV9kb21haW4g
+KnAybSwgdW5zaWduZWQKPj4gPiA+ID4gbG9uZwo+PiA+ID4gPiBnZm4sCj4+ID4gPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHAybV9hY2Nlc3NfdCBhKQo+PiA+ID4g
+PiArewo+PiA+ID4gPiArICAgIGludCByYzsKPj4gPiA+ID4gKwo+PiA+ID4gPiArICAgIGlmICgg
+cDJtX2FjY2Vzc19yd3ggPT0gYSApCj4+ID4gPiA+ICsgICAgICAgIHJhZGl4X3RyZWVfZGVsZXRl
+KCZwMm0tPm1lbV9hY2Nlc3Nfc2V0dGluZ3MsIGdmbik7Cj4+ID4gPiA+ICsKPj4gPiA+ID4gKyAg
+ICByYyA9IHJhZGl4X3RyZWVfaW5zZXJ0KCZwMm0tPm1lbV9hY2Nlc3Nfc2V0dGluZ3MsIGdmbiwK
+Pj4gPiA+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgIHJhZGl4X3RyZWVfaW50X3RvX3B0
+cihhKSk7Cj4+ID4gPiBJcyB0aGVyZSBhbiAiZWxzZSIgbWlzc2luZyBhYm92ZSBoZXJlPyBPdGhl
+cndpc2Ugd2h5IHdvdWxkIHlvdQo+PiA+ID4gZGVsZXRlIHRoZSBub2RlIGZpcnN0Pwo+PiA+IFll
+cyBpdCBuZWVkcyBhIGVsc2Ugb3IgYSByZXR1cm4uIFdlIHBsYW4gbm90IHRvIGhhdmUgdGhlIHJ3
+eCBpbiB0aGUKPj4gPiB0cmVlIHNvIHdlIGNhIHNhdmUgdXAgc29tZSBzcGFjZS4KPj4gLi4uIHRo
+aXMgY29ycmVjdGVkPyBPdGhlcndpc2UgSSdtIHRlbXB0ZWQgdG8gc2F5IHRoYXQgdGhlIGNyZWF0
+aW9uIG9mCj4+IHRoaXMgcmFkaXggdHJlZSBuZWVkcyB0byBiZSBhdm9pZGVkIGJ5IGFsbCBtZWFu
+cywgYXMgbG9uZyBhcyBpdCdzIG5vdAo+PiByZWFsbHkgbmVlZGVkLgo+Cj5UaGUgbnVtYmVyIHdh
+cyB3aXRoIHRoaXMgcGF0Y2ggc28gbm8gY29ycmVjdGlvbi4gVGhpcyB3YXMgZG9uZSB3aXRoCj54
+ZW4tYWNjZXNzIHdyaXRlIGFuZCBJIGRvbid0IHRoaW5rIGl0IHdpbGwgbWFrZSBhIGRpZmZlcmVu
+Y2UgaWYgeW91Cj5jaGFuZ2UgdGhlIGFjY2VzcyB0byBhbGwgdGhlIG1lbSBwYWdlcy4KClRoZSBx
+dWVzdGlvbiAib24gYXZlcmFnZSIgd2Fzbid0IHdpdGggeGVuLWFjY2VzcyBpbiB1c2UuIEknbSB3
+b3JyaWVkIG9mIHRoZQpvdmVyaGVhZCBfd2l0aG91dF8gYW55IGludHJvc3BlY3Rpb24gYWN0aXZl
+LgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
