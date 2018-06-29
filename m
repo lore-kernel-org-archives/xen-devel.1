@@ -1,24 +1,15 @@
-From: "Chenjia (C)" <chenjia09@huawei.com>
-Subject: Re:
- =?gb2312?b?SGVscDogYSB4ZW4gY3Jhc2ggb2YgNC44LjIgdmVy?=
- =?gb2312?b?c2lvbi8vLy8vtPC4tDogSXMgdGhlcmUgYSBmYXN0ZXIgd2F5IHRvIHJlc3Rv?=
- =?gb2312?b?cmUgVmlydHVhbCBtYWNoaW5lIHN0YXR1cyBpbiBYZW4/?=
-Date: Fri, 29 Jun 2018 09:45:54 +0000
-Message-ID: <193BC0700AA2F44A8843B8D1C1E6B618D51AA2AC@nkgeml514-mbx.china.huawei.com>
-References: <193BC0700AA2F44A8843B8D1C1E6B618D51AA10D@nkgeml514-mbx.china.huawei.com>
- <5B35C66802000078001350C7@prv1-mh.provo.novell.com>
- <193BC0700AA2F44A8843B8D1C1E6B618D51AA189@nkgeml514-mbx.china.huawei.com>,
- <5B35FCCC02000078001CF04A@prv1-mh.provo.novell.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 1/2] xen/xsm: Introduce new boot parameter
+ xsm
+Date: Fri, 29 Jun 2018 10:47:54 +0100
+Message-ID: <03f7c8f0-b129-d787-5716-4efbc10100af@citrix.com>
+References: <20180629092810.25993-1-xin.li@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4644789697109898949=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=s/cd=jp=huawei.com=chenjia09@srs-us1.protection.inumbo.net>)
- id 1fYpyh-0001Iu-My
- for xen-devel@lists.xenproject.org; Fri, 29 Jun 2018 09:46:07 +0000
-In-Reply-To: <5B35FCCC02000078001CF04A@prv1-mh.provo.novell.com>
-Content-Language: zh-CN
+In-Reply-To: <20180629092810.25993-1-xin.li@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,130 +18,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: "wangxu (R)" <wangxu0@huawei.com>, "Shentao (Terry)" <shentao8@huawei.com>, Yaoshaomin <yaoshaomin@huawei.com>, zhaobingjian <zhaobingjian@huawei.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Xin Li <talons.lee@gmail.com>, xen-devel@lists.xen.org
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Xin Li <xin.li@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <JBeulich@suse.com>, Ming Lu <ming.lu@citrix.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4644789697109898949==
-Content-Language: zh-CN
-Content-Type: multipart/alternative;
-	boundary="_000_193BC0700AA2F44A8843B8D1C1E6B618D51AA2ACnkgeml514mbxchi_"
-
---_000_193BC0700AA2F44A8843B8D1C1E6B618D51AA2ACnkgeml514mbxchi_
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
-
-RGVhciBKYW6jug0KdGhhbmtzIHZlcnkgbXVjaCBmb3IgeW91ciByZXBseTp3ZSB3aWxsIHRyeSB0
-aGUgNC44LjMgdmVyc2lvbiwgaWYgd2UgaGF2ZSB0aGUgcmVzdWx0LCB3ZSB3aWxsIGZlZWRiYWNr
-IHRvIHlvdaOsdGhhbmsgeW91o6ENCg0KQmVzdCByZWdhcmRzDQoNCg0KDQoNCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fDQqzwrzXIENoZW5qaWENCk2juis4Ni0xMzMwMTIzNTUzNDx0
-ZWw6Kzg2LTEzMzAxMjM1NTM0Pg0KRaO6Y2hlbmppYTA5QGh1YXdlaS5jb208bWFpbHRvOmNoZW5q
-aWEwOUBodWF3ZWkuY29tPg0KsvrGt9PrveK+9re9sLgtsLLIq7v5tKHGvcyov6q3orK/DQpQcm9k
-dWN0cyAmIFNvbHV0aW9ucy1TZWN1cml0eSBCYXNlIFBsYXRmb3JtIERldmVsb3BtZW50IERlcHQN
-Cg0Kt6K8/sjLo7ogSmFuIEJldWxpY2gNCsrVvP7Iy6O6IENoZW5qaWEgKEMpPGNoZW5qaWEwOUBo
-dWF3ZWkuY29tPG1haWx0bzpjaGVuamlhMDlAaHVhd2VpLmNvbT4+DQqzrcvNo7ogU2hlbnRhbyAo
-VGVycnkpPHNoZW50YW84QGh1YXdlaS5jb208bWFpbHRvOnNoZW50YW84QGh1YXdlaS5jb20+Pjt3
-YW5neHUgKFIpPHdhbmd4dTBAaHVhd2VpLmNvbTxtYWlsdG86d2FuZ3h1MEBodWF3ZWkuY29tPj47
-WWFvc2hhb21pbjx5YW9zaGFvbWluQGh1YXdlaS5jb208bWFpbHRvOnlhb3NoYW9taW5AaHVhd2Vp
-LmNvbT4+O3poYW9iaW5namlhbjx6aGFvYmluZ2ppYW5AaHVhd2VpLmNvbTxtYWlsdG86emhhb2Jp
-bmdqaWFuQGh1YXdlaS5jb20+Pjt4ZW4tZGV2ZWw8eGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnPG1haWx0bzp4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmc+Pg0K1vfM4qO6IFJlOiC0
-8Li0OiBbWGVuLWRldmVsXSBIZWxwOiBhIHhlbiBjcmFzaCBvZiA0LjguMiB2ZXJzaW9uLy8vLy+0
-8Li0OiBJcyB0aGVyZSBhIGZhc3RlciB3YXkgdG8gcmVzdG9yZSBWaXJ0dWFsIG1hY2hpbmUgc3Rh
-dHVzIGluIFhlbj8NCsqxvOSjuiAyMDE4LTA2LTI5IDE3OjMzOjE0DQoNCj4+PiBPbiAyOS4wNi4x
-OCBhdCAwODozOCwgPGNoZW5qaWEwOUBodWF3ZWkuY29tPiB3cm90ZToNCj4gV2UgaGF2ZSB0cnkg
-dGhlIGxhc3QgeGVuIHZlcnNpb24gNC45LjIod2UgY2hlY2sgdGhlIGNvbW1pdCBjOWFmZTI2ZTVk
-OiBzeW5jDQo+IENQVSBzdGF0ZSB1cG9uIGZpbmFsIGRvbWFpbiBkZXN0cnVjdGlvbiBpcyBhbHNv
-IGluIDQuOS4yLCBpcyB0aGlzIHRoZSBzYW1lIGFzDQo+IGNvbW1pdCA0NzJkNTk2MDQyPyApICxh
-bmQgd2UgZ290IHRoZSBmb2xsb3dpbmcgbWVzc2FnZSBpbiBsaW51eCBjb25zb2xlLCB0aGUNCj4g
-c2VydmVyIHNlZW1zIGhhdmUgYmxvY2ssIGFuZCB1bnJlYWNoYWJsZToNCg0KSSdtIHNvcnJ5LCBi
-dXQgbm8uIFBsZWFzZSBkb24ndCBtaXggcHJvYmxlbXMuIFRoZSBvbmUgeW91IGRlc2NyaWJlIGhl
-cmUNCmxvb2tzIHRvIGJlIGEgTGludXggb25lIGF0IGZpcnN0IGdsYW5jZSwgbm90IGEgWGVuIG9u
-ZS4NCg0KSmFuDQoNCg0K
-
---_000_193BC0700AA2F44A8843B8D1C1E6B618D51AA2ACnkgeml514mbxchi_
-Content-Type: text/html; charset="gb2312"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dgb2312">
-<meta name=3D"Generator" content=3D"Microsoft Exchange Server">
-<!-- converted from text --><style><!-- .EmailQuote { margin-left: 1pt; pad=
-ding-left: 4pt; border-left: #800000 2px solid; } --></style>
-</head>
-<body>
-<div>
-<div style=3D"font-family:Calibri,Helvetica!important">Dear Jan=A3=BA<br>
-thanks very much for your reply:we will try the 4.8.3 version, if we have t=
-he result, we will feedback to you=A3=ACthank you=A3=A1<br>
-<br>
-Best regards<br>
-<br>
-<br>
-<br>
-<br>
-<hr style=3D"border-top:dotted 1px">
-=B3=C2=BC=D7 Chenjia<br>
-M=A3=BA<a href=3D"tel:&#43;86-13301235534">&#43;86-13301235534</a> <br>
-E=A3=BA<a href=3D"mailto:chenjia09@huawei.com">chenjia09@huawei.com</a><br>
-=B2=FA=C6=B7=D3=EB=BD=E2=BE=F6=B7=BD=B0=B8-=B0=B2=C8=AB=BB=F9=B4=A1=C6=BD=
-=CC=A8=BF=AA=B7=A2=B2=BF<br>
-Products &amp; Solutions-Security Base Platform Development Dept<br>
-<br>
-</div>
-<div name=3D"x_AnyOffice-Background-Image" style=3D"border-top:1px solid #B=
-5C4DF; padding:8px">
-<div><b>=B7=A2=BC=FE=C8=CB=A3=BA </b>Jan Beulich</div>
-<div><b>=CA=D5=BC=FE=C8=CB=A3=BA </b>Chenjia (C)&lt;<a href=3D"mailto:chenj=
-ia09@huawei.com">chenjia09@huawei.com</a>&gt;</div>
-<div><b>=B3=AD=CB=CD=A3=BA </b>Shentao (Terry)&lt;<a href=3D"mailto:shentao=
-8@huawei.com">shentao8@huawei.com</a>&gt;;wangxu (R)&lt;<a href=3D"mailto:w=
-angxu0@huawei.com">wangxu0@huawei.com</a>&gt;;Yaoshaomin&lt;<a href=3D"mail=
-to:yaoshaomin@huawei.com">yaoshaomin@huawei.com</a>&gt;;zhaobingjian&lt;<a =
-href=3D"mailto:zhaobingjian@huawei.com">zhaobingjian@huawei.com</a>&gt;;xen=
--devel&lt;<a href=3D"mailto:xen-devel@lists.xenproject.org">xen-devel@lists=
-.xenproject.org</a>&gt;</div>
-<div><b>=D6=F7=CC=E2=A3=BA </b>Re: =B4=F0=B8=B4: [Xen-devel] Help: a xen cr=
-ash of 4.8.2 version/////=B4=F0=B8=B4: Is there a faster way to restore Vir=
-tual machine status in Xen?</div>
-<div><b>=CA=B1=BC=E4=A3=BA </b>2018-06-29 17:33:14</div>
-<br>
-</div>
-</div>
-<font size=3D"2"><span style=3D"font-size:10pt;">
-<div class=3D"PlainText">&gt;&gt;&gt; On 29.06.18 at 08:38, &lt;chenjia09@h=
-uawei.com&gt; wrote:<br>
-&gt; We have try the last xen version 4.9.2(we check the commit c9afe26e5d:=
- sync <br>
-&gt; CPU state upon final domain destruction is also in 4.9.2, is this the =
-same as <br>
-&gt; commit 472d596042? ) ,and we got the following message in linux consol=
-e, the <br>
-&gt; server seems have block, and unreachable:<br>
-<br>
-I'm sorry, but no. Please don't mix problems. The one you describe here<br>
-looks to be a Linux one at first glance, not a Xen one.<br>
-<br>
-Jan<br>
-<br>
-<br>
-</div>
-</span></font>
-</body>
-</html>
-
---_000_193BC0700AA2F44A8843B8D1C1E6B618D51AA2ACnkgeml514mbxchi_--
-
-
---===============4644789697109898949==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4644789697109898949==--
+T24gMjkvMDYvMTggMTA6MjgsIFhpbiBMaSB3cm90ZToKPiBJbnRyb2R1Y2UgbmV3IGJvb3QgcGFy
+YW1ldGVyIHhzbSB0byBjaG9vc2Ugd2hpY2ggeHNtIG1vZHVsZSBpcyBlbmFibGVkLAo+IGFuZCBz
+ZXQgZGVmYXVsdCB0byBkdW1teS4KPgo+IFNpZ25lZC1vZmYtYnk6IFhpbiBMaSA8eGluLmxpQGNp
+dHJpeC5jb20+CgpBcyBhIG5vdGUgZm9yIG90aGVyIHJldmlld2VycywgdGhpcyBzZXJpZXMgaXMg
+YmFzZWQgb24gdG9wIG9mIG15IFhTTQpLY29uZmlnIGNsZWFudXAuCgpBcyBmb3IgdGhpcyBwYXRj
+aCwgaXRzIGFsbW9zdCB0aGVyZS7CoCBKdXN0IGEgZmV3IG1pbm9yIGlzc3Vlcy4KCj4KPiAtLS0K
+PiBDQzogRGFuaWVsIERlIEdyYWFmIDxkZ2RlZ3JhQHR5Y2hvLm5zYS5nb3Y+Cj4gQ0M6IEdlb3Jn
+ZSBEdW5sYXAgPEdlb3JnZS5EdW5sYXBAZXUuY2l0cml4LmNvbT4KPiBDQzogSmFuIEJldWxpY2gg
+PEpCZXVsaWNoQHN1c2UuY29tPgo+IENDOiBLb25yYWQgUnplc3p1dGVrIFdpbGsgPGtvbnJhZC53
+aWxrQG9yYWNsZS5jb20+Cj4gQ0M6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2Vy
+bmVsLm9yZz4KPiBDQzogVGltIERlZWdhbiA8dGltQHhlbi5vcmc+Cj4gQ0M6IFdlaSBMaXUgPHdl
+aS5saXUyQGNpdHJpeC5jb20+Cj4gQ0M6IFNlcmdleSBEeWFzbGkgPHNlcmdleS5keWFzbGlAY2l0
+cml4LmNvbT4KPiBDQzogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4K
+PiBDQzogTWluZyBMdSA8bWluZy5sdUBjaXRyaXguY29tPgo+IC0tLQo+ICBkb2NzL21pc2MveGVu
+LWNvbW1hbmQtbGluZS5tYXJrZG93biB8IDEzICsrKysrKysrKysKPiAgeGVuL3hzbS94c21fY29y
+ZS5jICAgICAgICAgICAgICAgICAgfCAzOSArKysrKysrKysrKysrKysrKysrKysrKysrKysrLQo+
+ICAyIGZpbGVzIGNoYW5nZWQsIDUxIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKPgo+IGRp
+ZmYgLS1naXQgYS9kb2NzL21pc2MveGVuLWNvbW1hbmQtbGluZS5tYXJrZG93biBiL2RvY3MvbWlz
+Yy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3duCj4gaW5kZXggMDc1ZTVlYTE1OS4uN2M2ODliODIy
+NSAxMDA2NDQKPiAtLS0gYS9kb2NzL21pc2MveGVuLWNvbW1hbmQtbGluZS5tYXJrZG93bgo+ICsr
+KyBiL2RvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3duCj4gQEAgLTg2NSw2ICs4NjUs
+MTkgQEAgaGFyZHdhcmUgZG9tYWluIGlzIGFyY2hpdGVjdHVyZSBkZXBlbmRlbnQuCj4gIE5vdGUg
+dGhhdCBzcGVjaWZ5aW5nIHplcm8gYXMgZG9tVSB2YWx1ZSBtZWFucyB6ZXJvLCB3aGlsZSBmb3Ig
+ZG9tMCBpdCBtZWFucwo+ICB0byB1c2UgdGhlIGRlZmF1bHQuCj4gIAo+ICsjIyMgeHNtCj4gKz4g
+YD0gZHVtbXkgfCBzaWxvIHwgZmxhc2tgCgpUaGlzIHNob3VsZCBiZSBqdXN0ICJkdW1teSB8IGZs
+YXNrIiBpbiB0aGlzIHBhdGNoLCBhbmQgZXh0ZW5kZWQgd2l0aApzaWxvIGluIHRoZSBuZXh0IHBh
+dGguwqAgQWxzbywgb3B0aW9ucyBpbiB0aGlzIGZpbGUgc2hvdWxkIGJlIHNvcnRlZAphbHBoYWJl
+dGljYWxseSwgc28gIyMjIHhzbSBzaG91bGQgYmUgbmVhciB0aGUgZW5kLCByYXRoZXIgdGhhbiBi
+ZXNpZGUgZmxhc2suCgo+ICsKPiArPiBEZWZhdWx0OiBgZHVtbXlgCj4gKwo+ICtTcGVjaWZ5IHdo
+aWNoIFhTTSBtb2R1bGUgc2hvdWxkIGJlIGVuYWJsZWQuICBUaGlzIG9wdGlvbiBpcyBvbmx5IGF2
+YWlsYWJsZSBpZgo+ICt0aGUgaHlwZXJ2aXNvciB3YXMgY29tcGlsZWQgd2l0aCBYU00gc3VwcG9y
+dC4KPiArCj4gKyogYGR1bW15YDogdGhpcyBpcyB0aGUgZGVmYXVsdCBjaG9pY2UuICBObyBzcGVj
+aWFsIHJlc3RyaWN0aW9uIHdpbGwgYmUgYXBwbGllZC4KPiArICBpdCdzIGFsc28gdXNlZCB3aGVu
+IFhTTSBpcyBjb21waWxlZCBvdXQuCj4gKyogYGZsYXNrYDogdGhpcyBpcyB0aGUgcG9saWN5IGJh
+c2VkIGFjY2VzcyBjb250cm9sLiAgVG8gY2hvb3NlIHRoaXMsIHRoZQo+ICsgIHNlcGFyYXRlZCBv
+cHRpb24gaW4ga2NvbmZpZyBtdXN0IGFsc28gYmUgZW5hYmxlZC4KPiArCj4gICMjIyBmbGFzawo+
+ICA+IGA9IHBlcm1pc3NpdmUgfCBlbmZvcmNpbmcgfCBsYXRlIHwgZGlzYWJsZWRgCj4gIAo+IGRp
+ZmYgLS1naXQgYS94ZW4veHNtL3hzbV9jb3JlLmMgYi94ZW4veHNtL3hzbV9jb3JlLmMKPiBpbmRl
+eCBjZGRjZjdhYTUxLi5lMDAyMjAwNTc4IDEwMDY0NAo+IC0tLSBhL3hlbi94c20veHNtX2NvcmUu
+Ywo+ICsrKyBiL3hlbi94c20veHNtX2NvcmUuYwo+IEBAIC0zMSw2ICszMSwzMCBAQAo+ICAKPiAg
+c3RydWN0IHhzbV9vcGVyYXRpb25zICp4c21fb3BzOwo+ICAKPiArZW51bSB4c21fYm9vdHBhcmFt
+IHsKPiArICAgIFhTTV9CT09UUEFSQU1fRFVNTVksCj4gKyAgICBYU01fQk9PVFBBUkFNX0ZMQVNL
+LAo+ICsgICAgWFNNX0JPT1RQQVJBTV9JTlZBTElELAoKSSdkIGRyb3AgSU5WQUxJRCAoU2VlIGJl
+bG93IGZvciB0aGUgcGFyc2luZyBhc3BlY3QpLCBhcyBpdCBhY3R1YWxseQpmYWxscyBiYWNrIHRv
+IERVTU1ZLgoKPiArfTsKPiArCj4gK2VudW0geHNtX2Jvb3RwYXJhbSBfX3JlYWRfbW9zdGx5IHhz
+bV9ib290cGFyYW0gPSBYU01fQk9PVFBBUkFNX0RVTU1ZOwoKVGhpcyBzaG91bGQgYmUgX19pbml0
+ZGF0YSByYXRoZXIgdGhhbiBfX3JlYWRfbW9zdGx5LsKgIEl0IGlzIHNhZmUgdG8gYmUKZGlzY2Fy
+ZGVkIGFmdGVyIGJvb3QuCgo+ICsKPiArc3RhdGljIGludCBfX2luaXQgcGFyc2VfeHNtX3BhcmFt
+KGNvbnN0IGNoYXIgKnMpCj4gK3sKCmludCByYyA9IDA7Cgo+ICsgICAgaWYgKCAhc3RyY21wKHMs
+ICJkdW1teSIpICkKPiArICAgICAgICB4c21fYm9vdHBhcmFtID0gWFNNX0JPT1RQQVJBTV9EVU1N
+WTsKPiArI2lmZGVmIENPTkZJR19YU01fRkxBU0sKPiArICAgIGVsc2UgaWYgKCAhc3RyY21wKHMs
+ICJmbGFzayIpICkKPiArICAgICAgICB4c21fYm9vdHBhcmFtID0gWFNNX0JPT1RQQVJBTV9GTEFT
+SzsKPiArI2VuZGlmCj4gKyAgICBlbHNlCj4gKyAgICAgICAgeHNtX2Jvb3RwYXJhbSA9IFhTTV9C
+T09UUEFSQU1fSU5WQUxJRDsKPiArCj4gKyAgICByZXR1cm4gMDsKCmVsc2UKwqDCoMKgIHJjID0g
+LUVJTlZBTDsKCnJldHVybiByYzsKCkFzIGEgcmVzdWx0LCB0aGUgY29yZSBjb21tYW5kIGxpbmUg
+aW5mcmFzdHJ1Y3R1cmUgd2lsbCBpbmZvcm0gdGhlIHVzZXIKaWYgdGhleSBwYXNzZWQgYW4gdW5y
+ZWNvZ25pc2VkIG9wdGlvbi4KCn5BbmRyZXcKCj4gK30KPiArCj4gK2N1c3RvbV9wYXJhbSgieHNt
+IiwgcGFyc2VfeHNtX3BhcmFtKTsKPiArCj4gIHN0YXRpYyBpbmxpbmUgaW50IHZlcmlmeShzdHJ1
+Y3QgeHNtX29wZXJhdGlvbnMgKm9wcykKPiAgewo+ICAgICAgLyogdmVyaWZ5IHRoZSBzZWN1cml0
+eV9vcGVyYXRpb25zIHN0cnVjdHVyZSBleGlzdHMgKi8KPiBAQCAtNTcsNyArODEsMjAgQEAgc3Rh
+dGljIGludCBfX2luaXQgeHNtX2NvcmVfaW5pdChjb25zdCB2b2lkICpwb2xpY3lfYnVmZmVyLCBz
+aXplX3QgcG9saWN5X3NpemUpCj4gICAgICB9Cj4gIAo+ICAgICAgeHNtX29wcyA9ICZkdW1teV94
+c21fb3BzOwo+IC0gICAgZmxhc2tfaW5pdChwb2xpY3lfYnVmZmVyLCBwb2xpY3lfc2l6ZSk7Cj4g
+Kwo+ICsgICAgc3dpdGNoICggeHNtX2Jvb3RwYXJhbSApCj4gKyAgICB7Cj4gKyAgICBjYXNlIFhT
+TV9CT09UUEFSQU1fRFVNTVk6Cj4gKyAgICAgICAgLyogZW1wdHkgKi8KPiArICAgICAgICBicmVh
+azsKPiArCj4gKyAgICBjYXNlIFhTTV9CT09UUEFSQU1fRkxBU0s6Cj4gKyAgICAgICAgZmxhc2tf
+aW5pdChwb2xpY3lfYnVmZmVyLCBwb2xpY3lfc2l6ZSk7Cj4gKyAgICAgICAgYnJlYWs7Cj4gKwo+
+ICsgICAgZGVmYXVsdDoKPiArICAgICAgICBwcmludGsoIlhTTTogSW52YWxpZCB2YWx1ZSBmb3Ig
+eHNtPSBib290IHBhcmFtZXRlci5cbiIpOwo+ICsgICAgfQo+ICAKPiAgICAgIHJldHVybiAwOwo+
+ICB9CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
