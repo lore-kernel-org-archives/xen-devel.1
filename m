@@ -1,18 +1,15 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v6 11/13] xen: support the Null scheduler
-Date: Fri, 29 Jun 2018 11:38:53 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1806291136500.23811@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1806131409300.14695@sstabellini-ThinkPad-X260>
- <1528924492-6579-11-git-send-email-sstabellini@kernel.org>
- <5B22706A02000078001CB4C2@prv1-mh.provo.novell.com>
- <3881fbda-d34b-caf2-23d7-5f6e0a956748@citrix.com>
- <alpine.DEB.2.10.1806141318080.14695@sstabellini-ThinkPad-X260>
- <fc748ba73ec2eacc38613883d7a80ea748cf4d37.camel@suse.com>
- <20180628073654.5wl7z2s4gc4s5by4@mac.bytemobile.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: Altp2m/#VE page issue
+Date: Fri, 29 Jun 2018 22:29:06 +0300
+Message-ID: <c4951da2-c97b-3f34-1d4d-984947a4daf2@bitdefender.com>
+References: <a92cbff7-572e-4dde-e5c9-aa8a530b9b89@bitdefender.com>
+ <CABfawhnbYbvc75hB7aHbKFwAj81qQ8-TWLhb_Rig+ZBXVFrGXQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1799796722-1530297539=:23811"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180628073654.5wl7z2s4gc4s5by4@mac.bytemobile.com>
+In-Reply-To: <CABfawhnbYbvc75hB7aHbKFwAj81qQ8-TWLhb_Rig+ZBXVFrGXQ@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,64 +18,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Artem Mygaiev <artem_mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xen.org
+To: Tamas K Lengyel <tamas@tklengyel.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1799796722-1530297539=:23811
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Thu, 28 Jun 2018, Roger Pau Monné wrote:
-> On Thu, Jun 28, 2018 at 09:27:08AM +0200, Dario Faggioli wrote:
-> > On Thu, 2018-06-14 at 13:20 -0700, Stefano Stabellini wrote:
-> > > On Thu, 14 Jun 2018, Andrew Cooper wrote:
-> > > > On 14/06/18 14:40, Jan Beulich wrote:
-> > > > I don't think its reasonable to alter the support status with this
-> > > issue
-> > > > outstanding.
-> > > 
-> > > I completely missed this report, probably because I haven't paid
-> > > attention to PV-shim. Do you have any more information about this?
-> > > The
-> > > report is a bit vague. If I can't repro it, I can't fix it.
-> > > 
-> > > Couldn't it be that is normal because after a while you ran out of
-> > > pcpus?
-> > > 
-> > > Dario, do you have any opinion on this?
-> > >
-> > The issue that I know of is that the null scheduler does not properly
-> > support CPU hotplug/hotunplug.
-> > 
-> > This is an issue on, let's say, baremetal, if you use null, and try to
-> > do CPU hotplug/hotunplug. When trying to use null as the scheduler of
-> > the shim, we run into that same issue, even if not specifically doing
-> > CPU hotplug/hotunplug (because the shim use the same path for CPU
-> > bringup, IIRC).
-> 
-> The shim uses CPU hotplug/unplug when the guest brings up/down a
-> vCPU using the VCPUOP_{up/down} hypercall.
-> 
-> The best description of the issue I could find is:
-> 
-> https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg01085.html
-
-OK, thanks for the explanation. We don't support CPU hotplug on ARM, so
-we could mark the NULL scheduler as supported on the ARM architecture
-today? Once you implement CPU hotplug support in NULL, we could mark it
-as supported on x86 too.
---8323329-1799796722-1530297539=:23811
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1799796722-1530297539=:23811--
+T24gMDYvMjkvMjAxOCAwNzo1MiBQTSwgVGFtYXMgSyBMZW5neWVsIHdyb3RlOgo+IE9uIEZyaSwg
+SnVuIDI5LCAyMDE4IGF0IDk6MjUgQU0gUmF6dmFuIENvam9jYXJ1Cj4gPHJjb2pvY2FydUBiaXRk
+ZWZlbmRlci5jb20+IHdyb3RlOgo+Pgo+PiBIZWxsbywKPj4KPj4gV2UncmUgdHJ5aW5nIHRvIGdl
+dCAjVkUgdG8gd29yayB3aXRoIGEgInJlZ3VsYXIiIGd1ZXN0IHBhZ2UgKHRoYXQgaXMsCj4+IG5v
+dCBhIHBhZ2UgdGhhdCB3ZSBnZXQgdmlhIHhjX2RvbWFpbl9pbmNyZWFzZV9yZXNlcnZhdGlvbl9l
+eGFjdCgpIC8KPj4geGNfZG9tYWluX3BvcHVsYXRlX3BoeXNtYXBfZXhhY3QoKSkuCj4+Cj4+IEhv
+d2V2ZXIsIHRoZSB3YXkgWGVuJ3MgY29kZSB3b3JrcyBub3csIGl0IGRvZXNuJ3Qgc2VlbSB0byBi
+ZSBwb3NzaWJsZToKPj4KPj4gaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9eGVuLmdp
+dDthPWJsb2I7Zj14ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYztoPTIwYThhNjlmYmU0MTJhYTky
+OGM3NWI1ZDc3NTY4MTZiZjU1MTc4ZmM7aGI9cmVmcy9oZWFkcy9zdGFnaW5nI2wyMTUwCj4+Cj4+
+IGJlY2F1c2UgZ2V0X2dmbl9xdWVyeV91bmxvY2tlZCgpIGNhbGxzIGVwdF9nZXRfZW50cnkoKSwg
+d2hpY2ggcmV0dXJucwo+PiBJTlZBTElEX01GTiBpZiBnZm4gPiBwMm0tPm1heF9tYXBwZWRfcGZu
+Lgo+IAo+IEl0J3MgY2VydGFpbmx5IHdlaXJkIHRvIGhhdmUgYSAicmVndWxhciIgZ2ZuIHRoYXQn
+cyBhbHNvIGFib3ZlCj4gbWF4X21hcHBlZF9wZm4uIFRoYXQgdG8gbWUgc291bmRzIGxpa2UgYSBi
+dWcgd2l0aCBob3cgbWF4X21hcHBlZF9wZm4KPiBpcyBzZXQuIFRvIGJlIGhvbmVzdCwgSSd2ZSBy
+YW4gaW50byBpc3N1ZXMgd2l0aCBtYXhfbWFwcGVkX2dmbiBpbiB0aGUKPiBwYXN0IHRvbyBhbmQg
+aXQgd2FzIGFubm95aW5nIHNvIEkgZG8gYWN0dWFsbHkgZW5kIHVwIGp1c3QgcnVubmluZzoKPiAK
+PiByYyA9IHhjX2RvbWFpbl9zZXRtYXhtZW0oZHJha3Z1Zi0+eGVuLT54YywgZHJha3Z1Zi0+ZG9t
+SUQsIH4wKTsKPiAKPiB0byBtYWtlIGl0IGdvIGF3YXkuIEl0J3MgZnVnbHkgYnV0IGRpZG4ndCBo
+YXZlIHRpbWUgeWV0IHRvIGludmVzdGlnYXRlCj4gZnVydGhlciDCr1xfKOODhClfL8KvLiBNYXli
+ZSBpdCdzIHRpbWUgZm9yIGEgcHJvcGVyIGZpeC4KClRob3NlIGFyZSB0d28gcHJvYmxlbXMgdGhl
+biwgSSd2ZSBqdXN0IHRyaWVkIHRoYXQgYW5kIGl0IGRvZXNuJ3QgZml4Cm1pbmUuIEkndmUgbG9n
+Z2VkIGFsbCBlcHRfc2V0X2VudHJ5KCllcywgYW5kIGhlcmUgYXJlIHRoZSBvbmVzIGJlZm9yZQp0
+aGUgZW5hYmxlX25vdGlmeSgpIGNhbGw6CgooWEVOKSBbMTc5MjguNjMyOTE0XSBlcHRfc2V0X2Vu
+dHJ5KCk6IEdGTiAweDIyYzgsIG1mbjogMHhiMTI2YzgKKFhFTikgWzE3OTI4LjYzMzE3NV0gZXB0
+X3NldF9lbnRyeSgpOiBHRk4gMHgyMmNlLCBtZm46IDB4YjEyNmNlCihYRU4pIFsxNzkyOC42MzQ1
+MTldIGVwdF9zZXRfZW50cnkoKTogR0ZOIDB4MTA2ODdkLCBtZm46IDB4YTI4MDdkCihYRU4pIFsx
+NzkyOC42MzU5MzldIGVwdF9zZXRfZW50cnkoKTogR0ZOIDB4MTA2NzQ1LCBtZm46IDB4YTI4MzQ1
+CihYRU4pIFsxNzkyOC42MzYyNDBdIGVwdF9zZXRfZW50cnkoKTogR0ZOIDB4MjM0YywgbWZuOiAw
+eGIxMjc0YwooWEVOKSBbMTc5MjguNjM2NDU5XSBlcHRfc2V0X2VudHJ5KCk6IEdGTiAweDEwNjZj
+MiwgbWZuOiAweGEyODJjMgooWEVOKSBbMTc5MjguNjM3MTYzXSBlcHRfc2V0X2VudHJ5KCk6IEdG
+TiAweDEwNjZkNywgbWZuOiAweGEyODJkNwooWEVOKSBbMTc5MjguNjM3NDAwXSBlcHRfc2V0X2Vu
+dHJ5KCk6IEdGTiAweDEwNjc1OCwgbWZuOiAweGEyODM1OAooWEVOKSBbMTc5MjguNjM5NTc2XSBl
+cHRfc2V0X2VudHJ5KCk6IEdGTiAweDEwNjdkOSwgbWZuOiAweGEyODNkOQooWEVOKSBbMTc5Mjgu
+NjQxOTA4XSBlcHRfc2V0X2VudHJ5KCk6IEdGTiAweDIyYjgsIG1mbjogMHhiMTI2YjgKKFhFTikg
+WzE3OTI4LjY0MjkzNl0gZXB0X3NldF9lbnRyeSgpOiBHRk4gMHgyMDc4LCBtZm46IDB4YjEyODc4
+CihYRU4pIFsxNzkyOC42NzI2ODJdIEhWTU9QX2FsdHAybV92Y3B1X2VuYWJsZV9ub3RpZnkgZG9t
+YWluOiA1LCB2Y3B1OiAwLApnZm46IDB4MWM2NzAwMAooWEVOKSBbMTc5MjguNjcyNjg0XSBjYWxs
+aW5nIGFsdHAybV92Y3B1X3VwZGF0ZV92bWZ1bmNfdmUoKQooWEVOKSBbMTc5MjguNjcyNjkwXSBn
+Zm4gPiBwMm0tPm1heF9tYXBwZWRfcGZuIChnb3RvIG91dCkKKFhFTikgWzE3OTI4LjY3MjY5MV0g
+bWZuX3gobWZuKSA9PSBJTlZBTElEX01GTgoKSSdtIGp1c3QgdHJ5aW5nIHRvIHNldCB0aGUgI1ZF
+IHBhZ2UgdG8gMHgxYzY3MDAwIG9uIGEgNEdCIGRvbWFpbiwgYW5kCml0J3MgbGVzcyB0aGFuIG1h
+eF9tYXBwZWRfcGZuIChhdCBsZWFzdCBhdCB0aGUgdGltZSB0aGUgYXBwbGljYXRpb24gaXMKbWFr
+aW5nIHRoZSBjYWxsKS4KCgpUaGFua3MsClJhenZhbgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
