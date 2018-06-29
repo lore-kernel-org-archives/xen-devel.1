@@ -1,23 +1,19 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re:
- =?utf-8?b?562U5aSNOiAgSGVscDogYSB4ZW4gY3Jhc2ggb2Yg?=
- =?utf-8?b?NC44LjIgdmVyc2lvbi8vLy8v562U5aSNOiBJcyB0aGVyZSBhIGZhc3RlciB3?=
- =?utf-8?q?ay_to_restore_Virtual_machine_status_in_Xen=3F?=
-Date: Fri, 29 Jun 2018 03:33:00 -0600
-Message-ID: <5B35FCCC02000078001CF04A@prv1-mh.provo.novell.com>
-References: <193BC0700AA2F44A8843B8D1C1E6B618D51AA10D@nkgeml514-mbx.china.huawei.com>
- <5B35C66802000078001350C7@prv1-mh.provo.novell.com>
- <193BC0700AA2F44A8843B8D1C1E6B618D51AA189@nkgeml514-mbx.china.huawei.com>
+Subject: Re: [PATCH v2] x86/mm: Add mem access rights to NPT
+Date: Fri, 29 Jun 2018 03:38:36 -0600
+Message-ID: <5B35FE1C02000078001CF056@prv1-mh.provo.novell.com>
+References: <1529335072-2141-1-git-send-email-aisaila@bitdefender.com>
+ <5B2D1B0002000078001CD08E@prv1-mh.provo.novell.com>
+ <1530195070.8880.9.camel@bitdefender.com>
+ <5B34F36C02000078001CEEA0@prv1-mh.provo.novell.com>
+ <1530197609.8880.14.camel@bitdefender.com>
+ <5B35CDF502000078001350D8@prv1-mh.provo.novell.com>
+ <1530261783.8880.18.camel@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=gccx=jp=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fYpm2-0000Mo-SI
- for xen-devel@lists.xenproject.org; Fri, 29 Jun 2018 09:33:02 +0000
-In-Reply-To: <193BC0700AA2F44A8843B8D1C1E6B618D51AA189@nkgeml514-mbx.china.huawei.com>
+In-Reply-To: <1530261783.8880.18.camel@bitdefender.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -27,19 +23,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Chenjia(C)" <chenjia09@huawei.com>
-Cc: "wangxu(R)" <wangxu0@huawei.com>, "Shentao(Terry)" <shentao8@huawei.com>, Yaoshaomin <yaoshaomin@huawei.com>, zhaobingjian <zhaobingjian@huawei.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: aisaila@bitdefender.com
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, tamas@tklengyel.com, Razvan Cojocaru <rcojocaru@bitdefender.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI5LjA2LjE4IGF0IDA4OjM4LCA8Y2hlbmppYTA5QGh1YXdlaS5jb20+IHdyb3RlOgo+
-IFdlIGhhdmUgdHJ5IHRoZSBsYXN0IHhlbiB2ZXJzaW9uIDQuOS4yKHdlIGNoZWNrIHRoZSBjb21t
-aXQgYzlhZmUyNmU1ZDogc3luYyAKPiBDUFUgc3RhdGUgdXBvbiBmaW5hbCBkb21haW4gZGVzdHJ1
-Y3Rpb24gaXMgYWxzbyBpbiA0LjkuMiwgaXMgdGhpcyB0aGUgc2FtZSBhcyAKPiBjb21taXQgNDcy
-ZDU5NjA0Mj8gKSAsYW5kIHdlIGdvdCB0aGUgZm9sbG93aW5nIG1lc3NhZ2UgaW4gbGludXggY29u
-c29sZSwgdGhlIAo+IHNlcnZlciBzZWVtcyBoYXZlIGJsb2NrLCBhbmQgdW5yZWFjaGFibGU6CgpJ
-J20gc29ycnksIGJ1dCBuby4gUGxlYXNlIGRvbid0IG1peCBwcm9ibGVtcy4gVGhlIG9uZSB5b3Ug
-ZGVzY3JpYmUgaGVyZQpsb29rcyB0byBiZSBhIExpbnV4IG9uZSBhdCBmaXJzdCBnbGFuY2UsIG5v
-dCBhIFhlbiBvbmUuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+Pj4+IE9uIDI5LjA2LjE4IGF0IDEwOjQyLCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3Rl
+Ogo+IEkndmUgc3RhcnRlZCBhIHdpbiA3IG1hY2hpbmUgd2l0aCBubyBpbnRyb3NwZWN0aW9uIG9y
+IHhlbi1hY2Nlc3MuIEFmdGVyCj4gMzAgbWluIG9mIHVwdGltZSB0aGVyZSB3ZXJlIDAgaW5zZXJ0
+cyBpbnRvIHRoZSB0cmVlLiBJIGd1ZXNzIHRoZQo+IG92ZXJoZWFkIGlzIGRvd24gdG8gYSBtaW5p
+bXVtIHdpdGggbm8gdXNlciBtb2RpZmllZCBhY2Nlc3MgcmlnaHRzLgoKVGhhbmtzLCB0aGlzIGlz
+IGhlbHBmdWwgdG8ga25vdy4gSW4gdGhhdCBjYXNlIHRob3VnaCwgYXMgc2FpZCBiZWZvcmUsIEkn
+ZApsaWtlIHRvIGFzayB0byBkZWZlciBzZXR0aW5nIHVwIG9mIHRoZSByYWRpeCB0cmVlIHRvIHRo
+ZSBwb2ludCB3aGVyZSBpdAphY3R1YWxseSBpcyBnb2luZyB0byBiZSBuZWVkZWQuCgpKYW4KCgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
