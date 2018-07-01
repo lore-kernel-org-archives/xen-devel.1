@@ -1,19 +1,19 @@
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: [PATCH 4.14 002/157] x86/xen: Add call of
+Subject: [PATCH 4.17 002/220] x86/xen: Add call of
  speculative_store_bypass_ht_init() to PV paths
-Date: Sun,  1 Jul 2018 18:21:14 +0200
-Message-ID: <20180701160852.414936941__19916.2408979193$1530462558$gmane$org@linuxfoundation.org>
-References: <20180701160852.287307684@linuxfoundation.org>
+Date: Sun,  1 Jul 2018 18:20:26 +0200
+Message-ID: <20180701160908.369313453__42762.7917998054$1530462990$gmane$org@linuxfoundation.org>
+References: <20180701160908.272447118@linuxfoundation.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=0ucb=jr=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1fZfEX-0006ZV-9F
- for xen-devel@lists.xenproject.org; Sun, 01 Jul 2018 16:29:53 +0000
-In-Reply-To: <20180701160852.287307684@linuxfoundation.org>
+ id 1fZfLk-0007IV-Jg
+ for xen-devel@lists.xenproject.org; Sun, 01 Jul 2018 16:37:20 +0000
+In-Reply-To: <20180701160908.272447118@linuxfoundation.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,7 +26,7 @@ To: linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>, Peter Zijlstra <peterz@infradead.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Brian Woods <brian.woods@amd.com>, stable@vger.kernel.org, Ingo Molnar <mingo@kernel.org>, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>, Linus Torvalds <torvalds@linux-foundation.org>, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-NC4xNC1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
+NC4xNy1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
 cGxlYXNlIGxldCBtZSBrbm93LgoKLS0tLS0tLS0tLS0tLS0tLS0tCgpGcm9tOiBKdWVyZ2VuIEdy
 b3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cgpjb21taXQgNzQ4OTlkOTJlNjY2NjNkYzc2NzFhODAxN2Iz
 MTQ2ZGNkNDczNWYzYiB1cHN0cmVhbS4KCkNvbW1pdDoKCiAgMWY1MGRkYjRmNDE4ICgieDg2L3Nw
