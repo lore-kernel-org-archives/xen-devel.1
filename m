@@ -1,15 +1,17 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 1/3] tools/libxc: Drop xc_cpuid_to_str()
-Date: Mon, 2 Jul 2018 12:41:56 +0200
-Message-ID: <20180702104156.ojtwqwxgqctnkzm7@mac.bytemobile.com>
+From: Sergey Dyasli <sergey.dyasli@citrix.com>
+Subject: Re: [PATCH 3/3] x86/msr: Use the architectural layout
+ for MSR_{MISC_ENABLES, PLATFORM_INFO}
+Date: Mon, 2 Jul 2018 10:46:14 +0000
+Message-ID: <6fc2d2a8132ffcde4e7ca4d54876af0a66da31fc.camel@citrix.com>
 References: <1530525447-28347-1-git-send-email-andrew.cooper3@citrix.com>
- <1530525447-28347-2-git-send-email-andrew.cooper3@citrix.com>
+ <1530525447-28347-4-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <1530525447-28347-2-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1530525447-28347-4-git-send-email-andrew.cooper3@citrix.com>
+Content-Language: en-US
+Content-ID: <D0FD3B929DB4F148B9D4D302BC2B53DB@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,24 +20,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Andrew Cooper <Andrew.Cooper3@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, "JBeulich@suse.com" <JBeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKdWwgMDIsIDIwMTggYXQgMTA6NTc6MjVBTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBUaGlzIGhlbHBlciBhcHBlYXJzIHRvIGhhdmUgYmVlbiBpbnRyb2R1Y2VkIDEwIHll
-YXJzIGFnbyBieSBjL3MgNWYxNGE4N2NlYgo+ICJ4ODYsIGh2bTogR3Vlc3QgQ1BVSUQgY29uZmln
-dXJhdGlvbiIgYW5kIG5ldmVyIGhhZCBhbnkgdXNlcnMgYXQgYWxsLgo+IAo+IGFsbG9jX3N0cigp
-IGlzIGFjdHVhbGx5IGFuIG9wZW5jb2RlZCBjYWxsb2MoKSwgYW5kIG5vdyBvbmx5IGhhcyBhIHNp
-bmdsZQo+IGNhbGxlci4gIFVzZSBjYWxsb2MoKSBkaXJlY3RseSBhbmQgZHJvcCBhbGxvY19zdHIo
-KS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRy
-aXguY29tPgoKUmV2aWV3ZWQtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXgu
-Y29tPgoKPiBAQCAtODMyLDcgKzgwOSw3IEBAIGludCB4Y19jcHVpZF9zZXQoCj4gICAgICAgICAg
-ICAgIGNvbnRpbnVlOwo+ICAgICAgICAgIH0KPiAgICAgICAgICAKPiAtICAgICAgICBjb25maWdf
-dHJhbnNmb3JtZWRbaV0gPSBhbGxvY19zdHIoKTsKPiArICAgICAgICBjb25maWdfdHJhbnNmb3Jt
-ZWRbaV0gPSBjYWxsb2MoMzMsIDEpOyAvKiAzMiBiaXRzLCBOVUwgdGVybWluYXRvci4gKi8KCkkg
-d291bGQgcmF0aGVyIGRvIHNpemVvZigqY29uZmlnX3RyYW5zZm9ybWVkW2ldKSwgYnV0IEknbSBu
-b3QgZ29pbmcgdG8KaW5zaXN0LgoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gTW9uLCAyMDE4LTA3LTAyIGF0IDEwOjU3ICswMTAwLCBBbmRyZXcgQ29vcGVyIHdyb3RlOg0K
+PiBUaGlzIHNpbXBsaWZpZXMgZnV0dXJlIGludGVyYWN0aW9ucyB3aXRoIHRoZSB0b29sc3RhY2ss
+IGJ5IHJlbW92aW5nIHRoZSBuZWVkDQo+IGZvciBwZXItTVNSIGN1c3RvbSBhY2Nlc3NvcnMgd2hl
+biBzaHVmZmxpbmcgZGF0YSBpbi9vdXQgb2YgYSBwb2xpY3kuDQo+IA0KPiBVc2UgYSAzMmJpdCBy
+YXcgYmFja2luZyBpbnRlZ2VyIChmb3Igc2ltcGxpY2l0eSksIGFuZCB1c2UgYSBiaXRmaWVsZCB0
+byBtb3ZlDQo+IHRoZSBjcHVpZF9mYXVsdGluZyBmaWVsZCB0byBpdHMgYXBwcm9wcmlhdGUgcG9z
+aXRpb24uDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVy
+M0BjaXRyaXguY29tPg0KPiAtLS0NCj4gDQoNClJldmlld2VkLWJ5OiBTZXJnZXkgRHlhc2xpIDxz
+ZXJnZXkuZHlhc2xpQGNpdHJpeC5jb20+DQoNCi0tIA0KVGhhbmtzLA0KU2VyZ2V5Cl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
