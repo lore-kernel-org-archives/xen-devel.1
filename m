@@ -1,16 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v1 2/2] hvm/svm: Enable EMUL_UNIMPLEMENTED
- events on svm
-Date: Mon, 02 Jul 2018 04:59:27 -0600
-Message-ID: <5B3A058F02000078001CFB91@prv1-mh.provo.novell.com>
-References: <1526037083-29920-1-git-send-email-aisaila@bitdefender.com>
- <1526037083-29920-2-git-send-email-aisaila@bitdefender.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH] x86/altp2m: Add a subop for obtaining the
+ mem access of a page
+Date: Mon, 2 Jul 2018 12:01:01 +0100
+Message-ID: <8021d5e7-c6c6-f1ff-dbe1-9ba564d15526@arm.com>
+References: <20180628130036.23241-1-apop@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1526037083-29920-2-git-send-email-aisaila@bitdefender.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=sc1v=js=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1fZwZv-000635-Pf
+ for xen-devel@lists.xenproject.org; Mon, 02 Jul 2018 11:01:07 +0000
+In-Reply-To: <20180628130036.23241-1-apop@bitdefender.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,35 +23,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: aisaila@bitdefender.com, tamas@tklengyel.com
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, xen-devel@lists.xen.org
+To: Adrian Pop <apop@bitdefender.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDExLjA1LjE4IGF0IDEzOjExLCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3Rl
-Ogo+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS14ODYvbW9uaXRvci5oCj4gKysrIGIveGVuL2luY2x1
-ZGUvYXNtLXg4Ni9tb25pdG9yLmgKPiBAQCAtODMsMTYgKzgzLDEzIEBAIHN0YXRpYyBpbmxpbmUg
-dWludDMyX3QgYXJjaF9tb25pdG9yX2dldF9jYXBhYmlsaXRpZXMoc3RydWN0IGRvbWFpbiAqZCkK
-PiAgICAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0lO
-VEVSUlVQVCkgfAo+ICAgICAgICAgICAgICAgICAgICAgICgxVSA8PCBYRU5fRE9NQ1RMX01PTklU
-T1JfRVZFTlRfQ1BVSUQpIHwKPiAgICAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNU
-TF9NT05JVE9SX0VWRU5UX0RFQlVHX0VYQ0VQVElPTikgfAo+IC0gICAgICAgICAgICAgICAgICAg
-ICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfV1JJVEVfQ1RSTFJFRykpOwo+ICsgICAg
-ICAgICAgICAgICAgICAgICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfV1JJVEVfQ1RS
-TFJFRykgfAo+ICsgICAgICAgICAgICAgICAgICAgICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1Jf
-RVZFTlRfRU1VTF9VTklNUExFTUVOVEVEKSk7Cj4gIAo+IC0gICAgaWYgKCBjcHVfaGFzX3ZteCAp
-Cj4gLSAgICB7Cj4gLSAgICAgICAgY2FwYWJpbGl0aWVzIHw9ICgxVSA8PCBYRU5fRE9NQ1RMX01P
-TklUT1JfRVZFTlRfRU1VTF9VTklNUExFTUVOVEVEKTsKPiAgCj4gLSAgICAgICAgLyogU2luY2Ug
-d2Uga25vdyB0aGlzIGlzIG9uIFZNWCwgd2UgY2FuIGp1c3QgY2FsbCB0aGUgaHZtIGZ1bmMgKi8K
-PiAtICAgICAgICBpZiAoIGh2bV9pc19zaW5nbGVzdGVwX3N1cHBvcnRlZCgpICkKPiAtICAgICAg
-ICAgICAgY2FwYWJpbGl0aWVzIHw9ICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfU0lO
-R0xFU1RFUCk7Cj4gLSAgICB9Cj4gKyAgICAgLyogQ2hlY2sgaWYgd2UgYXJlIG9uIFZNWCBhbmQg
-dGhlbiB3ZSBjYW4ganVzdCBjYWxsIHRoZSBodm0gZnVuYyAqLwo+ICsgICAgaWYgKCBjcHVfaGFz
-X3ZteCAmJiBodm1faXNfc2luZ2xlc3RlcF9zdXBwb3J0ZWQoKSApCj4gKyAgICAgICAgY2FwYWJp
-bGl0aWVzIHw9ICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfU0lOR0xFU1RFUCk7CgpJ
-IHdhcyBhYm91dCB0byBhcHBseSB0aGlzIHdoZW4gSSBub3RpY2VkIHRoZSBzZWVtaW5nbHkgdW5u
-ZWNlc3NhcnkKY3B1X2hhc192bXggaGVyZTogaHZtX2lzX3NpbmdsZXN0ZXBfc3VwcG9ydGVkKCkg
-aXMgcHJlY2lzZWx5IHRoZQphYnN0cmFjdGlvbiB0byBtYWtlIHN1Y2ggZXh0cmEgY2hlY2tpbmcg
-dW5uZWNlc3NhcnkuIElmIHlvdSBhZ3JlZSwKSSBjYW4gZHJvcCBpdCB3aGlsZSBhcHBseWluZy4K
-CkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+SGksCgpPbiAwNi8yOC8yMDE4IDAyOjAwIFBNLCBBZHJpYW4gUG9wIHdyb3RlOgo+IGRpZmYgLS1n
+aXQgYS94ZW4vYXJjaC9hcm0vbWVtX2FjY2Vzcy5jIGIveGVuL2FyY2gvYXJtL21lbV9hY2Nlc3Mu
+Ywo+IGluZGV4IGFlMjY4NmZmYTIuLmJhOWU1MGU3ZjYgMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gv
+YXJtL21lbV9hY2Nlc3MuYwo+ICsrKyBiL3hlbi9hcmNoL2FybS9tZW1fYWNjZXNzLmMKPiBAQCAt
+MjM2LDcgKzIzNiw3IEBAIGJvb2wgcDJtX21lbV9hY2Nlc3NfY2hlY2socGFkZHJfdCBncGEsIHZh
+ZGRyX3QgZ2xhLCBjb25zdCBzdHJ1Y3QgbnBmZWMgbnBmZWMpCj4gICAgICAgaWYgKCAhcDJtLT5t
+ZW1fYWNjZXNzX2VuYWJsZWQgKQo+ICAgICAgICAgICByZXR1cm4gdHJ1ZTsKPiAgIAo+IC0gICAg
+cmMgPSBwMm1fZ2V0X21lbV9hY2Nlc3Modi0+ZG9tYWluLCBnYWRkcl90b19nZm4oZ3BhKSwgJnht
+YSk7Cj4gKyAgICByYyA9IHAybV9nZXRfbWVtX2FjY2Vzcyh2LT5kb21haW4sIGdhZGRyX3RvX2dm
+bihncGEpLCAmeG1hLCAwKTsKPiAgICAgICBpZiAoIHJjICkKPiAgICAgICAgICAgcmV0dXJuIHRy
+dWU7Cj4gICAKPiBAQCAtNDQwLDggKzQ0MCw5IEBAIGxvbmcgcDJtX3NldF9tZW1fYWNjZXNzX211
+bHRpKHN0cnVjdCBkb21haW4gKmQsCj4gICAgICAgcmV0dXJuIC1FT1BOT1RTVVBQOwo+ICAgfQo+
+ICAgCj4gKy8qIFRoZSBhbHRwMm1faWR4IGFyZ3VtZW50IGlzIG5vdCB1c2VkIG9uIEFSTS4gKi8K
+CnMvQVJNL0FybS8gcGxlYXNlLgoKQWxzbywgSSBndWVzcyBhbHRwMm1faWR4IHNob3VsZCBhbHdh
+eXMgYmUgMCB1bnRpbCBhbHRwMm0gaXMgaW1wbGVtZW50ZWQgCmZvciBBcm0uIElmIHNvLCBJIHdv
+dWxkIGxpa2UgdG8gc2VlIGEgY2hlY2sgb24gdGhlIHZhcmlhYmxlIGFuZCByZXR1cm4gCi1FSU5W
+QUwgb24gZXJyb3IuCgpDaGVlcywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
