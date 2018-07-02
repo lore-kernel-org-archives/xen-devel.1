@@ -1,20 +1,23 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH RFC 02/15] xen/arm: move a few guest related
- #defines to public/arch-arm.h
-Date: Mon, 2 Jul 2018 14:38:30 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1807021432040.23811@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1806131457490.14695@sstabellini-ThinkPad-X260>
- <1528928118-14960-2-git-send-email-sstabellini@kernel.org>
- <0d239daf-06c4-0d63-9d9f-b3cec31ff640@arm.com>
- <alpine.DEB.2.10.1806141412440.14695@sstabellini-ThinkPad-X260>
- <c97b7c22-6301-02ff-0b43-fc1d866f114f@arm.com>
- <alpine.DEB.2.10.1807021328220.23811@sstabellini-ThinkPad-X260>
- <5de55023-3bd7-0b30-7b36-637a590e5e10@arm.com>
+Subject: Re: [PATCH v6 11/13] xen: support the Null scheduler
+Date: Mon, 2 Jul 2018 15:08:43 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1807021438430.23811@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1806131409300.14695@sstabellini-ThinkPad-X260>
+ <1528924492-6579-11-git-send-email-sstabellini@kernel.org>
+ <5B22706A02000078001CB4C2@prv1-mh.provo.novell.com>
+ <3881fbda-d34b-caf2-23d7-5f6e0a956748@citrix.com>
+ <alpine.DEB.2.10.1806141318080.14695@sstabellini-ThinkPad-X260>
+ <fc748ba73ec2eacc38613883d7a80ea748cf4d37.camel@suse.com>
+ <20180628073654.5wl7z2s4gc4s5by4@mac.bytemobile.com>
+ <alpine.DEB.2.10.1806291136500.23811@sstabellini-ThinkPad-X260>
+ <3a61996d-495d-e1ca-5e3c-619f2529c868@arm.com>
+ <alpine.DEB.2.10.1807020901510.23811@sstabellini-ThinkPad-X260>
+ <1312098f-0d2a-d871-3ba3-5e81394870a4@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-563725539-1530567758=:23811"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5de55023-3bd7-0b30-7b36-637a590e5e10@arm.com>
+In-Reply-To: <1312098f-0d2a-d871-3ba3-5e81394870a4@arm.com>
+Content-ID: <alpine.DEB.2.10.1807021443040.23811@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,91 +27,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@arm.com>
-Cc: artem_mygaiev@epam.com, Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, ian.jackson@eu.citrix.com, xen-devel@lists.xen.org, wei.liu2@citrix.com, nd@arm.com
+Cc: Artem Mygaiev <artem_mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, nd@arm.com, Stefano Stabellini <sstabellini@kernel.org>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, Jan Beulich <JBeulich@suse.com>, Dario Faggioli <dfaggioli@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAyIEp1bCAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gSGksCj4gCj4gT24gMDIv
-MDcvMjAxOCAyMTozNywgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4gT24gRnJpLCAxNSBK
-dW4gMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+ID4gPiBIaSBTdGVmYW5vLAo+ID4gPiAKPiA+
-ID4gT24gMDYvMTQvMjAxOCAxMDoxNSBQTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4g
-PiA+IE9uIFRodSwgMTQgSnVuIDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gPiA+IE9u
-IDEzLzA2LzE4IDIzOjE1LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiA+ID4gPiA+IE1v
-dmUgYSBmZXcgY29uc3RhbnRzIGRlZmluZWQgYnkgbGlieGxfYXJtLmMgdG8KPiA+ID4gPiA+ID4g
-eGVuL2luY2x1ZGUvcHVibGljL2FyY2gtYXJtLmgsIHNvIHRoYXQgdGhleSBhcmUgdG9nZXRoZXIg
-d2l0aCB0aGUKPiA+ID4gPiA+ID4gb3RoZXIKPiA+ID4gPiA+ID4gZ3Vlc3QgcmVsYXRlZCAjZGVm
-aW5lcyBzdWNoIGFzIEdVRVNUX0dJQ0RfQkFTRSBhbmQgR1VFU1RfVlBMMDExX1NQSS4KPiA+ID4g
-PiA+ID4gQWxzbywgdGhpcyB3YXkgdGhleSBjYW4gYmUgcmV1c2VkIGJ5IGh5cGVydmlzb3IgY29k
-ZS4KPiA+ID4gPiA+IAo+ID4gPiA+ID4gQWxsIHZhcmlhYmxlcyBtb3ZlZCB0byBhcmNoLWFybS5o
-IHNob3VsZCBiZSBwcmVmaXhlZCB3aXRoIEdVRVNUXyogdG8KPiA+ID4gPiA+IGF2b2lkCj4gPiA+
-ID4gPiBjbGFzaCB3aXRoIHRoZSByZXN0IG9mIFhlbi4KPiA+ID4gPiAKPiA+ID4gPiBJJ2xsIGRv
-Lgo+ID4gPiA+IAo+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gU2lnbmVkLW9mZi1ieTogU3RlZmFu
-byBTdGFiZWxsaW5pIDxzdGVmYW5vc0B4aWxpbnguY29tPgo+ID4gPiA+ID4gPiBDQzogd2VpLmxp
-dTJAY2l0cml4LmNvbQo+ID4gPiA+ID4gPiBDQzogaWFuLmphY2tzb25AZXUuY2l0cml4LmNvbQo+
-ID4gPiA+ID4gPiAtLS0KPiA+ID4gPiA+ID4gICAgIHRvb2xzL2xpYnhsL2xpYnhsX2FybS5jICAg
-ICAgIHwgMjYgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPiA+ID4gPiA+ID4gICAgIHhlbi9p
-bmNsdWRlL3B1YmxpYy9hcmNoLWFybS5oIHwgMjYgKysrKysrKysrKysrKysrKysrKysrKysrKysK
-PiA+ID4gPiA+ID4gICAgIDIgZmlsZXMgY2hhbmdlZCwgMjYgaW5zZXJ0aW9ucygrKSwgMjYgZGVs
-ZXRpb25zKC0pCj4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiBkaWZmIC0tZ2l0IGEvdG9vbHMvbGli
-eGwvbGlieGxfYXJtLmMgYi90b29scy9saWJ4bC9saWJ4bF9hcm0uYwo+ID4gPiA+ID4gPiBpbmRl
-eCA4YWY5ZjZmLi44OWE0MTdmIDEwMDY0NAo+ID4gPiA+ID4gPiAtLS0gYS90b29scy9saWJ4bC9s
-aWJ4bF9hcm0uYwo+ID4gPiA+ID4gPiArKysgYi90b29scy9saWJ4bC9saWJ4bF9hcm0uYwo+ID4g
-PiA+ID4gPiBAQCAtOCwyMyArOCw2IEBACj4gPiA+ID4gPiA+ICAgICAjaW5jbHVkZSA8bGliZmR0
-Lmg+Cj4gPiA+ID4gPiA+ICAgICAjaW5jbHVkZSA8YXNzZXJ0Lmg+Cj4gPiA+ID4gPiA+ICAgICAt
-LyoqCj4gPiA+ID4gPiA+IC0gKiBJUlEgbGluZSB0eXBlLgo+ID4gPiA+ID4gPiAtICogRFRfSVJR
-X1RZUEVfTk9ORSAgICAgICAgICAgIC0gZGVmYXVsdCwgdW5zcGVjaWZpZWQgdHlwZQo+ID4gPiA+
-ID4gPiAtICogRFRfSVJRX1RZUEVfRURHRV9SSVNJTkcgICAgIC0gcmlzaW5nIGVkZ2UgdHJpZ2dl
-cmVkCj4gPiA+ID4gPiA+IC0gKiBEVF9JUlFfVFlQRV9FREdFX0ZBTExJTkcgICAgLSBmYWxsaW5n
-IGVkZ2UgdHJpZ2dlcmVkCj4gPiA+ID4gPiA+IC0gKiBEVF9JUlFfVFlQRV9FREdFX0JPVEggICAg
-ICAgLSByaXNpbmcgYW5kIGZhbGxpbmcgZWRnZSB0cmlnZ2VyZWQKPiA+ID4gPiA+ID4gLSAqIERU
-X0lSUV9UWVBFX0xFVkVMX0hJR0ggICAgICAtIGhpZ2ggbGV2ZWwgdHJpZ2dlcmVkCj4gPiA+ID4g
-PiA+IC0gKiBEVF9JUlFfVFlQRV9MRVZFTF9MT1cgICAgICAgLSBsb3cgbGV2ZWwgdHJpZ2dlcmVk
-Cj4gPiA+ID4gPiA+IC0gKi8KPiA+ID4gPiA+ID4gLSNkZWZpbmUgRFRfSVJRX1RZUEVfTk9ORSAg
-ICAgICAgICAgMHgwMDAwMDAwMAo+ID4gPiA+ID4gPiAtI2RlZmluZSBEVF9JUlFfVFlQRV9FREdF
-X1JJU0lORyAgICAweDAwMDAwMDAxCj4gPiA+ID4gPiA+IC0jZGVmaW5lIERUX0lSUV9UWVBFX0VE
-R0VfRkFMTElORyAgIDB4MDAwMDAwMDIKPiA+ID4gPiA+ID4gLSNkZWZpbmUgRFRfSVJRX1RZUEVf
-RURHRV9CT1RIICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+ID4gPiA+ID4gPiAtICAgIChE
-VF9JUlFfVFlQRV9FREdFX0ZBTExJTkcgfCBEVF9JUlFfVFlQRV9FREdFX1JJU0lORykKPiA+ID4g
-PiA+ID4gLSNkZWZpbmUgRFRfSVJRX1RZUEVfTEVWRUxfSElHSCAgICAgMHgwMDAwMDAwNAo+ID4g
-PiA+ID4gPiAtI2RlZmluZSBEVF9JUlFfVFlQRV9MRVZFTF9MT1cgICAgICAweDAwMDAwMDA4Cj4g
-PiA+ID4gPiA+IC0KPiA+ID4gPiA+IAo+ID4gPiA+ID4gVGhvc2UgZGVmaW5lcyBoYXZlIG5vdGhp
-bmcgdG8gZG8gd2l0aCB0aGUgZ3Vlc3QgaXRzZWxmLiBUaGV5IGFyZQo+ID4gPiA+ID4gY3VycmVu
-dGx5Cj4gPiA+ID4gPiBkZWZpbmUgaW4gWGVuIHdpdGhvdXQgdGhlIERUXyBwcmVmaXguCj4gPiA+
-ID4gCj4gPiA+ID4gU291bmRzIGxpa2Ugd2Ugd2FudCB0byBnZXQgcmlkIG9mIHRoZSBEVF9JUlFf
-VFlQRV8qIGRlZmluaXRpb25zCj4gPiA+ID4gY29tcGxldGVseSwgbW92ZSB0aGUgSVJRX1RZUEVf
-KiBkZWZpbml0aW9ucyBmcm9tIGRldmljZV90cmVlLmggdG8gaGVyZSwKPiA+ID4gPiBhbmQgc3Rh
-cnQgdXNpbmcgdGhlbSBpbiB0b29scy9saWJ4bC9saWJ4bF9hcm0uYyAod2hpY2ggaW52b2x2ZXMg
-YQo+ID4gPiA+IHJlbmFtaW5nIHMvRFRfSVJRX1RZUEUvSVJRX1RZUEUvZykuCj4gPiA+ID4gCj4g
-PiA+ID4gSXMgdGhhdCB3aGF0IHlvdSBoYWQgaW4gbWluZD8KPiA+ID4gCj4gPiA+IEV2ZW4gaWYg
-RFQgaXMgQXJtIG9ubHkgdG9kYXksIHRoZSBEVCBjb2RlIGlzIGluIGNvbW1vbiBjb2RlIGFuZCB0
-aGVyZWZvcmUKPiA+ID4gaGVhZGVyIGRldmljZV90cmVlLmggc2hvdWxkIGNvbnRhaW4gZXZlcnkg
-dGhpbmcgbmVjZXNzYXJ5IHRvIHVzZSBhIERULgo+ID4gPiAKPiA+ID4gSWYgd2Ugc3RpbGwgd2Fu
-dCB0byBzaGFyZSBjb25zdGFudCB3aXRoIGxpYnhsIHRoZW4gSSB3b3VsZCBwcmVmZXIgdG8KPiA+
-ID4gaW50cm9kdWNlCj4gPiA+IGEgbmV3IGhlYWRlciAoc2ltaWxhciB0byBhY3BpL2FjY29uZmln
-LmgpIHRoYXQgcHJvdmlkZSBhbGwgdGhlIGNvbW1vbgo+ID4gPiB2YWx1ZXMuCj4gPiAKPiA+IE9L
-LCBJIGNhbiBkbyB0aGF0LiBJJ2xsIGludHJvZHVjZSBhIG5ldyBoZWFkZXIgZmlsZS4KPiA+IAo+
-ID4gCj4gPiA+IE5vdGUgdGhhdCB0aGUgaHlwZXJ2aXNvciBvbmUgZG9uJ3QgaGF2ZSB0aGUgRFRf
-IHByZWZpeCBiZWNhdXNlIHRoZXkgYXJlCj4gPiA+IHVzZSB0bwo+ID4gPiBkZXNjcmliZSBJUlEg
-Zm9yIGJvdGggRFQgYW5kIEFDUEkgaW4gWGVuLiBJdCBpcyBub3QgdGhhdCBuaWNlLCB3ZSBtaWdo
-dAo+ID4gPiB3YW50Cj4gPiA+IHRvIGludHJvZHVjZSBhbGlhc2VzIGluIHRoYXQgY2FzZS4gU28g
-d2Uga2VlcCBEVF8qIGluIGxpYnhsLgo+ID4gCj4gPiBXaXRoIHRoZSBuZXcgaGVhZGVyIGZpbGUg
-d2UnbGwgYmUgYWJsZSB0byByZXVzZSB0aGUgc2FtZSAjZGVmaW5lcyBpbgo+ID4gbGlieGwgYW5k
-IHhlbi4gSSB0aGluayBpdCB3b3VsZCBiZSBuaWNlciB0byBhdm9pZCB0aGUgYWxpYXNlcyBhbmQg
-anVzdAo+ID4gdXNlIHRoZSByZWd1bGFyIGRlZmluaXRpb25zIGluIGxpYnhsIHRvbz8gQ2hhbmdp
-bmcgbGlieGwgdG8gdXNlCj4gPiBJUlFfVFlQRV8gZGlyZWN0bHkgb25seSByZXF1aXJlcyBhIHNt
-YWxsIHBhdGNoLgo+IAo+IEkgcmVhbGx5IGRvbid0IHdhbnQgdGhhdC4gQXMgSSBleHBsYWluZWQs
-IElSUV9UWVBFIGhhdmUgYmVlbiBjb252ZW5pZW50bHkKPiBjaG9zZW4gdG8gYXZvaWQgY29udmVy
-dGluZyBEVCB2YWx1ZSB0byBJUlFfVFlQRS4gVGhleSBhcmUgbm90IG1lYW50IHRvIGJlIHVzZQo+
-IGxpa2UgdGhhdCBsaWJ4bCAob3IgYW55IGhlYWRlciBwdWJsaWNseSBzaGFyZWQpIGFuZCB3aWxs
-IHByb3ZpZGUgbW9yZQo+IGNvbmZ1c2lvbiB0aGF0IGFueXRoaW5nIGZvciBvdGhlciBiaXRzIHRo
-YW4gdGhlIGh5cGVydmlzb3IuCgpJIGRvbid0IGZvbGxvdyB0aGUgZXhwbGFuYXRpb24uIFdoeSB3
-b3VsZCB0aGV5IGJlIGNvbmZ1c2luZyBpbiBwdWJsaWMKaGVhZGVycz8gV2hhdCBpcyB0aGUgaW1w
-b3J0YW50IGRpZmZlcmVuY2UgYmV0d2VlbiBEVF9JUlFfVFlQRV8qIGFuZApJUlFfVFlQRV8qIHRo
-YXQgd2UgYXJlIHRyeWluZyB0byBrZWVwPyBXaHkgSVJRX1RZUEVfKiBzaG91bGRuJ3QgYmUgdXNl
-ZApieSBsaWJ4bD8KCgo+IFNvIGluIHRoZSBoeXBlcnZpc29yIGNhc2Ugd2Ugd2FudCB0bzoKPiAJ
-MSkgRGVmaW5lIERUXyogaW4gYSBzZXBhcmF0ZSBoZWFkZXIKPiAJMikgQWxpYXMgSVJRX1RZUEVf
-KiB0byBjb3JyZXNwb25kaW5nIG9uZS4KPiAKPiBJbiB0aGUgbGlieGwgY2FzZSB3ZSB3YW50IHRv
-IHVzZSB0aGUgbmV3IGhlYWRlciBjb250YWluaW5nIERUXyouCgpJIHVuZGVyc3RhbmQgd2hhdCB5
-b3UgYXJlIGFza2luZyBub3csIHRoYXQgaXMgY2xlYXIuIEkgZG9uJ3QgdW5kZXJzdGFuZAp3aHkg
-dGhvdWdoLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-563725539-1530567758=:23811
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1807021443041.23811@sstabellini-ThinkPad-X260>
+
+On Mon, 2 Jul 2018, Julien Grall wrote:
+> Hi,
+> 
+> On 02/07/2018 19:24, Stefano Stabellini wrote:
+> > On Mon, 2 Jul 2018, Julien Grall wrote:
+> > > Hi Stefano,
+> > > 
+> > > On 06/29/2018 07:38 PM, Stefano Stabellini wrote:
+> > > > On Thu, 28 Jun 2018, Roger Pau Monné wrote:
+> > > > > On Thu, Jun 28, 2018 at 09:27:08AM +0200, Dario Faggioli wrote:
+> > > > > > On Thu, 2018-06-14 at 13:20 -0700, Stefano Stabellini wrote:
+> > > > > > > On Thu, 14 Jun 2018, Andrew Cooper wrote:
+> > > > > > > > On 14/06/18 14:40, Jan Beulich wrote:
+> > > > > > > > I don't think its reasonable to alter the support status with
+> > > > > > > > this
+> > > > > > > issue
+> > > > > > > > outstanding.
+> > > > > > > 
+> > > > > > > I completely missed this report, probably because I haven't paid
+> > > > > > > attention to PV-shim. Do you have any more information about this?
+> > > > > > > The
+> > > > > > > report is a bit vague. If I can't repro it, I can't fix it.
+> > > > > > > 
+> > > > > > > Couldn't it be that is normal because after a while you ran out of
+> > > > > > > pcpus?
+> > > > > > > 
+> > > > > > > Dario, do you have any opinion on this?
+> > > > > > > 
+> > > > > > The issue that I know of is that the null scheduler does not
+> > > > > > properly
+> > > > > > support CPU hotplug/hotunplug.
+> > > > > > 
+> > > > > > This is an issue on, let's say, baremetal, if you use null, and try
+> > > > > > to
+> > > > > > do CPU hotplug/hotunplug. When trying to use null as the scheduler
+> > > > > > of
+> > > > > > the shim, we run into that same issue, even if not specifically
+> > > > > > doing
+> > > > > > CPU hotplug/hotunplug (because the shim use the same path for CPU
+> > > > > > bringup, IIRC).
+> > > > > 
+> > > > > The shim uses CPU hotplug/unplug when the guest brings up/down a
+> > > > > vCPU using the VCPUOP_{up/down} hypercall.
+> > > > > 
+> > > > > The best description of the issue I could find is:
+> > > > > 
+> > > > > https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg01085.html
+> > > > 
+> > > > OK, thanks for the explanation. We don't support CPU hotplug on ARM, so
+> > > > we could mark the NULL scheduler as supported on the ARM architecture
+> > > > today? Once you implement CPU hotplug support in NULL, we could mark it
+> > > > as supported on x86 too.
+> > > Well, Mirela paved the way to support CPU hotplug (should be merged soon).
+> > > She
+> > > is looking at suspend/resume which is IHMO an extension of hotplug case.
+> > > So
+> > > are you sure this could never happen on Arm?
+> > 
+> > I thought that suspend/resume didn't actually require the same kind of
+> > scheduler support that CPU hotplug needs. If suspend/resume ends up
+> > not working with scheduler NULL, then that is a problem.
+> 
+> The suspend/resume code will offline the CPU one by one using cpu_down. This
+> is the same path as hotplug. So you will end up with more vCPUs than online
+> pCPUs, although the domain will be frozen. How this is going to fit in the
+> NULL scheduler?
+
+[...]
+
+> Virtually every platform support CPU hotplug. It is not just about "physically
+> pluggable CPUs" but any CPU that can be offline at any time.
+
+CPU hotplug in Xen clearly doesn't work as I expected: I assumed that
+CPU hotplug would make a CPU "present" or "absent", while cpu_up/down
+would make the CPU "online" and "offline". This is how things used to
+work in the Linux kernel at least: a CPU can be turned down but still be
+present on the socket. To do that, CPU hotplug is not involved. CPU
+hotplug would get involved when the user yanks the physical CPU out of
+the socket.
+
+>From what you describe, it is not the case in Xen, and it really looks
+like we need support for CPU hotplug in NULL even to support for the
+most basic CPU offlining/onlining functionalities.
+--8323329-563725539-1530567758=:23811
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-563725539-1530567758=:23811--
