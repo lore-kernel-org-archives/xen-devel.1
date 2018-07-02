@@ -1,78 +1,60 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH RFC] tools/libxl: Switch Arm guest type to
- PVH
-Date: Mon, 2 Jul 2018 10:18:17 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1807021013570.23811@sstabellini-ThinkPad-X260>
-References: <20180625130814.29771-1-julien.grall@arm.com>
- <20180625131956.ehoocvdnaser3rfn@citrix.com>
- <8c3d0d5c-3953-3514-54b7-4cf4896b5df2@arm.com>
- <20180625162839.3l3njsov75tvwacj@mac.bytemobile.com>
- <23345.6832.106103.997622@mariner.uk.xensource.com>
- <20180626064917.wasgl6de6x6o3toi@mac.bytemobile.com>
- <cd3006a9-0ee4-ffc6-dccc-fe47d64c6a58@arm.com>
+From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Subject: Re: [PATCH v12 09/11] x86/tsc: prepare for early sched_clock
+Date: Mon, 2 Jul 2018 13:18:36 -0400
+Message-ID: <20180702171836.GD22876@char.us.oracle.com>
+References: <alpine.DEB.2.21.1806231815060.8650@nanos.tec.linutronix.de>
+ <alpine.DEB.2.21.1806232210110.8650@nanos.tec.linutronix.de>
+ <CAGM2reYQx769omkWVweEcTMy8WNrKOiuUVo4OFWNh4zW-rc4pg@mail.gmail.com>
+ <alpine.DEB.2.21.1806232347540.8650@nanos.tec.linutronix.de>
+ <alpine.DEB.2.21.1806261725510.1587@nanos.tec.linutronix.de>
+ <CAGM2reYQ23XhQHAOO0Oo8MGvgrjpNZPZkwp+wwsU8Fb+jfANyA@mail.gmail.com>
+ <alpine.DEB.2.21.1806270947410.1587@nanos.tec.linutronix.de>
+ <alpine.DEB.2.21.1806281159590.1778@nanos.tec.linutronix.de>
+ <CAGM2read-NcUjssuUPHaf=qhdidT8f7cRNOs_GjdPnuOVvi-Lw@mail.gmail.com>
+ <alpine.DEB.2.21.1806290925340.1578@nanos.tec.linutronix.de>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1622506955-1530551898=:23811"
-Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <cd3006a9-0ee4-ffc6-dccc-fe47d64c6a58@arm.com>
-List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
-List-Post: <mailto:xen-devel@lists.xenproject.org>
-List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
-List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Errors-To: xen-devel-bounces@lists.xenproject.org
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: sstabellini@kernel.org, Wei Liu <wei.liu2@citrix.com>, andrew.cooper3@citrix.com, xen-devel@lists.xen.org, Ian Jackson <ian.jackson@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Content-Type: text/plain; charset=us-ascii
+Return-path: <linux-kernel-owner@vger.kernel.org>
+Content-Disposition: inline
+In-Reply-To: <alpine.DEB.2.21.1806290925340.1578@nanos.tec.linutronix.de>
+Sender: linux-kernel-owner@vger.kernel.org
+To: Thomas Gleixner <tglx@linutronix.de>, jgross@suse.com
+Cc: Pavel Tatashin <pasha.tatashin@oracle.com>, Steven Sistare <steven.sistare@oracle.com>, Daniel Jordan <daniel.m.jordan@oracle.com>, linux@armlinux.org.uk, Martin Schwidefsky <schwidefsky@de.ibm.com>, Heiko Carstens <heiko.carstens@de.ibm.com>, John Stultz <john.stultz@linaro.org>, sboyd@codeaurora.org, x86@kernel.org, LKML <linux-kernel@vger.kernel.org>, mingo@redhat.com, "H. Peter Anvin" <hpa@zytor.com>, douly.fnst@cn.fujitsu.com, Peter Zijlstra <peterz@infradead.org>, Prarit Bhargava <prarit@redhat.com>, feng.tang@intel.com, Petr Mladek <pmladek@suse.com>, gnomes@lxorguk.ukuu.org.uk, linux-s390@vger.kernel.org, andriy.shevchenko@linux.intel.com, boris.ostrovsky@oracle.com, pbonzini@redhat.com, xen-devel@lists.xensource.com
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1622506955-1530551898=:23811
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Mon, 2 Jul 2018, Julien Grall wrote:
-> On 06/26/2018 07:49 AM, Roger Pau Monné wrote:
-> > On Mon, Jun 25, 2018 at 05:39:12PM +0100, Ian Jackson wrote:
-> > > Roger Pau Monné writes ("Re: [PATCH RFC] tools/libxl: Switch Arm guest
-> > > type to PVH"):
-> > > > IMO I would remove the 'type' option from xl.cfg (so that it's
-> > > > basically ignored) in the ARM case and force it internally to PVH (if
-> > > > that's the best route for current ARM guests).
-> > > 
-> > > What about libvirt users ?  I haven't seen what a libvirt Xen ARM
-> > > guest config looks like but we need to meak sure that existing guests
-> > > don't break.
+On Fri, Jun 29, 2018 at 09:30:10AM +0200, Thomas Gleixner wrote:
+> On Thu, 28 Jun 2018, Pavel Tatashin wrote:
+> > On Thu, Jun 28, 2018 at 11:23 AM Thomas Gleixner <tglx@linutronix.de> wrote:
+> > Hi Thomas,
 > > 
-> > For livbirt (or users of libxl library) we could force the type to
-> > pvh, regardless of the value set by the client, but I guess that would
-> > make adding types later on quite complicated.
+> > In addition to above, we have xen hvm:
+> > 
+> > setup_arch()
+> >     ...
+> >     init_hypervisor_platform();
+> >         x86_init.hyper.init_platform();
+> >             xen_hvm_guest_init()
+> >                 xen_hvm_init_time_ops();
 > 
-> I am fairly confident we will never have PV guest on Arm. So one solution
-> would be to alias PV to PVH for Arm. This still give us the liberty to add
-> more guest type in the future.
+> Duh. Missed that completely.
 > 
-> Any opinions?
+> >     ...
+> >     tsc_early_delay_calibrate();
+> >         tsc_khz = x86_platform.calibrate_tsc(); == xen_tsc_khz()
+> >     ...
+> > 
+> > Which works early.
+> > 
+> > So, what should we do with xen, which seems to be the only platform
+> > that would provide different tsc frequency early and late, because of
+> > different calibration method?
+> 
+> Fix it? I have no idea why XEN has two variants of the scheme and I neither
+> have a clue why the KVM clock stuff is late.
 
-Roger, what is the plan for x86? Wasn't there an idea to silently and
-transparently "upgrade" PV guests to PVH when possible (when hardware
-support is available)?
-
-If that is the case, basically we could do the same for ARM. We could
-have an hardware features check, that would always return true on ARM
-because without virtualization extensions Xen cannot even boot, then
-upgrade PV to PVH. On x86 the upgrade would only happen when the
-required features are present.
---8323329-1622506955-1530551898=:23811
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1622506955-1530551898=:23811--
+Added Juergen (Xen).
+> 
+> Thanks,
+> 
+> 	tglx
+> 
