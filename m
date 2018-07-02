@@ -1,17 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 3/3] x86/msr: Use the architectural layout
- for MSR_{MISC_ENABLES, PLATFORM_INFO}
-Date: Mon, 02 Jul 2018 05:29:51 -0600
-Message-ID: <5B3A0CAF02000078001CFBD9@prv1-mh.provo.novell.com>
-References: <1530525447-28347-1-git-send-email-andrew.cooper3@citrix.com>
- <1530525447-28347-4-git-send-email-andrew.cooper3@citrix.com>
- <6fc2d2a8132ffcde4e7ca4d54876af0a66da31fc.camel@citrix.com>
+From: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
+Subject: Re: [PATCH v1 2/2] hvm/svm: Enable EMUL_UNIMPLEMENTED
+ events on svm
+Date: Mon, 2 Jul 2018 11:29:41 +0000
+Message-ID: <1530531007.8880.22.camel@bitdefender.com>
+References: <1526037083-29920-1-git-send-email-aisaila@bitdefender.com>
+ <1526037083-29920-2-git-send-email-aisaila@bitdefender.com>
+ <5B3A058F02000078001CFB91@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <6fc2d2a8132ffcde4e7ca4d54876af0a66da31fc.camel@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <5B3A058F02000078001CFB91@prv1-mh.provo.novell.com>
+Content-Language: en-US
+Content-ID: <71CD373CF430CB4CA9395749EEFBB8F6@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,21 +21,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Sergey Dyasli <sergey.dyasli@citrix.com>
-Cc: xen-devel@lists.xen.org, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: "JBeulich@suse.com" <JBeulich@suse.com>, "tamas@tklengyel.com" <tamas@tklengyel.com>
+Cc: "George.Dunlap@eu.citrix.com" <George.Dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "rcojocaru@bitdefender.com" <rcojocaru@bitdefender.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDAyLjA3LjE4IGF0IDEyOjQ2LCA8c2VyZ2V5LmR5YXNsaUBjaXRyaXguY29tPiB3cm90
-ZToKPiBPbiBNb24sIDIwMTgtMDctMDIgYXQgMTA6NTcgKzAxMDAsIEFuZHJldyBDb29wZXIgd3Jv
-dGU6Cj4+IFRoaXMgc2ltcGxpZmllcyBmdXR1cmUgaW50ZXJhY3Rpb25zIHdpdGggdGhlIHRvb2xz
-dGFjaywgYnkgcmVtb3ZpbmcgdGhlIG5lZWQKPj4gZm9yIHBlci1NU1IgY3VzdG9tIGFjY2Vzc29y
-cyB3aGVuIHNodWZmbGluZyBkYXRhIGluL291dCBvZiBhIHBvbGljeS4KPj4gCj4+IFVzZSBhIDMy
-Yml0IHJhdyBiYWNraW5nIGludGVnZXIgKGZvciBzaW1wbGljaXR5KSwgYW5kIHVzZSBhIGJpdGZp
-ZWxkIHRvIG1vdmUKPj4gdGhlIGNwdWlkX2ZhdWx0aW5nIGZpZWxkIHRvIGl0cyBhcHByb3ByaWF0
-ZSBwb3NpdGlvbi4KPj4gCj4+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5j
-b29wZXIzQGNpdHJpeC5jb20+Cj4+IC0tLQo+PiAKPiAKPiBSZXZpZXdlZC1ieTogU2VyZ2V5IER5
-YXNsaSA8c2VyZ2V5LmR5YXNsaUBjaXRyaXguY29tPgoKQWNrZWQtYnk6IEphbiBCZXVsaWNoIDxq
-YmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+T24gTHUsIDIwMTgtMDctMDIgYXQgMDQ6NTkgLTA2MDAsIEphbiBCZXVsaWNoIHdyb3RlOg0KPiA+
+DQo+ID4gPg0KPiA+ID4gPg0KPiA+ID4gPiBPbiAxMS4wNS4xOCBhdCAxMzoxMSwgPGFpc2FpbGFA
+Yml0ZGVmZW5kZXIuY29tPiB3cm90ZToNCj4gPiAtLS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L21v
+bml0b3IuaA0KPiA+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvbW9uaXRvci5oDQo+ID4gQEAg
+LTgzLDE2ICs4MywxMyBAQCBzdGF0aWMgaW5saW5lIHVpbnQzMl90DQo+ID4gYXJjaF9tb25pdG9y
+X2dldF9jYXBhYmlsaXRpZXMoc3RydWN0IGRvbWFpbiAqZCkNCj4gPiAgICAgICAgICAgICAgICAg
+ICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX0lOVEVSUlVQVCkgfA0KPiA+ICAg
+ICAgICAgICAgICAgICAgICAgICgxVSA8PCBYRU5fRE9NQ1RMX01PTklUT1JfRVZFTlRfQ1BVSUQp
+IHwNCj4gPiAgICAgICAgICAgICAgICAgICAgICAoMVUgPDwNCj4gPiBYRU5fRE9NQ1RMX01PTklU
+T1JfRVZFTlRfREVCVUdfRVhDRVBUSU9OKSB8DQo+ID4gLSAgICAgICAgICAgICAgICAgICAgKDFV
+IDw8DQo+ID4gWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX1dSSVRFX0NUUkxSRUcpKTsNCj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX1dSSVRF
+X0NUUkxSRUcpDQo+ID4gfA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICgxVSA8PA0KPiA+IFhF
+Tl9ET01DVExfTU9OSVRPUl9FVkVOVF9FTVVMX1VOSU1QTEVNRU5URUQpKTsNCj4gPg0KPiA+IC0g
+ICAgaWYgKCBjcHVfaGFzX3ZteCApDQo+ID4gLSAgICB7DQo+ID4gLSAgICAgICAgY2FwYWJpbGl0
+aWVzIHw9ICgxVSA8PA0KPiA+IFhFTl9ET01DVExfTU9OSVRPUl9FVkVOVF9FTVVMX1VOSU1QTEVN
+RU5URUQpOw0KPiA+DQo+ID4gLSAgICAgICAgLyogU2luY2Ugd2Uga25vdyB0aGlzIGlzIG9uIFZN
+WCwgd2UgY2FuIGp1c3QgY2FsbCB0aGUgaHZtDQo+ID4gZnVuYyAqLw0KPiA+IC0gICAgICAgIGlm
+ICggaHZtX2lzX3NpbmdsZXN0ZXBfc3VwcG9ydGVkKCkgKQ0KPiA+IC0gICAgICAgICAgICBjYXBh
+YmlsaXRpZXMgfD0gKDFVIDw8DQo+ID4gWEVOX0RPTUNUTF9NT05JVE9SX0VWRU5UX1NJTkdMRVNU
+RVApOw0KPiA+IC0gICAgfQ0KPiA+ICsgICAgIC8qIENoZWNrIGlmIHdlIGFyZSBvbiBWTVggYW5k
+IHRoZW4gd2UgY2FuIGp1c3QgY2FsbCB0aGUgaHZtDQo+ID4gZnVuYyAqLw0KPiA+ICsgICAgaWYg
+KCBjcHVfaGFzX3ZteCAmJiBodm1faXNfc2luZ2xlc3RlcF9zdXBwb3J0ZWQoKSApDQo+ID4gKyAg
+ICAgICAgY2FwYWJpbGl0aWVzIHw9ICgxVSA8PA0KPiA+IFhFTl9ET01DVExfTU9OSVRPUl9FVkVO
+VF9TSU5HTEVTVEVQKTsNCj4gSSB3YXMgYWJvdXQgdG8gYXBwbHkgdGhpcyB3aGVuIEkgbm90aWNl
+ZCB0aGUgc2VlbWluZ2x5IHVubmVjZXNzYXJ5DQo+IGNwdV9oYXNfdm14IGhlcmU6IGh2bV9pc19z
+aW5nbGVzdGVwX3N1cHBvcnRlZCgpIGlzIHByZWNpc2VseSB0aGUNCj4gYWJzdHJhY3Rpb24gdG8g
+bWFrZSBzdWNoIGV4dHJhIGNoZWNraW5nIHVubmVjZXNzYXJ5LiBJZiB5b3UgYWdyZWUsDQo+IEkg
+Y2FuIGRyb3AgaXQgd2hpbGUgYXBwbHlpbmcuDQo+DQpZZXMgSSBhZ3JlZSB3aXRoIHRoaXMgYW5k
+IGl0IGlzIG9rIHRvIGRyb3AgaXQuDQoNClRoYW5rcywNCkFsZXgNCg0KX19fX19fX19fX19fX19f
+X19fX19fX19fDQpUaGlzIGVtYWlsIHdhcyBzY2FubmVkIGJ5IEJpdGRlZmVuZGVyDQpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
