@@ -1,18 +1,22 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: xen crash with 4.17 kernel on Fedora
-Date: Mon, 2 Jul 2018 10:07:00 +0200
-Message-ID: <d8f7f688-cbaa-a72b-8a73-2a6f95e45aee@suse.com>
-References: <alpine.LFD.2.21.1807011742590.4081@austen3.home>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH 10/10] vpci/sriov: add support for SR-IOV
+ capability
+Date: Mon, 2 Jul 2018 10:12:19 +0200
+Message-ID: <20180702081219.m54u7ye27upm2rby@mac.bytemobile.com>
+References: <20180620144234.51783-1-roger.pau@citrix.com>
+ <20180620144234.51783-11-roger.pau@citrix.com>
+ <20180629152708.f3z5lgjprh6vj35l@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------661F81853FA166E9F89AC43F"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=37lk=js=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fZtrU-0002wJ-DU
- for xen-devel@lists.xenproject.org; Mon, 02 Jul 2018 08:07:04 +0000
-In-Reply-To: <alpine.LFD.2.21.1807011742590.4081@austen3.home>
-Content-Language: de-DE
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=n1b/=js=citrix.com=prvs=714d6e1f6=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fZtx1-0003iF-LF
+ for xen-devel@lists.xenproject.org; Mon, 02 Jul 2018 08:12:47 +0000
+Content-Disposition: inline
+In-Reply-To: <20180629152708.f3z5lgjprh6vj35l@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,142 +25,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Michael Young <m.a.young@durham.ac.uk>, xen-devel@lists.xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---------------661F81853FA166E9F89AC43F
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-On 01/07/18 18:43, Michael Young wrote:
-> I am seeing crash on boot and DomU (pv) on Fedora with the 4.17 kernel
-> (eg. kernel-4.17.2-200.fc28.x86_64 and kernel-4.17.3-200.fc28.x86_64) which
-> didn't occur with 4.16 kernel (eg. kernel-4.16.16-300.fc28.x86_64)
-
-Could you please try the attached patches? They apply to either 4.17
-or 4.18-rc.
-
-The first one should let the kernel survive the WARN_ONCE(), while
-the second will avoid hitting the WARN_ONCE().
-
-
-Juergen
-
---------------661F81853FA166E9F89AC43F
-Content-Type: text/x-patch;
- name="0001-xen-setup-pv-irq-ops-vector-earlier.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="0001-xen-setup-pv-irq-ops-vector-earlier.patch"
-
->From baa8db1bd97958cccc67f8e894847104c51c27ef Mon Sep 17 00:00:00 2001
-From: Juergen Gross <jgross@suse.com>
-Date: Mon, 2 Jul 2018 09:09:18 +0200
-Subject: [PATCH] xen: setup pv irq ops vector earlier
-
-Setting pv_irq_ops for Xen PV domains should be done as early as
-possible in order to support e.g. very early printk() usage.
-
-Remove the no longer necessary conditional in xen_init_irq_ops()
-from PVH V1 times to make clear this is a PV only function.
-
-Cc: <stable@vger.kernel.org> # 4.14
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/xen/enlighten_pv.c | 3 +--
- arch/x86/xen/irq.c          | 4 +---
- 2 files changed, 2 insertions(+), 5 deletions(-)
-
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 8d4e2e1ae60b..0f4cd9e5bed4 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -1213,6 +1213,7 @@ asmlinkage __visible void __init xen_start_kernel(void)
- 	pv_info = xen_info;
- 	pv_init_ops.patch = paravirt_patch_default;
- 	pv_cpu_ops = xen_cpu_ops;
-+	xen_init_irq_ops();
- 
- 	x86_platform.get_nmi_reason = xen_get_nmi_reason;
- 
-@@ -1249,8 +1250,6 @@ asmlinkage __visible void __init xen_start_kernel(void)
- 	get_cpu_cap(&boot_cpu_data);
- 	x86_configure_nx();
- 
--	xen_init_irq_ops();
--
- 	/* Let's presume PV guests always boot on vCPU with id 0. */
- 	per_cpu(xen_vcpu_id, 0) = 0;
- 
-diff --git a/arch/x86/xen/irq.c b/arch/x86/xen/irq.c
-index 74179852e46c..7515a19fd324 100644
---- a/arch/x86/xen/irq.c
-+++ b/arch/x86/xen/irq.c
-@@ -128,8 +128,6 @@ static const struct pv_irq_ops xen_irq_ops __initconst = {
- 
- void __init xen_init_irq_ops(void)
- {
--	/* For PVH we use default pv_irq_ops settings. */
--	if (!xen_feature(XENFEAT_hvm_callback_vector))
--		pv_irq_ops = xen_irq_ops;
-+	pv_irq_ops = xen_irq_ops;
- 	x86_init.irqs.intr_init = xen_init_IRQ;
- }
--- 
-2.13.7
-
-
---------------661F81853FA166E9F89AC43F
-Content-Type: text/x-patch;
- name="0002-xen-remove-global-bit-from-__default_kernel_pte_mask.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0002-xen-remove-global-bit-from-__default_kernel_pte_mask.pa";
- filename*1="tch"
-
->From 2ab1412c43762f27e65bd18d8c1ffde9133a56b1 Mon Sep 17 00:00:00 2001
-From: Juergen Gross <jgross@suse.com>
-Date: Mon, 2 Jul 2018 09:31:36 +0200
-Subject: [PATCH] xen: remove global bit from __default_kernel_pte_mask for
- pv guests
-
-When removing the global bit from __supported_pte_mask do the same for
-__default_kernel_pte_mask in order to avoid the WARN_ONCE() in
-check_pgprot() when setting a kernel pte before having called
-init_mem_mapping().
-
-Cc: <stable@vger.kernel.org> # 4.17
-Reported-by: Michael Young <m.a.young@durham.ac.uk>
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/xen/enlighten_pv.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 0f4cd9e5bed4..cf7b13d3e911 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -1230,6 +1230,7 @@ asmlinkage __visible void __init xen_start_kernel(void)
- 
- 	/* Prevent unwanted bits from being set in PTEs. */
- 	__supported_pte_mask &= ~_PAGE_GLOBAL;
-+	__default_kernel_pte_mask &= ~_PAGE_GLOBAL;
- 
- 	/*
- 	 * Prevent page tables from being allocated in highmem, even
--- 
-2.13.7
-
-
---------------661F81853FA166E9F89AC43F
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------661F81853FA166E9F89AC43F--
+T24gRnJpLCBKdW4gMjksIDIwMTggYXQgMDQ6Mjc6MDhQTSArMDEwMCwgV2VpIExpdSB3cm90ZToK
+PiBPbiBXZWQsIEp1biAyMCwgMjAxOCBhdCAwNDo0MjozNFBNICswMjAwLCBSb2dlciBQYXUgTW9u
+bmUgd3JvdGU6Cj4gPiBTbyB0aGF0IGEgUENJIGRldmljZSB0aGF0IHN1cHBvcnRzIFNSLUlPViAo
+UEYpIGNhbiBlbmFibGUgdGhlIGNhcGFiaWxpdHkKPiA+IGFuZCB1c2UgdGhlIHZpcnR1YWwgZnVu
+Y3Rpb25zLgo+ID4gCj4gPiBUaGlzIGNvZGUgaXMgZXhwZWN0ZWQgdG8gb25seSBiZSB1c2VkIGJ5
+IHByaXZpbGVnZWQgZG9tYWlucywKPiA+IHVucHJpdmlsZWdlZCBkb21haW5zIHNob3VsZCBub3Qg
+Z2V0IGFjY2VzcyB0byB0aGUgU1ItSU9WIGNhcGFiaWxpdHkuCj4gPiAKPiA+IFRoZSBjdXJyZW50
+IGNvZGUgZGV0ZWN0cyBlbmFibGluZyBvZiB0aGUgdmlydHVhbCBmdW5jdGlvbnMgZmVhdHVyZSBh
+bmQKPiA+IGF1dG9tYXRpY2FsbHkgYWRkcyB0aGUgVkZzIHRvIHRoZSBkb21haW4uIEl0IGFsc28g
+ZGV0ZWN0cyBlbmFibGluZyBvZgo+ID4gbWVtb3J5IHNwYWNlIGFuZCBtYXBzIHRoZSBWRnMgQkFS
+cyBpbnRvIHRoZSBkb21haW4gcDJtLiBEaXNhYmxpbmcgb2YKPiA+IHRoZSBWRiBlbmFibGUgYml0
+IHJlbW92ZXMgdGhlIGRldmljZXMgYW5kIHRoZSBCQVIgbWVtb3J5IG1hcCBmcm9tIHRoZQo+ID4g
+ZG9tYWluIHAybS4KPiA+IAo+ID4gU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9n
+ZXIucGF1QGNpdHJpeC5jb20+Cj4gWy4uLl0KPiA+ICAgICAgaW50IHJjOwo+ID4gQEAgLTI2MSwx
+MiArMjczLDI5IEBAIHN0YXRpYyBpbnQgbW9kaWZ5X2JhcnMoY29uc3Qgc3RydWN0IHBjaV9kZXYg
+KnBkZXYsIGJvb2wgbWFwLCBib29sIHJvbV9vbmx5KQo+ID4gICAgICAgICAgfQo+ID4gICAgICB9
+Cj4gPiAgCj4gPiArICAgIC8qIEdldCB0aGUgcGFyZW50IGRldiBpZiBpdCdzIGEgVkYuICovCj4g
+PiArICAgIGlmICggcGRldi0+aW5mby5pc192aXJ0Zm4gKQo+ID4gKyAgICB7Cj4gPiArICAgICAg
+ICBwY2lkZXZzX2xvY2soKTsKPiA+ICsgICAgICAgIHBhcmVudCA9IHBjaV9nZXRfcGRldihwZGV2
+LT5zZWcsIHBkZXYtPmluZm8ucGh5c2ZuLmJ1cywKPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwZGV2LT5pbmZvLnBoeXNmbi5kZXZmbik7Cj4gPiArICAgICAgICBwY2lkZXZzX3Vu
+bG9jaygpOwo+ID4gKyAgICB9Cj4gPiArCj4gPiAgICAgIC8qCj4gPiAgICAgICAqIENoZWNrIGZv
+ciBvdmVybGFwcyB3aXRoIG90aGVyIEJBUnMuIE5vdGUgdGhhdCBvbmx5IEJBUnMgdGhhdCBhcmUK
+PiA+ICAgICAgICogY3VycmVudGx5IG1hcHBlZCAoZW5hYmxlZCkgYXJlIGNoZWNrZWQgZm9yIG92
+ZXJsYXBzLgo+ID4gICAgICAgKi8KPiA+ICAgICAgbGlzdF9mb3JfZWFjaF9lbnRyeSh0bXAsICZw
+ZGV2LT5kb21haW4tPmFyY2gucGRldl9saXN0LCBkb21haW5fbGlzdCkKPiA+ICAgICAgewo+ID4g
+KyAgICAgICAgLyoKPiA+ICsgICAgICAgICAqIFdoZW4gbWFwcGluZyB0aGUgQkFScyBvZiBhIFZG
+IHRoZSBwYXJlbnQgUEYgaXMgYWxyZWFkeSBsb2NrZWQsCj4gPiArICAgICAgICAgKiB0cnlpbmcg
+dG8gbG9jayBpdCB3aWxsIHJlc3VsdCBpbiBhIGRlYWRsb2NrLiBUaGlzIGlzIGJlY2F1c2UKPiA+
+ICsgICAgICAgICAqIHZwY2lfbW9kaWZ5X2JhcnMgaXMgY2FsbGVkIGZyb20gdGhlIHBhcmVudCBQ
+RiBjb250cm9sX3dyaXRlIHJlZ2lzdGVyCj4gPiArICAgICAgICAgKiBoYW5kbGVyLgo+ID4gKyAg
+ICAgICAgICovCj4gPiArICAgICAgICBib29sIGxvY2sgPSBwYXJlbnQgIT0gdG1wOwo+IAo+IFRo
+ZXJlIGlzIHNwaW5fbG9ja19yZWN1cnNpdmUuIFdvdWxkIHRoYXQgd29yaz8KClllcywgYnV0IEkg
+d2Fzbid0IHN1cmUgd2hldGhlciB0aGlzIHNpbmdsZSB1c2FnZSBvZiByZWN1cnNpdmVuZXNzCndv
+dWxkIGJlIGVub3VnaCB0byBzd2l0Y2ggdGhlIGxvY2sgdG8gYSByZWN1cnNpdmUgb25lLiBJIGNh
+biBzd2l0Y2ggaXQKaWYgdGhlcmUncyBjb25zZW5zdXMuCgo+IFsuLi5dCj4gPiArc3RhdGljIGlu
+dCBpbml0X3NyaW92KHN0cnVjdCBwY2lfZGV2ICpwZGV2KQo+ID4gK3sKPiA+ICsgICAgdW5zaWdu
+ZWQgaW50IHBvcyA9IHBjaV9maW5kX2V4dF9jYXBhYmlsaXR5KHBkZXYtPnNlZywgcGRldi0+YnVz
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGRl
+di0+ZGV2Zm4sCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBQQ0lfRVhUX0NBUF9JRF9TUklPVik7Cj4gPiArICAgIHVpbnQxNl90IHRvdGFsX3ZmczsK
+PiA+ICsKPiA+ICsgICAgaWYgKCAhcG9zICkKPiA+ICsgICAgICAgIHJldHVybiAwOwo+ID4gKwo+
+ID4gKyAgICB0b3RhbF92ZnMgPSBwY2lfY29uZl9yZWFkMTYocGRldi0+c2VnLCBwZGV2LT5idXMs
+IFBDSV9TTE9UKHBkZXYtPmRldmZuKSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIFBDSV9GVU5DKHBkZXYtPmRldmZuKSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBvcyArIFBDSV9TUklPVl9UT1RBTF9WRik7Cj4gPiArCj4gPiArICAgIHBkZXYtPnZw
+Y2ktPnNyaW92ID0geHphbGxvY19ieXRlcyhTUklPVl9TSVpFKHRvdGFsX3ZmcykpOwo+ID4gKyAg
+ICBpZiAoICFwZGV2LT52cGNpLT5zcmlvdiApCj4gPiArICAgICAgICByZXR1cm4gLUVOT01FTTsK
+PiA+ICsKPiA+ICsgICAgcmV0dXJuIHZwY2lfYWRkX3JlZ2lzdGVyKHBkZXYtPnZwY2ksIHZwY2lf
+aHdfcmVhZDE2LCBjb250cm9sX3dyaXRlLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcG9zICsgUENJX1NSSU9WX0NUUkwsIDIsIHBkZXYtPnZwY2ktPnNyaW92KTsKPiAKPiBJZiB2
+cGNpX2FkZF9yZWdpc3RlciBmYWlscyBzcmlvdiBpcyBnb2luZyB0byBiZSBsZWFrZWQ/IE9yIGV2
+ZW50dWFsbHkKPiB0aGF0IHdpbGwgY2F1c2UgdGhlIGRvbWFpbiB0byBjcmFzaCBpbiB0ZWFyZG93
+bi4KCnNyaW92IHNob3VsZCBiZSBmcmVlZCBieSB2cGNpX3JlbW92ZV9kZXZpY2UsIGJ1dCBJIHRo
+aW5rIEkndmUgbWlzc2VkCnRvIGFkZCB0aGUgZnJlZSBpbiB0aGVyZS4uLgoKPiBJIHRoaW5rIGl0
+IHdvdWxkIG1ha2UgbW9yZSBzZW5zZSBpZiBpbml0X3NyaW92IGlzIGFibGUgdG8gY2xlYW4gdXAg
+YWZ0ZXIKPiBpdHNlbGYuIE1TSSBhbmQgTVNJLVggY29kZSBoYXMgc2ltaWxhciBpc3N1ZS4KClll
+cywgYXMgc2FpZCBpbiBwcmV2aW91cyBwYXRjaGVzIEkgZG9uJ3QgbWluZCBtb3ZpbmcgdGhlIGZy
+ZWVpbmcgaW50bwp0aGUgdGVhcmRvd24gaGVscGVycyAoYW5kIGFsc28gYWRkIGZyZWVzIGluIHRo
+ZSBpbml0IGhlbHBlcnMgaW4gdGhlCmVycm9yIGNhc2VzKS4KClJvZ2VyLgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
