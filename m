@@ -1,9 +1,11 @@
-From: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH 2/3] osstest: set the make command to use for
- xen-build
-Date: Mon, 2 Jul 2018 10:41:01 +0200
-Message-ID: <20180702084102.90577-3-roger.pau@citrix.com>
-References: <20180702084102.90577-1-roger.pau@citrix.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH 2/4] tests: disable x86 emulator test
+ harness when using clang
+Date: Mon, 2 Jul 2018 10:45:43 +0200
+Message-ID: <20180702084543.u5aphtzhjkmt4tmm@mac.bytemobile.com>
+References: <20180702082826.90272-1-roger.pau@citrix.com>
+ <20180702082826.90272-3-roger.pau@citrix.com>
+ <20180702083511.tythi36lhr6h2s5g@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -11,9 +13,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=n1b/=js=citrix.com=prvs=714d6e1f6=roger.pau@srs-us1.protection.inumbo.net>)
- id 1fZuPI-0007YN-C3
- for xen-devel@lists.xenproject.org; Mon, 02 Jul 2018 08:42:00 +0000
-In-Reply-To: <20180702084102.90577-1-roger.pau@citrix.com>
+ id 1fZuTF-0008Cr-6p
+ for xen-devel@lists.xenproject.org; Mon, 02 Jul 2018 08:46:05 +0000
+Content-Disposition: inline
+In-Reply-To: <20180702083511.tythi36lhr6h2s5g@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,42 +25,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIGRlZmF1bHQgbWFrZSBvbiBGcmVlQlNEIGlzIHRoZSBCU0QgbWFrZSwgYW5kIFhlbiByZXF1
-aXJlcyB0aGUgR05VCm1ha2UgaW4gb3JkZXIgdG8gYnVpbGQuIFNldCB0aGUgbWFrZSBjb21tYW5k
-IGJhc2VkIG9uIHRoZSBPUyBmb3IgdGhlClhlbiBidWlsZC4KClNpZ25lZC1vZmYtYnk6IFJvZ2Vy
-IFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgotLS0KIHRzLXhlbi1idWlsZCB8IDEx
-ICsrKysrKy0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9u
-cygtKQoKZGlmZiAtLWdpdCBhL3RzLXhlbi1idWlsZCBiL3RzLXhlbi1idWlsZAppbmRleCA1Nzkx
-M2Q0Zi4uNTdhNjE1N2EgMTAwNzU1Ci0tLSBhL3RzLXhlbi1idWlsZAorKysgYi90cy14ZW4tYnVp
-bGQKQEAgLTI4LDYgKzI4LDcgQEAgdHNyZWFkY29uZmlnKCk7CiBzZWxlY3RidWlsZGhvc3QoXEBB
-UkdWKTsKIAogb3VyICRkb2tjb25maWcgPSAxOworb3VyICRtYWtlID0gJGhvLT57T1N9IGVxICJm
-cmVlYnNkIiA/ICJnbWFrZSIgOiAibWFrZSI7CiAKIHdoaWxlIChAQVJHViAmJiAkQVJHVlswXSA9
-fiBtL14tLykgewogICAgICRfID0gc2hpZnQgQEFSR1Y7CkBAIC0xNTYsMjQgKzE1NywyNCBAQCBF
-TkQKIAogICAgIGJ1aWxkY21kX3N0YW1wZWRfbG9nZ2VkKDYwMCwgJ3hlbicsICdrY29uZmlnJywg
-JycsPDxFTkQsJycpIGlmICRkb2tjb25maWc7CiAgICAgICAgICAgICBpZiB0ZXN0IC1mIHhlbi9L
-Y29uZmlnOyB0aGVuCi0gICAgICAgICAgICAgICAgJG1ha2VfcHJlZml4IG1ha2UgLUMgeGVuIG9s
-ZGRlZmNvbmZpZworICAgICAgICAgICAgICAgICRtYWtlX3ByZWZpeCAkbWFrZSAtQyB4ZW4gb2xk
-ZGVmY29uZmlnCiAgICAgICAgICAgICBmaQogRU5ECiAKICAgICBpZiAoIUBtYWtlX2FyZ3MpIHsK
-IAlidWlsZGNtZF9zdGFtcGVkX2xvZ2dlZCg5MDAwLCAneGVuJywgJ2J1aWxkJywgJycsPDxFTkQs
-JycpOwotICAgICAgICAgICAgJG1ha2VfcHJlZml4IG1ha2UgJG1ha2VmbGFncyBidWlsZAorICAg
-ICAgICAgICAgJG1ha2VfcHJlZml4ICRtYWtlICRtYWtlZmxhZ3MgYnVpbGQKIEVORAogICAgIH0K
-IAogICAgIGJ1aWxkY21kX3N0YW1wZWRfbG9nZ2VkKDkwMDAsICd4ZW4nLCAnYWxsJywgJycsPDxF
-TkQsJycpOwotICAgICAgICAgICAgJG1ha2VfcHJlZml4IG1ha2UgJG1ha2VmbGFncyBAbWFrZV9h
-cmdzCisgICAgICAgICAgICAkbWFrZV9wcmVmaXggJG1ha2UgJG1ha2VmbGFncyBAbWFrZV9hcmdz
-CiBFTkQKIAogICAgIGlmICgkZW5hYmxlX3hzbSkgewogCW15ICR4ZW5fdmVyc2lvbiA9IHRhcmdl
-dF9jbWRfb3V0cHV0KCRobywgPDxFTkQsIDMwKTsKIAkgICAgY2QgJGJ1aWxkZGlyL3hlbgotCSAg
-ICAkbWFrZV9wcmVmaXggbWFrZSB4ZW52ZXJzaW9uCisJICAgICRtYWtlX3ByZWZpeCAkbWFrZSB4
-ZW52ZXJzaW9uCiBFTkQKIAlzdG9yZV9ydW52YXIoImZsYXNrcG9saWN5IiwgInhlbnBvbGljeS0i
-IC4gJHhlbl92ZXJzaW9uKTsKICAgICB9CkBAIC0xODEsNyArMTgyLDcgQEAgRU5ECiAgICAgaWYg
-KCRlbmFibGVfbGl2ZXBhdGNoKSB7CiAJc3Vic3RlcF9ldmFsKCcvZGlzdC10ZXN0Jywgc3ViIHsK
-IAkgICAgYnVpbGRjbWRfc3RhbXBlZF9sb2dnZWQoNjAwLCAneGVuJywgJ3hlbmxwdCcsICcnLDw8
-RU5ELCcnKTsKLSAgICAgICAgICAgICRtYWtlX3ByZWZpeCBtYWtlICRtYWtlZmxhZ3MgZGlzdC10
-ZXN0cworICAgICAgICAgICAgJG1ha2VfcHJlZml4ICRtYWtlICRtYWtlZmxhZ3MgZGlzdC10ZXN0
-cwogRU5ECiAJfSk7CiAgICAgfQotLSAKMi4xNy4xCgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gTW9uLCBKdWwgMDIsIDIwMTggYXQgMDk6MzU6MTFBTSArMDEwMCwgV2VpIExpdSB3cm90ZToK
+PiBPbiBNb24sIEp1bCAwMiwgMjAxOCBhdCAxMDoyODoyNEFNICswMjAwLCBSb2dlciBQYXUgTW9u
+bmUgd3JvdGU6Cj4gPiBjbGFuZyBpcyBub3QgY2FwYWJsZSBvZiBidWlsZGluZyB0aGUgeDg2IGVt
+dWxhdG9yIHRlc3QgaGFybmVzcywgc28KPiA+IGRpc2Nvbm5lY3QgaXQgZnJvbSB0aGUgY2xhbmcg
+YnVpbGQgdW50aWwgaXQgY2FuIGJlIGZpeGVkLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBSb2dl
+ciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KPiAKPiBPaCB3ZWxsLgo+IAo+IEFj
+a2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+IAo+IERvbid0IHlvdSBuZWVk
+IHRvIGRpc2FibGUgYWZsIGhhcm5lc3MgYnVpbGQgYXMgd2VsbD8KCkhtLCB0aGF0IHNlZW1zIHRv
+IGJ1aWxkIGZpbmUgc28gZmFyIChhdCBsZWFzdCBpbiBteSB0ZXN0cyksIHNvIEkgd2lsbApsZWF2
+ZSBpdCBmb3Igbm93LgoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
