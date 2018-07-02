@@ -1,9 +1,9 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] xen/ACPI: don't upload Px/Cx data for
- disabled processors
-Date: Mon, 2 Jul 2018 15:51:21 +0200
-Message-ID: <b007f4c7-b533-d7c3-c622-2163966189fa@suse.com>
-References: <5B30C13F02000078001CD68D@suse.com>
+Subject: Re: [PATCH RESEND] xen/mcelog: eliminate redundant
+ setting of interface version
+Date: Mon, 2 Jul 2018 15:52:40 +0200
+Message-ID: <057f151e-99b0-a8cc-8066-e2fcb31801be@suse.com>
+References: <5B30C1C402000078001CD6A2@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -11,9 +11,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=37lk=js=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fZzEk-0007dA-52
- for xen-devel@lists.xenproject.org; Mon, 02 Jul 2018 13:51:26 +0000
-In-Reply-To: <5B30C13F02000078001CD68D@suse.com>
+ id 1fZzFz-0007hr-6m
+ for xen-devel@lists.xenproject.org; Mon, 02 Jul 2018 13:52:43 +0000
+In-Reply-To: <5B30C1C402000078001CD6A2@suse.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,24 +23,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Len Brown <lenb@kernel.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, "Rafael J. Wysocki" <rjw@rjwysocki.net>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, linux-acpi@vger.kernel.org
+To: Jan Beulich <JBeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjUvMDYvMTggMTI6MTcsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFRoaXMgaXMgdW5uZWNlc3Nh
-cnkgYW5kIHRyaWdnZXJzIGEgd2FybmluZyBpbiB0aGUgaHlwZXJ2aXNvci4KPiAKPiBPZnRlbiBz
-eXN0ZW1zIGhhdmUgbW9yZSBwcm9jZXNzb3IgZW50cmllcyBpbiB0aGVpciBBQ1BJIHRhYmxlcyB0
-aGFuIGFyZQo+IGFjdHVhbGx5IGluc3RhbGxlZC9hY3RpdmUuIFRoZSBBQ1BJX1NUQV9ERVZJQ0Vf
-UFJFU0VOVCBiaXQgY2Fubm90IGJlCj4gcmVsaWFibHkgdXNlZCwgYnV0IHRoZSBBQ1BJX01BRFRf
-RU5BQkxFRCBiaXQgY2FuLiBJbiBvcmRlciB0byBub3QKPiBpbnRyb2R1Y2UgbmV3IGZ1bmN0aW9u
-cyBpbiB0aGUgbWFpbiBBQ1BJIHByb2Nlc3NvciBkcml2ZXIgY29kZSwgc2ltcGx5Cj4gdXNlIGFj
-cGlfZ2V0X3BoeXNfaWQoKSwgd2hpY2ggZG9lcyBtb3JlIHRoYW4gd2UgbmVlZCwgYnV0IHdoaWNo
-IGNoZWNrcwo+IHRoZSBNQURUIGVuYWJsZWQgYml0IGluIHRoZSBwcm9jZXNzLiBBbnkgQ1BVIGZv
-ciB3aGljaCB3ZSBjYW4ndAo+IGRldGVybWluZSB0aGUgQVBJQyBJRCBpcyB1bmxpa2VseSB0byB3
-b3JrIHByb3Blcmx5IGFueXdheSwgc28gdGhlIGV4dHJhCj4gY2hlY2tzIGRvbmUgYnkgYWNwaV9n
-ZXRfcGh5c19pZCgpIHNob3VsZCBkbyBubyBoYXJtLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBC
-ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KClJldmlld2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxq
-Z3Jvc3NAc3VzZS5jb20+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+T24gMjUvMDYvMTggMTI6MTksIEphbiBCZXVsaWNoIHdyb3RlOgo+IFRoaXMgYWxyZWFkeSBnZXRz
+IGRvbmUgaW4gSFlQRVJWSVNPUl9tY2EoKS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGlj
+aCA8amJldWxpY2hAc3VzZS5jb20+CgpSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3Nz
+QHN1c2UuY29tPgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
