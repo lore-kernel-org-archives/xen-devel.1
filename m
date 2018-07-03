@@ -1,16 +1,19 @@
-From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Subject: Re: [PATCH RFC 03/15] xen/arm: extend device tree based
- multiboot protocol
-Date: Tue, 3 Jul 2018 18:35:35 +0900
-Message-ID: <CAJy5ezp50=UpYXActfqadGVL7m1NVk5BTwXnUTtQiY+Op59f3w@mail.gmail.com>
-References: <alpine.DEB.2.10.1806131457490.14695@sstabellini-ThinkPad-X260>
- <1528928118-14960-3-git-send-email-sstabellini@kernel.org>
- <30b92df4-ae73-1803-94af-14a128c59746@arm.com>
- <alpine.DEB.2.10.1807021338290.23811@sstabellini-ThinkPad-X260>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v3.1] libxl: Design of an async API to issue QMP
+ commands to QEMU
+Date: Tue, 3 Jul 2018 10:47:41 +0100
+Message-ID: <20180703094741.4211-1-anthony.perard@citrix.com>
+References: <20180601143720.24637-1-anthony.perard@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7931161671759951305=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1807021338290.23811@sstabellini-ThinkPad-X260>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=uprr=jt=citrix.com=prvs=71530daac=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1faHuY-0007Iv-UK
+ for xen-devel@lists.xenproject.org; Tue, 03 Jul 2018 09:47:50 +0000
+In-Reply-To: <20180601143720.24637-1-anthony.perard@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,451 +22,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Artem Mygaiev <artem_mygaiev@epam.com>, Stefano Stabellini <stefanos@xilinx.com>, Julien Grall <julien.grall@arm.com>, andrii_anisov@epam.com, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7931161671759951305==
-Content-Type: multipart/alternative; boundary="000000000000b36b5305701502f3"
-
---000000000000b36b5305701502f3
-Content-Type: text/plain; charset="UTF-8"
-
-Hi, Sorry for the top post (I'm not managing todo in line reply with my
-phone).
-
-Yes, in the long run it there are some benefits if the format could be kept
-similar when possible. We could reuse some of the documentation and perhaps
-some of the code to parse. Allthough I'm guessing that most of the xl
-parsing is not readily reusable from the hypervisor itself.
-
-On the other hand, perhaps the xl format parser is too complex and not
-something we would like be reused from within the hypervisor itself?
-Considering that one of the use cases for dom0 less is certification.
-
-So an alternative if we don't try to reuse the xl format as much as
-possible could be to create a new syntax that is as easy as possible to
-parse.
-
-I'm not very convinced on what path is best at the moment.
-
-Regarding strings vs dtb numbers with cells, don't we already have a
-generic dtb function that parses numbers and considers the #cells that
-could be reused?
-
-Best regards,
-Edgar
-
-On Tue, Jul 3, 2018, 06:32 Stefano Stabellini <sstabellini@kernel.org>
-wrote:
-
-> On Thu, 14 Jun 2018, Julien Grall wrote:
-> > Hi Stefano,
-> >
-> > On 13/06/18 23:15, Stefano Stabellini wrote:
-> > > Extend the existing device tree based multiboot protocol to include
-> > > information regarding other domUs to boot.
-> > >
-> > > Signed-off-by: Stefano Stabellini <stefanos@xilinx.com>
-> > > ---
-> > >   docs/misc/arm/device-tree/booting.txt | 102
-> > > ++++++++++++++++++++++++++++++++++
-> > >   1 file changed, 102 insertions(+)
-> > >
-> > > diff --git a/docs/misc/arm/device-tree/booting.txt
-> > > b/docs/misc/arm/device-tree/booting.txt
-> > > index ce2d0dc..95255e5 100644
-> > > --- a/docs/misc/arm/device-tree/booting.txt
-> > > +++ b/docs/misc/arm/device-tree/booting.txt
-> > > @@ -119,3 +119,105 @@ For those you would hardcode the Xen commandline
-> in
-> > > the DTB under
-> > >   line by writing bootargs (as for native Linux).
-> > >   A Xen-aware bootloader would set xen,xen-bootargs for Xen,
-> > > xen,dom0-bootargs
-> > >   for Dom0 and bootargs for native Linux.
-> > > +
-> > > +
-> > > +Creating DomUs directly from Xen
-> > > +================================
-> > > +
-> > > +It is possible to have Xen create other domains, in addition to dom0,
-> > > +out of the information provided via device tree. A Kernel and initrd
-> >
-> > NIT: s/Kernel/kernel/
->
-> OK
->
->
-> > > +(optional) need to be specified for each guest.
-> > > +
-> > > +For each DomU to be created there needs to be one node under /chosen
-> > > +with the following properties:
-> >
-> > I think it would be better to make this domain agnostic. I.e allow Dom0
-> to be
-> > created the same way but still supporting the current bindings.
-> >
-> > We could differentiate Dom0 from the other with a property
-> > "xen,initial-domain". Note that I am not asking to add this property in
-> this
-> > series. This is more a forward looking of the use of this binding.
->
-> It sounds like a good idea, I'll add it.
->
->
-> > > +
-> > > +- compatible
-> > > +
-> > > +    "xen,domU"
-> >
-> > If we follow my suggestion, this would be renamed "xen,domain".
->
-> OK
->
->
-> > > +
-> > > +- mem (optional)
-> >
-> > I would prefer the full name "memory".
->
-> Yes, especially given that the corresponding xl config file option is
-> called "memory".
->
->
-> > > +
-> > > +    A string specifying the amount of RAM to allocate to the guest. If
-> > > +    not specified it defaults to "64M". The format of the string is
-> the
-> > > same
-> > > +    as the one for the mem= parameter in xl config files.
-> >
-> > I don't much like default values because they are pretty arbitrary. This
-> also
-> > does not match the default value for Dom0. Why don't you mandate the
-> property?
->
-> Yes, I can do that.
->
->
-> > I would also prefer if the size is specified in the same way number are
-> > described in Device-Tree. I.e using cells. You could impose 2 cells for
-> the
-> > size here.
->
-> see below
->
->
-> > > +
-> > > +- cpus (optional)
-> > > +
-> > > +    A string specifying the number of vcpus to allocate to the guest.
-> If
-> > > +    not specified it defaults to "1".
-> >
-> > Same remarks as for "mem".
->
-> I think it would be nicer if we kept the same format used for xl config
-> files for these two options. Especially given that we already have the
-> functions in the hypervisor to parse them (Xen knows how to parse
-> dom0_max_vcpus and dom0_mem for instance). It is going to be easier to
-> use and it doesn't come with a cost for Xen.
->
-> Edgar, what do you think?
->
->
-> > > +
-> > > +- #address-cells and #size-cells
-> > > +
-> > > +    Both #address-cells and #size-cells need to be specified because
-> > > +    both sub-nodes (described shortly) have reg properties.
-> > > +
-> > > +Under the "xen,domU" compatible node, one or more sub-nodes are
-> present
-> > > +for the DomU kernel and ramdisk.
-> > > +
-> > > +The kernel sub-node has the following properties:
-> > > +
-> > > +- compatible
-> > > +
-> > > +    "multiboot,domU-kernel"
-> >
-> > I don't think we need to specify a new compatible here. We could re-use
-> > "multiboot,kernel" here because the parent node will contain "xen,domU".
->
-> Yes you are right
->
->
-> > > +
-> > > +- reg
-> > > +
-> > > +    Specifies the physical address of the kernel in RAM and its
-> > > +    length.
-> > > +
-> > > +- bootargs (optional)
-> > > +
-> > > +    Command line parameters for the guest kernel.
-> > > +
-> > > +The ramdisk sub-node has the following properties:
-> > > +
-> > > +- compatible
-> > > +
-> > > +    "multiboot,domU-ramdisk"
-> >
-> > Same here, we could re-use "multiboot,ramdisk".
->
-> OK
->
->
-> > > +
-> > > +- reg
-> > > +
-> > > +    Specifies the physical address of the ramdisk in RAM and its
-> > > +    length.
-> >
-> > We should mention somewhere that this should be described in the /chosen
-> node
-> > of the device-tree.
->
-> OK
->
-> _______________________________________________
-> Xen-devel mailing list
-> Xen-devel@lists.xenproject.org
-> https://lists.xenproject.org/mailman/listinfo/xen-devel
-
---000000000000b36b5305701502f3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div>Hi, Sorry for the top post (I&#39;m not managing tod=
-o in line reply with my phone).=C2=A0</div><div dir=3D"auto"><br></div><div=
- dir=3D"auto">Yes, in the long run it there are some benefits if the format=
- could be kept similar when possible. We could reuse some of the documentat=
-ion and perhaps some of the code to parse. Allthough I&#39;m guessing that =
-most of the xl parsing is not readily reusable from the hypervisor itself.<=
-/div><div dir=3D"auto"><br></div><div dir=3D"auto">On the other hand, perha=
-ps the xl format parser is too complex and not something we would like be r=
-eused from within the hypervisor itself? Considering that one of the use ca=
-ses for dom0 less is certification.</div><div dir=3D"auto"><br></div><div d=
-ir=3D"auto">So an alternative if we don&#39;t try to reuse the xl format as=
- much as possible could be to create a new syntax that is as easy as possib=
-le to parse.</div><div dir=3D"auto"><br></div><div dir=3D"auto">I&#39;m not=
- very convinced on what path is best at the moment.</div><div dir=3D"auto">=
-<br></div><div dir=3D"auto">Regarding strings vs dtb numbers with cells, do=
-n&#39;t we already have a generic dtb function that parses numbers and cons=
-iders the #cells that could be reused?</div><div dir=3D"auto"><br></div><di=
-v dir=3D"auto">Best regards,=C2=A0</div><div dir=3D"auto">Edgar=C2=A0<br><b=
-r><div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr">On Tue, Jul 3, 2=
-018, 06:32 Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org"=
->sstabellini@kernel.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
-ex">On Thu, 14 Jun 2018, Julien Grall wrote:<br>
-&gt; Hi Stefano,<br>
-&gt; <br>
-&gt; On 13/06/18 23:15, Stefano Stabellini wrote:<br>
-&gt; &gt; Extend the existing device tree based multiboot protocol to inclu=
-de<br>
-&gt; &gt; information regarding other domUs to boot.<br>
-&gt; &gt; <br>
-&gt; &gt; Signed-off-by: Stefano Stabellini &lt;<a href=3D"mailto:stefanos@=
-xilinx.com" target=3D"_blank" rel=3D"noreferrer">stefanos@xilinx.com</a>&gt=
-;<br>
-&gt; &gt; ---<br>
-&gt; &gt;=C2=A0 =C2=A0docs/misc/arm/device-tree/booting.txt | 102<br>
-&gt; &gt; ++++++++++++++++++++++++++++++++++<br>
-&gt; &gt;=C2=A0 =C2=A01 file changed, 102 insertions(+)<br>
-&gt; &gt; <br>
-&gt; &gt; diff --git a/docs/misc/arm/device-tree/booting.txt<br>
-&gt; &gt; b/docs/misc/arm/device-tree/booting.txt<br>
-&gt; &gt; index ce2d0dc..95255e5 100644<br>
-&gt; &gt; --- a/docs/misc/arm/device-tree/booting.txt<br>
-&gt; &gt; +++ b/docs/misc/arm/device-tree/booting.txt<br>
-&gt; &gt; @@ -119,3 +119,105 @@ For those you would hardcode the Xen comman=
-dline in<br>
-&gt; &gt; the DTB under<br>
-&gt; &gt;=C2=A0 =C2=A0line by writing bootargs (as for native Linux).<br>
-&gt; &gt;=C2=A0 =C2=A0A Xen-aware bootloader would set xen,xen-bootargs for=
- Xen,<br>
-&gt; &gt; xen,dom0-bootargs<br>
-&gt; &gt;=C2=A0 =C2=A0for Dom0 and bootargs for native Linux.<br>
-&gt; &gt; +<br>
-&gt; &gt; +<br>
-&gt; &gt; +Creating DomUs directly from Xen<br>
-&gt; &gt; +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-&gt; &gt; +<br>
-&gt; &gt; +It is possible to have Xen create other domains, in addition to =
-dom0,<br>
-&gt; &gt; +out of the information provided via device tree. A Kernel and in=
-itrd<br>
-&gt; <br>
-&gt; NIT: s/Kernel/kernel/<br>
-<br>
-OK<br>
-<br>
-<br>
-&gt; &gt; +(optional) need to be specified for each guest.<br>
-&gt; &gt; +<br>
-&gt; &gt; +For each DomU to be created there needs to be one node under /ch=
-osen<br>
-&gt; &gt; +with the following properties:<br>
-&gt; <br>
-&gt; I think it would be better to make this domain agnostic. I.e allow Dom=
-0 to be<br>
-&gt; created the same way but still supporting the current bindings.<br>
-&gt; <br>
-&gt; We could differentiate Dom0 from the other with a property<br>
-&gt; &quot;xen,initial-domain&quot;. Note that I am not asking to add this =
-property in this<br>
-&gt; series. This is more a forward looking of the use of this binding.<br>
-<br>
-It sounds like a good idea, I&#39;ll add it.<br>
-<br>
-<br>
-&gt; &gt; +<br>
-&gt; &gt; +- compatible<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 &quot;xen,domU&quot;<br>
-&gt; <br>
-&gt; If we follow my suggestion, this would be renamed &quot;xen,domain&quo=
-t;.<br>
-<br>
-OK<br>
-<br>
-<br>
-&gt; &gt; +<br>
-&gt; &gt; +- mem (optional)<br>
-&gt; <br>
-&gt; I would prefer the full name &quot;memory&quot;.<br>
-<br>
-Yes, especially given that the corresponding xl config file option is<br>
-called &quot;memory&quot;.<br>
-<br>
-<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 A string specifying the amount of RAM to allocate =
-to the guest. If<br>
-&gt; &gt; +=C2=A0 =C2=A0 not specified it defaults to &quot;64M&quot;. The =
-format of the string is the<br>
-&gt; &gt; same<br>
-&gt; &gt; +=C2=A0 =C2=A0 as the one for the mem=3D parameter in xl config f=
-iles.<br>
-&gt; <br>
-&gt; I don&#39;t much like default values because they are pretty arbitrary=
-. This also<br>
-&gt; does not match the default value for Dom0. Why don&#39;t you mandate t=
-he property?<br>
-<br>
-Yes, I can do that.<br>
-<br>
-<br>
-&gt; I would also prefer if the size is specified in the same way number ar=
-e<br>
-&gt; described in Device-Tree. I.e using cells. You could impose 2 cells fo=
-r the<br>
-&gt; size here.<br>
-<br>
-see below<br>
-<br>
-<br>
-&gt; &gt; +<br>
-&gt; &gt; +- cpus (optional)<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 A string specifying the number of vcpus to allocat=
-e to the guest. If<br>
-&gt; &gt; +=C2=A0 =C2=A0 not specified it defaults to &quot;1&quot;.<br>
-&gt; <br>
-&gt; Same remarks as for &quot;mem&quot;.<br>
-<br>
-I think it would be nicer if we kept the same format used for xl config<br>
-files for these two options. Especially given that we already have the<br>
-functions in the hypervisor to parse them (Xen knows how to parse<br>
-dom0_max_vcpus and dom0_mem for instance). It is going to be easier to<br>
-use and it doesn&#39;t come with a cost for Xen.<br>
-<br>
-Edgar, what do you think?<br><br>
-<br>
-&gt; &gt; +<br>
-&gt; &gt; +- #address-cells and #size-cells<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 Both #address-cells and #size-cells need to be spe=
-cified because<br>
-&gt; &gt; +=C2=A0 =C2=A0 both sub-nodes (described shortly) have reg proper=
-ties.<br>
-&gt; &gt; +<br>
-&gt; &gt; +Under the &quot;xen,domU&quot; compatible node, one or more sub-=
-nodes are present<br>
-&gt; &gt; +for the DomU kernel and ramdisk.<br>
-&gt; &gt; +<br>
-&gt; &gt; +The kernel sub-node has the following properties:<br>
-&gt; &gt; +<br>
-&gt; &gt; +- compatible<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 &quot;multiboot,domU-kernel&quot;<br>
-&gt; <br>
-&gt; I don&#39;t think we need to specify a new compatible here. We could r=
-e-use<br>
-&gt; &quot;multiboot,kernel&quot; here because the parent node will contain=
- &quot;xen,domU&quot;.<br>
-<br>
-Yes you are right<br>
-<br>
-<br>
-&gt; &gt; +<br>
-&gt; &gt; +- reg<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 Specifies the physical address of the kernel in RA=
-M and its<br>
-&gt; &gt; +=C2=A0 =C2=A0 length.<br>
-&gt; &gt; +<br>
-&gt; &gt; +- bootargs (optional)<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 Command line parameters for the guest kernel.<br>
-&gt; &gt; +<br>
-&gt; &gt; +The ramdisk sub-node has the following properties:<br>
-&gt; &gt; +<br>
-&gt; &gt; +- compatible<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 &quot;multiboot,domU-ramdisk&quot;<br>
-&gt; <br>
-&gt; Same here, we could re-use &quot;multiboot,ramdisk&quot;.<br>
-<br>
-OK<br>
-<br>
-<br>
-&gt; &gt; +<br>
-&gt; &gt; +- reg<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 Specifies the physical address of the ramdisk in R=
-AM and its<br>
-&gt; &gt; +=C2=A0 =C2=A0 length.<br>
-&gt; <br>
-&gt; We should mention somewhere that this should be described in the /chos=
-en node<br>
-&gt; of the device-tree.<br>
-<br>
-OK<br>
-<br>
-_______________________________________________<br>
-Xen-devel mailing list<br>
-<a href=3D"mailto:Xen-devel@lists.xenproject.org" target=3D"_blank" rel=3D"=
-noreferrer">Xen-devel@lists.xenproject.org</a><br>
-<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
-noreferrer noreferrer" target=3D"_blank">https://lists.xenproject.org/mailm=
-an/listinfo/xen-devel</a></blockquote></div></div></div>
-
---000000000000b36b5305701502f3--
-
-
---===============7931161671759951305==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7931161671759951305==--
+QWxsIHRoZSBmdW5jdGlvbnMgd2lsbCBiZSBpbXBsZW1lbnRlZCBpbiBsYXRlciBwYXRjaGVzLgoK
+U2lnbmVkLW9mZi1ieTogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+
+CgotLS0KCldoYXQgZG8geW91IHRoaW5rIG9mIHRoaXMgZGVzaWduPyBUaGlzIGlzIHRoZSBzYW1l
+IGFzIGluIG15IHBhdGNoIHNlcmllcwp3aXRoIG5ldyBuYW1lcyAodG8gYXZvaWQgY29uZnVzaW9u
+IHdpdGggbGlieGxfX19ldl8qKSBhbmQgZG9jdW1lbnRhdGlvbi4KCkknbGwgd3JpdGUgc29tZXRo
+aW5nIGFzIHdlbGwgZm9yIHRoZSBpbnRlcm5hbCBvZiB0aGUgZW5naW5lICh0aGUgUU1QCmNsaWVu
+dCBpdHNlbGYpLgotLS0KIHRvb2xzL2xpYnhsL2xpYnhsX2ludGVybmFsLmggICAgICAgICB8IDk4
+ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysKIHRvb2xzL2xpYnhsL2xpYnhsX3R5cGVzX2lu
+dGVybmFsLmlkbCB8IDE0ICsrKysKIDIgZmlsZXMgY2hhbmdlZCwgMTEyIGluc2VydGlvbnMoKykK
+CmRpZmYgLS1naXQgYS90b29scy9saWJ4bC9saWJ4bF9pbnRlcm5hbC5oIGIvdG9vbHMvbGlieGwv
+bGlieGxfaW50ZXJuYWwuaAppbmRleCBjNTgyODk0NTg5Li5hYzVhOGEyMWYyIDEwMDY0NAotLS0g
+YS90b29scy9saWJ4bC9saWJ4bF9pbnRlcm5hbC5oCisrKyBiL3Rvb2xzL2xpYnhsL2xpYnhsX2lu
+dGVybmFsLmgKQEAgLTM1Nyw2ICszNTcsMTA0IEBAIHN0cnVjdCBsaWJ4bF9fZXZfY2hpbGQgewog
+fTsKIAogCisvKgorICogUU1QIGFzeW5jaHJvbm91cyBjYWxscworICovCisKKy8qCisgKiBUaGlz
+IHN0cnVjdCBpcyB1c2VkIHRvIHJlZ2lzdGVyIG9uZSBjb21tYW5kIHRvIHNlbmQgdG8gUUVNVSB3
+aXRoIGFuCisgKiBhc3NvY2lhdGVkIGNhbGxiYWNrLgorICoKKyAqIFBvc3NpYmxlIHN0YXRlczoK
+KyAqICBVbmRlZmluZWQKKyAqICAgIE1pZ2h0IGNvbnRhaW4gYW55dGhpbmcuCisgKiAgSWRsZQor
+ICogICAgU3RydWN0IGNvbnRlbnRzIGFyZSBkZWZpbmVkIGVub3VnaCB0byBwYXNzIHRvIGFueQor
+ICogICAgbGlieGxfX3FtcF9jbWRfKiBmdW5jdGlvbnMgYnV0IGlzIG5vdCByZWdpc3RlcmVkIGFu
+ZCBjYWxsYmFjaworICogICAgd2lsbCBub3QgYmUgY2FsbGVkLiBUaGUgc3RydWN0IGRvZXMgbm90
+IGNvbnRhaW4gcmVmZXJlbmNlcyB0bworICogICAgYW55IGFsbG9jYXRlZCByZXNvdXJjZXMgc28g
+Y2FuIGJlIHRocm93biBhd2F5LgorICogIEFjdGl2ZQorICogICAgQ3VycmVudGx5IHdhaXRpbmcg
+Zm9yIGEgcmVzcG9uc2UgZnJvbSBRRU1VLCBhbmQgY2FsbGJhY2sgY2FuIGJlCisgKiAgICBjYWxs
+ZWQuIF9kaXNwb3NlIG11c3QgYmUgY2FsbGVkIHRvIHJlY2xhaW0gcmVzb3VyY2VzLgorICovCit0
+eXBlZGVmIHN0cnVjdCBsaWJ4bF9fcW1wX2NtZF9zdGF0ZSBsaWJ4bF9fcW1wX2NtZF9zdGF0ZTsK
+KworLyoKKyAqIGNtZF9zdGF0ZTogICBJbiBJZGxlIHN0YXRlICh3aXRoIHZhbHVlIGRvbWlkIGF2
+YWlsYWJsZSkuCisgKiByZXNwb25zZTogICAgUU1QIHJlc3BvbnNlIG9uIHN1Y2Nlc3MsIG9yIE5V
+TEwgb24gZXJyb3IuCisgKiBlcnJvcl9jbGFzczogTk9ORSBvbiBzdWNjZXNzLCBvdGhlcndpc2Ug
+UU1QIGVycm9yIGNsYXNzIG9yIGxpYnhsIGVycm9yLgorICovCit0eXBlZGVmIGxpYnhsX19xbXBf
+Y21kX2NhbGxiYWNrKGxpYnhsX19nYyAqZ2MsCisgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIGxpYnhsX19xbXBfY21kX3N0YXRlICpjbWRfc3RhdGUsCisgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGNvbnN0IGxpYnhsX19qc29uX29iamVjdCAqcmVzcG9uc2UsCisgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIGxpYnhsX19xbXBfZXJyb3JfY2xhc3MgZXJyb3JfY2xh
+c3MpOworCisvKgorICogSW5pdGlhbGl6ZSBsaWJ4bF9fcW1wX2NtZF9zdGF0ZS4KKyAqICAgIFdo
+aWNoIG11c3QgYmUgaW4gVW5kZWZpbmVkIG9yIElkbGUgc3RhdGUuCisgKiAgICBPbiByZXR1cm4g
+aXQgaXMgSWRsZS4KKyAqLworX2hpZGRlbiB2b2lkIGxpYnhsX19xbXBfY21kX2luaXQobGlieGxf
+X3FtcF9jbWRfc3RhdGUgKmNtZF9zdGF0ZSk7CisKKy8qCisgKiBSZWdpc3RlciBhIGNvbW1hbmQg
+dG8gYmUgaXNzdWVkIHRvIFFFTVUuCisgKiAgIE9uIGVudHJ5IGNtZF9zdGF0ZSBtdXN0IGJlIElk
+bGUuCisgKiAgIFJldHVybnMgYSBsaWJ4bCBlcnJvciBjb2RlOyBvbiBlcnJvciByZXR1cm4gY21k
+X3N0YXRlIGlzIElkbGUuCisgKiAgIE9uIHN1Y2Nlc3NmdWwgcmV0dXJuIGNtZF9zdGF0ZSBpcyBB
+Y3RpdmUgYW5kIGNhbGxiYWNrIHdpbGwgYmUKKyAqICAgY2FsbGVkIGluIHRoZSBmdXR1cmUuCisg
+KiAgIENhbGxiYWNrIHdpbGwgbm90IGJlIGNhbGxlZCBmcm9tIHdpdGhpbiB0aGUgY2FsbCB0byB0
+aGlzCisgKiAgIGZ1bmN0aW9uLgorICoKKyAqIFRoaXMgZnVuY3Rpb24gd2lsbCBhdHRlbXB0IHRv
+IGNvbm5lY3QgdG8gdGhlIFFNUCBzb2NrZXQgaWYgbm90CisgKiBhbHJlYWR5IGNvbm5lY3RlZC4g
+Tm8gb3RoZXIgY29tbXVuaWNhdGlvbiB3aWxsIGJlIGRvbmUgYmVmb3JlIHRoZQorICogZnVuY3Rp
+b24gcmV0dXJucy4KKyAqCisgKiBUaGUgY2FsbGJhY2sgd2lsbCBiZSBjYWxsZWQgd2l0aCB0aGUg
+c2FtZSBjbWRfc3RhdGUsIGJ1dCB0aGUKKyAqIGNtZF9zdGF0ZSB3aWxsIGJlIElkbGUuCisgKgor
+ICogV2hlbiBjYWxsZWQgZnJvbSB3aXRoaW4gYSBjYWxsYmFjaywgdGhlIHNhbWUgUU1QIGNvbm5l
+Y3Rpb24gd2lsbCBiZQorICogcmV1c2VkIHRvIGV4ZWN1dGUgdGhlIG5ldyBjb21tYW5kLiBUaGlz
+IGlzIGltcG9ydGFudCBpbiB0aGUgY2FzZQorICogd2hlcmUgdGhlIGZpcnN0IGNvbW1hbmQgaXMg
+ImFkZC1mZCIgYW5kIHRoZSBzZWNvbmQgY29tbWFuZCB1c2UgdGhlCisgKiBmZHNldCBjcmVhdGVk
+IGJ5IFFFTVUuCisgKi8KK19oaWRkZW4gaW50IGxpYnhsX19xbXBfY21kX2V4ZWMobGlieGxfX2dj
+ICpnYywKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbGlieGxfX3FtcF9jbWRfc3Rh
+dGUgKmNtZF9zdGF0ZSwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbGlieGxfX3Ft
+cF9jbWRfY2FsbGJhY2sgKmNhbGxiYWNrLAorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICB1aW50MzJfdCBkb21pZCwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3Qg
+Y2hhciAqY21kLCBsaWJ4bF9fanNvbl9vYmplY3QgKmFyZ3MpOworCisvKgorICogT24gZW50cnks
+IGNtZF9zdGF0ZSBtdXN0IGJlIGluIHN0YXRlIEFjdGl2ZSBvciBJZGxlLgorICogT24gcmV0dXJu
+IGl0IGlzIElkbGUuCisgKi8KK19oaWRkZW4gdm9pZCBsaWJ4bF9fcW1wX2NtZF9kaXNwb3NlKGxp
+YnhsX19nYyAqZ2MsCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsaWJ4bF9f
+cW1wX2NtZF9zdGF0ZSAqY21kX3N0YXRlKTsKKworc3RydWN0IGxpYnhsX19xbXBfY21kX3N0YXRl
+IHsKKyAgICAvKiByZWFkLW9ubHkgb25jZSBBY3RpdmUgYW5kIGZyb20gd2l0aGluIHRoZSBjYWxs
+YmFjayAqLworICAgIHVpbnQzMl90IGRvbWlkOworICAgIGxpYnhsX19xbXBfY21kX2NhbGxiYWNr
+ICpjYWxsYmFjazsKKworICAgIC8qIHByaXZhdGUgKi8KKworICAgIC8qCisgICAgICogaWQgPT0g
+MDogaW5pdGlhbCBzdGF0ZSBvciByZXNwb25zZSBhbHJlYWR5IHJlY2VpdmVkIGFuZCBjYWxsYmFj
+ayBjYWxsZWQuCisgICAgICogICAgICAgICAgU3RhdGUgaXMgSWRsZS4KKyAgICAgKiBpZCA+IDA6
+ICBpZCB1c2VkIHRvIHNlbmQgYSBjb21tYW5kIHRvIHFlbXUuCisgICAgICogICAgICAgICAgU3Rh
+dGUgaXMgQWN0aXZlLgorICAgICAqLworICAgIGludCBpZDsKKyAgICBMSUJYTF9UQUlMUV9FTlRS
+WShsaWJ4bF9fZXZfcW1wKSBlbnRyeTsKKworICAgIC8qCisgICAgICogVGhpcyB2YWx1ZSBjYW4g
+YmUgaW5pdGlhbGlzZSBiZWZvcmUgY2FsbGluZyBfcW1wX2NtZF9leGVjLiBUaGUKKyAgICAgKiBm
+aWxlIGRlc2NyaXB0b3Igd2lsbCBzZW50IHRvIFFFTVUgYWxvbmcgd2l0aCB0aGUgY29tbWFuZCwg
+dGhlbgorICAgICAqIHRoZSBmZCB3aWxsIGJlIGNsb3NlZC4KKyAgICAgKi8KKyAgICBsaWJ4bF9f
+Y2FyZWZkICplZmQ7Cit9OworCisKIC8qCiAgKiBldmdlbiBzdHJ1Y3R1cmVzLCB3aGljaCBhcmUg
+dGhlIHN0YXRlIHdlIHVzZSBmb3IgZ2VuZXJhdGluZwogICogZXZlbnRzIGZvciB0aGUgY2FsbGVy
+LgpkaWZmIC0tZ2l0IGEvdG9vbHMvbGlieGwvbGlieGxfdHlwZXNfaW50ZXJuYWwuaWRsIGIvdG9v
+bHMvbGlieGwvbGlieGxfdHlwZXNfaW50ZXJuYWwuaWRsCmluZGV4IGYyZmYwMTcxOGQuLmFkYTk3
+NjE1ZDUgMTAwNjQ0Ci0tLSBhL3Rvb2xzL2xpYnhsL2xpYnhsX3R5cGVzX2ludGVybmFsLmlkbAor
+KysgYi90b29scy9saWJ4bC9saWJ4bF90eXBlc19pbnRlcm5hbC5pZGwKQEAgLTEzLDYgKzEzLDIw
+IEBAIGxpYnhsX19xbXBfbWVzc2FnZV90eXBlID0gRW51bWVyYXRpb24oInFtcF9tZXNzYWdlX3R5
+cGUiLCBbCiAgICAgKDUsICJpbnZhbGlkIiksCiAgICAgXSkKIAorbGlieGxfX3FtcF9lcnJvcl9j
+bGFzcyA9IEVudW1lcmF0aW9uKCJxbXBfZXJyb3JfY2xhc3MiLCBbCisgICAgIyBObyBlcnJvcgor
+ICAgICgwLCAiTk9ORSIpLAorICAgICMgRXJyb3IgZ2VuZXJhdGVkIGJ5IGxpYnhsIChlLmcuIHNv
+Y2tldCBjbG9zZWQgdW5leHBlY3RlZGx5LCBubyBtZW0sIC4uLikKKyAgICAoMSwgImxpYnhsX2Vy
+cm9yIiksCisgICAgIyBRTVAgZXJyb3IgY2xhc3NlcyBkZXNjcmliZWQgaW4gUUVNVSBzb3VyY2Vz
+IGNvZGUgKFFhcGlFcnJvckNsYXNzKQorICAgICgyLCAiR2VuZXJpY0Vycm9yIiksCisgICAgKDMs
+ICJDb21tYW5kTm90Rm91bmQiKSwKKyAgICAoNCwgIkRldmljZU5vdEFjdGl2ZSIpLAorICAgICg1
+LCAiRGV2aWNlTm90Rm91bmQiKSwKKyAgICAjIFVucmVjb2duaXplZCBRTVAgZXJyb3IgY2xhc3MK
+KyAgICAoNiwgIlVua25vd24iKSwKKyAgICBdKQorCiBsaWJ4bF9fZGV2aWNlX2tpbmQgPSBFbnVt
+ZXJhdGlvbigiZGV2aWNlX2tpbmQiLCBbCiAgICAgKDAsICJOT05FIiksCiAgICAgKDEsICJWSUYi
+KSwKLS0gCkFudGhvbnkgUEVSQVJECgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
