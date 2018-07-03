@@ -1,16 +1,25 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 124920: all pass - PUSHED
-Date: Tue, 03 Jul 2018 19:01:34 +0000
-Message-ID: <osstest-124920-mainreport@xen.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v6 11/13] xen: support the Null scheduler
+Date: Tue, 3 Jul 2018 12:08:32 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1807031035120.23811@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1806131409300.14695@sstabellini-ThinkPad-X260>
+ <1528924492-6579-11-git-send-email-sstabellini@kernel.org>
+ <5B22706A02000078001CB4C2@prv1-mh.provo.novell.com>
+ <3881fbda-d34b-caf2-23d7-5f6e0a956748@citrix.com>
+ <alpine.DEB.2.10.1806141318080.14695@sstabellini-ThinkPad-X260>
+ <fc748ba73ec2eacc38613883d7a80ea748cf4d37.camel@suse.com>
+ <20180628073654.5wl7z2s4gc4s5by4@mac.bytemobile.com>
+ <alpine.DEB.2.10.1806291136500.23811@sstabellini-ThinkPad-X260>
+ <3a61996d-495d-e1ca-5e3c-619f2529c868@arm.com>
+ <alpine.DEB.2.10.1807020901510.23811@sstabellini-ThinkPad-X260>
+ <1312098f-0d2a-d871-3ba3-5e81394870a4@arm.com>
+ <alpine.DEB.2.10.1807021438430.23811@sstabellini-ThinkPad-X260>
+ <a0c5a063-7f45-3278-a2fd-cbd52afcecd9@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-20601374-1530639444=:23811"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xqjr=jt=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1faQYU-0000wu-6t
- for xen-devel@lists.xenproject.org; Tue, 03 Jul 2018 19:01:38 +0000
+In-Reply-To: <a0c5a063-7f45-3278-a2fd-cbd52afcecd9@arm.com>
+Content-ID: <alpine.DEB.2.10.1807031037280.23811@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,59 +28,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Julien Grall <julien.grall@arm.com>
+Cc: Artem Mygaiev <artem_mygaiev@epam.com>, Lars Kurth <lars.kurth@citrix.com>, nd@arm.com, Stefano Stabellini <sstabellini@kernel.org>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, Jan Beulich <JBeulich@suse.com>, Dario Faggioli <dfaggioli@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNDkyMCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjQ5MjAvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
-dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiBvdm1mICAgICAgICAgICAgICAgICBhYTQyNDBlZGZmNDEwMzRkNzA5OTM4YTE1YjQyY2Y0
-ZmQzMjE0Mzg2CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICAzYjAzYjVl
-OTkwZjhiYjM0N2RmZGI5MTkyNmQ4ZWYwMTVkMGI2MDdlCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-MjQ2MTggIDIwMTgtMDYtMjIgMTk6MTA6NTcgWiAgIDEwIGRheXMKRmFpbGluZyBzaW5jZSAgICAg
-ICAgMTI0Njc1ICAyMDE4LTA2LTI0IDIzOjQwOjE1IFogICAgOCBkYXlzICAgMTAgYXR0ZW1wdHMK
-VGVzdGluZyBzYW1lIHNpbmNlICAgMTI0OTIwICAyMDE4LTA3LTAyIDE1OjQxOjM1IFogICAgMSBk
-YXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVy
-IHRlc3Q6CiAgQmksIERhbmRhbiA8ZGFuZGFuLmJpQGludGVsLmNvbT4KICBDaGFvIFpoYW5nIDxj
-aGFvLmIuemhhbmdAaW50ZWwuY29tPgogIENoYXNlbCBDaGl1IDxjaGFzZWwuY2hpdUBpbnRlbC5j
-b20+CiAgQ2hhc2VsLCBDaGl1IDxjaGFzZWwuY2hpdUBpbnRlbC5jb20+CiAgQ2hlbiBBIENoZW4g
-PGNoZW4uYS5jaGVuQGludGVsLmNvbT4KICBjaGVuYzIgPGNoZW4uYS5jaGVuQGludGVsLmNvbT4K
-ICBEYW5kYW4gQmkgPGRhbmRhbi5iaUBpbnRlbC5jb20+CiAgZGFubiBmcmF6aWVyIDxkYW5uZkBk
-ZWJpYW4ub3JnPgogIEZ1IFNpeXVhbiA8c2l5dWFuLmZ1QGludGVsLmNvbT4KICBHYXJ5IExpbiA8
-Z2xpbkBzdXNlLmNvbT4KICBIYW8gV3UgPGhhby5hLnd1QGludGVsLmNvbT4KICBIb25nLWNoaWhY
-IEhzdWVoIDxob25nLWNoaWh4LmhzdWVoQGludGVsLmNvbT4KICBKYWJlbiBDYXJzZXkgPGphYmVu
-LmNhcnNleUBpbnRlbC5jb20+CiAgTGltaW5nIEdhbyA8bGltaW5nLmdhb0BpbnRlbC5jb20+CiAg
-TWljaGFlbCBEIEtpbm5leSA8bWljaGFlbC5kLmtpbm5leUBpbnRlbC5jb20+CiAgU2FtaSBNdWph
-d2FyIDxzYW1pLm11amF3YXJAYXJtLmNvbT4KICBTdGFyIFplbmcgPHN0YXIuemVuZ0BpbnRlbC5j
-b20+CiAgVGhvbWFzIFBhbG1lciA8dGhvbWFzLnBhbG1lckBocGUuY29tPgogIFh1IFdlaVggPHdl
-aXgueHVAaW50ZWwuY29tPgogIFl1bmh1YSBGZW5nIDx5dW5odWF4LmZlbmdAaW50ZWwuY29tPgog
-IFpoYW5nLCBDaGFvIEIgPGNoYW8uYi56aGFuZ0BpbnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1k
-NjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2
-NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxh
-Yi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dz
-L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0
-dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRp
-b24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAg
-IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJF
-QURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9w
-PW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2Rl
-IGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0
-ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9y
-ZzovaG9tZS94ZW4vZ2l0L29zc3Rlc3Qvb3ZtZi5naXQKICAgM2IwM2I1ZTk5MC4uYWE0MjQwZWRm
-ZiAgYWE0MjQwZWRmZjQxMDM0ZDcwOTkzOGExNWI0MmNmNGZkMzIxNDM4NiAtPiB4ZW4tdGVzdGVk
-LW1hc3RlcgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-20601374-1530639444=:23811
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1807031037281.23811@sstabellini-ThinkPad-X260>
+
+On Tue, 3 Jul 2018, Julien Grall wrote:
+> Hi Stefano,
+> 
+> On 02/07/18 23:08, Stefano Stabellini wrote:
+> > On Mon, 2 Jul 2018, Julien Grall wrote:
+> > > Hi,
+> > > 
+> > > On 02/07/2018 19:24, Stefano Stabellini wrote:
+> > > > On Mon, 2 Jul 2018, Julien Grall wrote:
+> > > > > Hi Stefano,
+> > > > > 
+> > > > > On 06/29/2018 07:38 PM, Stefano Stabellini wrote:
+> > > > > > On Thu, 28 Jun 2018, Roger Pau Monné wrote:
+> > > > > > > On Thu, Jun 28, 2018 at 09:27:08AM +0200, Dario Faggioli wrote:
+> > > > > > > > On Thu, 2018-06-14 at 13:20 -0700, Stefano Stabellini wrote:
+> > > > > > > > > On Thu, 14 Jun 2018, Andrew Cooper wrote:
+> > > > > > > > > > On 14/06/18 14:40, Jan Beulich wrote:
+> > > > > > > > > > I don't think its reasonable to alter the support status
+> > > > > > > > > > with
+> > > > > > > > > > this
+> > > > > > > > > issue
+> > > > > > > > > > outstanding.
+> > > > > > > > > 
+> > > > > > > > > I completely missed this report, probably because I haven't
+> > > > > > > > > paid
+> > > > > > > > > attention to PV-shim. Do you have any more information about
+> > > > > > > > > this?
+> > > > > > > > > The
+> > > > > > > > > report is a bit vague. If I can't repro it, I can't fix it.
+> > > > > > > > > 
+> > > > > > > > > Couldn't it be that is normal because after a while you ran
+> > > > > > > > > out of
+> > > > > > > > > pcpus?
+> > > > > > > > > 
+> > > > > > > > > Dario, do you have any opinion on this?
+> > > > > > > > > 
+> > > > > > > > The issue that I know of is that the null scheduler does not
+> > > > > > > > properly
+> > > > > > > > support CPU hotplug/hotunplug.
+> > > > > > > > 
+> > > > > > > > This is an issue on, let's say, baremetal, if you use null, and
+> > > > > > > > try
+> > > > > > > > to
+> > > > > > > > do CPU hotplug/hotunplug. When trying to use null as the
+> > > > > > > > scheduler
+> > > > > > > > of
+> > > > > > > > the shim, we run into that same issue, even if not specifically
+> > > > > > > > doing
+> > > > > > > > CPU hotplug/hotunplug (because the shim use the same path for
+> > > > > > > > CPU
+> > > > > > > > bringup, IIRC).
+> > > > > > > 
+> > > > > > > The shim uses CPU hotplug/unplug when the guest brings up/down a
+> > > > > > > vCPU using the VCPUOP_{up/down} hypercall.
+> > > > > > > 
+> > > > > > > The best description of the issue I could find is:
+> > > > > > > 
+> > > > > > > https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg01085.html
+> > > > > > 
+> > > > > > OK, thanks for the explanation. We don't support CPU hotplug on ARM,
+> > > > > > so
+> > > > > > we could mark the NULL scheduler as supported on the ARM
+> > > > > > architecture
+> > > > > > today? Once you implement CPU hotplug support in NULL, we could mark
+> > > > > > it
+> > > > > > as supported on x86 too.
+> > > > > Well, Mirela paved the way to support CPU hotplug (should be merged
+> > > > > soon).
+> > > > > She
+> > > > > is looking at suspend/resume which is IHMO an extension of hotplug
+> > > > > case.
+> > > > > So
+> > > > > are you sure this could never happen on Arm?
+> > > > 
+> > > > I thought that suspend/resume didn't actually require the same kind of
+> > > > scheduler support that CPU hotplug needs. If suspend/resume ends up
+> > > > not working with scheduler NULL, then that is a problem.
+> > > 
+> > > The suspend/resume code will offline the CPU one by one using cpu_down.
+> > > This
+> > > is the same path as hotplug. So you will end up with more vCPUs than
+> > > online
+> > > pCPUs, although the domain will be frozen. How this is going to fit in the
+> > > NULL scheduler?
+> > 
+> > [...]
+> > 
+> > > Virtually every platform support CPU hotplug. It is not just about
+> > > "physically
+> > > pluggable CPUs" but any CPU that can be offline at any time.
+> > 
+> > CPU hotplug in Xen clearly doesn't work as I expected: I assumed that
+> > CPU hotplug would make a CPU "present" or "absent", while cpu_up/down
+> > would make the CPU "online" and "offline". This is how things used to
+> > work in the Linux kernel at least: a CPU can be turned down but still be
+> > present on the socket. To do that, CPU hotplug is not involved. CPU
+> > hotplug would get involved when the user yanks the physical CPU out of
+> > the socket.
+> 
+> Are you sure? Looking at Linux they are using the CPU hotplug subsystem to
+> online/offline CPUs. This is even used to bring up secondary CPUs during boot.
+> This is not very different from how Xen is behaving.
+
+arch_register/unregister_cpu in Linux make a cpu "present" and "absent"
+respectively. They require CONFIG_HOTPLUG_CPU. cpu_up and cpu_down are
+different operations to turn it "on" and "off" and are triggered via
+sysfs. arch_register/unregister_cpu are triggered by ACPI events on
+x86.
+
+arch_register/unregister_cpu are hotplug operations, and cpu_up is not,
+as expected. But it gets confusing because cpu_down depends on
+CONFIG_HOTPLUG_CPU. So bringing up CPUs is not hotplug, but turning them
+off at runtime is hotplug? Even though turning them off has nothing to
+do with any physical or virtual "plugging". I find it very confusing. I
+hope that in Xen will manage to do something clearer than this.
+
+
+> >  From what you describe, it is not the case in Xen, and it really looks
+> > like we need support for CPU hotplug in NULL even to support for the
+> > most basic CPU offlining/onlining functionalities.
+> 
+> I think we at least want to have the bug reported by Andrew & Roger fixed. I
+> am not entirely whether there would be other bug in the scheduler.
+
+Sure. For the kconfig series I'll use credit instead until the issue is
+fixed.
+--8323329-20601374-1530639444=:23811
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-20601374-1530639444=:23811--
