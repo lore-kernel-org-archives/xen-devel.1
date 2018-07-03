@@ -1,21 +1,12 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH RFC] tools/libxl: Switch Arm guest type to
- PVH
-Date: Tue, 3 Jul 2018 13:27:23 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1807031324480.23811@sstabellini-ThinkPad-X260>
-References: <20180625130814.29771-1-julien.grall@arm.com>
- <20180625131956.ehoocvdnaser3rfn@citrix.com>
- <8c3d0d5c-3953-3514-54b7-4cf4896b5df2@arm.com>
- <20180625162839.3l3njsov75tvwacj@mac.bytemobile.com>
- <23345.6832.106103.997622@mariner.uk.xensource.com>
- <20180626064917.wasgl6de6x6o3toi@mac.bytemobile.com>
- <cd3006a9-0ee4-ffc6-dccc-fe47d64c6a58@arm.com>
- <alpine.DEB.2.10.1807021013570.23811@sstabellini-ThinkPad-X260>
- <20180703072855.ijfw5od5b63qi25q@mac.bytemobile.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 00/13] x86: CPUID and MSR policy marshalling
+ support
+Date: Tue, 3 Jul 2018 21:55:13 +0100
+Message-ID: <1530651326-5320-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-741056505-1530649644=:23811"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180703072855.ijfw5od5b63qi25q@mac.bytemobile.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,71 +15,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, andrew.cooper3@citrix.com, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Ian Jackson <ian.jackson@citrix.com>
+To: Xen-devel <xen-devel@lists.xen.org>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-741056505-1530649644=:23811
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Tue, 3 Jul 2018, Roger Pau Monné wrote:
-> On Mon, Jul 02, 2018 at 10:18:17AM -0700, Stefano Stabellini wrote:
-> > On Mon, 2 Jul 2018, Julien Grall wrote:
-> > > On 06/26/2018 07:49 AM, Roger Pau Monné wrote:
-> > > > On Mon, Jun 25, 2018 at 05:39:12PM +0100, Ian Jackson wrote:
-> > > > > Roger Pau Monné writes ("Re: [PATCH RFC] tools/libxl: Switch Arm guest
-> > > > > type to PVH"):
-> > > > > > IMO I would remove the 'type' option from xl.cfg (so that it's
-> > > > > > basically ignored) in the ARM case and force it internally to PVH (if
-> > > > > > that's the best route for current ARM guests).
-> > > > > 
-> > > > > What about libvirt users ?  I haven't seen what a libvirt Xen ARM
-> > > > > guest config looks like but we need to meak sure that existing guests
-> > > > > don't break.
-> > > > 
-> > > > For livbirt (or users of libxl library) we could force the type to
-> > > > pvh, regardless of the value set by the client, but I guess that would
-> > > > make adding types later on quite complicated.
-> > > 
-> > > I am fairly confident we will never have PV guest on Arm. So one solution
-> > > would be to alias PV to PVH for Arm. This still give us the liberty to add
-> > > more guest type in the future.
-> > > 
-> > > Any opinions?
-> > 
-> > Roger, what is the plan for x86? Wasn't there an idea to silently and
-> > transparently "upgrade" PV guests to PVH when possible (when hardware
-> > support is available)?
-> 
-> This could only be done for xl config files that don't specify a
-> 'type' option IMO, for libvirt and other users of libxl I don't think
-> this is feasible.
-> 
-> > If that is the case, basically we could do the same for ARM. We could
-> > have an hardware features check, that would always return true on ARM
-> > because without virtualization extensions Xen cannot even boot, then
-> > upgrade PV to PVH. On x86 the upgrade would only happen when the
-> > required features are present.
-> 
-> It's slightly more convoluted on x86 because apart from the hardware
-> features you also need to parse the kernel in order to figure out if
-> it has the PVH entry point before setting the type to PVH.
-
-I see. Too bad. In that case, if we have to go with an ARM specific
-solution and nobody has a better suggestion, then I think it is OK to go
-ahead with aliasing PV to PVH on ARM as Julien mentioned.
---8323329-741056505-1530649644=:23811
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-741056505-1530649644=:23811--
+VGhpcyBzZXJpZXMgaW50cm9kdWNlcyBsaWJ4ODYsIGEgc21hbGwgc2hhcmVkIGxpYnJhcnkgYmV0
+d2VlbiB0aGUgaHlwZXJ2aXNvcgphbmQgbGlieGMsIGFuZCBoeXBlcmNhbGxzIHRvIGdldC9zZXQg
+ZnVsbCBDUFVJRC9NU1IgcG9saWNpZXMuICBGdXR1cmUgd29yawp3aWxsIGFycmFuZ2UgZm9yIFhF
+Tl9ET01DVExfc2V0X2NwdW1zcl9wb2xpY3kgdG8gZnVuY3Rpb24gcHJvcGVybHksIGFmdGVyIHRo
+ZQphdWRpdGluZyBhbmQgY29tcGFyaXNvbiBsb2dpYyBpcyBzb3J0ZWQuCgpJbiB0aGUgbWVhbnRp
+bWUsIHRoZSBkYXRhIG1hcnNoYWxsaW5nIGxvZ2ljIGlzIGluIGEgc3VpdGFibGUgc3RhdGUgZm9y
+IHJldmlldy4KClNvbWUgb3BlbiBxdWVzdGlvbnM6CgogICogVGhlIHBvc2l0aW9uIG9mIGxpYng4
+NiBpbiB0aGUgc291cmNlIHRyZWUuICBJdCBwcm9iYWJseSBkb2Vzbid0IHdhbnQgdG8KICAgIGxp
+dmUgaW4gaXRzIGN1cnJlbnQgbG9jYXRpb24uCiAgKiBOYW1pbmcgb2YgdmFyaW91cyBmaWxlcywg
+cGFydGljdWxhcmx5IHBvbGljeS5jICh3aGljaCBJIGRvbid0IGxpa2UsIGJ1dAogICAgY2FuJ3Qg
+dGhpbmsgb2YgYW55dGhpbmcgYmV0dGVyKS4KICAqIEEgVE9DVE9VIHJhY2UgaW4gdGhlIGZpbmFs
+IHBhdGNoLCBjYXVzZWQgYnkgdGhlIGNvcHlfZnJvbV9ndWVzdCgpIEFCSS4KICAgIE1vcmUgZGV0
+YWlscyBpbiB0aGF0IHBhdGNoLgoKVGhpcyBzZXJpZXMgaXMgYmFzZWQgb24geDg2LW5leHQsIGFu
+ZCBjYW4gYmUgZm91bmQgaW4gZ2l0IGZvcm0gaGVyZToKCiAgaHR0cDovL3hlbmJpdHMueGVuLm9y
+Zy9naXR3ZWIvP3A9cGVvcGxlL2FuZHJld2Nvb3AveGVuLmdpdDthPXNob3J0bG9nO2g9cmVmcy9o
+ZWFkcy9jcHVpZC1tYXJzaGFsLXYxCgpBbmRyZXcgQ29vcGVyICg1KToKICBsaWJ4ODY6IEludHJv
+ZHVjZSBsaWJ4ODYvY3B1aWQuaAogIGxpYng4NjogSW50cm9kdWNlIGxpYng4Ni9tc3IuaCBhbmQg
+c2hhcmUgbXNyX3tkb21haW4sdmNwdX1fcG9saWN5IHdpdGggdXNlcnNwYWNlCiAgbGlieDg2OiBJ
+bnRyb2R1Y2UgYSBoZWxwZXIgdG8gc2VyaWFsaXNlIGEgY3B1aWRfcG9saWN5IG9iamVjdAogIHg4
+NjogQ29sbGVjdCBwb2xpY2llcyB0b2dldGhlciBpbnRvIGdyb3VwcwogIGxpYng4NjogSW50cm9k
+dWNlIGEgaGVscGVyIHRvIGRlc2VyaWFsaXNlIGEgY3B1aWRfcG9saWN5IG9iamVjdAoKUm9nZXIg
+UGF1IE1vbm7DqSAoNSk6CiAgbGlieDg2OiBnZW5lcmF0ZSBjcHVpZC1hdXRvZ2VuLmggaW4gdGhl
+IGxpYng4NiBpbmNsdWRlIGRpcgogIGxpYng4NjogU2hhcmUgc3RydWN0IGNwdWlkX3BvbGljeSB3
+aXRoIHVzZXJzcGFjZQogIGxpYng4NjogaW50cm9kdWNlIGEgbGlieDg2IHNoYXJlZCBsaWJyYXJ5
+CiAgbGlieDg2OiBJbnRyb2R1Y2UgYSBoZWxwZXIgdG8gc2VyaWFsaXNlIG1zcl97ZG9tYWluLHZj
+cHV9X3BvbGljeSBvYmplY3RzCiAgbGlieDg2OiBpbnRyb2R1Y2UgYSBoZWxwZXIgdG8gZGVzZXJp
+YWxpemUgTVNSIHBvbGljaWVzCgpTZXJnZXkgRHlhc2xpICgzKToKICB4ODYvc3lzY3RsOiBJbXBs
+ZW1lbnQgWEVOX1NZU0NUTF9nZXRfY3B1bXNyX3BvbGljeQogIHg4Ni9kb21jdGw6IEltcGxlbWVu
+dCBYRU5fRE9NQ1RMX2dldF9jcHVtc3JfcG9saWN5CiAgeDg2L2RvbWN0bDogSW1wbGVtZW50IFhF
+Tl9ET01DVExfc2V0X2NwdW1zcl9wb2xpY3kKCiAuZ2l0aWdub3JlICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHwgICAyICstCiB0b29scy9pbmNsdWRlL01ha2VmaWxlICAgICAgICAg
+ICAgICAgICAgICAgIHwgIDE1ICsrCiB0b29scy9saWJ4Yy9NYWtlZmlsZSAgICAgICAgICAgICAg
+ICAgICAgICAgIHwgIDE0ICstCiB0b29scy9saWJ4Yy9pbmNsdWRlL3hlbmN0cmwuaCAgICAgICAg
+ICAgICAgIHwgIDE1ICstCiB0b29scy9saWJ4Yy94Y19jcHVpZF94ODYuYyAgICAgICAgICAgICAg
+ICAgIHwgMTYzICsrKysrKysrKysrKysrKysrLS0tCiB0b29scy9taXNjL3hlbi1jcHVpZC5jICAg
+ICAgICAgICAgICAgICAgICAgIHwgMTM1ICsrKysrKysrKysrKysrKy0KIHRvb2xzL3Rlc3RzL3g4
+Nl9lbXVsYXRvci94ODYtZW11bGF0ZS5oICAgICAgfCAgIDIgKwogeGVuL2FyY2gveDg2L2NwdS9j
+b21tb24uYyAgICAgICAgICAgICAgICAgICB8ICAgMiArLQogeGVuL2FyY2gveDg2L2NwdWlkLmMg
+ICAgICAgICAgICAgICAgICAgICAgICB8ICAzMiArLS0tCiB4ZW4vYXJjaC94ODYvZG9tY3RsLmMg
+ICAgICAgICAgICAgICAgICAgICAgIHwgMTMzICsrKysrKysrKysrKysrKysKIHhlbi9hcmNoL3g4
+Ni9tc3IuYyAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDQgKy0KIHhlbi9hcmNoL3g4Ni9z
+eXNjdGwuYyAgICAgICAgICAgICAgICAgICAgICAgfCAxMDEgKysrKysrKysrKysrCiB4ZW4vYXJj
+aC94ODYveDg2X2VtdWxhdGUveDg2X2VtdWxhdGUuaCAgICAgIHwgICA3ICstCiB4ZW4vY29tbW9u
+L01ha2VmaWxlICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAxICsKIHhlbi9jb21tb24vbGli
+eDg2L01ha2VmaWxlICAgICAgICAgICAgICAgICAgfCAgIDMgKwogeGVuL2NvbW1vbi9saWJ4ODYv
+Y3B1aWQuYyAgICAgICAgICAgICAgICAgICB8IDIyNiArKysrKysrKysrKysrKysrKysrKysrKysr
+KysKIHhlbi9jb21tb24vbGlieDg2L2xpYng4Ni1wcml2YXRlLmggICAgICAgICAgfCAgNzQgKysr
+KysrKysrCiB4ZW4vY29tbW9uL2xpYng4Ni9tc3IuYyAgICAgICAgICAgICAgICAgICAgIHwgMTM0
+ICsrKysrKysrKysrKysrKysKIHhlbi9jb21tb24vbGlieDg2L3BvbGljaWVzLmMgICAgICAgICAg
+ICAgICAgfCAgMTkgKysrCiB4ZW4vaW5jbHVkZS9NYWtlZmlsZSAgICAgICAgICAgICAgICAgICAg
+ICAgIHwgICA2ICstCiB4ZW4vaW5jbHVkZS9hc20teDg2L2NwdWZlYXR1cmVzLmggICAgICAgICAg
+IHwgICAyICstCiB4ZW4vaW5jbHVkZS9hc20teDg2L2NwdWlkLmggICAgICAgICAgICAgICAgIHwg
+MjI4ICstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIHhlbi9pbmNsdWRlL2FzbS14ODYvbXNy
+LmggICAgICAgICAgICAgICAgICAgfCAgNjUgKystLS0tLS0KIHhlbi9pbmNsdWRlL3B1YmxpYy9h
+cmNoLXg4Ni94ZW4uaCAgICAgICAgICAgfCAgMTggKysrCiB4ZW4vaW5jbHVkZS9wdWJsaWMvZG9t
+Y3RsLmggICAgICAgICAgICAgICAgIHwgIDI1ICsrKwogeGVuL2luY2x1ZGUvcHVibGljL3N5c2N0
+bC5oICAgICAgICAgICAgICAgICB8ICA0MSArKysrKwogeGVuL2luY2x1ZGUve2FzbS14ODYgPT4g
+eGVuL2xpYng4Nn0vY3B1aWQuaCB8IDEwMyArKysrKy0tLS0tLS0tCiB4ZW4vaW5jbHVkZS94ZW4v
+bGlieDg2L21zci5oICAgICAgICAgICAgICAgIHwgIDc4ICsrKysrKysrKysKIHhlbi9pbmNsdWRl
+L3hlbi9saWJ4ODYvcG9saWNpZXMuaCAgICAgICAgICAgfCAgMzUgKysrKysKIHhlbi9pbmNsdWRl
+L3hlbi94bWFsbG9jLmggICAgICAgICAgICAgICAgICAgfCAgIDcgKwogeGVuL3hzbS9mbGFzay9o
+b29rcy5jICAgICAgICAgICAgICAgICAgICAgICB8ICAgMyArCiB4ZW4veHNtL2ZsYXNrL3BvbGlj
+eS9hY2Nlc3NfdmVjdG9ycyAgICAgICAgIHwgICA0ICstCiAzMiBmaWxlcyBjaGFuZ2VkLCAxMjgx
+IGluc2VydGlvbnMoKyksIDQxNiBkZWxldGlvbnMoLSkKIGNyZWF0ZSBtb2RlIDEwMDY0NCB4ZW4v
+Y29tbW9uL2xpYng4Ni9NYWtlZmlsZQogY3JlYXRlIG1vZGUgMTAwNjQ0IHhlbi9jb21tb24vbGli
+eDg2L2NwdWlkLmMKIGNyZWF0ZSBtb2RlIDEwMDY0NCB4ZW4vY29tbW9uL2xpYng4Ni9saWJ4ODYt
+cHJpdmF0ZS5oCiBjcmVhdGUgbW9kZSAxMDA2NDQgeGVuL2NvbW1vbi9saWJ4ODYvbXNyLmMKIGNy
+ZWF0ZSBtb2RlIDEwMDY0NCB4ZW4vY29tbW9uL2xpYng4Ni9wb2xpY2llcy5jCiBjb3B5IHhlbi9p
+bmNsdWRlL3thc20teDg2ID0+IHhlbi9saWJ4ODZ9L2NwdWlkLmggKDc3JSkKIGNyZWF0ZSBtb2Rl
+IDEwMDY0NCB4ZW4vaW5jbHVkZS94ZW4vbGlieDg2L21zci5oCiBjcmVhdGUgbW9kZSAxMDA2NDQg
+eGVuL2luY2x1ZGUveGVuL2xpYng4Ni9wb2xpY2llcy5oCgotLSAKMi4xLjQKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
