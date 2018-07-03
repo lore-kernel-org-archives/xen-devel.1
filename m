@@ -1,12 +1,11 @@
 From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH 2/3] osstest: set the make command to use
- for xen-build
-Date: Tue, 3 Jul 2018 17:54:12 +0100
-Message-ID: <23355.43572.883112.798640@mariner.uk.xensource.com>
+Subject: Re: [PATCH 3/3] osstest: add FreeBSD Xen build job
+Date: Tue, 3 Jul 2018 17:56:51 +0100
+Message-ID: <23355.43731.29349.858048@mariner.uk.xensource.com>
 References: <20180702084102.90577-1-roger.pau@citrix.com>
- <20180702084102.90577-3-roger.pau@citrix.com>
- <23355.37446.142212.68258@mariner.uk.xensource.com>
- <20180703155140.xmfm7cjmnadmitf5@mac.bytemobile.com>
+ <20180702084102.90577-4-roger.pau@citrix.com>
+ <23355.38085.803261.551348@mariner.uk.xensource.com>
+ <20180703161035.hbf66zm3plw4ocps@mac.bytemobile.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -14,9 +13,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=bw7e=jt=citrix.com=prvs=71508c46d=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1faOZY-0006EG-OC
- for xen-devel@lists.xenproject.org; Tue, 03 Jul 2018 16:54:36 +0000
-In-Reply-To: <20180703155140.xmfm7cjmnadmitf5@mac.bytemobile.com>
+ id 1faObn-0006Pg-EZ
+ for xen-devel@lists.xenproject.org; Tue, 03 Jul 2018 16:56:55 +0000
+In-Reply-To: <20180703161035.hbf66zm3plw4ocps@mac.bytemobile.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,14 +28,24 @@ To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Um9nZXIgUGF1IE1vbm7DqSB3cml0ZXMgKCJSZTogW1BBVENIIDIvM10gb3NzdGVzdDogc2V0IHRo
-ZSBtYWtlIGNvbW1hbmQgdG8gdXNlIGZvciB4ZW4tYnVpbGQiKToKPiBPbiBUdWUsIEp1bCAwMywg
-MjAxOCBhdCAwNDoxMjowNlBNICswMTAwLCBJYW4gSmFja3NvbiB3cm90ZToKPiA+IFdvdWxkbid0
-IGl0IGJlIGJldHRlciB0byB3cml0ZQo+ID4gICAgJGhvLT57T1N9ID1+IG0vYnNkLwo+ID4gb3Ig
-c29tZXRoaW5nID8KPiAKPiBZZXMsIHRoYXQncyBpbmRlZWQgYmV0dGVyLiBXb3VsZCB5b3UgbGlr
-ZSBtZSB0byBzZW5kIGEgbmV3IHZlcnNpb24KPiB3aXRoIHRoaXMgZml4ZWQ/CgpXZWxsLCBwbGVh
-c2UgY2hhbmdlIGl0IGluIHlvdXIgdHJlZS4gIEkgdGhpbmsgSSBtYXkgYXNrIHlvdSB0byBjaGFu
-Z2UKYW5vdGhlciBjb21taXQgbWVzc2FnZSBzb21laHdlcmUuLi4KCklhbi4KCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Um9nZXIgUGF1IE1vbm7DqSB3cml0ZXMgKCJSZTogW1BBVENIIDMvM10gb3NzdGVzdDogYWRkIEZy
+ZWVCU0QgWGVuIGJ1aWxkIGpvYiIpOgo+IE9uIFR1ZSwgSnVsIDAzLCAyMDE4IGF0IDA0OjIyOjQ1
+UE0gKzAxMDAsIElhbiBKYWNrc29uIHdyb3RlOgo+ID4gVGhpcyBpcyBxdWl0ZSB1Z2x5LiAgc2ct
+cnVuLWpvYiBub3JtYWxseSB0cmllcyB0byBiZSBhIGJpdCBtb3JlCj4gPiBhYnN0cmFjdC4gIEkn
+bSBub3Qgc3VyZSBleGFjdGx5IHdoYXQgdG8gc3VnZ2VzdC4KPiA+IAo+ID4gTWF5YmUgYSB0cy14
+ZW4tYnVpbGQtY2xhbmcgY29udGFpbmluZyB0aGVzZSBhcmd1bWVudHMgPyAgT2YgY291cnNlIGZv
+cgo+ID4gYSBjbGFuZyBidWlsZCBvbiBMaW51eCAvdXNyL2xvY2FsL2Jpbi9sZCBpcyB3cm9uZy4u
+Lgo+IAo+IE1heWJlIHRzLXhlbi1idWlsZC1mcmVlYnNkPwo+IAo+IEkgd2VudCB0aGlzIHJvdXRl
+IGJlY2F1c2UgaXQgZGlkIG5vdCBpbnZvbHZlIGNyZWF0aW5nIHlldCBhbm90aGVyCj4gdHMtYnVp
+bGQtKiBzY3JpcHQsIGJ1dCBpZiB5b3UgdGhpbmsgaXQncyBiZXR0ZXIgSSBjYW4gYWRkIHN1Y2gg
+YQo+IHNjcmlwdC4KCk1tbS4gIEhvdyBhYm91dCBhIHNpbXBsZSBzaGVsbCBzY3JpcHQgd3JhcHBl
+ciA/ICBTZWUKdHMtaG9zdC1pbnN0YWxsLXR3aWNlIDotKS4KCj4gSXQgaGFwcGVucyB0byBiZSBs
+aWtlIHRoYXQgaW4gdGhpcyBjYXNlIGJlY2F1c2UgdGhlCj4gdHMtYnVpbGQtcHJlcC1mcmVlYnNk
+IGluc3RhbGxzIHRoZSBiaW51dGlscyBwYWNrYWdlIGluIC91c3IvbG9jYWwgYW5kCj4gdGhhdCBw
+cm92aWRlcyBHTlUgbGQgaW4gdGhlIHNwZWNpZmllZCBwYXRoLgoKU28gdGhpcyBpcyBhIHRoaW5n
+IHNwZWNpZmljIHRvIGJ1aWxkaW5nIG9uIEZyZWVCU0QsIGFuZCB3aWxsIGFsd2F5cyBiZQp0cnVl
+ID8gIFByZXN1bWFibHkgb24gb3RoZXIgQlNEcyB0b28gaW4gdGhlb3J5ID8KCk1heWJlIGl0IHNo
+b3VsZCBiZSBpbiB0cy14ZW4tYnVpbGQsIHRoZW4sIGNvbmRpdGlvbmFsIG9uICRoby0+e09TfSA/
+CgpJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
