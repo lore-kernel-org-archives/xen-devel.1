@@ -1,22 +1,22 @@
 From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH 1/3] osstest: remove duplicate
- set_freebsd_runvars
-Date: Tue, 3 Jul 2018 17:53:44 +0100
-Message-ID: <23355.43544.714868.848299@mariner.uk.xensource.com>
+Subject: Re: [PATCH 2/3] osstest: set the make command to use
+ for xen-build
+Date: Tue, 3 Jul 2018 17:54:12 +0100
+Message-ID: <23355.43572.883112.798640@mariner.uk.xensource.com>
 References: <20180702084102.90577-1-roger.pau@citrix.com>
- <20180702084102.90577-2-roger.pau@citrix.com>
- <23355.37376.789833.763385@mariner.uk.xensource.com>
- <20180703155034.qhtivoiuvixbyg3l@mac.bytemobile.com>
+ <20180702084102.90577-3-roger.pau@citrix.com>
+ <23355.37446.142212.68258@mariner.uk.xensource.com>
+ <20180703155140.xmfm7cjmnadmitf5@mac.bytemobile.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=bw7e=jt=citrix.com=prvs=71508c46d=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1faOYn-00063c-B2
- for xen-devel@lists.xenproject.org; Tue, 03 Jul 2018 16:53:49 +0000
-In-Reply-To: <20180703155034.qhtivoiuvixbyg3l@mac.bytemobile.com>
+ id 1faOZY-0006EG-OC
+ for xen-devel@lists.xenproject.org; Tue, 03 Jul 2018 16:54:36 +0000
+In-Reply-To: <20180703155140.xmfm7cjmnadmitf5@mac.bytemobile.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,24 +26,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: Ian Jackson <ian.jackson@citrix.com>, xen-devel@lists.xenproject.org
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Um9nZXIgUGF1IE1vbm7DqSB3cml0ZXMgKCJSZTogW1BBVENIIDEvM10gb3NzdGVzdDogcmVtb3Zl
-IGR1cGxpY2F0ZSBzZXRfZnJlZWJzZF9ydW52YXJzIik6Cj4gT24gVHVlLCBKdWwgMDMsIDIwMTgg
-YXQgMDQ6MTA6NTZQTSArMDEwMCwgSWFuIEphY2tzb24gd3JvdGU6Cj4gPiBSb2dlciBQYXUgTW9u
-bmUgd3JpdGVzICgiW1BBVENIIDEvM10gb3NzdGVzdDogcmVtb3ZlIGR1cGxpY2F0ZSBzZXRfZnJl
-ZWJzZF9ydW52YXJzIik6Cj4gPiA+IFNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJv
-Z2VyLnBhdUBjaXRyaXguY29tPgo+ID4gCj4gPiBPb3BzLiAgSSB3b25kZXIgaWYgdGhpcyB3YXMg
-bXkgZG9pbmcuICBIYXZlIHlvdSB2ZXJpZmllZCB0aGF0IHRoZXkncmUKPiA+IGlkZW50aWNhbCA/
-Cj4gCj4gVGhleSBhcmUgbm90IGlkZW50aWNhbC4gVGhlIG9uZSBpbiBtZmktY29tbW9uIGlzIGEg
-c3VwZXJzZXQgb2YgdGhlIG9uZQo+IGhlcmUsIGJlY2F1c2UgdGhlIGZ1bmN0aW9uIGl0c2VsZiB3
-aWxsIHRyeSB0byByZXRyaWV2ZSB0aGUgYW5vaW50ZWQKPiB2ZXJzaW9uIGl0c2VsZiBhcyBhIGxh
-c3QgcmVzb3J0LgoKU28gYXMgYSBzaWRlIGVmZmVjdCBvZiB0aGlzIGNoYW5nZSB5b3UgYXJlIGFk
-ZGluZyB0aGF0IGZ1bmN0aW9uYWxpdHkKdG8gbWFrZS1mcmVlYnNkLWZsaWdodCA/ICBPciByYXRo
-ZXIsIHlvdSBhcmUgZml4aW5nLCBpbgptYWtlLWZyZWVic2QtZmxpZ2h0LCB0aGUgYnVnIHRoYXQg
-Y2F1c2VkIG1lIHRvIHdyaXRlOgogIG1maS1jb21tb246IEZhbGwgYmFjayB0byBhbm9pbnRlZCBi
-dWlsZHMgaW4gRXhlY3V0aXZlIG1vZGUKPwoKSWFuLgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+Um9nZXIgUGF1IE1vbm7DqSB3cml0ZXMgKCJSZTogW1BBVENIIDIvM10gb3NzdGVzdDogc2V0IHRo
+ZSBtYWtlIGNvbW1hbmQgdG8gdXNlIGZvciB4ZW4tYnVpbGQiKToKPiBPbiBUdWUsIEp1bCAwMywg
+MjAxOCBhdCAwNDoxMjowNlBNICswMTAwLCBJYW4gSmFja3NvbiB3cm90ZToKPiA+IFdvdWxkbid0
+IGl0IGJlIGJldHRlciB0byB3cml0ZQo+ID4gICAgJGhvLT57T1N9ID1+IG0vYnNkLwo+ID4gb3Ig
+c29tZXRoaW5nID8KPiAKPiBZZXMsIHRoYXQncyBpbmRlZWQgYmV0dGVyLiBXb3VsZCB5b3UgbGlr
+ZSBtZSB0byBzZW5kIGEgbmV3IHZlcnNpb24KPiB3aXRoIHRoaXMgZml4ZWQ/CgpXZWxsLCBwbGVh
+c2UgY2hhbmdlIGl0IGluIHlvdXIgdHJlZS4gIEkgdGhpbmsgSSBtYXkgYXNrIHlvdSB0byBjaGFu
+Z2UKYW5vdGhlciBjb21taXQgbWVzc2FnZSBzb21laHdlcmUuLi4KCklhbi4KCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
