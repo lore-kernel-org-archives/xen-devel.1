@@ -1,21 +1,21 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [xen-4.11-testing test] 124876: trouble:
- blocked/broken/fail/pass [and 1 more messages]
-Date: Tue, 3 Jul 2018 11:03:13 +0100
-Message-ID: <23355.18913.673630.683538@mariner.uk.xensource.com>
-References: <E1fa3kA-0007ae-Ei@osstest.test-lab.xenproject.org>
- <osstest-124876-mainreport@xen.org>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [Notes for xen summit 2018 design session] Process
+ changes: is the 6 monthly release Cadence too short, Security Process, ...
+Date: Tue, 3 Jul 2018 12:07:33 +0200
+Message-ID: <20180703100733.mhfeia2vfywt6czx@mac.bytemobile.com>
+References: <0920C595-DA2C-4C5E-B713-40ADB616CC93@citrix.com>
+ <60433E7B-455A-45C9-8A6A-B26F5BD8F115@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=bw7e=jt=citrix.com=prvs=71508c46d=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1faI9W-0000ke-8C
- for xen-devel@lists.xenproject.org; Tue, 03 Jul 2018 10:03:18 +0000
-In-Reply-To: <osstest-124876-mainreport@xen.org>,
- <E1fa3kA-0007ae-Ei@osstest.test-lab.xenproject.org>
+ <srs0=iwop=jt=citrix.com=prvs=715f702c9=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1faIDp-0001G6-6o
+ for xen-devel@lists.xenproject.org; Tue, 03 Jul 2018 10:07:45 +0000
+Content-Disposition: inline
+In-Reply-To: <60433E7B-455A-45C9-8A6A-B26F5BD8F115@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,26 +24,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: osstest service owner <osstest-admin@xenproject.org>
-Cc: jgross@suse.com, xen-devel@lists.xenproject.org
+To: Lars Kurth <lars.kurth@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Rich Persaud <persaur@gmail.com>, Doug Goldstein <cardoe@cardoe.com>, "advisory-board@lists.xenproject.org" <advisory-board@lists.xenproject.org>, "committers@xenproject.org" <committers@xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-b3NzdGVzdCBzZXJ2aWNlIG93bmVyIHdyaXRlcyAoIlt4ZW4tNC4xMS10ZXN0aW5nIHRlc3RdIDEy
-NDg3NjogdHJvdWJsZTogYmxvY2tlZC9icm9rZW4vZmFpbC9wYXNzIik6Cj4gZmxpZ2h0IDEyNDg3
-NiB4ZW4tNC4xMS10ZXN0aW5nIHJlYWwgW3JlYWxdCj4gaHR0cDovL2xvZ3MudGVzdC1sYWIueGVu
-cHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNDg3Ni8KPiAKPiBGYWlsdXJlcyBhbmQgcHJvYmxl
-bXMgd2l0aCB0ZXN0cyA6LSgKPiAKPiBUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFy
-ZSBibG9ja2luZywKPiBpbmNsdWRpbmcgdGVzdHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoKPiAg
-YnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAg
-ICAgIGJyb2tlbgoKQmFzZWQgb24gdGhpcyBhbmQgbXkgYWRob2MgcmV0ZXN0IG9mIHRoZSBhcm0g
-cGFydHM6Cgppd2pAeGVuYml0cy54ZW4ub3JnIHdyaXRlcyAoIlthZGhvYyB0ZXN0XSAxMjQ5MTU6
-IHRvbGVyYWJsZSBhbGwgcGFzcyIpOgo+IFthZGhvYyBhZGhvY10gPDJ0ZXN0aW5nLmdpdCBtYXN0
-ZXIgL2Rldi9wdHMvMj4KPiBoYXJuZXNzIGMxNDk4MGI6IERlYmlhbiBwcmVzZWVkOiBEaXNhYmxl
-IHNlY3VyaXR5IGFyY2hpdmUgZm9yIGplc3NpZSBhLi4uCj4gMTI0OTE1OiB0b2xlcmFibGUgYWxs
-IHBhc3MKPiAKPiBmbGlnaHQgMTI0OTE1IHhlbi11bnN0YWJsZSBhZGhvYyBbYWRob2NdCj4gaHR0
-cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNDkxNS8KPiAK
-PiBGYWlsdXJlcyA6LS8gYnV0IG5vIHJlZ3Jlc3Npb25zLgoKSSBoYXZlIGZvcmNlIHB1c2hlZCB0
-byBzdGFibGUtNC4xMS4KCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+T24gTW9uLCBKdWwgMDIsIDIwMTggYXQgMDY6MDM6MzlQTSArMDAwMCwgTGFycyBLdXJ0aCB3cm90
+ZToKPiBXZSB0aGVuIGhhZCBhIGRpc2N1c3Npb24gYXJvdW5kIHdoeSB0aGUgcG9zaXRpdmUgYmVu
+ZWZpdHMgZGlkbid0IG1hdGVyaWFsaXplOgo+ICogQW5kcmV3IGFuZCBhIGZldyBvdGhlciBiZWxp
+ZXZlIHRoYXQgdGhlIG1vZGVsIGlzbid0IGJyb2tlbiwgYnV0IHRoYXQgdGhlIGlzc3VlIGlzIHdp
+dGggaG93IHdlIAo+IMKgwqBkZXZlbG9wLiBJbiBvdGhlciB3b3JkcywgbW92aW5nIHRvIGEgOSBt
+b250aHMgbW9kZWwgd2lsbCAqbm90KiBmaXggdGhlIHVuZGVybHlpbmcgaXNzdWVzLCBidXQgCj4g
+wqDCoG1lcmVseSBwcm92aWRlIGFuIGluY2VudGl2ZSBub3QgdG8gZml4IHRoZW0uCj4gKiBJc3N1
+ZXMgaGlnaGxpZ2h0ZWQgd2VyZToKPiDCoCAqIDItMyBtb250aHMgc3RhYmlsaXppbmcgcGVyaW9k
+IGlzIHRvbyBsb25nCgpJIHRoaW5rIG9uZSBvZiB0aGUgZ29hbHMgd2l0aCB0aGUgNiBtb250aCBy
+ZWxlYXNlIGN5Y2xlIHdhcyB0byBzaHJpbmsKdGhlIHN0YWJpbGl6aW5nIHBlcmlvZCwgYnV0IGl0
+IGRpZG4ndCB0dXJuIHRoYXQgd2F5LCBhbmQgdGhlCnN0YWJpbGl6aW5nIHBlcmlvZCBpcyBxdWl0
+ZSBzaW1pbGFyIHdpdGggYSA2IG9yIGEgOSBtb250aCByZWxlYXNlCmN5Y2xlLgoKUm9nZXIuCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
