@@ -1,17 +1,16 @@
-From: Karl Johnson <karljohnson.it@gmail.com>
-Subject: Recent 4.9 kernel not booting as dom0
-Date: Wed, 4 Jul 2018 14:16:19 -0400
-Message-ID: <CAAzNQHQGhtGReJ=7p=i7nQE72pQdWgsyYRp=K2KBzbqKt3HyLA@mail.gmail.com>
+From: ihor.matushchak@foobox.net
+Subject: [PATCH v1] xen:arm:earlyprintk configuration for rk3399
+ boards
+Date: Wed,  4 Jul 2018 23:55:27 +0300
+Message-ID: <7f31581e86c9d98994b31f6f303b02115d381d48.1530737070.git.ihor.matushchak@foobox.net>
+References: <cover.1530737070.git.ihor.matushchak@foobox.net>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2152654648251440064=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=iasq=ju=gmail.com=karljohnson.it@srs-us1.protection.inumbo.net>)
- id 1famKQ-0003Sj-Pd
- for xen-devel@lists.xenproject.org; Wed, 04 Jul 2018 18:16:34 +0000
-Received: by mail-lf0-x235.google.com with SMTP id l16-v6so4976552lfc.13
- for <xen-devel@lists.xenproject.org>; Wed, 04 Jul 2018 11:16:33 -0700 (PDT)
+In-Reply-To: <cover.1530737070.git.ihor.matushchak@foobox.net>
+In-Reply-To: <cover.1530737070.git.ihor.matushchak@foobox.net>
+References: <cover.1530737070.git.ihor.matushchak@foobox.net>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,61 +19,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org, xen-devel@lists.xen.org
+Cc: Ihor Matushchak <ihor.matushchak@foobox.net>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2152654648251440064==
-Content-Type: multipart/alternative; boundary="0000000000001aa87a0570306e3e"
-
---0000000000001aa87a0570306e3e
-Content-Type: text/plain; charset="UTF-8"
-
-Hello,
-
-I'm building dom0 kernel RPMs for the CentOS Xen project (
-https://github.com/CentOS-virt7/xen-kernel) and it seems that the 4.9
-branch isn't booting anymore as dom0. I recently built 4.9.110 and 4.9.111,
-both give black screen and reboot while booting dom0. Our last successful
-version is 4.9.105 therefore something must be wrong between 4.9.106 and
-4.9.110.
-
-I checked the OSSTEST for linux-4.9 and the last working flight was
-4.9.101. Is there a known issue with Xen and Linux 4.9?
-
-I don't have a serial port to see if there's a trace. It reboots right
-here: https://pasteboard.co/HsLJbMp.jpg
-
-Regards,
-
-Karl
-
---0000000000001aa87a0570306e3e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hello,<br><br>I&#39;m building dom0 kernel RPMs for the Ce=
-ntOS Xen project (<a href=3D"https://github.com/CentOS-virt7/xen-kernel">ht=
-tps://github.com/CentOS-virt7/xen-kernel</a>) and it seems that the 4.9 bra=
-nch isn&#39;t booting anymore as dom0. I recently built 4.9.110 and 4.9.111=
-, both give black screen and reboot while booting dom0. Our last successful=
- version is 4.9.105 therefore something must be wrong between 4.9.106 and 4=
-.9.110.<br><br>I checked the OSSTEST for linux-4.9 and the last working fli=
-ght was 4.9.101. Is there a known issue with Xen and Linux 4.9? <br><br>I d=
-on&#39;t have a serial port to see if there&#39;s a trace. It reboots right=
- here: <a href=3D"https://pasteboard.co/HsLJbMp.jpg">https://pasteboard.co/=
-HsLJbMp.jpg</a><br><br>Regards,<br><br>Karl<br></div>
-
---0000000000001aa87a0570306e3e--
-
-
---===============2152654648251440064==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2152654648251440064==--
+RnJvbTogSWhvciBNYXR1c2hjaGFrIDxpaG9yLm1hdHVzaGNoYWtAZm9vYm94Lm5ldD4KClNpZ25l
+ZC1vZmYtYnk6IElob3IgTWF0dXNoY2hhayA8aWhvci5tYXR1c2hjaGFrQGZvb2JveC5uZXQ+Ci0t
+LQogZG9jcy9taXNjL2FybS9lYXJseS1wcmludGsudHh0IHwgMSArCiB4ZW4vYXJjaC9hcm0vUnVs
+ZXMubWsgICAgICAgICAgfCAxICsKIDIgZmlsZXMgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspCgpk
+aWZmIC0tZ2l0IGEvZG9jcy9taXNjL2FybS9lYXJseS1wcmludGsudHh0IGIvZG9jcy9taXNjL2Fy
+bS9lYXJseS1wcmludGsudHh0CmluZGV4IGY3NjVmNTkuLjU1NzRhOTEgMTAwNjQ0Ci0tLSBhL2Rv
+Y3MvbWlzYy9hcm0vZWFybHktcHJpbnRrLnR4dAorKysgYi9kb2NzL21pc2MvYXJtL2Vhcmx5LXBy
+aW50ay50eHQKQEAgLTQ0LDYgKzQ0LDcgQEAgdGhlIG5hbWUgb2YgdGhlIG1hY2hpbmU6CiAgIC0g
+bXZlYnU6IHByaW50ayB3aXRoIHRoZSBNVkVCVSBmb3IgTWFydmVsbCBBcm1hZGEgMzcwMCBTb0Nz
+CiAgIC0gb21hcDU0MzI6IHByaW50ayB3aXRoIFVBUlQzIG9uIFRJIE9NQVA1NDMyIHByb2Nlc3Nv
+cnMKICAgLSByY2FyMzogcHJpbnRrIHdpdGggU0NJRjIgb24gUmVuZXNhcyBSLUNhciBHZW4zIHBy
+b2Nlc3NvcnMKKyAgLSByazMzOTk6IHByaW50ayB3aXRoIDgyNTAgb24gUm9ja2NoaXAgcmszMzk5
+IHByb2Nlc3NvcnMKICAgLSBzZWF0dGxlOiBwcmludGsgd2l0aCBwbDAxMSBmb3IgQU1EIFNlYXR0
+bGUgcHJvY2Vzc29yCiAgIC0gc3VuNmk6IHByaW50ayB3aXRoIDgyNTAgb24gQWxsd2lubmVyIEEz
+MSBwcm9jZXNzb3JzCiAgIC0gc3VuN2k6IHByaW50ayB3aXRoIDgyNTAgb24gQWxsd2lubmVyIEEy
+MCBwcm9jZXNzb3JzCmRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vUnVsZXMubWsgYi94ZW4vYXJj
+aC9hcm0vUnVsZXMubWsKaW5kZXggZjI2NDU5Mi4uMDA4MWZlZCAxMDA2NDQKLS0tIGEveGVuL2Fy
+Y2gvYXJtL1J1bGVzLm1rCisrKyBiL3hlbi9hcmNoL2FybS9SdWxlcy5tawpAQCAtMzksNiArMzks
+NyBAQCBFQVJMWV9QUklOVEtfbWlkd2F5ICAgICAgICAgOj0gcGwwMTEsMHhmZmYzNjAwMAogRUFS
+TFlfUFJJTlRLX212ZWJ1ICAgICAgICAgIDo9IG12ZWJ1LDB4ZDAwMTIwMDAKIEVBUkxZX1BSSU5U
+S19vbWFwNTQzMiAgICAgICA6PSA4MjUwLDB4NDgwMjAwMDAsMgogRUFSTFlfUFJJTlRLX3JjYXIz
+ICAgICAgICAgIDo9IHNjaWYsMHhlNmU4ODAwMAorRUFSTFlfUFJJTlRLX3JrMzM5OSAgICAgICAg
+IDo9IDgyNTAsMHhmZjFhMDAwMCwyCiBFQVJMWV9QUklOVEtfc2VhdHRsZSAgICAgICAgOj0gcGww
+MTEsMHhlMTAxMDAwMAogRUFSTFlfUFJJTlRLX3N1bjZpICAgICAgICAgIDo9IDgyNTAsMHgwMWMy
+ODAwMCwyCiBFQVJMWV9QUklOVEtfc3VuN2kgICAgICAgICAgOj0gODI1MCwweDAxYzI4MDAwLDIK
+LS0gCjIuNy40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
