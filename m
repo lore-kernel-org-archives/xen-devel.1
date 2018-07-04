@@ -1,20 +1,15 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <royger@FreeBSD.org>
-Subject: Re: [freebsd-master test] 124935: trouble:
- blocked/broken
-Date: Wed, 4 Jul 2018 08:49:28 +0200
-Message-ID: <20180704064928.lwg6brh5ntr4ypxv@mac.bytemobile.com>
-References: <osstest-124935-mainreport@xen.org>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH 01/13] libx86: Introduce libx86/cpuid.h
+Date: Wed, 4 Jul 2018 07:54:04 +0100
+Message-ID: <20180704065403.egesqk7wtpx7fgnt@citrix.com>
+References: <1530651326-5320-1-git-send-email-andrew.cooper3@citrix.com>
+ <1530651326-5320-2-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=b+ad=ju=freebsd.org=royger@srs-us1.protection.inumbo.net>)
- id 1fabb5-0003ri-Vt
- for xen-devel@lists.xenproject.org; Wed, 04 Jul 2018 06:49:04 +0000
 Content-Disposition: inline
-In-Reply-To: <osstest-124935-mainreport@xen.org>
+In-Reply-To: <1530651326-5320-2-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,23 +18,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: osstest service owner <osstest-admin@xenproject.org>
-Cc: xen-devel@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Jan Beulich <JBeulich@suse.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKdWwgMDQsIDIwMTggYXQgMDI6NTI6MDVBTSArMDAwMCwgb3NzdGVzdCBzZXJ2aWNl
-IG93bmVyIHdyb3RlOgo+IGZsaWdodCAxMjQ5MzUgZnJlZWJzZC1tYXN0ZXIgcmVhbCBbcmVhbF0K
-PiBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTI0OTM1
-Lwo+IAo+IEZhaWx1cmVzIGFuZCBwcm9ibGVtcyB3aXRoIHRlc3RzIDotKAo+IAo+IFRlc3RzIHdo
-aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAo+IGluY2x1ZGluZyB0ZXN0cyB3
-aGljaCBjb3VsZCBub3QgYmUgcnVuOgo+ICBidWlsZC1hbWQ2NC1mcmVlYnNkICAgICAgICAgICAg
-IDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCj4gIGJ1aWxkLWFtZDY0LWZyZWVi
-c2QgICAgICAgICAgIDUgaG9zdC1pbnN0YWxsKDUpICAgICAgICBicm9rZW4gUkVHUi4gdnMuIDEy
-NDkwOQoKVGhpcyBmYWlsdXJlIGlzIGNhdXNlZCBiZWNhdXNlIHRoZSBob3N0IGlzIHNldCB0byBi
-b290IGZyb20gVUVGSSwgYW5kCnRoZXJlJ3Mgbm8gbG9naWMgeWV0IGluIG9zc3Rlc3QgdG8gaW5z
-dGFsbCBGcmVlQlNEIGZyb20gVUVGSS4KCklzIHRoZXJlIGFueXdheSB0byBwcmV2ZW50IHRoZSBG
-cmVlQlNEIGpvYnMgZnJvbSBydW5uaW5nIGluCmFsYmFuYXswfDF9IChvciBVRUZJIGJveGVzIGlu
-IGdlbmVyYWwpPwoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCBKdWwgMDMsIDIwMTggYXQgMDk6NTU6MTRQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBCZWdpbiB0byB1bnRhbmdsZSB0aGUgaGVhZGVyIGRlcGVuZGVuY3kgdGFuZ2xlIGJ5
+IG1vdmluZyBkZWZpbml0aW9uIG9mCj4gc3RydWN0IGNwdWlkX2xlYWYgb3V0IG9mIHg4Nl9lbXVs
+YXRlLmggaW50byB0aGUgbmV3IGNwdWlkLmguCj4gCj4gQWRkaXRpb25hbGx5LCBwbHVtYiB0aGUg
+aGVhZGVyIHRocm91Z2ggdG8gbGlieGMuICBUaGlzIGlzIHRlY2huaWNhbGx5IGEKPiByZWR1bmRh
+bnQgaW5jbHVkZSBhdCB0aGlzIHBvaW50LCBidXQgaXQgaGVscHMgYnVpbGQtdGVzdCB0aGUgbGF0
+ZXIgY2hhbmdlcywKPiBhbmQgd2lsbCBiZSB1c2VkIGV2ZW50dWFsbHkuCj4gCj4gU2lnbmVkLW9m
+Zi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPiBTaWduZWQt
+b2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KClJldmlld2Vk
+LWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
