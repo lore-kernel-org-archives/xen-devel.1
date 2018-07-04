@@ -1,20 +1,26 @@
-From: Steven Haigh <netwiz@crc.id.au>
-Subject: Re: [Notes for xen summit 2018 design session] Process
- changes: is the 6 monthly release Cadence too short, Security Process, ...
-Date: Thu, 05 Jul 2018 01:59:11 +1000
-Message-ID: <8146633.jAX8UBOXDT@wopr.lan.crc.id.au>
-References: <0920C595-DA2C-4C5E-B713-40ADB616CC93@citrix.com>
- <FA03802B-3308-4BF8-B3D9-1E6DAB3DA64B@citrix.com>
- <23356.60431.470201.125684@mariner.uk.xensource.com>
+From: Daniel Kiper <daniel.kiper@oracle.com>
+Subject: Re: [PATCH v2 1/8] xen: calculate XEN_BUILD_TIME using
+ XEN_BUILD_DATE value
+Date: Wed, 4 Jul 2018 18:07:43 +0200
+Message-ID: <20180704160743.GF26572@olila.local.net-space.pl>
+References: <1529418946-30114-1-git-send-email-daniel.kiper@oracle.com>
+ <1529418946-30114-2-git-send-email-daniel.kiper@oracle.com>
+ <5B30F2B202000078001CD8E4@prv1-mh.provo.novell.com>
+ <20180704120629.GJ4670@olila.local.net-space.pl>
+ <23356.53881.85485.72287@mariner.uk.xensource.com>
+ <20180704143957.GC26572@olila.local.net-space.pl>
+ <23356.60074.281809.940061@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7073144572106643806=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=g09h=ju=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
- id 1fakBZ-0004AG-MW
- for xen-devel@lists.xenproject.org; Wed, 04 Jul 2018 15:59:17 +0000
-In-Reply-To: <23356.60431.470201.125684@mariner.uk.xensource.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=z+bn=ju=oracle.com=daniel.kiper@srs-us1.protection.inumbo.net>)
+ id 1fakKD-0005kb-U5
+ for xen-devel@lists.xenproject.org; Wed, 04 Jul 2018 16:08:13 +0000
+Content-Disposition: inline
+In-Reply-To: <23356.60074.281809.940061@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,106 +29,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Lars Kurth <lars.kurth@citrix.com>, "advisory-board@lists.xenproject.org" <advisory-board@lists.xenproject.org>, Doug Goldstein <cardoe@cardoe.com>, George Dunlap <George.Dunlap@citrix.com>, Rich Persaud <persaur@gmail.com>, "committers@xenproject.org" <committers@xenproject.org>, Ian Jackson <ian.jackson@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <royger@FreeBSD.org>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7073144572106643806==
-Content-Type: multipart/signed; boundary="nextPart7363736.UuHk3IXPUc"; micalg="pgp-sha256"; protocol="application/pgp-signature"
-
---nextPart7363736.UuHk3IXPUc
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-
-On Thursday, 5 July 2018 1:47:27 AM AEST Ian Jackson wrote:
-> George Dunlap writes ("Re: [Xen-devel] [Notes for xen summit 2018 design=
-=20
-session] Process changes: is the 6 monthly release Cadence too short, Secur=
-ity=20
-Process, ..."):
-> > I seem to recall saying that even if we agreed that moving to continuous
-> > delivery was a goal we wanted to pursue, we would still be several years
-> > away from achieving anything like it; and so in the mean time, it would
-> > probably make sense to move back to a 9-month cycle while we attack the
-> > problem.
-> Another thing that is that as our window of N years'
-> security-supported releases has filled up with ~6-month releases,
-> there are more of them.
->=20
-> I know we had concerns that this makes backporting harder.  I'm not
-> really sure that's true.  The total amount of backporting lossage
-> (merge conflicts etc.) is the same, and trivial automatic backports
-> are nearly no work.
->=20
-> But one thing that is noticeable is that this significantly increases
-> our test load when a security update comes out.  Each
-> security-supported branch gets updates, and osstest suddenly needs to
-> test them all.
-
-I did like the idea of an 'LTS' vs 'testing' release. The idea that odd / e=
-ven=20
-or similar varied in lifecycle - allowing entire versions to be killed off=
-=20
-rapidly.
-
-If we had 'LTS' support at 2 (or more?) years, and 'testing' support at 6 (=
-or=20
-less?) months, would this help?
-
-I guess the idea would be that the 'testing' versions are where all the rap=
-id=20
-features are added, which is then 'frozen' into an LTS release at some poin=
-t=20
-to only get security fixes via point releases (ala linux kernel version typ=
-e=20
-bumping).
-
-Is this even practical? I guess this would depend on how often an LTS relea=
-se=20
-is spawned...
-
-=2D-=20
-Steven Haigh
-
-=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB https://www.crc.id.au
-=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
-
---nextPart7363736.UuHk3IXPUc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAls87s8ACgkQQa811Xp9
-MdznuQ//VC+cqcwffbTZZ1CNkqLq+djA1LD67xbF8oOkwWOWYvCYYBEj/ButW4rG
-Or8tIpSqydPuKG/+/WK676PpaW7gn3Jjg503SvYF78IKm2bHevOlrltoS0DARqcF
-443GLb+pqol2PyP4nj97Uhtg5khlPgflLjyh3359CbRTckbfuQmoQwBFJHjWDM9K
-kgSaf8x3XZqvLx1rZXZsX7IPnCieqdKNR3yFg7+wpGZS0riEIzptS5e9x0HFcLsh
-nY1tYHm/LpxNeMOiF9D6yLeI/A1ODGl8nPEak+yOSNyktihvg82BzfOT+IHEi2ze
-os2l/PQ0oDRU40freDAK9D/gNUXu+cMfCMVELDGT2de7ZZKx2sopCZ5kDbyM7KNA
-v3YvL8bIHpD6i7fMRSJ0HwcQmUplCVKHm94BBTINdjU5L2zZAzoFt+LIlwJFNbB4
-xZfxH9ipXV9/ZnqEnArlxULVsqcMT2v0p9Xv59FhzuhjQ6Auklu1WMPlQjN4yXI6
-IHk4aZYFdBwU/ZyRTJRI4YG1hh3BgEGtZ8ZvRo6qXUIoHQ651YF95lkAbPwuZ6NX
-U45wdgl/oeIPeh2P5Fka3oQYjb2j6F8+XiLxTWRVq/Bb0RMcuLGW3xkimX+9CXMF
-AUCqMQTC0TFb3+XHRu1bBfYLMHpgla8K+nHRBSoG6+AS9LCKnkg=
-=PZza
------END PGP SIGNATURE-----
-
---nextPart7363736.UuHk3IXPUc--
-
-
-
-
-
---===============7073144572106643806==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7073144572106643806==--
+T24gV2VkLCBKdWwgMDQsIDIwMTggYXQgMDQ6NDE6MzBQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
+dGU6Cj4gRGFuaWVsIEtpcGVyIHdyaXRlcyAoIlJlOiBbUEFUQ0ggdjIgMS84XSB4ZW46IGNhbGN1
+bGF0ZSBYRU5fQlVJTERfVElNRSB1c2luZyBYRU5fQlVJTERfREFURSB2YWx1ZSIpOgo+ID4gT24g
+V2VkLCBKdWwgMDQsIDIwMTggYXQgMDI6NTg6MTdQTSArMDEwMCwgSWFuIEphY2tzb24gd3JvdGU6
+Cj4gPiA+IGV4cG9ydCBYRU5fQlVJTERfUE9TSVhfVElNRQk/PSAkKHNoZWxsIGVjaG8gJCR7U09V
+UkNFX0RBVEVfRVBPQ0gtZGF0ZSArJXN9KQo+ID4KPiA+IE9LLCBidXQgd2hhdCBpZiBTT1VSQ0Vf
+REFURV9FUE9DSCBpcyBub3QgZGVmaW5lZD8KPiA+ICJkYXRlIiBjb21tYW5kIGlzIG5vdCBhIGdv
+b2Qgc29sdXRpb24gaGVyZS4KPgo+IEkgZG9uJ3QgdW5kZXJzdGFuZCB3aHkgeW91IHRoaW5rIG5v
+dC4gIEkgdGhpbmsgYWxsIHRoZSB2ZXJzaW9ucyBvZgo+IGRhdGUgd2UgY2FyZSBhYm91dCB3aWxs
+IGRvIHNvbWV0aGluZyBzZW5zaWJsZSB3aXRoCj4gICAgIGRhdGUgKyVzCj4KPiBJIGRvbid0IGhh
+dmUgYSBGcmVlQlNEIGhvc3QgdG8gaGFuZCB0byB0ZXN0LCBDQydpbmcgUm9nZXIuCgpUaGlzIGlz
+IG5vdCB0aGUgZGF0ZSBjb21tYW5kIHByb2JsZW0uIFRoaXMgaXMgbW9yZSByZWxhdGVkIHRvIFNP
+VVJDRV9EQVRFX0VQT0NICnNwZWMgKGh0dHBzOi8vcmVwcm9kdWNpYmxlLWJ1aWxkcy5vcmcvc3Bl
+Y3Mvc291cmNlLWRhdGUtZXBvY2gvI2lkbTU1KQp3aGljaCBjbGVhcmx5IHNheXM6CgogIFRoZSB2
+YWx1ZSBNVVNUIGJlIHJlcHJvZHVjaWJsZSAoZGV0ZXJtaW5pc3RpYykgYWNyb3NzIGRpZmZlcmVu
+dAogIGV4ZWN1dGlvbnMgb2YgdGhlIGJ1aWxkLCBkZXBlbmRpbmcgb25seSBvbiB0aGUgc291cmNl
+IGNvZGUuIEl0IFNIT1VMRAogIGJlIHNldCB0byB0aGUgbGFzdCBtb2RpZmljYXRpb24gdGltZSBv
+ZiB0aGUgc291cmNlLCBpbmNvcnBvcmF0aW5nIGFueQogIHBhY2thZ2luZy1zcGVjaWZpYyBtb2Rp
+ZmljYXRpb25zLgoKU28sIEFJVUksIGFib3ZlIGltcGxpZXMgdGhhdCB3ZSBzaG91bGQgbm90IHVz
+ZSB0aGUgZGF0ZSBjb21tYW5kLiBBbSBJIHJpZ2h0PwoKPiBBbHRob3VnaCBteSBydW5lIGFib3Zl
+IGlzIHdyb25nIGFuZCBzaG91bGQgcmVhZAo+ICAgICBleHBvcnQgWEVOX0JVSUxEX1BPU0lYX1RJ
+TUUJPz0gJChzaGVsbCBlY2hvICQke1NPVVJDRV9EQVRFX0VQT0NILSQkKGRhdGUgKyVzKX0pCj4K
+PiA+IElmIG90aGVyIGd1eXMgYXJlIE9LIHdpdGggdGhhdCBJIGNhbiBwcmVwYXJlIGEgcGF0Y2gg
+d2l0aCB5b3VyIFN1Z2dlc3RlZC1ieS4KPgo+IEhvdyBkbyBpbiBpbnRlbmQgdG8gY2hvb3NlIHdo
+aWNoIHdyYXBwZXIgc2NyaXB0IHRvIHVzZSA/CgpJIHRob3VnaCB0aGF0IGEgbWVjaGFuaXNtIHRv
+IGRpZmZlcmVudGlhdGUgR05VIGFuZCBCU0Qgc3lzdGVtcyBleGlzdHMgaW4KdGhlIFhlbiBidWls
+ZCBzeXN0ZW0uIFNvLCBJIHdhcyBnb2luZyB0byByZXVzZSBpdCBzb21laG93LgoKPiBUaGlzIHBp
+bGUgb2Ygc3R1ZmYgd2lsbCBydW4gb24gYXdmdWwgbG90IG9mIHRpbWVzIGR1cmluZyBlYWNoIG1h
+a2Ugc28KPiBrZWVwaW5nIGl0IG9mIHJlYXNvbmFibGUgc2l6ZSBpcyBhIGdvb2QgcGxhbi4KPgo+
+IE1heWJlIGl0IHdvdWxkIGJlIGJldHRlciB0byBoYXZlIGEgc2luZ2xlIHNoZWxsIHNjcmlwdCB3
+aGljaCBvdXRwdXRzIGEKPiB3aG9sZSBidW5jaCBvZiB2YXJpYWJsZSBzZXR0aW5ncyBmb3IgbWFr
+ZSB0byAkKGV2YWwgKSA/CgpJdCBsb29rcyB0aGF0IHRoaXMgdmFyaWFibGUgaXMgcmVmZXJlbmNl
+ZCBvbmNlLCBzbywgaXQgc2hvdWxkIG5vdCBiZSBhIHByb2JsZW0uCgpEYW5pZWwKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
