@@ -1,20 +1,19 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [freebsd-master test] 124935: trouble:
- blocked/broken
-Date: Wed, 4 Jul 2018 11:55:40 +0100
-Message-ID: <23356.42924.671628.339753@mariner.uk.xensource.com>
-References: <osstest-124935-mainreport@xen.org>
- <20180704064928.lwg6brh5ntr4ypxv@mac.bytemobile.com>
+From: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 1/3] resource allocation:
+ PropCompareBase: Break out _get_val
+Date: Wed, 4 Jul 2018 11:56:29 +0100
+Message-ID: <1530701791-32462-1-git-send-email-ian.jackson@eu.citrix.com>
+References: <23356.42924.671628.339753@mariner.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=8qzb=ju=citrix.com=prvs=716786cb2=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1fafS6-0000h4-HP
- for xen-devel@lists.xenproject.org; Wed, 04 Jul 2018 10:56:02 +0000
-In-Reply-To: <20180704064928.lwg6brh5ntr4ypxv@mac.bytemobile.com>
+ id 1fafSk-00018o-IJ
+ for xen-devel@lists.xenproject.org; Wed, 04 Jul 2018 10:56:42 +0000
+In-Reply-To: <23356.42924.671628.339753@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,25 +22,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <royger@FreeBSD.org>
-Cc: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <royger@FreeBSD.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Um9nZXIgUGF1IE1vbm7DqSB3cml0ZXMgKCJSZTogW1hlbi1kZXZlbF0gW2ZyZWVic2QtbWFzdGVy
-IHRlc3RdIDEyNDkzNTogdHJvdWJsZTogYmxvY2tlZC9icm9rZW4iKToKPiBUaGlzIGZhaWx1cmUg
-aXMgY2F1c2VkIGJlY2F1c2UgdGhlIGhvc3QgaXMgc2V0IHRvIGJvb3QgZnJvbSBVRUZJLCBhbmQK
-PiB0aGVyZSdzIG5vIGxvZ2ljIHlldCBpbiBvc3N0ZXN0IHRvIGluc3RhbGwgRnJlZUJTRCBmcm9t
-IFVFRkkuCgpPaC4gIChQbGVhc2UgZGlzcmVnYXJkIG15IG90aGVyIG1haWwuKQoKPiBJcyB0aGVy
-ZSBhbnl3YXkgdG8gcHJldmVudCB0aGUgRnJlZUJTRCBqb2JzIGZyb20gcnVubmluZyBpbgo+IGFs
-YmFuYXswfDF9IChvciBVRUZJIGJveGVzIGluIGdlbmVyYWwpPwoKRm9yIG5vdyBJIGhhdmUgdW5z
-ZXQgdGhlIGBmcmVlYnNkLTEwJyBob3N0ZmxhZy4gIFRodCBzaG91bGQgZG8gdGhlCnRyaWNrLgoK
-VGhlcmUgaXMgYWxzbyB0aGUgUHJvcEVxIHJlc291ciByZXNvdXJjZWNvbmRpdGlvbiB3aGljaCBj
-b3VsZCBiZSB1c2VkCmZvciB0aGlzLCBidXQgSSBub3RpY2UgdGhhdDoKICogUHJvcENvbXBhcmVC
-YXNlIGRvZXMgbm90IGhvbm91ciBob3N0IHByb3BlcnRpZXMgc2V0IGluIHRoZQogICBjb25maWd1
-cmF0aW9uIGZpbGVzIHJhdGhlciB0aGFuIHRoZSBkYXRhYmFzZTsKICogUHJvcENvbXBhcmVCYXNl
-IHdvdWxkIG5lZWQgYSB3YXkgdG8gc3BlY2lmeSB3aGF0IHRoZSBkZWZhdWx0CiAgIGlzIGlmIHRo
-ZSBjb25kaXRpb24gaXMgbm90IGZvdW5kLgoKSSB3aWxsIHNlbmQgc29tZSBwYXRjaGVzIHRvIGZp
-eCB0aGF0IGluIGEgbW9tZW50LgoKSWFuLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+VGhpcyBpcyBnb2luZyB0byBtYWtlIGRlZmF1bHRpbmcgZXRjLiBhIGJpdCBlYXNpZXIuCgpObyBm
+dW5jdGlvbmFsIGNoYW5nZS4KClNpZ25lZC1vZmYtYnk6IElhbiBKYWNrc29uIDxJYW4uSmFja3Nv
+bkBldS5jaXRyaXguY29tPgpDQzogUm9nZXIgUGF1IE1vbm7DqSA8cm95Z2VyQEZyZWVCU0Qub3Jn
+PgotLS0KIE9zc3Rlc3QvUmVzb3VyY2VDb25kaXRpb24vUHJvcENvbXBhcmVCYXNlLnBtIHwgMTEg
+KysrKysrKystLS0KIDEgZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25z
+KC0pCgpkaWZmIC0tZ2l0IGEvT3NzdGVzdC9SZXNvdXJjZUNvbmRpdGlvbi9Qcm9wQ29tcGFyZUJh
+c2UucG0gYi9Pc3N0ZXN0L1Jlc291cmNlQ29uZGl0aW9uL1Byb3BDb21wYXJlQmFzZS5wbQppbmRl
+eCA1MzA2YmI4Li4xZTNhYTg1IDEwMDY0NAotLS0gYS9Pc3N0ZXN0L1Jlc291cmNlQ29uZGl0aW9u
+L1Byb3BDb21wYXJlQmFzZS5wbQorKysgYi9Pc3N0ZXN0L1Jlc291cmNlQ29uZGl0aW9uL1Byb3BD
+b21wYXJlQmFzZS5wbQpAQCAtNDQsNyArNDQsNyBAQCBzdWIgbmV3IHsKICAgICB9LCAkY2xhc3M7
+CiB9CiAKLXN1YiBjaGVjayB7CitzdWIgX2dldF92YWwgKCQkJCkgewogICAgIG15ICgkcGMsICRy
+ZXN0eXBlLCAkcmVzbmFtZSkgPSBAXzsKIAogICAgICMgVXNpbmcgX2NhY2hlZCBhdm9pZHMgbmVl
+ZGluZyB0byB3b3JyeSBhYm91dCAkZGJoX3Rlc3RzIGJlaW5nCkBAIC01Nyw5ICs1NywxNCBAQCBF
+TkQKIAogICAgIG15ICRyb3c9ICRocHJvcHEtPmZldGNocm93X2FycmF5cmVmKCk7CiAgICAgJGhw
+cm9wcS0+ZmluaXNoKCk7CisgICAgCisgICAgbXkgJHYgPSAkcm93LT5bMF07CisgICAgcmV0dXJu
+ICR2OworfQogCi0gICAgbXkgJHByb3B2YWwgPSAkcm93LT5bMF07Ci0KK3N1YiBjaGVjayB7Cisg
+ICAgbXkgKCRwYywgJHJlc3R5cGUsICRyZXNuYW1lKSA9IEBfOworICAgIG15ICRwcm92YWwgPSAk
+cGMtPl9nZXRfdmFsKCRwYywgJHJlc3R5cGUsICRyZXNuYW1lKTsKICAgICByZXR1cm4gJHBjLT5f
+Y2hlY2soJHByb3B2YWwpOwogfQogCi0tIAoyLjEuNAoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
