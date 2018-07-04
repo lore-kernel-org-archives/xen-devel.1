@@ -1,20 +1,20 @@
 From: Steven Haigh <netwiz@crc.id.au>
 Subject: Re: [Notes for xen summit 2018 design session] Process
  changes: is the 6 monthly release Cadence too short, Security Process, ...
-Date: Thu, 05 Jul 2018 01:51:59 +1000
-Message-ID: <1813867.Jnpbfve7Wy@wopr.lan.crc.id.au>
+Date: Thu, 05 Jul 2018 01:59:11 +1000
+Message-ID: <8146633.jAX8UBOXDT@wopr.lan.crc.id.au>
 References: <0920C595-DA2C-4C5E-B713-40ADB616CC93@citrix.com>
- <20180703100733.mhfeia2vfywt6czx@mac.bytemobile.com>
  <FA03802B-3308-4BF8-B3D9-1E6DAB3DA64B@citrix.com>
+ <23356.60431.470201.125684@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7098104623206257518=="
+Content-Type: multipart/mixed; boundary="===============7073144572106643806=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=g09h=ju=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
- id 1fak4f-0003Ve-TK
- for xen-devel@lists.xenproject.org; Wed, 04 Jul 2018 15:52:10 +0000
-In-Reply-To: <FA03802B-3308-4BF8-B3D9-1E6DAB3DA64B@citrix.com>
+ id 1fakBZ-0004AG-MW
+ for xen-devel@lists.xenproject.org; Wed, 04 Jul 2018 15:59:17 +0000
+In-Reply-To: <23356.60431.470201.125684@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,126 +24,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Lars Kurth <lars.kurth@citrix.com>, "advisory-board@lists.xenproject.org" <advisory-board@lists.xenproject.org>, Doug Goldstein <cardoe@cardoe.com>, George Dunlap <George.Dunlap@citrix.com>, Rich Persaud <persaur@gmail.com>, "committers@xenproject.org" <committers@xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Lars Kurth <lars.kurth@citrix.com>, "advisory-board@lists.xenproject.org" <advisory-board@lists.xenproject.org>, Doug Goldstein <cardoe@cardoe.com>, George Dunlap <George.Dunlap@citrix.com>, Rich Persaud <persaur@gmail.com>, "committers@xenproject.org" <committers@xenproject.org>, Ian Jackson <ian.jackson@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7098104623206257518==
-Content-Type: multipart/signed; boundary="nextPart6899638.daCjOmCk2O"; micalg="pgp-sha256"; protocol="application/pgp-signature"
+--===============7073144572106643806==
+Content-Type: multipart/signed; boundary="nextPart7363736.UuHk3IXPUc"; micalg="pgp-sha256"; protocol="application/pgp-signature"
 
---nextPart6899638.daCjOmCk2O
+--nextPart7363736.UuHk3IXPUc
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="UTF-8"
 
-On Thursday, 5 July 2018 1:26:16 AM AEST George Dunlap wrote:
-> > On Jul 3, 2018, at 11:07 AM, Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
-> > wrote:
-> >=20
-> > On Mon, Jul 02, 2018 at 06:03:39PM +0000, Lars Kurth wrote:
-> >=20
-> >> We then had a discussion around why the positive benefits didn't
-> >> materialize:
- * Andrew and a few other believe that the model isn't
-> >> broken, but that the issue is with how we>>=20
-> >>   develop. In other words, moving to a 9 months model will *not* fix t=
-he
-> >>   underlying issues, but=20
- merely provide an incentive not to fix them.
-> >>=20
-> >> * Issues highlighted were:
-> >>=20
-> >>   * 2-3 months stabilizing period is too long
-> >=20
-> >=20
-> > I think one of the goals with the 6 month release cycle was to shrink
-> > the stabilizing period, but it didn't turn that way, and the
-> > stabilizing period is quite similar with a 6 or a 9 month release
-> > cycle.
+On Thursday, 5 July 2018 1:47:27 AM AEST Ian Jackson wrote:
+> George Dunlap writes ("Re: [Xen-devel] [Notes for xen summit 2018 design=
+=20
+session] Process changes: is the 6 monthly release Cadence too short, Secur=
+ity=20
+Process, ..."):
+> > I seem to recall saying that even if we agreed that moving to continuous
+> > delivery was a goal we wanted to pursue, we would still be several years
+> > away from achieving anything like it; and so in the mean time, it would
+> > probably make sense to move back to a 9-month cycle while we attack the
+> > problem.
+> Another thing that is that as our window of N years'
+> security-supported releases has filled up with ~6-month releases,
+> there are more of them.
 >=20
+> I know we had concerns that this makes backporting harder.  I'm not
+> really sure that's true.  The total amount of backporting lossage
+> (merge conflicts etc.) is the same, and trivial automatic backports
+> are nearly no work.
 >=20
-> Right, and I think this was something that wasn=E2=80=99t quite captured =
-in Lars=E2=80=99
-> summary.
-=20
-> Everyone agreed:
-> 1. The expectation was that a shorter release cycle would lead to shorter
-> stabilization periods
- 2. This has not turned out to be the case, which
-> means
-> 3 At the moment, our =E2=80=9Ctime doing development=E2=80=9D to =E2=80=
-=9Ctime fixing bugs for a
-> release=E2=80=9D ratio is far too low.
-=20
-> One option to fix #3 is to go back to a 9-month cycle (or even a 12-month
-> cycle), which would increase the =E2=80=9Cdevelopment=E2=80=9D part of th=
-e equation.
-=20
-> But Doug was advocating trying instead to attack the =E2=80=9Ctime fixing=
- bugs=E2=80=9D part
-> of the equation.  He said he was a big fan =E2=80=9Ccontinuous delivery=
-=E2=80=9D =E2=80=94 of being
-> *always* ready to release.  And I think there=E2=80=99s a fair amount of =
-agreement
-> that one of the reasons it takes so long to stabilize is that our testing
-> isn=E2=80=99t reliably catching bugs for whatever reason.
+> But one thing that is noticeable is that this significantly increases
+> our test load when a security update comes out.  Each
+> security-supported branch gets updates, and osstest suddenly needs to
+> test them all.
 
-On this point alone, release quickly, release often. The kernel for instanc=
-e=20
-runs about 1 release per week on the stable branches - sometimes 2.
-
-With regular process, releases should be easy to achieve - and that means=20
-automation, automation and more automation.
-
-=46rom my end as a 'consumer' of this process, a regular process makes it e=
-asy=20
-for me to rebase work based on a regular release. In fact, it usually takes=
- me=20
-less than 30 minutes to update, compile, package and release kernel builds =
-=2D=20
-and all of that is compile time. I check kernel.org every 6 hours, and fire=
+I did like the idea of an 'LTS' vs 'testing' release. The idea that odd / e=
+ven=20
+or similar varied in lifecycle - allowing entire versions to be killed off=
 =20
-off automated builds as needed. The reality is, I could easily make this=20
-hourly and reduce time from release to package to less than an hour - but a=
+rapidly.
+
+If we had 'LTS' support at 2 (or more?) years, and 'testing' support at 6 (=
+or=20
+less?) months, would this help?
+
+I guess the idea would be that the 'testing' versions are where all the rap=
+id=20
+features are added, which is then 'frozen' into an LTS release at some poin=
 t=20
-that point is it worth it? :)
+to only get security fixes via point releases (ala linux kernel version typ=
+e=20
+bumping).
 
-The longest delay on getting this to the clients is the time it takes for n=
-on-
-local mirrors to catch up.
-=20
-> So a fair amount of the discussion was about what it would look like, and
-> what it would take, to make it such that almost any push from osstest (or
-> whatever testing infrasctructure we went with) could reasonably be
-> released, and would have a very low expectation of having extraneous bugs.
-
-The key here is testing. If we started at the release end of the tree,=20
-something as simple as a git tag triggers a tarball export of the tree=20
-versioned as per the tag may well be a huge step forward in the release.
-
-Then time can be taken after this in tweaking the testing part as we find=20
-things that become obvious through the rapid release process.
-
-> I seem to recall saying that even if we agreed that moving to continuous
-> delivery was a goal we wanted to pursue, we would still be several years
-> away from achieving anything like it; and so in the mean time, it would
-> probably make sense to move back to a 9-month cycle while we attack the
-> problem.
-
-Honestly, as a packager, I don't see ground-breaking changes in any version=
- of=20
-Xen that is currently released. Most are optimisations like the new PVH cod=
-e.
-
-My point here is that really, are there enough major features that would br=
-eak=20
-everything to require a new major release every 9 months?
-
-Would 12 months for major features be more suitable and keep smaller=20
-refinements / additions as point releases?
-
-With a solid base via testing, there's no real reason why a weekly (or dail=
-y)=20
-release wouldn't be technically feasible - apart from not having enough=20
-changes to justify it ;)
+Is this even practical? I guess this would depend on how often an LTS relea=
+se=20
+is spawned...
 
 =2D-=20
 Steven Haigh
@@ -151,35 +87,35 @@ Steven Haigh
 =F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB https://www.crc.id.au
 =F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
 
---nextPart6899638.daCjOmCk2O
+--nextPart7363736.UuHk3IXPUc
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part.
 Content-Transfer-Encoding: 7Bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAls87R8ACgkQQa811Xp9
-MdzneRAAiVgUzTyXANz05AhUiGqCQ3FG+BqRbemzOw0/wDqRQmAKU9GKn3N91m+l
-eTrkU9Owar4UQLUP1M8bC69D4CV+b/d890XNEqQa1z2Q8vSm0DZuIt8Tg6vqnB7A
-vwm+xYLQCYqtvYbxYYeS9ZB54pnLosyCXaRtAJ6QWJjrfZcY/nyM543VEdYKJfii
-l8bjDH4qrrm8x9/Zpq8dOXJ+WmCMAKdZHjRHSxlNvJpG1AHC3m1w065bQ4dRNW9f
-l8aoBnH9xVGMoWjWy3kXt5QNM86JBBhf3S8A4sLwY3j49ERribRxHna3f1p1TDX/
-o5vKwVY1698A6s3WJClV/4/3zaW/ysVZ2apOU89R1KNgTf5VmJnha9NKtvALifPR
-t7ZK8xrdF7yBeUmNCe6/lRCpGfnIWvltZ6HDzut0IvU8Nf160Y0QintcB/hz+bWi
-6O2TH32OLNqixc2d21SB9CB7HFAQA8CANwO387RYbkM2HvBuOEJyNSC4rQFv803q
-UAdJCGrTjoCNBZYoQCBPx46/6ME5k7DUg2etorxSl2XQYNdmSSZT4RFA6vKr6juD
-bU8DLqEostfezsR1cQPyi3Muvfwqpcr4256VDqd648+uMnZEfCheO9tWodNJZqMC
-NClmFNkTPNuQnsyzPUoXllcCp2g8YZaq8NLSb8/vtzSvWw4KtQs=
-=v8zM
+iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAls87s8ACgkQQa811Xp9
+MdznuQ//VC+cqcwffbTZZ1CNkqLq+djA1LD67xbF8oOkwWOWYvCYYBEj/ButW4rG
+Or8tIpSqydPuKG/+/WK676PpaW7gn3Jjg503SvYF78IKm2bHevOlrltoS0DARqcF
+443GLb+pqol2PyP4nj97Uhtg5khlPgflLjyh3359CbRTckbfuQmoQwBFJHjWDM9K
+kgSaf8x3XZqvLx1rZXZsX7IPnCieqdKNR3yFg7+wpGZS0riEIzptS5e9x0HFcLsh
+nY1tYHm/LpxNeMOiF9D6yLeI/A1ODGl8nPEak+yOSNyktihvg82BzfOT+IHEi2ze
+os2l/PQ0oDRU40freDAK9D/gNUXu+cMfCMVELDGT2de7ZZKx2sopCZ5kDbyM7KNA
+v3YvL8bIHpD6i7fMRSJ0HwcQmUplCVKHm94BBTINdjU5L2zZAzoFt+LIlwJFNbB4
+xZfxH9ipXV9/ZnqEnArlxULVsqcMT2v0p9Xv59FhzuhjQ6Auklu1WMPlQjN4yXI6
+IHk4aZYFdBwU/ZyRTJRI4YG1hh3BgEGtZ8ZvRo6qXUIoHQ651YF95lkAbPwuZ6NX
+U45wdgl/oeIPeh2P5Fka3oQYjb2j6F8+XiLxTWRVq/Bb0RMcuLGW3xkimX+9CXMF
+AUCqMQTC0TFb3+XHRu1bBfYLMHpgla8K+nHRBSoG6+AS9LCKnkg=
+=PZza
 -----END PGP SIGNATURE-----
 
---nextPart6899638.daCjOmCk2O--
+--nextPart7363736.UuHk3IXPUc--
 
 
 
 
 
---===============7098104623206257518==
+--===============7073144572106643806==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -189,4 +125,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============7098104623206257518==--
+--===============7073144572106643806==--
