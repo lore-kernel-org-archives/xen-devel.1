@@ -1,17 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 00/13] x86: CPUID and MSR policy marshalling
- support
-Date: Wed, 04 Jul 2018 04:44:38 -0600
-Message-ID: <5B3CA51602000078001D0F82@prv1-mh.provo.novell.com>
-References: <1530651326-5320-1-git-send-email-andrew.cooper3@citrix.com>
- <5B3C82B602000078001D0E02@prv1-mh.provo.novell.com>
- <4ee2a619-3e8f-523f-b280-6891ff7edc26@citrix.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <royger@FreeBSD.org>
+Subject: Re: [freebsd-master test] 124935: trouble:
+ blocked/broken
+Date: Wed, 4 Jul 2018 12:48:31 +0200
+Message-ID: <20180704104831.mncxvbormkno54ij@mac.bytemobile.com>
+References: <osstest-124935-mainreport@xen.org>
+ <23356.41426.140421.448689@mariner.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <4ee2a619-3e8f-523f-b280-6891ff7edc26@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=b+ad=ju=freebsd.org=royger@srs-us1.protection.inumbo.net>)
+ id 1fafL5-0008AZ-RS
+ for xen-devel@lists.xenproject.org; Wed, 04 Jul 2018 10:48:47 +0000
 Content-Disposition: inline
+In-Reply-To: <23356.41426.140421.448689@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,21 +24,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Daniel de Graaf <dgdegra@tycho.nsa.gov>, Roger Pau Monne <roger.pau@citrix.com>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA0LjA3LjE4IGF0IDEyOjQwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMDQvMDcvMTggMDk6MTcsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBQZXJzb25hbGx5
-IEknZCBmYXZvciB0aGUgdG9wIGxldmVsIHZhcmlhbnRzLCBhcyB0aGF0IG1ha2VzCj4+IHN1ZmZp
-Y2llbnRseSBjbGVhciB0aGF0IHRoZSBjb2RlIGlzIG5laXRoZXIgc3BlY2lmaWMgdG8gdGhlIGh5
-cGVydmlzb3IKPj4gbm9yIHNwZWNpZmljIHRvIHRoZSB0b29scy4KPiAKPiBUaGF0J3MgdGhlIGNv
-bmNlcm4gSSd2ZSBnb3Qgd2l0aCB0aGUgdG9wIGxldmVsIHZhcmlhbnQuICBJIHZpZXcgdGhpcyBh
-cwo+IGh5cGVydmlzb3IgY29kZSB3aGljaCB3ZSBhbHNvIHdhbnQgdG8gdXNlIGluIGxpYnhjLCBy
-YXRoZXIgdGhhbgo+IHNwZWNpZmljYWxseSBzZXBhcmF0ZSBjb2RlLgoKQnV0IGlzbid0IHRoZSBu
-YXR1cmUgb2YgbGlicmFyeSBjb2RlIHRvIGJlIHVzZWQgaW4gZGlmZmVyZW50IGVudmlyb25tZW50
-cz8KSGVuY2Ugd2h5IHdvdWxkIHlvdSB3YW50IHRoaXMgc3BlY2lmaWNhbGx5IHF1YWxpZmllZCBh
-cyBoeXBlcnZpc29yIGNvZGU/CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+T24gV2VkLCBKdWwgMDQsIDIwMTggYXQgMTE6MzA6NDJBTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
+dGU6Cj4gb3NzdGVzdCBzZXJ2aWNlIG93bmVyIHdyaXRlcyAoIltmcmVlYnNkLW1hc3RlciB0ZXN0
+XSAxMjQ5MzU6IHRyb3VibGU6IGJsb2NrZWQvYnJva2VuIik6Cj4gPiBmbGlnaHQgMTI0OTM1IGZy
+ZWVic2QtbWFzdGVyIHJlYWwgW3JlYWxdCj4gPiBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9q
+ZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTI0OTM1Lwo+ID4gCj4gPiBGYWlsdXJlcyBhbmQgcHJvYmxl
+bXMgd2l0aCB0ZXN0cyA6LSgKPiA+IAo+ID4gVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFu
+ZCBhcmUgYmxvY2tpbmcsCj4gPiBpbmNsdWRpbmcgdGVzdHMgd2hpY2ggY291bGQgbm90IGJlIHJ1
+bjoKPiA+ICBidWlsZC1hbWQ2NC1mcmVlYnNkICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAg
+ICAgICAgICAgICAgYnJva2VuCj4gPiAgYnVpbGQtYW1kNjQtZnJlZWJzZCAgICAgICAgICAgNSBo
+b3N0LWluc3RhbGwoNSkgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gMTI0OTA5Cj4gCj4gRFlLIHdo
+YXQgdGhpcyBpcyA/Cj4gCj4gSXQgc2VlbXMgdG8gZ2V0IGFzIGZhciBhcyB0aGlzOgo+IAo+ICAg
+SnVsICA0IDAyOjA4OjMwLjkyMDEzMiAgIFN1Y2NlZWQgdG8gZG93bmxvYWQgTkJQIGZpbGUuCj4g
+ICBKdWwgIDQgMDI6MDg6MzAuOTMyMTM4IFswbVszMG1bNDBtWzJKWzAxOzAxSFswbVszN21bNDBt
+ZXJyb3I6IHNlcmlhbCBwb3J0IGAwJyBpc24ndCBmb3VuZC4KPiAgIEp1bCAgNCAwMjowODozMS4w
+NDAwOTkKPiAgIGVycm9yOiBjYW4ndCBmaW5kIGNvbW1hbmQgYHRpbWVvdXQnLgoKSSBoYXZlIG5v
+IGlkZWEgd2hhdCBOQlAgaXMuIEkgZG9uJ3QgdGhpbmsgaXQncyByZWxhdGVkIHRvIHRoZSBGcmVl
+QlNECmluc3RhbGxlciBhdCBhbGwuCgpUaGFua3MsIFJvZ2VyLgoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
