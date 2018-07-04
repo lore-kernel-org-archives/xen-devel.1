@@ -1,17 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 124986: tolerable all pass -
- PUSHED
-Date: Thu, 05 Jul 2018 04:03:11 +0000
-Message-ID: <osstest-124986-mainreport@xen.org>
+From: Karl Johnson <karljohnson.it@gmail.com>
+Subject: Recent 4.9 kernel not booting as dom0
+Date: Wed, 4 Jul 2018 14:16:19 -0400
+Message-ID: <CAAzNQHQGhtGReJ=7p=i7nQE72pQdWgsyYRp=K2KBzbqKt3HyLA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2152654648251440064=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ok6w=jv=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1favUA-0004oC-KU
- for xen-devel@lists.xenproject.org; Thu, 05 Jul 2018 04:03:14 +0000
+ <srs0=iasq=ju=gmail.com=karljohnson.it@srs-us1.protection.inumbo.net>)
+ id 1famKQ-0003Sj-Pd
+ for xen-devel@lists.xenproject.org; Wed, 04 Jul 2018 18:16:34 +0000
+Received: by mail-lf0-x235.google.com with SMTP id l16-v6so4976552lfc.13
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Jul 2018 11:16:33 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,52 +20,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNDk4NiB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNDk4Ni8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
-ICAgICAgICAgICAgICBlMWI3ZWI5MmQzZWM2Y2UzY2E2OGNmZmIzNmExNDhlYjU5ZjU5NjEzCmJh
-c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICAzNmQ5NGMxN2ZhMWU0OGNjOWZi
-OWVkMTViYzlhMjIzN2ExNzM4YmJiCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjQ5NzEgIDIwMTgt
-MDctMDQgMTY6MDA6NTQgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTI0OTgzICAy
-MDE4LTA3LTA0IDE5OjAwOjUxIFogICAgMCBkYXlzICAgIDIgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
-d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KICBJYW4gSmFja3NvbiA8SWFuLkphY2tzb25AZXUuY2l0cml4
-LmNvbT4KICBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgV2VpIExpdSA8d2VpLmxp
-dTJAY2l0cml4LmNvbT4KCmpvYnM6CiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-YXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC14
-c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1pMzg2ICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVz
-dC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUv
-bG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAg
-ICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxh
-bmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0
-CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7
-Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdl
-Yi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3Mg
-Y29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9
-b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhl
-bi5vcmc6L2hvbWUveGVuL2dpdC94ZW4uZ2l0CiAgIDM2ZDk0YzE3ZmEuLmUxYjdlYjkyZDMgIGUx
-YjdlYjkyZDNlYzZjZTNjYTY4Y2ZmYjM2YTE0OGViNTlmNTk2MTMgLT4gc21va2UKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============2152654648251440064==
+Content-Type: multipart/alternative; boundary="0000000000001aa87a0570306e3e"
+
+--0000000000001aa87a0570306e3e
+Content-Type: text/plain; charset="UTF-8"
+
+Hello,
+
+I'm building dom0 kernel RPMs for the CentOS Xen project (
+https://github.com/CentOS-virt7/xen-kernel) and it seems that the 4.9
+branch isn't booting anymore as dom0. I recently built 4.9.110 and 4.9.111,
+both give black screen and reboot while booting dom0. Our last successful
+version is 4.9.105 therefore something must be wrong between 4.9.106 and
+4.9.110.
+
+I checked the OSSTEST for linux-4.9 and the last working flight was
+4.9.101. Is there a known issue with Xen and Linux 4.9?
+
+I don't have a serial port to see if there's a trace. It reboots right
+here: https://pasteboard.co/HsLJbMp.jpg
+
+Regards,
+
+Karl
+
+--0000000000001aa87a0570306e3e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hello,<br><br>I&#39;m building dom0 kernel RPMs for the Ce=
+ntOS Xen project (<a href=3D"https://github.com/CentOS-virt7/xen-kernel">ht=
+tps://github.com/CentOS-virt7/xen-kernel</a>) and it seems that the 4.9 bra=
+nch isn&#39;t booting anymore as dom0. I recently built 4.9.110 and 4.9.111=
+, both give black screen and reboot while booting dom0. Our last successful=
+ version is 4.9.105 therefore something must be wrong between 4.9.106 and 4=
+.9.110.<br><br>I checked the OSSTEST for linux-4.9 and the last working fli=
+ght was 4.9.101. Is there a known issue with Xen and Linux 4.9? <br><br>I d=
+on&#39;t have a serial port to see if there&#39;s a trace. It reboots right=
+ here: <a href=3D"https://pasteboard.co/HsLJbMp.jpg">https://pasteboard.co/=
+HsLJbMp.jpg</a><br><br>Regards,<br><br>Karl<br></div>
+
+--0000000000001aa87a0570306e3e--
+
+
+--===============2152654648251440064==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2152654648251440064==--
