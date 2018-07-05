@@ -1,19 +1,22 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: Recent 4.9 kernel not booting as dom0
-Date: Thu, 5 Jul 2018 12:57:29 +0200
-Message-ID: <adcdd60e-50e4-86ed-3573-efc407ae9b78@suse.com>
-References: <CAAzNQHQGhtGReJ=7p=i7nQE72pQdWgsyYRp=K2KBzbqKt3HyLA@mail.gmail.com>
- <755ba9c6-34c8-1a06-73c2-7afbc02b1bbd@suse.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [Notes for xen summit 2018 design session] Process
+ changes: is the 6 monthly release Cadence too short, Security Process, ...
+Date: Thu, 5 Jul 2018 12:05:23 +0100
+Message-ID: <23357.64371.756397.906488@mariner.uk.xensource.com>
+References: <0920C595-DA2C-4C5E-B713-40ADB616CC93@citrix.com>
+ <60433E7B-455A-45C9-8A6A-B26F5BD8F115@citrix.com>
+ <0c8301e7-f9a7-3936-ed82-f858f8edc285@suse.com>
+ <AEC3807E-0EC4-4B77-8050-C58D98EA124D@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------7144DD7D439A18E95E1C851C"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=jouk=jv=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fb1x5-0007Oo-Pd
- for xen-devel@lists.xenproject.org; Thu, 05 Jul 2018 10:57:31 +0000
-In-Reply-To: <755ba9c6-34c8-1a06-73c2-7afbc02b1bbd@suse.com>
-Content-Language: de-DE
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=l63l=jv=citrix.com=prvs=717d132a8=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1fb24m-0000AP-F6
+ for xen-devel@lists.xenproject.org; Thu, 05 Jul 2018 11:05:28 +0000
+In-Reply-To: <AEC3807E-0EC4-4B77-8050-C58D98EA124D@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,114 +25,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Karl Johnson <karljohnson.it@gmail.com>, xen-devel@lists.xenproject.org
+To: Lars Kurth <lars.kurth@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, "advisory-board@lists.xenproject.org" <advisory-board@lists.xenproject.org>, Doug Goldstein <cardoe@cardoe.com>, Rich Persaud <persaur@gmail.com>, "committers@xenproject.org" <committers@xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>, Matt Spencer <Matt.Spencer@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---------------7144DD7D439A18E95E1C851C
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-On 05/07/18 12:19, Juergen Gross wrote:
-> On 04/07/18 20:16, Karl Johnson wrote:
->> Hello,
->>
->> I'm building dom0 kernel RPMs for the CentOS Xen project
->> (https://github.com/CentOS-virt7/xen-kernel) and it seems that the 4.9
->> branch isn't booting anymore as dom0. I recently built 4.9.110 and
->> 4.9.111, both give black screen and reboot while booting dom0. Our last
->> successful version is 4.9.105 therefore something must be wrong between
->> 4.9.106 and 4.9.110.
->>
->> I checked the OSSTEST for linux-4.9 and the last working flight was
->> 4.9.101. Is there a known issue with Xen and Linux 4.9?
-> 
-> I think I've found the reason. Testing a patch right now.
-
-It worked. I have already sent it to stable. In case you want to try
-it I'm attaching it for reference.
-
-
-Juergen
-
---------------7144DD7D439A18E95E1C851C
-Content-Type: text/x-patch;
- name="0001-x86-cpu-Re-apply-forced-caps-every-time-CPU-caps-are.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0001-x86-cpu-Re-apply-forced-caps-every-time-CPU-caps-are.pa";
- filename*1="tch"
-
->From cc2872574d060fb3d35fd28c81327ee887f540ef Mon Sep 17 00:00:00 2001
-From: Juergen Gross <jgross@suse.com>
-Date: Thu, 5 Jul 2018 12:29:48 +0200
-Subject: [PATCH-for-4.9-stable] x86/cpu: Re-apply forced caps every time CPU caps are re-read
-
-Calling get_cpu_cap() will reset a bunch of CPU features.  This will
-cause the system to lose track of force-set and force-cleared
-features in the words that are reset until the end of CPU
-initialization.  This can cause X86_FEATURE_FPU, for example, to
-change back and forth during boot and potentially confuse CPU setup.
-
-To minimize the chance of confusion, re-apply forced caps every time
-get_cpu_cap() is called.
-
-Signed-off-by: Andy Lutomirski <luto@kernel.org>
-Reviewed-by: Borislav Petkov <bp@suse.de>
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: Brian Gerst <brgerst@gmail.com>
-Cc: Dave Hansen <dave.hansen@linux.intel.com>
-Cc: Fenghua Yu <fenghua.yu@intel.com>
-Cc: H. Peter Anvin <hpa@zytor.com>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>
-Cc: Matthew Whitehead <tedheadster@gmail.com>
-Cc: Oleg Nesterov <oleg@redhat.com>
-Cc: One Thousand Gnomes <gnomes@lxorguk.ukuu.org.uk>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: Rik van Riel <riel@redhat.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Yu-cheng Yu <yu-cheng.yu@intel.com>
-Link: http://lkml.kernel.org/r/c817eb373d2c67c2c81413a70fc9b845fa34a37e.1484705016.git.luto@kernel.org
-Signed-off-by: Ingo Molnar <mingo@kernel.org>
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-upstream commit: 60d3450167433f2d099ce2869dc52dd9e7dc9b29
-needed for Xen PV guests to boot, was broken since commit
-c43b4ff972a986c85bdd8dc1aa05fe23b29ef99c
----
- arch/x86/kernel/cpu/common.c | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index b0fd028b2eee..7a4279d8a902 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -848,6 +848,13 @@ void get_cpu_cap(struct cpuinfo_x86 *c)
- 
- 	init_scattered_cpuid_features(c);
- 	init_speculation_control(c);
-+
-+	/*
-+	 * Clear/Set all flags overridden by options, after probe.
-+	 * This needs to happen each time we re-probe, which may happen
-+	 * several times during CPU initialization.
-+	 */
-+	apply_forced_caps(c);
- }
- 
- static void identify_cpu_without_cpuid(struct cpuinfo_x86 *c)
--- 
-2.13.7
-
-
---------------7144DD7D439A18E95E1C851C
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------7144DD7D439A18E95E1C851C--
+TGFycyBLdXJ0aCB3cml0ZXMgKCJSZTogW1hlbi1kZXZlbF0gW05vdGVzIGZvciB4ZW4gc3VtbWl0
+IDIwMTggZGVzaWduIHNlc3Npb25dIFByb2Nlc3MgY2hhbmdlczogaXMgdGhlIDYgbW9udGhseSBy
+ZWxlYXNlIENhZGVuY2UgdG9vIHNob3J0LCBTZWN1cml0eSBQcm9jZXNzLCAuLi4iKToKPiAqIFRo
+ZSBHaXRsYWIgbWFjaGluZXJ5IHdpbGwgZG8gYnVpbGQgdGVzdHMgKGFuZCB0aGUgZGlzY3Vzc2lv
+bgo+ICAgc2hvd2VkIHRoYXQgd2Ugc2hvdWxkIGJlIGFibGUgdG8gZG8gdGhpcyB2aWEgY3Jvc3Mg
+Y29tcGlsYXRpb24gb3IKPiAgIGNvbXBpbGF0aW9uIG9uIGEgcmVhbCBzeXN0ZW0gaWYgYSBzZXJ2
+aWNlIHN1Y2ggYXMgaW5mb3NpZnRlciBpcwo+ICAgdXNlZCBbLi4uXQo+ICogVGhpcyBjb3VsZCBl
+dmVudHVhbGx5IGluY2x1ZGUgYSBiYXNpYyBzZXQgb2Ygc21va2UgdGVzdHMgdGhhdCBhcmUKPiAg
+IHN5c3RlbSBpbmRlcGVuZGVudCBhbmQgY291bGQgcnVuIHVuZGVyIFFFTVUgLSBEb3VnIGFscmVh
+ZHkgdXNlcyBhCj4gICBiYXNpYyB0ZXN0IHdoZXJlIGEgeGVuIGhvc3QgYW5kL29yIFZNIGlzIHN0
+YXJ0ZWQKCkZpcnN0bHksIEkgdGhpbmsgdGhpcyBpcyBhbGwgYW4gZXhjZWxsZW50IGlkZWEuICBJ
+dCBzaG91bGQgYmUgcHVyc3VlZC4KCkkgZG9uJ3QgdGhpbmsgaXQgaW50ZXJhY3RzIGRpcmVjdGx5
+IHdpdGggb3NzdGVzdCBleGNlcHQgdG8gcmVkdWNlIHRoZQpyYXRlIG9mIHRlc3QgZmFpbHVyZXMu
+CgoKPiBbSnVlcmdlbjpdCj4gICAgIEEgbWFqb3Igc291cmNlIG9mIHRoZSBwYWluIHNlZW1zIHRv
+IGJlIHRoZSBoYXJkd2FyZTogQWJvdXQgaGFsZiBvZiBhbGwKPiAgICAgY2FzZXMgd2hlcmUgSSBs
+b29rZWQgaW50byB0aGUgdGVzdCByZXBvcnRzIHRvIGZpbmQgdGhlIHJlYXNvbiBmb3IgYQo+ICAg
+ICBmYWlsaW5nIHRlc3QgZmxpZ2h0IHdlcmUgcmVsYXRlZCB0byBoYXJkd2FyZSBmYWlsdXJlcy4g
+Tm90IHN1cmUgaG93IHRvCj4gICAgIHNvbHZlIHRoYXQuCj4gICAgIAo+IFRoaXMgaXMgd29ycnlp
+bmcgYW5kIEkgd291bGQgbGlrZSB0byBnZXQgSWFuIEphY2tzb24ncyB2aWV3cG9pbnQgb24gaXQu
+IAoKSSBoYXZlbid0IHdvcmtlZCB1cCBhIGZvcm1hbCBhbmFseXNpcyBvZiB0aGUgcGF0dGVybiBv
+ZiBmYWlsdXJlcywgYnV0CihkaXNjdXNzaW5nIGhhcmR3YXJlIHRyb3VibGUgb25seSk6CgogKiBX
+ZSBhcmUgc3RpbGwgd2FpdGluZyBmb3IgbmV3IEFSTSBoYXJkd2FyZS4gIFdoZW4gd2UgZ2V0IGl0
+IHdlIHdpbGwKICAgaG9wZWZ1bGx5IGJlIGFibGUgdG8gZGVjb21taXNzaW9uIHRoZSBhcm5kYWxl
+IGRldiBib2FyZHMsIHdob3NlCiAgIG5ldHdvcmsgY29udHJvbGxlcnMgYXJlIHVucmVsaWFibGUu
+CgogICBTYWRseSwgdGhlIHVucmVsaWFiaWxpdHkgb2YgdGhlIGFybWhmIHRlc3RzIGhhcyBiZWNv
+bWUgc28KICAgbm9ybWFsaXNlZCB0aGF0IHdlIGFsbCBqdXN0IHNocnVnIGFuZCBob3BlIHRoZSBu
+ZXh0IG9uZSB3aWxsIGJlCiAgIGJldHRlci4gIEFub3RoZXIgb3B0aW9uIHdvdWxkIGJlIHRvIGRl
+Y29tbWlzc2lvbiB0aGUgYXJuZGFsZXMgcmlnaHQKICAgYXdheSBhbmQgcmVkdWNlIHRoZSBhcm1o
+ZiB0ZXN0IGNvdmVyYWdlLgoKICogV2UgaGF2ZSBoYWQgcHJvYmxlbXMgd2l0aCBQRFUgcmVsYXlz
+LCBhZmZlY3RpbmcgYWJvdXQgdGhyZWUKICAgbWFjaGluZXMgKGRlcGVuZGluZyBob3cgeW91IGNv
+dW50IHRoaW5ncykuICBNeSBleHBlcmllbmNlIHdpdGggdGhlCiAgIFBEVXMgaW4gTWFzc2FjaHVz
+ZXR0cyBoYXMgYmVlbiBtdWNoIHBvb3JlciB0aGFuIGluIENhbWJyaWRnZS4gIEkKICAgdGhpbmsg
+dGhlIHVuZGVybHlpbmcgY2F1c2UgaXMgcHJvYmFibHkgVVNBaWFuIDExMFYgZWxlY3RyaWNpdHkg
+KCEpCiAgIEkgaGF2ZSBhIHBsYW4gdG8gZml4IHRoaXMsIGludm9sdmluZyBtb3JlIHVzZSBvZiBJ
+UE1JIGluIHRhbmRlbQogICB3aXRoIHRoZSBQRFVzLCB3aGljaCBJIGhvcGUgd2lsbCByZWR1Y2Ug
+dGhpcyBzaWduaWZpY2FudGx5LgoKICogQXMgdGhlIHRlc3QgbGFiIGluY3JlYXNlcyBpbiBzaXpl
+LCB0aGUgcmF0ZSBvZiBoYXJkd2FyZSBmYWlsdXJlCiAgIG5lY2Vzc2FyaWx5IGFsc28gcmlzZXMu
+ICBSaWdodCBub3csIHJlc3BvbnNlIHRvIHRoYXQgaXMgbWFudWFsOiBhCiAgIGh1bWFuIG11c3Qg
+bm90aWNlIHRoZSBwcm9ibGVtLCBpbnNwZWN0IHRlc3QgcmVzdWx0cywgZGVjaWRlIGl0IGlzIGEK
+ICAgaGFyZHdhcmUgcHJvYmxlbSwgYW5kIHRha2UgdGhlIGFmZmVjdGVkIG5vZGUgb3V0IG9mIHNl
+cnZpY2UuICBJCiAgIGFtIHdvcmtpbmcgb24gYSBwbGFuIHRvIGRvIHRoYXQgcGFydCBhdXRvbWF0
+aWNhbGx5LgoKICAgSHVtYW4gaW50ZXJ2ZW50aW9uIHdpbGwgc3RpbGwgYmUgcmVxdWlyZWQgdG8g
+ZGlhZ25vc2UgYW5kIHJlcGFpcgogICB0aGUgcHJvYmxlbSBvZiBjb3Vyc2UsIGJ1dCBpbiB0aGUg
+bWVhbnRpbWUsIGZ1cnRoZXIgdGVzdHMgd2lsbCBub3QKICAgYmUgYWZmZWN0ZWQuCgo+ICAgICBB
+bm90aGVyIHBvdGVudGlhbCBwcm9ibGVtcyBzaG93ZWQgdXAgbGFzdCB3ZWVrOiBPU1NURVNUIGlz
+IHVzaW5nIHRoZQo+ICAgICBEZWJpYW4gc2VydmVycyBmb3IgZG9pbmcgdGhlIGJhc2ljIGluc3Rh
+bGxhdGlvbi4gQSBjaGFuZ2UgdGhlcmUgKGUuZy4KPiAgICAgYSBuZXcgcG9pbnQgcmVsZWFzZSkg
+d2lsbCBibG9jayB0ZXN0cy4gSSdkIHByZWZlciB0byBoYXZlIGEgbG9jYWwgY2FjaGUKPiAgICAg
+b2YgdGhlIGxhc3Qga25vd24gZ29vZCBzZXQgb2YgKi5kZWIgZmlsZXMgdG8gYmUgdXNlZCBlc3Bl
+Y2lhbGx5IGZvciB0aGUKPiAgICAgYnJhbmNoZWQgWGVuIHZlcnNpb25zLiBUaGlzIHdvdWxkIHJ1
+bGUgb3V0IHJlbW90ZSBwcm9ibGVtcyBmb3IgcmVsZWFzZXMuCj4gCj4gVGhpcyBpcyBhZ2FpbiBz
+b21ldGhpbmcgd2hpY2ggd2Ugc2hvdWxkIGRlZmluaXRlbHkgbG9vayBhdC4KClRoaXMgd2FzIGJh
+ZCBsdWNrLiAgVGhpcyBraW5kIG9mIHVwZGF0ZSBoYXBwZW5zIGFib3V0IDMtNCB0aW1lcyBhCnll
+YXIuICBJdCBkb2VzIGJyZWFrIGV2ZXJ5dGhpbmcsIGxlYWRpbmcgdG8gYSBkZWxheSBvZiBhIGRh
+eSBvciB0d28sCmJ1dCB0aGUgZml4IGlzIHN0cmFpZ2h0Zm9yd2FyZC4KCk9idmlvdXNseSB0aGlz
+IGlzIG5vdCBpZGVhbCBidXQgdGhlIHNvbHV0aW9ucyBhcmUgbm9udHJpdmlhbC4gIEl0IGlzCm5v
+dCByZWFsbHkgcG9zc2libGUgdG8gImhhdmUgYSBsb2NhbCBjYWNoZSBvZiB0aGUgbGFzdCBrbm93
+biBnb29kIHNldApvZiAqLmRlYiBmaWxlcyIgd2l0aG91dCBrbm93aW5nIHdoYXQgdGhhdCBzdWJz
+ZXQgc2hvdWxkIGJlOyB0aGF0IHdvdWxkCnJlcXVpcmUgYW4gZWRpZmljZSB0byB0cmFjayB3aGF0
+IGlzIHVzZWQsIG9yIHNvbWUgbWFudWFsIGNvbmZpZ3VyYXRpb24Kd2hpY2ggd291bGQgcHJvYmFi
+bHkgYnJlYWsuICBBbHRlcm5hdGl2ZWx5IHdlIGNvdWxkIHJ1biBhIGNvbXBsZXRlCm1pcnJvciBi
+dXQgdGhhdCBpcyBhICpsb3QqIG9mIHNwYWNlIGFuZCBiYW5kd2lkdGgsIG1vc3Qgb2Ygd2hpY2gg
+d291bGQKYmUgdW51c2VkLgoKSSB0aGluayB0aGUgcmlnaHQgYXBwcm9hY2ggaXMgcHJvYmFibHkg
+dG8gc3dpdGNoIGZyb20gdXNpbmcgZC1pIGZvcgpob3N0IGluc3RhbGxzLCB0byBzb21ldGhpbmcg
+bGlrZSBGQUkuICBUaGF0IHdvdWxkIGJlIGZhc3RlciBhcyB3ZWxsLgpIb3dldmVyIHRoYXQgYW1v
+dW5zIHRvIHJlZW5naW5lZXJpbmcgdGhlIHdheSBvc3N0ZXN0IGRvZXMgaG9zdAppbnN0YWxsczsg
+aXQgd291bGQgYWxzbyBsZWF2ZSB1cyBtYWludGFpbmluZyBhbiBhZGRpdGlvbmFsIHdheSB0byBk
+bwpob3N0IGluc3RhbGxzLCBzaW5jZSB3ZSB3b3VsZCBzdGlsbCB3YW50IHRvIGJlIGFibGUgdG8g
+KnRlc3QqIGQtaQpvcGVyYXRpb24gYXMgYSBndWVzdC4KClNvIG92ZXJhbGwgSSBoYXZlIGxlZnQg
+dGhpcyBvbmUgb24gdGhlIGJhY2sgYnVybmVyLgoKCklhbi4KCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
