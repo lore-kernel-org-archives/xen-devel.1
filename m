@@ -1,15 +1,17 @@
 From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH RFC 07/15] xen/arm: increase MAX_MODULES
-Date: Fri, 6 Jul 2018 11:17:18 +0100
-Message-ID: <8fd05c47-ff36-5393-cc69-dd647cb66f54@arm.com>
+Subject: Re: [PATCH RFC 11/15] xen/arm: generate a simple device
+ tree for domUs
+Date: Fri, 6 Jul 2018 11:22:00 +0100
+Message-ID: <0200c585-715b-ca71-9aa1-6ef115411eb1@arm.com>
 References: <alpine.DEB.2.10.1806131457490.14695@sstabellini-ThinkPad-X260>
- <1528928118-14960-7-git-send-email-sstabellini@kernel.org>
- <20180706021009.tq7mm2eebclf5l6i@doug-macbook.localdomain>
+ <1528928118-14960-11-git-send-email-sstabellini@kernel.org>
+ <b77bb1d1-19b3-5a9c-1301-729b69098703@arm.com>
+ <alpine.DEB.2.10.1807051611270.13502@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180706021009.tq7mm2eebclf5l6i@doug-macbook.localdomain>
+In-Reply-To: <alpine.DEB.2.10.1807051611270.13502@sstabellini-ThinkPad-X260>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -19,26 +21,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Doug Goldstein <cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: Stefano Stabellini <sstabellini@kernel.org>
 Cc: artem_mygaiev@epam.com, Stefano Stabellini <stefanos@xilinx.com>, andrii_anisov@epam.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgRG91ZywKCk9uIDA2LzA3LzE4IDAzOjEwLCBEb3VnIEdvbGRzdGVpbiB3cm90ZToKPiBPbiBX
-ZWQsIEp1biAxMywgMjAxOCBhdCAwMzoxNToxMFBNIC0wNzAwLCBTdGVmYW5vIFN0YWJlbGxpbmkg
-d3JvdGU6Cj4+IFhlbiBib290IG1vZHVsZXMgbmVlZCB0byBhY2NvdW50IG5vdCBqdXN0IGZvciBE
-b20wIGJ1dCBhbHNvIGZvciBhIGZldwo+PiBwb3RlbnRpYWwgRG9tVXMsIGVhY2ggb2YgdGhlbSBj
-b21pbmcgd2l0aCB0aGVpciBvd24ga2VybmVsIGFuZCBpbml0cmQuCj4+IEluY3JlYXNlIE1BWF9N
-T0RVTEVTIHRvIDMyIHRvIGFsbG93IGZvciBtb3JlIERvbVVzLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5
-OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHN0ZWZhbm9zQHhpbGlueC5jb20+Cj4gCj4gUmV2aWV3ZWQt
-Ynk6IERvdWcgR29sZHN0ZWluIDxjYXJkb2VAY2FyZG9lLmNvbT4KPiAKPiBEaWRuJ3Qgc2VlIGFu
-eSBjb21tZW50IG9uIHRoaXMgc28gZmFyIHNvIEkgZmlndXJlZCBJJ2QgY29tbWVudC4gVGhpcyBp
-cwo+IHByb2JhYmx5IHRoZSBsZWFzdCBjb250cm92ZXJzaWFsIHBhdGNoIGFuZCBjb3VsZCBqdXN0
-IGdvIGluIHRvZGF5LgoKVGhlIG9ubHkgcmVhc29uIEkgZGlkbid0IGNvbW1lbnQgdGhpcyBpcyBi
-ZWNhdXNlIEkgd2FudGVkIHRvIHNlZSBob3cgdGhlIApyZXN0IG9mIHRoZSBzZXJpZXMgZ28uIFRo
-ZSBwYXRjaCBzdGFuZGFsb25lIGlzIG5vdCBzb21ldGhpbmcgdGhhdCBpcyAKdXNlZnVsIGZvciBY
-ZW4gdG9kYXkgYXMgd2Ugd2lsbCBuZXZlciBoYXZlIG1vcmUgdGhhbiA1IG1vZHVsZXMuIFNvIEkg
-CndvdWxkIHJhdGhlciB3YWl0IHRoZSByZXN0IG9mIHRoZSBzZXJpZXMgYmVmb3JlIG1lcmdpbmcg
-aXQuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+CgpPbiAwNi8wNy8xOCAwMDo1OSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+IE9uIFRodSwg
+MTQgSnVuIDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4+ICsjZGVmaW5lIERPTVVfRFRCX1NJ
+WkUgNDA5Ngo+Pgo+PiBJcyB0aGlzIGdvaW5nIHRvIGJlIGVub3VnaD8gUGVyIHRoZSBkb2N1bWVu
+dGF0aW9uLCB0aGUgbWF4aW11bSBzaXplIG9mIGEgRFQgaXMKPj4gMk1CLgo+IAo+IFRoYXQgaXMg
+d2hhdCB3ZSB1c2UgdG9kYXkgZm9yIHRoZSBzbWFsbCBnZW5lcmF0ZWQgRFRCIGZvciBBQ1BJIGRv
+bTAuCgpUaGUgZ2VuZXJhdGVkIERUQiBmb3IgQUNQSSBkb20wIGlzIG11Y2ggbW9yZSBzbWFsbGVy
+IHRoYW4gdGhpcyBvbmUuIDopCgo+IENlcnRhaW5seSBpdCBpcyBlbm91Z2ggbWVtb3J5IGZyb20g
+bXkgZW1waXJpY2FsIHRlc3RzIHNvIGZhci4gIEkgc3VnZ2VzdAo+IHRvIGtlZXAgYXMgaXMgaW4g
+dGhpcyBzZXJpZXMsIHRoZW4gcG90ZW50aWFsbHkgY2hhbmdlIGl0IHdoZW4gd2UKPiBpbnRyb2R1
+Y2UgbGFyZ2VyIERvbVUgRFRCcyAoZGV2aWNlIGFzc2lnbm1lbnQgbWlnaHQgcmVxdWlyZSBpdCwg
+Zm9yCj4gZXhhbXBsZSkuCgpDYW4geW91IHBsZWFzZSBhZGQgYSBjb21tZW50IG9uIHRvcCBvZiBE
+T01VX0RUQl9TSVpFIHRoZW4/CgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
