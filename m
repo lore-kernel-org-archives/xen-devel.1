@@ -1,18 +1,20 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH RFC 11/15] xen/arm: generate a simple device
- tree for domUs
-Date: Fri, 6 Jul 2018 11:22:00 +0100
-Message-ID: <0200c585-715b-ca71-9aa1-6ef115411eb1@arm.com>
-References: <alpine.DEB.2.10.1806131457490.14695@sstabellini-ThinkPad-X260>
- <1528928118-14960-11-git-send-email-sstabellini@kernel.org>
- <b77bb1d1-19b3-5a9c-1301-729b69098703@arm.com>
- <alpine.DEB.2.10.1807051611270.13502@sstabellini-ThinkPad-X260>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Ping: [PATCH] x86: fix dependency tracking for
+ asm/indirect_thunk_asm.h
+Date: Fri, 06 Jul 2018 04:25:40 -0600
+Message-ID: <5B3F43A402000078001D1CD6@prv1-mh.provo.novell.com>
+References: <5B31ED1E02000078001CDD5F@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1807051611270.13502@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=w/jz=jw=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fbNvs-0003Dz-Oq
+ for xen-devel@lists.xenproject.org; Fri, 06 Jul 2018 10:25:44 +0000
+In-Reply-To: <5B31ED1E02000078001CDD5F@prv1-mh.provo.novell.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,22 +23,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: artem_mygaiev@epam.com, Stefano Stabellini <stefanos@xilinx.com>, andrii_anisov@epam.com, xen-devel@lists.xen.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwNi8wNy8xOCAwMDo1OSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+IE9uIFRodSwg
-MTQgSnVuIDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4+ICsjZGVmaW5lIERPTVVfRFRCX1NJ
-WkUgNDA5Ngo+Pgo+PiBJcyB0aGlzIGdvaW5nIHRvIGJlIGVub3VnaD8gUGVyIHRoZSBkb2N1bWVu
-dGF0aW9uLCB0aGUgbWF4aW11bSBzaXplIG9mIGEgRFQgaXMKPj4gMk1CLgo+IAo+IFRoYXQgaXMg
-d2hhdCB3ZSB1c2UgdG9kYXkgZm9yIHRoZSBzbWFsbCBnZW5lcmF0ZWQgRFRCIGZvciBBQ1BJIGRv
-bTAuCgpUaGUgZ2VuZXJhdGVkIERUQiBmb3IgQUNQSSBkb20wIGlzIG11Y2ggbW9yZSBzbWFsbGVy
-IHRoYW4gdGhpcyBvbmUuIDopCgo+IENlcnRhaW5seSBpdCBpcyBlbm91Z2ggbWVtb3J5IGZyb20g
-bXkgZW1waXJpY2FsIHRlc3RzIHNvIGZhci4gIEkgc3VnZ2VzdAo+IHRvIGtlZXAgYXMgaXMgaW4g
-dGhpcyBzZXJpZXMsIHRoZW4gcG90ZW50aWFsbHkgY2hhbmdlIGl0IHdoZW4gd2UKPiBpbnRyb2R1
-Y2UgbGFyZ2VyIERvbVUgRFRCcyAoZGV2aWNlIGFzc2lnbm1lbnQgbWlnaHQgcmVxdWlyZSBpdCwg
-Zm9yCj4gZXhhbXBsZSkuCgpDYW4geW91IHBsZWFzZSBhZGQgYSBjb21tZW50IG9uIHRvcCBvZiBE
-T01VX0RUQl9TSVpFIHRoZW4/CgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+UGluZz8KCj4+PiBPbiAyNi4wNi4xOCBhdCAwOTozNywgPEpCZXVsaWNoQHN1c2UuY29tPiB3cm90
+ZToKPiBJbmNsdWRpbmcgdGhlIGhlYWRlciBzb2xlbHkgYXQgdGhlIGFzc2VtYmxlciBsZXZlbCBt
+ZWFucyB0aGUgY29tcGlsZXIKPiBjYW4ndCByZWNvcmQgdGhlIGhlYWRlciBhcyBhIGRlcGVuZGVu
+Y3kgaW4gLiouby5kIGZpbGVzLiBBcnJhbmdlIGZvciB0aGUKPiBoZWFkZXIgdG8gYmUgaW5jbHVk
+ZS1hYmxlIGF0IHRoZSBDIGxldmVsIGluc3RlYWQuCj4gCj4gU2lnbmVkLW9mZi1ieTogSmFuIEJl
+dWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+IAo+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS14ODYv
+YXNtX2RlZm5zLmgKPiArKysgYi94ZW4vaW5jbHVkZS9hc20teDg2L2FzbV9kZWZucy5oCj4gQEAg
+LTE4LDEyICsxOCwxMSBAQAo+ICAjaWZuZGVmIENPTkZJR19JTkRJUkVDVF9USFVOSwo+ICAuZXF1
+IENPTkZJR19JTkRJUkVDVF9USFVOSywgMAo+ICAjZW5kaWYKPiAtIyBpbmNsdWRlIDxhc20vaW5k
+aXJlY3RfdGh1bmtfYXNtLmg+Cj4gICNlbHNlCj4gIGFzbSAoICJcdC5lcXUgQ09ORklHX0lORElS
+RUNUX1RIVU5LLCAiCj4gICAgICAgIF9fc3RyaW5naWZ5KElTX0VOQUJMRUQoQ09ORklHX0lORElS
+RUNUX1RIVU5LKSkgKTsKPiAtYXNtICggIlx0LmluY2x1ZGUgXCJhc20vaW5kaXJlY3RfdGh1bmtf
+YXNtLmhcIiIgKTsKPiAgI2VuZGlmCj4gKyNpbmNsdWRlIDxhc20vaW5kaXJlY3RfdGh1bmtfYXNt
+Lmg+Cj4gIAo+ICAjaWZuZGVmIF9fQVNTRU1CTFlfXwo+ICB2b2lkIHJldF9mcm9tX2ludHIodm9p
+ZCk7Cj4gLS0tIGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9pbmRpcmVjdF90aHVua19hc20uaAo+ICsr
+KyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvaW5kaXJlY3RfdGh1bmtfYXNtLmgKPiBAQCAtMSw3ICsx
+LDE3IEBACj4gIC8qCj4gLSAqIFdhcm5pbmchICBUaGlzIGZpbGUgaXMgaW5jbHVkZWQgYXQgYW4g
+YXNzZW1ibGVyIGxldmVsIGZvciAuYyBmaWxlcywgY2F1c2luZwo+IC0gKiB1c3VhbCAjaWZkZWYn
+YXJ5IHRvIHR1cm4gaW50byBjb21tZW50cy4KPiArICogVHJpY2tlcnkgdG8gYWxsb3cgdGhpcyBo
+ZWFkZXIgdG8gYmUgaW5jbHVkZWQgYXQgdGhlIEMgbGV2ZWwsIHRvIHBlcm1pdAo+ICsgKiBwcm9w
+ZXIgZGVwZW5kZW5jeSB0cmFja2luZyBpbiAuKi5vLmQgZmlsZXMsIHdoaWxlIHN0aWxsIGhhdmlu
+ZyBpdCBjb250YWluCj4gKyAqIGFzc2VtYmxlciBvbmx5IG1hY3Jvcy4KPiAgICovCj4gKyNpZm5k
+ZWYgX19BU1NFTUJMWV9fCj4gKyMgaWYgMAo+ICsgIC5pZiAwCj4gKyMgZW5kaWYKPiArYXNtICgg
+Ilx0LmluY2x1ZGUgXCJhc20vaW5kaXJlY3RfdGh1bmtfYXNtLmhcIiIgKTsKPiArIyBpZiAwCj4g
+KyAgLmVuZGlmCj4gKyMgZW5kaWYKPiArI2Vsc2UKPiAgCj4gIC5tYWNybyBJTkRJUkVDVF9CUkFO
+Q0ggaW5zbjpyZXEgYXJnOnJlcQo+ICAvKgo+IEBAIC0zOSwzICs0OSw1IEBACj4gIC5tYWNybyBJ
+TkRJUkVDVF9KTVAgYXJnOnJlcQo+ICAgICAgSU5ESVJFQ1RfQlJBTkNIIGptcCBcYXJnCj4gIC5l
+bmRtCj4gKwo+ICsjZW5kaWYKCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
