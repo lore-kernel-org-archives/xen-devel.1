@@ -1,19 +1,19 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86: fix dependency tracking for
- asm/indirect_thunk_asm.h
-Date: Fri, 6 Jul 2018 13:38:40 +0100
-Message-ID: <4bfd8740-287a-7c3b-c0f9-f534b90a0a13@citrix.com>
-References: <5B31ED1E02000078001CDD5F@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH] x86: correctly set nonlazy_xstate_used when
+ loading full state
+Date: Fri, 6 Jul 2018 13:39:50 +0100
+Message-ID: <1fa523f9-1500-a9a6-2ef2-75ac94757dde@citrix.com>
+References: <5B31EF8002000078001CDD83@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=khol=jw=citrix.com=prvs=7188636b3=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1fbQ0Z-0006al-UP
- for xen-devel@lists.xenproject.org; Fri, 06 Jul 2018 12:38:43 +0000
-In-Reply-To: <5B31ED1E02000078001CDD5F@prv1-mh.provo.novell.com>
+ id 1fbQ1h-0006hO-NP
+ for xen-devel@lists.xenproject.org; Fri, 06 Jul 2018 12:39:53 +0000
+In-Reply-To: <5B31EF8002000078001CDD83@prv1-mh.provo.novell.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,12 +26,12 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjYvMDYvMTggMDg6MzcsIEphbiBCZXVsaWNoIHdyb3RlOgo+IEluY2x1ZGluZyB0aGUgaGVh
-ZGVyIHNvbGVseSBhdCB0aGUgYXNzZW1ibGVyIGxldmVsIG1lYW5zIHRoZSBjb21waWxlcgo+IGNh
-bid0IHJlY29yZCB0aGUgaGVhZGVyIGFzIGEgZGVwZW5kZW5jeSBpbiAuKi5vLmQgZmlsZXMuIEFy
-cmFuZ2UgZm9yIHRoZQo+IGhlYWRlciB0byBiZSBpbmNsdWRlLWFibGUgYXQgdGhlIEMgbGV2ZWwg
-aW5zdGVhZC4KPgo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNv
-bT4KCkFja2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMjYvMDYvMTggMDg6NDcsIEphbiBCZXVsaWNoIHdyb3RlOgo+IEluIHRoaXMgY2FzZSwganVz
+dCBsaWtlIHhjcjBfYWNjdW0sIG5vbmxhenlfeHN0YXRlX3VzZWQgc2hvdWxkIGFsd2F5cyBiZQo+
+IHNldCB0byB0aGUgaW50ZW5kZWQgbmV3IHZhbHVlLCByYXRoZXIgdGhhbiBwb3NzaWJseSBsZWF2
+aW5nIHRoZSBmbGFnIHNldAo+IGZyb20gYSBwcmlvciBzdGF0ZSBsb2FkLgo+Cj4gU2lnbmVkLW9m
+Zi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKQWNrZWQtYnk6IEFuZHJldyBD
+b29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
