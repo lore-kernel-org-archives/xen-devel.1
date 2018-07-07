@@ -1,20 +1,21 @@
-From: Saeed Mirzamohammadi <saeed.mzmd@gmail.com>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: Routing physical interrupts to EL1
-Date: Sat, 7 Jul 2018 12:32:02 -0700
-Message-ID: <CALPKaJmxWGA2nQMoKeQqMtz55ZD7hQUxrEZHHAbsAdFN5F+aZg@mail.gmail.com>
+Date: Sat, 7 Jul 2018 22:25:23 +0100
+Message-ID: <4c0bfd16-3936-46ea-cc22-ebad77e4a4b5@arm.com>
 References: <CALPKaJ=qbh0rLK+MC=fC966=D50+_3eOCTYbQcbCyqm1psaYcg@mail.gmail.com>
  <0eb78867-7802-f38a-0711-d5336b262d0f@arm.com>
+ <CALPKaJmxWGA2nQMoKeQqMtz55ZD7hQUxrEZHHAbsAdFN5F+aZg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1387549702290119757=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=qoml=jx=gmail.com=saeed.mzmd@srs-us1.protection.inumbo.net>)
- id 1fbsw9-0007O0-J0
- for xen-devel@lists.xenproject.org; Sat, 07 Jul 2018 19:32:05 +0000
-Received: by mail-qk0-x244.google.com with SMTP id b5-v6so5954720qkg.6
- for <xen-devel@lists.xenproject.org>; Sat, 07 Jul 2018 12:32:03 -0700 (PDT)
-In-Reply-To: <0eb78867-7802-f38a-0711-d5336b262d0f@arm.com>
+ <srs0=qeo4=jx=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1fbuht-0000hp-Bh
+ for xen-devel@lists.xenproject.org; Sat, 07 Jul 2018 21:25:29 +0000
+In-Reply-To: <CALPKaJmxWGA2nQMoKeQqMtz55ZD7hQUxrEZHHAbsAdFN5F+aZg@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,240 +24,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
+To: Saeed Mirzamohammadi <saeed.mzmd@gmail.com>
 Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1387549702290119757==
-Content-Type: multipart/alternative; boundary="000000000000bcba4d05706dd56c"
-
---000000000000bcba4d05706dd56c
-Content-Type: text/plain; charset="UTF-8"
-
-Thanks for your detailed reply.
-
-On Fri, Jul 6, 2018 at 6:13 AM, Julien Grall <julien.grall@arm.com> wrote:
-
->
->
-> On 06/07/18 04:51, Saeed Mirzamohammadi wrote:
->
->> Hi,
->>
->
-> Hello,
->
-> I'm trying to route all the physical interrupts to the guest domain rather
->> than being trapped in the Xen. I would like to know what is the right way
->> to do that?
->>
->
-> May I ask what is your use case for that? If you route interrupts to the
-> guest, Xen will not receive vital interrupt such as the timer, UART, SMMU
-> interrupts, maintenance interrupt....
->
-I only have one guest domain. So, I'm trying to make Xen transparent to
-avoid any extra overhead caused by trapping interrupts. But I still need
-Xen for my own hypercalls. I don't need the timer cause I pinned and don't
-need any vcpu scheduler. Based on my understanding, I can only disable the
-interrupts on ARM all together using the HCR_EL2 register and we can't pick
-one interrupt to not trap, right?
-
->
->
->> I know that HCR_IMO bit in the HCR_EL2 register is supposed to be for
->> routing the interrupts to the guest (Routing to EL1 instead of EL2).
->> link to the datasheet: http://infocenter.arm.com/help
->> /index.jsp?topic=/com.arm.doc.ddi0500d/CIHJHAAG.html
->>
->> So, I have tried doing the following in the leave_hypervisor_tail. I run
->> a simple hypercall and do the following lines before return (which is I
->> guess the last point of exit to the guest from hypervisor):
->> ---------------------
->> /current->arch.hcr_el2 &= ~HCR_IMO;/
->> /WRITE_SYSREG(current->arch.hcr_el2, HCR_EL2);/
->> /isb();/
->> /----------------------/
->> /
->> /
->> /It looks like to be doing it right for all thevcpus butgets stuck after
->> return from leave_hypervisor_tail for the lastvcpu.
->>
->
-> What do you mean by stuck? Do you see any logs?
->
-It's hung with no log.
-
->
-> HCR_EL2.IMO unset means the interrupt will get signaled to EL1. It does
-> not affect how interrupt will get read (e.g IAR).
->
-> Which interrupt controller are you using?
->
-I'm using a GICv2.
-
-> In case of GICv2, Xen is re-mapping GICC to GICV. So when the guest is
-> reading IAR, it will read the interrupts from the LRs. Not the physical
-> interface.
->
- So, in the case of GICv2, we can't route them cause Xen is the one that is
-updating the LRs and guest is reading from the LRs, am I right?
-
->
-> In case of GICv3, HCR_EL2.IMO will also control the access. So you should
-> be fine here.
->
-> However, in both case you will at least need to rework the way software
-> generated interrupts are sent to the guest. At the moment, they are written
-> in the LRs.
->
-> Is it possible to not trap on the ICDSGIR (SGI register)?
-
-Thanks,
-
-> Cheers,
->
-> --
-> Julien Grall
->
-
-
-
--- 
-Saeed Mirzamohammadi
-PhD Student
-Department of Computer Science
-University of California, Irvine
-Irvine, CA 92617
-saeed@uci.edu <smirzamo@uci.edu>
-http://www.ics.uci.edu/~saeed/ <http://www.ics.uci.edu/~smirzamo/>
-
---000000000000bcba4d05706dd56c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks for your detailed reply.<br><div class=3D"gmail_ext=
-ra"><br><div class=3D"gmail_quote">On Fri, Jul 6, 2018 at 6:13 AM, Julien G=
-rall <span dir=3D"ltr">&lt;<a href=3D"mailto:julien.grall@arm.com" target=
-=3D"_blank">julien.grall@arm.com</a>&gt;</span> wrote:<br><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex"><br>
-<br>
-On 06/07/18 04:51, Saeed Mirzamohammadi wrote:<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex">
-Hi,<br>
-</blockquote>
-<br>
-Hello,<span><br>
-<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex">
-I&#39;m trying to route all the physical interrupts to the guest domain rat=
-her than being trapped in the Xen. I would like to know what is the right w=
-ay to do that?<br>
-</blockquote>
-<br></span>
-May I ask what is your use case for that? If you route interrupts to the gu=
-est, Xen will not receive vital interrupt such as the timer, UART, SMMU int=
-errupts, maintenance interrupt....<br></blockquote><div>I only have one gue=
-st domain. So, I&#39;m trying to make Xen transparent to avoid any extra ov=
-erhead caused by trapping interrupts. But I still need Xen for my own hyper=
-calls. I don&#39;t need the timer cause I pinned and don&#39;t need any vcp=
-u scheduler. Based on my understanding, I can only disable the interrupts o=
-n ARM all together using the HCR_EL2 register and we can&#39;t pick one int=
-errupt to not trap, right?<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">
-<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex"><span>
-<br>
-I know that HCR_IMO bit in the HCR_EL2 register is supposed to be for routi=
-ng the interrupts to the guest (Routing to EL1 instead of EL2).<br>
-link to the datasheet: <a href=3D"http://infocenter.arm.com/help/index.jsp?=
-topic=3D/com.arm.doc.ddi0500d/CIHJHAAG.html" rel=3D"noreferrer" target=3D"_=
-blank">http://infocenter.arm.com/help<wbr>/index.jsp?topic=3D/com.arm.doc.<=
-wbr>ddi0500d/CIHJHAAG.html</a><br>
-<br>
-So, I have tried doing the following in the=C2=A0leave_hypervisor_tail. I r=
-un a simple hypercall=C2=A0and do the following lines before return (which =
-is I guess the last point of exit to the guest from hypervisor):<br>
----------------------<br></span>
-/current-&gt;arch.hcr_el2 &amp;=3D ~HCR_IMO;/<br>
-/WRITE_SYSREG(current-&gt;arch.hc<wbr>r_el2, HCR_EL2);/<br>
-/isb();/<br>
-/----------------------/<br>
-/<br>
-/<br>
-/It looks like to be doing it right for all thevcpus=C2=A0butgets=C2=A0stuc=
-k after return from leave_hypervisor_tail for the lastvcpu.<br>
-</blockquote>
-<br>
-What do you mean by stuck? Do you see any logs?<br></blockquote><div>It&#39=
-;s hung with no log.</div><blockquote class=3D"gmail_quote" style=3D"margin=
-:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
->
-<br>
-HCR_EL2.IMO unset means the interrupt will get signaled to EL1. It does not=
- affect how interrupt will get read (e.g IAR).<br>
-<br>
-Which interrupt controller are you using?<br></blockquote><div>I&#39;m usin=
-g a GICv2.=C2=A0=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"marg=
-in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
-x">In case of GICv2, Xen is re-mapping GICC to GICV. So when the guest is r=
-eading IAR, it will read the interrupts from the LRs. Not the physical inte=
-rface.<br></blockquote><div>=C2=A0So, in the case of GICv2, we can&#39;t ro=
-ute them cause Xen is the one that is updating the LRs and guest is reading=
- from the LRs, am I right?</div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
-t:1ex">
-<br>
-In case of GICv3, HCR_EL2.IMO will also control the access. So you should b=
-e fine here.<br>
-<br>
-However, in both case you will at least need to rework the way software gen=
-erated interrupts are sent to the guest. At the moment, they are written in=
- the LRs.<br>
-<br></blockquote><div>Is it possible to not trap on the=C2=A0ICDSGIR (SGI r=
-egister)?</div><div><br></div><div>Thanks,</div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">
-Cheers,<span class=3D"gmail-m_8719056196740612075m_9097269075652312375HOEnZ=
-b"><font color=3D"#888888"><br>
-<br>
--- <br>
-Julien Grall<br>
-</font></span></blockquote></div><br><br clear=3D"all"><div><br></div>-- <b=
-r><div class=3D"gmail-m_8719056196740612075m_9097269075652312375gmail_signa=
-ture"><div dir=3D"ltr"><div><div dir=3D"ltr">Saeed Mirzamohammadi<div>PhD S=
-tudent<br style=3D"color:rgb(34,34,34);font-family:arial,sans-serif;font-si=
-ze:13px;background-color:rgb(255,255,255)"><span style=3D"color:rgb(34,34,3=
-4);font-family:arial,sans-serif;font-size:13px;background-color:rgb(255,255=
-,255)">Department of Computer Science</span><br><div><span style=3D"color:r=
-gb(34,34,34);font-family:arial,sans-serif;font-size:13px;background-color:r=
-gb(255,255,255)">University of California, Irvine</span></div><div><span st=
-yle=3D"color:rgb(34,34,34);font-family:arial,sans-serif;font-size:13px;back=
-ground-color:rgb(255,255,255)">Irvine, CA 92617</span></div><div><span styl=
-e=3D"color:rgb(34,34,34);font-family:arial,sans-serif;font-size:13px;backgr=
-ound-color:rgb(255,255,255)"><a href=3D"mailto:smirzamo@uci.edu" target=3D"=
-_blank">saeed@uci.edu</a></span></div><div><span style=3D"background-color:=
-rgb(255,255,255)"><a href=3D"http://www.ics.uci.edu/~smirzamo/" target=3D"_=
-blank">http://www.ics.uci.edu/~saeed/</a></span></div></div></div></div></d=
-iv></div>
-</div></div>
-
---000000000000bcba4d05706dd56c--
-
-
---===============1387549702290119757==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1387549702290119757==--
+SGVsbG8sCgpPbiAwNy8wNy8yMDE4IDA4OjMyIFBNLCBTYWVlZCBNaXJ6YW1vaGFtbWFkaSB3cm90
+ZToKPiBUaGFua3MgZm9yIHlvdXIgZGV0YWlsZWQgcmVwbHkuCj4gCj4gT24gRnJpLCBKdWwgNiwg
+MjAxOCBhdCA2OjEzIEFNLCBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tIAo+IDxt
+YWlsdG86anVsaWVuLmdyYWxsQGFybS5jb20+PiB3cm90ZToKPiAKPiAKPiAKPiAgICAgT24gMDYv
+MDcvMTggMDQ6NTEsIFNhZWVkIE1pcnphbW9oYW1tYWRpIHdyb3RlOgo+IAo+ICAgICAgICAgSGks
+Cj4gCj4gCj4gICAgIEhlbGxvLAo+IAo+ICAgICAgICAgSSdtIHRyeWluZyB0byByb3V0ZSBhbGwg
+dGhlIHBoeXNpY2FsIGludGVycnVwdHMgdG8gdGhlIGd1ZXN0Cj4gICAgICAgICBkb21haW4gcmF0
+aGVyIHRoYW4gYmVpbmcgdHJhcHBlZCBpbiB0aGUgWGVuLiBJIHdvdWxkIGxpa2UgdG8KPiAgICAg
+ICAgIGtub3cgd2hhdCBpcyB0aGUgcmlnaHQgd2F5IHRvIGRvIHRoYXQ/Cj4gCj4gCj4gICAgIE1h
+eSBJIGFzayB3aGF0IGlzIHlvdXIgdXNlIGNhc2UgZm9yIHRoYXQ/IElmIHlvdSByb3V0ZSBpbnRl
+cnJ1cHRzIHRvCj4gICAgIHRoZSBndWVzdCwgWGVuIHdpbGwgbm90IHJlY2VpdmUgdml0YWwgaW50
+ZXJydXB0IHN1Y2ggYXMgdGhlIHRpbWVyLAo+ICAgICBVQVJULCBTTU1VIGludGVycnVwdHMsIG1h
+aW50ZW5hbmNlIGludGVycnVwdC4uLi4KPiAKPiBJIG9ubHkgaGF2ZSBvbmUgZ3Vlc3QgZG9tYWlu
+LiBTbywgSSdtIHRyeWluZyB0byBtYWtlIFhlbiB0cmFuc3BhcmVudCB0byAKPiBhdm9pZCBhbnkg
+ZXh0cmEgb3ZlcmhlYWQgY2F1c2VkIGJ5IHRyYXBwaW5nIGludGVycnVwdHMuCgpEbyB5b3UgaW5j
+bHVkZSBEb20wIGluIHlvdXIgIm9uZSBndWVzdCBkb21haW4iPyBJZiBzbywgbWF5IEkgYXNrIHdo
+YXQgaXMgCnlvdXIgZW5kIGdvYWw/IFdoeSBub3QgYm9vdGluZyB0aGUgT1Mgb24gYmFyZW1ldGFs
+PwoKPiBCdXQgSSBzdGlsbCBuZWVkIAo+IFhlbiBmb3IgbXkgb3duIGh5cGVyY2FsbHMuIEkgZG9u
+J3QgbmVlZCB0aGUgdGltZXIgY2F1c2UgSSBwaW5uZWQgYW5kIAo+IGRvbid0IG5lZWQgYW55IHZj
+cHUgc2NoZWR1bGVyLgoKV2VsbCwgWGVuIHN0aWxsIG5lZWRzIGludGVycnVwdHMgZm9yIG90aGVy
+IHRoaW5ncyBsaWtlIFVBUlQgYW5kIFNNTVUuIEl0IAphbHNvIG5lZWRzIGludGVycnVwdHMgdG8g
+SVBJIG90aGVyIHBDUFUgc3VjaCBhcyBmb3Igc29mdGlycSwgdW5ibG9ja2luZyAKYW5vdGhlciB2
+Q1BVICh3YWl0aW5nIG9uIGFuIGV2ZW50IGZvciBpbnN0YW5jZSkuLi4gSSBkb24ndCB0aGluayB5
+b3UgY2FuIApkaXNjYXJkIGludGVycnVwdHMgdGhhdCBlYXNpbHkgaW4gWGVuIHdpdGhvdXQgc29t
+ZSBjb29wZXJhdGlvbiB3aXRoIHRoZSAKZ3Vlc3QuCgpMZXQncyBpbWFnaW5lIFhlbiBJUElzIGFu
+b3RoZXIgcENQVS4gSWYgaW50ZXJydXB0cyBhcmUgcm91dGVkIHRvIHlvdXIgCmd1ZXN0LCB0aGlz
+IGd1ZXN0IHdpbGwgcmVjZWl2ZSB0aGUgSVBJcyBhbmQgd2lsbCBub3QgdW5kZXJzdGFuZCB3aGF0
+IHRvIGRvLgoKPiBCYXNlZCBvbiBteSB1bmRlcnN0YW5kaW5nLCBJIGNhbiBvbmx5IAo+IGRpc2Fi
+bGUgdGhlIGludGVycnVwdHMgb24gQVJNIGFsbCB0b2dldGhlciB1c2luZyB0aGUgSENSX0VMMiBy
+ZWdpc3RlciAKPiBhbmQgd2UgY2FuJ3QgcGljayBvbmUgaW50ZXJydXB0IHRvIG5vdCB0cmFwLCBy
+aWdodD8KCkRlcGVuZHMgb24geW91ciBpbnRlcnJ1cHRzIGNvbnRyb2xsZXIuIE9uIEdJQ3Y0LCB5
+b3Ugd2lsbCBiZSBhYmxlIHRvIApkaXJlY3RseSBpbmplY3RlZCBzb21lIExQSXMgKGkuZSBNU0kp
+LgoKPiAKPiAKPiAKPiAgICAgICAgIEkga25vdyB0aGF0IEhDUl9JTU8gYml0IGluIHRoZSBIQ1Jf
+RUwyIHJlZ2lzdGVyIGlzIHN1cHBvc2VkIHRvCj4gICAgICAgICBiZSBmb3Igcm91dGluZyB0aGUg
+aW50ZXJydXB0cyB0byB0aGUgZ3Vlc3QgKFJvdXRpbmcgdG8gRUwxCj4gICAgICAgICBpbnN0ZWFk
+IG9mIEVMMikuCj4gICAgICAgICBsaW5rIHRvIHRoZSBkYXRhc2hlZXQ6Cj4gICAgICAgICBodHRw
+Oi8vaW5mb2NlbnRlci5hcm0uY29tL2hlbHAvaW5kZXguanNwP3RvcGljPS9jb20uYXJtLmRvYy5k
+ZGkwNTAwZC9DSUhKSEFBRy5odG1sCj4gICAgICAgICA8aHR0cDovL2luZm9jZW50ZXIuYXJtLmNv
+bS9oZWxwL2luZGV4LmpzcD90b3BpYz0vY29tLmFybS5kb2MuZGRpMDUwMGQvQ0lISkhBQUcuaHRt
+bD4KPiAKPiAgICAgICAgIFNvLCBJIGhhdmUgdHJpZWQgZG9pbmcgdGhlIGZvbGxvd2luZyBpbgo+
+ICAgICAgICAgdGhlwqBsZWF2ZV9oeXBlcnZpc29yX3RhaWwuIEkgcnVuIGEgc2ltcGxlIGh5cGVy
+Y2FsbMKgYW5kIGRvIHRoZQo+ICAgICAgICAgZm9sbG93aW5nIGxpbmVzIGJlZm9yZSByZXR1cm4g
+KHdoaWNoIGlzIEkgZ3Vlc3MgdGhlIGxhc3QgcG9pbnQKPiAgICAgICAgIG9mIGV4aXQgdG8gdGhl
+IGd1ZXN0IGZyb20gaHlwZXJ2aXNvcik6Cj4gICAgICAgICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0K
+PiAgICAgICAgIC9jdXJyZW50LT5hcmNoLmhjcl9lbDIgJj0gfkhDUl9JTU87Lwo+ICAgICAgICAg
+L1dSSVRFX1NZU1JFRyhjdXJyZW50LT5hcmNoLmhjcl9lbDIsIEhDUl9FTDIpOy8KPiAgICAgICAg
+IC9pc2IoKTsvCj4gICAgICAgICAvLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS8KPiAgICAgICAgIC8K
+PiAgICAgICAgIC8KPiAgICAgICAgIC9JdCBsb29rcyBsaWtlIHRvIGJlIGRvaW5nIGl0IHJpZ2h0
+IGZvciBhbGwKPiAgICAgICAgIHRoZXZjcHVzwqBidXRnZXRzwqBzdHVjayBhZnRlciByZXR1cm4g
+ZnJvbSBsZWF2ZV9oeXBlcnZpc29yX3RhaWwKPiAgICAgICAgIGZvciB0aGUgbGFzdHZjcHUuCj4g
+Cj4gCj4gICAgIFdoYXQgZG8geW91IG1lYW4gYnkgc3R1Y2s/IERvIHlvdSBzZWUgYW55IGxvZ3M/
+Cj4gCj4gSXQncyBodW5nIHdpdGggbm8gbG9nLgo+IAo+IAo+ICAgICBIQ1JfRUwyLklNTyB1bnNl
+dCBtZWFucyB0aGUgaW50ZXJydXB0IHdpbGwgZ2V0IHNpZ25hbGVkIHRvIEVMMS4gSXQKPiAgICAg
+ZG9lcyBub3QgYWZmZWN0IGhvdyBpbnRlcnJ1cHQgd2lsbCBnZXQgcmVhZCAoZS5nIElBUikuCj4g
+Cj4gICAgIFdoaWNoIGludGVycnVwdCBjb250cm9sbGVyIGFyZSB5b3UgdXNpbmc/Cj4gCj4gSSdt
+IHVzaW5nIGEgR0lDdjIuCj4gCj4gICAgIEluIGNhc2Ugb2YgR0lDdjIsIFhlbiBpcyByZS1tYXBw
+aW5nIEdJQ0MgdG8gR0lDVi4gU28gd2hlbiB0aGUgZ3Vlc3QKPiAgICAgaXMgcmVhZGluZyBJQVIs
+IGl0IHdpbGwgcmVhZCB0aGUgaW50ZXJydXB0cyBmcm9tIHRoZSBMUnMuIE5vdCB0aGUKPiAgICAg
+cGh5c2ljYWwgaW50ZXJmYWNlLgo+IAo+ICDCoFNvLCBpbiB0aGUgY2FzZSBvZiBHSUN2Miwgd2Ug
+Y2FuJ3Qgcm91dGUgdGhlbSBjYXVzZSBYZW4gaXMgdGhlIG9uZSAKPiB0aGF0IGlzIHVwZGF0aW5n
+IHRoZSBMUnMgYW5kIGd1ZXN0IGlzIHJlYWRpbmcgZnJvbSB0aGUgTFJzLCBhbSBJIHJpZ2h0PwoK
+SWYgeW91IHdhbnQgdG8gcm91dGUgKmFsbCogdGhlIGludGVycnVwdHMsIHlvdSBjYW4gbWFwIEdJ
+Q0MgYW5kIG5vdCBHSUNWIAp0byB5b3VyIGd1ZXN0LiBTbyB3aGVuIHRoZSBndWVzdCB3aWxsIHJl
+YWQgSUFSLCBpdCB3aWxsIHJlYWQgdGhlIApwaHlzaWNhbCBpbnRlcnJ1cHRzLgoKPiAKPiAKPiAg
+ICAgSW4gY2FzZSBvZiBHSUN2MywgSENSX0VMMi5JTU8gd2lsbCBhbHNvIGNvbnRyb2wgdGhlIGFj
+Y2Vzcy4gU28geW91Cj4gICAgIHNob3VsZCBiZSBmaW5lIGhlcmUuCj4gCj4gICAgIEhvd2V2ZXIs
+IGluIGJvdGggY2FzZSB5b3Ugd2lsbCBhdCBsZWFzdCBuZWVkIHRvIHJld29yayB0aGUgd2F5Cj4g
+ICAgIHNvZnR3YXJlIGdlbmVyYXRlZCBpbnRlcnJ1cHRzIGFyZSBzZW50IHRvIHRoZSBndWVzdC4g
+QXQgdGhlIG1vbWVudCwKPiAgICAgdGhleSBhcmUgd3JpdHRlbiBpbiB0aGUgTFJzLgo+IAo+IElz
+IGl0IHBvc3NpYmxlIHRvIG5vdCB0cmFwIG9uIHRoZcKgSUNEU0dJUiAoU0dJIHJlZ2lzdGVyKT8K
+ClNHSXMgcmVnaXN0ZXIgYXJlIGFscmVhZHkgdHJhcHBlZCBieSBYZW4uIFRoZXkgYXJlIGVtdWxh
+dGVkIGJ5IHdyaXRpbmcgCnRoZSBjb3JyZXNwb25kaW5nIGludGVycnVwdCB0byB0aGUgTFJzLgoK
+SG93ZXZlciwgU0dJcyBhcmUgbm90IHRoZSBvbmx5IGludGVycnVwdCBnZW5lcmF0ZWQgYnkgdGhl
+IGh5cGVydmlzb3IgCmRpcmVjdGx5LiBUaGVyZSBhcmUgYWxzbyB0aGUgZXZlbnQgY2hhbm5lbCAo
+YSBQUEkpIG9yIGFueSBkZXZpY2UgCmVtdWxhdGVkIGJ5IHRoZSBoeXBlcnZpc29yIChlLmcgUEww
+MTEpLgoKVHJ5aW5nIHRvIHJlbW92ZSBpbnRlcnJ1cHRzIGZyb20gdGhlIGh5cGVydmlzb3IgaXMg
+bW9yZSBhIHBhaW4gY29tcGFyZSAKdG8gdGhlIGJlbmVmaXRzIHlvdSB3aWxsIGdhaW4uIFlvdSB3
+aWxsIGJlIGJldHRlciBhdCBpbXByb3ZpbmcgdGhlIApsYXRlbmN5IHdoZW4gcmVjZWl2aW5nIGlu
+dGVycnVwdCAoQUZBSUsgdGhpcyBpcyBhbHJlYWR5IGJlIGdvb2QpLgoKQ2hlZXJzLAoKLS0KSnVs
+aWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
