@@ -1,22 +1,13 @@
-From: Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH v2 1/4] automation: install texinfo
-Date: Mon, 9 Jul 2018 12:14:23 -0500
-Message-ID: <20180709171423.e4nj3ikb27jkkjyg@doug-macbook.localdomain>
-References: <20180709153216.15892-1-wei.liu2@citrix.com>
- <20180709153216.15892-2-wei.liu2@citrix.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH] stubdom: disable newlib's need for texinfo
+Date: Mon, 9 Jul 2018 18:14:44 +0100
+Message-ID: <23363.38916.575110.644197@mariner.uk.xensource.com>
+References: <20180709170546.4102-1-cardoe@cardoe.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ajrs=jz=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
- id 1fcZk2-0007tS-M1
- for xen-devel@lists.xenproject.org; Mon, 09 Jul 2018 17:14:26 +0000
-Received: by mail-qk0-x243.google.com with SMTP id d22-v6so10064704qkc.8
- for <xen-devel@lists.xenproject.org>; Mon, 09 Jul 2018 10:14:25 -0700 (PDT)
-Content-Disposition: inline
-In-Reply-To: <20180709153216.15892-2-wei.liu2@citrix.com>
+In-Reply-To: <20180709170546.4102-1-cardoe@cardoe.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,15 +16,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>
+To: Doug Goldstein <cardoe@cardoe.com>
+Cc: Samuel Thibault <samuel.thibault@ens-lyon.org>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKdWwgMDksIDIwMTggYXQgMDQ6MzI6MTNQTSArMDEwMCwgV2VpIExpdSB3cm90ZToK
-PiBTdHViZG9tJ3MgZGVwZW5kZW5jeSBuZXdsaWIgbmVlZHMgaXQuCj4gCj4gU2lnbmVkLW9mZi1i
-eTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCkNvdWxkIHdlIGNvbnNpZGVyIDwyMDE4
-MDcwOTE3MDU0Ni40MTAyLTEtY2FyZG9lQGNhcmRvZS5jb20+IGluc3RlYWQ/CgpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMTgtMDcvbXNnMDA4
-MTAuaHRtbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+RG91ZyBHb2xkc3RlaW4gd3JpdGVzICgiW1BBVENIXSBzdHViZG9tOiBkaXNhYmxlIG5ld2xpYidz
+IG5lZWQgZm9yIHRleGluZm8iKToKPiBuZXdsaWIgaGFzIGEgaGFyZGNvZGVkIGRlcGVuZGVuY3kg
+b24gdGV4aW5mbywgd2hpY2ggaW4gdHVybiBtZWFucyB0aGF0Cj4gWGVuIGhhcyB0aGlzIGRlcGVu
+ZGVuY3kgd2hlbiBidWlsZGluZyB0aGUgc3R1YiBkb21haW5zLiBUaGUgZmlsZXMgdGhhdAo+IG5l
+d2xpYiBnZW5lcmF0ZXMgYXJlIG5ldmVyIHVzZWQgb3IgZXhwb3NlZCBieSB0aGUgWGVuIGJ1aWxk
+IHN5c3RlbSBzbwo+IGl0cyByZWFsbHkgYSB3YXN0ZWQgZWZmb3J0IHRvIHJlcXVpcmUgYSBoZWF2
+eSAoc2l6ZSB3aXNlKSBwYWNrYWdlIGZvcgo+IHRoZSBidWlsZCBvZiBzb21ldGhpbmcgdGhhdCdz
+IHRocm93biBhd2F5LiBJbnN0ZWFkIG9mIGFkZGluZyBpdCBhcyBhCj4gcmVxdWlyZW1lbnQgdGhp
+cyBwYXRjaGVzIG91dCB0aGUgY29kZSBwYXRoIGluIG5ld2xpYiB0aGF0IHVzZXMgaXQgc28KPiB0
+aGF0IHRoZSBmaWxlcyBhcmUgbmV2ZXIgZ2VuZXJhdGVkLgoKQWNrZWQtYnk6IElhbiBKYWNrc29u
+IDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
