@@ -1,16 +1,12 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v2 02/21] xen/arm: make allocate_memory work
- for non 1:1 mapped guests
-Date: Mon, 9 Jul 2018 14:58:40 +0100
-Message-ID: <48aab9bd-a084-e87c-0bce-99b6583703e7@arm.com>
-References: <alpine.DEB.2.10.1807061523160.13502@sstabellini-ThinkPad-X260>
- <1530918736-13965-2-git-send-email-sstabellini@kernel.org>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: [PATCH] xen/Makefile: Bump version to 4.11.1-pre for
+ ongoing 4.11 stable branch
+Date: Mon, 9 Jul 2018 14:59:25 +0100
+Message-ID: <23363.27197.499392.71917@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1530918736-13965-2-git-send-email-sstabellini@kernel.org>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,15 +15,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, andrii_anisov@epam.com, xen-devel@lists.xen.org
+To: xen-devel@lists.xen.org
+Cc: Juergen Gross <jgross@suse.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwNy8wNy8xOCAwMDoxMSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+IEBAIC0yNjMs
-NiArMjg4LDEyIEBAIHN0YXRpYyB2b2lkIGFsbG9jYXRlX21lbW9yeShzdHJ1Y3QgZG9tYWluICpk
-LCBzdHJ1Y3Qga2VybmVsX2luZm8gKmtpbmZvKQoKSSBmb3Jnb3QgdG8gbWVudGlvbiB0aGF0IHZl
-cnkgbGlrZWx5IHlvdSB3YW50IHRvIHVwZGF0ZSB0aGUgYmlnIGNvbW1lbnQgCm9uIHRvcCBvZiB0
-aGlzIGZ1bmN0aW9uLgoKQ2hlZXJzLAotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+SSB3aWxsIHB1c2ggdGhpcyBjaGFuZ2Ugb24gV2VkbmVzZGF5LCBhZnRlciA0LjExIGlzIHJlbGVh
+c2VkLCBhbmQgdGhlbgo0LjExIGNhbiBiZSBoYW5kZWQgb3ZlciB0byB0aGUgc3RhYmxlIG1haW50
+YWluZXJzLgoKSWFuLgoKRnJvbSAxZmQ4N2JhMWNkMDMxMmI3NDNhNDg3NTZhOTFjNjk2MmIxNTE0
+YWFjIE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBJYW4gSmFja3NvbiA8aWFuLmphY2tz
+b25AZXUuY2l0cml4LmNvbT4KRGF0ZTogTW9uLCA5IEp1bCAyMDE4IDE0OjU2OjE5ICswMTAwClN1
+YmplY3Q6IFtQQVRDSF0geGVuL01ha2VmaWxlOiBCdW1wIHZlcnNpb24gdG8gNC4xMS4xLXByZSBm
+b3Igb25nb2luZyA0LjExCiBzdGFibGUgYnJhbmNoCgpTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3Nv
+biA8SWFuLkphY2tzb25AZXUuY2l0cml4LmNvbT4KLS0tCiB4ZW4vTWFrZWZpbGUgfCAyICstCiAx
+IGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQg
+YS94ZW4vTWFrZWZpbGUgYi94ZW4vTWFrZWZpbGUKaW5kZXggNGQwNzVjMy4uYTkyMmExYiAxMDA2
+NDQKLS0tIGEveGVuL01ha2VmaWxlCisrKyBiL3hlbi9NYWtlZmlsZQpAQCAtMiw3ICsyLDcgQEAK
+ICMgQWxsIG90aGVyIHBsYWNlcyB0aGlzIGlzIHN0b3JlZCAoZWcuIGNvbXBpbGUuaCkgc2hvdWxk
+IGJlIGF1dG9nZW5lcmF0ZWQuCiBleHBvcnQgWEVOX1ZFUlNJT04gICAgICAgPSA0CiBleHBvcnQg
+WEVOX1NVQlZFUlNJT04gICAgPSAxMQotZXhwb3J0IFhFTl9FWFRSQVZFUlNJT04gPz0gLjAkKFhF
+Tl9WRU5ET1JWRVJTSU9OKQorZXhwb3J0IFhFTl9FWFRSQVZFUlNJT04gPz0gLjEtcHJlJChYRU5f
+VkVORE9SVkVSU0lPTikKIGV4cG9ydCBYRU5fRlVMTFZFUlNJT04gICA9ICQoWEVOX1ZFUlNJT04p
+LiQoWEVOX1NVQlZFUlNJT04pJChYRU5fRVhUUkFWRVJTSU9OKQogLWluY2x1ZGUgeGVuLXZlcnNp
+b24KIAotLSAKMi4xLjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
