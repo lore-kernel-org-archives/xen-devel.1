@@ -1,15 +1,20 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 2/2] x86/msr: Rename the msr policy objects
-Date: Tue, 10 Jul 2018 10:33:58 +0200
-Message-ID: <20180710083358.dhk7cidrspgxafex@mac.bytemobile.com>
-References: <1531132188-20564-1-git-send-email-andrew.cooper3@citrix.com>
- <1531132188-20564-3-git-send-email-andrew.cooper3@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 1/2] MAINTAINERS: drop USB PV DRIVERS entry
+Date: Tue, 10 Jul 2018 02:35:31 -0600
+Message-ID: <5B446FD302000078001D27F1@prv1-mh.provo.novell.com>
+References: <20180710081536.25438-1-wei.liu2@citrix.com>
+ <20180710081536.25438-2-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=xfjl=j2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fco7S-000425-7I
+ for xen-devel@lists.xenproject.org; Tue, 10 Jul 2018 08:35:34 +0000
+In-Reply-To: <20180710081536.25438-2-wei.liu2@citrix.com>
 Content-Disposition: inline
-In-Reply-To: <1531132188-20564-3-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,22 +23,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKdWwgMDksIDIwMTggYXQgMTE6Mjk6NDhBTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBBZnRlciBhdHRlbXB0aW5nIHRvIGRldmVsb3AgdGhlIGluZnJhc3RydWN0dXJlLCBp
-dCB0dXJucyBvdXQgdGhhdCB0aGUgY2hvaWNlCj4gb2YgbmFtaW5nIGlzIHN1Ym9wdGltYWwuCj4g
-Cj4gUmVuYW1lIG1zcl9kb21haW5fcG9saWN5IHRvIGp1c3QgbXNyX3BvbGljeSB0byBtaXJyb3Ig
-dGhlIENQVUlEIHNpZGUgb2YKPiB0aGluZ3MsIGFuZCBhbHRlciB0aGUgJ2RwJyB2YXJpYWJsZSBu
-YW1lIGNvbnZlbnRpb24gdG8gJ21wJy4gIFdoaWxlIGFsdGVyaW5nCj4gYWxsIHRoZSBuYW1lcywg
-ZXhwb3J0IGFsbCBvZiB0aGUgc3lzdGVtIG1zcl9wb2xpY3kgb2JqZWN0cyAod2hpY2ggYXJlIGFs
-cmVhZHkKPiBnbG9iYWwgc3ltYm9scykuCj4gCj4gUmVuYW1lIG1zcl92Y3B1X3BvbGljeSB0byB2
-Y3B1X21zcnMgYW5kIHN3aXRjaCAndnAnIHRvICdtc3JzJyBpbiBjb2RlLiAgVXBkYXRlCj4gdGhl
-IGFyY2hfdmNwdSBmaWVsZCBuYW1lIHRvIG1hdGNoLgo+IAo+IE5vIGZ1bmN0aW9uYWwgY2hhbmdl
-Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJp
-eC5jb20+CgpSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5j
-b20+CgpUaGFua3MuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDEwLjA3LjE4IGF0IDEwOjE1LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+U3VnZ2VzdGVkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4gU2lnbmVkLW9m
+Zi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBKYW4gQmV1bGlj
+aCA8amJldWxpY2hAc3VzZS5jb20+CgpUaGFua3MgZm9yIHJlbWVtYmVyaW5nIHRoaXMgLSBJIGhh
+ZCBsb25nIGZvcmdvdHRlbi4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
