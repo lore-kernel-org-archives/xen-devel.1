@@ -1,21 +1,22 @@
-From: Wei Liu <wei.liu2@citrix.com>
+From: Juergen Gross <jgross@suse.com>
 Subject: Re: [PATCH] docs: adjust release management doc
-Date: Tue, 10 Jul 2018 14:26:50 +0100
-Message-ID: <20180710132650.2bkv3jetezy27nvu@citrix.com>
+Date: Tue, 10 Jul 2018 15:32:17 +0200
+Message-ID: <6a80a0f0-3a0f-4bb9-d438-3c6b8b4ab5e3@suse.com>
 References: <20180426104844.15342-1-jgross@suse.com>
  <20180426105256.fv6srikb6en3pamr@citrix.com>
  <aad50418-278e-bf48-179b-a86df397a220@suse.com>
+ <20180710132650.2bkv3jetezy27nvu@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=9fb0=j2=citrix.com=prvs=7221156ca=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fcsfh-0004KS-Sr
- for xen-devel@lists.xenproject.org; Tue, 10 Jul 2018 13:27:13 +0000
-Content-Disposition: inline
-In-Reply-To: <aad50418-278e-bf48-179b-a86df397a220@suse.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=ns0p=j2=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fcske-00057Q-SZ
+ for xen-devel@lists.xenproject.org; Tue, 10 Jul 2018 13:32:20 +0000
+In-Reply-To: <20180710132650.2bkv3jetezy27nvu@citrix.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +25,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: sstabellini@kernel.org, Wei Liu <wei.liu2@citrix.com>, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, jbeulich@suse.com, xen-devel@lists.xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: sstabellini@kernel.org, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, jbeulich@suse.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBKdWwgMTAsIDIwMTggYXQgMDM6MjM6NDZQTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3
-cm90ZToKPiBPbiAyNi8wNC8xOCAxMjo1MiwgV2VpIExpdSB3cm90ZToKPiA+IE9uIFRodSwgQXBy
-IDI2LCAyMDE4IGF0IDEyOjQ4OjQ0UE0gKzAyMDAsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gPj4g
-U2lnbmVkLW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgo+ID4gCj4gPiBB
-Y2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KPiAKPiBQaW5nPwoKT29wcywg
-dGhpcyBmZWxsIHRocm91Z2ggdGhlIGNyYWNrLgoKSSB0cmllZCB0byBhcHBseSBpdCwgYnV0IGl0
-IGRvZXNuJ3QgYXBwbHkgY2xlYW5seSBhbnltb3JlLiBDYW4geW91IGdpdmUKbWUgYSBnaXQgYnJh
-bmNoIGluc3RlYWQ/CgpXZWkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+T24gMTAvMDcvMTggMTU6MjYsIFdlaSBMaXUgd3JvdGU6Cj4gT24gVHVlLCBKdWwgMTAsIDIwMTgg
+YXQgMDM6MjM6NDZQTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPj4gT24gMjYvMDQvMTgg
+MTI6NTIsIFdlaSBMaXUgd3JvdGU6Cj4+PiBPbiBUaHUsIEFwciAyNiwgMjAxOCBhdCAxMjo0ODo0
+NFBNICswMjAwLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+Pj4+IFNpZ25lZC1vZmYtYnk6IEp1ZXJn
+ZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KPj4+Cj4+PiBBY2tlZC1ieTogV2VpIExpdSA8d2Vp
+LmxpdTJAY2l0cml4LmNvbT4KPj4KPj4gUGluZz8KPiAKPiBPb3BzLCB0aGlzIGZlbGwgdGhyb3Vn
+aCB0aGUgY3JhY2suCj4gCj4gSSB0cmllZCB0byBhcHBseSBpdCwgYnV0IGl0IGRvZXNuJ3QgYXBw
+bHkgY2xlYW5seSBhbnltb3JlLiBDYW4geW91IGdpdmUKPiBtZSBhIGdpdCBicmFuY2ggaW5zdGVh
+ZD8KCmh0dHBzOi8vZ2l0aHViLmNvbS9qZ3Jvc3MxL3hlbi5naXQgZG9jCgoKSnVlcmdlbgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
