@@ -1,21 +1,22 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH v2 05/13] iommu: don't domain_crash() inside
- iommu_map/unmap_page()
-Date: Tue, 10 Jul 2018 17:49:58 +0100
-Message-ID: <61d6f65e-df11-c45b-c03b-19924162e7cc@citrix.com>
-References: <20180707110526.35822-1-paul.durrant@citrix.com>
- <20180707110526.35822-6-paul.durrant@citrix.com>
+From: Leon Romanovsky <leon@kernel.org>
+Subject: Re: [RFC PATCH] mm,
+ oom: distinguish blockable mode for mmu notifiers
+Date: Tue, 10 Jul 2018 19:20:20 +0300
+Message-ID: <20180710162020.GJ3014__1712.28573094613$1531243641$gmane$org@mtr-leonro.mtl.com>
+References: <20180622150242.16558-1-mhocko@kernel.org>
+ <20180627074421.GF32348@dhcp22.suse.cz>
+ <20180709122908.GJ22049@dhcp22.suse.cz>
+ <20180710134040.GG3014@mtr-leonro.mtl.com>
+ <20180710141410.GP14284@dhcp22.suse.cz>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0827860524739759835=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=sxqp=j2=citrix.com=prvs=722797069=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1fcvq0-0003rL-Av
- for xen-devel@lists.xenproject.org; Tue, 10 Jul 2018 16:50:04 +0000
-In-Reply-To: <20180707110526.35822-6-paul.durrant@citrix.com>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=+kbi=j2=kernel.org=leon@srs-us1.protection.inumbo.net>)
+ id 1fcvNK-0000ld-2r
+ for xen-devel@lists.xenproject.org; Tue, 10 Jul 2018 16:20:26 +0000
+In-Reply-To: <20180710141410.GP14284@dhcp22.suse.cz>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,29 +25,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Michal Hocko <mhocko@kernel.org>
+Cc: kvm@vger.kernel.org, Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>, David Airlie <airlied@linux.ie>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Sudeep Dutt <sudeep.dutt@intel.com>, dri-devel@lists.freedesktop.org, linux-mm@kvack.org, Felix Kuehling <felix.kuehling@amd.com>, Andrea Arcangeli <aarcange@redhat.com>, "David (ChunMing) Zhou" <David1.Zhou@amd.com>, Dimitri Sivanich <sivanich@sgi.com>, linux-rdma@vger.kernel.org, amd-gfx@lists.freedesktop.org, Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>, David Rientjes <rientjes@google.com>, xen-devel@lists.xenproject.org, intel-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>, =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>Mike Marciniszyn <mi>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDcvMDcvMjAxOCAxMjowNSBQTSwgUGF1bCBEdXJyYW50IHdyb3RlOgo+IFR1cm4gaW9tbXVf
-bWFwL3VubWFwX3BhZ2UoKSBpbnRvIHN0cmFpZ2h0Zm9yd2FyZCB3cmFwcGVycyB0aGF0IGNoZWNr
-IHRoZQo+IGV4aXN0ZW5jZSBvZiB0aGUgcmVsZXZhbnQgaW9tbXVfb3AgYW5kIGNhbGwgdGhyb3Vn
-aCB0byBpdC4gVGhpcyBtYWtlcyB0aGVtCj4gdXNhYmxlIGJ5IFBWIElPTU1VIGNvZGUgdG8gYmUg
-ZGVsaXZlcmVkIGluIGZ1dHVyZSBwYXRjaGVzLgo+IExlYXZlIHRoZSBkZWNpc2lvbiBvbiB3aGV0
-aGVyIHRvIGludm9rZSBkb21haW5fY3Jhc2goKSB1cCB0byB0aGUgY2FsbGVyLgo+IFRoaXMgaGFz
-IHRoZSBhZGRlZCBiZW5lZml0IHRoYXQgdGhlIChtb2R1bGUvbGluZSBudW1iZXIpIG1lc3NhZ2Ug
-dGhhdAo+IGRvbWFpbl9jcmFzaCgpIHNwaXRzIG91dCB3aWxsIGJlIG1vcmUgaW5kaWNhdGl2ZSBv
-ZiB3aGVyZSB0aGUgcHJvYmxlbSBsaWVzLgo+IAo+IE5PVEU6IFRoaXMgcGF0Y2ggaW5jbHVkZXMg
-b25lIGJpdCBvZiBjbGVhbi11cCBpbiBzZXRfaWRlbnRpdHlfcDJtX2VudHJ5KCkKPiAgICAgICBy
-ZXBsYWNpbmcgdXNlIG9mIHAybS0+ZG9tYWluIHdpdGggdGhlIGRvbWFpbiBwb2ludGVyIHBhc3Nl
-ZCBpbnRvIHRoZQo+ICAgICAgIGZ1bmN0aW9uLgo+IAo+IFNpZ25lZC1vZmYtYnk6IFBhdWwgRHVy
-cmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+CgpJIGhhdmUgc29tZSBtaW5vciByZXNlcnZh
-dGlvbnMgYWJvdXQgdGhpcywgc2luY2UgaXQgY291bGQgbGVhdmUgb3BlbiB0aGUKcG9zc2liaWxp
-dHkgdGhhdCBhIGZhaWxlZCBvcGVyYXRpb24gKmRvZXNuJ3QqIHJlc3VsdCBpbiBhIGRvbWFpbiBj
-cmFzaAp3aGVuIGl0IHNob3VsZC4gIEJ1dCBhbGwgdGhlIGZ1bmN0aW9ucyBpbiBxdWVzdGlvbiBh
-cmUgX19tdXN0X2NoZWNrLCBzbwp0aGUgcmlzayBvZiB0aGF0IHNvcnQgb2YgYnVnIGNyZWVwaW5n
-IGluIGlzIHNpZ25pZmljYW50bHkgbG93ZXIuCgpTbzoKClJldmlld2VkLWJ5OiBHZW9yZ2UgRHVu
-bGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+
+--===============0827860524739759835==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="0EphSjNCSB1asamE"
+Content-Disposition: inline
+
+
+--0EphSjNCSB1asamE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Tue, Jul 10, 2018 at 04:14:10PM +0200, Michal Hocko wrote:
+> On Tue 10-07-18 16:40:40, Leon Romanovsky wrote:
+> > On Mon, Jul 09, 2018 at 02:29:08PM +0200, Michal Hocko wrote:
+> > > On Wed 27-06-18 09:44:21, Michal Hocko wrote:
+> > > > This is the v2 of RFC based on the feedback I've received so far. The
+> > > > code even compiles as a bonus ;) I haven't runtime tested it yet, mostly
+> > > > because I have no idea how.
+> > > >
+> > > > Any further feedback is highly appreciated of course.
+> > >
+> > > Any other feedback before I post this as non-RFC?
+> >
+> > From mlx5 perspective, who is primary user of umem_odp.c your change looks ok.
+>
+> Can I assume your Acked-by?
+
+I didn't have a chance to test it because it applies on our rdma-next, but
+fails to compile.
+
+Thanks
+
+>
+> Thanks for your review!
+> --
+> Michal Hocko
+> SUSE Labs
+>
+
+--0EphSjNCSB1asamE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIcBAEBAgAGBQJbRNzEAAoJEORje4g2clinTRAP/3xbJ66iDSwdQCcVd+3SPmwJ
+NYt2S+UqK7m5inKXFtDVKC9BNIb6WKX5gVPyLMKfr6d+Ru6XVd/TmavJyDTHbBzC
+B5a13HTOqAMPLoRdcU/HqN0yHWXsRtekZ5jnnxLt+mXVq+34Vk6MNFO2OL8opaeP
+1Dznd0rY8jrA9Y3Z6gXBkog9xIFE5h7NouLdApinAqoP8D4/M1quGSGsmSqlkY0z
+NHviSlRW8/cRSgSeS5SQEyj3jz6gsZCYRWwskONf+VWy848aAoessVXzNVgtuLbR
+4eIkAHhb1DTPdIPIZyzxrQ4e7QCaFOb/AFAt6K0E2YmTgmnntKLrpXf76p8GIXFW
+xmxji8Z6R+/124cH67/+GpgSvAFSoqyHsjv8IJkB8XPsLnfN4vqxH6U0U7lO4Z5l
+Pex8wMFs55GgrDsI99dEczCglFesam5u9RRnHLGY1nYYofDoNKTbWiKEAAIQJK7R
+P0fCVmW921et6rtnsPOIM40O/94vJPLP0Wam76GXSCtQFw22xK90XCIvrYLuZIcs
+q7nDB6HzfKUL0Ai1KAhhcqzn785E9xtAxLy6CilgmB4nTqXhaP5cM5RZZiD86jEr
+N8GMXABgUjwgwxV4AFHGY2qeawlN+l2yLNl6r05KNyKTWWyhM2rt0HNnRkLRP51G
+xxL8y7wxClLAZl6dTXFz
+=ETz1
+-----END PGP SIGNATURE-----
+
+--0EphSjNCSB1asamE--
+
+
+--===============0827860524739759835==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0827860524739759835==--
