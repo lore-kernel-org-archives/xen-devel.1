@@ -1,20 +1,26 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH 4/8] x86/AMD: distinguish compute units from
- hyper-threads
-Date: Wed, 11 Jul 2018 06:07:42 -0600
-Message-ID: <5B45F30E02000078001D3139@prv1-mh.provo.novell.com>
-References: <5B45F01B02000078001D30FF@prv1-mh.provo.novell.com>
+From: Leon Romanovsky <leon@kernel.org>
+Subject: Re: [RFC PATCH] mm,
+ oom: distinguish blockable mode for mmu notifiers
+Date: Wed, 11 Jul 2018 15:08:45 +0300
+Message-ID: <20180711120845.GA7750__31631.8167643205$1531310850$gmane$org@mtr-leonro.mtl.com>
+References: <20180622150242.16558-1-mhocko@kernel.org>
+ <20180627074421.GF32348@dhcp22.suse.cz>
+ <20180709122908.GJ22049@dhcp22.suse.cz>
+ <20180710134040.GG3014@mtr-leonro.mtl.com>
+ <20180710141410.GP14284@dhcp22.suse.cz>
+ <20180710162020.GJ3014@mtr-leonro.mtl.com>
+ <20180711090353.GD20050@dhcp22.suse.cz>
+ <20180711101447.GU3014@mtr-leonro.mtl.com>
+ <20180711111318.GL20050@dhcp22.suse.cz>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8209887834458372162=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=t1xz=j3=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fdDuK-0005h1-VA
- for xen-devel@lists.xenproject.org; Wed, 11 Jul 2018 12:07:44 +0000
-In-Reply-To: <5B45F01B02000078001D30FF@prv1-mh.provo.novell.com>
-Content-Disposition: inline
+ (envelope-from <srs0=25lf=j3=kernel.org=leon@srs-us1.protection.inumbo.net>)
+ id 1fdDvO-0005py-Ax
+ for xen-devel@lists.xenproject.org; Wed, 11 Jul 2018 12:08:50 +0000
+In-Reply-To: <20180711111318.GL20050@dhcp22.suse.cz>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,76 +29,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: Michal Hocko <mhocko@kernel.org>
+Cc: kvm@vger.kernel.org, Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>, David Airlie <airlied@linux.ie>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Sudeep Dutt <sudeep.dutt@intel.com>, dri-devel@lists.freedesktop.org, linux-mm@kvack.org, Felix Kuehling <felix.kuehling@amd.com>, Andrea Arcangeli <aarcange@redhat.com>, "David (ChunMing) Zhou" <David1.Zhou@amd.com>, Dimitri Sivanich <sivanich@sgi.com>, linux-rdma@vger.kernel.org, amd-gfx@lists.freedesktop.org, Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>, David Rientjes <rientjes@google.com>, xen-devel@lists.xenproject.org, intel-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>, =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>Mike Marciniszyn <mi>
 List-Id: xen-devel@lists.xenproject.org
 
-RmFtMTcgcmVwbGFjZXMgQ1VzIGJ5IEhUcywgd2hpY2ggd2Ugc2hvdWxkIHJlZmxlY3QgYWNjb3Jk
-aW5nbHksIGV2ZW4gaWYKdGhlIGRpZmZlcmVuY2UgaXMgbm90IHZlcnkgYmlnLiBUaGUgbW9zdCBy
-ZWxldmFudCBjaGFuZ2UgKHJlcXVpcmluZyBzb21lCmNvZGUgcmVzdHJ1Y3R1cmluZykgaXMgdGhh
-dCB0aGUgdG9wb2V4dCBmZWF0dXJlIG5vIGxvbmdlciBtZWFucyB0aGVyZSBpcwphIHZhbGlkIENV
-IElELgoKVGFrZSB0aGUgb3Bwb3J0dW5pdHkgYW5kIGNvbnZlcnQgd3JvbmdseSBwbGFpbiBpbnQg
-dmFyaWFibGVzIGluCnNldF9jcHVfc2libGluZ19tYXAoKSB0byB1bnNpZ25lZCBpbnQuCgpTaWdu
-ZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgotLS0gYS94ZW4vYXJj
-aC94ODYvY3B1L2FtZC5jCisrKyBiL3hlbi9hcmNoL3g4Ni9jcHUvYW1kLmMKQEAgLTUwNCwxNyAr
-NTA0LDIzIEBAIHN0YXRpYyB2b2lkIGFtZF9nZXRfdG9wb2xvZ3koc3RydWN0IGNwdWkKICAgICAg
-ICAgICAgICAgICB1MzIgZWF4LCBlYngsIGVjeCwgZWR4OwogCiAgICAgICAgICAgICAgICAgY3B1
-aWQoMHg4MDAwMDAxZSwgJmVheCwgJmVieCwgJmVjeCwgJmVkeCk7Ci0gICAgICAgICAgICAgICAg
-Yy0+Y29tcHV0ZV91bml0X2lkID0gZWJ4ICYgMHhGRjsKICAgICAgICAgICAgICAgICBjLT54ODZf
-bnVtX3NpYmxpbmdzID0gKChlYnggPj4gOCkgJiAweDMpICsgMTsKKworCQlpZiAoYy0+eDg2IDwg
-MHgxNykKKwkgICAgICAgICAgICAgICAgYy0+Y29tcHV0ZV91bml0X2lkID0gZWJ4ICYgMHhGRjsK
-KwkJZWxzZSB7CisJICAgICAgICAgICAgICAgIGMtPmNwdV9jb3JlX2lkID0gZWJ4ICYgMHhGRjsK
-KwkJCWMtPng4Nl9tYXhfY29yZXMgLz0gYy0+eDg2X251bV9zaWJsaW5nczsKKwkJfQogICAgICAg
-ICB9CiAgICAgICAgIAogICAgICAgICBpZiAob3B0X2NwdV9pbmZvKQogICAgICAgICAgICAgICAg
-IHByaW50aygiQ1BVICVkKCVkKSAtPiBQcm9jZXNzb3IgJWQsICVzICVkXG4iLAogICAgICAgICAg
-ICAgICAgICAgICAgICBjcHUsIGMtPng4Nl9tYXhfY29yZXMsIGMtPnBoeXNfcHJvY19pZCwKLSAg
-ICAgICAgICAgICAgICAgICAgICAgY3B1X2hhcyhjLCBYODZfRkVBVFVSRV9UT1BPRVhUKSA/ICJD
-b21wdXRlIFVuaXQiIDogCi0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAiQ29yZSIsCi0gICAgICAgICAgICAgICAgICAgICAgIGNwdV9oYXMo
-YywgWDg2X0ZFQVRVUkVfVE9QT0VYVCkgPyBjLT5jb21wdXRlX3VuaXRfaWQgOgotICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYy0+Y3B1X2Nv
-cmVfaWQpOworICAgICAgICAgICAgICAgICAgICAgICBjLT5jb21wdXRlX3VuaXRfaWQgIT0gSU5W
-QUxJRF9DVUlEID8gIkNvbXB1dGUgVW5pdCIKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICA6ICJDb3JlIiwKKyAgICAgICAgICAgICAgICAg
-ICAgICAgYy0+Y29tcHV0ZV91bml0X2lkICE9IElOVkFMSURfQ1VJRCA/IGMtPmNvbXB1dGVfdW5p
-dF9pZAorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIDogYy0+Y3B1X2NvcmVfaWQpOwogfQogCiBzdGF0aWMgdm9pZCBlYXJseV9pbml0X2Ft
-ZChzdHJ1Y3QgY3B1aW5mb194ODYgKmMpCi0tLSBhL3hlbi9hcmNoL3g4Ni9zbXBib290LmMKKysr
-IGIveGVuL2FyY2gveDg2L3NtcGJvb3QuYwpAQCAtMjM2LDMzICsyMzYsNDEgQEAgc3RhdGljIHZv
-aWQgbGlua190aHJlYWRfc2libGluZ3MoaW50IGNwdQogICAgIGNwdW1hc2tfc2V0X2NwdShjcHUy
-LCBwZXJfY3B1KGNwdV9jb3JlX21hc2ssIGNwdTEpKTsKIH0KIAotc3RhdGljIHZvaWQgc2V0X2Nw
-dV9zaWJsaW5nX21hcChpbnQgY3B1KQorc3RhdGljIHZvaWQgc2V0X2NwdV9zaWJsaW5nX21hcCh1
-bnNpZ25lZCBpbnQgY3B1KQogewotICAgIGludCBpOworICAgIHVuc2lnbmVkIGludCBpOwogICAg
-IHN0cnVjdCBjcHVpbmZvX3g4NiAqYyA9IGNwdV9kYXRhOwogCiAgICAgY3B1bWFza19zZXRfY3B1
-KGNwdSwgJmNwdV9zaWJsaW5nX3NldHVwX21hcCk7CiAKICAgICBjcHVtYXNrX3NldF9jcHUoY3B1
-LCBzb2NrZXRfY3B1bWFza1tjcHVfdG9fc29ja2V0KGNwdSldKTsKKyAgICBjcHVtYXNrX3NldF9j
-cHUoY3B1LCBwZXJfY3B1KGNwdV9jb3JlX21hc2ssIGNwdSkpOworICAgIGNwdW1hc2tfc2V0X2Nw
-dShjcHUsIHBlcl9jcHUoY3B1X3NpYmxpbmdfbWFzaywgY3B1KSk7CiAKICAgICBpZiAoIGNbY3B1
-XS54ODZfbnVtX3NpYmxpbmdzID4gMSApCiAgICAgewogICAgICAgICBmb3JfZWFjaF9jcHUgKCBp
-LCAmY3B1X3NpYmxpbmdfc2V0dXBfbWFwICkKICAgICAgICAgewotICAgICAgICAgICAgaWYgKCBj
-cHVfaGFzKGMsIFg4Nl9GRUFUVVJFX1RPUE9FWFQpICkgewotICAgICAgICAgICAgICAgIGlmICgg
-KGNbY3B1XS5waHlzX3Byb2NfaWQgPT0gY1tpXS5waHlzX3Byb2NfaWQpICYmCi0gICAgICAgICAg
-ICAgICAgICAgICAoY1tjcHVdLmNvbXB1dGVfdW5pdF9pZCA9PSBjW2ldLmNvbXB1dGVfdW5pdF9p
-ZCkgKQorICAgICAgICAgICAgaWYgKCBjcHUgPT0gaSB8fCBjW2NwdV0ucGh5c19wcm9jX2lkICE9
-IGNbaV0ucGh5c19wcm9jX2lkICkKKyAgICAgICAgICAgICAgICBjb250aW51ZTsKKyAgICAgICAg
-ICAgIGlmICggY1tjcHVdLmNvbXB1dGVfdW5pdF9pZCAhPSBJTlZBTElEX0NVSUQgJiYKKyAgICAg
-ICAgICAgICAgICAgY1tpXS5jb21wdXRlX3VuaXRfaWQgIT0gSU5WQUxJRF9DVUlEICkKKyAgICAg
-ICAgICAgIHsKKyAgICAgICAgICAgICAgICBpZiAoIGNbY3B1XS5jb21wdXRlX3VuaXRfaWQgPT0g
-Y1tpXS5jb21wdXRlX3VuaXRfaWQgKQogICAgICAgICAgICAgICAgICAgICBsaW5rX3RocmVhZF9z
-aWJsaW5ncyhjcHUsIGkpOwotICAgICAgICAgICAgfSBlbHNlIGlmICggKGNbY3B1XS5waHlzX3By
-b2NfaWQgPT0gY1tpXS5waHlzX3Byb2NfaWQpICYmCi0gICAgICAgICAgICAgICAgICAgICAgICAo
-Y1tjcHVdLmNwdV9jb3JlX2lkID09IGNbaV0uY3B1X2NvcmVfaWQpICkgewotICAgICAgICAgICAg
-ICAgIGxpbmtfdGhyZWFkX3NpYmxpbmdzKGNwdSwgaSk7CiAgICAgICAgICAgICB9CisgICAgICAg
-ICAgICBlbHNlIGlmICggY1tjcHVdLmNwdV9jb3JlX2lkICE9IFhFTl9JTlZBTElEX0NPUkVfSUQg
-JiYKKyAgICAgICAgICAgICAgICAgICAgICBjW2ldLmNwdV9jb3JlX2lkICE9IFhFTl9JTlZBTElE
-X0NPUkVfSUQgKQorICAgICAgICAgICAgeworICAgICAgICAgICAgICAgIGlmICggY1tjcHVdLmNw
-dV9jb3JlX2lkID09IGNbaV0uY3B1X2NvcmVfaWQgKQorICAgICAgICAgICAgICAgICAgICBsaW5r
-X3RocmVhZF9zaWJsaW5ncyhjcHUsIGkpOworICAgICAgICAgICAgfQorICAgICAgICAgICAgZWxz
-ZQorICAgICAgICAgICAgICAgIHByaW50ayhYRU5MT0dfV0FSTklORworICAgICAgICAgICAgICAg
-ICAgICAgICAiQ1BVJXU6IHVuY2xlYXIgcmVsYXRpb25zaGlwIHdpdGggQ1BVJXVcbiIsCisgICAg
-ICAgICAgICAgICAgICAgICAgIGNwdSwgaSk7CiAgICAgICAgIH0KICAgICB9Ci0gICAgZWxzZQot
-ICAgIHsKLSAgICAgICAgY3B1bWFza19zZXRfY3B1KGNwdSwgcGVyX2NwdShjcHVfc2libGluZ19t
-YXNrLCBjcHUpKTsKLSAgICB9CiAKICAgICBpZiAoIGNbY3B1XS54ODZfbWF4X2NvcmVzID09IDEg
-KQogICAgIHsKCgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============8209887834458372162==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="SLDf9lqlvOQaIe6s"
+Content-Disposition: inline
+
+
+--SLDf9lqlvOQaIe6s
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Wed, Jul 11, 2018 at 01:13:18PM +0200, Michal Hocko wrote:
+> On Wed 11-07-18 13:14:47, Leon Romanovsky wrote:
+> > On Wed, Jul 11, 2018 at 11:03:53AM +0200, Michal Hocko wrote:
+> > > On Tue 10-07-18 19:20:20, Leon Romanovsky wrote:
+> > > > On Tue, Jul 10, 2018 at 04:14:10PM +0200, Michal Hocko wrote:
+> > > > > On Tue 10-07-18 16:40:40, Leon Romanovsky wrote:
+> > > > > > On Mon, Jul 09, 2018 at 02:29:08PM +0200, Michal Hocko wrote:
+> > > > > > > On Wed 27-06-18 09:44:21, Michal Hocko wrote:
+> > > > > > > > This is the v2 of RFC based on the feedback I've received so far. The
+> > > > > > > > code even compiles as a bonus ;) I haven't runtime tested it yet, mostly
+> > > > > > > > because I have no idea how.
+> > > > > > > >
+> > > > > > > > Any further feedback is highly appreciated of course.
+> > > > > > >
+> > > > > > > Any other feedback before I post this as non-RFC?
+> > > > > >
+> > > > > > From mlx5 perspective, who is primary user of umem_odp.c your change looks ok.
+> > > > >
+> > > > > Can I assume your Acked-by?
+> > > >
+> > > > I didn't have a chance to test it because it applies on our rdma-next, but
+> > > > fails to compile.
+> > >
+> > > What is the compilation problem? Is it caused by the patch or some other
+> > > unrelated changed?
+> >
+> > Thanks for pushing me to take a look on it.
+> > Your patch needs the following hunk to properly compile at least on my system.
+>
+> I suspect you were trying the original version. I've posted an updated
+> patch here http://lkml.kernel.org/r/20180627074421.GF32348@dhcp22.suse.cz
+> and all these issues should be fixed there. Including many other fixes.
+>
+
+Ohh, you used --reply-to, IMHO it is best way to make sure that the
+patch will be lost :)
+
+> Could you have a look at that one please?
+
+I grabbed it, the results will be overnight only.
+
+Thanks
+
+> --
+> Michal Hocko
+> SUSE Labs
+
+--SLDf9lqlvOQaIe6s
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIcBAEBAgAGBQJbRfNNAAoJEORje4g2clinlVwP+gOTolhbvb7Z7rdf1A/MW8q6
+SOrUeHuzbfpi3QwcJOQv9305fjVWOQ8Sgqv9xbYw19ISxlIY+B/tm+XgbUEcMHMC
+P0TYVuLz2SGJCRoovqICZ49NzestzlGyn3Nv5AGoKG2JAzWXphtHROIkGt3SNraX
+O1B+izek2DrruThuLEtQbNHx+gI9QP7YZhdz7ClbNO2VwxIGQZcCvhjc2fG1v6ab
+dkXKZ3QS05bm5rQO2+VFV3WhAFtkUwocqyjrGrbvn6IgDWYPmXmXhbjhSbLs4V+w
+ggj4kwUQd0R/QQY126lOtkvZKQk/EZu+GmumNpLqeTY0AF+vX4SOMrsZreekaQIw
+4ZzouQ0yFyBGIYO/i+zQaAyAgwJBf0b1nyWl+OZyY8E03e2COp0GF2sdiTMo5K+N
+G9msVCQhavJsWawiL+1RyzgfLHipcnp4dYCFDqpqbZR/3Kx7ld1OBWT0JzbhuqZW
+x4uelzSwBAzeZW2Hj2TYfMNuaRlHBiJi7Bqct8b2avsftTvGvUdQKbtxxxXzd1SI
+J1OgzS/WFi/Ao+UW0yFVXWKtitaIMzCVhZroYZs4BUoKJq8fLjGSaXxEPfUfLQmT
+SjbLYA8IVUQLJs3yx/2TJrRxu2ti8zUhnv+jJfcG0T7LT5CjL9Qe7Yx8lMy+u4eR
+ngUiQqGK0WJWIaQq3r19
+=g6/F
+-----END PGP SIGNATURE-----
+
+--SLDf9lqlvOQaIe6s--
+
+
+--===============8209887834458372162==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8209887834458372162==--
