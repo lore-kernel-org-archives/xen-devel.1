@@ -1,33 +1,22 @@
-From: "Chenjia (C)" <chenjia09@huawei.com>
-Subject: =?utf-8?b?562U5aSNOiDnrZTlpI06IOetlOWkjTog562U5aSN?=
- =?utf-8?b?OiAg562U5aSNOiBIZWxwOiBhIHhlbiBjcmFzaCBvZiA0LjguMiB2ZXJzaW9u?=
- =?utf-8?q?/////=E7=AD=94=E5=A4=8D=3A_Is_there_a_faster_way_to_restore_Vir?=
- =?utf-8?q?tual_machine_status_in_Xen=3F?=
-Date: Wed, 11 Jul 2018 09:54:09 +0000
-Message-ID: <193BC0700AA2F44A8843B8D1C1E6B618D51BBF37@nkgeml514-mbx.china.huawei.com>
-References: <193BC0700AA2F44A8843B8D1C1E6B618D51AA10D@nkgeml514-mbx.china.huawei.com>
- <5B35C66802000078001350C7@prv1-mh.provo.novell.com>
- <193BC0700AA2F44A8843B8D1C1E6B618D51AA189@nkgeml514-mbx.china.huawei.com>
- <5B35FCCC02000078001CF04A@prv1-mh.provo.novell.com>
- <193BC0700AA2F44A8843B8D1C1E6B618D51AA2AC@nkgeml514-mbx.china.huawei.com>
- <193BC0700AA2F44A8843B8D1C1E6B618D51AB24C@nkgeml514-mbx.china.huawei.com>
- <625c8b72-f066-c167-ac5e-407b2651437f@suse.com>
- <193BC0700AA2F44A8843B8D1C1E6B618D51AB8C9@nkgeml514-mbx.china.huawei.com>
- <d8d68fb5-989f-0aae-7126-ec7d3e18af82@suse.com>
- <193BC0700AA2F44A8843B8D1C1E6B618D51ABC84@nkgeml514-mbx.china.huawei.com>
- <8749fd38-cd74-c936-396d-51abb13df97d@suse.com>
- <193BC0700AA2F44A8843B8D1C1E6B618D51ABCEE@nkgeml514-mbx.china.huawei.com>
- <2cf6117e-c32c-7572-3105-97d88001a2de@suse.com>
+From: "Woodhouse, David" <dwmw@amazon.co.uk>
+Subject: Re: [PATCH 2/3] xen: set cpu capabilities from
+ xen_start_kernel()
+Date: Wed, 11 Jul 2018 09:54:17 +0000
+Message-ID: <1531302856.8759.28.camel@amazon.co.uk>
+References: <20180530110958.19413-1-jgross@suse.com>
+ <20180530110958.19413-3-jgross@suse.com>
+ <1531300502.8759.24.camel@amazon.co.uk>
+ <b1933a71-360e-c046-a6aa-42e4b047bcbd@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8534271069403898034=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=t6wn=j3=huawei.com=chenjia09@srs-us1.protection.inumbo.net>)
- id 1fdBpH-0006mb-Hk
+ <srs0=rz2e=j3=amazon.co.uk=prvs=72372aa4e=dwmw@srs-us1.protection.inumbo.net>)
+ id 1fdBpH-0006mg-OL
  for xen-devel@lists.xenproject.org; Wed, 11 Jul 2018 09:54:23 +0000
-Content-Language: zh-CN
+In-Reply-To: <b1933a71-360e-c046-a6aa-42e4b047bcbd@suse.com>
+MIME-Version: 1.0
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -36,73 +25,185 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, Jan Beulich <JBeulich@suse.com>
-Cc: zhaobingjian <zhaobingjian@huawei.com>, "Shentao (Terry)" <shentao8@huawei.com>, "Hutao (C)" <hutao09@huawei.com>, "Jugang (David, Enterprise Network)" <jugang09@huawei.com>, Yaoshaomin <yaoshaomin@huawei.com>, "Zhuxiaolin (A)" <zhuxiaolin09@huawei.com>, "wangxu (R)" <wangxu0@huawei.com>, xen-devel <xen-devel@lists.xenproject.org>, yuanjinfeng <yuanjinfeng@huawei.com>
+To: "jgross@suse.com" <jgross@suse.com>, "stable@vger.kernel.org" <stable@vger.kernel.org>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>, "Veith,
+ Simon" <sveith@amazon.de>
 List-Id: xen-devel@lists.xenproject.org
 
-RGVhciB4ZW4gZXhwZXJ077yaDQoJRnJvbSB0aGUgYmxvY2tlZCBpbmZvcm1hdGlvbiwgd2UgZm91
-bmQgdGhhdCB0aGUgQ1BVIDE0IGFuZCBDUFUgMTkgaXMgYmxvY2tlZCwgYW5kIHRoZSBjYWxsIHRy
-YWNlIGlzIG1haW5seSBhYm91dDoNCls2ODkxNS43OTI1MjZdICBbPGZmZmZmZmZmODExMDI0Zjg+
-XSBvbl9lYWNoX2NwdSsweDI4LzB4NjANCls2ODkxNS43OTI1NDBdICBbPGZmZmZmZmZmODEzZWQ3
-ZTE+XSBkZWNyZWFzZV9yZXNlcnZhdGlvbisweDI2MS8weDJmMA0KWzY4OTE1Ljc5MjU1NV0gIFs8
-ZmZmZmZmZmY4MTNlZGZjNj5dIGFsbG9jX3hlbmJhbGxvb25lZF9wYWdlcysweGU2LzB4MTgwDQpb
-Njg5MTUuNzkyNTcxXSAgWzxmZmZmZmZmZjgxM2VjMjExPl0gZ250dGFiX2FsbG9jX3BhZ2VzKzB4
-MTEvMHg0MA0KWzY4OTE1Ljc5MjU4Nl0gIFs8ZmZmZmZmZmZhMDQ5YzE1Yz5dIGdudGRldl9pb2N0
-bCsweDIzYy8weDc1MCBbeGVuX2dudGRldl0NCls2ODkxNS43OTI2MDhdICBbPGZmZmZmZmZmODEy
-MTNkNDM+XSBkb192ZnNfaW9jdGwrMHgyZTMvMHg0YzANCls2ODkxNS43OTI2MzFdICBbPGZmZmZm
-ZmZmODEyMTNmOTQ+XSBTeVNfaW9jdGwrMHg3NC8weDgwDQpbNjg5MTUuNzkyNjQ0XSAgWzxmZmZm
-ZmZmZjgxNWY1N2MzPl0gZW50cnlfU1lTQ0FMTF82NF9mYXN0cGF0aCsweDFlLzB4Y2ENCg0KWzY5
-MTc1Ljc4NjQwNV0gQ2FsbCBUcmFjZToNCls2OTE3NS43ODY0MThdICBbPGZmZmZmZmZmODExOGIx
-ZTg+XSBwYWdlY2FjaGVfZ2V0X3BhZ2UrMHgxNjgvMHgxZDANCls2OTE3NS43ODY0NzFdICBbPGZm
-ZmZmZmZmYTAyNjg1Yjk+XSBwcmVwYXJlX3BhZ2VzKzB4YTkvMHgxYjAgW2J0cmZzXQ0KWzY5MTc1
-Ljc4NjUwOF0gIFs8ZmZmZmZmZmZhMDI2OTM0Mj5dIF9fYnRyZnNfYnVmZmVyZWRfd3JpdGUrMHgy
-MTIvMHg2ODAgW2J0cmZzXQ0KWzY5MTc1Ljc4NjU0M10gIFs8ZmZmZmZmZmZhMDI2Y2ZlMz5dIGJ0
-cmZzX2ZpbGVfd3JpdGVfaXRlcisweDE4My8weDVjMCBbYnRyZnNdDQpbNjkxNzUuNzg2NTYwXSAg
-WzxmZmZmZmZmZjgxMjAxNTQ2Pl0gX192ZnNfd3JpdGUrMHhiNi8weDEwMA0KWzY5MTc1Ljc4NjU3
-NF0gIFs8ZmZmZmZmZmY4MTIwMWIzZD5dIHZmc193cml0ZSsweDlkLzB4MTkwDQpbNjkxNzUuNzg2
-NTg3XSAgWzxmZmZmZmZmZjgxMjAyODEyPl0gU3lTX3dyaXRlKzB4NDIvMHhhMA0KWzY5MTc1Ljc4
-NjU5OV0gIFs8ZmZmZmZmZmY4MTVmNTdjMz5dIGVudHJ5X1NZU0NBTExfNjRfZmFzdHBhdGgrMHgx
-ZS8weGNhDQpbNjkxNzUuNzkzODgxXSBEV0FSRjIgdW53aW5kZXIgc3R1Y2sgYXQgZW50cnlfU1lT
-Q0FMTF82NF9mYXN0cGF0aCsweDFlLzB4Y2ENCg0KCVdoYXQgdGhlIHJlYXNvbiBtYXliZSB0byBj
-YXVzZSB0aGlzIHByb2JsZW0/IElzIHRoZXJlIHNvbWUgd2F5IHRvIFByZXZlbnQgdGhlIGtlcm5l
-bCBmcm9tIGRvaW5nIHNpbWlsYXIgcHJvY2Vzc2luZyBhbmQgYXZvaWRpbmcgdGhpcyBwcm9ibGVt
-cz8gTG9va2luZyBmb3J3YXJkIHRvIHlvdXIgcmVwbHksdGhhbmsgeW91IQ0KDQpCZXN0IFJlZ2Fy
-ZHMNCg0KDQotLS0tLemCruS7tuWOn+S7ti0tLS0tDQrlj5Hku7bkuro6IENoZW5qaWEgKEMpIA0K
-5Y+R6YCB5pe26Ze0OiAyMDE45bm0N+aciDnml6UgMTA6MTINCuaUtuS7tuS6ujogJ0p1ZXJnZW4g
-R3Jvc3MnIDxqZ3Jvc3NAc3VzZS5jb20+DQrmioTpgIE6IHpoYW9iaW5namlhbiA8emhhb2Jpbmdq
-aWFuQGh1YXdlaS5jb20+OyBTaGVudGFvIChUZXJyeSkgPHNoZW50YW84QGh1YXdlaS5jb20+OyBZ
-YW9zaGFvbWluIDx5YW9zaGFvbWluQGh1YXdlaS5jb20+OyBaaHV4aWFvbGluIChBKSA8emh1eGlh
-b2xpbjA5QGh1YXdlaS5jb20+OyB3YW5neHUgKFIpIDx3YW5neHUwQGh1YXdlaS5jb20+OyB4ZW4t
-ZGV2ZWwgPHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZz47IHl1YW5qaW5mZW5nIDx5dWFu
-amluZmVuZ0BodWF3ZWkuY29tPjsgSHV0YW8gKEMpIDxodXRhbzA5QGh1YXdlaS5jb20+OyBKdWdh
-bmcgKERhdmlkLCBFbnRlcnByaXNlIE5ldHdvcmspIDxqdWdhbmcwOUBodWF3ZWkuY29tPjsgSmFu
-IEJldWxpY2ggPEpCZXVsaWNoQHN1c2UuY29tPg0K5Li76aKYOiDnrZTlpI06IOetlOWkjTog562U
-5aSNOiDnrZTlpI06IFtYZW4tZGV2ZWxdIOetlOWkjTogSGVscDogYSB4ZW4gY3Jhc2ggb2YgNC44
-LjIgdmVyc2lvbi8vLy8v562U5aSNOiBJcyB0aGVyZSBhIGZhc3RlciB3YXkgdG8gcmVzdG9yZSBW
-aXJ0dWFsIG1hY2hpbmUgc3RhdHVzIGluIFhlbj8NCg0KRGVhciBKdWVyZ2VuOg0KCVdlIGhhdmUg
-ZGlzYWJsZSBEUERLIGFuZCBhZGQgY29ucmluZ19zaXplPTFNIG9uIHRoZSBzZXJ2ZXIoeGVuIDQu
-OC4zIHdpdGggZG9tMCBsaW51eCBrZXJuZWwgNC40LjEyMS05Mi44NS1kZWZhdWx0KSwgYW5kIHdl
-IHN0aWxsIGdvdCB0aGUgYmxvY2tlZCBpbmZvcm1hdGlvbiwgcGxlYXNlIHNlZSB0aGUgYXR0YWNo
-IGZpbGUgdG8gaGVscCB1cy4gVGhhbmsgeW91IQ0KDQpCZXN0IFJlZ2FyZHMNCg0KLS0tLS3pgq7k
-u7bljp/ku7YtLS0tLQ0K5Y+R5Lu25Lq6OiBKdWVyZ2VuIEdyb3NzIFttYWlsdG86amdyb3NzQHN1
-c2UuY29tXSANCuWPkemAgeaXtumXtDogMjAxOOW5tDfmnIg25pelIDE1OjUwDQrmlLbku7bkuro6
-IENoZW5qaWEgKEMpIDxjaGVuamlhMDlAaHVhd2VpLmNvbT47IEphbiBCZXVsaWNoIDxKQmV1bGlj
-aEBzdXNlLmNvbT4NCuaKhOmAgTogemhhb2JpbmdqaWFuIDx6aGFvYmluZ2ppYW5AaHVhd2VpLmNv
-bT47IFNoZW50YW8gKFRlcnJ5KSA8c2hlbnRhbzhAaHVhd2VpLmNvbT47IFlhb3NoYW9taW4gPHlh
-b3NoYW9taW5AaHVhd2VpLmNvbT47IFpodXhpYW9saW4gKEEpIDx6aHV4aWFvbGluMDlAaHVhd2Vp
-LmNvbT47IHdhbmd4dSAoUikgPHdhbmd4dTBAaHVhd2VpLmNvbT47IHhlbi1kZXZlbCA8eGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnPjsgeXVhbmppbmZlbmcgPHl1YW5qaW5mZW5nQGh1YXdl
-aS5jb20+OyBIdXRhbyAoQykgPGh1dGFvMDlAaHVhd2VpLmNvbT4NCuS4u+mimDogUmU6IOetlOWk
-jTog562U5aSNOiDnrZTlpI06IFtYZW4tZGV2ZWxdIOetlOWkjTogSGVscDogYSB4ZW4gY3Jhc2gg
-b2YgNC44LjIgdmVyc2lvbi8vLy8v562U5aSNOiBJcyB0aGVyZSBhIGZhc3RlciB3YXkgdG8gcmVz
-dG9yZSBWaXJ0dWFsIG1hY2hpbmUgc3RhdHVzIGluIFhlbj8NCg0KT24gMDYvMDcvMTggMDg6Mjcs
-IENoZW5qaWEgKEMpIHdyb3RlOg0KPiBEZWFyIEp1ZXJnZW46DQo+ICAgICAgICAgICAgV2Ugd2ls
-bCBmb2xsb3cgeW91ciBzdWdnZXN0aW9uOiB1bmxvYWQgRFBESywgdGhlbiB0ZXN0IGEgYWdhaW4u
-DQo+IA0KPiAJT3VyIHNlcnZlciBoYXZlIDI0IHZjcHUsIGFuZCBpZiB3ZSBwcmVzcyAnMCcgaXQg
-b25seSBzaG93IDEwIHZjcHUncyBkdW1wIG1lc3NhZ2UsICBpcyB0aGVyZSBhIHdheSB0byBzaG93
-IG1vcmUgZHVtcCBtZXNzYWdlPw0KDQpMb29raW5nIG1vcmUgYXQgdGhpcyBJIGd1ZXNzIHRoZSBj
-b25zb2xlIHJpbmcgYnVmZmVyIGlzIHRvbyBzbWFsbC4NCg0KUGxlYXNlIGFkZA0KDQpjb25yaW5n
-X3NpemU9MU0NCg0KdG8geW91ciBoeXBlcnZpc29yIGJvb3QgcGFyYW1ldGVycy4NCg0KDQpKdWVy
-Z2VuDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============8534271069403898034==
+Content-Language: en-US
+Content-Type: multipart/signed; micalg=sha-256;
+	protocol="application/x-pkcs7-signature"; boundary="=-sQ7IaZBgsGHWhuMpB/Ui"
+
+--=-sQ7IaZBgsGHWhuMpB/Ui
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+
+
+On Wed, 2018-07-11 at 11:46 +0200, Juergen Gross wrote:
+> On 11/07/18 11:15, Woodhouse, David wrote:
+> >=20
+> > On Wed, 2018-05-30 at 13:09 +0200, Juergen Gross wrote:
+> > >=20
+> > > There is no need to set the same capabilities for each cpu
+> > > individually. This can easily be done for all cpus when starting the
+> > > kernel.
+> > >=20
+> > > Upstream commit: 0808e80cb760de2733c0527d2090ed2205a1eef8 ("xen: set
+> > > cpu capabilities from xen_start_kernel()")
+> > >=20
+> > > Signed-off-by: Juergen Gross <jgross@suse.com>
+> > > Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> > That breaks PV guests because they get KAISER enabled =E2=80=94 when
+> > kaiser_check_boottime_disable() runs, X86_FEATURE_XENPV isn't set.
+>
+> Which kernel version are you talking about?
+>=20
+> With upstream commit 60d3450167433f2d099ce2869dc52dd9e7dc9b29 which will
+> be part of next stable-4.9 everything is fine.
+
+Right. That's what Simon had also backported. We hadn't spotted it was
+already lined up.
+--=-sQ7IaZBgsGHWhuMpB/Ui
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCEE4w
+ggUuMIIEFqADAgECAhEApEtL31g6H7ROXdOiQnA9RjANBgkqhkiG9w0BAQsFADCBlzELMAkGA1UE
+BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgG
+A1UEChMRQ09NT0RPIENBIExpbWl0ZWQxPTA7BgNVBAMTNENPTU9ETyBSU0EgQ2xpZW50IEF1dGhl
+bnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1haWwgQ0EwHhcNMTcxMjIxMDAwMDAwWhcNMTgxMjIxMjM1
+OTU5WjAiMSAwHgYJKoZIhvcNAQkBFhFkd213QGFtYXpvbi5jby51azCCASIwDQYJKoZIhvcNAQEB
+BQADggEPADCCAQoCggEBAKdGKgXuwKMg2r+i/4BZZC0ddRxNq3xIKTakie/VCSzoO7P17A36ZzUc
+VMEYPfqDt/65xoc6Tdih+qkY2pNDppZ1DZ8mVrAX6O2O60ZhmXB60wMoDvXPZInvkMOW4drqnje/
+7/NOypn/XQAY+ln4KT+3tHG3TfryyJFMedqC/r29KJlCeeCxIzdtq2j5mN42tvPVv4+p+Kr77uui
+GOASNdFJbNdgx7UGF+il6kRGSle17LJZKMgRiLJXYjECwnGwdfLdN5SINWD5IC3yXY8d14Bq6DyD
+jNts1DFw+SKhW8kVFYRZpv7TE3/42QJKQVL6YWka5T4EJO7AD3gy2ypRsd8CAwEAAaOCAecwggHj
+MB8GA1UdIwQYMBaAFIKvbIz4xf6WYXzoHz0rcUhexIvAMB0GA1UdDgQWBBT/vhvBExl2wDr8f50u
+b+0yzFyZRjAOBgNVHQ8BAf8EBAMCBaAwDAYDVR0TAQH/BAIwADAgBgNVHSUEGTAXBggrBgEFBQcD
+BAYLKwYBBAGyMQEDBQIwEQYJYIZIAYb4QgEBBAQDAgUgMEYGA1UdIAQ/MD0wOwYMKwYBBAGyMQEC
+AQEBMCswKQYIKwYBBQUHAgEWHWh0dHBzOi8vc2VjdXJlLmNvbW9kby5uZXQvQ1BTMFoGA1UdHwRT
+MFEwT6BNoEuGSWh0dHA6Ly9jcmwuY29tb2RvY2EuY29tL0NPTU9ET1JTQUNsaWVudEF1dGhlbnRp
+Y2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcmwwgYsGCCsGAQUFBwEBBH8wfTBVBggrBgEFBQcwAoZJ
+aHR0cDovL2NydC5jb21vZG9jYS5jb20vQ09NT0RPUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRT
+ZWN1cmVFbWFpbENBLmNydDAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuY29tb2RvY2EuY29tMBwG
+A1UdEQQVMBOBEWR3bXdAYW1hem9uLmNvLnVrMA0GCSqGSIb3DQEBCwUAA4IBAQCK2HofespbCaDu
+udwwfh8GxDpVUnVbZZVWScpZMxfYpXzLot7L6iZrr16oMQ+UOiDDAK6/D3+u2QN8u0lJ6yLKVmvh
+lGOzDywGsyG2Ohy8Dt5jcEK5sz84OsPtrRH7ahZHLxYPhWlUKOjOPN6sb9h6uMYlXmG/KmAr2rwF
+exN6Zrwh6YwF7ukuMs175YcNyYRdB8kVYq3WikfbTHOoRbJiu9Unw7LqnvPTfx+xUvD6aN2CKLtr
+mactWbk98swNgbI18UWjfEpugvAqw09CDLjeq7N1v0SkUkQEDqGSUE+hKFryTNXtZ6zOfl+MQfD8
+U7T5oJa34DmWXK9+x7dl+MrqMIIFLjCCBBagAwIBAgIRAKRLS99YOh+0Tl3TokJwPUYwDQYJKoZI
+hvcNAQELBQAwgZcxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAO
+BgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVkMT0wOwYDVQQDEzRDT01P
+RE8gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTE3MTIy
+MTAwMDAwMFoXDTE4MTIyMTIzNTk1OVowIjEgMB4GCSqGSIb3DQEJARYRZHdtd0BhbWF6b24uY28u
+dWswggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCnRioF7sCjINq/ov+AWWQtHXUcTat8
+SCk2pInv1Qks6Duz9ewN+mc1HFTBGD36g7f+ucaHOk3YofqpGNqTQ6aWdQ2fJlawF+jtjutGYZlw
+etMDKA71z2SJ75DDluHa6p43v+/zTsqZ/10AGPpZ+Ck/t7Rxt0368siRTHnagv69vSiZQnngsSM3
+bato+ZjeNrbz1b+Pqfiq++7rohjgEjXRSWzXYMe1BhfopepERkpXteyyWSjIEYiyV2IxAsJxsHXy
+3TeUiDVg+SAt8l2PHdeAaug8g4zbbNQxcPkioVvJFRWEWab+0xN/+NkCSkFS+mFpGuU+BCTuwA94
+MtsqUbHfAgMBAAGjggHnMIIB4zAfBgNVHSMEGDAWgBSCr2yM+MX+lmF86B89K3FIXsSLwDAdBgNV
+HQ4EFgQU/74bwRMZdsA6/H+dLm/tMsxcmUYwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAw
+IAYDVR0lBBkwFwYIKwYBBQUHAwQGCysGAQQBsjEBAwUCMBEGCWCGSAGG+EIBAQQEAwIFIDBGBgNV
+HSAEPzA9MDsGDCsGAQQBsjEBAgEBATArMCkGCCsGAQUFBwIBFh1odHRwczovL3NlY3VyZS5jb21v
+ZG8ubmV0L0NQUzBaBgNVHR8EUzBRME+gTaBLhklodHRwOi8vY3JsLmNvbW9kb2NhLmNvbS9DT01P
+RE9SU0FDbGllbnRBdXRoZW50aWNhdGlvbmFuZFNlY3VyZUVtYWlsQ0EuY3JsMIGLBggrBgEFBQcB
+AQR/MH0wVQYIKwYBBQUHMAKGSWh0dHA6Ly9jcnQuY29tb2RvY2EuY29tL0NPTU9ET1JTQUNsaWVu
+dEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcnQwJAYIKwYBBQUHMAGGGGh0dHA6Ly9v
+Y3NwLmNvbW9kb2NhLmNvbTAcBgNVHREEFTATgRFkd213QGFtYXpvbi5jby51azANBgkqhkiG9w0B
+AQsFAAOCAQEAith6H3rKWwmg7rncMH4fBsQ6VVJ1W2WVVknKWTMX2KV8y6Ley+oma69eqDEPlDog
+wwCuvw9/rtkDfLtJSesiylZr4ZRjsw8sBrMhtjocvA7eY3BCubM/ODrD7a0R+2oWRy8WD4VpVCjo
+zjzerG/YerjGJV5hvypgK9q8BXsTema8IemMBe7pLjLNe+WHDcmEXQfJFWKt1opH20xzqEWyYrvV
+J8Oy6p7z038fsVLw+mjdgii7a5mnLVm5PfLMDYGyNfFFo3xKboLwKsNPQgy43quzdb9EpFJEBA6h
+klBPoSha8kzV7Weszn5fjEHw/FO0+aCWt+A5llyvfse3ZfjK6jCCBeYwggPOoAMCAQICEGqb4Tg7
+/ytrnwHV2binUlYwDQYJKoZIhvcNAQEMBQAwgYUxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVh
+dGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBMaW1p
+dGVkMSswKQYDVQQDEyJDT01PRE8gUlNBIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MB4XDTEzMDEx
+MDAwMDAwMFoXDTI4MDEwOTIzNTk1OVowgZcxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVy
+IE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVk
+MT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVt
+YWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvrOeV6wodnVAFsc4A5jTxhh2
+IVDzJXkLTLWg0X06WD6cpzEup/Y0dtmEatrQPTRI5Or1u6zf+bGBSyD9aH95dDSmeny1nxdlYCeX
+IoymMv6pQHJGNcIDpFDIMypVpVSRsivlJTRENf+RKwrB6vcfWlP8dSsE3Rfywq09N0ZfxcBa39V0
+wsGtkGWC+eQKiz4pBZYKjrc5NOpG9qrxpZxyb4o4yNNwTqzaaPpGRqXB7IMjtf7tTmU2jqPMLxFN
+e1VXj9XB1rHvbRikw8lBoNoSWY66nJN/VCJv5ym6Q0mdCbDKCMPybTjoNCQuelc0IAaO4nLUXk0B
+OSxSxt8kCvsUtQIDAQABo4IBPDCCATgwHwYDVR0jBBgwFoAUu69+Aj36pvE8hI6t7jiY7NkyMtQw
+HQYDVR0OBBYEFIKvbIz4xf6WYXzoHz0rcUhexIvAMA4GA1UdDwEB/wQEAwIBhjASBgNVHRMBAf8E
+CDAGAQH/AgEAMBEGA1UdIAQKMAgwBgYEVR0gADBMBgNVHR8ERTBDMEGgP6A9hjtodHRwOi8vY3Js
+LmNvbW9kb2NhLmNvbS9DT01PRE9SU0FDZXJ0aWZpY2F0aW9uQXV0aG9yaXR5LmNybDBxBggrBgEF
+BQcBAQRlMGMwOwYIKwYBBQUHMAKGL2h0dHA6Ly9jcnQuY29tb2RvY2EuY29tL0NPTU9ET1JTQUFk
+ZFRydXN0Q0EuY3J0MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5jb21vZG9jYS5jb20wDQYJKoZI
+hvcNAQEMBQADggIBAHhcsoEoNE887l9Wzp+XVuyPomsX9vP2SQgG1NgvNc3fQP7TcePo7EIMERoh
+42awGGsma65u/ITse2hKZHzT0CBxhuhb6txM1n/y78e/4ZOs0j8CGpfb+SJA3GaBQ+394k+z3ZBy
+WPQedXLL1OdK8aRINTsjk/H5Ns77zwbjOKkDamxlpZ4TKSDMKVmU/PUWNMKSTvtlenlxBhh7ETrN
+543j/Q6qqgCWgWuMAXijnRglp9fyadqGOncjZjaaSOGTTFB+E2pvOUtY+hPebuPtTbq7vODqzCM6
+ryEhNhzf+enm0zlpXK7q332nXttNtjv7VFNYG+I31gnMrwfHM5tdhYF/8v5UY5g2xANPECTQdu9v
+WPoqNSGDt87b3gXb1AiGGaI06vzgkejL580ul+9hz9D0S0U4jkhJiA7EuTecP/CFtR72uYRBcunw
+wH3fciPjviDDAI9SnC/2aPY8ydehzuZutLbZdRJ5PDEJM/1tyZR2niOYihZ+FCbtf3D9mB12D4ln
+9icgc7CwaxpNSCPt8i/GqK2HsOgkL3VYnwtx7cJUmpvVdZ4ognzgXtgtdk3ShrtOS1iAN2ZBXFiR
+mjVzmehoMof06r1xub+85hFQzVxZx5/bRaTKTlL8YXLI8nAbR9HWdFqzcOoB/hxfEyIQpx9/s81r
+gzdEZOofSlZHynoSMYIDyjCCA8YCAQEwga0wgZcxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVh
+dGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBMaW1p
+dGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJl
+IEVtYWlsIENBAhEApEtL31g6H7ROXdOiQnA9RjANBglghkgBZQMEAgEFAKCCAe0wGAYJKoZIhvcN
+AQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTgwNzExMDk1NDE2WjAvBgkqhkiG9w0B
+CQQxIgQgFoRHL3g9g9hm/OKLIjHX01xrWelJZ803z3hz9Ke/JNYwgb4GCSsGAQQBgjcQBDGBsDCB
+rTCBlzELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMH
+U2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQxPTA7BgNVBAMTNENPTU9ETyBSU0Eg
+Q2xpZW50IEF1dGhlbnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1haWwgQ0ECEQCkS0vfWDoftE5d06JC
+cD1GMIHABgsqhkiG9w0BCRACCzGBsKCBrTCBlzELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0
+ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0
+ZWQxPTA7BgNVBAMTNENPTU9ETyBSU0EgQ2xpZW50IEF1dGhlbnRpY2F0aW9uIGFuZCBTZWN1cmUg
+RW1haWwgQ0ECEQCkS0vfWDoftE5d06JCcD1GMA0GCSqGSIb3DQEBAQUABIIBAAPvQuwaAonexFmQ
+qoyrRCFuWL2Rh06wiFrcncet9UKs8JCbHFS9rbYRWF8zPOfdZ23Zz8Rrb/++mnzHrt3c7gDxm92I
+0BKrQ+2cbfuIDYquJwCO7wTc5c1wU58lLMywWkaVi3RItpeZ7cBDOA6UJlXIg9SXKRYd4gLs3onz
+wNAovEBc+oy8HET3E/l80wwANfJ2pHheAOv1DTSljgRO17p+3uHJjES/tztS2vT8nWIDWPRAKJgV
+1qjC9Unz2gT75/ce7eyidG9TkP1cxZI839Y1E9tT8SQeQZxobfw/B1XBZewuYt9R36l42W6SX17o
+uswfpVcQP9gS/EViOi4PdusAAAAAAAA=
+
+
+--=-sQ7IaZBgsGHWhuMpB/Ui--
+
+--===============8534271069403898034==
+Content-Type: multipart/alternative; boundary="===============6323901978614464069=="
+MIME-Version: 1.0
+Content-Disposition: inline
+
+--===============6323901978614464069==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+
+
+
+
+Amazon Development Centre (London) Ltd. Registered in England and Wales wit=
+h registration number 04543232 with its registered office at 1 Principal Pl=
+ace, Worship Street, London EC2A 2FA, United Kingdom.
+
+
+
+--===============6323901978614464069==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+
+<br><br><br>Amazon Development Centre (London) Ltd.Registered in England an=
+d Wales with registration number 04543232 with its registered office at 1 P=
+rincipal Place, Worship Street, London EC2A 2FA, United Kingdom.<br><br><br>
+
+--===============6323901978614464069==--
+
+--===============8534271069403898034==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8534271069403898034==--
