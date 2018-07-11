@@ -1,18 +1,18 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 8/8] Publish: Cambridge: Get the public
- URL right
-Date: Wed, 11 Jul 2018 15:14:20 +0100
-Message-ID: <1531318460-4509-9-git-send-email-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 1/8] cr-ensure-disk-space: With -D,
+ print check_space command
+Date: Wed, 11 Jul 2018 15:14:13 +0100
+Message-ID: <1531318460-4509-2-git-send-email-ian.jackson@eu.citrix.com>
 References: <1531318460-4509-1-git-send-email-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=ygtr=j3=citrix.com=prvs=723fa8a25=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1fdFt4-0006Av-SJ
- for xen-devel@lists.xenproject.org; Wed, 11 Jul 2018 14:14:34 +0000
+ id 1fdFt3-00069y-43
+ for xen-devel@lists.xenproject.org; Wed, 11 Jul 2018 14:14:33 +0000
 In-Reply-To: <1531318460-4509-1-git-send-email-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,20 +26,21 @@ To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBVUkwgaXMgbm93IGFjY2Vzc2libGUsIGFsdGhvdWdoIHRoZXJlIGFyZSBzb21lIHdlYnNl
-cnZlciB0d2Vha3MKcmVtYWluaW5nIHRvIGRvLgoKU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24g
-PElhbi5KYWNrc29uQGV1LmNpdHJpeC5jb20+Ci0tLQogcHJvZHVjdGlvbi1jb25maWctY2FtYnJp
-ZGdlIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0p
-CgpkaWZmIC0tZ2l0IGEvcHJvZHVjdGlvbi1jb25maWctY2FtYnJpZGdlIGIvcHJvZHVjdGlvbi1j
-b25maWctY2FtYnJpZGdlCmluZGV4IGIxMzYwYmEuLjg2NDdmZWIgMTAwNjQ0Ci0tLSBhL3Byb2R1
-Y3Rpb24tY29uZmlnLWNhbWJyaWRnZQorKysgYi9wcm9kdWN0aW9uLWNvbmZpZy1jYW1icmlkZ2UK
-QEAgLTQ4LDcgKzQ4LDcgQEAgVGVzdEhvc3RLZXlwYWlyUGF0aCAvZXhwb3J0L2hvbWUvb3NzdGVz
-dC8uc3NoL2lkX3JzYV9vc3N0ZXN0CiAKIEdpdENhY2hlUHJveHkgZ2l0Oi8vZ2l0LWNhY2hlLmRh
-ZW1vbi5vc3N0ZXN0LnhzLmNpdHJpdGUubmV0Ojk0MTkvCiAKLVB1YkJhc2VVcmwgaHR0cDovL29z
-c3Rlc3QueHMuY2l0cml0ZS5uZXQvfm9zc3Rlc3QvdGVzdGxvZ3MKK1B1YkJhc2VVcmwgaHR0cDov
-L29zc3Rlc3QueGVuc291cmNlLmNvbS9vc3N0ZXN0CiBSZXBvcnRIdG1sUHViQmFzZVVybD0iJGN7
-UHViQmFzZVVybH0vbG9ncyIKIFJlc3VsdHNIdG1sUHViQmFzZVVybD0iJGN7UHViQmFzZVVybH0v
-cmVzdWx0cyIKIAotLSAKMi4xLjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+U2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPElhbi5KYWNrc29uQGV1LmNpdHJpeC5jb20+Ci0t
+LQogY3ItZW5zdXJlLWRpc2stc3BhY2UgfCA1ICsrKystCiAxIGZpbGUgY2hhbmdlZCwgNCBpbnNl
+cnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvY3ItZW5zdXJlLWRpc2stc3Bh
+Y2UgYi9jci1lbnN1cmUtZGlzay1zcGFjZQppbmRleCA3MDkxMzE0Li4zZTAyODhmIDEwMDc1NQot
+LS0gYS9jci1lbnN1cmUtZGlzay1zcGFjZQorKysgYi9jci1lbnN1cmUtZGlzay1zcGFjZQpAQCAt
+MjUsNiArMjUsNyBAQCBCRUdJTiB7IHVuc2hpZnQgQElOQywgcXcoLik7IH0KIHVzZSBPc3N0ZXN0
+OwogdXNlIE9zc3Rlc3Q6Ok1hbmFnZW1lbnQgcXcoOmxvZ3MpOwogdXNlIEZjbnRsIHF3KDpmbG9j
+ayk7Cit1c2UgRGF0YTo6RHVtcGVyOwogCiBvdXIgJGRyeXJ1bj0gMDsKIG91ciAkZm9yY2U7CkBA
+IC01Niw3ICs1Nyw5IEBAIGNzcmVhZGNvbmZpZygpOwogbG9nc19zZWxlY3QgJGNmZ2Jhc2Ugb3Ig
+ZXhpdCAwOwogCiBzdWIgY2hlY2tfc3BhY2UgKCkgewotICAgIG9wZW4gUCwgIi18Iiwgb25sb2do
+b3N0ICJkZiAtLWJsb2NrLXNpemU9MU0gLVAgJGxvZ2RpciIgb3IgZGllICQhOworICAgIG15IEBj
+bWQgPSBvbmxvZ2hvc3QgImRmIC0tYmxvY2stc2l6ZT0xTSAtUCAkbG9nZGlyIjsKKyAgICBwcmlu
+dCBERUJVRyAiY2hlY2tfc3BhY2U6ICIsIER1bXBlcihcQGNtZCk7CisgICAgb3BlbiBQLCAiLXwi
+LCBAY21kIG9yIGRpZSAkITsKICAgICAkXz0gPFA+OwogICAgIG0vXmZpbGVzeXN0ZW0vaSBvciBk
+aWUgIiRfID8iOwogICAgICRfPSA8UD47Ci0tIAoyLjEuNAoKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
