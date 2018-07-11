@@ -1,20 +1,16 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] xen: setup pv irq ops vector earlier
-Date: Wed, 11 Jul 2018 07:08:54 +0200
-Message-ID: <0362cb33-b6e6-a099-249f-b516b288f106__46404.7063062482$1531285681$gmane$org@suse.com>
-References: <20180702100001.19953-1-jgross@suse.com>
- <7ed006f3-22ea-2c35-1cbe-15d7cf04a71b@oracle.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [ovmf test] 125095: all pass - PUSHED
+Date: Wed, 11 Jul 2018 05:13:39 +0000
+Message-ID: <osstest-125095-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=nw1x=j3=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fd7N5-0000Vl-2a
- for xen-devel@lists.xenproject.org; Wed, 11 Jul 2018 05:08:59 +0000
-In-Reply-To: <7ed006f3-22ea-2c35-1cbe-15d7cf04a71b@oracle.com>
-Content-Language: de-DE
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=/znv=j3=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fd7Rg-0001Ci-9m
+ for xen-devel@lists.xenproject.org; Wed, 11 Jul 2018 05:13:44 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,20 +19,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org
-Cc: tglx@linutronix.de, mingo@redhat.com, stable@vger.kernel.org, hpa@zytor.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvMDcvMTggMDA6MjYsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiBPbiAwNy8wMi8yMDE4
-IDA2OjAwIEFNLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+PiBTZXR0aW5nIHB2X2lycV9vcHMgZm9y
-IFhlbiBQViBkb21haW5zIHNob3VsZCBiZSBkb25lIGFzIGVhcmx5IGFzCj4+IHBvc3NpYmxlIGlu
-IG9yZGVyIHRvIHN1cHBvcnQgZS5nLiB2ZXJ5IGVhcmx5IHByaW50aygpIHVzYWdlLgo+IAo+IFdp
-bGwgcHJpbnRrKCkgd29yayBhcyByZXN1bHQgb2YgdGhpcyBtb3ZlPyBXZSBzdGlsbCwgZm9yIGV4
-YW1wbGUsCj4gaGF2ZW4ndCBzZXQgdXAgY29uc29sZS4KCkl0IHdpbGwgcHJpbnQgdG8gdGhlIGtl
-cm5lbCBwcmludCBidWZmZXIsIHNvIHRoZSBvdXRwdXQgd2lsbCBiZQphdmFpbGFibGUgbGF0ZXIu
-Cgo+IFRoaXMgd2lsbCAocHJvYmFibHkpIGFsbG93IHVzIG5vdCB0byBjcmFzaCAoZHVlIHRvIFNU
-SSBhbmQgc3VjaCkgYnV0IEkKPiBhbSBub3Qgc3VyZSAic3VwcG9ydCIgaXMgdGhlIHJpZ2h0IHRl
-cm0gaGVyZS4KCk5vdCBjcmFzaGluZyBpcyBiaWcgcGx1cyBJTU8uIDotKQoKCkp1ZXJnZW4KCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+ZmxpZ2h0IDEyNTA5NSBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjUwOTUvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
+dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
+bmc6CiBvdm1mICAgICAgICAgICAgICAgICBlNGUzMTRiMWI2Yjc0YzQ2ZGEzYzA0OTNlN2E4MDdk
+ZjI4Y2I5YWVkCmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICA5ZWRiYTUx
+ZjkzZDhlODFlMDlmOTA1YWZjOTk0ZWZlMDJkYmU1MjRlCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
+MjUwNzMgIDIwMTgtMDctMTAgMDg6MTA6NTIgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
+ICAgMTI1MDk1ICAyMDE4LTA3LTExIDAzOjQwOjUyIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMK
+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgRXJpYyBEb25n
+IDxlcmljLmRvbmdAaW50ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14
+c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LWxp
+YnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92
+bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
+Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoK
+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcK
+bG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNv
+bmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxh
+Yi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9y
+dHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54
+ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFz
+dGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJs
+b2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQK
+ICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5
+CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhlbi5vcmc6L2hvbWUveGVuL2dpdC9v
+c3N0ZXN0L292bWYuZ2l0CiAgIDllZGJhNTFmOTMuLmU0ZTMxNGIxYjYgIGU0ZTMxNGIxYjZiNzRj
+NDZkYTNjMDQ5M2U3YTgwN2RmMjhjYjlhZWQgLT4geGVuLXRlc3RlZC1tYXN0ZXIKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
