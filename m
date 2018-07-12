@@ -1,21 +1,21 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v3 2/3] xen/compiler: introduce a define for
- weak symbols
-Date: Thu, 12 Jul 2018 12:37:17 +0100
-Message-ID: <820e7ba0-ae0a-31c5-6d31-07ed3c9b8288@citrix.com>
+From: Daniel Kiper <daniel.kiper@oracle.com>
+Subject: Re: [PATCH v3 1/3] xen/x86: replace '||' usage in the
+ linker script
+Date: Thu, 12 Jul 2018 13:38:21 +0200
+Message-ID: <20180712113821.GT26572@olila.local.net-space.pl>
 References: <20180711153450.83331-1-roger.pau@citrix.com>
- <20180711153450.83331-3-roger.pau@citrix.com>
+ <20180711153450.83331-2-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=+/yn=j4=citrix.com=prvs=7248936b7=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1fdZuS-0007dD-EO
- for xen-devel@lists.xenproject.org; Thu, 12 Jul 2018 11:37:20 +0000
-In-Reply-To: <20180711153450.83331-3-roger.pau@citrix.com>
-Content-Language: en-GB
+ <srs0=5rxg=j4=oracle.com=daniel.kiper@srs-us1.protection.inumbo.net>)
+ id 1fdZvZ-0007jv-Gu
+ for xen-devel@lists.xenproject.org; Thu, 12 Jul 2018 11:38:29 +0000
+Content-Disposition: inline
+In-Reply-To: <20180711153450.83331-2-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,26 +24,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Daniel Kiper <daniel.kiper@oracle.com>, Jan Beulich <jbeulich@suse.com>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvMDcvMTggMTY6MzQsIFJvZ2VyIFBhdSBNb25uZSB3cm90ZToKPiBBbmQgcmVwbGFjZSB0
-aGUgb3Blbi1jb2RlZCB2ZXJzaW9ucyBhbHJlYWR5IGluIHRyZWUuIE5vIGZ1bmN0aW9uYWwKPiBj
-aGFuZ2UuCj4KPiBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0
-cml4LmNvbT4KPiAtLS0KPiBDYzogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+IENj
-OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgo+IENjOiBEYW5pZWwg
-S2lwZXIgPGRhbmllbC5raXBlckBvcmFjbGUuY29tPgo+IC0tLQo+ICB4ZW4vaW5jbHVkZS94ZW4v
-Y29tcGlsZXIuaCAgICAgICAgICB8IDIgKysKPiAgeGVuL2luY2x1ZGUveGVuL2xpdmVwYXRjaF9w
-YXlsb2FkLmggfCA0ICsrLS0KPiAgMiBmaWxlcyBjaGFuZ2VkLCA0IGluc2VydGlvbnMoKyksIDIg
-ZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUveGVuL2NvbXBpbGVyLmgg
-Yi94ZW4vaW5jbHVkZS94ZW4vY29tcGlsZXIuaAo+IGluZGV4IGE3ZTA1NjgxYzkuLjAwMWY1ODk2
-NTUgMTAwNjQ0Cj4gLS0tIGEveGVuL2luY2x1ZGUveGVuL2NvbXBpbGVyLmgKPiArKysgYi94ZW4v
-aW5jbHVkZS94ZW4vY29tcGlsZXIuaAo+IEBAIC0xOCw2ICsxOCw4IEBACj4gIAo+ICAjZGVmaW5l
-IF9fcGFja2VkICAgICAgX19hdHRyaWJ1dGVfXygoX19wYWNrZWRfXykpCj4gIAo+ICsjZGVmaW5l
-IF9fd2VhayAgICAgICAgX19hdHRyaWJ1dGVfXygod2VhaykpCgpfX3dlZWtfX8KgIChjYW4gYmUg
-Zml4ZWQgb24gY29tbWl0KQoKT3RoZXJ3aXNlLCBSZWl2ZXdlZC1ieTogQW5kcmV3IENvb3BlciA8
-YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBKdWwgMTEsIDIwMTggYXQgMDU6MzQ6NDhQTSArMDIwMCwgUm9nZXIgUGF1IE1vbm5l
+IHdyb3RlOgo+IFdpdGggJ3wnLiBUaGUgcmVzdWx0IGlzIHRoZSBzYW1lLCBhbmQgdGhlIGxhdGVy
+IHdvcmtzIHdpdGggbGxkLiBGaXhlcwo+IHRoZSBmb2xsb3dpbmcgZXJyb3Igd2hlbiBidWlsZGlu
+ZyBYZW4gd2l0aCBsbGQ6Cj4KPiBsZCAgICAtbWVsZl94ODZfNjRfZmJzZCAgLVQgeGVuLmxkcyAt
+TiBwcmVsaW5rLm8gLS1idWlsZC1pZD1zaGExIFwKPiAgICAgL3Jvb3Qvc3JjL3hlbi94ZW4vY29t
+bW9uL3N5bWJvbHMtZHVtbXkubyAtbyAvcm9vdC9zcmMveGVuL3hlbi8ueGVuLXN5bXMuMAo+IGxk
+OiBlcnJvcjogeGVuLmxkczoyNjA6IG1hbGZvcm1lZCBudW1iZXI6IHwKPiA+Pj4gQVNTRVJUKF9f
+aW1hZ2VfYmFzZV9fID4gKCgoKCgoKCgoMjYxID4+IDgpICogMHhmZmZmMDAwMDAwMDAwMDAwKSB8
+ICgyNjEgPDwgMzkpKSkgKyAoKDEgPDwgMzkpIC8gMikpICsgKDY0IDw8IDMwKSkgKyAoMSA8PCAz
+MCkpICsgKDEgPDwgMzApKSkgfHwKPiA+Pj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4K
+Pgo+IFNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29t
+Pgo+IC0tLQo+IENjOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4gQ2M6IEFuZHJl
+dyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cj4gQ2M6IERhbmllbCBLaXBlciA8
+ZGFuaWVsLmtpcGVyQG9yYWNsZS5jb20+Cj4gLS0tCj4gIHhlbi9hcmNoL3g4Ni94ZW4ubGRzLlMg
+fCAyICstCj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+
+Cj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni94ZW4ubGRzLlMgYi94ZW4vYXJjaC94ODYveGVu
+Lmxkcy5TCj4gaW5kZXggNzBhZmVkZDMxZC4uMzI2ZTg4NTQwMiAxMDA2NDQKPiAtLS0gYS94ZW4v
+YXJjaC94ODYveGVuLmxkcy5TCj4gKysrIGIveGVuL2FyY2gveDg2L3hlbi5sZHMuUwo+IEBAIC0z
+MzEsNyArMzMxLDcgQEAgU0VDVElPTlMKPiAgICAuY29tbWVudCAwIDogeyAqKC5jb21tZW50KSB9
+Cj4gIH0KPgo+IC1BU1NFUlQoX19pbWFnZV9iYXNlX18gPiBYRU5fVklSVF9TVEFSVCB8fAo+ICtB
+U1NFUlQoX19pbWFnZV9iYXNlX18gPiBYRU5fVklSVF9TVEFSVCB8Cj4gICAgICAgICBfXzJNX3J3
+ZGF0YV9lbmQgPD0gWEVOX1ZJUlRfRU5EIC0gTlJfQ1BVUyAqIFBBR0VfU0laRSwKPiAgICAgICAg
+ICJYZW4gaW1hZ2Ugb3ZlcmxhcHMgc3R1YnMgYXJlYSIpCgpJIGFtIG5vdCBoYXBweSB3aXRoIHRo
+aXMgY2hhbmdlLiBJcyB0aGUgc2FtZSBuZWVkZWQgZm9yIGFueSAiJiYiPwpBbnl3YXksIGlmIG1h
+aW50YWluZXJzIGFyZSBPSyB3aXRoIHRoYXQgSSB3aWxsIGp1c3QgYXNrIHlvdSB0byBwdXQKdGhl
+IGNvbW1lbnQgYmVmb3JlIHRoZSBBU1NFUlQoKSB3aHkgeW91IHVzZSAifCIgaW5zdGVhZCBvZiAi
+fHwiLgoKRGFuaWVsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
