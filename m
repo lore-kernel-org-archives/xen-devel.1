@@ -1,19 +1,21 @@
-From: Rich Persaud <persaur@gmail.com>
-Subject: Re: Xen for Automotive - white paper on virtualization
-Date: Thu, 12 Jul 2018 08:39:00 -0400
-Message-ID: <9F2A9589-6324-4D7A-85FD-CB93D8708FEB@gmail.com>
-References: <EFB1BA1D-EB72-4896-ABA3-5ABA7EE9DBB5@gmail.com>
-Mime-Version: 1.0 (1.0)
-Content-Type: multipart/mixed; boundary="===============8105788604081776260=="
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 2/8] x86: distinguish CPU offlining from CPU
+ removal
+Date: Thu, 12 Jul 2018 13:42:18 +0100
+Message-ID: <b6940a2d-f905-7bf1-b71d-696390088340@citrix.com>
+References: <5B45F01B02000078001D30FF@prv1-mh.provo.novell.com>
+ <5B45F2AC02000078001D3133@prv1-mh.provo.novell.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=csaa=j4=gmail.com=persaur@srs-us1.protection.inumbo.net>)
- id 1fdasD-0006Zh-Tm
- for xen-devel@lists.xenproject.org; Thu, 12 Jul 2018 12:39:05 +0000
-Received: by mail-oi0-x22f.google.com with SMTP id q11-v6so29891080oic.12
- for <xen-devel@lists.xenproject.org>; Thu, 12 Jul 2018 05:39:04 -0700 (PDT)
-In-Reply-To: <EFB1BA1D-EB72-4896-ABA3-5ABA7EE9DBB5@gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=+/yn=j4=citrix.com=prvs=7248936b7=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1fdavN-0007Et-Q6
+ for xen-devel@lists.xenproject.org; Thu, 12 Jul 2018 12:42:21 +0000
+In-Reply-To: <5B45F2AC02000078001D3133@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,59 +24,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Artem_Mygaiev@epam.com, Michele Paolino <m.paolino@virtualopensystems.com>, Daniel Bernal <Daniel.Bernal@arm.com>, Alex_Agizim@epam.com, Stewart.Hildebrand@dornerworks.com, sstabellini@kernel.org, Jonathan Kline <jonathan.kline@starlab.io>, denys.balatsko@globallogic.com
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8105788604081776260==
-Content-Type: multipart/alternative;
-	boundary=Apple-Mail-04F27458-7A4C-44EF-B055-30CA26B71DB8
-Content-Transfer-Encoding: 7bit
-
-
---Apple-Mail-04F27458-7A4C-44EF-B055-30CA26B71DB8
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Thanks to everyone who contributed to the AGL virtualization white paper and=
- to Michele Paolino for stewarding it from concept to final publication.   I=
-=E2=80=99ve added it to the Xen wiki:
-
-https://wiki.xenproject.org/wiki/Automotive_Whitepapers
-
-Rich=
-
---Apple-Mail-04F27458-7A4C-44EF-B055-30CA26B71DB8
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"></head><body dir=3D"auto"><div><span></span></div><div><meta http-equ=
-iv=3D"content-type" content=3D"text/html; charset=3Dutf-8"><div><span></span=
-></div><div><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"><div><span></span></div><div><meta http-equiv=3D"content-type" conten=
-t=3D"text/html; charset=3Dutf-8"><div></div><div>Thanks to everyone who cont=
-ributed to the AGL virtualization white paper and to Michele Paolino for ste=
-warding it from concept to final publication. &nbsp; I=E2=80=99ve added it t=
-o the Xen wiki:</div><div><br></div><div><a href=3D"https://wiki.xenproject.=
-org/wiki/Automotive_Whitepapers">https://wiki.xenproject.org/wiki/Automotive=
-_Whitepapers</a></div><div><br></div><div>Rich</div></div></div></div></body=
-></html>=
-
---Apple-Mail-04F27458-7A4C-44EF-B055-30CA26B71DB8--
-
-
---===============8105788604081776260==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8105788604081776260==--
+T24gMTEvMDcvMTggMTM6MDYsIEphbiBCZXVsaWNoIHdyb3RlOgo+IEluIG9yZGVyIHRvIGJlIGFi
+bGUgdG8gc2VydmljZSAjTUMgb24gb2ZmbGluZWQgQ1BVcywgR0RULCBJRFQsIHN0YWNrLAoKRm9y
+IGNsYXJpdHksIEknZCBwaHJhc2UgdGhpcyBhcyAiQ1BVcywgdGhlIEdEVCwgLi4uIiB0byBoZWxw
+IHZpc3VhbGx5CnNlcGFyYXRlIENQVXMgYXMgaXQgaXNuJ3QgYSBwYXJ0IG9mIHRoZSByZXN0IG9m
+IHRoZSBsaXN0LgoKPiAtLS0gYS94ZW4vYXJjaC94ODYvZ2VuYXBpYy94MmFwaWMuYwo+ICsrKyBi
+L3hlbi9hcmNoL3g4Ni9nZW5hcGljL3gyYXBpYy5jCj4gQEAgLTIwMSwxOCArMjAxLDI1IEBAIHN0
+YXRpYyBpbnQgdXBkYXRlX2NsdXN0ZXJpbmZvKAo+ICAgICAgICAgIGlmICggIWNsdXN0ZXJfY3B1
+c19zcGFyZSApCj4gICAgICAgICAgICAgIGNsdXN0ZXJfY3B1c19zcGFyZSA9IHh6YWxsb2MoY3B1
+bWFza190KTsKPiAgICAgICAgICBpZiAoICFjbHVzdGVyX2NwdXNfc3BhcmUgfHwKPiAtICAgICAg
+ICAgICAgICFhbGxvY19jcHVtYXNrX3ZhcigmcGVyX2NwdShzY3JhdGNoX21hc2ssIGNwdSkpICkK
+PiArICAgICAgICAgICAgICFjb25kX2FsbG9jX2NwdW1hc2tfdmFyKCZwZXJfY3B1KHNjcmF0Y2hf
+bWFzaywgY3B1KSkgKQo+ICAgICAgICAgICAgICBlcnIgPSAtRU5PTUVNOwo+ICAgICAgICAgIGJy
+ZWFrOwo+ICAgICAgY2FzZSBDUFVfVVBfQ0FOQ0VMRUQ6Cj4gICAgICBjYXNlIENQVV9ERUFEOgo+
+ICsgICAgY2FzZSBDUFVfUkVNT1ZFOgo+ICsgICAgICAgIGlmICggcGFya19vZmZsaW5lX2NwdXMg
+PT0gKGFjdGlvbiAhPSBDUFVfUkVNT1ZFKSApCj4gKyAgICAgICAgICAgIGJyZWFrOwo+ICAgICAg
+ICAgIGlmICggcGVyX2NwdShjbHVzdGVyX2NwdXMsIGNwdSkgKQo+ICAgICAgICAgIHsKPiAgICAg
+ICAgICAgICAgY3B1bWFza19jbGVhcl9jcHUoY3B1LCBwZXJfY3B1KGNsdXN0ZXJfY3B1cywgY3B1
+KSk7Cj4gICAgICAgICAgICAgIGlmICggY3B1bWFza19lbXB0eShwZXJfY3B1KGNsdXN0ZXJfY3B1
+cywgY3B1KSkgKQo+ICsgICAgICAgICAgICB7Cj4gICAgICAgICAgICAgICAgICB4ZnJlZShwZXJf
+Y3B1KGNsdXN0ZXJfY3B1cywgY3B1KSk7Cj4gKyAgICAgICAgICAgICAgICBwZXJfY3B1KGNsdXN0
+ZXJfY3B1cywgY3B1KSA9IE5VTEw7Cj4gKyAgICAgICAgICAgIH0KPiAgICAgICAgICB9Cj4gICAg
+ICAgICAgZnJlZV9jcHVtYXNrX3ZhcihwZXJfY3B1KHNjcmF0Y2hfbWFzaywgY3B1KSk7Cj4gKyAg
+ICAgICAgY2xlYXJfY3B1bWFza192YXIoJnBlcl9jcHUoc2NyYXRjaF9tYXNrLCBjcHUpKTsKCmZy
+ZWVpbmcgYW5kIE5VTEwtaW5nIHRoZSBwb2ludGVyIGF0IHRoZSBzYW1lIHRpbWUgaXMgYWxyZWFk
+eSBhIGNvbW1vbgpwYXR0ZXJuwqAgSG93IGFib3V0IGludHJvZHVjaW5nCgovKiBGcmVlIGFuIGFs
+bG9jYXRpb24sIGFuZCB6ZXJvIHRoZSBwb2ludGVyIHRvIGl0LiAqLwojZGVmaW5lIFhGUkVFKHAp
+Cih7CsKgwqDCoCB0eXBlb2YoKnApICpfcCA9IChwKTsKCsKgwqDCoCB4ZnJlZShfcCk7CsKgwqDC
+oCBfcCA9IE5VTEw7Cn0pCgphbmQgYSBzaW1pbGFyIHdyYXBwZXIgZm9yIEZSRUVfQ1BVTUFTS19W
+QVIocCkgd2hpY2ggdGFrZXMgY2FyZSBvZiB0aGUKTlVMTC1pbmcgYXMgd2VsbD8KCkluIHRpbWUg
+YXMgdGhlc2Ugc3RhcnQgdG8gZ2V0IHVzZWQgbW9yZSB3aWRlbHksIGl0IHNob3VsZCByZWR1Y2Ug
+dGhlCmNoYW5jZXMgb2YgZG91YmxlLWZyZWVpbmcgaW4gY2xlYW51cCBwYXRocy4KCj4gQEAgLTYz
+LDYgKzYzLDggQEAgc3RhdGljIGNwdW1hc2tfdCBzY3JhdGNoX2NwdTBtYXNrOwo+ICBjcHVtYXNr
+X3QgY3B1X29ubGluZV9tYXAgX19yZWFkX21vc3RseTsKPiAgRVhQT1JUX1NZTUJPTChjcHVfb25s
+aW5lX21hcCk7Cj4gIAo+ICtib29sIF9fcmVhZF9tb3N0bHkgcGFya19vZmZsaW5lX2NwdXM7Cj4g
+Kwo+ICB1bnNpZ25lZCBpbnQgX19yZWFkX21vc3RseSBucl9zb2NrZXRzOwo+ICBjcHVtYXNrX3Qg
+KipfX3JlYWRfbW9zdGx5IHNvY2tldF9jcHVtYXNrOwo+ICBzdGF0aWMgY3B1bWFza190ICpzZWNv
+bmRhcnlfc29ja2V0X2NwdW1hc2s7Cj4gQEAgLTg4Nyw3ICs4ODksNyBAQCBzdGF0aWMgdm9pZCBj
+bGVhbnVwX2NwdV9yb290X3BndCh1bnNpZ25lCj4gICAgICB9Cj4gIH0KPiAgCj4gLXN0YXRpYyB2
+b2lkIGNwdV9zbXBib290X2ZyZWUodW5zaWduZWQgaW50IGNwdSkKPiArc3RhdGljIHZvaWQgY3B1
+X3NtcGJvb3RfZnJlZSh1bnNpZ25lZCBpbnQgY3B1LCBib29sIGFsbCkKClBlcmhhcHMgInJlbW92
+ZSIgb3IgInJlbW92ZV9jcHUiLCB0byBtYXRjaCB0aGUgQ1BVX1JFTU9WRSB0ZXJtaW5vbG9neT8K
+CkFsc28sIHdlIHByb2JhYmx5IHdhbnQgYSBjb21tZW50IGhlcmUgZXhwbGFpbmluZyB0aGUgZGlm
+ZmVyZW5jZSBiZXR3ZWVuCnBhcmtpbmcgYW5kIHJlbW92aW5nIGluIHRlcm1zIG9mIHdoYXQgaW5m
+cmFzdHJ1Y3R1cmUgbmVlZHMgdG8gcmVtYWluIHZhbGlkLgoKfkFuZHJldwoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
