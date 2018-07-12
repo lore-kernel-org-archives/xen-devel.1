@@ -1,19 +1,20 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 3/8] allow cpu_down() to be called earlier
-Date: Thu, 12 Jul 2018 13:44:25 +0100
-Message-ID: <16b6f38d-1b57-fca3-ea9d-72ef169bab19@citrix.com>
+Subject: Re: [PATCH 4/8] x86/AMD: distinguish compute units from
+ hyper-threads
+Date: Thu, 12 Jul 2018 14:02:57 +0100
+Message-ID: <49c30338-2bbb-bc45-df29-40668305405a@citrix.com>
 References: <5B45F01B02000078001D30FF@prv1-mh.provo.novell.com>
- <5B45F2DC02000078001D3136@prv1-mh.provo.novell.com>
+ <5B45F30E02000078001D3139@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=+/yn=j4=citrix.com=prvs=7248936b7=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1fdaxR-0007NI-0o
- for xen-devel@lists.xenproject.org; Thu, 12 Jul 2018 12:44:29 +0000
-In-Reply-To: <5B45F2DC02000078001D3136@prv1-mh.provo.novell.com>
+ id 1fdbGH-00018m-An
+ for xen-devel@lists.xenproject.org; Thu, 12 Jul 2018 13:03:57 +0000
+In-Reply-To: <5B45F30E02000078001D3139@prv1-mh.provo.novell.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,19 +25,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>
+Cc: Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvMDcvMTggMTM6MDYsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFRoZSBmdW5jdGlvbidzIHVz
-ZSBvZiB0aGUgc3RvcC1tYWNoaW5lIGxvZ2ljIGhhcyBzbyBmYXIgcHJldmVudGVkIGl0cwo+IHVz
-ZSBhaGVhZCBvZiB0aGUgcHJvY2Vzc2luZyBvZiB0aGUgIm9yZGluYXJ5IiBpbml0Y2FsbHMuIFNp
-bmNlIGF0IHRoaXMKPiBlYXJseSB0aW1lIHdlJ3JlIGluIGEgY29udHJvbGxlZCBlbnZpcm9ubWVu
-dCBhbnl3YXksIHRoZXJlJ3Mgbm8gbmVlZCBmb3IKPiBzdWNoIGEgaGVhdnkgdG9vbC4gQWRkaXRp
-b25hbGx5IHRoaXMgb3VnaHQgdG8gaGF2ZSBsZXNzIG9mIGEgcGVyZm9ybWFuY2UKPiBpbXBhY3Qg
-ZXNwZWNpYWxseSBvbiBsYXJnZSBzeXN0ZW1zLCBjb21wYXJlZCB0byB0aGUgYWx0ZXJuYXRpdmUg
-b2YKPiBtYWtpbmcgc3RvcC1tYWNoaW5lIGZ1bmN0aW9uYWxpdHkgYXZhaWxhYmxlIGVhcmxpZXIu
-Cj4KPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpSZXZp
-ZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTEvMDcvMTggMTM6MDcsIEphbiBCZXVsaWNoIHdyb3RlOgo+IEZhbTE3IHJlcGxhY2VzIENV
+cyBieSBIVHMsIHdoaWNoIHdlIHNob3VsZCByZWZsZWN0IGFjY29yZGluZ2x5LCBldmVuIGlmCj4g
+dGhlIGRpZmZlcmVuY2UgaXMgbm90IHZlcnkgYmlnLiBUaGUgbW9zdCByZWxldmFudCBjaGFuZ2Ug
+KHJlcXVpcmluZyBzb21lCj4gY29kZSByZXN0cnVjdHVyaW5nKSBpcyB0aGF0IHRoZSB0b3BvZXh0
+IGZlYXR1cmUgbm8gbG9uZ2VyIG1lYW5zIHRoZXJlIGlzCj4gYSB2YWxpZCBDVSBJRC4KPgo+IFRh
+a2UgdGhlIG9wcG9ydHVuaXR5IGFuZCBjb252ZXJ0IHdyb25nbHkgcGxhaW4gaW50IHZhcmlhYmxl
+cyBpbgo+IHNldF9jcHVfc2libGluZ19tYXAoKSB0byB1bnNpZ25lZCBpbnQuCj4KPiBTaWduZWQt
+b2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4KPiAtLS0gYS94ZW4vYXJj
+aC94ODYvY3B1L2FtZC5jCj4gKysrIGIveGVuL2FyY2gveDg2L2NwdS9hbWQuYwo+IEBAIC01MDQs
+MTcgKzUwNCwyMyBAQCBzdGF0aWMgdm9pZCBhbWRfZ2V0X3RvcG9sb2d5KHN0cnVjdCBjcHVpCj4g
+ICAgICAgICAgICAgICAgICB1MzIgZWF4LCBlYngsIGVjeCwgZWR4Owo+ICAKPiAgICAgICAgICAg
+ICAgICAgIGNwdWlkKDB4ODAwMDAwMWUsICZlYXgsICZlYngsICZlY3gsICZlZHgpOwo+IC0gICAg
+ICAgICAgICAgICAgYy0+Y29tcHV0ZV91bml0X2lkID0gZWJ4ICYgMHhGRjsKPiAgICAgICAgICAg
+ICAgICAgIGMtPng4Nl9udW1fc2libGluZ3MgPSAoKGVieCA+PiA4KSAmIDB4MykgKyAxOwo+ICsK
+PiArCQlpZiAoYy0+eDg2IDwgMHgxNykKPiArCSAgICAgICAgICAgICAgICBjLT5jb21wdXRlX3Vu
+aXRfaWQgPSBlYnggJiAweEZGOwo+ICsJCWVsc2Ugewo+ICsJICAgICAgICAgICAgICAgIGMtPmNw
+dV9jb3JlX2lkID0gZWJ4ICYgMHhGRjsKPiArCQkJYy0+eDg2X21heF9jb3JlcyAvPSBjLT54ODZf
+bnVtX3NpYmxpbmdzOwo+ICsJCX0KClRoZSBpbmRlbnRhdGlvbiBoZXJlIGlzIG9kZC7CoCBJdCB0
+dXJucyBvdXQgdGhlIGZ1bmN0aW9uIHVzZXMgZW50aXJlbHkKOC1zcGFjZXMgcmF0aGVyIHRoYW4g
+dGFicywgbGlrZSB0aGUgcmVzdCBvZiB0aGUgZmlsZS4KCldvdWxkIHlvdSBtaW5kIGVpdGhlciBy
+ZXRhaW5pbmcgc3BhY2VzLCBvciBmaXhpbmcgdXAgdGhlIGVudGlyZSBmdW5jdGlvbgoocHJvYmFi
+bHkgZWFzaWVzdCBhcyBhIHByZXJlcSBwYXRjaCkgPwoKT3RoZXJ3aXNlIExHVE0uCgp+QW5kcmV3
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
