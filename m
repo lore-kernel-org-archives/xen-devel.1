@@ -1,23 +1,16 @@
-From: Daniel Kiper <daniel.kiper@oracle.com>
-Subject: Re: [PATCH v3 3/3] xen/x86: declare the efi symbol as
- weak
-Date: Fri, 13 Jul 2018 12:20:56 +0200
-Message-ID: <20180713102056.GX26572@olila.local.net-space.pl>
-References: <20180711153450.83331-1-roger.pau@citrix.com>
- <20180711153450.83331-4-roger.pau@citrix.com>
- <20180712113514.GS26572@olila.local.net-space.pl>
- <20180712163733.6ujsjqsbkokfzit4@mac.bytemobile.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v11 01/11] x86/cpu: Introduce
+ vmce_save_vcpu_ctxt_one() func
+Date: Fri, 13 Jul 2018 04:29:44 -0600
+Message-ID: <5B487F1802000078001D3C13@prv1-mh.provo.novell.com>
+References: <1531472650-6718-1-git-send-email-aisaila@bitdefender.com>
+ <1531472650-6718-2-git-send-email-aisaila@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=he50=j5=oracle.com=daniel.kiper@srs-us1.protection.inumbo.net>)
- id 1fdvCC-00063S-Gi
- for xen-devel@lists.xenproject.org; Fri, 13 Jul 2018 10:21:04 +0000
+In-Reply-To: <1531472650-6718-2-git-send-email-aisaila@bitdefender.com>
 Content-Disposition: inline
-In-Reply-To: <20180712163733.6ujsjqsbkokfzit4@mac.bytemobile.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,23 +19,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: aisaila@bitdefender.com
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBKdWwgMTIsIDIwMTggYXQgMDY6Mzc6MzNQTSArMDIwMCwgUm9nZXIgUGF1IE1vbm7D
-qSB3cm90ZToKPiBPbiBUaHUsIEp1bCAxMiwgMjAxOCBhdCAwMTozNToxNFBNICswMjAwLCBEYW5p
-ZWwgS2lwZXIgd3JvdGU6Cj4gPiBPbiBXZWQsIEp1bCAxMSwgMjAxOCBhdCAwNTozNDo1MFBNICsw
-MjAwLCBSb2dlciBQYXUgTW9ubmUgd3JvdGU6Cj4gPiA+IFRoaXMgYWxsb3dzIHJlbW92aW5nIHRo
-ZSBERUZJTkVEIGNvbmRpdGlvbmFsIGluIHRoZSBsaW5rZXIgc2NyaXB0LCBhbmQKPiA+ID4gZml4
-ZXMgY29tcGlsYXRpb24gd2l0aCBsbGQ6Cj4gPgo+ID4gcy9sbGQvTExWTSBsaW5rZXIvPwo+ID4K
-PiA+IENvdWxkIHlvdSBtZW50aW9uIHRoZSB2ZXJzaW9uIG9mIExMVk0gbGlua2VyIGluIHRoZSBj
-b21taXQgbWVzc2FnZT8KPiA+IEFuZCBJIGFtIHN0aWxsIG5vdCBzdXJlIHdoeSBkbyB5b3UgaW5z
-aXN0IG9uIHRoaXMgcGF0Y2ggc2VyaWVzLgo+ID4gSUlSQyB5b3UgaGF2ZSB0b2xkIHVzIHRoYXQg
-Ym90aCBpc3N1ZXMgd2lsbCBiZSBmaXhlZCBpbiBMTFZNLgo+Cj4gUmlnaHQsIGJ1dCBJIGhhdmUg
-bm8gaWRlYSB3aGVuIGxsZCA3LjAuMCB3aWxsIGJlIHJlbGVhc2VkLCBtdWNoIGxlc3MKPiB3aGVu
-IGl0IHdpbGwgYmUgbWVyZ2VkIGludG8gRnJlZUJTRCBiYXNlIHN5c3RlbS4KClBsZWFzZSBhZGQg
-c29tZXRoaW5nIGxpa2UgdGhhdCB0byB0aGUgY29tbWl0IG1lc3NhZ2VzIG9mIGJvdGggcGF0Y2hl
-cy4KCkRhbmllbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDEzLjA3LjE4IGF0IDExOjA0LCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3Rl
+Ogo+IENoYW5nZXMgc2luY2UgVjEwOgo+IAktIEFkZCBtZW1zZXQgdG8gMCBmb3IgY3R4dC4KCldo
+eT8gV2hhdCdzIHdyb25nIHdpdGggLi4uCgo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9jcHUvbWNoZWNr
+L3ZtY2UuYwo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9jcHUvbWNoZWNrL3ZtY2UuYwo+IEBAIC0zNDks
+NiArMzQ5LDIwIEBAIGludCB2bWNlX3dybXNyKHVpbnQzMl90IG1zciwgdWludDY0X3QgdmFsKQo+
+ICAgICAgcmV0dXJuIHJldDsKPiAgfQo+ICAKPiArc3RhdGljIGludCB2bWNlX3NhdmVfdmNwdV9j
+dHh0X29uZShzdHJ1Y3QgdmNwdSAqdiwgaHZtX2RvbWFpbl9jb250ZXh0X3QgKmgpCj4gKyB7Cj4g
+KyAgICBzdHJ1Y3QgaHZtX3ZtY2VfdmNwdSBjdHh0Owo+ICsKPiArICAgIG1lbXNldCgmY3R4dCwg
+MCwgc2l6ZW9mKGN0eHQpKTsKCiAgICBzdHJ1Y3QgaHZtX3ZtY2VfdmNwdSBjdHh0ID0ge307Cgpp
+bnN0ZWFkPyBPciBldmVuIHB1bGxpbmcgYWxsIG9mIHRoaXMgLi4uCgo+ICsgICAgY3R4dC5jYXBz
+ID0gdi0+YXJjaC52bWNlLm1jZ19jYXA7Cj4gKyAgICBjdHh0Lm1jaV9jdGwyX2JhbmswID0gdi0+
+YXJjaC52bWNlLmJhbmtbMF0ubWNpX2N0bDI7Cj4gKyAgICBjdHh0Lm1jaV9jdGwyX2JhbmsxID0g
+di0+YXJjaC52bWNlLmJhbmtbMV0ubWNpX2N0bDI7Cj4gKyAgICBjdHh0Lm1jZ19leHRfY3RsID0g
+di0+YXJjaC52bWNlLm1jZ19leHRfY3RsOwoKLi4uIGludG8gdGhlIGluaXRpYWxpemVyLCB3aGlj
+aCB3aWxsIG1ha2Ugc3VyZSBwYWRkaW5nIGZpZWxkcyBhcmUgemVyby4KSSBjYW4gc2VlIHRoYXQg
+YSBtZW1zZXQoKSBpcyB3YXJyYW50ZWQgaW4gX3NvbWVfIGNhc2VzLCBidXQgbm90CnVuaWZvcm1s
+eS4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
