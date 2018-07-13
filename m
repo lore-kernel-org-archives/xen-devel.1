@@ -1,19 +1,23 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] xen/x86/vpmu: Zero struct pt_regs before
- calling into sample handling code
-Date: Fri, 13 Jul 2018 10:41:44 +0200
-Message-ID: <8f1cfd9a-cabb-85fe-1b63-5b5162f149be__3035.58201198957$1531471230$gmane$org@suse.com>
-References: <1531416420-3580-1-git-send-email-boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH 1/8] cpupools: fix state when downing a CPU
+ failed
+Date: Fri, 13 Jul 2018 11:02:50 +0200
+Message-ID: <fd2f91cd-b6f4-34aa-e05b-a855c984be56@suse.com>
+References: <5B45F01B02000078001D30FF@prv1-mh.provo.novell.com>
+ <5B45F26A02000078001D312F@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=3fzb=j5=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fdte8-0002Mr-SF
- for xen-devel@lists.xenproject.org; Fri, 13 Jul 2018 08:41:48 +0000
-In-Reply-To: <1531416420-3580-1-git-send-email-boris.ostrovsky@oracle.com>
+ id 1fdtyY-0004Vb-RN
+ for xen-devel@lists.xenproject.org; Fri, 13 Jul 2018 09:02:54 +0000
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id 782DFADEE
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Jul 2018 09:02:51 +0000 (UTC)
+In-Reply-To: <5B45F26A02000078001D312F@suse.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,16 +27,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
-Cc: mark.rutland@arm.com, stable@vger.kernel.org
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Dario Faggioli <dfaggioli@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTIvMDcvMTggMTk6MjcsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiBPdGhlcndpc2Ugd2Ug
-bWF5IGxlYWsga2VybmVsIHN0YWNrIGZvciBldmVudHMgdGhhdCBzYW1wbGUgdXNlcgo+IHJlZ2lz
-dGVycy4KPiAKPiBSZXBvcnRlZC1ieTogTWFyayBSdXRsYW5kIDxtYXJrLnJ1dGxhbmRAYXJtLmNv
-bT4KPiBTaWduZWQtb2ZmLWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFj
-bGUuY29tPgo+IENjOiBzdGFibGVAdmdlci5rZXJuZWwub3JnCgpSZXZpZXdlZC1ieTogSnVlcmdl
-biBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTEvMDcvMTggMTQ6MDQsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFdoaWxlIEkndmUgcnVuIGlu
+dG8gdGhlIGlzc3VlIHdpdGggZnVydGhlciBwYXRjaGVzIGluIHBsYWNlIHdoaWNoIG5vCj4gbG9u
+Z2VyIGd1YXJhbnRlZSB0aGUgcGVyLUNQVSBhcmVhIHRvIHN0YXJ0IG91dCBhcyBhbGwgemVyb3Ms
+IHRoZQo+IENQVV9ET1dOX0ZBSUxFRCBwcm9jZXNzaW5nIGxvb2tzIHRvIGhhdmUgdGhlIHNhbWUg
+aXNzdWU6IEJ5IG5vdCB6YXBwaW5nCj4gdGhlIHBlci1DUFUgY3B1cG9vbCBwb2ludGVyLCBjcHVw
+b29sX2NwdV9hZGQoKSdzIChpbmRpcmVjdCkgaW52b2NhdGlvbgo+IG9mIHNjaGVkdWxlX2NwdV9z
+d2l0Y2goKSB3aWxsIHRyaWdnZXIgdGhlICJjICE9IG9sZF9wb29sIiBhc3NlcnRpb24KPiB0aGVy
+ZS4KPiAKPiBDbGVhcmluZyB0aGUgZmllbGQgZHVyaW5nIENQVV9ET1dOX1BSRVBBUkUgaXMgdG9v
+IGVhcmx5IChhZmFpY3QgdGhpcwo+IHNob3VsZCBub3QgaGFwcGVuIGJlZm9yZSBjcHVfZGlzYWJs
+ZV9zY2hlZHVsZXIoKSkuIENsZWFyaW5nIGl0IGluCj4gQ1BVX0RFQUQgYW5kIENQVV9ET1dOX0ZB
+SUxFRCB3b3VsZCBiZSBhbiBvcHRpb24sIGJ1dCB3b3VsZCB0YWtlIHRoZSBzYW1lCj4gcGllY2Ug
+b2YgY29kZSB0d2ljZS4gU2luY2UgdGhlIGZpZWxkJ3MgdmFsdWUgc2hvdWxkbid0IG1hdHRlciB3
+aGlsZSB0aGUKPiBDUFUgaXMgb2ZmbGluZSwgc2ltcGx5IGNsZWFyIGl0IGluIENQVV9PTkxJTkUg
+YW5kIENQVV9ET1dOX0ZBSUxFRCwgYnV0Cj4gb25seSBmb3Igb3RoZXIgdGhhbiB0aGUgc3VzcGVu
+ZC9yZXN1bWUgY2FzZSAod2hpY2ggZ2V0cyBzcGVjaWFsbHkKPiBoYW5kbGVkIGluIGNwdXBvb2xf
+Y3B1X3JlbW92ZSgpKS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hA
+c3VzZS5jb20+Cj4gLS0tCj4gVEJEOiBJIHRoaW5rIHRoaXMgd291bGQgYmV0dGVyIGNhbGwgc2No
+ZWR1bGVfY3B1X3N3aXRjaChjcHUsIE5VTEwpIGZyb20KPiAgICAgIGNwdXBvb2xfY3B1X3JlbW92
+ZSgpLCBidXQgYmVzaWRlcyB0aGF0IC0gYXMgcGVyIGFib3ZlIC0gbGlrZWx5Cj4gICAgICBiZWlu
+ZyB0b28gZWFybHksIHRoYXQgZnVuY3Rpb24gaGFzIGZ1cnRoZXIgcHJlcmVxcyB0byBiZSBtZXQu
+IEl0Cj4gICAgICBhbHNvIGRvZXNuJ3QgbG9vayBhcyBpZiBjcHVwb29sX3VuYXNzaWduX2NwdV9o
+ZWxwZXIoKSBjb3VsZCBiZSB1c2VkCj4gICAgICB0aGVyZS4KPiAKPiAtLS0gYS94ZW4vY29tbW9u
+L2NwdXBvb2wuYwo+ICsrKyBiL3hlbi9jb21tb24vY3B1cG9vbC5jCj4gQEAgLTc3OCw2ICs3Nzgs
+OCBAQCBzdGF0aWMgaW50IGNwdV9jYWxsYmFjaygKPiAgICAgIHsKPiAgICAgIGNhc2UgQ1BVX0RP
+V05fRkFJTEVEOgo+ICAgICAgY2FzZSBDUFVfT05MSU5FOgo+ICsgICAgICAgIGlmICggc3lzdGVt
+X3N0YXRlIDw9IFNZU19TVEFURV9hY3RpdmUgKQo+ICsgICAgICAgICAgICBwZXJfY3B1KGNwdXBv
+b2wsIGNwdSkgPSBOVUxMOwo+ICAgICAgICAgIHJjID0gY3B1cG9vbF9jcHVfYWRkKGNwdSk7CgpX
+b3VsZG4ndCBpdCBtYWtlIG1vcmUgc2Vuc2UgdG8gY2xlYXIgdGhlIGZpZWxkIGluIGNwdXBvb2xf
+Y3B1X2FkZCgpCndoaWNoIGFscmVhZHkgaXMgdGVzdGluZyBzeXN0ZW1fc3RhdGU/CgpNb2RpZnlp
+bmcgdGhlIGNvbmRpdGlvbiBpbiBjcHVwb29sX2NwdV9hZGQoKSB0bwoKICBpZiAoIHN5c3RlbV9z
+dGF0ZSA8PSBTWVNfU1RBVEVfYWN0aXZlICkKCmF0IHRoZSBzYW1lIHRpbWUgd291bGQgaGF2ZSB0
+aGUgYmVuZWZpdCB0byBjYXRjaCBwcm9ibGVtcyBpbiBjYXNlCnN1c3BlbmRpbmcgY3B1cyBpcyBm
+YWlsaW5nIGR1cmluZyBTWVNfU1RBVEVfc3VzcGVuZCAoSSdkIGV4cGVjdAp0cmlnZ2VyaW5nIHRo
+ZSBmaXJzdCBBU1NFUlQgaW4gc2NoZWR1bGVfY3B1X3N3aXRjaCgpIGluIHRoaXMgY2FzZSkuCgpJ
+dCBzaG91bGQgYmUgbm90ZWQgdGhhdCB0aGlzIHNjZW5hcmlvIGlzIHRoZW9yZXRpY2FsIG9ubHks
+IGFzIHRvZGF5CnRoZSBDUFVfRE9XTl9GQUlMRUQgY2FzZSBjYW4ndCBoYXBwZW4gaW4gdGhlIHN1
+c3BlbmQgY2FzZS4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
