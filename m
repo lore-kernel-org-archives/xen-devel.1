@@ -1,15 +1,12 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 19/21] xen/arm: introduce create_domUs
-Date: Mon, 16 Jul 2018 14:44:43 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1807161408210.21200@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1807061523160.13502@sstabellini-ThinkPad-X260>
- <1530918736-13965-19-git-send-email-sstabellini@kernel.org>
- <5B4CC36E02000078001D48BB@prv1-mh.provo.novell.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Update links on
+ https://wiki.xen.org/wiki/Xen_in_Qubes_OS_Security_Architecture
+Date: Mon, 16 Jul 2018 23:54:29 +0200
+Message-ID: <20180716215429.GM1371@mail-itl>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3836151512427155288=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B4CC36E02000078001D48BB@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,21 +15,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>
+To: xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAxNiBKdWwgMjAxOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gPj4+IE9uIDA3LjA3LjE4
-IGF0IDAxOjEyLCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6Cj4gPiAtLS0gYS94ZW4v
-aW5jbHVkZS9hc20teDg2L3NldHVwLmgKPiA+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvc2V0
-dXAuaAo+ID4gQEAgLTczLDQgKzczLDYgQEAgZXh0ZXJuIGJvb2wgb3B0X2RvbTBfc2hhZG93Owo+
-ID4gICNlbmRpZgo+ID4gIGV4dGVybiBib29sIGRvbTBfcHZoOwo+ID4gIAo+ID4gKyNkZWZpbmUg
-bWF4X2luaXRfZG9taWQgKDEpCj4gCj4gV2h5IGlzIHRoaXMgMSByYXRoZXIgdGhhbiAwPyBPciBp
-cyB0aGUgbmFtZSBpbXByZWNpc2U/CgpZZWFoLCB0aGUgbmFtZSBpcyBpbXByZWNpc2UuIE9uIHg4
-NiB0aGVyZSBpcyBhbHdheXMgb25seSBkb20wIGF0IGJvb3QsCnNvIHRoaXMgdmFyaWFibGUgaXMg
-c2V0IHRvIDArMSA9IDEuIEkgY2FuIGNoYW5nZSB0aGUgdmFyaWFibGUgdG8KYWN0dWFsbHkgbWF0
-Y2ggdGhlIG5hbWUsIHNvIHRoYXQgb24gYSBzeXN0ZW0gd2l0aCBvbmx5IGRvbTAgYXQgYm9vdCwK
-bWF4X2luaXRfZG9taWQgd291bGQgYmUgKDApLiBJdCBtYWtlcyBtb3JlIHNlbnNlIHRoYXQgd2F5
-LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3836151512427155288==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="VYvi4N5CyHZx5xNE"
+Content-Disposition: inline
+
+
+--VYvi4N5CyHZx5xNE
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+Could anyone with wiki write access update links to qubes
+arch-spec-0.3.pdf? The correct one is:
+https://www.qubes-os.org/attachment/wiki/QubesArchitecture/arch-spec-0.3.pdf
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--VYvi4N5CyHZx5xNE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAltNFBUACgkQ24/THMrX
+1yyTSAf/YFvRa59CJd4Tef8aGkMaubKAczhOuKF7HMB/FWwWSxPhLDdsr4i6d7D6
+mI8S8pueBnbjkXTNm4bAtSpsOrVr+RQogTegD7vykb+i6lP3D04FvgevrSIQvdoE
+S8aIVqzmwY5dytd3y1siUTDvvUkj/SOm7vvoR00NqmOeoNXh3B6ADeSAsV3Dfx3U
+mopxrV9E86UAwYa0OYZuishQsYuZNYrqxPbCPeFW3as+kocQNm1H7dY+wNlXKrS5
+yP0IzLv8b5u720bMy2o5MZKLEAzoGKV6Bs+F8CVsuDmoEBeGSUvPko+JTV9b5LHR
+UVCfyiceUHFIw5caer7kBOfMHX7CLg==
+=N8cF
+-----END PGP SIGNATURE-----
+
+--VYvi4N5CyHZx5xNE--
+
+
+--===============3836151512427155288==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3836151512427155288==--
