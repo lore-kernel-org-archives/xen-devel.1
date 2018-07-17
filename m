@@ -1,18 +1,15 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 20/21] xen: support console_switching
- between Dom0 and DomUs on ARM
-Date: Tue, 17 Jul 2018 00:37:51 -0600
-Message-ID: <5B4D8EBF02000078001D4AAC@prv1-mh.provo.novell.com>
-References: <alpine.DEB.2.10.1807061523160.13502@sstabellini-ThinkPad-X260>
- <1530918736-13965-20-git-send-email-sstabellini@kernel.org>
- <5B4CC5A602000078001D48CD@prv1-mh.provo.novell.com>
- <alpine.DEB.2.10.1807161411280.21200@sstabellini-ThinkPad-X260>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: Update links on
+ https://wiki.xen.org/wiki/Xen_in_Qubes_OS_Security_Architecture
+Date: Tue, 17 Jul 2018 07:51:40 +0100
+Message-ID: <20180717065140.svrlkdr75lvw2isp@citrix.com>
+References: <20180716215429.GM1371@mail-itl>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1807161411280.21200@sstabellini-ThinkPad-X260>
 Content-Disposition: inline
+In-Reply-To: <20180716215429.GM1371@mail-itl>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,49 +18,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini <stefanos@xilinx.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>
+To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE2LjA3LjE4IGF0IDIzOjU1LCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6
-Cj4gT24gTW9uLCAxNiBKdWwgMjAxOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+ID4+PiBPbiAwNy4w
-Ny4xOCBhdCAwMToxMiwgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+IHdyb3RlOgo+PiA+IEBAIC0z
-ODksMjkgKzM5Miw0OSBAQCBzdGF0aWMgdm9pZCBkdW1wX2NvbnNvbGVfcmluZ19rZXkodW5zaWdu
-ZWQgY2hhciBrZXkpCj4+ID4gICAgICBmcmVlX3hlbmhlYXBfcGFnZXMoYnVmLCBvcmRlcik7Cj4+
-ID4gIH0KPj4gPiAgCj4+ID4gLS8qIENUUkwtPHN3aXRjaF9jaGFyPiBzd2l0Y2hlcyBpbnB1dCBk
-aXJlY3Rpb24gYmV0d2VlbiBYZW4gYW5kIERPTTAuICovCj4+ID4gKy8qCj4+ID4gKyAqIENUUkwt
-PHN3aXRjaF9jaGFyPiBzd2l0Y2hlcyBpbnB1dCBkaXJlY3Rpb24gYmV0d2VlbiBYZW4sIERvbTAg
-YW5kCj4+ID4gKyAqIERvbVVzLgo+PiA+ICsgKi8KPj4gPiAgI2RlZmluZSBzd2l0Y2hfY29kZSAo
-b3B0X2NvbnN3aXRjaFswXS0nYScrMSkKPj4gPiAtc3RhdGljIGludCBfX3JlYWRfbW9zdGx5IHhl
-bl9yeCA9IDE7IC8qIEZBTFNFID0+IGlucHV0IHBhc3NlZCB0byBkb21haW4gMC4gKi8KPj4gPiAr
-c3RhdGljIGludCBfX3JlYWRfbW9zdGx5IHhlbl9yeCA9IDE7IC8qIDEgPT4gaW5wdXQgcGFzc2Vk
-IHRvIGRvbWFpbiAwLiAqLwo+PiAKPj4gSSBndWVzcyB0aGlzIHZhcmlhYmxlIHdhbnRzIHJlbmFt
-aW5nIG5vdy4KPiAKPiBZZWFoLiBXaGF0IGFib3V0IGBjb25zb2xlX3J4Jz8gCgpUaGF0J3MgcmVh
-c29uYWJsZS4gQW5vdGhlciBvcHRpb24gd291bGQgYmUgdG8gdXNlIHJ4X2RvbWlkLCBhbmQgc3Rv
-cmUKYWN0dWFsIGRvbWFpbiBJRHMgdGhlcmUgKERPTUlEX1hFTiBmb3IgWGVuKS4gVGhhdCdsbCBt
-YWtlIHRoZSBzd2l0Y2hpbmcKbG9naWMgc2xpZ2h0bHkgbGFyZ2VyLCBidXQgcGVyaGFwcyBwcm92
-aWRlIGEgYmV0dGVyIHVuZGVyc3RhbmRhYmxlIGVuZApyZXN1bHQuCgo+PiA+IEBAIC05MzMsOSAr
-OTU2LDYgQEAgdm9pZCBfX2luaXQgY29uc29sZV9lbmRib290KHZvaWQpCj4+ID4gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAiZGVjcmVhc2UgbG9nIGxldmVsIHRocmVzaG9sZCIsIDApOwo+
-PiA+ICAgICAgcmVnaXN0ZXJfaXJxX2tleWhhbmRsZXIoJ0cnLCAmZG9fdG9nZ2xlX2d1ZXN0LAo+
-PiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgInRvZ2dsZSBob3N0L2d1ZXN0IGxvZyBs
-ZXZlbCBhZGp1c3RtZW50IiwgMCk7Cj4+ID4gLQo+PiA+IC0gICAgLyogU2VyaWFsIGlucHV0IGlz
-IGRpcmVjdGVkIHRvIERPTTAgYnkgZGVmYXVsdC4gKi8KPj4gPiAtICAgIHN3aXRjaF9zZXJpYWxf
-aW5wdXQoKTsKPj4gCj4+IFRoaXMgcmVtb3ZlcyBhbiBpbW8gaGVscGZ1bCBib290IHRpbWUgbWVz
-c2FnZS4gSXMgdGhhdCBpbnRlbnRpb25hbCwKPj4gYW5kIGlmIHNvIHdoeT8KPiAgCj4gWWVzLCBp
-dCB3YXMgaW50ZW50aW9uYWwuIHN3aXRjaF9zZXJpYWxfaW5wdXQgaW5jcmVhc2VzIHhlbl9yeCwg
-SSB0aG91Z2h0Cj4gaXQgZGlkbid0IG1ha2UgdG9vIG11Y2ggc2Vuc2UgdG8gZG8gdGhhdCBhdCBi
-b290LCBhbmQgd291bGQgYmUgY2xlYXJlcgo+IHRvIGp1c3QgaW5pdGlhbGl6ZSB4ZW5fcnggdG8g
-dGhlIHdhbnRlZCB2YWx1ZSBmcm9tIHRoZSBnZXQgZ28gKHRoZSB2YWx1ZQo+IHdvdWxkIGJlIDEg
-Zm9yIGRvbTApLiBBbHNvLCBpbiBwcmV2aW91cyBpbXBsZW1lbnRhdGlvbnMgb2YgdGhpcyBwYXRj
-aCBpdAo+IHdhcyBhY3R1YWxseSByZXF1aXJlZCwgYnV0IG5vdCBhbnltb3JlLgo+IAo+IEluIGZh
-Y3QsIGlmIHlvdSBwcmVmZXIsIEkgY291bGQgYWxzbyBrZWVwIHRoaXMgc3dpdGNoX3NlcmlhbF9p
-bnB1dCgpCj4gY2FsbCBhcy1pcyBhbmQgY2hhbmdlIHRoZSBpbml0aWFsIHZhbHVlIG9mIHhlbl9y
-eCB0byAwLiBUaGF0IHdvdWxkIGFsc28KPiB3b3JrLCBhcyB0aGUgaW5jcmVhc2Ugb2YgeGVuX3J4
-IGhlcmUgd291bGQgZW5kIHVwIHNlbGVjdGluZyBzdGlsbCBkb20wCj4gZm9yIGlucHV0LgoKWWVz
-LCBJJ2QgcHJlZmVyIGlmIHlvdSBsZWZ0IGl0IHVudG91Y2hlZC4gVGhlIGlkZWEgYWZ0ZXIgYWxs
-IGlzIHRoYXQgcHJpb3IKdG8gcmVhY2hpbmcgaGVyZSBpbnB1dCBnb2VzIHRvIFhlbiwgYW5kIG9u
-bHkgZnJvbSBoZXJlIG9uIGl0IGdvZXMgdG8KRG9tMC4KCkphbgoKCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gTW9uLCBKdWwgMTYsIDIwMTggYXQgMTE6NTQ6MjlQTSArMDIwMCwgTWFyZWsgTWFyY3p5a293
+c2tpLUfDs3JlY2tpIHdyb3RlOgo+IEhpLAo+IAo+IENvdWxkIGFueW9uZSB3aXRoIHdpa2kgd3Jp
+dGUgYWNjZXNzIHVwZGF0ZSBsaW5rcyB0byBxdWJlcwo+IGFyY2gtc3BlYy0wLjMucGRmPyBUaGUg
+Y29ycmVjdCBvbmUgaXM6Cj4gaHR0cHM6Ly93d3cucXViZXMtb3Mub3JnL2F0dGFjaG1lbnQvd2lr
+aS9RdWJlc0FyY2hpdGVjdHVyZS9hcmNoLXNwZWMtMC4zLnBkZgo+IAoKV2hhdCBpcyB5b3VyIHdp
+a2kgdXNlcm5hbWU/IEkgY2FuIGdyYW50IHlvdSB3cml0ZSBhY2Nlc3MuCgpXZWkuCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
