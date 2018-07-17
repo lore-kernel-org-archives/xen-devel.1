@@ -1,16 +1,19 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [libvirt test] 125179: regressions - FAIL
-Date: Tue, 17 Jul 2018 04:52:23 +0000
-Message-ID: <osstest-125179-mainreport@xen.org>
+From: Leon Romanovsky <leonro@mellanox.com>
+Subject: Re: [PATCH] mm,
+ oom: distinguish blockable mode for mmu notifiers
+Date: Tue, 17 Jul 2018 07:03:47 +0300
+Message-ID: <20180717040347.GT3152__3043.53114120222$1531803414$gmane$org@mtr-leonro.mtl.com>
+References: <20180716115058.5559-1-mhocko@kernel.org>
+ <20180716161249.c76240cd487c070fb271d529@linux-foundation.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0787223169248974598=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=uour=kb=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1ffHyN-0002ru-GY
- for xen-devel@lists.xenproject.org; Tue, 17 Jul 2018 04:52:27 +0000
+ <srs0=km7c=kb=mellanox.com=leonro@srs-us1.protection.inumbo.net>)
+ id 1ffHDY-0007V3-QS
+ for xen-devel@lists.xenproject.org; Tue, 17 Jul 2018 04:04:04 +0000
+In-Reply-To: <20180716161249.c76240cd487c070fb271d529@linux-foundation.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,129 +22,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Michal Hocko <mhocko@suse.com>, kvm@vger.kernel.org, Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>, David Airlie <airlied@linux.ie>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Sudeep Dutt <sudeep.dutt@intel.com>, dri-devel@lists.freedesktop.org, Michal Hocko <mhocko@kernel.org>, linux-mm@kvack.org, Andrea Arcangeli <aarcange@redhat.com>, "David (ChunMing) Zhou" <David1.Zhou@amd.com>, Dimitri Sivanich <sivanich@sgi.com>, linux-rdma@vger.kernel.org, amd-gfx@lists.freedesktop.org, Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>, David Rientjes <rientjes@google.com>, xen-devel@lists.xenproject.org, intel-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>, =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.c>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNTE3OSBsaWJ2aXJ0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjUxNzkvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3Rz
-IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMg
-d2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFybTY0LWxpYnZpcnQgICAgICAgICAgIDYg
-bGlidmlydC1idWlsZCAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMzgxNAogYnVpbGQtaTM4
-Ni1saWJ2aXJ0ICAgICAgICAgICAgNiBsaWJ2aXJ0LWJ1aWxkICAgICAgICAgICAgZmFpbCBSRUdS
-LiB2cy4gMTIzODE0CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICA2IGxpYnZpcnQtYnVp
-bGQgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjM4MTQKIGJ1aWxkLWFybWhmLWxpYnZpcnQg
-ICAgICAgICAgIDYgbGlidmlydC1idWlsZCAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyMzgx
-NAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRl
-c3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAg
-ICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1h
-bWQ2NC14c20gMSBidWlsZC1jaGVjaygxKSBibG9ja2VkIG4vYQogdGVzdC1hcm02NC1hcm02NC1s
-aWJ2aXJ0LXFjb3cyICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9h
-CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
-ICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQgICAgICAxIGJ1aWxk
-LWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybTY0LWFybTY0LWxp
-YnZpcnQteHNtICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0
-ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAg
-ICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3ICAxIGJ1aWxkLWNo
-ZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZp
-cnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxIGJ1aWxkLWNoZWNrKDEpIGJsb2NrZWQgbi9h
-CiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1wYWlyICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
-ICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcGFpciAgMSBidWls
-ZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hcm1oZi1hcm1oZi1s
-aWJ2aXJ0ICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQog
-dGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAg
-ICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgMSBidWlsZC1j
-aGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQoKdmVyc2lvbiB0YXJnZXRlZCBmb3Ig
-dGVzdGluZzoKIGxpYnZpcnQgICAgICAgICAgICAgIDE5ZTlkOTJiMjdhYmUyMTBkNTRlNjE3MDY5
-ZmM4MGNhYTJhZjAxM2UKYmFzZWxpbmUgdmVyc2lvbjoKIGxpYnZpcnQgICAgICAgICAgICAgIDA3
-NmEyYjQwOTY2N2RkOWY3MTZhMmEyMDg1ZTFmZmVhOWQ1OGZlOGIKCkxhc3QgdGVzdCBvZiBiYXNp
-cyAgIDEyMzgxNCAgMjAxOC0wNi0wNSAwNDoxOToyMyBaICAgNDIgZGF5cwpGYWlsaW5nIHNpbmNl
-ICAgICAgICAxMjM4NDAgIDIwMTgtMDYtMDYgMDQ6MTk6MjggWiAgIDQxIGRheXMgICAzMCBhdHRl
-bXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMjUxNzkgIDIwMTgtMDctMTUgMTA6NTI6MzEgWiAg
-ICAxIGRheXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMg
-dW5kZXIgdGVzdDoKICAgIEFuZHJlYSBCb2xvZ25hbmkgPGFib2xvZ25hQHJlZGhhdC5jb20+CiAg
-QW55YSBIYXJ0ZXIgPGFoYXJ0ZXJAcmVkaGF0LmNvbT4KICBCam9lcm4gV2FsayA8YndhbGtAbGlu
-dXguaWJtLmNvbT4KICBCb2JvIER1IDxkdWJvMTYzQDEyNi5jb20+CiAgQm9yaXMgRml1Y3p5bnNr
-aSA8Zml1Y3p5QGxpbnV4LmlibS5jb20+CiAgQnJpamVzaCBTaW5naCA8YnJpamVzaC5zaW5naEBh
-bWQuY29tPgogIENoYW5na3VvIFNoaSA8c2hpLmNoYW5na3VvQGgzYy5jb20+CiAgQ2hlbiBIYW54
-aWFvIDxjaGVuaGFueGlhb0BnbWFpbC5jb20+CiAgQ2hyaXN0aWFuIEVocmhhcmR0IDxjaHJpc3Rp
-YW4uZWhyaGFyZHRAY2Fub25pY2FsLmNvbT4KICBDb2xlIFJvYmluc29uIDxjcm9iaW5zb0ByZWRo
-YXQuY29tPgogIERhbmllbCBOaWNvbGV0dGkgPGRhbnR0aTEyQGdtYWlsLmNvbT4KICBEYW5pZWwg
-UC4gQmVycmFuZ8OpIDxiZXJyYW5nZUByZWRoYXQuY29tPgogIERhbmllbCBWZWlsbGFyZCA8dmVp
-bGxhcmRAcmVkaGF0LmNvbT4KICBFcmljIEJsYWtlIDxlYmxha2VAcmVkaGF0LmNvbT4KICBFcmlr
-IFNrdWx0ZXR5IDxlc2t1bHRldEByZWRoYXQuY29tPgogIEZhYmlhbm8gRmlkw6puY2lvIDxmYWJp
-YW5vQGZpZGVuY2lvLm9yZz4KICBGaWxpcCBBbGFjIDxmaWxpcGFsYWNAZ21haWwuY29tPgogIEhh
-biBIYW4gPGhoYW5AcmVkaGF0LmNvbT4KICBpbnRyaWdlcmkgPGludHJpZ2VyaStsaWJ2aXJ0QGJv
-dW0ub3JnPgogIGludHJpZ2VyaSA8aW50cmlnZXJpQGJvdW0ub3JnPgogIEphbWllIFN0cmFuZGJv
-Z2UgPGphbWllQGNhbm9uaWNhbC5jb20+CiAgSmllIFdhbmcgPHdhbmdqaWU4OC5odWF3ZWkuY29t
-PgogIEppcmkgRGVuZW1hcmsgPGpkZW5lbWFyQHJlZGhhdC5jb20+CiAgSm9obiBGZXJsYW4gPGpm
-ZXJsYW5AcmVkaGF0LmNvbT4KICBKdWxpbyBGYXJhY2NvIDxqY2ZhcmFjY29AZ21haWwuY29tPgog
-IErDoW4gVG9ta28gPGp0b21rb0ByZWRoYXQuY29tPgogIEthc2h5YXAgQ2hhbWFydGh5IDxrY2hh
-bWFydEByZWRoYXQuY29tPgogIEthdGVyaW5hIEtvdWtpb3UgPGtrb3VraW91QHJlZGhhdC5jb20+
-CiAgTGFpbmUgU3R1bXAgPGxhaW5lQGxhaW5lLm9yZz4KICBMYXN6bG8gRXJzZWsgPGxlcnNla0By
-ZWRoYXQuY29tPgogIEx1eWFvIEh1YW5nIDxsaHVhbmdAcmVkaGF0LmNvbT4KICBNYXJjIEhhcnRt
-YXllciA8bWhhcnRtYXlAbGludXguaWJtLmNvbT4KICBNYXJjb3MgUGF1bG8gZGUgU291emEgPG1h
-cmNvcy5zb3V6YS5vcmdAZ21haWwuY29tPgogIE1hcnRpbiBLbGV0emFuZGVyIDxta2xldHphbkBy
-ZWRoYXQuY29tPgogIE1pY2hhbCBQcml2b3puaWsgPG1wcml2b3puQHJlZGhhdC5jb20+CiAgTWlj
-aGFsIFByw612b3puw61rIDxtcHJpdm96bkByZWRoYXQuY29tPgogIFBhdmVsIEhyZGluYSA8cGhy
-ZGluYUByZWRoYXQuY29tPgogIFBldGVyIEtyZW1wYSA8cGtyZW1wYUByZWRoYXQuY29tPgogIFBp
-bm8gVG9zY2FubyA8cHRvc2Nhbm9AcmVkaGF0LmNvbT4KICBSYWRvc3RpbiBTdG95YW5vdiA8cnN0
-b3lhbm92MUBnbWFpbC5jb20+CiAgUmFteSBFbGtlc3QgPHJhbXllbGtlc3RAZ21haWwuY29tPgog
-IHJhbXllbGtlc3QgPHJhbXllbGtlc3RAZ21haWwuY29tPgogIFJpY2hhcmQgVy5NLiBKb25lcyA8
-cmpvbmVzQHJlZGhhdC5jb20+CiAgUm9tYW4gQm9nb3JvZHNraXkgPGJvZ29yb2Rza2l5QGdtYWls
-LmNvbT4KICBTaGljaGFuZ2t1byA8c2hpLmNoYW5na3VvQGgzYy5jb20+CiAgU2ltb24gS29ieWRh
-IDxza29ieWRhQHJlZGhhdC5jb20+CiAgU3RlZmFuIEJhZGVyIDxzdGVmYW4uYmFkZXJAY2Fub25p
-Y2FsLmNvbT4KICBTdGVmYW4gQmVyZ2VyIDxzdGVmYW5iQGxpbnV4LnZuZXQuaWJtLmNvbT4KICBT
-dWtyaXQgQmhhdG5hZ2FyIDxza3J0Ymh0bmdyQGdtYWlsLmNvbT4KICB3MDAyNTE1NzQgPHdhbmdq
-aWU4OEBodWF3ZWkuY29tPgogIFdlaWx1biBaaHUgPHpodXdlaWx1bkBodWF3ZWkuY29tPgoKam9i
-czoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogYnVpbGQtYXJtNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQt
-bGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
-CiBidWlsZC1hcm02NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIGJ1aWxkLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1hbWQ2NC1w
-dm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IGJ1aWxkLWFybTY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICBibG9ja2VkIAog
-dGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAg
-ICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20g
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2
-LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0
-ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgYmxvY2tlZCAKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYt
-bGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRl
-c3QtYW1kNjQtYW1kNjQtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQtcWNvdzIg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtaGYtYXJtaGYt
-bGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVz
-dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IGJsb2NrZWQgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5w
-cm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdl
-cwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9s
-b2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2Yg
-dGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6
-Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5l
-bWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rl
-c3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBi
-ZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0Lmdp
-dDthPXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCihObyByZXZpc2lvbiBsb2c7IGl0IHdvdWxkIGJl
-IDczODUgbGluZXMgbG9uZy4pCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+
+--===============0787223169248974598==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="cW+P/jduATWpL925"
+Content-Disposition: inline
+
+
+--cW+P/jduATWpL925
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Mon, Jul 16, 2018 at 04:12:49PM -0700, Andrew Morton wrote:
+> On Mon, 16 Jul 2018 13:50:58 +0200 Michal Hocko <mhocko@kernel.org> wrote:
+>
+> > From: Michal Hocko <mhocko@suse.com>
+> >
+> > There are several blockable mmu notifiers which might sleep in
+> > mmu_notifier_invalidate_range_start and that is a problem for the
+> > oom_reaper because it needs to guarantee a forward progress so it cannot
+> > depend on any sleepable locks.
+> >
+> > Currently we simply back off and mark an oom victim with blockable mmu
+> > notifiers as done after a short sleep. That can result in selecting a
+> > new oom victim prematurely because the previous one still hasn't torn
+> > its memory down yet.
+> >
+> > We can do much better though. Even if mmu notifiers use sleepable locks
+> > there is no reason to automatically assume those locks are held.
+> > Moreover majority of notifiers only care about a portion of the address
+> > space and there is absolutely zero reason to fail when we are unmapping an
+> > unrelated range. Many notifiers do really block and wait for HW which is
+> > harder to handle and we have to bail out though.
+> >
+> > This patch handles the low hanging fruid. __mmu_notifier_invalidate_range_start
+> > gets a blockable flag and callbacks are not allowed to sleep if the
+> > flag is set to false. This is achieved by using trylock instead of the
+> > sleepable lock for most callbacks and continue as long as we do not
+> > block down the call chain.
+>
+> I assume device driver developers are wondering "what does this mean
+> for me".  As I understand it, the only time they will see
+> blockable==false is when their driver is being called in response to an
+> out-of-memory condition, yes?  So it is a very rare thing.
+
+I can't say for everyone, but at least for me (mlx5), it is not rare event.
+I'm seeing OOM very often while I'm running my tests in low memory VMs.
+
+Thanks
+
+>
+> Any suggestions regarding how the driver developers can test this code
+> path?  I don't think we presently have a way to fake an oom-killing
+> event?  Perhaps we should add such a thing, given the problems we're
+> having with that feature.
+
+--cW+P/jduATWpL925
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIcBAEBAgAGBQJbTWqjAAoJEORje4g2clinGqAP+gKzC/GfmPDn9AVen4vgye2r
+8ZHefQ6uHWv4nJE61TvooYoxviDwWVXtXhUT+MnvEvQ43UMMtfUc4ZyBaHovPPmr
+a6eXZGQP9+08P4l3nl3dPg1H9D1ynkxSqKLJykEM+xSzWy16+F3JYQXUnTcujqrn
+m/eiJ9hHXL2sS2w7Xwj1BLmCmeMJ/e7v6Og0eUkXeCIYHrtBfUziO+XhMwU6BEKE
+uNsyROY/ua4XvzuHWwGmUbM0pT1Pk/qvkHGK8RP1jkBbzS0nlYZoKKtlgH0E3Cot
+ifa7ZfLQT4kG1KttzXX7ZVuwxK+wyKHhykJxlJIRl/uDSbmdEjRcNPFwAwzAsQLG
+ZMjnx2wo9tqlBMSdwlwtZBc8H8MPagM5pLypQTIFdMmvD/lGVGXk2/rwP2dixw/W
+V/j9V5eWAkjkp2hg5KxZLSW0nK7e1bEreZesEejfWb/tZGpEWjOtDfv+F9drZZ8O
+iqvT56/bALDpLSvSDaCTxbfVpZf6wm+eKE4DkwIBzl8cTyRp7136JKnDJ0FVse/Z
+OGqa7WWV1LTVMAHzRsHpX9HrTPpRKxFuZYYB8Z5NTeHa0TVqjsuOYo5uf5SfVsS5
+3BeOAh2ncekLrn5WyVnY78PaXLzJ1vUCtvQGOYMX6fwI15+63z3+BH8t46ulmJed
+MuCRD555f27+kAwtDYmE
+=gzyd
+-----END PGP SIGNATURE-----
+
+--cW+P/jduATWpL925--
+
+
+--===============0787223169248974598==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0787223169248974598==--
