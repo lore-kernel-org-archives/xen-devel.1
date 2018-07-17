@@ -1,19 +1,18 @@
-From: Leon Romanovsky <leonro@mellanox.com>
-Subject: Re: [PATCH] mm,
- oom: distinguish blockable mode for mmu notifiers
-Date: Tue, 17 Jul 2018 07:03:47 +0300
-Message-ID: <20180717040347.GT3152__3043.53114120222$1531803414$gmane$org@mtr-leonro.mtl.com>
-References: <20180716115058.5559-1-mhocko@kernel.org>
- <20180716161249.c76240cd487c070fb271d529@linux-foundation.org>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2 20/21] xen: support console_switching
+ between Dom0 and DomUs on ARM
+Date: Tue, 17 Jul 2018 00:37:51 -0600
+Message-ID: <5B4D8EBF02000078001D4AAC@prv1-mh.provo.novell.com>
+References: <alpine.DEB.2.10.1807061523160.13502@sstabellini-ThinkPad-X260>
+ <1530918736-13965-20-git-send-email-sstabellini@kernel.org>
+ <5B4CC5A602000078001D48CD@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1807161411280.21200@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0787223169248974598=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=km7c=kb=mellanox.com=leonro@srs-us1.protection.inumbo.net>)
- id 1ffHDY-0007V3-QS
- for xen-devel@lists.xenproject.org; Tue, 17 Jul 2018 04:04:04 +0000
-In-Reply-To: <20180716161249.c76240cd487c070fb271d529@linux-foundation.org>
+In-Reply-To: <alpine.DEB.2.10.1807161411280.21200@sstabellini-ThinkPad-X260>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,96 +21,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: Michal Hocko <mhocko@suse.com>, kvm@vger.kernel.org, Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>, David Airlie <airlied@linux.ie>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Sudeep Dutt <sudeep.dutt@intel.com>, dri-devel@lists.freedesktop.org, Michal Hocko <mhocko@kernel.org>, linux-mm@kvack.org, Andrea Arcangeli <aarcange@redhat.com>, "David (ChunMing) Zhou" <David1.Zhou@amd.com>, Dimitri Sivanich <sivanich@sgi.com>, linux-rdma@vger.kernel.org, amd-gfx@lists.freedesktop.org, Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>, David Rientjes <rientjes@google.com>, xen-devel@lists.xenproject.org, intel-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>, =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.c>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini <stefanos@xilinx.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0787223169248974598==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cW+P/jduATWpL925"
-Content-Disposition: inline
-
-
---cW+P/jduATWpL925
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Mon, Jul 16, 2018 at 04:12:49PM -0700, Andrew Morton wrote:
-> On Mon, 16 Jul 2018 13:50:58 +0200 Michal Hocko <mhocko@kernel.org> wrote:
->
-> > From: Michal Hocko <mhocko@suse.com>
-> >
-> > There are several blockable mmu notifiers which might sleep in
-> > mmu_notifier_invalidate_range_start and that is a problem for the
-> > oom_reaper because it needs to guarantee a forward progress so it cannot
-> > depend on any sleepable locks.
-> >
-> > Currently we simply back off and mark an oom victim with blockable mmu
-> > notifiers as done after a short sleep. That can result in selecting a
-> > new oom victim prematurely because the previous one still hasn't torn
-> > its memory down yet.
-> >
-> > We can do much better though. Even if mmu notifiers use sleepable locks
-> > there is no reason to automatically assume those locks are held.
-> > Moreover majority of notifiers only care about a portion of the address
-> > space and there is absolutely zero reason to fail when we are unmapping an
-> > unrelated range. Many notifiers do really block and wait for HW which is
-> > harder to handle and we have to bail out though.
-> >
-> > This patch handles the low hanging fruid. __mmu_notifier_invalidate_range_start
-> > gets a blockable flag and callbacks are not allowed to sleep if the
-> > flag is set to false. This is achieved by using trylock instead of the
-> > sleepable lock for most callbacks and continue as long as we do not
-> > block down the call chain.
->
-> I assume device driver developers are wondering "what does this mean
-> for me".  As I understand it, the only time they will see
-> blockable==false is when their driver is being called in response to an
-> out-of-memory condition, yes?  So it is a very rare thing.
-
-I can't say for everyone, but at least for me (mlx5), it is not rare event.
-I'm seeing OOM very often while I'm running my tests in low memory VMs.
-
-Thanks
-
->
-> Any suggestions regarding how the driver developers can test this code
-> path?  I don't think we presently have a way to fake an oom-killing
-> event?  Perhaps we should add such a thing, given the problems we're
-> having with that feature.
-
---cW+P/jduATWpL925
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIcBAEBAgAGBQJbTWqjAAoJEORje4g2clinGqAP+gKzC/GfmPDn9AVen4vgye2r
-8ZHefQ6uHWv4nJE61TvooYoxviDwWVXtXhUT+MnvEvQ43UMMtfUc4ZyBaHovPPmr
-a6eXZGQP9+08P4l3nl3dPg1H9D1ynkxSqKLJykEM+xSzWy16+F3JYQXUnTcujqrn
-m/eiJ9hHXL2sS2w7Xwj1BLmCmeMJ/e7v6Og0eUkXeCIYHrtBfUziO+XhMwU6BEKE
-uNsyROY/ua4XvzuHWwGmUbM0pT1Pk/qvkHGK8RP1jkBbzS0nlYZoKKtlgH0E3Cot
-ifa7ZfLQT4kG1KttzXX7ZVuwxK+wyKHhykJxlJIRl/uDSbmdEjRcNPFwAwzAsQLG
-ZMjnx2wo9tqlBMSdwlwtZBc8H8MPagM5pLypQTIFdMmvD/lGVGXk2/rwP2dixw/W
-V/j9V5eWAkjkp2hg5KxZLSW0nK7e1bEreZesEejfWb/tZGpEWjOtDfv+F9drZZ8O
-iqvT56/bALDpLSvSDaCTxbfVpZf6wm+eKE4DkwIBzl8cTyRp7136JKnDJ0FVse/Z
-OGqa7WWV1LTVMAHzRsHpX9HrTPpRKxFuZYYB8Z5NTeHa0TVqjsuOYo5uf5SfVsS5
-3BeOAh2ncekLrn5WyVnY78PaXLzJ1vUCtvQGOYMX6fwI15+63z3+BH8t46ulmJed
-MuCRD555f27+kAwtDYmE
-=gzyd
------END PGP SIGNATURE-----
-
---cW+P/jduATWpL925--
-
-
---===============0787223169248974598==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0787223169248974598==--
+Pj4+IE9uIDE2LjA3LjE4IGF0IDIzOjU1LCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6
+Cj4gT24gTW9uLCAxNiBKdWwgMjAxOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+ID4+PiBPbiAwNy4w
+Ny4xOCBhdCAwMToxMiwgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+IHdyb3RlOgo+PiA+IEBAIC0z
+ODksMjkgKzM5Miw0OSBAQCBzdGF0aWMgdm9pZCBkdW1wX2NvbnNvbGVfcmluZ19rZXkodW5zaWdu
+ZWQgY2hhciBrZXkpCj4+ID4gICAgICBmcmVlX3hlbmhlYXBfcGFnZXMoYnVmLCBvcmRlcik7Cj4+
+ID4gIH0KPj4gPiAgCj4+ID4gLS8qIENUUkwtPHN3aXRjaF9jaGFyPiBzd2l0Y2hlcyBpbnB1dCBk
+aXJlY3Rpb24gYmV0d2VlbiBYZW4gYW5kIERPTTAuICovCj4+ID4gKy8qCj4+ID4gKyAqIENUUkwt
+PHN3aXRjaF9jaGFyPiBzd2l0Y2hlcyBpbnB1dCBkaXJlY3Rpb24gYmV0d2VlbiBYZW4sIERvbTAg
+YW5kCj4+ID4gKyAqIERvbVVzLgo+PiA+ICsgKi8KPj4gPiAgI2RlZmluZSBzd2l0Y2hfY29kZSAo
+b3B0X2NvbnN3aXRjaFswXS0nYScrMSkKPj4gPiAtc3RhdGljIGludCBfX3JlYWRfbW9zdGx5IHhl
+bl9yeCA9IDE7IC8qIEZBTFNFID0+IGlucHV0IHBhc3NlZCB0byBkb21haW4gMC4gKi8KPj4gPiAr
+c3RhdGljIGludCBfX3JlYWRfbW9zdGx5IHhlbl9yeCA9IDE7IC8qIDEgPT4gaW5wdXQgcGFzc2Vk
+IHRvIGRvbWFpbiAwLiAqLwo+PiAKPj4gSSBndWVzcyB0aGlzIHZhcmlhYmxlIHdhbnRzIHJlbmFt
+aW5nIG5vdy4KPiAKPiBZZWFoLiBXaGF0IGFib3V0IGBjb25zb2xlX3J4Jz8gCgpUaGF0J3MgcmVh
+c29uYWJsZS4gQW5vdGhlciBvcHRpb24gd291bGQgYmUgdG8gdXNlIHJ4X2RvbWlkLCBhbmQgc3Rv
+cmUKYWN0dWFsIGRvbWFpbiBJRHMgdGhlcmUgKERPTUlEX1hFTiBmb3IgWGVuKS4gVGhhdCdsbCBt
+YWtlIHRoZSBzd2l0Y2hpbmcKbG9naWMgc2xpZ2h0bHkgbGFyZ2VyLCBidXQgcGVyaGFwcyBwcm92
+aWRlIGEgYmV0dGVyIHVuZGVyc3RhbmRhYmxlIGVuZApyZXN1bHQuCgo+PiA+IEBAIC05MzMsOSAr
+OTU2LDYgQEAgdm9pZCBfX2luaXQgY29uc29sZV9lbmRib290KHZvaWQpCj4+ID4gICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAiZGVjcmVhc2UgbG9nIGxldmVsIHRocmVzaG9sZCIsIDApOwo+
+PiA+ICAgICAgcmVnaXN0ZXJfaXJxX2tleWhhbmRsZXIoJ0cnLCAmZG9fdG9nZ2xlX2d1ZXN0LAo+
+PiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgInRvZ2dsZSBob3N0L2d1ZXN0IGxvZyBs
+ZXZlbCBhZGp1c3RtZW50IiwgMCk7Cj4+ID4gLQo+PiA+IC0gICAgLyogU2VyaWFsIGlucHV0IGlz
+IGRpcmVjdGVkIHRvIERPTTAgYnkgZGVmYXVsdC4gKi8KPj4gPiAtICAgIHN3aXRjaF9zZXJpYWxf
+aW5wdXQoKTsKPj4gCj4+IFRoaXMgcmVtb3ZlcyBhbiBpbW8gaGVscGZ1bCBib290IHRpbWUgbWVz
+c2FnZS4gSXMgdGhhdCBpbnRlbnRpb25hbCwKPj4gYW5kIGlmIHNvIHdoeT8KPiAgCj4gWWVzLCBp
+dCB3YXMgaW50ZW50aW9uYWwuIHN3aXRjaF9zZXJpYWxfaW5wdXQgaW5jcmVhc2VzIHhlbl9yeCwg
+SSB0aG91Z2h0Cj4gaXQgZGlkbid0IG1ha2UgdG9vIG11Y2ggc2Vuc2UgdG8gZG8gdGhhdCBhdCBi
+b290LCBhbmQgd291bGQgYmUgY2xlYXJlcgo+IHRvIGp1c3QgaW5pdGlhbGl6ZSB4ZW5fcnggdG8g
+dGhlIHdhbnRlZCB2YWx1ZSBmcm9tIHRoZSBnZXQgZ28gKHRoZSB2YWx1ZQo+IHdvdWxkIGJlIDEg
+Zm9yIGRvbTApLiBBbHNvLCBpbiBwcmV2aW91cyBpbXBsZW1lbnRhdGlvbnMgb2YgdGhpcyBwYXRj
+aCBpdAo+IHdhcyBhY3R1YWxseSByZXF1aXJlZCwgYnV0IG5vdCBhbnltb3JlLgo+IAo+IEluIGZh
+Y3QsIGlmIHlvdSBwcmVmZXIsIEkgY291bGQgYWxzbyBrZWVwIHRoaXMgc3dpdGNoX3NlcmlhbF9p
+bnB1dCgpCj4gY2FsbCBhcy1pcyBhbmQgY2hhbmdlIHRoZSBpbml0aWFsIHZhbHVlIG9mIHhlbl9y
+eCB0byAwLiBUaGF0IHdvdWxkIGFsc28KPiB3b3JrLCBhcyB0aGUgaW5jcmVhc2Ugb2YgeGVuX3J4
+IGhlcmUgd291bGQgZW5kIHVwIHNlbGVjdGluZyBzdGlsbCBkb20wCj4gZm9yIGlucHV0LgoKWWVz
+LCBJJ2QgcHJlZmVyIGlmIHlvdSBsZWZ0IGl0IHVudG91Y2hlZC4gVGhlIGlkZWEgYWZ0ZXIgYWxs
+IGlzIHRoYXQgcHJpb3IKdG8gcmVhY2hpbmcgaGVyZSBpbnB1dCBnb2VzIHRvIFhlbiwgYW5kIG9u
+bHkgZnJvbSBoZXJlIG9uIGl0IGdvZXMgdG8KRG9tMC4KCkphbgoKCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
