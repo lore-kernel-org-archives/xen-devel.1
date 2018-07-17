@@ -1,16 +1,17 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 02/11] x86/vmx: Don't clobber %dr6 while
- debugging state is lazy
-Date: Tue, 17 Jul 2018 10:28:21 +0100
-Message-ID: <7c115a9e-e4ca-a69e-df89-93fcc0c123ce@citrix.com>
-References: <1528120755-17455-1-git-send-email-andrew.cooper3@citrix.com>
- <1528120755-17455-3-git-send-email-andrew.cooper3@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: Update links on
+ https://wiki.xen.org/wiki/Xen_in_Qubes_OS_Security_Architecture
+Date: Tue, 17 Jul 2018 11:30:37 +0200
+Message-ID: <20180717093037.GP1371@mail-itl>
+References: <20180716215429.GM1371@mail-itl>
+ <20180717065140.svrlkdr75lvw2isp@citrix.com>
+ <20180717092519.GO1371@mail-itl>
+ <20180717092743.ou4vwidxxvmhvhdf@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7800789254023997142=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1528120755-17455-3-git-send-email-andrew.cooper3@citrix.com>
-Content-Language: en-GB
+In-Reply-To: <20180717092743.ou4vwidxxvmhvhdf@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,32 +20,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMDYvMTggMTQ6NTksIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4gYy9zIDRmMzY0NTJiNjMg
-aW50cm9kdWNlZCBhIHdyaXRlIHRvICVkcjYgaW4gdGhlICNEQiBpbnRlcmNlcHQgY2FzZSwgYnV0
-IHRoZQo+IGd1ZXN0cyBkZWJ1ZyByZWdpc3RlcnMgbWF5IGJlIGxhenkgYXQgdGhpcyBwb2ludCwg
-YXQgd2hpY2ggcG9pbnQgdGhlIGd1ZXN0cwo+IGxhdGVyIGF0dGVtcHQgdG8gcmVhZCAlZHI2IHdp
-bGwgZGlzY2FyZCB0aGlzIHZhbHVlIGFuZCB1c2UgdGhlIG9sZGVyIHN0YWxlCj4gdmFsdWUuCj4K
-PiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
-Pgo+IC0tLQo+IENDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+Cj4gQ0M6IFdlaSBM
-aXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4gQ0M6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBh
-dUBjaXRyaXguY29tPgo+IENDOiBKdW4gTmFrYWppbWEgPGp1bi5uYWthamltYUBpbnRlbC5jb20+
-Cj4gQ0M6IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgoKUGluZwoKPiAtLS0KPiAg
-eGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMgfCAxICsKPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5z
-ZXJ0aW9uKCspCj4KPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMgYi94
-ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYwo+IGluZGV4IDMzZDM5ZjYuLjhkYmU4MzggMTAwNjQ0
-Cj4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMKPiArKysgYi94ZW4vYXJjaC94ODYv
-aHZtL3ZteC92bXguYwo+IEBAIC0zNjk2LDYgKzM2OTYsNyBAQCB2b2lkIHZteF92bWV4aXRfaGFu
-ZGxlcihzdHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncykKPiAgICAgICAgICAgICAgICovCj4gICAg
-ICAgICAgICAgIF9fdm1yZWFkKEVYSVRfUVVBTElGSUNBVElPTiwgJmV4aXRfcXVhbGlmaWNhdGlv
-bik7Cj4gICAgICAgICAgICAgIEhWTVRSQUNFXzFEKFRSQVBfREVCVUcsIGV4aXRfcXVhbGlmaWNh
-dGlvbik7Cj4gKyAgICAgICAgICAgIF9fcmVzdG9yZV9kZWJ1Z19yZWdpc3RlcnModik7Cj4gICAg
-ICAgICAgICAgIHdyaXRlX2RlYnVncmVnKDYsIGV4aXRfcXVhbGlmaWNhdGlvbiB8IERSX1NUQVRV
-U19SRVNFUlZFRF9PTkUpOwo+ICAgICAgICAgICAgICBpZiAoICF2LT5kb21haW4tPmRlYnVnZ2Vy
-X2F0dGFjaGVkICkKPiAgICAgICAgICAgICAgewoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============7800789254023997142==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="OPsOAWNf+lTlQ18+"
+Content-Disposition: inline
+
+
+--OPsOAWNf+lTlQ18+
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jul 17, 2018 at 10:27:43AM +0100, Wei Liu wrote:
+> On Tue, Jul 17, 2018 at 11:25:19AM +0200, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > On Tue, Jul 17, 2018 at 07:51:40AM +0100, Wei Liu wrote:
+> > > On Mon, Jul 16, 2018 at 11:54:29PM +0200, Marek Marczykowski-G=C3=B3r=
+ecki wrote:
+> > > > Hi,
+> > > >=20
+> > > > Could anyone with wiki write access update links to qubes
+> > > > arch-spec-0.3.pdf? The correct one is:
+> > > > https://www.qubes-os.org/attachment/wiki/QubesArchitecture/arch-spe=
+c-0.3.pdf
+> > > >=20
+> > >=20
+> > > What is your wiki username? I can grant you write access.
+> >=20
+> > Marmarek
+> >=20
+>=20
+> Done. Please try.
+
+It works :)
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--OPsOAWNf+lTlQ18+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAltNtz0ACgkQ24/THMrX
+1yzuoAf8DEtvkY+SlGq83RrFDWV68RePSqWD4GNaFepKAWIkkuVdS46Jz1tk0sOt
+aNEkdE6PsgUWMDFBXLaLabgpF3y03/bKAba44Kwb9uuWCE4EAynzv0TDh3Mpy1D0
+zBPeGja1Z8WStjPR7ngBJIduuXGhOg9C2guxBhig38yFcqEyrMuxlmsoTtPBlu64
+1qLjWEwQpebrld60xIU8cwEDS627xRHlxInWtAhyJMuIapMwYxKIWtWu43Kqdgvy
++uPv6KrRDVCLKx+gJfyo9gUYaU1MtVkspm/lj8CMaspNPXCUUC+Sn3CXB0d+S0/a
+rWhAhir8b19Fwm4/Dk/gobuSJvZHig==
+=iECY
+-----END PGP SIGNATURE-----
+
+--OPsOAWNf+lTlQ18+--
+
+
+--===============7800789254023997142==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7800789254023997142==--
