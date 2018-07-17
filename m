@@ -1,17 +1,21 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: Update links on
- https://wiki.xen.org/wiki/Xen_in_Qubes_OS_Security_Architecture
-Date: Tue, 17 Jul 2018 11:30:37 +0200
-Message-ID: <20180717093037.GP1371@mail-itl>
-References: <20180716215429.GM1371@mail-itl>
- <20180717065140.svrlkdr75lvw2isp@citrix.com>
- <20180717092519.GO1371@mail-itl>
- <20180717092743.ou4vwidxxvmhvhdf@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 1/2] x86/vHPET: replace literal numbers
+Date: Tue, 17 Jul 2018 03:32:28 -0600
+Message-ID: <5B4DB7AC02000078001D4C2E@prv1-mh.provo.novell.com>
+References: <5B4DA67502000078001D4B70@prv1-mh.provo.novell.com>
+ <5B4DAA3A02000078001D4B7E@prv1-mh.provo.novell.com>
+ <aa501a39-980e-04a3-d46e-11fdbd1c9930@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7800789254023997142=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180717092743.ou4vwidxxvmhvhdf@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=enkq=kb=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1ffMLR-0000eq-AK
+ for xen-devel@lists.xenproject.org; Tue, 17 Jul 2018 09:32:33 +0000
+In-Reply-To: <aa501a39-980e-04a3-d46e-11fdbd1c9930@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,78 +24,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel <xen-devel@lists.xen.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7800789254023997142==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="OPsOAWNf+lTlQ18+"
-Content-Disposition: inline
-
-
---OPsOAWNf+lTlQ18+
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jul 17, 2018 at 10:27:43AM +0100, Wei Liu wrote:
-> On Tue, Jul 17, 2018 at 11:25:19AM +0200, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > On Tue, Jul 17, 2018 at 07:51:40AM +0100, Wei Liu wrote:
-> > > On Mon, Jul 16, 2018 at 11:54:29PM +0200, Marek Marczykowski-G=C3=B3r=
-ecki wrote:
-> > > > Hi,
-> > > >=20
-> > > > Could anyone with wiki write access update links to qubes
-> > > > arch-spec-0.3.pdf? The correct one is:
-> > > > https://www.qubes-os.org/attachment/wiki/QubesArchitecture/arch-spe=
-c-0.3.pdf
-> > > >=20
-> > >=20
-> > > What is your wiki username? I can grant you write access.
-> >=20
-> > Marmarek
-> >=20
->=20
-> Done. Please try.
-
-It works :)
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---OPsOAWNf+lTlQ18+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAltNtz0ACgkQ24/THMrX
-1yzuoAf8DEtvkY+SlGq83RrFDWV68RePSqWD4GNaFepKAWIkkuVdS46Jz1tk0sOt
-aNEkdE6PsgUWMDFBXLaLabgpF3y03/bKAba44Kwb9uuWCE4EAynzv0TDh3Mpy1D0
-zBPeGja1Z8WStjPR7ngBJIduuXGhOg9C2guxBhig38yFcqEyrMuxlmsoTtPBlu64
-1qLjWEwQpebrld60xIU8cwEDS627xRHlxInWtAhyJMuIapMwYxKIWtWu43Kqdgvy
-+uPv6KrRDVCLKx+gJfyo9gUYaU1MtVkspm/lj8CMaspNPXCUUC+Sn3CXB0d+S0/a
-rWhAhir8b19Fwm4/Dk/gobuSJvZHig==
-=iECY
------END PGP SIGNATURE-----
-
---OPsOAWNf+lTlQ18+--
-
-
---===============7800789254023997142==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7800789254023997142==--
+Pj4+IE9uIDE3LjA3LjE4IGF0IDExOjAzLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMTcvMDcvMTggMDk6MzUsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBAQCAtNDExLDcg
+KzQxMCwxMyBAQCBzdGF0aWMgaW50IGhwZXRfd3JpdGUoCj4+ICAgICAgY2FzZSBIUEVUX1RuX0NG
+RygyKToKPj4gICAgICAgICAgdG4gPSBIUEVUX1ROKENGRywgYWRkcik7Cj4+ICAKPj4gLSAgICAg
+ICAgaC0+aHBldC50aW1lcnNbdG5dLmNvbmZpZyA9IGhwZXRfZml4dXBfcmVnKG5ld192YWwsIG9s
+ZF92YWwsIDB4M2Y0ZSk7Cj4+ICsgICAgICAgIGgtPmhwZXQudGltZXJzW3RuXS5jb25maWcgPSBo
+cGV0X2ZpeHVwX3JlZyhuZXdfdmFsLCBvbGRfdmFsLAo+PiArICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSFBFVF9UTl9MRVZFTCB8Cj4+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBIUEVUX1ROX0VOQUJM
+RSB8Cj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBIUEVUX1ROX1BFUklPRElDIHwKPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIEhQRVRfVE5fU0VUVkFMIHwKPj4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEhQRVRfVE5fMzJCSVQgfAo+PiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSFBFVF9UTl9S
+T1VURSk7Cj4gCj4gVGhpcyBjYW4gYmUgcmF0aGVyIGJldHRlciByZWZsb3dlZC4gIGUuZy4KPiAK
+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2h2bS9ocGV0LmMgYi94ZW4vYXJjaC94ODYvaHZt
+L2hwZXQuYwo+IGluZGV4IGY3ZWY0ZjcuLjU5ODZkMWQgMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gv
+eDg2L2h2bS9ocGV0LmMKPiArKysgYi94ZW4vYXJjaC94ODYvaHZtL2hwZXQuYwo+IEBAIC00MTEs
+NyArNDExLDEwIEBAIHN0YXRpYyBpbnQgaHBldF93cml0ZSgKPiAgICAgIGNhc2UgSFBFVF9Ubl9D
+RkcoMik6Cj4gICAgICAgICAgdG4gPSBIUEVUX1ROKENGRywgYWRkcik7Cj4gIAo+IC0gICAgICAg
+IGgtPmhwZXQudGltZXJzW3RuXS5jb25maWcgPSBocGV0X2ZpeHVwX3JlZyhuZXdfdmFsLCBvbGRf
+dmFsLCAweDNmNGUpOwo+ICsgICAgICAgIGgtPmhwZXQudGltZXJzW3RuXS5jb25maWcgPSBocGV0
+X2ZpeHVwX3JlZygKPiArICAgICAgICAgICAgbmV3X3ZhbCwgb2xkX3ZhbCwgKEhQRVRfVE5fTEVW
+RUwgfCBIUEVUX1ROX0VOQUJMRSB8Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBI
+UEVUX1ROX1BFUklPRElDIHwgSFBFVF9UTl9TRVRWQUwgfAo+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgSFBFVF9UTl8zMkJJVCB8IEhQRVRfVE5fUk9VVEUpKTsKCldoZXRoZXIgdGhp
+cyBpcyAiYmV0dGVyIiBpcyBhIG1hdHRlciBvZiB0YXN0ZS4gVG8gYmUgaG9uZXN0LCBJIHByZXR0
+eQptdWNoIGRpc2xpa2UgdGhpcyBpbmRlbnRhdGlvbiBzdHlsZSBmb3IgZnVuY3Rpb24gY2FsbHMu
+IEkgY291bGQgbWF5YmUKYmUgdGFsa2VkIGludG8KCiAgICAgICAgaC0+aHBldC50aW1lcnNbdG5d
+LmNvbmZpZyA9CiAgICAgICAgICAgIGhwZXRfZml4dXBfcmVnKG5ld192YWwsIG9sZF92YWwsCiAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIChIUEVUX1ROX0xFVkVMIHwgSFBFVF9UTl9FTkFCTEUg
+fAogICAgICAgICAgICAgICAgICAgICAgICAgICAgSFBFVF9UTl9QRVJJT0RJQyB8IEhQRVRfVE5f
+U0VUVkFMIHwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIEhQRVRfVE5fMzJCSVQgfCBIUEVU
+X1ROX1JPVVRFKSk7CgooYWxiZWl0IGl0J3Mgb25seSBtYXJnaW5hbGx5IGJldHRlciB0aGFuIHdo
+YXQgeW91IHN1Z2dlc3QpLCBidXQgY2xlYXJseQpub3QgeW91ciB2YXJpYW50LgoKPiBPdGhlcndp
+c2UsIFJldmlld2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
+PgoKTGV0IG1lIGtub3cgZm9yIHdoaWNoIG9mIHRoZSB2YXJpYW50KHMpIHRoaXMgc3RhbmRzLgoK
+SmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
