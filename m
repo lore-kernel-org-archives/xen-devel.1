@@ -1,21 +1,20 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v2 5/6] x86: (command line option to) avoid
- use of secondary hyper-threads
-Date: Wed, 18 Jul 2018 15:43:37 +0200
-Message-ID: <20180718134337.y6yoej2f3zwgvhsw@mac>
-References: <5B4EF70702000078001D53C7@prv1-mh.provo.novell.com>
- <5B4EF92E02000078001D53FC@prv1-mh.provo.novell.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v2] tools/firmware: reproducible seabios
+ build
+Date: Wed, 18 Jul 2018 14:44:33 +0100
+Message-ID: <20180718134433.ywtodutmojfhjhgb@citrix.com>
+References: <20180718110238.10480-1-olaf@aepfle.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=lpv/=kc=citrix.com=prvs=730b0b06a=roger.pau@srs-us1.protection.inumbo.net>)
- id 1ffmk7-0000d9-Mt
- for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 13:43:47 +0000
+ <srs0=ab30=kc=citrix.com=prvs=730fbb136=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1ffmkv-0000iN-4f
+ for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 13:44:37 +0000
 Content-Disposition: inline
-In-Reply-To: <5B4EF92E02000078001D53FC@prv1-mh.provo.novell.com>
+In-Reply-To: <20180718110238.10480-1-olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,17 +23,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Dario Faggioli <dfaggioli@suse.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, xen-devel <xen-devel@lists.xenproject.org>, Brian Woods <brian.woods@amd.com>
+To: Olaf Hering <olaf@aepfle.de>
+Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKdWwgMTgsIDIwMTggYXQgMDI6MjQ6MTRBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gU2hhcmVkIHJlc291cmNlcyAoTDEgY2FjaGUgYW5kIFRMQiBpbiBwYXJ0aWN1bGFyKSBw
-cmVzZW50IGEgcmlzayBvZgo+IGluZm9ybWF0aW9uIGxlYWsgdmlhIHNpZGUgY2hhbm5lbHMuIERv
-bid0IHVzZSBoeXBlcnRocmVhZHMgaW4gc3VjaAo+IGNhc2VzLCBidXQgYWxsb3cgaW5kZXBlbmRl
-bnQgY29udHJvbCBvZiB0aGVpciB1c2UgYXQgdGhlIHNhbWUgdGltZS4KPiAKPiBTaWduZWQtb2Zm
-LWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpSZXZpZXdlZC1ieTogUm9nZXIg
-UGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CgpUaGFua3MsIFJvZ2VyLgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gV2VkLCBKdWwgMTgsIDIwMTggYXQgMDE6MDI6MzhQTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
+dGU6Cj4gVGhlIGJ1aWxkc3lzdGVtIG9mIHNlYWJpb3MgYWx3YXlzIGluY2x1ZGVzIHRoZSBjdXJy
+ZW50IHRpbWUgYW5kIHRoZQo+IGhvc3RuYW1lIGludG8gdGhlIHJlc3VsdGluZyBiaW5hcnkuIFRv
+IGF2b2lkIHRoYXQsIGl0IGlzIHJlcXVpcmVkIHRvCj4gaGF2ZSBhIGZpbGUgJy52ZXJzaW9uJyBp
+biB0aGUgdG9wbGV2ZWwgZGlyZWN0b3J5IG9mIHNlYWJpb3MtZGlyLXJlbW90ZS4KPiBBbmQgaXQg
+aXMgcmVxdWlyZWQgdG8gcGFzcyBFWFRSQVZFUlNJT049IHRvIG1ha2UgYmVjYXVzZSBpdHMgdG9w
+bGV2ZWwKPiBNYWtlZmlsZSBkb2VzIG5vdCB0YWtlIEVYVFJBVkVSU0lPTiBmcm9tIGVudmlyb25t
+ZW50Lgo+IAo+IEFkanVzdCB0aGUgY29kZSB0byBjcmVhdGUgYSAnLnZlcnNpb24nIGZpbGUgd2l0
+aCBmaXhlZCBjb250ZW50Lgo+IEFkanVzdCB0aGUgY29kZSB0byBwYXNzIEVYVFJBVkVSU0lPTiBk
+b3duIHRvIG1ha2UuCj4gCj4gU2lnbmVkLW9mZi1ieTogT2xhZiBIZXJpbmcgPG9sYWZAYWVwZmxl
+LmRlPgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
