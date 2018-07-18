@@ -1,20 +1,19 @@
 From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH v4 5/9] osstest: abstract code to create a
- FreeBSD build job
-Date: Wed, 18 Jul 2018 16:13:19 +0100
-Message-ID: <23375.22799.65098.486081@mariner.uk.xensource.com>
+Subject: Re: [PATCH v4 9/9] osstest: add FreeBSD Xen build job
+Date: Wed, 18 Jul 2018 16:14:10 +0100
+Message-ID: <23375.22850.689507.77514@mariner.uk.xensource.com>
 References: <20180717160347.60140-1-roger.pau@citrix.com>
- <20180717160347.60140-6-roger.pau@citrix.com>
+ <20180717160347.60140-10-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=ndva=kc=citrix.com=prvs=7304e4abf=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1ffo8p-0000OG-Nf
- for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 15:13:23 +0000
-In-Reply-To: <20180717160347.60140-6-roger.pau@citrix.com>
+ id 1ffo9f-0000Rq-IO
+ for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 15:14:15 +0000
+In-Reply-To: <20180717160347.60140-10-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,11 +26,9 @@ To: Roger Pau Monne <roger.pau@citrix.com>
 Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Um9nZXIgUGF1IE1vbm5lIHdyaXRlcyAoIltQQVRDSCB2NCA1LzldIG9zc3Rlc3Q6IGFic3RyYWN0
-IGNvZGUgdG8gY3JlYXRlIGEgRnJlZUJTRCBidWlsZCBqb2IiKToKPiBJbnRvIGEgaGVscGVyLiBB
-IGRpZmYgb2YgdGhlIHJ1bnZhcnMgb2YgZmxpZ2h0cyBnZW5lcmF0ZWQgd2l0aCBhbmQKPiB3aXRo
-b3V0IHRoZSBwYXRjaCBzaG93IG5vIGRpZmZlcmVuY2VzLgoKQWNrZWQtYnk6IElhbiBKYWNrc29u
-IDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+Um9nZXIgUGF1IE1vbm5lIHdyaXRlcyAoIltQQVRDSCB2NCA5LzldIG9zc3Rlc3Q6IGFkZCBGcmVl
+QlNEIFhlbiBidWlsZCBqb2IiKToKPiBUbyBib3RoIHRoZSBGcmVlQlNEIGFuZCB0aGUgeGVuLXVu
+c3RhYmxlIGZsaWdodHMuCgpQbGVhc2UgYWRkIHRoaXMgdG8gdGhlIG9zc3Rlc3QgZmxpZ2h0cyB0
+b28hCgpJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
