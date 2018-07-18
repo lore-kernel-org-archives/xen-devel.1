@@ -1,21 +1,17 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] automation: enable building rombios with
- clang
-Date: Wed, 18 Jul 2018 07:47:39 +0100
-Message-ID: <20180718064739.ydu4hy5gz3d6qura@citrix.com>
-References: <20180717083935.25964-1-wei.liu2@citrix.com>
- <20180717215433.dsp6oaikeyrd7dgn@MacBook-Pro.localdomain>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2 20/21] xen: support console_switching
+ between Dom0 and DomUs on ARM
+Date: Wed, 18 Jul 2018 01:12:13 -0600
+Message-ID: <5B4EE84D02000078001D5343@prv1-mh.provo.novell.com>
+References: <alpine.DEB.2.10.1807061523160.13502@sstabellini-ThinkPad-X260>
+ <1530918736-13965-20-git-send-email-sstabellini@kernel.org>
+ <72242a48-711c-0e6d-0885-eeb88cfcfa66@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ab30=kc=citrix.com=prvs=730fbb136=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1ffgFT-0004sM-9Q
- for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 06:47:43 +0000
+In-Reply-To: <72242a48-711c-0e6d-0885-eeb88cfcfa66@arm.com>
 Content-Disposition: inline
-In-Reply-To: <20180717215433.dsp6oaikeyrd7dgn@MacBook-Pro.localdomain>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,35 +20,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Doug Goldstein <cardoe@cardoe.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini <stefanos@xilinx.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, nd@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBKdWwgMTcsIDIwMTggYXQgMDQ6NTQ6MzNQTSAtMDUwMCwgRG91ZyBHb2xkc3RlaW4g
-d3JvdGU6Cj4gT24gVHVlLCBKdWwgMTcsIDIwMTggYXQgMDk6Mzk6MzVBTSArMDEwMCwgV2VpIExp
-dSB3cm90ZToKPiA+IFByZXZpb3VzbHkgaXQgaXMgZGlzYWJsZWQgYmVjYXVzZSB0aGUgZW1iZWRk
-ZWQgaXB4ZSBjYW4ndCBiZSBidWlsdAo+ID4gd2l0aCBjbGFuZy4gTm93IHRoYXQgaXB4ZSBpcyBz
-cGxpdCBvdXQgd2UgY2FuIHVzZSAtLXdpdGgtc3lzdGVtLWlweGUKPiA+IHRvIHdvcmsgYXJvdW5k
-IHRoZSBpc3N1ZS4KPiA+IAo+ID4gU2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0
-cml4LmNvbT4KPiA+IC0tLQo+ID4gRGVwZW5kcyBvbiB0aGUgaXB4ZSBzZXJpZXMganVzdCBjb21t
-aXR0ZWQuCj4gPiAtLS0KPiA+ICBhdXRvbWF0aW9uL3NjcmlwdHMvYnVpbGQgfCA0ICsrLS0KPiA+
-ICAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQo+ID4gCj4g
-PiBkaWZmIC0tZ2l0IGEvYXV0b21hdGlvbi9zY3JpcHRzL2J1aWxkIGIvYXV0b21hdGlvbi9zY3Jp
-cHRzL2J1aWxkCj4gPiBpbmRleCAwNTQyMjZiZDczLi40ZGNhYWJmNGJkIDEwMDc1NQo+ID4gLS0t
-IGEvYXV0b21hdGlvbi9zY3JpcHRzL2J1aWxkCj4gPiArKysgYi9hdXRvbWF0aW9uL3NjcmlwdHMv
-YnVpbGQKPiA+IEBAIC0xNiw4ICsxNiw4IEBAIGNmZ2FyZ3MrPSgiLS1lbmFibGUtZG9jcyIpCj4g
-PiAgaWYgW1sgIiR7Q0N9IiA9PSAiY2xhbmciIF1dOyB0aGVuCj4gPiAgICAgICMgU2VhQklPUyBj
-YW5ub3QgYmUgYnVpbHQgd2l0aCBjbGFuZwo+ID4gICAgICBjZmdhcmdzKz0oIi0td2l0aC1zeXN0
-ZW0tc2VhYmlvcz0vdXNyL3NoYXJlL3NlYWJpb3MvYmlvcy5iaW4iKQo+ID4gLSAgICAjIGlQWEUg
-Y2Fubm90IGJlIGJ1aWx0IHdpdGggY2xhbmcgc28gd2UgY2Fubm90IGJ1aWxkIHJvbWJpb3MKPiA+
-IC0gICAgY2ZnYXJncys9KCItLWRpc2FibGUtcm9tYmlvcyIpCj4gPiArICAgICMgaVBYRSBjYW5u
-b3QgYmUgYnVpbHQgd2l0aCBjbGFuZwo+ID4gKyAgICBjZmdhcmdzKz0oIi0td2l0aC1zeXN0ZW0t
-aXB4ZT0vdXNyL3NoYXJlL2lweGUvaXB4ZS5iaW4iKQo+IAo+IFRoaXMgZmlsZSBkb2Vzbid0IGV4
-aXN0IG9uIHRoZSBVYnVudHUgY29udGFpbmVycyBJJ3ZlIHRyaWVkLiBFdmVuIGFmdGVyCj4gaW5z
-dGFsbGluZyBpcHhlIGFuZCBpcHhlLXFlbXUuIFdoYXQgZGlzdHJvIHByb3ZpZGVkIGlQWEUgZmls
-ZSBjYW4gd2UKPiB1c2U/CgpUaGUgZWZmZWN0IG9mIC0td2l0aC1zeXN0ZW0taXB4ZSBvbmx5IHB1
-dHMgdGhhdCBwYXRoIGludG8gbGlieGwgYW5kCnRoYXQncyBpdC4gIFRoYXQgaXMganVzdCBhIHJh
-bmRvbSBwYXRoIEkgcHV0IGluLgoKV2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDE3LjA3LjE4IGF0IDIyOjI5LCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+
+IE9uIDA3LzA3LzIwMTggMDA6MTIsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPj4gVG9kYXkg
+Q3RybC1BQUEgaXMgdXNlZCB0byBzd2l0Y2ggYmV0d2VlbiBYZW4gYW5kIERvbTAuIEV4dGVuZCB0
+aGUKPj4gbWVjaGFuaXNtIHRvIGFsbG93IGZvciBzd2l0Y2hpbmcgYmV0d2VlbiBYZW4sIERvbTAs
+IGFuZCBhbnkgb2YgdGhlCj4+IGluaXRpYWwgRG9tVSBjcmVhdGVkIGZyb20gWGVuIGFsb25nc2lk
+ZSBEb20wIG91dCBvZiBpbmZvcm1hdGlvbiBwcm92aWRlZAo+PiB2aWEgZGV2aWNlIHRyZWUuCj4g
+SXQgZmVlbHMgYSBiaXQgcGFpbmZ1bCBmb3IgdGhlIHVzZXIgdG8gc3dpdGNoIE4gdGltZXMgdG8g
+Z2V0IGhpcyBkb21haW4gCj4gY29uc29sZS4gV291bGQgaXQgYmUgcG9zc2libGUgdG8gcHJvdmlk
+ZSBhIG5ldyBrZXkgYmluZGluZyB3aGVyZSB5b3UgCj4gdHlwZSB0aGUgZG9tYWluIElEIHlvdSB3
+YW50IHRvIHN3aXRjaCB0bz8KCkRvZXMgdGhhdCBtZWFuIHlvdSdkIHdhbnQgdG8gdXNlIDAtOSBm
+b3IgdGhpcyBwdXJwb3NlPyBJJ2QgYmUKdmVyeSBoZXNpdGFudCB0byBhY2NlcHQgc3VjaCwgYXMg
+d2UncmUgcHJldHR5IHRpZ2h0IHdpdGggYXZhaWxhYmxlCmNoYXJhY3RlcnMgYWxyZWFkeS4gQW5k
+IG9mIGNvdXJzZSAwLTkgd291bGRuJ3Qgc2NhbGUgdG8gRG9tMTAKYW5kIGJleW9uZC4gSWYgeW91
+IGhhdmUgc29tZXRoaW5nIGVsc2UgaW4gbWluZCwgSSB0aGluayBpdCB3b3VsZApoZWxwIGlmIHlv
+dSBzcGVsbGVkIHRoaXMgb3V0LgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
