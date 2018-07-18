@@ -1,20 +1,21 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v2] tools/firmware: reproducible seabios
- build
-Date: Wed, 18 Jul 2018 14:44:33 +0100
-Message-ID: <20180718134433.ywtodutmojfhjhgb@citrix.com>
-References: <20180718110238.10480-1-olaf@aepfle.de>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v2 6/6] cpumask: tidy {,
+ z}alloc_cpumask_var()
+Date: Wed, 18 Jul 2018 15:44:38 +0200
+Message-ID: <20180718134438.ficraey7uvref4zu@mac>
+References: <5B4EF70702000078001D53C7@prv1-mh.provo.novell.com>
+ <5B4EF95902000078001D5400@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ab30=kc=citrix.com=prvs=730fbb136=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1ffmkv-0000iN-4f
- for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 13:44:37 +0000
+ <srs0=lpv/=kc=citrix.com=prvs=730b0b06a=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1ffml8-0000km-T2
+ for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 13:44:50 +0000
 Content-Disposition: inline
-In-Reply-To: <20180718110238.10480-1-olaf@aepfle.de>
+In-Reply-To: <5B4EF95902000078001D5400@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,21 +24,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKdWwgMTgsIDIwMTggYXQgMDE6MDI6MzhQTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
-dGU6Cj4gVGhlIGJ1aWxkc3lzdGVtIG9mIHNlYWJpb3MgYWx3YXlzIGluY2x1ZGVzIHRoZSBjdXJy
-ZW50IHRpbWUgYW5kIHRoZQo+IGhvc3RuYW1lIGludG8gdGhlIHJlc3VsdGluZyBiaW5hcnkuIFRv
-IGF2b2lkIHRoYXQsIGl0IGlzIHJlcXVpcmVkIHRvCj4gaGF2ZSBhIGZpbGUgJy52ZXJzaW9uJyBp
-biB0aGUgdG9wbGV2ZWwgZGlyZWN0b3J5IG9mIHNlYWJpb3MtZGlyLXJlbW90ZS4KPiBBbmQgaXQg
-aXMgcmVxdWlyZWQgdG8gcGFzcyBFWFRSQVZFUlNJT049IHRvIG1ha2UgYmVjYXVzZSBpdHMgdG9w
-bGV2ZWwKPiBNYWtlZmlsZSBkb2VzIG5vdCB0YWtlIEVYVFJBVkVSU0lPTiBmcm9tIGVudmlyb25t
-ZW50Lgo+IAo+IEFkanVzdCB0aGUgY29kZSB0byBjcmVhdGUgYSAnLnZlcnNpb24nIGZpbGUgd2l0
-aCBmaXhlZCBjb250ZW50Lgo+IEFkanVzdCB0aGUgY29kZSB0byBwYXNzIEVYVFJBVkVSU0lPTiBk
-b3duIHRvIG1ha2UuCj4gCj4gU2lnbmVkLW9mZi1ieTogT2xhZiBIZXJpbmcgPG9sYWZAYWVwZmxl
-LmRlPgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gV2VkLCBKdWwgMTgsIDIwMTggYXQgMDI6MjQ6NTdBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gRHJvcCB1bm5lY2Vzc2FyeSBjYXN0cyBhbmQgdXNlIGJvb2wgaW4gZmF2b3Igb2YgYm9v
+bF90Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4K
+PiBSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4K
+PiBSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KClJldmlld2VkLWJ5
+OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
