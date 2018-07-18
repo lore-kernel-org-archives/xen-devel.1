@@ -1,14 +1,11 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 2/2] x86/xstate: Make errors in xstate
- calculations more obvious by crashing the domain
-Date: Wed, 18 Jul 2018 13:30:53 +0100
-Message-ID: <1531917053-695-3-git-send-email-andrew.cooper3@citrix.com>
-References: <1531917053-695-1-git-send-email-andrew.cooper3@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Links on Xen 4.11 release blog post broken
+Date: Wed, 18 Jul 2018 14:35:28 +0200
+Message-ID: <20180718123528.GC24243@mail-itl>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4000892779615681659=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1531917053-695-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,37 +14,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SWYgdmFsaWRfeGNyMCgpIGFjY2VwdHMgYSBuZXdfYnYgd2hpY2ggZXhjZWVkcyB4ZmVhdHVyZV9t
-YXNrLCB0aGVuIHNvbWV0aGluZwppcyBicm9rZW4gd2l0aCB0aGUgQ1BVSUQgcG9saWNpeSBkZXJp
-dmF0aW9uIG9yIGF1ZGl0aW5nIGxvZ2ljLiAgSWYgaGFyZHdhcmUKcmVqZWN0cyBuZXdfYnYsIHRo
-ZW4gc29tZXRoaW5nIGlzIGJyb2tlbiB3aXRoIFhlbidzIHhzdGF0ZSBsb2dpYy4KCkluIGJvdGgg
-Y2FzZXMsIGNyYXNoIHRoZSBkb21haW4gd2l0aCBhbiBvYnZpb3VzIGVycm9yIG1lc3NhZ2UsIHRv
-IGhlbHAKaGlnaGxpZ2h0IHRoZSBpc3N1ZXMuCgpTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVy
-IDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgotLS0KQ0M6IEphbiBCZXVsaWNoIDxKQmV1bGlj
-aEBzdXNlLmNvbT4KLS0tCiB4ZW4vYXJjaC94ODYveHN0YXRlLmMgfCAxOCArKysrKysrKysrKysr
-KysrKy0KIDEgZmlsZSBjaGFuZ2VkLCAxNyBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpk
-aWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L3hzdGF0ZS5jIGIveGVuL2FyY2gveDg2L3hzdGF0ZS5j
-CmluZGV4IDQ0Yjk5M2YuLjA2Yzk0ZjggMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni94c3RhdGUu
-YworKysgYi94ZW4vYXJjaC94ODYveHN0YXRlLmMKQEAgLTcwOCwxMSArNzA4LDI3IEBAIGludCBo
-YW5kbGVfeHNldGJ2KHUzMiBpbmRleCwgdTY0IG5ld19idikKICAgICBpZiAoIGluZGV4ICE9IFhD
-Ul9YRkVBVFVSRV9FTkFCTEVEX01BU0sgKQogICAgICAgICByZXR1cm4gLUVPUE5PVFNVUFA7CiAK
-LSAgICBpZiAoIChuZXdfYnYgJiB+eGZlYXR1cmVfbWFzaykgfHwgIXZhbGlkX3hjcjAoY3Vyci0+
-ZG9tYWluLCBuZXdfYnYpICkKKyAgICBpZiAoICF2YWxpZF94Y3IwKGN1cnItPmRvbWFpbiwgbmV3
-X2J2KSApCiAgICAgICAgIHJldHVybiAtRUlOVkFMOwogCisgICAgaWYgKCBuZXdfYnYgJiB+eGZl
-YXR1cmVfbWFzayApCisgICAgeworICAgICAgICBncHJpbnRrKFhFTkxPR19FUlIsCisgICAgICAg
-ICAgICAgICAgIm5ld19idiAlMDE2IiBQUkl4NjQgIiBleGNlZWRzIGhhcmR3YXJlIG1heCAlMDE2
-IiBQUkl4NjQgIlxuIiwKKyAgICAgICAgICAgICAgICBuZXdfYnYsIHhmZWF0dXJlX21hc2spOwor
-ICAgICAgICBkb21haW5fY3Jhc2goY3Vyci0+ZG9tYWluKTsKKworICAgICAgICByZXR1cm4gLUVJ
-TlZBTDsKKyAgICB9CisKICAgICBpZiAoICFzZXRfeGNyMChuZXdfYnYpICkKKyAgICB7CisgICAg
-ICAgIGdwcmludGsoWEVOTE9HX0VSUiwgIm5ld19idiAlMDE2IiBQUkl4NjQgIiByZWplY3RlZCBi
-eSBoYXJkd2FyZVxuIiwKKyAgICAgICAgICAgICAgICBuZXdfYnYpOworICAgICAgICBkb21haW5f
-Y3Jhc2goY3Vyci0+ZG9tYWluKTsKKwogICAgICAgICByZXR1cm4gLUVGQVVMVDsKKyAgICB9CiAK
-ICAgICBtYXNrID0gbmV3X2J2ICYgfmN1cnItPmFyY2gueGNyMF9hY2N1bTsKICAgICBjdXJyLT5h
-cmNoLnhjcjAgPSBuZXdfYnY7Ci0tIAoyLjEuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============4000892779615681659==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="RnlQjJ0d97Da+TV1"
+Content-Disposition: inline
+
+
+--RnlQjJ0d97Da+TV1
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+Links here:
+https://blog.xenproject.org/2018/07/10/whats-new-in-the-xen-project-hypervi=
+sor-4-11/
+are broken - all points to https://www.google.com/url?q=3D<original link>
+=2E..
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--RnlQjJ0d97Da+TV1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAltPNA8ACgkQ24/THMrX
+1yzwQgf9G7ROYZOCGeH+ZG3RdbxjiTJkRkeU7B7kV3viDOaEdjE0tuJZgLzgEJSk
+3iKLvb7WZ7/BVwmE82Azz5AKqiUMKidd11bC6qp0KlSdIuZiOTd+HChycRCJzGW5
+/c9cmhJ735jB6pA30OMgY5A1Vi9xBIRYMmPXoj6ccEdfPle3yNU76oJzmj3jIiN7
+tOKtzwKjyF47YufEEdRANSkzLWNYcKfg/kb2DpDLrYPX8RQ80/tNlFi4JwPhgLrz
+h8vMPlS1q9VhJPm4PNu8gyBOfGVqACqpUnthR6LXeCy0rsJu8Yxcg/AnpgpEo/WX
+2QPdvE0khL4Ze3U/rWevqB9jQODSqQ==
+=bYzc
+-----END PGP SIGNATURE-----
+
+--RnlQjJ0d97Da+TV1--
+
+
+--===============4000892779615681659==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4000892779615681659==--
