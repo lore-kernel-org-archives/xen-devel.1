@@ -1,22 +1,29 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 1/2] x86: report use of PCID together
- with reporting XPTI status
-Date: Wed, 18 Jul 2018 03:19:19 -0600
-Message-ID: <5B4F061702000078001D54D9@prv1-mh.provo.novell.com>
-References: <5B4EF9C402000078001D5433@prv1-mh.provo.novell.com>
- <5B4EFB3E02000078001D544D@prv1-mh.provo.novell.com>
- <db8ea3d1-7367-408e-5b48-72b1c0ef658b@citrix.com>
+From: Adrian Pop <apop@bitdefender.com>
+Subject: Re: [PATCH v2 2/2] x86/altp2m: Add a subop for
+ obtaining the memaccess of a page
+Date: Wed, 18 Jul 2018 12:24:50 +0300
+Message-ID: <20180718092450.GA7520@hel>
+References: <20180705104445.8048-1-apop@bitdefender.com>
+ <20180705104445.8048-3-apop@bitdefender.com>
+ <5B431E5202000078001D2313@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=rjtn=kc=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fficE-00024y-JG
- for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 09:19:22 +0000
-In-Reply-To: <db8ea3d1-7367-408e-5b48-72b1c0ef658b@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=h/vn=kc=bitdefender.com=apop@srs-us1.protection.inumbo.net>)
+ id 1ffihp-0002ml-3d
+ for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 09:25:09 +0000
+Received: from mx-sr.buh.bitdefender.com (mx-sr.buh.bitdefender.biz
+ [10.17.80.103])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id 85832307FB18
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Jul 2018 13:41:21 +0300 (EEST)
+Received: from smtp01.buh.bitdefender.com (smtp.bitdefender.biz [10.17.80.75])
+ by mx-sr.buh.bitdefender.com (Postfix) with ESMTP id C81917FE69
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Jul 2018 12:25:06 +0300 (EEST)
 Content-Disposition: inline
+In-Reply-To: <5B431E5202000078001D2313@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,26 +32,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, tamas@tklengyel.com, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE4LjA3LjE4IGF0IDEwOjQ2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTgvMDcvMjAxOCAwOTozMywgSmFuIEJldWxpY2ggd3JvdGU6Cj4+IC0tLSBhL3hl
-bi9pbmNsdWRlL2FzbS14ODYvc3BlY19jdHJsLmgKPj4gKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4
-Ni9zcGVjX2N0cmwuaAo+PiBAQCAtMzgsNiArMzgsOCBAQCBleHRlcm4gdWludDhfdCBvcHRfeHB0
-aTsKPj4gICNkZWZpbmUgT1BUX1hQVElfRE9NMCAgMHgwMQo+PiAgI2RlZmluZSBPUFRfWFBUSV9E
-T01VICAweDAyCj4+ICAKPj4gK2Jvb2wgeHB0aV9wY2lkX2VuYWJsZWQodm9pZCk7Cj4gCj4gVGhp
-cyBzdGlsbCBzaG91bGQgYmUgaW5zaWRlIGFuIENPTkZJR19QViB0byBhdm9pZCBzY2VuYXJpb3Mg
-d2hpY2ggd2lsbAo+IGNvbXBpbGUgY29ycmVjdGx5IGJ1dCBmYWlsIHRvIGxpbmsuICBJdCBzaG91
-bGQgbGl2ZSBpbiBwdi9kb21haW4uaCBhdAo+IHdoaWNoIHBvaW50IGV2ZXJ5dGhpbmcgc2hvdWxk
-IGJlIGZpbmUuCgpJdCB3YXMgaW50ZW50aW9uYWwgdGhhdCBJIGRpZG4ndCBtb3ZlIHRoZSBkZWNs
-YXJhdGlvbjogV2hldGhlciB0aGUgYnVpbGQKZmFpbHMgYXQgdGhlIGNvbXBpbGUgb3IgbGluayBz
-dGFnZSBpcyBpcnJlbGV2YW50IGltby4gQWxsIHdlIG5lZWQgaXMgdGhhdCBpdApmYWlsIGF0IGFs
-bC4gSSB3b3VsZCBoYXZlIG1vdmVkIGl0IGlmIGl0cyBjdXJyZW50IHBsYWNlbWVudCB3YXNuJ3Qg
-YWdhaW4KdmVyeSBpbnRlbnRpb25hbCwgbmV4dCB0byB0aGUgb3RoZXIgWFBUSSBwaWVjZXMuCgo+
-IFdpdGggdGhhdCwgUmV2aWV3ZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNp
-dHJpeC5jb20+CgpQbGVhc2UgY2xhcmlmeSB3aGV0aGVyIHlvdSBjYW4gbGl2ZSB3aXRoIHRoZSBh
-Ym92ZS4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gTW9uLCBKdWwgMDksIDIwMTggYXQgMDI6MzU6MzBBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDA1LjA3LjE4IGF0IDEyOjQ0LCA8YXBvcEBiaXRkZWZlbmRlci5jb20+IHdy
+b3RlOgo+ID4gQm90aCBhbHRwMm0gZ2V0L3NldCBtZW1hY2Nlc3MgZnVuY3Rpb25zIHVzZSB0aGUg
+c3RydWN0Cj4gPiB4ZW5faHZtX2FsdHAybV9tZW1fYWNjZXNzIHdoaWNoIGhhcyBub3cgZHJvcHBl
+ZCB0aGUgYHNldCcgcGFydCBhbmQgaGFzCj4gPiBiZWVuIHJlbmFtZWQgZnJvbSB4ZW5faHZtX2Fs
+dHAybV9zZXRfbWVtX2FjY2Vzcy4KPiA+IAo+ID4gU2lnbmVkLW9mZi1ieTogQWRyaWFuIFBvcCA8
+YXBvcEBiaXRkZWZlbmRlci5jb20+Cj4gCj4gTG9va2luZyB0aHJvdWdoIHRoaXMgcGF0Y2ggLSB3
+aGF0J3MgdGhlIHBvaW50IG9mIHBhdGNoIDE/IFRoZXJlJ3Mgbm8KPiBmdXJ0aGVyIHVzZXIgYmVp
+bmcgaW50cm9kdWNlZCBoZXJlLgoKSXQncyBub3QgZW50aXJlbHkgbmVjZXNzYXJ5LiAgSXQganVz
+dCBjbGVhbnMgdXAgX3AybV9nZXRfbWVtX2FjY2VzcygpCnNsaWdodGx5LCB3aGljaCB3b3VsZCBi
+ZSB0aGUgb25seSB1c2VyIG9mIHRoZSBuZXcgZnVuY3Rpb24uICBJIGNvdWxkCmRyb3AgcGF0Y2gg
+MSBhbmQgaWYgaXQncyBkZWVtZWQgZGVzaXJhYmxlIEkgY291bGQgc2VuZCBpdCBzZXBhcmF0ZWx5
+LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
