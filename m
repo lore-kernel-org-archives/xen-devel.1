@@ -1,20 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH v2 2/2] x86/spec-ctrl: split reporting for PV
- and HVM guests
-Date: Wed, 18 Jul 2018 02:33:31 -0600
-Message-ID: <5B4EFB5B02000078001D5450@prv1-mh.provo.novell.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2 1/2] x86: report use of PCID together
+ with reporting XPTI status
+Date: Wed, 18 Jul 2018 09:46:16 +0100
+Message-ID: <db8ea3d1-7367-408e-5b48-72b1c0ef658b@citrix.com>
 References: <5B4EF9C402000078001D5433@prv1-mh.provo.novell.com>
+ <5B4EFB3E02000078001D544D@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=rjtn=kc=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ffhtu-0006UP-DB
- for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 08:33:34 +0000
-In-Reply-To: <5B4EF9C402000078001D5433@prv1-mh.provo.novell.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=dg1m=kc=citrix.com=prvs=730a7d111=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1ffi6F-0007Yk-Mb
+ for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 08:46:19 +0000
+In-Reply-To: <5B4EFB3E02000078001D544D@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,49 +24,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-UHV0dGluZyB0aGVtIG9uIHNlcGFyYXRlIGxpbmVzIHdhcyBzdWdnZXN0ZWQgYmVmb3JlLCBhbmQg
-aXMgZ29pbmcgdG8KYmVjb21lIG5lY2Vzc2FyeSBldmVudHVhbGx5IGFueXdheSBhcyB0aGluZ3Mg
-Z2V0IGFkZGVkIGhlcmUuIFNwbGl0IHRoZW0Kbm93LCBhbmQgcHV0IHRoZSByZXNwZWN0aXZlIHBp
-ZWNlcyBpbiBDT05GSUdfKiBjb25kaXRpb25hbHMgYXQgdGhlIHNhbWUKdGltZS4KClNpZ25lZC1v
-ZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KLS0tCnYyOiBOZXcuCgotLS0g
-YS94ZW4vYXJjaC94ODYvc3BlY19jdHJsLmMKKysrIGIveGVuL2FyY2gveDg2L3NwZWNfY3RybC5j
-CkBAIC0yNDIsMTMgKzI0Miw4IEBAIHN0YXRpYyB2b2lkIF9faW5pdCBwcmludF9kZXRhaWxzKGVu
-dW0gaW4KICAgICAgKiBBbHRlcm5hdGl2ZXMgYmxvY2tzIGZvciBwcm90ZWN0aW5nIGFnYWluc3Qg
-YW5kL29yIHZpcnR1YWxpc2luZwogICAgICAqIG1pdGlnYXRpb24gc3VwcG9ydCBmb3IgZ3Vlc3Rz
-LgogICAgICAqLwotICAgIHByaW50aygiICBTdXBwb3J0IGZvciBWTXM6IFBWOiVzJXMlcyVzLCBI
-Vk06JXMlcyVzJXNcbiIsCi0gICAgICAgICAgIChib290X2NwdV9oYXMoWDg2X0ZFQVRVUkVfU0Nf
-TVNSX1BWKSB8fAotICAgICAgICAgICAgYm9vdF9jcHVfaGFzKFg4Nl9GRUFUVVJFX1NDX1JTQl9Q
-VikgfHwKLSAgICAgICAgICAgIG9wdF9lYWdlcl9mcHUpICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgPyAiIiAgICAgICAgICAgICAgIDogIiBOb25lIiwKLSAgICAgICAgICAgYm9vdF9jcHVfaGFz
-KFg4Nl9GRUFUVVJFX1NDX01TUl9QVikgICAgICAgPyAiIE1TUl9TUEVDX0NUUkwiIDogIiIsCi0g
-ICAgICAgICAgIGJvb3RfY3B1X2hhcyhYODZfRkVBVFVSRV9TQ19SU0JfUFYpICAgICAgID8gIiBS
-U0IiICAgICAgICAgICA6ICIiLAotICAgICAgICAgICBvcHRfZWFnZXJfZnB1ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICA/ICIgRUFHRVJfRlBVIiAgICAgOiAiIiwKKyNpZmRlZiBDT05GSUdf
-SFZNCisgICAgcHJpbnRrKCIgIFN1cHBvcnQgZm9yIEhWTSBWTXM6JXMlcyVzJXNcbiIsCiAgICAg
-ICAgICAgIChib290X2NwdV9oYXMoWDg2X0ZFQVRVUkVfU0NfTVNSX0hWTSkgfHwKICAgICAgICAg
-ICAgIGJvb3RfY3B1X2hhcyhYODZfRkVBVFVSRV9TQ19SU0JfSFZNKSB8fAogICAgICAgICAgICAg
-b3B0X2VhZ2VyX2ZwdSkgICAgICAgICAgICAgICAgICAgICAgICAgICA/ICIiICAgICAgICAgICAg
-ICAgOiAiIE5vbmUiLApAQCAtMjU2LDcgKzI1MSwxNiBAQCBzdGF0aWMgdm9pZCBfX2luaXQgcHJp
-bnRfZGV0YWlscyhlbnVtIGluCiAgICAgICAgICAgIGJvb3RfY3B1X2hhcyhYODZfRkVBVFVSRV9T
-Q19SU0JfSFZNKSAgICAgID8gIiBSU0IiICAgICAgICAgICA6ICIiLAogICAgICAgICAgICBvcHRf
-ZWFnZXJfZnB1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICA/ICIgRUFHRVJfRlBVIiAgICAg
-OiAiIik7CiAKKyNlbmRpZgogI2lmZGVmIENPTkZJR19QVgorICAgIHByaW50aygiICBTdXBwb3J0
-IGZvciBQViBWTXM6JXMlcyVzJXNcbiIsCisgICAgICAgICAgIChib290X2NwdV9oYXMoWDg2X0ZF
-QVRVUkVfU0NfTVNSX1BWKSB8fAorICAgICAgICAgICAgYm9vdF9jcHVfaGFzKFg4Nl9GRUFUVVJF
-X1NDX1JTQl9QVikgfHwKKyAgICAgICAgICAgIG9wdF9lYWdlcl9mcHUpICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgPyAiIiAgICAgICAgICAgICAgIDogIiBOb25lIiwKKyAgICAgICAgICAgYm9v
-dF9jcHVfaGFzKFg4Nl9GRUFUVVJFX1NDX01TUl9QVikgICAgICAgPyAiIE1TUl9TUEVDX0NUUkwi
-IDogIiIsCisgICAgICAgICAgIGJvb3RfY3B1X2hhcyhYODZfRkVBVFVSRV9TQ19SU0JfUFYpICAg
-ICAgID8gIiBSU0IiICAgICAgICAgICA6ICIiLAorICAgICAgICAgICBvcHRfZWFnZXJfZnB1ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICA/ICIgRUFHRVJfRlBVIiAgICAgOiAiIik7CisKICAg
-ICBwcmludGsoIiAgWFBUSSAoNjQtYml0IFBWIG9ubHkpOiBEb20wICVzLCBEb21VICVzICh3aXRo
-JXMgUENJRClcbiIsCiAgICAgICAgICAgIG9wdF94cHRpICYgT1BUX1hQVElfRE9NMCA/ICJlbmFi
-bGVkIiA6ICJkaXNhYmxlZCIsCiAgICAgICAgICAgIG9wdF94cHRpICYgT1BUX1hQVElfRE9NVSA/
-ICJlbmFibGVkIiA6ICJkaXNhYmxlZCIsCgoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+T24gMTgvMDcvMjAxOCAwOTozMywgSmFuIEJldWxpY2ggd3JvdGU6Cj4gLS0tIGEveGVuL2luY2x1
+ZGUvYXNtLXg4Ni9zcGVjX2N0cmwuaAo+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvc3BlY19j
+dHJsLmgKPiBAQCAtMzgsNiArMzgsOCBAQCBleHRlcm4gdWludDhfdCBvcHRfeHB0aTsKPiAgI2Rl
+ZmluZSBPUFRfWFBUSV9ET00wICAweDAxCj4gICNkZWZpbmUgT1BUX1hQVElfRE9NVSAgMHgwMgo+
+ICAKPiArYm9vbCB4cHRpX3BjaWRfZW5hYmxlZCh2b2lkKTsKClRoaXMgc3RpbGwgc2hvdWxkIGJl
+IGluc2lkZSBhbiBDT05GSUdfUFYgdG8gYXZvaWQgc2NlbmFyaW9zIHdoaWNoIHdpbGwKY29tcGls
+ZSBjb3JyZWN0bHkgYnV0IGZhaWwgdG8gbGluay7CoCBJdCBzaG91bGQgbGl2ZSBpbiBwdi9kb21h
+aW4uaCBhdAp3aGljaCBwb2ludCBldmVyeXRoaW5nIHNob3VsZCBiZSBmaW5lLgoKV2l0aCB0aGF0
+LCBSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4K
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
