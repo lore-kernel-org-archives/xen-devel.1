@@ -1,22 +1,21 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2 2/6] x86: distinguish CPU offlining from
- CPU removal
-Date: Wed, 18 Jul 2018 15:35:08 +0100
-Message-ID: <5cbce79d-9de3-c9a2-08fe-8806e397e864@citrix.com>
-References: <5B4EF70702000078001D53C7@prv1-mh.provo.novell.com>
- <5B4EF81102000078001D53D4@prv1-mh.provo.novell.com>
- <20180718113754.q2cgcev2ctazw67a@mac>
- <5B4F4F2002000078001D57E2@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v3 2/2] x86/efi: split compiler vs linker
+ support
+Date: Wed, 18 Jul 2018 08:41:30 -0600
+Message-ID: <5B4F519A02000078001D5815@prv1-mh.provo.novell.com>
+References: <20180718102733.15253-1-roger.pau@citrix.com>
+ <20180718102733.15253-3-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6510611574803853392=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=dg1m=kc=citrix.com=prvs=730a7d111=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ffnXr-0005D8-Qi
- for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 14:35:11 +0000
-In-Reply-To: <5B4F4F2002000078001D57E2@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=rjtn=kc=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1ffne3-00061L-Li
+ for xen-devel@lists.xenproject.org; Wed, 18 Jul 2018 14:41:35 +0000
+In-Reply-To: <20180718102733.15253-3-roger.pau@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,96 +24,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Daniel Kiper <daniel.kiper@oracle.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============6510611574803853392==
-Content-Type: multipart/alternative;
-	boundary="------------7BB3149A31BA071B64A75D3F"
-Content-Language: en-GB
-
---------------7BB3149A31BA071B64A75D3F
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-On 18/07/18 15:30, Jan Beulich wrote:
->>> --- a/xen/include/xen/xmalloc.h
->>> +++ b/xen/include/xen/xmalloc.h
->>> @@ -42,6 +42,12 @@
->>>  /* Free any of the above. */
->>>  extern void xfree(void *);
->>>  
->>> +/* Free an allocation, and zero the pointer to it. */
->>> +#define XFREE(p) do { \
->>> +    xfree(p);         \
->>> +    (p) = NULL;       \
->>> +} while ( false )
->> Do you need the do { ... } while construct here? Isn't it enough to
->> use ({ ... })?
-> I try to avoid gcc extensions when the same can be achieved without.
-> Furthermore I'd prefer if the construct was not usable as rvalue.
-
-Yes - the do { } while ( 0 ) style here is actually more useful than ({
-}) to prevent caller (mis)use.
-
-~Andrew
-
---------------7BB3149A31BA071B64A75D3F
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 18/07/18 15:30, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:5B4F4F2002000078001D57E2@prv1-mh.provo.novell.com">
-      <blockquote type="cite" style="color: #000000;">
-        <blockquote type="cite" style="color: #000000;">
-          <pre wrap="">--- a/xen/include/xen/xmalloc.h
-+++ b/xen/include/xen/xmalloc.h
-@@ -42,6 +42,12 @@
- /* Free any of the above. */
- extern void xfree(void *);
- 
-+/* Free an allocation, and zero the pointer to it. */
-+#define XFREE(p) do { \
-+    xfree(p);         \
-+    (p) = NULL;       \
-+} while ( false )
-</pre>
-        </blockquote>
-        <pre wrap="">Do you need the do { ... } while construct here? Isn't it enough to
-use ({ ... })?
-</pre>
-      </blockquote>
-      <pre wrap="">I try to avoid gcc extensions when the same can be achieved without.
-Furthermore I'd prefer if the construct was not usable as rvalue.
-</pre>
-    </blockquote>
-    <br>
-    Yes - the do { } while ( 0 ) style here is actually more useful than
-    ({ }) to prevent caller (mis)use.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------7BB3149A31BA071B64A75D3F--
-
-
---===============6510611574803853392==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6510611574803853392==--
+Pj4+IE9uIDE4LjA3LjE4IGF0IDEyOjI3LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
+IFNvIHRoYXQgYW4gRUxGIGJpbmFyeSB3aXRoIHN1cHBvcnQgZm9yIEVGSSBzZXJ2aWNlcyB3aWxs
+IGJlIGJ1aWx0IHdoZW4KPiB0aGUgY29tcGlsZXIgc3VwcG9ydHMgdGhlIE1TIEFCSSwgcmVnYXJk
+bGVzcyBvZiB0aGUgbGlua2VyIHN1cHBvcnQgZm9yCj4gUEUuCj4gCj4gU2lnbmVkLW9mZi1ieTog
+Um9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4gUmV2aWV3ZWQtYnk6IEph
+biBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPiAtLS0KPiBDYzogSmFuIEJldWxpY2ggPGpi
+ZXVsaWNoQHN1c2UuY29tPgo+IENjOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRy
+aXguY29tPgo+IENjOiBEYW5pZWwgS2lwZXIgPGRhbmllbC5raXBlckBvcmFjbGUuY29tPgo+IC0t
+LQo+IENoYW5nZXMgc2luY2UgdjE6Cj4gIC0gTmV3IGluIHRoaXMgdmVyc2lvbi4KPiAtLS0KPiAg
+eGVuL2FyY2gveDg2L01ha2VmaWxlICAgICB8IDcgKysrKy0tLQo+ICB4ZW4vYXJjaC94ODYvZWZp
+L01ha2VmaWxlIHwgNiArKystLS0KPiAgeGVuL2FyY2gveDg2L3hlbi5sZHMuUyAgICB8IDIgKy0K
+PiAgMyBmaWxlcyBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDcgZGVsZXRpb25zKC0pCj4gCj4g
+ZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9NYWtlZmlsZSBiL3hlbi9hcmNoL3g4Ni9NYWtlZmls
+ZQo+IGluZGV4IDE3MjY4NWZiNDEuLjEzMDFmNTJjM2IgMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gv
+eDg2L01ha2VmaWxlCj4gKysrIGIveGVuL2FyY2gveDg2L01ha2VmaWxlCj4gQEAgLTE2Myw5ICsx
+NjMsMTAgQEAgRUZJX0xERkxBR1MgKz0gLS1taW5vci1pbWFnZS12ZXJzaW9uPSQoWEVOX1NVQlZF
+UlNJT04pCj4gIEVGSV9MREZMQUdTICs9IC0tbWFqb3Itb3MtdmVyc2lvbj0yIC0tbWlub3Itb3Mt
+dmVyc2lvbj0wCj4gIEVGSV9MREZMQUdTICs9IC0tbWFqb3Itc3Vic3lzdGVtLXZlcnNpb249MiAt
+LW1pbm9yLXN1YnN5c3RlbS12ZXJzaW9uPTAKPiAgCj4gLSMgQ2hlY2sgaWYgdGhlIGJ1aWxkIHN5
+c3RlbSBzdXBwb3J0cyBQRS4KPiAtWEVOX0JVSUxEX1BFIDo9ICQoc2hlbGwgJChDQykgJChmaWx0
+ZXItb3V0ICQoQ0ZMQUdTLXkpIC4lLmQsJChDRkxBR1MpKSAtYyBlZmkvY2hlY2suYyAtbyBlZmkv
+Y2hlY2subyAyPi9kZXYvbnVsbCAmJiBlY2hvIHkpCj4gLWV4cG9ydCBYRU5fQlVJTERfUEUgOj0g
+JChpZiAkKFhFTl9CVUlMRF9QRSksJChzaGVsbCAkKExEKSAtbWkzODZwZXAgLS1zdWJzeXN0ZW09
+MTAgLW8gZWZpL2NoZWNrLmVmaSBlZmkvY2hlY2subyAyPi9kZXYvbnVsbCAmJiBlY2hvIHkpKQo+
+ICsjIENoZWNrIGlmIHRoZSBjb21waWxlciBzdXBwb3J0cyB0aGUgTVMgQUJJLgo+ICtleHBvcnQg
+WEVOX0JVSUxEX0VGSSA6PSAkKHNoZWxsICQoQ0MpICQoZmlsdGVyLW91dCAkKENGTEFHUy15KSAu
+JS5kLCQoQ0ZMQUdTKSkgLWMgZWZpL2NoZWNrLmMgLW8gZWZpL2NoZWNrLm8gMj4vZGV2L251bGwg
+JiYgZWNobyB5KQo+ICsjIENoZWNrIGlmIHRoZSBsaW5rZXIgc3VwcG9ydHMgUEUuCj4gK1hFTl9C
+VUlMRF9QRSA6PSAkKGlmICQoWEVOX0JVSUxEX0VGSSksJChzaGVsbCAkKExEKSAtbWkzODZwZXAg
+LS1zdWJzeXN0ZW09MTAgLW8gZWZpL2NoZWNrLmVmaSBlZmkvY2hlY2subyAyPi9kZXYvbnVsbCAm
+JiBlY2hvIHkpKQo+ICBDRkxBR1MtJChYRU5fQlVJTERfUEUpICs9IC1EWEVOX0JVSUxEX1BFCgpS
+ZWJhc2luZyAob3ZlciBwYXRjaCAxKSBtaXN0YWtlPyBJIHRoaW5rIHRoaXMgd2FudHMgdG8gYmUK
+CkNGTEFHUy0kKFhFTl9CVUlMRF9FRkkpICs9IC1EWEVOX0JVSUxEX0VGSQoKZm9yIC4uLgoKPiAt
+LS0gYS94ZW4vYXJjaC94ODYveGVuLmxkcy5TCj4gKysrIGIveGVuL2FyY2gveDg2L3hlbi5sZHMu
+Uwo+IEBAIC0zMDQsNyArMzA0LDcgQEAgU0VDVElPTlMKPiAgICB9IDp0ZXh0Cj4gICNlbmRpZgo+
+ICAKPiAtI2lmbmRlZiBYRU5fQlVJTERfUEUKPiArI2lmbmRlZiBYRU5fQlVJTERfRUZJCj4gICAg
+ZWZpID0gLjsKPiAgI2VuZGlmCgouLi4gdGhpcyB0byB3b3JrLgoKSmFuCgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
