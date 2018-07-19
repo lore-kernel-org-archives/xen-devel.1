@@ -1,17 +1,20 @@
-From: Waiman Long <longman@redhat.com>
-Subject: [PATCH v2] xen/spinlock: Don't use pvqspinlock if only
- 1 vCPU
-Date: Thu, 19 Jul 2018 17:39:57 -0400
-Message-ID: <1532036397-19449-1-git-send-email-longman__8803.07334377921$1532036339$gmane$org@redhat.com>
+From: Davidlohr Bueso <dave@stgolabs.net>
+Subject: Re: [PATCH v2] xen/spinlock: Don't use pvqspinlock if
+ only 1 vCPU
+Date: Thu, 19 Jul 2018 14:54:56 -0700
+Message-ID: <20180719215456.5ho3udhfoqlkh75a__14223.7049098641$1532037244$gmane$org@linux-r8p5>
+References: <1532036397-19449-1-git-send-email-longman@redhat.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=fsdu=kd=redhat.com=longman@srs-us1.protection.inumbo.net>)
- id 1fgGed-0000Aq-V4
- for xen-devel@lists.xenproject.org; Thu, 19 Jul 2018 21:40:07 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=nihg=kd=stgolabs.net=dave@srs-us1.protection.inumbo.net>)
+ id 1fgGtB-00019i-0K
+ for xen-devel@lists.xenproject.org; Thu, 19 Jul 2018 21:55:09 +0000
+Content-Disposition: inline
+In-Reply-To: <1532036397-19449-1-git-send-email-longman@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,28 +23,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>
-Cc: Waiman Long <longman@redhat.com>, xen-devel@lists.xenproject.org, x86@kernel.org, linux-kernel@vger.kernel.org
+To: Waiman Long <longman@redhat.com>
+Cc: Juergen Gross <jgross@suse.com>, x86@kernel.org, linux-kernel@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Thomas Gleixner <tglx@linutronix.de>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gYSBWTSB3aXRoIG9ubHkgMSB2Q1BVLCB0aGUgbG9ja2luZyBmYXN0IHBhdGhzIHdpbGwgYWx3
-YXlzIGJlCnN1Y2Nlc3NmdWwuIEluIHRoaXMgY2FzZSwgdGhlcmUgaXMgbm8gbmVlZCB0byB1c2Ug
-dGhlIHRoZSBQViBxc3BpbmxvY2sKY29kZSB3aGljaCBoYXMgaGlnaGVyIG92ZXJoZWFkIG9uIHRo
-ZSB1bmxvY2sgc2lkZSB0aGFuIHRoZSBuYXRpdmUKcXNwaW5sb2NrIGNvZGUuCgpUaGUgeGVuX3B2
-c3BpbiB2ZXJpYWJsZSBpcyBhbHNvIHR1cm5lZCBvZmYgaW4gdGhpcyAxIHZDUFUgY2FzZSB0bwpl
-bGltaW5hdGUgdW5uZWVkZWQgcHZxc3BpbmxvY2sgaW5pdGlhbGl6YXRpb24gaW4geGVuX2luaXRf
-bG9ja19jcHUoKQp3aGljaCBpcyBydW4gYWZ0ZXIgeGVuX2luaXRfc3BpbmxvY2tzKCkuCgpTaWdu
-ZWQtb2ZmLWJ5OiBXYWltYW4gTG9uZyA8bG9uZ21hbkByZWRoYXQuY29tPgotLS0KIGFyY2gveDg2
-L3hlbi9zcGlubG9jay5jIHwgNCArKysrCiAxIGZpbGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCsp
-CgpkaWZmIC0tZ2l0IGEvYXJjaC94ODYveGVuL3NwaW5sb2NrLmMgYi9hcmNoL3g4Ni94ZW4vc3Bp
-bmxvY2suYwppbmRleCBjZDk3YTYyLi45NzNmMTBlIDEwMDY0NAotLS0gYS9hcmNoL3g4Ni94ZW4v
-c3BpbmxvY2suYworKysgYi9hcmNoL3g4Ni94ZW4vc3BpbmxvY2suYwpAQCAtMTMwLDYgKzEzMCwx
-MCBAQCB2b2lkIHhlbl91bmluaXRfbG9ja19jcHUoaW50IGNwdSkKIHZvaWQgX19pbml0IHhlbl9p
-bml0X3NwaW5sb2Nrcyh2b2lkKQogewogCisJLyogIERvbid0IG5lZWQgdG8gdXNlIHB2cXNwaW5s
-b2NrIGNvZGUgaWYgdGhlcmUgaXMgb25seSAxIHZDUFUuICovCisJaWYgKG51bV9wb3NzaWJsZV9j
-cHVzKCkgPT0gMSkKKwkJeGVuX3B2c3BpbiA9IGZhbHNlOworCiAJaWYgKCF4ZW5fcHZzcGluKSB7
-CiAJCXByaW50ayhLRVJOX0RFQlVHICJ4ZW46IFBWIHNwaW5sb2NrcyBkaXNhYmxlZFxuIik7CiAJ
-CXJldHVybjsKLS0gCjEuOC4zLjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+T24gVGh1LCAxOSBKdWwgMjAxOCwgV2FpbWFuIExvbmcgd3JvdGU6Cgo+T24gYSBWTSB3aXRoIG9u
+bHkgMSB2Q1BVLCB0aGUgbG9ja2luZyBmYXN0IHBhdGhzIHdpbGwgYWx3YXlzIGJlCj5zdWNjZXNz
+ZnVsLiBJbiB0aGlzIGNhc2UsIHRoZXJlIGlzIG5vIG5lZWQgdG8gdXNlIHRoZSB0aGUgUFYgcXNw
+aW5sb2NrCj5jb2RlIHdoaWNoIGhhcyBoaWdoZXIgb3ZlcmhlYWQgb24gdGhlIHVubG9jayBzaWRl
+IHRoYW4gdGhlIG5hdGl2ZQo+cXNwaW5sb2NrIGNvZGUuCj4KPlRoZSB4ZW5fcHZzcGluIHZlcmlh
+YmxlIGlzIGFsc28gdHVybmVkIG9mZiBpbiB0aGlzIDEgdkNQVSBjYXNlIHRvCj5lbGltaW5hdGUg
+dW5uZWVkZWQgcHZxc3BpbmxvY2sgaW5pdGlhbGl6YXRpb24gaW4geGVuX2luaXRfbG9ja19jcHUo
+KQo+d2hpY2ggaXMgcnVuIGFmdGVyIHhlbl9pbml0X3NwaW5sb2NrcygpLgoKV291bGRuJ3Qga3Zt
+IGFsc28gd2FudCB0aGlzPwoKZGlmZiAtLWdpdCBhL2FyY2gveDg2L2tlcm5lbC9rdm0uYyBiL2Fy
+Y2gveDg2L2tlcm5lbC9rdm0uYwppbmRleCBhMzdiZGEzOGQyMDUuLjk1YWNlYjY5MjAxMCAxMDA2
+NDQKLS0tIGEvYXJjaC94ODYva2VybmVsL2t2bS5jCisrKyBiL2FyY2gveDg2L2tlcm5lbC9rdm0u
+YwpAQCAtNDU3LDcgKzQ1Nyw4IEBAIHN0YXRpYyB2b2lkIF9faW5pdCBzZXZfbWFwX3BlcmNwdV9k
+YXRhKHZvaWQpCiBzdGF0aWMgdm9pZCBfX2luaXQga3ZtX3NtcF9wcmVwYXJlX2NwdXModW5zaWdu
+ZWQgaW50IG1heF9jcHVzKQogewogCW5hdGl2ZV9zbXBfcHJlcGFyZV9jcHVzKG1heF9jcHVzKTsK
+LQlpZiAoa3ZtX3BhcmFfaGFzX2hpbnQoS1ZNX0hJTlRTX1JFQUxUSU1FKSkKKwlpZiAobnVtX3Bv
+c3NpYmxlX2NwdXMoKSA9PSAxIHx8CisJICAgIGt2bV9wYXJhX2hhc19oaW50KEtWTV9ISU5UU19S
+RUFMVElNRSkpCiAJCXN0YXRpY19icmFuY2hfZGlzYWJsZSgmdmlydF9zcGluX2xvY2tfa2V5KTsK
+IH0KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
+bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
