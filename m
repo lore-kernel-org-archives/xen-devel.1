@@ -1,21 +1,13 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v3 04/13] iommu: push use of type-safe BFN
- and MFN into iommu_ops
-Date: Thu, 19 Jul 2018 09:10:07 +0100
-Message-ID: <20180719081007.7px4byb3y56k4omt@citrix.com>
-References: <20180717133816.37958-1-paul.durrant@citrix.com>
- <20180717133816.37958-5-paul.durrant@citrix.com>
+From: Dan Carpenter <dan.carpenter@oracle.com>
+Subject: [PATCH] drm/xen-front: Fix error code in
+ xen_drm_front_gem_get_sg_table()
+Date: Thu, 19 Jul 2018 11:11:33 +0300
+Message-ID: <20180719081133.k7asay4fl2qhhpjf__29611.0489326113$1531987905$gmane$org@mwanda>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xz3x=kd=citrix.com=prvs=731336292=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fg40z-000051-9Q
- for xen-devel@lists.xenproject.org; Thu, 19 Jul 2018 08:10:21 +0000
 Content-Disposition: inline
-In-Reply-To: <20180717133816.37958-5-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,16 +16,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
+To: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Cc: David Airlie <airlied@linux.ie>, kernel-janitors@vger.kernel.org, dri-devel@lists.freedesktop.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBKdWwgMTcsIDIwMTggYXQgMDI6Mzg6MDdQTSArMDEwMCwgUGF1bCBEdXJyYW50IHdy
-b3RlOgo+IFRoaXMgcGF0Y2ggbW9kaWZpZXMgdGhlIG1ldGhvZHMgaW4gc3RydWN0IGlvbW11X29w
-cyB0byB1c2UgdHlwZS1zYWZlIEJGTgo+IGFuZCBNRk4uIFRoaXMgZm9sbG93cyBvbiBmcm9tIHRo
-ZSBwcmlvciBwYXRjaCB0aGF0IG1vZGlmaWVkIHRoZSBmdW5jdGlvbnMKPiBleHBvcnRlZCBpbiB4
-ZW4vaW9tbXUuaC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBQYXVsIER1cnJhbnQgPHBhdWwuZHVycmFu
-dEBjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+VGhlIHhlbl9kcm1fZnJvbnRfZ2VtX2dldF9zZ190YWJsZSgpIGZ1bmN0aW9uIGlzIHN1cHBvc2Vk
+IHRvIHJldHVybgplcnJvciBwb2ludGVyLiAgVGhlIGN1cnJlbnQgY29kZSwgd291bGQgdHJpZ2dl
+ciBhIE5VTEwgZGVyZWZlcmVuY2UgaW4KZHJtX2dlbV9tYXBfZG1hX2J1ZigpLgoKRml4ZXM6IGM1
+NzViN2VlYjg5ZiAoImRybS94ZW4tZnJvbnQ6IEFkZCBzdXBwb3J0IGZvciBYZW4gUFYgZGlzcGxh
+eSBmcm9udGVuZCIpClNpZ25lZC1vZmYtYnk6IERhbiBDYXJwZW50ZXIgPGRhbi5jYXJwZW50ZXJA
+b3JhY2xlLmNvbT4KCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJv
+bnRfZ2VtLmMgYi9kcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfZ2VtLmMKaW5kZXgg
+Yzg1YmZlNzU3MWNiLi40NTA3YmMwM2VkOGYgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS94
+ZW4veGVuX2RybV9mcm9udF9nZW0uYworKysgYi9kcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1f
+ZnJvbnRfZ2VtLmMKQEAgLTE3OSw3ICsxNzksNyBAQCBzdHJ1Y3Qgc2dfdGFibGUgKnhlbl9kcm1f
+ZnJvbnRfZ2VtX2dldF9zZ190YWJsZShzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKmdlbV9vYmopCiAJ
+c3RydWN0IHhlbl9nZW1fb2JqZWN0ICp4ZW5fb2JqID0gdG9feGVuX2dlbV9vYmooZ2VtX29iaik7
+CiAKIAlpZiAoIXhlbl9vYmotPnBhZ2VzKQotCQlyZXR1cm4gTlVMTDsKKwkJcmV0dXJuIEVSUl9Q
+VFIoLUVJTlZBTCk7CiAKIAlyZXR1cm4gZHJtX3ByaW1lX3BhZ2VzX3RvX3NnKHhlbl9vYmotPnBh
+Z2VzLCB4ZW5fb2JqLT5udW1fcGFnZXMpOwogfQoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
