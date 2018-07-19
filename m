@@ -1,21 +1,15 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v3 07/13] iommu: track reserved ranges using
- a rangeset
-Date: Thu, 19 Jul 2018 10:01:11 +0100
-Message-ID: <20180719090111.uoygardgnyl6c5dv@citrix.com>
-References: <20180717133816.37958-1-paul.durrant@citrix.com>
- <20180717133816.37958-8-paul.durrant@citrix.com>
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+Subject: Re: [PATCH] drm/xen-front: Fix error code in
+ xen_drm_front_gem_get_sg_table()
+Date: Thu, 19 Jul 2018 12:06:38 +0300
+Message-ID: <b8154096-3a43-cca1-316e-4d60d69ee9ab__25636.9102317423$1531991130$gmane$org@gmail.com>
+References: <20180719081133.k7asay4fl2qhhpjf@mwanda>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xz3x=kd=citrix.com=prvs=731336292=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fg4oJ-0005Bx-RO
- for xen-devel@lists.xenproject.org; Thu, 19 Jul 2018 09:01:19 +0000
-Content-Disposition: inline
-In-Reply-To: <20180717133816.37958-8-paul.durrant@citrix.com>
+In-Reply-To: <20180719081133.k7asay4fl2qhhpjf@mwanda>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,22 +18,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>
+To: Dan Carpenter <dan.carpenter@oracle.com>
+Cc: David Airlie <airlied@linux.ie>, kernel-janitors@vger.kernel.org, dri-devel@lists.freedesktop.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBKdWwgMTcsIDIwMTggYXQgMDI6Mzg6MTBQTSArMDEwMCwgUGF1bCBEdXJyYW50IHdy
-b3RlOgo+IFJhbmdlcyB0aGF0IHNob3VsZCBiZSBjb25zaWRlcmVkIHJlc2VydmVkIGluIHRoZSBJ
-T01NVSBhcmUgbm90IG5lY2Vzc2FyaWx5Cj4gbGltaXRlZCB0byBSTVJScy4gSWYgaW9tbXVfaW5j
-bHVzaXZlX21hcHBpbmcgaXMgc2V0IHRoZW4gYW55IGZyYW1lIG51bWJlcgo+IGZhbGxpbmcgd2l0
-aGluIGFuIEU4MjAgcmVzZXJ2ZWQgcmVnaW9uIHNob3VsZCBhbHNvIGJlIGNvbnNpZGVyZWQgYXMK
-PiByZXNlcnZlZCBpbiB0aGUgSU9NTVUuCj4gVGhpcyBwYXRjaCBhZGRzIGEgcmFuZ2VzZXQgdG8g
-dGhlIGRvbWFpbl9pb21tdSBzdHJ1Y3R1cmUgdGhhdCBpcyB0aGVuIHVzZWQKPiB0byB0cmFjayBh
-bGwgcmVzZXJ2ZWQgcmFuZ2VzLiBUaGlzIHdpbGwgYmUgbmVlZGVkIGJ5IGEgc3Vic2VxdWVudCBw
-YXRjaAo+IHRvIHRlc3Qgd2hldGhlciBpdCBpcyBzYWZlIHRvIG1vZGlmeSBhIHBhcnRpY3VsYXIg
-SU9NTVUgZW50cnkuCj4gCj4gU2lnbmVkLW9mZi1ieTogUGF1bCBEdXJyYW50IDxwYXVsLmR1cnJh
-bnRAY2l0cml4LmNvbT4KPiBSZXZpZXdlZC1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxh
-cEBjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+SGksIERhbiEKClRoYW5rIHlvdSBmb3IgdGhlIHBhdGNoIGFuZCBzb3JyeSBJIHdhcyBjbHVtc3kg
+c2VuZGluZyB2My4KCkRvIHlvdSB3YW50IG1lIHRvIHNlbmQgdjMgbm93IHdpdGggdGhlIGZpeGVz
+IGZvciBib3RoIFhlbiBhbmQgQ01BPwoKVGhhbmsgeW91LAoKT2xla3NhbmRyCgoKT24gMDcvMTkv
+MjAxOCAxMToxMSBBTSwgRGFuIENhcnBlbnRlciB3cm90ZToKPiBUaGUgeGVuX2RybV9mcm9udF9n
+ZW1fZ2V0X3NnX3RhYmxlKCkgZnVuY3Rpb24gaXMgc3VwcG9zZWQgdG8gcmV0dXJuCj4gZXJyb3Ig
+cG9pbnRlci4gIFRoZSBjdXJyZW50IGNvZGUsIHdvdWxkIHRyaWdnZXIgYSBOVUxMIGRlcmVmZXJl
+bmNlIGluCj4gZHJtX2dlbV9tYXBfZG1hX2J1ZigpLgo+Cj4gRml4ZXM6IGM1NzViN2VlYjg5ZiAo
+ImRybS94ZW4tZnJvbnQ6IEFkZCBzdXBwb3J0IGZvciBYZW4gUFYgZGlzcGxheSBmcm9udGVuZCIp
+Cj4gU2lnbmVkLW9mZi1ieTogRGFuIENhcnBlbnRlciA8ZGFuLmNhcnBlbnRlckBvcmFjbGUuY29t
+Pgo+Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9nZW0u
+YyBiL2RyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9nZW0uYwo+IGluZGV4IGM4NWJm
+ZTc1NzFjYi4uNDUwN2JjMDNlZDhmIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS94ZW4v
+eGVuX2RybV9mcm9udF9nZW0uYwo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9m
+cm9udF9nZW0uYwo+IEBAIC0xNzksNyArMTc5LDcgQEAgc3RydWN0IHNnX3RhYmxlICp4ZW5fZHJt
+X2Zyb250X2dlbV9nZXRfc2dfdGFibGUoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpnZW1fb2JqKQo+
+ICAgCXN0cnVjdCB4ZW5fZ2VtX29iamVjdCAqeGVuX29iaiA9IHRvX3hlbl9nZW1fb2JqKGdlbV9v
+YmopOwo+ICAgCj4gICAJaWYgKCF4ZW5fb2JqLT5wYWdlcykKPiAtCQlyZXR1cm4gTlVMTDsKPiAr
+CQlyZXR1cm4gRVJSX1BUUigtRUlOVkFMKTsKPiAgIAo+ICAgCXJldHVybiBkcm1fcHJpbWVfcGFn
+ZXNfdG9fc2coeGVuX29iai0+cGFnZXMsIHhlbl9vYmotPm51bV9wYWdlcyk7Cj4gICB9CgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
