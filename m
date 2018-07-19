@@ -1,17 +1,14 @@
-From: Waiman Long <longman@redhat.com>
-Subject: [PATCH] xen/spinlock: Don't use pvqspinlock if only 1
- vCPU
-Date: Thu, 19 Jul 2018 09:48:20 -0400
-Message-ID: <1532008100-26922-1-git-send-email-longman__46778.7692127333$1532008041$gmane$org@redhat.com>
+From: Alexandru Isaila <aisaila@bitdefender.com>
+Subject: [PATCH v13 01/11] x86/cpu: Introduce
+ vmce_save_vcpu_ctxt_one() func
+Date: Thu, 19 Jul 2018 17:07:59 +0300
+Message-ID: <1532009289-14416-2-git-send-email-aisaila@bitdefender.com>
+References: <1532009289-14416-1-git-send-email-aisaila@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=fsdu=kd=redhat.com=longman@srs-us1.protection.inumbo.net>)
- id 1fg9IE-0007Tk-TG
- for xen-devel@lists.xenproject.org; Thu, 19 Jul 2018 13:48:30 +0000
+In-Reply-To: <1532009289-14416-1-git-send-email-aisaila@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,25 +17,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>
-Cc: Waiman Long <longman@redhat.com>, xen-devel@lists.xenproject.org, x86@kernel.org, linux-kernel@vger.kernel.org
+To: xen-devel@lists.xen.org
+Cc: wei.liu2@citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, paul.durrant@citrix.com, jbeulich@suse.com, Alexandru Isaila <aisaila@bitdefender.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gYSBWTSB3aXRoIG9ubHkgMSB2Q1BVLCB0aGUgbG9ja2luZyBmYXN0IHBhdGhzIHdpbGwgYWx3
-YXlzIGJlCnN1Y2Nlc3NmdWwuIEluIHRoaXMgY2FzZSwgdGhlcmUgaXMgbm8gbmVlZCB0byB1c2Ug
-dGhlIHRoZSBQViBxc3BpbmxvY2sKY29kZSB3aGljaCBoYXMgaGlnaGVyIG92ZXJoZWFkIG9uIHRo
-ZSB1bmxvY2sgc2lkZSB0aGFuIHRoZSBuYXRpdmUKcXNwaW5sb2NrIGNvZGUuCgpTaWduZWQtb2Zm
-LWJ5OiBXYWltYW4gTG9uZyA8bG9uZ21hbkByZWRoYXQuY29tPgotLS0KIGFyY2gveDg2L3hlbi9z
-cGlubG9jay5jIHwgMyArKy0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDEgZGVs
-ZXRpb24oLSkKCmRpZmYgLS1naXQgYS9hcmNoL3g4Ni94ZW4vc3BpbmxvY2suYyBiL2FyY2gveDg2
-L3hlbi9zcGlubG9jay5jCmluZGV4IGNkOTdhNjIuLjM4ZjQ3YWUgMTAwNjQ0Ci0tLSBhL2FyY2gv
-eDg2L3hlbi9zcGlubG9jay5jCisrKyBiL2FyY2gveDg2L3hlbi9zcGlubG9jay5jCkBAIC0xMzAs
-NyArMTMwLDggQEAgdm9pZCB4ZW5fdW5pbml0X2xvY2tfY3B1KGludCBjcHUpCiB2b2lkIF9faW5p
-dCB4ZW5faW5pdF9zcGlubG9ja3Modm9pZCkKIHsKIAotCWlmICgheGVuX3B2c3BpbikgeworCS8q
-ICBEb24ndCBuZWVkIHRvIHVzZSBwdnFzcGlubG9jayBjb2RlIGlmIHRoZXJlIGlzIG9ubHkgMSB2
-Q1BVLiAqLworCWlmICgheGVuX3B2c3BpbiB8fCBudW1fcG9zc2libGVfY3B1cygpID09IDEpIHsK
-IAkJcHJpbnRrKEtFUk5fREVCVUcgInhlbjogUFYgc3BpbmxvY2tzIGRpc2FibGVkXG4iKTsKIAkJ
-cmV0dXJuOwogCX0KLS0gCjEuOC4zLjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+VGhpcyBpcyB1c2VkIHRvIHNhdmUgZGF0YSBmcm9tIGEgc2luZ2xlIGluc3RhbmNlLgoKU2lnbmVk
+LW9mZi1ieTogQWxleGFuZHJ1IElzYWlsYSA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+CgotLS0K
+Q2hhbmdlcyBzaW5jZSBWMTE6CgktIFJlbW92ZWQgdGhlIG1lbXNldCBhbmQgYWRkZWQgaW5pdCB3
+aXRoIHt9LgotLS0KIHhlbi9hcmNoL3g4Ni9jcHUvbWNoZWNrL3ZtY2UuYyB8IDIxICsrKysrKysr
+KysrKystLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDEzIGluc2VydGlvbnMoKyksIDggZGVsZXRp
+b25zKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2NwdS9tY2hlY2svdm1jZS5jIGIveGVu
+L2FyY2gveDg2L2NwdS9tY2hlY2svdm1jZS5jCmluZGV4IGUwN2NkMmYuLjMxZTU1M2MgMTAwNjQ0
+Ci0tLSBhL3hlbi9hcmNoL3g4Ni9jcHUvbWNoZWNrL3ZtY2UuYworKysgYi94ZW4vYXJjaC94ODYv
+Y3B1L21jaGVjay92bWNlLmMKQEAgLTM0OSw2ICszNDksMTggQEAgaW50IHZtY2Vfd3Jtc3IodWlu
+dDMyX3QgbXNyLCB1aW50NjRfdCB2YWwpCiAgICAgcmV0dXJuIHJldDsKIH0KIAorc3RhdGljIGlu
+dCB2bWNlX3NhdmVfdmNwdV9jdHh0X29uZShzdHJ1Y3QgdmNwdSAqdiwgaHZtX2RvbWFpbl9jb250
+ZXh0X3QgKmgpCit7CisgICAgc3RydWN0IGh2bV92bWNlX3ZjcHUgY3R4dCA9IHsKKyAgICAgICAg
+LmNhcHMgPSB2LT5hcmNoLnZtY2UubWNnX2NhcCwKKyAgICAgICAgLm1jaV9jdGwyX2JhbmswID0g
+di0+YXJjaC52bWNlLmJhbmtbMF0ubWNpX2N0bDIsCisgICAgICAgIC5tY2lfY3RsMl9iYW5rMSA9
+IHYtPmFyY2gudm1jZS5iYW5rWzFdLm1jaV9jdGwyLAorICAgICAgICAubWNnX2V4dF9jdGwgPSB2
+LT5hcmNoLnZtY2UubWNnX2V4dF9jdGwsCisgICAgfTsKKworICAgIHJldHVybiBodm1fc2F2ZV9l
+bnRyeShWTUNFX1ZDUFUsIHYtPnZjcHVfaWQsIGgsICZjdHh0KTsKK30KKwogc3RhdGljIGludCB2
+bWNlX3NhdmVfdmNwdV9jdHh0KHN0cnVjdCBkb21haW4gKmQsIGh2bV9kb21haW5fY29udGV4dF90
+ICpoKQogewogICAgIHN0cnVjdCB2Y3B1ICp2OwpAQCAtMzU2LDE0ICszNjgsNyBAQCBzdGF0aWMg
+aW50IHZtY2Vfc2F2ZV92Y3B1X2N0eHQoc3RydWN0IGRvbWFpbiAqZCwgaHZtX2RvbWFpbl9jb250
+ZXh0X3QgKmgpCiAKICAgICBmb3JfZWFjaF92Y3B1ICggZCwgdiApCiAgICAgewotICAgICAgICBz
+dHJ1Y3QgaHZtX3ZtY2VfdmNwdSBjdHh0ID0gewotICAgICAgICAgICAgLmNhcHMgPSB2LT5hcmNo
+LnZtY2UubWNnX2NhcCwKLSAgICAgICAgICAgIC5tY2lfY3RsMl9iYW5rMCA9IHYtPmFyY2gudm1j
+ZS5iYW5rWzBdLm1jaV9jdGwyLAotICAgICAgICAgICAgLm1jaV9jdGwyX2JhbmsxID0gdi0+YXJj
+aC52bWNlLmJhbmtbMV0ubWNpX2N0bDIsCi0gICAgICAgICAgICAubWNnX2V4dF9jdGwgPSB2LT5h
+cmNoLnZtY2UubWNnX2V4dF9jdGwsCi0gICAgICAgIH07Ci0KLSAgICAgICAgZXJyID0gaHZtX3Nh
+dmVfZW50cnkoVk1DRV9WQ1BVLCB2LT52Y3B1X2lkLCBoLCAmY3R4dCk7CisgICAgICAgIGVyciA9
+IHZtY2Vfc2F2ZV92Y3B1X2N0eHRfb25lKHYsIGgpOwogICAgICAgICBpZiAoIGVyciApCiAgICAg
+ICAgICAgICBicmVhazsKICAgICB9Ci0tIAoyLjcuNAoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
