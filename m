@@ -1,14 +1,16 @@
-From: George Dunlap <george.dunlap@citrix.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
 Subject: Re: [PATCH V5] x86/altp2m: Fix crash with
  INVALID_ALTP2M EPTP index
-Date: Fri, 20 Jul 2018 16:07:11 +0100
-Message-ID: <ab532b31-0eef-1364-f26d-b758a78e4ff6@citrix.com>
+Date: Fri, 20 Jul 2018 19:29:55 +0300
+Message-ID: <91e61736-c6a4-a628-dbb2-a2d50a9ff38e@bitdefender.com>
 References: <1530196528-17865-1-git-send-email-rcojocaru@bitdefender.com>
+ <ab532b31-0eef-1364-f26d-b758a78e4ff6@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------BE44086A4365F6EAFC36E1ED"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1530196528-17865-1-git-send-email-rcojocaru@bitdefender.com>
-Content-Language: en-US
+In-Reply-To: <ab532b31-0eef-1364-f26d-b758a78e4ff6@citrix.com>
+Content-Language: en-GB-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,141 +19,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>, xen-devel@lists.xen.org
-Cc: george.dunlap@eu.citrix.com, andrew.cooper3@citrix.com, kevin.tian@intel.com, jun.nakajima@intel.com, jbeulich@suse.com
+To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xen.org
+Cc: george.dunlap@eu.citrix.com, andrew.cooper3@citrix.com, kevin.tian@intel.com, jbeulich@suse.com, jun.nakajima@intel.com
 List-Id: xen-devel@lists.xenproject.org
 
---------------BE44086A4365F6EAFC36E1ED
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 06/28/2018 03:35 PM, Razvan Cojocaru wrote:
-> A VM exit handler executed immediately after enabling #VE might
-> find a stale __vmsave()d EPTP_INDEX, stored by calling
-> altp2m_vcpu_destroy() when SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS
-> had been enabled by altp2m_vcpu_update_vmfunc_ve().
-> 
-> vmx_vmexit_handler() __vmread()s EPTP_INDEX as soon as
-> SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS is set, so if an
-> application enables altp2m on a domain, succesfully calls
-> xc_altp2m_set_vcpu_enable_notify(), then disables altp2m and
-> exits, a second run of said application will likely read the
-> INVALID_ALTP2M EPTP_INDEX set when disabling altp2m in the first
-> run, and crash the host with the BUG_ON(idx >= MAX_ALTP2M),
-> between xc_altp2m_set_vcpu_enable_notify() and
-> xc_altp2m_set_domain_state(..., false).
-> 
-> The problem is not restricted to an INVALID_ALTP2M EPTP_INDEX
-> (which can only sanely happen on altp2m uninit), but applies
-> to any stale index previously saved - which means that all
-> altp2m_vcpu_update_vmfunc_ve() calls must also call
-> altp2m_vcpu_update_p2m() after setting
-> SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS, in order to make sure
-> that the stored EPTP_INDEX is always valid at
-> vmx_vmexit_handler() time.
-
-I'm sorry, this description still doesn't make hardly any sense to me,
-nor the solution, even after reading all the previous threads on the
-issue.  The description doesn't, for instance, mention vcpu_pause() at
-all, in spite of the fact that it seems (from the previous discussion)
-that this is a critical part of why this solution works; nor is there
-any comment in the code about the required discipline regarding
-SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS,  making it fairly likely that
-someone will re-introduce a bug like this in the future.
-
-My normal template for something like this is
-1. Explain what the current situation is
-2. Explain why that's a problem
-3. Describe what you're changing and how it fixes it.
-
-I can't help but think the right thing to do here is in vmx.c somewhere
--- it is, after all, code in vmx.c that:
-1. Sets and clears SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS
-2. Writes EPTP_INDEX
-3. Assumes that SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS => EPTP_INDEX is
-valid.
-
-What about something like the attached, instead (compile-tested only)?
-
- -George
-
---------------BE44086A4365F6EAFC36E1ED
-Content-Type: text/x-patch;
-	name="0001-x86-altp2m-Make-sure-EPTP_INDEX-is-up-to-date-when-e.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
-	filename*0="0001-x86-altp2m-Make-sure-EPTP_INDEX-is-up-to-date-when-e.pa";
-	filename*1="tch"
-
-=46rom 03c71cda215fd9183a0fe10cb42394d63e3879c5 Mon Sep 17 00:00:00 2001
-From: George Dunlap <george.dunlap@citrix.com>
-Date: Fri, 20 Jul 2018 16:04:01 +0100
-Subject: [PATCH] x86/altp2m: Make sure EPTP_INDEX is up-to-date when enab=
-ling
- #VE
-
-vmx_vmexit_handler() assumes that if
-SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS is set, that the value in
-EPTP_INDEX is valid.  Unfortunately, the function which sets this bit
-(vmx_vcpu_update_vmfunc_ve) doesn't actually set EPTP_INDEX; it will
-only be set the next time vmx_vcpu_update_eptp() is called.
-
-This means that if a vcpu makes a vmexit between these two points, the
-EPTP_INDEX it reads will be invalid.  The first time this race happens
-for a domain, EPTP_INDEX will most likely be zero, which is the index
-for the "host" p2m -- and thus is often correct.  But the second time
-this race happens, the value will typically be INVALID_ALTP2M, which
-will hit the following BUG:
-
-    BUG_ON(idx >=3D MAX_ALTP2M);
-
-Worse, if for some reason the current altp2m was *not* `0` during this
-window (say, because a toolstack changed the VM to a different view),
-then the accounting of active vcpus for an altp2m will be thrown off.
-
-Fix this by always updating EPTP_INDEX to the current altp2m index
-when enabling #VE.
-
-Reported-by: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Signed-off-by: George Dunlap <george.dunlap@citrix.com>
----
- xen/arch/x86/hvm/vmx/vmx.c | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index bcf95f9a5f..bc25daed2c 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2191,7 +2191,14 @@ static void vmx_vcpu_update_vmfunc_ve(struct vcpu =
-*v)
-             mfn =3D get_gfn_query_unlocked(d, gfn_x(vcpu_altp2m(v).veinf=
-o_gfn), &t);
-=20
-             if ( !mfn_eq(mfn, INVALID_MFN) )
-+            {
-                 __vmwrite(VIRT_EXCEPTION_INFO, mfn_x(mfn) << PAGE_SHIFT)=
-;
-+                /*=20
-+                 * Make sure we have an up-to-date EPTP_INDEX when
-+                 * setting SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS
-+                 */
-+                __vmwrite(EPTP_INDEX, vcpu_altp2m(v).p2midx);
-+            }
-             else
-                 v->arch.hvm_vmx.secondary_exec_control &=3D
-                     ~SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS;
---=20
-2.18.0
-
-
---------------BE44086A4365F6EAFC36E1ED
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------BE44086A4365F6EAFC36E1ED--
+T24gMDcvMjAvMjAxOCAwNjowNyBQTSwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiBPbiAwNi8yOC8y
+MDE4IDAzOjM1IFBNLCBSYXp2YW4gQ29qb2NhcnUgd3JvdGU6Cj4+IEEgVk0gZXhpdCBoYW5kbGVy
+IGV4ZWN1dGVkIGltbWVkaWF0ZWx5IGFmdGVyIGVuYWJsaW5nICNWRSBtaWdodAo+PiBmaW5kIGEg
+c3RhbGUgX192bXNhdmUoKWQgRVBUUF9JTkRFWCwgc3RvcmVkIGJ5IGNhbGxpbmcKPj4gYWx0cDJt
+X3ZjcHVfZGVzdHJveSgpIHdoZW4gU0VDT05EQVJZX0VYRUNfRU5BQkxFX1ZJUlRfRVhDRVBUSU9O
+Uwo+PiBoYWQgYmVlbiBlbmFibGVkIGJ5IGFsdHAybV92Y3B1X3VwZGF0ZV92bWZ1bmNfdmUoKS4K
+Pj4KPj4gdm14X3ZtZXhpdF9oYW5kbGVyKCkgX192bXJlYWQoKXMgRVBUUF9JTkRFWCBhcyBzb29u
+IGFzCj4+IFNFQ09OREFSWV9FWEVDX0VOQUJMRV9WSVJUX0VYQ0VQVElPTlMgaXMgc2V0LCBzbyBp
+ZiBhbgo+PiBhcHBsaWNhdGlvbiBlbmFibGVzIGFsdHAybSBvbiBhIGRvbWFpbiwgc3VjY2VzZnVs
+bHkgY2FsbHMKPj4geGNfYWx0cDJtX3NldF92Y3B1X2VuYWJsZV9ub3RpZnkoKSwgdGhlbiBkaXNh
+YmxlcyBhbHRwMm0gYW5kCj4+IGV4aXRzLCBhIHNlY29uZCBydW4gb2Ygc2FpZCBhcHBsaWNhdGlv
+biB3aWxsIGxpa2VseSByZWFkIHRoZQo+PiBJTlZBTElEX0FMVFAyTSBFUFRQX0lOREVYIHNldCB3
+aGVuIGRpc2FibGluZyBhbHRwMm0gaW4gdGhlIGZpcnN0Cj4+IHJ1biwgYW5kIGNyYXNoIHRoZSBo
+b3N0IHdpdGggdGhlIEJVR19PTihpZHggPj0gTUFYX0FMVFAyTSksCj4+IGJldHdlZW4geGNfYWx0
+cDJtX3NldF92Y3B1X2VuYWJsZV9ub3RpZnkoKSBhbmQKPj4geGNfYWx0cDJtX3NldF9kb21haW5f
+c3RhdGUoLi4uLCBmYWxzZSkuCj4+Cj4+IFRoZSBwcm9ibGVtIGlzIG5vdCByZXN0cmljdGVkIHRv
+IGFuIElOVkFMSURfQUxUUDJNIEVQVFBfSU5ERVgKPj4gKHdoaWNoIGNhbiBvbmx5IHNhbmVseSBo
+YXBwZW4gb24gYWx0cDJtIHVuaW5pdCksIGJ1dCBhcHBsaWVzCj4+IHRvIGFueSBzdGFsZSBpbmRl
+eCBwcmV2aW91c2x5IHNhdmVkIC0gd2hpY2ggbWVhbnMgdGhhdCBhbGwKPj4gYWx0cDJtX3ZjcHVf
+dXBkYXRlX3ZtZnVuY192ZSgpIGNhbGxzIG11c3QgYWxzbyBjYWxsCj4+IGFsdHAybV92Y3B1X3Vw
+ZGF0ZV9wMm0oKSBhZnRlciBzZXR0aW5nCj4+IFNFQ09OREFSWV9FWEVDX0VOQUJMRV9WSVJUX0VY
+Q0VQVElPTlMsIGluIG9yZGVyIHRvIG1ha2Ugc3VyZQo+PiB0aGF0IHRoZSBzdG9yZWQgRVBUUF9J
+TkRFWCBpcyBhbHdheXMgdmFsaWQgYXQKPj4gdm14X3ZtZXhpdF9oYW5kbGVyKCkgdGltZS4KPiAK
+PiBJJ20gc29ycnksIHRoaXMgZGVzY3JpcHRpb24gc3RpbGwgZG9lc24ndCBtYWtlIGhhcmRseSBh
+bnkgc2Vuc2UgdG8gbWUsCj4gbm9yIHRoZSBzb2x1dGlvbiwgZXZlbiBhZnRlciByZWFkaW5nIGFs
+bCB0aGUgcHJldmlvdXMgdGhyZWFkcyBvbiB0aGUKPiBpc3N1ZS4gIFRoZSBkZXNjcmlwdGlvbiBk
+b2Vzbid0LCBmb3IgaW5zdGFuY2UsIG1lbnRpb24gdmNwdV9wYXVzZSgpIGF0Cj4gYWxsLCBpbiBz
+cGl0ZSBvZiB0aGUgZmFjdCB0aGF0IGl0IHNlZW1zIChmcm9tIHRoZSBwcmV2aW91cyBkaXNjdXNz
+aW9uKQo+IHRoYXQgdGhpcyBpcyBhIGNyaXRpY2FsIHBhcnQgb2Ygd2h5IHRoaXMgc29sdXRpb24g
+d29ya3M7IG5vciBpcyB0aGVyZQo+IGFueSBjb21tZW50IGluIHRoZSBjb2RlIGFib3V0IHRoZSBy
+ZXF1aXJlZCBkaXNjaXBsaW5lIHJlZ2FyZGluZwo+IFNFQ09OREFSWV9FWEVDX0VOQUJMRV9WSVJU
+X0VYQ0VQVElPTlMsICBtYWtpbmcgaXQgZmFpcmx5IGxpa2VseSB0aGF0Cj4gc29tZW9uZSB3aWxs
+IHJlLWludHJvZHVjZSBhIGJ1ZyBsaWtlIHRoaXMgaW4gdGhlIGZ1dHVyZS4KPiAKPiBNeSBub3Jt
+YWwgdGVtcGxhdGUgZm9yIHNvbWV0aGluZyBsaWtlIHRoaXMgaXMKPiAxLiBFeHBsYWluIHdoYXQg
+dGhlIGN1cnJlbnQgc2l0dWF0aW9uIGlzCj4gMi4gRXhwbGFpbiB3aHkgdGhhdCdzIGEgcHJvYmxl
+bQo+IDMuIERlc2NyaWJlIHdoYXQgeW91J3JlIGNoYW5naW5nIGFuZCBob3cgaXQgZml4ZXMgaXQu
+Cj4gCj4gSSBjYW4ndCBoZWxwIGJ1dCB0aGluayB0aGUgcmlnaHQgdGhpbmcgdG8gZG8gaGVyZSBp
+cyBpbiB2bXguYyBzb21ld2hlcmUKPiAtLSBpdCBpcywgYWZ0ZXIgYWxsLCBjb2RlIGluIHZteC5j
+IHRoYXQ6Cj4gMS4gU2V0cyBhbmQgY2xlYXJzIFNFQ09OREFSWV9FWEVDX0VOQUJMRV9WSVJUX0VY
+Q0VQVElPTlMKPiAyLiBXcml0ZXMgRVBUUF9JTkRFWAo+IDMuIEFzc3VtZXMgdGhhdCBTRUNPTkRB
+UllfRVhFQ19FTkFCTEVfVklSVF9FWENFUFRJT05TID0+IEVQVFBfSU5ERVggaXMKPiB2YWxpZC4K
+PiAKPiBXaGF0IGFib3V0IHNvbWV0aGluZyBsaWtlIHRoZSBhdHRhY2hlZCwgaW5zdGVhZCAoY29t
+cGlsZS10ZXN0ZWQgb25seSk/Ckdlb3JnZSwgdGhhbmtzIGZvciB0aGUgcmV2aWV3LCBjb21tZW50
+cyBhbmQgbmV3IHBhdGNoISBZb3UncmUgdGhlIHRoaXJkCnBlcnNvbiB0ZWxsaW5nIG1lIHRoYXQg
+dGhlIHBhdGNoIGRlc2NyaXB0aW9uIGlzIGhhcmQgdG8gcGFyc2UgLSBJJ2xsCmRlZmluaXRlbHkg
+d29yayBvbiB0aGF0IHNraWxsIGluIHRoZSBmdXR1cmUgKGFuZCBzb3JyeSBmb3IgdGhlCmluY29u
+dmVuaWVuY2UpLgoKVGhlIHZjcHVfcGF1c2UoKSBsZWFkIHdhcyBhIHJlZCBoZXJyaW5nIGluIG15
+IGluaXRpYWwgaW52ZXN0aWdhdGlvbiBvZgp0aGUgaXNzdWUsIGFuZCB0aGF0IGlzIHRoZSByZWFz
+b24gd2h5IGl0IGRpZG4ndCBtYWtlIGl0IGludG8gdGhlIHBhdGNoCmRlc2NyaXB0aW9uLiBUaGUg
+cGF1c2luZyBhbHJlYWR5IGRvbmUgaXMgZmluZS4KCkkndmUgdGVzdGVkIHlvdXIgcGF0Y2ggb24g
+bXkgc3lzdGVtICh3aGVyZSBJIGNhbiByZXByb2R1Y2UgdGhlIGNyYXNoCndpdGggYSAxMDAlIHJl
+cHJvZHVjdGlvbiByYXRlIHdpdGhvdXQgaXQpLCBhbmQgSSd2ZSBoYWQgbm8gY3Jhc2hlcyAtIHNv
+Cml0IGRvZXMgc2VlbSB0byBoYXZlIGZpeGVkIHRoZSBwcm9ibGVtLiBUaGlua2luZyBhYm91dCB0
+aGUgY3Jhc2ggcGF0aCwKaXQgYWxzbyBtYWtlcyBzZW5zZSB0aGF0IGl0IHdvdWxkIGZpeCB0aGUg
+cHJvYmxlbSAtIEkgY2FuJ3QgdGhpbmsgb2YgYW55Cm9iamVjdGlvbnMgdG8gaXQuCgpMZXQgbWUg
+dHJ5IHRoZSBleHBsYW5hdGlvbiBhZ2FpbjoKClRoZSBjdXJyZW50IHNpdHVhdGlvbjogd2hlbiB3
+ZSBydW4gdHdpY2UgYW4gYWx0cDJtIGNsaWVudCBhcHBsaWNhdGlvbgp3aGljaCB1c2VzIGFsdHAy
+bV92Y3B1X3VwZGF0ZV92bWZ1bmNfdmUoKSAoaXQgX2hhc18gdG8gYmUgdHdpY2UpLCB0aGUKZm9s
+bG93aW5nIGhhcHBlbnM6IGFmdGVyIHRoZSBmaXJzdCBydW4gb2YgdGhlIGFwcGxpY2F0aW9uLAph
+bHRwMm1fdmNwdV9kZXN0cm95KCkgZ2V0cyBjYWxsZWQgYXMgcGFydCBvZiB0aGUgY2xlYW51cCBw
+cm9jZXNzLCBhbmQKdGhpcyBzdG9yZXMgSU5WQUxJRF9BTFRQMk0gRVBUUF9JTkRFWCBpbiB0aGUg
+Vk1DUy4KCmFsdHAybV92Y3B1X2Rlc3Ryb3koKSBpcyB3aGF0IHNhdmVzIElOVkFMSURfQUxUUDJN
+IGFmdGVyIHRoZSBmaXJzdCBydW4Kb2YgdGhlIGNsaWVudCBhcHBsaWNhdGlvbjoKCiA0OCB2b2lk
+CiA0OSBhbHRwMm1fdmNwdV9kZXN0cm95KHN0cnVjdCB2Y3B1ICp2KQogNTAgewogNTEgICAgIHN0
+cnVjdCBwMm1fZG9tYWluICpwMm07CiA1MgogNTMgICAgIGlmICggdiAhPSBjdXJyZW50ICkKIDU0
+ICAgICAgICAgdmNwdV9wYXVzZSh2KTsKIDU1CiA1NiAgICAgaWYgKCAocDJtID0gcDJtX2dldF9h
+bHRwMm0odikpICkKIDU3ICAgICAgICAgYXRvbWljX2RlYygmcDJtLT5hY3RpdmVfdmNwdXMpOwog
+NTgKIDU5ICAgICBhbHRwMm1fdmNwdV9yZXNldCh2KTsKIDYwCiA2MSAgICAgYWx0cDJtX3ZjcHVf
+dXBkYXRlX3AybSh2KTsKIDYyICAgICBhbHRwMm1fdmNwdV91cGRhdGVfdm1mdW5jX3ZlKHYpOwog
+NjMKIDY0ICAgICBpZiAoIHYgIT0gY3VycmVudCApCiA2NSAgICAgICAgIHZjcHVfdW5wYXVzZSh2
+KTsKIDY2IH0KCmFsdHAybV92Y3B1X3Jlc2V0KHYpIHNldHMgYXYtPnAybWlkeCA9IElOVkFMSURf
+QUxUUDJNLCB0aGVuCmFsdHAybV92Y3B1X3VwZGF0ZV9wMm0odikgc2F2ZXMgaXQuCgpUaGUgX3Nl
+Y29uZF8gcnVuIG9mIHRoZSBhcHBsaWNhdGlvbiB0aGVuIGNhbGxzCmFsdHAybV92Y3B1X3VwZGF0
+ZV92bWZ1bmNfdmUoKSBhZ2Fpbi4gQXQgdGhpcyBwb2ludCwgRVBUUF9JTkRFWCA9PQpJTlZBTElE
+X0FMVFAyTSwgYW5kIHZteF92Y3B1X3VwZGF0ZV92bWZ1bmNfdmUoKSBvbmx5IHNldHMKU0VDT05E
+QVJZX0VYRUNfRU5BQkxFX1ZJUlRfRVhDRVBUSU9OUyAoYnV0IF9ub3RfIEVQVFBfSU5ERVggYWxz
+bywgYXMKeW91ciBwYXRjaCBub3cgZG9lcykuIFRoZSBvbmx5IGZ1bmN0aW9uIHRoYXQgdXBkYXRl
+cyBFUFRQX0lOREVYIGlzCnZteF92Y3B1X3VwZGF0ZV9lcHRwKCkgLSBzbyBhbHRwMm1fdmNwdV91
+cGRhdGVfcDJtKHYpIGluIG15IHBhdGNoLgoKVGhlIHBhdXNpbmcgaXMgZmluZSwgYnV0IGFsdHAy
+bV92Y3B1X3VwZGF0ZV92bWZ1bmNfdmUoKSBkaWQgbm90IHNhdmUKRVBUUF9JTkRFWC4KCmFsdHAy
+bV92Y3B1X3VwZGF0ZV9wMm0odikgaXMgY2FsbGVkIGluIG9ubHkgNCBwbGFjZXMgbm93OgpwMm1f
+c3dpdGNoX2RvbWFpbl9hbHRwMm1fYnlfaWQoKSwgcDJtX3N3aXRjaF92Y3B1X2FsdHAybV9ieV9p
+ZCgpLAphbHRwMm1fdmNwdV9pbml0aWFsaXNlKCkgYW5kIGFsdHAybV92Y3B1X2Rlc3Ryb3koKS4K
+ClNvIGF0IHRoZSB0aW1lIG9mIHRoZSBzZWNvbmQgcnVuIG9mIHRoZSBhcHBsaWNhdGlvbiwgRVBU
+UF9JTkRFWCBpcyBzdGlsbApJTlZBTElEX0FMVFAyTSwgYW5kIHZteF92Y3B1X3VwZGF0ZV92bWZ1
+bmNfdmUoKSBkb2VzIG5vdGhpbmcgYWJvdXQgaXQuCgpBdCB0aGlzIHBvaW50LCB0aGUgZmlyc3Qg
+Y2FsbCBvZiB2bXhfdm1leGl0X2hhbmRsZXIoKSB3aWxsIGZpbmQKU0VDT05EQVJZX0VYRUNfRU5B
+QkxFX1ZJUlRfRVhDRVBUSU9OUyBzZXQgYW5kIHdpbGwgdHJ5IHRvIHdvcmsgd2l0aCB0aGUKc3Rv
+cmVkIEVQVFBfSU5ERVguIFNvIHlvdSBzZWUsIHRoZSBwYXVzaW5nIGlzIGZpbmUsIGJ1dCB0aGUg
+ZmxvdyBpcwpyYXRoZXIgdW5mb3J0dW5hdGUuCgpTbyBiYXNpY2FsbHkgbXkgcGF0Y2ggZG9lcyB3
+aGF0IHlvdXIgcGF0Y2ggYWxzbyBkb2VzIGluIGVzc2VuY2UuIEkganVzdAp0aG91Z2h0IHRoYXQg
+SSBzaG91bGQgY2hhbmdlIHRoZSBjb2RlIHRoYXQncyBfbm90XyBWTVgtc3BlY2lmaWMgaW4gY2Fz
+ZQphbHRwMm0gaXMgZXh0ZW5kZWQgdG8gU1ZNLgoKU28gSSBob3BlIEkndmUgYmVlbiBhYmxlIHRv
+IGZpbmFsbHkgY2xhcmlmeSB0aGluZ3MgLSBhbmQgaWYgbm90LCBpdApzaG91bGQgYmUgY2xlYXIg
+dG8gZXZlcnlib2R5IGJ5IG5vdyB0aGF0IEknbSByZWFsbHkgdHJ5aW5nIGJ1dCBmYWlsaW5nCnRv
+IGJlIGVsb3F1ZW50IG9uIHRoaXMgcGFydGljdWxhciB0b3BpYy4gOikKCkxvbmcgc3Rvcnkgc2hv
+cnQsIEZXSVc6CgpSZXZpZXdlZC1ieTogUmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVm
+ZW5kZXIuY29tPgpUZXN0ZWQtYnk6IFJhenZhbiBDb2pvY2FydSA8cmNvam9jYXJ1QGJpdGRlZmVu
+ZGVyLmNvbT4KCkFuZCwgb2YgY291cnNlLCBtYW55IHRoYW5rcyBmb3IgeW91ciBoZWxwIQoKClRo
+YW5rcywKUmF6dmFuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
