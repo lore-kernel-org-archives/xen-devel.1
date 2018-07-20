@@ -1,162 +1,66 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 125447: regressions - FAIL
-Date: Fri, 20 Jul 2018 02:23:01 +0000
-Message-ID: <osstest-125447-mainreport@xen.org>
+From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Subject: Re: Memory Read Only Enforcement: VMM assisted kernel rootkit
+	mitigation for KVM
+Date: Thu, 19 Jul 2018 22:45:33 -0400
+Message-ID: <20180720024533.GA27437@char.US.ORACLE.com>
+References: <20180719213802.17161-1-ahmedsoliman0x666@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=mg4+=ke=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fgL4S-0000eB-3C
- for xen-devel@lists.xenproject.org; Fri, 20 Jul 2018 02:23:04 +0000
-List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
-List-Post: <mailto:xen-devel@lists.xenproject.org>
-List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
-List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Errors-To: xen-devel-bounces@lists.xenproject.org
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Return-path: <virtualization-bounces@lists.linux-foundation.org>
+Content-Disposition: inline
+In-Reply-To: <20180719213802.17161-1-ahmedsoliman0x666@gmail.com>
+List-Unsubscribe: <https://lists.linuxfoundation.org/mailman/options/virtualization>,
+	<mailto:virtualization-request@lists.linux-foundation.org?subject=unsubscribe>
+List-Archive: <http://lists.linuxfoundation.org/pipermail/virtualization/>
+List-Post: <mailto:virtualization@lists.linux-foundation.org>
+List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
+List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>,
+	<mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Sender: virtualization-bounces@lists.linux-foundation.org
+Errors-To: virtualization-bounces@lists.linux-foundation.org
+To: Ahmed Abd El Mawgood <ahmedsoliman0x666@gmail.com>, xen-devel@lists.xensource.com
+Cc: nathan Corbet <corbet@lwn.net>, Ard Biesheuvel <ard.biesheuvel@linaro.org>, rkrcmar@redhat.com, Kees Cook <keescook@chromium.org>, kvm@vger.kernel.org, linux-doc@vger.kernel.org, David Vrabel <david.vrabel@nutanix.com>, x86@kernel.org, Boris Lukashev <blukashev@sempervictus.com>, virtualization@lists.linux-foundation.org, Ingo Molnar <mingo@redhat.com>, nigel.edwards@hpe.com, hpa@zytor.com, Kernel Hardening <kernel-hardening@lists.openwall.com>, Paolo Bonzini <pbonzini@redhat.com>, Thomas Gleixner <tglx@linutronix.de>, Rik van Riel <riel@surriel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNTQ0NyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNTQ0Ny8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYW1kNjQgICAgICAgICAg
-ICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI1NDMy
-CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0taTM4NiAgMSBidWlsZC1jaGVjaygxKSAg
-ICAgICAgIGJsb2NrZWQgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAxIGJ1aWxk
-LWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiBidWlsZC1hbWQ2NC1saWJ2aXJ0
-ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0
-ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2
-ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
-cm1oZi14bCAgICAgICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBu
-ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1
-cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRl
-c3Rpbmc6CiB4ZW4gICAgICAgICAgICAgICAgICBkNjM3MWNjYjkzMDEyZGI0YWQ2NjE1ZmU2NjYy
-MDViODYzMDhjYjRlCmJhc2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICAzY2Rh
-YzI4MDU2OTJjN2FjY2RlMmY0MDVkODFjYzBiZTc5OWFlZTQ4CgpMYXN0IHRlc3Qgb2YgYmFzaXMg
-ICAxMjU0MzIgIDIwMTgtMDctMTkgMTQ6MDA6NDAgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNp
-bmNlICAgMTI1NDM5ICAyMDE4LTA3LTE5IDE5OjAwOjM2IFogICAgMCBkYXlzICAgIDMgYXR0ZW1w
-dHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3
-IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICBKYW4gQmV1bGljaCA8amJldWxp
-Y2hAc3VzZS5jb20+CiAgUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cgpq
-b2JzOgogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1k
-NjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2Nr
-ZWQgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dS1kZWJpYW5odm0taTM4NiAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0
-LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tl
-ZCAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qu
-b3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dz
-LCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVz
-dC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSBy
-ZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJp
-dHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hi
-PW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7
-YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5k
-IGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3Vt
-bWFyeQoKCk5vdCBwdXNoaW5nLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCBkNjM3MWNjYjkzMDEyZGI0YWQ2NjE1ZmU2
-NjYyMDViODYzMDhjYjRlCkF1dGhvcjogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0
-cml4LmNvbT4KRGF0ZTogICBXZWQgSnVsIDE4IDEyOjIyOjU1IDIwMTggKzAxMDAKCiAgICB4ODYv
-eHN0YXRlOiBNYWtlIGVycm9ycyBpbiB4c3RhdGUgY2FsY3VsYXRpb25zIG1vcmUgb2J2aW91cyBi
-eSBjcmFzaGluZyB0aGUgZG9tYWluCiAgICAKICAgIElmIHhjcjBfbWF4IGV4Y2VlZHMgeGZlYXR1
-cmVfbWFzaywgdGhlbiBzb21ldGhpbmcgaXMgYnJva2VuIHdpdGggdGhlIENQVUlECiAgICBwb2xp
-Y3kgZGVyaXZhdGlvbiBvciBhdWRpdGluZyBsb2dpYy4gIElmIGhhcmR3YXJlIHJlamVjdHMgbmV3
-X2J2LCB0aGVuCiAgICBzb21ldGhpbmcgaXMgYnJva2VuIHdpdGggWGVuJ3MgeHN0YXRlIGxvZ2lj
-LgogICAgCiAgICBJbiBib3RoIGNhc2VzLCBjcmFzaCB0aGUgZG9tYWluIHdpdGggYW4gb2J2aW91
-cyBlcnJvciBtZXNzYWdlLCB0byBoZWxwCiAgICBoaWdobGlnaHQgdGhlIGlzc3Vlcy4KICAgIAog
-ICAgU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNv
-bT4KICAgIFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cgpjb21t
-aXQgMzYxYjgzNWZhMDBkOWY0NTE2N2M1MGE2MGUwNTRjY2YyMmMwNjVkNwpBdXRob3I6IEFuZHJl
-dyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgV2VkIEp1bCAxOCAx
-MTo1Njo0NCAyMDE4ICswMTAwCgogICAgeDg2L3hzdGF0ZTogVXNlIGEgZ3Vlc3RzIENQVUlEIHBv
-bGljeSwgcmF0aGVyIHRoYW4gYWxsb3dpbmcgYWxsIGZlYXR1cmVzCiAgICAKICAgIEl0IHR1cm5z
-IG91dCB0aGF0IFhlbiBoYXMgbmV2ZXIgZW5mb3JjZWQgdGhhdCBhIGRvbWFpbiByZW1haW4gd2l0
-aGluIHRoZQogICAgeHN0YXRlIGZlYXR1cmVzIGFkdmVydGlzZWQgaW4gQ1BVSUQuCiAgICAKICAg
-IFRoZSBjaGVjayBvZiBuZXdfYnYgYWdhaW5zdCB4ZmVhdHVyZV9tYXNrIGVuc3VyZXMgdGhhdCBh
-IGRvbWFpbiBzdGF5cyB3aXRoaW4KICAgIHRoZSBzZXQgb2YgZmVhdHVyZXMgdGhhdCBYZW4gaGFz
-IGVuYWJsZWQgaW4gaGFyZHdhcmUgKGFuZCB0aGVyZWZvcmUgaXNuJ3QgYQogICAgc2VjdXJpdHkg
-cHJvYmxlbSksIGJ1dCB0aGlzIGRvZXMgbWVhbnMgdGhhdCBhdHRlbXB0cyB0byBsZXZlbCBhIGd1
-ZXN0IGZvcgogICAgbWlncmF0aW9uIHNhZmV0eSBtaWdodCBub3QgYmUgZWZmZWN0aXZlIGlmIHRo
-ZSBndWVzdCBpZ25vcmVzIENQVUlELgogICAgCiAgICBDaGVjayB0aGUgQ1BVSUQgcG9saWN5IGlu
-IHZhbGlkYXRlX3hzdGF0ZSgpIChmb3IgaW5jb21pbmcgbWlncmF0aW9uKSBhbmQgaW4KICAgIGhh
-bmRsZV94c2V0YnYoKSAoZm9yIGd1ZXN0IFhTRVRCViBpbnN0cnVjdGlvbnMpLiAgVGhpcyBzdWJz
-dW1lcyB0aGUgUEtSVSBjaGVjawogICAgZm9yIFBWIGd1ZXN0cyBpbiBoYW5kbGVfeHNldGJ2KCkg
-KGFuZCBhbHNvIGRlbW9uc3RyYXRlcyB0aGF0IEkgc2hvdWxkIGhhdmUKICAgIHNwb3R0ZWQgdGhp
-cyBwcm9ibGVtIHdoaWxlIHJldmlld2luZyBjL3MgZmJmOTk3MTI0MWYpLgogICAgCiAgICBGb3Ig
-bWlncmF0aW9uLCB0aGlzIGlzIGNvcnJlY3QgZGVzcGl0ZSB0aGUgY3VycmVudCAobWlzKW9yZGVy
-aW5nIG9mIGRhdGEKICAgIGJlY2F1c2UgZC0+YXJjaC5jcHVpZCBpcyB0aGUgYXBwbGljYWJsZSBt
-YXggcG9saWN5LgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcu
-Y29vcGVyM0BjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGlj
-aEBzdXNlLmNvbT4KCmNvbW1pdCAyZTJiZDVhMjllNDgxZDBlN2YxNjNhMTlkNjYzZDk1OWUwOTU1
-MGZkCkF1dGhvcjogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KRGF0
-ZTogICBGcmkgSnVuIDI5IDEzOjA1OjUyIDIwMTggKzAwMDAKCiAgICBsaWJ4ODY6IEludHJvZHVj
-ZSBsaWIveDg2L21zci5oIGFuZCBzaGFyZSBtc3JfcG9saWN5IHdpdGggdXNlcnNwYWNlCiAgICAK
-ICAgIFRvIGZhY2lsaXRhdGUgdGhlIHNoYXJlZCBYZW4gYW5kIHRvb2xzdGFjayBjb2RlIGluIGxp
-Yng4Niwgc3RydWN0IG1zcl9wb2xpY3kKICAgIG5lZWRzIHRvIGJlIGF2YWlsYWJsZSBpbiB0aGUg
-c2FtZSB3YXkgYXMgc3RydWN0IGNwdWlkX3BvbGljeS4KICAgIAogICAgU2lnbmVkLW9mZi1ieTog
-QW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIFJldmlld2VkLWJ5
-OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IFJvZ2VyIFBh
-dSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgogICAgQWNrZWQtYnk6IEphbiBCZXVsaWNo
-IDxqYmV1bGljaEBzdXNlLmNvbT4KCmNvbW1pdCBmZWEyZmFiOTYzNTYxM2Q1YmU4MzQ4MmRhNWQ3
-OTE2MGVmOTI4OTQxCkF1dGhvcjogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5j
-b20+CkRhdGU6ICAgVGh1IEp1biAyMSAxNTozNTo0OCAyMDE4ICswMTAwCgogICAgbGlieDg2OiBp
-bnRyb2R1Y2UgYSBsaWJ4ODYgc2hhcmVkIGxpYnJhcnkKICAgIAogICAgTW92ZSB4ODZfY3B1aWRf
-bG9va3VwX2RlZXBfZGVwcygpIGludG8gdGhlIHNoYXJlZCBsaWJyYXJ5LCByZW1vdmluZyB0aGUK
-ICAgIGluZGl2aWR1YWwgY29waWVzIGZyb20gdGhlIGh5cGVydmlzb3IgYW5kIGxpYnhjIHJlc3Bl
-Y3RpdmVseS4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIu
-cGF1QGNpdHJpeC5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcu
-Y29vcGVyM0BjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNp
-dHJpeC5jb20+CiAgICBBY2tlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoK
-Y29tbWl0IDRkZDdlNzRmMzFmYWNmOTk3ZmZhNjRkMWMzOGExZGE3YTcwN2UzMjYKQXV0aG9yOiBS
-b2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KRGF0ZTogICBUaHUgSnVuIDIx
-IDE2OjM1OjQ2IDIwMTggKzAyMDAKCiAgICBsaWJ4ODY6IFNoYXJlIHN0cnVjdCBjcHVpZF9wb2xp
-Y3kgd2l0aCB1c2Vyc3BhY2UKICAgIAogICAgQm90aCBYZW4gYW5kIHRoZSB0b29sc3RhY2sgaGF2
-ZSBuZWVkIG9mIHRoZSBzYW1lIGxvZ2ljIHdoZW4gaXQgY29tZXMgdG8KICAgIG1hbmlwdWxhdGlv
-biBhbmQgY2hlY2tpbmcgb2YgdGhlIENQVUlEIGFuZCBNU1IgdmFsdWVzIG9mZmVyZWQgdG8gZ3Vl
-c3RzLiAgVG8KICAgIHRoYXQgZW5kLCBsaWJ4ODYgaXMgYmVpbmcgaW50cm9kdWNlZCB0byBhbGxv
-dyBYZW4gYW5kIHRoZSB0b29sc3RhY2sgdG8gc2hhcmUgYQogICAgc2luZ2xlIGltcGxlbWVudGF0
-aW9uLCByYXRoZXIgdGhhbiBkdXBsaWNhdGluZyB0aGUgbG9naWMuCiAgICAKICAgIE5vIGZ1bmN0
-aW9uYWwgY2hhbmdlLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxy
-b2dlci5wYXVAY2l0cml4LmNvbT4KICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFu
-ZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgICBSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxp
-dTJAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5j
-b20+Cgpjb21taXQgZWRkZjk1NTljOTc3OWU5YTExZTFjNGRiNDZiNWVjMjZiM2NiODcwOQpBdXRo
-b3I6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgpEYXRlOiAgIFRodSBK
-dW4gMjEgMTY6MzU6NDYgMjAxOCArMDIwMAoKICAgIGxpYng4NjogZ2VuZXJhdGUgY3B1aWQtYXV0
-b2dlbi5oIGluIHRoZSBsaWJ4ODYgaW5jbHVkZSBkaXIKICAgIAogICAgVGhpcyBhdm9pZHMgYWxs
-IHVzZXJzIG5lZWRpbmcgdG8gb3BlbmNvZGUgbG9jYWwgZ2VuZXJhdGlvbiBvZiB0aGUgZmlsZS4K
-ICAgIAogICAgU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJp
-eC5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0Bj
-aXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+
-CiAgICBSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKY29tbWl0
-IDBlOTZmM2Q1MmVjMjAwYjhmNzc2NDE2NGUyMmQ3NmVlZjYxNTFmNTkKQXV0aG9yOiBBbmRyZXcg
-Q29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgpEYXRlOiAgIFRodSBKdW4gMjggMTE6
-MDA6NDQgMjAxOCArMDAwMAoKICAgIGxpYng4NjogSW50cm9kdWNlIGxpYi94ODYvY3B1aWQuaAog
-ICAgCiAgICBCZWdpbiB0byB1bnRhbmdsZSB0aGUgaGVhZGVyIGRlcGVuZGVuY3kgdGFuZ2xlIGJ5
-IG1vdmluZyBkZWZpbml0aW9uIG9mCiAgICBzdHJ1Y3QgY3B1aWRfbGVhZiBvdXQgb2YgeDg2X2Vt
-dWxhdGUuaCBpbnRvIHRoZSBuZXcgY3B1aWQuaC4KICAgIAogICAgQWRkaXRpb25hbGx5LCBwbHVt
-YiB0aGUgaGVhZGVyIHRocm91Z2ggdG8gbGlieGMuICBUaGlzIGlzIHRlY2huaWNhbGx5IGEKICAg
-IHJlZHVuZGFudCBpbmNsdWRlIGF0IHRoaXMgcG9pbnQsIGJ1dCBpdCBoZWxwcyBidWlsZC10ZXN0
-IHRoZSBsYXRlciBjaGFuZ2VzLAogICAgYW5kIHdpbGwgYmUgdXNlZCBldmVudHVhbGx5LgogICAg
-CiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXgu
-Y29tPgogICAgU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJp
-eC5jb20+CiAgICBSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KICAg
-IEFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CihxZW11IGNoYW5nZXMg
-bm90IGluY2x1ZGVkKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+On Thu, Jul 19, 2018 at 11:37:59PM +0200, Ahmed Abd El Mawgood wrote:
+> Hi,
+> 
+> This is my first set of patches that works as I would expect, and the
+> third revision I sent to mailing lists.
+> 
+> Following up with my previous discussions about kernel rootkit mitigation
+> via placing R/O protection on critical data structure, static data,
+> privileged registers with static content. These patches present the
+> first part where it is only possible to place these protections on
+> memory pages. Feature-wise, this set of patches is incomplete in the sense of:
+> - They still don't protect privileged registers
+> - They don't protect guest TLB from malicious gva -> gpa page mappings.
+> But they provide sketches for a basic working design. Note that I am totally
+> noob and it took lots of time and effort to get to this point. So sorry in
+> advance if I overlooked something.
+
+This reminds me of Xen PV page model. That is the hypervisor is the one
+auditing the page tables and the guest's pages are read-only.
+
+Ditto for IDT, GDT, etc. Gosh, did you by chance look at how
+Xen PV mechanism is done? It may provide the protection you are looking for?
+
+CC-ing xen-devel.
+> 
+> [PATCH 1/3] [RFC V3] KVM: X86: Memory ROE documentation
+> [PATCH 2/3] [RFC V3] KVM: X86: Adding arbitrary data pointer in kvm memslot itterator functions
+> [PATCH 3/3] [RFC V3] KVM: X86: Adding skeleton for Memory ROE
+> 
+> Summery:
+> 
+>  Documentation/virtual/kvm/hypercalls.txt |  14 ++++
+>  arch/x86/include/asm/kvm_host.h          |  11 ++-
+>  arch/x86/kvm/Kconfig                     |   7 ++
+>  arch/x86/kvm/mmu.c                       | 127 ++++++++++++++++++++++---------
+>  arch/x86/kvm/x86.c                       |  82 +++++++++++++++++++-
+>  include/linux/kvm_host.h                 |   3 +
+>  include/uapi/linux/kvm_para.h            |   1 +
+>  virt/kvm/kvm_main.c                      |  29 ++++++-
+>  8 files changed, 232 insertions(+), 42 deletions(-)
+> 
