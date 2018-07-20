@@ -1,26 +1,16 @@
-From: Christopher Clark <christopher.w.clark@gmail.com>
-Subject: Re: [PATCH] shim: Fix generation of compat/callback.i:
- allow redef of OBJECT vars
-Date: Thu, 19 Jul 2018 22:26:03 -0700
-Message-ID: <CACMJ4GbKn-t3OOwVA2Ue6UyoKxTP3gvYYV8xO_rkqHVPQrAX7A@mail.gmail.com>
-References: <1531956796-7465-1-git-send-email-christopher.w.clark@gmail.com>
- <5B5036A802000078001D5AE3@prv1-mh.provo.novell.com>
- <alpine.DEB.2.10.1807190955250.19154@sstabellini-ThinkPad-X260>
- <5B50D9420200007800137603@prv1-mh.provo.novell.com>
- <alpine.DEB.2.10.1807191139460.19154@sstabellini-ThinkPad-X260>
- <5B50E13E020000780013763E@prv1-mh.provo.novell.com>
- <alpine.DEB.2.10.1807191233140.19154@sstabellini-ThinkPad-X260>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [ovmf test] 125454: all pass - PUSHED
+Date: Fri, 20 Jul 2018 05:59:58 +0000
+Message-ID: <osstest-125454-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0051022027233321725=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gv0p=ke=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
- id 1fgNvb-0007sP-R3
- for xen-devel@lists.xenproject.org; Fri, 20 Jul 2018 05:26:07 +0000
-Received: by mail-lj1-x243.google.com with SMTP id l15-v6so10090683lji.6
- for <xen-devel@lists.xenproject.org>; Thu, 19 Jul 2018 22:26:05 -0700 (PDT)
-In-Reply-To: <alpine.DEB.2.10.1807191233140.19154@sstabellini-ThinkPad-X260>
+ <srs0=mg4+=ke=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fgOSQ-000283-E2
+ for xen-devel@lists.xenproject.org; Fri, 20 Jul 2018 06:00:02 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,223 +19,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, julien.grall@arm.com, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0051022027233321725==
-Content-Type: multipart/alternative; boundary="00000000000037dfc30571678837"
-
---00000000000037dfc30571678837
-Content-Type: text/plain; charset="UTF-8"
-
-On Thu, Jul 19, 2018 at 12:34 PM, Stefano Stabellini <sstabellini@kernel.org
-> wrote:
-
-> On Thu, 19 Jul 2018, Jan Beulich wrote:
-> > >>> Stefano Stabellini <sstabellini@kernel.org> 07/19/18 8:49 PM >>>
-> > >On Thu, 19 Jul 2018, Jan Beulich wrote:
-> > >> >>> Stefano Stabellini <sstabellini@kernel.org> 07/19/18 7:00 PM >>>
-> > >> >On Thu, 19 Jul 2018, Jan Beulich wrote:
-> > >> >> > Signed-off-by: Christopher Clark <christopher.clark6@
-> baesystems.com>
-> > >> >> > ---
-> > >> >> > Please use my gmail address for any correspondence to me.
-> > >> >>
-> > >> >> I think it is generally considered bad practice to have From: and
-> S-o-b
-> > >> >> differ.
-> > >> >
-> > >> >Why? That is perfectly fine. Signed-off-by is about copyright of the
-> > >> >code while From: is about authorship.
-> > >>
-> > >> Well, in this particular case Christopher had even asked that
-> communication
-> > >> to go to the mail address he sent from. How is anyone going to know
-> that if
-> > >> judging just from the eventual commit in git?
-> > >
-> > >Yeah, that bit of information is lost in the commit message,
-> > >unfortunately. At that point, the patch is already committed, so it is
-> > >usually not a big deal.
-> >
-> > What if there is an issue with the change, or simply a question about it?
-> > I'd expect to be able to get in touch with the author by using the
-> provided
-> > email address, at least if the commit isn't overly old yet.
->
-> Thinking about it, the From: email address will end up in the Author:
-> field of the commit. So actually, the information will be retained.
->
-
-Thanks for the group input on the From/Author and S-o-b identifiers.
-
-Context on the constraints which lead to the structure of my original message
-on this thread:
-
-* Email message source:
-
-My messages are sent to the list from my gmail account as that's the one I
-have easiest access to from my development environment. Shouldn't be a
-concern as I'm easily reachable there and as Stefano pointed out, inclusion
-of an alternate 'From:' in within the message body is enough to change the
-git 'Author' if the patch is merged.
-
-* Commit Author:
-
-I can provide either address for the From/Author address for the commit.
-
-My preference is for it being the address I am reliably reachable at --
-which would be my gmail account as noted. My reachability at this email
-address has exceeded that of any other email address I have ever had,
-surviving multiple changes of organizational affiliation.
-
-* Commit Signed-off-by:
-
-I have a legal requirement to ensure that copyright is attributed for the
-work, and I have used the S-o-b address to do so.  In the patch I sent, the
-email address provided for the S-o-b is under the administrative control of
-the legal owner of the copyright, which seems appropriate for it.
-
-I could change the S-o-b to match the From/Author, and add further language
-to the commit message to clarify copyright attribution, but that seems
-incorrect and would require further effort to support any automation for
-eg. harvesting community contribution statistics.
-
-Re: Jan's feedback on the patch content:
-
-The hint to CFLAGS was helpful, thanks, as this double define is indeed
-being triggered when CFLAGS is not cleared, so: this patch isn't necessary.
-
-I still haven't quite determined why a top level "make install" triggers a
-"make -C xen-root/xen distclean", which then causes further compilation to
-be performed, in what should be an install-only step, which made this other
-behaviour visible (since in the cross-compile system I'm working with,
-CFLAGS is being explicitly cleared for the "make" but happened not to be
-for "make install").
-
-It's also been brought to my attention that this isn't the first time this
-undefine has been proposed on this list -- so apologies for the revisit.
-
-thanks,
-
-Christopher
-
---00000000000037dfc30571678837
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br><div class=3D"gmail_extra"><br><div class=3D"gmail_quo=
-te">On Thu, Jul 19, 2018 at 12:34 PM, Stefano Stabellini <span dir=3D"ltr">=
-&lt;<a href=3D"mailto:sstabellini@kernel.org" target=3D"_blank">sstabellini=
-@kernel.org</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex"><span class=3D"gmail-">On Thu, 19 Jul 2018, Jan Beulich wrote:<=
-br>
-&gt; &gt;&gt;&gt; Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kern=
-el.org">sstabellini@kernel.org</a>&gt; 07/19/18 8:49 PM &gt;&gt;&gt;<br>
-&gt; &gt;On Thu, 19 Jul 2018, Jan Beulich wrote:<br>
-&gt; &gt;&gt; &gt;&gt;&gt; Stefano Stabellini &lt;<a href=3D"mailto:sstabel=
-lini@kernel.org">sstabellini@kernel.org</a>&gt; 07/19/18 7:00 PM &gt;&gt;&g=
-t;<br>
-&gt; &gt;&gt; &gt;On Thu, 19 Jul 2018, Jan Beulich wrote:<br>
-&gt; &gt;&gt; &gt;&gt; &gt; Signed-off-by: Christopher Clark &lt;<a href=3D=
-"mailto:christopher.clark6@baesystems.com">christopher.clark6@<wbr>baesyste=
-ms.com</a>&gt;<br>
-&gt; &gt;&gt; &gt;&gt; &gt; ---<br>
-&gt; &gt;&gt; &gt;&gt; &gt; Please use my gmail address for any corresponde=
-nce to me.<br>
-&gt; &gt;&gt; &gt;&gt; <br>
-&gt; &gt;&gt; &gt;&gt; I think it is generally considered bad practice to h=
-ave From: and S-o-b<br>
-&gt; &gt;&gt; &gt;&gt; differ.<br>
-&gt; &gt;&gt; &gt;<br>
-&gt; &gt;&gt; &gt;Why? That is perfectly fine. Signed-off-by is about copyr=
-ight of the<br>
-&gt; &gt;&gt; &gt;code while From: is about authorship. <br>
-&gt; &gt;&gt; <br>
-&gt; &gt;&gt; Well, in this particular case Christopher had even asked that=
- communication<br>
-&gt; &gt;&gt; to go to the mail address he sent from. How is anyone going t=
-o know that if<br>
-&gt; &gt;&gt; judging just from the eventual commit in git?<br>
-&gt; &gt;<br>
-&gt; &gt;Yeah, that bit of information is lost in the commit message,<br>
-&gt; &gt;unfortunately. At that point, the patch is already committed, so i=
-t is<br>
-&gt; &gt;usually not a big deal.<br>
-&gt; <br>
-&gt; What if there is an issue with the change, or simply a question about =
-it?<br>
-&gt; I&#39;d expect to be able to get in touch with the author by using the=
- provided<br>
-&gt; email address, at least if the commit isn&#39;t overly old yet.<br>
-<br>
-</span>Thinking about it, the From: email address will end up in the Author=
-:<br>
-field of the commit. So actually, the information will be retained.<br>
-</blockquote></div><div class=3D"gmail_extra"><br></div><div class=3D"gmail=
-_extra">Thanks for the group input on the From/Author and S-o-b identifiers=
-.</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">Cont=
-ext on the constraints which lead to the structure of my <span style=3D"fon=
-t-size:small;background-color:rgb(255,255,255);text-decoration-style:initia=
-l;text-decoration-color:initial;float:none;display:inline">original<span>=
-=C2=A0</span></span>message on this thread:</div><div class=3D"gmail_extra"=
-><br></div><div class=3D"gmail_extra">* Email message source:</div><div cla=
-ss=3D"gmail_extra"><br></div><div class=3D"gmail_extra">My messages are sen=
-t to the list from my gmail account as that&#39;s the one I have easiest ac=
-cess to from my development environment. Shouldn&#39;t be a concern as I&#3=
-9;m easily reachable there and as Stefano pointed out, inclusion of an alte=
-rnate &#39;From:&#39; in within the message body is enough to change the gi=
-t &#39;Author&#39; if the patch is merged.</div><div class=3D"gmail_extra">=
-<br></div><div class=3D"gmail_extra">* Commit Author:</div><div class=3D"gm=
-ail_extra"><br></div><div class=3D"gmail_extra">I can provide either addres=
-s for the From/Author address for the commit.</div><div class=3D"gmail_extr=
-a"><br></div><div class=3D"gmail_extra">My preference is for it being the a=
-ddress I am reliably reachable at -- which would be my gmail account as not=
-ed. My reachability at this email address has exceeded that of any other em=
-ail address I have ever had, surviving multiple changes of organizational a=
-ffiliation.</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_e=
-xtra">* Commit Signed-off-by:</div><div class=3D"gmail_extra"><br></div><di=
-v class=3D"gmail_extra">I have a legal requirement to ensure that copyright=
- is attributed for the work, and I have used the S-o-b address to do so.=C2=
-=A0 In the patch I sent, the email address provided for the S-o-b is under =
-the administrative control of the legal owner of the copyright, which seems=
- appropriate for it.</div><div class=3D"gmail_extra"><br></div><div class=
-=3D"gmail_extra">I could change the S-o-b to match the From/Author, and add=
- further language to the commit message to clarify copyright attribution, b=
-ut that seems incorrect and would require further effort to support any aut=
-omation for eg. harvesting community contribution statistics.</div><div cla=
-ss=3D"gmail_extra"><br></div><div class=3D"gmail_extra">Re: Jan&#39;s feedb=
-ack on the patch content:</div><div class=3D"gmail_extra"><br></div><div cl=
-ass=3D"gmail_extra">The hint to CFLAGS was helpful, thanks, as this double =
-define is indeed being triggered when CFLAGS is not cleared, so: this patch=
- isn&#39;t necessary.</div><div class=3D"gmail_extra"><br></div><div class=
-=3D"gmail_extra">I still haven&#39;t quite determined why a top level &quot=
-;make install&quot; triggers a &quot;make -C xen-root/xen distclean&quot;, =
-which then causes further compilation to be performed, in what should be an=
- install-only step, which made this other behaviour visible (since in the c=
-ross-compile system I&#39;m working with, CFLAGS is being explicitly cleare=
-d for the &quot;make&quot; but happened not to be for &quot;make install&qu=
-ot;).</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">=
-It&#39;s also been brought to my attention that this isn&#39;t the first ti=
-me this undefine has been proposed on this list -- so apologies for the rev=
-isit.</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">=
-thanks,</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra=
-">Christopher</div><div><br></div></div><div class=3D"gmail_extra"><br></di=
-v></div>
-
---00000000000037dfc30571678837--
-
-
---===============0051022027233321725==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0051022027233321725==--
+ZmxpZ2h0IDEyNTQ1NCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjU0NTQvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
+dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
+bmc6CiBvdm1mICAgICAgICAgICAgICAgICBkYTQxN2ViOGVkNGJiYWYxNDljMzFkMTk3ZWI1NmZj
+OGE1YWJiZjY4CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICBkOTAwZDdj
+OTg1N2E2NzZkOTI3MWEwYWI0OTljMTJiMzc5ZGMzNjUyCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
+MjUyOTUgIDIwMTgtMDctMTggMDM6NDA6NDAgWiAgICAyIGRheXMKRmFpbGluZyBzaW5jZSAgICAg
+ICAgMTI1MzAyICAyMDE4LTA3LTE4IDA3OjEwOjQ4IFogICAgMSBkYXlzICAgMTYgYXR0ZW1wdHMK
+VGVzdGluZyBzYW1lIHNpbmNlICAgMTI1NDU0ICAyMDE4LTA3LTIwIDAzOjEwOjM5IFogICAgMCBk
+YXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVy
+IHRlc3Q6CiAgQWNoaW4gR3VwdGEgPGFjaGluLmd1cHRhQGFybS5jb20+CiAgRGFuZGFuIEJpIDxk
+YW5kYW4uYmlAaW50ZWwuY29tPgogIEVyaWMgRG9uZyA8ZXJpYy5kb25nQGludGVsLmNvbT4KICBK
+aWFuIEogV2FuZyA8amlhbi5qLndhbmdAaW50ZWwuY29tPgogIExhc3psbyBFcnNlayA8bGVyc2Vr
+QHJlZGhhdC5jb20+CiAgU3VnaG9zaCBHYW51IDxzdWdob3NoLmdhbnVAYXJtLmNvbT4KICBTdXBy
+ZWV0aCBWZW5rYXRlc2ggPHN1cHJlZXRoLnZlbmthdGVzaEBhcm0uY29tPgoKam9iczoKIGJ1aWxk
+LWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
+YXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
+YW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
+ZDY0LWFtZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVz
+dC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUv
+bG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAg
+ICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxh
+bmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0
+CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7
+Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdl
+Yi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3Mg
+Y29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9
+b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhl
+bi5vcmc6L2hvbWUveGVuL2dpdC9vc3N0ZXN0L292bWYuZ2l0CiAgIGQ5MDBkN2M5ODUuLmRhNDE3
+ZWI4ZWQgIGRhNDE3ZWI4ZWQ0YmJhZjE0OWMzMWQxOTdlYjU2ZmM4YTVhYmJmNjggLT4geGVuLXRl
+c3RlZC1tYXN0ZXIKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
