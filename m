@@ -1,13 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: CPU flags disappear on Spectre enabled host
-Date: Fri, 20 Jul 2018 11:58:38 +0200
-Message-ID: <20180720115838.46ad7cab.olaf@aepfle.de>
-References: <20180720112156.69e44899.olaf@aepfle.de>
- <10e3d9ac-eb07-ded9-8538-83a8a036a173@citrix.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH v3] x86/mm: Add mem access rights to NPT
+Date: Fri, 20 Jul 2018 11:05:56 +0100
+Message-ID: <2e1324f3-faeb-4f51-17da-13358d49d59f@citrix.com>
+References: <1530535351-5516-1-git-send-email-aisaila@bitdefender.com>
+ <E820D7C2-E63B-43F5-B288-9D9FDD2B0A44@citrix.com>
+ <1531988299.10865.16.camel@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7644489902241821882=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <10e3d9ac-eb07-ded9-8538-83a8a036a173@citrix.com>
+In-Reply-To: <1531988299.10865.16.camel@bitdefender.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,62 +19,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xen.org
+To: Isaila Alexandru <aisaila@bitdefender.com>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, "tamas@tklengyel.com" <tamas@tklengyel.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "rcojocaru@bitdefender.com" <rcojocaru@bitdefender.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7644489902241821882==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/2ZJ0YVT26vhkB=F.Csobt2W"; protocol="application/pgp-signature"
-
---Sig_/2ZJ0YVT26vhkB=F.Csobt2W
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Fri, 20 Jul 2018 10:38:30 +0100
-schrieb Andrew Cooper <andrew.cooper3@citrix.com>:
-
-> On 20/07/18 10:21, Olaf Hering wrote:
-> > Is the loss of cpuflags intentional? =20
-> Yes, but they've got nothing to do with Spectre.
-
-Thank you, Andrew. After a few more reboots I figured that booting without =
-any cmdline option makes no difference.
-
-=46rom the original report that I got, these additional flags disappeared:
-
-cqm_llc
-cqm_occup_llc
-pln
-pts
-
-I assume a domU can not make use of them either? They are not listed in CPU=
-ID in wikipedia, perhaps just not with those names.
-
-Olaf
-
---Sig_/2ZJ0YVT26vhkB=F.Csobt2W
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW1GyTgAKCRBdQqD6ppg2
-fuPEAKDXPc+zreaeCyoT1VLt4N5z3fHzBACgyFaGOU61P3YFfJIGqnNt6DrcIAc=
-=mMno
------END PGP SIGNATURE-----
-
---Sig_/2ZJ0YVT26vhkB=F.Csobt2W--
-
-
---===============7644489902241821882==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7644489902241821882==--
+T24gMDcvMTkvMjAxOCAwOToxOCBBTSwgSXNhaWxhIEFsZXhhbmRydSB3cm90ZToKPiBPbiBNaSwg
+MjAxOC0wNy0xOCBhdCAxNTozMyArMDAwMCwgR2VvcmdlIER1bmxhcCB3cm90ZToKPj4KPj4+Cj4+
+PiBPbiBKdWwgMiwgMjAxOCwgYXQgODo0MiBBTSwgQWxleGFuZHJ1IElzYWlsYSA8YWlzYWlsYUBi
+aXRkZWZlbmRlci5jCj4+PiBvbT4gd3JvdGU6Cj4+Pgo+Pj4gRnJvbTogSXNhaWxhIEFsZXhhbmRy
+dSA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+Cj4+Pgo+Pj4gVGhpcyBwYXRjaCBhZGRzIGFjY2Vz
+cyByaWdodHMgZm9yIHRoZSBOUFQgcGFnZXMuIFRoZSBhY2Nlc3MgcmlnaHRzCj4+PiBhcmUKPj4+
+IHNhdmVkIGluIGEgcmFkaXggdHJlZSB3aXRoIHRoZSByb290IHNhdmVkIGluIHAybV9kb21haW4u
+IFRoZSByaWdodHMKPj4+IGFyZSBtYW5pcHVsYXRlZCB0aHJvdWdoIHAybV9zZXRfYWNjZXNzKCkK
+Pj4+IGFuZCBwMm1fZ2V0X2FjY2VzcygpIGZ1bmN0aW9ucy4KPj4+IFRoZSBwYXRjaCBmb2xsb3dz
+IHRoZSBlcHQgbG9naWMuCj4+IFRoaXMgZGVzY3JpcHRpb24gbmVlZHMgdG8gYmUgbXVjaCBtb3Jl
+IGNvbXBsZXRlLsKgwqBTb21ldGhpbmcgbGlrZQo+PiB0aGlzOgo+Pgo+PiAtLS0KPj4gVGhpcyBw
+YXRjaCBhZGRzIGFjY2VzcyBjb250cm9sIGZvciBOUFQgbW9kZS7CoMKgCj4+Cj4+IFRoZXJlIGFy
+ZW7igJl0IGVub3VnaCBleHRyYSBiaXRzIHRvIHN0b3JlIHRoZSBhY2Nlc3MgcmlnaHRzIGluIHRo
+ZSBOUFQKPj4gcDJtIHRhYmxlLCBzbyB3ZSBhZGQgYSByYWRpeCB0cmVlIHRvIHN0b3JlIHRoZSBy
+aWdodHMuwqDCoEZvcgo+PiBlZmZpY2llbmN5LCByZW1vdmUgZW50cmllcyB3aGljaCBtYXRjaCB0
+aGUgZGVmYXVsdCBwZXJtaXNzaW9ucyByYXRoZXIKPj4gdGhhbiBjb250aW51aW5nIHRvIHN0b3Jl
+IHRoZW0uCj4+Cj4+IE1vZGlmeSBwMm0tcHQuYzpwMm1fdHlwZV90b19mbGFncygpIHRvIG1pcnJv
+ciB0aGUgZXB0IHZlcnNpb246IHRha2luZwo+PiBhbiBhY2Nlc3MsIGFuZCByZW1vdmluZyAvIGFk
+ZGluZyBSVyBvciBOWCBmbGFncyBhcyBhcHByb3ByaWF0ZS4KPj4gLS0tCj4+Cj4gSSB3aWxsIHVw
+ZGF0ZSB0aGUgcGF0Y2ggZGVzY3JpcHRpb24uCj4+Pgo+Pj4KPj4+IE5vdGU6IEl0IHdhcyB0ZXN0
+ZWQgd2l0aCB4ZW4tYWNjZXNzIHdyaXRlCj4+Pgo+Pj4gU2lnbmVkLW9mZi1ieTogQWxleGFuZHJ1
+IElzYWlsYSA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+Cj4+Cj4+Pgo+Pj4KPj4+IC0tLQo+Pj4g
+Q2hhbmdlcyBzaW5jZSBWMjoKPj4+IAktIERlbGV0ZSBibGFrIGxpbmUKPj4+IAktIEFkZCByZXR1
+cm4gaWYgcDJtX2FjY2Vzc19yd3ggPSBhCj4+PiAJLSBEZWxldGUgdGhlIGNvbW1lbnQgZnJvbSBw
+Mm1fcHRfZ2V0X2VudHJ5KCkKPj4+IAktIE1vdmVkIHJhZGl4X3RyZWVfaW5pdCgpIHRvIGFyY2hf
+bW9uaXRvcl9pbml0X2RvbWFpbigpLgo+Pj4gLS0tCj4+PiB4ZW4vYXJjaC94ODYvbW0vbWVtX2Fj
+Y2Vzcy5jwqDCoMKgwqDCoHzCoMKgwqAzICsrCj4+PiB4ZW4vYXJjaC94ODYvbW0vcDJtLXB0LmPC
+oMKgwqDCoMKgwqDCoMKgwqB8IDEwOQo+Pj4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKy0tLS0tCj4+PiB4ZW4vYXJjaC94ODYvbW0vcDJtLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqB8wqDCoMKgNiArKysKPj4+IHhlbi9hcmNoL3g4Ni9tb25pdG9yLmPCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgfMKgwqAxMyArKysrKwo+Pj4geGVuL2luY2x1ZGUvYXNtLXg4Ni9tZW1fYWNjZXNzLmgg
+fMKgwqDCoDIgKy0KPj4+IHhlbi9pbmNsdWRlL2FzbS14ODYvcDJtLmjCoMKgwqDCoMKgwqDCoMKg
+fMKgwqDCoDYgKysrCj4+PiA2IGZpbGVzIGNoYW5nZWQsIDEyNCBpbnNlcnRpb25zKCspLCAxNSBk
+ZWxldGlvbnMoLSkKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L21tL21lbV9hY2Nl
+c3MuYwo+Pj4gYi94ZW4vYXJjaC94ODYvbW0vbWVtX2FjY2Vzcy5jCj4+PiBpbmRleCBjMGNkMDE3
+Li5kNzhjODJjIDEwMDY0NAo+Pj4gLS0tIGEveGVuL2FyY2gveDg2L21tL21lbV9hY2Nlc3MuYwo+
+Pj4gKysrIGIveGVuL2FyY2gveDg2L21tL21lbV9hY2Nlc3MuYwo+Pj4gQEAgLTIyMSw3ICsyMjEs
+MTAgQEAgYm9vbCBwMm1fbWVtX2FjY2Vzc19jaGVjayhwYWRkcl90IGdwYSwKPj4+IHVuc2lnbmVk
+IGxvbmcgZ2xhLAo+Pj4gwqDCoMKgwqDCoMKgwqDCoHsKPj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoHJlcS0+dS5tZW1fYWNjZXNzLmZsYWdzIHw9IE1FTV9BQ0NFU1NfR0xBX1ZBTElEOwo+Pj4g
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmVxLT51Lm1lbV9hY2Nlc3MuZ2xhID0gZ2xhOwo+Pj4g
+K8KgwqDCoMKgwqDCoMKgwqB9Cj4+Pgo+Pj4gK8KgwqDCoMKgwqDCoMKgwqBpZiAoIG5wZmVjLmds
+YV92YWxpZCB8fCBjcHVfaGFzX3N2bSApCj4+PiArwqDCoMKgwqDCoMKgwqDCoHsKPj4gSSBjYW7i
+gJl0IGltbWVkaWF0ZWx5IHRlbGwgd2hhdCB0aGlzIGlzIGFib3V0LCB3aGljaCBtZWFucyBpdCBu
+ZWVkcyBhCj4+IGNvbW1lbnQuCj4+Cj4+IEl0IG1heSBhbHNvIGJlIChkZXBlbmRpbmcgb24gd2h5
+IHRoaXMgaXMgaGVyZSkgdGhhdCDigJxjcHVfaGFzX3N2beKAnQo+PiBtYWtlcyB0aGlzIG1vcmUg
+ZnJhZ2lsZSDigJQgaWYgdGhpcyBpcyByZWFsbHkgYWJvdXQgaGF2aW5nIGEgcmFkaXgKPj4gdHJl
+ZSwgZm9yIGluc3RhbmNlLCB0aGVuIHlvdSBzaG91bGQgcHJvYmFibHkgY2hlY2sgZm9yIGEgcmFk
+aXggdHJlZS4KPiAKPiBUaGlzIGlzIGFib3V0IHRoZSBkaWZmZXJlbnQgbnBmZWMgb24gU1ZOLiBU
+aGUgZ2xhIGluIG5ldmVyIHZhbGlkIHNvIHRoZQo+IGZhdWx0IGZsYWcgd2lsbCBub3QgYmUgc2V0
+LgoKUmlnaHQgLS0gdGhlbiByZWFsbHkgdGhpcyBjaGVjayB3YXMgYWx3YXlzIGEgVk1YLWlzbSwg
+YW5kIHNob3VsZCByZWFsbHkKaGF2ZSBiZWVuOgoKICAgIC8qIFZNWCBjYW4gb25seSB0ZWxsIHRo
+ZSBmYXVsdCB0eXBlIGlmIGdsYV92YWxpZCBpcyBzZXQgKi8KICAgIGlmICggIShjcHVfaGFzX3Zt
+eCAmJiAhbnBmZWMuZ2xhX3ZhbGlkKSApIHsKICAgIC4uLgoKQnV0IGluIGFueSBjYXNlLCBpZiBj
+cHVfaGFzX3ZteCAmJiAhbnBmZWMuZ2xhX3ZhbGlkLCB0aGVuIG5wZmVjLmtpbmQKc2hvdWxkIGJl
+IG5wZmVjX2tpbmRfdW5rbm93biAoPT0wKTsgc28gaXMgdGhlcmUgYW55IHJlYXNvbiBub3QgdG8g
+cmVhZApucGZlYy5raW5kIGhlcmUgdW5jb25kaXRpb25hbGx5PyAgaS5lLiwgbGlrZSBiZWxvdz8K
+CiAgICBpZiAoIG5wZmVjLmdsYV92YWxpZCApCiAgICB7CiAgICAgICAgcmVxLT51Lm1lbV9hY2Nl
+c3MuZmxhZ3MgfD0gTUVNX0FDQ0VTU19HTEFfVkFMSUQ7CiAgICAgICAgcmVxLT51Lm1lbV9hY2Nl
+c3MuZ2xhID0gZ2xhOwogICAgfQoKICAgIGlmICggbnBmZWMua2luZCA9PSBucGZlY19raW5kX3dp
+dGhfZ2xhICkKICAgICAgICByZXEtPnUubWVtX2FjY2Vzcy5mbGFncyB8PSBNRU1fQUNDRVNTX0ZB
+VUxUX1dJVEhfR0xBOwogICAgZWxzZSBpZiAoIG5wZmVjLmtpbmQgPT0gbnBmZWNfa2luZF9pbl9n
+cHQgKQogICAgICAgIHJlcS0+dS5tZW1fYWNjZXNzLmZsYWdzIHw9IE1FTV9BQ0NFU1NfRkFVTFRf
+SU5fR1BUOwoKCiAtR2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
