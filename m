@@ -1,16 +1,26 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 125453: regressions - FAIL
-Date: Fri, 20 Jul 2018 04:54:54 +0000
-Message-ID: <osstest-125453-mainreport@xen.org>
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Subject: Re: [PATCH] shim: Fix generation of compat/callback.i:
+ allow redef of OBJECT vars
+Date: Thu, 19 Jul 2018 22:26:03 -0700
+Message-ID: <CACMJ4GbKn-t3OOwVA2Ue6UyoKxTP3gvYYV8xO_rkqHVPQrAX7A@mail.gmail.com>
+References: <1531956796-7465-1-git-send-email-christopher.w.clark@gmail.com>
+ <5B5036A802000078001D5AE3@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1807190955250.19154@sstabellini-ThinkPad-X260>
+ <5B50D9420200007800137603@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1807191139460.19154@sstabellini-ThinkPad-X260>
+ <5B50E13E020000780013763E@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1807191233140.19154@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0051022027233321725=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=mg4+=ke=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fgNRU-0004uX-Tq
- for xen-devel@lists.xenproject.org; Fri, 20 Jul 2018 04:55:00 +0000
+ <srs0=gv0p=ke=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
+ id 1fgNvb-0007sP-R3
+ for xen-devel@lists.xenproject.org; Fri, 20 Jul 2018 05:26:07 +0000
+Received: by mail-lj1-x243.google.com with SMTP id l15-v6so10090683lji.6
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Jul 2018 22:26:05 -0700 (PDT)
+In-Reply-To: <alpine.DEB.2.10.1807191233140.19154@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,144 +29,223 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, julien.grall@arm.com, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNTQ1MyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNTQ1My8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYW1kNjQgICAgICAgICAg
-ICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI1NDMy
-CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVz
-dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAg
-IGJsb2NrZWQgIG4vYQogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgMSBidWlsZC1jaGVj
-aygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dS1kZWJpYW5odm0taTM4NiAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgIGJsb2NrZWQgbi9hCiB0
-ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2
-ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
-cm1oZi14bCAgICAgICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBu
-ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1
-cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRl
-c3Rpbmc6CiB4ZW4gICAgICAgICAgICAgICAgICBkNjM3MWNjYjkzMDEyZGI0YWQ2NjE1ZmU2NjYy
-MDViODYzMDhjYjRlCmJhc2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICAzY2Rh
-YzI4MDU2OTJjN2FjY2RlMmY0MDVkODFjYzBiZTc5OWFlZTQ4CgpMYXN0IHRlc3Qgb2YgYmFzaXMg
-ICAxMjU0MzIgIDIwMTgtMDctMTkgMTQ6MDA6NDAgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNp
-bmNlICAgMTI1NDM5ICAyMDE4LTA3LTE5IDE5OjAwOjM2IFogICAgMCBkYXlzICAgIDQgYXR0ZW1w
-dHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3
-IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICBKYW4gQmV1bGljaCA8amJldWxp
-Y2hAc3VzZS5jb20+CiAgUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cgpq
-b2JzOgogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1k
-NjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2Nr
-ZWQgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dS1kZWJpYW5odm0taTM4NiAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0
-LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tl
-ZCAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qu
-b3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dz
-LCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVz
-dC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSBy
-ZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJp
-dHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hi
-PW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7
-YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5k
-IGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3Vt
-bWFyeQoKCk5vdCBwdXNoaW5nLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCBkNjM3MWNjYjkzMDEyZGI0YWQ2NjE1ZmU2
-NjYyMDViODYzMDhjYjRlCkF1dGhvcjogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0
-cml4LmNvbT4KRGF0ZTogICBXZWQgSnVsIDE4IDEyOjIyOjU1IDIwMTggKzAxMDAKCiAgICB4ODYv
-eHN0YXRlOiBNYWtlIGVycm9ycyBpbiB4c3RhdGUgY2FsY3VsYXRpb25zIG1vcmUgb2J2aW91cyBi
-eSBjcmFzaGluZyB0aGUgZG9tYWluCiAgICAKICAgIElmIHhjcjBfbWF4IGV4Y2VlZHMgeGZlYXR1
-cmVfbWFzaywgdGhlbiBzb21ldGhpbmcgaXMgYnJva2VuIHdpdGggdGhlIENQVUlECiAgICBwb2xp
-Y3kgZGVyaXZhdGlvbiBvciBhdWRpdGluZyBsb2dpYy4gIElmIGhhcmR3YXJlIHJlamVjdHMgbmV3
-X2J2LCB0aGVuCiAgICBzb21ldGhpbmcgaXMgYnJva2VuIHdpdGggWGVuJ3MgeHN0YXRlIGxvZ2lj
-LgogICAgCiAgICBJbiBib3RoIGNhc2VzLCBjcmFzaCB0aGUgZG9tYWluIHdpdGggYW4gb2J2aW91
-cyBlcnJvciBtZXNzYWdlLCB0byBoZWxwCiAgICBoaWdobGlnaHQgdGhlIGlzc3Vlcy4KICAgIAog
-ICAgU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNv
-bT4KICAgIFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cgpjb21t
-aXQgMzYxYjgzNWZhMDBkOWY0NTE2N2M1MGE2MGUwNTRjY2YyMmMwNjVkNwpBdXRob3I6IEFuZHJl
-dyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgV2VkIEp1bCAxOCAx
-MTo1Njo0NCAyMDE4ICswMTAwCgogICAgeDg2L3hzdGF0ZTogVXNlIGEgZ3Vlc3RzIENQVUlEIHBv
-bGljeSwgcmF0aGVyIHRoYW4gYWxsb3dpbmcgYWxsIGZlYXR1cmVzCiAgICAKICAgIEl0IHR1cm5z
-IG91dCB0aGF0IFhlbiBoYXMgbmV2ZXIgZW5mb3JjZWQgdGhhdCBhIGRvbWFpbiByZW1haW4gd2l0
-aGluIHRoZQogICAgeHN0YXRlIGZlYXR1cmVzIGFkdmVydGlzZWQgaW4gQ1BVSUQuCiAgICAKICAg
-IFRoZSBjaGVjayBvZiBuZXdfYnYgYWdhaW5zdCB4ZmVhdHVyZV9tYXNrIGVuc3VyZXMgdGhhdCBh
-IGRvbWFpbiBzdGF5cyB3aXRoaW4KICAgIHRoZSBzZXQgb2YgZmVhdHVyZXMgdGhhdCBYZW4gaGFz
-IGVuYWJsZWQgaW4gaGFyZHdhcmUgKGFuZCB0aGVyZWZvcmUgaXNuJ3QgYQogICAgc2VjdXJpdHkg
-cHJvYmxlbSksIGJ1dCB0aGlzIGRvZXMgbWVhbnMgdGhhdCBhdHRlbXB0cyB0byBsZXZlbCBhIGd1
-ZXN0IGZvcgogICAgbWlncmF0aW9uIHNhZmV0eSBtaWdodCBub3QgYmUgZWZmZWN0aXZlIGlmIHRo
-ZSBndWVzdCBpZ25vcmVzIENQVUlELgogICAgCiAgICBDaGVjayB0aGUgQ1BVSUQgcG9saWN5IGlu
-IHZhbGlkYXRlX3hzdGF0ZSgpIChmb3IgaW5jb21pbmcgbWlncmF0aW9uKSBhbmQgaW4KICAgIGhh
-bmRsZV94c2V0YnYoKSAoZm9yIGd1ZXN0IFhTRVRCViBpbnN0cnVjdGlvbnMpLiAgVGhpcyBzdWJz
-dW1lcyB0aGUgUEtSVSBjaGVjawogICAgZm9yIFBWIGd1ZXN0cyBpbiBoYW5kbGVfeHNldGJ2KCkg
-KGFuZCBhbHNvIGRlbW9uc3RyYXRlcyB0aGF0IEkgc2hvdWxkIGhhdmUKICAgIHNwb3R0ZWQgdGhp
-cyBwcm9ibGVtIHdoaWxlIHJldmlld2luZyBjL3MgZmJmOTk3MTI0MWYpLgogICAgCiAgICBGb3Ig
-bWlncmF0aW9uLCB0aGlzIGlzIGNvcnJlY3QgZGVzcGl0ZSB0aGUgY3VycmVudCAobWlzKW9yZGVy
-aW5nIG9mIGRhdGEKICAgIGJlY2F1c2UgZC0+YXJjaC5jcHVpZCBpcyB0aGUgYXBwbGljYWJsZSBt
-YXggcG9saWN5LgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcu
-Y29vcGVyM0BjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGlj
-aEBzdXNlLmNvbT4KCmNvbW1pdCAyZTJiZDVhMjllNDgxZDBlN2YxNjNhMTlkNjYzZDk1OWUwOTU1
-MGZkCkF1dGhvcjogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KRGF0
-ZTogICBGcmkgSnVuIDI5IDEzOjA1OjUyIDIwMTggKzAwMDAKCiAgICBsaWJ4ODY6IEludHJvZHVj
-ZSBsaWIveDg2L21zci5oIGFuZCBzaGFyZSBtc3JfcG9saWN5IHdpdGggdXNlcnNwYWNlCiAgICAK
-ICAgIFRvIGZhY2lsaXRhdGUgdGhlIHNoYXJlZCBYZW4gYW5kIHRvb2xzdGFjayBjb2RlIGluIGxp
-Yng4Niwgc3RydWN0IG1zcl9wb2xpY3kKICAgIG5lZWRzIHRvIGJlIGF2YWlsYWJsZSBpbiB0aGUg
-c2FtZSB3YXkgYXMgc3RydWN0IGNwdWlkX3BvbGljeS4KICAgIAogICAgU2lnbmVkLW9mZi1ieTog
-QW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIFJldmlld2VkLWJ5
-OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IFJvZ2VyIFBh
-dSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgogICAgQWNrZWQtYnk6IEphbiBCZXVsaWNo
-IDxqYmV1bGljaEBzdXNlLmNvbT4KCmNvbW1pdCBmZWEyZmFiOTYzNTYxM2Q1YmU4MzQ4MmRhNWQ3
-OTE2MGVmOTI4OTQxCkF1dGhvcjogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5j
-b20+CkRhdGU6ICAgVGh1IEp1biAyMSAxNTozNTo0OCAyMDE4ICswMTAwCgogICAgbGlieDg2OiBp
-bnRyb2R1Y2UgYSBsaWJ4ODYgc2hhcmVkIGxpYnJhcnkKICAgIAogICAgTW92ZSB4ODZfY3B1aWRf
-bG9va3VwX2RlZXBfZGVwcygpIGludG8gdGhlIHNoYXJlZCBsaWJyYXJ5LCByZW1vdmluZyB0aGUK
-ICAgIGluZGl2aWR1YWwgY29waWVzIGZyb20gdGhlIGh5cGVydmlzb3IgYW5kIGxpYnhjIHJlc3Bl
-Y3RpdmVseS4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIu
-cGF1QGNpdHJpeC5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcu
-Y29vcGVyM0BjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNp
-dHJpeC5jb20+CiAgICBBY2tlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoK
-Y29tbWl0IDRkZDdlNzRmMzFmYWNmOTk3ZmZhNjRkMWMzOGExZGE3YTcwN2UzMjYKQXV0aG9yOiBS
-b2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KRGF0ZTogICBUaHUgSnVuIDIx
-IDE2OjM1OjQ2IDIwMTggKzAyMDAKCiAgICBsaWJ4ODY6IFNoYXJlIHN0cnVjdCBjcHVpZF9wb2xp
-Y3kgd2l0aCB1c2Vyc3BhY2UKICAgIAogICAgQm90aCBYZW4gYW5kIHRoZSB0b29sc3RhY2sgaGF2
-ZSBuZWVkIG9mIHRoZSBzYW1lIGxvZ2ljIHdoZW4gaXQgY29tZXMgdG8KICAgIG1hbmlwdWxhdGlv
-biBhbmQgY2hlY2tpbmcgb2YgdGhlIENQVUlEIGFuZCBNU1IgdmFsdWVzIG9mZmVyZWQgdG8gZ3Vl
-c3RzLiAgVG8KICAgIHRoYXQgZW5kLCBsaWJ4ODYgaXMgYmVpbmcgaW50cm9kdWNlZCB0byBhbGxv
-dyBYZW4gYW5kIHRoZSB0b29sc3RhY2sgdG8gc2hhcmUgYQogICAgc2luZ2xlIGltcGxlbWVudGF0
-aW9uLCByYXRoZXIgdGhhbiBkdXBsaWNhdGluZyB0aGUgbG9naWMuCiAgICAKICAgIE5vIGZ1bmN0
-aW9uYWwgY2hhbmdlLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxy
-b2dlci5wYXVAY2l0cml4LmNvbT4KICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFu
-ZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgICBSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxp
-dTJAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5j
-b20+Cgpjb21taXQgZWRkZjk1NTljOTc3OWU5YTExZTFjNGRiNDZiNWVjMjZiM2NiODcwOQpBdXRo
-b3I6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgpEYXRlOiAgIFRodSBK
-dW4gMjEgMTY6MzU6NDYgMjAxOCArMDIwMAoKICAgIGxpYng4NjogZ2VuZXJhdGUgY3B1aWQtYXV0
-b2dlbi5oIGluIHRoZSBsaWJ4ODYgaW5jbHVkZSBkaXIKICAgIAogICAgVGhpcyBhdm9pZHMgYWxs
-IHVzZXJzIG5lZWRpbmcgdG8gb3BlbmNvZGUgbG9jYWwgZ2VuZXJhdGlvbiBvZiB0aGUgZmlsZS4K
-ICAgIAogICAgU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJp
-eC5jb20+CiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0Bj
-aXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+
-CiAgICBSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKY29tbWl0
-IDBlOTZmM2Q1MmVjMjAwYjhmNzc2NDE2NGUyMmQ3NmVlZjYxNTFmNTkKQXV0aG9yOiBBbmRyZXcg
-Q29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgpEYXRlOiAgIFRodSBKdW4gMjggMTE6
-MDA6NDQgMjAxOCArMDAwMAoKICAgIGxpYng4NjogSW50cm9kdWNlIGxpYi94ODYvY3B1aWQuaAog
-ICAgCiAgICBCZWdpbiB0byB1bnRhbmdsZSB0aGUgaGVhZGVyIGRlcGVuZGVuY3kgdGFuZ2xlIGJ5
-IG1vdmluZyBkZWZpbml0aW9uIG9mCiAgICBzdHJ1Y3QgY3B1aWRfbGVhZiBvdXQgb2YgeDg2X2Vt
-dWxhdGUuaCBpbnRvIHRoZSBuZXcgY3B1aWQuaC4KICAgIAogICAgQWRkaXRpb25hbGx5LCBwbHVt
-YiB0aGUgaGVhZGVyIHRocm91Z2ggdG8gbGlieGMuICBUaGlzIGlzIHRlY2huaWNhbGx5IGEKICAg
-IHJlZHVuZGFudCBpbmNsdWRlIGF0IHRoaXMgcG9pbnQsIGJ1dCBpdCBoZWxwcyBidWlsZC10ZXN0
-IHRoZSBsYXRlciBjaGFuZ2VzLAogICAgYW5kIHdpbGwgYmUgdXNlZCBldmVudHVhbGx5LgogICAg
-CiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXgu
-Y29tPgogICAgU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJp
-eC5jb20+CiAgICBSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KICAg
-IEFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CihxZW11IGNoYW5nZXMg
-bm90IGluY2x1ZGVkKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+--===============0051022027233321725==
+Content-Type: multipart/alternative; boundary="00000000000037dfc30571678837"
+
+--00000000000037dfc30571678837
+Content-Type: text/plain; charset="UTF-8"
+
+On Thu, Jul 19, 2018 at 12:34 PM, Stefano Stabellini <sstabellini@kernel.org
+> wrote:
+
+> On Thu, 19 Jul 2018, Jan Beulich wrote:
+> > >>> Stefano Stabellini <sstabellini@kernel.org> 07/19/18 8:49 PM >>>
+> > >On Thu, 19 Jul 2018, Jan Beulich wrote:
+> > >> >>> Stefano Stabellini <sstabellini@kernel.org> 07/19/18 7:00 PM >>>
+> > >> >On Thu, 19 Jul 2018, Jan Beulich wrote:
+> > >> >> > Signed-off-by: Christopher Clark <christopher.clark6@
+> baesystems.com>
+> > >> >> > ---
+> > >> >> > Please use my gmail address for any correspondence to me.
+> > >> >>
+> > >> >> I think it is generally considered bad practice to have From: and
+> S-o-b
+> > >> >> differ.
+> > >> >
+> > >> >Why? That is perfectly fine. Signed-off-by is about copyright of the
+> > >> >code while From: is about authorship.
+> > >>
+> > >> Well, in this particular case Christopher had even asked that
+> communication
+> > >> to go to the mail address he sent from. How is anyone going to know
+> that if
+> > >> judging just from the eventual commit in git?
+> > >
+> > >Yeah, that bit of information is lost in the commit message,
+> > >unfortunately. At that point, the patch is already committed, so it is
+> > >usually not a big deal.
+> >
+> > What if there is an issue with the change, or simply a question about it?
+> > I'd expect to be able to get in touch with the author by using the
+> provided
+> > email address, at least if the commit isn't overly old yet.
+>
+> Thinking about it, the From: email address will end up in the Author:
+> field of the commit. So actually, the information will be retained.
+>
+
+Thanks for the group input on the From/Author and S-o-b identifiers.
+
+Context on the constraints which lead to the structure of my original message
+on this thread:
+
+* Email message source:
+
+My messages are sent to the list from my gmail account as that's the one I
+have easiest access to from my development environment. Shouldn't be a
+concern as I'm easily reachable there and as Stefano pointed out, inclusion
+of an alternate 'From:' in within the message body is enough to change the
+git 'Author' if the patch is merged.
+
+* Commit Author:
+
+I can provide either address for the From/Author address for the commit.
+
+My preference is for it being the address I am reliably reachable at --
+which would be my gmail account as noted. My reachability at this email
+address has exceeded that of any other email address I have ever had,
+surviving multiple changes of organizational affiliation.
+
+* Commit Signed-off-by:
+
+I have a legal requirement to ensure that copyright is attributed for the
+work, and I have used the S-o-b address to do so.  In the patch I sent, the
+email address provided for the S-o-b is under the administrative control of
+the legal owner of the copyright, which seems appropriate for it.
+
+I could change the S-o-b to match the From/Author, and add further language
+to the commit message to clarify copyright attribution, but that seems
+incorrect and would require further effort to support any automation for
+eg. harvesting community contribution statistics.
+
+Re: Jan's feedback on the patch content:
+
+The hint to CFLAGS was helpful, thanks, as this double define is indeed
+being triggered when CFLAGS is not cleared, so: this patch isn't necessary.
+
+I still haven't quite determined why a top level "make install" triggers a
+"make -C xen-root/xen distclean", which then causes further compilation to
+be performed, in what should be an install-only step, which made this other
+behaviour visible (since in the cross-compile system I'm working with,
+CFLAGS is being explicitly cleared for the "make" but happened not to be
+for "make install").
+
+It's also been brought to my attention that this isn't the first time this
+undefine has been proposed on this list -- so apologies for the revisit.
+
+thanks,
+
+Christopher
+
+--00000000000037dfc30571678837
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_extra"><br><div class=3D"gmail_quo=
+te">On Thu, Jul 19, 2018 at 12:34 PM, Stefano Stabellini <span dir=3D"ltr">=
+&lt;<a href=3D"mailto:sstabellini@kernel.org" target=3D"_blank">sstabellini=
+@kernel.org</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex"><span class=3D"gmail-">On Thu, 19 Jul 2018, Jan Beulich wrote:<=
+br>
+&gt; &gt;&gt;&gt; Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kern=
+el.org">sstabellini@kernel.org</a>&gt; 07/19/18 8:49 PM &gt;&gt;&gt;<br>
+&gt; &gt;On Thu, 19 Jul 2018, Jan Beulich wrote:<br>
+&gt; &gt;&gt; &gt;&gt;&gt; Stefano Stabellini &lt;<a href=3D"mailto:sstabel=
+lini@kernel.org">sstabellini@kernel.org</a>&gt; 07/19/18 7:00 PM &gt;&gt;&g=
+t;<br>
+&gt; &gt;&gt; &gt;On Thu, 19 Jul 2018, Jan Beulich wrote:<br>
+&gt; &gt;&gt; &gt;&gt; &gt; Signed-off-by: Christopher Clark &lt;<a href=3D=
+"mailto:christopher.clark6@baesystems.com">christopher.clark6@<wbr>baesyste=
+ms.com</a>&gt;<br>
+&gt; &gt;&gt; &gt;&gt; &gt; ---<br>
+&gt; &gt;&gt; &gt;&gt; &gt; Please use my gmail address for any corresponde=
+nce to me.<br>
+&gt; &gt;&gt; &gt;&gt; <br>
+&gt; &gt;&gt; &gt;&gt; I think it is generally considered bad practice to h=
+ave From: and S-o-b<br>
+&gt; &gt;&gt; &gt;&gt; differ.<br>
+&gt; &gt;&gt; &gt;<br>
+&gt; &gt;&gt; &gt;Why? That is perfectly fine. Signed-off-by is about copyr=
+ight of the<br>
+&gt; &gt;&gt; &gt;code while From: is about authorship. <br>
+&gt; &gt;&gt; <br>
+&gt; &gt;&gt; Well, in this particular case Christopher had even asked that=
+ communication<br>
+&gt; &gt;&gt; to go to the mail address he sent from. How is anyone going t=
+o know that if<br>
+&gt; &gt;&gt; judging just from the eventual commit in git?<br>
+&gt; &gt;<br>
+&gt; &gt;Yeah, that bit of information is lost in the commit message,<br>
+&gt; &gt;unfortunately. At that point, the patch is already committed, so i=
+t is<br>
+&gt; &gt;usually not a big deal.<br>
+&gt; <br>
+&gt; What if there is an issue with the change, or simply a question about =
+it?<br>
+&gt; I&#39;d expect to be able to get in touch with the author by using the=
+ provided<br>
+&gt; email address, at least if the commit isn&#39;t overly old yet.<br>
+<br>
+</span>Thinking about it, the From: email address will end up in the Author=
+:<br>
+field of the commit. So actually, the information will be retained.<br>
+</blockquote></div><div class=3D"gmail_extra"><br></div><div class=3D"gmail=
+_extra">Thanks for the group input on the From/Author and S-o-b identifiers=
+.</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">Cont=
+ext on the constraints which lead to the structure of my <span style=3D"fon=
+t-size:small;background-color:rgb(255,255,255);text-decoration-style:initia=
+l;text-decoration-color:initial;float:none;display:inline">original<span>=
+=C2=A0</span></span>message on this thread:</div><div class=3D"gmail_extra"=
+><br></div><div class=3D"gmail_extra">* Email message source:</div><div cla=
+ss=3D"gmail_extra"><br></div><div class=3D"gmail_extra">My messages are sen=
+t to the list from my gmail account as that&#39;s the one I have easiest ac=
+cess to from my development environment. Shouldn&#39;t be a concern as I&#3=
+9;m easily reachable there and as Stefano pointed out, inclusion of an alte=
+rnate &#39;From:&#39; in within the message body is enough to change the gi=
+t &#39;Author&#39; if the patch is merged.</div><div class=3D"gmail_extra">=
+<br></div><div class=3D"gmail_extra">* Commit Author:</div><div class=3D"gm=
+ail_extra"><br></div><div class=3D"gmail_extra">I can provide either addres=
+s for the From/Author address for the commit.</div><div class=3D"gmail_extr=
+a"><br></div><div class=3D"gmail_extra">My preference is for it being the a=
+ddress I am reliably reachable at -- which would be my gmail account as not=
+ed. My reachability at this email address has exceeded that of any other em=
+ail address I have ever had, surviving multiple changes of organizational a=
+ffiliation.</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_e=
+xtra">* Commit Signed-off-by:</div><div class=3D"gmail_extra"><br></div><di=
+v class=3D"gmail_extra">I have a legal requirement to ensure that copyright=
+ is attributed for the work, and I have used the S-o-b address to do so.=C2=
+=A0 In the patch I sent, the email address provided for the S-o-b is under =
+the administrative control of the legal owner of the copyright, which seems=
+ appropriate for it.</div><div class=3D"gmail_extra"><br></div><div class=
+=3D"gmail_extra">I could change the S-o-b to match the From/Author, and add=
+ further language to the commit message to clarify copyright attribution, b=
+ut that seems incorrect and would require further effort to support any aut=
+omation for eg. harvesting community contribution statistics.</div><div cla=
+ss=3D"gmail_extra"><br></div><div class=3D"gmail_extra">Re: Jan&#39;s feedb=
+ack on the patch content:</div><div class=3D"gmail_extra"><br></div><div cl=
+ass=3D"gmail_extra">The hint to CFLAGS was helpful, thanks, as this double =
+define is indeed being triggered when CFLAGS is not cleared, so: this patch=
+ isn&#39;t necessary.</div><div class=3D"gmail_extra"><br></div><div class=
+=3D"gmail_extra">I still haven&#39;t quite determined why a top level &quot=
+;make install&quot; triggers a &quot;make -C xen-root/xen distclean&quot;, =
+which then causes further compilation to be performed, in what should be an=
+ install-only step, which made this other behaviour visible (since in the c=
+ross-compile system I&#39;m working with, CFLAGS is being explicitly cleare=
+d for the &quot;make&quot; but happened not to be for &quot;make install&qu=
+ot;).</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">=
+It&#39;s also been brought to my attention that this isn&#39;t the first ti=
+me this undefine has been proposed on this list -- so apologies for the rev=
+isit.</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra">=
+thanks,</div><div class=3D"gmail_extra"><br></div><div class=3D"gmail_extra=
+">Christopher</div><div><br></div></div><div class=3D"gmail_extra"><br></di=
+v></div>
+
+--00000000000037dfc30571678837--
+
+
+--===============0051022027233321725==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0051022027233321725==--
