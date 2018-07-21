@@ -1,462 +1,96 @@
-From: Ahmed Abd El Mawgood <ahmedsoliman0x666@gmail.com>
-Subject: [PATCH RFC V4 3/3] KVM: X86: Adding skeleton for Memory ROE
-Date: Sat, 21 Jul 2018 01:31:30 +0200
-Message-ID: <20180720233130.14129-4-ahmedsoliman0x666@gmail.com>
-References: <20180720233130.14129-1-ahmedsoliman0x666@gmail.com>
-Return-path: <kernel-hardening-return-13824-glkh-kernel-hardening=m.gmane.org@lists.openwall.com>
-List-Post: <mailto:kernel-hardening@lists.openwall.com>
-List-Help: <mailto:kernel-hardening-help@lists.openwall.com>
-List-Unsubscribe: <mailto:kernel-hardening-unsubscribe@lists.openwall.com>
-List-Subscribe: <mailto:kernel-hardening-subscribe@lists.openwall.com>
-In-Reply-To: <20180720233130.14129-1-ahmedsoliman0x666@gmail.com>
-To: kvm@vger.kernel.org, Kernel Hardening <kernel-hardening@lists.openwall.com>, virtualization@lists.linux-foundation.org, linux-doc@vger.kernel.org, x86@kernel.org, xen-devel@lists.xensource.com
-Cc: Paolo Bonzini <pbonzini@redhat.com>, rkrcmar@redhat.com, nathan Corbet <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, hpa@zytor.com, Kees Cook <keescook@chromium.org>, Ard Biesheuvel <ard.biesheuvel@linaro.org>, David Hildenbrand <david@redhat.com>, Boris Lukashev <blukashev@sempervictus.com>, David Vrabel <david.vrabel@nutanix.com>, nigel.edwards@hpe.com, Rik van Riel <riel@surriel.com>, Ahmed Abd El Mawgood <ahmedsoliman0x666@gmail.com>
+From: Andrew Morton <akpm@linux-foundation.org>
+Subject: Re: [PATCH] mm,
+ oom: distinguish blockable mode for mmu notifiers
+Date: Fri, 20 Jul 2018 17:09:02 -0700
+Message-ID: <20180720170902.d1137060c23802d55426aa03__15897.5097387613$1532131692$gmane$org@linux-foundation.org>
+References: <20180716115058.5559-1-mhocko@kernel.org>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=xzri=kf=linux-foundation.org=akpm@srs-us1.protection.inumbo.net>)
+ id 1fgfSN-0007dw-Js
+ for xen-devel@lists.xenproject.org; Sat, 21 Jul 2018 00:09:07 +0000
+In-Reply-To: <20180716115058.5559-1-mhocko@kernel.org>
+List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
+List-Post: <mailto:xen-devel@lists.xenproject.org>
+List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
+List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Errors-To: xen-devel-bounces@lists.xenproject.org
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+To: Michal Hocko <mhocko@kernel.org>
+Cc: Michal Hocko <mhocko@suse.com>, kvm@vger.kernel.org, Radim =?UTF-8?Q?Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@redhat.com>, David Airlie <airlied@linux.ie>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Sudeep Dutt <sudeep.dutt@intel.com>, dri-devel@lists.freedesktop.org, linux-mm@kvack.org, Andrea Arcangeli <aarcange@redhat.com>, "David (ChunMing) Zhou" <David1.Zhou@amd.com>, Dimitri Sivanich <sivanich@sgi.com>, linux-rdma@vger.kernel.org, amd-gfx@lists.freedesktop.org, Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>, David Rientjes <rientjes@google.com>, xen-devel@lists.xenproject.org, intel-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>, Leon Romanovsky <leonro@mellanox.com>, =?ISO-8859-1?Q?J=E9r=F4me?= Glisse <jglisse@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen
 List-Id: xen-devel@lists.xenproject.org
 
-This patch introduces a hypercall implemented for X86 that can assist
-against subset of kernel rootkits, it works by place readonly protection in
-shadow PTE. The end result protection is also kept in a bitmap for each
-kvm_memory_slot and is used as reference when updating SPTEs. The whole
-goal is to protect the guest kernel static data from modification if
-attacker is running from guest ring 0, for this reason there is no
-hypercall to revert effect of Memory ROE hypercall. This patch doesn't
-implement integrity check on guest TLB so obvious attack on the current
-implementation will involve guest virtual address -> guest physical
-address remapping, but there are plans to fix that.
-
-Signed-off-by: Ahmed Abd El Mawgood <ahmedsoliman0x666@gmail.com>
----
- arch/x86/include/asm/kvm_host.h |  11 ++++-
- arch/x86/kvm/Kconfig            |   7 +++
- arch/x86/kvm/mmu.c              |  72 +++++++++++++++++++++++-----
- arch/x86/kvm/x86.c              | 104 ++++++++++++++++++++++++++++++++++++++--
- include/linux/kvm_host.h        |   3 ++
- include/uapi/linux/kvm_para.h   |   1 +
- virt/kvm/kvm_main.c             |  29 +++++++++--
- 7 files changed, 208 insertions(+), 19 deletions(-)
-
-diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index c13cd28d9d1b..128bcfa246a3 100644
---- a/arch/x86/include/asm/kvm_host.h
-+++ b/arch/x86/include/asm/kvm_host.h
-@@ -236,6 +236,15 @@ struct kvm_mmu_memory_cache {
- 	void *objects[KVM_NR_MEM_OBJS];
- };
- 
-+/*
-+ * This is internal structure used to be be able to access kvm memory slot and
-+ * have track of the number of current PTE when doing shadow PTE walk
-+ */
-+struct kvm_write_access_data {
-+	int i;
-+	struct kvm_memory_slot *memslot;
-+};
-+
- /*
-  * the pages used as guest page table on soft mmu are tracked by
-  * kvm_memory_slot.arch.gfn_track which is 16 bits, so the role bits used
-@@ -1130,7 +1139,7 @@ void kvm_mmu_set_mask_ptes(u64 user_mask, u64 accessed_mask,
- 		u64 acc_track_mask, u64 me_mask);
- 
- void kvm_mmu_reset_context(struct kvm_vcpu *vcpu);
--void kvm_mmu_slot_remove_write_access(struct kvm *kvm,
-+void kvm_mmu_slot_apply_write_access(struct kvm *kvm,
- 				      struct kvm_memory_slot *memslot);
- void kvm_mmu_zap_collapsible_sptes(struct kvm *kvm,
- 				   const struct kvm_memory_slot *memslot);
-diff --git a/arch/x86/kvm/Kconfig b/arch/x86/kvm/Kconfig
-index 1bbec387d289..487e02de4e76 100644
---- a/arch/x86/kvm/Kconfig
-+++ b/arch/x86/kvm/Kconfig
-@@ -96,6 +96,13 @@ config KVM_MMU_AUDIT
- 	 This option adds a R/W kVM module parameter 'mmu_audit', which allows
- 	 auditing of KVM MMU events at runtime.
- 
-+config KVM_MROE
-+	bool "Hypercall Memory Read-Only Enforcement"
-+	depends on KVM && X86
-+	help
-+	This option adds KVM_HC_HMROE hypercall to kvm as a hardening
-+	mechanism to protect memory pages from being edited.
-+
- # OK, it's a little counter-intuitive to do this, but it puts it neatly under
- # the virtualization menu.
- source drivers/vhost/Kconfig
-diff --git a/arch/x86/kvm/mmu.c b/arch/x86/kvm/mmu.c
-index 77661530b2c4..4ce6a9a19a23 100644
---- a/arch/x86/kvm/mmu.c
-+++ b/arch/x86/kvm/mmu.c
-@@ -1416,9 +1416,8 @@ static bool spte_write_protect(u64 *sptep, bool pt_protect)
- 	return mmu_spte_update(sptep, spte);
- }
- 
--static bool __rmap_write_protect(struct kvm *kvm,
--				 struct kvm_rmap_head *rmap_head,
--				 bool pt_protect, void *data)
-+static bool __rmap_write_protection(struct kvm *kvm,
-+		struct kvm_rmap_head *rmap_head, bool pt_protect)
- {
- 	u64 *sptep;
- 	struct rmap_iterator iter;
-@@ -1430,6 +1429,38 @@ static bool __rmap_write_protect(struct kvm *kvm,
- 	return flush;
- }
- 
-+#ifdef CONFIG_KVM_MROE
-+static bool __rmap_write_protect_mroe(struct kvm *kvm,
-+		struct kvm_rmap_head *rmap_head,
-+		bool pt_protect,
-+		struct kvm_write_access_data *d)
-+{
-+	u64 *sptep;
-+	struct rmap_iterator iter;
-+	bool prot;
-+	bool flush = false;
-+
-+	for_each_rmap_spte(rmap_head, &iter, sptep) {
-+		prot = !test_bit(d->i, d->memslot->mroe_bitmap) && pt_protect;
-+		flush |= spte_write_protect(sptep, prot);
-+		d->i++;
-+	}
-+	return flush;
-+}
-+#endif
-+
-+static bool __rmap_write_protect(struct kvm *kvm,
-+		struct kvm_rmap_head *rmap_head,
-+		bool pt_protect,
-+		struct kvm_write_access_data *d)
-+{
-+#ifdef CONFIG_KVM_MROE
-+	if (d != NULL)
-+		return __rmap_write_protect_mroe(kvm, rmap_head, pt_protect, d);
-+#endif
-+	return __rmap_write_protection(kvm, rmap_head, pt_protect);
-+}
-+
- static bool spte_clear_dirty(u64 *sptep)
- {
- 	u64 spte = *sptep;
-@@ -1517,7 +1548,7 @@ static void kvm_mmu_write_protect_pt_masked(struct kvm *kvm,
- 	while (mask) {
- 		rmap_head = __gfn_to_rmap(slot->base_gfn + gfn_offset + __ffs(mask),
- 					  PT_PAGE_TABLE_LEVEL, slot);
--		__rmap_write_protect(kvm, rmap_head, false, NULL);
-+		__rmap_write_protection(kvm, rmap_head, false);
- 
- 		/* clear the first set bit */
- 		mask &= mask - 1;
-@@ -1593,11 +1624,15 @@ bool kvm_mmu_slot_gfn_write_protect(struct kvm *kvm,
- 	struct kvm_rmap_head *rmap_head;
- 	int i;
- 	bool write_protected = false;
-+	struct kvm_write_access_data data = {
-+		.i = 0,
-+		.memslot = slot,
-+	};
- 
- 	for (i = PT_PAGE_TABLE_LEVEL; i <= PT_MAX_HUGEPAGE_LEVEL; ++i) {
- 		rmap_head = __gfn_to_rmap(gfn, i, slot);
- 		write_protected |= __rmap_write_protect(kvm, rmap_head, true,
--				NULL);
-+				&data);
- 	}
- 
- 	return write_protected;
-@@ -5190,21 +5225,36 @@ static bool slot_rmap_write_protect(struct kvm *kvm,
- 				    struct kvm_rmap_head *rmap_head,
- 				    void *data)
- {
--	return __rmap_write_protect(kvm, rmap_head, false, data);
-+	return __rmap_write_protect(kvm, rmap_head, false,
-+			(struct kvm_write_access_data *)data);
- }
- 
--void kvm_mmu_slot_remove_write_access(struct kvm *kvm,
-+static bool slot_rmap_apply_protection(struct kvm *kvm,
-+		struct kvm_rmap_head *rmap_head,
-+		void *data)
-+{
-+	struct kvm_write_access_data *d = (struct kvm_write_access_data *) data;
-+	bool prot_mask = !(d->memslot->flags & KVM_MEM_READONLY);
-+
-+	return __rmap_write_protect(kvm, rmap_head, prot_mask, d);
-+}
-+
-+void kvm_mmu_slot_apply_write_access(struct kvm *kvm,
- 				      struct kvm_memory_slot *memslot)
- {
- 	bool flush;
-+	struct kvm_write_access_data data = {
-+		.i = 0,
-+		.memslot = memslot,
-+	};
- 
- 	spin_lock(&kvm->mmu_lock);
--	flush = slot_handle_all_level(kvm, memslot, slot_rmap_write_protect,
--				      false, NULL);
-+	flush = slot_handle_all_level(kvm, memslot, slot_rmap_apply_protection,
-+				      false, &data);
- 	spin_unlock(&kvm->mmu_lock);
- 
- 	/*
--	 * kvm_mmu_slot_remove_write_access() and kvm_vm_ioctl_get_dirty_log()
-+	 * kvm_mmu_slot_apply_write_access() and kvm_vm_ioctl_get_dirty_log()
- 	 * which do tlb flush out of mmu-lock should be serialized by
- 	 * kvm->slots_lock otherwise tlb flush would be missed.
- 	 */
-@@ -5301,7 +5351,7 @@ void kvm_mmu_slot_largepage_remove_write_access(struct kvm *kvm,
- 					false, NULL);
- 	spin_unlock(&kvm->mmu_lock);
- 
--	/* see kvm_mmu_slot_remove_write_access */
-+	/* see kvm_mmu_slot_apply_write_access*/
- 	lockdep_assert_held(&kvm->slots_lock);
- 
- 	if (flush)
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 2b812b3c5088..de58ddaf5260 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -4179,7 +4179,7 @@ int kvm_vm_ioctl_get_dirty_log(struct kvm *kvm, struct kvm_dirty_log *log)
- 
- 	/*
- 	 * All the TLBs can be flushed out of mmu lock, see the comments in
--	 * kvm_mmu_slot_remove_write_access().
-+	 * kvm_mmu_slot_apply_write_access().
- 	 */
- 	lockdep_assert_held(&kvm->slots_lock);
- 	if (is_dirty)
-@@ -6672,7 +6672,98 @@ static int kvm_pv_clock_pairing(struct kvm_vcpu *vcpu, gpa_t paddr,
- }
- #endif
- 
--/*
-+#ifdef CONFIG_KVM_MROE
-+static void kvm_mroe_protect_slot(struct kvm *kvm, struct kvm_memory_slot *slot,
-+				gfn_t gfn, u64 npages)
-+{
-+	int i;
-+
-+	for (i = gfn - slot->base_gfn; i < gfn + npages - slot->base_gfn; i++)
-+		set_bit(i, slot->mroe_bitmap);
-+	kvm_mmu_slot_apply_write_access(kvm, slot);
-+	kvm_arch_flush_shadow_memslot(kvm, slot);
-+}
-+
-+static int __kvm_mroe_protect_range(struct kvm *kvm, gpa_t gpa, u64 npages)
-+{
-+	struct kvm_memory_slot *slot;
-+	gfn_t gfn = gpa >> PAGE_SHIFT;
-+
-+	while (npages != 0) {
-+		slot = gfn_to_memslot(kvm, gfn);
-+		if (!slot)
-+			return -EINVAL;
-+		if (gfn + npages > slot->base_gfn + slot->npages) {
-+			u64 _npages = slot->base_gfn + slot->npages - gfn;
-+
-+			kvm_mroe_protect_slot(kvm, slot, gfn, _npages);
-+			gfn += _npages;
-+			npages -= _npages;
-+		} else {
-+			kvm_mroe_protect_slot(kvm, slot, gfn, npages);
-+			npages = 0;
-+		}
-+	}
-+	return 0;
-+}
-+
-+static int kvm_mroe_protect_range(struct kvm *kvm, gpa_t gpa, u64 npages)
-+{
-+	int r;
-+
-+	mutex_lock(&kvm->slots_lock);
-+	r = __kvm_mroe_protect_range(kvm, gpa, npages);
-+	mutex_unlock(&kvm->slots_lock);
-+	return r;
-+}
-+
-+static bool kvm_mroe_userspace(struct kvm_vcpu *vcpu)
-+{
-+	u64 rflags;
-+	u64 cr0 = kvm_read_cr0(vcpu);
-+	u64 iopl;
-+
-+	// first checking we are not in protected mode
-+	if ((cr0 & 1) == 0)
-+		return false;
-+	/*
-+	 * we don't need to worry about comments in __get_regs
-+	 * because we are sure that this function will only be
-+	 * triggered at the end of a hypercall
-+	 */
-+	 rflags = kvm_get_rflags(vcpu);
-+	iopl = (rflags >> 12) & 3;
-+	if (iopl != 3)
-+		return false;
-+	return true;
-+}
-+
-+static int kvm_mroe(struct kvm_vcpu *vcpu, u64 gva, u64 npages)
-+{
-+	struct kvm *kvm = vcpu->kvm;
-+	gpa_t gpa;
-+	u64 hva;
-+
-+	/*
-+	 * First we need to maek sure that we are running from something that
-+	 * isn't usermode
-+	 */
-+	if (kvm_mroe_userspace(vcpu))
-+		return -1;//I don't really know what to return
-+	if (gva & ~PAGE_MASK)
-+		return -EINVAL;
-+	// We need to make sure that there will be no overflow
-+	if ((npages << PAGE_SHIFT) >> PAGE_SHIFT != npages || npages == 0)
-+		return -EINVAL;
-+	gpa = kvm_mmu_gva_to_gpa_system(vcpu, gva, NULL);
-+	hva = gfn_to_hva(kvm, gpa >> PAGE_SHIFT);
-+	if (!access_ok(VERIFY_WRITE, hva, npages << PAGE_SHIFT))
-+		return -EINVAL;
-+	return kvm_mroe_protect_range(vcpu->kvm, gpa, npages);
-+}
-+#endif
-+
-+ /*
-  * kvm_pv_kick_cpu_op:  Kick a vcpu.
-  *
-  * @apicid - apicid of vcpu to be kicked.
-@@ -6739,6 +6830,11 @@ int kvm_emulate_hypercall(struct kvm_vcpu *vcpu)
- 	case KVM_HC_CLOCK_PAIRING:
- 		ret = kvm_pv_clock_pairing(vcpu, a0, a1);
- 		break;
-+#endif
-+#ifdef CONFIG_KVM_MROE
-+	case KVM_HC_HMROE:
-+		ret = kvm_mroe(vcpu, a0, a1);
-+		break;
- #endif
- 	default:
- 		ret = -KVM_ENOSYS;
-@@ -8973,8 +9069,8 @@ static void kvm_mmu_slot_apply_flags(struct kvm *kvm,
- 				     struct kvm_memory_slot *new)
- {
- 	/* Still write protect RO slot */
-+	kvm_mmu_slot_apply_write_access(kvm, new);
- 	if (new->flags & KVM_MEM_READONLY) {
--		kvm_mmu_slot_remove_write_access(kvm, new);
- 		return;
- 	}
- 
-@@ -9012,7 +9108,7 @@ static void kvm_mmu_slot_apply_flags(struct kvm *kvm,
- 		if (kvm_x86_ops->slot_enable_log_dirty)
- 			kvm_x86_ops->slot_enable_log_dirty(kvm, new);
- 		else
--			kvm_mmu_slot_remove_write_access(kvm, new);
-+			kvm_mmu_slot_apply_write_access(kvm, new);
- 	} else {
- 		if (kvm_x86_ops->slot_disable_log_dirty)
- 			kvm_x86_ops->slot_disable_log_dirty(kvm, new);
-diff --git a/include/linux/kvm_host.h b/include/linux/kvm_host.h
-index 4ee7bc548a83..82c5780e11d9 100644
---- a/include/linux/kvm_host.h
-+++ b/include/linux/kvm_host.h
-@@ -297,6 +297,9 @@ static inline int kvm_vcpu_exiting_guest_mode(struct kvm_vcpu *vcpu)
- struct kvm_memory_slot {
- 	gfn_t base_gfn;
- 	unsigned long npages;
-+#ifdef CONFIG_KVM_MROE
-+	unsigned long *mroe_bitmap;
-+#endif
- 	unsigned long *dirty_bitmap;
- 	struct kvm_arch_memory_slot arch;
- 	unsigned long userspace_addr;
-diff --git a/include/uapi/linux/kvm_para.h b/include/uapi/linux/kvm_para.h
-index dcf629dd2889..4e2badc09b5b 100644
---- a/include/uapi/linux/kvm_para.h
-+++ b/include/uapi/linux/kvm_para.h
-@@ -26,6 +26,7 @@
- #define KVM_HC_MIPS_EXIT_VM		7
- #define KVM_HC_MIPS_CONSOLE_OUTPUT	8
- #define KVM_HC_CLOCK_PAIRING		9
-+#define KVM_HC_HMROE			10
- 
- /*
-  * hypercalls use architecture specific
-diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
-index 8b47507faab5..0f7141e4d550 100644
---- a/virt/kvm/kvm_main.c
-+++ b/virt/kvm/kvm_main.c
-@@ -794,6 +794,17 @@ static int kvm_create_dirty_bitmap(struct kvm_memory_slot *memslot)
- 	return 0;
- }
- 
-+static int kvm_init_mroe_bitmap(struct kvm_memory_slot *slot)
-+{
-+#ifdef CONFIG_KVM_MROE
-+	slot->mroe_bitmap = kvzalloc(BITS_TO_LONGS(slot->npages) *
-+	sizeof(unsigned long), GFP_KERNEL);
-+	if (!slot->mroe_bitmap)
-+		return -ENOMEM;
-+#endif
-+	return 0;
-+}
-+
- /*
-  * Insert memslot and re-sort memslots based on their GFN,
-  * so binary search could be used to lookup GFN.
-@@ -1011,6 +1022,8 @@ int __kvm_set_memory_region(struct kvm *kvm,
- 		if (kvm_create_dirty_bitmap(&new) < 0)
- 			goto out_free;
- 	}
-+	if (kvm_init_mroe_bitmap(&new) < 0)
-+		goto out_free;
- 
- 	slots = kvzalloc(sizeof(struct kvm_memslots), GFP_KERNEL);
- 	if (!slots)
-@@ -1264,13 +1277,23 @@ static bool memslot_is_readonly(struct kvm_memory_slot *slot)
- 	return slot->flags & KVM_MEM_READONLY;
- }
- 
-+static bool gfn_is_readonly(struct kvm_memory_slot *slot, gfn_t gfn)
-+{
-+#ifdef CONFIG_KVM_MROE
-+	return test_bit(gfn - slot->base_gfn, slot->mroe_bitmap) ||
-+		memslot_is_readonly(slot);
-+#else
-+	return memslot_is_readonly(slot);
-+#endif
-+}
-+
- static unsigned long __gfn_to_hva_many(struct kvm_memory_slot *slot, gfn_t gfn,
- 				       gfn_t *nr_pages, bool write)
- {
- 	if (!slot || slot->flags & KVM_MEMSLOT_INVALID)
- 		return KVM_HVA_ERR_BAD;
- 
--	if (memslot_is_readonly(slot) && write)
-+	if (gfn_is_readonly(slot, gfn) && write)
- 		return KVM_HVA_ERR_RO_BAD;
- 
- 	if (nr_pages)
-@@ -1314,7 +1337,7 @@ unsigned long gfn_to_hva_memslot_prot(struct kvm_memory_slot *slot,
- 	unsigned long hva = __gfn_to_hva_many(slot, gfn, NULL, false);
- 
- 	if (!kvm_is_error_hva(hva) && writable)
--		*writable = !memslot_is_readonly(slot);
-+		*writable = !gfn_is_readonly(slot, gfn);
- 
- 	return hva;
- }
-@@ -1554,7 +1577,7 @@ kvm_pfn_t __gfn_to_pfn_memslot(struct kvm_memory_slot *slot, gfn_t gfn,
- 	}
- 
- 	/* Do not map writable pfn in the readonly memslot. */
--	if (writable && memslot_is_readonly(slot)) {
-+	if (writable && gfn_is_readonly(slot, gfn)) {
- 		*writable = false;
- 		writable = NULL;
- 	}
--- 
-2.16.4
+T24gTW9uLCAxNiBKdWwgMjAxOCAxMzo1MDo1OCArMDIwMCBNaWNoYWwgSG9ja28gPG1ob2Nrb0Br
+ZXJuZWwub3JnPiB3cm90ZToKCj4gRnJvbTogTWljaGFsIEhvY2tvIDxtaG9ja29Ac3VzZS5jb20+
+Cj4gCj4gVGhlcmUgYXJlIHNldmVyYWwgYmxvY2thYmxlIG1tdSBub3RpZmllcnMgd2hpY2ggbWln
+aHQgc2xlZXAgaW4KPiBtbXVfbm90aWZpZXJfaW52YWxpZGF0ZV9yYW5nZV9zdGFydCBhbmQgdGhh
+dCBpcyBhIHByb2JsZW0gZm9yIHRoZQo+IG9vbV9yZWFwZXIgYmVjYXVzZSBpdCBuZWVkcyB0byBn
+dWFyYW50ZWUgYSBmb3J3YXJkIHByb2dyZXNzIHNvIGl0IGNhbm5vdAo+IGRlcGVuZCBvbiBhbnkg
+c2xlZXBhYmxlIGxvY2tzLgo+IAo+IC4uLgo+Cj4gQEAgLTU3MSw3ICs1NjUsMTIgQEAgc3RhdGlj
+IGJvb2wgb29tX3JlYXBfdGFza19tbShzdHJ1Y3QgdGFza19zdHJ1Y3QgKnRzaywgc3RydWN0IG1t
+X3N0cnVjdCAqbW0pCj4gIAo+ICAJdHJhY2Vfc3RhcnRfdGFza19yZWFwaW5nKHRzay0+cGlkKTsK
+PiAgCj4gLQlfX29vbV9yZWFwX3Rhc2tfbW0obW0pOwo+ICsJLyogZmFpbGVkIHRvIHJlYXAgcGFy
+dCBvZiB0aGUgYWRkcmVzcyBzcGFjZS4gVHJ5IGFnYWluIGxhdGVyICovCj4gKwlpZiAoIV9fb29t
+X3JlYXBfdGFza19tbShtbSkpIHsKPiArCQl1cF9yZWFkKCZtbS0+bW1hcF9zZW0pOwo+ICsJCXJl
+dCA9IGZhbHNlOwo+ICsJCWdvdG8gdW5sb2NrX29vbTsKPiArCX0KClRoaXMgZnVuY3Rpb24gaXMg
+c3RhcnRpbmcgdG8gbG9vayBhIGJpdCBzY3Jld3kuCgo6IHN0YXRpYyBib29sIG9vbV9yZWFwX3Rh
+c2tfbW0oc3RydWN0IHRhc2tfc3RydWN0ICp0c2ssIHN0cnVjdCBtbV9zdHJ1Y3QgKm1tKQo6IHsK
+OiAJaWYgKCFkb3duX3JlYWRfdHJ5bG9jaygmbW0tPm1tYXBfc2VtKSkgewo6IAkJdHJhY2Vfc2tp
+cF90YXNrX3JlYXBpbmcodHNrLT5waWQpOwo6IAkJcmV0dXJuIGZhbHNlOwo6IAl9CjogCjogCS8q
+CjogCSAqIE1NRl9PT01fU0tJUCBpcyBzZXQgYnkgZXhpdF9tbWFwIHdoZW4gdGhlIE9PTSByZWFw
+ZXIgY2FuJ3QKOiAJICogd29yayBvbiB0aGUgbW0gYW55bW9yZS4gVGhlIGNoZWNrIGZvciBNTUZf
+T09NX1NLSVAgbXVzdCBydW4KOiAJICogdW5kZXIgbW1hcF9zZW0gZm9yIHJlYWRpbmcgYmVjYXVz
+ZSBpdCBzZXJpYWxpemVzIGFnYWluc3QgdGhlCjogCSAqIGRvd25fd3JpdGUoKTt1cF93cml0ZSgp
+IGN5Y2xlIGluIGV4aXRfbW1hcCgpLgo6IAkgKi8KOiAJaWYgKHRlc3RfYml0KE1NRl9PT01fU0tJ
+UCwgJm1tLT5mbGFncykpIHsKOiAJCXVwX3JlYWQoJm1tLT5tbWFwX3NlbSk7CjogCQl0cmFjZV9z
+a2lwX3Rhc2tfcmVhcGluZyh0c2stPnBpZCk7CjogCQlyZXR1cm4gdHJ1ZTsKOiAJfQo6IAo6IAl0
+cmFjZV9zdGFydF90YXNrX3JlYXBpbmcodHNrLT5waWQpOwo6IAo6IAkvKiBmYWlsZWQgdG8gcmVh
+cCBwYXJ0IG9mIHRoZSBhZGRyZXNzIHNwYWNlLiBUcnkgYWdhaW4gbGF0ZXIgKi8KOiAJaWYgKCFf
+X29vbV9yZWFwX3Rhc2tfbW0obW0pKSB7CjogCQl1cF9yZWFkKCZtbS0+bW1hcF9zZW0pOwo6IAkJ
+cmV0dXJuIHRydWU7CjogCX0KOiAKOiAJcHJfaW5mbygib29tX3JlYXBlcjogcmVhcGVkIHByb2Nl
+c3MgJWQgKCVzKSwgbm93IGFub24tcnNzOiVsdWtCLCBmaWxlLXJzczolbHVrQiwgc2htZW0tcnNz
+OiVsdWtCXG4iLAo6IAkJCXRhc2tfcGlkX25yKHRzayksIHRzay0+Y29tbSwKOiAJCQlLKGdldF9t
+bV9jb3VudGVyKG1tLCBNTV9BTk9OUEFHRVMpKSwKOiAJCQlLKGdldF9tbV9jb3VudGVyKG1tLCBN
+TV9GSUxFUEFHRVMpKSwKOiAJCQlLKGdldF9tbV9jb3VudGVyKG1tLCBNTV9TSE1FTVBBR0VTKSkp
+Owo6IAl1cF9yZWFkKCZtbS0+bW1hcF9zZW0pOwo6IAo6IAl0cmFjZV9maW5pc2hfdGFza19yZWFw
+aW5nKHRzay0+cGlkKTsKOiAJcmV0dXJuIHRydWU7CjogfQoKLSBVbmRvY3VtZW50ZWQgcmV0dXJu
+IHZhbHVlLgoKLSBjb21tZW50ICJmYWlsZWQgdG8gcmVhcCBwYXJ0Li4uIiBpcyBtaXNsZWFkaW5n
+IC0gc291bmRzIGxpa2UgaXQncwogIHJlZmVycmluZyB0byBzb21ldGhpbmcgd2hpY2ggaGFwcGVu
+ZWQgaW4gdGhlIHBhc3QsIGlzIGluIGZhY3QKICByZWZlcnJpbmcgdG8gc29tZXRoaW5nIHdoaWNo
+IG1pZ2h0IGhhcHBlbiBpbiB0aGUgZnV0dXJlLgoKLSBmYWlscyB0byBjYWxsIHRyYWNlX2Zpbmlz
+aF90YXNrX3JlYXBpbmcoKSBpbiBvbmUgY2FzZQoKLSBjb2RlIGR1cGxpY2F0aW9uLgoKCkknbSB0
+aGlua2luZyBpdCB3YW50cyB0byBiZSBzb21ldGhpbmcgbGlrZSB0aGlzPwoKOiAvKgo6ICAqIFJl
+dHVybiB0cnVlIGlmIHdlIHN1Y2Nlc3NmdWxseSBhY3F1aXJlZCAodGhlbiByZWxlYXNlZCkgbW1h
+cF9zZW0KOiAgKi8KOiBzdGF0aWMgYm9vbCBvb21fcmVhcF90YXNrX21tKHN0cnVjdCB0YXNrX3N0
+cnVjdCAqdHNrLCBzdHJ1Y3QgbW1fc3RydWN0ICptbSkKOiB7CjogCWlmICghZG93bl9yZWFkX3Ry
+eWxvY2soJm1tLT5tbWFwX3NlbSkpIHsKOiAJCXRyYWNlX3NraXBfdGFza19yZWFwaW5nKHRzay0+
+cGlkKTsKOiAJCXJldHVybiBmYWxzZTsKOiAJfQo6IAo6IAkvKgo6IAkgKiBNTUZfT09NX1NLSVAg
+aXMgc2V0IGJ5IGV4aXRfbW1hcCB3aGVuIHRoZSBPT00gcmVhcGVyIGNhbid0CjogCSAqIHdvcmsg
+b24gdGhlIG1tIGFueW1vcmUuIFRoZSBjaGVjayBmb3IgTU1GX09PTV9TS0lQIG11c3QgcnVuCjog
+CSAqIHVuZGVyIG1tYXBfc2VtIGZvciByZWFkaW5nIGJlY2F1c2UgaXQgc2VyaWFsaXplcyBhZ2Fp
+bnN0IHRoZQo6IAkgKiBkb3duX3dyaXRlKCk7dXBfd3JpdGUoKSBjeWNsZSBpbiBleGl0X21tYXAo
+KS4KOiAJICovCjogCWlmICh0ZXN0X2JpdChNTUZfT09NX1NLSVAsICZtbS0+ZmxhZ3MpKSB7Cjog
+CQl0cmFjZV9za2lwX3Rhc2tfcmVhcGluZyh0c2stPnBpZCk7CjogCQlnb3RvIG91dDsKOiAJfQo6
+IAo6IAl0cmFjZV9zdGFydF90YXNrX3JlYXBpbmcodHNrLT5waWQpOwo6IAo6IAlpZiAoIV9fb29t
+X3JlYXBfdGFza19tbShtbSkpIHsKOiAJCS8qIEZhaWxlZCB0byByZWFwIHBhcnQgb2YgdGhlIGFk
+ZHJlc3Mgc3BhY2UuIFRyeSBhZ2FpbiBsYXRlciAqLwo6IAkJZ290byBmaW5pc2g7CjogCX0KOiAK
+OiAJcHJfaW5mbygib29tX3JlYXBlcjogcmVhcGVkIHByb2Nlc3MgJWQgKCVzKSwgbm93IGFub24t
+cnNzOiVsdWtCLCBmaWxlLXJzczolbHVrQiwgc2htZW0tcnNzOiVsdWtCXG4iLAo6IAkJCXRhc2tf
+cGlkX25yKHRzayksIHRzay0+Y29tbSwKOiAJCQlLKGdldF9tbV9jb3VudGVyKG1tLCBNTV9BTk9O
+UEFHRVMpKSwKOiAJCQlLKGdldF9tbV9jb3VudGVyKG1tLCBNTV9GSUxFUEFHRVMpKSwKOiAJCQlL
+KGdldF9tbV9jb3VudGVyKG1tLCBNTV9TSE1FTVBBR0VTKSkpOwo6IGZpbmlzaDoKOiAJdHJhY2Vf
+ZmluaXNoX3Rhc2tfcmVhcGluZyh0c2stPnBpZCk7Cjogb3V0Ogo6IAl1cF9yZWFkKCZtbS0+bW1h
+cF9zZW0pOwo6IAlyZXR1cm4gdHJ1ZTsKOiB9CgotIEluY3JlYXNlcyBtbWFwX3NlbSBob2xkIHRp
+bWUgYSBsaXR0bGUgYnkgbW92aW5nCiAgdHJhY2VfZmluaXNoX3Rhc2tfcmVhcGluZygpIGluc2lk
+ZSB0aGUgbG9ja2VkIHJlZ2lvbi4gIFNvIHN1ZSBtZSA7KQoKLSBTaGFyaW5nIHRoZSBmaW5pc2g6
+IHBhdGggbWVhbnMgdGhhdCB0aGUgdHJhY2UgZXZlbnQgd29uJ3QKICBkaXN0aW5ndWlzaCBiZXR3
+ZWVuIHRoZSB0d28gc291cmNlcyBvZiBmaW5pc2hpbmcuCgpQbGVhc2UgdGFrZSBhIGxvb2s/Cgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
