@@ -1,16 +1,22 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [ovmf baseline-only test] 74998: tolerable FAIL
-Date: Mon, 23 Jul 2018 23:13:37 +0100
-Message-ID: <osstest-74998-mainreport@xen.org>
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Subject: Re: [PATCH] firmware/shim : filter output files during
+ Xen tree setup
+Date: Mon, 23 Jul 2018 16:00:35 -0700
+Message-ID: <CACMJ4GZ+otBvc0=-08JUTuhYD3+66EnTu=P6-y0=aVSuCKZ-Bg@mail.gmail.com>
+References: <1532121305-5253-1-git-send-email-christopher.w.clark@gmail.com>
+ <20180723090940.jf6bysl5vtt7ehqx@mac.bytemobile.com>
+ <398ca3b0-6d16-0434-449d-c9bae7b0c4ea@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1189239265237106865=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=nsvk=kh=xenproject.org=prvs=73549576a=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1fhj5M-00072d-NV
- for xen-devel@lists.xenproject.org; Mon, 23 Jul 2018 22:13:44 +0000
+ <srs0=ivbl=kh=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
+ id 1fhjol-00025j-CY
+ for xen-devel@lists.xenproject.org; Mon, 23 Jul 2018 23:00:39 +0000
+Received: by mail-lj1-x241.google.com with SMTP id y17-v6so1923639ljy.8
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Jul 2018 16:00:37 -0700 (PDT)
+In-Reply-To: <398ca3b0-6d16-0434-449d-c9bae7b0c4ea@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,146 +25,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
-NDk5OCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
-dC9sb2dzLzc0OTk4LwoKRmFpbHVyZXMgOi0vIGJ1dCBubyByZWdyZXNzaW9ucy4KClRlc3RzIHdo
-aWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQgMTAgZGViaWFuLWh2bS1pbnN0YWxsICAgICBmYWlsIGxp
-a2UgNzQ5OTYKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0IDEwIGRlYmlhbi1o
-dm0taW5zdGFsbCAgICAgIGZhaWwgbGlrZSA3NDk5NgoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVz
-dGluZzoKIG92bWYgICAgICAgICAgICAgICAgIDU0OWFlODVjZTFiMDAyMjhjM2FiY2Y2YTllNDAy
-MmM0ZjRmYmE1ZWQKYmFzZWxpbmUgdmVyc2lvbjoKIG92bWYgICAgICAgICAgICAgICAgIGQ5ZTIw
-NmQ0YmY5MTI0ZmU1MjZiYWFhMGVjNTZhN2QyMzE2Y2E2YjMKCkxhc3QgdGVzdCBvZiBiYXNpcyAg
-ICA3NDk5NiAgMjAxOC0wNy0yMyAwNTo0OTo0NiBaICAgIDAgZGF5cwpUZXN0aW5nIHNhbWUgc2lu
-Y2UgICAgNzQ5OTggIDIwMTgtMDctMjMgMjA6MjA6MTMgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0
-cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBTdGFyIFpl
-bmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+CiAgU3VwcmVldGggVmVua2F0ZXNoIDxzdXByZWV0aC52
-ZW5rYXRlc2hAYXJtLmNvbT4KICBZb25naG9uZyBaaHUgPHlvbmdob25nLnpodUBpbnRlbC5jb20+
-CiAgWXVuaHVhIEZlbmcgPHl1bmh1YXguZmVuZ0BpbnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1k
-NjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2
-NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC54cy5jaXRy
-aXRlLm5ldApsb2dzOiAvaG9tZS9vc3N0ZXN0L2xvZ3MKaW1hZ2VzOiAvaG9tZS9vc3N0ZXN0L2lt
-YWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6
-Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVzdC9sb2dzCgpUZXN0IGhhcm5lc3MgY29kZSBj
-YW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbnNvdXJjZS5jb20vZ2l0d2ViP3A9
-b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaCBub3QgYXBwbGljYWJsZS4KCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQg
-NTQ5YWU4NWNlMWIwMDIyOGMzYWJjZjZhOWU0MDIyYzRmNGZiYTVlZApBdXRob3I6IFN1cHJlZXRo
-IFZlbmthdGVzaCA8c3VwcmVldGgudmVua2F0ZXNoQGFybS5jb20+CkRhdGU6ICAgVHVlIEp1bCAz
-IDE4OjAwOjM1IDIwMTggKzA4MDAKCiAgICBCYXNlVG9vbHMvQXV0b0dlbjogVXBkYXRlIGhlYWRl
-ciBmaWxlIGZvciBNTSBtb2R1bGVzLgogICAgCiAgICBUaGlzIHBhdGNoIGNvcnJlY3RzIHRoZSBN
-b2R1bGUgVHlwZSBIZWFkZXIgZmlsZSBmb3IgTWFuYWdlbWVudCBNb2RlKE1NKQogICAgYXMgc3Bl
-Y2lmaWVkIGluIFBJIHYxLjYgU3BlY2lmaWNhdGlvbi4gQWxzbywgaXQgdXBkYXRlcyBwYXJhbWV0
-ZXIgZm9yCiAgICBhdXRvIGdlbmVyYXRlZCB0ZW1wbGF0ZSBmdW5jdGlvbnMgZnJvbSBFRklfU01N
-X1NZU1RFTV9UQUJMRTIgdG8KICAgIEVGSV9NTV9TWVNURU1fVEFCTEUuCiAgICAKICAgIENvbnRy
-aWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAxLjEKICAgIFNp
-Z25lZC1vZmYtYnk6IFN1cHJlZXRoIFZlbmthdGVzaCA8c3VwcmVldGgudmVua2F0ZXNoQGFybS5j
-b20+CiAgICBSZXZpZXdlZC1ieTogSmlld2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+CiAg
-ICBDYzogSmlld2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+CiAgICBSZXZpZXdlZC1ieTog
-TGltaW5nIEdhbyA8bGltaW5nLmdhb0BpbnRlbC5jb20+Cgpjb21taXQgMTc5NGI5OGY3MmZiMDg3
-ZjAxMjYwMmM0ZDE0NTA3NjJkZDYyOTA2ZApBdXRob3I6IFlvbmdob25nIFpodSA8eW9uZ2hvbmcu
-emh1QGludGVsLmNvbT4KRGF0ZTogICBGcmkgSnVsIDEzIDExOjI4OjMzIDIwMTggKzA4MDAKCiAg
-ICBCYXNlVG9vbHM6IEVsZkNvbnZlcnQgVG9vbCB1cGRhdGUgVmVyYm9zZU1zZyB0byBzYW1lIHdp
-dGggdGhlIGNvbW1lbnQKICAgIAogICAgRml4ZXM6IGh0dHBzOi8vYnVnemlsbGEudGlhbm9jb3Jl
-Lm9yZy9zaG93X2J1Zy5jZ2k/aWQ9OTk0CiAgICBDb250cmlidXRlZC11bmRlcjogVGlhbm9Db3Jl
-IENvbnRyaWJ1dGlvbiBBZ3JlZW1lbnQgMS4wCiAgICBTaWduZWQtb2ZmLWJ5OiBZb25naG9uZyBa
-aHUgPHlvbmdob25nLnpodUBpbnRlbC5jb20+CiAgICBSZXZpZXdlZC1ieTogTGltaW5nIEdhbyA8
-bGltaW5nLmdhb0BpbnRlbC5jb20+Cgpjb21taXQgMTA5NDRiYzM5MGY1MmZjZDQxODY3MGZlMDE3
-MWRhMWQ0ZjNiMDVjYwpBdXRob3I6IFN0YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KRGF0
-ZTogICBGcmkgSnVsIDEzIDE2OjAwOjE1IDIwMTggKzA4MDAKCiAgICBNZGVNb2R1bGVQa2cgQ2Fw
-c3VsZUFwcDogVXNlIEVGSV9VTlNVUFBPUlRFRCBmb3IgaW5jb3JyZWN0IEFyZ2MgY2FzZQogICAg
-CiAgICBBbGlnbiBjb2RlIHRvIHVzZSBFRklfVU5TVVBQT1JURUQgZm9yIGFsbCBpbmNvcnJlY3Qg
-QXJnYyBjYXNlcy4KICAgIAogICAgQ2M6IE1pY2hhZWwgRCBLaW5uZXkgPG1pY2hhZWwuZC5raW5u
-ZXlAaW50ZWwuY29tPgogICAgQ2M6IEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgog
-ICAgQ2M6IFlvbmdob25nIFpodSA8eW9uZ2hvbmcuemh1QGludGVsLmNvbT4KICAgIENvbnRyaWJ1
-dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAxLjEKICAgIFNpZ25l
-ZC1vZmYtYnk6IFN0YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KICAgIFJldmlld2VkLWJ5
-OiBKaWV3ZW4gWWFvIDxqaWV3ZW4ueWFvQGludGVsLmNvbT4KCmNvbW1pdCBkOWM2NDBiOTI4MmRk
-M2E2ZWU0NWJjNTg4NmU3ZDViMGU1ODZjOTVkCkF1dGhvcjogU3RhciBaZW5nIDxzdGFyLnplbmdA
-aW50ZWwuY29tPgpEYXRlOiAgIEZyaSBKdWwgMTMgMTU6NTA6MTYgMjAxOCArMDgwMAoKICAgIE1k
-ZU1vZHVsZVBrZyBDYXBzdWxlQXBwOiBDaGVjayBjYXBzdWxlIGhlYWRlciBiZWZvcmUgdXNpbmcg
-aXRzIEZsYWdzCiAgICAKICAgIENjOiBNaWNoYWVsIEQgS2lubmV5IDxtaWNoYWVsLmQua2lubmV5
-QGludGVsLmNvbT4KICAgIENjOiBKaWV3ZW4gWWFvIDxqaWV3ZW4ueWFvQGludGVsLmNvbT4KICAg
-IENjOiBZb25naG9uZyBaaHUgPHlvbmdob25nLnpodUBpbnRlbC5jb20+CiAgICBDb250cmlidXRl
-ZC11bmRlcjogVGlhbm9Db3JlIENvbnRyaWJ1dGlvbiBBZ3JlZW1lbnQgMS4xCiAgICBTaWduZWQt
-b2ZmLWJ5OiBTdGFyIFplbmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+CiAgICBSZXZpZXdlZC1ieTog
-Smlld2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+Cgpjb21taXQgOTVkZDdhNmVjZDIzNTgy
-MDhhOWY4MmJiOTQ4Y2FmZGRlYmQ3ODUxOQpBdXRob3I6IFN0YXIgWmVuZyA8c3Rhci56ZW5nQGlu
-dGVsLmNvbT4KRGF0ZTogICBGcmkgSnVsIDEzIDE1OjI4OjIxIDIwMTggKzA4MDAKCiAgICBNZGVN
-b2R1bGVQa2cgQ2Fwc3VsZUFwcDogU2hvdyBjbGVhciBtZXNzYWdlIHdoZW4gb3B0aW9uIGlzIHVu
-cmVjb2duaXplZAogICAgCiAgICBDYzogTWljaGFlbCBEIEtpbm5leSA8bWljaGFlbC5kLmtpbm5l
-eUBpbnRlbC5jb20+CiAgICBDYzogSmlld2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+CiAg
-ICBDYzogWW9uZ2hvbmcgWmh1IDx5b25naG9uZy56aHVAaW50ZWwuY29tPgogICAgQ29udHJpYnV0
-ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmlidXRpb24gQWdyZWVtZW50IDEuMQogICAgU2lnbmVk
-LW9mZi1ieTogU3RhciBaZW5nIDxzdGFyLnplbmdAaW50ZWwuY29tPgogICAgUmV2aWV3ZWQtYnk6
-IEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgoKY29tbWl0IDgxZTEyNzZhZGZlODhj
-ZmJiYzM5NjE4YjUyNDI5Y2Y0OWVmM2NiY2UKQXV0aG9yOiBTdGFyIFplbmcgPHN0YXIuemVuZ0Bp
-bnRlbC5jb20+CkRhdGU6ICAgRnJpIEp1bCAxMyAxNToxNjowMiAyMDE4ICswODAwCgogICAgTWRl
-TW9kdWxlUGtnIENhcHN1bGVBcHA6IERvIG5vdCBwYXJzZSBiaXRzIGluIENhcHN1bGVGbGFncyBv
-ZiBFU1JUCiAgICAKICAgIEFjY29yZGluZyB0byBVRUZJIHNwZWMsIG9ubHkgYml0cyAwLTE1IG9m
-IENhcHN1bGVGbGFncyBhcmUKICAgIG1lYW5pbmdmdWwgYW5kIENhcHN1bGVHdWlkIHNwZWNpZmlj
-LCBDQVBTVUxFX0ZMQUdTX1BFUlNJU1RfQUNST1NTX1JFU0VUCiAgICBDQVBTVUxFX0ZMQUdTX1BP
-UFVMQVRFX1NZU1RFTV9UQUJMRS9DQVBTVUxFX0ZMQUdTX0lOSVRJQVRFX1JFU0VUCiAgICBkZWZp
-bmVkIGluIFVFRkkgc3BlYyBhcmUgaW4gYml0cyAxNi0zMSwgdGhleSBzaG91bGQgbm90IGJlIHBh
-cnNlZCBpbgogICAgQ2Fwc3VsZUZsYWdzIG9mIEVTUlQuCiAgICAKICAgIENhcHN1bGVGbGFncwog
-ICAgVGhlIGNhcHN1bGUgZmxhZ3MgZmllbGQgY29udGFpbnMgdGhlIENhcHN1bGVHdWlkIGZsYWdz
-IChiaXRzIDAtMTUpCiAgICBhcyBkZWZpbmVkIGluIHRoZSBFRklfQ0FQU1VMRV9IRUFERVIgdGhh
-dCB3aWxsIGJlIHNldCBpbiB0aGUgY2Fwc3VsZQogICAgaGVhZGVyLgogICAgCiAgICBDYzogTWlj
-aGFlbCBEIEtpbm5leSA8bWljaGFlbC5kLmtpbm5leUBpbnRlbC5jb20+CiAgICBDYzogSmlld2Vu
-IFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+CiAgICBDYzogWW9uZ2hvbmcgWmh1IDx5b25naG9u
-Zy56aHVAaW50ZWwuY29tPgogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmli
-dXRpb24gQWdyZWVtZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTogU3RhciBaZW5nIDxzdGFyLnpl
-bmdAaW50ZWwuY29tPgogICAgUmV2aWV3ZWQtYnk6IEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50
-ZWwuY29tPgoKY29tbWl0IGQ0ZDkxMTY3NzU3NjNhN2NlNGJmZjg5NGVhMDZlY2VmNGIxN2U0NDEK
-QXV0aG9yOiBTdGFyIFplbmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+CkRhdGU6ICAgRnJpIEp1bCAx
-MyAxNTowNDoxNiAyMDE4ICswODAwCgogICAgTWRlTW9kdWxlUGtnIENhcHN1bGVBcHA6IEZpeCBt
-ZW1vcnkgbGVhayBpbiBEdW1wRm1wSW1hZ2UoKQogICAgCiAgICBJbWFnZSBidWZmZXIgc2hvdWxk
-IGJlIGZyZWVkIGFmdGVyIHVzaW5nLgogICAgCiAgICBDYzogTWljaGFlbCBEIEtpbm5leSA8bWlj
-aGFlbC5kLmtpbm5leUBpbnRlbC5jb20+CiAgICBDYzogSmlld2VuIFlhbyA8amlld2VuLnlhb0Bp
-bnRlbC5jb20+CiAgICBDYzogWW9uZ2hvbmcgWmh1IDx5b25naG9uZy56aHVAaW50ZWwuY29tPgog
-ICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmlidXRpb24gQWdyZWVtZW50IDEu
-MQogICAgU2lnbmVkLW9mZi1ieTogU3RhciBaZW5nIDxzdGFyLnplbmdAaW50ZWwuY29tPgogICAg
-UmV2aWV3ZWQtYnk6IEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgoKY29tbWl0IDU0
-MTA1MDJmNmQ3ZTRiYjc4NmNjZDZjMzBjODY2MmVkMjE3YmNhYmEKQXV0aG9yOiBTdGFyIFplbmcg
-PHN0YXIuemVuZ0BpbnRlbC5jb20+CkRhdGU6ICAgV2VkIEp1bCAxMSAxNjozNTowMiAyMDE4ICsw
-ODAwCgogICAgTWRlTW9kdWxlUGtnIENhcHN1bGVBcHA6IENoZWNrIEFyZyBjb3VudCBmb3IgLVAg
-R0VUIG9wdGlvbgogICAgCiAgICBBbHNvIGFkZCBoZWxwIGluZm8gZm9yIENhcHN1bGVBcHAgLVAg
-R0VUIG9wdGlvbi4KICAgIAogICAgQ2M6IE1pY2hhZWwgRCBLaW5uZXkgPG1pY2hhZWwuZC5raW5u
-ZXlAaW50ZWwuY29tPgogICAgQ2M6IEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgog
-ICAgQ2M6IFlvbmdob25nIFpodSA8eW9uZ2hvbmcuemh1QGludGVsLmNvbT4KICAgIENvbnRyaWJ1
-dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAxLjEKICAgIFNpZ25l
-ZC1vZmYtYnk6IFN0YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KICAgIFJldmlld2VkLWJ5
-OiBKaWV3ZW4gWWFvIDxqaWV3ZW4ueWFvQGludGVsLmNvbT4KCmNvbW1pdCBhMTBkZWY5MTY1MzE2
-M2RiYzZhMzhhNjA5YTg3YjM3MGU5MDM1NjU0CkF1dGhvcjogWXVuaHVhIEZlbmcgPHl1bmh1YXgu
-ZmVuZ0BpbnRlbC5jb20+CkRhdGU6ICAgRnJpIEp1bCAxMyAxNzowNToyMCAyMDE4ICswODAwCgog
-ICAgQmFzZVRvb2xzOiBlbmFibGUgRml4ZWRBdEJ1aWxkIChWT0lEKikgUENEIHVzZSBpbiB0aGUg
-W0RFUEVYXSBzZWN0aW9uCiAgICAKICAgIFYzOiBBZGQgc29tZSBpbnZhbGlkIHR5cGUgYW5kIGRh
-dHVtIGNoZWNrCiAgICAKICAgIFYyOiBsaW1pdCB0aGUgUENEIHVzZWQgaW4gdGhlIFtEZXBleF0g
-c2VjdGlvbiBzaG91bGQgYmUgdXNlZCBpbiB0aGUgbW9kdWxlCiAgICAKICAgIFRoZSBQQ0QgaXRl
-bSB1c2VkIGluIElORiBbRGVwZXhdIHNlY3Rpb24gbXVzdCBiZSBkZWZpbmVkIGFzIEZpeGVkQXRC
-dWlsZAogICAgdHlwZSBhbmQgVk9JRCogZGF0dW0gdHlwZSwgYW5kIHRoZSBzaXplIG9mIHRoZSBQ
-Q0QgbXVzdCBiZSAxNiBieXRlcy4KICAgIAogICAgRml4ZXM6IGh0dHBzOi8vYnVnemlsbGEudGlh
-bm9jb3JlLm9yZy9zaG93X2J1Zy5jZ2k/aWQ9NDQzCiAgICBDYzogTGltaW5nIEdhbyA8bGltaW5n
-Lmdhb0BpbnRlbC5jb20+CiAgICBDYzogWW9uZ2hvbmcgWmh1IDx5b25naG9uZy56aHVAaW50ZWwu
-Y29tPgogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmlidXRpb24gQWdyZWVt
-ZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTogWXVuaHVhIEZlbmcgPHl1bmh1YXguZmVuZ0BpbnRl
-bC5jb20+CiAgICBSZXZpZXdlZC1ieTogWW9uZ2hvbmcgWmh1IDx5b25naG9uZy56aHVAaW50ZWwu
-Y29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============1189239265237106865==
+Content-Type: multipart/alternative; boundary="0000000000000d89a90571b29dad"
+
+--0000000000000d89a90571b29dad
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jul 23, 2018 at 2:26 AM, Andrew Cooper <andrew.cooper3@citrix.com>
+wrote:
+
+> On 23/07/18 10:09, Roger Pau Monn=C3=A9 wrote:
+> > On Fri, Jul 20, 2018 at 02:15:05PM -0700, Christopher Clark wrote:
+> >> Exclude named output files from the Xen tree setup.
+> >>
+> >> The linkfarm.stamp content will differ between top level "make"
+> >> and "make install" invocations, due to the introduction of these
+> >> output files that are produced during the "make" build.
+> >>
+> >> Filter these out to prevent an unnecessary rebuild of the shim during
+> >> "make install".
+> >>
+> >> Signed-off-by: Christopher Clark <christopher.clark6@baesystems.com>
+> >> ---
+> >>  tools/firmware/xen-dir/Makefile | 6 +++++-
+> >>  1 file changed, 5 insertions(+), 1 deletion(-)
+> >>
+> >> diff --git a/tools/firmware/xen-dir/Makefile b/tools/firmware/xen-dir/
+> Makefile
+> >> index 84648c3..e490dca 100644
+> >> --- a/tools/firmware/xen-dir/Makefile
+> >> +++ b/tools/firmware/xen-dir/Makefile
+> >> @@ -11,6 +11,9 @@ D=3Dxen-root
+> >>  LINK_DIRS=3Dconfig xen
+> >>  LINK_FILES=3DConfig.mk
+> >>
+> >> +# Files to exclude from the link farm
+> >> +EXCLUDE_FILES=3Dxen xen.gz xen-syms xen-syms.map efi.lds xen.lds mkel=
+f32
+> mkreloc
+> > I don't really like to list the files here, since it's very easy for
+> > them to get out of sync. The alternative I have is also not very nice
+> > however, since it relies on .gitignore:
+> >
+> > EXCLUDE_FILES:=3D$(patsubst xen/%,%,$(filter xen/%,$(shell cat
+> $(XEN_ROOT)/.gitignore)))
+>
+> The correct way to fix this is to rip the current build system to
+> shreds, start again, and get it to support out-of-tree builds.
+>
+> This linkfarm logic exists only to work around a hole which we couldn't
+> fix at the time.
+>
+
+
+As Andrew observes, the linkfarm code is a temporary solution until Xen
+supports out of tree builds.
+
+The proposed patch is localized and easy to understand.
+
+If the list of files is not maintained, it will break in obvious ways
+(either an unnecessary shim rebuild, or a non-rebuild when it should but
+only in a developer environment) and it will serve as a reminder to fix
+support for out of tree builds.
+
+So, I'd like to request inclusion of the original patch proposed.
+
+Christopher
+
+--0000000000000d89a90571b29dad
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_extra"><br><div class=3D"gmail_quo=
+te">On Mon, Jul 23, 2018 at 2:26 AM, Andrew Cooper <span dir=3D"ltr">&lt;<a=
+ href=3D"mailto:andrew.cooper3@citrix.com" target=3D"_blank">andrew.cooper3=
+@citrix.com</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex"><div class=3D"gmail-HOEnZb"><div class=3D"gmail-h5">On 23/07/18=
+ 10:09, Roger Pau Monn=C3=A9 wrote:<br>
+&gt; On Fri, Jul 20, 2018 at 02:15:05PM -0700, Christopher Clark wrote:<br>
+&gt;&gt; Exclude named output files from the Xen tree setup.<br>
+&gt;&gt;<br>
+&gt;&gt; The linkfarm.stamp content will differ between top level &quot;mak=
+e&quot;<br>
+&gt;&gt; and &quot;make install&quot; invocations, due to the introduction =
+of these<br>
+&gt;&gt; output files that are produced during the &quot;make&quot; build.<=
+br>
+&gt;&gt;<br>
+&gt;&gt; Filter these out to prevent an unnecessary rebuild of the shim dur=
+ing<br>
+&gt;&gt; &quot;make install&quot;.<br>
+&gt;&gt;<br>
+&gt;&gt; Signed-off-by: Christopher Clark &lt;<a href=3D"mailto:christopher=
+.clark6@baesystems.com">christopher.clark6@<wbr>baesystems.com</a>&gt;<br>
+&gt;&gt; ---<br>
+&gt;&gt;=C2=A0 tools/firmware/xen-dir/<wbr>Makefile | 6 +++++-<br>
+&gt;&gt;=C2=A0 1 file changed, 5 insertions(+), 1 deletion(-)<br>
+&gt;&gt;<br>
+&gt;&gt; diff --git a/tools/firmware/xen-dir/<wbr>Makefile b/tools/firmware=
+/xen-dir/<wbr>Makefile<br>
+&gt;&gt; index 84648c3..e490dca 100644<br>
+&gt;&gt; --- a/tools/firmware/xen-dir/<wbr>Makefile<br>
+&gt;&gt; +++ b/tools/firmware/xen-dir/<wbr>Makefile<br>
+&gt;&gt; @@ -11,6 +11,9 @@ D=3Dxen-root<br>
+&gt;&gt;=C2=A0 LINK_DIRS=3Dconfig xen<br>
+&gt;&gt;=C2=A0 LINK_FILES=3DConfig.mk<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt; +# Files to exclude from the link farm<br>
+&gt;&gt; +EXCLUDE_FILES=3Dxen xen.gz xen-syms xen-syms.map efi.lds xen.lds =
+mkelf32 mkreloc<br>
+&gt; I don&#39;t really like to list the files here, since it&#39;s very ea=
+sy for<br>
+&gt; them to get out of sync. The alternative I have is also not very nice<=
+br>
+&gt; however, since it relies on .gitignore:<br>
+&gt;<br>
+&gt; EXCLUDE_FILES:=3D$(patsubst xen/%,%,$(filter xen/%,$(shell cat $(XEN_R=
+OOT)/.gitignore)))<br>
+<br>
+</div></div>The correct way to fix this is to rip the current build system =
+to<br>
+shreds, start again, and get it to support out-of-tree builds.<br>
+<br>
+This linkfarm logic exists only to work around a hole which we couldn&#39;t=
+<br>
+fix at the time.<br></blockquote></div></div><div class=3D"gmail_extra"><di=
+v class=3D"gmail_extra"><br></div><div class=3D"gmail_extra"><br></div><div=
+ class=3D"gmail_extra">As Andrew observes, the linkfarm code is a temporary=
+ solution until Xen supports out of tree builds.</div><div class=3D"gmail_e=
+xtra"><br></div><div class=3D"gmail_extra">The proposed patch is localized =
+and easy to understand.</div><div class=3D"gmail_extra"><br></div><div clas=
+s=3D"gmail_extra">If the list of files is not maintained, it will break in =
+obvious ways (either an unnecessary shim rebuild, or a non-rebuild when it =
+should but only in a developer environment) and it will serve as a reminder=
+ to fix support for out of tree builds.</div><div class=3D"gmail_extra"><br=
+></div><div class=3D"gmail_extra">So, I&#39;d like to request inclusion of =
+the original patch proposed.</div><div class=3D"gmail_extra"><br></div><div=
+ class=3D"gmail_extra">Christopher</div></div><div class=3D"gmail_extra"><b=
+r></div></div>
+
+--0000000000000d89a90571b29dad--
+
+
+--===============1189239265237106865==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1189239265237106865==--
