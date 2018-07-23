@@ -1,15 +1,14 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] x86/spec-ctrl: Fix the parsing of xpti= on
- fixed Intel hardware
-Date: Mon, 23 Jul 2018 15:33:10 +0100
-Message-ID: <20180723143310.wyolxmwhuf4c3mfi@citrix.com>
-References: <1532353682-28335-1-git-send-email-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/hvm: Disallow unknown MSR_EFER bits
+Date: Mon, 23 Jul 2018 15:33:23 +0100
+Message-ID: <20180723143323.bxfczp6wodzh7m5h@citrix.com>
+References: <1532353790-28875-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <1532353682-28335-1-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1532353790-28875-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,22 +18,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Jan Beulich <JBeulich@suse.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKdWwgMjMsIDIwMTggYXQgMDI6NDg6MDJQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBUaGUgY2FsbHMgdG8geHB0aV9pbml0X2RlZmF1bHQoKSBpbiBwYXJzZV94cHRpKCkg
-YXJlIGJ1Z2d5LiAgVGhlIENQVUlEIGRhdGEKPiBoYXNuJ3QgYmVlbiBmZXRjaGVkIHRoYXQgZWFy
-bHksIGFuZCBib290X2NwdV9oYXMoWDg2X0ZFQVRVUkVfQVJDSF9DQVBTKSB3aWxsCj4gYWx3YXlz
-IGV2YWx1YXRlIGZhbHNlLgo+IAo+IEFzIGEgcmVzdWx0LCB0aGUgZGVmYXVsdCBjYXNlIHdvbid0
-IGRpc2FibGUgWFBUSSBvbiBJbnRlbCBoYXJkd2FyZSB3aGljaAo+IGFkdmVydGlzZXMgQVJDSF9D
-QVBBQklMSVRJRVNfUkRDTF9OTy4KPiAKPiBTaW1wbGlmeSBwYXJzZV94cHRpKCkgdG8gc29sZWx5
-IHRoZSBzZXR0aW5nIG9mIG9wdF94cHRpIGFjY29yZGluZyB0byB0aGUKPiBwYXNzZWQgc3RyaW5n
-LCBhbmQgaGF2ZSBpbml0X3NwZWN1bGF0aW9uX21pdGlnYXRpb25zKCkgY2FsbAo+IHhwdGlfaW5p
-dF9kZWZhdWx0KCkgaWYgYXBwcm9waWF0ZS4gIERyb3AgdGhlIGZvcmNlIHBhcmFtZXRlciwgYW5k
-IHBhc3MgY2Fwcwo+IGluc3RlYWQsIHRvIGF2b2lkIHJlZHVuZGFudCByZS1yZWFkaW5nIG9mIE1T
-Ul9BUkNIX0NBUFMuCj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT4KClJldmlld2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXgu
-Y29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gTW9uLCBKdWwgMjMsIDIwMTggYXQgMDI6NDk6NTBQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBJdCB0dXJucyBvdXQgdGhhdCBub3RoaW5nIGV2ZXIgcHJldmVudGVkIEhWTSBndWVz
+dHMgZnJvbSB0cnlpbmcgdG8gc2V0IHVua25vd24KPiBFRkVSIGJpdHMuICBHZW5lcmFsbHksIHRo
+aXMgcmVzdWx0cyBpbiBhIHZtZW50cnkgZmFpbHVyZS4KPiAKPiBGb3IgSW50ZWwgaGFyZHdhcmUs
+IGFsbCBpbXBsZW1lbnRlZCBiaXRzIGFyZSBjb3ZlcmVkIGJ5IHRoZSBjaGVja3MuCj4gCj4gRm9y
+IEFNRCBoYXJkd2FyZSwgdGhlIG9ubHkgRUZFUiBiaXQgd2hpY2ggaXNuJ3QgY292ZXJlZCBieSB0
+aGUgY2hlY2tzIGlzIFRDRQo+ICh3aGljaCBBRkFJQ1QgaXMgc3BlY2lmaWMgdG8gQU1EIEZhbTE1
+LzE2IGhhcmR3YXJlKS4gIFdlIG5ldmVyIGFkdmVydGlzZSBUQ0UKPiBpbiBDUFVJRCwgYnV0IGl0
+IGlzbid0IGEgc2VjdXJpdHkgcHJvYmxlbSB0byBoYXZlIFRDRSB1bmV4cGVjdGVkIGVuYWJsZWQg
+aW4KPiBndWVzdCBjb250ZXh0Lgo+IAo+IERpc2FsbG93IHRoZSBzZXR0aW5nIG9mIGJpdHMgb3V0
+c2lkZSBvZiB0aGUgRUZFUl9LTk9XTl9NQVNLLCB3aGljaCBwcmV2ZW50cwo+IGFueSB2bWVudHJ5
+IGZhaWx1cmVzIGZvciBndWVzdHMsIHlpZWxkaW5nICNHUCBpbnN0ZWFkLgo+IAo+IFNpZ25lZC1v
+ZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpSZXZpZXdl
+ZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
