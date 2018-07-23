@@ -1,36 +1,19 @@
-From: Ihor Matushchak <ihor.matushchak@foobox.net>
-Subject: Re: [PATCH v1] earlyprintk configuration for rk3399
- boards
-Date: Mon, 23 Jul 2018 19:37:05 +0300
-Message-ID: <CAFq70MFV58hqdHRLobpL6uZ5fZGX=c2xRyxK5pEP4E_wCoRpaQ@mail.gmail.com>
-References: <cover.1530737070.git.ihor.matushchak@foobox.net>
- <74c207f1-b2aa-9c7f-4004-02f9f721f6d6@arm.com>
- <CAFq70MEKa4GSaWprALmjaDyqOJeHUsAkSF-d869X4irhsjLOSQ@mail.gmail.com>
- <223c2116-0788-fb95-f3d1-7da0c3568515@arm.com>
- <CAFq70MG5aKTHYGjEom4HUzJKshkVPd6PScv2JV7H-ygmiZu=Lg@mail.gmail.com>
- <d6883cd0-1138-5df2-34ee-cf9a2774cfcb@arm.com>
+From: Lars Kurth <lars.kurth@citrix.com>
+Subject: automation: Creating a patchwork instance to improve
+ pre-commit build testing
+Date: Mon, 23 Jul 2018 16:40:46 +0000
+Message-ID: <DD622B30-B54C-4B9A-AA24-05329BD800B9@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8923545917178424177=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=4iug=kh=foobox.net=ihor.matushchak@srs-us1.protection.inumbo.net>)
- id 1fhdpe-0005BU-KR
- for xen-devel@lists.xenproject.org; Mon, 23 Jul 2018 16:37:10 +0000
-Received: from pb-smtp1.pobox.com (unknown [127.0.0.1])
- by pb-smtp1.pobox.com (Postfix) with ESMTP id C847BF7517
- for <xen-devel@lists.xenproject.org>; Mon, 23 Jul 2018 12:37:07 -0400 (EDT)
-Received: from pb-smtp1.nyi.icgroup.com (unknown [127.0.0.1])
- by pb-smtp1.pobox.com (Postfix) with ESMTP id C0315F7516
- for <xen-devel@lists.xenproject.org>; Mon, 23 Jul 2018 12:37:07 -0400 (EDT)
-Received: from mail-ed1-f43.google.com (unknown [209.85.208.43])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by pb-smtp1.pobox.com (Postfix) with ESMTPSA id 1E8DBF7514
- for <xen-devel@lists.xenproject.org>; Mon, 23 Jul 2018 12:37:07 -0400 (EDT)
-Received: by mail-ed1-f43.google.com with SMTP id o8-v6so1493955edt.13
- for <xen-devel@lists.xenproject.org>; Mon, 23 Jul 2018 09:37:07 -0700 (PDT)
-In-Reply-To: <d6883cd0-1138-5df2-34ee-cf9a2774cfcb@arm.com>
+ <srs0=5geg=kh=citrix.com=prvs=735aaeb87=lars.kurth@srs-us1.protection.inumbo.net>)
+ id 1fhdtD-0005wr-TI
+ for xen-devel@lists.xenproject.org; Mon, 23 Jul 2018 16:40:51 +0000
+Content-Language: en-US
+Content-ID: <16B80B5CCD1C19468349566C4890FC0D@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -39,350 +22,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, =?UTF-8?B?0IbQs9C+0YAg0JzQsNGC0YPRidCw0Lo=?= <i.matushchak@foobox.net>, xen-devel@lists.xen.org
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Iurii Artemenko <Iurii_Artemenko@epam.com>, Wei Liu <wei.liu2@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, "minios-devel@lists.xenproject.org" <minios-devel@lists.xenproject.org>, Committers <committers@xenproject.org>, Matt Spencer <Matt.Spencer@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============8923545917178424177==
-Content-Type: multipart/alternative; boundary="00000000000086e5990571ad4139"
-
---00000000000086e5990571ad4139
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Julien,
-
-Got it, thanks.
-
-*BR,*
-*Ihor Matushchak*
-
-2018-07-23 17:59 GMT+03:00 Julien Grall <julien.grall@arm.com>:
-
->
->
-> On 23/07/18 15:47, Ihor Matushchak wrote:
->
->> Hi Julien,
->>
->
-> Hi Ihor,
->
->
->> Sure, I would be glad to do that.
->>
->> I suppose it should be placed somewhere on wiki.xenproject.org <
->> http://wiki.xenproject.org>?
->>
->
-> We usually create a new platform under https://wiki.xenproject.org/wi
-> ki/Xen_ARM_with_Virtualization_Extensions
->
-> We can then add a link on the main page to the documentation of the rk339=
-9.
->
-> Cheers,
->
-> /
->> /
->> /BR,/
->> /Ihor Matushchak/
->>
->> 2018-07-23 17:33 GMT+03:00 Julien Grall <julien.grall@arm.com <mailto:
->> julien.grall@arm.com>>:
->>
->>     On 06/07/18 12:04, =D0=86=D0=B3=D0=BE=D1=80 =D0=9C=D0=B0=D1=82=D1=83=
-=D1=89=D0=B0=D0=BA wrote:
->>
->>         Hello Julien,
->>
->>
->>     Hi Ihor,
->>
->>     Sorry for the late reply.
->>
->>
->>         I suppose there is no such documentation, at least I didn't find
->>         any.
->>         Bringing up XEN 4.10.0 on RK3399 is my pet-project.
->>         My current target board is Ibox3399
->>         <https://www.aliexpress.com/item/RK3399-Development-Board-Ib
->> ox3399-2GB-DDR3-16GB-EMMC-Six-Core-A72-A53-Mali-T860-GPU-
->> Android6/32816273232.html
->>         <https://www.aliexpress.com/item/RK3399-Development-Board-Ib
->> ox3399-2GB-DDR3-16GB-EMMC-Six-Core-A72-A53-Mali-T860-GPU-
->> Android6/32816273232.html>>
->>
->>         At the moment I got dom0 running on this board and some test
->>         guest domain (both 4.4 kernels).
->>         Actually no changes made to XEN (except earlyprintk) at the
->>         moment, Xen works from the box.
->>
->>
->>     Glad to see Xen booting out of box on RK3399 :).
->>
->>     The alias is only for convience. It would be possible to do the same
->>     with 8250,0xff1a0000,2.
->>
->>     So instead of that patch, I would suggest to write down a
->>     documentation for booting Xen on the board and early debugging.
->>
->>     What do you think?
->>
->>     Cheers,
->>
->>
->>         /BR,/
->>         /Ihor Matushchak/
->>
->>         2018-07-06 13:36 GMT+03:00 Julien Grall <julien.grall@arm.com
->>         <mailto:julien.grall@arm.com> <mailto:julien.grall@arm.com
->>         <mailto:julien.grall@arm.com>>>:
->>
->>              Hello,
->>
->>              On 04/07/18 21:55, ihor.matushchak@foobox.net
->>         <mailto:ihor.matushchak@foobox.net>
->>              <mailto:ihor.matushchak@foobox.net
->>         <mailto:ihor.matushchak@foobox.net>> wrote:
->>
->>                  From: Ihor Matushchak <ihor.matushchak@foobox.net
->>         <mailto:ihor.matushchak@foobox.net>
->>                  <mailto:ihor.matushchak@foobox.net
->>         <mailto:ihor.matushchak@foobox.net>>>
->>
->>                  This patch enables earlyprintk for Rockchip rk3399
->>         based SoC.
->>
->>              Is there any missing pieces in Xen to boot on Rockchip? I
->>         would also
->>              quite like to see some documentation how to boot Xen on
->>         that platform.
->>
->>              Cheers,
->>
->>
->>
->>                  Ihor Matushchak (1):
->>                      xen:arm:earlyprintk configuration for rk3399 boards
->>
->>                     docs/misc/arm/early-printk.txt | 1 +
->>                     xen/arch/arm/Rules.mk          | 1 +
->>                     2 files changed, 2 insertions(+)
->>
->>
->>              --     Julien Grall
->>
->>
->>
->>     --     Julien Grall
->>
->>
->>
-> --
-> Julien Grall
->
-
---00000000000086e5990571ad4139
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Julien,<div><br></div><div>Got it, thanks.</div><div><br><=
-/div><div><i>BR,</i></div><div><i>Ihor Matushchak</i></div></div><div class=
-=3D"gmail_extra"><br><div class=3D"gmail_quote">2018-07-23 17:59 GMT+03:00 =
-Julien Grall <span dir=3D"ltr">&lt;<a href=3D"mailto:julien.grall@arm.com" =
-target=3D"_blank">julien.grall@arm.com</a>&gt;</span>:<br><blockquote class=
-=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
-ing-left:1ex"><br>
-<br>
-On 23/07/18 15:47, Ihor Matushchak wrote:<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex">
-Hi Julien,<br>
-</blockquote>
-<br>
-Hi Ihor,<br>
-<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex"><span class=3D"">
-<br>
-Sure, I would be glad to do that.<br>
-<br></span>
-I suppose it should be placed somewhere on <a href=3D"http://wiki.xenprojec=
-t.org" rel=3D"noreferrer" target=3D"_blank">wiki.xenproject.org</a> &lt;<a =
-href=3D"http://wiki.xenproject.org" rel=3D"noreferrer" target=3D"_blank">ht=
-tp://wiki.xenproject.org</a>&gt;?<br>
-</blockquote>
-<br>
-We usually create a new platform under <a href=3D"https://wiki.xenproject.o=
-rg/wiki/Xen_ARM_with_Virtualization_Extensions" rel=3D"noreferrer" target=
-=3D"_blank">https://wiki.xenproject.org/wi<wbr>ki/Xen_ARM_with_Virtualizati=
-on<wbr>_Extensions</a><br>
-<br>
-We can then add a link on the main page to the documentation of the rk3399.=
-<br>
-<br>
-Cheers,<br>
-<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex">
-/<br>
-/<br>
-/BR,/<br>
-/Ihor Matushchak/<br>
-<br>
-2018-07-23 17:33 GMT+03:00 Julien Grall &lt;<a href=3D"mailto:julien.grall@=
-arm.com" target=3D"_blank">julien.grall@arm.com</a> &lt;mailto:<a href=3D"m=
-ailto:julien.grall@arm.com" target=3D"_blank">julien.grall@arm.com</a>&gt;&=
-gt;<wbr>:<span class=3D""><br>
-<br>
-=C2=A0 =C2=A0 On 06/07/18 12:04, =D0=86=D0=B3=D0=BE=D1=80 =D0=9C=D0=B0=D1=
-=82=D1=83=D1=89=D0=B0=D0=BA wrote:<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Hello Julien,<br>
-<br>
-<br>
-=C2=A0 =C2=A0 Hi Ihor,<br>
-<br>
-=C2=A0 =C2=A0 Sorry for the late reply.<br>
-<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 I suppose there is no such documentation, at le=
-ast I didn&#39;t find<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 any.<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Bringing up XEN 4.10.0 on RK3399 is my pet-proj=
-ect.<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 My current target board is Ibox3399<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 &lt;<a href=3D"https://www.aliexpress.com/item/=
-RK3399-Development-Board-Ibox3399-2GB-DDR3-16GB-EMMC-Six-Core-A72-A53-Mali-=
-T860-GPU-Android6/32816273232.html" rel=3D"noreferrer" target=3D"_blank">ht=
-tps://www.aliexpress.com/it<wbr>em/RK3399-Development-Board-Ib<wbr>ox3399-2=
-GB-DDR3-16GB-EMMC-Six-<wbr>Core-A72-A53-Mali-T860-GPU-<wbr>Android6/3281627=
-3232.html</a><br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 &lt;<a href=3D"https://www.aliexpress.com/item/=
-RK3399-Development-Board-Ibox3399-2GB-DDR3-16GB-EMMC-Six-Core-A72-A53-Mali-=
-T860-GPU-Android6/32816273232.html" rel=3D"noreferrer" target=3D"_blank">ht=
-tps://www.aliexpress.com/it<wbr>em/RK3399-Development-Board-Ib<wbr>ox3399-2=
-GB-DDR3-16GB-EMMC-Six-<wbr>Core-A72-A53-Mali-T860-GPU-<wbr>Android6/3281627=
-3232.html</a>&gt;&gt;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 At the moment I got dom0 running on this board =
-and some test<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 guest domain (both 4.4 kernels).<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Actually no changes made to XEN (except earlypr=
-intk) at the<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 moment, Xen works from the box.<br>
-<br>
-<br>
-=C2=A0 =C2=A0 Glad to see Xen booting out of box on RK3399 :).<br>
-<br>
-=C2=A0 =C2=A0 The alias is only for convience. It would be possible to do t=
-he same<br>
-=C2=A0 =C2=A0 with 8250,0xff1a0000,2.<br>
-<br>
-=C2=A0 =C2=A0 So instead of that patch, I would suggest to write down a<br>
-=C2=A0 =C2=A0 documentation for booting Xen on the board and early debuggin=
-g.<br>
-<br>
-=C2=A0 =C2=A0 What do you think?<br>
-<br>
-=C2=A0 =C2=A0 Cheers,<br>
-<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 /BR,/<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 /Ihor Matushchak/<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 2018-07-06 13:36 GMT+03:00 Julien Grall &lt;<a =
-href=3D"mailto:julien.grall@arm.com" target=3D"_blank">julien.grall@arm.com=
-</a><br></span>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 &lt;mailto:<a href=3D"mailto:julien.grall@arm.c=
-om" target=3D"_blank">julien.grall@arm.com</a>&gt; &lt;mailto:<a href=3D"ma=
-ilto:julien.grall@arm.com" target=3D"_blank">julien.grall@arm.com</a><span =
-class=3D""><br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 &lt;mailto:<a href=3D"mailto:julien.grall@arm.c=
-om" target=3D"_blank">julien.grall@arm.com</a>&gt;&gt;<wbr>&gt;:<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 Hello,<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 On 04/07/18 21:55, <a href=
-=3D"mailto:ihor.matushchak@foobox.net" target=3D"_blank">ihor.matushchak@fo=
-obox.net</a><br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 &lt;mailto:<a href=3D"mailto:ihor.matushchak@fo=
-obox.net" target=3D"_blank">ihor.matushchak@foobox<wbr>.net</a>&gt;<br></sp=
-an>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 &lt;mailto:<a href=3D"mailt=
-o:ihor.matushchak@foobox.net" target=3D"_blank">ihor.matushchak@foobox<wbr>=
-.net</a><span class=3D""><br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 &lt;mailto:<a href=3D"mailto:ihor.matushchak@fo=
-obox.net" target=3D"_blank">ihor.matushchak@foobox<wbr>.net</a>&gt;&gt; wro=
-te:<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 From: Ihor Ma=
-tushchak &lt;<a href=3D"mailto:ihor.matushchak@foobox.net" target=3D"_blank=
-">ihor.matushchak@foobox.net</a><br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 &lt;mailto:<a href=3D"mailto:ihor.matushchak@fo=
-obox.net" target=3D"_blank">ihor.matushchak@foobox<wbr>.net</a>&gt;<br></sp=
-an>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 &lt;mailto:<a=
- href=3D"mailto:ihor.matushchak@foobox.net" target=3D"_blank">ihor.matushch=
-ak@foobox<wbr>.net</a><span class=3D""><br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 &lt;mailto:<a href=3D"mailto:ihor.matushchak@fo=
-obox.net" target=3D"_blank">ihor.matushchak@foobox<wbr>.net</a>&gt;&gt;&gt;=
-<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 This patch en=
-ables earlyprintk for Rockchip rk3399<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 based SoC.<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 Is there any missing pieces=
- in Xen to boot on Rockchip? I<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 would also<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 quite like to see some docu=
-mentation how to boot Xen on<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 that platform.<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 Cheers,<br>
-<br>
-<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 Ihor Matushch=
-ak (1):<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =
-=C2=A0xen:arm:earlyprintk configuration for rk3399 boards<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =
-docs/misc/arm/early-printk.txt | 1 +<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =
-xen/arch/arm/Rules.mk=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =
-2 files changed, 2 insertions(+)<br>
-<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 --=C2=A0 =C2=A0 =C2=A0Julie=
-n Grall<br>
-<br>
-<br>
-<br>
-=C2=A0 =C2=A0 --=C2=A0 =C2=A0 =C2=A0Julien Grall<br>
-<br>
-<br>
-</span></blockquote><span class=3D"HOEnZb"><font color=3D"#888888">
-<br>
--- <br>
-Julien Grall<br>
-</font></span></blockquote></div><br></div>
-
---00000000000086e5990571ad4139--
-
-
---===============8923545917178424177==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8923545917178424177==--
+SGkgYWxsLA0KDQpXZWkgYW5kIERvdWcgaGF2ZSByZWNlbnRseSBiZWVuIGltcHJvdmluZyBbeGVu
+LmdpdF0gLyBhdXRvbWF0aW9uIC8gYnVpbGQsIGltcGxlbWVudGluZyBzb21lIG9mIHRoZSBmdW5j
+dGlvbmFsaXR5IG91dGxpbmVkIGluIFsxXSAoc2VlICJDSSAvIENEIiBoZWFkaW5nKS7CoA0KDQpX
+ZSBhcmUgaW50ZW5kaW5nIHRvIHRha2UgZXZlcnkgcGF0Y2ggc2VyaWVzIHRoYXQgaXMgc2VudCB0
+byB4ZW4tZGV2ZWwgYW5kIGNyZWF0ZSBhIGJyYW5jaCBhdCBodHRwczovL2dpdGxhYi5jb20veGVu
+LXByb2plY3QveGVuLmdpdCBzY29wZWQgdG8gc29tZXRoaW5nIGxpa2UgIm1sLzxtc2ctaWQ+Ii4g
+bWwgc3RhbmRzIGZvciBtYWlsaW5nIGxpc3QuIFRoZSBnb2FsIGlzIHRvIHJ1biB3aGF0ZXZlciBi
+YXNpYyBDSSB0ZXN0cyB3ZSBjYW4gdG8gaGVscCByZXZpZXdlcnMgYW5kIGNvbnRyaWJ1dG9ycy4g
+V2VpIGFuZCBEb3VnIGhhdmUgZ290dGVuIHRoaW5ncyB0byB0aGUgcG9pbnQgd2hlcmUgd2UgY2Fu
+IGNvbXBpbGUgYWdhaW5zdCBhIG51bWJlciBvZiBkaXN0cm9zIGFuZCB0aGV5IGNvbnRpbnVlIHRv
+IGV4cGFuZCB0aGF0IGZ1bmN0aW9uYWxpdHkuIA0KDQpXaGF0IGlzIG1pc3NpbmcsIGlzIHRoZSBj
+YXBhYmlsaXR5IHRvIHRha2UgcGF0Y2ggc2VyaWVzIGZyb20gdGhlIG1haWxpbmcgbGlzdCBhbmQg
+dXNlIHRoZSBwb3N0ZWQgcGF0Y2hlcyB0byB0cmlnZ2VyIHRoZSBDSS9DRCBmdW5jdGlvbmFsaXR5
+LiBXZSBhcmUgcGxhbm5pbmcgdG8gdXNlIFBhdGNod29yayBiZWNhdXNlIGl0IHByb3ZpZGVzIGZ1
+bmN0aW9uYWxpdHkgdG8gYWxsb3cgdXMgdG8gZG8gdGhpcyB2aWEgdGhlIFBhdGNod29yayBBUEkg
+KGh0dHBzOi8vcGF0Y2h3b3JrLnJlYWR0aGVkb2NzLmlvL2VuL2xhdGVzdC9hcGkvcmVzdC8pIE9y
+aWdpbmFsbHkgRG91ZyBzdWdnZXN0ZWQgaGUgY291bGQganVzdCB0cnkgdGhpcyB2aWEgb25lIG9m
+IGhpcyBvd24gVk1zLCBidXQgdGhlIHJlY2VudCBpbnRyb2R1Y3Rpb24gb2YgdGhlIEdEUFIgY3Jl
+YXRlcyByaXNrcyBhbmQgb2JsaWdhdGlvbnMgZm9yIGV2ZXJ5b25lIChib3RoIGluZGl2aWR1YWxz
+IGFuZCBjb21wYW5pZXMpIHdobyBwcm9jZXNzZXMgWGVuIFByb2plY3QgcmVsYXRlZCBtYWlsaW5n
+IGxpc3QgZGF0YSAoaW5jbHVkaW5nIGdpdCBtZXRhLWRhdGEpLiBUbyBhdm9pZCB0aGlzLCB3ZSB3
+ZXJlIHBsYW5uaW5nIHRvIHJ1biBwYXRjaHdvcmsgb24gYSBuZXcgWGVuIFByb2plY3QgaG9zdGVk
+IFZNLCBmb3IgdGhlIHNvbGUgcHVycG9zZSBvZiB1c2luZyB0aGUgUGF0Y2h3b3JrIEFQSS7CoA0K
+DQpBdCB0aGlzIHN0YWdlLCB3ZSBhcmUgbm90IGludGVuZGluZyB0byBleHBvc2UgdGhlIHBhdGNo
+d29yayBVSS4NCg0KIyBIb3cgZG9lcyB0aGlzIGltcGFjdCBtZT8NClRoZSBjb250cmlidXRpb24g
+d29ya2Zsb3cgaXMgKm5vdCogaW1wYWN0ZWQgYnkgdGhpcyBjaGFuZ2UsIGJ1dCBvbmNlIHVwIGFu
+ZCBydW5uaW5nIHRoZSBmb2xsb3dpbmcgd2lsbCBoYXBwZW4gb25jZSB5b3UgcG9zdCBhIHBhdGNo
+IG9yIHBhdGNoIHNlcmllcyB0byB4ZW4tZGV2ZWw6DQoqIFBhdGNod29yayB3aWxsIHRha2UgcGF0
+Y2ggc2VyaWVzIGZyb20gdGhlIG1haWxpbmcgbGlzdCBhbmQgYXBwbGllcyBpdA0KKiBDSS9EQyB0
+ZXN0aW5nIGlzIHRyaWdnZXJlZA0KKiBBIHRlc3QgcmVwb3J0IHdpbGwgYmUgc2VudCBhcyBhIG1h
+aWwgdG8gdGhlIHBhdGNoIG9yIHRoZSBzZXJpZXMgKGFrYSB0aGUgMDAgcGF0Y2ggb2YgdGhlwqBz
+ZXJpZXMpDQoNClRoaXMgZG9lcyBtZWFuIHRob3VnaCB0aGF0IHNlcmllcyB3aGljaCBkbyBub3Qg
+YnVpbGQgb3Igc2hvdyBvdGhlciBpc3N1ZXMsIHdpbGwgbGlrZWx5IG5vdCBiZSByZXZpZXdlZCB1
+bnRpbCB0aGUgdGVzdHMgcGFzcy4gVGhpcyB3b3VsZCBsZXNzZW4gdGhlIGJ1cmRlbiBvbiByZXZp
+ZXdlcnMsIGFzIHRoZXkgd2lsbCBrbm93IHdoZXRoZXIgdGhlIGNvZGUgc3VibWl0dGVkIGJ1aWxk
+cyBvbiBhIHdpZGUgYXJyYXkgb2YgZW52aXJvbm1lbnRzLiANCg0KIyBTdXBwb3J0ZWQgYnVpbGQg
+ZW52aXJvbm1lbnRzIChmb3Igbm93KQ0KRm9yIG5vdywgd2UgYXJlIG9ubHkgc3VwcG9ydGluZyB0
+aGlzIG9uIHg4Ni4gVGhlIGV4YWN0IGxpc3Qgb2YgZGlzdHJvcyB3ZSBidWlsZCBhZ2FpbnN0IGNh
+biBiZSBmb3VuZCBpbiBbeGVuLmdpdF0gLyBhdXRvbWF0aW9uIC8gYnVpbGTCoA0KQXJtIHN1cHBv
+cnQgd2lsbCBiZSBhZGRlZCBsYXRlciwgb25jZSB0aGUgbWlzc2luZyBwaWVjZXMgYXJlIGluIHBs
+YWNlIChzZWUgWzFdIHNlY3Rpb24gIldoYXQgT1NzIChhcmNoaXRlY3R1cmVzKSBzaG91bGQgd2Ug
+c3VwcG9ydD8iKcKgDQoNCiMgV2hhdCBhYm91dCBjaGVja3BhdGNoLnBsPw0KT25jZSBjbGFuZy1m
+b3JtYXQgY2hhbmdlcyBoYXZlIGJlZW4gY29tcGxldGVkLCBXZWkgYW5kIERvdWcgYXJlIGdvaW5n
+IHRvIGxvb2sgYXQgYXV0b21hdGluZyBjb2RlIHN0eWxlIGNoZWNrcyBhcyB3ZWxsLiBJdXJpaSBB
+cnRlbWVua28gaXMgd29ya2luZyBvbiBjbGFuZy1mb3JtYXQgaW1wcm92ZW1lbnRzIHRoYXQgd2ls
+bCBhbGxvdyB1cyB0byB3b3JrIGFyb3VuZCB0aGUgaXNzdWVzIG91dGxpbmVkIGluIFsyXS4gVGhl
+cmUgYXJlIHN0aWxsIDMgbWlzc2luZyBwaWVjZXMgKHNlZSBbM10pLiANCg0KSSBkb24ndCB0aGlu
+ayB0aGlzIGlzIGEgY29udHJvdmVyc2lhbCBwcm9wb3NhbCwgYnV0IEkgd2FudGVkIHRvIGFzayB3
+aGV0aGVyIHRoZXJlIGFyZSBhbnkgb2JqZWN0aW9ucyBvciBzdWdnZXN0aW9ucy4gSSBpbmNsdWRl
+ZCB0aGUgbWluaW9zLWRldmVsIGxpc3QsIGFzIHRoZSBVbmlrcmFmdCBwcm9qZWN0IGlzIHBsYW5u
+aW5nIHRvIGludHJvZHVjZSBwYXRjaHdvcmsgaW50byB0aGVpciB3b3JrZmxvdy4NCg0KQmVzdCBS
+ZWdhcmRzDQpMYXJzDQoNCg0KIyBSZWZlcmVuY2VzDQpbMV0gaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE4LTA3L21zZzAwMTI2Lmh0bWzCoA0K
+DQpbMl0gaHR0cHM6Ly94ZW4ubWFya21haWwub3JnL3RocmVhZC9wYzJkaGpnYmdyZGN6NXNiDQpb
+M10gQ29kaW5nIHN0eWxlIHBhdHRlcm5zIHVzZWQgaW4gWGVuIHRoYXQgd2UgY2Fubm90IHlldCBz
+dXBwb3J0DQoNCkJyYWNlcyBzaG91bGQgYmUgb21pdHRlZCBmb3IgYmxvY2tzIHdpdGggYSBzaW5n
+bGUgc3RhdGVtZW50LiBlLmcuLA0KwqBpZiAoIGNvbmRpdGlvbiApDQrCoCDCoCDCoHNpbmdsZV9z
+dGF0ZW1lbnQoKTsNCsKgDQpDb21tZW50cw0KLS0tLS0tLS0NCsKgDQrCoE9ubHkgQyBzdHlsZSAv
+KiAuLi4gKi8gY29tbWVudHMgYXJlIHRvIGJlIHVzZWQuwqAgQysrIHN0eWxlIC8vIGNvbW1lbnRz
+DQrCoHNob3VsZCBub3QgYmUgdXNlZC7CoCBNdWx0aS13b3JkIGNvbW1lbnRzIHNob3VsZCBiZWdp
+biB3aXRoIGEgY2FwaXRhbA0KwqBsZXR0ZXIuwqAgQ29tbWVudHMgY29udGFpbmluZyBhIHNpbmds
+ZSBzZW50ZW5jZSBtYXkgZW5kIHdpdGggYSBmdWxsDQrCoHN0b3A7IGNvbW1lbnRzIGNvbnRhaW5p
+bmcgc2V2ZXJhbCBzZW50ZW5jZXMgbXVzdCBoYXZlIGEgZnVsbCBzdG9wDQrCoGFmdGVyIGVhY2gg
+c2VudGVuY2UuDQrCoA0KwqBNdWx0aS1saW5lIGNvbW1lbnQgYmxvY2tzIHNob3VsZCBzdGFydCBh
+bmQgZW5kIHdpdGggY29tbWVudCBtYXJrZXJzIG9uDQrCoHNlcGFyYXRlIGxpbmVzIGFuZCBlYWNo
+IGxpbmUgc2hvdWxkIGJlZ2luIHdpdGggYSBsZWFkaW5nICcqJy4NCsKgDQrCoC8qDQrCoCAqIEV4
+YW1wbGUsIG11bHRpLWxpbmUgY29tbWVudCBibG9jay4NCsKgICoNCsKgICogTm90ZSBiZWdpbm5p
+bmcgYW5kIGVuZCBtYXJrZXJzIG9uIHNlcGFyYXRlIGxpbmVzIGFuZCBsZWFkaW5nICcqJy4NCsKg
+ICovDQrCoA0KRW1hY3MgbG9jYWwgdmFyaWFibGVzDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0NCkEg
+Y29tbWVudCBibG9jayBjb250YWluaW5nIGxvY2FsIHZhcmlhYmxlcyBmb3IgZW1hY3MgaXMgcGVy
+bWl0dGVkIGF0DQp0aGUgZW5kIG9mIGZpbGVzLsKgIEl0IHNob3VsZCBiZToNCsKgDQrCoC8qDQrC
+oCAqIExvY2FsIHZhcmlhYmxlczoNCsKgICogbW9kZTogQw0KwqAgKiBjLWZpbGUtc3R5bGU6ICJC
+U0QiDQrCoCAqIGMtYmFzaWMtb2Zmc2V0OiA0DQrCoCAqIGluZGVudC10YWJzLW1vZGU6IG5pbA0K
+wqAgKiBFbmQ6DQrCoCAqLw0KDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
