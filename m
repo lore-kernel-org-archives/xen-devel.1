@@ -1,15 +1,21 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] x86/spec-ctrl: Fix the parsing of xpti= on
- fixed Intel hardware
-Date: Mon, 23 Jul 2018 16:22:11 +0200
-Message-ID: <f38b5696-4f68-597c-a2f6-f1cc12b41688@suse.com>
-References: <1532353682-28335-1-git-send-email-andrew.cooper3@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v3 12/13] x86: add iommu_ops to modify and
+ flush IOMMU mappings
+Date: Mon, 23 Jul 2018 15:26:29 +0100
+Message-ID: <20180723142629.ytcph5yf34pi2vmg@citrix.com>
+References: <20180717133816.37958-1-paul.durrant@citrix.com>
+ <20180717133816.37958-13-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1532353682-28335-1-git-send-email-andrew.cooper3@citrix.com>
-Content-Language: de-DE
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=l8wo=kh=citrix.com=prvs=7352c57fe=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1fhbnF-0001ru-SL
+ for xen-devel@lists.xenproject.org; Mon, 23 Jul 2018 14:26:33 +0000
+Content-Disposition: inline
+In-Reply-To: <20180717133816.37958-13-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,23 +24,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjMvMDcvMTggMTU6NDgsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4gVGhlIGNhbGxzIHRvIHhw
-dGlfaW5pdF9kZWZhdWx0KCkgaW4gcGFyc2VfeHB0aSgpIGFyZSBidWdneS4gIFRoZSBDUFVJRCBk
-YXRhCj4gaGFzbid0IGJlZW4gZmV0Y2hlZCB0aGF0IGVhcmx5LCBhbmQgYm9vdF9jcHVfaGFzKFg4
-Nl9GRUFUVVJFX0FSQ0hfQ0FQUykgd2lsbAo+IGFsd2F5cyBldmFsdWF0ZSBmYWxzZS4KPiAKPiBB
-cyBhIHJlc3VsdCwgdGhlIGRlZmF1bHQgY2FzZSB3b24ndCBkaXNhYmxlIFhQVEkgb24gSW50ZWwg
-aGFyZHdhcmUgd2hpY2gKPiBhZHZlcnRpc2VzIEFSQ0hfQ0FQQUJJTElUSUVTX1JEQ0xfTk8uCj4g
-Cj4gU2ltcGxpZnkgcGFyc2VfeHB0aSgpIHRvIHNvbGVseSB0aGUgc2V0dGluZyBvZiBvcHRfeHB0
-aSBhY2NvcmRpbmcgdG8gdGhlCj4gcGFzc2VkIHN0cmluZywgYW5kIGhhdmUgaW5pdF9zcGVjdWxh
-dGlvbl9taXRpZ2F0aW9ucygpIGNhbGwKPiB4cHRpX2luaXRfZGVmYXVsdCgpIGlmIGFwcHJvcGlh
-dGUuICBEcm9wIHRoZSBmb3JjZSBwYXJhbWV0ZXIsIGFuZCBwYXNzIGNhcHMKPiBpbnN0ZWFkLCB0
-byBhdm9pZCByZWR1bmRhbnQgcmUtcmVhZGluZyBvZiBNU1JfQVJDSF9DQVBTLgo+IAo+IFNpZ25l
-ZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpSZXZp
-ZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4KCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCBKdWwgMTcsIDIwMTggYXQgMDI6Mzg6MTVQTSArMDEwMCwgUGF1bCBEdXJyYW50IHdy
+b3RlOgpbLi4uXQo+ICtzdGF0aWMgaW50IGlvbW11b3BfdW5tYXAoc3RydWN0IHhlbl9pb21tdV9v
+cF91bm1hcCAqb3ApCj4gK3sKWy4uLl0KPiArCj4gKyAgICBpZiAoICFpb21tdV91bm1hcF9wYWdl
+KGN1cnJkLCBiZm4pICkKPiArICAgICAgICByYyA9IC1FSU87CgpTbyBpdCBpcyBhbiBlcnJvciB0
+byB1bm1hcCB0aGUgcGFnZSBzdWNjZXNzZnVsbHk/IEluIGZhY3QgdGhpcyBzYW1lIGxpbmUKaXMg
+Y2hhbmdlZCBpbiB0aGUgbmV4dCBwYXRjaC4gSSBzdXBwb3NlIHRoZSBjb2RlIGhlcmUgaXMgd3Jv
+bmcuCgpXZWkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
