@@ -1,10 +1,22 @@
-From: sepanta s <sapanta992@gmail.com>
-Subject: An issue in sharing the pages again in xen-memshare
-Date: Mon, 23 Jul 2018 07:07:27 +0430
-Message-ID: <CABaiLQ959qf8fDZSV5-G1utG3mZUB2WMmw+HaMjfXC0PXtkzhw@mail.gmail.com>
+From: Michal Hocko <mhocko@kernel.org>
+Subject: Re: [PATCH] mm,
+ oom: distinguish blockable mode for mmu notifiers
+Date: Mon, 23 Jul 2018 09:11:54 +0200
+Message-ID: <20180723071154.GC17905__10490.352768875$1532329846$gmane$org@dhcp22.suse.cz>
+References: <20180716115058.5559-1-mhocko@kernel.org>
+ <20180720170902.d1137060c23802d55426aa03@linux-foundation.org>
+ <20180723070306.GB17905@dhcp22.suse.cz>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6361325670804138342=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=qqcr=kh=kernel.org=mhocko@srs-us1.protection.inumbo.net>)
+ id 1fhV0f-0004Hd-VB
+ for xen-devel@lists.xenproject.org; Mon, 23 Jul 2018 07:11:57 +0000
+Content-Disposition: inline
+In-Reply-To: <20180723070306.GB17905@dhcp22.suse.cz>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,62 +25,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xen.org" <Xen-devel@lists.xen.org>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: kvm@vger.kernel.org, Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>, David Airlie <airlied@linux.ie>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Sudeep Dutt <sudeep.dutt@intel.com>, dri-devel@lists.freedesktop.org, linux-mm@kvack.org, Andrea Arcangeli <aarcange@redhat.com>, "David (ChunMing) Zhou" <David1.Zhou@amd.com>, Dimitri Sivanich <sivanich@sgi.com>, linux-rdma@vger.kernel.org, amd-gfx@lists.freedesktop.org, Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>, David Rientjes <rientjes@google.com>, xen-devel@lists.xenproject.org, intel-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>, Leon Romanovsky <leonro@mellanox.com>, =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, Mike Marciniszyn <mike>
 List-Id: xen-devel@lists.xenproject.org
 
---===============6361325670804138342==
-Content-Type: multipart/alternative; boundary="0000000000002505d50571a54d12"
-
---0000000000002505d50571a54d12
-Content-Type: text/plain; charset="UTF-8"
-
-Hi all,
-
-I have written a program that can share memory pages of two VMs every x
-milliseconds. To do so, I modified xen and added an unshare event to be
-able to capture it. However,  for some pages, when I receive the unshare
-event that contains the information about the pages which was about to be
-written on and put it on a buffer for sharing them again after x
-milliseconds, I cannot nominate them again and an error occurs. So, the
-sharing mechanism I have built can partially share pages. I guess the
-problem might be because of internal structure of sharing mechanism in the
-Xen but can't figure out the problem.
-Do you  have any idea what can cause this problem? Or what should I check
-to get closer to any solution?
-
-
-Thanks,
-Sepanta
-
---0000000000002505d50571a54d12
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi all, <br></div><div><br></div><div>I have written =
-a program that can share memory pages of two VMs every x milliseconds. To d=
-o so, I modified xen and added an unshare event to be able to capture it. H=
-owever,=C2=A0
-for some pages, when I receive the unshare event that contains the informat=
-ion about the pages which was about to be written on and put it on a buffer=
- for sharing them again after x milliseconds, I cannot nominate them again =
-and an error occurs. So, the sharing mechanism I have built can partially s=
-hare pages. I guess the problem might be because of internal structure of s=
-haring mechanism in the Xen but can&#39;t figure out the problem. <br></div=
-><div>Do you=C2=A0 have any idea what can cause this problem? Or what shoul=
-d I check to get closer to any solution? <br></div><div><br></div><div><br>=
-</div><div>Thanks,</div><div>Sepanta<br></div></div>
-
---0000000000002505d50571a54d12--
-
-
---===============6361325670804138342==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6361325670804138342==--
+T24gTW9uIDIzLTA3LTE4IDA5OjAzOjA2LCBNaWNoYWwgSG9ja28gd3JvdGU6Cj4gT24gRnJpIDIw
+LTA3LTE4IDE3OjA5OjAyLCBBbmRyZXcgTW9ydG9uIHdyb3RlOgo+IFsuLi5dCj4gPiBQbGVhc2Ug
+dGFrZSBhIGxvb2s/Cj4gCj4gQXJlIHlvdSBPSyB0byBoYXZlIHRoZXNlIGluIGEgc2VwYXJhdGUg
+cGF0Y2g/CgpCdHcuIEkgd2lsbCByZWJhc2UgdGhpcyBwYXRjaCBvbmNlIG9vbSBzdHVmZiBpbiBs
+aW51eC1uZXh0IHNldHRsZXMuIEF0CmxlYXN0IG9vbV9sb2NrIHJlbW92YWwgZnJvbSBvb21fcmVh
+cGVyIHdpbGwgY29uZmxpY3QuCgotLSAKTWljaGFsIEhvY2tvClNVU0UgTGFicwoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
