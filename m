@@ -1,18 +1,20 @@
-From: Andrii Anisov <andrii_anisov@epam.com>
-Subject: Re: [PATCH v2 02/21] xen/arm: make allocate_memory work
- for non 1:1 mapped guests
-Date: Tue, 24 Jul 2018 15:09:03 +0300
-Message-ID: <e7970e17-6451-10d1-511a-77041bbb4ff7@epam.com>
-References: <alpine.DEB.2.10.1807061523160.13502@sstabellini-ThinkPad-X260>
- <1530918736-13965-2-git-send-email-sstabellini@kernel.org>
- <94e6cecd-12d7-29bf-51f0-c9e997da6d58@epam.com>
- <alpine.DEB.2.10.1807231130090.19154@sstabellini-ThinkPad-X260>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86/pvh: change the order of the iommu
+ initialization for Dom0
+Date: Tue, 24 Jul 2018 06:36:53 -0600
+Message-ID: <5B571D6502000078001D7374@prv1-mh.provo.novell.com>
+References: <20180724112900.70208-1-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1807231130090.19154@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=vgmm=ki=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fhwYj-0001rb-Re
+ for xen-devel@lists.xenproject.org; Tue, 24 Jul 2018 12:36:57 +0000
+In-Reply-To: <20180724112900.70208-1-roger.pau@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,16 +23,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, julien.grall@arm.com, xen-devel@lists.xen.org
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8gU3RlZmFubywKCgpPbiAyMy4wNy4xOCAyMTozMiwgU3RlZmFubyBTdGFiZWxsaW5pIHdy
-b3RlOgo+IGFsc28gdGhlIEdJQyBhbmQgdGltZXIgYWRkcmVzc2VzIG5lZWQgdG8gYmUgY29uZmln
-dXJhYmxlLgpJIGRvbid0IHJlbWVtYmVyIHdlIGV2ZXIgaGFkIGEgcHJvYmxlbSB3aXRoIHRoZW0u
-IEJ1dCB5ZXMsIHRoaXMgc2hvdWxkIApiZSBjb25maWd1cmFibGUgYXMgd2VsbC4KCj4gSSB1c3Vh
-bGx5IHJlZmVyIHRvIHRoaXMgKGZ1dHVyZSkgZmVhdHVyZSBhcyBhcmJpdHJhcnkgZ3Vlc3QgbWVt
-b3J5IG1hcC4KSSBzZWUuCgotLSAKCipBbmRyaWkgQW5pc292KgoKCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDI0LjA3LjE4IGF0IDEzOjI5LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
+IFRoZSBpb21tdSBpbml0aWFsaXphdGlvbiB3aWxsIGFsc28gY3JlYXRlIE1NSU8gbWFwcGluZ3Mg
+aW4gdGhlIERvbTAKPiBwMm0sIHNvIHRoZSBwYWdpbmcgbWVtb3J5IHBvb2wgbmVlZHMgdG8gYmUg
+YWxsb2NhdGVkIG9yIGVsc2UgaW9tbXUKPiBpbml0aWFsaXphdGlvbiB3aWxsIGZhaWwuCj4gCj4g
+TW92ZSB0aGUgY2FsbCB0byBpbml0IHRoZSBpb21tdSBhZnRlciB0aGUgRG9tMCBwMm0gaGFzIGJl
+ZW4gc2V0dXAgaW4KPiBvcmRlciB0byBzb2x2ZSB0aGlzLgo+IAo+IE5vdGUgdGhhdCBpc3N1ZXMg
+Y2F1c2VkIGJ5IHRoaXMgd3Jvbmcgb3JkZXJpbmcgaGF2ZSBvbmx5IGJlZW4gc2Vlbgo+IHdoZW4g
+dXNpbmcgc2hhZG93IHBhZ2luZy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOp
+IDxyb2dlci5wYXVAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hA
+c3VzZS5jb20+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
