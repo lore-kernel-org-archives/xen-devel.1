@@ -1,28 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 5/6] x86/HVM: prefill cache with PDPTEs when
- possible
-Date: Tue, 24 Jul 2018 01:04:04 -0600
-Message-ID: <5B56CF6402000078001D6F89@prv1-mh.provo.novell.com>
-References: <5B506A6E02000078001D5D17@prv1-mh.provo.novell.com>
- <5B506CE302000078001D5D8A@prv1-mh.provo.novell.com>
- <2fa046b9-9d6f-caa0-d400-804f92332d2e@citrix.com>
- <5B507A6102000078001D5DDD@prv1-mh.provo.novell.com>
- <65e2cc63-e956-86ca-2c46-55dd0157ae9e@citrix.com>
- <5B50DA850200007800137618@prv1-mh.provo.novell.com>
- <95a0aace-ae9b-6595-978c-05a1de712f6c@citrix.com>
- <5B50DFE70200007800137635@prv1-mh.provo.novell.com>
- <4ba21c83-e1e5-fa2b-01e0-04f2b92b79aa@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [Notes for xen summit 2018 design session ]
+ Testing/Building with Docker/GitLab
+Date: Tue, 24 Jul 2018 08:18:44 +0100
+Message-ID: <20180724071844.qjxdpzttazxuryvo@citrix.com>
+References: <65A1D88B-2E3A-4DB9-9823-D59D894405C7@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=vgmm=ki=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fhrMh-00062t-6e
- for xen-devel@lists.xenproject.org; Tue, 24 Jul 2018 07:04:11 +0000
-In-Reply-To: <4ba21c83-e1e5-fa2b-01e0-04f2b92b79aa@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=2t9p=ki=citrix.com=prvs=736d78cd4=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1fhrar-0006uN-6U
+ for xen-devel@lists.xenproject.org; Tue, 24 Jul 2018 07:18:49 +0000
 Content-Disposition: inline
+In-Reply-To: <65A1D88B-2E3A-4DB9-9823-D59D894405C7@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,22 +23,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>
+To: Lars Kurth <lars.kurth@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <Andrii_Anisov@epam.com>, "xudong.hao@intel.com" <xudong.hao@intel.com>, Doug Goldstein <cardoe@cardoe.com>, Dario Faggioli <dfaggioli@suse.com>, Florian Schmidt <Florian.Schmidt@neclab.eu>, "committers@xenproject.org" <committers@xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>, Artem Mygaiev <artem.mygaiev@globallogic.com>, Matt Spencer <Matt.Spencer@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE5LjA3LjE4IGF0IDIxOjA3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT2ggLSBJJ2Qgbm90IGxvb2tlZCBpbiB0aGF0IG11Y2ggZGV0YWlsIGF0IHlvdXIgYWxn
-b3JpdGhtLiAgQXMgYSBmaXJzdAo+IGd1dCBmZWVsLCB0YWdnaW5nIGJ5IGxldmVsIGRvZXNuJ3Qg
-c291bmQgYXMgaWYgaXQgd2lsbCBpbnRlcmFjdAo+IGNvcnJlY3RseSB3aXRoIGxpbmVhciBwYWdl
-dGFibGVzLgo+IAo+IEJvdGggdGhlIEludGVsIGFuZCBBTUQgT1JNJ3MgbWFpbnRhaW4gcGFnaW5n
-IHN0cnVjdHVyZSBjYWNoZXMgc28gSSdkCj4gZXhwZWN0IHRoYXQgYSBsaW5lYXIgcGFnZXRhYmxl
-IGVudHJ5IHdvdWxkIGJlIHNlcnZlZCBmcm9tIHRoYXQgY2FjaGUKPiByYXRoZXIgdGhhbiBiZWlu
-ZyByZWFkIHR3aWNlIGZyb20gUkFNLgoKSXMgdGhlcmUgYW55d2hlcmUgZW5vdWdoIGRldGFpbCBh
-Ym91dCB0aGUgYWN0dWFsIGltcGxlbWVudGF0aW9uIG9mCnRoZSBwYWdpbmcgc3RydWN0dXJlIGNh
-Y2hlcz8gSSBjb3VsZCBpbWFnaW5lIHRoZW0gYmVpbmcgcGVyIGxldmVsLiBJdAp3b3VsZG4ndCBi
-ZSB2ZXJ5IGRpZmZpY3VsdCB0byBzd2l0Y2ggdG8gYSB0cmlzdGF0ZSBoZXJlIChub3JtYWwgZGF0
-YSwKcGFnZSB0YWJsZSwgYW5kIFBBRSBMMykuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+U2luY2UgSSBjYW1lIGJhY2sgZnJvbSB0aGUgc3VtbWl0LCBJIGJ1aWx0IGEgYnVuY2ggb2YgbmV3
+IGNvbnRhaW5lcnMgYW5kCmVuYWJsZWQgYnVpbGRpbmcgbW9zdCBjb21wb25lbnRzIHdpdGggZ2l0
+bGFiIENJLiBUaGUgZG9ja2VyIGJhc2UKc29sdXRpb24gaXMgZGVmaW5pdGVseSBtb3JlIGZsZXhp
+YmxlIHRoYW4gVHJhdmlzIGluIHRoYXQgeW91IGNhbgpiYXNpY2FsbHkgaW5zdGFsbCB3aGF0ZXZl
+ciBwYWNrYWdlcyB5b3Ugd2FudC4KCkRvdWcncyBjb250YWluZXJpemUgc2NyaXB0IHdhcyBhbHNv
+IGNvbW1pdHRlZCBpbiB0cmVlIHRvIHVuaWZ5IGRldmVsb3BlcgphbmQgQ0kgZXhwZXJpZW5jZS4g
+Tm93IGEgZGV2ZWxvcGVyIGNhbiB1c2UgdGhlIHNhbWUgZG9ja2VyIGltYWdlIGluCmdpdGxhYiBD
+SSB0byBidWlsZCB0ZXN0IHRoZWlyIGNoYW5nZXMuIEkgYWxzbyBzd2l0Y2hlZCBteSBwcmUtY29t
+bWl0CmJ1aWxkIHRlc3QgdG8gY29udGFpbmVyLWJhc2UsIHdoaWNoIHdvcmtzIGdyZWF0IGZvciBt
+ZS4KCkFzIGZvciBBcm0sIEkgaGF2ZW4ndCBkb25lIGFueXRoaW5nIGR1ZSB0byB0aW1lIGNvbnN0
+cmFpbnQuIEJ1dCBJCnN1c3BlY3QgbW9zdCBvZiB0aGUgZG9ja2VyIGZpbGVzIGNhbiBiZSBlYXNp
+bHkgYWRhcHRlZCBiZWNhdXNlIHRoZXJlCmlzbid0IHRoYXQgbXVjaCB4ODYgc3BlY2lmaWMgdGhp
+bmcgaW4gdGhlbS4KCldlIHN0aWxsIGhhdmVuJ3QgbWFuYWdlZCB0byBnZXQgZ2l0bGFiIENJJ3Mg
+ZW1haWxzIHRvIHhlbi1kZXZlbC4gTm90CnN1cmUgd2h5LgoKSSBoYXZlIHdyaXR0ZW4gYSBzbWFs
+bCBzY3JpcHQgdG8gc21va2UgdGVzdCBYZW4gd2l0aCBRRU1VLiBJdCBpcwp2ZXJ5IHByaW1pdGl2
+ZSwgYnV0IGl0IGlzIGJldHRlciB0aGFuIG5vdGhpbmcuIEkgd2lsbCBmaW5kIHNvbWUgdGltZSB0
+bwppbnRlZ3JhdGUgdGhhdCBpbnRvIGdpdGxhYiBhcyB3ZWxsLgoKSSBhbHNvIHdyb3RlIGEgc21h
+bGwgc2NyaXB0IHRvIGJ1aWxkIGV2ZXJ5IGNvbW1pdCBmcm9tIGEgZ2l2ZW4gcmFuZ2UuIEl0Cndv
+dWxkIGJlIHBvc3NpYmxlIHRvIGludGVncmF0ZSB0aGF0IGludG8gZ2l0bGFiIENJIGFzIHdlbGws
+IGJ1dCB0aGF0J3MKZ29pbmcgdG8gZWF0IGEgbG90IG9mIGNwdSB0aW1lLgoKV2VpLgoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
