@@ -1,20 +1,19 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v4 2/2] vhpet: add support for level
- triggered interrupts
-Date: Tue, 24 Jul 2018 07:36:39 -0600
-Message-ID: <5B572B6702000078001D7407@prv1-mh.provo.novell.com>
-References: <20180717103854.55773-1-roger.pau@citrix.com>
- <20180717103854.55773-3-roger.pau@citrix.com>
+Subject: Re: [PATCH] xen: correct DEFCONFIG_LIST Kconfig item
+Date: Tue, 24 Jul 2018 07:40:11 -0600
+Message-ID: <5B572C3B02000078001D7416@prv1-mh.provo.novell.com>
+References: <20180710083151.21961-1-jgross@suse.com>
+ <5B4487E802000078001D2929@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=vgmm=ki=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fhxUa-00074G-23
- for xen-devel@lists.xenproject.org; Tue, 24 Jul 2018 13:36:44 +0000
-In-Reply-To: <20180717103854.55773-3-roger.pau@citrix.com>
+ id 1fhxY1-0007iq-Lc
+ for xen-devel@lists.xenproject.org; Tue, 24 Jul 2018 13:40:17 +0000
+In-Reply-To: <5B4487E802000078001D2929@prv1-mh.provo.novell.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,24 +23,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Stefan Bader <stefan.bader@canonical.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Doug Goldstein <cardoe@cardoe.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE3LjA3LjE4IGF0IDEyOjM4LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IExldmVsIHRyaWdnZXJlZCBpbnRlcnJ1cHRzIGFyZSBub3QgYW4gb3B0aW9uYWwgZmVhdHVyZSBv
-ZiBIUEVULCBhbmQKPiBtdXN0IGJlIGltcGxlbWVudGVkIGluIG9yZGVyIHRvIGNvbXBseSB3aXRo
-IHRoZSBIUEVUIHNwZWNpZmljYXRpb24uCj4gCj4gSW1wbGVtZW50IHRoZW0gYnkgYWRkaW5nIGEg
-Y2FsbGJhY2sgdG8gdGhlIHRpbWVyIHdoaWNoIHNldHMgdGhlCj4gaW50ZXJydXB0IGJpdCBpbiB0
-aGUgZ2VuZXJhbCBpbnRlcnJ1cHQgc3RhdHVzIHJlZ2lzdGVyLiBGdXJ0aGVyCj4gaW50ZXJydXB0
-cyAoaW4gY2FzZSBvZiBwZXJpb2RpYyBtb2RlKSB3aWxsIG5vdCBiZSBpbmplY3RlZCB1bnRpbCB0
-aGUKPiBiaXQgaXMgY2xlYXJlZC4KPiAKPiBJbiBvcmRlciB0byByZXNldCB0aGUgaW50ZXJydXB0
-cyB3aGVuIHRoZSBzdGF0dXMgYml0IGlzIGNsZWFyIFhlbiBtdXN0Cj4gYWxzbyBkZXRlY3QgYWNj
-ZXNzZXMgdG8gc3VjaCByZWdpc3Rlci4KPiAKPiBXaGlsZSB0aGVyZSBjb252ZXJ0IHRuIGFuZCBp
-IGluIGhwZXRfd3JpdGUgdG8gdW5zaWduZWQuCj4gCj4gUmVwb3J0ZWQtYnk6IFN0ZWZhbiBCYWRl
-ciA8c3RlZmFuLmJhZGVyQGNhbm9uaWNhbC5jb20+Cj4gU2lnbmVkLW9mZi1ieTogUm9nZXIgUGF1
-IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogSmFuIEJldWxpY2gg
-PGpiZXVsaWNoQHN1c2UuY29tPgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+Pj4+IE9uIDEwLjA3LjE4IGF0IDEyOjE4LCA8SkJldWxpY2hAc3VzZS5jb20+IHdyb3RlOgo+Pj4+
+IE9uIDEwLjA3LjE4IGF0IDEwOjMxLCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4gVGhlIGRl
+ZmF1bHQgdmFsdWUgb2YgREVGQ09ORklHX0xJU1QgaXMgd3Jvbmc6IGl0IHNob3VsZCBiZSB0aGUg
+dmFsdWUgb2YKPj4gdGhlIGNvbmZpZ3VyZWQgQVJDSF9ERUZDT05GSUcgaXRlbSwgbm90IHRoZSBz
+dHJpbmcgIiRBUkNIX0RFRkNPTkZJRyIuCj4gCj4gTWFrc2Ugc2Vuc2UgYW5kIG1hdGNoZXMgTGlu
+dXgsIGJ1dCBJJ2Qgc3RpbGwgcHJlZmVyIHRvIGhhdmUgRG91ZydzCj4gY29uc2VudCBoZXJlLgoK
+UGluZz8KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
