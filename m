@@ -1,16 +1,28 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: [PATCH] automation: introduce a script for build test
-Date: Tue, 24 Jul 2018 17:56:51 +0100
-Message-ID: <20180724165651.21743-1-wei.liu2@citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: automation: Creating a patchwork instance to
+ improve pre-commit build testing
+Date: Tue, 24 Jul 2018 19:22:00 +0200
+Message-ID: <e5b85bb5063db69ca7a1712066779bee620de952.camel@suse.com>
+References: <DD622B30-B54C-4B9A-AA24-05329BD800B9@citrix.com>
+ <5B56EC0002000078001D708C@prv1-mh.provo.novell.com>
+ <20180724092430.puacbfkbimdm5anz@citrix.com>
+ <5B56F2BB02000078001D7130@prv1-mh.provo.novell.com>
+ <20180724094352.bobqiacujy4tgcp4@citrix.com>
+ <5B56F99502000078001D719C@prv1-mh.provo.novell.com>
+ <20180724101858.jhsyfdkpy7urdrku@citrix.com>
+ <A73BD547-2874-42D6-A766-046FA4C0E1DC@citrix.com>
+ <17f94bb6-2fce-c6d7-7ae9-e380708d3a96@arm.com>
+ <18079EC1-15A4-4C05-A78F-0570E1F54E8E@citrix.com>
+ <cf651d14-f6f4-b651-b6b3-1fc5cbdbcd8f@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6211108917600330012=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=2t9p=ki=citrix.com=prvs=736d78cd4=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fi0cK-0008BN-7R
- for xen-devel@lists.xenproject.org; Tue, 24 Jul 2018 16:56:56 +0000
+ <srs0=ymhk=ki=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1fi10j-0001sG-Qa
+ for xen-devel@lists.xenproject.org; Tue, 24 Jul 2018 17:22:09 +0000
+In-Reply-To: <cf651d14-f6f4-b651-b6b3-1fc5cbdbcd8f@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,59 +31,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Doug Goldstein <cardoe@cardoe.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@citrix.com>
+To: George Dunlap <george.dunlap@citrix.com>, Lars Kurth <lars.kurth@citrix.com>, Julien Grall <julien.grall@arm.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>
+Cc: Iurii Artemenko <Iurii_Artemenko@epam.com>, Doug Goldstein <cardoe@cardoe.com>, Minios-devel <minios-devel@lists.xenproject.org>, "committers@xenproject.org" <committers@xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>, Matt Spencer <Matt.Spencer@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-U2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+ClNp
-Z25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Ci0tLQpUaGlzIGlzIGEg
-c2NyaXB0IEkgd3JvdGUgcHJldmlvdXNseSBmb3IgYnVpbGQgdGVzdC4KCkNjOiBBbmRyZXcgQ29v
-cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgpDYzogR2VvcmdlIER1bmxhcCA8R2Vvcmdl
-LkR1bmxhcEBldS5jaXRyaXguY29tPgpDYzogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNp
-dHJpeC5jb20+CkNjOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CkNjOiBLb25yYWQg
-Unplc3p1dGVrIFdpbGsgPGtvbnJhZC53aWxrQG9yYWNsZS5jb20+CkNjOiBTdGVmYW5vIFN0YWJl
-bGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CkNjOiBUaW0gRGVlZ2FuIDx0aW1AeGVuLm9y
-Zz4KQ2M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CkNjOiBKdWxpZW4gR3JhbGwgPGp1
-bGllbi5ncmFsbEBhcm0uY29tPgpDYzogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNp
-dHJpeC5jb20+Cgp2NToKMS4gVXNlIGJhc2ggc28gdGhhdCB3aGlsZSBkbyAuLi4gZG9uZSA8ICgp
-IHdvcmtzLgoyLiBNb3ZlIHNjcmlwdCB0byBhdXRvbWF0aW9uIGRpcmVjdG9yeS4KCnY0OgoxLiBD
-aGVjaywgc2F2ZS9yZXN0b3JlICQ/LgoyLiBEb24ndCB1c2UgdHJhcCwgY2hlY2sgZXhpdCBjb2Rl
-IGRpcmVjdGx5LgozLiBNb3JlIGVycm9yIG1lc3NhZ2VzLgoKdjM6CjEuIFVzZSBnaXQtY2xlYW4g
-aW4gZGVmYXVsdCBydW5lLgoyLiBQcmludCBtb3JlIGZyaWVuZGx5IG1lc3NhZ2UuCjMuIFJlc3Rv
-cmUgSEVBRCBhdXRvbWF0aWNhbGx5LgotLS0KIGF1dG9tYXRpb24vc2NyaXB0cy9idWlsZC10ZXN0
-LnNoIHwgNjggKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwogMSBmaWxl
-IGNoYW5nZWQsIDY4IGluc2VydGlvbnMoKykKIGNyZWF0ZSBtb2RlIDEwMDc1NSBhdXRvbWF0aW9u
-L3NjcmlwdHMvYnVpbGQtdGVzdC5zaAoKZGlmZiAtLWdpdCBhL2F1dG9tYXRpb24vc2NyaXB0cy9i
-dWlsZC10ZXN0LnNoIGIvYXV0b21hdGlvbi9zY3JpcHRzL2J1aWxkLXRlc3Quc2gKbmV3IGZpbGUg
-bW9kZSAxMDA3NTUKaW5kZXggMDAwMDAwMDAwMC4uODg1ZTVmN2ExMwotLS0gL2Rldi9udWxsCisr
-KyBiL2F1dG9tYXRpb24vc2NyaXB0cy9idWlsZC10ZXN0LnNoCkBAIC0wLDAgKzEsNjggQEAKKyMh
-L2Jpbi9iYXNoCisKKyMgUnVuIGNvbW1hbmQgb24gZXZlcnkgY29tbWl0IHdpdGhpbiB0aGUgcmFu
-Z2Ugc3BlY2lmaWVkLiBJZiBubyBjb21tYW5kIGlzCisjIHByb3ZpZGVkLCB1c2UgdGhlIGRlZmF1
-bHQgb25lIHRvIGNsZWFuIGFuZCBidWlsZCB0aGUgd2hvbGUgdHJlZS4KKyMKKyMgVGhlIGRlZmF1
-bHQgcnVuZSBpcyByYXRoZXIgc2ltcGxlLiBUbyBkbyBhIGNyb3NzLWJ1aWxkLCBwbGVhc2UgcHV0
-IHlvdXIgdXN1YWwKKyMgYnVpbGQgcnVuZSBpbiBhIHNoZWxsIHNjcmlwdCBhbmQgaW52b2tlIGl0
-IHdpdGggdGhpcyBzY3JpcHQuCisKK2lmICEgdGVzdCAtZiB4ZW4vY29tbW9uL2tlcm5lbC5jOyB0
-aGVuCisgICAgZWNobyAiUGxlYXNlIHJ1biB0aGlzIHNjcmlwdCBmcm9tIHRvcC1sZXZlbCBkaXJl
-Y3RvcnkiCisgICAgZXhpdCAxCitmaQorCitpZiB0ZXN0ICQjIC1sdCAyIDsgdGhlbgorICAgIGVj
-aG8gIlVzYWdlOiAkMCA8QkFTRT4gPFRJUD4gW0NNRF0iCisgICAgZXhpdCAxCitmaQorCitzdGF0
-dXM9YGdpdCBzdGF0dXMgLXNgCitpZiB0ZXN0IC1uICIkc3RhdHVzIjsgdGhlbgorICAgIGVjaG8g
-IlRyZWUgaXMgZGlydHksIGFib3J0ZWQiCisgICAgZXhpdCAxCitmaQorCitCQVNFPSQxOyBzaGlm
-dAorVElQPSQxOyBzaGlmdAorCitPUklHX0JSQU5DSD1gZ2l0IHN5bWJvbGljLXJlZiAtcSAtLXNo
-b3J0IEhFQURgCitpZiB0ZXN0ICQ/IC1uZSAwOyB0aGVuCisgICAgZWNobyAiRGV0YWNoZWQgSEVB
-RCwgYWJvcnRlZCIKKyAgICBleGl0IDEKK2ZpCisKK3doaWxlIHJlYWQgbnVtIHJldjsgZG8KKyAg
-ICBlY2hvICJUZXN0aW5nICRudW0gJHJldiIKKworICAgIGdpdCBjaGVja291dCAkcmV2CisgICAg
-cmV0PSQ/CisgICAgaWYgdGVzdCAkcmV0IC1uZSAwOyB0aGVuCisgICAgICAgIGVjaG8gIkZhaWxl
-ZCB0byBjaGVja291dCAkbnVtICRyZXYgd2l0aCAkcmV0IgorICAgICAgICBicmVhaworICAgIGZp
-CisKKyAgICBpZiB0ZXN0ICQjIC1lcSAwIDsgdGhlbgorICAgICAgICBnaXQgY2xlYW4gLWZkeCAm
-JiAuL2NvbmZpZ3VyZSAmJiBtYWtlIC1qNAorICAgIGVsc2UKKyAgICAgICAgIiRAIgorICAgIGZp
-CisgICAgcmV0PSQ/CisgICAgaWYgdGVzdCAkcmV0IC1uZSAwOyB0aGVuCisgICAgICAgIGVjaG8g
-IkZhaWxlZCBhdCAkbnVtICRyZXYgd2l0aCAkcmV0IgorICAgICAgICBicmVhaworICAgIGZpCisg
-ICAgZWNobworZG9uZSA8IDwoZ2l0IHJldi1saXN0ICRCQVNFLi4kVElQIHwgbmwgLWJhIHwgdGFj
-KQorCitlY2hvICJSZXN0b3Jpbmcgb3JpZ2luYWwgSEVBRCIKK2dpdCBjaGVja291dCAkT1JJR19C
-UkFOQ0gKK2djb19yZXQ9JD8KK2lmIHRlc3QgJGdjb19yZXQgLW5lIDA7IHRoZW4KKyAgICBlY2hv
-ICJGYWlsZWQgdG8gcmVzdG9yZSBvcmlnbmFsIEhFQUQuIENoZWNrIHRyZWUgc3RhdHVzIGJlZm9y
-ZSBkb2luZyBhbnl0aGluZyBlbHNlISIKKyAgICBleGl0ICRnY29fcmV0CitmaQorCitpZiB0ZXN0
-ICRyZXQgLWVxIDA7IHRoZW4KKyAgICBlY2hvICJvay4iCitmaQorZXhpdCAkcmV0Ci0tIAoyLjEx
-LjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============6211108917600330012==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-zKe2CYgjx4vs3/48O9NI"
+
+
+--=-zKe2CYgjx4vs3/48O9NI
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+FWIW,
+
+On Tue, 2018-07-24 at 16:26 +0100, George Dunlap wrote:
+> On 07/24/2018 12:23 PM, Lars Kurth wrote:
+> >=20
+> > It seems to me there are a number of options we have and thus some
+> > decisions
+> > that need to be made.
+
+> > 2: Do we have an opt-in or op-out (e.g. through a tag, a specific
+> > CC, etc.) for patches
+>=20
+> Opt-out.
+>
++1
+
+> > 5: Do we report back on success or only on failure?
+> > See question by Julien
+>=20
+> I'd start with having the bot respond to 00/NN exactly once, both on
+> success and failure.
+>=20
++1
+
+> > 4: Who else, besides the author should get a mail
+> > The patch submitters should definitely get a mail, the question is
+> > whether people on the CC list should also get one
+>=20
+> I think the bot should reply-to-all.  Maybe we can add an opt-out to
+> our
+> website, so that the bot won't reply to you if you don't want it to.
+>=20
++1
+
+:-)
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-zKe2CYgjx4vs3/48O9NI
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAltXYDkACgkQFkJ4iaW4
+c+7V6A//b1YKt44bsqoBGCMIZt2VT9yo4Eui4NgxrQqhxk1w+vf5rzb07Qpvb72I
+LqVJtA+9DhPeQNF1BTPsStNDCy6UsYEI6K4A7J6A5a1W0ywgBjoZga4ETWbgLioD
+lEpmTdFwqyRGT6H2ZX3eoMX7Clh0VVQJlQPmcS6NbI8j7LTpaX2eROc5oYNyuidR
+h81DENTt0TiY3p7g6ibT/F0MVjcNo2oqDX7ib9cJYwuOOQ6ae8iFBtowamKvnSiG
+hMrvL6WG3oatnwk7oI13baSlEHhEteLXWSVMsCe9qBjSzO6rUcBdNVtLjto9azpm
+hWzXrVwtlrnALDvscqiktSB+pbICK5lmlfSGRK7bPh3i6PkbgOXsu4iKmEobuDgD
+CMTEEHObbF3+QzNm0tZYB0PKkAVk8Lj/zxY4IGXMyRdlX6i58zCyQYO81a8koYS7
+7mblOeIPZfXjm92m0X6UPUo8joJO/6a88sCMZPwg7BBoJPu2pxUPNII5VkLSU9nf
+dnmAoXjplwVu+ioirDNPko//jY5qN4qDHeES1gOogCaq389kQUk2xXgwlM2BVDA4
+yhdfLSgDfH0jeBvwYH/LHd7ULucTWZNtPb6hmPzuxnWCk3fq6W5in0TSqJQS1kmQ
+OtvZIjiG1InI8CncZ2Y4RxTLzZff/20oU8ymTFACIAs/xbUc+t8=
+=bbvP
+-----END PGP SIGNATURE-----
+
+--=-zKe2CYgjx4vs3/48O9NI--
+
+
+
+--===============6211108917600330012==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6211108917600330012==--
