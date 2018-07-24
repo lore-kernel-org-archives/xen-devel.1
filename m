@@ -1,27 +1,26 @@
-From: Manuel Bouyer <bouyer@antioche.eu.org>
-Subject: Re: 4.11.0 RC1 panic
-Date: Tue, 24 Jul 2018 17:03:53 +0200
-Message-ID: <20180724150353.GA23700@mail.soc.lip6.fr>
-References: <5B20DC910200000204A693B0@prv1-mh.provo.novell.com>
- <5B20EAF702000078001CACA3@prv1-mh.provo.novell.com>
- <5B2197D3020000F004A75E9B@prv1-mh.provo.novell.com>
- <5B227CAD02000078001CB51F@prv1-mh.provo.novell.com>
- <5B30A8DD0200007003BD270D@prv1-mh.provo.novell.com>
- <5B3B92D602000078001D0619@prv1-mh.provo.novell.com>
- <5B3BA1A6020000F004B7A140@prv1-mh.provo.novell.com>
- <5B3F7C2F020000D004BA0458@prv1-mh.provo.novell.com>
- <5B4C73C30200007F03CE8FF3@prv1-mh.provo.novell.com>
- <5B4C7B2902000078001D4511@prv1-mh.provo.novell.com>
+From: Doug Goldstein <cardoe@cardoe.com>
+Subject: Re: automation: Creating a patchwork instance to
+ improve pre-commit build testing
+Date: Tue, 24 Jul 2018 10:08:33 -0500
+Message-ID: <20180724150833.cfxw4m4yky7pp7i3@doug-macbook.localdomain>
+References: <DD622B30-B54C-4B9A-AA24-05329BD800B9@citrix.com>
+ <5B56EC0002000078001D708C@prv1-mh.provo.novell.com>
+ <20180724092430.puacbfkbimdm5anz@citrix.com>
+ <5B56F2BB02000078001D7130@prv1-mh.provo.novell.com>
+ <43ef4420-ec29-3c8b-c1d0-2144e2a95da2@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="W/nzBZO5zC0uMSeA"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=y+ru=ki=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
- id 1fhyr0-00072s-Sf
- for xen-devel@lists.xenproject.org; Tue, 24 Jul 2018 15:03:58 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=7yex=ki=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
+ id 1fhyvV-0007Et-4d
+ for xen-devel@lists.xenproject.org; Tue, 24 Jul 2018 15:08:37 +0000
+Received: by mail-yw0-x242.google.com with SMTP id w76-v6so1645125ywg.4
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Jul 2018 08:08:35 -0700 (PDT)
 Content-Disposition: inline
-In-Reply-To: <5B4C7B2902000078001D4511@prv1-mh.provo.novell.com>
+In-Reply-To: <43ef4420-ec29-3c8b-c1d0-2144e2a95da2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,65 +29,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: George Dunlap <george.dunlap@citrix.com>
+Cc: Lars Kurth <lars.kurth@citrix.com>, Iurii Artemenko <Iurii_Artemenko@epam.com>, Wei Liu <wei.liu2@citrix.com>, Minios-devel <minios-devel@lists.xenproject.org>, committers@xenproject.org, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Matt Spencer <Matt.Spencer@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---W/nzBZO5zC0uMSeA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Mon, Jul 16, 2018 at 05:02:01AM -0600, Jan Beulich wrote:
-> > Unfortunably there has been a crash last week:
-> 
-> Hmm, looks to be still all the same as before (except for the line
-> number). I'm afraid I'm out of ideas, at least for the moment.
-
-OK, FYI I commited xen 4.11 packages for NetBSD, with the attached
-patch. With this the hypervisor doens't panic ...
-
--- 
-Manuel Bouyer <bouyer@antioche.eu.org>
-     NetBSD: 26 ans d'experience feront toujours la difference
---
-
---W/nzBZO5zC0uMSeA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename=patch-zz-bouyer
-
-$NetBSD: patch-zz-bouyer,v 1.1 2018/07/24 13:40:11 bouyer Exp $
-Dirty hack to avoid assert failure. This has been discussed on xen-devel
-but no solution has been fonud so far.
-The box producing http://www-soc.lip6.fr/~bouyer/NetBSD-tests/xen/
-is running with this patch; the printk has fired but the
-hypervisor keeps running.
-
---- xen/arch/x86/mm.c.orig	2018-07-19 10:32:07.000000000 +0200
-+++ xen/arch/x86/mm.c	2018-07-21 20:47:47.000000000 +0200
-@@ -674,7 +674,12 @@
-     typeof(pg->linear_pt_count) oc;
- 
-     oc = arch_fetch_and_add(&pg->linear_pt_count, -1);
--    ASSERT(oc > 0);
-+    if (oc <= 0) {
-+            gdprintk(XENLOG_WARNING,
-+                 "mm.c:dec_linear_entries(): oc %d would fail assert\n", oc);
-+	    pg->linear_pt_count = 0;
-+    }
-+    /* ASSERT(oc > 0); */
- }
- 
- static bool inc_linear_uses(struct page_info *pg)
-
---W/nzBZO5zC0uMSeA
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---W/nzBZO5zC0uMSeA--
+T24gVHVlLCBKdWwgMjQsIDIwMTggYXQgMDM6MzI6MDlQTSArMDEwMCwgR2VvcmdlIER1bmxhcCB3
+cm90ZToKPiBPbiAwNy8yNC8yMDE4IDEwOjM0IEFNLCBKYW4gQmV1bGljaCB3cm90ZToKPiA+Pj4+
+IE9uIDI0LjA3LjE4IGF0IDExOjI0LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4gPj4g
+T24gVHVlLCBKdWwgMjQsIDIwMTggYXQgMDM6MDY6MDhBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+Pj4+IE9uIDIzLjA3LjE4IGF0IDE4OjQwLCA8bGFycy5rdXJ0aEBjaXRyaXguY29t
+PiB3cm90ZToKPiA+Pj4+ICMgSG93IGRvZXMgdGhpcyBpbXBhY3QgbWU/Cj4gPj4+PiBUaGUgY29u
+dHJpYnV0aW9uIHdvcmtmbG93IGlzICpub3QqIGltcGFjdGVkIGJ5IHRoaXMgY2hhbmdlLCBidXQg
+b25jZSB1cCBhbmQgCj4gPj4KPiA+Pj4+IHJ1bm5pbmcgdGhlIGZvbGxvd2luZyB3aWxsIGhhcHBl
+biBvbmNlIHlvdSBwb3N0IGEgcGF0Y2ggb3IgcGF0Y2ggc2VyaWVzIHRvIAo+ID4+Pj4geGVuLWRl
+dmVsOgo+ID4+Pj4gKiBQYXRjaHdvcmsgd2lsbCB0YWtlIHBhdGNoIHNlcmllcyBmcm9tIHRoZSBt
+YWlsaW5nIGxpc3QgYW5kIGFwcGxpZXMgaXQKPiA+Pj4+ICogQ0kvREMgdGVzdGluZyBpcyB0cmln
+Z2VyZWQKPiA+Pj4+ICogQSB0ZXN0IHJlcG9ydCB3aWxsIGJlIHNlbnQgYXMgYSBtYWlsIHRvIHRo
+ZSBwYXRjaCBvciB0aGUgc2VyaWVzIChha2EgdGhlIDAwIHBhdGNoIG9mIHRoZSBzZXJpZXMpCj4g
+Pj4+Pgo+ID4+Pj4gVGhpcyBkb2VzIG1lYW4gdGhvdWdoIHRoYXQgc2VyaWVzIHdoaWNoIGRvIG5v
+dCBidWlsZCBvciBzaG93IG90aGVyIGlzc3VlcywgCj4gPj4+PiB3aWxsIGxpa2VseSBub3QgYmUg
+cmV2aWV3ZWQgdW50aWwgdGhlIHRlc3RzIHBhc3MuIFRoaXMgd291bGQgbGVzc2VuIHRoZSAKPiA+
+Pj4+IGJ1cmRlbiBvbiByZXZpZXdlcnMsIGFzIHRoZXkgd2lsbCBrbm93IHdoZXRoZXIgdGhlIGNv
+ZGUgc3VibWl0dGVkIGJ1aWxkcyBvbiBhIAo+ID4+Pj4gd2lkZSBhcnJheSBvZiBlbnZpcm9ubWVu
+dHMuIAo+ID4+Pgo+ID4+PiBTbyBob3cgYXJlIGRlcGVuZGVuY2llcyBiZXR3ZWVuIHNlcmllcyBp
+bnRlbmRlZCB0byBiZSBkZWFsdCB3aXRoPyBJdAo+ID4+PiBpcyBub3QgdW5jb21tb24gZm9yIHNv
+bWVvbmUgdG8gc2F5ICJhcHBsaWVzIG9ubHkgb24gdG9wIG9mIHh5eiIuIFRoZQo+ID4+PiBpbXBs
+aWNhdGlvbiBvZiAid2lsbCBsaWtlbHkgbm90IGJlIHJldmlld2VkIHVudGlsIHRoZSB0ZXN0cyBw
+YXNzIiBzZWVtcwo+ID4+PiB1bnN1aXRhYmxlIHRvIG1lIGluIHN1Y2ggYSBjYXNlLgo+ID4+Pgo+
+ID4+Cj4gPj4gV2UgaGF2ZSBiZWVuIGFza2luZyBldmVyeW9uZSB0byByZWJhc2UgdG8gc3RhZ2lu
+ZyBiZWZvcmUgcG9zdGluZyBhIG5ldwo+ID4+IHZlcnNpb24gZm9yIGEgbG9uZyB0aW1lLiAgSXQg
+aXMgbmF0dXJhbCBmb3IgdGhlIGJvdCB0byBhc3N1bWUgdGhhdAo+ID4+IGV2ZXJ5dGhpbmcgc2hv
+dWxkIGFwcGx5IG9uIHRvcCBvZiBzdGFnaW5nLiBUaGF0IHdvdWxkIHByb3ZpZGUgbW9zdCB2YWx1
+ZQo+ID4+IHRvIHRoZSBjb21tdW5pdHkuCj4gPj4KPiA+PiBGb3Igc3BlY2lhbCBjYXNlcyBsaWtl
+IHlvdSBqdXN0IG1lbnRpb24sIHdlIHNob3VsZCBhaW0gdG8gcHJvdmlkZQo+ID4+IG1lY2hhbmlz
+bXMgdG8gbWFudWFsbHkgYXBwb2ludCBhIGJyYW5jaCB0byBiZSB0ZXN0ZWQuCj4gPiAKPiA+IEkn
+bSBhZnJhaWQgSSBkaXNhZ3JlZSBhZ2FpbjogVG9vbHMgdXNlZCBzaG91bGQgbm90IGJlIGRpY3Rh
+dGVkLiBJJ20KPiA+IHVzaW5nIHF1aWx0LCBub3QgZ2l0IGZvciBteSB3b3JrLCBhbmQgaGVuY2Ug
+SSBkb24ndCBtYWludGFpbiBhbnkKPiA+IGJyYW5jaGVzIGFueXdoZXJlLgo+IAo+IFdlbGwgaXQn
+cyBuZXZlciBiZWVuIG91ciBoYWJpdCB0byByZXZpZXcgcGF0Y2ggc2VyaWVzIHNlbnQgYWdhaW5z
+dAo+IHJhbmRvbSBwcml2YXRlIGJyYW5jaGVzLiAgKHg4Ni1uZXh0IG5vdCBiZWluZyBhIHJhbmRv
+bSBwcml2YXRlIGJyYW5jaC4pCj4gVGhlIGlkZWEgd291bGQgYmUgdGhhdCB5b3UgcHV0IGEgdGFn
+IGluIHRoZSBtZXNzYWdlIHNvbWV3aGVyZSB0aGF0Cj4gaW5kaWNhdGVzIHdoYXQgdGhlIHBhdGNo
+Ym90IHNob3VsZCBkby4gIFRoaXMgd291bGQgcHJvYmFibHkgYmUganVzdCB0aGUKPiBtZXNzYWdl
+LWlkIG9mIHRoZSBwYXRjaCBzZXJpZXMsIGdpdmVuIHRoYXQgKHN0ZWFkeSBzdGF0ZSkgeW91ciBw
+cmV2aW91cwo+IHNlcmllcyB3b3VsZCBoYXZlIGhhZCB0aGUgYm90IHJlcGx5IHRvIGl0IHdpdGgg
+YSBsaW5rLiAgU29tZXRoaW5nIGxpa2UgdGhpczoKPiAKPiBQcmVyZXF1aXNpdGUtc2VyaWVzOiA8
+NUI1MDZBNkUwMjAwMDA3ODAwMUQ1RDE3QHBydjEtbWgucHJvdm8ubm92ZWxsLmNvbT4KPiAKPiBJ
+ZiB0aGUgc2VuZGVyIGRvZXNuJ3QgYWRkIHRoZSBwcmVyZXF1aXNpdGUgc2VyaWVzLCB0aGVuIG9m
+IGNvdXJzZSBpdAo+IHdvbid0IGFwcGx5OyBidXQgdGhlIHJldmlld2VyIGNhbiBjaG9vc2UgdG8g
+aWdub3JlIHRoZSBmYWlsdXJlIGluIHRoYXQgY2FzZS4KPiAKPiAgLUdlb3JnZQoKU28gZndpdywg
+dGhlcmUncyBhIHRvb2wgY2FsbGVkIGdpdC1zZXJpZXMgKHRoZSBhdXRob3Igc2F5cyBoZSdzIHdv
+cmtpbmcKb24gaW50ZWdyYXRpbmcgaXRzIGZ1bmN0aW9uYWxpdHkgaW50byB0aGUgZ2l0IHVwc3Ry
+ZWFtKSB0aGF0IGRvZXMKZXhhY3RseSB0aGlzLiBNb3N0IG9mIG15IHJlY2VudCBwYXRjaGVzIGhh
+dmUgYmVlbiBzZW50IHdpdGggaXQgYW5kCnlvdSdsbCBhY3R1YWxseSBzZWUgd2hhdCBjb21taXQg
+ZnJvbSBzdGFnaW5nIG15IHBhdGNoZXMgYXJlIGJhc2VkIG9uIGFuZAppZiBJIHdhbnRlZCBJIGNv
+dWxkIHJlY29yZCBpbnN0ZWFkIHRoZSBtZXNzYWdlLWlkIG9mIGEgcG9zdGVkIHNlcmllcyBpdAp3
+b3VsZCBkZXBlbmQgb24uIEkndmUgc3Bva2VuIHdpdGggdGhlIHBhdGNod29yayBmb2xrcyBhYm91
+dCBzdXBwb3J0IHRoYXQKdGFnIGFzIHdlbGwuCgotLQpEb3VnCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
