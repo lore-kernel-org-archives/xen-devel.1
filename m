@@ -1,15 +1,27 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH] x86/svm: Drop the suggestion of Long Mode
- Segment Limit support
-Date: Tue, 24 Jul 2018 16:36:16 +0200
-Message-ID: <20180724143616.jjfiyz7szsoofzv4@mac.bytemobile.com>
-References: <1532356957-1706-1-git-send-email-andrew.cooper3@citrix.com>
+From: Manuel Bouyer <bouyer@antioche.eu.org>
+Subject: Re: 4.11.0 RC1 panic
+Date: Tue, 24 Jul 2018 17:03:53 +0200
+Message-ID: <20180724150353.GA23700@mail.soc.lip6.fr>
+References: <5B20DC910200000204A693B0@prv1-mh.provo.novell.com>
+ <5B20EAF702000078001CACA3@prv1-mh.provo.novell.com>
+ <5B2197D3020000F004A75E9B@prv1-mh.provo.novell.com>
+ <5B227CAD02000078001CB51F@prv1-mh.provo.novell.com>
+ <5B30A8DD0200007003BD270D@prv1-mh.provo.novell.com>
+ <5B3B92D602000078001D0619@prv1-mh.provo.novell.com>
+ <5B3BA1A6020000F004B7A140@prv1-mh.provo.novell.com>
+ <5B3F7C2F020000D004BA0458@prv1-mh.provo.novell.com>
+ <5B4C73C30200007F03CE8FF3@prv1-mh.provo.novell.com>
+ <5B4C7B2902000078001D4511@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="W/nzBZO5zC0uMSeA"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=y+ru=ki=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
+ id 1fhyr0-00072s-Sf
+ for xen-devel@lists.xenproject.org; Tue, 24 Jul 2018 15:03:58 +0000
 Content-Disposition: inline
-In-Reply-To: <1532356957-1706-1-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <5B4C7B2902000078001D4511@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,27 +30,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKdWwgMjMsIDIwMTggYXQgMDM6NDI6MzdQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBCZWNhdXNlIG9mIGEgYnVnIGluIDIwMTAsIExNU0wgc3VwcG9ydCBkaWRuJ3QgZnVu
-Y3Rpb25lZCBpbiBYZW4uCj4gCj4gYy9zIGYyYzYwODQ0NCBub3RpY2VkIGJ1dCBhdm9pZGVkIGZp
-eGluZyB0aGUgaXNzdWUgZm9yIG1pZ3JhdGlvbiByZWFzb25zLiAgSW4KPiBhZGRpdGlvbiB0byBt
-aWdyYXRpb24gcHJvYmxlbXMsIGNoYW5nZXMgdG8gdGhlIHNlZ21lbnRhdGlvbiBsb2dpYyBmb3IK
-PiBlbXVsYXRpb24gd291bGQgYmUgbmVlZGVkIGJlZm9yZSB0aGUgZmVhdHVyZSBjb3VsZCBiZSBl
-bmFibGVkLgo+IAo+IFRoaXMgZmVhdHVyZSBpcyBlbnRpcmVseSB1bnVzZWQgYnkgb3BlcmF0aW5n
-IHN5c3RlbXMgKHByb2JhYmx5IG93aW5nIHRvIGl0cwo+IHNlbWFudGljcyB3aGljaCBvbmx5IGNv
-dmVyIGhhbGYgdGhlIHNlZ21lbnQgcmVnaXN0ZXJzKSwgYW5kIG5vIG9uZSBoYXMKPiBjb21tZW50
-ZWQgb24gaXRzIGFic2VuY2UgZnJvbSBYZW4uICBBcyBzdXBwb3J0aW5nIGl0IHdvdWxkIGludm9s
-dmUgYSBsYXJnZQo+IGFtb3VudCBvZiBlZmZvcnQsIGl0IHNlZW1zIGJldHRlciB0byByZW1vdmUg
-dGhlIGNvZGUgZW50aXJlbHkuCj4gCj4gSWYgc29tZW9uZSBmaW5kcyBhIHZhbGlkIHVzZWNhc2Us
-IHdlIGNhbiByZXN1cnJlY3RpbmcgdGhlIGNvZGUgYW5kCiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBeIHJlc3VycmVjdAo+IGltcGxlbWVudGluZyB0aGUgcmVtYWlu
-aW5nIHBhcnRzLCBidXQgSSBkb3VidCBhbnlvbmUgd2lsbC4KICBeaW1wbGVtZW50Cj4gCj4gU2ln
-bmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KClJl
-dmlld2VkLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--W/nzBZO5zC0uMSeA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Mon, Jul 16, 2018 at 05:02:01AM -0600, Jan Beulich wrote:
+> > Unfortunably there has been a crash last week:
+> 
+> Hmm, looks to be still all the same as before (except for the line
+> number). I'm afraid I'm out of ideas, at least for the moment.
+
+OK, FYI I commited xen 4.11 packages for NetBSD, with the attached
+patch. With this the hypervisor doens't panic ...
+
+-- 
+Manuel Bouyer <bouyer@antioche.eu.org>
+     NetBSD: 26 ans d'experience feront toujours la difference
+--
+
+--W/nzBZO5zC0uMSeA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=patch-zz-bouyer
+
+$NetBSD: patch-zz-bouyer,v 1.1 2018/07/24 13:40:11 bouyer Exp $
+Dirty hack to avoid assert failure. This has been discussed on xen-devel
+but no solution has been fonud so far.
+The box producing http://www-soc.lip6.fr/~bouyer/NetBSD-tests/xen/
+is running with this patch; the printk has fired but the
+hypervisor keeps running.
+
+--- xen/arch/x86/mm.c.orig	2018-07-19 10:32:07.000000000 +0200
++++ xen/arch/x86/mm.c	2018-07-21 20:47:47.000000000 +0200
+@@ -674,7 +674,12 @@
+     typeof(pg->linear_pt_count) oc;
+ 
+     oc = arch_fetch_and_add(&pg->linear_pt_count, -1);
+-    ASSERT(oc > 0);
++    if (oc <= 0) {
++            gdprintk(XENLOG_WARNING,
++                 "mm.c:dec_linear_entries(): oc %d would fail assert\n", oc);
++	    pg->linear_pt_count = 0;
++    }
++    /* ASSERT(oc > 0); */
+ }
+ 
+ static bool inc_linear_uses(struct page_info *pg)
+
+--W/nzBZO5zC0uMSeA
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--W/nzBZO5zC0uMSeA--
