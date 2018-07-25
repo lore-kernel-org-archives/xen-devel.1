@@ -1,23 +1,24 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
+From: Juergen Gross <jgross@suse.com>
 Subject: Re: Xen 4.12 release planning
-Date: Wed, 25 Jul 2018 12:39:50 +0100
-Message-ID: <29C1840E-1993-4A15-B724-908B8BDEDDD7@xenproject.org>
+Date: Wed, 25 Jul 2018 13:45:09 +0200
+Message-ID: <078a4f8a-d0be-184f-ce47-97c1b0817358@suse.com>
 References: <6a766b09-d5fe-a9ce-cacf-546c998ab803@suse.com>
  <0c25205b-b237-a7cd-aedf-45e7f86b3492@arm.com>
  <b8f9bd2e-46bb-1a31-e9ac-dbc42841f31f@citrix.com>
  <3563543c-c5c9-cb80-8d3e-c34e731118c8@suse.com>
  <CAFLBxZZNzww-8=VqbuaGY4bHpFwxHXtC5J13PKM458yu7VerPg@mail.gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
-Content-Type: multipart/mixed; boundary="===============8406175124264256925=="
+ <29C1840E-1993-4A15-B724-908B8BDEDDD7@xenproject.org>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=h8kl=kj=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1fiI95-00073U-KY
- for xen-devel@lists.xenproject.org; Wed, 25 Jul 2018 11:39:55 +0000
-Received: by mail-wr1-x42f.google.com with SMTP id a3-v6so7098660wrt.2
- for <xen-devel@lists.xenproject.org>; Wed, 25 Jul 2018 04:39:53 -0700 (PDT)
-In-Reply-To: <CAFLBxZZNzww-8=VqbuaGY4bHpFwxHXtC5J13PKM458yu7VerPg@mail.gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=sdpf=kj=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fiIED-0007lw-8g
+ for xen-devel@lists.xenproject.org; Wed, 25 Jul 2018 11:45:13 +0000
+In-Reply-To: <29C1840E-1993-4A15-B724-908B8BDEDDD7@xenproject.org>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,196 +27,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <dunlapg@umich.edu>
-Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Lars Kurth <lars.kurth.xen@gmail.com>, George Dunlap <dunlapg@umich.edu>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8406175124264256925==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_6DD86429-DA1E-400F-860E-5DFC6B8255EC"
-
-
---Apple-Mail=_6DD86429-DA1E-400F-860E-5DFC6B8255EC
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-
-
-> On 25 Jul 2018, at 12:24, George Dunlap <dunlapg@umich.edu> wrote:
->=20
-> On Wed, Jul 25, 2018 at 10:22 AM, Juergen Gross <jgross@suse.com =
-<mailto:jgross@suse.com>> wrote:
->>=20
->> fFFFFFFR.......ffFFFFFFR.......ffFFFFFFR.......f
->>=20
->> We can rule out several variants with release dates just before or in =
-a
->> holiday season:
->>=20
->> Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
->> Xx.XXXXX...xxxx...........xxXXXXx..............X      holidays
->> ffFFFFFFR.......ffFFFFFFR.......ffFFFFFFR.......
->> .ffFFFFFFR.......ffFFFFFFR.......ffFFFFFFR......
->>=20
->> Best fit seems to be releasing in first half of March/July/November. =
-The
->> main clash seems to be Chinese new year in the freeze period, but
->> avoiding that would mean we'd have to either move into Christmas or
->> Eastern, or to use a schedule with varying periods.
->>=20
->> Please remember that Chinese new year is only 2 weeks long (at =
-varying
->> dates) so only 2 weeks of the freeze period are hit. Next year the
->> Chinese new year will be at February 5th.
->>=20
->> For my 4.12 plan I've added some extra weeks between last posting =
-date
->> and release date to accommodate for the holiday seasons, resulting in
->> my suggestion.
->=20
-> Thanks for the detailed analysis Juregen.  This seems good to me.
->=20
-> -George
-
-This looks good to me also. To address Julien's concerns, we could also =
-consider an earlier Last posting date/Hard code freeze date for Arm =
-related code to work around Julien's holiday plans. I think this would =
-be entirely OK and set expectations of contributors accordingly. But =
-maybe this is not necessary if Julien and Stefano can agree a work split =
-somehow.=20
-
-Alternatively we could communicate absences of key reviewers say in =
-November to set expectations of contributors for the final stretch of =
-the release cycle. In other words, if a key reviewer is away, then =
-contributors will need to get series into good shape before their =
-reviewers go on vacation.=20
-
-Regards
-Lars
-
-
---Apple-Mail=_6DD86429-DA1E-400F-860E-5DFC6B8255EC
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
-class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
-class=3D"">On 25 Jul 2018, at 12:24, George Dunlap &lt;<a =
-href=3D"mailto:dunlapg@umich.edu" class=3D"">dunlapg@umich.edu</a>&gt; =
-wrote:</div><br class=3D"Apple-interchange-newline"><div class=3D""><span =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">On Wed, Jul =
-25, 2018 at 10:22 AM, Juergen Gross &lt;</span><a =
-href=3D"mailto:jgross@suse.com" style=3D"font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; orphans: auto; text-align: =
-start; text-indent: 0px; text-transform: none; white-space: normal; =
-widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px;" class=3D"">jgross@suse.com</a><span =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">&gt; =
-wrote:</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><blockquote type=3D"cite" style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px; text-decoration: none;" class=3D""><br =
-class=3D"">fFFFFFFR.......ffFFFFFFR.......ffFFFFFFR.......f<br =
-class=3D""><br class=3D"">We can rule out several variants with release =
-dates just before or in a<br class=3D"">holiday season:<br class=3D""><br =
-class=3D"">Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec<br =
-class=3D"">Xx.XXXXX...xxxx...........xxXXXXx..............X =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;holidays<br =
-class=3D"">ffFFFFFFR.......ffFFFFFFR.......ffFFFFFFR.......<br =
-class=3D"">.ffFFFFFFR.......ffFFFFFFR.......ffFFFFFFR......<br =
-class=3D""><br class=3D"">Best fit seems to be releasing in first half =
-of March/July/November. The<br class=3D"">main clash seems to be Chinese =
-new year in the freeze period, but<br class=3D"">avoiding that would =
-mean we'd have to either move into Christmas or<br class=3D"">Eastern, =
-or to use a schedule with varying periods.<br class=3D""><br =
-class=3D"">Please remember that Chinese new year is only 2 weeks long =
-(at varying<br class=3D"">dates) so only 2 weeks of the freeze period =
-are hit. Next year the<br class=3D"">Chinese new year will be at =
-February 5th.<br class=3D""><br class=3D"">For my 4.12 plan I've added =
-some extra weeks between last posting date<br class=3D"">and release =
-date to accommodate for the holiday seasons, resulting in<br class=3D"">my=
- suggestion.<br class=3D""></blockquote><br style=3D"caret-color: rgb(0, =
-0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">Thanks for the detailed analysis Juregen. &nbsp;This seems =
-good to me.</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" =
-class=3D"">-George</span><br style=3D"caret-color: rgb(0, 0, 0); =
-font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""></div></blockquote><br =
-class=3D""></div><div>This looks good to me also. To address Julien's =
-concerns, we could also consider an earlier Last posting date/Hard code =
-freeze date for Arm related code to work around Julien's holiday plans. =
-I think this would be entirely OK and set expectations of contributors =
-accordingly. But maybe this is not necessary if Julien and Stefano can =
-agree a work split somehow.&nbsp;</div><div><br =
-class=3D""></div><div>Alternatively we could communicate absences of key =
-reviewers say in November to set expectations of contributors for the =
-final stretch of the release cycle. In other words, if a key reviewer is =
-away, then contributors will need to get series into good shape before =
-their reviewers go on vacation.&nbsp;</div><div><br =
-class=3D""></div><div>Regards</div><div>Lars</div><br =
-class=3D""></body></html>=
-
---Apple-Mail=_6DD86429-DA1E-400F-860E-5DFC6B8255EC--
-
-
---===============8406175124264256925==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8406175124264256925==--
+T24gMjUvMDcvMTggMTM6MzksIExhcnMgS3VydGggd3JvdGU6Cj4gCj4gCj4+IE9uIDI1IEp1bCAy
+MDE4LCBhdCAxMjoyNCwgR2VvcmdlIER1bmxhcCA8ZHVubGFwZ0B1bWljaC5lZHUKPj4gPG1haWx0
+bzpkdW5sYXBnQHVtaWNoLmVkdT4+IHdyb3RlOgo+Pgo+PiBPbiBXZWQsIEp1bCAyNSwgMjAxOCBh
+dCAxMDoyMiBBTSwgSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tCj4+IDxtYWlsdG86amdy
+b3NzQHN1c2UuY29tPj4gd3JvdGU6Cj4+Pgo+Pj4gZkZGRkZGRlIuLi4uLi4uZmZGRkZGRkZSLi4u
+Li4uLmZmRkZGRkZGUi4uLi4uLi5mCj4+Pgo+Pj4gV2UgY2FuIHJ1bGUgb3V0IHNldmVyYWwgdmFy
+aWFudHMgd2l0aCByZWxlYXNlIGRhdGVzIGp1c3QgYmVmb3JlIG9yIGluIGEKPj4+IGhvbGlkYXkg
+c2Vhc29uOgo+Pj4KPj4+IEphbiBGZWIgTWFyIEFwciBNYXkgSnVuIEp1bCBBdWcgU2VwIE9jdCBO
+b3YgRGVjCj4+PiBYeC5YWFhYWC4uLnh4eHguLi4uLi4uLi4uLnh4WFhYWHguLi4uLi4uLi4uLi4u
+LlggwqDCoMKgwqDCoGhvbGlkYXlzCj4+PiBmZkZGRkZGRlIuLi4uLi4uZmZGRkZGRkZSLi4uLi4u
+LmZmRkZGRkZGUi4uLi4uLi4KPj4+IC5mZkZGRkZGRlIuLi4uLi4uZmZGRkZGRkZSLi4uLi4uLmZm
+RkZGRkZGUi4uLi4uLgo+Pj4KPj4+IEJlc3QgZml0IHNlZW1zIHRvIGJlIHJlbGVhc2luZyBpbiBm
+aXJzdCBoYWxmIG9mIE1hcmNoL0p1bHkvTm92ZW1iZXIuIFRoZQo+Pj4gbWFpbiBjbGFzaCBzZWVt
+cyB0byBiZSBDaGluZXNlIG5ldyB5ZWFyIGluIHRoZSBmcmVlemUgcGVyaW9kLCBidXQKPj4+IGF2
+b2lkaW5nIHRoYXQgd291bGQgbWVhbiB3ZSdkIGhhdmUgdG8gZWl0aGVyIG1vdmUgaW50byBDaHJp
+c3RtYXMgb3IKPj4+IEVhc3Rlcm4sIG9yIHRvIHVzZSBhIHNjaGVkdWxlIHdpdGggdmFyeWluZyBw
+ZXJpb2RzLgo+Pj4KPj4+IFBsZWFzZSByZW1lbWJlciB0aGF0IENoaW5lc2UgbmV3IHllYXIgaXMg
+b25seSAyIHdlZWtzIGxvbmcgKGF0IHZhcnlpbmcKPj4+IGRhdGVzKSBzbyBvbmx5IDIgd2Vla3Mg
+b2YgdGhlIGZyZWV6ZSBwZXJpb2QgYXJlIGhpdC4gTmV4dCB5ZWFyIHRoZQo+Pj4gQ2hpbmVzZSBu
+ZXcgeWVhciB3aWxsIGJlIGF0IEZlYnJ1YXJ5IDV0aC4KPj4+Cj4+PiBGb3IgbXkgNC4xMiBwbGFu
+IEkndmUgYWRkZWQgc29tZSBleHRyYSB3ZWVrcyBiZXR3ZWVuIGxhc3QgcG9zdGluZyBkYXRlCj4+
+PiBhbmQgcmVsZWFzZSBkYXRlIHRvIGFjY29tbW9kYXRlIGZvciB0aGUgaG9saWRheSBzZWFzb25z
+LCByZXN1bHRpbmcgaW4KPj4+IG15IHN1Z2dlc3Rpb24uCj4+Cj4+IFRoYW5rcyBmb3IgdGhlIGRl
+dGFpbGVkIGFuYWx5c2lzIEp1cmVnZW4uIMKgVGhpcyBzZWVtcyBnb29kIHRvIG1lLgo+Pgo+PiAt
+R2VvcmdlCj4gCj4gVGhpcyBsb29rcyBnb29kIHRvIG1lIGFsc28uIFRvIGFkZHJlc3MgSnVsaWVu
+J3MgY29uY2VybnMsIHdlIGNvdWxkIGFsc28KPiBjb25zaWRlciBhbiBlYXJsaWVyIExhc3QgcG9z
+dGluZyBkYXRlL0hhcmQgY29kZSBmcmVlemUgZGF0ZSBmb3IgQXJtCj4gcmVsYXRlZCBjb2RlIHRv
+IHdvcmsgYXJvdW5kIEp1bGllbidzIGhvbGlkYXkgcGxhbnMuIEkgdGhpbmsgdGhpcyB3b3VsZAo+
+IGJlIGVudGlyZWx5IE9LIGFuZCBzZXQgZXhwZWN0YXRpb25zIG9mIGNvbnRyaWJ1dG9ycyBhY2Nv
+cmRpbmdseS4gQnV0Cj4gbWF5YmUgdGhpcyBpcyBub3QgbmVjZXNzYXJ5IGlmIEp1bGllbiBhbmQg
+U3RlZmFubyBjYW4gYWdyZWUgYSB3b3JrIHNwbGl0Cj4gc29tZWhvdy7CoAo+IAo+IEFsdGVybmF0
+aXZlbHkgd2UgY291bGQgY29tbXVuaWNhdGUgYWJzZW5jZXMgb2Yga2V5IHJldmlld2VycyBzYXkg
+aW4KPiBOb3ZlbWJlciB0byBzZXQgZXhwZWN0YXRpb25zIG9mIGNvbnRyaWJ1dG9ycyBmb3IgdGhl
+IGZpbmFsIHN0cmV0Y2ggb2YKPiB0aGUgcmVsZWFzZSBjeWNsZS4gSW4gb3RoZXIgd29yZHMsIGlm
+IGEga2V5IHJldmlld2VyIGlzIGF3YXksIHRoZW4KPiBjb250cmlidXRvcnMgd2lsbCBuZWVkIHRv
+IGdldCBzZXJpZXMgaW50byBnb29kIHNoYXBlIGJlZm9yZSB0aGVpcgo+IHJldmlld2VycyBnbyBv
+biB2YWNhdGlvbi7CoAoKSSBsaWtlIHRoYXQgaWRlYS4gTGV0cyBleHBhbmQgaXQgdG8ga2V5IHBl
+cnNvbnMgKGkuZS4gcmVsZWFzZSBtYW5hZ2VyLApyZWxlYXNlIHRlY2huaWNpYW4sIGNvbW11bml0
+eSBtYW5hZ2VyLCBrZXkgcmV2aWV3ZXJzKS4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
