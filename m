@@ -1,14 +1,14 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: Build Inconsistencies
-Date: Wed, 25 Jul 2018 10:27:06 +0200
-Message-ID: <20180725082706.nklcesfvfbrc63au@mac.bytemobile.com>
-References: <20180724164617.GA32193@amd.com>
+From: Isaila Alexandru <aisaila@bitdefender.com>
+Subject: Re: [PATCH v4] x86/mm: Add mem access rights to NPT
+Date: Wed, 25 Jul 2018 11:29:59 +0300
+Message-ID: <1532507399.21125.7.camel@bitdefender.com>
+References: <1532353689-2242-1-git-send-email-aisaila@bitdefender.com>
+ <5B56E99D02000078001D706B@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <20180724164617.GA32193@amd.com>
+In-Reply-To: <5B56E99D02000078001D706B@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,26 +17,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Brian Woods <brian.woods@amd.com>
-Cc: xen-devel@lists.xen.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, tamas@tklengyel.com, Razvan Cojocaru <rcojocaru@bitdefender.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBKdWwgMjQsIDIwMTggYXQgMTE6NDY6MzFBTSAtMDUwMCwgQnJpYW4gV29vZHMgd3Jv
-dGU6Cj4gSSd2ZSBkaXNjb3ZlcmVkIHNvbWUgaW5jb25zaXN0ZW5jaWVzIHdoZW4gYnVpbGRpbmcg
-WGVuLiAgV2l0aCBwYXRjaAo+IGUzZjY2N2JjNWY1MWQwYWE0NDM1N2E2NGNhMTM0Y2Q5NTI2Nzlj
-ODEsIGl0IHNlZW1zICdtYWtlIC1qMSBkZWJiYWxsJwo+IGJ1aWxkcyB3aGlsZSAnbWFrZSAtaiAx
-MjAgZGViYmFsbCcgZG9lcyBub3QuICBJIHJldmVydGVkIHRvIHRoZQo+IHByZXZpb3VzIGNvbW1p
-dCwgYzY2ZDk5ODJlYmYwMjQ3Y2M4ZWRiMzU1ZjVhZGI0ZTk5M2Q0MzFjMiwgYW5kIGJvdGgKPiB3
-b3JrLgoKSSdtIGFmcmFpZCBJJ20gbm90IGFibGUgdG8gZmluZCB0aGUgZXJyb3IgaW4gdGhlIGxv
-Z3MuIEkndmUgdHJpZWQKZ3JlcHBpbmcgZm9yICdlcnJvcjonIG9yICcqKionLCBidXQgSSBoYXZl
-bid0IGJlZW4gYWJsZSB0byBmaW5kCmFueXRoaW5nLgoKRG8geW91IGhhcHBlbiB0byBoYXZlIHRo
-ZSBleGFjdCBjYXVzZSBvZiB0aGUgYnVpbGQgZmFpbHVyZT8KCj4gVGhlIGxvZ3MgYXJlIGF0dGFj
-aGVkIGZvciBib3RoIGJ1aWxkcy4KPiAKPiAtLSAKPiBCcmlhbiBXb29kcwoKPiBTY3JpcHQgc3Rh
-cnRlZCBvbiBUdWUgMjQgSnVsIDIwMTggMTE6Mjk6NTcgQU0gQ0RUCj4gG1swMTszMm1uaWtrYRtb
-MDE7MzRtICQbWzAwbSBtYWtlIGNsZWFuIC1qIDUwCj4gbWFrZSAtQyB4ZW4gY2xlYW4KPiBtYWtl
-IC1DIHRvb2xzL2luY2x1ZGUgY2xlYW4KCkFGQUlDVCBhIGBtYWtlIGRlYmJhbGxgIGRvZXNuJ3Qg
-Y2FsbCB0aGUgY2xlYW4gdGFyZ2V0cywgc28geW91IGFyZQpkb2luZyBzb21ldGhpbmcgZWxzZSBo
-ZXJlIGFwYXJ0IGZyb20gYSBgbWFrZSBkZWJiYWxsYC4KClRoYW5rcywgUm9nZXIuCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+PiA+IAo+ID4gK3N0YXRpYyB2b2lkIHAybV9zZXRfYWNjZXNzKHN0cnVjdCBwMm1fZG9tYWluICpw
+Mm0sIHVuc2lnbmVkIGxvbmcKPiA+IGdmbiwKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcDJtX2Fj
+Y2Vzc190IGEpCj4gPiArewo+ID4gK8KgwqDCoMKgaW50IHJjOwo+ID4gKwo+ID4gK8KgwqDCoMKg
+aWYgKCAhcDJtLT5tZW1fYWNjZXNzX3NldHRpbmdzICkKPiA+ICvCoMKgwqDCoMKgwqDCoMKgcmV0
+dXJuOwo+IE5vIGVycm9yIGluZGljYXRpb24/CgpJIHdvdWxkIHNheSBBU1NFUlQgaXMgYSBiZXR0
+ZXIgY2hvaWNlIGlmIHRoZSBjb2RlIGdvdCB0aGlzIGZhciBhbmQgaXQKY291bGQgbm90IGFsbG9j
+YXRlIG1lbW9yeQoKQWxleAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
