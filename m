@@ -1,25 +1,23 @@
-From: Juergen Gross <jgross@suse.com>
+From: Lars Kurth <lars.kurth.xen@gmail.com>
 Subject: Re: Xen 4.12 release planning
-Date: Wed, 25 Jul 2018 13:37:27 +0200
-Message-ID: <91fd5fae-e221-b754-700f-0872c6cf68de@suse.com>
+Date: Wed, 25 Jul 2018 12:39:50 +0100
+Message-ID: <29C1840E-1993-4A15-B724-908B8BDEDDD7@xenproject.org>
 References: <6a766b09-d5fe-a9ce-cacf-546c998ab803@suse.com>
  <0c25205b-b237-a7cd-aedf-45e7f86b3492@arm.com>
  <b8f9bd2e-46bb-1a31-e9ac-dbc42841f31f@citrix.com>
  <3563543c-c5c9-cb80-8d3e-c34e731118c8@suse.com>
  <CAFLBxZZNzww-8=VqbuaGY4bHpFwxHXtC5J13PKM458yu7VerPg@mail.gmail.com>
- <d5699acb-b110-a629-e0df-593102720c5b@citrix.com>
- <4495c080-c839-2bf4-3ea8-7e56cc6ca2ad@suse.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
+Content-Type: multipart/mixed; boundary="===============8406175124264256925=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=sdpf=kj=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fiI6j-0006rE-Jv
- for xen-devel@lists.xenproject.org; Wed, 25 Jul 2018 11:37:29 +0000
-In-Reply-To: <4495c080-c839-2bf4-3ea8-7e56cc6ca2ad@suse.com>
-Content-Language: de-DE
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=h8kl=kj=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1fiI95-00073U-KY
+ for xen-devel@lists.xenproject.org; Wed, 25 Jul 2018 11:39:55 +0000
+Received: by mail-wr1-x42f.google.com with SMTP id a3-v6so7098660wrt.2
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Jul 2018 04:39:53 -0700 (PDT)
+In-Reply-To: <CAFLBxZZNzww-8=VqbuaGY4bHpFwxHXtC5J13PKM458yu7VerPg@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,110 +26,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <dunlapg@umich.edu>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Julien Grall <julien.grall@arm.com>
+To: George Dunlap <dunlapg@umich.edu>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjUvMDcvMTggMTM6MzQsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gT24gMjUvMDcvMTggMTM6
-MzAsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4+IE9uIDI1LzA3LzE4IDEyOjI0LCBHZW9yZ2UgRHVu
-bGFwIHdyb3RlOgo+Pj4gT24gV2VkLCBKdWwgMjUsIDIwMTggYXQgMTA6MjIgQU0sIEp1ZXJnZW4g
-R3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4gd3JvdGU6Cj4+Pj4gT24gMjUvMDcvMTggMTA6MTksIEFu
-ZHJldyBDb29wZXIgd3JvdGU6Cj4+Pj4+IE9uIDI1LzA3LzIwMTggMDk6MTUsIEp1bGllbiBHcmFs
-bCB3cm90ZToKPj4+Pj4+IEhpIEp1ZXJnZW4sCj4+Pj4+Pgo+Pj4+Pj4gT24gMjUvMDcvMTggMDg6
-MTksIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+Pj4+Pj4gSXRzIHRpbWUgdG8gcGxhbiB0aGUgWGVu
-IDQuMTIgcmVsZWFzZSBkYXRlcy4KPj4+Pj4+Pgo+Pj4+Pj4+IFRoZXJlIGhhdmUgYmVlbiBjb25j
-ZXJucyB3aXRoIHRoZSBzY2hlZHVsZSBvZiA2IG1vbnRocyBiZXR3ZWVuIHJlbGVhc2VzLAo+Pj4+
-Pj4+IGFzIHRoaXMgc2NoZW1lIGlzIGxlYWRpbmcgdG8gdG9vIG1hbnkgc3VwcG9ydGVkIHZlcnNp
-b25zIG9mIFhlbiBhdCBhCj4+Pj4+Pj4gdGltZS4gVGhlIG5lZWRlZCByZXNvdXJjZXMgdG8gYmFj
-a3BvcnQgYnVnIGZpeGVzIGFuZCBzZWN1cml0eSBmaXhlcyBhcwo+Pj4+Pj4+IHdlbGwgYXMgZG9p
-bmcgdGhlIHRlc3RzIGZvciBhbGwgdGhvc2UgcmVsZWFzZXMgYXJlIGEgbGltaXRpbmcgZmFjdG9y
-IHRvCj4+Pj4+Pj4gcHVzaCBvdXQgdGhlIGN1cnJlbnQgbWFpbiByZWxlYXNlIGFzIHdlbGwgYXMg
-cG9pbnQgcmVsZWFzZXMgb24gdGltZS4KPj4+Pj4+Pgo+Pj4+Pj4+IEFmdGVyIHNvbWUgZGlzY3Vz
-c2lvbnMgYXQgdGhlIFhlbiBkZXZlbG9wZXIgc3VtbWl0LCBvbiB4ZW4tZGV2ZWwgYW5kCj4+Pj4+
-Pj4gYmV0d2VlbiB0aGUgY29tbWl0dGVycyBhIHNsaWdodGx5IGxvbmdlciByZWxlYXNlIGN5Y2xl
-IG9mIDggb3IgOSBtb250aHMKPj4+Pj4+PiB3YXMgc3VnZ2VzdGVkLgo+Pj4+Pj4+Cj4+Pj4+Pj4g
-V2l0aCAxOCBtb250aHMgb2YgZnVsbCBzdXBwb3J0IGFuZCAzNiBtb250aHMgb2Ygc2VjdXJpdHkg
-c3VwcG9ydCB0aGUKPj4+Pj4+PiBudW1iZXIgb2YgY29uY3VycmVudCBzdXBwb3J0ZWQgcmVsZWFz
-ZXMgd2lsbCBiZSB0aGUgc2FtZSB3aXRoIGVpdGhlciA4Cj4+Pj4+Pj4gb3IgOSBtb250aHMgcmVs
-ZWFzZSBjeWNsZXMsIHNvIEkgaGF2ZSBjaG9zZW4gYW4gOCBtb250aCBjeWNsZSBmb3Igbm93Lgo+
-Pj4+Pj4+IEhhdmluZyBvbmx5IDMgcG9zc2libGUgdGltZXMgaW4gdGhlIHllYXIgZm9yIGEgcmVs
-ZWFzZSB3aWxsIG1ha2UgaXQKPj4+Pj4+PiBlYXNpZXIgdG8gYXZvaWQgbWFqb3IgaG9saWRheSBz
-ZWFzb25zLiA+Cj4+Pj4+Pj4gSW4gY2FzZSB0aGVyZSBpcyBubyBvYmplY3Rpb24gSSdtIHBsYW5u
-aW5nIFhlbiA0LjEyIHdpdGg6Cj4+Pj4+Pj4KPj4+Pj4+PiAqIExhc3QgcG9zdGluZyBkYXRlOiBE
-ZWNlbWJlciAxNHRoLCAyMDE4Cj4+Pj4+Pj4gKiBIYXJkIGNvZGUgZnJlZXplOiBKYW51YXJ5IDEx
-dGgsIDIwMTkKPj4+Pj4+IEluIGdlbmVyYWwsIHlvdSB3b3VsZCBleHBlY3Qgd2VzdGVybiBwZW9w
-bGUgdG8gc2xvdyBkb3duIGR1cmluZwo+Pj4+Pj4gQ2hyaXN0bWFzIHBlcmlvZCBhbmQgaGF2ZSB0
-byBkZWFsIHdpdGggYSBwaWxlIG9mIGUtbWFpbCBqdXN0IGFmdGVyIE5ldwo+Pj4+Pj4gWWVhci4g
-U28gSSB0aGluaywgdGhpcyBpcyBub3QgdmVyeSBjb252ZW5pZW50IHBlcmlvZCBmb3IgYSBjb2Rl
-IGZyZWV6ZS4KPj4+Pj4+Cj4+Pj4+PiBJIHVzdWFsbHkgdGFrZSBtb3JlIGhvbGlkYXlzIGFyb3Vu
-ZCBDaHJpc3RtYXMgYW5kIE5ldyBZZWFyLiBGb3IgdGhpcwo+Pj4+Pj4geWVhciwgSSB3aWxsIGJl
-IG9uIGhvbGlkYXlzIGZyb20gMjFzdCBEZWNlbWJlciB1bnRpbCB0aGUgMTN0aCBKYW51YXJ5Lgo+
-Pj4+Pj4gVGhpcyBiYXNpY2FsbHkgbWVhbnMgbXkgY3V0IG9mZiBmb3IgQXJtIHBhdGNoZXMgd2ls
-bCBiZSAyMXN0IERlY2VtYmVyCj4+Pj4+PiBvciBwb3RlbnRpYWxseSBmZXcgZGF5cyBiZWZvcmUg
-dG8gYXZvaWQgaGF2aW5nIHRoZSBsaWtlbHkgbGFzdCBtaW51dGUKPj4+Pj4+IHJ1c2guCj4+Pj4+
-IEdpdmVuIHRoYXQgd2UgaGF2ZSBkZWNpZGVkIHRvIHN3aXRjaCB0byBhIGRpZmZlcmVuY2UgY2Fk
-ZW5jZSwgaXQgd291bGQKPj4+Pj4gYmUgcHJ1ZGVudCB0byB3b3JrIG91dCB3aGVuIHRoZSBiZXN0
-IGFsaWdubWVudCBvZiBhbiA4LW1vbnRoIGNhZGVuY2UKPj4+Pj4gd291bGQgYmUsIHJhdGhlciB0
-aGFuIGhhdmluZyBpdCA4IG1vbnRocyBmcm9tIG5vdy4gIElmIHRoYXQgbWVhbnMgYQo+Pj4+PiBv
-bmUtb2ZmIHNob3J0ZXIgb3IgbG9uZ2VyIGN5Y2xlIGZvciA0LjEyIHRoZW4gc28gYmUgaXQuCj4+
-Pj4gVGhlIGdlbmVyYWwgaG9saWRheSBzZWFzb25zIGFyZToKPj4+Pgo+Pj4+IC0gQ2hpbmVzZSBu
-ZXcgeWVhciAoZW5kIG9mIEphbnVhcnkgLi4uIG1pZCBvZiBGZWJydWFyeSksIDIgd2Vla3MKPj4+
-PiAtIEVhc3Rlcm4gKGVuZCBvZiBNYXJjaCAuLi4gZW5kIG9mIEFwcmlsKSwgb25seSBhIHdlYWsg
-ZGVwZW5kZW5jeT8KPj4+PiAtIHN1bW1lciAoQXVndXN0PyksIHNlY29uZCBoYWxmIG9mIEp1bHkg
-YW5kIGZpcnN0IGhhbGYgb2YgU2VwdGVtYmVyIGFzCj4+Pj4gICBhIHdlYWsgZGVwZW5kZW5jeQo+
-Pj4+IC0gQ2hyaXN0bWFzIChlbmQgb2YgRGVjZW1iZXIgLi4uIHN0YXJ0IG9mIEphbnVhcnkpLCBh
-ZGRpbmcgb25lIHdlZWsgYXMKPj4+PiAgIGEgd2VhayBkZXBlbmRlbmN5Cj4+Pj4KPj4+PiBXZSBk
-b24ndCBsaWtlIHRoZSBwbGFubmVkIHJlbGVhc2UgdG8gYmUgaW4gb3IganVzdCBiZWZvcmUgYSBo
-b2xpZGF5Cj4+Pj4gc2Vhc29uLiBUaGUgcGVyaW9kIGJldHdlZW4gbGFzdCBwb3N0aW5nIGRhdGUg
-YW5kIGZyZWV6ZSBzaG91bGQgbGFzdAo+Pj4+IDIgd2Vla3MsIHRoZSBmcmVlemUgcGVyaW9kIHNo
-b3VsZCBsYXN0IDYgd2Vla3MuCj4+Pj4KPj4+PiBJbiB0aGUgZGlhZ3JhbSBiZWxvdyBJIGhhdmUg
-dXNlZCBhICdYJyBmb3IgYSBtYWpvciBob2xpZGF5IHNlYXNvbiBhbmQKPj4+PiBhICd4JyBmb3Ig
-YSB3ZWFrIGRlcGVuZGVuY3kuIFRoZSBsaW5lcyBiZWxvdyBhcmUgcG9zc2libGUgcmVsZWFzZSBk
-YXRlCj4+Pj4gdmFyaWFudHMganVzdCBzaGlmdGVkIGJ5IGEgd2VhayBlYWNoIHRvIHNob3cgYWxs
-IHBvc3NpYmlsaXRpZXMuCj4+Pj4KPj4+PiBKYW4gRmViIE1hciBBcHIgTWF5IEp1biBKdWwgQXVn
-IFNlcCBPY3QgTm92IERlYwo+Pj4+IFh4LlhYWFhYLi4ueHh4eC4uLi4uLi4uLi4ueHhYWFhYeC4u
-Li4uLi4uLi4uLi4uWCAgICAgIGhvbGlkYXlzCj4+Pj4gZmZGRkZGRkZSLi4uLi4uLmZmRkZGRkZG
-Ui4uLi4uLi5mZkZGRkZGRlIuLi4uLi4uCj4+Pj4gLmZmRkZGRkZGUi4uLi4uLi5mZkZGRkZGRlIu
-Li4uLi4uZmZGRkZGRkZSLi4uLi4uCj4+Pj4gLi5mZkZGRkZGRlIuLi4uLi4uZmZGRkZGRkZSLi4u
-Li4uLmZmRkZGRkZGUi4uLi4uCj4+Pj4gLi4uZmZGRkZGRkZSLi4uLi4uLmZmRkZGRkZGUi4uLi4u
-Li5mZkZGRkZGRlIuLi4uCj4+Pj4gLi4uLmZmRkZGRkZGUi4uLi4uLi5mZkZGRkZGRlIuLi4uLi4u
-ZmZGRkZGRkZSLi4uCj4+Pj4gLi4uLi5mZkZGRkZGRlIuLi4uLi4uZmZGRkZGRkZSLi4uLi4uLmZm
-RkZGRkZGUi4uCj4+Pj4gLi4uLi4uZmZGRkZGRkZSLi4uLi4uLmZmRkZGRkZGUi4uLi4uLi5mZkZG
-RkZGRlIuCj4+Pj4gLi4uLi4uLmZmRkZGRkZGUi4uLi4uLi5mZkZGRkZGRlIuLi4uLi4uZmZGRkZG
-RkZSCj4+Pj4gUi4uLi4uLi5mZkZGRkZGRlIuLi4uLi4uZmZGRkZGRkZSLi4uLi4uLmZmRkZGRkZG
-Cj4+Pj4gRlIuLi4uLi4uZmZGRkZGRkZSLi4uLi4uLmZmRkZGRkZGUi4uLi4uLi5mZkZGRkZGCj4+
-Pj4gRkZSLi4uLi4uLmZmRkZGRkZGUi4uLi4uLi5mZkZGRkZGRlIuLi4uLi4uZmZGRkZGCj4+Pj4g
-RkZGUi4uLi4uLi5mZkZGRkZGRlIuLi4uLi4uZmZGRkZGRkZSLi4uLi4uLmZmRkZGCj4+Pj4gRkZG
-RlIuLi4uLi4uZmZGRkZGRkZSLi4uLi4uLmZmRkZGRkZGUi4uLi4uLi5mZkZGCj4+Pj4gRkZGRkZS
-Li4uLi4uLmZmRkZGRkZGUi4uLi4uLi5mZkZGRkZGRlIuLi4uLi4uZmZGCj4+Pj4gRkZGRkZGUi4u
-Li4uLi5mZkZGRkZGRlIuLi4uLi4uZmZGRkZGRkZSLi4uLi4uLmZmCj4+Pj4gZkZGRkZGRlIuLi4u
-Li4uZmZGRkZGRkZSLi4uLi4uLmZmRkZGRkZGUi4uLi4uLi5mCj4+Pj4KPj4+PiBXZSBjYW4gcnVs
-ZSBvdXQgc2V2ZXJhbCB2YXJpYW50cyB3aXRoIHJlbGVhc2UgZGF0ZXMganVzdCBiZWZvcmUgb3Ig
-aW4gYQo+Pj4+IGhvbGlkYXkgc2Vhc29uOgo+Pj4+Cj4+Pj4gSmFuIEZlYiBNYXIgQXByIE1heSBK
-dW4gSnVsIEF1ZyBTZXAgT2N0IE5vdiBEZWMKPj4+PiBYeC5YWFhYWC4uLnh4eHguLi4uLi4uLi4u
-Lnh4WFhYWHguLi4uLi4uLi4uLi4uLlggICAgICBob2xpZGF5cwo+Pj4+IGZmRkZGRkZGUi4uLi4u
-Li5mZkZGRkZGRlIuLi4uLi4uZmZGRkZGRkZSLi4uLi4uLgo+Pj4+IC5mZkZGRkZGRlIuLi4uLi4u
-ZmZGRkZGRkZSLi4uLi4uLmZmRkZGRkZGUi4uLi4uLgo+Pj4+Cj4+Pj4gQmVzdCBmaXQgc2VlbXMg
-dG8gYmUgcmVsZWFzaW5nIGluIGZpcnN0IGhhbGYgb2YgTWFyY2gvSnVseS9Ob3ZlbWJlci4gVGhl
-Cj4+Pj4gbWFpbiBjbGFzaCBzZWVtcyB0byBiZSBDaGluZXNlIG5ldyB5ZWFyIGluIHRoZSBmcmVl
-emUgcGVyaW9kLCBidXQKPj4+PiBhdm9pZGluZyB0aGF0IHdvdWxkIG1lYW4gd2UnZCBoYXZlIHRv
-IGVpdGhlciBtb3ZlIGludG8gQ2hyaXN0bWFzIG9yCj4+Pj4gRWFzdGVybiwgb3IgdG8gdXNlIGEg
-c2NoZWR1bGUgd2l0aCB2YXJ5aW5nIHBlcmlvZHMuCj4+Pj4KPj4+PiBQbGVhc2UgcmVtZW1iZXIg
-dGhhdCBDaGluZXNlIG5ldyB5ZWFyIGlzIG9ubHkgMiB3ZWVrcyBsb25nIChhdCB2YXJ5aW5nCj4+
-Pj4gZGF0ZXMpIHNvIG9ubHkgMiB3ZWVrcyBvZiB0aGUgZnJlZXplIHBlcmlvZCBhcmUgaGl0LiBO
-ZXh0IHllYXIgdGhlCj4+Pj4gQ2hpbmVzZSBuZXcgeWVhciB3aWxsIGJlIGF0IEZlYnJ1YXJ5IDV0
-aC4KPj4+Pgo+Pj4+IEZvciBteSA0LjEyIHBsYW4gSSd2ZSBhZGRlZCBzb21lIGV4dHJhIHdlZWtz
-IGJldHdlZW4gbGFzdCBwb3N0aW5nIGRhdGUKPj4+PiBhbmQgcmVsZWFzZSBkYXRlIHRvIGFjY29t
-bW9kYXRlIGZvciB0aGUgaG9saWRheSBzZWFzb25zLCByZXN1bHRpbmcgaW4KPj4+PiBteSBzdWdn
-ZXN0aW9uLgo+Pj4gVGhhbmtzIGZvciB0aGUgZGV0YWlsZWQgYW5hbHlzaXMgSnVyZWdlbi4gIFRo
-aXMgc2VlbXMgZ29vZCB0byBtZS4KPj4KPj4gSSB0aGluayBpdCBpcyBhbHNvIHdvcnRoIHN0YXlp
-bmcgdGhhdCB3ZSBuZWVkIHRvIHdvcmsgb24gcmVkdWNpbmcgdGhlCj4+IGxlbmd0aCBvZiB0aGUg
-aGFyZCBmcmVlemUgZGF0ZSwgYmVjYXVzZSBhcyBpcyB2aXNpYmxlIGZyb20gdGhhdCBkaWFncmFt
-LAo+PiBpdHMgYmFzaWNhbGx5IGhhbGYgdGhlIHllYXIuCj4gCj4gTm8sIGl0IGlzbid0LiBJdCBj
-YW4gaGFwcGVuIGhhbGYgdGhlIHllYXIsIGJ1dCBpbiByZWFsaXR5IGl0IGlzIG9ubHkKPiBldmVy
-eSA5IG1vbnRocyAoc28gaW4gb25lIGNhc2Ugb3V0IG9mIHRocmVlKS4KCkFhcmcsIG9mIGNvdXJz
-ZSB0aGlzIHNob3VsZCBiZTogZXZlcnkgOCBtb250aHMgKHNvIGFsd2F5cyBza2lwcGluZyBvbmUK
-Y2FzZSkuCgoKSnVlcmdlbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+
+--===============8406175124264256925==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_6DD86429-DA1E-400F-860E-5DFC6B8255EC"
+
+
+--Apple-Mail=_6DD86429-DA1E-400F-860E-5DFC6B8255EC
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+
+> On 25 Jul 2018, at 12:24, George Dunlap <dunlapg@umich.edu> wrote:
+>=20
+> On Wed, Jul 25, 2018 at 10:22 AM, Juergen Gross <jgross@suse.com =
+<mailto:jgross@suse.com>> wrote:
+>>=20
+>> fFFFFFFR.......ffFFFFFFR.......ffFFFFFFR.......f
+>>=20
+>> We can rule out several variants with release dates just before or in =
+a
+>> holiday season:
+>>=20
+>> Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+>> Xx.XXXXX...xxxx...........xxXXXXx..............X      holidays
+>> ffFFFFFFR.......ffFFFFFFR.......ffFFFFFFR.......
+>> .ffFFFFFFR.......ffFFFFFFR.......ffFFFFFFR......
+>>=20
+>> Best fit seems to be releasing in first half of March/July/November. =
+The
+>> main clash seems to be Chinese new year in the freeze period, but
+>> avoiding that would mean we'd have to either move into Christmas or
+>> Eastern, or to use a schedule with varying periods.
+>>=20
+>> Please remember that Chinese new year is only 2 weeks long (at =
+varying
+>> dates) so only 2 weeks of the freeze period are hit. Next year the
+>> Chinese new year will be at February 5th.
+>>=20
+>> For my 4.12 plan I've added some extra weeks between last posting =
+date
+>> and release date to accommodate for the holiday seasons, resulting in
+>> my suggestion.
+>=20
+> Thanks for the detailed analysis Juregen.  This seems good to me.
+>=20
+> -George
+
+This looks good to me also. To address Julien's concerns, we could also =
+consider an earlier Last posting date/Hard code freeze date for Arm =
+related code to work around Julien's holiday plans. I think this would =
+be entirely OK and set expectations of contributors accordingly. But =
+maybe this is not necessary if Julien and Stefano can agree a work split =
+somehow.=20
+
+Alternatively we could communicate absences of key reviewers say in =
+November to set expectations of contributors for the final stretch of =
+the release cycle. In other words, if a key reviewer is away, then =
+contributors will need to get series into good shape before their =
+reviewers go on vacation.=20
+
+Regards
+Lars
+
+
+--Apple-Mail=_6DD86429-DA1E-400F-860E-5DFC6B8255EC
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
+class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 25 Jul 2018, at 12:24, George Dunlap &lt;<a =
+href=3D"mailto:dunlapg@umich.edu" class=3D"">dunlapg@umich.edu</a>&gt; =
+wrote:</div><br class=3D"Apple-interchange-newline"><div class=3D""><span =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">On Wed, Jul =
+25, 2018 at 10:22 AM, Juergen Gross &lt;</span><a =
+href=3D"mailto:jgross@suse.com" style=3D"font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; orphans: auto; text-align: =
+start; text-indent: 0px; text-transform: none; white-space: normal; =
+widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
+-webkit-text-stroke-width: 0px;" class=3D"">jgross@suse.com</a><span =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">&gt; =
+wrote:</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><blockquote type=3D"cite" style=3D"font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
+-webkit-text-stroke-width: 0px; text-decoration: none;" class=3D""><br =
+class=3D"">fFFFFFFR.......ffFFFFFFR.......ffFFFFFFR.......f<br =
+class=3D""><br class=3D"">We can rule out several variants with release =
+dates just before or in a<br class=3D"">holiday season:<br class=3D""><br =
+class=3D"">Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec<br =
+class=3D"">Xx.XXXXX...xxxx...........xxXXXXx..............X =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;holidays<br =
+class=3D"">ffFFFFFFR.......ffFFFFFFR.......ffFFFFFFR.......<br =
+class=3D"">.ffFFFFFFR.......ffFFFFFFR.......ffFFFFFFR......<br =
+class=3D""><br class=3D"">Best fit seems to be releasing in first half =
+of March/July/November. The<br class=3D"">main clash seems to be Chinese =
+new year in the freeze period, but<br class=3D"">avoiding that would =
+mean we'd have to either move into Christmas or<br class=3D"">Eastern, =
+or to use a schedule with varying periods.<br class=3D""><br =
+class=3D"">Please remember that Chinese new year is only 2 weeks long =
+(at varying<br class=3D"">dates) so only 2 weeks of the freeze period =
+are hit. Next year the<br class=3D"">Chinese new year will be at =
+February 5th.<br class=3D""><br class=3D"">For my 4.12 plan I've added =
+some extra weeks between last posting date<br class=3D"">and release =
+date to accommodate for the holiday seasons, resulting in<br class=3D"">my=
+ suggestion.<br class=3D""></blockquote><br style=3D"caret-color: rgb(0, =
+0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">Thanks for the detailed analysis Juregen. &nbsp;This seems =
+good to me.</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" =
+class=3D"">-George</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""></div></blockquote><br =
+class=3D""></div><div>This looks good to me also. To address Julien's =
+concerns, we could also consider an earlier Last posting date/Hard code =
+freeze date for Arm related code to work around Julien's holiday plans. =
+I think this would be entirely OK and set expectations of contributors =
+accordingly. But maybe this is not necessary if Julien and Stefano can =
+agree a work split somehow.&nbsp;</div><div><br =
+class=3D""></div><div>Alternatively we could communicate absences of key =
+reviewers say in November to set expectations of contributors for the =
+final stretch of the release cycle. In other words, if a key reviewer is =
+away, then contributors will need to get series into good shape before =
+their reviewers go on vacation.&nbsp;</div><div><br =
+class=3D""></div><div>Regards</div><div>Lars</div><br =
+class=3D""></body></html>=
+
+--Apple-Mail=_6DD86429-DA1E-400F-860E-5DFC6B8255EC--
+
+
+--===============8406175124264256925==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8406175124264256925==--
