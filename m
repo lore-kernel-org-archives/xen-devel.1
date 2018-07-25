@@ -1,23 +1,16 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v3 1/2] x86/efi: move the logic to detect PE
- build support
-Date: Wed, 25 Jul 2018 08:38:16 -0600
-Message-ID: <5B588B5802000078001D7D17@prv1-mh.provo.novell.com>
-References: <20180718102733.15253-1-roger.pau@citrix.com>
- <20180718102733.15253-2-roger.pau@citrix.com>
- <20180725124828.GH4642@olila.i.net-space.pl>
- <20180725133843.xux2ieegh5qkhwxq@mac.bytemobile.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH] Config.mk: update OVMF changeset
+Date: Wed, 25 Jul 2018 15:38:23 +0100
+Message-ID: <20180725143823.31567-1-anthony.perard@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=x1ei=kj=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fiKvk-00009X-PF
- for xen-devel@lists.xenproject.org; Wed, 25 Jul 2018 14:38:20 +0000
-In-Reply-To: <20180725133843.xux2ieegh5qkhwxq@mac.bytemobile.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=b3i8=kj=citrix.com=prvs=73789403c=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1fiKw9-0000BH-FK
+ for xen-devel@lists.xenproject.org; Wed, 25 Jul 2018 14:38:45 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,41 +19,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, Daniel Kiper <daniel.kiper@oracle.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI1LjA3LjE4IGF0IDE1OjM4LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IE9uIFdlZCwgSnVsIDI1LCAyMDE4IGF0IDAyOjQ4OjI4UE0gKzAyMDAsIERhbmllbCBLaXBlciB3
-cm90ZToKPj4gT24gV2VkLCBKdWwgMTgsIDIwMTggYXQgMTI6Mjc6MzJQTSArMDIwMCwgUm9nZXIg
-UGF1IE1vbm5lIHdyb3RlOgo+PiA+IFNvIHRoYXQgaXQgY2FuIGJlIHVzZWQgYnkgb3RoZXIgY29t
-cG9uZW50cyBhcGFydCBmcm9tIHRoZSBlZmkgc3BlY2lmaWMKPj4gPiBjb2RlLiBCeSBtb3Zpbmcg
-dGhlIGRldGVjdGlvbiBjb2RlIGNyZWF0aW5nIGEgZHVtbXkgZWZpL2Rpc2FibGVkIGZpbGUKPj4g
-PiBjYW4gYmUgYXZvaWRlZC4KPj4gPgo+PiA+IFRoaXMgaXMgcmVxdWlyZWQgc28gdGhhdCB0aGUg
-Y29uZGl0aW9uYWwgdXNlZCB0byBkZWZpbmUgdGhlIGVmaSBzeW1ib2wKPj4gPiBpbiB0aGUgbGlu
-a2VyIHNjcmlwdCBjYW4gYmUgcmVtb3ZlZCBhbmQgaW5zdGVhZCB0aGUgZGVmaW5pdGlvbiBvZiB0
-aGUKPj4gPiBlZmkgc3ltYm9sIGNhbiBiZSBndWFyZGVkIHVzaW5nIHRoZSBwcmVwcm9jZXNzb3Iu
-Cj4+ID4KPj4gPiBUaGUgbW90aXZhdGlvbiBiZWhpbmQgdGhpcyBjaGFuZ2UgaXMgdG8gYmUgYWJs
-ZSB0byBidWlsZCBYZW4gdXNpbmcgbGxkCj4+ID4gKHRoZSBMTFZNIGxpbmtlciksIHRoYXQgYXQg
-bGVhc3Qgb24gdmVyc2lvbiA2LjAuMCBkb2Vzbid0IHdvcmsKPj4gPiBwcm9wZXJseSB3aXRoIGEg
-REVGSU5FRCBiZWluZyB1c2VkIGluIGEgY29uZGl0aW9uYWwgZXhwcmVzc2lvbjoKPj4gPgo+PiA+
-IGxkICAgIC1tZWxmX3g4Nl82NF9mYnNkICAtVCB4ZW4ubGRzIC1OIHByZWxpbmsubyAtLWJ1aWxk
-LWlkPXNoYTEgXAo+PiA+ICAgICAvcm9vdC9zcmMveGVuL3hlbi9jb21tb24vc3ltYm9scy1kdW1t
-eS5vIC1vIC9yb290L3NyYy94ZW4veGVuLy54ZW4tc3ltcy4wCj4+ID4gbGQ6IGVycm9yOiB4ZW4u
-bGRzOjIzMzogc3ltYm9sIG5vdCBmb3VuZDogZWZpCj4+ID4KPj4gPiBTaWduZWQtb2ZmLWJ5OiBS
-b2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KPj4gPiBSZXZpZXdlZC1ieTog
-SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+PiAKPj4gVGhpcyBwYXRjaCBkb2VzIG1v
-cmUgdGhhbiBzdWJqZWN0IHNheXMuIFNvLCBwbGVhc2Ugc3BsaXQgdGhpcyBwYXRjaCBpbnRvCj4+
-IDIgcGFydHMuIE9uZSB3aGljaCByZWFsbHkgbW92ZXMgdGhlIGRldGVjdGlvbiBsb2dpYyBhbmQg
-dGhlIHNlY29uZCB3aGljaAo+PiByZXBsYWNlcyBERUZJTkVEKCkgd2l0aCAjaWZkZWYuCj4gCj4g
-SXQncyBub3QgcG9zc2libGUgdG8gcGxhY2UgdGhlIHdob2xlIGNvbnRlbnRzIG9mIHRoZSBwYXRj
-aCBpbiBhCj4gc3ViamVjdCBsaW5lLCB0aGF0J3Mgd2h5IHRoZXJlJ3MgYWxzbyBhIGNvbW1pdCBt
-ZXNzYWdlIHRoYXQgSSB0aGluawo+IGNvcnJlY3RseSBleHBsYWlucyBldmVyeXRoaW5nIGRvbmUg
-aW4gdGhlIHBhdGNoLgo+IAo+IElNTyBqdXN0IGhhdmluZyBhIHBhdGNoIHRvIGNoYW5nZSB0aGUg
-REVGSU5FRCB0byBhbiBpZmRlZiBpcyBxdWl0ZQo+IHBvaW50bGVzcywgaXQncyBiZXR0ZXIgdG8g
-c3dpdGNoIGl0IGhlcmUgdG9nZXRoZXIgd2l0aCB0aGUgY2hhbmdlIHRoYXQKPiBhY3R1YWxseSBp
-bnRyb2R1Y2VzIHRoZSBkZWZpbmUgaXRzZWxmLgoKRlRSIEknbSBmaW5lIHdpdGggdGhlIHBhdGNo
-IGFzIGlzLCBhcyBpbmRpY2F0ZWQgYnkgbXkgUi1iLgoKSmFuCgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+U2ltcGx5IGNhdGNoaW5nIHVwIHdpdGggdXBzdHJlYW0uCgpTaWduZWQtb2ZmLWJ5OiBBbnRob255
+IFBFUkFSRCA8YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KLS0tCiBDb25maWcubWsgfCAyICst
+CiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1n
+aXQgYS9Db25maWcubWsgYi9Db25maWcubWsKaW5kZXggMGU4MjliYjM2NC4uYWViNDE4YWRmNiAx
+MDA2NDQKLS0tIGEvQ29uZmlnLm1rCisrKyBiL0NvbmZpZy5tawpAQCAtMjc0LDcgKzI3NCw3IEBA
+IFFFTVVfVFJBRElUSU9OQUxfVVJMID89IGdpdDovL3hlbmJpdHMueGVuLm9yZy9xZW11LXhlbi10
+cmFkaXRpb25hbC5naXQKIFNFQUJJT1NfVVBTVFJFQU1fVVJMID89IGdpdDovL3hlbmJpdHMueGVu
+Lm9yZy9zZWFiaW9zLmdpdAogTUlOSU9TX1VQU1RSRUFNX1VSTCA/PSBnaXQ6Ly94ZW5iaXRzLnhl
+bi5vcmcvbWluaS1vcy5naXQKIGVuZGlmCi1PVk1GX1VQU1RSRUFNX1JFVklTSU9OID89IDk0N2Yz
+NzM3YWJmNjVmZGE2M2YzZmZkOTdmZGRmYTY5ODY5ODY4NjgKK09WTUZfVVBTVFJFQU1fUkVWSVNJ
+T04gPz0gZWY1MjllNmFiN2MzMTI5MGEzMzA0NWJiMWYxODM3NDQ3Y2MwZWI1NgogUUVNVV9VUFNU
+UkVBTV9SRVZJU0lPTiA/PSBtYXN0ZXIKIE1JTklPU19VUFNUUkVBTV9SRVZJU0lPTiA/PSAwYjRi
+Nzg5N2UwOGI5NjdhMDliZWQyMDI4YTc5ZmFiZmY4MjM0MmRkCiAKLS0gCkFudGhvbnkgUEVSQVJE
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
