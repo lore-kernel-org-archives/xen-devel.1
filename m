@@ -1,15 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v14 00/11] x86/domctl: Save info for one
- vcpu instance
-Date: Wed, 25 Jul 2018 06:38:37 -0600
-Message-ID: <5B586F4D02000078001D7B98@prv1-mh.provo.novell.com>
-References: <1532520862-13648-1-git-send-email-aisaila@bitdefender.com>
+From: Daniel Kiper <daniel.kiper@oracle.com>
+Subject: Re: [PATCH v3 1/2] x86/efi: move the logic to detect PE
+ build support
+Date: Wed, 25 Jul 2018 14:48:28 +0200
+Message-ID: <20180725124828.GH4642@olila.i.net-space.pl>
+References: <20180718102733.15253-1-roger.pau@citrix.com>
+ <20180718102733.15253-2-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1532520862-13648-1-git-send-email-aisaila@bitdefender.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=mrrg=kj=oracle.com=daniel.kiper@srs-us1.protection.inumbo.net>)
+ id 1fiJDg-0006oV-Dr
+ for xen-devel@lists.xenproject.org; Wed, 25 Jul 2018 12:48:44 +0000
 Content-Disposition: inline
+In-Reply-To: <20180718102733.15253-2-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,31 +24,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: aisaila@bitdefender.com
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI1LjA3LjE4IGF0IDE0OjE0LCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3Rl
-Ogo+IFRoaXMgcGF0Y2ggc2VyaWVzIGFkZHJlc3NlcyB0aGUgaWRlZWEgb2Ygc2F2aW5nIGRhdGEg
-ZnJvbSBhIHNpbmdsZSB2Y3B1IGluc3RhbmNlLgo+IEZpcnN0IGl0IHN0YXJ0cyBieSBhZGRpbmcg
-KnNhdmVfb25lIGZ1bmN0aW9ucywgdGhlbiBpdCBpbnRyb2R1Y2VzIGEgaGFuZGxlciBmb3IgdGhl
-Cj4gbmV3IHNhdmVfb25lKiBmdW5jcyBhbmQgbWFrZXMgdXNlIG9mIGl0IGluIHRoZSBodm1fc2F2
-ZSBhbmQgaHZtX3NhdmVfb25lIGZ1bmNzLgo+IFRoZSBmaW5hbCAyIHBhdGNoZXMgYXJlIHVzZWQg
-Zm9yIGNsZWFuIHVwLiBUaGUgZmlyc3Qgb25lIHJlbW92ZXMgdGhlIHNhdmUqIGZ1bmNzIGFuZAo+
-IHJlbmFtZXMgdGhlIHNhdmVfb25lKiB0byBzYXZlLgo+IFRoZSBsYXN0IHBhdGNoIHJlbW92ZXMg
-dGhlIHNhdmVfb25lKiBoYW5kbGVyIHRoYXQgaXMgbm8gbG9uZ2VyIHVzZWQuCgpJJ20gc29ycnkg
-Zm9yIHRoZSByYW50LCBidXQgSSBjYW4ndCByZXNpc3QgYW55IGxvbmdlcjogWW91J3JlIG9mIGNv
-dXJzZQpmcmVlIHRvIGNvbnRpbnVlIHRoaXMgd2F5IGFuZCBwb3N0IG5ldyB2ZXJzaW9ucyBhZnRl
-ciBldmVyeSBpbmRpdmlkdWFsCmNvbW1lbnQuIFlvdSBtYXkgYmUgYWltaW5nIGZvciBhIG5ldyBy
-ZWNvcmQgb2YgdmVyc2lvbnMgb2YgYSBwYXRjaApzZXJpZXMgdGhpcyB3YXkuIEl0J3Mgbm90IHJl
-YWxseSBtYWtpbmcgbXVjaCBzZW5zZSB0byBtZSB0aG91Z2guIEknZApyZWFsbHkgbGlrZSB0byBn
-ZXQgdGhyb3VnaCB0aGlzIHNlcmllcyBpbiBpdHMgZW50aXJldHksIGJ1dCBzbyBmYXIgeW91J3Zl
-Cm1hbmFnZWQgdG8gcHVzaCBpdCBkb3duIG9uIG15IHByaW9yaXR5IDEwIG9yIHNvIHRpbWVzIChi
-ZXR3ZWVuCmVxdWFsbHkgaW1wb3J0YW50IHNlcmllcyBJJ20ganVkZ2luZyBieSB0aW1lIHdoYXQg
-dG8gbG9vayBhdCkuIFRvIG1lCnBlcnNvbmFsbHksIGFsbCB0aGVzZSByZWN1cnJpbmcgc3VibWlz
-c2lvbnMgY2F1c2UgaXMgKGEgbGl0dGxlIGJpdCBvZiwgYnV0Cml0IHN1bXMgdXApIGV4dHJhIHdv
-cmsgKG1vdmluZyB0aGlzIHRvIGl0cyBkZXNpZ25hdGVkIG1haWwgZm9sZGVyIHBsdXMKZmluZGlu
-ZyBhbmQgZGVsZXRpbmcgdGhlIHByaW9yIHZlcnNpb24pLgoKSmFuCgoKCl9fX19fX19fX19fX19f
+T24gV2VkLCBKdWwgMTgsIDIwMTggYXQgMTI6Mjc6MzJQTSArMDIwMCwgUm9nZXIgUGF1IE1vbm5l
+IHdyb3RlOgo+IFNvIHRoYXQgaXQgY2FuIGJlIHVzZWQgYnkgb3RoZXIgY29tcG9uZW50cyBhcGFy
+dCBmcm9tIHRoZSBlZmkgc3BlY2lmaWMKPiBjb2RlLiBCeSBtb3ZpbmcgdGhlIGRldGVjdGlvbiBj
+b2RlIGNyZWF0aW5nIGEgZHVtbXkgZWZpL2Rpc2FibGVkIGZpbGUKPiBjYW4gYmUgYXZvaWRlZC4K
+Pgo+IFRoaXMgaXMgcmVxdWlyZWQgc28gdGhhdCB0aGUgY29uZGl0aW9uYWwgdXNlZCB0byBkZWZp
+bmUgdGhlIGVmaSBzeW1ib2wKPiBpbiB0aGUgbGlua2VyIHNjcmlwdCBjYW4gYmUgcmVtb3ZlZCBh
+bmQgaW5zdGVhZCB0aGUgZGVmaW5pdGlvbiBvZiB0aGUKPiBlZmkgc3ltYm9sIGNhbiBiZSBndWFy
+ZGVkIHVzaW5nIHRoZSBwcmVwcm9jZXNzb3IuCj4KPiBUaGUgbW90aXZhdGlvbiBiZWhpbmQgdGhp
+cyBjaGFuZ2UgaXMgdG8gYmUgYWJsZSB0byBidWlsZCBYZW4gdXNpbmcgbGxkCj4gKHRoZSBMTFZN
+IGxpbmtlciksIHRoYXQgYXQgbGVhc3Qgb24gdmVyc2lvbiA2LjAuMCBkb2Vzbid0IHdvcmsKPiBw
+cm9wZXJseSB3aXRoIGEgREVGSU5FRCBiZWluZyB1c2VkIGluIGEgY29uZGl0aW9uYWwgZXhwcmVz
+c2lvbjoKPgo+IGxkICAgIC1tZWxmX3g4Nl82NF9mYnNkICAtVCB4ZW4ubGRzIC1OIHByZWxpbmsu
+byAtLWJ1aWxkLWlkPXNoYTEgXAo+ICAgICAvcm9vdC9zcmMveGVuL3hlbi9jb21tb24vc3ltYm9s
+cy1kdW1teS5vIC1vIC9yb290L3NyYy94ZW4veGVuLy54ZW4tc3ltcy4wCj4gbGQ6IGVycm9yOiB4
+ZW4ubGRzOjIzMzogc3ltYm9sIG5vdCBmb3VuZDogZWZpCj4KPiBTaWduZWQtb2ZmLWJ5OiBSb2dl
+ciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KPiBSZXZpZXdlZC1ieTogSmFuIEJl
+dWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKVGhpcyBwYXRjaCBkb2VzIG1vcmUgdGhhbiBzdWJq
+ZWN0IHNheXMuIFNvLCBwbGVhc2Ugc3BsaXQgdGhpcyBwYXRjaCBpbnRvCjIgcGFydHMuIE9uZSB3
+aGljaCByZWFsbHkgbW92ZXMgdGhlIGRldGVjdGlvbiBsb2dpYyBhbmQgdGhlIHNlY29uZCB3aGlj
+aApyZXBsYWNlcyBERUZJTkVEKCkgd2l0aCAjaWZkZWYuCgpEYW5pZWwKCl9fX19fX19fX19fX19f
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
 WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
 cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
