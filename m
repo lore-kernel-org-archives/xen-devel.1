@@ -1,16 +1,19 @@
-From: Isaila Alexandru <aisaila@bitdefender.com>
-Subject: Re: [PATCH v4] x86/mm: Add mem access rights to NPT
-Date: Wed, 25 Jul 2018 12:28:10 +0300
-Message-ID: <1532510890.21125.14.camel@bitdefender.com>
-References: <1532353689-2242-1-git-send-email-aisaila@bitdefender.com>
- <5B56E99D02000078001D706B@prv1-mh.provo.novell.com>
- <1532507399.21125.7.camel@bitdefender.com>
- <5B583F8602000078001D78F0@prv1-mh.provo.novell.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH] xen/blkfront: remove unused macros
+Date: Wed, 25 Jul 2018 11:30:55 +0200
+Message-ID: <20180725093055.t65t6thkoddxfkbe__21504.1592754007$1532510990$gmane$org@mac.bytemobile.com>
+References: <20180725074207.6808-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B583F8602000078001D78F0@prv1-mh.provo.novell.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=oa/l=kj=citrix.com=prvs=737a33581=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fiG8R-00034m-6I
+ for xen-devel@lists.xenproject.org; Wed, 25 Jul 2018 09:31:07 +0000
+Content-Disposition: inline
+In-Reply-To: <20180725074207.6808-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,35 +22,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, tamas@tklengyel.com, Razvan Cojocaru <rcojocaru@bitdefender.com>, xen-devel@lists.xen.org
+To: Juergen Gross <jgross@suse.com>
+Cc: linux-block@vger.kernel.org, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTWksIDIwMTgtMDctMjUgYXQgMDM6MTQgLTA2MDAsIEphbiBCZXVsaWNoIHdyb3RlOgo+ID4g
-Cj4gPiA+IAo+ID4gPiA+IAo+ID4gPiA+IE9uIDI1LjA3LjE4IGF0IDEwOjI5LCA8YWlzYWlsYUBi
-aXRkZWZlbmRlci5jb20+IHdyb3RlOgo+ID4gPiA+IAo+ID4gPiA+ICtzdGF0aWMgdm9pZCBwMm1f
-c2V0X2FjY2VzcyhzdHJ1Y3QgcDJtX2RvbWFpbiAqcDJtLCB1bnNpZ25lZAo+ID4gPiA+IGxvbmcK
-PiA+ID4gPiBnZm4sCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBwMm1fYWNjZXNzX3QgYSkK
-PiA+ID4gPiArewo+ID4gPiA+ICvCoMKgwqDCoGludCByYzsKPiA+ID4gPiArCj4gPiA+ID4gK8Kg
-wqDCoMKgaWYgKCAhcDJtLT5tZW1fYWNjZXNzX3NldHRpbmdzICkKPiA+ID4gPiArwqDCoMKgwqDC
-oMKgwqDCoHJldHVybjsKPiA+ID4gTm8gZXJyb3IgaW5kaWNhdGlvbj8KPiA+IEkgd291bGQgc2F5
-IEFTU0VSVCBpcyBhIGJldHRlciBjaG9pY2UgaWYgdGhlIGNvZGUgZ290IHRoaXMgZmFyIGFuZAo+
-ID4gaXQKPiA+IGNvdWxkIG5vdCBhbGxvY2F0ZSBtZW1vcnkKPiBGb3Igb25lIEFTU0VSVCgpIGlz
-IGEgbm8tb3AgaW4gcmVsZWFzZSBidWlsZHMuIEFuZCB0aGVuIGl0IGlzCj4gZXh0cmVtZWx5IGJh
-ZCBwcmFjdGljZXMgdG8gYnJpbmcgZG93biB0aGUgaG9zdCB3aGVuIGFuIG9wZXJhdGlvbgo+IHRh
-cmdldGluZyBqdXN0IGEgc2luZ2xlIGd1ZXN0IGhhcyBmYWlsZWQuIFlvdSBlaXRoZXIgcmV0dXJu
-IGFuIGVycm9yCj4gaW5kaWNhdG9yIGhlcmUgKGFuZCBwYXNzIGl0IHVwIHRoZSBjYWxsIHRyZWUp
-LCBvciBpZiB0aGF0J3MgcmVhbGx5Cj4gdW5mZWFzaWJsZSB0aGVuIHlvdSBjcmFzaCB0aGUgYWZm
-ZWN0ZWQgZG9tYWluICh3ZSBkbyBzbyBpbiBxdWl0ZQo+IGEgZmV3IG90aGVyIHNpdHVhdGlvbnMp
-LiBCdXQgeW91J2QgbmVlZCB0byBtYWtlIGNsZWFyIChpZiBpdCdzIG5vdAo+IG9idmlvdXMpIHdo
-eSBwYXNzaW5nIHVwIGFuIGVycm9yIGlzIHVuYWNjZXB0YWJsZSBoZXJlLgo+IApCeSB0aGlzIHRp
-bWUgaW4gdGhlIGNvZGUgdGhlIHJhZGl4IHRyZWUgc2hvdWxkIGJlIGluIHBsYWNlLiBJZiBpdCBp
-cwpub3QgdGhlbiB0aGUgZG9tYWluIHNob3VsZCBjcmFzaCBiZWNhdXNlIHNvbWV0aGluZyBpcyB3
-cm9uZyBhbmQgdGhlIG1lbQphY2Nlc3MgZmVhdHVyZSB3aWxsIG5vdCBmdW5jdGlvbiBzbyBwYXNz
-aW5nIHRoZSBlcnJvciB1cCB3aWxsIGhhdmUgYQpyZXN1bHQgb2YgY3Jhc2hpbmcgdGhlIGRvbWFp
-biBsYXRlciBhZnRlciBjaGVja2luZy7CoAoKSSB3aWxsIGFkZCBhIGRvbWFpbiBjcmFzaCBoZXJl
-IGFuZCBhIGNvbW1lbnQgcmVnYXJkaW5nIGl0LgoKVGhhbmtzLApBbGV4CgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gV2VkLCBKdWwgMjUsIDIwMTggYXQgMDk6NDI6MDdBTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBSZW1vdmUgc29tZSBtYWNyb3Mgbm90IHVzZWQgYW55d2hlcmUuCj4gCj4gU2lnbmVk
+LW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKQWNrZWQtYnk6IFJvZ2Vy
+IFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoKVGhhbmtzLCBSb2dlci4KCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
