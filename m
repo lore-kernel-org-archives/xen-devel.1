@@ -1,22 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] firmware/shim : filter output files during
- Xen tree setup
-Date: Wed, 25 Jul 2018 01:51:11 -0600
-Message-ID: <5B582BEF02000078001D781F@prv1-mh.provo.novell.com>
-References: <1532121305-5253-1-git-send-email-christopher.w.clark@gmail.com>
- <5B56F4D802000078001D7155@prv1-mh.provo.novell.com>
- <CACMJ4GYhRyZkESCw+OWrW5WbM+LAf6ZCyrbtTrK_12wdMPDyWw@mail.gmail.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] docs: use the make wildcard function
+ instead of find
+Date: Wed, 25 Jul 2018 08:55:21 +0100
+Message-ID: <20180725075520.ggc7jwpf34qnx6nj@citrix.com>
+References: <20180723160032.62597-1-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=x1ei=kj=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fiEZo-0000qt-5I
- for xen-devel@lists.xenproject.org; Wed, 25 Jul 2018 07:51:16 +0000
-In-Reply-To: <CACMJ4GYhRyZkESCw+OWrW5WbM+LAf6ZCyrbtTrK_12wdMPDyWw@mail.gmail.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=m8ai=kj=citrix.com=prvs=737e41906=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1fiEe3-00010j-JZ
+ for xen-devel@lists.xenproject.org; Wed, 25 Jul 2018 07:55:39 +0000
 Content-Disposition: inline
+In-Reply-To: <20180723160032.62597-1-roger.pau@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,47 +23,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Christopher Clark <christopher.w.clark@gmail.com>
-Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI1LjA3LjE4IGF0IDAyOjIxLCA8Y2hyaXN0b3BoZXIudy5jbGFya0BnbWFpbC5jb20+
-IHdyb3RlOgo+IE9uIFR1ZSwgSnVsIDI0LCAyMDE4IGF0IDI6NDMgQU0sIEphbiBCZXVsaWNoIDxK
-QmV1bGljaEBzdXNlLmNvbT4gd3JvdGU6Cj4gCj4+ID4+PiBPbiAyMC4wNy4xOCBhdCAyMzoxNSwg
-PGNocmlzdG9waGVyLncuY2xhcmtAZ21haWwuY29tPiB3cm90ZToKPj4gPiBFeGNsdWRlIG5hbWVk
-IG91dHB1dCBmaWxlcyBmcm9tIHRoZSBYZW4gdHJlZSBzZXR1cC4KPj4gPgo+PiA+IFRoZSBsaW5r
-ZmFybS5zdGFtcCBjb250ZW50IHdpbGwgZGlmZmVyIGJldHdlZW4gdG9wIGxldmVsICJtYWtlIgo+
-PiA+IGFuZCAibWFrZSBpbnN0YWxsIiBpbnZvY2F0aW9ucywgZHVlIHRvIHRoZSBpbnRyb2R1Y3Rp
-b24gb2YgdGhlc2UKPj4gPiBvdXRwdXQgZmlsZXMgdGhhdCBhcmUgcHJvZHVjZWQgZHVyaW5nIHRo
-ZSAibWFrZSIgYnVpbGQuCj4+ID4KPj4gPiBGaWx0ZXIgdGhlc2Ugb3V0IHRvIHByZXZlbnQgYW4g
-dW5uZWNlc3NhcnkgcmVidWlsZCBvZiB0aGUgc2hpbSBkdXJpbmcKPj4gPiAibWFrZSBpbnN0YWxs
-Ii4KPj4gPgo+PiA+IFNpZ25lZC1vZmYtYnk6IENocmlzdG9waGVyIENsYXJrIDxjaHJpc3RvcGhl
-ci5jbGFyazZAYmFlc3lzdGVtcy5jb20+Cj4+ID4gLS0tCj4+ID4gIHRvb2xzL2Zpcm13YXJlL3hl
-bi1kaXIvTWFrZWZpbGUgfCA2ICsrKysrLQo+PiA+ICAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRp
-b25zKCspLCAxIGRlbGV0aW9uKC0pCj4+ID4KPj4gPiBkaWZmIC0tZ2l0IGEvdG9vbHMvZmlybXdh
-cmUveGVuLWRpci9NYWtlZmlsZQo+PiA+IGIvdG9vbHMvZmlybXdhcmUveGVuLWRpci9NYWtlZmls
-ZQo+PiA+IGluZGV4IDg0NjQ4YzMuLmU0OTBkY2EgMTAwNjQ0Cj4+ID4gLS0tIGEvdG9vbHMvZmly
-bXdhcmUveGVuLWRpci9NYWtlZmlsZQo+PiA+ICsrKyBiL3Rvb2xzL2Zpcm13YXJlL3hlbi1kaXIv
-TWFrZWZpbGUKPj4gPiBAQCAtMTEsNiArMTEsOSBAQCBEPXhlbi1yb290Cj4+ID4gIExJTktfRElS
-Uz1jb25maWcgeGVuCj4+ID4gIExJTktfRklMRVM9Q29uZmlnLm1rCj4+ID4KPj4gPiArIyBGaWxl
-cyB0byBleGNsdWRlIGZyb20gdGhlIGxpbmsgZmFybQo+PiA+ICtFWENMVURFX0ZJTEVTPXhlbiB4
-ZW4uZ3ogeGVuLXN5bXMgeGVuLXN5bXMubWFwIGVmaS5sZHMgeGVuLmxkcyBta2VsZjMyCj4+IG1r
-cmVsb2MKPj4KPj4gV2hhdCBhYm91dCB4ZW4uZWZpIGFuZCBhbGwgb2YgaXRzIGF1eGlsaWFyeSBm
-aWxlcz8KPiAKPiAKPiBGYWlyIHBvaW50IC0gdGhpcyBsaXN0IHdhcyBmcm9tIGEgbm9uLUVGSSBi
-dWlsZCwgYW5kIEVGSSBkb2VzIGFkZCB0d28gbW9yZQo+IGZpbGVzIHRvIGl0OiB4ZW4uZWZpIGFu
-ZCB4ZW4uZWZpLm1hcAoKU28gd2hhdCBhYm91dCB0aGUgYXV4aWxpYXJ5IG9uZXMgY3JlYXRlZCB0
-aGVyZSwgbGlrZSAuLnhlbi1zeW1zLiogb3IKLi54ZW4uZWZpLioKCj4+IFdoYXQgYWJvdXQgb3Ro
-ZXIgZ2VuZXJhdGVkIGZpbGVzPwo+Pgo+IAo+IEkgZG9uJ3Qgc2VlIGFueSBvdGhlcnMgYmVpbmcg
-YWRkZWQgdG8gdGhlIHN0YW1wIGZpbGUgLS0gd2l0aCB0aGUgcG9zc2libGUKPiBleGNlcHRpb24g
-b2YgdGhlICJkaXNhYmxlZCIgZmlsZSBpbiB4ZW4vYXJjaC94ODYvZWZpIHdoaWNoIGNhbiBjYXB0
-dXJlCj4gYnVpbGQgZXJyb3JzLiBJIGRvbid0IHRoaW5rIHRoYXQgZmlsZSB3aWxsIGJlIHByZXNl
-bnQgaW4gcHJvZHVjdGlvbiBidWlsZHMuCj4gCj4gRGlkIHlvdSBoYXZlIGFueSBvdGhlcnMgaW4g
-bWluZD8gSSdsbCBwb3N0IGFuIHVwZGF0ZWQgcGF0Y2ggd2l0aCB0aGUKPiBFRkktdXBkYXRlZCBs
-aXN0IGluIHRoZSBtZWFudGltZS4KCkJlc2lkZXMgdGhlIGFib3ZlIG9uZXMsIEknZCBzdXNwZWN0
-IGdlbmVyYXRlZCBoZWFkZXJzIHRvIHNob3cgdXAKdGhlcmUsIHBvc3NpYmx5IG9ubHkgYWZ0ZXIg
-aGF2aW5nIHJ1biBhIHNlY29uZCAoaW5jcmVtZW50YWwpIGJ1aWxkIGluCnRoYXQgdHJlZS4gSSBu
-b3RpY2UgdGhhdCB0aGUgKi5baXNvYV0gZXhjbHVzaW9uIGFscmVhZHkgdGFrZXMgY2FyZSBvZgph
-dm9pZGluZyBlLmcuIGFzbS1vZmZzZXRzLnMuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gTW9uLCBKdWwgMjMsIDIwMTggYXQgMDY6MDA6MzJQTSArMDIwMCwgUm9nZXIgUGF1IE1vbm5l
+IHdyb3RlOgo+IFRoZSByZWdleHAgdXNlZCB3aXRoIGZpbmQgaW4gb3JkZXIgdG8gbGlzdCB0aGUg
+bWFuIHBhZ2VzIGRvZXNuJ3Qgd29yawo+IHdpdGggRnJlZUJTRCBmaW5kLCBzbyB1c2UgYSB3aWxk
+Y2FyZCBpbnN0ZWFkLiBObyBmdW5jdGlvbmFsIGNoYW5nZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBS
+b2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBXZWkgTGl1
+IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
