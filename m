@@ -1,21 +1,15 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v7 12/12] xen: clarify the security-support
- status of Kconfig options on ARM
-Date: Wed, 25 Jul 2018 17:40:49 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1807251738120.20701@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1807061537300.13502@sstabellini-ThinkPad-X260>
- <1530918843-14318-12-git-send-email-sstabellini@kernel.org>
- <4ee54631-55cd-da09-f7d5-6bf7e8de9198@arm.com>
- <alpine.DEB.2.10.1807241509020.20701@sstabellini-ThinkPad-X260>
- <8049223f-0f2c-45a7-ceb6-e067f4719bdd@arm.com>
- <187f86ee-e6b6-db7f-196d-28550aeebb54@citrix.com>
- <56067f51-6e39-6a06-399a-64918603532f@arm.com>
- <CAFLBxZakhFWmGMo65cq5f0E_b737dn6t=kFrzPQ59-HuQEXerg@mail.gmail.com>
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Subject: Re: [PATCH] xenconsole: add option to avoid escape
+ sequences in log
+Date: Wed, 25 Jul 2018 18:15:20 -0700
+Message-ID: <CACMJ4GYzBQHdd-V=R1fMv+F6WTggtpbhmhCxNTzt8oCBAw8-LA@mail.gmail.com>
+References: <20180721001412.26214-1-marmarek@invisiblethingslab.com>
+ <20180725084939.fyb7gco34gonbsp3@citrix.com>
+ <20180725085321.jaaro3xbqykyrzjs@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4387629828894050199=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAFLBxZakhFWmGMo65cq5f0E_b737dn6t=kFrzPQ59-HuQEXerg@mail.gmail.com>
+In-Reply-To: <20180725085321.jaaro3xbqykyrzjs@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,27 +18,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <George.Dunlap@eu.citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, =?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCAyNSBKdWwgMjAxOCwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiBPbiBXZWQsIEp1bCAy
-NSwgMjAxOCBhdCAxMDo1MCBBTSwgSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4g
-d3JvdGU6Cj4gPj4gQW55dGhpbmcgeW91IGNhbiBzZWxlY3QgaW4gbWVudWNvbmZpZyB3aXRob3V0
-IHBhc3NpbmcKPiA+PiBYRU5fQ09ORklHX0VYUEVSVD15IGlzIHNlY3VyaXR5IHN1cHBvcnRlZC4g
-IEFueXRoaW5nIGhpZGRlbiBiZWhpbmQKPiA+PiBYRU5fQ09ORklHX0VYUEVSVCBpcyBzZWN1cml0
-eSBzdXBwb3J0ZWQgaW4gaXRzIGRlZmF1bHQgY29uZmlndXJhdGlvbi4KPiA+Cj4gPgo+ID4gQ291
-bGQgeW91IGNsYXJpZnkgd2hhdCB5b3UgbWVhbiBieSBzZWN1cml0eSBzdXBwb3J0ZWQgaGVyZT8g
-Rm9yIGluc3RhbmNlLAo+ID4gImxpdmVwYXRjaCIgaXMgc2VsZWN0YWJsZSBvbiBBcm0gd2l0aCBY
-RU5fQ09ORklHX0VYUEVSVD15IGJ1dCBpdCBpcyBtYXJrZWQKPiA+IGFzICJleHBlcmltZW50YWwi
-IGluIFNVUFBPUlQuTUQuCj4gCj4gSSB0aGluayBBbmR5IG1lYW5zIHNvbWV0aGluZyBsaWtlLCAi
-c3VwcG9ydGVkIHdoZW4gbm8gYWRtaW4gYWN0aW9uIGlzCj4gdGFrZW4gdG8gYWN0aXZhdGUgaXQi
-LiAgTGl2ZXBhdGNoIGRvZXNuJ3QganVzdCBoYXBwZW4gYnkgaXRzZWxmOyB5b3UKPiBoYXZlIHRv
-IHRha2UgYW4gYWN0aW9uIHRvIHRyaWdnZXIgdGhlIGJlaGF2aW9yLCBzbyBpdCdzIG5vdCBzdXBw
-b3J0ZWQuCgpJIGFtIE9LIGZvbGxvd2luZyB0aGUgc2FtZSBtb2RlbCBvbiBBUk0gdG9vLiBEbyB3
-ZSBhbGwgYWdyZWU/CgpJZiBzbywgSSBjYW4ganVzdCByZW1vdmUgdGhpcyBwYXRjaCBmcm9tIHRo
-ZSBzZXJpZXMsIGJlY2F1c2UgdGhlCnByZXZpb3VzIHBhdGNoIGFscmVhZHkgY2xhcmlmaWVzIHRo
-ZSByb2xlIG9mIEVYUEVSVC4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+--===============4387629828894050199==
+Content-Type: multipart/alternative; boundary="0000000000009c7aac0571dcbae3"
+
+--0000000000009c7aac0571dcbae3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Jul 25, 2018 at 1:53 AM, Wei Liu <wei.liu2@citrix.com> wrote:
+
+> On Wed, Jul 25, 2018 at 09:49:39AM +0100, Wei Liu wrote:
+> > On Sat, Jul 21, 2018 at 02:14:12AM +0200, Marek Marczykowski-G=C3=B3rec=
+ki
+> wrote:
+> >
+> > > +
+> > > +   memcpy(dest, buf, len);
+> > > +   for (i =3D 0; i < len; i++) {
+> > > +           if (dest[i] =3D=3D '\033')
+> > > +                   dest[i] =3D '.';
+> > > +   }
+> >
+> > This could be made more efficient by using:
+> >
+> >         for (i =3D 0; i < len; i++) {
+> >              if (src[i] =3D=3D '\033')
+> >                  dst[i] =3D '.';
+> >              else
+> >                  dst[i] =3D src[i];
+>
+
+The above code doesn't write the value that was checked into the
+destination buffer; instead it does a second copy from the source buffer.
+That is a problematic code pattern that we shouldn't really encourage.
+
+
+>
+> Oh this can even be written in a shorter form:
+>
+>   dst[i] =3D src[i] !=3D '\033' ?: '.';
+>
+>
+That may be shorter but it is harder to understand, whereas Marek's
+original code is clear and well structured.
+
+One nit with the proposed patch is the introduction of the dynamically size
+array on the stack, with input to the function determining its size:
+
+>   static int write_all(int fd, const char* buf, size_t len)
+>   {
+> +       char buf_replaced[len];
+
+That might be just fine for userspace code, but would it be better replaced
+with a fixed size buffer and a loop instead?
+
+Christopher
+
+--0000000000009c7aac0571dcbae3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_extra"><br><div class=3D"gmail_quo=
+te">On Wed, Jul 25, 2018 at 1:53 AM, Wei Liu <span dir=3D"ltr">&lt;<a href=
+=3D"mailto:wei.liu2@citrix.com" target=3D"_blank">wei.liu2@citrix.com</a>&g=
+t;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div =
+class=3D"gmail-HOEnZb"><div class=3D"gmail-h5">On Wed, Jul 25, 2018 at 09:4=
+9:39AM +0100, Wei Liu wrote:<br>
+&gt; On Sat, Jul 21, 2018 at 02:14:12AM +0200, Marek Marczykowski-G=C3=B3re=
+cki wrote:<br>&gt; <br>&gt; &gt; +<br>
+&gt; &gt; +=C2=A0 =C2=A0memcpy(dest, buf, len);<br>
+&gt; &gt; +=C2=A0 =C2=A0for (i =3D 0; i &lt; len; i++) {<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (dest[i] =3D=3D &#39=
+;\033&#39;)<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0dest[i] =3D &#39;.&#39;;<br>
+&gt; &gt; +=C2=A0 =C2=A0}<br>
+&gt; <br>
+&gt; This could be made more efficient by using:<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0for (i =3D 0; i &lt; len; i++) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (src[i] =3D=3D &#39=
+;\033&#39;)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 dst[i] =
+=3D &#39;.&#39;;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 else<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 dst[i] =
+=3D src[i];<br></div></div></blockquote><div><br></div><div><div>The above =
+code doesn&#39;t write the value that was checked into the destination buff=
+er; instead it does a second copy from the source buffer. That is a problem=
+atic code pattern that we shouldn&#39;t really encourage.</div></div><div>=
+=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
+.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div class=3D=
+"gmail-HOEnZb"><div class=3D"gmail-h5">
+<br>
+</div></div>Oh this can even be written in a shorter form:<br>
+<br>
+=C2=A0 dst[i] =3D src[i] !=3D &#39;\033&#39; ?: &#39;.&#39;;<br>
+<div class=3D"gmail-HOEnZb"><div class=3D"gmail-h5"><br></div></div></block=
+quote><div><br></div><div><div>That may be shorter but it is harder to unde=
+rstand, whereas Marek&#39;s original code is clear and well structured.</di=
+v></div><div><br></div><div><div>One nit with the proposed patch is the int=
+roduction of the dynamically size array on the stack, with input to the fun=
+ction determining its size:</div><div><br></div><div>&gt;=C2=A0 =C2=A0stati=
+c int write_all(int fd, const char* buf, size_t len)</div><div>&gt;=C2=A0 =
+=C2=A0{</div><div>&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0char buf_replaced[len];<=
+/div><div><br></div><div>That might be just fine for userspace code, but wo=
+uld it be better replaced with a fixed size buffer and a loop instead?</div=
+></div><div><br></div><div>Christopher</div><div>=C2=A0</div></div></div></=
+div>
+
+--0000000000009c7aac0571dcbae3--
+
+
+--===============4387629828894050199==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4387629828894050199==--
