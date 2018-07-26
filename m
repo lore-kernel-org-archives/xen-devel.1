@@ -1,16 +1,24 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [ovmf baseline-only test] 75013: tolerable FAIL
-Date: Thu, 26 Jul 2018 19:28:13 +0100
-Message-ID: <osstest-75013-mainreport@xen.org>
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Subject: Re: [PATCH v2] firmware/shim : filter output files
+ during Xen tree setup
+Date: Thu, 26 Jul 2018 14:10:00 -0700
+Message-ID: <CACMJ4GbtbVGfRmqiT448vG6aXgWTZyFrwgT+mEXrQdH9tz05Jg@mail.gmail.com>
+References: <CACMJ4GYhRyZkESCw+OWrW5WbM+LAf6ZCyrbtTrK_12wdMPDyWw@mail.gmail.com>
+ <1532478539-11746-1-git-send-email-christopher.w.clark@gmail.com>
+ <5B57C29F0200000804C77BEC@prv1-mh.provo.novell.com>
+ <5B57C462020000E403D61C84@prv1-mh.provo.novell.com>
+ <5B58308B02000078001D784A@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============9170996560765798239=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=beub=kk=xenproject.org=prvs=738fd18b3=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1fil0A-0006v5-MF
- for xen-devel@lists.xenproject.org; Thu, 26 Jul 2018 18:28:38 +0000
+ <srs0=sxpe=kk=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
+ id 1finWP-0001ef-MZ
+ for xen-devel@lists.xenproject.org; Thu, 26 Jul 2018 21:10:05 +0000
+Received: by mail-lj1-x22d.google.com with SMTP id v9-v6so2678719ljk.4
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Jul 2018 14:10:03 -0700 (PDT)
+In-Reply-To: <5B58308B02000078001D784A@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,99 +27,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
-NTAxMyBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
-dC9sb2dzLzc1MDEzLwoKRmFpbHVyZXMgOi0vIGJ1dCBubyByZWdyZXNzaW9ucy4KClRlc3RzIHdo
-aWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAxMCBkZWJpYW4taHZtLWluc3RhbGwgICAgICBmYWlsIGxp
-a2UgNzUwMTIKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAxMCBkZWJpYW4t
-aHZtLWluc3RhbGwgICAgIGZhaWwgbGlrZSA3NTAxMgoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVz
-dGluZzoKIG92bWYgICAgICAgICAgICAgICAgIDRhNzIzZWQyNTgzNjc0NzFlYWM4YjRhZTMyNTU4
-ZjA5ZWY2NTY3MmUKYmFzZWxpbmUgdmVyc2lvbjoKIG92bWYgICAgICAgICAgICAgICAgIGNmNGU3
-OWU0NjZmOTUxZTcyYzJjYmQ0MDAwMmM3MWZkYWRkYWQzODkKCkxhc3QgdGVzdCBvZiBiYXNpcyAg
-ICA3NTAxMiAgMjAxOC0wNy0yNiAxMjo1MDowNSBaICAgIDAgZGF5cwpUZXN0aW5nIHNhbWUgc2lu
-Y2UgICAgNzUwMTMgIDIwMTgtMDctMjYgMTc6MjA6MDkgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0
-cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBKaWV3ZW4g
-WWFvIDxqaWV3ZW4ueWFvQGludGVsLmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
-ODYteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4
-Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0
-LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAg
-ICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnhzLmNpdHJpdGUubmV0CmxvZ3M6
-IC9ob21lL29zc3Rlc3QvbG9ncwppbWFnZXM6IC9ob21lL29zc3Rlc3QvaW1hZ2VzCgpMb2dzLCBj
-b25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL29zc3Rlc3QueGVu
-c291cmNlLmNvbS9vc3N0ZXN0L2xvZ3MKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBh
-dAogICAgaHR0cDovL3hlbmJpdHMueGVuc291cmNlLmNvbS9naXR3ZWI/cD1vc3N0ZXN0LmdpdDth
-PXN1bW1hcnkKCgpQdXNoIG5vdCBhcHBsaWNhYmxlLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCA0YTcyM2VkMjU4MzY3
-NDcxZWFjOGI0YWUzMjU1OGYwOWVmNjU2NzJlCkF1dGhvcjogSmlld2VuIFlhbyA8amlld2VuLnlh
-b0BpbnRlbC5jb20+CkRhdGU6ICAgRnJpIE5vdiAyNCAwOToyMTo1NCAyMDE3ICswODAwCgogICAg
-TWRlTW9kdWxlUGtnL0R4ZUNvcmU6IE5vdCB1cGRhdGUgUnRDb2RlIGluIE1lbUF0dHJUYWJsZSBh
-ZnRlciBFbmRPZkR4ZQogICAgCiAgICBXZSB3YW50IHRvIHByb3ZpZGUgcHJlY2lzZSBpbmZvIGlu
-IE1lbUF0dHJpYlRhYmxlCiAgICB0byBib3RoIE9TIGFuZCBTTU0sIGFuZCBTTU0gb25seSBnZXRz
-IHRoZSBpbmZvIGF0IEVuZE9mRHhlLgogICAgU28gd2UgZG8gbm90IHVwZGF0ZSBSdENvZGUgZW50
-cnkgaW4gRW5kT2ZEeGUuCiAgICAKICAgIFRoZSBpbXBhY3QgaXMgdGhhdCBpZiAzcmQgcGFydCBP
-UFJPTSBpcyBydW50aW1lLCBpdCBjYW5ub3QgYmUgZXhlY3V0ZWQKICAgIGF0IFVFRkkgcnVudGlt
-ZSBwaGFzZS4KICAgIEN1cnJlbnRseSwgd2UgZG8gbm90IHNlZSBjb21wYXRpYmlsaXR5IGlzc3Vl
-LCBiZWNhdXNlIHRoZSBvbmx5IHJ1bnRpbWUKICAgIE9QUk9NIHdlIGZvdW5kIGJlZm9yZSBpbiBV
-TkRJLCBhbmQgVUVGSSBPUyB3aWxsIG5vdCB1c2UgVU5ESSBpbnRlcmZhY2UKICAgIGluIE9TLgog
-ICAgCiAgICBDb250cmlidXRlZC11bmRlcjogVGlhbm9Db3JlIENvbnRyaWJ1dGlvbiBBZ3JlZW1l
-bnQgMS4xCiAgICBTaWduZWQtb2ZmLWJ5OiBKaWV3ZW4gWWFvIDxqaWV3ZW4ueWFvQGludGVsLmNv
-bT4KICAgIFJldmlld2VkLWJ5OiBTdGFyIFplbmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+Cgpjb21t
-aXQgOGEyZTFhOWQ1NGVlNzMxNmM0ODExMWIxZjIxNmE1Njg3OTFiMmRhMgpBdXRob3I6IEppZXdl
-biBZYW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgpEYXRlOiAgIFdlZCBOb3YgMjIgMjM6MTE6NTQg
-MjAxNyArMDgwMAoKICAgIFVlZmlDcHVQa2cvUGlTbW1DcHU6IENoZWNrIEVGSV9SVU5USU1FX1JP
-IGluIFVFRkkgbWVtIGF0dHJpYiB0YWJsZS4KICAgIAogICAgSXQgdHJlYXRzIHRoZSBVRUZJIHJ1
-bnRpbWUgcGFnZSB3aXRoIEVGSV9NRU1PUllfUk8gYXR0cmlidXRlIGFzCiAgICBpbnZhbGlkIFNN
-TSBjb21tdW5pY2F0aW9uIGJ1ZmZlci4KICAgIAogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5v
-Q29yZSBDb250cmlidXRpb24gQWdyZWVtZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTogSmlld2Vu
-IFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+CiAgICBSZXZpZXdlZC1ieTogU3RhciBaZW5nIDxz
-dGFyLnplbmdAaW50ZWwuY29tPgoKY29tbWl0IDY4MDk2MjcyNzY2NDBhMGM1N2IzZjNjN2NmMGM1
-ZWI0NjlmMDE5ZTYKQXV0aG9yOiBKaWV3ZW4gWWFvIDxqaWV3ZW4ueWFvQGludGVsLmNvbT4KRGF0
-ZTogICBXZWQgTm92IDIyIDIzOjExOjIyIDIwMTcgKzA4MDAKCiAgICBNZGVQa2cvU21tTWVtTGli
-OiBDaGVjayBFRklfTUVNT1JZX1JPIGluIFVFRkkgbWVtIGF0dHJpYiB0YWJsZS4KICAgIAogICAg
-SXQgdHJlYXRzIHRoZSBVRUZJIHJ1bnRpbWUgcGFnZSB3aXRoIEVGSV9NRU1PUllfUk8gYXR0cmli
-dXRlIGFzCiAgICBpbnZhbGlkIFNNTSBjb21tdW5pY2F0aW9uIGJ1ZmZlci4KICAgIAogICAgQ29u
-dHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmlidXRpb24gQWdyZWVtZW50IDEuMQogICAg
-U2lnbmVkLW9mZi1ieTogSmlld2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+CiAgICBSZXZp
-ZXdlZC1ieTogU3RhciBaZW5nIDxzdGFyLnplbmdAaW50ZWwuY29tPgoKY29tbWl0IGIyMzA1ZGQy
-NzdiYTY3ODAyN2VkNjdmOWEzNGM0MWM2YTJlYjUxOWMKQXV0aG9yOiBKaWV3ZW4gWWFvIDxqaWV3
-ZW4ueWFvQGludGVsLmNvbT4KRGF0ZTogICBXZWQgTm92IDIyIDIyOjA1OjA3IDIwMTcgKzA4MDAK
-CiAgICBNZGVNb2R1bGVQa2cvRHhlQ29yZTogSW5zdGFsbCBVRUZJIG1lbSBhdHRyaWIgdGFibGUg
-YXQgRW5kT2ZEeGUuCiAgICAKICAgIFNvIHRoYXQgdGhlIFNNTSBjYW4gY29uc3VtZSBpdCB0byBz
-ZXQgcGFnZSBwcm90ZWN0aW9uIGZvcgogICAgdGhlIFVFRkkgcnVudGltZSBwYWdlIHdpdGggRUZJ
-X01FTU9SWV9STyBhdHRyaWJ1dGUuCiAgICAKICAgIENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFub0Nv
-cmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAxLjEKICAgIFNpZ25lZC1vZmYtYnk6IEppZXdlbiBZ
-YW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgogICAgUmV2aWV3ZWQtYnk6IFN0YXIgWmVuZyA8c3Rh
-ci56ZW5nQGludGVsLmNvbT4KCmNvbW1pdCBhYzY2MTNkYjQ2OTdiZTEzYjQwMjllN2I0M2Q2NWU2
-ODZmNTkzOGNiCkF1dGhvcjogSmlld2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+CkRhdGU6
-ICAgVGh1IE5vdiAyIDE5OjAwOjAyIDIwMTcgKzA4MDAKCiAgICBVZWZpQ3B1UGtnL1BpU21tQ3B1
-OiBDaGVjayBmb3IgdW50ZXN0ZWQgbWVtb3J5IGluIEdDRAogICAgCiAgICBJdCB0cmVhdHMgR0NE
-IHVudGVzdGVkIG1lbW9yeSBhcyBpbnZhbGlkIFNNTQogICAgY29tbXVuaWNhdGlvbiBidWZmZXIu
-CiAgICAKICAgIENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVl
-bWVudCAxLjEKICAgIFNpZ25lZC1vZmYtYnk6IEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwu
-Y29tPgogICAgUmV2aWV3ZWQtYnk6IFN0YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KCmNv
-bW1pdCAyMzNmZmE5MGNjZDg1MmE4YzZhNDc4ZWIwNDI2NzMxZDY0NTk4MzE2CkF1dGhvcjogSmll
-d2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+CkRhdGU6ICAgVGh1IE5vdiAyIDE4OjIxOjEz
-IDIwMTcgKzA4MDAKCiAgICBNZGVQa2cvU21tTWVtTGliOiBDaGVjayBmb3IgdW50ZXN0ZWQgbWVt
-b3J5IGluIEdDRAogICAgCiAgICBJdCB0cmVhdHMgR0NEIHVudGVzdGVkIG1lbW9yeSBhcyBpbnZh
-bGlkIFNNTQogICAgY29tbXVuaWNhdGlvbiBidWZmZXIuCiAgICAKICAgIENvbnRyaWJ1dGVkLXVu
-ZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAxLjEKICAgIFNpZ25lZC1vZmYt
-Ynk6IEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgogICAgUmV2aWV3ZWQtYnk6IFN0
-YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+--===============9170996560765798239==
+Content-Type: multipart/alternative; boundary="0000000000001e51a30571ed6bf2"
+
+--0000000000001e51a30571ed6bf2
+Content-Type: text/plain; charset="UTF-8"
+
+On Wed, Jul 25, 2018 at 1:10 AM, Jan Beulich <JBeulich@suse.com> wrote:
+
+> >>> On 25.07.18 at 02:28, <christopher.w.clark@gmail.com> wrote:
+> > --- a/tools/firmware/xen-dir/Makefile
+> > +++ b/tools/firmware/xen-dir/Makefile
+> > @@ -11,6 +11,10 @@ D=xen-root
+> >  LINK_DIRS=config xen
+> >  LINK_FILES=Config.mk
+> >
+> > +# Files to exclude from the link farm
+> > +EXCLUDE_FILES=xen xen.gz xen-syms xen-syms.map xen.efi xen.efi.map \
+> > +              efi.lds xen.lds mkelf32 mkreloc
+>
+>
+> So what about the auxiliary ones created there, like ..xen-syms.* or
+> ..xen.efi.*
+
+Thanks for this feedback. After rebuilding binutils to include an
+EFI-capable linker, and then all tools dependent on that, and then building
+the Xen tree, these files have become evident.
+
+I added handling for these to the exclusion list, and tested with each of
+Xen 4.10.1(*), 4.11.0 and staging: Each build passes "make", "make install"
+in fresh trees without rebuilding the shim during the install step.
+
+The 4.10.1 test was with this additional commit applied:
+  commit 8717e7417cebeae162fd61ea4cbdcdd422748f08
+  Author: Juergen Gross <jgross@suse.com>
+    shim: don't let build modify shim.config
+
+I'll post a v3 patch with the updated exclusion list as per above.
+
+
+To amend my earlier reply to v1, here's a diff between the initial
+> linkfarm.stamp
+> and one resulting after a first incremental re-build:
+
+
+> --- .../tools/firmware/xen-dir/linkfarm.stamp
+> +++ .../tools/firmware/xen-dir/linkfarm.stamp
+>
+>
+
+> I think all additions here should be considered as exclusion candidates.
+>
+
+The unfortunate thing about that list is that it is quite a bit longer and
+will be more vulnerable to change. It includes header files which makes me
+wary of it. You could shorten it with some wildcard matching, and you'll be
+approaching something similar to the gitignore file content, as Roger had
+pointed towards, but my preference is to leave it alone.
+
+None of the options here that are short of a rewrite are great, but the
+short exclusion list improves the behaviour for non-incremental builds,
+which is a benefit for downstream and production builds where incremental
+builds are not a requirement.
+
+Christopher
+
+--0000000000001e51a30571ed6bf2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_extra"><br><div class=3D"gmail_quote">=
+On Wed, Jul 25, 2018 at 1:10 AM, Jan Beulich <span dir=3D"ltr">&lt;<a href=
+=3D"mailto:JBeulich@suse.com" target=3D"_blank">JBeulich@suse.com</a>&gt;</=
+span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><span cla=
+ss=3D"gmail-">&gt;&gt;&gt; On 25.07.18 at 02:28, &lt;<a href=3D"mailto:chri=
+stopher.w.clark@gmail.com">christopher.w.clark@gmail.com</a><wbr>&gt; wrote=
+:<br>
+&gt; --- a/tools/firmware/xen-dir/<wbr>Makefile<br>
+&gt; +++ b/tools/firmware/xen-dir/<wbr>Makefile<br>
+&gt; @@ -11,6 +11,10 @@ D=3Dxen-root<br>
+&gt;=C2=A0 LINK_DIRS=3Dconfig xen<br>
+&gt;=C2=A0 LINK_FILES=3DConfig.mk<br>
+&gt;=C2=A0 <br>
+&gt; +# Files to exclude from the link farm<br>
+&gt; +EXCLUDE_FILES=3Dxen xen.gz xen-syms xen-syms.map xen.efi xen.efi.map =
+\<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 efi.lds xen.lds mkel=
+f32 mkreloc<br>
+<br></span></blockquote><div><br></div><div><span style=3D"font-size:small;=
+background-color:rgb(255,255,255);text-decoration-style:initial;text-decora=
+tion-color:initial;float:none;display:inline">&gt; So what about the auxili=
+ary ones created there, like ..xen-syms.* or</span><br style=3D"font-size:s=
+mall;background-color:rgb(255,255,255);text-decoration-style:initial;text-d=
+ecoration-color:initial"><span style=3D"font-size:small;background-color:rg=
+b(255,255,255);text-decoration-style:initial;text-decoration-color:initial;=
+float:none;display:inline">&gt; ..xen.efi.*</span><br></div><div><br></div>=
+<div>Thanks for this feedback. After rebuilding binutils to include an EFI-=
+capable linker, and then all tools dependent on that, and then building the=
+ Xen tree, these files have become evident.</div><div><br></div><div>I adde=
+d handling for these to the exclusion list, and tested with each of Xen 4.1=
+0.1(*), 4.11.0 and staging: Each build passes &quot;make&quot;, &quot;make =
+install&quot; in fresh trees without rebuilding the shim during the install=
+ step.</div><div><br></div><div>The 4.10.1 test was with this additional co=
+mmit applied:<br><div>=C2=A0 commit 8717e7417cebeae162fd61ea4cbdcdd422748f0=
+8</div><div>=C2=A0 Author: Juergen Gross &lt;<a href=3D"mailto:jgross@suse.=
+com">jgross@suse.com</a>&gt;</div></div><div><div>=C2=A0 =C2=A0 shim: don&#=
+39;t let build modify shim.config</div></div><div><br></div><div>I&#39;ll p=
+ost a v3 patch with the updated exclusion list as per above.</div><div><br>=
+</div><div><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
+0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><spa=
+n class=3D"gmail-">
+</span>To amend my earlier reply to v1, here&#39;s a diff between the initi=
+al linkfarm.stamp<br>
+and one resulting after a first incremental re-build:=C2=A0</blockquote><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+--- .../tools/firmware/xen-dir/<wbr>linkfarm.stamp<br>
++++ .../tools/firmware/xen-dir/<wbr>linkfarm.stamp<br><br></blockquote><div=
+>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
+0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+I think all additions here should be considered as exclusion candidates.<br=
+></blockquote><div><br></div><div>The unfortunate thing about that list is =
+that it is quite a bit longer and will be more vulnerable to change. It inc=
+ludes header files which makes me wary of it. You could shorten it with som=
+e wildcard matching, and you&#39;ll be approaching something similar to the=
+ gitignore file content, as Roger had pointed towards, but my preference is=
+ to leave it alone.</div><div><br></div><div>None of the options here that =
+are short of a rewrite are great, but the short exclusion list improves the=
+ behaviour for non-incremental builds, which is a benefit for downstream an=
+d production builds where incremental builds are not a requirement.</div><d=
+iv><br></div><div>Christopher</div><div><br></div><div><br></div><div><br><=
+/div><div><br></div></div></div></div>
+
+--0000000000001e51a30571ed6bf2--
+
+
+--===============9170996560765798239==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9170996560765798239==--
