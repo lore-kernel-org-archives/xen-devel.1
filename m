@@ -1,15 +1,16 @@
-From: Christopher Clark <christopher.w.clark@gmail.com>
-Subject: Re: [PATCH] xenconsole: add option to avoid escape
- sequences in log
-Date: Wed, 25 Jul 2018 18:15:20 -0700
-Message-ID: <CACMJ4GYzBQHdd-V=R1fMv+F6WTggtpbhmhCxNTzt8oCBAw8-LA@mail.gmail.com>
-References: <20180721001412.26214-1-marmarek@invisiblethingslab.com>
- <20180725084939.fyb7gco34gonbsp3@citrix.com>
- <20180725085321.jaaro3xbqykyrzjs@citrix.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [ovmf baseline-only test] 75008: tolerable FAIL
+Date: Thu, 26 Jul 2018 02:53:19 +0100
+Message-ID: <osstest-75008-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4387629828894050199=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180725085321.jaaro3xbqykyrzjs@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=beub=kk=xenproject.org=prvs=738fd18b3=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1fiVT2-0005RJ-KA
+ for xen-devel@lists.xenproject.org; Thu, 26 Jul 2018 01:53:24 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,131 +19,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, =?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============4387629828894050199==
-Content-Type: multipart/alternative; boundary="0000000000009c7aac0571dcbae3"
-
---0000000000009c7aac0571dcbae3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jul 25, 2018 at 1:53 AM, Wei Liu <wei.liu2@citrix.com> wrote:
-
-> On Wed, Jul 25, 2018 at 09:49:39AM +0100, Wei Liu wrote:
-> > On Sat, Jul 21, 2018 at 02:14:12AM +0200, Marek Marczykowski-G=C3=B3rec=
-ki
-> wrote:
-> >
-> > > +
-> > > +   memcpy(dest, buf, len);
-> > > +   for (i =3D 0; i < len; i++) {
-> > > +           if (dest[i] =3D=3D '\033')
-> > > +                   dest[i] =3D '.';
-> > > +   }
-> >
-> > This could be made more efficient by using:
-> >
-> >         for (i =3D 0; i < len; i++) {
-> >              if (src[i] =3D=3D '\033')
-> >                  dst[i] =3D '.';
-> >              else
-> >                  dst[i] =3D src[i];
->
-
-The above code doesn't write the value that was checked into the
-destination buffer; instead it does a second copy from the source buffer.
-That is a problematic code pattern that we shouldn't really encourage.
-
-
->
-> Oh this can even be written in a shorter form:
->
->   dst[i] =3D src[i] !=3D '\033' ?: '.';
->
->
-That may be shorter but it is harder to understand, whereas Marek's
-original code is clear and well structured.
-
-One nit with the proposed patch is the introduction of the dynamically size
-array on the stack, with input to the function determining its size:
-
->   static int write_all(int fd, const char* buf, size_t len)
->   {
-> +       char buf_replaced[len];
-
-That might be just fine for userspace code, but would it be better replaced
-with a fixed size buffer and a loop instead?
-
-Christopher
-
---0000000000009c7aac0571dcbae3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br><div class=3D"gmail_extra"><br><div class=3D"gmail_quo=
-te">On Wed, Jul 25, 2018 at 1:53 AM, Wei Liu <span dir=3D"ltr">&lt;<a href=
-=3D"mailto:wei.liu2@citrix.com" target=3D"_blank">wei.liu2@citrix.com</a>&g=
-t;</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
-px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div =
-class=3D"gmail-HOEnZb"><div class=3D"gmail-h5">On Wed, Jul 25, 2018 at 09:4=
-9:39AM +0100, Wei Liu wrote:<br>
-&gt; On Sat, Jul 21, 2018 at 02:14:12AM +0200, Marek Marczykowski-G=C3=B3re=
-cki wrote:<br>&gt; <br>&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0memcpy(dest, buf, len);<br>
-&gt; &gt; +=C2=A0 =C2=A0for (i =3D 0; i &lt; len; i++) {<br>
-&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (dest[i] =3D=3D &#39=
-;\033&#39;)<br>
-&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0dest[i] =3D &#39;.&#39;;<br>
-&gt; &gt; +=C2=A0 =C2=A0}<br>
-&gt; <br>
-&gt; This could be made more efficient by using:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0for (i =3D 0; i &lt; len; i++) {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (src[i] =3D=3D &#39=
-;\033&#39;)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 dst[i] =
-=3D &#39;.&#39;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 else<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 dst[i] =
-=3D src[i];<br></div></div></blockquote><div><br></div><div><div>The above =
-code doesn&#39;t write the value that was checked into the destination buff=
-er; instead it does a second copy from the source buffer. That is a problem=
-atic code pattern that we shouldn&#39;t really encourage.</div></div><div>=
-=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div class=3D=
-"gmail-HOEnZb"><div class=3D"gmail-h5">
-<br>
-</div></div>Oh this can even be written in a shorter form:<br>
-<br>
-=C2=A0 dst[i] =3D src[i] !=3D &#39;\033&#39; ?: &#39;.&#39;;<br>
-<div class=3D"gmail-HOEnZb"><div class=3D"gmail-h5"><br></div></div></block=
-quote><div><br></div><div><div>That may be shorter but it is harder to unde=
-rstand, whereas Marek&#39;s original code is clear and well structured.</di=
-v></div><div><br></div><div><div>One nit with the proposed patch is the int=
-roduction of the dynamically size array on the stack, with input to the fun=
-ction determining its size:</div><div><br></div><div>&gt;=C2=A0 =C2=A0stati=
-c int write_all(int fd, const char* buf, size_t len)</div><div>&gt;=C2=A0 =
-=C2=A0{</div><div>&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0char buf_replaced[len];<=
-/div><div><br></div><div>That might be just fine for userspace code, but wo=
-uld it be better replaced with a fixed size buffer and a loop instead?</div=
-></div><div><br></div><div>Christopher</div><div>=C2=A0</div></div></div></=
-div>
-
---0000000000009c7aac0571dcbae3--
-
-
---===============4387629828894050199==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4387629828894050199==--
+VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
+NTAwOCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
+dC9sb2dzLzc1MDA4LwoKRmFpbHVyZXMgOi0vIGJ1dCBubyByZWdyZXNzaW9ucy4KClRlc3RzIHdo
+aWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWFt
+ZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQgMTAgZGViaWFuLWh2bS1pbnN0YWxsICAgICBmYWlsIGxp
+a2UgNzUwMDYKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0IDEwIGRlYmlhbi1o
+dm0taW5zdGFsbCAgICAgIGZhaWwgbGlrZSA3NTAwNgoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVz
+dGluZzoKIG92bWYgICAgICAgICAgICAgICAgIDMwNGEyN2UwOGY5MTM5NTU1Njk0ZmJkMjdkMmI3
+OGM0MzBkZjliOGYKYmFzZWxpbmUgdmVyc2lvbjoKIG92bWYgICAgICAgICAgICAgICAgIGVmNTI5
+ZTZhYjdjMzEyOTBhMzMwNDViYjFmMTgzNzQ0N2NjMGViNTYKCkxhc3QgdGVzdCBvZiBiYXNpcyAg
+ICA3NTAwNiAgMjAxOC0wNy0yNSAwOToxOTo0NyBaICAgIDAgZGF5cwpUZXN0aW5nIHNhbWUgc2lu
+Y2UgICAgNzUwMDggIDIwMTgtMDctMjYgMDA6MjA6MDggWiAgICAwIGRheXMgICAgMSBhdHRlbXB0
+cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbGV4ZWkg
+RmVkb3JvdiA8QWxleGVpLkZlZG9yb3ZAYXJtLmNvbT4KICBBbGV4ZWlGZWRvcm92IDxBbGV4ZWku
+RmVkb3JvdkBhcm0uY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
+ZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LWxpYnZpcnQg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
+LWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
+YXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92bWYtYW1k
+NjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
+ZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAoKCi0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpz
+Zy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QueHMuY2l0cml0ZS5uZXQKbG9nczogL2hvbWUvb3Nz
+dGVzdC9sb2dzCmltYWdlczogL2hvbWUvb3NzdGVzdC9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxl
+cywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vb3NzdGVzdC54ZW5zb3VyY2UuY29t
+L29zc3Rlc3QvbG9ncwoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRw
+Oi8veGVuYml0cy54ZW5zb3VyY2UuY29tL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoK
+ClB1c2ggbm90IGFwcGxpY2FibGUuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KY29tbWl0IDMwNGEyN2UwOGY5MTM5NTU1Njk0ZmJk
+MjdkMmI3OGM0MzBkZjliOGYKQXV0aG9yOiBBbGV4ZWlGZWRvcm92IDxBbGV4ZWkuRmVkb3JvdkBh
+cm0uY29tPgpEYXRlOiAgIFR1ZSBKdWwgMTcgMDM6NTk6MjUgMjAxOCAtMDcwMAoKICAgIFNoZWxs
+UGtnOiBhZGQgVWVmaVNoZWxsQWNwaVZpZXdDb21tYW5kTGliLmluZiB0byBTaGVsbFBrZy5kc2MK
+ICAgIAogICAgVGhpcyBwYXRjaCBhZGRzIFVlZmlTaGVsbEFjcGlWaWV3Q29tbWFuZExpYiBJTkYg
+ZmlsZSBpbnRvCiAgICBbQ29tcG9uZW50c10gc2VjdGlvbiBvZiBTaGVsbFBrZy5kc2Mgc28gdGhp
+cyBsaWJyYXJ5IGNhbiBiZSBidWlsdAogICAgaW4gU2hlbGxQa2cgbGV2ZWwgYnVpbGQuCiAgICAK
+ICAgIENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAx
+LjEKICAgIFNpZ25lZC1vZmYtYnk6IEFsZXhlaSBGZWRvcm92IDxBbGV4ZWkuRmVkb3JvdkBhcm0u
+Y29tPgogICAgUmV2aWV3ZWQtYnk6IFJ1aXl1IE5pIDxydWl5dS5uaUBpbnRlbC5jb20+CiAgICBS
+ZXZpZXdlZC1ieTogSmFiZW4gQ2Fyc2V5IDxqYWJlbi5jYXJzZXlAaW50ZWwuY29tPgoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
