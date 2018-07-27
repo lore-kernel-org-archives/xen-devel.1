@@ -1,18 +1,21 @@
-From: Andrii Anisov <andrii_anisov@epam.com>
-Subject: Re: [PATCH v7 08/12] arm: add ALL, QEMU,
- Rcar3 and MPSoC configs
-Date: Fri, 27 Jul 2018 13:30:34 +0300
-Message-ID: <5b253972-a880-0ded-dc51-db2f9f8abbdc@epam.com>
-References: <alpine.DEB.2.10.1807061537300.13502@sstabellini-ThinkPad-X260>
- <1530918843-14318-8-git-send-email-sstabellini@kernel.org>
- <9070dccb-e699-7189-d6b3-38cb5f0773f3@epam.com>
- <alpine.DEB.2.10.1807261543150.20701@sstabellini-ThinkPad-X260>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: Xen 4.12 release planning
+Date: Fri, 27 Jul 2018 11:32:09 +0100
+Message-ID: <1509DACB-8574-4255-BE57-4C8C47C46C3F@xenproject.org>
+References: <6a766b09-d5fe-a9ce-cacf-546c998ab803@suse.com>
+ <alpine.DEB.2.10.1807261510301.20701@sstabellini-ThinkPad-X260>
+ <f78a2c5a-6f78-d11d-0f13-6240d47c6642@suse.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
+Content-Type: multipart/mixed; boundary="===============1168401095146227040=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1807261543150.20701@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=tp6w=kl=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1fj02g-0005KN-EN
+ for xen-devel@lists.xenproject.org; Fri, 27 Jul 2018 10:32:14 +0000
+Received: by mail-wr1-x431.google.com with SMTP id t13-v6so4547296wrv.12
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Jul 2018 03:32:12 -0700 (PDT)
+In-Reply-To: <f78a2c5a-6f78-d11d-0f13-6240d47c6642@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,100 +24,313 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: artem_mygaiev@epam.com, andrew.cooper3@citrix.com, George.Dunlap@citrix.com, xen-devel@lists.xen.org, julien.grall@arm.com, dfaggioli@suse.com, volodymyr_babchuk@epam.com
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8gU3RlZmFubywKCgpPbiAyNy4wNy4xOCAwMTo0NiwgU3RlZmFubyBTdGFiZWxsaW5pIHdy
-b3RlOgo+IE9uIFR1ZSwgMjQgSnVsIDIwMTgsIEFuZHJpaSBBbmlzb3Ygd3JvdGU6Cj4+IE9uIDA3
-LjA3LjE4IDAyOjEzLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4+PiBBZGQgYSAiUGxhdGZv
-cm0gU3VwcG9ydCIgY2hvaWNlIHdpdGggZm91ciBrY29uZmlnIG9wdGlvbnM6IFFFTVUsIFJDQVIz
-LAo+Pj4gTVBTT0MgYW5kIEFMTC4gVGhleSBlbmFibGUgdGhlIHJlcXVpcmVkIG9wdGlvbnMgZm9y
-IHRoZWlyIGhhcmR3YXJlCj4+PiBwbGF0Zm9ybS4gQUxMIGVuYWJsZXMgYWxsIGF2YWlsYWJsZSBw
-bGF0Zm9ybXMgYW5kIGl0J3MgdGhlIGRlZmF1bHQuIEl0Cj4+PiBkb2Vzbid0IGF1dG9tYXRpY2Fs
-bHkgc2VsZWN0IGFueSBvZiB0aGUgcmVsYXRlZCBkcml2ZXJzLCBvdGhlcndpc2UgdGhleQo+Pj4g
-Y2Fubm90IGJlIGRpc2FibGVkLiBBTEwgaXMgaW1wbGVtZW50ZWQgYnkgc2VsZWN0aW5nIGhpZGRl
-biBvcHRpb25zCj4+PiBjb3JyZXNwb25kaW5nIHRvIFFFTVUsIE1QU09DIGFuZCBSQ0FSMy4KPj4+
-Cj4+PiBJbiB0aGUgY2FzZSBvZiB0aGUgTVBTT0MgdGhhdCBoYXMgYSBwbGF0Zm9ybSBmaWxlIHVu
-ZGVyCj4+PiBhcmNoL2FybS9wbGF0Zm9ybXMvLCBidWlsZCB0aGUgZmlsZSBpZiBNUFNPQy4KPj4+
-Cj4+PiBTaWduZWQtb2ZmLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5l
-bC5vcmc+Cj4+PiBDQzogYXJ0ZW1fbXlnYWlldkBlcGFtLmNvbQo+Pj4gQ0M6IHZvbG9keW15cl9i
-YWJjaHVrQGVwYW0uY29tCj4+Pgo+Pj4gLS0tCj4+PiBDaGFuZ2VzIGluIHY1Ogo+Pj4gLSB0dXJu
-IHBsYXRmb3JtIHN1cHBvcnQgaW50byBhIGNob2ljZQo+Pj4gLSBhZGQgQUxMCj4+Pgo+Pj4gQ2hh
-bmdlcyBpbiB2NDoKPj4+IC0gZml4IEdJQ3YzL0dJQ1YzCj4+PiAtIGRlZmF1bHQgeSB0byBhbGwg
-b3B0aW9ucwo+Pj4gLSBidWlsZCB4aWxpbngtenlucW1wIGlmIE1QU09DCj4+PiAtLS0KPj4+ICAg
-IHhlbi9hcmNoL2FybS9LY29uZmlnICAgICAgICAgICAgfCAgMiArKwo+Pj4gICAgeGVuL2FyY2gv
-YXJtL3BsYXRmb3Jtcy9LY29uZmlnICB8IDU1Cj4+PiArKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKwo+Pj4gICAgeGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9NYWtlZmlsZSB8
-ICAyICstCj4+PiAgICAzIGZpbGVzIGNoYW5nZWQsIDU4IGluc2VydGlvbnMoKyksIDEgZGVsZXRp
-b24oLSkKPj4+ICAgIGNyZWF0ZSBtb2RlIDEwMDY0NCB4ZW4vYXJjaC9hcm0vcGxhdGZvcm1zL0tj
-b25maWcKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL0tjb25maWcgYi94ZW4vYXJj
-aC9hcm0vS2NvbmZpZwo+Pj4gaW5kZXggMmI4NzExMS4uNzVjYWNmYiAxMDA2NDQKPj4+IC0tLSBh
-L3hlbi9hcmNoL2FybS9LY29uZmlnCj4+PiArKysgYi94ZW4vYXJjaC9hcm0vS2NvbmZpZwo+Pj4g
-QEAgLTIxMyw2ICsyMTMsOCBAQCBjb25maWcgQVJNNjRfSEFSREVOX0JSQU5DSF9QUkVESUNUT1IK
-Pj4+ICAgIGNvbmZpZyBBUk0zMl9IQVJERU5fQlJBTkNIX1BSRURJQ1RPUgo+Pj4gICAgICAgIGRl
-Zl9ib29sIHkgaWYgQVJNXzMyICYmIEhBUkRFTl9CUkFOQ0hfUFJFRElDVE9SCj4+PiAgICArc291
-cmNlICJhcmNoL2FybS9wbGF0Zm9ybXMvS2NvbmZpZyIKPj4+ICsKPj4+ICAgIHNvdXJjZSAiY29t
-bW9uL0tjb25maWciCj4+PiAgICAgIHNvdXJjZSAiZHJpdmVycy9LY29uZmlnIgo+Pj4gZGlmZiAt
-LWdpdCBhL3hlbi9hcmNoL2FybS9wbGF0Zm9ybXMvS2NvbmZpZyBiL3hlbi9hcmNoL2FybS9wbGF0
-Zm9ybXMvS2NvbmZpZwo+Pj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPj4+IGluZGV4IDAwMDAwMDAu
-LjA3YzU5MzAKPj4+IC0tLSAvZGV2L251bGwKPj4+ICsrKyBiL3hlbi9hcmNoL2FybS9wbGF0Zm9y
-bXMvS2NvbmZpZwo+Pj4gQEAgLTAsMCArMSw1NSBAQAo+Pj4gK2Nob2ljZQo+Pj4gKwlwcm9tcHQg
-IlBsYXRmb3JtIFN1cHBvcnQiCj4+PiArCWRlZmF1bHQgQUxMCj4+PiArCS0tLWhlbHAtLS0KPj4+
-ICsJQ2hvb3NlIHdoaWNoIGhhcmR3YXJlIHBsYXRmb3JtIHRvIGVuYWJsZSBpbiBYZW4uCj4+PiAr
-Cj4+PiArCUlmIHVuc3VyZSwgY2hvb3NlIEFMTC4KPj4+ICsKPj4+ICtjb25maWcgQUxMCj4+IEkg
-d291bGQgc3VnZ2VzdCB0byBzZXBhcmF0ZSBpdCBpbnRvIEFMTF9BUk0zMiBhbmQgQUxMX0FSTTY0
-LiBUaGVuLCBpbiBhCj4+IG1ha2VmaWxlIHVzZSB0aGVtIGZvciBwbGF0Zm9ybXMgaW5zdGVhZCBv
-ZiByYXcgQVJNMzIgYW5kIEFSTTY0LiBUaGlzIHdvdWxkCj4+IG1ha2Ugc3VjaCBjaGFuZ2UgcmVh
-bGx5IHVzZWZ1bDogZGlzYWJsaW5nIEFMTF94IHdpbGwgZHJvcCBhbGwgb2RkIHBsYXRmb3JtCj4+
-IGNvZGUuCj4gSGkgQW5kcmlpLAo+Cj4gSSBkb24ndCB1bmRlcnN0YW5kIHRoZSBzdWdnZXN0aW9u
-OiBBUk0zMiBwbGF0Zm9ybXMgY2Fubm90IGJlIGVuYWJsZWQgb24KPiBBUk02NCBhbmQgdmljZSB2
-ZXJzYS4KSW5kZWVkLgoKPiAgIFNvIGJhc2ljYWxseSBpdCBpcyBhcyBpZiB5b3UgYWx3YXlzIGdl
-dCBvbmx5Cj4gQUxMX0FSTTMyIG9yIEFMTF9BUk02NCBkZXBlbmRpbmcgb24geW91ciB0YXJnZXQg
-YXJjaGl0ZWN0dXJlLgo+Cj4gQW0gSSBtaXNzaW5nIHNvbWV0aGluZz8KV2l0aCB0aGlzIHBhdGNo
-LCBkZXNlbGVjdGluZyAiY29uZmlnIEFMTCIgZG9lcyBub3QgcmVtb3ZlIGFsbCBwbGF0Zm9ybSAK
-Y29kZSBmcm9tIHRoZSBidWlsZC4gSXQgaXMgYmVjYXVzZSBidWlsZCBvZiB0aGUgbW9zdCBvZiB0
-aGF0IGNvZGUgCmRlcGVuZHMgZGlyZWN0bHkgb24gQVJNeHguCkluIG9yZGVyIHRvIGdldCBhIHBv
-c3NpYmlsaXR5IHRvIGRyb3AgdW5uZWVkZWQgcGxhdGZvcm0gY29kZSwgdGhlIApwbGF0Zm9ybSBj
-b2RlIHNob3VsZCBiZSBkZXBlbmRlbnQgb24gImNvbmZpZyBBTEwiLiBCdXQgaGVyZSB5b3UgZG8g
-bm90IAp3YW50IHRvIG1peCAzMmJpdCBhbmQgNjRiaXQgcGxhdGZvcm1zLCBzbyB5b3Ugd291bGQg
-bmVlZCAiY29uZmlnIEFMTF8zMiIgCmFuZCAiY29uZmlnIEFMTF82NCIuCkZvciBzdXJlLCB3cml0
-dGVuIGFib3ZlIGlzIG1lYW5pbmdmdWwgb25seSBmb3IgdGhlIGNhc2UgaWYgc29tZW9uZSBuZWVk
-cyAKdGhlIHBvc3NpYmlsaXR5IHRvIGRyb3Agb2RkIHBsYXRmb3JtIGNvZGUgZnJvbSB0aGUgYnVp
-bGQuCj4+PiArCWJvb2wgIkFsbCBQbGF0Zm9ybXMiCj4+PiArCXNlbGVjdCBNUFNPQ19QTEFURk9S
-TQo+Pj4gKwlzZWxlY3QgUUVNVV9QTEFURk9STQo+Pj4gKwlzZWxlY3QgUkNBUjNfUExBVEZPUk0K
-Pj4+ICsJLS0taGVscC0tLQo+Pj4gKwlFbmFibGUgc3VwcG9ydCBmb3IgYWxsIGF2YWlsYWJsZSBo
-YXJkd2FyZSBwbGF0Zm9ybXMuIEl0IGRvZXNuJ3QKPj4+ICsJYXV0b21hdGljYWxseSBzZWxlY3Qg
-YW55IG9mIHRoZSByZWxhdGVkIGRyaXZlcnMuCj4+PiArCj4+PiArY29uZmlnIFFFTVUKPj4+ICsJ
-Ym9vbCAiUUVNVSBhYXJjaCB2aXJ0IG1hY2hpbmUgc3VwcG9ydCIKPj4+ICsJZGVwZW5kcyBvbiBB
-Uk1fNjQKPj4+ICsJc2VsZWN0IFFFTVVfUExBVEZPUk0KPj4+ICsJc2VsZWN0IEdJQ1YzCj4+PiAr
-CXNlbGVjdCBIQVNfUEwwMTEKPj4+ICsJLS0taGVscC0tLQo+Pj4gKwlFbmFibGUgYWxsIHRoZSBy
-ZXF1aXJlZCBkcml2ZXJzIGZvciBRRU1VIGFhcmNoNjQgdmlydCBlbXVsYXRlZAo+Pj4gKwltYWNo
-aW5lLgo+Pj4gKwo+Pj4gK2NvbmZpZyBSQ0FSMwo+Pj4gKwlib29sICJSZW5lc2FzIFJDYXIzIHN1
-cHBvcnQiCj4+PiArCWRlcGVuZHMgb24gQVJNXzY0Cj4+PiArCXNlbGVjdCBSQ0FSM19QTEFURk9S
-TQo+Pj4gKwlzZWxlY3QgSEFTX1NDSUYKPj4+ICsJLS0taGVscC0tLQo+Pj4gKwlFbmFibGUgYWxs
-IHRoZSByZXF1aXJlZCBkcml2ZXJzIGZvciBSZW5lc2FzIFJDYXIzCj4+PiArCj4+PiArY29uZmln
-IE1QU09DCj4+PiArCWJvb2wgIlhpbGlueCBVbHRyYXNjYWxlKyBNUFNvQyBzdXBwb3J0Igo+Pj4g
-KwlkZXBlbmRzIG9uIEFSTV82NAo+Pj4gKwlzZWxlY3QgTVBTT0NfUExBVEZPUk0KPj4+ICsJc2Vs
-ZWN0IEhBU19DQURFTkNFX1VBUlQKPj4+ICsJc2VsZWN0IEFSTV9TTU1VCj4+PiArCS0tLWhlbHAt
-LS0KPj4+ICsJRW5hYmxlIGFsbCB0aGUgcmVxdWlyZWQgZHJpdmVycyBmb3IgWGlsaW54IFVsdHJh
-c2NhbGUrIE1QU29DCj4+PiArCj4+PiArZW5kY2hvaWNlCj4+PiArCj4+PiArY29uZmlnIFFFTVVf
-UExBVEZPUk0KPj4+ICsJYm9vbAo+Pj4gKwo+Pj4gK2NvbmZpZyBSQ0FSM19QTEFURk9STQo+Pj4g
-Kwlib29sCj4+PiArCj4+PiArY29uZmlnIE1QU09DX1BMQVRGT1JNCj4+IFNob3VsZG4ndCBNUFNP
-Q19QTEFURk9STSBiZSBkZXBlbmRlbnQgb24gQVJNNjQ/Cj4gWWVzLCBhbmQgaXQgaXMsIHNlZSAi
-Y29uZmlnIE1QU09DIiBmZXcgbGluZXMgYWJvdmUuCkZldyBsaW5lcyBhYm92ZSwgb25seSAiY29u
-ZmlnIE1QU09DIiBpcyBkZXBlbmRlbnQgb24gQVJNNjQuIEJ1dCAKTVBTT0NfUExBVEZPUk0gaXMg
-c2VsZWN0ZWQgYnkgImNvbmZpZyBBTEwiIGF0IHRoZSBiZWdpbm5pbmcgb2YgdGhlIApwYXRjaC4g
-QW5kIGl0IHdpbGwgYmUgc2VsZWN0ZWQgZm9yIEFSTTMyIGFzIHdlbGwuCgo+Pj4gKwlib29sCj4+
-PiArCj4+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9NYWtlZmlsZQo+Pj4g
-Yi94ZW4vYXJjaC9hcm0vcGxhdGZvcm1zL01ha2VmaWxlCj4+PiBpbmRleCA4MGU1NTVjLi5hNzli
-ZGI5IDEwMDY0NAo+Pj4gLS0tIGEveGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9NYWtlZmlsZQo+Pj4g
-KysrIGIveGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9NYWtlZmlsZQo+Pj4gQEAgLTgsNCArOCw0IEBA
-IG9iai0kKENPTkZJR19BUk1fNjQpICs9IHNlYXR0bGUubwo+Pj4gICAgb2JqLXkgKz0gc3VueGku
-bwo+Pj4gICAgb2JqLSQoQ09ORklHX0FSTV82NCkgKz0gdGh1bmRlcngubwo+Pj4gICAgb2JqLSQo
-Q09ORklHX0FSTV82NCkgKz0geGdlbmUtc3Rvcm0ubwo+Pj4gLW9iai0kKENPTkZJR19BUk1fNjQp
-ICs9IHhpbGlueC16eW5xbXAubwo+Pj4gK29iai0kKENPTkZJR19NUFNPQ19QTEFURk9STSkgICs9
-IHhpbGlueC16eW5xbXAubwoKLS0gCgoqQW5kcmlpIEFuaXNvdioKCgoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1168401095146227040==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_55B2AC7B-3F2D-454B-8D6F-65EABD561214"
+
+
+--Apple-Mail=_55B2AC7B-3F2D-454B-8D6F-65EABD561214
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+
+> On 27 Jul 2018, at 08:51, Juergen Gross <jgross@suse.com> wrote:
+>=20
+> On 27/07/18 00:13, Stefano Stabellini wrote:
+>> On Wed, 25 Jul 2018, Juergen Gross wrote:
+>>> Its time to plan the Xen 4.12 release dates.
+>>>=20
+>>> There have been concerns with the schedule of 6 months between =
+releases,
+>>> as this scheme is leading to too many supported versions of Xen at a
+>>> time. The needed resources to backport bug fixes and security fixes =
+as
+>>> well as doing the tests for all those releases are a limiting factor =
+to
+>>> push out the current main release as well as point releases on time.
+>>>=20
+>>> After some discussions at the Xen developer summit, on xen-devel and
+>>> between the committers a slightly longer release cycle of 8 or 9 =
+months
+>>> was suggested.
+>>>=20
+>>> With 18 months of full support and 36 months of security support the
+>>> number of concurrent supported releases will be the same with either =
+8
+>>> or 9 months release cycles, so I have chosen an 8 month cycle for =
+now.
+>>> Having only 3 possible times in the year for a release will make it
+>>> easier to avoid major holiday seasons.
+>>>=20
+>>> In case there is no objection I'm planning Xen 4.12 with:
+>>>=20
+>>> * Last posting date: December 14th, 2018
+>>> * Hard code freeze: January 11th, 2019
+>>> * Release: March 7th, 2019
+>>>=20
+>>> Release of Xen 4.13 would then be early November 2019, 4.14 at early
+>>> July 2020.
+>>=20
+>> Given the holdidays season (it is not just Julien going on vacation =
+but
+>> pretty much everybody), wouldn't it be better to move the hard code
+>> freeze by a couple of weeks? For instance Jan 25th? We can still keep
+>> the release date as Mar 7th, there should be still enough time?
+>=20
+> I don't think planning with a 6 week freeze period is a good idea. The
+> last releases took longer than 2 months.
+>=20
+> We could slip the complete release by 2 weeks, of course. In this case
+> I'd move the last posting date to January. So something like:
+>=20
+> * Last posting date: January 11th, 2019
+> * Hard code freeze: January 25th, 2019
+> * Release: March 21st, 2019
+
+Another alternative would be to move the dates backwards rather than =
+forward. The 4.12 development window effectively opened 21-06-18, so a =
+last posting data and hard code freeze before Xmas should be OK. Then =
+assume that there won't be RC's for at last 2 (maybe 3) weeks during the =
+winter holidays. But as long as someone is there to keep an eye on =
+OSSTEST and to do a force push and build an RC1 before Xmas that may be =
+OK: but it would probably still be OK if RC1 slipped until just after =
+New Years Eve.
+
+> Risks for that schedule are:
+> - last posting date short after holiday season - is that really a
+>  problem?
+> - Chinese new year rather soon after start of freeze period
+> - planned release date rather close to eastern
+>=20
+> Opinions?
+
+With this in mind. The only problem is that there will be Chinese New =
+Year for some of the late to middle RCs ... Looking at possible RC dates
+RC1: wk Jan 1st=20
+RC2: wk Jan 8th
+RC3: wk Jan 15th
+RC4: wk Jan 22nd
+RC5: wk Jan 29th
+RC6: wk Feb 5th (Chinese New Year)
+RC7: wk Feb 12th
+RC8: wk Feb 19th
+
+Lars
+
+=20=
+
+--Apple-Mail=_55B2AC7B-3F2D-454B-8D6F-65EABD561214
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
+class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 27 Jul 2018, at 08:51, Juergen Gross &lt;<a =
+href=3D"mailto:jgross@suse.com" class=3D"">jgross@suse.com</a>&gt; =
+wrote:</div><br class=3D"Apple-interchange-newline"><div class=3D""><span =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">On 27/07/18 =
+00:13, Stefano Stabellini wrote:</span><br style=3D"caret-color: rgb(0, =
+0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><blockquote type=3D"cite" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; orphans: auto; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; widows: auto; word-spacing: =
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D"">On Wed, 25 Jul 2018, Juergen Gross =
+wrote:<br class=3D""><blockquote type=3D"cite" class=3D"">Its time to =
+plan the Xen 4.12 release dates.<br class=3D""><br class=3D"">There have =
+been concerns with the schedule of 6 months between releases,<br =
+class=3D"">as this scheme is leading to too many supported versions of =
+Xen at a<br class=3D"">time. The needed resources to backport bug fixes =
+and security fixes as<br class=3D"">well as doing the tests for all =
+those releases are a limiting factor to<br class=3D"">push out the =
+current main release as well as point releases on time.<br class=3D""><br =
+class=3D"">After some discussions at the Xen developer summit, on =
+xen-devel and<br class=3D"">between the committers a slightly longer =
+release cycle of 8 or 9 months<br class=3D"">was suggested.<br =
+class=3D""><br class=3D"">With 18 months of full support and 36 months =
+of security support the<br class=3D"">number of concurrent supported =
+releases will be the same with either 8<br class=3D"">or 9 months =
+release cycles, so I have chosen an 8 month cycle for now.<br =
+class=3D"">Having only 3 possible times in the year for a release will =
+make it<br class=3D"">easier to avoid major holiday seasons.<br =
+class=3D""><br class=3D"">In case there is no objection I'm planning Xen =
+4.12 with:<br class=3D""><br class=3D"">* Last posting date: December =
+14th, 2018<br class=3D"">* Hard code freeze: January 11th, 2019<br =
+class=3D"">* Release: March 7th, 2019<br class=3D""><br class=3D"">Release=
+ of Xen 4.13 would then be early November 2019, 4.14 at early<br =
+class=3D"">July 2020.<br class=3D""></blockquote><br class=3D"">Given =
+the holdidays season (it is not just Julien going on vacation but<br =
+class=3D"">pretty much everybody), wouldn't it be better to move the =
+hard code<br class=3D"">freeze by a couple of weeks? For instance Jan =
+25th? We can still keep<br class=3D"">the release date as Mar 7th, there =
+should be still enough time?<br class=3D""></blockquote><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">I don't think =
+planning with a 6 week freeze period is a good idea. The</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">last releases =
+took longer than 2 months.</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><br style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">We could slip the complete release by 2 weeks, of course. In =
+this case</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">I'd move the =
+last posting date to January. So something like:</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">* Last =
+posting date: January 11th, 2019</span><br style=3D"caret-color: rgb(0, =
+0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">* Hard code freeze: January 25th, 2019</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">* Release: =
+March 21st, 2019</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""></div></blockquote><div><br =
+class=3D""></div>Another alternative would be to move the dates =
+backwards rather than forward. The 4.12 development window effectively =
+opened 21-06-18, so a last posting data and hard code freeze before Xmas =
+should be OK. Then assume that there won't be RC's for at last 2 (maybe =
+3) weeks during the winter holidays. But as long as someone is there to =
+keep an eye on OSSTEST and to do a force push and build an RC1 before =
+Xmas that may be OK: but it would probably still be OK if RC1 slipped =
+until just after New Years Eve.</div><div><br =
+class=3D""></div><div><blockquote type=3D"cite" class=3D""><span =
+class=3D"" style=3D"font-family: Menlo-Regular; font-size: 11px; float: =
+none; display: inline !important;">Risks for that schedule =
+are:</span><br class=3D"" style=3D"font-family: Menlo-Regular; =
+font-size: 11px;"><span class=3D"" style=3D"font-family: Menlo-Regular; =
+font-size: 11px; float: none; display: inline !important;">- last =
+posting date short after holiday season - is that really a</span><br =
+class=3D"" style=3D"font-family: Menlo-Regular; font-size: 11px;"><span =
+class=3D"" style=3D"font-family: Menlo-Regular; font-size: 11px; float: =
+none; display: inline !important;">&nbsp;problem?</span><br class=3D"" =
+style=3D"font-family: Menlo-Regular; font-size: 11px;"><span class=3D"" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; float: none; =
+display: inline !important;">- Chinese new year rather soon after start =
+of freeze period</span><br class=3D"" style=3D"font-family: =
+Menlo-Regular; font-size: 11px;"><span class=3D"" style=3D"font-family: =
+Menlo-Regular; font-size: 11px; float: none; display: inline =
+!important;">- planned release date rather close to eastern</span><br =
+class=3D"" style=3D"font-family: Menlo-Regular; font-size: 11px;"><br =
+class=3D"" style=3D"font-family: Menlo-Regular; font-size: 11px;"><span =
+class=3D"" style=3D"font-family: Menlo-Regular; font-size: 11px; float: =
+none; display: inline !important;">Opinions?</span><br class=3D"" =
+style=3D"font-family: Menlo-Regular; font-size: 11px;"></blockquote><br =
+class=3D""></div><div>With this in mind. The only problem is that there =
+will be Chinese New Year for some of the late to middle RCs ... Looking =
+at possible RC dates</div><div>RC1: wk Jan 1st&nbsp;</div><div>RC2: wk =
+Jan 8th</div><div>RC3: wk Jan 15th</div><div>RC4: wk Jan =
+22nd</div><div>RC5: wk Jan 29th</div><div>RC6: wk Feb 5th (Chinese New =
+Year)</div><div>RC7: wk Feb 12th</div><div><div>RC8: wk Feb =
+19th</div><div><br class=3D""></div><div>Lars</div><div class=3D""><br =
+class=3D""></div></div><div>&nbsp;</div></body></html>=
+
+--Apple-Mail=_55B2AC7B-3F2D-454B-8D6F-65EABD561214--
+
+
+--===============1168401095146227040==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1168401095146227040==--
