@@ -1,63 +1,85 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 125665: all pass - PUSHED
-Date: Mon, 30 Jul 2018 03:37:54 +0000
-Message-ID: <osstest-125665-mainreport@xen.org>
+From: Stephen Rothwell <sfr@canb.auug.org.au>
+Subject: linux-next: build failure after merge of the xen-tip tree
+Date: Mon, 30 Jul 2018 15:12:13 +1000
+Message-ID: <20180730151213.4b1e1af4@canb.auug.org.au>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=jy+i=ko=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fjz0R-00061J-SQ
- for xen-devel@lists.xenproject.org; Mon, 30 Jul 2018 03:37:59 +0000
-List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
-List-Post: <mailto:xen-devel@lists.xenproject.org>
-List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
-List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Errors-To: xen-devel-bounces@lists.xenproject.org
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/73HHtKXX1qw=vgpi/4uaEGA"; protocol="application/pgp-signature"
+Return-path: <linux-kernel-owner@vger.kernel.org>
+Sender: linux-kernel-owner@vger.kernel.org
+To: Juergen Gross <jgross@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen Devel <Xen-devel@lists.xensource.com>, Dave Airlie <airlied@linux.ie>, DRI <dri-devel@lists.freedesktop.org>
+Cc: Linux-Next Mailing List <linux-next@vger.kernel.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNTY2NSBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjU2NjUvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
-dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiBvdm1mICAgICAgICAgICAgICAgICAzOWYwMTU2ZmNlMzczYzBjMGEwNGQ4NTkyOGI3ZDg3
-NjEwMzcxMzRlCmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICAxYmYyM2U2
-YjdmNDE0YjllNmJkNDcxZTBiMjM2NjQwMGU1ZDUyZTQ1CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-MjU2NDYgIDIwMTgtMDctMjggMTM6MTA6NDcgWiAgICAxIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
-ICAgMTI1NjY1ICAyMDE4LTA3LTMwIDAxOjQwOjQzIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgWXVuaHVhIEZl
-bmcgPHl1bmh1YXguZmVuZ0BpbnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1p
-Mzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
-ODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
-dXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0
-Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9n
-cywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRl
-c3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2Ug
-cmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5i
-aXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDto
-Yj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0
-O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3Vu
-ZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1
-bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94ZW4v
-Z2l0L29zc3Rlc3Qvb3ZtZi5naXQKICAgMWJmMjNlNmI3Zi4uMzlmMDE1NmZjZSAgMzlmMDE1NmZj
-ZTM3M2MwYzBhMDRkODU5MjhiN2Q4NzYxMDM3MTM0ZSAtPiB4ZW4tdGVzdGVkLW1hc3RlcgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--Sig_/73HHtKXX1qw=vgpi/4uaEGA
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Hi all,
+
+After merging the xen-tip tree, today's linux-next build (x86_64
+allmodconfig) failed like this:
+
+drivers/xen/gntdev-dmabuf.c:360:12: error: initialization from incompatible=
+ pointer type [-Werror=3Dincompatible-pointer-types]
+  .attach =3D dmabuf_exp_ops_attach,
+            ^~~~~~~~~~~~~~~~~~~~~
+
+Caused by commit
+
+  a240d6e42e28 ("xen/gntdev: Implement dma-buf export functionality")
+
+interacting with commit
+
+  a19741e5e5a9 ("dma_buf: remove device parameter from attach callback v2")
+
+from the drm tree.
+
+I have added the following merge fix patch:
+
+From: Stephen Rothwell <sfr@canb.auug.org.au>
+Date: Mon, 30 Jul 2018 15:08:21 +1000
+Subject: [PATCH] xen/gntdev: fix up for attach callback API change
+
+Signed-off-by: Stephen Rothwell <sfr@canb.auug.org.au>
+---
+ drivers/xen/gntdev-dmabuf.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/drivers/xen/gntdev-dmabuf.c b/drivers/xen/gntdev-dmabuf.c
+index faaa4d3970ea..744cfe9b0311 100644
+--- a/drivers/xen/gntdev-dmabuf.c
++++ b/drivers/xen/gntdev-dmabuf.c
+@@ -217,7 +217,6 @@ dmabuf_pages_to_sgt(struct page **pages, unsigned int n=
+r_pages)
+ }
+=20
+ static int dmabuf_exp_ops_attach(struct dma_buf *dma_buf,
+-				 struct device *target_dev,
+ 				 struct dma_buf_attachment *attach)
+ {
+ 	struct gntdev_dmabuf_attachment *gntdev_dmabuf_attach;
+--=20
+2.18.0
+
+--=20
+Cheers,
+Stephen Rothwell
+
+--Sig_/73HHtKXX1qw=vgpi/4uaEGA
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEENIC96giZ81tWdLgKAVBC80lX0GwFAlteni0ACgkQAVBC80lX
+0GwDxwgAk1uyJwmu37U9AWLxDpWymcewjFApvhkWp/9YTADWVlUtm/4WnXziEUYN
+g5455MQIMNr9WGJSzWlONVZPvDHZq/xq04DSGzwNA+FwQo4r87oaW6agVlUQfVt6
+oAWjU9OPkRViphl2BWVdRNZjEGf8OdShCUKXdm8A5YkxOg0FB7ibEWc+VKwJmy5j
+CCEOyth8nd41mnTMEGJoVbcR86xg58Th3wEWaj2QBPsxhlG9LiheYvJhZd3BH5SL
+XgiTBwl5p8iirAYF+yIY/SahQQcY/ptuF25VbL6sEfudIIKLG5yiP/jZ3lu5C8rR
+4KKLGfFAvJzrYAMektpcS22I5qcsBw==
+=HLLG
+-----END PGP SIGNATURE-----
+
+--Sig_/73HHtKXX1qw=vgpi/4uaEGA--
