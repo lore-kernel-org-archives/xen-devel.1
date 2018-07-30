@@ -1,121 +1,59 @@
-From: Stephen Rothwell <sfr@canb.auug.org.au>
-Subject: linux-next: manual merge of the akpm-current tree with the xen-tip
- tree
-Date: Mon, 30 Jul 2018 19:02:10 +1000
-Message-ID: <20180730190210.48a75b72@canb.auug.org.au>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [distros-debian-sid test] 75026: tolerable FAIL
+Date: Mon, 30 Jul 2018 10:27:01 +0100
+Message-ID: <osstest-75026-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- boundary="Sig_/RQ/f9UhlBN2KABzauLfOSxw"; protocol="application/pgp-signature"
-Return-path: <linux-kernel-owner@vger.kernel.org>
-Sender: linux-kernel-owner@vger.kernel.org
-To: Andrew Morton <akpm@linux-foundation.org>, Juergen Gross <jgross@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen Devel <Xen-devel@lists.xensource.com>
-Cc: Linux-Next Mailing List <linux-next@vger.kernel.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Michal Hocko <mhocko@suse.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=azy9=ko=xenproject.org=prvs=742ebd7b8=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1fk4SI-0007Ea-DM
+ for xen-devel@lists.xenproject.org; Mon, 30 Jul 2018 09:27:06 +0000
+List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
+List-Post: <mailto:xen-devel@lists.xenproject.org>
+List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
+List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Errors-To: xen-devel-bounces@lists.xenproject.org
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---Sig_/RQ/f9UhlBN2KABzauLfOSxw
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Hi all,
-
-Today's linux-next merge of the akpm-current tree got a conflict in:
-
-  drivers/xen/gntdev.c
-
-between commit:
-
-  1d3145675538 ("xen/gntdev: Make private routines/structures accessible")
-
-from the xen-tip tree and commit:
-
-  aaefcabe9c25 ("mm, oom: distinguish blockable mode for mmu notifiers")
-
-from the akpm-current tree.
-
-I fixed it up (see below) and can carry the fix as necessary. This
-is now fixed as far as linux-next is concerned, but any non trivial
-conflicts should be mentioned to your upstream maintainer when your tree
-is submitted for merging.  You may also want to consider cooperating
-with the maintainer of the conflicting tree to minimise any particularly
-complex conflicts.
-
---=20
-Cheers,
-Stephen Rothwell
-
-diff --cc drivers/xen/gntdev.c
-index c866a62f766d,55b4f0e3f4d6..000000000000
---- a/drivers/xen/gntdev.c
-+++ b/drivers/xen/gntdev.c
-@@@ -479,7 -441,20 +479,20 @@@ static const struct vm_operations_struc
- =20
-  /* ------------------------------------------------------------------ */
- =20
- -static bool in_range(struct grant_map *map,
-++static bool in_range(struct gntdev_grant_map *map,
-+ 			      unsigned long start, unsigned long end)
-+ {
-+ 	if (!map->vma)
-+ 		return false;
-+ 	if (map->vma->vm_start >=3D end)
-+ 		return false;
-+ 	if (map->vma->vm_end <=3D start)
-+ 		return false;
-+=20
-+ 	return true;
-+ }
-+=20
- -static void unmap_if_in_range(struct grant_map *map,
- +static void unmap_if_in_range(struct gntdev_grant_map *map,
-  			      unsigned long start, unsigned long end)
-  {
-  	unsigned long mstart, mend;
-@@@ -503,15 -472,26 +510,26 @@@
-  	WARN_ON(err);
-  }
- =20
-- static void mn_invl_range_start(struct mmu_notifier *mn,
-+ static int mn_invl_range_start(struct mmu_notifier *mn,
-  				struct mm_struct *mm,
-- 				unsigned long start, unsigned long end)
-+ 				unsigned long start, unsigned long end,
-+ 				bool blockable)
-  {
-  	struct gntdev_priv *priv =3D container_of(mn, struct gntdev_priv, mn);
- -	struct grant_map *map;
- +	struct gntdev_grant_map *map;
-+ 	int ret =3D 0;
-+=20
-+ 	/* TODO do we really need a mutex here? */
-+ 	if (blockable)
-+ 		mutex_lock(&priv->lock);
-+ 	else if (!mutex_trylock(&priv->lock))
-+ 		return -EAGAIN;
- =20
-- 	mutex_lock(&priv->lock);
-  	list_for_each_entry(map, &priv->maps, next) {
-+ 		if (in_range(map, start, end)) {
-+ 			ret =3D -EAGAIN;
-+ 			goto out_unlock;
-+ 		}
-  		unmap_if_in_range(map, start, end);
-  	}
-  	list_for_each_entry(map, &priv->freeable_maps, next) {
-
---Sig_/RQ/f9UhlBN2KABzauLfOSxw
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEENIC96giZ81tWdLgKAVBC80lX0GwFAlte1BIACgkQAVBC80lX
-0GyG1wf+KGs6g2d6zFRQetpC8V37YhGvenZX4vHrVb7nXp9wmUVt3fRrOGvAJFGx
-r9aZVBdZeBDIt1Hj5XClOm4xB3MkDUAzEAC0qp8zQxh+OopZwALw/rT+laHdTlLY
-9UhtdxjieNyHVr56160LUtInU6dh13GS8nvowWMz0QRahdHnObEu/rffWgbOluKv
-wPmS8tGiY/blbx5oNqMYZPUQ7I80iTrml7OrDLRQq9bWRlAaDWOe7fH6e6gbfuVF
-DP89e2ojb8N9kl2UR77cJiy6XjzNvGqrbyOYiolmhqy4D2FZMiAoLSPBDwEC9OiQ
-JFolvw3vycLsazHFkuuTJmlD2CdGug==
-=BIWe
------END PGP SIGNATURE-----
-
---Sig_/RQ/f9UhlBN2KABzauLfOSxw--
+ZmxpZ2h0IDc1MDI2IGRpc3Ryb3MtZGViaWFuLXNpZCByZWFsIFtyZWFsXQpodHRwOi8vb3NzdGVz
+dC54ZW5zb3VyY2UuY29tL29zc3Rlc3QvbG9ncy83NTAyNi8KCkZhaWx1cmVzIDotLyBidXQgbm8g
+cmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJs
+b2NraW5nOgogdGVzdC1hcm1oZi1hcm1oZi1hcm1oZi1zaWQtbmV0Ym9vdC1weWdydWIgMTAgZGVi
+aWFuLWRpLWluc3RhbGwgZmFpbCBsaWtlIDc0OTk3CiB0ZXN0LWFtZDY0LWFtZDY0LWkzODYtc2lk
+LW5ldGJvb3QtcHlncnViIDEwIGRlYmlhbi1kaS1pbnN0YWxsICBmYWlsIGxpa2UgNzQ5OTcKIHRl
+c3QtYW1kNjQtaTM4Ni1hbWQ2NC1zaWQtbmV0Ym9vdC1weWdydWIgMTAgZGViaWFuLWRpLWluc3Rh
+bGwgIGZhaWwgbGlrZSA3NDk5NwogdGVzdC1hbWQ2NC1pMzg2LWkzODYtc2lkLW5ldGJvb3QtcHZn
+cnViIDEwIGRlYmlhbi1kaS1pbnN0YWxsICAgZmFpbCBsaWtlIDc0OTk3CiB0ZXN0LWFtZDY0LWFt
+ZDY0LWFtZDY0LXNpZC1uZXRib290LXB2Z3J1YiAxMCBkZWJpYW4tZGktaW5zdGFsbCBmYWlsIGxp
+a2UgNzQ5OTcKCmJhc2VsaW5lIHZlcnNpb246CiBmbGlnaHQgICAgICAgICAgICAgICA3NDk5NwoK
+am9iczoKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFt
+ZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQt
+c2lkLW5ldGJvb3QtcHZncnViICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2
+NC1pMzg2LWkzODYtc2lkLW5ldGJvb3QtcHZncnViICAgICAgICAgICAgICAgICAgICAgIGZhaWwg
+ICAgCiB0ZXN0LWFtZDY0LWkzODYtYW1kNjQtc2lkLW5ldGJvb3QtcHlncnViICAgICAgICAgICAg
+ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYtYXJtaGYtc2lkLW5ldGJvb3QtcHln
+cnViICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXNp
+ZC1uZXRib290LXB5Z3J1YiAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCgoKLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJl
+cG9ydC1mbGlnaHQgb24gb3NzdGVzdC54cy5jaXRyaXRlLm5ldApsb2dzOiAvaG9tZS9vc3N0ZXN0
+L2xvZ3MKaW1hZ2VzOiAvaG9tZS9vc3N0ZXN0L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBl
+dGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3Nz
+dGVzdC9sb2dzCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94
+ZW5iaXRzLnhlbnNvdXJjZS5jb20vZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVz
+aCBub3QgYXBwbGljYWJsZS4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
