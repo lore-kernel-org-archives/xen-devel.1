@@ -1,24 +1,90 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: linux-next: build failure after merge of the xen-tip tree
-Date: Mon, 30 Jul 2018 10:40:34 +0300
-Message-ID: <06d1e71e-3f2d-9f97-3499-a448efa0321e@gmail.com>
-References: <20180730151213.4b1e1af4@canb.auug.org.au>
+From: Xiao Liang <xiliang@redhat.com>
+Subject: Re: [PATCH] xen-netfront: wait xenbus state change when
+ load module manually
+Date: Mon, 30 Jul 2018 15:43:45 +0800
+Message-ID: <41022efa-141a-01d9-3084-8460b5017592__18290.3431276374$1532936559$gmane$org@redhat.com>
+References: <20180727095608.25210-1-xiliang@redhat.com>
+ <4dfca465-8da3-7ebf-aac1-08ffe34a74ac@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
-Return-path: <linux-kernel-owner@vger.kernel.org>
-In-Reply-To: <20180730151213.4b1e1af4@canb.auug.org.au>
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
+Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=5mdi=ko=redhat.com=xiliang@srs-us1.protection.inumbo.net>)
+ id 1fk2qR-0007bH-4J
+ for xen-devel@lists.xenproject.org; Mon, 30 Jul 2018 07:43:55 +0000
+In-Reply-To: <4dfca465-8da3-7ebf-aac1-08ffe34a74ac@oracle.com>
 Content-Language: en-US
-Sender: linux-kernel-owner@vger.kernel.org
-To: Stephen Rothwell <sfr@canb.auug.org.au>, Juergen Gross <jgross@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen Devel <Xen-devel@lists.xensource.com>, Dave Airlie <airlied@linux.ie>, DRI <dri-devel@lists.freedesktop.org>
-Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Linux-Next Mailing List <linux-next@vger.kernel.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
+List-Post: <mailto:xen-devel@lists.xenproject.org>
+List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
+List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Errors-To: xen-devel-bounces@lists.xenproject.org
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, netdev@vger.kernel.org, xen-devel@lists.xenproject.org, davem@davemloft.net, jgross@suse.com
+Cc: linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-
-> From: Stephen Rothwell <sfr@canb.auug.org.au>
-> Date: Mon, 30 Jul 2018 15:08:21 +1000
-> Subject: [PATCH] xen/gntdev: fix up for attach callback API change
->
-> Signed-off-by: Stephen Rothwell <sfr@canb.auug.org.au>
-Thank you for your patch,
-Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+VGhhbmtzLCBCb3JpcwoKUGxlYXNlIHNlZSBteSByZXBseSBpbmxpbmUuCgoKT24gMDcvMjgvMjAx
+OCAwMjo0MCBBTSwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDA3LzI3LzIwMTggMDU6NTYg
+QU0sIFhpYW8gTGlhbmcgd3JvdGU6Cj4+IFdoZW4gbG9hZGluZyBtb2R1bGUgbWFudWFsbHksIGFm
+dGVyIGNhbGwgeGVuYnVzX3N3aXRjaF9zdGF0ZSB0byBpbml0aWFsaXplcwo+PiB0aGUgc3RhdGUg
+b2YgdGhlIG5ldGZyb250IGRldmljZSwgdGhlIGRyaXZlciBzdGF0ZSBkaWQgbm90IGNoYW5nZSBz
+byBmYXN0Cj4+IHRoYXQgbWF5IGxlYWQgbm8gZGV2IGNyZWF0ZWQgaW4gbGF0ZXN0IGtlcm5lbC4g
+VGhpcyBwYXRjaCBhZGRzIHdhaXQgdG8gbWFrZQo+PiBzdXJlIHhlbmJ1cyBrbm93cyB0aGUgZHJp
+dmVyIGlzIG5vdCBpbiBjbG9zZWQvdW5rbm93biBzdGF0ZS4KPj4KPj4gQ3VycmVudCBzdGF0ZToK
+Pj4gW3ZtXSMgZXRodG9vbCBldGgwCj4+IFNldHRpbmdzIGZvciBldGgwOgo+PiAJTGluayBkZXRl
+Y3RlZDogeWVzCj4+IFt2bV0jIG1vZHByb2JlIC1yIHhlbl9uZXRmcm9udAo+PiBbdm1dIyBtb2Rw
+cm9iZSAgeGVuX25ldGZyb250Cj4+IFt2bV0jIGV0aHRvb2wgZXRoMAo+PiBTZXR0aW5ncyBmb3Ig
+ZXRoMDoKPj4gQ2Fubm90IGdldCBkZXZpY2Ugc2V0dGluZ3M6IE5vIHN1Y2ggZGV2aWNlCj4+IENh
+bm5vdCBnZXQgd2FrZS1vbi1sYW4gc2V0dGluZ3M6IE5vIHN1Y2ggZGV2aWNlCj4+IENhbm5vdCBn
+ZXQgbWVzc2FnZSBsZXZlbDogTm8gc3VjaCBkZXZpY2UKPj4gQ2Fubm90IGdldCBsaW5rIHN0YXR1
+czogTm8gc3VjaCBkZXZpY2UKPj4gTm8gZGF0YSBhdmFpbGFibGUKPj4KPj4gV2l0aCB0aGUgcGF0
+Y2ggaW5zdGFsbGVkLgo+PiBbdm1dIyBldGh0b29sIGV0aDAKPj4gU2V0dGluZ3MgZm9yIGV0aDA6
+Cj4+IAlMaW5rIGRldGVjdGVkOiB5ZXMKPj4gW3ZtXSMgbW9kcHJvYmUgLXIgeGVuX25ldGZyb250
+Cj4+IFt2bV0jIG1vZHByb2JlIHhlbl9uZXRmcm9udAo+PiBbdm1dIyBldGh0b29sIGV0aDAKPj4g
+U2V0dGluZ3MgZm9yIGV0aDA6Cj4+IAlMaW5rIGRldGVjdGVkOiB5ZXMKPj4KPj4gU2lnbmVkLW9m
+Zi1ieTogWGlhbyBMaWFuZyA8eGlsaWFuZ0ByZWRoYXQuY29tPgo+PiAtLS0KPj4gICBkcml2ZXJz
+L25ldC94ZW4tbmV0ZnJvbnQuYyB8IDYgKysrKysrCj4+ICAgMSBmaWxlIGNoYW5nZWQsIDYgaW5z
+ZXJ0aW9ucygrKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQveGVuLW5ldGZyb250LmMg
+Yi9kcml2ZXJzL25ldC94ZW4tbmV0ZnJvbnQuYwo+PiBpbmRleCBhNTdkYWVjZjFkNTcuLjJkODgx
+MmRkMTUzNCAxMDA2NDQKPj4gLS0tIGEvZHJpdmVycy9uZXQveGVuLW5ldGZyb250LmMKPj4gKysr
+IGIvZHJpdmVycy9uZXQveGVuLW5ldGZyb250LmMKPj4gQEAgLTg3LDYgKzg3LDcgQEAgc3RydWN0
+IG5ldGZyb250X2NiIHsKPj4gICAvKiBJUlEgbmFtZSBpcyBxdWV1ZSBuYW1lIHdpdGggIi10eCIg
+b3IgIi1yeCIgYXBwZW5kZWQgKi8KPj4gICAjZGVmaW5lIElSUV9OQU1FX1NJWkUgKFFVRVVFX05B
+TUVfU0laRSArIDMpCj4+ICAgCj4+ICtzdGF0aWMgREVDTEFSRV9XQUlUX1FVRVVFX0hFQUQobW9k
+dWxlX2xvYWRfcSk7Cj4+ICAgc3RhdGljIERFQ0xBUkVfV0FJVF9RVUVVRV9IRUFEKG1vZHVsZV91
+bmxvYWRfcSk7Cj4+ICAgCj4+ICAgc3RydWN0IG5ldGZyb250X3N0YXRzIHsKPj4gQEAgLTEzMzAs
+NiArMTMzMSwxMSBAQCBzdGF0aWMgc3RydWN0IG5ldF9kZXZpY2UgKnhlbm5ldF9jcmVhdGVfZGV2
+KHN0cnVjdCB4ZW5idXNfZGV2aWNlICpkZXYpCj4+ICAgCW5ldGlmX2NhcnJpZXJfb2ZmKG5ldGRl
+dik7Cj4+ICAgCj4+ICAgCXhlbmJ1c19zd2l0Y2hfc3RhdGUoZGV2LCBYZW5idXNTdGF0ZUluaXRp
+YWxpc2luZyk7Cj4+ICsJd2FpdF9ldmVudChtb2R1bGVfbG9hZF9xLAo+PiArCQkJICAgeGVuYnVz
+X3JlYWRfZHJpdmVyX3N0YXRlKGRldi0+b3RoZXJlbmQpICE9Cj4+ICsJCQkgICBYZW5idXNTdGF0
+ZUNsb3NlZCAmJgo+PiArCQkJICAgeGVuYnVzX3JlYWRfZHJpdmVyX3N0YXRlKGRldi0+b3RoZXJl
+bmQpICE9Cj4+ICsJCQkgICBYZW5idXNTdGF0ZVVua25vd24pOwo+PiAgIAlyZXR1cm4gbmV0ZGV2
+Owo+PiAgIAo+PiAgICBleGl0Ogo+Cj4gU2hvdWxkIHdlIGhhdmUgYSB3YWtlX3VwIHNvbWV3aGVy
+ZT8KSW4gbXkgdW5kZXJzdGFuZGluZywgbmV0YmFja19jaGFuZ2VkIGhhbmRsZXMgaXQgaWYgZGV2
+IHN0YXRlIGlzIGluIApYZW5idXNTdGF0ZUluaXRpYWxpc2luZyBhbmQgb3RoZXJlbmQgaXMgaW4g
+WGVuYnVzU3RhdGVJbml0V2FpdCwgYW5kIHRoZW4gCmNyZWF0ZSBjb25uZWN0aW9uIHRvIGJhY2tl
+bmQuCkJ1dCBpbiBtb3N0IGNhc2VzLCBpdCBicmVha3Mgb3V0IGFzIGRldi0+c3RhdGUgbm90IGlu
+IApYZW5idXNTdGF0ZUluaXRpYWxpc2luZy4gU28gSSBhZGRlZCBhIHdhaXQgaGVyZS4KPiBBbmQg
+d2hhdCBhYm91dCBvdGhlciBzdGF0ZXMgLS0tIGlzLAo+IGZvciBleGFtcGxlLCBYZW5idXNTdGF0
+ZUNsb3NpbmcgYSB2YWxpZCByZWFzb24gdG8gY29udGludWU/CkkgdGhpbmsgWGVuYnVzU3RhdGVD
+bG9zaW5nIHNob3VsZCBub3QgYmUgYSB2YWxpZCByZWFzb24gdG8gY29udGludWUuCk15IHB1cnBv
+c2UgaXMgd2FpdGluZyBvdGhlcmVuZCBzdGF0dXMgdG8gYmUgWGVuYnVzU3RhdGVJbml0V2FpdChh
+ZnRlciAKbmV3IGRldiBjcmVhdGVkKS5UbyBhdm9pZCB1bm5lY2Vzc2FyeSBpbXBhY3QsIEnCoCBv
+bmx5IGNoZWNrIGl0IGxlYXZlcyAKY2xvc2VkIGFuZCB1bmtub3cgc3RhdGUgaW4gdGhpcyBwYXRj
+aC4KCkluIG15IHRlc3RpbmcsIGhvdHBsdWcgdmlmcyBmcm9tIGd1ZXN0IGluIGhvc3Qgb3IgbG9h
+ZC91bmxvYWQgbW9kdWxlIGluIApndWVzdCBvdmVyIDEwMCB0aW1lcywgb25seSB3YWl0aW5nIFhl
+bmJ1c1N0YXRlSW5pdFdhaXQgb3IgYXMgdGhpcyBwYXRjaCAKZG9lcywgYm90aCBhcmUgd29ya2lu
+Zy4KdmlmcyBjYW4gYmUgY3JlYXRlZCBlYWNoIHRpbWUgc3VjY2Vzc2Z1bGx5LgoKVGhhbmtzLApY
+aWFvIExpYW5nCgo+Cj4KPiAtYm9yaXMKPgo+Cj4gX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KPiBYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Cj4gWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCj4gaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
