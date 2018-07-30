@@ -1,69 +1,241 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v7 08/12] arm: add ALL, QEMU,
- Rcar3 and MPSoC configs
-Date: Mon, 30 Jul 2018 10:39:08 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1807301039020.20701@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1807061537300.13502@sstabellini-ThinkPad-X260>
- <1530918843-14318-8-git-send-email-sstabellini@kernel.org>
- <9070dccb-e699-7189-d6b3-38cb5f0773f3@epam.com>
- <alpine.DEB.2.10.1807261543150.20701@sstabellini-ThinkPad-X260>
- <5b253972-a880-0ded-dc51-db2f9f8abbdc@epam.com>
- <alpine.DEB.2.10.1807271006090.20701@sstabellini-ThinkPad-X260>
- <5fcc3513-ef81-b08b-cbab-4cbb18aebcac@epam.com>
- <alpine.DEB.2.10.1807271431010.20701@sstabellini-ThinkPad-X260>
- <CAF3u54Dov+QzhJKz9qkM3=0CTRXSzcNq=sVdL+ExuWbvfJd75w@mail.gmail.com>
- <alpine.DEB.2.10.1807271620540.20701@sstabellini-ThinkPad-X260>
- <e82165d7-09c2-4ef9-c968-d19758c5b6fe@arm.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: linux-next: manual merge of the akpm-current tree with the
+ xen-tip tree
+Date: Mon, 30 Jul 2018 13:45:22 -0400
+Message-ID: <c4dd4773-d2c8-5d1c-6c6e-b8c11b2489ac@oracle.com>
+References: <20180730190210.48a75b72@canb.auug.org.au>
+ <6bf747ac-13d0-f77b-4983-2015a5703a12@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <e82165d7-09c2-4ef9-c968-d19758c5b6fe@arm.com>
-List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
-List-Post: <mailto:xen-devel@lists.xenproject.org>
-List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
-List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
- <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Errors-To: xen-devel-bounces@lists.xenproject.org
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: artem_mygaiev@epam.com, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, andrew.cooper3@citrix.com, George.Dunlap@citrix.com, dfaggioli@suse.com, Julien Grall <julien.grall@gmail.com>, xen-devel@lists.xen.org, volodymyr_babchuk@epam.com
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="1Y1oSzynr4021wIwpLA1bYR7nYNMHF5t3"
+Return-path: <linux-kernel-owner@vger.kernel.org>
+In-Reply-To: <6bf747ac-13d0-f77b-4983-2015a5703a12@oracle.com>
+Sender: linux-kernel-owner@vger.kernel.org
+To: Stephen Rothwell <sfr@canb.auug.org.au>, Andrew Morton <akpm@linux-foundation.org>, Juergen Gross <jgross@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen Devel <Xen-devel@lists.xensource.com>
+Cc: Linux-Next Mailing List <linux-next@vger.kernel.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Michal Hocko <mhocko@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAzMCBKdWwgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIFN0ZWZhbm8sCj4g
-Cj4gT24gMjgvMDcvMTggMDA6MzAsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IE9uIEZy
-aSwgMjcgSnVsIDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gSGkgU3RlZmFubywKPiA+
-ID4gU29ycnkgZm9yIHRoZSB0b3AgcG9zdGluZy4KPiA+ID4gCj4gPiA+IEkgdGhpbmsgQW5kcmlp
-IG1hZGUgYSBnb29kIHBvaW50LiBXaXRoIHlvdXIgbmV3IGNvZGUgTVBTT0Mgd2lsbCBnZXQgYnVp
-bHQKPiA+ID4gb24gQXJtIDMyIGJpdCBhcyB3ZWxsLgo+ID4gPiAKPiA+ID4gVGhpcyB3YXMgbm90
-IHRoZSBjYXNlIGJlZm9yZSB0aGlzIHBhdGNoLgo+ID4gPiAKPiA+ID4gU28gSSB3b3VsZCBsaWtl
-IGF0IGxlYXN0IHRoYXQgdG8gYmUgZml4ZWQgYmVmb3JlIGFueSBjb21taXQuCj4gPiAKPiA+IE9L
-LCB0aGlzIGlzIGEgcHJvYmxlbS4gSSdsbCBmaXggaXQuCj4gPiAKPiA+IExvb2tpbmcgaW50byBp
-dCBJIHRoaW5rIHRoZXJlIGlzIGEgd2F5IHRvIHNvbHZlIGl0IHRoYXQgZG9lc24ndCByZXF1aXJl
-Cj4gPiBkdXBsaWNhdGlvbiwgYW5kIG5vdCBldmVuIHRoZSBpbnRyb2R1Y3Rpb24gb2YgQUxMXzMy
-IGFuZCBBTExfNjQ6IHdlIGp1c3QKPiA+IG5lZWQgdG8gYWRkICJpZiBBUk1fNjQiIGZvciB0aGUg
-QVJNNjQgcGxhdGZvcm1zIGFuZCAiaWYgQVJNXzMyIiBmb3IgdGhlCj4gPiBBUk0zMiBwbGF0Zm9y
-bXMuCj4gPiAKPiA+IFNvIHRvZGF5IHdlIHdvdWxkIGhhdmUgKHRoZSAiaWYgQVJNXzY0IiBpcyBu
-ZXcgY29tcGFyZWQgdG8gdGhpcyBwYXRjaCk6Cj4gPiAKPiA+ICAgIGNvbmZpZyBBTEwKPiA+ICAg
-ICAgICBib29sICJBbGwgUGxhdGZvcm1zIgo+ID4gICAgICAgIHNlbGVjdCBNUFNPQ19QTEFURk9S
-TSBpZiBBUk1fNjQKPiA+IAo+ID4gSW4gdGhlIGZ1cnVyZSwgYXNzdW1pbmcgdGhhdCB3ZSBoYWQg
-RVhZTk9TNSBhbmQgT01BUDUgb3B0aW9ucywgaXQgd291bGQKPiA+IGJlY29tZToKPiA+IAo+ID4g
-ICAgY29uZmlnIEFMTAo+ID4gICAgICAgIGJvb2wgIkFsbCBQbGF0Zm9ybXMiCj4gPiAgICAgICAg
-c2VsZWN0IE1QU09DX1BMQVRGT1JNIGlmIEFSTV82NAo+ID4gICAgICAgIHNlbGVjdCBFWFlOT1M1
-IGlmIEFSTV8zMgo+ID4gICAgICAgIHNlbGVjdCBPTUFQNSBpZiBBUk1fMzIKPiA+IAo+ID4gV2hh
-dCBkbyB5b3UgdGhpbms/Cj4gCj4gSSB0aGluayBJIHdvdWxkIHByZWZlciB0aGUgc3VnZ2VzdGlv
-biBJIG1hZGUgb24gQW5kcmlpJ3MgYW5zd2VyOgo+IAo+IGNob2ljZQo+ICAgIGNvbmZpZyBBTExf
-UExBVAo+ICAgICAgIGJvb2wgIkFsbCBQbGF0Zm9ybXMiCj4gICAgICAgIi4uLi4iCj4gZW5kY2hv
-aWNlCj4gCj4gY29uZmlnIEFMTF9QTEFUXzY0Cj4gICAgIGRlZmF1bHQgKEFMTCAmJiBBUk1fNjQp
-Cj4gCj4gY29uZmlnIEFMTF9QTEFUXzMyCj4gICAgIGRlZmF1bHQgKEFMTF9QTEFUICYmIEFSTV8z
-MikKPiAKPiBjb25maWcgTVBTT0NfUExBVEZPUk0KPiAgICAgYm9vbAo+ICAgICBkZWZhdWx0IChB
-TExfUExBVF82NCB8fCBNUFNPQykKPiAKPiBUaGlzIHdvdWxkIGF2b2lkIGEgbG9uZyBsaXN0IGlu
-ICJBTExfUExBVEZPUk1TIi4KPiAKPiBBbHNvLCBJIGp1c3Qgbm90aWNlZCB0aGF0ICdBTEwnIHdp
-bGwgYmVjb21lIENPTkZJR19BTEwuIFRoaXMgaXMgc2xpZ2h0bHkgdG9vCj4gdmFndWUgYXMgYSBu
-YW1lLiBJdCB3b3VsZCBiZSBiZXR0ZXIgdG8gaW5jbHVkZSAiUExBVCIgaW4gaXQuCgpJIHZlcmlm
-aWVkIHRoYXQgdGhpcyBhbHNvIHdvcmtzIGFzIGV4cGVjdGVkLiBJJ2xsIG1ha2UgdGhlIGNoYW5n
-ZXMgYW5kCnJlc2VuZCB0aGUgc2VyaWVzLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--1Y1oSzynr4021wIwpLA1bYR7nYNMHF5t3
+Content-Type: multipart/mixed; boundary="duwpSwbFFWk5XRWFqEPZZdEJ3Wikbywjh";
+ protected-headers="v1"
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: Stephen Rothwell <sfr@canb.auug.org.au>,
+ Andrew Morton <akpm@linux-foundation.org>, Juergen Gross <jgross@suse.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Xen Devel <Xen-devel@lists.xensource.com>
+Cc: Linux-Next Mailing List <linux-next@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Michal Hocko <mhocko@suse.com>
+Message-ID: <c4dd4773-d2c8-5d1c-6c6e-b8c11b2489ac@oracle.com>
+Subject: Re: linux-next: manual merge of the akpm-current tree with the
+ xen-tip tree
+References: <20180730190210.48a75b72@canb.auug.org.au>
+ <6bf747ac-13d0-f77b-4983-2015a5703a12@oracle.com>
+In-Reply-To: <6bf747ac-13d0-f77b-4983-2015a5703a12@oracle.com>
+
+--duwpSwbFFWk5XRWFqEPZZdEJ3Wikbywjh
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
+
+On 07/30/2018 01:02 PM, Boris Ostrovsky wrote:
+> On 07/30/2018 05:02 AM, Stephen Rothwell wrote:
+>> Hi all,
+>>
+>> Today's linux-next merge of the akpm-current tree got a conflict in:
+>>
+>>   drivers/xen/gntdev.c
+>>
+>> between commit:
+>>
+>>   1d3145675538 ("xen/gntdev: Make private routines/structures accessib=
+le")
+>>
+>> from the xen-tip tree and commit:
+>>
+>>   aaefcabe9c25 ("mm, oom: distinguish blockable mode for mmu notifiers=
+")
+>>
+>> from the akpm-current tree.
+>>
+>> I fixed it up (see below) and can carry the fix as necessary. This
+>> is now fixed as far as linux-next is concerned, but any non trivial
+>> conflicts should be mentioned to your upstream maintainer when your tr=
+ee
+>> is submitted for merging.  You may also want to consider cooperating
+>> with the maintainer of the conflicting tree to minimise any particular=
+ly
+>> complex conflicts.
+>>
+>> -- Cheers, Stephen Rothwell diff --cc drivers/xen/gntdev.c index
+>> c866a62f766d,55b4f0e3f4d6..000000000000 --- a/drivers/xen/gntdev.c +++=
+
+>> b/drivers/xen/gntdev.c @@@ -479,7 -441,20 +479,20 @@@ static const
+>> struct vm_operations_struc /*
+>> ------------------------------------------------------------------ */
+>> -static bool in_range(struct grant_map *map, ++static bool
+>> in_range(struct gntdev_grant_map *map, + unsigned long start, unsigned=
+
+>> long end) + { + if (!map->vma) + return false; + if
+>> (map->vma->vm_start >=3D end) + return false; + if (map->vma->vm_end <=
+=3D
+>> start) + return false; + + return true; + } + -static void
+>> unmap_if_in_range(struct grant_map *map, +static void
+>> unmap_if_in_range(struct gntdev_grant_map *map, unsigned long start,
+>> unsigned long end) { unsigned long mstart, mend; @@@ -503,15 -472,26
+>> +510,26 @@@ WARN_ON(err); } - static void mn_invl_range_start(struct
+>> mmu_notifier *mn, + static int mn_invl_range_start(struct mmu_notifier=
+
+>> *mn, struct mm_struct *mm, - unsigned long start, unsigned long end) +=
+
+>> unsigned long start, unsigned long end, + bool blockable) { struct
+>> gntdev_priv *priv =3D container_of(mn, struct gntdev_priv, mn); - stru=
+ct
+>> grant_map *map; + struct gntdev_grant_map *map; + int ret =3D 0; + + /=
+*
+>> TODO do we really need a mutex here? */ + if (blockable) +
+>> mutex_lock(&priv->lock); + else if (!mutex_trylock(&priv->lock)) +
+>> return -EAGAIN; - mutex_lock(&priv->lock); list_for_each_entry(map,
+>> &priv->maps, next) { + if (in_range(map, start, end)) { + ret =3D
+>> -EAGAIN; + goto out_unlock; + } unmap_if_in_range(map, start, end); }
+>> list_for_each_entry(map, &priv->freeable_maps, next) {
+
+
+Ugh... That's some interesting whitespace optimization on part of
+thundebird. Let me paste the relevant patch hunk here.
+
+
+diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
+index bd56653b9bbc..55b4f0e3f4d6 100644
+--- a/drivers/xen/gntdev.c
++++ b/drivers/xen/gntdev.c
+@@ -441,18 +441,25 @@ static const struct vm_operations_struct gntdev_vmo=
+ps =3D {
+=20
+ /* ------------------------------------------------------------------ */=
+
+=20
++static bool in_range(struct grant_map *map,
++			      unsigned long start, unsigned long end)
++{
++	if (!map->vma)
++		return false;
++	if (map->vma->vm_start >=3D end)
++		return false;
++	if (map->vma->vm_end <=3D start)
++		return false;
++
++	return true;
++}
++
+ static void unmap_if_in_range(struct grant_map *map,
+ 			      unsigned long start, unsigned long end)
+ {
+ 	unsigned long mstart, mend;
+ 	int err;
+=20
+-	if (!map->vma)
+-		return;
+-	if (map->vma->vm_start >=3D end)
+-		return;
+-	if (map->vma->vm_end <=3D start)
+-		return;
+ 	mstart =3D max(start, map->vma->vm_start);
+ 	mend   =3D min(end,   map->vma->vm_end);
+ 	pr_debug("map %d+%d (%lx %lx), range %lx %lx, mrange %lx %lx\n",
+@@ -465,21 +472,40 @@ static void unmap_if_in_range(struct grant_map *map=
+,
+ 	WARN_ON(err);
+ }
+=20
+-static void mn_invl_range_start(struct mmu_notifier *mn,
++static int mn_invl_range_start(struct mmu_notifier *mn,
+ 				struct mm_struct *mm,
+-				unsigned long start, unsigned long end)
++				unsigned long start, unsigned long end,
++				bool blockable)
+ {
+ 	struct gntdev_priv *priv =3D container_of(mn, struct gntdev_priv, mn);
+ 	struct grant_map *map;
++	int ret =3D 0;
++
++	/* TODO do we really need a mutex here? */
++	if (blockable)
++		mutex_lock(&priv->lock);
++	else if (!mutex_trylock(&priv->lock))
++		return -EAGAIN;
+=20
+-	mutex_lock(&priv->lock);
+ 	list_for_each_entry(map, &priv->maps, next) {
++		if (in_range(map, start, end)) {
++			ret =3D -EAGAIN;
++			goto out_unlock;
++		}
+ 		unmap_if_in_range(map, start, end);
+ 	}
+ 	list_for_each_entry(map, &priv->freeable_maps, next) {
++		if (in_range(map, start, end)) {
++			ret =3D -EAGAIN;
++			goto out_unlock;
++		}
+ 		unmap_if_in_range(map, start, end);
+ 	}
++
++out_unlock:
+ 	mutex_unlock(&priv->lock);
++
++	return ret;
+ }
+
+
+-boris
+
+
+
+>
+> I clearly missed this (aaefcabe9c25) patch but now that I am looking at=
+
+> it I don't think I understand the logic for changes in
+> list_for_each_entry() loops.
+>
+> Aren't we ending up never unmapping grant pages? Michal, can you explai=
+n
+> what you are trying to do here?
+>
+>
+> -boris
+>
+>
+>
+
+
+
+--duwpSwbFFWk5XRWFqEPZZdEJ3Wikbywjh--
+
+--1Y1oSzynr4021wIwpLA1bYR7nYNMHF5t3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEExAVKDNg/TOdD61Yyit52kIbKwbIFAltfTrIACgkQit52kIbK
+wbJpGQ/+KkWIm64yGKlpwAMOF/Xmw7LodK606aZuXqTILJt2kZCcvuWO2yChRVcG
+yruqDt/ljY0gu55mNlli1ap71P25uoLXlz0/NkYV9zvOXvQP6pgisSgicREcRpin
+O3I2V8WMxfuhaoaMwlifLhBCvYx+SoTFCg/8qS/LZaEpj6WWAuK/oIr49/wNhOD7
+W6pseuB3wD0O2uSIprI74HCQ3lCFs7S3sDeoOyCHh1Y2F6+krG9RxVT4RdwrhfPG
+Xare9SHEZo2DStUvrqq91NTedLSxnyT6yBu7FLwky3qcx8fJLcSwYbnmVMiQNRzV
+d0K5eCLNvyokNY2AiiixL1QFz5VPzBAXZ0n0dN974w9unzxsVjVDrW940H5l2P2k
+ngVTEf/+tGQ8yiSbY/hdyQqoVWGuKLhe86xZRFwL/LlcmoY1sUR42YqU68oKh9RN
+WAzWGF7hg/A8SOiyxXR1U4QcN8mdb2D0etcHjfSRwLQUgKYKlVw0+r87jhs52twE
+0WkQlIsk5f3ZJDXlLK2ae4l30RZjWVO8DECE3kAblFmO8YbbV7jfrBXTcE7yDcQM
+ULYjtz1FaWl9TiuD4ZqFIAjEdrnEgZEml7KDMxxxc6pK8PNfgTDaUNoShQSOP4PX
+N+nQ4E/gx2EVhy52GVWLmwttHaJ+t34yXW/Vbywf3//3+Dqa32Y=
+=7Tsm
+-----END PGP SIGNATURE-----
+
+--1Y1oSzynr4021wIwpLA1bYR7nYNMHF5t3--
