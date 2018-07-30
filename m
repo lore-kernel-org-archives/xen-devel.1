@@ -1,22 +1,19 @@
-From: Andrii Anisov <Andrii_Anisov@epam.com>
-Subject: Re: [PATCH v7 08/12] arm: add ALL, QEMU,
- Rcar3 and MPSoC configs
-Date: Mon, 30 Jul 2018 16:11:00 +0000
-Message-ID: <VI1PR0302MB26882AEA88A515D2EF93197EE62F0@VI1PR0302MB2688.eurprd03.prod.outlook.com>
-References: <alpine.DEB.2.10.1807061537300.13502@sstabellini-ThinkPad-X260>
- <1530918843-14318-8-git-send-email-sstabellini@kernel.org>
- <9070dccb-e699-7189-d6b3-38cb5f0773f3@epam.com>
- <alpine.DEB.2.10.1807261543150.20701@sstabellini-ThinkPad-X260>
- <5b253972-a880-0ded-dc51-db2f9f8abbdc@epam.com>
- <alpine.DEB.2.10.1807271006090.20701@sstabellini-ThinkPad-X260>
- <5fcc3513-ef81-b08b-cbab-4cbb18aebcac@epam.com>,
- <alpine.DEB.2.10.1807271431010.20701@sstabellini-ThinkPad-X260>
+From: David Miller <davem@davemloft.net>
+Subject: Re: [PATCH] xen-netfront: wait xenbus state change when
+ load module manually
+Date: Mon, 30 Jul 2018 09:41:05 -0700 (PDT)
+Message-ID: <20180730.094105.276965999059841658.davem__35447.5664710209$1532968803$gmane$org@davemloft.net>
+References: <20180727095608.25210-1-xiliang@redhat.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1807271431010.20701@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=7hur=ko=davemloft.net=davem@srs-us1.protection.inumbo.net>)
+ id 1fkBEL-00080M-LH
+ for xen-devel@lists.xenproject.org; Mon, 30 Jul 2018 16:41:09 +0000
+In-Reply-To: <20180727095608.25210-1-xiliang@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,23 +22,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Artem Mygaiev <Artem_Mygaiev@epam.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "George.Dunlap@citrix.com" <George.Dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, "julien.grall@arm.com" <julien.grall@arm.com>, "dfaggioli@suse.com" <dfaggioli@suse.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: xiliang@redhat.com
+Cc: jgross@suse.com, netdev@vger.kernel.org, boris.ostrovsky@oracle.com, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-CkhlbGxvIFN0ZWZhbm8sCgo+wqBBaCwgeWVzLCBJIHVuZGVyc3RhbmQgd2hhdCB5b3UgbWVhbiBu
-b3cuCgpNeSBwb2ludCB3YXMgdG8gZ2V0IHRoZSBmZWF0dXJlIG9mIG1pbmltYWwgcGxhdGZvcm0g
-c3VwcG9ydCByaWdodCBhd2F5LiBZb3UgYXJlIGludGVyZXN0ZWQgaW4gWGlsaW54LCBzbyB5b3Ug
-bWFrZSBhIG1pbmltYWwgY29uZmlndXJhdGlvbiBmb3LCoE1QU09DLiBBbmQgc3RhY2vCoHRoZSBy
-ZXN0wqBpbnRvIGFuICpvcHRpb25hbCogYWxsIHBsYXRmb3JtcyBzdXBwb3J0LiBTb8KgbWFpbnRh
-aW5lcnMgb2Ygb3RoZXIgcGxhdGZvcm1zIGNhbiBzaG93IHRoZWlyIGludGVyZXN0IHdpdGggYXBw
-cm9wcmlhdGUgcGF0Y2hlcyBmb3IgbWluaW1hbCBjb25maWd1cmF0aW9uIHN1cHBvcnRpbmcgdGhl
-aXIgdGFyZ2V0cy4KCj7CoEdpdmVuIHRoYXQgdGhpcyBwYXRjaCBzZXJpZXMgaGFzIGJlZW4KPsKg
-b3V0IGZvciBhIHdoaWxlIG5vdyBhbmQgaGFzIGFsbCB0aGUgcmVxdWlyZWQgYWNrcywgSSB3b3Vs
-ZCBwcmVmZXIgdG8KPsKgY29tbWl0IGl0IGFzIGlzICh3aXRoIHRoZSBzbWFsbCBjaGFuZ2UgcmVx
-dWVzdGVkIGJ5IEp1bGllbikgYW5kIG1ha2UKPsKgY2hhbmdlcyBmb3IgdmV4cHJlc3MsIHN1bnhp
-LCBhbmQgb3RoZXJzIGluIGZvbGxvdy11cCBwYXRjaGVzLgoKU28gbGV0IGl0IGJlLgoKKkFORFJJ
-SSBBTklTT1YqCgogICAgCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+RnJvbTogWGlhbyBMaWFuZyA8eGlsaWFuZ0ByZWRoYXQuY29tPgpEYXRlOiBGcmksIDI3IEp1bCAy
+MDE4IDE3OjU2OjA4ICswODAwCgo+IFdoZW4gbG9hZGluZyBtb2R1bGUgbWFudWFsbHksIGFmdGVy
+IGNhbGwgeGVuYnVzX3N3aXRjaF9zdGF0ZSB0byBpbml0aWFsaXplcwo+IHRoZSBzdGF0ZSBvZiB0
+aGUgbmV0ZnJvbnQgZGV2aWNlLCB0aGUgZHJpdmVyIHN0YXRlIGRpZCBub3QgY2hhbmdlIHNvIGZh
+c3QKPiB0aGF0IG1heSBsZWFkIG5vIGRldiBjcmVhdGVkIGluIGxhdGVzdCBrZXJuZWwuIFRoaXMg
+cGF0Y2ggYWRkcyB3YWl0IHRvIG1ha2UKPiBzdXJlIHhlbmJ1cyBrbm93cyB0aGUgZHJpdmVyIGlz
+IG5vdCBpbiBjbG9zZWQvdW5rbm93biBzdGF0ZS4KIC4uLgo+IFNpZ25lZC1vZmYtYnk6IFhpYW8g
+TGlhbmcgPHhpbGlhbmdAcmVkaGF0LmNvbT4KCkFwcGxpZWQgYW5kIHF1ZXVlZCB1cCBmb3IgLXN0
+YWJsZSwgdGhhbmtzLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
