@@ -1,19 +1,16 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86/xstate: correct logging in
- handle_xsetbv()
-Date: Tue, 31 Jul 2018 11:38:29 +0100
-Message-ID: <2eebf927-2562-96a8-9c21-a042d8f7a0aa@citrix.com>
-References: <1532000683-23429-1-git-send-email-andrew.cooper3@citrix.com>
- <1532000683-23429-3-git-send-email-andrew.cooper3@citrix.com>
- <5B5B1D2602000078001D879C@prv1-mh.provo.novell.com>
- <dfc9d085-c0ad-aa73-edd1-3fd161795442@citrix.com>
- <5B603BD402000078001D9616@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 2/3] x86/spec-ctrl: Add defines and
+ variables for AMD SSBD support
+Date: Tue, 31 Jul 2018 04:44:57 -0600
+Message-ID: <5B603DA902000078001D9628@prv1-mh.provo.novell.com>
+References: <20180720145736.126487-1-brian.woods@amd.com>
+ <20180720145736.126487-3-brian.woods@amd.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B603BD402000078001D9616@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+In-Reply-To: <20180720145736.126487-3-brian.woods@amd.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,13 +19,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Brian Woods <brian.woods@amd.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMzEvMDcvMTggMTE6MzcsIEphbiBCZXVsaWNoIHdyb3RlOgo+IENvcnJlY3QgYSBkaXNhZ3Jl
-ZW1lbnQgYmV0d2VlbiB0ZXh0IGFuZCBsb2dnZWQgdmFsdWUuCj4KPiBTaWduZWQtb2ZmLWJ5OiBK
-YW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpBY2tlZC1ieTogQW5kcmV3IENvb3BlciA8
-YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDIwLjA3LjE4IGF0IDE2OjU3LCA8YnJpYW4ud29vZHNAYW1kLmNvbT4gd3JvdGU6Cj4g
+SW4gcHJlcGFyYXRpb24gZm9yIGFkZGluZyBzd2l0Y2hhYmxlIFNTQkQsIGFkZCBzb21lIGRlZmlu
+ZXMgYW5kCj4gdmFyaWFibGVzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEJyaWFuIFdvb2RzIDxicmlh
+bi53b29kc0BhbWQuY29tPgoKV2hldGhlciB0aGVzZSBhZGRpdGlvbnMgZml0IHRoZSBwdXJwb3Nl
+IGNhbiBvbmx5IGJlIHRvbGQgd2hlbgpzZWVpbmcgdGhlaXIgdXNlLiBQbGVhc2UgZm9sZCB0aGlz
+IGludG8gdGhlIHBhdGNoIHVzaW5nIHRoZXNlLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
