@@ -1,15 +1,15 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH] tools/gdbsx: fix 'g' packet response for
- 64bit guests
-Date: Tue, 31 Jul 2018 18:10:07 +0200
-Message-ID: <20180731161007.GR1371@mail-itl>
-References: <20180731023042.19031-1-marmarek@invisiblethingslab.com>
- <20180731090024.xbovqmyfrj6xiaid@citrix.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v8 00/11] arm: more kconfig configurability
+ and small default configs
+Date: Tue, 31 Jul 2018 09:10:12 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1807310906320.26773@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1807301042060.20701@sstabellini-ThinkPad-X260>
+ <01ae546e-229d-d8d0-966e-ed3754eb8e0a@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5363988781829150958=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180731090024.xbovqmyfrj6xiaid@citrix.com>
+In-Reply-To: <01ae546e-229d-d8d0-966e-ed3754eb8e0a@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,77 +18,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Elena Ufimtseva <elena.ufimtseva@oracle.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, andrew.cooper3@citrix.com, George.Dunlap@citrix.com, dfaggioli@suse.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5363988781829150958==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="+GDz8FH0cDPsW8g2"
-Content-Disposition: inline
-
-
---+GDz8FH0cDPsW8g2
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jul 31, 2018 at 10:00:24AM +0100, Wei Liu wrote:
-> On Tue, Jul 31, 2018 at 04:30:42AM +0200, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > --- a/tools/debugger/gdbsx/gx/gx_local.c
-> > +++ b/tools/debugger/gdbsx/gx/gx_local.c
-> > @@ -45,8 +45,8 @@ prnt_32regs(struct xg_gdb_regs32 *r32p)
-> >  static void
-> >  prnt_64regs(struct xg_gdb_regs64 *r64p)
-> >  {
-> > -    printf("rip:"XGF64" rsp:"XGF64" flags:"XGF64"\n", r64p->rip, r64p-=
->rsp,
-> > -           r64p->rflags);
-> > +    printf("rip:"XGF64" rsp:"XGF64" flags:%08x\n", r64p->rip, r64p->rs=
-p,
-> > +           r64p->eflags);
->=20
-> I think it would be better to introduce XGF32 and XGFM32 in the header.
-
-I was inspired by prnt_32regs function, which use explicit %08x. Should
-it be changed there too (to PRIx32)? Otherwise that would be
-inconsistent (and maybe warrant a totally separate cleanup).
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---+GDz8FH0cDPsW8g2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAltgid8ACgkQ24/THMrX
-1yyvPwf8DDOjdPHSpE7as4hNhFYgvbtK+K4ltpX8T1e+eEqeUvmvM7HaoIH2g1WE
-+wOF57HBCX2rieaDXEF4bhTz4iRPo3vvwgsk3mCiCG6oEDdxGlisyPGa3e15vXsW
-NviaIM+UAoeKd8UxuoTyfUuuIYHNHu/QYgKDHKK24UBaad1hwCATScfD/0q+3KhF
-GJr4BlLrbd/IFMTq3wNPcdzNTdIPjEoW7Iidkjfn8yZ2kbHPc/mKptKlN9Aa5vqw
-v2ZmFu+jJZO6ootGtNZ0H2y+vB6e5RuoExEiYGkpytZ3aDhBS9CCxfl4Y3RlD8e1
-y+uru2BCJALXL5ZG1FGaFsGFahl3iA==
-=IVod
------END PGP SIGNATURE-----
-
---+GDz8FH0cDPsW8g2--
-
-
---===============5363988781829150958==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5363988781829150958==--
+T24gVHVlLCAzMSBKdWwgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IE9uIDMwLzA3LzE4IDE4
+OjQ4LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiBIaSBhbGwsCj4gCj4gSGkgU3RlZmFu
+bywKPiAKPiA+IAo+ID4gVGhpcyBwYXRjaCBzZXJpZXMgaXMgdGhlIGZpcnN0IHN0ZXAgdG93YXJk
+IGJ1aWxkaW5nIGEgc21hbGwgY2VydGlmaWFibGUKPiA+IFhlbiBoeXBlcnZpc29yIGZvciBBUk0g
+Ym9hcmRzLgo+ID4gCj4gPiBUaGUgc2VyaWVzIG1ha2VzIGEgZmV3IGNoYW5nZXMgdG8gYWxsb3cg
+ZGlzYWJsaW5nIG1vcmUga2NvbmZpZyBvcHRpb25zOgo+ID4gbW9zdCBvZiB0aGVtIGFscmVhZHkg
+ZXhpc3QgYnV0IGNhbm5vdCBiZSBkaXNhYmxlZC4gSXQgYWxzbyBpbnRyb2R1Y2VzIGEKPiA+IHJl
+ZmVyZW5jZSBrY29uZmlnIGZvciBSZW5lc2FzIFJDYXIgKGR1ZSB0byBwb3B1bGFyIGRlbWFuZCwg
+Y2FuZGlkYXRlIGZvcgo+ID4gY2VydGlmaWNhdGlvbnMpLCBYaWxpbnggTVBTb0MsIGFuZCBmb3Ig
+UUVNVSBhYXJjaDY0IChub3QgZm9yCj4gPiBjZXJ0aWZpY2F0aW9ucywgYnV0IHVzZWZ1bCBmb3Ig
+ZGVidWdnaW5nKS4KPiA+IAo+ID4gVGhlIGxhc3QgcGF0Y2ggY2xhcmlmaWVzIHRoZSBzZWN1cml0
+eSBzdXBwb3J0IHN0YXR1cyBvZiBrY29uZmlnIG9wdGlvbnMKPiA+IGluIFhlbi4KPiA+IAo+ID4g
+QWxsIHBhdGNoZXMgYXJlIGFscmVhZHkgYWNrZWQsIGV4Y2VwdCBmb3IgcGF0Y2ggIzg6ICJhcm06
+IGFkZCBBTExfUExBVCwKPiA+IFFFTVUsIFJjYXIzIGFuZCBNUFNvQyBjb25maWdzIi4KPiA+IAo+
+ID4gQ2hlZXJzLAo+ID4gCj4gPiBTdGVmYW5vCj4gPiAKPiA+IAo+ID4gVGhlIGZvbGxvd2luZyBj
+aGFuZ2VzIHNpbmNlIGNvbW1pdCAxNmZiNGI1YTlhNzlmOTVkZjE3ZjEwYmE2MmU5ZjQ0ZDIxY2Y4
+OWI1Ogo+ID4gCj4gPiAgICBkb2NzL2dlbi1odG1sLWluZGV4OiBNYWtlIEhUTUw6OlRyZWVCdWls
+ZGVyOjpYUGF0aCBvcHRpb25hbCBhZ2Fpbgo+ID4gKDIwMTgtMDQtMTMgMTc6MDQ6MzYgKzAxMDAp
+Cj4gCj4gVGhpcyBpcyBuZWFybHkgNCBtb250aHMgb2xkLi4uIFBsZWFzZSByZXNlbmQgdGhlIHNl
+cmllcyByZWJhc2VkIG9uIHRoZSBsYXRlc3QKPiBzdGFnaW5nLgoKVGhpcyBpcyB0aGUgcmViYXNl
+IG9uIHN0YWdpbmcsIGxldCBtZSBrbm93IGlmIHlvdSB3b3VsZCBhbHNvIGxpa2UgbWUgdG8Kc2Vu
+ZCBpdCB0byB0aGUgbGlzdC4gVGhpcyBicmFuY2ggaXMgZXhhY3RseSBpZGVudGljYWwgdG8gdjgg
+KGFzaWRlIGZyb20KdGhlIGZpcnN0IHBhdGNoIGJlaW5nIGRyb3BwZWQpOiBJIGhhdmVuJ3QgZG9u
+ZSBKYW4ncyBzbWFsbCByZXF1ZXN0IGZvcgpjaGFuZ2UuIExldCBtZSBrbm93IGlmIHlvdSBwcmVm
+ZXIgdGhhdCBJIGRvLgoKClRoZSBmb2xsb3dpbmcgY2hhbmdlcyBzaW5jZSBjb21taXQgNmFhYTlm
+YjMwODE3MWVjNThkZGY0Y2YwNThhZDUzNDFmODFhNjVjZjoKCiAgaHZtL2FsdHAybTogQ2xhcmlm
+eSB0aGUgcHJvcGVyIHdheSB0byBleHRlbmQgdGhlIGFsdHAybSBpbnRlcmZhY2UgKDIwMTgtMDct
+MzEgMTY6MTQ6MDEgKzAxMDApCgphcmUgYXZhaWxhYmxlIGluIHRoZSBnaXQgcmVwb3NpdG9yeSBh
+dDoKCiAgaHR0cDovL3hlbmJpdHMueGVucHJvamVjdC5vcmcvZ2l0LWh0dHAvcGVvcGxlL3NzdGFi
+ZWxsaW5pL3hlbi11bnN0YWJsZS5naXQgc21hbGwta2NvbmZpZy12OC0yCgpmb3IgeW91IHRvIGZl
+dGNoIGNoYW5nZXMgdXAgdG8gY2EzMDZmMGYwZTI1YTUyMGZhMWM0YWJkMjI1ZmM5MTI1MzI3NDIz
+ZToKCiAgeGVuOiBzcGVjaWZ5IHN1cHBvcnQgZm9yIEVYUEVSVCBhbmQgREVCVUcgS2NvbmZpZyBv
+cHRpb25zICgyMDE4LTA3LTMxIDA4OjI0OjAxIC0wNzAwKQoKLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpTdGVmYW5vIFN0YWJl
+bGxpbmkgKDEwKToKICAgICAgYXJtOiBtYWtlIGl0IHBvc3NpYmxlIHRvIGRpc2FibGUgSEFTX0dJ
+Q1YzCiAgICAgIGFybTogcmVuYW1lIEhBU19HSUNWMyB0byBHSUNWMwogICAgICBNYWtlIE1FTV9B
+Q0NFU1MgY29uZmlndXJhYmxlCiAgICAgIG1ha2UgaXQgcG9zc2libGUgdG8gZW5hYmxlL2Rpc2Fi
+bGUgVUFSVCBkcml2ZXJzCiAgICAgIGFybTogbWFrZSBpdCBwb3NzaWJsZSB0byBkaXNhYmxlIHRo
+ZSBTTU1VIGRyaXZlcgogICAgICBhcm06IGFkZCBhIHRpbnkga2NvbmZpZyBjb25maWd1cmF0aW9u
+CiAgICAgIGFybTogYWRkIEFMTF9QTEFULCBRRU1VLCBSY2FyMyBhbmQgTVBTb0MgY29uZmlncwog
+ICAgICB4ZW46IGFkZCBwZXItcGxhdGZvcm0gZGVmYXVsdHMgZm9yIE5SX0NQVVMKICAgICAgeGVu
+OiBhZGQgY2xvYyB0YXJnZXQKICAgICAgeGVuOiBzcGVjaWZ5IHN1cHBvcnQgZm9yIEVYUEVSVCBh
+bmQgREVCVUcgS2NvbmZpZyBvcHRpb25zCgogU1VQUE9SVC5tZCAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHwgIDYgKysrKysKIHRvb2xzL2Zpcm13YXJlL3hlbi1kaXIvc2hpbS5jb25maWcgICB8
+ICAyICstCiB4ZW4vTWFrZWZpbGUgICAgICAgICAgICAgICAgICAgICAgICAgfCAxMiArKysrKysr
+KysKIHhlbi9hcmNoL0tjb25maWcgICAgICAgICAgICAgICAgICAgICB8ICAzICsrKwogeGVuL2Fy
+Y2gvYXJtL0tjb25maWcgICAgICAgICAgICAgICAgIHwgMTUgKysrKysrKystLS0KIHhlbi9hcmNo
+L2FybS9NYWtlZmlsZSAgICAgICAgICAgICAgICB8ICA0ICstLQogeGVuL2FyY2gvYXJtL2NvbmZp
+Z3MvdGlueTY0LmNvbmYgICAgIHwgMzggKysrKysrKysrKysrKysrKysrKysrKysrKysKIHhlbi9h
+cmNoL2FybS9wbGF0Zm9ybXMvS2NvbmZpZyAgICAgICB8IDUyICsrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKwogeGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9NYWtlZmlsZSAgICAgIHwg
+IDIgKy0KIHhlbi9hcmNoL2FybS92Z2ljLmMgICAgICAgICAgICAgICAgICB8ICAyICstCiB4ZW4v
+YXJjaC9hcm0vdmdpYy92Z2ljLmMgICAgICAgICAgICAgfCAgMiArLQogeGVuL2FyY2gveDg2L0tj
+b25maWcgICAgICAgICAgICAgICAgIHwgIDIgKy0KIHhlbi9jb21tb24vS2NvbmZpZyAgICAgICAg
+ICAgICAgICAgICB8IDEwICsrKysrKy0KIHhlbi9jb21tb24vTWFrZWZpbGUgICAgICAgICAgICAg
+ICAgICB8ICAyICstCiB4ZW4vY29tbW9uL2RvbWN0bC5jICAgICAgICAgICAgICAgICAgfCAgMiAr
+LQogeGVuL2RyaXZlcnMvY2hhci9LY29uZmlnICAgICAgICAgICAgIHwgMTUgKysrKysrLS0tLS0K
+IHhlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL0tjb25maWcgICAgICB8IDEyICsrKysrKysrKwogeGVu
+L2RyaXZlcnMvcGFzc3Rocm91Z2gvYXJtL01ha2VmaWxlIHwgIDIgKy0KIHhlbi9pbmNsdWRlL2Fz
+bS1hcm0vZ2ljLmggICAgICAgICAgICB8ICA0ICstLQogeGVuL2luY2x1ZGUvYXNtLWFybS92Z2lj
+LmggICAgICAgICAgIHwgIDQgKy0tCiB4ZW4vaW5jbHVkZS94ZW4vbWVtX2FjY2Vzcy5oICAgICAg
+ICAgfCAgNCArLS0KIHhlbi9pbmNsdWRlL3hzbS9kdW1teS5oICAgICAgICAgICAgICB8ICAyICst
+CiB4ZW4vaW5jbHVkZS94c20veHNtLmggICAgICAgICAgICAgICAgfCAgNCArLS0KIHhlbi94c20v
+ZHVtbXkuYyAgICAgICAgICAgICAgICAgICAgICB8ICAyICstCiB4ZW4veHNtL2ZsYXNrL2hvb2tz
+LmMgICAgICAgICAgICAgICAgfCAgNCArLS0KIDI1IGZpbGVzIGNoYW5nZWQsIDE3MyBpbnNlcnRp
+b25zKCspLCAzNCBkZWxldGlvbnMoLSkKIGNyZWF0ZSBtb2RlIDEwMDY0NCB4ZW4vYXJjaC9hcm0v
+Y29uZmlncy90aW55NjQuY29uZgogY3JlYXRlIG1vZGUgMTAwNjQ0IHhlbi9hcmNoL2FybS9wbGF0
+Zm9ybXMvS2NvbmZpZwoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
