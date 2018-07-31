@@ -1,12 +1,21 @@
-From: Xen.org security team <security@xen.org>
-Subject: Xen Security Advisory 274 v2 (CVE-2018-14678) - Linux:
- Uninitialized state in x86 PV failsafe callback path
-Date: Tue, 31 Jul 2018 10:14:04 +0000
-Message-ID: <E1fkRfI-0004FB-Ek@xenbits.xenproject.org>
+From: "Woodhouse, David" <dwmw@amazon.co.uk>
+Subject: Re: [PATCH qemu-xen-traditional] xen/pt: allow QEMU to
+ request MSI unmasking at bind time
+Date: Tue, 31 Jul 2018 10:22:15 +0000
+Message-ID: <1533032534.16128.19.camel@amazon.co.uk>
+References: <1527058885.8186.68.camel@infradead.org>
+ <1529314520-79691-1-git-send-email-andraprs@amazon.com>	 ,
+ <20180618114352.xelerr457ev2e5kj@mac> <1529570276822.28578@amazon.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
-Content-Transfer-Encoding: binary
+Content-Type: multipart/mixed; boundary="===============7734061385603820055=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=qryg=kp=amazon.co.uk=prvs=7431c8362=dwmw@srs-us1.protection.inumbo.net>)
+ id 1fkRnK-0007Kk-96
+ for xen-devel@lists.xenproject.org; Tue, 31 Jul 2018 10:22:22 +0000
+In-Reply-To: <1529570276822.28578@amazon.com>
+MIME-Version: 1.0
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,195 +24,221 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-announce@lists.xen.org, xen-devel@lists.xen.org, xen-users@lists.xen.org, oss-security@lists.openwall.com
-Cc: "Xen.org security team" <security-team-members@xen.org>
+To: "roger.pau@citrix.com" <roger.pau@citrix.com>, "Paraschiv, Andra-Irina" <andraprs@amazon.com>
+Cc: "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>, "ian.jackson@eu.citrix.com" <ian.jackson@eu.citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---=separator
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
+--===============7734061385603820055==
+Content-Language: en-US
+Content-Type: multipart/signed; micalg=sha-256;
+	protocol="application/x-pkcs7-signature"; boundary="=-YWz4PyoXUWQnj8iv6jCp"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA256
+--=-YWz4PyoXUWQnj8iv6jCp
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-            Xen Security Advisory CVE-2018-14678 / XSA-274
-                              version 2
+Ian, any objections?
 
-      Linux: Uninitialized state in x86 PV failsafe callback path
-
-UPDATES IN VERSION 2
-====================
-
-CVE assigned.  Fix the title to refer to the failsafe callback path.
-
-ISSUE DESCRIPTION
-=================
-
-Linux has a `failsafe` callback, invoked by Xen under certain
-conditions.  Normally in this failsafe callback, error_entry is paired
-with error_exit; and error_entry uses %ebx to communicate to
-error_exit whether to use the user or kernel return path.
-
-Unfortunately, on 64-bit PV Xen on x86, error_exit is called without
-error_entry being called first, leaving %ebx with an invalid value.
-
-IMPACT
-======
-
-A rogue user-space program could crash a guest kernel.  Privilege
-escalation cannot be ruled out.
-
-VULNERABLE SYSTEMS
-==================
-
-Only 64-bit x86 PV Linux systems are vulnerable.
-
-All versions of Linux are vulnerable.
-
-MITIGATION
-==========
-
-Switching to HVM or PVH guests will mitigate this issue.
-
-CREDITS
-=======
-
-This issue was discovered by M. Vefa Bicakci, and recognized as a
-security issue by Andy Lutorminski.
-
-RESOLUTION
-==========
-
-Applying the appropriate attached patch resolves this issue.
-
-NB this patch has not been accepted into Linux upstream yet.  An
-updated advisory will be sent if the fix upstreamed looks
-significantly different.
-
-xsa274-linux-4.17.patch           Linux 4.17
-
-$ sha256sum xsa274*
-0c30cb13d1d573f446c8cb8d4824ffad8ef9149a7589a19ef9bcc83c07bddcf5  xsa274-linux-4.17.patch
-$
-
-NOTE ON THE LACK OF EMBARGO
-===========================
-
-The patch for this issue was published on linux-kernel without being
-first reported to the XenProject Security Team.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBCAAGBQJbYDYRAAoJEIP+FMlX6CvZo1gH/3+9TpyHsjwGIqIrK8wndAQ6
-bth9m0e/Zq4alZflWRsQlJ64toE23dlZmFF9juHLPNEV/4jPm4CA1oRVLQQkJ3am
-6kh4SQMNU5kDa/3S7sCnpYnM+IRg3JO9oDjKfz9PiDImKApzbE/NnGbQLP766BUD
-dCNKLdJlX+i3mRnKeqehFZKSPY43zOMU19hgfuKGEXwRCqlbLraL1+X5xGN11J51
-iXHOJxK9fRBhi2d8jiCKAISqw0OMcROfrCgOFdabxYpw2/H49bjyADd0s9QV5piG
-In1b7S4AFEZfEzEQ0wlXs4wvhqmBZGdMyXxAL7BP4hTGXAJovLrfsL/nX/DXprQ=
-=H+Zn
------END PGP SIGNATURE-----
-
---=separator
-Content-Type: application/octet-stream; name="xsa274-linux-4.17.patch"
-Content-Disposition: attachment; filename="xsa274-linux-4.17.patch"
+Thanks.On Thu, 2018-06-21 at 08:37 +0000, Paraschiv, Andra-Irina wrote:
+> + Cc: Ian Jackson <ian.jackson@eu.citrix.com> for review.
+>=20
+> Thanks, Roger, for review and feedback.
+>=20
+> Andra
+> ________________________________________
+> From: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> Sent: Monday, June 18, 2018 2:43 PM
+> To: Paraschiv, Andra-Irina
+> Cc: xen-devel@lists.xenproject.org; sstabellini@kernel.org; jbeulich@
+> suse.com; andrew.cooper3@citrix.com; Woodhouse, David
+> Subject: Re: [PATCH qemu-xen-traditional] xen/pt: allow QEMU to
+> request MSI unmasking at bind time
+>=20
+> On Mon, Jun 18, 2018 at 09:35:20AM +0000, Andra Paraschiv wrote:
+> >=20
+> > When a MSI interrupt is bound to a guest using
+> > xc_domain_update_msi_irq (XEN_DOMCTL_bind_pt_irq) the interrupt is
+> > left masked by default.
+> >=20
+> > This causes problems with guests that first configure interrupts
+> > and
+> > clean the per-entry MSIX table mask bit and afterwards enable MSIX
+> > globally. In such scenario the Xen internal msixtbl handlers would
+> > not
+> > detect the unmasking of MSIX entries because vectors are not yet
+> > registered since MSIX is not enabled, and vectors would be left
+> > masked.
+> >=20
+> > Introduce a new flag in the gflags field to signal Xen whether a
+> > MSI
+> > interrupt should be unmasked after being bound.
+> >=20
+> > This also requires to track the mask register for MSI interrupts,
+> > so
+> > QEMU can also notify to Xen whether the MSI interrupt should be
+> > bound
+> > masked or unmasked
+> >=20
+> > Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> > Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> > Reported-by: Andreas Kinzler <hfp@posteo.de>
+> > Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+> > Signed-off-by: Stefano Stabellini <sstabellini@kernel.org>
+> >=20
+> > [Backported from commit a8036336609d2e184fc3543a4c439c0ba7d7f3a2
+> > =C2=A0https://git.qemu.org/?p=3Dqemu.git;a=3Dcommit;h=3Da8036336609d2e1=
+84fc354
+> > 3a4c439c0ba7d7f3a2
+> > =C2=A0https://xenbits.xen.org/gitweb/?p=3Dqemu-xen.git;a=3Dcommit;h=3Da=
+8036336
+> > 609d2e184fc3543a4c439c0ba7d7f3a2]
+> >=20
+> > Signed-off-by: Andra Paraschiv <andraprs@amazon.com>
+> Thanks for doing the backport, LGTM.
+>=20
+>=20
+>=20
+> Amazon Development Center (Romania) S.R.L. registered office: 27A Sf.
+> Lazar Street, UBC5, floor 2, Iasi, Iasi County, 700045, Romania.
+> Registered in Romania. Registration number J22/2621/2005.
+>=20
+>=20
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+--=-YWz4PyoXUWQnj8iv6jCp
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
 
-RnJvbSA4ZGY2MzUwMDdlMDczNzg4NzUyMmVlYmVlODg2MTU1NjAyYjg4MDli
-IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBBbmR5IEx1dG9taXJz
-a2kgPGx1dG9Aa2VybmVsLm9yZz4KRGF0ZTogU3VuLCAyMiBKdWwgMjAxOCAx
-MTowNTowOSAtMDcwMApTdWJqZWN0OiBbUEFUQ0hdIHg4Ni9lbnRyeS82NDog
-UmVtb3ZlICVlYnggaGFuZGxpbmcgZnJvbSBlcnJvcl9lbnRyeS9leGl0Cgpl
-cnJvcl9lbnRyeSBhbmQgZXJyb3JfZXhpdCBjb21tdW5pY2F0ZSB0aGUgdXNl
-ciB2cyBrZXJuZWwgc3RhdHVzIG9mCnRoZSBmcmFtZSB1c2luZyAlZWJ4LiAg
-VGhpcyBpcyB1bm5lY2Vzc2FyeSAtLSB0aGUgaW5mb3JtYXRpb24gaXMgaW4K
-cmVncy0+Y3MuICBKdXN0IHVzZSByZWdzLT5jcy4KClRoaXMgbWFrZXMgZXJy
-b3JfZW50cnkgc2ltcGxlciBhbmQgbWFrZXMgZXJyb3JfZXhpdCBtb3JlIHJv
-YnVzdC4KCkl0IGFsc28gZml4ZXMgYSBuYXN0eSBidWcuICBCZWZvcmUgYWxs
-IHRoZSBTcGVjdHJlIG5vbnNlbnNlLCBUaGUKeGVuX2ZhaWxzYWZlX2NhbGxi
-YWNrIGVudHJ5IHBvaW50IHJldHVybmVkIGxpa2UgdGhpczoKCiAgICAgICAg
-QUxMT0NfUFRfR1BSRUdTX09OX1NUQUNLCiAgICAgICAgU0FWRV9DX1JFR1MK
-ICAgICAgICBTQVZFX0VYVFJBX1JFR1MKICAgICAgICBFTkNPREVfRlJBTUVf
-UE9JTlRFUgogICAgICAgIGptcCAgICAgZXJyb3JfZXhpdAoKQW5kIGl0IGRp
-ZCBub3QgZ28gdGhyb3VnaCBlcnJvcl9lbnRyeS4gIFRoaXMgd2FzIGJvZ3Vz
-OiBSQlgKY29udGFpbmVkIGdhcmJhZ2UsIGFuZCBlcnJvcl9leGl0IGV4cGVj
-dGVkIGEgZmxhZyBpbiBSQlguCkZvcnR1bmF0ZWx5LCBpdCBnZW5lcmFsbHkg
-Y29udGFpbmVkICpub256ZXJvKiBnYXJiYWdlLCBzbyB0aGUKY29ycmVjdCBj
-b2RlIHBhdGggd2FzIHVzZWQuICBBcyBwYXJ0IG9mIHRoZSBTcGVjdHJlIGZp
-eGVzLCBjb2RlIHdhcwphZGRlZCB0byBjbGVhciBSQlggdG8gbWl0aWdhdGUg
-Y2VydGFpbiBzcGVjdWxhdGlvbiBhdHRhY2tzLiAgTm93LApkZXBlbmRpbmcg
-b24ga2VybmVsIGNvbmZpZ3VyYXRpb24sIFJCWCBnb3QgemVyb2VkIGFuZCwg
-d2hlbiBydW5uaW5nCnNvbWUgV2luZSB3b3JrbG9hZHMsIHRoZSBrZXJuZWwg
-Y3Jhc2hlcy4gIFRoaXMgd2FzIGludHJvZHVjZWQgYnk6CgogICAgY29tbWl0
-IDNhYzZkOGM3ODdiOCAoIng4Ni9lbnRyeS82NDogQ2xlYXIgcmVnaXN0ZXJz
-IGZvcgogICAgZXhjZXB0aW9ucy9pbnRlcnJ1cHRzLCB0byByZWR1Y2Ugc3Bl
-Y3VsYXRpb24gYXR0YWNrIHN1cmZhY2UiKQoKV2l0aCB0aGlzIHBhdGNoIGFw
-cGxpZWQsIFJCWCBpcyBubyBsb25nZXIgbmVlZGVkIGFzIGEgZmxhZywgYW5k
-IHRoZQpwcm9ibGVtIGdvZXMgYXdheS4KCkkgc3VzcGVjdCB0aGF0IG1hbGlj
-aW91cyB1c2Vyc3BhY2UgY291bGQgdXNlIHRoaXMgYnVnIHRvIGNyYXNoIHRo
-ZQprZXJuZWwgZXZlbiB3aXRob3V0IHRoZSBvZmZlbmRpbmcgcGF0Y2ggYXBw
-bGllZCwgdGhvdWdoLgoKW0hpc3RvcmljYWwgbm90ZTogSSB3cm90ZSB0aGlz
-IHBhdGNoIGFzIGEgY2xlYW51cCBiZWZvcmUgSSB3YXMgYXdhcmUKIG9mIHRo
-ZSBidWcgaXQgZml4ZWQuXQoKW05vdGUgdG8gc3RhYmxlIG1haW50YWluZXJz
-OiB0aGlzIHNob3VsZCBwcm9iYWJseSBnZXQgYXBwbGllZCB0byBhbGwKIGtl
-cm5lbHMuICBJZiB5b3UncmUgbmVydm91cyBhYm91dCB0aGF0LCBhIG1vcmUg
-Y29uc2VydmF0aXZlIGZpeCB0bwogYWRkIHhvcmwgJWVieCwlZWJ4OyBpbmNs
-ICVlYnggYmVmb3JlIHRoZSBqdW1wIHRvIGVycm9yX2V4aXQgc2hvdWxkCiBh
-bHNvIGZpeCB0aGUgcHJvYmxlbS5dCgpDYzogQnJpYW4gR2Vyc3QgPGJyZ2Vy
-c3RAZ21haWwuY29tPgpDYzogQm9yaXNsYXYgUGV0a292IDxicEBhbGllbjgu
-ZGU+CkNjOiBEb21pbmlrIEJyb2Rvd3NraSA8bGludXhAZG9taW5pa2Jyb2Rv
-d3NraS5uZXQ+CkNjOiBJbmdvIE1vbG5hciA8bWluZ29AcmVkaGF0LmNvbT4K
-Q2M6ICJILiBQZXRlciBBbnZpbiIgPGhwYUB6eXRvci5jb20+CkNjOiBUaG9t
-YXMgR2xlaXhuZXIgPHRnbHhAbGludXRyb25peC5kZT4KQ2M6IEJvcmlzIE9z
-dHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+CkNjOiBKdWVy
-Z2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CkNjOiB4ZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKQ2M6IHg4NkBrZXJuZWwub3JnCkNjOiBzdGFi
-bGVAdmdlci5rZXJuZWwub3JnCkZpeGVzOiAzYWM2ZDhjNzg3YjggKCJ4ODYv
-ZW50cnkvNjQ6IENsZWFyIHJlZ2lzdGVycyBmb3IgZXhjZXB0aW9ucy9pbnRl
-cnJ1cHRzLCB0byByZWR1Y2Ugc3BlY3VsYXRpb24gYXR0YWNrIHN1cmZhY2Ui
-KQpSZXBvcnRlZC1hbmQtdGVzdGVkLWJ5OiAiTS4gVmVmYSBCaWNha2NpIiA8
-bS52LmJAcnVuYm94LmNvbT4KU2lnbmVkLW9mZi1ieTogQW5keSBMdXRvbWly
-c2tpIDxsdXRvQGtlcm5lbC5vcmc+Ci0tLQogYXJjaC94ODYvZW50cnkvZW50
-cnlfNjQuUyB8IDE4ICsrKystLS0tLS0tLS0tLS0tLQogMSBmaWxlIGNoYW5n
-ZWQsIDQgaW5zZXJ0aW9ucygrKSwgMTQgZGVsZXRpb25zKC0pCgpkaWZmIC0t
-Z2l0IGEvYXJjaC94ODYvZW50cnkvZW50cnlfNjQuUyBiL2FyY2gveDg2L2Vu
-dHJ5L2VudHJ5XzY0LlMKaW5kZXggNzNhNTIyZDUzYjUzLi44YWU3ZmZkYThm
-OTggMTAwNjQ0Ci0tLSBhL2FyY2gveDg2L2VudHJ5L2VudHJ5XzY0LlMKKysr
-IGIvYXJjaC94ODYvZW50cnkvZW50cnlfNjQuUwpAQCAtOTgxLDcgKzk4MSw3
-IEBAIEVOVFJZKFxzeW0pCiAKIAljYWxsCVxkb19zeW0KIAotCWptcAllcnJv
-cl9leGl0CQkJLyogJWVieDogbm8gc3dhcGdzIGZsYWcgKi8KKwlqbXAJZXJy
-b3JfZXhpdAogCS5lbmRpZgogRU5EKFxzeW0pCiAuZW5kbQpAQCAtMTIyMiw3
-ICsxMjIyLDYgQEAgRU5EKHBhcmFub2lkX2V4aXQpCiAKIC8qCiAgKiBTYXZl
-IGFsbCByZWdpc3RlcnMgaW4gcHRfcmVncywgYW5kIHN3aXRjaCBHUyBpZiBu
-ZWVkZWQuCi0gKiBSZXR1cm46IEVCWD0wOiBjYW1lIGZyb20gdXNlciBtb2Rl
-OyBFQlg9MTogb3RoZXJ3aXNlCiAgKi8KIEVOVFJZKGVycm9yX2VudHJ5KQog
-CVVOV0lORF9ISU5UX0ZVTkMKQEAgLTEyNjksNyArMTI2OCw2IEBAIEVOVFJZ
-KGVycm9yX2VudHJ5KQogCSAqIGZvciB0aGVzZSBoZXJlIHRvby4KIAkgKi8K
-IC5MZXJyb3Jfa2VybmVsc3BhY2U6Ci0JaW5jbAklZWJ4CiAJbGVhcQluYXRp
-dmVfaXJxX3JldHVybl9pcmV0KCVyaXApLCAlcmN4CiAJY21wcQklcmN4LCBS
-SVArOCglcnNwKQogCWplCS5MZXJyb3JfYmFkX2lyZXQKQEAgLTEzMDMsMjgg
-KzEzMDEsMjAgQEAgRU5UUlkoZXJyb3JfZW50cnkpCiAKIAkvKgogCSAqIFBy
-ZXRlbmQgdGhhdCB0aGUgZXhjZXB0aW9uIGNhbWUgZnJvbSB1c2VyIG1vZGU6
-IHNldCB1cCBwdF9yZWdzCi0JICogYXMgaWYgd2UgZmF1bHRlZCBpbW1lZGlh
-dGVseSBhZnRlciBJUkVUIGFuZCBjbGVhciBFQlggc28gdGhhdAotCSAqIGVy
-cm9yX2V4aXQga25vd3MgdGhhdCB3ZSB3aWxsIGJlIHJldHVybmluZyB0byB1
-c2VyIG1vZGUuCisJICogYXMgaWYgd2UgZmF1bHRlZCBpbW1lZGlhdGVseSBh
-ZnRlciBJUkVULgogCSAqLwogCW1vdgklcnNwLCAlcmRpCiAJY2FsbAlmaXh1
-cF9iYWRfaXJldAogCW1vdgklcmF4LCAlcnNwCi0JZGVjbAklZWJ4CiAJam1w
-CS5MZXJyb3JfZW50cnlfZnJvbV91c2VybW9kZV9hZnRlcl9zd2FwZ3MKIEVO
-RChlcnJvcl9lbnRyeSkKIAotCi0vKgotICogT24gZW50cnksIEVCWCBpcyBh
-ICJyZXR1cm4gdG8ga2VybmVsIG1vZGUiIGZsYWc6Ci0gKiAgIDE6IGFscmVh
-ZHkgaW4ga2VybmVsIG1vZGUsIGRvbid0IG5lZWQgU1dBUEdTCi0gKiAgIDA6
-IHVzZXIgZ3NiYXNlIGlzIGxvYWRlZCwgd2UgbmVlZCBTV0FQR1MgYW5kIHN0
-YW5kYXJkIHByZXBhcmF0aW9uIGZvciByZXR1cm4gdG8gdXNlcm1vZGUKLSAq
-LwogRU5UUlkoZXJyb3JfZXhpdCkKIAlVTldJTkRfSElOVF9SRUdTCiAJRElT
-QUJMRV9JTlRFUlJVUFRTKENMQlJfQU5ZKQogCVRSQUNFX0lSUVNfT0ZGCi0J
-dGVzdGwJJWVieCwgJWVieAotCWpueglyZXRpbnRfa2VybmVsCisJdGVzdGIJ
-JDMsIENTKCVyc3ApCisJanoJcmV0aW50X2tlcm5lbAogCWptcAlyZXRpbnRf
-dXNlcgogRU5EKGVycm9yX2V4aXQpCiAKLS0gCjIuMTguMAoK
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCEE4w
+ggUuMIIEFqADAgECAhEApEtL31g6H7ROXdOiQnA9RjANBgkqhkiG9w0BAQsFADCBlzELMAkGA1UE
+BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgG
+A1UEChMRQ09NT0RPIENBIExpbWl0ZWQxPTA7BgNVBAMTNENPTU9ETyBSU0EgQ2xpZW50IEF1dGhl
+bnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1haWwgQ0EwHhcNMTcxMjIxMDAwMDAwWhcNMTgxMjIxMjM1
+OTU5WjAiMSAwHgYJKoZIhvcNAQkBFhFkd213QGFtYXpvbi5jby51azCCASIwDQYJKoZIhvcNAQEB
+BQADggEPADCCAQoCggEBAKdGKgXuwKMg2r+i/4BZZC0ddRxNq3xIKTakie/VCSzoO7P17A36ZzUc
+VMEYPfqDt/65xoc6Tdih+qkY2pNDppZ1DZ8mVrAX6O2O60ZhmXB60wMoDvXPZInvkMOW4drqnje/
+7/NOypn/XQAY+ln4KT+3tHG3TfryyJFMedqC/r29KJlCeeCxIzdtq2j5mN42tvPVv4+p+Kr77uui
+GOASNdFJbNdgx7UGF+il6kRGSle17LJZKMgRiLJXYjECwnGwdfLdN5SINWD5IC3yXY8d14Bq6DyD
+jNts1DFw+SKhW8kVFYRZpv7TE3/42QJKQVL6YWka5T4EJO7AD3gy2ypRsd8CAwEAAaOCAecwggHj
+MB8GA1UdIwQYMBaAFIKvbIz4xf6WYXzoHz0rcUhexIvAMB0GA1UdDgQWBBT/vhvBExl2wDr8f50u
+b+0yzFyZRjAOBgNVHQ8BAf8EBAMCBaAwDAYDVR0TAQH/BAIwADAgBgNVHSUEGTAXBggrBgEFBQcD
+BAYLKwYBBAGyMQEDBQIwEQYJYIZIAYb4QgEBBAQDAgUgMEYGA1UdIAQ/MD0wOwYMKwYBBAGyMQEC
+AQEBMCswKQYIKwYBBQUHAgEWHWh0dHBzOi8vc2VjdXJlLmNvbW9kby5uZXQvQ1BTMFoGA1UdHwRT
+MFEwT6BNoEuGSWh0dHA6Ly9jcmwuY29tb2RvY2EuY29tL0NPTU9ET1JTQUNsaWVudEF1dGhlbnRp
+Y2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcmwwgYsGCCsGAQUFBwEBBH8wfTBVBggrBgEFBQcwAoZJ
+aHR0cDovL2NydC5jb21vZG9jYS5jb20vQ09NT0RPUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRT
+ZWN1cmVFbWFpbENBLmNydDAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuY29tb2RvY2EuY29tMBwG
+A1UdEQQVMBOBEWR3bXdAYW1hem9uLmNvLnVrMA0GCSqGSIb3DQEBCwUAA4IBAQCK2HofespbCaDu
+udwwfh8GxDpVUnVbZZVWScpZMxfYpXzLot7L6iZrr16oMQ+UOiDDAK6/D3+u2QN8u0lJ6yLKVmvh
+lGOzDywGsyG2Ohy8Dt5jcEK5sz84OsPtrRH7ahZHLxYPhWlUKOjOPN6sb9h6uMYlXmG/KmAr2rwF
+exN6Zrwh6YwF7ukuMs175YcNyYRdB8kVYq3WikfbTHOoRbJiu9Unw7LqnvPTfx+xUvD6aN2CKLtr
+mactWbk98swNgbI18UWjfEpugvAqw09CDLjeq7N1v0SkUkQEDqGSUE+hKFryTNXtZ6zOfl+MQfD8
+U7T5oJa34DmWXK9+x7dl+MrqMIIFLjCCBBagAwIBAgIRAKRLS99YOh+0Tl3TokJwPUYwDQYJKoZI
+hvcNAQELBQAwgZcxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAO
+BgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVkMT0wOwYDVQQDEzRDT01P
+RE8gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTE3MTIy
+MTAwMDAwMFoXDTE4MTIyMTIzNTk1OVowIjEgMB4GCSqGSIb3DQEJARYRZHdtd0BhbWF6b24uY28u
+dWswggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCnRioF7sCjINq/ov+AWWQtHXUcTat8
+SCk2pInv1Qks6Duz9ewN+mc1HFTBGD36g7f+ucaHOk3YofqpGNqTQ6aWdQ2fJlawF+jtjutGYZlw
+etMDKA71z2SJ75DDluHa6p43v+/zTsqZ/10AGPpZ+Ck/t7Rxt0368siRTHnagv69vSiZQnngsSM3
+bato+ZjeNrbz1b+Pqfiq++7rohjgEjXRSWzXYMe1BhfopepERkpXteyyWSjIEYiyV2IxAsJxsHXy
+3TeUiDVg+SAt8l2PHdeAaug8g4zbbNQxcPkioVvJFRWEWab+0xN/+NkCSkFS+mFpGuU+BCTuwA94
+MtsqUbHfAgMBAAGjggHnMIIB4zAfBgNVHSMEGDAWgBSCr2yM+MX+lmF86B89K3FIXsSLwDAdBgNV
+HQ4EFgQU/74bwRMZdsA6/H+dLm/tMsxcmUYwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAw
+IAYDVR0lBBkwFwYIKwYBBQUHAwQGCysGAQQBsjEBAwUCMBEGCWCGSAGG+EIBAQQEAwIFIDBGBgNV
+HSAEPzA9MDsGDCsGAQQBsjEBAgEBATArMCkGCCsGAQUFBwIBFh1odHRwczovL3NlY3VyZS5jb21v
+ZG8ubmV0L0NQUzBaBgNVHR8EUzBRME+gTaBLhklodHRwOi8vY3JsLmNvbW9kb2NhLmNvbS9DT01P
+RE9SU0FDbGllbnRBdXRoZW50aWNhdGlvbmFuZFNlY3VyZUVtYWlsQ0EuY3JsMIGLBggrBgEFBQcB
+AQR/MH0wVQYIKwYBBQUHMAKGSWh0dHA6Ly9jcnQuY29tb2RvY2EuY29tL0NPTU9ET1JTQUNsaWVu
+dEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcnQwJAYIKwYBBQUHMAGGGGh0dHA6Ly9v
+Y3NwLmNvbW9kb2NhLmNvbTAcBgNVHREEFTATgRFkd213QGFtYXpvbi5jby51azANBgkqhkiG9w0B
+AQsFAAOCAQEAith6H3rKWwmg7rncMH4fBsQ6VVJ1W2WVVknKWTMX2KV8y6Ley+oma69eqDEPlDog
+wwCuvw9/rtkDfLtJSesiylZr4ZRjsw8sBrMhtjocvA7eY3BCubM/ODrD7a0R+2oWRy8WD4VpVCjo
+zjzerG/YerjGJV5hvypgK9q8BXsTema8IemMBe7pLjLNe+WHDcmEXQfJFWKt1opH20xzqEWyYrvV
+J8Oy6p7z038fsVLw+mjdgii7a5mnLVm5PfLMDYGyNfFFo3xKboLwKsNPQgy43quzdb9EpFJEBA6h
+klBPoSha8kzV7Weszn5fjEHw/FO0+aCWt+A5llyvfse3ZfjK6jCCBeYwggPOoAMCAQICEGqb4Tg7
+/ytrnwHV2binUlYwDQYJKoZIhvcNAQEMBQAwgYUxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVh
+dGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBMaW1p
+dGVkMSswKQYDVQQDEyJDT01PRE8gUlNBIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MB4XDTEzMDEx
+MDAwMDAwMFoXDTI4MDEwOTIzNTk1OVowgZcxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVy
+IE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVk
+MT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVt
+YWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvrOeV6wodnVAFsc4A5jTxhh2
+IVDzJXkLTLWg0X06WD6cpzEup/Y0dtmEatrQPTRI5Or1u6zf+bGBSyD9aH95dDSmeny1nxdlYCeX
+IoymMv6pQHJGNcIDpFDIMypVpVSRsivlJTRENf+RKwrB6vcfWlP8dSsE3Rfywq09N0ZfxcBa39V0
+wsGtkGWC+eQKiz4pBZYKjrc5NOpG9qrxpZxyb4o4yNNwTqzaaPpGRqXB7IMjtf7tTmU2jqPMLxFN
+e1VXj9XB1rHvbRikw8lBoNoSWY66nJN/VCJv5ym6Q0mdCbDKCMPybTjoNCQuelc0IAaO4nLUXk0B
+OSxSxt8kCvsUtQIDAQABo4IBPDCCATgwHwYDVR0jBBgwFoAUu69+Aj36pvE8hI6t7jiY7NkyMtQw
+HQYDVR0OBBYEFIKvbIz4xf6WYXzoHz0rcUhexIvAMA4GA1UdDwEB/wQEAwIBhjASBgNVHRMBAf8E
+CDAGAQH/AgEAMBEGA1UdIAQKMAgwBgYEVR0gADBMBgNVHR8ERTBDMEGgP6A9hjtodHRwOi8vY3Js
+LmNvbW9kb2NhLmNvbS9DT01PRE9SU0FDZXJ0aWZpY2F0aW9uQXV0aG9yaXR5LmNybDBxBggrBgEF
+BQcBAQRlMGMwOwYIKwYBBQUHMAKGL2h0dHA6Ly9jcnQuY29tb2RvY2EuY29tL0NPTU9ET1JTQUFk
+ZFRydXN0Q0EuY3J0MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5jb21vZG9jYS5jb20wDQYJKoZI
+hvcNAQEMBQADggIBAHhcsoEoNE887l9Wzp+XVuyPomsX9vP2SQgG1NgvNc3fQP7TcePo7EIMERoh
+42awGGsma65u/ITse2hKZHzT0CBxhuhb6txM1n/y78e/4ZOs0j8CGpfb+SJA3GaBQ+394k+z3ZBy
+WPQedXLL1OdK8aRINTsjk/H5Ns77zwbjOKkDamxlpZ4TKSDMKVmU/PUWNMKSTvtlenlxBhh7ETrN
+543j/Q6qqgCWgWuMAXijnRglp9fyadqGOncjZjaaSOGTTFB+E2pvOUtY+hPebuPtTbq7vODqzCM6
+ryEhNhzf+enm0zlpXK7q332nXttNtjv7VFNYG+I31gnMrwfHM5tdhYF/8v5UY5g2xANPECTQdu9v
+WPoqNSGDt87b3gXb1AiGGaI06vzgkejL580ul+9hz9D0S0U4jkhJiA7EuTecP/CFtR72uYRBcunw
+wH3fciPjviDDAI9SnC/2aPY8ydehzuZutLbZdRJ5PDEJM/1tyZR2niOYihZ+FCbtf3D9mB12D4ln
+9icgc7CwaxpNSCPt8i/GqK2HsOgkL3VYnwtx7cJUmpvVdZ4ognzgXtgtdk3ShrtOS1iAN2ZBXFiR
+mjVzmehoMof06r1xub+85hFQzVxZx5/bRaTKTlL8YXLI8nAbR9HWdFqzcOoB/hxfEyIQpx9/s81r
+gzdEZOofSlZHynoSMYIDyjCCA8YCAQEwga0wgZcxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVh
+dGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBMaW1p
+dGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRoZW50aWNhdGlvbiBhbmQgU2VjdXJl
+IEVtYWlsIENBAhEApEtL31g6H7ROXdOiQnA9RjANBglghkgBZQMEAgEFAKCCAe0wGAYJKoZIhvcN
+AQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTgwNzMxMTAyMjE0WjAvBgkqhkiG9w0B
+CQQxIgQgnRhkmvz5wsZbAWFk+ZAVV+WmPVJa1V355gGsOrYbVtwwgb4GCSsGAQQBgjcQBDGBsDCB
+rTCBlzELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMH
+U2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQxPTA7BgNVBAMTNENPTU9ETyBSU0Eg
+Q2xpZW50IEF1dGhlbnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1haWwgQ0ECEQCkS0vfWDoftE5d06JC
+cD1GMIHABgsqhkiG9w0BCRACCzGBsKCBrTCBlzELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0
+ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0
+ZWQxPTA7BgNVBAMTNENPTU9ETyBSU0EgQ2xpZW50IEF1dGhlbnRpY2F0aW9uIGFuZCBTZWN1cmUg
+RW1haWwgQ0ECEQCkS0vfWDoftE5d06JCcD1GMA0GCSqGSIb3DQEBAQUABIIBAGM5r2P+OntfW5vX
+K22Z7Wed59f4n9ORmMZ6IHxbOVp19F7Cv5tZoQFz21dnYRSjkNsSPhZk5IwjoQtOy9d2P1IpesmS
+l2okZaQfj+V1IXJb9M68q1lXMW4YKbA7aUHoNopKbot/m0FoB7QZjfvE4tFQVXg6ySH/coqkDWSI
+Leyb9DzgAQ7vr1mBPqTfdHRkAe62G2G+DWrSRgMw7d54Qq0Mu9Rq5wmENqYO7+nPgJdWHximsA3Q
+gqWIc52JhJJdUvf3CGigS8tyjgjwtD0Aw2FiYY1AqMcFC0DcdQM9Fekc8EWjHKBLxCTPNAs9agi5
+KixPuYEHVM4bcr15fqm1qhAAAAAAAAA=
 
---=separator
+
+--=-YWz4PyoXUWQnj8iv6jCp--
+
+--===============7734061385603820055==
+Content-Type: multipart/alternative; boundary="===============4166318085595823567=="
+MIME-Version: 1.0
+Content-Disposition: inline
+
+--===============4166318085595823567==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+
+
+
+
+Amazon Development Centre (London) Ltd. Registered in England and Wales wit=
+h registration number 04543232 with its registered office at 1 Principal Pl=
+ace, Worship Street, London EC2A 2FA, United Kingdom.
+
+
+
+--===============4166318085595823567==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+
+<br><br><br>Amazon Development Centre (London) Ltd.Registered in England an=
+d Wales with registration number 04543232 with its registered office at 1 P=
+rincipal Place, Worship Street, London EC2A 2FA, United Kingdom.<br><br><br>
+
+--===============4166318085595823567==--
+
+--===============7734061385603820055==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -213,4 +248,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---=separator--
+--===============7734061385603820055==--
