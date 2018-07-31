@@ -1,15 +1,20 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v8 00/11] arm: more kconfig configurability
- and small default configs
-Date: Tue, 31 Jul 2018 09:10:12 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1807310906320.26773@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1807301042060.20701@sstabellini-ThinkPad-X260>
- <01ae546e-229d-d8d0-966e-ed3754eb8e0a@arm.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v2] xenconsole: add option to avoid escape
+ sequences in log
+Date: Tue, 31 Jul 2018 18:11:15 +0200
+Message-ID: <20180731161115.GS1371@mail-itl>
+References: <20180731031532.11752-1-marmarek@invisiblethingslab.com>
+ <20180731091010.chflw6m32uqeatsq@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2020262908886500393=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <01ae546e-229d-d8d0-966e-ed3754eb8e0a@arm.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=01/i=kp=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1fkXF1-0003of-Qc
+ for xen-devel@lists.xenproject.org; Tue, 31 Jul 2018 16:11:19 +0000
+In-Reply-To: <20180731091010.chflw6m32uqeatsq@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,78 +23,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, andrew.cooper3@citrix.com, George.Dunlap@citrix.com, dfaggioli@suse.com, xen-devel@lists.xen.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCAzMSBKdWwgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IE9uIDMwLzA3LzE4IDE4
-OjQ4LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiBIaSBhbGwsCj4gCj4gSGkgU3RlZmFu
-bywKPiAKPiA+IAo+ID4gVGhpcyBwYXRjaCBzZXJpZXMgaXMgdGhlIGZpcnN0IHN0ZXAgdG93YXJk
-IGJ1aWxkaW5nIGEgc21hbGwgY2VydGlmaWFibGUKPiA+IFhlbiBoeXBlcnZpc29yIGZvciBBUk0g
-Ym9hcmRzLgo+ID4gCj4gPiBUaGUgc2VyaWVzIG1ha2VzIGEgZmV3IGNoYW5nZXMgdG8gYWxsb3cg
-ZGlzYWJsaW5nIG1vcmUga2NvbmZpZyBvcHRpb25zOgo+ID4gbW9zdCBvZiB0aGVtIGFscmVhZHkg
-ZXhpc3QgYnV0IGNhbm5vdCBiZSBkaXNhYmxlZC4gSXQgYWxzbyBpbnRyb2R1Y2VzIGEKPiA+IHJl
-ZmVyZW5jZSBrY29uZmlnIGZvciBSZW5lc2FzIFJDYXIgKGR1ZSB0byBwb3B1bGFyIGRlbWFuZCwg
-Y2FuZGlkYXRlIGZvcgo+ID4gY2VydGlmaWNhdGlvbnMpLCBYaWxpbnggTVBTb0MsIGFuZCBmb3Ig
-UUVNVSBhYXJjaDY0IChub3QgZm9yCj4gPiBjZXJ0aWZpY2F0aW9ucywgYnV0IHVzZWZ1bCBmb3Ig
-ZGVidWdnaW5nKS4KPiA+IAo+ID4gVGhlIGxhc3QgcGF0Y2ggY2xhcmlmaWVzIHRoZSBzZWN1cml0
-eSBzdXBwb3J0IHN0YXR1cyBvZiBrY29uZmlnIG9wdGlvbnMKPiA+IGluIFhlbi4KPiA+IAo+ID4g
-QWxsIHBhdGNoZXMgYXJlIGFscmVhZHkgYWNrZWQsIGV4Y2VwdCBmb3IgcGF0Y2ggIzg6ICJhcm06
-IGFkZCBBTExfUExBVCwKPiA+IFFFTVUsIFJjYXIzIGFuZCBNUFNvQyBjb25maWdzIi4KPiA+IAo+
-ID4gQ2hlZXJzLAo+ID4gCj4gPiBTdGVmYW5vCj4gPiAKPiA+IAo+ID4gVGhlIGZvbGxvd2luZyBj
-aGFuZ2VzIHNpbmNlIGNvbW1pdCAxNmZiNGI1YTlhNzlmOTVkZjE3ZjEwYmE2MmU5ZjQ0ZDIxY2Y4
-OWI1Ogo+ID4gCj4gPiAgICBkb2NzL2dlbi1odG1sLWluZGV4OiBNYWtlIEhUTUw6OlRyZWVCdWls
-ZGVyOjpYUGF0aCBvcHRpb25hbCBhZ2Fpbgo+ID4gKDIwMTgtMDQtMTMgMTc6MDQ6MzYgKzAxMDAp
-Cj4gCj4gVGhpcyBpcyBuZWFybHkgNCBtb250aHMgb2xkLi4uIFBsZWFzZSByZXNlbmQgdGhlIHNl
-cmllcyByZWJhc2VkIG9uIHRoZSBsYXRlc3QKPiBzdGFnaW5nLgoKVGhpcyBpcyB0aGUgcmViYXNl
-IG9uIHN0YWdpbmcsIGxldCBtZSBrbm93IGlmIHlvdSB3b3VsZCBhbHNvIGxpa2UgbWUgdG8Kc2Vu
-ZCBpdCB0byB0aGUgbGlzdC4gVGhpcyBicmFuY2ggaXMgZXhhY3RseSBpZGVudGljYWwgdG8gdjgg
-KGFzaWRlIGZyb20KdGhlIGZpcnN0IHBhdGNoIGJlaW5nIGRyb3BwZWQpOiBJIGhhdmVuJ3QgZG9u
-ZSBKYW4ncyBzbWFsbCByZXF1ZXN0IGZvcgpjaGFuZ2UuIExldCBtZSBrbm93IGlmIHlvdSBwcmVm
-ZXIgdGhhdCBJIGRvLgoKClRoZSBmb2xsb3dpbmcgY2hhbmdlcyBzaW5jZSBjb21taXQgNmFhYTlm
-YjMwODE3MWVjNThkZGY0Y2YwNThhZDUzNDFmODFhNjVjZjoKCiAgaHZtL2FsdHAybTogQ2xhcmlm
-eSB0aGUgcHJvcGVyIHdheSB0byBleHRlbmQgdGhlIGFsdHAybSBpbnRlcmZhY2UgKDIwMTgtMDct
-MzEgMTY6MTQ6MDEgKzAxMDApCgphcmUgYXZhaWxhYmxlIGluIHRoZSBnaXQgcmVwb3NpdG9yeSBh
-dDoKCiAgaHR0cDovL3hlbmJpdHMueGVucHJvamVjdC5vcmcvZ2l0LWh0dHAvcGVvcGxlL3NzdGFi
-ZWxsaW5pL3hlbi11bnN0YWJsZS5naXQgc21hbGwta2NvbmZpZy12OC0yCgpmb3IgeW91IHRvIGZl
-dGNoIGNoYW5nZXMgdXAgdG8gY2EzMDZmMGYwZTI1YTUyMGZhMWM0YWJkMjI1ZmM5MTI1MzI3NDIz
-ZToKCiAgeGVuOiBzcGVjaWZ5IHN1cHBvcnQgZm9yIEVYUEVSVCBhbmQgREVCVUcgS2NvbmZpZyBv
-cHRpb25zICgyMDE4LTA3LTMxIDA4OjI0OjAxIC0wNzAwKQoKLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpTdGVmYW5vIFN0YWJl
-bGxpbmkgKDEwKToKICAgICAgYXJtOiBtYWtlIGl0IHBvc3NpYmxlIHRvIGRpc2FibGUgSEFTX0dJ
-Q1YzCiAgICAgIGFybTogcmVuYW1lIEhBU19HSUNWMyB0byBHSUNWMwogICAgICBNYWtlIE1FTV9B
-Q0NFU1MgY29uZmlndXJhYmxlCiAgICAgIG1ha2UgaXQgcG9zc2libGUgdG8gZW5hYmxlL2Rpc2Fi
-bGUgVUFSVCBkcml2ZXJzCiAgICAgIGFybTogbWFrZSBpdCBwb3NzaWJsZSB0byBkaXNhYmxlIHRo
-ZSBTTU1VIGRyaXZlcgogICAgICBhcm06IGFkZCBhIHRpbnkga2NvbmZpZyBjb25maWd1cmF0aW9u
-CiAgICAgIGFybTogYWRkIEFMTF9QTEFULCBRRU1VLCBSY2FyMyBhbmQgTVBTb0MgY29uZmlncwog
-ICAgICB4ZW46IGFkZCBwZXItcGxhdGZvcm0gZGVmYXVsdHMgZm9yIE5SX0NQVVMKICAgICAgeGVu
-OiBhZGQgY2xvYyB0YXJnZXQKICAgICAgeGVuOiBzcGVjaWZ5IHN1cHBvcnQgZm9yIEVYUEVSVCBh
-bmQgREVCVUcgS2NvbmZpZyBvcHRpb25zCgogU1VQUE9SVC5tZCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHwgIDYgKysrKysKIHRvb2xzL2Zpcm13YXJlL3hlbi1kaXIvc2hpbS5jb25maWcgICB8
-ICAyICstCiB4ZW4vTWFrZWZpbGUgICAgICAgICAgICAgICAgICAgICAgICAgfCAxMiArKysrKysr
-KysKIHhlbi9hcmNoL0tjb25maWcgICAgICAgICAgICAgICAgICAgICB8ICAzICsrKwogeGVuL2Fy
-Y2gvYXJtL0tjb25maWcgICAgICAgICAgICAgICAgIHwgMTUgKysrKysrKystLS0KIHhlbi9hcmNo
-L2FybS9NYWtlZmlsZSAgICAgICAgICAgICAgICB8ICA0ICstLQogeGVuL2FyY2gvYXJtL2NvbmZp
-Z3MvdGlueTY0LmNvbmYgICAgIHwgMzggKysrKysrKysrKysrKysrKysrKysrKysrKysKIHhlbi9h
-cmNoL2FybS9wbGF0Zm9ybXMvS2NvbmZpZyAgICAgICB8IDUyICsrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKwogeGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9NYWtlZmlsZSAgICAgIHwg
-IDIgKy0KIHhlbi9hcmNoL2FybS92Z2ljLmMgICAgICAgICAgICAgICAgICB8ICAyICstCiB4ZW4v
-YXJjaC9hcm0vdmdpYy92Z2ljLmMgICAgICAgICAgICAgfCAgMiArLQogeGVuL2FyY2gveDg2L0tj
-b25maWcgICAgICAgICAgICAgICAgIHwgIDIgKy0KIHhlbi9jb21tb24vS2NvbmZpZyAgICAgICAg
-ICAgICAgICAgICB8IDEwICsrKysrKy0KIHhlbi9jb21tb24vTWFrZWZpbGUgICAgICAgICAgICAg
-ICAgICB8ICAyICstCiB4ZW4vY29tbW9uL2RvbWN0bC5jICAgICAgICAgICAgICAgICAgfCAgMiAr
-LQogeGVuL2RyaXZlcnMvY2hhci9LY29uZmlnICAgICAgICAgICAgIHwgMTUgKysrKysrLS0tLS0K
-IHhlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL0tjb25maWcgICAgICB8IDEyICsrKysrKysrKwogeGVu
-L2RyaXZlcnMvcGFzc3Rocm91Z2gvYXJtL01ha2VmaWxlIHwgIDIgKy0KIHhlbi9pbmNsdWRlL2Fz
-bS1hcm0vZ2ljLmggICAgICAgICAgICB8ICA0ICstLQogeGVuL2luY2x1ZGUvYXNtLWFybS92Z2lj
-LmggICAgICAgICAgIHwgIDQgKy0tCiB4ZW4vaW5jbHVkZS94ZW4vbWVtX2FjY2Vzcy5oICAgICAg
-ICAgfCAgNCArLS0KIHhlbi9pbmNsdWRlL3hzbS9kdW1teS5oICAgICAgICAgICAgICB8ICAyICst
-CiB4ZW4vaW5jbHVkZS94c20veHNtLmggICAgICAgICAgICAgICAgfCAgNCArLS0KIHhlbi94c20v
-ZHVtbXkuYyAgICAgICAgICAgICAgICAgICAgICB8ICAyICstCiB4ZW4veHNtL2ZsYXNrL2hvb2tz
-LmMgICAgICAgICAgICAgICAgfCAgNCArLS0KIDI1IGZpbGVzIGNoYW5nZWQsIDE3MyBpbnNlcnRp
-b25zKCspLCAzNCBkZWxldGlvbnMoLSkKIGNyZWF0ZSBtb2RlIDEwMDY0NCB4ZW4vYXJjaC9hcm0v
-Y29uZmlncy90aW55NjQuY29uZgogY3JlYXRlIG1vZGUgMTAwNjQ0IHhlbi9hcmNoL2FybS9wbGF0
-Zm9ybXMvS2NvbmZpZwoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+
+--===============2020262908886500393==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="U7F39clxgs+06sAz"
+Content-Disposition: inline
+
+
+--U7F39clxgs+06sAz
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jul 31, 2018 at 10:10:10AM +0100, Wei Liu wrote:
+> On Tue, Jul 31, 2018 at 05:15:32AM +0200, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > Add --replace-escape option to xenconsoled, which replaces ESC with
+> > '.' in console output written to log file. This makes it slightly safer
+> > to do tail -f on a console output of untrusted guest.
+> > The pty output is unaffected by this option.
+> >=20
+> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
+slab.com>
+>=20
+> Acked-by: Wei Liu <wei.liu2@citrix.com>
+>=20
+> ... though I would like to make a minor modification when committing.
+> See below.
+>=20
+> >  static int write_all(int fd, const char* buf, size_t len)
+> >  {
+> > +	char buf_replaced[1024];
+> > +	size_t this_round;
+>=20
+> These two can be moved into ...=20
+>=20
+> > +
+> >  	while (len) {
+> > -		ssize_t ret =3D write(fd, buf, len);
+> > +		ssize_t ret;
+> > +		if (replace_escape) {
+>=20
+> ... here.
+>=20
+> Let me know if you disagree.
+
+Sure, that's fine with me.
+
+> > +			if (len > sizeof(buf_replaced))
+> > +				this_round =3D sizeof(buf_replaced);
+> > +			else
+> > +				this_round =3D len;
+> > +			do_replace_escape(buf, buf_replaced, this_round);
+> > +			ret =3D write(fd, buf_replaced, this_round);
+> > +		} else
+> > +			ret =3D write(fd, buf, len);
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--U7F39clxgs+06sAz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAltgiiMACgkQ24/THMrX
+1yy4Zgf+LIwHJ7XYt8bKO3iKRwv0kT/2h4LHYf0dx5NHS2rNPoE1bS4diNfLf/Xi
+I2nVbYzOILOmSlHNWETAXUD/Kih14qPxZbiU3ozyfRY1XFXCjtyORjJclywBFyAY
+udM/RlSDLcTOd60XSalRnB3+oYc7yIzZXGKsgWFKSD4mojOSiPef3qCSWPKO+lqH
+WpWkuhEBzB0UPxFWl1qzvTM82sLPXspuSmE6+KrYdW3mUuVgoqSPieaORv1m95B3
+TqwoA0ITJWZhmUd02QMLeyRjMxGm1xuLY01FXy5C8egrs5onCViMvtbxu3a5X0b5
+Bbr5GE6c1YV4+rO/q/P2rWiEwngqTQ==
+=3l/S
+-----END PGP SIGNATURE-----
+
+--U7F39clxgs+06sAz--
+
+
+--===============2020262908886500393==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2020262908886500393==--
