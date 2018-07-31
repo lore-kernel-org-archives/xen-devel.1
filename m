@@ -1,16 +1,15 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 125693: all pass - PUSHED
-Date: Tue, 31 Jul 2018 21:39:14 +0000
-Message-ID: <osstest-125693-mainreport@xen.org>
+From: Lele Ma <lelema.zh@gmail.com>
+Subject: Networking with MiniOS
+Date: Tue, 31 Jul 2018 17:42:01 -0400
+Message-ID: <CA+-OKzVn9-ijw+z8toXWy=6HcXsD=HeLKEA3-Y1C5LSsTro57A@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0077088603988907623=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=b8jk=kp=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fkcMO-0003ii-Bc
- for xen-devel@lists.xenproject.org; Tue, 31 Jul 2018 21:39:16 +0000
+ <srs0=h+0c=kp=gmail.com=lelema.zh@srs-us1.protection.inumbo.net>)
+ id 1fkcPG-0004PR-U0
+ for xen-devel@lists.xenproject.org; Tue, 31 Jul 2018 21:42:14 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,45 +18,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: minios-devel@lists.xenproject.org
+Cc: xen-devel <xen-devel@lists.xenproject.org>, tamas.lengyel@zentific.com
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNTY5MyBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjU2OTMvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
-dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiBvdm1mICAgICAgICAgICAgICAgICA2ZDlhMGE5NDIwMTY3YTg3ZDM1M2I1M2I5M2ZlYzE3
-YWQ2MWI0YjYxCmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICAzOWYwMTU2
-ZmNlMzczYzBjMGEwNGQ4NTkyOGI3ZDg3NjEwMzcxMzRlCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-MjU2NjUgIDIwMTgtMDctMzAgMDE6NDA6NDMgWiAgICAxIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
-ICAgMTI1NjkzICAyMDE4LTA3LTMxIDA1OjEwOjQyIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgSGFvIFd1IDxo
-YW8uYS53dUBpbnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXhzbSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmly
-dCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
-bGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-CnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dz
-OiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmln
-IGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywg
-YW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
-cmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIK
-ICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtm
-PVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAg
-aHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQ
-dXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94ZW4vZ2l0L29zc3Rl
-c3Qvb3ZtZi5naXQKICAgMzlmMDE1NmZjZS4uNmQ5YTBhOTQyMCAgNmQ5YTBhOTQyMDE2N2E4N2Qz
-NTNiNTNiOTNmZWMxN2FkNjFiNGI2MSAtPiB4ZW4tdGVzdGVkLW1hc3RlcgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============0077088603988907623==
+Content-Type: multipart/alternative; boundary="00000000000068c3d505725273e8"
+
+--00000000000068c3d505725273e8
+Content-Type: text/plain; charset="UTF-8"
+
+Dear All,
+
+I am trying to enable networking with MiniOS.
+
+I created a daytime server based on daytime.c
+<https://github.com/xen-project/mini-os/blob/master/daytime.c> shipped with
+MiniOS. The code in daytime.c is copied into stubdom/c/main.c and built
+with c-stubdom.
+Server thread is created successfully but client cannot establish tcp
+connection with server thread, neither from MiniOS itself or from anther VM
+(dom0).
+
+The client code in MiniOS is:
+-------------------------------
+ while (1){
+        targetconn = netconn_new(NETCONN_TCP);
+            if ( targetconn == NULL ) {
+            /* No memory for new connection? */
+            continue;
+        }
+        rc = netconn_bind(targetconn, &localip, 0);
+*        //... success binding*
+        rc = netconn_connect ( targetconn, &remote_ip, LISTEN_PORT );
+
+        if ( rc != ERR_OK )
+        {
+*            // always catched the error here*
+            printf("----%s: Error connecting. Now reconnect...\n",
+__FUNCTION__);
+            netconn_delete ( targetconn );
+            continue;
+        }
+    }
+-------------------------------------------------
+(Complete code: https://github.com/tinyvmi/tinynet/blob/master/daytime.c)
+
+On dom0, I used telnet <minios-ip> <port> to connect, also with no luck.
+
+Could anyone give some hints how should I build a tcp connection with
+MiniOS?
+
+Best,
+Lele Ma
+
+--00000000000068c3d505725273e8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Dear All,<div><br></div><div>I am trying to enable network=
+ing with MiniOS.</div><div><br></div><div>I created a daytime server based =
+on <a href=3D"https://github.com/xen-project/mini-os/blob/master/daytime.c"=
+>daytime.c</a> shipped with MiniOS. The code in daytime.c is copied into st=
+ubdom/c/main.c and built with c-stubdom.=C2=A0</div><div>Server thread is c=
+reated successfully but client cannot establish tcp connection with server =
+thread, neither from MiniOS itself or from anther VM (dom0).</div><div><br>=
+</div><div>The client code in MiniOS is:</div><div>------------------------=
+-------</div><div><div>=C2=A0while (1){</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 targetconn =3D netconn_new(NETCONN_TCP);<br></div><div>=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if ( targetconn =3D=3D NULL ) {=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /*=
+ No memory for new connection? */</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 continue;</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 }</div><div>=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 rc =3D netconn_bind(targetconn, &amp;localip, 0);<=
+/div><div><b>=C2=A0 =C2=A0 =C2=A0 =C2=A0 //... success binding</b></div><di=
+v>=C2=A0 =C2=A0 =C2=A0 =C2=A0 rc =3D netconn_connect ( targetconn, &amp;rem=
+ote_ip, LISTEN_PORT );=C2=A0</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0</d=
+iv><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 if ( rc !=3D ERR_OK )</div><div>=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 {</div><div><b>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 // always catched the error here</b></div><div><b>=C2=A0</b> =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 printf(&quot;----%s: Error connecting. Now reconne=
+ct...\n&quot;, __FUNCTION__);</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 netconn_delete ( targetconn );</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 continue;</div><div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 }</div><div>=
+=C2=A0 =C2=A0 }<br></div></div><div>---------------------------------------=
+----------</div><div>(Complete code:=C2=A0<a href=3D"https://github.com/tin=
+yvmi/tinynet/blob/master/daytime.c">https://github.com/tinyvmi/tinynet/blob=
+/master/daytime.c</a>)</div><div><br></div><div>On dom0, I used telnet &lt;=
+minios-ip&gt; &lt;port&gt; to connect, also with no luck.</div><div><br></d=
+iv><div>Could anyone give some hints how should I build a tcp connection wi=
+th MiniOS?=C2=A0=C2=A0</div><div><br></div><div>Best,<br>Lele Ma</div><div>=
+<br></div></div>
+
+--00000000000068c3d505725273e8--
+
+
+--===============0077088603988907623==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0077088603988907623==--
