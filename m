@@ -1,19 +1,19 @@
 From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v2] xen/spinlock: Don't use pvqspinlock if
- only 1 vCPU
-Date: Tue, 31 Jul 2018 13:05:39 -0400
-Message-ID: <a57a15cb-162f-6248-79c9-311756bd9560__23779.0397987284$1533056656$gmane$org@oracle.com>
-References: <1532036397-19449-1-git-send-email-longman@redhat.com>
+Subject: Re: [PATCH][next] xen/gntdev: don't dereference a null
+ gntdev_dmabuf on allocation failure
+Date: Tue, 31 Jul 2018 13:09:08 -0400
+Message-ID: <524db07f-2e88-5ae1-f748-4f86506eeeb6__16648.8301860683$1533056857$gmane$org@oracle.com>
+References: <20180731140225.22717-1-colin.king@canonical.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=vyvo=kp=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1fkY5P-0008Ay-S8
- for xen-devel@lists.xenproject.org; Tue, 31 Jul 2018 17:05:27 +0000
-In-Reply-To: <1532036397-19449-1-git-send-email-longman@redhat.com>
+ id 1fkY8i-0008Pf-Dq
+ for xen-devel@lists.xenproject.org; Tue, 31 Jul 2018 17:08:52 +0000
+In-Reply-To: <20180731140225.22717-1-colin.king@canonical.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,20 +23,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Waiman Long <longman@redhat.com>, Juergen Gross <jgross@suse.com>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>
-Cc: xen-devel@lists.xenproject.org, x86@kernel.org, linux-kernel@vger.kernel.org
+To: Colin King <colin.king@canonical.com>, Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDcvMTkvMjAxOCAwNTozOSBQTSwgV2FpbWFuIExvbmcgd3JvdGU6Cj4gT24gYSBWTSB3aXRo
-IG9ubHkgMSB2Q1BVLCB0aGUgbG9ja2luZyBmYXN0IHBhdGhzIHdpbGwgYWx3YXlzIGJlCj4gc3Vj
-Y2Vzc2Z1bC4gSW4gdGhpcyBjYXNlLCB0aGVyZSBpcyBubyBuZWVkIHRvIHVzZSB0aGUgdGhlIFBW
-IHFzcGlubG9jawo+IGNvZGUgd2hpY2ggaGFzIGhpZ2hlciBvdmVyaGVhZCBvbiB0aGUgdW5sb2Nr
-IHNpZGUgdGhhbiB0aGUgbmF0aXZlCj4gcXNwaW5sb2NrIGNvZGUuCj4KPiBUaGUgeGVuX3B2c3Bp
-biB2ZXJpYWJsZSBpcyBhbHNvIHR1cm5lZCBvZmYgaW4gdGhpcyAxIHZDUFUgY2FzZSB0bwo+IGVs
-aW1pbmF0ZSB1bm5lZWRlZCBwdnFzcGlubG9jayBpbml0aWFsaXphdGlvbiBpbiB4ZW5faW5pdF9s
-b2NrX2NwdSgpCj4gd2hpY2ggaXMgcnVuIGFmdGVyIHhlbl9pbml0X3NwaW5sb2NrcygpLgo+Cj4g
-U2lnbmVkLW9mZi1ieTogV2FpbWFuIExvbmcgPGxvbmdtYW5AcmVkaGF0LmNvbT4KCgpBcHBsaWVk
-IHRvIGZvci1saW51cy00LjE5LgoKLWJvcmlzCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDcvMzEvMjAxOCAxMDowMiBBTSwgQ29saW4gS2luZyB3cm90ZToKPiBGcm9tOiBDb2xpbiBJ
+YW4gS2luZyA8Y29saW4ua2luZ0BjYW5vbmljYWwuY29tPgo+Cj4gQ3VycmVudGx5IHdoZW4gdGhl
+IGFsbG9jYXRpb24gb2YgZ250ZGV2X2RtYWJ1ZiBmYWlscywgdGhlIGVycm9yIGV4aXQKPiBwYXRo
+IHdpbGwgY2FsbCBkbWFidWZfaW1wX2ZyZWVfc3RvcmFnZSBhbmQgY2F1c2VzIGEgbnVsbCBwb2lu
+dGVyCj4gZGVyZWZlcmVuY2Ugb24gZ250ZGV2X2RtYWJ1Zi4gIEZpeCB0aGlzIGJ5IGFkZGluZyBh
+biBlcnJvciBleGl0IHBhdGgKPiB0aGF0IHdvbid0IGZyZWUgZ250ZGV2X2RtYWJ1Zi4KPgo+IERl
+dGVjdGVkIGJ5IENvdmVyaXR5U2NhbiwgQ0lEIzE0NzIxMjQgKCJEZXJlZmVyZW5jZSBhZnRlciBu
+dWxsIGNoZWNrIikKPgo+IEZpeGVzOiBiZjhkYzU1YjEzNTggKCJ4ZW4vZ250ZGV2OiBJbXBsZW1l
+bnQgZG1hLWJ1ZiBpbXBvcnQgZnVuY3Rpb25hbGl0eSIpCj4gU2lnbmVkLW9mZi1ieTogQ29saW4g
+SWFuIEtpbmcgPGNvbGluLmtpbmdAY2Fub25pY2FsLmNvbT4KClJldmlld2VkLWJ5OiBCb3JpcyBP
+c3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgoKQXBwbGllZCB0byBmb3ItbGlu
+dXMtNC4xOS4KCgoKPiAtLS0KPiAgZHJpdmVycy94ZW4vZ250ZGV2LWRtYWJ1Zi5jIHwgMyArKy0K
+PiAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQo+Cj4gZGlm
+ZiAtLWdpdCBhL2RyaXZlcnMveGVuL2dudGRldi1kbWFidWYuYyBiL2RyaXZlcnMveGVuL2dudGRl
+di1kbWFidWYuYwo+IGluZGV4IDc0NGNmZTliMDMxMS4uY2JhNmI1ODZiZmJkIDEwMDY0NAo+IC0t
+LSBhL2RyaXZlcnMveGVuL2dudGRldi1kbWFidWYuYwo+ICsrKyBiL2RyaXZlcnMveGVuL2dudGRl
+di1kbWFidWYuYwo+IEBAIC01NjgsNyArNTY4LDcgQEAgc3RhdGljIHN0cnVjdCBnbnRkZXZfZG1h
+YnVmICpkbWFidWZfaW1wX2FsbG9jX3N0b3JhZ2UoaW50IGNvdW50KQo+ICAKPiAgCWdudGRldl9k
+bWFidWYgPSBremFsbG9jKHNpemVvZigqZ250ZGV2X2RtYWJ1ZiksIEdGUF9LRVJORUwpOwo+ICAJ
+aWYgKCFnbnRkZXZfZG1hYnVmKQo+IC0JCWdvdG8gZmFpbDsKPiArCQlnb3RvIGZhaWxfbm9fZnJl
+ZTsKPiAgCj4gIAlnbnRkZXZfZG1hYnVmLT51LmltcC5yZWZzID0ga2NhbGxvYyhjb3VudCwKPiAg
+CQkJCQkgICAgc2l6ZW9mKGdudGRldl9kbWFidWYtPnUuaW1wLnJlZnNbMF0pLAo+IEBAIC01OTEs
+NiArNTkxLDcgQEAgc3RhdGljIHN0cnVjdCBnbnRkZXZfZG1hYnVmICpkbWFidWZfaW1wX2FsbG9j
+X3N0b3JhZ2UoaW50IGNvdW50KQo+ICAKPiAgZmFpbDoKPiAgCWRtYWJ1Zl9pbXBfZnJlZV9zdG9y
+YWdlKGdudGRldl9kbWFidWYpOwo+ICtmYWlsX25vX2ZyZWU6Cj4gIAlyZXR1cm4gRVJSX1BUUigt
+RU5PTUVNKTsKPiAgfQo+ICAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
