@@ -1,19 +1,15 @@
-From: Marek Marczykowski <marmarek@invisiblethingslab.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
 Subject: Re: [PATCH] tools/gdbsx: fix 'g' packet response for
  64bit guests
-Date: Tue, 31 Jul 2018 18:04:56 +0200
-Message-ID: <20180731160456.GQ1371@mail-itl>
+Date: Tue, 31 Jul 2018 18:10:07 +0200
+Message-ID: <20180731161007.GR1371@mail-itl>
 References: <20180731023042.19031-1-marmarek@invisiblethingslab.com>
- <5B60176302000078001D941A@prv1-mh.provo.novell.com>
+ <20180731090024.xbovqmyfrj6xiaid@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0368593853699474857=="
+Content-Type: multipart/mixed; boundary="===============5363988781829150958=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=01/i=kp=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1fkX8w-0002tT-O2
- for xen-devel@lists.xenproject.org; Tue, 31 Jul 2018 16:05:03 +0000
-In-Reply-To: <5B60176302000078001D941A@prv1-mh.provo.novell.com>
+In-Reply-To: <20180731090024.xbovqmyfrj6xiaid@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,33 +18,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Elena Ufimtseva <elena.ufimtseva@oracle.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Elena Ufimtseva <elena.ufimtseva@oracle.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============0368593853699474857==
+--===============5363988781829150958==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="8w4vJErrroHezzIq"
+	protocol="application/pgp-signature"; boundary="+GDz8FH0cDPsW8g2"
 Content-Disposition: inline
 
 
---8w4vJErrroHezzIq
+--+GDz8FH0cDPsW8g2
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 31, 2018 at 02:01:39AM -0600, Jan Beulich wrote:
-> >>> On 31.07.18 at 04:30, <marmarek@invisiblethingslab.com> wrote:
+On Tue, Jul 31, 2018 at 10:00:24AM +0100, Wei Liu wrote:
+> On Tue, Jul 31, 2018 at 04:30:42AM +0200, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > --- a/tools/debugger/gdbsx/gx/gx_local.c
+> > +++ b/tools/debugger/gdbsx/gx/gx_local.c
+> > @@ -45,8 +45,8 @@ prnt_32regs(struct xg_gdb_regs32 *r32p)
+> >  static void
+> >  prnt_64regs(struct xg_gdb_regs64 *r64p)
+> >  {
+> > -    printf("rip:"XGF64" rsp:"XGF64" flags:"XGF64"\n", r64p->rip, r64p-=
+>rsp,
+> > -           r64p->rflags);
+> > +    printf("rip:"XGF64" rsp:"XGF64" flags:%08x\n", r64p->rip, r64p->rs=
+p,
+> > +           r64p->eflags);
 >=20
-> Marek,
->=20
-> looks like all of the patches you've sent early this morning local time
-> here came through twice on xen-devel: Would you please avoid
-> having xen-devel on both the To and the Cc lists (just with different
-> domains)?
+> I think it would be better to introduce XGF32 and XGFM32 in the header.
 
-Sorry about that, now fixed my setup.
+I was inspired by prnt_32regs function, which use explicit %08x. Should
+it be changed there too (to PRIx32)? Otherwise that would be
+inconsistent (and maybe warrant a totally separate cleanup).
 
 --=20
 Best Regards,
@@ -57,25 +63,25 @@ Invisible Things Lab
 A: Because it messes up the order in which people normally read text.
 Q: Why is top-posting such a bad thing?
 
---8w4vJErrroHezzIq
+--+GDz8FH0cDPsW8g2
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAltgiKcACgkQ24/THMrX
-1ywFiAf/SodY/tjZ1rhW4gydduVI3M8TGUSUrt7YpkOjJv8/Esl2At4EFWAQZVU1
-qIbCKvtwuP4KzLKvMScCARuF1YmCn9/zGZAYOCYT/5WygUlMficPAGZdBXo0v9pD
-N8CboM9FOvQEdQ5BUt6UAc8YyJ0AuKZJsxGq/gb8v5ko8mDiEIuQXimhOCWGxHTI
-os3gMiHhEoRraKmNGwjNDvaJsC33kN2L2fP7y6Kz1FW903bcJCrAHb3dUqY7ZyBs
-fmdCdYcmomeG496pc95UFu+LDc7Sd+9p9aaskP2c9zWgHqmk8X7anXRbf7+nsiTg
-8skvKAowiNUHDo61KztUd5SmFFzmfA==
-=S0OA
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAltgid8ACgkQ24/THMrX
+1yyvPwf8DDOjdPHSpE7as4hNhFYgvbtK+K4ltpX8T1e+eEqeUvmvM7HaoIH2g1WE
++wOF57HBCX2rieaDXEF4bhTz4iRPo3vvwgsk3mCiCG6oEDdxGlisyPGa3e15vXsW
+NviaIM+UAoeKd8UxuoTyfUuuIYHNHu/QYgKDHKK24UBaad1hwCATScfD/0q+3KhF
+GJr4BlLrbd/IFMTq3wNPcdzNTdIPjEoW7Iidkjfn8yZ2kbHPc/mKptKlN9Aa5vqw
+v2ZmFu+jJZO6ootGtNZ0H2y+vB6e5RuoExEiYGkpytZ3aDhBS9CCxfl4Y3RlD8e1
+y+uru2BCJALXL5ZG1FGaFsGFahl3iA==
+=IVod
 -----END PGP SIGNATURE-----
 
---8w4vJErrroHezzIq--
+--+GDz8FH0cDPsW8g2--
 
 
---===============0368593853699474857==
+--===============5363988781829150958==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -85,4 +91,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============0368593853699474857==--
+--===============5363988781829150958==--
