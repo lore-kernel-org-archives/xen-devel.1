@@ -1,17 +1,21 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: [PATCH] docs/xl: Clarify documentation for mem-max and
- mem-set
-Date: Wed, 1 Aug 2018 16:41:24 +0100
-Message-ID: <20180801154124.12130-1-george.dunlap@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [RFC PATCH 03/17] libxl: Handle Linux stubdomain
+ specific QEMU options.
+Date: Wed, 1 Aug 2018 17:55:39 +0200
+Message-ID: <20180801155539.GW1371@mail-itl>
+References: <cover.cff0dcda374a083d3fc638b205f631586751181e.1533009377.git-series.marmarek@invisiblethingslab.com>
+ <1dad6c1a0f8cf4ca4d4f34a0a9762fcdfbc28fa1.1533009377.git-series.marmarek@invisiblethingslab.com>
+ <CAKf6xpvwd3XUd8E3CZFjdbX5zJQfROTN-Ce9B6=2CEygUuuR7g@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0471335319644487939=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=eebn=kq=citrix.com=prvs=744794b03=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1fktFj-00077y-1O
- for xen-devel@lists.xenproject.org; Wed, 01 Aug 2018 15:41:31 +0000
+ <srs0=8sl1=kq=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1fktTW-0007yp-Au
+ for xen-devel@lists.xenproject.org; Wed, 01 Aug 2018 15:55:46 +0000
+In-Reply-To: <CAKf6xpvwd3XUd8E3CZFjdbX5zJQfROTN-Ce9B6=2CEygUuuR7g@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,93 +24,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Eric Shelton <eshelton@pobox.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-bWVtLXNldCBpcyB0aGUgcHJpbWFyeSBjb21tYW5kIHRoYXQgdXNlcnMgd2lsbCBuZWVkIHRvIHVz
-ZSBhbmQKdW5kZXJzdGFuZC4gIE1vdmUgaXQgZmlyc3QsIGFuZCBjbGFyaWZ5IHRoZSB3b3JkaW5n
-OyBhbHNvIHNwZWNpZnkgdGhhdAp5b3UgY2FuJ3Qgc2V0IHRoZSB0YXJnZXQgaGlnaGVyIHRoYW4g
-bWF4bWVtIGZyb20gdGhlIGRvbWFpbiBjb25maWcuCgptZW0tbWF4IGlzIGFjdHVhbGx5IGEgcHJl
-dHR5IHVzZWxlc3MgY29tbWFuZCBhdCB0aGUgbW9tZW50LiAgQ2xhcmlmeQp0aGF0IHVzZXJzIGFy
-ZSBub3QgZXhwZWN0ZWQgdG8gdXNlIGl0OyBhbmQgZG9jdW1lbnQgYWxsIG9mIGl0cyBxdWlya3kK
-YmVoYXZpb3IuCgpTaWduZWQtb2ZmLWJ5OiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNp
-dHJpeC5jb20+Ci0tLQpJJ20gYWN0dWxseSBzb21ld2hhdCB0ZW1wdGVkIHRvIHRha2Ugb3V0IHRo
-ZSBlbnRyeSBmb3IgbWVtLW1heAplbnRpcmVseSAtLSBpdCdzIG5vdCBhdCBhbGwgY2xlYXIgdG8g
-bWUgd2hhdCBhbnlvbmUgd291bGQgdXNlIGl0IGZvciwKYW5kIGl0J3Mgb25seSBsaWtlbHkgdG8g
-Y29uZnVzZSBwZW9wbGUuCgpDQzogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGNpdHJpeC5jb20+
-CkNDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgpDQzogQW5kcmV3IENvb3BlciA8YW5k
-cmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KQ0M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNv
-bT4KQ0M6IFRpbSBEZWVnYW4gPHRpbUB4ZW4ub3JnPgpDQzogS29ucmFkIFdpbGsgPGtvbnJhZC53
-aWxrQG9yYWNsZS5jb20+CkNDOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5l
-bC5vcmc+CkNDOiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgpDQzogTGFycyBL
-dXJ0aCA8bGFycy5rdXJ0aEBjaXRyaXguY29tPgotLS0KIGRvY3MvbWFuL3hsLnBvZC4xLmluIHwg
-NzIgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0KIDEgZmlsZSBj
-aGFuZ2VkLCA1MCBpbnNlcnRpb25zKCspLCAyMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9k
-b2NzL21hbi94bC5wb2QuMS5pbiBiL2RvY3MvbWFuL3hsLnBvZC4xLmluCmluZGV4IGI3NDc2NGRj
-ZDMuLjFkM2RhYmYxODUgMTAwNjQ0Ci0tLSBhL2RvY3MvbWFuL3hsLnBvZC4xLmluCisrKyBiL2Rv
-Y3MvbWFuL3hsLnBvZC4xLmluCkBAIC0zOTMsNDAgKzM5Myw2OCBAQCBsZXNzIHV0aWxpemVkIHRo
-YW4gYSBoaWdoIENQVSB3b3JrbG9hZC4gIENvbnNpZGVyIHlvdXJzZWxmIHdhcm5lZC4KIAogPWJh
-Y2sKIAotPWl0ZW0gQjxtZW0tbWF4PiBJPGRvbWFpbi1pZD4gSTxtZW0+Cis9aXRlbSBCPG1lbS1z
-ZXQ+IEk8ZG9tYWluLWlkPiBJPG1lbT4KIAotU3BlY2lmeSB0aGUgbWF4aW11bSBhbW91bnQgb2Yg
-bWVtb3J5IHRoZSBkb21haW4gaXMgYWJsZSB0byB1c2UsIGFwcGVuZGluZyAndCcKLWZvciB0ZXJh
-Ynl0ZXMsICdnJyBmb3IgZ2lnYWJ5dGVzLCAnbScgZm9yIG1lZ2FieXRlcywgJ2snIGZvciBraWxv
-Ynl0ZXMgYW5kICdiJwotZm9yIGJ5dGVzLgorU2V0IHRoZSB0YXJnZXQgZm9yIHRoZSBkb21haW4n
-cyBiYWxsb29uIGRyaXZlci4gIEFwcGVuZCAndCcgZm9yCit0ZXJhYnl0ZXMsICdnJyBmb3IgZ2ln
-YWJ5dGVzLCAnbScgZm9yIG1lZ2FieXRlcywgJ2snIGZvciBraWxvYnl0ZXMKK2FuZCAnYicgZm9y
-IGJ5dGVzLgogCi1UaGUgbWVtLW1heCB2YWx1ZSBtYXkgbm90IGNvcnJlc3BvbmQgdG8gdGhlIGFj
-dHVhbCBtZW1vcnkgdXNlZCBpbiB0aGUKLWRvbWFpbiwgYXMgaXQgbWF5IGJhbGxvb24gZG93biBp
-dHMgbWVtb3J5IHRvIGdpdmUgbW9yZSBiYWNrIHRvIHRoZSBPUy4KK1RoaXMgbXVzdCBiZSBsZXNz
-IHRoYW4gdGhlIGluaXRpYWwgQjxtYXhtZW0+IHBhcmFtZXRlciBpbiB0aGUgZG9tYWluJ3MKK2Nv
-bmZpZ3VyYXRpb24uCiAKLVRoZSB2YWx1ZSBnaXZlbiBqdXN0IHNldHMgdGhlIG1lbW9yeSBhbW91
-bnQgdGhlIGRvbWFpbiBpcyBhbGxvd2VkIHRvIGFsbG9jYXRlCi1pbiB0aGUgaHlwZXJ2aXNvci4g
-SXQgY2FuJ3QgYmUgc2V0IGxvd2VyIHRoYW4gdGhlIGN1cnJlbnQgcmVzZXJ2YXRpb24sIGJ1dAot
-aXQgaXMgYWxsb3dlZCB0byBiZSBoaWdoZXIgdGhhbiB0aGUgY29uZmlndXJlZCBtYXhpbXVtIG1l
-bW9yeSBzaXplIG9mIHRoZQotZG9tYWluIChCPG1heG1lbT4gcGFyYW1ldGVyIGluIHRoZSBkb21h
-aW4ncyBjb25maWd1cmF0aW9uKS4gVXNpbmcgQjx4bCBtZW0tbWF4PgotdG8gc2V0IHRoZSBtYXhp
-bXVtIG1lbW9yeSBhYm92ZSB0aGUgaW5pdGlhbCBCPG1heG1lbT4gdmFsdWUgd2lsbCBub3QgYWxs
-b3cgdGhlCi1hZGRpdGlvbmFsIG1lbW9yeSB0byBiZSB1c2VkIHZpYSBCPHhsIG1lbS1zZXQ+LiBU
-aGUgaW5pdGlhbCBCPG1heG1lbT4gdmFsdWUgaXMKLXN0aWxsIHVzZWQgYXMgYW4gdXBwZXIgbGlt
-aXQgZm9yIEI8eGwgbWVtLXNldD4uCitOb3RlIHRoYXQgdGhpcyBvcGVyYXRpb24gcmVxdWVzdHMg
-dGhlIGd1ZXN0IG9wZXJhdGluZyBzeXN0ZW0ncyBiYWxsb29uCitkcml2ZXIgdG8gcmVhY2ggdGhl
-IHRhcmdldCBhbW91bnQgb2YgbWVtb3J5LiAgVGhlIGd1ZXN0IG1heSBmYWlsIHRvCityZWFjaCB0
-aGF0IGFtb3VudCBvZiBtZW1vcnkgZm9yIGFueSBudW1iZXIgb2YgcmVhc29ucywgaW5jbHVkaW5n
-OgogCi1UaGUgZG9tYWluIHdpbGwgbm90IHJlY2VpdmUgYW55IHNpZ25hbCByZWdhcmRpbmcgdGhl
-IGNoYW5nZWQgbWVtb3J5IGxpbWl0LgorPW92ZXIgNAogCi09aXRlbSBCPG1lbS1zZXQ+IEk8ZG9t
-YWluLWlkPiBJPG1lbT4KKz1pdGVtCisKK1RoZSBndWVzdCBkb2Vzbid0IGhhdmUgYSBiYWxsb29u
-IGRyaXZlciBpbnN0YWxsZWQKKworPWl0ZW0KKworVGhlIGd1ZXN0J3MgYmFsbG9vbiBkcml2ZXIg
-aXMgYnVnZ3kKKworPWl0ZW0KKworVGhlIGd1ZXN0J3MgYmFsbG9vbiBkcml2ZXIgY2Fubm90IGNy
-ZWF0ZSBmcmVlIGd1ZXN0IG1lbW9yeSBkdWUgdG8KK2d1ZXN0IG1lbW9yeSBwcmVzc3VyZQorCis9
-aXRlbQogCi1TZXQgdGhlIGRvbWFpbidzIHVzZWQgbWVtb3J5IHVzaW5nIHRoZSBiYWxsb29uIGRy
-aXZlcjsgYXBwZW5kICd0JyBmb3IKLXRlcmFieXRlcywgJ2cnIGZvciBnaWdhYnl0ZXMsICdtJyBm
-b3IgbWVnYWJ5dGVzLCAnaycgZm9yIGtpbG9ieXRlcyBhbmQgJ2InIGZvcgotYnl0ZXMuCitUaGUg
-Z3Vlc3QncyBiYWxsb29uIGRyaXZlciBjYW5ub3QgYWxsb2NhdGUgbWVtb3J5IGZyb20gWGVuIGJl
-Y2F1c2Ugb2YKK2h5cGVydmlzb3IgbWVtb3J5IHByZXNzdXJlCiAKLUJlY2F1c2UgdGhpcyBvcGVy
-YXRpb24gcmVxdWlyZXMgY29vcGVyYXRpb24gZnJvbSB0aGUgZG9tYWluIG9wZXJhdGluZwotc3lz
-dGVtLCB0aGVyZSBpcyBubyBndWFyYW50ZWUgdGhhdCBpdCB3aWxsIHN1Y2NlZWQuICBUaGlzIGNv
-bW1hbmQgd2lsbAotZGVmaW5pdGVseSBub3Qgd29yayB1bmxlc3MgdGhlIGRvbWFpbiBoYXMgdGhl
-IHJlcXVpcmVkIHBhcmF2aXJ0Ci1kcml2ZXIuCis9aXRlbQorCitUaGUgZ3Vlc3QgYWRtaW5pc3Ry
-YXRvciBoYXMgZGlzYWJsZWQgdGhlIGJhbGxvb24gZHJpdmVyCisKKz1iYWNrCiAKIEI8V2Fybmlu
-Zzo+IFRoZXJlIGlzIG5vIGdvb2Qgd2F5IHRvIGtub3cgaW4gYWR2YW5jZSBob3cgc21hbGwgb2Yg
-YQogbWVtLXNldCB3aWxsIG1ha2UgYSBkb21haW4gdW5zdGFibGUgYW5kIGNhdXNlIGl0IHRvIGNy
-YXNoLiAgQmUgdmVyeQogY2FyZWZ1bCB3aGVuIHVzaW5nIHRoaXMgY29tbWFuZCBvbiBydW5uaW5n
-IGRvbWFpbnMuCiAKKz1pdGVtIEI8bWVtLW1heD4gSTxkb21haW4taWQ+IEk8bWVtPgorCitTcGVj
-aWZ5IHRoZSBsaW1pdCBYZW4gd2lsbCBwbGFjZSBvbiB0aGUgYW1vdW50IG9mIG1lbW9yeSBhIGd1
-ZXN0IG1heQorYWxsb2NhdGUuIEFwcGVuZCAndCcgZm9yIHRlcmFieXRlcywgJ2cnIGZvciBnaWdh
-Ynl0ZXMsICdtJyBmb3IKK21lZ2FieXRlcywgJ2snIGZvciBraWxvYnl0ZXMgYW5kICdiJyBmb3Ig
-Ynl0ZXMuCisKK05CIHRoYXQgdXNlcnMgbm9ybWFsbHkgc2hvdWxkbid0IG5lZWQgdGhpcyBjb21t
-YW5kOyBCPHhsIG1lbS1zZXQ+IHdpbGwKK3NldCB0aGlzIGFzIGFwcHJvcHJpYXRlIGF1dG9tYXRp
-Y2FsbHkuCisKK0k8bWVtPiBjYW4ndCBiZSBzZXQgbG93ZXIgdGhhbiB0aGUgY3VycmVudCBtZW1v
-cnkgdGFyZ2V0IGZvcgorSTxkb21haW4taWQ+LiAgSXQgaXMgYWxsb3dlZCB0byBiZSBoaWdoZXIg
-dGhhbiB0aGUgY29uZmlndXJlZCBtYXhpbXVtCittZW1vcnkgc2l6ZSBvZiB0aGUgZG9tYWluIChC
-PG1heG1lbT4gcGFyYW1ldGVyIGluIHRoZSBkb21haW4ncworY29uZmlndXJhdGlvbikuIE5vdGUg
-aG93ZXZlciB0aGF0IHRoZSBpbml0aWFsIEI8bWF4bWVtPiB2YWx1ZSBpcyBzdGlsbAordXNlZCBh
-cyBhbiB1cHBlciBsaW1pdCBmb3IgQjx4bCBtZW0tc2V0Pi4gIEFsc28gbm90ZSB0aGF0IGNhbGxp
-bmcgQjx4bAorbWVtLXNldD4gd2lsbCByZXNldCB0aGlzIHZhbHVlLgorCitUaGUgZG9tYWluIHdp
-bGwgbm90IHJlY2VpdmUgYW55IHNpZ25hbCByZWdhcmRpbmcgdGhlIGNoYW5nZWQgbWVtb3J5Cits
-aW1pdC4KKwogPWl0ZW0gQjxtaWdyYXRlPiBbSTxPUFRJT05TPl0gSTxkb21haW4taWQ+IEk8aG9z
-dD4KIAogTWlncmF0ZSBhIGRvbWFpbiB0byBhbm90aGVyIGhvc3QgbWFjaGluZS4gQnkgZGVmYXVs
-dCBCPHhsPiByZWxpZXMgb24gc3NoIGFzIGEKLS0gCjIuMTguMAoKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============0471335319644487939==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="ZGfVcqCQYT4RlWas"
+Content-Disposition: inline
+
+
+--ZGfVcqCQYT4RlWas
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Aug 01, 2018 at 10:25:22AM -0400, Jason Andryuk wrote:
+> On Mon, Jul 30, 2018 at 11:56 PM, Marek Marczykowski-G=C3=B3recki
+> <marmarek@invisiblethingslab.com> wrote:
+> > From: Eric Shelton <eshelton@pobox.com>
+> >
+> > This patch creates an appropriate command line for the QEMU instance
+> > running in a Linux-based stubdomain.
+> >
+> > NOTE: a number of items are not currently implemented for Linux-based
+> > stubdomains, such as:
+> > - save/restore
+> > - QMP socket
+> > - graphics output (e.g., VNC)
+> >
+> > Signed-off-by: Eric Shelton <eshelton@pobox.com>
+> >
+> > Simon:
+> >  * fix disk path
+> >  * fix cdrom path and "format"
+> >  * pass downscript for network interfaces
+> > ---
+> <snip>
+> > @@ -1099,10 +1118,21 @@ static int libxl__build_device_model_args_new(l=
+ibxl__gc *gc,
+> >                  return ERROR_INVAL;
+> >              }
+> >              if (b_info->u.hvm.serial) {
+> > -                flexarray_vappend(dm_args,
+> > -                                  "-serial", b_info->u.hvm.serial, NUL=
+L);
+> > +                if (is_stubdom) {
+> > +                    flexarray_vappend(dm_args,
+> > +                                      "-serial",
+> > +                                      GCSPRINTF("/dev/hvc%d", STUBDOM_=
+CONSOLE_SERIAL),
+> > +                                      NULL);
+> > +                } else {
+> > +                    flexarray_vappend(dm_args,
+> > +                                      "-serial", b_info->u.hvm.serial,=
+ NULL);
+> > +                }
+> >              } else if (b_info->u.hvm.serial_list) {
+> >                  char **p;
+> > +                if (is_stubdom) {
+> > +                    flexarray_vappend(dm_args,
+> > +                                      "-serial", "/dev/hvc1", NULL);
+>=20
+> Should this also be GCSPRINTF("/dev/hvc%d", STUBDOM_CONSOLE_SERIAL)
+> instead of hardcoding hvc1?
+
+Yes. Anyway,  multiple serial consoles are incompatible with
+stubdomain anyway - should it error out if serial_list have multiple
+elements? Or silently ignore others?
+
+> > +                }
+> >                  for (p =3D b_info->u.hvm.serial_list;
+> >                       *p;
+> >                       p++) {
+>=20
+> <snip>
+>=20
+> > @@ -1550,8 +1584,8 @@ static int libxl__build_device_model_args_new(lib=
+xl__gc *gc,
+> >
+> >              if (disks[i].is_cdrom) {
+> >                  drive =3D libxl__sprintf(gc,
+> > -                         "if=3Dide,index=3D%d,readonly=3Don,media=3Dcd=
+rom,id=3Dide-%i",
+> > -                         disk, dev_number);
+> > +                         "if=3Dide,readonly=3Don,media=3Dcdrom,id=3Did=
+e-%i",
+> > +                         dev_number);
+>=20
+> What is the impact of dropping index?
+
+Leftover from Qubes-specific part of this patch (non-cdrom disks are
+converted to SCSI for readonly support, dropping index avoids hitting
+IDE limitation of 4 disks). I'll remove this chunk.
+
+> >                  if (target_path)
+> >                      drive =3D libxl__sprintf(gc, "%s,file=3D%s,format=
+=3D%s",
+>=20
+> Regards,
+> Jason
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--ZGfVcqCQYT4RlWas
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlth1/sACgkQ24/THMrX
+1yyhBQgAlqkUpbv+gLJ6cZhgcH2zjuuOIYhtrki3pqNewoQFhseaMwZN6T12OBss
+tbDtHnxG+VxRhqteeDdxXw1KJvQmyK/zsDwKco1idJ0loda6ZFDGPBiO7JXnyTEQ
+Y7xgWorMvgicTynwsw6Dln675scb69B1caOLhpBmIsMtfflrYq8bg0lzKe5gR3Yt
+lHy4yCqENDda7dqT6v28QRoheTQl4+VJfPJQGz9Q+PYKAQ9ED/UZfMnuooeYoXEw
+B9pAg4zc2lyidFQbkRjxfibTkbWRtHKbMy7hMVNMZnVTR18f5DGiFsQz78F/BRIj
+eGoRNc5Gtq/rLvTQzCLNCzD3qMKMug==
+=Wnno
+-----END PGP SIGNATURE-----
+
+--ZGfVcqCQYT4RlWas--
+
+
+--===============0471335319644487939==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0471335319644487939==--
