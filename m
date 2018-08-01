@@ -1,16 +1,17 @@
-From: Isaila Alexandru <aisaila@bitdefender.com>
-Subject: Re: [PATCH v14 09/11] x86/domctl: Don't pause the whole
- domain if only getting vcpu state
-Date: Wed, 01 Aug 2018 17:50:46 +0300
-Message-ID: <1533135046.21125.36.camel@bitdefender.com>
-References: <1532520862-13648-1-git-send-email-aisaila@bitdefender.com>
- <1532520862-13648-10-git-send-email-aisaila@bitdefender.com>
- <5B605F4702000078001D9759@prv1-mh.provo.novell.com>
+From: Jason Andryuk <jandryuk@gmail.com>
+Subject: Re: [RFC PATCH 04/17] libxl: Build the domain with a
+ Linux based stubdomain
+Date: Wed, 1 Aug 2018 10:54:10 -0400
+Message-ID: <CAKf6xpsrwfk2WzSF479JLy5H=ejxwVMiY-4zY8zCxRStjL2-cA@mail.gmail.com>
+References: <cover.cff0dcda374a083d3fc638b205f631586751181e.1533009377.git-series.marmarek@invisiblethingslab.com>
+ <f893b4caf7113d08e56264260e9ffc10b171b7fa.1533009377.git-series.marmarek@invisiblethingslab.com>
+ <CAKf6xptrvrpzj1EqzZypPK15zmu597zy_oGDtrEF4wGLWU=5gA@mail.gmail.com>
+ <20180801143715.GV1371@mail-itl>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B605F4702000078001D9759@prv1-mh.provo.novell.com>
+In-Reply-To: <20180801143715.GV1371@mail-itl>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,25 +20,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: =?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, Simon Gaiser <simon@invisiblethingslab.com>, xen-devel <xen-devel@lists.xenproject.org>, Eric Shelton <eshelton@pobox.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTWEsIDIwMTgtMDctMzEgYXQgMDc6MDggLTA2MDAsIEphbiBCZXVsaWNoIHdyb3RlOgo+ID4g
-Cj4gPiA+IAo+ID4gPiA+IAo+ID4gPiA+IE9uIDI1LjA3LjE4IGF0IDE0OjE0LCA8YWlzYWlsYUBi
-aXRkZWZlbmRlci5jb20+IHdyb3RlOgo+ID4gVGhpcyBwYXRjaCBpcyBmb2N1c2VkIG9uIG1vdmlu
-ZyB0aGUgZm9yIGxvb3AgdG8gdGhlIGNhbGxlciBzbwo+ID4gbm93IHdlIGNhbiBzYXZlIGluZm8g
-Zm9yIGEgc2luZ2xlIHZjcHUgaW5zdGFuY2Ugd2l0aCB0aGUgc2F2ZV9vbmUKPiA+IGhhbmRsZXJz
-Lgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBBbGV4YW5kcnUgSXNhaWxhIDxhaXNhaWxhQGJpdGRl
-ZmVuZGVyLmNvbT4KPiBGaXJzdCBvZiBhbGwgSSdkIGFwcHJlY2lhdGUgaWYgdGhpcyBwYXRjaCB3
-YXMgbGFzdCBpbiB0aGUgc2VyaWVzLAo+IGFmdGVyIGFsbAo+IGluZnJhc3RydWN0dXJlIGNoYW5n
-ZXMgaGF2ZSBiZWVuIGRvbmUuCj4gCklmIHRoaXMgcGF0Y2ggd2lsbCBiZSB0aGUgbGFzdCBvbmUg
-aW4gdGhlIHNlcmllcyB0aGVuIGJldHdlZW4gdGhlIG9uZQp0aGF0IHJlbW92ZXMgdGhlIHNhdmUg
-ZnVuY3Rpb25zIChhbmQgd2l0aCB0aGF0IHRoZSBmb3IpIGFuZCB0aGlzIG9uZQp0aGUgY29kZSB3
-aWxsIG5vdCBydW4gYXMgZXhwZWN0ZWQgYmVjYXVzZSB0aGVyZSB3aWxsIGJlIG5vIGZvci7CoAoK
-VGhpcyBwYXRjaCBoYXMgdG8gYmUgZm9sbG93ZWQgYnkgdGhlICJSZW1vdmUgcmVkdW5kYW50IHNh
-dmUgZnVuY3Rpb25zIgphbmQgbm90IHRoZSBvdGhlciB3YXkgYXJvdW5kLgoKUGxlYXNlIGNsYXJp
-ZnkgdGhpcyBpZiBJIGRpZCBub3QgdW5kZXJzdG9vZCBjb3JyZWN0bHkuwqAKClRoYW5rcyzCoApB
-bGV4CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gV2VkLCBBdWcgMSwgMjAxOCBhdCAxMDozNyBBTSwgTWFyZWsgTWFyY3p5a293c2tpLUfDs3Jl
+Y2tpCjxtYXJtYXJla0BpbnZpc2libGV0aGluZ3NsYWIuY29tPiB3cm90ZToKPiBPbiBXZWQsIEF1
+ZyAwMSwgMjAxOCBhdCAxMDoyNjowNkFNIC0wNDAwLCBKYXNvbiBBbmRyeXVrIHdyb3RlOgo+PiBP
+biBNb24sIEp1bCAzMCwgMjAxOCBhdCAxMTo1NiBQTSwgTWFyZWsgTWFyY3p5a293c2tpLUfDs3Jl
+Y2tpCj4+IDxtYXJtYXJla0BpbnZpc2libGV0aGluZ3NsYWIuY29tPiB3cm90ZToKPj4gPiBGcm9t
+OiBFcmljIFNoZWx0b24gPGVzaGVsdG9uQHBvYm94LmNvbT4KPj4gPgo+PiA+IFRoaXMgd2lsbCBi
+dWlsZCBhIExpbnV4LWJhc2VkIHN0dWJkb21haW4gd2l0aCBRRU1VIHVwc3RyZWFtLgo+PiA+Cj4+
+ID4gU2lnbmVkLW9mZi1ieTogRXJpYyBTaGVsdG9uIDxlc2hlbHRvbkBwb2JveC5jb20+Cj4+ID4K
+Pj4gPiBTaW1vbjoKPj4gPiAgKiB1c2UgaW5pdHJhbWZzIGluc3RlYWQgb2YgZGlzayB3aXRoIHJv
+b3Rmcwo+PiA+ICAqIGRvbid0IGluaXRpYWxpemUgcW1wICh1bnVzZWQgaW4gUXViZXMpCj4+ID4g
+ICogTWFrZSBsaWJ4bF9kb21haW5fbmVlZF9tZW1vcnkgY29uc2lzdGVudCB3aXRoIGFjdHVhbCBz
+dHViZG9tYSBidWlsZAo+PiA+ICAgIGNvZGUgKGJ1Z2ZpeCByZWxldmFudCBhbHNvIGZvciBub24t
+bGludXggY2FzZSkKPj4gPiAgKiBNYWtlIHN0dWJkb21haW4gbWVtb3J5IHNpemUgY29uZmlndXJh
+YmxlCj4+ID4gU2lnbmVkLW9mZi1ieTogU2ltb24gR2Fpc2VyIDxzaW1vbkBpbnZpc2libGV0aGlu
+Z3NsYWIuY29tPgo+PiA+Cj4+ID4gTWFyZWs6Cj4+ID4gICogTWFrZSBrZXJuZWwgYW5kIHJhbWRp
+c2sgcGF0aHMgY29uZmlndXJhYmxlLgo+PiA+IFNpZ25lZC1vZmYtYnk6IE1hcmVrIE1hcmN6eWtv
+d3NraS1Hw7NyZWNraSA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNvbT4KPj4gPiAtLS0K
+Pj4KPj4gPHNuaXA+Cj4+Cj4+ID4gQEAgLTE5ODMsMTAgKzE5OTcsOCBAQCB2b2lkIGxpYnhsX19z
+cGF3bl9zdHViX2RtKGxpYnhsX19lZ2MgKmVnYywgbGlieGxfX3N0dWJfZG1fc3Bhd25fc3RhdGUg
+KnNkc3MpCj4+ID4gICAgICAgICAgZG1fY29uZmlnLT5udW1fdmticyA9IDE7Cj4+ID4gICAgICB9
+Cj4+ID4KPj4gPiAtICAgIHN0dWJkb21fc3RhdGUtPnB2X2tlcm5lbC5wYXRoCj4+ID4gLSAgICAg
+ICAgPSBsaWJ4bF9fYWJzX3BhdGgoZ2MsICJpb2VtdS1zdHViZG9tLmd6IiwgbGlieGxfX3hlbmZp
+cm13YXJlZGlyX3BhdGgoKSk7Cj4+ID4gLSAgICBzdHViZG9tX3N0YXRlLT5wdl9jbWRsaW5lID0g
+R0NTUFJJTlRGKCIgLWQgJWQiLCBndWVzdF9kb21pZCk7Cj4+Cj4+IFRoaXMgZHJvcHBlZCBsaW5l
+IGlzbid0IHJlc3RvcmVkIGFueXdoZXJlIGVsc2UsIGFmYWljcy4gIERvZXMgdGhpcwo+PiBicmVh
+ayBtaW5pLW9zIHN0dWJkb21zPwo+Cj4gTm8sIG1pbmktb3MgZ2V0cyBjbWRsaW5lIGZyb20geGVu
+c3RvcmUgYW55d2F5LiBBbmQKPiBsaWJ4bF9fYnVpbGRfZGV2aWNlX21vZGVsX2FyZ3Nfb2xkIGRv
+IGFkZCAtZCBkb21pZCB0aGVyZS4KCkFoLCBva2F5LiAgVGhhbmtzLgoKUmV2aWV3ZWQtYnk6IEph
+c29uIEFuZHJ5dWsgPGphbmRyeXVrQGdtYWlsLmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
