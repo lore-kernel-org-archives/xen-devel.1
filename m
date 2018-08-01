@@ -1,15 +1,19 @@
-From: Jason Andryuk <jandryuk@gmail.com>
-Subject: Re: [RFC PATCH 06/17] libxl: create vkb device only for
- guests with graphics output
-Date: Wed, 1 Aug 2018 10:30:14 -0400
-Message-ID: <CAKf6xpsU0WZnjLVMQ5iqW1Z4sjQHx6WkVygBE-d4WCLJ6MTTww@mail.gmail.com>
-References: <cover.cff0dcda374a083d3fc638b205f631586751181e.1533009377.git-series.marmarek@invisiblethingslab.com>
- <767b0474eebe5317b8d0a4d225043172172d0be7.1533009377.git-series.marmarek@invisiblethingslab.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH 1/5] x86/cpuidle: replace a pointless NULL check
+Date: Wed, 01 Aug 2018 08:31:20 -0600
+Message-ID: <5B61C43802000078001D9F5F@prv1-mh.provo.novell.com>
+References: <5B61C21202000078001D9F2D@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <767b0474eebe5317b8d0a4d225043172172d0be7.1533009377.git-series.marmarek@invisiblethingslab.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=qz6i=kq=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fks9s-0007Gr-NZ
+ for xen-devel@lists.xenproject.org; Wed, 01 Aug 2018 14:31:24 +0000
+In-Reply-To: <5B61C21202000078001D9F2D@prv1-mh.provo.novell.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,22 +22,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, xen-devel@lists.xen.org
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKdWwgMzAsIDIwMTggYXQgMTE6NTYgUE0sIE1hcmVrIE1hcmN6eWtvd3NraS1Hw7Ny
-ZWNraQo8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNvbT4gd3JvdGU6Cj4gVGhlIGZvcmNl
-ZCB2a2IgZGV2aWNlIGlzIG1lYW50IGZvciBiZXR0ZXIgcGVyZm9ybWFuY2Ugb2YgcWVtdSBhY2Nl
-c3MKPiAoYXQgbGVhc3QgYWNjb3JkaW5nIHRvIGViYmQyNTYxYjRjZWZiMjk5ZjBmNjhhODhiMjc4
-ODUwNDIyM2RlMTggImxpYnhsOgo+IEFkZCBhIHZrYmQgZnJvbnRlbmQvYmFja2VuZCBwYWlyIGZv
-ciBIVk0gZ3Vlc3RzIiksIHdoaWNoIGlzbid0IHVzZWQgaWYKPiB0aGVyZSBpcyBubyBjb25maWd1
-cmVkIGNoYW5uZWwgdG8gYWN0dWFsbHkgYWNjZXNzIHRoYXQga2V5Ym9hcmQuCj4KPiBPbmUgY2Fu
-IHN0aWxsIGFkZCB2a2IgZGV2aWNlIG1hbnVhbGx5IGlmIG5lZWRlZC4KPgo+IFRoaXMgaXMgY29u
-dGludWF0aW9uIG9mIGIwNTNmMGM0YzllNTMzZjNkOTc4MzdjZjg5N2ViOTIwYjgzNTVlZDMgImxp
-YnhsOiBkbwo+IG5vdCBzdGFydCBkb20wIHFlbXUgZm9yIHN0dWJkb21haW4gd2hlbiBub3QgbmVl
-ZGVkIi4KClByaW9yIHRvIHRoaXMgY2hhbmdlLCB3YXMgYSBkb20wIHFlbXUgc3RhcnRlZCBmb3Ig
-dGhlc2UgZW50cmllcz8KClJldmlld2VkLWJ5OiBKYXNvbiBBbmRyeXVrIDxqYW5kcnl1a0BnbWFp
-bC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+VGhlIGFkZHJlc3Mgb2YgYW4gYXJyYXkgc2xvdCBjYW4ndCBiZSBOVUxMLiBJbnN0ZWFkIGFkZCBh
+IGJvdW5kcyBjaGVjawp0byBtYWtlIHN1cmUgdGhlIGFycmF5IGluZGV4aW5nIGlzIHZhbGlkICh0
+aGUgY2hlY2sgaXMgYWdhaW5zdCAyIHNpbmNlCnNsb3QgemVybyBvZiB0aGUgYXJyYXkgLSBjb3Jy
+ZXNwb25kaW5nIHRvIEMwIC0gaXMgb2Ygbm8gaW50ZXJlc3QgaGVyZSkuCgpTaWduZWQtb2ZmLWJ5
+OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgotLS0gYS94ZW4vYXJjaC94ODYvYWNw
+aS9jcHVfaWRsZS5jCisrKyBiL3hlbi9hcmNoL3g4Ni9hY3BpL2NwdV9pZGxlLmMKQEAgLTc1OSwx
+MSArNzU5LDExIEBAIHZvaWQgYWNwaV9kZWFkX2lkbGUodm9pZCkKICAgICBzdHJ1Y3QgYWNwaV9w
+cm9jZXNzb3JfcG93ZXIgKnBvd2VyOwogICAgIHN0cnVjdCBhY3BpX3Byb2Nlc3Nvcl9jeCAqY3g7
+CiAKLSAgICBpZiAoIChwb3dlciA9IHByb2Nlc3Nvcl9wb3dlcnNbc21wX3Byb2Nlc3Nvcl9pZCgp
+XSkgPT0gTlVMTCApCisgICAgaWYgKCAocG93ZXIgPSBwcm9jZXNzb3JfcG93ZXJzW3NtcF9wcm9j
+ZXNzb3JfaWQoKV0pID09IE5VTEwgfHwKKyAgICAgICAgIHBvd2VyLT5jb3VudCA8IDIgKQogICAg
+ICAgICBnb3RvIGRlZmF1bHRfaGFsdDsKIAotICAgIGlmICggKGN4ID0gJnBvd2VyLT5zdGF0ZXNb
+cG93ZXItPmNvdW50LTFdKSA9PSBOVUxMICkKLSAgICAgICAgZ290byBkZWZhdWx0X2hhbHQ7Cisg
+ICAgY3ggPSAmcG93ZXItPnN0YXRlc1twb3dlci0+Y291bnQgLSAxXTsKIAogICAgIGlmICggY3gt
+PmVudHJ5X21ldGhvZCA9PSBBQ1BJX0NTVEFURV9FTV9GRkggKQogICAgIHsKCgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
