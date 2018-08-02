@@ -1,19 +1,23 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [RFC] OVMF on PVH
-Date: Thu, 2 Aug 2018 18:21:31 +0200
-Message-ID: <20180802162131.tly5zwcfewz5lalv@mac>
-References: <20180802112435.GB1327@perard.uk.xensource.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [Notes for xen summit 2018 design session] Graphic
+ virtualization
+Date: Thu, 2 Aug 2018 10:53:27 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1808021053080.1127@sstabellini-ThinkPad-X260>
+References: <c05f24a4-6c10-282f-3945-c63dcee168ba@arm.com>
+ <c8de3993-cac5-0e94-22d9-63294d52095b@epam.com>
+ <D1498146-8849-4D03-B8F2-9C62224FE706@citrix.com>
+ <4a33c97b-7569-52e5-b165-eff6b37bb0bd@epam.com>
+ <6b151a8d-f11f-29d9-20f5-499732bfb357@arm.com>
+ <0800a925-7b32-85b4-67e6-7916829e01cb@epam.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1280138051-1533232435=:1127"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=os/m=kr=citrix.com=prvs=7454c2131=roger.pau@srs-us1.protection.inumbo.net>)
- id 1flGM9-0004tv-9N
- for xen-devel@lists.xenproject.org; Thu, 02 Aug 2018 16:21:41 +0000
-Content-Disposition: inline
-In-Reply-To: <20180802112435.GB1327@perard.uk.xensource.com>
+ <srs0=hjhm=kr=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1flHnS-0002sz-IJ
+ for xen-devel@lists.xenproject.org; Thu, 02 Aug 2018 17:53:58 +0000
+In-Reply-To: <0800a925-7b32-85b4-67e6-7916829e01cb@epam.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,86 +26,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Artem Mygaiev <artem_mygaiev@epam.com>
+Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Rich Persaud <persaur@gmail.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <Paul.Durrant@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBBdWcgMDIsIDIwMTggYXQgMTI6MjQ6MzVQTSArMDEwMCwgQW50aG9ueSBQRVJBUkQg
-d3JvdGU6Cj4gSGksCj4gCj4gSSd2ZSBiZWVuIHdvcmtpbmcgb24gYm9vdGluZyBPVk1GIGluIGEg
-UFZIIGd1ZXN0LiBUaGVyZSBhcmUgZmV3IGNoYW5nZXMKPiB0aGF0IEknZCBsaWtlIHlvdXIgY29t
-bWVudHMgb24uIFRob3NlIGFyZSBjaGFuZ2VzIHRoYXQgSSd2ZSBhbHJlYWR5IG1hZGUKPiBpbiBt
-eSBwcml2YXRlIGJyYW5jaCwgdGhlcmUgYXJlIGVpdGhlciByZXF1aXJlZCBvciB3aWxsIG1ha2Ug
-dGhpbmdzCj4gZWFzaWVyLgo+IAo+ICMjIEdvYWwKPiAKPiBIYXZlIGEgc2luZ2xlIGJsb2IgdGhh
-dCBjYW4gYmUgdXNlIGZvciBib3RoIEhWTSBhbmQgUFZIIGd1ZXN0cy4gQW5kIGJlCj4gYWJsZSB0
-byBzdGFydCBVRUZJIGNvbXBhdGlibGUgZ3Vlc3RzIGluIFBWSC4KPiAKPiAKPiAjIyBOZXcgYmlu
-YXJ5LCBzZXBhcmF0ZWQgZnJvbSBRRU1VL0tWTSBvbmUuCj4gCj4gUmlnaHQgbm93LCB0aGUgcnVs
-ZXMgdG8gYnVpbGQgdGhlIGZpcm13YXJlIGFyZSBsb2NhdGVkIGluCj4gYE92bWZQa2cvT3ZtZlBr
-Z1g2NC5kc2NgLCBhIHBsYXRmb3JtLiBJJ3ZlIGNyZWF0ZWQgYSBuZXcgcGxhdGZvcm0sIHdpdGhv
-dXQKPiBLVk0gc3VwcG9ydCwgYW5kIHdvdWxkIGxpa2UgdG8gcmV0aXJlIHRoZSBYZW4gc3VwcG9y
-dCBmcm9tIHRoZSBjdXJyZW50Cj4gcGxhdGZvcm0uICBGb3Igbm93LCBJIGhhdmUgY3JlYXRlZCBP
-dm1mUGtnL1hlbk92bWYuZHNjLiAoVGhlIGNoYW5nZSB0byBhCj4gbmV3IHBsYXRmb3JtIGhhZCBi
-ZWVuIHByb3Bvc2VkIGJ5IHVwc3RyZWFtLikKCklzIGl0IG15IHVuZGVyc3RhbmRpbmcgdGhhdCBh
-ZnRlciB0aGlzIHRoZXJlIHdpbGwgYmUgYSBnZW5lcmljCnBsYXRmb3JtIChmb3IgUUVNVSwgS1ZN
-IGFuZCBldmVyeXRoaW5nIGVsc2UpIGFuZCBhIHBsYXRmb3JtIGZvciBYZW4/Cgo+IFRoYXQgd291
-bGQgc2ltcGxpZnkgWGVuIHN1cHBvcnQgaW4gT1ZNRiwgYW5kIGFsbG93IHRvIGRpdmVyZ2UgbW9y
-ZSBmcm9tCj4gT1ZNRiB3aGVyZSBuZWVkZWQuIFRoYXQgd291bGQgbW9zdGx5IGJlIHVzZWZ1bCBk
-dXJpbmcgdGhlIGluaXRpYWwgYm9vdAo+IHBoYXNlIHdoZXJlIHRoZXJlIGxvdHMgb2YgYGlmIHhl
-biBkbyB0aGF0LCBlbHNlIGRvIHRoYXRgLgoKSSBmZWFyIHRoaXMgbWlnaHQgYmUgZGFuZ2Vyb3Vz
-IGJlY2F1c2UgbW9zdCBkZXZlbG9wZXJzIHdpbGwgb25seSB0ZXN0CmFnYWluc3QgdGhlIGdlbmVy
-aWMgcGxhdGZvcm0sIHNvIGJyZWFrYWdlIGNvdWxkIGJlIGludHJvZHVjZWQgbW9yZQplYXNpbHkg
-dG8gdGhlIFhlbiBwbGF0Zm9ybSB3aXRob3V0IHVwc3RyZWFtIG5vdGljaW5nPwoKPiBXZSBjYW4g
-YWxzbyBjaG9vc2Ugc29tZSBkcml2ZXJzIHRoYXQgY2FuIHdvcmsgb24gYm90aCBQVkggYW5kIEhW
-TSwgZm9yCj4gZXhhbXBsZSwgdXNlIGEgTEFQSUMgdGltZXIgaW5zdGVhZCBvZiBBQ1BJIFRpbWVy
-Lgo+IAo+IEFsbCB0aGlzIG1lYW4gdGhhdCBidWlsZGluZyBPVk1GIGZvciBYZW4gd291bGQgbmVl
-ZCB0byBiZSBjaGFuZ2UuCgpBbmQgZGlzdHJvcyB3aWxsIGxpa2VseSBoYXZlIHRvIHByb3ZpZGUg
-dHdvIGRpZmZlcmVudCBwYWNrYWdlcywgb3IgYQpzaW5nbGUgcGFja2FnZSB3aXRoIHRoZSBnZW5l
-cmljIGJpbmFyeSBhbmQgdGhlIFhlbiBzcGVjaWZpYyBvbmUuCgo+IAo+ICMjIEVMRiBoZWFkZXIK
-PiAKPiBBZGRpbmcgYW4gRUxGIGhlYWRlciB0byBPVk1GIHNvIHRoZSBibG9iIGNhbiBiZSBsb2Fk
-ZWQgYnkgbGlieGwvbGlieGMKPiB3aXRob3V0IG1vZGlmeWluZyB0aG9zZSBsaWJzLgo+IAo+IFRo
-YXQgcmVwbGFjZSBhIHNlY3Rpb24gb2YgdGhlIE9WTUYgYmluYXJ5IGNhbGxlZCBWYXJTdG9yZSBi
-eSB0aGF0IEVMRgo+IGhlYWRlci4gIEl0J3MgZW1wdHkgYW5kIGxpYnhsIGRvZXNuJ3Qga25vdyBo
-b3cgdG8gdXNlIGl0LiAoUUVNVS9LVk0gd291bGQKPiBoYXZlIGEgZmxhc2ggZGV2aWNlIGxvYWRp
-bmcgdGhlIHN0b3JlLCBzbyBpdCBjYW4gYmUgd3JpdHRlbiB0by4pCgpDYW4ndCB5b3UganVzdCBh
-ZGQgdGhlIGhlYWRlciB3aXRob3V0IHJlcGxhY2luZyBhbnl0aGluZz8gVGhlIEVMRgpoZWFkZXIg
-aXMgcXVpdGUgc21hbGwsIHNvIEkgZG9uJ3QgdGhpbmsgc2l6ZSBzaG91bGQgYmUgYSBwcm9ibGVt
-IChpZgp0aGF0J3Mgd2h5IGl0J3MgcGxhY2VkIG9uIHRvcCBvZiB0aGUgVmFyU3RvcmUpLgoKPiBX
-aXRoIHRoZSBFTEYgaGVhZGVyLCBJIGNhbiB0ZXN0IE9WTUYgYnkgc2ltcGx5IGFkZGluZyB0aGlz
-IGluIHRoZSBjb25maWcKPiBmaWxlOgo+IAo+ICAgICB0eXBlPSdwdmgnCj4gICAgIGtlcm5lbD0n
-L3BhdGgvdG8vT1ZNRi5mZCcKClllcywgdGhhdCdzIHRoZSBleHBlY3RhdGlvbiBhbmQgaXMgd2hh
-dCBmaXJtd2FyZT0nb3ZtZnx1ZWZpJyBzaG91bGQKZG8gYmVoaW5kIHRoZSBzY2VuZXMuCgo+IFdl
-IGNvdWxkIHVzZSBhIG1vZGlmaWVkIGBodm1sb2FkZXJgIHRvIGxvYWQgT1ZNRiBvbiBQVkggb3Ig
-dGVhY2ggbGlieGMgdG8KPiBsb2FkIGl0IGF0IGEgaGFyZGNvZGVkIGxvY2F0aW9uLCBidXQgSSBk
-b24ndCBzZWUgaXQgYXMgbmVjZXNzYXJ5LCBhbmQgaWYKPiB3ZSBoYXZlIG9uZSBsZXNzIGZpcm13
-YXJlIHRvIGxvYWQsIGl0J3MgcHJvYmFibHkgYmV0dGVyLgo+IAo+IFdpdGggdGhlIHVzZSBvZiBh
-biBFTEYgaGVhZGVyIGNvbWVzIGFub3RoZXIgaXNzdWUsIHdoaWNoIGFzIHRvIGRvIHdpdGgKPiB3
-ZXJlIHRoZSBiaW5hcnkgbmVlZHMgdG8gYmUgbG9hZGVkIGluaXRpYWxseS4KPiAKPiAjIyBMb2Fk
-aW5nIGJpbmFyeSBhdCAweDEwMDAwICgxTUIsIGxpa2UgaHZtbG9hZGVyIG9uIEhWTSkKClRoYXQg
-d29ya3Mgd2VsbCBmb3IgaHZtbG9hZGVyIGJlY2F1c2UgYWZ0ZXIgaXQgaGFzIGZpbmlzaGVkIHJ1
-bm5pbmcKdGhlIG1lbW9yeSBjYW4gYmUgb3ZlcndyaXR0ZW4gd2l0aG91dCBpc3N1ZXMuIFRoZSBz
-YW1lIGlzIG5vdCB0cnVlIGZvcgpvdm1mIHdoaWNoIG5lZWRzIHRvIGtlZXAgZGF0YSBhcm91bmQg
-c28gdGhhdCBib290IHNlcnZpY2VzIGFuZCBydW50aW1lCnNlcnZpY2VzIGNhbiBjb250aW51ZSB3
-b3JraW5nLgoKPiBSaWdodCBub3csIHRoZSBPVk1GIGJsb2IgaXMgbG9hZGVkIChieSBodm1sb2Fk
-ZXIpIGp1c3QgYmVsb3cgNEdCLCB3aXRoCj4gaHZtbG9hZGVyIG1vdmluZyBzb21lIFJBTSBhcm91
-bmQgdG8gYWxsb3cgdGhhdC4gIEJ1dCB3aXRoIHRoZSB1c2Ugb2YgYW4KPiBFTEYgaGVhZGVyLCBh
-bmQgbGV0IGxpYnhjIGxvYWQgdGhlIGJsb2IsIGl0IHdhcyBub3QgcG9zc2libGUgdG8gbG9hZCB0
-aGUKPiBibG9iIGp1c3QgYmVsb3cgNEdCLiAoT3IgYXQgbGVhc3Qgd2l0aG91dCBtb2RpZmljYXRp
-b24gb2YgdGhlIHRvb2xzdGFjayBJCj4gZ3Vlc3MuKQoKbGlieGMvbGliZWxmIHdpbGwgbG9hZCB0
-aGUgYmluYXJ5IGluIHRoZSBwb3NpdGlvbiBzcGVjaWZpZWQgYnkgdGhlIEVMRgpwcm9ncmFtIGhl
-YWRlcnMgUGh5c0FkZHIgZmllbGQgKGFsc28gY2FsbGVkIExNQSkuIElmIHlvdSBleGVjdXRlCmBy
-ZWFkZWxmIC1sIDxvdm1mIGJpbmFyeT5gIHlvdSBzaG91bGQgc2VlIHRoZSBwcm9ncmFtIGhlYWRl
-cnMgYW5kIHRoZQphZGRyZXNzIHdoZXJlIHRoZXkgc2hvdWxkIGJlIGxvYWRlZC4KCllvdSBjYW4g
-ZWFzaWx5IG1vZGlmeSB0aGUgTE1BIGluIHRoZSBsaW5rZXIgc2NyaXB0IHVzaW5nIHRoZSBBVApr
-ZXl3b3JkLgoKPiBTbyBJJ3ZlIGF0dGVtcHRlZCB0byBoYXZlIE9WTUYgYmVlbiBzdGFydGVkIGZy
-b20gYSBkaWZmZXJlbnQgcGxhY2UKPiBpbiBtZW1vcnkuIFRoZW4gSSBoYWQgdG8gaGFjayBhIGJp
-dCBtb3JlIGluIG9yZGVyIHRvIGJlIGFibGUgdG8gc3RhcnQgT1ZNRgo+IGZyb20gdHdvIGRpZmZl
-cmVudCBsb2NhdGlvbiAodGhlIGN1cnJlbnQgb25lIGZvciBIVk0gZ3Vlc3QsIGFuZCBhIG5ldyBv
-bmUKPiB0aGF0IGNhbiBiZSB1c2VkIGZvciBQVkgpLiBUaGF0IHdvcmtzIGZpbmUsIEknbGwganVz
-dCBoYXZlIHRvIGZpbmQgb3V0Cj4gd2hhdCB1cHN0cmVhbSB0aGluayBhYm91dCB0aGF0LgoKSSB0
-aGluayB0aGUgYWRkcmVzcyB3aGVyZSBvdm1mIGlzIGxvYWRlZCBzaG91bGQgYmUgdGhlIHNhbWUg
-Zm9yIEhWTSBvcgpQVkggaWYgcG9zc2libGUuIFdlIGtub3cgdGhhdCBsb2FkaW5nIGF0IHRoaXMg
-YWRkcmVzcyB3b3JrcyBmb3IgSFZNLApzbyBJIHRoaW5rIHdlIHNob3VsZCBrZWVwIGl0IGZvciBQ
-VkgsIGl0J3MgbGVzcyBsaWtlbHkgdG8gY2F1c2UgaXNzdWVzCmluIHRoZSBmdXR1cmUgaWYgYm90
-aCBhcmUga2VwdCBpbiBzeW5jLgoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1280138051-1533232435=:1127
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Thu, 2 Aug 2018, Artem Mygaiev wrote:
+> On 02.08.18 18:57, Julien Grall wrote:
+> > Hi Artem,
+> > 
+> > On 02/08/18 16:54, Artem Mygaiev wrote:
+> > > On 02.08.18 18:29, Lars Kurth wrote:
+> > > > 
+> > > > 
+> > > > ﻿On 02/08/2018, 16:27, "Artem Mygaiev" <artem_mygaiev@epam.com> wrote:
+> > > > 
+> > > >      Hello Julien
+> > > >      On 02.08.18 12:56, Julien Grall wrote:
+> > > >      > Hi,
+> > > >      >
+> > > >      > Sorry for the late posting. The notes were taken by Stefano
+> > > > Stabellini.
+> > > >      > Thank you.
+> > > >      >
+> > > >      > This has some clarifications requested from EPAM regarding
+> > > > PowerVR.
+> > > >      >
+> > > >      > The existing graphics solutions on Xen today are:
+> > > >      >     - PV DRM:
+> > > >      >          * Supports multiple displays per VM
+> > > >      >          * Based on Grant-tables.
+> > > >      >          * Improvement of Xen FB which is based on foreign
+> > > > mapping
+> > > >      >
+> > > >      Frontend driver will be part of LK starting 4.18
+> > > > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/gpu/drm/xen?h=v4.18-rc7 
+> > > >      >     - Intel GVT: https://01.org/igvt-g
+> > > >      >          * Based on IOREQ server infrastructure
+> > > >      >          * Performance is 70% of direct assigned hardware
+> > > >      >
+> > > >      >     - NVIDIA:
+> > > >      >          * Much more virtualizable
+> > > >      >          * Provide mappable chunk of PCI BARs.
+> > > >      >          * Userspace component emulates PCI config space
+> > > >      >
+> > > >      > Current effort for graphic virtualization on Arm:
+> > > >      >     - Samsung: They have a PV OpenGL solution. This seems to be
+> > > > fast.
+> > > >      This is interesting. Do you know if there is any open benchmark
+> > > > data?
+> > > > 
+> > > > The presentation and recording is at
+> > > > https://www.slideshare.net/xen_com_mgr/design-and-implementation-of-automotive-xpdds18-virtualization-based-on-xen-sungmin-lee-samsung-electronics 
+> > > > https://www.youtube.com/watch?v=mBD8o9X32fA&index=14&list=PLYyw7IQjL-zFlQYbY9BgsLhxqp1Ui67W7 
+> > > 
+> > > Thanks for pointing to XDS materials. Unfortunately, there is no
+> > > comparison with "native" GPU performance (non-virtualized)... I guess I
+> > > need to ask Samsung folks for details.
+> > They do compare with Dom0 (slides 20 and onwards). Dom0 has the direct
+> > access to the GPU, so this is very similar to native.
+> > 
+> > Did you expect other comparison?
+> 
+> Yes, implementation of sharing may impact Dom0 performance. In this case it
+> seems that native GL applications in Dom0 are also reside in SVDM somehow
+> (slide 14). I am not saying it is necessary impacting, but it is always better
+> to have non-virtualized environment as a reference.
+> 
+> Too bad I couldn't make it to XDS due to conflict with AGL/OSS events :(
+
+I took his business card, I'll try to make introductions.
+--8323329-1280138051-1533232435=:1127
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1280138051-1533232435=:1127--
