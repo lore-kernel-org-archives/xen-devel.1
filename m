@@ -1,14 +1,20 @@
 From: "Tian, Kevin" <kevin.tian@intel.com>
-Subject: Re: [PATCH] x86/vmx: Avoid using
- domain_crash_syncrhonous() in vmx_vmentry_failure()
-Date: Thu, 2 Aug 2018 07:32:15 +0000
-Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D191291534@SHSMSX101.ccr.corp.intel.com>
-References: <1533128106-5545-1-git-send-email-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2 1/5] iommu/vtd: cleanup
+ vtd_set_hwdom_mapping after ia64 removal
+Date: Thu, 2 Aug 2018 07:36:52 +0000
+Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D191291593@SHSMSX101.ccr.corp.intel.com>
+References: <20180801110340.67695-1-roger.pau@citrix.com>
+ <20180801110340.67695-2-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1533128106-5545-1-git-send-email-andrew.cooper3@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=wuhy=kr=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
+ id 1fl8Ab-0008TP-4M
+ for xen-devel@lists.xenproject.org; Thu, 02 Aug 2018 07:37:13 +0000
+In-Reply-To: <20180801110340.67695-2-roger.pau@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -18,18 +24,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: "Nakajima, Jun" <jun.nakajima@intel.com>, Jan Beulich <JBeulich@suse.com>
+To: Roger Pau Monne <roger.pau@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-PiBGcm9tOiBBbmRyZXcgQ29vcGVyIFttYWlsdG86YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbV0K
-PiBTZW50OiBXZWRuZXNkYXksIEF1Z3VzdCAxLCAyMDE4IDg6NTUgUE0KPiAKPiBUaGVyZSBpcyBu
-byBuZWVkIGZvciB0aGUgc3luY3Job25vdXMgdmFyaWVudCwgYXMgdGhlIHZtZW50cnkgZmFpbHVy
-ZSBwYXRoCj4gY2FuCj4ganVzdCByZXR1cm4gdG8gcHJvY2Vzc2luZyBzb2Z0aXJxcy4KPiAKPiBU
-aGlzIGlzIGluIGFpZCBvZiB0cnlpbmcgdG8gcmVtb3ZlIGRvbWFpbl9jcmFzaF9zeW5jcmhvbm91
-cygpIGZyb20gdGhlCj4gY29kZWJhc2UuCj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3Bl
-ciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBLZXZpbiBUaWFuIDxrZXZp
-bi50aWFuQGludGVsLmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+PiBGcm9tOiBSb2dlciBQYXUgTW9ubmUgW21haWx0bzpyb2dlci5wYXVAY2l0cml4LmNvbV0NCj4g
+U2VudDogV2VkbmVzZGF5LCBBdWd1c3QgMSwgMjAxOCA3OjA0IFBNDQo+IA0KPiBSZW1vdmUgdGhl
+IGhhbmRsaW5nIGZvciBkaWZmZXJlbnQgcGFnZSBzaXplcyBub3cgdGhhdCBpYTY0IGlzIGdvbmUu
+DQo+IA0KPiBObyBmdW5jdGlvbmFsIGNoYW5nZS4NCj4gDQo+IFJlcG9ydGVkIGJ5OiBKYW4gQmV1
+bGljaCA8SkJldWxpY2hAc3VzZS5jb20+DQo+IFNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25u
+w6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPg0KDQpBY2tlZC1ieTogS2V2aW4gVGlhbiA8a2V2aW4u
+dGlhbkBpbnRlbC5jb20+DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
