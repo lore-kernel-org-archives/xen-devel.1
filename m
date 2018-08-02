@@ -1,21 +1,20 @@
-From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-Subject: [PATCH net-next] xen-netback: use true and false for
- boolean values
-Date: Wed, 1 Aug 2018 19:31:01 -0500
-Message-ID: <20180802003101.GA19256__7924.50561789355$1533187688$gmane$org@embeddedor.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86/HVM: correct an inverted check in
+ hvm_load()
+Date: Thu, 02 Aug 2018 00:02:59 -0600
+Message-ID: <5B629E9302000078001DA1B2@prv1-mh.provo.novell.com>
+References: <5B61D38002000078001DA043@prv1-mh.provo.novell.com>
+ <0576d10c-4590-c925-4a03-ab455b0ad1f3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=+i43=kr=embeddedor.com=gustavo@srs-us1.protection.inumbo.net>)
- id 1fl1WE-0006Fq-Ql
- for xen-devel@lists.xenproject.org; Thu, 02 Aug 2018 00:31:06 +0000
-Received: from cm12.websitewelcome.com (cm12.websitewelcome.com [100.42.49.8])
- by gateway34.websitewelcome.com (Postfix) with ESMTP id E68CFE54992
- for <xen-devel@lists.xenproject.org>;
- Wed,  1 Aug 2018 19:31:04 -0500 (CDT)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=zvpq=kr=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fl6hS-0000wy-Rm
+ for xen-devel@lists.xenproject.org; Thu, 02 Aug 2018 06:03:02 +0000
+In-Reply-To: <0576d10c-4590-c925-4a03-ab455b0ad1f3@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,25 +24,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, "David S. Miller" <davem@davemloft.net>
-Cc: xen-devel@lists.xenproject.org, "Gustavo A. R. Silva" <gustavo@embeddedor.com>, linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-UmV0dXJuIHN0YXRlbWVudHMgaW4gZnVuY3Rpb25zIHJldHVybmluZyBib29sIHNob3VsZCB1c2Ug
-dHJ1ZSBvciBmYWxzZQppbnN0ZWFkIG9mIGFuIGludGVnZXIgdmFsdWUuCgpUaGlzIGlzc3VlIHdh
-cyBkZXRlY3RlZCB3aXRoIHRoZSBoZWxwIG9mIENvY2NpbmVsbGUuCgpTaWduZWQtb2ZmLWJ5OiBH
-dXN0YXZvIEEuIFIuIFNpbHZhIDxndXN0YXZvQGVtYmVkZGVkb3IuY29tPgotLS0KIGRyaXZlcnMv
-bmV0L3hlbi1uZXRiYWNrL25ldGJhY2suYyB8IDQgKystLQogMSBmaWxlIGNoYW5nZWQsIDIgaW5z
-ZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL25ldC94ZW4t
-bmV0YmFjay9uZXRiYWNrLmMgYi9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay9uZXRiYWNrLmMKaW5k
-ZXggYTI3ZGFhMi4uMzYyMWUwNSAxMDA2NDQKLS0tIGEvZHJpdmVycy9uZXQveGVuLW5ldGJhY2sv
-bmV0YmFjay5jCisrKyBiL2RyaXZlcnMvbmV0L3hlbi1uZXRiYWNrL25ldGJhY2suYwpAQCAtMTYw
-Myw5ICsxNjAzLDkgQEAgc3RhdGljIHZvaWQgeGVudmlmX2N0cmxfYWN0aW9uKHN0cnVjdCB4ZW52
-aWYgKnZpZikKIHN0YXRpYyBib29sIHhlbnZpZl9jdHJsX3dvcmtfdG9kbyhzdHJ1Y3QgeGVudmlm
-ICp2aWYpCiB7CiAJaWYgKGxpa2VseShSSU5HX0hBU19VTkNPTlNVTUVEX1JFUVVFU1RTKCZ2aWYt
-PmN0cmwpKSkKLQkJcmV0dXJuIDE7CisJCXJldHVybiB0cnVlOwogCi0JcmV0dXJuIDA7CisJcmV0
-dXJuIGZhbHNlOwogfQogCiBpcnFyZXR1cm5fdCB4ZW52aWZfY3RybF9pcnFfZm4oaW50IGlycSwg
-dm9pZCAqZGF0YSkKLS0gCjIuNy40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+Pj4+IE9uIDAxLjA4LjE4IGF0IDE4OjA4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMDEvMDgvMTggMTY6MzYsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBDbGVhcmx5IHdl
+IHdhbnQgdG8gcHV0IGEgdkNQVSB0byBzbGVlcCBpZiBpdCBpcyBfbm90XyBhbHJlYWR5IGRvd24u
+Cj4+Cj4+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPj4g
+LS0tCj4+IFRCRDogU2luY2UgdGhlIGZsYXcgYXBwYXJlbnRseSBuZXZlciBtYXR0ZXJlZCwgSSBp
+bXBseSB0aGF0IHRoZSBmdW5jdGlvbgo+PiAgICAgIGlzIG5ldmVyIGNhbGxlZCB3aXRoIGFueSB2
+Q1BVIHVwLiBIZW5jZSBhbiBhbHRlcm5hdGl2ZSBtaWdodCBiZSB0bwo+PiAgICAgIHNpbXBseSBy
+ZXR1cm4gYW4gZXJyb3IgaWYgYSB2Q1BVIGRvZXNuJ3QgaGF2ZSBWUEZfZG93biBzZXQuCj4gCj4g
+V2l0aCBSZW11cy9DT0xPLCB3ZSBzaG91bGQgaGl0IHRoaXMgcGF0aCB3aXRoIGFuIHVwIHZDUFUg
+b24gZXZlcnkKPiBpdGVyYXRpb24gYWZ0ZXIgdGhlIGZpcnN0LiAgR2l2ZW4gdGhpcyBidWcsIEkn
+bSBzdHJ1Z2dsaW5nIHRvIHNlZSBob3cgaXQKPiB3b3JrcyBhdCBhbGwuCgpXZWxsLCB0aGF0IHdv
+dWxkIHJ1bGUgb3V0IHRoZSBhbHRlcm5hdGl2ZSBzdWdnZXN0aW9uLCBidXQgc2luY2UKdGhpcyBp
+cyBuZWl0aGVyIGFuIGFjayBub3IgYSBuYWsgLSB3aGF0IGRvIHlvdSBzdWdnZXN0IHdlIGRvPwoK
+SmFuCgo+PiAtLS0gYS94ZW4vYXJjaC94ODYvaHZtL3NhdmUuYwo+PiArKysgYi94ZW4vYXJjaC94
+ODYvaHZtL3NhdmUuYwo+PiBAQCAtMjY4LDcgKzI2OCw3IEBAIGludCBodm1fbG9hZChzdHJ1Y3Qg
+ZG9tYWluICpkLCBodm1fZG9tYWkKPj4gIAo+PiAgICAgIC8qIERvd24gYWxsIHRoZSB2Y3B1czog
+d2Ugb25seSByZS1lbmFibGUgdGhlIG9uZXMgdGhhdCBoYWQgc3RhdGUgc2F2ZWQuICovCj4+ICAg
+ICAgZm9yX2VhY2hfdmNwdShkLCB2KQo+PiAtICAgICAgICBpZiAoIHRlc3RfYW5kX3NldF9iaXQo
+X1ZQRl9kb3duLCAmdi0+cGF1c2VfZmxhZ3MpICkKPj4gKyAgICAgICAgaWYgKCAhdGVzdF9hbmRf
+c2V0X2JpdChfVlBGX2Rvd24sICZ2LT5wYXVzZV9mbGFncykgKQo+PiAgICAgICAgICAgICAgdmNw
+dV9zbGVlcF9ub3N5bmModik7Cj4+ICAKPj4gICAgICBmb3IgKCA7IDsgKQo+Pgo+PgoKCgoKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
