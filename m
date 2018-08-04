@@ -1,16 +1,23 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [distros-debian-stretch test] 75046: tolerable FAIL
-Date: Sat, 4 Aug 2018 10:41:11 +0100
-Message-ID: <osstest-75046-mainreport@xen.org>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: libxl__build_hvm type confusion
+Date: Sat, 4 Aug 2018 20:25:18 +0200
+Message-ID: <20180804182518.GN1371@mail-itl>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6415758100016960133=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=mbqk=kt=xenproject.org=prvs=747e71598=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1flt3k-0008Tm-5D
- for xen-devel@lists.xenproject.org; Sat, 04 Aug 2018 09:41:16 +0000
+ <srs0=wiwb=kt=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1fm1Ex-0004r6-Hv
+ for xen-devel@lists.xenproject.org; Sat, 04 Aug 2018 18:25:23 +0000
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
+ by mailout.nyi.internal (Postfix) with ESMTP id DAFBC21F30
+ for <xen-devel@lists.xenproject.org>; Sat,  4 Aug 2018 14:25:21 -0400 (EDT)
+Received: from mail-itl (ip5b40bfaa.dynamic.kabel-deutschland.de
+ [91.64.191.170])
+ by mail.messagingengine.com (Postfix) with ESMTPA id 13C39E4626
+ for <xen-devel@lists.xenproject.org>; Sat,  4 Aug 2018 14:25:20 -0400 (EDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,41 +26,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDc1MDQ2IGRpc3Ryb3MtZGViaWFuLXN0cmV0Y2ggcmVhbCBbcmVhbF0KaHR0cDovL29z
-c3Rlc3QueGVuc291cmNlLmNvbS9vc3N0ZXN0L2xvZ3MvNzUwNDYvCgpGYWlsdXJlcyA6LS8gYnV0
-IG5vIHJlZ3Jlc3Npb25zLgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5v
-dCBibG9ja2luZzoKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1zdHJldGNoLW5ldGJvb3QtcHlncnVi
-IDEwIGRlYmlhbi1kaS1pbnN0YWxsIGZhaWwgbGlrZSA3NTAxOQogdGVzdC1hbWQ2NC1hbWQ2NC1h
-bWQ2NC1zdHJldGNoLW5ldGJvb3QtcHZncnViIDEwIGRlYmlhbi1kaS1pbnN0YWxsIGZhaWwgbGlr
-ZSA3NTAxOQogdGVzdC1hbWQ2NC1pMzg2LWFtZDY0LXN0cmV0Y2gtbmV0Ym9vdC1weWdydWIgMTAg
-ZGViaWFuLWRpLWluc3RhbGwgZmFpbCBsaWtlIDc1MDE5CiB0ZXN0LWFtZDY0LWkzODYtaTM4Ni1z
-dHJldGNoLW5ldGJvb3QtcHZncnViIDEwIGRlYmlhbi1kaS1pbnN0YWxsIGZhaWwgbGlrZSA3NTAx
-OQogdGVzdC1hcm1oZi1hcm1oZi1hcm1oZi1zdHJldGNoLW5ldGJvb3QtcHlncnViIDEwIGRlYmlh
-bi1kaS1pbnN0YWxsIGZhaWwgbGlrZSA3NTAxOQoKYmFzZWxpbmUgdmVyc2lvbjoKIGZsaWdodCAg
-ICAgICAgICAgICAgIDc1MDE5Cgpqb2JzOgogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHZvcHMg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC1hbWQ2NC1zdHJldGNoLW5ldGJvb3QtcHZncnViICAgICAgICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtaTM4Ni1zdHJldGNoLW5ldGJvb3QtcHZncnViICAg
-ICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1hbWQ2NC1zdHJldGNoLW5l
-dGJvb3QtcHlncnViICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi1h
-cm1oZi1zdHJldGNoLW5ldGJvb3QtcHlncnViICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LWkzODYtc3RyZXRjaC1uZXRib290LXB5Z3J1YiAgICAgICAgICAgICAgICAg
-ZmFpbCAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnhzLmNpdHJpdGUubmV0
-CmxvZ3M6IC9ob21lL29zc3Rlc3QvbG9ncwppbWFnZXM6IC9ob21lL29zc3Rlc3QvaW1hZ2VzCgpM
-b2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL29zc3Rl
-c3QueGVuc291cmNlLmNvbS9vc3N0ZXN0L2xvZ3MKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBm
-b3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuc291cmNlLmNvbS9naXR3ZWI/cD1vc3N0ZXN0
-LmdpdDthPXN1bW1hcnkKCgpQdXNoIG5vdCBhcHBsaWNhYmxlLgoKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============6415758100016960133==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="pv9UK6dtKDJISKO7"
+Content-Disposition: inline
+
+
+--pv9UK6dtKDJISKO7
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+libxl__domain_build calls libxl__build_hvm for both
+LIBXL_DOMAIN_TYPE_HVM and LIBXL_DOMAIN_TYPE_PVH, but libxl__build_hvm
+uses fields from b_info->u.hvm, which looks like invalid thing to do.
+Should those field be moved out of that union?
+Additionally I think some asserts in every function using b_info->u
+would be a good idea.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--pv9UK6dtKDJISKO7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAltl744ACgkQ24/THMrX
+1yyM3Qf+J0jb5J1QVfGVGuhqm96pSobcYvjIqk4vpaVoiQG4YcMGAvHZ3c3L995n
+bjWCDaM6B3QejqmPDWcGVxFAgeePq56btVigI0yI2/l9qLp9ptlVyjYhaYP7nHr2
+zN+KLainI8uy5NVI0LgZvyrJjDFPYb7kFu8aumMbmy6gM8gmo7IXnGq/ql2l7OD1
+W3Z+4XOfJEJBktvyB9gXPRTELBMFikV7YLbUmeCRnv/vpoREi+s75zQms4Sw9pf/
+c1Vdvp/3NGwE2pXshWVcbQ1Bm3WQsu81G8VA46ixWmzjYM01mVJEZEP+1OcNrnKb
+7MIwYOPpkUYmSBgwYIdi33TqfsstuQ==
+=f2Zy
+-----END PGP SIGNATURE-----
+
+--pv9UK6dtKDJISKO7--
+
+
+--===============6415758100016960133==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6415758100016960133==--
