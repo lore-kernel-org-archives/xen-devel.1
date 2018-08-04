@@ -1,19 +1,19 @@
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: [PATCH 4.17 19/31] x86/entry/64: Remove %ebx handling
+Subject: [PATCH 4.14 15/23] x86/entry/64: Remove %ebx handling
  from error_entry/exit
-Date: Sat,  4 Aug 2018 11:00:54 +0200
-Message-ID: <20180804082633.816762866__44502.5509493009$1533373325$gmane$org@linuxfoundation.org>
-References: <20180804082632.304529527@linuxfoundation.org>
+Date: Sat,  4 Aug 2018 11:01:06 +0200
+Message-ID: <20180804082645.449818322__24205.0386070789$1533373369$gmane$org@linuxfoundation.org>
+References: <20180804082643.641435547@linuxfoundation.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=7vyu=kt=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1flsSl-0005QK-Jv
- for xen-devel@lists.xenproject.org; Sat, 04 Aug 2018 09:03:03 +0000
-In-Reply-To: <20180804082632.304529527@linuxfoundation.org>
+ id 1flsTl-0005UI-8q
+ for xen-devel@lists.xenproject.org; Sat, 04 Aug 2018 09:04:05 +0000
+In-Reply-To: <20180804082643.641435547@linuxfoundation.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,7 +26,7 @@ To: linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>, Denys Vlasenko <dvlasenk@redhat.com>, Josh Poimboeuf <jpoimboe@redhat.com>, Peter Zijlstra <peterz@infradead.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Dave Hansen <dave.hansen@linux.intel.com>, stable@vger.kernel.org, Ingo Molnar <mingo@kernel.org>, Linus Torvalds <torvalds@linux-foundation.org>, Borislav Petkov <bp@alien8.de>, Dominik Brodowski <linux@dominikbrodowski.net>, Andy Lutomirski <luto@kernel.org>, Brian Gerst <brgerst@gmail.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>
 List-Id: xen-devel@lists.xenproject.org
 
-NC4xNy1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
+NC4xNC1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
 cGxlYXNlIGxldCBtZSBrbm93LgoKLS0tLS0tLS0tLS0tLS0tLS0tCgpGcm9tOiBBbmR5IEx1dG9t
 aXJza2kgPGx1dG9Aa2VybmVsLm9yZz4KCmNvbW1pdCBiMzY4MWRkNTQ4ZDA2ZGViMmUxNTczODkw
 ODI5ZGZmNGIxNWFiZjQ2IHVwc3RyZWFtLgoKZXJyb3JfZW50cnkgYW5kIGVycm9yX2V4aXQgY29t
@@ -79,16 +79,16 @@ ZmYtYnk6IEdyZWcgS3JvYWgtSGFydG1hbiA8Z3JlZ2toQGxpbnV4Zm91bmRhdGlvbi5vcmc+Cgot
 LS0KIGFyY2gveDg2L2VudHJ5L2VudHJ5XzY0LlMgfCAgIDE4ICsrKystLS0tLS0tLS0tLS0tLQog
 MSBmaWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgMTQgZGVsZXRpb25zKC0pCgotLS0gYS9h
 cmNoL3g4Ni9lbnRyeS9lbnRyeV82NC5TCisrKyBiL2FyY2gveDg2L2VudHJ5L2VudHJ5XzY0LlMK
-QEAgLTk4MSw3ICs5ODEsNyBAQCBFTlRSWShcc3ltKQogCiAJY2FsbAlcZG9fc3ltCiAKLQlqbXAJ
+QEAgLTkzMyw3ICs5MzMsNyBAQCBFTlRSWShcc3ltKQogCiAJY2FsbAlcZG9fc3ltCiAKLQlqbXAJ
 ZXJyb3JfZXhpdAkJCS8qICVlYng6IG5vIHN3YXBncyBmbGFnICovCisJam1wCWVycm9yX2V4aXQK
-IAkuZW5kaWYKIEVORChcc3ltKQogLmVuZG0KQEAgLTEyMjIsNyArMTIyMiw2IEBAIEVORChwYXJh
+IAkuZW5kaWYKIEVORChcc3ltKQogLmVuZG0KQEAgLTExNjYsNyArMTE2Niw2IEBAIEVORChwYXJh
 bm9pZF9leGl0KQogCiAvKgogICogU2F2ZSBhbGwgcmVnaXN0ZXJzIGluIHB0X3JlZ3MsIGFuZCBz
 d2l0Y2ggR1MgaWYgbmVlZGVkLgotICogUmV0dXJuOiBFQlg9MDogY2FtZSBmcm9tIHVzZXIgbW9k
 ZTsgRUJYPTE6IG90aGVyd2lzZQogICovCiBFTlRSWShlcnJvcl9lbnRyeSkKIAlVTldJTkRfSElO
-VF9GVU5DCkBAIC0xMjY5LDcgKzEyNjgsNiBAQCBFTlRSWShlcnJvcl9lbnRyeSkKIAkgKiBmb3Ig
+VF9GVU5DCkBAIC0xMjEzLDcgKzEyMTIsNiBAQCBFTlRSWShlcnJvcl9lbnRyeSkKIAkgKiBmb3Ig
 dGhlc2UgaGVyZSB0b28uCiAJICovCiAuTGVycm9yX2tlcm5lbHNwYWNlOgotCWluY2wJJWVieAog
 CWxlYXEJbmF0aXZlX2lycV9yZXR1cm5faXJldCglcmlwKSwgJXJjeAogCWNtcHEJJXJjeCwgUklQ
-KzgoJXJzcCkKIAlqZQkuTGVycm9yX2JhZF9pcmV0CkBAIC0xMzAzLDI4ICsxMzAxLDIwIEBAIEVO
+KzgoJXJzcCkKIAlqZQkuTGVycm9yX2JhZF9pcmV0CkBAIC0xMjQ3LDI4ICsxMjQ1LDIwIEBAIEVO
 VFJZKGVycm9yX2VudHJ5KQogCiAJLyoKIAkgKiBQcmV0ZW5kIHRoYXQgdGhlIGV4Y2VwdGlvbiBj
 YW1lIGZyb20gdXNlciBtb2RlOiBzZXQgdXAgcHRfcmVncwotCSAqIGFzIGlmIHdlIGZhdWx0ZWQg
 aW1tZWRpYXRlbHkgYWZ0ZXIgSVJFVCBhbmQgY2xlYXIgRUJYIHNvIHRoYXQKLQkgKiBlcnJvcl9l
