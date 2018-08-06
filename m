@@ -1,8 +1,9 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: [PATCH 3/4] xen/blkfront: reorder tests in xlblk_init()
-Date: Mon,  6 Aug 2018 13:34:02 +0200
-Message-ID: <20180806113403.24728-5-jgross__8414.21801965243$1533555452$gmane$org@suse.com>
-References: <20180806113403.24728-1-jgross@suse.com>
+Subject: Re: [PATCH] xen/biomerge: Use true and false for
+ boolean values
+Date: Mon, 6 Aug 2018 13:42:10 +0200
+Message-ID: <9c98c6be-92ba-3045-0888-549376872eb6__11501.0460060605$1533555660$gmane$org@suse.com>
+References: <20180805005014.GA2299@embeddedor.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -10,9 +11,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=c1gs=kv=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fmdqY-0001rV-GV
- for xen-devel@lists.xenproject.org; Mon, 06 Aug 2018 11:38:46 +0000
-In-Reply-To: <20180806113403.24728-1-jgross@suse.com>
+ id 1fmdtt-0002ca-1T
+ for xen-devel@lists.xenproject.org; Mon, 06 Aug 2018 11:42:13 +0000
+In-Reply-To: <20180805005014.GA2299@embeddedor.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,35 +23,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, linux-block@vger.kernel.org
-Cc: axboe@kernel.dk, Juergen Gross <jgross@suse.com>, boris.ostrovsky@oracle.com, roger.pau@citrix.com
+To: "Gustavo A. R. Silva" <gustavo@embeddedor.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-SW4gY2FzZSB3ZSBkb24ndCB3YW50IHB2IGJsb2NrIGRldmljZXMgd2Ugc2hvdWxkIG5vdCB0ZXN0
-IHBhcmFtZXRlcnMKZm9yIHNhbml0eSBhbmQgZXZlbnR1YWxseSBwcmludCBvdXQgZXJyb3IgbWVz
-c2FnZXMuIFNvIHRlc3QgcHJlY2x1ZGluZwpjb25kaXRpb25zIGJlZm9yZSBjaGVja2luZyBwYXJh
-bWV0ZXJzLgoKU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgot
-LS0KIGRyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMgfCAxOCArKysrKysrKystLS0tLS0tLS0K
-IDEgZmlsZSBjaGFuZ2VkLCA5IGluc2VydGlvbnMoKyksIDkgZGVsZXRpb25zKC0pCgpkaWZmIC0t
-Z2l0IGEvZHJpdmVycy9ibG9jay94ZW4tYmxrZnJvbnQuYyBiL2RyaXZlcnMvYmxvY2sveGVuLWJs
-a2Zyb250LmMKaW5kZXggMTlmZWI4ODM1ZmM0Li5mNzJkOTYzODQzMjYgMTAwNjQ0Ci0tLSBhL2Ry
-aXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMKKysrIGIvZHJpdmVycy9ibG9jay94ZW4tYmxrZnJv
-bnQuYwpAQCAtMjcxOCw2ICsyNzE4LDE1IEBAIHN0YXRpYyBpbnQgX19pbml0IHhsYmxrX2luaXQo
-dm9pZCkKIAlpZiAoIXhlbl9kb21haW4oKSkKIAkJcmV0dXJuIC1FTk9ERVY7CiAKKwlpZiAoIXhl
-bl9oYXNfcHZfZGlza19kZXZpY2VzKCkpCisJCXJldHVybiAtRU5PREVWOworCisJaWYgKHJlZ2lz
-dGVyX2Jsa2RldihYRU5WQkRfTUFKT1IsIERFVl9OQU1FKSkgeworCQlwcl93YXJuKCJ4ZW5fYmxr
-OiBjYW4ndCBnZXQgbWFqb3IgJWQgd2l0aCBuYW1lICVzXG4iLAorCQkJWEVOVkJEX01BSk9SLCBE
-RVZfTkFNRSk7CisJCXJldHVybiAtRU5PREVWOworCX0KKwogCWlmICh4ZW5fYmxraWZfbWF4X3Nl
-Z21lbnRzIDwgQkxLSUZfTUFYX1NFR01FTlRTX1BFUl9SRVFVRVNUKQogCQl4ZW5fYmxraWZfbWF4
-X3NlZ21lbnRzID0gQkxLSUZfTUFYX1NFR01FTlRTX1BFUl9SRVFVRVNUOwogCkBAIC0yNzMzLDE1
-ICsyNzQyLDYgQEAgc3RhdGljIGludCBfX2luaXQgeGxibGtfaW5pdCh2b2lkKQogCQl4ZW5fYmxr
-aWZfbWF4X3F1ZXVlcyA9IG5yX2NwdXM7CiAJfQogCi0JaWYgKCF4ZW5faGFzX3B2X2Rpc2tfZGV2
-aWNlcygpKQotCQlyZXR1cm4gLUVOT0RFVjsKLQotCWlmIChyZWdpc3Rlcl9ibGtkZXYoWEVOVkJE
-X01BSk9SLCBERVZfTkFNRSkpIHsKLQkJcHJpbnRrKEtFUk5fV0FSTklORyAieGVuX2JsazogY2Fu
-J3QgZ2V0IG1ham9yICVkIHdpdGggbmFtZSAlc1xuIiwKLQkJICAgICAgIFhFTlZCRF9NQUpPUiwg
-REVWX05BTUUpOwotCQlyZXR1cm4gLUVOT0RFVjsKLQl9Ci0KIAlJTklUX0RFTEFZRURfV09SSygm
-YmxrZnJvbnRfd29yaywgYmxrZnJvbnRfZGVsYXlfd29yayk7CiAKIAlyZXQgPSB4ZW5idXNfcmVn
-aXN0ZXJfZnJvbnRlbmQoJmJsa2Zyb250X2RyaXZlcik7Ci0tIAoyLjEzLjcKCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMDUvMDgvMTggMDI6NTAsIEd1c3Rhdm8gQS4gUi4gU2lsdmEgd3JvdGU6Cj4gUmV0dXJuIHN0
+YXRlbWVudHMgaW4gZnVuY3Rpb25zIHJldHVybmluZyBib29sIHNob3VsZCB1c2UgdHJ1ZSBvciBm
+YWxzZQo+IGluc3RlYWQgb2YgYW4gaW50ZWdlciB2YWx1ZS4KPiAKPiBUaGlzIGNvZGUgd2FzIGRl
+dGVjdGVkIHdpdGggdGhlIGhlbHAgb2YgQ29jY2luZWxsZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBH
+dXN0YXZvIEEuIFIuIFNpbHZhIDxndXN0YXZvQGVtYmVkZGVkb3IuY29tPgoKUmV2aWV3ZWQtYnk6
+IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
