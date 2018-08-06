@@ -1,24 +1,16 @@
-From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-Subject: Re: [PATCH] xen/biomerge: Use true and false for
- boolean values
-Date: Mon, 6 Aug 2018 07:28:08 -0500
-Message-ID: <d0cb0b66-1f7f-c949-c50f-62f1d4d3c3db__2191.10706025294$1533558822$gmane$org@embeddedor.com>
-References: <20180805005014.GA2299@embeddedor.com>
- <9c98c6be-92ba-3045-0888-549376872eb6@suse.com>
+From: Paul Durrant <paul.durrant@citrix.com>
+Subject: [PATCH v20 0/2] guest resource mapping (reprise)
+Date: Mon, 6 Aug 2018 13:54:47 +0100
+Message-ID: <20180806125449.2829-1-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=t3w0=kv=embeddedor.com=gustavo@srs-us1.protection.inumbo.net>)
- id 1fmeid-0006Vz-4C
- for xen-devel@lists.xenproject.org; Mon, 06 Aug 2018 12:34:39 +0000
-Received: from cm15.websitewelcome.com (cm15.websitewelcome.com [100.42.49.9])
- by gateway36.websitewelcome.com (Postfix) with ESMTP id A12E241F3306D
- for <xen-devel@lists.xenproject.org>; Mon,  6 Aug 2018 06:31:51 -0500 (CDT)
-In-Reply-To: <9c98c6be-92ba-3045-0888-549376872eb6@suse.com>
-Content-Language: en-US
+ <srs0=cgzd=kv=citrix.com=prvs=749486379=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1fmf2D-00086e-AP
+ for xen-devel@lists.xenproject.org; Mon, 06 Aug 2018 12:54:53 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,17 +19,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwOC8wNi8yMDE4IDA2OjQyIEFNLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+IE9uIDA1LzA4
-LzE4IDAyOjUwLCBHdXN0YXZvIEEuIFIuIFNpbHZhIHdyb3RlOgo+PiBSZXR1cm4gc3RhdGVtZW50
-cyBpbiBmdW5jdGlvbnMgcmV0dXJuaW5nIGJvb2wgc2hvdWxkIHVzZSB0cnVlIG9yIGZhbHNlCj4+
-IGluc3RlYWQgb2YgYW4gaW50ZWdlciB2YWx1ZS4KPj4KPj4gVGhpcyBjb2RlIHdhcyBkZXRlY3Rl
-ZCB3aXRoIHRoZSBoZWxwIG9mIENvY2NpbmVsbGUuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IEd1c3Rh
-dm8gQS4gUi4gU2lsdmEgPGd1c3Rhdm9AZW1iZWRkZWRvci5jb20+Cj4gCj4gUmV2aWV3ZWQtYnk6
-IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KPiAKClRoYW5rcywgSnVlcmdlbi4KCi0t
-Ckd1c3Rhdm8KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+VGhlc2UgcGF0Y2hlcyBhcmUgdGhlIHBhdGNoZXMgZnJvbSBteSBvcmlnaW5hbCByZXNvdXJjZSBt
+YXBwaW5nIHNlcmllcwp0aGF0IGRpZCBub3QgbWFrZSBpdCBpbnRvIDQuMTEuCgpQYXVsIER1cnJh
+bnQgKDIpOgogIGNvbW1vbjogYWRkIGEgbmV3IG1hcHBhYmxlIHJlc291cmNlIHR5cGU6IFhFTk1F
+TV9yZXNvdXJjZV9ncmFudF90YWJsZQogIHRvb2xzL2xpYnhlbmN0cmw6IHVzZSBuZXcgeGVuZm9y
+ZWlnbm1lbW9yeSBBUEkgdG8gc2VlZCBncmFudCB0YWJsZQoKIHRvb2xzL2xpYnhjL2luY2x1ZGUv
+eGNfZG9tLmggICAgICAgIHwgICA4ICstLQogdG9vbHMvbGlieGMveGNfZG9tX2Jvb3QuYyAgICAg
+ICAgICAgfCAxMTQgKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tCiB0b29scy9s
+aWJ4Yy94Y19zcl9yZXN0b3JlX3g4Nl9odm0uYyB8ICAxMCArKy0tCiB0b29scy9saWJ4Yy94Y19z
+cl9yZXN0b3JlX3g4Nl9wdi5jICB8ICAgMiArLQogdG9vbHMvbGlieGwvbGlieGxfZG9tLmMgICAg
+ICAgICAgICAgfCAgIDEgLQogdG9vbHMvcHl0aG9uL3hlbi9sb3dsZXZlbC94Yy94Yy5jICAgfCAg
+IDYgKy0KIHhlbi9jb21tb24vZ3JhbnRfdGFibGUuYyAgICAgICAgICAgIHwgIDc0ICsrKysrKysr
+KysrKysrKysrKystLS0tCiB4ZW4vY29tbW9uL21lbW9yeS5jICAgICAgICAgICAgICAgICB8ICA1
+NiArKysrKysrKysrKysrKysrKy0KIHhlbi9pbmNsdWRlL3B1YmxpYy9tZW1vcnkuaCAgICAgICAg
+IHwgICA5ICsrLQogeGVuL2luY2x1ZGUveGVuL2dyYW50X3RhYmxlLmggICAgICAgfCAgIDQgKysK
+IDEwIGZpbGVzIGNoYW5nZWQsIDIxOSBpbnNlcnRpb25zKCspLCA2NSBkZWxldGlvbnMoLSkKCi0t
+IAoyLjExLjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
