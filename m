@@ -1,19 +1,18 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: libxl__build_hvm type confusion
-Date: Mon, 6 Aug 2018 13:37:10 +0200
-Message-ID: <20180806113710.GO1371@mail-itl>
-References: <20180804182518.GN1371@mail-itl>
- <20180806091649.5a3tm7t4q54kzkgx@mac>
+From: Juergen Gross <jgross@suse.com>
+Subject: [PATCH 3/4] xen/blkfront: reorder tests in xlblk_init()
+Date: Mon,  6 Aug 2018 13:34:02 +0200
+Message-ID: <20180806113403.24728-5-jgross__8414.21801965243$1533555452$gmane$org@suse.com>
+References: <20180806113403.24728-1-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6296790222721661358=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=u4cs=kv=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1fmdp5-0001bo-5j
- for xen-devel@lists.xenproject.org; Mon, 06 Aug 2018 11:37:15 +0000
-In-Reply-To: <20180806091649.5a3tm7t4q54kzkgx@mac>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=c1gs=kv=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fmdqY-0001rV-GV
+ for xen-devel@lists.xenproject.org; Mon, 06 Aug 2018 11:38:46 +0000
+In-Reply-To: <20180806113403.24728-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,89 +21,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, linux-block@vger.kernel.org
+Cc: axboe@kernel.dk, Juergen Gross <jgross@suse.com>, boris.ostrovsky@oracle.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6296790222721661358==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="qMrVIIv05ewzrSl/"
-Content-Disposition: inline
-
-
---qMrVIIv05ewzrSl/
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Aug 06, 2018 at 11:16:49AM +0200, Roger Pau Monn=C3=A9 wrote:
-> On Sat, Aug 04, 2018 at 08:25:18PM +0200, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > Hi,
-> >=20
-> > libxl__domain_build calls libxl__build_hvm for both
-> > LIBXL_DOMAIN_TYPE_HVM and LIBXL_DOMAIN_TYPE_PVH, but libxl__build_hvm
-> > uses fields from b_info->u.hvm, which looks like invalid thing to do.
-> > Should those field be moved out of that union?
->=20
-> Depends on the fields and whether they are relevant for PVH or not.
-> Either they are moved out of the HVM struct and shared between PVH and
-> HVM if they are relevant, or it's usage it's fully limited to domain
-> type HVM.
-
-In this particular case it is about:
- - u.hvm.mmio_hole_memkb
- - u.hvm.rdm_mem_boundary_memkb
-
-Not sure if those are relevant for PVH
-
-> I guess this mostly works because those HVM fields are not aliased to
-> any of the fields of the PVH struct and they are all 0 which happens
-> to be the correct value for PVH.
-
-Since u.pvh is very small, that's probably the case.
-
-> > Additionally I think some asserts in every function using b_info->u
-> > would be a good idea.
->=20
-> Sure, I'm all in for adding more checks!
->=20
-> Thanks, Roger.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---qMrVIIv05ewzrSl/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAltoMuQACgkQ24/THMrX
-1ywRUQf+JCKBHD8hmrXpUeEBO8ao5nxX6OMH+mfCXxdOjtqc1/H2aHipVq0wnvmY
-FmWlnHndmUQnuYJB5VCRGMUkROzSa9IhATRCdDng26ggxhaSTCMP+zwCv/2ZrNtN
-5A/1n9w9FSTBteCmZAp9l/Jk3ODs7u5F4VixW4pwViA1R+a4eYrk35AAcPhcBjTn
-6zKnezqE6Pf8xECu3jfxhqXuwrbRHzS5xTiSg/LqLaaNsPCyIA2Dt/2rJg2AbYSl
-RGqrpJijsQVsmjp4FEQF228ifovHhJ7ZjgLhF6vRN5881Y+WL0creskA0qqyKqta
-tN/ce8Aj7Ithj2pf7zFafo78iVtyQA==
-=sGDu
------END PGP SIGNATURE-----
-
---qMrVIIv05ewzrSl/--
-
-
---===============6296790222721661358==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6296790222721661358==--
+SW4gY2FzZSB3ZSBkb24ndCB3YW50IHB2IGJsb2NrIGRldmljZXMgd2Ugc2hvdWxkIG5vdCB0ZXN0
+IHBhcmFtZXRlcnMKZm9yIHNhbml0eSBhbmQgZXZlbnR1YWxseSBwcmludCBvdXQgZXJyb3IgbWVz
+c2FnZXMuIFNvIHRlc3QgcHJlY2x1ZGluZwpjb25kaXRpb25zIGJlZm9yZSBjaGVja2luZyBwYXJh
+bWV0ZXJzLgoKU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgot
+LS0KIGRyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMgfCAxOCArKysrKysrKystLS0tLS0tLS0K
+IDEgZmlsZSBjaGFuZ2VkLCA5IGluc2VydGlvbnMoKyksIDkgZGVsZXRpb25zKC0pCgpkaWZmIC0t
+Z2l0IGEvZHJpdmVycy9ibG9jay94ZW4tYmxrZnJvbnQuYyBiL2RyaXZlcnMvYmxvY2sveGVuLWJs
+a2Zyb250LmMKaW5kZXggMTlmZWI4ODM1ZmM0Li5mNzJkOTYzODQzMjYgMTAwNjQ0Ci0tLSBhL2Ry
+aXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMKKysrIGIvZHJpdmVycy9ibG9jay94ZW4tYmxrZnJv
+bnQuYwpAQCAtMjcxOCw2ICsyNzE4LDE1IEBAIHN0YXRpYyBpbnQgX19pbml0IHhsYmxrX2luaXQo
+dm9pZCkKIAlpZiAoIXhlbl9kb21haW4oKSkKIAkJcmV0dXJuIC1FTk9ERVY7CiAKKwlpZiAoIXhl
+bl9oYXNfcHZfZGlza19kZXZpY2VzKCkpCisJCXJldHVybiAtRU5PREVWOworCisJaWYgKHJlZ2lz
+dGVyX2Jsa2RldihYRU5WQkRfTUFKT1IsIERFVl9OQU1FKSkgeworCQlwcl93YXJuKCJ4ZW5fYmxr
+OiBjYW4ndCBnZXQgbWFqb3IgJWQgd2l0aCBuYW1lICVzXG4iLAorCQkJWEVOVkJEX01BSk9SLCBE
+RVZfTkFNRSk7CisJCXJldHVybiAtRU5PREVWOworCX0KKwogCWlmICh4ZW5fYmxraWZfbWF4X3Nl
+Z21lbnRzIDwgQkxLSUZfTUFYX1NFR01FTlRTX1BFUl9SRVFVRVNUKQogCQl4ZW5fYmxraWZfbWF4
+X3NlZ21lbnRzID0gQkxLSUZfTUFYX1NFR01FTlRTX1BFUl9SRVFVRVNUOwogCkBAIC0yNzMzLDE1
+ICsyNzQyLDYgQEAgc3RhdGljIGludCBfX2luaXQgeGxibGtfaW5pdCh2b2lkKQogCQl4ZW5fYmxr
+aWZfbWF4X3F1ZXVlcyA9IG5yX2NwdXM7CiAJfQogCi0JaWYgKCF4ZW5faGFzX3B2X2Rpc2tfZGV2
+aWNlcygpKQotCQlyZXR1cm4gLUVOT0RFVjsKLQotCWlmIChyZWdpc3Rlcl9ibGtkZXYoWEVOVkJE
+X01BSk9SLCBERVZfTkFNRSkpIHsKLQkJcHJpbnRrKEtFUk5fV0FSTklORyAieGVuX2JsazogY2Fu
+J3QgZ2V0IG1ham9yICVkIHdpdGggbmFtZSAlc1xuIiwKLQkJICAgICAgIFhFTlZCRF9NQUpPUiwg
+REVWX05BTUUpOwotCQlyZXR1cm4gLUVOT0RFVjsKLQl9Ci0KIAlJTklUX0RFTEFZRURfV09SSygm
+YmxrZnJvbnRfd29yaywgYmxrZnJvbnRfZGVsYXlfd29yayk7CiAKIAlyZXQgPSB4ZW5idXNfcmVn
+aXN0ZXJfZnJvbnRlbmQoJmJsa2Zyb250X2RyaXZlcik7Ci0tIAoyLjEzLjcKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
