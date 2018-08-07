@@ -1,20 +1,19 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/9] x86: put compat.o and x86_64/compat.o
- under CONFIG_PV
-Date: Tue, 07 Aug 2018 04:41:58 -0600
-Message-ID: <5B69777602000078001DB7C2@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH 2/9] x86: add missing "inline" keyword
+Date: Tue, 07 Aug 2018 04:42:20 -0600
+Message-ID: <5B69778C02000078001DB7D4@prv1-mh.provo.novell.com>
 References: <cover.3198a0d9ad2683b74afcc86654a244d17cd8795e.1533636027.git-series.wei.liu2@citrix.com>
- <020de81575057c1802a45bd31dcca6900a0659ee.1533636027.git-series.wei.liu2@citrix.com>
+ <536730a67461cad7ef8253c89db0f29c0e5dba2b.1533636027.git-series.wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=hjto=kw=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fmzRC-0000bW-G0
- for xen-devel@lists.xenproject.org; Tue, 07 Aug 2018 10:42:02 +0000
-In-Reply-To: <020de81575057c1802a45bd31dcca6900a0659ee.1533636027.git-series.wei.liu2@citrix.com>
+ id 1fmzRY-0000dL-Vu
+ for xen-devel@lists.xenproject.org; Tue, 07 Aug 2018 10:42:25 +0000
+In-Reply-To: <536730a67461cad7ef8253c89db0f29c0e5dba2b.1533636027.git-series.wei.liu2@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -29,9 +28,8 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenpro
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IE9uIDA3LjA4LjE4IGF0IDEyOjAwLCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
-VGhleSBjb250YWluIGNvZGUgZm9yIGNvbXBhdCBoeXBlcmNhbGwgZm9yIFBWIGd1ZXN0cy4KPiAK
-PiBTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKQWNrZWQtYnk6
-IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+U2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBK
+YW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
