@@ -1,15 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v15 00/14] x86/domctl: Save info for one
- vcpu instance
-Date: Tue, 07 Aug 2018 06:59:08 -0600
-Message-ID: <5B69979C02000078001DB8F0@prv1-mh.provo.novell.com>
-References: <1533304431-27897-1-git-send-email-aisaila@bitdefender.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 0/4] xen: various cleanups
+Date: Tue, 7 Aug 2018 15:10:51 +0200
+Message-ID: <395f02c9-9893-e8fc-2b51-4229c66b796b__13997.777485247$1533647394$gmane$org@suse.com>
+References: <20180717120113.12756-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1533304431-27897-1-git-send-email-aisaila@bitdefender.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=rp5o=kw=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fn1lH-0007KT-FT
+ for xen-devel@lists.xenproject.org; Tue, 07 Aug 2018 13:10:55 +0000
+In-Reply-To: <20180717120113.12756-1-jgross@suse.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,25 +22,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: aisaila@bitdefender.com
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org
+Cc: boris.ostrovsky@oracle.com, mingo@redhat.com, tglx@linutronix.de, hpa@zytor.com
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDAzLjA4LjE4IGF0IDE1OjUzLCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3Rl
-Ogo+IEFsZXhhbmRydSBJc2FpbGEgKDE0KToKPiAKPiB4ODYvY3B1OiBJbnRyb2R1Y2Ugdm1jZV9z
-YXZlX3ZjcHVfY3R4dF9vbmUoKSBmdW5jCj4geDg2L2h2bTogSW50cm9kdWNlIGh2bV9zYXZlX3Rz
-Y19hZGp1c3Rfb25lKCkgZnVuYwo+IHg4Ni9odm06IEludHJvZHVjZSBodm1fc2F2ZV9jcHVfY3R4
-dF9vbmUgZnVuYwo+IHg4Ni9odm06IEludHJvZHVjZSBodm1fc2F2ZV9jcHVfeHNhdmVfc3RhdGVz
-X29uZQo+IHg4Ni9odm06IEludHJvZHVjZSBodm1fc2F2ZV9jcHVfbXNyc19vbmUgZnVuYwo+IHg4
-Ni9odm06IEludHJvZHVjZSBodm1fc2F2ZV9tdHJyX21zcl9vbmUgZnVuYwo+IHg4Ni9odm06IElu
-dHJvZHVjZSB2aXJpZGlhbl9zYXZlX3ZjcHVfY3R4dF9vbmUoKQo+IHg4Ni9odm06IEludHJvZHVj
-ZSBsYXBpY19zYXZlX2hpZGRlbl9vbmUKPiB4ODYvaHZtOiBJbnRyb2R1Y2UgbGFwaWNfc2F2ZV9y
-ZWdzX29uZSBmdW5jCj4geDg2L2h2bTogQWRkIGhhbmRsZXIgZm9yIHNhdmVfb25lIGZ1bmNzCj4g
-eDg2L2RvbWN0bDogVXNlIGh2bV9zYXZlX3ZjcHVfaGFuZGxlcgo+IHg4Ni9odm06IERyb3AgdGhl
-IHVzZSBvZiBzYXZlIGZ1bmN0aW9ucwo+IHg4Ni9odm06IFJlbW92ZSByZWR1bmRhbnQgc2F2ZSBm
-dW5jdGlvbnMKPiB4ODYvZG9tY3RsOiBEb24ndCBwYXVzZSB0aGUgd2hvbGUgZG9tYWluIGlmIG9u
-bHkKClBhdGNoZXMgMS4uLjUgYW5kIDEwClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxp
-Y2hAc3VzZS5jb20+CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+T24gMTcvMDcvMTggMTQ6MDEsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gU29tZSBYZW4gcmVsYXRl
+ZCBjbGVhbnVwczoKPiAtIG1vdmUgc29tZSBwdi1vbmx5IGNvZGUgZnJvbSBDT05GSUdfWEVOIHRv
+IENPTkZJR19YRU5fUFYKPiAtIHVzZSBDT05GSUdfWEVOX1BWSFZNIGluIE1ha2VmaWxlIGluc3Rl
+YWQgb2YgI2lmZGVmIGFyb3VuZCBhIGNvbXBsZXRlIHNvdXJjZQo+IC0gYWRkIFNQRFggaWRlbnRp
+ZmllciB3aGVyZSBtaXNzaW5nCj4gCj4gSnVlcmdlbiBHcm9zcyAoNCk6Cj4gICB4ZW46IG1vdmUg
+cHYgaXJxIHJlbGF0ZWQgZnVuY3Rpb25zIHVuZGVyIENPTkZJR19YRU5fUFYgdW1icmVsbGEKPiAg
+IHhlbjogbW92ZSBwdiBzcGVjaWZpYyBwYXJ0cyBvZiBhcmNoL3g4Ni94ZW4vbW11LmMgdG8gbW11
+X3B2LmMKPiAgIHhlbjogbGluayBwbGF0Zm9ybS1wY2ktdW5wbHVnLm8gb25seSBpZiBDT05GSUdf
+WEVOX1BWSFZNCj4gICB4ZW46IGFkZCBTUERYIGlkZW50aWZpZXIgaW4gYXJjaC94ODYveGVuIGZp
+bGVzCj4gCj4gIGFyY2gveDg2L2VudHJ5L2VudHJ5XzMyLlMgICAgICAgICAgfCAgIDggKy0KPiAg
+YXJjaC94ODYvZW50cnkvZW50cnlfNjQuUyAgICAgICAgICB8ICAgOCArLQo+ICBhcmNoL3g4Ni94
+ZW4vTWFrZWZpbGUgICAgICAgICAgICAgIHwgIDQxICsrKysrKy0tCj4gIGFyY2gveDg2L3hlbi9l
+ZmkuYyAgICAgICAgICAgICAgICAgfCAgMTQgKy0tCj4gIGFyY2gveDg2L3hlbi9lbmxpZ2h0ZW4u
+YyAgICAgICAgICAgfCAgIDIgKwo+ICBhcmNoL3g4Ni94ZW4vZW5saWdodGVuX2h2bS5jICAgICAg
+IHwgICAyICsKPiAgYXJjaC94ODYveGVuL2dyYW50LXRhYmxlLmMgICAgICAgICB8ICAyNSArLS0t
+LQo+ICBhcmNoL3g4Ni94ZW4vbW11LmMgICAgICAgICAgICAgICAgIHwgMTg4ICstLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPiAgYXJjaC94ODYveGVuL21tdV9wdi5jICAgICAg
+ICAgICAgICB8IDE0MCArKysrKysrKysrKysrKysrKysrKysrKysrKysKPiAgYXJjaC94ODYveGVu
+L3AybS5jICAgICAgICAgICAgICAgICB8ICAgMiArCj4gIGFyY2gveDg2L3hlbi9wY2ktc3dpb3Rs
+Yi14ZW4uYyAgICAgfCAgIDIgKwo+ICBhcmNoL3g4Ni94ZW4vcGxhdGZvcm0tcGNpLXVucGx1Zy5j
+IHwgIDE4ICstLS0KPiAgYXJjaC94ODYveGVuL3Zkc28uaCAgICAgICAgICAgICAgICB8ICAgMiAr
+Cj4gIGFyY2gveDg2L3hlbi94ZW4tcHZoLlMgICAgICAgICAgICAgfCAgMTUgKy0tCj4gIGluY2x1
+ZGUveGVuL2ludGVyZmFjZS9tZW1vcnkuaCAgICAgfCAgIDYgLS0KPiAgaW5jbHVkZS94ZW4veGVu
+LW9wcy5oICAgICAgICAgICAgICB8IDEzMyArKysrKysrKysrKysrKysrKy0tLS0tLS0tLQo+ICAx
+NiBmaWxlcyBjaGFuZ2VkLCAyODcgaW5zZXJ0aW9ucygrKSwgMzE5IGRlbGV0aW9ucygtKQo+IApC
+b3JpcywgYW55IG9iamVjdGlvbnM/CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
