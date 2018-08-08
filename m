@@ -1,17 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 125793: trouble:
- blocked/broken/pass
-Date: Wed, 08 Aug 2018 00:14:02 +0000
-Message-ID: <osstest-125793-mainreport@xen.org>
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Subject: Re: x86 Community Call - Wed Aug 15,
+ 14:00 - 15:00 UTC - Call for agenda items
+Date: Tue, 7 Aug 2018 17:28:17 -0700
+Message-ID: <CACMJ4GY86+a0pkmvc_PPUWxLfjrC+h9GyvLkwWCdhk7P1rOjGw@mail.gmail.com>
+References: <FE6F7D80-B354-42CB-9E2A-A6931FAEC046@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7603370866866194129=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=cdxt=kx=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fnC75-0004er-UE
- for xen-devel@lists.xenproject.org; Wed, 08 Aug 2018 00:14:07 +0000
+ <srs0=ajrs=kx=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
+ id 1fnCKr-0005aB-MF
+ for xen-devel@lists.xenproject.org; Wed, 08 Aug 2018 00:28:21 +0000
+Received: by mail-lf1-x12d.google.com with SMTP id y200-v6so308839lfd.7
+ for <xen-devel@lists.xenproject.org>; Tue, 07 Aug 2018 17:28:19 -0700 (PDT)
+In-Reply-To: <FE6F7D80-B354-42CB-9E2A-A6931FAEC046@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,64 +23,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Lars Kurth <lars.kurth@citrix.com>
+Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, Matt Spencer <Matt.Spencer@arm.com>, "edgar.iglesias@xilinx.com" <edgar.iglesias@xilinx.com>, "Ji,
+ John" <john.ji@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, "daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, xen-devel <xen-devel@lists.xenproject.org>, Artem Mygaiev <Artem_Mygaiev@epam.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "committers@xenproject.org" <committers@xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, "intel-xen@intel.com" <intel-xen@intel.com>, Jarvis Roach <Jarvis.Roach@dornerworks.com>, Juergen Gross <jgross@suse.com>, Volodymyr Babchuk <volodymyr_ba>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNTc5MyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNTc5My8KCkZhaWx1cmVzIGFu
-ZCBwcm9ibGVtcyB3aXRoIHRlc3RzIDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFu
-ZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgog
-YnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAg
-ICAgIGJyb2tlbgoKUmVncmVzc2lvbnMgd2hpY2ggYXJlIHJlZ2FyZGVkIGFzIGFsbG93YWJsZSAo
-bm90IGJsb2NraW5nKToKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgIDIgaG9zdHMtYWxs
-b2NhdGUgICAgICAgICBicm9rZW4gUkVHUi4gdnMuIDEyNTcyOQoKVGVzdHMgd2hpY2ggZGlkIG5v
-dCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNt
-ICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIGJ1aWxk
-LWFybTY0LXhzbSAgICAgICAgICAgICAgIDMgY2FwdHVyZS1sb2dzICAgICAgICAgIGJyb2tlbiBi
-bG9ja2VkIGluIDEyNTcyOQogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
-LXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGlu
-ZzoKIHhlbiAgICAgICAgICAgICAgICAgIGU3NTJmMjg0MDk2NzhjZTNhZGU0OTk4NmIzOTMwOTE3
-OGZiMmE2ZDYKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIGVkNWY4ZDlj
-YTQ3ZTY5ZTMwMjIxYzM3ZWM4MTJmMmIzOGFmMTlkODMKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEy
-NTcyOSAgMjAxOC0wOC0wMSAxMTowMDozOSBaICAgIDYgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAg
-ICAxMjU3NDEgIDIwMTgtMDgtMDIgMTA6MDE6MDkgWiAgICA1IGRheXMgICAxMyBhdHRlbXB0cwpU
-ZXN0aW5nIHNhbWUgc2luY2UgICAxMjU3NzIgIDIwMTgtMDgtMDYgMTY6MDA6MzcgWiAgICAxIGRh
-eXMgICAxMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIg
-dGVzdDoKICBBbGV4YW5kcnUgSXNhaWxhIDxhaXNhaWxhQGJpdGRlZmVuZGVyLmNvbT4KICBBbmRy
-ZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIERvdWcgR29sZHN0ZWluIDxj
-YXJkb2VAY2FyZG9lLmNvbT4KICBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5j
-b20+CiAgSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgogIEp1bGllbiBHcmFsbCA8anVs
-aWVuLmdyYWxsQGFybS5jb20+CiAgS2V2aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+CiAg
-UmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29tPgogIFJvZ2VyIFBhdSBN
-b25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgogIFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJl
-bGxpbmlAa2VybmVsLm9yZz4KCmpvYnM6CiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFtZDY0ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
-bGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14
-bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1pMzg2ICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3Qu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hv
-bWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0
-CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4
-cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlz
-IGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJs
-b2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dp
-dHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5l
-c3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2Vi
-P3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5Cgpicm9rZW4tam9iIGJ1aWxkLWFybTY0LXhzbSBicm9r
-ZW4KYnJva2VuLXN0ZXAgYnVpbGQtYXJtNjQteHNtIGhvc3RzLWFsbG9jYXRlCmJyb2tlbi1zdGVw
-IGJ1aWxkLWFybTY0LXhzbSBjYXB0dXJlLWxvZ3MKCk5vdCBwdXNoaW5nLgoKKE5vIHJldmlzaW9u
-IGxvZzsgaXQgd291bGQgYmUgNDgwIGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============7603370866866194129==
+Content-Type: multipart/alternative; boundary="0000000000004d19b50572e19619"
+
+--0000000000004d19b50572e19619
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Aug 7, 2018 at 2:26 AM, Lars Kurth <lars.kurth@citrix.com> wrote:
+
+> Dear community members,
+>
+> please send me agenda items for next week=E2=80=99s community call by thi=
+s Friday.
+>
+>
+If there is time available on the call, I'd like to ask about Xen's memory
+scrubbing, to better understand the changes made to it in recent versions
+of Xen (4.10+) and the community understanding of requirements on it.
+
+thanks,
+
+Christopher
+
+--0000000000004d19b50572e19619
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_extra"><div class=3D"gmail_quote">On T=
+ue, Aug 7, 2018 at 2:26 AM, Lars Kurth <span dir=3D"ltr">&lt;<a href=3D"mai=
+lto:lars.kurth@citrix.com" target=3D"_blank">lars.kurth@citrix.com</a>&gt;<=
+/span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8=
+ex;border-left:1px #ccc solid;padding-left:1ex">Dear community members,<br>
+=C2=A0<br>
+please send me agenda items for next week=E2=80=99s community call by this =
+Friday. <br><br></blockquote><div><br></div><div>If there is time available=
+ on the call, I&#39;d like to ask about Xen&#39;s memory scrubbing, to bett=
+er understand the changes made to it in recent versions of Xen (4.10+) and =
+the community understanding of requirements on it.</div><div><br></div><div=
+>thanks,</div><div><br></div><div>Christopher</div><div>=C2=A0</div></div><=
+/div></div>
+
+--0000000000004d19b50572e19619--
+
+
+--===============7603370866866194129==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7603370866866194129==--
