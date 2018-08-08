@@ -1,11 +1,19 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Emulation and active (valid) interrupts
-Date: Wed, 8 Aug 2018 17:26:51 +0300
-Message-ID: <d189b20b-f2d3-629f-6a62-54a6491f2778@bitdefender.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: [PATCH v2 2/5] xen/blkfront: cleanup stale persistent
+ grants
+Date: Wed,  8 Aug 2018 16:25:25 +0200
+Message-ID: <20180808142528.31029-3-jgross__48718.7775820077$1533738430$gmane$org@suse.com>
+References: <20180808142528.31029-1-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------DCE50A5568C6B4F6B5D5942F"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Language: en-US-large
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=wssg=kx=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fnPRu-0000ID-AH
+ for xen-devel@lists.xenproject.org; Wed, 08 Aug 2018 14:28:30 +0000
+In-Reply-To: <20180808142528.31029-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,173 +22,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+To: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, linux-block@vger.kernel.org
+Cc: axboe@kernel.dk, Juergen Gross <jgross@suse.com>, boris.ostrovsky@oracle.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---------------DCE50A5568C6B4F6B5D5942F
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-Hello,
-
-I'm seeing rare occasions where this backtrace occurs at a point in
-__vmx_inject_exception() where there's already a valid interrupt set up
-in VM_ENTRY_INTR_INFO (that is, once the value is __vmread(), intr_info
-& INTR_INFO_VALID_MASK is non-zero):
-
-Xen call trace:
-   [<ffff82d0801fe9c7>] vmx.c#__vmx_inject_exception+0x47/0xd9
-   [<ffff82d080201c6a>] vmx.c#vmx_inject_trap+0x1e1/0x29f
-   [<ffff82d0801d6b8a>] hvm_inject_trap+0xb0/0xb5
-   [<ffff82d0801d6be7>] hvm_inject_page_fault+0x2a/0x2c
-   [<ffff82d0801d6cc6>] hvm.c#__hvm_copy+0xdd/0x37f
-   [<ffff82d0801d88fa>] hvm_copy_from_guest_virt+0x14/0x16
-   [<ffff82d0801d28e3>] emulate.c#__hvmemul_read+0x12f/0x19f
-   [<ffff82d0801d2a2c>] emulate.c#hvmemul_read+0x28/0x2a
-   [<ffff82d0801a931c>] x86_emulate.c#read_ulong+0x13/0x15
-   [<ffff82d0801ab412>] x86_emulate+0x16b1/0x11405
-   [<ffff82d0801d180a>] emulate.c#_hvm_emulate_one+0x188/0x2bc
-   [<ffff82d0801d1a34>] hvm_emulate_one+0x10/0x12
-   [<ffff82d0801d2d39>] hvm_mem_access_emulate_one+0x7a/0xdd
-   [<ffff82d0801dbe50>] hvm_do_resume+0x246/0x3d3
-   [<ffff82d0801fbddb>] vmx_do_resume+0x102/0x119
-   [<ffff82d080170ba3>] context_switch+0xf52/0xfad
-   [<ffff82d08013182c>] schedule.c#schedule+0x753/0x792
-   [<ffff82d080134f05>] softirq.c#__do_softirq+0x85/0x90
-   [<ffff82d080134f5a>] do_softirq+0x13/0x15
-   [<ffff82d08016b5f2>] domain.c#idle_loop+0x61/0x6e
-
-(this is a Xen 4.7.5 trace, but it applies to staging as well).
-
-This was the initial culprit:
-
-[<ffff82d08031b55d>] vmx.c#__vmx_inject_exception+0xa1/0xda
-[<ffff82d08031eb5c>] vmx_inject_extint+0x94/0x9f
-[<ffff82d080315a0a>] vmx_intr_assist+0x4ee/0x5ad
-[<ffff82d0803258ff>] vmx_asm_vmexit_handler+0xff/0x270
-
-and I thought I'd fixed it by treating the emulation in a similar manner
-to the single-step case: have vmx_intr_assist() block interrupts for the
-duration of the emulation (please see the attached patch for staging).
-However, a bit more rarely this time, we still end up overwriting an
-interrupt via the above code path.
-
-Obviously this works only if nothing has been written in
-VM_ENTRY_INTR_INFO _before_ we block (return) in vmx_intr_assist().
-
-My questions are:
-
-1. Is it possible to already have a valid interrupt written in
-VM_ENTRY_INTR_INFO at EXIT_REASON_EPT_VIOLATION-time in
-vmx_vmexit_handler()?
-
-2. Is it possible that something else in that path writes into
-VM_ENTRY_INTR_INFO (which the vmx_intr_assist() logic can't possibly
-prevent)? For example, in my Xen 4.7.5 sources, there's a
-pt_restore_timer(v); call in hvm_do_resume() before the vm_event
-emulation code.
-
-
-Thanks,
-Razvan
-
---------------DCE50A5568C6B4F6B5D5942F
-Content-Type: text/x-patch;
- name="emulate_intr_block.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="emulate_intr_block.patch"
-
-diff --git a/xen/arch/x86/hvm/vm_event.c b/xen/arch/x86/hvm/vm_event.c
-index 28d08a6..8e7c737 100644
---- a/xen/arch/x86/hvm/vm_event.c
-+++ b/xen/arch/x86/hvm/vm_event.c
-@@ -124,6 +124,8 @@ void hvm_vm_event_do_resume(struct vcpu *v)
- 
-         w->do_write.msr = 0;
-     }
-+
-+    v->arch.vm_event->intr_block = false;
- }
- 
- /*
-diff --git a/xen/arch/x86/hvm/vmx/intr.c b/xen/arch/x86/hvm/vmx/intr.c
-index eb9b288..97cecbf 100644
---- a/xen/arch/x86/hvm/vmx/intr.c
-+++ b/xen/arch/x86/hvm/vmx/intr.c
-@@ -22,6 +22,7 @@
- #include <xen/errno.h>
- #include <xen/trace.h>
- #include <xen/event.h>
-+#include <xen/vm_event.h>
- #include <asm/apicdef.h>
- #include <asm/current.h>
- #include <asm/cpufeature.h>
-@@ -37,6 +38,7 @@
- #include <asm/hvm/nestedhvm.h>
- #include <public/hvm/ioreq.h>
- #include <asm/hvm/trace.h>
-+#include <asm/vm_event.h>
- 
- /*
-  * A few notes on virtual NMI and INTR delivery, and interactions with
-@@ -231,6 +233,11 @@ void vmx_intr_assist(void)
-     enum hvm_intblk intblk;
-     int pt_vector;
- 
-+    if ( unlikely(v->arch.vm_event) &&
-+         vm_event_check_ring(v->domain->vm_event_monitor) &&
-+         v->arch.vm_event->intr_block )
-+        return;
-+
-     /* Block event injection when single step with MTF. */
-     if ( unlikely(v->arch.hvm_vcpu.single_step) )
-     {
-diff --git a/xen/common/monitor.c b/xen/common/monitor.c
-index c606683..4263929 100644
---- a/xen/common/monitor.c
-+++ b/xen/common/monitor.c
-@@ -113,6 +113,12 @@ int monitor_traps(struct vcpu *v, bool sync, vm_event_request_t *req)
-     if ( sync )
-     {
-         req->flags |= VM_EVENT_FLAG_VCPU_PAUSED;
-+        /*
-+         * It only makes sense to block interrupts for the duration of
-+         * processing blocking vm_events, since that is the only case where
-+         * emulating the current instruction really applies.
-+         */
-+        v->arch.vm_event->intr_block = true;
-         vm_event_vcpu_pause(v);
-         rc = 1;
-     }
-diff --git a/xen/include/asm-x86/vm_event.h b/xen/include/asm-x86/vm_event.h
-index 39e73c8..2b36614 100644
---- a/xen/include/asm-x86/vm_event.h
-+++ b/xen/include/asm-x86/vm_event.h
-@@ -34,6 +34,12 @@ struct arch_vm_event {
-     struct monitor_write_data write_data;
-     struct vm_event_regs_x86 gprs;
-     bool set_gprs;
-+    /*
-+     * Block interrupts until this vm_event is done handling (after the
-+     * fashion of single-step). Meant for the cases where the vm_event
-+     * reply asks for emulation of the current instruction.
-+     */
-+    bool intr_block;
- };
- 
- int vm_event_init_domain(struct domain *d);
-
---------------DCE50A5568C6B4F6B5D5942F
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------DCE50A5568C6B4F6B5D5942F--
+QWRkIGEgcGVyaW9kaWMgY2xlYW51cCBmdW5jdGlvbiB0byByZW1vdmUgb2xkIHBlcnNpc3RlbnQg
+Z3JhbnRzIHdoaWNoCmFyZSBubyBsb25nZXIgaW4gdXNlIG9uIHRoZSBiYWNrZW5kIHNpZGUuIFRo
+aXMgYXZvaWRzIHN0YXJ2YXRpb24gaW4KY2FzZSB0aGVyZSBhcmUgbG90cyBvZiBwZXJzaXN0ZW50
+IGdyYW50cyBmb3IgYSBkZXZpY2Ugd2hpY2ggbm8gbG9uZ2VyCmlzIGludm9sdmVkIGluIEkvTyBi
+dXNpbmVzcy4KClNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4K
+LS0tCiBkcml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5jIHwgOTQgKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrLS0KIDEgZmlsZSBjaGFuZ2VkLCA5MCBpbnNlcnRpb25z
+KCspLCA0IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvYmxvY2sveGVuLWJsa2Zy
+b250LmMgYi9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5jCmluZGV4IGI1Y2VkY2NiNWQ3ZC4u
+N2M0YjFiOWQzOTcxIDEwMDY0NAotLS0gYS9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5jCisr
+KyBiL2RyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMKQEAgLTQ2LDYgKzQ2LDcgQEAKICNpbmNs
+dWRlIDxsaW51eC9zY2F0dGVybGlzdC5oPgogI2luY2x1ZGUgPGxpbnV4L2JpdG1hcC5oPgogI2lu
+Y2x1ZGUgPGxpbnV4L2xpc3QuaD4KKyNpbmNsdWRlIDxsaW51eC93b3JrcXVldWUuaD4KIAogI2lu
+Y2x1ZGUgPHhlbi94ZW4uaD4KICNpbmNsdWRlIDx4ZW4veGVuYnVzLmg+CkBAIC0xMjEsNiArMTIy
+LDggQEAgc3RhdGljIGlubGluZSBzdHJ1Y3QgYmxraWZfcmVxICpibGtpZl9yZXEoc3RydWN0IHJl
+cXVlc3QgKnJxKQogCiBzdGF0aWMgREVGSU5FX01VVEVYKGJsa2Zyb250X211dGV4KTsKIHN0YXRp
+YyBjb25zdCBzdHJ1Y3QgYmxvY2tfZGV2aWNlX29wZXJhdGlvbnMgeGx2YmRfYmxvY2tfZm9wczsK
+K3N0YXRpYyBzdHJ1Y3QgZGVsYXllZF93b3JrIGJsa2Zyb250X3dvcms7CitzdGF0aWMgTElTVF9I
+RUFEKGluZm9fbGlzdCk7CiAKIC8qCiAgKiBNYXhpbXVtIG51bWJlciBvZiBzZWdtZW50cyBpbiBp
+bmRpcmVjdCByZXF1ZXN0cywgdGhlIGFjdHVhbCB2YWx1ZSB1c2VkIGJ5CkBAIC0yMTYsNiArMjE5
+LDcgQEAgc3RydWN0IGJsa2Zyb250X2luZm8KIAkvKiBTYXZlIHVuY29tcGxldGUgcmVxcyBhbmQg
+YmlvcyBmb3IgbWlncmF0aW9uLiAqLwogCXN0cnVjdCBsaXN0X2hlYWQgcmVxdWVzdHM7CiAJc3Ry
+dWN0IGJpb19saXN0IGJpb19saXN0OworCXN0cnVjdCBsaXN0X2hlYWQgaW5mb19saXN0OwogfTsK
+IAogc3RhdGljIHVuc2lnbmVkIGludCBucl9taW5vcnM7CkBAIC0xNzY0LDYgKzE3NjgsMTIgQEAg
+c3RhdGljIGludCB3cml0ZV9wZXJfcmluZ19ub2RlcyhzdHJ1Y3QgeGVuYnVzX3RyYW5zYWN0aW9u
+IHhidCwKIAlyZXR1cm4gZXJyOwogfQogCitzdGF0aWMgdm9pZCBmcmVlX2luZm8oc3RydWN0IGJs
+a2Zyb250X2luZm8gKmluZm8pCit7CisJbGlzdF9kZWwoJmluZm8tPmluZm9fbGlzdCk7CisJa2Zy
+ZWUoaW5mbyk7Cit9CisKIC8qIENvbW1vbiBjb2RlIHVzZWQgd2hlbiBmaXJzdCBzZXR0aW5nIHVw
+LCBhbmQgd2hlbiByZXN1bWluZy4gKi8KIHN0YXRpYyBpbnQgdGFsa190b19ibGtiYWNrKHN0cnVj
+dCB4ZW5idXNfZGV2aWNlICpkZXYsCiAJCQkgICBzdHJ1Y3QgYmxrZnJvbnRfaW5mbyAqaW5mbykK
+QEAgLTE4ODUsNyArMTg5NSwxMCBAQCBzdGF0aWMgaW50IHRhbGtfdG9fYmxrYmFjayhzdHJ1Y3Qg
+eGVuYnVzX2RldmljZSAqZGV2LAogIGRlc3Ryb3lfYmxrcmluZzoKIAlibGtpZl9mcmVlKGluZm8s
+IDApOwogCi0Ja2ZyZWUoaW5mbyk7CisJbXV0ZXhfbG9jaygmYmxrZnJvbnRfbXV0ZXgpOworCWZy
+ZWVfaW5mbyhpbmZvKTsKKwltdXRleF91bmxvY2soJmJsa2Zyb250X211dGV4KTsKKwogCWRldl9z
+ZXRfZHJ2ZGF0YSgmZGV2LT5kZXYsIE5VTEwpOwogCiAJcmV0dXJuIGVycjsKQEAgLTE5OTYsNiAr
+MjAwOSwxMCBAQCBzdGF0aWMgaW50IGJsa2Zyb250X3Byb2JlKHN0cnVjdCB4ZW5idXNfZGV2aWNl
+ICpkZXYsCiAJaW5mby0+aGFuZGxlID0gc2ltcGxlX3N0cnRvdWwoc3RycmNocihkZXYtPm5vZGVu
+YW1lLCAnLycpKzEsIE5VTEwsIDApOwogCWRldl9zZXRfZHJ2ZGF0YSgmZGV2LT5kZXYsIGluZm8p
+OwogCisJbXV0ZXhfbG9jaygmYmxrZnJvbnRfbXV0ZXgpOworCWxpc3RfYWRkKCZpbmZvLT5pbmZv
+X2xpc3QsICZpbmZvX2xpc3QpOworCW11dGV4X3VubG9jaygmYmxrZnJvbnRfbXV0ZXgpOworCiAJ
+cmV0dXJuIDA7CiB9CiAKQEAgLTIzMDYsNiArMjMyMywxMiBAQCBzdGF0aWMgdm9pZCBibGtmcm9u
+dF9nYXRoZXJfYmFja2VuZF9mZWF0dXJlcyhzdHJ1Y3QgYmxrZnJvbnRfaW5mbyAqaW5mbykKIAlp
+ZiAoaW5kaXJlY3Rfc2VnbWVudHMgPD0gQkxLSUZfTUFYX1NFR01FTlRTX1BFUl9SRVFVRVNUKQog
+CQlpbmRpcmVjdF9zZWdtZW50cyA9IDA7CiAJaW5mby0+bWF4X2luZGlyZWN0X3NlZ21lbnRzID0g
+aW5kaXJlY3Rfc2VnbWVudHM7CisKKwlpZiAoaW5mby0+ZmVhdHVyZV9wZXJzaXN0ZW50KSB7CisJ
+CW11dGV4X2xvY2soJmJsa2Zyb250X211dGV4KTsKKwkJc2NoZWR1bGVfZGVsYXllZF93b3JrKCZi
+bGtmcm9udF93b3JrLCBIWiAqIDEwKTsKKwkJbXV0ZXhfdW5sb2NrKCZibGtmcm9udF9tdXRleCk7
+CisJfQogfQogCiAvKgpAQCAtMjQ4Nyw3ICsyNTEwLDkgQEAgc3RhdGljIGludCBibGtmcm9udF9y
+ZW1vdmUoc3RydWN0IHhlbmJ1c19kZXZpY2UgKnhiZGV2KQogCW11dGV4X3VubG9jaygmaW5mby0+
+bXV0ZXgpOwogCiAJaWYgKCFiZGV2KSB7Ci0JCWtmcmVlKGluZm8pOworCQltdXRleF9sb2NrKCZi
+bGtmcm9udF9tdXRleCk7CisJCWZyZWVfaW5mbyhpbmZvKTsKKwkJbXV0ZXhfdW5sb2NrKCZibGtm
+cm9udF9tdXRleCk7CiAJCXJldHVybiAwOwogCX0KIApAQCAtMjUwNyw3ICsyNTMyLDkgQEAgc3Rh
+dGljIGludCBibGtmcm9udF9yZW1vdmUoc3RydWN0IHhlbmJ1c19kZXZpY2UgKnhiZGV2KQogCWlm
+IChpbmZvICYmICFiZGV2LT5iZF9vcGVuZXJzKSB7CiAJCXhsdmJkX3JlbGVhc2VfZ2VuZGlzayhp
+bmZvKTsKIAkJZGlzay0+cHJpdmF0ZV9kYXRhID0gTlVMTDsKLQkJa2ZyZWUoaW5mbyk7CisJCW11
+dGV4X2xvY2soJmJsa2Zyb250X211dGV4KTsKKwkJZnJlZV9pbmZvKGluZm8pOworCQltdXRleF91
+bmxvY2soJmJsa2Zyb250X211dGV4KTsKIAl9CiAKIAltdXRleF91bmxvY2soJmJkZXYtPmJkX211
+dGV4KTsKQEAgLTI1OTAsNyArMjYxNyw3IEBAIHN0YXRpYyB2b2lkIGJsa2lmX3JlbGVhc2Uoc3Ry
+dWN0IGdlbmRpc2sgKmRpc2ssIGZtb2RlX3QgbW9kZSkKIAkJZGV2X2luZm8oZGlza190b19kZXYo
+YmRldi0+YmRfZGlzayksICJyZWxlYXNpbmcgZGlza1xuIik7CiAJCXhsdmJkX3JlbGVhc2VfZ2Vu
+ZGlzayhpbmZvKTsKIAkJZGlzay0+cHJpdmF0ZV9kYXRhID0gTlVMTDsKLQkJa2ZyZWUoaW5mbyk7
+CisJCWZyZWVfaW5mbyhpbmZvKTsKIAl9CiAKIG91dDoKQEAgLTI2MjMsNiArMjY1MCw2MSBAQCBz
+dGF0aWMgc3RydWN0IHhlbmJ1c19kcml2ZXIgYmxrZnJvbnRfZHJpdmVyID0gewogCS5pc19yZWFk
+eSA9IGJsa2Zyb250X2lzX3JlYWR5LAogfTsKIAorc3RhdGljIHZvaWQgcHVyZ2VfcGVyc2lzdGVu
+dF9ncmFudHMoc3RydWN0IGJsa2Zyb250X2luZm8gKmluZm8pCit7CisJdW5zaWduZWQgaW50IGk7
+CisJdW5zaWduZWQgbG9uZyBmbGFnczsKKworCWZvciAoaSA9IDA7IGkgPCBpbmZvLT5ucl9yaW5n
+czsgaSsrKSB7CisJCXN0cnVjdCBibGtmcm9udF9yaW5nX2luZm8gKnJpbmZvID0gJmluZm8tPnJp
+bmZvW2ldOworCQlzdHJ1Y3QgZ3JhbnQgKmdudF9saXN0X2VudHJ5LCAqdG1wOworCisJCXNwaW5f
+bG9ja19pcnFzYXZlKCZyaW5mby0+cmluZ19sb2NrLCBmbGFncyk7CisKKwkJaWYgKHJpbmZvLT5w
+ZXJzaXN0ZW50X2dudHNfYyA9PSAwKSB7CisJCQlzcGluX3VubG9ja19pcnFyZXN0b3JlKCZyaW5m
+by0+cmluZ19sb2NrLCBmbGFncyk7CisJCQljb250aW51ZTsKKwkJfQorCisJCWxpc3RfZm9yX2Vh
+Y2hfZW50cnlfc2FmZShnbnRfbGlzdF9lbnRyeSwgdG1wLCAmcmluZm8tPmdyYW50cywKKwkJCQkJ
+IG5vZGUpIHsKKwkJCWlmIChnbnRfbGlzdF9lbnRyeS0+Z3JlZiA9PSBHUkFOVF9JTlZBTElEX1JF
+RiB8fAorCQkJICAgIGdudHRhYl9xdWVyeV9mb3JlaWduX2FjY2VzcyhnbnRfbGlzdF9lbnRyeS0+
+Z3JlZikpCisJCQkJY29udGludWU7CisKKwkJCWxpc3RfZGVsKCZnbnRfbGlzdF9lbnRyeS0+bm9k
+ZSk7CisJCQlnbnR0YWJfZW5kX2ZvcmVpZ25fYWNjZXNzKGdudF9saXN0X2VudHJ5LT5ncmVmLCAw
+LCAwVUwpOworCQkJcmluZm8tPnBlcnNpc3RlbnRfZ250c19jLS07CisJCQlfX2ZyZWVfcGFnZShn
+bnRfbGlzdF9lbnRyeS0+cGFnZSk7CisJCQlrZnJlZShnbnRfbGlzdF9lbnRyeSk7CisJCX0KKwor
+CQlzcGluX3VubG9ja19pcnFyZXN0b3JlKCZyaW5mby0+cmluZ19sb2NrLCBmbGFncyk7CisJfQor
+fQorCitzdGF0aWMgdm9pZCBibGtmcm9udF9kZWxheV93b3JrKHN0cnVjdCB3b3JrX3N0cnVjdCAq
+d29yaykKK3sKKwlzdHJ1Y3QgYmxrZnJvbnRfaW5mbyAqaW5mbzsKKwlib29sIG5lZWRfc2NoZWR1
+bGVfd29yayA9IGZhbHNlOworCisJbXV0ZXhfbG9jaygmYmxrZnJvbnRfbXV0ZXgpOworCisJbGlz
+dF9mb3JfZWFjaF9lbnRyeShpbmZvLCAmaW5mb19saXN0LCBpbmZvX2xpc3QpIHsKKwkJaWYgKGlu
+Zm8tPmZlYXR1cmVfcGVyc2lzdGVudCkgeworCQkJbmVlZF9zY2hlZHVsZV93b3JrID0gdHJ1ZTsK
+KwkJCW11dGV4X2xvY2soJmluZm8tPm11dGV4KTsKKwkJCXB1cmdlX3BlcnNpc3RlbnRfZ3JhbnRz
+KGluZm8pOworCQkJbXV0ZXhfdW5sb2NrKCZpbmZvLT5tdXRleCk7CisJCX0KKwl9CisKKwlpZiAo
+bmVlZF9zY2hlZHVsZV93b3JrKQorCQlzY2hlZHVsZV9kZWxheWVkX3dvcmsoJmJsa2Zyb250X3dv
+cmssIEhaICogMTApOworCisJbXV0ZXhfdW5sb2NrKCZibGtmcm9udF9tdXRleCk7Cit9CisKIHN0
+YXRpYyBpbnQgX19pbml0IHhsYmxrX2luaXQodm9pZCkKIHsKIAlpbnQgcmV0OwpAQCAtMjY1NSw2
+ICsyNzM3LDggQEAgc3RhdGljIGludCBfX2luaXQgeGxibGtfaW5pdCh2b2lkKQogCQlyZXR1cm4g
+LUVOT0RFVjsKIAl9CiAKKwlJTklUX0RFTEFZRURfV09SSygmYmxrZnJvbnRfd29yaywgYmxrZnJv
+bnRfZGVsYXlfd29yayk7CisKIAlyZXQgPSB4ZW5idXNfcmVnaXN0ZXJfZnJvbnRlbmQoJmJsa2Zy
+b250X2RyaXZlcik7CiAJaWYgKHJldCkgewogCQl1bnJlZ2lzdGVyX2Jsa2RldihYRU5WQkRfTUFK
+T1IsIERFVl9OQU1FKTsKQEAgLTI2NjgsNiArMjc1Miw4IEBAIG1vZHVsZV9pbml0KHhsYmxrX2lu
+aXQpOwogCiBzdGF0aWMgdm9pZCBfX2V4aXQgeGxibGtfZXhpdCh2b2lkKQogeworCWNhbmNlbF9k
+ZWxheWVkX3dvcmtfc3luYygmYmxrZnJvbnRfd29yayk7CisKIAl4ZW5idXNfdW5yZWdpc3Rlcl9k
+cml2ZXIoJmJsa2Zyb250X2RyaXZlcik7CiAJdW5yZWdpc3Rlcl9ibGtkZXYoWEVOVkJEX01BSk9S
+LCBERVZfTkFNRSk7CiAJa2ZyZWUobWlub3JzKTsKLS0gCjIuMTMuNwoKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
