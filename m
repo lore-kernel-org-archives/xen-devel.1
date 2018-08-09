@@ -1,16 +1,19 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: [PATCH] xen/netfront: don't cache skb_shinfo()
-Date: Thu,  9 Aug 2018 16:42:16 +0200
-Message-ID: <20180809144216.18856-1-jgross__3966.37294111333$1533825669$gmane$org@suse.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] xen/netfront: don't cache skb_shinfo()
+Date: Thu, 9 Aug 2018 15:47:01 +0100
+Message-ID: <20180809144701.b6hn2or22dnkey2h__23727.1363650963$1533825950$gmane$org@citrix.com>
+References: <20180809144216.18856-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=re6t=ky=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fnm8s-0000Px-B8
- for xen-devel@lists.xenproject.org; Thu, 09 Aug 2018 14:42:22 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=cugt=ky=citrix.com=prvs=752bb2a90=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1fnmDS-0000cy-Dl
+ for xen-devel@lists.xenproject.org; Thu, 09 Aug 2018 14:47:06 +0000
+Content-Disposition: inline
+In-Reply-To: <20180809144216.18856-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,36 +22,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, netdev@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>, boris.ostrovsky@oracle.com, davem@davemloft.net, stable@vger.kernel.org
+To: Juergen Gross <jgross@suse.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com, davem@davemloft.net
 List-Id: xen-devel@lists.xenproject.org
 
-c2tiX3NoaW5mbygpIGNhbiBjaGFuZ2Ugd2hlbiBjYWxsaW5nIF9fcHNrYl9wdWxsX3RhaWwoKTog
-RG9uJ3QgY2FjaGUKaXRzIHJldHVybiB2YWx1ZS4KCkNjOiBzdGFibGVAdmdlci5rZXJuZWwub3Jn
-ClNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KLS0tCiBkcml2
-ZXJzL25ldC94ZW4tbmV0ZnJvbnQuYyB8IDggKysrKy0tLS0KIDEgZmlsZSBjaGFuZ2VkLCA0IGlu
-c2VydGlvbnMoKyksIDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQveGVu
-LW5ldGZyb250LmMgYi9kcml2ZXJzL25ldC94ZW4tbmV0ZnJvbnQuYwppbmRleCAyZDg4MTJkZDE1
-MzQuLjlkZDJjYTYyZDg0YSAxMDA2NDQKLS0tIGEvZHJpdmVycy9uZXQveGVuLW5ldGZyb250LmMK
-KysrIGIvZHJpdmVycy9uZXQveGVuLW5ldGZyb250LmMKQEAgLTg5NCw3ICs4OTQsNiBAQCBzdGF0
-aWMgUklOR19JRFggeGVubmV0X2ZpbGxfZnJhZ3Moc3RydWN0IG5ldGZyb250X3F1ZXVlICpxdWV1
-ZSwKIAkJCQkgIHN0cnVjdCBza19idWZmICpza2IsCiAJCQkJICBzdHJ1Y3Qgc2tfYnVmZl9oZWFk
-ICpsaXN0KQogewotCXN0cnVjdCBza2Jfc2hhcmVkX2luZm8gKnNoaW5mbyA9IHNrYl9zaGluZm8o
-c2tiKTsKIAlSSU5HX0lEWCBjb25zID0gcXVldWUtPnJ4LnJzcF9jb25zOwogCXN0cnVjdCBza19i
-dWZmICpuc2tiOwogCkBAIC05MDMsMTUgKzkwMiwxNiBAQCBzdGF0aWMgUklOR19JRFggeGVubmV0
-X2ZpbGxfZnJhZ3Moc3RydWN0IG5ldGZyb250X3F1ZXVlICpxdWV1ZSwKIAkJCVJJTkdfR0VUX1JF
-U1BPTlNFKCZxdWV1ZS0+cngsICsrY29ucyk7CiAJCXNrYl9mcmFnX3QgKm5mcmFnID0gJnNrYl9z
-aGluZm8obnNrYiktPmZyYWdzWzBdOwogCi0JCWlmIChzaGluZm8tPm5yX2ZyYWdzID09IE1BWF9T
-S0JfRlJBR1MpIHsKKwkJaWYgKHNrYl9zaGluZm8oc2tiKS0+bnJfZnJhZ3MgPT0gTUFYX1NLQl9G
-UkFHUykgewogCQkJdW5zaWduZWQgaW50IHB1bGxfdG8gPSBORVRGUk9OVF9TS0JfQ0Ioc2tiKS0+
-cHVsbF90bzsKIAogCQkJQlVHX09OKHB1bGxfdG8gPD0gc2tiX2hlYWRsZW4oc2tiKSk7CiAJCQlf
-X3Bza2JfcHVsbF90YWlsKHNrYiwgcHVsbF90byAtIHNrYl9oZWFkbGVuKHNrYikpOwogCQl9Ci0J
-CUJVR19PTihzaGluZm8tPm5yX2ZyYWdzID49IE1BWF9TS0JfRlJBR1MpOworCQlCVUdfT04oc2ti
-X3NoaW5mbyhza2IpLT5ucl9mcmFncyA+PSBNQVhfU0tCX0ZSQUdTKTsKIAotCQlza2JfYWRkX3J4
-X2ZyYWcoc2tiLCBzaGluZm8tPm5yX2ZyYWdzLCBza2JfZnJhZ19wYWdlKG5mcmFnKSwKKwkJc2ti
-X2FkZF9yeF9mcmFnKHNrYiwgc2tiX3NoaW5mbyhza2IpLT5ucl9mcmFncywKKwkJCQlza2JfZnJh
-Z19wYWdlKG5mcmFnKSwKIAkJCQlyeC0+b2Zmc2V0LCByeC0+c3RhdHVzLCBQQUdFX1NJWkUpOwog
-CiAJCXNrYl9zaGluZm8obnNrYiktPm5yX2ZyYWdzID0gMDsKLS0gCjIuMTMuNwoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVGh1LCBBdWcgMDksIDIwMTggYXQgMDQ6NDI6MTZQTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBza2Jfc2hpbmZvKCkgY2FuIGNoYW5nZSB3aGVuIGNhbGxpbmcgX19wc2tiX3B1bGxf
+dGFpbCgpOiBEb24ndCBjYWNoZQo+IGl0cyByZXR1cm4gdmFsdWUuCj4gCj4gQ2M6IHN0YWJsZUB2
+Z2VyLmtlcm5lbC5vcmcKPiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
+ZS5jb20+CgpSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
