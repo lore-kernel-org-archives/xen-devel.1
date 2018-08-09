@@ -1,10 +1,23 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: qemu-3.0 fails with staging
-Date: Thu, 9 Aug 2018 11:02:42 +0200
-Message-ID: <20180809110242.553ea267.olaf@aepfle.de>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v22 1/2] common: add a new mappable resource
+ type: XENMEM_resource_grant_table
+Date: Thu, 09 Aug 2018 03:07:11 -0600
+Message-ID: <5B6C043F02000078001DC5E8@prv1-mh.provo.novell.com>
+References: <20180808141620.25471-1-paul.durrant@citrix.com>
+ <20180808141620.25471-2-paul.durrant@citrix.com>
+ <5B6BFF7602000078001DC5C1@prv1-mh.provo.novell.com>
+ <4c17991b1f1c411ca3bde0c95148644b@AMSPEX02CL03.citrite.net>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0616694261564724359=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=emy9=ky=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fnguZ-0003fa-CX
+ for xen-devel@lists.xenproject.org; Thu, 09 Aug 2018 09:07:15 +0000
+In-Reply-To: <4c17991b1f1c411ca3bde0c95148644b@AMSPEX02CL03.citrite.net>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,83 +26,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, george.dunlap@citrix.com, Ian Jackson <Ian.Jackson@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============0616694261564724359==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/dhlZJY02Q+H/+sIxSG+cDQR"; protocol="application/pgp-signature"
-
---Sig_/dhlZJY02Q+H/+sIxSG+cDQR
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-This domU.cfg fails for me with staging+qemu-3.0, but qemu-2.12 happens to =
-work:
-
-name=3D'fv'
-serial=3D'pty'
-vcpus=3D'4'
-memory=3D'8888'
-disk=3D[ 'vdev=3Dxvda, format=3Draw, access=3Drw, target=3D/nfs_vmimages/di=
-sk0.raw' ]
-vif=3D[ 'bridge=3Dbr0,mac=3D3e:27:63:30:c0:46,type=3Dvif' ]
-builder=3D"hvm"
-device_model_version=3D"qemu-xen"
-device_model_override=3D'/usr/lib64/qemu-3.0/bin/qemu-system-i386'
-
-libxl: error: libxl_dm.c:2429:device_model_spawn_outcome: Domain 3:domain 3=
- device model: spawn failed (rc=3D-3)
-libxl: error: libxl_create.c:1566:domcreate_devmodel_started: Domain 3:devi=
-ce model did not start: -3
-libxl: error: libxl_dm.c:2543:kill_device_model: Device Model already exited
-libxl: error: libxl_domain.c:1034:libxl__destroy_domid: Domain 3:Non-exista=
-nt domain
-libxl: error: libxl_domain.c:993:domain_destroy_callback: Domain 3:Unable t=
-o destroy guest
-libxl: error: libxl_domain.c:920:domain_destroy_cb: Domain 3:Destruction of=
- domain failed
-
-
-tail: '/var/log/xen/qemu-dm-fv.log' has been replaced;  following new file
-qemu-system-i386: -serial pty: char device redirected to /dev/pts/5 (label =
-serial0)
-xenforeignmemory: error: ioctl failed: Invalid argument
-qemu-system-i386: failed to map ioreq server resources: error 22 handle=3D0=
-x561c17027040
-qemu-system-i386: xen hardware virtual machine initialisation failed
-
-
-Does it actually work for anyone? I think there is an OSS-TEST for qemu.git=
-#master.
-I have to debug something else, so can not actually look further at this po=
-int.
-
-
-Olaf
-
---Sig_/dhlZJY02Q+H/+sIxSG+cDQR
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW2wDMgAKCRBdQqD6ppg2
-ftLsAJ9Q7Ch+nN/z986zCSzMhr2pVbZNjACgzjeMuR1XR/GOHpkfTWlaDk4LSDs=
-=MAUz
------END PGP SIGNATURE-----
-
---Sig_/dhlZJY02Q+H/+sIxSG+cDQR--
-
-
---===============0616694261564724359==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0616694261564724359==--
+Pj4+IE9uIDA5LjA4LjE4IGF0IDEwOjU1LCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
+Ogo+PiBGcm9tOiBKYW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+PiBTZW50
+OiAwOSBBdWd1c3QgMjAxOCAwOTo0Nwo+PiAKPj4gPj4+IE9uIDA4LjA4LjE4IGF0IDE2OjE2LCA8
+cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3RlOgo+PiA+ICtzdGF0aWMgaW50IGdudHRhYl9n
+ZXRfc3RhdHVzX2ZyYW1lX21mbihzdHJ1Y3QgZG9tYWluICpkLAo+PiA+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBsb25nIGlkeCwgbWZuX3QgKm1mbikK
+Pj4gPiArewo+PiA+ICsgICAgY29uc3Qgc3RydWN0IGdyYW50X3RhYmxlICpndCA9IGQtPmdyYW50
+X3RhYmxlOwo+PiA+ICsKPj4gPiArICAgIEFTU0VSVChndC0+Z3RfdmVyc2lvbiA9PSAyKTsKPj4g
+PiArCj4+ID4gKyAgICBpZiAoIGlkeCA+PSBucl9zdGF0dXNfZnJhbWVzKGd0KSApCj4+ID4gKyAg
+ICB7Cj4+ID4gKyAgICAgICAgdW5zaWduZWQgbG9uZyBucl9zdGF0dXM7Cj4+ID4gKyAgICAgICAg
+dW5zaWduZWQgbG9uZyBucl9ncmFudDsKPj4gPiArCj4+ID4gKyAgICAgICAgbnJfc3RhdHVzID0g
+aWR4ICsgMTsgLyogc3VmZmljaWVudCBmcmFtZXMgdG8gbWFrZSBpZHggdmFsaWQgKi8KPj4gPiAr
+ICAgICAgICBucl9ncmFudCA9IHN0YXR1c190b19ncmFudF9mcmFtZXMobnJfc3RhdHVzKTsKPj4g
+PiArCj4+ID4gKyAgICAgICAgaWYgKCBucl9ncmFudCA8PSBucl9ncmFudF9mcmFtZXMoZ3QpICkg
+Lyogb3ZlcmZsb3cgY2hlY2sgKi8KPj4gPiArICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4+
+IAo+PiBJZiB0aGUgdGFibGUgaXMgY3VycmVudGx5IGVtcHR5LCB0aGlzIHdvdWxkIGFsd2F5cyBm
+YWlsLCB3b3VsZG4ndAo+PiBpdD8gWW91IGhhdmVuJ3QgZ3Jvd24gdGhlIHRhYmxlIHlldCBieSB0
+aGlzIHBvaW50Lgo+IAo+IEdvb2QgcG9pbnQsIEkgc2hvdWxkIGJlIGNoZWNraW5nIG5yX3N0YXR1
+cyBub3QgbnJfZ3JhbnQuCj4gCj4+IAo+PiA+ICsgICAgICAgIGlmICggbnJfZ3JhbnQgPD0gZ3Qt
+Pm1heF9ncmFudF9mcmFtZXMgKQo+PiA+ICsgICAgICAgICAgICBnbnR0YWJfZ3Jvd190YWJsZShk
+LCBucl9ncmFudCk7Cj4+IAo+PiBBbmQgaGVyZSAob3RoZXIgdGhhbiBvcmlnaW5hbGx5IGluIGdu
+dHRhYl9tYXBfZnJhbWUoKSkgeW91Cj4+IGludm9rZSBnbnR0YWJfZ3Jvd190YWJsZSgpIHBlcmhh
+cHMgcG9pbnRsZXNzbHkgKHdoZW4gdGhlIHRhYmxlCj4+IGRvZXNuJ3QgaW4gZmFjdCBuZWVkIGdy
+b3dpbmcpLgo+IAo+IFdlbGwgaWYgaWR4IGlzIG91dCBvZiByYW5nZSAod2hpY2ggaXMgaG93IHRo
+ZSBjb2RlIGdvdCBpbiBoZXJlKSB0aGVuIHRoZSAKPiB0YWJsZSBtdXN0IG5lZWQgdG8gZ3Jvdy4K
+Ck9oLCBzb3JyeSAtIEkndmUgaWdub3JlZCB0aGUgb3V0ZXIgaWYoKS4KCj4+ID4gQEAgLTEwMjcs
+NiArMTA2NiwxMSBAQCBzdGF0aWMgaW50IGFjcXVpcmVfcmVzb3VyY2UoCj4+ID4KPj4gPiAgICAg
+IHN3aXRjaCAoIHhtYXIudHlwZSApCj4+ID4gICAgICB7Cj4+ID4gKyAgICBjYXNlIFhFTk1FTV9y
+ZXNvdXJjZV9ncmFudF90YWJsZToKPj4gPiArICAgICAgICByYyA9IGFjcXVpcmVfZ3JhbnRfdGFi
+bGUoZCwgeG1hci5pZCwgeG1hci5mcmFtZSwgeG1hci5ucl9mcmFtZXMsCj4+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIG1mbl9saXN0KTsKPj4gPiArICAgICAgICBicmVhazsK
+Pj4gPiArCj4+ID4gICAgICBkZWZhdWx0Ogo+PiA+ICAgICAgICAgIHJjID0gYXJjaF9hY3F1aXJl
+X3Jlc291cmNlKGQsIHhtYXIudHlwZSwgeG1hci5pZCwgeG1hci5mcmFtZSwKPj4gPiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICB4bWFyLm5yX2ZyYW1lcywgbWZuX2xpc3QsICZ4
+bWFyLmZsYWdzKTsKPj4gPiBAQCAtMTA0Niw2ICsxMDkwLDE2IEBAIHN0YXRpYyBpbnQgYWNxdWly
+ZV9yZXNvdXJjZSgKPj4gPiAgICAgICAgICB4ZW5fcGZuX3QgZ2ZuX2xpc3RbQVJSQVlfU0laRSht
+Zm5fbGlzdCldOwo+PiA+ICAgICAgICAgIHVuc2lnbmVkIGludCBpOwo+PiA+Cj4+ID4gKyAgICAg
+ICAgLyoKPj4gPiArICAgICAgICAgKiBGSVhNRTogVW50aWwgZm9yZWlnbiBwYWdlcyBpbnNlcnRl
+ZCBpbnRvIHRoZSBQMk0gYXJlIHByb3Blcmx5Cj4+ID4gKyAgICAgICAgICogICAgICAgIHJlZmVy
+ZW5jZSBjb3VudGVkLCBpdCBpcyB1bnNhZmUgdG8gYWxsb3cgbWFwcGluZyBvZgo+PiA+ICsgICAg
+ICAgICAqICAgICAgICBub24tY2FsbGVyLW93bmVkIHJlc291cmNlIHBhZ2VzIHVubGVzcyB0aGUg
+Y2FsbGVyIGlzCj4+ID4gKyAgICAgICAgICogICAgICAgIHRoZSBoYXJkd2FyZSBkb21haW4uCj4+
+ID4gKyAgICAgICAgICovCj4+ID4gKyAgICAgICAgaWYgKCAhKHhtYXIuZmxhZ3MgJiBYRU5NRU1f
+cnNyY19hY3FfY2FsbGVyX293bmVkKSAmJgo+PiA+ICsgICAgICAgICAgICAgIWlzX2hhcmR3YXJl
+X2RvbWFpbihjdXJyZCkgKQo+PiA+ICsgICAgICAgICAgICByZXR1cm4gLUVPUE5PVFNVUFA7Cj4+
+ID4gKwo+PiAKPj4gTm93IHRoYXQgSSBsb29rIGF0IHRoaXMgYWdhaW4gLSB3b3VsZG4ndCB0aGlz
+IGNoZWNrIGJldHRlciBsaXZlIGFoZWFkCj4+IG9mIHRoZSBtYWluIHN3aXRjaCgpPyBJIGZpbmQg
+aXQgb2RkLCBmb3IgZXhhbXBsZSwgdGhhdCBpbiB0aGlzIGNhc2UgdGhlCj4+IGdyYW50IHRhYmxl
+IHdvdWxkIHN0aWxsIGhhdmUgZ290IGdyb3duLgo+IAo+IFRoaXMgY2FuJ3QgbGl2ZSBhaGVhZCBv
+ZiB0aGUgbWFpbiBzd2l0Y2ggYmVjYXVzZSAKPiBYRU5NRU1fcnNyY19hY3FfY2FsbGVyX293bmVk
+IGlzIHBhc3NlZC1vdXQgZmxhZywgbm90IGEgcGFzc2VkLWluIG9uZS4gCgpPaCwgcmlnaHQuIEV4
+Y2VwdCB0aGF0IG9ubHkgYXJjaF9hY3F1aXJlX3Jlc291cmNlKCkgY291bGQgY3VycmVudGx5CnNl
+dCB0aGUgZmxhZywgYW5kIGhlbmNlIGZyb20gdGhpcyBwYXRjaCdzIHBlcnNwZWN0aXZlIGl0J3Mg
+bm90IHZpc2libGUKdGhhdCB0aGlzIGlzIGFuICJvdXQiIGZsYWcuIEkgZ3Vlc3MgeW91IG1lYW4g
+dG8gc2V0IHRoZSBmbGFnIGluCmFjcXVpcmVfZ3JhbnRfdGFibGUoKSBvciBuZXh0IHRvIHRoZSBj
+YWxsIHRvIGl0LgoKPiBBbHNvLCB0aGUgZ3JhbnQgdGFibGUgd291bGQgaGF2ZSBwb3RlbnRpYWxs
+eSBncm93biBldmVuIHRob3VnaCB0aGUgb3Agd2lsbCAKPiBmYWlsLiBJcyB0aGF0IHdoYXQncyBj
+b25jZXJuaW5nIHlvdT8KCkJ1dCBhIGZhaWx1cmUgcG9zdC1ncm93IG90aGVyIHRoYW4gdGhlIG9u
+ZSBhYm92ZSBpcyByZWxhdGl2ZWx5IHVubGlrZWx5LAppc24ndCBpdD8KCkphbgoKCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
