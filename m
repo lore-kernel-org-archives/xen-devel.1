@@ -1,21 +1,14 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [RFC PATCH v2 01/17] libxl: fix qemu-trad cmdline
- for no sdl/vnc case
-Date: Thu, 9 Aug 2018 10:19:25 +0100
-Message-ID: <20180809091925.th7b6ejh25z55xjb@citrix.com>
-References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
- <7b254e7464fe461e84f73ea3c146fb5a7909ea3d.1533608042.git-series.marmarek@invisiblethingslab.com>
+From: Alexandru Isaila <aisaila@bitdefender.com>
+Subject: [PATCH v16 09/13] x86/hvm: Introduce
+ lapic_save_regs_one func
+Date: Thu,  9 Aug 2018 12:20:57 +0300
+Message-ID: <1533806461-7428-10-git-send-email-aisaila@bitdefender.com>
+References: <1533806461-7428-1-git-send-email-aisaila@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=cugt=ky=citrix.com=prvs=752bb2a90=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fnh6P-00052P-54
- for xen-devel@lists.xenproject.org; Thu, 09 Aug 2018 09:19:29 +0000
-Content-Disposition: inline
-In-Reply-To: <7b254e7464fe461e84f73ea3c146fb5a7909ea3d.1533608042.git-series.marmarek@invisiblethingslab.com>
+In-Reply-To: <1533806461-7428-1-git-send-email-aisaila@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,25 +17,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: xen-devel@lists.xen.org
+Cc: wei.liu2@citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, paul.durrant@citrix.com, jbeulich@suse.com, Alexandru Isaila <aisaila@bitdefender.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBBdWcgMDcsIDIwMTggYXQgMDQ6MTY6MDZBTSArMDIwMCwgTWFyZWsgTWFyY3p5a293
-c2tpLUfDs3JlY2tpIHdyb3RlOgo+IFdoZW4gcWVtdSBpcyBydW5uaW5nIGluIHN0dWJkb21haW4s
-IGFueSBhdHRlbXB0IHRvIGluaXRpYWxpemUgdm5jL3NkbAo+IHRoZXJlIHdpbGwgY3Jhc2ggaXQg
-KG9uIGZhaWxlZCBhdHRlbXB0IHRvIGxvYWQgYSBrZXltYXAgZnJvbSBhIGZpbGUpLiBJZgo+IHZm
-YiBpcyBwcmVzZW50LCBhbGwgdGhvc2UgY2FzZXMgYXJlIHNraXBwZWQuIEJ1dCBzaW5jZQo+IGIw
-NTNmMGM0YzllNTMzZjNkOTc4MzdjZjg5N2ViOTIwYjgzNTVlZDMgImxpYnhsOiBkbyBub3Qgc3Rh
-cnQgZG9tMCBxZW11Cj4gZm9yIHN0dWJkb21haW4gd2hlbiBub3QgbmVlZGVkIiBpdCBpcyBwb3Nz
-aWJsZSB0byBjcmVhdGUgYSBzdHViZG9tYWluCj4gd2l0aG91dCB2ZmIgYW5kIGNvbnRyYXJ5IHRv
-IHRoZSBjb21tZW50IC12bmMgbm9uZSBkbyB0cmlnZ2VyIFZOQwo+IGluaXRpYWxpemF0aW9uIGNv
-ZGUgKGp1c3Qgc2tpcHMgZXhwb3NpbmcgaXQgZXh0ZXJuYWxseSkuCj4gQ2hhbmdlIHRoZSBpbXBs
-aWNpdCBTREwgYXZvaWRpbmcgbWV0aG9kIHRvIC1ub2dyYXBoaWNzIG9wdGlvbiwgdXNlZCB3aGVu
-Cj4gbm9uZSBvZiBTREwgb3IgVk5DIGlzIGVuYWJsZWQuCgpVcmdoLi4uCgo+IAo+IFNpZ25lZC1v
-ZmYtYnk6IE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSA8bWFybWFyZWtAaW52aXNpYmxldGhp
-bmdzbGFiLmNvbT4KPiBSZXZpZXdlZC1ieTogSmFzb24gQW5kcnl1ayA8amFuZHJ5dWtAZ21haWwu
-Y29tPgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+VGhpcyBpcyB1c2VkIHRvIHNhdmUgZGF0YSBmcm9tIGEgc2luZ2xlIGluc3RhbmNlLgoKU2lnbmVk
+LW9mZi1ieTogQWxleGFuZHJ1IElzYWlsYSA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+CgotLS0K
+Q2hhbmdlcyBzaW5jZSB2MTU6CgktIERyb3Agc3RydWN0IHZsYXBpYyAqcy4KLS0tCiB4ZW4vYXJj
+aC94ODYvaHZtL3ZsYXBpYy5jIHwgMjMgKysrKysrKysrKysrKysrLS0tLS0tLS0KIDEgZmlsZSBj
+aGFuZ2VkLCAxNSBpbnNlcnRpb25zKCspLCA4IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3hl
+bi9hcmNoL3g4Ni9odm0vdmxhcGljLmMgYi94ZW4vYXJjaC94ODYvaHZtL3ZsYXBpYy5jCmluZGV4
+IDQyOWZmYjUuLmFhODkyYmMgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vdmxhcGljLmMK
+KysrIGIveGVuL2FyY2gveDg2L2h2bS92bGFwaWMuYwpAQCAtMTQ1OCwyNiArMTQ1OCwzMyBAQCBz
+dGF0aWMgaW50IGxhcGljX3NhdmVfaGlkZGVuKHN0cnVjdCBkb21haW4gKmQsIGh2bV9kb21haW5f
+Y29udGV4dF90ICpoKQogICAgIHJldHVybiBlcnI7CiB9CiAKK3N0YXRpYyBpbnQgbGFwaWNfc2F2
+ZV9yZWdzX29uZShzdHJ1Y3QgdmNwdSAqdiwgaHZtX2RvbWFpbl9jb250ZXh0X3QgKmgpCit7Cisg
+ICAgaWYgKCAhaGFzX3ZsYXBpYyh2LT5kb21haW4pICkKKyAgICAgICAgcmV0dXJuIDA7CisKKyAg
+ICBpZiAoIGh2bV9mdW5jcy5zeW5jX3Bpcl90b19pcnIgKQorICAgICAgICBodm1fZnVuY3Muc3lu
+Y19waXJfdG9faXJyKHYpOworCisgICAgcmV0dXJuIGh2bV9zYXZlX2VudHJ5KExBUElDX1JFR1Ms
+IHYtPnZjcHVfaWQsIGgsIHZjcHVfdmxhcGljKHYpLT5yZWdzKTsKK30KKwogc3RhdGljIGludCBs
+YXBpY19zYXZlX3JlZ3Moc3RydWN0IGRvbWFpbiAqZCwgaHZtX2RvbWFpbl9jb250ZXh0X3QgKmgp
+CiB7CiAgICAgc3RydWN0IHZjcHUgKnY7Ci0gICAgc3RydWN0IHZsYXBpYyAqczsKLSAgICBpbnQg
+cmMgPSAwOworICAgIGludCBlcnIgPSAwOwogCiAgICAgaWYgKCAhaGFzX3ZsYXBpYyhkKSApCiAg
+ICAgICAgIHJldHVybiAwOwogCiAgICAgZm9yX2VhY2hfdmNwdSAoIGQsIHYgKQogICAgIHsKLSAg
+ICAgICAgaWYgKCBodm1fZnVuY3Muc3luY19waXJfdG9faXJyICkKLSAgICAgICAgICAgIGh2bV9m
+dW5jcy5zeW5jX3Bpcl90b19pcnIodik7Ci0KLSAgICAgICAgcyA9IHZjcHVfdmxhcGljKHYpOwot
+ICAgICAgICBpZiAoIChyYyA9IGh2bV9zYXZlX2VudHJ5KExBUElDX1JFR1MsIHYtPnZjcHVfaWQs
+IGgsIHMtPnJlZ3MpKSAhPSAwICkKKyAgICAgICAgZXJyID0gbGFwaWNfc2F2ZV9yZWdzX29uZSh2
+LCBoKTsKKyAgICAgICAgaWYgKCBlcnIgKQogICAgICAgICAgICAgYnJlYWs7CiAgICAgfQogCi0g
+ICAgcmV0dXJuIHJjOworICAgIHJldHVybiBlcnI7CiB9CiAKIC8qCi0tIAoyLjcuNAoKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
