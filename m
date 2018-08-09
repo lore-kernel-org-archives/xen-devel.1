@@ -1,15 +1,14 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH] common/gnttab: Explicitly default to gnttab
- v1 during domain creation
-Date: Thu, 9 Aug 2018 12:55:34 +0200
-Message-ID: <20180809105534.mutxtwnwual74aoo@mac>
-References: <1533810718-6010-1-git-send-email-andrew.cooper3@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: qemu-3.0 fails with staging
+Date: Thu, 9 Aug 2018 12:58:13 +0200
+Message-ID: <20180809125813.006b186d.olaf@aepfle.de>
+References: <20180809110242.553ea267.olaf@aepfle.de>
+ <baf3c5c57d764650b55815d581fdac81@AMSPEX02CL03.citrite.net>
+ <f74217d62aec4d1c8d40d1c39155222d@AMSPEX02CL03.citrite.net>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============9136072619657014087=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <1533810718-6010-1-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <f74217d62aec4d1c8d40d1c39155222d@AMSPEX02CL03.citrite.net>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,44 +17,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: Paul Durrant <Paul.Durrant@citrix.com>
+Cc: "'xen-devel@lists.xen.org'" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBBdWcgMDksIDIwMTggYXQgMTE6MzE6NThBTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBGb3IgcmVhc29ucyB3aGljaCBhcHBlYXIgdG8gYmUgZXhjbHVzaXZlbHkgZG93biB0
-byBwb29yIHJldmlldyBvZiB0aGUgZ3JhbnQKPiB0YWJsZSB2MiBjb2RlLCBhIGdyYW50IHRhYmxl
-J3MgdmVyc2lvbiBmaWVsZCB3YXMgd2Fzbid0IGluaXRpYWxpc2VkIGR1cmluZwo+IGNyZWF0aW9u
-Lgo+IAo+IEEgbnVtYmVyIG9mIHByb2JsZW1zIChpbmNsdWRpbmcgWFNBcykgaGF2ZSBvY2N1cnJl
-ZCBpbiB0aGUgcGFzdCB0cnlpbmcgdHJ5aW5nCj4gdG8gdXNlIGEgZ3JhbnQgdGFibGUgd2hpY2gg
-aGFzbid0IGJlZW4gcHJvcGVybHkgc2V0IHVwLCBhbmQgdmFyaW91cyBhcmVhcyBvZgo+IHRoZSBj
-b2RlIGNvcGUgd2l0aCB2MCBieSBkZWZhdWx0aW5nIHRvIHYxLgo+IAo+IEluIHBhcnRpY3VsYXIs
-IHRoZSB0b29sc3RhY2sgdXNpbmcgR05UVEFCT1Bfc2V0dXBfdGFibGUgdG8gYmUgYWJsZSB0byBm
-aWxsIGluCj4gdGhlIHN0b3JlL2NvbnNvbGUgZ3JhbnRzIGhhcyBhIHNpZGUgZWZmZWN0IG9mIHN3
-aXRjaGluZyB0byB2MS4KPiAKPiBJbiBoaW5kc2lnaHQgaG93ZXZlciwgdGhpcyAiZml4dXAgaWYg
-d2Ugc2VlIDAiIGlzIGEgdmVyeSBwb29yLCB3aXRoIGEKPiBzdWJzdGFudGlhbCBkZWdyZWUgb2Yg
-cmlzay4gIEV4cGxpY2l0bHkgZGVmYXVsdCB0byBncmFudCB0YWJsZSB2MSBkdXJpbmcKPiBkb21h
-aW4gY3JlYXRlLCBhbmQgbGV0IHRoZSByZXN0IG9mIHRoZSBjb2RlIHdvcmsgc2FmZWx5IGluIHRo
-ZSBrbm93bGVkZ2UgdGhhdAo+IHRoZSB2ZXJzaW9uIGlzIHNlbnNpYmx5IHNldC4KPiAKPiBTaWdu
-ZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKUmV2
-aWV3ZWQtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoKSSB3b3Vs
-ZCBob3dldmVyIGtlZXAgdGhlIGN1cnJlbnQgZ3RfdmVyc2lvbiAhPSAwIGFzc2VydHMsIGFuZCBj
-aGFuZ2UKdGhlIGlmICggZ3RfdmVyc2lvbiA9PSAwICkgaW50byBBU1NFUlQoZ3RfdmVyc2lvbiAh
-PSAwKTsKCj4gQEAgLTI5OTEsMTUgKzI5NzAsMTEgQEAgZ250dGFiX3NldF92ZXJzaW9uKFhFTl9H
-VUVTVF9IQU5ETEVfUEFSQU0oZ250dGFiX3NldF92ZXJzaW9uX3QpIHVvcCkKPiAgCj4gICAgICBz
-d2l0Y2ggKCBndC0+Z3RfdmVyc2lvbiApCj4gICAgICB7Cj4gLSAgICBjYXNlIDA6Cj4gLSAgICAg
-ICAgaWYgKCBvcC52ZXJzaW9uID09IDIgKQo+IC0gICAgICAgIHsKPiAgICAgIGNhc2UgMToKPiAt
-ICAgICAgICAgICAgLyogWFhYOiBXZSBjb3VsZCBtYXliZSBzaHJpbmsgdGhlIGFjdGl2ZSBncmFu
-dCB0YWJsZSBoZXJlLiAqLwo+IC0gICAgICAgICAgICByZXMgPSBnbnR0YWJfcG9wdWxhdGVfc3Rh
-dHVzX2ZyYW1lcyhjdXJyZCwgZ3QsIG5yX2dyYW50X2ZyYW1lcyhndCkpOwo+IC0gICAgICAgICAg
-ICBpZiAoIHJlcyA8IDApCj4gLSAgICAgICAgICAgICAgICBnb3RvIG91dF91bmxvY2s7Cj4gLSAg
-ICAgICAgfQo+ICsgICAgICAgIC8qIFhYWDogV2UgY291bGQgbWF5YmUgc2hyaW5rIHRoZSBhY3Rp
-dmUgZ3JhbnQgdGFibGUgaGVyZS4gKi8KPiArICAgICAgICByZXMgPSBnbnR0YWJfcG9wdWxhdGVf
-c3RhdHVzX2ZyYW1lcyhjdXJyZCwgZ3QsIG5yX2dyYW50X2ZyYW1lcyhndCkpOwo+ICsgICAgICAg
-IGlmICggcmVzIDwgMCkKPiArICAgICAgICAgICAgZ290byBvdXRfdW5sb2NrOwo+ICAgICAgICAg
-IGJyZWFrOwo+ICAgICAgY2FzZSAyOgo+ICAgICAgICAgIGZvciAoIGkgPSAwOyBpIDwgR05UVEFC
-X05SX1JFU0VSVkVEX0VOVFJJRVM7IGkrKyApCgpBbmQgSSB3b3VsZCBhZGQgYSBkZWZhdWx0OiBB
-U1NFUlRfVU5SRUFDSEFCTEUoKTsgaGVyZS4KClRoYW5rcywgUm9nZXIuCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============9136072619657014087==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/q=0Fs8KXx_SlgZA9D82AQ1O"; protocol="application/pgp-signature"
+
+--Sig_/q=0Fs8KXx_SlgZA9D82AQ1O
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 9 Aug 2018 10:22:51 +0000
+schrieb Paul Durrant <Paul.Durrant@citrix.com>:
+
+> Oh sorry, I see the xen version is just staging. Still need the dom0 kern=
+el version though.
+
+Kernel 4.4, SLE12SP3.
+
+Olaf
+
+--Sig_/q=0Fs8KXx_SlgZA9D82AQ1O
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW2weRQAKCRBdQqD6ppg2
+fpdaAJwJ4FFVra7+WWWy5ijJs5qrpn3eBwCg+saLQb7z6OEVkpgQ/24yWXCXHmU=
+=RXlH
+-----END PGP SIGNATURE-----
+
+--Sig_/q=0Fs8KXx_SlgZA9D82AQ1O--
+
+
+--===============9136072619657014087==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9136072619657014087==--
