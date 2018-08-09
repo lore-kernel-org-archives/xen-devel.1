@@ -1,14 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: qemu-3.0 fails with staging
-Date: Thu, 9 Aug 2018 12:58:13 +0200
-Message-ID: <20180809125813.006b186d.olaf@aepfle.de>
-References: <20180809110242.553ea267.olaf@aepfle.de>
- <baf3c5c57d764650b55815d581fdac81@AMSPEX02CL03.citrite.net>
- <f74217d62aec4d1c8d40d1c39155222d@AMSPEX02CL03.citrite.net>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] common/gnttab: Explicitly default to gnttab
+ v1 during domain creation
+Date: Thu, 9 Aug 2018 12:12:11 +0100
+Message-ID: <d1c40e13-b23b-b653-bc91-85b7f0e0a226@citrix.com>
+References: <1533810718-6010-1-git-send-email-andrew.cooper3@citrix.com>
+ <20180809105534.mutxtwnwual74aoo@mac>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============9136072619657014087=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <f74217d62aec4d1c8d40d1c39155222d@AMSPEX02CL03.citrite.net>
+In-Reply-To: <20180809105534.mutxtwnwual74aoo@mac>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,50 +19,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>
-Cc: "'xen-devel@lists.xen.org'" <xen-devel@lists.xen.org>
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============9136072619657014087==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/q=0Fs8KXx_SlgZA9D82AQ1O"; protocol="application/pgp-signature"
-
---Sig_/q=0Fs8KXx_SlgZA9D82AQ1O
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 9 Aug 2018 10:22:51 +0000
-schrieb Paul Durrant <Paul.Durrant@citrix.com>:
-
-> Oh sorry, I see the xen version is just staging. Still need the dom0 kern=
-el version though.
-
-Kernel 4.4, SLE12SP3.
-
-Olaf
-
---Sig_/q=0Fs8KXx_SlgZA9D82AQ1O
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW2weRQAKCRBdQqD6ppg2
-fpdaAJwJ4FFVra7+WWWy5ijJs5qrpn3eBwCg+saLQb7z6OEVkpgQ/24yWXCXHmU=
-=RXlH
------END PGP SIGNATURE-----
-
---Sig_/q=0Fs8KXx_SlgZA9D82AQ1O--
-
-
---===============9136072619657014087==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============9136072619657014087==--
+T24gMDkvMDgvMTggMTE6NTUsIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6Cj4gT24gVGh1LCBBdWcg
+MDksIDIwMTggYXQgMTE6MzE6NThBTSArMDEwMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4gRm9y
+IHJlYXNvbnMgd2hpY2ggYXBwZWFyIHRvIGJlIGV4Y2x1c2l2ZWx5IGRvd24gdG8gcG9vciByZXZp
+ZXcgb2YgdGhlIGdyYW50Cj4+IHRhYmxlIHYyIGNvZGUsIGEgZ3JhbnQgdGFibGUncyB2ZXJzaW9u
+IGZpZWxkIHdhcyB3YXNuJ3QgaW5pdGlhbGlzZWQgZHVyaW5nCj4+IGNyZWF0aW9uLgo+Pgo+PiBB
+IG51bWJlciBvZiBwcm9ibGVtcyAoaW5jbHVkaW5nIFhTQXMpIGhhdmUgb2NjdXJyZWQgaW4gdGhl
+IHBhc3QgdHJ5aW5nIHRyeWluZwo+PiB0byB1c2UgYSBncmFudCB0YWJsZSB3aGljaCBoYXNuJ3Qg
+YmVlbiBwcm9wZXJseSBzZXQgdXAsIGFuZCB2YXJpb3VzIGFyZWFzIG9mCj4+IHRoZSBjb2RlIGNv
+cGUgd2l0aCB2MCBieSBkZWZhdWx0aW5nIHRvIHYxLgo+Pgo+PiBJbiBwYXJ0aWN1bGFyLCB0aGUg
+dG9vbHN0YWNrIHVzaW5nIEdOVFRBQk9QX3NldHVwX3RhYmxlIHRvIGJlIGFibGUgdG8gZmlsbCBp
+bgo+PiB0aGUgc3RvcmUvY29uc29sZSBncmFudHMgaGFzIGEgc2lkZSBlZmZlY3Qgb2Ygc3dpdGNo
+aW5nIHRvIHYxLgo+Pgo+PiBJbiBoaW5kc2lnaHQgaG93ZXZlciwgdGhpcyAiZml4dXAgaWYgd2Ug
+c2VlIDAiIGlzIGEgdmVyeSBwb29yLCB3aXRoIGEKPj4gc3Vic3RhbnRpYWwgZGVncmVlIG9mIHJp
+c2suICBFeHBsaWNpdGx5IGRlZmF1bHQgdG8gZ3JhbnQgdGFibGUgdjEgZHVyaW5nCj4+IGRvbWFp
+biBjcmVhdGUsIGFuZCBsZXQgdGhlIHJlc3Qgb2YgdGhlIGNvZGUgd29yayBzYWZlbHkgaW4gdGhl
+IGtub3dsZWRnZSB0aGF0Cj4+IHRoZSB2ZXJzaW9uIGlzIHNlbnNpYmx5IHNldC4KPj4KPj4gU2ln
+bmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPiBS
+ZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4KPiBJ
+IHdvdWxkIGhvd2V2ZXIga2VlcCB0aGUgY3VycmVudCBndF92ZXJzaW9uICE9IDAgYXNzZXJ0cywg
+YW5kIGNoYW5nZQo+IHRoZSBpZiAoIGd0X3ZlcnNpb24gPT0gMCApIGludG8gQVNTRVJUKGd0X3Zl
+cnNpb24gIT0gMCk7CgpObyAtIHRoZXkgYXJlIG5vdCBjb3JyZWN0IGVpdGhlciwgYmVjYXVzZSB0
+aGV5IHdpbGwgcGFzcyBmb3IgMyBvciBncmVhdGVyLgoKSSd2ZSBnb3Qgc29tZSBjbGVhbnVwIHBs
+YW5zIHdoaWNoIHdpbGwgdHVybiBhIGxvYWQgb2YgdGhpcyBpbnRvCgpzd2l0Y2ggKCBndC0+Z3Rf
+dmVyc2lvbiApCnsKY2FzZSAxOiAuLi4KY2FzZSAyOiAuLi4KZGVmYXVsdDogQVNTRVJUX1VOUkVB
+Q0hBQkxFKCk7Cn0KCmJ1dCB0aGF0IGlzIGRlZmluaXRlbHkgd29yayBmb3IgbGF0ZXIuCgp+QW5k
+cmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
