@@ -1,27 +1,22 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v1 4/4] xen/arm: Reuse R-Car Gen2 platform
- code for Stout board
-Date: Thu, 9 Aug 2018 17:20:54 +0100
-Message-ID: <dc8d828c-eef0-7c30-6766-865d80e465e8@arm.com>
-References: <1533580552-938-1-git-send-email-olekstysh@gmail.com>
- <1533580552-938-5-git-send-email-olekstysh@gmail.com>
- <fd405643-3ae8-de5d-ed4f-7acd6e3b70b3@arm.com>
- <CAPD2p-m_K4CQzWbVuFp0FWh=kFjrHkLpwZagx0+UO4n0kV-egw@mail.gmail.com>
- <adfc68b1-f061-5c70-9083-3ef7d51d6457@arm.com>
- <CAPD2p-=pJmEqRzShLzudpLh2Ymd0KuDMBgyKfM+gSRyPcR2apA@mail.gmail.com>
- <ac28cd7b-71c4-b1c5-5b2c-7fe0aaf93b54@arm.com>
- <CAPD2p-kwLaF_wMtPSyMT8iYRFHf=dLELBbc0cZbenH1v89BrEA@mail.gmail.com>
+From: Jason Andryuk <jandryuk@gmail.com>
+Subject: Re: [RFC PATCH v2 03/17] libxl: Handle Linux stubdomain
+ specific QEMU options.
+Date: Thu, 9 Aug 2018 12:23:14 -0400
+Message-ID: <CAKf6xpuZ+4GM5+yXoLXPwczDhFR1k+14kAOZAkpsUr078r6LHg@mail.gmail.com>
+References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <084e43a6ca74c8cb6ffb7301497f425b413cfc42.1533608042.git-series.marmarek@invisiblethingslab.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=bsm9=ky=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1fnngK-0000LA-4U
- for xen-devel@lists.xenproject.org; Thu, 09 Aug 2018 16:21:00 +0000
-In-Reply-To: <CAPD2p-kwLaF_wMtPSyMT8iYRFHf=dLELBbc0cZbenH1v89BrEA@mail.gmail.com>
-Content-Language: en-US
+ <srs0=3j7a=ky=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1fnnii-0000XU-Lc
+ for xen-devel@lists.xenproject.org; Thu, 09 Aug 2018 16:23:28 +0000
+Received: by mail-lj1-x22c.google.com with SMTP id 203-v6so4920138ljj.13
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Aug 2018 09:23:26 -0700 (PDT)
+In-Reply-To: <084e43a6ca74c8cb6ffb7301497f425b413cfc42.1533608042.git-series.marmarek@invisiblethingslab.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,26 +25,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr Tyshchenko <olekstysh@gmail.com>
-Cc: Artem Mygaiev <Artem_Mygaiev@epam.com>, xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+To: =?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Eric Shelton <eshelton@pobox.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwOC8wOS8yMDE4IDA1OjE4IFBNLCBPbGVrc2FuZHIgVHlzaGNoZW5rbyB3cm90ZToKPiBP
-biBUaHUsIEF1ZyA5LCAyMDE4IGF0IDc6MTAgUE0sIEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxs
-QGFybS5jb20+IHdyb3RlOgo+PiBTb21laG93IEkgdGhvdWdodCB0aGUgcGxhdGZvcm0gd2FzIDY0
-LWJpdCBhbmQgZm91bmQgYSBTT0MgbmFtZSB2ZXJ5IHNpbWlsYXIKPj4gdG8gaXQuIFNvcnJ5IGZv
-ciB0aGUgY29uZnVzaW9uLiBQU0NJIHNlZW1zIGluZGVlZCBub3Qgc3VwcG9ydGVkIGZvciB0aGF0
-Cj4+IHBsYXRmb3JtLgo+IFItQ2FyIEdlbjMgaXMgQVJNNjQgKEgyIFNvQyAtPiByOGE3NzkwKSBh
-bmQgZG9lcyBzdXBwb3J0IFBTQ0kuCj4gQnV0IFItQ2FyIEdlbjIgaXMgQVJNMzIgKEgyIFNvQyAt
-PiByOGE3NzkwKQo+IAo+Pgo+PiBIb3dldmVyLCB0aGUgY29kZSBsb29rcyBmYWlybHkgZGlmZmVy
-ZW50IHRoYW4gd2hhdCB3ZSBoYXZlIGluIFhlbi4gRm9yCj4+IGluc3RhbmNlIHNlY29uZGFyeSBD
-UFUgc2VlbXMgdG8gcmVxdWlyZSB0byBpbml0aWFsaXplIENOVFZPRkYsIHRoZSBmdW5jdGlvbgo+
-PiB0byBwb3dlciBvbiBhIENQVSBhbHNvIGxvb2tzIGRpZmZlcmVudC4KPiBTb3JyeSwgd2hpY2gg
-Y29kZSB5b3UgYXJlIHRha2luZyBhYm91dCwgVS1Cb290IG9yIExpbnV4PwoKVGhlIFNNUCBjb2Rl
-IGluIExpbnV4IHZzIHRoZSBTTVAgY29kZSBpbiBYZW4gZm9yIHRoZSBSLUNhci4gSW4gbW9zdCBv
-ZiAKdGhlIGNhc2VzLCBYZW4gc2hvdWxkIHJlcGxpY2F0ZSB3aGF0IExpbnV4IGRvZXMuCgpJIGFt
-IHRyeWluZyB0byB1bmRlcnN0YW5kIHdoeSBzdWNoIGRpZmZlcmVuY2VzIGF0IHRoZSBtb21lbnQu
-CgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+T24gTW9uLCBBdWcgNiwgMjAxOCBhdCAxMDoyMiBQTSBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVj
+a2kKPG1hcm1hcmVrQGludmlzaWJsZXRoaW5nc2xhYi5jb20+IHdyb3RlOgo+Cj4gRnJvbTogRXJp
+YyBTaGVsdG9uIDxlc2hlbHRvbkBwb2JveC5jb20+Cj4KPiBUaGlzIHBhdGNoIGNyZWF0ZXMgYW4g
+YXBwcm9wcmlhdGUgY29tbWFuZCBsaW5lIGZvciB0aGUgUUVNVSBpbnN0YW5jZQo+IHJ1bm5pbmcg
+aW4gYSBMaW51eC1iYXNlZCBzdHViZG9tYWluLgo+Cj4gTk9URTogYSBudW1iZXIgb2YgaXRlbXMg
+YXJlIG5vdCBjdXJyZW50bHkgaW1wbGVtZW50ZWQgZm9yIExpbnV4LWJhc2VkCj4gc3R1YmRvbWFp
+bnMsIHN1Y2ggYXM6Cj4gLSBzYXZlL3Jlc3RvcmUKPiAtIFFNUCBzb2NrZXQKPiAtIGdyYXBoaWNz
+IG91dHB1dCAoZS5nLiwgVk5DKQo+Cj4gU2lnbmVkLW9mZi1ieTogRXJpYyBTaGVsdG9uIDxlc2hl
+bHRvbkBwb2JveC5jb20+Cj4KPiBTaW1vbjoKPiAgKiBmaXggZGlzayBwYXRoCj4gICogZml4IGNk
+cm9tIHBhdGggYW5kICJmb3JtYXQiCj4gICogcGFzcyBkb3duc2NyaXB0IGZvciBuZXR3b3JrIGlu
+dGVyZmFjZXMKPgo+IFNpZ25lZC1vZmYtYnk6IFNpbW9uIEdhaXNlciA8c2ltb25AaW52aXNpYmxl
+dGhpbmdzbGFiLmNvbT4KPiBbZHJvcCBRdWJlcy1zcGVjaWZpYyBwYXJ0c10KPiBTaWduZWQtb2Zm
+LWJ5OiBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVja2kgPG1hcm1hcmVrQGludmlzaWJsZXRoaW5n
+c2xhYi5jb20+Cj4gLS0tCj4gQ2hhbmdlcyBpbiB2MjoKPiAgLSBmaXggc2VyaWFsIHNwZWNpZmll
+ZCB3aXRoIHNlcmlhbD1bIC4uLiBdIHN5bnRheAo+ICAtIGVycm9yIG91dCBvbiBtdWx0aXBsZSBj
+b25zb2xlcyAoaW5jb21wYXRpYmxlIHdpdGggc3R1YmRvbSkKPiAgLSBkcm9wIGVycm9uZW91cyBj
+aHVuayBhYm91dCBjZHJvbQoKUmV2aWV3ZWQtYnk6IEphc29uIEFuZHJ5dWsgPGphbmRyeXVrQGdt
+YWlsLmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
