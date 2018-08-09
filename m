@@ -1,22 +1,10 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH v22 1/2] common: add a new mappable resource
- type: XENMEM_resource_grant_table
-Date: Thu, 9 Aug 2018 08:55:58 +0000
-Message-ID: <4c17991b1f1c411ca3bde0c95148644b@AMSPEX02CL03.citrite.net>
-References: <20180808141620.25471-1-paul.durrant@citrix.com>
- <20180808141620.25471-2-paul.durrant@citrix.com>
- <5B6BFF7602000078001DC5C1@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: qemu-3.0 fails with staging
+Date: Thu, 9 Aug 2018 11:02:42 +0200
+Message-ID: <20180809110242.553ea267.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0616694261564724359=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=jt8i=ky=citrix.com=prvs=752d8a5ef=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1fngji-0002iP-11
- for xen-devel@lists.xenproject.org; Thu, 09 Aug 2018 08:56:02 +0000
-In-Reply-To: <5B6BFF7602000078001DC5C1@prv1-mh.provo.novell.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,69 +13,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Jan Beulich' <JBeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, George Dunlap <George.Dunlap@citrix.com>, Ian Jackson <Ian.Jackson@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IEphbiBCZXVsaWNoIFttYWlsdG86
-SkJldWxpY2hAc3VzZS5jb21dCj4gU2VudDogMDkgQXVndXN0IDIwMTggMDk6NDcKPiBUbzogUGF1
-bCBEdXJyYW50IDxQYXVsLkR1cnJhbnRAY2l0cml4LmNvbT4KPiBDYzogQW5kcmV3IENvb3BlciA8
-QW5kcmV3LkNvb3BlcjNAY2l0cml4LmNvbT47IFdlaSBMaXUKPiA8d2VpLmxpdTJAY2l0cml4LmNv
-bT47IEdlb3JnZSBEdW5sYXAgPEdlb3JnZS5EdW5sYXBAY2l0cml4LmNvbT47IElhbgo+IEphY2tz
-b24gPElhbi5KYWNrc29uQGNpdHJpeC5jb20+OyBTdGVmYW5vIFN0YWJlbGxpbmkKPiA8c3N0YWJl
-bGxpbmlAa2VybmVsLm9yZz47IHhlbi1kZXZlbCA8eGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnPjsKPiBLb25yYWQgUnplc3p1dGVrIFdpbGsgPGtvbnJhZC53aWxrQG9yYWNsZS5jb20+OyBU
-aW0gKFhlbi5vcmcpCj4gPHRpbUB4ZW4ub3JnPgo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggdjIyIDEv
-Ml0gY29tbW9uOiBhZGQgYSBuZXcgbWFwcGFibGUgcmVzb3VyY2UgdHlwZToKPiBYRU5NRU1fcmVz
-b3VyY2VfZ3JhbnRfdGFibGUKPiAKPiA+Pj4gT24gMDguMDguMTggYXQgMTY6MTYsIDxwYXVsLmR1
-cnJhbnRAY2l0cml4LmNvbT4gd3JvdGU6Cj4gPiArc3RhdGljIGludCBnbnR0YWJfZ2V0X3N0YXR1
-c19mcmFtZV9tZm4oc3RydWN0IGRvbWFpbiAqZCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICB1bnNpZ25lZCBsb25nIGlkeCwgbWZuX3QgKm1mbikKPiA+ICt7Cj4g
-PiArICAgIGNvbnN0IHN0cnVjdCBncmFudF90YWJsZSAqZ3QgPSBkLT5ncmFudF90YWJsZTsKPiA+
-ICsKPiA+ICsgICAgQVNTRVJUKGd0LT5ndF92ZXJzaW9uID09IDIpOwo+ID4gKwo+ID4gKyAgICBp
-ZiAoIGlkeCA+PSBucl9zdGF0dXNfZnJhbWVzKGd0KSApCj4gPiArICAgIHsKPiA+ICsgICAgICAg
-IHVuc2lnbmVkIGxvbmcgbnJfc3RhdHVzOwo+ID4gKyAgICAgICAgdW5zaWduZWQgbG9uZyBucl9n
-cmFudDsKPiA+ICsKPiA+ICsgICAgICAgIG5yX3N0YXR1cyA9IGlkeCArIDE7IC8qIHN1ZmZpY2ll
-bnQgZnJhbWVzIHRvIG1ha2UgaWR4IHZhbGlkICovCj4gPiArICAgICAgICBucl9ncmFudCA9IHN0
-YXR1c190b19ncmFudF9mcmFtZXMobnJfc3RhdHVzKTsKPiA+ICsKPiA+ICsgICAgICAgIGlmICgg
-bnJfZ3JhbnQgPD0gbnJfZ3JhbnRfZnJhbWVzKGd0KSApIC8qIG92ZXJmbG93IGNoZWNrICovCj4g
-PiArICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gCj4gSWYgdGhlIHRhYmxlIGlzIGN1cnJl
-bnRseSBlbXB0eSwgdGhpcyB3b3VsZCBhbHdheXMgZmFpbCwgd291bGRuJ3QKPiBpdD8gWW91IGhh
-dmVuJ3QgZ3Jvd24gdGhlIHRhYmxlIHlldCBieSB0aGlzIHBvaW50LgoKR29vZCBwb2ludCwgSSBz
-aG91bGQgYmUgY2hlY2tpbmcgbnJfc3RhdHVzIG5vdCBucl9ncmFudC4KCj4gCj4gPiArICAgICAg
-ICBpZiAoIG5yX2dyYW50IDw9IGd0LT5tYXhfZ3JhbnRfZnJhbWVzICkKPiA+ICsgICAgICAgICAg
-ICBnbnR0YWJfZ3Jvd190YWJsZShkLCBucl9ncmFudCk7Cj4gCj4gQW5kIGhlcmUgKG90aGVyIHRo
-YW4gb3JpZ2luYWxseSBpbiBnbnR0YWJfbWFwX2ZyYW1lKCkpIHlvdQo+IGludm9rZSBnbnR0YWJf
-Z3Jvd190YWJsZSgpIHBlcmhhcHMgcG9pbnRsZXNzbHkgKHdoZW4gdGhlIHRhYmxlCj4gZG9lc24n
-dCBpbiBmYWN0IG5lZWQgZ3Jvd2luZykuCgpXZWxsIGlmIGlkeCBpcyBvdXQgb2YgcmFuZ2UgKHdo
-aWNoIGlzIGhvdyB0aGUgY29kZSBnb3QgaW4gaGVyZSkgdGhlbiB0aGUgdGFibGUgbXVzdCBuZWVk
-IHRvIGdyb3cuCgo+IAo+ID4gQEAgLTEwMjcsNiArMTA2NiwxMSBAQCBzdGF0aWMgaW50IGFjcXVp
-cmVfcmVzb3VyY2UoCj4gPgo+ID4gICAgICBzd2l0Y2ggKCB4bWFyLnR5cGUgKQo+ID4gICAgICB7
-Cj4gPiArICAgIGNhc2UgWEVOTUVNX3Jlc291cmNlX2dyYW50X3RhYmxlOgo+ID4gKyAgICAgICAg
-cmMgPSBhY3F1aXJlX2dyYW50X3RhYmxlKGQsIHhtYXIuaWQsIHhtYXIuZnJhbWUsIHhtYXIubnJf
-ZnJhbWVzLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1mbl9saXN0KTsK
-PiA+ICsgICAgICAgIGJyZWFrOwo+ID4gKwo+ID4gICAgICBkZWZhdWx0Ogo+ID4gICAgICAgICAg
-cmMgPSBhcmNoX2FjcXVpcmVfcmVzb3VyY2UoZCwgeG1hci50eXBlLCB4bWFyLmlkLCB4bWFyLmZy
-YW1lLAo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeG1hci5ucl9mcmFt
-ZXMsIG1mbl9saXN0LCAmeG1hci5mbGFncyk7Cj4gPiBAQCAtMTA0Niw2ICsxMDkwLDE2IEBAIHN0
-YXRpYyBpbnQgYWNxdWlyZV9yZXNvdXJjZSgKPiA+ICAgICAgICAgIHhlbl9wZm5fdCBnZm5fbGlz
-dFtBUlJBWV9TSVpFKG1mbl9saXN0KV07Cj4gPiAgICAgICAgICB1bnNpZ25lZCBpbnQgaTsKPiA+
-Cj4gPiArICAgICAgICAvKgo+ID4gKyAgICAgICAgICogRklYTUU6IFVudGlsIGZvcmVpZ24gcGFn
-ZXMgaW5zZXJ0ZWQgaW50byB0aGUgUDJNIGFyZSBwcm9wZXJseQo+ID4gKyAgICAgICAgICogICAg
-ICAgIHJlZmVyZW5jZSBjb3VudGVkLCBpdCBpcyB1bnNhZmUgdG8gYWxsb3cgbWFwcGluZyBvZgo+
-ID4gKyAgICAgICAgICogICAgICAgIG5vbi1jYWxsZXItb3duZWQgcmVzb3VyY2UgcGFnZXMgdW5s
-ZXNzIHRoZSBjYWxsZXIgaXMKPiA+ICsgICAgICAgICAqICAgICAgICB0aGUgaGFyZHdhcmUgZG9t
-YWluLgo+ID4gKyAgICAgICAgICovCj4gPiArICAgICAgICBpZiAoICEoeG1hci5mbGFncyAmIFhF
-Tk1FTV9yc3JjX2FjcV9jYWxsZXJfb3duZWQpICYmCj4gPiArICAgICAgICAgICAgICFpc19oYXJk
-d2FyZV9kb21haW4oY3VycmQpICkKPiA+ICsgICAgICAgICAgICByZXR1cm4gLUVPUE5PVFNVUFA7
-Cj4gPiArCj4gCj4gTm93IHRoYXQgSSBsb29rIGF0IHRoaXMgYWdhaW4gLSB3b3VsZG4ndCB0aGlz
-IGNoZWNrIGJldHRlciBsaXZlIGFoZWFkCj4gb2YgdGhlIG1haW4gc3dpdGNoKCk/IEkgZmluZCBp
-dCBvZGQsIGZvciBleGFtcGxlLCB0aGF0IGluIHRoaXMgY2FzZSB0aGUKPiBncmFudCB0YWJsZSB3
-b3VsZCBzdGlsbCBoYXZlIGdvdCBncm93bi4KClRoaXMgY2FuJ3QgbGl2ZSBhaGVhZCBvZiB0aGUg
-bWFpbiBzd2l0Y2ggYmVjYXVzZSBYRU5NRU1fcnNyY19hY3FfY2FsbGVyX293bmVkIGlzIHBhc3Nl
-ZC1vdXQgZmxhZywgbm90IGEgcGFzc2VkLWluIG9uZS4gCkFsc28sIHRoZSBncmFudCB0YWJsZSB3
-b3VsZCBoYXZlIHBvdGVudGlhbGx5IGdyb3duIGV2ZW4gdGhvdWdoIHRoZSBvcCB3aWxsIGZhaWwu
-IElzIHRoYXQgd2hhdCdzIGNvbmNlcm5pbmcgeW91PwoKICBQYXVsCgo+IAo+IEphbgo+IAoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============0616694261564724359==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/dhlZJY02Q+H/+sIxSG+cDQR"; protocol="application/pgp-signature"
+
+--Sig_/dhlZJY02Q+H/+sIxSG+cDQR
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+This domU.cfg fails for me with staging+qemu-3.0, but qemu-2.12 happens to =
+work:
+
+name=3D'fv'
+serial=3D'pty'
+vcpus=3D'4'
+memory=3D'8888'
+disk=3D[ 'vdev=3Dxvda, format=3Draw, access=3Drw, target=3D/nfs_vmimages/di=
+sk0.raw' ]
+vif=3D[ 'bridge=3Dbr0,mac=3D3e:27:63:30:c0:46,type=3Dvif' ]
+builder=3D"hvm"
+device_model_version=3D"qemu-xen"
+device_model_override=3D'/usr/lib64/qemu-3.0/bin/qemu-system-i386'
+
+libxl: error: libxl_dm.c:2429:device_model_spawn_outcome: Domain 3:domain 3=
+ device model: spawn failed (rc=3D-3)
+libxl: error: libxl_create.c:1566:domcreate_devmodel_started: Domain 3:devi=
+ce model did not start: -3
+libxl: error: libxl_dm.c:2543:kill_device_model: Device Model already exited
+libxl: error: libxl_domain.c:1034:libxl__destroy_domid: Domain 3:Non-exista=
+nt domain
+libxl: error: libxl_domain.c:993:domain_destroy_callback: Domain 3:Unable t=
+o destroy guest
+libxl: error: libxl_domain.c:920:domain_destroy_cb: Domain 3:Destruction of=
+ domain failed
+
+
+tail: '/var/log/xen/qemu-dm-fv.log' has been replaced;  following new file
+qemu-system-i386: -serial pty: char device redirected to /dev/pts/5 (label =
+serial0)
+xenforeignmemory: error: ioctl failed: Invalid argument
+qemu-system-i386: failed to map ioreq server resources: error 22 handle=3D0=
+x561c17027040
+qemu-system-i386: xen hardware virtual machine initialisation failed
+
+
+Does it actually work for anyone? I think there is an OSS-TEST for qemu.git=
+#master.
+I have to debug something else, so can not actually look further at this po=
+int.
+
+
+Olaf
+
+--Sig_/dhlZJY02Q+H/+sIxSG+cDQR
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW2wDMgAKCRBdQqD6ppg2
+ftLsAJ9Q7Ch+nN/z986zCSzMhr2pVbZNjACgzjeMuR1XR/GOHpkfTWlaDk4LSDs=
+=MAUz
+-----END PGP SIGNATURE-----
+
+--Sig_/dhlZJY02Q+H/+sIxSG+cDQR--
+
+
+--===============0616694261564724359==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0616694261564724359==--
