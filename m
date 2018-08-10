@@ -1,22 +1,19 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 06/10] x86/paravirt: introduce new config
- option PARAVIRT_XXL
-Date: Fri, 10 Aug 2018 16:44:33 +0200
-Message-ID: <080a3358-98eb-c5db-b316-edcc74d938c4__39981.1236108237$1533912206$gmane$org@suse.com>
-References: <20180810115252.18213-1-jgross@suse.com>
- <20180810115252.18213-7-jgross@suse.com>
- <cdb31666-f4ca-4a5c-6961-c6e92da722c1@oracle.com>
+From: Paul Durrant <paul.durrant@citrix.com>
+Subject: [PATCH v2 1/2] x86/hvm/ioreq: MMIO range checking
+ completely ignores direction flag
+Date: Fri, 10 Aug 2018 15:48:02 +0100
+Message-ID: <20180810144803.12652-2-paul.durrant@citrix.com>
+References: <20180810144803.12652-1-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=xtjq=kz=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1fo8ei-0006Vc-6L
- for xen-devel@lists.xenproject.org; Fri, 10 Aug 2018 14:44:44 +0000
-In-Reply-To: <cdb31666-f4ca-4a5c-6961-c6e92da722c1@oracle.com>
-Content-Language: de-DE
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=3eyy=kz=citrix.com=prvs=753083691=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1fo8hz-0006j5-Qb
+ for xen-devel@lists.xenproject.org; Fri, 10 Aug 2018 14:48:07 +0000
+In-Reply-To: <20180810144803.12652-1-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,19 +22,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org, virtualization@lists.linux-foundation.org
-Cc: akataria@vmware.com, rusty@rustcorp.com.au, mingo@redhat.com, tglx@linutronix.de, hpa@zytor.com
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTAvMDgvMTggMTY6MjIsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiBPbiAwOC8xMC8yMDE4
-IDA3OjUyIEFNLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+PiBBIGxhcmdlIGFtb3VudCBvZiBwYXJh
-dmlydCBvcHMgaXMgdXNlZCBieSBYZW4gUFYgZ3Vlc3RzIG9ubHkuIEFkZCBhIG5ldwo+PiBjb25m
-aWcgb3B0aW9uIFBBUkFWSVJUX1hYTCB3aGljaCBpcyBzZWxlY3RlZCBieSBYRU5fUFYuIExhdGVy
-IHdlIGNhbgo+PiBwdXQgdGhlIFhlbiBQViBvbmx5IHBhcmF2aXJ0IG9wcyB1bmRlciB0aGUgUEFS
-QUNWSVJUX1hYTCB1bWJyZWxsYS4KPiAKPiBXaGF0IGRvZXMgIlhYTCIgc3RhbmQgZm9yPyBNeSBp
-bW1lZGlhdGUgdGhvdWdodCB3YXMgImV4dHJhIGV4dHJhIGxhcmdlIgo+IGJ1dCBJIHN1c3BlY3Qg
-aXQncyBzb21ldGhpbmcgZWxzZS4KCk5vLCB5b3VyIGltbWVkaWF0ZSB0aG91Z2h0IHdhcyBjb3Jy
-ZWN0LiA6LSkKCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+aHZtX3NlbGVjdF9pb3JlcV9zZXJ2ZXIoKSBpcyB1c2VkIHRvIHJvdXRlIGFuIGlvcmVxIHRvIHRo
+ZSBhcHByb3ByaWF0ZQppb3JlcSBzZXJ2ZXIuIEZvciBNTUlPIHRoaXMgaXMgZG9uZSBieSBjb21w
+YXJpbmcgdGhlIHJhbmdlIG9mIHRoZSBpb3JlcQp0byB0aGUgcmFuZ2VzIHJlZ2lzdGVyZWQgYnkg
+dGhlIGRldmljZSBtb2RlbHMgb2YgZWFjaCBpb3JlcSBzZXJ2ZXIuClVuZm9ydHVuYXRlbHkgdGhl
+IGNhbGN1bGF0aW9uIG9mIHRoZSByYW5nZSBpZiB0aGUgaW9yZXEgY29tcGxldGVseSBpZ25vcmVz
+CnRoZSBkaXJlY3Rpb24gZmxhZyBhbmQgdGh1cyBtYXkgY2FsY3VsYXRlIHRoZSB3cm9uZyByYW5n
+ZSBmb3IgY29tcGFyaXNvbi4KVGh1cyB0aGUgaW9yZXEgbWF5IGVpdGhlciBiZSByb3V0ZWQgdG8g
+dGhlIHdyb25nIHNlcnZlciBvciBlcnJvbmVvdXNseQp0ZXJtaW5hdGVkIGJ5IG51bGxfb3BzLgoK
+Tk9URTogVGhlIHBhdGNoIGFsc28gZml4ZXMgd2hpdGVzcGFjZSBpbiB0aGUgc3dpdGNoIHN0YXRl
+bWVudCB0byBtYWtlIGl0CiAgICAgIHN0eWxlIGNvbXBsaWFudC4KClNpZ25lZC1vZmYtYnk6IFBh
+dWwgRHVycmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+ClJldmlld2VkLWJ5OiBBbmRyZXcg
+Q29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgotLS0KQ2M6IEphbiBCZXVsaWNoIDxq
+YmV1bGljaEBzdXNlLmNvbT4KLS0tCiB4ZW4vYXJjaC94ODYvaHZtL2lvcmVxLmMgfCAxNSArKysr
+KysrKysrLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9u
+cygtKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9odm0vaW9yZXEuYyBiL3hlbi9hcmNoL3g4
+Ni9odm0vaW9yZXEuYwppbmRleCA3YzUxNWIzZWY3Li45NDBhMmM5NzI4IDEwMDY0NAotLS0gYS94
+ZW4vYXJjaC94ODYvaHZtL2lvcmVxLmMKKysrIGIveGVuL2FyY2gveDg2L2h2bS9pb3JlcS5jCkBA
+IC0xMzUzLDIwICsxMzUzLDI1IEBAIHN0cnVjdCBodm1faW9yZXFfc2VydmVyICpodm1fc2VsZWN0
+X2lvcmVxX3NlcnZlcihzdHJ1Y3QgZG9tYWluICpkLAogCiAgICAgICAgIHN3aXRjaCAoIHR5cGUg
+KQogICAgICAgICB7Ci0gICAgICAgICAgICB1bnNpZ25lZCBsb25nIGVuZDsKKyAgICAgICAgICAg
+IHVuc2lnbmVkIGxvbmcgc3RhcnQsIGVuZDsKIAogICAgICAgICBjYXNlIFhFTl9ETU9QX0lPX1JB
+TkdFX1BPUlQ6Ci0gICAgICAgICAgICBlbmQgPSBhZGRyICsgcC0+c2l6ZSAtIDE7Ci0gICAgICAg
+ICAgICBpZiAoIHJhbmdlc2V0X2NvbnRhaW5zX3JhbmdlKHIsIGFkZHIsIGVuZCkgKQorICAgICAg
+ICAgICAgc3RhcnQgPSBhZGRyOworICAgICAgICAgICAgZW5kID0gc3RhcnQgKyBwLT5zaXplIC0g
+MTsKKyAgICAgICAgICAgIGlmICggcmFuZ2VzZXRfY29udGFpbnNfcmFuZ2Uociwgc3RhcnQsIGVu
+ZCkgKQogICAgICAgICAgICAgICAgIHJldHVybiBzOwogCiAgICAgICAgICAgICBicmVhazsKKwog
+ICAgICAgICBjYXNlIFhFTl9ETU9QX0lPX1JBTkdFX01FTU9SWToKLSAgICAgICAgICAgIGVuZCA9
+IGFkZHIgKyAocC0+c2l6ZSAqIHAtPmNvdW50KSAtIDE7Ci0gICAgICAgICAgICBpZiAoIHJhbmdl
+c2V0X2NvbnRhaW5zX3JhbmdlKHIsIGFkZHIsIGVuZCkgKQorICAgICAgICAgICAgc3RhcnQgPSBo
+dm1fbW1pb19maXJzdF9ieXRlKHApOworICAgICAgICAgICAgZW5kID0gaHZtX21taW9fbGFzdF9i
+eXRlKHApOworCisgICAgICAgICAgICBpZiAoIHJhbmdlc2V0X2NvbnRhaW5zX3JhbmdlKHIsIHN0
+YXJ0LCBlbmQpICkKICAgICAgICAgICAgICAgICByZXR1cm4gczsKIAogICAgICAgICAgICAgYnJl
+YWs7CisKICAgICAgICAgY2FzZSBYRU5fRE1PUF9JT19SQU5HRV9QQ0k6CiAgICAgICAgICAgICBp
+ZiAoIHJhbmdlc2V0X2NvbnRhaW5zX3NpbmdsZXRvbihyLCBhZGRyID4+IDMyKSApCiAgICAgICAg
+ICAgICB7Ci0tIAoyLjExLjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
 X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
 ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
 LWRldmVs
