@@ -1,8 +1,8 @@
 From: Xen.org security team <security@xen.org>
-Subject: Xen Security Advisory 271 v2 (CVE-2018-14007) - XAPI
- HTTP directory traversal
-Date: Tue, 14 Aug 2018 17:18:03 +0000
-Message-ID: <E1fpcxH-0007Gh-9J@xenbits.xenproject.org>
+Subject: Xen Security Advisory 272 v2 - oxenstored does not
+ apply quota-maxentity
+Date: Tue, 14 Aug 2018 17:19:35 +0000
+Message-ID: <E1fpcyl-0001qx-Dd@xenbits.xenproject.org>
 Mime-Version: 1.0
 Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
 Content-Transfer-Encoding: binary
@@ -27,97 +27,111 @@ Content-Transfer-Encoding: 7bit
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA256
 
-            Xen Security Advisory CVE-2018-14007 / XSA-271
-                               version 2
+                    Xen Security Advisory XSA-272
+                              version 2
 
-                     XAPI HTTP directory traversal
+               oxenstored does not apply quota-maxentity
 
 UPDATES IN VERSION 2
 ====================
+
+Ammend patch to reference XSA-272 in the commit message.
 
 Public release.
 
 ISSUE DESCRIPTION
 =================
 
-XAPI has an unauthenticated HTTP endpoint update/ which exports the
-contents of /var/update for other hosts to use.
+The logic in oxenstored for handling writes depended on the order of
+evaluation of expressions making up a tuple.
 
-However, the resolution of . and .. in paths is performed before url
-unquoting is performed.  This allows an attacker to traverse out of the
-web root.
+As indicated in section 7.7.3 "Operations on data structures" of the
+OCaml manual:
+
+  http://caml.inria.fr/pub/docs/manual-ocaml/expr.html
+
+the order of evaluation of subexpressions is not specified.  In
+practice, different implementations behave differently.
 
 IMPACT
 ======
 
-An unauthenticated user with access to the management network can read
-arbitrary files from the dom0 filesystem.  This includes the pool secret
-/etc/xensource/ptoken which grants the attacker full administrator
-access.
+oxenstored may not enforce the configured quota-maxentity.
+
+This allows a malicious or buggy guest to write as many xenstore entries
+as it wishes, causing unbounded memory usage in oxenstored.  This can
+lead to a system-wide DoS.
 
 VULNERABLE SYSTEMS
 ==================
 
-All versions of XAPI since v1.13.0 are vulnerable.
+Xen 4.1 and later are potentially vulnerable.
 
-If the directory /var/update doesn't exist, the vulnerability is not
-exposed.
+Only systems using the OCaml xenstored implementation are potentially
+vulnerable.  Systems using the C xenstored implementation are not
+vulnerable.
+
+Whether the compiled oxenstored binary is vulnerable depends on which
+compiler was used.  OCaml can be compiled either as bytecode (with
+ocamlc) or as a native binary (with ocamlopt).
+
+The following OCaml program demonstrates the issue, and identifies
+whether the resulting oxenstored binary will skip the quota enforcement.
+
+  $ cat order.ml
+  let check () =
+    let flag = ref false in
+    let update _ = flag := true; () in
+    List.iter update [1;2;3], !flag
+
+  let main () =
+    let _, flag = check () in
+    if flag then
+    print_endline "This code is not vulnerable!"
+    else
+    print_endline "This code is vulnerable!"
+
+  let () = main ()
+
+  $ ocamlc order.ml -o order.bytecode
+  $ ./order.bytecode
+  This code is vulnerable!
+  $ ocamlopt order.ml -o order.native
+  $ ./order.native
+  This code is not vulnerable!
+
+To confirm whether an OCaml binary is bytecode or native, use file.
+
+  $ file order.bytecode
+  order.bytecode: a /usr/bin/ocamlrun script executable (binary data)
+  $ file order.native
+  order.native: ELF 64-bit LSB executable, ...
+
+NOTE: These results are applicable to OCaml 4.01.0-5 as distributed in
+Debian Jessie.  These results are not representative of other versions
+of OCaml, or of other OS distributions.
 
 MITIGATION
 ==========
 
-In the recommended configuration, the management network is isolated and
-isn't reachable from untrusted hosts, or by general network traffic.
+There are no mitigations available.
 
 CREDITS
 =======
 
-This issue was discovered by Ronald Volgers of Computest
-https://www.computest.nl/en/
+This issue was discovered by Christian Lindig of Citrix.
 
 RESOLUTION
 ==========
 
 Applying the appropriate attached patch resolves this issue.
 
-xsa271-xapi.patch
+xsa272.patch           All versions of Xen
 
-$ sha256sum xsa271*
-ffefb71cd328e0ee5654c135bf9b08f48abedd013f1c68d5589132e2a03a01f8  xsa271-xapi.patch
+$ sha256sum xsa272*
+0da953ca48d0cf0688ecff6a074304a9d2217871809a76ef26b9addeb66ecb3e  xsa272.meta
+6e0359d89bf65794f16d39198cc90f5c3137bce4eb850e54625ab00e2c568c2c  xsa272.patch
 $
-
-REGENERATION OF POOL SECRET
-===========================
-
-There are no known exploits in the wild.  If there is a risk that
-credentials could have been stolen, they should be reset.
-
-Most credentials can be reset via normal administrative means, but the
-pool secret doesn't have any mechanism to reset.  The following
-instructions should be used:
-
- 1) On all pool members, stop Xapi:
-    # service xapi stop
-
- 2) On the pool master:
-    # rm /etc/xensource/ptoken
-    # /opt/xensource/libexec/genptoken -f -o /etc/xensource/ptoken
-
- 3) Copy /etc/xensource/ptoken to all pool slaves
-
- 4) On the pool master, restart the toolstack:
-    # xe-toolstack-restart
-
- 5) On all pool slaves, restart the toolstack:
-    # xe-toolstack-restart
-
-Once the pool secret has been regenerated, the root password can be
-changed with:
-    # xe user-password-change
-
-Furthermore, consideration should be given to other credentials, such as
-(but not limited to) SSL keys, Storage SAN/iSCSI/NFS details, as well as
-secrets contained within VMs disks/snapshots/etc.
 
 DEPLOYMENT DURING EMBARGO
 =========================
@@ -146,47 +160,102 @@ consult the Xen Project community's agreed Security Policy:
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iQEcBAEBCAAGBQJbcw6vAAoJEIP+FMlX6CvZx6cH/0qaq4PDDHSrIONP7v35ZYWe
-nZEoA+IWk0u35t4MwSRA8qcXZ9m+d7icHdE0c5Jwdh2sBOSFKzoehCuZOFXVpYTv
-SHdr/J3ilZRN1KV7Zo/agZJFYClV5QxR118PnVYFqsAHVGjxh6RzazyBNPUTkoIa
-qw/FBQwsib4Wkj5/RPympYscxetzAUoYiFeVtTgtqknXlt3UbXqzwg/lXTrMZwtG
-nBSjFEW+EURlkKR0HF85mtFBmqA1I3xsKgJDaob5KWl+HmlIj0SY9knQ2le3lgxn
-7zXiPSwOARg2E+vl3GB1Xd1fgcRGykBtjVWPX9uAgdb/C7qx6DN2PYEdyz1xZtI=
-=5lIm
+iQEcBAEBCAAGBQJbcw8fAAoJEIP+FMlX6CvZ1VYIALce26h9Sf0P0joLd/fhUwf4
+JcCIaTWvHsy0ucJgpi7i+SCMa7Iz60CriK6dSYlwIuPvka8XU5MDmZ56gbENApDZ
+ibWMwvyCrgb0BH3VIwJZfk7eaKM7OwKeEnnIrIWaVGsT2StwoZOHgdLRLCTSFJ/K
+iss3ALSzZ8z7/WqEkBE3JeJ7skrh5nmNp428fJXWYhOyYbqkqyggn6XzBQg/EzGD
+vabxz4CdYCr1ox7sq42Q/UFeLoWB6CKCLgRgqOGyCrm7K324ymBzRXtXpPUrLEaq
+ugR27W/zr09e8N/fOhH4dBNCzkktuqclwrfMlFr1WUfiltSDmVwNZkURkvVGeu0=
+=TPZD
 -----END PGP SIGNATURE-----
 
 --=separator
-Content-Type: application/octet-stream; name="xsa271-xapi.patch"
-Content-Disposition: attachment; filename="xsa271-xapi.patch"
+Content-Type: application/octet-stream; name="xsa272.meta"
+Content-Disposition: attachment; filename="xsa272.meta"
 Content-Transfer-Encoding: base64
 
-RnJvbTogUm9iIEhvZXMgPHJvYi5ob2VzQGNpdHJpeC5jb20+CkRhdGU6IFdl
-ZCwgMTggSnVsIDIwMTggMTE6MTg6MjcgKzAxMDAKU3ViamVjdDogRml4IHBh
-dGggdmVyaWZpY2F0aW9uIGluIC91cGRhdGUvIGhhbmRsZXIKClRoZSBoYW5k
-bGVyIGRlY29kZWQgdGhlIHBlcmNlbnQtc3ltYm9scyBpbiB0aGUgZ2l2ZW4g
-cGF0aCBhZnRlciByZXNvbHZpbmcgdGhlIC4KYW5kIC4uIHBhdHRlcm5zLiBU
-aGlzIG1lYW50IHRoYXQgYW55ICIlMmUlMmUiIHN0cmluZ3MgaW4gdGhlIHBh
-dGggd291bGQgc3RpbGwKcmVzdWx0IGluIC4uIHN0cmluZ3MgaW4gdGhlIHZh
-bGlkYXRlIHBhdGgsIHdoaWNoIG1hZGUgaXQgcG9zc2libGUgdG8gZG93bmxv
-YWQKZmlsZXMgb3V0c2lkZSB0aGUgZGVzaWduYXRlZCBkaXJlY3RvcnkgZm9y
-IHVwZGF0ZXMuCgpSZXBvcnRlZC1ieTogUm9uYWxkIFZvbGdlcnMgPHJ2b2xn
-ZXJzQGNvbXB1dGVzdC5ubD4KU2lnbmVkLW9mZi1ieTogUm9iIEhvZXMgPHJv
-Yi5ob2VzQGNpdHJpeC5jb20+CgpkaWZmIC0tZ2l0IGEvb2NhbWwveGFwaS94
-YXBpX3Bvb2xfdXBkYXRlLm1sIGIvb2NhbWwveGFwaS94YXBpX3Bvb2xfdXBk
-YXRlLm1sCmluZGV4IDI3NWE4ZTUuLmNjYzFkODggMTAwNjQ0Ci0tLSBhL29j
-YW1sL3hhcGkveGFwaV9wb29sX3VwZGF0ZS5tbAorKysgYi9vY2FtbC94YXBp
-L3hhcGlfcG9vbF91cGRhdGUubWwKQEAgLTUzNiw4ICs1MzYsOCBAQCBsZXQg
-cGF0aF9mcm9tX3VyaSB1cmkgPQogICAoKiByZW1vdmUgYW55IGRvZGd5IHVz
-ZSBvZiAiLiIgb3IgIi4uIiBOQiB3ZSBkb24ndCBwcmV2ZW50IHRoZSB1c2Ug
-b2Ygc3ltbGlua3MgKikKICAgU3RyaW5nLnN1Yl90b19lbmQgdXJpIChTdHJp
-bmcubGVuZ3RoIENvbnN0YW50cy5nZXRfcG9vbF91cGRhdGVfZG93bmxvYWRf
-dXJpKQogICB8PiBGaWxlbmFtZS5jb25jYXQgIVhhcGlfZ2xvYnMuaG9zdF91
-cGRhdGVfZGlyCi0gIHw+IFN0ZGV4dC5Vbml4ZXh0LnJlc29sdmVfZG90X2Fu
-ZF9kb3Rkb3QKICAgfD4gVXJpLnBjdF9kZWNvZGUKKyAgfD4gU3RkZXh0LlVu
-aXhleHQucmVzb2x2ZV9kb3RfYW5kX2RvdGRvdAogCiBsZXQgcG9vbF91cGRh
-dGVfZG93bmxvYWRfaGFuZGxlciAocmVxOiBSZXF1ZXN0LnQpIHMgXyA9CiAg
-IGRlYnVnICJwb29sX3VwZGF0ZS5wb29sX3VwZGF0ZV9kb3dubG9hZF9oYW5k
-bGVyIFVSTCAlcyIgcmVxLlJlcXVlc3QudXJpOwo=
+ewogICJYU0EiOiAyNzIsCiAgIlN1cHBvcnRlZFZlcnNpb25zIjogWwogICAg
+Im1hc3RlciIsCiAgICAiNC4xMSIsCiAgICAiNC4xMCIsCiAgICAiNC45IiwK
+ICAgICI0LjgiLAogICAgIjQuNyIsCiAgICAiNC42IgogIF0sCiAgIlRyZWVz
+IjogWwogICAgInhlbiIKICBdLAogICJSZWNpcGVzIjogewogICAgIjQuMTAi
+OiB7CiAgICAgICJSZWNpcGVzIjogewogICAgICAgICJ4ZW4iOiB7CiAgICAg
+ICAgICAiU3RhYmxlUmVmIjogIjg3YzgzYWYzMzNlMDI0OGFkYTJlNjU2MDk2
+NWFjYTYwOTZlYzdmMmIiLAogICAgICAgICAgIlByZXJlcXMiOiBbCiAgICAg
+ICAgICAgIDI2OCwKICAgICAgICAgICAgMjY5CiAgICAgICAgICBdLAogICAg
+ICAgICAgIlBhdGNoZXMiOiBbCiAgICAgICAgICAgICJ4c2EyNzIucGF0Y2gi
+CiAgICAgICAgICBdCiAgICAgICAgfQogICAgICB9CiAgICB9LAogICAgIjQu
+MTEiOiB7CiAgICAgICJSZWNpcGVzIjogewogICAgICAgICJ4ZW4iOiB7CiAg
+ICAgICAgICAiU3RhYmxlUmVmIjogIjMzY2VkNzI1ZTExYWY0ZWFiZDMzMzRk
+MTJmNTNlZDgwN2U5ZTI1ODYiLAogICAgICAgICAgIlByZXJlcXMiOiBbCiAg
+ICAgICAgICAgIDI2OCwKICAgICAgICAgICAgMjY5CiAgICAgICAgICBdLAog
+ICAgICAgICAgIlBhdGNoZXMiOiBbCiAgICAgICAgICAgICJ4c2EyNzIucGF0
+Y2giCiAgICAgICAgICBdCiAgICAgICAgfQogICAgICB9CiAgICB9LAogICAg
+IjQuNiI6IHsKICAgICAgIlJlY2lwZXMiOiB7CiAgICAgICAgInhlbiI6IHsK
+ICAgICAgICAgICJTdGFibGVSZWYiOiAiOThkNzk0OGI1MGI0ZTkxZWM0ZWZh
+ODYwZGEzMmQ5YWM0ZmU2OTMwMCIsCiAgICAgICAgICAiUHJlcmVxcyI6IFsK
+ICAgICAgICAgICAgMjY4LAogICAgICAgICAgICAyNjkKICAgICAgICAgIF0s
+CiAgICAgICAgICAiUGF0Y2hlcyI6IFsKICAgICAgICAgICAgInhzYTI3Mi5w
+YXRjaCIKICAgICAgICAgIF0KICAgICAgICB9CiAgICAgIH0KICAgIH0sCiAg
+ICAiNC43IjogewogICAgICAiUmVjaXBlcyI6IHsKICAgICAgICAieGVuIjog
+ewogICAgICAgICAgIlN0YWJsZVJlZiI6ICI5MWNhODRjODYyYjE1ZmU3NGFi
+OWI1ODcwZTY2OTAzYWVjNGY4NmRkIiwKICAgICAgICAgICJQcmVyZXFzIjog
+WwogICAgICAgICAgICAyNjgsCiAgICAgICAgICAgIDI2OQogICAgICAgICAg
+XSwKICAgICAgICAgICJQYXRjaGVzIjogWwogICAgICAgICAgICAieHNhMjcy
+LnBhdGNoIgogICAgICAgICAgXQogICAgICAgIH0KICAgICAgfQogICAgfSwK
+ICAgICI0LjgiOiB7CiAgICAgICJSZWNpcGVzIjogewogICAgICAgICJ4ZW4i
+OiB7CiAgICAgICAgICAiU3RhYmxlUmVmIjogImFhNDUwMTUzZjJkOTYwYzIx
+NzE0OWIzMWI2OGE4YjU3YzVhOGU1OTUiLAogICAgICAgICAgIlByZXJlcXMi
+OiBbCiAgICAgICAgICAgIDI2OCwKICAgICAgICAgICAgMjY5CiAgICAgICAg
+ICBdLAogICAgICAgICAgIlBhdGNoZXMiOiBbCiAgICAgICAgICAgICJ4c2Ey
+NzIucGF0Y2giCiAgICAgICAgICBdCiAgICAgICAgfQogICAgICB9CiAgICB9
+LAogICAgIjQuOSI6IHsKICAgICAgIlJlY2lwZXMiOiB7CiAgICAgICAgInhl
+biI6IHsKICAgICAgICAgICJTdGFibGVSZWYiOiAiYTFiMjIzYjc1NmYzNTQ4
+OTU1MjUwNjBiZDNmOWYxZjA3ODk5YTA4MiIsCiAgICAgICAgICAiUHJlcmVx
+cyI6IFsKICAgICAgICAgICAgMjY4LAogICAgICAgICAgICAyNjkKICAgICAg
+ICAgIF0sCiAgICAgICAgICAiUGF0Y2hlcyI6IFsKICAgICAgICAgICAgInhz
+YTI3Mi5wYXRjaCIKICAgICAgICAgIF0KICAgICAgICB9CiAgICAgIH0KICAg
+IH0sCiAgICAibWFzdGVyIjogewogICAgICAiUmVjaXBlcyI6IHsKICAgICAg
+ICAieGVuIjogewogICAgICAgICAgIlN0YWJsZVJlZiI6ICJhY2QwMGEzMDMz
+NzhjZTQ4YmQ2YmJkOGE1NzlmMWZlMmYxYjIxYTdkIiwKICAgICAgICAgICJQ
+cmVyZXFzIjogWwogICAgICAgICAgICAyNjgsCiAgICAgICAgICAgIDI2OQog
+ICAgICAgICAgXSwKICAgICAgICAgICJQYXRjaGVzIjogWwogICAgICAgICAg
+ICAieHNhMjcyLnBhdGNoIgogICAgICAgICAgXQogICAgICAgIH0KICAgICAg
+fQogICAgfQogIH0KfQ==
+
+--=separator
+Content-Type: application/octet-stream; name="xsa272.patch"
+Content-Disposition: attachment; filename="xsa272.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbTogQ2hyaXN0aWFuIExpbmRpZyA8Y2hyaXN0aWFuLmxpbmRpZ0BjaXRy
+aXguY29tPgpTdWJqZWN0OiB0b29scy9veGVuc3RvcmVkOiBNYWtlIGV2YWx1
+YXRpb24gb3JkZXIgZXhwbGljaXQKCkluIFN0b3JlLnBhdGhfd3JpdGUoKSwg
+UGF0aC5hcHBseV9tb2RpZnkoKSB1cGRhdGVzIHRoZSBub2RlX2NyZWF0ZWQK
+cmVmZXJlbmNlIGFuZCBib3RoIHRoZSB2YWx1ZSBvZiBhcHBseV9tb2RpZnko
+KSBhbmQgbm9kZV9jcmVhdGVkIGFyZQpyZXR1cm5lZCBieSBwYXRoX3dyaXRl
+KCkuCgpBdCBsZWFzdCB3aXRoIE9DYW1sIDQuMDYuMSB0aGlzIGxlYWRzIHRv
+IHRoZSB2YWx1ZSBvZiBub2RlX2NyZWF0ZWQgYmVpbmcKcmV0dXJuZWQgKmJl
+Zm9yZSogaXQgaXMgdXBkYXRlZCBieSBhcHBseV9tb2RpZnkoKS4gIFRoaXMg
+aW4gdHVybiBsZWFkcwp0byB0aGUgcXVvdGEgZm9yIGEgZG9tYWluIG5vdCBi
+ZWluZyB1cGRhdGVkIGluIFN0b3JlLndyaXRlKCkuICBIZW5jZSwgYQpndWVz
+dCBjYW4gY3JlYXRlIGFuIHVubGltaXRlZCBudW1iZXIgb2YgZW50cmllcyBp
+biB4ZW5zdG9yZS4KClRoZSBmaXggaXMgdG8gbWFrZSBldmFsdWF0aW9uIG9y
+ZGVyIGV4cGxpY2l0LgoKVGhpcyBpcyBYU0EtMjcyLgoKU2lnbmVkLW9mZi1i
+eTogQ2hyaXN0aWFuIExpbmRpZyA8Y2hyaXN0aWFuLmxpbmRpZ0BjaXRyaXgu
+Y29tPgpSZXZpZXdlZC1ieTogUm9iIEhvZXMgPHJvYi5ob2VzQGNpdHJpeC5j
+b20+CgpkaWZmIC0tZ2l0IGEvdG9vbHMvb2NhbWwveGVuc3RvcmVkL3N0b3Jl
+Lm1sIGIvdG9vbHMvb2NhbWwveGVuc3RvcmVkL3N0b3JlLm1sCmluZGV4IDlm
+NjE5YjhmZDUuLjhiMDcyN2Y4YTggMTAwNjQ0Ci0tLSBhL3Rvb2xzL29jYW1s
+L3hlbnN0b3JlZC9zdG9yZS5tbAorKysgYi90b29scy9vY2FtbC94ZW5zdG9y
+ZWQvc3RvcmUubWwKQEAgLTI1Nyw3ICsyNTcsOCBAQCBsZXQgcGF0aF93cml0
+ZSBzdG9yZSBwZXJtIHBhdGggdmFsdWUgPQogCQlOb2RlLmNoZWNrX3Blcm0g
+c3RvcmUucm9vdCBwZXJtIFBlcm1zLldSSVRFOwogCQlOb2RlLnNldF92YWx1
+ZSBzdG9yZS5yb290IHZhbHVlLCBmYWxzZQogCSkgZWxzZQotCQlQYXRoLmFw
+cGx5X21vZGlmeSBzdG9yZS5yb290IHBhdGggZG9fd3JpdGUsICFub2RlX2Ny
+ZWF0ZWQKKwkJbGV0IHJvb3QgPSBQYXRoLmFwcGx5X21vZGlmeSBzdG9yZS5y
+b290IHBhdGggZG9fd3JpdGUgaW4KKwkJcm9vdCwgIW5vZGVfY3JlYXRlZAog
+CiBsZXQgcGF0aF9ybSBzdG9yZSBwZXJtIHBhdGggPQogCWxldCBkb19ybSBu
+b2RlIG5hbWUgPQo=
 
 --=separator
 Content-Type: text/plain; charset="utf-8"
