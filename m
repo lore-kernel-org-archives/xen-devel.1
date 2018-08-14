@@ -1,19 +1,16 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] xen: fix stale PVH comment
-Date: Tue, 14 Aug 2018 15:33:11 +0100
-Message-ID: <20180814143311.wqd6ucga2xjhwst3@citrix.com>
-References: <20180814140324.76000-1-roger.pau@citrix.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v2 09/12] xen/domain: Call
+ arch_domain_create() as early as possible in domain_create()
+Date: Tue, 14 Aug 2018 16:37:52 +0200
+Message-ID: <20180814143752.zheoya42tt32jvzp@mac>
+References: <1534154469-6076-1-git-send-email-andrew.cooper3@citrix.com>
+ <1534154469-6076-10-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=m/c6=k5=citrix.com=prvs=7578e698a=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fpaNn-00033L-RP
- for xen-devel@lists.xenproject.org; Tue, 14 Aug 2018 14:33:15 +0000
 Content-Disposition: inline
-In-Reply-To: <20180814140324.76000-1-roger.pau@citrix.com>
+In-Reply-To: <1534154469-6076-10-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,13 +19,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBBdWcgMTQsIDIwMTggYXQgMDQ6MDM6MjRQTSArMDIwMCwgUm9nZXIgUGF1IE1vbm5l
-IHdyb3RlOgo+IFNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRy
-aXguY29tPgo+IC0tLQoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
-bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
-LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gTW9uLCBBdWcgMTMsIDIwMTggYXQgMTE6MDE6MDZBTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBUaGlzIGlzIGluIHByZXBhcmF0aW9uIHRvIHNldCB1cCBkLT5tYXhfY3B1cyBhbmQg
+ZC0+dmNwdVtdIGluIGRvbWFpbl9jcmVhdGUoKSwKPiBhbmQgYWxsb3cgbGF0ZXIgcGFydHMgb2Yg
+ZG9tYWluIGNvbnN0cnVjdGlvbiB0byBoYXZlIGFjY2VzcyB0byB0aGUgdmFsdWVzLgo+IAo+IFNp
+Z25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cj4g
+LS0tCj4gQ0M6IEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT4KPiBDQzogU3RlZmFubyBT
+dGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgo+IENDOiBKdWxpZW4gR3JhbGwgPGp1
+bGllbi5ncmFsbEBhcm0uY29tPgo+IENDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+
+IC0tLQo+ICB4ZW4vY29tbW9uL2RvbWFpbi5jIHwgMzQgKysrKysrKysrKysrKysrKystLS0tLS0t
+LS0tLS0tLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgMTcgaW5zZXJ0aW9ucygrKSwgMTcgZGVsZXRp
+b25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9jb21tb24vZG9tYWluLmMgYi94ZW4vY29tbW9u
+L2RvbWFpbi5jCj4gaW5kZXggYmU1MTQyNi4uMGM0NGYyNyAxMDA2NDQKPiAtLS0gYS94ZW4vY29t
+bW9uL2RvbWFpbi5jCj4gKysrIGIveGVuL2NvbW1vbi9kb21haW4uYwo+IEBAIC0zMjIsNiArMzIy
+LDIzIEBAIHN0cnVjdCBkb21haW4gKmRvbWFpbl9jcmVhdGUoZG9taWRfdCBkb21pZCwKPiAgICAg
+ICAgICBlbHNlCj4gICAgICAgICAgICAgIGQtPmd1ZXN0X3R5cGUgPSBndWVzdF90eXBlX3B2Owo+
+ICAKPiArICAgICAgICBpZiAoICFpc19oYXJkd2FyZV9kb21haW4oZCkgKQo+ICsgICAgICAgICAg
+ICBkLT5ucl9waXJxcyA9IG5yX3N0YXRpY19pcnFzICsgZXh0cmFfZG9tVV9pcnFzOwo+ICsgICAg
+ICAgIGVsc2UKPiArICAgICAgICAgICAgZC0+bnJfcGlycXMgPSBleHRyYV9od2RvbV9pcnFzID8g
+bnJfc3RhdGljX2lycXMgKyBleHRyYV9od2RvbV9pcnFzCj4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICA6IGFyY2hfaHdkb21faXJxcyhkb21pZCk7Cj4gKyAgICAg
+ICAgaWYgKCBkLT5ucl9waXJxcyA+IG5yX2lycXMgKQo+ICsgICAgICAgICAgICBkLT5ucl9waXJx
+cyA9IG5yX2lycXM7CgpkLT5ucl9waXJxcyA9IG1pbihkLT5ucl9waXJxcywgbnJfaXJxcyk7CgpM
+R1RNOgoKUmV2aWV3ZWQtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29t
+PgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
