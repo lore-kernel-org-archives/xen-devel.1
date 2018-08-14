@@ -1,21 +1,21 @@
-From: Rich Persaud <persaur@gmail.com>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: [OSSTEST PATCH] production-config: Temporarily drop
  arm64
-Date: Tue, 14 Aug 2018 18:42:36 -0400
-Message-ID: <4CF00BD3-46A3-4185-8051-839358C6CF95@gmail.com>
+Date: Tue, 14 Aug 2018 23:46:45 +0100
+Message-ID: <7185b02e-04c4-1be0-b327-40edceec4079@arm.com>
 References: <1534172236-16046-1-git-send-email-ian.jackson@eu.citrix.com>
-Mime-Version: 1.0 (1.0)
-Content-Type: text/plain; charset="utf-8"
+ <4CF00BD3-46A3-4185-8051-839358C6CF95@gmail.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=x4vv=k5=gmail.com=persaur@srs-us1.protection.inumbo.net>)
- id 1fpi1Q-0007v4-A9
- for xen-devel@lists.xenproject.org; Tue, 14 Aug 2018 22:42:40 +0000
-Received: by mail-oi0-x241.google.com with SMTP id b16-v6so36599099oic.9
- for <xen-devel@lists.xenproject.org>; Tue, 14 Aug 2018 15:42:39 -0700 (PDT)
-In-Reply-To: <1534172236-16046-1-git-send-email-ian.jackson@eu.citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=+6mo=k5=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1fpi5R-00084D-Kd
+ for xen-devel@lists.xenproject.org; Tue, 14 Aug 2018 22:46:49 +0000
+In-Reply-To: <4CF00BD3-46A3-4185-8051-839358C6CF95@gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,15 +24,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>
+To: Rich Persaud <persaur@gmail.com>, Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gQXVnIDEzLCAyMDE4LCBhdCAxMDo1NywgSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNp
-dHJpeC5jb20+IHdyb3RlOgo+IAo+IEJvdGggb3VyIGFybTY0IGJveGVzIGFyZSBvdXQgb2YgY29t
-bWlzc2lvbiBhbmQgcmVwYWlyaW5nIHRoZW0gaXMKPiB0YWtpbmcgdG9vIGxvbmcuCgpBcG9sb2dp
-ZXMgaWYgdGhpcyBpcyBhbHJlYWR5IGRvY3VtZW50ZWQgZWxzZXdoZXJlIC0gZG9lcyBPU1N0ZXN0
-IHVzZSBRZW11IGZvciBhcm02NCB0ZXN0aW5nPwoKUmljaApfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+SGkgUmljaCwKCk9uIDA4LzE0LzIwMTggMTE6NDIgUE0sIFJpY2ggUGVyc2F1ZCB3cm90ZToKPiBP
+biBBdWcgMTMsIDIwMTgsIGF0IDEwOjU3LCBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0
+cml4LmNvbT4gd3JvdGU6Cj4+Cj4+IEJvdGggb3VyIGFybTY0IGJveGVzIGFyZSBvdXQgb2YgY29t
+bWlzc2lvbiBhbmQgcmVwYWlyaW5nIHRoZW0gaXMKPj4gdGFraW5nIHRvbyBsb25nLgo+IAo+IEFw
+b2xvZ2llcyBpZiB0aGlzIGlzIGFscmVhZHkgZG9jdW1lbnRlZCBlbHNld2hlcmUgLSBkb2VzIE9T
+U3Rlc3QgdXNlIFFlbXUgZm9yIGFybTY0IHRlc3Rpbmc/CgpPc3N0ZXN0IGRvZXMgbm90IHVzZSBR
+RU1VIGZvciB0ZXN0aW5nLCBidXQgSSB0aGluayBpdCB3b3VsZCBiZSB0b28gc2xvdyAKdG8gaGF2
+ZSByZXN1bHQgaW4gdGltZWx5IG1hbm5lciBhbmQgdXNlIHg4NiByZXNvdXJjZSBhcyB3ZWxsLgoK
+V2UgYXJlIG1lYW50IHRvIHJlY2VpdmUgbW9yZSBuZXcgYXJtNjQgaGFyZHdhcmUgaW4gYSBiaXQg
+YW5kIGFsc28gMiAKVGh1bmRlci1YIHdhaXRpbmcgZm9yIGEgRGViaWFuIHVwZ3JhZGVkIGJlZm9y
+ZSB0aGV5IGNhbiBiZSB0aHJvd24gaW50byAKcHJvZHVjdGlvbi4KCkNoZWVycywKCj4gCj4gUmlj
+aAo+IAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
