@@ -1,19 +1,12 @@
-From: David Miller <davem@davemloft.net>
-Subject: Re: [PATCH net-next v3] xen-netfront: fix warn message
- as irq device name has '/'
-Date: Tue, 14 Aug 2018 10:11:02 -0700 (PDT)
-Message-ID: <20180814.101102.975738099798437246.davem__38231.9210017615$1534266604$gmane$org@davemloft.net>
-References: <20180814152128.5477-1-xiliang@redhat.com>
+From: Xen.org security team <security@xen.org>
+Subject: Xen Security Advisory 273 v1 (CVE-2018-3620,
+ CVE-2018-3646) - L1 Terminal Fault speculative side channel
+Date: Tue, 14 Aug 2018 17:16:15 +0000
+Message-ID: <E1fpcvX-0005fq-35@xenbits.xenproject.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=jela=k5=davemloft.net=davem@srs-us1.protection.inumbo.net>)
- id 1fpcqX-0007Ie-OJ
- for xen-devel@lists.xenproject.org; Tue, 14 Aug 2018 17:11:05 +0000
-In-Reply-To: <20180814152128.5477-1-xiliang@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,33 +15,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xiliang@redhat.com
-Cc: jgross@suse.com, netdev@vger.kernel.org, boris.ostrovsky@oracle.com, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org, xen-users@lists.xen.org, oss-security@lists.openwall.com
+Cc: "Xen.org security team" <security-team-members@xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogWGlhbyBMaWFuZyA8eGlsaWFuZ0ByZWRoYXQuY29tPgpEYXRlOiBUdWUsIDE0IEF1ZyAy
-MDE4IDIzOjIxOjI4ICswODAwCgo+IFRoZXJlIGlzIGEgY2FsbCB0cmFjZSBnZW5lcmF0ZWQgYWZ0
-ZXIgY29tbWl0IDJkNDA4YzBkNDU3NGIwMWI5ZWQ0NWUwMjUxNjg4OGJmOTI1ZTExYTkoCj4geGVu
-LW5ldGZyb250OiBmaXggcXVldWUgbmFtZSBzZXR0aW5nKS4gVGhlcmUgaXMgbm8gJ2RldmljZS92
-aWYveHgtcTAtdHgnIGZpbGUgZm91bmQKPiB1bmRlciAvcHJvYy9pcnEveHgvLgo+IAo+IFRoaXMg
-cGF0Y2ggb25seSBwaWNrcyB1cCBkZXZpY2UgdHlwZSBhbmQgaWQgYXMgaXRzIG5hbWUuCj4gCj4g
-V2l0aCB0aGUgcGF0Y2gsIG5vdyAvcHJvYy9pbnRlcnJ1cHRzIGxvb2tzIGxpa2UgYmVsb3cgYW5k
-IHRoZSB3YXJuaW5nIG1lc3NhZ2UgZ29uZToKPiAgNzA6ICAgICAgICAgMjEgICAgICAgICAgMCAg
-ICAgICAgICAwICAgICAgICAgIDAgICB4ZW4tZHluICAgIC1ldmVudCAgICAgdmlmMC1xMC10eAo+
-ICA3MTogICAgICAgICAxNSAgICAgICAgICAwICAgICAgICAgIDAgICAgICAgICAgMCAgIHhlbi1k
-eW4gICAgLWV2ZW50ICAgICB2aWYwLXEwLXJ4Cj4gIDcyOiAgICAgICAgIDE0ICAgICAgICAgIDAg
-ICAgICAgICAgMCAgICAgICAgICAwICAgeGVuLWR5biAgICAtZXZlbnQgICAgIHZpZjAtcTEtdHgK
-PiAgNzM6ICAgICAgICAgMzMgICAgICAgICAgMCAgICAgICAgICAwICAgICAgICAgIDAgICB4ZW4t
-ZHluICAgIC1ldmVudCAgICAgdmlmMC1xMS1yeAo+ICA3NDogICAgICAgICAxMiAgICAgICAgICAw
-ICAgICAgICAgIDAgICAgICAgICAgMCAgIHhlbi1keW4gICAgLWV2ZW50ICAgICB2aWYwLXEyLXR4
-Cj4gIDc1OiAgICAgICAgIDI0ICAgICAgICAgIDAgICAgICAgICAgMCAgICAgICAgICAwICAgeGVu
-LWR5biAgICAtZXZlbnQgICAgIHZpZjAtcTItcngKPiAgNzY6ICAgICAgICAgMTkgICAgICAgICAg
-MCAgICAgICAgICAwICAgICAgICAgIDAgICB4ZW4tZHluICAgIC1ldmVudCAgICAgdmlmMC1xMy10
-eAo+ICA3NzogICAgICAgICAyMSAgICAgICAgICAwICAgICAgICAgIDAgICAgICAgICAgMCAgIHhl
-bi1keW4gICAgLWV2ZW50ICAgICB2aWYwLXEzLXJ4Cj4gCj4gQmVsb3cgaXMgY2FsbCB0cmFjZSBp
-bmZvcm1hdGlvbiB3aXRob3V0IHRoaXMgcGF0Y2g6CiAuLi4KPiBTaWduZWQtb2ZmLWJ5OiBYaWFv
-IExpYW5nIDx4aWxpYW5nQHJlZGhhdC5jb20+Cj4gUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3Mg
-PGpncm9zc0BzdXNlLmNvbT4KCkFwcGxpZWQsIHRoYW5rIHlvdS4KCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+     Xen Security Advisory CVE-2018-3620,CVE-2018-3646 / XSA-273
+
+               L1 Terminal Fault speculative side channel
+
+ISSUE DESCRIPTION
+=================
+
+In x86 nomenclature, a Terminal Fault is a pagetable walk which aborts
+due to the page being not present (e.g. paged out to disk), or because
+of reserved bits being set.
+
+Architecturally, such a memory access will result in a page fault
+exception, but some processors will speculatively compute the physical
+address and issue an L1D lookup.  If data resides in the L1D cache, it
+may be forwarded to dependent instructions, and may be leaked via a side
+channel.
+
+Furthermore:
+  * SGX protections are not applied
+  * EPT guest to host translations are not applied
+  * SMM protections are not applied
+
+This issue is split into multiple CVEs depending on circumstance.  The
+CVEs which apply to Xen are:
+  * CVE-2018-3620 - Operating Systems and SMM
+  * CVE-2018-3646 - Hypervisors
+
+For more details, see:
+  https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00161.html
+
+IMPACT
+======
+
+An attacker can potentially read arbitrary host RAM.  This includes data
+belonging to Xen, data belonging to other guests, and data belonging to
+different security contexts within the same guest.
+
+An attacker could be a guest kernel (which can manipulate the pagetables
+directly), or could be guest userspace either directly (e.g. with
+mprotect() or similar system call) or indirectly (by gaming the guest
+kernel's paging subsystem).
+
+VULNERABLE SYSTEMS
+==================
+
+Systems running all versions of Xen are affected.
+
+Only x86 processors are vulnerable.  ARM processors are not known to be
+affected.
+
+Only Intel Core based processors (from at least Merom onwards) are
+potentially affected.  Other processor designs (Intel Atom/Knights
+range), and other manufacturers (AMD) are not known to be affected.
+
+x86 PV guests fall into the CVE-2018-3620 (OS and SMM) category.  x86
+HVM and PVH guests fall into the CVE-2018-3646 (Hypervisors) category.
+
+MITIGATION
+==========
+
+This issue can be mitigated with a combination of software and firmware
+changes.
+
+Switching guests to being HVM with shadow paging enabled (hap=0 in
+xl.cfg) is believed to mitigate the vulnerability on systems which don't
+have terabytes of RAM.  However the performance impact of shadow paging
+in combination with in-guests Meltdown mitigations (KPTI, KVAS, etc)
+will most likely make this option prohibitive to use.
+
+RESOLUTION
+==========
+
+New microcode, and possibly a new firmware image is required to prevent
+SMM data from being leaked with this vulnerability.  Consult your
+hardware vendor.
+
+Software updates to Xen (details below) are required to prevent guests
+from being able to leak data belonging to Xen or to other guests in the
+system.
+
+Guest kernel software updates are required to prevent guest userspace
+from being able to leak data belonging to the kernel or other processes
+within the same guest.  Consult your OS vendors.
+
+1) For PV guests (which fall into the CVE-2018-3620 - OS/SMM case),
+   leakage of data from Xen or other guests can be prevented entirely
+   with software changes in Xen.
+
+   If the PV guest tries to write an L1TF-vulnerable PTE (for current
+   kernels, very likely when paging data out to disk), shadow paging is
+   activated and forced upon the guest.  Alternatively, if shadow paging
+   is compiled out, the guest is crashed instead.
+
+   Shadowing comes with a workload-dependent performance hit to the
+   guest.  Once the guest kernel software updates have been applied, a
+   well behaved guest will not write vulnerable PTEs, and will therefore
+   avoid the performance penalty (or crash) entirely.
+
+   This behaviour is active by default for guests on affected hardware
+   (controlled by `pv-l1tf=`), but is disabled by default for dom0.
+   Dom0's exemption is because of instabilities when being shadowed,
+   which are under investigation, but dom0 kernel updates should still
+   be taken to mitigate the userspace aspect.
+
+2) For HVM and PVH guests running with Hardware Assisted Paging (which fall
+   into the CVE-2018-3646 - Hypervisors case), leakage of data from Xen or
+   other guests can only be prevented entirely by disabling
+   SMT/Hyper-threading (if available and active in the BIOS), and by using the
+   L1D_FLUSH feature (available in the new microcode) on every VMEntry.
+
+   On affected hardware, L1D_FLUSH is enabled by default (controlled by
+   `spec-ctrl=[no-]l1d-flush`), subject to microcode availability.
+
+   However, SMT/Hyper-threading is not disabled by default, because Xen does
+   not have enough information to choose an appropriate default.  Safety can
+   be arranged in a number of ways by the toolstack, including with finer
+   granularity than simply on or off.
+
+   Therefore, users are expected to perform a risk assessment of their
+   deployment, and explicitly chose a default (`smt=<bool>`).  See the RISK
+   ASSESSMENT section below.  Xen will issue a warning at boot on vulnerable
+   hardware when no explicit smt choice has been set.
+
+There are ongoing experimentation and development efforts to find lower
+overhead mitigations for the HVM case.
+
+
+We are not supplying separate patches because the changes have many
+complicated prerequisites.  To get the fixes, it is necessary to
+update to the latest Xen applicable staging-XX branch.
+
+The relevant git commit object ids are as follows:
+
+d757c29ffe2e31b15397e43cd58da88b6318b654 staging-4.11
+13e85a6dbc1eeda4f95c0d3afcd205579eab5909 staging-4.10
+14f90aaef8d441cbdece5b74829e85e767fb196c staging-4.9
+d95b5bb31e6d4361e356f0ff0853b6bb172a8b6a staging-4.8
+9b8375a272ad02d8d0c229b3e3e7989e852734d8 staging-4.7
+e1b03b03b199bd206c81286b4f51b6a681123eda staging-4.6
+aa67b97ed34279c43a43d9ca46727b5746caa92e staging          # xen-unstable
+
+In each case the tip commit is "xl.conf: Add global affinity masks".
+
+
+RISK ASSESSMENT OF SMT/HYPER-THREADING
+======================================
+
+1) If hyper-threading is unavailable, or already disabled in the BIOS, no
+   further action is necessary.
+
+2) If you are using exclusively PV or HVM Shadow guests, hyper-threading has
+   no impact on security, and is safe to remain enabled.
+
+3) If an HVM guest kernel is trusted (i.e. under host admin control), and has
+   been updated to include the OS vendor mitigations, then it is probably safe
+   to be scheduled with hyper-threading active.
+
+4) If an HVM guest kernel is untrusted (i.e. not under host admin control), it
+   is probably not safe to be scheduled with hyper-threading active.
+
+FINER GRAINED SMT/HYPER-THREADING CONTROL WITH TOOLSTACK SETTINGS
+=================================================================
+
+New options (vm.cpumask, vm.hvm.cpumask and vm.pv.cpumask) have been
+added in the xl/libxl toolstack to provide global control over CPU
+hard affinity settings.  The global masks are applied when a guest is
+created or when a vcpu is pinned.
+
+Sketch of how to use the new options:
+  1. Livepatch the hypervisor.
+  2. Identify all sibling threads and partition them with the new
+     options in xl.conf.
+  3. For each DomU, run `xl vcpu-pin $DOM all all`, which should
+     cause the global masks to be applied to all vcpus of a DomU.
+  4. Verify the required affinity has taken effect by running `xl
+     vcpu-list`.
+
+The default behaviour of xl is to always apply global masks unless
+`--ignore-global-affinity-masks` is specified.  Please refer to
+xl.conf(5) for details.
+
+NOTE CONCERNING CVE-2018-3615
+=============================
+
+CVE-2018-3615 covers the interaction of L1TF and Intel SGX.  Xen has
+no support for enclaves in any currently released version, so no Xen
+systems are affected.
+
+NOTE REGARDING LACK OF EMBARGO
+==============================
+
+Despite an attempt to organise predisclosure, the discoverers ultimately
+did not authorise a predisclosure.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBCAAGBQJbcw4zAAoJEIP+FMlX6CvZZ0AIAMqgsxv05j191DxrphhMPgLT
+9LybN7bCQU4z5bhufI0DQdppVU/WmAqhlVHL/Q9OJO1nnlTuGI0demuaObTnL6q0
+HSNeC5ZArKT24qunr9hSzysG8LS5HI9lsIxYYz4FOSFOK6kn5MuQj5Z+ZdID/XTx
+9/S21UfDvZPLhbxyqXmLfENzVkVOf+6NA/Ebl+0//sfbq/QtZAA0k63t3ZWatTPV
+1heFGkb3Agmq5D/wtoKfcVbCmg2CU41/T9kXk4j1ADmIRc0FLjV/bXP16PC/XByP
+a+HmSG+nIWkYBpqYhDBu9M6lXeZb9bi2Oeh16FRuF5l28BbZcp3Zk19VUoSkgi4=
+=NRkR
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--=separator--
