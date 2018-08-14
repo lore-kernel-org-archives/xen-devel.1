@@ -1,10 +1,12 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 01/15] xen/arm: cpregs: Allow HSR_CPREG* to
- receive more than 1 parameter
-Date: Tue, 14 Aug 2018 14:47:46 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1808141443580.15066@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH 03/15] xen/arm: Introduce helpers to
+ clear/flags flags in HCR_EL2
+Date: Tue, 14 Aug 2018 14:49:59 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1808141448330.15066@sstabellini-ThinkPad-X260>
 References: <20180716172712.20294-1-julien.grall@arm.com>
- <20180716172712.20294-2-julien.grall@arm.com>
+ <20180716172712.20294-4-julien.grall@arm.com>
+ <alpine.DEB.2.10.1808141345410.15066@sstabellini-ThinkPad-X260>
+ <4c0f6e56-7d17-8e3d-3146-1c043d489eb8@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,9 +14,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=pgrk=k5=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fphAN-0003DC-0y
- for xen-devel@lists.xenproject.org; Tue, 14 Aug 2018 21:47:51 +0000
-In-Reply-To: <20180716172712.20294-2-julien.grall@arm.com>
+ id 1fphCV-0003YF-2e
+ for xen-devel@lists.xenproject.org; Tue, 14 Aug 2018 21:50:03 +0000
+In-Reply-To: <4c0f6e56-7d17-8e3d-3146-1c043d489eb8@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,29 +26,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, Julien Grall <julien.grall@linaro.org>
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien.grall@linaro.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAxNiBKdWwgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEF0IHRoZSBtb21lbnQs
-IEhTUl9DUFJFRyBpcyBleHBlY3RlZCB0byByZWNlaXZlIG9ubHkgdGhlIGNvLXByb2Nlc3Nvcgo+
-IHJlZ2lzdGVyIG5hbWUgaW4gcGFyYW1ldGVyLiBCZWNhdXNlIHRoZSBuYW1lIGlzIGFjdHVhbGx5
-IGEgZGVmaW5lLCB0aGlzCj4gbWF5IGhhdmUgYmVlbiBleHBhbmRlZCBieSBhIHByZXZpb3VzIG1h
-Y3JvLgo+IAo+IFJhdGhlciB0aGFuIGltcG9zaW5nIHRoZSB1c2Ugb2YgX0hTUl9DUFJFRyogaW4g
-c3VjaCBjYXNlcywgYWxsb3cKPiBIU1JfQ1BSRUcgdG8gcmVjZWl2ZSBtb3JlIHRoYW4gMSBwYXJh
-bWV0ZXIuCj4gCj4gU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAbGlu
-YXJvLm9yZz4KClJldmlld2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtl
-cm5lbC5vcmc+Cgo+IC0tLQo+ICB4ZW4vaW5jbHVkZS9hc20tYXJtL2NwcmVncy5oIHwgNCArKy0t
-Cj4gIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCj4gCj4g
-ZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vY3ByZWdzLmggYi94ZW4vaW5jbHVkZS9h
-c20tYXJtL2NwcmVncy5oCj4gaW5kZXggOGRiNjVkNWUyYS4uNGM3NGU4MTYxYiAxMDA2NDQKPiAt
-LS0gYS94ZW4vaW5jbHVkZS9hc20tYXJtL2NwcmVncy5oCj4gKysrIGIveGVuL2luY2x1ZGUvYXNt
-LWFybS9jcHJlZ3MuaAo+IEBAIC00Nyw4ICs0Nyw4IEBACj4gICAgICAoKF9fSFNSX0NQUkVHXyMj
-b3AxKSA8PCBIU1JfQ1A2NF9PUDFfU0hJRlQpCj4gIAo+ICAvKiBFbmNvZGUgYSByZWdpc3RlciBh
-cyBwZXIgSFNSIElTUyBwYXR0ZXJuICovCj4gLSNkZWZpbmUgSFNSX0NQUkVHMzIoWCkgX0hTUl9D
-UFJFRzMyKFgpCj4gLSNkZWZpbmUgSFNSX0NQUkVHNjQoWCkgX0hTUl9DUFJFRzY0KFgpCj4gKyNk
-ZWZpbmUgSFNSX0NQUkVHMzIoWC4uLikgX0hTUl9DUFJFRzMyKFgpCj4gKyNkZWZpbmUgSFNSX0NQ
-UkVHNjQoWC4uLikgX0hTUl9DUFJFRzY0KFgpCj4gIAo+ICAvKgo+ICAgKiBPcmRlciByZWdpc3Rl
-cnMgYnkgQ29wcm9jZXNzb3ItPiBDUm4tPiBPcGNvZGUgMS0+IENSbS0+IE9wY29kZSAyCj4gLS0g
-Cj4gMi4xMS4wCj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVHVlLCAxNCBBdWcgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIFN0ZWZhbm8sCj4g
+Cj4gT24gMDgvMTQvMjAxOCAwOTo0NiBQTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4g
+T24gTW9uLCAxNiBKdWwgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+ID4gPiBBIGNvdXBsZSBv
+ZiBwbGFjZXMgaW4gdGhlIGNvZGUgd2lsbCBuZWVkIHRvIGNsZWFyL3NldCBmbGFncyBpbiBIQ1Jf
+RUwyCj4gPiA+IGZvciBhIGdpdmVuIHZDUFUgYW5kIHRoZW4gcmVwbGljYXRlIGludG8gdGhlIGhh
+cmR3YXJlLiBJbnRyb2R1Y2UKPiA+ID4gaGVscGVycyBhbmQgcmVwbGFjZSBvcGVuLWNvZGVkIHZl
+cnNpb24uCj4gPiA+IAo+ID4gPiBTaWduZWQtb2ZmLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5n
+cmFsbEBsaW5hcm8ub3JnPgo+ID4gCj4gPiBUaGUgbWFjcm9zIGxvb2sgZ29vZCwgYnV0IEkgZ3Jl
+cHBlZCBmb3IgdGhlbSBpbiB5b3VyIHNlcmllcyBhbmQgdGhlcmUKPiA+IGFyZSBubyBtb3JlIGNh
+bGxlcnMuIFdoYXQgcGxhY2VzIGFyZSB5b3UgcmVmZXJyaW5nIHRvIHRoYXQgdGhleSB3aWxsCj4g
+PiBuZWVkIHRoZW0/Cj4gCj4gSSBzcGxpdCBzb21lIG9mIG15IHdvcmsgaW4gMiBwYXJ0IHRvIHJl
+ZHVjZSB0aGUgc2l6ZSBvZiB0aGUgc2VyaWVzLiBUaGlzIHdpbGwKPiBiZSB1c2VkIGluIGFub3Ro
+ZXIgc2VyaWVzIHdoZXJlIHVwZGF0aW5nIEhDUiBmb3IgdHJhcHBpbmcgVFRCUi9TQ1RMUiogd2ls
+bCBiZQo+IGR5bmFtaWMuCj4gCj4gQWx0aG91Z2ggaW4gZ2VuZXJhbCwgdGhpcyBpcyBhbiBpbXBy
+b3ZlbWVudCBjb21wYXJlIHRvIHRoZSBjdXJyZW50IGNvZGUgYXMgaXQKPiBtYWtlcyBjbGVhciB3
+aGF0IG5lZWRzIHRvIGJlIHVwZGF0ZWQgd2hlbiBtb2RpZnlpbmcgSENSLgoKWWVzLCBpdCBpcywg
+YnV0IG5vcm1hbGx5IEkgd291bGQgb25seSBpbnRyb2R1Y2UgdmNwdV9oY3Jfc2V0X2ZsYWdzIGlu
+CnRoaXMgc2VyaWVzLCBiZWNhdXNlIHZjcHVfaGNyX2NsZWFyX2ZsYWdzIGlzIGxlZnQgY29tcGxl
+dGVseSB1bnVzZWQ/CgpJIGFsc28gZG9uJ3QgbWluZCBpbnRyb2R1Y2luZyBpdCBhbnl3YXkgaWYg
+eW91IGhhdmUgYSBzZXJpZXMgY29taW5nLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
