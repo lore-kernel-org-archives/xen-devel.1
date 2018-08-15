@@ -1,11 +1,19 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: [PATCH for-4.7] arm: constify atomic_read parameter
-Date: Wed, 15 Aug 2018 09:28:36 +0100
-Message-ID: <20180815082836.6046-1-wei.liu2@citrix.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH for-4.7] arm: constify atomic_read parameter
+Date: Wed, 15 Aug 2018 09:29:32 +0100
+Message-ID: <cce88130-c26d-7b02-a31a-138b6077f3e5@citrix.com>
+References: <20180815082836.6046-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=mwwv=k6=citrix.com=prvs=758086435=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1fprBP-0004Fw-Py
+ for xen-devel@lists.xenproject.org; Wed, 15 Aug 2018 08:29:35 +0000
+In-Reply-To: <20180815082836.6046-1-wei.liu2@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,27 +22,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZGVkMmEzN2Q2MyBhZGRlZCBjb25zdCB0byBhdG9taWNfcmVhZC4gRG8gdGhlIHNhbWUgZm9yIEFy
-bQpjb3VudGVycGFydC4KClNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5j
-b20+Ci0tLQpDYzogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgpD
-YzogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KQ2M6IEphbiBCZXVsaWNoIDxq
-YmV1bGljaEBzdXNlLmNvbT4KQ2M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJp
-eC5jb20+CgpCcmVha2FnZSBkdWUgdG8gWFNBLTI3MyBjaGFuZ2VzLgotLS0KIHhlbi9pbmNsdWRl
-L2FzbS1hcm0vYXRvbWljLmggfCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyks
-IDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20tYXJtL2F0b21pYy5o
-IGIveGVuL2luY2x1ZGUvYXNtLWFybS9hdG9taWMuaAppbmRleCAyOWFiMjY1ZjAwLi5kZTIyZmQ1
-NWQ3IDEwMDY0NAotLS0gYS94ZW4vaW5jbHVkZS9hc20tYXJtL2F0b21pYy5oCisrKyBiL3hlbi9p
-bmNsdWRlL2FzbS1hcm0vYXRvbWljLmgKQEAgLTExMCw3ICsxMTAsNyBAQCB0eXBlZGVmIHN0cnVj
-dCB7IGludCBjb3VudGVyOyB9IGF0b21pY190OwogICogc3RyZXgvbGRyZXggbW9uaXRvciBvbiBz
-b21lIGltcGxlbWVudGF0aW9ucy4gVGhlIHJlYXNvbiB3ZSBjYW4gdXNlIGl0IGZvcgogICogYXRv
-bWljX3NldCgpIGlzIHRoZSBjbHJleCBvciBkdW1teSBzdHJleCBkb25lIG9uIGV2ZXJ5IGV4Y2Vw
-dGlvbiByZXR1cm4uCiAgKi8KLXN0YXRpYyBpbmxpbmUgaW50IGF0b21pY19yZWFkKGF0b21pY190
-ICp2KQorc3RhdGljIGlubGluZSBpbnQgYXRvbWljX3JlYWQoY29uc3QgYXRvbWljX3QgKnYpCiB7
-CiAgICAgcmV0dXJuICoodm9sYXRpbGUgaW50ICopJnYtPmNvdW50ZXI7CiB9Ci0tIAoyLjExLjAK
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTUvMDgvMjAxOCAwOToyOCwgV2VpIExpdSB3cm90ZToKPiBkZWQyYTM3ZDYzIGFkZGVkIGNv
+bnN0IHRvIGF0b21pY19yZWFkLiBEbyB0aGUgc2FtZSBmb3IgQXJtCj4gY291bnRlcnBhcnQuCj4K
+PiBTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKQWNrZWQtYnk6
+IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpNb3N0IGxpa2VseSBu
+ZWVkZWQgZm9yIDQuNiBhcyB3ZWxsLgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
