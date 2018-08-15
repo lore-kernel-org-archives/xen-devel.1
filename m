@@ -1,10 +1,11 @@
 From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH] x86/Xen: further refine
- add_preferred_console() invocations
-Date: Wed, 15 Aug 2018 17:35:05 -0400
-Message-ID: <0d51e28a-cef3-da80-7366-f36959e93d85@oracle.com>
-References: <5B30C7DD02000078001CD735@suse.com>
- <2a1d6b6e-539b-cb97-3e47-77b5636299ed@suse.com>
+Subject: Re: Ping: [PATCH] xen/ACPI: don't upload Px/Cx data for
+ disabled processors
+Date: Wed, 15 Aug 2018 17:41:48 -0400
+Message-ID: <2cd98495-6077-d6d9-647f-71238c3cf68a@oracle.com>
+References: <5B30C13F02000078001CD68D@prv1-mh.provo.novell.com>
+ <5B73C70202000078001DE1A2@prv1-mh.provo.novell.com>
+ <CAJZ5v0gO1qsj6fqYHJfodwQugSSFbRO5zCjyA9cpN=z1RW49vw@mail.gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,9 +13,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=ti2w=k6=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1fq3Qj-0006zO-T3
- for xen-devel@lists.xenproject.org; Wed, 15 Aug 2018 21:34:13 +0000
-In-Reply-To: <2a1d6b6e-539b-cb97-3e47-77b5636299ed@suse.com>
+ id 1fq3XE-0007kX-NM
+ for xen-devel@lists.xenproject.org; Wed, 15 Aug 2018 21:40:56 +0000
+In-Reply-To: <CAJZ5v0gO1qsj6fqYHJfodwQugSSFbRO5zCjyA9cpN=z1RW49vw@mail.gmail.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,17 +25,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: "Rafael J. Wysocki" <rafael@kernel.org>, JBeulich@suse.com
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, "Rafael J. Wysocki" <rjw@rjwysocki.net>, ACPI Devel Maling List <linux-acpi@vger.kernel.org>, Len Brown <lenb@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDcvMDIvMjAxOCAxMDozOCBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBPbiAyNS8wNi8x
-OCAxMjo0NSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+IEFzIHRoZSBzZXF1ZW5jZSBvZiBpbnZvY2F0
-aW9ucyBtYXR0ZXJzLCBhZGQgInR0eSIgb25seSBhZnRlciAiaHZjIiB3aGVuCj4+IGEgVkdBIGNv
-bnNvbGUgaXMgYXZhaWxhYmxlICh3aGljaCBpcyBvZnRlbiB0aGUgY2FzZSBmb3IgRG9tMCwgYnV0
-IGhhcmRseQo+PiBldmVyIGZvciBEb21VKS4KPj4KPj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxp
-Y2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+IFJldmlld2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jv
-c3NAc3VzZS5jb20+Cj4KCgoKQXBwbGllZCB0byBmb3ItbGludXMtNC4xOS4KCi1ib3JpcwoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMDgvMTUvMjAxOCAwMzo1NSBBTSwgUmFmYWVsIEouIFd5c29ja2kgd3JvdGU6Cj4gT24gV2Vk
+LCBBdWcgMTUsIDIwMTggYXQgODo0NCBBTSBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+
+IHdyb3RlOgo+Pj4+PiBPbiAyNS4wNi4xOCBhdCAxMjoxNywgIHdyb3RlOgo+Pj4gVGhpcyBpcyB1
+bm5lY2Vzc2FyeSBhbmQgdHJpZ2dlcnMgYSB3YXJuaW5nIGluIHRoZSBoeXBlcnZpc29yLgo+Pj4K
+Pj4+IE9mdGVuIHN5c3RlbXMgaGF2ZSBtb3JlIHByb2Nlc3NvciBlbnRyaWVzIGluIHRoZWlyIEFD
+UEkgdGFibGVzIHRoYW4gYXJlCj4+PiBhY3R1YWxseSBpbnN0YWxsZWQvYWN0aXZlLiBUaGUgQUNQ
+SV9TVEFfREVWSUNFX1BSRVNFTlQgYml0IGNhbm5vdCBiZQo+Pj4gcmVsaWFibHkgdXNlZCwgYnV0
+IHRoZSBBQ1BJX01BRFRfRU5BQkxFRCBiaXQgY2FuLiBJbiBvcmRlciB0byBub3QKPj4+IGludHJv
+ZHVjZSBuZXcgZnVuY3Rpb25zIGluIHRoZSBtYWluIEFDUEkgcHJvY2Vzc29yIGRyaXZlciBjb2Rl
+LCBzaW1wbHkKPj4+IHVzZSBhY3BpX2dldF9waHlzX2lkKCksIHdoaWNoIGRvZXMgbW9yZSB0aGFu
+IHdlIG5lZWQsIGJ1dCB3aGljaCBjaGVja3MKPj4+IHRoZSBNQURUIGVuYWJsZWQgYml0IGluIHRo
+ZSBwcm9jZXNzLiBBbnkgQ1BVIGZvciB3aGljaCB3ZSBjYW4ndAo+Pj4gZGV0ZXJtaW5lIHRoZSBB
+UElDIElEIGlzIHVubGlrZWx5IHRvIHdvcmsgcHJvcGVybHkgYW55d2F5LCBzbyB0aGUgZXh0cmEK
+Pj4+IGNoZWNrcyBkb25lIGJ5IGFjcGlfZ2V0X3BoeXNfaWQoKSBzaG91bGQgZG8gbm8gaGFybS4K
+Pj4+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4+
+PiAtLS0KPj4+ICBkcml2ZXJzL2FjcGkvcHJvY2Vzc29yX2NvcmUuYyAgICB8ICAgIDEgKwo+Pj4g
+IGRyaXZlcnMveGVuL3hlbi1hY3BpLXByb2Nlc3Nvci5jIHwgICAgNiArKysrKysKPj4+ICAyIGZp
+bGVzIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKQo+PiBXaXRoIErDvHJnZW4ncyBSLWIgaW4gcGxh
+Y2UsIG1heSBJIGFzayBmb3IgYW4gYWNrIGZvciB0aGUgcHJvY2Vzc29yX2NvcmUuYwo+PiBjaGFu
+Z2UsIG9yIC0gaW4gY2FzZSB5b3UgZGlzbGlrZSB0aGUgbmV3IGV4cG9ydCAtIGFuIGFsdGVybmF0
+aXZlIHN1Z2dlc3Rpb24/Cj4gSXQgaXMgZmluZSB0byBleHBvcnQgaXQgSU1PLiAgSWYgeW91IG5l
+ZWQgbXkgQUNLIGZvciB0aGF0LCBwbGVhc2UgZmVlbAo+IGZyZWUgdG8gYWRkIGl0IHRvIHRoZSBw
+YXRjaC4KCgpBcHBsaWVkIHRvIGZvci1saW51cy00LjE5LgoKLWJvcmlzCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
