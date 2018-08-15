@@ -1,21 +1,16 @@
-From: Christoph Hellwig <hch@infradead.org>
-Subject: Re: [PATCH RESEND] compat-ioctl/Xen: support at least
- some IOCTLs of evtchn and privcmd
-Date: Wed, 15 Aug 2018 05:41:59 -0700
-Message-ID: <20180815124159.GA11205@infradead.org>
-References: <5B30C6E202000078001CD724@prv1-mh.provo.novell.com>
- <5B73C5D402000078001DE189@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2 04/12] xen/evtchn: Pass max_evtchn_port
+ into evtchn_init()
+Date: Wed, 15 Aug 2018 06:45:53 -0600
+Message-ID: <5B74208102000078001DE5D7@prv1-mh.provo.novell.com>
+References: <1534154469-6076-1-git-send-email-andrew.cooper3@citrix.com>
+ <1534154469-6076-5-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ldo5=k6=bombadil.srs.infradead.org=batv+f595ad7416d8d84eb633+5470+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1fpv7q-00018t-2l
- for xen-devel@lists.xenproject.org; Wed, 15 Aug 2018 12:42:10 +0000
+In-Reply-To: <1534154469-6076-5-git-send-email-andrew.cooper3@citrix.com>
 Content-Disposition: inline
-In-Reply-To: <5B73C5D402000078001DE189@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,12 +19,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-fsdevel@vger.kernel.org, viro@zeniv.linux.org.uk
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-UGxlYXNlIHdpcmUgdXAgYSBjb21wYXRfaW9jdGwgaGFuZGxlciBmb3IgdGhlIHhlbiBwcml2Y21k
-IGhhbmRsZXIKaW5zdGVhZCBvZiBhZGRpbmcgdGhlc2UgdG8gYSBnbG9iYWwgdGFibGUuCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDEzLjA4LjE4IGF0IDEyOjAxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gLi4uIHJhdGhlciB0aGFuIHNldHRpbmcgaXQgdXAgb25jZSBkb21haW5fY3JlYXRlKCkg
+aGFzIGNvbXBsZXRlZC4gIFRoaXMKPiBpbnZvbHZlcyBjb25zdHJ1Y3RpbmcgYSBkZWZhdWx0IHZh
+bHVlIGZvciBkb20wLgo+IAo+IE5vIHByYWN0aWNhbCBjaGFuZ2UgaW4gZnVuY3Rpb25hbGl0eS4K
+PiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXgu
+Y29tPgoKUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
