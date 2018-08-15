@@ -1,12 +1,15 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/pv: Use xmemdup() for cpuidmasks,
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] x86/pv: Use xmemdup() for cpuidmasks,
  rather than opencoding it
-Date: Wed, 15 Aug 2018 10:54:11 +0100
-Message-ID: <1534326851-10159-1-git-send-email-andrew.cooper3@citrix.com>
+Date: Wed, 15 Aug 2018 10:58:51 +0100
+Message-ID: <20180815095851.tja6h33nm57slanl@citrix.com>
+References: <1534326851-10159-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Content-Disposition: inline
+In-Reply-To: <1534326851-10159-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,30 +18,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-U2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4K
-LS0tCkNDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+CkNDOiBXZWkgTGl1IDx3ZWku
-bGl1MkBjaXRyaXguY29tPgpDQzogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5j
-b20+Ci0tLQogeGVuL2FyY2gveDg2L3B2L2RvbWFpbi5jIHwgMTAgKysrLS0tLS0tLQogMSBmaWxl
-IGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94
-ZW4vYXJjaC94ODYvcHYvZG9tYWluLmMgYi94ZW4vYXJjaC94ODYvcHYvZG9tYWluLmMKaW5kZXgg
-MzIzMGFjNi4uNTIxMDhkNCAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L3B2L2RvbWFpbi5jCisr
-KyBiL3hlbi9hcmNoL3g4Ni9wdi9kb21haW4uYwpAQCAtMjQwLDEzICsyNDAsOSBAQCBpbnQgcHZf
-ZG9tYWluX2luaXRpYWxpc2Uoc3RydWN0IGRvbWFpbiAqZCkKICAgICAgICAgZ290byBmYWlsOwog
-ICAgIGNsZWFyX3BhZ2UoZC0+YXJjaC5wdl9kb21haW4uZ2R0X2xkdF9sMXRhYik7CiAKLSAgICBp
-ZiAoIGxldmVsbGluZ19jYXBzICYgfkxDQVBfZmF1bHRpbmcgKQotICAgIHsKLSAgICAgICAgZC0+
-YXJjaC5wdl9kb21haW4uY3B1aWRtYXNrcyA9IHhtYWxsb2Moc3RydWN0IGNwdWlkbWFza3MpOwot
-ICAgICAgICBpZiAoICFkLT5hcmNoLnB2X2RvbWFpbi5jcHVpZG1hc2tzICkKLSAgICAgICAgICAg
-IGdvdG8gZmFpbDsKLSAgICAgICAgKmQtPmFyY2gucHZfZG9tYWluLmNwdWlkbWFza3MgPSBjcHVp
-ZG1hc2tfZGVmYXVsdHM7Ci0gICAgfQorICAgIGlmICggbGV2ZWxsaW5nX2NhcHMgJiB+TENBUF9m
-YXVsdGluZyAmJgorICAgICAgICAgKGQtPmFyY2gucHZfZG9tYWluLmNwdWlkbWFza3MgPSB4bWVt
-ZHVwKCZjcHVpZG1hc2tfZGVmYXVsdHMpKSA9PSBOVUxMICkKKyAgICAgICAgZ290byBmYWlsOwog
-CiAgICAgcmMgPSBjcmVhdGVfcGVyZG9tYWluX21hcHBpbmcoZCwgR0RUX0xEVF9WSVJUX1NUQVJU
-LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEdEVF9MRFRfTUJZVEVTIDw8ICgy
-MCAtIFBBR0VfU0hJRlQpLAotLSAKMi4xLjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+T24gV2VkLCBBdWcgMTUsIDIwMTggYXQgMTA6NTQ6MTFBTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRy
+aXguY29tPgoKUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
