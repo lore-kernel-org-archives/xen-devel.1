@@ -1,19 +1,18 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] pygrub: fix package version
-Date: Wed, 15 Aug 2018 09:11:53 +0100
-Message-ID: <20180815081153.llowwah3u2bfjvnf@citrix.com>
-References: <1534320487-144448-1-git-send-email-simon.rowe@eu.citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH for-4.6] amend "x86/Intel: Mitigations for GPZ
+ SP4 - Speculative Store Bypass"
+Date: Wed, 15 Aug 2018 02:21:50 -0600
+Message-ID: <5B73E29E02000078001DE38B@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=fjet=k6=citrix.com=prvs=75862455f=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fpquL-0002wS-DM
- for xen-devel@lists.xenproject.org; Wed, 15 Aug 2018 08:11:57 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=e0/s=k6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fpr3y-0003qR-Dk
+ for xen-devel@lists.xenproject.org; Wed, 15 Aug 2018 08:21:54 +0000
 Content-Disposition: inline
-In-Reply-To: <1534320487-144448-1-git-send-email-simon.rowe@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,14 +21,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Simon Rowe <simon.rowe@eu.citrix.com>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBBdWcgMTUsIDIwMTggYXQgMDk6MDg6MDdBTSArMDEwMCwgU2ltb24gUm93ZSB3cm90
-ZToKPiBNYWtlIHRoZSB2ZXJzaW9uIGluIHNldHVwLnB5IGFncmVlIHdpdGggUFlHUlVCX1ZFUi4K
-PiAKPiBTaWduZWQtb2ZmLWJ5OiBTaW1vbiBSb3dlIDxzaW1vbi5yb3dlQGV1LmNpdHJpeC5jb20+
-CgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+VGhpcyBpcyBwYXJ0IG9mIENWRS0yMDE4LTM2MzkgLyBYU0EtMjYzLgoKU2lnbmVkLW9mZi1ieTog
+SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKLS0tIGEvdG9vbHMvbGlieGMveGNfY3B1
+ZmVhdHVyZS5oCisrKyBiL3Rvb2xzL2xpYnhjL3hjX2NwdWZlYXR1cmUuaApAQCAtMTQ3LDUgKzE0
+Nyw2IEBACiAvKiBJbnRlbC1kZWZpbmVkIENQVSBmZWF0dXJlcywgQ1BVSUQgbGV2ZWwgMHgwMDAw
+MDAwNzowIChlZHgpICovCiAjZGVmaW5lIFg4Nl9GRUFUVVJFX0lCUlNCICAgICAgIDI2IC8qIElC
+UlMgYW5kIElCUEIgc3VwcG9ydCAodXNlZCBieSBJbnRlbCkgKi8KICNkZWZpbmUgWDg2X0ZFQVRV
+UkVfU1RJQlAgICAgICAgMjcgLyogU1RJQlAgKi8KKyNkZWZpbmUgWDg2X0ZFQVRVUkVfU1NCRCAg
+ICAgICAgMzEgLyogTVNSX1NQRUNfQ1RSTC5TU0JEIGF2YWlsYWJsZSAqLwogCiAjZW5kaWYgLyog
+X19MSUJYQ19DUFVGRUFUVVJFX0ggKi8KLS0tIGEvdG9vbHMvbGlieGMveGNfY3B1aWRfeDg2LmMK
+KysrIGIvdG9vbHMvbGlieGMveGNfY3B1aWRfeDg2LmMKQEAgLTM2OSw3ICszNjksOCBAQCBzdGF0
+aWMgdm9pZCB4Y19jcHVpZF9odm1fcG9saWN5KAogICAgICAgICAgICAgICAgICAgICAgICAgYml0
+bWFza29mKFg4Nl9GRUFUVVJFX1NNQVApIHwKICAgICAgICAgICAgICAgICAgICAgICAgIGJpdG1h
+c2tvZihYODZfRkVBVFVSRV9GU0dTQkFTRSkpOwogICAgICAgICAgICAgcmVnc1szXSAmPSAoYml0
+bWFza29mKFg4Nl9GRUFUVVJFX0lCUlNCKSB8Ci0gICAgICAgICAgICAgICAgICAgICAgICBiaXRt
+YXNrb2YoWDg2X0ZFQVRVUkVfU1RJQlApKTsKKyAgICAgICAgICAgICAgICAgICAgICAgIGJpdG1h
+c2tvZihYODZfRkVBVFVSRV9TVElCUCkgfAorICAgICAgICAgICAgICAgICAgICAgICAgYml0bWFz
+a29mKFg4Nl9GRUFUVVJFX1NTQkQpKTsKICAgICAgICAgfSBlbHNlCiAgICAgICAgICAgICByZWdz
+WzFdID0gcmVnc1szXSA9IDA7CiAgICAgICAgIHJlZ3NbMF0gPSByZWdzWzJdID0gMDsKQEAgLTUx
+Miw3ICs1MTMsOCBAQCBzdGF0aWMgdm9pZCB4Y19jcHVpZF9wdl9wb2xpY3koCiAgICAgICAgICAg
+ICAgICAgICAgICAgICBiaXRtYXNrb2YoWDg2X0ZFQVRVUkVfQURYKSAgfAogICAgICAgICAgICAg
+ICAgICAgICAgICAgYml0bWFza29mKFg4Nl9GRUFUVVJFX0ZTR1NCQVNFKSk7CiAgICAgICAgICAg
+ICByZWdzWzNdICY9IChiaXRtYXNrb2YoWDg2X0ZFQVRVUkVfSUJSU0IpIHwKLSAgICAgICAgICAg
+ICAgICAgICAgICAgIGJpdG1hc2tvZihYODZfRkVBVFVSRV9TVElCUCkpOworICAgICAgICAgICAg
+ICAgICAgICAgICAgYml0bWFza29mKFg4Nl9GRUFUVVJFX1NUSUJQKSB8CisgICAgICAgICAgICAg
+ICAgICAgICAgICBiaXRtYXNrb2YoWDg2X0ZFQVRVUkVfU1NCRCkpOwogICAgICAgICB9CiAgICAg
+ICAgIGVsc2UKICAgICAgICAgICAgIHJlZ3NbMV0gPSByZWdzWzNdID0gMDsKCgoKCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
