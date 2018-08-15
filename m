@@ -1,16 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 06/12] xen/gnttab: Pass max_{grant,
- maptrack}_frames into grant_table_create()
-Date: Wed, 15 Aug 2018 06:51:19 -0600
-Message-ID: <5B7421C702000078001DE5ED@prv1-mh.provo.novell.com>
-References: <1534154469-6076-1-git-send-email-andrew.cooper3@citrix.com>
- <1534154469-6076-7-git-send-email-andrew.cooper3@citrix.com>
+From: Al Viro <viro@ZenIV.linux.org.uk>
+Subject: Re: [PATCH RESEND] compat-ioctl/Xen: support at least
+ some IOCTLs of evtchn and privcmd
+Date: Wed, 15 Aug 2018 13:51:14 +0100
+Message-ID: <20180815125114.GV6515@ZenIV.linux.org.uk>
+References: <5B30C6E202000078001CD724@prv1-mh.provo.novell.com>
+ <5B73C5D402000078001DE189@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1534154469-6076-7-git-send-email-andrew.cooper3@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=hkmn=k6=ftp.linux.org.uk=viro@srs-us1.protection.inumbo.net>)
+ id 1fpvGk-0002Cj-M9
+ for xen-devel@lists.xenproject.org; Wed, 15 Aug 2018 12:51:22 +0000
 Content-Disposition: inline
+In-Reply-To: <5B73C5D402000078001DE189@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,20 +24,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-fsdevel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEzLjA4LjE4IGF0IDEyOjAxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gLi4uIHJhdGhlciB0aGFuIHNldHRpbmcgdGhlIGxpbWl0cyB1cCBhZnRlciBkb21haW5f
-Y3JlYXRlKCkgaGFzIGNvbXBsZXRlZC4KPiAKPiBUaGlzIHJlbW92ZXMgYWxsIHRoZSBnbnR0YWIg
-aW5mcmFzdHJ1Y3R1cmUgZm9yIGNhbGN1bGF0aW5nIHRoZSBudW1iZXIgb2YgZG9tMAo+IGdyYW50
-IGZyYW1lcywgb3B0aW5nIGluc3RlYWQgdG8gcmVxdWlyZSB0aGUgZG9tMCBjb25zdHJ1Y3Rpb24g
-Y29kZSB0byBwYXNzIGEKPiBzYW5lIHZhbHVlIGluIHZpYSB0aGUgY29uZmlndXJhdGlvbi4KPiAK
-PiBJbiBwcmFjdGljZSwgdGhpcyBub3cgbWVhbnMgdGhhdCB0aGVyZSBpcyBuZXZlciBhIHBhcnRp
-YWxseSBjb25zdHJ1Y3RlZCBncmFudAo+IHRhYmxlIGZvciBhIHJlZmVyZW5jZS1hYmxlIGRvbWFp
-bi4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRy
-aXguY29tPgoKUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gV2VkLCBBdWcgMTUsIDIwMTggYXQgMTI6MTk6MDBBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gV2hpbGUgdGhpcyBpcyBvbmx5IGEgc3RhcnQgKElPQ1RMX1BSSVZDTURfTU1BUCogYW5k
+IElPQ1RMX1BSSVZDTURfRE1fT1AKPiByZXF1aXJlIG1vcmUgd29yayksIGl0IGF0IGxlYXN0IGFs
+bG93cyBzb21lIHNpbXBsZSBvcGVyYXRpb25zIChsaWtlCj4gInhsIGRtZXNnIikgd2hpY2ggaGF2
+ZSBhbHdheXMgYmVlbiBhdmFpbGFibGUgb24gWGVub0xpbnV4IHRvIHdvcmsgYWdhaW4KPiB3aXRo
+IGEgNjQtYml0IGtlcm5lbCB1bmRlcm5lYXRoIGEgMzItYml0IGRpc3Ryby4KPiAKPiBTaWduZWQt
+b2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4gQWNrZWQtYnk6IEp1ZXJn
+ZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCgpOYWNrZWQtYnk6IEFsIFZpcm8gPHZpcm9AemVu
+aXYubGludXgub3JnLnVrPgoKCVRoaXMgYmVsb25ncyBpbiBkcml2ZXJzL3hlbi9wcml2Y21kLmMs
+IG5vdCBpbiBmcy9jb21wYXRfaW9jdGwuYwoqQU5ZKiBzaW5nbGUtZHJpdmVyIGlvY3RsIGRlZmlu
+aXRlbHkgc2hvdWxkIGJlIGhhbmRsZWQgYnkgLT5jb21wYXRfaW9jdGwoKQptZXRob2QgYW5kIGFu
+eSBwYXRjaGVzIGR1bXBpbmcgc3VjaCBzdHVmZiBpbnRvIGZzL2NvbXBhdF9pb2N0bC5jIHdpbGwg
+YmUKcmVqZWN0ZWQuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
