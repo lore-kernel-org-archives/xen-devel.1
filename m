@@ -1,21 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 2/2] x86/hvm/emulate: make sure rep I/O
- emulation does not cross GFN boundaries
-Date: Wed, 15 Aug 2018 06:41:55 -0600
-Message-ID: <5B741F9302000078001DE5C5@prv1-mh.provo.novell.com>
-References: <20180810144803.12652-1-paul.durrant@citrix.com>
- <20180810144803.12652-3-paul.durrant@citrix.com>
+From: Christoph Hellwig <hch@infradead.org>
+Subject: Re: [PATCH RESEND] compat-ioctl/Xen: support at least
+ some IOCTLs of evtchn and privcmd
+Date: Wed, 15 Aug 2018 05:41:59 -0700
+Message-ID: <20180815124159.GA11205@infradead.org>
+References: <5B30C6E202000078001CD724@prv1-mh.provo.novell.com>
+ <5B73C5D402000078001DE189@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=e0/s=k6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fpv7f-00018i-EU
- for xen-devel@lists.xenproject.org; Wed, 15 Aug 2018 12:41:59 +0000
-In-Reply-To: <20180810144803.12652-3-paul.durrant@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=ldo5=k6=bombadil.srs.infradead.org=batv+f595ad7416d8d84eb633+5470+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1fpv7q-00018t-2l
+ for xen-devel@lists.xenproject.org; Wed, 15 Aug 2018 12:42:10 +0000
 Content-Disposition: inline
+In-Reply-To: <5B73C5D402000078001DE189@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,45 +24,12 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-fsdevel@vger.kernel.org, viro@zeniv.linux.org.uk
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEwLjA4LjE4IGF0IDE2OjQ4LCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+IFdoZW4gZW11bGF0aW5nIGEgcmVwIEkvTyBvcGVyYXRpb24gaXQgaXMgcG9zc2libGUgdGhh
-dCB0aGUgaW9yZXEgd2lsbAo+IGRlc2NyaWJlIGEgc2luZ2xlIG9wZXJhdGlvbiB0aGF0IHNwYW5z
-IG11bHRpcGxlIEdGTnMuIFRoaXMgaXMgZmluZSBhcyBsb25nCj4gYXMgYWxsIHRob3NlIEdGTnMg
-ZmFsbCB3aXRoaW4gYW4gTU1JTyByZWdpb24gY292ZXJlZCBieSBhIHNpbmdsZSBkZXZpY2UKPiBt
-b2RlbCwgYnV0IHVuZm9ydHVuYXRlbHkgdGhlIGhpZ2hlciBsZXZlbHMgb2YgdGhlIGVtdWxhdGlv
-biBjb2RlIGRvIG5vdAo+IGd1YXJhbnRlZSB0aGF0LiBUaGlzIGlzIHNvbWV0aGluZyB0aGF0IHNo
-b3VsZCBhbG1vc3QgY2VydGFpbmx5IGJlIGZpeGVkLAo+IGJ1dCBpbiB0aGUgbWVhbnRpbWUgdGhp
-cyBwYXRjaCBtYWtlcyBzdXJlIHRoYXQgTU1JTyBpcyB0cnVuY2F0ZWQgYXQgR0ZOCj4gYm91bmRh
-cmllcyBhbmQgaGVuY2UgdGhlIGFwcHJvcHJpYXRlIGRldmljZSBtb2RlbCBpcyByZS1ldmFsdWF0
-ZWQgZm9yIGVhY2gKPiB0YXJnZXQgR0ZOLgo+IAo+IE5PVEU6IFRoaXMgcGF0Y2ggZG9lcyBub3Qg
-ZGVhbCB3aXRoIHRoZSBjYXNlIG9mIGEgc2luZ2xlIE1NSU8gb3BlcmF0aW9uCj4gICAgICAgc3Bh
-bm5pbmcgYSBHRk4gYm91bmRhcnkuIFRoYXQgaXMgbW9yZSBjb21wbGV4IHRvIGRlYWwgd2l0aCBh
-bmQgaXMKPiAgICAgICBkZWZlcnJlZCB0byBhIHN1YnNlcXVlbnQgcGF0Y2guCj4gCj4gU2lnbmVk
-LW9mZi1ieTogUGF1bCBEdXJyYW50IDxwYXVsLmR1cnJhbnRAY2l0cml4LmNvbT4KClJldmlld2Vk
-LWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CndpdGggYSB0eXBlIGNoYW5nZSBy
-ZXF1ZXN0OgoKPiAtLS0gYS94ZW4vYXJjaC94ODYvaHZtL2VtdWxhdGUuYwo+ICsrKyBiL3hlbi9h
-cmNoL3g4Ni9odm0vZW11bGF0ZS5jCj4gQEAgLTE4NCw2ICsxODQsMjUgQEAgc3RhdGljIGludCBo
-dm1lbXVsX2RvX2lvKAo+ICAgICAgICAgIGh2bXRyYWNlX2lvX2Fzc2lzdCgmcCk7Cj4gICAgICB9
-Cj4gIAo+ICsgICAgLyoKPiArICAgICAqIE1ha2Ugc3VyZSB0aGF0IHdlIHRydW5jYXRlIHJlcCBN
-TUlPIGF0IGFueSBHRk4gYm91bmRhcnkuIFRoaXMgaXMKPiArICAgICAqIG5lY2Vzc2FyeSB0byBl
-bnN1cmUgdGhhdCB0aGUgY29ycmVjdCBkZXZpY2UgbW9kZWwgaXMgdGFyZ2V0dGVkCj4gKyAgICAg
-KiBvciB0aGF0IHdlIGNvcnJlY3RseSBoYW5kbGUgYSByZXAgb3Agc3Bhbm5pbmcgTU1JTyBhbmQg
-UkFNLgo+ICsgICAgICovCj4gKyAgICBpZiAoIHVubGlrZWx5KHAuY291bnQgPiAxKSAmJiBwLnR5
-cGUgPT0gSU9SRVFfVFlQRV9DT1BZICkKPiArICAgIHsKPiArICAgICAgICB1bnNpZ25lZCBsb25n
-IG9mZiA9IHAuYWRkciAmIH5QQUdFX01BU0s7CgpJZiB0aGlzIHdhcyAidW5zaWduZWQgaW50Iiwg
-YWxsIGNhbGN1bGF0aW9ucyBiZWxvdyBjb3VsZCBiZSBzbGlnaHRseQpjaGVhcGVyIDMyLWJpdCBv
-bmVzIGFuZCAuLi4KCj4gKyAgICAgICAgaWYgKCBQQUdFX1NJWkUgLSBvZmYgPCBwLnNpemUgKSAv
-KiBzaW5nbGUgcmVwIHNwYW5zIEdGTiAqLwo+ICsgICAgICAgICAgICBwLmNvdW50ID0gMTsKPiAr
-ICAgICAgICBlbHNlCj4gKyAgICAgICAgICAgIHAuY291bnQgPSBtaW5fdCh1bnNpZ25lZCBsb25n
-LAoKLi4uIHRoaXMgY291bGQgYmUganVzdCBtaW4oKSwgYXMgbG9uZyBhcyAuLi4KCj4gKyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwLmNvdW50LAo+ICsgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgKChwLmRmID8gKG9mZiArIHAuc2l6ZSkgOiAoUEFHRV9TSVpFIC0gb2ZmKSkgLwoKLi4u
-IHRoZSAzcmQgYXJnIG9mIHRoZSA/OiBnZXRzIGNhc3QgdG8gdW5zaWduZWQgaW50LiBJZiB5b3Ug
-YWdyZWUsIEknZApiZSBmaW5lIGRvaW5nIHRoZSBhZGp1c3RtZW50cyB3aGlsZSBjb21taXR0aW5n
-LgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+UGxlYXNlIHdpcmUgdXAgYSBjb21wYXRfaW9jdGwgaGFuZGxlciBmb3IgdGhlIHhlbiBwcml2Y21k
+IGhhbmRsZXIKaW5zdGVhZCBvZiBhZGRpbmcgdGhlc2UgdG8gYSBnbG9iYWwgdGFibGUuCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
