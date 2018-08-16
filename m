@@ -1,16 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 125941: regressions - FAIL
-Date: Thu, 16 Aug 2018 06:27:53 +0000
-Message-ID: <osstest-125941-mainreport@xen.org>
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Subject: Re: Future of 32-bit PV support
+Date: Wed, 15 Aug 2018 23:32:24 -0700
+Message-ID: <CACMJ4GZti4ypL=CBSROj0CSh6GRXXkq+iqV7CtBWKiiF6CYinA@mail.gmail.com>
+References: <ede80e02-5704-1d46-4edf-58515ad63f40@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7346469776678963889=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xtga=k7=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fqBlF-0006Ch-6o
- for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 06:27:57 +0000
+ <srs0=ubxr=k7=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
+ id 1fqBpc-00070Z-Lg
+ for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 06:32:28 +0000
+In-Reply-To: <ede80e02-5704-1d46-4edf-58515ad63f40@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,102 +20,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, bouyer@netbsd.org, "xen-users@lists.xenproject.org" <xen-users@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNTk0MSB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNTk0MS8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYXJtaGYgICAgICAgICAg
-ICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI1OTIz
-CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVz
-dC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAg
-IGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1
-cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCgp2ZXJzaW9uIHRhcmdldGVkIGZv
-ciB0ZXN0aW5nOgogeGVuICAgICAgICAgICAgICAgICAgNGNkYjZiZmRlMjMwMGM3NTcyNWIzZTI2
-NzQ2OWJkNmM5ZWVlZTU1ZQpiYXNlbGluZSB2ZXJzaW9uOgogeGVuICAgICAgICAgICAgICAgICAg
-M2RkNDU0YzZjNjk0NDA5YWFlZGQ0ZWQwNzVkNmFlYWNlMmRkODM5MQoKTGFzdCB0ZXN0IG9mIGJh
-c2lzICAgMTI1OTIzICAyMDE4LTA4LTE1IDE2OjAwOjQxIFogICAgMCBkYXlzClRlc3Rpbmcgc2Ft
-ZSBzaW5jZSAgIDEyNTkyOCAgMjAxOC0wOC0xNSAxOTowMDo0OSBaICAgIDAgZGF5cyAgICA2IGF0
-dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFu
-ZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgQ2hyaXN0aWFuIExpbmRp
-ZyA8Y2hyaXN0aWFuLmxpbmRpZ0BjaXRyaXguY29tPgogIERhbmllbCBEZSBHcmFhZiA8ZGdkZWdy
-YUB0eWNoby5uc2EuZ292PgogIEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CiAg
-V2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-cWVtdXUtZGViaWFuaHZtLWkzODYgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9q
-ZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoK
-TG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dz
-LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhl
-c2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94
-ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFp
-bDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3Qu
-Z2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBm
-b3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDth
-PXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgNGNkYjZiZmRlMjMwMGM3NTcyNWIz
-ZTI2NzQ2OWJkNmM5ZWVlZTU1ZQpBdXRob3I6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIz
-QGNpdHJpeC5jb20+CkRhdGU6ICAgRnJpIE1hciAxNiAxODoyNzoyNCAyMDE4ICswMDAwCgogICAg
-eGVuL2V2dGNobjogUGFzcyBtYXhfZXZ0Y2huX3BvcnQgaW50byBldnRjaG5faW5pdCgpCiAgICAK
-ICAgIC4uLiByYXRoZXIgdGhhbiBzZXR0aW5nIGl0IHVwIG9uY2UgZG9tYWluX2NyZWF0ZSgpIGhh
-cyBjb21wbGV0ZWQuICBUaGlzCiAgICBpbnZvbHZlcyBjb25zdHJ1Y3RpbmcgYSBkZWZhdWx0IHZh
-bHVlIGZvciBkb20wLgogICAgCiAgICBObyBwcmFjdGljYWwgY2hhbmdlIGluIGZ1bmN0aW9uYWxp
-dHkuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIz
-QGNpdHJpeC5jb20+CiAgICBSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1
-QGNpdHJpeC5jb20+CiAgICBSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2Uu
-Y29tPgogICAgQWNrZWQtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cgpj
-b21taXQgNGE4MzQ5NzYzNTA1NmQzM2ZlMjBlZjcwNWYzNTYxN2IxMDAzYTI3NgpBdXRob3I6IEFu
-ZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgVHVlIEZlYiAy
-NyAxNzozOTozNyAyMDE4ICswMDAwCgogICAgeGVuL2RvbWN0bDogTWVyZ2Ugc2V0X21heF9ldnRj
-aG4gaW50byBjcmVhdGVkb21haW4KICAgIAogICAgc2V0X21heF9ldnRjaG4gaXMgc29tZXdoYXQg
-d2VpcmQuICBJdCB3YXMgaW50cm9kdWNlZCB3aXRoIHRoZSBldmVudF9maWZvIHdvcmssCiAgICBi
-dXQgaGFzIG5ldmVyIGJlZW4gdXNlZC4gIFN0aWxsLCBpdCBpcyBhIGJvdW5kaW5nIG9uIHJlc291
-cmNlcyBjb25zdW1lZCBieSB0aGUKICAgIGV2ZW50IGNoYW5uZWwgaW5mcmFzdHJ1Y3R1cmUsIGFu
-ZCBzaG91bGQgYmUgcGFydCBvZiBjcmVhdGVkb21haW4sIHJhdGhlciB0aGFuCiAgICBlZGl0YWJs
-ZSBhZnRlciB0aGUgZmFjdC4KICAgIAogICAgRHJvcCBYRU5fRE9NQ1RMX3NldF9tYXhfZXZ0Y2hu
-IGNvbXBsZXRlbHkgKGluY2x1ZGluZyBYU00gaG9va3MgYW5kIGxpYnhjCiAgICB3cmFwcGVycyks
-IGFuZCByZXRhaW4gdGhlIGZ1bmN0aW9uYWxpdHkgaW4gWEVOX0RPTUNUTF9jcmVhdGVkb21haW4u
-CiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNp
-dHJpeC5jb20+CiAgICBBY2tlZC1ieTogRGFuaWVsIERlIEdyYWFmIDxkZ2RlZ3JhQHR5Y2hvLm5z
-YS5nb3Y+CiAgICBBY2tlZC1ieTogQ2hyaXN0aWFuIExpbmRpZyA8Y2hyaXN0aWFuLmxpbmRpZ0Bj
-aXRyaXguY29tPgogICAgQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CiAg
-ICBSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cgpj
-b21taXQgNTRlZDI1MWRjN2I4NTU2NTgyMDAxOTEwMmU1MzNhZmNlYTgxNGUxNgpBdXRob3I6IEFu
-ZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgRnJpIE1hciA5
-IDE0OjM4OjM1IDIwMTggKzAwMDAKCiAgICB0b29sczogUmV3b3JrIHhjX2RvbWFpbl9jcmVhdGUo
-KSB0byB0YWtlIGEgZnVsbCB4ZW5fZG9tY3RsX2NyZWF0ZWRvbWFpbgogICAgCiAgICBJbiBmdXR1
-cmUgcGF0Y2hlcywgdGhlIHN0cnVjdHVyZSB3aWxsIGJlIGV4dGVuZGVkIHdpdGggZnVydGhlciBp
-bmZvcm1hdGlvbiwKICAgIGFuZCB0aGlzIGlzIGZhciBjbGVhbmVyIHRoYW4gYWRkaW5nIGV4dHJh
-IHBhcmFtZXRlcnMuCiAgICAKICAgIFRoZSBweXRob24gc3R1YnMgYXJlIHRoZSBvbmx5IHVzZXIg
-d2hpY2ggcGFzc2VzIE5VTEwgZm9yIHRoZSBleGlzdGluZyBjb25maWcKICAgIG9wdGlvbiAod2hp
-Y2ggaXMgYWN0dWFsbHkgdGhlIGFyY2ggc3Vic3RydWN0dXJlKS4gIFRoZXJlZm9yZSwgdGhlICNp
-ZmRlZmFyeQogICAgbW92ZXMgdG8gY29tcGVuc2F0ZS4KICAgIAogICAgRm9yIGxpYnhsLCBwYXNz
-IHRoZSBmdWxsIGNvbmZpZyBvYmplY3QgZG93biBpbnRvCiAgICBsaWJ4bF9fYXJjaF9kb21haW5f
-e3ByZXBhcmUsc2F2ZX1fY29uZmlnKCksIGFzIHRoZXJlIGFyZSBpbiBwcmFjdGljZSBhcmNoCiAg
-ICBzcGVjaWZpYyBzZXR0aW5ncyBpbiB0aGUgY29tbW9uIHBhcnQgb2YgdGhlIHN0cnVjdHVyZSAo
-ZmxhZ3MgczNfaW50ZWdyaXR5IGFuZAogICAgb29zX29mZiBzcGVjaWZpY2FsbHkpLgogICAgCiAg
-ICBObyBwcmFjdGljYWwgY2hhbmdlIGluIGJlaGF2aW91ci4KICAgIAogICAgU2lnbmVkLW9mZi1i
-eTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5
-OiBDaHJpc3RpYW4gTGluZGlnIDxjaHJpc3RpYW4ubGluZGlnQGNpdHJpeC5jb20+CiAgICBSZXZp
-ZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CiAgICBBY2tl
-ZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCmNvbW1pdCBhY2MyYTA2Yzc4MGU5
-ZTdmZmE2MzczODU0NzM1NTAzYjdkNjNhMWQwCkF1dGhvcjogQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KRGF0ZTogICBNb24gTWFyIDEyIDEwOjQwOjMzIDIwMTggKzAw
-MDAKCiAgICB0b29scy9vY2FtbDogUGFzcyBhIGZ1bGwgZG9tY3RsX2NyZWF0ZV9jb25maWcgaW50
-byBzdHViX3hjX2RvbWFpbl9jcmVhdGUoKQogICAgCiAgICBUaGUgdW5kZXJseWluZyBDIGZ1bmN0
-aW9uIGlzIGFib3V0IHRvIG1ha2UgdGhlIHNhbWUgY2hhbmdlLCBhbmQgdGhlIHN0cnVjdHVyZQog
-ICAgaXMgZ29pbmcgdG8gZ2FpbiBleHRyYSBmaWVsZHMuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6
-IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgICBBY2tlZC1ieTog
-Q2hyaXN0aWFuIExpbmRpZyA8Y2hyaXN0aWFuLmxpbmRpZ0BjaXRyaXguY29tPgoocWVtdSBjaGFu
-Z2VzIG5vdCBpbmNsdWRlZCkKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+--===============7346469776678963889==
+Content-Type: multipart/alternative; boundary="0000000000003854630573879b82"
+
+--0000000000003854630573879b82
+Content-Type: text/plain; charset="UTF-8"
+
+On Wed, Aug 15, 2018 at 11:17 PM, Juergen Gross <jgross@suse.com> wrote:
+
+> In the Xen x86 community call we have been discussing whether anyone
+> really is depending on 32-bit PV guests. We'd like to evaluate whether
+> anyone would see problems with:
+>
+> - deprecating 32-bit PV guest support in Xen, meaning that we'd
+>   eventually switch to support 32-bit PV guests only via PV-shim from
+>   Xen 4.12 or 4.13
+>
+> - dropping 32-bit PV support from upstream Linux kernel, resulting in
+>   current 32-bit PV guests no longer being able to upgrade to the newest
+>   kernel version any longer
+>
+> And related to that:
+>
+> - is there any Linux distribution still shipping 32-bit PV-capable
+>   systems?
+>
+> - what about BSD? Is 32-bit PV support important there?
+>
+
+
+Juergen - just to be very clear about the scope here:
+* would this proposal affect the ability to use a 32-bit dom0?
+* is this proposal to affect x86 only or also for ARM?
+
+Christopher
+
+--0000000000003854630573879b82
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_extra"><div class=3D"gmail_quote">=
+On Wed, Aug 15, 2018 at 11:17 PM, Juergen Gross <span dir=3D"ltr">&lt;<a hr=
+ef=3D"mailto:jgross@suse.com" target=3D"_blank">jgross@suse.com</a>&gt;</sp=
+an> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;=
+border-left:1px #ccc solid;padding-left:1ex">In the Xen x86 community call =
+we have been discussing whether anyone<br>
+really is depending on 32-bit PV guests. We&#39;d like to evaluate whether<=
+br>
+anyone would see problems with:<br>
+<br>
+- deprecating 32-bit PV guest support in Xen, meaning that we&#39;d<br>
+=C2=A0 eventually switch to support 32-bit PV guests only via PV-shim from<=
+br>
+=C2=A0 Xen 4.12 or 4.13<br>
+<br>
+- dropping 32-bit PV support from upstream Linux kernel, resulting in<br>
+=C2=A0 current 32-bit PV guests no longer being able to upgrade to the newe=
+st<br>
+=C2=A0 kernel version any longer<br>
+<br>
+And related to that:<br>
+<br>
+- is there any Linux distribution still shipping 32-bit PV-capable<br>
+=C2=A0 systems?<br>
+<br>
+- what about BSD? Is 32-bit PV support important there?<br></blockquote><di=
+v><br></div><div><br></div><div>Juergen - just to be very clear about the s=
+cope here:</div><div>* would this proposal affect the ability to use a 32-b=
+it dom0?<br></div><div>* is this proposal to affect x86 only or also for AR=
+M?<br></div><br></div><div class=3D"gmail_quote">Christopher</div><div clas=
+s=3D"gmail_quote"><br></div></div></div>
+
+--0000000000003854630573879b82--
+
+
+--===============7346469776678963889==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7346469776678963889==--
