@@ -1,14 +1,16 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v3 25/25] xen/arm: split domain_build.c
-Date: Wed, 15 Aug 2018 17:25:32 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1808151644360.15066@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1807311623060.5781@sstabellini-ThinkPad-X260>
- <1533079688-9541-25-git-send-email-sstabellini@kernel.org>
- <a5331c07-7f2a-dfee-6c7d-a3b3e6e21eb2@arm.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 125932: regressions - FAIL
+Date: Thu, 16 Aug 2018 00:44:39 +0000
+Message-ID: <osstest-125932-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-778993463-1534379133=:15066"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <a5331c07-7f2a-dfee-6c7d-a3b3e6e21eb2@arm.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=xtga=k7=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fq6P4-00064F-AQ
+ for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 00:44:42 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,162 +19,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-778993463-1534379133=:15066
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Mon, 13 Aug 2018, Julien Grall wrote:
-> Hi,
-> 
-> On 01/08/18 00:28, Stefano Stabellini wrote:
-> > domain_build.c is too large.
-> > 
-> > Move all the ACPI specific device tree generating functions from
-> > domain_build.c to acpi/acpi_dt_build.c.
-> 
-> The directory is called "acpi" so there is no point to duplicate in the
-> filename.
-> 
-> Also, looking at the code moved, the name does not seem to be correct. Indeed
-> you also generate ACPI tables. A better name for this file would be
-> domain_build.c
-
-OK
-
-
-> > 
-> > Signed-off-by: Stefano Stabellini <stefanos@xilinx.com>
-> > ---
-> >   xen/arch/arm/acpi/Makefile        |   1 +
-> >   xen/arch/arm/acpi/acpi_dt_build.c | 591
-> > ++++++++++++++++++++++++++++++++++++++
-> >   xen/arch/arm/acpi/acpi_dt_build.h |  32 +++
-> >   xen/arch/arm/domain_build.c       | 585
-> > +------------------------------------
-> >   4 files changed, 629 insertions(+), 580 deletions(-)
-> >   create mode 100644 xen/arch/arm/acpi/acpi_dt_build.c
-> >   create mode 100644 xen/arch/arm/acpi/acpi_dt_build.h
-> > 
-> > diff --git a/xen/arch/arm/acpi/Makefile b/xen/arch/arm/acpi/Makefile
-> > index 23963f8..ac0804b 100644
-> > --- a/xen/arch/arm/acpi/Makefile
-> > +++ b/xen/arch/arm/acpi/Makefile
-> > @@ -1,2 +1,3 @@
-> >   obj-y += lib.o
-> > +obj-y += acpi_dt_build.o
-> >   obj-y += boot.init.o
-> > diff --git a/xen/arch/arm/acpi/acpi_dt_build.c
-> > b/xen/arch/arm/acpi/acpi_dt_build.c
-> > new file mode 100644
-> > index 0000000..7e12d64
-> > --- /dev/null
-> > +++ b/xen/arch/arm/acpi/acpi_dt_build.c
-> > @@ -0,0 +1,591 @@
-> 
-> Missing copyright headers here.
-
-OK
-
-
-> > +#include <xen/mm.h>
-> > +#include <xen/sched.h>
-> > +#include <xen/acpi.h>
-> > +#include <xen/event.h>
-> > +#include <xen/iocap.h>
-> > +#include <xen/device_tree.h>
-> > +#include <xen/libfdt/libfdt.h>
-> > +#include <xen/irq.h>
-> > +#include <asm/irq.h>
-> 
-> Do we really need xen/irq.h and asm/irq.h?
-
-No, I'll remove
-
-
-> > +#include <acpi/actables.h>
-> > +#include "acpi_dt_build.h"
-> > +#include "../kernel.h"
-> 
-> Urgh, that's a call to move kernel.h in asm-arm/.
-
-OK
-
-
-> > diff --git a/xen/arch/arm/acpi/acpi_dt_build.h
-> > b/xen/arch/arm/acpi/acpi_dt_build.h
-> > new file mode 100644
-> > index 0000000..08e7aab
-> > --- /dev/null
-> > +++ b/xen/arch/arm/acpi/acpi_dt_build.h
-> > @@ -0,0 +1,32 @@
-> > +#ifndef __ARCH_ARM_ACPI_ACPI_DT_BUILD_H__
-> > +#define __ARCH_ARM_ACPI_ACPI_DT_BUILD_H__
-> > +
-> > +#include <xen/sched.h>
-> > +#include "../kernel.h"
-> 
-> See above.
-
-OK
-
-
-> > +
-> > +int map_irq_to_domain(struct domain *d, unsigned int irq,
-> > +                      bool need_mapping, const char *devname);
-> > +int make_chosen_node(const struct kernel_info *kinfo);
-> > +void evtchn_allocate(struct domain *d);
-> 
-> Those one should be moved in an header domain_build.h in asm-arm.
-
-OK
-
-
-> > +
-> > +#ifndef CONFIG_ACPI
-> > +static inline int prepare_acpi(struct domain *d, struct kernel_info *kinfo)
-> > +{
-> > +    /* Only booting with ACPI will hit here */
-> > +    BUG();
-> > +    return -EINVAL;
-> > +}
-> > +#else
-> > +int prepare_acpi(struct domain *d, struct kernel_info *kinfo);
-> > +#endif
-> 
-> This one should go in asm-arm/acpi.h.
-> 
-> So this header is not necessary anymore.
-
-I was unable to add prepare_acpi to asm-arm/acpi.h because it causes a
-#include dependency hell, I am thinking of adding it to asm-arm/domain_build.h.
-
-In file included from /local/repos/xen-upstream/xen/include/xen/sched.h:11:0,
-                 from /local/repos/xen-upstream/xen/include/asm/domain.h:5,
-                 from /local/repos/xen-upstream/xen/include/asm/kernel.h:10,
-                 from /local/repos/xen-upstream/xen/include/asm/acpi.h:27,
-                 from /local/repos/xen-upstream/xen/include/acpi/platform/aclinux.h:58,
-                 from /local/repos/xen-upstream/xen/include/acpi/platform/acenv.h:142,
-                 from /local/repos/xen-upstream/xen/include/acpi/acpi.h:56,
-                 from /local/repos/xen-upstream/xen/include/xen/acpi.h:33,
-                 from pl011.c:307:
-/local/repos/xen-upstream/xen/include/xen/domain.h:59:31: error: ‘struct xen_domctl_createdomain’ declared inside parameter list will not be visible outside of this definition or declaration [-Werror]
-                        struct xen_domctl_createdomain *config);
-
---8323329-778993463-1534379133=:15066
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-778993463-1534379133=:15066--
+ZmxpZ2h0IDEyNTkzMiB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNTkzMi8KClJlZ3Jlc3Npb25z
+IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
+ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYXJtaGYgICAgICAgICAg
+ICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI1OTIz
+CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVz
+dC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAg
+IGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1
+cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCgp2ZXJzaW9uIHRhcmdldGVkIGZv
+ciB0ZXN0aW5nOgogeGVuICAgICAgICAgICAgICAgICAgNGNkYjZiZmRlMjMwMGM3NTcyNWIzZTI2
+NzQ2OWJkNmM5ZWVlZTU1ZQpiYXNlbGluZSB2ZXJzaW9uOgogeGVuICAgICAgICAgICAgICAgICAg
+M2RkNDU0YzZjNjk0NDA5YWFlZGQ0ZWQwNzVkNmFlYWNlMmRkODM5MQoKTGFzdCB0ZXN0IG9mIGJh
+c2lzICAgMTI1OTIzICAyMDE4LTA4LTE1IDE2OjAwOjQxIFogICAgMCBkYXlzClRlc3Rpbmcgc2Ft
+ZSBzaW5jZSAgIDEyNTkyOCAgMjAxOC0wOC0xNSAxOTowMDo0OSBaICAgIDAgZGF5cyAgICAzIGF0
+dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFu
+ZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgQ2hyaXN0aWFuIExpbmRp
+ZyA8Y2hyaXN0aWFuLmxpbmRpZ0BjaXRyaXguY29tPgogIERhbmllbCBEZSBHcmFhZiA8ZGdkZWdy
+YUB0eWNoby5uc2EuZ292PgogIEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CiAg
+V2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NCAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
+LWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBm
+YWlsICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
+cWVtdXUtZGViaWFuaHZtLWkzODYgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
+bWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9q
+ZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoK
+TG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dz
+LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhl
+c2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94
+ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFp
+bDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3Qu
+Z2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBm
+b3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDth
+PXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgNGNkYjZiZmRlMjMwMGM3NTcyNWIz
+ZTI2NzQ2OWJkNmM5ZWVlZTU1ZQpBdXRob3I6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIz
+QGNpdHJpeC5jb20+CkRhdGU6ICAgRnJpIE1hciAxNiAxODoyNzoyNCAyMDE4ICswMDAwCgogICAg
+eGVuL2V2dGNobjogUGFzcyBtYXhfZXZ0Y2huX3BvcnQgaW50byBldnRjaG5faW5pdCgpCiAgICAK
+ICAgIC4uLiByYXRoZXIgdGhhbiBzZXR0aW5nIGl0IHVwIG9uY2UgZG9tYWluX2NyZWF0ZSgpIGhh
+cyBjb21wbGV0ZWQuICBUaGlzCiAgICBpbnZvbHZlcyBjb25zdHJ1Y3RpbmcgYSBkZWZhdWx0IHZh
+bHVlIGZvciBkb20wLgogICAgCiAgICBObyBwcmFjdGljYWwgY2hhbmdlIGluIGZ1bmN0aW9uYWxp
+dHkuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIz
+QGNpdHJpeC5jb20+CiAgICBSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1
+QGNpdHJpeC5jb20+CiAgICBSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2Uu
+Y29tPgogICAgQWNrZWQtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cgpj
+b21taXQgNGE4MzQ5NzYzNTA1NmQzM2ZlMjBlZjcwNWYzNTYxN2IxMDAzYTI3NgpBdXRob3I6IEFu
+ZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgVHVlIEZlYiAy
+NyAxNzozOTozNyAyMDE4ICswMDAwCgogICAgeGVuL2RvbWN0bDogTWVyZ2Ugc2V0X21heF9ldnRj
+aG4gaW50byBjcmVhdGVkb21haW4KICAgIAogICAgc2V0X21heF9ldnRjaG4gaXMgc29tZXdoYXQg
+d2VpcmQuICBJdCB3YXMgaW50cm9kdWNlZCB3aXRoIHRoZSBldmVudF9maWZvIHdvcmssCiAgICBi
+dXQgaGFzIG5ldmVyIGJlZW4gdXNlZC4gIFN0aWxsLCBpdCBpcyBhIGJvdW5kaW5nIG9uIHJlc291
+cmNlcyBjb25zdW1lZCBieSB0aGUKICAgIGV2ZW50IGNoYW5uZWwgaW5mcmFzdHJ1Y3R1cmUsIGFu
+ZCBzaG91bGQgYmUgcGFydCBvZiBjcmVhdGVkb21haW4sIHJhdGhlciB0aGFuCiAgICBlZGl0YWJs
+ZSBhZnRlciB0aGUgZmFjdC4KICAgIAogICAgRHJvcCBYRU5fRE9NQ1RMX3NldF9tYXhfZXZ0Y2hu
+IGNvbXBsZXRlbHkgKGluY2x1ZGluZyBYU00gaG9va3MgYW5kIGxpYnhjCiAgICB3cmFwcGVycyks
+IGFuZCByZXRhaW4gdGhlIGZ1bmN0aW9uYWxpdHkgaW4gWEVOX0RPTUNUTF9jcmVhdGVkb21haW4u
+CiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNp
+dHJpeC5jb20+CiAgICBBY2tlZC1ieTogRGFuaWVsIERlIEdyYWFmIDxkZ2RlZ3JhQHR5Y2hvLm5z
+YS5nb3Y+CiAgICBBY2tlZC1ieTogQ2hyaXN0aWFuIExpbmRpZyA8Y2hyaXN0aWFuLmxpbmRpZ0Bj
+aXRyaXguY29tPgogICAgQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CiAg
+ICBSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cgpj
+b21taXQgNTRlZDI1MWRjN2I4NTU2NTgyMDAxOTEwMmU1MzNhZmNlYTgxNGUxNgpBdXRob3I6IEFu
+ZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgRnJpIE1hciA5
+IDE0OjM4OjM1IDIwMTggKzAwMDAKCiAgICB0b29sczogUmV3b3JrIHhjX2RvbWFpbl9jcmVhdGUo
+KSB0byB0YWtlIGEgZnVsbCB4ZW5fZG9tY3RsX2NyZWF0ZWRvbWFpbgogICAgCiAgICBJbiBmdXR1
+cmUgcGF0Y2hlcywgdGhlIHN0cnVjdHVyZSB3aWxsIGJlIGV4dGVuZGVkIHdpdGggZnVydGhlciBp
+bmZvcm1hdGlvbiwKICAgIGFuZCB0aGlzIGlzIGZhciBjbGVhbmVyIHRoYW4gYWRkaW5nIGV4dHJh
+IHBhcmFtZXRlcnMuCiAgICAKICAgIFRoZSBweXRob24gc3R1YnMgYXJlIHRoZSBvbmx5IHVzZXIg
+d2hpY2ggcGFzc2VzIE5VTEwgZm9yIHRoZSBleGlzdGluZyBjb25maWcKICAgIG9wdGlvbiAod2hp
+Y2ggaXMgYWN0dWFsbHkgdGhlIGFyY2ggc3Vic3RydWN0dXJlKS4gIFRoZXJlZm9yZSwgdGhlICNp
+ZmRlZmFyeQogICAgbW92ZXMgdG8gY29tcGVuc2F0ZS4KICAgIAogICAgRm9yIGxpYnhsLCBwYXNz
+IHRoZSBmdWxsIGNvbmZpZyBvYmplY3QgZG93biBpbnRvCiAgICBsaWJ4bF9fYXJjaF9kb21haW5f
+e3ByZXBhcmUsc2F2ZX1fY29uZmlnKCksIGFzIHRoZXJlIGFyZSBpbiBwcmFjdGljZSBhcmNoCiAg
+ICBzcGVjaWZpYyBzZXR0aW5ncyBpbiB0aGUgY29tbW9uIHBhcnQgb2YgdGhlIHN0cnVjdHVyZSAo
+ZmxhZ3MgczNfaW50ZWdyaXR5IGFuZAogICAgb29zX29mZiBzcGVjaWZpY2FsbHkpLgogICAgCiAg
+ICBObyBwcmFjdGljYWwgY2hhbmdlIGluIGJlaGF2aW91ci4KICAgIAogICAgU2lnbmVkLW9mZi1i
+eTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5
+OiBDaHJpc3RpYW4gTGluZGlnIDxjaHJpc3RpYW4ubGluZGlnQGNpdHJpeC5jb20+CiAgICBSZXZp
+ZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CiAgICBBY2tl
+ZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCmNvbW1pdCBhY2MyYTA2Yzc4MGU5
+ZTdmZmE2MzczODU0NzM1NTAzYjdkNjNhMWQwCkF1dGhvcjogQW5kcmV3IENvb3BlciA8YW5kcmV3
+LmNvb3BlcjNAY2l0cml4LmNvbT4KRGF0ZTogICBNb24gTWFyIDEyIDEwOjQwOjMzIDIwMTggKzAw
+MDAKCiAgICB0b29scy9vY2FtbDogUGFzcyBhIGZ1bGwgZG9tY3RsX2NyZWF0ZV9jb25maWcgaW50
+byBzdHViX3hjX2RvbWFpbl9jcmVhdGUoKQogICAgCiAgICBUaGUgdW5kZXJseWluZyBDIGZ1bmN0
+aW9uIGlzIGFib3V0IHRvIG1ha2UgdGhlIHNhbWUgY2hhbmdlLCBhbmQgdGhlIHN0cnVjdHVyZQog
+ICAgaXMgZ29pbmcgdG8gZ2FpbiBleHRyYSBmaWVsZHMuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6
+IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgICBBY2tlZC1ieTog
+Q2hyaXN0aWFuIExpbmRpZyA8Y2hyaXN0aWFuLmxpbmRpZ0BjaXRyaXguY29tPgoocWVtdSBjaGFu
+Z2VzIG5vdCBpbmNsdWRlZCkKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
