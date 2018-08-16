@@ -1,19 +1,19 @@
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: [PATCH 4.17 05/21] xen/pv: Call get_cpu_address_sizes
+Subject: [PATCH 4.18 06/22] xen/pv: Call get_cpu_address_sizes
  to set x86_virt/phys_bits
-Date: Thu, 16 Aug 2018 20:45:15 +0200
-Message-ID: <20180816171612.582193090__27141.1192989492$1534445185$gmane$org@linuxfoundation.org>
-References: <20180816171612.136242278@linuxfoundation.org>
+Date: Thu, 16 Aug 2018 20:45:22 +0200
+Message-ID: <20180816171556.744027410__18320.6125665039$1534445262$gmane$org@linuxfoundation.org>
+References: <20180816171556.502583508@linuxfoundation.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=i45+=k7=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1fqNJ4-0002X1-7Y
- for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 18:47:38 +0000
-In-Reply-To: <20180816171612.136242278@linuxfoundation.org>
+ id 1fqNKH-0002cn-DD
+ for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 18:48:53 +0000
+In-Reply-To: <20180816171556.502583508@linuxfoundation.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,7 +26,7 @@ To: linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, x86@kernel.org, "M. Vefa Bicakci" <m.v.b@runbox.com>, stable@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, Andy Lutomirski <luto@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-NC4xNy1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
+NC4xOC1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
 cGxlYXNlIGxldCBtZSBrbm93LgoKLS0tLS0tLS0tLS0tLS0tLS0tCgpGcm9tOiBNLiBWZWZhIEJp
 Y2FrY2kgPG0udi5iQHJ1bmJveC5jb20+Cgpjb21taXQgNDA1YzAxOGEyNWZlNDY0ZGM2ODA1N2Ji
 YzgwMTRhNThmMmJkNDQyMiB1cHN0cmVhbS4KCkNvbW1pdCBkOTRhMTU1YzU5YzkgKCJ4ODYvY3B1
@@ -65,7 +65,7 @@ cmNoL3g4Ni9rZXJuZWwvY3B1L2NvbW1vbi5jIHwgICAgMiArLQogYXJjaC94ODYva2VybmVsL2Nw
 dS9jcHUuaCAgICB8ICAgIDEgKwogYXJjaC94ODYveGVuL2VubGlnaHRlbl9wdi5jICB8ICAgIDMg
 KysrCiAzIGZpbGVzIGNoYW5nZWQsIDUgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQoKLS0t
 IGEvYXJjaC94ODYva2VybmVsL2NwdS9jb21tb24uYworKysgYi9hcmNoL3g4Ni9rZXJuZWwvY3B1
-L2NvbW1vbi5jCkBAIC04ODMsNyArODgzLDcgQEAgdm9pZCBnZXRfY3B1X2NhcChzdHJ1Y3QgY3B1
+L2NvbW1vbi5jCkBAIC05MDUsNyArOTA1LDcgQEAgdm9pZCBnZXRfY3B1X2NhcChzdHJ1Y3QgY3B1
 aW5mb194ODYgKmMpCiAJYXBwbHlfZm9yY2VkX2NhcHMoYyk7CiB9CiAKLXN0YXRpYyB2b2lkIGdl
 dF9jcHVfYWRkcmVzc19zaXplcyhzdHJ1Y3QgY3B1aW5mb194ODYgKmMpCit2b2lkIGdldF9jcHVf
 YWRkcmVzc19zaXplcyhzdHJ1Y3QgY3B1aW5mb194ODYgKmMpCiB7CiAJdTMyIGVheCwgZWJ4LCBl
@@ -75,15 +75,15 @@ cHVfZGV2ICpjb25zdCBfX3g4NgogCQkJICAgICpjb25zdCBfX3g4Nl9jcHVfZGV2X2VuZFtdOwog
 CiBleHRlcm4gdm9pZCBnZXRfY3B1X2NhcChzdHJ1Y3QgY3B1aW5mb194ODYgKmMpOworZXh0ZXJu
 IHZvaWQgZ2V0X2NwdV9hZGRyZXNzX3NpemVzKHN0cnVjdCBjcHVpbmZvX3g4NiAqYyk7CiBleHRl
 cm4gdm9pZCBjcHVfZGV0ZWN0X2NhY2hlX3NpemVzKHN0cnVjdCBjcHVpbmZvX3g4NiAqYyk7CiBl
-eHRlcm4gaW50IGRldGVjdF9leHRlbmRlZF90b3BvbG9neV9lYXJseShzdHJ1Y3QgY3B1aW5mb194
-ODYgKmMpOwogZXh0ZXJuIGludCBkZXRlY3RfaHRfZWFybHkoc3RydWN0IGNwdWluZm9feDg2ICpj
-KTsKLS0tIGEvYXJjaC94ODYveGVuL2VubGlnaHRlbl9wdi5jCisrKyBiL2FyY2gveDg2L3hlbi9l
-bmxpZ2h0ZW5fcHYuYwpAQCAtMTI1OCw2ICsxMjU4LDkgQEAgYXNtbGlua2FnZSBfX3Zpc2libGUg
-dm9pZCBfX2luaXQgeGVuX3N0YQogCWdldF9jcHVfY2FwKCZib290X2NwdV9kYXRhKTsKIAl4ODZf
-Y29uZmlndXJlX254KCk7CiAKKwkvKiBEZXRlcm1pbmUgdmlydHVhbCBhbmQgcGh5c2ljYWwgYWRk
-cmVzcyBzaXplcyAqLworCWdldF9jcHVfYWRkcmVzc19zaXplcygmYm9vdF9jcHVfZGF0YSk7CisK
-IAkvKiBMZXQncyBwcmVzdW1lIFBWIGd1ZXN0cyBhbHdheXMgYm9vdCBvbiB2Q1BVIHdpdGggaWQg
-MC4gKi8KIAlwZXJfY3B1KHhlbl92Y3B1X2lkLCAwKSA9IDA7CiAKCgoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+eHRlcm4gdm9pZCBpbml0X3NjYXR0ZXJlZF9jcHVpZF9mZWF0dXJlcyhzdHJ1Y3QgY3B1aW5mb194
+ODYgKmMpOwogZXh0ZXJuIHUzMiBnZXRfc2NhdHRlcmVkX2NwdWlkX2xlYWYodW5zaWduZWQgaW50
+IGxldmVsLAotLS0gYS9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMKKysrIGIvYXJjaC94ODYv
+eGVuL2VubGlnaHRlbl9wdi5jCkBAIC0xMjU5LDYgKzEyNTksOSBAQCBhc21saW5rYWdlIF9fdmlz
+aWJsZSB2b2lkIF9faW5pdCB4ZW5fc3RhCiAJZ2V0X2NwdV9jYXAoJmJvb3RfY3B1X2RhdGEpOwog
+CXg4Nl9jb25maWd1cmVfbngoKTsKIAorCS8qIERldGVybWluZSB2aXJ0dWFsIGFuZCBwaHlzaWNh
+bCBhZGRyZXNzIHNpemVzICovCisJZ2V0X2NwdV9hZGRyZXNzX3NpemVzKCZib290X2NwdV9kYXRh
+KTsKKwogCS8qIExldCdzIHByZXN1bWUgUFYgZ3Vlc3RzIGFsd2F5cyBib290IG9uIHZDUFUgd2l0
+aCBpZCAwLiAqLwogCXBlcl9jcHUoeGVuX3ZjcHVfaWQsIDApID0gMDsKIAoKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
