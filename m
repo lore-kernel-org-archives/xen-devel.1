@@ -1,21 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 2/2] x86/hvm/emulate: make sure rep I/O
- emulation does not cross GFN boundaries
-Date: Thu, 16 Aug 2018 01:33:41 -0600
-Message-ID: <5B7528D502000078001DEB8A@prv1-mh.provo.novell.com>
-References: <20180810144803.12652-1-paul.durrant@citrix.com>
- <20180810144803.12652-3-paul.durrant@citrix.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] libxl: fix ARM build after 54ed251dc7
+Date: Thu, 16 Aug 2018 08:41:55 +0100
+Message-ID: <9297c93c-5fcc-a817-578d-71ec0bdb49bb@citrix.com>
+References: <5B751E7902000078001DEB43@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=x9l4=k7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fqCmv-00044S-9e
- for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 07:33:45 +0000
-In-Reply-To: <20180810144803.12652-3-paul.durrant@citrix.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=rytq=k7=citrix.com=prvs=759b2abc3=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1fqCut-0004tI-6r
+ for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 07:41:59 +0000
+In-Reply-To: <5B751E7902000078001DEB43@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,37 +22,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEwLjA4LjE4IGF0IDE2OjQ4LCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jCj4gKysrIGIveGVuL2FyY2gveDg2
-L2h2bS9lbXVsYXRlLmMKPiBAQCAtMTg0LDYgKzE4NCwyNSBAQCBzdGF0aWMgaW50IGh2bWVtdWxf
-ZG9faW8oCj4gICAgICAgICAgaHZtdHJhY2VfaW9fYXNzaXN0KCZwKTsKPiAgICAgIH0KPiAgCj4g
-KyAgICAvKgo+ICsgICAgICogTWFrZSBzdXJlIHRoYXQgd2UgdHJ1bmNhdGUgcmVwIE1NSU8gYXQg
-YW55IEdGTiBib3VuZGFyeS4gVGhpcyBpcwo+ICsgICAgICogbmVjZXNzYXJ5IHRvIGVuc3VyZSB0
-aGF0IHRoZSBjb3JyZWN0IGRldmljZSBtb2RlbCBpcyB0YXJnZXR0ZWQKPiArICAgICAqIG9yIHRo
-YXQgd2UgY29ycmVjdGx5IGhhbmRsZSBhIHJlcCBvcCBzcGFubmluZyBNTUlPIGFuZCBSQU0uCj4g
-KyAgICAgKi8KPiArICAgIGlmICggdW5saWtlbHkocC5jb3VudCA+IDEpICYmIHAudHlwZSA9PSBJ
-T1JFUV9UWVBFX0NPUFkgKQo+ICsgICAgewo+ICsgICAgICAgIHVuc2lnbmVkIGxvbmcgb2ZmID0g
-cC5hZGRyICYgflBBR0VfTUFTSzsKPiArCj4gKyAgICAgICAgaWYgKCBQQUdFX1NJWkUgLSBvZmYg
-PCBwLnNpemUgKSAvKiBzaW5nbGUgcmVwIHNwYW5zIEdGTiAqLwo+ICsgICAgICAgICAgICBwLmNv
-dW50ID0gMTsKPiArICAgICAgICBlbHNlCj4gKyAgICAgICAgICAgIHAuY291bnQgPSBtaW5fdCh1
-bnNpZ25lZCBsb25nLAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgcC5jb3VudCwKPiAr
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICgocC5kZiA/IChvZmYgKyBwLnNpemUpIDogKFBB
-R0VfU0laRSAtIG9mZikpIC8KPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwLnNpemUp
-KTsKPiArICAgIH0KPiArICAgIEFTU0VSVChwLmNvdW50KTsKCkkndmUgYXBwbGllZCB0aGUgcGF0
-Y2ggd2l0aCB0aGUgZWFybGllciBzdWdnZXN0ZWQgY2hhbmdlcywgYnV0IEkgd29uZGVyCmlmIHRo
-ZSBwbGFjZW1lbnQgZXNwZWNpYWxseSB3cnQgdGhlIHZpc2libGUgaW4gY29udGV4dCBodm10cmFj
-ZV9pb19hc3Npc3QoKQppc24ndCBzdWItb3B0aW1hbC4KCkNvbnNpZGVyaW5nIHRoZSBvdGhlciBz
-cGxpdHRpbmcgZG9uZSBlbHNld2hlcmUgSSBhbHNvIHdvbmRlciB3aGV0aGVyCnNvbWUgb2YgdGhh
-dCBjYW4ndCB0aGVuIGdvIGF3YXksIG9yIHdoZXRoZXIgdGhlIHNwZWNpZmljIGNvZGUgcGF0aAp3
-aGVyZSB5b3UndmUgZm91bmQgdGhlIHNwbGl0dGluZyB0byBiZSBtaXNzaW5nIHdvdWxkbid0IGJl
-dHRlciBiZSBmaXhlZAppbnN0ZWFkLiBJdCBjZXJ0YWlubHkgZmVlbHMgd3JvbmcgZm9yIHNwbGl0
-dGluZyB0byBoYXBwZW4gaW4gbXVsdGlwbGUKcGxhY2VzIGZvciAoSSB0aGluaykgYSBzaW5nbGUg
-cmVxdWVzdC4KCkknbGwgZGVmZXIgdGhlIGRlY2lzaW9uIHdoZXRoZXIgdG8gYmFja3BvcnQgdGhp
-cyB1bnRpbCB3ZSd2ZSBzZXR0bGVkIGJvdGgKb2YgdGhlIGFib3ZlLgoKSmFuCgoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTYvMDgvMjAxOCAwNzo0OSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gQ29tbWl0ICJ0b29sczog
+UmV3b3JrIHhjX2RvbWFpbl9jcmVhdGUoKSB0byB0YWtlIGEgZnVsbAo+IHhlbl9kb21jdGxfY3Jl
+YXRlZG9tYWluIiAgZmFpbGVkIHRvIHJlcGxhY2Ugb25lIGZ1cnRoZXIgaW5zdGFuY2Ugb2YKPiB4
+Y19jb25maWcgaW4gbGlieGxfX2FyY2hfZG9tYWluX3NhdmVfY29uZmlnKCkuCj4KPiBTaWduZWQt
+b2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4gLS0tCj4gSSBoYXZlIG5v
+IGVudmlyb25tZW50IHNldCB1cCB0byBkbyBjcm9zcyB0b29sIHN0YWNrIGJ1aWxkcywgc28gdGhl
+IHBhdGNoCj4gaXMgc29sZWx5IGJhc2VkIG9uIG9zc3Rlc3QgcmVwb3J0IGFuZCBjb2RlIGluc3Bl
+Y3Rpb24uCgpOb3IgZG8gSSBzYWRseSwgYW5kIHdlIGRvbid0IHlldCBoYXZlIHRoaXMgd29ya2lu
+ZyBpbiBUcmF2aXMvZ2l0bGFiCndoaWNoIGlzIHRoYXQgdGVzdGluZyBtaXNzZWQgaXQuCgpBY2tl
+ZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCj4KPiAtLS0g
+YS90b29scy9saWJ4bC9saWJ4bF9hcm0uYwo+ICsrKyBiL3Rvb2xzL2xpYnhsL2xpYnhsX2FybS5j
+Cj4gQEAgLTEyNSw3ICsxMjUsNyBAQCBpbnQgbGlieGxfX2FyY2hfZG9tYWluX3NhdmVfY29uZmln
+KGxpYnhsX19nYyAqZ2MsCj4gICAgICAgICAgcmV0dXJuIEVSUk9SX0ZBSUw7Cj4gICAgICB9Cj4g
+IAo+IC0gICAgc3RhdGUtPmNsb2NrX2ZyZXF1ZW5jeSA9IHhjX2NvbmZpZy0+Y2xvY2tfZnJlcXVl
+bmN5Owo+ICsgICAgc3RhdGUtPmNsb2NrX2ZyZXF1ZW5jeSA9IGNvbmZpZy0+YXJjaC5jbG9ja19m
+cmVxdWVuY3k7Cj4gIAo+ICAgICAgcmV0dXJuIDA7Cj4gIH0KPgo+CgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
