@@ -1,132 +1,91 @@
 From: Stephen Rothwell <sfr@canb.auug.org.au>
-Subject: Re: linux-next: manual merge of the akpm-current tree with the
- xen-tip tree
-Date: Thu, 16 Aug 2018 10:05:11 +1000
-Message-ID: <20180816100511.2377dda2@canb.auug.org.au>
-References: <20180730190210.48a75b72@canb.auug.org.au>
+Subject: Re: linux-next: build failure after merge of the xen-tip tree
+Date: Thu, 16 Aug 2018 10:09:13 +1000
+Message-ID: <20180816100913.0ffa0df5@canb.auug.org.au>
+References: <20180730151213.4b1e1af4@canb.auug.org.au>
 Mime-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- boundary="Sig_/Hgsa92rdqXObSy_yITGi8Ub"; protocol="application/pgp-signature"
+ boundary="Sig_/aBMld8MOi9ZBxBxSih09DoJ"; protocol="application/pgp-signature"
 Return-path: <linux-kernel-owner@vger.kernel.org>
-In-Reply-To: <20180730190210.48a75b72@canb.auug.org.au>
+In-Reply-To: <20180730151213.4b1e1af4@canb.auug.org.au>
 Sender: linux-kernel-owner@vger.kernel.org
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: Juergen Gross <jgross@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen Devel <Xen-devel@lists.xensource.com>, Linux-Next Mailing List <linux-next@vger.kernel.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Michal Hocko <mhocko@suse.com>
+To: Dave Airlie <airlied@linux.ie>, DRI <dri-devel@lists.freedesktop.org>
+Cc: Juergen Gross <jgross@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen Devel <Xen-devel@lists.xensource.com>, Linux-Next Mailing List <linux-next@vger.kernel.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
---Sig_/Hgsa92rdqXObSy_yITGi8Ub
+--Sig_/aBMld8MOi9ZBxBxSih09DoJ
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
 Hi all,
 
-On Mon, 30 Jul 2018 19:02:10 +1000 Stephen Rothwell <sfr@canb.auug.org.au> =
+On Mon, 30 Jul 2018 15:12:13 +1000 Stephen Rothwell <sfr@canb.auug.org.au> =
 wrote:
 >
-> Today's linux-next merge of the akpm-current tree got a conflict in:
+> After merging the xen-tip tree, today's linux-next build (x86_64
+> allmodconfig) failed like this:
 >=20
->   drivers/xen/gntdev.c
+> drivers/xen/gntdev-dmabuf.c:360:12: error: initialization from incompatib=
+le pointer type [-Werror=3Dincompatible-pointer-types]
+>   .attach =3D dmabuf_exp_ops_attach,
+>             ^~~~~~~~~~~~~~~~~~~~~
 >=20
-> between commit:
+> Caused by commit
 >=20
->   1d3145675538 ("xen/gntdev: Make private routines/structures accessible")
+>   a240d6e42e28 ("xen/gntdev: Implement dma-buf export functionality")
 >=20
-> from the xen-tip tree and commit:
+> interacting with commit
 >=20
->   aaefcabe9c25 ("mm, oom: distinguish blockable mode for mmu notifiers")
+>   a19741e5e5a9 ("dma_buf: remove device parameter from attach callback v2=
+")
 >=20
-> from the akpm-current tree.
+> from the drm tree.
 >=20
-> I fixed it up (see below) and can carry the fix as necessary. This
-> is now fixed as far as linux-next is concerned, but any non trivial
-> conflicts should be mentioned to your upstream maintainer when your tree
-> is submitted for merging.  You may also want to consider cooperating
-> with the maintainer of the conflicting tree to minimise any particularly
-> complex conflicts.
+> I have added the following merge fix patch:
 >=20
-> --=20
-> Cheers,
-> Stephen Rothwell
+> From: Stephen Rothwell <sfr@canb.auug.org.au>
+> Date: Mon, 30 Jul 2018 15:08:21 +1000
+> Subject: [PATCH] xen/gntdev: fix up for attach callback API change
 >=20
-> diff --cc drivers/xen/gntdev.c
-> index c866a62f766d,55b4f0e3f4d6..000000000000
-> --- a/drivers/xen/gntdev.c
-> +++ b/drivers/xen/gntdev.c
-> @@@ -479,7 -441,20 +479,20 @@@ static const struct vm_operations_struc
->  =20
->   /* ------------------------------------------------------------------ */
->  =20
->  -static bool in_range(struct grant_map *map,
-> ++static bool in_range(struct gntdev_grant_map *map,
-> + 			      unsigned long start, unsigned long end)
-> + {
-> + 	if (!map->vma)
-> + 		return false;
-> + 	if (map->vma->vm_start >=3D end)
-> + 		return false;
-> + 	if (map->vma->vm_end <=3D start)
-> + 		return false;
-> +=20
-> + 	return true;
-> + }
-> +=20
->  -static void unmap_if_in_range(struct grant_map *map,
->  +static void unmap_if_in_range(struct gntdev_grant_map *map,
->   			      unsigned long start, unsigned long end)
->   {
->   	unsigned long mstart, mend;
-> @@@ -503,15 -472,26 +510,26 @@@
->   	WARN_ON(err);
->   }
->  =20
-> - static void mn_invl_range_start(struct mmu_notifier *mn,
-> + static int mn_invl_range_start(struct mmu_notifier *mn,
->   				struct mm_struct *mm,
-> - 				unsigned long start, unsigned long end)
-> + 				unsigned long start, unsigned long end,
-> + 				bool blockable)
->   {
->   	struct gntdev_priv *priv =3D container_of(mn, struct gntdev_priv, mn);
->  -	struct grant_map *map;
->  +	struct gntdev_grant_map *map;
-> + 	int ret =3D 0;
-> +=20
-> + 	/* TODO do we really need a mutex here? */
-> + 	if (blockable)
-> + 		mutex_lock(&priv->lock);
-> + 	else if (!mutex_trylock(&priv->lock))
-> + 		return -EAGAIN;
->  =20
-> - 	mutex_lock(&priv->lock);
->   	list_for_each_entry(map, &priv->maps, next) {
-> + 		if (in_range(map, start, end)) {
-> + 			ret =3D -EAGAIN;
-> + 			goto out_unlock;
-> + 		}
->   		unmap_if_in_range(map, start, end);
->   	}
->   	list_for_each_entry(map, &priv->freeable_maps, next) {
+> Signed-off-by: Stephen Rothwell <sfr@canb.auug.org.au>
+> ---
+>  drivers/xen/gntdev-dmabuf.c | 1 -
+>  1 file changed, 1 deletion(-)
+>=20
+> diff --git a/drivers/xen/gntdev-dmabuf.c b/drivers/xen/gntdev-dmabuf.c
+> index faaa4d3970ea..744cfe9b0311 100644
+> --- a/drivers/xen/gntdev-dmabuf.c
+> +++ b/drivers/xen/gntdev-dmabuf.c
+> @@ -217,7 +217,6 @@ dmabuf_pages_to_sgt(struct page **pages, unsigned int=
+ nr_pages)
+>  }
+> =20
+>  static int dmabuf_exp_ops_attach(struct dma_buf *dma_buf,
+> -				 struct device *target_dev,
+>  				 struct dma_buf_attachment *attach)
+>  {
+>  	struct gntdev_dmabuf_attachment *gntdev_dmabuf_attach;
 
-This is now a conflict between Linus' tree and the akpm-current tree.
+This is now a conflict between Linus' tree and the drm tree.
 
 --=20
 Cheers,
 Stephen Rothwell
 
---Sig_/Hgsa92rdqXObSy_yITGi8Ub
+--Sig_/aBMld8MOi9ZBxBxSih09DoJ
 Content-Type: application/pgp-signature
 Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEENIC96giZ81tWdLgKAVBC80lX0GwFAlt0v7cACgkQAVBC80lX
-0GyT9Af9FHUkWlJA+c6mKp7D4Zcr12z3D0N2E1osk+wFOvnqG5GLz98lOetUCMQc
-ObTE3lkBmDYsDFscrrJCPNwin6bgddwsqoDCRTYzmEebk576k2LjFFMqXybWFoFe
-He8Mj7LE26U6ydU99CHuvhUUn8UmlaFjc32sEhMp0IqTdSV0RE880NlXhc5raUNs
-RuEEOK4S8IXSYr1aLAyTnUKT+aDsbZ0k949fAzQvOQR76jTu6+zjl02g9fWpnS/Y
-3tAM8YW7DjFIj5mj5OOkuc2PfSIB+sriR/qANJ9yjT+8yoPI7u6FzORsDnNvAyjb
-lZqStevQoY+M5qlDspeS6bfCfV5LDg==
-=OJCs
+iQEzBAEBCAAdFiEENIC96giZ81tWdLgKAVBC80lX0GwFAlt0wKkACgkQAVBC80lX
+0GwHrgf+O6FFsaNS9Ns/qqJwGQglbwJYGtok6HZHX+YpwBufT7zw0Kz566uGeYo2
+ye73+FV1lIhF2iKb4R0Cq9MZuUkn9CiezYeQcnqjyjdVIJigYqb/9nBxnDMEPBlC
+/4Np6/b6Dutrf5Lw8sW8R1+xakOw5xtdLHMwJM+gDoUEAhueAXlz24kRfpmk4XNw
+dvWHQfkFHM0CyzVYO6WKJ/dko3uW31VwVQAqIcmbD+O27f4UsIaEs8oAtupuMB6o
+AZD/tgsy26nzEuQnesQZ7tbNqx2B8Ziu8asekMQI9czIb4Ag0ZQKHPkDEhFS4xMY
+JZETbXOfxG4qLvK4ZrZLpLRFAeIArg==
+=jUg3
 -----END PGP SIGNATURE-----
 
---Sig_/Hgsa92rdqXObSy_yITGi8Ub--
+--Sig_/aBMld8MOi9ZBxBxSih09DoJ--
