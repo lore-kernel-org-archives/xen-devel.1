@@ -1,22 +1,17 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 15/15] xen/arm: traps: Move the
- implementation of GUEST_BUG_ON in traps.h
-Date: Thu, 16 Aug 2018 11:17:25 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1808161112430.16354@sstabellini-ThinkPad-X260>
-References: <20180716172712.20294-1-julien.grall@arm.com>
- <20180716172712.20294-16-julien.grall@arm.com>
- <alpine.DEB.2.10.1808141442070.15066@sstabellini-ThinkPad-X260>
- <1a6b5113-3ad5-50e2-1c0f-b9d532ec0b81@arm.com>
+Subject: Re: [PATCH v3 13/25] xen/arm: introduce create_domUs
+Date: Thu, 16 Aug 2018 11:20:02 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1808161119360.16354@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1807311623060.5781@sstabellini-ThinkPad-X260>
+ <1533079688-9541-13-git-send-email-sstabellini@kernel.org>
+ <ebf9dbfc-4d90-3a15-0ec1-12fb7a5e72ee@arm.com>
+ <alpine.DEB.2.10.1808151239270.15066@sstabellini-ThinkPad-X260>
+ <691e4662-6f0c-17d2-25e2-837db1773190@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=0lge=k7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fqMpt-00087d-ML
- for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 18:17:29 +0000
-In-Reply-To: <1a6b5113-3ad5-50e2-1c0f-b9d532ec0b81@arm.com>
+In-Reply-To: <691e4662-6f0c-17d2-25e2-837db1773190@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,26 +21,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien.grall@linaro.org>
+Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, andrew.cooper3@citrix.com, xen-devel@lists.xen.org, jbeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
 T24gVGh1LCAxNiBBdWcgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIFN0ZWZhbm8sCj4g
-Cj4gT24gMDgvMTQvMjAxOCAxMDo0MyBQTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4g
-T24gTW9uLCAxNiBKdWwgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+ID4gPiBHVUVTVF9CVUdf
-T04gbWF5IGJlIHVzZWQgaW4gb3RoZXIgZmlsZXMgZG9pbmcgZ3Vlc3QgZW11bGF0aW9uLgo+ID4g
-PiAKPiA+ID4gU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAbGluYXJv
-Lm9yZz4KPiA+IAo+ID4gR2l2ZW4gdGhhdCBHVUVTVF9CVUdfT04gaXMgbm90IGFjdHVhbGx5IHVz
-ZWQgaW4gYW55IG90aGVyIGZpbGVzIGluIHRoaXMKPiA+IHBhdGNoIHNlcmllcywgSSBhc3N1bWUg
-eW91IGFyZSByZWZlcnJpbmcgdG8gb25lIG9mIHlvdXIgZnV0dXJlIHNlcmllcz8KPiAKPiBJdCBp
-cyBnb2luZyB0byBiZSB1c2VkIGxhdGVyLiBIb3dldmVyLCBJIGRvbid0IHJlYWxseSByZWZlciB0
-byBhbnkgc2VyaWVzIGluCj4gcGFydGljdWxhci4gSXQgaXMganVzdCB0aGF0IHRoaXMgbWFjcm9z
-IGNvdWxkIGJlIGhlbHBmdWwgaW4gYW55IGVtdWxhdGlvbiBjb2RlCj4gdG8gY2F0Y2ggd2hhdCB3
-ZSB0aGluayBpcyBhIGludmFsaWQgYXJjaGl0ZWN0dXJhbCBiZWhhdmlvci4KCkl0IGlzIG9ubHkg
-dGhhdCBhIGNvbmNyZXRlIHVzZS1jYXNlIGhlbHBzLiBUaGUgaWRlYSBvZiBtb3ZpbmcKR1VFU1Rf
-QlVHX09OIGlzIGdvb2QsIGJ1dCB3aGVyZSB0bz8gRm9yIGluc3RhbmNlLCB3b3VsZG4ndCBpdCBi
-ZSBiZXR0ZXIKdG8gbW92ZSBpdCB0byBndWVzdF9hY2Nlc3MuaD8gSSBhbSBqdXN0IHRyeWluZyB0
-byBwb2ludCB0byBhbiBleGlzdGluZwpoZWFkZXIgd2hpY2ggaXMgbW9yZSB3aWRlbHkgdXNlZCBh
-Y3Jvc3MgdGhlIGVtdWxhdG9ycyAodnBsMDExLAp2Z2ljLXYzLWl0cy5jLCBodm0uYywgLi4uKQoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Cj4gT24gMDgvMTUvMjAxOCAwOTowNCBQTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4g
+T24gTW9uLCAxMyBBdWcgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+ID4gPiA+ICt2b2lkIF9f
+aW5pdCBjcmVhdGVfZG9tVXModm9pZCkKPiA+ID4gPiArewo+ID4gPiA+ICsgICAgc3RydWN0IGR0
+X2RldmljZV9ub2RlICpub2RlOwo+ID4gPiA+ICsgICAgc3RydWN0IGR0X2RldmljZV9ub2RlICpj
+aG9zZW4gPSBkdF9maW5kX25vZGVfYnlfbmFtZShkdF9ob3N0LAo+ID4gPiA+ICJjaG9zZW4iKTsK
+PiA+ID4gPiArCj4gPiA+ID4gKyAgICBpZiAoIGNob3NlbiAhPSBOVUxMICkKPiA+ID4gPiArICAg
+IHsKPiA+ID4gPiArICAgICAgICBkdF9mb3JfZWFjaF9jaGlsZF9ub2RlKGNob3Nlbiwgbm9kZSkK
+PiA+ID4gPiArICAgICAgICB7Cj4gPiA+ID4gKyAgICAgICAgICAgIHN0cnVjdCBkb21haW4gKmQ7
+Cj4gPiA+ID4gKyAgICAgICAgICAgIHN0cnVjdCB4ZW5fZG9tY3RsX2NyZWF0ZWRvbWFpbiBkX2Nm
+ZyA9IHsKPiA+ID4gPiArICAgICAgICAgICAgICAgIC5hcmNoLmdpY192ZXJzaW9uID0gWEVOX0RP
+TUNUTF9DT05GSUdfR0lDX05BVElWRSwKPiA+ID4gPiArICAgICAgICAgICAgICAgIC5hcmNoLm5y
+X3NwaXMgPSAzMiwKPiA+ID4gCj4gPiA+IEFGQUlDVCwgd2hlbiBjcmVhdGluZyBEb21VIGZyb20g
+dGhlIHRvb2xzdGFjayBucl9zcGlzIHdpbGwgYmUgMC4gU28gd2h5IDMyCj4gPiA+IGhlcmU/Cj4g
+PiAKPiA+IExlZ2FjeSBmcm9tIGRlYnVnIGNvZGUuIEl0IHNob3VsZCBiZSAwLCB1bmxlc3MgdnBs
+MDExIGlzIGVuYWJsZWQsIGluCj4gPiB3aGljaCBjYXNlIGl0IHNob3VsZCBiZSAxLgo+IAo+IEkg
+d291bGQgcHJlZmVyIGlmIHdlIHVzZSBHVUVTVF9WUEwwMTFfU1BJIC0gMzIuIFRoaXMgd291bGQg
+bWFrZSB0aGUgY29kZQo+IGJ1bGxldC1wcm9vZiBmb3IgYW55IHBvdGVudGlhbCByZXNodWZmbGUg
+b2YgdGhlIElSUXMuCgpPSywgSSdsbCBkbyB0aGF0LiBJdCBpcyBhY3R1YWxseSBHVUVTVF9WUEww
+MTFfU1BJIC0gMzIgKyAxLgooR1VFU1RfVlBMMDExX1NQSSAtIDMyIGlzIDAuKQoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
