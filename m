@@ -1,17 +1,19 @@
-From: Christopher Clark <christopher.w.clark@gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
 Subject: Re: Future of 32-bit PV support
-Date: Wed, 15 Aug 2018 23:32:24 -0700
-Message-ID: <CACMJ4GZti4ypL=CBSROj0CSh6GRXXkq+iqV7CtBWKiiF6CYinA@mail.gmail.com>
+Date: Thu, 16 Aug 2018 00:36:46 -0600
+Message-ID: <5B751B7E02000078001DEB2E@prv1-mh.provo.novell.com>
 References: <ede80e02-5704-1d46-4edf-58515ad63f40@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7346469776678963889=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ubxr=k7=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
- id 1fqBpc-00070Z-Lg
- for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 06:32:28 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=x9l4=k7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fqBtr-0007D7-TA
+ for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 06:36:51 +0000
 In-Reply-To: <ede80e02-5704-1d46-4edf-58515ad63f40@suse.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,91 +23,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, bouyer@netbsd.org, "xen-users@lists.xenproject.org" <xen-users@lists.xenproject.org>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, bouyer@NetBSD.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============7346469776678963889==
-Content-Type: multipart/alternative; boundary="0000000000003854630573879b82"
-
---0000000000003854630573879b82
-Content-Type: text/plain; charset="UTF-8"
-
-On Wed, Aug 15, 2018 at 11:17 PM, Juergen Gross <jgross@suse.com> wrote:
-
-> In the Xen x86 community call we have been discussing whether anyone
-> really is depending on 32-bit PV guests. We'd like to evaluate whether
-> anyone would see problems with:
->
-> - deprecating 32-bit PV guest support in Xen, meaning that we'd
->   eventually switch to support 32-bit PV guests only via PV-shim from
->   Xen 4.12 or 4.13
->
-> - dropping 32-bit PV support from upstream Linux kernel, resulting in
->   current 32-bit PV guests no longer being able to upgrade to the newest
->   kernel version any longer
->
-> And related to that:
->
-> - is there any Linux distribution still shipping 32-bit PV-capable
->   systems?
->
-> - what about BSD? Is 32-bit PV support important there?
->
-
-
-Juergen - just to be very clear about the scope here:
-* would this proposal affect the ability to use a 32-bit dom0?
-* is this proposal to affect x86 only or also for ARM?
-
-Christopher
-
---0000000000003854630573879b82
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br><div class=3D"gmail_extra"><div class=3D"gmail_quote">=
-On Wed, Aug 15, 2018 at 11:17 PM, Juergen Gross <span dir=3D"ltr">&lt;<a hr=
-ef=3D"mailto:jgross@suse.com" target=3D"_blank">jgross@suse.com</a>&gt;</sp=
-an> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;=
-border-left:1px #ccc solid;padding-left:1ex">In the Xen x86 community call =
-we have been discussing whether anyone<br>
-really is depending on 32-bit PV guests. We&#39;d like to evaluate whether<=
-br>
-anyone would see problems with:<br>
-<br>
-- deprecating 32-bit PV guest support in Xen, meaning that we&#39;d<br>
-=C2=A0 eventually switch to support 32-bit PV guests only via PV-shim from<=
-br>
-=C2=A0 Xen 4.12 or 4.13<br>
-<br>
-- dropping 32-bit PV support from upstream Linux kernel, resulting in<br>
-=C2=A0 current 32-bit PV guests no longer being able to upgrade to the newe=
-st<br>
-=C2=A0 kernel version any longer<br>
-<br>
-And related to that:<br>
-<br>
-- is there any Linux distribution still shipping 32-bit PV-capable<br>
-=C2=A0 systems?<br>
-<br>
-- what about BSD? Is 32-bit PV support important there?<br></blockquote><di=
-v><br></div><div><br></div><div>Juergen - just to be very clear about the s=
-cope here:</div><div>* would this proposal affect the ability to use a 32-b=
-it dom0?<br></div><div>* is this proposal to affect x86 only or also for AR=
-M?<br></div><br></div><div class=3D"gmail_quote">Christopher</div><div clas=
-s=3D"gmail_quote"><br></div></div></div>
-
---0000000000003854630573879b82--
-
-
---===============7346469776678963889==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7346469776678963889==--
+Pj4+IE9uIDE2LjA4LjE4IGF0IDA4OjE3LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBJbiB0
+aGUgWGVuIHg4NiBjb21tdW5pdHkgY2FsbCB3ZSBoYXZlIGJlZW4gZGlzY3Vzc2luZyB3aGV0aGVy
+IGFueW9uZQo+IHJlYWxseSBpcyBkZXBlbmRpbmcgb24gMzItYml0IFBWIGd1ZXN0cy4gV2UnZCBs
+aWtlIHRvIGV2YWx1YXRlIHdoZXRoZXIKPiBhbnlvbmUgd291bGQgc2VlIHByb2JsZW1zIHdpdGg6
+Cj4gCj4gLSBkZXByZWNhdGluZyAzMi1iaXQgUFYgZ3Vlc3Qgc3VwcG9ydCBpbiBYZW4sIG1lYW5p
+bmcgdGhhdCB3ZSdkCj4gICBldmVudHVhbGx5IHN3aXRjaCB0byBzdXBwb3J0IDMyLWJpdCBQViBn
+dWVzdHMgb25seSB2aWEgUFYtc2hpbSBmcm9tCj4gICBYZW4gNC4xMiBvciA0LjEzCgpJIHRoaW5r
+IHdlIHNob3VsZG4ndCB0cnkgdG8gYmUgdG9vIGVhZ2VyIGhlcmUuIERlcHJlY2F0aW5nIGlzIGZp
+bmUgaWYKd2UgY2FuIGdldCBzdWZmaWNpZW50IGNvbmZpcm1hdGlvbiB0aGF0IG5vLW9uZSBuZWVk
+cyB0aGlzIGFueW1vcmUsCmJ1dCBzd2l0Y2hpbmcgdG8gc29tZXRoaW5nIGxpa2UgdGhlIHNoaW0t
+b25seSBtb2RlbCBuZWVkcyB0byBjb21lCnN1ZmZpY2llbnRseSBtdWNoIGxhdGVyLgoKRm9yIHBl
+b3BsZSBjb25jZXJuZWQgYWJvdXQgbWVtb3J5IGZvb3RwcmludCwgc2hvdWxkIHdlIHBlcmhhcHMK
+bWFrZSB4MzIgc3VwcG9ydCBpbiBwdWJsaWMgaGVhZGVycyBhbmQgdG9vbCBzdGFjayBhIHByZXJl
+cSBoZXJlPwpOb3QgdGhlIGxlYXN0IGJlY2F1c2UgLSBhZmFpY3QgLSAzMi1iaXQgdXNlciBzcGFj
+ZSBzdXBwb3J0IGluIDY0LWJpdApMaW51eCBjb250aW51ZXMgdG8gYmUgc3VidGx5IGJyb2tlbiwg
+ZHVlIHRvIHRoZXJlIG5vdCBiZWluZyBhbnkKY2xlYXIgcm91dGUgZm9yIHdoYXQgdG8gZG8gd2l0
+aCAieDg2LTY0L1hlbjogZml4IHN0YWNrIHN3aXRjaGluZyIsCnNlbnQgb3ZlciB0aHJlZSBtb250
+aHMgYWdvPyBCdXQgZXZlbiB3aXRob3V0IHRoYXQgSSB0aGluayB4MzIgaXMKcHJlZmVyYWJsZSBv
+dmVyIHRydWUgMzItYml0IG1vZGUuCgpKYW4KCj4gLSBkcm9wcGluZyAzMi1iaXQgUFYgc3VwcG9y
+dCBmcm9tIHVwc3RyZWFtIExpbnV4IGtlcm5lbCwgcmVzdWx0aW5nIGluCj4gICBjdXJyZW50IDMy
+LWJpdCBQViBndWVzdHMgbm8gbG9uZ2VyIGJlaW5nIGFibGUgdG8gdXBncmFkZSB0byB0aGUgbmV3
+ZXN0Cj4gICBrZXJuZWwgdmVyc2lvbiBhbnkgbG9uZ2VyCj4gCj4gQW5kIHJlbGF0ZWQgdG8gdGhh
+dDoKPiAKPiAtIGlzIHRoZXJlIGFueSBMaW51eCBkaXN0cmlidXRpb24gc3RpbGwgc2hpcHBpbmcg
+MzItYml0IFBWLWNhcGFibGUKPiAgIHN5c3RlbXM/Cj4gCj4gLSB3aGF0IGFib3V0IEJTRD8gSXMg
+MzItYml0IFBWIHN1cHBvcnQgaW1wb3J0YW50IHRoZXJlPwo+IAo+IAo+IEp1ZXJnZW4KPiAKPiBf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+IFhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKPiBYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcgCj4gaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbCAKCgoKCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
