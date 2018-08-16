@@ -1,17 +1,17 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v3 25/25] xen/arm: split domain_build.c
-Date: Thu, 16 Aug 2018 10:20:02 +0100
-Message-ID: <dbf9b7d3-b82c-47db-45d5-c0eabee4f232@arm.com>
-References: <alpine.DEB.2.10.1807311623060.5781@sstabellini-ThinkPad-X260>
- <1533079688-9541-25-git-send-email-sstabellini@kernel.org>
- <a5331c07-7f2a-dfee-6c7d-a3b3e6e21eb2@arm.com>
- <alpine.DEB.2.10.1808151644360.15066@sstabellini-ThinkPad-X260>
+From: Zhenzhong Duan <zhenzhong.duan@oracle.com>
+Subject: Re: [PATCH] x86/mmcfg/drhd: Move acpi_mmcfg_init()
+ before calling acpi_parse_dmar()
+Date: Thu, 16 Aug 2018 17:30:58 +0800
+Message-ID: <fdcad3f9-df8f-7242-b8e2-7447a153b7ad@oracle.com>
+References: <5fd7cd01-d55b-4fba-b57b-41560dc99cf2@default>
+ <5B75235402000078001DEB68@prv1-mh.provo.novell.com>
+ <670ef321-52e8-e501-faf9-a91e0ce94013@oracle.com>
+Reply-To: zhenzhong.duan@oracle.com
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1808151644360.15066@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+In-Reply-To: <670ef321-52e8-e501-faf9-a91e0ce94013@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,42 +20,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, andrii_anisov@epam.com, xen-devel@lists.xen.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: david.westwood@hpe.com, Andrew Cooper <andrew.cooper3@citrix.com>, Srinivas REDDY Eeda <srinivas.eeda@oracle.com>, Xen-Devel <xen-devel@lists.xen.org>, manoj.gopalasetty@hpe.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgU3RlZmFubywKCk9uIDA4LzE2LzIwMTggMDE6MjUgQU0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3
-cm90ZToKPiBPbiBNb24sIDEzIEF1ZyAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+PiArCj4+
-PiArI2lmbmRlZiBDT05GSUdfQUNQSQo+Pj4gK3N0YXRpYyBpbmxpbmUgaW50IHByZXBhcmVfYWNw
-aShzdHJ1Y3QgZG9tYWluICpkLCBzdHJ1Y3Qga2VybmVsX2luZm8gKmtpbmZvKQo+Pj4gK3sKPj4+
-ICsgICAgLyogT25seSBib290aW5nIHdpdGggQUNQSSB3aWxsIGhpdCBoZXJlICovCj4+PiArICAg
-IEJVRygpOwo+Pj4gKyAgICByZXR1cm4gLUVJTlZBTDsKPj4+ICt9Cj4+PiArI2Vsc2UKPj4+ICtp
-bnQgcHJlcGFyZV9hY3BpKHN0cnVjdCBkb21haW4gKmQsIHN0cnVjdCBrZXJuZWxfaW5mbyAqa2lu
-Zm8pOwo+Pj4gKyNlbmRpZgo+Pgo+PiBUaGlzIG9uZSBzaG91bGQgZ28gaW4gYXNtLWFybS9hY3Bp
-LmguCj4+Cj4+IFNvIHRoaXMgaGVhZGVyIGlzIG5vdCBuZWNlc3NhcnkgYW55bW9yZS4KPiAKPiBJ
-IHdhcyB1bmFibGUgdG8gYWRkIHByZXBhcmVfYWNwaSB0byBhc20tYXJtL2FjcGkuaCBiZWNhdXNl
-IGl0IGNhdXNlcyBhCj4gI2luY2x1ZGUgZGVwZW5kZW5jeSBoZWxsLCBJIGFtIHRoaW5raW5nIG9m
-IGFkZGluZyBpdCB0byBhc20tYXJtL2RvbWFpbl9idWlsZC5oLgo+IAo+IEluIGZpbGUgaW5jbHVk
-ZWQgZnJvbSAvbG9jYWwvcmVwb3MveGVuLXVwc3RyZWFtL3hlbi9pbmNsdWRlL3hlbi9zY2hlZC5o
-OjExOjAsCj4gICAgICAgICAgICAgICAgICAgZnJvbSAvbG9jYWwvcmVwb3MveGVuLXVwc3RyZWFt
-L3hlbi9pbmNsdWRlL2FzbS9kb21haW4uaDo1LAo+ICAgICAgICAgICAgICAgICAgIGZyb20gL2xv
-Y2FsL3JlcG9zL3hlbi11cHN0cmVhbS94ZW4vaW5jbHVkZS9hc20va2VybmVsLmg6MTAsCj4gICAg
-ICAgICAgICAgICAgICAgZnJvbSAvbG9jYWwvcmVwb3MveGVuLXVwc3RyZWFtL3hlbi9pbmNsdWRl
-L2FzbS9hY3BpLmg6MjcsCj4gICAgICAgICAgICAgICAgICAgZnJvbSAvbG9jYWwvcmVwb3MveGVu
-LXVwc3RyZWFtL3hlbi9pbmNsdWRlL2FjcGkvcGxhdGZvcm0vYWNsaW51eC5oOjU4LAo+ICAgICAg
-ICAgICAgICAgICAgIGZyb20gL2xvY2FsL3JlcG9zL3hlbi11cHN0cmVhbS94ZW4vaW5jbHVkZS9h
-Y3BpL3BsYXRmb3JtL2FjZW52Lmg6MTQyLAo+ICAgICAgICAgICAgICAgICAgIGZyb20gL2xvY2Fs
-L3JlcG9zL3hlbi11cHN0cmVhbS94ZW4vaW5jbHVkZS9hY3BpL2FjcGkuaDo1NiwKPiAgICAgICAg
-ICAgICAgICAgICBmcm9tIC9sb2NhbC9yZXBvcy94ZW4tdXBzdHJlYW0veGVuL2luY2x1ZGUveGVu
-L2FjcGkuaDozMywKPiAgICAgICAgICAgICAgICAgICBmcm9tIHBsMDExLmM6MzA3Ogo+IC9sb2Nh
-bC9yZXBvcy94ZW4tdXBzdHJlYW0veGVuL2luY2x1ZGUveGVuL2RvbWFpbi5oOjU5OjMxOiBlcnJv
-cjog4oCYc3RydWN0IHhlbl9kb21jdGxfY3JlYXRlZG9tYWlu4oCZIGRlY2xhcmVkIGluc2lkZSBw
-YXJhbWV0ZXIgbGlzdCB3aWxsIG5vdCBiZSB2aXNpYmxlIG91dHNpZGUgb2YgdGhpcyBkZWZpbml0
-aW9uIG9yIGRlY2xhcmF0aW9uIFstV2Vycm9yXQo+ICAgICAgICAgICAgICAgICAgICAgICAgICBz
-dHJ1Y3QgeGVuX2RvbWN0bF9jcmVhdGVkb21haW4gKmNvbmZpZyk7CgpYZW4gQXJtIGhlYWRlcnMg
-YXJlIGEgYml0IGEgbWVzcy4gOi8KCkl0IGxvb2tzIGxpa2UgY3JlYXRlX2RvbTAgbGl2ZXMgaW4g
-c2V0dXAuaCwgd291bGQgaXQgYmUgcG9zc2libGUgdG8gbW92ZSAKdGhlIHByb3RvdHlwZXMgdGhl
-cmU/CgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+Ck9uIDIwMTgvOC8xNiAxNzoxMywgWmhlbnpob25nIER1YW4gd3JvdGU6Cj4+Cj4+PiAtLS0gYS94
+ZW4vYXJjaC94ODYvc2V0dXAuYwo+Pj4gKysrIGIveGVuL2FyY2gveDg2L3NldHVwLmMKPj4+IEBA
+IC0xNDkzLDYgKzE0OTMsMTAgQEAgdm9pZCBfX2luaXQgbm9yZXR1cm4gX19zdGFydF94ZW4odW5z
+aWduZWQgbG9uZyAKPj4+IG1iaV9wKQo+Pj4gwqDCoMKgwqDCoCBnZW5lcmljX2FwaWNfcHJvYmUo
+KTsKPj4+ICvCoMKgwqAgcHRfcGNpX2luaXQoKTsKPj4+ICsKPj4+ICvCoMKgwqAgYWNwaV9tbWNm
+Z19pbml0KCk7Cj4+PiArCj4+PiDCoMKgwqDCoMKgIGFjcGlfYm9vdF9pbml0KCk7Cj4+Cj4+IFdp
+dGggdGhlIGRlcGVuZGVuY3kgYmVpbmcgX2luXyBhY3BpX2Jvb3RfaW5pdCgpLCB0aGUgaW52b2Nh
+dGlvbiBvZgo+PiBhY3BpX21tY2ZnX2luaXQoKSBzaG91bGQgbm93IGJlIG1vdmVkIHRoZXJlLgo+
+IFllcywgSSBmZWVsIGJldHRlciB0byBtb3ZlIHB0X3BjaV9pbml0KCkgYW5kIGFjcGlfbW1jZmdf
+aW5pdCgpIGluIAo+IGFjcGlfYm9vdF9pbml0KCkgYmVmb3JlIGFjcGlfbW1jZmdfaW5pdCgpLiBB
+bnkgbW9yZSBjb21tZW50cz8KSSBzZWUgYWNwaV9ib290X2luaXQoKSBpcyBlbXB0eSBmdW5jIHdo
+ZW4gQ09ORklHX0FDUElfQk9PVCBpc24ndCBzZXQuIERvIAp3ZSBzdXBwb3J0IGRpc2FibGluZyB0
+aGlzIGNvbmZpZyBvcHRpb24/IElmIHllcywgSSB0aGluayBhYm92ZSBjaGFuZ2UgCndpbGwgYnJl
+YWsgbm9uLWFjcGkgY2FzZS4KClRoYW5rcwpaaGVuemhvbmcKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
