@@ -1,91 +1,103 @@
-From: Stephen Rothwell <sfr@canb.auug.org.au>
-Subject: Re: linux-next: build failure after merge of the xen-tip tree
-Date: Thu, 16 Aug 2018 10:09:13 +1000
-Message-ID: <20180816100913.0ffa0df5@canb.auug.org.au>
-References: <20180730151213.4b1e1af4@canb.auug.org.au>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [freebsd-master test] 125917: regressions - trouble:
+ blocked/fail
+Date: Thu, 16 Aug 2018 00:22:52 +0000
+Message-ID: <osstest-125917-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- boundary="Sig_/aBMld8MOi9ZBxBxSih09DoJ"; protocol="application/pgp-signature"
-Return-path: <linux-kernel-owner@vger.kernel.org>
-In-Reply-To: <20180730151213.4b1e1af4@canb.auug.org.au>
-Sender: linux-kernel-owner@vger.kernel.org
-To: Dave Airlie <airlied@linux.ie>, DRI <dri-devel@lists.freedesktop.org>
-Cc: Juergen Gross <jgross@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen Devel <Xen-devel@lists.xensource.com>, Linux-Next Mailing List <linux-next@vger.kernel.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=xtga=k7=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fq641-0004NK-3e
+ for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 00:22:57 +0000
+List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
+List-Post: <mailto:xen-devel@lists.xenproject.org>
+List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
+List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Errors-To: xen-devel-bounces@lists.xenproject.org
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org, royger@FreeBSD.org
 List-Id: xen-devel@lists.xenproject.org
 
---Sig_/aBMld8MOi9ZBxBxSih09DoJ
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Hi all,
-
-On Mon, 30 Jul 2018 15:12:13 +1000 Stephen Rothwell <sfr@canb.auug.org.au> =
-wrote:
->
-> After merging the xen-tip tree, today's linux-next build (x86_64
-> allmodconfig) failed like this:
->=20
-> drivers/xen/gntdev-dmabuf.c:360:12: error: initialization from incompatib=
-le pointer type [-Werror=3Dincompatible-pointer-types]
->   .attach =3D dmabuf_exp_ops_attach,
->             ^~~~~~~~~~~~~~~~~~~~~
->=20
-> Caused by commit
->=20
->   a240d6e42e28 ("xen/gntdev: Implement dma-buf export functionality")
->=20
-> interacting with commit
->=20
->   a19741e5e5a9 ("dma_buf: remove device parameter from attach callback v2=
-")
->=20
-> from the drm tree.
->=20
-> I have added the following merge fix patch:
->=20
-> From: Stephen Rothwell <sfr@canb.auug.org.au>
-> Date: Mon, 30 Jul 2018 15:08:21 +1000
-> Subject: [PATCH] xen/gntdev: fix up for attach callback API change
->=20
-> Signed-off-by: Stephen Rothwell <sfr@canb.auug.org.au>
-> ---
->  drivers/xen/gntdev-dmabuf.c | 1 -
->  1 file changed, 1 deletion(-)
->=20
-> diff --git a/drivers/xen/gntdev-dmabuf.c b/drivers/xen/gntdev-dmabuf.c
-> index faaa4d3970ea..744cfe9b0311 100644
-> --- a/drivers/xen/gntdev-dmabuf.c
-> +++ b/drivers/xen/gntdev-dmabuf.c
-> @@ -217,7 +217,6 @@ dmabuf_pages_to_sgt(struct page **pages, unsigned int=
- nr_pages)
->  }
-> =20
->  static int dmabuf_exp_ops_attach(struct dma_buf *dma_buf,
-> -				 struct device *target_dev,
->  				 struct dma_buf_attachment *attach)
->  {
->  	struct gntdev_dmabuf_attachment *gntdev_dmabuf_attach;
-
-This is now a conflict between Linus' tree and the drm tree.
-
---=20
-Cheers,
-Stephen Rothwell
-
---Sig_/aBMld8MOi9ZBxBxSih09DoJ
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEENIC96giZ81tWdLgKAVBC80lX0GwFAlt0wKkACgkQAVBC80lX
-0GwHrgf+O6FFsaNS9Ns/qqJwGQglbwJYGtok6HZHX+YpwBufT7zw0Kz566uGeYo2
-ye73+FV1lIhF2iKb4R0Cq9MZuUkn9CiezYeQcnqjyjdVIJigYqb/9nBxnDMEPBlC
-/4Np6/b6Dutrf5Lw8sW8R1+xakOw5xtdLHMwJM+gDoUEAhueAXlz24kRfpmk4XNw
-dvWHQfkFHM0CyzVYO6WKJ/dko3uW31VwVQAqIcmbD+O27f4UsIaEs8oAtupuMB6o
-AZD/tgsy26nzEuQnesQZ7tbNqx2B8Ziu8asekMQI9czIb4Ag0ZQKHPkDEhFS4xMY
-JZETbXOfxG4qLvK4ZrZLpLRFAeIArg==
-=jUg3
------END PGP SIGNATURE-----
-
---Sig_/aBMld8MOi9ZBxBxSih09DoJ--
+ZmxpZ2h0IDEyNTkxNyBmcmVlYnNkLW1hc3RlciByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0
+LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTI1OTE3LwoKUmVncmVzc2lvbnMgOi0o
+CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5n
+IHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC1mcmVlYnNkICAgICAg
+ICAgICA3IGZyZWVic2QtYnVpbGQgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjUzMTcKClRl
+c3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiBidWlsZC1h
+bWQ2NC1mcmVlYnNkLWFnYWluICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxv
+Y2tlZCAgbi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogZnJlZWJzZCAgICAgICAg
+ICAgICAgZGM1OTYyNzIzZTQxYWEzOTlmMzVmOTJhOWY5NTdhYjQ3ZmVhOGZlNwpiYXNlbGluZSB2
+ZXJzaW9uOgogZnJlZWJzZCAgICAgICAgICAgICAgYmY2NWQwNTcwNzEwNGRmOTQxMTdhMjkzMzI3
+ZDc5N2Q3MWEwMTE4ZAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI1MzE3ICAyMDE4LTA3LTE4IDA5
+OjE5OjQ3IFogICAyOCBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyNTQ2NyAgMjAxOC0wNy0y
+MCAwOToxOTo1OSBaICAgMjYgZGF5cyAgIDEyIGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAg
+IDEyNTkxNyAgMjAxOC0wOC0xNSAwOToxOToxNSBaICAgIDAgZGF5cyAgICAxIGF0dGVtcHRzCgot
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIDBtcCA8MG1wQEZy
+ZWVCU0Qub3JnPgogIGFlIDxhZUBGcmVlQlNELm9yZz4KICBhbGMgPGFsY0BGcmVlQlNELm9yZz4K
+ICBhbGxhbmp1ZGUgPGFsbGFuanVkZUBGcmVlQlNELm9yZz4KICBhbmRyZXcgPGFuZHJld0BGcmVl
+QlNELm9yZz4KICBhbnRvaW5lIDxhbnRvaW5lQEZyZWVCU0Qub3JnPgogIGFyYXVqbyA8YXJhdWpv
+QEZyZWVCU0Qub3JnPgogIGFzb21lcnMgPGFzb21lcnNARnJlZUJTRC5vcmc+CiAgYXZnIDxhdmdA
+RnJlZUJTRC5vcmc+CiAgYmFwdCA8YmFwdEBGcmVlQlNELm9yZz4KICBiZGUgPGJkZUBGcmVlQlNE
+Lm9yZz4KICBiZHJld2VyeSA8YmRyZXdlcnlARnJlZUJTRC5vcmc+CiAgYnIgPGJyQEZyZWVCU0Qu
+b3JnPgogIGJyZCA8YnJkQEZyZWVCU0Qub3JnPgogIGJyb29rcyA8YnJvb2tzQEZyZWVCU0Qub3Jn
+PgogIGJ3aWRhd3NrIDxid2lkYXdza0BGcmVlQlNELm9yZz4KICBieiA8YnpARnJlZUJTRC5vcmc+
+CiAgY2VtIDxjZW1ARnJlZUJTRC5vcmc+CiAgY29nbmV0IDxjb2duZXRARnJlZUJTRC5vcmc+CiAg
+Y3BlcmNpdmEgPGNwZXJjaXZhQEZyZWVCU0Qub3JnPgogIGN5IDxjeUBGcmVlQlNELm9yZz4KICBk
+YWIgPGRhYkBGcmVlQlNELm9yZz4KICBkYWljaGkgPGRhaWNoaUBGcmVlQlNELm9yZz4KICBkYXZp
+ZGNzIDxkYXZpZGNzQEZyZWVCU0Qub3JnPgogIGRlbHBoaWogPGRlbHBoaWpARnJlZUJTRC5vcmc+
+CiAgZGVzIDxkZXNARnJlZUJTRC5vcmc+CiAgZGltIDxkaW1ARnJlZUJTRC5vcmc+CiAgZHRlc2tl
+IDxkdGVza2VARnJlZUJTRC5vcmc+CiAgZWFkbGVyIDxlYWRsZXJARnJlZUJTRC5vcmc+CiAgZW1h
+c3RlIDxlbWFzdGVARnJlZUJTRC5vcmc+CiAgZXVnZW4gPGV1Z2VuQEZyZWVCU0Qub3JnPgogIGZz
+dSA8ZnN1QEZyZWVCU0Qub3JnPgogIGdhbGxhdGluIDxnYWxsYXRpbkBGcmVlQlNELm9yZz4KICBn
+YW5ib2xkIDxnYW5ib2xkQEZyZWVCU0Qub3JnPgogIGdhdmluIDxnYXZpbkBGcmVlQlNELm9yZz4K
+ICBnamIgPGdqYkBGcmVlQlNELm9yZz4KICBnbGViaXVzIDxnbGViaXVzQEZyZWVCU0Qub3JnPgog
+IGdvbnpvIDxnb256b0BGcmVlQlNELm9yZz4KICBoc2VsYXNreSA8aHNlbGFza3lARnJlZUJTRC5v
+cmc+CiAgaWFuIDxpYW5ARnJlZUJTRC5vcmc+CiAgaW1wIDxpbXBARnJlZUJTRC5vcmc+CiAgamhi
+IDxqaGJARnJlZUJTRC5vcmc+CiAgamhpYmJpdHMgPGpoaWJiaXRzQEZyZWVCU0Qub3JnPgogIGpo
+aXhzb24gPGpoaXhzb25ARnJlZUJTRC5vcmc+CiAgamlsbGVzIDxqaWxsZXNARnJlZUJTRC5vcmc+
+CiAgamtpbSA8amtpbUBGcmVlQlNELm9yZz4KICBqdGwgPGp0bEBGcmVlQlNELm9yZz4KICBrZXZh
+bnMgPGtldmFuc0BGcmVlQlNELm9yZz4KICBrZXZsbyA8a2V2bG9ARnJlZUJTRC5vcmc+CiAga2li
+IDxraWJARnJlZUJTRC5vcmc+CiAga3AgPGtwQEZyZWVCU0Qub3JnPgogIGxlaXRhbyA8bGVpdGFv
+QEZyZWVCU0Qub3JnPgogIGxvb3MgPGxvb3NARnJlZUJTRC5vcmc+CiAgbHVwb3JsIDxsdXBvcmxA
+RnJlZUJTRC5vcmc+CiAgbHdoc3UgPGx3aHN1QEZyZWVCU0Qub3JnPgogIG1hbnUgPG1hbnVARnJl
+ZUJTRC5vcmc+CiAgbWFyaXVzIDxtYXJpdXNARnJlZUJTRC5vcmc+CiAgbWFya2ogPG1hcmtqQEZy
+ZWVCU0Qub3JnPgogIE1hdGh5IFZhbmhvZWYgPE1hdGh5LlZhbmhvZWZAY3Mua3VsZXV2ZW4uYmU+
+CiAgTWF0dGhldyBBaHJlbnMgPG1haHJlbnNAZGVscGhpeC5jb20+CiAgbWF2IDxtYXZARnJlZUJT
+RC5vcmc+CiAgbWNrdXNpY2sgPG1ja3VzaWNrQEZyZWVCU0Qub3JnPgogIG1tIDxtbUBGcmVlQlNE
+Lm9yZz4KICBtbWFjeSA8bW1hY3lARnJlZUJTRC5vcmc+CiAgbW1lbCA8bW1lbEBGcmVlQlNELm9y
+Zz4KICBuZXRjaGlsZCA8bmV0Y2hpbGRARnJlZUJTRC5vcmc+CiAgbnAgPG5wQEZyZWVCU0Qub3Jn
+PgogIG9icmllbiA8b2JyaWVuQEZyZWVCU0Qub3JnPgogIG9zaG9nYm8gPG9zaG9nYm9ARnJlZUJT
+RC5vcmc+CiAgcGZnIDxwZmdARnJlZUJTRC5vcmc+CiAgcGhrIDxwaGtARnJlZUJTRC5vcmc+CiAg
+cGtlbHNleSA8cGtlbHNleUBGcmVlQlNELm9yZz4KICBwc3RlZiA8cHN0ZWZARnJlZUJTRC5vcmc+
+CiAgcm1hY2tsZW0gPHJtYWNrbGVtQEZyZWVCU0Qub3JnPgogIHJveWdlciA8cm95Z2VyQEZyZWVC
+U0Qub3JnPgogIHJwb2thbGEgPHJwb2thbGFARnJlZUJTRC5vcmc+CiAgcnJzIDxycnNARnJlZUJT
+RC5vcmc+CiAgc2VmIDxzZWZARnJlZUJTRC5vcmc+CiAgc2V2YW4gPHNldmFuQEZyZWVCU0Qub3Jn
+PgogIHNodXJkIDxzaHVyZEBGcmVlQlNELm9yZz4KICBzamcgPHNqZ0BGcmVlQlNELm9yZz4KICB0
+cmFzeiA8dHJhc3pARnJlZUJTRC5vcmc+CiAgdHJ1Y2ttYW4gPHRydWNrbWFuQEZyZWVCU0Qub3Jn
+PgogIHRzb29tZSA8dHNvb21lQEZyZWVCU0Qub3JnPgogIHR1ZXhlbiA8dHVleGVuQEZyZWVCU0Qu
+b3JnPgogIHVxcyA8dXFzQEZyZWVCU0Qub3JnPgogIHdpbGwgPHdpbGxARnJlZUJTRC5vcmc+CiAg
+d29vZHNiMDIgPHdvb2RzYjAyQEZyZWVCU0Qub3JnPgogIHd1bGYgPHd1bGZARnJlZUJTRC5vcmc+
+CiAgemxlc2xpZSA8emxlc2xpZUBGcmVlQlNELm9yZz4KCmpvYnM6CiBidWlsZC1hbWQ2NC1mcmVl
+YnNkLWFnYWluICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIGJ1
+aWxkLWFtZDY0LWZyZWVic2QgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBmYWlsICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVu
+cHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFn
+ZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8v
+bG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9m
+IHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRw
+Oi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUu
+ZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0
+ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4g
+YmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5n
+aXQ7YT1zdW1tYXJ5CgoKTm90IHB1c2hpbmcuCgooTm8gcmV2aXNpb24gbG9nOyBpdCB3b3VsZCBi
+ZSAxMjE3OSBsaW5lcyBsb25nLikKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
