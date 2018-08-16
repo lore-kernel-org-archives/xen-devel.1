@@ -1,20 +1,19 @@
-From: Christopher Clark <christopher.w.clark@gmail.com>
-Subject: Re: Future of 32-bit PV support
-Date: Thu, 16 Aug 2018 11:42:45 -0700
-Message-ID: <CACMJ4GYPLibjtU1oO19+SYm-PUeGMXaLGSYdiFPMrKYHu=Ox8Q@mail.gmail.com>
-References: <ede80e02-5704-1d46-4edf-58515ad63f40@suse.com>
- <CACMJ4GZti4ypL=CBSROj0CSh6GRXXkq+iqV7CtBWKiiF6CYinA@mail.gmail.com>
- <5B751EFB02000078001DEB46@suse.com>
- <9bcc6e34-ae5e-dcc4-0257-b8c2ab75a998@suse.com>
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Subject: [PATCH 4.17 05/21] xen/pv: Call get_cpu_address_sizes
+ to set x86_virt/phys_bits
+Date: Thu, 16 Aug 2018 20:45:15 +0200
+Message-ID: <20180816171612.582193090__27141.1192989492$1534445185$gmane$org@linuxfoundation.org>
+References: <20180816171612.136242278@linuxfoundation.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2173737993703433764=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ubxr=k7=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
- id 1fqNEO-0002Le-IO
- for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 18:42:48 +0000
-In-Reply-To: <9bcc6e34-ae5e-dcc4-0257-b8c2ab75a998@suse.com>
+ <srs0=i45+=k7=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
+ id 1fqNJ4-0002X1-7Y
+ for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 18:47:38 +0000
+In-Reply-To: <20180816171612.136242278@linuxfoundation.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,162 +22,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, bouyer@netbsd.org, Jan Beulich <JBeulich@suse.com>, xen-users@lists.xenproject.org
+To: linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, x86@kernel.org, "M. Vefa Bicakci" <m.v.b@runbox.com>, stable@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, Andy Lutomirski <luto@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2173737993703433764==
-Content-Type: multipart/alternative; boundary="000000000000202378057391cf73"
-
---000000000000202378057391cf73
-Content-Type: text/plain; charset="UTF-8"
-
-On Thu, Aug 16, 2018 at 12:55 AM, Juergen Gross <jgross@suse.com> wrote:
-
-> On 16/08/18 08:51, Jan Beulich wrote:
-> >>>> On 16.08.18 at 08:32, <christopher.w.clark@gmail.com> wrote:
-> >> On Wed, Aug 15, 2018 at 11:17 PM, Juergen Gross <jgross@suse.com>
-> wrote:
-> >>
-> >>> In the Xen x86 community call we have been discussing whether anyone
-> >>> really is depending on 32-bit PV guests. We'd like to evaluate whether
-> >>> anyone would see problems with:
-> >>>
-> >>> - deprecating 32-bit PV guest support in Xen, meaning that we'd
-> >>>   eventually switch to support 32-bit PV guests only via PV-shim from
-> >>>   Xen 4.12 or 4.13
-> >>>
-> >>> - dropping 32-bit PV support from upstream Linux kernel, resulting in
-> >>>   current 32-bit PV guests no longer being able to upgrade to the
-> newest
-> >>>   kernel version any longer
-> >>>
-> >>> And related to that:
-> >>>
-> >>> - is there any Linux distribution still shipping 32-bit PV-capable
-> >>>   systems?
-> >>>
-> >>> - what about BSD? Is 32-bit PV support important there?
-> >>
-> >> Juergen - just to be very clear about the scope here:
-> >> * would this proposal affect the ability to use a 32-bit dom0?
-> >
-> > If the Dom0 is to be PV - yes, of course. For the time being there's
-> > no complete PVH Dom0 support, so if 32-bit is needed here, PV is
-> > for now indeed the only option.
->
-
-ack. I asked because it's not necessarily obvious to all that dom0 is
-included in the term "guest", and it widens the consequences of this change.
-
-
->
-> And to be more precise: the first step would be to remove 32-bit PV
-> support from upstream Linux kernel. This would result in the loss of
-> the ability to use a _new_ Linux (e.g. >= 4.20 / 5.0) as a 32-bit dom0.
-> A 32-bit dom0 using a kernel <= 4.19 would still work until we remove
-> 32-bit PV support from the hypervisor (which we wouldn't do before full
-> support of PVH dom0, I guess).
->
-
-That makes sense.
-
-
->
-> Is there a special reason you want to use a 32-bit dom0?
->
-
-In short, no.
-OpenXT currently uses a 32-bit PV dom0, but work is already under way to
-migrate to 64-bit. I think your proposal is justified and good.
-
-Christopher
-
---000000000000202378057391cf73
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br><div class=3D"gmail_extra"><br><div class=3D"gmail_quo=
-te">On Thu, Aug 16, 2018 at 12:55 AM, Juergen Gross <span dir=3D"ltr">&lt;<=
-a href=3D"mailto:jgross@suse.com" target=3D"_blank">jgross@suse.com</a>&gt;=
-</span> wrote:<br><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .=
-8ex;border-left:1px #ccc solid;padding-left:1ex"><span class=3D"">On 16/08/=
-18 08:51, Jan Beulich wrote:<br>
-&gt;&gt;&gt;&gt; On 16.08.18 at 08:32, &lt;<a href=3D"mailto:christopher.w.=
-clark@gmail.com">christopher.w.clark@gmail.com</a><wbr>&gt; wrote:<br>
-</span><span class=3D"">&gt;&gt; On Wed, Aug 15, 2018 at 11:17 PM, Juergen =
-Gross &lt;<a href=3D"mailto:jgross@suse.com">jgross@suse.com</a>&gt; wrote:=
-<br>
-&gt;&gt;<br>
-&gt;&gt;&gt; In the Xen x86 community call we have been discussing whether =
-anyone<br>
-&gt;&gt;&gt; really is depending on 32-bit PV guests. We&#39;d like to eval=
-uate whether<br>
-&gt;&gt;&gt; anyone would see problems with:<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; - deprecating 32-bit PV guest support in Xen, meaning that we&=
-#39;d<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0eventually switch to support 32-bit PV guests only=
- via PV-shim from<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0Xen 4.12 or 4.13<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; - dropping 32-bit PV support from upstream Linux kernel, resul=
-ting in<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0current 32-bit PV guests no longer being able to u=
-pgrade to the newest<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0kernel version any longer<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; And related to that:<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; - is there any Linux distribution still shipping 32-bit PV-cap=
-able<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0systems?<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; - what about BSD? Is 32-bit PV support important there?<br>&gt=
-;&gt;<br>
-&gt;&gt; Juergen - just to be very clear about the scope here:<br>
-&gt;&gt; * would this proposal affect the ability to use a 32-bit dom0?<br>
-&gt; <br>
-</span><span class=3D"">&gt; If the Dom0 is to be PV - yes, of course. For =
-the time being there&#39;s<br>
-&gt; no complete PVH Dom0 support, so if 32-bit is needed here, PV is<br>
-&gt; for now indeed the only option.<br></span></blockquote><div><br></div>=
-<div>ack. I asked because it&#39;s not necessarily obvious to all that dom0=
- is included in the term &quot;guest&quot;, and it widens the consequences =
-of this change.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" sty=
-le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><span =
-class=3D"">
-<br>
-</span>And to be more precise: the first step would be to remove 32-bit PV<=
-br>
-support from upstream Linux kernel. This would result in the loss of<br>
-the ability to use a _new_ Linux (e.g. &gt;=3D 4.20 / 5.0) as a 32-bit dom0=
-.<br>
-A 32-bit dom0 using a kernel &lt;=3D 4.19 would still work until we remove<=
-br>
-32-bit PV support from the hypervisor (which we wouldn&#39;t do before full=
-<br>
-support of PVH dom0, I guess).<br></blockquote><div><br></div><div>That mak=
-es sense.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-<br>
-Is there a special reason you want to use a 32-bit dom0?<br></blockquote><d=
-iv><br></div><div>In short, no.</div><div>OpenXT currently uses a 32-bit PV=
- dom0, but work is already under way to migrate to 64-bit. I think your pro=
-posal is justified and good.</div><div><br></div><div>Christopher</div><div=
-><br></div></div></div></div>
-
---000000000000202378057391cf73--
-
-
---===============2173737993703433764==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2173737993703433764==--
+NC4xNy1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
+cGxlYXNlIGxldCBtZSBrbm93LgoKLS0tLS0tLS0tLS0tLS0tLS0tCgpGcm9tOiBNLiBWZWZhIEJp
+Y2FrY2kgPG0udi5iQHJ1bmJveC5jb20+Cgpjb21taXQgNDA1YzAxOGEyNWZlNDY0ZGM2ODA1N2Ji
+YzgwMTRhNThmMmJkNDQyMiB1cHN0cmVhbS4KCkNvbW1pdCBkOTRhMTU1YzU5YzkgKCJ4ODYvY3B1
+OiBQcmV2ZW50IGNwdWluZm9feDg2Ojp4ODZfcGh5c19iaXRzCmFkanVzdG1lbnQgY29ycnVwdGlv
+biIpIGhhcyBtb3ZlZCB0aGUgcXVlcnkgYW5kIGNhbGN1bGF0aW9uIG9mIHRoZQp4ODZfdmlydF9i
+aXRzIGFuZCB4ODZfcGh5c19iaXRzIGZpZWxkcyBvZiB0aGUgY3B1aW5mb194ODYgc3RydWN0CmZy
+b20gdGhlIGdldF9jcHVfY2FwIGZ1bmN0aW9uIHRvIGEgbmV3IGZ1bmN0aW9uIG5hbWVkCmdldF9j
+cHVfYWRkcmVzc19zaXplcy4KCk9uZSBvZiB0aGUgY2FsbCBzaXRlcyByZWxhdGVkIHRvIFhlbiBQ
+ViBWTXMgd2FzIHVuZm9ydHVuYXRlbHkgbWlzc2VkCmluIHRoZSBhZm9yZW1lbnRpb25lZCBjb21t
+aXQuIFRoaXMgcHJldmVudHMgc3VjY2Vzc2Z1bCBib290LXVwIG9mCmtlcm5lbCB2ZXJzaW9ucyA0
+LjE3IGFuZCB1cCBpbiBYZW4gUFYgVk1zIGlmIENPTkZJR19ERUJVR19WSVJUVUFMCmlzIGVuYWJs
+ZWQsIGR1ZSB0byB0aGUgZm9sbG93aW5nIGNvZGUgcGF0aDoKCiAgZW5saWdodGVuX3B2LmM6Onhl
+bl9zdGFydF9rZXJuZWwKICAgIG1tdV9wdi5jOjp4ZW5fcmVzZXJ2ZV9zcGVjaWFsX3BhZ2VzCiAg
+ICAgIHBhZ2UuaDo6X19wYQogICAgICAgIHBoeXNhZGRyLmM6Ol9fcGh5c19hZGRyCiAgICAgICAg
+ICBwaHlzYWRkci5oOjpwaHlzX2FkZHJfdmFsaWQKCnBoeXNfYWRkcl92YWxpZCB1c2VzIGJvb3Rf
+Y3B1X2RhdGEueDg2X3BoeXNfYml0cyB0byB2YWxpZGF0ZSBwaHlzaWNhbAphZGRyZXNzZXMuIGJv
+b3RfY3B1X2RhdGEueDg2X3BoeXNfYml0cyBpcyBubyBsb25nZXIgcG9wdWxhdGVkIGJlZm9yZQp0
+aGUgY2FsbCB0byB4ZW5fcmVzZXJ2ZV9zcGVjaWFsX3BhZ2VzIGR1ZSB0byB0aGUgYWZvcmVtZW50
+aW9uZWQgY29tbWl0CnRob3VnaCwgc28gdGhlIHZhbGlkYXRpb24gcGVyZm9ybWVkIGJ5IHBoeXNf
+YWRkcl92YWxpZCBmYWlscywgd2hpY2gKY2F1c2VzIF9fcGh5c19hZGRyIHRvIHRyaWdnZXIgYSBC
+VUcsIHByZXZlbnRpbmcgYm9vdC11cC4KClNpZ25lZC1vZmYtYnk6IE0uIFZlZmEgQmljYWtjaSA8
+bS52LmJAcnVuYm94LmNvbT4KUmV2aWV3ZWQtYnk6IFRob21hcyBHbGVpeG5lciA8dGdseEBsaW51
+dHJvbml4LmRlPgpSZXZpZXdlZC1ieTogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lA
+b3JhY2xlLmNvbT4KQ2M6ICJLaXJpbGwgQS4gU2h1dGVtb3YiIDxraXJpbGwuc2h1dGVtb3ZAbGlu
+dXguaW50ZWwuY29tPgpDYzogQW5keSBMdXRvbWlyc2tpIDxsdXRvQGtlcm5lbC5vcmc+CkNjOiBJ
+bmdvIE1vbG5hciA8bWluZ29AcmVkaGF0LmNvbT4KQ2M6ICJILiBQZXRlciBBbnZpbiIgPGhwYUB6
+eXRvci5jb20+CkNjOiBUaG9tYXMgR2xlaXhuZXIgPHRnbHhAbGludXRyb25peC5kZT4KQ2M6IEJv
+cmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+CkNjOiBKdWVyZ2VuIEdy
+b3NzIDxqZ3Jvc3NAc3VzZS5jb20+CkNjOiB4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+Q2M6IHg4NkBrZXJuZWwub3JnCkNjOiBzdGFibGVAdmdlci5rZXJuZWwub3JnICMgZm9yIHY0LjE3
+IGFuZCB1cApGaXhlczogZDk0YTE1NWM1OWM5ICgieDg2L2NwdTogUHJldmVudCBjcHVpbmZvX3g4
+Njo6eDg2X3BoeXNfYml0cyBhZGp1c3RtZW50IGNvcnJ1cHRpb24iKQpTaWduZWQtb2ZmLWJ5OiBC
+b3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgpTaWduZWQtb2ZmLWJ5
+OiBHcmVnIEtyb2FoLUhhcnRtYW4gPGdyZWdraEBsaW51eGZvdW5kYXRpb24ub3JnPgoKLS0tCiBh
+cmNoL3g4Ni9rZXJuZWwvY3B1L2NvbW1vbi5jIHwgICAgMiArLQogYXJjaC94ODYva2VybmVsL2Nw
+dS9jcHUuaCAgICB8ICAgIDEgKwogYXJjaC94ODYveGVuL2VubGlnaHRlbl9wdi5jICB8ICAgIDMg
+KysrCiAzIGZpbGVzIGNoYW5nZWQsIDUgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQoKLS0t
+IGEvYXJjaC94ODYva2VybmVsL2NwdS9jb21tb24uYworKysgYi9hcmNoL3g4Ni9rZXJuZWwvY3B1
+L2NvbW1vbi5jCkBAIC04ODMsNyArODgzLDcgQEAgdm9pZCBnZXRfY3B1X2NhcChzdHJ1Y3QgY3B1
+aW5mb194ODYgKmMpCiAJYXBwbHlfZm9yY2VkX2NhcHMoYyk7CiB9CiAKLXN0YXRpYyB2b2lkIGdl
+dF9jcHVfYWRkcmVzc19zaXplcyhzdHJ1Y3QgY3B1aW5mb194ODYgKmMpCit2b2lkIGdldF9jcHVf
+YWRkcmVzc19zaXplcyhzdHJ1Y3QgY3B1aW5mb194ODYgKmMpCiB7CiAJdTMyIGVheCwgZWJ4LCBl
+Y3gsIGVkeDsKIAotLS0gYS9hcmNoL3g4Ni9rZXJuZWwvY3B1L2NwdS5oCisrKyBiL2FyY2gveDg2
+L2tlcm5lbC9jcHUvY3B1LmgKQEAgLTQ2LDYgKzQ2LDcgQEAgZXh0ZXJuIGNvbnN0IHN0cnVjdCBj
+cHVfZGV2ICpjb25zdCBfX3g4NgogCQkJICAgICpjb25zdCBfX3g4Nl9jcHVfZGV2X2VuZFtdOwog
+CiBleHRlcm4gdm9pZCBnZXRfY3B1X2NhcChzdHJ1Y3QgY3B1aW5mb194ODYgKmMpOworZXh0ZXJu
+IHZvaWQgZ2V0X2NwdV9hZGRyZXNzX3NpemVzKHN0cnVjdCBjcHVpbmZvX3g4NiAqYyk7CiBleHRl
+cm4gdm9pZCBjcHVfZGV0ZWN0X2NhY2hlX3NpemVzKHN0cnVjdCBjcHVpbmZvX3g4NiAqYyk7CiBl
+eHRlcm4gaW50IGRldGVjdF9leHRlbmRlZF90b3BvbG9neV9lYXJseShzdHJ1Y3QgY3B1aW5mb194
+ODYgKmMpOwogZXh0ZXJuIGludCBkZXRlY3RfaHRfZWFybHkoc3RydWN0IGNwdWluZm9feDg2ICpj
+KTsKLS0tIGEvYXJjaC94ODYveGVuL2VubGlnaHRlbl9wdi5jCisrKyBiL2FyY2gveDg2L3hlbi9l
+bmxpZ2h0ZW5fcHYuYwpAQCAtMTI1OCw2ICsxMjU4LDkgQEAgYXNtbGlua2FnZSBfX3Zpc2libGUg
+dm9pZCBfX2luaXQgeGVuX3N0YQogCWdldF9jcHVfY2FwKCZib290X2NwdV9kYXRhKTsKIAl4ODZf
+Y29uZmlndXJlX254KCk7CiAKKwkvKiBEZXRlcm1pbmUgdmlydHVhbCBhbmQgcGh5c2ljYWwgYWRk
+cmVzcyBzaXplcyAqLworCWdldF9jcHVfYWRkcmVzc19zaXplcygmYm9vdF9jcHVfZGF0YSk7CisK
+IAkvKiBMZXQncyBwcmVzdW1lIFBWIGd1ZXN0cyBhbHdheXMgYm9vdCBvbiB2Q1BVIHdpdGggaWQg
+MC4gKi8KIAlwZXJfY3B1KHhlbl92Y3B1X2lkLCAwKSA9IDA7CiAKCgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
