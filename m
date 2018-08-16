@@ -1,17 +1,22 @@
-From: Zhenzhong Duan <zhenzhong.duan@oracle.com>
-Subject: Re: [PATCH] x86/mmcfg/drhd: Move acpi_mmcfg_init()
- before calling acpi_parse_dmar()
-Date: Thu, 16 Aug 2018 17:30:58 +0800
-Message-ID: <fdcad3f9-df8f-7242-b8e2-7447a153b7ad@oracle.com>
-References: <5fd7cd01-d55b-4fba-b57b-41560dc99cf2@default>
- <5B75235402000078001DEB68@prv1-mh.provo.novell.com>
- <670ef321-52e8-e501-faf9-a91e0ce94013@oracle.com>
-Reply-To: zhenzhong.duan@oracle.com
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/hvm/viridian: set shutdown_code in
+ response to CrashNotify
+Date: Thu, 16 Aug 2018 10:39:37 +0100
+Message-ID: <9560c716-dbfe-72b1-e922-68f99d2be9f8@citrix.com>
+References: <20180810154342.3296-1-paul.durrant@citrix.com>
+ <afa181cd-d5c7-97ec-b980-1d88ecb266ab@citrix.com>
+ <1af7af3a96b94f5f893f7f1ca91e8972@AMSPEX02CL03.citrite.net>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <670ef321-52e8-e501-faf9-a91e0ce94013@oracle.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=rytq=k7=citrix.com=prvs=759b2abc3=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1fqElD-0000SN-2I
+ for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 09:40:07 +0000
+In-Reply-To: <1af7af3a96b94f5f893f7f1ca91e8972@AMSPEX02CL03.citrite.net>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,24 +25,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: david.westwood@hpe.com, Andrew Cooper <andrew.cooper3@citrix.com>, Srinivas REDDY Eeda <srinivas.eeda@oracle.com>, Xen-Devel <xen-devel@lists.xen.org>, manoj.gopalasetty@hpe.com
+To: Paul Durrant <Paul.Durrant@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Ck9uIDIwMTgvOC8xNiAxNzoxMywgWmhlbnpob25nIER1YW4gd3JvdGU6Cj4+Cj4+PiAtLS0gYS94
-ZW4vYXJjaC94ODYvc2V0dXAuYwo+Pj4gKysrIGIveGVuL2FyY2gveDg2L3NldHVwLmMKPj4+IEBA
-IC0xNDkzLDYgKzE0OTMsMTAgQEAgdm9pZCBfX2luaXQgbm9yZXR1cm4gX19zdGFydF94ZW4odW5z
-aWduZWQgbG9uZyAKPj4+IG1iaV9wKQo+Pj4gwqDCoMKgwqDCoCBnZW5lcmljX2FwaWNfcHJvYmUo
-KTsKPj4+ICvCoMKgwqAgcHRfcGNpX2luaXQoKTsKPj4+ICsKPj4+ICvCoMKgwqAgYWNwaV9tbWNm
-Z19pbml0KCk7Cj4+PiArCj4+PiDCoMKgwqDCoMKgIGFjcGlfYm9vdF9pbml0KCk7Cj4+Cj4+IFdp
-dGggdGhlIGRlcGVuZGVuY3kgYmVpbmcgX2luXyBhY3BpX2Jvb3RfaW5pdCgpLCB0aGUgaW52b2Nh
-dGlvbiBvZgo+PiBhY3BpX21tY2ZnX2luaXQoKSBzaG91bGQgbm93IGJlIG1vdmVkIHRoZXJlLgo+
-IFllcywgSSBmZWVsIGJldHRlciB0byBtb3ZlIHB0X3BjaV9pbml0KCkgYW5kIGFjcGlfbW1jZmdf
-aW5pdCgpIGluIAo+IGFjcGlfYm9vdF9pbml0KCkgYmVmb3JlIGFjcGlfbW1jZmdfaW5pdCgpLiBB
-bnkgbW9yZSBjb21tZW50cz8KSSBzZWUgYWNwaV9ib290X2luaXQoKSBpcyBlbXB0eSBmdW5jIHdo
-ZW4gQ09ORklHX0FDUElfQk9PVCBpc24ndCBzZXQuIERvIAp3ZSBzdXBwb3J0IGRpc2FibGluZyB0
-aGlzIGNvbmZpZyBvcHRpb24/IElmIHllcywgSSB0aGluayBhYm92ZSBjaGFuZ2UgCndpbGwgYnJl
-YWsgbm9uLWFjcGkgY2FzZS4KClRoYW5rcwpaaGVuemhvbmcKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTAvMDgvMTggMTY6NTksIFBhdWwgRHVycmFudCB3cm90ZToKPj4gLS0tLS1PcmlnaW5hbCBN
+ZXNzYWdlLS0tLS0KPj4gRnJvbTogQW5kcmV3IENvb3Blcgo+PiBTZW50OiAxMCBBdWd1c3QgMjAx
+OCAxNjo1Nwo+PiBUbzogUGF1bCBEdXJyYW50IDxQYXVsLkR1cnJhbnRAY2l0cml4LmNvbT47IHhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwo+PiBDYzogSmFuIEJldWxpY2ggPGpiZXVsaWNo
+QHN1c2UuY29tPgo+PiBTdWJqZWN0OiBSZTogW1BBVENIXSB4ODYvaHZtL3ZpcmlkaWFuOiBzZXQg
+c2h1dGRvd25fY29kZSBpbiByZXNwb25zZSB0bwo+PiBDcmFzaE5vdGlmeQo+Pgo+PiBPbiAxMC8w
+OC8xOCAxNjo0MywgUGF1bCBEdXJyYW50IHdyb3RlOgo+Pj4gV2hlbiBXaW5kb3dzIHdyaXRlcyB0
+aGUgQ3Jhc2hOb3RpZnkgYml0IGluIHRoZSBDUkFTSF9DVEwgTVNSIHRoZW4gd2UKPj4ga25vdwo+
+Pj4gaXQgaXMgY3Jhc2hpbmcsIHNvIHNldCB0aGUgZG9tYWluIHNodXRkb3duIGNvZGUgYXBwcm9w
+cmlhdGVseS4KPj4+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBQYXVsIER1cnJhbnQgPHBhdWwuZHVycmFu
+dEBjaXRyaXguY29tPgo+Pj4gLS0tCj4+PiBDYzogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2Uu
+Y29tPgo+Pj4gQ2M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cj4+
+PiAtLS0KPj4+ICB4ZW4vYXJjaC94ODYvaHZtL3ZpcmlkaWFuLmMgfCA0ICsrKysKPj4+ICAxIGZp
+bGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspCj4+Pgo+Pj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNo
+L3g4Ni9odm0vdmlyaWRpYW4uYyBiL3hlbi9hcmNoL3g4Ni9odm0vdmlyaWRpYW4uYwo+Pj4gaW5k
+ZXggNDg2MDY1MTgyYy4uMjk0Y2Y0ODZjYyAxMDA2NDQKPj4+IC0tLSBhL3hlbi9hcmNoL3g4Ni9o
+dm0vdmlyaWRpYW4uYwo+Pj4gKysrIGIveGVuL2FyY2gveDg2L2h2bS92aXJpZGlhbi5jCj4+PiBA
+QCAtNjQ1LDYgKzY0NSwxMCBAQCBpbnQgd3Jtc3JfdmlyaWRpYW5fcmVncyh1aW50MzJfdCBpZHgs
+IHVpbnQ2NF90IHZhbCkKPj4+ICAgICAgICAgIGlmICggIWN0bC51LkNyYXNoTm90aWZ5ICkKPj4+
+ICAgICAgICAgICAgICBicmVhazsKPj4+Cj4+PiArICAgICAgICBzcGluX2xvY2soJmQtPnNodXRk
+b3duX2xvY2spOwo+Pj4gKyAgICAgICAgZC0+c2h1dGRvd25fY29kZSA9IFNIVVRET1dOX2NyYXNo
+Owo+Pj4gKyAgICAgICAgc3Bpbl91bmxvY2soJmQtPnNodXRkb3duX2xvY2spOwo+PiBIb3cgZG9l
+cyB0aGUgZG9tYWluIGV2ZW50dWFsbHkgc2h1dCBkb3duPwo+IEkgYXNzdW1lIGl0IHNodXRzIGRv
+d24gd2hlbiB0aGUgZ3Vlc3Qgd3JpdGVzIHRvIHRoZSBQSUlYLgo+Cj4+IMKgIEl0IGZlZWxzIHNs
+aWdodGx5IG9kZCB0byBoYXZlCj4+IGEgc2h1dGRvd24gY29kZSBiZWZvcmUgdGhlIGRvbWFpbiBo
+YXMgZmluaXNoZWQgZXhlY3V0aW5nIGNvZGUuCj4+Cj4gVGhhdCdzIHRoZSBub3JtLiBUaGUgUFYg
+ZHJpdmVycyAoaWYgdGhleSBhcmUgaW5zdGFsbGVkKSBzZXQgaXQgdmlhIGEgc2NoZWRvcC4gVGhp
+cyBqdXN0IG1ha2VzIHN1cmUgaXQgaXMgc2V0IGV2ZW4gaWYgdGhlIFBWIGRyaXZlcnMgYXJlbid0
+IHRoZXJlLgoKV2hhdCBoYXBwZW5zIGlmIHRoZSB1c2VyIGhhcyBjb25maWd1cmVkIHdpbmRvd3Mg
+dG8gcmVib290IGFmdGVyIGEgY3Jhc2g/Cgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
