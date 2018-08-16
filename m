@@ -1,18 +1,16 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: Future of 32-bit PV support
-Date: Thu, 16 Aug 2018 10:34:34 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1808161033060.16354@sstabellini-ThinkPad-X260>
-References: <ede80e02-5704-1d46-4edf-58515ad63f40@suse.com>
+Subject: Re: [PATCH v3 25/25] xen/arm: split domain_build.c
+Date: Thu, 16 Aug 2018 11:12:26 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1808161106110.16354@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1807311623060.5781@sstabellini-ThinkPad-X260>
+ <1533079688-9541-25-git-send-email-sstabellini@kernel.org>
+ <a5331c07-7f2a-dfee-6c7d-a3b3e6e21eb2@arm.com>
+ <alpine.DEB.2.10.1808151644360.15066@sstabellini-ThinkPad-X260>
+ <dbf9b7d3-b82c-47db-45d5-c0eabee4f232@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1766184295-1534443147=:16354"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=0lge=k7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fqMAR-0004Y0-7X
- for xen-devel@lists.xenproject.org; Thu, 16 Aug 2018 17:34:39 +0000
-In-Reply-To: <ede80e02-5704-1d46-4edf-58515ad63f40@suse.com>
+In-Reply-To: <dbf9b7d3-b82c-47db-45d5-c0eabee4f232@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,29 +19,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, bouyer@NetBSD.org, "xen-users@lists.xenproject.org" <xen-users@lists.xenproject.org>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCAxNiBBdWcgMjAxOCwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBJbiB0aGUgWGVuIHg4
-NiBjb21tdW5pdHkgY2FsbCB3ZSBoYXZlIGJlZW4gZGlzY3Vzc2luZyB3aGV0aGVyIGFueW9uZQo+
-IHJlYWxseSBpcyBkZXBlbmRpbmcgb24gMzItYml0IFBWIGd1ZXN0cy4gV2UnZCBsaWtlIHRvIGV2
-YWx1YXRlIHdoZXRoZXIKPiBhbnlvbmUgd291bGQgc2VlIHByb2JsZW1zIHdpdGg6Cj4gCj4gLSBk
-ZXByZWNhdGluZyAzMi1iaXQgUFYgZ3Vlc3Qgc3VwcG9ydCBpbiBYZW4sIG1lYW5pbmcgdGhhdCB3
-ZSdkCj4gICBldmVudHVhbGx5IHN3aXRjaCB0byBzdXBwb3J0IDMyLWJpdCBQViBndWVzdHMgb25s
-eSB2aWEgUFYtc2hpbSBmcm9tCj4gICBYZW4gNC4xMiBvciA0LjEzCj4gCj4gLSBkcm9wcGluZyAz
-Mi1iaXQgUFYgc3VwcG9ydCBmcm9tIHVwc3RyZWFtIExpbnV4IGtlcm5lbCwgcmVzdWx0aW5nIGlu
-Cj4gICBjdXJyZW50IDMyLWJpdCBQViBndWVzdHMgbm8gbG9uZ2VyIGJlaW5nIGFibGUgdG8gdXBn
-cmFkZSB0byB0aGUgbmV3ZXN0Cj4gICBrZXJuZWwgdmVyc2lvbiBhbnkgbG9uZ2VyCj4gCj4gQW5k
-IHJlbGF0ZWQgdG8gdGhhdDoKPiAKPiAtIGlzIHRoZXJlIGFueSBMaW51eCBkaXN0cmlidXRpb24g
-c3RpbGwgc2hpcHBpbmcgMzItYml0IFBWLWNhcGFibGUKPiAgIHN5c3RlbXM/Cj4gCj4gLSB3aGF0
-IGFib3V0IEJTRD8gSXMgMzItYml0IFBWIHN1cHBvcnQgaW1wb3J0YW50IHRoZXJlPwoKSGkgSnVl
-cmdlbiwKCkFsdGhvdWdoIEkgY2FuIHNlZSB0aGF0IGRlcHJlY2F0aW5nIDMyLWJpdCBQViBndWVz
-dCBzdXBwb3J0IGlzCmRlc2lyYWJsZSwgYW5kIGl0IG1pZ2h0IG5vdCBjYXVzZSBhbnkgcHJvYmxl
-bXMgdG8gTGludXggYW5kCkJTRHMsIHdlIG5lZWQgdG8gYmUgY2FyZWZ1bCBhYm91dCB1bmlrZXJu
-ZWxzLgoKVGhlcmUgYXJlIHByb2JhYmx5IHVuaWtlcm5lbHMgb3V0IHRoZXJlIHRoYXQgb25seSBz
-dXBwb3J0IFBWIDMyYml0CnN0aWxsLiBBbmQgd2h5IG5vdD8gSWYgeW91IGFyZSBkZXNpZ25pbmcg
-YSB1bmlrZXJuZWwgdG9kYXksIGl0IHdvdWxkCnN0aWxsIG1ha2Ugc2Vuc2UgdG8gdXNlIFBWIDMy
-Yml0IG9yIFBWSC4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1766184295-1534443147=:16354
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Thu, 16 Aug 2018, Julien Grall wrote:
+> Hi Stefano,
+> 
+> On 08/16/2018 01:25 AM, Stefano Stabellini wrote:
+> > On Mon, 13 Aug 2018, Julien Grall wrote:
+> > > > +
+> > > > +#ifndef CONFIG_ACPI
+> > > > +static inline int prepare_acpi(struct domain *d, struct kernel_info
+> > > > *kinfo)
+> > > > +{
+> > > > +    /* Only booting with ACPI will hit here */
+> > > > +    BUG();
+> > > > +    return -EINVAL;
+> > > > +}
+> > > > +#else
+> > > > +int prepare_acpi(struct domain *d, struct kernel_info *kinfo);
+> > > > +#endif
+> > > 
+> > > This one should go in asm-arm/acpi.h.
+> > > 
+> > > So this header is not necessary anymore.
+> > 
+> > I was unable to add prepare_acpi to asm-arm/acpi.h because it causes a
+> > #include dependency hell, I am thinking of adding it to
+> > asm-arm/domain_build.h.
+> > 
+> > In file included from
+> > /local/repos/xen-upstream/xen/include/xen/sched.h:11:0,
+> >                   from /local/repos/xen-upstream/xen/include/asm/domain.h:5,
+> >                   from
+> > /local/repos/xen-upstream/xen/include/asm/kernel.h:10,
+> >                   from /local/repos/xen-upstream/xen/include/asm/acpi.h:27,
+> >                   from
+> > /local/repos/xen-upstream/xen/include/acpi/platform/aclinux.h:58,
+> >                   from
+> > /local/repos/xen-upstream/xen/include/acpi/platform/acenv.h:142,
+> >                   from /local/repos/xen-upstream/xen/include/acpi/acpi.h:56,
+> >                   from /local/repos/xen-upstream/xen/include/xen/acpi.h:33,
+> >                   from pl011.c:307:
+> > /local/repos/xen-upstream/xen/include/xen/domain.h:59:31: error: ‘struct
+> > xen_domctl_createdomain’ declared inside parameter list will not be visible
+> > outside of this definition or declaration [-Werror]
+> >                          struct xen_domctl_createdomain *config);
+> 
+> Xen Arm headers are a bit a mess. :/
+> 
+> It looks like create_dom0 lives in setup.h, would it be possible to move the
+> prototypes there?
+
+It doesn't work either :-/
+
+The problem is that the prototype of prepare_acpi needs the definition
+of struct kernel_info, which triggers the include mess. Leaving the
+prototypes in asm-arm/domain_build.h work though.
+--8323329-1766184295-1534443147=:16354
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1766184295-1534443147=:16354--
