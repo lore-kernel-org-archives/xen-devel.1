@@ -1,15 +1,14 @@
 From: Daniel De Graaf <dgdegra@tycho.nsa.gov>
-Subject: Re: [PATCH 2/2] xen/xsm: Rename CONIFIG_XSM_POLICY to
- CONFIG_XSM_FLASK_POLICY
-Date: Fri, 17 Aug 2018 14:57:44 -0400
-Message-ID: <3d7fd969-4506-f0bc-1178-579c25d4e547@tycho.nsa.gov>
-References: <1530011348-4852-1-git-send-email-andrew.cooper3@citrix.com>
- <1530011348-4852-3-git-send-email-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 1/2] xen/xsm: Introduce new boot parameter
+ xsm
+Date: Fri, 17 Aug 2018 15:11:12 -0400
+Message-ID: <966260f9-4f89-4f88-6a70-9bf82407e97a@tycho.nsa.gov>
+References: <20180703012629.507-1-xin.li@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1530011348-4852-3-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <20180703012629.507-1-xin.li@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -19,23 +18,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Xin Li <xin.li@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <JBeulich@suse.com>, Ming Lu <ming.lu@citrix.com>
+To: Xin Li <talons.lee@gmail.com>, xen-devel@lists.xen.org
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Xin Li <xin.li@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ming Lu <ming.lu@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDYvMjYvMjAxOCAwNzowOSBBTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBUaGUgZW1iZWRk
-ZWQgcG9saWN5IGlzIHNwZWNpZmljIGZsYXNrLCBzbyB1cGRhdGUgdGhlIGluZnJhc3RydWN0dXJl
-IHRvIHJlZmxlY3QKPiB0aGlzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFu
-ZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpUaGlzIG9uZSBhY3R1YWxseSBoYXMgYSBoaXN0b3J5
-IG9mIGJlaW5nIHNoYXJlZCBiZXR3ZWVuIEZMQVNLIGFuZCBBQ00gKHRoZQpub3ctcmVtb3ZlZCBh
-bHRlcm5hdGl2ZSB0byBGTEFTSyBpbiBlYXJsaWVyIHZlcnNpb25zIG9mIFhlbikuICBIb3dldmVy
-LCB0aGUKY3VycmVudCBwb2xpY3kgZ2VuZXJhdGlvbiBpcyB2ZXJ5IHNwZWNpZmljIHRvIEZMQVNL
-LCBhbmQgaXQgd291bGQgYmUgdXNlZnVsCnRvIGFsbG93IG11bHRpcGxlIHNlY3VyaXR5IG1vZHVs
-ZXMgdG8gZWFjaCBoYXZlIHRoZWlyIG93biBkZWZhdWx0IHBvbGljeS4KCk92ZXJhbGwsIEkgdGhp
-bmsgaXQncyBhIHVzZWZ1bCBjaGFuZ2UuICBJcyB0aGVyZSBhIHJlYXNvbiB5b3UgY2hvc2UgdGhl
-CnByZWZpeCAieHNtX2luaXRfZmxhc2siIG92ZXIgInhzbV9mbGFza19pbml0Ij8gIFRoZSBsYXR0
-ZXIgbWF5IGJlIG1vcmUKYW1lbmFibGUgdG8gZ3JlcHBpbmcuCgpFaXRoZXIgd2F5LAoKQWNrZWQt
-Ynk6IERhbmllbCBEZSBHcmFhZiA8ZGdkZWdyYUB0eWNoby5uc2EuZ292PgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMDcvMDIvMjAxOCAwOToyNiBQTSwgWGluIExpIHdyb3RlOgo+IEludHJvZHVjZSBuZXcgYm9v
+dCBwYXJhbWV0ZXIgeHNtIHRvIGNob29zZSB3aGljaCB4c20gbW9kdWxlIGlzIGVuYWJsZWQsCj4g
+YW5kIHNldCBkZWZhdWx0IHRvIGR1bW15Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IFhpbiBMaSA8eGlu
+LmxpQGNpdHJpeC5jb20+CgpUaGlzIGlzIGEgY2hhbmdlIGluIGRlZmF1bHRzIGZvciB0aGUgY29t
+bWFuZCBsaW5lOiBwcmV2aW91c2x5LCBpZiB5b3UKY29tcGlsZWQgWGVuIHdpdGggRkxBU0sgc3Vw
+cG9ydCwgWGVuIGRlZmF1bHRlZCB0byB1c2luZyBpdCB1bmxlc3MgeW91CnNwZWNpZmllZCAiZmxh
+c2s9ZGlzYWJsZWQiIG9uIHRoZSBjb21tYW5kIGxpbmUuICBJZiB3ZSB3YW50IHRvIG1vZGVsIHRo
+ZQppbnRlcmZhY2UgYWZ0ZXIgTGludXgsIHRoZXJlIHdvdWxkIGJlIGEgS0NvbmZpZyBjaG9pY2Ug
+b2YgdGhlIGRlZmF1bHQKd2hpY2ggY2FuIGJlIG92ZXJyaWRkZW4gYnkgdGhlIGNvbW1hbmQgbGlu
+ZSwgc28gZGlzdHJpYnV0aW9ucyBjYW4ga2VlcApjdXJyZW50IGJlaGF2aW9yIChpbmNsdWRpbmcg
+bWFraW5nIHRoZSBkZWZhdWx0IGR1bW15IHdoaWxlIGVuYWJsaW5nIHRoZQpvdGhlciBYU00gbW9k
+dWxlcykuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
