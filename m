@@ -1,20 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86: use VMLOAD for PV context switch
-Date: Fri, 17 Aug 2018 01:33:43 -0600
-Message-ID: <5B767A5702000078001DF3AD@prv1-mh.provo.novell.com>
-References: <5B4486F302000078001D290A@prv1-mh.provo.novell.com>
- <20180816220408.GC9630@amd.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v2] libxl/arm: Fix build on arm64 + acpi w/
+ gcc 8.2
+Date: Fri, 17 Aug 2018 08:36:03 +0100
+Message-ID: <20180817073602.25nlho2pv3ktygts@citrix.com>
+References: <20180815072155.2zr5kum2odwpc6cj@citrix.com>
+ <1534450961-3321-1-git-send-email-christopher.w.clark@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ndfk=la=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fqZGU-0003bD-MO
- for xen-devel@lists.xenproject.org; Fri, 17 Aug 2018 07:33:46 +0000
-In-Reply-To: <20180816220408.GC9630@amd.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=v/z7=la=citrix.com=prvs=760f4e3ef=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1fqZIk-0003iL-Pm
+ for xen-devel@lists.xenproject.org; Fri, 17 Aug 2018 07:36:06 +0000
 Content-Disposition: inline
+In-Reply-To: <1534450961-3321-1-git-send-email-christopher.w.clark@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,44 +24,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Brian Woods <brian.woods@amd.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Christopher Clark <christopher.w.clark@gmail.com>
+Cc: xen-devel@lists.xenproject.org, julien.grall@arm.com, sstabellini@kernel.org, ian.jackson@eu.citrix.com, wei.liu2@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE3LjA4LjE4IGF0IDAwOjA0LCA8YnJpYW4ud29vZHNAYW1kLmNvbT4gd3JvdGU6Cj4g
-T24gVHVlLCBKdWwgMTAsIDIwMTggYXQgMDQ6MTQ6MTFBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4+IEhhdmluZyBub3RpY2VkIHRoYXQgVk1MT0FEIGFsb25lIGlzIGFib3V0IGFzIGZhc3Qg
-YXMgYSBzaW5nbGUgb2YgdGhlCj4+IGludm9sdmVkIFdSTVNScywgSSB0aG91Z2h0IGl0IG1pZ2h0
-IGJlIGEgcmVhc29uYWJsZSBpZGVhIHRvIGFsc28gdXNlIGl0Cj4+IGZvciBQVi4gTWVhc3VyZW1l
-bnRzLCBob3dldmVyLCBoYXZlIHNob3duIHRoYXQgYW4gYWN0dWFsIGltcHJvdmVtZW50IGNhbgo+
-PiBiZSBhY2hpZXZlZCBvbmx5IHdpdGggYW4gZWFybHkgcHJlZmV0Y2ggb2YgdGhlIFZNQ0IgKHRo
-YW5rcyB0byBBbmRyZXcKPj4gZm9yIHN1Z2dlc3RpbmcgdG8gdHJ5IHRoaXMpLCB3aGljaCBJIGhh
-dmUgdG8gYWRtaXQgSSBjYW4ndCByZWFsbHkKPj4gZXhwbGFpbi4gVGhpcyB3YXkgb24gbXkgRmFt
-MTUgYm94IGNvbnRleHQgc3dpdGNoIHRha2VzIG92ZXIgMTAwIGNsb2Nrcwo+PiBsZXNzIG9uIGF2
-ZXJhZ2UgKHRoZSBtZWFzdXJlZCB2YWx1ZXMgYXJlIGhlYXZpbHkgdmFyeWluZyBpbiBhbGwgY2Fz
-ZXMsCj4+IHRob3VnaCkuCj4+IAo+PiBUaGlzIGlzIGludGVudGlvbmFsbHkgbm90IHVzaW5nIGEg
-bmV3IGh2bV9mdW5jcyBob29rOiBGb3Igb25lLCB0aGlzIGlzCj4+IGFsbCBhYm91dCBQViwgYW5k
-IHNvbWV0aGluZyBzaW1pbGFyIGNhbiBoYXJkbHkgYmUgZG9uZSBmb3IgVk1YLgo+PiBGdXJ0aGVy
-bW9yZSB0aGUgaW5kaXJlY3QgdG8gZGlyZWN0IGNhbGwgcGF0Y2hpbmcgdGhhdCBpcyBtZWFudCB0
-byBiZQo+PiBhcHBsaWVkIHRvIG1vc3QgaHZtX2Z1bmNzIGhvb2tzIHdvdWxkIGJlIHVnbHkgdG8g
-bWFrZSB3b3JrIHdpdGgKPj4gZnVuY3Rpb25zIGhhdmluZyBtb3JlIHRoYW4gNiBwYXJhbWV0ZXJz
-Lgo+PiAKPj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+
-IAo+IEkgaGF2ZSBjb25maXJtZWQgaXQgd2l0aCBhIHNlbmlvciBoYXJkd2FyZSBlbmdpbmVlciBh
-bmQgdXNpbmcgdm1sb2FkIGluCj4gdGhpcyBmYXNoaW9uIGlzIHNhZmUgYW5kIHJlY29tbWVuZGVk
-IGZvciBwZXJmb3JtYW5jZS4gIEFzIGZhciBhcyB1c2luZwo+IHZtbG9hZCB3aXRoIFBWLgo+IAo+
-IEFja2VkLWJ5OiBCcmlhbiBXb29kcyA8YnJpYW4ud29vZHNAYW1kLmNvbT4KClRoYW5rcy4gVGhl
-cmUncyBhbm90aGVyIGFzcGVjdCBpbiB0aGlzIHNhbWUgYXJlYSB0aGF0IEknZCBsaWtlIHRvCmlt
-cHJvdmUsIGFuZCBoZW5jZSBzZWVrIGNsYXJpZmljYXRpb24gb24gdXAgZnJvbnQ6IEN1cnJlbnRs
-eSBTVk0KY29kZSB1c2VzIHR3byBwYWdlcyBwZXIgQ1BVLCBvbmUgZm9yIGhvc3Rfdm1jYiBhbmQg
-dGhlIG90aGVyCmZvciBoc2EuIEFmYWljdCB0aGUgdHdvIHVzZXMgYXJlIGVudGlyZWx5IGRpcy1q
-b2ludDogVGhlIGhvc3Qgc2F2ZQphcmVhIGxvb2tzIHRvIGJlIHNpbXBseSB5ZXQgYW5vdGhlciBW
-TUNCLCBhbmQgdGhlIHBhcnRzIGFjY2Vzc2VkCmR1cmluZyBWTVJVTiAvIFZNIGV4aXQgYXJlIGZ1
-bGx5IHNlcGFyYXRlIGZyb20gdGhlIG9uZXMgdXNlZCBieQpWTUxPQUQgLyBWTVNBVkUuIFRoZXJl
-Zm9yZSBJIHRoaW5rIGJvdGggY291bGQgYmUgZm9sZGVkLApyZWR1Y2luZyBjb2RlIHNpemUgYXMg
-d2VsbCBhcyBtZW1vcnkgKGFuZCBwZXJoYXBzIGNhY2hlKSBmb290cHJpbnQuCgpJIHRoaW5rIHRo
-aXMgc2VwYXJhdGlvbiB3YXMgZG9uZSBiZWNhdXNlIHRoZSBQTSBtZW50aW9ucyBib3RoCmRhdGEg
-c3RydWN0dXJlcyBzZXBhcmF0ZWx5LCBidXQgaWlyYyB0aGVyZSdzIG5vdGhpbmcgc2FpZCBhbnl3
-aGVyZQp0aGF0IHRoZSB0d28gc3RydWN0dXJlcyBpbmRlZWQgbmVlZCB0byBiZSBkaXN0aW5jdC4K
-CkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVGh1LCBBdWcgMTYsIDIwMTggYXQgMDE6MjI6NDFQTSAtMDcwMCwgQ2hyaXN0b3BoZXIgQ2xh
+cmsgd3JvdGU6Cj4gQWRkIHplcm8tcGFkZGluZyB0byAjZGVmaW5lZCBBQ1BJIHRhYmxlIHN0cmlu
+Z3MgdGhhdCBhcmUgY29waWVkLgo+IFByb3ZpZGVzIHN1ZmZpY2llbnQgY2hhcmFjdGVycyB0byBz
+YXRpc2Z5IHRoZSBsZW5ndGggcmVxdWlyZWQgdG8KPiBmdWxseSBwb3B1bGF0ZSB0aGUgZGVzdGlu
+YXRpb24gYW5kIHByZXZlbnQgYXJyYXktYm91bmRzIHdhcm5pbmdzLgo+IEFkZCBCVUlMRF9CVUdf
+T04gc2l6ZW9mIGNoZWNrcyBmb3IgY29tcGlsZS10aW1lIGxlbmd0aCBjaGVja2luZy4KPiAKPiBT
+aWduZWQtb2ZmLWJ5OiBDaHJpc3RvcGhlciBDbGFyayA8Y2hyaXN0b3BoZXIuY2xhcms2QGJhZXN5
+c3RlbXMuY29tPgo+IFJldmlld2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5p
+QGtlcm5lbC5vcmc+CgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
