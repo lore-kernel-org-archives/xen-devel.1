@@ -1,20 +1,15 @@
 From: Daniel De Graaf <dgdegra@tycho.nsa.gov>
-Subject: Re: [PATCH 2/2] xen/xsm: Add new SILO mode for XSM
-Date: Fri, 17 Aug 2018 15:25:17 -0400
-Message-ID: <c4d27750-4194-2b81-be87-8108f8b37674@tycho.nsa.gov>
-References: <20180629092810.25993-1-xin.li@citrix.com>
- <20180629092810.25993-2-xin.li@citrix.com>
- <5B360B9502000078001CF112@prv1-mh.provo.novell.com>
- <37c4feea41824b99a88e7575b8004976@SINPEX02CL01.citrite.net>
- <5B39D43602000078001CF94F@prv1-mh.provo.novell.com>
- <f36a7487eee1457daaa7f25ed50d147f@SINPEX02CL01.citrite.net>
- <5B39F29E02000078001CFA94@prv1-mh.provo.novell.com>
- <5a3e903cf6f54858965b66b843dcf586@SINPEX02CL01.citrite.net>
+Subject: Re: [PATCH v3 01/25] xen: allow console_io hypercalls
+ from certain DomUs
+Date: Fri, 17 Aug 2018 15:33:06 -0400
+Message-ID: <0788de31-00f7-4fb6-f5d5-ad80f7503e6f@tycho.nsa.gov>
+References: <alpine.DEB.2.10.1807311623060.5781@sstabellini-ThinkPad-X260>
+ <1533079688-9541-1-git-send-email-sstabellini@kernel.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5a3e903cf6f54858965b66b843dcf586@SINPEX02CL01.citrite.net>
+In-Reply-To: <1533079688-9541-1-git-send-email-sstabellini@kernel.org>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,18 +19,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Xin Li (Talons)" <xin.li@citrix.com>
-Cc: Xin Li <talons.lee@gmail.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, George Dunlap <George.Dunlap@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, Jan Beulich <JBeulich@suse.com>, Ming Lu <ming.lu@citrix.com>
+To: Stefano Stabellini <sstabellini@kernel.org>, julien.grall@arm.com
+Cc: Stefano Stabellini <stefanos@xilinx.com>, andrii_anisov@epam.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, xen-devel@lists.xen.org, tim@xen.org, jbeulich@suse.com, wei.liu2@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDcvMjQvMjAxOCAwNDoxOCBBTSwgWGluIExpIChUYWxvbnMpIHdyb3RlOgo+ICAgSGkgRGFu
-aWVsLAo+IAo+ICAgICAgIEkgdGhpbmsgdGhlIG1haW4gcXVlc3Rpb25zIGhlcmUgYXJlOgo+ICAg
-ICAgIDEuIERvIHdlIG5lZWQgYSBzZXBhcmF0ZWQgS0NvbmZpZyBvcHRpb24gZm9yIFNJTE8KClll
-czsgSSBtYWRlIGNvbW1lbnRzIG9uIHlvdXIgcGF0Y2ggZG9pbmcgc28KCj4gICAgICAgMi4gQ2Fu
-IHdlIHVzZSBpbmRpcmVjdCBjYWxsIGxpa2UgImR1bW15X3hzbV9vcHMuZ3JhbnRfY29weSIKPiAg
-ICAgICBBbnkgc3VnZ2VzdGlvbj8KCkl0IHdvdWxkIGJlIG5pY2UgdG8gYXZvaWQgaXQuICBNYWtp
-bmcgYSBnbG9iYWwgZHVtbXlfeHNtX2dyYW50X2NvcHkoKQpmdW5jdGlvbiB3b3VsZCBiZSBiZXR0
-ZXIsIHRob3VnaCB0aGUgYmVzdCBsb2NhdGlvbiBvZiB0aGUgcHJvdG90eXBlIGFuZApjb2RlIGlz
-bid0IG9idmlvdXMuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMDcvMzEvMjAxOCAwNzoyNyBQTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+IEludHJv
+ZHVjZSBhbiBpc19jb25zb2xlIG9wdGlvbiB0byBhbGxvdyBjZXJ0YWluIGNsYXNzZXMgb2YgZG9t
+VXMgdG8gdXNlCj4gdGhlIFhlbiBjb25zb2xlLiBTcGVjaWZpY2FsbHksIGl0IHdpbGwgYmUgdXNl
+ZCB0byBnaXZlIGNvbnNvbGUgYWNjZXNzIHRvCj4gYWxsIGRvbVVzIHN0YXJ0ZWQgZnJvbSBYZW4g
+ZnJvbSBpbmZvcm1hdGlvbiBvbiBkZXZpY2UgdHJlZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBTdGVm
+YW5vIFN0YWJlbGxpbmkgPHN0ZWZhbm9zQHhpbGlueC5jb20+CgpBY2tlZC1ieTogRGFuaWVsIERl
+IEdyYWFmIDxkZ2RlZ3JhQHR5Y2hvLm5zYS5nb3Y+CgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
