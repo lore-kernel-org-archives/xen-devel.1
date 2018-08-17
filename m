@@ -1,18 +1,17 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [xen-unstable-smoke test] 126019: regressions - FAIL
-Date: Fri, 17 Aug 2018 16:31:29 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1808171617120.16354@sstabellini-ThinkPad-X260>
-References: <osstest-126019-mainreport@xen.org>
- <5B767D5902000078001DF3CA@prv1-mh.provo.novell.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 2/2] xen/xsm: Rename CONIFIG_XSM_POLICY to
+ CONFIG_XSM_FLASK_POLICY
+Date: Sat, 18 Aug 2018 00:40:16 +0100
+Message-ID: <157bae5d-7d0c-e649-f4dd-f4b7cf52dd48@citrix.com>
+References: <1530011348-4852-1-git-send-email-andrew.cooper3@citrix.com>
+ <1530011348-4852-3-git-send-email-andrew.cooper3@citrix.com>
+ <3d7fd969-4506-f0bc-1178-579c25d4e547@tycho.nsa.gov>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-325859147-1534548689=:16354"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=78fa=la=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fqoDL-0001Wd-SA
- for xen-devel@lists.xenproject.org; Fri, 17 Aug 2018 23:31:31 +0000
-In-Reply-To: <5B767D5902000078001DF3CA@prv1-mh.provo.novell.com>
+In-Reply-To: <3d7fd969-4506-f0bc-1178-579c25d4e547@tycho.nsa.gov>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,56 +20,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, osstest service owner <osstest-admin@xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>
+To: Daniel De Graaf <dgdegra@tycho.nsa.gov>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Xin Li <xin.li@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <JBeulich@suse.com>, Ming Lu <ming.lu@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-325859147-1534548689=:16354
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Fri, 17 Aug 2018, Jan Beulich wrote:
-> >>> On 17.08.18 at 06:52, <osstest-admin@xenproject.org> wrote:
-> > flight 126019 xen-unstable-smoke real [real]
-> > http://logs.test-lab.xenproject.org/osstest/logs/126019/ 
-> > 
-> > Regressions :-(
-> > 
-> > Tests which did not succeed and are blocking,
-> > including tests which could not be run:
-> >  test-armhf-armhf-xl          12 guest-start              fail REGR. vs. 125923
-> 
-> Is anyone looking into this:
-> 
-> libxl: error: libxl_arm.c:124:libxl__arch_domain_save_config: Unexpected gic version 0
-> 
-> Looks like further fallout from 54ed251dc7.
-
-Looking at 54ed251dc7, I think this line is wrong:
-
--    memcpy(config, &domctl.u.createdomain.arch, sizeof(*config));
-
-the result is not copied back to the caller.
-
-But I can see that the following should have fixed that already:
-
-commit effed864104ad9bee3f72a2a7d9fb2146b8bf122
-Author: Roger Pau Monné <roger.pau@citrix.com>
-Date:   Fri Aug 17 13:59:35 2018 +0200
-
-    libxc: copy back the result of XEN_DOMCTL_createdomain
-
---8323329-325859147-1534548689=:16354
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-325859147-1534548689=:16354--
+T24gMTcvMDgvMTggMTk6NTcsIERhbmllbCBEZSBHcmFhZiB3cm90ZToKPiBPbiAwNi8yNi8yMDE4
+IDA3OjA5IEFNLCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+PiBUaGUgZW1iZWRkZWQgcG9saWN5IGlz
+IHNwZWNpZmljIGZsYXNrLCBzbyB1cGRhdGUgdGhlIGluZnJhc3RydWN0dXJlCj4+IHRvIHJlZmxl
+Y3QKPj4gdGhpcy4KPj4KPj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
+b3BlcjNAY2l0cml4LmNvbT4KPgo+IFRoaXMgb25lIGFjdHVhbGx5IGhhcyBhIGhpc3Rvcnkgb2Yg
+YmVpbmcgc2hhcmVkIGJldHdlZW4gRkxBU0sgYW5kIEFDTQo+ICh0aGUKPiBub3ctcmVtb3ZlZCBh
+bHRlcm5hdGl2ZSB0byBGTEFTSyBpbiBlYXJsaWVyIHZlcnNpb25zIG9mIFhlbikuwqAKPiBIb3dl
+dmVyLCB0aGUKPiBjdXJyZW50IHBvbGljeSBnZW5lcmF0aW9uIGlzIHZlcnkgc3BlY2lmaWMgdG8g
+RkxBU0ssIGFuZCBpdCB3b3VsZCBiZQo+IHVzZWZ1bAo+IHRvIGFsbG93IG11bHRpcGxlIHNlY3Vy
+aXR5IG1vZHVsZXMgdG8gZWFjaCBoYXZlIHRoZWlyIG93biBkZWZhdWx0IHBvbGljeS4KPgo+IE92
+ZXJhbGwsIEkgdGhpbmsgaXQncyBhIHVzZWZ1bCBjaGFuZ2UuwqAgSXMgdGhlcmUgYSByZWFzb24g
+eW91IGNob3NlIHRoZQo+IHByZWZpeCAieHNtX2luaXRfZmxhc2siIG92ZXIgInhzbV9mbGFza19p
+bml0Ij/CoCBUaGUgbGF0dGVyIG1heSBiZSBtb3JlCj4gYW1lbmFibGUgdG8gZ3JlcHBpbmcuCj4K
+PiBFaXRoZXIgd2F5LAo+Cj4gQWNrZWQtYnk6IERhbmllbCBEZSBHcmFhZiA8ZGdkZWdyYUB0eWNo
+by5uc2EuZ292PgoKVGhpcyB3YXMgc29tZSBzZWQgdG8gYmVnaW4gd2l0aCwgd2hpY2ggaXMgd2h5
+IHRoZXkgZW5kZWQgdXAgbGlrZSB0aGF0LsKgCkkgd2lsbCBtYWtlIHRob3NlIGFkanVzdG1lbnRz
+LgoKVGhhbmtzLAoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
