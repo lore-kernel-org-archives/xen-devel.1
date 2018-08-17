@@ -1,15 +1,15 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/6] x86/mm: Use mfn_eq()/mfn_add() rather
- than opencoded variations
-Date: Fri, 17 Aug 2018 06:54:46 -0600
-Message-ID: <5B76C59602000078001DF6C1@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH 3/6] x86/shadow: Switch
+ shadow_domain.has_fast_mmio_entries to bool
+Date: Fri, 17 Aug 2018 06:57:29 -0600
+Message-ID: <5B76C63902000078001DF6C8@prv1-mh.provo.novell.com>
 References: <1534358077-24700-1-git-send-email-andrew.cooper3@citrix.com>
- <1534358077-24700-2-git-send-email-andrew.cooper3@citrix.com>
+ <1534358077-24700-4-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1534358077-24700-2-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1534358077-24700-4-git-send-email-andrew.cooper3@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -20,23 +20,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IE9uIDE1LjA4LjE4IGF0IDIwOjM0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gLS0tIGEveGVuL2FyY2gveDg2L21tL2hhcC9oYXAuYwo+ICsrKyBiL3hlbi9hcmNoL3g4
-Ni9tbS9oYXAvaGFwLmMKPiBAQCAtNzI5LDcgKzcyOSw4IEBAIGhhcF93cml0ZV9wMm1fZW50cnko
-c3RydWN0IGRvbWFpbiAqZCwgdW5zaWduZWQgbG9uZyBnZm4sIGwxX3BnZW50cnlfdCAqcCwKPiAg
-ICAgICAgICAgKiB1bmxlc3MgdGhlIG9ubHkgY2hhbmdlIGlzIGFuIGluY3JlYXNlIGluIGFjY2Vz
-cyByaWdodHMuICovCj4gICAgICAgICAgbWZuX3Qgb21mbiA9IGwxZV9nZXRfbWZuKCpwKTsKPiAg
-ICAgICAgICBtZm5fdCBubWZuID0gbDFlX2dldF9tZm4obmV3KTsKPiAtICAgICAgICBmbHVzaF9u
-ZXN0ZWRwMm0gPSAhKCBtZm5feChvbWZuKSA9PSBtZm5feChubWZuKQo+ICsKPiArICAgICAgICBm
-bHVzaF9uZXN0ZWRwMm0gPSAhKG1mbl9lcShvbWZuLCBubWZuKQo+ICAgICAgICAgICAgICAmJiBw
-ZXJtc19zdHJpY3RseV9pbmNyZWFzZWQob2xkX2ZsYWdzLCBsMWVfZ2V0X2ZsYWdzKG5ldykpICk7
-CgpTZWVpbmcgdGhhdCB5b3Ugc3RyaXAgdGhlIHN0cmF5IGxlYWRpbmcgc3BhY2UsIGNvdWxkIHlv
-dSBzdHJpcCB0aGUgc3RyYXkKdHJhaWxpbmcgb25lIGFzIHdlbGwsIGFuZCBtb3ZlIHRoZSAmJiB0
-byBpdHMgcHJvcGVyIHBsYWNlPwoKV2l0aCB0aGUgb25lIHByZXZpb3VzbHkgcG9pbnRlZCBvdXQg
-aXNzdWUgZml4ZWQKUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4K
-CkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+dGU6Cj4gLS0tIGEveGVuL2FyY2gveDg2L21tL3NoYWRvdy9tdWx0aS5jCj4gKysrIGIveGVuL2Fy
+Y2gveDg2L21tL3NoYWRvdy9tdWx0aS5jCj4gQEAgLTU2Myw4ICs1NjMsNyBAQCBfc2hfcHJvcGFn
+YXRlKHN0cnVjdCB2Y3B1ICp2LAo+ICAgICAgewo+ICAgICAgICAgIC8qIEd1ZXN0IGwxZSBtYXBz
+IGVtdWxhdGVkIE1NSU8gc3BhY2UgKi8KPiAgICAgICAgICAqc3AgPSBzaF9sMWVfbW1pbyh0YXJn
+ZXRfZ2ZuLCBnZmxhZ3MpOwo+IC0gICAgICAgIGlmICggIWQtPmFyY2gucGFnaW5nLnNoYWRvdy5o
+YXNfZmFzdF9tbWlvX2VudHJpZXMgKQo+IC0gICAgICAgICAgICBkLT5hcmNoLnBhZ2luZy5zaGFk
+b3cuaGFzX2Zhc3RfbW1pb19lbnRyaWVzID0gMTsKPiArICAgICAgICBkLT5hcmNoLnBhZ2luZy5z
+aGFkb3cuaGFzX2Zhc3RfbW1pb19lbnRyaWVzID0gdHJ1ZTsKCkFyZSB5b3Ugc3VyZSB0aGUgaWYo
+KSBpc24ndCBpbnRlbnRpb25hbGx5IHRoZXJlIHRvIGF2b2lkIGRpcnR5aW5nIGEKY2FjaGVsaW5l
+IHdoZW4gdGhlIHZhbHVlIGlzIGFscmVhZHkgYXMgaW50ZW5kZWQ/CgpKYW4KCgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
