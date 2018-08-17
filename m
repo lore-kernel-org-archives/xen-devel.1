@@ -1,26 +1,29 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v3 4/5] x86: use MOV for PFN/PDX conversion
- when possible
-Date: Fri, 17 Aug 2018 09:41:32 +0100
-Message-ID: <346f7e0e-a18a-9327-bfcd-decd30a4ee2d@citrix.com>
-References: <5AA7E79302000078001B0FAB@prv1-mh.provo.novell.com>
- <5AA7D98302000000000F73C0@prv1-mh.provo.novell.com>
- <5AA7D98302000078001CDC8C@prv1-mh.provo.novell.com>
- <5AA7D98302000000000F8008@prv1-mh.provo.novell.com>
- <5AA7D98302000078001DD5F0@prv1-mh.provo.novell.com>
- <5B76740802000078001DF345@prv1-mh.provo.novell.com>
- <5B7677DC02000078001DF38A@prv1-mh.provo.novell.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v3 0/4] x86/iommu: PVH Dom0 workarounds for
+ missing RMRR entries
+Date: Fri, 17 Aug 2018 10:53:23 +0200
+Message-ID: <20180817085323.hglub4jq2lqer2rf@mac>
+References: <20180807143715.kscihz3wuj6mcnfi@mac>
+ <CABfawhmQ557uduVUJjTMbZ3u5FWswPvbVYSUBY785Vx=qbitfA@mail.gmail.com>
+ <20180807150829.ydvmvpfyrigeeyyd@mac>
+ <CABfawhkomnqJ4rjc5ZBZ+rdJSeqx1XTeAKSeYQRva-BoLQeHsw@mail.gmail.com>
+ <CABfawhnSmeR_SeMHjL7CG0tCnnHUKPdCPQePD_iRVZiO4N+mxw@mail.gmail.com>
+ <20180808082557.iklujkqgmb5sdzyr@mac>
+ <5B6ABDE202000078001DBE54@prv1-mh.provo.novell.com>
+ <CABfawh=c168v2EDXoqUAgOTM4v3rodRUqQk8XYMMFgo_68PM_w@mail.gmail.com>
+ <5B73CACA02000078001DE1B5@prv1-mh.provo.novell.com>
+ <CABfawhmP2z66b7eamaZ-Kc_D=kGEc-0OFRo6EjVUo2Oc0ePCZg@mail.gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=lgsd=la=citrix.com=prvs=760e009d3=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1fqaKY-00034y-So
- for xen-devel@lists.xenproject.org; Fri, 17 Aug 2018 08:42:02 +0000
-In-Reply-To: <5B7677DC02000078001DF38A@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+ <srs0=qfmz=la=citrix.com=prvs=760927a5f=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fqaVj-0004Eh-1v
+ for xen-devel@lists.xenproject.org; Fri, 17 Aug 2018 08:53:35 +0000
+Content-Disposition: inline
+In-Reply-To: <CABfawhmP2z66b7eamaZ-Kc_D=kGEc-0OFRo6EjVUo2Oc0ePCZg@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,24 +32,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Connor Davis <davisc@ainfosec.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTcvMDgvMjAxOCAwODoyMywgSmFuIEJldWxpY2ggd3JvdGU6Cj4gLi4uIGFuZCAob2YgY291
-cnNlKSBhbHNvIG1hZGRyIC8gZGlyZWN0LW1hcC1vZmZzZXQgb25lcy4KPgo+IE1vc3QgeDg2IHN5
-c3RlbXMgZG9uJ3QgYWN0dWFsbHkgcmVxdWlyZSB0aGUgdXNlIG9mIFBEWCBjb21wcmVzc2lvbi4g
-Tm93Cj4gdGhhdCB3ZSBoYXZlIHBhdGNoaW5nIGZvciB0aGUgY29udmVyc2lvbiBjb2RlIGluIHBs
-YWNlIGFueXdheSwgZXh0ZW5kIGl0Cj4gdG8gdXNlIHNpbXBsZSBNT1Ygd2hlbiBwb3NzaWJsZS4g
-SW50cm9kdWNlIGEgbmV3IHBzZXVkby1DUFUtZmVhdHVyZSB0bwo+IGtleSB0aGUgcGF0Y2hpbmcg
-b2ZmIG9mLgo+Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29t
-Pgo+IC0tLQo+IFRoZSBpbmRlbnRhdGlvbiBvZiB0aGUgYWx0ZXJuYXRpdmVfaW9fMigpIHVzZXMg
-YmVsb3cgZW5kcyB1cCB3cm9uZywgYnV0Cj4gcmUtaW5kZW50aW5nIGhlcmUgc2VlbXMgdW5kZXNp
-cmFibGUuIEkgY291bGQgZWl0aGVyIGFkZCBhIGZvbGxvdy11cAo+IHJlLWZvcm1hdHRpbmcgcGF0
-Y2gsIG9yIHNpbXBseSBzbGlnaHRseSBib2RnZSB0aGUgaW5kZW50YXRpb24gaW4gdGhlCj4gZWFy
-bGllciBwYXRjaGVzLCBmb3IgaXQgdG8gY29tZSBvdXQgcmlnaHQgaGVyZS4KCkkndmUgdXNlZCB0
-aGUgImJvZGdlIHRoZSBpbmRlbnRhdGlvbiBpbiB0aGUgZWFybGllciBwYXRjaGVzIiB0cmljawpi
-ZWZvcmUsIGFuZCBpdCBpcyBwcm9iYWJseSB0aGUgY2xlYW5lc3QgYXBwcm9hY2guCgpBY2tlZC1i
-eTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVGh1LCBBdWcgMTYsIDIwMTggYXQgMTA6NDM6NTRBTSAtMDYwMCwgVGFtYXMgSyBMZW5neWVs
+IHdyb3RlOgo+IEkgZG91YmxlIGNoZWNrZWQgYW5kIHRoZSBvcHRpb24gaXMgc2V0IHByb3Blcmx5
+IGJ1dCBJJ20gc3RpbGwgZ2V0dGluZwo+IHRoZSBzYW1lIG5vbi1wcmVzZW50IGVudHJ5IGZhdWx0
+cyBhcyBiZWZvcmUuIEF0IHRoZSBtb21lbnQgSSBkb24ndAo+IGhhdmUgc2VyaWFsIGFjY2VzcyBz
+byBub3Qgc3VyZSBob3cgdG8gdmVyaWZ5IHRoYXQgdGhlIG9wdGlvbiB0b29rCj4gZWZmZWN0LiBU
+aGlzIGlzIG15IGJvb3QgaW5mbzoKPiAKPiBbcHZoXQo+IG9wdGlvbnM9bG9nbHZsPWFsbCBndWVz
+dF9sb2dsdmw9YWxsIGRvbTBfbWVtPTQwOTZNLG1heDo0MDk2TQo+IGRvbTBfbWF4X3ZjcHVzPTIg
+c2NoZWQ9bnVsbCBkb20wPXB2aCBpb21tdT1yZXF1aXJlZCxkZWJ1Zwo+IGRvbTAtaW9tbXU9cmVs
+YXhlZCBjb25zb2xlPXZnYQo+IHJtcnI9MHg1ZjQ4Mzg1PTA6MDoyLjAsMHgyMTYxODM9MDowOjIu
+MCwweDcwYjZkMTk9MDowOjIuMAoKVGhpcyBpcyBub3QgdGhlIGNvcnJlY3QgZm9ybWF0LiBJdCdz
+OgoKcm1ycj0weDVmNDgzODU9MDowOjIuMDsweDIxNjE4Mz0wOjA6Mi4wOzB4NzBiNmQxOT0wOjA6
+Mi4wCgpOb3RlIHRoZSAnOycgYmV0d2VlbiBybXJyIGVudHJpZXMuCgpSb2dlci4KCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
