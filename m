@@ -1,17 +1,26 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/2] xen/xsm: Rename CONIFIG_XSM_POLICY to
- CONFIG_XSM_FLASK_POLICY
-Date: Sat, 18 Aug 2018 00:40:16 +0100
-Message-ID: <157bae5d-7d0c-e649-f4dd-f4b7cf52dd48@citrix.com>
-References: <1530011348-4852-1-git-send-email-andrew.cooper3@citrix.com>
- <1530011348-4852-3-git-send-email-andrew.cooper3@citrix.com>
- <3d7fd969-4506-f0bc-1178-579c25d4e547@tycho.nsa.gov>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Rich Persaud <persaur@gmail.com>
+Subject: Re: [PATCH v3 5/5] x86: use PDEP for PTE flags
+ insertion when available
+Date: Fri, 17 Aug 2018 21:08:27 -0400
+Message-ID: <B9ED55E9-8146-4202-84CD-6DE928E75D45@gmail.com>
+References: <5AA7E79302000078001B0FAB@prv1-mh.provo.novell.com>
+ <5AA7D98302000000000F73C0@prv1-mh.provo.novell.com>
+ <5AA7D98302000078001CDC8C@prv1-mh.provo.novell.com>
+ <5AA7D98302000000000F8008@prv1-mh.provo.novell.com>
+ <5AA7D98302000078001DD5F0@prv1-mh.provo.novell.com>
+ <5B76740802000078001DF345@prv1-mh.provo.novell.com>
+ <5B76781702000078001DF38D@prv1-mh.provo.novell.com>
+Mime-Version: 1.0 (1.0)
+Content-Type: multipart/mixed; boundary="===============4865817783663196547=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <3d7fd969-4506-f0bc-1178-579c25d4e547@tycho.nsa.gov>
-Content-Language: en-GB
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=xf3e=lb=gmail.com=persaur@srs-us1.protection.inumbo.net>)
+ id 1fqpjC-0008HO-2F
+ for xen-devel@lists.xenproject.org; Sat, 18 Aug 2018 01:08:30 +0000
+Received: by mail-it0-x231.google.com with SMTP id j81-v6so13715839ite.0
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Aug 2018 18:08:28 -0700 (PDT)
+In-Reply-To: <5B76781702000078001DF38D@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,27 +29,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Daniel De Graaf <dgdegra@tycho.nsa.gov>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Xin Li <xin.li@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <JBeulich@suse.com>, Ming Lu <ming.lu@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTcvMDgvMTggMTk6NTcsIERhbmllbCBEZSBHcmFhZiB3cm90ZToKPiBPbiAwNi8yNi8yMDE4
-IDA3OjA5IEFNLCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+PiBUaGUgZW1iZWRkZWQgcG9saWN5IGlz
-IHNwZWNpZmljIGZsYXNrLCBzbyB1cGRhdGUgdGhlIGluZnJhc3RydWN0dXJlCj4+IHRvIHJlZmxl
-Y3QKPj4gdGhpcy4KPj4KPj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT4KPgo+IFRoaXMgb25lIGFjdHVhbGx5IGhhcyBhIGhpc3Rvcnkgb2Yg
-YmVpbmcgc2hhcmVkIGJldHdlZW4gRkxBU0sgYW5kIEFDTQo+ICh0aGUKPiBub3ctcmVtb3ZlZCBh
-bHRlcm5hdGl2ZSB0byBGTEFTSyBpbiBlYXJsaWVyIHZlcnNpb25zIG9mIFhlbikuwqAKPiBIb3dl
-dmVyLCB0aGUKPiBjdXJyZW50IHBvbGljeSBnZW5lcmF0aW9uIGlzIHZlcnkgc3BlY2lmaWMgdG8g
-RkxBU0ssIGFuZCBpdCB3b3VsZCBiZQo+IHVzZWZ1bAo+IHRvIGFsbG93IG11bHRpcGxlIHNlY3Vy
-aXR5IG1vZHVsZXMgdG8gZWFjaCBoYXZlIHRoZWlyIG93biBkZWZhdWx0IHBvbGljeS4KPgo+IE92
-ZXJhbGwsIEkgdGhpbmsgaXQncyBhIHVzZWZ1bCBjaGFuZ2UuwqAgSXMgdGhlcmUgYSByZWFzb24g
-eW91IGNob3NlIHRoZQo+IHByZWZpeCAieHNtX2luaXRfZmxhc2siIG92ZXIgInhzbV9mbGFza19p
-bml0Ij/CoCBUaGUgbGF0dGVyIG1heSBiZSBtb3JlCj4gYW1lbmFibGUgdG8gZ3JlcHBpbmcuCj4K
-PiBFaXRoZXIgd2F5LAo+Cj4gQWNrZWQtYnk6IERhbmllbCBEZSBHcmFhZiA8ZGdkZWdyYUB0eWNo
-by5uc2EuZ292PgoKVGhpcyB3YXMgc29tZSBzZWQgdG8gYmVnaW4gd2l0aCwgd2hpY2ggaXMgd2h5
-IHRoZXkgZW5kZWQgdXAgbGlrZSB0aGF0LsKgCkkgd2lsbCBtYWtlIHRob3NlIGFkanVzdG1lbnRz
-LgoKVGhhbmtzLAoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+
+--===============4865817783663196547==
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-0041B1EF-36BA-42F0-8EC1-16B7608C7636
+Content-Transfer-Encoding: 7bit
+
+
+--Apple-Mail-0041B1EF-36BA-42F0-8EC1-16B7608C7636
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+On Aug 17, 2018, at 03:24, Jan Beulich <JBeulich@suse.com> wrote:
+>=20
+> This replaces 5 instructions by a single one, further reducing code size,
+> cache, and TLB footprint (in particular on systems supporting BMI2).
+
+This link claims that BMI2 may be less performant/consistent on AMD Ryzen th=
+an Intel:
+https://www.reddit.com/r/Amd/comments/60i6er/ryzen_and_bmi2_strange_behavior=
+_and_high_latencies/
+
+Would this patch series have any benefit to L0 hypervisors/rootkits (e.g. Br=
+omium, Bareflank or similar hypervisors) which could be monitoring L1 Xen?  O=
+r Xen as L0 hypervisor and Hyper-V as L1 hypervisor?
+
+Rich=
+
+--Apple-Mail-0041B1EF-36BA-42F0-8EC1-16B7608C7636
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><div></div><div>On Aug 17, 2018, at 03:24, J=
+an Beulich &lt;<a href=3D"mailto:JBeulich@suse.com">JBeulich@suse.com</a>&gt=
+; wrote:</div><div><br></div><blockquote type=3D"cite"><span>This replaces 5=
+ instructions by a single one, further reducing code size,</span><br><span>c=
+ache, and TLB footprint (in particular on systems supporting BMI2).</span><b=
+r></blockquote><br><div>This link claims that BMI2 may be less performant/co=
+nsistent on AMD Ryzen than Intel:</div><div><a href=3D"https://www.reddit.co=
+m/r/Amd/comments/60i6er/ryzen_and_bmi2_strange_behavior_and_high_latencies/"=
+>https://www.reddit.com/r/Amd/comments/60i6er/ryzen_and_bmi2_strange_behavio=
+r_and_high_latencies/</a></div><div><br></div><div>Would this patch series h=
+ave any benefit to L0 hypervisors/rootkits (e.g. Bromium, Bareflank or simil=
+ar hypervisors) which could be monitoring L1 Xen? &nbsp;Or Xen as L0 hypervi=
+sor and Hyper-V as L1 hypervisor?</div><div><br></div><div>Rich</div></body>=
+</html>=
+
+--Apple-Mail-0041B1EF-36BA-42F0-8EC1-16B7608C7636--
+
+
+--===============4865817783663196547==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4865817783663196547==--
