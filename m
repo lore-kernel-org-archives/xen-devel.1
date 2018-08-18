@@ -1,16 +1,15 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [qemu-mainline test] 125959: tolerable FAIL - PUSHED
-Date: Sat, 18 Aug 2018 17:09:27 +0000
-Message-ID: <osstest-125959-mainreport@xen.org>
+Subject: [libvirt bisection] complete build-amd64-libvirt
+Date: Sat, 18 Aug 2018 18:24:06 +0000
+Message-ID: <E1fr5tO-0005Ln-Md@osstest.test-lab.xenproject.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6288788758601829662=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=xo0w=lb=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fr4jE-0006WB-HF
- for xen-devel@lists.xenproject.org; Sat, 18 Aug 2018 17:09:32 +0000
+ id 1fr5tR-0003zO-Rp
+ for xen-devel@lists.xenproject.org; Sat, 18 Aug 2018 18:24:09 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,195 +21,236 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNTk1OSBxZW11LW1haW5saW5lIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3Qt
-bGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjU5NTkvCgpGYWlsdXJlcyA6LS8gYnV0
-IG5vIHJlZ3Jlc3Npb25zLgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5v
-dCBibG9ja2luZzoKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVz
-dC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyNTY0MAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV1LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTI1NjQw
-CiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hl
-Y2sgICAgZmFpbCAgbGlrZSAxMjU2NDAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3MxNi1h
-bWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyNTY0MAogdGVzdC1hcm1o
-Zi1hcm1oZi1saWJ2aXJ0LXJhdyAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwg
-IGxpa2UgMTI1NjQwCiB0ZXN0LWFtZDY0LWkzODYteGwtcHZzaGltICAgIDEyIGd1ZXN0LXN0YXJ0
-ICAgICAgICAgICAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2
-aXJ0LXhzbSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFz
-cwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sg
-ICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQteHNtIDEz
-IG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1k
-NjQtaTM4Ni1saWJ2aXJ0ICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWls
-ICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFt
-ZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFt
-ZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1
-cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUg
-IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRl
-Ymlhbi1odm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0
-LWxpYnZpcnQtdmhkIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNo
-ZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgMTQgc2F2ZXJl
-c3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1o
-Zi14bC1jdWJpZXRydWNrIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCBuZXZl
-ciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWN1YmlldHJ1Y2sgMTQgc2F2ZXJlc3RvcmUtc3Vw
-cG9ydC1jaGVjayAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2
-Y3B1IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVz
-dC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAg
-ICBmYWlsICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMgICAgIDEzIG1pZ3Jh
-dGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJt
-aGYteGwtcnRkcyAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAxMiBtaWdyYXRlLXN1cHBvcnQt
-Y2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAg
-ICAgIDEzIHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQg
-MTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
-bWhmLWxpYnZpcnQtcmF3IDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dz
-LWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1
-LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCgp2
-ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogcWVtdXUgICAgICAgICAgICAgICAgYzU0MmE5
-Zjk3OTRlYzhlMGJjM2ZjZjU5NTZkM2NjOGJjZTY2Nzc4OQpiYXNlbGluZSB2ZXJzaW9uOgogcWVt
-dXUgICAgICAgICAgICAgICAgMThhMzk4ZjZhMzlkZjRiMDhmZjg2YWMwZDM4Mzg0MTkzY2E1ZjRj
-YwoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI1NjQwICAyMDE4LTA3LTI3IDIyOjE2OjQ0IFogICAy
-MSBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyNTY3NSAgMjAxOC0wNy0zMCAwOTozNjo1OCBa
-ICAgMTkgZGF5cyAgIDEyIGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEyNTk1OSAgMjAx
-OC0wOC0xNiAwOTo1Njo1OCBaICAgIDIgZGF5cyAgICAxIGF0dGVtcHRzCgotLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdo
-byB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFkYW0gTGFja29yenluc2tpIDxhZGFt
-QGw0cmUub3JnPgogIEFsYmVydG8gR2FyY2lhIDxiZXJ0b0BpZ2FsaWEuY29tPgogIEFsZXggQmVu
-bsOpZSA8YWxleC5iZW5uZWVAbGluYXJvLm9yZz4KICBCQUxBVE9OIFpvbHRhbiA8YmFsYXRvbkBl
-aWsuYm1lLmh1PgogIENocmlzdGlhbiBCb3JudHJhZWdlciA8Ym9ybnRyYWVnZXJAZGUuaWJtLmNv
-bT4KICBDb3JuZWxpYSBIdWNrIDxjb2h1Y2tAcmVkaGF0LmNvbT4KICBDw6lkcmljIExlIEdvYXRl
-ciA8Y2xnQGthb2Qub3JnPgogIERhbmllbCBQLiBCZXJyYW5nw6kgPGJlcnJhbmdlQHJlZGhhdC5j
-b20+CiAgRGF2aWQgR2lic29uIDxkYXZpZEBnaWJzb24uZHJvcGJlYXIuaWQuYXU+CiAgRG91IExp
-eWFuZyA8ZG91bHkuZm5zdEBjbi5mdWppdHN1LmNvbT4KICBEci4gRGF2aWQgQWxhbiBHaWxiZXJ0
-IDxkZ2lsYmVydEByZWRoYXQuY29tPgogIEVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPgog
-IEZhbSBaaGVuZyA8ZmFtekByZWRoYXQuY29tPgogIEdlZXJ0IFV5dHRlcmhvZXZlbiA8Z2VlcnQr
-cmVuZXNhc0BnbGlkZXIuYmU+CiAgSWdvciBNYW1tZWRvdiA8aW1hbW1lZG9AcmVkaGF0LmNvbT4K
-ICBKYXkgWmhvdSA8amlhbmpheS56aG91QGh1YXdlaS5jb20+CiAgSnVsaWEgU3V2b3JvdmEgPGp1
-c3VhbEBtYWlsLnJ1PgogIEtldmluIFdvbGYgPGt3b2xmQHJlZGhhdC5jb20+CiAgS09OUkFEIEZy
-ZWRlcmljIDxmcmVkZXJpYy5rb25yYWRAYWRhY29yZS5jb20+CiAgTGF1cmVudCBEZXNub2d1ZXMg
-PGxhdXJlbnQuZGVzbm9ndWVzQGdtYWlsLmNvbT4KICBMYXVyZW50IFZpdmllciA8bGF1cmVudEB2
-aXZpZXIuZXU+CiAgTGVvbmlkIEJsb2NoIDxsYmxvY2hAamFudXN0ZWNoLmNvbT4KICBsaXVqdW5q
-aWUgPGxpdWp1bmppZTIzQGh1YXdlaS5jb20+CiAgTHVjIE1pY2hlbCA8bHVjLm1pY2hlbEBncmVl
-bnNvY3MuY29tPgogIE1hcmMtQW5kcsOpIEx1cmVhdSA8bWFyY2FuZHJlLmx1cmVhdUByZWRoYXQu
-Y29tPgogIE1hcmt1cyBBcm1icnVzdGVyIDxhcm1icnVAcmVkaGF0LmNvbT4KICBNYXggRmlsaXBw
-b3YgPGpjbXZia2JjQGdtYWlsLmNvbT4KICBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEByZWRoYXQu
-Y29tPgogIFBhb2xvIEJvbnppbmkgPHBib256aW5pQHJlZGhhdC5jb20+CiAgUGF2ZWwgRG92Z2Fs
-eXVrIDxQYXZlbC5Eb3ZnYWx1a0Bpc3ByYXMucnU+CiAgUGV0ZXIgS3JlbXBhIDxwa3JlbXBhQHJl
-ZGhhdC5jb20+CiAgUGV0ZXIgTWF5ZGVsbCA8cGV0ZXIubWF5ZGVsbEBsaW5hcm8ub3JnPgogIFBo
-aWxpcHBlIE1hdGhpZXUtRGF1ZMOpIDxmNGJ1Z0BhbXNhdC5vcmc+CiAgUmljaGFyZCBIZW5kZXJz
-b24gPHJpY2hhcmQuaGVuZGVyc29uQGxpbmFyby5vcmc+CiAgU2ViYXN0aWFuIEJhdWVyIDxtYWls
-QHNlYmFzdGlhbmJhdWVyLmluZm8+CiAgU2hpdmFwcmFzYWQgRyBCaGF0IDxzYmhhdEBsaW51eC52
-bmV0LmlibS5jb20+CiAgU3RlZmFuIEJlcmdlciA8c3RlZmFuYkBsaW51eC52bmV0LmlibS5jb20+
-CiAgVGhvbWFzIEh1dGggPHRodXRoQHJlZGhhdC5jb20+CiAgVGl3ZWkgQmllIDx0aXdlaS5iaWVA
-aW50ZWwuY29tPgogIFZsYWRpbWlyIFNlbWVudHNvdi1PZ2lldnNraXkgPHZzZW1lbnRzb3ZAdmly
-dHVvenpvLmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYteHNtICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1k
-NjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1o
-Zi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYt
-cHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0
-LXhzbSAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRl
-Ymlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC14c20gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwteHNtICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQtcWVtdXUtbmVzdGVkLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0tYW1kICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGVi
-aWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2
-LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYt
-YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYt
-eGwtYXJuZGFsZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC1xZW11dS1kbXJlc3RyaWN0LWFtZDY0LWRtcmVzdHJpY3QgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWkzODYteGwtcWVtdXUtZG1yZXN0cmljdC1hbWQ2NC1kbXJlc3RyaWN0ICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtaTM4NiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW4xMC1p
-Mzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwt
-cWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1pbnRlbCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0taW50
-ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGli
-dmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-cm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1t
-dWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmly
-dC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQtYW1kNjQtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2c2hpbSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1wdnNo
-aW0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC1weWdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFjb3cyICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXJhdyAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1k
-NjQtc2hhZG93ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtc2hhZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXNoYWRvdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBv
-cnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUv
-bG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywg
-ZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0
-Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBv
-c3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdl
-Yi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRw
-Oi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7
-aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94
-ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaGluZyBy
-ZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhlbi5vcmc6L2hvbWUveGVuL2dpdC9xZW11LXhlbi5naXQK
-ICAgMThhMzk4ZjZhMy4uYzU0MmE5Zjk3OSAgYzU0MmE5Zjk3OTRlYzhlMGJjM2ZjZjU5NTZkM2Nj
-OGJjZTY2Nzc4OSAtPiB1cHN0cmVhbS10ZXN0ZWQKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+--===============6288788758601829662==
+Content-Type: text/plain
+
+branch xen-unstable
+xenbranch xen-unstable
+job build-amd64-libvirt
+testid libvirt-build
+
+Tree: libvirt git://libvirt.org/libvirt.git
+Tree: libvirt_gnulib https://git.savannah.gnu.org/git/gnulib.git/
+Tree: libvirt_keycodemapdb https://gitlab.com/keycodemap/keycodemapdb.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  libvirt git://libvirt.org/libvirt.git
+  Bug introduced:  60d9ad6f1e42618fce10baeb0f02c35e5ebd5b24
+  Bug not present: 9b837963c54ac50d7faae63184d32a0fb599d1b0
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/126175/
+
+
+  commit 60d9ad6f1e42618fce10baeb0f02c35e5ebd5b24
+  Author: Michal Privoznik <mprivozn@redhat.com>
+  Date:   Mon Jun 4 06:51:50 2018 +0200
+  
+      configure: Require GnuTLS
+      
+      We are building with GnuTLS everywhere because GnuTLS is widely
+      available. Also, it is desirable to prefer cryptographically
+      strong PRNG over "/dev/urandom" which is just a fallback.
+      
+      Signed-off-by: Michal Privoznik <mprivozn@redhat.com>
+      Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+
+
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/libvirt/build-amd64-libvirt.libvirt-build.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
+
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/libvirt/build-amd64-libvirt.libvirt-build --summary-out=tmp/126175.bisection-summary --basis-template=123814 --blessings=real,real-bisect libvirt build-amd64-libvirt libvirt-build
+Searching for failure / basis pass:
+ 125925 fail [host=godello1] / 123814 ok.
+Failure / basis pass flights: 125925 / 123814
+(tree with no url: minios)
+(tree with no url: ovmf)
+(tree with no url: seabios)
+Tree: libvirt git://libvirt.org/libvirt.git
+Tree: libvirt_gnulib https://git.savannah.gnu.org/git/gnulib.git/
+Tree: libvirt_keycodemapdb https://gitlab.com/keycodemap/keycodemapdb.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest bfd91dc0c40019c4b543bb704a7391faca0e1bc8 68df637b5f1b5c10370f6981d2a43a5cf74368df 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 1f7574763cbb2c85825b8cc4d81f386e767a476f
+Basis pass 076a2b409667dd9f716a2a2085e1ffea9d58fe8b d6397dde2e127e246e3eeb5254a21f42cac783c8 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 06f542f8f2e446c01bd0edab51e9450af7f6e05b
+Generating revisions with ./adhoc-revtuple-generator  git://libvirt.org/libvirt.git#076a2b409667dd9f716a2a2085e1ffea9d58fe8b-bfd91dc0c40019c4b543bb704a7391faca0e1bc8 https://git.savannah.gnu.org/git/gnulib.git/#d6397dde2e127e246e3eeb5254a21f42cac783c8-68df637b5f1b5c10370f6981d2a43a5cf74368df https://gitlab.com/keycodemap/keycodemapdb.git#16e5b0787687d8904dad2c026107409eb9bfcb95-16e5b0787687d8904dad2c026107409eb9bfcb95 git://xenbits.xen.org/qemu-xen-traditional.git#c8ea0457495342c417c3dc033bba25148b279f60-c8ea0457495342c417c3dc033bba25148b279f60 git://xenbits.xen.org/qemu-xen.git#43139135a8938de44f66333831d3a8655d07663a-43139135a8938de44f66333831d3a8655d07663a git://xenbits.xen.org/xen.git#06f542f8f2e446c01bd0edab51e9450af7f6e05b-1f7574763cbb2c85825b8cc4d81f386e767a476f
+Loaded 3358 nodes in revision graph
+Searching for test results:
+ 123840 [host=huxelrebe0]
+ 123814 pass 076a2b409667dd9f716a2a2085e1ffea9d58fe8b d6397dde2e127e246e3eeb5254a21f42cac783c8 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 06f542f8f2e446c01bd0edab51e9450af7f6e05b
+ 123876 [host=huxelrebe0]
+ 123889 [host=huxelrebe0]
+ 123890 [host=huxelrebe0]
+ 123891 [host=huxelrebe0]
+ 123866 [host=huxelrebe0]
+ 123892 [host=huxelrebe0]
+ 123895 [host=huxelrebe0]
+ 123868 [host=huxelrebe0]
+ 123896 [host=huxelrebe0]
+ 123878 [host=huxelrebe0]
+ 123882 [host=huxelrebe0]
+ 123883 [host=huxelrebe0]
+ 123885 [host=huxelrebe0]
+ 123899 [host=huxelrebe0]
+ 123901 [host=huxelrebe0]
+ 123929 [host=huxelrebe1]
+ 123981 [host=huxelrebe0]
+ 124034 [host=huxelrebe1]
+ 124060 [host=huxelrebe1]
+ 124095 [host=huxelrebe0]
+ 124159 [host=huxelrebe1]
+ 124188 [host=huxelrebe0]
+ 124208 [host=huxelrebe1]
+ 124239 [host=huxelrebe1]
+ 124404 [host=huxelrebe1]
+ 124312 [host=huxelrebe0]
+ 124367 [host=huxelrebe1]
+ 124438 [host=huxelrebe0]
+ 124489 [host=huxelrebe1]
+ 124580 [host=huxelrebe0]
+ 124879 [host=huxelrebe0]
+ 124939 [host=huxelrebe0]
+ 124906 [host=huxelrebe0]
+ 125086 [host=godello0]
+ 125035 [host=godello0]
+ 124987 [host=huxelrebe0]
+ 125055 fail irrelevant
+ 125179 [host=godello0]
+ 125154 fail irrelevant
+ 125300 [host=godello0]
+ 125262 [host=godello0]
+ 125428 [host=godello0]
+ 125504 [host=huxelrebe1]
+ 125490 [host=godello0]
+ 125552 [host=godello0]
+ 125517 [host=huxelrebe1]
+ 125586 fail irrelevant
+ 125653 [host=godello0]
+ 125647 fail irrelevant
+ 125638 fail irrelevant
+ 125668 [host=godello0]
+ 125692 [host=godello0]
+ 125903 [host=huxelrebe1]
+ 125925 fail bfd91dc0c40019c4b543bb704a7391faca0e1bc8 68df637b5f1b5c10370f6981d2a43a5cf74368df 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 1f7574763cbb2c85825b8cc4d81f386e767a476f
+ 126007 [host=huxelrebe1]
+ 126014 [host=huxelrebe1]
+ 126018 [host=huxelrebe1]
+ 126022 [host=huxelrebe1]
+ 126026 [host=huxelrebe1]
+ 126041 [host=huxelrebe1]
+ 126067 [host=huxelrebe1]
+ 126044 [host=huxelrebe1]
+ 126070 [host=huxelrebe1]
+ 126047 [host=huxelrebe1]
+ 126052 [host=huxelrebe1]
+ 126056 [host=huxelrebe1]
+ 126057 [host=huxelrebe1]
+ 126072 pass 076a2b409667dd9f716a2a2085e1ffea9d58fe8b d6397dde2e127e246e3eeb5254a21f42cac783c8 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 06f542f8f2e446c01bd0edab51e9450af7f6e05b
+ 126058 [host=huxelrebe1]
+ 126059 [host=huxelrebe1]
+ 126060 [host=huxelrebe1]
+ 126091 pass 88860bb9d98ac00a31b335f843915c0401ee0d66 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 3960f3a52346348e6b0306f65d19375612bd35b9
+ 126079 fail bfd91dc0c40019c4b543bb704a7391faca0e1bc8 68df637b5f1b5c10370f6981d2a43a5cf74368df 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 1f7574763cbb2c85825b8cc4d81f386e767a476f
+ 126065 [host=huxelrebe1]
+ 126087 fail f7ac4f7ee508b66c7e76b818377fcc222daad5b5 0ee5212efa5434e5bc837660fbf2facbdeb39952 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a b4ac4bc410222d221dc46a74ac71efaa7b32d57c
+ 126089 fail cb9868b5212674058662b5cdca7496b7639922e0 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 11535cdbc0ae5925a55b3e735447c30faaa6f63b
+ 126105 fail 30fb2276d88b275dc2aad6ddd28c100d944b59a5 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 35fcb982ea16c40619fee8bba4789a94d824521e
+ 126122 pass f3f7cb73b9b0b77d087c8159810ac4acb62ebf96 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 3960f3a52346348e6b0306f65d19375612bd35b9
+ 126106 pass 8ac8301366f4f04bd566be9e0e8209530d16d2f9 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 3960f3a52346348e6b0306f65d19375612bd35b9
+ 126124 pass 620a1c6a2a60facdeb78a33f7ba2f94639938b27 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 3960f3a52346348e6b0306f65d19375612bd35b9
+ 126147 fail 4f15e75a9abe7b01157a767255ee69135a527824 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 35fcb982ea16c40619fee8bba4789a94d824521e
+ 126175 fail 60d9ad6f1e42618fce10baeb0f02c35e5ebd5b24 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 35fcb982ea16c40619fee8bba4789a94d824521e
+ 126153 pass f785aa6c2bd8814ee4282d6ac990b7d7650dfa40 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 35fcb982ea16c40619fee8bba4789a94d824521e
+ 126156 pass 9b837963c54ac50d7faae63184d32a0fb599d1b0 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 35fcb982ea16c40619fee8bba4789a94d824521e
+ 126158 fail 60d9ad6f1e42618fce10baeb0f02c35e5ebd5b24 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 35fcb982ea16c40619fee8bba4789a94d824521e
+ 126161 pass 9b837963c54ac50d7faae63184d32a0fb599d1b0 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 35fcb982ea16c40619fee8bba4789a94d824521e
+ 126166 fail 60d9ad6f1e42618fce10baeb0f02c35e5ebd5b24 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 35fcb982ea16c40619fee8bba4789a94d824521e
+ 126173 pass 9b837963c54ac50d7faae63184d32a0fb599d1b0 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 35fcb982ea16c40619fee8bba4789a94d824521e
+Searching for interesting versions
+ Result found: flight 123814 (pass), for basis pass
+ Result found: flight 125925 (fail), for basis failure
+ Repro found: flight 126072 (pass), for basis pass
+ Repro found: flight 126079 (fail), for basis failure
+ 0 revisions at 9b837963c54ac50d7faae63184d32a0fb599d1b0 7ff7a27a8a988a5aa058ce29e1e219e4fa75940f 16e5b0787687d8904dad2c026107409eb9bfcb95 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 35fcb982ea16c40619fee8bba4789a94d824521e
+No revisions left to test, checking graph state.
+ Result found: flight 126156 (pass), for last pass
+ Result found: flight 126158 (fail), for first failure
+ Repro found: flight 126161 (pass), for last pass
+ Repro found: flight 126166 (fail), for first failure
+ Repro found: flight 126173 (pass), for last pass
+ Repro found: flight 126175 (fail), for first failure
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  libvirt git://libvirt.org/libvirt.git
+  Bug introduced:  60d9ad6f1e42618fce10baeb0f02c35e5ebd5b24
+  Bug not present: 9b837963c54ac50d7faae63184d32a0fb599d1b0
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/126175/
+
+
+  commit 60d9ad6f1e42618fce10baeb0f02c35e5ebd5b24
+  Author: Michal Privoznik <mprivozn@redhat.com>
+  Date:   Mon Jun 4 06:51:50 2018 +0200
+  
+      configure: Require GnuTLS
+      
+      We are building with GnuTLS everywhere because GnuTLS is widely
+      available. Also, it is desirable to prefer cryptographically
+      strong PRNG over "/dev/urandom" which is just a fallback.
+      
+      Signed-off-by: Michal Privoznik <mprivozn@redhat.com>
+      Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.411444 to fit
+pnmtopng: 60 colors found
+Revision graph left in /home/logs/results/bisect/libvirt/build-amd64-libvirt.libvirt-build.{dot,ps,png,html,svg}.
+----------------------------------------
+126175: tolerable ALL FAIL
+
+flight 126175 libvirt real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/126175/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ build-amd64-libvirt           6 libvirt-build           fail baseline untested
+
+
+jobs:
+ build-amd64-libvirt                                          fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+
+--===============6288788758601829662==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6288788758601829662==--
