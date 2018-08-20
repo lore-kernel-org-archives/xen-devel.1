@@ -1,20 +1,19 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] xenpmd: prevent format-truncation warning
- with gcc 8.2 + ARM 32-bit
-Date: Mon, 20 Aug 2018 15:21:02 +0100
-Message-ID: <20180820142102.mcqdbkt2hv4umj6l@citrix.com>
-References: <1534555336-10318-1-git-send-email-christopher.w.clark@gmail.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH] tools: libxl/xl: run NUMA placement even
+ when an hard-affinity is set
+Date: Mon, 20 Aug 2018 16:22:43 +0200
+Message-ID: <b346c13a4a05c75d531da1dcfa7ea684a0d5089e.camel@suse.com>
+References: <153452538306.14879.2645077465028661264.stgit@Palanthas.fritz.box>
+ <20180820101428.djudte4z2wye3cz3@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8360441442764491152=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=qa+b=ld=citrix.com=prvs=763aa43e8=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1frl3M-0000Oq-W3
- for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 14:21:09 +0000
-Content-Disposition: inline
-In-Reply-To: <1534555336-10318-1-git-send-email-christopher.w.clark@gmail.com>
+ <srs0=inry=ld=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1frl5X-0000fg-Of
+ for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 14:23:23 +0000
+In-Reply-To: <20180820101428.djudte4z2wye3cz3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,53 +22,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Christopher Clark <christopher.w.clark@gmail.com>
-Cc: xen-devel@lists.xenproject.org, ian.jackson@eu.citrix.com, wei.liu2@citrix.com
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBBdWcgMTcsIDIwMTggYXQgMDY6MjI6MTZQTSAtMDcwMCwgQ2hyaXN0b3BoZXIgQ2xh
-cmsgd3JvdGU6Cj4geGVucG1kIHdyaXRlcyBiYXR0ZXJ5IGluZm9ybWF0aW9uIHRvIHhlbnN0b3Jl
-LCBpbmNsdWRpbmcgYSBzdHJpbmcgd2l0aCBhCj4gZm9ybWF0dGVkIGhleCB2YWx1ZSBjYWxjdWxh
-dGVkIGZyb20gc3VtbWluZyB0aGUgbGVuZ3RocyBvZiBmb3VyIHN0cmluZ3MsCj4gcGx1cyBzb21l
-IGNvbnN0YW50cy4KPiAKPiBFYWNoIG9mIHRoZSBmb3VyIHN0cmluZ3MgaGFzIGEgbWF4aW11bSBs
-ZW5ndGggb2YgMzEgYnl0ZXMsIGV4Y2x1ZGluZyB0aGUKPiB0ZXJtaW5hdGluZyB6ZXJvIGJ5dGUu
-IFRoZSBzdHJpbmdzIGFyZSBzdG9yZWQgaW4gMzItYnl0ZSBhcnJheXMgaW4gYQo+IHN0cnVjdCB0
-aGF0IGlzIHplcm9lZCBiZWZvcmUgaXQgaXMgcG9wdWxhdGVkLCBhbmQgbG9naWMgdGhhdCB3cml0
-ZXMgdG8KPiB0aGUgc3RyaW5ncyB1c2VzIHN0cm5jcHkgYW5kIGV4cGxpY2l0IHplcm8gdGVybWlu
-YXRpb24uCj4gCj4gVGhlIG1heGltdW0gdmFsdWUgdG8gYmUgc3VwcGxpZWQgdG8gdGhlIHhlbnN0
-b3JlIHN0cmluZyBpczoKPiAgICg5ICogNCkgKyAoMzEgKiA0KSArIDQgLCB3aGljaCBpcyAxNjQs
-IGllLiAweGE0Lgo+IAo+IFdoZW4gdXNlZCB3aXRoIHRoaXMgdmFsdWUsICclMDJ4JyB3aWxsIGFs
-d2F5cyBmaXQgd2l0aGluIDMgYnl0ZXMsIGJ1dAo+IGdjYyA4LjIgaXMgYXBwYXJlbnRseSBub3Qg
-YWJsZSB0byBkZWR1Y2UgdGhpcyAob2JzZXJ2ZWQgd2hlbiBidWlsZGluZwo+IGZvciBhIDMyLWJp
-dCBBUk0gcGxhdGZvcm0pLgo+IAo+IFRoaXMgY29tbWl0IGFzc2lzdHMgdGhlIGNvbXBpbGVyIGJ5
-IGFwcGx5aW5nIGEgbWFzayAoMHhmZikgdG8gdGhlIHZhbHVlLAo+IGVuYWJsaW5nIGl0IHRvIG9i
-c2VydmUgYSBsb3dlciBtYXhpbXVtIHZhbHVlIGFuZCBzbyBwYXNzIHRoZSB0cnVuY2F0aW9uCj4g
-bGVuZ3RoIGNoZWNrLgo+IAo+IFByaW9yIHRvIHRoaXMgY2hhbmdlLCBidWlsZGluZyBmYWlscyB3
-aXRoIHRoZSBjb21waWxlciB3YXJuaW5nOgo+IAo+IHwgeGVucG1kLmM6IEluIGZ1bmN0aW9uICd3
-cml0ZV9iYXR0ZXJ5X2luZm9fdG9feGVuc3RvcmUnOgo+IHwgeGVucG1kLmM6MzU0OjIzOiBlcnJv
-cjogJyUwMngnIGRpcmVjdGl2ZSBvdXRwdXQgbWF5IGJlIHRydW5jYXRlZAo+IHdyaXRpbmcgYmV0
-d2VlbiAyIGFuZCA4IGJ5dGVzIGludG8gYSByZWdpb24gb2Ygc2l6ZSAzCj4gWy1XZXJyb3I9Zm9y
-bWF0LXRydW5jYXRpb249XQo+IHwgICAgICBzbnByaW50Zih2YWwsIDMsICIlMDJ4IiwKPiB8ICAg
-ICAgICAgICAgICAgICAgICAgICAgXn5+fgo+IHwgeGVucG1kLmM6MzU0OjIyOiBub3RlOiBkaXJl
-Y3RpdmUgYXJndW1lbnQgaW4gdGhlIHJhbmdlIFs0MCwgMjE0NzQ4Mzc3OF0KPiB8ICAgICAgc25w
-cmludGYodmFsLCAzLCAiJTAyeCIsCj4gfCAgICAgICAgICAgICAgICAgICAgICAgXn5+fn5+Cj4g
-fCB4ZW5wbWQuYzozNTQ6NTogbm90ZTogJ3NucHJpbnRmJyBvdXRwdXQgYmV0d2VlbiAzIGFuZCA5
-IGJ5dGVzIGludG8gYQo+IGRlc3RpbmF0aW9uIG9mIHNpemUgMwo+IHwgICAgICBzbnByaW50Zih2
-YWwsIDMsICIlMDJ4IiwKPiB8ICAgICAgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+Cj4gfCAgICAg
-ICAgICAgICAgICh1bnNpZ25lZCBpbnQpKDkqNCArCj4gfCAgICAgICAgICAgICAgIH5+fn5+fn5+
-fn5+fn5+fn5+fn5+Cj4gfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cmxlbihpbmZv
-LT5tb2RlbF9udW1iZXIpICsKPiB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+IHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
-dHJsZW4oaW5mby0+c2VyaWFsX251bWJlcikgKwo+IHwgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICB+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+IHwgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBzdHJsZW4oaW5mby0+YmF0dGVyeV90eXBlKSArCj4gfCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIH5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KPiB8ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgc3RybGVuKGluZm8tPm9lbV9pbmZvKSArIDQpKTsKPiB8ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgfn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+
-IHwgY2MxOiBhbGwgd2FybmluZ3MgYmVpbmcgdHJlYXRlZCBhcyBlcnJvcnMKPiAKPiBTaWduZWQt
-b2ZmLWJ5OiBDaHJpc3RvcGhlciBDbGFyayA8Y2hyaXN0b3BoZXIuY2xhcms2QGJhZXN5c3RlbXMu
-Y29tPgoKSG1tLi4uIEkganVzdCBwdXNoZWQgYSBkaWZmZXJlbnQgZml4IGZvciB0aGlzIHRvIHN0
-YWdpbmcuIENhbiB5b3UgdHJ5IGlmCnRoYXQgd29ya3MgZm9yIHlvdT8KCldlaS4KCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============8360441442764491152==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-B9XbtQ57suqp7e0X0tTo"
+
+
+--=-B9XbtQ57suqp7e0X0tTo
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, 2018-08-20 at 11:14 +0100, Wei Liu wrote:
+> On Fri, Aug 17, 2018 at 07:03:03PM +0200, Dario Faggioli wrote:
+> > @@ -27,6 +27,8 @@
+> > =20
+> >  #include "_paths.h"
+> > =20
+> > +//#define DEBUG 1
+> > +
+>=20
+> Stray changes here?
+>=20
+> You can use NDEBUG instead.
+>=20
+I found this in one other place in libxl (libxl_event.c), and figured I
+could use it here too.
+
+Reason is that this guards a (potentially) rather expensive check,
+which I personally consider too much, even for debug build. At the same
+time, it could be handy for us developers to have it there, and be able
+to enable it when making changes to affinity and/or NUMA placement
+code.
+
+But I don't have a too strong opinion; I'll change it to us NDEBUG if
+that's what you prefer.
+
+> > @@ -162,6 +165,38 @@ static int numa_place_domain(libxl__gc *gc,
+> > uint32_t domid,
+> >      rc =3D libxl_cpupool_info(CTX, &cpupool_info, cpupool);
+> >      if (rc)
+> >          goto out;
+> > +    map =3D &cpupool_info.cpumap;
+> > +
+> > +    /*
+> > +     * If there's a well defined hard affinity mask (i.e., the
+> > same one for all
+> > +     * the vcpus), we can try to run the placement considering
+> > only the pcpus
+> > +     * within such mask.
+> > +     */
+> > +    if (info->num_vcpu_hard_affinity)
+> > +    {
+>=20
+> Placement of "{" is wrong.
+>=20
+Yep, sorry.
+
+> > +        int j;
+> > +
+> > +        for (j =3D 0; j < info->num_vcpu_hard_affinity; j++)
+> > +            assert(libxl_bitmap_equal(&info-
+> > >vcpu_hard_affinity[0],
+> > +                                      &info-
+> > >vcpu_hard_affinity[j], 0));
+> > +#endif /* DEBUG */
+>=20
+> But why should the above be debug only? The assumption doesn't seem
+> to
+> always hold.
+>=20
+I'm not sure I'm getting your point. If we're here, we do indeed want
+to be sure that we don't have a different hard-affinity mask for the
+various vcpus... In fact, if we do, which one should we use for
+placement?
+
+So, yes, if we are here, I think the assert() should be true. I just
+considered this check only useful to developers, and too expensive even
+for debug builds. But as said above, I can gate this with NDEBUG if you
+prefer so.
+
+> > +        /*
+> > +         * Hard affinity should _really_ contain cpus that are
+> > inside our
+> > +         * cpupool. Anyway, if it does not, log a warning and only
+> > use the
+> > +         * cpupool's cpus for placement.
+> > +         */
+> > +        if (!libxl_bitmap_is_empty(&cpumap))
+> > +            map =3D &cpumap;
+> > +        else
+> > +            LOG(WARN, "Hard affinity completely outside of
+> > domain's cpupool?");
+>=20
+> Should this be an error?
+>=20
+> What is the expected interaction for hard affinity and cpupool?
+>=20
+cpupools rulez. :-D
+
+Basically, a domain can't possibly run on any cpu which is outside of
+the pool where the domain itself lives, no matter what the affinity is.
+
+BTW, I tested this better, and I believe there is no need for adding
+this WARN. In fact, if the domain is being created inside a pool,
+setting its hard affinity to a mask which is completely disjoint from
+the cpupool's one fails _before_ getting here.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-B9XbtQ57suqp7e0X0tTo
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlt6zrQACgkQFkJ4iaW4
+c+6OZQ//egHklMUyrdstti69ISQFzDF/pW/uhUbTn4JlpK6esClKIh/7xaE/sZNT
+I3lun5owIUcjyaV2C7PeqBVkJpNVryrRXrsZsPENnmP3bOx9yM/+sEiJHo+mly9d
+dCuvFsdxCFp1JPQ7qaOEhr4F9uLsp86UMlwN03m/LNd3JeXfTThbgYBOt/R2ypbP
+zr0Iag0maxH66xh/VZPA4S+HgUFEOFLigPrj8Sroe3NRvoVnU9IixvJbcGhNeeq/
+37fppQFSm671EEA6Y6nM3VJyp0yVwAC61e2YTXqWmunLgg685LrKkj4/4n7pCGsH
+Q28ADTHAoRvpbEZEyhdQMnacBHcZXyAE3hIvzyddH6nW98fQ07eyffICvuq7+ekl
+O78dfKKemZErxJGPHmnuZQyuMvig5ZipO6iVfUU7CVXmrMgBevy6mom6IPW7Y3Xl
+t9F7OtJiFE8PasEJ8ET8FhaBWE6cqBzDoAlXJGyq9aFwKJ9nN3tOJDUxu7QmK4lz
+ykn2fhPCU4DhlGRis0ylOAVfRU89vVzdcocXZI2pvHJAzab/425lkmMRO+tcvEjX
+RbKWmxVyQi/cNIqLca5EjFyC2rvvwMD4t/A76PFkkTvprlKjsO/TxZ95EyXR+fEV
+t+ZrLOwNXuQqgBY9PEie0BnuYAMQs351cLBs/zLvQ6FNsHOHNHk=
+=3v6C
+-----END PGP SIGNATURE-----
+
+--=-B9XbtQ57suqp7e0X0tTo--
+
+
+
+--===============8360441442764491152==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8360441442764491152==--
