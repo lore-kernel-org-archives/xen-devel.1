@@ -1,19 +1,21 @@
-From: Ian Jackson <ian.jackson@citrix.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 Subject: Re: [PATCH 2/2] osstest: configure git proxy for FreeBSD
-Date: Mon, 20 Aug 2018 11:53:17 +0100
-Message-ID: <23418.40349.15959.260209@mariner.uk.xensource.com>
+Date: Mon, 20 Aug 2018 13:07:14 +0200
+Message-ID: <20180820110714.qx3pohtjvgaypoa4@mac>
 References: <20180820105113.28840-1-roger.pau@citrix.com>
  <20180820105113.28840-2-roger.pau@citrix.com>
+ <23418.40349.15959.260209@mariner.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=egrx=ld=citrix.com=prvs=763ac145b=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1frhoH-0004OC-NO
- for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 10:53:21 +0000
-In-Reply-To: <20180820105113.28840-2-roger.pau@citrix.com>
+ <srs0=bhjx=ld=citrix.com=prvs=76356e8f4=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fri1v-0005bS-Pe
+ for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 11:07:27 +0000
+Content-Disposition: inline
+In-Reply-To: <23418.40349.15959.260209@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,15 +24,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
+To: Ian Jackson <ian.jackson@citrix.com>
 Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Um9nZXIgUGF1IE1vbm5lIHdyaXRlcyAoIltQQVRDSCAyLzJdIG9zc3Rlc3Q6IGNvbmZpZ3VyZSBn
-aXQgcHJveHkgZm9yIEZyZWVCU0QiKToKPiBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOp
-IDxyb2dlci5wYXVAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tz
-b25AZXUuY2l0cml4LmNvbT4KClRoYW5rcy4KCkRvIHlvdSB3YW50IG1lIHRvIHB1c2ggdGhlc2Ug
-dG8gcHJldGVzdCBzb29uID8KCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+T24gTW9uLCBBdWcgMjAsIDIwMTggYXQgMTE6NTM6MTdBTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
+dGU6Cj4gUm9nZXIgUGF1IE1vbm5lIHdyaXRlcyAoIltQQVRDSCAyLzJdIG9zc3Rlc3Q6IGNvbmZp
+Z3VyZSBnaXQgcHJveHkgZm9yIEZyZWVCU0QiKToKPiA+IFNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBh
+dSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgo+IAo+IEFja2VkLWJ5OiBJYW4gSmFja3Nv
+biA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KPiAKPiBUaGFua3MuCj4gCj4gRG8geW91IHdh
+bnQgbWUgdG8gcHVzaCB0aGVzZSB0byBwcmV0ZXN0IHNvb24gPwoKSWYgeW91IGNvdWxkLCB5ZXMg
+cGxlYXNlLiBJJ20gaG9waW5nIHRoaXMgd2lsbCB1bmJsb2NrIHRoZSBGcmVlQlNECmJ1aWxkLCBv
+ciBhdCBsZWFzdCBnZXQgaXQgY2xvc2VyIHRvIHVuYmxvY2tpbmcgOikKClRoYW5rcywgUm9nZXIu
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
