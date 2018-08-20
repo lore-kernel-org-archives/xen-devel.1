@@ -1,8 +1,8 @@
 From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH] tools/kdd: work around gcc 8.1 bug
-Date: Mon, 20 Aug 2018 11:38:50 +0100
-Message-ID: <23418.39482.33087.486946@mariner.uk.xensource.com>
-References: <545884d1ccc4854c0a59fff99283becc1842a5bc.1533551059.git-series.wei.liu2@citrix.com>
+Subject: Re: [PATCH] tools/tests: fix an xs-test.c issue
+Date: Mon, 20 Aug 2018 11:39:59 +0100
+Message-ID: <23418.39551.632079.567937@mariner.uk.xensource.com>
+References: <20180820083818.8464-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -10,9 +10,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=egrx=ld=citrix.com=prvs=763ac145b=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1frhaJ-00025h-1H
- for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 10:38:55 +0000
-In-Reply-To: <545884d1ccc4854c0a59fff99283becc1842a5bc.1533551059.git-series.wei.liu2@citrix.com>
+ id 1frhbQ-0002TL-0F
+ for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 10:40:04 +0000
+In-Reply-To: <20180820083818.8464-1-wei.liu2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,13 +22,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Tim Deegan <tim@xen.org>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-V2VpIExpdSB3cml0ZXMgKCJbUEFUQ0hdIHRvb2xzL2tkZDogd29yayBhcm91bmQgZ2NjIDguMSBi
-dWciKToKPiBHY2MgOC4xIGhhcyBhIGJ1ZyB0aGF0IGNhdXNlcyBrZGQgZmFpbCB0byBidWlsZC4g
-UmV3cml0ZSB0aGUgY29kZSB0bwo+IHdvcmsgYXJvdW5kIHRoYXQgYnVnLgoKQWNrZWQtYnk6IElh
-biBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgoKVGhhbmtzLApJYW4uCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+V2VpIExpdSB3cml0ZXMgKCJbUEFUQ0hdIHRvb2xzL3Rlc3RzOiBmaXggYW4geHMtdGVzdC5jIGlz
+c3VlIik6Cj4gVGhlIHJldCB2YXJpYWJsZSBjYW4gYmUgdXNlZCB1bmluaXRpYWxpc2VkIHdoZW4g
+aXRlcnMgaXMgMC4gSW5pdGlhbGlzZQo+IHJldCBhdCB0aGUgYmVnaW5uaW5nIHRvIGZpeCB0aGlz
+IGlzc3VlLgoKQWNrZWQtYnk6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29t
+PgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
