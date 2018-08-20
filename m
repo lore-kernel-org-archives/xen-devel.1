@@ -1,21 +1,14 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH 2/2] osstest: configure git proxy for FreeBSD
-Date: Mon, 20 Aug 2018 12:42:19 +0100
-Message-ID: <23418.43291.48649.948768@mariner.uk.xensource.com>
-References: <20180820105113.28840-1-roger.pau@citrix.com>
- <20180820105113.28840-2-roger.pau@citrix.com>
- <23418.40349.15959.260209@mariner.uk.xensource.com>
- <20180820110714.qx3pohtjvgaypoa4@mac>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2 1/2] dmar: iommu mem leak fix
+Date: Mon, 20 Aug 2018 05:45:36 -0600
+Message-ID: <5B7AA9E002000078001DFFE3@prv1-mh.provo.novell.com>
+References: <9b6a4488-c69a-48fa-88c1-131894b70b36@default>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=egrx=ld=citrix.com=prvs=763ac145b=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1friZk-0001ES-9f
- for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 11:42:24 +0000
-In-Reply-To: <20180820110714.qx3pohtjvgaypoa4@mac>
+In-Reply-To: <9b6a4488-c69a-48fa-88c1-131894b70b36@default>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,16 +17,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org
+To: Zhenzhong Duan <zhenzhong.duan@oracle.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Xen-Devel <xen-devel@lists.xen.org>, Shane Wang <shane.wang@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Srinivas REDDY Eeda <srinivas.eeda@oracle.com>, Gang Wei <gang.wei@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Um9nZXIgUGF1IE1vbm7DqSB3cml0ZXMgKCJSZTogW1BBVENIIDIvMl0gb3NzdGVzdDogY29uZmln
-dXJlIGdpdCBwcm94eSBmb3IgRnJlZUJTRCIpOgo+IE9uIE1vbiwgQXVnIDIwLCAyMDE4IGF0IDEx
-OjUzOjE3QU0gKzAxMDAsIElhbiBKYWNrc29uIHdyb3RlOgo+ID4gRG8geW91IHdhbnQgbWUgdG8g
-cHVzaCB0aGVzZSB0byBwcmV0ZXN0IHNvb24gPwo+IAo+IElmIHlvdSBjb3VsZCwgeWVzIHBsZWFz
-ZS4gSSdtIGhvcGluZyB0aGlzIHdpbGwgdW5ibG9jayB0aGUgRnJlZUJTRAo+IGJ1aWxkLCBvciBh
-dCBsZWFzdCBnZXQgaXQgY2xvc2VyIHRvIHVuYmxvY2tpbmcgOikKClJpZ2h0LCBkb25lLgoKVGhh
-bmtzLApJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDIwLjA4LjE4IGF0IDEyOjQyLCA8emhlbnpob25nLmR1YW5Ab3JhY2xlLmNvbT4gd3Jv
+dGU6Cj4gUmVsZWFzZSBtZW1vcnkgYWxsb2NhdGVkIGZvciBkcmhkIGlvbW11IGluIGVycm9yIHBh
+dGguCj4gCj4gLXYyOiBmaXh1cCB3cm9uZyBwYXJhbWV0ZXIgaGlkZW4gZHVlIHRvIG15IHJlbW92
+aW5nIC1XZXJyb3IKClRoaXMgbGluZSBiZWxvbmdzIC4uLgoKPiBTaWduZWQtb2ZmLWJ5OiBaaGVu
+emhvbmcgRHVhbiA8emhlbnpob25nLmR1YW5Ab3JhY2xlLmNvbT4KPiAtLS0KCi4uLiBoZXJlLCBz
+byBpdCB3b24ndCBlbmQgdXAgaW4gdGhlIGNvbW1pdCBtZXNzYWdlLiBTdGlsbAoKUmV2aWV3ZWQt
+Ynk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCkFuZCBhcyBhbiBhZHZpY2UgLSBy
+ZW1vdmluZyAtV2Vycm9yIGlzIHByZXR0eSBzdHJvbmdseSB0byBiZQphZHZpc2VkIGFnYWluc3Qu
+CgpGaW5hbGx5LCB3aGlsZSBvbiB2MSB0aGUgQ2MgbGlzdCB3YXMgdG9vIHNob3J0LCBpdCBlbmRl
+ZCB1cCB0b28KbG9uZyBub3c6IFRoZXJlJ3Mgbm8gcmVhc29uIGZvciB0aGUgVFhUIG1haW50YWlu
+ZXJzIHRvIGJlIENjLWVkCm9uIHRoaXMgcGF0Y2gsIG9ubHkgcGF0Y2ggMiBpcyBpbiBuZWVkZWQg
+b2YgdGhpcy4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
