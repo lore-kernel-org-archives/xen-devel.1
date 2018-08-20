@@ -1,20 +1,18 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH RESEND] x86/xen: enable early use of
- set_fixmap in 32-bit Xen PV guest
-Date: Mon, 20 Aug 2018 19:20:17 -0400
-Message-ID: <95bde638-877d-c9b4-0457-dfeea06fd7dc__10763.3806103424$1534807075$gmane$org@oracle.com>
-References: <20180820152420.16004-1-jgross@suse.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 06/10] xen/arm: add OMAP5 kconfig
+Date: Mon, 20 Aug 2018 16:59:15 -0700
+Message-ID: <1534809559-32704-6-git-send-email-sstabellini@kernel.org>
+References: <alpine.DEB.2.10.1808201645540.16354@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=r5nf=ld=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1frtRw-0006pt-8A
- for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 23:19:04 +0000
-In-Reply-To: <20180820152420.16004-1-jgross@suse.com>
-Content-Language: en-US
+ <srs0=1y+9=ld=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1fru51-0001Xz-2P
+ for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 23:59:27 +0000
+In-Reply-To: <alpine.DEB.2.10.1808201645540.16354@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,27 +21,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org
-Cc: tglx@linutronix.de, mingo@redhat.com, hpa@zytor.com
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <stefanos@xilinx.com>, baozich@gmail.com, sstabellini@kernel.org, andrii_anisov@epam.com, julien.grall@linaro.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMjAvMjAxOCAxMToyNCBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBDb21taXQgN2Iy
-NWI5Y2IwZGFkODMgKCJ4ODYveGVuL3RpbWU6IEluaXRpYWxpemUgcHYgeGVuIHRpbWUgaW4KPiBp
-bml0X2h5cGVydmlzb3JfcGxhdGZvcm0oKSIpIG1vdmVkIHRoZSBtYXBwaW5nIG9mIHRoZSBzaGFy
-ZWQgaW5mbyBhcmVhCj4gYmVmb3JlIHBhZ2V0YWJsZV9pbml0KCkuIFRoaXMgYnJlYWtzIGJvb3Rp
-bmcgYXMgMzItYml0IFBWIGd1ZXN0IGFzIHRoZQo+IHVzZSBvZiBzZXRfZml4bWFwIGlzbid0IHBv
-c3NpYmxlIGF0IHRoaXMgdGltZSBvbiAzMi1iaXQuCj4KPiBUaGlzIGNhbiBiZSB3b3JrZWQgYXJv
-dW5kIGJ5IHBvcHVsYXRpbmcgdGhlIG5lZWRlZCBQTUQgb24gMzItYml0Cj4ga2VybmVsIGVhcmxp
-ZXIuCj4KPiBJbiBvcmRlciBub3QgdG8gcmVpbXBsZW1lbnQgcG9wdWxhdGVfZXh0cmFfcHRlKCkg
-dXNpbmcgZXh0ZW5kX2JyaygpCj4gZm9yIGFsbG9jYXRpbmcgbmV3IHBhZ2UgdGFibGVzIGV4dGVu
-ZCBhbGxvY19sb3dfcGFnZXMoKSB0byBkbyB0aGF0IGluCj4gY2FzZSB0aGUgZWFybHkgcGFnZSB0
-YWJsZSBwb29sIGlzIG5vdCB5ZXQgYXZhaWxhYmxlLgo+Cj4gRml4ZXM6IDdiMjViOWNiMGRhZDgz
-ICgieDg2L3hlbi90aW1lOiBJbml0aWFsaXplIHB2IHhlbiB0aW1lIGluIGluaXRfaHlwZXJ2aXNv
-cl9wbGF0Zm9ybSgpIikKPiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
-ZS5jb20+Cj4gUmV2aWV3ZWQtYnk6IFRob21hcyBHbGVpeG5lciA8dGdseEBsaW51dHJvbml4LmRl
-Pgo+IC0tLQo+IFJlc2VuZGluZyB3aXRoIGNvcnJlY3RlZCBGaXhlczogdGFnCj4gQm9yaXMsIHBs
-ZWFzZSB0YWtlIHRoaXMgdmlhIHRoZSBYZW4gdHJlZSAoVGhvbWFzIGFza2VkIHVzIHRvIGRvIHNv
-KQoKQXBwbGllZCB0byBmb3ItbGludXMtMTliLgoKLWJvcmlzCgoKCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+QWRkIGEga2NvbmZpZyBvcHRpb24gZm9yIFRJIE9NQVA1IHBsYXRmb3Jtcy4KClNpZ25lZC1vZmYt
+Ynk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3RlZmFub3NAeGlsaW54LmNvbT4KQ0M6IGJhb3ppY2hA
+Z21haWwuY29tCi0tLQogeGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9LY29uZmlnICB8IDExICsrKysr
+KysrKysrCiB4ZW4vYXJjaC9hcm0vcGxhdGZvcm1zL01ha2VmaWxlIHwgIDIgKy0KIDIgZmlsZXMg
+Y2hhbmdlZCwgMTIgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL3hl
+bi9hcmNoL2FybS9wbGF0Zm9ybXMvS2NvbmZpZyBiL3hlbi9hcmNoL2FybS9wbGF0Zm9ybXMvS2Nv
+bmZpZwppbmRleCBhMTE2NTY2Li4zYjEyMjU0IDEwMDY0NAotLS0gYS94ZW4vYXJjaC9hcm0vcGxh
+dGZvcm1zL0tjb25maWcKKysrIGIveGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9LY29uZmlnCkBAIC03
+Nyw2ICs3NywxMyBAQCBjb25maWcgUkNBUjIKIAktLS1oZWxwLS0tCiAJRW5hYmxlIGFsbCB0aGUg
+cmVxdWlyZWQgZHJpdmVycyBmb3IgUmVuZXNhcyBSLUNhciBHZW4yLgogCitjb25maWcgT01BUDUK
+Kwlib29sICJUSSBPTUFQNSBwbGF0Zm9ybXMiCisJZGVwZW5kcyBvbiBBUk1fMzIKKwlzZWxlY3Qg
+SEFTX09NQVAKKwktLS1oZWxwLS0tCisJRW5hYmxlIGFsbCB0aGUgcmVxdWlyZWQgZHJpdmVycyBm
+b3IgVEkgT01BUDUgYmFzZWQgcGxhdGZvcm1zLgorCiBlbmRjaG9pY2UKIAogY29uZmlnIEFMTDY0
+X1BMQVQKQEAgLTExMCwzICsxMTcsNyBAQCBjb25maWcgU0VBVFRMRV9QTEFURk9STQogY29uZmln
+IFJDQVIyX1BMQVRGT1JNCiAJYm9vbAogCWRlZmF1bHQgKEFMTDMyX1BMQVQgfHwgUkNBUjIpCisK
+K2NvbmZpZyBPTUFQNV9QTEFURk9STQorCWJvb2wKKwlkZWZhdWx0IChBTEwzMl9QTEFUIHx8IE9N
+QVA1KQpkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9NYWtlZmlsZSBiL3hlbi9h
+cmNoL2FybS9wbGF0Zm9ybXMvTWFrZWZpbGUKaW5kZXggZjZjMDNmYy4uOGFmZTM3YiAxMDA2NDQK
+LS0tIGEveGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy9NYWtlZmlsZQorKysgYi94ZW4vYXJjaC9hcm0v
+cGxhdGZvcm1zL01ha2VmaWxlCkBAIC0yLDcgKzIsNyBAQCBvYmoteSArPSB2ZXhwcmVzcy5vCiBv
+YmotJChDT05GSUdfQVJNXzMyKSArPSBicmNtLm8KIG9iai0kKENPTkZJR19BUk1fMzIpICs9IGV4
+eW5vczUubwogb2JqLSQoQ09ORklHX0FSTV8zMikgKz0gbWlkd2F5Lm8KLW9iai0kKENPTkZJR19B
+Uk1fMzIpICs9IG9tYXA1Lm8KK29iai0kKENPTkZJR19PTUFQNV9QTEFURk9STSkgICAgKz0gb21h
+cDUubwogb2JqLSQoQ09ORklHX1JDQVIyX1BMQVRGT1JNKSAgICArPSByY2FyMi5vCiBvYmotJChD
+T05GSUdfU0VBVFRMRV9QTEFURk9STSkgICs9IHNlYXR0bGUubwogb2JqLSQoQ09ORklHX1NVTlhJ
+X1BMQVRGT1JNKSAgICArPSBzdW54aS5vCi0tIAoxLjkuMQoKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
