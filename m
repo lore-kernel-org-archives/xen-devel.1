@@ -1,19 +1,12 @@
-From: Omkar Bolla <omkar.bolla@pathpartnertech.com>
-Subject: Re: Armv8-A: Not able to enable secondary CPUs in
- Hikey960 board
-Date: Mon, 20 Aug 2018 15:16:47 +0530
-Message-ID: <CAC4nxbu8VBv4zamABUP2Up=0T5FQg_Nv94B1rnCSP+s2Vq_5Og@mail.gmail.com>
-References: <CAC4nxbsJss__sbvs5fKEW1RZAiyC8KNvV3HMPM88v4HmBwO+ZA@mail.gmail.com>
- <20180811170626.GB20295@char.us.oracle.com>
- <CAC4nxbtEJEnZ9o4hRqSwk_9hzJa1aCvNfGPTccvHRMAp7BvS4g@mail.gmail.com>
- <20180813130114.GA14031@char.us.oracle.com>
- <1d456451-6beb-5a4b-968a-5539f7b8c01b@arm.com>
- <CAC4nxbvnDGOJotFe0VD6zOjhJcb5TOfLMLtdxPd3Lh8KKPgYLQ@mail.gmail.com>
- <baff58c5-f744-0a23-217b-db64e0716024@arm.com>
+From: Xen.org security team <security@xen.org>
+Subject: Xen Security Advisory 269 v3 (CVE-2018-15468) - x86:
+ Incorrect MSR_DEBUGCTL handling lets guests enable BTS
+Date: Mon, 20 Aug 2018 09:47:30 +0000
+Message-ID: <E1frgmY-0003e7-W2@xenbits.xenproject.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2766219825309528058=="
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <baff58c5-f744-0a23-217b-db64e0716024@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,844 +15,623 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xensource.com, Stefano Stabellini <sstabellini@kernel.org>
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org, xen-users@lists.xen.org, oss-security@lists.openwall.com
+Cc: "Xen.org security team" <security-team-members@xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2766219825309528058==
-Content-Type: multipart/alternative; boundary="000000000000be0aaf0573dac917"
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
---000000000000be0aaf0573dac917
-Content-Type: text/plain; charset="UTF-8"
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-Hi Julien,
+            Xen Security Advisory CVE-2018-15468 / XSA-269
+                              version 3
 
-I tried today with your patch in xen-4.11
+      x86: Incorrect MSR_DEBUGCTL handling lets guests enable BTS
 
-Still has secondary cpus problems,
+UPDATES IN VERSION 3
+====================
 
-Please find below log after that patch in xen-4.11
---------------------------------------------------------
-Loading driver at 0x000B03B5000 EntryPoint=0x000B044907C
-Loading driver at 0x000B03B5000 EntryPoint=0x000B044907C
-Using modules provided by bootloader in FDT
-Xen 4.11.1-pre (c/s Mon Jul 30 11:30:09 2018 +0200 git:33ced72-dirty) EFI
-loader
+CVE assigned.
 
-- UART enabled -
-- CPU 00000000 booting -
-- Current EL 00000008 -
-- Xen starting at EL2 -
-- Setting up control registers -
-- Turning on paging -
-- Ready -
-(XEN) Checking for initrd in /chosen
-(XEN) RAM: 0000000000000000 - 000000001abfffff
-(XEN) RAM: 000000001ad88000 - 0000000031ffffff
-(XEN) RAM: 0000000032101000 - 000000003dffffff
-(XEN) RAM: 0000000040000000 - 000000004cfa3fff
-(XEN) RAM: 0000000089cc0000 - 00000000b03a3fff
-(XEN) RAM: 00000000b1af0000 - 00000000b9af0fff
-(XEN) RAM: 00000000b9af1000 - 00000000b9af8fff
-(XEN) RAM: 00000000b9b09000 - 00000000b9bcffff
-(XEN) RAM: 00000000b9c70000 - 00000000b9c71fff
-(XEN) RAM: 00000000b9c74000 - 00000000b9d5ffff
-(XEN) RAM: 00000000ba125000 - 00000000ba12bfff
-(XEN) RAM: 00000000ba12c000 - 00000000bd9b7fff
-(XEN) RAM: 00000000bd9b8000 - 00000000bd9b9fff
-(XEN) RAM: 00000000bd9ba000 - 00000000bd9c3fff
-(XEN) RAM: 00000000bd9c4000 - 00000000bef5ffff
-(XEN) RAM: 00000000bef60000 - 00000000bf0effff
-(XEN) RAM: 00000000bf0f0000 - 00000000bf13ffff
-(XEN) RAM: 00000000bf190000 - 00000000bf193fff
-(XEN) RAM: 00000000bf194000 - 00000000bfffffff
-(XEN) RAM: 00000000c0000000 - 00000000dfffffff
-(XEN) RAM: 0000000200000000 - 000000021fffffff
-(XEN)
-(XEN) MODULE[0]: 00000000b03a4000 - 00000000b03b5000 Device Tree
-(XEN) MODULE[1]: 00000000b04be000 - 00000000b1975a00 Kernel
- console=tty0 console=hvc0 root=/dev/sdd10 rootwait rw rootfstype=ext4
-efi=noruntime video=HDMI-A
--1:1280x720@60
-(XEN)
-(XEN) Command line: loglvl=all console=dtuart dtuart=/soc/serial@fff32000
-dom0_mem=2048M efi=no-rs
-(XEN) parameter "efi" unknown!
-(XEN) Placing Xen at 0x00000000dfe00000-0x00000000e0000000
-(XEN) Update BOOTMOD_XEN from 00000000b03b5000-00000000b04bdd81 =>
-00000000dfe00000-00000000dff08d81
-(XEN) Domain heap initialised
-(XEN) Booting using Device Tree
-(XEN) Platform: Generic System
-(XEN) Looking for dtuart at "/soc/serial@fff32000", options ""
- Xen 4.11.1-pre
-(XEN) Xen version 4.11.1-pre (omkar.bolla@) (aarch64-linux-gnu-gcc (Linaro
-GCC 7.1-2017.05) 7.1.1 20170510) debug=n  Mon Aug 20 15:11:16 IST 2018
-(XEN) Latest ChangeSet: Mon Jul 30 11:30:09 2018 +0200 git:33ced72-dirty
-(XEN) Processor: 410fd034: "ARM Limited", variant: 0x0, part 0xd03, rev 0x4
-(XEN) 64-bit Execution:
-(XEN)   Processor Features: 0000000000002222 0000000000000000
-(XEN)     Exception Levels: EL3:64+32 EL2:64+32 EL1:64+32 EL0:64+32
-(XEN)     Extensions: FloatingPoint AdvancedSIMD
-(XEN)   Debug Features: 0000000010305106 0000000000000000
-(XEN)   Auxiliary Features: 0000000000000000 0000000000000000
-(XEN)   Memory Model Features: 0000000000001122 0000000000000000
-(XEN)   ISA Features:  0000000000011120 0000000000000000
-(XEN) 32-bit Execution:
-(XEN)   Processor Features: 00000131:00011011
-(XEN)     Instruction Sets: AArch32 A32 Thumb Thumb-2 Jazelle
-(XEN)     Extensions: GenericTimer Security
-(XEN)   Debug Features: 03010066
-(XEN)   Auxiliary Features: 00000000
-(XEN)   Memory Model Features: 10201105 40000000 01260000 02102211
-(XEN)  ISA Features: 02101110 13112111 21232042 01112131 00011142 00011121
-(XEN) Using SMC Calling Convention v1.1
-(XEN) Using PSCI v1.1
-(XEN) SMP: Allowing 8 CPUs
-(XEN) Generic Timer IRQ: phys=30 hyp=26 virt=27 Freq: 1920 KHz
-(XEN) GICv2 initialization:
-(XEN)         gic_dist_addr=00000000e82b1000
-(XEN)         gic_cpu_addr=00000000e82b2000
-(XEN)         gic_hyp_addr=00000000e82b4000
-(XEN)         gic_vcpu_addr=00000000e82b6000
-(XEN)         gic_maintenance_irq=25
-(XEN) GICv2: 384 lines, 8 cpus, secure (IID 0200143b).
-(XEN) Using scheduler: SMP Credit Scheduler (credit)
-(XEN) Allocated console ring of 64 KiB.
-(XEN) Bringing up CPU1
-(XEN) Failed to bring up CPU1
-(XEN) Failed to bring up CPU 1 (error -9)
-(XEN) Bringing up CPU2
-(XEN) Failed to bring up CPU2
-(XEN) Failed to bring up CPU 2 (error -9)
-(XEN) Bringing up CPU3
-(XEN) Failed to bring up CPU3
-(XEN) Failed to bring up CPU 3 (error -9)
-(XEN) Bringing up CPU4
-(XEN) Failed to bring up CPU4
-(XEN) Failed to bring up CPU 4 (error -9)
-(XEN) Bringing up CPU5
-(XEN) Failed to bring up CPU5
-(XEN) Failed to bring up CPU 5 (error -9)
-(XEN) Bringing up CPU6
-(XEN) Failed to bring up CPU6
-(XEN) Failed to bring up CPU 6 (error -9)
-(XEN) Bringing up CPU7
-(XEN) Failed to bring up CPU7
-(XEN) Failed to bring up CPU 7 (error -9)
-(XEN) Brought up 1 CPUs
-(XEN) P2M: 40-bit IPA with 40-bit PA and 8-bit VMID
-(XEN) P2M: 3 levels with order-1 root, VTCR 0x80023558
-(XEN) I/O virtualisation disabled
-(XEN) build-id: 361a7d1197ce6c845658fa3210780d1751b7103a
-(XEN) alternatives: Patching with alt table 00000000400acff8 ->
-00000000400ad568
-(XEN) *** LOADING DOMAIN 0 ***
-(XEN) Loading kernel from boot module @ 00000000b04be000
-(XEN) Allocating 1:1 mappings totalling 2048MB for dom0:
-(XEN) BANK[0] 0x00000010000000-0x00000018000000 (128MB)
-(XEN) BANK[1] 0x00000020000000-0x00000030000000 (256MB)
-(XEN) BANK[2] 0x00000038000000-0x0000003c000000 (64MB)
-(XEN) BANK[3] 0x00000040000000-0x0000004c000000 (192MB)
-(XEN) BANK[4] 0x0000008c000000-0x000000b0000000 (576MB)
-(XEN) BANK[5] 0x000000b4000000-0x000000b8000000 (64MB)
-(XEN) BANK[6] 0x000000c0000000-0x000000dc000000 (448MB)
-(XEN) BANK[7] 0x00000200000000-0x00000214000000 (320MB)
-(XEN) Grant table range: 0x000000dfe00000-0x000000dfe40000
-(XEN) Allocating PPI 16 for event channel interrupt
-(XEN) Loading zImage from 00000000b04be000 to
-0000000010080000-0000000011537a00
-(XEN) Loading dom0 DTB to 0x0000000017e00000-0x0000000017e0d73b
-(XEN) Initial low memory virq threshold set at 0x4000 pages.
-(XEN) Scrubbing Free RAM on 1 nodes using 1 CPUs
-(XEN)
-....................................................................done.
-(XEN) Std. Loglevel: All
-(XEN) Guest Loglevel: Nothing (Rate-limited: Errors and warnings)
-(XEN) *** Serial input -> DOM0 (type 'CTRL-a' three times to switch input
-to Xen)
-(XEN) Freed 280kB init memory.
-(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER4
-(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER8
-(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER12
-(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER16
-(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER20
-(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER24
-(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER28
-(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER32
-(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER36
-(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER40
-[    0.000000] Booting Linux on physical CPU 0x0
-[    0.000000] Linux version 4.9.113-07887-geb8dbd1-dirty
-(omkar.bolla@OmkarB-LaptopU) (gcc version 7.1.1 20170510 (Linaro GCC
-7.1-2017.05) ) #32 SMP PREEMPT Sun
-Aug 19 17:07:02 IST 2018
-[    0.000000] Boot CPU: AArch64 Processor [410fd034]
-[    0.000000] Xen 4.11 support found
-[    0.000000] efi: Getting EFI parameters from FDT:
-[    0.000000] efi: UEFI not found.
-[    0.000000] Ion: base 0xda200000, size is 0x1e00000, node name graphic,
-heap-name carveout_gralloc namesize 17,[99][97][114][118]
-[    0.000000] Ion: insert heap-name carveout_gralloc
-[    0.000000] OF: reserved mem: initialized node graphic, compatible id
-hisi_ion
-[    0.000000] cma: Reserved 64 MiB at 0x00000000d6000000
-[    0.000000] psci: probing for conduit method from DT.
-[    0.000000] psci: PSCIv1.1 detected in firmware.
-[    0.000000] psci: Using standard PSCI v0.2 function IDs
-[    0.000000] psci: Trusted OS migration not required
-[    0.000000] psci: SMC Calling Convention v1.1
-[    0.000000] percpu: Embedded 23 pages/cpu @ffffffc213f88000 s54936 r8192
-d31080 u94208
-[    0.000000] Detected VIPT I-cache on CPU0
-[    0.000000] CPU features: enabling workaround for ARM erratum 845719
-[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.
-Total pages: 515592
-[    0.000000] Kernel command line: console=tty0 console=hvc0
-root=/dev/sdd10 rootwait rw rootfstype=ext4 efi=noruntime
-video=HDMI-A-1:1280x720@60
-[    0.000000] PID hash table entries: 4096 (order: 3, 32768 bytes)
-[    0.000000] Dentry cache hash table entries: 262144 (order: 9, 2097152
-bytes)
-[    0.000000] Inode-cache hash table entries: 131072 (order: 8, 1048576
-bytes)
-[    0.000000] software IO TLB [mem 0xd2000000-0xd6000000] (64MB) mapped at
-[ffffffc0d2000000-ffffffc0d5ffffff]
-[    0.000000] Memory: 1824004K/2095104K available (13756K kernel code,
-1374K rwdata, 4884K rodata, 1152K init, 1067K bss, 205564K reserved, 65536K
-cma-reserved)
-[    0.000000] Virtual kernel memory layout:
-[    0.000000]     modules : 0xffffff8000000000 - 0xffffff8008000000   (
- 128 MB)
-[    0.000000]     vmalloc : 0xffffff8008000000 - 0xffffffbebfff0000   (
- 250 GB)
-[    0.000000]       .text : 0xffffff8008080000 - 0xffffff8008df0000   (
-13760 KB)
-[    0.000000]     .rodata : 0xffffff8008df0000 - 0xffffff80092c0000   (
-4928 KB)
-[    0.000000]       .init : 0xffffff80092c0000 - 0xffffff80093e0000   (
-1152 KB)
-[    0.000000]       .data : 0xffffff80093e0000 - 0xffffff8009537a00   (
-1375 KB)
-[    0.000000]        .bss : 0xffffff8009537a00 - 0xffffff8009642754   (
-1068 KB)
-[    0.000000]     fixed   : 0xffffffbefe7fb000 - 0xffffffbefec00000   (
-4116 KB)
-[    0.000000]     PCI I/O : 0xffffffbefee00000 - 0xffffffbeffe00000   (
-16 MB)
-[    0.000000]     vmemmap : 0xffffffbf00000000 - 0xffffffc000000000   (
- 4 GB maximum)
-[    0.000000]               0xffffffbf00400000 - 0xffffffbf08500000   (
- 129 MB actual)
-[    0.000000]     memory  : 0xffffffc010000000 - 0xffffffc214000000   (
-8256 MB)
-[    0.000000] Preemptible hierarchical RCU implementation.
-[    0.000000]  Build-time adjustment of leaf fanout to 64.
-[    0.000000]  RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=1.
-[    0.000000] RCU: Adjusting geometry for rcu_fanout_leaf=64, nr_cpu_ids=1
-[    0.000000] NR_IRQS:64 nr_irqs:64 0
-[    0.000000] arm_arch_timer: Architected cp15 timer(s) running at 1.92MHz
-(virt).
-[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff
-max_cycles: 0x1c570327e, max_idle_ns: 1763180809505 ns
-[    0.000005] sched_clock: 56 bits at 1920kHz, resolution 520ns, wraps
-every 4398046510977ns
-[    0.000105] clocksource: arm,sp804: mask: 0xffffffff max_cycles:
-0xffffffff, max_idle_ns: 58334160866034 ns
-[    0.000699] Console: colour dummy device 80x25
-[    0.001190] console [tty0] enabled
-[    0.341427] console [hvc0] enabled
-[    0.344935] Calibrating delay loop (skipped), value calculated using
-timer frequency.. 3.84 BogoMIPS (lpj=7680)
-[    0.355049] pid_max: default: 32768 minimum: 301
-[    0.359845] Security Framework initialized
-[    0.363910] SELinux:  Initializing.
-[    0.367538] Mount-cache hash table entries: 4096 (order: 3, 32768 bytes)
-[    0.374225] Mountpoint-cache hash table entries: 4096 (order: 3, 32768
-bytes)
-[    0.382219] ftrace: allocating 44464 entries in 174 pages
-[    0.479344] sched-energy: CPU device node has no sched-energy-costs
-[    0.485645] Invalid sched_group_energy for CPU0
-[    0.490181] CPU0: update cpu_capacity 1024
-[    0.494355] ASID allocator initialised with 32768 entries
-[    0.500803] xen:grant_table: Grant tables using version 1 layout
-[    0.506746] Grant table initialized
-[    0.510310] xen:events: Using FIFO-based ABI
-[    0.514720] Xen: initializing cpu0
-[    0.547593] EFI services will not be available.
-[    0.560149] Brought up 1 CPUs
-[    0.563030] SMP: Total of 1 processors activated.
-[    0.567826] CPU features: detected feature: 32-bit EL0 Support
-[    0.573708] CPU features: detected feature: Kernel page table isolation
-(KPTI)
-[    0.586209] CPU: All CPU(s) started at EL1
-[    0.590234] alternatives: patching kernel code
-[    0.594924] Invalid sched_group_energy for CPU0
-[    0.599376] CPU0: update max cpu_capacity 1024
-[    0.603878] Invalid sched_group_energy for Cluster0
-[    0.610428] devtmpfs: initialized
+ISSUE DESCRIPTION
+=================
 
---------------------------------------------------------
+The DEBUGCTL MSR contains several debugging features, some of which virtualise
+cleanly, but some do not.  In particular, Branch Trace Store is not
+virtualised by the processor, and software has to be careful to configure it
+suitably not to lock up the core.  As a result, it must only be available to
+fully trusted guests.
 
-Thanks,
-Omkar B
+Unfortunately, in the case that vPMU is disabled, all value checking was
+skipped, allowing the guest to chose any MSR_DEBUGCTL setting it likes.
 
-On Wed, Aug 15, 2018 at 11:52 PM, Julien Grall <julien.grall@arm.com> wrote:
+IMPACT
+======
 
-> On 08/15/2018 10:15 AM, Omkar Bolla wrote:
->
->> HI Julien,
->>
->
-> Hello,
->
-> As you suggested, I enabled early printk for hikey960 in xen-4.8 stable
->> branch and xen-4.11 stable branch.
->>
->
-> Looking at the logs, Xen is placed differently in the memory:
->         - Xen 4.8:  0x000000001aa00000
->         - Xen 4.11: 0x000000021fe00000
->
-> With Xen 4.11, the binary will be placed above 4GB. There was some change
-> in the way to place Xen in the memory in 2016 allowing to place Xen at the
-> end of the usable RAM.
->
-> I suspect the firmware does not support 64-bit address entry point for
-> secondary CPU. This would explain the ADDRESS_INVALID from PSCI CPU UP
-> call. Can you give a try to this patch:
->
-> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-> index 7d40a8466b..13318da6b1 100644
-> --- a/xen/arch/arm/setup.c
-> +++ b/xen/arch/arm/setup.c
-> @@ -408,13 +408,11 @@ static paddr_t __init get_xen_paddr(void)
->              if ( !e )
->                  continue;
->
-> -#ifdef CONFIG_ARM_32
->              /* Xen must be under 4GB */
->              if ( e > 0x100000000ULL )
->                  e = 0x100000000ULL;
->              if ( e < bank->start )
->                  continue;
-> -#endif
->
->              s = e - min_size;
->
->
-> Cheers,
->
-> --
-> Julien Grall
->
+A malicious or buggy guest administrator can lock up the entire host, causing
+a Denial of Service.
 
--- 
+VULNERABLE SYSTEMS
+==================
+
+Xen versions 4.6 and later are vulnerable.
+
+Only systems using Intel CPUs are affected. ARM and AMD systems are
+unaffected.
+
+Only x86 HVM or PVH guests can exploit the vulnerability.  x86 PV guests
+cannot exploit the vulnerability.
+
+MITIGATION
+==========
+
+Running only x86 PV guests avoids the vulnerability.
+
+CREDITS
+=======
+
+This issue was discovered by Andrew Cooper of Citrix.
+
+RESOLUTION
+==========
+
+Applying the appropriate attached patch resolves this issue.
+
+xsa269.patch           xen-unstable
+xsa269-4.11.patch      Xen 4.11
+xsa269-4.10.patch      4.10, 4.9
+xsa269-4.8.patch       Xen 4.8, 4.7, 4.6
+
+$ sha256sum xsa269*
+4733d09bb63523744ca2ee172e2fade0c39082c15d9a746144f279cf1359b723  xsa269.meta
+5a5fe36f1f876a5029493e7fa191436fd021929aaba2d820636df17f4ed20113  xsa269.patch
+ea11cef818050bca13d4eb89294627c97e4cdb830124f679e77d37a44a370286  xsa269-4.8.patch
+45ba1823530f329dd73088b77098e686b32f5daac0bc5177b2afea09f8c3593a  xsa269-4.10.patch
+e0ca060311fb9ba3247e2fe65bca4806a131644f8894fd08be374904904b1944  xsa269-4.11.patch
+$
+
+DEPLOYMENT DURING EMBARGO
+=========================
+
+Deployment of the patches and/or mitigations described above (or
+others which are substantially similar) is permitted during the
+embargo, even on public-facing systems with untrusted guest users and
+administrators.
+
+But: Distribution of updated software is prohibited (except to other
+members of the predisclosure list).
+
+Predisclosure list members who wish to deploy significantly different
+patches and/or mitigations, please contact the Xen Project Security
+Team.
 
 
+(Note: this during-embargo deployment notice is retained in
+post-embargo publicly released Xen Project advisories, even though it
+is then no longer applicable.  This is to enable the community to have
+oversight of the Xen Project Security Team's decisionmaking.)
 
+For more information about permissible uses of embargoed information,
+consult the Xen Project community's agreed Security Policy:
+  http://www.xenproject.org/security-policy.html
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
 
+iQEcBAEBCAAGBQJbeo4KAAoJEIP+FMlX6CvZfakIAJRgw9LWW7fnr0WX11dt/Rm1
+GgBxMWS7DrnBPBjE7GqhtqgFyvIVHBnWEEj1WW1WvHWIV/XIbV8GKOi6ecfF5p3o
+vK/a/8S0qOSOtOPZZJkZGuZn6pNd9V0Ynx296Hn6DKildBBEkGSXoWo67ViaxrP2
+iPzhYukDRYlqjF5pYfPr7Zek+RodtB+rxJEKMpDDIW8aeA3hnsOZNXAmr5n+Q465
+rNojqJDV5Zwuli+L0SVzmtkY6dbeXyhMWn3zAj8a5Pq+/VkK3PdcEBVNADLXbh3a
+lnDmjwsY9ZX64HhXbamFMV1Wykhbjb+Jprj6CJjuz4wcGArKW+lsTV86p8Q5Kzk=
+=uYjg
+-----END PGP SIGNATURE-----
 
+--=separator
+Content-Type: application/octet-stream; name="xsa269.meta"
+Content-Disposition: attachment; filename="xsa269.meta"
+Content-Transfer-Encoding: base64
 
-This
-message contains confidential information and is intended only 
-for the
-individual(s) named. If you are not the intended
-recipient, you are 
-notified that disclosing, copying, distributing or taking any
-action in 
-reliance on the contents of this mail and attached file/s is strictly
+ewogICJYU0EiOiAyNjksCiAgIlN1cHBvcnRlZFZlcnNpb25zIjogWwogICAg
+Im1hc3RlciIsCiAgICAiNC4xMSIsCiAgICAiNC4xMCIsCiAgICAiNC45IiwK
+ICAgICI0LjgiLAogICAgIjQuNyIsCiAgICAiNC42IgogIF0sCiAgIlRyZWVz
+IjogWwogICAgInhlbiIKICBdLAogICJSZWNpcGVzIjogewogICAgIjQuMTAi
+OiB7CiAgICAgICJSZWNpcGVzIjogewogICAgICAgICJ4ZW4iOiB7CiAgICAg
+ICAgICAiU3RhYmxlUmVmIjogIjg3YzgzYWYzMzNlMDI0OGFkYTJlNjU2MDk2
+NWFjYTYwOTZlYzdmMmIiLAogICAgICAgICAgIlByZXJlcXMiOiBbCiAgICAg
+ICAgICAgIDI2OAogICAgICAgICAgXSwKICAgICAgICAgICJQYXRjaGVzIjog
+WwogICAgICAgICAgICAieHNhMjY5LTQuMTAucGF0Y2giCiAgICAgICAgICBd
+CiAgICAgICAgfQogICAgICB9CiAgICB9LAogICAgIjQuMTEiOiB7CiAgICAg
+ICJSZWNpcGVzIjogewogICAgICAgICJ4ZW4iOiB7CiAgICAgICAgICAiU3Rh
+YmxlUmVmIjogIjMzY2VkNzI1ZTExYWY0ZWFiZDMzMzRkMTJmNTNlZDgwN2U5
+ZTI1ODYiLAogICAgICAgICAgIlByZXJlcXMiOiBbCiAgICAgICAgICAgIDI2
+OAogICAgICAgICAgXSwKICAgICAgICAgICJQYXRjaGVzIjogWwogICAgICAg
+ICAgICAieHNhMjY5LTQuMTEucGF0Y2giCiAgICAgICAgICBdCiAgICAgICAg
+fQogICAgICB9CiAgICB9LAogICAgIjQuNiI6IHsKICAgICAgIlJlY2lwZXMi
+OiB7CiAgICAgICAgInhlbiI6IHsKICAgICAgICAgICJTdGFibGVSZWYiOiAi
+OThkNzk0OGI1MGI0ZTkxZWM0ZWZhODYwZGEzMmQ5YWM0ZmU2OTMwMCIsCiAg
+ICAgICAgICAiUHJlcmVxcyI6IFsKICAgICAgICAgICAgMjY4CiAgICAgICAg
+ICBdLAogICAgICAgICAgIlBhdGNoZXMiOiBbCiAgICAgICAgICAgICJ4c2Ey
+NjktNC44LnBhdGNoIgogICAgICAgICAgXQogICAgICAgIH0KICAgICAgfQog
+ICAgfSwKICAgICI0LjciOiB7CiAgICAgICJSZWNpcGVzIjogewogICAgICAg
+ICJ4ZW4iOiB7CiAgICAgICAgICAiU3RhYmxlUmVmIjogIjkxY2E4NGM4NjJi
+MTVmZTc0YWI5YjU4NzBlNjY5MDNhZWM0Zjg2ZGQiLAogICAgICAgICAgIlBy
+ZXJlcXMiOiBbCiAgICAgICAgICAgIDI2OAogICAgICAgICAgXSwKICAgICAg
+ICAgICJQYXRjaGVzIjogWwogICAgICAgICAgICAieHNhMjY5LTQuOC5wYXRj
+aCIKICAgICAgICAgIF0KICAgICAgICB9CiAgICAgIH0KICAgIH0sCiAgICAi
+NC44IjogewogICAgICAiUmVjaXBlcyI6IHsKICAgICAgICAieGVuIjogewog
+ICAgICAgICAgIlN0YWJsZVJlZiI6ICJhYTQ1MDE1M2YyZDk2MGMyMTcxNDli
+MzFiNjhhOGI1N2M1YThlNTk1IiwKICAgICAgICAgICJQcmVyZXFzIjogWwog
+ICAgICAgICAgICAyNjgKICAgICAgICAgIF0sCiAgICAgICAgICAiUGF0Y2hl
+cyI6IFsKICAgICAgICAgICAgInhzYTI2OS00LjgucGF0Y2giCiAgICAgICAg
+ICBdCiAgICAgICAgfQogICAgICB9CiAgICB9LAogICAgIjQuOSI6IHsKICAg
+ICAgIlJlY2lwZXMiOiB7CiAgICAgICAgInhlbiI6IHsKICAgICAgICAgICJT
+dGFibGVSZWYiOiAiYTFiMjIzYjc1NmYzNTQ4OTU1MjUwNjBiZDNmOWYxZjA3
+ODk5YTA4MiIsCiAgICAgICAgICAiUHJlcmVxcyI6IFsKICAgICAgICAgICAg
+MjY4CiAgICAgICAgICBdLAogICAgICAgICAgIlBhdGNoZXMiOiBbCiAgICAg
+ICAgICAgICJ4c2EyNjktNC4xMC5wYXRjaCIKICAgICAgICAgIF0KICAgICAg
+ICB9CiAgICAgIH0KICAgIH0sCiAgICAibWFzdGVyIjogewogICAgICAiUmVj
+aXBlcyI6IHsKICAgICAgICAieGVuIjogewogICAgICAgICAgIlN0YWJsZVJl
+ZiI6ICJhY2QwMGEzMDMzNzhjZTQ4YmQ2YmJkOGE1NzlmMWZlMmYxYjIxYTdk
+IiwKICAgICAgICAgICJQcmVyZXFzIjogWwogICAgICAgICAgICAyNjgKICAg
+ICAgICAgIF0sCiAgICAgICAgICAiUGF0Y2hlcyI6IFsKICAgICAgICAgICAg
+InhzYTI2OS5wYXRjaCIKICAgICAgICAgIF0KICAgICAgICB9CiAgICAgIH0K
+ICAgIH0KICB9Cn0=
 
-prohibited. Please notify the
-sender immediately and delete this e-mail 
-from your system. E-mail transmission
-cannot be guaranteed to be secured or 
-error-free as information could be
-intercepted, corrupted, lost, destroyed, 
-arrive late or incomplete, or contain
-viruses. The sender therefore does 
-not accept liability for any errors or
-omissions in the contents of this 
-message, which arise as a result of e-mail
-transmission.
+--=separator
+Content-Type: application/octet-stream; name="xsa269.patch"
+Content-Disposition: attachment; filename="xsa269.patch"
+Content-Transfer-Encoding: base64
 
---000000000000be0aaf0573dac917
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+RnJvbTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNv
+bT4KU3ViamVjdDogeDg2L3Z0eDogRml4IHRoZSBjaGVja2luZyBmb3IgdW5r
+bm93bi9pbnZhbGlkIE1TUl9ERUJVR0NUTCBiaXRzCgpUaGUgVlBNVV9NT0RF
+X09GRiBlYXJseS1leGl0IGluIHZwbXVfZG9fd3Jtc3IoKSBpbnRyb2R1Y2Vk
+IGJ5IGMvcwoxMWZlOTk4ZTU2IGJ5cGFzc2VzIGFsbCByZXNlcnZlZCBiaXQg
+Y2hlY2tpbmcgaW4gdGhlIGdlbmVyYWwgY2FzZS4gIEFzIGEKcmVzdWx0LCBh
+IGd1ZXN0IGNhbiBlbmFibGUgQlRTIHdoZW4gaXQgc2hvdWxkbid0IGJlIHBl
+cm1pdHRlZCB0bywgYW5kCmxvY2sgdXAgdGhlIGVudGlyZSBob3N0LgoKV2l0
+aCB2UE1VIGFjdGl2ZSAobm90IGEgc2VjdXJpdHkgc3VwcG9ydGVkIGNvbmZp
+Z3VyYXRpb24sIGJ1dCB1c2VmdWwgZm9yCmRlYnVnZ2luZyksIHRoZSByZXNl
+cnZlZCBiaXQgY2hlY2tpbmcgaW4gYnJva2VuLCBjYXVzZWQgYnkgdGhlIG9y
+aWdpbmFsCkJUUyBjaGFuZ2VzZXQgMWE4YWE3NWVkLgoKRnJvbSBhIGNvcnJl
+Y3RuZXNzIHN0YW5kcG9pbnQsIGl0IGlzIG5vdCBwb3NzaWJsZSB0byBoYXZl
+IHR3byBkaWZmZXJlbnQKcGllY2VzIG9mIGNvZGUgcmVzcG9uc2libGUgZm9y
+IGRpZmZlcmVudCBwYXJ0cyBvZiB2YWx1ZSBjaGVja2luZywgaWYKdGhlcmUg
+aXNuJ3QgYW4gYWNjdW11bGF0aW9uIG9mIGJpdHMgd2hpY2ggaGF2ZSBiZWVu
+IGNoZWNrZWQuICBBCnByYWN0aWNhbCB1cHNob3Qgb2YgdGhpcyBpcyB0aGF0
+IGEgZ3Vlc3QgY2FuIHNldCBhbnkgdmFsdWUgaXQKd2lzaGVzICh1c3VhbGx5
+IHJlc3VsdGluZyBpbiBhIHZtZW50cnkgZmFpbHVyZSBmb3IgYmFkIGd1ZXN0
+IHN0YXRlKS4KClRoZXJlZm9yZSwgZml4IHRoaXMgYnkgaW1wbGVtZW50aW5n
+IGFsbCB0aGUgcmVzZXJ2ZWQgYml0IGNoZWNraW5nIGluIHRoZQptYWluIE1T
+Ul9ERUJVR0NUTCBibG9jaywgYW5kIHJlbW92aW5nIGFsbCBoYW5kbGluZyBv
+ZiBERUJVR0NUTCBmcm9tIHRoZQp2UE1VIE1TUiBsb2dpYy4KClRoaXMgaXMg
+WFNBLTI2OQoKU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
+LmNvb3BlcjNAY2l0cml4LmNvbT4KUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNo
+IDxqYmV1bGljaEBzdXNlLmNvbT4KCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94
+ODYvY3B1L3ZwbXVfaW50ZWwuYyBiL3hlbi9hcmNoL3g4Ni9jcHUvdnBtdV9p
+bnRlbC5jCmluZGV4IDFmYzc5YzkuLjZlMjdmNmUgMTAwNjQ0Ci0tLSBhL3hl
+bi9hcmNoL3g4Ni9jcHUvdnBtdV9pbnRlbC5jCisrKyBiL3hlbi9hcmNoL3g4
+Ni9jcHUvdnBtdV9pbnRlbC5jCkBAIC01MzMsMjcgKzUzMyw3IEBAIHN0YXRp
+YyBpbnQgY29yZTJfdnBtdV9kb193cm1zcih1bnNpZ25lZCBpbnQgbXNyLCB1
+aW50NjRfdCBtc3JfY29udGVudCwKICAgICB1aW50NjRfdCAqZW5hYmxlZF9j
+bnRyczsKIAogICAgIGlmICggIWNvcmUyX3ZwbXVfbXNyX2NvbW1vbl9jaGVj
+ayhtc3IsICZ0eXBlLCAmaW5kZXgpICkKLSAgICB7Ci0gICAgICAgIC8qIFNw
+ZWNpYWwgaGFuZGxpbmcgZm9yIEJUUyAqLwotICAgICAgICBpZiAoIG1zciA9
+PSBNU1JfSUEzMl9ERUJVR0NUTE1TUiApCi0gICAgICAgIHsKLSAgICAgICAg
+ICAgIHN1cHBvcnRlZCB8PSBJQTMyX0RFQlVHQ1RMTVNSX1RSIHwgSUEzMl9E
+RUJVR0NUTE1TUl9CVFMgfAotICAgICAgICAgICAgICAgICAgICAgICAgIElB
+MzJfREVCVUdDVExNU1JfQlRJTlQ7Ci0KLSAgICAgICAgICAgIGlmICggY3B1
+X2hhcygmY3VycmVudF9jcHVfZGF0YSwgWDg2X0ZFQVRVUkVfRFNDUEwpICkK
+LSAgICAgICAgICAgICAgICBzdXBwb3J0ZWQgfD0gSUEzMl9ERUJVR0NUTE1T
+Ul9CVFNfT0ZGX09TIHwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+SUEzMl9ERUJVR0NUTE1TUl9CVFNfT0ZGX1VTUjsKLSAgICAgICAgICAgIGlm
+ICggIShtc3JfY29udGVudCAmIH5zdXBwb3J0ZWQpICYmCi0gICAgICAgICAg
+ICAgICAgIHZwbXVfaXNfc2V0KHZwbXUsIFZQTVVfQ1BVX0hBU19CVFMpICkK
+LSAgICAgICAgICAgICAgICByZXR1cm4gMDsKLSAgICAgICAgICAgIGlmICgg
+KG1zcl9jb250ZW50ICYgc3VwcG9ydGVkKSAmJgotICAgICAgICAgICAgICAg
+ICAhdnBtdV9pc19zZXQodnBtdSwgVlBNVV9DUFVfSEFTX0JUUykgKQotICAg
+ICAgICAgICAgICAgIHByaW50ayhYRU5MT0dfR19XQVJOSU5HCi0gICAgICAg
+ICAgICAgICAgICAgICAgICIlcHY6IERlYnVnIFN0b3JlIHVuc3VwcG9ydGVk
+IG9uIHRoaXMgQ1BVXG4iLAotICAgICAgICAgICAgICAgICAgICAgICBjdXJy
+ZW50KTsKLSAgICAgICAgfQogICAgICAgICByZXR1cm4gLUVJTlZBTDsKLSAg
+ICB9CiAKICAgICBBU1NFUlQoIXN1cHBvcnRlZCk7CiAKZGlmZiAtLWdpdCBh
+L3hlbi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jIGIveGVuL2FyY2gveDg2L2h2
+bS92bXgvdm14LmMKaW5kZXggMTJlMGVlNS4uOGRhMDVmNSAxMDA2NDQKLS0t
+IGEveGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMKKysrIGIveGVuL2FyY2gv
+eDg2L2h2bS92bXgvdm14LmMKQEAgLTMwODEsMTEgKzMwODEsMTQgQEAgdm9p
+ZCB2bXhfdmxhcGljX21zcl9jaGFuZ2VkKHN0cnVjdCB2Y3B1ICp2KQogc3Rh
+dGljIGludCB2bXhfbXNyX3dyaXRlX2ludGVyY2VwdCh1bnNpZ25lZCBpbnQg
+bXNyLCB1aW50NjRfdCBtc3JfY29udGVudCkKIHsKICAgICBzdHJ1Y3QgdmNw
+dSAqdiA9IGN1cnJlbnQ7CisgICAgY29uc3Qgc3RydWN0IGNwdWlkX3BvbGlj
+eSAqY3AgPSB2LT5kb21haW4tPmFyY2guY3B1aWQ7CiAKICAgICBIVk1fREJH
+X0xPRyhEQkdfTEVWRUxfTVNSLCAiZWN4PSUjeCwgbXNyX3ZhbHVlPSUjIlBS
+SXg2NCwgbXNyLCBtc3JfY29udGVudCk7CiAKICAgICBzd2l0Y2ggKCBtc3Ig
+KQogICAgIHsKKyAgICAgICAgdWludDY0X3QgcnN2ZDsKKwogICAgIGNhc2Ug
+TVNSX0lBMzJfU1lTRU5URVJfQ1M6CiAgICAgICAgIF9fdm13cml0ZShHVUVT
+VF9TWVNFTlRFUl9DUywgbXNyX2NvbnRlbnQpOwogICAgICAgICBicmVhazsK
+QEAgLTMxMzgsMTggKzMxNDEsMjYgQEAgc3RhdGljIGludCB2bXhfbXNyX3dy
+aXRlX2ludGVyY2VwdCh1bnNpZ25lZCBpbnQgbXNyLCB1aW50NjRfdCBtc3Jf
+Y29udGVudCkKICAgICAgICAgd3Jtc3JsKE1TUl9TWVNDQUxMX01BU0ssIG1z
+cl9jb250ZW50KTsKICAgICAgICAgYnJlYWs7CiAKLSAgICBjYXNlIE1TUl9J
+QTMyX0RFQlVHQ1RMTVNSOiB7Ci0gICAgICAgIHVpbnQ2NF90IHN1cHBvcnRl
+ZCA9IElBMzJfREVCVUdDVExNU1JfTEJSIHwgSUEzMl9ERUJVR0NUTE1TUl9C
+VEY7CisgICAgY2FzZSBNU1JfSUEzMl9ERUJVR0NUTE1TUjoKKyAgICAgICAg
+cnN2ZCA9IH4oSUEzMl9ERUJVR0NUTE1TUl9MQlIgfCBJQTMyX0RFQlVHQ1RM
+TVNSX0JURik7CiAKLSAgICAgICAgaWYgKCBib290X2NwdV9oYXMoWDg2X0ZF
+QVRVUkVfUlRNKSApCi0gICAgICAgICAgICBzdXBwb3J0ZWQgfD0gSUEzMl9E
+RUJVR0NUTE1TUl9SVE07Ci0gICAgICAgIGlmICggbXNyX2NvbnRlbnQgJiB+
+c3VwcG9ydGVkICkKKyAgICAgICAgLyogVE9ETzogV2lyZSB2UE1VIHNldHRp
+bmdzIHByb3Blcmx5IHRocm91Z2ggdGhlIENQVUlEIHBvbGljeSAqLworICAg
+ICAgICBpZiAoIHZwbXVfaXNfc2V0KHZjcHVfdnBtdSh2KSwgVlBNVV9DUFVf
+SEFTX0JUUykgKQogICAgICAgICB7Ci0gICAgICAgICAgICAvKiBQZXJoYXBz
+IHNvbWUgb3RoZXIgYml0cyBhcmUgc3VwcG9ydGVkIGluIHZwbXUuICovCi0g
+ICAgICAgICAgICBpZiAoIHZwbXVfZG9fd3Jtc3IobXNyLCBtc3JfY29udGVu
+dCwgc3VwcG9ydGVkKSApCi0gICAgICAgICAgICAgICAgYnJlYWs7CisgICAg
+ICAgICAgICByc3ZkICY9IH4oSUEzMl9ERUJVR0NUTE1TUl9UUiB8IElBMzJf
+REVCVUdDVExNU1JfQlRTIHwKKyAgICAgICAgICAgICAgICAgICAgICBJQTMy
+X0RFQlVHQ1RMTVNSX0JUSU5UKTsKKworICAgICAgICAgICAgaWYgKCBjcHVf
+aGFzKCZjdXJyZW50X2NwdV9kYXRhLCBYODZfRkVBVFVSRV9EU0NQTCkgKQor
+ICAgICAgICAgICAgICAgIHJzdmQgJj0gfihJQTMyX0RFQlVHQ1RMTVNSX0JU
+U19PRkZfT1MgfAorICAgICAgICAgICAgICAgICAgICAgICAgICBJQTMyX0RF
+QlVHQ1RMTVNSX0JUU19PRkZfVVNSKTsKICAgICAgICAgfQogCisgICAgICAg
+IGlmICggY3AtPmZlYXQucnRtICkKKyAgICAgICAgICAgIHJzdmQgJj0gfklB
+MzJfREVCVUdDVExNU1JfUlRNOworCisgICAgICAgIGlmICggbXNyX2NvbnRl
+bnQgJiByc3ZkICkKKyAgICAgICAgICAgIGdvdG8gZ3BfZmF1bHQ7CisKICAg
+ICAgICAgLyoKICAgICAgICAgICogV2hlbiBhIGd1ZXN0IGZpcnN0IGVuYWJs
+ZXMgTEJSLCBhcnJhbmdlIHRvIHNhdmUgYW5kIHJlc3RvcmUgdGhlIExCUgog
+ICAgICAgICAgKiBNU1JzIGFuZCBhbGxvdyB0aGUgZ3Vlc3QgZGlyZWN0IGFj
+Y2Vzcy4KQEAgLTMyMDgsNyArMzIxOSw3IEBAIHN0YXRpYyBpbnQgdm14X21z
+cl93cml0ZV9pbnRlcmNlcHQodW5zaWduZWQgaW50IG1zciwgdWludDY0X3Qg
+bXNyX2NvbnRlbnQpCiAKICAgICAgICAgX192bXdyaXRlKEdVRVNUX0lBMzJf
+REVCVUdDVEwsIG1zcl9jb250ZW50KTsKICAgICAgICAgYnJlYWs7Ci0gICAg
+fQorCiAgICAgY2FzZSBNU1JfSUEzMl9GRUFUVVJFX0NPTlRST0w6CiAgICAg
+Y2FzZSBNU1JfSUEzMl9WTVhfQkFTSUMgLi4uIE1TUl9JQTMyX1ZNWF9WTUZV
+TkM6CiAgICAgICAgIC8qIE5vbmUgb2YgdGhlc2UgTVNScyBhcmUgd3JpdGVh
+YmxlLiAqLwo=
 
-<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"color:rgb(11,83,148)=
-">Hi Julien,</div><div class=3D"gmail_default" style=3D"color:rgb(11,83,148=
-)"><br></div><div class=3D"gmail_default" style=3D"color:rgb(11,83,148)">I =
-tried today with your patch in xen-4.11</div><div class=3D"gmail_default" s=
-tyle=3D"color:rgb(11,83,148)"><br></div><div class=3D"gmail_default" style=
-=3D"color:rgb(11,83,148)">Still has secondary cpus problems,</div><div clas=
-s=3D"gmail_default" style=3D"color:rgb(11,83,148)"><br></div><div class=3D"=
-gmail_default" style=3D"color:rgb(11,83,148)">Please find below log after t=
-hat patch in xen-4.11</div><div class=3D"gmail_default" style=3D"color:rgb(=
-11,83,148)">--------------------------------------------------------</div><=
-div class=3D"gmail_default"><div class=3D"gmail_default"><font color=3D"#0b=
-5394">Loading driver at 0x000B03B5000 EntryPoint=3D0x000B044907C</font></di=
-v><div class=3D"gmail_default"><font color=3D"#0b5394">Loading driver at 0x=
-000B03B5000 EntryPoint=3D0x000B044907C=C2=A0</font></div><div class=3D"gmai=
-l_default"><font color=3D"#0b5394">Using modules provided by bootloader in =
-FDT</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">Xen 4.=
-11.1-pre (c/s Mon Jul 30 11:30:09 2018 +0200 git:33ced72-dirty) EFI loader<=
-/font></div><div class=3D"gmail_default"><font color=3D"#0b5394"><br></font=
-></div><div class=3D"gmail_default"><font color=3D"#0b5394">- UART enabled =
--</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">- CPU 00=
-000000 booting -</font></div><div class=3D"gmail_default"><font color=3D"#0=
-b5394">- Current EL 00000008 -</font></div><div class=3D"gmail_default"><fo=
-nt color=3D"#0b5394">- Xen starting at EL2 -</font></div><div class=3D"gmai=
-l_default"><font color=3D"#0b5394">- Setting up control registers -</font><=
-/div><div class=3D"gmail_default"><font color=3D"#0b5394">- Turning on pagi=
-ng -</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">- Rea=
-dy -</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=
- Checking for initrd in /chosen</font></div><div class=3D"gmail_default"><f=
-ont color=3D"#0b5394">(XEN) RAM: 0000000000000000 - 000000001abfffff</font>=
-</div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) RAM: 00000=
-0001ad88000 - 0000000031ffffff</font></div><div class=3D"gmail_default"><fo=
-nt color=3D"#0b5394">(XEN) RAM: 0000000032101000 - 000000003dffffff</font><=
-/div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) RAM: 000000=
-0040000000 - 000000004cfa3fff</font></div><div class=3D"gmail_default"><fon=
-t color=3D"#0b5394">(XEN) RAM: 0000000089cc0000 - 00000000b03a3fff</font></=
-div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) RAM: 0000000=
-0b1af0000 - 00000000b9af0fff</font></div><div class=3D"gmail_default"><font=
- color=3D"#0b5394">(XEN) RAM: 00000000b9af1000 - 00000000b9af8fff</font></d=
-iv><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) RAM: 00000000=
-b9b09000 - 00000000b9bcffff</font></div><div class=3D"gmail_default"><font =
-color=3D"#0b5394">(XEN) RAM: 00000000b9c70000 - 00000000b9c71fff</font></di=
-v><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) RAM: 00000000b=
-9c74000 - 00000000b9d5ffff</font></div><div class=3D"gmail_default"><font c=
-olor=3D"#0b5394">(XEN) RAM: 00000000ba125000 - 00000000ba12bfff</font></div=
-><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) RAM: 00000000ba=
-12c000 - 00000000bd9b7fff</font></div><div class=3D"gmail_default"><font co=
-lor=3D"#0b5394">(XEN) RAM: 00000000bd9b8000 - 00000000bd9b9fff</font></div>=
-<div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) RAM: 00000000bd9=
-ba000 - 00000000bd9c3fff</font></div><div class=3D"gmail_default"><font col=
-or=3D"#0b5394">(XEN) RAM: 00000000bd9c4000 - 00000000bef5ffff</font></div><=
-div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) RAM: 00000000bef6=
-0000 - 00000000bf0effff</font></div><div class=3D"gmail_default"><font colo=
-r=3D"#0b5394">(XEN) RAM: 00000000bf0f0000 - 00000000bf13ffff</font></div><d=
-iv class=3D"gmail_default"><font color=3D"#0b5394">(XEN) RAM: 00000000bf190=
-000 - 00000000bf193fff</font></div><div class=3D"gmail_default"><font color=
-=3D"#0b5394">(XEN) RAM: 00000000bf194000 - 00000000bfffffff</font></div><di=
-v class=3D"gmail_default"><font color=3D"#0b5394">(XEN) RAM: 00000000c00000=
-00 - 00000000dfffffff</font></div><div class=3D"gmail_default"><font color=
-=3D"#0b5394">(XEN) RAM: 0000000200000000 - 000000021fffffff</font></div><di=
-v class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=C2=A0</font></div><=
-div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) MODULE[0]: 000000=
-00b03a4000 - 00000000b03b5000 Device Tree=C2=A0=C2=A0</font></div><div clas=
-s=3D"gmail_default"><font color=3D"#0b5394">(XEN) MODULE[1]: 00000000b04be0=
-00 - 00000000b1975a00 Kernel=C2=A0 =C2=A0 =C2=A0 =C2=A0console=3Dtty0 conso=
-le=3Dhvc0 root=3D/dev/sdd10 rootwait rw rootfstype=3Dext4 efi=3Dnoruntime v=
-ideo=3DHDMI-A</font></div><div class=3D"gmail_default"><font color=3D"#0b53=
-94">-1:1280x720@60</font></div><div class=3D"gmail_default"><font color=3D"=
-#0b5394">(XEN)=C2=A0</font></div><div class=3D"gmail_default"><font color=
-=3D"#0b5394">(XEN) Command line: loglvl=3Dall console=3Ddtuart dtuart=3D/so=
-c/serial@fff32000 dom0_mem=3D2048M efi=3Dno-rs</font></div><div class=3D"gm=
-ail_default"><font color=3D"#0b5394">(XEN) parameter &quot;efi&quot; unknow=
-n!</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) P=
-lacing Xen at 0x00000000dfe00000-0x00000000e0000000</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">(XEN) Update BOOTMOD_XEN from 00=
-000000b03b5000-00000000b04bdd81 =3D&gt; 00000000dfe00000-00000000dff08d81</=
-font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Domai=
-n heap initialised</font></div><div class=3D"gmail_default"><font color=3D"=
-#0b5394">(XEN) Booting using Device Tree</font></div><div class=3D"gmail_de=
-fault"><font color=3D"#0b5394">(XEN) Platform: Generic System</font></div><=
-div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Looking for dtuar=
-t at &quot;/soc/serial@fff32000&quot;, options &quot;&quot;</font></div><di=
-v class=3D"gmail_default"><font color=3D"#0b5394">=C2=A0Xen 4.11.1-pre</fon=
-t></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Xen vers=
-ion 4.11.1-pre (omkar.bolla@) (aarch64-linux-gnu-gcc (Linaro GCC 7.1-2017.0=
-5) 7.1.1 20170510) debug=3Dn=C2=A0 Mon Aug 20 15:11:16 IST 2018</font></div=
-><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Latest ChangeSe=
-t: Mon Jul 30 11:30:09 2018 +0200 git:33ced72-dirty</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">(XEN) Processor: 410fd034: &quot=
-;ARM Limited&quot;, variant: 0x0, part 0xd03, rev 0x4</font></div><div clas=
-s=3D"gmail_default"><font color=3D"#0b5394">(XEN) 64-bit Execution:</font><=
-/div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=C2=A0 =C2=
-=A0Processor Features: 0000000000002222 0000000000000000</font></div><div c=
-lass=3D"gmail_default"><font color=3D"#0b5394">(XEN)=C2=A0 =C2=A0 =C2=A0Exc=
-eption Levels: EL3:64+32 EL2:64+32 EL1:64+32 EL0:64+32</font></div><div cla=
-ss=3D"gmail_default"><font color=3D"#0b5394">(XEN)=C2=A0 =C2=A0 =C2=A0Exten=
-sions: FloatingPoint AdvancedSIMD</font></div><div class=3D"gmail_default">=
-<font color=3D"#0b5394">(XEN)=C2=A0 =C2=A0Debug Features: 0000000010305106 =
-0000000000000000</font></div><div class=3D"gmail_default"><font color=3D"#0=
-b5394">(XEN)=C2=A0 =C2=A0Auxiliary Features: 0000000000000000 0000000000000=
-000</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=
-=C2=A0 =C2=A0Memory Model Features: 0000000000001122 0000000000000000</font=
-></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=C2=A0 =C2=
-=A0ISA Features:=C2=A0 0000000000011120 0000000000000000</font></div><div c=
-lass=3D"gmail_default"><font color=3D"#0b5394">(XEN) 32-bit Execution:</fon=
-t></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=C2=A0 =
-=C2=A0Processor Features: 00000131:00011011</font></div><div class=3D"gmail=
-_default"><font color=3D"#0b5394">(XEN)=C2=A0 =C2=A0 =C2=A0Instruction Sets=
-: AArch32 A32 Thumb Thumb-2 Jazelle</font></div><div class=3D"gmail_default=
-"><font color=3D"#0b5394">(XEN)=C2=A0 =C2=A0 =C2=A0Extensions: GenericTimer=
- Security</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">=
-(XEN)=C2=A0 =C2=A0Debug Features: 03010066</font></div><div class=3D"gmail_=
-default"><font color=3D"#0b5394">(XEN)=C2=A0 =C2=A0Auxiliary Features: 0000=
-0000</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=
-=C2=A0 =C2=A0Memory Model Features: 10201105 40000000 01260000 02102211</fo=
-nt></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=C2=A0 I=
-SA Features: 02101110 13112111 21232042 01112131 00011142 00011121</font></=
-div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Using SMC Ca=
-lling Convention v1.1</font></div><div class=3D"gmail_default"><font color=
-=3D"#0b5394">(XEN) Using PSCI v1.1</font></div><div class=3D"gmail_default"=
-><font color=3D"#0b5394">(XEN) SMP: Allowing 8 CPUs</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">(XEN) Generic Timer IRQ: phys=3D=
-30 hyp=3D26 virt=3D27 Freq: 1920 KHz</font></div><div class=3D"gmail_defaul=
-t"><font color=3D"#0b5394">(XEN) GICv2 initialization:</font></div><div cla=
-ss=3D"gmail_default"><font color=3D"#0b5394">(XEN)=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0gic_dist_addr=3D00000000e82b1000</font></div><div class=3D"gmail_=
-default"><font color=3D"#0b5394">(XEN)=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gic=
-_cpu_addr=3D00000000e82b2000</font></div><div class=3D"gmail_default"><font=
- color=3D"#0b5394">(XEN)=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gic_hyp_addr=3D00=
-000000e82b4000</font></div><div class=3D"gmail_default"><font color=3D"#0b5=
-394">(XEN)=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gic_vcpu_addr=3D00000000e82b600=
-0</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gic_maintenance_irq=3D25</font></div><div cl=
-ass=3D"gmail_default"><font color=3D"#0b5394">(XEN) GICv2: 384 lines, 8 cpu=
-s, secure (IID 0200143b).</font></div><div class=3D"gmail_default"><font co=
-lor=3D"#0b5394">(XEN) Using scheduler: SMP Credit Scheduler (credit)</font>=
-</div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Allocated =
-console ring of 64 KiB.</font></div><div class=3D"gmail_default"><font colo=
-r=3D"#0b5394">(XEN) Bringing up CPU1</font></div><div class=3D"gmail_defaul=
-t"><font color=3D"#0b5394">(XEN) Failed to bring up CPU1</font></div><div c=
-lass=3D"gmail_default"><font color=3D"#0b5394">(XEN) Failed to bring up CPU=
- 1 (error -9)</font></div><div class=3D"gmail_default"><font color=3D"#0b53=
-94">(XEN) Bringing up CPU2</font></div><div class=3D"gmail_default"><font c=
-olor=3D"#0b5394">(XEN) Failed to bring up CPU2</font></div><div class=3D"gm=
-ail_default"><font color=3D"#0b5394">(XEN) Failed to bring up CPU 2 (error =
--9)</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) =
-Bringing up CPU3</font></div><div class=3D"gmail_default"><font color=3D"#0=
-b5394">(XEN) Failed to bring up CPU3</font></div><div class=3D"gmail_defaul=
-t"><font color=3D"#0b5394">(XEN) Failed to bring up CPU 3 (error -9)</font>=
-</div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Bringing u=
-p CPU4</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XE=
-N) Failed to bring up CPU4</font></div><div class=3D"gmail_default"><font c=
-olor=3D"#0b5394">(XEN) Failed to bring up CPU 4 (error -9)</font></div><div=
- class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Bringing up CPU5</fo=
-nt></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Failed =
-to bring up CPU5</font></div><div class=3D"gmail_default"><font color=3D"#0=
-b5394">(XEN) Failed to bring up CPU 5 (error -9)</font></div><div class=3D"=
-gmail_default"><font color=3D"#0b5394">(XEN) Bringing up CPU6</font></div><=
-div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Failed to bring u=
-p CPU6</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XE=
-N) Failed to bring up CPU 6 (error -9)</font></div><div class=3D"gmail_defa=
-ult"><font color=3D"#0b5394">(XEN) Bringing up CPU7</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">(XEN) Failed to bring up CPU7</f=
-ont></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Failed=
- to bring up CPU 7 (error -9)</font></div><div class=3D"gmail_default"><fon=
-t color=3D"#0b5394">(XEN) Brought up 1 CPUs</font></div><div class=3D"gmail=
-_default"><font color=3D"#0b5394">(XEN) P2M: 40-bit IPA with 40-bit PA and =
-8-bit VMID</font></div><div class=3D"gmail_default"><font color=3D"#0b5394"=
->(XEN) P2M: 3 levels with order-1 root, VTCR 0x80023558</font></div><div cl=
-ass=3D"gmail_default"><font color=3D"#0b5394">(XEN) I/O virtualisation disa=
-bled</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=
- build-id: 361a7d1197ce6c845658fa3210780d1751b7103a</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">(XEN) alternatives: Patching wit=
-h alt table 00000000400acff8 -&gt; 00000000400ad568</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">(XEN) *** LOADING DOMAIN 0 ***</=
-font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Loadi=
-ng kernel from boot module @ 00000000b04be000</font></div><div class=3D"gma=
-il_default"><font color=3D"#0b5394">(XEN) Allocating 1:1 mappings totalling=
- 2048MB for dom0:</font></div><div class=3D"gmail_default"><font color=3D"#=
-0b5394">(XEN) BANK[0] 0x00000010000000-0x00000018000000 (128MB)</font></div=
-><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) BANK[1] 0x00000=
-020000000-0x00000030000000 (256MB)</font></div><div class=3D"gmail_default"=
-><font color=3D"#0b5394">(XEN) BANK[2] 0x00000038000000-0x0000003c000000 (6=
-4MB)</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN)=
- BANK[3] 0x00000040000000-0x0000004c000000 (192MB)</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">(XEN) BANK[4] 0x0000008c000000-0=
-x000000b0000000 (576MB)</font></div><div class=3D"gmail_default"><font colo=
-r=3D"#0b5394">(XEN) BANK[5] 0x000000b4000000-0x000000b8000000 (64MB)</font>=
-</div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) BANK[6] 0x=
-000000c0000000-0x000000dc000000 (448MB)</font></div><div class=3D"gmail_def=
-ault"><font color=3D"#0b5394">(XEN) BANK[7] 0x00000200000000-0x000002140000=
-00 (320MB)</font></div><div class=3D"gmail_default"><font color=3D"#0b5394"=
->(XEN) Grant table range: 0x000000dfe00000-0x000000dfe40000</font></div><di=
-v class=3D"gmail_default"><font color=3D"#0b5394">(XEN) Allocating PPI 16 f=
-or event channel interrupt</font></div><div class=3D"gmail_default"><font c=
-olor=3D"#0b5394">(XEN) Loading zImage from 00000000b04be000 to 000000001008=
-0000-0000000011537a00</font></div><div class=3D"gmail_default"><font color=
-=3D"#0b5394">(XEN) Loading dom0 DTB to 0x0000000017e00000-0x0000000017e0d73=
-b</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) In=
-itial low memory virq threshold set at 0x4000 pages.</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">(XEN) Scrubbing Free RAM on 1 no=
-des using 1 CPUs</font></div><div class=3D"gmail_default"><font color=3D"#0=
-b5394">(XEN) ..............................................................=
-......done.</font></div><div class=3D"gmail_default"><font color=3D"#0b5394=
-">(XEN) Std. Loglevel: All</font></div><div class=3D"gmail_default"><font c=
-olor=3D"#0b5394">(XEN) Guest Loglevel: Nothing (Rate-limited: Errors and wa=
-rnings)</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">(X=
-EN) *** Serial input -&gt; DOM0 (type &#39;CTRL-a&#39; three times to switc=
-h input to Xen)</font></div><div class=3D"gmail_default"><font color=3D"#0b=
-5394">(XEN) Freed 280kB init memory.</font></div><div class=3D"gmail_defaul=
-t"><font color=3D"#0b5394">(XEN) d0v0: vGICD: unhandled word write 0xffffff=
-ff to ICACTIVER4</font></div><div class=3D"gmail_default"><font color=3D"#0=
-b5394">(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER8</fo=
-nt></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) d0v0: v=
-GICD: unhandled word write 0xffffffff to ICACTIVER12</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">(XEN) d0v0: vGICD: unhandled wor=
-d write 0xffffffff to ICACTIVER16</font></div><div class=3D"gmail_default">=
-<font color=3D"#0b5394">(XEN) d0v0: vGICD: unhandled word write 0xffffffff =
-to ICACTIVER20</font></div><div class=3D"gmail_default"><font color=3D"#0b5=
-394">(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER24</fon=
-t></div><div class=3D"gmail_default"><font color=3D"#0b5394">(XEN) d0v0: vG=
-ICD: unhandled word write 0xffffffff to ICACTIVER28</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">(XEN) d0v0: vGICD: unhandled wor=
-d write 0xffffffff to ICACTIVER32</font></div><div class=3D"gmail_default">=
-<font color=3D"#0b5394">(XEN) d0v0: vGICD: unhandled word write 0xffffffff =
-to ICACTIVER36</font></div><div class=3D"gmail_default"><font color=3D"#0b5=
-394">(XEN) d0v0: vGICD: unhandled word write 0xffffffff to ICACTIVER40</fon=
-t></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0=
- 0.000000] Booting Linux on physical CPU 0x0</font></div><div class=3D"gmai=
-l_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] Linux version 4=
-.9.113-07887-geb8dbd1-dirty (omkar.bolla@OmkarB-LaptopU) (gcc version 7.1.1=
- 20170510 (Linaro GCC 7.1-2017.05) ) #32 SMP PREEMPT Sun=C2=A0</font></div>=
-<div class=3D"gmail_default"><font color=3D"#0b5394">Aug 19 17:07:02 IST 20=
-18</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0=
- =C2=A0 0.000000] Boot CPU: AArch64 Processor [410fd034]</font></div><div c=
-lass=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] Xen=
- 4.11 support found</font></div><div class=3D"gmail_default"><font color=3D=
-"#0b5394">[=C2=A0 =C2=A0 0.000000] efi: Getting EFI parameters from FDT:</f=
-ont></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=
-=A0 0.000000] efi: UEFI not found.</font></div><div class=3D"gmail_default"=
-><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] Ion: base 0xda200000, siz=
-e is 0x1e00000, node name graphic, heap-name carveout_gralloc namesize 17,[=
-99][97][114][118]</font></div><div class=3D"gmail_default"><font color=3D"#=
-0b5394">[=C2=A0 =C2=A0 0.000000] Ion: insert heap-name carveout_gralloc=C2=
-=A0</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=
-=A0 =C2=A0 0.000000] OF: reserved mem: initialized node graphic, compatible=
- id hisi_ion</font></div><div class=3D"gmail_default"><font color=3D"#0b539=
-4">[=C2=A0 =C2=A0 0.000000] cma: Reserved 64 MiB at 0x00000000d6000000</fon=
-t></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0=
- 0.000000] psci: probing for conduit method from DT.</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] psci: P=
-SCIv1.1 detected in firmware.</font></div><div class=3D"gmail_default"><fon=
-t color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] psci: Using standard PSCI v0.2=
- function IDs</font></div><div class=3D"gmail_default"><font color=3D"#0b53=
-94">[=C2=A0 =C2=A0 0.000000] psci: Trusted OS migration not required</font>=
-</div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0=
-.000000] psci: SMC Calling Convention v1.1</font></div><div class=3D"gmail_=
-default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] percpu: Embedded =
-23 pages/cpu @ffffffc213f88000 s54936 r8192 d31080 u94208</font></div><div =
-class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] De=
-tected VIPT I-cache on CPU0</font></div><div class=3D"gmail_default"><font =
-color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] CPU features: enabling workaroun=
-d for ARM erratum 845719</font></div><div class=3D"gmail_default"><font col=
-or=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] Built 1 zonelists in Zone order, mo=
-bility grouping on.=C2=A0 Total pages: 515592</font></div><div class=3D"gma=
-il_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] Kernel command=
- line: console=3Dtty0 console=3Dhvc0 root=3D/dev/sdd10 rootwait rw rootfsty=
-pe=3Dext4 efi=3Dnoruntime video=3DHDMI-A-1:1280x720@60</font></div><div cla=
-ss=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] PID h=
-ash table entries: 4096 (order: 3, 32768 bytes)</font></div><div class=3D"g=
-mail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] Dentry cache=
- hash table entries: 262144 (order: 9, 2097152 bytes)</font></div><div clas=
-s=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] Inode-=
-cache hash table entries: 131072 (order: 8, 1048576 bytes)</font></div><div=
- class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] s=
-oftware IO TLB [mem 0xd2000000-0xd6000000] (64MB) mapped at [ffffffc0d20000=
-00-ffffffc0d5ffffff]</font></div><div class=3D"gmail_default"><font color=
-=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] Memory: 1824004K/2095104K available (=
-13756K kernel code, 1374K rwdata, 4884K rodata, 1152K init, 1067K bss, 2055=
-64K reserved, 65536K cma-reserved)</font></div><div class=3D"gmail_default"=
-><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] Virtual kernel memory lay=
-out:</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=
-=A0 =C2=A0 0.000000]=C2=A0 =C2=A0 =C2=A0modules : 0xffffff8000000000 - 0xff=
-ffff8008000000=C2=A0 =C2=A0(=C2=A0 =C2=A0128 MB)</font></div><div class=3D"=
-gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000]=C2=A0 =C2=
-=A0 =C2=A0vmalloc : 0xffffff8008000000 - 0xffffffbebfff0000=C2=A0 =C2=A0(=
-=C2=A0 =C2=A0250 GB)</font></div><div class=3D"gmail_default"><font color=
-=3D"#0b5394">[=C2=A0 =C2=A0 0.000000]=C2=A0 =C2=A0 =C2=A0 =C2=A0.text : 0xf=
-fffff8008080000 - 0xffffff8008df0000=C2=A0 =C2=A0( 13760 KB)</font></div><d=
-iv class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000]=
-=C2=A0 =C2=A0 =C2=A0.rodata : 0xffffff8008df0000 - 0xffffff80092c0000=C2=A0=
- =C2=A0(=C2=A0 4928 KB)</font></div><div class=3D"gmail_default"><font colo=
-r=3D"#0b5394">[=C2=A0 =C2=A0 0.000000]=C2=A0 =C2=A0 =C2=A0 =C2=A0.init : 0x=
-ffffff80092c0000 - 0xffffff80093e0000=C2=A0 =C2=A0(=C2=A0 1152 KB)</font></=
-div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.0=
-00000]=C2=A0 =C2=A0 =C2=A0 =C2=A0.data : 0xffffff80093e0000 - 0xffffff80095=
-37a00=C2=A0 =C2=A0(=C2=A0 1375 KB)</font></div><div class=3D"gmail_default"=
-><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000]=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 .bss : 0xffffff8009537a00 - 0xffffff8009642754=C2=A0 =C2=A0(=C2=A0 1068=
- KB)</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=
-=A0 =C2=A0 0.000000]=C2=A0 =C2=A0 =C2=A0fixed=C2=A0 =C2=A0: 0xffffffbefe7fb=
-000 - 0xffffffbefec00000=C2=A0 =C2=A0(=C2=A0 4116 KB)</font></div><div clas=
-s=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000]=C2=A0 =
-=C2=A0 =C2=A0PCI I/O : 0xffffffbefee00000 - 0xffffffbeffe00000=C2=A0 =C2=A0=
-(=C2=A0 =C2=A0 16 MB)</font></div><div class=3D"gmail_default"><font color=
-=3D"#0b5394">[=C2=A0 =C2=A0 0.000000]=C2=A0 =C2=A0 =C2=A0vmemmap : 0xffffff=
-bf00000000 - 0xffffffc000000000=C2=A0 =C2=A0(=C2=A0 =C2=A0 =C2=A04 GB maxim=
-um)</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=
-=A0 =C2=A0 0.000000]=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-0xffffffbf00400000 - 0xffffffbf08500000=C2=A0 =C2=A0(=C2=A0 =C2=A0129 MB ac=
-tual)</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=
-=A0 =C2=A0 0.000000]=C2=A0 =C2=A0 =C2=A0memory=C2=A0 : 0xffffffc010000000 -=
- 0xffffffc214000000=C2=A0 =C2=A0(=C2=A0 8256 MB)</font></div><div class=3D"=
-gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] Preemptible=
- hierarchical RCU implementation.</font></div><div class=3D"gmail_default">=
-<font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000]=C2=A0 Build-time adjustmen=
-t of leaf fanout to 64.</font></div><div class=3D"gmail_default"><font colo=
-r=3D"#0b5394">[=C2=A0 =C2=A0 0.000000]=C2=A0 RCU restricting CPUs from NR_C=
-PUS=3D64 to nr_cpu_ids=3D1.</font></div><div class=3D"gmail_default"><font =
-color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] RCU: Adjusting geometry for rcu_=
-fanout_leaf=3D64, nr_cpu_ids=3D1</font></div><div class=3D"gmail_default"><=
-font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000000] NR_IRQS:64 nr_irqs:64 0</fo=
-nt></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=
-=A0 0.000000] arm_arch_timer: Architected cp15 timer(s) running at 1.92MHz =
-(virt).</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=
-=C2=A0 =C2=A0 0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffff=
-ff max_cycles: 0x1c570327e, max_idle_ns: 1763180809505 ns</font></div><div =
-class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000005] sc=
-hed_clock: 56 bits at 1920kHz, resolution 520ns, wraps every 4398046510977n=
-s</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =
-=C2=A0 0.000105] clocksource: arm,sp804: mask: 0xffffffff max_cycles: 0xfff=
-fffff, max_idle_ns: 58334160866034 ns</font></div><div class=3D"gmail_defau=
-lt"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.000699] Console: colour dummy =
-device 80x25</font></div><div class=3D"gmail_default"><font color=3D"#0b539=
-4">[=C2=A0 =C2=A0 0.001190] console [tty0] enabled</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.341427] console=
- [hvc0] enabled</font></div><div class=3D"gmail_default"><font color=3D"#0b=
-5394">[=C2=A0 =C2=A0 0.344935] Calibrating delay loop (skipped), value calc=
-ulated using timer frequency.. 3.84 BogoMIPS (lpj=3D7680)</font></div><div =
-class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.355049] pi=
-d_max: default: 32768 minimum: 301</font></div><div class=3D"gmail_default"=
-><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.359845] Security Framework initia=
-lized</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=
-=A0 =C2=A0 0.363910] SELinux:=C2=A0 Initializing.</font></div><div class=3D=
-"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.367538] Mount-cach=
-e hash table entries: 4096 (order: 3, 32768 bytes)</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.374225] Mountpo=
-int-cache hash table entries: 4096 (order: 3, 32768 bytes)</font></div><div=
- class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.382219] f=
-trace: allocating 44464 entries in 174 pages</font></div><div class=3D"gmai=
-l_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.479344] sched-energy: C=
-PU device node has no sched-energy-costs</font></div><div class=3D"gmail_de=
-fault"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.485645] Invalid sched_group=
-_energy for CPU0</font></div><div class=3D"gmail_default"><font color=3D"#0=
-b5394">[=C2=A0 =C2=A0 0.490181] CPU0: update cpu_capacity 1024</font></div>=
-<div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.49435=
-5] ASID allocator initialised with 32768 entries</font></div><div class=3D"=
-gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.500803] xen:grant_t=
-able: Grant tables using version 1 layout</font></div><div class=3D"gmail_d=
-efault"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.506746] Grant table initia=
-lized</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=
-=A0 =C2=A0 0.510310] xen:events: Using FIFO-based ABI</font></div><div clas=
-s=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.514720] Xen: i=
-nitializing cpu0</font></div><div class=3D"gmail_default"><font color=3D"#0=
-b5394">[=C2=A0 =C2=A0 0.547593] EFI services will not be available.</font><=
-/div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.=
-560149] Brought up 1 CPUs</font></div><div class=3D"gmail_default"><font co=
-lor=3D"#0b5394">[=C2=A0 =C2=A0 0.563030] SMP: Total of 1 processors activat=
-ed.</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=
-=A0 =C2=A0 0.567826] CPU features: detected feature: 32-bit EL0 Support</fo=
-nt></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=
-=A0 0.573708] CPU features: detected feature: Kernel page table isolation (=
-KPTI)</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=
-=A0 =C2=A0 0.586209] CPU: All CPU(s) started at EL1</font></div><div class=
-=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.590234] alterna=
-tives: patching kernel code</font></div><div class=3D"gmail_default"><font =
-color=3D"#0b5394">[=C2=A0 =C2=A0 0.594924] Invalid sched_group_energy for C=
-PU0</font></div><div class=3D"gmail_default"><font color=3D"#0b5394">[=C2=
-=A0 =C2=A0 0.599376] CPU0: update max cpu_capacity 1024</font></div><div cl=
-ass=3D"gmail_default"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.603878] Inva=
-lid sched_group_energy for Cluster0</font></div><div class=3D"gmail_default=
-"><font color=3D"#0b5394">[=C2=A0 =C2=A0 0.610428] devtmpfs: initialized</f=
-ont></div><div style=3D"color:rgb(11,83,148)"><br></div></div><div class=3D=
-"gmail_default" style=3D"color:rgb(11,83,148)">----------------------------=
-----------------------------</div><div class=3D"gmail_default" style=3D"col=
-or:rgb(11,83,148)"><br></div><div class=3D"gmail_default" style=3D"color:rg=
-b(11,83,148)">Thanks,</div><div class=3D"gmail_default" style=3D"color:rgb(=
-11,83,148)">Omkar B</div></div><div class=3D"gmail_extra"><br><div class=3D=
-"gmail_quote">On Wed, Aug 15, 2018 at 11:52 PM, Julien Grall <span dir=3D"l=
-tr">&lt;<a href=3D"mailto:julien.grall@arm.com" target=3D"_blank">julien.gr=
-all@arm.com</a>&gt;</span> wrote:<br><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On 08/1=
-5/2018 10:15 AM, Omkar Bolla wrote:<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex">
-HI Julien,<br>
-</blockquote>
-<br>
-Hello,<span class=3D""><br>
-<br>
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex">
-As you suggested, I enabled early printk for hikey960 in xen-4.8 stable bra=
-nch and xen-4.11 stable branch.<br>
-</blockquote>
-<br></span>
-Looking at the logs, Xen is placed differently in the memory:<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 - Xen 4.8:=C2=A0 0x000000001aa00000<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 - Xen 4.11: 0x000000021fe00000<br>
-<br>
-With Xen 4.11, the binary will be placed above 4GB. There was some change i=
-n the way to place Xen in the memory in 2016 allowing to place Xen at the e=
-nd of the usable RAM.<br>
-<br>
-I suspect the firmware does not support 64-bit address entry point for seco=
-ndary CPU. This would explain the ADDRESS_INVALID from PSCI CPU UP call. Ca=
-n you give a try to this patch:<br>
-<br>
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c<br>
-index 7d40a8466b..13318da6b1 100644<br>
---- a/xen/arch/arm/setup.c<br>
-+++ b/xen/arch/arm/setup.c<br>
-@@ -408,13 +408,11 @@ static paddr_t __init get_xen_paddr(void)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if ( !e )<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0continue;<br>
-<br>
--#ifdef CONFIG_ARM_32<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Xen must be under 4GB */=
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if ( e &gt; 0x100000000ULL =
-)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0e =3D 0x10000=
-0000ULL;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if ( e &lt; bank-&gt;start =
-)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0continue;<br>
--#endif<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0s =3D e - min_size;<br>
-<br>
-<br>
-Cheers,<span class=3D"HOEnZb"><font color=3D"#888888"><br>
-<br>
--- <br>
-Julien Grall<br>
-</font></span></blockquote></div><br></div>
+--=separator
+Content-Type: application/octet-stream; name="xsa269-4.8.patch"
+Content-Disposition: attachment; filename="xsa269-4.8.patch"
+Content-Transfer-Encoding: base64
 
-<br>
+RnJvbTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNv
+bT4KU3ViamVjdDogeDg2L3Z0eDogRml4IHRoZSBjaGVja2luZyBmb3IgdW5r
+bm93bi9pbnZhbGlkIE1TUl9ERUJVR0NUTCBiaXRzCgpUaGUgVlBNVV9NT0RF
+X09GRiBlYXJseS1leGl0IGluIHZwbXVfZG9fd3Jtc3IoKSBpbnRyb2R1Y2Vk
+IGJ5IGMvcwoxMWZlOTk4ZTU2IGJ5cGFzc2VzIGFsbCByZXNlcnZlZCBiaXQg
+Y2hlY2tpbmcgaW4gdGhlIGdlbmVyYWwgY2FzZS4gIEFzIGEKcmVzdWx0LCBh
+IGd1ZXN0IGNhbiBlbmFibGUgQlRTIHdoZW4gaXQgc2hvdWxkbid0IGJlIHBl
+cm1pdHRlZCB0bywgYW5kCmxvY2sgdXAgdGhlIGVudGlyZSBob3N0LgoKV2l0
+aCB2UE1VIGFjdGl2ZSAobm90IGEgc2VjdXJpdHkgc3VwcG9ydGVkIGNvbmZp
+Z3VyYXRpb24sIGJ1dCB1c2VmdWwgZm9yCmRlYnVnZ2luZyksIHRoZSByZXNl
+cnZlZCBiaXQgY2hlY2tpbmcgaW4gYnJva2VuLCBjYXVzZWQgYnkgdGhlIG9y
+aWdpbmFsCkJUUyBjaGFuZ2VzZXQgMWE4YWE3NWVkLgoKRnJvbSBhIGNvcnJl
+Y3RuZXNzIHN0YW5kcG9pbnQsIGl0IGlzIG5vdCBwb3NzaWJsZSB0byBoYXZl
+IHR3byBkaWZmZXJlbnQKcGllY2VzIG9mIGNvZGUgcmVzcG9uc2libGUgZm9y
+IGRpZmZlcmVudCBwYXJ0cyBvZiB2YWx1ZSBjaGVja2luZywgaWYKdGhlcmUg
+aXNuJ3QgYW4gYWNjdW11bGF0aW9uIG9mIGJpdHMgd2hpY2ggaGF2ZSBiZWVu
+IGNoZWNrZWQuICBBCnByYWN0aWNhbCB1cHNob3Qgb2YgdGhpcyBpcyB0aGF0
+IGEgZ3Vlc3QgY2FuIHNldCBhbnkgdmFsdWUgaXQKd2lzaGVzICh1c3VhbGx5
+IHJlc3VsdGluZyBpbiBhIHZtZW50cnkgZmFpbHVyZSBmb3IgYmFkIGd1ZXN0
+IHN0YXRlKS4KClRoZXJlZm9yZSwgZml4IHRoaXMgYnkgaW1wbGVtZW50aW5n
+IGFsbCB0aGUgcmVzZXJ2ZWQgYml0IGNoZWNraW5nIGluIHRoZQptYWluIE1T
+Ul9ERUJVR0NUTCBibG9jaywgYW5kIHJlbW92aW5nIGFsbCBoYW5kbGluZyBv
+ZiBERUJVR0NUTCBmcm9tIHRoZQp2UE1VIE1TUiBsb2dpYy4KClRoaXMgaXMg
+WFNBLTI2OQoKU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
+LmNvb3BlcjNAY2l0cml4LmNvbT4KUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNo
+IDxqYmV1bGljaEBzdXNlLmNvbT4KCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94
+ODYvY3B1L3ZwbXVfaW50ZWwuYyBiL3hlbi9hcmNoL3g4Ni9jcHUvdnBtdV9p
+bnRlbC5jCmluZGV4IDdmOWFkZDEuLjYyNzZjMTAgMTAwNjQ0Ci0tLSBhL3hl
+bi9hcmNoL3g4Ni9jcHUvdnBtdV9pbnRlbC5jCisrKyBiL3hlbi9hcmNoL3g4
+Ni9jcHUvdnBtdV9pbnRlbC5jCkBAIC02OCwxMCArNjgsNiBAQAogI2RlZmlu
+ZSBNU1JfUE1DX0FMSUFTX01BU0sgICAgICAgKH4oTVNSX0lBMzJfUEVSRkNU
+UjAgXiBNU1JfSUEzMl9BX1BFUkZDVFIwKSkKIHN0YXRpYyBib29sX3QgX19y
+ZWFkX21vc3RseSBmdWxsX3dpZHRoX3dyaXRlOwogCi0vKiBJbnRlbC1zcGVj
+aWZpYyBWUE1VIGZlYXR1cmVzICovCi0jZGVmaW5lIFZQTVVfQ1BVX0hBU19E
+UyAgICAgICAgICAgICAgICAgICAgIDB4MTAwIC8qIEhhcyBEZWJ1ZyBTdG9y
+ZSAqLwotI2RlZmluZSBWUE1VX0NQVV9IQVNfQlRTICAgICAgICAgICAgICAg
+ICAgICAweDIwMCAvKiBIYXMgQnJhbmNoIFRyYWNlIFN0b3JlICovCi0KIC8q
+CiAgKiBNU1JfQ09SRV9QRVJGX0ZJWEVEX0NUUl9DVFJMIGNvbnRhaW5zIHRo
+ZSBjb25maWd1cmF0aW9uIG9mIGFsbCBmaXhlZAogICogY291bnRlcnMuIDQg
+Yml0cyBmb3IgZXZlcnkgY291bnRlci4KQEAgLTU2MywyNyArNTU5LDcgQEAg
+c3RhdGljIGludCBjb3JlMl92cG11X2RvX3dybXNyKHVuc2lnbmVkIGludCBt
+c3IsIHVpbnQ2NF90IG1zcl9jb250ZW50LAogICAgIHVpbnQ2NF90ICplbmFi
+bGVkX2NudHJzOwogCiAgICAgaWYgKCAhY29yZTJfdnBtdV9tc3JfY29tbW9u
+X2NoZWNrKG1zciwgJnR5cGUsICZpbmRleCkgKQotICAgIHsKLSAgICAgICAg
+LyogU3BlY2lhbCBoYW5kbGluZyBmb3IgQlRTICovCi0gICAgICAgIGlmICgg
+bXNyID09IE1TUl9JQTMyX0RFQlVHQ1RMTVNSICkKLSAgICAgICAgewotICAg
+ICAgICAgICAgc3VwcG9ydGVkIHw9IElBMzJfREVCVUdDVExNU1JfVFIgfCBJ
+QTMyX0RFQlVHQ1RMTVNSX0JUUyB8Ci0gICAgICAgICAgICAgICAgICAgICAg
+ICAgSUEzMl9ERUJVR0NUTE1TUl9CVElOVDsKLQotICAgICAgICAgICAgaWYg
+KCBjcHVfaGFzKCZjdXJyZW50X2NwdV9kYXRhLCBYODZfRkVBVFVSRV9EU0NQ
+TCkgKQotICAgICAgICAgICAgICAgIHN1cHBvcnRlZCB8PSBJQTMyX0RFQlVH
+Q1RMTVNSX0JUU19PRkZfT1MgfAotICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBJQTMyX0RFQlVHQ1RMTVNSX0JUU19PRkZfVVNSOwotICAgICAgICAg
+ICAgaWYgKCAhKG1zcl9jb250ZW50ICYgfnN1cHBvcnRlZCkgJiYKLSAgICAg
+ICAgICAgICAgICAgdnBtdV9pc19zZXQodnBtdSwgVlBNVV9DUFVfSEFTX0JU
+UykgKQotICAgICAgICAgICAgICAgIHJldHVybiAwOwotICAgICAgICAgICAg
+aWYgKCAobXNyX2NvbnRlbnQgJiBzdXBwb3J0ZWQpICYmCi0gICAgICAgICAg
+ICAgICAgICF2cG11X2lzX3NldCh2cG11LCBWUE1VX0NQVV9IQVNfQlRTKSAp
+Ci0gICAgICAgICAgICAgICAgcHJpbnRrKFhFTkxPR19HX1dBUk5JTkcKLSAg
+ICAgICAgICAgICAgICAgICAgICAgIiVwdjogRGVidWcgU3RvcmUgdW5zdXBw
+b3J0ZWQgb24gdGhpcyBDUFVcbiIsCi0gICAgICAgICAgICAgICAgICAgICAg
+IGN1cnJlbnQpOwotICAgICAgICB9CiAgICAgICAgIHJldHVybiAtRUlOVkFM
+OwotICAgIH0KIAogICAgIEFTU0VSVCghc3VwcG9ydGVkKTsKIApkaWZmIC0t
+Z2l0IGEveGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMgYi94ZW4vYXJjaC94
+ODYvaHZtL3ZteC92bXguYwppbmRleCA5NTU2NDNjLi5kMDdkOTQxIDEwMDY0
+NAotLS0gYS94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYworKysgYi94ZW4v
+YXJjaC94ODYvaHZtL3ZteC92bXguYwpAQCAtMjk3Niw2ICsyOTc2LDggQEAg
+c3RhdGljIGludCB2bXhfbXNyX3dyaXRlX2ludGVyY2VwdCh1bnNpZ25lZCBp
+bnQgbXNyLCB1aW50NjRfdCBtc3JfY29udGVudCkKIAogICAgIHN3aXRjaCAo
+IG1zciApCiAgICAgeworICAgICAgICB1aW50NjRfdCByc3ZkOworCiAgICAg
+Y2FzZSBNU1JfSUEzMl9TWVNFTlRFUl9DUzoKICAgICAgICAgX192bXdyaXRl
+KEdVRVNUX1NZU0VOVEVSX0NTLCBtc3JfY29udGVudCk7CiAgICAgICAgIGJy
+ZWFrOwpAQCAtMjk5MCwxNyArMjk5MiwyOSBAQCBzdGF0aWMgaW50IHZteF9t
+c3Jfd3JpdGVfaW50ZXJjZXB0KHVuc2lnbmVkIGludCBtc3IsIHVpbnQ2NF90
+IG1zcl9jb250ZW50KQogICAgICAgICBfX3Ztd3JpdGUoR1VFU1RfU1lTRU5U
+RVJfRUlQLCBtc3JfY29udGVudCk7CiAgICAgICAgIGJyZWFrOwogICAgIGNh
+c2UgTVNSX0lBMzJfREVCVUdDVExNU1I6IHsKKyAgICAgICAgdWludDMyX3Qg
+ZWJ4LCBlY3ggPSAwOwogICAgICAgICBpbnQgaSwgcmMgPSAwOwotICAgICAg
+ICB1aW50NjRfdCBzdXBwb3J0ZWQgPSBJQTMyX0RFQlVHQ1RMTVNSX0xCUiB8
+IElBMzJfREVCVUdDVExNU1JfQlRGOwogCi0gICAgICAgIGlmICggYm9vdF9j
+cHVfaGFzKFg4Nl9GRUFUVVJFX1JUTSkgKQotICAgICAgICAgICAgc3VwcG9y
+dGVkIHw9IElBMzJfREVCVUdDVExNU1JfUlRNOwotICAgICAgICBpZiAoIG1z
+cl9jb250ZW50ICYgfnN1cHBvcnRlZCApCisgICAgICAgIHJzdmQgPSB+KElB
+MzJfREVCVUdDVExNU1JfTEJSIHwgSUEzMl9ERUJVR0NUTE1TUl9CVEYpOwor
+CisgICAgICAgIC8qIFRPRE86IFdpcmUgdlBNVSBzZXR0aW5ncyBwcm9wZXJs
+eSB0aHJvdWdoIHRoZSBDUFVJRCBwb2xpY3kgKi8KKyAgICAgICAgaWYgKCB2
+cG11X2lzX3NldCh2Y3B1X3ZwbXUodiksIFZQTVVfQ1BVX0hBU19CVFMpICkK
+ICAgICAgICAgewotICAgICAgICAgICAgLyogUGVyaGFwcyBzb21lIG90aGVy
+IGJpdHMgYXJlIHN1cHBvcnRlZCBpbiB2cG11LiAqLwotICAgICAgICAgICAg
+aWYgKCB2cG11X2RvX3dybXNyKG1zciwgbXNyX2NvbnRlbnQsIHN1cHBvcnRl
+ZCkgKQotICAgICAgICAgICAgICAgIGJyZWFrOworICAgICAgICAgICAgcnN2
+ZCAmPSB+KElBMzJfREVCVUdDVExNU1JfVFIgfCBJQTMyX0RFQlVHQ1RMTVNS
+X0JUUyB8CisgICAgICAgICAgICAgICAgICAgICAgSUEzMl9ERUJVR0NUTE1T
+Ul9CVElOVCk7CisKKyAgICAgICAgICAgIGlmICggY3B1X2hhcygmY3VycmVu
+dF9jcHVfZGF0YSwgWDg2X0ZFQVRVUkVfRFNDUEwpICkKKyAgICAgICAgICAg
+ICAgICByc3ZkICY9IH4oSUEzMl9ERUJVR0NUTE1TUl9CVFNfT0ZGX09TIHwK
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgSUEzMl9ERUJVR0NUTE1TUl9C
+VFNfT0ZGX1VTUik7CiAgICAgICAgIH0KKworICAgICAgICBodm1fY3B1aWQo
+NywgTlVMTCwgJmVieCwgJmVjeCwgTlVMTCk7CisgICAgICAgIGlmICggZWJ4
+ICYgY3B1ZmVhdF9tYXNrKFg4Nl9GRUFUVVJFX1JUTSkgKQorICAgICAgICAg
+ICAgcnN2ZCAmPSB+SUEzMl9ERUJVR0NUTE1TUl9SVE07CisKKyAgICAgICAg
+aWYgKCBtc3JfY29udGVudCAmIHJzdmQgKQorICAgICAgICAgICAgZ290byBn
+cF9mYXVsdDsKKwogICAgICAgICBpZiAoIG1zcl9jb250ZW50ICYgSUEzMl9E
+RUJVR0NUTE1TUl9MQlIgKQogICAgICAgICB7CiAgICAgICAgICAgICBjb25z
+dCBzdHJ1Y3QgbGJyX2luZm8gKmxiciA9IGxhc3RfYnJhbmNoX21zcl9nZXQo
+KTsKZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS14ODYvdnBtdS5oIGIv
+eGVuL2luY2x1ZGUvYXNtLXg4Ni92cG11LmgKaW5kZXggZWQ5ZWMwNy4uNzVi
+MTk3MyAxMDA2NDQKLS0tIGEveGVuL2luY2x1ZGUvYXNtLXg4Ni92cG11LmgK
+KysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni92cG11LmgKQEAgLTc3LDYgKzc3
+LDEwIEBAIHN0cnVjdCB2cG11X3N0cnVjdCB7CiAvKiBQVihIKSBndWVzdHM6
+IFZQTVUgcmVnaXN0ZXJzIGFyZSBhY2Nlc3NlZCBieSBndWVzdCBmcm9tIHNo
+YXJlZCBwYWdlICovCiAjZGVmaW5lIFZQTVVfQ0FDSEVEICAgICAgICAgICAg
+ICAgICAgICAgICAgIDB4NDAKIAorLyogSW50ZWwtc3BlY2lmaWMgVlBNVSBm
+ZWF0dXJlcyAqLworI2RlZmluZSBWUE1VX0NQVV9IQVNfRFMgICAgICAgICAg
+ICAgICAgICAgICAweDEwMCAvKiBIYXMgRGVidWcgU3RvcmUgKi8KKyNkZWZp
+bmUgVlBNVV9DUFVfSEFTX0JUUyAgICAgICAgICAgICAgICAgICAgMHgyMDAg
+LyogSGFzIEJyYW5jaCBUcmFjZSBTdG9yZSAqLworCiBzdGF0aWMgaW5saW5l
+IHZvaWQgdnBtdV9zZXQoc3RydWN0IHZwbXVfc3RydWN0ICp2cG11LCBjb25z
+dCB1MzIgbWFzaykKIHsKICAgICB2cG11LT5mbGFncyB8PSBtYXNrOwo=
 
+--=separator
+Content-Type: application/octet-stream; name="xsa269-4.10.patch"
+Content-Disposition: attachment; filename="xsa269-4.10.patch"
+Content-Transfer-Encoding: base64
 
+RnJvbSAwNjUzYTA1OTg2MTNlYTlkNzU5OGFkOGY5YWNlODllZDc0OTg0MTBj
+IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBBbmRyZXcgQ29vcGVy
+IDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgpEYXRlOiBNb24sIDMwIEp1
+bCAyMDE4IDExOjAxOjI4ICswMTAwClN1YmplY3Q6IFtQQVRDSF0geDg2L3Z0
+eDogRml4IHRoZSBjaGVja2luZyBmb3IgdW5rbm93bi9pbnZhbGlkIE1TUl9E
+RUJVR0NUTAogYml0cwoKVGhlIFZQTVVfTU9ERV9PRkYgZWFybHktZXhpdCBp
+biB2cG11X2RvX3dybXNyKCkgaW50cm9kdWNlZCBieSBjL3MKMTFmZTk5OGU1
+NiBieXBhc3NlcyBhbGwgcmVzZXJ2ZWQgYml0IGNoZWNraW5nIGluIHRoZSBn
+ZW5lcmFsIGNhc2UuICBBcyBhCnJlc3VsdCwgYSBndWVzdCBjYW4gZW5hYmxl
+IEJUUyB3aGVuIGl0IHNob3VsZG4ndCBiZSBwZXJtaXR0ZWQgdG8sIGFuZAps
+b2NrIHVwIHRoZSBlbnRpcmUgaG9zdC4KCldpdGggdlBNVSBhY3RpdmUgKG5v
+dCBhIHNlY3VyaXR5IHN1cHBvcnRlZCBjb25maWd1cmF0aW9uLCBidXQgdXNl
+ZnVsIGZvcgpkZWJ1Z2dpbmcpLCB0aGUgcmVzZXJ2ZWQgYml0IGNoZWNraW5n
+IGluIGJyb2tlbiwgY2F1c2VkIGJ5IHRoZSBvcmlnaW5hbApCVFMgY2hhbmdl
+c2V0IDFhOGFhNzVlZC4KCkZyb20gYSBjb3JyZWN0bmVzcyBzdGFuZHBvaW50
+LCBpdCBpcyBub3QgcG9zc2libGUgdG8gaGF2ZSB0d28gZGlmZmVyZW50CnBp
+ZWNlcyBvZiBjb2RlIHJlc3BvbnNpYmxlIGZvciBkaWZmZXJlbnQgcGFydHMg
+b2YgdmFsdWUgY2hlY2tpbmcsIGlmCnRoZXJlIGlzbid0IGFuIGFjY3VtdWxh
+dGlvbiBvZiBiaXRzIHdoaWNoIGhhdmUgYmVlbiBjaGVja2VkLiAgQQpwcmFj
+dGljYWwgdXBzaG90IG9mIHRoaXMgaXMgdGhhdCBhIGd1ZXN0IGNhbiBzZXQg
+YW55IHZhbHVlIGl0Cndpc2hlcyAodXN1YWxseSByZXN1bHRpbmcgaW4gYSB2
+bWVudHJ5IGZhaWx1cmUgZm9yIGJhZCBndWVzdCBzdGF0ZSkuCgpUaGVyZWZv
+cmUsIGZpeCB0aGlzIGJ5IGltcGxlbWVudGluZyBhbGwgdGhlIHJlc2VydmVk
+IGJpdCBjaGVja2luZyBpbiB0aGUKbWFpbiBNU1JfREVCVUdDVEwgYmxvY2ss
+IGFuZCByZW1vdmluZyBhbGwgaGFuZGxpbmcgb2YgREVCVUdDVEwgZnJvbSB0
+aGUKdlBNVSBNU1IgbG9naWMuCgpUaGlzIGlzIFhTQS0yNjkKClNpZ25lZC1v
+ZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
+b20+ClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5j
+b20+Ci0tLQogeGVuL2FyY2gveDg2L2NwdS92cG11X2ludGVsLmMgfCAyMCAt
+LS0tLS0tLS0tLS0tLS0tLS0tLQogeGVuL2FyY2gveDg2L2h2bS92bXgvdm14
+LmMgICAgfCAyNyArKysrKysrKysrKysrKysrKysrKy0tLS0tLS0KIDIgZmls
+ZXMgY2hhbmdlZCwgMjAgaW5zZXJ0aW9ucygrKSwgMjcgZGVsZXRpb25zKC0p
+CgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2NwdS92cG11X2ludGVsLmMg
+Yi94ZW4vYXJjaC94ODYvY3B1L3ZwbXVfaW50ZWwuYwppbmRleCAyMDdlMmU3
+MTJjLi5kNDQ0NGYwZDk0IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvY3B1
+L3ZwbXVfaW50ZWwuYworKysgYi94ZW4vYXJjaC94ODYvY3B1L3ZwbXVfaW50
+ZWwuYwpAQCAtNTM1LDI3ICs1MzUsNyBAQCBzdGF0aWMgaW50IGNvcmUyX3Zw
+bXVfZG9fd3Jtc3IodW5zaWduZWQgaW50IG1zciwgdWludDY0X3QgbXNyX2Nv
+bnRlbnQsCiAgICAgdWludDY0X3QgKmVuYWJsZWRfY250cnM7CiAKICAgICBp
+ZiAoICFjb3JlMl92cG11X21zcl9jb21tb25fY2hlY2sobXNyLCAmdHlwZSwg
+JmluZGV4KSApCi0gICAgewotICAgICAgICAvKiBTcGVjaWFsIGhhbmRsaW5n
+IGZvciBCVFMgKi8KLSAgICAgICAgaWYgKCBtc3IgPT0gTVNSX0lBMzJfREVC
+VUdDVExNU1IgKQotICAgICAgICB7Ci0gICAgICAgICAgICBzdXBwb3J0ZWQg
+fD0gSUEzMl9ERUJVR0NUTE1TUl9UUiB8IElBMzJfREVCVUdDVExNU1JfQlRT
+IHwKLSAgICAgICAgICAgICAgICAgICAgICAgICBJQTMyX0RFQlVHQ1RMTVNS
+X0JUSU5UOwotCi0gICAgICAgICAgICBpZiAoIGNwdV9oYXMoJmN1cnJlbnRf
+Y3B1X2RhdGEsIFg4Nl9GRUFUVVJFX0RTQ1BMKSApCi0gICAgICAgICAgICAg
+ICAgc3VwcG9ydGVkIHw9IElBMzJfREVCVUdDVExNU1JfQlRTX09GRl9PUyB8
+Ci0gICAgICAgICAgICAgICAgICAgICAgICAgICAgIElBMzJfREVCVUdDVExN
+U1JfQlRTX09GRl9VU1I7Ci0gICAgICAgICAgICBpZiAoICEobXNyX2NvbnRl
+bnQgJiB+c3VwcG9ydGVkKSAmJgotICAgICAgICAgICAgICAgICB2cG11X2lz
+X3NldCh2cG11LCBWUE1VX0NQVV9IQVNfQlRTKSApCi0gICAgICAgICAgICAg
+ICAgcmV0dXJuIDA7Ci0gICAgICAgICAgICBpZiAoIChtc3JfY29udGVudCAm
+IHN1cHBvcnRlZCkgJiYKLSAgICAgICAgICAgICAgICAgIXZwbXVfaXNfc2V0
+KHZwbXUsIFZQTVVfQ1BVX0hBU19CVFMpICkKLSAgICAgICAgICAgICAgICBw
+cmludGsoWEVOTE9HX0dfV0FSTklORwotICAgICAgICAgICAgICAgICAgICAg
+ICAiJXB2OiBEZWJ1ZyBTdG9yZSB1bnN1cHBvcnRlZCBvbiB0aGlzIENQVVxu
+IiwKLSAgICAgICAgICAgICAgICAgICAgICAgY3VycmVudCk7Ci0gICAgICAg
+IH0KICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Ci0gICAgfQogCiAgICAgQVNT
+RVJUKCFzdXBwb3J0ZWQpOwogCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYv
+aHZtL3ZteC92bXguYyBiL3hlbi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jCmlu
+ZGV4IDQ4ZDNjNTRlODQuLjJjNDkwY2Y2MmEgMTAwNjQ0Ci0tLSBhL3hlbi9h
+cmNoL3g4Ni9odm0vdm14L3ZteC5jCisrKyBiL3hlbi9hcmNoL3g4Ni9odm0v
+dm14L3ZteC5jCkBAIC0zMDk3LDExICszMDk3LDE0IEBAIHZvaWQgdm14X3Zs
+YXBpY19tc3JfY2hhbmdlZChzdHJ1Y3QgdmNwdSAqdikKIHN0YXRpYyBpbnQg
+dm14X21zcl93cml0ZV9pbnRlcmNlcHQodW5zaWduZWQgaW50IG1zciwgdWlu
+dDY0X3QgbXNyX2NvbnRlbnQpCiB7CiAgICAgc3RydWN0IHZjcHUgKnYgPSBj
+dXJyZW50OworICAgIGNvbnN0IHN0cnVjdCBjcHVpZF9wb2xpY3kgKmNwID0g
+di0+ZG9tYWluLT5hcmNoLmNwdWlkOwogCiAgICAgSFZNX0RCR19MT0coREJH
+X0xFVkVMX01TUiwgImVjeD0lI3gsIG1zcl92YWx1ZT0lIyJQUkl4NjQsIG1z
+ciwgbXNyX2NvbnRlbnQpOwogCiAgICAgc3dpdGNoICggbXNyICkKICAgICB7
+CisgICAgICAgIHVpbnQ2NF90IHJzdmQ7CisKICAgICBjYXNlIE1TUl9JQTMy
+X1NZU0VOVEVSX0NTOgogICAgICAgICBfX3Ztd3JpdGUoR1VFU1RfU1lTRU5U
+RVJfQ1MsIG1zcl9jb250ZW50KTsKICAgICAgICAgYnJlYWs7CkBAIC0zMTE3
+LDE2ICszMTIwLDI2IEBAIHN0YXRpYyBpbnQgdm14X21zcl93cml0ZV9pbnRl
+cmNlcHQodW5zaWduZWQgaW50IG1zciwgdWludDY0X3QgbXNyX2NvbnRlbnQp
+CiAgICAgICAgIGJyZWFrOwogICAgIGNhc2UgTVNSX0lBMzJfREVCVUdDVExN
+U1I6IHsKICAgICAgICAgaW50IGksIHJjID0gMDsKLSAgICAgICAgdWludDY0
+X3Qgc3VwcG9ydGVkID0gSUEzMl9ERUJVR0NUTE1TUl9MQlIgfCBJQTMyX0RF
+QlVHQ1RMTVNSX0JURjsKIAotICAgICAgICBpZiAoIGJvb3RfY3B1X2hhcyhY
+ODZfRkVBVFVSRV9SVE0pICkKLSAgICAgICAgICAgIHN1cHBvcnRlZCB8PSBJ
+QTMyX0RFQlVHQ1RMTVNSX1JUTTsKLSAgICAgICAgaWYgKCBtc3JfY29udGVu
+dCAmIH5zdXBwb3J0ZWQgKQorICAgICAgICByc3ZkID0gfihJQTMyX0RFQlVH
+Q1RMTVNSX0xCUiB8IElBMzJfREVCVUdDVExNU1JfQlRGKTsKKworICAgICAg
+ICAvKiBUT0RPOiBXaXJlIHZQTVUgc2V0dGluZ3MgcHJvcGVybHkgdGhyb3Vn
+aCB0aGUgQ1BVSUQgcG9saWN5ICovCisgICAgICAgIGlmICggdnBtdV9pc19z
+ZXQodmNwdV92cG11KHYpLCBWUE1VX0NQVV9IQVNfQlRTKSApCiAgICAgICAg
+IHsKLSAgICAgICAgICAgIC8qIFBlcmhhcHMgc29tZSBvdGhlciBiaXRzIGFy
+ZSBzdXBwb3J0ZWQgaW4gdnBtdS4gKi8KLSAgICAgICAgICAgIGlmICggdnBt
+dV9kb193cm1zcihtc3IsIG1zcl9jb250ZW50LCBzdXBwb3J0ZWQpICkKLSAg
+ICAgICAgICAgICAgICBicmVhazsKKyAgICAgICAgICAgIHJzdmQgJj0gfihJ
+QTMyX0RFQlVHQ1RMTVNSX1RSIHwgSUEzMl9ERUJVR0NUTE1TUl9CVFMgfAor
+ICAgICAgICAgICAgICAgICAgICAgIElBMzJfREVCVUdDVExNU1JfQlRJTlQp
+OworCisgICAgICAgICAgICBpZiAoIGNwdV9oYXMoJmN1cnJlbnRfY3B1X2Rh
+dGEsIFg4Nl9GRUFUVVJFX0RTQ1BMKSApCisgICAgICAgICAgICAgICAgcnN2
+ZCAmPSB+KElBMzJfREVCVUdDVExNU1JfQlRTX09GRl9PUyB8CisgICAgICAg
+ICAgICAgICAgICAgICAgICAgIElBMzJfREVCVUdDVExNU1JfQlRTX09GRl9V
+U1IpOwogICAgICAgICB9CisKKyAgICAgICAgaWYgKCBjcC0+ZmVhdC5ydG0g
+KQorICAgICAgICAgICAgcnN2ZCAmPSB+SUEzMl9ERUJVR0NUTE1TUl9SVE07
+CisKKyAgICAgICAgaWYgKCBtc3JfY29udGVudCAmIHJzdmQgKQorICAgICAg
+ICAgICAgZ290byBncF9mYXVsdDsKKwogICAgICAgICBpZiAoIG1zcl9jb250
+ZW50ICYgSUEzMl9ERUJVR0NUTE1TUl9MQlIgKQogICAgICAgICB7CiAgICAg
+ICAgICAgICBjb25zdCBzdHJ1Y3QgbGJyX2luZm8gKmxiciA9IGxhc3RfYnJh
+bmNoX21zcl9nZXQoKTsKLS0gCjIuMTguMAoK
 
+--=separator
+Content-Type: application/octet-stream; name="xsa269-4.11.patch"
+Content-Disposition: attachment; filename="xsa269-4.11.patch"
+Content-Transfer-Encoding: base64
 
-<p><span lang=3D"EN-IN">This
-message contains confidential information and is intended only for the
-individual(s) named.</span><span lang=3D"EN-IN"> </span>If you are not the =
-intended
-recipient, you are notified that disclosing, copying, distributing or takin=
-g any
-action in reliance on the contents of this mail and attached file/s is stri=
-ctly
-prohibited<span lang=3D"EN-IN">. Please notify the
-sender immediately and delete this e-mail from your system. E-mail transmis=
-sion
-cannot be guaranteed to be secured or error-free as information could be
-intercepted, corrupted, lost, destroyed, arrive late or incomplete, or cont=
-ain
-viruses. The sender therefore does not accept liability for any errors or
-omissions in the contents of this message, which arise as a result of e-mai=
-l
-transmission.</span></p>
---000000000000be0aaf0573dac917--
+RnJvbTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNv
+bT4KU3ViamVjdDogeDg2L3Z0eDogRml4IHRoZSBjaGVja2luZyBmb3IgdW5r
+bm93bi9pbnZhbGlkIE1TUl9ERUJVR0NUTCBiaXRzCgpUaGUgVlBNVV9NT0RF
+X09GRiBlYXJseS1leGl0IGluIHZwbXVfZG9fd3Jtc3IoKSBpbnRyb2R1Y2Vk
+IGJ5IGMvcwoxMWZlOTk4ZTU2IGJ5cGFzc2VzIGFsbCByZXNlcnZlZCBiaXQg
+Y2hlY2tpbmcgaW4gdGhlIGdlbmVyYWwgY2FzZS4gIEFzIGEKcmVzdWx0LCBh
+IGd1ZXN0IGNhbiBlbmFibGUgQlRTIHdoZW4gaXQgc2hvdWxkbid0IGJlIHBl
+cm1pdHRlZCB0bywgYW5kCmxvY2sgdXAgdGhlIGVudGlyZSBob3N0LgoKV2l0
+aCB2UE1VIGFjdGl2ZSAobm90IGEgc2VjdXJpdHkgc3VwcG9ydGVkIGNvbmZp
+Z3VyYXRpb24sIGJ1dCB1c2VmdWwgZm9yCmRlYnVnZ2luZyksIHRoZSByZXNl
+cnZlZCBiaXQgY2hlY2tpbmcgaW4gYnJva2VuLCBjYXVzZWQgYnkgdGhlIG9y
+aWdpbmFsCkJUUyBjaGFuZ2VzZXQgMWE4YWE3NWVkLgoKRnJvbSBhIGNvcnJl
+Y3RuZXNzIHN0YW5kcG9pbnQsIGl0IGlzIG5vdCBwb3NzaWJsZSB0byBoYXZl
+IHR3byBkaWZmZXJlbnQKcGllY2VzIG9mIGNvZGUgcmVzcG9uc2libGUgZm9y
+IGRpZmZlcmVudCBwYXJ0cyBvZiB2YWx1ZSBjaGVja2luZywgaWYKdGhlcmUg
+aXNuJ3QgYW4gYWNjdW11bGF0aW9uIG9mIGJpdHMgd2hpY2ggaGF2ZSBiZWVu
+IGNoZWNrZWQuICBBCnByYWN0aWNhbCB1cHNob3Qgb2YgdGhpcyBpcyB0aGF0
+IGEgZ3Vlc3QgY2FuIHNldCBhbnkgdmFsdWUgaXQKd2lzaGVzICh1c3VhbGx5
+IHJlc3VsdGluZyBpbiBhIHZtZW50cnkgZmFpbHVyZSBmb3IgYmFkIGd1ZXN0
+IHN0YXRlKS4KClRoZXJlZm9yZSwgZml4IHRoaXMgYnkgaW1wbGVtZW50aW5n
+IGFsbCB0aGUgcmVzZXJ2ZWQgYml0IGNoZWNraW5nIGluIHRoZQptYWluIE1T
+Ul9ERUJVR0NUTCBibG9jaywgYW5kIHJlbW92aW5nIGFsbCBoYW5kbGluZyBv
+ZiBERUJVR0NUTCBmcm9tIHRoZQp2UE1VIE1TUiBsb2dpYy4KClRoaXMgaXMg
+WFNBLTI2OQoKU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
+LmNvb3BlcjNAY2l0cml4LmNvbT4KUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNo
+IDxqYmV1bGljaEBzdXNlLmNvbT4KCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94
+ODYvY3B1L3ZwbXVfaW50ZWwuYyBiL3hlbi9hcmNoL3g4Ni9jcHUvdnBtdV9p
+bnRlbC5jCmluZGV4IDIwN2UyZTcuLmQ0NDQ0ZjAgMTAwNjQ0Ci0tLSBhL3hl
+bi9hcmNoL3g4Ni9jcHUvdnBtdV9pbnRlbC5jCisrKyBiL3hlbi9hcmNoL3g4
+Ni9jcHUvdnBtdV9pbnRlbC5jCkBAIC01MzUsMjcgKzUzNSw3IEBAIHN0YXRp
+YyBpbnQgY29yZTJfdnBtdV9kb193cm1zcih1bnNpZ25lZCBpbnQgbXNyLCB1
+aW50NjRfdCBtc3JfY29udGVudCwKICAgICB1aW50NjRfdCAqZW5hYmxlZF9j
+bnRyczsKIAogICAgIGlmICggIWNvcmUyX3ZwbXVfbXNyX2NvbW1vbl9jaGVj
+ayhtc3IsICZ0eXBlLCAmaW5kZXgpICkKLSAgICB7Ci0gICAgICAgIC8qIFNw
+ZWNpYWwgaGFuZGxpbmcgZm9yIEJUUyAqLwotICAgICAgICBpZiAoIG1zciA9
+PSBNU1JfSUEzMl9ERUJVR0NUTE1TUiApCi0gICAgICAgIHsKLSAgICAgICAg
+ICAgIHN1cHBvcnRlZCB8PSBJQTMyX0RFQlVHQ1RMTVNSX1RSIHwgSUEzMl9E
+RUJVR0NUTE1TUl9CVFMgfAotICAgICAgICAgICAgICAgICAgICAgICAgIElB
+MzJfREVCVUdDVExNU1JfQlRJTlQ7Ci0KLSAgICAgICAgICAgIGlmICggY3B1
+X2hhcygmY3VycmVudF9jcHVfZGF0YSwgWDg2X0ZFQVRVUkVfRFNDUEwpICkK
+LSAgICAgICAgICAgICAgICBzdXBwb3J0ZWQgfD0gSUEzMl9ERUJVR0NUTE1T
+Ul9CVFNfT0ZGX09TIHwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+SUEzMl9ERUJVR0NUTE1TUl9CVFNfT0ZGX1VTUjsKLSAgICAgICAgICAgIGlm
+ICggIShtc3JfY29udGVudCAmIH5zdXBwb3J0ZWQpICYmCi0gICAgICAgICAg
+ICAgICAgIHZwbXVfaXNfc2V0KHZwbXUsIFZQTVVfQ1BVX0hBU19CVFMpICkK
+LSAgICAgICAgICAgICAgICByZXR1cm4gMDsKLSAgICAgICAgICAgIGlmICgg
+KG1zcl9jb250ZW50ICYgc3VwcG9ydGVkKSAmJgotICAgICAgICAgICAgICAg
+ICAhdnBtdV9pc19zZXQodnBtdSwgVlBNVV9DUFVfSEFTX0JUUykgKQotICAg
+ICAgICAgICAgICAgIHByaW50ayhYRU5MT0dfR19XQVJOSU5HCi0gICAgICAg
+ICAgICAgICAgICAgICAgICIlcHY6IERlYnVnIFN0b3JlIHVuc3VwcG9ydGVk
+IG9uIHRoaXMgQ1BVXG4iLAotICAgICAgICAgICAgICAgICAgICAgICBjdXJy
+ZW50KTsKLSAgICAgICAgfQogICAgICAgICByZXR1cm4gLUVJTlZBTDsKLSAg
+ICB9CiAKICAgICBBU1NFUlQoIXN1cHBvcnRlZCk7CiAKZGlmZiAtLWdpdCBh
+L3hlbi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jIGIveGVuL2FyY2gveDg2L2h2
+bS92bXgvdm14LmMKaW5kZXggOTcwNzUxNC4uYWUwMjhkZCAxMDA2NDQKLS0t
+IGEveGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMKKysrIGIveGVuL2FyY2gv
+eDg2L2h2bS92bXgvdm14LmMKQEAgLTMwMzIsMTEgKzMwMzIsMTQgQEAgdm9p
+ZCB2bXhfdmxhcGljX21zcl9jaGFuZ2VkKHN0cnVjdCB2Y3B1ICp2KQogc3Rh
+dGljIGludCB2bXhfbXNyX3dyaXRlX2ludGVyY2VwdCh1bnNpZ25lZCBpbnQg
+bXNyLCB1aW50NjRfdCBtc3JfY29udGVudCkKIHsKICAgICBzdHJ1Y3QgdmNw
+dSAqdiA9IGN1cnJlbnQ7CisgICAgY29uc3Qgc3RydWN0IGNwdWlkX3BvbGlj
+eSAqY3AgPSB2LT5kb21haW4tPmFyY2guY3B1aWQ7CiAKICAgICBIVk1fREJH
+X0xPRyhEQkdfTEVWRUxfTVNSLCAiZWN4PSUjeCwgbXNyX3ZhbHVlPSUjIlBS
+SXg2NCwgbXNyLCBtc3JfY29udGVudCk7CiAKICAgICBzd2l0Y2ggKCBtc3Ig
+KQogICAgIHsKKyAgICAgICAgdWludDY0X3QgcnN2ZDsKKwogICAgIGNhc2Ug
+TVNSX0lBMzJfU1lTRU5URVJfQ1M6CiAgICAgICAgIF9fdm13cml0ZShHVUVT
+VF9TWVNFTlRFUl9DUywgbXNyX2NvbnRlbnQpOwogICAgICAgICBicmVhazsK
+QEAgLTMwOTEsMTYgKzMwOTQsMjYgQEAgc3RhdGljIGludCB2bXhfbXNyX3dy
+aXRlX2ludGVyY2VwdCh1bnNpZ25lZCBpbnQgbXNyLCB1aW50NjRfdCBtc3Jf
+Y29udGVudCkKIAogICAgIGNhc2UgTVNSX0lBMzJfREVCVUdDVExNU1I6IHsK
+ICAgICAgICAgaW50IGksIHJjID0gMDsKLSAgICAgICAgdWludDY0X3Qgc3Vw
+cG9ydGVkID0gSUEzMl9ERUJVR0NUTE1TUl9MQlIgfCBJQTMyX0RFQlVHQ1RM
+TVNSX0JURjsKIAotICAgICAgICBpZiAoIGJvb3RfY3B1X2hhcyhYODZfRkVB
+VFVSRV9SVE0pICkKLSAgICAgICAgICAgIHN1cHBvcnRlZCB8PSBJQTMyX0RF
+QlVHQ1RMTVNSX1JUTTsKLSAgICAgICAgaWYgKCBtc3JfY29udGVudCAmIH5z
+dXBwb3J0ZWQgKQorICAgICAgICByc3ZkID0gfihJQTMyX0RFQlVHQ1RMTVNS
+X0xCUiB8IElBMzJfREVCVUdDVExNU1JfQlRGKTsKKworICAgICAgICAvKiBU
+T0RPOiBXaXJlIHZQTVUgc2V0dGluZ3MgcHJvcGVybHkgdGhyb3VnaCB0aGUg
+Q1BVSUQgcG9saWN5ICovCisgICAgICAgIGlmICggdnBtdV9pc19zZXQodmNw
+dV92cG11KHYpLCBWUE1VX0NQVV9IQVNfQlRTKSApCiAgICAgICAgIHsKLSAg
+ICAgICAgICAgIC8qIFBlcmhhcHMgc29tZSBvdGhlciBiaXRzIGFyZSBzdXBw
+b3J0ZWQgaW4gdnBtdS4gKi8KLSAgICAgICAgICAgIGlmICggdnBtdV9kb193
+cm1zcihtc3IsIG1zcl9jb250ZW50LCBzdXBwb3J0ZWQpICkKLSAgICAgICAg
+ICAgICAgICBicmVhazsKKyAgICAgICAgICAgIHJzdmQgJj0gfihJQTMyX0RF
+QlVHQ1RMTVNSX1RSIHwgSUEzMl9ERUJVR0NUTE1TUl9CVFMgfAorICAgICAg
+ICAgICAgICAgICAgICAgIElBMzJfREVCVUdDVExNU1JfQlRJTlQpOworCisg
+ICAgICAgICAgICBpZiAoIGNwdV9oYXMoJmN1cnJlbnRfY3B1X2RhdGEsIFg4
+Nl9GRUFUVVJFX0RTQ1BMKSApCisgICAgICAgICAgICAgICAgcnN2ZCAmPSB+
+KElBMzJfREVCVUdDVExNU1JfQlRTX09GRl9PUyB8CisgICAgICAgICAgICAg
+ICAgICAgICAgICAgIElBMzJfREVCVUdDVExNU1JfQlRTX09GRl9VU1IpOwog
+ICAgICAgICB9CisKKyAgICAgICAgaWYgKCBjcC0+ZmVhdC5ydG0gKQorICAg
+ICAgICAgICAgcnN2ZCAmPSB+SUEzMl9ERUJVR0NUTE1TUl9SVE07CisKKyAg
+ICAgICAgaWYgKCBtc3JfY29udGVudCAmIHJzdmQgKQorICAgICAgICAgICAg
+Z290byBncF9mYXVsdDsKKwogICAgICAgICBpZiAoIG1zcl9jb250ZW50ICYg
+SUEzMl9ERUJVR0NUTE1TUl9MQlIgKQogICAgICAgICB7CiAgICAgICAgICAg
+ICBjb25zdCBzdHJ1Y3QgbGJyX2luZm8gKmxiciA9IGxhc3RfYnJhbmNoX21z
+cl9nZXQoKTsK
 
-
---===============2766219825309528058==
+--=separator
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -869,4 +641,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============2766219825309528058==--
+--=separator--
