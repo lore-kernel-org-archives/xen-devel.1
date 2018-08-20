@@ -1,24 +1,23 @@
-From: Julien Grall <julien.grall@linaro.org>
-Subject: Re: [PATCH 15/15] xen/arm: traps: Move the
- implementation of GUEST_BUG_ON in traps.h
-Date: Mon, 20 Aug 2018 10:17:29 +0100
-Message-ID: <CAEC2CxoFP2PvitM1TM2XYk6j1=a8W+DDqrBYTNB5Q74FvMLZYQ@mail.gmail.com>
-References: <20180716172712.20294-1-julien.grall@arm.com>
- <20180716172712.20294-16-julien.grall@arm.com>
- <alpine.DEB.2.10.1808141442070.15066@sstabellini-ThinkPad-X260>
- <1a6b5113-3ad5-50e2-1c0f-b9d532ec0b81@arm.com>
- <alpine.DEB.2.10.1808161112430.16354@sstabellini-ThinkPad-X260>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 05/34] xen: is_hvm_domain should evaluate to
+ 0 when !CONFIG_HVM
+Date: Mon, 20 Aug 2018 10:23:47 +0100
+Message-ID: <4f38f9e2-edd8-df76-3932-c9abf426a8ab@citrix.com>
+References: <cover.f5351150954129956fcf53a7781206b6295df78d.1534518694.git-series.wei.liu2@citrix.com>
+ <32dc160e20e574c7ec736fad43157928de86962e.1534518694.git-series.wei.liu2@citrix.com>
+ <5a1733d0-6b5a-8638-86a8-b4bb053a6848@citrix.com>
+ <20180820090650.zwfoamxtw6uq43rr@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0945526150658233955=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=o2yn=ld=linaro.org=julien.grall@srs-us1.protection.inumbo.net>)
- id 1frgJx-000883-Vo
- for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 09:17:58 +0000
-Received: by mail-qt0-x22f.google.com with SMTP id b15-v6so15389615qtp.11
- for <xen-devel@lists.xenproject.org>; Mon, 20 Aug 2018 02:17:56 -0700 (PDT)
-In-Reply-To: <alpine.DEB.2.10.1808161112430.16354@sstabellini-ThinkPad-X260>
+ <srs0=6aav=ld=citrix.com=prvs=763c8c697=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1frgPi-0000ey-NV
+ for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 09:23:54 +0000
+In-Reply-To: <20180820090650.zwfoamxtw6uq43rr@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,119 +26,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Julien Grall <julien.grall@arm.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0945526150658233955==
-Content-Type: multipart/alternative; boundary="0000000000007cc4bb0573da6266"
-
---0000000000007cc4bb0573da6266
-Content-Type: text/plain; charset="UTF-8"
-
-Hi Stefano,
-
-On Thu, 16 Aug 2018, 19:17 Stefano Stabellini, <sstabellini@kernel.org>
-wrote:
-
-> On Thu, 16 Aug 2018, Julien Grall wrote:
-> > Hi Stefano,
-> >
-> > On 08/14/2018 10:43 PM, Stefano Stabellini wrote:
-> > > On Mon, 16 Jul 2018, Julien Grall wrote:
-> > > > GUEST_BUG_ON may be used in other files doing guest emulation.
-> > > >
-> > > > Signed-off-by: Julien Grall <julien.grall@linaro.org>
-> > >
-> > > Given that GUEST_BUG_ON is not actually used in any other files in this
-> > > patch series, I assume you are referring to one of your future series?
-> >
-> > It is going to be used later. However, I don't really refer to any
-> series in
-> > particular. It is just that this macros could be helpful in any
-> emulation code
-> > to catch what we think is a invalid architectural behavior.
->
-> It is only that a concrete use-case helps. The idea of moving
-> GUEST_BUG_ON is good, but where to? For instance, wouldn't it be better
-> to move it to guest_access.h? I am just trying to point to an existing
-> header which is more widely used across the emulators (vpl011,
-> vgic-v3-its.c, hvm.c, ...)
->
-
-Definitely not in guest_access.h or any wider in includes. If you look at
-the implementation and documentation, it will crash the hypervisor because
-the goal is to catch hardware bug or misunderstanding of the spec. This is
-not meant to be used in emulation. We should not crash the guest/hypervisor
-in bad behavior but inject an exception.
-
-So trap.h is the best places for it as hardware trap are now split accros
-multiples files.
-
-Cheers,
-
---0000000000007cc4bb0573da6266
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div>Hi Stefano,</div><div dir=3D"auto"><br><div class=3D=
-"gmail_quote" dir=3D"auto"><div dir=3D"ltr">On Thu, 16 Aug 2018, 19:17 Stef=
-ano Stabellini, &lt;<a href=3D"mailto:sstabellini@kernel.org">sstabellini@k=
-ernel.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On Thu, =
-16 Aug 2018, Julien Grall wrote:<br>
-&gt; Hi Stefano,<br>
-&gt; <br>
-&gt; On 08/14/2018 10:43 PM, Stefano Stabellini wrote:<br>
-&gt; &gt; On Mon, 16 Jul 2018, Julien Grall wrote:<br>
-&gt; &gt; &gt; GUEST_BUG_ON may be used in other files doing guest emulatio=
-n.<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; Signed-off-by: Julien Grall &lt;<a href=3D"mailto:julien.gra=
-ll@linaro.org" target=3D"_blank" rel=3D"noreferrer">julien.grall@linaro.org=
-</a>&gt;<br>
-&gt; &gt; <br>
-&gt; &gt; Given that GUEST_BUG_ON is not actually used in any other files i=
-n this<br>
-&gt; &gt; patch series, I assume you are referring to one of your future se=
-ries?<br>
-&gt; <br>
-&gt; It is going to be used later. However, I don&#39;t really refer to any=
- series in<br>
-&gt; particular. It is just that this macros could be helpful in any emulat=
-ion code<br>
-&gt; to catch what we think is a invalid architectural behavior.<br>
-<br>
-It is only that a concrete use-case helps. The idea of moving<br>
-GUEST_BUG_ON is good, but where to? For instance, wouldn&#39;t it be better=
-<br>
-to move it to guest_access.h? I am just trying to point to an existing<br>
-header which is more widely used across the emulators (vpl011,<br>
-vgic-v3-its.c, hvm.c, ...)<br></blockquote></div></div><div dir=3D"auto"><b=
-r></div><div dir=3D"auto">Definitely not in guest_access.h or any wider in =
-includes. If you look at the implementation and documentation, it will cras=
-h the hypervisor because the goal is to catch hardware bug or misunderstand=
-ing of the spec. This is not meant to be used in emulation. We should not c=
-rash the guest/hypervisor in bad behavior but inject an exception.</div><di=
-v dir=3D"auto"><br></div><div dir=3D"auto">So trap.h is the best places for=
- it as hardware trap are now split accros multiples files.</div><div dir=3D=
-"auto"><br></div><div dir=3D"auto">Cheers,</div><div dir=3D"auto"><br></div=
-><div dir=3D"auto"><br></div><div dir=3D"auto"><div class=3D"gmail_quote"><=
-blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px=
- #ccc solid;padding-left:1ex">
-</blockquote></div></div></div>
-
---0000000000007cc4bb0573da6266--
-
-
---===============0945526150658233955==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0945526150658233955==--
+T24gMjAvMDgvMjAxOCAxMDowNiwgV2VpIExpdSB3cm90ZToKPiBPbiBTdW4sIEF1ZyAxOSwgMjAx
+OCBhdCAwNTo0ODoxN1BNICswMTAwLCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+PiBPbiAxNy8wOC8y
+MDE4IDE2OjEyLCBXZWkgTGl1IHdyb3RlOgo+Pj4gU2luY2UgaXQgaXMgZGVmaW5lZCBpbiBjb21t
+b24gaGVhZGVyIGZpbGUsIGludHJvZHVjZSBDT05GSUdfSFZNIHRvCj4+PiBBcm0gdG8gYXZvaWQg
+YnJlYWthZ2UuCj4+Pgo+Pj4gU2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4
+LmNvbT4KPj4+IC0tLQo+Pj4gIHhlbi9hcmNoL2FybS9LY29uZmlnICAgIHwgMyArKysKPj4+ICB4
+ZW4vaW5jbHVkZS94ZW4vc2NoZWQuaCB8IDYgKysrKysrCj4+PiAgMiBmaWxlcyBjaGFuZ2VkLCA5
+IGluc2VydGlvbnMoKykKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL0tjb25maWcg
+Yi94ZW4vYXJjaC9hcm0vS2NvbmZpZwo+Pj4gaW5kZXggNTg2YmM2Mi4uYzBlOTY5ZSAxMDA2NDQK
+Pj4+IC0tLSBhL3hlbi9hcmNoL2FybS9LY29uZmlnCj4+PiArKysgYi94ZW4vYXJjaC9hcm0vS2Nv
+bmZpZwo+Pj4gQEAgLTUyLDYgKzUyLDkgQEAgY29uZmlnIEhBU19JVFMKPj4+ICAgICAgICAgIHBy
+b21wdCAiR0lDdjMgSVRTIE1TSSBjb250cm9sbGVyIHN1cHBvcnQiIGlmIEVYUEVSVCA9ICJ5Igo+
+Pj4gICAgICAgICAgZGVwZW5kcyBvbiBHSUNWMyAmJiAhTkVXX1ZHSUMKPj4+ICAKPj4+ICtjb25m
+aWcgSFZNCj4+PiArICAgICAgICBkZWZfYm9vbCB5Cj4+PiArCj4+PiAgY29uZmlnIE5FV19WR0lD
+Cj4+PiAgCWJvb2wKPj4+ICAJcHJvbXB0ICJVc2UgbmV3IFZHSUMgaW1wbGVtZW50YXRpb24iCj4+
+PiBkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUveGVuL3NjaGVkLmggYi94ZW4vaW5jbHVkZS94ZW4v
+c2NoZWQuaAo+Pj4gaW5kZXggNTFjZWViZS4uOGZjMzQyMyAxMDA2NDQKPj4+IC0tLSBhL3hlbi9p
+bmNsdWRlL3hlbi9zY2hlZC5oCj4+PiArKysgYi94ZW4vaW5jbHVkZS94ZW4vc2NoZWQuaAo+Pj4g
+QEAgLTg3OSw4ICs4NzksMTQgQEAgdm9pZCB3YXRjaGRvZ19kb21haW5fZGVzdHJveShzdHJ1Y3Qg
+ZG9tYWluICpkKTsKPj4+ICAKPj4+ICAjZGVmaW5lIGlzX3B2X2RvbWFpbihkKSAoKGQpLT5ndWVz
+dF90eXBlID09IGd1ZXN0X3R5cGVfcHYpCj4+PiAgI2RlZmluZSBpc19wdl92Y3B1KHYpICAgKGlz
+X3B2X2RvbWFpbigodiktPmRvbWFpbikpCj4+PiArCj4+PiArI2lmIENPTkZJR19IVk0KPj4+ICAj
+ZGVmaW5lIGlzX2h2bV9kb21haW4oZCkgKChkKS0+Z3Vlc3RfdHlwZSA9PSBndWVzdF90eXBlX2h2
+bSkKPj4+ICsjZWxzZQo+Pj4gKyNkZWZpbmUgaXNfaHZtX2RvbWFpbihkKSAoMCkKPj4+ICsjZW5k
+aWYKPj4+ICAjZGVmaW5lIGlzX2h2bV92Y3B1KHYpICAgKGlzX2h2bV9kb21haW4odi0+ZG9tYWlu
+KSkKPj4gVGhlIG5lZWQgZm9yIHRoZSBmb2xsb3dpbmcgcGF0Y2ggaXMgY2F1c2VkIGJ5IGEgYnVn
+IGhlcmUsIGluIHRoYXQgeW91Cj4+IGRvbid0IGV2YWx1YXRlIGQuCj4gSSBrbm93LiBJIGRpZG4n
+dCBjbGFzc2lmaWVkIHRoYXQgYXMgYSBidWcgdGhvdWdoLgoKSSdtIGFmcmFpZCB0aGF0IHRoZSB4
+ODYgbWFpbnRhaW5lcnNoaXAgd2lsbCBkaXNhZ3JlZSB3aXRoIHlvdSB0aGVyZS4KCj4KPj4gZGlm
+ZiAtLWdpdCBhL3hlbi9pbmNsdWRlL3hlbi9zY2hlZC5oIGIveGVuL2luY2x1ZGUveGVuL3NjaGVk
+LmgKPj4gaW5kZXggNTFjZWViZS4uZmRkMThhNyAxMDA2NDQKPj4gLS0tIGEveGVuL2luY2x1ZGUv
+eGVuL3NjaGVkLmgKPj4gKysrIGIveGVuL2luY2x1ZGUveGVuL3NjaGVkLmgKPj4gQEAgLTg3OSw4
+ICs4NzksMTcgQEAgdm9pZCB3YXRjaGRvZ19kb21haW5fZGVzdHJveShzdHJ1Y3QgZG9tYWluICpk
+KTsKPj4KPj4gICNkZWZpbmUgaXNfcHZfZG9tYWluKGQpICgoZCktPmd1ZXN0X3R5cGUgPT0gZ3Vl
+c3RfdHlwZV9wdikKPj4gICNkZWZpbmUgaXNfcHZfdmNwdSh2KSAgIChpc19wdl9kb21haW4oKHYp
+LT5kb21haW4pKQo+PiAtI2RlZmluZSBpc19odm1fZG9tYWluKGQpICgoZCktPmd1ZXN0X3R5cGUg
+PT0gZ3Vlc3RfdHlwZV9odm0pCj4+IC0jZGVmaW5lIGlzX2h2bV92Y3B1KHYpICAgKGlzX2h2bV9k
+b21haW4odi0+ZG9tYWluKSkKPj4gKwo+PiArc3RhdGljIGlubGluZSBib29sIGlzX2h2bV9kb21h
+aW4oY29uc3Qgc3RydWN0IGRvbWFpbiAqZCkKPj4gK3sKPj4gKyAgICByZXR1cm4gSVNfRU5BQkxF
+RChDT05GSUdfSFZNKSA/IGQtPmd1ZXN0X3R5cGUgPT0gZ3Vlc3RfdHlwZV9odm0gOiBmYWxzZTsK
+Pj4gK30KPj4gKwo+PiArc3RhdGljIGlubGluZSBib29sIGlzX2h2bV92Y3B1KGNvbnN0IHN0cnVj
+dCB2Y3B1ICp2KQo+PiArewo+PiArICAgIHJldHVybiBpc19odm1fZG9tYWluKHYtPmRvbWFpbik7
+Cj4+ICt9Cj4+ICsKPiBUaGlzIHNob3VsZCB3b3JrIHRvby4gSSdtIG5vdCB0b28gZnVzcyB3aGV0
+aGVyIGlzX2h2bV8qIGFyZSBtYWNyb3Mgb3IKPiBmdW5jdGlvbnMuCgpzdGF0aWMgaW5saW5lcyBh
+cmUgc3VwZXJpb3IgdG8gbWFjcm9zIGluIGEgbG90IG9mIHdheXMuwqAgSWYgaW4gZG91YnQsCnVz
+ZSBhIHN0YXRpYyBpbmxpbmUgKGlmIHlvdSBjYW4uwqAgd2UndmUgZ290IHNvbWUgaGVhZGVyIGZp
+bGUgdGFuZ2xlcwp3aGljaCBvY2Nhc2lvbmFsbHkgbWFrZSBpdCB2ZXJ5IGhhcmQgdG8gdXNlIHN0
+YXRpYyBpbmxpbmVzKS4KCj4KPj4gICNkZWZpbmUgaXNfcGlubmVkX3ZjcHUodikgKCh2KS0+ZG9t
+YWluLT5pc19waW5uZWQgfHwgXAo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY3B1bWFz
+a193ZWlnaHQoKHYpLT5jcHVfaGFyZF9hZmZpbml0eSkgPT0gMSkKPj4gICNpZmRlZiBDT05GSUdf
+SEFTX1BBU1NUSFJPVUdICj4+Cj4+IHNlZW1zIHRvIGNvbXBpbGUsIGFuZCBzaG91bGQgRFRSVCBp
+bmNsdWRpbmcgYWxsIGFwcHJvcHJpYXRlIHBhcmFtZXRlcgo+PiBldmFsdWF0aW9uLgo+IEkgd2ls
+bCB0ZXN0IGlmIERDRSB3b3JrcyBwcm9wZXJseSB3aXRoIHN0YXRpYyBpbmxpbmUgZnVuY3Rpb25z
+LgoKSXQgZG9lcyAoL3Nob3VsZCkuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
