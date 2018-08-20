@@ -1,19 +1,16 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] tools: libxl/xl: run NUMA placement even
- when an hard-affinity is set
-Date: Mon, 20 Aug 2018 16:22:43 +0200
-Message-ID: <b346c13a4a05c75d531da1dcfa7ea684a0d5089e.camel@suse.com>
-References: <153452538306.14879.2645077465028661264.stgit@Palanthas.fritz.box>
- <20180820101428.djudte4z2wye3cz3@citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [freebsd-master test] 126247: tolerable FAIL - PUSHED
+Date: Mon, 20 Aug 2018 14:27:19 +0000
+Message-ID: <osstest-126247-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8360441442764491152=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=inry=ld=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1frl5X-0000fg-Of
- for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 14:23:23 +0000
-In-Reply-To: <20180820101428.djudte4z2wye3cz3@citrix.com>
+ <srs0=spvk=ld=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1frl9R-0000s0-6b
+ for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 14:27:25 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,158 +19,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org, royger@FreeBSD.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8360441442764491152==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-B9XbtQ57suqp7e0X0tTo"
-
-
---=-B9XbtQ57suqp7e0X0tTo
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 2018-08-20 at 11:14 +0100, Wei Liu wrote:
-> On Fri, Aug 17, 2018 at 07:03:03PM +0200, Dario Faggioli wrote:
-> > @@ -27,6 +27,8 @@
-> > =20
-> >  #include "_paths.h"
-> > =20
-> > +//#define DEBUG 1
-> > +
->=20
-> Stray changes here?
->=20
-> You can use NDEBUG instead.
->=20
-I found this in one other place in libxl (libxl_event.c), and figured I
-could use it here too.
-
-Reason is that this guards a (potentially) rather expensive check,
-which I personally consider too much, even for debug build. At the same
-time, it could be handy for us developers to have it there, and be able
-to enable it when making changes to affinity and/or NUMA placement
-code.
-
-But I don't have a too strong opinion; I'll change it to us NDEBUG if
-that's what you prefer.
-
-> > @@ -162,6 +165,38 @@ static int numa_place_domain(libxl__gc *gc,
-> > uint32_t domid,
-> >      rc =3D libxl_cpupool_info(CTX, &cpupool_info, cpupool);
-> >      if (rc)
-> >          goto out;
-> > +    map =3D &cpupool_info.cpumap;
-> > +
-> > +    /*
-> > +     * If there's a well defined hard affinity mask (i.e., the
-> > same one for all
-> > +     * the vcpus), we can try to run the placement considering
-> > only the pcpus
-> > +     * within such mask.
-> > +     */
-> > +    if (info->num_vcpu_hard_affinity)
-> > +    {
->=20
-> Placement of "{" is wrong.
->=20
-Yep, sorry.
-
-> > +        int j;
-> > +
-> > +        for (j =3D 0; j < info->num_vcpu_hard_affinity; j++)
-> > +            assert(libxl_bitmap_equal(&info-
-> > >vcpu_hard_affinity[0],
-> > +                                      &info-
-> > >vcpu_hard_affinity[j], 0));
-> > +#endif /* DEBUG */
->=20
-> But why should the above be debug only? The assumption doesn't seem
-> to
-> always hold.
->=20
-I'm not sure I'm getting your point. If we're here, we do indeed want
-to be sure that we don't have a different hard-affinity mask for the
-various vcpus... In fact, if we do, which one should we use for
-placement?
-
-So, yes, if we are here, I think the assert() should be true. I just
-considered this check only useful to developers, and too expensive even
-for debug builds. But as said above, I can gate this with NDEBUG if you
-prefer so.
-
-> > +        /*
-> > +         * Hard affinity should _really_ contain cpus that are
-> > inside our
-> > +         * cpupool. Anyway, if it does not, log a warning and only
-> > use the
-> > +         * cpupool's cpus for placement.
-> > +         */
-> > +        if (!libxl_bitmap_is_empty(&cpumap))
-> > +            map =3D &cpumap;
-> > +        else
-> > +            LOG(WARN, "Hard affinity completely outside of
-> > domain's cpupool?");
->=20
-> Should this be an error?
->=20
-> What is the expected interaction for hard affinity and cpupool?
->=20
-cpupools rulez. :-D
-
-Basically, a domain can't possibly run on any cpu which is outside of
-the pool where the domain itself lives, no matter what the affinity is.
-
-BTW, I tested this better, and I believe there is no need for adding
-this WARN. In fact, if the domain is being created inside a pool,
-setting its hard affinity to a mask which is completely disjoint from
-the cpupool's one fails _before_ getting here.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-B9XbtQ57suqp7e0X0tTo
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlt6zrQACgkQFkJ4iaW4
-c+6OZQ//egHklMUyrdstti69ISQFzDF/pW/uhUbTn4JlpK6esClKIh/7xaE/sZNT
-I3lun5owIUcjyaV2C7PeqBVkJpNVryrRXrsZsPENnmP3bOx9yM/+sEiJHo+mly9d
-dCuvFsdxCFp1JPQ7qaOEhr4F9uLsp86UMlwN03m/LNd3JeXfTThbgYBOt/R2ypbP
-zr0Iag0maxH66xh/VZPA4S+HgUFEOFLigPrj8Sroe3NRvoVnU9IixvJbcGhNeeq/
-37fppQFSm671EEA6Y6nM3VJyp0yVwAC61e2YTXqWmunLgg685LrKkj4/4n7pCGsH
-Q28ADTHAoRvpbEZEyhdQMnacBHcZXyAE3hIvzyddH6nW98fQ07eyffICvuq7+ekl
-O78dfKKemZErxJGPHmnuZQyuMvig5ZipO6iVfUU7CVXmrMgBevy6mom6IPW7Y3Xl
-t9F7OtJiFE8PasEJ8ET8FhaBWE6cqBzDoAlXJGyq9aFwKJ9nN3tOJDUxu7QmK4lz
-ykn2fhPCU4DhlGRis0ylOAVfRU89vVzdcocXZI2pvHJAzab/425lkmMRO+tcvEjX
-RbKWmxVyQi/cNIqLca5EjFyC2rvvwMD4t/A76PFkkTvprlKjsO/TxZ95EyXR+fEV
-t+ZrLOwNXuQqgBY9PEie0BnuYAMQs351cLBs/zLvQ6FNsHOHNHk=
-=3v6C
------END PGP SIGNATURE-----
-
---=-B9XbtQ57suqp7e0X0tTo--
-
-
-
---===============8360441442764491152==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8360441442764491152==--
+ZmxpZ2h0IDEyNjI0NyBmcmVlYnNkLW1hc3RlciByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0
+LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTI2MjQ3LwoKRmFpbHVyZXMgOi0vIGJ1
+dCBubyByZWdyZXNzaW9ucy4KClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBu
+b3QgYmxvY2tpbmc6CiBidWlsZC1hbWQ2NC14ZW4tZnJlZWJzZCAgICAgICA3IHhlbi1idWlsZC1m
+cmVlYnNkICAgICAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9y
+IHRlc3Rpbmc6CiBmcmVlYnNkICAgICAgICAgICAgICA3MjQ0NWE0MWIzZmZmMTc0Y2Q0OWY5YjFi
+NmUwYjE4YWJhNzgwNTI5CmJhc2VsaW5lIHZlcnNpb246CiBmcmVlYnNkICAgICAgICAgICAgICAz
+YTE4YTkyMDBlOTdiYTUyYWU4ZjY3Yzc4ZjNhZGEwNzM5MzE2Nzg5CgpMYXN0IHRlc3Qgb2YgYmFz
+aXMgICAxMjYwNDYgIDIwMTgtMDgtMTcgMDk6MTg6NTggWiAgICAzIGRheXMKVGVzdGluZyBzYW1l
+IHNpbmNlICAgMTI2MjQ3ICAyMDE4LTA4LTIwIDA5OjE5OjE5IFogICAgMCBkYXlzICAgIDEgYXR0
+ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgMG1w
+IDwwbXBARnJlZUJTRC5vcmc+CiAgYWxjIDxhbGNARnJlZUJTRC5vcmc+CiAgYXJhdWpvIDxhcmF1
+am9ARnJlZUJTRC5vcmc+CiAgYXNvbWVycyA8YXNvbWVyc0BGcmVlQlNELm9yZz4KICBhdmF0YXIg
+PGF2YXRhckBGcmVlQlNELm9yZz4KICBicm9va3MgPGJyb29rc0BGcmVlQlNELm9yZz4KICBieiA8
+YnpARnJlZUJTRC5vcmc+CiAgY2VtIDxjZW1ARnJlZUJTRC5vcmc+CiAgY3kgPGN5QEZyZWVCU0Qu
+b3JnPgogIGRlbHBoaWogPGRlbHBoaWpARnJlZUJTRC5vcmc+CiAgZGVzIDxkZXNARnJlZUJTRC5v
+cmc+CiAgZGltIDxkaW1ARnJlZUJTRC5vcmc+CiAgZWFkbGVyIDxlYWRsZXJARnJlZUJTRC5vcmc+
+CiAgZXVnZW4gPGV1Z2VuQEZyZWVCU0Qub3JnPgogIGltcCA8aW1wQEZyZWVCU0Qub3JnPgogIGpo
+YiA8amhiQEZyZWVCU0Qub3JnPgogIGpoaWJiaXRzIDxqaGliYml0c0BGcmVlQlNELm9yZz4KICBq
+bWcgPGptZ0BGcmVlQlNELm9yZz4KICBrZXZhbnMgPGtldmFuc0BGcmVlQlNELm9yZz4KICBraWIg
+PGtpYkBGcmVlQlNELm9yZz4KICBrcCA8a3BARnJlZUJTRC5vcmc+CiAgbWFudSA8bWFudUBGcmVl
+QlNELm9yZz4KICBtYXJraiA8bWFya2pARnJlZUJTRC5vcmc+CiAgbWF2IDxtYXZARnJlZUJTRC5v
+cmc+CiAgbWNrdXNpY2sgPG1ja3VzaWNrQEZyZWVCU0Qub3JnPgogIG1tYWN5IDxtbWFjeUBGcmVl
+QlNELm9yZz4KICBuX2hpYm1hIDxuX2hpYm1hQEZyZWVCU0Qub3JnPgogIG5wIDxucEBGcmVlQlNE
+Lm9yZz4KICBvc2hvZ2JvIDxvc2hvZ2JvQEZyZWVCU0Qub3JnPgogIHBmZyA8cGZnQEZyZWVCU0Qu
+b3JnPgogIHJtYWNrbGVtIDxybWFja2xlbUBGcmVlQlNELm9yZz4KICB0cmFzeiA8dHJhc3pARnJl
+ZUJTRC5vcmc+CiAgdHVleGVuIDx0dWV4ZW5ARnJlZUJTRC5vcmc+Cgpqb2JzOgogYnVpbGQtYW1k
+NjQtZnJlZWJzZC1hZ2FpbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiBidWlsZC1hbWQ2NC1mcmVlYnNkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXhlbi1mcmVlYnNkICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9u
+IG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmlt
+YWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZh
+aWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0
+L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdl
+bmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0
+LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54
+ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpU
+ZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
+cmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpU
+byB4ZW5iaXRzLnhlbi5vcmc6L2hvbWUveGVuL2dpdC9mcmVlYnNkLmdpdAogICAzYTE4YTkyMDBl
+OS4uNzI0NDVhNDFiM2YgIDcyNDQ1YTQxYjNmZmYxNzRjZDQ5ZjliMWI2ZTBiMThhYmE3ODA1Mjkg
+LT4gdGVzdGVkL21hc3RlcgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
