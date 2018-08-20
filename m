@@ -1,19 +1,16 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] build: remove tboot make targets
-Date: Mon, 20 Aug 2018 09:38:37 +0100
-Message-ID: <20180820083837.5lujxzua2f34sdlj@citrix.com>
-References: <20180819022205.22024-1-cardoe@cardoe.com>
+From: Zhenzhong Duan <zhenzhong.duan@oracle.com>
+Subject: Re: [PATCH 2/2] x86/dmar: zap DMAR signature for dom0
+ once in TBOOT case
+Date: Mon, 20 Aug 2018 16:40:08 +0800
+Message-ID: <eb563e2c-6f64-b553-595e-1cd0e875faf7@oracle.com>
+References: <787bc1e4-3175-4123-80a3-74d2dc1b2d7f@default>
+ <5B7A7C2702000078001DFCDF@prv1-mh.provo.novell.com>
+Reply-To: zhenzhong.duan@oracle.com
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=qa+b=ld=citrix.com=prvs=763aa43e8=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1frfhx-00038q-7Q
- for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 08:38:41 +0000
-Content-Disposition: inline
-In-Reply-To: <20180819022205.22024-1-cardoe@cardoe.com>
+In-Reply-To: <5B7A7C2702000078001DFCDF@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,16 +19,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Doug Goldstein <cardoe@cardoe.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Xen-Devel <xen-devel@lists.xen.org>, Shane Wang <shane.wang@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Srinivas REDDY Eeda <srinivas.eeda@oracle.com>, Gang Wei <gang.wei@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gU2F0LCBBdWcgMTgsIDIwMTggYXQgMDk6MjI6MDVQTSAtMDUwMCwgRG91ZyBHb2xkc3RlaW4g
-d3JvdGU6Cj4gVGhlIHRib290IHRhcmdldHMgYXJlIHdvZWZ1bGx5IG91dCBvZiBkYXRlLiBUaGVz
-ZSBzaG91bGQgcmVhbGx5IGJlCj4gcmV0aXJlZCBiZWNhdXNlIHNldHRpbmcgdXAgdGJvb3QgaXMg
-bW9yZSBjb21wbGV4IHRoYW4gdGhlIGJ1aWxkIHByb2Nlc3MKPiBmb3IgaXQuCj4gCj4gU2lnbmVk
-LW9mZi1ieTogRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBjYXJkb2UuY29tPgoKQWNrZWQtYnk6IFdl
-aSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+T24gMjAxOC84LzIwIDE2OjMwLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+PiBPbiAyMC4wOC4xOCBh
+dCAwNTozMiwgPHpoZW56aG9uZy5kdWFuQG9yYWNsZS5jb20+IHdyb3RlOgo+PiBXaGVuIFRCT09U
+IGVuYWJsZWQsIGFjcGlfcGFyc2VfZG1hcigpIHphcCBhIGNvcHkgb2YgRE1BUiB0YWJsZSByYXRo
+ZXIKPj4gdGhhbiB0aGUgcmVhbCB0YWJsZSwgc28gbWFrZSBpdCBjb250cm9sZWQgYnkgY29uZmln
+IG9wdGlvbiBiYXNlZCBvbiB0aGUKPj4gZmFjdCB0aGF0IHdlIGFscmVhZHkgaGF2ZSBkb25lIHRo
+ZSByZWFsIHphcHBpbmcgaW4gdGJvb3RfcGFyc2VfZG1hcl90YWJsZSgpLgo+IAo+IElzIHRoaXMg
+anVzdCBhIGNvc21ldGljIGNoYW5nZSwgb3IgaXMgdGhlcmUgYW55IGhhcm0gZG9uZSBieSB0aGUg
+ZXh0cmEKPiB6YXBwaW5nPwpDb3NtZXRpYyBjaGFuZ2UsIEkgZmVlbCBpdCBpc24ndCBuZWNlc3Nv
+cnkgdG8gemFwIGEgY29weSBvZiBETUFSIHRhYmxlIAp3aGljaCBpcyBmcmVlZCBsYXRlci4KClRo
+YW5rcwpaaGVuemhvbmcKPiAKPj4gQXMgc2FpZCBhYm92ZSwgYWNwaV9wYXJzZV9kbWFyKCkgZG9l
+c24ndCB6YXBzIEFQQ0kgRE1BUiBzaWduYXR1cmUgaW4KPj4gcmVhbCBUWFQgaGVhcCB0YWJsZSwg
+Zml4IHRoZSBzdGFsZSBjb21tZW50cy4KPj4KPj4gU2lnbmVkLW9mZi1ieTogWmhlbnpob25nIER1
+YW4gPHpoZW56aG9uZy5kdWFuQG9yYWNsZS5jb20+Cj4+IC0tLQo+PiAgIHhlbi9hcmNoL3g4Ni90
+Ym9vdC5jICAgICAgICAgICAgICAgfCAgICAzICstLQo+PiAgIHhlbi9kcml2ZXJzL3Bhc3N0aHJv
+dWdoL3Z0ZC9kbWFyLmMgfCAgICAyICsrCj4+ICAgMiBmaWxlcyBjaGFuZ2VkLCAzIGluc2VydGlv
+bnMoKyksIDIgZGVsZXRpb25zKC0pCj4gCj4gWW91J3ZlIGFnYWluIGZhaWxlZCB0byBDYyBtYWlu
+dGFpbmVycyAoaW5jbHVkZWQgbm93KS4KPiAKPiBKYW4KPiAKPj4gLS0tIGEveGVuL2FyY2gveDg2
+L3Rib290LmMKPj4gKysrIGIveGVuL2FyY2gveDg2L3Rib290LmMKPj4gQEAgLTQ5MCw4ICs0OTAs
+NyBAQCBpbnQgX19pbml0IHRib290X3BhcnNlX2RtYXJfdGFibGUoYWNwaV90YWJsZV9oYW5kbGVy
+IGRtYXJfaGFuZGxlcikKPj4gICAgICAgcmMgPSBkbWFyX2hhbmRsZXIoZG1hcl90YWJsZSk7Cj4+
+ICAgICAgIHhmcmVlKGRtYXJfdGFibGUpOwo+PiAgIAo+PiAtICAgIC8qIGFjcGlfcGFyc2VfZG1h
+cigpIHphcHMgQVBDSSBETUFSIHNpZ25hdHVyZSBpbiBUWFQgaGVhcCB0YWJsZSAqLwo+PiAtICAg
+IC8qIGJ1dCBkb20wIHdpbGwgcmVhZCByZWFsIHRhYmxlLCBzbyBtdXN0IHphcCBpdCB0aGVyZSB0
+b28gKi8KPj4gKyAgICAvKiBEb20wIHdpbGwgcmVhZCByZWFsIERNQVIgdGFibGUsIHNvIG11c3Qg
+emFwIGl0IHRoZXJlICovCj4+ICAgICAgIGFjcGlfZG1hcl96YXAoKTsKPj4gICAKPj4gICAgICAg
+cmV0dXJuIHJjOwo+PiAtLS0gYS94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC92dGQvZG1hci5jCj4+
+ICsrKyBiL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL3Z0ZC9kbWFyLmMKPj4gQEAgLTg2Niw4ICs4
+NjYsMTAgQEAgc3RhdGljIGludCBfX2luaXQgYWNwaV9wYXJzZV9kbWFyKHN0cnVjdCBhY3BpX3Rh
+YmxlX2hlYWRlciAqdGFibGUpCj4+ICAgICAgIH0KPj4gICAKPj4gICBvdXQ6Cj4+ICsjaWZuZGVm
+IENPTkZJR19UQk9PVAo+PiAgICAgICAvKiBaYXAgQUNQSSBETUFSIHNpZ25hdHVyZSB0byBwcmV2
+ZW50IGRvbTAgdXNpbmcgdnQtZCBIVy4gKi8KPj4gICAgICAgYWNwaV9kbWFyX3phcCgpOwo+PiAr
+I2VuZGlmCj4+ICAgICAgIHJldHVybiByZXQ7Cj4+ICAgfQo+PiAgIAo+IAo+IAoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
