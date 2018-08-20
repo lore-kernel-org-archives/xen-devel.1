@@ -1,21 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/2] x86/xen: don't write ptes directly in
- 32-bit PV guests
-Date: Mon, 20 Aug 2018 02:38:28 -0600
-Message-ID: <5B7A7E0402000078001DFD01__28748.4533073895$1534754238$gmane$org@prv1-mh.provo.novell.com>
-References: <20180820051456.20779-1-jgross@suse.com>
- <20180820051456.20779-2-jgross@suse.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] build: remove tboot make targets
+Date: Mon, 20 Aug 2018 09:38:37 +0100
+Message-ID: <20180820083837.5lujxzua2f34sdlj@citrix.com>
+References: <20180819022205.22024-1-cardoe@cardoe.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=jmcq=ld=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1frfhs-00037j-FZ
- for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 08:38:36 +0000
-In-Reply-To: <20180820051456.20779-2-jgross@suse.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=qa+b=ld=citrix.com=prvs=763aa43e8=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1frfhx-00038q-7Q
+ for xen-devel@lists.xenproject.org; Mon, 20 Aug 2018 08:38:41 +0000
 Content-Disposition: inline
+In-Reply-To: <20180819022205.22024-1-cardoe@cardoe.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +22,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: the arch/x86 maintainers <x86@kernel.org>, linux-kernel@vger.kernel.org, mingo@redhat.com, hpa@zytor.com, xen-devel <xen-devel@lists.xenproject.org>, tglx@linutronix.de, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: Doug Goldstein <cardoe@cardoe.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIwLjA4LjE4IGF0IDA3OjE0LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBJbiBz
-b21lIGNhc2VzIDMyLWJpdCBQQUUgUFYgZ3Vlc3RzIHN0aWxsIHdyaXRlIFBURXMgZGlyZWN0bHkg
-aW5zdGVhZCBvZgo+IHVzaW5nIGh5cGVyY2FsbHMuIFRoaXMgaXMgZXNwZWNpYWxseSBiYWQgd2hl
-biBjbGVhcmluZyBhIFBURSBhcyB0aGlzIGlzCj4gZG9uZSB2aWEgMzItYml0IHdyaXRlcyB3aGlj
-aCB3aWxsIHByb2R1Y2UgaW50ZXJtZWRpYXRlIEwxVEYgYXR0YWNrYWJsZQo+IFBURXMuCj4gCj4g
-Q2hhbmdlIHRoZSBjb2RlIHRvIHVzZSBoeXBlcmNhbGxzIGluc3RlYWQuCj4gCj4gU2lnbmVkLW9m
-Zi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKUmV2aWV3ZWQtYnk6IEphbiBC
-ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+T24gU2F0LCBBdWcgMTgsIDIwMTggYXQgMDk6MjI6MDVQTSAtMDUwMCwgRG91ZyBHb2xkc3RlaW4g
+d3JvdGU6Cj4gVGhlIHRib290IHRhcmdldHMgYXJlIHdvZWZ1bGx5IG91dCBvZiBkYXRlLiBUaGVz
+ZSBzaG91bGQgcmVhbGx5IGJlCj4gcmV0aXJlZCBiZWNhdXNlIHNldHRpbmcgdXAgdGJvb3QgaXMg
+bW9yZSBjb21wbGV4IHRoYW4gdGhlIGJ1aWxkIHByb2Nlc3MKPiBmb3IgaXQuCj4gCj4gU2lnbmVk
+LW9mZi1ieTogRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBjYXJkb2UuY29tPgoKQWNrZWQtYnk6IFdl
+aSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
