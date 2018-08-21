@@ -1,20 +1,17 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 06/10] xen/arm: add OMAP5 kconfig
-Date: Tue, 21 Aug 2018 10:24:26 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1808211023420.16354@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1808201645540.16354@sstabellini-ThinkPad-X260>
- <1534809559-32704-6-git-send-email-sstabellini@kernel.org>
- <b62bbadc-db50-4cdd-2dc2-b6831b091bf6@epam.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 126333: tolerable all pass -
+ PUSHED
+Date: Tue, 21 Aug 2018 18:13:51 +0000
+Message-ID: <osstest-126333-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=euep=le=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1fsAOM-0007ah-H8
- for xen-devel@lists.xenproject.org; Tue, 21 Aug 2018 17:24:30 +0000
-In-Reply-To: <b62bbadc-db50-4cdd-2dc2-b6831b091bf6@epam.com>
+ <srs0=qc7t=le=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fsBAA-0003DA-1G
+ for xen-devel@lists.xenproject.org; Tue, 21 Aug 2018 18:13:54 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,19 +20,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii_anisov@epam.com>
-Cc: xen-devel@lists.xenproject.org, baozich@gmail.com, Stefano Stabellini <sstabellini@kernel.org>, julien.grall@linaro.org, Stefano Stabellini <stefanos@xilinx.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCAyMSBBdWcgMjAxOCwgQW5kcmlpIEFuaXNvdiB3cm90ZToKPiBIZWxsbyBTdGVmYW5v
-LAo+IAo+IAo+IE9uIDIxLjA4LjE4IDAyOjU5LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4g
-PiBBZGQgYSBrY29uZmlnIG9wdGlvbiBmb3IgVEkgT01BUDUgcGxhdGZvcm1zLgo+ID4gCj4gPiBT
-aWduZWQtb2ZmLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHN0ZWZhbm9zQHhpbGlueC5jb20+Cj4g
-PiBDQzogYmFvemljaEBnbWFpbC5jb20KPiA+IC0tIAo+IAo+IFJldmlld2VkLWJ5OiBBbmRyaWkg
-QW5pc292IDxhbmRyaWlfYW5pc292QGVwYW0uY29tPgo+ICpBbmRyaWkgQW5pc292KgoKSGkgQW5k
-cmlpLAoKVGhhbmtzIGZvciB0aGUgcmV2aWV3cyEgSSB3b3VsZCBhcHByZWNpYXRlIGlmIHlvdSBj
-b3VsZCB0YWtlIGEgbG9vayBhdAp0aGUgcmVzdCBvZiB0aGUgcGF0Y2hlcyBpbiB0aGlzIHNlcmll
-cyB0b28gOi0pCgpDaGVlcnMsCgpTdGVmYW5vCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+ZmxpZ2h0IDEyNjMzMyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNjMzMy8KCkZhaWx1cmVzIDot
+LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
+cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
+LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
+LXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGlu
+ZzoKIHhlbiAgICAgICAgICAgICAgICAgIDEzODVhMTRiZmMwOTY3MjUxM2NiNWJmOWJhYWZhODgx
+YzhkOTM1NDIKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIGYzNDY5MGE5
+NjJlYTcxMzY3YmM1Nzg4Y2M5YWY5YzlmYWIyY2FmYTAKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEy
+NjMyOSAgMjAxOC0wOC0yMSAxNDowMDozNCBaICAgIDAgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2Ug
+ICAxMjYzMzMgIDIwMTgtMDgtMjEgMTY6MDA6MzYgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoK
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbmRyZXcgQ29v
+cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEphbiBCZXVsaWNoIDxqYmV1bGljaEBz
+dXNlLmNvbT4KICBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKam9iczoKIGJ1aWxkLWFt
+ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
+NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0taTM4NiAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3Qt
+bGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xv
+Z3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAg
+aHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5h
+dGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAog
+ICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9
+UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIv
+P3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNv
+ZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9z
+c3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1c2hpbmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4u
+b3JnOi9ob21lL3hlbi9naXQveGVuLmdpdAogICBmMzQ2OTBhOTYyLi4xMzg1YTE0YmZjICAxMzg1
+YTE0YmZjMDk2NzI1MTNjYjViZjliYWFmYTg4MWM4ZDkzNTQyIC0+IHNtb2tlCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
