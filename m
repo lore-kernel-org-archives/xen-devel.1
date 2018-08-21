@@ -1,21 +1,22 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] tools: libxl/xl: run NUMA placement even
- when an hard-affinity is set
-Date: Tue, 21 Aug 2018 17:14:52 +0200
-Message-ID: <0272aceb4d34d1d9f4a92c1b6faaede59a1242a8.camel@suse.com>
-References: <153452538306.14879.2645077465028661264.stgit@Palanthas.fritz.box>
- <20180820101428.djudte4z2wye3cz3@citrix.com>
- <b346c13a4a05c75d531da1dcfa7ea684a0d5089e.camel@suse.com>
- <23419.59543.385873.125444@mariner.uk.xensource.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v6 6/6] x86/iommu: add map-reserved
+ dom0-iommu option to map reserved memory ranges
+Date: Tue, 21 Aug 2018 17:22:18 +0200
+Message-ID: <20180821152218.4vq32prphnmqxf7d@mac>
+References: <20180821074944.38773-1-roger.pau@citrix.com>
+ <20180821074944.38773-7-roger.pau@citrix.com>
+ <5B7C155102000078001E0842@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2517208254120976060=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gbqd=le=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1fs8NZ-00039Z-QD
- for xen-devel@lists.xenproject.org; Tue, 21 Aug 2018 15:15:33 +0000
-In-Reply-To: <23419.59543.385873.125444@mariner.uk.xensource.com>
+ <srs0=js+4=le=citrix.com=prvs=7646db883=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fs8UW-000418-B2
+ for xen-devel@lists.xenproject.org; Tue, 21 Aug 2018 15:22:44 +0000
+Content-Disposition: inline
+In-Reply-To: <5B7C155102000078001E0842@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,85 +25,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, xen-devel <xen-devel@lists.xenproject.org>, Brian Woods <brian.woods@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2517208254120976060==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-ak0E8dxCRWYXNI7e6d+W"
-
-
---=-ak0E8dxCRWYXNI7e6d+W
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2018-08-21 at 11:25 +0100, Ian Jackson wrote:
-> Dario Faggioli writes ("Re: [Xen-devel] [PATCH] tools: libxl/xl: run
-> NUMA placement even when an hard-affinity is set"):
-> > On Mon, 2018-08-20 at 11:14 +0100, Wei Liu wrote:
-> > > You can use NDEBUG instead.
-> >=20
-> > But I don't have a too strong opinion; I'll change it to us NDEBUG
-> > if
-> > that's what you prefer.
->=20
-> Please do not use NDEBUG.  libxl is not designed to be compiled with
-> NDEBUG.
->=20
-Err.. Ok. So, what do I do?
-
-Do I leave it under this special "manually enable for development and
-testing" kind of thing?
-
-Do I make it always on?
-
-Do I get rid of it?
-
-:-)
-
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-ak0E8dxCRWYXNI7e6d+W
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlt8LGwACgkQFkJ4iaW4
-c+473hAApM9KY81p1oigEBCcJmDKRSStDJHmrJlDfUc8YyZhJD5XlG4xtpVhE9vA
-rnXZ7wwTw4nvn3H1+Dy01FDLMdizawS+QSBsJkvD3L4tDGGckfQ+JVlglBzyWUe+
-A9oLDOIebckDYuUHZoD4Mq/ltUVwPAL8ImeYoAo1eRT+DEwWcxtFGNuYEz2lFRtA
-eVlJFszUwWeLe1M2N/5/PMBvuWTJDUIy9oMaKd9E4uckNKEM2D5Sb2KJ+XameGQ7
-Js0u0em8TfA2PhnO0Gw8U/RSEvRdrsYwqygvgV6+0HYgw50Fmi17BfmuWSGDn15J
-i+k1OWutsRqAOUR+zUbU62gAUa58DneMHBc8fLnpRzlkhiit7XzhmSsaddKmOkk8
-CBXRdySVfoDssQ9Bxe1F/m96UyjRStdAhSI9MM16wh18rDOrME4CkWHuKJ+aXzjI
-SYUlKceWenwaIDNJ8IcfLD8jq0TXBaTOGUj39FFZuwPFj2Cu97wCIt8SR9f/OhVc
-CIj6aHkNU4Bpc4MlG3FcMbMNhKfQWnD830GGYl03zmDgQktljxuD1/jkAt15RYBr
-kuXeE/bytj6ljTrXWSAW45hVRaEFlMC/bLIArIa4L/Yw4rmZRkJeUj/mPeLqjHEi
-iNYkJsdEr8kTJErfsG7pYvoNmcMdrMycdt1QoH1dG2fLJXhl0Cw=
-=Cr/X
------END PGP SIGNATURE-----
-
---=-ak0E8dxCRWYXNI7e6d+W--
-
-
-
---===============2517208254120976060==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2517208254120976060==--
+T24gVHVlLCBBdWcgMjEsIDIwMTggYXQgMDc6MzY6MTdBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDIxLjA4LjE4IGF0IDA5OjQ5LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdy
+b3RlOgo+ID4gLS0tIGEvZG9jcy9taXNjL3hlbi1jb21tYW5kLWxpbmUubWFya2Rvd24KPiA+ICsr
+KyBiL2RvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLm1hcmtkb3duCj4gPiBAQCAtNzA0LDYgKzcw
+NCwxNSBAQCBUaGlzIGxpc3Qgb2YgYm9vbGVhbnMgY29udHJvbHMgdGhlIGlvbW11IHVzYWdlIGJ5
+IERvbTA6Cj4gPiAgICBvcHRpb24gaXMgb25seSBhcHBsaWNhYmxlIHRvIGEgUFYgRG9tMCBhbmQg
+aXMgZW5hYmxlZCBieSBkZWZhdWx0IG9uIEludGVsCj4gPiAgICBoYXJkd2FyZS4KPiA+ICAKPiA+
+ICsqIGBtYXAtcmVzZXJ2ZWRgOiBzZXRzIHVwIERNQSByZW1hcHBpbmcgZm9yIGFsbCB0aGUgcmVz
+ZXJ2ZWQgcmVnaW9ucyBpbiB0aGUKPiA+ICsgIG1lbW9yeSBtYXAgZm9yIERvbTAuIFVzZSB0aGlz
+IHRvIHdvcmsgYXJvdW5kIGZpcm13YXJlIGlzc3VlcyBwcm92aWRpbmcKPiA+ICsgIGluY29ycmVj
+dCBSTVJSL0lWTUQgZW50cmllcy4gUmF0aGVyIHRoYW4gb25seSBtYXBwaW5nIFJBTSBwYWdlcyBm
+b3IgSU9NTVUKPiA+ICsgIGFjY2Vzc2VzIGZvciBEb20wLCBhbGwgbWVtb3J5IHJlZ2lvbnMgbWFy
+a2VkIGFzIHJlc2VydmVkIGluIHRoZSBtZW1vcnkgbWFwCj4gPiArICB0aGF0IGRvbid0IG92ZXJs
+YXAgd2l0aCBhbnkgTU1JTyByZWdpb24gZnJvbSBlbXVsYXRlZCBkZXZpY2VzIHdpbGwgYmUKPiA+
+ICsgIGlkZW50aXR5IG1hcHBlZC4gVGhpcyBvcHRpb24gbWFwcyBhIHN1YnNldCBvZiB0aGUgbWVt
+b3J5IHRoYXQgd291bGQgYmUKPiA+ICsgIG1hcHBlZCB3aGVuIHVzaW5nIHRoZSBgbWFwLWluY2x1
+c2l2ZWAgb3B0aW9uLiBUaGlzIG9wdGlvbiBpcyBhdmFpbGFibGUgdG8gYQo+ID4gKyAgUFZIIERv
+bTAgYW5kIGlzIGVuYWJsZWQgYnkgZGVmYXVsdCBvbiBJbnRlbCBoYXJkd2FyZS4KPiAKPiBUaGlz
+IHNvdW5kcyBhcyBpZiB0aGUgb3B0aW9uIHdhcyBtZWFuaW5nbGVzcyBmb3IgUFYsIGJ1dCBJIGNh
+bid0IHNlZW0KPiB0byBzZWUgdGhpcyBiZWluZyB0aGUgY2FzZS4gVGhlIHBsYWNlcyBzZXR0aW5n
+IGlvbW11X2h3ZG9tX3Jlc2VydmVkCj4gZG9uJ3QgbG9vayBhdCBkb21haW4gdHlwZSBhZmFpY3Ms
+IGFuZCB0aGUgY2hhbmdlIHRvIHRoZSBkZWZhdWx0IGNhc2UKPiBpbiBod2RvbV9pb21tdV9tYXAo
+KSdzIHN3aXRjaCgpIGJsb2NrIGhhcyB0aGUgaXNfaHZtX2RvbWFpbigpIGNoZWNrCj4gaW5kZXBl
+bmRlbnQgb2YgdGhlIGlvbW11X2h3ZG9tX3Jlc2VydmVkIG9uZS4KClRoZSBvcHRpb24gc2hvdWxk
+IGJlIGZ1bmN0aW9uYWwgZm9yIFBWIGFsc28sIHNvIHRoYXQgYSB1c2VyIGNvdWxkCmhhdmU6Cgpk
+b20wLWlvbW11PW1hcC1pbmNsdXNpdmU9MCxtYXAtcmVzZXJ2ZWQKCj4gSSBhbHNvIHdvbmRlciBh
+Ym91dCB0aGUgd29yZGluZyAiaXMgYXZhaWxhYmxlIHRvIjogRm9yIGEgZG9tYWluIHR5cGUKPiBy
+ZXN0cmljdGlvbiwgd291bGQgIm9ubHkgdGFrZXMgZWZmZWN0IG9uIiBvciBzb21lIHN1Y2ggYmUg
+bW9yZSB0byB0aGUKPiBwb2ludD8KCldoYXQgYWJvdXQ6CgoiVGhpcyBvcHRpb24gaXMgYXZhaWxh
+YmxlIHRvIGFsbCBEb20wIG1vZGVzIGFuZCBpcyBlbmFibGVkIGJ5IGRlZmF1bHQKb24gSW50ZWwg
+aGFyZHdhcmUuIgoKPiA+IEBAIC0xMzgsMTYgKzEzOSwyNCBAQCBzdGF0aWMgYm9vbCBfX2h3ZG9t
+X2luaXQgaHdkb21faW9tbXVfbWFwKGNvbnN0IHN0cnVjdCBkb21haW4gKmQsCj4gPiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBsb25nIHBmbiwKPiA+
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcg
+bWF4X3BmbikKPiA+ICB7Cj4gPiArICAgIHVuc2lnbmVkIGludCBpLCB0eXBlOwo+ID4gKwo+ID4g
+ICAgICAvKgo+ID4gICAgICAgKiBTZXQgdXAgMToxIG1hcHBpbmcgZm9yIGRvbTAuIERlZmF1bHQg
+dG8gaW5jbHVkZSBvbmx5IGNvbnZlbnRpb25hbCBSQU0KPiA+ICAgICAgICogYXJlYXMgYW5kIGxl
+dCBSTVJScyBpbmNsdWRlIG5lZWRlZCByZXNlcnZlZCByZWdpb25zLiBXaGVuIHNldCwgdGhlCj4g
+PiAgICAgICAqIGluY2x1c2l2ZSBtYXBwaW5nIGFkZGl0aW9uYWxseSBtYXBzIGluIGV2ZXJ5IHBm
+biB1cCB0byA0R0IgZXhjZXB0IHRob3NlCj4gPiAtICAgICAqIHRoYXQgZmFsbCBpbiB1bnVzYWJs
+ZSByYW5nZXMuCj4gPiArICAgICAqIHRoYXQgZmFsbCBpbiB1bnVzYWJsZSByYW5nZXMgZm9yIFBW
+IERvbTAuCj4gPiAgICAgICAqLwo+ID4gLSAgICBpZiAoIChwZm4gPiBtYXhfcGZuICYmICFtZm5f
+dmFsaWQoX21mbihwZm4pKSkgfHwgeGVuX2luX3JhbmdlKHBmbikgKQo+ID4gKyAgICBpZiAoIChw
+Zm4gPiBtYXhfcGZuICYmICFtZm5fdmFsaWQoX21mbihwZm4pKSkgfHwgeGVuX2luX3JhbmdlKHBm
+bikgfHwKPiA+ICsgICAgICAgICAvKgo+ID4gKyAgICAgICAgICAqIElnbm9yZSBhbnkgYWRkcmVz
+cyBiZWxvdyAxTUIsIHRoYXQncyBhbHJlYWR5IGlkZW50aXR5IG1hcHBlZCBieSB0aGUKPiA+ICsg
+ICAgICAgICAgKiBEb20wIGJ1aWxkZXIgZm9yIEhWTS4KPiA+ICsgICAgICAgICAgKi8KPiA+ICsg
+ICAgICAgICAoIWQtPmRvbWFpbl9pZCAmJiBpc19odm1fZG9tYWluKGQpICYmIHBmbiA8IFBGTl9E
+T1dOKE1CKDEpKSkgKQo+ID4gICAgICAgICAgcmV0dXJuIGZhbHNlOwo+ID4gIAo+ID4gLSAgICBz
+d2l0Y2ggKCBwYWdlX2dldF9yYW1fdHlwZShwZm4pICkKPiA+ICsgICAgdHlwZSA9IHBhZ2VfZ2V0
+X3JhbV90eXBlKHBmbik7Cj4gPiArICAgIHN3aXRjaCAoIHR5cGUgKQo+IAo+IEFueSByZWFzb24g
+bm90IHRvIGtlZXAgdGhpcyBhIHNpbmdsZSBsaW5lLCBwdXR0aW5nIHRoZSBhc3NpZ25tZW50IGlu
+c2lkZQo+IHRoZSBzd2l0Y2goKT8KCkkgZG9uJ3QgbGlrZSB0byBwdXQgYXNzaWdubWVudHMgaW5z
+aWRlIG9mIGV4cHJlc3Npb25zLCBidXQgSSBjYW4KY2VydGFpbmx5IGRvIHRoYXQuCgo+ID4gQEAg
+LTE1OCwxMCArMTY3LDQxIEBAIHN0YXRpYyBib29sIF9faHdkb21faW5pdCBod2RvbV9pb21tdV9t
+YXAoY29uc3Qgc3RydWN0IGRvbWFpbiAqZCwKPiA+ICAgICAgICAgIGJyZWFrOwo+ID4gIAo+ID4g
+ICAgICBkZWZhdWx0Ogo+ID4gLSAgICAgICAgaWYgKCAhaW9tbXVfaHdkb21faW5jbHVzaXZlIHx8
+IHBmbiA+IG1heF9wZm4gKQo+ID4gKyAgICAgICAgaWYgKCB0eXBlICYgUkFNX1RZUEVfUkVTRVJW
+RUQgKQo+ID4gKyAgICAgICAgewo+ID4gKyAgICAgICAgICAgIGlmICggIWlvbW11X2h3ZG9tX2lu
+Y2x1c2l2ZSAmJiAhaW9tbXVfaHdkb21fcmVzZXJ2ZWQgKQo+ID4gKyAgICAgICAgICAgICAgICBy
+ZXR1cm4gZmFsc2U7Cj4gPiArICAgICAgICB9Cj4gPiArICAgICAgICBlbHNlIGlmICggaXNfaHZt
+X2RvbWFpbihkKSB8fCAhaW9tbXVfaHdkb21faW5jbHVzaXZlIHx8IHBmbiA+IG1heF9wZm4gKQo+
+ID4gICAgICAgICAgICAgIHJldHVybiBmYWxzZTsKPiA+ICAgICAgfQo+ID4gIAo+ID4gKyAgICAv
+Kgo+ID4gKyAgICAgKiBDaGVjayB0aGF0IGl0IGRvZXNuJ3Qgb3ZlcmxhcCB3aXRoIHRoZSBMQVBJ
+Qwo+ID4gKyAgICAgKiBUT0RPOiBpZiB0aGUgZ3Vlc3QgcmVsb2NhdGVzIHRoZSBNTUlPIGFyZWEg
+b2YgdGhlIExBUElDIG9yIElPLUFQSUMgWGVuCj4gPiArICAgICAqIHNob3VsZCBtYWtlIHN1cmUg
+dGhlcmUncyBub3RoaW5nIGluIHRoZSBuZXcgYWRkcmVzcyB0aGF0IHdvdWxkIHByZXZlbnQKPiA+
+ICsgICAgICogdHJhcHBpbmcuCj4gPiArICAgICAqLwo+IAo+IEhtbSwgbm93IHlvdSBldmVuIG1l
+bnRpb24gdGhlIElPLUFQSUMgaGVyZS4gRG9lcyBvdXIgLyBxZW11J3MKPiBjaGlwc2V0IGVtdWxh
+dGlvbiBhbGxvdyBmb3IgdGhpcyBpbiB0aGUgZmlyc3QgcGxhY2U/CgpObywgSSBkaWRuJ3QgcmVj
+YWxsIHRoYXQgdGhlIElPLUFQSUMgYmFzZSBpcyBjaGFuZ2VkIGZyb20gYSByZWdpc3RlcgpvbiB0
+aGUgY2hpcHNldCBhbmQgbm90IGZyb20gYSBNU1IuIEkgd2lsbCByZW1vdmUgdGhpcy4KClRoYW5r
+cywgUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
