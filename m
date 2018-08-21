@@ -1,12 +1,10 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v6 4/6] mm: introduce a helper to get the
- memory type of a page
-Date: Tue, 21 Aug 2018 09:54:49 -0600
-Message-ID: <5B7C35C902000078001E0984@prv1-mh.provo.novell.com>
-References: <20180821074944.38773-1-roger.pau@citrix.com>
- <20180821074944.38773-5-roger.pau@citrix.com>
- <5B7C0B3102000078001E0801@prv1-mh.provo.novell.com>
- <20180821152627.tpjdkkxz2wtfy4za@mac>
+Subject: Re: [PATCH v2 2/2] x86/pae: use 64 bit atomic xchg
+ function in native_ptep_get_and_clear
+Date: Tue, 21 Aug 2018 09:57:36 -0600
+Message-ID: <5B7C367002000078001E0987__46301.4504559853$1534866997$gmane$org@prv1-mh.provo.novell.com>
+References: <20180821153755.30462-1-jgross@suse.com>
+ <20180821153755.30462-3-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -14,9 +12,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=ip0d=le=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fs8zd-0007Zj-Mj
- for xen-devel@lists.xenproject.org; Tue, 21 Aug 2018 15:54:53 +0000
-In-Reply-To: <20180821152627.tpjdkkxz2wtfy4za@mac>
+ id 1fs92O-0007pW-PF
+ for xen-devel@lists.xenproject.org; Tue, 21 Aug 2018 15:57:44 +0000
+In-Reply-To: <20180821153755.30462-3-jgross@suse.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,25 +24,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: the arch/x86 maintainers <x86@kernel.org>, linux-kernel@vger.kernel.org, mingo@redhat.com, hpa@zytor.com, xen-devel <xen-devel@lists.xenproject.org>, tglx@linutronix.de, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIxLjA4LjE4IGF0IDE3OjI2LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IE9uIFR1ZSwgQXVnIDIxLCAyMDE4IGF0IDA2OjUzOjA1QU0gLTA2MDAsIEphbiBCZXVsaWNoIHdy
-b3RlOgo+PiA+Pj4gT24gMjEuMDguMTggYXQgMDk6NDksIDxyb2dlci5wYXVAY2l0cml4LmNvbT4g
-d3JvdGU6Cj4+ID4gUmV0dXJucyBhbGwgdGhlIG1lbW9yeSB0eXBlcyBhcHBsaWNhYmxlIHRvIGEg
-cGFnZS4KPj4gPiAKPj4gPiBUaGlzIGZ1bmN0aW9uIGlzIHVuaW1wbGVtZW50ZWQgZm9yIEFSTS4K
-Pj4gPiAKPj4gPiBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0
-cml4LmNvbT4KPj4gCj4+IFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5j
-b20+Cj4+IAo+PiBCdXQgdGhpcyBzaG91bGQgb25seSBnbyBpbiB0b2dldGhlciB3aXRoIHRoZSBj
-b25zdW1lciBvZiB0aGUgbmV3IGZ1bmN0aW9uCj4+IHNlZWluZyB0aGF0IHlvdSBkaWRuJ3QgZm9s
-ZCB0aGUgcGF0Y2hlcy4KPiAKPiBPaCwgc29ycnkuIEkndmUgb25seSBmb2xkZWQgdGhlIHZwY2kg
-TU1DRkcgcGF0Y2ggaW50byBwYXRjaCA2Lgo+IAo+IFNpbmNlIEkgaGF2ZSB0byByZXNlbmQgdGhp
-cyBhbnl3YXkgaW4gb3JkZXIgdG8gYXBwbHkgdGhlIHJlcXVlc3RlZAo+IGNoYW5nZXMgdG8gcGF0
-Y2ggNiB3b3VsZCB5b3UgbGlrZSBtZSB0byBmb2xkIHRoaXMgaW50byBwYXRjaCA1IHdoZXJlCj4g
-aXQncyBhY3R1YWxseSB1c2VkPwoKTG9naWNhbGx5IGl0IG1pZ2h0IGJlIGJldHRlciwgYnV0IHRo
-YXQgcGF0Y2ggaXMgYWxyZWFkeSBwcmV0dHkgYmlnCmFueXdheTsgSSdtIGZpbmUgZWl0aGVyIHdh
-eS4KCkphbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDIxLjA4LjE4IGF0IDE3OjM3LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBVc2lu
+ZyBvbmx5IDMyLWJpdCB3cml0ZXMgZm9yIHRoZSBwdGUgd2lsbCByZXN1bHQgaW4gYW4gaW50ZXJt
+ZWRpYXRlCj4gTDFURiB2dWxuZXJhYmxlIFBURS4gV2hlbiBydW5uaW5nIGFzIGEgWGVuIFBWIGd1
+ZXN0IHRoaXMgd2lsbCBhdCBvbmNlCj4gc3dpdGNoIHRoZSBndWVzdCB0byBzaGFkb3cgbW9kZSBy
+ZXN1bHRpbmcgaW4gYSBsb3NzIG9mIHBlcmZvcm1hbmNlLgo+IAo+IFVzZSBhcmNoX2F0b21pYzY0
+X3hjaGcoKSBpbnN0ZWFkIHdoaWNoIHdpbGwgcGVyZm9ybSB0aGUgcmVxdWVzdGVkCj4gb3BlcmF0
+aW9uIGF0b21pY2FsbHkgd2l0aCBhbGwgNjQgYml0cy4KPiAKPiBTb21lIHBlcmZvcm1hbmNlIGNv
+bnNpZGVyYXRpb25zIGFjY29yZGluZyB0bzoKPiAKPiBodHRwczovL3NvZnR3YXJlLmludGVsLmNv
+bS9zaXRlcy9kZWZhdWx0L2ZpbGVzL21hbmFnZWQvYWQvZGMvSW50ZWwtWGVvbi1TY2FsIAo+IGFi
+bGUtUHJvY2Vzc29yLXRocm91Z2hwdXQtbGF0ZW5jeS5wZGYKPiAKPiBUaGUgbWFpbiBudW1iZXIg
+c2hvdWxkIGJlIHRoZSBsYXRlbmN5LCBhcyB0aGVyZSBpcyBubyB0aWdodCBsb29wIGFyb3VuZAo+
+IG5hdGl2ZV9wdGVwX2dldF9hbmRfY2xlYXIoKS4KPiAKPiAibG9jayBjbXB4Y2hnOGIiIGhhcyBh
+IGxhdGVuY3kgb2YgMjAgY3ljbGVzLCB3aGlsZSAibG9jayB4Y2hnIiAod2l0aCBhCj4gbWVtb3J5
+IG9wZXJhbmQpIGlzbid0IG1lbnRpb25lZCBpbiB0aGF0IGRvY3VtZW50LiAibG9jayB4YWRkIiAo
+d2l0aCB4YWRkCj4gaGF2aW5nIDMgY3ljbGVzIGxlc3MgbGF0ZW5jeSB0aGFuIHhjaGcpIGhhcyBh
+IGxhdGVuY3kgb2YgMTEsIHNvIHdlIGNhbgo+IGFzc3VtZSBhIGxhdGVuY3kgb2YgMTQgZm9yICJs
+b2NrIHhjaGciLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNl
+LmNvbT4KClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CndpdGgg
+b25lIGZ1cnRoZXIgcmVtYXJrOgoKPiBAQCAtMTUwLDEwICsxNTIsNyBAQCBzdGF0aWMgaW5saW5l
+IHB0ZV90IG5hdGl2ZV9wdGVwX2dldF9hbmRfY2xlYXIocHRlX3QgKnB0ZXApCj4gIHsKPiAgCXB0
+ZV90IHJlczsKPiAgCj4gLQkvKiB4Y2hnIGFjdHMgYXMgYSBiYXJyaWVyIGJlZm9yZSB0aGUgc2V0
+dGluZyBvZiB0aGUgaGlnaCBiaXRzICovCj4gLQlyZXMucHRlX2xvdyA9IHhjaGcoJnB0ZXAtPnB0
+ZV9sb3csIDApOwo+IC0JcmVzLnB0ZV9oaWdoID0gcHRlcC0+cHRlX2hpZ2g7Cj4gLQlwdGVwLT5w
+dGVfaGlnaCA9IDA7Cj4gKwlyZXMucHRlID0gKHB0ZXZhbF90KWFyY2hfYXRvbWljNjRfeGNoZygo
+YXRvbWljNjRfdCAqKXB0ZXAsIDApOwoKSXMgdGhlIGNhc3Qgb24gdGhlIHJldHVybiB2YWx1ZSBy
+ZWFsbHkgbmVlZGVkIGhlcmU/CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
