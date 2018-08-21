@@ -1,16 +1,16 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH 2/6] x86/shadow: Use more appropriate
- conversion functions
-Date: Tue, 21 Aug 2018 11:02:22 +0100
-Message-ID: <20180821100222.5yq33wvpe5jr4bkd@citrix.com>
+Subject: Re: [PATCH 4/6] x86/shadow: Use MASK_* helpers for the
+ MMIO fastpath PTE manipulation
+Date: Tue, 21 Aug 2018 11:04:26 +0100
+Message-ID: <20180821100426.ppy4stp7gxtxw4w2@citrix.com>
 References: <1534358077-24700-1-git-send-email-andrew.cooper3@citrix.com>
- <1534358077-24700-3-git-send-email-andrew.cooper3@citrix.com>
+ <1534358077-24700-5-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <1534358077-24700-3-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1534358077-24700-5-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,11 +23,11 @@ To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: Wei Liu <wei.liu2@citrix.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBBdWcgMTUsIDIwMTggYXQgMDc6MzQ6MzNQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBSZXBsYWNlIHBmbl90b19wYWRkcihtZm5feCguLi4pKSB3aXRoIG1mbl90b19tYWRk
-cigpLCBhbmQgcmVwbGFjZSBhbiBvcGVuY29kZWQKPiBnZm5fdG9fZ2FkZHIoKS4KPiAKPiBObyBm
-dW5jdGlvbmFsIGNoYW5nZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRy
-ZXcuY29vcGVyM0BjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNp
-dHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gV2VkLCBBdWcgMTUsIDIwMTggYXQgMDc6MzQ6MzVQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBEcm9wIHRoZSBub3ctdW51c2VkIFNIX0wxRV9NTUlPX0dGTl9TSElGVCBkZWZpbml0
+aW9uLgo+IAo+IE5vIGZ1bmN0aW9uYWwgY2hhbmdlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJl
+dyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogV2VpIExp
+dSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
