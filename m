@@ -1,19 +1,20 @@
 From: "Tian, Kevin" <kevin.tian@intel.com>
-Subject: Re: [PATCH] VMX: make vmx_read_guest_msr() cope with
- callers not checking its return value
-Date: Wed, 22 Aug 2018 01:44:52 +0000
-Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D1912D35FD@SHSMSX101.ccr.corp.intel.com>
-References: <5B740FAC02000078001DE559@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH v5 1/8] iommu: rename iommu_dom0_strict and
+ iommu_passthrough
+Date: Wed, 22 Aug 2018 01:46:20 +0000
+Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D1912D3622@SHSMSX101.ccr.corp.intel.com>
+References: <20180814134336.75539-1-roger.pau@citrix.com>
+ <20180814134336.75539-2-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=5ybv=lf=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
- id 1fsICk-0001V0-4J
- for xen-devel@lists.xenproject.org; Wed, 22 Aug 2018 01:45:02 +0000
-In-Reply-To: <5B740FAC02000078001DE559@prv1-mh.provo.novell.com>
+ id 1fsIE6-0001bE-Vo
+ for xen-devel@lists.xenproject.org; Wed, 22 Aug 2018 01:46:27 +0000
+In-Reply-To: <20180814134336.75539-2-roger.pau@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,19 +24,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, "Nakajima,
- Jun" <jun.nakajima@intel.com>
+To: Roger Pau Monne <roger.pau@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiBGcm9tOiBKYW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+IFNlbnQ6IFdl
-ZG5lc2RheSwgQXVndXN0IDE1LCAyMDE4IDc6MzQgUE0KPiAKPiBJdCB0b29rIHRpbGwgdGhlIDQu
-NSBiYWNrcG9ydHMgb2YgdGhlIEwxVEYgcHJlcmVxcyB0aGF0IGdjYyA4LjIgZmluYWxseQo+IG5v
-dGljZWQgdGhhdCB0aGUgdlBNVSBjYWxsZXJzLCBub3QgY2hlY2tpbmcgdGhlIGZ1bmN0aW9uJ3Mg
-cmV0dXJuIHZhbHVlLAo+IG1heSBjb25zdW1lIHVuaW5pdGlhbGl6ZWQgZGF0YS4gR3VhcmQgYWdh
-aW5zdCB0aGlzIGJ5IHN0b3JpbmcgemVybyBvbgo+IHRoZSBlcnJvciBwYXRoLgo+IAo+IFNpZ25l
-ZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPiAKCkFja2VkLWJ5OiBL
-ZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+PiBGcm9tOiBSb2dlciBQYXUgTW9ubmUgW21haWx0bzpyb2dlci5wYXVAY2l0cml4LmNvbV0NCj4g
+U2VudDogVHVlc2RheSwgQXVndXN0IDE0LCAyMDE4IDk6NDMgUE0NCj4gDQo+IFRvIGlvbW11X2h3
+ZG9tX3N0cmljdCBhbmQgaW9tbXVfaHdkb21fcGFzc3Rocm91Z2ggd2hpY2ggaXMgbW9yZQ0KPiBk
+ZXNjcmlwdGl2ZSBvZiB0aGVpciB1c2FnZS4gQWxzbyBjaGFuZ2UgdGhlaXIgdHlwZSBmcm9tIGJv
+b2xfdCB0bw0KPiBib29sLg0KPiANCj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuDQo+IA0KPiBTaWdu
+ZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4NCg0KUmV2
+aWV3ZWQtYnk6IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPg0KX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
