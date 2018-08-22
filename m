@@ -1,27 +1,20 @@
-From: Andy Lutomirski <luto@kernel.org>
-Subject: Re: [PATCH v2] x86/entry/64: Remove %ebx handling from
- error_entry/exit
-Date: Tue, 21 Aug 2018 18:42:56 -0700
-Message-ID: <CALCETrUs2BYr883a9mMmxuPeTrzbpMfd=V3=guYKn6R5it6ORw__30606.4108307057$1534902149$gmane$org@mail.gmail.com>
-References: <1534479596-7546-1-git-send-email-srn@prgmr.com>
+From: "Tian, Kevin" <kevin.tian@intel.com>
+Subject: Re: [PATCH] VMX: make vmx_read_guest_msr() cope with
+ callers not checking its return value
+Date: Wed, 22 Aug 2018 01:44:52 +0000
+Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D1912D35FD@SHSMSX101.ccr.corp.intel.com>
+References: <5B740FAC02000078001DE559@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ihbd=lf=kernel.org=luto@srs-us1.protection.inumbo.net>)
- id 1fsIB7-0001Ph-K0
- for xen-devel@lists.xenproject.org; Wed, 22 Aug 2018 01:43:21 +0000
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 8AFE021840
- for <xen-devel@lists.xenproject.org>; Wed, 22 Aug 2018 01:43:18 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id z96-v6so228607wrb.8
- for <xen-devel@lists.xenproject.org>; Tue, 21 Aug 2018 18:43:18 -0700 (PDT)
-In-Reply-To: <1534479596-7546-1-git-send-email-srn@prgmr.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=5ybv=lf=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
+ id 1fsICk-0001V0-4J
+ for xen-devel@lists.xenproject.org; Wed, 22 Aug 2018 01:45:02 +0000
+In-Reply-To: <5B740FAC02000078001DE559@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,14 +23,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Sarah Newman <srn@prgmr.com>
-Cc: Juergen Gross <jgross@suse.com>, Brian Gerst <brgerst@gmail.com>, X86 ML <x86@kernel.org>, Dominik Brodowski <linux@dominikbrodowski.net>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, stable <stable@vger.kernel.org>, Andy Lutomirski <luto@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel <xen-devel@lists.xenproject.org>, Thomas Gleixner <tglx@linutronix.de>, David Woodhouse <dwmw2@infradead.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, "Nakajima,
+ Jun" <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBBdWcgMTYsIDIwMTggYXQgOToxOSBQTSwgU2FyYWggTmV3bWFuIDxzcm5AcHJnbXIu
-Y29tPiB3cm90ZToKPiBjb21taXQgYjM2ODFkZDU0OGQwNmRlYjJlMTU3Mzg5MDgyOWRmZjRiMTVh
-YmY0NiB1cHN0cmVhbS4KPgo+IFRoaXMgdmVyc2lvbiBhcHBsaWVzIHRvIHY0LjkuCgouLi4KCkxv
-b2tzIG9rYXkgdG8gbWUuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+PiBGcm9tOiBKYW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+IFNlbnQ6IFdl
+ZG5lc2RheSwgQXVndXN0IDE1LCAyMDE4IDc6MzQgUE0KPiAKPiBJdCB0b29rIHRpbGwgdGhlIDQu
+NSBiYWNrcG9ydHMgb2YgdGhlIEwxVEYgcHJlcmVxcyB0aGF0IGdjYyA4LjIgZmluYWxseQo+IG5v
+dGljZWQgdGhhdCB0aGUgdlBNVSBjYWxsZXJzLCBub3QgY2hlY2tpbmcgdGhlIGZ1bmN0aW9uJ3Mg
+cmV0dXJuIHZhbHVlLAo+IG1heSBjb25zdW1lIHVuaW5pdGlhbGl6ZWQgZGF0YS4gR3VhcmQgYWdh
+aW5zdCB0aGlzIGJ5IHN0b3JpbmcgemVybyBvbgo+IHRoZSBlcnJvciBwYXRoLgo+IAo+IFNpZ25l
+ZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPiAKCkFja2VkLWJ5OiBL
+ZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
