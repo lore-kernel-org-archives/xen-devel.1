@@ -1,16 +1,21 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [ovmf baseline-only test] 75106: tolerable FAIL
-Date: Thu, 23 Aug 2018 05:40:28 +0100
-Message-ID: <osstest-75106-mainreport@xen.org>
+From: Pasha Tatashin <Pavel.Tatashin@microsoft.com>
+Subject: Re: [PATCH] x86/xen: enable early use of set_fixmap in
+ 32-bit Xen PV guest
+Date: Wed, 22 Aug 2018 19:28:17 +0000
+Message-ID: <CAGM2rebMaogjr-EbwBOxzB8GZqGqrM-4rG-m95O6O=WwzjJ2Rw__27934.5097755597$1534999622$gmane$org@mail.gmail.com>
+References: <20180817134016.19957-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xvvp=lg=xenproject.org=prvs=766017817=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1fshQ8-000501-VF
- for xen-devel@lists.xenproject.org; Thu, 23 Aug 2018 04:40:32 +0000
+ <srs0=esyw=lf=microsoft.com=pavel.tatashin@srs-us1.protection.inumbo.net>)
+ id 1fsYpM-00056J-Jo
+ for xen-devel@lists.xenproject.org; Wed, 22 Aug 2018 19:30:00 +0000
+In-Reply-To: <20180817134016.19957-1-jgross@suse.com>
+Content-Language: en-US
+Content-ID: <3B2DCAE84E10B441B85B1DECC2CB57F4@namprd21.prod.outlook.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,45 +24,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: "jgross@suse.com" <jgross@suse.com>
+Cc: "x86@kernel.org" <x86@kernel.org>, LKML <linux-kernel@vger.kernel.org>, "pasha.tatashin@oracle.com" <pasha.tatashin@oracle.com>, "mingo@redhat.com" <mingo@redhat.com>, "hpa@zytor.com" <hpa@zytor.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>, "tglx@linutronix.de" <tglx@linutronix.de>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
-NTEwNiBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
-dC9sb2dzLzc1MTA2LwoKRmFpbHVyZXMgOi0vIGJ1dCBubyByZWdyZXNzaW9ucy4KClRlc3RzIHdo
-aWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQgMTAgZGViaWFuLWh2bS1pbnN0YWxsICAgICBmYWlsIGxp
-a2UgNzUxMDIKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0IDEwIGRlYmlhbi1o
-dm0taW5zdGFsbCAgICAgIGZhaWwgbGlrZSA3NTEwMgoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVz
-dGluZzoKIG92bWYgICAgICAgICAgICAgICAgIGNjNjkzOTA2NzAwOGM0ZGNhYjk5MGQ1ZThiZTY1
-MDg2ZWMzOTNhZmEKYmFzZWxpbmUgdmVyc2lvbjoKIG92bWYgICAgICAgICAgICAgICAgIDZjZjZm
-ZWQwMjQwOGI1ZjNiYTM5ZGU0NmNiYzk3MWI5ZGRhMzYzOWIKCkxhc3QgdGVzdCBvZiBiYXNpcyAg
-ICA3NTEwMiAgMjAxOC0wOC0yMiAwMDozNjo1NiBaICAgIDEgZGF5cwpUZXN0aW5nIHNhbWUgc2lu
-Y2UgICAgNzUxMDYgIDIwMTgtMDgtMjIgMTI6Mjk6MTEgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0
-cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBIYW8gV3Ug
-PGhhby5hLnd1QGludGVsLmNvbT4KICBMYXN6bG8gRXJzZWsgPGxlcnNla0ByZWRoYXQuY29tPgog
-IHNoZW5nbGVpIDxzaGVuZ2xlaS56aGFuZ0BpbnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQt
-eHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1s
-aWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZhaWwgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC54cy5jaXRyaXRl
-Lm5ldApsb2dzOiAvaG9tZS9vc3N0ZXN0L2xvZ3MKaW1hZ2VzOiAvaG9tZS9vc3N0ZXN0L2ltYWdl
-cwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9v
-c3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVzdC9sb2dzCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4g
-YmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbnNvdXJjZS5jb20vZ2l0d2ViP3A9b3Nz
-dGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaCBub3QgYXBwbGljYWJsZS4KCihObyByZXZpc2lvbiBs
-b2c7IGl0IHdvdWxkIGJlIDU5MCBsaW5lcyBsb25nLikKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gRnJpLCBBdWcgMTcsIDIwMTggYXQgOTo0MSBBTSBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
+ZS5jb20+IHdyb3RlOg0KPg0KPiBDb21taXQgN2IyNWI5Y2IwZGFkODMgKCJ4ODYveGVuL3RpbWU6
+IEluaXRpYWxpemUgcHYgeGVuIHRpbWUgaW4NCj4gaW5pdF9oeXBlcnZpc29yX3BsYXRmb3JtKCki
+KSBtb3ZlZCB0aGUgbWFwcGluZyBvZiB0aGUgc2hhcmVkIGluZm8gYXJlYQ0KPiBiZWZvcmUgcGFn
+ZXRhYmxlX2luaXQoKS4gVGhpcyBicmVha3MgYm9vdGluZyBhcyAzMi1iaXQgUFYgZ3Vlc3QgYXMg
+dGhlDQo+IHVzZSBvZiBzZXRfZml4bWFwIGlzbid0IHBvc3NpYmxlIGF0IHRoaXMgdGltZSBvbiAz
+Mi1iaXQuDQo+DQo+IFRoaXMgY2FuIGJlIHdvcmtlZCBhcm91bmQgYnkgcG9wdWxhdGluZyB0aGUg
+bmVlZGVkIFBNRCBvbiAzMi1iaXQNCj4ga2VybmVsIGVhcmxpZXIuDQo+DQo+IEluIG9yZGVyIG5v
+dCB0byByZWltcGxlbWVudCBwb3B1bGF0ZV9leHRyYV9wdGUoKSB1c2luZyBleHRlbmRfYnJrKCkN
+Cj4gZm9yIGFsbG9jYXRpbmcgbmV3IHBhZ2UgdGFibGVzIGV4dGVuZCBhbGxvY19sb3dfcGFnZXMo
+KSB0byBkbyB0aGF0IGluDQo+IGNhc2UgdGhlIGVhcmx5IHBhZ2UgdGFibGUgcG9vbCBpcyBub3Qg
+eWV0IGF2YWlsYWJsZS4NCj4NCj4gRml4ZXM6IDdiMjViOWNiMGRhZDgzDQoNCkZpeGVzOiA3YjI1
+YjljYjBkYWQgKCJ4ODYveGVuL3RpbWU6IEluaXRpYWxpemUgcHYgeGVuIHRpbWUgaW4NCmluaXRf
+aHlwZXJ2aXNvcl9wbGF0Zm9ybSgpIikNCg0KUmV2aWV3ZWQtYnk6IFBhdmVsIFRhdGFzaGluIDxw
+YXZlbC50YXRhc2hpbkBtaWNyb3NvZnQuY29tPgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
