@@ -1,17 +1,18 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v3 02/25] xen/arm: move a few DT related
- defines to public/device_tree_defs.h
-Date: Wed, 22 Aug 2018 16:25:46 +0100
-Message-ID: <20180822152546.u6xfevn6au5xhkzy@citrix.com>
-References: <alpine.DEB.2.10.1807311623060.5781@sstabellini-ThinkPad-X260>
- <1533079688-9541-2-git-send-email-sstabellini@kernel.org>
- <8d3e00e6-2347-6a0e-0d7f-ca3ec0221fe8@arm.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v17 12/13] x86/hvm: Remove redundant save
+ functions
+Date: Wed, 22 Aug 2018 17:26:10 +0200
+Message-ID: <20180822152610.r7vlc4vp2tsbbevs@mac>
+References: <1534946563-12084-1-git-send-email-aisaila@bitdefender.com>
+ <1534946563-12084-13-git-send-email-aisaila@bitdefender.com>
+ <20180822150423.4gb4q66guorbgupb@mac>
+ <1534951335.20997.14.camel@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <8d3e00e6-2347-6a0e-0d7f-ca3ec0221fe8@arm.com>
+In-Reply-To: <1534951335.20997.14.camel@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,23 +21,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, ian.jackson@eu.citrix.com, xen-devel@lists.xen.org, wei.liu2@citrix.com
+To: Isaila Alexandru <aisaila@bitdefender.com>
+Cc: wei.liu2@citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, xen-devel@lists.xen.org, paul.durrant@citrix.com, jbeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBBdWcgMDEsIDIwMTggYXQgMTA6MzE6NTBBTSArMDEwMCwgSnVsaWVuIEdyYWxsIHdy
-b3RlOgo+IAo+IAo+IE9uIDAxLzA4LzE4IDAwOjI3LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6
-Cj4gPiBNb3ZlIGEgZmV3IGNvbnN0YW50cyBkZWZpbmVkIGJ5IGxpYnhsX2FybS5jIHRvCj4gPiB4
-ZW4vaW5jbHVkZS9wdWJsaWMvZGV2aWNlX3RyZWVfZGVmcy5oLCBzbyB0aGF0IHRoZXkgY2FuIGJl
-IHVzZWQgZnJvbSBYZW4KPiA+IGFuZCBsaWJ4bC4gUHJlcGVuZCBHVUVTVF8gdG8gYXZvaWQgY29u
-ZmxpY3RzLgo+ID4gCj4gPiBNb3ZlIHRoZSBEVF9JUlFfVFlQRSogZGVmaW5pdGlvbnMgZnJvbSBs
-aWJ4bF9hcm0uYyB0bwo+ID4gcHVibGljL2RldmljZV90cmVlX2RlZnMuaC4gVXNlIHRoZW0gaW4g
-WGVuIHdoZXJlIGFwcHJvcHJpYXRlLgo+ID4gCj4gPiBSZS1kZWZpbmUgdGhlIGV4aXN0aW5nIFhl
-biBpbnRlcm5hbCBJUlFfVFlQRXMgYXMgRFRfSVJRX1RZUEVzOiB0aGV5Cj4gPiBhbHJlYWR5IGhh
-cHBlbiB0byBiZSB0aGUgc2FtZSwgbGV0IG1ha2UgaXQgY2xlYXIuCj4gPiAKPiA+IFNpZ25lZC1v
-ZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3RlZmFub3NAeGlsaW54LmNvbT4KPiAKPiBBY2tl
-ZC1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCkFja2VkLWJ5OiBXZWkg
-TGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+T24gV2VkLCBBdWcgMjIsIDIwMTggYXQgMDY6MjI6MTVQTSArMDMwMCwgSXNhaWxhIEFsZXhhbmRy
+dSB3cm90ZToKPiA+ID4gwqAKPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGlmICggaGFu
+ZGxlcihkLCBoKSAhPSAwICkKPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGlmICggaGFu
+ZGxlcihkLT52Y3B1WzBdLCBoKSAhPSAwICkKPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqB7Cj4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBwcmludGsoWEVOTE9H
+X0dfRVJSCj4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIkhWTSVkIHNhdmU6IGZhaWxlZCB0byBzYXZlIHR5cGUKPiA+ID4gJSJQUkl1MTYiXG4iLAo+
+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCJIVk0g
+ZCVkIHNhdmU6IGZhaWxlZCB0byBzYXZlIHR5cGUKPiA+ID4gJSJQUkl1MTYiXG4iLAo+ID4gVGhp
+cyBsb29rcyBsaWtlIGFuIHVucmVsYXRlZCBjaGFuZ2UuCj4gSSB3YW50ZWQgdG8gY2hhbmdlIHRo
+aXMgc28gaXQgY291bGQgYmUgaW4gdGhlIHNhbWUgb3JkZXIgYXMgdGhlCj4gcGVyX3ZjcHUgcHJp
+bnQgdGhhdCB3YXMgbW9kaWZpZWQgYXQgSmFuJ3MgcmVxdWVzdC4KPiBOb3cgdGhlIHByaW50IGlz
+IHNvbWV0aGluZyBsaWtlOgo+IAo+ICIKPiAoWEVOKSBIVk0gZDJ2MCBzYXZlOiBDUFUKPiAoWEVO
+KSBIVk0gZDJ2MSBzYXZlOiBDUFUKPiAoWEVOKSBIVk0gZDIgc2F2ZTogUElDCj4gKFhFTikgSFZN
+IGQyIHNhdmU6IElPQVBJQwo+IChYRU4pIEhWTSBkMnYwIHNhdmU6IExBUElDCj4gIgo+IGluIG9w
+cG9zZSB0byBoYXZpbmcgIihYRU4pIEhWTTIgc2F2ZTogUElDIi4KPiAKPiBJZiB0aGUgY2hhbmdl
+IGlzIG5vdCBuZWVkZWQgSSBjYW4gZHJvcCBpdC4KCkp1c3QgYWRkIGEgc21hbGwgY29tbWVudCBv
+biB0aGUgY29tbWl0IHNheWluZyB0aGF0IHdoaWxlIHRoZXJlIHlvdQphbHNvIGZpeCB0aGUgcHJp
+bnRpbmcgb2YgYSBtZXNzYWdlIGluIG9yZGVyIHRvIG1hdGNoIHRoZSBmb3JtYXQgb2YgdGhlCm90
+aGVyIHNhdmUgcmVsYXRlZCBtZXNzYWdlcy4KClRoYW5rcywgUm9nZXIuCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
