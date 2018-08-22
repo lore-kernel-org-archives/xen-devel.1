@@ -1,16 +1,16 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [ovmf baseline-only test] 75102: tolerable FAIL
-Date: Wed, 22 Aug 2018 12:55:05 +0100
-Message-ID: <osstest-75102-mainreport@xen.org>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [linux-3.18 bisection] complete
+ test-amd64-i386-qemut-rhel6hvm-intel
+Date: Wed, 22 Aug 2018 12:26:27 +0000
+Message-ID: <E1fsSDT-0000l5-RP@osstest.test-lab.xenproject.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4365093843241830815=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wi0r=lf=xenproject.org=prvs=765d9170c=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1fsRjC-0007Su-6l
- for xen-devel@lists.xenproject.org; Wed, 22 Aug 2018 11:55:10 +0000
+ <srs0=hkcu=lf=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fsSDX-0001gB-0v
+ for xen-devel@lists.xenproject.org; Wed, 22 Aug 2018 12:26:31 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,54 +22,186 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
-NTEwMiBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
-dC9sb2dzLzc1MTAyLwoKRmFpbHVyZXMgOi0vIGJ1dCBubyByZWdyZXNzaW9ucy4KClRlc3RzIHdo
-aWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQgMTAgZGViaWFuLWh2bS1pbnN0YWxsICAgICBmYWlsIGxp
-a2UgNzUwOTgKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0IDEwIGRlYmlhbi1o
-dm0taW5zdGFsbCAgICAgIGZhaWwgbGlrZSA3NTA5OAoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVz
-dGluZzoKIG92bWYgICAgICAgICAgICAgICAgIDZjZjZmZWQwMjQwOGI1ZjNiYTM5ZGU0NmNiYzk3
-MWI5ZGRhMzYzOWIKYmFzZWxpbmUgdmVyc2lvbjoKIG92bWYgICAgICAgICAgICAgICAgIDEzMTgx
-OGJhNWE4M2QxZThmM2YxYjRjMDQxMjAwNzU1ZmZmNjRhYmIKCkxhc3QgdGVzdCBvZiBiYXNpcyAg
-ICA3NTA5OCAgMjAxOC0wOC0yMSAwMzoyODo1MyBaICAgIDEgZGF5cwpUZXN0aW5nIHNhbWUgc2lu
-Y2UgICAgNzUxMDIgIDIwMTgtMDgtMjIgMDA6MzY6NTYgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0
-cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBGZW5nLCBZ
-dW5odWFYIDx5dW5odWF4LmZlbmdAaW50ZWwuY29tPgogIFl1bmh1YSBGZW5nIDx5dW5odWF4LmZl
-bmdAaW50ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LWxpYnZpcnQgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFt
-ZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11
-dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAoKCi0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1y
-ZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QueHMuY2l0cml0ZS5uZXQKbG9nczogL2hvbWUvb3NzdGVz
-dC9sb2dzCmltYWdlczogL2hvbWUvb3NzdGVzdC9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywg
-ZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vb3NzdGVzdC54ZW5zb3VyY2UuY29tL29z
-c3Rlc3QvbG9ncwoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8v
-eGVuYml0cy54ZW5zb3VyY2UuY29tL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1
-c2ggbm90IGFwcGxpY2FibGUuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KY29tbWl0IDZjZjZmZWQwMjQwOGI1ZjNiYTM5ZGU0NmNi
-Yzk3MWI5ZGRhMzYzOWIKQXV0aG9yOiBGZW5nLCBZdW5odWFYIDx5dW5odWF4LmZlbmdAaW50ZWwu
-Y29tPgpEYXRlOiAgIFR1ZSBBdWcgMjEgMDg6NDg6MzggMjAxOCArMDgwMAoKICAgIEJhc2VUb29s
-czogRml4IHJlZ3Jlc3Npb24gaXNzdWUgYnkgYjIzNDE0ZjY1NDBkCiAgICAKICAgIFYyOiBSZW5h
-bWluZyBmdW5jdGlvbiBEZXBleEV4cHJlc3Npb25Ub2tlbkxpc3QgdG8gIERlcGV4RXhwcmVzc2lv
-bkRpY3QKICAgIGluc3RlYWQgb2YgY2hhbmdpbmcgdGhlIGNhbGxlcnMKICAgIAogICAgRml4IHJl
-Z3Jlc3Npb24gaXNzdWUgYnkgYjIzNDE0ZjY1NDBkNGYzMzZiNmYwMGI0NDY4MTkxMWQ0NjlmOWEw
-NAogICAgQXR0cmlidXRlRXJyb3I6ICdNb2R1bGVBdXRvR2VuJyBvYmplY3QgaGFzIG5vIGF0dHJp
-YnV0ZQogICAgJ0RlcGV4RXhwcmVzc2lvbkRpY3QnCiAgICAKICAgIENjOiBMaW1pbmcgR2FvIDxs
-aW1pbmcuZ2FvQGludGVsLmNvbT4KICAgIENjOiBZb25naG9uZyBaaHUgPHlvbmdob25nLnpodUBp
-bnRlbC5jb20+CiAgICBDb250cmlidXRlZC11bmRlcjogVGlhbm9Db3JlIENvbnRyaWJ1dGlvbiBB
-Z3JlZW1lbnQgMS4xCiAgICBTaWduZWQtb2ZmLWJ5OiBZdW5odWEgRmVuZyA8eXVuaHVheC5mZW5n
-QGludGVsLmNvbT4KICAgIFJldmlld2VkLWJ5OiBZb25naG9uZyBaaHUgPHlvbmdob25nLnpodUBp
-bnRlbC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============4365093843241830815==
+Content-Type: text/plain
+
+branch xen-unstable
+xenbranch xen-unstable
+job test-amd64-i386-qemut-rhel6hvm-intel
+testid redhat-install
+
+Tree: linux git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  a2d9a6fa1fcd2dfcfa9d1d34998156f9399a3eb2
+  Bug not present: 83fa6552cea112a900ec7891f8c170d022fe7e20
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/126384/
+
+
+  commit a2d9a6fa1fcd2dfcfa9d1d34998156f9399a3eb2
+  Author: Paul Durrant <paul.durrant@citrix.com>
+  Date:   Thu Aug 9 10:59:41 2018 +0100
+  
+      tools/libxenctrl: use new xenforeignmemory API to seed grant table
+      
+      A previous patch added support for priv-mapping guest resources directly
+      (rather than having to foreign-map, which requires P2M modification for
+      HVM guests).
+      
+      This patch makes use of the new API to seed the guest grant table unless
+      the underlying infrastructure (i.e. privcmd) doesn't support it, in which
+      case the old scheme is used.
+      
+      NOTE: The call to xc_dom_gnttab_hvm_seed() in hvm_build_set_params() was
+            actually unnecessary, as the grant table has already been seeded
+            by a prior call to xc_dom_gnttab_init() made by libxl__build_dom().
+      
+      Signed-off-by: Paul Durrant <paul.durrant@citrix.com>
+      Acked-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+      Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+      Acked-by: Wei Liu <wei.liu2@citrix.com>
+      Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/linux-3.18/test-amd64-i386-qemut-rhel6hvm-intel.redhat-install.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
+
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/linux-3.18/test-amd64-i386-qemut-rhel6hvm-intel.redhat-install --summary-out=tmp/126384.bisection-summary --basis-template=126042 --blessings=real,real-bisect linux-3.18 test-amd64-i386-qemut-rhel6hvm-intel redhat-install
+Searching for failure / basis pass:
+ 126270 fail [host=chardonnay1] / 126042 [host=baroque1] 125899 [host=debina0] 125658 ok.
+Failure / basis pass flights: 126270 / 125658
+(tree with no url: minios)
+(tree with no url: ovmf)
+(tree with no url: seabios)
+Tree: linux git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest 18e6ee0440a7ab853e4ca0f1403eeef1803ed970 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 3dd454c6c694409aaedd4ed075d6aeace2dd8391
+Basis pass dbba166b0e442d4d38ae0f244d32338c3e92d16f c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a e3f667bc5f51d0aa44357a64ca134cd952679c81
+Generating revisions with ./adhoc-revtuple-generator  git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git#dbba166b0e442d4d38ae0f244d32338c3e92d16f-18e6ee0440a7ab853e4ca0f1403eeef1803ed970 git://xenbits.xen.org/osstest/linux-firmware.git#c530a75c1e6a472b0eb9558310b518f0dfcd8860-c530a75c1e6a472b0eb9558310b518f0dfcd8860 git://xenbits.xen.org/qemu-xen-traditional.git#c8ea0457495342c417c3dc033bba25148b279f60-c8ea0457495342c417c3dc033bba25148b279f60 git://xenbits.xen.org/qemu-xen.git#43139135a8938de44f66333831d3a8655d07663a-4f080070a9809bde857851e68a3aeff0c4b9b6a6 git://xenbits.xen.org/xen.git#e3f667bc5f51d0aa44357a64ca134cd952679c81-3dd454c6c694409aaedd4ed075d6aeace2dd8391
+adhoc-revtuple-generator: tree discontiguous: qemu-xen
+Loaded 2002 nodes in revision graph
+Searching for test results:
+ 125649 [host=fiano1]
+ 125658 pass dbba166b0e442d4d38ae0f244d32338c3e92d16f c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a e3f667bc5f51d0aa44357a64ca134cd952679c81
+ 125899 [host=debina0]
+ 126042 [host=baroque1]
+ 126189 fail 18e6ee0440a7ab853e4ca0f1403eeef1803ed970 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 3dd454c6c694409aaedd4ed075d6aeace2dd8391
+ 126341 pass dbba166b0e442d4d38ae0f244d32338c3e92d16f c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a e3f667bc5f51d0aa44357a64ca134cd952679c81
+ 126348 pass 15165b72aa41f623e1519e03e5e1de9ee92cad73 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 4b60c40659b34b6577a6bc91eb4115458a0e425f
+ 126351 pass 30a1af4f5ab1d457afade268298f9f9f3943a2dc c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 4b60c40659b34b6577a6bc91eb4115458a0e425f
+ 126359 pass 830f9674e76d08d04585e53fc200ae8af99966e7 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 83fa6552cea112a900ec7891f8c170d022fe7e20
+ 126344 fail 18e6ee0440a7ab853e4ca0f1403eeef1803ed970 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 3dd454c6c694409aaedd4ed075d6aeace2dd8391
+ 126270 fail 18e6ee0440a7ab853e4ca0f1403eeef1803ed970 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 3dd454c6c694409aaedd4ed075d6aeace2dd8391
+ 126354 fail 830f9674e76d08d04585e53fc200ae8af99966e7 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a b76ec3946bf6caca2c3950b857c008bc8db6723f
+ 126356 pass f42178c0f2f09d6e87b0a35dff3c8484eeaaa197 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 4b60c40659b34b6577a6bc91eb4115458a0e425f
+ 126363 fail 830f9674e76d08d04585e53fc200ae8af99966e7 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 2a8a8e99feb950504559196521bc9fd63ed3a962
+ 126366 fail 830f9674e76d08d04585e53fc200ae8af99966e7 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 2a3b34ec47817048ab59586855cf0709fc77487e
+ 126368 fail 830f9674e76d08d04585e53fc200ae8af99966e7 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a a2d9a6fa1fcd2dfcfa9d1d34998156f9399a3eb2
+ 126372 pass 830f9674e76d08d04585e53fc200ae8af99966e7 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 83fa6552cea112a900ec7891f8c170d022fe7e20
+ 126379 fail 830f9674e76d08d04585e53fc200ae8af99966e7 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a a2d9a6fa1fcd2dfcfa9d1d34998156f9399a3eb2
+ 126381 pass 830f9674e76d08d04585e53fc200ae8af99966e7 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 83fa6552cea112a900ec7891f8c170d022fe7e20
+ 126384 fail 830f9674e76d08d04585e53fc200ae8af99966e7 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a a2d9a6fa1fcd2dfcfa9d1d34998156f9399a3eb2
+Searching for interesting versions
+ Result found: flight 125658 (pass), for basis pass
+ Result found: flight 126189 (fail), for basis failure
+ Repro found: flight 126341 (pass), for basis pass
+ Repro found: flight 126344 (fail), for basis failure
+ 0 revisions at 830f9674e76d08d04585e53fc200ae8af99966e7 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 43139135a8938de44f66333831d3a8655d07663a 83fa6552cea112a900ec7891f8c170d022fe7e20
+No revisions left to test, checking graph state.
+ Result found: flight 126359 (pass), for last pass
+ Result found: flight 126368 (fail), for first failure
+ Repro found: flight 126372 (pass), for last pass
+ Repro found: flight 126379 (fail), for first failure
+ Repro found: flight 126381 (pass), for last pass
+ Repro found: flight 126384 (fail), for first failure
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  a2d9a6fa1fcd2dfcfa9d1d34998156f9399a3eb2
+  Bug not present: 83fa6552cea112a900ec7891f8c170d022fe7e20
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/126384/
+
+
+  commit a2d9a6fa1fcd2dfcfa9d1d34998156f9399a3eb2
+  Author: Paul Durrant <paul.durrant@citrix.com>
+  Date:   Thu Aug 9 10:59:41 2018 +0100
+  
+      tools/libxenctrl: use new xenforeignmemory API to seed grant table
+      
+      A previous patch added support for priv-mapping guest resources directly
+      (rather than having to foreign-map, which requires P2M modification for
+      HVM guests).
+      
+      This patch makes use of the new API to seed the guest grant table unless
+      the underlying infrastructure (i.e. privcmd) doesn't support it, in which
+      case the old scheme is used.
+      
+      NOTE: The call to xc_dom_gnttab_hvm_seed() in hvm_build_set_params() was
+            actually unnecessary, as the grant table has already been seeded
+            by a prior call to xc_dom_gnttab_init() made by libxl__build_dom().
+      
+      Signed-off-by: Paul Durrant <paul.durrant@citrix.com>
+      Acked-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+      Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+      Acked-by: Wei Liu <wei.liu2@citrix.com>
+      Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+pnmtopng: 155 colors found
+Revision graph left in /home/logs/results/bisect/linux-3.18/test-amd64-i386-qemut-rhel6hvm-intel.redhat-install.{dot,ps,png,html,svg}.
+----------------------------------------
+126384: tolerable ALL FAIL
+
+flight 126384 linux-3.18 real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/126384/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ test-amd64-i386-qemut-rhel6hvm-intel 10 redhat-install  fail baseline untested
+
+
+jobs:
+ test-amd64-i386-qemut-rhel6hvm-intel                         fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+
+--===============4365093843241830815==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4365093843241830815==--
