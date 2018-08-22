@@ -1,14 +1,18 @@
 From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v3 00/25] dom0less step1: boot multiple
- domains from device tree
-Date: Wed, 22 Aug 2018 16:44:02 +0100
-Message-ID: <507761d1-529f-e245-f982-48e18968987d@arm.com>
-References: <alpine.DEB.2.10.1807311623060.5781@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH 00/15] xen/arm: Bunch of clean-up/improvement
+Date: Wed, 22 Aug 2018 16:45:47 +0100
+Message-ID: <ebf3ab0e-fb4e-8518-583d-c2cc5059014d@arm.com>
+References: <20180716172712.20294-1-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1807311623060.5781@sstabellini-ThinkPad-X260>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=cicq=lf=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1fsVKP-0008DX-W0
+ for xen-devel@lists.xenproject.org; Wed, 22 Aug 2018 15:45:50 +0000
+In-Reply-To: <20180716172712.20294-1-julien.grall@arm.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -18,18 +22,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: andrii_anisov@epam.com, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgU3RlZmFubywKCk9uIDAxLzA4LzE4IDAwOjI3LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6
-Cj4gICAgICAgIHhlbi9hcm06IG1vdmUgYSBmZXcgRFQgcmVsYXRlZCBkZWZpbmVzIHRvIHB1Ymxp
-Yy9kZXZpY2VfdHJlZV9kZWZzLmgKPiAgICAgICAgeGVuL2FybTogZG8gbm90IHBhc3MgZHRfaG9z
-dCB0byBtYWtlX21lbW9yeV9ub2RlIGFuZCBtYWtlX2h5cGVydmlzb3Jfbm9kZQo+ICAgICAgICB4
-ZW4vYXJtOiBtb3ZlIGV2dGNobl9hbGxvY2F0ZSBjYWxsIG91dCBvZiBtYWtlX2h5cGVydmlzb3Jf
-bm9kZQo+ICAgICAgICB4ZW4vYXJtOiByZW5hbWUgYWNwaV9tYWtlX2Nob3Nlbl9ub2RlIHRvIG1h
-a2VfY2hvc2VuX25vZGUKCkkgaGF2ZSBjb21taXR0ZWQgdGhvc2UgNCBwYXRjaGVzLiAyMSB0byBn
-byA7KQoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGksCgpPbiAxNi8wNy8xOCAxODoyNiwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEp1bGllbiBHcmFs
+bCAoMTUpOgo+ICAgIHhlbi9hcm06IGNwcmVnczogQWxsb3cgSFNSX0NQUkVHKiB0byByZWNlaXZl
+IG1vcmUgdGhhbiAxIHBhcmFtZXRlcgo+ICAgIHhlbi9hcm06IGNwcmVnczogRml4IHR5cG8gaW4g
+dGhlIGRvY3VtZW50YXRpb24gb2YgVFRCQ1IKPiAgICB4ZW4vYXJtOiBwMm06IFJlZHVjZSB0aGUg
+bG9ja2luZyBzZWN0aW9uIGluIGdldF9wYWdlX2Zyb21fZ3ZhCj4gICAgeGVuL2FybTogcDJtOiBM
+aW1pdCBjYWxsIHRvIG1lbSBhY2Nlc3MgY29kZSB1c2UgaW4gZ2V0X3BhZ2VfZnJvbV9ndmEKPiAg
+ICB4ZW4vYXJtOiBSZXdvcmsgbHBhZV9tYXBwaW5nCj4gICAgeGVuL2FybTogUmV3b3JrIGxwYWVf
+dGFibGUKPiAgICB4ZW4vYXJtOiBSZW5hbWUgbHBhZV92YWxpZCB0byBscGFlX2lzX3ZhbGlkCj4g
+ICAgeGVuL2FybTogZ3Vlc3Rfd2FsazogVXNlIGxwYWVfaXNfbWFwcGluZyB0byBzaW1wbGlmeSB0
+aGUgY29kZQo+ICAgIHhlbi9hcm06IHAybTogUmVuYW1lIHJldCB0byBtZm4gaW4gcDJtX2xvb2t1
+cAo+ICAgIHhlbi9hcm06IHAybTogSW50cm9kdWNlIGEgbmV3IHZhcmlhYmxlIHJlbW92aW5nX21h
+cHBpbmcgaW4KPiAgICAgIF9fcDJtX3NldF9lbnRyeQpJIGhhdmUgY29tbWl0dGVkIHRob3NlIDEw
+IHBhdGNoZXMuIFRoZSByZXN0IHJlcXVpcmVzIHNvbWUgcmV3b3JrIGFuZCAKdGhlcmVmb3JlIGEg
+cmVzcGluLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
