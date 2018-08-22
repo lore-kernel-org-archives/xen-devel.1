@@ -1,23 +1,15 @@
-From: Valentin Vidic <Valentin.Vidic@CARNet.hr>
-Subject: Re: [Xen-users] Xen shutdown fails to release DRBD
- device
-Date: Wed, 22 Aug 2018 17:39:28 +0200
-Message-ID: <20180822153928.GE3534@gavran.carpriv.carnet.hr>
-References: <20180822132424.GB3534@gavran.carpriv.carnet.hr>
- <20180822133420.osvdkjonaxwtd3pq@mac>
- <20180822134251.GC3534@gavran.carpriv.carnet.hr>
- <20180822135546.GD3534@gavran.carpriv.carnet.hr>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v3 00/25] dom0less step1: boot multiple
+ domains from device tree
+Date: Wed, 22 Aug 2018 16:44:02 +0100
+Message-ID: <507761d1-529f-e245-f982-48e18968987d@arm.com>
+References: <alpine.DEB.2.10.1807311623060.5781@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=e71x=lf=carnet.hr=valentin.vidic@srs-us1.protection.inumbo.net>)
- id 1fsVEN-0006wG-FP
- for xen-devel@lists.xenproject.org; Wed, 22 Aug 2018 15:39:35 +0000
-Content-Disposition: inline
-In-Reply-To: <20180822135546.GD3534@gavran.carpriv.carnet.hr>
+In-Reply-To: <alpine.DEB.2.10.1807311623060.5781@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,40 +18,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, xen-users@lists.xenproject.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: andrii_anisov@epam.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBBdWcgMjIsIDIwMTggYXQgMDM6NTU6NDZQTSArMDIwMCwgVmFsZW50aW4gVmlkaWMg
-d3JvdGU6Cj4gRFJCRCBlbmQgZm9yIHRoaXMgc2VlbXMgcmF0aGVyIHNpbXBsZSwgaXQgb25seSBj
-aGVja3MgaWYgdGhlCj4gZGV2aWNlLT5vcGVuX2NudCBpcyB6ZXJvLiBTbyBpdCB3b3VsZCBzZWVt
-IGxpa2UgZHJiZF9yZWxlYXNlCj4gd2FzIG5vdCBjYWxsZWQgeWV0IHdoZW4gdGhlIGJsb2NrLWRy
-YmQgc2NyaXB0IGlzIHJ1bj8KPiAKPiAKPiBzdGF0aWMgZW51bSBkcmJkX3N0YXRlX3J2Cj4gaXNf
-dmFsaWRfc3RhdGUoc3RydWN0IGRyYmRfZGV2aWNlICpkZXZpY2UsIHVuaW9uIGRyYmRfc3RhdGUg
-bnMpCj4gewo+IC4uLgo+ICAgICAgICAgZWxzZSBpZiAobnMucm9sZSA9PSBSX1NFQ09OREFSWSAm
-JiBkZXZpY2UtPm9wZW5fY250KQo+ICAgICAgICAgICAgICAgICBydiA9IFNTX0RFVklDRV9JTl9V
-U0U7Cj4gLi4uCj4gfQo+IAo+IHN0YXRpYyB2b2lkIGRyYmRfcmVsZWFzZShzdHJ1Y3QgZ2VuZGlz
-ayAqZ2QsIGZtb2RlX3QgbW9kZSkKPiB7Cj4gICAgICAgICBzdHJ1Y3QgZHJiZF9kZXZpY2UgKmRl
-dmljZSA9IGdkLT5wcml2YXRlX2RhdGE7Cj4gICAgICAgICBtdXRleF9sb2NrKCZkcmJkX21haW5f
-bXV0ZXgpOwo+ICAgICAgICAgZGV2aWNlLT5vcGVuX2NudC0tOwo+ICAgICAgICAgbXV0ZXhfdW5s
-b2NrKCZkcmJkX21haW5fbXV0ZXgpOwo+IH0KCk9uIHRoZSBYZW4gc2lkZSBpdCBzZWVtcyB0aGF0
-IFhlbmJ1c1N0YXRlQ2xvc2VkIGV2ZW50IGlzIHNlbnQKdG8geGVuYnVzIHRvIHJ1biB0aGUgYmxv
-Y2stZHJiZCBzY3JpcHQuICBIb3dldmVyIHRoZSBjYWxsIHRvCnhlbl9ibGtpZl9kaXNjb25uZWN0
-IGluIHRoZSBsaW5lIGJlZm9yZSB0aGF0IGNhbiBmYWlsIHdpdGggLUVCVVNZCmlmIHRoZXJlIGlz
-IHN0aWxsIHNvbWUgaW4tZmxpZ2h0IElPIGZvciB0aGUgZGV2aWNlLiAgQ291bGQgaXQgYmUKdGhh
-dCBhIGxvdCBvZiBJTyBkdXJpbmcgc2h1dGRvd24gaXMgaG9sZGluZyB0aGUgRFJCRCBkZXZpY2Ug
-b3Blbgp3aGlsZSB0aGUgYmxvY2stZHJiZCBzY3JpcHQgaGFzIGFscmVhZHkgc3RhcnRlZCBydW5u
-aW5nPwoKLyoKICogQ2FsbGJhY2sgcmVjZWl2ZWQgd2hlbiB0aGUgZnJvbnRlbmQncyBzdGF0ZSBj
-aGFuZ2VzLgogKi8Kc3RhdGljIHZvaWQgZnJvbnRlbmRfY2hhbmdlZChzdHJ1Y3QgeGVuYnVzX2Rl
-dmljZSAqZGV2LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIGVudW0geGVuYnVzX3N0YXRl
-IGZyb250ZW5kX3N0YXRlKQp7Ci4uLgogICAgICAgIGNhc2UgWGVuYnVzU3RhdGVDbG9zZWQ6CiAg
-ICAgICAgICAgICAgICB4ZW5fYmxraWZfZGlzY29ubmVjdChiZS0+YmxraWYpOwogICAgICAgICAg
-ICAgICAgeGVuYnVzX3N3aXRjaF9zdGF0ZShkZXYsIFhlbmJ1c1N0YXRlQ2xvc2VkKTsKICAgICAg
-ICAgICAgICAgIGlmICh4ZW5idXNfZGV2X2lzX29ubGluZShkZXYpKQogICAgICAgICAgICAgICAg
-ICAgICAgICBicmVhazsKICAgICAgICAgICAgICAgIC8qIGZhbGwgdGhyb3VnaCBpZiBub3Qgb25s
-aW5lICovCi4uLgp9CgpNYXliZSB0aGUgWGVuYnVzU3RhdGVDbG9zZWQgZXZlbnQgc2hvdWxkIG9u
-bHkgYmUgc2VuZCB3aGVuIHRoZQpkZXZpY2UgaXMgY2xvc2VkIGluIHhlbl9ibGtpZl9mcmVlIG9y
-IHNvbWUgb3RoZXIgcGxhY2U/CgotLSAKVmFsZW50aW4KCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+SGkgU3RlZmFubywKCk9uIDAxLzA4LzE4IDAwOjI3LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6
+Cj4gICAgICAgIHhlbi9hcm06IG1vdmUgYSBmZXcgRFQgcmVsYXRlZCBkZWZpbmVzIHRvIHB1Ymxp
+Yy9kZXZpY2VfdHJlZV9kZWZzLmgKPiAgICAgICAgeGVuL2FybTogZG8gbm90IHBhc3MgZHRfaG9z
+dCB0byBtYWtlX21lbW9yeV9ub2RlIGFuZCBtYWtlX2h5cGVydmlzb3Jfbm9kZQo+ICAgICAgICB4
+ZW4vYXJtOiBtb3ZlIGV2dGNobl9hbGxvY2F0ZSBjYWxsIG91dCBvZiBtYWtlX2h5cGVydmlzb3Jf
+bm9kZQo+ICAgICAgICB4ZW4vYXJtOiByZW5hbWUgYWNwaV9tYWtlX2Nob3Nlbl9ub2RlIHRvIG1h
+a2VfY2hvc2VuX25vZGUKCkkgaGF2ZSBjb21taXR0ZWQgdGhvc2UgNCBwYXRjaGVzLiAyMSB0byBn
+byA7KQoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
