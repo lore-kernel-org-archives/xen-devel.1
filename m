@@ -1,14 +1,15 @@
 From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v1 4/6] optee: add OP-TEE mediator
-Date: Wed, 22 Aug 2018 18:28:47 +0100
-Message-ID: <15ce9921-3541-a89a-8257-1bc4a2c83386@arm.com>
+Subject: Re: [PATCH v1 5/6] libxl: create DTS node for OP-TEE if
+ it is enabled
+Date: Wed, 22 Aug 2018 18:32:55 +0100
+Message-ID: <ddaac512-921f-3cf7-f715-3870d53025d1@arm.com>
 References: <1534947094-9974-1-git-send-email-volodymyr_babchuk@epam.com>
- <1534947094-9974-5-git-send-email-volodymyr_babchuk@epam.com>
+ <1534947094-9974-6-git-send-email-volodymyr_babchuk@epam.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1534947094-9974-5-git-send-email-volodymyr_babchuk@epam.com>
+In-Reply-To: <1534947094-9974-6-git-send-email-volodymyr_babchuk@epam.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -18,42 +19,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Volodymyr Babchuk <volodymyr_babchuk@epam.com>, xen-devel@lists.xen.org, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, Jens Wiklander <jens.wiklander@linaro.org>
+To: Volodymyr Babchuk <volodymyr_babchuk@epam.com>, xen-devel@lists.xen.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
 Cc: tee-dev@lists.linaro.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpQbGVhc2Ugb25seSBDQyByZWxldmFudCBwZW9wbGUgdG8gdGhlIHBhdGNoZXMuIFRoaXMg
-Y291bGQgYmUgZG9uZSBlYXNpbHkgCnVzaW5nIHRoZSBuZXcgc2NyaXB0IGFkZF9tYWludGFpbmVy
-cy5wbC4KCk9uIDIyLzA4LzE4IDE1OjExLCBWb2xvZHlteXIgQmFiY2h1ayB3cm90ZToKPiBBZGQg
-T1AtVEVFIG1lZGlhdG9yLCBzbyBndWVzdHMgY2FuIGFjY2VzcyBPUC1URUUgc2VydmljZXMuCj4g
-Cj4gT1AtVEVFIG1lZGlhdG9yIHN1cHBvcnQgYWRkcmVzcyB0cmFuc2xhdGlvbiBmb3IgRG9tVXMu
-Cj4gSXQgdHJhY2tzIGV4ZWN1dGlvbiBvZiBTVEQgY2FsbHMsIGNvcnJlY3RseSBoYW5kbGVzIG1l
-bW9yeS1yZWxhdGVkIFJQQwo+IHJlcXVlc3RzLCB0cmFja3MgYnVmZmVyIGFsbG9jYXRlZCBmb3Ig
-UlBDcy4KPiAKPiBXaXRoIHRoaXMgcGF0Y2ggT1AtVEVFIHN1Y2Vzc2Z1bGx5IHBhc3NlcyBvd24g
-dGVzdHMsIHdoaWxlIGNsaWVudCBpcwo+IHJ1bm5pbmcgaW4gRG9tVS4KPiAKPiBTaWduZWQtb2Zm
-LWJ5OiBWb2xvZHlteXIgQmFiY2h1ayA8dm9sb2R5bXlyX2JhYmNodWtAZXBhbS5jb20+Cj4gLS0t
-Cj4gCj4gICBDaGFuZ2VzIGZyb20gIlJGQyI6Cj4gICAtIFJlbW92ZWQgc3BlY2lhbCBjYXNlIGZv
-ciBEb20wL0h3RE9NCj4gICAtIE5vIG1vcmUgc3VwcG9ydCBmb3IgcGxhaW4gT1AtVEVFIChvbmx5
-IE9QLVRFRSB3aXRoIHZpcnR1YWxpemF0aW9uCj4gICAgIGNvbmZpZyBlbmFibGVkIGlzIHN1cHBv
-cnRlZCkKPiAgIC0gTXVsdGlwbGUgZG9tYWlucyBpcyBub3cgc3VwcG9ydGVkCj4gICAtIFBhZ2Vz
-IHRoYXQgYXJlIHNoYXJlZCBiZXR3ZWVuIE9QLVRFRSBhbmQgZG9tYWluIGFyZSBub3cgcGlubmVk
-Cj4gICAtIFJlbmFtZWQgQ09ORklHX0FSTV9PUFRFRSB0byBDT05GSUdfT1BURUUKPiAgIC0gQ29t
-bWFuZCBidWZmZXJzIGZyb20gZG9tYWluIGFyZSBub3cgc2hhZG93ZWQgYnkgWEVOCj4gICAtIE1l
-ZGlhdG9yIG5vdyBmaWx0ZXJzIG91dCB1bmtub3duIGNhcGFiaWxpdGllcyBhbmQgcmVxdWVzdHMK
-PiAgIC0gY2FsbCBjb250ZXh0cywgc2hhcmVkIG1lbW9yeSBvYmplY3Qgbm93IHN0b3JlZCBwZXIt
-ZG9tYWluCj4gCj4gICB4ZW4vYXJjaC9hcm0vdGVlL0tjb25maWcgICAgICAgICAgICB8ICAgNCAr
-Cj4gICB4ZW4vYXJjaC9hcm0vdGVlL01ha2VmaWxlICAgICAgICAgICB8ICAgMSArCj4gICB4ZW4v
-YXJjaC9hcm0vdGVlL29wdGVlLmMgICAgICAgICAgICB8IDk3MiArKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysKClRoaXMgcGF0Y2ggaXMgZmFyIHRvIGJpZyB0byBnZXQgYSBwcm9w
-ZXIgcmV2aWV3IHdpdGggdW5kZXJzdGFuZGluZyBvZiAKdGhlIGNvZGUuIENhbiB5b3Ugc3BsaXQg
-aXQgaW4gc21hbGxlciBvbmVzIHdpdGggYXBwcm9wcmlhdGUgY29tbWl0IG1lc3NhZ2U/CgogRnJv
-bSBhIHF1aWNrIGxvb2sgYXQgaXQsIEkgd291bGQgbGlrZSB0byB1bmRlcnN0YW5kIGhvdyB0aGUg
-bWVtb3J5IAphbGxvY2F0ZWQgaW4gWGVuIGlzIGJvdW5kZWQgZm9yIGEgZ2l2ZW4gZ3Vlc3Q/IFNh
-bWUgcXVlc3Rpb24gZm9yIHRoZSB0aW1lLgoKSSBhbSBpbnRlcmVzdGVkIGluIGEgbm9ybWFsIGNh
-c2UgYnV0IGFsc28gaW4gdGhlIGNhc2Ugd2hlcmUgc29tZW9uZSAKbWFsaWNpb3VzIGlzIHVzaW5n
-IHRoYXQgQVBJLiBIb3cgbXVjaCBkYW1hZ2UgY2FuIGl0IGRvIHRvIHRoZSBoeXBlcnZpc29yPwoK
-SSB3aWxsIGdpdmUgYSBwcm9wZXIgbG9vayB3aGVuIGl0IGlzIHNwbGl0LgoKQ2hlZXJzLAoKLS0g
-Ckp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+SGksCgpPbiAyMi8wOC8xOCAxNToxMSwgVm9sb2R5bXlyIEJhYmNodWsgd3JvdGU6Cj4gU2lnbmVk
+LW9mZi1ieTogVm9sb2R5bXlyIEJhYmNodWsgPHZvbG9keW15cl9iYWJjaHVrQGVwYW0uY29tPgoK
+SSBhbSBhIGJpdCBjb25mdXNlZC4gVGhlIERUIGlzIG9ubHkgaGVyZSB0byB0ZWxsIHRoZSBndWVz
+dCBPUC1URUUgaXMgCnByZXNlbnQuIEJ1dCBJIGRvbid0IHNlZSBhbnl0aGluZyB0byB0ZWxsIHRo
+ZSBoeXBlcnZpc29yIHRoZSBndWVzdCB3aWxsIAp1c2UgT1AtVEVFLgoKQ2hlZXJzLAoKLS0gCkp1
+bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
