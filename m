@@ -1,18 +1,18 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+From: Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>
 Subject: Re: [PATCH] xen/gntdev: fix up blockable calls to
  mn_invl_range_start
-Date: Thu, 23 Aug 2018 09:46:40 -0400
-Message-ID: <565d0ef0-4723-bd1b-95de-cb9aba50fe20__32993.6247122989$1535031848$gmane$org@oracle.com>
+Date: Thu, 23 Aug 2018 22:44:07 +0900
+Message-ID: <07c7ead4-334d-9b25-f588-25e9b46bbea0__39010.3009449833$1535031882$gmane$org@i-love.sakura.ne.jp>
 References: <20180823120707.10998-1-mhocko@kernel.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wcce=lg=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1fspvR-0006uY-5z
- for xen-devel@lists.xenproject.org; Thu, 23 Aug 2018 13:45:25 +0000
+ <srs0=sjxu=lg=i-love.sakura.ne.jp=penguin-kernel@srs-us1.protection.inumbo.net>)
+ id 1fspuT-0006rd-5Q
+ for xen-devel@lists.xenproject.org; Thu, 23 Aug 2018 13:44:25 +0000
 In-Reply-To: <20180823120707.10998-1-mhocko@kernel.org>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -24,27 +24,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Michal Hocko <mhocko@kernel.org>, Andrew Morton <akpm@linux-foundation.org>
-Cc: Juergen Gross <jgross@suse.com>, Michal Hocko <mhocko@suse.com>, Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>, LKML <linux-kernel@vger.kernel.org>, linux-mm@kvack.org, xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Michal Hocko <mhocko@suse.com>, LKML <linux-kernel@vger.kernel.org>, linux-mm@kvack.org, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMjMvMjAxOCAwODowNyBBTSwgTWljaGFsIEhvY2tvIHdyb3RlOgo+IEZyb206IE1pY2hh
-bCBIb2NrbyA8bWhvY2tvQHN1c2UuY29tPgo+Cj4gOTMwNjVhYzc1M2U0ICgibW0sIG9vbTogZGlz
-dGluZ3Vpc2ggYmxvY2thYmxlIG1vZGUgZm9yIG1tdSBub3RpZmllcnMiKQo+IGhhcyBpbnRyb2R1
-Y2VkIGJsb2NrYWJsZSBwYXJhbWV0ZXIgdG8gYWxsIG1tdV9ub3RpZmllcnMgYW5kIHRoZSBub3Rp
-Zmllcgo+IGhhcyB0byBiYWNrIG9mZiB3aGVuIGNhbGxlZCBpbiAhYmxvY2thYmxlIGNhc2UgYW5k
-IGl0IGNvdWxkIGJsb2NrIGRvd24KPiB0aGUgcm9hZC4KPgo+IFRoZSBhYm92ZSBjb21taXQgaW1w
-bGVtZW50ZWQgdGhhdCBmb3IgbW5faW52bF9yYW5nZV9zdGFydCBidXQgYm90aAo+IGluX3Jhbmdl
-IGNoZWNrcyBhcmUgZG9uZSB1bmNvbmRpdGlvbmFsbHkgcmVnYXJkbGVzcyBvZiB0aGUgYmxvY2th
-YmxlCj4gbW9kZSBhbmQgYXMgc3VjaCB0aGV5IHdvdWxkIGZhaWwgYWxsIHRoZSB0aW1lIGZvciBy
-ZWd1bGFyIGNhbGxzLgo+IEZpeCB0aGlzIGJ5IGNoZWNraW5nIGJsb2NrYWJsZSBwYXJhbWV0ZXIg
-YXMgd2VsbC4KPgo+IE9uY2Ugd2UgYXJlIHRoZXJlIHdlIGNhbiByZW1vdmUgdGhlIHN0YWxlIFRP
-RE8uIFRoZSBsb2NrIGhhcyB0byBiZQo+IHNsZWVwYWJsZSBiZWNhdXNlIHdlIHdhaXQgZm9yIGNv
-bXBsZXRpb24gZG93biBpbiBnbnR0YWJfdW5tYXBfcmVmc19zeW5jLgo+Cj4gRml4ZXM6IDkzMDY1
-YWM3NTNlNCAoIm1tLCBvb206IGRpc3Rpbmd1aXNoIGJsb2NrYWJsZSBtb2RlIGZvciBtbXUgbm90
-aWZpZXJzIikKPiBDYzogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNv
-bT4KPiBDYzogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgo+IFNpZ25lZC1vZmYtYnk6
-IE1pY2hhbCBIb2NrbyA8bWhvY2tvQHN1c2UuY29tPgoKUmV2aWV3ZWQtYnk6IEJvcmlzIE9zdHJv
-dnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNlbC5jb20+CgoKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMjAxOC8wOC8yMyAyMTowNywgTWljaGFsIEhvY2tvIHdyb3RlOgo+IGRpZmYgLS1naXQgYS9k
+cml2ZXJzL3hlbi9nbnRkZXYuYyBiL2RyaXZlcnMveGVuL2dudGRldi5jCj4gaW5kZXggNTczOTBj
+NzY2NmU1Li5lN2Q4YmIxYmVlMmEgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy94ZW4vZ250ZGV2LmMK
+PiArKysgYi9kcml2ZXJzL3hlbi9nbnRkZXYuYwo+IEBAIC01MTksMjEgKzUxOSwyMCBAQCBzdGF0
+aWMgaW50IG1uX2ludmxfcmFuZ2Vfc3RhcnQoc3RydWN0IG1tdV9ub3RpZmllciAqbW4sCj4gIAlz
+dHJ1Y3QgZ250ZGV2X2dyYW50X21hcCAqbWFwOwo+ICAJaW50IHJldCA9IDA7Cj4gIAo+IC0JLyog
+VE9ETyBkbyB3ZSByZWFsbHkgbmVlZCBhIG11dGV4IGhlcmU/ICovCj4gIAlpZiAoYmxvY2thYmxl
+KQo+ICAJCW11dGV4X2xvY2soJnByaXYtPmxvY2spOwo+ICAJZWxzZSBpZiAoIW11dGV4X3RyeWxv
+Y2soJnByaXYtPmxvY2spKQo+ICAJCXJldHVybiAtRUFHQUlOOwo+ICAKPiAgCWxpc3RfZm9yX2Vh
+Y2hfZW50cnkobWFwLCAmcHJpdi0+bWFwcywgbmV4dCkgewo+IC0JCWlmIChpbl9yYW5nZShtYXAs
+IHN0YXJ0LCBlbmQpKSB7Cj4gKwkJaWYgKCFibG9ja2FibGUgJiYgaW5fcmFuZ2UobWFwLCBzdGFy
+dCwgZW5kKSkgewoKVGhpcyBzdGlsbCBsb29rcyBzdHJhbmdlLiBQcmlvciB0byA5MzA2NWFjNzUz
+ZTQsIGluX3JhbmdlKCkgdGVzdCB3YXMKaW5zaWRlIHVubWFwX2lmX2luX3JhbmdlKCkuIEJ1dCB0
+aGlzIHBhdGNoIHJlbW92ZXMgaW5fcmFuZ2UoKSB0ZXN0CmlmIGJsb2NrYWJsZSA9PSB0cnVlLiBU
+aGF0IGlzLCB1bm1hcF9pZl9pbl9yYW5nZSgpIHdpbGwgdW5jb25kaXRpb25hbGx5CnVubWFwIGlm
+IGJsb2NrYWJsZSA9PSB0cnVlLCB3aGljaCBzZWVtcyB0byBiZSBhbiB1bmV4cGVjdGVkIGNoYW5n
+ZS4KCj4gIAkJCXJldCA9IC1FQUdBSU47Cj4gIAkJCWdvdG8gb3V0X3VubG9jazsKPiAgCQl9Cj4g
+IAkJdW5tYXBfaWZfaW5fcmFuZ2UobWFwLCBzdGFydCwgZW5kKTsKPiAgCX0KCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
