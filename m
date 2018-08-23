@@ -1,18 +1,21 @@
-From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-Subject: Re: [PATCH v1 5/6] libxl: create DTS node for OP-TEE if
- it is enabled
-Date: Thu, 23 Aug 2018 17:16:08 +0300
-Message-ID: <b4fee4ac-2f15-6eb7-553a-3cfe54bc2996@epam.com>
-References: <1534947094-9974-1-git-send-email-volodymyr_babchuk@epam.com>
- <1534947094-9974-6-git-send-email-volodymyr_babchuk@epam.com>
- <ddaac512-921f-3cf7-f715-3870d53025d1@arm.com>
- <f2da47c6-1db7-9667-56c9-98bdf0fe7d5f@epam.com>
- <98c02aed-cf94-beb0-5c98-d5398c0e4532@arm.com>
+From: Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>
+Subject: Re: [PATCH] xen/gntdev: fix up blockable calls to
+ mn_invl_range_start
+Date: Thu, 23 Aug 2018 23:20:54 +0900
+Message-ID: <470950f0-a579-6c74-c5f0-bea635259176__34697.5295142785$1535033991$gmane$org@i-love.sakura.ne.jp>
+References: <20180823120707.10998-1-mhocko@kernel.org>
+ <07c7ead4-334d-9b25-f588-25e9b46bbea0@i-love.sakura.ne.jp>
+ <20180823135151.GM29735@dhcp22.suse.cz>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <98c02aed-cf94-beb0-5c98-d5398c0e4532@arm.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=sjxu=lg=i-love.sakura.ne.jp=penguin-kernel@srs-us1.protection.inumbo.net>)
+ id 1fsqTv-00033Q-O6
+ for xen-devel@lists.xenproject.org; Thu, 23 Aug 2018 14:21:03 +0000
+In-Reply-To: <20180823135151.GM29735@dhcp22.suse.cz>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,30 +25,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: tee-dev@lists.linaro.org
+To: Michal Hocko <mhocko@kernel.org>
+Cc: Juergen Gross <jgross@suse.com>, LKML <linux-kernel@vger.kernel.org>, linux-mm@kvack.org, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Andrew Morton <akpm@linux-foundation.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAyMy4wOC4xOCAxNzoxMSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpLAo+IAo+IE9u
-IDA4LzIzLzIwMTggMDM6MDMgUE0sIFZvbG9keW15ciBCYWJjaHVrIHdyb3RlOgo+PiBIaSwKPj4K
-Pj4gT24gMjIuMDguMTggMjA6MzIsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4+IEhpLAo+Pj4KPj4+
-IE9uIDIyLzA4LzE4IDE1OjExLCBWb2xvZHlteXIgQmFiY2h1ayB3cm90ZToKPj4+PiBTaWduZWQt
-b2ZmLWJ5OiBWb2xvZHlteXIgQmFiY2h1ayA8dm9sb2R5bXlyX2JhYmNodWtAZXBhbS5jb20+Cj4+
-Pgo+Pj4gSSBhbSBhIGJpdCBjb25mdXNlZC4gVGhlIERUIGlzIG9ubHkgaGVyZSB0byB0ZWxsIHRo
-ZSBndWVzdCBPUC1URUUgaXMgCj4+PiBwcmVzZW50LiBCdXQgSSBkb24ndCBzZWUgYW55dGhpbmcg
-dG8gdGVsbCB0aGUgaHlwZXJ2aXNvciB0aGUgZ3Vlc3QgCj4+PiB3aWxsIHVzZSBPUC1URUUuCj4+
-Cj4+IFllcywgdGhpcyBpcyB3aGF0IEkgd2FudGVkIHRvIGRpc2N1c3MuIEkgaGFkIGEgZmVsbGlu
-ZyB0aGF0IGl0IGlzIG5vdCAKPj4gcXVpdGUgcmlnaHQuIEkgdGhpbmsgeW91ciBpZGVhIHdpdGgg
-RE9NQ1RMIGlzIGJldHRlci4gSSdsbCByZXdvcmsgdGhpcyAKPj4gcGFydCBpbiB0aGXCoCBmb2xs
-b3dpbmcgd2F5Ogo+Pgo+PiBpZiB0aGVyZSBpcyAib3B0ZWU9MSIgaW4gYSBjb25maWcgZmlsZSwg
-dGhlbiBsaWJ4bCB3aWxsIGNyZWF0ZSBEVCAKPj4gZW50cnkgYW5kIGFzayBoeXBlcnZpc29yIHRv
-IGVuYWJsZSBhY2Nlc3MgdG8gVEVFIGZvciB0aGlzIGRvbWFpbi4KPiAKPiBZb3UgcHJvYmFibHkg
-YWxzbyB3YW50IHRvIG1ha2UgdGhlIHZhcmlhYmxlIFRFRSBhZ25vc3RpYyBieSByZW5hbWluZyB0
-byAKPiAidGVlIi4KPiAKPiBJbiB0aGUgZnV0dXJlLCB0aGUgdG9vbHN0YWNrIHdvdWxkIG5lZWQg
-dG8ga25vdyB3aGljaCBURUUgaXMgaW4gdXNlZCBpbiAKPiB0aGUgaHlwZXJ2aXNvci4gRm9yIG5v
-dywgaXQgaXMgZmluZSB0byBhc3N1bWUgdGhhdCBpdCBpcyBPUC1URUUuCgpZZXMsIHNvdW5kcyBn
-b29kLiBXaWxsIGRvIGluIHRoaXMgd2F5LgpUaGFuayB5b3UgZm9yIHJldmlldyBhbmQgc3VnZ2Vz
-dGlvbi4KCi0tIApWb2xvZHlteXIgQmFiY2h1awoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+T24gMjAxOC8wOC8yMyAyMjo1MSwgTWljaGFsIEhvY2tvIHdyb3RlOgo+IFlvdSBhcmUgcmlnaHQu
+IEkgY29tcGxldGVseSBmb3Jnb3QgSSd2ZSByZW1vdmVkIGluX3JhbmdlIHRoZXJlLiBEb2VzCj4g
+dGhpcyBsb29rIGFueSBiZXR0ZXI/Cj4gCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMveGVuL2dudGRl
+di5jIGIvZHJpdmVycy94ZW4vZ250ZGV2LmMKPiBpbmRleCBlN2Q4YmIxYmVlMmEuLjMwZjgxMDA0
+ZWE2MyAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3hlbi9nbnRkZXYuYwo+ICsrKyBiL2RyaXZlcnMv
+eGVuL2dudGRldi5jCj4gQEAgLTUyNSwxNCArNTI1LDIwIEBAIHN0YXRpYyBpbnQgbW5faW52bF9y
+YW5nZV9zdGFydChzdHJ1Y3QgbW11X25vdGlmaWVyICptbiwKPiAgCQlyZXR1cm4gLUVBR0FJTjsK
+PiAgCj4gIAlsaXN0X2Zvcl9lYWNoX2VudHJ5KG1hcCwgJnByaXYtPm1hcHMsIG5leHQpIHsKPiAt
+CQlpZiAoIWJsb2NrYWJsZSAmJiBpbl9yYW5nZShtYXAsIHN0YXJ0LCBlbmQpKSB7Cj4gKwkJaWYg
+KGluX3JhbmdlKG1hcCwgc3RhcnQsIGVuZCkpIHsKPiArCQkJaWYgKGJsb2NrYWJsZSkKPiArCQkJ
+CWNvbnRpbnVlOwo+ICsKPiAgCQkJcmV0ID0gLUVBR0FJTjsKPiAgCQkJZ290byBvdXRfdW5sb2Nr
+Owo+ICAJCX0KClRoaXMgc3RpbGwgbG9va3Mgc3RyYW5nZS4gaW5fcmFuZ2UoKSByZXR1cm5zIGZh
+bHNlIGlmIG1hcC0+dm1hID09IE5VTEwuCkJ1dCB1bm1hcF9pZl9pbl9yYW5nZSgpIHVuY29uZGl0
+aW9uYWxseSBkZXJlZmVyZW5jZXMgbWFwLT52bWEtPnZtX1tzdGFydHxlbmRdIC4KU3VnZ2VzdGlv
+biBmcm9tIEJvcmlzIGxvb2tzIGJldHRlci4KCj4gIAkJdW5tYXBfaWZfaW5fcmFuZ2UobWFwLCBz
+dGFydCwgZW5kKTsKPiAgCX0KPiAgCWxpc3RfZm9yX2VhY2hfZW50cnkobWFwLCAmcHJpdi0+ZnJl
+ZWFibGVfbWFwcywgbmV4dCkgewo+IC0JCWlmICghYmxvY2thYmxlICYmIGluX3JhbmdlKG1hcCwg
+c3RhcnQsIGVuZCkpIHsKPiArCQlpZiAoaW5fcmFuZ2UobWFwLCBzdGFydCwgZW5kKSkgewo+ICsJ
+CQlpZiAoYmxvY2thYmxlKQo+ICsJCQkJY29udGludWU7Cj4gKwkJCQo+ICAJCQlyZXQgPSAtRUFH
+QUlOOwo+ICAJCQlnb3RvIG91dF91bmxvY2s7Cj4gIAkJfQo+IAoKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
