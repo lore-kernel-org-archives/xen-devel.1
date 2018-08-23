@@ -1,15 +1,16 @@
 From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-Subject: Re: [PATCH v1 6/6] xsm: add tee access policy support
-Date: Thu, 23 Aug 2018 16:57:13 +0300
-Message-ID: <6165364e-f6ed-01e9-5106-b731362e6d3a@epam.com>
+Subject: Re: [PATCH v1 5/6] libxl: create DTS node for OP-TEE if
+ it is enabled
+Date: Thu, 23 Aug 2018 17:03:21 +0300
+Message-ID: <f2da47c6-1db7-9667-56c9-98bdf0fe7d5f@epam.com>
 References: <1534947094-9974-1-git-send-email-volodymyr_babchuk@epam.com>
- <1534947094-9974-7-git-send-email-volodymyr_babchuk@epam.com>
- <58a8d383-6a8f-442a-2611-0f8dfa053941@arm.com>
+ <1534947094-9974-6-git-send-email-volodymyr_babchuk@epam.com>
+ <ddaac512-921f-3cf7-f715-3870d53025d1@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <58a8d383-6a8f-442a-2611-0f8dfa053941@arm.com>
+In-Reply-To: <ddaac512-921f-3cf7-f715-3870d53025d1@arm.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -19,20 +20,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: tee-dev@lists.linaro.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSnVsaWVuLAoKT24gMjMuMDguMTggMTY6NDMsIEp1bGllbiBHcmFsbCB3cm90ZToKCj4gCj4g
-SSBkb24ndCB0aGluayB3ZSBzaG91bGQgdXNlIFhTTSB0byBlbmZvcmNlIHRoZSB1c2Ugb2YgVEVF
-LiBUaGlzIAo+IGNvbnRyYWRpY3RvcnkgdG8geW91ciBuZXh0IHBhdGNoIHdoZXJlIHlvdSBsZXQg
-dGhlIHVzZXIgY29uZmlndXJlIE9QLVRFRSAKPiBmb3IgYSBnaXZlbiBndWVzdC4KPiAKPiBJSE1P
-LCBYU00gc2hvdWxkIG9ubHkgYmUgdXNlZCB0byByZXN0cmljdCB1c2FnZSBvZiBjYWxscyBpbiBh
-IGZpbmUgCj4gZ3JhaW4uIEZvciBhbiBvdmVyYWxsIGNvbnRyb2wsIHRoYXQgc2hvdWxkIGJlIGdv
-IHRocm91Z2ggYSBET01DVEwgdGVsbCAKPiBYZW4gdG8gaW5pdGlhbGl6ZSBPUC1URUUgZm9yIHRo
-YXQgZG9tYWluLgoKSnVzdCB0byBiZSBzdXJlLiBZb3UgYXJlIHByb3Bvc2luZyB0byBhZGQgZmxh
-ZyAiVEVFX0VOQUJMRUQiIGZvciBhIApkb21haW4gYW5kIHNldCBpdCBkdXJpbmcgZG9tYWluIGNv
-bnN0cnVjdGlvbiwgYmFzZWQgb24gY29uZmlndXJhdGlvbiwgcmlnaHQ/CgpXaGF0IGRpZCB5b3Ug
-bWVhbiBieSAiZmluZSBncmFpbiI/CgotLSAKVm9sb2R5bXlyIEJhYmNodWsKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+SGksCgpPbiAyMi4wOC4xOCAyMDozMiwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpLAo+IAo+IE9u
+IDIyLzA4LzE4IDE1OjExLCBWb2xvZHlteXIgQmFiY2h1ayB3cm90ZToKPj4gU2lnbmVkLW9mZi1i
+eTogVm9sb2R5bXlyIEJhYmNodWsgPHZvbG9keW15cl9iYWJjaHVrQGVwYW0uY29tPgo+IAo+IEkg
+YW0gYSBiaXQgY29uZnVzZWQuIFRoZSBEVCBpcyBvbmx5IGhlcmUgdG8gdGVsbCB0aGUgZ3Vlc3Qg
+T1AtVEVFIGlzIAo+IHByZXNlbnQuIEJ1dCBJIGRvbid0IHNlZSBhbnl0aGluZyB0byB0ZWxsIHRo
+ZSBoeXBlcnZpc29yIHRoZSBndWVzdCB3aWxsIAo+IHVzZSBPUC1URUUuCgpZZXMsIHRoaXMgaXMg
+d2hhdCBJIHdhbnRlZCB0byBkaXNjdXNzLiBJIGhhZCBhIGZlbGxpbmcgdGhhdCBpdCBpcyBub3Qg
+CnF1aXRlIHJpZ2h0LiBJIHRoaW5rIHlvdXIgaWRlYSB3aXRoIERPTUNUTCBpcyBiZXR0ZXIuIEkn
+bGwgcmV3b3JrIHRoaXMgCnBhcnQgaW4gdGhlICBmb2xsb3dpbmcgd2F5OgoKaWYgdGhlcmUgaXMg
+Im9wdGVlPTEiIGluIGEgY29uZmlnIGZpbGUsIHRoZW4gbGlieGwgd2lsbCBjcmVhdGUgRFQgZW50
+cnkgCmFuZCBhc2sgaHlwZXJ2aXNvciB0byBlbmFibGUgYWNjZXNzIHRvIFRFRSBmb3IgdGhpcyBk
+b21haW4uCgotLSAKVm9sb2R5bXlyIEJhYmNodWsKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
