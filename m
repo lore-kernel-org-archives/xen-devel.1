@@ -1,22 +1,21 @@
-From: Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH v2] automation: enable building rombios with
- clang
-Date: Fri, 24 Aug 2018 10:32:24 -0500
-Message-ID: <20180824153224.ufzcfzk6xbi2nzqk@doug-macbook.localdomain>
-References: <20180824152247.9166-1-wei.liu2@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] rombios: work around clang's
+ -Waddress-of-packed-member
+Date: Fri, 24 Aug 2018 16:32:15 +0100
+Message-ID: <20180824153215.7fpmgrhrdaoe777c@citrix.com>
+References: <20180824152215.8823-1-wei.liu2@citrix.com>
+ <20180824153037.pfxqfuxy4afezc6u@doug-macbook.localdomain>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=pgyi=lh=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
- id 1ftE4Z-0007ZM-Tx
- for xen-devel@lists.xenproject.org; Fri, 24 Aug 2018 15:32:27 +0000
-Received: by mail-qk0-x241.google.com with SMTP id g197-v6so6100769qke.5
- for <xen-devel@lists.xenproject.org>; Fri, 24 Aug 2018 08:32:26 -0700 (PDT)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=n8yf=lh=citrix.com=prvs=76773b150=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1ftE4y-0007c3-Db
+ for xen-devel@lists.xenproject.org; Fri, 24 Aug 2018 15:32:52 +0000
 Content-Disposition: inline
-In-Reply-To: <20180824152247.9166-1-wei.liu2@citrix.com>
+In-Reply-To: <20180824153037.pfxqfuxy4afezc6u@doug-macbook.localdomain>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,18 +24,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org
+To: Doug Goldstein <cardoe@cardoe.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBBdWcgMjQsIDIwMTggYXQgMDQ6MjI6NDdQTSArMDEwMCwgV2VpIExpdSB3cm90ZToK
-PiBQcmV2aW91c2x5IGl0IGlzIGRpc2FibGVkIGJlY2F1c2UgdGhlIGVtYmVkZGVkIGlweGUgY2Fu
-J3QgYmUgYnVpbHQKPiB3aXRoIGNsYW5nLiBOb3cgdGhhdCBpcHhlIGlzIHNwbGl0IG91dCB3ZSBj
-YW4gdXNlIC0td2l0aC1zeXN0ZW0taXB4ZQo+IHRvIHdvcmsgYXJvdW5kIHRoZSBpc3N1ZS4KPiAK
-PiBTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+IC0tLQo+ICsg
-ICAgIyBpUFhFIGNhbm5vdCBiZSBidWlsdCB3aXRoIGNsYW5nCj4gKyAgICBjZmdhcmdzKz0oIi0t
-d2l0aC1zeXN0ZW0taXB4ZT0vdXNyL2xpYi9pcHhlL2lweGUucHhlIikKCkRpZCB3ZSBldmVyIGdl
-dCBhbGwgdGhlIGNvbnRhaW5lcnMgdXBkYXRlZCB3aXRoIHRoaXMgZmlsZSBpbiBwbGFjZT8KCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gRnJpLCBBdWcgMjQsIDIwMTggYXQgMTA6MzA6MzdBTSAtMDUwMCwgRG91ZyBHb2xkc3RlaW4g
+d3JvdGU6Cj4gT24gRnJpLCBBdWcgMjQsIDIwMTggYXQgMDQ6MjI6MTVQTSArMDEwMCwgV2VpIExp
+dSB3cm90ZToKPiA+IEJ1aWxkaW5nIHJvbWJpb3Mgd2l0aCBjbGFuZyBYWFggZmFpbHMgd2l0aDoK
+Ck9vcHMsIEkgaGF2ZSBtZWFudCB0byByZXBsYWNlIFhYWCB3aXRoIHRoZSByaWdodCB2ZXJzaW9u
+IG51bWJlci4KCldpbGwgZml4IHRoYXQgd2hpbGUgY29tbWl0dGluZy4KCj4gPiAKPiA+IHRjZ2Jp
+b3MuYzoxNTE5OjM0OiBlcnJvcjogdGFraW5nIGFkZHJlc3Mgb2YgcGFja2VkIG1lbWJlciAndScg
+b2YgY2xhc3Mgb3Igc3RydWN0dXJlICdwdXNoYWRfcmVnc190JyBtYXkgcmVzdWx0IGluIGFuIHVu
+YWxpZ25lZCBwb2ludGVyIHZhbHVlIFstV2Vycm9yLC1XYWRkcmVzcy1vZi1wYWNrZWQtbWVtYmVy
+XQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIMKucy0+
+dS5yMzIuZWR4KTsKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgXn5+fn5+fn5+fn5+fn5+Cj4gPiAKPiA+IFdvcmsgYXJvdW5kIHRoYXQgYnkgdXNpbmcg
+YW4gaW50ZXJtZWRpYXRlIHZhcmlhYmxlLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1
+IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+IAo+IFJldmlld2VkLWJ5OiBEb3VnIEdvbGRzdGVpbiA8
+Y2FyZG9lQGNhcmRvZS5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
