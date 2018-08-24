@@ -1,23 +1,14 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [linux-3.18 bisection] complete
- test-amd64-amd64-xl-shadow
-Date: Fri, 24 Aug 2018 09:35:52 +0000
-Message-ID: <867af023836249878d96196f9e1e27be@AMSPEX02CL03.citrite.net>
-References: <E1ft0R1-0000Ei-7L@osstest.test-lab.xenproject.org>
- <20180824091314.dwcnmwfjctdre2pw@citrix.com>
- <b27568f003fb447a8526a038d5d23a80@AMSPEX02CL03.citrite.net>
- <20180824093458.yqpjn2bidhkyifo2@citrix.com>
+From: sepanta s <sapanta992@gmail.com>
+Subject: Re: An issue in sharing the pages again in xen-memshare
+Date: Fri, 24 Aug 2018 09:37:19 +0430
+Message-ID: <CABaiLQ-gQBDurcA+Bt+B0pNnziiq-pJMWqpE9Tvh5bYeCQjUjA@mail.gmail.com>
+References: <CABaiLQ959qf8fDZSV5-G1utG3mZUB2WMmw+HaMjfXC0PXtkzhw@mail.gmail.com>
+ <b1a73c07-3e50-38ad-7ef5-851df86bac7b@bitdefender.com>
+ <CABaiLQ-EH0Z7UgFP4MF0oHWP5WSYR=4_FdU+r2+1BkECLdWScw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============9206639824095403289=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xfq4=lh=citrix.com=prvs=767642893=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1ft8VW-0002mn-W8
- for xen-devel@lists.xenproject.org; Fri, 24 Aug 2018 09:35:55 +0000
-In-Reply-To: <20180824093458.yqpjn2bidhkyifo2@citrix.com>
-Content-Language: en-US
+In-Reply-To: <CABaiLQ-EH0Z7UgFP4MF0oHWP5WSYR=4_FdU+r2+1BkECLdWScw@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,36 +17,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, osstest service owner <osstest-admin@xenproject.org>
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: Tamas Lengyel <tamas.lengyel@zentific.com>, "xen-devel@lists.xen.org" <Xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IFdlaSBMaXUgW21haWx0bzp3ZWku
-bGl1MkBjaXRyaXguY29tXQo+IFNlbnQ6IDI0IEF1Z3VzdCAyMDE4IDEwOjM1Cj4gVG86IFBhdWwg
-RHVycmFudCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+Cj4gQ2M6IFdlaSBMaXUgPHdlaS5saXUy
-QGNpdHJpeC5jb20+OyBvc3N0ZXN0IHNlcnZpY2Ugb3duZXIgPG9zc3Rlc3QtCj4gYWRtaW5AeGVu
-cHJvamVjdC5vcmc+OyB4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKPiBTdWJqZWN0OiBS
-ZTogW1hlbi1kZXZlbF0gW2xpbnV4LTMuMTggYmlzZWN0aW9uXSBjb21wbGV0ZSB0ZXN0LWFtZDY0
-LWFtZDY0LQo+IHhsLXNoYWRvdwo+IAo+IE9uIEZyaSwgQXVnIDI0LCAyMDE4IGF0IDEwOjMwOjI2
-QU0gKzAxMDAsIFBhdWwgRHVycmFudCB3cm90ZToKPiA+ID4gPiBGb3IgYmlzZWN0aW9uIHJldmlz
-aW9uLXR1cGxlIGdyYXBoIHNlZToKPiA+ID4gPiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5w
-cm9qZWN0Lm9yZy9vc3N0ZXN0L3Jlc3VsdHMvYmlzZWN0L2xpbnV4LQo+ID4gPiAzLjE4L3Rlc3Qt
-YW1kNjQtYW1kNjQteGwtc2hhZG93Lmd1ZXN0LXN0YXJ0Lmh0bWwKPiA+ID4gPiBSZXZpc2lvbiBJ
-RHMgaW4gZWFjaCBncmFwaCBub2RlIHJlZmVyLCByZXNwZWN0aXZlbHksIHRvIHRoZSBUcmVlcyBh
-Ym92ZS4KPiA+ID4KPiA+ID4gZG9tYWluYnVpbGRlcjogZGV0YWlsOiB2Y3B1X3g4Nl82NDogY2Fs
-bGVkCj4gPiA+IGRvbWFpbmJ1aWxkZXI6IGRldGFpbDogdmNwdV94ODZfNjQ6IGNyMzogcGZuIDB4
-MjI0NSBtZm4gMHgyNDQ4NDUKPiA+ID4geGVuZm9yZWlnbm1lbW9yeTogZXJyb3I6IGlvY3RsIGZh
-aWxlZDogSW52YWxpZCBhcmd1bWVudAo+ID4gPiB4YzogZXJyb3I6IHBhbmljOiB4Y19kb21fYm9v
-dC5jOjQyMDogeGNfZG9tX2dudHRhYl9zZWVkOiBmYWlsZWQgdG8KPiBhY3F1aXJlCj4gPiA+IGQx
-IGdyYW50IHRhYmxlIFtlcnJubz0yMl0KPiA+ID4gOiBJbnRlcm5hbCBlcnJvcgo+ID4gPiBsaWJ4
-bDogZXJyb3I6IGxpYnhsX2RvbS5jOjc1MDpsaWJ4bF9fYnVpbGRfZG9tOiB4Y19kb21fZ250dGFi
-X2luaXQgZmFpbGVkOgo+ID4gPiBJbnZhbGlkIGFyZ3VtZW50Cj4gPiA+IGRvbWFpbmJ1aWxkZXI6
-IGRldGFpbDogeGNfZG9tX3JlbGVhc2U6IGNhbGxlZAo+ID4gPgo+ID4KPiA+IFRha2luZyBhIGxv
-b2sgbm93Li4uIEp1c3QgZm9yY2luZyBoYXAgb2ZmIGRvZXNuJ3QgZ2VuZXJhdGUgYW4gaW1tZWRp
-YXRlCj4gcmVwcm8gc28gSSdsbCBoYXZlIHRvIGhhdmUgYSBjbG9zZXIgbG9vayBhdCB0aGUgZW52
-aXJvbm1lbnQuCj4gCj4gTm90ZSB0aGUgTGludXggYnJhbmNoIGlzIDMuMTguIEknbSBub3Qgc3Vy
-ZSBpZiB0aGF0IHJlYWxseSBtYXR0ZXJzLgo+IAoKSSB0aGluayB0aGF0J3MgdGhlIGd1ZXN0IHZl
-cnNpb24sIHdoaWNoIHNob3VsZCBiZSBpcnJlbGV2YW50LiBUcnlpbmcgdG8gZmlndXJlIG91dCBm
-cm9tIHRoZSBsb2dzIHdoYXQgZG9tMCBpcy4KCiAgUGF1bAoKPiBXZWkuCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============9206639824095403289==
+Content-Type: multipart/alternative; boundary="000000000000e9e26105742b1f4a"
+
+--000000000000e9e26105742b1f4a
+Content-Type: text/plain; charset="UTF-8"
+
+Hi again,
+
+I debugged the kernel codes and found out the root cause.
+The sharing is not done for some pages causing error -E2BIG which is due to
+reference count being more than one. This prevents hypervor to nominate the
+page. As much as I know about this issue, the page that I want to nominate
+and I receive this error from make_page_sharable function in mem_sharing.c
+is pointed by more than one pages. So, is there any idea to resolve this
+issue? I though that I can put the page number in a buffer and share it
+again after t milliseconds but still the nomination return -E2BIG error.
+Am I missing something?
+
+I would be grateful if you could help.
+
+
+On Sat, Jul 28, 2018 at 11:13 AM sepanta s <sapanta992@gmail.com> wrote:
+
+> Thanks.
+> I would be thankful if he can help me ...
+>
+> On Mon, Jul 23, 2018 at 11:52 AM Razvan Cojocaru <
+> rcojocaru@bitdefender.com> wrote:
+>
+>> On 07/23/2018 05:37 AM, sepanta s wrote:
+>> > I have written a program that can share memory pages of two VMs every x
+>> > milliseconds. To do so, I modified xen and added an unshare event to be
+>> > able to capture it. However,  for some pages, when I receive the unshare
+>> > event that contains the information about the pages which was about to
+>> > be written on and put it on a buffer for sharing them again after x
+>> > milliseconds, I cannot nominate them again and an error occurs. So, the
+>> > sharing mechanism I have built can partially share pages. I guess the
+>> > problem might be because of internal structure of sharing mechanism in
+>> > the Xen but can't figure out the problem.
+>> > Do you  have any idea what can cause this problem? Or what should I
+>> > check to get closer to any solution?
+>>
+>> I've never used this feature, but Tamas might have some insight into
+>> this (added to Cc).
+>>
+>
+
+--000000000000e9e26105742b1f4a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi again, <br></div><div><br></div><div>I debugged th=
+e kernel codes and found out the root cause. <br></div><div>The sharing is =
+not done for some pages causing error -E2BIG which is due to reference coun=
+t being more than one. This prevents hypervor to nominate the page. As much=
+ as I know about this issue, the page that I want to nominate and I receive=
+ this error from make_page_sharable function in mem_sharing.c is pointed by=
+ more than one pages. So, is there any idea to resolve this issue? I though=
+ that I can put the page number in a buffer and share it again after t mill=
+iseconds but still the nomination return -E2BIG error.=C2=A0 Am I missing s=
+omething? <br></div><div><br></div><div>I would be grateful if you could he=
+lp. <br></div><div><br></div></div><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr">On Sat, Jul 28, 2018 at 11:13 AM sepanta s &lt;<a href=3D"mailto:s=
+apanta992@gmail.com">sapanta992@gmail.com</a>&gt; wrote:<br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc so=
+lid;padding-left:1ex"><div dir=3D"ltr"><div>Thanks. <br></div><div>I would =
+be thankful if he can help me ...<br></div></div><br><div class=3D"gmail_qu=
+ote"><div dir=3D"ltr">On Mon, Jul 23, 2018 at 11:52 AM Razvan Cojocaru &lt;=
+<a href=3D"mailto:rcojocaru@bitdefender.com" target=3D"_blank">rcojocaru@bi=
+tdefender.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On 07/=
+23/2018 05:37 AM, sepanta s wrote:<br>
+&gt; I have written a program that can share memory pages of two VMs every =
+x<br>
+&gt; milliseconds. To do so, I modified xen and added an unshare event to b=
+e<br>
+&gt; able to capture it. However,=C2=A0 for some pages, when I receive the =
+unshare<br>
+&gt; event that contains the information about the pages which was about to=
+<br>
+&gt; be written on and put it on a buffer for sharing them again after x<br=
+>
+&gt; milliseconds, I cannot nominate them again and an error occurs. So, th=
+e<br>
+&gt; sharing mechanism I have built can partially share pages. I guess the<=
+br>
+&gt; problem might be because of internal structure of sharing mechanism in=
+<br>
+&gt; the Xen but can&#39;t figure out the problem.<br>
+&gt; Do you=C2=A0 have any idea what can cause this problem? Or what should=
+ I<br>
+&gt; check to get closer to any solution?<br>
+<br>
+I&#39;ve never used this feature, but Tamas might have some insight into<br=
+>
+this (added to Cc).<br>
+</blockquote></div>
+</blockquote></div>
+
+--000000000000e9e26105742b1f4a--
+
+
+--===============9206639824095403289==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9206639824095403289==--
