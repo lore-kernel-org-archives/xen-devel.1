@@ -1,21 +1,20 @@
-From: Thomas Gleixner <tglx@linutronix.de>
-Subject: Re: [PATCH v2] xen: move pv irq related functions under
- CONFIG_XEN_PV umbrella
-Date: Fri, 24 Aug 2018 15:56:59 +0200 (CEST)
-Message-ID: <alpine.DEB.2.21.1808241556300.1550__23098.0427739725$1535118948$gmane$org@nanos.tec.linutronix.de>
-References: <20180808061918.5033-1-jgross@suse.com>
- <b7909bb0-ed7c-2640-3f50-136c9e8abf3d@oracle.com>
- <a5dca37c-8d97-33b6-41b1-7d08cab526f7@suse.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH] tools: building IPXE should be determined
+ by CONFIG_IPXE
+Date: Fri, 24 Aug 2018 15:51:54 +0200
+Message-ID: <20180824135154.jbdefeb76oruze7y@mac>
+References: <20180824105404.8131-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=oirh=lh=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1ftCaK-0004i7-K6
- for xen-devel@lists.xenproject.org; Fri, 24 Aug 2018 13:57:08 +0000
-In-Reply-To: <a5dca37c-8d97-33b6-41b1-7d08cab526f7@suse.com>
+ <srs0=npre=lh=citrix.com=prvs=76755a058=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1ftCap-0004l0-U3
+ for xen-devel@lists.xenproject.org; Fri, 24 Aug 2018 13:57:39 +0000
+Content-Disposition: inline
+In-Reply-To: <20180824105404.8131-1-wei.liu2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,15 +23,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: x86@kernel.org, linux-kernel@vger.kernel.org, mingo@redhat.com, hpa@zytor.com, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCAyNCBBdWcgMjAxOCwgSnVlcmdlbiBHcm9zcyB3cm90ZToKCj4gT24gMDgvMDgvMTgg
-MTc6MTMsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiA+IHg4NiBtYWludGFpbmVycywgdGhpcyBu
-ZWVkcyB5b3UgYWNrIHRvbyBldmVuIHRob3VnaCBpdCBoYXMgInhlbiIgdGFnIGluCj4gPiB0aGUg
-c3ViamVjdCwgdGhhbmtzLgo+IAo+IFBpbmc/CgpJIHRob3VnaHQgSSBzZW50IG9uZSBhbHJlYWR5
-LCBidXQgaGVyZSB5b3UgZ286CgpBY2tlZC1ieTogVGhvbWFzIEdsZWl4bmVyIDx0Z2x4QGxpbnV0
-cm9uaXguZGU+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gRnJpLCBBdWcgMjQsIDIwMTggYXQgMTE6NTQ6MDRBTSArMDEwMCwgV2VpIExpdSB3cm90ZToK
+PiBTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKUmV2aWV3ZWQt
+Ynk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
