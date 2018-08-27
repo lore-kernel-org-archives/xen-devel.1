@@ -1,22 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v3] x86/altp2m: Add a subop for obtaining
- the mem access of a page
-Date: Mon, 27 Aug 2018 03:59:16 -0600
-Message-ID: <5B83CB7402000078001E2169@prv1-mh.provo.novell.com>
-References: <20180725111601.22524-1-apop@bitdefender.com>
- <5B6049FA02000078001D967A@prv1-mh.provo.novell.com>
- <20180827093807.GA1307@hel>
+From: Steven Haigh <netwiz@crc.id.au>
+Subject: Re: Unable to build staging-4.9 on RHEL6
+Date: Mon, 27 Aug 2018 20:03:36 +1000
+Message-ID: <2134533.qq8BOla9DR@wopr.lan.crc.id.au>
+References: <b4cf0fe633df980a1d9299ae1520be9a@crc.id.au>
+ <5B83B71102000078001E205E@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8930529402286483863=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=jola=lk=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fuEIr-00011t-32
- for xen-devel@lists.xenproject.org; Mon, 27 Aug 2018 09:59:21 +0000
-In-Reply-To: <20180827093807.GA1307@hel>
-Content-Disposition: inline
+ (envelope-from <srs0=suj4=lk=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
+ id 1fuENC-0001sS-L4
+ for xen-devel@lists.xenproject.org; Mon, 27 Aug 2018 10:03:50 +0000
+In-Reply-To: <5B83B71102000078001E205E@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,56 +21,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Adrian Pop <apop@bitdefender.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Tamas K Lengyel <tamas@tklengyel.com>, Sergej Proskurin <proskurin@sec.in.tum.de>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI3LjA4LjE4IGF0IDExOjM4LCA8YXBvcEBiaXRkZWZlbmRlci5jb20+IHdyb3RlOgo+
-IE9uIFR1ZSwgSnVsIDMxLCAyMDE4IGF0IDA1OjM3OjMwQU0gLTA2MDAsIEphbiBCZXVsaWNoIHdy
-b3RlOgo+PiA+Pj4gT24gMjUuMDcuMTggYXQgMTM6MTYsIDxhcG9wQGJpdGRlZmVuZGVyLmNvbT4g
-d3JvdGU6Cj4+ID4gLS0tIGEveGVuL2luY2x1ZGUvcHVibGljL2h2bS9odm1fb3AuaAo+PiA+ICsr
-KyBiL3hlbi9pbmNsdWRlL3B1YmxpYy9odm0vaHZtX29wLmgKPj4gPiBAQCAtMjM0LDcgKzIzNCw3
-IEBAIHN0cnVjdCB4ZW5faHZtX2FsdHAybV92aWV3IHsKPj4gPiAgdHlwZWRlZiBzdHJ1Y3QgeGVu
-X2h2bV9hbHRwMm1fdmlldyB4ZW5faHZtX2FsdHAybV92aWV3X3Q7Cj4+ID4gIERFRklORV9YRU5f
-R1VFU1RfSEFORExFKHhlbl9odm1fYWx0cDJtX3ZpZXdfdCk7Cj4+ID4gIAo+PiA+IC1zdHJ1Y3Qg
-eGVuX2h2bV9hbHRwMm1fc2V0X21lbV9hY2Nlc3Mgewo+PiA+ICtzdHJ1Y3QgeGVuX2h2bV9hbHRw
-Mm1fbWVtX2FjY2VzcyB7Cj4+ID4gICAgICAvKiB2aWV3ICovCj4+ID4gICAgICB1aW50MTZfdCB2
-aWV3Owo+PiA+ICAgICAgLyogTWVtb3J5IHR5cGUgKi8KPj4gPiBAQCAtMjQzLDggKzI0Myw4IEBA
-IHN0cnVjdCB4ZW5faHZtX2FsdHAybV9zZXRfbWVtX2FjY2VzcyB7Cj4+ID4gICAgICAvKiBnZm4g
-Ki8KPj4gPiAgICAgIHVpbnQ2NF90IGdmbjsKPj4gPiAgfTsKPj4gPiAtdHlwZWRlZiBzdHJ1Y3Qg
-eGVuX2h2bV9hbHRwMm1fc2V0X21lbV9hY2Nlc3MgeGVuX2h2bV9hbHRwMm1fc2V0X21lbV9hY2Nl
-c3NfdDsKPj4gPiAtREVGSU5FX1hFTl9HVUVTVF9IQU5ETEUoeGVuX2h2bV9hbHRwMm1fc2V0X21l
-bV9hY2Nlc3NfdCk7Cj4+ID4gK3R5cGVkZWYgc3RydWN0IHhlbl9odm1fYWx0cDJtX21lbV9hY2Nl
-c3MgeGVuX2h2bV9hbHRwMm1fbWVtX2FjY2Vzc190Owo+PiA+ICtERUZJTkVfWEVOX0dVRVNUX0hB
-TkRMRSh4ZW5faHZtX2FsdHAybV9tZW1fYWNjZXNzX3QpOwo+PiA+ICAKPj4gPiAgc3RydWN0IHhl
-bl9odm1fYWx0cDJtX3NldF9tZW1fYWNjZXNzX211bHRpIHsKPj4gPiAgICAgIC8qIHZpZXcgKi8K
-Pj4gPiBAQCAtMjk2LDYgKzI5Niw4IEBAIHN0cnVjdCB4ZW5faHZtX2FsdHAybV9vcCB7Cj4+ID4g
-ICNkZWZpbmUgSFZNT1BfYWx0cDJtX2NoYW5nZV9nZm4gICAgICAgICAgIDgKPj4gPiAgLyogU2V0
-IGFjY2VzcyBmb3IgYW4gYXJyYXkgb2YgcGFnZXMgKi8KPj4gPiAgI2RlZmluZSBIVk1PUF9hbHRw
-Mm1fc2V0X21lbV9hY2Nlc3NfbXVsdGkgOQo+PiA+ICsvKiBHZXQgdGhlIGFjY2VzcyBvZiBhIHBh
-Z2Ugb2YgbWVtb3J5IGZyb20gYSBjZXJ0YWluIHZpZXcgKi8KPj4gPiArI2RlZmluZSBIVk1PUF9h
-bHRwMm1fZ2V0X21lbV9hY2Nlc3MgICAgICAgMTAKPj4gPiAgICAgIGRvbWlkX3QgZG9tYWluOwo+
-PiA+ICAgICAgdWludDE2X3QgcGFkMTsKPj4gPiAgICAgIHVpbnQzMl90IHBhZDI7Cj4+ID4gQEAg
-LTMwMyw3ICszMDUsNyBAQCBzdHJ1Y3QgeGVuX2h2bV9hbHRwMm1fb3Agewo+PiA+ICAgICAgICAg
-IHN0cnVjdCB4ZW5faHZtX2FsdHAybV9kb21haW5fc3RhdGUgICAgICAgICBkb21haW5fc3RhdGU7
-Cj4+ID4gICAgICAgICAgc3RydWN0IHhlbl9odm1fYWx0cDJtX3ZjcHVfZW5hYmxlX25vdGlmeSAg
-IGVuYWJsZV9ub3RpZnk7Cj4+ID4gICAgICAgICAgc3RydWN0IHhlbl9odm1fYWx0cDJtX3ZpZXcg
-ICAgICAgICAgICAgICAgIHZpZXc7Cj4+ID4gLSAgICAgICAgc3RydWN0IHhlbl9odm1fYWx0cDJt
-X3NldF9tZW1fYWNjZXNzICAgICAgIHNldF9tZW1fYWNjZXNzOwo+PiA+ICsgICAgICAgIHN0cnVj
-dCB4ZW5faHZtX2FsdHAybV9tZW1fYWNjZXNzICAgICAgICAgICBtZW1fYWNjZXNzOwo+PiA+ICAg
-ICAgICAgIHN0cnVjdCB4ZW5faHZtX2FsdHAybV9jaGFuZ2VfZ2ZuICAgICAgICAgICBjaGFuZ2Vf
-Z2ZuOwo+PiA+ICAgICAgICAgIHN0cnVjdCB4ZW5faHZtX2FsdHAybV9zZXRfbWVtX2FjY2Vzc19t
-dWx0aSBzZXRfbWVtX2FjY2Vzc19tdWx0aTsKPj4gPiAgICAgICAgICB1aW50OF90IHBhZFs2NF07
-Cj4+IAo+PiBUaGlzIGJlaW5nIGV4cG9zZWQgdG8gZ3Vlc3RzLCB0aGUgaW50ZXJmYWNlIGhhcyB0
-byBiZSBjb25zaWRlcmVkCj4+IHN0YWJsZSBpbW8sIGluIHdoaWNoIGNhc2UgeW91IGNhbid0IHJl
-bmFtZSB0aGluZ3MgbGlrZSB0aGlzLiBZb3UnZAo+PiBuZWVkIF9fWEVOX0lOVEVSRkFDRV9WRVJT
-SU9OX18gZGVwZW5kZW50IGxvZ2ljIChqdXN0IGxpa2UgaXMgdGhlCj4+IGNhc2UgZnVydGhlciB1
-cCBpbiB0aGUgZmlsZSkuCj4gCj4gUmlnaHQuICBTb3JyeSBhYm91dCB0aGF0LiAgTWF5YmUganVz
-dCBoYXZpbmcgc2VwYXJhdGUgc3RydWN0cyBmb3IKPiBnZXQvc2V0IHdvdWxkIGJlIGNsZWFuZXIg
-aW4gdGhpcyBjYXNlLCBldmVuIHRob3VnaCB0aGV5IHdvdWxkIGJlCj4gc2ltaWxhci4KClBlcnNv
-bmFsbHkgSSdkIHByZWZlciB0byBhdm9pZCBoYXZpbmcgdHdvIHN0cnVjdHVyZXMgd2l0aCBpZGVu
-dGljYWwKbGF5b3V0IGJ1dCBkaWZmZXJlbnQgdGFncy4gQnV0IGlmIG90aGVycyB0aGluayBkaWZm
-ZXJlbnRseSwgSSdtIG5vdAptZWFuaW5nIHRvIHN0YW5kIGluIHRoZSB3YXkuCgpKYW4KCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============8930529402286483863==
+Content-Type: multipart/signed; boundary="nextPart2595603.JacL9BJ3Y3"; micalg="pgp-sha256"; protocol="application/pgp-signature"
+
+--nextPart2595603.JacL9BJ3Y3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+
+On Monday, 27 August 2018 6:32:17 PM AEST Jan Beulich wrote:
+> >>> On 24.08.18 at 04:56, <netwiz@crc.id.au> wrote:
+> > When trying to build both xen and qemu-xen from the staging-4.9
+> > branches, I'm running into issues compiling.
+> >=20
+> > Errors start with:
+> >=20
+> > BUILDSTDERR: sse.c: In function 'simd_test':
+> > BUILDSTDERR: sse.c:319: error: subscripted value is neither array nor
+> > pointer
+>=20
+> That's the x86 insn emulator test harness afaict, which doesn't get
+> built unless you explicitly ask for it. Why are you building it? It's
+> well known that it requires a new enough compiler (and the bar will
+> raise with AVX512 support, which is in the works).
+
+Hi Jan,
+
+I don't specifically enable any testing (that I'm aware of).
+
+The current SPEC file that I'm using is at:
+https://git.crc.id.au/netwiz/xen49/src/devel/SPECS/xen49.spec
+
+Essentially it boils down to:
+=2E/configure --enable-systemd --prefix=3D/usr --enable-xsmpolicy %{?enable=
+_ocaml}=20
+\
+  --libdir=3D%{_libdir} --enable-efi --disable-qemu-traditional \
+  --with-extra-qemuU-configure-args=3D"--enable-spice --enable-usb-redir"
+
+(cd xen; make defconfig; sed -i 's/# CONFIG_LIVEPATCH is not set/
+CONFIG_LIVEPATCH=3Dy/g' .config; make oldconfig)
+
+export XEN_DOMAIN=3Dxen.crc.id.au
+make %{?_smp_mflags} %{?efi_flags} dist
+
+I'll note that 4.6, 4.7, and 4.10 do not fail in this fashion using almost =
+the=20
+same command set to build.
+
+=2D-=20
+Steven Haigh
+
+=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB https://www.crc.id.au
+=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
+
+--nextPart2595603.JacL9BJ3Y3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAluDzHgACgkQQa811Xp9
+MdwImQ/+M8Ft7Aa40KN2oDceQ7nByemfoD+nvu/FeSmgIUuumSLBvZPQYHXl8iI0
+TBPfTUeYk3dgMP/d1jaqBFohgDmtFrqI2SSnHGKJy/w5t0yeGfbrkx4ZADaJHp8G
+RYKL8QbssjuHYRobz6thGWTGKXWX3Es2DC5/y4nCCcARi1AdFIjpMWBwsyXT8ri6
+TTXRIy8HlPQIiE5WoXvTlwAdmDf0gymlorhOKqHEFW2rXx4i5fiLF2u2mucMiyce
+TOW9l8q/1yyBMhL8DII5BdwgLMc8xE203D1X9xkPtInWK9OlDHYM7kDg1O1FwTvz
+ey0n+eSHbO8VfvIglTsOQjK1vj7M0qfI+ozFGldO1WvvRjhkqtX+Jb51h/QUzPgy
+etWVevUKFDwHw5N6y4aFvCagGhH5yrXoZoSRo0v1vhWpTJk3rCDBByp9j7ifun4m
+Q7/IrZaxP7fC2wzj7w4zkcNeF4+0TjgF4NfXNv4Rtm/OtcON3pk0r1JL6O4MHR8V
+f8ZhYJKHpC+eUvDdqeip0RUvrtAOcekO5At99qz9S8q72CzqPzv8GonQXvuji8fe
+YG+ui9OTZGHsMNT7yy6zb1GkGMZddb75IO2LkEh7gCm02paU8hFVN40za4NXW2q5
+Ts7ldvavHMXXn0+K6mYZSxli13smk1OEMR/qB1FsswCqR9Fp2W4=
+=sQhw
+-----END PGP SIGNATURE-----
+
+--nextPart2595603.JacL9BJ3Y3--
+
+
+
+
+
+--===============8930529402286483863==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8930529402286483863==--
