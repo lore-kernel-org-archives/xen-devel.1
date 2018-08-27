@@ -1,10 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: incompatible changes in staging break qemu
-Date: Mon, 27 Aug 2018 08:43:15 +0200
-Message-ID: <20180827084315.3e91117e.olaf@aepfle.de>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v1 1/6] arm: add SMC wrapper that is
+ compatible with SMCCC
+Date: Mon, 27 Aug 2018 00:44:30 -0600
+Message-ID: <5B839DCE02000078001E1F9D@prv1-mh.provo.novell.com>
+References: <1534947094-9974-1-git-send-email-volodymyr_babchuk@epam.com>
+ <1534947094-9974-2-git-send-email-volodymyr_babchuk@epam.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7289809697787178399=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <1534947094-9974-2-git-send-email-volodymyr_babchuk@epam.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -13,50 +19,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Cc: edgar.iglesias@xilinx.com, Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Lars Kurth <lars.kurth@xenproject.org>, xen-devel@lists.xen.org, tee-dev@lists.linaro.org, Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7289809697787178399==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/LAmg1/EV7E3l0YPwH9/4T.A"; protocol="application/pgp-signature"
-
---Sig_/LAmg1/EV7E3l0YPwH9/4T.A
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Since about two weeks, no released qemu can be built against xen.git#stagin=
-g. The error looks like that:
-
-qemu-20180825T130857.235c82acca/include/hw/xen/xen_common.h:677:5: error: t=
-oo many arguments to function 'xc_domain_create'
-
-It looks like staging lacks proper compat wrappers for released qemu versio=
-ns.
-
-Olaf
-
---Sig_/LAmg1/EV7E3l0YPwH9/4T.A
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW4OdgwAKCRBdQqD6ppg2
-fjVlAJ9Vmr50AGhMrCDMX5oDqNFbvu2rrwCgwDKUrx/QMOqZ1J4JFL1JnhdRgQ4=
-=dnDt
------END PGP SIGNATURE-----
-
---Sig_/LAmg1/EV7E3l0YPwH9/4T.A--
-
-
---===============7289809697787178399==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7289809697787178399==--
+Pj4+IE9uIDIyLjA4LjE4IGF0IDE2OjExLCA8dm9sb2R5bXlyX2JhYmNodWtAZXBhbS5jb20+IHdy
+b3RlOgo+IEV4aXN0aW5nIFNNQyB3cmFwcGVyIGNhbGxfc21jKCkgYWxsb3dzIG9ubHkgNCBwYXJh
+bWV0ZXJzIGFuZAo+IHJldHVybnMgb25seSBvbmUgdmFsdWUuIFRoaXMgaXMgZW5vdWdoIGZvciBl
+eGlzdGluZwo+IHVzZSBpbiBQU0NJIGNvZGUsIGJ1dCBURUUgbWVkaWF0b3Igd2lsbCBuZWVkIGEg
+Y2FsbCB0aGF0IGlzCj4gZnVsbHkgY29tcGF0aWJsZSB3aXRoIEFSTSBTTUNDQy4KPiBUaGlzIHBh
+dGNoIGFkZHMgdGhpcyBjYWxsIGZvciBib3RoIGFybTMyIGFuZCBhcm02NC4KPiAKPiBUaGVyZSB3
+YXMgc2ltaWxhciBwYXRjaCBieSBFZGdhciBFLiBJZ2xlc2lhcyAoWzFdKSwgYnV0IGxvb2tzCj4g
+bGlrZSBpdCBpcyBhYmFuZG9uZWQuCj4gCj4gWzFdIGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxNy0wMi9tc2cwMDYzNi5odG1sIAo+IAo+IEND
+OiAiRWRnYXIgRS4gSWdsZXNpYXMiIDxlZGdhci5pZ2xlc2lhc0B4aWxpbnguY29tPgo+IAo+IFNp
+Z25lZC1vZmYtYnk6IFZvbG9keW15ciBCYWJjaHVrIDx2b2xvZHlteXJfYmFiY2h1a0BlcGFtLmNv
+bT4KPiAtLS0KPiAKPiBjaGFuZ2VzIGZyb20gIlJGQyI6Cj4gICAtIHJlc3BvbnNlIG5vdyBzdG9y
+ZWQgaW4gc3RydWN0dXJlIGluc3RlYWQgb2YgYXJyYXkKPiAgIC0gYWRkZWQgY29tbWVudHMgZm9y
+IGFybTMyIGFzc2VtYmx5IGNvZGUKPiAgIC0gYWRkZWQgb2Zmc2V0IChpbnN0ZWFkIG9mIG1hZ2lj
+IHZhbHVlcykgZm9yIGFybTMyIGFzbSBjb2RlCj4gCj4gIHhlbi9hcmNoL2FybS9hcm0zMi9NYWtl
+ZmlsZSAgICAgIHwgIDEgKwo+ICB4ZW4vYXJjaC9hcm0vYXJtMzIvc21jLlMgICAgICAgICB8IDM5
+ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+ICB4ZW4vYXJjaC9hcm0v
+YXJtNjQvTWFrZWZpbGUgICAgICB8ICAxICsKPiAgeGVuL2FyY2gvYXJtL2FybTY0L2FzbS1vZmZz
+ZXRzLmMgfCAgNCArKysrCj4gIHhlbi9hcmNoL2FybS9hcm02NC9zbWMuUyAgICAgICAgIHwgMzAg
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gIHhlbi9pbmNsdWRlL2FzbS1hcm0vcHJv
+Y2Vzc29yLmggIHwgMTEgKysrKysrKysrKysKPiAgNiBmaWxlcyBjaGFuZ2VkLCA4NiBpbnNlcnRp
+b25zKCspCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCB4ZW4vYXJjaC9hcm0vYXJtMzIvc21jLlMKPiAg
+Y3JlYXRlIG1vZGUgMTAwNjQ0IHhlbi9hcmNoL2FybS9hcm02NC9zbWMuUwoKV2l0aCB0aGlzIGRp
+ZmZzdGF0LCB3aHkgZGlkIEkgZW5kIHVwIG9uIHRoZSBfVG9fIGxpc3Qgb2YgdGhpcyBwYXRjaD8K
+SSBzaG91bGRuJ3QgZXZlbiBoYXZlIGJlZW4gb24gdGhlIENjIGxpc3QgKGFuZCBJJ20gZ29pbmcg
+dG8gYmxpbmRseQpkZWxldGUgYWxsIG90aGVyIHBhdGNoZXMgb2YgdGhpcyBzZXJpZXMgd2hlcmUg
+eW91J3ZlIGFsc28KYXBwYXJlbnRseSBwdXQgbWUgb24gdGhlIFRvIGxpc3QpLiBQbGVhc2UgcmVt
+ZW1iZXIgdGhhdCBwYXRjaGVzCmFyZSBzdXBwb3NlZCB0byBiZSBzZW50IF9Ub18gdGhlIGxpc3Qs
+IHdpdGggbWFpbnRhaW5lcnMsIHJldmlld2VycwooYW5kIHBlcmhhcHMgb3RoZXJzKSBDYy1lZC4g
+VG9nZXRoZXIgd2l0aCBwZW9wbGUgcmVwbHlpbmcgdG8KbWFpbHMgb2Z0ZW4gbm90IGFkanVzdGlu
+ZyBUby9DYyBsaXN0cyBhY2NvcmRpbmdseSwgSSd2ZSBub3cgZW5kZWQKdXAgd2l0aCB3ZWxsIG92
+ZXIgMzAgbWFpbHMgaW4gbXkgcHJpbWFyeSBtYWlsIGZvbGRlciB3aGljaApwcmVzdW1hYmx5IEkg
+aGF2ZSBubyBidXNpbmVzcyB3aXRoIGF0IGFsbC4gCgpKYW4KCgoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
