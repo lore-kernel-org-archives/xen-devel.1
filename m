@@ -1,19 +1,17 @@
-From: Steven Haigh <netwiz@crc.id.au>
-Subject: Re: Unable to build staging-4.9 on RHEL6
-Date: Mon, 27 Aug 2018 21:30:17 +1000
-Message-ID: <4042528.4QxGzAFDWl@wopr.lan.crc.id.au>
-References: <b4cf0fe633df980a1d9299ae1520be9a@crc.id.au>
- <2134533.qq8BOla9DR@wopr.lan.crc.id.au>
- <5B83D44202000078001E21D7@prv1-mh.provo.novell.com>
+From: Jason Andryuk <jandryuk@gmail.com>
+Subject: Re: L1TF, and future work
+Date: Mon, 27 Aug 2018 08:10:05 -0400
+Message-ID: <CAKf6xpvvqESK4=jJwbTDnLDk4PmED_43Z=7tQer9CDP+2nRPvg@mail.gmail.com>
+References: <4dad178a-91c7-c328-9bc5-4362945d4725@citrix.com>
+ <5B74347002000078001DE714@suse.com>
+ <4f14ae93-8b5b-0391-4933-3ca902e4ee6f@suse.com>
+ <CAKf6xpudQ5dmheXAAEPm_bJ=n7YJPwBuUHQbS2_45bqKWM8ZEA@mail.gmail.com>
+ <c8c0d4ad-171b-b28f-97b1-77018f3a99ad@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8459039196476254782=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=suj4=lk=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
- id 1fuFiz-0000iM-LQ
- for xen-devel@lists.xenproject.org; Mon, 27 Aug 2018 11:30:26 +0000
-In-Reply-To: <5B83D44202000078001E21D7@prv1-mh.provo.novell.com>
+In-Reply-To: <c8c0d4ad-171b-b28f-97b1-77018f3a99ad@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,136 +20,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: sergey.dyasli@citrix.com, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, tim@xen.org, xen-devel@lists.xen.org, Jan Beulich <JBeulich@suse.com>, security@xen.org, Dario Faggioli <dfaggioli@suse.com>, dwmw@amazon.co.uk, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============8459039196476254782==
-Content-Type: multipart/signed; boundary="nextPart3354417.A8d4g6hQpE"; micalg="pgp-sha256"; protocol="application/pgp-signature"
-
---nextPart3354417.A8d4g6hQpE
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-
-On Monday, 27 August 2018 8:36:50 PM AEST Jan Beulich wrote:
-> >>> On 27.08.18 at 12:03, <netwiz@crc.id.au> wrote:
-> > On Monday, 27 August 2018 6:32:17 PM AEST Jan Beulich wrote:
-> >> >>> On 24.08.18 at 04:56, <netwiz@crc.id.au> wrote:
-> >> > When trying to build both xen and qemu-xen from the staging-4.9
-> >> > branches, I'm running into issues compiling.
-> >> >=20
-> >> > Errors start with:
-> >> >=20
-> >> > BUILDSTDERR: sse.c: In function 'simd_test':
-> >> > BUILDSTDERR: sse.c:319: error: subscripted value is neither array nor
-> >> > pointer
-> >>=20
-> >> That's the x86 insn emulator test harness afaict, which doesn't get
-> >> built unless you explicitly ask for it. Why are you building it? It's
-> >> well known that it requires a new enough compiler (and the bar will
-> >> raise with AVX512 support, which is in the works).
-> >=20
-> > Hi Jan,
-> >=20
-> > I don't specifically enable any testing (that I'm aware of).
-> >=20
-> > The current SPEC file that I'm using is at:
-> > https://git.crc.id.au/netwiz/xen49/src/devel/SPECS/xen49.spec
-> >=20
-> > Essentially it boils down to:
-> > ./configure --enable-systemd --prefix=3D/usr --enable-xsmpolicy
-> > %{?enable_ocaml}
-> > \
-> >=20
-> >   --libdir=3D%{_libdir} --enable-efi --disable-qemu-traditional \
-> >   --with-extra-qemuU-configure-args=3D"--enable-spice --enable-usb-redi=
-r"
-> >=20
-> > (cd xen; make defconfig; sed -i 's/# CONFIG_LIVEPATCH is not set/
-> > CONFIG_LIVEPATCH=3Dy/g' .config; make oldconfig)
-> >=20
-> > export XEN_DOMAIN=3Dxen.crc.id.au
-> > make %{?_smp_mflags} %{?efi_flags} dist
->=20
-> It's this last step which is of interest afaict; how you configure
-> things does not seem to matter. The dist target implies building
-> dist-tools, which in turn has install-tools as a dependency. Most
-> of the sub-directories under tools/tests/ have an empty
-> install target in their makefiles though, which means nothing is
-> going to be done when entering the respective directories.
-
-This is actually interesting.
-
-I tried originally doing a 'make build', then 'make DESTDIR=3D%{buildroot}=
-=20
-install' - however I found that this didn't produce any EFI binaries in /bo=
-ot/
-efi/efi/$EFI_VENDOR/ like the 'make dist' option does.
-
-This seemed to persist across all versions (4.6 - 4.10) hence the path that=
- I=20
-had taken.
-
-Should this then be a part of fixing why no EFI binaries exist in the make=
-=20
-build / make install method, and not trying to fix a test as a side effect =
-of=20
-having to use 'make dist'?
-=20
-> > I'll note that 4.6, 4.7, and 4.10 do not fail in this fashion using alm=
-ost
-> > the same command set to build.
->=20
-> I can't spot any relevant difference between the versions you
-> mention (or master). I'm afraid you'll need to dig a little deeper
-> yourself (unless someone else has an idea).
->=20
-> Jan
-
-
-
-=2D-=20
-Steven Haigh
-
-=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB https://www.crc.id.au
-=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
-
---nextPart3354417.A8d4g6hQpE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAluD4MkACgkQQa811Xp9
-MdxuaQ/+LQvE8WC+YSsDMAiNIAqw7bwv7K1An92wFGqM0XMECPziDVt4g+ZzsaBC
-2oIHBsb+1wQ+varA60iAtNyXU3dMzmXkIz+c5EsNbN3ztZrcjn8KJTgOREQ1fOE5
-p1LzlC+lvQPXS92dDfCwcOXc/Rav0pBRUNh+BGORyQiMHEeJQus6HlWxBRvG/NsL
-9Ajw+hPa9Jm/9ZT0Y7N+kwr9ZXXB1UOZgDsnCIhXaUeJfSp6yEc4qfLvyAsq+G5i
-RuOZUNltx5C58G5fbI/oq9fFQFHbXBn+DKlVE5pPG/iVcsUKtlKdFd8gcMy9srps
-zhYdyHD3S86GcpJE5NehRMpscUrbAtHdw/IomftG4S6T2aDXnkSsuyuIadj0Nhll
-9kuuO3HAU7BAAJi6EtHcBDGK19GadqHlFA7AGoi0j50VAi52iAr5khj5FUomscyQ
-qbo+ZzvrssFYmjKkRekVjb2VQlNvR6zDfJlVvJfF0IfvGz6p2rrmMVGZY/iodZcn
-pFjEIjt2SE0cRClEUjf92faiz1rK8SXnt8xuPoNdCoNRaS1kuWemF5gkBbI0vd8S
-zGhoqArq6xSKabkfTFLH+qSN8H25IvntFx0rdWzIOI3Jtd6azaXiFmEtfRHg1JZs
-8M15IVBg/n1b5vxj7oka70Ai7v9f1IZpWjLkXYdNQWtUrUQkXWc=
-=N/jm
------END PGP SIGNATURE-----
-
---nextPart3354417.A8d4g6hQpE--
-
-
-
-
-
---===============8459039196476254782==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8459039196476254782==--
+T24gU2F0LCBBdWcgMjUsIDIwMTggYXQgMToyMSBBTSBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
+ZS5jb20+IHdyb3RlOgo+Cj4gT24gMjQvMDgvMTggMjA6NDMsIEphc29uIEFuZHJ5dWsgd3JvdGU6
+Cj4gPiBPbiBXZWQsIEF1ZyAxNSwgMjAxOCBhdCAxMDozOSBBTSBKdWVyZ2VuIEdyb3NzIDxqZ3Jv
+c3NAc3VzZS5jb20+IHdyb3RlOgo+ID4+Cj4gPj4gT24gMTUvMDgvMTggMTY6MTAsIEphbiBCZXVs
+aWNoIHdyb3RlOgo+ID4+Pj4+PiBPbiAxNS4wOC4xOCBhdCAxNToxNywgPGFuZHJldy5jb29wZXIz
+QGNpdHJpeC5jb20+IHdyb3RlOgo+ID4+Pj4gMikgMzJiaXQgUFYgZ3Vlc3RzIHdoaWNoIHVzZSB3
+cml0ZWFibGUgcGFnZXRhYmxlIHN1cHBvcnQgd2lsbAo+ID4+Pj4gYXV0b21hdGljYWxseSBnZXQg
+c2hhZG93ZWQgd2hlbiB0aGUgY2xlYXIgdGhlIGxvd2VyIGhhbGYuCj4gPj4+Cj4gPj4+IC4uLiBv
+ZiBhIHBhZ2UgdGFibGUgZW50cnkuCj4gPj4+Cj4gPj4+PiAgSWRlYWxseSwgc3VjaAo+ID4+Pj4g
+Z3Vlc3RzIHNob3VsZCBiZSBtb2RpZmllZCB0byB1c2UgaHlwZXJjYWxscyByYXRoZXIgdGhhbiB0
+aGUgcHR3cgo+ID4+Pj4gaW5mcmFzdHJ1Y3R1cmUgKGFzIGl0cyBtb3JlIGVmZmljaWVudCB0byBi
+ZWdpbiB3aXRoKSwgYnV0IHdlIGNhbgo+ID4+Pj4gcHJvYmFibHkgd29yayBhcm91bmQgdGhpcyBp
+biBYZW4gYnkgZW11bGF0aW5nIHRoZSBuZXh0IGZldyBpbnN0cnVjdGlvbnMKPiA+Pj4+IHVudGls
+IHdlIGhhdmUgYSBjb21wbGV0ZSBQVEUgKHNhbWUgYXMgdGhlIHNoYWRvdyBjb2RlKS4KPiA+Pj4K
+PiA+Pj4gUHJvdmlkZWQgdGhlIGludGVydmVuaW5nIGluc25zIGFyZSBzaW1wbGUgZW5vdWdoLiBJ
+J3ZlIGxvb2tlZCBpbnRvCj4gPj4+IGN1cnJlbnQgTGludXggcHYtb3BzIGNvZGUgdGhlIG90aGVy
+IGRheSwgYW5kIGFmYWljdCBpdCdzIGFscmVhZHkKPiA+Pj4gdXNpbmcgbW11LW9wIG9yIGNtcHhj
+aGc4YiwgYnV0IG5vdCB0d28gc2VwYXJhdGUgbW92LXMuIEJ1dAo+ID4+PiBvZiBjb3Vyc2UgSSd2
+ZSBsb29rZWQgYXQgdGhlIGdlbmVyYWwgcm91dGluZXMgb25seSwgbm90IGF0IHRoaW5ncwo+ID4+
+PiBwZXJoYXBzIGhpZGRlbiBpbiBzcGVjaWFsIGNhc2VzLCBvciBpbiBpbml0LW9ubHkgY29kZS4K
+PiA+Pgo+ID4+IExvb2sgYXQgeGVuX3B0ZV9jbGVhcigpLiBJbnNpZGUgaXJxIGhhbmRsaW5nIGl0
+IHdpbGwgdXNlIChQQUUgY2FzZSk6Cj4gPj4KPiA+PiBzdGF0aWMgaW5saW5lIHZvaWQgbmF0aXZl
+X3B0ZV9jbGVhcihzdHJ1Y3QgbW1fc3RydWN0ICptbSwgdW5zaWduZWQgbG9uZwo+ID4+IGFkZHIs
+Cj4gPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcHRlX3QgKnB0ZXApCj4g
+Pj4gewo+ID4+ICAgICAgICAgcHRlcC0+cHRlX2xvdyA9IDA7Cj4gPj4gICAgICAgICBzbXBfd21i
+KCk7Cj4gPj4gICAgICAgICBwdGVwLT5wdGVfaGlnaCA9IDA7Cj4gPj4gfQo+ID4KPiA+IEkndmUg
+YmVlbiB0ZXN0aW5nIG91dCBzZXRfNjRiaXQgZm9yIFBURSBvcGVyYXRpb25zIG9uIDMyYml0IFBB
+RS4gIEkKPiA+IGhhdmVuJ3QgZm91bmQgYWxsIHRoZSBzcG90cywgYnV0IHNoYWRvd2luZyBpcyBu
+b3cgZW5hYmxlZCBhIGZldwo+ID4gc2Vjb25kcyBpbnRvIGJvb3QgaW5zdGVhZCBvZiBpbW1lZGlh
+dGVseS4KPiA+Cj4gPiBBbmQgeWVzLCBJIHRoaW5rIGh0dHBzOi8vYnVnemlsbGEua2VybmVsLm9y
+Zy9zaG93X2J1Zy5jZ2k/aWQ9MTk4NDk3IGlzCj4gPiByZWxhdGVkIGFzIHlvdSBwcmVzdW1lZCBh
+IHdoaWxlIGJhY2suCj4KPiBJIGhhdmUgYSBwYXRjaCBzZXJpZXMgKHR3byBwYXRjaGVzKSBhdm9p
+ZGluZyBzaGFkb3dpbmcgY29tcGxldGVseToKPgo+IGh0dHBzOi8vbGlzdHMueGVuLm9yZy9hcmNo
+aXZlcy9odG1sL3hlbi1kZXZlbC8yMDE4LTA4L21zZzAxNzg1Lmh0bWwKCkdyZWF0ISAgVGhhbmsg
+eW91LiAgSSdtIGJ1aWxkaW5nIG5vdy4KCkxvb2tzIGxpa2UgSSBtaXNzZWQgbmF0aXZlX3B0ZXBf
+Z2V0X2FuZF9jbGVhciB3aGljaCBsZWQgdG8gdGhlIGRlbGF5CmVuYWJsaW5nIHNoYWRvd2luZy4K
+ClJlZ2FyZHMsCkphc29uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
