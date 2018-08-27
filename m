@@ -1,18 +1,21 @@
-From: Steven Haigh <netwiz@crc.id.au>
+From: "Jan Beulich" <JBeulich@suse.com>
 Subject: Re: Unable to build staging-4.9 on RHEL6
-Date: Mon, 27 Aug 2018 20:03:36 +1000
-Message-ID: <2134533.qq8BOla9DR@wopr.lan.crc.id.au>
+Date: Mon, 27 Aug 2018 04:36:50 -0600
+Message-ID: <5B83D44202000078001E21D7@prv1-mh.provo.novell.com>
 References: <b4cf0fe633df980a1d9299ae1520be9a@crc.id.au>
  <5B83B71102000078001E205E@prv1-mh.provo.novell.com>
+ <2134533.qq8BOla9DR@wopr.lan.crc.id.au>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8930529402286483863=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=suj4=lk=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
- id 1fuENC-0001sS-L4
- for xen-devel@lists.xenproject.org; Mon, 27 Aug 2018 10:03:50 +0000
-In-Reply-To: <5B83B71102000078001E205E@prv1-mh.provo.novell.com>
+ (envelope-from <srs0=jola=lk=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fuEtE-0004Gm-7f
+ for xen-devel@lists.xenproject.org; Mon, 27 Aug 2018 10:36:56 +0000
+In-Reply-To: <2134533.qq8BOla9DR@wopr.lan.crc.id.au>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,99 +24,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <JBeulich@suse.com>
+To: Steven Haigh <netwiz@crc.id.au>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============8930529402286483863==
-Content-Type: multipart/signed; boundary="nextPart2595603.JacL9BJ3Y3"; micalg="pgp-sha256"; protocol="application/pgp-signature"
-
---nextPart2595603.JacL9BJ3Y3
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-
-On Monday, 27 August 2018 6:32:17 PM AEST Jan Beulich wrote:
-> >>> On 24.08.18 at 04:56, <netwiz@crc.id.au> wrote:
-> > When trying to build both xen and qemu-xen from the staging-4.9
-> > branches, I'm running into issues compiling.
-> >=20
-> > Errors start with:
-> >=20
-> > BUILDSTDERR: sse.c: In function 'simd_test':
-> > BUILDSTDERR: sse.c:319: error: subscripted value is neither array nor
-> > pointer
->=20
-> That's the x86 insn emulator test harness afaict, which doesn't get
-> built unless you explicitly ask for it. Why are you building it? It's
-> well known that it requires a new enough compiler (and the bar will
-> raise with AVX512 support, which is in the works).
-
-Hi Jan,
-
-I don't specifically enable any testing (that I'm aware of).
-
-The current SPEC file that I'm using is at:
-https://git.crc.id.au/netwiz/xen49/src/devel/SPECS/xen49.spec
-
-Essentially it boils down to:
-=2E/configure --enable-systemd --prefix=3D/usr --enable-xsmpolicy %{?enable=
-_ocaml}=20
-\
-  --libdir=3D%{_libdir} --enable-efi --disable-qemu-traditional \
-  --with-extra-qemuU-configure-args=3D"--enable-spice --enable-usb-redir"
-
-(cd xen; make defconfig; sed -i 's/# CONFIG_LIVEPATCH is not set/
-CONFIG_LIVEPATCH=3Dy/g' .config; make oldconfig)
-
-export XEN_DOMAIN=3Dxen.crc.id.au
-make %{?_smp_mflags} %{?efi_flags} dist
-
-I'll note that 4.6, 4.7, and 4.10 do not fail in this fashion using almost =
-the=20
-same command set to build.
-
-=2D-=20
-Steven Haigh
-
-=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB https://www.crc.id.au
-=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
-
---nextPart2595603.JacL9BJ3Y3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAluDzHgACgkQQa811Xp9
-MdwImQ/+M8Ft7Aa40KN2oDceQ7nByemfoD+nvu/FeSmgIUuumSLBvZPQYHXl8iI0
-TBPfTUeYk3dgMP/d1jaqBFohgDmtFrqI2SSnHGKJy/w5t0yeGfbrkx4ZADaJHp8G
-RYKL8QbssjuHYRobz6thGWTGKXWX3Es2DC5/y4nCCcARi1AdFIjpMWBwsyXT8ri6
-TTXRIy8HlPQIiE5WoXvTlwAdmDf0gymlorhOKqHEFW2rXx4i5fiLF2u2mucMiyce
-TOW9l8q/1yyBMhL8DII5BdwgLMc8xE203D1X9xkPtInWK9OlDHYM7kDg1O1FwTvz
-ey0n+eSHbO8VfvIglTsOQjK1vj7M0qfI+ozFGldO1WvvRjhkqtX+Jb51h/QUzPgy
-etWVevUKFDwHw5N6y4aFvCagGhH5yrXoZoSRo0v1vhWpTJk3rCDBByp9j7ifun4m
-Q7/IrZaxP7fC2wzj7w4zkcNeF4+0TjgF4NfXNv4Rtm/OtcON3pk0r1JL6O4MHR8V
-f8ZhYJKHpC+eUvDdqeip0RUvrtAOcekO5At99qz9S8q72CzqPzv8GonQXvuji8fe
-YG+ui9OTZGHsMNT7yy6zb1GkGMZddb75IO2LkEh7gCm02paU8hFVN40za4NXW2q5
-Ts7ldvavHMXXn0+K6mYZSxli13smk1OEMR/qB1FsswCqR9Fp2W4=
-=sQhw
------END PGP SIGNATURE-----
-
---nextPart2595603.JacL9BJ3Y3--
-
-
-
-
-
---===============8930529402286483863==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8930529402286483863==--
+Pj4+IE9uIDI3LjA4LjE4IGF0IDEyOjAzLCA8bmV0d2l6QGNyYy5pZC5hdT4gd3JvdGU6Cj4gT24g
+TW9uZGF5LCAyNyBBdWd1c3QgMjAxOCA2OjMyOjE3IFBNIEFFU1QgSmFuIEJldWxpY2ggd3JvdGU6
+Cj4+ID4+PiBPbiAyNC4wOC4xOCBhdCAwNDo1NiwgPG5ldHdpekBjcmMuaWQuYXU+IHdyb3RlOgo+
+PiA+IFdoZW4gdHJ5aW5nIHRvIGJ1aWxkIGJvdGggeGVuIGFuZCBxZW11LXhlbiBmcm9tIHRoZSBz
+dGFnaW5nLTQuOQo+PiA+IGJyYW5jaGVzLCBJJ20gcnVubmluZyBpbnRvIGlzc3VlcyBjb21waWxp
+bmcuCj4+ID4gCj4+ID4gRXJyb3JzIHN0YXJ0IHdpdGg6Cj4+ID4gCj4+ID4gQlVJTERTVERFUlI6
+IHNzZS5jOiBJbiBmdW5jdGlvbiAnc2ltZF90ZXN0JzoKPj4gPiBCVUlMRFNUREVSUjogc3NlLmM6
+MzE5OiBlcnJvcjogc3Vic2NyaXB0ZWQgdmFsdWUgaXMgbmVpdGhlciBhcnJheSBub3IKPj4gPiBw
+b2ludGVyCj4+IAo+PiBUaGF0J3MgdGhlIHg4NiBpbnNuIGVtdWxhdG9yIHRlc3QgaGFybmVzcyBh
+ZmFpY3QsIHdoaWNoIGRvZXNuJ3QgZ2V0Cj4+IGJ1aWx0IHVubGVzcyB5b3UgZXhwbGljaXRseSBh
+c2sgZm9yIGl0LiBXaHkgYXJlIHlvdSBidWlsZGluZyBpdD8gSXQncwo+PiB3ZWxsIGtub3duIHRo
+YXQgaXQgcmVxdWlyZXMgYSBuZXcgZW5vdWdoIGNvbXBpbGVyIChhbmQgdGhlIGJhciB3aWxsCj4+
+IHJhaXNlIHdpdGggQVZYNTEyIHN1cHBvcnQsIHdoaWNoIGlzIGluIHRoZSB3b3JrcykuCj4gCj4g
+SGkgSmFuLAo+IAo+IEkgZG9uJ3Qgc3BlY2lmaWNhbGx5IGVuYWJsZSBhbnkgdGVzdGluZyAodGhh
+dCBJJ20gYXdhcmUgb2YpLgo+IAo+IFRoZSBjdXJyZW50IFNQRUMgZmlsZSB0aGF0IEknbSB1c2lu
+ZyBpcyBhdDoKPiBodHRwczovL2dpdC5jcmMuaWQuYXUvbmV0d2l6L3hlbjQ5L3NyYy9kZXZlbC9T
+UEVDUy94ZW40OS5zcGVjIAo+IAo+IEVzc2VudGlhbGx5IGl0IGJvaWxzIGRvd24gdG86Cj4gLi9j
+b25maWd1cmUgLS1lbmFibGUtc3lzdGVtZCAtLXByZWZpeD0vdXNyIC0tZW5hYmxlLXhzbXBvbGlj
+eSAKPiAlez9lbmFibGVfb2NhbWx9IAo+IFwKPiAgIC0tbGliZGlyPSV7X2xpYmRpcn0gLS1lbmFi
+bGUtZWZpIC0tZGlzYWJsZS1xZW11LXRyYWRpdGlvbmFsIFwKPiAgIC0td2l0aC1leHRyYS1xZW11
+VS1jb25maWd1cmUtYXJncz0iLS1lbmFibGUtc3BpY2UgLS1lbmFibGUtdXNiLXJlZGlyIgo+IAo+
+IChjZCB4ZW47IG1ha2UgZGVmY29uZmlnOyBzZWQgLWkgJ3MvIyBDT05GSUdfTElWRVBBVENIIGlz
+IG5vdCBzZXQvCj4gQ09ORklHX0xJVkVQQVRDSD15L2cnIC5jb25maWc7IG1ha2Ugb2xkY29uZmln
+KQo+IAo+IGV4cG9ydCBYRU5fRE9NQUlOPXhlbi5jcmMuaWQuYXUKPiBtYWtlICV7P19zbXBfbWZs
+YWdzfSAlez9lZmlfZmxhZ3N9IGRpc3QKCkl0J3MgdGhpcyBsYXN0IHN0ZXAgd2hpY2ggaXMgb2Yg
+aW50ZXJlc3QgYWZhaWN0OyBob3cgeW91IGNvbmZpZ3VyZQp0aGluZ3MgZG9lcyBub3Qgc2VlbSB0
+byBtYXR0ZXIuIFRoZSBkaXN0IHRhcmdldCBpbXBsaWVzIGJ1aWxkaW5nCmRpc3QtdG9vbHMsIHdo
+aWNoIGluIHR1cm4gaGFzIGluc3RhbGwtdG9vbHMgYXMgYSBkZXBlbmRlbmN5LiBNb3N0Cm9mIHRo
+ZSBzdWItZGlyZWN0b3JpZXMgdW5kZXIgdG9vbHMvdGVzdHMvIGhhdmUgYW4gZW1wdHkKaW5zdGFs
+bCB0YXJnZXQgaW4gdGhlaXIgbWFrZWZpbGVzIHRob3VnaCwgd2hpY2ggbWVhbnMgbm90aGluZyBp
+cwpnb2luZyB0byBiZSBkb25lIHdoZW4gZW50ZXJpbmcgdGhlIHJlc3BlY3RpdmUgZGlyZWN0b3Jp
+ZXMuCgo+IEknbGwgbm90ZSB0aGF0IDQuNiwgNC43LCBhbmQgNC4xMCBkbyBub3QgZmFpbCBpbiB0
+aGlzIGZhc2hpb24gdXNpbmcgYWxtb3N0IHRoZSAKPiBzYW1lIGNvbW1hbmQgc2V0IHRvIGJ1aWxk
+LgoKSSBjYW4ndCBzcG90IGFueSByZWxldmFudCBkaWZmZXJlbmNlIGJldHdlZW4gdGhlIHZlcnNp
+b25zIHlvdQptZW50aW9uIChvciBtYXN0ZXIpLiBJJ20gYWZyYWlkIHlvdSdsbCBuZWVkIHRvIGRp
+ZyBhIGxpdHRsZSBkZWVwZXIKeW91cnNlbGYgKHVubGVzcyBzb21lb25lIGVsc2UgaGFzIGFuIGlk
+ZWEpLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
