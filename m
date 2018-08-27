@@ -1,17 +1,19 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 126763: regressions -
- trouble: blocked/fail
-Date: Mon, 27 Aug 2018 11:29:26 +0000
-Message-ID: <osstest-126763-mainreport@xen.org>
+From: Steven Haigh <netwiz@crc.id.au>
+Subject: Re: Unable to build staging-4.9 on RHEL6
+Date: Mon, 27 Aug 2018 21:30:17 +1000
+Message-ID: <4042528.4QxGzAFDWl@wopr.lan.crc.id.au>
+References: <b4cf0fe633df980a1d9299ae1520be9a@crc.id.au>
+ <2134533.qq8BOla9DR@wopr.lan.crc.id.au>
+ <5B83D44202000078001E21D7@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8459039196476254782=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=oxzl=lk=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fuFi5-00006S-9h
- for xen-devel@lists.xenproject.org; Mon, 27 Aug 2018 11:29:29 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=suj4=lk=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
+ id 1fuFiz-0000iM-LQ
+ for xen-devel@lists.xenproject.org; Mon, 27 Aug 2018 11:30:26 +0000
+In-Reply-To: <5B83D44202000078001E21D7@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,90 +22,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNjc2MyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNjc2My8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYW1kNjQgICAgICAgICAg
-ICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI2NzAy
-CiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAgICAgICAgICAg
-ICBmYWlsIFJFR1IuIHZzLiAxMjY3MDIKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0
-IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAxIGJ1aWxk
-LWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXFlbXV1LWRlYmlhbmh2bS1pMzg2ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgYmxvY2tlZCBu
-L2EKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAg
-ICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgIDEgYnVp
-bGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKCnZlcnNpb24gdGFyZ2V0ZWQg
-Zm9yIHRlc3Rpbmc6CiB4ZW4gICAgICAgICAgICAgICAgICBmZDA3YjY2NDhjNGM4ODkxZGNhNWJk
-MGY3ZWYxNzRiNjgzMWY4MGIyCmJhc2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAg
-ICBlNWQ2ZGRjZDMxYTYxMTNlNGEzZGI3YTIzNWNhNzg3NzBmZThmNDAxCgpMYXN0IHRlc3Qgb2Yg
-YmFzaXMgICAxMjY3MDIgIDIwMTgtMDgtMjYgMTM6MDA6MzEgWiAgICAwIGRheXMKVGVzdGluZyBz
-YW1lIHNpbmNlICAgMTI2NzYzICAyMDE4LTA4LTI3IDEwOjAwOjI5IFogICAgMCBkYXlzICAgIDEg
-YXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAg
-QW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICBEb3VnIEdvbGRzdGVp
-biA8Y2FyZG9lQGNhcmRvZS5jb20+CiAgSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgog
-IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgogIFBhdWwgRHVycmFudCA8cGF1bC5k
-dXJyYW50QGNpdHJpeC5jb20+CiAgV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KICBaaGVu
-emhvbmcgRHVhbiA8emhlbnpob25nLmR1YW5Ab3JhY2xlLmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2
-NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAg
-ICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBmYWlsICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWkzODYgICAgICAgICAgICAgICAgICAgICBibG9ja2Vk
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGJsb2NrZWQgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxh
-Yi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dz
-L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0
-dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRp
-b24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAg
-IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJF
-QURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9w
-PW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2Rl
-IGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0
-ZXN0LmdpdDthPXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgZmQwN2I2NjQ4YzRj
-ODg5MWRjYTViZDBmN2VmMTc0YjY4MzFmODBiMgpBdXRob3I6IFpoZW56aG9uZyBEdWFuIDx6aGVu
-emhvbmcuZHVhbkBvcmFjbGUuY29tPgpEYXRlOiAgIE1vbiBBdWcgMjcgMTE6Mzc6MjQgMjAxOCAr
-MDIwMAoKICAgIFZULWQvZG1hcjogaW9tbXUgbWVtIGxlYWsgZml4CiAgICAKICAgIFJlbGVhc2Ug
-bWVtb3J5IGFsbG9jYXRlZCBmb3IgZHJoZCBpb21tdSBpbiBlcnJvciBwYXRoLgogICAgCiAgICBT
-aWduZWQtb2ZmLWJ5OiBaaGVuemhvbmcgRHVhbiA8emhlbnpob25nLmR1YW5Ab3JhY2xlLmNvbT4K
-ICAgIEFja2VkLWJ5OiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KCmNvbW1pdCBj
-M2YwZGNjYzk2NjhiMTQ5NDljOTFiNzZmOTdkYmFjY2IxN2QyNDc3CkF1dGhvcjogRG91ZyBHb2xk
-c3RlaW4gPGNhcmRvZUBjYXJkb2UuY29tPgpEYXRlOiAgIE1vbiBBdWcgMjcgMTE6Mzc6MDEgMjAx
-OCArMDIwMAoKICAgIGJ1aWxkOiByZW1vdmUgdGJvb3QgbWFrZSB0YXJnZXRzCiAgICAKICAgIFRo
-ZSB0Ym9vdCB0YXJnZXRzIGFyZSB3b2VmdWxseSBvdXQgb2YgZGF0ZS4gVGhlc2Ugc2hvdWxkIHJl
-YWxseSBiZQogICAgcmV0aXJlZCBiZWNhdXNlIHNldHRpbmcgdXAgdGJvb3QgaXMgbW9yZSBjb21w
-bGV4IHRoYW4gdGhlIGJ1aWxkIHByb2Nlc3MKICAgIGZvciBpdC4KICAgIAogICAgU2lnbmVkLW9m
-Zi1ieTogRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBjYXJkb2UuY29tPgogICAgQWNrZWQtYnk6IEph
-biBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICAgIEFja2VkLWJ5OiBXZWkgTGl1IDx3ZWku
-bGl1MkBjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IENocmlzdG9waGVyIENsYXJrIDxjaHJp
-c3RvcGhlci5jbGFyazZAYmFlc3lzdGVtcy5jb20+Cgpjb21taXQgNjI5ODU2ZWFlMmE3Zjc2NmYx
-ZjAyNGEwNmFkM2FiZjFmZDRiOWQzNwpBdXRob3I6IFBhdWwgRHVycmFudCA8cGF1bC5kdXJyYW50
-QGNpdHJpeC5jb20+CkRhdGU6ICAgTW9uIEF1ZyAyNyAxMTozMDoxOCAyMDE4ICswMjAwCgogICAg
-eDg2L2h2bTogcmVtb3ZlIGRlZmF1bHQgaW9yZXEgc2VydmVyCiAgICAKICAgIE15IHJlY2VudCBw
-YXRjaCBbMV0gdG8gcWVtdS14ZW4tdHJhZGl0aW9uYWwgcmVtb3ZlcyB0aGUgbGFzdCB1c2Ugb2Yg
-dGhlCiAgICAnZGVmYXVsdCcgaW9yZXEgc2VydmVyIGluIFhlbi4gKFRoaXMgaXMgYSBjYXRjaC1h
-bGwgaW9yZXEgc2VydmVyIHRoYXQgaXMKICAgIHVzZWQgaWYgbm8gZXhwbGljaXRseSByZWdpc3Rl
-cmVkIEkvTyByYW5nZSBpcyB0YXJnZXR0ZWQpLgogICAgCiAgICBUaGlzIHBhdGNoIGNhbiBiZSBh
-cHBsaWVkIG9uY2UgdGhhdCBwYXRjaCBpcyBjb21taXR0ZWQsIHRvIHJlbW92ZSB0aGUKICAgICg+
-MTAwIGxpbmVzIG9mKSByZWR1bmRhbnQgY29kZSBpbiBYZW4uCiAgICAKICAgIE5PVEU6IFRoZSBy
-ZW1vdmFsIG9mIHRoZSBzcGVjaWFsIGNhc2UgZm9yIEhWTV9QQVJBTV9ETV9ET01BSU4gaW4KICAg
-ICAgICAgIGh2bV9hbGxvd19zZXRfcGFyYW0oKSBpcyBub3QgZGlyZWN0bHkgcmVsYXRlZCB0byBy
-ZW1vdmFsIG9mCiAgICAgICAgICBkZWZhdWx0IGlvcmVxIHNlcnZlcnMuIEl0IGNvdWxkIGhhdmUg
-YmVlbiBjbGVhbmVkIHVwIGF0IGFueSB0aW1lCiAgICAgICAgICBhZnRlciBjb21taXQgOWE0MjJj
-MDMgIng4Ni9odm06IHN0b3AgcGFzc2luZyBleHBsaWNpdCBkb21pZCB0bwogICAgICAgICAgaHZt
-X2NyZWF0ZV9pb3JlcV9zZXJ2ZXIoKSIuIEl0IGlzIG5vdyBhZGRlZCB0byB0aGUgbmV3CiAgICAg
-ICAgICBkZXByZWNhdGVkIHNldHMgaW50cm9kdWNlZCBieSB0aGlzIHBhdGNoLgogICAgCiAgICBb
-MV0gaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8y
-MDE4LTA4L21zZzAwMjcwLmh0bWwKICAgIAogICAgU2lnbmVkLW9mZi1ieTogUGF1bCBEdXJyYW50
-IDxwYXVsLmR1cnJhbnRAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxh
-bmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxq
-YmV1bGljaEBzdXNlLmNvbT4KKHFlbXUgY2hhbmdlcyBub3QgaW5jbHVkZWQpCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============8459039196476254782==
+Content-Type: multipart/signed; boundary="nextPart3354417.A8d4g6hQpE"; micalg="pgp-sha256"; protocol="application/pgp-signature"
+
+--nextPart3354417.A8d4g6hQpE
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+
+On Monday, 27 August 2018 8:36:50 PM AEST Jan Beulich wrote:
+> >>> On 27.08.18 at 12:03, <netwiz@crc.id.au> wrote:
+> > On Monday, 27 August 2018 6:32:17 PM AEST Jan Beulich wrote:
+> >> >>> On 24.08.18 at 04:56, <netwiz@crc.id.au> wrote:
+> >> > When trying to build both xen and qemu-xen from the staging-4.9
+> >> > branches, I'm running into issues compiling.
+> >> >=20
+> >> > Errors start with:
+> >> >=20
+> >> > BUILDSTDERR: sse.c: In function 'simd_test':
+> >> > BUILDSTDERR: sse.c:319: error: subscripted value is neither array nor
+> >> > pointer
+> >>=20
+> >> That's the x86 insn emulator test harness afaict, which doesn't get
+> >> built unless you explicitly ask for it. Why are you building it? It's
+> >> well known that it requires a new enough compiler (and the bar will
+> >> raise with AVX512 support, which is in the works).
+> >=20
+> > Hi Jan,
+> >=20
+> > I don't specifically enable any testing (that I'm aware of).
+> >=20
+> > The current SPEC file that I'm using is at:
+> > https://git.crc.id.au/netwiz/xen49/src/devel/SPECS/xen49.spec
+> >=20
+> > Essentially it boils down to:
+> > ./configure --enable-systemd --prefix=3D/usr --enable-xsmpolicy
+> > %{?enable_ocaml}
+> > \
+> >=20
+> >   --libdir=3D%{_libdir} --enable-efi --disable-qemu-traditional \
+> >   --with-extra-qemuU-configure-args=3D"--enable-spice --enable-usb-redi=
+r"
+> >=20
+> > (cd xen; make defconfig; sed -i 's/# CONFIG_LIVEPATCH is not set/
+> > CONFIG_LIVEPATCH=3Dy/g' .config; make oldconfig)
+> >=20
+> > export XEN_DOMAIN=3Dxen.crc.id.au
+> > make %{?_smp_mflags} %{?efi_flags} dist
+>=20
+> It's this last step which is of interest afaict; how you configure
+> things does not seem to matter. The dist target implies building
+> dist-tools, which in turn has install-tools as a dependency. Most
+> of the sub-directories under tools/tests/ have an empty
+> install target in their makefiles though, which means nothing is
+> going to be done when entering the respective directories.
+
+This is actually interesting.
+
+I tried originally doing a 'make build', then 'make DESTDIR=3D%{buildroot}=
+=20
+install' - however I found that this didn't produce any EFI binaries in /bo=
+ot/
+efi/efi/$EFI_VENDOR/ like the 'make dist' option does.
+
+This seemed to persist across all versions (4.6 - 4.10) hence the path that=
+ I=20
+had taken.
+
+Should this then be a part of fixing why no EFI binaries exist in the make=
+=20
+build / make install method, and not trying to fix a test as a side effect =
+of=20
+having to use 'make dist'?
+=20
+> > I'll note that 4.6, 4.7, and 4.10 do not fail in this fashion using alm=
+ost
+> > the same command set to build.
+>=20
+> I can't spot any relevant difference between the versions you
+> mention (or master). I'm afraid you'll need to dig a little deeper
+> yourself (unless someone else has an idea).
+>=20
+> Jan
+
+
+
+=2D-=20
+Steven Haigh
+
+=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB https://www.crc.id.au
+=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
+
+--nextPart3354417.A8d4g6hQpE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAluD4MkACgkQQa811Xp9
+MdxuaQ/+LQvE8WC+YSsDMAiNIAqw7bwv7K1An92wFGqM0XMECPziDVt4g+ZzsaBC
+2oIHBsb+1wQ+varA60iAtNyXU3dMzmXkIz+c5EsNbN3ztZrcjn8KJTgOREQ1fOE5
+p1LzlC+lvQPXS92dDfCwcOXc/Rav0pBRUNh+BGORyQiMHEeJQus6HlWxBRvG/NsL
+9Ajw+hPa9Jm/9ZT0Y7N+kwr9ZXXB1UOZgDsnCIhXaUeJfSp6yEc4qfLvyAsq+G5i
+RuOZUNltx5C58G5fbI/oq9fFQFHbXBn+DKlVE5pPG/iVcsUKtlKdFd8gcMy9srps
+zhYdyHD3S86GcpJE5NehRMpscUrbAtHdw/IomftG4S6T2aDXnkSsuyuIadj0Nhll
+9kuuO3HAU7BAAJi6EtHcBDGK19GadqHlFA7AGoi0j50VAi52iAr5khj5FUomscyQ
+qbo+ZzvrssFYmjKkRekVjb2VQlNvR6zDfJlVvJfF0IfvGz6p2rrmMVGZY/iodZcn
+pFjEIjt2SE0cRClEUjf92faiz1rK8SXnt8xuPoNdCoNRaS1kuWemF5gkBbI0vd8S
+zGhoqArq6xSKabkfTFLH+qSN8H25IvntFx0rdWzIOI3Jtd6azaXiFmEtfRHg1JZs
+8M15IVBg/n1b5vxj7oka70Ai7v9f1IZpWjLkXYdNQWtUrUQkXWc=
+=N/jm
+-----END PGP SIGNATURE-----
+
+--nextPart3354417.A8d4g6hQpE--
+
+
+
+
+
+--===============8459039196476254782==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8459039196476254782==--
