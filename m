@@ -1,20 +1,17 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] build: remove tboot make targets
-Date: Tue, 28 Aug 2018 00:05:23 -0600
-Message-ID: <5B84E62302000078001E26BA@prv1-mh.provo.novell.com>
-References: <20180819022205.22024-1-cardoe@cardoe.com>
- <5B7A7CC602000078001DFCE2@prv1-mh.provo.novell.com>
- <20180827162344.45gcfxqvoknyggki@doug-macbook.localdomain>
+Subject: Re: [PATCH v1 1/6] arm: add SMC wrapper that is
+ compatible with SMCCC
+Date: Tue, 28 Aug 2018 00:09:28 -0600
+Message-ID: <5B84E71802000078001E26CD@prv1-mh.provo.novell.com>
+References: <1534947094-9974-1-git-send-email-volodymyr_babchuk@epam.com>
+ <1534947094-9974-2-git-send-email-volodymyr_babchuk@epam.com>
+ <5B839DCE02000078001E1F9D@prv1-mh.provo.novell.com>
+ <a49c68af-7549-45dc-f4fd-0018dbd44437@epam.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=k/hy=ll=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fuX86-0000F7-72
- for xen-devel@lists.xenproject.org; Tue, 28 Aug 2018 06:05:30 +0000
-In-Reply-To: <20180827162344.45gcfxqvoknyggki@doug-macbook.localdomain>
+In-Reply-To: <a49c68af-7549-45dc-f4fd-0018dbd44437@epam.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,25 +21,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Doug Goldstein <cardoe@cardoe.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Shane Wang <shane.wang@intel.com>, xen-devel <xen-devel@lists.xenproject.org>, Gang Wei <gang.wei@intel.com>
+To: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Cc: Lars Kurth <lars.kurth@xenproject.org>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI3LjA4LjE4IGF0IDE4OjIzLCA8Y2FyZG9lQGNhcmRvZS5jb20+IHdyb3RlOgo+IE9u
-IE1vbiwgQXVnIDIwLCAyMDE4IGF0IDAyOjMzOjEwQU0gLTA2MDAsIEphbiBCZXVsaWNoIHdyb3Rl
-Ogo+PiA+Pj4gT24gMTkuMDguMTggYXQgMDQ6MjIsIDxjYXJkb2VAY2FyZG9lLmNvbT4gd3JvdGU6
-Cj4+ID4gVGhlIHRib290IHRhcmdldHMgYXJlIHdvZWZ1bGx5IG91dCBvZiBkYXRlLiBUaGVzZSBz
-aG91bGQgcmVhbGx5IGJlCj4+ID4gcmV0aXJlZCBiZWNhdXNlIHNldHRpbmcgdXAgdGJvb3QgaXMg
-bW9yZSBjb21wbGV4IHRoYW4gdGhlIGJ1aWxkIHByb2Nlc3MKPj4gPiBmb3IgaXQuCj4+ID4gCj4+
-ID4gU2lnbmVkLW9mZi1ieTogRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBjYXJkb2UuY29tPgo+PiAK
-Pj4gQWNrZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPj4gCj4+IEJ1dCBJ
-IHRoaW5rIHlvdSB3b3VsZCBiZXR0ZXIgaGF2ZSBDYy1lZCB0aGUgVFhUL1RCT09UIG1haW50YWlu
-ZXJzCj4+IChub3cgZG9uZSksIGFzIGl0IHdhcyBwcmVzdW1hYmx5IHRoZW0gaGF2aW5nIGludHJv
-ZHVjZWQgdGhlc2UKPj4gdGFyZ2V0cy4gRXZlbiBpZiB0aGUgY2hhbmNlIGlmIGhpZ2ggdG8gbm90
-IHNlZSBhbnkgcmVzcG9uc2UsIHdlCj4+IHNob3VsZCBhdCBsZWFzdCBnaXZlIHRoZW0gYSBjaGFu
-Y2UgdG8gY2hpbWUgaW4uCj4gCj4gSnVzdCBhIG9uZSB3ZWVrIHBpbmcuCgpTbGlnaHRseSB0b28g
-bGF0ZSwgZG9uJ3QgeW91IHRoaW5rLCB3aXRoIGl0IGhhdmluZyBnb25lIGluIHllc3RlcmRheT8K
-QW5kIHdoeSBfdG9fIG1lIGFueXdheSwgd2hlbiBteSBhY2sgaXMgZXZlbiB2aXNpYmxlIGFib3Zl
-PwoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDI3LjA4LjE4IGF0IDIxOjI0LCA8dm9sb2R5bXlyX2JhYmNodWtAZXBhbS5jb20+IHdy
+b3RlOgo+IEhpIEphbiwKPiAKPiAKPiBPbiAyNy4wOC4xOCAwOTo0NCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gCj4gWy4uLl0KPiAKPj4+ICAgeGVuL2FyY2gvYXJtL2FybTMyL01ha2VmaWxlICAgICAg
+fCAgMSArCj4+PiAgIHhlbi9hcmNoL2FybS9hcm0zMi9zbWMuUyAgICAgICAgIHwgMzkgCj4gKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4+PiAgIHhlbi9hcmNoL2FybS9h
+cm02NC9NYWtlZmlsZSAgICAgIHwgIDEgKwo+Pj4gICB4ZW4vYXJjaC9hcm0vYXJtNjQvYXNtLW9m
+ZnNldHMuYyB8ICA0ICsrKysKPj4+ICAgeGVuL2FyY2gvYXJtL2FybTY0L3NtYy5TICAgICAgICAg
+fCAzMCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKPj4+ICAgeGVuL2luY2x1ZGUvYXNt
+LWFybS9wcm9jZXNzb3IuaCAgfCAxMSArKysrKysrKysrKwo+Pj4gICA2IGZpbGVzIGNoYW5nZWQs
+IDg2IGluc2VydGlvbnMoKykKPj4+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IHhlbi9hcmNoL2FybS9h
+cm0zMi9zbWMuUwo+Pj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgeGVuL2FyY2gvYXJtL2FybTY0L3Nt
+Yy5TCj4+IAo+PiBXaXRoIHRoaXMgZGlmZnN0YXQsIHdoeSBkaWQgSSBlbmQgdXAgb24gdGhlIF9U
+b18gbGlzdCBvZiB0aGlzIHBhdGNoPwo+PiBJIHNob3VsZG4ndCBldmVuIGhhdmUgYmVlbiBvbiB0
+aGUgQ2MgbGlzdCAoYW5kIEknbSBnb2luZyB0byBibGluZGx5Cj4+IGRlbGV0ZSBhbGwgb3RoZXIg
+cGF0Y2hlcyBvZiB0aGlzIHNlcmllcyB3aGVyZSB5b3UndmUgYWxzbwo+PiBhcHBhcmVudGx5IHB1
+dCBtZSBvbiB0aGUgVG8gbGlzdCkuIFBsZWFzZSByZW1lbWJlciB0aGF0IHBhdGNoZXMKPj4gYXJl
+IHN1cHBvc2VkIHRvIGJlIHNlbnQgX1RvXyB0aGUgbGlzdCwgd2l0aCBtYWludGFpbmVycywgcmV2
+aWV3ZXJzCj4+IChhbmQgcGVyaGFwcyBvdGhlcnMpIENjLWVkLiBUb2dldGhlciB3aXRoIHBlb3Bs
+ZSByZXBseWluZyB0bwo+PiBtYWlscyBvZnRlbiBub3QgYWRqdXN0aW5nIFRvL0NjIGxpc3RzIGFj
+Y29yZGluZ2x5LCBJJ3ZlIG5vdyBlbmRlZAo+PiB1cCB3aXRoIHdlbGwgb3ZlciAzMCBtYWlscyBp
+biBteSBwcmltYXJ5IG1haWwgZm9sZGVyIHdoaWNoCj4+IHByZXN1bWFibHkgSSBoYXZlIG5vIGJ1
+c2luZXNzIHdpdGggYXQgYWxsLgo+IAo+IE15IGFwb2xvZ2llcyBmb3IgZGlzdHVyYmluZyB5b3Uu
+IEkgcmVhbGx5IGhhdmUgbm8gaW50ZW50aW9uIHRvIHVwc2V0IHlvdS4KPiBJIHVzZWQgZ2V0X21h
+aW50YWluZXIucGwgc2NyaXB0IGFuZCBpdCBzaG93ZWQgeW91ciBlLW1haWwgYWRkcmVzcy4gU28g
+SSAKPiBhZGRlZCB5b3UgdG8gVG86IGxpc3QuCgpPbiB0b3Agb2YgSnVsaWVuJ3MgcmVwbHkgdGhp
+cyBfc3RpbGxfIGxlYXZlcyB0aGUgcXVlc3Rpb24gb2Ygd2h5CnlvdSd2ZSBhZGRlZCBtZSB0byB0
+aGUgVG8gbGlzdCB0aGVuLCByYXRoZXIgdGhhbiB0aGUgQ2Mgb25lLgoKQW5kIGJ0dyAtIHNjcmlw
+dCBhbmQgb3RoZXIgYnVncyBoYXBwZW4uIFBsZWFzZSBhZGQgc29tZSBzYWx0CnRvIHRoZWlyIG91
+dHB1dC4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
