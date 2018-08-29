@@ -1,19 +1,18 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86: drop NO_XPTI synthetic feature
-Date: Wed, 29 Aug 2018 14:38:45 +0100
-Message-ID: <0e5a70bb-8e7e-ded0-3840-a0ff3325a6cc@citrix.com>
-References: <5B86A19E02000078001E30C5@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH v3 0/3] x86: assorted assembly related cleanup
+Date: Wed, 29 Aug 2018 07:41:54 -0600
+Message-ID: <5B86A2A202000078001E30C9@prv1-mh.provo.novell.com>
+References: <5B362CC002000078001CF22A@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xzde=lm=citrix.com=prvs=772b5abf7=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1fv0gK-0000TT-AT
- for xen-devel@lists.xenproject.org; Wed, 29 Aug 2018 13:38:48 +0000
-In-Reply-To: <5B86A19E02000078001E30C5@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=lc6w=lm=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fv0jP-0001K0-6J
+ for xen-devel@lists.xenproject.org; Wed, 29 Aug 2018 13:41:59 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,14 +21,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjkvMDgvMTggMTQ6MzcsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFdpdGggdGhlcmUgbm90IGJl
-aW5nIGFueSBwYXRjaGluZyBkb25lIGJhc2VkIG9uIGl0LCB3ZSBkb24ndCBuZWVkIHRoaXMuCj4g
-Tm9uLXBhdGNoaW5nIGNvbmRpdGlvbmFscyBjYW4gdXNlIG9wdF94cHRpIGluc3RlYWQuCj4KPiBT
-aWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpBY2tlZC1ieTog
-QW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+MTogYWx0ZXJuYXRpdmVzOiBmdWxseSBsZXZlcmFnZSBhdXRvbWF0aWMgTk9QIGZpbGxpbmcKMjog
+bW92ZSBxdW90aW5nIG9mIF9fQVNNX3tTVEFDLENMQUN9CjM6IHJlZHVjZSAidmlzaWJpbGl0eSIg
+b2Ygc3BlY19jdHJsX2FzbS5oCgpTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hA
+c3VzZS5jb20+CgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
