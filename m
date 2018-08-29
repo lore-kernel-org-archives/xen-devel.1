@@ -1,12 +1,21 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: incompatible changes in staging break qemu
-Date: Wed, 29 Aug 2018 14:22:05 +0200
-Message-ID: <20180829122204.GE31376@aepfle.de>
-References: <20180827084315.3e91117e.olaf@aepfle.de>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2 12/12] xen/domain: Allocate d->vcpu[] in
+ domain_create()
+Date: Wed, 29 Aug 2018 13:29:50 +0100
+Message-ID: <a534be06-1de1-a26b-d6c7-e93ab39f1311@citrix.com>
+References: <1534154469-6076-1-git-send-email-andrew.cooper3@citrix.com>
+ <1534154469-6076-13-git-send-email-andrew.cooper3@citrix.com>
+ <5B74268F02000078001DE65B@prv1-mh.provo.novell.com>
+ <4293be30-da9e-d6cc-b3ba-1e19e514aa52@citrix.com>
+ <5B74445602000078001DE780@prv1-mh.provo.novell.com>
+ <8f088499-9b4e-3732-09c6-85f26d3b941c@citrix.com>
+ <5B868D2102000078001E301E@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1005979266798626610=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180827084315.3e91117e.olaf@aepfle.de>
+In-Reply-To: <5B868D2102000078001E301E@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,55 +24,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1005979266798626610==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1Ow488MNN9B9o/ov"
-Content-Disposition: inline
-
-
---1Ow488MNN9B9o/ov
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Mon, Aug 27, Olaf Hering wrote:
-
-> Since about two weeks, no released qemu can be built against xen.git#staging. The error looks like that:
-> qemu-20180825T130857.235c82acca/include/hw/xen/xen_common.h:677:5: error: too many arguments to function 'xc_domain_create'
-> It looks like staging lacks proper compat wrappers for released qemu versions.
-
-Passing --disable-xen-pv-domain-build instead of
---enable-xen-pv-domain-build to configure fixes/hides the build error.
-
-What is "xen-pv-domain-build" supposed to do?
-
-
-Olaf
-
---1Ow488MNN9B9o/ov
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW4aP6QAKCRBdQqD6ppg2
-fg8QAKCdJwi0YOvJ2/esjULPesOSYLIT3gCfaaTnZotIvdvoSOgZt64R5prik5M=
-=4KkP
------END PGP SIGNATURE-----
-
---1Ow488MNN9B9o/ov--
-
-
---===============1005979266798626610==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1005979266798626610==--
+T24gMjkvMDgvMTggMTM6MTAsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDI5LjA4LjE4IGF0
+IDEyOjM2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IE9uIDE1LzA4LzE4
+IDE2OjE4LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4+IC0tLSBhL3hlbi9jb21tb24vZG9tY3Rs
+LmMKPj4+Pj4+ICsrKyBiL3hlbi9jb21tb24vZG9tY3RsLmMKPj4+Pj4+IEBAIC01NTQsMTYgKzU1
+NCw5IEBAIGxvbmcgZG9fZG9tY3RsKFhFTl9HVUVTVF9IQU5ETEVfUEFSQU0oeGVuX2RvbWN0bF90
+KSAKPj4gdV9kb21jdGwpCj4+Pj4+PiAgCj4+Pj4+PiAgICAgICAgICByZXQgPSAtRUlOVkFMOwo+
+Pj4+Pj4gICAgICAgICAgaWYgKCAoZCA9PSBjdXJyZW50LT5kb21haW4pIHx8IC8qIG5vIGRvbWFp
+bl9wYXVzZSgpICovCj4+Pj4+PiAtICAgICAgICAgICAgIChtYXggPiBkb21haW5fbWF4X3ZjcHVz
+KGQpKSApCj4+Pj4+PiArICAgICAgICAgICAgIChtYXggIT0gZC0+bWF4X3ZjcHVzKSApICAgLyog
+bWF4X3ZjcHVzIHNldCB1cCBpbiBjcmVhdGVkb21haW4gCj4+ICovCj4+Pj4+PiAgICAgICAgICAg
+ICAgYnJlYWs7Cj4+Pj4+PiAgCj4+Pj4+PiAtICAgICAgICAvKiBVbnRpbCBYZW5vcHJvZiBjYW4g
+ZHluYW1pY2FsbHkgZ3JvdyBpdHMgdmNwdS1zIGFycmF5Li4uICovCj4+Pj4+PiAtICAgICAgICBp
+ZiAoIGQtPnhlbm9wcm9mICkKPj4+Pj4+IC0gICAgICAgIHsKPj4+Pj4+IC0gICAgICAgICAgICBy
+ZXQgPSAtRUFHQUlOOwo+Pj4+Pj4gLSAgICAgICAgICAgIGJyZWFrOwo+Pj4+Pj4gLSAgICAgICAg
+fQo+Pj4+Pj4gLQo+Pj4+Pj4gICAgICAgICAgLyogTmVlZGVkLCBmb3IgZXhhbXBsZSwgdG8gZW5z
+dXJlIHdyaXRhYmxlIHAudC4gc3RhdGUgaXMgc3luY2VkLiAqLwo+Pj4+Pj4gICAgICAgICAgZG9t
+YWluX3BhdXNlKGQpOwo+Pj4+Pj4gIAo+Pj4+Pj4gQEAgLTU4MSwzOCArNTc0LDggQEAgbG9uZyBk
+b19kb21jdGwoWEVOX0dVRVNUX0hBTkRMRV9QQVJBTSh4ZW5fZG9tY3RsX3QpIAo+PiB1X2RvbWN0
+bCkKPj4+Pj4+ICAgICAgICAgICAgICB9Cj4+Pj4+PiAgICAgICAgICB9Cj4+Pj4+PiAgCj4+Pj4+
+PiAtICAgICAgICAvKiBXZSBjYW5ub3QgcmVkdWNlIG1heGltdW0gVkNQVXMuICovCj4+Pj4+PiAt
+ICAgICAgICByZXQgPSAtRUlOVkFMOwo+Pj4+Pj4gLSAgICAgICAgaWYgKCAobWF4IDwgZC0+bWF4
+X3ZjcHVzKSAmJiAoZC0+dmNwdVttYXhdICE9IE5VTEwpICl4Y19kb21haW5fbWF4X3ZjcHVzCj4+
+Pj4+PiAtICAgICAgICAgICAgZ290byBtYXh2Y3B1X291dDsKPj4+Pj4+IC0KPj4+Pj4+IC0gICAg
+ICAgIC8qCj4+Pj4+PiAtICAgICAgICAgKiBGb3Igbm93IGRvbid0IGFsbG93IGluY3JlYXNpbmcg
+dGhlIHZjcHUgY291bnQgZnJvbSBhIG5vbi16ZXJvCj4+Pj4+PiAtICAgICAgICAgKiB2YWx1ZTog
+VGhpcyBjb2RlIGFuZCBhbGwgcmVhZGVycyBvZiBkLT52Y3B1IHdvdWxkIG90aGVyd2lzZSBuZWVk
+Cj4+Pj4+PiAtICAgICAgICAgKiB0byBiZSBjb252ZXJ0ZWQgdG8gdXNlIFJDVSwgYnV0IGF0IHBy
+ZXNlbnQgdGhlcmUncyBubyB0b29scyBzaWRlCj4+Pj4+PiAtICAgICAgICAgKiBjb2RlIHBhdGgg
+dGhhdCB3b3VsZCBpc3N1ZSBzdWNoIGEgcmVxdWVzdC4KPj4+Pj4+IC0gICAgICAgICAqLwo+Pj4+
+Pj4gLSAgICAgICAgcmV0ID0gLUVCVVNZOwo+Pj4+Pj4gLSAgICAgICAgaWYgKCAoZC0+bWF4X3Zj
+cHVzID4gMCkgJiYgKG1heCA+IGQtPm1heF92Y3B1cykgKQo+Pj4+Pj4gLSAgICAgICAgICAgIGdv
+dG8gbWF4dmNwdV9vdXQ7Cj4+Pj4+PiAtCj4+Pj4+PiAgICAgICAgICByZXQgPSAtRU5PTUVNOwo+
+Pj4+Pj4gICAgICAgICAgb25saW5lID0gY3B1cG9vbF9kb21haW5fY3B1bWFzayhkKTsKPj4+Pj4+
+IC0gICAgICAgIGlmICggbWF4ID4gZC0+bWF4X3ZjcHVzICkKPj4+Pj4+IC0gICAgICAgIHsKPj4+
+Pj4+IC0gICAgICAgICAgICBzdHJ1Y3QgdmNwdSAqKnZjcHVzOwo+Pj4+Pj4gLQo+Pj4+Pj4gLSAg
+ICAgICAgICAgIEJVR19PTihkLT52Y3B1ICE9IE5VTEwpOwo+Pj4+Pj4gLSAgICAgICAgICAgIEJV
+R19PTihkLT5tYXhfdmNwdXMgIT0gMCk7Cj4+Pj4+PiAtCj4+Pj4+PiAtICAgICAgICAgICAgaWYg
+KCAodmNwdXMgPSB4emFsbG9jX2FycmF5KHN0cnVjdCB2Y3B1ICosIG1heCkpID09IE5VTEwgKQo+
+Pj4+Pj4gLSAgICAgICAgICAgICAgICBnb3RvIG1heHZjcHVfb3V0Owo+Pj4+Pj4gLQo+Pj4+Pj4g
+LSAgICAgICAgICAgIC8qIEluc3RhbGwgdmNwdSBhcnJheSAvdGhlbi8gdXBkYXRlIG1heF92Y3B1
+cy4gKi8KPj4+Pj4+IC0gICAgICAgICAgICBkLT52Y3B1ID0gdmNwdXM7Cj4+Pj4+PiAtICAgICAg
+ICAgICAgc21wX3dtYigpOwo+Pj4+Pj4gLSAgICAgICAgICAgIGQtPm1heF92Y3B1cyA9IG1heDsK
+Pj4+Pj4+IC0gICAgICAgIH0KPj4+Pj4+ICAKPj4+Pj4+ICAgICAgICAgIGZvciAoIGkgPSAwOyBp
+IDwgbWF4OyBpKysgKQo+Pj4+Pj4gICAgICAgICAgewo+Pj4+PiBXaXRoIGFsbCBvZiB0aGlzIGRy
+b3BwZWQsIEkgdGhpbmsgdGhlIGRvbWN0bCBzaG91bGQgYmUgcmVuYW1lZC4gQnkKPj4+Pj4gZHJv
+cHBpbmcgaXRzICJtYXgiIGlucHV0IGF0IHRoZSBzYW1lIHRpbWUsIHRoZXJlIHdvdWxkIHRoZW4g
+YWxzbwo+Pj4+PiBubyBsb25nZXIgYmUgYSBuZWVkIHRvIGNoZWNrIHRoYXQgdGhlIHZhbHVlIG1h
+dGNoZXMgd2hhdCB3YXMKPj4+Pj4gc3RvcmVkIGR1cmluZyBkb21haW4gY3JlYXRpb24uCj4+Pj4g
+SSdtIHN0aWxsIGxvb2tpbmcgdG8gZXZlbnR1YWxseSBkZWxldGUgdGhlIGh5cGVyY2FsbCwgYnV0
+IHdlIG5lZWQgdG8gYmUKPj4+PiBhYmxlIHRvIGNsZWFuIHVwIGFsbCBkb21haW4vdmNwdSBhbGxv
+Y2F0aW9ucyB3aXRob3V0IGNhbGxpbmcKPj4+PiBjb21wbGV0ZV9kb21haW5fZGVzdHJveSwgb3Ig
+cmVhcnJhbmdlIHRoZSBlbnRyeSBsb2dpYyBzbwo+Pj4+IGNvbXBsZXRlX2RvbWFpbl9kZXN0cm95
+KCkgY2FuIGJlIHJldXNlZCBmb3IgYSBkb21haW4gd2hpY2ggaXNuJ3QKPj4+PiBjdXJyZW50bHkg
+aW4gdGhlIGRvbWxpc3QuCj4+Pj4KPj4+PiBVbmZvcnR1bmF0ZWx5LCBJIHRoaW5rIHRoaXMgaXMg
+Z29pbmcgdG8gYmUgZmFpcmx5IGNvbXBsaWNhdGVkLCBJIHRoaW5rLgo+Pj4gRXNwZWNpYWxseSB3
+aGVuIHdlIGV4cGVjdCB0aGlzIHRvIHRha2Ugc29tZSB0aW1lLCBJIHRoaW5rIGl0IHdvdWxkCj4+
+PiBiZSBxdWl0ZSBoZWxwZnVsIGZvciB0aGUgZG9tY3RsIHRvIGFjdHVhbGx5IHNheSB3aGF0IGl0
+IGRvZXMgdW50aWwKPj4+IHRoZW4sIHJhdGhlciB0aGFuIHJldGFpbmluZyBpdHMgY3VycmVudCAo
+dGhlbiBtaXNsZWFkaW5nKSBuYW1lLgo+PiBSZW5hbWluZyB0aGUgZG9tY3RsIG1lYW5zIHJlbmFt
+aW5nIHhjX2RvbWFpbl9tYXhfdmNwdXMoKSwgYW5kIHRoZQo+PiBweXRob24vb2NhbWwgc3R1YnMs
+IHRoZSBsYXR0ZXIgb2Ygd2hpY2ggZG9lcyBoYXZlIGV4dGVybmFsIHVzZXJzLgo+IFRoaXMgaXMg
+YW4gb3B0aW9uLCBidXQgdGhlIGxpYnhjIGFuZCBoaWdoZXIgbGF5ZXIgZnVuY3Rpb25zIGNvdWxk
+IGFzIHdlbGwKPiBiZSBsZWZ0IGFsb25lLCBwZXJoYXBzIHdpdGggYSBjb21tZW50IGFkZGVkIHRv
+IHRoZSBmdW5jdGlvbiB5b3UgbmFtZQo+IGV4cGxhaW5pbmcgd2h5IGl0cyBuYW1lIGRvZXNuJ3Qg
+bWF0Y2ggdGhlIGRvbWN0bCBpdCB1c2VzLgoKQW5kIHdoYXQgZ29vZCB3aWxsIHRoYXQgZG8/wqAg
+WW91J2xsIG5vdyBoYXZlIGluY29uc2lzdGVudCBuYW1pbmcsIHdoaWNoCmlzIHdvcnNlLgoKSXRz
+IGVpdGhlciBhbGwgb3Igbm90aGluZywgYW5kIHRoZXJlIGFyZSBzZXZlcmFsIGdvb2QgcmVhc29u
+cyB0byBub3QKY2hhbmdlIGV2ZXJ5dGhpbmcuwqAgSSBkZWZpbml0ZWx5IGRvbid0IHRoaW5rIHJl
+bmFtaW5nIHRoZSBpbmZyYXN0cnVjdHVyZQppcyBhIGNvbnN0cnVjdGl2ZSB1c2Ugb2YgbXkgdGlt
+ZSwgb3IgYW55b25lIGVsc2VzIGZvciB0aGF0IG1hdHRlci4KCkknbSBvcGVuIHRvIHRoZSBpZGVh
+IG9mIGxlYXZpbmcgYSBjb21tZW50IGJ5IHRoZSBpbXBsZW1lbnRhdGlvbiBvZgpYRU5fRE9NQ1RM
+X21heF92Y3B1czogZXhwbGFpbmluZyBpdHMgY2hhbmdlIGluIGJlaGF2aW91ciwgYnV0IEkgdGhp
+bmsKdGhhdCB0aGUgZXh0ZW50IG9mIHdoYXQgaXMgcmVhc29uYWJsZSB0byBkbyBoZXJlLgoKfkFu
+ZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
