@@ -1,14 +1,17 @@
-From: Olaf Hering <olaf@aepfle.de>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
 Subject: Re: build regression in staging
-Date: Wed, 29 Aug 2018 12:37:16 +0200
-Message-ID: <20180829103716.GB31376@aepfle.de>
+Date: Wed, 29 Aug 2018 11:38:30 +0100
+Message-ID: <03c0df6b-7113-22b3-564f-9aabab0bc37b@citrix.com>
 References: <20180829122729.3a063f43.olaf@aepfle.de>
  <376c792f-0b11-8c5b-dc14-4e5091e00028@citrix.com>
  <7a990912-e2c7-7693-70c7-709df5bfa386@citrix.com>
+ <20180829103716.GB31376@aepfle.de>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6394029563109643531=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <7a990912-e2c7-7693-70c7-709df5bfa386@citrix.com>
+In-Reply-To: <20180829103716.GB31376@aepfle.de>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,51 +20,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Olaf Hering <olaf@aepfle.de>
 Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6394029563109643531==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="rJwd6BRFiFCcLxzm"
-Content-Disposition: inline
-
-
---rJwd6BRFiFCcLxzm
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-On Wed, Aug 29, Andrew Cooper wrote:
-
-> Is the offending object file available to inspect?
-
-I will try to build it locally later today.
-
-
-Olaf
-
---rJwd6BRFiFCcLxzm
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW4Z3XAAKCRBdQqD6ppg2
-fnghAKC7F00VieHfMFg3RdFDDA87CLbuMACgxn//wqKfSCu8nI0wZ27mArQBrZo=
-=K+rV
------END PGP SIGNATURE-----
-
---rJwd6BRFiFCcLxzm--
-
-
---===============6394029563109643531==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6394029563109643531==--
+T24gMjkvMDgvMTggMTE6MzcsIE9sYWYgSGVyaW5nIHdyb3RlOgo+IE9uIFdlZCwgQXVnIDI5LCBB
+bmRyZXcgQ29vcGVyIHdyb3RlOgo+Cj4+IElzIHRoZSBvZmZlbmRpbmcgb2JqZWN0IGZpbGUgYXZh
+aWxhYmxlIHRvIGluc3BlY3Q/Cj4gSSB3aWxsIHRyeSB0byBidWlsZCBpdCBsb2NhbGx5IGxhdGVy
+IHRvZGF5LgoKQWN0dWFsbHksIEkndmUgc3BvdHRlZCB0aGUgcHJvYmxlbS7CoCBKdXN0IHdyaXRp
+bmcgYSBwYXRjaC4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
