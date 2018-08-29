@@ -1,18 +1,18 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v17 13/13] x86/domctl: Don't pause the whole
- domain if only getting vcpu state
-Date: Wed, 29 Aug 2018 08:13:20 -0600
-Message-ID: <5B86AA0002000078001E31D3@prv1-mh.provo.novell.com>
-References: <1534946563-12084-1-git-send-email-aisaila@bitdefender.com>
- <1534946563-12084-14-git-send-email-aisaila@bitdefender.com>
- <20180822144129.uxe5plthp4fxyxqe@mac>
- <1534950925.20997.8.camel@bitdefender.com>
- <1535551353.20997.18.camel@bitdefender.com>
+Subject: [PATCH v2 0/6] x86emul: fixes, improvements,
+ and beginnings of AVX512 support
+Date: Wed, 29 Aug 2018 08:20:00 -0600
+Message-ID: <5B86AB9002000078001E31E3@prv1-mh.provo.novell.com>
+References: <5B6BF83602000078001DC548@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1535551353.20997.18.camel@bitdefender.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=lc6w=lm=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fv1KG-0006UF-Aa
+ for xen-devel@lists.xenproject.org; Wed, 29 Aug 2018 14:20:04 +0000
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,27 +22,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: aisaila@bitdefender.com
-Cc: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, Paul Durrant <paul.durrant@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI5LjA4LjE4IGF0IDE2OjAyLCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3Rl
-Ogo+IE9uIE1pLCAyMDE4LTA4LTIyIGF0IDE4OjE1ICswMzAwLCBJc2FpbGEgQWxleGFuZHJ1IHdy
-b3RlOgo+PiBPbiBNaSwgMjAxOC0wOC0yMiBhdCAxNjo0MSArMDIwMCwgUm9nZXIgUGF1IE1vbm7D
-qSB3cm90ZToKPj4gPiBJZiB5b3UgbG9vayBhdCB2Y3B1X2h2bSBpbiB0b29scy9saWJ4Yy94Y19k
-b21feDg2LmMgaXQgc2F2ZXMgdGhlCj4+ID4gZnVsbAo+PiA+IGRvbWFpbiBjb250ZXh0IGp1c3Qg
-dG8gZ2V0IHRoZSBDUFUgYW5kIHRoZSBNVFJSIHN0YXRlIG9mIFZDUFUjMC4gRG8KPj4gPiB5b3Ug
-dGhpbmsgeW91IGNvdWxkIHN3aXRjaCB0aGlzIGNvZGUgdG8gdXNlIHRoZSBuZXdseSBpbnRyb2R1
-Y2VkCj4+ID4gbWFjaGluZXJ5IHRvIHNhdmUgYSBzaW5nbGUgaW5zdGFuY2Ugb2YgYSBzcGVjaWZp
-YyB0eXBlPwo+PiBTdXJlLCBJIHdpbGwgYWRkIGEgdG9vbCBwYXRjaCBhdCB0aGUgZW5kIG9mIHRo
-ZSBzZXJpZXMKPiAKPiBJcyB0aGlzIHVyZ2VudCB0byBiZSBpbiB0aGlzIHNlcmllcz8gSWYgbm90
-IEkgd2lsbCBhZGQgYSBuZXcgcGF0Y2gKPiBhZnRlciBpdCBpcyBhbGwgaW4uIAoKQ29uc2lkZXJp
-bmcgdGhlIHByb2JsZW1zIHRoYXQgdGhlcmUgaGF2ZSBiZWVuIHdpdGggdGhpcyBzZXJpZXMsCmFu
-eXRoaW5nIHRvIGhlbHAgYnVpbGQgY29uZmlkZW5jZSBpbiB0aGluZ3Mgc3RpbGwgd29ya2luZyBm
-b3IgYWxsCmNhc2VzIHdvdWxkIGhlbHAgaGVyZSwgc28gSSdtIHByZXR0eSBnbGFkIFJvZ2VyIHRo
-b3VnaHQgb2YgdGhpcywKYW5kIHdoaWxlIEkgd291bGRuJ3QgbWFrZSBpdCBhcyBzdHJvbmcgYXMg
-InRoZSBzZXJpZXMgY2FuJ3QgZ28KaW4gd2l0aG91dCB0aGlzIiwgSSdkIHN0aWxsIG11Y2ggcHJl
-ZmVyIGlmIHlvdSB0b28gdGhlIHRpbWUuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+MTogZml4IEZNQSBzY2FsYXIgb3BlcmFuZCBzaXplcwoyOiBleHRlbmQgTUFTS01PVntRLERRVX0g
+dGVzdHMKMzogc3VwcG9ydCBBVlg1MTIgb3BtYXNrIGluc25zCjQ6IGNsZWFuIHVwIEFWWDIgaW5z
+biB1c2UgaW4gdGVzdCBoYXJuZXNzCjU6IGNvcnJlY3QgRVZFWCBkZWNvZGluZwo2OiBnZW5lcmFs
+aXplIHZlY3RvciBsZW5ndGggaGFuZGxpbmcgZm9yIEFWWDUxMi9FVkVYCgpXaGlsZSBJIGFsc28g
+aGF2ZSByZWFkeSBhIHBhdGNoIGVtdWxhdGluZyB0aGUgYmFzaWMgQVZYNTEyIG1vdmVzLAppdHMg
+cHJlcmVxIHRvIHdpZGVuIHJlc3BlY3RpdmUgZmllbGRzIGluIEhWTSBjb2RlIHRvIGFsbG93IGZv
+ciA2NCBieXRlCm9wZXJhbmQgc2l6ZXMgaGFzIGEgZGVwZW5kZW5jeSBvbiB0aGUgIng4Ni9IVk06
+IGltcGxlbWVudCBtZW1vcnkKcmVhZCBjYWNoaW5nIiBzZXJpZXMsIHdoaWNoIGxvb2tzIHRvIGJl
+IHN0YWxsZWQsIGFuZCBJIHByZWZlciB0byBhdm9pZApwb3N0aW5nIGZ1cnRoZXIgcGF0Y2hlcyB3
+aXRoIGRlcGVuZGVuY2llcyBvbiBzdGFsbGVkIHNlcmllcy4KClNvbWUgc3VwcG9ydCBiZXlvbmQg
+bW92ZXMgaXMgYWxzbyBtb3N0bHkgcmVhZHksIGJ1dCBpdCdzIG5vdCBxdWl0ZQplbm91Z2ggeWV0
+IHRvIGVuYWJsZSB0ZXN0aW5nIHRoYXQgY29kZSBpbiB0aGUgaGFybmVzcywgYW5kIEknZCByYXRo
+ZXIKbm90IHBvc3QgY29kZSB0aGF0IEkgaGF2ZW4ndCBwdXNoZWQgdGhyb3VnaCB0aGUgaGFybmVz
+cyB5ZXQuIFRoZQpwYXJ0aWFsIHRlc3RpbmcgSSd2ZSBiZWVuIGRvaW5nIG1lYW5zLCBob3dldmVy
+LCB0aGF0IGluIHBhcnRpY3VsYXIgdGhlCmxhc3QgdHdvIHBhdGNoZXMgaGVyZSBoYXZlIGJlZW4g
+dGVzdGVkIGFscmVhZHksIGV2ZW4gaWYgbm8gc3VjaAp0ZXN0aW5nIHdvdWxkIGJlIHBvc3NpYmxl
+IGZvciBvdGhlcnMgdW50aWwgZnVydGhlciBwYXRjaGVzIGFjdHVhbGx5IGdldApwb3N0ZWQuCgpK
+YW4KCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
