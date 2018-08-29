@@ -1,12 +1,26 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/alt: Fix build when CONFIG_LIVEPATCH is
- disabled
-Date: Wed, 29 Aug 2018 11:57:02 +0100
-Message-ID: <1535540222-11439-1-git-send-email-andrew.cooper3@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH 0/2] MMIO emulation fixes
+Date: Wed, 29 Aug 2018 13:00:52 +0200
+Message-ID: <20180829110052.GC31376@aepfle.de>
+References: <fdf19f7d-1b92-a9c0-3602-b1c9807bf610@citrix.com>
+ <a735b4359ccc4b278330204d9790c6ac@AMSPEX02CL03.citrite.net>
+ <5B6DAF9F02000078001DD040@prv1-mh.provo.novell.com>
+ <e2f77af0b2394b8f859a1f2dc1a91797@AMSPEX02CL03.citrite.net>
+ <5B6DB69D02000078001DD06A@prv1-mh.provo.novell.com>
+ <eaab5a73-2910-7fb6-e1fc-08537e63088c@citrix.com>
+ <92ca69e5-98b1-61e4-817a-3868f829471a@citrix.com>
+ <5B712A3502000078001DD514@prv1-mh.provo.novell.com>
+ <20180829103614.GA31376@aepfle.de>
+ <75009cae-1c9b-65d9-8269-497f94469983@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============9071230856918192320=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=ygmg=lm=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fuyDa-0002AV-Tu
+ for xen-devel@lists.xenproject.org; Wed, 29 Aug 2018 11:00:59 +0000
+In-Reply-To: <75009cae-1c9b-65d9-8269-497f94469983@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,53 +29,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>, george.dunlap@citrix.com, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Yy9zIGIyOGNkMjFjMzYyOCAieDg2L2J1aWxkOiBVc2UgbmV3IC5ub3BzIGRpcmVjdGl2ZSB3aGVu
-IGF2YWlsYWJsZSIKaW50cm9kdWNlZCBhIF9fcmVhZF9tb3N0bHkgYm9vbGVhbiB3aGljaCBpcyBp
-bmNsdWRlZCBpZiB0aGUgdG9vbGNoYWluIHN1cHBvcnRzCnRoZSAubm9wcyBkaXJlY3RpdmUuCgpX
-aGVuIENPTkZJR19MSVZFUEFUQ0ggaXMgY29tcGlsZWQgb3V0LCBhbHRlcm5hdGl2ZS5vIGlzIGV4
-cGVjdGVkIHRvIGJlIGEgZnVsbHkKaW5pdCBtb2R1bGUsIGFuZCB0b29sY2hhaW5fbm9wc19hcmVf
-aWRlYWwgdHJpcHMgdGhlIGJ1aWxkIHN5c3RlbSBjaGVjazoKCiAgRXJyb3I6IHNpemUgb2YgYWx0
-ZXJuYXRpdmUubzouZGF0YS5yZWFkX21vc3RseSBpcyAweDAxCiAgL2xvY2FsL3hlbi5naXQveGVu
-L1J1bGVzLm1rOjIwNjogcmVjaXBlIGZvciB0YXJnZXQgJ2FsdGVybmF0aXZlLmluaXQubycgZmFp
-bGVkCiAgbWFrZVszXTogKioqIFthbHRlcm5hdGl2ZS5pbml0Lm9dIEVycm9yIDEyCgpJbnRyb2R1
-Y2UgaW5pdF9vcl9saXZlcGF0Y2hfcmVhZF9tb3N0bHkgYW5kIHN3aXRjaCB0aGUgYW5ub3RhdGlv
-biBmb3IKdG9vbGNoYWluX25vcHNfYXJlX2lkZWFsLgoKUmVwb3J0ZWQtYnk6IE9sYWYgSGVyaW5n
-IDxvbGFmQGFlcGZsZS5kZT4KU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT4KLS0tCkNDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+
-CkNDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgpDQzogUm9nZXIgUGF1IE1vbm7DqSA8
-cm9nZXIucGF1QGNpdHJpeC5jb20+CkNDOiBLb25yYWQgUnplc3p1dGVrIFdpbGsgPGtvbnJhZC53
-aWxrQG9yYWNsZS5jb20+CkNDOiBSb3NzIExhZ2Vyd2FsbCA8cm9zcy5sYWdlcndhbGxAY2l0cml4
-LmNvbT4KLS0tCiB4ZW4vYXJjaC94ODYvYWx0ZXJuYXRpdmUuYyAgfCAyICstCiB4ZW4vaW5jbHVk
-ZS94ZW4vbGl2ZXBhdGNoLmggfCAyICsrCiAyIGZpbGVzIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygr
-KSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9hbHRlcm5hdGl2ZS5j
-IGIveGVuL2FyY2gveDg2L2FsdGVybmF0aXZlLmMKaW5kZXggZWE4MzVkOS4uMWFlNDkyMyAxMDA2
-NDQKLS0tIGEveGVuL2FyY2gveDg2L2FsdGVybmF0aXZlLmMKKysrIGIveGVuL2FyY2gveDg2L2Fs
-dGVybmF0aXZlLmMKQEAgLTkxLDcgKzkxLDcgQEAgYXNtICggIi5wdXNoc2VjdGlvbiAuaW5pdC5y
-b2RhdGEsIFwiYVwiLCBAcHJvZ2JpdHNcblx0IgogICAgICAgInRvb2xjaGFpbl9ub3BzOiAubm9w
-cyAiIF9fc3RyaW5naWZ5KEFTTV9OT1BfTUFYKSAiXG5cdCIKICAgICAgICIucG9wc2VjdGlvblxu
-XHQiKTsKIGV4dGVybiBjaGFyIHRvb2xjaGFpbl9ub3BzW0FTTV9OT1BfTUFYXTsKLXN0YXRpYyBi
-b29sIF9fcmVhZF9tb3N0bHkgdG9vbGNoYWluX25vcHNfYXJlX2lkZWFsOworc3RhdGljIGJvb2wg
-aW5pdF9vcl9saXZlcGF0Y2hfcmVhZF9tb3N0bHkgdG9vbGNoYWluX25vcHNfYXJlX2lkZWFsOwog
-CiAjZWxzZQogIyBkZWZpbmUgdG9vbGNoYWluX25vcHNfYXJlX2lkZWFsIGZhbHNlCmRpZmYgLS1n
-aXQgYS94ZW4vaW5jbHVkZS94ZW4vbGl2ZXBhdGNoLmggYi94ZW4vaW5jbHVkZS94ZW4vbGl2ZXBh
-dGNoLmgKaW5kZXggOThlYzAxMi4uMWIxODE3YyAxMDA2NDQKLS0tIGEveGVuL2luY2x1ZGUveGVu
-L2xpdmVwYXRjaC5oCisrKyBiL3hlbi9pbmNsdWRlL3hlbi9saXZlcGF0Y2guaApAQCAtMjMsNiAr
-MjMsNyBAQCBzdHJ1Y3QgeGVuX3N5c2N0bF9saXZlcGF0Y2hfb3A7CiAjZGVmaW5lIGluaXRfb3Jf
-bGl2ZXBhdGNoX2NvbnN0CiAjZGVmaW5lIGluaXRfb3JfbGl2ZXBhdGNoX2NvbnN0cmVsCiAjZGVm
-aW5lIGluaXRfb3JfbGl2ZXBhdGNoX2RhdGEKKyNkZWZpbmUgaW5pdF9vcl9saXZlcGF0Y2hfcmVh
-ZF9tb3N0bHkgX19yZWFkX21vc3RseQogI2RlZmluZSBpbml0X29yX2xpdmVwYXRjaAogCiAvKiBD
-b252ZW5pZW5jZSBkZWZpbmUgZm9yIHByaW50ay4gKi8KQEAgLTEyMSw2ICsxMjIsNyBAQCB2b2lk
-IGFyY2hfbGl2ZXBhdGNoX3VubWFzayh2b2lkKTsKICNkZWZpbmUgaW5pdF9vcl9saXZlcGF0Y2hf
-Y29uc3QgICAgICAgX19pbml0Y29uc3QKICNkZWZpbmUgaW5pdF9vcl9saXZlcGF0Y2hfY29uc3Ry
-ZWwgICAgX19pbml0Y29uc3RyZWwKICNkZWZpbmUgaW5pdF9vcl9saXZlcGF0Y2hfZGF0YSAgICAg
-ICAgX19pbml0ZGF0YQorI2RlZmluZSBpbml0X29yX2xpdmVwYXRjaF9yZWFkX21vc3RseSBfX2lu
-aXRkYXRhCiAjZGVmaW5lIGluaXRfb3JfbGl2ZXBhdGNoICAgICAgICAgICAgIF9faW5pdAogCiBz
-dGF0aWMgaW5saW5lIGludCBsaXZlcGF0Y2hfb3Aoc3RydWN0IHhlbl9zeXNjdGxfbGl2ZXBhdGNo
-X29wICpvcCkKLS0gCjIuMS40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+
+--===============9071230856918192320==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="jousvV0MzM2p6OtC"
+Content-Disposition: inline
+
+
+--jousvV0MzM2p6OtC
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Wed, Aug 29, Andrew Cooper wrote:
+
+> Architecturally speaking, handing #MC back is probably the closest we
+> can get to sensible behaviour, but it is still a bug that Linux is
+> touching the ballooned out page in the first place.
+
+Well, the issue is that a read crosses a page boundary. If that would be
+forbidden, load_unaligned_zeropad() would not exist. It can not know
+what is in the following page. And such page crossing happens also in
+the unballooned case. Sadly I can not trigger the reported NFS bug
+myself. But it can be enforced by ballooning enough pages so that an
+allocated readdir reply eventually is right in front of a ballooned
+page.
+
+Olaf
+
+--jousvV0MzM2p6OtC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW4Z84QAKCRBdQqD6ppg2
+fp25AJ9W9FgX9595utSXicONFLK6L88fWwCdEUnP48iIKisj450mLwRDnUKpI9o=
+=IrIQ
+-----END PGP SIGNATURE-----
+
+--jousvV0MzM2p6OtC--
+
+
+--===============9071230856918192320==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9071230856918192320==--
