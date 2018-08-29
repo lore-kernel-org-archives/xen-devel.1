@@ -1,20 +1,12 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 12/12] xen/domain: Allocate d->vcpu[] in
- domain_create()
-Date: Wed, 29 Aug 2018 06:10:09 -0600
-Message-ID: <5B868D2102000078001E301E@prv1-mh.provo.novell.com>
-References: <1534154469-6076-1-git-send-email-andrew.cooper3@citrix.com>
- <1534154469-6076-13-git-send-email-andrew.cooper3@citrix.com>
- <5B74268F02000078001DE65B@prv1-mh.provo.novell.com>
- <4293be30-da9e-d6cc-b3ba-1e19e514aa52@citrix.com>
- <5B74445602000078001DE780@prv1-mh.provo.novell.com>
- <8f088499-9b4e-3732-09c6-85f26d3b941c@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: incompatible changes in staging break qemu
+Date: Wed, 29 Aug 2018 14:22:05 +0200
+Message-ID: <20180829122204.GE31376@aepfle.de>
+References: <20180827084315.3e91117e.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1005979266798626610=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <8f088499-9b4e-3732-09c6-85f26d3b941c@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <20180827084315.3e91117e.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,73 +15,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI5LjA4LjE4IGF0IDEyOjM2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTUvMDgvMTggMTY6MTgsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pgo+Pj4+PiAtLS0g
-YS94ZW4vY29tbW9uL2RvbWN0bC5jCj4+Pj4+ICsrKyBiL3hlbi9jb21tb24vZG9tY3RsLmMKPj4+
-Pj4gQEAgLTU1NCwxNiArNTU0LDkgQEAgbG9uZyBkb19kb21jdGwoWEVOX0dVRVNUX0hBTkRMRV9Q
-QVJBTSh4ZW5fZG9tY3RsX3QpIAo+IHVfZG9tY3RsKQo+Pj4+PiAgCj4+Pj4+ICAgICAgICAgIHJl
-dCA9IC1FSU5WQUw7Cj4+Pj4+ICAgICAgICAgIGlmICggKGQgPT0gY3VycmVudC0+ZG9tYWluKSB8
-fCAvKiBubyBkb21haW5fcGF1c2UoKSAqLwo+Pj4+PiAtICAgICAgICAgICAgIChtYXggPiBkb21h
-aW5fbWF4X3ZjcHVzKGQpKSApCj4+Pj4+ICsgICAgICAgICAgICAgKG1heCAhPSBkLT5tYXhfdmNw
-dXMpICkgICAvKiBtYXhfdmNwdXMgc2V0IHVwIGluIGNyZWF0ZWRvbWFpbiAKPiAqLwo+Pj4+PiAg
-ICAgICAgICAgICAgYnJlYWs7Cj4+Pj4+ICAKPj4+Pj4gLSAgICAgICAgLyogVW50aWwgWGVub3By
-b2YgY2FuIGR5bmFtaWNhbGx5IGdyb3cgaXRzIHZjcHUtcyBhcnJheS4uLiAqLwo+Pj4+PiAtICAg
-ICAgICBpZiAoIGQtPnhlbm9wcm9mICkKPj4+Pj4gLSAgICAgICAgewo+Pj4+PiAtICAgICAgICAg
-ICAgcmV0ID0gLUVBR0FJTjsKPj4+Pj4gLSAgICAgICAgICAgIGJyZWFrOwo+Pj4+PiAtICAgICAg
-ICB9Cj4+Pj4+IC0KPj4+Pj4gICAgICAgICAgLyogTmVlZGVkLCBmb3IgZXhhbXBsZSwgdG8gZW5z
-dXJlIHdyaXRhYmxlIHAudC4gc3RhdGUgaXMgc3luY2VkLiAqLwo+Pj4+PiAgICAgICAgICBkb21h
-aW5fcGF1c2UoZCk7Cj4+Pj4+ICAKPj4+Pj4gQEAgLTU4MSwzOCArNTc0LDggQEAgbG9uZyBkb19k
-b21jdGwoWEVOX0dVRVNUX0hBTkRMRV9QQVJBTSh4ZW5fZG9tY3RsX3QpIAo+IHVfZG9tY3RsKQo+
-Pj4+PiAgICAgICAgICAgICAgfQo+Pj4+PiAgICAgICAgICB9Cj4+Pj4+ICAKPj4+Pj4gLSAgICAg
-ICAgLyogV2UgY2Fubm90IHJlZHVjZSBtYXhpbXVtIFZDUFVzLiAqLwo+Pj4+PiAtICAgICAgICBy
-ZXQgPSAtRUlOVkFMOwo+Pj4+PiAtICAgICAgICBpZiAoIChtYXggPCBkLT5tYXhfdmNwdXMpICYm
-IChkLT52Y3B1W21heF0gIT0gTlVMTCkgKXhjX2RvbWFpbl9tYXhfdmNwdXMKPj4+Pj4gLSAgICAg
-ICAgICAgIGdvdG8gbWF4dmNwdV9vdXQ7Cj4+Pj4+IC0KPj4+Pj4gLSAgICAgICAgLyoKPj4+Pj4g
-LSAgICAgICAgICogRm9yIG5vdyBkb24ndCBhbGxvdyBpbmNyZWFzaW5nIHRoZSB2Y3B1IGNvdW50
-IGZyb20gYSBub24temVybwo+Pj4+PiAtICAgICAgICAgKiB2YWx1ZTogVGhpcyBjb2RlIGFuZCBh
-bGwgcmVhZGVycyBvZiBkLT52Y3B1IHdvdWxkIG90aGVyd2lzZSBuZWVkCj4+Pj4+IC0gICAgICAg
-ICAqIHRvIGJlIGNvbnZlcnRlZCB0byB1c2UgUkNVLCBidXQgYXQgcHJlc2VudCB0aGVyZSdzIG5v
-IHRvb2xzIHNpZGUKPj4+Pj4gLSAgICAgICAgICogY29kZSBwYXRoIHRoYXQgd291bGQgaXNzdWUg
-c3VjaCBhIHJlcXVlc3QuCj4+Pj4+IC0gICAgICAgICAqLwo+Pj4+PiAtICAgICAgICByZXQgPSAt
-RUJVU1k7Cj4+Pj4+IC0gICAgICAgIGlmICggKGQtPm1heF92Y3B1cyA+IDApICYmIChtYXggPiBk
-LT5tYXhfdmNwdXMpICkKPj4+Pj4gLSAgICAgICAgICAgIGdvdG8gbWF4dmNwdV9vdXQ7Cj4+Pj4+
-IC0KPj4+Pj4gICAgICAgICAgcmV0ID0gLUVOT01FTTsKPj4+Pj4gICAgICAgICAgb25saW5lID0g
-Y3B1cG9vbF9kb21haW5fY3B1bWFzayhkKTsKPj4+Pj4gLSAgICAgICAgaWYgKCBtYXggPiBkLT5t
-YXhfdmNwdXMgKQo+Pj4+PiAtICAgICAgICB7Cj4+Pj4+IC0gICAgICAgICAgICBzdHJ1Y3QgdmNw
-dSAqKnZjcHVzOwo+Pj4+PiAtCj4+Pj4+IC0gICAgICAgICAgICBCVUdfT04oZC0+dmNwdSAhPSBO
-VUxMKTsKPj4+Pj4gLSAgICAgICAgICAgIEJVR19PTihkLT5tYXhfdmNwdXMgIT0gMCk7Cj4+Pj4+
-IC0KPj4+Pj4gLSAgICAgICAgICAgIGlmICggKHZjcHVzID0geHphbGxvY19hcnJheShzdHJ1Y3Qg
-dmNwdSAqLCBtYXgpKSA9PSBOVUxMICkKPj4+Pj4gLSAgICAgICAgICAgICAgICBnb3RvIG1heHZj
-cHVfb3V0Owo+Pj4+PiAtCj4+Pj4+IC0gICAgICAgICAgICAvKiBJbnN0YWxsIHZjcHUgYXJyYXkg
-L3RoZW4vIHVwZGF0ZSBtYXhfdmNwdXMuICovCj4+Pj4+IC0gICAgICAgICAgICBkLT52Y3B1ID0g
-dmNwdXM7Cj4+Pj4+IC0gICAgICAgICAgICBzbXBfd21iKCk7Cj4+Pj4+IC0gICAgICAgICAgICBk
-LT5tYXhfdmNwdXMgPSBtYXg7Cj4+Pj4+IC0gICAgICAgIH0KPj4+Pj4gIAo+Pj4+PiAgICAgICAg
-ICBmb3IgKCBpID0gMDsgaSA8IG1heDsgaSsrICkKPj4+Pj4gICAgICAgICAgewo+Pj4+IFdpdGgg
-YWxsIG9mIHRoaXMgZHJvcHBlZCwgSSB0aGluayB0aGUgZG9tY3RsIHNob3VsZCBiZSByZW5hbWVk
-LiBCeQo+Pj4+IGRyb3BwaW5nIGl0cyAibWF4IiBpbnB1dCBhdCB0aGUgc2FtZSB0aW1lLCB0aGVy
-ZSB3b3VsZCB0aGVuIGFsc28KPj4+PiBubyBsb25nZXIgYmUgYSBuZWVkIHRvIGNoZWNrIHRoYXQg
-dGhlIHZhbHVlIG1hdGNoZXMgd2hhdCB3YXMKPj4+PiBzdG9yZWQgZHVyaW5nIGRvbWFpbiBjcmVh
-dGlvbi4KPj4+IEknbSBzdGlsbCBsb29raW5nIHRvIGV2ZW50dWFsbHkgZGVsZXRlIHRoZSBoeXBl
-cmNhbGwsIGJ1dCB3ZSBuZWVkIHRvIGJlCj4+PiBhYmxlIHRvIGNsZWFuIHVwIGFsbCBkb21haW4v
-dmNwdSBhbGxvY2F0aW9ucyB3aXRob3V0IGNhbGxpbmcKPj4+IGNvbXBsZXRlX2RvbWFpbl9kZXN0
-cm95LCBvciByZWFycmFuZ2UgdGhlIGVudHJ5IGxvZ2ljIHNvCj4+PiBjb21wbGV0ZV9kb21haW5f
-ZGVzdHJveSgpIGNhbiBiZSByZXVzZWQgZm9yIGEgZG9tYWluIHdoaWNoIGlzbid0Cj4+PiBjdXJy
-ZW50bHkgaW4gdGhlIGRvbWxpc3QuCj4+Pgo+Pj4gVW5mb3J0dW5hdGVseSwgSSB0aGluayB0aGlz
-IGlzIGdvaW5nIHRvIGJlIGZhaXJseSBjb21wbGljYXRlZCwgSSB0aGluay4KPj4gRXNwZWNpYWxs
-eSB3aGVuIHdlIGV4cGVjdCB0aGlzIHRvIHRha2Ugc29tZSB0aW1lLCBJIHRoaW5rIGl0IHdvdWxk
-Cj4+IGJlIHF1aXRlIGhlbHBmdWwgZm9yIHRoZSBkb21jdGwgdG8gYWN0dWFsbHkgc2F5IHdoYXQg
-aXQgZG9lcyB1bnRpbAo+PiB0aGVuLCByYXRoZXIgdGhhbiByZXRhaW5pbmcgaXRzIGN1cnJlbnQg
-KHRoZW4gbWlzbGVhZGluZykgbmFtZS4KPiAKPiBSZW5hbWluZyB0aGUgZG9tY3RsIG1lYW5zIHJl
-bmFtaW5nIHhjX2RvbWFpbl9tYXhfdmNwdXMoKSwgYW5kIHRoZQo+IHB5dGhvbi9vY2FtbCBzdHVi
-cywgdGhlIGxhdHRlciBvZiB3aGljaCBkb2VzIGhhdmUgZXh0ZXJuYWwgdXNlcnMuCgpUaGlzIGlz
-IGFuIG9wdGlvbiwgYnV0IHRoZSBsaWJ4YyBhbmQgaGlnaGVyIGxheWVyIGZ1bmN0aW9ucyBjb3Vs
-ZCBhcyB3ZWxsCmJlIGxlZnQgYWxvbmUsIHBlcmhhcHMgd2l0aCBhIGNvbW1lbnQgYWRkZWQgdG8g
-dGhlIGZ1bmN0aW9uIHlvdSBuYW1lCmV4cGxhaW5pbmcgd2h5IGl0cyBuYW1lIGRvZXNuJ3QgbWF0
-Y2ggdGhlIGRvbWN0bCBpdCB1c2VzLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============1005979266798626610==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="1Ow488MNN9B9o/ov"
+Content-Disposition: inline
+
+
+--1Ow488MNN9B9o/ov
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Mon, Aug 27, Olaf Hering wrote:
+
+> Since about two weeks, no released qemu can be built against xen.git#staging. The error looks like that:
+> qemu-20180825T130857.235c82acca/include/hw/xen/xen_common.h:677:5: error: too many arguments to function 'xc_domain_create'
+> It looks like staging lacks proper compat wrappers for released qemu versions.
+
+Passing --disable-xen-pv-domain-build instead of
+--enable-xen-pv-domain-build to configure fixes/hides the build error.
+
+What is "xen-pv-domain-build" supposed to do?
+
+
+Olaf
+
+--1Ow488MNN9B9o/ov
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW4aP6QAKCRBdQqD6ppg2
+fg8QAKCdJwi0YOvJ2/esjULPesOSYLIT3gCfaaTnZotIvdvoSOgZt64R5prik5M=
+=4KkP
+-----END PGP SIGNATURE-----
+
+--1Ow488MNN9B9o/ov--
+
+
+--===============1005979266798626610==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1005979266798626610==--
