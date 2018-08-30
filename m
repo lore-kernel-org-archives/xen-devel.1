@@ -1,16 +1,26 @@
-From: Zhenzhong Duan <zhenzhong.duan@oracle.com>
-Subject: Re: [PATCH] xen/grant: Mute gcc warning in
- steal_linear_address()
-Date: Thu, 30 Aug 2018 16:10:16 +0800
-Message-ID: <75ebc583-b2fe-0871-0da4-23984ab2fb4e@oracle.com>
-References: <037428ab-4f89-4068-9ad4-1ded955cf9fd@default>
- <5B87A4F602000078001E35FF@prv1-mh.provo.novell.com>
-Reply-To: zhenzhong.duan@oracle.com
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH 0/2] MMIO emulation fixes
+Date: Thu, 30 Aug 2018 10:10:34 +0200
+Message-ID: <20180830081034.GA20226@aepfle.de>
+References: <e8cff3ca6c154b67a2a932af83719354@AMSPEX02CL03.citrite.net>
+ <fdf19f7d-1b92-a9c0-3602-b1c9807bf610@citrix.com>
+ <a735b4359ccc4b278330204d9790c6ac@AMSPEX02CL03.citrite.net>
+ <5B6DAF9F02000078001DD040@prv1-mh.provo.novell.com>
+ <e2f77af0b2394b8f859a1f2dc1a91797@AMSPEX02CL03.citrite.net>
+ <5B6DB69D02000078001DD06A@prv1-mh.provo.novell.com>
+ <eaab5a73-2910-7fb6-e1fc-08537e63088c@citrix.com>
+ <92ca69e5-98b1-61e4-817a-3868f829471a@citrix.com>
+ <5B712A3502000078001DD514@prv1-mh.provo.novell.com>
+ <20180829103614.GA31376@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0855821332266535982=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B87A4F602000078001E35FF@prv1-mh.provo.novell.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=ntoh=ln=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fvI2N-0006wZ-CF
+ for xen-devel@lists.xenproject.org; Thu, 30 Aug 2018 08:10:44 +0000
+In-Reply-To: <20180829103614.GA31376@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,32 +29,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Srinivas REDDY Eeda <srinivas.eeda@oracle.com>, Wei Liu <wei.liu2@citrix.com>, Xen-Devel <xen-devel@lists.xen.org>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, george.dunlap@citrix.com, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-5ZyoIDIwMTgvOC8zMCAxNjowNCwgSmFuIEJldWxpY2gg5YaZ6YGTOgo+Pj4+IE9uIDMwLjA4LjE4
-IGF0IDA2OjA2LCA8emhlbnpob25nLmR1YW5Ab3JhY2xlLmNvbT4gd3JvdGU6Cj4+IE1vdmUgcmVm
-ZXJlbmNlIG9mIG9sMWUgYWhlYWQgb3IgZWxzZSB3ZSBzZWUgYmVsb3cgd2FybmluZy4KPj4KPj4g
-Y2MxOiB3YXJuaW5ncyBiZWluZyB0cmVhdGVkIGFzIGVycm9ycwo+PiBncmFudF90YWJsZS5jOiBJ
-biBmdW5jdGlvbiAncmVwbGFjZV9ncmFudF9wdl9tYXBwaW5nJzoKPj4gZ3JhbnRfdGFibGUuYzox
-NDI6IHdhcm5pbmc6ICdvbDFlLmwxJyBtYXkgYmUgdXNlZCB1bmluaXRpYWxpemVkIGluIHRoaXMK
-Pj4gZnVuY3Rpb24KPj4KPj4gU2lnbmVkLW9mZi1ieTogWmhlbnpob25nIER1YW4gPHpoZW56aG9u
-Zy5kdWFuQG9yYWNsZS5jb20+Cj4gCj4gSSdtIGZpbmUgd2l0aCB0aGUgY2hhbmdlLCBidXQgZ29p
-bmcgZm9yd2FyZCBwbGVhc2UgYmUgbW9yZSBzcGVjaWZpYwo+IHdpdGggeW91ciBkZXNjcmlwdGlv
-bnM6IFdoZXRoZXIgb3Igbm90IHdhcm5pbmdzIGdldCBlbWl0dGVkIGZvciBhCj4gY2VydGFpbiBw
-aWVjZSBvZiBjb2RlIG9mdGVuIGhpZ2hseSBkZXBlbmRzIG9uIGNvbXBpbGVyIHZlcnNpb24uIExl
-dAo+IHVzIGtub3cgd2hpY2ggdmVyc2lvbiB5b3UndmUgcnVuIHRoaXMgaW50byB3aXRoLiBGb3Ig
-dGhlIHJlY29yZCwgSSdtCj4gYnVpbGRpbmcgb24gYSB3aWRlIHJhbmdlIG9mIGdjYyB2ZXJzaW9u
-cyBldmVyeSBvbmNlIGluIGEgd2hpbGUsIGFuZAo+IEkndmUgbm90IGNvbWUgYWNyb3NzIHRoaXMg
-d2FybmluZyBzbyBmYXIgKG9yIGVsc2UgSSB3b3VsZCBoYXZlIHNlbnQKPiBhIHBhdGNoKS4gVGhl
-IHJlYWxseSBvbGQgdmVyc2lvbnMgKDQuMS54IGZvciBleGFtcGxlKSBjYW4ndCByZWFsbHkgYmUK
-PiB1c2VkIGFueW1vcmUgZm9yIGNlcnRhaW4gb3RoZXIgcmVhc29ucyBhbnl3YXksIGFuZCBJIHRo
-aW5rIGl0J3MKPiBhYm91dCB0aW1lIHdlIGF0IGxlYXN0IHJhaXNlIHRoZSBiYXIgYSBsaXR0bGUg
-KGFsc28gZm9yIGJpbnV0aWxzLCB3aGljaAo+IGlpcmMgd2FzIHRoZSBhY3R1YWwgcHJvYmxlbSB3
-aXRoIGhlcmUsIHVzaW5nIGEgdmVyc2lvbiBtYXRjaGluZyBpbgo+IG9yaWdpbmFsIHJlbGVhc2Ug
-dGltZSB3aXRoIGdjYyA0LjEueCkuCgpnY2MgdmVyc2lvbiA0LjEuMiAyMDA4MDcwNCAoUmVkIEhh
-dCA0LjEuMi01NSkKClRoYW5rcwpaaGVuemhvbmcKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============0855821332266535982==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="n8g4imXOkfNTN/H1"
+Content-Disposition: inline
+
+
+--n8g4imXOkfNTN/H1
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Aug 29, Olaf Hering wrote:
+
+> On Mon, Aug 13, Jan Beulich wrote:
+>=20
+> > And hence the consideration of mapping in an all zeros page
+> > instead. This is because of the way __hvmemul_read() /
+> > __hvm_copy() work: The latter doesn't tell its caller how many
+> > bytes it was able to read, and hence the former considers the
+> > entire range MMIO (and forwards the request for emulation).
+> > Of course all of this is an issue only because
+> > hvmemul_virtual_to_linear() sees no need to split the request
+> > at the page boundary, due to the balloon driver having left in
+> > place the mapping of the ballooned out page.
+
+So how is this bug supposed to be fixed?
+
+What I see in my tracing is that __hvmemul_read gets called with
+gla=3D=3Dffff880223bffff9/bytes=3D=3D8. Then hvm_copy_from_guest_linear fil=
+ls
+the buffer from gpa 223bffff9 with data, but finally it returns
+HVMTRANS_bad_gfn_to_mfn, which it got from a failed get_page_from_gfn
+for the second page.
+
+Now things go downhill. hvmemul_linear_mmio_read is called, which calls
+hvmemul_do_io/hvm_io_intercept. That returns X86EMUL_UNHANDLEABLE. As a
+result hvm_process_io_intercept(null_handler) is called, which
+overwrites the return buffer with 0xff.
+
+Olaf
+
+--n8g4imXOkfNTN/H1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW4emdgAKCRBdQqD6ppg2
+fuOdAJsFHjshIUBXZ6ws0mvKSCwTdflfygCcCI4UeHOFsmRs4315k6ud32e9tC4=
+=wFfC
+-----END PGP SIGNATURE-----
+
+--n8g4imXOkfNTN/H1--
+
+
+--===============0855821332266535982==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0855821332266535982==--
