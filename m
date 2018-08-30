@@ -1,22 +1,17 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [xen-4.9-testing test] 126201: regressions - FAIL
-Date: Thu, 30 Aug 2018 11:57:02 +0100
-Message-ID: <20180830105702.3cmjc26dee77xyqz@citrix.com>
-References: <osstest-126201-mainreport@xen.org>
- <5B7BF42E02000078001E06A7@suse.com>
- <5ec84362-88e6-c9d8-6f17-578616ab1a76@suse.com>
- <20180824085802.5gfltbaywpfffytw@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH 0/2] x86/HVM: emulation adjustments
+Date: Thu, 30 Aug 2018 05:05:07 -0600
+Message-ID: <5B87CF6302000078001E37A6@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=9rit=ln=citrix.com=prvs=773fe5341=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fvKdP-0006hz-QM
- for xen-devel@lists.xenproject.org; Thu, 30 Aug 2018 10:57:07 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=wyq4=ln=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fvKlD-0007eY-Rk
+ for xen-devel@lists.xenproject.org; Thu, 30 Aug 2018 11:05:11 +0000
 Content-Disposition: inline
-In-Reply-To: <20180824085802.5gfltbaywpfffytw@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,56 +20,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jim Fehlig <jfehlig@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, osstest service owner <osstest-admin@xenproject.org>, Jan Beulich <JBeulich@suse.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Olaf Hering <olaf@aepfle.de>, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBBdWcgMjQsIDIwMTggYXQgMDk6NTg6MDJBTSArMDEwMCwgV2VpIExpdSB3cm90ZToK
-PiBPbiBXZWQsIEF1ZyAyMiwgMjAxOCBhdCAwNDo1MjoyN1BNIC0wNjAwLCBKaW0gRmVobGlnIHdy
-b3RlOgo+ID4gT24gMDgvMjEvMjAxOCAwNToxNCBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gPiA+
-ID4gPiA+IE9uIDIxLjA4LjE4IGF0IDAzOjExLCA8b3NzdGVzdC1hZG1pbkB4ZW5wcm9qZWN0Lm9y
-Zz4gd3JvdGU6Cj4gPiA+ID4gZmxpZ2h0IDEyNjIwMSB4ZW4tNC45LXRlc3RpbmcgcmVhbCBbcmVh
-bF0KPiA+ID4gPiBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xv
-Z3MvMTI2MjAxLwo+ID4gPiA+IAo+ID4gPiA+IFJlZ3Jlc3Npb25zIDotKAo+ID4gPiA+IAo+ID4g
-PiA+IFRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAo+ID4gPiA+
-IGluY2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgo+ID4gPiA+ICAgdGVzdC1h
-bWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgMjIgZ3Vlc3QtbWlncmF0ZS9zcmNfaG9zdC9kc3RfaG9z
-dCBmYWlsIFJFR1IuIHZzLiAxMjQzMjgKPiA+ID4gCj4gPiA+IFNvbWV0aGluZyBuZWVkcyB0byBi
-ZSBkb25lIGFib3V0IHRoaXMsIGFzIHRoaXMgY29udGludWVkIGZhaWx1cmUgaXMKPiA+ID4gYmxv
-Y2tpbmcgdGhlIDQuOS4zIHJlbGVhc2UuIEkgZGlkIG1haWwgYWJvdXQgdGhpcyBvbiBBdWcgMm5k
-IGFscmVhZHkKPiA+ID4gZm9yIGZsaWdodCAxMjU3MTAsIEkndmUgZ290IGJhY2sgZnJvbSBXZWk6
-Cj4gPiA+IAo+ID4gPiA+IFRoaXMgaXMgbGlidmlydGQncyBlcnJvciBtZXNzYWdlLgo+ID4gPiA+
-IAo+ID4gPiA+IFRoZSByZW1vdGUgaG9zdCBjYW4ndCBvYnRhaW4gdGhlIHN0YXRlIGNoYW5nZSBs
-b2cgZHVlIHRvIGl0IGlzIGFscmVhZHkKPiA+ID4gPiBoZWxkIGJ5IGFub3RoZXIgdGFzay90aHJl
-YWQuIEl0IGNvdWxkIGJlIGEgbGlidmlydCAvIGxpYnhsIGJ1Zy4KPiA+ID4gPiAKPiA+ID4gPiAy
-MDE4LTA4LTAxIDE2OjEyOjEzLjQzMyswMDAwOiAzNDkxOiB3YXJuaW5nIDogbGlieGxEb21haW5P
-YmpCZWdpbkpvYjoxNTEgOgo+ID4gPiA+IENhbm5vdCBzdGFydCBqb2IgKG1vZGlmeSkgZm9yIGRv
-bWFpbiBkZWJpYW4uZ3Vlc3Qub3NzdGVzdDsgY3VycmVudCBqb2IgaXMgKG1vZGlmeSkgb3duZWQg
-YnkgKDI0OTc1KQo+ID4gCj4gPiBJIHRvb2sgYSBjbG9zZXIgbG9vayBhdCB0aGUgbG9ncyBhbmQg
-aXQgYXBwZWFycyB0aGUgZmluaXNoIHBoYXNlIG9mCj4gPiBtaWdyYXRpb24gZmFpbHMgdG8gYWNx
-dWlyZSB0aGUgZG9tYWluIGpvYiBsb2NrIHNpbmNlIGl0IGlzIGFscmVhZHkgaGVsZCBieQo+ID4g
-dGhlIHBlcmZvcm0gcGhhc2UuIEluIHRoZSBwZXJmb3JtIHBoYXNlLCBhZnRlciB0aGUgdm0gaGFz
-IGJlZW4gdHJhbnNmZXJyZWQKPiA+IHRvIHRoZSBkc3QsIHRoZSBxZW11IHByb2Nlc3MgYXNzb2Np
-YXRlZCB3aXRoIHRoZSB2bSBpcyBzdGFydGVkLiBGb3Igd2hhdGV2ZXIKPiA+IHJlYXNvbiB0aGF0
-IHRha2VzIGEgbG9uZyB0aW1lIG9uIHRoaXMgaG9zdDoKPiA+IAo+ID4gMjAxOC0wOC0xOSAxNzow
-NToxOS4xODIrMDAwMDogbGlieGw6IGxpYnhsX2RtLmM6MjIzNTpsaWJ4bF9fc3Bhd25fbG9jYWxf
-ZG06Cj4gPiBEb21haW4gMTpTcGF3bmluZyBkZXZpY2UtbW9kZWwgL3Vzci9sb2NhbC9saWIveGVu
-L2Jpbi9xZW11LXN5c3RlbS1pMzg2IHdpdGgKPiA+IGFyZ3VtZW50czogLi4uCj4gPiAyMDE4LTA4
-LTE5IDE3OjA1OjE5LjE4OCswMDAwOiBsaWJ4bDogbGlieGxfZXhlYy5jOjM5ODpzcGF3bl93YXRj
-aF9ldmVudDoKPiA+IGRvbWFpbiAxIGRldmljZSBtb2RlbDogc3Bhd24gd2F0Y2ggcD0obnVsbCkK
-PiAKPiBUaGlzIGlzIGEgc3B1cmlvdXMgZXZlbnQgYWZ0ZXIgdGhlIHdhdGNoIGhhcyBiZWVuIHNl
-dCB1cC4KPiAKPiA+IC4uLgo+ID4gMjAxOC0wOC0xOSAxNzowNTo1MS41MjkrMDAwMDogbGlieGw6
-IGxpYnhsX2V2ZW50LmM6NTczOndhdGNoZmRfY2FsbGJhY2s6Cj4gPiB3YXRjaCB3PTB4N2Y4NGEw
-MDQ3ZWU4IHdwYXRoPS9sb2NhbC9kb21haW4vMC9kZXZpY2UtbW9kZWwvMS9zdGF0ZSB0b2tlbj0y
-LzE6Cj4gPiBldmVudCBlcGF0aD0vbG9jYWwvZG9tYWluLzAvZGV2aWNlLW1vZGVsLzEvc3RhdGUK
-PiA+IDIwMTgtMDgtMTkgMTc6MDU6NTEuNTI5KzAwMDA6IGxpYnhsOiBsaWJ4bF9leGVjLmM6Mzk4
-OnNwYXduX3dhdGNoX2V2ZW50Ogo+ID4gZG9tYWluIDEgZGV2aWNlIG1vZGVsOiBzcGF3biB3YXRj
-aCBwPXJ1bm5pbmcKPiAKPiBTbyBpdCBoYXMgdGFrZW4gMzJzIGZvciBRRU1VIHRvIHdyaXRlICJy
-dW5uaW5nIiBpbiB4ZW5zdG9yZS4gVGhpcywKPiBob3dldmVyLCBpcyBzdGlsbCB3aXRoaW4gdGhl
-IHRpbWVvdXQgbGltaXQgc2V0IGJ5IGxpYnhsICg2MHMpLgo+IAoKSSBoYXZlbid0IGJlZW4gYWJs
-ZSB0byByZWxpYWJseSByZXByb2R1Y2UgdGhlIHRpbWVvdXQuCgpPbmUgdGhpbmcgSSBvYnNlcnZl
-IGlzIHRoYXQgbGlidmlydCBwaWNrcyBxZGlzayBiYWNrZW5kIHdoaWxlIHhsIHBpY2tzCnBoeXMg
-YmFja2VuZC4KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+MTogZHJvcCBodm1fZmV0Y2hfZnJvbV9ndWVzdF9saW5lYXIoKQoyOiBzcGxpdCBwYWdlIHN0cmFk
+ZGxpbmcgZW11bGF0ZWQgYWNjZXNzZXMgaW4gbW9yZSBjYXNlcwoKUGF0Y2ggMiBpcyBpbmNvbXBs
+ZXRlIGF0IHRoaXMgdGltZSwgYW5kIGhlbmNlIG9ubHkgUkZDLgoKSmFuCgoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
