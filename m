@@ -1,20 +1,15 @@
 From: "Tian, Kevin" <kevin.tian@intel.com>
-Subject: Re: [PATCH v2 09/23] x86/pt: make it build with
- !CONFIG_HVM
-Date: Thu, 30 Aug 2018 01:29:57 +0000
-Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D1912E10DE@SHSMSX101.ccr.corp.intel.com>
-References: <cover.65253d1128f698146b48c4ff3bba2198f360c7b1.1535285866.git-series.wei.liu2@citrix.com>
- <aeb8e35a432c51d910aa4e6a5d83fd8ecaccca01.1535285866.git-series.wei.liu2@citrix.com>
+Subject: Re: [PATCH 3/7] xen/hvm: Rename d->arch.hvm_domain to
+ d->arch.hvm
+Date: Thu, 30 Aug 2018 01:34:14 +0000
+Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D1912E1109@SHSMSX101.ccr.corp.intel.com>
+References: <1535477946-17892-1-git-send-email-andrew.cooper3@citrix.com>
+ <1535477946-17892-4-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=bxg0=ln=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
- id 1fvBmr-00034v-Kh
- for xen-devel@lists.xenproject.org; Thu, 30 Aug 2018 01:30:17 +0000
-In-Reply-To: <aeb8e35a432c51d910aa4e6a5d83fd8ecaccca01.1535285866.git-series.wei.liu2@citrix.com>
+In-Reply-To: <1535477946-17892-4-git-send-email-andrew.cooper3@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,16 +19,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, "Nakajima,
- Jun" <jun.nakajima@intel.com>, Jan Beulich <jbeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, "Nakajima, Jun" <jun.nakajima@intel.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, George Dunlap <george.dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <JBeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiBGcm9tOiBXZWkgTGl1IFttYWlsdG86d2VpLmxpdTJAY2l0cml4LmNvbV0KPiBTZW50OiBTdW5k
-YXksIEF1Z3VzdCAyNiwgMjAxOCA4OjIwIFBNCj4gCj4gVGhpcyByZXF1aXJlcyBwcm92aWRpbmcg
-c3R1YnMgZm9yIGEgZmV3IGZ1bmN0aW9ucyB3aGljaCBhcmUgcGFydCBvZgo+IEhWTSBjb2RlLgo+
-IAo+IFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpSZXZpZXdl
-ZC1ieTogS2V2aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+CgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+PiBGcm9tOiBBbmRyZXcgQ29vcGVyIFttYWlsdG86YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbV0N
+Cj4gU2VudDogV2VkbmVzZGF5LCBBdWd1c3QgMjksIDIwMTggMTozOSBBTQ0KPiANCj4gVGhlIHRy
+YWlsaW5nIF9kb21haW4gc3VmZml4IGlzIHJlZHVuZGFudCwgYnV0IGFkZHMgdG8gY29kZSB2b2x1
+bWUuICBEcm9wIGl0Lg0KPiANCj4gUmVmbG93IGxpbmVzIGFzIGFwcHJvcHJpYXRlLCBhbmQgc3dp
+dGNoIHRvIHVzaW5nIHRoZSBuZXcgWEZSRUUvZXRjDQo+IHdyYXBwZXJzDQo+IHdoZXJlIGFwcGxp
+Y2FibGUuDQo+IA0KPiBObyBmdW5jdGlvbmFsIGNoYW5nZS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6
+IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+DQoNClJldmlld2VkLWJ5
+OiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4NCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
