@@ -1,26 +1,17 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH 0/2] MMIO emulation fixes
-Date: Thu, 30 Aug 2018 12:42:43 +0200
-Message-ID: <20180830104243.GB20226@aepfle.de>
-References: <5B6DB69D02000078001DD06A@prv1-mh.provo.novell.com>
- <eaab5a73-2910-7fb6-e1fc-08537e63088c@citrix.com>
- <92ca69e5-98b1-61e4-817a-3868f829471a@citrix.com>
- <5B712A3502000078001DD514@prv1-mh.provo.novell.com>
- <20180829103614.GA31376@aepfle.de>
- <20180830081034.GA20226@aepfle.de>
- <5B712A3502000078001DD514@prv1-mh.provo.novell.com>
- <5B86773A0200004903F324A0@prv1-mh.provo.novell.com>
- <5B87A68A0200001C04E5493A@prv1-mh.provo.novell.com>
- <5B87A97D02000078001E3674@prv1-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 126985: tolerable all pass -
+ PUSHED
+Date: Thu, 30 Aug 2018 10:48:38 +0000
+Message-ID: <osstest-126985-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0156443399935675856=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ntoh=ln=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1fvKPb-0005Za-DQ
- for xen-devel@lists.xenproject.org; Thu, 30 Aug 2018 10:42:51 +0000
-In-Reply-To: <5B87A97D02000078001E3674@prv1-mh.provo.novell.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=k5id=ln=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fvKVF-0005mv-O6
+ for xen-devel@lists.xenproject.org; Thu, 30 Aug 2018 10:48:41 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,87 +20,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, george.dunlap@citrix.com, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0156443399935675856==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="dc+cDN39EJAMEtIO"
-Content-Disposition: inline
-
-
---dc+cDN39EJAMEtIO
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Aug 30, Jan Beulich wrote:
-
-> approach): One is Paul's idea of making null_handler actually retrieve
-> RAM contents when (part of) the access touches RAM. Another might
-
-This works for me:
-
-static int null_read(const struct hvm_io_handler *io_handler,
-                     uint64_t addr,
-                     uint32_t size,
-                     uint64_t *data)
-{
-    struct vcpu *curr =3D current;
-    struct domain *currd =3D curr->domain;
-    p2m_type_t p2mt =3D p2m_invalid;
-    unsigned long gmfn =3D paddr_to_pfn(addr);
-    struct page_info *page;
-    char *p;
-
-    get_gfn_query_unlocked(currd, gmfn, &p2mt);
-    if ( p2mt !=3D p2m_ram_rw )
-    {  =20
-        *data =3D ~0ul;
-    }
-    else
-    {  =20
-        page =3D get_page_from_gfn(currd, gmfn, NULL, P2M_UNSHARE);
-        if ( ! page )
-        {
-            memset(data, 0xee, size);
-        }
-        else
-        {
-            p =3D (char *)__map_domain_page(page) + (addr & ~PAGE_MASK);
-            memcpy(data, p, size);
-            unmap_domain_page(p);
-            put_page(page);
-        }
-    }
-    return X86EMUL_OKAY;
-}
-
-Olaf
-
---dc+cDN39EJAMEtIO
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW4fKHwAKCRBdQqD6ppg2
-ftA1AJ4iHCOfKve6dVwea7Zuz8j4Tv5XTwCgjx9usDkvKfHgsipMDgEMu2SOi30=
-=glX9
------END PGP SIGNATURE-----
-
---dc+cDN39EJAMEtIO--
-
-
---===============0156443399935675856==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0156443399935675856==--
+ZmxpZ2h0IDEyNjk4NSB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNjk4NS8KCkZhaWx1cmVzIDot
+LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
+cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
+LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
+LXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGlu
+ZzoKIHhlbiAgICAgICAgICAgICAgICAgIGFlZDE5ZmI1MzcwZGY0ODUyN2ZiYTgyYzg4YzZiNzQx
+MTc3NjI4M2EKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIDY2MjM1ZGQ5
+ZjAxNGU0NmIxMjVjMGY0NjFjMmYxOGE3OTlkZTRkMjUKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEy
+Njk2MSAgMjAxOC0wOC0yOSAyMDowMzo0MiBaICAgIDAgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2Ug
+ICAxMjY5ODUgIDIwMTgtMDgtMzAgMDg6MDA6MzMgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoK
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBXZWkgTGl1IDx3
+ZWkubGl1MkBjaXRyaXguY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
+dWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJp
+YW5odm0taTM4NiAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
+LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgot
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxv
+Z3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25m
+aWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIu
+eGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRz
+LCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVu
+Lm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3Rl
+cgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9i
+O2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAg
+ICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoK
+ClB1c2hpbmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9naXQveGVu
+LmdpdAogICA2NjIzNWRkOWYwLi5hZWQxOWZiNTM3ICBhZWQxOWZiNTM3MGRmNDg1MjdmYmE4MmM4
+OGM2Yjc0MTE3NzYyODNhIC0+IHNtb2tlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
