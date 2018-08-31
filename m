@@ -1,15 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH for-4.7] x86/spec-ctrl: Fix backport of
- 1fdb25a614b
-Date: Fri, 31 Aug 2018 01:24:21 -0600
-Message-ID: <5B88ED2502000078001E3C29@prv1-mh.provo.novell.com>
-References: <1535654270-32333-1-git-send-email-andrew.cooper3@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] xen: Fix inconsistent callers of panic()
+Date: Fri, 31 Aug 2018 09:30:44 +0200
+Message-ID: <8b7eb4e5-65b3-3f9d-1318-febdd15ff8a2@suse.com>
+References: <1535632297-29549-1-git-send-email-andrew.cooper3@citrix.com>
+ <5B87FA3102000078001E38B7@prv1-mh.provo.novell.com>
+ <e5ad89df-4408-259b-7a34-1c242c3fb931@citrix.com>
+ <5B88E15002000078001E3BBD@prv1-mh.provo.novell.com>
+ <7e1164f8-68af-a08b-ff54-4d077562a2ce@suse.com>
+ <5B88E88102000078001E3BEF@prv1-mh.provo.novell.com>
+ <143997da-04af-6384-3866-b49c403410e9@suse.com>
+ <5B88EC8902000078001E3C1B@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1535654270-32333-1-git-send-email-andrew.cooper3@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <5B88EC8902000078001E3C1B@prv1-mh.provo.novell.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,20 +24,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDMwLjA4LjE4IGF0IDIwOjM3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gUmVmcmVzaGluZyBYZW5TZXJ2ZXIncyBwYXRjaHF1ZXVlIGhhcyBzaG93biB0aGF0IEkg
-bWlzc2VkIHRoaXMgYWRqdXN0bWVudCBpbgo+IHRoZSB1cHN0cmVhbSBiYWNrcG9ydHMgb2YgdGhl
-IGZpbmFsIHZlcnNpb24gb2YgdGhlIFhTQS0yNzMgZml4ZXMuCj4gCj4gVGhlIGNvZGUgZG9lcyB3
-b3JrIGluIDQuNyBhbmQgZWFybGllciwgYnV0IG9ubHkgYmVjYXVzZSB0aGUgZXZlbnR1YWwgdmFs
-dWUgb2YKPiAob3B0X3B2X2wxdGYgJiBPUFRfUFZfTDFURl9ET014KSBpcyB3aXRoaW4gcmFuZ2Ug
-b2YgYSBjaGFyLgoKQW5kIEkgaGFkIG5vdGljZWQgdGhpcyB3aGlsZSBwdWxsaW5nIHRoaW5ncyBp
-bnRvIG91ciB0cmVlcywgYnV0IGRlY2lkZWQKdG8gbGVhdmUgaXQgc2luY2UgaXQncyB3b3JraW5n
-LgoKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXgu
-Y29tPgoKQWNrZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCkphbgoKCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
-bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
-LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMzEvMDgvMTggMDk6MjEsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDMxLjA4LjE4IGF0
+IDA5OjEyLCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4gT24gMzEvMDgvMTggMDk6MDQsIEph
+biBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4gT24gMzEuMDguMTggYXQgMDg6NDMsIDxqZ3Jvc3NAc3Vz
+ZS5jb20+IHdyb3RlOgo+Pj4+IE9uIDMxLzA4LzE4IDA4OjMzLCBKYW4gQmV1bGljaCB3cm90ZToK
+Pj4+Pj4+Pj4gT24gMzAuMDguMTggYXQgMTk6MDgsIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
+PiB3cm90ZToKPj4+Pj4+IE9uIDMwLzA4LzE4IDE1OjA3LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+
+Pj4+Pj4+PiBPbiAzMC4wOC4xOCBhdCAxNDozMSwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+
+IHdyb3RlOgo+Pj4+Pj4+PiBUaGUgb2JzZXJ2YW50IGFtb25nc3QgeW91IG1pZ2h0IHJlYWxpc2Ug
+dGhhdCB0aGlzIHJldmVydHMgcGFydHMgb2YgYy9zCj4+Pj4+Pj4+IDUxYWQ5MGFlYTIxYyAtIFdo
+YXQgY2FuIEkgc2F5PyAgU2V2ZXJhbCB5ZWFycyBvZiBoaW5kc2lnaHQgaXMgdmVyeSB1c2VmdWws
+IAo+PiBhbmQKPj4+Pj4+Pj4gYXQgdGhlIHRpbWUgSSBkaWQgYXNrIHRoZSBtYWludGFpbmVycyB3
+aGljaCBvcHRpb24gdGhleSB0aG91Z2h0IHdvdWxkIGJlCj4+Pj4+Pj4+IGJldHRlci4uLgo+Pj4+
+Pj4+IC4uLiBJIHRoaW5rIGJvdGggdGhlIGVhcmxpZXIgYW5kIHRoaXMgY2hhbmdlIGFyZSBoZWFk
+aW5nIGluIHRoZQo+Pj4+Pj4+IHdyb25nIGRpcmVjdGlvbjogSSB3b3VsZCBtdWNoIHJhdGhlciBz
+ZWUgdGhlIG5ld2xpbmUgb21pdHRlZAo+Pj4+Pj4+IGV2ZXJ5d2hlcmUsIF9pbmNsdWRpbmdfIGlu
+IHBhbmljKCkgaXRzZWxmOiBUaGlzIGNhdXNlcyBvbmUgbGluZQo+Pj4+Pj4+IGxlc3MgdG8gc2Ny
+b2xsIG9mZiB0aGUgc2NyZWVuIGluIGNhc2UgeW91IGRvbid0IGhhdmUgYSBzZXJpYWwKPj4+Pj4+
+PiBjb25zb2xlLgo+Pj4+Cj4+Pj4gQ2FuJ3Qgd2UganVzdCBkcm9wIHByaW50aW5nIHRoZSBleHRy
+YSBcbiBpbiBwYW5pYygpPwo+Pj4+Cj4+Pj4gLSAgICBwcmludGsoIiVzXG4iLCBidWYpOwo+Pj4+
+ICsgICAgcHJpbnRrKCIlcyIsIGJ1Zik7Cj4+Pgo+Pj4gVGhhdCdzIHdoYXQgSSdtIHN1Z2dlc3Rp
+bmcsIHllcywgcGx1cyAoaWYgdGhlcmUgYXJlIGFueSkgZHJvcHBpbmcKPj4+IHRyYWlsaW5nIG5l
+d2xpbmVzIGluIHBhbmljKCkgaW52b2NhdGlvbnMuCj4+Cj4+IFV1aCwgYm90aD8KPj4KPj4gVGhp
+cyB3b3VsZCBsb29rIGxpa2U6Cj4+Cj4+ICoqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqCj4+IFBBTklDIG9uIGNwdSAyOgo+PiBibGFsYmxhYmxhKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKgo+IAo+IEhtbSwgdGhlIHRyYWlsaW5nICoqKiogd291bGQgcGVyaGFwcyBi
+ZXR0ZXIgYWxzbyBiZSBkcm9wcGVkLiBBcyBwZXIKPiBteSBvcmlnaW5hbCByZXBseSB0byBBbmRy
+ZXcsIHRoZSBnb2FsIHNob3VsZCBpbW8gYmUgdG8gaGF2ZSBhcyBsaXR0bGUKPiB1c2VsZXNzIG91
+dHB1dCBhcyBwb3NzaWJsZSAoYnV0IGFzIG11Y2ggYXMgbmVjZXNzYXJ5L2hlbHBmdWwsIGkuZS4g
+SSdtCj4gbm90IHN1Z2dlc3RpbmcgdG8gZHJvcCB0aGUgZmlyc3QgbGluZSBvZiBzdGFycyksIHRv
+IGF2b2lkIG1lYW5pbmdmdWwKPiBsaW5lcyBzY3JvbGxpbmcgb2ZmLgoKSSBkb24ndCB0aGluazoK
+CioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqClBBTklDIG9uIGNwdSAyOgpibGFs
+YmxhYmxhUmVib290IGluIGZpdmUgc2Vjb25kcy4uLgoKaXMgd2hhdCB3ZSB3YW50LgoKU28gb25l
+ICdcbicgc2hvdWxkIHN0YXk6IGVpdGhlciB3aGVuIHByaW50aW5nIHRoZSBwYW5pYyBtZXNzYWdl
+LCBvciBpbgp0aGUgcGFuaWMgbWVzc2FnZSBpdHNlbGYuCgoKSnVlcmdlbgoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
