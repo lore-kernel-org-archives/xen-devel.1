@@ -1,16 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 127190: all pass - PUSHED
-Date: Mon, 03 Sep 2018 04:43:19 +0000
-Message-ID: <osstest-127190-mainreport@xen.org>
+From: Spencer Michaels <sxmichaels@gmail.com>
+Subject: Event monitoring support for PV guests
+Date: Sun, 2 Sep 2018 15:10:35 -0400
+Message-ID: <CAMf-k8EWH=R-O3fC0ywEwVxfQkujyHAsS_CuvLMJJv6_Nw18sQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3296218762728998017=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ddhu=lr=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fwghy-0001Rc-HB
- for xen-devel@lists.xenproject.org; Mon, 03 Sep 2018 04:43:26 +0000
+ <srs0=i0qy=lq=gmail.com=sxmichaels@srs-us1.protection.inumbo.net>)
+ id 1fwXlo-0002Ox-N8
+ for xen-devel@lists.xenproject.org; Sun, 02 Sep 2018 19:10:48 +0000
+Received: by mail-pg1-x52d.google.com with SMTP id d19-v6so7610872pgv.1
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Sep 2018 12:10:46 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,47 +20,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNzE5MCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjcxOTAvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
-dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiBvdm1mICAgICAgICAgICAgICAgICA0Y2YwMjJmMmYxMWZjM2NkMTJhYjVkZDI0ZTVhZTc0
-ZjU0MWJhYzQ4CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICBiOGJjYWFm
-YjM5ZTg4NjBhMWZiNjcyZDc1YmI2ZjdiYmRjZWIyOGJkCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-MjcxODYgIDIwMTgtMDktMDMgMDE6MTA6NDcgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
-ICAgMTI3MTkwICAyMDE4LTA5LTAzIDAyOjU3OjM2IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQm9iIEZlbmcg
-PGJvYi5jLmZlbmdAaW50ZWwuY29tPgogIEZlbmcsIEJvYiBDIDxib2IuYy5mZW5nQGludGVsLmNv
-bT4KICBaaGFvemgxeCA8emhpcWlhbmd4LnpoYW9AaW50ZWwuY29tPgogIFpoaXFpYW5nWCBaaGFv
-IDx6aGlxaWFuZ3guemhhb0BpbnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1p
-Mzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
-ODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
-dXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0
-Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9n
-cywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRl
-c3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2Ug
-cmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5i
-aXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDto
-Yj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0
-O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3Vu
-ZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1
-bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94ZW4v
-Z2l0L29zc3Rlc3Qvb3ZtZi5naXQKICAgYjhiY2FhZmIzOS4uNGNmMDIyZjJmMSAgNGNmMDIyZjJm
-MTFmYzNjZDEyYWI1ZGQyNGU1YWU3NGY1NDFiYWM0OCAtPiB4ZW4tdGVzdGVkLW1hc3RlcgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============3296218762728998017==
+Content-Type: multipart/alternative; boundary="0000000000008f7ad60574e82e66"
+
+--0000000000008f7ad60574e82e66
+Content-Type: text/plain; charset="UTF-8"
+
+Hello,
+
+I'm currently doing some research that involves examining the behavior of
+native code on paravirtualized Xen guests. gdbsx has proven somewhat limited
+for my use case, in large part due to the very limitations I describe
+below, so
+I have been writing my own application with some debugging capabilities to
+interface with the guests.
+
+I have found, however, that quite a few major debugging features ---
+chiefly,
+breakpoints and single-step mode --- do not appear to be supported for PV
+guests. Looking through the source of Xen itself seems to confirm this [1].
+It
+looks like the root cause of this is a lack of event monitoring support for
+PV
+guests, however, I have not been able to find much information online about
+whether or not there are other ways to do what I want.
+
+Is there any other way that I can use trap-based breakpoints or single step
+mode on PV guests (presumably without using the event monitoring API), or
+does
+Xen simply not support anything of the sort at the moment? If not, I might
+take
+a stab at adding support for it myself, but I'm not sure how complicated
+that
+would be.
+
+Thanks,
+Spencer
+
+
+[1] For instance: to enable single-step mode, the `XEN_DOMCTL_debug_op`
+syscall is
+used; its implementation `xen/arch/x86/domctl.c:978` bails out if the guest
+is
+not HVM, and otherwise calls what `hvm_debug_op()`, clearly an HVM-specific
+function. A similar trend appears to be the case for all the `xc_monitor_*`
+functions, e.g. `xc_monitor_software_breakpoint()`, which uses the
+`XC_DOMCTL_MONITOR_OP_ENABLE` domctl syscall. As best as I can tell, when
+that
+syscall is run, the VM's capabilities are checked at
+`xen/common/monitor.c:53`,
+and PV guests don't seem to have any monitoring capabilities.
+
+--0000000000008f7ad60574e82e66
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div di=
+r=3D"ltr"><div dir=3D"ltr"><div>Hello,</div><div><br></div><div><div>I&#39;=
+m currently doing some research that involves examining the behavior of</di=
+v><div>native code on paravirtualized Xen guests. gdbsx has proven somewhat=
+ limited</div><div>for my use case, in large part due to the very limitatio=
+ns I describe below, so</div><div>I have been writing my own application wi=
+th some debugging capabilities to</div><div>interface with the guests.</div=
+></div><div><br></div><div>I have found, however, that quite a few major de=
+bugging features --- chiefly,</div><div>breakpoints and single-step mode --=
+- do not appear to be supported for PV</div><div>guests. Looking through th=
+e source of Xen itself seems to confirm this [1]. It</div><div>looks like t=
+he root cause of this is a lack of event monitoring support for PV</div><di=
+v>guests, however, I have not been able to find much information online abo=
+ut</div><div>whether or not there are other ways to do what I want.</div><d=
+iv><br></div><div><div>Is there any other way that I can use trap-based bre=
+akpoints or single step</div><div>mode on PV guests (presumably without usi=
+ng the event monitoring API), or does</div><div>Xen simply not support anyt=
+hing of the sort at the moment? If not, I might take</div><div>a stab at ad=
+ding support for it myself, but I&#39;m not sure how complicated that</div>=
+<div>would be.</div></div><div><br></div><div>Thanks,</div><div>Spencer</di=
+v><div><br></div><div><br></div><div>[1] For instance: to enable single-ste=
+p mode, the `XEN_DOMCTL_debug_op` syscall is</div><div>used; its implementa=
+tion `xen/arch/x86/domctl.c:978` bails out if the guest is</div><div>not HV=
+M, and otherwise calls what `hvm_debug_op()`, clearly an HVM-specific</div>=
+<div>function. A similar trend appears to be the case for all the `xc_monit=
+or_*`</div><div>functions, e.g. `xc_monitor_software_breakpoint()`, which u=
+ses the</div><div>`XC_DOMCTL_MONITOR_OP_ENABLE` domctl syscall. As best as =
+I can tell, when that</div><div>syscall is run, the VM&#39;s capabilities a=
+re checked at `xen/common/monitor.c:53`,</div><div>and PV guests don&#39;t =
+seem to have any monitoring capabilities.</div><div><br></div></div></div><=
+/div></div></div></div>
+
+--0000000000008f7ad60574e82e66--
+
+
+--===============3296218762728998017==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3296218762728998017==--
