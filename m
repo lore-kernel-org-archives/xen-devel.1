@@ -1,22 +1,26 @@
-From: Rashmica <rashmica.g@gmail.com>
-Subject: [PATCH RFCv2 3/6] mm/memory_hotplug: fix
- online/offline_pages called w.o. mem_hotplug_lock
-Date: Mon, 3 Sep 2018 10:36:24 +1000
-Message-ID: <70372ef5-e332-6c07-f08c-50f8808bde6d@gmail.com>
-References: <20180821104418.12710-1-david@redhat.com>
- <20180821104418.12710-4-david@redhat.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: Event monitoring support for PV guests
+Date: Mon, 3 Sep 2018 08:42:00 +0300
+Message-ID: <e4527670-2632-6bdf-503b-33942d59dc02@bitdefender.com>
+References: <CAMf-k8EWH=R-O3fC0ywEwVxfQkujyHAsS_CuvLMJJv6_Nw18sQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7033227392406503336=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=n/g3=lr=gmail.com=rashmica.g@srs-us1.protection.inumbo.net>)
- id 1fwcrA-0007WJ-I0
- for xen-devel@lists.xenproject.org; Mon, 03 Sep 2018 00:36:40 +0000
-Received: by mail-pf1-x435.google.com with SMTP id b11-v6so7896776pfo.3
- for <xen-devel@lists.xenproject.org>; Sun, 02 Sep 2018 17:36:39 -0700 (PDT)
-In-Reply-To: <20180821104418.12710-4-david@redhat.com>
-Content-Language: en-US
+ <srs0=j1gd=lr=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1fwhcr-0005pw-3t
+ for xen-devel@lists.xenproject.org; Mon, 03 Sep 2018 05:42:13 +0000
+Received: from mx-sr.buh.bitdefender.com (mx-sr.buh.bitdefender.biz
+ [10.17.80.103])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id DBA30301AB31
+ for <xen-devel@lists.xenproject.org>; Mon,  3 Sep 2018 08:42:10 +0300 (EEST)
+Received: from smtp03.buh.bitdefender.org (smtp.bitdefender.biz [10.17.80.77])
+ by mx-sr.buh.bitdefender.com (Postfix) with ESMTP id D53577FC2A
+ for <xen-devel@lists.xenproject.org>; Mon,  3 Sep 2018 08:42:10 +0300 (EEST)
+In-Reply-To: <CAMf-k8EWH=R-O3fC0ywEwVxfQkujyHAsS_CuvLMJJv6_Nw18sQ@mail.gmail.com>
+Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,144 +29,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: David Hildenbrand <david@redhat.com>, linux-mm@kvack.org
-Cc: Kate Stewart <kstewart@linuxfoundation.org>, Michal Hocko <mhocko@suse.com>, linux-doc@vger.kernel.org, Benjamin Herrenschmidt <benh@kernel.crashing.org>, Balbir Singh <bsingharora@gmail.com>, Heiko Carstens <heiko.carstens@de.ibm.com>, Paul Mackerras <paulus@samba.org>, "K. Y. Srinivasan" <kys@microsoft.com>, Thomas Gleixner <tglx@linutronix.de>, Michael Neuling <mikey@neuling.org>, Stephen Hemminger <sthemmin@microsoft.com>, Michael Ellerman <mpe@ellerman.id.au>, Pavel Tatashin <pasha.tatashin@oracle.com>, linux-acpi@vger.kernel.org, xen-devel@lists.xenproject.org, Len Brown <lenb@kernel.org>, Haiyang Zhang <haiyangz@microsoft.com>, Dan Williams <dan.j.williams@intel.com>, YASUAKI ISHIMATSU <yasu.isimatu@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, Oscar Salvador <osalvador@suse.de>, Juergen Gross <jgross@suse.com>, Math
+To: Spencer Michaels <sxmichaels@gmail.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---===============7033227392406503336==
-Content-Type: multipart/alternative;
- boundary="------------1093E43F969F497286F217F7"
-Content-Language: en-US
-
-This is a multi-part message in MIME format.
---------------1093E43F969F497286F217F7
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-Hi David,
-
-
-On 21/08/18 20:44, David Hildenbrand wrote:
-
-> There seem to be some problems as result of 30467e0b3be ("mm, hotplug:
-> fix concurrent memory hot-add deadlock"), which tried to fix a possible
-> lock inversion reported and discussed in [1] due to the two locks
-> 	a) device_lock()
-> 	b) mem_hotplug_lock
->
-> While add_memory() first takes b), followed by a) during
-> bus_probe_device(), onlining of memory from user space first took b),
-> followed by a), exposing a possible deadlock.
-
-Do you mean "onlining of memory from user space first took a),
-followed by b)"? 
-
-> In [1], and it was decided to not make use of device_hotplug_lock, but
-> rather to enforce a locking order.
->
-> The problems I spotted related to this:
->
-> 1. Memory block device attributes: While .state first calls
->    mem_hotplug_begin() and the calls device_online() - which takes
->    device_lock() - .online does no longer call mem_hotplug_begin(), so
->    effectively calls online_pages() without mem_hotplug_lock.
->
-> 2. device_online() should be called under device_hotplug_lock, however
->    onlining memory during add_memory() does not take care of that.
->
-> In addition, I think there is also something wrong about the locking in
->
-> 3. arch/powerpc/platforms/powernv/memtrace.c calls offline_pages()
->    without locks. This was introduced after 30467e0b3be. And skimming over
->    the code, I assume it could need some more care in regards to locking
->    (e.g. device_online() called without device_hotplug_lock - but I'll
->    not touch that for now).
-
-Can you mention that you fixed this in later patches?
-
-
-The series looks good to me. Feel free to add my reviewed-by:
-
-Reviewed-by: Rashmica Gupta <rashmica.g@gmail.com>
-
-
---------------1093E43F969F497286F217F7
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">
-      <pre>Hi David,
-
-
-On 21/08/18 20:44, David Hildenbrand wrote:</pre>
-    </div>
-    <blockquote type="cite"
-      cite="mid:20180821104418.12710-4-david@redhat.com">
-      <pre wrap="">There seem to be some problems as result of 30467e0b3be ("mm, hotplug:
-fix concurrent memory hot-add deadlock"), which tried to fix a possible
-lock inversion reported and discussed in [1] due to the two locks
-	a) device_lock()
-	b) mem_hotplug_lock
-
-While add_memory() first takes b), followed by a) during
-bus_probe_device(), onlining of memory from user space first took b),
-followed by a), exposing a possible deadlock.</pre>
-    </blockquote>
-    <pre>Do you mean "onlining of memory from user space first took a),
-followed by b)"? 
-
-</pre>
-    <blockquote type="cite"
-      cite="mid:20180821104418.12710-4-david@redhat.com">
-      <pre wrap="">
-In [1], and it was decided to not make use of device_hotplug_lock, but
-rather to enforce a locking order.
-
-The problems I spotted related to this:
-
-1. Memory block device attributes: While .state first calls
-   mem_hotplug_begin() and the calls device_online() - which takes
-   device_lock() - .online does no longer call mem_hotplug_begin(), so
-   effectively calls online_pages() without mem_hotplug_lock.
-
-2. device_online() should be called under device_hotplug_lock, however
-   onlining memory during add_memory() does not take care of that.
-
-In addition, I think there is also something wrong about the locking in
-
-3. arch/powerpc/platforms/powernv/memtrace.c calls offline_pages()
-   without locks. This was introduced after 30467e0b3be. And skimming over
-   the code, I assume it could need some more care in regards to locking
-   (e.g. device_online() called without device_hotplug_lock - but I'll
-   not touch that for now).</pre>
-    </blockquote>
-    <pre>Can you mention that you fixed this in later patches?
-
-</pre>
-    <br>
-    <pre>The series looks good to me. Feel free to add my reviewed-by:
-
-Reviewed-by: Rashmica Gupta <a class="moz-txt-link-rfc2396E" href="mailto:rashmica.g@gmail.com">&lt;rashmica.g@gmail.com&gt;</a></pre>
-  </body>
-</html>
-
---------------1093E43F969F497286F217F7--
-
-
---===============7033227392406503336==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7033227392406503336==--
+T24gOS8yLzE4IDEwOjEwIFBNLCBTcGVuY2VyIE1pY2hhZWxzIHdyb3RlOgo+IEkgaGF2ZSBmb3Vu
+ZCwgaG93ZXZlciwgdGhhdCBxdWl0ZSBhIGZldyBtYWpvciBkZWJ1Z2dpbmcgZmVhdHVyZXMgLS0t
+Cj4gY2hpZWZseSwKPiBicmVha3BvaW50cyBhbmQgc2luZ2xlLXN0ZXAgbW9kZSAtLS0gZG8gbm90
+IGFwcGVhciB0byBiZSBzdXBwb3J0ZWQgZm9yIFBWCj4gZ3Vlc3RzLiBMb29raW5nIHRocm91Z2gg
+dGhlIHNvdXJjZSBvZiBYZW4gaXRzZWxmIHNlZW1zIHRvIGNvbmZpcm0gdGhpcwo+IFsxXS4gSXQK
+PiBsb29rcyBsaWtlIHRoZSByb290IGNhdXNlIG9mIHRoaXMgaXMgYSBsYWNrIG9mIGV2ZW50IG1v
+bml0b3Jpbmcgc3VwcG9ydAo+IGZvciBQVgo+IGd1ZXN0cywgaG93ZXZlciwgSSBoYXZlIG5vdCBi
+ZWVuIGFibGUgdG8gZmluZCBtdWNoIGluZm9ybWF0aW9uIG9ubGluZSBhYm91dAo+IHdoZXRoZXIg
+b3Igbm90IHRoZXJlIGFyZSBvdGhlciB3YXlzIHRvIGRvIHdoYXQgSSB3YW50LgoKSXQgaXMgdGhl
+b3JldGljYWxseSBwb3NzaWJsZSB0byBhZGQgdm1fZXZlbnQgc3VwcG9ydCBmb3IgUFYgZG9tYWlu
+cwoobG9vayB1cCBBcmF2aW5kaCBQdXRoaXlhcGFyYW1iaWwncyBzZXJpZXMsIGZvciBleGFtcGxl
+KS4KCkknbSBub3Qgc3VyZSBob3cgZWFzeSBpdCBpcy4KCkkgYXNzdW1lIHlvdSd2ZSBhbHJlYWR5
+IHNlZW46CgpodHRwczovL3dpa2kueGVucHJvamVjdC5vcmcvd2lraS9EZWJ1Z2dpbmdfWGVuCmh0
+dHA6Ly93d3ctYXJjaGl2ZS54ZW5wcm9qZWN0Lm9yZy9maWxlcy94ZW5zdW1taXRfaW50ZWwwOS94
+ZW4tZGVidWdnaW5nLnBkZgoKClJhenZhbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
