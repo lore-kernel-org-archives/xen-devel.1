@@ -1,17 +1,15 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/5] xen/domain: Break __domain_destroy()
- out of domain_create() and complete_domain_destroy()
-Date: Mon, 3 Sep 2018 17:58:02 +0100
-Message-ID: <3cdb1229-651e-cddd-73ae-be76c271aad3@citrix.com>
-References: <1535986020-15906-1-git-send-email-andrew.cooper3@citrix.com>
- <1535986020-15906-3-git-send-email-andrew.cooper3@citrix.com>
- <20180903165458.b37qew26ejvt4n3y@zion.uk.xensource.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] xen/x86: Ignore the automatically generated
+ include/asm-x86/asm-macros.h
+Date: Mon, 3 Sep 2018 17:58:26 +0100
+Message-ID: <20180903165826.iyccnhbmhk24xgcl@zion.uk.xensource.com>
+References: <1535993283-4132-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180903165458.b37qew26ejvt4n3y@zion.uk.xensource.com>
-Content-Language: en-GB
+Content-Disposition: inline
+In-Reply-To: <1535993283-4132-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,45 +18,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Julien Grall <julien.grall@arm.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDMvMDkvMTggMTc6NTQsIFdlaSBMaXUgd3JvdGU6Cj4gT24gTW9uLCBTZXAgMDMsIDIwMTgg
-YXQgMDM6NDY6NTdQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4gVGhpcyBpcyB0aGUg
-Zmlyc3Qgc3RlcCBpbiBtYWtpbmcgdGhlIGRlc3Ryb3kgcGF0aCBpZGVwb3RlbnQsIGFuZCB1c2lu
-ZyBpdCBpbgo+ICJpZGVtcG90ZW50Ii4KPgo+PiBwbGFjZSBvZiB0aGUgYWQtaG9jIGNsZWFudXAg
-cGF0aHMgaW4gdGhlIGNyZWF0ZSBwYXRoLgo+Pgo+PiBUbyBiZWdpbiB3aXRoLCB0aGUgdHJpdmlh
-bCBmcmVlIG9wZXJhdGlvbnMgYXJlIGJyb2tlbiBvdXQuICBUaGUgcmVzdCBvZiB0aGUKPj4gY2xl
-YW51cCBjb2RlIHdpbGwgYmUgbW92ZWQgYXMgaXQgaXMgZGVtb25zdHJhdGVkIChvciBtYWRlKSB0
-byBiZSBpZGVtcG90ZW50Lgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRy
-ZXcuY29vcGVyM0BjaXRyaXguY29tPgo+PiAtLS0KPj4gQ0M6IEphbiBCZXVsaWNoIDxKQmV1bGlj
-aEBzdXNlLmNvbT4KPj4gQ0M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4+IENDOiBS
-b2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KPj4gQ0M6IFN0ZWZhbm8gU3Rh
-YmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KPj4gQ0M6IEp1bGllbiBHcmFsbCA8anVs
-aWVuLmdyYWxsQGFybS5jb20+Cj4+IC0tLQo+PiAgeGVuL2NvbW1vbi9kb21haW4uYyB8IDI5ICsr
-KysrKysrKysrKysrKysrKysrKystLS0tLS0tCj4+ICAxIGZpbGUgY2hhbmdlZCwgMjIgaW5zZXJ0
-aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKPj4KPj4gZGlmZiAtLWdpdCBhL3hlbi9jb21tb24vZG9t
-YWluLmMgYi94ZW4vY29tbW9uL2RvbWFpbi5jCj4+IGluZGV4IDQzYWI5MjYuLjIyNTNjMmQgMTAw
-NjQ0Cj4+IC0tLSBhL3hlbi9jb21tb24vZG9tYWluLmMKPj4gKysrIGIveGVuL2NvbW1vbi9kb21h
-aW4uYwo+PiBAQCAtMjYwLDYgKzI2MCwyMyBAQCBzdGF0aWMgaW50IF9faW5pdCBwYXJzZV9leHRy
-YV9ndWVzdF9pcnFzKGNvbnN0IGNoYXIgKnMpCj4+ICB9Cj4+ICBjdXN0b21fcGFyYW0oImV4dHJh
-X2d1ZXN0X2lycXMiLCBwYXJzZV9leHRyYV9ndWVzdF9pcnFzKTsKPj4gIAo+PiArLyoKPj4gKyAq
-IERlc3Ryb3kgYSBkb21haW4gb25jZSBhbGwgcmVmZXJlbmNlcyB0byBpdCBoYXZlIGJlZW4gZHJv
-cHBlZC4gIFVzZWQgZWl0aGVyCj4+ICsgKiBmcm9tIHRoZSBSQ1UgcGF0aCwgb3IgZnJvbSB0aGUg
-ZG9tYWluX2NyZWF0ZSgpIGVycm9yIHBhdGggYmVmb3JlIHRoZSBkb21haW4KPj4gKyAqIGlzIGlu
-c2VydGVkIGludG8gdGhlIGRvbWxpc3QuCj4+ICsgKi8KPj4gK3N0YXRpYyB2b2lkIF9fZG9tYWlu
-X2Rlc3Ryb3koc3RydWN0IGRvbWFpbiAqZCkKPj4gK3sKPj4gKyAgICBCVUdfT04oIWQtPmlzX2R5
-aW5nKTsKPj4gKyAgICBCVUdfT04oYXRvbWljX3JlYWQoJmQtPnJlZmNudCkgIT0gRE9NQUlOX0RF
-U1RST1lFRCk7Cj4+ICsKPj4gKyAgICB4ZnJlZShkLT5wYnVmKTsKPiBXaXRoIHRoaXMgY2hhbmdl
-ZCB0byBYRlJFRSBoZXJlOgoKVGhpcyBpcyB0aGUgb25lIHBsYWNlIHdoZXJlIGl0IGRvZXNuJ3Qg
-bWF0dGVyLsKgIGQgZ29lcyBmdWxseSBvdXQgb2YKc2NvcGUgYmVmb3JlIHRoZSBlbmQgb2YgdGhp
-cyBmdW5jdGlvbi4KCj4KPiBSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNv
-bT4KPgo+PiArCj4+ICsgICAgZnJlZV9jcHVtYXNrX3ZhcihkLT5kaXJ0eV9jcHVtYXNrKTsKPiBP
-biBtYWtpbmcgdGhpbmdzIGlkZW1wb3RlbnQ6IHRoaXMgZnVuY3Rpb24gc2VlbXMgdG8gYmUgYSBj
-YW5kaWRhdGUuCgpJIGRvbid0IHVuZGVyc3RhbmQuwqAgT25lIGltcGxlbWVudGF0aW9uIGlzIHhm
-cmVlKCkgdW5kZXIgdGhlIGhvb2QsIGFuZAp0aGUgb3RoZXIgaXMgYSBuby1vcCBiZWNhdXNlIG5v
-IGFsbG9jYXRpb24gdG9vayBwbGFjZS4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gTW9uLCBTZXAgMDMsIDIwMTggYXQgMDU6NDg6MDNQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRy
+aXguY29tPgoKUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
