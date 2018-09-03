@@ -1,15 +1,15 @@
 From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH 3/7] xen/hvm: Rename d->arch.hvm_domain to
- d->arch.hvm
-Date: Mon, 3 Sep 2018 08:11:39 +0000
-Message-ID: <f2d3b207c4f84bed82b09aa6c11ee6aa@AMSPEX02CL03.citrite.net>
+Subject: Re: [PATCH 4/7] x86/hvm: Rename v->arch.hvm_vcpu to
+ v->arch.hvm
+Date: Mon, 3 Sep 2018 08:13:13 +0000
+Message-ID: <187045fb55884a7fbf3ee50b26bd9e8b@AMSPEX02CL03.citrite.net>
 References: <1535477946-17892-1-git-send-email-andrew.cooper3@citrix.com>
- <1535477946-17892-4-git-send-email-andrew.cooper3@citrix.com>
+ <1535477946-17892-5-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1535477946-17892-4-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1535477946-17892-5-git-send-email-andrew.cooper3@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -37,14 +37,14 @@ dWxpZW4NCj4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPjsgSnVuIE5ha2FqaW1hIDxqdW4u
 bmFrYWppbWFAaW50ZWwuY29tPjsNCj4gS2V2aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+
 OyBCb3JpcyBPc3Ryb3Zza3kNCj4gPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPjsgU3VyYXZl
 ZSBTdXRoaWt1bHBhbml0DQo+IDxzdXJhdmVlLnN1dGhpa3VscGFuaXRAYW1kLmNvbT47IEJyaWFu
-IFdvb2RzIDxicmlhbi53b29kc0BhbWQuY29tPg0KPiBTdWJqZWN0OiBbUEFUQ0ggMy83XSB4ZW4v
-aHZtOiBSZW5hbWUgZC0+YXJjaC5odm1fZG9tYWluIHRvIGQtDQo+ID5hcmNoLmh2bQ0KPiANCj4g
-VGhlIHRyYWlsaW5nIF9kb21haW4gc3VmZml4IGlzIHJlZHVuZGFudCwgYnV0IGFkZHMgdG8gY29k
-ZSB2b2x1bWUuICBEcm9wIGl0Lg0KPiANCj4gUmVmbG93IGxpbmVzIGFzIGFwcHJvcHJpYXRlLCBh
-bmQgc3dpdGNoIHRvIHVzaW5nIHRoZSBuZXcgWEZSRUUvZXRjIHdyYXBwZXJzDQo+IHdoZXJlIGFw
-cGxpY2FibGUuDQo+IA0KPiBObyBmdW5jdGlvbmFsIGNoYW5nZS4NCj4gDQo+IFNpZ25lZC1vZmYt
-Ynk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+DQoNCkFja2VkLWJ5
-OiBQYXVsIER1cnJhbnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPg0KX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+IFdvb2RzIDxicmlhbi53b29kc0BhbWQuY29tPg0KPiBTdWJqZWN0OiBbUEFUQ0ggNC83XSB4ODYv
+aHZtOiBSZW5hbWUgdi0+YXJjaC5odm1fdmNwdSB0byB2LT5hcmNoLmh2bQ0KPiANCj4gVGhlIHRy
+YWlsaW5nIF92Y3B1IHN1ZmZpeCBpcyByZWR1bmRhbnQsIGJ1dCBhZGRzIHRvIGNvZGUgdm9sdW1l
+LiAgRHJvcCBpdC4NCj4gDQo+IFJlZmxvdyBsaW5lcyBhcyBhcHByb3ByaWF0ZSwgYW5kIHN3aXRj
+aCB0byB1c2luZyB0aGUgbmV3IFhGUkVFL2V0YyB3cmFwcGVycw0KPiB3aGVyZSBhcHBsaWNhYmxl
+Lg0KPiANCj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBBbmRy
+ZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPg0KDQpBY2tlZC1ieTogUGF1bCBE
+dXJyYW50IDxwYXVsLmR1cnJhbnRAY2l0cml4LmNvbT4NCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
