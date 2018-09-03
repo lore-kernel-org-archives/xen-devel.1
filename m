@@ -1,17 +1,22 @@
-From: Spencer Michaels <sxmichaels@gmail.com>
-Subject: Event monitoring support for PV guests
-Date: Sun, 2 Sep 2018 15:10:35 -0400
-Message-ID: <CAMf-k8EWH=R-O3fC0ywEwVxfQkujyHAsS_CuvLMJJv6_Nw18sQ@mail.gmail.com>
+From: Rashmica <rashmica.g@gmail.com>
+Subject: [PATCH RFCv2 3/6] mm/memory_hotplug: fix
+ online/offline_pages called w.o. mem_hotplug_lock
+Date: Mon, 3 Sep 2018 10:36:24 +1000
+Message-ID: <70372ef5-e332-6c07-f08c-50f8808bde6d@gmail.com>
+References: <20180821104418.12710-1-david@redhat.com>
+ <20180821104418.12710-4-david@redhat.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3296218762728998017=="
+Content-Type: multipart/mixed; boundary="===============7033227392406503336=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=i0qy=lq=gmail.com=sxmichaels@srs-us1.protection.inumbo.net>)
- id 1fwXlo-0002Ox-N8
- for xen-devel@lists.xenproject.org; Sun, 02 Sep 2018 19:10:48 +0000
-Received: by mail-pg1-x52d.google.com with SMTP id d19-v6so7610872pgv.1
- for <xen-devel@lists.xenproject.org>; Sun, 02 Sep 2018 12:10:46 -0700 (PDT)
+ <srs0=n/g3=lr=gmail.com=rashmica.g@srs-us1.protection.inumbo.net>)
+ id 1fwcrA-0007WJ-I0
+ for xen-devel@lists.xenproject.org; Mon, 03 Sep 2018 00:36:40 +0000
+Received: by mail-pf1-x435.google.com with SMTP id b11-v6so7896776pfo.3
+ for <xen-devel@lists.xenproject.org>; Sun, 02 Sep 2018 17:36:39 -0700 (PDT)
+In-Reply-To: <20180821104418.12710-4-david@redhat.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,100 +25,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: David Hildenbrand <david@redhat.com>, linux-mm@kvack.org
+Cc: Kate Stewart <kstewart@linuxfoundation.org>, Michal Hocko <mhocko@suse.com>, linux-doc@vger.kernel.org, Benjamin Herrenschmidt <benh@kernel.crashing.org>, Balbir Singh <bsingharora@gmail.com>, Heiko Carstens <heiko.carstens@de.ibm.com>, Paul Mackerras <paulus@samba.org>, "K. Y. Srinivasan" <kys@microsoft.com>, Thomas Gleixner <tglx@linutronix.de>, Michael Neuling <mikey@neuling.org>, Stephen Hemminger <sthemmin@microsoft.com>, Michael Ellerman <mpe@ellerman.id.au>, Pavel Tatashin <pasha.tatashin@oracle.com>, linux-acpi@vger.kernel.org, xen-devel@lists.xenproject.org, Len Brown <lenb@kernel.org>, Haiyang Zhang <haiyangz@microsoft.com>, Dan Williams <dan.j.williams@intel.com>, YASUAKI ISHIMATSU <yasu.isimatu@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, Oscar Salvador <osalvador@suse.de>, Juergen Gross <jgross@suse.com>, Math
 List-Id: xen-devel@lists.xenproject.org
 
---===============3296218762728998017==
-Content-Type: multipart/alternative; boundary="0000000000008f7ad60574e82e66"
+This is a multi-part message in MIME format.
+--===============7033227392406503336==
+Content-Type: multipart/alternative;
+ boundary="------------1093E43F969F497286F217F7"
+Content-Language: en-US
 
---0000000000008f7ad60574e82e66
-Content-Type: text/plain; charset="UTF-8"
+This is a multi-part message in MIME format.
+--------------1093E43F969F497286F217F7
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Hello,
-
-I'm currently doing some research that involves examining the behavior of
-native code on paravirtualized Xen guests. gdbsx has proven somewhat limited
-for my use case, in large part due to the very limitations I describe
-below, so
-I have been writing my own application with some debugging capabilities to
-interface with the guests.
-
-I have found, however, that quite a few major debugging features ---
-chiefly,
-breakpoints and single-step mode --- do not appear to be supported for PV
-guests. Looking through the source of Xen itself seems to confirm this [1].
-It
-looks like the root cause of this is a lack of event monitoring support for
-PV
-guests, however, I have not been able to find much information online about
-whether or not there are other ways to do what I want.
-
-Is there any other way that I can use trap-based breakpoints or single step
-mode on PV guests (presumably without using the event monitoring API), or
-does
-Xen simply not support anything of the sort at the moment? If not, I might
-take
-a stab at adding support for it myself, but I'm not sure how complicated
-that
-would be.
-
-Thanks,
-Spencer
+Hi David,
 
 
-[1] For instance: to enable single-step mode, the `XEN_DOMCTL_debug_op`
-syscall is
-used; its implementation `xen/arch/x86/domctl.c:978` bails out if the guest
-is
-not HVM, and otherwise calls what `hvm_debug_op()`, clearly an HVM-specific
-function. A similar trend appears to be the case for all the `xc_monitor_*`
-functions, e.g. `xc_monitor_software_breakpoint()`, which uses the
-`XC_DOMCTL_MONITOR_OP_ENABLE` domctl syscall. As best as I can tell, when
-that
-syscall is run, the VM's capabilities are checked at
-`xen/common/monitor.c:53`,
-and PV guests don't seem to have any monitoring capabilities.
+On 21/08/18 20:44, David Hildenbrand wrote:
 
---0000000000008f7ad60574e82e66
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+> There seem to be some problems as result of 30467e0b3be ("mm, hotplug:
+> fix concurrent memory hot-add deadlock"), which tried to fix a possible
+> lock inversion reported and discussed in [1] due to the two locks
+> 	a) device_lock()
+> 	b) mem_hotplug_lock
+>
+> While add_memory() first takes b), followed by a) during
+> bus_probe_device(), onlining of memory from user space first took b),
+> followed by a), exposing a possible deadlock.
 
-<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div di=
-r=3D"ltr"><div dir=3D"ltr"><div>Hello,</div><div><br></div><div><div>I&#39;=
-m currently doing some research that involves examining the behavior of</di=
-v><div>native code on paravirtualized Xen guests. gdbsx has proven somewhat=
- limited</div><div>for my use case, in large part due to the very limitatio=
-ns I describe below, so</div><div>I have been writing my own application wi=
-th some debugging capabilities to</div><div>interface with the guests.</div=
-></div><div><br></div><div>I have found, however, that quite a few major de=
-bugging features --- chiefly,</div><div>breakpoints and single-step mode --=
-- do not appear to be supported for PV</div><div>guests. Looking through th=
-e source of Xen itself seems to confirm this [1]. It</div><div>looks like t=
-he root cause of this is a lack of event monitoring support for PV</div><di=
-v>guests, however, I have not been able to find much information online abo=
-ut</div><div>whether or not there are other ways to do what I want.</div><d=
-iv><br></div><div><div>Is there any other way that I can use trap-based bre=
-akpoints or single step</div><div>mode on PV guests (presumably without usi=
-ng the event monitoring API), or does</div><div>Xen simply not support anyt=
-hing of the sort at the moment? If not, I might take</div><div>a stab at ad=
-ding support for it myself, but I&#39;m not sure how complicated that</div>=
-<div>would be.</div></div><div><br></div><div>Thanks,</div><div>Spencer</di=
-v><div><br></div><div><br></div><div>[1] For instance: to enable single-ste=
-p mode, the `XEN_DOMCTL_debug_op` syscall is</div><div>used; its implementa=
-tion `xen/arch/x86/domctl.c:978` bails out if the guest is</div><div>not HV=
-M, and otherwise calls what `hvm_debug_op()`, clearly an HVM-specific</div>=
-<div>function. A similar trend appears to be the case for all the `xc_monit=
-or_*`</div><div>functions, e.g. `xc_monitor_software_breakpoint()`, which u=
-ses the</div><div>`XC_DOMCTL_MONITOR_OP_ENABLE` domctl syscall. As best as =
-I can tell, when that</div><div>syscall is run, the VM&#39;s capabilities a=
-re checked at `xen/common/monitor.c:53`,</div><div>and PV guests don&#39;t =
-seem to have any monitoring capabilities.</div><div><br></div></div></div><=
-/div></div></div></div>
+Do you mean "onlining of memory from user space first took a),
+followed by b)"? 
 
---0000000000008f7ad60574e82e66--
+> In [1], and it was decided to not make use of device_hotplug_lock, but
+> rather to enforce a locking order.
+>
+> The problems I spotted related to this:
+>
+> 1. Memory block device attributes: While .state first calls
+>    mem_hotplug_begin() and the calls device_online() - which takes
+>    device_lock() - .online does no longer call mem_hotplug_begin(), so
+>    effectively calls online_pages() without mem_hotplug_lock.
+>
+> 2. device_online() should be called under device_hotplug_lock, however
+>    onlining memory during add_memory() does not take care of that.
+>
+> In addition, I think there is also something wrong about the locking in
+>
+> 3. arch/powerpc/platforms/powernv/memtrace.c calls offline_pages()
+>    without locks. This was introduced after 30467e0b3be. And skimming over
+>    the code, I assume it could need some more care in regards to locking
+>    (e.g. device_online() called without device_hotplug_lock - but I'll
+>    not touch that for now).
+
+Can you mention that you fixed this in later patches?
 
 
---===============3296218762728998017==
+The series looks good to me. Feel free to add my reviewed-by:
+
+Reviewed-by: Rashmica Gupta <rashmica.g@gmail.com>
+
+
+--------------1093E43F969F497286F217F7
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">
+      <pre>Hi David,
+
+
+On 21/08/18 20:44, David Hildenbrand wrote:</pre>
+    </div>
+    <blockquote type="cite"
+      cite="mid:20180821104418.12710-4-david@redhat.com">
+      <pre wrap="">There seem to be some problems as result of 30467e0b3be ("mm, hotplug:
+fix concurrent memory hot-add deadlock"), which tried to fix a possible
+lock inversion reported and discussed in [1] due to the two locks
+	a) device_lock()
+	b) mem_hotplug_lock
+
+While add_memory() first takes b), followed by a) during
+bus_probe_device(), onlining of memory from user space first took b),
+followed by a), exposing a possible deadlock.</pre>
+    </blockquote>
+    <pre>Do you mean "onlining of memory from user space first took a),
+followed by b)"? 
+
+</pre>
+    <blockquote type="cite"
+      cite="mid:20180821104418.12710-4-david@redhat.com">
+      <pre wrap="">
+In [1], and it was decided to not make use of device_hotplug_lock, but
+rather to enforce a locking order.
+
+The problems I spotted related to this:
+
+1. Memory block device attributes: While .state first calls
+   mem_hotplug_begin() and the calls device_online() - which takes
+   device_lock() - .online does no longer call mem_hotplug_begin(), so
+   effectively calls online_pages() without mem_hotplug_lock.
+
+2. device_online() should be called under device_hotplug_lock, however
+   onlining memory during add_memory() does not take care of that.
+
+In addition, I think there is also something wrong about the locking in
+
+3. arch/powerpc/platforms/powernv/memtrace.c calls offline_pages()
+   without locks. This was introduced after 30467e0b3be. And skimming over
+   the code, I assume it could need some more care in regards to locking
+   (e.g. device_online() called without device_hotplug_lock - but I'll
+   not touch that for now).</pre>
+    </blockquote>
+    <pre>Can you mention that you fixed this in later patches?
+
+</pre>
+    <br>
+    <pre>The series looks good to me. Feel free to add my reviewed-by:
+
+Reviewed-by: Rashmica Gupta <a class="moz-txt-link-rfc2396E" href="mailto:rashmica.g@gmail.com">&lt;rashmica.g@gmail.com&gt;</a></pre>
+  </body>
+</html>
+
+--------------1093E43F969F497286F217F7--
+
+
+--===============7033227392406503336==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -123,4 +165,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============3296218762728998017==--
+--===============7033227392406503336==--
