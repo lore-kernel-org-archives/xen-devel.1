@@ -1,22 +1,22 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v2 13/23] x86: provide stubs,
- declarations and macros in hvm.h
-Date: Mon, 3 Sep 2018 10:50:53 +0100
-Message-ID: <20180903095053.grgulnqrppm4zvil@zion.uk.xensource.com>
-References: <cover.65253d1128f698146b48c4ff3bba2198f360c7b1.1535285866.git-series.wei.liu2@citrix.com>
- <d068682a0e82659a9f324c4b329de6a1a212b517.1535285866.git-series.wei.liu2@citrix.com>
- <1e7b9dd730604269b339f51959ff0c0c@AMSPEX02CL03.citrite.net>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: tools/fuzz fails due build, osstest did not notice
+Date: Mon, 3 Sep 2018 11:53:23 +0200
+Message-ID: <20180903115323.616cc7f8.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7827336817637714274=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=42l1=lr=citrix.com=prvs=7777b264b=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fwlW3-0006tS-Ja
- for xen-devel@lists.xenproject.org; Mon, 03 Sep 2018 09:51:27 +0000
-Content-Disposition: inline
-In-Reply-To: <1e7b9dd730604269b339f51959ff0c0c@AMSPEX02CL03.citrite.net>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=eiaa=lr=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fwlY9-00074t-DE
+ for xen-devel@lists.xenproject.org; Mon, 03 Sep 2018 09:53:38 +0000
+Received: from sender by smtp.strato.de (RZmta 43.21 AUTH)
+ with ESMTPSA id Q02f6au839rYQDh
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
+ 521 ECDH bits, eq. 15360 bits RSA))
+ (Client did not present a certificate)
+ for <xen-devel@lists.xenproject.org>;
+ Mon, 3 Sep 2018 11:53:34 +0200 (CEST)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,48 +25,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBTZXAgMDMsIDIwMTggYXQgMTA6NDU6MDFBTSArMDEwMCwgUGF1bCBEdXJyYW50IHdy
-b3RlOgo+ID4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0KPiA+IEZyb206IFhlbi1kZXZlbCBb
-bWFpbHRvOnhlbi1kZXZlbC1ib3VuY2VzQGxpc3RzLnhlbnByb2plY3Qub3JnXSBPbiBCZWhhbGYK
-PiA+IE9mIFdlaSBMaXUKPiA+IFNlbnQ6IDI2IEF1Z3VzdCAyMDE4IDEzOjIwCj4gPiBUbzogeGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCj4gPiBDYzogQW5kcmV3IENvb3BlciA8QW5kcmV3
-LkNvb3BlcjNAY2l0cml4LmNvbT47IFdlaSBMaXUKPiA+IDx3ZWkubGl1MkBjaXRyaXguY29tPjsg
-SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+ID4gU3ViamVjdDogW1hlbi1kZXZlbF0g
-W1BBVENIIHYyIDEzLzIzXSB4ODY6IHByb3ZpZGUgc3R1YnMsIGRlY2xhcmF0aW9ucyBhbmQKPiA+
-IG1hY3JvcyBpbiBodm0uaAo+ID4gCj4gPiBNYWtlIHN1cmUgaHZtX2VuYWJsZWQgZXZhbHVhdGUg
-dG8gZmFsc2UgdGhlbiBwcm92aWRlIG5lY2Vzc2FyeSBzdHVicywKPiA+IGRlY2xhcmF0aW9ucyBh
-bmQgbWFjcm9zIHRvIG1ha2UgWGVuIGJ1aWxkLgo+ID4gCj4gPiBUaGUgaXNfdmlyaWRpYW5fZG9t
-YWluIG1hY3JvIGNhbid0IGJlIHR1cm5lZCBpbnRvIGFuIGlubGluZSBmdW5jdGlvbgo+ID4gZWFz
-aWx5LAo+IAo+IFdoeT8gSXQncyBqdXN0IGFuIGlzX2h2bV9kb21haW4oKSBhbmQgYSBmZWF0dXJl
-IGNoZWNrLgoKSXQgaXMgZG9tYWluLmggd2hpY2ggaW5jbHVkZXMgaHZtL2RvbWFpbi5oLCBub3Qg
-dGhlIG90aGVyIHdheSBhcm91bmQuCldoZW4gaXNfdmlyaWRpYW5fZG9tYWluIGlzIGRlZmluZWQs
-IHN0cnVjdCBkb21haW4gaXMgbm90IGF2YWlsYWJsZS4gSWYKaXNfdmlyaWRpYW5fZG9tYWluIGlz
-IGEgZnVuY3Rpb24sIGl0IHdpbGwgbmVlZCB0byBrbm93IHRoZSBkZWZpbml0aW9uIG9mCnN0cnVj
-dCBkb21haW4uCgpBbm90aGVyIHdheSB0byBmaXggdGhpcyBpcyB0byBtb3ZlIGlzX3ZpcmlkaWFu
-X2RvbWFpbiB0byBhbm90aGVyIGhlYWRlcgpmaWxlLiBJIGRvbid0IGtub3cgd2hpY2ggb25lIHdv
-dWxkIGJlIHByZWZlcnJlZC4KCj4gCj4gPiBzbyBpbnN0ZWFkIGl0cyBjYWxsZXIgaXMgbW9kaWZp
-ZWQgdG8gYXZvaWQgdW51c2VkIHZhcmlhYmxlCj4gPiB3YXJuaW5nLgo+ID4gCj4gPiBTaWduZWQt
-b2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+ID4gLS0tCj4gPiAgeGVuL2Fy
-Y2gveDg2L3RyYXBzLmMgICAgICAgICAgfCAgIDQgKy0KPiA+ICB4ZW4vaW5jbHVkZS9hc20teDg2
-L2h2bS9odm0uaCB8IDE0OQo+ID4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0K
-PiA+ICAyIGZpbGVzIGNoYW5nZWQsIDE0OCBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQo+
-ID4gCj4gPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L3RyYXBzLmMgYi94ZW4vYXJjaC94ODYv
-dHJhcHMuYwo+ID4gaW5kZXggZGRmZjM0Ni4uMjdiOTY1MSAxMDA2NDQKPiA+IC0tLSBhL3hlbi9h
-cmNoL3g4Ni90cmFwcy5jCj4gPiArKysgYi94ZW4vYXJjaC94ODYvdHJhcHMuYwo+ID4gQEAgLTc3
-MSw5ICs3NzEsOSBAQCBzdGF0aWMgdm9pZCBkb190cmFwKHN0cnVjdCBjcHVfdXNlcl9yZWdzICpy
-ZWdzKQo+ID4gIC8qIFJldHVybnMgMCBpZiBub3QgaGFuZGxlZCwgYW5kIG5vbi0wIGZvciBzdWNj
-ZXNzLiAqLwo+ID4gIGludCByZG1zcl9oeXBlcnZpc29yX3JlZ3ModWludDMyX3QgaWR4LCB1aW50
-NjRfdCAqdmFsKQo+ID4gIHsKPiA+IC0gICAgc3RydWN0IGRvbWFpbiAqZCA9IGN1cnJlbnQtPmRv
-bWFpbjsKPiA+ICAgICAgLyogT3B0aW9uYWxseSBzaGlmdCBvdXQgb2YgdGhlIHdheSBvZiBWaXJp
-ZGlhbiBhcmNoaXRlY3R1cmFsIE1TUnMuICovCj4gPiAtICAgIHVpbnQzMl90IGJhc2UgPSBpc192
-aXJpZGlhbl9kb21haW4oZCkgPyAweDQwMDAwMjAwIDogMHg0MDAwMDAwMDsKPiA+ICsgICAgdWlu
-dDMyX3QgYmFzZSA9IGlzX3ZpcmlkaWFuX2RvbWFpbihjdXJyZW50LT5kb21haW4pCj4gPiArICAg
-ICAgICA/IDB4NDAwMDAyMDAgOiAweDQwMDAwMDAwOwo+ID4gCj4gCj4gVGhpcyBpcyBhIGJpdCB1
-Z2x5IHNvIGl0IHdvdWxkIGJlIG5pY2UgdG8ga2VlcCBpdCBvbiBhIHNpbmdsZSBsaW5lLgoKT0su
-CgpXZWkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7827336817637714274==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/UwM_/gV/Y9Tg_mTBPWSdo8_"; protocol="application/pgp-signature"
+
+--Sig_/UwM_/gV/Y9Tg_mTBPWSdo8_
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Since about two months staging fails to build because tools/fuzz can not co=
+pe with CFLAGS=3D"-O2 -Wall  -fstack-protector-strong -funwind-tables -fasy=
+nchronous-unwind-tables -fstack-clash-protection". While I can easily hide =
+the bug by undefining _FORTIFY_SOURCE, I always wonder why osstest does not=
+ catch such bugs?
+
+Looking at some random build-amd64/6.ts-xen-build.log output, it seems no C=
+FLAGS at all is set. I'm sure SUSE is not the only one that sets CFLAGS dur=
+ing their package build, and further I think SUSE is not the only one who e=
+nforces -D_FORTIFY_SOURCE=3D globally. So on that ground, shouldn't whateve=
+r osstest does match what the consumers of xen use? Running osstest with th=
+row-away-binaries compiled with -D_FORTIFY_SOURCE will likely not hurt or i=
+nvalidate the overall coverage.
+
+Olaf
+
+--Sig_/UwM_/gV/Y9Tg_mTBPWSdo8_
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW40EkwAKCRBdQqD6ppg2
+foWwAKCyPd8ftKbAG24m8dW+IeW3IRfgnACfTIj4Gct7dFOWOZ4TbUhL2xBUUGk=
+=yyz5
+-----END PGP SIGNATURE-----
+
+--Sig_/UwM_/gV/Y9Tg_mTBPWSdo8_--
+
+
+--===============7827336817637714274==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7827336817637714274==--
