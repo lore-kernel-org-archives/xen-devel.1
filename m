@@ -1,27 +1,18 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH 1/1] cameraif: add ABI for para-virtual
- camera
-Date: Tue, 4 Sep 2018 09:56:17 +0300
-Message-ID: <53189190-ffe0-9795-b01c-01de8db83acb@gmail.com>
-References: <20180731093142.3828-1-andr2000@gmail.com>
- <20180731093142.3828-2-andr2000@gmail.com>
- <99cd131d-85ae-bbfb-61ef-fdc0401727f6@suse.com>
- <5505e5af-5b64-b317-a0d8-09c11317926f@gmail.com>
- <345d7ec3-3ca3-e8fe-28a0-ba299196b5e4@gmail.com>
- <ecfe2b61-deb8-5c3d-3cf4-706c23b47afc@xs4all.nl>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: tools/fuzz fails due build, osstest did not notice
+Date: Tue, 4 Sep 2018 09:32:16 +0200
+Message-ID: <20180904093216.33ea8ad8.olaf@aepfle.de>
+References: <20180903115323.616cc7f8.olaf@aepfle.de>
+ <5B8D2A9E02000078001E491D@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2132960230262472209=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=eubl=ls=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1fx5GA-0005wR-G0
- for xen-devel@lists.xenproject.org; Tue, 04 Sep 2018 06:56:22 +0000
-Received: by mail-lf1-x144.google.com with SMTP id q13-v6so2069574lfc.2
- for <xen-devel@lists.xenproject.org>; Mon, 03 Sep 2018 23:56:20 -0700 (PDT)
-In-Reply-To: <ecfe2b61-deb8-5c3d-3cf4-706c23b47afc@xs4all.nl>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=tkn6=ls=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fx5p7-0000Ke-3q
+ for xen-devel@lists.xenproject.org; Tue, 04 Sep 2018 07:32:29 +0000
+In-Reply-To: <5B8D2A9E02000078001E491D@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,89 +21,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Hans Verkuil <hverkuil@xs4all.nl>, Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, konrad.wilk@oracle.com, boris.ostrovsky@oracle.com, mchehab@kernel.org, linux-media@vger.kernel.org, sakari.ailus@linux.intel.com, koji.matsuoka.xm@renesas.com
-Cc: Artem Mygaiev <Artem_Mygaiev@epam.com>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDkvMDMvMjAxOCAwNjoyNSBQTSwgSGFucyBWZXJrdWlsIHdyb3RlOgo+IEhpIE9sZWtzYW5k
-ciwKPgo+IE9uIDA5LzAzLzIwMTggMTI6MTYgUE0sIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdy
-b3RlOgo+PiBPbiAwOC8yMS8yMDE4IDA4OjU0IEFNLCBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyB3
-cm90ZToKPj4+IE9uIDA4LzE0LzIwMTggMTE6MzAgQU0sIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+
-Pj4gT24gMzEvMDcvMTggMTE6MzEsIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdyb3RlOgo+Pj4+
-PiBGcm9tOiBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyA8b2xla3NhbmRyX2FuZHJ1c2hjaGVua29A
-ZXBhbS5jb20+Cj4+Pj4+Cj4+Pj4+IFRoaXMgaXMgdGhlIEFCSSBmb3IgdGhlIHR3byBoYWx2ZXMg
-b2YgYSBwYXJhLXZpcnR1YWxpemVkCj4+Pj4+IGNhbWVyYSBkcml2ZXIgd2hpY2ggZXh0ZW5kcyBY
-ZW4ncyByZWFjaCBtdWx0aW1lZGlhIGNhcGFiaWxpdGllcyBldmVuCj4+Pj4+IGZhcnRoZXIgZW5h
-YmxpbmcgaXQgZm9yIHZpZGVvIGNvbmZlcmVuY2luZywgSW4tVmVoaWNsZSBJbmZvdGFpbm1lbnQs
-Cj4+Pj4+IGhpZ2ggZGVmaW5pdGlvbiBtYXBzIGV0Yy4KPj4+Pj4KPj4+Pj4gVGhlIGluaXRpYWwg
-Z29hbCBpcyB0byBzdXBwb3J0IG1vc3QgbmVlZGVkIGZ1bmN0aW9uYWxpdHkgd2l0aCB0aGUKPj4+
-Pj4gZmluYWwgaWRlYSB0byBtYWtlIGl0IHBvc3NpYmxlIHRvIGV4dGVuZCB0aGUgcHJvdG9jb2wg
-aWYgbmVlZCBiZToKPj4+Pj4KPj4+Pj4gMS4gUHJvdmlkZSBtZWFucyBmb3IgYmFzZSB2aXJ0dWFs
-IGRldmljZSBjb25maWd1cmF0aW9uOgo+Pj4+PiAgICAtIHBpeGVsIGZvcm1hdHMKPj4+Pj4gICAg
-LSByZXNvbHV0aW9ucwo+Pj4+PiAgICAtIGZyYW1lIHJhdGVzCj4+Pj4+IDIuIFN1cHBvcnQgYmFz
-aWMgY2FtZXJhIGNvbnRyb2xzOgo+Pj4+PiAgICAtIGNvbnRyYXN0Cj4+Pj4+ICAgIC0gYnJpZ2h0
-bmVzcwo+Pj4+PiAgICAtIGh1ZQo+Pj4+PiAgICAtIHNhdHVyYXRpb24KPj4+Pj4gMy4gU3VwcG9y
-dCBzdHJlYW1pbmcgY29udHJvbAo+Pj4+PiA0LiBTdXBwb3J0IHplcm8tY29weWluZyB1c2UtY2Fz
-ZXMKPj4+Pj4KPj4+Pj4gU2lnbmVkLW9mZi1ieTogT2xla3NhbmRyIEFuZHJ1c2hjaGVua28KPj4+
-Pj4gPG9sZWtzYW5kcl9hbmRydXNoY2hlbmtvQGVwYW0uY29tPgo+Pj4+IFNvbWUgc3R5bGUgaXNz
-dWVzIGJlbG93Li4uCj4+PiBXaWxsIGZpeCBhbGwgdGhlIGJlbG93LCB0aGFuayB5b3UhCj4+Pgo+
-Pj4gSSB3b3VsZCBsaWtlIHRvIGRyYXcgc29tZSBhdHRlbnRpb24gb2YgdGhlIExpbnV4L1Y0TCBj
-b21tdW5pdHkgdG8gdGhpcwo+Pj4gcHJvdG9jb2wgYXMgdGhlIHBsYW4gaXMgdGhhdCBvbmNlIGl0
-IGlzIGFjY2VwdGVkIGZvciBYZW4gd2UgcGxhbiB0bwo+Pj4gdXBzdHJlYW0gYSBMaW51eCBjYW1l
-cmEgZnJvbnQtZW5kIGtlcm5lbCBkcml2ZXIgd2hpY2ggd2lsbCBiZSBiYXNlZAo+Pj4gb24gdGhp
-cyB3b3JrIGFuZCB3aWxsIGJlIGEgVjRMMiBkZXZpY2UgZHJpdmVyICh0aGlzIGlzIHdoeSBJIGhh
-dmUgc2VudAo+Pj4gdGhpcyBwYXRjaCBub3Qgb25seSB0byBYZW4sIGJ1dCB0byB0aGUgY29ycmVz
-cG9uZGluZyBMaW51eCBtYWlsaW5nIGxpc3QKPj4+IGFzIHdlbGwpCj4+IHBpbmcKPiBTb3JyeSwg
-dGhpcyBnb3QgYnVyaWVkIGluIG15IG1haWxib3gsIEkgb25seSBjYW1lIGFjcm9zcyBpdCB0b2Rh
-eS4gSSdsbCB0cnkKPiB0byByZXZpZXcgdGhpcyB0aGlzIHdlZWssIGlmIG5vdCwganVzdCBwaW5n
-IG1lIGFnYWluLgpUaGFuayB5b3UgZm9yIHlvdXIgdGltZQo+Cj4gSSBoYWQgb25lIGhpZ2gtbGV2
-ZWwgcXVlc3Rpb24sIHRob3VnaDoKPgo+IFdoYXQgdHlwZXMgb2YgaGFyZHdhcmUgZG8geW91IGlu
-dGVuZCB0byB0YXJnZXQ/IFRoaXMgaW5pdGlhbCB2ZXJzaW9uIHRhcmdldHMKPiAodmVyeSkgc2lt
-cGxlIHdlYmNhbXMsIGJ1dCB3aGF0IGFib3V0IEhETUkgb3IgU0RUViByZWNlaXZlcnM/IE9yIGhh
-cmR3YXJlCj4gY29kZWNzPyBPciBjb21wbGV4IGVtYmVkZGVkIHZpZGVvIHBpcGVsaW5lcz8KPgo+
-IEluIG90aGVyIHdvcmRzLCB3aGVyZSBhcmUgeW91IHBsYW5uaW5nIHRvIGRyYXcgdGhlIGxpbmU/
-Cj4KPiBFdmVuIHdpdGgganVzdCBzaW1wbGUgY2FtZXJhcyB0aGVyZSBpcyBhIGRpZmZlcmVuY2Ug
-YmV0d2VlbiByZWd1bGFyIFVWQwo+IHdlYmNhbXMgYW5kIGNhbWVyYXMgdXNlZCB3aXRoIGVtYmVk
-ZGVkIHN5c3RlbXM6IGZvciB0aGUgbGF0dGVyIHlvdSBvZnRlbgo+IG5lZWQgdG8gcHJvdmlkZSBt
-b3JlIGNvbnRyb2wgdy5yLnQuIHdoaXRlLWJhbGFuY2luZyBldGMuLCB0aGluZ3MgdGhhdCBhCj4g
-VVZDIHdlYmNhbSB3aWxsIGdlbmVyYWxseSBkbyBmb3IgeW91IGluIHRoZSB3ZWJjYW0ncyBmaXJt
-d2FyZS4KVGhlIHVzZS1jYXNlcyB3ZSB3YW50IHRvIGltcGxlbWVudCBhcmUgbW9zdGx5IGluIGF1
-dG9tb3RpdmUvZW1iZWRkZWQgZG9tYWluLApzbyB0aGVyZSBhcmUgbWFueSBwZXJmb3JtYW5jZSBy
-ZXN0cmljdGlvbnMgYXBwbHkuCldlIGFyZSBub3QgdGFyZ2V0aW5nIHZpcnR1YWxpemluZyB2ZXJ5
-IGNvbXBsZXggaGFyZHdhcmUgYW5kIGhhdmUgbm8gCmludGVudGlvbgp0byBtYWtlIGEgMToxIG1h
-cHBpbmcgb2YgdGhlIHJlYWwgaGFyZHdhcmU6IGZvciB0aGF0IG9uZSBjYW4gcGFzcy10aHJvdWdo
-CmEgcmVhbCBIVyBkZXZpY2UgdG8gYSB2aXJ0dWFsIG1hY2hpbmUgKFZNKS4gVGhlIGdvYWwgaXMg
-dG8gc2hhcmUgYSBzaW5nbGUKY2FtZXJhIGRldmljZSB0byBtdWx0aXBsZSB2aXJ0dWFsIG1hY2hp
-bmVzLCBubyBjb2RlY3MsIHJlY2VpdmVycyBldGMuCgpDb250cm9sbGluZyB0aGUgc2FtZSBIVyBk
-ZXZpY2UgZnJvbSBkaWZmZXJlbnQgVk1zIGRvZXNuJ3QgbG9vayBmZWFzaWJsZToKd2hhdCBpZiB0
-aGUgc2FtZSBjb250cm9sIGlzIHNldCB0byBkaWZmZXJlbnQgdmFsdWVzIGZyb20gZGlmZmVyZW50
-IFZNcz8KT2YgY291cnNlLCB0aGlzIGNhbiBiZSBhY2hpZXZlZCBpZiB0aGUgY29ycmVzcG9uZGlu
-ZyBiYWNrZW5kIGNhbiAKcG9zdC1wcm9jZXNzCm9yaWdpbmFsIGNhbWVyYSBpbWFnZSB3aXRoIEdQ
-VSwgZm9yIGV4YW1wbGUsIHRodXMgYXBwbHlpbmcgZGlmZmVyZW50IGZpbHRlcnMKZm9yIGRpZmZl
-cmVudCBWTXMgZWZmZWN0aXZlbHkgZW11bGF0aW5nIGNhbWVyYSBjb250cm9scy4KQnV0IHRoaXMg
-cmVxdWlyZXMgYWRkaXRpb25hbCBDUFUvR1BVIHBvd2VyIHdoaWNoIHdlIHRyeSB0byBhdm9pZC4K
-ClN5c3RlbSBwYXJ0aXRpb25pbmcgKGNhbWVyYSBhbmQgY29udHJvbHMgYXNzaWdubWVudCkgaXMg
-ZG9uZSBhdCAKY29uZmlndXJhdGlvbgp0aW1lIChyZW1lbWJlciB3ZSBhcmUgaW4gYXV0b21vdGl2
-ZS9lbWJlZGRlZCB3b3JsZCwgc28gbW9zdCBvZiB0aGUgdGltZSAKdGhlIHNldApvZiBWTXMgcmVx
-dWlyaW5nIGNhbWVyYXMgaXMga25vd24gYXQgdGhpcyBzdGFnZSBhbmQgdGhlIGNvbmZpZ3VyYXRp
-b24gCnJlbWFpbnMKc3RhdGljIGF0IHJ1bi10aW1lKS4gU28sIHdoZW4gcGFyYS12aXJ0dWFsaXpl
-ZCAoUFYpIGFwcHJvYWNoIGlzIHVzZWQgdGhlbiB3ZQpvbmx5IGltcGxlbWVudCB2ZXJ5IGJhc2lj
-IGNvbnRyb2xzICh0aG9zZSBmb3VuZCBpbiB0aGUgcHJvdG9jb2wpLCBzbyBvbmUgY2FuCmFzc2ln
-biBzZXQgb2YgY29udHJvbHMgKGFsbCBvciBzb21lKSB0byBvbmUgb2YgdGhlIFZNcyAobWFpbiBv
-ciBtaXNzaW9uIApjcml0aWNhbApWTSBvciB3aGF0ZXZlcikgYWxsb3dpbmcgdGhhdCBWTSB0byBh
-ZGp1c3RzIHRob3NlIGZvciBhbGwgVk1zIGF0IG9uY2UuIApGb3Igb3RoZXIKVk1zIHRoaW5rIG9m
-IGl0IGFzIGZpcm13YXJlIGltcGxlbWVudGVkIGFkanVzdG1lbnQuIEFuZCB0aGUgYmFja2VuZCBz
-dGlsbApjb250cm9scyB0aGUgcmVzdCBvZiB0aGUgY29udHJvbHMgb2YgdGhlIHJlYWwgSFcgY2Ft
-ZXJhIHlvdSBtZW50aW9uLgoKSnVzdCBhbiBleGFtcGxlIG9mIGF1dG9tb3RpdmUgdXNlLWNhc2Ug
-KHdlIGNhbiBpbWFnaW5lIG1hbnkgbW9yZSk6CjEuIERyaXZlciBEb21haW4gLSBvd25zIHJlYWwg
-Y2FtZXJhIEhXIGFuZCBydW5zIHRoZSBjYW1lcmEgYmFja2VuZC4KIMKgwqAgVXNlcyBjYW1lcmEg
-b3V0cHV0IGZvciBtaXNzaW9uIGNyaXRpY2FsIHRhc2tzLCBlLmcuIHBhcmtpbmcgYXNzaXN0YW5j
-ZS4KMi4gSW4tVmVoaWNsZSBJbmZvdGFpbm1lbnQgZG9tYWluIC0gdXNlcyBQViBjYW1lcmEgZm9y
-IGluZm90YWlubWVudCAKcHVycG9zZXMsCiDCoMKgIGUuZy4gdGFraW5nIHBpY3R1cmVzIHdoaWxl
-IGluIG1vdGlvbi4KMy4gTmF2aWdhdGlvbiBkb21haW4gLSB1c2VzIFBWIGNhbWVyYSBmb3IgaGln
-aCBkZWZpbml0aW9uIG1hcHMKCkhvcGUsIHRoaXMgaGVscHMgdW5kZXJzdGFuZGluZyB0aGUgcG9z
-c2libGUgdXNlcyBvZiB0aGUgcHJvcG9zZWQgCnByb3RvY29sLCBpdHMKaW50ZW50aW9uIGFuZCBy
-ZXN0cmljdGlvbnMuCgo+IFJlZ2FyZHMsCj4KPiAJSGFucwpUaGFuayB5b3UsCk9sZWtzYW5kcgoK
+--===============2132960230262472209==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/gNBsyiVBWsx5q647O./_my="; protocol="application/pgp-signature"
+
+--Sig_/gNBsyiVBWsx5q647O./_my=
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 03 Sep 2018 06:35:42 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> what is the actual problem? The mere
+> listing of compiler flags passed does not make clear to me where the clash
+> is, or how it would surface.
+
+As I noticed just now, it fails to build only in Tumbleweed. So in this spe=
+cific case osstest would have caught it only in a few years from now.
+
+[   38s] make -C x86_instruction_emulator install
+[   38s] make[6]: Entering directory '/home/abuild/rpmbuild/BUILD/xen-4.12.=
+20180831T120653.6164970942/non-dbg/tools/fuzz/x86_instruction_emulator'
+[   38s] [ -L x86-emulate.h ] || ln -sf /home/abuild/rpmbuild/BUILD/xen-4.1=
+2.20180831T120653.6164970942/non-dbg/tools/fuzz/x86_instruction_emulator/..=
+/../../tools/tests/x86_emulator/x86-emulate.h
+[   38s] [ -L x86_emulate ] || ln -sf /home/abuild/rpmbuild/BUILD/xen-4.12.=
+20180831T120653.6164970942/non-dbg/tools/fuzz/x86_instruction_emulator/../.=
+./../xen/arch/x86/x86_emulate
+[   38s] /usr/bin/gcc  -m64 -DBUILD_ID -fno-strict-aliasing -std=3Dgnu99 -W=
+all -Wstrict-prototypes -Wdeclaration-after-statement -Wno-unused-but-set-v=
+ariable -Wno-unused-local-typedefs   -O0 -fno-omit-frame-pointer -D__XEN_IN=
+TERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERSION__ -MMD -MF .fuzz-emul.o.=
+d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE  -O2 -Wall -D_FORTIFY_SOURCE=3D=
+2 -fstack-protector-strong -funwind-tables -fasynchronous-unwind-tables -fs=
+tack-clash-protection -I/home/abuild/rpmbuild/BUILD/xen-4.12.20180831T12065=
+3.6164970942/non-dbg/tools/fuzz/x86_instruction_emulator/../../../tools/inc=
+lude -D__XEN_TOOLS__ -I.  -c -o fuzz-emul.o fuzz-emul.c
+[   38s] In file included from /usr/include/features.h:428,  =20
+[   38s]                  from /usr/include/assert.h:35,
+[   38s]                  from fuzz-emul.c:1:
+[   38s] fuzz-emul.c: In function 'input_read':
+[   38s] /usr/include/bits/string_fortified.h:31:1: error: inlining failed =
+in call to always_inline 'memcpy': target specific option mismatch
+[   38s]  __NTH (memcpy (void *__restrict __dest, const void *__restrict __=
+src,
+[   38s]  ^~~~~
+[   38s] fuzz-emul.c:67:5: note: called from here
+[   38s]      memcpy(dst, &s->corpus->data[s->data_index], size);
+[   38s]      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[   38s] In file included from /usr/include/features.h:428,  =20
+[   38s]                  from /usr/include/assert.h:35,
+[   38s]                  from fuzz-emul.c:1:
+[   38s] /usr/include/bits/string_fortified.h:31:1: error: inlining failed =
+in call to always_inline 'memcpy': target specific option mismatch
+[   38s]  __NTH (memcpy (void *__restrict __dest, const void *__restrict __=
+src,
+[   38s]  ^~~~~
+[   38s] fuzz-emul.c:67:5: note: called from here
+[   38s]      memcpy(dst, &s->corpus->data[s->data_index], size);
+[   38s]      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[   38s] make[6]: *** [/home/abuild/rpmbuild/BUILD/xen-4.12.20180831T120653=
+.6164970942/non-dbg/tools/fuzz/x86_instruction_emulator/../../../tools/Rule=
+s.mk:225: fuzz-emul.o] Error 1
+
+Appending -U_FORTIFY_SOURCE in tools/fuzz fixes it. Not sure why fuzz is di=
+fferent from the rest of tools.
+
+Olaf
+
+--Sig_/gNBsyiVBWsx5q647O./_my=
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW441AAAKCRBdQqD6ppg2
+fq8xAKCpJPtVDoCsOeZ8nFTSJmqQVvDkZgCgxUdLQpyWLXOxevgK3pGhRfZ5z14=
+=pYBO
+-----END PGP SIGNATURE-----
+
+--Sig_/gNBsyiVBWsx5q647O./_my=--
+
+
+--===============2132960230262472209==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2132960230262472209==--
