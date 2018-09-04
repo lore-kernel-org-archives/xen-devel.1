@@ -1,18 +1,21 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: tools/fuzz fails due build, osstest did not notice
-Date: Tue, 4 Sep 2018 09:32:16 +0200
-Message-ID: <20180904093216.33ea8ad8.olaf@aepfle.de>
-References: <20180903115323.616cc7f8.olaf@aepfle.de>
- <5B8D2A9E02000078001E491D@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH RFC] x86/HVM: also stuff RSB upon exit to
+ guest
+Date: Tue, 04 Sep 2018 01:37:35 -0600
+Message-ID: <5B8E363F02000078001E4F56@prv1-mh.provo.novell.com>
+References: <5B5B2A3E02000078001D8810@prv1-mh.provo.novell.com>
+ <a03ec850-dc80-cacc-6348-e9910d154207@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2132960230262472209=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=tkn6=ls=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1fx5p7-0000Ke-3q
- for xen-devel@lists.xenproject.org; Tue, 04 Sep 2018 07:32:29 +0000
-In-Reply-To: <5B8D2A9E02000078001E491D@prv1-mh.provo.novell.com>
+ (envelope-from <srs0=qfrq=ls=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fx5uB-0000Te-D5
+ for xen-devel@lists.xenproject.org; Tue, 04 Sep 2018 07:37:43 +0000
+In-Reply-To: <a03ec850-dc80-cacc-6348-e9910d154207@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,100 +24,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2132960230262472209==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/gNBsyiVBWsx5q647O./_my="; protocol="application/pgp-signature"
-
---Sig_/gNBsyiVBWsx5q647O./_my=
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Mon, 03 Sep 2018 06:35:42 -0600
-schrieb "Jan Beulich" <JBeulich@suse.com>:
-
-> what is the actual problem? The mere
-> listing of compiler flags passed does not make clear to me where the clash
-> is, or how it would surface.
-
-As I noticed just now, it fails to build only in Tumbleweed. So in this spe=
-cific case osstest would have caught it only in a few years from now.
-
-[   38s] make -C x86_instruction_emulator install
-[   38s] make[6]: Entering directory '/home/abuild/rpmbuild/BUILD/xen-4.12.=
-20180831T120653.6164970942/non-dbg/tools/fuzz/x86_instruction_emulator'
-[   38s] [ -L x86-emulate.h ] || ln -sf /home/abuild/rpmbuild/BUILD/xen-4.1=
-2.20180831T120653.6164970942/non-dbg/tools/fuzz/x86_instruction_emulator/..=
-/../../tools/tests/x86_emulator/x86-emulate.h
-[   38s] [ -L x86_emulate ] || ln -sf /home/abuild/rpmbuild/BUILD/xen-4.12.=
-20180831T120653.6164970942/non-dbg/tools/fuzz/x86_instruction_emulator/../.=
-./../xen/arch/x86/x86_emulate
-[   38s] /usr/bin/gcc  -m64 -DBUILD_ID -fno-strict-aliasing -std=3Dgnu99 -W=
-all -Wstrict-prototypes -Wdeclaration-after-statement -Wno-unused-but-set-v=
-ariable -Wno-unused-local-typedefs   -O0 -fno-omit-frame-pointer -D__XEN_IN=
-TERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERSION__ -MMD -MF .fuzz-emul.o.=
-d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE  -O2 -Wall -D_FORTIFY_SOURCE=3D=
-2 -fstack-protector-strong -funwind-tables -fasynchronous-unwind-tables -fs=
-tack-clash-protection -I/home/abuild/rpmbuild/BUILD/xen-4.12.20180831T12065=
-3.6164970942/non-dbg/tools/fuzz/x86_instruction_emulator/../../../tools/inc=
-lude -D__XEN_TOOLS__ -I.  -c -o fuzz-emul.o fuzz-emul.c
-[   38s] In file included from /usr/include/features.h:428,  =20
-[   38s]                  from /usr/include/assert.h:35,
-[   38s]                  from fuzz-emul.c:1:
-[   38s] fuzz-emul.c: In function 'input_read':
-[   38s] /usr/include/bits/string_fortified.h:31:1: error: inlining failed =
-in call to always_inline 'memcpy': target specific option mismatch
-[   38s]  __NTH (memcpy (void *__restrict __dest, const void *__restrict __=
-src,
-[   38s]  ^~~~~
-[   38s] fuzz-emul.c:67:5: note: called from here
-[   38s]      memcpy(dst, &s->corpus->data[s->data_index], size);
-[   38s]      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[   38s] In file included from /usr/include/features.h:428,  =20
-[   38s]                  from /usr/include/assert.h:35,
-[   38s]                  from fuzz-emul.c:1:
-[   38s] /usr/include/bits/string_fortified.h:31:1: error: inlining failed =
-in call to always_inline 'memcpy': target specific option mismatch
-[   38s]  __NTH (memcpy (void *__restrict __dest, const void *__restrict __=
-src,
-[   38s]  ^~~~~
-[   38s] fuzz-emul.c:67:5: note: called from here
-[   38s]      memcpy(dst, &s->corpus->data[s->data_index], size);
-[   38s]      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[   38s] make[6]: *** [/home/abuild/rpmbuild/BUILD/xen-4.12.20180831T120653=
-.6164970942/non-dbg/tools/fuzz/x86_instruction_emulator/../../../tools/Rule=
-s.mk:225: fuzz-emul.o] Error 1
-
-Appending -U_FORTIFY_SOURCE in tools/fuzz fixes it. Not sure why fuzz is di=
-fferent from the rest of tools.
-
-Olaf
-
---Sig_/gNBsyiVBWsx5q647O./_my=
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW441AAAKCRBdQqD6ppg2
-fq8xAKCpJPtVDoCsOeZ8nFTSJmqQVvDkZgCgxUdLQpyWLXOxevgK3pGhRfZ5z14=
-=pYBO
------END PGP SIGNATURE-----
-
---Sig_/gNBsyiVBWsx5q647O./_my=--
-
-
---===============2132960230262472209==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2132960230262472209==--
+Pj4+IE9uIDAzLjA5LjE4IGF0IDE4OjIwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMjcvMDcvMTggMTU6MjAsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBJbiBvcmRlciB0
+byBtb3N0bHkgZWxpbWluYXRlIGFidXNlIG9mIHdoYXQgWGVuIGxlYXZlcyBpbiB0aGUgUlNCIGJ5
+Cj4+IGd1ZXN0IGxldmVsIGF0dGFja2VycywgZmlsbCB0aGUgUlNCIHdpdGggYWxtb3N0LU5VTEwg
+cG9pbnRlcnMgcmlnaHQKPj4gYmVmb3JlIGVudGVyaW5nIGd1ZXN0IGNvbnRleHQuCj4gCj4gSG93
+IGRvIHlvdSBlbnZpc2FnZSBhbiBhdHRhY2tlciB1c2luZyB3aGF0IFhlbiBsZWF2ZXMgaW4gdGhl
+IFJTQj8gIEFuCj4gYXR0YWNrZXIgZG9lc24ndCBoYXZlIG11Y2gvYW55IGNvbnRyb2wgb2YgdGhl
+IGNhbGxncmFwaCBYZW4gbWFrZXMuCgpKdXN0IHV0aWxpemUgb2NjYXNpb25hbCBvdmVybGFwcyBi
+ZXR3ZWVuIFhlbiBhbmQgZ3Vlc3Qga2VybmVsIGFkZHJlc3Nlcy4KCj4+IFRCRDogT2J2aW91c2x5
+IHVzaW5nIE5VTEwgaGVyZSBoYXMgdGhlIGRvd25zaWRlIG9mIHJlYWRzIHRocm91Z2ggTlVMTAo+
+PiAgICAgIG5vdCBnb2luZyB0byBmYXVsdCBhbnltb3JlLgo+IAo+IFRoaXMgYWxvbmUgaXMgc3Vm
+ZmljaWVudCBqdXN0aWZpY2F0aW9uIHRvIG5vdCB1c2UgdGhpcyByb3V0ZS4gIElkZWFsbHksCj4g
+d2Ugc2hvdWxkIGhhdmUgbm8gbWFwcGluZ3Mgd2l0aGluIGRpc3AzMiBvZiAwLgo+IAo+IEluIHBy
+aW5jaXBsZSwgdGhlcmUgYXJlIG90aGVyIGJldHRlciBhZGRyZXNzZXMgd2hpY2ggY291bGQgYmUg
+dXNlZCwgc3VjaAo+IGFzIHRoZSBwYWdlIGltbWVkaWF0ZWx5IGJlbG93IHRoZSBjYW5vbmljYWwg
+Ym91bmRhcnksIG9yIFRTRUcvSFNFRywgYnV0Li4uCgpJaXJjIHRoZXJlIHdhcyBhdCBsZWFzdCBv
+bmUgZXJyYXR1bSByZXF1aXJpbmcgbm8gbWFwcGluZyByaWdodApiZWxvdyB0aGUgY2Fub25pY2Fs
+IGJvdW5kYXJ5LgoKQXMgdG8gVFNFRy9IU0VHIC0gdGhleSBhcmUgcGh5c2ljYWwgYWRkcmVzc2Vz
+LCBhcmVuJ3QgdGhleT8KCj4+ICsKPj4gKyAgICAgICAgcHRyID0gX19tYXBfZG9tYWluX3BhZ2Uo
+cGcpOwo+PiArICAgICAgICBtZW1zZXQocHRyLCAtMSwgUEFHRV9TSVpFKTsKPj4gKyAgICAgICAg
+bWVtY3B5KHB0ciArIGFkZHIsIGRvX292ZXJ3cml0ZV9yc2IsIHNpemUpOwo+PiArICAgICAgICB1
+bm1hcF9kb21haW5fcGFnZShwdHIpOwo+PiArCj4+ICsgICAgICAgIHNtcF93bWIoKTsKPiAKPiBX
+aGF0IGlzIHRoaXMgYmFycmllciBmb3I/CgpUbyBtYWtlIHN1cmUgZXZlcnl0aGluZyBhaGVhZCBv
+ZiBpdCBoYXBwZW5zIGJlZm9yZSAuLi4KCj4+ICsgICAgICAgIGh2bV9vdmVyd3JpdGVfcnNiID0g
+KHZvaWQgKilhZGRyOwoKLi4uIHRoaXMgYXNzaWdubWVudC4KCj4+IC0tLSBhL3hlbi9pbmNsdWRl
+L2FzbS14ODYvc3BlY19jdHJsX2FzbS5oCj4+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvc3Bl
+Y19jdHJsX2FzbS5oCj4+IEBAIC0yNDksNiArMjQ5LDggQEAKPj4gIAo+PiAgLyogVXNlIHdoZW4g
+ZXhpdGluZyB0byBIVk0gZ3Vlc3QgY29udGV4dC4gKi8KPj4gICNkZWZpbmUgU1BFQ19DVFJMX0VY
+SVRfVE9fSFZNICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKPj4g
+KyAgICBtb3YgaHZtX292ZXJ3cml0ZV9yc2IoJXJpcCksICVyY3g7ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIFwKPj4gKyAgICBBTFRFUk5BVElWRSAiIiwgIklORElSRUNUX0NBTEwg
+JXJjeCIsIFg4Nl9GRUFUVVJFX1NDX1JTQl9IVk07ICAgICAgIFwKPiAKPiAuLi4gdGhlcmUgYXJl
+IHR3byByZWFzb25zIHdoeSBJIGRpZG4ndCBkbyBhbnkgUlNCIHN0dWZmaW5nIGFsb25nIHRoZXNl
+Cj4gbGluZXMuCj4gCj4gRmlyc3QsIHRoaXMgaXMgcmFjeSB3aXRoIE5NSXMvZXRjLgoKVGhpcyBp
+cyB1bmRlcnN0b29kLCBhbmQgY291bGQgZWl0aGVyIGJlIGZpeGVkIG9yIHRvbGVyYXRlZCBhcyBl
+dmVuCmxlc3MgY29udHJvbGxhYmxlIGJ5IGFuIGF0dGFja2VyLgoKPiBTZWNvbmRseSwgU01NIG1v
+ZGUgZG9lcyBleGFjdGx5IHRoZSBzYW1lIHRvIHRoZSB3aG9sZSBzeXN0ZW0gKG91dHNpZGUgb2YK
+PiBYZW5zIGNvbnRyb2wpIHdpdGggYSBjYWxsIHRyZWUgaW4gSFNFRy9UU0VHLgoKQW5kIHRoZXkg
+Y291bGQgZG8gc2ltaWxhciBzdHVmZmluZy4KCj4gT3ZlcmFsbCwgZ2l2ZW4gdGhlIGhvbGVzIGlu
+IHRoZSBhdmFpbGFibGUgbWVjaGFuaXNtLCBhbmQgdGhlIGZhY3QgdGhhdAo+IFhlbidzIGN1cnJl
+bnQgY2FsbGdyYXBoIGlzIGFjdHVhbGx5IHByZXR0eSBnb29kICh3cnQgUlNCKSBmb3IgY3VycmVu
+dAo+IG9wZXJhdGluZyBzeXN0ZW1zLCBJIGRpZG4ndCB0aGluayBpdCB3YXMgd29ydGggZG9pbmcg
+YW55dGhpbmcgc3BlY2lhbC4KCldlbGwsIG9rYXksIEkganVzdCB3YW50ZWQgdGhlIG9wdGlvbiBk
+aXNjdXNzZWQuIEknbGwgZHJvcCB0aGUgcGF0Y2guCgpKYW4KCgoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
