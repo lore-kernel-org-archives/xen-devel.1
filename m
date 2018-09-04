@@ -1,20 +1,14 @@
-From: Greg KH <gregkh@linuxfoundation.org>
-Subject: Re: [PATCH] xen-swiotlb: use actually allocated size on
- check physical contiguous
-Date: Tue, 4 Sep 2018 21:13:30 +0200
-Message-ID: <20180904191330.GA16532__49497.6717899137$1536088345$gmane$org@kroah.com>
-References: <d578b69a-848b-2c86-175a-1b1933d82a36@oracle.com>
+From: Christoph Hellwig <hch@lst.de>
+Subject: [PATCH 01/13] arm: remove the unused BIOVEC_MERGEABLE
+ define
+Date: Tue,  4 Sep 2018 12:14:19 -0700
+Message-ID: <20180904191431.20102-2-hch@lst.de>
+References: <20180904191431.20102-1-hch@lst.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ohbg=ls=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1fxGlb-00033A-A5
- for xen-devel@lists.xenproject.org; Tue, 04 Sep 2018 19:13:35 +0000
-Content-Disposition: inline
-In-Reply-To: <d578b69a-848b-2c86-175a-1b1933d82a36@oracle.com>
+In-Reply-To: <20180904191431.20102-1-hch@lst.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,24 +17,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Joe Jin <joe.jin@oracle.com>
-Cc: John Sobecki <john.sobecki@oracle.com>, "DONGLI.ZHANG" <dongli.zhang@oracle.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, stable@vger.kernel.org, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Jens Axboe <axboe@kernel.dk>
+Cc: linux-block@vger.kernel.org, xen-devel@lists.xen.org, linux-arm-kernel@lists.infradead.org, Ming Lei <ming.lei@redhat.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBTZXAgMDQsIDIwMTggYXQgMTE6MTY6NThBTSAtMDcwMCwgSm9lIEppbiB3cm90ZToK
-PiB4ZW5fc3dpb3RsYl97YWxsb2MsZnJlZX1fY29oZXJlbnQoKSBhY3R1YWxseSBhbGxvY2F0ZS9m
-cmVlIHNpemUgYnkgb3JkZXIKPiBidXQgdXNlZCB0aGUgcmVxdWlyZWQgc2l6ZSB0byBjaGVjayBp
-ZiBhZGRyZXNzIGlzIHBoeXNpY2FsIGNvbnRpZ3VvdXMsCj4gaWYgZmlyc3QgcGFnZXMgYXJlIHBo
-eXNpY2FsIGNvbnRpZ3VvdXMgYWxzbyBwYXNzZWQKPiByYW5nZV9zdHJhZGRsZXNfcGFnZV9ib3Vu
-ZGFyeSgpIGNoZWNrLCBidXQgb3RoZXJzIHdlcmUgbm90IGl0IHdpbGwKPiBsZWFkIGtlcm5lbCBw
-YW5pYy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKb2UgSmluIDxqb2UuamluQG9yYWNsZS5jb20+Cj4g
-Q2M6IEtvbnJhZCBSemVzenV0ZWsgV2lsayA8a29ucmFkLndpbGtAb3JhY2xlLmNvbT4KPiAtLS0K
-PiAgZHJpdmVycy94ZW4vc3dpb3RsYi14ZW4uYyB8IDYgKysrKysrCj4gIDEgZmlsZSBjaGFuZ2Vk
-LCA2IGluc2VydGlvbnMoKykKPiAKCjxmb3JtbGV0dGVyPgoKVGhpcyBpcyBub3QgdGhlIGNvcnJl
-Y3Qgd2F5IHRvIHN1Ym1pdCBwYXRjaGVzIGZvciBpbmNsdXNpb24gaW4gdGhlCnN0YWJsZSBrZXJu
-ZWwgdHJlZS4gIFBsZWFzZSByZWFkOgogICAgaHR0cHM6Ly93d3cua2VybmVsLm9yZy9kb2MvaHRt
-bC9sYXRlc3QvcHJvY2Vzcy9zdGFibGUta2VybmVsLXJ1bGVzLmh0bWwKZm9yIGhvdyB0byBkbyB0
-aGlzIHByb3Blcmx5LgoKPC9mb3JtbGV0dGVyPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+U2lnbmVkLW9mZi1ieTogQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBsc3QuZGU+Ci0tLQogYXJjaC9h
+cm0vaW5jbHVkZS9hc20vaW8uaCB8IDcgLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDcgZGVsZXRp
+b25zKC0pCgpkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vaW5jbHVkZS9hc20vaW8uaCBiL2FyY2gvYXJt
+L2luY2x1ZGUvYXNtL2lvLmgKaW5kZXggMmNmYmM1MzFmNjNiLi42Nzc0NTUzZGMyMTQgMTAwNjQ0
+Ci0tLSBhL2FyY2gvYXJtL2luY2x1ZGUvYXNtL2lvLmgKKysrIGIvYXJjaC9hcm0vaW5jbHVkZS9h
+c20vaW8uaApAQCAtNDU5LDEzICs0NTksNiBAQCBleHRlcm4gdm9pZCBwY2lfaW91bm1hcChzdHJ1
+Y3QgcGNpX2RldiAqZGV2LCB2b2lkIF9faW9tZW0gKmFkZHIpOwogCiAjaW5jbHVkZSA8YXNtLWdl
+bmVyaWMvaW8uaD4KIAotLyoKLSAqIGNhbiB0aGUgaGFyZHdhcmUgbWFwIHRoaXMgaW50byBvbmUg
+c2VnbWVudCBvciBub3QsIGdpdmVuIG5vIG90aGVyCi0gKiBjb25zdHJhaW50cy4KLSAqLwotI2Rl
+ZmluZSBCSU9WRUNfTUVSR0VBQkxFKHZlYzEsIHZlYzIpCVwKLQkoKGJ2ZWNfdG9fcGh5cygodmVj
+MSkpICsgKHZlYzEpLT5idl9sZW4pID09IGJ2ZWNfdG9fcGh5cygodmVjMikpKQotCiBzdHJ1Y3Qg
+YmlvX3ZlYzsKIGV4dGVybiBib29sIHhlbl9iaW92ZWNfcGh5c19tZXJnZWFibGUoY29uc3Qgc3Ry
+dWN0IGJpb192ZWMgKnZlYzEsCiAJCQkJICAgICAgY29uc3Qgc3RydWN0IGJpb192ZWMgKnZlYzIp
+OwotLSAKMi4xOC4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
