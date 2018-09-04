@@ -1,14 +1,16 @@
-From: Christoph Hellwig <hch@lst.de>
-Subject: [PATCH 02/13] xen: remove the xen_biovec_phys_mergeable
- export
-Date: Tue,  4 Sep 2018 12:14:20 -0700
-Message-ID: <20180904191431.20102-3-hch__10030.5220847533$1536088485$gmane$org@lst.de>
-References: <20180904191431.20102-1-hch@lst.de>
+From: Julien Grall <julien.grall@arm.com>
+Subject: [PATCH 0/3] xen/arm: vgic-v3: Bug fixes
+Date: Tue,  4 Sep 2018 20:21:50 +0100
+Message-ID: <20180904192153.17210-1-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180904191431.20102-1-hch@lst.de>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=0yqp=ls=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1fxGtm-0005QM-SC
+ for xen-devel@lists.xenproject.org; Tue, 04 Sep 2018 19:22:02 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,19 +19,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jens Axboe <axboe@kernel.dk>
-Cc: linux-block@vger.kernel.org, xen-devel@lists.xen.org, linux-arm-kernel@lists.infradead.org, Ming Lei <ming.lei@redhat.com>
+To: xen-devel@lists.xenproject.org
+Cc: andre.przywara@arm.com, Julien Grall <julien.grall@arm.com>, sstabellini@kernel.org, shameerali.kolothum.thodi@huawei.com
 List-Id: xen-devel@lists.xenproject.org
 
-QklPVkVDX1BIWVNfTUVSR0VBQkxFIGlzIG9ubHkgY2FsbGVkIGZyb20gY29yZSBibG9jayBjb2Rl
-LgoKU2lnbmVkLW9mZi1ieTogQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBsc3QuZGU+Ci0tLQogZHJp
-dmVycy94ZW4vYmlvbWVyZ2UuYyB8IDEgLQogMSBmaWxlIGNoYW5nZWQsIDEgZGVsZXRpb24oLSkK
-CmRpZmYgLS1naXQgYS9kcml2ZXJzL3hlbi9iaW9tZXJnZS5jIGIvZHJpdmVycy94ZW4vYmlvbWVy
-Z2UuYwppbmRleCA1NWVkODBjM2ExN2MuLjM5OWM0ZTMwZjcyMyAxMDA2NDQKLS0tIGEvZHJpdmVy
-cy94ZW4vYmlvbWVyZ2UuYworKysgYi9kcml2ZXJzL3hlbi9iaW9tZXJnZS5jCkBAIC0yMCw0ICsy
-MCwzIEBAIGJvb2wgeGVuX2Jpb3ZlY19waHlzX21lcmdlYWJsZShjb25zdCBzdHJ1Y3QgYmlvX3Zl
-YyAqdmVjMSwKIAlyZXR1cm4gZmFsc2U7CiAjZW5kaWYKIH0KLUVYUE9SVF9TWU1CT0woeGVuX2Jp
-b3ZlY19waHlzX21lcmdlYWJsZSk7Ci0tIAoyLjE4LjAKCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+SGkgYWxsLAoKVGhlIGZpcnN0IDIgcGF0Y2hlcyBvZiB0aGUgc2VyaWVzIGFyZSBtZWFudCB0byBh
+ZGRyZXNzIERvbTAgYm9vdCBmYWlsdXJlCndoZW4gb24gR0lDdjQgcGxhdGZvcm1zIGFzIHdlbGwg
+YXMgd2hlbiB0aGUgbnVtYmVyIG9mIHZDUFVzIGlzIG5vdCBlcXVhbCB0bwp0aGUgbnVtYmVycyBv
+ZiBwQ1BVcy4gVGhleSBzaG91bGQgYmUgYmFja3BvcnRlZCB1cCBYZW4gNC44LgoKUGF0Y2ggIzMg
+c2hvdWxkIGFkZHJlc3MgZmFpbHVyZSB3aGVuIGZhaWxpbmcgdG8gY3JlYXRlIGd1ZXN0LiBJVFMg
+aXMgc3RpbGwKdW5kZXIgRVhQRVJULCBzbyBJIHdvdWxkIG5vdCBjb25zaWRlciBpdCBhcyBiYWNr
+cG9ydC4KCkNoZWVycywKCkp1bGllbiBHcmFsbCAoMyk6CiAgW25vdC1mb3ItdW5zdGFibGVdIHhl
+bi9hcm06IHZnaWMtdjM6IERlbGF5IHRoZSBpbml0aWFsaXphdGlvbiBvZiB0aGUKICAgIGRvbWFp
+biBpbmZvcm1hdGlvbgogIHhlbi9hcm06IHZnaWMtdjM6IERvbid0IGNyZWF0ZSBlbXB0eSByZS1k
+aXN0cmlidXRvciByZWdpb25zCiAgeGVuL2FybTogdmdpYy12My1pdHM6IE1ha2UgdmdpY192M19p
+dHNfZnJlZV9kb21haW4gaWRlbXBvdGVudAoKIHhlbi9hcmNoL2FybS9naWMtdjMuYyAgICAgIHwg
+MTAgKysrKysrKystLQogeGVuL2FyY2gvYXJtL3ZnaWMtdjMtaXRzLmMgfCAgNCArKysrCiB4ZW4v
+YXJjaC9hcm0vdmdpYy12My5jICAgICB8IDQwICsrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrLS0KIDMgZmlsZXMgY2hhbmdlZCwgNTAgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlv
+bnMoLSkKCi0tIAoyLjExLjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
