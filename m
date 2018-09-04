@@ -1,21 +1,19 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v3 03/16] x86: XENMEM_resource_ioreq_server
- is HVM only
-Date: Tue, 4 Sep 2018 17:42:08 +0100
-Message-ID: <20180904164208.rvqripldcdanug4y@zion.uk.xensource.com>
-References: <20180904161533.11575-1-wei.liu2@citrix.com>
- <20180904161533.11575-4-wei.liu2@citrix.com>
+Subject: Re: [PATCH] libxl: create control/sysrq xenstore node
+Date: Tue, 4 Sep 2018 17:51:58 +0100
+Message-ID: <20180904165158.x3am5qhrluxj2bzn@zion.uk.xensource.com>
+References: <20180904113929.32549-1-vkuznets@redhat.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=6dpj=ls=citrix.com=prvs=77871bf46=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1fxEP5-0007TR-Tj
- for xen-devel@lists.xenproject.org; Tue, 04 Sep 2018 16:42:11 +0000
+ id 1fxEYc-0008Mn-Vo
+ for xen-devel@lists.xenproject.org; Tue, 04 Sep 2018 16:52:03 +0000
 Content-Disposition: inline
-In-Reply-To: <20180904161533.11575-4-wei.liu2@citrix.com>
+In-Reply-To: <20180904113929.32549-1-vkuznets@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,16 +22,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>
+To: Vitaly Kuznetsov <vkuznets@redhat.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBTZXAgMDQsIDIwMTggYXQgMDU6MTU6MjBQTSArMDEwMCwgV2VpIExpdSB3cm90ZToK
-PiBQdXQgdGhlIGVudGlyZSBjYXNlIGJyYW5jaCB1bmRlciBDT05GSUdfSFZNLgo+IAo+IE5vbmV0
-aGVsZXNzIGNoZWNrIEhWTSBiZWZvcmUgdHJ5aW5nIHRvIGdldCBpb3JlcSBzZXJ2ZXIuCgpUaGUg
-d29yZGluZyBoZXJlIGlzIGNvbmZ1c2luZy4gSXQgc2hvdWxkIGhhdmUgYmVlbiB3cml0dGVuIGFz
-OgoKTGlmdCB0aGUgY2hlY2sgZnJvbSBodm1fZ2V0X2lvcmVxX3NlcnZlcl9mcmFtZSBpbnRvIGl0
-cyBjYWxsZXIuCgpXZWkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+T24gVHVlLCBTZXAgMDQsIDIwMTggYXQgMDE6Mzk6MjlQTSArMDIwMCwgVml0YWx5IEt1em5ldHNv
+diB3cm90ZToKPiAneGwgc3lzcnEnIGNvbW1hbmQgZG9lc24ndCB3b3JrIHdpdGggbW9kZXJuIExp
+bnV4IGd1ZXN0cyB3aXRoIHRoZSBmb2xsb3dpbmcKPiBtZXNzYWdlIGluIGd1ZXN0J3MgbG9nOgo+
+IAo+ICB4ZW46bWFuYWdlOiBzeXNycV9oYW5kbGVyOiBFcnJvciAtMTMgd3JpdGluZyBzeXNycSBp
+biBjb250cm9sL3N5c3JxCj4gCj4geGVuc3RvcmUgdHJhY2UgY29uZmlybXM6Cj4gCj4gIElOIDB4
+MjRiZDlhMCAyMDE4MDkwNCAwNDozNjozMiBXUklURSAoY29udHJvbC9zeXNycSApCj4gIE9VVCAw
+eDI0YmQ5YTAgMjAxODA5MDQgMDQ6MzY6MzIgRVJST1IgKEVBQ0NFUyApCj4gCj4gVGhlIHByb2Js
+ZW0gc2VlbXMgdG8gYmUgaW4gdGhlIGZhY3QgdGhhdCB3ZSBkb24ndCBwcmUtY3JlYXRlIGNvbnRy
+b2wvc3lzcnEKPiB4ZW5zdG9yZSBub2RlIGFuZCBsaWJ4bF9zZW5kX3N5c3JxKCkgZG9pbmcgbGli
+eGxfX3hzX3ByaW50ZigpIGNyZWF0ZXMgaXQgYXMKPiByZWFkLW9ubHkuIEFzIHdlIHdhbnQgdG8g
+YWxsb3cgZ3Vlc3RzIHRvIGNsZWFuICdjb250cm9sL3N5c3JxJyBhZnRlciB0aGUKPiByZXF1ZXN0
+ZWQgYWN0aW9uIGlzIHBlcmZvcm1lZCwgd2UgbmVlZCB0byBtYWtlIHRoaXMgbm9kZSB3cml0YWJs
+ZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBWaXRhbHkgS3V6bmV0c292IDx2a3V6bmV0c0ByZWRoYXQu
+Y29tPgoKSG1tLi4uIHRoaXMgbm9kZSBpc24ndCBkb2N1bWVudGVkLgoKQ2FuIHlvdSBwb2ludCBt
+ZSB0byB0aGUgY29kZSBpbiBMaW51eD8KCj4gLS0tCj4gLSBMaW51eCBjb2RlIHdpbGwgbmVlZCB0
+byBiZSBtb2RpZmllZCB0b28uIFdpdGggdGhpcyBwYXRjaCB3ZSBnZXQgc29tZXRoaW5nCj4gbGlr
+ZQo+IAo+ICBzeXNycTogU3lzUnEgOiBFbWVyZ2VuY3kgU3luYwo+ICB4ZW46bWFuYWdlOiBFcnJv
+ciAtMzQgcmVhZGluZyBzeXNycSBjb2RlIGluIGNvbnRyb2wvc3lzcnEKPiAgRW1lcmdlbmN5IFN5
+bmMgY29tcGxldGUKPiAKPiBUaGlzIG5ldyBFUkFOR0UgZmF1bHQgaGFwcGVucyBiZWNhdXNlIGFm
+dGVyIHdlIGNsZWFuIGNvbnRyb2wvc3lzcnEgbm9kZQo+IHhlbnN0b3JlIHdhdGNoIGluIHRoZSBn
+dWVzdCBpcyByZS1hc3NlcnRlZCBidXQgdGhlIHZhbHVlIGlzIGVtcHR5ICgiIikgc28KPiB4ZW5i
+dXNfc2NhbmYoKSBmYWlscyAiJWMiIHBhcnNpbmcuCj4gCj4gSXQgc2VlbXMgdGhlIGZlYXR1cmUg
+aXMgbG9uZyBicm9rZW4uCj4gLS0tCj4gIHRvb2xzL2xpYnhsL2xpYnhsX2NyZWF0ZS5jIHwgMyAr
+KysKPiAgMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKQo+IAo+IGRpZmYgLS1naXQgYS90
+b29scy9saWJ4bC9saWJ4bF9jcmVhdGUuYyBiL3Rvb2xzL2xpYnhsL2xpYnhsX2NyZWF0ZS5jCj4g
+aW5kZXggYjdiNDRlMjgwYi4uZDYwZjk1MmY3MyAxMDA2NDQKPiAtLS0gYS90b29scy9saWJ4bC9s
+aWJ4bF9jcmVhdGUuYwo+ICsrKyBiL3Rvb2xzL2xpYnhsL2xpYnhsX2NyZWF0ZS5jCj4gQEAgLTY5
+Miw2ICs2OTIsOSBAQCByZXRyeV90cmFuc2FjdGlvbjoKPiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgR0NTUFJJTlRGKCIlcy9jb250cm9sL2ZlYXR1cmUtczQiLCBkb21fcGF0aCksCj4gICAgICAg
+ICAgICAgICAgICAgICAgICAgIHJ3cGVybSwgQVJSQVlfU0laRShyd3Blcm0pKTsKPiAgICAgIH0K
+PiArICAgIGxpYnhsX194c19ta25vZChnYywgdCwKPiArICAgICAgICAgICAgICAgICAgICBHQ1NQ
+UklOVEYoIiVzL2NvbnRyb2wvc3lzcnEiLCBkb21fcGF0aCksCj4gKyAgICAgICAgICAgICAgICAg
+ICAgcndwZXJtLCBBUlJBWV9TSVpFKHJ3cGVybSkpOwo+ICAgICAgbGlieGxfX3hzX21rbm9kKGdj
+LCB0LAo+ICAgICAgICAgICAgICAgICAgICAgIEdDU1BSSU5URigiJXMvZGV2aWNlL3N1c3BlbmQv
+ZXZlbnQtY2hhbm5lbCIsIGRvbV9wYXRoKSwKPiAgICAgICAgICAgICAgICAgICAgICByd3Blcm0s
+IEFSUkFZX1NJWkUocndwZXJtKSk7Cj4gLS0gCj4gMi4xNC40Cj4gCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
