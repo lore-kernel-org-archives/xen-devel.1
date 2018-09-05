@@ -1,33 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v6 01/14] iommu: introduce the concept of
- BFN...
-Date: Wed, 05 Sep 2018 01:11:47 -0600
-Message-ID: <5B8F81B302000078001E55C9@prv1-mh.provo.novell.com>
-References: <20180823094711.21376-1-paul.durrant@citrix.com>
- <20180823094711.21376-2-paul.durrant@citrix.com>
- <5B88147F02000078001E39FB@prv1-mh.provo.novell.com>
- <eb9e4dcaf17544338b3b3fb5d40d43d0@AMSPEX02CL03.citrite.net>
- <5B8D1F2602000078001E48B5@prv1-mh.provo.novell.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D1912EFA15@SHSMSX101.ccr.corp.intel.com>
- <5B8E432E02000078001E4FB5@prv1-mh.provo.novell.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D1912EFD02@SHSMSX101.ccr.corp.intel.com>
- <5B8E469802000078001E4FE5@prv1-mh.provo.novell.com>
- <777ac29dd97a46938eec6c00ecf51e32@AMSPEX02CL03.citrite.net>
- <5B8E4B8A02000078001E505A@prv1-mh.provo.novell.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D1912F0BFB@SHSMSX101.ccr.corp.intel.com>
- <5B8F7C5202000078001E559F@prv1-mh.provo.novell.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D1912F14C8@SHSMSX101.ccr.corp.intel.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v2 1/2] x86/HVM: drop
+ hvm_fetch_from_guest_linear()
+Date: Wed, 5 Sep 2018 09:20:50 +0200
+Message-ID: <20180905092050.2867375d.olaf@aepfle.de>
+References: <5B87CF6302000078001E37A6@prv1-mh.provo.novell.com>
+ <5B8D561F02000078001E4BED@prv1-mh.provo.novell.com>
+ <5B8D56B102000078001E4C08@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6933701488316579961=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=jboo=lt=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fxRyg-0005yJ-MO
- for xen-devel@lists.xenproject.org; Wed, 05 Sep 2018 07:11:50 +0000
-In-Reply-To: <AADFC41AFE54684AB9EE6CBC0274A5D1912F14C8@SHSMSX101.ccr.corp.intel.com>
-Content-Disposition: inline
+ (envelope-from <srs0=domh=lt=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fxS7d-0006iv-65
+ for xen-devel@lists.xenproject.org; Wed, 05 Sep 2018 07:21:05 +0000
+In-Reply-To: <5B8D56B102000078001E4C08@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -36,64 +23,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Kevin Tian <kevin.tian@intel.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA1LjA5LjE4IGF0IDA4OjU2LCA8a2V2aW4udGlhbkBpbnRlbC5jb20+IHdyb3RlOgo+
-PiAgRnJvbTogSmFuIEJldWxpY2ggW21haWx0bzpKQmV1bGljaEBzdXNlLmNvbV0KPj4gU2VudDog
-V2VkbmVzZGF5LCBTZXB0ZW1iZXIgNSwgMjAxOCAyOjQ5IFBNCj4+IAo+PiA+Pj4gT24gMDUuMDku
-MTggYXQgMDI6NDIsIDxrZXZpbi50aWFuQGludGVsLmNvbT4gd3JvdGU6Cj4+ID4+ICBGcm9tOiBK
-YW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+PiA+PiBTZW50OiBUdWVzZGF5
-LCBTZXB0ZW1iZXIgNCwgMjAxOCA1OjA4IFBNCj4+ID4+Cj4+ID4+ID4+PiBPbiAwNC4wOS4xOCBh
-dCAxMDo0OSwgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPiB3cm90ZToKPj4gPj4gPj4gIC0tLS0t
-T3JpZ2luYWwgTWVzc2FnZS0tLS0tCj4+ID4+ID4+IEZyb206IEphbiBCZXVsaWNoIFttYWlsdG86
-SkJldWxpY2hAc3VzZS5jb21dCj4+ID4+ID4+IFNlbnQ6IDA0IFNlcHRlbWJlciAyMDE4IDA5OjQ3
-Cj4+ID4+ID4+IFRvOiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KPj4gPj4gPj4g
-Q2M6IFN1cmF2ZWUgU3V0aGlrdWxwYW5pdCA8c3VyYXZlZS5zdXRoaWt1bHBhbml0QGFtZC5jb20+
-OyBKdWxpZW4KPj4gPj4gR3JhbGwKPj4gPj4gPj4gPGp1bGllbi5ncmFsbEBhcm0uY29tPjsgUGF1
-bCBEdXJyYW50IDxQYXVsLkR1cnJhbnRAY2l0cml4LmNvbT47Cj4+ID4+IFN0ZWZhbm8KPj4gPj4g
-Pj4gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz47IHhlbi1kZXZlbCA8eGVuLQo+
-PiA+PiA+PiBkZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZz4KPj4gPj4gPj4gU3ViamVjdDogUmU6
-IFtYZW4tZGV2ZWxdIFtQQVRDSCB2NiAwMS8xNF0gaW9tbXU6IGludHJvZHVjZSB0aGUKPj4gY29u
-Y2VwdAo+PiA+PiBvZgo+PiA+PiA+PiBCRk4uLi4KPj4gPj4gPj4KPj4gPj4gPj4gPj4+IE9uIDA0
-LjA5LjE4IGF0IDEwOjM3LCA8a2V2aW4udGlhbkBpbnRlbC5jb20+IHdyb3RlOgo+PiA+PiA+PiA+
-PiAgRnJvbTogSmFuIEJldWxpY2ggW21haWx0bzpKQmV1bGljaEBzdXNlLmNvbV0KPj4gPj4gPj4g
-Pj4gU2VudDogVHVlc2RheSwgU2VwdGVtYmVyIDQsIDIwMTggNDozMyBQTQo+PiA+PiA+PiA+PiA+
-Cj4+ID4+ID4+ID4+ID4gYnVzIGFkZHJlc3MgaXMgY29tbW9ubHkgdXNlZCBhbG9uZyB3aXRoIHBo
-eXNpY2FsL3ZpcnR1YWwKPj4gYWRkcmVzcywKPj4gPj4gdG8KPj4gPj4gPj4gPj4gPiByZXByZXNl
-bnQgZGlmZmVyZW50IHZpZXdzIGJldHdlZW4gZGV2aWNlcyBhbmQgQ1BVLiBGcm9tIHRoYXQKPj4g
-Pj4gYW5nbGUKPj4gPj4gPj4gPj4gPiBJIHRoaW5rIEJGTiBpcyBhIGNsZWFyIHRlcm0gaW4gdGhp
-cyBjb250ZXh0LiBidHcgaXQgaXMgbm90IG5lY2Vzc2FyeQo+PiB0bwo+PiA+PiA+PiA+PiA+IGRp
-ZmZlcmVudGlhdGUgR0JGTiBhbmQgTUJGTiBzaW5jZSB0aGVyZSBpcyBvbmx5IG9uZSBCRk4gdmll
-dwo+PiBwZXIKPj4gPj4gPj4gPj4gPiBkZXZpY2UuCj4+ID4+ID4+ID4+Cj4+ID4+ID4+ID4+IFN1
-cmUsIGJ1dCB5b3UgbmVnbGVjdCB0aGUgcHJlc2VuY2Ugb2Ygb25lIG9yIG1vcmUgSU9NTVVzIHdo
-ZW4KPj4gPj4gPj4gPj4geW91IHNheSAiYmV0d2VlbiBkZXZpY2VzIGFuZCBDUFUiLiBUaGVyZSBh
-ZGRyZXNzZXMgcHJpb3IgdG8gYW5kCj4+ID4+ID4+ID4+IGFmdGVyIElPTU1VIHRyYW5zbGF0aW9u
-IGFyZSBkaXN0aW5jdCwgYW5kIHdoaWxlIHRoZSBvbmUgYmVmb3JlIHRoZQo+PiA+PiA+PiA+PiB0
-cmFuc2xhdGlvbiBtYXRjaGVzIHRoZSBkZXZpY2UgdmlldywgdGhlIG9uZSBhZnRlciB0cmFuc2xh
-dGlvbiBkb2VzCj4+ID4+ID4+ID4+IG5vdCBuZWNlc3NhcmlseSBtYXRjaCB0aGUgQ1BVIHZpZXcu
-IEhlbmNlIHRoZXJlIGFyZSB0d28gImJ1cyIKPj4gPj4gPj4gPj4gZnJhbWUgbnVtYmVycyBoZXJl
-IC0gb25lIHJlcHJlc2VudGluZyB0aGUgZGV2aWNlIHZpZXcsIGFuZCB0aGUKPj4gPj4gPj4gPj4g
-b3RoZXIgcmVwcmVzZW50aW5nIHRoZSBJT01NVSAob3V0cHV0KSB2aWV3Lgo+PiA+PiA+PiA+Pgo+
-PiA+PiA+PiA+Cj4+ID4+ID4+ID4gSSBkaWRuJ3QgZ2V0LiB0aGUgb3V0cHV0IGFkZHJlc3MgZnJv
-bSBJT01NVSBpcyB0aGUgb25lIHNlbnQgdG8KPj4gPj4gPj4gPiBtZW1vcnkgY29udHJvbGxlciwg
-c2FtZSBhcyB0aGUgb25lIHNlbnQgZnJvbSBDUFUuCj4+ID4+ID4+Cj4+ID4+ID4+IFRoYXQncyBv
-biBwcmVzZW50IHg4NiBzeXN0ZW1zLCBidXQgYWl1aSBub3QgaW4gdGhlIGdlbmVyYWwgY2FzZS4g
-VGhlCj4+ID4+ID4+IHRlcm1pbm9sb2d5IHRvIGJlIHVzZWQgaW4gWGVuIHNob3VsZCBmaXQgdGhl
-IGdlbmVyYWwgY2FzZSB0aG91Z2guCj4+ID4+ID4KPj4gPj4gPiBTbyB5b3VyIGNvbmNlcm4gaXMg
-Y2FzY2FkZWQgSU9NTVVzPwo+PiA+Pgo+PiA+PiBOb3QgcHJpbWFyaWx5LiBNeSBjb25jZXJuIGFy
-ZSBzeXN0ZW1zIHdpdGggYW4gSS9PIGFkZHJlc3Mgc3BhY2UKPj4gPj4gKGJlaGluZCB0aGUgSU9N
-TVUpIGRpc3RpbmN0IGZyb20gdGhlIENQVSBhZGRyZXNzIHNwYWNlLiBJaXJjIGF0Cj4+ID4+IGxl
-YXN0IEFscGhhIGlzL3dhcyB0aGF0IHdheS4KPj4gPj4KPj4gPgo+PiA+IFRoZW4gUGF1bCBwbGVh
-c2UgZG9jdW1lbnRzIGNsZWFybHkgdGhhdCB0aGlzIGJ1cyBhZGRyZXNzIHJlZmVycyB0bwo+PiA+
-IHRoZSBpbnB1dCBzaWRlIG9mIElPTU1VLiA6LSkKPj4gCj4+IEJ1dCB3aGVuIHJlYWRpbmcgY29k
-ZSB5b3UgY2FuJ3QgYWx3YXlzIGdvIGJhY2sgdG8gbG9vayBhdCB0aGUgb25lCj4+IHBsYWNlIHdo
-ZXJlIGl0cyBtZWFuaW5nIGlzIGRvY3VtZW50ZWQuIEhlbmNlIG15IGRlc2lyZSBmb3IgYSBuYW1l
-Cj4+IHdoaWNoIHByb3Blcmx5IGNvbnZleXMgdGhlIG1lYW5pbmcuCj4+IAo+IAo+IFRoZW4gcG9z
-c2libHkgZ28gYmFjayB0byBERk4sIGJ1dCB0YWtlICdEJyBhcyBETUEgaW5zdGVhZCBvZiBkZXZp
-Y2U/CgpIb3cgd291bGQgIkRNQSIgYmUgYW55IGJldHRlciB0aGFuICJidXMiPyBXaG9zZSB2aWV3
-IGl0IGlzIHRoZW4gc3RpbGwKaXMgdW5jbGVhci4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============6933701488316579961==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/2pvyh5cK8Lb5WJcS4Vp4LG0"; protocol="application/pgp-signature"
+
+--Sig_/2pvyh5cK8Lb5WJcS4Vp4LG0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 03 Sep 2018 09:43:45 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> It can easily be expressed through hvm_copy_from_guest_linear(), and in
+> two cases this even simplifies callers.
+>=20
+> Suggested-by: Paul Durrant <paul.durrant@citrix.com>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+Tested-by: Olaf Hering <olaf@aepfle.de>
+
+Olaf
+
+--Sig_/2pvyh5cK8Lb5WJcS4Vp4LG0
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW4+D0gAKCRBdQqD6ppg2
+fmboAJ93IHG4XH8AtJebJnzNTZjjmIZDAgCg4FNejK07oxY3T363mNGx8ab5Gi8=
+=kocC
+-----END PGP SIGNATURE-----
+
+--Sig_/2pvyh5cK8Lb5WJcS4Vp4LG0--
+
+
+--===============6933701488316579961==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6933701488316579961==--
