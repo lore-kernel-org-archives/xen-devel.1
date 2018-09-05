@@ -1,17 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: Rats nest with domain pirq initialisation
-Date: Wed, 05 Sep 2018 05:38:07 -0600
-Message-ID: <5B8FC01F02000078001E584B@prv1-mh.provo.novell.com>
-References: <1534154469-6076-1-git-send-email-andrew.cooper3@citrix.com>
- <1534154469-6076-10-git-send-email-andrew.cooper3@citrix.com>
- <2d004d47-9031-f01a-26db-d3d4b63ec479@citrix.com>
- <5B8F849F02000078001E55F9@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] xen: avoid crash in disable_hotplug_cpu
+Date: Wed, 5 Sep 2018 13:50:19 +0200
+Message-ID: <20180905135019.56b303da.olaf__46957.3459741243$1536148166$gmane$org@aepfle.de>
+References: <20180905104039.13512-1-olaf@aepfle.de>
+ <7630aac8-8588-6e42-0807-f98b66ce37b5@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1870796422220389676=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B8F849F02000078001E55F9@prv1-mh.provo.novell.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=domh=lt=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fxWKS-0004GU-8y
+ for xen-devel@lists.xenproject.org; Wed, 05 Sep 2018 11:50:36 +0000
+In-Reply-To: <7630aac8-8588-6e42-0807-f98b66ce37b5@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,18 +21,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, open list <linux-kernel@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA1LjA5LjE4IGF0IDA5OjI0LCA8SkJldWxpY2hAc3VzZS5jb20+IHdyb3RlOgo+Pj4+
-IE9uIDA0LjA5LjE4IGF0IDIwOjQ0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6
-Cj4+IFVubGlrZSB0aGUgYm9vbGVhbi1uYXR1cmUgcmFuZ2VzZXRfY29udGFpbnNfKigpIGhlbHBl
-cnMsIEkgZG9uJ3QgdGhpbmsKPj4gaXQgaXMgcmVhc29uYWJsZSB0byBtYWtlIHJhbmdlc2V0X3Jl
-bW92ZV8qKCkgdG9sZXJhdGUgYSBOVUxMIHJhbmdlc2V0Lgo+IAo+ICsxCgpIbW0sIHVwb24gZnVy
-dGhlciB0aG91Z2h0OiByYW5nZXNldF9yZW1vdmVfKigpIGlzIGEgbm8tb3Agb24gYW4KZW1wdHkg
-cmFuZ2VzZXQuIE1ha2luZyBpdCBiYWlsIG9uIGEgTlVMTCBvbmUgd291bGQgdGhlcmVmb3JlIHNl
-ZW0KbGlrZSBub3Qgc28gdW5yZWFzb25hYmxlIGEgdGhpbmcuCgpKYW4KCgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============1870796422220389676==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/9_A9212rbA3FEtpY02kkZAv"; protocol="application/pgp-signature"
+
+--Sig_/9_A9212rbA3FEtpY02kkZAv
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 5 Sep 2018 12:55:58 +0200
+schrieb Juergen Gross <jgross@suse.com>:
+
+> the last cpu
+
+Which one is the "last" one? I mean, if cpu#0 never can be offlined than pe=
+rhaps the code should check for just that and return early. But if cpu#0 co=
+uld be disabled while some other cpu is the remaining cpu, some other check=
+ is needed I think.
+
+Olaf
+
+--Sig_/9_A9212rbA3FEtpY02kkZAv
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW4/C+wAKCRBdQqD6ppg2
+frlGAJ9IqMrNEZ+KR+wJ/FSquh6l+aGV6ACeN8hFlwCo1KKm1VhjD09C4UsVH4Y=
+=zyjz
+-----END PGP SIGNATURE-----
+
+--Sig_/9_A9212rbA3FEtpY02kkZAv--
+
+
+--===============1870796422220389676==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1870796422220389676==--
