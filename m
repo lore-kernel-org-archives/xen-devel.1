@@ -1,20 +1,20 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v1] xen: avoid crash in disable_hotplug_cpu
-Date: Wed, 5 Sep 2018 17:27:14 +0200
-Message-ID: <20180905172714.301ee3ca.olaf__21335.9710680836$1536161182$gmane$org@aepfle.de>
-References: <20180905104039.13512-1-olaf@aepfle.de>
- <7630aac8-8588-6e42-0807-f98b66ce37b5@suse.com>
- <20180905164719.52e02256.olaf@aepfle.de>
- <237d1597-6085-dffb-fb12-1965db0ee68b@suse.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: Rats nest with domain pirq initialisation
+Date: Wed, 5 Sep 2018 17:44:56 +0200
+Message-ID: <20180905154456.fddaa2cfivb6h4do@mac.bytemobile.com>
+References: <1534154469-6076-1-git-send-email-andrew.cooper3@citrix.com>
+ <1534154469-6076-10-git-send-email-andrew.cooper3@citrix.com>
+ <2d004d47-9031-f01a-26db-d3d4b63ec479@citrix.com>
+ <5B8F849F02000078001E55F9@prv1-mh.provo.novell.com>
+ <cf1ff537-4d7b-a1cb-74ed-b2ff7983f316@citrix.com>
+ <5B8FCB2502000078001E58A9@prv1-mh.provo.novell.com>
+ <ba242be2-c3b5-c313-e416-29f29dd13ec1@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0095865201408832192=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=domh=lt=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1fxZiO-0006cf-Cy
- for xen-devel@lists.xenproject.org; Wed, 05 Sep 2018 15:27:32 +0000
-In-Reply-To: <237d1597-6085-dffb-fb12-1965db0ee68b@suse.com>
+Content-Disposition: inline
+In-Reply-To: <ba242be2-c3b5-c313-e416-29f29dd13ec1@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,52 +23,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, open list <linux-kernel@vger.kernel.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============0095865201408832192==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/TI5y0ZfQwVAwJKF68k8B/3J"; protocol="application/pgp-signature"
-
---Sig_/TI5y0ZfQwVAwJKF68k8B/3J
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Wed, 5 Sep 2018 17:14:48 +0200
-schrieb Juergen Gross <jgross@suse.com>:
-
-> I'm not sure this WARN triggers because it is cpu#0. Are you sure
-> the tested cpu in that WARN was 0? After all the test is just running
-> on cpu#0 and I don't think it can be offline already.
-
-If I leave cpu#0 alone, no WARN is triggered.
-I resend with test cpu_is_hotpluggable.
-
-Olaf
-
---Sig_/TI5y0ZfQwVAwJKF68k8B/3J
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW4/10gAKCRBdQqD6ppg2
-fufQAKD4WbQYJa6/l2vfOvl8CTRfmE7miwCg2mhDS0UzOsyptvX7Rg1m3w3HChA=
-=SfAQ
------END PGP SIGNATURE-----
-
---Sig_/TI5y0ZfQwVAwJKF68k8B/3J--
-
-
---===============0095865201408832192==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0095865201408832192==--
+T24gV2VkLCBTZXAgMDUsIDIwMTggYXQgMDE6Mzk6MThQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBPbiAwNS8wOS8xOCAxMzoyNSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gPj4+PiBPbiAw
+NS4wOS4xOCBhdCAxNDowNCwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+ID4+
+IE9uIDA1LzA5LzE4IDA4OjI0LCBKYW4gQmV1bGljaCB3cm90ZToKPiA+Pj4+Pj4gT24gMDQuMDku
+MTggYXQgMjA6NDQsIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToKPiA+Pj4+IFRo
+ZSBwYXRoIHdoaWNoIGJsb3dzIHVwIGlzOgo+ID4+Pj4KPiA+Pj4+IGFyY2hfZG9tYWluX2Rlc3Ry
+b3koKQo+ID4+Pj4gICBmcmVlX2RvbWFpbl9waXJxcygpCj4gPj4+PiAgICAgdW5tYXBfZG9tYWlu
+X3BpcnEoKQo+ID4+Pj4gICAgICAgaXJxX2RlbnlfYWNjZXNzKCkKPiA+Pj4+ICAgICAgICAgcmFu
+Z2VzZXRfcmVtb3ZlX3NpbmdsZXRvbigoZCktPmlycV9jYXBzLCBpKQo+ID4+PiBCdXQgd2hhdCBJ
+UlEgZG8gd2UgZmluZCB0byB1bm1hcCBoZXJlPyBUaGVyZSBjYW4ndCBiZSBhbnkgdGhhdCBoYXZl
+Cj4gPj4+IGJlZW4gbWFwcGVkLCB3aGVuIC0+aXJxX2NhcHMgaXMgc3RpbGwgTlVMTC4gSU9XIEkg
+ZG9uJ3QgY3VycmVudGx5IHNlZQo+ID4+PiBob3cgZG9tYWluX3BpcnFfdG9faXJxKCkgd291bGQg
+bGVnaXRpbWF0ZWx5IHJldHVybiBhIHBvc2l0aXZlIHZhbHVlIGF0Cj4gPj4+IHRoaXMgcG9pbnQg
+aW4gdGltZSwgeWV0IHRoYXQncyB3aGF0IGd1YXJkcyB0aGUgY2FsbHMgdG8gdW5tYXBfZG9tYWlu
+X3BpcnEoKS4KPiA+PiBJdCBpcyBwaXJxIDIgd2hpY2ggZXhwbG9kZXMsIHdoaWNoIGlzIHRoZSBm
+aXJzdCBvZiB0aGUgcmVkdW5kYW50IHBpcnEKPiA+PiBzdHJ1Y3R1cmVzIGFsbG9jYXRlZCBmb3Ig
+bGVnYWN5IHJvdXRpbmcuCj4gPj4KPiA+PiBJJ20gbm90IHN1cmUgSSB1bmRlcnN0YW5kIHRoaXMg
+Y29kZSB3ZWxsIGVub3VnaCB0byBjb21tZW50IG9uIHdoeQo+ID4+IGRvbWFpbl9waXJxX3RvX2ly
+cSgpIHJldHVybnMgYSBwb3NpdGl2ZSB2YWx1ZSBhdCB0aGlzIHBvaW50LCBidXQgSSdtCj4gPj4g
+Z29pbmcgdG8gZ28gb3V0IG9uIGEgbGltYiBhbmQgc3VnZ2VzdCBpdCBtaWdodCBiZSByZWxhdGVk
+IHRvIG91cgo+ID4+IHVubmVjZXNzYXJ5KD8pIHByZWFsbG9jYXRpb24uCj4gPiBJJ3ZlIG1lYW53
+aGlsZSBjb25zaWRlcmVkIHRoaXMgYXMgdGhlIHJlYXNvbiwgdG9vLiBBbmQgaWlyYyB0aGUKPiA+
+IHByZS1hbGxvY2F0aW9uIGlzIGJlY2F1c2UgZ3Vlc3RzIChpbmNsdWRpbmcgRG9tMCkgYnlwYXNz
+IHNvbWUgb2YKPiA+IHRoZSBzZXR1cCB0aGV5IHdvdWxkIGRvIGZvciBub24tbGVnYWN5IElSUXMu
+IFRoaXMgbWF5IGhhdmUgYmVlbgo+ID4ganVzdCBhIFhlbm9MaW51eCAobWlzKWJlaGF2aW9yLCBi
+dXQgZXZlbiB0aGVuIEknbSBub3QgY29udmluY2VkCj4gPiB3ZSBjb3VsZCBlYXNpbHkgYWx0ZXIg
+dGhpbmdzLgo+IAo+IEJ5cGFzcyB3aGljaCBzZXR1cD/CoCBPbmUgd2F5IG9yIGFub3RoZXIgdGhl
+eSBoYXZlIHRvIGJpbmQgdGhlIGlycSBiZWZvcmUKPiBpdCBjYW4gYmUgdXNlZCwgc28gSSBzdGls
+bCBkb24ndCBzZWUgd2h5IGFueSBzdHJ1Y3R1cmUgcHJlYWxsb2NhdGlvbiBpcwo+IG5lZWRlZC7C
+oCAoUmVzZXJ2YXRpb24gb2YgbGVnYWN5IGlycSBudW1iZXJzLCBwZXJhaHBzLikKCkZvciBQSVJR
+cyB5b3UgbmVlZCB0byBmaXJzdCBhbGxvY2F0ZSBhIFBJUlEsIHRoZW4gY29uZmlndXJlIGl0IGFu
+ZApiaW5kIHRoZSBQSVJRIHRvIGFuIGV2ZW50IGNoYW5uZWwuIEkgaGF2ZSBubyBpZGVhLCBidXQg
+aXQgd291bGRuJ3QKc2VlbSB0aGF0IHdlaXJkIHRoYXQgb2xkIERvbTAga2VybmVscyB3b3VsZCBh
+c3N1bWUgdGhhdCBsZWdhY3kgSVJRcwooPDE2KSBhcmUgYWxyZWFkeSBhbGxvY2F0ZWQsIGFuZCBq
+dXN0IGNvbmZpZ3VyZSBhbmQgYmluZCB0aGVtLgoKTGFzdCB0aW1lIEkgbG9va2VkIHdoZW4gd29y
+a2luZyBvbiBsZWdhY3kgUFZIIHN1cHBvcnQgZm9yIEZyZWVCU0QKcHZvcHMgTGludXggd291bGQg
+Y29ycmVjdGx5IGFsbG9jYXRlIGxlZ2FjeSBQSVJRcyBiZWZvcmUgYXR0ZW1wdGluZyB0bwpiaW5k
+IHRoZW0sIGJ1dCBJIGhhdmVuJ3QgbG9va2VkIGF0IGNsYXNzaWMgeGVub2xpbnV4IERvbTAga2Vy
+bmVscy4KClJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
