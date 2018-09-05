@@ -1,16 +1,19 @@
-From: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH] osstest: add missing disk driver name
-Date: Wed, 5 Sep 2018 16:11:39 +0200
-Message-ID: <20180905141139.36689-1-roger.pau@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] docs: document ~/control/sysrq
+Date: Wed, 5 Sep 2018 16:12:25 +0200
+Message-ID: <ff57f754-d874-61db-a26e-06293ea7fbe4@suse.com>
+References: <20180905140501.10462-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=myqw=lt=citrix.com=prvs=779943e21=roger.pau@srs-us1.protection.inumbo.net>)
- id 1fxYXb-0000W3-HN
- for xen-devel@lists.xenproject.org; Wed, 05 Sep 2018 14:12:19 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=evre=lt=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fxYXl-0000Xb-HP
+ for xen-devel@lists.xenproject.org; Wed, 05 Sep 2018 14:12:29 +0000
+In-Reply-To: <20180905140501.10462-1-wei.liu2@citrix.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,29 +22,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZWxibGluZyBib3hlcyB1c2VzIHRoZSBtZmkgZHJpdmVyIGFuZCBoYXZlIHRoZSBoYXJkIGRpc2tz
-IGluCnBhc3N0aHJvdWdoIG1vZGUsIHdoaWNoIG1lYW5zIHRoZSBtZmkgZHJpdmVyIHdpbGwgZXhw
-b3NlIHRoZW0gYXMKbWZpc3lzcGQ/IGluc3RlYWQgb2YgbWZpZD8uIEluIG9yZGVyIGZvciB0aGUg
-aW5zdGFsbGVyIHRvIGRldGVjdCBzdWNoCmRpc2tzIGFkZCBtZmlzeXNwZDAgdG8gdGhlIGxpc3Qg
-b2YgZGlza3MgdG8gcHJvYmUuCgpUaGlzIHNob3VsZCBmaXggdGhlIGhvc3QtaW5zdGFsbCBpc3N1
-ZXMgcmVwb3J0ZWQgb24gZWxibGluZyBib3hlczoKCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjczMDQvCgpTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUg
-TW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KLS0tCiB0cy1mcmVlYnNkLWhvc3QtaW5zdGFs
-bCB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoK
-ZGlmZiAtLWdpdCBhL3RzLWZyZWVic2QtaG9zdC1pbnN0YWxsIGIvdHMtZnJlZWJzZC1ob3N0LWlu
-c3RhbGwKaW5kZXggODYyYTI1ZTcuLjUzZGFlZWZjIDEwMDc1NQotLS0gYS90cy1mcmVlYnNkLWhv
-c3QtaW5zdGFsbAorKysgYi90cy1mcmVlYnNkLWhvc3QtaW5zdGFsbApAQCAtMTIzLDcgKzEyMyw3
-IEBAIHN1YiBpbnN0YWxsICgpIHsKICAgICBteSAka25vd25ob3N0cyA9IGtub3duX2hvc3RzKCk7
-CiAgICAgbXkgJHNzaGRfa2V5c191cmwgPSBjcmVhdGVfc3NoX292ZXJsYXkoKTsKICAgICBteSBA
-ZGlza19uYW1lcyA9Ci0gICAgICAgIHF3KGFkYTAgZGEwIGFkMCBhYWNkMCBhbXJkMCBpZGFkMCBp
-cHNkMCBtZmlkMCBtbHhkMCB0d2VkMCk7CisgICAgICAgIHF3KGFkYTAgZGEwIGFkMCBhYWNkMCBh
-bXJkMCBpZGFkMCBpcHNkMCBtZmlkMCBtZmlzeXNwZDAgbWx4ZDAgdHdlZDApOwogICAgIG15ICR0
-YXJnZXRfc2V0cyA9ICIvcm9vdC9vc3N0ZXN0X3NldHMiOwogICAgIG15ICRkaXNrOwogICAgIG15
-ICRuaWM7Ci0tIAoyLjE4LjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+T24gMDUvMDkvMTggMTY6MDUsIFdlaSBMaXUgd3JvdGU6Cj4gU2lnbmVkLW9mZi1ieTogV2VpIExp
+dSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NA
+c3VzZS5jb20+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
