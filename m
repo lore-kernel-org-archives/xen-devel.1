@@ -1,19 +1,17 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v2] xen: avoid crash in disable_hotplug_cpu
-Date: Thu, 6 Sep 2018 18:53:40 -0400
-Message-ID: <904b8bf8-ce80-2751-04bf-de1e450ef58c__37120.6756135964$1536274275$gmane$org@oracle.com>
-References: <20180906063712.28639-1-olaf@aepfle.de>
- <b7306d7f-e827-6556-e1bb-4b934a162e46@oracle.com>
- <20180906223145.37f7009b.olaf@aepfle.de>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 3/3] xen/vcpu: Rework sanity checks in
+ vcpu_create()
+Date: Fri, 7 Sep 2018 00:01:32 +0100
+Message-ID: <6e5f11bb-bd6d-5d76-24f4-62f71224f60c@citrix.com>
+References: <1536261934-1236-1-git-send-email-andrew.cooper3@citrix.com>
+ <1536261934-1236-4-git-send-email-andrew.cooper3@citrix.com>
+ <CAKf6xpvAYJryWPCjtNPhNbU9v3p1+ihMH=FqoPzb1Nc65KHSCQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5005386762755522551=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=n/pg=lu=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1fy38W-00019f-29
- for xen-devel@lists.xenproject.org; Thu, 06 Sep 2018 22:52:28 +0000
-In-Reply-To: <20180906223145.37f7009b.olaf@aepfle.de>
+In-Reply-To: <CAKf6xpvAYJryWPCjtNPhNbU9v3p1+ihMH=FqoPzb1Nc65KHSCQ@mail.gmail.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,99 +20,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, open list <linux-kernel@vger.kernel.org>
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: sstabellini@kernel.org, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org, julien.grall@arm.com, Jan Beulich <JBeulich@suse.com>, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5005386762755522551==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="auAW3TJhCbkwOPZEQCY9BtNozEvZC8EIu"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---auAW3TJhCbkwOPZEQCY9BtNozEvZC8EIu
-Content-Type: multipart/mixed; boundary="Qsz2hA954rg39Vg9lPeOJz7WCrKPmXf3t";
- protected-headers="v1"
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>,
- open list <linux-kernel@vger.kernel.org>
-Message-ID: <904b8bf8-ce80-2751-04bf-de1e450ef58c@oracle.com>
-Subject: Re: [PATCH v2] xen: avoid crash in disable_hotplug_cpu
-References: <20180906063712.28639-1-olaf@aepfle.de>
- <b7306d7f-e827-6556-e1bb-4b934a162e46@oracle.com>
- <20180906223145.37f7009b.olaf@aepfle.de>
-In-Reply-To: <20180906223145.37f7009b.olaf@aepfle.de>
-
---Qsz2hA954rg39Vg9lPeOJz7WCrKPmXf3t
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-US
-
-On 09/06/2018 04:31 PM, Olaf Hering wrote:
-> Am Thu, 6 Sep 2018 14:45:57 -0400
-> schrieb Boris Ostrovsky <boris.ostrovsky@oracle.com>:
->
->> On 09/06/2018 02:37 AM, Olaf Hering wrote:
->>> The command 'xl vcpu-set 0 0', issued in dom0, will crash dom0:
->>> This happens because handle_vcpu_hotplug_event is called twice. In th=
-e
->>> first iteration cpu_present is still true, in the second iteration
->>> cpu_present is false which causes get_cpu_device to return NULL.
->>> In case of cpu#0, cpu_online is apparently always true.
->> I think we should check both this and num_online_cpus() !=3D 0.
-> This can not possibly help. cpu#0 is the first one that goes offline.
-> IF cpu0_hotpluggable is broken, then only "if (!cpu) return;" can help.=
-
-
-
-And maybe that needs to be part of the check, in addition to
-cpu_is_hotpluggable() test.
-
-Offlining CPU0 is problematic. For example, look at xen_pv_cpu_disable().=
-
-
-
-
--boris
-
-
---Qsz2hA954rg39Vg9lPeOJz7WCrKPmXf3t--
-
---auAW3TJhCbkwOPZEQCY9BtNozEvZC8EIu
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEExAVKDNg/TOdD61Yyit52kIbKwbIFAluRr/UACgkQit52kIbK
-wbLYeRAAhsnCpb/DSHlF5gDBmxU3YHyAY7yCGZJYAtqNoQFytITDv2MupWiiVHqW
-+RuAIlLD85ytK62bp/2+Fh30NnM9o6ePBTWUthotP+PS2QQ8yHiv5k0gEMzvlm7/
-TMOposgvv91EKXLFHJd0xQVjHlNETN2gkajUdIfw5jx5AbKXOC46xxNcw8hlWSqP
-CuZBzvC+FRCOAC4JEdOu5t9vunMbvGoj5WQuSXFgh50a7Y+ujXrRKtUvEHG2tkOw
-JWJq7M+Dy/yj12/9JZdVVaNGviqGyedIUCUmYYSp/Nq7ciO+ji0kAw6ZFh12xr1T
-6R6YADjWNw8LmaCn8TaI0a5gGsWx5d/Sq9oi+TM3NNgj2F1WIP+bNnTNjnOkepfr
-HbLRgJgtDPor3bewPhTV30Oj5nE1YMEfphRwCIXiUTp6f8dRTUlGVAWo+f36OiN6
-XWwY79v0iK2JZewp7ljlpRoTO6tZs6d5YKq7dBanoomyC/DhHNrAirrGdXmrQAaW
-IDSyJayhcdHdKbr/eBlozTJfHswAkA//fTxUmMVReUOr1E+Zz5+xcRYeQ3G1EUKv
-xQK5+GVnXCls885J6vlwaiFVRjc8B5SfftW7pm9IdXX8AUiVjkBFVht/oyCbjm19
-ucXgbiueGZTV+hsh8UcZsLPphbYnYDD4H0s/hF6ZHLgyLf1/vNc=
-=obmP
------END PGP SIGNATURE-----
-
---auAW3TJhCbkwOPZEQCY9BtNozEvZC8EIu--
-
-
---===============5005386762755522551==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5005386762755522551==--
+T24gMDYvMDkvMTggMjE6MDcsIEphc29uIEFuZHJ5dWsgd3JvdGU6Cj4gT24gVGh1LCBTZXAgNiwg
+MjAxOCBhdCAzOjI4IFBNIEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+
+IHdyb3RlOgo+PiBQb2lzb25pbmcgaWRsZV92Y3B1WzBdIHdpdGggdGhlIHNhbml0eSBkZWJ1ZyB2
+YWx1ZSBpc24ndCBhY3R1YWxseSBhIGNsZXZlcgo+PiBpZGVhLCBiZWNhdXNlIGl0IHBhc3NlcyBh
+IE5VTEwgcG9pbnRlciBjaGVjayBidXQgaXNuJ3QgYSB1c2FibGUgdmNwdS4gIEl0IGlzCj4+IGFs
+c28gdGhlIHJlYXNvbiBmb3IgdGhlICghaXNfaWRsZV9kb21haW4oZCkgfHwgdmNwdV9pZCkgcGFy
+dCBvZiB0aGUgZXhpc3RpbmcKPj4gc2FuaXR5IEJVR19PTigpLgo+Pgo+PiBOb3cgdGhhdCBkLT5t
+YXhfdmNwdXMgaXMgYXBwcm9wcmlhdGVseSBzZXQgdXAgYmVmb3JlIHZjcHVfY3JlYXRlKCkgaXMg
+Y2FsbGVkLAo+PiB3ZSBjYW4gcHJvcGVybHkgcmFuZ2UgY2hlY2sgdGhlIHJlcXVlc3RlZCB2Y3B1
+X2lkLiAgRHJvcCB0aGUgQlVHX09OKCkgYW5kCj4+IHJlcGxhY2UgaXQgd2l0aCBjb2RlIHdoaWNo
+IGlzIHJ1bnRpbWUgc2FmZSBidXQgbm9uLWZhdGFsLgo+Pgo+PiBXaGlsZSB2MCBtdXN0IGJlIHRo
+ZSBmaXJzdCBhbGxvY2F0ZWQgdmNwdSBmb3IgZm9yX2VhY2hfdmNwdSgpIHRvIHdvcmssIGl0Cj4+
+IGlzbid0IGEgcmVxdWlyZW1lbnQgZm9yIHRoZSB0aHJlYWRpbmcgdGhlIHZjcHUgaW50byB0aGUg
+bGlua2VkIGxpc3QsIHNvIHVwZGF0ZQo+PiB0aGUgdGhyZWFkaW5nIGNvZGUgdG8gYmUgbW9yZSBn
+ZW5lcmljLCBhbmQgYWRkIGEgY29tbWVudCBleHBsYWluaW5nIHdoeSB3ZQo+PiBuZWVkIHRvIHNl
+YXJjaCBmb3IgcHJldl9pZC4KPj4KPj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5k
+cmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPj4gLS0tCj4+IENDOiBKYW4gQmV1bGljaCA8SkJldWxp
+Y2hAc3VzZS5jb20+Cj4+IENDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+PiBDQzog
+Um9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4+IENDOiBTdGVmYW5vIFN0
+YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+Cj4+IENDOiBKdWxpZW4gR3JhbGwgPGp1
+bGllbi5ncmFsbEBhcm0uY29tPgo+PiAtLS0KPj4gIHhlbi9hcmNoL2FybS9zZXR1cC5jIHwgIDEg
+LQo+PiAgeGVuL2FyY2gveDg2L3NldHVwLmMgfCAgMSAtCj4+ICB4ZW4vY29tbW9uL2RvbWFpbi5j
+ICB8IDMyICsrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0tCj4+ICAzIGZpbGVzIGNoYW5n
+ZWQsIDI4IGluc2VydGlvbnMoKyksIDYgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS94
+ZW4vYXJjaC9hcm0vc2V0dXAuYyBiL3hlbi9hcmNoL2FybS9zZXR1cC5jCj4+IGluZGV4IDAxYWFh
+YWIuLmQwNmFjNDAgMTAwNjQ0Cj4+IC0tLSBhL3hlbi9hcmNoL2FybS9zZXR1cC5jCj4+ICsrKyBi
+L3hlbi9hcmNoL2FybS9zZXR1cC5jCj4+IEBAIC03MDQsNyArNzA0LDYgQEAgdm9pZCBfX2luaXQg
+c3RhcnRfeGVuKHVuc2lnbmVkIGxvbmcgYm9vdF9waHlzX29mZnNldCwKPj4gICAgICBzZXRfcHJv
+Y2Vzc29yX2lkKDApOyAvKiBuZWVkZWQgZWFybHksIGZvciBzbXBfcHJvY2Vzc29yX2lkKCkgKi8K
+Pj4KPj4gICAgICBzZXRfY3VycmVudCgoc3RydWN0IHZjcHUgKikweGZmZmZmMDAwKTsgLyogZGVi
+dWcgc2FuaXR5ICovCj4+IC0gICAgaWRsZV92Y3B1WzBdID0gY3VycmVudDsKPj4KPj4gICAgICBz
+ZXR1cF92aXJ0dWFsX3JlZ2lvbnMoTlVMTCwgTlVMTCk7Cj4+ICAgICAgLyogSW5pdGlhbGl6ZSB0
+cmFwcyBlYXJseSBhbGxvdyB1cyB0byBnZXQgYmFja3RyYWNlIHdoZW4gYW4gZXJyb3Igb2NjdXJy
+ZWQgKi8KPj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9zZXR1cC5jIGIveGVuL2FyY2gveDg2
+L3NldHVwLmMKPj4gaW5kZXggYTJmMjJhMS4uNWUxZThhZSAxMDA2NDQKPj4gLS0tIGEveGVuL2Fy
+Y2gveDg2L3NldHVwLmMKPj4gKysrIGIveGVuL2FyY2gveDg2L3NldHVwLmMKPj4gQEAgLTY5MSw3
+ICs2OTEsNiBAQCB2b2lkIF9faW5pdCBub3JldHVybiBfX3N0YXJ0X3hlbih1bnNpZ25lZCBsb25n
+IG1iaV9wKQo+Pgo+PiAgICAgIHNldF9wcm9jZXNzb3JfaWQoMCk7Cj4+ICAgICAgc2V0X2N1cnJl
+bnQoSU5WQUxJRF9WQ1BVKTsgLyogZGVidWcgc2FuaXR5LiAqLwo+PiAtICAgIGlkbGVfdmNwdVsw
+XSA9IGN1cnJlbnQ7Cj4geGVuL2FyY2gveDg2L3Rib290LmM6dGJvb3Rfc2h1dGRvd24oKSBoYXM6
+Cj4gICAgIGlmICggaWRsZV92Y3B1WzBdICE9IElOVkFMSURfVkNQVSApCj4gICAgICAgICB3cml0
+ZV9wdGJhc2UoaWRsZV92Y3B1WzBdKTsKPgo+IFdpdGggeW91ciBjaGFuZ2UsIHRoaXMgc2hvdWxk
+IGJlIHVwZGF0ZSB0byBjaGVjayBmb3Igbm9uLU5VTEwuCgpPaCAtIHZlcnkgZ29vZCBjYXRjaC7C
+oCBUaGFua3MuCgpMb29raW5nIGF0IHRoZSBjb2RlLCBpZGVhbGx5IGl0IHdvdWxkIGNoYW5nZSB0
+bwp3cml0ZV9jcjMoaWRsZV9wZ190YWJsZSksIGJ1dCB0aGF0IGlzbid0IGdvaW5nIHRvIGluY2x1
+ZGUgdGhlIGFkZGl0aW9uYWwKQ1I0IGNoYW5nZXMuwqAgTGVhdmluZyB0aGlzIGluIHRoaXMgZm9y
+bSAod2l0aCBhIE5VTEwpIGNoZWNrIGlzIHByb2JhYmx5CmJlc3QuCgp+QW5kcmV3CgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
