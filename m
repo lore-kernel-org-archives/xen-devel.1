@@ -1,20 +1,18 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH] xen/balloon: add runtime control for
- scrubbing ballooned out pages
-Date: Thu, 6 Sep 2018 22:31:28 +0200
-Message-ID: <20180906203128.GJ1353__23222.6219996393$1536265826$gmane$org@mail-itl>
-References: <20180906153355.25363-1-marmarek@invisiblethingslab.com>
- <bf287a28-5e40-1ea2-a983-3d6a8e9a9869@oracle.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v2] xen: avoid crash in disable_hotplug_cpu
+Date: Thu, 6 Sep 2018 22:31:45 +0200
+Message-ID: <20180906223145.37f7009b.olaf__48671.2118647576$1536265846$gmane$org@aepfle.de>
+References: <20180906063712.28639-1-olaf@aepfle.de>
+ <b7306d7f-e827-6556-e1bb-4b934a162e46@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5844588392092870416=="
+Content-Type: multipart/mixed; boundary="===============9102452813074348899=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=n4la=lu=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1fy0wA-00009u-Tf
- for xen-devel@lists.xenproject.org; Thu, 06 Sep 2018 20:31:35 +0000
-In-Reply-To: <bf287a28-5e40-1ea2-a983-3d6a8e9a9869@oracle.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=y5ed=lu=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fy0we-0000BV-9I
+ for xen-devel@lists.xenproject.org; Thu, 06 Sep 2018 20:32:04 +0000
+In-Reply-To: <b7306d7f-e827-6556-e1bb-4b934a162e46@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,88 +25,47 @@ To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, open list <linux-kernel@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
+--===============9102452813074348899==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/tskpqat.bDZCNZqA9o0sYsv"; protocol="application/pgp-signature"
 
---===============5844588392092870416==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="+Z7/5fzWRHDJ0o7Q"
-Content-Disposition: inline
-
-
---+Z7/5fzWRHDJ0o7Q
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+--Sig_/tskpqat.bDZCNZqA9o0sYsv
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 06, 2018 at 04:14:50PM -0400, Boris Ostrovsky wrote:
-> On 09/06/2018 11:33 AM, Marek Marczykowski-G=C3=B3recki wrote:
-> > Scrubbing pages on initial balloon down can take some time, especially
-> > in nested virtualization case (nested EPT is slow). When HVM/PVH guest =
-is
-> > started with memory=3D significantly lower than maxmem=3D, all the extra
-> > pages will be scrubbed before returning to Xen. But since most of them
-> > weren't used at all at that point, Xen needs to populate them first
-> > (from populate-on-demand pool). In nested virt case (Xen inside KVM)
-> > this slows down the guest boot by 15-30s with just 1.5GB needed to be
-> > returned to Xen.
-> >
-> > Add runtime parameter to enable/disable it, to allow initially disabling
-> > scrubbing, then enable it back during boot (for example in initramfs).
-> > Such usage relies on assumption that a) most pages ballooned out during
-> > initial boot weren't used at all, and b) even if they were, very few
-> > secrets are in the guest at that time (before any serious userspace
-> > kicks in).
-> >
-> > Default behaviour is unchanged.
-> >
-> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
-> >
-> > ---
-> > Is module_param() a good thing for this? Other xen-balloon parameters a=
-re
-> > in /sys/devices/system/xen_memory, so maybe it would make sense to put
-> > this one there too? But then, cmdline parameter would need to be added
-> > separately and comment about core_param() suggests it shouldn't be used
-> > if not absolutely necessary (is it?).
->=20
->=20
-> You can also use cmdline_find_option() in the balloon driver.
->=20
-> I would prefer that all tunables for the balloon driver live in the same
-> place. (Note that in that case
-> Documentation/ABI/stable/sysfs-devices-system-xen_memory will need to be
-> updated).
+Am Thu, 6 Sep 2018 14:45:57 -0400
+schrieb Boris Ostrovsky <boris.ostrovsky@oracle.com>:
 
-Ok, will move that. This will also mean that it will affect only balloon
-driver, not other users of mem-reservation.c (grant allocator). But
-given the reason for this tunable, I think that's fine.
+> On 09/06/2018 02:37 AM, Olaf Hering wrote:
+> > The command 'xl vcpu-set 0 0', issued in dom0, will crash dom0:
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
+> > This happens because handle_vcpu_hotplug_event is called twice. In the
+> > first iteration cpu_present is still true, in the second iteration
+> > cpu_present is false which causes get_cpu_device to return NULL.
+> > In case of cpu#0, cpu_online is apparently always true.
 
---+Z7/5fzWRHDJ0o7Q
-Content-Type: application/pgp-signature; name="signature.asc"
+> I think we should check both this and num_online_cpus() !=3D 0.
+
+This can not possibly help. cpu#0 is the first one that goes offline.
+IF cpu0_hotpluggable is broken, then only "if (!cpu) return;" can help.
+
+Olaf
+
+--Sig_/tskpqat.bDZCNZqA9o0sYsv
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAluRjqAACgkQ24/THMrX
-1ywXoQf9GslZ5mNMyTDoXZE1lz+20hZnloXps/YwcnK2/Ay5c3SGIrEmnd6vPDah
-c4VUpATzbvRIDWgtkVlAohA1dunJXxEiG0kQfjPAkoPFbwtuY/O1/JW9m9vjnf4B
-e9TBJ+IuN713Sh+6+AaBIfsNliiBnH6TCBL56v7EA3vi4t49oVPZ5Dp0xYjj7Tug
-PmIL73QI99yol51gpGw0FZZTULlH7WqP2INzVsLhAQlhVyC7fN4wdskfBWnn9rao
-aQpw6vIRu5TExGJn4hD8XjxIrfkkIGebvKVWATFHDHE/e1Z2lV0a++AitAg1l4zs
-6vSnfcAZO8cVRQqD4SIPhDWGKtJJ1A==
-=IoZO
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW5GOsQAKCRBdQqD6ppg2
+floXAKCrnwaC4KbLH/1h4SPHYTIFty1K1QCgqtpEYxNU7utPdsHHHNjNKGFbODU=
+=6dXi
 -----END PGP SIGNATURE-----
 
---+Z7/5fzWRHDJ0o7Q--
+--Sig_/tskpqat.bDZCNZqA9o0sYsv--
 
 
---===============5844588392092870416==
+--===============9102452813074348899==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -118,4 +75,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5844588392092870416==--
+--===============9102452813074348899==--
