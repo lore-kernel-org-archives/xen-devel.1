@@ -1,20 +1,20 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
 Subject: Re: [PATCH] xen/balloon: add runtime control for
  scrubbing ballooned out pages
-Date: Thu, 6 Sep 2018 16:14:50 -0400
-Message-ID: <bf287a28-5e40-1ea2-a983-3d6a8e9a9869__12773.119720123$1536264750$gmane$org@oracle.com>
+Date: Thu, 6 Sep 2018 22:31:28 +0200
+Message-ID: <20180906203128.GJ1353__23222.6219996393$1536265826$gmane$org@mail-itl>
 References: <20180906153355.25363-1-marmarek@invisiblethingslab.com>
+ <bf287a28-5e40-1ea2-a983-3d6a8e9a9869@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5844588392092870416=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=n/pg=lu=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1fy0er-0007J1-IY
- for xen-devel@lists.xenproject.org; Thu, 06 Sep 2018 20:13:41 +0000
-In-Reply-To: <20180906153355.25363-1-marmarek@invisiblethingslab.com>
-Content-Language: en-US
+ <srs0=n4la=lu=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1fy0wA-00009u-Tf
+ for xen-devel@lists.xenproject.org; Thu, 06 Sep 2018 20:31:35 +0000
+In-Reply-To: <bf287a28-5e40-1ea2-a983-3d6a8e9a9869@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,40 +23,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>, xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, open list <linux-kernel@vger.kernel.org>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, open list <linux-kernel@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDkvMDYvMjAxOCAxMTozMyBBTSwgTWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyb3Rl
-Ogo+IFNjcnViYmluZyBwYWdlcyBvbiBpbml0aWFsIGJhbGxvb24gZG93biBjYW4gdGFrZSBzb21l
-IHRpbWUsIGVzcGVjaWFsbHkKPiBpbiBuZXN0ZWQgdmlydHVhbGl6YXRpb24gY2FzZSAobmVzdGVk
-IEVQVCBpcyBzbG93KS4gV2hlbiBIVk0vUFZIIGd1ZXN0IGlzCj4gc3RhcnRlZCB3aXRoIG1lbW9y
-eT0gc2lnbmlmaWNhbnRseSBsb3dlciB0aGFuIG1heG1lbT0sIGFsbCB0aGUgZXh0cmEKPiBwYWdl
-cyB3aWxsIGJlIHNjcnViYmVkIGJlZm9yZSByZXR1cm5pbmcgdG8gWGVuLiBCdXQgc2luY2UgbW9z
-dCBvZiB0aGVtCj4gd2VyZW4ndCB1c2VkIGF0IGFsbCBhdCB0aGF0IHBvaW50LCBYZW4gbmVlZHMg
-dG8gcG9wdWxhdGUgdGhlbSBmaXJzdAo+IChmcm9tIHBvcHVsYXRlLW9uLWRlbWFuZCBwb29sKS4g
-SW4gbmVzdGVkIHZpcnQgY2FzZSAoWGVuIGluc2lkZSBLVk0pCj4gdGhpcyBzbG93cyBkb3duIHRo
-ZSBndWVzdCBib290IGJ5IDE1LTMwcyB3aXRoIGp1c3QgMS41R0IgbmVlZGVkIHRvIGJlCj4gcmV0
-dXJuZWQgdG8gWGVuLgo+Cj4gQWRkIHJ1bnRpbWUgcGFyYW1ldGVyIHRvIGVuYWJsZS9kaXNhYmxl
-IGl0LCB0byBhbGxvdyBpbml0aWFsbHkgZGlzYWJsaW5nCj4gc2NydWJiaW5nLCB0aGVuIGVuYWJs
-ZSBpdCBiYWNrIGR1cmluZyBib290IChmb3IgZXhhbXBsZSBpbiBpbml0cmFtZnMpLgo+IFN1Y2gg
-dXNhZ2UgcmVsaWVzIG9uIGFzc3VtcHRpb24gdGhhdCBhKSBtb3N0IHBhZ2VzIGJhbGxvb25lZCBv
-dXQgZHVyaW5nCj4gaW5pdGlhbCBib290IHdlcmVuJ3QgdXNlZCBhdCBhbGwsIGFuZCBiKSBldmVu
-IGlmIHRoZXkgd2VyZSwgdmVyeSBmZXcKPiBzZWNyZXRzIGFyZSBpbiB0aGUgZ3Vlc3QgYXQgdGhh
-dCB0aW1lIChiZWZvcmUgYW55IHNlcmlvdXMgdXNlcnNwYWNlCj4ga2lja3MgaW4pLgo+Cj4gRGVm
-YXVsdCBiZWhhdmlvdXIgaXMgdW5jaGFuZ2VkLgo+Cj4gU2lnbmVkLW9mZi1ieTogTWFyZWsgTWFy
-Y3p5a293c2tpLUfDs3JlY2tpIDxtYXJtYXJla0BpbnZpc2libGV0aGluZ3NsYWIuY29tPgo+Cj4g
-LS0tCj4gSXMgbW9kdWxlX3BhcmFtKCkgYSBnb29kIHRoaW5nIGZvciB0aGlzPyBPdGhlciB4ZW4t
-YmFsbG9vbiBwYXJhbWV0ZXJzIGFyZQo+IGluIC9zeXMvZGV2aWNlcy9zeXN0ZW0veGVuX21lbW9y
-eSwgc28gbWF5YmUgaXQgd291bGQgbWFrZSBzZW5zZSB0byBwdXQKPiB0aGlzIG9uZSB0aGVyZSB0
-b28/IEJ1dCB0aGVuLCBjbWRsaW5lIHBhcmFtZXRlciB3b3VsZCBuZWVkIHRvIGJlIGFkZGVkCj4g
-c2VwYXJhdGVseSBhbmQgY29tbWVudCBhYm91dCBjb3JlX3BhcmFtKCkgc3VnZ2VzdHMgaXQgc2hv
-dWxkbid0IGJlIHVzZWQKPiBpZiBub3QgYWJzb2x1dGVseSBuZWNlc3NhcnkgKGlzIGl0PykuCgoK
-WW91IGNhbiBhbHNvIHVzZSBjbWRsaW5lX2ZpbmRfb3B0aW9uKCkgaW4gdGhlIGJhbGxvb24gZHJp
-dmVyLgoKSSB3b3VsZCBwcmVmZXIgdGhhdCBhbGwgdHVuYWJsZXMgZm9yIHRoZSBiYWxsb29uIGRy
-aXZlciBsaXZlIGluIHRoZSBzYW1lCnBsYWNlLiAoTm90ZSB0aGF0IGluIHRoYXQgY2FzZQpEb2N1
-bWVudGF0aW9uL0FCSS9zdGFibGUvc3lzZnMtZGV2aWNlcy1zeXN0ZW0teGVuX21lbW9yeSB3aWxs
-IG5lZWQgdG8gYmUKdXBkYXRlZCkuCgoKLWJvcmlzCgoKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============5844588392092870416==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="+Z7/5fzWRHDJ0o7Q"
+Content-Disposition: inline
+
+
+--+Z7/5fzWRHDJ0o7Q
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Sep 06, 2018 at 04:14:50PM -0400, Boris Ostrovsky wrote:
+> On 09/06/2018 11:33 AM, Marek Marczykowski-G=C3=B3recki wrote:
+> > Scrubbing pages on initial balloon down can take some time, especially
+> > in nested virtualization case (nested EPT is slow). When HVM/PVH guest =
+is
+> > started with memory=3D significantly lower than maxmem=3D, all the extra
+> > pages will be scrubbed before returning to Xen. But since most of them
+> > weren't used at all at that point, Xen needs to populate them first
+> > (from populate-on-demand pool). In nested virt case (Xen inside KVM)
+> > this slows down the guest boot by 15-30s with just 1.5GB needed to be
+> > returned to Xen.
+> >
+> > Add runtime parameter to enable/disable it, to allow initially disabling
+> > scrubbing, then enable it back during boot (for example in initramfs).
+> > Such usage relies on assumption that a) most pages ballooned out during
+> > initial boot weren't used at all, and b) even if they were, very few
+> > secrets are in the guest at that time (before any serious userspace
+> > kicks in).
+> >
+> > Default behaviour is unchanged.
+> >
+> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
+slab.com>
+> >
+> > ---
+> > Is module_param() a good thing for this? Other xen-balloon parameters a=
+re
+> > in /sys/devices/system/xen_memory, so maybe it would make sense to put
+> > this one there too? But then, cmdline parameter would need to be added
+> > separately and comment about core_param() suggests it shouldn't be used
+> > if not absolutely necessary (is it?).
+>=20
+>=20
+> You can also use cmdline_find_option() in the balloon driver.
+>=20
+> I would prefer that all tunables for the balloon driver live in the same
+> place. (Note that in that case
+> Documentation/ABI/stable/sysfs-devices-system-xen_memory will need to be
+> updated).
+
+Ok, will move that. This will also mean that it will affect only balloon
+driver, not other users of mem-reservation.c (grant allocator). But
+given the reason for this tunable, I think that's fine.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--+Z7/5fzWRHDJ0o7Q
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAluRjqAACgkQ24/THMrX
+1ywXoQf9GslZ5mNMyTDoXZE1lz+20hZnloXps/YwcnK2/Ay5c3SGIrEmnd6vPDah
+c4VUpATzbvRIDWgtkVlAohA1dunJXxEiG0kQfjPAkoPFbwtuY/O1/JW9m9vjnf4B
+e9TBJ+IuN713Sh+6+AaBIfsNliiBnH6TCBL56v7EA3vi4t49oVPZ5Dp0xYjj7Tug
+PmIL73QI99yol51gpGw0FZZTULlH7WqP2INzVsLhAQlhVyC7fN4wdskfBWnn9rao
+aQpw6vIRu5TExGJn4hD8XjxIrfkkIGebvKVWATFHDHE/e1Z2lV0a++AitAg1l4zs
+6vSnfcAZO8cVRQqD4SIPhDWGKtJJ1A==
+=IoZO
+-----END PGP SIGNATURE-----
+
+--+Z7/5fzWRHDJ0o7Q--
+
+
+--===============5844588392092870416==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5844588392092870416==--
