@@ -1,20 +1,17 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: ARM: Xen 4.11 + modern dom0 on ODROID-XU4/HC1
- (Exynos 5422)
-Date: Thu, 6 Sep 2018 15:18:01 +0100
-Message-ID: <1f73bda0-d169-48ab-6842-4637c0fa5dc8@arm.com>
-References: <CAJ6XMjHTycMxPznJHZC5zKQUrti0kjymnKN1oCReiVsL6p35QA@mail.gmail.com>
+From: Vikram K <vikram.k@pathpartnertech.com>
+Subject: USB pass-through and WiFi access
+Date: Thu, 6 Sep 2018 19:51:28 +0530
+Message-ID: <CAFsJcmbBym+gR14vucNsaA20cfUpSr6MGehu4RwoX2k0qp2MDw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3007898547510991702=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=hlz8=lu=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1fxv6j-0004Fv-ID
- for xen-devel@lists.xenproject.org; Thu, 06 Sep 2018 14:18:05 +0000
-In-Reply-To: <CAJ6XMjHTycMxPznJHZC5zKQUrti0kjymnKN1oCReiVsL6p35QA@mail.gmail.com>
-Content-Language: en-US
+ <srs0=8gs1=lu=pathpartnertech.com=vikram.k@srs-us1.protection.inumbo.net>)
+ id 1fxvA3-00051E-7h
+ for xen-devel@lists.xenproject.org; Thu, 06 Sep 2018 14:21:31 +0000
+Received: by mail-io0-x229.google.com with SMTP id v14-v6so8982790iob.4
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Sep 2018 07:21:29 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,56 +20,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Steve Dodd <steved424@gmail.com>, xen-users@lists.xenproject.org, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMDkvMTggMDk6NDUsIFN0ZXZlIERvZGQgd3JvdGU6Cj4gSGkgYWxsLAoKSGVsbG8gU3Rl
-dmUsCgo+IEhhdmluZyBzdWNjZXNzZnVsbHkgZm9sbG93ZWQgdGhlIGluc3RydWN0aW9ucyBhdAo+
-IGh0dHBzOi8vd2lraS5vZHJvaWQuY29tL29kcm9pZC14dTQvYXBwbGljYXRpb25fbm90ZS9zb2Z0
-d2FyZS94ZW5fdmlydHVhbGl6YXRpb24KPiB0byBnZXQgYW4gb2xkIFhlbiBhbmQgZG9tMCBrZXJu
-ZWwgd29ya2luZyBvbiBteSBPRFJPSUQgSEMxIEknZCBsaWtlIHRvCj4gZ2V0IGEgbW9yZSBtb2Rl
-cm4gc2V0dXAgd29ya2luZy4KPiAKPiBJIG1hbmFnZWQgdG8gZ2V0IHRoZSA0LjExIGh5cGVydmlz
-b3IgdG8gYm9vdCBoYXBwaWx5IHdpdGggdGhlIGJpdHMgb2YKPiBodHRwczovL2dpdGh1Yi5jb20v
-YmtyZXBvL3hlbi9jb21taXQvOGQ1NjIwNTQ1NWE0YTFlMDIzMzQyMWQzZWU5OGUzYzdkZWUyMGJk
-Mgo+IHRoYXQgZGVhbCB3aXRoIHRoZSBDUFUgaW5pdGlhbGl6YXRpb24gKHRoZSB0cmFwL2h5cGVy
-Y2FsbCBjaGFuZ2Ugc2VlbXMKPiB0byBhbHJlYWR5IGJlIGEgcGFydCBvZiA0LjExIGluIGEgZGlm
-ZmVyZW50IGZvcm0uKSBBbnkgY2hhbmNlIG9mCj4gZ2V0dGluZyB0aGlzIHBhdGNoIG1lcmdlZD8K
-QUZBSUNUIHRoZSBwYXRjaCBjYW4gYmUgZGl2aWRlZCBpbiB0d286CgkxKSBEb20wIFNNQyBmb3J3
-YXJkCldoaWxlIHdlIGRpZCBzb21lIHdvcmsgYXJvdW5kIHRyYXBwaW5nIFNNQywgd2Ugc3RpbGwg
-ZG9uJ3QgZm9yd2FyZCB0aGVtIApkaXJlY3RseSB0byB0aGUgZmlybXdhcmUuIElmIHlvdSBuZWVk
-IHRvIGZvcndhcmQgRG9tMCBTTUMgY2FsbCB0byB0aGUgCmZpcm13YXJlLCB0aGVuIHdlIGZpcnN0
-IG5lZWQgdG8ga25vdyB3aGF0IHRoZXkgYXJlIHVzZWQgZm9yLiBJIHdvdWxkIApwcmVmZXIgYSB3
-aGlsZWxpc3Rpbmcgb3ZlciBmb3J3YXJkIGV2ZXJ5dGhpbmcgKGV2ZW4gZm9yIERvbTApLgoJMikg
-U01QIHN1cHBvcnQgZm9yIE9kcm9pZC1YVQpUaGlzIHBhcnQgd291bGQgbmVlZCB0byBiZSBjbGVh
-bmVkIHVwLiBXZSBuZWVkIHRvIGVuc3VyZSB0aGUgU01QIApicmluZy11cCBpcyBzdGlsbCB3b3Jr
-aW5nIHdpdGggdGhlIG90aGVyIGV4eW5vcyBwbGF0Zm9ybS4KCkZlZWwgZnJlZSB0byBzZW5kIHBh
-dGNoZXMgb24geGVuLWRldmVsLCBJIHdvdWxkIGJlIGhhcHB5IHRvIHJldmlldyB0aGVtLgoKPiAK
-PiBXaGF0IEkgYW0gY29tcGxldGVseSBzdHVjayBvbiBpcyBnZXR0aW5nIGEgbW9kZXJuIGRvbTAg
-d29ya2luZy4gVGhlCj4gaGFuZGZ1bCBvZiBwYXRjaGVzIGluCj4gaHR0cHM6Ly9naXRodWIuY29t
-L2JrcmVwby9saW51eC1kb20wL2NvbW1pdHMvb2Ryb2lkeHUzLTMuMTAueS14ZW4gc2VlbQo+IG9u
-bHkgdG8gZW5hYmxlIHRoZSByZWxldmFudCBjb25maWcgb3B0aW9ucywgcGF0Y2ggdGhlIGRldmlj
-ZSB0cmVlIHdpdGgKPiB0aGUgYXJjaCB0aW1lciBhbmQgInhlbi1kb20wIiBwYXNzdGhyb3VnaCBz
-ZWN0aW9uLCBhbmQgYmFja3BvcnQgdGhlCj4gUFNDSSBzdXBwb3J0IHdoaWNoIGlzIGFscmVhZHkg
-aW4gNC4xNCwgc28gSSd2ZSB0cmllZCBhcHBseWluZyB0aGVzZQo+IGNoYW5nZXMgdG8gdGhlIE9E
-Uk9JRCA0LjE0IHRyZWUgYXQKPiBodHRwczovL2dpdGh1Yi5jb20vaGFyZGtlcm5lbC9saW51eCwg
-d2l0aCBubyBzdWNjZXNzLgo+IAo+IFVzaW5nIHRoZSBGRFQgZnJvbSB0aGUgd29ya2luZyAzLngg
-ZG9tMCB3aXRoIHRoZSA0LjE0IHpJbWFnZSwgaXQgYm9vdHMKPiBidXQgZG9lc24ndCBzZWVtIHRv
-IGZpbmQgYW55IG9mIHRoZSB1bmRlcmx5aW5nIGhhcmR3YXJlLCBjZXJ0YWlubHkgbm90Cj4gdGhl
-IFVTQiBhdHRhY2hlZCBTU0Qgd2hpY2ggSSBuZWVkIHRvIGJvb3QuCgpJIHdvdWxkIG5vdCByZWNv
-bW1lbmQgdG8gdXNlIHRoZSAzLnggRkRUIHdpdGggNC4xNC4gRGVzcGl0ZSB0aGUgRFQgCnNob3Vs
-ZCBiZSBhZ25vc3RpYyB0byB0aGUga2VybmVsIHJldmlzaW9uLCB0aGVyZSBhcmUgc3RpbGwgb2Z0
-ZW4gY2hhbmdlcyAKYmluZGluZyBjaGFuZ2VzLgoKPiAKPiBVc2luZyB0aGUgRkRUIGZyb20gdGhl
-IE9EUk9JRCA0LjE0IHRyZWUsIHBhdGNoZWQgZm9yIGFyY2ggdGltZXIgYW5kCj4gdGhlIHhlbi1k
-b20wIHNlY3Rpb24sIHRoZSBoeXBlcnZpc29yIHN0aWNrcyBhdCAiKFhFTikgMy4uLiIKCkkgYW0g
-bm90IGVudGlyZWx5IHN1cmUgdG8gdW5kZXJzdGFuZCB3aHkgeW91IG5lZWQgdG8gcGF0Y2ggdGhl
-IGFyY2ggCnRpbWVyLiBDb3VsZCB5b3Ugc2VuZCB0aGUgZGlmZiBvZiB0aGUgRkRUPwoKSSB3b3Vs
-ZCBhbHNvIHJlY29tbWVuZCB0byBtYWtlIHN1cmUgdGhlIHNhbWUgY29uZmlndXJhdGlvbiBib290
-cyB3aXRob3V0IApYZW4uIFRoaXMgd2lsbCB0ZWxsIHlvdSB3aGV0aGVyIHRoZSBidWcgaXMgaW4g
-WGVuIG9yIExpbnV4LgoKPiAKPiBVbmZvcnR1bmF0ZWx5IEknbSBub3QgYXQgYWxsIGZhbWlsaWFy
-IHdpdGggZWl0aGVyIFhlbiBvciB0aGUgQVJNCj4gYXJjaGl0ZWN0dXJlLCBzbyB3b3VsZCByZWFs
-bHkgYXBwcmVjaWF0ZSBpdCBpZiBhbnlvbmUgY291bGQgc3RlZXIgbWUKPiBpbiB0aGUgcmlnaHQg
-ZGlyZWN0aW9uIQoKSSBob3BlIEkgcHJvdmlkZWQgZW5vdWdoIGRldGFpbHMuIEZlZWwgZnJlZSB0
-byBhc2sgYW55IHF1ZXN0aW9ucy4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============3007898547510991702==
+Content-Type: multipart/alternative; boundary="0000000000005d19e00575349b0b"
+
+--0000000000005d19e00575349b0b
+Content-Type: text/plain; charset="UTF-8"
+
+Hi,
+
+1. We are using Hikey960 board.
+2. Xen version is 4.8
+3. Linux kernel version is 4.14
+
+We want to add/pass-through USB devices to DomU. From the below link I
+understood that there is no USB back and front driver support in latest
+kernel. But PVUSB support is added to *xl* tools since Xen 4.7. Please
+provide pointers on to achieve USB pass-through and hotplug.
+https://wiki.xenproject.org/wiki/Xen_USB_Passthrough
+
+Also we want share wireless internet between Dom0 and DomU. To achieve this
+what configuration we need to?
+
+
+-- 
+Thanks & Regards
+VKS#436
+
+-- 
+
+
+
+
+
+
+This
+message contains confidential information and is intended only 
+for the
+individual(s) named. If you are not the intended
+recipient, you are 
+notified that disclosing, copying, distributing or taking any
+action in 
+reliance on the contents of this mail and attached file/s is strictly
+
+prohibited. Please notify the
+sender immediately and delete this e-mail 
+from your system. E-mail transmission
+cannot be guaranteed to be secured or 
+error-free as information could be
+intercepted, corrupted, lost, destroyed, 
+arrive late or incomplete, or contain
+viruses. The sender therefore does 
+not accept liability for any errors or
+omissions in the contents of this 
+message, which arise as a result of e-mail
+transmission.
+
+--0000000000005d19e00575349b0b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div>Hi,</div><div><br><=
+/div><div>1. We are using Hikey960 board.<br></div><div>2. Xen version is 4=
+.8</div><div>3. Linux kernel version is 4.14</div><div><br></div><div>We wa=
+nt to add/pass-through USB devices to DomU. From the below link I understoo=
+d that there is no USB back and front driver support in latest kernel. But =
+PVUSB support is added to <b>xl</b> tools since Xen 4.7. Please provide poi=
+nters on to achieve USB pass-through and hotplug.<br></div><div><a href=3D"=
+https://wiki.xenproject.org/wiki/Xen_USB_Passthrough">https://wiki.xenproje=
+ct.org/wiki/Xen_USB_Passthrough</a></div><div><br></div><div>Also we want s=
+hare wireless internet between Dom0 and DomU. To achieve this what configur=
+ation we need to?<br></div><div><br></div><div><br>-- <br><div class=3D"gma=
+il_signature"><div dir=3D"ltr"><div><div dir=3D"ltr"><span>Thanks &amp; Reg=
+ards<br>VKS#436<br></span><span style=3D"color:rgb(19,79,92)"></span></div>=
+</div></div></div>
+</div></div></div></div>
+
+<br>
+
+
+
+
+<p><span lang=3D"EN-IN">This
+message contains confidential information and is intended only for the
+individual(s) named.</span><span lang=3D"EN-IN"> </span>If you are not the =
+intended
+recipient, you are notified that disclosing, copying, distributing or takin=
+g any
+action in reliance on the contents of this mail and attached file/s is stri=
+ctly
+prohibited<span lang=3D"EN-IN">. Please notify the
+sender immediately and delete this e-mail from your system. E-mail transmis=
+sion
+cannot be guaranteed to be secured or error-free as information could be
+intercepted, corrupted, lost, destroyed, arrive late or incomplete, or cont=
+ain
+viruses. The sender therefore does not accept liability for any errors or
+omissions in the contents of this message, which arise as a result of e-mai=
+l
+transmission.</span></p>
+--0000000000005d19e00575349b0b--
+
+
+--===============3007898547510991702==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3007898547510991702==--
