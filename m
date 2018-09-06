@@ -1,32 +1,19 @@
-From: Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>
-Subject: Re: [PATCH] mm,
- oom: distinguish blockable mode for mmu notifiers
-Date: Fri, 7 Sep 2018 07:46:09 +0900
-Message-ID: <841ae1fb-bb5a-8b1e-6383-ca2e70b6e759__1972.1265569844$1536273930$gmane$org@i-love.sakura.ne.jp>
-References: <20180824120339.GL29735@dhcp22.suse.cz>
- <eb546bcb-9c5f-7d5d-43a7-bfde489f0e7f@amd.com>
- <20180824123341.GN29735@dhcp22.suse.cz>
- <b11df415-baf8-0a41-3c16-60dfe8d32bd3@amd.com>
- <20180824130132.GP29735@dhcp22.suse.cz>
- <23d071d2-82e4-9b78-1000-be44db5f6523@gmail.com>
- <20180824132442.GQ29735@dhcp22.suse.cz>
- <86bd94d5-0ce8-c67f-07a5-ca9ebf399cdd@gmail.com>
- <20180824134009.GS29735@dhcp22.suse.cz>
- <735b0a53-5237-8827-d20e-e57fa24d798f@amd.com>
- <20180824135257.GU29735@dhcp22.suse.cz>
- <b78f8b3a-7bc6-0dea-6752-5ea798eccb6b@i-love.sakura.ne.jp>
- <0e80c531-4e91-fb1d-e7eb-46a7aecc4c9d@amd.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH v2] xen: avoid crash in disable_hotplug_cpu
+Date: Thu, 6 Sep 2018 18:53:40 -0400
+Message-ID: <904b8bf8-ce80-2751-04bf-de1e450ef58c__37120.6756135964$1536274275$gmane$org@oracle.com>
+References: <20180906063712.28639-1-olaf@aepfle.de>
+ <b7306d7f-e827-6556-e1bb-4b934a162e46@oracle.com>
+ <20180906223145.37f7009b.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5005386762755522551=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=mgaa=lu=i-love.sakura.ne.jp=penguin-kernel@srs-us1.protection.inumbo.net>)
- id 1fy32s-0000Ta-DZ
- for xen-devel@lists.xenproject.org; Thu, 06 Sep 2018 22:46:38 +0000
-In-Reply-To: <0e80c531-4e91-fb1d-e7eb-46a7aecc4c9d@amd.com>
-Content-Language: en-US
+ <srs0=n/pg=lu=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1fy38W-00019f-29
+ for xen-devel@lists.xenproject.org; Thu, 06 Sep 2018 22:52:28 +0000
+In-Reply-To: <20180906223145.37f7009b.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -35,34 +22,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, Michal Hocko <mhocko@kernel.org>
-Cc: kvm@vger.kernel.org, =?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?= <rkrcmar@redhat.com>, David Airlie <airlied@linux.ie>, Sudeep Dutt <sudeep.dutt@intel.com>, dri-devel@lists.freedesktop.org, linux-mm@kvack.org, Andrea Arcangeli <aarcange@redhat.com>, Dimitri Sivanich <sivanich@sgi.com>, linux-rdma@vger.kernel.org, amd-gfx@lists.freedesktop.org, Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>, David Rientjes <rientjes@google.com>, xen-devel@lists.xenproject.org, intel-gfx@lists.freedesktop.org, Leon Romanovsky <leonro@mellanox.com>, =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, Mike Marciniszyn <mike.marciniszyn@intel.com>, Dennis Dalessandro <dennis.dalessandro@intel.com>, LKML <linux-kernel@vger.kernel.org>, Ashutosh Dixit <ashutosh.dixit>
+To: Olaf Hering <olaf@aepfle.de>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, open list <linux-kernel@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAxOC8wOC8yNyAxNjo0MSwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToKPiBBbSAyNi4wOC4y
-MDE4IHVtIDEwOjQwIHNjaHJpZWIgVGV0c3VvIEhhbmRhOgo+PiBJJ20gbm90IGZvbGxvd2luZy4g
-V2h5IGRvbid0IHdlIG5lZWQgdG8gZG8gbGlrZSBiZWxvdyAoZ2l2ZW4gdGhhdAo+PiBub2JvZHkg
-ZXhjZXB0IGFtZGdwdV9tbl9yZWFkX2xvY2soKSBob2xkcyAtPnJlYWRfbG9jaykgYmVjYXVzZSBl
-LmcuCj4+IGRybV9zY2hlZF9mZW5jZV9jcmVhdGUoKSBmcm9tIGRybV9zY2hlZF9qb2JfaW5pdCgp
-IGZyb20gYW1kZ3B1X2NzX3N1Ym1pdCgpCj4+IGlzIGRvaW5nIEdGUF9LRVJORUwgbWVtb3J5IGFs
-bG9jYXRpb24gd2l0aCAtPmxvY2sgaGVsZCBmb3Igd3JpdGU/Cj4gCj4gVGhhdCdzIGEgYnVnIHdo
-aWNoIG5lZWRzIHRvIGJlIGZpeGVkIHNlcGFyYXRlbHkuCj4gCj4gQWxsb2NhdGluZyBtZW1vcnkg
-d2l0aCBHRlBfS0VSTkVMIHdoaWxlIGhvbGRpbmcgYSBsb2NrIHdoaWNoIGlzIGFsc28gdGFrZW4g
-aW4gdGhlIHJlY2xhaW0gY29kZSBwYXRoIGlzIGlsbGVnYWwgbm90IG1hdHRlciB3aGF0IHlvdSBk
-by4KPiAKPiBQYXRjaGVzIHRvIGZpeCB0aGlzIGFyZSBhbHJlYWR5IG9uIHRoZSBhcHByb3ByaWF0
-ZSBtYWlsaW5nIGxpc3QgYW5kIHdpbGwgYmUgcHVzaGVkIHVwc3RyZWFtIHRvZGF5Lgo+IAo+IFJl
-Z2FyZHMsCj4gQ2hyaXN0aWFuLgoKQ29tbWl0IDRhMmRlNTRkYzFkNzY2OGYgKCJkcm0vYW1kZ3B1
-OiBmaXggaG9sZGluZyBtbl9sb2NrIHdoaWxlIGFsbG9jYXRpbmcgbWVtb3J5IikKc2VlbXMgdG8g
-YmUgY2FsbGluZyBhbWRncHVfbW5fdW5sb2NrKCkgd2l0aG91dCBhbWRncHVfbW5fbG9jaygpIHdo
-ZW4KZHJtX3NjaGVkX2pvYl9pbml0KCkgZmFpbGVkLi4uIAoKCgpNaWNoYWwsIHlvdSBhcmUgYXNr
-aW5nIG1lIHRvIGZpeCBhbGwgYnVncyAoaW5jbHVkaW5nIG91dCBvZiB0cmVlIGNvZGUpIGFuZCBw
-cmV2ZW50CmZ1dHVyZSBidWdzIGp1c3QgYmVjYXVzZSB5b3Ugd2FudCB0byBhdm9pZCB1c2luZyB0
-aW1lb3V0IGluIG9yZGVyIHRvIGF2b2lkIE9PTSBsb2NrdXAKKCBodHRwczovL21hcmMuaW5mby8/
-aT01NWEzZmIzNy0zMjQ2LTczZDctMGY0NS01ODM1YTNmNDgzMWNAaS1sb3ZlLnNha3VyYS5uZS5q
-cCApLgpUaGF0IGlzIGEgdG9vIG11Y2ggcmVxdWVzdCB3aGljaCBpcyBpbXBvc3NpYmxlIGZvciBl
-dmVuIHlvdS4gTW9yZSB5b3UgY291bnQgb24KdGhlIE9PTSByZWFwZXIsIHdlIGV4cG9uZW50aWFs
-bHkgY29tcGxpY2F0ZXMgZGVwZW5kZW5jeSBhbmQgbW9yZSBsaWtlbHkgdG8gc3R1bWJsZQpvdmVy
-IHVucmV2aWV3ZWQvdW50ZXN0ZWQgY29kZS4uLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============5005386762755522551==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="auAW3TJhCbkwOPZEQCY9BtNozEvZC8EIu"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--auAW3TJhCbkwOPZEQCY9BtNozEvZC8EIu
+Content-Type: multipart/mixed; boundary="Qsz2hA954rg39Vg9lPeOJz7WCrKPmXf3t";
+ protected-headers="v1"
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: Olaf Hering <olaf@aepfle.de>
+Cc: xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>,
+ open list <linux-kernel@vger.kernel.org>
+Message-ID: <904b8bf8-ce80-2751-04bf-de1e450ef58c@oracle.com>
+Subject: Re: [PATCH v2] xen: avoid crash in disable_hotplug_cpu
+References: <20180906063712.28639-1-olaf@aepfle.de>
+ <b7306d7f-e827-6556-e1bb-4b934a162e46@oracle.com>
+ <20180906223145.37f7009b.olaf@aepfle.de>
+In-Reply-To: <20180906223145.37f7009b.olaf@aepfle.de>
+
+--Qsz2hA954rg39Vg9lPeOJz7WCrKPmXf3t
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
+
+On 09/06/2018 04:31 PM, Olaf Hering wrote:
+> Am Thu, 6 Sep 2018 14:45:57 -0400
+> schrieb Boris Ostrovsky <boris.ostrovsky@oracle.com>:
+>
+>> On 09/06/2018 02:37 AM, Olaf Hering wrote:
+>>> The command 'xl vcpu-set 0 0', issued in dom0, will crash dom0:
+>>> This happens because handle_vcpu_hotplug_event is called twice. In th=
+e
+>>> first iteration cpu_present is still true, in the second iteration
+>>> cpu_present is false which causes get_cpu_device to return NULL.
+>>> In case of cpu#0, cpu_online is apparently always true.
+>> I think we should check both this and num_online_cpus() !=3D 0.
+> This can not possibly help. cpu#0 is the first one that goes offline.
+> IF cpu0_hotpluggable is broken, then only "if (!cpu) return;" can help.=
+
+
+
+And maybe that needs to be part of the check, in addition to
+cpu_is_hotpluggable() test.
+
+Offlining CPU0 is problematic. For example, look at xen_pv_cpu_disable().=
+
+
+
+
+-boris
+
+
+--Qsz2hA954rg39Vg9lPeOJz7WCrKPmXf3t--
+
+--auAW3TJhCbkwOPZEQCY9BtNozEvZC8EIu
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEExAVKDNg/TOdD61Yyit52kIbKwbIFAluRr/UACgkQit52kIbK
+wbLYeRAAhsnCpb/DSHlF5gDBmxU3YHyAY7yCGZJYAtqNoQFytITDv2MupWiiVHqW
++RuAIlLD85ytK62bp/2+Fh30NnM9o6ePBTWUthotP+PS2QQ8yHiv5k0gEMzvlm7/
+TMOposgvv91EKXLFHJd0xQVjHlNETN2gkajUdIfw5jx5AbKXOC46xxNcw8hlWSqP
+CuZBzvC+FRCOAC4JEdOu5t9vunMbvGoj5WQuSXFgh50a7Y+ujXrRKtUvEHG2tkOw
+JWJq7M+Dy/yj12/9JZdVVaNGviqGyedIUCUmYYSp/Nq7ciO+ji0kAw6ZFh12xr1T
+6R6YADjWNw8LmaCn8TaI0a5gGsWx5d/Sq9oi+TM3NNgj2F1WIP+bNnTNjnOkepfr
+HbLRgJgtDPor3bewPhTV30Oj5nE1YMEfphRwCIXiUTp6f8dRTUlGVAWo+f36OiN6
+XWwY79v0iK2JZewp7ljlpRoTO6tZs6d5YKq7dBanoomyC/DhHNrAirrGdXmrQAaW
+IDSyJayhcdHdKbr/eBlozTJfHswAkA//fTxUmMVReUOr1E+Zz5+xcRYeQ3G1EUKv
+xQK5+GVnXCls885J6vlwaiFVRjc8B5SfftW7pm9IdXX8AUiVjkBFVht/oyCbjm19
+ucXgbiueGZTV+hsh8UcZsLPphbYnYDD4H0s/hF6ZHLgyLf1/vNc=
+=obmP
+-----END PGP SIGNATURE-----
+
+--auAW3TJhCbkwOPZEQCY9BtNozEvZC8EIu--
+
+
+--===============5005386762755522551==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5005386762755522551==--
