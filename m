@@ -1,12 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 0/3] xen: Improvements to the vcpu
- create/destroy paths
-Date: Thu, 6 Sep 2018 20:25:31 +0100
-Message-ID: <1536261934-1236-1-git-send-email-andrew.cooper3@citrix.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH] xen/manage: don't complain about an empty
+ value in control/sysrq node
+Date: Thu, 6 Sep 2018 15:41:22 -0400
+Message-ID: <fb58e2c8-ffc4-dc5d-9625-6170f3fe7195__37710.4595107541$1536262742$gmane$org@oracle.com>
+References: <20180906112608.4221-1-vkuznets@redhat.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=n/pg=lu=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1fy08Q-0005BE-Mj
+ for xen-devel@lists.xenproject.org; Thu, 06 Sep 2018 19:40:10 +0000
+In-Reply-To: <20180906112608.4221-1-vkuznets@redhat.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,25 +23,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+To: Vitaly Kuznetsov <vkuznets@redhat.com>, xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBpcyB0aGUgc3RhcnQgb2YgdGhlIHdvcmsgdG8gbWFrZSB0aGUgdmNwdV9kZXN0cm95KCkg
-Y29kZSBpZGVtcG90ZW50LCBzbwp2Y3B1IGNvbnN0cnVjdGlvbiBjYW4gYmUgbW92ZWQgaW50byBk
-b21haW5fY3JlYXRlKCkgYW5kIHN1Y2Nlc3NmdWxseSB1bndvdW5kCm9uIGVycm9yLgoKQW5kcmV3
-IENvb3BlciAoMyk6CiAgeGVuL3ZjcHU6IFJlbmFtZSB0aGUgY29tbW9uIGludGVyZmFjZXMgZm9y
-IGNvbnNpc3RlbmN5CiAgeGVuL3ZjcHU6IEludHJvZHVjZSB2Y3B1X2Rlc3Ryb3koKQogIHhlbi92
-Y3B1OiBSZXdvcmsgc2FuaXR5IGNoZWNrcyBpbiB2Y3B1X2NyZWF0ZSgpCgogeGVuL2FyY2gvYXJt
-L2RvbWFpbi5jICAgICAgIHwgIDYgKystLQogeGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5jIHwg
-IDQgKy0tCiB4ZW4vYXJjaC9hcm0vc2V0dXAuYyAgICAgICAgfCAgMSAtCiB4ZW4vYXJjaC94ODYv
-ZG9tMF9idWlsZC5jICAgfCAgMiArLQogeGVuL2FyY2gveDg2L2RvbWFpbi5jICAgICAgIHwgIDQg
-Ky0tCiB4ZW4vYXJjaC94ODYvc2V0dXAuYyAgICAgICAgfCAgMSAtCiB4ZW4vY29tbW9uL2RvbWFp
-bi5jICAgICAgICAgfCA4MCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0t
-LS0tLS0KIHhlbi9jb21tb24vZG9tY3RsLmMgICAgICAgICB8ICAyICstCiB4ZW4vY29tbW9uL3Nj
-aGVkdWxlLmMgICAgICAgfCAgNCArLS0KIHhlbi9pbmNsdWRlL3hlbi9kb21haW4uaCAgICB8IDEw
-ICsrKy0tLQogMTAgZmlsZXMgY2hhbmdlZCwgNjkgaW5zZXJ0aW9ucygrKSwgNDUgZGVsZXRpb25z
-KC0pCgotLSAKMi4xLjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+T24gMDkvMDYvMjAxOCAwNzoyNiBBTSwgVml0YWx5IEt1em5ldHNvdiB3cm90ZToKPiBXaGVuIGd1
+ZXN0IHJlY2VpdmVzIGEgc3lzcnEgcmVxdWVzdCBmcm9tIHRoZSBob3N0IGl0IGFja25vd2xlZGdl
+cyBpdCBieQo+IHdyaXRpbmcgJ1wwJyB0byBjb250cm9sL3N5c3JxIHhlbnN0b3JlIG5vZGUuIFRo
+aXMsIGhvd2V2ZXIsIG1ha2UgeGVuc3RvcmUKPiB3YXRjaCBmaXJlIGFnYWluIGJ1dCB4ZW5idXNf
+c2NhbmYoKSBmYWlscyB0byBwYXJzZSBlbXB0eSB2YWx1ZSB3aXRoICIlYyIKPiBmb3JtYXQgc3Ry
+aW5nOgo+Cj4gIHN5c3JxOiBTeXNScSA6IEVtZXJnZW5jeSBTeW5jCj4gIEVtZXJnZW5jeSBTeW5j
+IGNvbXBsZXRlCj4gIHhlbjptYW5hZ2U6IEVycm9yIC0zNCByZWFkaW5nIHN5c3JxIGNvZGUgaW4g
+Y29udHJvbC9zeXNycQo+Cj4gSWdub3JlIC1FUkFOR0UgdGhlIHNhbWUgd2F5IHdlIGFscmVhZHkg
+aWdub3JlIC1FTk9FTlQsIGVtcHR5IHZhbHVlIGluCj4gY29udHJvbC9zeXNycSBpcyB0b3RhbGx5
+IGxlZ2FsLgo+Cj4gU2lnbmVkLW9mZi1ieTogVml0YWx5IEt1em5ldHNvdiA8dmt1em5ldHNAcmVk
+aGF0LmNvbT4KPgoKCkFwcGxpZWQgdG8gZm9yLWxpbnVzLTE5Yi4KCi1ib3JpcwoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
