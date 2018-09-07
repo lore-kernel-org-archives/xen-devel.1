@@ -1,19 +1,18 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: [PATCH v3] xen: avoid crash in disable_hotplug_cpu
-Date: Fri, 7 Sep 2018 09:33:20 -0400
-Message-ID: <26bef656-a1ec-8b81-98e2-ea723d095f03__49632.376622367$1536327045$gmane$org@oracle.com>
+Date: Fri, 7 Sep 2018 15:39:29 +0200
+Message-ID: <20180907153929.17d82e95.olaf__42529.9217379235$1536327513$gmane$org@aepfle.de>
 References: <20180907063023.16913-1-olaf@aepfle.de>
+ <26bef656-a1ec-8b81-98e2-ea723d095f03@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8485031868121341202=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=oxwu=lv=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1fyGrn-00035H-Ix
- for xen-devel@lists.xenproject.org; Fri, 07 Sep 2018 13:32:07 +0000
-In-Reply-To: <20180907063023.16913-1-olaf@aepfle.de>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=fjkp=lv=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fyGzA-0003F6-7n
+ for xen-devel@lists.xenproject.org; Fri, 07 Sep 2018 13:39:44 +0000
+In-Reply-To: <26bef656-a1ec-8b81-98e2-ea723d095f03@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,60 +21,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, open list <linux-kernel@vger.kernel.org>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, open list <linux-kernel@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDkvMDcvMjAxOCAwMjozMCBBTSwgT2xhZiBIZXJpbmcgd3JvdGU6Cj4gVGhlIGNvbW1hbmQg
-J3hsIHZjcHUtc2V0IDAgMCcsIGlzc3VlZCBpbiBkb20wLCB3aWxsIGNyYXNoIGRvbTA6Cj4KPiBC
-VUc6IHVuYWJsZSB0byBoYW5kbGUga2VybmVsIE5VTEwgcG9pbnRlciBkZXJlZmVyZW5jZSBhdCAw
-MDAwMDAwMDAwMDAwMmQ4Cj4gUEdEIDAgUDREIDAKPiBPb3BzOiAwMDAwIFsjMV0gUFJFRU1QVCBT
-TVAgTk9QVEkKPiBDUFU6IDcgUElEOiA2NSBDb21tOiB4ZW53YXRjaCBOb3QgdGFpbnRlZCA0LjE5
-LjAtcmMyLTEuZ2E5NDYyZGItZGVmYXVsdCAjMSBvcGVuU1VTRSBUdW1ibGV3ZWVkICh1bnJlbGVh
-c2VkKQo+IEhhcmR3YXJlIG5hbWU6IEludGVsIENvcnBvcmF0aW9uIFM1NTIwVVIvUzU1MjBVUiwg
-QklPUyBTNTUwMC44NkIuMDEuMDAuMDA1MC4wNTA2MjAxMDE2MDUgMDUvMDYvMjAxMAo+IFJJUDog
-ZTAzMDpkZXZpY2Vfb2ZmbGluZSsweDkvMHhiMAo+IENvZGU6IDc3IDI0IDAwIGU5IGNlIGZlIGZm
-IGZmIDQ4IDhiIDEzIGU5IDY4IGZmIGZmIGZmIDQ4IDhiIDEzIGU5IDI5IGZmIGZmIGZmIDQ4IDhi
-IDEzIGU5IGVhIGZlIGZmIGZmIDkwIDY2IDY2IDY2IDY2IDkwIDQxIDU0IDU1IDUzIDxmNj4gODcg
-ZDggMDIgMDAgMDAgMDEgMGYgODUgODggMDAgMDAgMDAgNDggYzcgYzIgMjAgMDkgNjAgODEgMzEg
-ZjYKPiBSU1A6IGUwMmI6ZmZmZmM5MDA0MGYyN2U4MCBFRkxBR1M6IDAwMDEwMjAzCj4gUkFYOiAw
-MDAwMDAwMDAwMDAwMDAwIFJCWDogMDAwMDAwMDAwMDAwMDAwMCBSQ1g6IDAwMDAwMDAwMDAwMDAw
-MDAKPiBSRFg6IGZmZmY4ODAxZjM4MDAwMDAgUlNJOiBmZmZmYzkwMDQwZjI3ZTcwIFJESTogMDAw
-MDAwMDAwMDAwMDAwMAo+IFJCUDogMDAwMDAwMDAwMDAwMDAwMCBSMDg6IGZmZmZmZmZmODIwZTQ3
-YjMgUjA5OiAwMDAwMDAwMDAwMDAwMDAwCj4gUjEwOiAwMDAwMDAwMDAwMDA3ZmYwIFIxMTogMDAw
-MDAwMDAwMDAwMDAwMCBSMTI6IGZmZmZmZmZmODIyZTZkMzAKPiBSMTM6IGRlYWQwMDAwMDAwMDAy
-MDAgUjE0OiBkZWFkMDAwMDAwMDAwMTAwIFIxNTogZmZmZmZmZmY4MTU4YjRlMAo+IEZTOiAgMDAw
-MDdmZmE1OTUxNThjMCgwMDAwKSBHUzpmZmZmODgwMWYzOWMwMDAwKDAwMDApIGtubEdTOjAwMDAw
-MDAwMDAwMDAwMDAKPiBDUzogIGUwMzMgRFM6IDAwMDAgRVM6IDAwMDAgQ1IwOiAwMDAwMDAwMDgw
-MDUwMDMzCj4gQ1IyOiAwMDAwMDAwMDAwMDAwMmQ4IENSMzogMDAwMDAwMDFkOTYwMjAwMCBDUjQ6
-IDAwMDAwMDAwMDAwMDI2NjAKPiBDYWxsIFRyYWNlOgo+ICBoYW5kbGVfdmNwdV9ob3RwbHVnX2V2
-ZW50KzB4YjUvMHhjMAo+ICB4ZW53YXRjaF90aHJlYWQrMHg4MC8weDE0MAo+ICA/IHdhaXRfd29r
-ZW4rMHg4MC8weDgwCj4gIGt0aHJlYWQrMHgxMTIvMHgxMzAKPiAgPyBrdGhyZWFkX2NyZWF0ZV93
-b3JrZXJfb25fY3B1KzB4NDAvMHg0MAo+ICByZXRfZnJvbV9mb3JrKzB4M2EvMHg1MAo+Cj4gVGhp
-cyBoYXBwZW5zIGJlY2F1c2UgaGFuZGxlX3ZjcHVfaG90cGx1Z19ldmVudCBpcyBjYWxsZWQgdHdp
-Y2UuIEluIHRoZQo+IGZpcnN0IGl0ZXJhdGlvbiBjcHVfcHJlc2VudCBpcyBzdGlsbCB0cnVlLCBp
-biB0aGUgc2Vjb25kIGl0ZXJhdGlvbgo+IGNwdV9wcmVzZW50IGlzIGZhbHNlIHdoaWNoIGNhdXNl
-cyBnZXRfY3B1X2RldmljZSB0byByZXR1cm4gTlVMTC4KPiBJbiBjYXNlIG9mIGNwdSMwLCBjcHVf
-b25saW5lIGlzIGFwcGFyZW50bHkgYWx3YXlzIHRydWUuCj4KPiBGaXggdGhpcyBjcmFzaCBieSBj
-aGVja2luZyBpZiB0aGUgY3B1IGNhbiBiZSBob3RwbHVnZ2VkLCB3aGljaCBpcyBmYWxzZQo+IGZv
-ciBhIGNwdSB0aGF0IHdhcyBqdXN0IHJlbW92ZWQuCj4KPiBBbHNvIGNoZWNrIGlmIHRoZSBjcHUg
-d2FzIGFjdHVhbGx5IG9mZmxpbmVkIGJ5IGRldmljZV9yZW1vdmUsIG90aGVyd2lzZQo+IGxlYXZl
-IHRoZSBjcHVfcHJlc2VudCBzdGF0ZSBhcyBpdCBpcy4KPgo+IFNpZ25lZC1vZmYtYnk6IE9sYWYg
-SGVyaW5nIDxvbGFmQGFlcGZsZS5kZT4KPiAtLS0KPiAgZHJpdmVycy94ZW4vY3B1X2hvdHBsdWcu
-YyB8IDQgKysrKwo+ICAxIGZpbGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspCj4KPiBkaWZmIC0t
-Z2l0IGEvZHJpdmVycy94ZW4vY3B1X2hvdHBsdWcuYyBiL2RyaXZlcnMveGVuL2NwdV9ob3RwbHVn
-LmMKPiBpbmRleCBkNDI2NWM4ZWJiMjIuLjY4ZjlmNjYzZGEwOCAxMDA2NDQKPiAtLS0gYS9kcml2
-ZXJzL3hlbi9jcHVfaG90cGx1Zy5jCj4gKysrIGIvZHJpdmVycy94ZW4vY3B1X2hvdHBsdWcuYwo+
-IEBAIC0xOSwxMSArMTksMTUgQEAgc3RhdGljIHZvaWQgZW5hYmxlX2hvdHBsdWdfY3B1KGludCBj
-cHUpCj4gIAo+ICBzdGF0aWMgdm9pZCBkaXNhYmxlX2hvdHBsdWdfY3B1KGludCBjcHUpCj4gIHsK
-PiArCWlmICghY3B1X2lzX2hvdHBsdWdnYWJsZShjcHUpKQo+ICsJCXJldHVybjsKPiAgCWlmIChj
-cHVfb25saW5lKGNwdSkpIHsKPiAgCQlsb2NrX2RldmljZV9ob3RwbHVnKCk7Cj4gIAkJZGV2aWNl
-X29mZmxpbmUoZ2V0X2NwdV9kZXZpY2UoY3B1KSk7Cj4gIAkJdW5sb2NrX2RldmljZV9ob3RwbHVn
-KCk7Cj4gIAl9Cj4gKwlpZiAoY3B1X29ubGluZShjcHUpKQo+ICsJCXJldHVybjsKPiAgCWlmIChj
-cHVfcHJlc2VudChjcHUpKQo+ICAJCXhlbl9hcmNoX3VucmVnaXN0ZXJfY3B1KGNwdSk7Cj4gIAoK
-CllvdSBkb24ndCBnZXQgYSB3YXJuaW5nIGluIHhlbl9pbml0X2xvY2tfY3B1KCkgZm9yIENQVTA/
-CgpBbHNvLCBhcyBhIHNpZGUgcXVlc3Rpb24gLS0tIHdoYXQgaXMgdGhlIHB1cnBvc2Ugb2YgJ3hs
-IHZjcHUtc2V0IDxkb21pZD4gMCc/CgotYm9yaXMKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+--===============8485031868121341202==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/dqoXiiKj2tZPOgK2yTzd_Y="; protocol="application/pgp-signature"
+
+--Sig_/dqoXiiKj2tZPOgK2yTzd_Y=
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Fri, 7 Sep 2018 09:33:20 -0400
+schrieb Boris Ostrovsky <boris.ostrovsky@oracle.com>:
+
+> what is the purpose of 'xl vcpu-set <domid> 0'?
+
+Likely just a script that went wrong. But that command should not break the=
+ dom0.
+
+Olaf
+
+--Sig_/dqoXiiKj2tZPOgK2yTzd_Y=
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW5J/kQAKCRBdQqD6ppg2
+foPVAKDBMAZro1uFQQ8JlSqyU2Nmnsw4PgCeJMskAcPHeieR6XyXCnV1lpg0Tkg=
+=6+u2
+-----END PGP SIGNATURE-----
+
+--Sig_/dqoXiiKj2tZPOgK2yTzd_Y=--
+
+
+--===============8485031868121341202==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8485031868121341202==--
