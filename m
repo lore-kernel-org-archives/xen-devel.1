@@ -1,18 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v3] xen: avoid crash in disable_hotplug_cpu
-Date: Fri, 7 Sep 2018 11:24:51 +0200
-Message-ID: <20180907112451.442b46fe.olaf__16859.5114061192$1536312240$gmane$org@aepfle.de>
-References: <20180907063023.16913-1-olaf@aepfle.de>
- <c26bfbe1-9032-468c-d4d0-c05eda8af762@suse.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v18 12/13] x86/hvm: Remove redundant save
+ functions
+Date: Fri, 07 Sep 2018 03:43:07 -0600
+Message-ID: <5B92482B02000078001E6447@prv1-mh.provo.novell.com>
+References: <1535980459-5457-1-git-send-email-aisaila@bitdefender.com>
+ <1535980459-5457-13-git-send-email-aisaila@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8020498207384561115=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=fjkp=lv=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1fyD0o-0000PN-EX
- for xen-devel@lists.xenproject.org; Fri, 07 Sep 2018 09:25:10 +0000
-In-Reply-To: <c26bfbe1-9032-468c-d4d0-c05eda8af762@suse.com>
+In-Reply-To: <1535980459-5457-13-git-send-email-aisaila@bitdefender.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,59 +19,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, open list <linux-kernel@vger.kernel.org>
+To: aisaila@bitdefender.com
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============8020498207384561115==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/UeViPe4cDLalinr9AGThlP2"; protocol="application/pgp-signature"
-
---Sig_/UeViPe4cDLalinr9AGThlP2
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Fri, 7 Sep 2018 09:48:28 +0200
-schrieb Juergen Gross <jgross@suse.com>:
-
-> On 07/09/18 08:30, Olaf Hering wrote:
-> > +	if (cpu_online(cpu))
-> > +		return;
-> >  	if (cpu_present(cpu))
-> >  		xen_arch_unregister_cpu(cpu); =20
-
-> Could you merge the two if conditions?
-> if (!cpu_online(cpu) && cpu_present(cpu))
-> 	xen_arch_unregister_cpu(cpu);
-
-Is that any different, beside being wrong, from what the patch actually doe=
-s?
-It would still clear the present bit later on.
-
-Olaf
-
---Sig_/UeViPe4cDLalinr9AGThlP2
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW5JD4wAKCRBdQqD6ppg2
-fgKUAJ9qUyfX87dZMcfGNMva1zc/zA/GxgCfTLOAZ5oxZ3BAHwMQr9339Cupsd0=
-=hFzS
------END PGP SIGNATURE-----
-
---Sig_/UeViPe4cDLalinr9AGThlP2--
-
-
---===============8020498207384561115==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8020498207384561115==--
+Pj4+IE9uIDAzLjA5LjE4IGF0IDE1OjE0LCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3Rl
+Ogo+IFRoaXMgcGF0Y2ggcmVtb3ZlcyB0aGUgcmVkdW5kYW50IHNhdmUgZnVuY3Rpb25zIGFuZCBy
+ZW5hbWVzIHRoZQo+IHNhdmVfb25lKiB0byBzYXZlLiBJdCB0aGVuIGNoYW5nZXMgdGhlIGRvbWFp
+biBwYXJhbSB0byB2Y3B1IGluIHRoZQo+IHNhdmUgZnVuY3MgYW5kIGFkYXB0cyBwcmludCBtZXNz
+YWdlcyBpbiBvcmRlciB0byBtYXRjaCB0aGUgZm9ybWF0IG9mIHRoZQo+IG90aGVyIHNhdmUgcmVs
+YXRlZCBtZXNzYWdlcy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbGV4YW5kcnUgSXNhaWxhIDxhaXNh
+aWxhQGJpdGRlZmVuZGVyLmNvbT4KPiAKPiAtLS0KPiBDaGFuZ2VzIHNpbmNlIFYxNzoKPiAJLSBS
+ZWZpdCBIVk1fUkVHSVNURVJfU0FWRV9SRVNUT1JFKENQVSkKPiAJLSBBZGQgY29uc3QgdG8gdGhl
+IGFkZGVkIHN0cnVjdCBkb21haW4gKmQKCkhvdyBkb2VzIHRoaXMgbWF0Y2ggdXAgd2l0aCAuLi4K
+Cj4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS9ocGV0LmMKPiArKysgYi94ZW4vYXJjaC94ODYvaHZt
+L2hwZXQuYwo+IEBAIC01MTYsMTYgKzUxNiwxNyBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGh2bV9t
+bWlvX29wcyBocGV0X21taW9fb3BzID0gewo+ICB9Owo+ICAKPiAgCj4gLXN0YXRpYyBpbnQgaHBl
+dF9zYXZlKHN0cnVjdCBkb21haW4gKmQsIGh2bV9kb21haW5fY29udGV4dF90ICpoKQo+ICtzdGF0
+aWMgaW50IGhwZXRfc2F2ZShzdHJ1Y3QgdmNwdSAqdiwgaHZtX2RvbWFpbl9jb250ZXh0X3QgKmgp
+Cj4gIHsKPiArICAgIHN0cnVjdCBkb21haW4gKmQgPSB2LT5kb21haW47CgouLi4gdGhpcyBhbmQg
+YXQgbGVhc3QgdGhlIHZQSVQgYW5kIHZSVEMgY2FzZXMgYXMgd2VsbD8gSXQncyBub3QgY2xlYXIg
+dG8gbWUKd2h5IGNvbnN0IGNvdWxkbid0IGJlIGFkZGVkIGhlcmU7IGl0IHByZXR0eSBjbGVhcmx5
+IGNhbid0IGJlIGFkZGVkIGluIHRoZQp2UElUIGNhc2UsIGJ1dCB0aGVuIGluIHRoZSB2UlRDIGl0
+IGxvb2tzIHRvIGJlIHBvc3NpYmxlIGFnYWluLiBFc3BlY2lhbGx5IGlmCnlvdSBnaXZlIGEgYnJv
+YWQvdW5zcGVjaWZpYyBzdGF0ZW1lbnQgYXMgYWJvdmUsIHBsZWFzZSBtYWtlIHN1cmUgeW91J3Zl
+CmFsc28gZG9uZSB0aGUgY29udmVyc2lvbiB1bmlmb3JtbHkuCgo+IEBAIC0xNDgsMTQgKzE0NSwx
+NCBAQCBpbnQgaHZtX3NhdmVfb25lKHN0cnVjdCBkb21haW4gKmQsIHVuc2lnbmVkIGludCB0eXBl
+Y29kZSwgdW5zaWduZWQgaW50IGluc3RhbmNlLAo+ICAgICAgICAgICAhaHZtX3NyX2hhbmRsZXJz
+W3R5cGVjb2RlXS5zYXZlICkKPiAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiAgCj4gKyAgICBp
+ZiAoIGluc3RhbmNlID49IGQtPm1heF92Y3B1cyApCj4gKyAgICAgICAgcmV0dXJuIC1FTk9FTlQ7
+CgpFeGN1c2UgbWUsIGJ1dCBob3cgbWFueSBtb3JlIHRpbWVzIGRvIEkgbmVlZCB0byBwb2ludCBv
+dXQgdGhhdCB0aGlzCmlzIHdyb25nPyBPbmNlIGFnYWluIGZvciBhIHNpbmdsZS12Q1BVIGd1ZXN0
+IHNhdmluZyB0aGUgc2Vjb25kIFBJQwppbnN0YW5jZSB3aWxsIGJlY29tZSBpbXBvc3NpYmxlIHdp
+dGggdGhpcy4gSnVzdCB0byByZS1pdGVyYXRlOiBUaGUgY2hlY2sKYWJvdmUgaGFzIHRvIGJlIGxp
+bWl0ZWQgdG8ganVzdCBIVk1TUl9QRVJfVkNQVSBraW5kIHJlY29yZHMuCgo+ICAgICAgY3R4dC5z
+aXplID0gaHZtX3NyX2hhbmRsZXJzW3R5cGVjb2RlXS5zaXplOwo+IC0gICAgaWYgKCBodm1fc3Jf
+aGFuZGxlcnNbdHlwZWNvZGVdLmtpbmQgPT0gSFZNU1JfUEVSX1ZDUFUgKQo+IC0gICAgICAgIGN0
+eHQuc2l6ZSAqPSBkLT5tYXhfdmNwdXM7Cj4gICAgICBjdHh0LmRhdGEgPSB4bWFsbG9jX2J5dGVz
+KGN0eHQuc2l6ZSk7Cj4gICAgICBpZiAoICFjdHh0LmRhdGEgKQo+ICAgICAgICAgIHJldHVybiAt
+RU5PTUVNOwo+ICAKPiAtICAgIGlmICggKHJ2ID0gaHZtX3NyX2hhbmRsZXJzW3R5cGVjb2RlXS5z
+YXZlKGQsICZjdHh0KSkgIT0gMCApCj4gKyAgICBpZiAoIChydiA9IGh2bV9zcl9oYW5kbGVyc1t0
+eXBlY29kZV0uc2F2ZShkLT52Y3B1W2luc3RhbmNlXSwgJmN0eHQpKSAhPSAwICkKCkFuZCB5b3Ug
+bmVlZCB0byB1c2UgZC0+dmNwdVswXSBmb3IgYWxsIG90aGVycyBoZXJlLgoKSmFuCgoKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
