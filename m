@@ -1,18 +1,17 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/5] x86/hvm: Switch hvm_allow_get_param()
- to use a whitelist
-Date: Fri, 07 Sep 2018 02:55:30 -0600
-Message-ID: <5B923D0202000078001E63A4@prv1-mh.provo.novell.com>
-References: <1536171124-27053-1-git-send-email-andrew.cooper3@citrix.com>
- <1536171124-27053-2-git-send-email-andrew.cooper3@citrix.com>
- <c2554d76f69749078dfe1ca60340042e@AMSPEX02CL03.citrite.net>
- <2145af5a-d61e-9b0c-2d47-b3f4e155306b@citrix.com>
+From: Roger Pau Monne <roger.pau@citrix.com>
+Subject: [PATCH v8 0/6] x86/iommu: PVH Dom0 workarounds for
+ missing RMRR entries
+Date: Fri, 7 Sep 2018 11:07:33 +0200
+Message-ID: <20180907090739.56652-1-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <2145af5a-d61e-9b0c-2d47-b3f4e155306b@citrix.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=mbmt=lv=citrix.com=prvs=781eb9476=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1fyCk4-0006Ib-4g
+ for xen-devel@lists.xenproject.org; Fri, 07 Sep 2018 09:07:52 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,22 +20,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA2LjA5LjE4IGF0IDE3OjIxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMDYvMDkvMTggMDk6NTYsIFBhdWwgRHVycmFudCB3cm90ZToKPj4+IEBAIC00Mzkw
-LDkgKzQ0MTEsNiBAQCBzdGF0aWMgaW50IGh2bW9wX2dldF9wYXJhbSgKPj4+ICAgICAgaWYgKCBj
-b3B5X2Zyb21fZ3Vlc3QoJmEsIGFyZywgMSkgKQo+Pj4gICAgICAgICAgcmV0dXJuIC1FRkFVTFQ7
-Cj4+Pgo+Pj4gLSAgICBpZiAoIGEuaW5kZXggPj0gSFZNX05SX1BBUkFNUyApCj4+PiAtICAgICAg
-ICByZXR1cm4gLUVJTlZBTDsKPj4+IC0KPj4gQVNTRVJULCBqdXN0IGluIGNhc2Ugc29tZW9uZSBz
-Y3Jld3MgdXAgdGhlIGFsbG93IGZ1bmN0aW9uIGluIGZ1dHVyZT8KPiAKPiBUaGF0J3Mgbm90IGdv
-aW5nIHRvIGhlbHAgaW4gYW55IHByYWN0aWNhbCB3YXkuICBUaGlzIGNoZWNrIGRvZXMgcmVhbGx5
-Cj4gZXhpc3QsIGFuZCBpcyBwYXJ0IG9mIHRoZSBzd2l0Y2ggc3RhdGVtZW50LgoKV2hpY2ggc3dp
-dGNoKCkgc3RhdGVtZW50PyBUaGUgb25lIGluIHRoZSBhbGxvdyBmdW5jdGlvbiBpbmNsdWRlcyB0
-aGlzLApidXQgdGhlIG9uZSBoZXJlIHNpbXBseSBoYXMKCiAgICBkZWZhdWx0OgogICAgICAgIGEu
-dmFsdWUgPSBkLT5hcmNoLmh2bS5wYXJhbXNbYS5pbmRleF07CiAgICAgICAgYnJlYWs7CgpKYW4K
-CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGVsbG8sCgpUaGUgZm9sbG93aW5nIHNlcmllcyBpbXBsZW1lbnQgYSB3b3JrYXJvdW5kIGZvciBt
+aXNzaW5nIFJNUlIKZW50cmllcyBmb3IgYSBQVkggRG9tMC4gSXQncyBiYXNlZCBvbiB0aGUgaW9t
+bXVfaW5jbHVzaXZlX21hcHBpbmcgVlRkCm9wdGlvbi4KClRoZSBQVkggd29ya2Fyb3VuZCBpZGVu
+dGl0eSBtYXBzIGFsbCByZWdpb25zIG1hcmtlZCBhcyByZXNlcnZlZCBpbiB0aGUKbWVtb3J5IG1h
+cC4KCk5vdGUgdGhhdCB0aGlzIHdvcmthcm91bmQgaXMgZW5hYmxlZCBieSBkZWZhdWx0IG9uIElu
+dGVsIGhhcmR3YXJlLiBJdCdzCmFsc28gYXZhaWxhYmxlIHRvIEFNRCBoYXJkd2FyZSwgYWx0aG91
+Z2ggaXQncyBkaXNhYmxlZCBieSBkZWZhdWx0IGluCnRoYXQgY2FzZS4KClRoZSBzZXJpZXMgY2Fu
+IGJlIGZvdW5kIGF0OgoKZ2l0Oi8veGVuYml0cy54ZW4ub3JnL3Blb3BsZS9yb3lnZXIveGVuLmdp
+dCBpb21tdV9pbmNsdXNpdmVfdjgKClRoYW5rcy4KClJvZ2VyIFBhdSBNb25uZSAoNik6CiAgaW9t
+bXU6IHJlbmFtZSBpb21tdV9kb20wX3N0cmljdCBhbmQgaW9tbXVfcGFzc3Rocm91Z2gKICBpb21t
+dTogaW50cm9kdWNlIGRvbTAtaW9tbXUgb3B0aW9uCiAgaW9tbXU6IG1ha2UgaW9tbXVfaW5jbHVz
+aXZlX21hcHBpbmcgYSBzdWJvcHRpb24gb2YgZG9tMC1pb21tdQogIG1tOiBpbnRyb2R1Y2UgYSBo
+ZWxwZXIgdG8gZ2V0IHRoZSBtZW1vcnkgdHlwZSBvZiBhIHBhZ2UKICB4ODYvaW9tbXU6IHN3aXRj
+aCB0aGUgaHdkb20gbWFwcGluZyBmdW5jdGlvbiB0byB1c2UgcGFnZV9nZXRfdHlwZQogIHg4Ni9p
+b21tdTogYWRkIG1hcC1yZXNlcnZlZCBkb20wLWlvbW11IG9wdGlvbiB0byBtYXAgcmVzZXJ2ZWQg
+bWVtb3J5CiAgICByYW5nZXMKCiBkb2NzL21pc2MveGVuLWNvbW1hbmQtbGluZS5tYXJrZG93biAg
+ICAgICAgIHwgIDQxICsrKysrKysrCiB4ZW4vYXJjaC94ODYvaHZtL2lvLmMgICAgICAgICAgICAg
+ICAgICAgICAgIHwgICA1ICsKIHhlbi9hcmNoL3g4Ni9tbS5jICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgfCAgNDIgKysrKysrKysKIHhlbi9hcmNoL3g4Ni94ODZfNjQvbW0uYyAgICAgICAgICAg
+ICAgICAgICAgfCAgIDMgKy0KIHhlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FtZC9pb21tdV9pbml0
+LmMgICAgfCAgIDIgKy0KIHhlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FtZC9wY2lfYW1kX2lvbW11
+LmMgfCAgMTEgKy0KIHhlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FybS9pb21tdS5jICAgICAgICAg
+fCAgIDQgKwogeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvYXJtL3NtbXUuYyAgICAgICAgICB8ICAg
+OSArKwogeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvaW9tbXUuYyAgICAgICAgICAgICB8ICA3MiAr
+KysrKysrKysrKy0tLQogeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2V4dGVybi5oICAgICAg
+ICB8ICAgMiAtCiB4ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC92dGQvaW9tbXUuYyAgICAgICAgIHwg
+IDI1ICsrLS0tCiB4ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC92dGQveDg2L3Z0ZC5jICAgICAgIHwg
+IDU4ICstLS0tLS0tLS0tCiB4ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC94ODYvaW9tbXUuYyAgICAg
+ICAgIHwgMTA1ICsrKysrKysrKysrKysrKysrKysrCiB4ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9p
+by5oICAgICAgICAgICAgICAgIHwgICAzICsKIHhlbi9pbmNsdWRlL3hlbi9pb21tdS5oICAgICAg
+ICAgICAgICAgICAgICAgfCAgIDggKy0KIHhlbi9pbmNsdWRlL3hlbi9tbS5oICAgICAgICAgICAg
+ICAgICAgICAgICAgfCAgIDMgKwogMTYgZmlsZXMgY2hhbmdlZCwgMzAwIGluc2VydGlvbnMoKyks
+IDkzIGRlbGV0aW9ucygtKQoKLS0gCjIuMTguMAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
