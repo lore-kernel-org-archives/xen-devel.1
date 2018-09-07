@@ -1,17 +1,29 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 3/3] xen/vcpu: Rework sanity checks in
- vcpu_create()
-Date: Fri, 7 Sep 2018 20:17:47 +0100
-Message-ID: <2c199642-21d0-2b34-b402-0acf22089e1d@citrix.com>
-References: <1536261934-1236-1-git-send-email-andrew.cooper3@citrix.com>
- <1536261934-1236-4-git-send-email-andrew.cooper3@citrix.com>
- <5B924FBB02000078001E64B5@prv1-mh.provo.novell.com>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Subject: Re: [PATCH v3 11/16] x86/mm: put HVM only code under
+ CONFIG_HVM
+Date: Fri, 7 Sep 2018 15:27:37 -0600
+Message-ID: <CABfawh=aBbV8P=iA3u17p1D3v=LspGUTyd-gjVsSEPuQn+y8=g@mail.gmail.com>
+References: <20180904161533.11575-1-wei.liu2@citrix.com>
+ <20180904161533.11575-12-wei.liu2@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2655297003179976724=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5B924FBB02000078001E64B5@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=nd2v=lv=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
+ id 1fyOID-0007cJ-Lm
+ for xen-devel@lists.xenproject.org; Fri, 07 Sep 2018 21:27:53 +0000
+Received: by mail-ed1-f68.google.com with SMTP id k14-v6so12463063edr.13
+ for <xen-devel@lists.xenproject.org>; Fri, 07 Sep 2018 14:27:51 -0700 (PDT)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com.
+ [209.85.221.42])
+ by smtp.gmail.com with ESMTPSA id o22-v6sm9738474edc.90.2018.09.07.14.27.50
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 07 Sep 2018 14:27:50 -0700 (PDT)
+Received: by mail-wr1-f42.google.com with SMTP id v17-v6so16205753wrr.9
+ for <xen-devel@lists.xenproject.org>; Fri, 07 Sep 2018 14:27:50 -0700 (PDT)
+In-Reply-To: <20180904161533.11575-12-wei.liu2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,52 +32,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: George Dunlap <george.dunlap@eu.citrix.com>, Xen-devel <xen-devel@lists.xenproject.org>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDcvMDkvMTggMTE6MTUsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDA2LjA5LjE4IGF0
-IDIxOjI1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IFdoaWxlIHYwIG11
-c3QgYmUgdGhlIGZpcnN0IGFsbG9jYXRlZCB2Y3B1IGZvciBmb3JfZWFjaF92Y3B1KCkgdG8gd29y
-aywgaXQKPj4gaXNuJ3QgYSByZXF1aXJlbWVudCBmb3IgdGhlIHRocmVhZGluZyB0aGUgdmNwdSBp
-bnRvIHRoZSBsaW5rZWQgbGlzdCwgc28gdXBkYXRlCj4+IHRoZSB0aHJlYWRpbmcgY29kZSB0byBi
-ZSBtb3JlIGdlbmVyaWMsIGFuZCBhZGQgYSBjb21tZW50IGV4cGxhaW5pbmcgd2h5IHdlCj4+IG5l
-ZWQgdG8gc2VhcmNoIGZvciBwcmV2X2lkLgo+IEknbSBhZnJhaWQgSSBjYW4ndCBicmluZyB0aGlz
-IGluIGxpbmUgd2l0aCB0aGUgY29kZSBjaGFuZ2U6Cj4KPj4gQEAgLTE3OCwxNSArMTkwLDI3IEBA
-IHN0cnVjdCB2Y3B1ICp2Y3B1X2NyZWF0ZSgKPj4gICAgICBpZiAoIGFyY2hfdmNwdV9jcmVhdGUo
-dikgIT0gMCApCj4+ICAgICAgICAgIGdvdG8gZmFpbF9zY2hlZDsKPj4gIAo+PiArICAgIC8qIElu
-c2VydCB0aGUgdmNwdSBpbnRvIHRoZSBkb21haW4ncyB2Y3B1IGxpc3QuICovCj4+ICAgICAgZC0+
-dmNwdVt2Y3B1X2lkXSA9IHY7Cj4+ICAgICAgaWYgKCB2Y3B1X2lkICE9IDAgKQo+IFRoZXJlIHN0
-aWxsIGlzIHRoaXMgY29uZGl0aW9uYWwsIGFuZCB5b3UgZG9uJ3QgYWRkIGFueSBlbHNlIHRvIGl0
-LiBIZW5jZQo+IGFmYWljcyBpZiB2Q1BVIDAgd2FzIGNyZWF0ZWQgYWZ0ZXIgdkNQVSAxLCB2Q1BV
-IDAncyBuZXh0X2luX2xpc3QKPiB3b3VsZCBub3QgYmUgbWFkZSBwb2ludCB0byB2Q1BVIDEuIFRo
-YXQncyBub3Qgd2hhdCBJJ2QgY2FsbCAibW9yZQo+IGdlbmVyaWMiLgoKWW91IGFyZSBjb21wbGV0
-ZWx5IGNvcnJlY3QuwqAgSSBkb24ndCBrbm93IHdoYXQgSSB3YXMgdGhpbmtpbmcgd2hlbgpzYXlp
-bmcgdGhhdCB0aGlzIGlzIG1vcmUgZ2VuZXJpYy4KCkkgc3VzcGVjdCBpdCBhbHNvIG1lYW5zIHRo
-YXQsIGRlcGVuZGluZyBvbiBoYXJkd2FyZSBDUFUgbnVtYmVyaW5nLApmb3JfZWFjaF92Y3B1KGlk
-bGUpIG1heSBub3Qgd29yaywgYnV0IHBlcmhhcHMgdGhhdCBpcyBub3QgYW4gaXNzdWUgYXMKdGhl
-IGlkbGUgZG9tYWlucyBwb2ludGVyIGlzIGFjdHVhbGx5IHByaXZhdGUgdG8gc2NoZWR1bGVyX2lu
-aXQoKS7CoCBJdCBpcwphdmFpbGFibGUgZnJvbSBlaXRoZXIgY3VycmVudC0+ZG9tYWluLCBvciBp
-ZGxlX3ZjcHVbJFhdLT5kb21haW4sIGJ1dCBJCnRoaW5rIGl0cyByZWFzb25hYmxlIHRvIGV4cGVj
-dCB0aGF0IHdlIG5ldmVyIHVzZSBmb3JfZWFjaF92Y3B1KCkgb3Zlcgp0aGUgaWRsZSBkb21haW4u
-Cgo+IEJ1dCB0aGUgcXVlc3Rpb24gaXMgd2hhdCB1c2UgdGhlIG5leHRfaW5fbGlzdCBmaWVsZCBp
-cyBpbiB0aGUgZmlyc3QgcGxhY2UsCj4gd2hlbiB0aGUgZW50cmllcyB0aGVyZSBhcmUgc29ydGVk
-IGJ5IElEIGFueXdheTogV2h5IGNhbid0IHdlCj4gc2ltcGx5IHVzZSB2LT5kb21haW4tPnZjcHVb
-XSBpbnN0ZWFkPyBJbiB0aGUgY29tbW9uIGNhc2UKPiB2LT5kb21haW4tPnZjcHVbdi0+dmNwdV9p
-ZCsxXSBpcyBub3QgZ29pbmcgdG8gYmUgTlVMTCBhbnl3YXksCj4gYW5kIEkgZG9uJ3QgdGhpbmsg
-Zm9yX2VhY2hfdmNwdSgpIHdvdWxkIGJlY29tZSB0aGF0IG11Y2ggbW9yZQo+IGNvbXBsaWNhdGVk
-IHRoYXQgd2F5LgoKSXQgd291bGQsIGJlY2F1c2UgZXZlcnkgaXRlcmF0aW9uIHlvdSdkIG5lZWQg
-YSBjaGVjayBvZiB2LT52Y3B1X2lkCmFnYWluc3QgZC0+bWF4X3ZjcHVzIHRvIGF2b2lkIHdhbGtp
-bmcgb2ZmIHRoZSBlbmQgb2YgZC0+dmNwdVtdCgo+Cj4+ICAgICAgewo+PiAgICAgICAgICBpbnQg
-cHJldl9pZCA9IHYtPnZjcHVfaWQgLSAxOwo+PiArCj4+ICsgICAgICAgIC8qCj4+ICsgICAgICAg
-ICAqIExvb2sgZm9yIHRoZSBwcmV2aW91c2x5IGFsbG9jYXRlZCB2Y3B1LCBhbmQgc3BsaWNlIGlu
-dG8gdGhlCj4+ICsgICAgICAgICAqIG5leHRfaW5fbGlzdCBzaW5nbGUgbGlua2VkIGxpc3QuCj4g
-SSdtIGFsc28gbm90IHZlcnkgaGFwcHkgYWJvdXQgdGhlIHVzZSBvZiAicHJldmlvdXNseSIgaGVy
-ZTogVGhpcyAodG8KPiBtZSBhcyBhIG5vbi1uYXRpdmUgc3BlYWtlcikgaW4gbm8gd2F5IG1lYW5z
-ICJ0aGUgb25lIHdpdGggdGhlIG5leHQKPiBsb3dlc3QgSUQiLgoKR2l2ZW4gdGhlIHNpbXBsaWZ5
-aW5nIGFzc3VtcHRpb24gb2Ygbm90IHRoZSBpZGxlIGRvbWFpbiwgdGhlIHNldHRpbmcgdXAKb2Yg
-dGhlIHNpbmdsZSBsaW5rZWQgbGlzdCBjYW4gYmUgbWFkZSBtdWNoIG1vcmUgY29uY2lzZSwgYXMg
-d2Uga25vdyB0aGUKSURzIGFyZSBwYWNrZWQgYW5kIGFsbG9jYXRlZCBpbiBhc2NlbmRpbmcgb3Jk
-ZXIuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============2655297003179976724==
+Content-Type: multipart/alternative; boundary="000000000000f3948d05754eadf4"
+
+--000000000000f3948d05754eadf4
+Content-Type: text/plain; charset="UTF-8"
+
+On Tue, Sep 4, 2018, 10:29 AM Wei Liu <wei.liu2@citrix.com> wrote:
+
+> Going through the code, HAP, EPT, PoD and ALTP2M depend on HVM code.
+> Put these components under CONFIG_HVM. This further requires putting
+> one of the vm event under CONFIG_HVM.
+>
+> Altp2m requires a bit more attention because its code is embedded in
+> generic x86 p2m code.
+>
+> Also make hap_enabled evaluate to false when !CONFIG_HVM. Make sure it
+> evaluate its parameter to avoid unused variable warnings in its users.
+>
+> Also sort items in Makefile while at it.
+>
+> Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+> ---
+>  xen/arch/x86/mm/Makefile         | 11 ++++++-----
+>  xen/arch/x86/mm/mem_access.c     | 18 +++++++++++++++++-
+>  xen/arch/x86/mm/mem_sharing.c    |  2 ++
+>  xen/arch/x86/mm/p2m.c            | 23 ++++++++++++-----------
+>  xen/common/vm_event.c            |  2 ++
+>
+
+As before, please only apply CONFIG_HVM ifdefs to x86 specific parts. We
+have an altp2m implementation for ARM that is planned to be posted again to
+the mailinglist in the near future.
+
+Thanks,
+Tamas
+
+--000000000000f3948d05754eadf4
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">=
+On Tue, Sep 4, 2018, 10:29 AM Wei Liu &lt;<a href=3D"mailto:wei.liu2@citrix=
+.com">wei.liu2@citrix.com</a>&gt; wrote:<br></div><blockquote class=3D"gmai=
+l_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left=
+:1ex">Going through the code, HAP, EPT, PoD and ALTP2M depend on HVM code.<=
+br>
+Put these components under CONFIG_HVM. This further requires putting<br>
+one of the vm event under CONFIG_HVM.<br>
+<br>
+Altp2m requires a bit more attention because its code is embedded in<br>
+generic x86 p2m code.<br>
+<br>
+Also make hap_enabled evaluate to false when !CONFIG_HVM. Make sure it<br>
+evaluate its parameter to avoid unused variable warnings in its users.<br>
+<br>
+Also sort items in Makefile while at it.<br>
+<br>
+Signed-off-by: Wei Liu &lt;<a href=3D"mailto:wei.liu2@citrix.com" target=3D=
+"_blank" rel=3D"noreferrer">wei.liu2@citrix.com</a>&gt;<br>
+---<br>
+=C2=A0xen/arch/x86/mm/Makefile=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 11 ++++++=
+-----<br>
+=C2=A0xen/arch/x86/mm/mem_access.c=C2=A0 =C2=A0 =C2=A0| 18 ++++++++++++++++=
++-<br>
+=C2=A0xen/arch/x86/mm/mem_sharing.c=C2=A0 =C2=A0 |=C2=A0 2 ++<br>
+=C2=A0xen/arch/x86/mm/p2m.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 23 +=
++++++++++++-----------<br>
+=C2=A0xen/common/vm_event.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
+=A0 2 ++<br></blockquote></div></div><div dir=3D"auto"><br></div><div dir=
+=3D"auto">As before, please only apply CONFIG_HVM ifdefs to x86 specific pa=
+rts. We have an altp2m implementation for ARM that is planned to be posted =
+again to the mailinglist in the near future.</div><div dir=3D"auto"><br></d=
+iv><div dir=3D"auto">Thanks,</div><div dir=3D"auto">Tamas</div></div>
+
+--000000000000f3948d05754eadf4--
+
+
+--===============2655297003179976724==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2655297003179976724==--
