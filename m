@@ -1,19 +1,23 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v4] xen: avoid crash in disable_hotplug_cpu
-Date: Fri, 7 Sep 2018 12:56:37 -0400
-Message-ID: <4f623671-e1aa-1804-449c-a26b0c4b9ce9__26990.7127171338$1536339251$gmane$org@oracle.com>
-References: <20180907143135.29608-1-olaf@aepfle.de>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] tools: specifically enable VirtFS in Linux
+ QEMU builds
+Date: Fri, 7 Sep 2018 09:55:54 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1809070952330.14449@sstabellini-ThinkPad-X260>
+References: <20180906120636.38754-1-paul.durrant@citrix.com>
+ <alpine.DEB.2.10.1809061110360.14449@sstabellini-ThinkPad-X260>
+ <e08f982ab0cc415c9a19d1cc40cd69ef@AMSPEX02CL03.citrite.net>
+ <20180907145750.c7447dsjd7omk5ec@mac.bytemobile.com>
+ <62c817eb-6ccd-1654-7c04-ff22cabcc5d8@citrix.com>
+ <f8aee796e09b4dc3b3eb56acd67c300d@AMSPEX02CL03.citrite.net>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1394005521-1536339355=:14449"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=oxwu=lv=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1fyK2W-0006ap-1r
- for xen-devel@lists.xenproject.org; Fri, 07 Sep 2018 16:55:24 +0000
-In-Reply-To: <20180907143135.29608-1-olaf@aepfle.de>
-Content-Language: en-US
+ <srs0=ggj+=lv=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1fyK32-0006ct-SV
+ for xen-devel@lists.xenproject.org; Fri, 07 Sep 2018 16:55:56 +0000
+In-Reply-To: <f8aee796e09b4dc3b3eb56acd67c300d@AMSPEX02CL03.citrite.net>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,123 +26,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, open list <linux-kernel@vger.kernel.org>
+To: Paul Durrant <Paul.Durrant@citrix.com>
+Cc: 'Stefano Stabellini' <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, George Dunlap <George.Dunlap@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDkvMDcvMjAxOCAxMDozMSBBTSwgT2xhZiBIZXJpbmcgd3JvdGU6Cj4gVGhlIGNvbW1hbmQg
-J3hsIHZjcHUtc2V0IDAgMCcsIGlzc3VlZCBpbiBkb20wLCB3aWxsIGNyYXNoIGRvbTA6Cj4KPiBC
-VUc6IHVuYWJsZSB0byBoYW5kbGUga2VybmVsIE5VTEwgcG9pbnRlciBkZXJlZmVyZW5jZSBhdCAw
-MDAwMDAwMDAwMDAwMmQ4Cj4gUEdEIDAgUDREIDAKPiBPb3BzOiAwMDAwIFsjMV0gUFJFRU1QVCBT
-TVAgTk9QVEkKPiBDUFU6IDcgUElEOiA2NSBDb21tOiB4ZW53YXRjaCBOb3QgdGFpbnRlZCA0LjE5
-LjAtcmMyLTEuZ2E5NDYyZGItZGVmYXVsdCAjMSBvcGVuU1VTRSBUdW1ibGV3ZWVkICh1bnJlbGVh
-c2VkKQo+IEhhcmR3YXJlIG5hbWU6IEludGVsIENvcnBvcmF0aW9uIFM1NTIwVVIvUzU1MjBVUiwg
-QklPUyBTNTUwMC44NkIuMDEuMDAuMDA1MC4wNTA2MjAxMDE2MDUgMDUvMDYvMjAxMAo+IFJJUDog
-ZTAzMDpkZXZpY2Vfb2ZmbGluZSsweDkvMHhiMAo+IENvZGU6IDc3IDI0IDAwIGU5IGNlIGZlIGZm
-IGZmIDQ4IDhiIDEzIGU5IDY4IGZmIGZmIGZmIDQ4IDhiIDEzIGU5IDI5IGZmIGZmIGZmIDQ4IDhi
-IDEzIGU5IGVhIGZlIGZmIGZmIDkwIDY2IDY2IDY2IDY2IDkwIDQxIDU0IDU1IDUzIDxmNj4gODcg
-ZDggMDIgMDAgMDAgMDEgMGYgODUgODggMDAgMDAgMDAgNDggYzcgYzIgMjAgMDkgNjAgODEgMzEg
-ZjYKPiBSU1A6IGUwMmI6ZmZmZmM5MDA0MGYyN2U4MCBFRkxBR1M6IDAwMDEwMjAzCj4gUkFYOiAw
-MDAwMDAwMDAwMDAwMDAwIFJCWDogMDAwMDAwMDAwMDAwMDAwMCBSQ1g6IDAwMDAwMDAwMDAwMDAw
-MDAKPiBSRFg6IGZmZmY4ODAxZjM4MDAwMDAgUlNJOiBmZmZmYzkwMDQwZjI3ZTcwIFJESTogMDAw
-MDAwMDAwMDAwMDAwMAo+IFJCUDogMDAwMDAwMDAwMDAwMDAwMCBSMDg6IGZmZmZmZmZmODIwZTQ3
-YjMgUjA5OiAwMDAwMDAwMDAwMDAwMDAwCj4gUjEwOiAwMDAwMDAwMDAwMDA3ZmYwIFIxMTogMDAw
-MDAwMDAwMDAwMDAwMCBSMTI6IGZmZmZmZmZmODIyZTZkMzAKPiBSMTM6IGRlYWQwMDAwMDAwMDAy
-MDAgUjE0OiBkZWFkMDAwMDAwMDAwMTAwIFIxNTogZmZmZmZmZmY4MTU4YjRlMAo+IEZTOiAgMDAw
-MDdmZmE1OTUxNThjMCgwMDAwKSBHUzpmZmZmODgwMWYzOWMwMDAwKDAwMDApIGtubEdTOjAwMDAw
-MDAwMDAwMDAwMDAKPiBDUzogIGUwMzMgRFM6IDAwMDAgRVM6IDAwMDAgQ1IwOiAwMDAwMDAwMDgw
-MDUwMDMzCj4gQ1IyOiAwMDAwMDAwMDAwMDAwMmQ4IENSMzogMDAwMDAwMDFkOTYwMjAwMCBDUjQ6
-IDAwMDAwMDAwMDAwMDI2NjAKPiBDYWxsIFRyYWNlOgo+ICBoYW5kbGVfdmNwdV9ob3RwbHVnX2V2
-ZW50KzB4YjUvMHhjMAo+ICB4ZW53YXRjaF90aHJlYWQrMHg4MC8weDE0MAo+ICA/IHdhaXRfd29r
-ZW4rMHg4MC8weDgwCj4gIGt0aHJlYWQrMHgxMTIvMHgxMzAKPiAgPyBrdGhyZWFkX2NyZWF0ZV93
-b3JrZXJfb25fY3B1KzB4NDAvMHg0MAo+ICByZXRfZnJvbV9mb3JrKzB4M2EvMHg1MAo+Cj4gVGhp
-cyBoYXBwZW5zIGJlY2F1c2UgaGFuZGxlX3ZjcHVfaG90cGx1Z19ldmVudCBpcyBjYWxsZWQgdHdp
-Y2UuIEluIHRoZQo+IGZpcnN0IGl0ZXJhdGlvbiBjcHVfcHJlc2VudCBpcyBzdGlsbCB0cnVlLCBp
-biB0aGUgc2Vjb25kIGl0ZXJhdGlvbgo+IGNwdV9wcmVzZW50IGlzIGZhbHNlIHdoaWNoIGNhdXNl
-cyBnZXRfY3B1X2RldmljZSB0byByZXR1cm4gTlVMTC4KPiBJbiBjYXNlIG9mIGNwdSMwLCBjcHVf
-b25saW5lIGlzIGFwcGFyZW50bHkgYWx3YXlzIHRydWUuCj4KPiBGaXggdGhpcyBjcmFzaCBieSBj
-aGVja2luZyBpZiB0aGUgY3B1IGNhbiBiZSBob3RwbHVnZ2VkLCB3aGljaCBpcyBmYWxzZQo+IGZv
-ciBhIGNwdSB0aGF0IHdhcyBqdXN0IHJlbW92ZWQuCj4KPiBBbHNvIGNoZWNrIGlmIHRoZSBjcHUg
-d2FzIGFjdHVhbGx5IG9mZmxpbmVkIGJ5IGRldmljZV9yZW1vdmUsIG90aGVyd2lzZQo+IGxlYXZl
-IHRoZSBjcHVfcHJlc2VudCBzdGF0ZSBhcyBpdCBpcy4KPgo+IFJlYXJyYW5nZSB0byBjb2RlIHRv
-IGRvIGFsbCB3b3JrIHdpdGggZGV2aWNlX2hvdHBsdWdfbG9jayBoZWxkLgo+Cj4gU2lnbmVkLW9m
-Zi1ieTogT2xhZiBIZXJpbmcgPG9sYWZAYWVwZmxlLmRlPgo+IC0tLQo+ICBkcml2ZXJzL3hlbi9j
-cHVfaG90cGx1Zy5jIHwgMTUgKysrKysrKystLS0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCA4IGlu
-c2VydGlvbnMoKyksIDcgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy94ZW4v
-Y3B1X2hvdHBsdWcuYyBiL2RyaXZlcnMveGVuL2NwdV9ob3RwbHVnLmMKPiBpbmRleCBkNDI2NWM4
-ZWJiMjIuLmIxMzU3YWE0YmM1NSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3hlbi9jcHVfaG90cGx1
-Zy5jCj4gKysrIGIvZHJpdmVycy94ZW4vY3B1X2hvdHBsdWcuYwo+IEBAIC0xOSwxNSArMTksMTYg
-QEAgc3RhdGljIHZvaWQgZW5hYmxlX2hvdHBsdWdfY3B1KGludCBjcHUpCj4gIAo+ICBzdGF0aWMg
-dm9pZCBkaXNhYmxlX2hvdHBsdWdfY3B1KGludCBjcHUpCj4gIHsKPiAtCWlmIChjcHVfb25saW5l
-KGNwdSkpIHsKPiAtCQlsb2NrX2RldmljZV9ob3RwbHVnKCk7Cj4gKwlpZiAoIWNwdV9pc19ob3Rw
-bHVnZ2FibGUoY3B1KSkKPiArCQlyZXR1cm47Cj4gKwlsb2NrX2RldmljZV9ob3RwbHVnKCk7Cj4g
-KwlpZiAoY3B1X29ubGluZShjcHUpKQo+ICAJCWRldmljZV9vZmZsaW5lKGdldF9jcHVfZGV2aWNl
-KGNwdSkpOwo+IC0JCXVubG9ja19kZXZpY2VfaG90cGx1ZygpOwo+IC0JfQo+IC0JaWYgKGNwdV9w
-cmVzZW50KGNwdSkpCj4gKwlpZiAoIWNwdV9vbmxpbmUoY3B1KSAmJiBjcHVfcHJlc2VudChjcHUp
-KSB7Cj4gIAkJeGVuX2FyY2hfdW5yZWdpc3Rlcl9jcHUoY3B1KTsKPiAtCj4gLQlzZXRfY3B1X3By
-ZXNlbnQoY3B1LCBmYWxzZSk7Cj4gKwkJc2V0X2NwdV9wcmVzZW50KGNwdSwgZmFsc2UpOwo+ICsJ
-fQo+ICsJdW5sb2NrX2RldmljZV9ob3RwbHVnKCk7Cj4gIH0KPiAgCj4gIHN0YXRpYyBpbnQgdmNw
-dV9vbmxpbmUodW5zaWduZWQgaW50IGNwdSkKCgpJIHdhcyBob3BpbmcgeW91J2QgcmVzcG9uZCB0
-byBteSBxdWVzdGlvbiBhYm91dCB3YXJuaW5nLgoKcm9vdEBoYXN3ZWxsPiB4bCB2Y3B1LXNldCAz
-IDAKCgphbmQgaW4gdGhlIGd1ZXN0Cgpbcm9vdEB2bS0wMjM4IH5dIyBbwqDCoCAzMi44NjY5NTVd
-IC0tLS0tLS0tLS0tLVsgY3V0IGhlcmUgXS0tLS0tLS0tLS0tLQpbwqDCoCAzMi44NjY5NjNdIHNw
-aW5sb2NrIG9uIENQVTAgZXhpc3RzIG9uIElSUTEhClvCoMKgIDMyLjg2Njk4NF0gV0FSTklORzog
-Q1BVOiAwIFBJRDogMTQgYXQgYXJjaC94ODYveGVuL3NwaW5sb2NrLmM6OTAKeGVuX2luaXRfbG9j
-a19jcHUrMHhiZi8weGQwClvCoMKgIDMyLjg2Njk5MF0gTW9kdWxlcyBsaW5rZWQgaW46ClvCoMKg
-IDMyLjg2Njk5NV0gQ1BVOiAwIFBJRDogMTQgQ29tbTogY3B1aHAvMCBOb3QgdGFpbnRlZCA0LjE5
-LjAtcmMyICMzMQpbwqDCoCAzMi44NjcwMDFdIFJJUDogZTAzMDp4ZW5faW5pdF9sb2NrX2NwdSsw
-eGJmLzB4ZDAKW8KgwqAgMzIuODY3MDA1XSBDb2RlOiA0YSA4YiAwYyBlNSAwMCBjNyAxNCA4MiA0
-OCBjNyBjMiA5MCA0ZiAwMSAwMCA0YyA4OQoyYyAxMSBlOSA4NSAwMCAwMCAwMCA4YiAxNCAwMiA0
-NCA4OSBlNiA0OCBjNyBjNyBhMCAwZiAwOCA4MiBlOCBhYiBlMyAwNQowMCA8MGY+IDBiIGU5IDdh
-IGZmIGZmIGZmIDY2IDJlIDBmIDFmIDg0IDAwIDAwIDAwIDAwIDAwIDgwIDNkIDU5IDAyIDIwClvC
-oMKgIDMyLjg2NzAxNV0gUlNQOiBlMDJiOmZmZmZjOTAwNDAxZmZlNDAgRUZMQUdTOiAwMDAxMDI4
-NgpbwqDCoCAzMi44NjcwMTldIFJBWDogMDAwMDAwMDAwMDAwMDAwMCBSQlg6IDAwMDAwMDAwMDAw
-MDAwMDAgUkNYOgowMDAwMDAwMDAwMDAwMDA2ClvCoMKgIDMyLjg2NzAyNF0gUkRYOiAwMDAwMDAw
-MDAwMDAwMDA3IFJTSTogMDAwMDAwMDAwMDAwMDAwMSBSREk6CmZmZmY4ODAwM2Q4MTY4YjAKW8Kg
-wqAgMzIuODY3MDM5XSBSQlA6IDAwMDAwMDAwMDAwMTRmOTggUjA4OiBmZmZmZmZmZjgxZWIwNGEw
-IFIwOToKMDAwMDAwMDAwMDAwN2Y5YgpbwqDCoCAzMi44NjcwNDVdIFIxMDogMDAwMDAwMDAwMDAw
-MDA2NSBSMTE6IGZmZmZmZmZmODJhOWI3Y2QgUjEyOgowMDAwMDAwMDAwMDAwMDAwClvCoMKgIDMy
-Ljg2NzA1MF0gUjEzOiBmZmZmZmZmZjgxMDFhODIwIFIxNDogZmZmZjg4MDAzZDQwMTI4MCBSMTU6
-CmZmZmZmZmZmODEwYWVjMTAKW8KgwqAgMzIuODY3MDYxXSBGUzrCoCAwMDAwMDAwMDAwMDAwMDAw
-KDAwMDApIEdTOmZmZmY4ODAwM2Q4MDAwMDAoMDAwMCkKa25sR1M6MDAwMDAwMDAwMDAwMDAwMApb
-wqDCoCAzMi44NjcwNjZdIENTOsKgIGUwMzMgRFM6IDAwMDAgRVM6IDAwMDAgQ1IwOiAwMDAwMDAw
-MDgwMDUwMDMzClvCoMKgIDMyLjg2NzA4MV0gQ1IyOiAwMDAwNTU2OWI2NGU3MmI4IENSMzogMDAw
-MDAwMDAyZTkwMjAwMCBDUjQ6CjAwMDAwMDAwMDAwNDI2NjAKW8KgwqAgMzIuODY3MDg5XSBDYWxs
-IFRyYWNlOgpbwqDCoCAzMi44NjcwOTZdwqAgPyBjc3RhdGVfY2xlYW51cCsweDQ3LzB4NDcKW8Kg
-wqAgMzIuODY3MTAxXcKgIHhlbl9jcHVfdXBfb25saW5lKzB4YS8weDEwClvCoMKgIDMyLjg2NzEw
-N13CoCBjcHVocF9pbnZva2VfY2FsbGJhY2srMHg4ZC8weDUwMApbwqDCoCAzMi44NjcxMTNdwqAg
-PyBzb3J0X3JhbmdlKzB4MjAvMHgyMApbwqDCoCAzMi44NjcxMTddwqAgY3B1aHBfdGhyZWFkX2Z1
-bisweGIwLzB4MTEwClvCoMKgIDMyLjg2NzEyMV3CoCBzbXBib290X3RocmVhZF9mbisweGM1LzB4
-MTYwClvCoMKgIDMyLjg2NzEyNl3CoCBrdGhyZWFkKzB4MTEyLzB4MTMwClvCoMKgIDMyLjg2NzEz
-MV3CoCA/IGt0aHJlYWRfYmluZCsweDMwLzB4MzAKW8KgwqAgMzIuODY3MTM2XcKgIHJldF9mcm9t
-X2ZvcmsrMHgzNS8weDQwClvCoMKgIDMyLjg2NzE0MV0gLS0tWyBlbmQgdHJhY2UgMTVkNGQ3MTEy
-YTFiMWNlYSBdLS0tClvCoMKgIDMyLjg2NzE0OF0gZ2VuaXJxOiBGbGFncyBtaXNtYXRjaCBpcnEg
-MS4gMDAwMmNjMDAgKHNwaW5sb2NrMCkgdnMuCjAwMDJjYzAwIChzcGlubG9jazApClvCoMKgIDMy
-Ljg2NzE1NF0gQ1BVOiAwIFBJRDogMTQgQ29tbTogY3B1aHAvMCBUYWludGVkOiBHwqDCoMKgwqDC
-oMKgwqAgV8KgwqDCoMKgwqDCoMKgwqAKNC4xOS4wLXJjMiAjMzEKW8KgwqAgMzIuODY3MTYwXSBD
-YWxsIFRyYWNlOgpbwqDCoCAzMi44NjcxNjVdwqAgZHVtcF9zdGFjaysweDVjLzB4ODAKW8KgwqAg
-MzIuODY3MTcxXcKgIF9fc2V0dXBfaXJxLmNvbGQuNTErMHg0ZS8weDllClvCoMKgIDMyLjg2NzE3
-N13CoCByZXF1ZXN0X3RocmVhZGVkX2lycSsweGY1LzB4MTYwClvCoMKgIDMyLjg2NzE4Ml3CoCA/
-IHhlbl9xbG9ja193YWl0KzB4NDAvMHg0MApbwqDCoCAzMi44NjcxODhdwqAgYmluZF9pcGlfdG9f
-aXJxaGFuZGxlcisweGFlLzB4MWQwClvCoMKgIDMyLjg2NzE5NF3CoCA/IHNvcnRfcmFuZ2UrMHgy
-MC8weDIwClvCoMKgIDMyLjg2NzE5OF3CoCB4ZW5faW5pdF9sb2NrX2NwdSsweDc0LzB4ZDAKW8Kg
-wqAgMzIuODY3MjAyXcKgID8gY3N0YXRlX2NsZWFudXArMHg0Ny8weDQ3ClvCoMKgIDMyLjg2NzIw
-Nl3CoCB4ZW5fY3B1X3VwX29ubGluZSsweGEvMHgxMApbwqDCoCAzMi44NjcyMTBdwqAgY3B1aHBf
-aW52b2tlX2NhbGxiYWNrKzB4OGQvMHg1MDAKW8KgwqAgMzIuODY3MjE1XcKgID8gc29ydF9yYW5n
-ZSsweDIwLzB4MjAKW8KgwqAgMzIuODY3MjE5XcKgIGNwdWhwX3RocmVhZF9mdW4rMHhiMC8weDEx
-MApbwqDCoCAzMi44NjcyMjNdwqAgc21wYm9vdF90aHJlYWRfZm4rMHhjNS8weDE2MApbwqDCoCAz
-Mi44NjcyMjddwqAga3RocmVhZCsweDExMi8weDEzMApbwqDCoCAzMi44NjcyMzFdwqAgPyBrdGhy
-ZWFkX2JpbmQrMHgzMC8weDMwClvCoMKgIDMyLjg2NzIzNV3CoCByZXRfZnJvbV9mb3JrKzB4MzUv
-MHg0MApbwqDCoCAzMi44NjcyNDldIGNwdSAwIHNwaW5sb2NrIGV2ZW50IGlycSAtMTYKW8KgwqAg
-MzIuODgwODc3XSBJUlEgMTY6IG5vIGxvbmdlciBhZmZpbmUgdG8gQ1BVMQpbwqDCoCAzMi44ODA4
-NzldIElSUSAxNzogbm8gbG9uZ2VyIGFmZmluZSB0byBDUFUxClvCoMKgIDMyLjg4MDg4MV0gSVJR
-IDE4OiBubyBsb25nZXIgYWZmaW5lIHRvIENQVTEKW8KgwqAgMzIuODgwODgyXSBJUlEgMTk6IG5v
-IGxvbmdlciBhZmZpbmUgdG8gQ1BVMQpbwqDCoCAzMi44ODA4ODRdIElSUSAyMDogbm8gbG9uZ2Vy
-IGFmZmluZSB0byBDUFUxClvCoMKgIDMyLjg4MDg4NV0gSVJRIDIxOiBubyBsb25nZXIgYWZmaW5l
-IHRvIENQVTEKW8KgwqAgMzIuODgwODg2XSBJUlEgMjI6IG5vIGxvbmdlciBhZmZpbmUgdG8gQ1BV
-MQpbwqDCoCAzMi44ODA4ODhdIElSUSAyMzogbm8gbG9uZ2VyIGFmZmluZSB0byBDUFUxClvCoMKg
-IDMyLjg4MDg4OV0gSVJRIDI0OiBubyBsb25nZXIgYWZmaW5lIHRvIENQVTEKW8KgwqAgMzIuODgy
-MjAyXSBzbXBib290OiBDUFUgMSBpcyBub3cgb2ZmbGluZQoKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1394005521-1536339355=:14449
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Fri, 7 Sep 2018, Paul Durrant wrote:
+> > -----Original Message-----
+> > From: George Dunlap [mailto:george.dunlap@citrix.com]
+> > Sent: 07 September 2018 16:26
+> > To: Roger Pau Monne <roger.pau@citrix.com>; Paul Durrant
+> > <Paul.Durrant@citrix.com>
+> > Cc: 'Stefano Stabellini' <sstabellini@kernel.org>; Wei Liu
+> > <wei.liu2@citrix.com>; Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>;
+> > Andrew Cooper <Andrew.Cooper3@citrix.com>; Tim (Xen.org)
+> > <tim@xen.org>; Julien Grall <julien.grall@arm.com>; Jan Beulich
+> > <jbeulich@suse.com>; Ian Jackson <Ian.Jackson@citrix.com>; xen-
+> > devel@lists.xenproject.org
+> > Subject: Re: [Xen-devel] [PATCH] tools: specifically enable VirtFS in Linux
+> > QEMU builds
+> > 
+> > On 09/07/2018 03:57 PM, Roger Pau Monné wrote:
+> > > On Fri, Sep 07, 2018 at 08:35:11AM +0000, Paul Durrant wrote:
+> > >>> -----Original Message-----
+> > >>> From: Stefano Stabellini [mailto:sstabellini@kernel.org]
+> > >>> Sent: 06 September 2018 19:12
+> > >>> To: Paul Durrant <Paul.Durrant@citrix.com>
+> > >>> Cc: xen-devel@lists.xenproject.org; Andrew Cooper
+> > >>> <Andrew.Cooper3@citrix.com>; George Dunlap
+> > >>> <George.Dunlap@citrix.com>; Ian Jackson <Ian.Jackson@citrix.com>;
+> > Jan
+> > >>> Beulich <jbeulich@suse.com>; Julien Grall <julien.grall@arm.com>;
+> > Konrad
+> > >>> Rzeszutek Wilk <konrad.wilk@oracle.com>; Stefano Stabellini
+> > >>> <sstabellini@kernel.org>; Tim (Xen.org) <tim@xen.org>; Wei Liu
+> > >>> <wei.liu2@citrix.com>
+> > >>> Subject: Re: [PATCH] tools: specifically enable VirtFS in Linux QEMU
+> > builds
+> > >>>
+> > >>> On Thu, 6 Sep 2018, Paul Durrant wrote:
+> > >>>> 9pfs support has been a documented feature since Xen 4.9, but QEMU
+> > will
+> > >>>> not be built with backend support unless libcap and libattr dev
+> > packages
+> > >>>> are installed.
+> > >>>>
+> > >>>> This patch modifies the README to call out those packages as pre-
+> > >>> requisites
+> > >>>> for Linux builds and specifically enables VirtFS in the configure line
+> > >>>> for QEMU so that an error message is displayed if they are missing.
+> > >>>>
+> > >>>> Signed-off-by: Paul Durrant <paul.durrant@citrix.com>
+> > >>>
+> > >>> Thank you, Paul!
+> > >>
+> > >> NP. I'm at the point of seriously considering a Windows frontend, which is
+> > why I've been playing.
+> > >>
+> > >> BTW, as a heads-up... Before I realised QEMU was not building the
+> > backend, I tried a modprobe of the Xen 9pfs transport module in a Linux
+> > guest and immediately hit a kernel BUG (NULL ptr IIRC) which was apparently
+> > down to the frontend expecting the backend to be present when its probe
+> > routine is run, rather than deferring things until the backend goes into
+> > InitWait (which is what a frontend generally should do). Also, it's non-obvious
+> > why I have to explicitly modprobe anyway... Shouldn't the module get
+> > demand-loaded when I run mount -t 9pfs blah?
+> > >>
+> > >>> Do we need to do anything for the configure stuff
+> > >>> (AC_CHECK_LIB in tools/configure.ac)?
+> > >>
+> > >> That's certainly a reasonable belt'n'braces approach so that folks don't
+> > have to wait until their tools build fails to find out what they need. I'll have a
+> > look at that.
+> > >
+> > > IMO I don't think we should be duplicating the checks that QEMU
+> > > configure already does in our configure script. The best option would
+> > > be to run whatever external configure scripts there are together with
+> > > our own configure script, but this is quite complicated because the
+> > > qemu-dir might have to be fetched at the point where configure runs.
+> > 
+> > Not the least because the dependencies may change.  I think adding an
+> > "--enable-9pfs" option which will pass on the requisite "--enable" to
+> > qemu (such that qemu build will fail if the prereqs are not present)
+> > makes the most sense.
+> 
+> I'd be happy with that if others are.
+
+If QEMU changes the virtfs default to "enable", then this option will
+become ineffective maybe without us even noticing. However, I guess we
+prefer to deal with duplicate enable/disable options in QEMU and Xen,
+rather than duplicate dependency checks which might be harder to keep
+up-to-date in the long run?
+--8323329-1394005521-1536339355=:14449
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1394005521-1536339355=:14449--
