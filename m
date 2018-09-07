@@ -1,39 +1,20 @@
-From: "Tian, Kevin" <kevin.tian@intel.com>
-Subject: Re: [PATCH v6 01/14] iommu: introduce the concept of
- BFN...
-Date: Fri, 7 Sep 2018 01:47:34 +0000
-Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D1912F4592@SHSMSX101.ccr.corp.intel.com>
-References: <20180823094711.21376-1-paul.durrant@citrix.com>
- <20180823094711.21376-2-paul.durrant@citrix.com>
- <5B88147F02000078001E39FB@prv1-mh.provo.novell.com>
- <eb9e4dcaf17544338b3b3fb5d40d43d0@AMSPEX02CL03.citrite.net>
- <5B8D1F2602000078001E48B5@prv1-mh.provo.novell.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D1912EFA15@SHSMSX101.ccr.corp.intel.com>
- <5B8E432E02000078001E4FB5@prv1-mh.provo.novell.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D1912EFD02@SHSMSX101.ccr.corp.intel.com>
- <5B8E469802000078001E4FE5@prv1-mh.provo.novell.com>
- <777ac29dd97a46938eec6c00ecf51e32@AMSPEX02CL03.citrite.net>
- <5B8E4B8A02000078001E505A@prv1-mh.provo.novell.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D1912F0BFB@SHSMSX101.ccr.corp.intel.com>
- <5B8F7C5202000078001E559F@prv1-mh.provo.novell.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D1912F14C8@SHSMSX101.ccr.corp.intel.com>
- <5B8F81B302000078001E55C9@prv1-mh.provo.novell.com>
- <a3315f3d139b4484a71c9669bd312fe1@AMSPEX02CL03.citrite.net>
- <5B8FA41B02000078001E56E4@prv1-mh.provo.novell.com>
- <707e1cd819cf4dbc996c80c936d25606@AMSPEX02CL03.citrite.net>
- <5B9127ED02000078001E5F41@prv1-mh.provo.novell.com>
- <afd5e179b3034dc099db256cdeffd062@AMSPEX02CL03.citrite.net>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Rich Persaud <persaur@gmail.com>
+Subject: Re: x86 Community Call - Wed Sept 12,
+ 14:00 - 15:00 UTC - Call for agenda items
+Date: Thu, 6 Sep 2018 21:50:24 -0400
+Message-ID: <582B9793-C858-4811-A57B-447EEDCBC9E3@gmail.com>
+References: <1834F463-A4BF-4FD8-AB38-9F053BC3C66F@citrix.com>
+Mime-Version: 1.0 (1.0)
+Content-Type: multipart/mixed; boundary="===============0729563900609352805=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=2jyo=lv=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
- id 1fy5sS-0006JC-D8
- for xen-devel@lists.xenproject.org; Fri, 07 Sep 2018 01:48:04 +0000
-In-Reply-To: <afd5e179b3034dc099db256cdeffd062@AMSPEX02CL03.citrite.net>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=6ary=lv=gmail.com=persaur@srs-us1.protection.inumbo.net>)
+ id 1fy5un-0006w3-2g
+ for xen-devel@lists.xenproject.org; Fri, 07 Sep 2018 01:50:29 +0000
+Received: by mail-it0-x236.google.com with SMTP id j81-v6so18660353ite.0
+ for <xen-devel@lists.xenproject.org>; Thu, 06 Sep 2018 18:50:28 -0700 (PDT)
+In-Reply-To: <1834F463-A4BF-4FD8-AB38-9F053BC3C66F@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -42,55 +23,177 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>, 'Jan Beulich' <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: Lars Kurth <lars.kurth@citrix.com>
+Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "dpsmith@apertussolutions.com" <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, Matt Spencer <Matt.Spencer@arm.com>, "edgar.iglesias@xilinx.com" <edgar.iglesias@xilinx.com>, "Ji,
+ John" <john.ji@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, "daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, xen-devel <xen-devel@lists.xenproject.org>, Artem Mygaiev <Artem_Mygaiev@epam.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, Christopher Clark <christopher.w.clark@gmail.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "committers@xenproject.org" <committers@xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, "intel-xen@intel.com" <intel-xen@intel.c>
 List-Id: xen-devel@lists.xenproject.org
 
-PiBGcm9tOiBQYXVsIER1cnJhbnQgW21haWx0bzpQYXVsLkR1cnJhbnRAY2l0cml4LmNvbV0KPiBT
-ZW50OiBUaHVyc2RheSwgU2VwdGVtYmVyIDYsIDIwMTggMTA6NTQgUE0KPiAKPiA+IC0tLS0tT3Jp
-Z2luYWwgTWVzc2FnZS0tLS0tCj4gPiBGcm9tOiBKYW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNo
-QHN1c2UuY29tXQo+ID4gU2VudDogMDYgU2VwdGVtYmVyIDIwMTggMTQ6MTMKPiA+IFRvOiBQYXVs
-IER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPgo+ID4gQ2M6IFN1cmF2ZWUgU3V0aGlr
-dWxwYW5pdCA8c3VyYXZlZS5zdXRoaWt1bHBhbml0QGFtZC5jb20+OyBKdWxpZW4gR3JhbGwKPiA+
-IDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT47IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29t
-PjsgU3RlZmFubwo+ID4gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz47IHhlbi1k
-ZXZlbCA8eGVuLQo+ID4gZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmc+Cj4gPiBTdWJqZWN0OiBS
-RTogW1hlbi1kZXZlbF0gW1BBVENIIHY2IDAxLzE0XSBpb21tdTogaW50cm9kdWNlIHRoZSBjb25j
-ZXB0Cj4gb2YKPiA+IEJGTi4uLgo+ID4KPiA+ID4+PiBPbiAwNi4wOS4xOCBhdCAxMjozNiwgPFBh
-dWwuRHVycmFudEBjaXRyaXguY29tPiB3cm90ZToKPiA+ID4+IEZyb206IEphbiBCZXVsaWNoIFtt
-YWlsdG86SkJldWxpY2hAc3VzZS5jb21dCj4gPiA+PiBTZW50OiAwNSBTZXB0ZW1iZXIgMjAxOCAx
-MDozOQo+ID4gPj4KPiA+ID4+ID4+PiBPbiAwNS4wOS4xOCBhdCAxMToxMywgPFBhdWwuRHVycmFu
-dEBjaXRyaXguY29tPiB3cm90ZToKPiA+ID4+ID4gUGVyc29uYWxseSBJIHRoaW5rICdidXMgYWRk
-cmVzcycgaXMgY29tbW9ubHkgZW5vdWdoIHVzZWQgdGVybSBmb3IKPiA+ID4+IGFkZHJlc3Nlcwo+
-ID4gPj4gPiB1c2VkIGJ5IGRldmljZXMgZm9yIERNQS4gSW5kZWVkIHdlIGhhdmUgYWxyZWFkeSAn
-ZGV2X2J1c19hZGRyJyBpbgo+ID4gdGhlCj4gPiA+PiBncmFudAo+ID4gPj4gPiBtYXAgYW5kIHVu
-bWFwIGh5cGVyY2FsbHMuIFNvIGJhZGRyIGFuZCBiZm4gc2VlbSBsaWtlIG9rIHRlcm1zIHRvCj4g
-bWUuCj4gPiBJdCdzCj4gPiA+PiA+IGFsc28gbm90IGltcG9zc2libGUgdG8gcmVuYW1lIHRoZXNl
-IGxhdGVyIGlmIHRoZXkgcHJvdmUgcHJvYmxlbWF0aWMuCj4gPiA+Pgo+ID4gPj4gQnV0IHRoYXQn
-cyB0aGUgcG9pbnQgLSB0aGUgbmFtZXMgYXJlIHByb2JsZW1hdGljICh0byBtZSk6IEkKPiBwZXJt
-YW5lbnRseQo+ID4gPj4gaGF2ZSB0byByZW1pbmQgbXlzZWxmIHRoYXQgdGhleSBkbyBfbm90XyBy
-ZWZlciB0byB0aGUgYWRkcmVzc2VzIGFzCj4gPiA+PiBzZWVuIHdoZW4gYWNjZXNzaW5nIG1lbW9y
-eSwgYnV0IHRoZSBvbmVzIGdvaW5nIF9pbnRvXyB0aGUgSU9NTVUuCj4gPiA+Cj4gPiA+IE9rLiBD
-b3VsZCB3ZSBhZ3JlZSBvbiAnSU9GTicgdGhlbj8gSSB0aGluayAnaW92YScgYW5kICdpbyBhZGRy
-ZXNzJyBhcmUKPiBhbHNvCj4gPiA+IHJlYXNvbmFibHkgd2lkZWx5IHVzZWQgdGVybXMgdG8gcmVm
-ZXIgdG8gYWRkcmVzcyBmcm9tIGEgZGV2aWNlJ3MgUG9WLgo+IEknZAo+ID4gPiByZWFsbHkgbGlr
-ZSB0byB1bmJsb2NrIHRoZXNlIGVhcmx5IHBhdGNoZXMuCj4gPgo+ID4gSG1tLCBlYXJsaWVyIEkg
-aGFkIGluZGljYXRlZCBJJ2QgcHJlZmVyIERGTiAoYXMgdGhpcyBtYWtlIGNsZWFyIHdob3NlCj4g
-PiB2aWV3IHdlIGFyZSB0YWxraW5nIGFib3V0KS4gS2V2aW4gc2VlbWVkIHRvIHByZWZlciBERk4g
-dG9vLCBqdXN0IHdpdGgKPiA+IGEgZGlmZmVyZW50IGFzc29jaWF0aW9uIGZvciBEICh3aGljaCwg
-YXMgc2FpZCwgSSBjb25zaWRlciB1bmhlbHBmdWwpLiBTbwo+ID4gaXMgdGhlcmUgYSBwYXJ0aWN1
-bGFyIHJlYXNvbiB5b3UncmUgbm93IHN1Z2dlc3RpbmcgSU9GTiBuZXZlcnRoZWxlc3M/Cj4gCj4g
-SXQgd2FzIHRoZSBhbWJpZ3VpdHkgYW5kIGxhY2sgb2YgYWdyZWVtZW50IG92ZXIgdGhlICdEJyB0
-aGF0IG1hZGUgbWUgdGhpbmsKPiB0aGF0IHRoZSBvdGhlciBhbHRlcm5hdGl2ZSB3b3VsZCBiZSBi
-ZXR0ZXIuCj4gS2V2aW4sIHdvdWxkIHlvdSBiZSBvayB3aXRoICdJT0ZOJz8KPiAKCk15IHByb2Js
-ZW0gd2l0aCBERk4gaXMgd2hlbiBjb21iaW5pbmcgRCB3aXRoIGFkZHJlc3MgdGhlbiAiZGV2aWNl
-IAphZGRyZXNzIiBpcyBub3QgdmVyeSBjbGVhciB0byBtZSB3aGlsZSBpbnRlcnByZXRpbmcgRCBh
-cyBETUEgaXMgYWxzbwpub3QgdGhhdCBjbGVhciBmcm9tIEphbidzIHBvaW50LgoKSSBkaWRuJ3Qg
-c2VlIGEgcGVyZmVjdCBjYW5kaWRhdGUgd2l0aG91dCBjYXVzaW5nIGFueSBhbWJpZ3VpdHkgLSBh
-dCB0aGlzCnBvaW50IEkgZmVlbCBJT0ZOL0lPVkEgbWlnaHQgbm90IGJlIHRoZSBiZXN0IG9uZSBi
-dXQgaXQgd2lucyB0byBtZSB3aGVuCmNvbnNpZGVyaW5nIHRoZSBmYWN0IHRoYXQgaXQgaXMgd2lk
-ZWx5IHVzZWQgdGVybSBpbiBvdGhlciBwbGFjZXMgKGUuZy4gaW4gdnRkIApzcGVjLCBpbiBMaW51
-eCB2ZmlvL2lvbW11IGRyaXZlciwgZXRjLikuIAoKVGhhbmtzCktldmluCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============0729563900609352805==
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-6DD18FBC-9440-4F81-8DB8-5C44AC9B82E7
+Content-Transfer-Encoding: 7bit
+
+
+--Apple-Mail-6DD18FBC-9440-4F81-8DB8-5C44AC9B82E7
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+> On Sep 6, 2018, at 11:35, Lars Kurth <lars.kurth@citrix.com> wrote:
+>=20
+> Dear community members,
+> =20
+> please send me agenda items for next week=E2=80=99s community call by next=
+=20
+> Monday.=20
+
+"Argo" (formerly v4v) inter-VM communication mechanism for Xen 4.12, discuss=
+ed at Xen Summit 2018 design session and PSEC 2018, design doc forthcoming. =
+ Variants of this technology have been used in OpenXT and uXen/Bromium for s=
+everal years.
+Video:  https://www.platformsecuritysummit.com/2018/speaker/clark/
+
+> One suggestion which was made to me recently by Rich,
+> Christopher and Daniel was for Daniel to give an overview of
+> Secure Boot, Measured Launch and TrenchBoot.
+> =20
+> @Daniel, @Christopher, @Rich: would this be possible during the
+> next call? How much time does the talk require.
+
+If attendees can watch Daniel Smith=E2=80=99s TrenchBoot video as a pre-requ=
+isite for the call, his overview will build on the video: 15 min talk + 15 m=
+ins of discussion.
+Video: https://www.platformsecuritysummit.com/2018/speaker/smith/
+
+There were boot integrity talks on Xen and/or UEFI, from AIS, Dell, Intel, O=
+racle:
+https://www.platformsecuritysummit.com/2018/topic/boot/
+
+Rich
+
+--Apple-Mail-6DD18FBC-9440-4F81-8DB8-5C44AC9B82E7
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><div><span></span></div><div><meta http-equ=
+iv=3D"content-type" content=3D"text/html; charset=3Dutf-8"><div><span></span=
+></div><div><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"><div></div><div>On Sep 6, 2018, at 11:35, Lars Kurth &lt;<a href=3D"m=
+ailto:lars.kurth@citrix.com">lars.kurth@citrix.com</a>&gt; wrote:</div><div>=
+<br></div><blockquote type=3D"cite"><div>
+
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:-webkit-standard;
+	panose-1:2 11 6 4 2 2 2 2 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+span.apple-converted-space
+	{mso-style-name:apple-converted-space;}
+.MsoChpDefault
+	{mso-style-type:export-only;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style>
+
+
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;-webkit-standard&quo=
+t;,serif;color:black">Dear community members,<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;-webkit-standard&quo=
+t;,serif;color:black">&nbsp;<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;-webkit-standard&quo=
+t;,serif;color:black">please send me agenda items for next week=E2=80=99s co=
+mmunity call by next
+<br>
+Monday.<span class=3D"apple-converted-space">&nbsp;</span></span></p></div><=
+/div></blockquote><div><br></div><div><span style=3D"background-color: rgba(=
+255, 255, 255, 0);">"Argo" (formerly v4v) inter-VM communication mechanism f=
+or Xen 4.12, discussed at Xen Summit 2018 design session and PSEC 2018</span=
+><span style=3D"background-color: rgba(255, 255, 255, 0);">, design doc fort=
+hcoming. &nbsp;Variants of this technology have been used in OpenXT and uXen=
+/Bromium for several years.</span></div><div><span style=3D"background-color=
+: rgba(255, 255, 255, 0);">Video: &nbsp;</span><font color=3D"#000000" style=
+=3D"caret-color: rgb(0, 0, 0); background-color: rgba(255, 255, 255, 0);"><a=
+ href=3D"https://www.platformsecuritysummit.com/2018/speaker/clark/" style=3D=
+"caret-color: rgb(0, 0, 0); background-color: rgba(255, 255, 255, 0);">https=
+://www.platformsecuritysummit.com/2018/speaker/clark/</a></font></div><br><b=
+lockquote type=3D"cite"><div><div class=3D"WordSection1"><p class=3D"MsoNorm=
+al"><span style=3D"font-family:&quot;-webkit-standard&quot;,serif;color:blac=
+k"><span class=3D"apple-converted-space">One suggestion which was made to me=
+ recently by Rich,<o:p></o:p></span></span></p>
+<p class=3D"MsoNormal"><span class=3D"apple-converted-space"><span style=3D"=
+font-family:&quot;-webkit-standard&quot;,serif;color:black">Christopher and D=
+aniel was for Daniel to give an overview of
+<o:p></o:p></span></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;-webkit-standard&quo=
+t;,serif;color:black">Secure Boot, Measured Launch and TrenchBoot.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;-webkit-standard&quo=
+t;,serif;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-family:&quot;-webkit-standard&quo=
+t;,serif;color:black">@Daniel, @Christopher, @Rich: would this be possible d=
+uring the<br>
+next call? How much time does the talk require.</span></p></div></div></bloc=
+kquote><div><br></div><div>If attendees can watch Daniel Smith=E2=80=99s Tre=
+nchBoot video as a pre-requisite for the call, his overview will build on th=
+e video: 15 min talk + 15 mins of discussion.</div><div>Video: <span style=3D=
+"background-color: rgba(255, 255, 255, 0);"><a href=3D"https://www.platforms=
+ecuritysummit.com/2018/speaker/smith/">https://www.platformsecuritysummit.co=
+m/2018/speaker/smith/<br></a><br></span></div><div><span style=3D"background=
+-color: rgba(255, 255, 255, 0);">There were boot integrity talks on Xen and/=
+or UEFI, from AIS, Dell, Intel, Oracle:</span></div><div><a href=3D"https://=
+www.platformsecuritysummit.com/2018/topic/boot/">https://www.platformsecurit=
+ysummit.com/2018/topic/boot/</a></div><div><br></div><div><span style=3D"bac=
+kground-color: rgba(255, 255, 255, 0);">Rich</span></div><div><blockquote ty=
+pe=3D"cite"><div><div class=3D"WordSection1">
+</div>
+
+
+</div></blockquote></div></div></div></body></html>=
+
+--Apple-Mail-6DD18FBC-9440-4F81-8DB8-5C44AC9B82E7--
+
+
+--===============0729563900609352805==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0729563900609352805==--
