@@ -1,15 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v18 00/13] x86/domctl: Save info for one
- vcpu instance
-Date: Fri, 07 Sep 2018 03:48:36 -0600
-Message-ID: <5B92497402000078001E6456@prv1-mh.provo.novell.com>
-References: <1535980459-5457-1-git-send-email-aisaila@bitdefender.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v3] xen: avoid crash in disable_hotplug_cpu
+Date: Fri, 7 Sep 2018 11:50:08 +0200
+Message-ID: <baf89177-9fcc-dda4-fefd-57537018c94e__49550.4858707593$1536313730$gmane$org@suse.com>
+References: <20180907063023.16913-1-olaf@aepfle.de>
+ <c26bfbe1-9032-468c-d4d0-c05eda8af762@suse.com>
+ <20180907112451.442b46fe.olaf@aepfle.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1535980459-5457-1-git-send-email-aisaila@bitdefender.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=cynw=lv=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1fyDP1-0002ep-J5
+ for xen-devel@lists.xenproject.org; Fri, 07 Sep 2018 09:50:11 +0000
+In-Reply-To: <20180907112451.442b46fe.olaf@aepfle.de>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,21 +24,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: aisaila@bitdefender.com
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org
+To: Olaf Hering <olaf@aepfle.de>
+Cc: xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, open list <linux-kernel@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDAzLjA5LjE4IGF0IDE1OjE0LCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3Rl
-Ogo+IFRoaXMgcGF0Y2ggc2VyaWVzIGFkZHJlc3NlcyB0aGUgaWRlZWEgb2Ygc2F2aW5nIGRhdGEg
-ZnJvbSBhIHNpbmdsZSB2Y3B1IGluc3RhbmNlLgo+IEZpcnN0IGl0IHN0YXJ0cyBieSBhZGRpbmcg
-KnNhdmVfb25lIGZ1bmN0aW9ucywgdGhlbiBpdCBpbnRyb2R1Y2VzIGEgaGFuZGxlciBmb3IgdGhl
-Cj4gbmV3IHNhdmVfb25lKiBmdW5jcyBhbmQgbWFrZXMgdXNlIG9mIGl0IGluIHRoZSBodm1fc2F2
-ZSBhbmQgaHZtX3NhdmVfb25lIGZ1bmNzLgo+IFRoZSBmaW5hbCBwYXRjaGVzIGFyZSB1c2VkIGZv
-ciBjbGVhbiB1cCBhbmQgY2hhbmdlIHRoZSBodm1fc2F2ZV9vbmUoKSBmdW5jIHdoaWxlIAo+IGNo
-YW5naW5nIGRvbWFpbl9wYXVzZSB0byB2Y3B1X3BhdXNlLgoKQ29uc2lkZXJpbmcgdGhlIG9uZ29p
-bmcgcHJvYmxlbXMgd2l0aCB0aGUgc2VyaWVzLCBwbGVhc2UgZ29pbmcKZm9yd2FyZCBpbmRpY2F0
-ZSBoZXJlIHdoYXQgZXhhY3QgdGVzdGluZyB5b3UndmUgZG9uZSB0byBtYWtlCnN1cmUgeW91IGlu
-dHJvZHVjZSBubyByZWdyZXNzaW9ucy4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+T24gMDcvMDkvMTggMTE6MjQsIE9sYWYgSGVyaW5nIHdyb3RlOgo+IEFtIEZyaSwgNyBTZXAgMjAx
+OCAwOTo0ODoyOCArMDIwMAo+IHNjaHJpZWIgSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29t
+PjoKPiAKPj4gT24gMDcvMDkvMTggMDg6MzAsIE9sYWYgSGVyaW5nIHdyb3RlOgo+Pj4gKwlpZiAo
+Y3B1X29ubGluZShjcHUpKQo+Pj4gKwkJcmV0dXJuOwo+Pj4gIAlpZiAoY3B1X3ByZXNlbnQoY3B1
+KSkKPj4+ICAJCXhlbl9hcmNoX3VucmVnaXN0ZXJfY3B1KGNwdSk7ICAKPiAKPj4gQ291bGQgeW91
+IG1lcmdlIHRoZSB0d28gaWYgY29uZGl0aW9ucz8KPj4gaWYgKCFjcHVfb25saW5lKGNwdSkgJiYg
+Y3B1X3ByZXNlbnQoY3B1KSkKPj4gCXhlbl9hcmNoX3VucmVnaXN0ZXJfY3B1KGNwdSk7Cj4gCj4g
+SXMgdGhhdCBhbnkgZGlmZmVyZW50LCBiZXNpZGUgYmVpbmcgd3JvbmcsIGZyb20gd2hhdCB0aGUg
+cGF0Y2ggYWN0dWFsbHkgZG9lcz8KCk5vLiBKdXN0IGEgbWF0dGVyIG9mIHN0eWxlLgoKPiBJdCB3
+b3VsZCBzdGlsbCBjbGVhciB0aGUgcHJlc2VudCBiaXQgbGF0ZXIgb24uCgpUaGlzIHNob3VsZCBi
+ZSBwYXJ0IG9mIHRoZSBpZiBjbGF1c2UsIG9mIGNvdXJzZS4KCgpKdWVyZ2VuCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
