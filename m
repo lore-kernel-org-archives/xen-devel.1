@@ -1,17 +1,17 @@
 From: zhong jiang <zhongjiang@huawei.com>
-Subject: [PATCH] net: xenbus: remove redundant condition check
+Subject: [PATCH] xen-netback: remove unecessary condition check
  before debugfs_remove_recursive
-Date: Sat, 8 Sep 2018 21:35:06 +0800
-Message-ID: <1536413706-31838-1-git-send-email-zhongjiang__11519.8967665949$1536516771$gmane$org@huawei.com>
+Date: Sat, 8 Sep 2018 21:53:42 +0800
+Message-ID: <1536414822-32911-1-git-send-email-zhongjiang__37406.0405222282$1536516773$gmane$org@huawei.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=gf4b=lw=huawei.com=zhongjiang@srs-us1.protection.inumbo.net>)
- id 1fyda6-0005oM-NA
- for xen-devel@lists.xenproject.org; Sat, 08 Sep 2018 13:47:22 +0000
+ id 1fyds6-00079U-3T
+ for xen-devel@lists.xenproject.org; Sat, 08 Sep 2018 14:05:58 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,23 +21,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: davem@davemloft.net, paul.durrant@citrix.com, wei.liu2@citrix.com
-Cc: xen-devel@lists.xenproject.org, netdev@vger.kernel.org
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, netdev@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZGVidWdmc19yZW1vdmVfcmVjdXJzaXZlIGhhcyB0YWtlbiB0aGUgSVNfRVJSX09SX05VTEwgaW50
-byBhY2NvdW50LiBKdXN0CnJlbW92ZSB0aGUgdW5uZWNlc3NhcnkgY29uZGl0aW9uIGNoZWNrLgoK
-U2lnbmVkLW9mZi1ieTogemhvbmcgamlhbmcgPHpob25namlhbmdAaHVhd2VpLmNvbT4KLS0tCiBk
-cml2ZXJzL25ldC94ZW4tbmV0YmFjay94ZW5idXMuYyB8IDMgKy0tCiAxIGZpbGUgY2hhbmdlZCwg
-MSBpbnNlcnRpb24oKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQv
-eGVuLW5ldGJhY2sveGVuYnVzLmMgYi9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay94ZW5idXMuYwpp
-bmRleCBjZDUxNDkyLi5mZTFkNTIyIDEwMDY0NAotLS0gYS9kcml2ZXJzL25ldC94ZW4tbmV0YmFj
-ay94ZW5idXMuYworKysgYi9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay94ZW5idXMuYwpAQCAtMjU0
-LDggKzI1NCw3IEBAIHN0YXRpYyB2b2lkIHhlbnZpZl9kZWJ1Z2ZzX2RlbGlmKHN0cnVjdCB4ZW52
-aWYgKnZpZikKIAlpZiAoSVNfRVJSX09SX05VTEwoeGVuX25ldGJhY2tfZGJnX3Jvb3QpKQogCQly
-ZXR1cm47CiAKLQlpZiAoIUlTX0VSUl9PUl9OVUxMKHZpZi0+eGVudmlmX2RiZ19yb290KSkKLQkJ
-ZGVidWdmc19yZW1vdmVfcmVjdXJzaXZlKHZpZi0+eGVudmlmX2RiZ19yb290KTsKKwlkZWJ1Z2Zz
-X3JlbW92ZV9yZWN1cnNpdmUodmlmLT54ZW52aWZfZGJnX3Jvb3QpOwogCXZpZi0+eGVudmlmX2Ri
-Z19yb290ID0gTlVMTDsKIH0KICNlbmRpZiAvKiBDT05GSUdfREVCVUdfRlMgKi8KLS0gCjEuNy4x
-Mi40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+ZGVidWdmc19yZW1vdmVfcmVjdXJzaXZlIGhhcyB0YWtlbiBJU19FUlJfT1JfTlVMTCBpbnRvIGFj
+Y291bnQuIFNvIGp1c3QKcmVtb3ZlIHRoZSBjb25kaXRpb24gY2hlY2sgYmVmb3JlIGRlYnVnZnNf
+cmVtb3ZlX3JlY3Vyc2l2ZS4KClNpZ25lZC1vZmYtYnk6IHpob25nIGppYW5nIDx6aG9uZ2ppYW5n
+QGh1YXdlaS5jb20+Ci0tLQogZHJpdmVycy9uZXQveGVuLW5ldGJhY2svbmV0YmFjay5jIHwgMyAr
+LS0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYg
+LS1naXQgYS9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay9uZXRiYWNrLmMgYi9kcml2ZXJzL25ldC94
+ZW4tbmV0YmFjay9uZXRiYWNrLmMKaW5kZXggMzYyMWUwNS4uODBhYWUzYSAxMDA2NDQKLS0tIGEv
+ZHJpdmVycy9uZXQveGVuLW5ldGJhY2svbmV0YmFjay5jCisrKyBiL2RyaXZlcnMvbmV0L3hlbi1u
+ZXRiYWNrL25ldGJhY2suYwpAQCAtMTY2MCw4ICsxNjYwLDcgQEAgc3RhdGljIGludCBfX2luaXQg
+bmV0YmFja19pbml0KHZvaWQpCiBzdGF0aWMgdm9pZCBfX2V4aXQgbmV0YmFja19maW5pKHZvaWQp
+CiB7CiAjaWZkZWYgQ09ORklHX0RFQlVHX0ZTCi0JaWYgKCFJU19FUlJfT1JfTlVMTCh4ZW5fbmV0
+YmFja19kYmdfcm9vdCkpCi0JCWRlYnVnZnNfcmVtb3ZlX3JlY3Vyc2l2ZSh4ZW5fbmV0YmFja19k
+Ymdfcm9vdCk7CisJZGVidWdmc19yZW1vdmVfcmVjdXJzaXZlKHhlbl9uZXRiYWNrX2RiZ19yb290
+KTsKICNlbmRpZiAvKiBDT05GSUdfREVCVUdfRlMgKi8KIAl4ZW52aWZfeGVuYnVzX2ZpbmkoKTsK
+IH0KLS0gCjEuNy4xMi40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
