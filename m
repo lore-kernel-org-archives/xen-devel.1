@@ -1,16 +1,27 @@
-From: "DeGraaf, Daniel G" <dgdegra@nsa.gov>
-Subject: Re: [Non-DoD Source] [PATCH 4/5] xen/domain: Fold
- xsm_free_security_domain() paths together
-Date: Fri, 7 Sep 2018 20:48:39 +0000
-Message-ID: <BA190A75E8413C49BB9E1D2B85D118115587C320@MSMR-GH1-UEA01.corp.nsa.gov>
-References: <1535986020-15906-1-git-send-email-andrew.cooper3@citrix.com>
- <1535986020-15906-5-git-send-email-andrew.cooper3@citrix.com>
+From: Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Subject: Re: [DRBD-user] [PATCH] xen-blkback: Switch to closed
+ state after releasing the backing device
+Date: Sat, 8 Sep 2018 09:34:32 +0200
+Message-ID: <20180908073432.GP26705__8312.80737552351$1536392031$gmane$org@gavran.carpriv.carnet.hr>
+References: <20180829065214.23546-1-Valentin.Vidic@CARNet.hr>
+ <20180905103649.edugijsjx4v2fbxd@mac.bytemobile.com>
+ <20180905162756.GA26705@gavran.carpriv.carnet.hr>
+ <20180907120337.GB11834@soda.linbit>
+ <20180907121348.GM26705@gavran.carpriv.carnet.hr>
+ <20180907132828.GC11834@soda.linbit>
+ <20180907164500.GN26705@gavran.carpriv.carnet.hr>
+ <20180907171459.GO26705@gavran.carpriv.carnet.hr>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1535986020-15906-5-git-send-email-andrew.cooper3@citrix.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=++iv=lw=carnet.hr=valentin.vidic@srs-us1.protection.inumbo.net>)
+ id 1fyXlS-00070t-RE
+ for xen-devel@lists.xenproject.org; Sat, 08 Sep 2018 07:34:42 +0000
+Content-Disposition: inline
+In-Reply-To: <20180907171459.GO26705@gavran.carpriv.carnet.hr>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,25 +30,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, 'Andrew Cooper' <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
+To: drbd-user@lists.linbit.com
+Cc: Jens Axboe <axboe@kernel.dk>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, linux-kernel@vger.kernel.org, stable@vger.kernel.org, linux-block@vger.kernel.org, xen-devel@lists.xenproject.org, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiBGcm9tOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPg0KPiBTZW50
-OiBNb25kYXksIFNlcHRlbWJlciAzLCAyMDE4IDEwOjQ3IEFNDQo+IFRvOiBYZW4tZGV2ZWwgPHhl
-bi1kZXZlbEBsaXN0cy54ZW4ub3JnPg0KPiBDYzogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3Bl
-cjNAY2l0cml4LmNvbT47IEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT47IFdlaSBMaXUg
-PHdlaS5saXUyQGNpdHJpeC5jb20+OyBSb2dlciBQYXUNCj4gTW9ubsOpIDxyb2dlci5wYXVAY2l0
-cml4LmNvbT47IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz47IEp1
-bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+OyBEYW5pZWwgRGUgR3JhYWYNCj4gPGRn
-ZGVncmFAdHljaG8ubnNhLmdvdj4NCj4gU3ViamVjdDogW05vbi1Eb0QgU291cmNlXSBbUEFUQ0gg
-NC81XSB4ZW4vZG9tYWluOiBGb2xkIHhzbV9mcmVlX3NlY3VyaXR5X2RvbWFpbigpIHBhdGhzIHRv
-Z2V0aGVyDQo+IA0KPiB4c21fZnJlZV9zZWN1cml0eV9kb21haW4oKSBpcyBpZGVtcG90ZW50IChi
-b3RoIHRoZSBkdW1teSBoYW5kbGVyLCBhbmQgdGhlDQo+IGZsYXNrIGhhbmRsZXIpLiAgTW92ZSBp
-dCBpbnRvIHRoZSBzaGFyZWQgX19kb21haW5fZGVzdHJveSgpIHBhdGgsIGFuZCBkcm9wIHRoZQ0K
-PiBJTklUX3hzbSBmbGFnIGZyb20gZG9tYWluX2NyZWF0ZSgpDQo+IA0KPiBTaWduZWQtb2ZmLWJ5
-OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPg0KDQpBY2tlZC1ieTog
-RGFuaWVsIERlIEdyYWFmIDxkZ2RlZ3JhQHR5Y2hvLm5zYS5nb3Y+DQoNCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gRnJpLCBTZXAgMDcsIDIwMTggYXQgMDc6MTQ6NTlQTSArMDIwMCwgVmFsZW50aW4gVmlkaWMg
+d3JvdGU6Cj4gSW4gZmFjdCB0aGUgZmlyc3Qgb25lIGlzIHRoZSBvcmlnaW5hbCBjb2RlIHBhdGgg
+YmVmb3JlIEkgbW9kaWZpZWQKPiBibGtiYWNrLiAgVGhlIHByb2JsZW0gaXMgaXQgZ2V0cyBleGVj
+dXRlZCBhc3luYyBmcm9tIHdvcmtxdWV1ZSBzbwo+IGl0IG1pZ2h0IG5vdCBhbHdheXMgcnVuIGJl
+Zm9yZSB0aGUgY2FsbCB0byBkcmJkYWRtIHNlY29uZGFyeS4KCkFzIHRoZSBEUkJEIGRldmljZSBn
+ZXRzIHJlbGVhc2VkIG9ubHkgd2hlbiB0aGUgbGFzdCBJTyByZXF1ZXN0CmhhcyBmaW5pc2hlZCwg
+SSBmb3VuZCBhIHdheSB0byBjaGVjayBhbmQgd2FpdCBmb3IgdGhpcyBpbiB0aGUKYmxvY2stZHJi
+ZCBzY3JpcHQ6CgotLS0gYmxvY2stZHJiZC5vcmlnICAgICAyMDE4LTA5LTA4IDA5OjA3OjIzLjQ5
+OTY0ODUxNSArMDIwMAorKysgYmxvY2stZHJiZCAgMjAxOC0wOS0wOCAwOToyODoxMi44OTIxOTM2
+NDkgKzAyMDAKQEAgLTIzMCw2ICsyMzAsMjQgQEAKIGFuZCBzbyBjYW5ub3QgYmUgbW91bnRlZCAk
+e20yfSR7d2hlbn0uIgogfQogCit3YWl0X2Zvcl9pbmZsaWdodCgpCit7CisgIGxvY2FsIGRldj0i
+JDEiCisgIGxvY2FsIGluZmxpZ2h0PSIvc3lzL2Jsb2NrLyR7ZGV2Iy9kZXYvfS9pbmZsaWdodCIK
+KyAgbG9jYWwgcmQgd3IKKworICBpZiAhIFsgLWYgIiRpbmZsaWdodCIgXTsgdGhlbgorICAgIHJl
+dHVybgorICBmaQorCisgIHdoaWxlIHRydWU7IGRvCisgICAgcmVhZCByZCB3ciA8ICRpbmZsaWdo
+dAorICAgIGlmIFsgIiRyZCIgPSAiMCIgLWEgIiR3ciIgPSAiMCIgXTsgdGhlbgorICAgICAgcmV0
+dXJuCisgICAgZmkKKyAgICBzbGVlcCAxCisgIGRvbmUKK30KIAogdD0kKHhlbnN0b3JlX3JlYWRf
+ZGVmYXVsdCAiJFhFTkJVU19QQVRIL3R5cGUiICdNSVNTSU5HJykKIApAQCAtMjg1LDYgKzMwMyw4
+IEBACiAgICAgICAgIGRyYmRfbHJvbGU9IiR7ZHJiZF9yb2xlJSUvKn0iCiAgICAgICAgIGRyYmRf
+ZGV2PSIkKGRyYmRhZG0gc2gtZGV2ICRkcmJkX3Jlc291cmNlKSIKIAorICAgICAgICB3YWl0X2Zv
+cl9pbmZsaWdodCAkZHJiZF9kZXYKKwogICAgICAgICBpZiBbICIkZHJiZF9scm9sZSIgIT0gJ1Nl
+Y29uZGFyeScgXTsgdGhlbgogICAgICAgICAgIGRyYmRhZG0gc2Vjb25kYXJ5ICRkcmJkX3Jlc291
+cmNlCiAgICAgICAgIGZpCgotLSAKVmFsZW50aW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
