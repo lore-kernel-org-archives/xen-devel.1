@@ -1,17 +1,29 @@
-From: zhong jiang <zhongjiang@huawei.com>
-Subject: [PATCH] xen-netback: remove unecessary condition check
- before debugfs_remove_recursive
-Date: Sat, 8 Sep 2018 21:53:42 +0800
-Message-ID: <1536414822-32911-1-git-send-email-zhongjiang__37406.0405222282$1536516773$gmane$org@huawei.com>
+From: Pasi =?iso-8859-1?Q?K=E4rkk=E4inen?= <pasik@iki.fi>
+Subject: Re: [PATCH V3 1/2] Drivers/PCI: Export pcie_has_flr()
+ interface
+Date: Sun, 9 Sep 2018 21:59:44 +0300
+Message-ID: <20180909185944.GC18222__33665.8779801384$1536519536$gmane$org@reaktio.net>
+References: <20171207222145.9769-1-Govinda.Tatti@Oracle.COM>
+ <20171207222145.9769-2-Govinda.Tatti@Oracle.COM>
+ <20171208202424.GC12367@bhelgaas-glaptop.roam.corp.google.com>
+ <426eeeab-0dcd-8de3-9c5f-a166acf2c130@Oracle.COM>
+ <20171212005919.GB30595@bhelgaas-glaptop.roam.corp.google.com>
+ <49956aaf-5fd5-939d-5fc7-231ffdb98b70@Oracle.COM>
+ <20171213212420.GH30595@bhelgaas-glaptop.roam.corp.google.com>
+ <fea075cf-fe6f-0d0b-11e4-4279fbfc280a@Oracle.COM>
+ <20171215181801.GU30595@bhelgaas-glaptop.roam.corp.google.com>
+ <20171218122629.GA18423@infradead.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gf4b=lw=huawei.com=zhongjiang@srs-us1.protection.inumbo.net>)
- id 1fyds6-00079U-3T
- for xen-devel@lists.xenproject.org; Sat, 08 Sep 2018 14:05:58 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=yo3k=lx=iki.fi=pasik@srs-us1.protection.inumbo.net>)
+ id 1fz4w4-0003IK-F9
+ for xen-devel@lists.xenproject.org; Sun, 09 Sep 2018 18:59:52 +0000
+Content-Disposition: inline
+In-Reply-To: <20171218122629.GA18423@infradead.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,25 +32,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: davem@davemloft.net, paul.durrant@citrix.com, wei.liu2@citrix.com
-Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+To: Christoph Hellwig <hch@infradead.org>
+Cc: jgross@suse.com, Satanand Burla <satananda.burla@caviumnetworks.com>, Govinda Tatti <Govinda.Tatti@Oracle.COM>, Herbert Xu <herbert@gondor.apana.org.au>, linux-pci@vger.kernel.org, Russell Currey <ruscur@russell.cc>, linux-kernel@vger.kernel.org, Derek Chickles <derek.chickles@caviumnetworks.com>, Sinan Kaya <okaya@codeaurora.org>, Srikanth Jampala <Jampala.Srikanth@cavium.com>, Bjorn Helgaas <helgaas@kernel.org>, JBeulich@suse.com, Felix Manlunas <felix.manlunas@caviumnetworks.com>, bhelgaas@google.com, xen-devel@lists.xenproject.org, boris.ostrovsky@Oracle.COM, Raghu Vatsavayi <raghu.vatsavayi@caviumnetworks.com>, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-ZGVidWdmc19yZW1vdmVfcmVjdXJzaXZlIGhhcyB0YWtlbiBJU19FUlJfT1JfTlVMTCBpbnRvIGFj
-Y291bnQuIFNvIGp1c3QKcmVtb3ZlIHRoZSBjb25kaXRpb24gY2hlY2sgYmVmb3JlIGRlYnVnZnNf
-cmVtb3ZlX3JlY3Vyc2l2ZS4KClNpZ25lZC1vZmYtYnk6IHpob25nIGppYW5nIDx6aG9uZ2ppYW5n
-QGh1YXdlaS5jb20+Ci0tLQogZHJpdmVycy9uZXQveGVuLW5ldGJhY2svbmV0YmFjay5jIHwgMyAr
-LS0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYg
-LS1naXQgYS9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay9uZXRiYWNrLmMgYi9kcml2ZXJzL25ldC94
-ZW4tbmV0YmFjay9uZXRiYWNrLmMKaW5kZXggMzYyMWUwNS4uODBhYWUzYSAxMDA2NDQKLS0tIGEv
-ZHJpdmVycy9uZXQveGVuLW5ldGJhY2svbmV0YmFjay5jCisrKyBiL2RyaXZlcnMvbmV0L3hlbi1u
-ZXRiYWNrL25ldGJhY2suYwpAQCAtMTY2MCw4ICsxNjYwLDcgQEAgc3RhdGljIGludCBfX2luaXQg
-bmV0YmFja19pbml0KHZvaWQpCiBzdGF0aWMgdm9pZCBfX2V4aXQgbmV0YmFja19maW5pKHZvaWQp
-CiB7CiAjaWZkZWYgQ09ORklHX0RFQlVHX0ZTCi0JaWYgKCFJU19FUlJfT1JfTlVMTCh4ZW5fbmV0
-YmFja19kYmdfcm9vdCkpCi0JCWRlYnVnZnNfcmVtb3ZlX3JlY3Vyc2l2ZSh4ZW5fbmV0YmFja19k
-Ymdfcm9vdCk7CisJZGVidWdmc19yZW1vdmVfcmVjdXJzaXZlKHhlbl9uZXRiYWNrX2RiZ19yb290
-KTsKICNlbmRpZiAvKiBDT05GSUdfREVCVUdfRlMgKi8KIAl4ZW52aWZfeGVuYnVzX2ZpbmkoKTsK
-IH0KLS0gCjEuNy4xMi40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+T24gTW9uLCBEZWMgMTgsIDIwMTcgYXQgMDQ6MjY6MzBBTSAtMDgwMCwgQ2hyaXN0b3BoIEhlbGx3
+aWcgd3JvdGU6Cj4gT24gRnJpLCBEZWMgMTUsIDIwMTcgYXQgMTI6MTg6MDJQTSAtMDYwMCwgQmpv
+cm4gSGVsZ2FhcyB3cm90ZToKPiA+IEkgdGhpbmsgQ2hyaXN0b3BoIHZvbHVudGVlcmVkIHRvIGRv
+IHNvbWUgcmVzdHJ1Y3R1cmluZywgYnV0IEkgZG9uJ3QKPiA+IGtub3cgaGlzIHRpbWVmcmFtZS4g
+IElmIHlvdSBjYW4sIEkgd291bGQgcHJvYmFibHkgd2FpdCBmb3IgdGhhdAo+ID4gYmVjYXVzZSB0
+aGVyZSdzIHNvIG11Y2ggb3ZlcmxhcCBoZXJlLgo+IAo+IEknbGwgaGF2ZSBzb21lIHRpbWUgb3Zl
+ciB0aGUgaG9saWRheXMuICBJZiB5b3UgbmVlZCBpdCBtb3JlIHVyZ2VudAo+IHRoYW4gdGhhdCBm
+ZWVsIGZyZWUgdG8gdGFrZSBvdmVyLgo+IAoKUmVwbHlpbmcgdG8gYW4gb2xkIHRocmVhZC4uCgpJ
+IG5vdGljZWQgcGNpZV9oYXNfZmxyKCkgaGFzIGJlZW4gcmVjZW50bHkgZXhwb3J0ZWQgaW4gdXBz
+dHJlYW0gTGludXg6Cmh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJuZWwv
+Z2l0L3RvcnZhbGRzL2xpbnV4LmdpdC9jb21taXQvP2lkPTJkMjkxN2Y3NzQ3ODA1YTFmNDE4ODY3
+MmYzMDhkODJhOGJhMDE3MDAKCkFyZSB0aGVyZSBtb3JlIGNoYW5nZXMgLyBjbGVhbnVwcyBwbGFu
+bmVkIHRvIHRoZXNlIGludGVyZmFjZXMsIGFzIG1lbnRpb25lZCBsYXN0IHllYXI/CgooY29udGV4
+dDogeGVuLXBjaWJhY2sgcmVzZXQvZG9fZmxyIGZlYXR1cmVzIHVwc3RyZWFtaW5nLCB3aGljaCBr
+aW5kIG9mIHN0YWxsZWQgbGFzdCB5ZWFyIHdoZW4gcGNpZV9oYXNfZmxyKCkgd2Fzbid0IGV4cG9y
+dGVkIGF0IHRoZSB0aW1lKQoKClRoYW5rcywKCi0tIFBhc2kKCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
