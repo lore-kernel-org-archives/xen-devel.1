@@ -1,16 +1,13 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 127470: all pass - PUSHED
-Date: Mon, 10 Sep 2018 20:13:30 +0000
-Message-ID: <osstest-127470-mainreport@xen.org>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: Updated key wiki documentation
+Date: Mon, 10 Sep 2018 22:45:25 +0200
+Message-ID: <20180910204525.GA5664@mail-itl>
+References: <7F64CE52-24D9-4253-8288-538C0721C9B5@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7709820005107615922=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=kpus=ly=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1fzSYw-0005X4-CU
- for xen-devel@lists.xenproject.org; Mon, 10 Sep 2018 20:13:34 +0000
+In-Reply-To: <7F64CE52-24D9-4253-8288-538C0721C9B5@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,47 +16,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Lars Kurth <lars.kurth.xen@gmail.com>
+Cc: Committers <committers@xenproject.org>, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyNzQ3MCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjc0NzAvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
-dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiBvdm1mICAgICAgICAgICAgICAgICBmNGVhYWYxYTZkNTBjNzYxZTJhZjlhNmRkMDk3NmZi
-OGEzYmQzYzA4CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICA0YjJkYzU1
-NWQ4YTY3ZTcxNWQ4ZmFmYWI0YzkxMzE3OTFkMzFhNzg4CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-Mjc0NjEgIDIwMTgtMDktMTAgMDA6NDA6NTIgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
-ICAgMTI3NDcwICAyMDE4LTA5LTEwIDA3OjQzOjU3IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgSmlhbiBKIFdh
-bmcgPGppYW4uai53YW5nQGludGVsLmNvbT4KICBSdWl5dSBOaSA8cnVpeXUubmlAaW50ZWwuY29t
-PgogIFpoYW5nIENoYW8gQiA8Y2hhby5iLnpoYW5nQGludGVsLmNvbT4KICBaaGFuZywgQ2hhbyBC
-IDxjaGFvLmIuemhhbmdAaW50ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4
-Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2
-LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1
-LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5v
-cmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3Ms
-IGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0
-LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJl
-cG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0
-cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9
-bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDth
-PWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQg
-YXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1t
-YXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhlbi5vcmc6L2hvbWUveGVuL2dp
-dC9vc3N0ZXN0L292bWYuZ2l0CiAgIDRiMmRjNTU1ZDguLmY0ZWFhZjFhNmQgIGY0ZWFhZjFhNmQ1
-MGM3NjFlMmFmOWE2ZGQwOTc2ZmI4YTNiZDNjMDggLT4geGVuLXRlc3RlZC1tYXN0ZXIKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============7709820005107615922==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="jRHKVT23PllUwdXP"
+Content-Disposition: inline
+
+
+--jRHKVT23PllUwdXP
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Sep 10, 2018 at 07:04:49PM +0100, Lars Kurth wrote:
+> See
+> https://wiki.xenproject.org/wiki/Xen_Project_Software_Overview_v2=20
+> and https://wiki.xenproject.org/wiki/Booting_Overview
+> I'd appreciate a look and feedback.=20
+
+On Booting_Overview, the diagram for pvgrub is wrong - kernel+initramfs
+comes from domU filesystem.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--jRHKVT23PllUwdXP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAluW1+UACgkQ24/THMrX
+1yyfhgf/Qn4ZEfJXqW40O90nzeExLbfCKCClCbHtyqsMfqRiIu83RqHIB8loS2f+
+RfTfOMhUxpqYNLc06V8lW2x9XMzXBGJ31AiYvBQ7aXuOEyE42BDl+OJmuikl2gVa
+/gsRiSI8tOtiPYqSMhp981UuhJRwhN7bH9KDy1lEjv6TCsbYz7YmYC/MvLNVMtgh
+0SLp8ZRHu36q+5WXf/AA3o0etiKGiOyDyWNmkS0BtNkysMYEjdbt7UhZmEYiWyX3
+gspxCqY9MmXaFu/fipLVlyQLFqYXum2kxJe+h4PlT69bsd5ZFBiQLep00CVypedv
+6DewYFHvl2hSKmaWnNjvaCE2kBULGQ==
+=UAMy
+-----END PGP SIGNATURE-----
+
+--jRHKVT23PllUwdXP--
+
+
+--===============7709820005107615922==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7709820005107615922==--
