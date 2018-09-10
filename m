@@ -1,13 +1,14 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: Updated key wiki documentation
-Date: Mon, 10 Sep 2018 22:45:25 +0200
-Message-ID: <20180910204525.GA5664@mail-itl>
-References: <7F64CE52-24D9-4253-8288-538C0721C9B5@gmail.com>
+From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
+Subject: Re: L1TF, and future work
+Date: Mon, 10 Sep 2018 15:45:49 -0600
+Message-ID: <CABfawh=irJJsc3cyW+CJX2=hd493+yMsudOGLF7koD+M-r+5Pg@mail.gmail.com>
+References: <4dad178a-91c7-c328-9bc5-4362945d4725@citrix.com>
+ <4a76f789c59f2b580d868e101d9d6cf0a538c660.camel@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7709820005107615922=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <7F64CE52-24D9-4253-8288-538C0721C9B5@gmail.com>
+In-Reply-To: <4a76f789c59f2b580d868e101d9d6cf0a538c660.camel@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,64 +17,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth.xen@gmail.com>
-Cc: Committers <committers@xenproject.org>, xen-devel <xen-devel@lists.xen.org>
+To: Dario Faggioli <dfaggioli@suse.com>
+Cc: JGross@suse.com, sergey.dyasli@citrix.com, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Dario Faggioli <dario.faggioli@citrix.com>, Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>, Jan Beulich <JBeulich@suse.com>, security@xen.org, dwmw@amazon.co.uk, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7709820005107615922==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="jRHKVT23PllUwdXP"
-Content-Disposition: inline
-
-
---jRHKVT23PllUwdXP
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Sep 10, 2018 at 07:04:49PM +0100, Lars Kurth wrote:
-> See
-> https://wiki.xenproject.org/wiki/Xen_Project_Software_Overview_v2=20
-> and https://wiki.xenproject.org/wiki/Booting_Overview
-> I'd appreciate a look and feedback.=20
-
-On Booting_Overview, the diagram for pvgrub is wrong - kernel+initramfs
-comes from domU filesystem.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---jRHKVT23PllUwdXP
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAluW1+UACgkQ24/THMrX
-1yyfhgf/Qn4ZEfJXqW40O90nzeExLbfCKCClCbHtyqsMfqRiIu83RqHIB8loS2f+
-RfTfOMhUxpqYNLc06V8lW2x9XMzXBGJ31AiYvBQ7aXuOEyE42BDl+OJmuikl2gVa
-/gsRiSI8tOtiPYqSMhp981UuhJRwhN7bH9KDy1lEjv6TCsbYz7YmYC/MvLNVMtgh
-0SLp8ZRHu36q+5WXf/AA3o0etiKGiOyDyWNmkS0BtNkysMYEjdbt7UhZmEYiWyX3
-gspxCqY9MmXaFu/fipLVlyQLFqYXum2kxJe+h4PlT69bsd5ZFBiQLep00CVypedv
-6DewYFHvl2hSKmaWnNjvaCE2kBULGQ==
-=UAMy
------END PGP SIGNATURE-----
-
---jRHKVT23PllUwdXP--
-
-
---===============7709820005107615922==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7709820005107615922==--
+T24gRnJpLCBBdWcgMjQsIDIwMTggYXQgMzoxNiBBTSBEYXJpbyBGYWdnaW9saSA8ZGZhZ2dpb2xp
+QHN1c2UuY29tPiB3cm90ZToKPgo+IE9uIFdlZCwgMjAxOC0wOC0xNSBhdCAxNDoxNyArMDEwMCwg
+QW5kcmV3IENvb3BlciB3cm90ZToKPiA+IEhlbGxvLAo+ID4KPiA+IE5vdyB0aGF0IHRoZSBlbWJh
+cmdvIG9uIFhTQS0yNzMgaXMgdXAsIHdlIGNhbiBzdGFydCBwdWJsaWNseQo+ID4gZGlzY3Vzc2lu
+Zwo+ID4gdGhlIHJlbWFpbmluZyB3b3JrIGRvLCBiZWNhdXNlIHRoZXJlIGlzIHBsZW50eSB0byBk
+by4gIEluIG5vCj4gPiBwYXJ0aWN1bGFyCj4gPiBvcmRlci4uLgo+ID4KPiA+Cj4gPiBbLi4uXQo+
+ID4KPiA+IDUpIENvcmUtYXdhcmUgc2NoZWR1bGluZy4gIEF0IHRoZSBtb21lbnQsIFhlbiB3aWxs
+IHNjaGVkdWxlIGFyYml0cmFyeQo+ID4gZ3Vlc3QgdmNwdXMgb24gYXJiaXRyYXJ5IGh5cGVydGhy
+ZWFkcy4gIFRoaXMgaXMgYmFkIGFuZCB3YW50cwo+ID4gZml4aW5nLgo+ID4gSSdsbCBkZWZlciB0
+byBEYXJpbyBmb3IgZnVydGhlciBkZXRhaWxzLgo+ID4KPiBZZXMuIFNvLCBiYXNpY2FsbHksIG1h
+a2luZyBzdXJlIHRoYXQsIGlmIHdlIGhhdmUgaHlwZXJ0aHJlYWRpbmcsIG9ubHkKPiB2Q1BVcyBm
+cm9tIG9uZSBkb21haW4gYXJlLCBhdCBhbnkgZ2l2ZW4gdGltZSwgY29uY3VycmVudGx5IHJ1bm5p
+bmcgb24KPiB0aGUgdGhyZWFkcyBvZiBhIGNvcmUsIGFjdHMgYXMgYSBmb3JtIG9mIG1pdGlnYXRp
+b24uCj4KPiBBcyBhIHJlZmVyZW5jZSwgY2hlY2sgaG93IHRoaXMgaXMgbWVudGlvbmVkIGluIEwx
+VEYgd3JpdGV1cHMgY29taW5nCj4gZnJvbSBvdGhlciBoeXBlcnZpc29yJ3MgdGhhdCBoYXZlIChv
+ciBhcmUgaW50cm9kdWNpbmcpIHN1cHBvcnQgZm9yIHRoaXMKPiBhbHJlYWR5Ogo+Cj4gSHlwZXIt
+VjoKPiBodHRwczovL3N1cHBvcnQubWljcm9zb2Z0LmNvbS9lbi11cy9oZWxwLzQ0NTc5NTEvd2lu
+ZG93cy1zZXJ2ZXItZ3VpZGFuY2UtdG8tcHJvdGVjdC1hZ2FpbnN0LWwxLXRlcm1pbmFsLWZhdWx0
+Cj4KPiBWTVdhcmU6Cj4gaHR0cHM6Ly9rYi52bXdhcmUuY29tL3MvYXJ0aWNsZS81NTgwNgo+Cj4g
+KE1TJyBIeXBlci1WJ3MgY29yZS1zY2hlZHVsZXIgaXMgYWxzbyBtZW50aW9uZWQgaW4gb25lIG9m
+IHRoZSBJbnRlbCdzCj4gZG9jdW1lbnRzCj4gaHR0cHM6Ly93d3cuaW50ZWwuY29tL2NvbnRlbnQv
+d3d3L3VzL2VuL2FyY2hpdGVjdHVyZS1hbmQtdGVjaG5vbG9neS9sMXRmLmh0bWwKPiAgKQo+Cj4g
+SXQncyBub3QgYSAqY29tcGxldGUqIG1pdGlnYXRpb24sIGFuZCwgZS5nLiwgdGhlIG90aGVyIG1l
+YXN1cmVzIChsaWtlCj4gdGhlIEwxRCBmbHVzaGluZyBvbiBWTUVudGVyKSBhcmUgc3RpbGwgcmVx
+dWlyZWQsIGJ1dCBpdCBoZWxwcwo+IHByZXZlbnRpbmcgdGhlIGlzc3VlIG9mIGEgVk0gYmVpbmcg
+YWJsZSB0byByZWFkL3N0ZWFsIGRhdGEgZnJvbSBhbm90aGVyCj4gVk0uCj4KPiBBcyBhbiBleGFt
+cGxlLCBpZiB3ZSBoYXZlIFZNIDEgYW5kIFZNIDIsIHdpdGggZm91ciB2Q1BVcyBlYWNoLCBhbmQg
+YQo+IHR3byBjb3JlIHN5c3RlbSB3aXRoIGh5cGVydGhyZWFkaW5nLCBpLmUuLCBjcHUgMCBhbmQg
+Y3B1IDEgYXJlIHRocmVhZHMKPiBvZiBjb3JlIDAsIHdoaWxlIGNwdSAyIGFuZCBjcHUgMyBhcmUg
+dGhyZWFkcyBvZiBjb3JlIDIsIHdlIHdhbnQgdG8KPiBzY2hlZHVsZSB0aGUgdkNQVXMsIGZvciBp
+bnN0YW5jZSwgbGlrZSB0aGlzOgo+Cj4gY3B1MCA8LS0gZDJ2Mwo+IGNwdTEgPC0tIGQydjEKPiBj
+cHUyIDwtLSBkMXYyCj4gY3B1MyA8LS0gZDF2MAo+Cj4gYW5kIG5vdCBsaWtlIHRoaXM6Cj4KPiBj
+cHUwIDwtLSBkMXYyCj4gY3B1MSA8LS0gZDJ2Mwo+IC4uLgo+Cj4gT2YgY291cnNlLCB0aGlzIG1l
+YW5zIHRoYXQsIGlmIG9ubHkgZDF2MiwgZnJvbSBWTSAxLCBpcyBhY3RpdmUgYW5kCj4gd2FudHMg
+dG8gcnVuLCB3aGlsZSBhbGxlIHRoZSBmb3VyIHZDUFVzIG9mIFZNIDIgYXJlIGFjdGl2ZSBhbmQg
+d2FudCB0bwo+IHJ1biB0b28sIHdlIGNhbiBlbmQgdXAgaW4gdGhpcyBzaXR1YXRpb246Cj4KPiBj
+cHUwIDwtLSBkMXYyCj4gY3B1MSA8LS0gX2lkbGVfCj4gY3B1MiA8LS0gZDJ2MQo+IGNwdTMgPC0t
+IGQydjMKPgo+IHdhbnRpbmdfdG9fcnVuOiBkMnYwLCBkMnYyCj4KPiBJLmUuLCB0aGVyZSBhcmUg
+cmVhZHkgdG8gcnVuIHZDUFVzLCB0aGVyZSBpcyBhbiBpZGxlIHBDUFUsIGJ1dCB3ZSBjYW4ndAo+
+IHJ1biB0aGVtIHRoZXJlLiBUaGlzIGlzIG5vdCBpZGVhbCwgYnV0IGlzLCBhdCBsZWFzdCBpbiB0
+aGVvcnksIGJldHRlcgo+IHRoYW4gZGlzYWJsaW5nIGh5cGVydGhyZWFkaW5nIGVudGlyZWx5LiAo
+QWdhaW4sIHRoZXNlIGFyZSBhbGwganVzdAo+IGV4YW1wbGVzISkKPgo+IE9mIGNvdXJzZSwgdGhp
+cyBtYWtlcyB0aGUgc2NoZWR1bGluZyBtdWNoIG1vcmUgY29tcGxpY2F0ZWQsIGVzcGVjaWFsbHkK
+PiB3aGVuIGl0IGNvbWVzIHRvIGZhaXJuZXNzIGNvbnNpZGVyYXRpb25zIGFuZCB0byBhdm9pZGlu
+ZyBzdGFydmF0aW9uLgo+Cj4gSSBkbyBoYXZlIGFuIFJGQyBsZXZlbCBwYXRjaCBzZXJpZXMsIGZv
+ciBzdGFydGluZyBpbXBsZW1lbnRpbmcgdGhpcwo+ICJjb3JlLXNjaGVkdWxpbmciLCB3aGljaCBJ
+IGhhdmUgc2hhcmVkIHdpdGggc29tZW9uZSwgZHVyaW5nIHRoZQo+IGVtYmFyZ28sIGFuZCB0aGF0
+IEkgd2lsbCBwb3N0IGhlcmUgb24geGVuLWRldmVsIGxhdGVyLgo+Cj4gTm90ZSB0aGF0IEknbGwg
+YmUgb2ZmIGZvciB+MiB3ZWVrcywgZWZmZWN0aXZlIG5leHQgTW9uZGF5LCBzbyBmZWVsIGZyZWUK
+PiB0byBjb21tZW50LCByZXBseSwgZXRjLCBidXQgZXhwZWN0IG1lIHRvIHJlcGx5IGJhY2sgb25s
+eSBpbiBTZXB0ZW1iZXIuCgpIaSBEYXJpbywKb25jZSB5b3UgYXJlIGJhY2sgZnJvbSB2YWNhdGlv
+biwgY291bGQgeW91IHNoYXJlIHRoZSBSRkMgcGF0Y2hlcyB5b3UgbWVudGlvbmVkPwoKVGhhbmtz
+LApUYW1hcwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
