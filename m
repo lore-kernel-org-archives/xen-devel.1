@@ -1,18 +1,20 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v4] xen: avoid crash in disable_hotplug_cpu
-Date: Tue, 11 Sep 2018 09:52:58 +0200
-Message-ID: <20180911095258.5ed9e9b7.olaf__42796.6649797328$1536652319$gmane$org@aepfle.de>
-References: <20180907143135.29608-1-olaf@aepfle.de>
- <4f623671-e1aa-1804-449c-a26b0c4b9ce9@oracle.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2] x86: use VMLOAD for PV context switch
+Date: Tue, 11 Sep 2018 01:54:59 -0600
+Message-ID: <5B9774D302000078001E7015@prv1-mh.provo.novell.com>
+References: <5B9679C702000078001E6CF7@prv1-mh.provo.novell.com>
+ <3d0b8574-c9f8-5248-d8f4-80ecaff7ef50@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7070636971738417274=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=lvjd=lz=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1fzdU3-0002dz-Ph
- for xen-devel@lists.xenproject.org; Tue, 11 Sep 2018 07:53:16 +0000
-In-Reply-To: <4f623671-e1aa-1804-449c-a26b0c4b9ce9@oracle.com>
+ (envelope-from <srs0=zj+h=lz=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1fzdVo-0002pn-AC
+ for xen-devel@lists.xenproject.org; Tue, 11 Sep 2018 07:55:04 +0000
+In-Reply-To: <3d0b8574-c9f8-5248-d8f4-80ecaff7ef50@oracle.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,55 +24,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, open list <linux-kernel@vger.kernel.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7070636971738417274==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/CPClJ/MMcjkzZUX9ZJc226I"; protocol="application/pgp-signature"
-
---Sig_/CPClJ/MMcjkzZUX9ZJc226I
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Am Fri, 7 Sep 2018 12:56:37 -0400
-schrieb Boris Ostrovsky <boris.ostrovsky@oracle.com>:
-
-> I was hoping you'd respond to my question about warning.
-
-It looks like CONFIG_BOOTPARAM_HOTPLUG_CPU0=3Dy is the reason for the warni=
-ng.
-As J=C3=BCrgen suggested in another mail, Xen should probably disable hotpl=
-ugging
-for cpu#0 in the generic setup code. Then cpu_is_hotpluggable(cpu) would
-do the right thing.
-
-Do you want me to merge that extra change into this patch?
-
-Olaf
-
---Sig_/CPClJ/MMcjkzZUX9ZJc226I
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW5d0WgAKCRBdQqD6ppg2
-flNNAKCxtgFIZPAviAgZkf3DXwrkLC/2EQCg751qjqAtbIv/pXtyiEZ23CD7CA8=
-=J0Xp
------END PGP SIGNATURE-----
-
---Sig_/CPClJ/MMcjkzZUX9ZJc226I--
-
-
---===============7070636971738417274==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+Pj4+IE9uIDEwLjA5LjE4IGF0IDIzOjU2LCA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+IHdy
+b3RlOgo+IE9uIDA5LzEwLzIwMTggMTA6MDMgQU0sIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBIYXZp
+bmcgbm90aWNlZCB0aGF0IFZNTE9BRCBhbG9uZSBpcyBhYm91dCBhcyBmYXN0IGFzIGEgc2luZ2xl
+IG9mIHRoZQo+PiBpbnZvbHZlZCBXUk1TUnMsIEkgdGhvdWdodCBpdCBtaWdodCBiZSBhIHJlYXNv
+bmFibGUgaWRlYSB0byBhbHNvIHVzZSBpdAo+PiBmb3IgUFYuIE1lYXN1cmVtZW50cywgaG93ZXZl
+ciwgaGF2ZSBzaG93biB0aGF0IGFuIGFjdHVhbCBpbXByb3ZlbWVudCBjYW4KPj4gYmUgYWNoaWV2
+ZWQgb25seSB3aXRoIGFuIGVhcmx5IHByZWZldGNoIG9mIHRoZSBWTUNCICh0aGFua3MgdG8gQW5k
+cmV3Cj4+IGZvciBzdWdnZXN0aW5nIHRvIHRyeSB0aGlzKSwgd2hpY2ggSSBoYXZlIHRvIGFkbWl0
+IEkgY2FuJ3QgcmVhbGx5Cj4+IGV4cGxhaW4uIFRoaXMgd2F5IG9uIG15IEZhbTE1IGJveCBjb250
+ZXh0IHN3aXRjaCB0YWtlcyBvdmVyIDEwMCBjbG9ja3MKPj4gbGVzcyBvbiBhdmVyYWdlICh0aGUg
+bWVhc3VyZWQgdmFsdWVzIGFyZSBoZWF2aWx5IHZhcnlpbmcgaW4gYWxsIGNhc2VzLAo+PiB0aG91
+Z2gpLgo+Pgo+PiBUaGlzIGlzIGludGVudGlvbmFsbHkgbm90IHVzaW5nIGEgbmV3IGh2bV9mdW5j
+cyBob29rOiBGb3Igb25lLCB0aGlzIGlzCj4+IGFsbCBhYm91dCBQViwgYW5kIHNvbWV0aGluZyBz
+aW1pbGFyIGNhbiBoYXJkbHkgYmUgZG9uZSBmb3IgVk1YLgo+PiBGdXJ0aGVybW9yZSB0aGUgaW5k
+aXJlY3QgdG8gZGlyZWN0IGNhbGwgcGF0Y2hpbmcgdGhhdCBpcyBtZWFudCB0byBiZQo+PiBhcHBs
+aWVkIHRvIG1vc3QgaHZtX2Z1bmNzIGhvb2tzIHdvdWxkIGJlIHVnbHkgdG8gbWFrZSB3b3JrIHdp
+dGgKPj4gZnVuY3Rpb25zIGhhdmluZyBtb3JlIHRoYW4gNiBwYXJhbWV0ZXJzLgo+Pgo+PiBTaWdu
+ZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4+IEFja2VkLWJ5OiBC
+cmlhbiBXb29kcyA8YnJpYW4ud29vZHNAYW1kLmNvbT4KPj4gLS0tCj4+IHYyOiBSZS1iYXNlLgo+
+PiAtLS0KPj4gQmVzaWRlcyB0aGUgbWVudGlvbmVkIG9kZGl0eSB3aXRoIG1lYXN1cmVkIHBlcmZv
+cm1hbmNlLCBJJ3ZlIGFsc28KPj4gbm90aWNlZCBhIHNpZ25pZmljYW50IGRpZmZlcmVuY2UgKG9m
+IGF0IGxlYXN0IDE1MCBjbG9ja3MpIGJldHdlZW4KPj4gbWVhc3VyaW5nIGltbWVkaWF0ZWx5IGFy
+b3VuZCB0aGUgY2FsbHMgdG8gc3ZtX2xvYWRfc2VncygpIGFuZCBtZWFzdXJpbmcKPj4gaW1tZWRp
+YXRlbHkgaW5zaWRlIHRoZSBmdW5jdGlvbi4KPj4KPiAKPiAKPj4gIAo+PiArI2lmZGVmIENPTkZJ
+R19QVgo+PiArYm9vbCBzdm1fbG9hZF9zZWdzKHVuc2lnbmVkIGludCBsZHRfZW50cywgdW5zaWdu
+ZWQgbG9uZyBsZHRfYmFzZSwKPj4gKyAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBpbnQgZnNf
+c2VsLCB1bnNpZ25lZCBsb25nIGZzX2Jhc2UsCj4+ICsgICAgICAgICAgICAgICAgICAgdW5zaWdu
+ZWQgaW50IGdzX3NlbCwgdW5zaWduZWQgbG9uZyBnc19iYXNlLAo+PiArICAgICAgICAgICAgICAg
+ICAgIHVuc2lnbmVkIGxvbmcgZ3Nfc2hhZG93KQo+PiArewo+PiArICAgIHVuc2lnbmVkIGludCBj
+cHUgPSBzbXBfcHJvY2Vzc29yX2lkKCk7Cj4+ICsgICAgc3RydWN0IHZtY2Jfc3RydWN0ICp2bWNi
+ID0gcGVyX2NwdShob3N0X3ZtY2JfdmEsIGNwdSk7Cj4+ICsKPj4gKyAgICBpZiAoIHVubGlrZWx5
+KCF2bWNiKSApCj4+ICsgICAgICAgIHJldHVybiBmYWxzZTsKPj4gKwo+PiArICAgIGlmICggIWxk
+dF9iYXNlICkKPj4gKyAgICB7Cj4+ICsgICAgICAgIGFzbSB2b2xhdGlsZSAoICJwcmVmZXRjaCAl
+MCIgOjogIm0iICh2bWNiLT5sZHRyKSApOwo+PiArICAgICAgICByZXR1cm4gdHJ1ZTsKPiAKPiAK
+PiBDb3VsZCB5b3UgZXhwbGFpbiB3aHkgdGhpcyBpcyB0cnVlPyBXZSBoYXZlbid0IGxvYWRlZCBG
+Uy9HUyBoZXJlLgoKQSB6ZXJvIGxkdF9iYXNlIGFyZ3VtZW50IGluZGljYXRlcyBhIHByZWZldGNo
+IHJlcXVlc3QuIFRoaXMgaXMgYW4KYWdyZWVtZW50IGJldHdlZW4gY2FsbGVycyBvZiB0aGUgZnVu
+Y3Rpb24gYW5kIGl0cyBpbXBsZW1lbnRhdGlvbi4KCj4gSSBhbHNvIGNvdWxkbid0IGZpbmQgZGlz
+Y3Vzc2lvbiBhYm91dCBwcmVmZXRjaCAtLS0gd2h5IGlzIHByZWZldGNoaW5nCj4gbGR0ciBleHBl
+Y3RlZCB0byBoZWxwPwoKU2VlIHRoZSBwYXRjaCBkZXNjcmlwdGlvbi4gbGR0ciBhcyB0aGUgZWxl
+bWVudCBpcyBhIHByZXR0eSByYW5kb20KY2hvaWNlIGJldHdlZW4gdGhlIHZhcmlvdXMgZmllbGRz
+IFZNTE9BRCB0b3VjaGVzLiBJdCdzIChwcmVzdW1hYmx5KQptb3JlIHRoZSBwYWdlIHdhbGsgdGhh
+biB0aGUgYWN0dWFsIGNhY2hlIGxpbmUocykgdGhhdCB3ZSB3YW50IHRvCmJlIHB1bGxlZCBpbiBh
+aGVhZCBvZiB0aW1lLiBJIGNhbiBvbmx5IGd1ZXNzIHRoYXQgVk1MT0FEIGV4ZWN1dGlvbgppcyBt
+b3JlICJzeW5jaHJvbm91cyIgd3J0IGl0cyBtZW1vcnkgYWNjZXNzZXMgYW5kL29yIGxhdGVuY3kg
+dG8KY29tcGxldGlvbiB0aGFuIG90aGVyIChzaW1wbGVyKSBpbnN0cnVjdGlvbnMuCgpKYW4KCgoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7070636971738417274==--
