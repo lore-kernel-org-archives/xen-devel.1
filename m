@@ -1,16 +1,16 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [ovmf baseline-only test] 75193: trouble: blocked/broken
-Date: Tue, 11 Sep 2018 03:04:58 +0100
-Message-ID: <osstest-75193-mainreport@xen.org>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [linux-linus bisection] complete
+ test-amd64-amd64-qemuu-nested-amd
+Date: Tue, 11 Sep 2018 02:17:32 +0000
+Message-ID: <E1fzYFA-0003uo-NB@osstest.test-lab.xenproject.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5203987469524196661=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=86mt=lz=xenproject.org=prvs=785c18460=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1fzY35-0007DX-HZ
- for xen-devel@lists.xenproject.org; Tue, 11 Sep 2018 02:05:03 +0000
+ <srs0=qnbd=lz=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1fzYFH-0008Dp-3p
+ for xen-devel@lists.xenproject.org; Tue, 11 Sep 2018 02:17:39 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,176 +22,312 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
-NTE5MyBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
-dC9sb2dzLzc1MTkzLwoKRmFpbHVyZXMgYW5kIHByb2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0
-cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3Rz
-IHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAg
-IDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2ICAgICAgICAg
-ICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1h
-bWQ2NC1wdm9wcyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJv
-a2VuCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAg
-ICAgICAgICAgYnJva2VuCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3Rh
-dHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAg
-ICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCgpUZXN0cyB3aGljaCBkaWQg
-bm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
-ZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9h
-CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
-ICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAg
-MSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgYmxvY2tlZCBuL2EKIGJ1aWxkLWkzODYtbGli
-dmlydCAgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBu
-L2EKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAg
-IGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAg
-NCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVzdGVkCiBidWlsZC1p
-Mzg2LXhzbSAgICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICBicm9rZW4gYmFz
-ZWxpbmUgdW50ZXN0ZWQKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgIDQgaG9zdC1pbnN0
-YWxsKDQpICAgICAgIGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtYW1kNjQteHNtICAg
-ICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVz
-dGVkCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAg
-ICBicm9rZW4gYmFzZWxpbmUgdW50ZXN0ZWQKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6
-CiBvdm1mICAgICAgICAgICAgICAgICBmNGVhYWYxYTZkNTBjNzYxZTJhZjlhNmRkMDk3NmZiOGEz
-YmQzYzA4CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICA0YjJkYzU1NWQ4
-YTY3ZTcxNWQ4ZmFmYWI0YzkxMzE3OTFkMzFhNzg4CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAgNzUx
-OTAgIDIwMTgtMDktMTAgMDc6NTA6MTQgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAg
-IDc1MTkzICAyMDE4LTA5LTEwIDIwOjIwOjEyIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgSmlhbiBKIFdhbmcg
-PGppYW4uai53YW5nQGludGVsLmNvbT4KICBSdWl5dSBOaSA8cnVpeXUubmlAaW50ZWwuY29tPgog
-IFpoYW5nIENoYW8gQiA8Y2hhby5iLnpoYW5nQGludGVsLmNvbT4KICBaaGFuZywgQ2hhbyBCIDxj
-aGFvLmIuemhhbmdAaW50ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtaTM4Ni14
-c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAg
-CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgYnJva2VuICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiBidWlsZC1pMzg2LWxp
-YnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAK
-IGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBicm9rZW4gIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92
-bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4
-Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAoK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QueHMuY2l0cml0ZS5uZXQKbG9nczogL2hv
-bWUvb3NzdGVzdC9sb2dzCmltYWdlczogL2hvbWUvb3NzdGVzdC9pbWFnZXMKCkxvZ3MsIGNvbmZp
-ZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vb3NzdGVzdC54ZW5zb3Vy
-Y2UuY29tL29zc3Rlc3QvbG9ncwoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAg
-ICBodHRwOi8veGVuYml0cy54ZW5zb3VyY2UuY29tL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3Vt
-bWFyeQoKYnJva2VuLWpvYiBidWlsZC1hbWQ2NC14c20gYnJva2VuCmJyb2tlbi1qb2IgYnVpbGQt
-aTM4NiBicm9rZW4KYnJva2VuLWpvYiBidWlsZC1hbWQ2NC1wdm9wcyBicm9rZW4KYnJva2VuLWpv
-YiBidWlsZC1pMzg2LXhzbSBicm9rZW4KYnJva2VuLWpvYiBidWlsZC1hbWQ2NCBicm9rZW4KYnJv
-a2VuLWpvYiBidWlsZC1pMzg2LXB2b3BzIGJyb2tlbgpicm9rZW4tc3RlcCBidWlsZC1pMzg2IGhv
-c3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1pMzg2LXB2b3BzIGhvc3QtaW5zdGFsbCg0
-KQpicm9rZW4tc3RlcCBidWlsZC1pMzg2LXhzbSBob3N0LWluc3RhbGwoNCkKYnJva2VuLXN0ZXAg
-YnVpbGQtYW1kNjQtcHZvcHMgaG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWFtZDY0
-LXhzbSBob3N0LWluc3RhbGwoNCkKYnJva2VuLXN0ZXAgYnVpbGQtYW1kNjQgaG9zdC1pbnN0YWxs
-KDQpCgpQdXNoIG5vdCBhcHBsaWNhYmxlLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCBmNGVhYWYxYTZkNTBjNzYxZTJh
-ZjlhNmRkMDk3NmZiOGEzYmQzYzA4CkF1dGhvcjogUnVpeXUgTmkgPHJ1aXl1Lm5pQGludGVsLmNv
-bT4KRGF0ZTogICBGcmkgQXVnIDMxIDE2OjU1OjM2IDIwMTggKzA4MDAKCiAgICBFbXVsYXRvci9X
-aW46IEZpeCBidWlsZCBmYWlsdXJlIHVzaW5nIFZTMjAxNXg4NiBvciBvbGQgV2luU0RLCiAgICAK
-ICAgIFdoZW4gYnVpbGQgd2l0aCBXaW5TREsgPD0gV2luMTAgVEgyLCB0aGUgdGVybWluYWwgb3Zl
-ciBDTUQuZXhlCiAgICBkb2Vzbid0IHdvcmsuIEJlY2F1c2UgV2luMTAgbGF0ZXIgdGhhbiBUSDIg
-c3RhcnRzIHRvIHN1cHBvcnQgVlQKICAgIHRlcm1pbmFsLgogICAgCiAgICBDb250cmlidXRlZC11
-bmRlcjogVGlhbm9Db3JlIENvbnRyaWJ1dGlvbiBBZ3JlZW1lbnQgMS4xCiAgICBTaWduZWQtb2Zm
-LWJ5OiBSdWl5dSBOaSA8cnVpeXUubmlAaW50ZWwuY29tPgogICAgQ2M6IE1pY2hhZWwgRCBLaW5u
-ZXkgPG1pY2hhZWwuZC5raW5uZXlAaW50ZWwuY29tPgogICAgUmV2aWV3ZWQtYnk6IEhhbyBBIFd1
-IDxoYW8uYS53dUBpbnRlbC5jb20+Cgpjb21taXQgMjg5Y2I4NzJlZGMyYjgyNjUzNGIzZmY2MzRk
-MjVmMjQzMGJmODdkNQpBdXRob3I6IFJ1aXl1IE5pIDxydWl5dS5uaUBpbnRlbC5jb20+CkRhdGU6
-ICAgRnJpIEF1ZyAzMSAxMTozNTo1OCAyMDE4ICswODAwCgogICAgRW11bGF0b3JQa2c6IFVwZGF0
-ZSBwYWNrYWdlIGxldmVsIFJlYWRtZS5tZAogICAgCiAgICBTaW5jZSB0aGUgZW11bGF0b3IgdW5k
-ZXIgV2luZG93cyBpcyBlbmFibGVkLCB0aGUgcGF0Y2ggY2hhbmdlcwogICAgUkVBRE1FIHRvIGlu
-Y2x1ZGUgdGhlIGluZm9ybWF0aW9uIG9mIGVtdWxhdG9yIHVuZGVyIFdpbmRvd3MuCiAgICBJdCBh
-bHNvIGNoYW5nZXMgUkVBRE1FIHRvIFJlYWRtZS5tZCBmb3IgYmV0dGVyIGxvb2tpbmcuCiAgICAK
-ICAgIENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAx
-LjEKICAgIFNpZ25lZC1vZmYtYnk6IFJ1aXl1IE5pIDxydWl5dS5uaUBpbnRlbC5jb20+CiAgICBD
-YzogTWljaGFlbCBEIEtpbm5leSA8bWljaGFlbC5kLmtpbm5leUBpbnRlbC5jb20+CiAgICBSZXZp
-ZXdlZC1ieTogSGFvIEEgV3UgPGhhby5hLnd1QGludGVsLmNvbT4KCmNvbW1pdCAzNGMzNDA1Y2I3
-NGMyMmE3ZDgxYjVhZWU2NWYwZmMyYTQ1YzhkZmFlCkF1dGhvcjogUnVpeXUgTmkgPHJ1aXl1Lm5p
-QGludGVsLmNvbT4KRGF0ZTogICBGcmkgU2VwIDcgMTg6MTI6NDYgMjAxOCArMDgwMAoKICAgIFVl
-ZmlDcHVQa2cvUGVpQ3B1RXhjZXB0aW9uOiBGaXggY29kaW5nIHN0eWxlIGlzc3VlCiAgICAKICAg
-IENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAxLjEK
-ICAgIFNpZ25lZC1vZmYtYnk6IFJ1aXl1IE5pIDxydWl5dS5uaUBpbnRlbC5jb20+CiAgICBSZXZp
-ZXdlZC1ieTogRGFuZGFuIEJpIDxkYW5kYW4uYmlAaW50ZWwuY29tPgoKY29tbWl0IDNhMzQ3NTMz
-MTI3NWJjYTE5MDcxODU1NzI0N2EzN2IyN2IwODNhMmEKQXV0aG9yOiBaaGFuZywgQ2hhbyBCIDxj
-aGFvLmIuemhhbmdAaW50ZWwuY29tPgpEYXRlOiAgIEZyaSBTZXAgNyAxNjozNTowOSAyMDE4ICsw
-ODAwCgogICAgU2VjdXJpdHlQa2c6IEhhc2hMaWI6IENoYW5nZSBkb3MgZm9ybWF0CiAgICAKICAg
-IENoYW5nZSBmaWxlIGZvcm1hdCB0byBET1MKICAgIAogICAgQ2M6IEJpIERhbmRhbiA8ZGFuZGFu
-LmJpQGludGVsLmNvbT4KICAgIENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0
-aW9uIEFncmVlbWVudCAxLjEKICAgIFNpZ25lZC1vZmYtYnk6IFpoYW5nIENoYW8gQiA8Y2hhby5i
-LnpoYW5nQGludGVsLmNvbT4KICAgIFJldmlld2VkLWJ5OiBCaSBEYW5kYW4gPGRhbmRhbi5iaUBp
-bnRlbC5jb20+Cgpjb21taXQgMGEwZDUyOTZlNDQ4ZmMzNTBkZTE1OTRjNDliOWMwZGVmZjdmYWQ2
-MApBdXRob3I6IEppYW4gSiBXYW5nIDxqaWFuLmoud2FuZ0BpbnRlbC5jb20+CkRhdGU6ICAgTW9u
-IFNlcCAzIDEwOjU2OjA3IDIwMTggKzA4MDAKCiAgICBVZWZpQ3B1UGtnL0NwdU1wUGVpOiBzdXBw
-b3J0IHN0YWNrIGd1YXJkIGZlYXR1cmUKICAgIAogICAgVGhpcyBmZWF0dXJlIGlzIHRoZSBzYW1l
-IGFzIFN0YWNrIEd1YXJkIGVuYWJsZWQgaW4gZHJpdmVyIENwdUR4ZSBidXQKICAgIGFwcGxpZXMg
-dG8gUEVJIHBoYXNlLiBEdWUgdG8gdGhlIHNwZWNpYWx0eSBpbiBQRUkgbW9kdWxlIGRpc3BhdGNo
-aW5nLAogICAgdGhpcyBkcml2ZXIgaXMgY2hhbmdlZCB0byBkbyB0aGUgYWN0dWFsIGluaXRpYWxp
-emF0aW9uIGluIG5vdGlmeQogICAgY2FsbGJhY2sgb2YgZXZlbnQgZ0VmaVBlaU1lbW9yeURpc2Nv
-dmVyZWRQcGlHdWlkLiBUaGlzIGNhbiBsZXQgdGhlCiAgICBzdGFjayBndWFyZCBhcHBseSB0byBh
-cyBtb3N0IFBFSSBkcml2ZXJzIGFzIHBvc3NpYmxlLgogICAgCiAgICBUbyBsZXQgU3RhY2sgR3Vh
-cmQgd29yaywgc29tZSBzaW1wbGUgcGFnZSB0YWJsZSBtYW5hZ2VtZW50IGNvZGUgYXJlCiAgICBp
-bnRyb2R1Y2VkIHRvIHNldHVwIEd1YXJkIHBhZ2UgYXQgYmFzZSBvZiBzdGFjayBmb3IgZWFjaCBw
-cm9jZXNzb3IuCiAgICAKICAgIENjOiBFcmljIERvbmcgPGVyaWMuZG9uZ0BpbnRlbC5jb20+CiAg
-ICBDYzogTGFzemxvIEVyc2VrIDxsZXJzZWtAcmVkaGF0LmNvbT4KICAgIENjOiBSdWl5dSBOaSA8
-cnVpeXUubmlAaW50ZWwuY29tPgogICAgQ2M6IEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwu
-Y29tPgogICAgQ2M6IFN0YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KICAgIENjOiAiV2Fy
-ZSwgUnlhbiBSIiA8cnlhbi5yLndhcmVAaW50ZWwuY29tPgogICAgQ29udHJpYnV0ZWQtdW5kZXI6
-IFRpYW5vQ29yZSBDb250cmlidXRpb24gQWdyZWVtZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTog
-SmlhbiBKIFdhbmcgPGppYW4uai53YW5nQGludGVsLmNvbT4KICAgIFJlZ3Jlc3Npb24tdGVzdGVk
-LWJ5OiBMYXN6bG8gRXJzZWsgPGxlcnNla0ByZWRoYXQuY29tPgogICAgUmV2aWV3ZWQtYnk6IEVy
-aWMgRG9uZyA8ZXJpYy5kb25nQGludGVsLmNvbT4KCmNvbW1pdCBlMDliNmI1OTUzZGIzOGRiODdi
-ODRjODBhMmU5NWE4MmExYzkxMDIwCkF1dGhvcjogSmlhbiBKIFdhbmcgPGppYW4uai53YW5nQGlu
-dGVsLmNvbT4KRGF0ZTogICBNb24gU2VwIDMgMTA6NDc6NTQgMjAxOCArMDgwMAoKICAgIFVlZmlD
-cHVQa2cvTXBJbml0TGliOiBmaXggcmVnaXN0ZXIgcmVzdG9yZSBpc3N1ZSBpbiBBUCB3YWtldXAK
-ICAgIAogICAgVGhlIGNvbmZsaWN0IGlzc3VlcyBhcmUgaW50cm9kdWNlZCBieSBTdGFjayBHdWFy
-ZCBmZWF0dXJlIGVuYWJsZWQgZm9yCiAgICBQRUkuCiAgICAKICAgIFRoZSBmaXJzdCBpcyBDUjAg
-d2hpY2ggc2hvdWxkIGJlIHJlc3RvcmVkIGFmdGVyIENSMyBhbmQgQ1I0LgogICAgQW5vdGhlciBp
-cyBUUiB3aGljaCBzaG91bGQgbm90IGJlIHBhc3NlZCBmcm9tIEJTUCB0byBBUCBkdXJpbmcgaW5p
-dAogICAgcGhhc2UuCiAgICAKICAgIENjOiBFcmljIERvbmcgPGVyaWMuZG9uZ0BpbnRlbC5jb20+
-CiAgICBDYzogTGFzemxvIEVyc2VrIDxsZXJzZWtAcmVkaGF0LmNvbT4KICAgIENjOiBSdWl5dSBO
-aSA8cnVpeXUubmlAaW50ZWwuY29tPgogICAgQ2M6IEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50
-ZWwuY29tPgogICAgQ2M6IFN0YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KICAgIENjOiAi
-V2FyZSwgUnlhbiBSIiA8cnlhbi5yLndhcmVAaW50ZWwuY29tPgogICAgQ29udHJpYnV0ZWQtdW5k
-ZXI6IFRpYW5vQ29yZSBDb250cmlidXRpb24gQWdyZWVtZW50IDEuMQogICAgU2lnbmVkLW9mZi1i
-eTogSmlhbiBKIFdhbmcgPGppYW4uai53YW5nQGludGVsLmNvbT4KICAgIFJlZ3Jlc3Npb24tdGVz
-dGVkLWJ5OiBMYXN6bG8gRXJzZWsgPGxlcnNla0ByZWRoYXQuY29tPgogICAgUmV2aWV3ZWQtYnk6
-IEVyaWMgRG9uZyA8ZXJpYy5kb25nQGludGVsLmNvbT4KCmNvbW1pdCBmYzBlN2ZkNWU4YWFkMTkz
-ZmNjMzQ3OTYzNGQ1YzY5OTk2ZjY0NjBhCkF1dGhvcjogSmlhbiBKIFdhbmcgPGppYW4uai53YW5n
-QGludGVsLmNvbT4KRGF0ZTogICBNb24gU2VwIDMgMTA6MzY6MjEgMjAxOCArMDgwMAoKICAgIFVl
-ZmlDcHVQa2cvQ3B1RXhjZXB0aW9uSGFuZGxlckxpYjogc3VwcG9ydCBzdGFjayBzd2l0Y2ggZm9y
-IFBFSSBleGNlcHRpb25zCiAgICAKICAgIFN0YWNrIEd1YXJkIG5lZWRzIHRvIHNldHVwIHN0YWNr
-IHN3aXRjaCBjYXBhYmlsaXR5IHRvIGFsbG93IGV4Y2VwdGlvbgogICAgaGFuZGxlciB0byBiZSBj
-YWxsZWQgd2l0aCBnb29kIHN0YWNrIGlmIHN0YWNrIG92ZXJmbG93IGlzIGRldGVjdGVkLgogICAg
-VGhpcyBwYXRjaCB1cGRhdGUgSW5pdGlhbGl6ZUNwdUV4Y2VwdGlvbkhhbmRsZXJzRXgoKSB0byBh
-bGxvdyBwYXNzCiAgICBleHRyYSBpbml0aWFsaXphdGlvbiBkYXRhIHVzZWQgdG8gc2V0dXAgZXhj
-ZXB0aW9uIHN0YWNrIHN3aXRjaCBmb3IKICAgIHNwZWNpZmllZCBleGNlcHRpb25zLgogICAgCiAg
-ICBDYzogRXJpYyBEb25nIDxlcmljLmRvbmdAaW50ZWwuY29tPgogICAgQ2M6IExhc3psbyBFcnNl
-ayA8bGVyc2VrQHJlZGhhdC5jb20+CiAgICBDYzogUnVpeXUgTmkgPHJ1aXl1Lm5pQGludGVsLmNv
-bT4KICAgIENjOiBKaWV3ZW4gWWFvIDxqaWV3ZW4ueWFvQGludGVsLmNvbT4KICAgIENjOiBTdGFy
-IFplbmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+CiAgICBDYzogIldhcmUsIFJ5YW4gUiIgPHJ5YW4u
-ci53YXJlQGludGVsLmNvbT4KICAgIENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJp
-YnV0aW9uIEFncmVlbWVudCAxLjEKICAgIFNpZ25lZC1vZmYtYnk6IEppYW4gSiBXYW5nIDxqaWFu
-Lmoud2FuZ0BpbnRlbC5jb20+CiAgICBSZWdyZXNzaW9uLXRlc3RlZC1ieTogTGFzemxvIEVyc2Vr
-IDxsZXJzZWtAcmVkaGF0LmNvbT4KICAgIFJldmlld2VkLWJ5OiBFcmljIERvbmcgPGVyaWMuZG9u
-Z0BpbnRlbC5jb20+Cgpjb21taXQgMmFmMjk4OGYzYTAyNjhiMDJkODdhOTdkNWI2ZDdiNjViMTdj
-MGIwMwpBdXRob3I6IEppYW4gSiBXYW5nIDxqaWFuLmoud2FuZ0BpbnRlbC5jb20+CkRhdGU6ICAg
-VGh1IEF1ZyAyMyAxNTo1ODozMSAyMDE4ICswODAwCgogICAgTWRlTW9kdWxlUGtnL0R4ZUlwbDog
-ZGlzYWJsZSBwYWdpbmcgYmVmb3JlIGNyZWF0aW5nIG5ldyBwYWdlIHRhYmxlCiAgICAKICAgIFBF
-SSBTdGFjayBHdWFyZCBuZWVkcyB0byBlbmFibGUgcGFnaW5nIGJlZm9yZSBEeGVJcGwuIFRoaXMg
-bWlnaHQgY2F1c2UKICAgICNHUCBpbiB0aGUgdHJhbnNpdGlvbiBmcm9tIDMyLWJpdCBQRUkgdG8g
-NjQtYml0IERYRSBkdWUgdG8gdGhlIGNvZGUKICAgIHRyeWluZyB0byB3cml0ZSBDUjMgcmVnaXN0
-ZXIgd2l0aCBQTUw0IHBhZ2UgdGFibGUgd2hpbGUgdGhlIHByb2Nlc3NvcgogICAgaXMgZW5hYmxl
-ZCB3aXRoIFBBRSBwYWdpbmcuCiAgICAKICAgIFNpbXBseSBkaXNhYmxpbmcgcGFnaW5nIGJlZm9y
-ZSB1cGRhdGluZyBDUjMgY2FuIHNvbHZlIHRoaXMgY29uZmxpY3QuCiAgICBUaGVyZSdzIG5vIHN1
-Y2ggaXNzdWUgZm9yIDY0LWJpdCBQRUkgc28gdGhpcyBjaGFuZ2UgYXBwbGllcyBvbmx5IHRvCiAg
-ICAzMi1iaXQgY29kZS4KICAgIAogICAgQ2M6IFN0YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNv
-bT4KICAgIENjOiBSdWl5dSBOaSA8cnVpeXUubmlAaW50ZWwuY29tPgogICAgQ2M6IEppZXdlbiBZ
-YW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgogICAgQ2M6ICJXYXJlLCBSeWFuIFIiIDxyeWFuLnIu
-d2FyZUBpbnRlbC5jb20+CiAgICBDb250cmlidXRlZC11bmRlcjogVGlhbm9Db3JlIENvbnRyaWJ1
-dGlvbiBBZ3JlZW1lbnQgMS4xCiAgICBTaWduZWQtb2ZmLWJ5OiBKaWFuIEogV2FuZyA8amlhbi5q
-LndhbmdAaW50ZWwuY29tPgogICAgUmVncmVzc2lvbi10ZXN0ZWQtYnk6IExhc3psbyBFcnNlayA8
-bGVyc2VrQHJlZGhhdC5jb20+CiAgICBSZXZpZXdlZC1ieTogRXJpYyBEb25nIDxlcmljLmRvbmdA
-aW50ZWwuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============5203987469524196661==
+Content-Type: text/plain
+
+branch xen-unstable
+xenbranch xen-unstable
+job test-amd64-amd64-qemuu-nested-amd
+testid debian-hvm-install
+
+Tree: linux git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  linux git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
+  Bug introduced:  93065ac753e4443840a057bfef4be71ec766fde9
+  Bug not present: c2343d2761f86ae1b857f78c7cdb9f51e5fa1641
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/127488/
+
+
+  commit 93065ac753e4443840a057bfef4be71ec766fde9
+  Author: Michal Hocko <mhocko@suse.com>
+  Date:   Tue Aug 21 21:52:33 2018 -0700
+  
+      mm, oom: distinguish blockable mode for mmu notifiers
+      
+      There are several blockable mmu notifiers which might sleep in
+      mmu_notifier_invalidate_range_start and that is a problem for the
+      oom_reaper because it needs to guarantee a forward progress so it cannot
+      depend on any sleepable locks.
+      
+      Currently we simply back off and mark an oom victim with blockable mmu
+      notifiers as done after a short sleep.  That can result in selecting a new
+      oom victim prematurely because the previous one still hasn't torn its
+      memory down yet.
+      
+      We can do much better though.  Even if mmu notifiers use sleepable locks
+      there is no reason to automatically assume those locks are held.  Moreover
+      majority of notifiers only care about a portion of the address space and
+      there is absolutely zero reason to fail when we are unmapping an unrelated
+      range.  Many notifiers do really block and wait for HW which is harder to
+      handle and we have to bail out though.
+      
+      This patch handles the low hanging fruit.
+      __mmu_notifier_invalidate_range_start gets a blockable flag and callbacks
+      are not allowed to sleep if the flag is set to false.  This is achieved by
+      using trylock instead of the sleepable lock for most callbacks and
+      continue as long as we do not block down the call chain.
+      
+      I think we can improve that even further because there is a common pattern
+      to do a range lookup first and then do something about that.  The first
+      part can be done without a sleeping lock in most cases AFAICS.
+      
+      The oom_reaper end then simply retries if there is at least one notifier
+      which couldn't make any progress in !blockable mode.  A retry loop is
+      already implemented to wait for the mmap_sem and this is basically the
+      same thing.
+      
+      The simplest way for driver developers to test this code path is to wrap
+      userspace code which uses these notifiers into a memcg and set the hard
+      limit to hit the oom.  This can be done e.g.  after the test faults in all
+      the mmu notifier managed memory and set the hard limit to something really
+      small.  Then we are looking for a proper process tear down.
+      
+      [akpm@linux-foundation.org: coding style fixes]
+      [akpm@linux-foundation.org: minor code simplification]
+      Link: http://lkml.kernel.org/r/20180716115058.5559-1-mhocko@kernel.org
+      Signed-off-by: Michal Hocko <mhocko@suse.com>
+      Acked-by: Christian König <christian.koenig@amd.com> # AMD notifiers
+      Acked-by: Leon Romanovsky <leonro@mellanox.com> # mlx and umem_odp
+      Reported-by: David Rientjes <rientjes@google.com>
+      Cc: "David (ChunMing) Zhou" <David1.Zhou@amd.com>
+      Cc: Paolo Bonzini <pbonzini@redhat.com>
+      Cc: Alex Deucher <alexander.deucher@amd.com>
+      Cc: David Airlie <airlied@linux.ie>
+      Cc: Jani Nikula <jani.nikula@linux.intel.com>
+      Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+      Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+      Cc: Doug Ledford <dledford@redhat.com>
+      Cc: Jason Gunthorpe <jgg@ziepe.ca>
+      Cc: Mike Marciniszyn <mike.marciniszyn@intel.com>
+      Cc: Dennis Dalessandro <dennis.dalessandro@intel.com>
+      Cc: Sudeep Dutt <sudeep.dutt@intel.com>
+      Cc: Ashutosh Dixit <ashutosh.dixit@intel.com>
+      Cc: Dimitri Sivanich <sivanich@sgi.com>
+      Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+      Cc: Juergen Gross <jgross@suse.com>
+      Cc: "Jérôme Glisse" <jglisse@redhat.com>
+      Cc: Andrea Arcangeli <aarcange@redhat.com>
+      Cc: Felix Kuehling <felix.kuehling@amd.com>
+      Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+      Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+
+
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/linux-linus/test-amd64-amd64-qemuu-nested-amd.debian-hvm-install.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
+
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/linux-linus/test-amd64-amd64-qemuu-nested-amd.debian-hvm-install --summary-out=tmp/127488.bisection-summary --basis-template=125898 --blessings=real,real-bisect linux-linus test-amd64-amd64-qemuu-nested-amd debian-hvm-install
+Searching for failure / basis pass:
+ 127458 fail [host=pinot1] / 126310 ok.
+Failure / basis pass flights: 127458 / 126310
+(tree with no url: minios)
+(tree with no url: ovmf)
+(tree with no url: seabios)
+Tree: linux git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest 9a5682765a2e5f93cf2fe7b612b8072b18f0c68a c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 1d069e45f7c2f6b2982797dd32092b300bacafad
+Basis pass 778a33959a8ad4cb1ea2f4c5119f9e1e8b9f9d9b c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 3dd454c6c694409aaedd4ed075d6aeace2dd8391
+Generating revisions with ./adhoc-revtuple-generator  git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git#778a33959a8ad4cb1ea2f4c5119f9e1e8b9f9d9b-9a5682765a2e5f93cf2fe7b612b8072b18f0c68a git://xenbits.xen.org/osstest/linux-firmware.git#c530a75c1e6a472b0eb9558310b518f0dfcd8860-c530a75c1e6a472b0eb9558310b518f0dfcd8860 git://xenbits.xen.org/qemu-xen-traditional.git#c8ea0457495342c417c3dc033bba25148b279f60-9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 git://xenbits.xen.org/qemu-xen.git#4f080070a9809bde857851e68a3aeff0c4b9b6a6-de5b678ca4dcdfa83e322491d478d66df56c1986 git://xenbits.xen.org/xen.git#3dd454c6c694409aaedd4ed075d6aeace2dd8391-1d069e45f7c2f6b2982797dd32092b300bacafad
+Loaded 597010 nodes in revision graph
+Searching for test results:
+ 126310 pass 778a33959a8ad4cb1ea2f4c5119f9e1e8b9f9d9b c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 3dd454c6c694409aaedd4ed075d6aeace2dd8391
+ 126412 fail irrelevant
+ 126550 fail irrelevant
+ 126682 fail irrelevant
+ 126888 fail irrelevant
+ 126978 fail irrelevant
+ 127038 fail irrelevant
+ 127108 fail irrelevant
+ 127148 fail irrelevant
+ 127193 fail irrelevant
+ 127221 fail irrelevant
+ 127256 fail irrelevant
+ 127284 fail irrelevant
+ 127315 fail irrelevant
+ 127344 fail irrelevant
+ 127364 fail irrelevant
+ 127457 fail b7b4247d553939ccf02ff597ec60f41a2f93ee8e c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 36e29dd9e580cb0f847f5ac1e72afdb5febe3e99
+ 127446 fail 741880e1f2f59b20125dc480765d2546cec66080 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 a9a2a761f75126d908612c64fabe6adde2b6d2b9
+ 127389 fail irrelevant
+ 127447 fail ff06525fcb8ae3c302ac1319bf6c07c026dea964 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 342dcb6430d76ebd1ce229a02bad83f8881c9ac9
+ 127466 fail b66fb005c97544e9e589b2f2e60ccfe3808c6c3e c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+ 127459 fail 00efcdce67a365ec1881a6fbf17f769d690244e9 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 4f080070a9809bde857851e68a3aeff0c4b9b6a6 a923919797c39d51ea0b808ea691bed20fe8e072
+ 127448 fail 25a8238f4cc8425d4aade4f9041be468d0e8aa2e c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 66235dd9f014e46b125c0f461c2f18a799de4d25
+ 127403 fail irrelevant
+ 127449 fail f707ef61e17261f2bb18c3e4871c6f135ab3aba9 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 66235dd9f014e46b125c0f461c2f18a799de4d25
+ 127415 fail irrelevant
+ 127443 fail f8f65382c98a28e3c2b20df9dd4231dca5a11682 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 1d069e45f7c2f6b2982797dd32092b300bacafad
+ 127450 fail 455c4401fe7a538facaffb35b906ce19f1ece474 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 66235dd9f014e46b125c0f461c2f18a799de4d25
+ 127451 pass 778a33959a8ad4cb1ea2f4c5119f9e1e8b9f9d9b c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 3dd454c6c694409aaedd4ed075d6aeace2dd8391
+ 127460 fail d40acad1f1979194ecda83f77468751244b4b098 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 4f080070a9809bde857851e68a3aeff0c4b9b6a6 a923919797c39d51ea0b808ea691bed20fe8e072
+ 127441 pass 778a33959a8ad4cb1ea2f4c5119f9e1e8b9f9d9b c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 3dd454c6c694409aaedd4ed075d6aeace2dd8391
+ 127444 fail irrelevant
+ 127445 fail 00fe9c326d2027f2437dea38ef0e82f9d02d94c0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 a9a2a761f75126d908612c64fabe6adde2b6d2b9
+ 127477 pass 778a33959a8ad4cb1ea2f4c5119f9e1e8b9f9d9b c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 3dd454c6c694409aaedd4ed075d6aeace2dd8391
+ 127452 fail f8f65382c98a28e3c2b20df9dd4231dca5a11682 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 1d069e45f7c2f6b2982797dd32092b300bacafad
+ 127456 fail a8cf76a9023bc6709b1361d06bb2fae5227b9d68 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 55924f9d923b51ce8ed6d2ecc7a3644a8562e8d9
+ 127484 pass c2343d2761f86ae1b857f78c7cdb9f51e5fa1641 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+ 127462 fail 2a9d6481004215da8e93edb588cf448f2af80303 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+ 127471 fail 85f237a57f143c0c895dcb7cc53fa0174522ce07 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+ 127468 pass 778a33959a8ad4cb1ea2f4c5119f9e1e8b9f9d9b c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 bb126eaf2c9d12a2368162e7aa27313c2ddc6fe8
+ 127480 fail f1547959d9efd0be6cac2a2fd32f05dd7144dd6c c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+ 127482 fail 93065ac753e4443840a057bfef4be71ec766fde9 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+ 127458 fail 9a5682765a2e5f93cf2fe7b612b8072b18f0c68a c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 1d069e45f7c2f6b2982797dd32092b300bacafad
+ 127476 pass c2343d2761f86ae1b857f78c7cdb9f51e5fa1641 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+ 127478 fail 9a5682765a2e5f93cf2fe7b612b8072b18f0c68a c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 1d069e45f7c2f6b2982797dd32092b300bacafad
+ 127481 fail c3b78b11efbb2865433abf9d22c004ffe4a73f5c c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+ 127487 pass c2343d2761f86ae1b857f78c7cdb9f51e5fa1641 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+ 127485 fail 93065ac753e4443840a057bfef4be71ec766fde9 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+ 127488 fail 93065ac753e4443840a057bfef4be71ec766fde9 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+Searching for interesting versions
+ Result found: flight 126310 (pass), for basis pass
+ Result found: flight 127458 (fail), for basis failure
+ Repro found: flight 127477 (pass), for basis pass
+ Repro found: flight 127478 (fail), for basis failure
+ 0 revisions at c2343d2761f86ae1b857f78c7cdb9f51e5fa1641 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c8ea0457495342c417c3dc033bba25148b279f60 4f080070a9809bde857851e68a3aeff0c4b9b6a6 1cd5d824c716280db4b5799d9aa64ca2f0730f72
+No revisions left to test, checking graph state.
+ Result found: flight 127476 (pass), for last pass
+ Result found: flight 127482 (fail), for first failure
+ Repro found: flight 127484 (pass), for last pass
+ Repro found: flight 127485 (fail), for first failure
+ Repro found: flight 127487 (pass), for last pass
+ Repro found: flight 127488 (fail), for first failure
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  linux git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
+  Bug introduced:  93065ac753e4443840a057bfef4be71ec766fde9
+  Bug not present: c2343d2761f86ae1b857f78c7cdb9f51e5fa1641
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/127488/
+
+
+  commit 93065ac753e4443840a057bfef4be71ec766fde9
+  Author: Michal Hocko <mhocko@suse.com>
+  Date:   Tue Aug 21 21:52:33 2018 -0700
+  
+      mm, oom: distinguish blockable mode for mmu notifiers
+      
+      There are several blockable mmu notifiers which might sleep in
+      mmu_notifier_invalidate_range_start and that is a problem for the
+      oom_reaper because it needs to guarantee a forward progress so it cannot
+      depend on any sleepable locks.
+      
+      Currently we simply back off and mark an oom victim with blockable mmu
+      notifiers as done after a short sleep.  That can result in selecting a new
+      oom victim prematurely because the previous one still hasn't torn its
+      memory down yet.
+      
+      We can do much better though.  Even if mmu notifiers use sleepable locks
+      there is no reason to automatically assume those locks are held.  Moreover
+      majority of notifiers only care about a portion of the address space and
+      there is absolutely zero reason to fail when we are unmapping an unrelated
+      range.  Many notifiers do really block and wait for HW which is harder to
+      handle and we have to bail out though.
+      
+      This patch handles the low hanging fruit.
+      __mmu_notifier_invalidate_range_start gets a blockable flag and callbacks
+      are not allowed to sleep if the flag is set to false.  This is achieved by
+      using trylock instead of the sleepable lock for most callbacks and
+      continue as long as we do not block down the call chain.
+      
+      I think we can improve that even further because there is a common pattern
+      to do a range lookup first and then do something about that.  The first
+      part can be done without a sleeping lock in most cases AFAICS.
+      
+      The oom_reaper end then simply retries if there is at least one notifier
+      which couldn't make any progress in !blockable mode.  A retry loop is
+      already implemented to wait for the mmap_sem and this is basically the
+      same thing.
+      
+      The simplest way for driver developers to test this code path is to wrap
+      userspace code which uses these notifiers into a memcg and set the hard
+      limit to hit the oom.  This can be done e.g.  after the test faults in all
+      the mmu notifier managed memory and set the hard limit to something really
+      small.  Then we are looking for a proper process tear down.
+      
+      [akpm@linux-foundation.org: coding style fixes]
+      [akpm@linux-foundation.org: minor code simplification]
+      Link: http://lkml.kernel.org/r/20180716115058.5559-1-mhocko@kernel.org
+      Signed-off-by: Michal Hocko <mhocko@suse.com>
+      Acked-by: Christian König <christian.koenig@amd.com> # AMD notifiers
+      Acked-by: Leon Romanovsky <leonro@mellanox.com> # mlx and umem_odp
+      Reported-by: David Rientjes <rientjes@google.com>
+      Cc: "David (ChunMing) Zhou" <David1.Zhou@amd.com>
+      Cc: Paolo Bonzini <pbonzini@redhat.com>
+      Cc: Alex Deucher <alexander.deucher@amd.com>
+      Cc: David Airlie <airlied@linux.ie>
+      Cc: Jani Nikula <jani.nikula@linux.intel.com>
+      Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+      Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+      Cc: Doug Ledford <dledford@redhat.com>
+      Cc: Jason Gunthorpe <jgg@ziepe.ca>
+      Cc: Mike Marciniszyn <mike.marciniszyn@intel.com>
+      Cc: Dennis Dalessandro <dennis.dalessandro@intel.com>
+      Cc: Sudeep Dutt <sudeep.dutt@intel.com>
+      Cc: Ashutosh Dixit <ashutosh.dixit@intel.com>
+      Cc: Dimitri Sivanich <sivanich@sgi.com>
+      Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+      Cc: Juergen Gross <jgross@suse.com>
+      Cc: "Jérôme Glisse" <jglisse@redhat.com>
+      Cc: Andrea Arcangeli <aarcange@redhat.com>
+      Cc: Felix Kuehling <felix.kuehling@amd.com>
+      Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+      Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+
+pnmtopng: 216 colors found
+Revision graph left in /home/logs/results/bisect/linux-linus/test-amd64-amd64-qemuu-nested-amd.debian-hvm-install.{dot,ps,png,html,svg}.
+----------------------------------------
+127488: tolerable ALL FAIL
+
+flight 127488 linux-linus real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/127488/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ test-amd64-amd64-qemuu-nested-amd 10 debian-hvm-install fail baseline untested
+
+
+jobs:
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+
+--===============5203987469524196661==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5203987469524196661==--
