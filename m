@@ -1,18 +1,20 @@
-From: Andrii Anisov <andrii.anisov@gmail.com>
-Subject: [PATCH] traps: coding style fixes
-Date: Tue, 11 Sep 2018 10:18:22 +0300
-Message-ID: <1536650302-3013-1-git-send-email-andrii.anisov@gmail.com>
+From: Michal Privoznik <mprivozn@redhat.com>
+Subject: Re: [libvirt] [PATCH 0/5] libxl: various migration V3
+ improvements
+Date: Tue, 11 Sep 2018 09:29:56 +0200
+Message-ID: <9d63a256-4041-8205-a070-6da90714e346__18382.5929336765$1536650929$gmane$org@redhat.com>
+References: <20180905212804.10587-1-jfehlig@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=t1ti=lz=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
- id 1fzcwO-0007az-0N
- for xen-devel@lists.xenproject.org; Tue, 11 Sep 2018 07:18:28 +0000
-Received: by mail-lj1-x241.google.com with SMTP id v9-v6so20037455ljk.4
- for <xen-devel@lists.xenproject.org>; Tue, 11 Sep 2018 00:18:26 -0700 (PDT)
+ <srs0=ggc3=lz=redhat.com=mprivozn@srs-us1.protection.inumbo.net>)
+ id 1fzd7a-0000Be-1e
+ for xen-devel@lists.xenproject.org; Tue, 11 Sep 2018 07:30:02 +0000
+In-Reply-To: <20180905212804.10587-1-jfehlig@suse.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,38 +23,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>
+To: Jim Fehlig <jfehlig@suse.com>, libvir-list@redhat.com
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogQW5kcmlpIEFuaXNvdiA8YW5kcmlpX2FuaXNvdkBlcGFtLmNvbT4KClNpZ25lZC1vZmYt
-Ynk6IEFuZHJpaSBBbmlzb3YgPGFuZHJpaV9hbmlzb3ZAZXBhbS5jb20+Ci0tLQogeGVuL2FyY2gv
-YXJtL3RyYXBzLmMgfCAxMiArKysrKysrKy0tLS0KIDEgZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlv
-bnMoKyksIDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3RyYXBzLmMg
-Yi94ZW4vYXJjaC9hcm0vdHJhcHMuYwppbmRleCA5YWU2NGFlLi40NWZiM2Q1IDEwMDY0NAotLS0g
-YS94ZW4vYXJjaC9hcm0vdHJhcHMuYworKysgYi94ZW4vYXJjaC9hcm0vdHJhcHMuYwpAQCAtMjQ0
-LDcgKzI0NCw4IEBAIHN0YXRpYyByZWdpc3Rlcl90ICpzZWxlY3RfdXNlcl9yZWcoc3RydWN0IGNw
-dV91c2VyX3JlZ3MgKnJlZ3MsIGludCByZWcpCiAgICAgICovCiAjZGVmaW5lIFJFR09GRlMoUikg
-b2Zmc2V0b2Yoc3RydWN0IGNwdV91c2VyX3JlZ3MsIFIpCiAKLSAgICBzd2l0Y2ggKCByZWcgKSB7
-CisgICAgc3dpdGNoICggcmVnICkKKyAgICB7CiAgICAgY2FzZSAwIC4uLiA3OiAvKiBVbmJhbmtl
-ZCByZWdpc3RlcnMgKi8KICAgICAgICAgQlVJTERfQlVHX09OKFJFR09GRlMocjApICsgNypzaXpl
-b2YocmVnaXN0ZXJfdCkgIT0gUkVHT0ZGUyhyNykpOwogICAgICAgICByZXR1cm4gJnJlZ3MtPnIw
-ICsgcmVnOwpAQCAtMTQyOSw3ICsxNDMwLDggQEAgc3RhdGljIHZvaWQgZG9fZGVidWdfdHJhcChz
-dHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncywgdW5zaWduZWQgaW50IGNvZGUpCiB7CiAgICAgdWlu
-dDMyX3QgcmVnOwogICAgIHVpbnQzMl90IGRvbWlkID0gY3VycmVudC0+ZG9tYWluLT5kb21haW5f
-aWQ7Ci0gICAgc3dpdGNoICggY29kZSApIHsKKyAgICBzd2l0Y2ggKCBjb2RlICkKKyAgICB7CiAg
-ICAgY2FzZSAweGUwIC4uLiAweGVmOgogICAgICAgICByZWcgPSBjb2RlIC0gMHhlMDsKICAgICAg
-ICAgcHJpbnRrKCJET00lZDogUiVkID0gMHglIlBSSXJlZ2lzdGVyIiBhdCAweCUiUFJJdmFkZHIi
-XG4iLApAQCAtMjA3MSw3ICsyMDczLDggQEAgdm9pZCBkb190cmFwX2d1ZXN0X3N5bmMoc3RydWN0
-IGNwdV91c2VyX3JlZ3MgKnJlZ3MpCiAKICAgICBlbnRlcl9oeXBlcnZpc29yX2hlYWQocmVncyk7
-CiAKLSAgICBzd2l0Y2ggKGhzci5lYykgeworICAgIHN3aXRjaCAoaHNyLmVjKQorICAgIHsKICAg
-ICBjYXNlIEhTUl9FQ19XRklfV0ZFOgogICAgICAgICAvKgogICAgICAgICAgKiBIQ1JfRUwyLlRX
-SSwgSENSX0VMMi5UV0UKQEAgLTIyNzAsNyArMjI3Myw4IEBAIHZvaWQgbGVhdmVfaHlwZXJ2aXNv
-cl90YWlsKHZvaWQpCiAgICAgd2hpbGUgKDEpCiAgICAgewogICAgICAgICBsb2NhbF9pcnFfZGlz
-YWJsZSgpOwotICAgICAgICBpZiAoIXNvZnRpcnFfcGVuZGluZyhzbXBfcHJvY2Vzc29yX2lkKCkp
-KSB7CisgICAgICAgIGlmICghc29mdGlycV9wZW5kaW5nKHNtcF9wcm9jZXNzb3JfaWQoKSkpCisg
-ICAgICAgIHsKICAgICAgICAgICAgIHZnaWNfc3luY190b19scnMoKTsKIAogICAgICAgICAgICAg
-LyoKLS0gCjIuNy40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+T24gMDkvMDUvMjAxOCAxMToyNyBQTSwgSmltIEZlaGxpZyB3cm90ZToKPiBQYXRjaCA1IGZpeGVz
+IGEgbG9uZyBzdGFuZGluZyBwcm9ibGVtIGZvdW5kIGJ5IHNvbWUgdmVyeSBzbG93IGhvc3RzIGlu
+Cj4geGVuJ3Mgb3NzdGVzdAo+IAo+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2
+ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOC0wOC9tc2cwMTk0NS5odG1sCj4gCj4gV2hpbGUgd29ya2lu
+ZyBvbiB0aGUgZml4LCBJIGRpc2NvdmVyZWQgb3RoZXIgcHJvYmxlbXMgaW4gbGlieGwncyBWMwo+
+IG1pZ3JhdGlvbiBwcm90b2NvbC4gRS5nLiBhIG1vZGlmeSBqb2Igb24gdGhlIG1pZ3JhdGluZyBW
+TSB3YXMgbm90Cj4gaGFuZGxlZCBwcm9wZXJseSBhY3Jvc3MgdGhlIHBoYXNlcyBvbiBlaXRoZXIg
+c3JjIG9yIGRzdCBob3N0LiBQYXRjaGVzCj4gMS00IGZpeCB0aGlzIGFuZCBvdGhlciBwcm9ibGVt
+cyBmb3VuZCBhbG9uZyB0aGUgd2F5Lgo+IAo+IEppbSBGZWhsaWcgKDUpOgo+ICAgbGlieGw6IG1p
+Z3JhdGlvbjogZGVmZXIgcmVtb3ZpbmcgVk0gdW50aWwgZmluaXNoIHBoYXNlCj4gICBsaWJ4bDog
+Zml4IGxvZ2ljIGluIFAyUCBtaWdyYXRpb24KPiAgIGxpYnhsOiBmaXggam9iIGhhbmRsaW5nIGFj
+cm9zcyBtaWdyYXRpb24gcGhhc2VzIG9uIHNyYwo+ICAgbGlieGw6IGZpeCBqb2IgaGFuZGxpbmcg
+YWNyb3NzIG1pZ3JhdGlvbiBwaGFzZXMgb24gZHN0Cj4gICBsaWJ4bDogam9pbiB3aXRoIHRocmVh
+ZCByZWNlaXZpbmcgbWlncmF0aW9uIGRhdGEKPiAKPiAgc3JjL2xpYnhsL2xpYnhsX2RvbWFpbi5o
+ICAgIHwgICAxICsKPiAgc3JjL2xpYnhsL2xpYnhsX2RyaXZlci5jICAgIHwgICA3IC0tCj4gIHNy
+Yy9saWJ4bC9saWJ4bF9taWdyYXRpb24uYyB8IDE2OCArKysrKysrKysrKysrKysrKysrKysrKyst
+LS0tLS0tLS0tLS0KPiAgMyBmaWxlcyBjaGFuZ2VkLCAxMTQgaW5zZXJ0aW9ucygrKSwgNjIgZGVs
+ZXRpb25zKC0pCj4gCgpBQ0sgc2VyaWVzLgoKTWljaGFsCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
