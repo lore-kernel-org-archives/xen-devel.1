@@ -1,19 +1,19 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH 1/5] xentrace_format: print timestamps in
- nanoseconds
-Date: Tue, 11 Sep 2018 11:45:32 +0100
-Message-ID: <521d05e5-c5ff-da28-bd8b-8aaf733bbe59@citrix.com>
-References: <1536597679-8303-1-git-send-email-andrii.anisov@gmail.com>
- <1536597679-8303-2-git-send-email-andrii.anisov@gmail.com>
- <3e079a5d-6437-90a4-f313-e87b57f9b2bd@citrix.com>
- <732445b5-59cf-5416-455d-f994ee2aa47c@epam.com>
- <2fa12bbc-ace0-c75e-96bd-431cb4d49158@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v4] xen: avoid crash in disable_hotplug_cpu
+Date: Tue, 11 Sep 2018 12:48:08 +0200
+Message-ID: <20180911124808.18dfe8bf.olaf__47362.8799933524$1536662822$gmane$org@aepfle.de>
+References: <20180907143135.29608-1-olaf@aepfle.de>
+ <4f623671-e1aa-1804-449c-a26b0c4b9ce9@oracle.com>
+ <20180911095258.5ed9e9b7.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0910630454025761449=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <2fa12bbc-ace0-c75e-96bd-431cb4d49158@citrix.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=lvjd=lz=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1fzgDV-0007p0-Nm
+ for xen-devel@lists.xenproject.org; Tue, 11 Sep 2018 10:48:22 +0000
+In-Reply-To: <20180911095258.5ed9e9b7.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,26 +22,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii_anisov@epam.com>, Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xen.org
-Cc: George Dunlap <george.dunlap@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Dario Faggioli <dfaggioli@suse.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, open list <linux-kernel@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDkvMTEvMjAxOCAxMTo0NCBBTSwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiBPbiAwOS8xMS8y
-MDE4IDExOjMyIEFNLCBBbmRyaWkgQW5pc292IHdyb3RlOgo+PiBIZWxsbyBHZW9yZ2UsCj4+Cj4+
-Cj4+IE9uIDExLjA5LjE4IDEzOjE1LCBHZW9yZ2UgRHVubGFwIHdyb3RlOgo+Pj4+IMKgwqDCoMKg
-wqDCoMKgwqDCoCBpZiBtaHo6Cj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdHNjID0gdHNj
-IC8gKG1oeioxMDAwMDAwLjApCj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdHNjID0gdHNj
-ICogMTAwMC4wIC8gbWh6Cj4+PiBXaHkgZG8geW91IHByZWZlciB0aGlzPwo+PiBJJ20gcGxheWlu
-ZyB3aXRoIHNjaGVkdWxpbmcgZnJvbSBvbmUgaGFuZCwgc28gdGltZSBzdGFtcHMgaW4gc2Vjb25k
-cwo+PiBkb2VzIG5vdCBnaXZlIHVuZGVyc3RhbmRpbmcgYWJvdXQgd2hhdCdzIGdvaW5nIG9uLgo+
-PiBGcm9tIG90aGVyIGhhbmQgSSdtIHF1aXRlIGNvbmZ1c2VkIGFib3V0IGhvdyB1c2VmdWwgdGlt
-ZXN0YW1wcyBpbgo+PiBzZWNvbmRzIGNvdWxkIGJlIGZvciB0cmFjZXMuIEFzIHBlciBteSB1bmRl
-cnN0YW5kaW5nLCB0cmFjZXIgc2hvdWxkIGJlCj4+IHVzZWZ1bCBmb3IgZGVidWdnaW5nIHNvbWUg
-cmFwaWRseSBjaGFuZ2luZyBwcm9jZXNzZXMuCj4gCj4gT2gsIHNvcnJ5IC0tIEkgbWlzc2VkIHRo
-ZSBwb2ludCBvZiB0aGlzIHBhdGNoLgo+IAo+IC0tLQo+IHhlbnRyYWNlX2Zvcm1hdDogcHJpbnQg
-dGltZXN0YW1wcyBpbiBuYW5vc2Vjb25kcwo+IAo+IC4uLnJhdGhlciB0aGFuIHNlY29uZHMuCgpU
-aGlzIHNob3VsZCByYXRoZXIgc2F5LCAiLi5yYXRoZXIgdGhhbiBzZWNvbmRzLCB3aGVuIHRoZSBj
-bG9jayBzcGVlZCBpcwpzcGVjaWZpZWQuIgoKIC1HZW9yZ2UKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============0910630454025761449==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/Sfd2.ijTAWqtljGsgLZh_Oj"; protocol="application/pgp-signature"
+
+--Sig_/Sfd2.ijTAWqtljGsgLZh_Oj
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Am Tue, 11 Sep 2018 09:52:58 +0200
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> As J=C3=BCrgen suggested in another mail, Xen should probably disable hot=
+plugging
+> for cpu#0 in the generic setup code. Then cpu_is_hotpluggable(cpu) would
+> do the right thing.
+
+The relevant code is all private to arch/x86/kernel/topology.c.
+There is no way to set .hotpluggable prior to register_cpu.
+I guess you need to work that out with the x86 maintainers.
+
+Olaf
+
+--Sig_/Sfd2.ijTAWqtljGsgLZh_Oj
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW5edaAAKCRBdQqD6ppg2
+fjWwAKCrFv/vHuKzbfIPZpQl9g2/TGaUigCg5UQ5+KRUfGnXJOUk7MH2kT2H6uo=
+=QfE0
+-----END PGP SIGNATURE-----
+
+--Sig_/Sfd2.ijTAWqtljGsgLZh_Oj--
+
+
+--===============0910630454025761449==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0910630454025761449==--
