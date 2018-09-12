@@ -1,16 +1,25 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: L1TF, and future work
-Date: Wed, 12 Sep 2018 08:12:41 +0200
-Message-ID: <1232dc83926fb50c0fc39c8af5636d23af2384fe.camel@suse.com>
-References: <4dad178a-91c7-c328-9bc5-4362945d4725@citrix.com>
- <4a76f789c59f2b580d868e101d9d6cf0a538c660.camel@suse.com>
- <CABfawh=irJJsc3cyW+CJX2=hd493+yMsudOGLF7koD+M-r+5Pg@mail.gmail.com>
- <337585af03f85f16e0637e1525dcdf273efd9e4b.camel@suse.com>
- <CABfawh=33YA+LZT-hAUO8dU9iWzPtB9wvEeQup_GJoOksfrWwg@mail.gmail.com>
+From: Amit Tomer <amittomer25@gmail.com>
+Subject: Re: [RFC PATCH 1/2] xen/arm: Add Amlogic S905 SoC early
+ printk support
+Date: Wed, 12 Sep 2018 12:13:55 +0530
+Message-ID: <CABHD4K9T94iVVZHWPZaMEmNmhidQsGgpsJxd0W3c6+jpph+HuA@mail.gmail.com>
+References: <1533661673-14607-1-git-send-email-amittomer25@gmail.com>
+ <1533661673-14607-2-git-send-email-amittomer25@gmail.com>
+ <683b761d-ccf8-b46e-284f-1713ef856b8f@arm.com>
+ <CABHD4K-K+XNYPZ4e2_kKa-PcAwKd-5OD5V72dTvb9qbr8qQeWA@mail.gmail.com>
+ <122b7b82-af4e-66f7-d210-2b9e0842fbc7@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5437591719632267897=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CABfawh=33YA+LZT-hAUO8dU9iWzPtB9wvEeQup_GJoOksfrWwg@mail.gmail.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=vqnc=l2=gmail.com=amittomer25@srs-us1.protection.inumbo.net>)
+ id 1fzysk-0000kj-1U
+ for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 06:44:10 +0000
+Received: by mail-oi0-x241.google.com with SMTP id k12-v6so1571143oiw.8
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Sep 2018 23:44:08 -0700 (PDT)
+In-Reply-To: <122b7b82-af4e-66f7-d210-2b9e0842fbc7@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,75 +28,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Cc: JGross@suse.com, sergey.dyasli@citrix.com, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Dario Faggioli <dario.faggioli@citrix.com>, Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>, Jan Beulich <JBeulich@suse.com>, security@xen.org, dwmw@amazon.co.uk, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, wei.liu2@citrix.com, konrad.wilk@oracle.com, George Dunlap <George.Dunlap@eu.citrix.com>, ian.jackson@eu.citrix.com, tim@xen.org, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andre Przywara <andre.przywara@arm.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5437591719632267897==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-z1CZd16Zpgm/wxAfXrlz"
-
-
---=-z1CZd16Zpgm/wxAfXrlz
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2018-09-11 at 11:14 -0600, Tamas K Lengyel wrote:
-> On Tue, Sep 11, 2018 at 9:13 AM Dario Faggioli <dfaggioli@suse.com>
->=20
-
-https://lists.xenproject.org/archives/html/xen-devel/2018-08/msg02164.html
-> >=20
-> > I'm back now, and am working on the series again. In the meanwhile,
-> > do
-> > feel free to share any kind of feedback or opinion.
->=20
-> Ah, thanks, I missed it somehow! :) We'll give it a spin, this is
-> likely something we will need down the road (probably with credit2
-> though).
->=20
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-z1CZd16Zpgm/wxAfXrlz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluYrloACgkQFkJ4iaW4
-c+4AoxAAjHU7O/VEGtJ/3O8gBSGHmzoeHqB5CNW+VeO+65oG/YlZ9Jo2YdybAOU3
-qS2RHz42BGlQFT11LEw+TgySKX2kRhvAU3fYhM35U1ie/VSQogHK9frg30SQHZbY
-SbO7tBysr2jrpSZkBMtPQx3pkQvPA9oXqgwArwOtrl73VsyN1FmDL2tviOwBQABz
-ps4Lgw1U2+fLStluU9XIzJ6lLB4Tu53Qyf33dkJ//JI61zcDYwQTeQCrXxYz2cVE
-cdrrqcAdD74HnvhOLbKcHCy1y3Q6Z+ZF8+HwZGiC6h9YGGf5D1PvjTe/jDVFIG6r
-g8FjWJsTkZHvA+9vEp7sC+pXJy2pQML1y+1Et6Ngt7eHR9fFe2qmpQKagxDTZ6/u
-KAFJdlf63HTk6PJvsjROv+OblcLWI2LjPkoTG+H/TqkRcVCE/LmIrWMX9W/TPPbP
-l8dGVzPb6HfeC17pq81f+Gkt5oW2EfItoKZClTOd23SBzFh8/N/HqqwskTyDeefM
-70TdtyiAhNr0jUr1azJDrzmgHtcaeLA07J+mbugJroety6DjwihUoc8ZNpYQ7QR9
-z847iQvxGzCCZI1ozULJahcPdj8aKI8lRjGRZyx1B/Gz2wbg88I8FuNNWmUUpONw
-FhH0p2vp3jF7iiSBYcBuQxTCdPO/TzTZNXcNaSsTBWwhcfRdnE4=
-=Nmh1
------END PGP SIGNATURE-----
-
---=-z1CZd16Zpgm/wxAfXrlz--
-
-
-
---===============5437591719632267897==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5437591719632267897==--
+SGVsbG8sCgo+IEkgYW0gdHJ5aW5nIHRvIHVuZGVyc3RhbmQgd2h5IExpbnV4IGlzIGRvaW5nIGl0
+LiBEbyB5b3UgZXhwZWN0IGFsbAo+IFUtQm9vdCB2ZXJzaW9uIHRvIGRvIGl0PwoKSXQncyBiZWNh
+dXNlIExpbnV4IGRvZXNuJ3QgcmVhbGx5IHRydXN0IHUtYm9vdCBhbmQgaW5pdGlhbGl6ZXMgZXZl
+cnkKdGhpbmcgYWdhaW4gPwpNYWlubGluZSBVLWJvb3QgZG9lcyBpdCBidXQgdGhhdCBtYXkgYWxz
+byBub3QgcmVxdWlyZWQgc2luY2UgQVRGIGRvZXMgaXQgZm9yIHVzLgoKVGhhbmtzCi1BbWl0Cgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
