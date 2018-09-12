@@ -1,22 +1,20 @@
 From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: BUG: sched=credit2 crashes system when using
- cpupools
-Date: Wed, 12 Sep 2018 17:11:20 +0200
-Message-ID: <9d3beeffa3ed724f751dc190b3de4d34a22f1ea3.camel@suse.com>
+Subject: Re: RFE: Detect NUMA misconfigurations and prevent
+ machine freezes
+Date: Wed, 12 Sep 2018 17:13:59 +0200
+Message-ID: <2d2f115d3f45d76ea439a1b36df9953a3b979aca.camel@suse.com>
 References: <6564259.GaOmOO5kt2@wopr.lan.crc.id.au>
  <29fc38c6-8908-2f6f-e496-a1644f56c59e@suse.com>
  <4e93ef83fb40d6a2a87f902f17bc0bc5@crc.id.au>
- <5B87ABF502000078001E36A3@prv1-mh.provo.novell.com>
- <faf61a4a900b3404de8077357e898159@crc.id.au>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1752591104606074789=="
+Content-Type: multipart/mixed; boundary="===============3635623575550961559=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=kpmf=l2=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1g06oI-0001ie-Q7
- for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 15:12:06 +0000
-In-Reply-To: <faf61a4a900b3404de8077357e898159@crc.id.au>
+ id 1g06qg-0001rC-K2
+ for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 15:14:34 +0000
+In-Reply-To: <4e93ef83fb40d6a2a87f902f17bc0bc5@crc.id.au>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,63 +23,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Steven Haigh <netwiz@crc.id.au>, Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.com>
+To: Steven Haigh <netwiz@crc.id.au>, Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============1752591104606074789==
+--===============3635623575550961559==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-jWbrt5rPvnh8+z+y3S98"
+	protocol="application/pgp-signature"; boundary="=-fMthdTplQN+xcFwLcxg3"
 
 
---=-jWbrt5rPvnh8+z+y3S98
+--=-fMthdTplQN+xcFwLcxg3
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2018-08-30 at 18:49 +1000, Steven Haigh wrote:
-> On 2018-08-30 18:33, Jan Beulich wrote:
-> > > > >=20
-> > Anyway - as J=C3=BCrgen says, something for the scheduler
-> > maintainers to look into.
+On Thu, 2018-08-30 at 14:01 +1000, Steven Haigh wrote:
+> On 2018-08-29 15:49, Juergen Gross wrote:
+> >=20
+> > RAM placement should not matter here. As the name already suggests
+> > cpupools do assignment of cpus. RAM allocated will be preferred
+> > taken
+> > from a local node, but this shouldn't be mandatory for success.
+> >=20
+> > Would it be possible to use a debug hypervisor (e.g. 4.12-unstable)=20
+> > for
+> > generating a verbose log (hypervisor boot parameter "loglvl=3Dall")
+> > and
+> > sending the complete hypervisor log?
 >=20
-Ok, I'm back.
+> I don't have a package for 4.11 or 4.12 built at all - but I did this
+> on=20
+> 4.10.2-pre (built from staging-4.10).
+>
+> [..]
+>
+> Add the CPUs:
+> (XEN) Adding cpu 12 to runqueue 0
+> (XEN)  First cpu on runqueue, activating
+> (XEN) Removing cpu 12 from runqueue 0
+> (XEN) Adding cpu 13 to runqueue 0
+> (XEN) Removing cpu 13 from runqueue 0
+> (XEN) Adding cpu 14 to runqueue 0
+> (XEN) Removing cpu 14 from runqueue 0
+> (XEN) Xen BUG at sched_credit2.c:3452
+> (XEN) Adding cpu 15 to runqueue 0
+> (XEN) ----[ Xen-4.10.2-pre  x86_64  debug=3Dn   Not tainted ]----
+>
+That's not a debug build, though.
 
-> Yep - I just want to confirm that we tested this in BOTH NUMA=20
-> configurations - and credit2 crashed on both.
->=20
-> I switched back to sched=3Dcredit, and it seems to work as expected:
-> # xl cpupool-list
-> Name               CPUs   Sched     Active   Domain count
-> Pool-node0          12    credit       y          3
-> Pool-node1          12    credit       y          0
->=20
-Wait, in a previous message, you said: "A machine where we could get
-this working every time shows". Doesn't that mean creating a separate
-pool for node 1 works with both Credit and Credit2, if the node has
-memory?
+It would be useful to test one such build (as suggested by Juergen), to
+see if any of the existing ASSERTs triggers.
 
-I mean, trying to clarifying, my understanding is that you have to
-systems:
-
-system A: node 1 has *no* memory
-system B: both node 0 and node 1 have memory
-
-Creating a Credit pool with pcpus from node 1 always work on both
-systems.
-
-OTOH, when you try to create a Credit2 pool with pcpus from node 1,
-does it always crash on both systems, or does it work on system B and
-crashes on system A ?
-
-I do have a NUMA box with RAM in both nodes (so similar to system B).
-Last time I checked, what you're trying to do worked there, pretty much
-with any scheduler combination, but I'll recheck.
-
-I don't have a box similar to system A. I'll try to remove some of the
-RAM from that NUMA box, and check what happens.
-
-Regards,
 Dario
 --=20
 <<This happens because I choose it to happen!>> (Raistlin Majere)
@@ -89,33 +81,33 @@ Dario
 Dario Faggioli, Ph.D, http://about.me/dario.faggioli
 Software Engineer @ SUSE https://www.suse.com/
 
---=-jWbrt5rPvnh8+z+y3S98
+--=-fMthdTplQN+xcFwLcxg3
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluZLJkACgkQFkJ4iaW4
-c+5bRg/+KNcyPcV0qB7RZsm/juqTmcs6KJKOoZHKmtidZ+YTmWf/AuYRkZeP2PSW
-b+QhxStK0YYcY31irmIT5H+q58lwUqsXV2+FT7vK/jhnWJoY+pcXj7hBRvxHkfNr
-fnAYs+BARC+BGEJSDETS3zLhwVaWasg8p7OhDeNl3Sl5jkkoRFkqyDNyx9czWMKd
-F3KRzTUiVq2B2SUVgzKuCd9b7SXdLl9VK2PwdwYZXdrHv+QgQ6MNWYGPqJ+ZImGk
-PgbGZUtiEfjSH3TjQbZllGYdMOzmwj1i8YUZ5CFL+3X6Azdv+bCgpOxErW1U6iWz
-yLlZ7J9kxG0K9MbtOeAQRz+An83kIeyeBUFRFyLmnQEBjvyRA0IZ7LUL1EZFxvMF
-T1AZs05+jQl9blWSNVQZmFR2ArumnQ0b215jztZ7+J2bi3C4auC4Y4sHhdIW69xF
-TC7pA1+0a0rRpsSPAig5rYQDImiXneiJp4Wbf13tAAGkxzKnDK98tx4VFJucKmD7
-O6w6B4Hg03u1wh40WiOWRXsFZz6Idkko7ydXJCF5suTuWh0BWdVoHP7GNlrsqwji
-rMMqNWgvBi7Gb0JaNLXPyRVMxGdvezwGeUFv1tXDHSX6FxLRJoikaTHfmJqh8zm5
-Q7jHfY1gi+ALxRwQvVUla+Z4iJTG4whXMpxYUT8Ov+JlxOw6rhE=
-=Bvfu
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluZLTgACgkQFkJ4iaW4
+c+5jVhAAtFHQzwOHpzP9nxw5t6s+Ra1EkTT6XToHdDdW79KIQchmnW8PlOx4/NmS
+hJo65UXXWMSdjdn2P54dhA37lmhlNU+MFCth4tFGYjCb+bzbD6stpDuDnK9RGMwg
+SWE9KDhGoJWNV1xcAMN637lCdOcFSXHabXdN7NKVzFLzlEnPftuRg21bstRdBNla
+OURpbb6JWQ2d46XaXDQgy203xlhpmkvk8orxgDIEVIBOKPOUuDdo+FQLXc6oQnTY
+bRni6r6Af5eW5eCbW3g1eVNxoCK5AHj6/+rGeFqTjDKFDicbjwKKLVfOiq+VVIFn
+Mkv81iqBsyVmjdclgFKE57HX83rndpKY8SJMLONFQ03WFgsHk7dSCBuzQUIA/138
+bvEyJ8f4sZpFiI3hFYcrwlccXzjHMYJXnsJendxVEGAflN42dth3O6ErxwEstdwJ
+BQZFbQ671t6mUt80LZBKLrPjOncPteNs9ScWBgqE4AOVxFciwX48wktvDsNeQVWl
+vre8F6+FhIbSPdGry7FCpX56NfI2MldLCpDUJbSIvjpc8MGhnwZdRyxMDIJII2VT
+MsRJekD/nVz0O5Guz534fXQRatxcNEWJzKg8QS8b2jWUIbcdF6sAWorYicbXxvza
+XmTG9k3oYvAU74Z4RCVgsmMGcBDXfoFz2LM35S1T/XPRI870KtA=
+=Sugh
 -----END PGP SIGNATURE-----
 
---=-jWbrt5rPvnh8+z+y3S98--
+--=-fMthdTplQN+xcFwLcxg3--
 
 
 
---===============1752591104606074789==
+--===============3635623575550961559==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -125,4 +117,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============1752591104606074789==--
+--===============3635623575550961559==--
