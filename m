@@ -1,29 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v6 08/14] vtd: add lookup_page method to
- iommu_ops
-Date: Wed, 12 Sep 2018 03:12:58 -0600
-Message-ID: <5B98D89A02000078001E7B14@prv1-mh.provo.novell.com>
-References: <20180823094711.21376-1-paul.durrant@citrix.com>
- <20180823094711.21376-9-paul.durrant@citrix.com>
- <5B925CC402000078001E6538@prv1-mh.provo.novell.com>
- <f341403b1c684f6a82ec85905599178e@AMSPEX02CL03.citrite.net>
- <5B98D1B702000078001E7A8F@prv1-mh.provo.novell.com>
- <77f7af1c0daf48c9ab66bbd77cc022ec@AMSPEX02CL03.citrite.net>
- <2c79d7d0775c4cbe8dc7577ab6b08e74@AMSPEX02CL03.citrite.net>
- <22882dd60fc847728f96b2d4b9c0a9d3@AMSPEX02CL03.citrite.net>
- <5B98D65E02000078001E7ACF@prv1-mh.provo.novell.com>
- <7ad76f0c35584cf08adcffaf1fe5bba4@AMSPEX02CL03.citrite.net>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH] drivers/block/xen-blkback/common.h: use
+ DIV_ROUND_UP instead of reimplementing its function
+Date: Wed, 12 Sep 2018 11:13:50 +0200
+Message-ID: <20180912091350.6wuvt2jkvzg6wruo__24188.05441489$1536743556$gmane$org@mac.bytemobile.com>
+References: <1536731100-56054-1-git-send-email-zhongjiang@huawei.com>
+ <5B98CAE202000078001E79CC@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=mhj0=l2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1g01Cp-0000VT-6K
- for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 09:13:03 +0000
-In-Reply-To: <7ad76f0c35584cf08adcffaf1fe5bba4@AMSPEX02CL03.citrite.net>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=nh++=l2=citrix.com=prvs=7864c2456=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1g01Di-0000f4-RK
+ for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 09:13:58 +0000
 Content-Disposition: inline
+In-Reply-To: <5B98CAE202000078001E79CC@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -32,20 +24,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Kevin Tian <kevin.tian@intel.com>, george.dunlap@citrix.com
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Jens Axboe <axboe@kernel.dk>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, xen-devel <xen-devel@lists.xenproject.org>, zhong jiang <zhongjiang@huawei.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEyLjA5LjE4IGF0IDExOjA1LCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+PiBGcm9tOiBKYW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+PiBTZW50
-OiAxMiBTZXB0ZW1iZXIgMjAxOCAxMDowMwo+PiAKPj4gQSBIVk0gZ3Vlc3QgdXNpbmcgdGhlIFBW
-IElPTU1VIGlzIHF1aXRlIGZpbmUsIGJ1dCBpdCBzaG91bGRuJ3QgdGFsayB0bwo+PiBpdCBpbiB0
-ZXJtcyBvZiBNRk5zLgo+PiAKPiAKPiBXZWxsLCBpdCBoYXMgdG8gdGFsayBNRk5zIGF0IHNvbWUg
-bGV2ZWwsIHN1cmVseT8gVGhlIG91dHB1dCBvZiB0aGUgSU9NTVUgaXMgCj4gbm90IHN1YmplY3Qg
-dG8gRVBUL05QVCwgcmlnaHQ/CgpZZXMgdG8gdGhlIHNlY29uZCBxdWVzdGlvbiwgYnV0IG5vIHRv
-IHRoZSBmaXJzdDogVGhlIEdGTiAtPiBNRk4gdHJhbnNsYXRpb24Kc2hvdWxkIHN0aWxsIGJlIGRv
-bmUgaW5zaWRlIFhlbiBpbiB0aGUgSFZNIGNhc2UsIGltbyAoaW4gdGhlIGNvdXJzZSBvZgptYW51
-ZmFjdHVyaW5nIHRoZSBQVEUpLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+QWRkaW5nIEp1bGllbiBob3cgZGlkIHRoZSB3b3JrIHRvIHN1cHBvcnQgWEVOX1BBR0VfU0laRSAh
+PSBQQUdFX1NJWkUuCgpPbiBXZWQsIFNlcCAxMiwgMjAxOCBhdCAwMjoxNDoyNkFNIC0wNjAwLCBK
+YW4gQmV1bGljaCB3cm90ZToKPiA+Pj4gT24gMTIuMDkuMTggYXQgMDc6NDUsIDx6aG9uZ2ppYW5n
+QGh1YXdlaS5jb20+IHdyb3RlOgo+ID4gLS0tIGEvZHJpdmVycy9ibG9jay94ZW4tYmxrYmFjay9j
+b21tb24uaAo+ID4gKysrIGIvZHJpdmVycy9ibG9jay94ZW4tYmxrYmFjay9jb21tb24uaAo+ID4g
+QEAgLTY1LDcgKzY1LDcgQEAKPiA+ICAJKFhFTl9QQUdFU19QRVJfSU5ESVJFQ1RfRlJBTUUgLyBY
+RU5fUEFHRVNfUEVSX1NFR01FTlQpCj4gPiAgCj4gPiAgI2RlZmluZSBNQVhfSU5ESVJFQ1RfUEFH
+RVMgXAo+ID4gLQkoKE1BWF9JTkRJUkVDVF9TRUdNRU5UUyArIFNFR1NfUEVSX0lORElSRUNUX0ZS
+QU1FIC0gMSkvU0VHU19QRVJfSU5ESVJFQ1RfRlJBTUUpCj4gPiArCQlESVZfUk9VTkRfVVAoTUFY
+X0lORElSRUNUX1NFR01FTlRTLCBTRUdTX1BFUl9JTkRJUkVDVF9GUkFNRSkKPiA+ICAjZGVmaW5l
+IElORElSRUNUX1BBR0VTKF9zZWdzKSBESVZfUk9VTkRfVVAoX3NlZ3MsIFhFTl9QQUdFU19QRVJf
+SU5ESVJFQ1RfRlJBTUUpCj4gCj4gTXkgZmlyc3QgcmVhY3Rpb24gd2FzIHRvIHN1Z2dlc3QKPiAK
+PiAjZGVmaW5lIE1BWF9JTkRJUkVDVF9QQUdFUyBJTkRJUkVDVF9QQUdFUyhNQVhfSU5ESVJFQ1Rf
+U0VHTUVOVFMpCj4gCj4gYnV0IHRoYXQgd291bGRuJ3QgbWF0Y2ggd2hhdCdzIHRoZXJlIGN1cnJl
+bnRseSAobm90ZSB0aGUgdHdvIGRpZmZlcmVudAo+IGRpdmlzb3JzKS4gSSBjYW4ndCByZWFsbHkg
+ZGVjaWRlIHdoZXRoZXIgdGhhdCdzIGp1c3QgdW5mb3J0dW5hdGUgbmFtaW5nCj4gb2YgdGhlIHR3
+byBtYWNyb3MsIG9yIGFuIGFjdHVhbCBidWcuCgpJIHRoaW5rIHRoZXJlJ3MgaW5kZWVkIGEgYnVn
+IGhlcmUuCgpBRkFJQ1QsIE1BWF9JTkRJUkVDVF9QQUdFUyBzaG91bGQgdXNlIFhFTl9QQUdFU19Q
+RVJfSU5ESVJFQ1RfRlJBTUUgYW5kCnRoZW4gaXQgY291bGQgYmUgY2hhbmdlZCBhcyBKYW4gc3Vn
+Z2VzdGVkLgoKQ3VycmVudCBNQVhfSU5ESVJFQ1RfUEFHRVMgaXMgbWlzbmFtZWQgYW5kIHNob3Vs
+ZCBpbnN0ZWFkIGJlCk1BWF9JTkRJUkVDVF9TRUdTICh3aGljaCBvbiB4ODYgaXMgZXhhY3RseSB0
+aGUgc2FtZSBiZWNhdXNlIFBBR0VfU0laRQo9PSBYRU5fUEFHRV9TSVpFKS4KClJvZ2VyLgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
