@@ -1,21 +1,26 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 3/5] xentrace_format: combine 64-bit LE
- values from traces
-Date: Wed, 12 Sep 2018 09:47:16 +0200
-Message-ID: <a3ecdef99586cbecc3ff565b5a32e7945dcbba67.camel@suse.com>
-References: <1536597679-8303-1-git-send-email-andrii.anisov@gmail.com>
- <1536597679-8303-4-git-send-email-andrii.anisov@gmail.com>
- <ead12893-8bd0-5438-5356-937d712e08e4@citrix.com>
- <13a287f0-bd56-c8c6-f6b6-56e7034247c0@epam.com>
+From: Adrian Pop <apop@bitdefender.com>
+Subject: [PATCH v6 1/3] x86/mm: Change default value for
+ suppress #VE in set_mem_access()
+Date: Wed, 12 Sep 2018 10:50:04 +0300
+Message-ID: <20180912075006.31791-2-apop@bitdefender.com>
+References: <20180912075006.31791-1-apop@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1107705412364525353=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=kpmf=l2=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1fzzsZ-0005nP-6O
- for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 07:48:03 +0000
-In-Reply-To: <13a287f0-bd56-c8c6-f6b6-56e7034247c0@epam.com>
+ <srs0=mfac=l2=bitdefender.com=apop@srs-us1.protection.inumbo.net>)
+ id 1fzzux-0006RK-5P
+ for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 07:50:31 +0000
+Received: from mx-sr.buh.bitdefender.com (mx-sr.buh.bitdefender.biz
+ [10.17.80.103])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id CD109305FFBA
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Sep 2018 10:50:29 +0300 (EEST)
+Received: from smtp03.buh.bitdefender.org (smtp.bitdefender.biz [10.17.80.77])
+ by mx-sr.buh.bitdefender.com (Postfix) with ESMTP id C6C197FBFF
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Sep 2018 10:50:29 +0300 (EEST)
+In-Reply-To: <20180912075006.31791-1-apop@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,75 +29,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii_anisov@epam.com>, George Dunlap <george.dunlap@citrix.com>, Andrii Anisov <andrii.anisov@gmail.com>
-Cc: George Dunlap <george.dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Adrian Pop <apop@bitdefender.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>, Sergej Proskurin <proskurin@sec.in.tum.de>, Vlad Ioan Topan <itopan@bitdefender.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1107705412364525353==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-oz5sC77EJlWtVSgo2Hai"
-
-
---=-oz5sC77EJlWtVSgo2Hai
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2018-09-11 at 15:23 +0300, Andrii Anisov wrote:
-> Hello George,
->=20
->=20
-> On 11.09.18 13:48, George Dunlap wrote:
-> > I like the idea; but what does 'LE' mean in this context?
->=20
-> Little endian. Most significant 32bit word is at a higher index in
-> the=20
-> array.
->
-I did get it, but it took it a little bit, and a couple of re-reads. I
-guess, just use 'little endian' (both in changelog and in the code)?
-
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-oz5sC77EJlWtVSgo2Hai
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluYxIQACgkQFkJ4iaW4
-c+5G/RAAxsxyjBe/cIozNj16chRZ7tmCU2n84HuS3kv6M62tm2NFjuwt3Z1JKGQQ
-HTKq/tpX+XjPzQb+cWi3e0zSvGZKXWuMS/R0sHO9mIqAnKCfmM1hLH79vHmVHS6w
-mAejF2DltmRFL0AOR53DloIX4gIyQO9xOjcseUvIPr/KLQi0mqKSN9+B8xyYltnK
-wMCj/bqfDqjb0E/FbZuGnKcb6Iptj9gLfKWJWV1tUWvcmswQ0G4V5VX+lfjzfy0G
-IJ8ZUG6rPOSghEuPYy56/MoPhgaSp0QZMJ41/FwFyjaGzU2XAmoZlDlaeiUXpYbd
-uHKq5JH6sQ2u3K2QD3i3SI/nlXmJQxWtgHP7aydIAnPamMZDM63NhFA8VPWY9o1o
-rZiJE9Qu2wSsEZshSbo2gZMp3/LcK5YYjBbF/w5AuiE3smioe3KNQmmvlqOYDgLM
-7XcPwOhWs/TPR3LqgodcOrSi9cFnTCqkGQ+dSK88rpBhFuhXekoO0g4hI/+6RZwD
-HEQWa+3ijG2EhpikbRS4sBcRHeO1l8zal1gQKyTs/zK4gQLVptf6znhb0Bew80Qb
-uWX/EaOnCqIdsgGDZz5wv+ANOHvQXXwPgVHe+QNZD4gsjQ3QGAlZpIptG+R97sQk
-C6H0Ica1nBoYJyRgPf3MN9pXjbopHw9DW7/LrJxRvEvHL+yZ9sg=
-=eYmO
------END PGP SIGNATURE-----
-
---=-oz5sC77EJlWtVSgo2Hai--
-
-
-
---===============1107705412364525353==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1107705412364525353==--
+RnJvbTogVmxhZCBJb2FuIFRvcGFuIDxpdG9wYW5AYml0ZGVmZW5kZXIuY29tPgoKVGhlIGRlZmF1
+bHQgdmFsdWUgZm9yIHRoZSAic3VwcHJlc3MgI1ZFIiBiaXQgc2V0IGJ5IHNldF9tZW1fYWNjZXNz
+KCkKY3VycmVudGx5IGRlcGVuZHMgb24gd2hldGhlciB0aGUgY2FsbCBpcyBtYWRlIGZyb20gdGhl
+IHNhbWUgZG9tYWluICh0aGUKYml0IGlzIHNldCB3aGVuIGNhbGxlZCBmcm9tIGFub3RoZXIgZG9t
+YWluIGFuZCBjbGVhcmVkIGlmIGNhbGxlZCBmcm9tCnRoZSBzYW1lIGRvbWFpbikuIFRoaXMgcGF0
+Y2ggY2hhbmdlcyB0aGF0IGJlaGF2aW9yIHRvIGluaGVyaXQgdGhlIG9sZApzdXBwcmVzcyAjVkUg
+Yml0IHZhbHVlIGlmIGl0IGlzIGFscmVhZHkgc2V0IGFuZCB0byBzZXQgaXQgdG8gMQpvdGhlcndp
+c2UsIHdoaWNoIGlzIHNhZmVyIGFuZCBtb3JlIHJlbGlhYmxlLgoKU2lnbmVkLW9mZi1ieTogVmxh
+ZCBJb2FuIFRvcGFuIDxpdG9wYW5AYml0ZGVmZW5kZXIuY29tPgpTaWduZWQtb2ZmLWJ5OiBBZHJp
+YW4gUG9wIDxhcG9wQGJpdGRlZmVuZGVyLmNvbT4KLS0tCkNoYW5nZXMgaW4gdjY6Ci0gYWRkIGEg
+Y29tbWVudCBpbiB0aGUgY29kZSB0byBleHBsYWluIHRoZSBtZWFuaW5nIG9mIHRoZSAtMSBtYWdp
+YyB2YWx1ZQotLS0KIHhlbi9hcmNoL3g4Ni9tbS9tZW1fYWNjZXNzLmMgfCA3ICsrKysrLS0KIDEg
+ZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0
+IGEveGVuL2FyY2gveDg2L21tL21lbV9hY2Nlc3MuYyBiL3hlbi9hcmNoL3g4Ni9tbS9tZW1fYWNj
+ZXNzLmMKaW5kZXggYThiM2U5OWVjNC4uYzk4MGYxNzQ0ZCAxMDA2NDQKLS0tIGEveGVuL2FyY2gv
+eDg2L21tL21lbV9hY2Nlc3MuYworKysgYi94ZW4vYXJjaC94ODYvbW0vbWVtX2FjY2Vzcy5jCkBA
+IC0yODUsOCArMjg1LDExIEBAIGludCBwMm1fc2V0X2FsdHAybV9tZW1fYWNjZXNzKHN0cnVjdCBk
+b21haW4gKmQsIHN0cnVjdCBwMm1fZG9tYWluICpocDJtLAogICAgICAgICB9CiAgICAgfQogCi0g
+ICAgcmV0dXJuIGFwMm0tPnNldF9lbnRyeShhcDJtLCBnZm4sIG1mbiwgUEFHRV9PUkRFUl80Sywg
+dCwgYSwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgIGN1cnJlbnQtPmRvbWFpbiAhPSBkKTsK
+KyAgICAvKgorICAgICAqIEluaGVyaXQgdGhlIG9sZCBzdXBwcmVzcyAjVkUgYml0IHZhbHVlIGlm
+IGl0IGlzIGFscmVhZHkgc2V0LCBvciBzZXQgaXQKKyAgICAgKiB0byAxIG90aGVyd2lzZQorICAg
+ICAqLworICAgIHJldHVybiBhcDJtLT5zZXRfZW50cnkoYXAybSwgZ2ZuLCBtZm4sIFBBR0VfT1JE
+RVJfNEssIHQsIGEsIC0xKTsKIH0KIAogc3RhdGljIGludCBzZXRfbWVtX2FjY2VzcyhzdHJ1Y3Qg
+ZG9tYWluICpkLCBzdHJ1Y3QgcDJtX2RvbWFpbiAqcDJtLAotLSAKMi4xOC4wCgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
