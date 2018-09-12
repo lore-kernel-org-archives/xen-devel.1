@@ -1,21 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v6 13/14] x86: add iommu_ops to modify and
- flush IOMMU mappings
-Date: Wed, 12 Sep 2018 01:03:57 -0600
-Message-ID: <5B98BA5D02000078001E7923@prv1-mh.provo.novell.com>
-References: <20180823094711.21376-1-paul.durrant@citrix.com>
- <20180823094711.21376-14-paul.durrant@citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 1/5] xentrace_format: print timestamps in
+ nanoseconds
+Date: Wed, 12 Sep 2018 09:42:18 +0200
+Message-ID: <2d70941bee81fbbedd5ffc2194ad40c6bdffd323.camel@suse.com>
+References: <1536597679-8303-1-git-send-email-andrii.anisov@gmail.com>
+ <1536597679-8303-2-git-send-email-andrii.anisov@gmail.com>
+ <3e079a5d-6437-90a4-f313-e87b57f9b2bd@citrix.com>
+ <732445b5-59cf-5416-455d-f994ee2aa47c@epam.com>
+ <2fa12bbc-ace0-c75e-96bd-431cb4d49158@citrix.com>
+ <c7b5a2df-0b25-845b-0f45-ae9060e2acd3@epam.com>
+ <40a3fe50-187a-75de-3c38-1fdff0922d89@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5964963675692344423=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=mhj0=l2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1fzzBz-0002m8-Ky
- for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 07:04:03 +0000
-In-Reply-To: <20180823094711.21376-14-paul.durrant@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <40a3fe50-187a-75de-3c38-1fdff0922d89@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,57 +22,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: George Dunlap <george.dunlap@citrix.com>, Andrii Anisov <andrii_anisov@epam.com>, Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xen.org
+Cc: George Dunlap <george.dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIzLjA4LjE4IGF0IDExOjQ3LCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+ICtzdGF0aWMgaW50IGlvbW11b3BfbWFwKHN0cnVjdCB4ZW5faW9tbXVfb3BfbWFwICpvcCkK
-PiArewo+ICsgICAgc3RydWN0IGRvbWFpbiAqZCwgKmN1cnJkID0gY3VycmVudC0+ZG9tYWluOwo+
-ICsgICAgc3RydWN0IGRvbWFpbl9pb21tdSAqaW9tbXUgPSBkb21faW9tbXUoY3VycmQpOwo+ICsg
-ICAgYm9vbCByZWFkb25seSA9IG9wLT5mbGFncyAmIFhFTl9JT01NVU9QX21hcF9yZWFkb25seTsK
-PiArICAgIGJmbl90IGJmbiA9IF9iZm4ob3AtPmJmbik7Cj4gKyAgICBzdHJ1Y3QgcGFnZV9pbmZv
-ICpwYWdlOwo+ICsgICAgdW5zaWduZWQgaW50IHByb3Q7Cj4gKyAgICBpbnQgcmMsIGlnbm9yZTsK
-PiArCj4gKyAgICBpZiAoIG9wLT5wYWQgfHwKPiArICAgICAgICAgKG9wLT5mbGFncyAmIH4oWEVO
-X0lPTU1VT1BfbWFwX2FsbCB8Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgIFhFTl9JT01NVU9Q
-X21hcF9yZWFkb25seSkpICkKPiArICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiArCj4gKyAgICBp
-ZiAoICFpb21tdS0+aW9tbXVfb3BfcmFuZ2VzICkKPiArICAgICAgICByZXR1cm4gLUVPUE5PVFNV
-UFA7Cj4gKwo+ICsgICAgLyogUGVyLWRldmljZSBtYXBwaW5nIG5vdCB5ZXQgc3VwcG9ydGVkICov
-Cj4gKyAgICBpZiAoICEob3AtPmZsYWdzICYgWEVOX0lPTU1VT1BfbWFwX2FsbCkgKQo+ICsgICAg
-ICAgIHJldHVybiAtRUlOVkFMOwo+ICsKPiArICAgIC8qIENoZWNrIHdoZXRoZXIgdGhlIHNwZWNp
-ZmllZCBCRk4gZmFsbHMgaW4gYSByZXNlcnZlZCByZWdpb24gKi8KPiArICAgIGlmICggcmFuZ2Vz
-ZXRfY29udGFpbnNfc2luZ2xldG9uKGlvbW11LT5yZXNlcnZlZF9yYW5nZXMsIGJmbl94KGJmbikp
-ICkKPiArICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiArCj4gKyAgICBkID0gcmN1X2xvY2tfZG9t
-YWluX2J5X2FueV9pZChvcC0+ZG9taWQpOwo+ICsgICAgaWYgKCAhZCApCj4gKyAgICAgICAgcmV0
-dXJuIC1FU1JDSDsKPiArCj4gKyAgICByYyA9IGdldF9wYWdlZF9nZm4oZCwgX2dmbihvcC0+Z2Zu
-KSwgcmVhZG9ubHksIE5VTEwsICZwYWdlKTsKPiArICAgIGlmICggcmMgKQo+ICsgICAgICAgIGdv
-dG8gdW5sb2NrOwo+ICsKPiArICAgIHJjID0gLUVJTlZBTDsKPiArICAgIGlmICggIXJlYWRvbmx5
-ICYmICFnZXRfcGFnZV90eXBlKHBhZ2UsIFBHVF93cml0YWJsZV9wYWdlKSApCj4gKyAgICB7Cj4g
-KyAgICAgICAgcHV0X3BhZ2UocGFnZSk7Cj4gKyAgICAgICAgZ290byB1bmxvY2s7Cj4gKyAgICB9
-Cj4gKwo+ICsgICAgcHJvdCA9IElPTU1VRl9yZWFkYWJsZTsKPiArICAgIGlmICggIXJlYWRvbmx5
-ICkKPiArICAgICAgICBwcm90IHw9IElPTU1VRl93cml0YWJsZTsKPiArCj4gKyAgICByYyA9IC1F
-SU87Cj4gKyAgICBpZiAoIGlvbW11X21hcF9wYWdlKGN1cnJkLCBiZm4sIHBhZ2VfdG9fbWZuKHBh
-Z2UpLCBwcm90KSApCj4gKyAgICAgICAgZ290byByZWxlYXNlOwo+ICsKPiArICAgIHJjID0gcmFu
-Z2VzZXRfYWRkX3NpbmdsZXRvbihpb21tdS0+aW9tbXVfb3BfcmFuZ2VzLCBiZm5feChiZm4pKTsK
-PiArICAgIGlmICggcmMgKQo+ICsgICAgICAgIGdvdG8gdW5tYXA7CgpXaGVuIGEgbWFwcGluZyBp
-cyByZXF1ZXN0ZWQgZm9yIHRoZSBzYW1lIEJGTiB0aGF0IGEgcHJpb3IgbWFwcGluZwp3YXMgYWxy
-ZWFkeSBlc3RhYmxpc2hlZCBmb3IsIHRoZSBwYWdlIHJlZnMgb2YgdGhhdCBwcmlvciBtYXBwaW5n
-IGdldApsZWFrZWQgaGVyZS4gSSBkb24ndCB0aGluayB5b3Ugd2FudCB0byByZXF1aXJlIGFuIGlu
-dGVybWVkaWF0ZSB1bm1hcCwKc28gY2hlY2tpbmcgdGhlIHJhbmdlc2V0IGZpcnN0IGlzIG5vdCBh
-biBvcHRpb24uIEhlbmNlIEkgdGhpbmsgeW91Cm5lZWQgdG8gbG9vayB1cCB0aGUgdHJhbnNsYXRp
-b24gYW55d2F5LCB3aGljaCBtYXkgbWVhbiB0aGF0IHRoZQpyYW5nZXNldCdzIHVzZWZ1bG5lc3Mg
-aXMgcXVpdGUgbGltaXRlZCAocmVsZXZhbnQgd2l0aCB0aGUgYWRkaXRpb25hbApjb250ZXh0IG9m
-IG15IHF1ZXN0aW9uIHJlZ2FyZGluZyBpdCBwZXJoYXBzIHJlcXVpcmluZyBhIHByZXR0eSBtdWNo
-CnVuYm91bmRlZCBhbW91bnQgb2YgbWVtb3J5KS4KCkluIG9yZGVyIHRvIGF2b2lkIHNob290aW5n
-IGRvd24gYWxsIHByZS1leGlzdGluZyBSQU0gbWFwcGluZ3MgLSBpcwp0aGVyZSBubyB3YXkgdGhl
-IHBhZ2UgdGFibGUgZW50cmllcyBjb3VsZCBiZSBtYXJrZWQgdG8gaWRlbnRpZnkKdGhlaXIgb3Jp
-Z2luPwoKSSBhbHNvIGhhdmUgYW5vdGhlciBtb3JlIGdlbmVyYWwgY29uY2VybjogQWxsb3dpbmcg
-dGhlIGd1ZXN0IHRvCm1hbmlwdWxhdGUgaXRzIElPTU1VIHBhZ2UgdGFibGVzIG1lYW5zIHRoYXQg
-aXQgY2FuIGRlbGliZXJhdGVseQpzaGF0dGVyIGxhcmdlIHBhZ2VzLCBncm93aW5nIHRoZSBvdmVy
-YWxsIG1lbW9yeSBmb290cHJpbnQgb2YgdGhlCmRvbWFpbi4gSSdtIGhlc2l0YW50IHRvIHNheSB0
-aGlzLCBidXQgSSdtIGFmcmFpZCB0aGF0IHJlc291cmNlCnRyYWNraW5nIG9mIHN1Y2ggImJlaGlu
-ZCB0aGUgc2NlbmVzIiBhbGxvY2F0aW9ucyBtaWdodCBiZSBhCm5lY2Vzc2FyeSBwcmVyZXEgZm9y
-IHRoZSBQViBJT01NVSB3b3JrLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+
+--===============5964963675692344423==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-LqTwmQsindVT3x2MQ2f8"
+
+
+--=-LqTwmQsindVT3x2MQ2f8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 2018-09-11 at 16:54 +0100, George Dunlap wrote:
+> On 09/11/2018 04:19 PM, Andrii Anisov wrote:
+> >=20
+> > On 11.09.18 13:44, George Dunlap wrote:
+> > > What I do in xenalyze is to have the timestamps in seconds, but
+> > > always
+> > > print down to the nanosecond.  (For this I actually break cpu
+> > > cycles
+> > > into s and ns separately, and then print "%u.%09u".)
+> >=20
+> > Here, we can have the same. With the 0current formula in
+> > xentrace_format, but changing `%(tsc)d` to `%(tsc).9f` in formats.
+> >=20
+Sorry, I'm not sure I'm getting this properly. When you say "with the
+current formula", do you mean before or after this series?
+
+IAC, changing the default format file that we ship so that it prints
+time in the format seconds.nanoseconds (if CPU speed is specified),
+would be nice IMO.
+
+> FYI, I never use xentrace_format; as far as I'm concerned it's been
+> made
+> obsolete by xenalyze, and if it were up to me I'd remove it from the
+> tree.  Lots of people seem to find it useful, so I review patches.
+>
+I almost entirely concur. As said already, the one reason why I think
+it still could be useful, and we should keep it, is that the way a
+trace will look like can be changed or tweaked rather easily, and
+without having to recompile anything, via the formats file, which is
+rather cool. :-)
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-LqTwmQsindVT3x2MQ2f8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluYw1oACgkQFkJ4iaW4
+c+5+zhAA7N0aWLPE/zVFwNdUatpNumeEo98iBAc6QuMZy/jOXNQyQwaD8DgELHKj
+upGD9G4Q+bpjT4iM71bRDCCdDwiytwqYSh47pUu8h8gib49NH6zJjDdKqX9kB189
+VMHe/dsxTDOAMBwRTyeOzpM3R/SvVbO0iGB9fGQR38kjFTxnq2/EdgQev4gRM+cQ
+0JOKtBG4/eVylU17zx3mDqiYZaaEOSe5qRplUJkrkncFPQ/rCtD49TyGvqfvRddS
+Ely93PySPiW7sbubscm5S3Q0SSRmaIiG/iCeV7y9BdLp24F6f5hD7d6pABwgk7JE
+339eYmNPvnLyZJTu9dp3ykxgt1aglFq6x4K1hfeXdRJJIF00iYhmfJyPDFOXqCDb
+S0eWDKT2AXUpsQr7nX/gXn9GwGEPve404Qeu7+TCXKIvb58bEXdesznWgkLy9eJy
+jBeWZ+SSWV1O+SgVlXDEghei2fHnjQOLfmcs/peb8xGmR+8mxxAJ/AT7rL5aqtu/
+Mev3lAu+/5KLwZ8jECd2SpMpBrpUhl505am6bwKLcG6HtsS7AWyOc8NEEvNwbGIN
+BW6rUnFmu7NB97/xmodI55UjqQ+1ikqMiReBYYSp7r2rgUNTD6ImqffOqIJ5zJdk
++u3t+8SXm7e5D6KcWFYXNNEaC9SRH0XviXDAUXadOWqQpxUC8M0=
+=EsG2
+-----END PGP SIGNATURE-----
+
+--=-LqTwmQsindVT3x2MQ2f8--
+
+
+
+--===============5964963675692344423==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5964963675692344423==--
