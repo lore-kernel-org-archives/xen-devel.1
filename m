@@ -1,26 +1,19 @@
-From: Adrian Pop <apop@bitdefender.com>
-Subject: [PATCH v6 1/3] x86/mm: Change default value for
- suppress #VE in set_mem_access()
-Date: Wed, 12 Sep 2018 10:50:04 +0300
-Message-ID: <20180912075006.31791-2-apop@bitdefender.com>
-References: <20180912075006.31791-1-apop@bitdefender.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 4/5] formats: allign trace record format to
+ the current code
+Date: Wed, 12 Sep 2018 09:49:56 +0200
+Message-ID: <62040836286ac75602fcf3882b971712a561a5df.camel@suse.com>
+References: <1536597679-8303-1-git-send-email-andrii.anisov@gmail.com>
+ <1536597679-8303-5-git-send-email-andrii.anisov@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4162523664654048496=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=mfac=l2=bitdefender.com=apop@srs-us1.protection.inumbo.net>)
- id 1fzzux-0006RK-5P
- for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 07:50:31 +0000
-Received: from mx-sr.buh.bitdefender.com (mx-sr.buh.bitdefender.biz
- [10.17.80.103])
- by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id CD109305FFBA
- for <xen-devel@lists.xenproject.org>; Wed, 12 Sep 2018 10:50:29 +0300 (EEST)
-Received: from smtp03.buh.bitdefender.org (smtp.bitdefender.biz [10.17.80.77])
- by mx-sr.buh.bitdefender.com (Postfix) with ESMTP id C6C197FBFF
- for <xen-devel@lists.xenproject.org>; Wed, 12 Sep 2018 10:50:29 +0300 (EEST)
-In-Reply-To: <20180912075006.31791-1-apop@bitdefender.com>
+ <srs0=kpmf=l2=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1fzzv0-0006Ry-Jc
+ for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 07:50:34 +0000
+In-Reply-To: <1536597679-8303-5-git-send-email-andrii.anisov@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,35 +22,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Adrian Pop <apop@bitdefender.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>, Sergej Proskurin <proskurin@sec.in.tum.de>, Vlad Ioan Topan <itopan@bitdefender.com>
+To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xen.org
+Cc: George Dunlap <george.dunlap@eu.citrix.com>, Andrii Anisov <andrii_anisov@epam.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogVmxhZCBJb2FuIFRvcGFuIDxpdG9wYW5AYml0ZGVmZW5kZXIuY29tPgoKVGhlIGRlZmF1
-bHQgdmFsdWUgZm9yIHRoZSAic3VwcHJlc3MgI1ZFIiBiaXQgc2V0IGJ5IHNldF9tZW1fYWNjZXNz
-KCkKY3VycmVudGx5IGRlcGVuZHMgb24gd2hldGhlciB0aGUgY2FsbCBpcyBtYWRlIGZyb20gdGhl
-IHNhbWUgZG9tYWluICh0aGUKYml0IGlzIHNldCB3aGVuIGNhbGxlZCBmcm9tIGFub3RoZXIgZG9t
-YWluIGFuZCBjbGVhcmVkIGlmIGNhbGxlZCBmcm9tCnRoZSBzYW1lIGRvbWFpbikuIFRoaXMgcGF0
-Y2ggY2hhbmdlcyB0aGF0IGJlaGF2aW9yIHRvIGluaGVyaXQgdGhlIG9sZApzdXBwcmVzcyAjVkUg
-Yml0IHZhbHVlIGlmIGl0IGlzIGFscmVhZHkgc2V0IGFuZCB0byBzZXQgaXQgdG8gMQpvdGhlcndp
-c2UsIHdoaWNoIGlzIHNhZmVyIGFuZCBtb3JlIHJlbGlhYmxlLgoKU2lnbmVkLW9mZi1ieTogVmxh
-ZCBJb2FuIFRvcGFuIDxpdG9wYW5AYml0ZGVmZW5kZXIuY29tPgpTaWduZWQtb2ZmLWJ5OiBBZHJp
-YW4gUG9wIDxhcG9wQGJpdGRlZmVuZGVyLmNvbT4KLS0tCkNoYW5nZXMgaW4gdjY6Ci0gYWRkIGEg
-Y29tbWVudCBpbiB0aGUgY29kZSB0byBleHBsYWluIHRoZSBtZWFuaW5nIG9mIHRoZSAtMSBtYWdp
-YyB2YWx1ZQotLS0KIHhlbi9hcmNoL3g4Ni9tbS9tZW1fYWNjZXNzLmMgfCA3ICsrKysrLS0KIDEg
-ZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0
-IGEveGVuL2FyY2gveDg2L21tL21lbV9hY2Nlc3MuYyBiL3hlbi9hcmNoL3g4Ni9tbS9tZW1fYWNj
-ZXNzLmMKaW5kZXggYThiM2U5OWVjNC4uYzk4MGYxNzQ0ZCAxMDA2NDQKLS0tIGEveGVuL2FyY2gv
-eDg2L21tL21lbV9hY2Nlc3MuYworKysgYi94ZW4vYXJjaC94ODYvbW0vbWVtX2FjY2Vzcy5jCkBA
-IC0yODUsOCArMjg1LDExIEBAIGludCBwMm1fc2V0X2FsdHAybV9tZW1fYWNjZXNzKHN0cnVjdCBk
-b21haW4gKmQsIHN0cnVjdCBwMm1fZG9tYWluICpocDJtLAogICAgICAgICB9CiAgICAgfQogCi0g
-ICAgcmV0dXJuIGFwMm0tPnNldF9lbnRyeShhcDJtLCBnZm4sIG1mbiwgUEFHRV9PUkRFUl80Sywg
-dCwgYSwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgIGN1cnJlbnQtPmRvbWFpbiAhPSBkKTsK
-KyAgICAvKgorICAgICAqIEluaGVyaXQgdGhlIG9sZCBzdXBwcmVzcyAjVkUgYml0IHZhbHVlIGlm
-IGl0IGlzIGFscmVhZHkgc2V0LCBvciBzZXQgaXQKKyAgICAgKiB0byAxIG90aGVyd2lzZQorICAg
-ICAqLworICAgIHJldHVybiBhcDJtLT5zZXRfZW50cnkoYXAybSwgZ2ZuLCBtZm4sIFBBR0VfT1JE
-RVJfNEssIHQsIGEsIC0xKTsKIH0KIAogc3RhdGljIGludCBzZXRfbWVtX2FjY2VzcyhzdHJ1Y3Qg
-ZG9tYWluICpkLCBzdHJ1Y3QgcDJtX2RvbWFpbiAqcDJtLAotLSAKMi4xOC4wCgoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4162523664654048496==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-J/tq+bsTAsR6Ban1vOA7"
+
+
+--=-J/tq+bsTAsR6Ban1vOA7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, 2018-09-10 at 19:41 +0300, Andrii Anisov wrote:
+> From: Andrii Anisov <andrii_anisov@epam.com>
+>=20
+> Allign rtds:repl_budget trace record format to the current code.
+>=20
+Right.
+
+This is (most likely) my fault. Sorry :-P
+
+> Signed-off-by: Andrii Anisov <andrii_anisov@epam.com>
+>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-J/tq+bsTAsR6Ban1vOA7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluYxSQACgkQFkJ4iaW4
+c+6G+hAAyjV5XhiDvqKm5toE7Juhgd8BKxJBDZLzvhiJtKQqor/MPKmgVppgLPI8
+LQOBjY0vbJ/dfnet4Hfz/27fvyonOQJaEWLN0xM5dUd7axrgAotrTPRZCNICsqKv
+qNRbVHAMDVu4mDs/k5vMAlIaMINGrdTWoFo1m4iefXMjD8yd/LmTQdetUdFqJjED
+y3ilLywYBm1co3LOjIoipsniW++NtQcHZdx7rQmjE/Afgiv9UBG1KXSwFAWliT1i
+/PsU01qMbAXQH0YIKN/WG2h2WcuIvMYeY0lKTd9Xnp9fbu+eQRb3wVEZNHeAJdwu
+pCWKRItGFGdFiu6ANTbAFTAflhlhLyGwnALeDDA6Zg6EBbgd6wATkuUMJIEi/NSl
+ga2klgRj+2XQWmpmeneaJOV/pCwfaafa/P/adPVR94ucaZFMVC4df9zYx8DfwBHj
+YG1BhLeULUaZYNxmCSbl238MlyyvNtrr/7WeQdZeiyBXv2E8H3QWhO8QH4WWAmvq
+naLXwLD8pdwfnJfZ+sV/0rAtgGPMLuunXnvLk7QCNag8V57JYNnOZgHoer4wR9li
+NXeujD/WVX6JeCRR+cHOxcCHdQy6XluXr71evGxRMLkPqRhJEcbikVLhTjAMZgDi
+fBJ848QYLFFDx9Cz9Kpkf9OPe1OFrh/z8VWH3+kbnAuMBW+3Tf4=
+=6MBj
+-----END PGP SIGNATURE-----
+
+--=-J/tq+bsTAsR6Ban1vOA7--
+
+
+
+--===============4162523664654048496==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4162523664654048496==--
