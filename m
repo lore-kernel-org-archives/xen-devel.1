@@ -1,17 +1,19 @@
-From: zhong jiang <zhongjiang@huawei.com>
-Subject: [PATCH] drivers/block/xen-blkback/common.h: use
- DIV_ROUND_UP instead of reimplementing its function
-Date: Wed, 12 Sep 2018 13:45:00 +0800
-Message-ID: <1536731100-56054-1-git-send-email-zhongjiang__20455.6525488899$1536731784$gmane$org@huawei.com>
+From: David Miller <davem@davemloft.net>
+Subject: Re: [PATCH] net: xenbus: remove redundant condition
+ check before debugfs_remove_recursive
+Date: Tue, 11 Sep 2018 23:01:45 -0700 (PDT)
+Message-ID: <20180911.230145.1517187819257402271.davem__30372.2169287086$1536732028$gmane$org@davemloft.net>
+References: <1536413706-31838-1-git-send-email-zhongjiang@huawei.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=u/vq=l2=huawei.com=zhongjiang@srs-us1.protection.inumbo.net>)
- id 1fzy9Q-00051M-IS
- for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 05:57:20 +0000
+ <srs0=hhve=l2=davemloft.net=davem@srs-us1.protection.inumbo.net>)
+ id 1fzyDj-0005m0-IF
+ for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 06:01:47 +0000
+In-Reply-To: <1536413706-31838-1-git-send-email-zhongjiang@huawei.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,26 +22,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: axboe@kernel.dk
-Cc: linux-block@vger.kernel.org, xen-devel@lists.xenproject.org, konrad.wilk@oracle.com, linux-kernel@vger.kernel.org, roger.pau@citrix.com
+To: zhongjiang@huawei.com
+Cc: xen-devel@lists.xenproject.org, paul.durrant@citrix.com, wei.liu2@citrix.com, netdev@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-RElWX1JPVU5EX1VQIGhhcyBpbXBsZW1lbnRlZCB0aGUgY29kZS1vcGVuZWQgZnVuY3Rpb24uIFRo
-ZXJlZm9yZSwganVzdApyZXBsYWNlIHRoZSBpbXBsZW1lbnRhdGlvbiB3aXRoIERJVl9ST1VORF9V
-UC4KClNpZ25lZC1vZmYtYnk6IHpob25nIGppYW5nIDx6aG9uZ2ppYW5nQGh1YXdlaS5jb20+Ci0t
-LQogZHJpdmVycy9ibG9jay94ZW4tYmxrYmFjay9jb21tb24uaCB8IDIgKy0KIDEgZmlsZSBjaGFu
-Z2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMv
-YmxvY2sveGVuLWJsa2JhY2svY29tbW9uLmggYi9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtiYWNrL2Nv
-bW1vbi5oCmluZGV4IDFkMzAwMmQuLjg3NDYxM2QgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvYmxvY2sv
-eGVuLWJsa2JhY2svY29tbW9uLmgKKysrIGIvZHJpdmVycy9ibG9jay94ZW4tYmxrYmFjay9jb21t
-b24uaApAQCAtNjUsNyArNjUsNyBAQAogCShYRU5fUEFHRVNfUEVSX0lORElSRUNUX0ZSQU1FIC8g
-WEVOX1BBR0VTX1BFUl9TRUdNRU5UKQogCiAjZGVmaW5lIE1BWF9JTkRJUkVDVF9QQUdFUyBcCi0J
-KChNQVhfSU5ESVJFQ1RfU0VHTUVOVFMgKyBTRUdTX1BFUl9JTkRJUkVDVF9GUkFNRSAtIDEpL1NF
-R1NfUEVSX0lORElSRUNUX0ZSQU1FKQorCQlESVZfUk9VTkRfVVAoTUFYX0lORElSRUNUX1NFR01F
-TlRTLCBTRUdTX1BFUl9JTkRJUkVDVF9GUkFNRSkKICNkZWZpbmUgSU5ESVJFQ1RfUEFHRVMoX3Nl
-Z3MpIERJVl9ST1VORF9VUChfc2VncywgWEVOX1BBR0VTX1BFUl9JTkRJUkVDVF9GUkFNRSkKIAog
-LyogTm90IGEgcmVhbCBwcm90b2NvbC4gIFVzZWQgdG8gZ2VuZXJhdGUgcmluZyBzdHJ1Y3RzIHdo
-aWNoIGNvbnRhaW4KLS0gCjEuNy4xMi40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+RnJvbTogemhvbmcgamlhbmcgPHpob25namlhbmdAaHVhd2VpLmNvbT4KRGF0ZTogU2F0LCA4IFNl
+cCAyMDE4IDIxOjM1OjA2ICswODAwCgo+IGRlYnVnZnNfcmVtb3ZlX3JlY3Vyc2l2ZSBoYXMgdGFr
+ZW4gdGhlIElTX0VSUl9PUl9OVUxMIGludG8gYWNjb3VudC4gSnVzdAo+IHJlbW92ZSB0aGUgdW5u
+ZWNlc3NhcnkgY29uZGl0aW9uIGNoZWNrLgo+IAo+IFNpZ25lZC1vZmYtYnk6IHpob25nIGppYW5n
+IDx6aG9uZ2ppYW5nQGh1YXdlaS5jb20+CgpBcHBsaWVkIHRvIG5ldC1uZXh0LgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
