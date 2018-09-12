@@ -1,19 +1,19 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [xen-unstable test] 127504: regressions - FAIL
-Date: Wed, 12 Sep 2018 10:19:53 +0200
-Message-ID: <20180912081953.sz22fjfxqo6wsul5@mac.bytemobile.com>
-References: <osstest-127504-mainreport@xen.org>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: Xen 4.12 Development Update
+Date: Wed, 12 Sep 2018 02:20:46 -0600
+Message-ID: <5B98CC5E02000078001E7A00@prv1-mh.provo.novell.com>
+References: <20180912065405.19997-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=nh++=l2=citrix.com=prvs=7864c2456=roger.pau@srs-us1.protection.inumbo.net>)
- id 1g00Np-0002gA-39
- for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 08:20:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=mhj0=l2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1g00OI-0002m4-K5
+ for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 08:20:50 +0000
+In-Reply-To: <20180912065405.19997-1-jgross@suse.com>
 Content-Disposition: inline
-In-Reply-To: <osstest-127504-mainreport@xen.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,22 +22,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: osstest service owner <osstest-admin@xenproject.org>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
+To: Paul Durrant <paul.durrant@citrix.com>, Juergen Gross <jgross@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBTZXAgMTIsIDIwMTggYXQgMDE6Mzk6MjZBTSArMDAwMCwgb3NzdGVzdCBzZXJ2aWNl
-IG93bmVyIHdyb3RlOgo+IGZsaWdodCAxMjc1MDQgeGVuLXVuc3RhYmxlIHJlYWwgW3JlYWxdCj4g
-aHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyNzUwNC8K
-PiAKPiBSZWdyZXNzaW9ucyA6LSgKPiAKPiBUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5k
-IGFyZSBibG9ja2luZywKPiBpbmNsdWRpbmcgdGVzdHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoK
-PiAgdGVzdC1hbWQ2NC1hbWQ2NC1leGFtaW5lICAgICAgNCBtZW1kaXNrLXRyeS1hcHBlbmQgICAg
-ICAgZmFpbCBSRUdSLiB2cy4gMTI3NDg5CgpUaGlzIHNob3VsZG4ndCBibG9jayB0aGUgcHVzaCwg
-dGhpcyBqb2IgcnVuIG9uIGFsYmFuYTAsIHdoaWNoIGlzIHNldCB0bwpib290IHVzaW5nIFVFRkkg
-YW5kIGRvZXNuJ3Qgc3VwcG9ydCBtZW1kaXNrLgoKTWF5YmUgbWVtZGlzay10cnktYXBwZW5kIHNo
-b3VsZCBiZSBjaGFuZ2VkIHRvIGFsd2F5cyByZXBvcnQgc3VjY2Vzcwp3aGVuIHJ1biBhcyBwYXJ0
-IG9mIHRoZSB4ZW4tdW5zdGFibGUgZmxpZ2h0PwoKSW4gYW55IGNhc2UsIElNTyBhIGZvcmNlIHB1
-c2ggc2hvdWxkIGJlIGRvbmUgaGVyZS4KClRoYW5rcywgUm9nZXIuCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDEyLjA5LjE4IGF0IDA4OjU0LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiA9PT0g
+eDg2ID09PSAKPiAKPiAqICBndWVzdCByZXNvdXJjZSBtYXBwaW5nICh2MTgpCj4gICAtICBQYXVs
+IER1cnJhbnQKClRoYXQncyBhbGwgZ29uZSBpbiBieSBub3c/IFBhdWw/Cgo+ICogIGh5cGVydmlz
+b3IgeDg2IGluc3RydWN0aW9uIGVtdWxhdG9yIGFkZGl0aW9ucyAodjQpCj4gICAtICBKYW4gQmV1
+bGljaAoKV2hlcmUncyB0aGlzICJ2NCIgY29taW5nIGZyb20/IFRoZSBwcmVzZW50bHkgcmVsZXZh
+bnQgc2VyaWVzIGlzCmF0IHYyIHJpZ2h0IG5vdywgd2l0aCAobXVjaCBiaWdnZXIpIHYzIGFyb3Vu
+ZCB0aGUgY29ybmVyLgoKPiAqICBQVi1vbmx5IGh5cGVydmlzb3IgKHYxKQo+ICAgLSAgV2VpIExp
+dQoKVGhpcyBzdXJlbHkgaGFzIHByb2dyZXNzZWQgcGFzdCB2MS4KCkphbgoKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
