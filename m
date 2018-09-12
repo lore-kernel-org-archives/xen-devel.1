@@ -1,20 +1,19 @@
-From: Steven Haigh <netwiz@crc.id.au>
-Subject: Re: BUG: sched=credit2 crashes system when using
- cpupools
-Date: Thu, 13 Sep 2018 01:27:51 +1000
-Message-ID: <3025735.xZ65HzDoXl@wopr.lan.crc.id.au>
-References: <6564259.GaOmOO5kt2@wopr.lan.crc.id.au>
- <faf61a4a900b3404de8077357e898159@crc.id.au>
- <9d3beeffa3ed724f751dc190b3de4d34a22f1ea3.camel@suse.com>
+From: Andrii Anisov <andrii.anisov@gmail.com>
+Subject: [PATCH v2] Change a time printout representation for
+ keyhandlers
+Date: Wed, 12 Sep 2018 18:58:34 +0300
+Message-ID: <1536767914-22616-1-git-send-email-andrii.anisov@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2554103356382315548=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=njql=l2=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
- id 1g073k-0002lj-Kh
- for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 15:28:04 +0000
-In-Reply-To: <9d3beeffa3ed724f751dc190b3de4d34a22f1ea3.camel@suse.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=rzjq=l2=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
+ id 1g07XM-0004wy-CR
+ for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 15:58:40 +0000
+Received: by mail-lj1-x243.google.com with SMTP id q127-v6so2062196ljq.11
+ for <xen-devel@lists.xenproject.org>; Wed, 12 Sep 2018 08:58:39 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,122 +23,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Juergen Gross <jgross@suse.com>, Jan Beulich <JBeulich@suse.com>, Dario Faggioli <dfaggioli@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2554103356382315548==
-Content-Type: multipart/signed; boundary="nextPart26053431.ib9BRS4ilb"; micalg="pgp-sha256"; protocol="application/pgp-signature"
-
---nextPart26053431.ib9BRS4ilb
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-
-On Thursday, 13 September 2018 1:11:20 AM AEST Dario Faggioli wrote:
-> On Thu, 2018-08-30 at 18:49 +1000, Steven Haigh wrote:
-> > On 2018-08-30 18:33, Jan Beulich wrote:
-> > > Anyway - as J=C3=BCrgen says, something for the scheduler
-> > > maintainers to look into.
->=20
-> Ok, I'm back.
->=20
-> > Yep - I just want to confirm that we tested this in BOTH NUMA
-> > configurations - and credit2 crashed on both.
-> >=20
-> > I switched back to sched=3Dcredit, and it seems to work as expected:
-> > # xl cpupool-list
-> > Name               CPUs   Sched     Active   Domain count
-> > Pool-node0          12    credit       y          3
-> > Pool-node1          12    credit       y          0
-
-Hi Dario,
-
-I'll try to clarify below.
-=20
-> Wait, in a previous message, you said: "A machine where we could get
-> this working every time shows". Doesn't that mean creating a separate
-> pool for node 1 works with both Credit and Credit2, if the node has
-> memory?
->=20
-> I mean, trying to clarifying, my understanding is that you have to
-> systems:
->=20
-> system A: node 1 has *no* memory
-> system B: both node 0 and node 1 have memory
->=20
-> Creating a Credit pool with pcpus from node 1 always work on both
-> systems.
-
-Correct. With the credit scheduler, the pool split worked correctly on both=
-=20
-systems.
-=20
-> OTOH, when you try to create a Credit2 pool with pcpus from node 1,
-> does it always crash on both systems, or does it work on system B and
-> crashes on system A ?
-
-Both systems crashed when using credit2. We originally thought this was due=
- to=20
-the different memory layout between the two systems. This bit turned out to=
-=20
-not matter as both systems crashed in the same way.
-
-> I do have a NUMA box with RAM in both nodes (so similar to system B).
-> Last time I checked, what you're trying to do worked there, pretty much
-> with any scheduler combination, but I'll recheck.
->=20
-> I don't have a box similar to system A. I'll try to remove some of the
-> RAM from that NUMA box, and check what happens.
-
-In theory, if you reproduce what we did, it should crash anyway. The RAM=20
-layout shouldn't matter.
-
-We changed the scheduler in the grub line as 'sched=3Dcredit2'. Then did th=
-e=20
-split. I didn't try changing the Dom0 to boot with credit, but making the=20
-pools credit2.
-
-=2D-=20
-Steven Haigh
-
-=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB https://www.crc.id.au
-=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
-
---nextPart26053431.ib9BRS4ilb
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAluZMHcACgkQQa811Xp9
-MdxSlA/+LMkOdqPbOUkvxP3KTmPuFa/j76oiOwK/GBlEDDjUhSEeoIPBw+wyJR0r
-GeHCLw7/FR1MVZqCr5IEfgATaw+o1QMwNs7QU+f4ugvjlZeEMrcbx2zhwbakQOmh
-GMHJAztbaRGspWW0/2ioV45ET83ONftDP2l423sLyl9g2EJZjrkFQE9uWvnXrntj
-x2k6AiOapbqZ1i6eljrHA9Mxah1UsyKhpQoRiNiUfRNm+T541OtiXdtgoazpKj+c
-3YRQwf7rJkrCu7WvXV6gR4ivVLZ2JajcdBL6jNQioM8H01oWYaDv8F1CBfhwYlml
-yoqcn9AaaKImfpk1fMBWLS2n0bxJHw0/22BoNbhcwc+uKUTnXCoAm2KqrTq9f9+Q
-ssE7m84sU6Irfd9uzcmWsqcNANoiBCEFuPb45b4o5ckYfJEc9xLgG4yKmgRLHwaW
-mdcZQpdvk66Ptz+uHT/E5+bHTEho4igMblEFxpPhpMAnp42qS6CxnXXYaFXn9M+i
-z1cOCuBdBSuxevUMhcikDIcpKEqpgowzkxx/pbs+cDW2/oM8578vKDULC4D8uHxg
-YrsHGSkcM+WFjdmcLnTa2EVxqpCHB+O2RKVKlULEpWfVhrXvgWvyOU3fUv0/J5Z0
-0ifovpuvmmyE9GD98NM5LqBENgsEhRnj+SMExwvz+Yokk0rHNRE=
-=aCrx
------END PGP SIGNATURE-----
-
---nextPart26053431.ib9BRS4ilb--
-
-
-
-
-
---===============2554103356382315548==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2554103356382315548==--
+RnJvbTogQW5kcmlpIEFuaXNvdiA8YW5kcmlpX2FuaXNvdkBlcGFtLmNvbT4KCkZvciBkaWZmZXJl
+bnQga2V5aGFuZGxlcnMsIHJlcGxhY2UgYSBoZXggd2l0aCBkZWxpbWl0ZXIgcmVwcmVzZW50YXRp
+b24Kb2YgdGltZSB0byBQUklfc3RpbWUgd2hpY2ggaXMgZGVjaW1hbCBucyBjdXJyZW50bHkuCgpT
+aWduZWQtb2ZmLWJ5OiBBbmRyaWkgQW5pc292IDxhbmRyaWlfYW5pc292QGVwYW0uY29tPgotLS0K
+CkNoYW5nZXMgaW4gdjI6CiAgICAtIFRpbWUgcmVwcmVzZW50YXRpb24gY2hhbmdlIHByb3BhZ2F0
+ZWQgdG8gYWxsIGtleWhhbmRsZXJzIGFzIGFncmVlZCBoZXJlIFsxXQogICAgLSBUaXRsZSBhbmQg
+bWVzc2FnZSBhcmUgY2hhbmdlZAoKWzFdIC0gaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9h
+cmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE4LTA5L21zZzAwOTk5Lmh0bWwKCi0tLQogeGVuL2Fy
+Y2gveDg2L251bWEuYyAgICAgfCA0ICsrLS0KIHhlbi9jb21tb24vcGFnZV9hbGxvYy5jIHwgNCAr
+Ky0tCiB4ZW4vY29tbW9uL3BlcmZjLmMgICAgICB8IDYgKystLS0tCiB4ZW4vY29tbW9uL3NwaW5s
+b2NrLmMgICB8IDggKysrLS0tLS0KIDQgZmlsZXMgY2hhbmdlZCwgOSBpbnNlcnRpb25zKCspLCAx
+MyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvbnVtYS5jIGIveGVuL2Fy
+Y2gveDg2L251bWEuYwppbmRleCBhODc5ODdkLi5kMTM0MTRhIDEwMDY0NAotLS0gYS94ZW4vYXJj
+aC94ODYvbnVtYS5jCisrKyBiL3hlbi9hcmNoL3g4Ni9udW1hLmMKQEAgLTM3OCw4ICszNzgsOCBA
+QCBzdGF0aWMgdm9pZCBkdW1wX251bWEodW5zaWduZWQgY2hhciBrZXkpCiAgICAgdW5zaWduZWQg
+aW50IHBhZ2VfbnVtX25vZGVbTUFYX05VTU5PREVTXTsKICAgICBjb25zdCBzdHJ1Y3Qgdm51bWFf
+aW5mbyAqdm51bWE7CiAKLSAgICBwcmludGsoIiclYycgcHJlc3NlZCAtPiBkdW1waW5nIG51bWEg
+aW5mbyAobm93LTB4JVg6JTA4WClcbiIsIGtleSwKLSAgICAgICAgICAgKHUzMikobm93Pj4zMiks
+ICh1MzIpbm93KTsKKyAgICBwcmludGsoIiclYycgcHJlc3NlZCAtPiBkdW1waW5nIG51bWEgaW5m
+byAobm93ID0gJSJQUklfc3RpbWUiKVxuIiwga2V5LAorICAgICAgICAgICBub3cpOwogCiAgICAg
+Zm9yX2VhY2hfb25saW5lX25vZGUgKCBpICkKICAgICB7CmRpZmYgLS1naXQgYS94ZW4vY29tbW9u
+L3BhZ2VfYWxsb2MuYyBiL3hlbi9jb21tb24vcGFnZV9hbGxvYy5jCmluZGV4IDAyYWVlZDcuLjE2
+ZTFiMGMgMTAwNjQ0Ci0tLSBhL3hlbi9jb21tb24vcGFnZV9hbGxvYy5jCisrKyBiL3hlbi9jb21t
+b24vcGFnZV9hbGxvYy5jCkBAIC0yNDIwLDggKzI0MjAsOCBAQCBzdGF0aWMgdm9pZCBkdW1wX2hl
+YXAodW5zaWduZWQgY2hhciBrZXkpCiAgICAgc190aW1lX3QgICAgICBub3cgPSBOT1coKTsKICAg
+ICBpbnQgICAgICAgICAgIGksIGo7CiAKLSAgICBwcmludGsoIiclYycgcHJlc3NlZCAtPiBkdW1w
+aW5nIGhlYXAgaW5mbyAobm93LTB4JVg6JTA4WClcbiIsIGtleSwKLSAgICAgICAgICAgKHUzMiko
+bm93Pj4zMiksICh1MzIpbm93KTsKKyAgICBwcmludGsoIiclYycgcHJlc3NlZCAtPiBkdW1waW5n
+IGhlYXAgaW5mbyAobm93ID0gJSJQUklfc3RpbWUiKVxuIiwga2V5LAorICAgICAgICAgICBub3cp
+OwogCiAgICAgZm9yICggaSA9IDA7IGkgPCBNQVhfTlVNTk9ERVM7IGkrKyApCiAgICAgewpkaWZm
+IC0tZ2l0IGEveGVuL2NvbW1vbi9wZXJmYy5jIGIveGVuL2NvbW1vbi9wZXJmYy5jCmluZGV4IDA2
+NzU2NzcuLjNhYmUzNTggMTAwNjQ0Ci0tLSBhL3hlbi9jb21tb24vcGVyZmMuYworKysgYi94ZW4v
+Y29tbW9uL3BlcmZjLmMKQEAgLTMzLDggKzMzLDcgQEAgdm9pZCBwZXJmY19wcmludGFsbCh1bnNp
+Z25lZCBjaGFyIGtleSkKICAgICB1bnNpZ25lZCBpbnQgaSwgajsKICAgICBzX3RpbWVfdCBub3cg
+PSBOT1coKTsKIAotICAgIHByaW50aygiWGVuIHBlcmZvcm1hbmNlIGNvdW50ZXJzIFNIT1cgIChu
+b3cgPSAweCUwOFg6JTA4WClcbiIsCi0gICAgICAgICAgICh1MzIpKG5vdz4+MzIpLCAodTMyKW5v
+dyk7CisgICAgcHJpbnRrKCJYZW4gcGVyZm9ybWFuY2UgY291bnRlcnMgU0hPVyAgKG5vdyA9ICUi
+UFJJX3N0aW1lIilcbiIsIG5vdyk7CiAKICAgICBmb3IgKCBpID0gaiA9IDA7IGkgPCBOUl9QRVJG
+Q1RSUzsgaSsrICkKICAgICB7CkBAIC0xMjIsOCArMTIxLDcgQEAgdm9pZCBwZXJmY19yZXNldCh1
+bnNpZ25lZCBjaGFyIGtleSkKICAgICBzX3RpbWVfdCBub3cgPSBOT1coKTsKIAogICAgIGlmICgg
+a2V5ICE9ICdcMCcgKQotICAgICAgICBwcmludGsoIlhlbiBwZXJmb3JtYW5jZSBjb3VudGVycyBS
+RVNFVCAobm93ID0gMHglMDhYOiUwOFgpXG4iLAotICAgICAgICAgICAgICAgKHUzMikobm93Pj4z
+MiksICh1MzIpbm93KTsKKyAgICAgICAgcHJpbnRrKCJYZW4gcGVyZm9ybWFuY2UgY291bnRlcnMg
+UkVTRVQgKG5vdyA9ICUiUFJJX3N0aW1lIilcbiIsIG5vdyk7CiAKICAgICAvKiBsZWF2ZSBTVEFU
+VVMgY291bnRlcnMgYWxvbmUgLS0gZG9uJ3QgcmVzZXQgKi8KIApkaWZmIC0tZ2l0IGEveGVuL2Nv
+bW1vbi9zcGlubG9jay5jIGIveGVuL2NvbW1vbi9zcGlubG9jay5jCmluZGV4IDM2ZTMxYzkuLjZi
+YzUyZDcgMTAwNjQ0Ci0tLSBhL3hlbi9jb21tb24vc3BpbmxvY2suYworKysgYi94ZW4vY29tbW9u
+L3NwaW5sb2NrLmMKQEAgLTM1OSw5ICszNTksOCBAQCB2b2lkIHNwaW5sb2NrX3Byb2ZpbGVfcHJp
+bnRhbGwodW5zaWduZWQgY2hhciBrZXkpCiAgICAgc190aW1lX3QgZGlmZjsKIAogICAgIGRpZmYg
+PSBub3cgLSBsb2NrX3Byb2ZpbGVfc3RhcnQ7Ci0gICAgcHJpbnRrKCJYZW4gbG9jayBwcm9maWxl
+IGluZm8gU0hPVyAgKG5vdyA9ICUwOFg6JTA4WCwgIgotICAgICAgICAidG90YWwgPSAlMDhYOiUw
+OFgpXG4iLCAodTMyKShub3c+PjMyKSwgKHUzMilub3csCi0gICAgICAgICh1MzIpKGRpZmY+PjMy
+KSwgKHUzMilkaWZmKTsKKyAgICBwcmludGsoIlhlbiBsb2NrIHByb2ZpbGUgaW5mbyBTSE9XICAo
+bm93ID0gJSJQUklfc3RpbWUiIHRvdGFsID0gIgorICAgICAgICAgICAiJSJQUklfc3RpbWUiKVxu
+Iiwgbm93LCBkaWZmKTsKICAgICBzcGlubG9ja19wcm9maWxlX2l0ZXJhdGUoc3BpbmxvY2tfcHJv
+ZmlsZV9wcmludF9lbGVtLCBOVUxMKTsKIH0KIApAQCAtMzc5LDggKzM3OCw3IEBAIHZvaWQgc3Bp
+bmxvY2tfcHJvZmlsZV9yZXNldCh1bnNpZ25lZCBjaGFyIGtleSkKICAgICBzX3RpbWVfdCBub3cg
+PSBOT1coKTsKIAogICAgIGlmICgga2V5ICE9ICdcMCcgKQotICAgICAgICBwcmludGsoIlhlbiBs
+b2NrIHByb2ZpbGUgaW5mbyBSRVNFVCAobm93ID0gJTA4WDolMDhYKVxuIiwKLSAgICAgICAgICAg
+ICh1MzIpKG5vdz4+MzIpLCAodTMyKW5vdyk7CisgICAgICAgIHByaW50aygiWGVuIGxvY2sgcHJv
+ZmlsZSBpbmZvIFJFU0VUIChub3cgPSAlIlBSSV9zdGltZSIpXG4iLCBub3cpOwogICAgIGxvY2tf
+cHJvZmlsZV9zdGFydCA9IG5vdzsKICAgICBzcGlubG9ja19wcm9maWxlX2l0ZXJhdGUoc3Bpbmxv
+Y2tfcHJvZmlsZV9yZXNldF9lbGVtLCBOVUxMKTsKIH0KLS0gCjIuNy40CgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
