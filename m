@@ -1,16 +1,22 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2] xen/vcpu: Rework sanity checks in
- vcpu_create()
-Date: Wed, 12 Sep 2018 09:00:43 -0600
-Message-ID: <5B992A1B02000078001E7E30@prv1-mh.provo.novell.com>
-References: <1536261934-1236-4-git-send-email-andrew.cooper3@citrix.com>
- <1536684371-1417-1-git-send-email-andrew.cooper3@citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: BUG: sched=credit2 crashes system when using
+ cpupools
+Date: Wed, 12 Sep 2018 17:11:20 +0200
+Message-ID: <9d3beeffa3ed724f751dc190b3de4d34a22f1ea3.camel@suse.com>
+References: <6564259.GaOmOO5kt2@wopr.lan.crc.id.au>
+ <29fc38c6-8908-2f6f-e496-a1644f56c59e@suse.com>
+ <4e93ef83fb40d6a2a87f902f17bc0bc5@crc.id.au>
+ <5B87ABF502000078001E36A3@prv1-mh.provo.novell.com>
+ <faf61a4a900b3404de8077357e898159@crc.id.au>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1752591104606074789=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1536684371-1417-1-git-send-email-andrew.cooper3@citrix.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=kpmf=l2=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1g06oI-0001ie-Q7
+ for xen-devel@lists.xenproject.org; Wed, 12 Sep 2018 15:12:06 +0000
+In-Reply-To: <faf61a4a900b3404de8077357e898159@crc.id.au>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,55 +25,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Jason Andryuk <jandryuk@gmail.com>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Steven Haigh <netwiz@crc.id.au>, Jan Beulich <JBeulich@suse.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDExLjA5LjE4IGF0IDE4OjQ2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gUG9pc29uaW5nIGlkbGVfdmNwdVswXSB3aXRoIHRoZSBzYW5pdHkgZGVidWcgdmFsdWUg
-aXNuJ3QgYWN0dWFsbHkgYSBjbGV2ZXIKPiBpZGVhLCBiZWNhdXNlIGl0IHBhc3NlcyBhIE5VTEwg
-cG9pbnRlciBjaGVjayBidXQgaXNuJ3QgYSB1c2FibGUgdmNwdS4gIEl0IGlzCj4gYWxzbyB0aGUg
-cmVhc29uIGZvciB0aGUgKCFpc19pZGxlX2RvbWFpbihkKSB8fCB2Y3B1X2lkKSBwYXJ0IG9mIHRo
-ZSBleGlzdGluZwo+IHNhbml0eSBCVUdfT04oKS4KCkJ1dCB5b3UgY29tcGxldGVseSBkaXNjb3Vu
-dCB0aGUgaW50ZW5kZWQgZWZmZWN0IG9mIHRoaXMgcG9pc29uaW5nOgpEdXJpbmcgZWFybHkgYm9v
-dCwgYSBOVUxMIGRlcmVmIGlzIGxpYWJsZSB0byBub3QgZmF1bHQsIHdoaWxlIGEgZGVyZWYKb2Yg
-SU5WQUxJRF9WQ1BVIGlzIGFsd2F5cyBnb2luZyB0byAob24geDg2IGF0IGxlYXN0KS4KCj4gLS0t
-IGEveGVuL2NvbW1vbi9kb21haW4uYwo+ICsrKyBiL3hlbi9jb21tb24vZG9tYWluLmMKPiBAQCAt
-MTM4LDcgKzEzOCwyMSBAQCBzdHJ1Y3QgdmNwdSAqdmNwdV9jcmVhdGUoCgpUaGlzIHBhdGNoIGRv
-ZXMgbm90IGxvb2sgdG8gYmUgYmFzZWQgb24gY3VycmVudCBzdGFnaW5nLgoKPiAgewo+ICAgICAg
-c3RydWN0IHZjcHUgKnY7Cj4gIAo+IC0gICAgQlVHX09OKCghaXNfaWRsZV9kb21haW4oZCkgfHwg
-dmNwdV9pZCkgJiYgZC0+dmNwdVt2Y3B1X2lkXSk7Cj4gKyAgICAvKgo+ICsgICAgICogU2FuaXR5
-IGNoZWNrIHNvbWUgaW5wdXQgZXhwZWN0YXRpb25zOgo+ICsgICAgICogIC0gZC0+bWF4X3ZjcHVz
-IGFuZCBkLT52Y3B1W10gc2hvdWxkIGJlIHNldCB1cAo+ICsgICAgICogIC0gdmNwdV9pZCBzaG91
-bGQgYmUgYm91bmRlZCBieSBkLT5tYXhfdmNwdXMKPiArICAgICAqICAtIFZjcHVzIHNob3VsZCBi
-ZSB0aWdodGx5IHBhY2tlZCBhbmQgYWxsb2NhdGVkIGluIGFzY2VuZGluZyBvcmRlcgo+ICsgICAg
-ICogICAgKGV4Y2VwdCBmb3IgdGhlIGlkbGUgZG9tYWluKS4KPiArICAgICAqICAtIE5vIHByZXZp
-b3VzIHZjcHUgd2l0aCB0aGlzIGlkIHNob3VsZCBiZSBhbGxvY2F0ZWQKPiArICAgICAqLwo+ICsg
-ICAgaWYgKCAhZC0+bWF4X3ZjcHVzIHx8ICFkLT52Y3B1IHx8IHZjcHVfaWQgPj0gZC0+bWF4X3Zj
-cHVzIHx8Cj4gKyAgICAgICAgICghaXNfaWRsZV9kb21haW4oZCkgJiYgdmNwdV9pZCAmJiAhZC0+
-dmNwdVt2Y3B1X2lkIC0gMV0pIHx8CgpOb3RlIGhvdyB5b3Ugc3RpbGwgcmVxdWlyZSBhbiBpc19p
-ZGxlX2RvbWFpbigpIHNwZWNpYWwgY2FzZSBoZXJlCmFueXdheS4KCj4gKyAgICAgICAgIGQtPnZj
-cHVbdmNwdV9pZF0gKQo+ICsgICAgewo+ICsgICAgICAgIEFTU0VSVF9VTlJFQUNIQUJMRSgpOwo+
-ICsgICAgICAgIHJldHVybiBOVUxMOwoKSSBhc3N1bWUgeW91IGNvbnNpZGVyIGl0IGFjY2VwdGFi
-bGUgZm9yIHJlbGVhc2UgYnVpbGRzIHRvIHJlcG9ydApiYWNrIC1FTk9NRU0gaW4gdGhlIChob3Bl
-ZnVsbHkgaW5kZWVkIGltcG9zc2libGUpIGNhc2Ugb2YKZXhlY3V0aW9uIGdvaW5nIHRoaXMgcGF0
-aD8KCj4gQEAgLTE3OCwxNiArMTkyLDEwIEBAIHN0cnVjdCB2Y3B1ICp2Y3B1X2NyZWF0ZSgKPiAg
-ICAgIGlmICggYXJjaF92Y3B1X2NyZWF0ZSh2KSAhPSAwICkKPiAgICAgICAgICBnb3RvIGZhaWxf
-c2NoZWQ7Cj4gIAo+ICsgICAgLyogSW5zZXJ0IHRoZSB2Y3B1IGludG8gdGhlIGRvbWFpbidzIHZj
-cHUgbGlzdC4gKi8KPiAgICAgIGQtPnZjcHVbdmNwdV9pZF0gPSB2Owo+IC0gICAgaWYgKCB2Y3B1
-X2lkICE9IDAgKQo+IC0gICAgewo+IC0gICAgICAgIGludCBwcmV2X2lkID0gdi0+dmNwdV9pZCAt
-IDE7Cj4gLSAgICAgICAgd2hpbGUgKCAocHJldl9pZCA+PSAwKSAmJiAoZC0+dmNwdVtwcmV2X2lk
-XSA9PSBOVUxMKSApCj4gLSAgICAgICAgICAgIHByZXZfaWQtLTsKPiAtICAgICAgICBCVUdfT04o
-cHJldl9pZCA8IDApOwo+IC0gICAgICAgIHYtPm5leHRfaW5fbGlzdCA9IGQtPnZjcHVbcHJldl9p
-ZF0tPm5leHRfaW5fbGlzdDsKPiAtICAgICAgICBkLT52Y3B1W3ByZXZfaWRdLT5uZXh0X2luX2xp
-c3QgPSB2Owo+IC0gICAgfQo+ICsgICAgaWYgKCAhaXNfaWRsZV9kb21haW4oZCkgJiYgdmNwdV9p
-ZCA+IDAgKQo+ICsgICAgICAgIGQtPnZjcHVbdmNwdV9pZCAtIDFdLT5uZXh0X2luX2xpc3QgPSB2
-OwoKV2hpbGUgYmVmb3JlIHRoaXMgY2hhbmdlIGZvcl9lYWNoX3ZjcHUoaWRsZV9kb21haW4pIHdh
-cwpicm9rZW4gb25seSBmb3IgdGhlIChjdXJyZW50bHkgaW1wb3NzaWJsZSBvbiB4ODYgYXQgbGVh
-c3QpIGNhc2UKb2YgQ1BVMCBub3QgYmVpbmcgb25saW5lIChub3IgcGFya2VkKSwgYWZhaWN0IGl0
-IHdpbGwgbm93IGJlCmJyb2tlbiBhbHRvZ2V0aGVyLCBsZWFkaW5nIHRvIE5VTEwgZGVyZWYtcyB3
-aGVuIHVzZWQuIElzIHRoYXQKcmVhbGx5IHdoYXQgeW91IHdhbnQgKGlmIHNvLCB0aGUgZGVzY3Jp
-cHRpb24gc2hvdWxkIHNheSBzbywgYW5kCndoeSB0aGF0J3Mgb2theSk/CgpKYW4KCgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1752591104606074789==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-jWbrt5rPvnh8+z+y3S98"
+
+
+--=-jWbrt5rPvnh8+z+y3S98
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2018-08-30 at 18:49 +1000, Steven Haigh wrote:
+> On 2018-08-30 18:33, Jan Beulich wrote:
+> > > > >=20
+> > Anyway - as J=C3=BCrgen says, something for the scheduler
+> > maintainers to look into.
+>=20
+Ok, I'm back.
+
+> Yep - I just want to confirm that we tested this in BOTH NUMA=20
+> configurations - and credit2 crashed on both.
+>=20
+> I switched back to sched=3Dcredit, and it seems to work as expected:
+> # xl cpupool-list
+> Name               CPUs   Sched     Active   Domain count
+> Pool-node0          12    credit       y          3
+> Pool-node1          12    credit       y          0
+>=20
+Wait, in a previous message, you said: "A machine where we could get
+this working every time shows". Doesn't that mean creating a separate
+pool for node 1 works with both Credit and Credit2, if the node has
+memory?
+
+I mean, trying to clarifying, my understanding is that you have to
+systems:
+
+system A: node 1 has *no* memory
+system B: both node 0 and node 1 have memory
+
+Creating a Credit pool with pcpus from node 1 always work on both
+systems.
+
+OTOH, when you try to create a Credit2 pool with pcpus from node 1,
+does it always crash on both systems, or does it work on system B and
+crashes on system A ?
+
+I do have a NUMA box with RAM in both nodes (so similar to system B).
+Last time I checked, what you're trying to do worked there, pretty much
+with any scheduler combination, but I'll recheck.
+
+I don't have a box similar to system A. I'll try to remove some of the
+RAM from that NUMA box, and check what happens.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-jWbrt5rPvnh8+z+y3S98
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluZLJkACgkQFkJ4iaW4
+c+5bRg/+KNcyPcV0qB7RZsm/juqTmcs6KJKOoZHKmtidZ+YTmWf/AuYRkZeP2PSW
+b+QhxStK0YYcY31irmIT5H+q58lwUqsXV2+FT7vK/jhnWJoY+pcXj7hBRvxHkfNr
+fnAYs+BARC+BGEJSDETS3zLhwVaWasg8p7OhDeNl3Sl5jkkoRFkqyDNyx9czWMKd
+F3KRzTUiVq2B2SUVgzKuCd9b7SXdLl9VK2PwdwYZXdrHv+QgQ6MNWYGPqJ+ZImGk
+PgbGZUtiEfjSH3TjQbZllGYdMOzmwj1i8YUZ5CFL+3X6Azdv+bCgpOxErW1U6iWz
+yLlZ7J9kxG0K9MbtOeAQRz+An83kIeyeBUFRFyLmnQEBjvyRA0IZ7LUL1EZFxvMF
+T1AZs05+jQl9blWSNVQZmFR2ArumnQ0b215jztZ7+J2bi3C4auC4Y4sHhdIW69xF
+TC7pA1+0a0rRpsSPAig5rYQDImiXneiJp4Wbf13tAAGkxzKnDK98tx4VFJucKmD7
+O6w6B4Hg03u1wh40WiOWRXsFZz6Idkko7ydXJCF5suTuWh0BWdVoHP7GNlrsqwji
+rMMqNWgvBi7Gb0JaNLXPyRVMxGdvezwGeUFv1tXDHSX6FxLRJoikaTHfmJqh8zm5
+Q7jHfY1gi+ALxRwQvVUla+Z4iJTG4whXMpxYUT8Ov+JlxOw6rhE=
+=Bvfu
+-----END PGP SIGNATURE-----
+
+--=-jWbrt5rPvnh8+z+y3S98--
+
+
+
+--===============1752591104606074789==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1752591104606074789==--
