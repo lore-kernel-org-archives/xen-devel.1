@@ -1,22 +1,21 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH] xentrace: handle sparse cpu ids correctly
- in xen trace buffer handling
-Date: Thu, 13 Sep 2018 12:45:30 +0100
-Message-ID: <7d33185a-0738-1f78-1fdd-534fb05cd96c@citrix.com>
-References: <20180830075214.11807-1-jgross@suse.com>
- <5B87AA5202000078001E3677@suse.com>
- <222d0135-0c6f-2327-2539-3479e938ec6c@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: RFE: Detect NUMA misconfigurations and prevent
+ machine freezes
+Date: Thu, 13 Sep 2018 13:49:15 +0200
+Message-ID: <26834ac4f406f240b8b0c46994535e6a33f0e440.camel@suse.com>
+References: <6564259.GaOmOO5kt2@wopr.lan.crc.id.au>
+ <29fc38c6-8908-2f6f-e496-a1644f56c59e@suse.com>
+ <4e93ef83fb40d6a2a87f902f17bc0bc5@crc.id.au>
+ <2d2f115d3f45d76ea439a1b36df9953a3b979aca.camel@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7204716364333322960=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=yl3a=l3=citrix.com=prvs=787e22e97=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1g0Q40-0005kh-FL
- for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 11:45:36 +0000
-In-Reply-To: <222d0135-0c6f-2327-2539-3479e938ec6c@suse.com>
-Content-Language: en-US
+ <srs0=tvlc=l3=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1g0Q82-0005wu-MF
+ for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 11:49:46 +0000
+In-Reply-To: <2d2f115d3f45d76ea439a1b36df9953a3b979aca.camel@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,42 +24,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Steven Haigh <netwiz@crc.id.au>, Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMzAvMjAxOCAxMDoyOCBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBPbiAzMC8wOC8x
-OCAxMDoyNiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDMwLjA4LjE4IGF0IDA5OjUyLCA8
-amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4+IEBAIC0yMDIsNyArMjAyLDcgQEAgc3RhdGljIGlu
-dCBhbGxvY190cmFjZV9idWZzKHVuc2lnbmVkIGludCBwYWdlcykKPj4+ICAgICAgICogQWxsb2Nh
-dGUgYnVmZmVycyBmb3IgYWxsIG9mIHRoZSBjcHVzLgo+Pj4gICAgICAgKiBJZiBhbnkgZmFpbHMs
-IGRlYWxsb2NhdGUgd2hhdCB5b3UgaGF2ZSBzbyBmYXIgYW5kIGV4aXQuCj4+PiAgICAgICAqLwo+
-Pj4gLSAgICBmb3JfZWFjaF9vbmxpbmVfY3B1KGNwdSkKPj4+ICsgICAgZm9yX2VhY2hfcHJlc2Vu
-dF9jcHUoY3B1KQo+Pj4gICAgICB7Cj4+PiAgICAgICAgICBvZmZzZXQgPSB0X2luZm9fZmlyc3Rf
-b2Zmc2V0ICsgKGNwdSAqIHBhZ2VzKTsKPj4+ICAgICAgICAgIHRfaW5mby0+bWZuX29mZnNldFtj
-cHVdID0gb2Zmc2V0Owo+Pgo+PiBEb2Vzbid0IHRoaXMgZ28gYSBsaXR0bGUgdG9vIGZhcj8gV2h5
-IHdvdWxkIHlvdSBhbGxvY2F0ZSBidWZmZXJzIGZvciBDUFVzCj4+IHdoaWNoIGNhbiBuZXZlciBi
-ZSBicm91Z2h0IG9ubGluZT8gVGhlcmUgb3VnaHQgdG8gYmUgYSBtaWRkbGUgZ3JvdW5kLAo+PiB3
-aGVyZSBvbmxpbmUtYWJsZSBDUFVzIGhhdmUgYnVmZmVycyBhbGxvY2F0ZWQsIGJ1dCBub24tb25s
-aW5lLWFibGUgb25lcwo+PiB3b24ndC4gT24gbGFyZ2VyIHN5c3RlbXMgSSBndWVzcyB0aGUgZGlm
-ZmVyZW5jZSBtYXkgYmUgcXVpdGUgbm90aWNhYmxlLgo+IAo+IEFjY29yZGluZyB0byB0aGUgY29t
-bWVudHMgaW4gaW5jbHVkZS94ZW4vY3B1bWFzay5oIGNwdV9wcmVzZW50X21hcAo+IHJlcHJlc2Vu
-dHMgdGhlIHBvcHVsYXRlZCBjcHVzLgo+IAo+IEkga25vdyB0aGF0IGN1cnJlbnRseSB0aGVyZSBp
-cyBubyBzdXBwb3J0IGZvciBvbmxpbmluZyBhIHBhcmtlZCBjcHUKPiBhZ2FpbiwgYnV0IEkgdGhp
-bmsgaGF2aW5nIHRvIHRoaW5rIGFib3V0IFhlbnRyYWNlIGJ1ZmZlciBhbGxvY2F0aW9uIGluCj4g
-Y2FzZSBvbmxpbmluZyBvZiBwYXJrZWQgY3B1cyBpcyBhZGRlZCB3b3VsZCBiZSBhIG5lYXJseSAx
-MDAlIGNoYW5jZSB0bwo+IGludHJvZHVjZSBhIGJ1Zy4KPiAKPiBYZW50cmFjZSBpcyB1c2VkIGZv
-ciB0ZXN0aW5nIHB1cnBvc2VzIG9ubHkuIFNvIElNSE8gYWxsb2NhdGluZyBzb21lIG1vcmUKPiBt
-ZW1vcnkgaXMgYWNjZXB0YWJsZS4KCk9uIHRoZSBvdGhlciBoYW5kLCBzaXplIG9mIGJ1ZmZlcnMg
-Y2FuIGJlIGEgc2lnbmlmaWNhbnQgZmFjdG9yIGluCndoZXRoZXIgeW91IGNhbiBtYW5hZ2UgdG8g
-Y2F0Y2ggdGhlIGJlaGF2aW9yIHlvdSB3YW50IG9yIHdoZXRoZXIgdGhlcmUKd2lsbCBiZSBnYXBz
-IGR1ZSB0byBkcm9wcGVkIHJlY29yZHM7IGFueXRoaW5nIHRoYXQgY2FuIG1ha2UgdGhvc2UKYWxs
-b2NhdGlvbnMgZ28gZmFydGhlciB3aWxsIGJlIGhlbHBmdWwuCgpBbnlvbmUgYnJpbmdpbmcgYSBw
-YXJrZWQgY3B1IGJhY2sgdXAgc2hvdWxkIGhhdmUgdG8gZ28gdGhyb3VnaCBhbGwKaW5zdGFuY2Vz
-IG9mIHBlcl9jcHUoKSBhbmQgZmlndXJlIG91dCBpZiB0aGV5IG5lZWQgdG8gZG8gc29tZXRoaW5n
-OyB0aGF0CnNob3VsZCBjYXRjaCB0aGlzIGlzc3VlLCBpZiBpdCBoYXBwZW5zLgoKU28gYWx0aG91
-Z2ggaXQncyBhIGJpdCBvZiBhIHRvdWdoIGRlY2lzaW9uLCBJJ2QgbGVhdmUgdGhpcwpmb3JfZWFj
-aF9vbmxpbmVfY3B1KCksIGFzIEphbiBzdWdnZXN0cy4KClRoYW5rcywKIC1HZW9yZ2UKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============7204716364333322960==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-fgndkkfd5fOnNtFIZZWP"
+
+
+--=-fgndkkfd5fOnNtFIZZWP
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-09-12 at 17:13 +0200, Dario Faggioli wrote:
+> On Thu, 2018-08-30 at 14:01 +1000, Steven Haigh wrote:
+> >=20
+> > Add the CPUs:
+> > (XEN) Adding cpu 12 to runqueue 0
+> > (XEN)  First cpu on runqueue, activating
+> > (XEN) Removing cpu 12 from runqueue 0
+> > (XEN) Adding cpu 13 to runqueue 0
+> > (XEN) Removing cpu 13 from runqueue 0
+> > (XEN) Adding cpu 14 to runqueue 0
+> > (XEN) Removing cpu 14 from runqueue 0
+> > (XEN) Xen BUG at sched_credit2.c:3452
+> > (XEN) Adding cpu 15 to runqueue 0
+> > (XEN) ----[ Xen-4.10.2-pre  x86_64  debug=3Dn   Not tainted ]----
+> >=20
+> That's not a debug build, though.
+>=20
+> It would be useful to test one such build (as suggested by Juergen),
+> to
+> see if any of the existing ASSERTs triggers.
+>=20
+Ok, ignore this.
+
+I have identified the problem, and I'm in the process of sending a
+patch (to which I'll Cc you).
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-fgndkkfd5fOnNtFIZZWP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluaTrwACgkQFkJ4iaW4
+c+6cqA//b6LEq2KLiWPKCpcBmVdWzawUzcCzwMnJu7yIco2vJzieKEMxRP2ywEla
+/J+08vERxk1YcCsl/o1wcXOrIhvzsjVf+SXJeOXBRZTBAmd6BjWh8KxEV/sr3j10
+qkwQHGnRDphx1fa8I6DhtWzoGa8Nyd+hVDmnil02K4YumZr2lKBbM5Oc+0s1MUK+
+mojS0wxTLGuQyWCaThBx0SGVnBrrUkztUtCPWEUKSXkzQZeNYGAdE36Yp3wxz3gr
+C0OI/nWj3K7vRcwUpQBVvGCVCWCtMG8KYiUtKQAAbKIBQ5Kkl7XHuWnTga0ym8UQ
+MjfH3eNY9J9c7fGePq8IcCROU96HWaQeNwRTxdQc/9rpBWYRSKopvNwpFeWTAYUM
+XkUH2GN5MJL0jHeOYw2zxSEojEiIHtETJ5So/70W9TbTLMaq1xT3p2cAZv4xyFuj
+OCJ4c9UlIUGhS1EQl+QysWxJNSgNiaaWMywR6oQoGRHt+pkhDXPEENyofl50NKx6
+C1dY33i3eJP18f2Af3133OyHAu5JO+CRDXp57kuHm9P7zRR3T4C/N2Y4rsFXF4LL
+bA5+/+/CTvo6rA5g5ljaRfDzhgyAjrzjfqsoT72ONp9U6+K2ZvkSOTbVCseXEMap
+1xYwns/aFpBOTWCxCPkQ2dTyPrRlrVkjfxmzG+5A8ZdaOhCFjQE=
+=Dnm9
+-----END PGP SIGNATURE-----
+
+--=-fgndkkfd5fOnNtFIZZWP--
+
+
+
+--===============7204716364333322960==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7204716364333322960==--
