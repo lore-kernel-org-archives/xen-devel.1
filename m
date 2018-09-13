@@ -1,15 +1,20 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v3 2/3] x86/viridan: Clean up Viridian MSR
+Subject: Re: [PATCH v3 3/3] x86: Clean up the Xen MSR
  infrastructure
-Date: Thu, 13 Sep 2018 06:28:18 -0600
-Message-ID: <5B9A57E202000078001E8329@prv1-mh.provo.novell.com>
+Date: Thu, 13 Sep 2018 06:30:41 -0600
+Message-ID: <5B9A587102000078001E832C@prv1-mh.provo.novell.com>
 References: <1536692177-15675-1-git-send-email-andrew.cooper3@citrix.com>
- <1536692177-15675-3-git-send-email-andrew.cooper3@citrix.com>
+ <1536692177-15675-4-git-send-email-andrew.cooper3@citrix.com>
+ <db45ee88f12d7d12c5e13ea6b22625408c2803f4.camel@citrix.com>
+ <bdd460f3-0487-0ab7-cff6-db1c313571ee@citrix.com>
+ <ea9eb527a924f2b42f7d84e607be8ac41fc988ac.camel@citrix.com>
+ <02f8a4a1-6948-be01-8721-ab1573da63e1@citrix.com>
+ <39dcaaacb5aacfa4f6c4d954fe796e895ad0df21.camel@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1536692177-15675-3-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <39dcaaacb5aacfa4f6c4d954fe796e895ad0df21.camel@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -20,22 +25,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, xen-devel@lists.xen.org, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDExLjA5LjE4IGF0IDIwOjU2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gUmVuYW1lIHRoZSBmdW5jdGlvbnMgdG8gZ3Vlc3Rfe3JkLHdyfW1zcl92aXJpZGlhbigp
-IGZvciBjb25zaXN0ZW5jeSwgYW5kCj4gYmVjYXVzZSB0aGUgX3JlZ3MoKSBzdWZmaXggaXNuJ3Qg
-dmVyeSBhcHByb3ByaWF0ZS4KPiAKPiBVcGRhdGUgdGhlbSB0byB0YWtlIGEgdmNwdSBwb2ludGVy
-IHJhdGhlciB0aGFuIHByZXN1bWluZyB0aGF0IHRoZXkgYWN0IG9uCj4gY3VycmVudCwgd2hpY2gg
-aXMgc2FmZSBmb3IgYWxsIGltcGxlbWVudGVkIG9wZXJhdGlvbnMsIGFuZCBzd2l0Y2ggdGhlaXIg
-cmV0dXJuCj4gQUJJIHRvIHVzZSBYODZFTVVMXyouCj4gCj4gVGhlIGRlZmF1bHQgY2FzZXMgbm8g
-bG9uZ2VyIG5lZWQgdG8gZGVhbCB3aXRoIE1TUnMgb3V0IG9mIHRoZSBWaXJpZGlhbiByYW5nZSwK
-PiBidXQgZHJvcCB0aGUgcHJpbnRrcyB0byBkZWJ1ZyBidWlsZHMgb25seSBhbmQgaWRlbnRpZnkg
-dGhlIHZhbHVlIGF0dGVtcHRpbmcgdG8KPiBiZSB3cml0dGVuLgo+IAo+IFNpZ25lZC1vZmYtYnk6
-IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cj4gUmV2aWV3ZWQtYnk6
-IFBhdWwgRHVycmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+CgpBY2tlZC1ieTogSmFuIEJl
-dWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+Pj4+IE9uIDEzLjA5LjE4IGF0IDA5OjU3LCA8c2VyZ2V5LmR5YXNsaUBjaXRyaXguY29tPiB3cm90
+ZToKPiBXaXRoIHRoaXMgYmVpbmcgcmViYXNlZCBvbiB0b3Agb2YgdjQgMS8zOgo+IAo+IFJldmll
+d2VkLWJ5OiBTZXJnZXkgRHlhc2xpIDxzZXJnZXkuZHlhc2xpQGNpdHJpeC5jb20+CgpBY2tlZC1i
+eTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
