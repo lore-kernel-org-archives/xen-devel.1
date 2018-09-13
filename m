@@ -1,23 +1,18 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH v8 1/7] iommu: introduce the concept of
- DFN...
-Date: Thu, 13 Sep 2018 13:21:37 +0000
-Message-ID: <96f560a562ef4d00a484daa0751a14cd@AMSPEX02CL03.citrite.net>
-References: <20180913103153.33377-1-paul.durrant@citrix.com>
- <20180913103153.33377-2-paul.durrant@citrix.com>
- <5B9A5BEF02000078001E8378@prv1-mh.provo.novell.com>
- <7dc3f0b19c7a42e9b871b7aeb7cf3dc8@AMSPEX02CL03.citrite.net>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH v3] Change timestamps representation for
+ keyhandlers
+Date: Thu, 13 Sep 2018 15:22:11 +0200
+Message-ID: <9b24c480bd1c2437798ff1619f5ef695dc938aa0.camel@suse.com>
+References: <1536771807-1118-1-git-send-email-andrii.anisov@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6083149373211198047=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=o9xv=l3=citrix.com=prvs=787a2ff47=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1g0RYx-0005bS-WE
- for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 13:21:40 +0000
-In-Reply-To: <7dc3f0b19c7a42e9b871b7aeb7cf3dc8@AMSPEX02CL03.citrite.net>
-Content-Language: en-US
+ <srs0=tvlc=l3=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1g0Ra5-0005g9-11
+ for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 13:22:49 +0000
+In-Reply-To: <1536771807-1118-1-git-send-email-andrii.anisov@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,96 +21,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>, 'Jan Beulich' <JBeulich@suse.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Julien Grall <julien.grall@arm.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBYZW4tZGV2ZWwgW21haWx0bzp4
-ZW4tZGV2ZWwtYm91bmNlc0BsaXN0cy54ZW5wcm9qZWN0Lm9yZ10gT24gQmVoYWxmDQo+IE9mIFBh
-dWwgRHVycmFudA0KPiBTZW50OiAxMyBTZXB0ZW1iZXIgMjAxOCAxNDowOQ0KPiBUbzogJ0phbiBC
-ZXVsaWNoJyA8SkJldWxpY2hAc3VzZS5jb20+DQo+IENjOiBLZXZpbiBUaWFuIDxrZXZpbi50aWFu
-QGludGVsLmNvbT47IFN0ZWZhbm8gU3RhYmVsbGluaQ0KPiA8c3N0YWJlbGxpbmlAa2VybmVsLm9y
-Zz47IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+OyBKdWxpZW4gR3JhbGwNCj4gPGp1bGll
-bi5ncmFsbEBhcm0uY29tPjsgU3VyYXZlZSBTdXRoaWt1bHBhbml0DQo+IDxzdXJhdmVlLnN1dGhp
-a3VscGFuaXRAYW1kLmNvbT47IHhlbi1kZXZlbCA8eGVuLQ0KPiBkZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZz4NCj4gU3ViamVjdDogUmU6IFtYZW4tZGV2ZWxdIFtQQVRDSCB2OCAxLzddIGlvbW11
-OiBpbnRyb2R1Y2UgdGhlIGNvbmNlcHQgb2YNCj4gREZOLi4uDQo+IA0KPiA+IC0tLS0tT3JpZ2lu
-YWwgTWVzc2FnZS0tLS0tDQo+ID4gRnJvbTogSmFuIEJldWxpY2ggW21haWx0bzpKQmV1bGljaEBz
-dXNlLmNvbV0NCj4gPiBTZW50OiAxMyBTZXB0ZW1iZXIgMjAxOCAxMzo0Ng0KPiA+IFRvOiBQYXVs
-IER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPg0KPiA+IENjOiBTdXJhdmVlIFN1dGhp
-a3VscGFuaXQgPHN1cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPjsgSnVsaWVuIEdyYWxsDQo+
-ID4gPGp1bGllbi5ncmFsbEBhcm0uY29tPjsgV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT47
-IEtldmluIFRpYW4NCj4gPiA8a2V2aW4udGlhbkBpbnRlbC5jb20+OyBTdGVmYW5vIFN0YWJlbGxp
-bmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+Ow0KPiB4ZW4tDQo+ID4gZGV2ZWwgPHhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZz4NCj4gPiBTdWJqZWN0OiBSZTogW1BBVENIIHY4IDEvN10g
-aW9tbXU6IGludHJvZHVjZSB0aGUgY29uY2VwdCBvZiBERk4uLi4NCj4gPg0KPiA+ID4+PiBPbiAx
-My4wOS4xOCBhdCAxMjozMSwgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPiB3cm90ZToNCj4gPiA+
-IC4uLm1lYW5pbmcgJ2RldmljZSBETUEgZnJhbWUgbnVtYmVyJyBpLmUuIGEgZnJhbWUgbnVtYmVy
-IG1hcHBlZCBpbiB0aGUNCj4gPiBJT01NVQ0KPiA+ID4gKHJhdGhlciB0aGFuIHRoZSBNTVUpIGFu
-ZCBoZW5jZSB1c2VkIGZvciBETUEgYWRkcmVzcyB0cmFuc2xhdGlvbi4NCj4gPiA+DQo+ID4gPiBU
-aGlzIHBhdGNoIGlzIGEgbGFyZ2VseSBjb3NtZXRpYyBjaGFuZ2UgdGhhdCBzdWJzdGl0dXRlcyB0
-aGUgdGVybXMNCj4gJ2dmbicNCj4gPiA+IGFuZCAnZ2FkZHInIGZvciAnZGZuJyBhbmQgJ2RhZGRy
-JyBpbiBhbGwgdGhlIHBsYWNlcyB3aGVyZSB0aGUgZnJhbWUNCj4gPiBudW1iZXINCj4gPiA+IG9y
-IGFkZHJlc3MgcmVsYXRlIHRvIGEgZGV2aWNlIHJhdGhlciB0aGFuIHRoZSBDUFUuDQo+ID4gPg0K
-PiA+ID4gVGhlIHBhcnRzIHRoYXQgYXJlIG5vdCBwdXJlbHkgY29zbWV0aWMgYXJlOg0KPiA+ID4N
-Cj4gPiA+ICAtIHRoZSBpbnRyb2R1Y3Rpb24gb2YgYSB0eXBlLXNhZmUgZGVjbGFyYXRpb24gb2Yg
-ZGZuX3QgYW5kIGRlZmluaXRpb24NCj4gPiBvZg0KPiA+ID4gICAgSU5WQUxJRF9ERk4gdG8gbWFr
-ZSB0aGUgc3Vic3RpdHV0aW9uIG9mIGdmbl94KElOVkFMSURfR0ZOKQ0KPiA+IG1lY2hhbmljYWwu
-DQo+ID4gPiAgLSB0aGUgaW50cm9kdWN0aW9uIG9mIF9fZGZuX3RvX2RhZGRyIGFuZCBfX2RhZGRy
-X3RvX2RmbiAoYW5kIHR5cGUtDQo+IHNhZmUNCj4gPiA+ICAgIHZhcmlhbnRzIHdpdGhvdXQgdGhl
-IGxlYWRpbmcgX18pIHdpdGggc29tZSB1c2Ugb2YgdGhlIGZvcm1lci4NCj4gPg0KPiA+IFRoZSBs
-YXR0ZXIgaXMgcmF0aGVyIHVuZm9ydHVuYXRlLCBidXQgcHJlc3VtYWJseSB1bmF2b2lkYWJsZSwN
-Cj4gPiBib3RoIGJlY2F1c2Ugb2YgdGhlIG5hbWUgc3BhY2UgaXNzdWUgYW5kIHRoZSBmYWN0IHRo
-YXQgdGhlIG90aGVyDQo+ID4gbm9uLXR5cGUtc2FmZSB2YXJpYW50cyBhcmUgaW50ZW5kZWQgdG8g
-Z28gYXdheSBhcyB3ZWxsKS4NCj4gPg0KPiA+ID4gLS0tIGEveGVuL2luY2x1ZGUveGVuL2lvbW11
-LmgNCj4gPiA+ICsrKyBiL3hlbi9pbmNsdWRlL3hlbi9pb21tdS5oDQo+ID4gPiBAQCAtMjMsMTEg
-KzIzLDM3IEBADQo+ID4gPiAgI2luY2x1ZGUgPHhlbi9wYWdlLWRlZnMuaD4NCj4gPiA+ICAjaW5j
-bHVkZSA8eGVuL3NwaW5sb2NrLmg+DQo+ID4gPiAgI2luY2x1ZGUgPHhlbi9wY2kuaD4NCj4gPiA+
-ICsjaW5jbHVkZSA8eGVuL3R5cGVzYWZlLmg+DQo+ID4gPiAgI2luY2x1ZGUgPHB1YmxpYy9odm0v
-aW9yZXEuaD4NCj4gPiA+ICAjaW5jbHVkZSA8cHVibGljL2RvbWN0bC5oPg0KPiA+ID4gICNpbmNs
-dWRlIDxhc20vZGV2aWNlLmg+DQo+ID4gPiAgI2luY2x1ZGUgPGFzbS9pb21tdS5oPg0KPiA+ID4N
-Cj4gPiA+ICtUWVBFX1NBRkUodWludDY0X3QsIGRmbik7DQo+ID4gPiArI2RlZmluZSBQUklfZGZu
-ICAgICBQUkl4NjQNCj4gPiA+ICsjZGVmaW5lIElOVkFMSURfREZOIF9kZm4ofjBVTEwpDQo+ID4g
-PiArDQo+ID4gPiArI2lmbmRlZiBkZm5fdA0KPiA+ID4gKyNkZWZpbmUgZGZuX3QgLyogR3JlcCBm
-b2RkZXI6IGRmbl90LCBfZGZuKCkgYW5kIGRmbl94KCkgYXJlIGRlZmluZWQNCj4gPiBhYm92ZSAq
-Lw0KPiA+ID4gKyNkZWZpbmUgX2Rmbg0KPiA+ID4gKyNkZWZpbmUgZGZuX3gNCj4gPiA+ICsjdW5k
-ZWYgZGZuX3QNCj4gPiA+ICsjdW5kZWYgX2Rmbg0KPiA+ID4gKyN1bmRlZiBkZm5feA0KPiA+ID4g
-KyNlbmRpZg0KPiA+ID4gKw0KPiA+ID4gKyNkZWZpbmUgSU9NTVVfUEFHRV9TSElGVCAxMg0KPiA+
-DQo+ID4gSXMgdGhpcyBjb3JyZWN0IGZvciBBUk0gaW4gYWxsIGNhc2VzPw0KPiANCj4gTG9va3Mg
-bGlrZSB0aGVyZSdzIG5vIGZpeGVkIHBhZ2Ugc2l6ZSBzbyB0aGVzZSBtYXkgYWN0dWFsbHkgYmUg
-YmV0dGVyIG9mZg0KPiBpbiBhbiB4ODYgaGVhZGVyLiBUaGV5IGp1c3QgZ290IHB1bGxlZCBoZXJl
-IHdoZW4gSSBtYWRlIHRoZSBjb2RlIGNvbW1vbi4NCj4gDQo+ID4NCj4gPiA+ICsjZGVmaW5lIElP
-TU1VX1BBR0VfU0laRSAgKDEgPDwgSU9NTVVfUEFHRV9TSElGVCkNCj4gPiA+ICsjZGVmaW5lIElP
-TU1VX1BBR0VfTUFTSyAgKH4oSU9NTVVfUEFHRV9TSVpFIC0gMSkpDQo+ID4gPiArDQo+ID4gPiAr
-dHlwZWRlZiB1aW50NjRfdCBkYWRkcl90Ow0KPiA+ID4gKw0KPiA+ID4gKyNkZWZpbmUgX19kZm5f
-dG9fZGFkZHIoZGZuKSAoKGRhZGRyX3QpKGRmbikgPDwgSU9NTVVfUEFHRV9TSElGVCkNCj4gPiA+
-ICsjZGVmaW5lIF9fZGFkZHJfdG9fZGZuKGRhZGRyKSAoKHVpbnQ2NF90KShkYWRkciA+PiBJT01N
-VV9QQUdFX1NISUZUKSkNCj4gPg0KPiA+IFBsZWFzZSBjb3VsZCBhdCBsZWFzdCB0aGUgbGF0dGVy
-IG9mIHRoZSB0d28gY2FzdHMgYmUgb21pdHRlZD8gQWxzbw0KPiA+IGRhZGRyIG5lZWRlZCBwYXJl
-bnRoZXNpemluZy4NCj4gPg0KPiANCj4gT2suDQo+IA0KPiA+ID4gLS0tIGEveGVuL2luY2x1ZGUv
-eGVuL21tLmgNCj4gPiA+ICsrKyBiL3hlbi9pbmNsdWRlL3hlbi9tbS5oDQo+ID4gPiBAQCAtMjYs
-NiArMjYsMTEgQEANCj4gPiA+ICAgKiAgIEEgbGluZWFyIGlkZWEgb2YgYSBndWVzdCBwaHlzaWNh
-bCBhZGRyZXNzIHNwYWNlLiBGb3IgYW4gYXV0by0NCj4gPiB0cmFuc2xhdGVkDQo+ID4gPiAgICog
-ICBndWVzdCwgcGZuID09IGdmbiB3aGlsZSBmb3IgYSBub24tdHJhbnNsYXRlZCBndWVzdCwgcGZu
-ICE9IGdmbi4NCj4gPiA+ICAgKg0KPiA+ID4gKyAqIGRmbjogRGV2aWNlIERNQSBGcmFtZSBOdW1i
-ZXIgKGRlZmluaXRpb25zIGluIGluY2x1ZGUveGVuL2lvbW11LmgpDQo+ID4gPiArICogICBUaGUg
-bGluZWFyIGZyYW1lIG51bWJlcnMgb2YgSU9NTVUgYWRkcmVzcyBzcGFjZS4gQWxsIGluaXRpYXRv
-cnMNCj4gPiBmb3IgKGkuZS4NCj4gPiA+ICsgKiAgIGFsbCBkZXZpY2VzIGFzc2lnbmVkIHRvKSBh
-IGd1ZXN0IHNoYXJlIGEgc2luZ2xlIElPTU1VIGFkZHJlc3MNCj4gPiBzcGFjZSBhbmQsDQo+ID4g
-PiArICogICBieSBkZWZhdWx0LCBYZW4gd2lsbCBlbnN1cmUgZGZuID09IHBmbi4NCj4gPg0KPiA+
-IFdoaWxlIHRoZSBuYW1lcyBoYXZlIGJlZW4gY2hhbmdlZCwgdGhlIHRlc3Qgc3RpbGwgdGFsa3Mg
-YWJvdXQgIklPTU1VDQo+ID4gYWRkcmVzcyBzcGFjZSIuIEluIHBhcnRpY3VsYXIgZm9yIHRoZSBJ
-T01NVSB0aGVyZSB2ZXJ5IGNsZWFyIGFyZSB0d28NCj4gPiBhZGRyZXNzIHNwYWNlcyAoaW5jb21p
-bmcgYW5kIG91dGdvaW5nKSwgc28gdGhpcyBuZWVkcyBkaXNhbWJpZ3VhdGlvbi4NCj4gPg0KPiA+
-IFdpdGggdGhlc2UgbWlub3IgaXNzdWVzIHRha2VuIGNhcmUgb2YNCj4gPiBBY2tlZC1ieTogSmFu
-IEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPg0KPiA+DQo+IA0KPiBUaGFua3MuIERvIHlvdSB3
-YW50IG1lIHRvIG1vdmUgdGhlIHBhZ2Ugc2l6ZSBkZWZpbml0aW9ucyBhbmQgcmUtc3VibWl0DQo+
-IHdpdGggdGhlIG90aGVyIHRoaW5ncyBmaXhlZCB1cD8NCj4gDQoNCkFjdHVhbGx5IEkganVzdCBw
-dWxsZWQgc3RhZ2luZyBhbmQgdGhlIHNlcmllcyBuZWVkcyBhIHJlLWJhc2UgKGFnYWluKSBhbnl3
-YXksIHNvIEknbGwgc3VibWl0IHY5Lg0KDQogIFBhdWwNCg0KPiA+IEphbg0KPiA+DQo+IA0KPiAN
-Cj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gWGVu
-LWRldmVsIG1haWxpbmcgbGlzdA0KPiBYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcNCj4g
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA0K
+
+--===============6083149373211198047==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-e+X3D6S2mT76SjKn5qQP"
+
+
+--=-e+X3D6S2mT76SjKn5qQP
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-09-12 at 20:03 +0300, Andrii Anisov wrote:
+> From: Andrii Anisov <andrii_anisov@epam.com>
+>=20
+> For different keyhandlers, replace a hex with delimiter
+> representation
+> of time to PRI_stime which is decimal ns currently.
+>=20
+> Signed-off-by: Andrii Anisov <andrii_anisov@epam.com>
+>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-e+X3D6S2mT76SjKn5qQP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluaZIMACgkQFkJ4iaW4
+c+7VgQ/8DWohotd+4qYddPNHqUGYKcxVq+Qi+DHo5GL1AW2Qjxbqb54PVbreGOiw
+potnq+Zcdy15rLmlQ570rEpBbdOXJTSddG3/QKnr8Wdrnw6a5wZ2cvvtL676+Sus
+G7QHnw+fThFsJm+mzjwSeoYowAHBm5DkCNSMSmbKiels38AdFRS2zFdeIOdK9gQt
+aWXtIgR/O3GT1MycOhMPpen99eEcwg1Wt/qXlDcuUZCj33B7lvyWpKukhsZGFvU5
+rW51ezLEHPNXXLAjC75+YbjvSn9BQliAEJrLHvMMoNdSnZpVDmOe1V70QpmM4h0o
+0cGR5LtK2AgEfwJsK5ZDwTDM6zyEHJ/x4moW3m5Mfe6Lq3+0JUcxxVU6bDFfL1VG
+7PtboBNJ0XzsBwtz/l2dGFlOAbbr1Y/0Etu87oAbwDu70tXS2eswz8udclcB3O+w
+l5NWW2QHKCUUb+tc3GoC/GqjQo7SwpdW8R8WtGNjXp+XoVjOsGiTdi+1MYrHsCK/
+9VnHguHW5a6Xi7wQsPag3/tMwXOYLFn3rSrLA4wTcuMqlhJ1mrMjUWXLO47600CP
+R763kpaZqANy59C40gjS6tKVDTUTME8wIiEcJbc0nl8uNUNy5PmT2tz9TdqEcmyr
+Rm/zrThkQIflq03juec5pq9b/i0G3U+4c9r1uWW0G8Y/hxfoOZM=
+=cD4O
+-----END PGP SIGNATURE-----
+
+--=-e+X3D6S2mT76SjKn5qQP--
+
+
+
+--===============6083149373211198047==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6083149373211198047==--
