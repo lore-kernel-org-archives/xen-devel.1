@@ -1,15 +1,17 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v9] new config option vtsc_tolerance_khz to
- avoid TSC emulation
-Date: Thu, 13 Sep 2018 09:39:13 +0200
-Message-ID: <20180913093913.328a523a.olaf@aepfle.de>
-References: <20180607130829.18811-1-olaf@aepfle.de>
- <20180626191113.2d8e6876.olaf@aepfle.de>
- <20180801181747.170405d8.olaf@aepfle.de>
+From: Sergey Dyasli <sergey.dyasli@citrix.com>
+Subject: Re: [PATCH v4 1/3] x86/msr: Dispatch Xen and Viridian
+ MSRs from guest_{wr, rd}msr()
+Date: Thu, 13 Sep 2018 07:54:33 +0000
+Message-ID: <b62572b4314a595041715979b0b231897e50630e.camel@citrix.com>
+References: <1536692177-15675-2-git-send-email-andrew.cooper3@citrix.com>
+ <1536753647-17165-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3281782390074541580=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180801181747.170405d8.olaf@aepfle.de>
+In-Reply-To: <1536753647-17165-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Language: en-US
+Content-ID: <01E1CA4E694322439059C36E5A7192E8@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,69 +20,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org, Andrew Cooper <andrew.cooper3@citrix.com>, Lars Kurth <lars.kurth@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Andrew Cooper <Andrew.Cooper3@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: Wei Liu <wei.liu2@citrix.com>, "JBeulich@suse.com" <JBeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============3281782390074541580==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/f/tgnFqHw2aabL/jRYZO1wt"; protocol="application/pgp-signature"
-
---Sig_/f/tgnFqHw2aabL/jRYZO1wt
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Andrew, Lars,
-
-this patch was not applied yet, even after a few "pings".
-
-I think it needs an approval from Andrew before it can go in, unless the
-bug has to be fixed in some other way.
-
-Please take some time to review that change.
-
-Thanks,
-Olaf
-
-Am Wed, 1 Aug 2018 18:17:47 +0200
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> Am Tue, 26 Jun 2018 19:11:13 +0200
-> schrieb Olaf Hering <olaf@aepfle.de>:
-> > Am Thu,  7 Jun 2018 15:08:29 +0200
-> > schrieb Olaf Hering <olaf@aepfle.de>: =20
-> > > Add an option to control when vTSC emulation will be activated for a
-> > > domU with tsc_mode=3Ddefault. Without such option each TSC access from
-> > > domU will be emulated, which causes a significant perfomance drop for
-> > > workloads that make use of rdtsc.   =20
-> > Andrew,
-> > do you have any comments on this patch/approach? =20
-> Andrew,
-> any comments on this patch?
-> https://lists.xen.org/archives/html/xen-devel/2018-06/msg00398.html
-
---Sig_/f/tgnFqHw2aabL/jRYZO1wt
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW5oUIQAKCRBdQqD6ppg2
-fiTzAKCYvYZBTuVwXEdjUzXl0vF4GV3TGwCZAQD5KQ2LEtV+N4bTur5iW69Ucu4=
-=neim
------END PGP SIGNATURE-----
-
---Sig_/f/tgnFqHw2aabL/jRYZO1wt--
-
-
---===============3281782390074541580==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3281782390074541580==--
+T24gV2VkLCAyMDE4LTA5LTEyIGF0IDEzOjAwICswMTAwLCBBbmRyZXcgQ29vcGVyIHdyb3RlOg0K
+PiBEZXNwaXRlIHRoZSBjb21wbGljYXRlZCBkaWZmIGluIHtzdm0sdm14fV9tc3Jfd3JpdGVfaW50
+ZXJjZXB0KCksIGl0IGlzIGp1c3QNCj4gdGhlIDAgY2FzZSBsb3Npbmcgb25lIGxldmVsIG9mIGlu
+ZGVudGF0aW9uLCBhcyBwYXJ0IG9mIHJlbW92aW5nIHRoZSBjYWxsIHRvDQo+IHdybXNyX2h5cGVy
+dmlzb3JfcmVncygpLg0KPiANCj4gVGhlIGNhc2UgYmxvY2tzIGluIGd1ZXN0X3t3cixyZH1tc3Io
+KSB1c2UgcmF3IG51bWJlcnMsIHBhcnRseSBmb3IgY29uc2lzdGVuY3kNCj4gd2l0aCB0aGUgQ1BV
+SUQgc2lkZSBvZiB0aGluZ3MsIGJ1dCBtYWlubHkgYmVjYXVzZSB0aGlzIGlzIGNsZWFyZXIgY29k
+ZSB0bw0KPiBmb2xsb3cuICBJbiBwYXJ0aWN1bGFyLCB0aGUgWGVuIGJsb2NrIG1heSBvdmVybGFw
+IHdpdGggdGhlIFZpcmlkaWFuIGJsb2NrIGlmDQo+IFZpcmlkaWFuIGlzIG5vdCBlbmFibGVkIGZv
+ciB0aGUgZG9tYWluLCBhbmQgdHJ5aW5nIHRvIGV4cHJlc3MgdGhpcyB3aXRoIG5hbWVkDQo+IGxp
+dGVyYWxzIGNhdXNlZCBtb3JlIGNvbmZ1c2lvbiB0aGF0IGl0IHNvbHZlZC4NCj4gDQo+IEZ1dHVy
+ZSBjaGFuZ2VzIHdpdGggY2xlYW4gdXAgdGhlIGluZGl2aWR1YWwgQVBJcywgaW5jbHVkaW5nIGFs
+bG93aW5nIHRoZXNlDQo+IE1TUnMgdG8gYmUgdXNhYmxlIGZvciB2Y3B1cyBvdGhlciB0aGFuIGN1
+cnJlbnQgKG5vIGNhbGxlcnMgZXhpc3Qgd2l0aCB2ICE9DQo+IGN1cnJlbnQpLg0KPiANCj4gU2ln
+bmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4NCj4g
+UmV2aWV3ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+
+DQo+IFJldmlld2VkLWJ5OiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4NCj4gUmV2
+aWV3ZWQtYnk6IFBhdWwgRHVycmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+DQo+IC0tLQ0K
+PiBDQzogSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1c2UuY29tPg0KPiBDQzogV2VpIExpdSA8d2Vp
+LmxpdTJAY2l0cml4LmNvbT4NCj4gQ0M6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRy
+aXguY29tPg0KPiBDQzogU2VyZ2V5IER5YXNsaSA8c2VyZ2V5LmR5YXNsaUBjaXRyaXguY29tPg0K
+PiANCj4gdjM6DQo+ICAqIFNwbGl0IG91dCBvZiBwcmV2aW91cyBzZXJpZXMuICBSZXRhaW4gYXBw
+cm9wcmlhdGUgUi1ieSdzDQo+IHY0Og0KPiAgKiBSZXRhaW4gc3dpdGNoKCkgZm9yIGludGVycHJl
+dGluZyB0aGUgcmVzdWx0IG9mIHdybXNyX2h5cGVydmlzb3JfcmVncygpDQo+IC0tLQ0KPiAgeGVu
+L2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMgICAgIHwgMjcgKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0NCj4gIHhlbi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jICAgICB8IDI4ICsrKystLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLQ0KPiAgeGVuL2FyY2gveDg2L21zci5jICAgICAgICAgICAgIHwgNDMgKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0tDQo+ICB4ZW4vYXJjaC94ODYv
+cHYvZW11bC1wcml2LW9wLmMgfCAgNiAtLS0tLS0NCj4gIDQgZmlsZXMgY2hhbmdlZCwgNDYgaW5z
+ZXJ0aW9ucygrKSwgNTggZGVsZXRpb25zKC0pDQoNClJldmlld2VkLWJ5OiBTZXJnZXkgRHlhc2xp
+IDxzZXJnZXkuZHlhc2xpQGNpdHJpeC5jb20+DQoNCi0tIA0KVGhhbmtzLA0KU2VyZ2V5Cl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
