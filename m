@@ -1,17 +1,15 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: null scheduler bug
-Date: Thu, 13 Sep 2018 09:04:51 +0200
-Message-ID: <a938e477609ae123ae61aec515daa34ccaf0b8f3.camel@suse.com>
-References: <alpine.DEB.2.10.1809121559330.4255@sstabellini-ThinkPad-X260>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v9] new config option vtsc_tolerance_khz to
+ avoid TSC emulation
+Date: Thu, 13 Sep 2018 09:39:13 +0200
+Message-ID: <20180913093913.328a523a.olaf@aepfle.de>
+References: <20180607130829.18811-1-olaf@aepfle.de>
+ <20180626191113.2d8e6876.olaf@aepfle.de>
+ <20180801181747.170405d8.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5817879500308225806=="
+Content-Type: multipart/mixed; boundary="===============3281782390074541580=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=tvlc=l3=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1g0Lgg-0006LE-Bv
- for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 07:05:14 +0000
-In-Reply-To: <alpine.DEB.2.10.1809121559330.4255@sstabellini-ThinkPad-X260>
+In-Reply-To: <20180801181747.170405d8.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,85 +18,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, milanboberic94@gmail.com
+To: xen-devel@lists.xen.org, Andrew Cooper <andrew.cooper3@citrix.com>, Lars Kurth <lars.kurth@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
+--===============3281782390074541580==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/f/tgnFqHw2aabL/jRYZO1wt"; protocol="application/pgp-signature"
 
---===============5817879500308225806==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-wmr2crqEB+1PXR/kQF69"
-
-
---=-wmr2crqEB+1PXR/kQF69
-Content-Type: text/plain; charset="UTF-8"
+--Sig_/f/tgnFqHw2aabL/jRYZO1wt
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2018-09-12 at 16:03 -0700, Stefano Stabellini wrote:
-> Hi Dario,
->=20
-> Milan has just found a bug in the null scheduler: apparently it is
-> not
-> possible to start a VM again after it has been destroyed.
->=20
-> My initial suspicion was that the VM wasn't properly destroyed, but I
-> asked Milan to double check with xl list, and the VM doesn't show in
-> the
-> list anymore.
->=20
-Ok. With what version of Xen? Is PCI passthrough/device assignment
-involved? I'm asking because this highly reminds me of this:
+Andrew, Lars,
 
-https://lists.xen.org/archives/html/xen-devel/2017-07/msg00501.html
+this patch was not applied yet, even after a few "pings".
 
-Which then led to this:
+I think it needs an approval from Andrew before it can go in, unless the
+bug has to be fixed in some other way.
 
-https://www.mail-archive.com/xen-devel@lists.xen.org/msg105388.html
+Please take some time to review that change.
 
-And to the following changes (related to RCU, which is how complete
-destruction of a domain occurs):
+Thanks,
+Olaf
 
-2b936ea7b "xen: RCU: avoid busy waiting until the end of grace period."
-38ad8151f "xen: RCU: don't let a CPU with a callback go idle."
-...
+Am Wed, 1 Aug 2018 18:17:47 +0200
+schrieb Olaf Hering <olaf@aepfle.de>:
 
-Are these commit there?
+> Am Tue, 26 Jun 2018 19:11:13 +0200
+> schrieb Olaf Hering <olaf@aepfle.de>:
+> > Am Thu,  7 Jun 2018 15:08:29 +0200
+> > schrieb Olaf Hering <olaf@aepfle.de>: =20
+> > > Add an option to control when vTSC emulation will be activated for a
+> > > domU with tsc_mode=3Ddefault. Without such option each TSC access from
+> > > domU will be emulated, which causes a significant perfomance drop for
+> > > workloads that make use of rdtsc.   =20
+> > Andrew,
+> > do you have any comments on this patch/approach? =20
+> Andrew,
+> any comments on this patch?
+> https://lists.xen.org/archives/html/xen-devel/2018-06/msg00398.html
 
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-wmr2crqEB+1PXR/kQF69
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
+--Sig_/f/tgnFqHw2aabL/jRYZO1wt
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluaDBMACgkQFkJ4iaW4
-c+5mphAA41OYs3Lt2oxYHYxY3JSZf8XBkFVu9RN5IayNQcQCFsnPCzFwEtRvwOwH
-0/+ZN2E2QZ5mrVVfW/8e94mqZR1AQsTRgGxklO8o0659hw1NU/i+MGXHMeKoqibI
-8j2vo96T3sj5eC0h+92KTZhCw/Soyrn+tiC9NN1oPmYzQ0/gmLZYv2Wvxyr4NUUA
-eD/AvRzpK0hHvTQTnnmh4+cKaYYwmau4Q8sjaTiTDG1hcPQ/06VgAApCco5mJuPN
-neUh839rA9rysIf7quhGKr9WHBF0XBl/hPavPDoOPnkrR5MU7sph4FnWvwENtbwA
-VegdYCUa3gno2yRNLSXCoiqrrdCV0PoSdvVXdZ4yIAFg3eIlUV2zo8m7E8CZwHvp
-Xx+QYYkejmxjx72jYC3uEvS5hAPvAGGYcuP2Od0h9+2zvwcEU0JSiFazsj2ls80E
-NTf4MYFNRnRwtgKdBUjdqvQOuTonsbKOD7pOQxpLLtJYW+v4ufE9fYABeVM49+Nx
-66q6WPchqfDAoG/6VK3+CTqxtTDSnDxEWfnMMO/9GCaebR7nf2J4tZQg5I+vcw6s
-aVxBL/7uiROpTpWlmQkFAdLn8eEIbvb/++HBj2a9YB4UqrDDpFwngWRh0gxkoKjz
-UZkfxu0a6ZBDy1bk0i49rO01VTu/F5QCvm/mi2WwsgHUgubnSAs=
-=aHgB
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW5oUIQAKCRBdQqD6ppg2
+fiTzAKCYvYZBTuVwXEdjUzXl0vF4GV3TGwCZAQD5KQ2LEtV+N4bTur5iW69Ucu4=
+=neim
 -----END PGP SIGNATURE-----
 
---=-wmr2crqEB+1PXR/kQF69--
+--Sig_/f/tgnFqHw2aabL/jRYZO1wt--
 
 
-
---===============5817879500308225806==
+--===============3281782390074541580==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -108,4 +83,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5817879500308225806==--
+--===============3281782390074541580==--
