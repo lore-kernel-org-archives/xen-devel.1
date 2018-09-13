@@ -1,18 +1,21 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH v3] Change timestamps representation for
- keyhandlers
-Date: Thu, 13 Sep 2018 15:22:11 +0200
-Message-ID: <9b24c480bd1c2437798ff1619f5ef695dc938aa0.camel@suse.com>
-References: <1536771807-1118-1-git-send-email-andrii.anisov@gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v8 5/7] memory: add
+ check_get_page_from_gfn() as a wrapper...
+Date: Thu, 13 Sep 2018 07:22:57 -0600
+Message-ID: <5B9A64B102000078001E83C8@prv1-mh.provo.novell.com>
+References: <20180913103153.33377-1-paul.durrant@citrix.com>
+ <20180913103153.33377-6-paul.durrant@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6083149373211198047=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=tvlc=l3=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1g0Ra5-0005g9-11
- for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 13:22:49 +0000
-In-Reply-To: <1536771807-1118-1-git-send-email-andrii.anisov@gmail.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=jl0+=l3=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1g0RaI-0005jM-Sq
+ for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 13:23:02 +0000
+In-Reply-To: <20180913103153.33377-6-paul.durrant@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,73 +24,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Wei Liu <wei.liu2@citrix.com>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6083149373211198047==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-e+X3D6S2mT76SjKn5qQP"
-
-
---=-e+X3D6S2mT76SjKn5qQP
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2018-09-12 at 20:03 +0300, Andrii Anisov wrote:
-> From: Andrii Anisov <andrii_anisov@epam.com>
->=20
-> For different keyhandlers, replace a hex with delimiter
-> representation
-> of time to PRI_stime which is decimal ns currently.
->=20
-> Signed-off-by: Andrii Anisov <andrii_anisov@epam.com>
->
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-e+X3D6S2mT76SjKn5qQP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluaZIMACgkQFkJ4iaW4
-c+7VgQ/8DWohotd+4qYddPNHqUGYKcxVq+Qi+DHo5GL1AW2Qjxbqb54PVbreGOiw
-potnq+Zcdy15rLmlQ570rEpBbdOXJTSddG3/QKnr8Wdrnw6a5wZ2cvvtL676+Sus
-G7QHnw+fThFsJm+mzjwSeoYowAHBm5DkCNSMSmbKiels38AdFRS2zFdeIOdK9gQt
-aWXtIgR/O3GT1MycOhMPpen99eEcwg1Wt/qXlDcuUZCj33B7lvyWpKukhsZGFvU5
-rW51ezLEHPNXXLAjC75+YbjvSn9BQliAEJrLHvMMoNdSnZpVDmOe1V70QpmM4h0o
-0cGR5LtK2AgEfwJsK5ZDwTDM6zyEHJ/x4moW3m5Mfe6Lq3+0JUcxxVU6bDFfL1VG
-7PtboBNJ0XzsBwtz/l2dGFlOAbbr1Y/0Etu87oAbwDu70tXS2eswz8udclcB3O+w
-l5NWW2QHKCUUb+tc3GoC/GqjQo7SwpdW8R8WtGNjXp+XoVjOsGiTdi+1MYrHsCK/
-9VnHguHW5a6Xi7wQsPag3/tMwXOYLFn3rSrLA4wTcuMqlhJ1mrMjUWXLO47600CP
-R763kpaZqANy59C40gjS6tKVDTUTME8wIiEcJbc0nl8uNUNy5PmT2tz9TdqEcmyr
-Rm/zrThkQIflq03juec5pq9b/i0G3U+4c9r1uWW0G8Y/hxfoOZM=
-=cD4O
------END PGP SIGNATURE-----
-
---=-e+X3D6S2mT76SjKn5qQP--
-
-
-
---===============6083149373211198047==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6083149373211198047==--
+Pj4+IE9uIDEzLjA5LjE4IGF0IDEyOjMxLCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
+Ogo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jCj4gKysrIGIveGVuL2FyY2gveDg2
+L2h2bS9lbXVsYXRlLmMKPiBAQCAtMzUzLDMzICszNTMsMjAgQEAgc3RhdGljIGludCBodm1lbXVs
+X2RvX2lvX2J1ZmZlcigKPiAgCj4gIHN0YXRpYyBpbnQgaHZtZW11bF9hY3F1aXJlX3BhZ2UodW5z
+aWduZWQgbG9uZyBnbWZuLCBzdHJ1Y3QgcGFnZV9pbmZvICoqcGFnZSkKPiAgewo+IC0gICAgc3Ry
+dWN0IGRvbWFpbiAqY3Vycl9kID0gY3VycmVudC0+ZG9tYWluOwo+IC0gICAgcDJtX3R5cGVfdCBw
+Mm10Owo+IC0KPiAtICAgICpwYWdlID0gZ2V0X3BhZ2VfZnJvbV9nZm4oY3Vycl9kLCBnbWZuLCAm
+cDJtdCwgUDJNX1VOU0hBUkUpOwo+IC0KPiAtICAgIGlmICggKnBhZ2UgPT0gTlVMTCApCj4gLSAg
+ICAgICAgcmV0dXJuIFg4NkVNVUxfVU5IQU5ETEVBQkxFOwo+IC0KPiAtICAgIGlmICggcDJtX2lz
+X3BhZ2luZyhwMm10KSApCj4gKyAgICBzd2l0Y2ggKCBjaGVja19nZXRfcGFnZV9mcm9tX2dmbihj
+dXJyZW50LT5kb21haW4sIF9nZm4oZ21mbiksIGZhbHNlLAo+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgTlVMTCwgcGFnZSkgKQo+ICAgICAgewo+IC0gICAgICAgIHB1dF9w
+YWdlKCpwYWdlKTsKPiAtICAgICAgICBwMm1fbWVtX3BhZ2luZ19wb3B1bGF0ZShjdXJyX2QsIGdt
+Zm4pOwo+IC0gICAgICAgIHJldHVybiBYODZFTVVMX1JFVFJZOwo+IC0gICAgfQo+ICsgICAgY2Fz
+ZSAwOgo+ICsgICAgICAgIGJyZWFrOwo+ICAKPiAtICAgIGlmICggcDJtX2lzX3NoYXJlZChwMm10
+KSApCj4gLSAgICB7Cj4gLSAgICAgICAgcHV0X3BhZ2UoKnBhZ2UpOwo+ICsgICAgY2FzZSAtRUFH
+QUlOOgo+ICAgICAgICAgIHJldHVybiBYODZFTVVMX1JFVFJZOwo+IC0gICAgfQo+ICAKPiAtICAg
+IC8qIFRoaXMgY29kZSBzaG91bGQgbm90IGJlIHJlYWNoZWQgaWYgdGhlIGdtZm4gaXMgbm90IFJB
+TSAqLwo+IC0gICAgaWYgKCBwMm1faXNfbW1pbyhwMm10KSApCgpUaGlzIGdldHMgcmVwbGFjZWQg
+YnkgCgogICAgaWYgKCAhcDJtX2lzX3JhbShwMm10KSB8fCAoIXJlYWRvbmx5ICYmIHAybV9pc19y
+ZWFkb25seShwMm10KSkgKQoKaW4gdGhlIGZ1bmN0aW9uLCB3aGljaCBJJ20gYWZyYWlkIGRvZXMg
+bm90IGZ1bGZpbGwgdGhlIGNsYWltIG9mCiJ0aGUgZGVzaXJlZCBzZW1hbnRpYyBpcyB0aGUgc2Ft
+ZSIsIHNpbmNlIHRoZXJlIGFyZSAob3IgYXQgdGhlCnZlcnkgbGVhc3QgY291bGQgYmUsIHlldCB5
+b3UgYWxzbyBkb24ndCB3YW50IHRvIGludHJvZHVjZQpsYXRlbnQgYnVncykgdHlwZXMgd2hpY2gg
+ZmFsbCBpbnRvIG5laXRoZXIgY2F0ZWdvcnkuIFdvdWxkIGl0CnBlcmhhcHMgbWFrZSBzZW5zZSB0
+byBkZWZlciBwMm10IGNoZWNrcyBiZXlvbmQKcGFnaW5nL3NoYXJlZCB0byB0aGUgY2FsbGVyIHdo
+ZW4gcGFzc2luZyBhIHJlc3BlY3RpdmUKbm9uLU5VTEwgcG9pbnRlciBpbnRvIHRoZSBmdW5jdGlv
+bj8gVGhpcyBpcyB0aGUgbW9yZSB0aGF0LCBhcwppcyBsb29rcywgdGhpcyAib25seSBhbG1vc3Qg
+dGhlIHNhbWUiIGFwcGxpZXMgdG8gYWxsIG9mIHRoZQppbnN0YW5jZXMgeW91IHJlcGxhY2UsIHdo
+aWNoIG1ha2VzIG1lIGV2ZW4gd29uZGVyIHdoZXRoZXIKdGhlIHAybXQgcG9pbnRlciBtaWdodCBu
+ZWVkIHRvIGJlIG1hbmRhdG9yeSB0byBiZSBwYXNzZWQgaW4uCgpKYW4KCgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
