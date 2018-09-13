@@ -1,17 +1,30 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] Make credit2 the default scheduler
-Date: Thu, 13 Sep 2018 18:51:19 +0200
-Message-ID: <cc2e661cc8543353929aebf1f190abd109ff2b82.camel@suse.com>
-References: <20180913163848.32216-1-george.dunlap@citrix.com>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Subject: Re: [PATCH v4 1/7] x86/p2m/pod: make it build with
+ !CONFIG_HVM
+Date: Thu, 13 Sep 2018 10:56:02 -0600
+Message-ID: <CABfawhm6fZ_RW+g5H3pB8CXZg_at+jD1uc2jmCpqjk_ins0zBQ@mail.gmail.com>
+References: <cover.f883694550a3da3b95e2bf2a6f6777297b851b43.1536856592.git-series.wei.liu2@citrix.com>
+ <692c143f75c48c83b7011147b1861e2c9b5f87f3.1536856592.git-series.wei.liu2@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6718293843228149948=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=tvlc=l3=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1g0UqN-0002OX-Hx
- for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 16:51:51 +0000
-In-Reply-To: <20180913163848.32216-1-george.dunlap@citrix.com>
+ <srs0=ekk3=l3=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
+ id 1g0Uv5-0002hZ-9g
+ for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 16:56:43 +0000
+Received: by mail-ed1-f65.google.com with SMTP id d8-v6so5226884edv.0
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Sep 2018 09:56:42 -0700 (PDT)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com.
+ [209.85.221.52])
+ by smtp.gmail.com with ESMTPSA id f19-v6sm1899031eda.49.2018.09.13.09.56.39
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 13 Sep 2018 09:56:40 -0700 (PDT)
+Received: by mail-wr1-f52.google.com with SMTP id v16-v6so6920773wro.11
+ for <xen-devel@lists.xenproject.org>; Thu, 13 Sep 2018 09:56:39 -0700 (PDT)
+In-Reply-To: <692c143f75c48c83b7011147b1861e2c9b5f87f3.1536856592.git-series.wei.liu2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,92 +33,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Wilk <konrad.wilk@oracle.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6718293843228149948==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-RgkdKa55KUECZrNu17Wy"
-
-
---=-RgkdKa55KUECZrNu17Wy
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2018-09-13 at 17:38 +0100, George Dunlap wrote:
-> Credit2 was declared "supported" in 4.8, and as of 4.10 had two other
-> critical features implemented (soft affinity / NUMA and caps).
->=20
-> [..]
->
-> Credit2, like credit, has a number of workloads / setups for which
-> performance could be improved.  Personally I think networking and
-> partially-loaded systems is going to be more representative of what
-> Xen is actually used for; so I think credit2 is on the whole the
-> better scheduler to use by default.  And in any case, making those
-> improvements on credit2 will be easier than on credit.
->=20
-> Signed-off-by: George Dunlap <george.dunlap@citrix.com>
->
-After all the effort we've spent on this, I'm really, really happy to
-see this (trying to) happen. Thanks for sending the patch. :-)
-
-I fully agree with and second George's reasoning, and feel 100% like
-providing my:
-
-Acked-by: Dario Faggioli <dfaggioli@suse.com>
-
-Of course, although we thing the scheduler is ready, the more
-testing/profiling/benchmarking/... we get, the better.
-
-So, everyone, don't be shy at throwing any kind of things against it,
-and report what happens, so we can fix the problem (or revert to
-Credit!) for 4.12
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-RgkdKa55KUECZrNu17Wy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlualYgACgkQFkJ4iaW4
-c+43ohAAxijiuYecrvQNEd4ZTywvfwDIFI3X4gXy2+sbR3xG9Lcv0f7siNgnqao3
-s39bAft4SBBLDLsH4a6Ev7sDvOT60yfqbr85CksRJ5GQ7uUZUOwFpOm6uOSSSfGa
-/P93fEVC2t+JPv/9AlElnLg7U2l8897n5Dg025PuediVDm51B7edF3jy4GcA+/m/
-ta3PhRcZxqFujjavE0EIDjeOWfwHDs2diXCBLKVEvRN45qhKEJfO2CNKcFvF6KJu
-9Xxj29NNsRpyGckisRHuQVuG/W7l8z1GldP6WFGn0ThPA4jBXJ9UtaLmD2l+YkU+
-Em6Uo8DcUiODX3A/OI/7FB7lDo0pgkv5zk4TaU3/MHkKv3GJbdy8EbFegh/zp9ri
-TLvjFDH9k9+Bhvp1oD+tMqjq3Pgypz4Gel9Bg3qrjtSEMmCgShPi/6mPDVYqOzON
-GtrE5W37hVLarxUwDCRzZGPamz0HYyvAa9ZiIUT7UbioX2JmuZkF3xxW1A3Czcty
-fMKAVrcysZbwJat+nj4FsEgFruUh9E1GFKAIXEJ78eW7f17VPnCPmMhxU584aABr
-mT5nxsT1HpcEGtwq4mIVi9DFl6t7JQwJ/vc8f1eeUl+84GoPRxP/viCDV2o5nD6j
-xjCIxinP04ndTi7faKDeiBWTBZYBTveXSpzUQwYJ8vYHLMlx/6o=
-=RM6y
------END PGP SIGNATURE-----
-
---=-RgkdKa55KUECZrNu17Wy--
-
-
-
---===============6718293843228149948==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6718293843228149948==--
+PiBkaWZmIC0tZ2l0IGEveGVuL2NvbW1vbi92bV9ldmVudC5jIGIveGVuL2NvbW1vbi92bV9ldmVu
+dC5jCj4gaW5kZXggNDc5M2FhYy4uNTBkNWViYyAxMDA2NDQKPiAtLS0gYS94ZW4vY29tbW9uL3Zt
+X2V2ZW50LmMKPiArKysgYi94ZW4vY29tbW9uL3ZtX2V2ZW50LmMKPiBAQCAtNjMwLDggKzYzMCw2
+IEBAIGludCB2bV9ldmVudF9kb21jdGwoc3RydWN0IGRvbWFpbiAqZCwgc3RydWN0IHhlbl9kb21j
+dGxfdm1fZXZlbnRfb3AgKnZlYywKPiAgICAgICAgICB7Cj4gICAgICAgICAgY2FzZSBYRU5fVk1f
+RVZFTlRfRU5BQkxFOgo+ICAgICAgICAgIHsKPiAtICAgICAgICAgICAgc3RydWN0IHAybV9kb21h
+aW4gKnAybSA9IHAybV9nZXRfaG9zdHAybShkKTsKPiAtCj4gICAgICAgICAgICAgIHJjID0gLUVP
+UE5PVFNVUFA7Cj4gICAgICAgICAgICAgIC8qIGh2bSBmaXhtZTogcDJtX2lzX2ZvcmVpZ24gdHlw
+ZXMgbmVlZCBhZGRyZXNzaW5nICovCj4gICAgICAgICAgICAgIGlmICggaXNfaHZtX2RvbWFpbiho
+YXJkd2FyZV9kb21haW4pICkKPiBAQCAtNjQ3LDEwICs2NDUsMTIgQEAgaW50IHZtX2V2ZW50X2Rv
+bWN0bChzdHJ1Y3QgZG9tYWluICpkLCBzdHJ1Y3QgeGVuX2RvbWN0bF92bV9ldmVudF9vcCAqdmVj
+LAo+ICAgICAgICAgICAgICBpZiAoIHVubGlrZWx5KG5lZWRfaW9tbXUoZCkpICkKPiAgICAgICAg
+ICAgICAgICAgIGJyZWFrOwo+Cj4gKyNpZmRlZiBDT05GSUdfSFZNCgpBZ2FpbiwgcGxlYXNlIGRv
+bid0IHB1dCBDT05GSUdfSFZNIGluIGNvbW1vbiBjb2RlLiBJZiBwMm0tPnBvZCBpcyBub3cKY29u
+ZGl0aW9uYWxseSBhdmFpbGFibGUgd2Ugd2lsbCBuZWVkIGEgcDJtIHdyYXBwZXIgZnVuY3Rpb24g
+dGhhdCBpcwphcmNoLWF3YXJlLgoKPiAgICAgICAgICAgICAgcmMgPSAtRVhERVY7Cj4gICAgICAg
+ICAgICAgIC8qIERpc2FsbG93IHBhZ2luZyBpbiBhIFBvRCBndWVzdCAqLwo+IC0gICAgICAgICAg
+ICBpZiAoIHAybS0+cG9kLmVudHJ5X2NvdW50ICkKPiArICAgICAgICAgICAgaWYgKCBwMm1fZ2V0
+X2hvc3RwMm0oZCktPnBvZC5lbnRyeV9jb3VudCApCj4gICAgICAgICAgICAgICAgICBicmVhazsK
+PiArI2VuZGlmCgpUaGFua3MsClRhbWFzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
