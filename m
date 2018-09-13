@@ -1,21 +1,19 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v7 4/6] iommu: don't domain_crash() inside
- iommu_map/unmap_page()
-Date: Thu, 13 Sep 2018 10:22:17 +0200
-Message-ID: <20180913082217.xk6zd3v2ir4po3xa@mac.bytemobile.com>
-References: <20180912113028.19610-1-paul.durrant@citrix.com>
- <20180912113028.19610-5-paul.durrant@citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: null scheduler bug
+Date: Thu, 13 Sep 2018 10:24:03 +0200
+Message-ID: <44174941bcd8f250a6ecd42ea10a78bf12453134.camel@suse.com>
+References: <alpine.DEB.2.10.1809121559330.4255@sstabellini-ThinkPad-X260>
+ <a938e477609ae123ae61aec515daa34ccaf0b8f3.camel@suse.com>
+ <CADJ6SV2G=51BK2p-bouNGfiS5sP2tiV6ztZZ7PFGjiptRw_P3w@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2567243330769129966=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=m7pv=l3=citrix.com=prvs=787f1cd73=roger.pau@srs-us1.protection.inumbo.net>)
- id 1g0MtN-0004bj-J2
- for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 08:22:25 +0000
-Content-Disposition: inline
-In-Reply-To: <20180912113028.19610-5-paul.durrant@citrix.com>
+ <srs0=tvlc=l3=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1g0Mvc-0004jf-RB
+ for xen-devel@lists.xenproject.org; Thu, 13 Sep 2018 08:24:44 +0000
+In-Reply-To: <CADJ6SV2G=51BK2p-bouNGfiS5sP2tiV6ztZZ7PFGjiptRw_P3w@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,45 +22,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel@lists.xenproject.org
+To: Milan Boberic <milanboberic94@gmail.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano Stabellini <stefano@stabellini.net>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBTZXAgMTIsIDIwMTggYXQgMTI6MzA6MjZQTSArMDEwMCwgUGF1bCBEdXJyYW50IHdy
-b3RlOgo+IFRoaXMgcGF0Y2ggcmVtb3ZlcyB0aGUgaW1wbGljaXQgZG9tYWluX2NyYXNoKCkgZnJv
-bSBpb21tdV9tYXAoKSwKPiB1bm1hcF9wYWdlKCkgYW5kIGlvbW11X2lvdGxiX2ZsdXNoKCkgYW5k
-IHR1cm5zIHRoZW0gaW50byBzdHJhaWdodGZvcndhcmQKPiB3cmFwcGVycyB0aGF0IGNoZWNrIHRo
-ZSBleGlzdGVuY2Ugb2YgdGhlIHJlbGV2YW50IGlvbW11X29wIGFuZCBjYWxsCj4gdGhyb3VnaCB0
-byBpdC4gVGhpcyBtYWtlcyB0aGVtIHVzYWJsZSBieSBQViBJT01NVSBjb2RlIHRvIGJlIGRlbGl2
-ZXJlZCBpbgo+IGZ1dHVyZSBwYXRjaGVzLgo+IFRoaXMgcGF0Y2ggYWRkcyBhIGhlbHBlciBtYWNy
-bywgZG9tdV9jcmFzaCgpLCB0aGF0IHdpbGwgb25seSBpbnZva2UKPiBkb21haW5fY3Jhc2goKSBp
-ZiB0aGUgZG9tYWluIGlzIG5vdCB0aGUgaGFyZHdhcmUgZG9tYWluIGFuZCBtb2RpZmllcwo+IGNh
-bGxlcnMgb2YgaW9tbXVfbWFwKCksIHVubWFwX3BhZ2UoKSBhbmQgaW9tbXVfaW90bGJfZmx1c2go
-KSB0byB1c2UgdGhpcwo+IHNob3VsZCBhbiBvcGVyYXRpb24gZmFpbC4KCkkgYXNzdW1lIHRoaXMg
-aXMgYmVjYXVzZSBmdXR1cmUgdXNhZ2VzIG9mIGlvbW11X21hcCwgdW5tYXAgYW5kIGZsdXNoCndp
-bGwgdG9sZXJhdGUgZmFpbHVyZSwgYW5kIHdpbGwgYmUgaGFuZGxlZCBkaWZmZXJlbnRseSB0aGFu
-IGNyYXNoaW5nCnRoZSBkb21haW4uCgo+IE5PVEU6IFRoaXMgcGF0Y2ggaW5jbHVkZXMgb25lIGJp
-dCBvZiBjbGVhbi11cCBpbiBzZXRfaWRlbnRpdHlfcDJtX2VudHJ5KCkKPiAgICAgICByZXBsYWNp
-bmcgdXNlIG9mIHAybS0+ZG9tYWluIHdpdGggdGhlIGRvbWFpbiBwb2ludGVyIHBhc3NlZCBpbnRv
-IHRoZQo+ICAgICAgIGZ1bmN0aW9uLgo+IAo+IFNpZ25lZC1vZmYtYnk6IFBhdWwgRHVycmFudCA8
-cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+Cj4gUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1
-bGljaEBzdXNlLmNvbT4KClJldmlld2VkLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVA
-Y2l0cml4LmNvbT4KCj4gZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL3hlbi9zY2hlZC5oIGIveGVu
-L2luY2x1ZGUveGVuL3NjaGVkLmgKPiBpbmRleCAwYmE4MGNiMWE4Li5mMmM1OTRkMTk3IDEwMDY0
-NAo+IC0tLSBhL3hlbi9pbmNsdWRlL3hlbi9zY2hlZC5oCj4gKysrIGIveGVuL2luY2x1ZGUveGVu
-L3NjaGVkLmgKPiBAQCAtNjE2LDYgKzYxNiwxMSBAQCB2b2lkIF9fZG9tYWluX2NyYXNoKHN0cnVj
-dCBkb21haW4gKmQpOwo+ICAgICAgX19kb21haW5fY3Jhc2goZCk7ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKPiAgfSB3aGlsZSAoMCkKPiAgCj4g
-KyNkZWZpbmUgZG9tdV9jcmFzaChkKSBkbyB7ICAgICAgICAgICAgICAgIFwKPiArICAgIGlmICgg
-IWlzX2hhcmR3YXJlX2RvbWFpbihkKSApICAgICAgICAgXAo+ICsgICAgICAgIGRvbWFpbl9jcmFz
-aChkKTsgICAgICAgICAgICAgICAgICBcCj4gK30gd2hpbGUgKGZhbHNlKQogICAgICAgICAgICBe
-IG1pc3Npbmcgc3BhY2VzCj4gKwo+ICAvKgo+ICAgKiBDYWxsZWQgZnJvbSBhc3NlbWJseSBjb2Rl
-LCB3aXRoIGFuIG9wdGlvbmFsIGFkZHJlc3MgdG8gaGVscCBpbmRpY2F0ZSB3aHkKPiAgICogdGhl
-IGNyYXNoIG9jY3VyZWQuICBJZiBhZGRyIGlzIDAsIGxvb2sgdXAgYWRkcmVzcyBmcm9tIGxhc3Qg
-ZXh0YWJsZQo+IC0tIAo+IDIuMTEuMAo+IAo+IAo+IF9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fCj4gWGVuLWRldmVsIG1haWxpbmcgbGlzdAo+IFhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwo+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+
+--===============2567243330769129966==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-NAcX/6qYEXe8jIuuSmY/"
+
+
+--=-NAcX/6qYEXe8jIuuSmY/
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+So, first of all:
+1. use plaintext, not HTML
+2. don't drop the xen-devel list (and other Cc-s) when replying.
+
+:-)
+
+That being said...
+
+On Thu, 2018-09-13 at 09:38 +0200, Milan Boberic wrote:
+> Hi Dario,=20
+> yes passtrhough is involved.=20
+>
+Ok.
+
+> This is everything I did so far:=20
+>=20
+> I implemented Xen Hypervisor 4.9.2 on UltraZed-EG board with carrier
+> card following these steps:
+> 1.) installed petalinux 2018.2 on Ubuntu 16.04
+> 2.) dowloaded  UltraZed-EG IO Carrier Card - PetaLinux 2018.2
+> Standard BSP
+> 3.) created project:   petalinux-create -t project =E2=80=93s  <path_to_B=
+SP>
+> 4.) copied xen-overlay.dtsi from ZCU102 project (also made with BSP)
+> to my project
+> 5.) built xen hypervisor following this guide link  (booting with SD
+> card)
+> 6.) made baremetal application that blinks PS LED with Vivado
+> 7.) measured signals jitted when application is on board with and
+> with out Xen
+>=20
+I am not familiar with building an SD-Card image for an ARM system with
+Xen on it. What I can tell, though, is that Xen 4.9.2 does not look to
+me to include the RCU subsystem fixes that I mentioned in my reply.
+
+I don't recall why we did not backport them. It may be that they're not
+entirely trivial, and they fix a behavior which manifests only in not
+fully supported cases. Or that we (well, I :-/) forgot.
+
+I can have a look, at how challenging it is to apply the patches to
+4.9.x (but no hard feelings if anyone beats me at it, I promise
+:-D).
+
+In the meantime, if you have the chance of trying Xen 4.10 or 4.10.1,
+which has those fixes, that would be great. In fact, in case everything
+would work with such version, that would be another clue that the RCU
+issue is the actual culprit.
+
+> I menaged to decrease jitter adding sched=3Dnull vwfi=3Dnative in xen-
+> overlay.dtsi file in xen-bootargs.
+>=20
+> The problem is when I add sched=3Dnull vwfi=3Dnative, I can create my
+> bare-metal application with xl create and destroy it with xl destroy
+> (it disappears from xl list) but when I want to start it again (xl
+> create) this error pops:
+>=20
+> root@uz3eg-iocc-2018-2:~# xl create bm1.cfg
+> Parsing config from bm1.cfg
+> (XEN) IRQ 48 is already used by domain 1
+> libxl: error: libxl_create.c:1278:domcreate_launch_dm: Domain
+> 2:failed give domain access to irq 48: Device or resource busy
+> libxl: error: libxl_domain.c:1003:libxl__destroy_domid: Domain 2:Non-
+> existant domain
+> libxl: error: libxl_domain.c:962:domain_destroy_callback: Domain
+> 2:Unable to destroy guest
+> libxl: error: libxl_domain.c:889:domain_destroy_cb: Domain
+> 2:Destruction of domain failed
+>=20
+> When I remove  sched=3Dnull vwfi=3Dnative and build project again
+> everything works fine, I can create and destroy bm app as many times
+> as I want.
+>=20
+Yes. If you look at the email (and to the full thread) I put links to,
+you'll see that the behavior is exactly the same. It mentions the
+Credit2 scheduler not working, rather than null, but the problem is the
+same, i.e., that there is no periodic timer tick neither in Credit2 nor
+in null.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-NAcX/6qYEXe8jIuuSmY/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluaHqYACgkQFkJ4iaW4
+c+5jRRAAjcXqMaDdtOsUnIFkI+gv91Tc0HvSU2fKeIQLhq1RXGWcHYcYp2ZC4Vjk
+GhmgdRPY1wg8XlzSYdgDC0kSEjRpy7R3ELcJthG8zksMh8LU7Vk8FmqpWnteeG4R
+xjjtMTFR+5z4EbObwEOMLslO1CTMOqLvjxldss65fPwN/+Dpp/qUHGirJnwd5QKq
+eqDgCopkTmwH8NXM1xRF1jJLxiLbJ7htjcCFr8UIw1/uvPoI4swUa5JnQYf/wQcw
+4GnI8iuZxGpXLMvYJVkxJ7MxtslKnD92k/OiOUFoYA77fpZ6+009gPrJJ4MtR7PG
+IFLoREshbARPFQZd0liu52pDa5DZCrZqZys9LwV9KeuX9ajquWnch5JaIl/TquMK
+v97gGSHWx8u3CakK8Ov9U+OrRkOyfteZnO7dvmacGhvt4k1bjMp6FA+xzBccNes2
+/DthxJsEIEGx9RoA8n1FXfe2evza4chivhJc2ebHBh8/153SdxbAr/SReZQ1Winr
+G4tnS4t4Id92yskIS2Mpi87vcAEsRd1maSSV7gwOUA4uYfSBLsQI+TVIZnSra+gO
+RpM6kXiSRdC6qf9Kl0jd/Q8yCQGLf3JE+0SI/+YIN9PqtIXDDc8K3mu7UC8tECBi
+VRh5sJmEYjP/jM7DYLI+U5EsDICmdTZ2Vl2p5RtuGKgVOLHdbzA=
+=0rT0
+-----END PGP SIGNATURE-----
+
+--=-NAcX/6qYEXe8jIuuSmY/--
+
+
+
+--===============2567243330769129966==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2567243330769129966==--
