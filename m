@@ -1,20 +1,17 @@
-From: Spencer Michaels <sxmichaels@gmail.com>
-Subject: Re: Reading guest page flags
-Date: Fri, 14 Sep 2018 01:01:33 -0700
-Message-ID: <CAMf-k8F6NFiPsm_ezQObZFQoVovW1Ot4_Q+G=ugoxz4zPYESSQ@mail.gmail.com>
-References: <CAMf-k8GVDLxt4hS9TngxxEb9Sn+jRM7Ecjfk__wL6xwbdKZKJw@mail.gmail.com>
- <daf65b86-e750-5544-9c5b-fd7ecb977738@bitdefender.com>
+From: Roger Pau Monne <roger.pau@citrix.com>
+Subject: [PATCH] intel/iommu: setup inclusive mappings before
+ enabling iommu
+Date: Fri, 14 Sep 2018 10:02:43 +0200
+Message-ID: <20180914080243.20961-1-roger.pau@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5930791900962056223=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=awal=l4=gmail.com=sxmichaels@srs-us1.protection.inumbo.net>)
- id 1g0j2y-0003wi-Pz
- for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 08:01:48 +0000
-Received: by mail-wr1-x435.google.com with SMTP id 20-v6so9350239wrb.12
- for <xen-devel@lists.xenproject.org>; Fri, 14 Sep 2018 01:01:47 -0700 (PDT)
-In-Reply-To: <daf65b86-e750-5544-9c5b-fd7ecb977738@bitdefender.com>
+ <srs0=mf26=l4=citrix.com=prvs=7880d46e1=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1g0j3z-00045H-Bf
+ for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 08:02:51 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,81 +20,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org
+Cc: Kevin Tian <kevin.tian@intel.com>, Dario Faggioli <dfaggioli@suse.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5930791900962056223==
-Content-Type: multipart/alternative; boundary="00000000000022b6810575d03c01"
-
---00000000000022b6810575d03c01
-Content-Type: text/plain; charset="UTF-8"
-
-Thanks! Sorry, I should have been more specific - I do indeed mean the
-regular guest PTEs (and I'm using PV guests which as I understand don't use
-EPT anyway). So, it seems I'll have to write my own code for this. I'll
-take a look at libvmi's implementation; if anyone knows any other libraries
-/ programs that read guest PTEs, that would be helpful to know as well.
-
-On Thu, Sep 13, 2018, 10:47 AM Razvan Cojocaru <rcojocaru@bitdefender.com>
-wrote:
-
-> On 9/13/18 8:29 PM, Spencer Michaels wrote:
-> > I'm writing an application that can read/write guest memory, and as part
-> > of that I need to check whether the page being manipulated is
-> > readable/writable by the guest itself. Does Xen have an API that would
-> > allow me to read the flags of an arbitrary page on a guest, given either
-> > its address or its PFN? I've only been able to find functions that
-> > update the existing memory mappings, but none to read them.
->
-> If you mean EPT, yes: look at xc_get_mem_access() in xenctrl.h / libxc.
-> If you mean "regular" PTEs, no - you'd have to write your own code to
-> retrieve that.
->
-
---00000000000022b6810575d03c01
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div>Thanks! Sorry, I should have been more specific - I =
-do indeed mean the regular guest PTEs (and I&#39;m using PV guests which as=
- I understand don&#39;t use EPT anyway). So, it seems I&#39;ll have to writ=
-e my own code for this. I&#39;ll take a look at libvmi&#39;s implementation=
-; if anyone knows any other libraries / programs that read guest PTEs, that=
- would be helpful to know as well.<br><br><div class=3D"gmail_quote"><div d=
-ir=3D"ltr">On Thu, Sep 13, 2018, 10:47 AM Razvan Cojocaru &lt;<a href=3D"ma=
-ilto:rcojocaru@bitdefender.com" target=3D"_blank" rel=3D"noreferrer">rcojoc=
-aru@bitdefender.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quot=
-e" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">=
-On 9/13/18 8:29 PM, Spencer Michaels wrote:<br>
-&gt; I&#39;m writing an application that can read/write guest memory, and a=
-s part<br>
-&gt; of that I need to check whether the page being manipulated is<br>
-&gt; readable/writable by the guest itself. Does Xen have an API that would=
-<br>
-&gt; allow me to read the flags of an arbitrary page on a guest, given eith=
-er<br>
-&gt; its address or its PFN? I&#39;ve only been able to find functions that=
-<br>
-&gt; update the existing memory mappings, but none to read them.<br>
-<br>
-If you mean EPT, yes: look at xc_get_mem_access() in xenctrl.h / libxc.<br>
-If you mean &quot;regular&quot; PTEs, no - you&#39;d have to write your own=
- code to<br>
-retrieve that.<br>
-</blockquote></div></div></div>
-
---00000000000022b6810575d03c01--
-
-
---===============5930791900962056223==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5930791900962056223==--
+T3IgZWxzZSBpdCBjYW4gbGVhZCB0byBmcmVlemVzIHdoZW4gZW5hYmxpbmcgdGhlIGlvbW11IG9u
+IGNlcnRhaW4KSW50ZWwgaGFyZHdhcmU6CgpbLi4uXQooWEVOKSBFTEY6IGFkZHJlc3NlczoKKFhF
+TikgICAgIHZpcnRfYmFzZSAgICAgICAgPSAweGZmZmZmZmZmODAwMDAwMDAKKFhFTikgICAgIGVs
+Zl9wYWRkcl9vZmZzZXQgPSAweDAKKFhFTikgICAgIHZpcnRfb2Zmc2V0ICAgICAgPSAweGZmZmZm
+ZmZmODAwMDAwMDAKKFhFTikgICAgIHZpcnRfa3N0YXJ0ICAgICAgPSAweGZmZmZmZmZmODEwMDAw
+MDAKKFhFTikgICAgIHZpcnRfa2VuZCAgICAgICAgPSAweGZmZmZmZmZmODI5NTMwMDAKKFhFTikg
+ICAgIHZpcnRfZW50cnkgICAgICAgPSAweGZmZmZmZmZmODI3NGUxODAKKFhFTikgICAgIHAybV9i
+YXNlICAgICAgICAgPSAweDgwMDAwMDAwMDAKKFhFTikgIFhlbiAga2VybmVsOiA2NC1iaXQsIGxz
+YiwgY29tcGF0MzIKKFhFTikgIERvbTAga2VybmVsOiA2NC1iaXQsIFBBRSwgbHNiLCBwYWRkciAw
+eDEwMDAwMDAgLT4gMHgyOTUzMDAKClRoaXMgcmVzdG9yZXMgdGhlIGJlaGF2aW9yIGJlZm9yZSBj
+b21taXQgNjZhOTI3NGNjMzQzNSB0aGF0IGNoYW5nZWQKdGhlIG9yZGVyIGFuZCBlbmFibGVkIHRo
+ZSBpb21tdSB3aXRob3V0IGhhdmluZyB0aGUgaW5jbHVzaXZlIG1hcHBpbmdzCnNldHVwLgoKTm90
+ZSB0aGF0IGluIG9yZGVyIHRvIHJlc3RvcmUgcHJldmlvdXMgYmVoYXZpb3IgYSBuZXcgZW5hYmxl
+IGhvb2sgaXMKYWRkZWQgdG8gdGhlIGlvbW11X29wcyBzdHJ1Y3QgdGhhdCdzIG9ubHkgdXNlZCBi
+eSBWVC1kLgoKUmVwb3J0ZWQtYnk6IERhcmlvIEZhZ2dpb2xpIDxkZmFnZ2lvbGlAc3VzZS5jb20+
+ClNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgot
+LS0KQ2M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KQ2M6IEtldmluIFRpYW4gPGtl
+dmluLnRpYW5AaW50ZWwuY29tPgpDYzogRGFyaW8gRmFnZ2lvbGkgPGRmYWdnaW9saUBzdXNlLmNv
+bT4KLS0tCiB4ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9pb21tdS5jICAgICB8ICAzICsrKwogeGVu
+L2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2lvbW11LmMgfCAxMCArKysrKysrKy0tCiB4ZW4vaW5j
+bHVkZS94ZW4vaW9tbXUuaCAgICAgICAgICAgICB8ICAxICsKIDMgZmlsZXMgY2hhbmdlZCwgMTIg
+aW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vZHJpdmVycy9w
+YXNzdGhyb3VnaC9pb21tdS5jIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvaW9tbXUuYwppbmRl
+eCBlZTNmNTIzZmRmLi4xZTI5MWFhNjczIDEwMDY0NAotLS0gYS94ZW4vZHJpdmVycy9wYXNzdGhy
+b3VnaC9pb21tdS5jCisrKyBiL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2lvbW11LmMKQEAgLTI0
+OCw2ICsyNDgsOSBAQCB2b2lkIF9faHdkb21faW5pdCBpb21tdV9od2RvbV9pbml0KHN0cnVjdCBk
+b21haW4gKmQpCiAgICAgfQogCiAgICAgYXJjaF9pb21tdV9od2RvbV9pbml0KGQpOworCisgICAg
+aWYgKCBoZC0+cGxhdGZvcm1fb3BzLT5lbmFibGUgKQorICAgICAgICBoZC0+cGxhdGZvcm1fb3Bz
+LT5lbmFibGUoKTsKIH0KIAogdm9pZCBpb21tdV90ZWFyZG93bihzdHJ1Y3QgZG9tYWluICpkKQpk
+aWZmIC0tZ2l0IGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2lvbW11LmMgYi94ZW4vZHJp
+dmVycy9wYXNzdGhyb3VnaC92dGQvaW9tbXUuYwppbmRleCBhZGM3MGYyMDVhLi5hYzMwNjIzNjk3
+IDEwMDY0NAotLS0gYS94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC92dGQvaW9tbXUuYworKysgYi94
+ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC92dGQvaW9tbXUuYwpAQCAtMTMxOSwxMiArMTMxOSwxNyBA
+QCBzdGF0aWMgdm9pZCBfX2h3ZG9tX2luaXQgaW50ZWxfaW9tbXVfaHdkb21faW5pdChzdHJ1Y3Qg
+ZG9tYWluICpkKQogICAgICAgICAgICAgICAgIiBJT01NVSBmbHVzaCBhbGwgZmFpbGVkIGZvciBo
+YXJkd2FyZSBkb21haW5cbiIpOwogCiAgICAgZm9yX2VhY2hfZHJoZF91bml0ICggZHJoZCApCi0g
+ICAgewogICAgICAgICBpZiAoIGlvbWVtX2RlbnlfYWNjZXNzKGQsIFBGTl9ET1dOKGRyaGQtPmFk
+ZHJlc3MpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFBGTl9ET1dOKGRyaGQtPmFk
+ZHJlc3MpKSApCiAgICAgICAgICAgICBCVUcoKTsKK30KKworc3RhdGljIHZvaWQgX19od2RvbV9p
+bml0IGludGVsX2lvbW11X2VuYWJsZSh2b2lkKQoreworICAgIHN0cnVjdCBhY3BpX2RyaGRfdW5p
+dCAqZHJoZDsKKworICAgIGZvcl9lYWNoX2RyaGRfdW5pdCAoIGRyaGQgKQogICAgICAgICBpb21t
+dV9lbmFibGVfdHJhbnNsYXRpb24oZHJoZCk7Ci0gICAgfQogfQogCiBpbnQgZG9tYWluX2NvbnRl
+eHRfbWFwcGluZ19vbmUoCkBAIC0yNjUwLDYgKzI2NTUsNyBAQCBzdGF0aWMgdm9pZCB2dGRfZHVt
+cF9wMm1fdGFibGUoc3RydWN0IGRvbWFpbiAqZCkKIAogY29uc3Qgc3RydWN0IGlvbW11X29wcyBp
+bnRlbF9pb21tdV9vcHMgPSB7CiAgICAgLmluaXQgPSBpbnRlbF9pb21tdV9kb21haW5faW5pdCwK
+KyAgICAuZW5hYmxlID0gaW50ZWxfaW9tbXVfZW5hYmxlLAogICAgIC5od2RvbV9pbml0ID0gaW50
+ZWxfaW9tbXVfaHdkb21faW5pdCwKICAgICAuYWRkX2RldmljZSA9IGludGVsX2lvbW11X2FkZF9k
+ZXZpY2UsCiAgICAgLmVuYWJsZV9kZXZpY2UgPSBpbnRlbF9pb21tdV9lbmFibGVfZGV2aWNlLApk
+aWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUveGVuL2lvbW11LmggYi94ZW4vaW5jbHVkZS94ZW4vaW9t
+bXUuaAppbmRleCA1N2M0ZTgxZWM2Li45NmI0ZmY2ZTFlIDEwMDY0NAotLS0gYS94ZW4vaW5jbHVk
+ZS94ZW4vaW9tbXUuaAorKysgYi94ZW4vaW5jbHVkZS94ZW4vaW9tbXUuaApAQCAtMTQwLDYgKzE0
+MCw3IEBAIHR5cGVkZWYgaW50IGlvbW11X2dyZG1fdCh4ZW5fcGZuX3Qgc3RhcnQsIHhlbl91bG9u
+Z190IG5yLCB1MzIgaWQsIHZvaWQgKmN0eHQpOwogCiBzdHJ1Y3QgaW9tbXVfb3BzIHsKICAgICBp
+bnQgKCppbml0KShzdHJ1Y3QgZG9tYWluICpkKTsKKyAgICB2b2lkICgqZW5hYmxlKSh2b2lkKTsK
+ICAgICB2b2lkICgqaHdkb21faW5pdCkoc3RydWN0IGRvbWFpbiAqZCk7CiAgICAgaW50ICgqYWRk
+X2RldmljZSkodTggZGV2Zm4sIGRldmljZV90ICpkZXYpOwogICAgIGludCAoKmVuYWJsZV9kZXZp
+Y2UpKGRldmljZV90ICpkZXYpOwotLSAKMi4xOC4wCgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
