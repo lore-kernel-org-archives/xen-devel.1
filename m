@@ -1,19 +1,23 @@
-From: Steven Haigh <netwiz@crc.id.au>
-Subject: Re: [PATCH] Make credit2 the default scheduler
-Date: Sat, 15 Sep 2018 00:21:11 +1000
-Message-ID: <4148872.qM0LCJrPQa@wopr.lan.crc.id.au>
-References: <20180913163848.32216-1-george.dunlap@citrix.com>
- <cc2e661cc8543353929aebf1f190abd109ff2b82.camel@suse.com>
- <5B9B752F02000078001E88AD@prv1-mh.provo.novell.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 5/6] xenbus: process be_watch events in
+ xenwatch multithreading
+Date: Fri, 14 Sep 2018 16:26:37 +0200
+Message-ID: <d5c6f15b-500d-91fd-1201-9fa552bc77cc__43894.4809175611$1536935132$gmane$org@suse.com>
+References: <1536910456-13337-1-git-send-email-dongli.zhang@oracle.com>
+ <1536910456-13337-6-git-send-email-dongli.zhang@oracle.com>
+ <8d6457cf-a105-3d88-bd38-d46b24f70501@suse.com>
+ <8f4c7508-1e8f-9d7e-1327-f537917845f4@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7482317529163592806=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=3mub=l4=crc.id.au=netwiz@srs-us1.protection.inumbo.net>)
- id 1g0oyM-0005yU-C4
- for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 14:21:27 +0000
-In-Reply-To: <5B9B752F02000078001E88AD@prv1-mh.provo.novell.com>
+ (envelope-from <srs0=rzwb=l4=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1g0p3S-0006FK-8f
+ for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 14:26:42 +0000
+In-Reply-To: <8f4c7508-1e8f-9d7e-1327-f537917845f4@oracle.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,107 +26,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, george.dunlap@citrix.com, Dario Faggioli <dfaggioli@suse.com>, Jan Beulich <JBeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+To: Dongli Zhang <dongli.zhang@oracle.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+Cc: wei.liu2@citrix.com, konrad.wilk@oracle.com, srinivas.eeda@oracle.com, paul.durrant@citrix.com, boris.ostrovsky@oracle.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============7482317529163592806==
-Content-Type: multipart/signed; boundary="nextPart5719703.KXq8LZaN82"; micalg="pgp-sha256"; protocol="application/pgp-signature"
-
---nextPart5719703.KXq8LZaN82
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-
-On Friday, 14 September 2018 6:45:35 PM AEST Jan Beulich wrote:
-> >>> On 13.09.18 at 18:51, <dfaggioli@suse.com> wrote:
-> > On Thu, 2018-09-13 at 17:38 +0100, George Dunlap wrote:
-> >> Credit2 was declared "supported" in 4.8, and as of 4.10 had two other
-> >> critical features implemented (soft affinity / NUMA and caps).
-> >>=20
-> >> [..]
-> >>=20
-> >> Credit2, like credit, has a number of workloads / setups for which
-> >> performance could be improved.  Personally I think networking and
-> >> partially-loaded systems is going to be more representative of what
-> >> Xen is actually used for; so I think credit2 is on the whole the
-> >> better scheduler to use by default.  And in any case, making those
-> >> improvements on credit2 will be easier than on credit.
-> >>=20
-> >> Signed-off-by: George Dunlap <george.dunlap@citrix.com>
-> >=20
-> > After all the effort we've spent on this, I'm really, really happy to
-> > see this (trying to) happen. Thanks for sending the patch. :-)
-> >=20
-> > I fully agree with and second George's reasoning, and feel 100% like
-> > providing my:
-> >=20
-> > Acked-by: Dario Faggioli <dfaggioli@suse.com>
->=20
-> And that's despite "sched=3Dcredit2 crashes system when using
-> cpupools"? While I agree that we shouldn't delay the switch for
-> much longer, in particular with there already being a fix available
-> from you I think that one should go in before the one here.
-
-Even though my opinion probably isn't very heavy on this matter, I've used=
-=20
-credit2 exclusively for a considerable time. If you're talking the issue I=
-=20
-think you're talking about, then I discovered it when doing stuff that most=
-=20
-people probably wouldn't bother with - evidenced that I hadn't done it befo=
-re=20
-either.
-
-I take peoples word on the performance +/- of a few percent here and there =
-=2D=20
-so if its easier to maintain and better code, then yeah - it makes sense to=
-=20
-move on with it. I certainly haven't found any normal use cases that would=
-=20
-lead me to object to this.
-
-=2D-=20
-Steven Haigh
-
-=F0=9F=93=A7 netwiz@crc.id.au       =F0=9F=92=BB https://www.crc.id.au
-=F0=9F=93=9E +61 (3) 9001 6090    =F0=9F=93=B1 0412 935 897
-
---nextPart5719703.KXq8LZaN82
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEFHf0gfgNrH6ofcYGQa811Xp9MdwFAlubw9cACgkQQa811Xp9
-Mdz0+RAAsXe+6kQc22xvOhEN/AGD6m2n7QHz2cDVhzlVKhd6MBEl0kSyOmDdjm0P
-8H1rcuMOxeOe5dsPdJsVpgY4xvRsnwGfhex6YTnNo32q0QHc3TxIPbgPSTE19zsO
-47jQgC+3nwKbx9pZEdMIqr8rCR8y3HEBkFaF8Ae4DLZMcrKOpNKj2n+neLRfXAF1
-zs3/cbB6taF4QWenc0n14HPVR7NT2/MVSLC3WoIpSBqhnbkiujx9frRgKFoFC3FL
-z/s/7w976KB00iLeATF0cEDr32j5VjU8txoBIfL5RcPveaQJpJDzQ17KTS6KC/ms
-rpO/lM3ssX1Y9DNamxBIhn812wAnBYAG/z9Fhp0N6+gu2xgidVPwSg+x1eoy7oAS
-9FLrbi2251x2YkgQSLxwEL/S2obPWkSYoGspztBIx1j0e/Vw3/bVooS91FqXbTMY
-dl4kT4hKAIF0RBC5CpugKTt/HuKfWjJy3+yPzvgEGszG+8r6UHnUviz9+5WHIFW1
-gTgS1T/H03nK0FO9jYCoV3gx8+T2R1qgOgKbQoBOgvGZ2Dh9BF8Uw1sqw3UVwOzY
-p+GE9Ukztl0ST3SzRhtrYV+xC6Nld50D8dVv5Ap9prqDs81SfR5Fq57352RNuDuf
-h2RKqMxnV5kgu3F3BU+WHtuK2CohNbxxEejIBl5RAT2tAhMXHAU=
-=AUMt
------END PGP SIGNATURE-----
-
---nextPart5719703.KXq8LZaN82--
-
-
-
-
-
---===============7482317529163592806==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7482317529163592806==--
+T24gMTQvMDkvMTggMTY6MTgsIERvbmdsaSBaaGFuZyB3cm90ZToKPiBIaSBKdWVyZ2VuLAo+IAo+
+IE9uIDA5LzE0LzIwMTggMDU6MTIgUE0sIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+IE9uIDE0LzA5
+LzE4IDA5OjM0LCBEb25nbGkgWmhhbmcgd3JvdGU6Cj4+PiBUaGlzIGlzIHRoZSA1dGggcGF0Y2gg
+b2YgYSAoNi1wYXRjaCkgcGF0Y2ggc2V0Lgo+Pj4KPj4+IFdpdGggdGhpcyBwYXRjaCwgd2F0Y2gg
+ZXZlbnQgaW4gcmVsYXRpdmUgcGF0aCBwYXR0ZXJuCj4+PiAnYmFja2VuZC88cHZkZXY+Lzxkb21p
+ZD5pLy4uLicgY2FuIGJlIHByb2Nlc3NlZCBpbiBwZXItZG9tVSB4ZW53YXRjaAo+Pgo+PiBzdXBl
+cmZsdW91cyAiaSIgLS0tLS0tLS0tLV4KPj4KPj4+IHRocmVhZC4KPj4+Cj4+PiBTaWduZWQtb2Zm
+LWJ5OiBEb25nbGkgWmhhbmcgPGRvbmdsaS56aGFuZ0BvcmFjbGUuY29tPgo+Pj4gLS0tCj4+PiAg
+ZHJpdmVycy94ZW4veGVuYnVzL3hlbmJ1c19wcm9iZS5jICAgICAgICAgfCAgMiArLQo+Pj4gIGRy
+aXZlcnMveGVuL3hlbmJ1cy94ZW5idXNfcHJvYmVfYmFja2VuZC5jIHwgMzIgKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKwo+Pj4gIGluY2x1ZGUveGVuL3hlbmJ1cy5oICAgICAgICAgICAg
+ICAgICAgICAgIHwgIDIgKysKPj4+ICAzIGZpbGVzIGNoYW5nZWQsIDM1IGluc2VydGlvbnMoKyks
+IDEgZGVsZXRpb24oLSkKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy94ZW4veGVuYnVzL3hl
+bmJ1c19wcm9iZS5jIGIvZHJpdmVycy94ZW4veGVuYnVzL3hlbmJ1c19wcm9iZS5jCj4+PiBpbmRl
+eCBiYTA2NDRjLi5hYTFiMTVhIDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy94ZW4veGVuYnVzL3hl
+bmJ1c19wcm9iZS5jCj4+PiArKysgYi9kcml2ZXJzL3hlbi94ZW5idXMveGVuYnVzX3Byb2JlLmMK
+Pj4+IEBAIC01NTIsNyArNTUyLDcgQEAgaW50IHhlbmJ1c19wcm9iZV9kZXZpY2VzKHN0cnVjdCB4
+ZW5fYnVzX3R5cGUgKmJ1cykKPj4+ICB9Cj4+PiAgRVhQT1JUX1NZTUJPTF9HUEwoeGVuYnVzX3By
+b2JlX2RldmljZXMpOwo+Pj4gIAo+Pj4gLXN0YXRpYyB1bnNpZ25lZCBpbnQgY2hhcl9jb3VudChj
+b25zdCBjaGFyICpzdHIsIGNoYXIgYykKPj4+ICt1bnNpZ25lZCBpbnQgY2hhcl9jb3VudChjb25z
+dCBjaGFyICpzdHIsIGNoYXIgYykKPj4KPj4gUGxlYXNlIGNoYW5nZSB0aGUgbmFtZSBvZiB0aGUg
+ZnVuY3Rpb24gd2hlbiBtYWtpbmcgaXQgZ2xvYmFsbHkKPj4gdmlzaWJsZSwgZS5nLiBieSBwcmVm
+aXhpbmcgInhlbmJ1c18iLgo+Pgo+PiBHZW5lcmFsbHkgSSB0aGluayB5b3UgZG9uJ3QgbmVlZCB0
+byB1c2UgaXQgYmVsb3cuCj4+Cj4+PiAgewo+Pj4gIAl1bnNpZ25lZCBpbnQgaSwgcmV0ID0gMDsK
+Pj4+ICAKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3hlbi94ZW5idXMveGVuYnVzX3Byb2JlX2Jh
+Y2tlbmQuYyBiL2RyaXZlcnMveGVuL3hlbmJ1cy94ZW5idXNfcHJvYmVfYmFja2VuZC5jCj4+PiBp
+bmRleCBiMGJlZDRmLi41MGRmODZhIDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy94ZW4veGVuYnVz
+L3hlbmJ1c19wcm9iZV9iYWNrZW5kLmMKPj4+ICsrKyBiL2RyaXZlcnMveGVuL3hlbmJ1cy94ZW5i
+dXNfcHJvYmVfYmFja2VuZC5jCj4+PiBAQCAtMjExLDkgKzIxMSw0MSBAQCBzdGF0aWMgdm9pZCBi
+YWNrZW5kX2NoYW5nZWQoc3RydWN0IHhlbmJ1c193YXRjaCAqd2F0Y2gsCj4+PiAgCXhlbmJ1c19k
+ZXZfY2hhbmdlZChwYXRoLCAmeGVuYnVzX2JhY2tlbmQpOwo+Pj4gIH0KPj4+ICAKPj4+ICtzdGF0
+aWMgZG9taWRfdCBwYXRoX3RvX2RvbWlkKGNvbnN0IGNoYXIgKnBhdGgpCj4+PiArewo+Pj4gKwlj
+b25zdCBjaGFyICpwID0gcGF0aDsKPj4+ICsJZG9taWRfdCBkb21pZCA9IDA7Cj4+PiArCj4+PiAr
+CXdoaWxlICgqcCkgewo+Pj4gKwkJaWYgKCpwIDwgJzAnIHx8ICpwID4gJzknKQo+Pj4gKwkJCWJy
+ZWFrOwo+Pj4gKwkJZG9taWQgPSAoZG9taWQgPDwgMykgKyAoZG9taWQgPDwgMSkgKyAoKnAgLSAn
+MCcpOwo+Pgo+PiByZWludmVudGluZyBhdG9pKCk/Cj4+Cj4+IFBsZWFzZSBkb24ndCBkbyB0aGF0
+LiBrc3RydG91MTYoKSBzZWVtcyB0byBiZSBhIHBlcmZlY3QgZml0Lgo+IAo+IEkgZGlkIHVzZSBr
+c3RydG91KigpIGluIHRoZSBlYXJseSBwcm90b3R5cGUgYW5kIHJlYWxpemVkIGtzdHJ0b3UxNigp
+IHJldHVybnMgMAo+IGlmIHRoZSBpbnB1dCBzdHJpbmcgY29udGFpbnMgbm9uLW51bWVyaWNhbCBj
+aGFyYWN0ZXJzLgo+IAo+IEUuZy4sIHRoZSBleGFtcGxlIG9mIGlucHV0IGNhbiBiZSAiMS8wL3N0
+YXRlIiwgd2hlcmUgMSBpcyBmb3RoZXJlbmRfaWQKPiAoZnJvbnRlbmRfaWQpIGFuZCAwIGlzIGhh
+bmRsZS4KPiAKPiBXaGVuICIxLzAvc3RhdGUiIGlzIHVzZWQgYXQgaW5wdXQsIGtzdHJ0b3UxNigp
+IHJldHVybnMgMCAocmV0dXJuZWQgaW50ZWdlcikgYW5kCj4gLTIyIChlcnJvcikuCgpBYWgsIG9r
+YXkuIFRoZW4gc2ltcGxlX3N0cnRvdWwoKT8KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
