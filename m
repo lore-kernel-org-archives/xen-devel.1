@@ -1,19 +1,21 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] Make credit2 the default scheduler
-Date: Fri, 14 Sep 2018 14:29:11 +0200
-Message-ID: <448fbac9df715f26058701653faa2a7f4d7d04f9.camel@suse.com>
-References: <20180913163848.32216„1„george.dunlap@citrix.com>
-	 <cc2e661cc8543353929aebf1f190abd109ff2b82.camel@suse.com>
-	 <5B9B752F02000078001E88AD@suse.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v4 1/7] x86/p2m/pod: make it build with
+ !CONFIG_HVM
+Date: Fri, 14 Sep 2018 06:41:49 -0600
+Message-ID: <5B9BAC8D02000078001E8A9B@prv1-mh.provo.novell.com>
+References: <cover.f883694550a3da3b95e2bf2a6f6777297b851b43.1536856592.git-series.wei.liu2@citrix.com>
+ <692c143f75c48c83b7011147b1861e2c9b5f87f3.1536856592.git-series.wei.liu2@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0738892517640507951=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=fooi=l4=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1g0nEX-0003pr-QU
- for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 12:30:01 +0000
-In-Reply-To: <5B9B752F02000078001E88AD@suse.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=ck89=l4=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1g0nQ0-00059s-Qe
+ for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 12:41:52 +0000
+In-Reply-To: <692c143f75c48c83b7011147b1861e2c9b5f87f3.1536856592.git-series.wei.liu2@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,96 +24,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, George Dunlap <george.dunlap@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, "Ian Jackson <ian.jackson@citrix.com>" <ian.jackson@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Tamas K Lengyel <tamas@tklengyel.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0738892517640507951==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-NafU10tOB6iH3gpc4zQE"
-
-
---=-NafU10tOB6iH3gpc4zQE
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2018-09-14 at 09:45 +0100, Jan Beulich wrote:
-> > > > On 13.09.18 at 18:51, <dfaggioli@suse.com> wrote:
-> > I fully agree with and second George's reasoning, and feel 100%
-> > like
-> > providing my:
-> >=20
-> > Acked-by: Dario Faggioli <dfaggioli@suse.com>
->=20
-> And that's despite "sched=3Dcredit2 crashes system when using
-> cpupools"?=20
->
-Well, considering that, as you say, there's a fix on the mailing list
-already, yes.
-
-And I'm guessing George must feel kind of the same, as he sent this
-patch, before reviewing/committing the other.
-
-In fact, the sooner we switch, the earlier OSSTest will start use
-Credit2 for everything, and show us whether or not there are other
-issues. And, speaking about that specific bug, OSSTest does not [sic!]
-test cpupools, so it's not even like it'll block pushes.
-
-That being said...
-
-> While I agree that we shouldn't delay the switch for
-> much longer, in particular with there already being a fix available
-> from you I think that one should go in before the one here.
->=20
-... I'm fine if maintainers/committers feels like waiting for the other
-patch to go in. The order in which they're committed, is something I
-have no control on. I don't think it's strictly necessary for this
-patch and the fix to hit the repo in a particular order. But if others
-do, no problem.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-NafU10tOB6iH3gpc4zQE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlubqZ0ACgkQFkJ4iaW4
-c+5GnxAA0GFdBrnvQkmDru8xJ3DOZxJYOUoehCHYGa2WyW5nL4+by5CNL0s1O3Rq
-MoUvqoB4reyb4ZCXkDnNS8/YMEQn38Qugra61w0bZ5lQGIZIQAAPx4gm1cBt5G3x
-n0DIaq7+xTyTwY2Q+/kIDKAdr1EQplfSctMOsOgbyLl/Ym+35v1TPOxt7RanuF1J
-Axal9obj9PwA4bt1NQ3kNPrluPWBOB9sGig/q6ugLFcLEdlDE3C+Rlos9gppjIUR
-XkFd4xKDnCox+i75vR1gYc1bVsalsCOrQcCTKQfMHiC9JUtJXGWHXh4gbW7lPXZY
-N5ckfJfuQbjLsSI/Qy4MWR45lFiQQPAM/k7kmdwBSmqQSGjV46p9gXa3LBvPmYsz
-yVw3+Drtsj1LX1lO0491LA56/gG3CPIt5aU6wIrORTcZ/e+HYr4kLPnl1bOF+E3C
-6P7H75FHytAwQHHk7cfg5tzZl9x4rRInPA+zVoFMAzEncAL8YZ3Mnkr+lnozobJi
-Ow1FXc2otIkg3ElRw/OwwqZ6T33/9NXmbiiM6fO/dllIFgk9giYr9UhbvalZtgYu
-WHAaYw+XsC+3z/ohKhbD/aj7CIJychWD6H54LxlKjvY19p43WwRoZqAzfK8kEcz1
-zLJ3qwl2YrAEhEg0WVPtrXORF9l8GUd0Qi49S0CpnX3H1dUb/14=
-=2dWE
------END PGP SIGNATURE-----
-
---=-NafU10tOB6iH3gpc4zQE--
-
-
-
---===============0738892517640507951==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0738892517640507951==--
+Pj4+IE9uIDEzLjA5LjE4IGF0IDE4OjM4LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+LS0tIGEveGVuL2FyY2gveDg2L21tL3AybS1wdC5jCj4gKysrIGIveGVuL2FyY2gveDg2L21tL3Ay
+bS1wdC5jCj4gQEAgLTk3NCw3ICs5NzQsOSBAQCBsb25nIHAybV9wdF9hdWRpdF9wMm0oc3RydWN0
+IHAybV9kb21haW4gKnAybSkKPiAgICAgIHVuc2lnbmVkIGxvbmcgbWZuLCBnZm4sIG0ycGZuOwo+
+ICAKPiAgICAgIEFTU0VSVChwMm1fbG9ja2VkX2J5X21lKHAybSkpOwo+ICsjaWZkZWYgQ09ORklH
+X0hWTQo+ICAgICAgQVNTRVJUKHBvZF9sb2NrZWRfYnlfbWUocDJtKSk7Cj4gKyNlbmRpZgo+ICAK
+PiAgICAgIC8qIEF1ZGl0IHBhcnQgb25lOiB3YWxrIHRoZSBkb21haW4ncyBwMm0gdGFibGUsIGNo
+ZWNraW5nIHRoZSBlbnRyaWVzLiAqLwo+ICAgICAgaWYgKCBwYWdldGFibGVfZ2V0X3BmbihwMm1f
+Z2V0X3BhZ2V0YWJsZShwMm0pKSAhPSAwICkKPiBAQCAtMTEwNSw2ICsxMTA3LDcgQEAgbG9uZyBw
+Mm1fcHRfYXVkaXRfcDJtKHN0cnVjdCBwMm1fZG9tYWluICpwMm0pCj4gICAgICAgICAgdW5tYXBf
+ZG9tYWluX3BhZ2UobDRlKTsKPiAgICAgIH0KPiAgCj4gKyNpZmRlZiBDT05GSUdfSFZNCj4gICAg
+ICBpZiAoIGVudHJ5X2NvdW50ICE9IHAybS0+cG9kLmVudHJ5X2NvdW50ICkKPiAgICAgIHsKPiAg
+ICAgICAgICBwcmludGsoIiVzOiByZWZjb3VudGVkIGVudHJ5IGNvdW50ICVsZCwgYXVkaXQgY291
+bnQgJWx1IVxuIiwKPiBAQCAtMTExMyw2ICsxMTE2LDcgQEAgbG9uZyBwMm1fcHRfYXVkaXRfcDJt
+KHN0cnVjdCBwMm1fZG9tYWluICpwMm0pCj4gICAgICAgICAgICAgICAgIGVudHJ5X2NvdW50KTsK
+PiAgICAgICAgICBCVUcoKTsKPiAgICAgIH0KPiArI2VuZGlmCj4gIAo+ICAgICAgcmV0dXJuIHBt
+YmFkOwo+ICB9CgpBIHNpbmdsZSAjaWZkZWYgYXJvdW5kIHRoZSBlbnRpcmUgZnVuY3Rpb24gcGxl
+YXNlLCB3aXRoCgojZWxzZQojIGRlZmluZSBwMm1fcHRfYXVkaXRfcDJtIE5VTEwKI2VuZGlmCgpv
+ciBzb21lIHN1Y2ggKGxpa2UgbWFraW5nIHRoZSBhdWRpdF9wMm0gc3RydWN0dXJlIG1lbWJlciBn
+byBhd2F5CmFsdG9nZXRoZXIpLCBhcyB5b3VyIGNoYW5nZSB0byB0aGUgY29uZGl0aW9uYWwgYXJv
+dW5kIGF1ZGl0X3AybSgpCnN1cHByZXNzZXMgdGhlIG9ubHkgY2FsbGVyLgoKPiAtLS0gYS94ZW4v
+YXJjaC94ODYvbW0vcDJtLmMKPiArKysgYi94ZW4vYXJjaC94ODYvbW0vcDJtLmMKPiBAQCAtNDks
+MTggKzQ5LDI4IEBAIGJvb2xlYW5fcGFyYW0oImhhcF8ybWIiLCBvcHRfaGFwXzJtYik7Cj4gIAo+
+ICBERUZJTkVfUEVSQ1BVX1JXTE9DS19HTE9CQUwocDJtX3BlcmNwdV9yd2xvY2spOwo+ICAKPiAr
+c3RhdGljIHZvaWQgcDJtX3BvZF9pbml0KHN0cnVjdCBwMm1fZG9tYWluICpwMm0pCj4gK3sKPiAr
+I2lmZGVmIENPTkZJR19IVk0KPiArICAgIHVuc2lnbmVkIGludCBpOwo+ICsKPiArICAgIG1tX2xv
+Y2tfaW5pdCgmcDJtLT5wb2QubG9jayk7Cj4gKyAgICBJTklUX1BBR0VfTElTVF9IRUFEKCZwMm0t
+PnBvZC5zdXBlcik7Cj4gKyAgICBJTklUX1BBR0VfTElTVF9IRUFEKCZwMm0tPnBvZC5zaW5nbGUp
+Owo+ICsKPiArICAgIGZvciAoIGkgPSAwOyBpIDwgQVJSQVlfU0laRShwMm0tPnBvZC5tcnAubGlz
+dCk7ICsraSApCj4gKyAgICAgICAgcDJtLT5wb2QubXJwLmxpc3RbaV0gPSBnZm5feChJTlZBTElE
+X0dGTik7Cj4gKyNlbmRpZgo+ICt9CgpJIHRoaW5rIHRoaXMgcmVhbGx5IGJlbG9uZ3MgaW50byBw
+Mm0tcG9kLmMuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
