@@ -1,20 +1,21 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] xen: sched/Credit2: fix bug when moving
- CPUs between two Credit2 cpupools
-Date: Fri, 14 Sep 2018 14:41:42 +0200
-Message-ID: <79a05586-7059-e432-604c-a99cdc6c1e20@suse.com>
-References: <153683962932.12063.15985092124725980082.stgit@Palanthas.fritz.box>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v4 2/7] x86: provide stubs,
+ declarations and macros in hvm.h
+Date: Fri, 14 Sep 2018 06:44:27 -0600
+Message-ID: <5B9BAD2B02000078001E8AB6@prv1-mh.provo.novell.com>
+References: <cover.f883694550a3da3b95e2bf2a6f6777297b851b43.1536856592.git-series.wei.liu2@citrix.com>
+ <27e242f5ffdb8a522d6f57b01d90f3f766ccb147.1536856592.git-series.wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=rzwb=l4=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1g0nPw-00059f-I0
- for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 12:41:48 +0000
-In-Reply-To: <153683962932.12063.15985092124725980082.stgit@Palanthas.fritz.box>
-Content-Language: de-DE
+ (envelope-from <srs0=ck89=l4=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1g0nSZ-0005Oa-31
+ for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 12:44:31 +0000
+In-Reply-To: <27e242f5ffdb8a522d6f57b01d90f3f766ccb147.1536856592.git-series.wei.liu2@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,40 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>, xen-devel@lists.xenproject.org
-Cc: Steven Haigh <netwiz@crc.id.au>, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTMvMDkvMTggMTM6NTMsIERhcmlvIEZhZ2dpb2xpIHdyb3RlOgo+IFdoZXRoZXIgb3Igbm90
-IGEgQ1BVIGlzIGFzc2lnbmVkIHRvIGEgcnVucXVldWUgKGFuZCwgaWYgeWVzLCB0byB3aGljaAo+
-IG9uZSkgd2l0aGluIGEgQ3JlZGl0MiBzY2hlZHVsZXIgaW5zdGFuY2UgbXVzdCBiZSBib3RoIGEg
-cGVyLWNwdSBhbmQKPiBwZXItc2NoZWR1bGVyIGluc3RhbmNlIG9uZS4KPiAKPiBJbiBmYWN0LCB3
-aGVuIHdlIG1vdmUgYSBDUFUgYmV0d2VlbiBjcHVwb29scywgd2UgZmlyc3Qgc2V0dXAgaXRzIHBl
-ci1jcHUKPiBkYXRhIGluIHRoZSBuZXcgcG9vbCwgYW5kIHRoZW4gY2xlYW51cCBpdHMgcGVyLWNw
-dSBkYXRhIGZyb20gdGhlIG9sZAo+IHBvb2wuIEluIENyZWRpdDIsIHdoZW4gdGhlcmUgY3VycmVu
-dGx5IGlzIG5vIHBlci1zY2hlZHVsZXIsIHBlci1jcHUKPiBkYXRhIChhcyB0aGUgY3B1LXRvLXJ1
-bnF1ZXVlIG1hcCBpcyBzdG9yZWQgb24gYSBwZXItY3B1IGJhc2lzIG9ubHkpLAo+IHRoaXMgbWVh
-bnMgdGhhdCB0aGUgY2xlYW51cCBvZiB0aGUgb2xkIHBlci1jcHUgZGF0YSBjYW4gbWVzcyB3aXRo
-IHRoZQo+IG5ldyBwZXItY3B1IGRhdGEsIGxlYWRpbmcgdG8gY3Jhc2hlcyBsaWtlIHRoaXM6Cj4g
-Cj4gaHR0cHM6Ly93d3cubWFpbC1hcmNoaXZlLmNvbS94ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcvbXNnMjMzMDYuaHRtbAo+IGh0dHBzOi8vd3d3Lm1haWwtYXJjaGl2ZS5jb20veGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnL21zZzIzMzUwLmh0bWwKPiAKPiBCYXNpY2FsbHksIHdo
-ZW4gY3NjaGVkMl9kZWluaXRfcGRhdGEoKSBpcyBjYWxsZWQgZm9yIENQVSAxMywgZm9yIGZ1bGx5
-Cj4gcmVtb3ZpbmcgdGhlIENQVSBmcm9tIFBvb2wtMCwgcGVyX2NwdSgxMyxydW5xX21hcCkgYWxy
-ZWFkeSBjb250YWluIHRoZQo+IGlkIG9mIHRoZSBydW5xdWV1ZSB0byB3aGljaCB0aGUgQ1BVIGhh
-cyBiZWVuIGFzc2lnbmVkIGluIHRoZSBzY2hlZHVsZXIKPiBvZiBQb29sLTEsIHdoaWNoIG1lYW5z
-IHdyb25nIHJ1bnF1ZXVlIG1hbmlwdWxhdGlvbnMgaGFwcGVuIGluIFBvb2wtMCdzCj4gc2NoZWR1
-bGVyLiBGdXJ0aGVybW9yZSwgYXQgdGhlIGVuZCBvZiBzdWNoIGNhbGwsIHRoYXQgc2FtZSBydW5x
-X21hcCBpcwo+IHVwZGF0ZWQgd2l0aCAtMSwgd2hpY2ggaXMgd2hhdCBjYXVzZXMgdGhlIEJVR19P
-TiBpbiBjc2NoZWQyX3NjaGVkdWxlKCksCj4gb24gQ1BVIDEzLCB0byB0cmlnZ2VyLgo+IAo+IFNv
-LCBpbnN0ZWFkIG9mIHJldmVydGluZyBhMmM0ZTVhYjU5ZCAieGVuOiBjcmVkaXQyOiBtYWtlIHRo
-ZSBjcHUgdG8KPiBydW5xdWV1ZSBtYXAgcGVyLWNwdSIgKGFzIHdlIGRvbid0IHdhbnQgdG8gZ28g
-YmFjayB0byBoYXZpbmcgdGhlIGh1Z2UKPiBhcnJheSBpbiBzdHJ1Y3QgY3NjaGVkMl9wcml2YXRl
-KSBhZGQgYSBwZXItY3B1IHNjaGVkdWxlciBzcGVjaWZpYyBkYXRhCj4gc3RydWN0dXJlLCBsaWtl
-LCBmb3IgaW5zdGFuY2UsIENyZWRpdDEgaGFzIGFscmVhZHkuIFRoYXQgKGZvciBub3cpIG9ubHkK
-PiBjb250YWlucyBvbmUgZmllbGQ6IHRoZSBpZCBvZiB0aGUgcnVucXVldWUgdGhlIENQVSBpcyBh
-c3NpZ25lZCB0by4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBEYXJpbyBGYWdnaW9saSA8ZGZhZ2dpb2xp
-QHN1c2UuY29tPgoKUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4K
-CgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDEzLjA5LjE4IGF0IDE4OjM4LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+TWFrZSBzdXJlIGh2bV9lbmFibGVkIGV2YWx1YXRlIHRvIGZhbHNlIHRoZW4gcHJvdmlkZSBuZWNl
+c3NhcnkgdGhpbmdzCj4gdG8gbWFrZSB4ZW4gYnVpbGQgd2hlbiAhQ09ORklHX0hWTS4KPiAKPiBT
+aWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKQWNrZWQtYnk6IEph
+biBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
