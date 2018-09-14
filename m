@@ -1,29 +1,19 @@
-From: Valentin Vidic <Valentin.Vidic@CARNet.hr>
-Subject: Re: [DRBD-user] [PATCH] xen-blkback: Switch to closed
- state after releasing the backing device
-Date: Fri, 14 Sep 2018 13:49:51 +0200
-Message-ID: <20180914114951.GH2153__6095.97618827156$1536925727$gmane$org@gavran.carpriv.carnet.hr>
-References: <20180907121348.GM26705@gavran.carpriv.carnet.hr>
- <20180907132828.GC11834@soda.linbit>
- <20180907164500.GN26705@gavran.carpriv.carnet.hr>
- <20180907171459.GO26705@gavran.carpriv.carnet.hr>
- <20180908073432.GP26705@gavran.carpriv.carnet.hr>
- <20180910124531.GA31737@soda.linbit>
- <20180910132252.GE26705@gavran.carpriv.carnet.hr>
- <20180910150058.suxehc3uheyho4qx@mac.bytemobile.com>
- <20180910161831.GG26705@gavran.carpriv.carnet.hr>
- <20180913150800.haswzd7t2xccbgvl@mac.bytemobile.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH] Make credit2 the default scheduler
+Date: Fri, 14 Sep 2018 14:29:11 +0200
+Message-ID: <448fbac9df715f26058701653faa2a7f4d7d04f9.camel@suse.com>
+References: <20180913163848.32216„1„george.dunlap@citrix.com>
+	 <cc2e661cc8543353929aebf1f190abd109ff2b82.camel@suse.com>
+	 <5B9B752F02000078001E88AD@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0738892517640507951=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=oal1=l4=carnet.hr=valentin.vidic@srs-us1.protection.inumbo.net>)
- id 1g0mbn-0000d7-Uj
- for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 11:49:59 +0000
-Content-Disposition: inline
-In-Reply-To: <20180913150800.haswzd7t2xccbgvl@mac.bytemobile.com>
+ <srs0=fooi=l4=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1g0nEX-0003pr-QU
+ for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 12:30:01 +0000
+In-Reply-To: <5B9B752F02000078001E88AD@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -32,34 +22,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: Jens Axboe <axboe@kernel.dk>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, linux-kernel@vger.kernel.org, stable@vger.kernel.org, linux-block@vger.kernel.org, xen-devel@lists.xenproject.org, drbd-user@lists.linbit.com
+To: Jan Beulich <JBeulich@suse.com>, George Dunlap <george.dunlap@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, "Ian Jackson <ian.jackson@citrix.com>" <ian.jackson@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBTZXAgMTMsIDIwMTggYXQgMDU6MDg6MDBQTSArMDIwMCwgUm9nZXIgUGF1IE1vbm7D
-qSB3cm90ZToKPiBTbyBJIGhhdmUgdGhlIGZvbGxvd2luZyBwYXRjaCB3aGljaCBJIHRoaW5rIG1p
-Z2h0IHNvbHZlIHlvdXIgaXNzdWVzCj4gd2hpbGUga2VlcGluZyB0aGUgcmVzZXQgbG9naWMgd29y
-a2luZy4gV291bGQgeW91IG1pbmQgZ2l2aW5nIGl0IGEgdHJ5Cj4gd2l0aCB5b3VyIHVzZSBjYXNl
-IGFuZCBwdmdydWI/CgpUaGFua3MgZm9yIHRoZSBwYXRjaC4gIEl0IHNlZW1zIHRvIGJlIGhhdmlu
-ZyBzb21lIHByb2JsZW1zIHdpdGggcHZncnViOgptYWNoaW5lcyBkb24ndCBib290IHBhc3QgcHZn
-cnViIGFuZCB0aGV5IGFyZSB1c2luZyAxMDAlIENQVS4gIEFsc28gaW4KZG9tMCB4ZW5zdG9yZWQg
-aXMgdXNpbmQgMTAwJSBDUFUgLSBzdHJhY2UgcmVwb3J0cyBpdCBpcyBsb29waW5nIGluIHRoaXM6
-CgpyZWFkKDI2LCAiXFxcMjQwXDBcMCIsIDQpICAgICAgICAgICAgICAgPSA0CnJlYWQoMjYsICJc
-MFwwXDBcMExcMFwwXDApXDBcMFwwXDM1XDBcMFwwK1xcXDIzMmBcMjMxXDMxXDEmIiwgMjQpID0g
-MjQKcmVhZCgyNiwgIi9sb2NhbC9kb21haW4vMC9iYWNrZW5kL3ZiZC8xLzUxNzEyL3N0YXRlIiwg
-NDEpID0gNDEKcmVhZCgyNiwgIlwyXDBcMFwwXDFcMFwwXDBcMFwwXDBcMFwwXDBcMFwwXDBcMFww
-XDBcMVwwXDBcMFwxXDBcMFwwMDA0IiwgMjkpID0gMjkKcmVhZCgyNiwgIlwwXDMzMFwwXDAiLCA0
-KSAgICAgICAgICAgICAgID0gNApyZWFkKDI2LCAiXDBcMFwwXDBMXDBcMFwwKVwwXDBcMFwzNVww
-XDBcMCtcXEpHXDIzMVwzMVwxJiIsIDI0KSA9IDI0CnJlYWQoMjYsICIvbG9jYWwvZG9tYWluLzAv
-YmFja2VuZC92YmQvMi81MTcxMi9zdGF0ZSIsIDQxKSA9IDQxCnJlYWQoMjYsICJcMlwwXDBcMFwx
-XDBcMFwwXDBcMFwwXDBcMFwwXDBcMFwwXDBcMFwwXDJcMFwwXDBcMVwwXDBcMDAwNCIsIDI5KSA9
-IDI5CnJlYWQoMjYsICJcMFwyMDBcMVwwIiwgNCkgICAgICAgICAgICAgICA9IDQKcmVhZCgyNiwg
-IlwwXDBcMFwwTFwwXDBcMClcMFwwXDBcMzVcMFwwXDArXFxaXDM3M1wyMzFcMzFcMSYiLCAyNCkg
-PSAyNApyZWFkKDI2LCAiL2xvY2FsL2RvbWFpbi8wL2JhY2tlbmQvdmJkLzUvNTE3MTIvc3RhdGUi
-LCA0MSkgPSA0MQpyZWFkKDI2LCAiXDJcMFwwXDBcMVwwXDBcMFwwXDBcMFwwXDBcMFwwXDBcMFww
-XDBcMFw1XDBcMFwwXDFcMFwwXDAwMDQiLCAyOSkgPSAyOQpyZWFkKDEyLCAiXDMyMVwxXDBcMCIs
-IDQpICAgICAgICAgICAgICAgPSA0CndyaXRlKDEyLCAiXDMyMVwxXDBcMCIsIDQpICAgICAgICAg
-ICAgICA9IDQKCi0tIApWYWxlbnRpbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+
+--===============0738892517640507951==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-NafU10tOB6iH3gpc4zQE"
+
+
+--=-NafU10tOB6iH3gpc4zQE
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-09-14 at 09:45 +0100, Jan Beulich wrote:
+> > > > On 13.09.18 at 18:51, <dfaggioli@suse.com> wrote:
+> > I fully agree with and second George's reasoning, and feel 100%
+> > like
+> > providing my:
+> >=20
+> > Acked-by: Dario Faggioli <dfaggioli@suse.com>
+>=20
+> And that's despite "sched=3Dcredit2 crashes system when using
+> cpupools"?=20
+>
+Well, considering that, as you say, there's a fix on the mailing list
+already, yes.
+
+And I'm guessing George must feel kind of the same, as he sent this
+patch, before reviewing/committing the other.
+
+In fact, the sooner we switch, the earlier OSSTest will start use
+Credit2 for everything, and show us whether or not there are other
+issues. And, speaking about that specific bug, OSSTest does not [sic!]
+test cpupools, so it's not even like it'll block pushes.
+
+That being said...
+
+> While I agree that we shouldn't delay the switch for
+> much longer, in particular with there already being a fix available
+> from you I think that one should go in before the one here.
+>=20
+... I'm fine if maintainers/committers feels like waiting for the other
+patch to go in. The order in which they're committed, is something I
+have no control on. I don't think it's strictly necessary for this
+patch and the fix to hit the repo in a particular order. But if others
+do, no problem.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-NafU10tOB6iH3gpc4zQE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlubqZ0ACgkQFkJ4iaW4
+c+5GnxAA0GFdBrnvQkmDru8xJ3DOZxJYOUoehCHYGa2WyW5nL4+by5CNL0s1O3Rq
+MoUvqoB4reyb4ZCXkDnNS8/YMEQn38Qugra61w0bZ5lQGIZIQAAPx4gm1cBt5G3x
+n0DIaq7+xTyTwY2Q+/kIDKAdr1EQplfSctMOsOgbyLl/Ym+35v1TPOxt7RanuF1J
+Axal9obj9PwA4bt1NQ3kNPrluPWBOB9sGig/q6ugLFcLEdlDE3C+Rlos9gppjIUR
+XkFd4xKDnCox+i75vR1gYc1bVsalsCOrQcCTKQfMHiC9JUtJXGWHXh4gbW7lPXZY
+N5ckfJfuQbjLsSI/Qy4MWR45lFiQQPAM/k7kmdwBSmqQSGjV46p9gXa3LBvPmYsz
+yVw3+Drtsj1LX1lO0491LA56/gG3CPIt5aU6wIrORTcZ/e+HYr4kLPnl1bOF+E3C
+6P7H75FHytAwQHHk7cfg5tzZl9x4rRInPA+zVoFMAzEncAL8YZ3Mnkr+lnozobJi
+Ow1FXc2otIkg3ElRw/OwwqZ6T33/9NXmbiiM6fO/dllIFgk9giYr9UhbvalZtgYu
+WHAaYw+XsC+3z/ohKhbD/aj7CIJychWD6H54LxlKjvY19p43WwRoZqAzfK8kEcz1
+zLJ3qwl2YrAEhEg0WVPtrXORF9l8GUd0Qi49S0CpnX3H1dUb/14=
+=2dWE
+-----END PGP SIGNATURE-----
+
+--=-NafU10tOB6iH3gpc4zQE--
+
+
+
+--===============0738892517640507951==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0738892517640507951==--
