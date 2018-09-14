@@ -1,31 +1,22 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v8 7/7] vtd: add lookup_page method to
- iommu_ops
-Date: Fri, 14 Sep 2018 02:28:50 -0600
-Message-ID: <5B9B714202000078001E8898@prv1-mh.provo.novell.com>
-References: <20180913103153.33377-1-paul.durrant@citrix.com>
- <20180913103153.33377-9-paul.durrant@citrix.com>
- <5B9A662D02000078001E83F4@prv1-mh.provo.novell.com>
- <f69c1a46c5764297b7dfdb8f55e7b1f8@AMSPEX02CL03.citrite.net>
- <5B9A69CF02000078001E8448@prv1-mh.provo.novell.com>
- <0bc9e5bbc5aa4b7ab07d023ffeef570f@AMSPEX02CL03.citrite.net>
- <5B9A6C9A02000078001E849B@prv1-mh.provo.novell.com>
- <33c6c87a30cd471ab3499e297da768ca@AMSPEX02CL03.citrite.net>
- <5B9A794C02000078001E84E8@prv1-mh.provo.novell.com>
- <cb30f0c244a447eca09e639eeb0da13a@AMSPEX02CL03.citrite.net>
- <5B9B6A3702000078001E87F4@prv1-mh.provo.novell.com>
- <49ac1db732994cd9a001704bec2e1f75@AMSPEX02CL03.citrite.net>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: stale hypervisor info in HVM after migration
+Date: Fri, 14 Sep 2018 10:29:07 +0200
+Message-ID: <20180914102907.1337e33b.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6712307743307869991=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ck89=l4=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1g0jTD-0006Ss-OY
- for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 08:28:55 +0000
-In-Reply-To: <49ac1db732994cd9a001704bec2e1f75@AMSPEX02CL03.citrite.net>
-Content-Disposition: inline
+ (envelope-from <srs0=rwbv=l4=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1g0jTY-0006Uq-0c
+ for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 08:29:16 +0000
+Received: from sender by smtp.strato.de (RZmta 44.1 AUTH)
+ with ESMTPSA id j00953u8E8TC2xt
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
+ 521 ECDH bits, eq. 15360 bits RSA))
+ (Client did not present a certificate)
+ for <xen-devel@lists.xenproject.org>;
+ Fri, 14 Sep 2018 10:29:12 +0200 (CEST)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -34,75 +25,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, george.dunlap@citrix.com
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE0LjA5LjE4IGF0IDEwOjExLCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+PiAgLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0KPj4gRnJvbTogSmFuIEJldWxpY2ggW21h
-aWx0bzpKQmV1bGljaEBzdXNlLmNvbV0KPj4gU2VudDogMTQgU2VwdGVtYmVyIDIwMTggMDg6NTkK
-Pj4gVG86IFBhdWwgRHVycmFudCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+Cj4+IENjOiBHZW9y
-Z2UgRHVubGFwIDxHZW9yZ2UuRHVubGFwQGNpdHJpeC5jb20+OyBXZWkgTGl1Cj4+IDx3ZWkubGl1
-MkBjaXRyaXguY29tPjsgS2V2aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+OyB4ZW4tZGV2
-ZWwgPHhlbi0KPj4gZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmc+Cj4+IFN1YmplY3Q6IFJFOiBb
-UEFUQ0ggdjggNy83XSB2dGQ6IGFkZCBsb29rdXBfcGFnZSBtZXRob2QgdG8gaW9tbXVfb3BzCj4+
-IAo+PiA+Pj4gT24gMTMuMDkuMTggYXQgMTY6NTMsIDxQYXVsLkR1cnJhbnRAY2l0cml4LmNvbT4g
-d3JvdGU6Cj4+ID4+IEZyb206IEphbiBCZXVsaWNoIFttYWlsdG86SkJldWxpY2hAc3VzZS5jb21d
-Cj4+ID4+IFNlbnQ6IDEzIFNlcHRlbWJlciAyMDE4IDE1OjUxCj4+ID4+Cj4+ID4+ID4+PiBPbiAx
-My4wOS4xOCBhdCAxNjowNCwgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPiB3cm90ZToKPj4gPj4g
-Pj4gRnJvbTogSmFuIEJldWxpY2ggW21haWx0bzpKQmV1bGljaEBzdXNlLmNvbV0KPj4gPj4gPj4g
-U2VudDogMTMgU2VwdGVtYmVyIDIwMTggMTQ6NTcKPj4gPj4gPj4KPj4gPj4gPj4gPj4+IE9uIDEz
-LjA5LjE4IGF0IDE1OjUwLCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+IHdyb3RlOgo+PiA+PiA+
-PiA+IE9rLiBJJ2xsIHNwZWxsIGl0IG91dCBpbiB0aGUgaGVhZGVyIGlmIHlvdSB0aGluayBpdCBp
-cyBub24tCj4+IG9idmlvdXMuCj4+ID4+ID4+Cj4+ID4+ID4+IE9idmlvdXMgb3Igbm90IC0gZG8g
-d2UgX2hhdmVfIGFueSBzdWNoIG91dGVyIGxvY2tpbmcgaW4gcGxhY2UgcmlnaHQKPj4gPj4gbm93
-Pwo+PiA+PiA+Pgo+PiA+PiA+Cj4+ID4+ID4gWWVzLiBUaGUgbG9ja2luZyBpcyBlaXRoZXIgdmlh
-IHRoZSBQMk0gb3IgZ3JhbnQgdGFibGUgbG9ja3MgZm9yIGFsbAo+PiA+PiBjdXJyZW50Cj4+ID4+
-ID4gdXNlcyBvciBtYXAgYW5kIHVubWFwIHRoYXQgSSBjYW4gc2VlLgo+PiA+Pgo+PiA+PiBCdXQg
-dHdvIGRpZmZlcmVudCBsb2NrcyBzdGlsbCBtZWFucyBubyBndWFyYW50ZWVzIGF0IGFsbC4KPj4g
-Pj4KPj4gPgo+PiA+IFNvLCBhcmUgeW91IHNheWluZyB0aGUgY3VycmVudCBpbXBsZW1lbnRhdGlv
-biBpcyBub3QgZml0IGZvciBwdXJwb3NlPyBEbwo+PiB5b3UKPj4gPiB3YW50IG1lIHRvIGFkZCBs
-b2NraW5nIGF0IHRoZSB3cmFwcGVyIGxldmVsPwo+PiAKPj4gV2VsbCwgSSBoYXZlbid0IGxvb2tl
-ZCBjbG9zZWx5IGVub3VnaCB0byBiZSBjZXJ0YWluLCBidXQgSSdtIGFmcmFpZCB0aGVyZQo+PiBt
-aWdodCBiZSBhbiBpc3N1ZSwgYW5kIGlmIHNvIEkgY2VydGFpbmx5IHRoaW5rIGl0IG5lZWRzIHRh
-a2luZyBjYXJlIG9mCj4+IGJlZm9yZQo+PiB3aWRlbmluZyB0aGUgcHJvYmxlbSBieSBleHBvc2lu
-ZyAobW9yZSBvZiBpdCkgdG8gZ3Vlc3RzLiBPZiBjb3Vyc2UgaXQKPj4gbWF5IHdlbGwgYmUgdGhh
-dCBhZGRpdGlvbiBvZiBhbm90aGVyIGxvY2tpbmcgbGF5ZXIgbWF5IGhhdmUgYWR2ZXJzZQo+PiBl
-ZmZlY3RzLCB0byBleGlzdGluZyBjb2RlIGFuZC9vciB5b3VyIGFkZGl0aW9ucy4KPj4gCj4gCj4g
-R2l2ZW4gdGhhdCBhbGwgdXNlcyBvZiBtYXAgYW5kIHVubWFwIGFyZSB1bmRlciB0aGUgZ3JhbnQg
-b3IgcDJtIGxvY2tzIHRoZW4gCj4gdGhlcmUgc2hvdWxkIG9ubHkgYmUgYW4gaXNzdWUgaWYgYSBy
-YWNlIG9jY3VycyBiZXR3ZWVuIGEgZ3JhbnQgdGFibGUgb3AgYW5kIAo+IHNvbWV0aGluZyBtb2Rp
-ZnlpbmcgdGhlIHAybSwgYW5kIEkgZG91YnQgc3VjaCBhbiBpc3N1ZSB3b3VsZCBiZSBsaW1pdGVk
-IHRvIAo+IGxlYXZpbmcganVzdCB0aGUgSU9NTVUgaW4gYW4gaW5jb3JyZWN0IHN0YXRlLiBUaGlz
-IHBhdGNoIGRvZXMgbm90aGluZyB0byBydWxlIAo+IG91dCBzdWNoIGEgcmFjZSwgYnV0IG5vciBk
-b2VzIGl0IG1ha2UgdGhpbmdzIGFueSB3b3JzZTsgaXQgaXMgY29tcGxldGVseSAKPiBvcnRob2dv
-bmFsIGFzIGl0IGludHJvZHVjZXMgYSBicmFuZCBuZXcgZnVuY3Rpb24gd2l0aCAoYXMgeWV0KSBu
-byBjYWxsZXJzLgo+IAo+IFRoaXMgbmV3IGxvb2t1cCBmdW5jdGlvbiBpcyBub3QgaW50ZW5kZWQg
-Zm9yIHVzZSBieSBhbnkgb2YgdGhlIGV4aXN0aW5nIGNvZGUgCj4gZXhlY3V0ZWQgdW5kZXIgZ3Jh
-bnQgdGFibGUgb3IgcDJtIGxvY2sgdGhvdWdoLiBPbmNlIFBWLUlPTU1VIGJlY29tZXMgCj4gb3Bl
-cmF0aW9uYWwgdGhlbiBhbGwgb2YgdGhhdCBhdXRvbWF0aWMgbWFwL3VubWFwIGNvZGUgd2lsbCBj
-ZWFzZSB0byBiZSAKPiBvcGVyYXRpb25hbC4gQXMgeW91IHBvaW50ZWQgb3V0IGluIHJldmlldyBv
-ZiBhbm90aGVyIHBhdGNoLCBJIGhhdmUgY29tcGxldGVseSAKPiBuZWdsZWN0ZWQgdG8gYWRkIHN1
-aXRhYmxlIGxvY2tpbmcgaW50byB0aGUgUFYtSU9NTVUgY29kZSBidXQgb25jZSBJIGFkZCB0aGF0
-IAo+IHRoZW4gbWFwLCB1bm1hcCBhbmQgbG9va3VwIG9wZXJhdGlvbnMgY29taW5nIHZpYSBoeXBl
-cmNhbGwgd2lsbCBiZSBwcm90ZWN0ZWQgCj4gZnJvbSBlYWNoIG90aGVyLgoKV2VsbCwgb2theSAt
-IEkgYWdyZWUgKGZvbGxvd2luZyB0aGUgc2Vjb25kIHBhcmFncmFwaCkgdGhhdCB0aGUgc2l0dWF0
-aW9uIGluZGVlZApkb2Vzbid0IGJlY29tZSB3b3JzZSB3aXRoIHlvdXIgYWRkaXRpb25zLiBIZW5j
-ZSBJIGZ1cnRoZXIgYWdyZWUgdGhhdCBpdCdzCnBlcmhhcHMgbm90IHJlYWxseSBhcHByb3ByaWF0
-ZSB0byBtYWtlIGZpeGluZyB0aGUgb3JpZ2luYWwgaXNzdWUgYSBwcmVyZXEuIEJ1dAp0aGF0IGxl
-YXZlcyB1cyBpbiBhIHNpdHVhdGlvbiB3aGVyZSB3ZSB3aWxsIGNvbnRpbnVlIHRvIGxpdmUgd2l0
-aCBhbiB1bmZpeGVkCihzdXNwZWN0ZWQpIGJ1ZyAoSSBkb24ndCBhbnRpY2lwYXRlIHRvIGhhdmUg
-dGhlIHRpbWUgdG8gbG9vayBpbnRvIGFkZHJlc3NpbmcKdGhpcyBhbnkgdGltZSBzb29uKS4gTXkg
-cGVyc29uYWwgYXBwcm9hY2ggdG8gYSBzaXR1YXRpb24gbGlrZSB0aGlzIGlzIHRoYXQgSSB0cnkK
-dG8gZml4IGlzc3VlcyBmb3VuZCBvbiB0aGUgcm9hZCBvZiBtYWtpbmcgYSAobGFyZ2VyKSBjaGFu
-Z2UgaW4gYSBjZXJ0YWluIGFyZWEKKGEgZ29vZCByZWNlbnQgZXhhbXBsZSBpcyAieDg2L0hWTTog
-Y29ycmVjdCBodm1lbXVsX21hcF9saW5lYXJfYWRkcigpCmZvciBtdWx0aS1wYWdlIGNhc2UiLCB3
-aGljaCBJJ3ZlIG5vdGljZWQgdG8gYmUgYW4gaXNzdWUgd2hpbGUgcHV0dGluZyB0b2dldGhlcgoi
-eDg2L0hWTTogc3BsaXQgcGFnZSBzdHJhZGRsaW5nIGVtdWxhdGVkIGFjY2Vzc2VzIGluIG1vcmUg
-Y2FzZXMiKS4KCkJvdHRvbSBsaW5lIC0gSSdtIG5vdCBnb2luZyB0byBpbnNpc3Qgb24geW91IHRh
-a2luZyBjYXJlIG9mIHRoaXMgdW5yZWxhdGVkCnByb2JsZW0sIHRoZSBtb3JlIHRoYXQgdGhpcyB3
-b3VsZCBsaWtlbHkgYmUgYSBsYXJnZXIgKGFuZCBwb3NzaWJseSBpbnRydXNpdmUpCnBpZWNlIG9m
-IHdvcmsuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+--===============6712307743307869991==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/fHM4NwEOJbdj2IbQOXvkZgQ"; protocol="application/pgp-signature"
+
+--Sig_/fHM4NwEOJbdj2IbQOXvkZgQ
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+During boot of a HVM domU, the running hypervisor ist recorded in DMI and d=
+mesg:
+
+crash> dmesg | grep -m1 Xen
+[    0.000000] DMI: Xen HVM domU, BIOS 4.7.2_02-36.1.1284 08/28/2017
+
+But after migration to another host, that info is not updated.
+Is there a chance to update that info in the kernels "resume" path?
+It would probably be ok to just do a printk in case DMI is a static string.
+
+
+Olaf
+
+--Sig_/fHM4NwEOJbdj2IbQOXvkZgQ
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW5txUwAKCRBdQqD6ppg2
+fjf9AKCr+M/d5tQdp7i4ybghXxPXAWBZxgCgx7rrNUrtDo2j0gmdBUfMJiLzsjQ=
+=1Y8v
+-----END PGP SIGNATURE-----
+
+--Sig_/fHM4NwEOJbdj2IbQOXvkZgQ--
+
+
+--===============6712307743307869991==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6712307743307869991==--
