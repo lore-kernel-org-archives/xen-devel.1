@@ -1,22 +1,21 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: stale hypervisor info in HVM after migration
-Date: Fri, 14 Sep 2018 10:29:07 +0200
-Message-ID: <20180914102907.1337e33b.olaf@aepfle.de>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 1/6] xenbus: prepare data structures and
+ parameter for xenwatch multithreading
+Date: Fri, 14 Sep 2018 10:32:35 +0200
+Message-ID: <23dc17b9-dc76-776b-74ef-d11f4b77552d__38964.6820295185$1536913879$gmane$org@suse.com>
+References: <1536910456-13337-1-git-send-email-dongli.zhang@oracle.com>
+ <1536910456-13337-2-git-send-email-dongli.zhang@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6712307743307869991=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=rwbv=l4=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1g0jTY-0006Uq-0c
- for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 08:29:16 +0000
-Received: from sender by smtp.strato.de (RZmta 44.1 AUTH)
- with ESMTPSA id j00953u8E8TC2xt
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
- 521 ECDH bits, eq. 15360 bits RSA))
- (Client did not present a certificate)
- for <xen-devel@lists.xenproject.org>;
- Fri, 14 Sep 2018 10:29:12 +0200 (CEST)
+ (envelope-from <srs0=rzwb=l4=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1g0jWo-0007E7-99
+ for xen-devel@lists.xenproject.org; Fri, 14 Sep 2018 08:32:38 +0000
+In-Reply-To: <1536910456-13337-2-git-send-email-dongli.zhang@oracle.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,52 +24,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Dongli Zhang <dongli.zhang@oracle.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+Cc: wei.liu2@citrix.com, konrad.wilk@oracle.com, srinivas.eeda@oracle.com, paul.durrant@citrix.com, boris.ostrovsky@oracle.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============6712307743307869991==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/fHM4NwEOJbdj2IbQOXvkZgQ"; protocol="application/pgp-signature"
-
---Sig_/fHM4NwEOJbdj2IbQOXvkZgQ
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-During boot of a HVM domU, the running hypervisor ist recorded in DMI and d=
-mesg:
-
-crash> dmesg | grep -m1 Xen
-[    0.000000] DMI: Xen HVM domU, BIOS 4.7.2_02-36.1.1284 08/28/2017
-
-But after migration to another host, that info is not updated.
-Is there a chance to update that info in the kernels "resume" path?
-It would probably be ok to just do a printk in case DMI is a static string.
-
-
-Olaf
-
---Sig_/fHM4NwEOJbdj2IbQOXvkZgQ
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW5txUwAKCRBdQqD6ppg2
-fjf9AKCr+M/d5tQdp7i4ybghXxPXAWBZxgCgx7rrNUrtDo2j0gmdBUfMJiLzsjQ=
-=1Y8v
------END PGP SIGNATURE-----
-
---Sig_/fHM4NwEOJbdj2IbQOXvkZgQ--
-
-
---===============6712307743307869991==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6712307743307869991==--
+T24gMTQvMDkvMTggMDk6MzQsIERvbmdsaSBaaGFuZyB3cm90ZToKPiBUaGlzIGlzIHRoZSAxc3Qg
+cGF0Y2ggb2YgYSAoNi1wYXRjaCkgcGF0Y2ggc2V0Lgo+IAo+IFRoaXMgcGF0Y2ggc2V0IG9mIHNp
+eCBwYXRjaGVzIGludHJvZHVjZXMgeGVud2F0Y2ggbXVsdGl0aHJlYWRpbmcgKG9yCj4gbXVsdGl0
+aHJlYWRlZCB4ZW53YXRjaCwgYWJicmV2aWF0ZWQgYXMgJ210d2F0Y2gnKSB0byBkb20wIGtlcm5l
+bC4gSW4KPiBhZGRpdGlvbiB0byB0aGUgZXhpc3Rpbmcgc2luZ2xlIHhlbndhdGNoIHRocmVhZCwg
+ZWFjaCBkb21VIGhhcyBpdHMgb3duCj4ga2VybmVsIHRocmVhZCAoW3hlbi1tdHdhdGNoLTxkb21p
+ZD5dKSB0byBwcm9jZXNzIGl0cyB4ZW53YXRjaCBldmVudC4KPiAKPiBBIGtlcm5lbCBwYXJhbWV0
+ZXIgJ3hlbl9tdHdhdGNoJyBpcyBpbnRyb2R1Y2VkIHRvIGNvbnRyb2wgd2hldGhlciB0aGUKPiBm
+ZWF0dXJlIGlzIGVuYWJsZWQgb3Igbm90IGR1cmluZyBkb20wIGtlcm5lbCBib290LiBUaGUgZmVh
+dHVyZSBpcyBkaXNhYmxlZAo+IGJ5IGRlZmF1bHQgaWYgJ3hlbl9tdHdhdGNoJyBpcyBub3Qgc2V0
+IGluIGdydWIuIEluIGFkZGl0aW9uLCB0aGlzIHBhdGNoCj4gYWxzbyBpbnRyb2R1Y2VzIHRoZSBk
+YXRhIHN0cnVjdHVyZXMgdG8gbWFpbnRhaW4gdGhlIHN0YXR1cyBvZiBlYWNoIHBlci1kb21VCj4g
+eGVud2F0Y2ggdGhyZWFkLiBUaGUgc3RhdHVzIG9mIGVhY2ggeGVud2F0Y2ggdGhyZWFkIChleGNl
+cHQgdGhlIGRlZmF1bHQKPiBvbmUpIGlzIG1haW50YWluZWQgYnkgYSBtdHdhdGNoIGRvbWFpbi4K
+PiAKPiBUaGUgZmVhdHVyZSBpcyBhdmFpbGFibGUgb25seSBvbiBkb20wLgo+IAo+IFNpZ25lZC1v
+ZmYtYnk6IERvbmdsaSBaaGFuZyA8ZG9uZ2xpLnpoYW5nQG9yYWNsZS5jb20+Cj4gLS0tCj4gIERv
+Y3VtZW50YXRpb24vYWRtaW4tZ3VpZGUva2VybmVsLXBhcmFtZXRlcnMudHh0IHwgIDMgKysKPiAg
+ZHJpdmVycy94ZW4veGVuYnVzL3hlbmJ1c194cy5jICAgICAgICAgICAgICAgICAgfCAzMSArKysr
+KysrKysrKysKPiAgaW5jbHVkZS94ZW4veGVuYnVzLmggICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgfCA2NSArKysrKysrKysrKysrKysrKysrKysrKysrCj4gIDMgZmlsZXMgY2hhbmdlZCwgOTkg
+aW5zZXJ0aW9ucygrKQo+IAo+IGRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9uL2FkbWluLWd1aWRl
+L2tlcm5lbC1wYXJhbWV0ZXJzLnR4dCBiL0RvY3VtZW50YXRpb24vYWRtaW4tZ3VpZGUva2VybmVs
+LXBhcmFtZXRlcnMudHh0Cj4gaW5kZXggNjRhM2JmNS4uZmMyOTVlZiAxMDA2NDQKPiAtLS0gYS9E
+b2N1bWVudGF0aW9uL2FkbWluLWd1aWRlL2tlcm5lbC1wYXJhbWV0ZXJzLnR4dAo+ICsrKyBiL0Rv
+Y3VtZW50YXRpb24vYWRtaW4tZ3VpZGUva2VybmVsLXBhcmFtZXRlcnMudHh0Cj4gQEAgLTQ5OTIs
+NiArNDk5Miw5IEBACj4gIAkJCQl0aGUgdW5wbHVnIHByb3RvY29sCj4gIAkJCW5ldmVyIC0tIGRv
+IG5vdCB1bnBsdWcgZXZlbiBpZiB2ZXJzaW9uIGNoZWNrIHN1Y2NlZWRzCj4gIAo+ICsJeGVuX210
+d2F0Y2ggICAgIFtLTkwsWEVOXQo+ICsJCQlFbmFibGVzIHRoZSBtdWx0aXRocmVhZGVkIHhlbndh
+dGNoIChtdHdhdGNoKS4KPiArCj4gIAl4ZW5fbm9wdnNwaW4JW1g4NixYRU5dCj4gIAkJCURpc2Fi
+bGVzIHRoZSB0aWNrZXRsb2NrIHNsb3dwYXRoIHVzaW5nIFhlbiBQVgo+ICAJCQlvcHRpbWl6YXRp
+b25zLgo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3hlbi94ZW5idXMveGVuYnVzX3hzLmMgYi9kcml2
+ZXJzL3hlbi94ZW5idXMveGVuYnVzX3hzLmMKPiBpbmRleCA0OWEzODc0Li4zZjEzN2QyIDEwMDY0
+NAo+IC0tLSBhL2RyaXZlcnMveGVuL3hlbmJ1cy94ZW5idXNfeHMuYwo+ICsrKyBiL2RyaXZlcnMv
+eGVuL3hlbmJ1cy94ZW5idXNfeHMuYwo+IEBAIC05NSw2ICs5NSwxOSBAQCBzdGF0aWMgcGlkX3Qg
+eGVud2F0Y2hfcGlkOwo+ICBzdGF0aWMgREVGSU5FX01VVEVYKHhlbndhdGNoX211dGV4KTsKPiAg
+c3RhdGljIERFQ0xBUkVfV0FJVF9RVUVVRV9IRUFEKHdhdGNoX2V2ZW50c193YWl0cSk7Cj4gIAo+
+ICtib29sIHhlbl9tdHdhdGNoOwo+ICtFWFBPUlRfU1lNQk9MX0dQTCh4ZW5fbXR3YXRjaCk7Cj4g
+Kwo+ICtzdHJ1Y3QgbXR3YXRjaF9pbmZvICptdHdhdGNoX2luZm87Cj4gKwo+ICtzdGF0aWMgYm9v
+bCBwYXJhbV94ZW5fbXR3YXRjaDsKPiArc3RhdGljIF9faW5pdCBpbnQgeGVuX3BhcnNlX210d2F0
+Y2goY2hhciAqYXJnKQo+ICt7Cj4gKwlwYXJhbV94ZW5fbXR3YXRjaCA9IHRydWU7Cj4gKwlyZXR1
+cm4gMDsKPiArfQo+ICtlYXJseV9wYXJhbSgieGVuX210d2F0Y2giLCB4ZW5fcGFyc2VfbXR3YXRj
+aCk7CgpBZGQgYSBLY29uZmlnIGl0ZW0gdG8gc2V0IHRoZSBkZWZhdWx0IHdoZW4gYnVpbGRpbmcg
+dGhlIGtlcm5lbD8gV2UgY2FuCnN0YXJ0IHdpdGggZGVmYXVsdCAib2ZmIiwgYnV0IGxhdGVyIHdl
+IG1pZ2h0IHdhbnQgdG8gZW5hYmxlIHRoaXMgZmVhdHVyZQphcyB0aGUgZGVmYXVsdC4KCj4gKwo+
+ICBzdGF0aWMgdm9pZCB4c19zdXNwZW5kX2VudGVyKHZvaWQpCj4gIHsKPiAgCXNwaW5fbG9jaygm
+eHNfc3RhdGVfbG9jayk7Cj4gQEAgLTkyOSw2ICs5NDIsMjQgQEAgaW50IHhzX2luaXQodm9pZCkK
+PiAgCWlmIChlcnIpCj4gIAkJcmV0dXJuIGVycjsKPiAgCj4gKwlpZiAoeGVuX2luaXRpYWxfZG9t
+YWluKCkgJiYgcGFyYW1feGVuX210d2F0Y2gpIHsKCldvdWxkbid0IGl0IGJlIGJldHRlciB0byBk
+cm9wIHRoZSB0ZXN0IGZvciB4ZW5faW5pdGlhbF9kb21haW4oKSBhbmQgZG8KdGhpcyBpbml0aWFs
+aXphdGlvbiBvbmx5IHdoZW4gYSBjYWxsZXIgKGJhY2tlbmQpIGlzIHJlcXVlc3RpbmcgdGhlCm11
+bHRpdGhyZWFkIG1vZGU/IFRoaXMgd291bGQgYXZvaWQgd2FzdGluZyBtZW1vcnkgaW4gY2FzZSBp
+dCBpc24ndCBnb2luZwp0b3AgYmUgdXNlZCBhbmQgLSBtb3JlIGltcG9ydGFudCAtIHdvdWxkIHN1
+cHBvcnQgZHJpdmVyIGRvbWFpbnMuCgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
