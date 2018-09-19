@@ -1,20 +1,16 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] Make credit2 the default scheduler
-Date: Wed, 19 Sep 2018 11:38:05 +0200
-Message-ID: <73c44e93d76cf400bed6f03b4f1623448276ecf1.camel@suse.com>
-References: <20180913163848.32216-1-george.dunlap@citrix.com>
- <cc2e661cc8543353929aebf1f190abd109ff2b82.camel@suse.com>
- <5B9B752F02000078001E88AD@prv1-mh.provo.novell.com>
- <4148872.qM0LCJrPQa@wopr.lan.crc.id.au>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: Save paused cpu ctx
+Date: Wed, 19 Sep 2018 03:39:28 -0600
+Message-ID: <5BA2195002000078001E9D54@prv1-mh.provo.novell.com>
+References: <154960af14936b2acefdb8d7f076cffaf53d8e47.camel@bitdefender.com>
+ <5BA2107002000078001E9C95@prv1-mh.provo.novell.com>
+ <dbefa8eb39e28fe40b516c06bc986cbfbbafe1f1.camel@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4734905073193498449=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=8f+w=mb=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1g2YwP-00056X-Bb
- for xen-devel@lists.xenproject.org; Wed, 19 Sep 2018 09:38:37 +0000
-In-Reply-To: <4148872.qM0LCJrPQa@wopr.lan.crc.id.au>
+In-Reply-To: <dbefa8eb39e28fe40b516c06bc986cbfbbafe1f1.camel@bitdefender.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,104 +19,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Steven Haigh <netwiz@crc.id.au>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, george.dunlap@citrix.com, Jan Beulich <JBeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+To: aisaila@bitdefender.com
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4734905073193498449==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-UOUJG8RfQWlgHLWgYrqa"
-
-
---=-UOUJG8RfQWlgHLWgYrqa
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, 2018-09-15 at 00:21 +1000, Steven Haigh wrote:
-> On Friday, 14 September 2018 6:45:35 PM AEST Jan Beulich wrote:
-> > > > >=20
-> > And that's despite "sched=3Dcredit2 crashes system when using
-> > cpupools"? While I agree that we shouldn't delay the switch for
-> > much longer, in particular with there already being a fix available
-> > from you I think that one should go in before the one here.
->=20
-> Even though my opinion probably isn't very heavy on this matter, I've
-> used=20
-> credit2 exclusively for a considerable time.=20
->
-Well, this is really interesting and useful to know. Can I ask what
-your typical workload is (if any), and how are things going?
-
-> If you're talking the issue I=20
-> think you're talking about, then I discovered it when doing stuff
-> that most=20
-> people probably wouldn't bother with - evidenced that I hadn't done
-> it before=20
-> either.
->=20
-Actually, we do expect the default scheduler not to crash if one
-creates a cpupool.
-
-Not that there hasn't been similar bug in Credit1, while it was the
-default (check `git log' :-/). But what this all means is that we need
-to do better at testing these things, e.g., finally adding cpupool and
-CPU online/offline testing to OSSTest.
-
-Anyway, the bugfix is in now. :-)
-
-> I take peoples word on the performance +/- of a few percent here and
-> there -=20
-> so if its easier to maintain and better code, then yeah - it makes
-> sense to=20
-> move on with it. I certainly haven't found any normal use cases that
-> would=20
-> lead me to object to this.
->=20
-Great, and thanks again for the feedback!
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-UOUJG8RfQWlgHLWgYrqa
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluiGQEACgkQFkJ4iaW4
-c+5QHA//SsrDcb4sGWVYXSTCR1V0ge1YUISocfDWq8LIFUjn756x2tfrdcHkCKN7
-Ho+la96XPrn4/JNiREhj6XpUZBQIFw11lNuMe/yKQQDCpcpHoejwh7xIJ3CPtiWA
-ilBFqqSPcVDW0sJW76fMu/F08qm2OqWH+jfmKQdQmnguhtE2zv2myFOOgKfjQE8G
-z8yi/AC5qIA6oC7JSeh2IfsCykaFhVAAIkDXnLQVVe+ClTl8WPcNkrApzXyI/vNO
-b4VQ2zj3GHjVUXXRR5krSeRZuTAoRGtt4rJ5pohlkBKMwAoKzur12xy8Wle1oXeI
-hxz4WPT+kpI+6CpRfKKe2O5Tre4dsSqYQ6rixUrWNa9IcgYRQcR7/sgu4fneWkxW
-7v7EY2dEl53cigHpSOk5SSFL9UElAg61dlPUErO3SoZ2sxNWsqhFtLaOFrml8CAb
-4D5uUii7Hs4mGS4jSNbHmXpvaqxUApOn5cYE8m4YTv/eWzmEvDUIfAfIx/GcUfCc
-naCCvyRCtsxbNln3ZizY2dF/ZH/klZapdMBOExuuRpxcUbjiBfncylhEiwNXBixt
-2+KqG9QPefIrQ/greS1o67/yarVoeRvvSJYeNd128JEn6HT3yj7HuaLxh3tn+u0k
-tXUVMJR72gCRG5MqydWpT+4i0LdaAob4be723cY8aiX5jTepCtw=
-=KYZW
------END PGP SIGNATURE-----
-
---=-UOUJG8RfQWlgHLWgYrqa--
-
-
-
---===============4734905073193498449==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4734905073193498449==--
+Pj4+IE9uIDE5LjA5LjE4IGF0IDExOjE5LCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3Rl
+Ogo+IE9uIFdlZCwgMjAxOC0wOS0xOSBhdCAwMzowMSAtMDYwMCwgSmFuIEJldWxpY2ggd3JvdGU6
+Cj4+ID4gPiA+IE9uIDE5LjA5LjE4IGF0IDEwOjIxLCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+
+IHdyb3RlOgo+PiA+IAo+PiA+IEkgd2FudCB0byByZXN0YXJ0IHRoZSBkaXNjdXNzaW9uIG9uIGRy
+b3BwaW5nIHRoZSAiaWYgKCB2LQo+PiA+ID5wYXVzZV9mbGFncyAmCj4+ID4gVlBGX2Rvd24gKSIg
+ZnJvbSBodm1fc2F2ZV9jcHVfY3R4dCgpIGFuZCBiZSBhYmxlIHRvIHNhdmUgY29udGV4dCBpbgo+
+PiA+IGEKPj4gPiB2Y3VwIGRvd24gc3RhdGUuIFRoZSBjb250ZW50IG9mIHRoZSBjdHggY291bGQg
+YmUgZmlsbGVkIGxpa2UgaXQgaXMKPj4gPiBkZXNjcmliZWQgaW4gSW50ZWwgU0RNLCAiOS4xLjEg
+UHJvY2Vzc29yIFN0YXRlIEFmdGVyIFJlc2V0IiAoaHR0cHM6Cj4+ID4gLy9zbyAKPj4gPiBmdHdh
+cmUuaW50ZWwuY29tL3NpdGVzL2RlZmF1bHQvZmlsZXMvbWFuYWdlZC8zOS9jNS8zMjU0NjItc2Rt
+LXZvbC0KPj4gPiAxLQo+PiA+IDJhYmNkLTNhYmNkLnBkZiAgIHBhZ2UgMjk5NikuCj4+ID4gCj4+
+ID4gSXMgdGhpcyBlbm91Z2ggdG8gYmUgdXAgc3RyZWFtZWQ/Cj4+IAo+PiBBbG9uZyB0aGUgbGlu
+ZXMgb2Ygd2hhdCBSb2dlciBoYXMgc2FpZCAtIHdpdGhvdXQga25vd2luZyBfd2h5XyB5b3UKPj4g
+d2FudCB0byBkbyB0aGF0LCBpdCdzIGhhcmQgdG8gdGVsbC4gSXQncyBwcmV0dHkgY2xlYXIgSSB0
+aGluayB0aGF0IHdlCj4+IGRvbid0Cj4+IHdhbnQgdG8gb3V0cmlnaHQgZHJvcCB0aGUgY29uZGl0
+aW9uLCB0aGUgcXVlc3Rpb24gaXMganVzdCB3aGV0aGVyIHRvCj4+IHNvbWV3aGF0IHJlbGF4IGl0
+IGZvciB5b3VyIHB1cnBvc2VzLgo+PiAKPj4gSSdtIGFmcmFpZCBJIGFsc28gZG9uJ3QgYWdyZWUg
+d2l0aCB5b3VyIGFzc2VydGlvbiB0aGF0IGEgZG93biB2Q1BVIGlzCj4+IGluICJhZnRlciByZXNl
+dCIgc3RhdGU6IFRvIG1lLCBzdWNoIGEgdkNQVSBjb3VsZCBsZWdpdGltYXRlbHkgYmUKPj4gY29u
+c2lkZXJlZCB0byBiZSBpbiB0aGF0IHN0YXRlLCBpbiB0aGUgc3RhdGUgaXQgd2FzIGluIHdoZW4g
+aXQgd2VudAo+PiBkb3duLCBvciBpbiBiYXNpY2FsbHkgYW55IG90aGVyIChwZXJoYXBzIHJhbmRv
+bSkgc3RhdGUuCj4gCj4gUHJvY2Vzc29yIFN0YXRlIEFmdGVyIFJlc2V0IGlzIGp1c3QgdGhlIG5h
+bWUgb2YgdGhlIHRhYmxlIGluIHRoZQo+IG1hbnVhbC4gSGF2aW5nIGEgZGVmYXVsdCBzdGF0ZSB0
+byByZXR1cm4gb24gYSBxdWVyeSB3YXMgdGhlIHN0YXJ0IHBvaW50Cj4gb2YgdGhlIGRpc2N1c3Np
+b24uIFlvdSBhcmUgcmlnaHQsIHdlIGNhbiByZXR1cm4gd2hhdGV2ZXIgc3RhdGUgdGhlIGNwdQo+
+IHdhcyBpbiBiZWZvcmUgaXQgd2VudCBkb3duLiBUaGUgY29kZSB3b3JrcyBmaW5lIGxpa2UgdGhh
+dCwgZnVydGhlcgo+IG1vcmUsIHRoaXMgd2lsbCBtYWtlIHVzIGhhdmUgYSBzbWFsbGVyIHBhdGNo
+IHBsdXMgYSBsZWdpdGltYXRlIGN0eCBhdAo+IHRoZSBlbmQgb2YgdGhlIHF1ZXJ5LgoKWW91IGRp
+ZG4ndCB1bmRlcnN0YW5kIG15IHJlc3BvbnNlIHRoZW46IFRoZXJlIGlzIG5vICJ0aGUgc3RhdGUi
+IGZvcgphIHZDUFUgd2hpY2ggaXMgZG93bi4gVGhlcmVmb3JlIHdlIHNob3VsZG4ndCBhcmJpdHJh
+cmlseSBwaWNrIG9uZSBvZgp0aGUgYWxtb3N0IGluZmluaXRlIG51bWJlciBvZiBvcHRpb25zLgoK
+QWxzbyBpbiB5b3VyIHJlcGx5IHRvIFJvZ2VyIHlvdSBkaWRuJ3QgcmVzcG9uZCBhdCBhbGwgdG8g
+dGhlIHNpemUKZ3Jvd3RoIHlvdXIgcHJvcG9zZWQgY2hhbmdlIHdvdWxkIGhhdmUgZm9yIHRoZSBt
+aWdyYXRpb24gc3RyZWFtLAphcyBwb2ludGVkIG91dCBieSBoaW0uCgpJbiBhbnkgZXZlbnQgLSBm
+b3Igbm93IEkgY29udGludWUgdG8gdGhpbmsgdGhhdCB0aGUgY29kZSBzaG91bGQKcmVtYWluIGFz
+IGlzLCBhbmQgdGhlIGNhbGxlciBzaG91bGQga25vdyB3aGV0aGVyIChhbmQgX2hvd18pIHRvCmRl
+YWwgd2l0aCBkb3duIHZDUFUtcy4KCj4+IEZpbmFsbHkgKGFuZCBJJ20gc29ycnkgZm9yIGJlaW5n
+IHBpY2t5IGhlcmUpIC0gd2h5IHdhcyB0aGlzIGlucXVpcnkKPj4gYWRkcmVzc2VkIF9Ub18gbWUg
+aW5zdGVhZCBvZiB0aGUgbGlzdD8KPiAKPiBJdCB3YXMgYWRkcmVzc2VkIHRvIHlvdSBiZWNhdXNl
+IGluIHYxNyBvZiB0aGUgc2F2ZV9vbmUgc2VyaWVzIHlvdSBzYWlkCj4gdGhhdCB3ZSBoYXZlIHRv
+IGNvbnRpbnVlIHRoZSBkaXNjdXNzaW9uIGluIGEgZGlmZmVyZW50IHRocmVhZC4gCgoiV2UiIGlz
+IHRoZSBjb21tdW5pdHkgaGVyZSwgbm90IGp1c3QgeW91IGFuZCBtZS4KCkphbgoKCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
