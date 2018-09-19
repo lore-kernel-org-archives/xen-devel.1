@@ -1,21 +1,21 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v5 3/3] x86/altp2m: Add a hvmop for querying
- the suppress #VE bit
-Date: Wed, 19 Sep 2018 15:48:18 +0100
-Message-ID: <20180919144818.7ccf6unelnspdd74@zion.uk.xensource.com>
-References: <20180903154836.25708-1-apop@bitdefender.com>
- <20180903154836.25708-4-apop@bitdefender.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v4] x86/altp2m: Add a subop for obtaining
+ the mem access of a page
+Date: Wed, 19 Sep 2018 08:48:54 -0600
+Message-ID: <5BA261D602000078001E9F8C@prv1-mh.provo.novell.com>
+References: <20180903154734.25361-1-apop@bitdefender.com>
+ <20180919144451.xk4etvgaj3l4ojgw@zion.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wwm0=mb=citrix.com=prvs=79313d28f=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1g2dmA-0004a1-7N
- for xen-devel@lists.xenproject.org; Wed, 19 Sep 2018 14:48:22 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=lqxj=mb=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1g2dmm-0004dA-DC
+ for xen-devel@lists.xenproject.org; Wed, 19 Sep 2018 14:49:00 +0000
+In-Reply-To: <20180919144451.xk4etvgaj3l4ojgw@zion.uk.xensource.com>
 Content-Disposition: inline
-In-Reply-To: <20180903154836.25708-4-apop@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,14 +24,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Adrian Pop <apop@bitdefender.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>, Sergej Proskurin <proskurin@sec.in.tum.de>, xen-devel@lists.xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Adrian Pop <apop@bitdefender.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Tamas K Lengyel <tamas@tklengyel.com>, Sergej Proskurin <proskurin@sec.in.tum.de>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBTZXAgMDMsIDIwMTggYXQgMDY6NDg6MzZQTSArMDMwMCwgQWRyaWFuIFBvcCB3cm90
-ZToKPiBTaWduZWQtb2ZmLWJ5OiBBZHJpYW4gUG9wIDxhcG9wQGJpdGRlZmVuZGVyLmNvbT4KCkFj
-a2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKRkFPRCBJJ20gZXhwZWN0aW5n
-IHlvdSB0byBhZGRyZXNzIFRhbWFzJyBjb21tZW50IGluIHBhdGNoIDEgYW5kIHJlc2VuZC4KCldl
-aS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDE5LjA5LjE4IGF0IDE2OjQ0LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+T24gTW9uLCBTZXAgMDMsIDIwMTggYXQgMDY6NDc6MzRQTSArMDMwMCwgQWRyaWFuIFBvcCB3cm90
+ZToKPj4gLS0tIGEveGVuL2luY2x1ZGUvcHVibGljL2h2bS9odm1fb3AuaAo+PiArKysgYi94ZW4v
+aW5jbHVkZS9wdWJsaWMvaHZtL2h2bV9vcC5oCj4+IEBAIC0yMzQsNiArMjM0LDcgQEAgc3RydWN0
+IHhlbl9odm1fYWx0cDJtX3ZpZXcgewo+PiAgdHlwZWRlZiBzdHJ1Y3QgeGVuX2h2bV9hbHRwMm1f
+dmlldyB4ZW5faHZtX2FsdHAybV92aWV3X3Q7Cj4+ICBERUZJTkVfWEVOX0dVRVNUX0hBTkRMRSh4
+ZW5faHZtX2FsdHAybV92aWV3X3QpOwo+PiAgCj4+ICsjaWYgX19YRU5fSU5URVJGQUNFX1ZFUlNJ
+T05fXyA8IDB4MDAwNDBhMDAKPj4gIHN0cnVjdCB4ZW5faHZtX2FsdHAybV9zZXRfbWVtX2FjY2Vz
+cyB7Cj4+ICAgICAgLyogdmlldyAqLwo+PiAgICAgIHVpbnQxNl90IHZpZXc7Cj4+IEBAIC0yNDUs
+NiArMjQ2LDE5IEBAIHN0cnVjdCB4ZW5faHZtX2FsdHAybV9zZXRfbWVtX2FjY2VzcyB7Cj4+ICB9
+Owo+PiAgdHlwZWRlZiBzdHJ1Y3QgeGVuX2h2bV9hbHRwMm1fc2V0X21lbV9hY2Nlc3MgeGVuX2h2
+bV9hbHRwMm1fc2V0X21lbV9hY2Nlc3NfdDsKPj4gIERFRklORV9YRU5fR1VFU1RfSEFORExFKHhl
+bl9odm1fYWx0cDJtX3NldF9tZW1fYWNjZXNzX3QpOwo+PiArI2VuZGlmIC8qIF9fWEVOX0lOVEVS
+RkFDRV9WRVJTSU9OX18gPCAweDAwMDQwYTAwICovCj4gCj4gI2Vsc2UgaGVyZSBwbGVhc2UsIG90
+aGVyd2lzZSB5b3UncmUgYWRkaW5nIHRoaXMgbmV3IGludGVyZmFjZSB0byBhIHNldAo+IG9mIG9s
+ZCBpbnRlcmZhY2VzLgoKSSBkb24ndCB0aGluayB3ZSBkbyBzbyBlbHNld2hlcmUsIHNvIEknZCBw
+cmVmZXIgaWYgd2UgZGlkbid0IGRvIHNvCmhlcmUgZWl0aGVyLiBCeSB1bmNvbmRpdGlvbmFsbHkg
+ZXhwb3NpbmcgdGhlIG5ldyBpbnRlcmZhY2Ugd2UKYWxsb3cgcGVvcGxlIHRvIG1vcnBoIHRoZWly
+IGNvZGUgaW4gc3RlcHMsIHJhdGhlciB0aGFuIGFsbCBpbiBvbmUKZ28gYXQgdGhlIHBvaW50IHRo
+ZXkgYnVtcCB0aGVpciBfX1hFTl9JTlRFUkZBQ0VfVkVSU0lPTl9fCnNldHRpbmcuCgpKYW4KCgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
