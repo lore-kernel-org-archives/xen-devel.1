@@ -1,20 +1,18 @@
-From: Isaila Alexandru <aisaila@bitdefender.com>
-Subject: Re: [PATCH v1] x86/hvm: Change return error for offline
- vcpus
-Date: Thu, 20 Sep 2018 17:26:32 +0300
-Message-ID: <74bad2ac1ee37ea0766e4cde1f4fa15585b0b559.camel@bitdefender.com>
-References: <20180920125434.20569-1-aisaila@bitdefender.com>
- <5BA3A6BC02000078001EA438@prv1-mh.provo.novell.com>
+From: Jason Andryuk <jandryuk@gmail.com>
+Subject: [PATCH] xen: Make XEN_BACKEND selectable by DomU
+Date: Thu, 20 Sep 2018 10:32:36 -0400
+Message-ID: <20180920143237.10000-1-jandryuk__37545.9221461371$1537453917$gmane$org@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=q4r9=mc=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
- id 1g2zum-0006Nv-Rk
- for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 14:26:45 +0000
-In-Reply-To: <5BA3A6BC02000078001EA438@prv1-mh.provo.novell.com>
+ <srs0=r1jv=mc=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1g3013-0007Az-9S
+ for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 14:33:13 +0000
+Received: by mail-qt0-x243.google.com with SMTP id r37-v6so8701471qtc.0
+ for <xen-devel@lists.xenproject.org>; Thu, 20 Sep 2018 07:33:11 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,26 +21,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, Jason Andryuk <jandryuk@gmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCAyMDE4LTA5LTIwIGF0IDA3OjU1IC0wNjAwLCBKYW4gQmV1bGljaCB3cm90ZToKPiA+
-ID4gPiBPbiAyMC4wOS4xOCBhdCAxNDo1NCwgPGFpc2FpbGFAYml0ZGVmZW5kZXIuY29tPiB3cm90
-ZToKPiA+IAo+ID4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS9zYXZlLmMKPiA+ICsrKyBiL3hlbi9h
-cmNoL3g4Ni9odm0vc2F2ZS5jCj4gPiBAQCAtMTY1LDcgKzE2NSw3IEBAIGludCBodm1fc2F2ZV9v
-bmUoc3RydWN0IGRvbWFpbiAqZCwgdW5zaWduZWQgaW50Cj4gPiB0eXBlY29kZSwgdW5zaWduZWQg
-aW50IGluc3RhbmNlLAo+ID4gICAgICBpZiAoIChydiA9IGh2bV9zcl9oYW5kbGVyc1t0eXBlY29k
-ZV0uc2F2ZSh2LCAmY3R4dCkpICE9IDAgKQo+ID4gICAgICAgICAgcHJpbnRrKFhFTkxPR19HX0VS
-UiAiSFZNJWQgc2F2ZTogZmFpbGVkIHRvIHNhdmUgdHlwZQo+ID4gJSJQUkl1MTYiICglZClcbiIs
-Cj4gPiAgICAgICAgICAgICAgICAgZC0+ZG9tYWluX2lkLCB0eXBlY29kZSwgcnYpOwo+ID4gLSAg
-ICBlbHNlIGlmICggcnYgPSAtRU5PRU5ULCBjdHh0LmN1ciA+PSBzaXplb2YoKmRlc2MpICkKPiA+
-ICsgICAgZWxzZSBpZiAoIHJ2ID0gLUVOT0RBVEEsIGN0eHQuY3VyID49IHNpemVvZigqZGVzYykg
-KQo+IAo+IEkgdGhpbmsgdGhpcyBjaGFuZ2Ugb2YgZXJyb3IgY29kZSBzaG91bGQgb25jZSBhZ2Fp
-biBvbmx5IGJlIGRvbmUKPiBmb3IgSFZNU1JfUEVSX1ZDUFUga2luZCByZWNvcmRzLiBGb3IgdGhl
-IG90aGVycyBubyBkYXRhCj4gYXBwZWFyaW5nIGlzIF90aGVfIGluZGljYXRpb24gb2YgdGhlIGlu
-c3RhbmNlIG5vdCBleGlzdGluZy4KPiAKT2ssIEkgd2lsbCBhZGQgYSBjb25kaXRpb25hbCBmb3Ig
-dGhpcyBpbnNpZGUgdGhlIGlmKCkKClRoYW5rcywKQWxleAoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+WEVOX0JBQ0tFTkQgZG9lc24ndCBhY3R1YWxseSBkZXBlbmQgb24gWEVOX0RPTTAuICBEb21VcyBj
+YW4gc2VydmUKYmFja2VuZHMgdG8gb3RoZXIgRG9tVXMuICBPbmUgZXhhbXBsZSBpcyBhIHNlcnZp
+Y2UgVk0gcHJvdmlkaW5nIG5ldHdvcmsKYmFja2VuZHMuCgpUaGUgb3JpZ2luYWwgS2NvbmZpZyBk
+ZWZhdWx0ZWQgRG9tMCB0byB5IGFuZCBpdCBjb3VsZCBiZSBkaXNhYmxlZC4gIERvbVUKY291bGQg
+bm90IHNlbGVjdCB0aGUgb3B0aW9uLiAgV2l0aCB0aGUgbmV3IEtjb25maWcsIHdlIGRlZmF1bHQg
+eSBmb3IKRG9tMCBhbmQgbiBmb3IgRG9tVS4gIEVpdGhlciBjYW4gdGhlbiB0b2dnbGUgdGhlIHNl
+bGVjdGlvbi4KClNpZ25lZC1vZmYtYnk6IEphc29uIEFuZHJ5dWsgPGphbmRyeXVrQGdtYWlsLmNv
+bT4KLS0tCk9wZW5YVCBydW5zIG5ldHdvcmsgYmFja2VuZHMgaW4gYSBuZXR3b3JrIHNlcnZpY2Ug
+RG9tVSB0aGF0IHNoYXJlcyBvdXQKUENJIE5JQ3MuCgogZHJpdmVycy94ZW4vS2NvbmZpZyB8IDMg
+Ky0tCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDIgZGVsZXRpb25zKC0pCgpkaWZm
+IC0tZ2l0IGEvZHJpdmVycy94ZW4vS2NvbmZpZyBiL2RyaXZlcnMveGVuL0tjb25maWcKaW5kZXgg
+YjQ1OWVkZmFjZmYzLi5hZjFiZjk5MzE4YzYgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMveGVuL0tjb25m
+aWcKKysrIGIvZHJpdmVycy94ZW4vS2NvbmZpZwpAQCAtMTAxLDggKzEwMSw3IEBAIGNvbmZpZyBY
+RU5fREVWX0VWVENITgogCiBjb25maWcgWEVOX0JBQ0tFTkQKIAlib29sICJCYWNrZW5kIGRyaXZl
+ciBzdXBwb3J0IgotCWRlcGVuZHMgb24gWEVOX0RPTTAKLQlkZWZhdWx0IHkKKwlkZWZhdWx0IHkg
+aWYgWEVOX0RPTTAKIAloZWxwCiAJICBTdXBwb3J0IGZvciBiYWNrZW5kIGRldmljZSBkcml2ZXJz
+IHRoYXQgcHJvdmlkZSBJL08gc2VydmljZXMKIAkgIHRvIG90aGVyIHZpcnR1YWwgbWFjaGluZXMu
+Ci0tIAoyLjE3LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
