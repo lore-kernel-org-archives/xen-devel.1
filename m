@@ -1,8 +1,8 @@
 From: YueHaibing <yuehaibing@huawei.com>
-Subject: [PATCH net-next 13/22] net: xen-netback: fix return
- type of ndo_start_xmit function
-Date: Thu, 20 Sep 2018 20:32:57 +0800
-Message-ID: <20180920123306.14772-14-yuehaibing__8411.35315499759$1537452466$gmane$org@huawei.com>
+Subject: [PATCH net-next 20/22] rionet: fix return type of
+ ndo_start_xmit function
+Date: Thu, 20 Sep 2018 20:33:04 +0800
+Message-ID: <20180920123306.14772-21-yuehaibing__35744.8882576593$1537452467$gmane$org@huawei.com>
 References: <20180920123306.14772-1-yuehaibing@huawei.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +11,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=6zv5=mc=huawei.com=yuehaibing@srs-us1.protection.inumbo.net>)
- id 1g2yNu-0003S7-8E
- for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 12:48:42 +0000
+ id 1g2yOH-0003WN-VT
+ for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 12:49:06 +0000
 In-Reply-To: <20180920123306.14772-1-yuehaibing@huawei.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -31,19 +31,17 @@ ZXRkZXZfdHhfdCcsCndoaWNoIGlzIGEgdHlwZWRlZiBmb3IgYW4gZW51bSB0eXBlLCBzbyBtYWtl
 IHN1cmUgdGhlIGltcGxlbWVudGF0aW9uIGluCnRoaXMgZHJpdmVyIGhhcyByZXR1cm5zICduZXRk
 ZXZfdHhfdCcgdmFsdWUsIGFuZCBjaGFuZ2UgdGhlIGZ1bmN0aW9uCnJldHVybiB0eXBlIHRvIG5l
 dGRldl90eF90LgoKRm91bmQgYnkgY29jY2luZWxsZS4KClNpZ25lZC1vZmYtYnk6IFl1ZUhhaWJp
-bmcgPHl1ZWhhaWJpbmdAaHVhd2VpLmNvbT4KLS0tCiBkcml2ZXJzL25ldC94ZW4tbmV0YmFjay9p
-bnRlcmZhY2UuYyB8IDMgKystCiAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAxIGRl
-bGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQveGVuLW5ldGJhY2svaW50ZXJmYWNl
-LmMgYi9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay9pbnRlcmZhY2UuYwppbmRleCA5MjI3NGMyLi43
-ZTNlYTM5IDEwMDY0NAotLS0gYS9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay9pbnRlcmZhY2UuYwor
-KysgYi9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay9pbnRlcmZhY2UuYwpAQCAtMTY1LDcgKzE2NSw4
-IEBAIHN0YXRpYyB1MTYgeGVudmlmX3NlbGVjdF9xdWV1ZShzdHJ1Y3QgbmV0X2RldmljZSAqZGV2
-LCBzdHJ1Y3Qgc2tfYnVmZiAqc2tiLAogCXJldHVybiB2aWYtPmhhc2gubWFwcGluZ1tza2JfZ2V0
-X2hhc2hfcmF3KHNrYikgJSBzaXplXTsKIH0KIAotc3RhdGljIGludCB4ZW52aWZfc3RhcnRfeG1p
-dChzdHJ1Y3Qgc2tfYnVmZiAqc2tiLCBzdHJ1Y3QgbmV0X2RldmljZSAqZGV2KQorc3RhdGljIG5l
-dGRldl90eF90Cit4ZW52aWZfc3RhcnRfeG1pdChzdHJ1Y3Qgc2tfYnVmZiAqc2tiLCBzdHJ1Y3Qg
-bmV0X2RldmljZSAqZGV2KQogewogCXN0cnVjdCB4ZW52aWYgKnZpZiA9IG5ldGRldl9wcml2KGRl
-dik7CiAJc3RydWN0IHhlbnZpZl9xdWV1ZSAqcXVldWUgPSBOVUxMOwotLSAKMS44LjMuMQoKCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
-bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
-LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+bmcgPHl1ZWhhaWJpbmdAaHVhd2VpLmNvbT4KLS0tCiBkcml2ZXJzL25ldC9yaW9uZXQuYyB8IDMg
+KystCiAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZm
+IC0tZ2l0IGEvZHJpdmVycy9uZXQvcmlvbmV0LmMgYi9kcml2ZXJzL25ldC9yaW9uZXQuYwppbmRl
+eCBlOWYxMDFjLi5kZTM5MWM3IDEwMDY0NAotLS0gYS9kcml2ZXJzL25ldC9yaW9uZXQuYworKysg
+Yi9kcml2ZXJzL25ldC9yaW9uZXQuYwpAQCAtMTcwLDcgKzE3MCw4IEBAIHN0YXRpYyBpbnQgcmlv
+bmV0X3F1ZXVlX3R4X21zZyhzdHJ1Y3Qgc2tfYnVmZiAqc2tiLCBzdHJ1Y3QgbmV0X2RldmljZSAq
+bmRldiwKIAlyZXR1cm4gMDsKIH0KIAotc3RhdGljIGludCByaW9uZXRfc3RhcnRfeG1pdChzdHJ1
+Y3Qgc2tfYnVmZiAqc2tiLCBzdHJ1Y3QgbmV0X2RldmljZSAqbmRldikKK3N0YXRpYyBuZXRkZXZf
+dHhfdAorcmlvbmV0X3N0YXJ0X3htaXQoc3RydWN0IHNrX2J1ZmYgKnNrYiwgc3RydWN0IG5ldF9k
+ZXZpY2UgKm5kZXYpCiB7CiAJaW50IGk7CiAJc3RydWN0IHJpb25ldF9wcml2YXRlICpybmV0ID0g
+bmV0ZGV2X3ByaXYobmRldik7Ci0tIAoxLjguMy4xCgoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
