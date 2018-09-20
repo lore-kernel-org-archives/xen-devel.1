@@ -1,23 +1,24 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v2 3/4] x86/HVM: implement memory read
- caching
-Date: Thu, 20 Sep 2018 16:42:35 +0100
-Message-ID: <20180920154235.wgk7co5cyxyb6s74@zion.uk.xensource.com>
-References: <5B97BEB202000078001E73FB@prv1-mh.provo.novell.com>
- <5B97BFE702000078001E7410@prv1-mh.provo.novell.com>
- <20180919155749.empmqzrzlba4gaom@zion.uk.xensource.com>
- <5BA340BF02000078001EA1F5@prv1-mh.provo.novell.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: null scheduler bug
+Date: Thu, 20 Sep 2018 18:09:04 +0200
+Message-ID: <a468e3dfc55bb6a421d47b908f89d9112075cc04.camel@suse.com>
+References: <alpine.DEB.2.10.1809121559330.4255@sstabellini-ThinkPad-X260>
+ <a938e477609ae123ae61aec515daa34ccaf0b8f3.camel@suse.com>
+ <CADJ6SV2G=51BK2p-bouNGfiS5sP2tiV6ztZZ7PFGjiptRw_P3w@mail.gmail.com>
+ <44174941bcd8f250a6ecd42ea10a78bf12453134.camel@suse.com>
+ <CADJ6SV2wis2kOz9j4OGTzRLd+2O2f_SuxktFWRq2A_tbng_3Ug@mail.gmail.com>
+ <529d38d04b140d90d33e424a064d401cf06f14cf.camel@suse.com>
+ <CADJ6SV09MS1x+qGJOu71W8M6cVhRaVuODBYDReHWmOm4c1NEfQ@mail.gmail.com>
+ <CADJ6SV0+O5c52_qwOUEakuX82C2+8Z-M4mKj0x+13GXjaiJjvw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7216692105700459712=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=1x7a=mc=citrix.com=prvs=794768bfb=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1g31U2-0007cJ-3H
- for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 16:07:14 +0000
-Content-Disposition: inline
-In-Reply-To: <5BA340BF02000078001EA1F5@prv1-mh.provo.novell.com>
+ <srs0=wywx=mc=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1g31WZ-0007kx-QI
+ for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 16:09:51 +0000
+In-Reply-To: <CADJ6SV0+O5c52_qwOUEakuX82C2+8Z-M4mKj0x+13GXjaiJjvw@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,72 +27,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Milan Boberic <milanboberic94@gmail.com>
+Cc: xen-devel@lists.xenproject.org, stefano@stabellini.net
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBTZXAgMjAsIDIwMTggYXQgMTI6Mzk6NTlBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gPj4+IE9uIDE5LjA5LjE4IGF0IDE3OjU3LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gPiBPbiBUdWUsIFNlcCAxMSwgMjAxOCBhdCAwNzoxNToxOUFNIC0wNjAwLCBKYW4gQmV1
-bGljaCB3cm90ZToKPiA+PiBFbXVsYXRpb24gcmVxdWlyaW5nIGRldmljZSBtb2RlbCBhc3Npc3Rh
-bmNlIHVzZXMgYSBmb3JtIG9mIGluc3RydWN0aW9uCj4gPj4gcmUtZXhlY3V0aW9uLCBhc3N1bWlu
-ZyB0aGF0IHRoZSBzZWNvbmQgKGFuZCBhbnkgZnVydGhlcikgcGFzcyB0YWtlcwo+ID4+IGV4YWN0
-bHkgdGhlIHNhbWUgcGF0aC4gVGhpcyBpcyBhIHZhbGlkIGFzc3VtcHRpb24gYXMgZmFyIHVzZSBv
-ZiBDUFUKPiA+PiByZWdpc3RlcnMgZ29lcyAoYXMgdGhvc2UgY2FuJ3QgY2hhbmdlIHdpdGhvdXQg
-YW55IG90aGVyIGluc3RydWN0aW9uCj4gPj4gZXhlY3V0aW5nIGluIGJldHdlZW4pLCBidXQgaXMg
-d3JvbmcgZm9yIG1lbW9yeSBhY2Nlc3Nlcy4gSW4gcGFydGljdWxhcgo+ID4+IGl0IGhhcyBiZWVu
-IG9ic2VydmVkIHRoYXQgV2luZG93cyBtaWdodCBwYWdlIG91dCBidWZmZXJzIHVuZGVybmVhdGgg
-YW4KPiA+PiBpbnN0cnVjdGlvbiBjdXJyZW50bHkgdW5kZXIgZW11bGF0aW9uIChoaXR0aW5nIGJl
-dHdlZW4gdHdvIHBhc3NlcykuIElmCj4gPj4gdGhlIGZpcnN0IHBhc3MgdHJhbnNsYXRlZCBhIGxp
-bmVhciBhZGRyZXNzIHN1Y2Nlc3NmdWxseSwgYW55IHN1YnNlcXVlbnQKPiA+PiBwYXNzIG5lZWRz
-IHRvIGRvIHNvIHRvbywgeWllbGRpbmcgdGhlIGV4YWN0IHNhbWUgdHJhbnNsYXRpb24uCj4gPiAK
-PiA+IE5vdCBzdXJlIEkgZm9sbG93LiBJZiB0aGUgYnVmZmVycyBhcmUgcGFnZWQgb3V0IGJldHdl
-ZW4gdHdvIHBhc3NlcywgaG93Cj4gPiB3b3VsZCBjYWNoaW5nIHRoZSB0cmFuc2xhdGlvbiBoZWxw
-PyAgWWVzIHlvdSBnZXQgdGhlIHNhbWUgdHJhbnNsYXRpb24KPiA+IHJlc3VsdCBidXQgdGhlIGNv
-bnRlbnQgb2YgdGhlIGFkZHJlc3MgcG9pbnRlZCB0byBieSB0aGUgdHJhbnNsYXRpb24KPiA+IHJl
-c3VsdCBjb3VsZCBiZSBkaWZmZXJlbnQsIHJpZ2h0Pwo+IAo+IElmIHdlIGFjY2Vzc2VkIHRoYXQg
-bWVtb3J5LCB5ZXMuIEJ1dCB0aGUgd2hvbGUgcG9pbnQgaGVyZSBpcyB0byBhdm9pZAo+IG1lbW9y
-eSBhY2Nlc3NlcyBkdXJpbmcgcmV0cnkgcHJvY2Vzc2luZywgd2hlbiB0aGUgc2FtZSBhY2Nlc3Mg
-aGFzCj4gYWxyZWFkeSBvY2N1cnJlZCBkdXJpbmcgYW4gZWFybGllciByb3VuZC4gQXMgbm90ZWQg
-b24gYW5vdGhlciBzdWItCj4gdGhyZWFkLCB0aGUgdGVybSAiY2FjaGUiIGhlcmUgbWF5IGJlIGEg
-bGl0dGxlIG1pc2xlYWRpbmcsIGFzIGl0J3Mgbm90Cj4gdGhlcmUgdG8gaW1wcm92ZSBwZXJmb3Jt
-YW5jZSAodGhpcywgaWYgc28sIHdvdWxkIGp1c3QgYmUgYSBkZXNpcmFibGUKPiBzaWRlIGVmZmVj
-dCksIGJ1dCB0byBndWFyYW50ZWUgY29ycmVjdG5lc3MuIEkndmUgY2hvc2VuIHRoaXMgbmFtaW5n
-IGZvcgo+IHRoZSBsYWNrIG9mIGEgYmV0dGVyIGFsdGVybmF0aXZlLgo+IAo+IFNvIGR1cmluZyBy
-ZXBsYXkvcmV0cnksIGluZHVjdGl2ZWx5IGJ5IGFsbCBwcmV2aW91c2x5IHBlcmZvcm1lZAo+IGFj
-Y2Vzc2VzIGNvbWluZyBmcm9tIHRoaXMgY2FjaGUsIHRoZSByZXN1bHQgaXMgZ29pbmcgdG8gYmUg
-dGhlIHNhbWUKPiBhcyB0aGF0IG9mIHRoZSBwcmV2aW91cyBydW4uIEl0J3MganVzdCB0aGF0LCBm
-b3Igbm93LCB3ZSB1c2UgX3RoaXNfCj4gY2FjaGUgb25seSBmb3IgcGFnZSB0YWJsZSBhY2Nlc3Nl
-cy4gQnV0IGRvbid0IGZvcmdldCB0aGF0IHRoZXJlIGlzCj4gYXQgbGVhc3Qgb25lIG90aGVyIGNh
-Y2hlIGluIHBsYWNlIChzdHJ1Y3QgaHZtX3ZjcHVfaW8ncwo+IG1taW9fY2FjaGVbXSkuCj4gCj4g
-Rm9yIHRoZSBwYWdlZC1vdXQgc2NlbmFyaW8gdGhpcyBtZWFucyB0aGF0IGRlc3BpdGUgdGhlIGxl
-YWYgcGFnZQo+IHRhYmxlIGVudHJ5IGhhdmluZyBjaGFuZ2VkIHRvIHNvbWUgbm9uLXByZXNlbnQg
-b25lIGJldHdlZW4gdGhlCj4gb3JpZ2luYWwgcnVuIHRocm91Z2ggZW11bGF0aW9uIGNvZGUgYW5k
-IHRoZSByZXBsYXkvcmV0cnkgYWZ0ZXIKPiBoYXZpbmcgcmVjZWl2ZWQgcWVtdSdzIHJlcGx5LCBz
-aW5jZSB0aGF0IFBURSB3b24ndCBiZSByZWFkIGFnYWluCj4gdGhlIG9yaWdpbmFsIHRyYW5zbGF0
-aW9uIHdpbGwgYmUgKHJlKXVzZWQuCgpSaWdodC4gSSBnb3QgeW91ciBpZGVhIHVwIHRvIHRoaXMg
-cG9pbnQuCgpJIHdvdWxkIGFwcHJlY2lhdGUgaWYgeW91IGNhbiBwdXQgdGhlIGZvbGxvd2luZyBw
-YXJhZ3JhcGhzIGludG8gY29tbWl0Cm1lc3NhZ2UuCgo+IAo+IEZvciB0aGUgYWN0dWFsIGRhdGEg
-cGFnZSBpbiB0aGlzIHNjZW5hcmlvLCB3aGlsZSB5b3UncmUgcmlnaHQgdGhhdCBpdHMKPiBjb250
-ZW50cyBtYXkgaGF2ZSBjaGFuZ2VkLCB0aGVyZSBhcmUgYSBjb3VwbGUgb2YgYXNwZWN0cyB0byB0
-YWtlCj4gaW50byBjb25zaWRlcmF0aW9uOgo+IC0gV2UgbXVzdCBiZSB0YWxraW5nIGFib3V0IGFu
-IGluc24gYWNjZXNzaW5nIHR3byBsb2NhdGlvbnMgKHR3bwo+ICAgbWVtb3J5IG9uZXMsIG9uZSBv
-ZiB3aGljaCBpcyBNTUlPLCBvciBhIG1lbW9yeSBhbmQgYW4gSS9PIG9uZSkuCj4gLSBJZiB0aGUg
-bm9uIEkvTyAvIE1NSU8gc2lkZSBpcyBiZWluZyByZWFkLCB0aGUgcmUtcmVhZCAoaWYgaXQgb2Nj
-dXJzCj4gICBhdCBhbGwpIGlzIGhhdmluZyBpdHMgcmVzdWx0IGRpc2NhcmRlZCwgYnkgdGFraW5n
-IHRoZSBzaG9ydGN1dCB0aHJvdWdoCj4gICB0aGUgZmlyc3Qgc3dpdGNoKCkncyBTVEFURV9JT1JF
-U1BfUkVBRFkgY2FzZSBpbiBodm1lbXVsX2RvX2lvKCkuCj4gICBOb3RlIGhvdywgYW1vbmcgYWxs
-IHRoZSByZS1pc3N1ZSBzYW5pdHkgY2hlY2tzIHRoZXJlLCB3ZSBhdm9pZAo+ICAgY29tcGFyaW5n
-IHRoZSBhY3R1YWwgZGF0YS4KPiAtIElmIHRoZSBub24gSS9PIC8gTU1JTyBzaWRlIGlzIGJlaW5n
-IHdyaXR0ZW4sIGl0IGlzIHRoZSBPU2VzCj4gICByZXNwb25zaWJpbGl0eSB0byBhdm9pZCBhY3R1
-YWxseSBtb3ZpbmcgcGFnZSBjb250ZW50cyB0byBkaXNrIHdoaWxlCj4gICB0aGVyZSBtaWdodCBz
-dGlsbCBiZSBhIHdyaXRlIGFjY2VzcyBpbiBmbGlnaHQgLSB0aGlzIGlzIG5vIGRpZmZlcmVudCBp
-bgo+ICAgYmVoYXZpb3IgZnJvbSBiYXJlIGhhcmR3YXJlLgo+IC0gUmVhZC1tb2RpZnktd3JpdGUg
-YWNjZXNzZXMgYXJlLCBhcyBhbHdheXMsIGNvbXBsaWNhdGVkLCBhbmQKPiAgIHdoaWxlIHdlIGRl
-YWwgd2l0aCB0aGVtIGJldHRlciBub3dhZGF5cyB0aGFuIHdlIGRpZCBpbiB0aGUgcGFzdCwKPiAg
-IHdlJ3JlIHN0aWxsIG5vdCBxdWl0ZSB0aGVyZSB0byBndWFyYW50ZWUgaGFyZHdhcmUgbGlrZSBi
-ZWhhdmlvciBpbgo+ICAgYWxsIGNhc2VzIGFueXdheS4gTm90aGluZyBpcyBnZXR0aW5nIHdvcnNl
-IGJ5IHRoZSBjaGFuZ2VzIG1hZGUKPiAgIGhlcmUsIGFmYWljdC4KPiAKPiBKYW4KPiAKPiAKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============7216692105700459712==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-CEJ0niGnbLfAVFfsywST"
+
+
+--=-CEJ0niGnbLfAVFfsywST
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hey,
+
+Sorry for not having followed up. I was (and still am) planning to, but
+am also a bit busy.
+
+On Thu, 2018-09-20 at 15:04 +0200, Milan Boberic wrote:
+> I ran some more tests and managed to successfully create and destroy
+> domU as many times as I want, without any delay between destroy and
+> create.
+> I added:
+>  printk("End of a domain_destroy function");
+>  in domain_destroy function and
+> printk("End of a complete_domain_destroy function"); in
+> complete_domain_destroy function, at the end of the functions.
+> Those functions are in domain.c file.
+>
+Right. This is exactly the kind of debug patch I wanted to
+suggest/send. It is, in fact, what was being use to diagnose/fix the
+RCU issue, when it first came up, as you may have seen.
+
+> Now, after every xl create it prints:
+>=20
+> root@uz3eg-iocc-2018-2:~# xl create bm1.cfg
+> Parsing config from bm1.cfg
+> <G><3>memory_map:add: dom2 gfn=3Dff0a0 mfn=3Dff0a0 nr=3D1
+>=20
+Mmm... So, you added a printk() (or, actually, two of them) in the
+domain destruction path, and are seeing (different) things being
+printed during domain creation? How nice! :-D
+
+I'm not sure how that happens, and whether/how this new output relates
+to the problem. However, what about the printk() you added? Do you see
+their output? It may be visible only on the console and/or in `xl
+dmesg'.
+
+While there, if you can, I'd add timestamsp, e.g.:
+
+printk("t=3D%"PRI_stime":End of a domain_destroy function", NOW());
+printk("t=3D%"PRI_stime":End of a complete_domain_destroy function", NOW())=
+;
+
+and check what the outpur looks like both under credit or credit2, and
+under null.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-CEJ0niGnbLfAVFfsywST
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlujxiIACgkQFkJ4iaW4
+c+607hAAtjlO7HgOE4fMWC62RuiV8BuDJkrbefiZv/I0zGBoRU29Ww0HO7ZOdyyE
+81axFT/dZ3U5m5tAepaW9AO137s/HQNR/ncLlfR09Q/cYpyfP+CIJdM4ZXRa9sCO
+aFdU85+1GK83E4hIRhHs5NicXUXjwCLNdfBW1bu+pdow2vSb9oOMy4784j8jUqBs
+eGOOho7LcM9LNWo02mu1fkrWxxa9lqS4/g2fuv2rYkpAVrtelbJgl/nauJ+LaP1W
+JcmbSmhSf+vEU1g0yrzPvlngi6B3XCzg2TFN5OBWIC/pI7m/TQ/Z9oWqsvngtZov
+I/jctsKqtH0RKu+1a4H6mDqZ04iw3vMFK8jew+wdde5UbWeqJ3iD2BUyTIVOez5G
+CwNDL6jtvE8tXpT83w3Oua5d+CnZNMIV8SLcbGU58bODrclVurl4dzdeOBiaBFru
+U82VlFjmklrjYgo/uAmfltTlCozZr74/X6si27brTIBwWHyawcUodsemPZwuJmm8
+ZxrUorsINx9UE46jEQqy0XDxn2OwI0TXM5MfD9oXBPFdln7KrT63zqYO+5GXKZ8h
+G8klMlM/nXyd4xooENMVBUpoFRqUNmPzGjKadCbDK0jLfmbbJzYm8ad9r7XMNnCR
+JNKw302Po2gJDE80zjWIlvpGC2bjFJxvUPRfKnCZ3YQHPe13fFY=
+=jgVb
+-----END PGP SIGNATURE-----
+
+--=-CEJ0niGnbLfAVFfsywST--
+
+
+
+--===============7216692105700459712==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7216692105700459712==--
