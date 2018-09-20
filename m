@@ -1,21 +1,19 @@
-From: Jason Andryuk <jandryuk@gmail.com>
-Subject: Re: [PATCH] xen: Make XEN_BACKEND selectable by DomU
-Date: Thu, 20 Sep 2018 11:30:11 -0400
-Message-ID: <CAKf6xpuPRsodEoZ0mAOdJBTSpcUsXNUM8so64Uk7PSH9L=RjYw__49307.4964885183$1537457343$gmane$org@mail.gmail.com>
-References: <20180920143237.10000-1-jandryuk@gmail.com>
- <5BA3B4B202000078001EA517@prv1-mh.provo.novell.com>
+From: David Miller <davem@davemloft.net>
+Subject: Re: [PATCH net-next 00/22] net: fix return type of
+ ndo_start_xmit function
+Date: Thu, 20 Sep 2018 08:50:55 -0700 (PDT)
+Message-ID: <20180920.085055.1188796939437872993.davem__44639.0454228551$1537458603$gmane$org@davemloft.net>
+References: <20180920123306.14772-1-yuehaibing@huawei.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=r1jv=mc=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1g30uP-0004Ej-QF
- for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 15:30:25 +0000
-Received: by mail-lf1-x141.google.com with SMTP id x20-v6so8741271lfg.2
- for <xen-devel@lists.xenproject.org>; Thu, 20 Sep 2018 08:30:24 -0700 (PDT)
-In-Reply-To: <5BA3B4B202000078001EA517@prv1-mh.provo.novell.com>
+ <srs0=zyev=mc=davemloft.net=davem@srs-us1.protection.inumbo.net>)
+ id 1g31EM-0005l6-E3
+ for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 15:51:02 +0000
+In-Reply-To: <20180920123306.14772-1-yuehaibing@huawei.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +22,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, open list <linux-kernel@vger.kernel.org>
+To: yuehaibing@huawei.com
+Cc: dmitry.tarnyagin@lockless.no, madalin.bucur@nxp.com, linux-mips@linux-mips.org, linux@armlinux.org.uk, pantelis.antoniou@gmail.com, kys@microsoft.com, t.sailer@alumni.ethz.ch, dev@openvswitch.org, f.fainelli@gmail.com, arvid.brodin@alten.se, michal.simek@xilinx.com, pshelar@ovn.org, m-karicheri2@ti.com, xen-devel@lists.xenproject.org, jreuter@yaina.de, sammy@sammy.net, grygorii.strashko@ti.com, w-kwok2@ti.com, haiyangz@microsoft.com, steve.glendinning@shawell.net, linux-can@vger.kernel.org, claudiu.manoil@nxp.com, paul.durrant@citrix.com, mkl@pengutronix.de, linux-hams@vger.kernel.org, linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org, wei.liu2@citrix.com, nico@fluxnic.net, netdev@vger.kernel.org, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, ralf@linux-mips.org, leoyang.li@nxp.com, hsweeten@visionengravers.com, wg@grandegger.com, devel@linuxdriv
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBTZXAgMjAsIDIwMTggYXQgMTA6NTQgQU0gSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1
-c2UuY29tPiB3cm90ZToKPgo+ID4+PiBPbiAyMC4wOS4xOCBhdCAxNjozMiwgPGphbmRyeXVrQGdt
-YWlsLmNvbT4gd3JvdGU6Cj4gPiAtLS0gYS9kcml2ZXJzL3hlbi9LY29uZmlnCj4gPiArKysgYi9k
-cml2ZXJzL3hlbi9LY29uZmlnCj4gPiBAQCAtMTAxLDggKzEwMSw3IEBAIGNvbmZpZyBYRU5fREVW
-X0VWVENITgo+ID4KPiA+ICBjb25maWcgWEVOX0JBQ0tFTkQKPiA+ICAgICAgIGJvb2wgIkJhY2tl
-bmQgZHJpdmVyIHN1cHBvcnQiCj4gPiAtICAgICBkZXBlbmRzIG9uIFhFTl9ET00wCj4gPiAtICAg
-ICBkZWZhdWx0IHkKPiA+ICsgICAgIGRlZmF1bHQgeSBpZiBYRU5fRE9NMAo+Cj4gV2h5IG5vdCB0
-aGUgc2ltcGxlciAiZGVmYXVsdCBYRU5fRE9NMCI/CgpJIGRpZG4ndCByZWFsaXplIHlvdSBjb3Vs
-ZCBkbyB0aGF0LiA6KSAgWWVzLCB0aGF0J3MgbmljZXIuCgpUaGFua3MsCkphc29uCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+RnJvbTogWXVlSGFpYmluZyA8eXVlaGFpYmluZ0BodWF3ZWkuY29tPgpEYXRlOiBUaHUsIDIwIFNl
+cCAyMDE4IDIwOjMyOjQ0ICswODAwCgo+IFRoZSBtZXRob2QgbmRvX3N0YXJ0X3htaXQoKSBpcyBk
+ZWZpbmVkIGFzIHJldHVybmluZyBhbiAnbmV0ZGV2X3R4X3QnLAo+IHdoaWNoIGlzIGEgdHlwZWRl
+ZiBmb3IgYW4gZW51bSB0eXBlLCBzbyBtYWtlIHN1cmUgdGhlIGltcGxlbWVudGF0aW9uIGluCj4g
+dGhpcyBkcml2ZXIgaGFzIHJldHVybnMgJ25ldGRldl90eF90JyB2YWx1ZSwgYW5kIGNoYW5nZSB0
+aGUgZnVuY3Rpb24KPiByZXR1cm4gdHlwZSB0byBuZXRkZXZfdHhfdC4KCkkgd291bGQgYWR2aXNl
+IHlvdSBub3QgdG8gc2VuZCBzbyBtYW55IG9mIHRoZXNlIGNoYW5nZXMgYXMgYSBncm91cC4KCklm
+IG9uZSBvZiB0aGUgcGF0Y2hlcyBuZWVkcyBmZWVkYmFjayBhZGRyZXNzZWQsIHdoaWNoIGlzIGFs
+cmVhZHkgdGhlCmNhc2UsIHlvdSB3aWxsIGhhdmUgdG8gcmVzdWJtaXQgdGhlIGVudGlyZSBzZXJp
+ZXMgYWxsIG92ZXIgYWdhaW4gd2l0aAp0aGUgZml4ZXMuCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
