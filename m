@@ -1,27 +1,22 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH 00/12] add per-domain and per-cpupool
- generic parameters
-Date: Thu, 20 Sep 2018 17:06:29 +0100
-Message-ID: <20180920160629.jullgb435zi7bcbr@zion.uk.xensource.com>
-References: <20180918060309.7186=3def=3dbf=3dbd1=3def=3dbf=3dbdjgr?==?UTF-8?Q?oss@suse.com=3f=3d>
- <5BA0D44602000078001E93EA@prv1=ef=bf=bdmh.pro?==?UTF-8?Q?vo.novell.com>
- <7cb2a460-095c-27c8-a4cf-47ef8e7850d5@suse.com>
- <5?==?UTF-8?Q?BA0DF9602000078001=3d=3fUTF-8=3fQ=3fE9448@suse.com>
- <6d56ad90-782?==?UTF-8?Q?5-adb7-f4e5-6c3ceb3210f6@suse.com>
- <001ab73a-078d-4ec1-4acd-2fb43?==?UTF-8?Q?89e8867@citrix.com>
- <20180919172818.3aksiju4s3ipw42p@zion.uk.xens?==?UTF-8?Q?ource.com>
- <fffd7e59-e437-8ed9-b228-b537fde050cd@suse.com>
+From: Paul Durrant <Paul.Durrant@citrix.com>
+Subject: Re: [PATCH 7/7] amd-iommu: add lookup_page method to
+ iommu_ops
+Date: Thu, 20 Sep 2018 15:41:40 +0000
+Message-ID: <ed31e7eac6214876ac48ae1b2ca86632@AMSPEX02CL03.citrite.net>
+References: <20180920141149.1643-1-paul.durrant@citrix.com>
+ <20180920141149.1643-8-paul.durrant@citrix.com>
+ <5BA3B6CC02000078001EA54F@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=1x7a=mc=citrix.com=prvs=794768bfb=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1g31k4-0000hg-Lu
- for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 16:23:48 +0000
-Content-Disposition: inline
-In-Reply-To: <fffd7e59-e437-8ed9-b228-b537fde050cd@suse.com>
+ <srs0=vqbt=mc=citrix.com=prvs=7948b9fa5=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1g31lG-0000m5-56
+ for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 16:25:02 +0000
+In-Reply-To: <5BA3B6CC02000078001EA54F@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,23 +25,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Daniel de Graaf <dgdegra@tycho.nsa.gov>
+To: 'Jan Beulich' <JBeulich@suse.com>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, Brian Woods <brian.woods@amd.com>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBTZXAgMTksIDIwMTggYXQgMDc6NTg6NTBQTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3
-cm90ZToKPiAKPiBEaWQgeW91IGxvb2sgaW50byB0aGUgcGF0Y2hlcywgZXNwZWNpYWxseSBwYXRj
-aCAxMD8gVGhlIHBhcmFtZXRlcnMgc2V0Cj4gYXJlIGFsbCBzdG9yZWQgaW4gZG9tYWluIGNvbmZp
-ZyB2aWEgbGlieGxfX2FyY2hfZG9tYWluX3NhdmVfY29uZmlnKCkuCgpObywgSSBkaWRuJ3QuCgpJ
-IHRoaW5rIHRoZSBnZW5lcmFsIGlkZWEgb2Ygd2hhdCB5b3UgZG8gaW4gcGF0Y2ggMTAgc2hvdWxk
-IHdvcmsuIEhvd2V2ZXIKSSB3YW50IHRvIGNvbW1lbnQgb24gdGhlIGltcGxlbWVudGF0aW9uLgoK
-SXQgYXBwZWFycyB0aGF0IHRoZSBpbXBsZW1lbnRhdGlvbiBpbiBwYXRjaCAxMCBjb25jYXRlbmF0
-ZXMgdGhlIG5ldwpzZXR0aW5ncyB0byB0aGUgb2xkIG9uZXMuIEl0IGlzIG5vdCB2ZXJ5IG5pY2Ug
-aW1vLgoKSWYgZm9yIHRoZSBsaWZlIHRpbWUgb2YgdGhlIGRvbWFpbiB5b3Ugc2V0IFggdGltZXMg
-dGhlIHNhbWUgcGFyYW1ldGVyCnlvdSBnZXQgYSBzdHJpbmcgb2YgZm9vPWJhcjEgZm9vPWJhcjIg
-aW4gdGhlIHNhdmVkIGNvbmZpZyBmaWxlLgoKVGhlcmUgaXMgcHJvYmFibHkgYSBzaW1wbGUgc29s
-dXRpb246IG1ha2UgdGhlIHBhcmFtZXRlciBsaXN0IGluIElETCBhCmtleSB2YWx1ZSBsaXN0LiBZ
-b3UgdGhlbiB1cGRhdGUgdGhlIGxpc3QgYWNjb3JkaW5nbHkuCgpXZWkuCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBYZW4tZGV2ZWwgW21haWx0bzp4
+ZW4tZGV2ZWwtYm91bmNlc0BsaXN0cy54ZW5wcm9qZWN0Lm9yZ10gT24gQmVoYWxmDQo+IE9mIEph
+biBCZXVsaWNoDQo+IFNlbnQ6IDIwIFNlcHRlbWJlciAyMDE4IDE2OjA0DQo+IFRvOiBQYXVsIER1
+cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPg0KPiBDYzogQW5kcmV3IENvb3BlciA8QW5k
+cmV3LkNvb3BlcjNAY2l0cml4LmNvbT47IEJyaWFuIFdvb2RzDQo+IDxicmlhbi53b29kc0BhbWQu
+Y29tPjsgV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT47IFN1cmF2ZWUNCj4gU3V0aGlrdWxw
+YW5pdCA8c3VyYXZlZS5zdXRoaWt1bHBhbml0QGFtZC5jb20+OyB4ZW4tZGV2ZWwgPHhlbi0NCj4g
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmc+DQo+IFN1YmplY3Q6IFJlOiBbWGVuLWRldmVsXSBb
+UEFUQ0ggNy83XSBhbWQtaW9tbXU6IGFkZCBsb29rdXBfcGFnZSBtZXRob2QgdG8NCj4gaW9tbXVf
+b3BzDQo+IA0KPiA+Pj4gT24gMjAuMDkuMTggYXQgMTY6MTEsIDxwYXVsLmR1cnJhbnRAY2l0cml4
+LmNvbT4gd3JvdGU6DQo+ID4gVGhpcyBwYXRjaCBhZGRzIGEgbmV3IG1ldGhvZCB0byB0aGUgQU1E
+IElPTU1VIGltcGxlbWVudGF0aW9uIHRvIGZpbmQgdGhlDQo+ID4gTUZOIGN1cnJlbnRseSBtYXBw
+ZWQgYnkgdGhlIHNwZWNpZmllZCBERk4uIFRoaXMgaXMgYW5hbG9nb3VzIHRvIHRoZQ0KPiA+IG1l
+dGhvZCBhZGRlZCBmb3IgVlQtZCBJT01NVSBieSBjb21taXQgNDNkMTYyMmIuDQo+IA0KPiBQbGVh
+c2UgZG9uJ3QgcHJvdmlkZSBjb21taXQgSURzIGZyb20gKHByZXN1bWFibHkpIHlvdXIgcHJpdmF0
+ZSByZXBvLA0KPiB0aGUgbW9yZSB3aXRob3V0IGEgdGl0bGUgcXVvdGVkIG5leHQgdG8gaXQuIEF0
+IGxlYXN0IHBhdGNoZXMgMSBhbmQgNg0KPiBoYXZlIHRoZSBzYW1lIGlzc3VlLg0KDQpPSy4uLiBz
+b3JyeSBnZXR0aW5nIGFoZWFkIG9mIG15c2VsZi4gTmVlZCB0byB3YWl0IGZvciB0aGUgcHJlLXJl
+cSBzZXJpZXMgdG8gZ28gaW4uDQoNCiAgUGF1bA0KDQo+IA0KPiBKYW4NCj4gDQo+IA0KPiANCj4g
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdA0KPiBYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcNCj4gaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA0KX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
