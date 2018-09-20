@@ -1,21 +1,19 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH net-next 13/22] net: xen-netback: fix return
- type of ndo_start_xmit function
-Date: Thu, 20 Sep 2018 15:05:49 +0100
-Message-ID: <20180920140549.xdowevpqjw45otjx__1228.85328387401$1537452376$gmane$org@zion.uk.xensource.com>
+From: YueHaibing <yuehaibing@huawei.com>
+Subject: [PATCH net-next 18/22] can: xilinx: fix return type of
+ ndo_start_xmit function
+Date: Thu, 20 Sep 2018 20:33:02 +0800
+Message-ID: <20180920123306.14772-19-yuehaibing__32827.1513958045$1537452466$gmane$org@huawei.com>
 References: <20180920123306.14772-1-yuehaibing@huawei.com>
- <20180920123306.14772-14-yuehaibing@huawei.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=1x7a=mc=citrix.com=prvs=794768bfb=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1g2zbu-0001XJ-IM
- for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 14:07:14 +0000
-Content-Disposition: inline
-In-Reply-To: <20180920123306.14772-14-yuehaibing@huawei.com>
+ <srs0=6zv5=mc=huawei.com=yuehaibing@srs-us1.protection.inumbo.net>)
+ id 1g2yO9-0003Ur-7A
+ for xen-devel@lists.xenproject.org; Thu, 20 Sep 2018 12:48:57 +0000
+In-Reply-To: <20180920123306.14772-1-yuehaibing@huawei.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +22,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: YueHaibing <yuehaibing@huawei.com>
-Cc: dmitry.tarnyagin@lockless.no, madalin.bucur@nxp.com, linux-mips@linux-mips.org, linux@armlinux.org.uk, pantelis.antoniou@gmail.com, kys@microsoft.com, t.sailer@alumni.ethz.ch, dev@openvswitch.org, f.fainelli@gmail.com, arvid.brodin@alten.se, michal.simek@xilinx.com, pshelar@ovn.org, m-karicheri2@ti.com, xen-devel@lists.xenproject.org, jreuter@yaina.de, sammy@sammy.net, grygorii.strashko@ti.com, w-kwok2@ti.com, haiyangz@microsoft.com, steve.glendinning@shawell.net, linux-can@vger.kernel.org, claudiu.manoil@nxp.com, paul.durrant@citrix.com, mkl@pengutronix.de, linux-hams@vger.kernel.org, linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org, wei.liu2@citrix.com, nico@fluxnic.net, netdev@vger.kernel.org, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, ralf@linux-mips.org, leoyang.li@nxp.com, hsweeten@visionengravers.com, wg@grandegger.com, devel@linuxdriv
+To: davem@davemloft.net, dmitry.tarnyagin@lockless.no, wg@grandegger.com, mkl@pengutronix.de, michal.simek@xilinx.com, hsweeten@visionengravers.com, madalin.bucur@nxp.com, pantelis.antoniou@gmail.com, claudiu.manoil@nxp.com, leoyang.li@nxp.com, linux@armlinux.org.uk, sammy@sammy.net, ralf@linux-mips.org, nico@fluxnic.net, steve.glendinning@shawell.net, f.fainelli@gmail.com, grygorii.strashko@ti.com, w-kwok2@ti.com, m-karicheri2@ti.com, t.sailer@alumni.ethz.ch, jreuter@yaina.de, kys@microsoft.com, haiyangz@microsoft.com, wei.liu2@citrix.com, paul.durrant@citrix.com, arvid.brodin@alten.se, pshelar@ovn.org
+Cc: dev@openvswitch.org, linux-mips@linux-mips.org, xen-devel@lists.xenproject.org, netdev@vger.kernel.org, linux-usb@vger.kernel.org, YueHaibing <yuehaibing@huawei.com>, linux-kernel@vger.kernel.org, linux-can@vger.kernel.org, devel@linuxdriverproject.org, linux-hams@vger.kernel.org, linux-omap@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBTZXAgMjAsIDIwMTggYXQgMDg6MzI6NTdQTSArMDgwMCwgWXVlSGFpYmluZyB3cm90
-ZToKPiBUaGUgbWV0aG9kIG5kb19zdGFydF94bWl0KCkgaXMgZGVmaW5lZCBhcyByZXR1cm5pbmcg
-YW4gJ25ldGRldl90eF90JywKPiB3aGljaCBpcyBhIHR5cGVkZWYgZm9yIGFuIGVudW0gdHlwZSwg
-c28gbWFrZSBzdXJlIHRoZSBpbXBsZW1lbnRhdGlvbiBpbgo+IHRoaXMgZHJpdmVyIGhhcyByZXR1
-cm5zICduZXRkZXZfdHhfdCcgdmFsdWUsIGFuZCBjaGFuZ2UgdGhlIGZ1bmN0aW9uCj4gcmV0dXJu
-IHR5cGUgdG8gbmV0ZGV2X3R4X3QuCj4gCj4gRm91bmQgYnkgY29jY2luZWxsZS4KPiAKPiBTaWdu
-ZWQtb2ZmLWJ5OiBZdWVIYWliaW5nIDx5dWVoYWliaW5nQGh1YXdlaS5jb20+CgpBY2tlZC1ieTog
-V2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+VGhlIG1ldGhvZCBuZG9fc3RhcnRfeG1pdCgpIGlzIGRlZmluZWQgYXMgcmV0dXJuaW5nIGFuICdu
+ZXRkZXZfdHhfdCcsCndoaWNoIGlzIGEgdHlwZWRlZiBmb3IgYW4gZW51bSB0eXBlLCBzbyBtYWtl
+IHN1cmUgdGhlIGltcGxlbWVudGF0aW9uIGluCnRoaXMgZHJpdmVyIGhhcyByZXR1cm5zICduZXRk
+ZXZfdHhfdCcgdmFsdWUsIGFuZCBjaGFuZ2UgdGhlIGZ1bmN0aW9uCnJldHVybiB0eXBlIHRvIG5l
+dGRldl90eF90LgoKRm91bmQgYnkgY29jY2luZWxsZS4KClNpZ25lZC1vZmYtYnk6IFl1ZUhhaWJp
+bmcgPHl1ZWhhaWJpbmdAaHVhd2VpLmNvbT4KLS0tCiBkcml2ZXJzL25ldC9jYW4veGlsaW54X2Nh
+bi5jIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0p
+CgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvY2FuL3hpbGlueF9jYW4uYyBiL2RyaXZlcnMvbmV0
+L2Nhbi94aWxpbnhfY2FuLmMKaW5kZXggMDQ1ZjA4NC4uNmRlNTAwNCAxMDA2NDQKLS0tIGEvZHJp
+dmVycy9uZXQvY2FuL3hpbGlueF9jYW4uYworKysgYi9kcml2ZXJzL25ldC9jYW4veGlsaW54X2Nh
+bi5jCkBAIC02MTIsNyArNjEyLDcgQEAgc3RhdGljIGludCB4Y2FuX3N0YXJ0X3htaXRfbWFpbGJv
+eChzdHJ1Y3Qgc2tfYnVmZiAqc2tiLCBzdHJ1Y3QgbmV0X2RldmljZSAqbmRldikKICAqCiAgKiBS
+ZXR1cm46IE5FVERFVl9UWF9PSyBvbiBzdWNjZXNzIGFuZCBORVRERVZfVFhfQlVTWSB3aGVuIHRo
+ZSB0eCBxdWV1ZSBpcyBmdWxsCiAgKi8KLXN0YXRpYyBpbnQgeGNhbl9zdGFydF94bWl0KHN0cnVj
+dCBza19idWZmICpza2IsIHN0cnVjdCBuZXRfZGV2aWNlICpuZGV2KQorc3RhdGljIG5ldGRldl90
+eF90IHhjYW5fc3RhcnRfeG1pdChzdHJ1Y3Qgc2tfYnVmZiAqc2tiLCBzdHJ1Y3QgbmV0X2Rldmlj
+ZSAqbmRldikKIHsKIAlzdHJ1Y3QgeGNhbl9wcml2ICpwcml2ID0gbmV0ZGV2X3ByaXYobmRldik7
+CiAJaW50IHJldDsKLS0gCjEuOC4zLjEKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
