@@ -1,17 +1,20 @@
-From: Alexandru Isaila <aisaila@bitdefender.com>
-Subject: [PATCH v2] x86/hvm: Change return error for offline
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v2] x86/hvm: Change return error for offline
  vcpus
-Date: Fri, 21 Sep 2018 10:30:30 +0300
-Message-ID: <20180921073030.32354-1-aisaila@bitdefender.com>
+Date: Fri, 21 Sep 2018 09:43:22 +0100
+Message-ID: <20180921084322.57tkffdhwqyemw7w@zion.uk.xensource.com>
+References: <20180921073030.32354-1-aisaila@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=kas4=md=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
- id 1g3FuL-0005Vx-88
- for xen-devel@lists.xenproject.org; Fri, 21 Sep 2018 07:31:21 +0000
+ <srs0=4pl1=md=citrix.com=prvs=7953d62ed=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1g3H27-0002cX-GV
+ for xen-devel@lists.xenproject.org; Fri, 21 Sep 2018 08:43:27 +0000
+Content-Disposition: inline
+In-Reply-To: <20180921073030.32354-1-aisaila@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,29 +23,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Alexandru Isaila <aisaila@bitdefender.com>, andrew.cooper3@citrix.com, wei.liu2@citrix.com, jbeulich@suse.com
+To: Alexandru Isaila <aisaila@bitdefender.com>
+Cc: xen-devel@lists.xenproject.org, wei.liu2@citrix.com, jbeulich@suse.com, andrew.cooper3@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBwYXRjaCBpcyBuZWVkZWQgaW4gb3JkZXIgdG8gaGF2ZSBhIGRpZmZlcmVudCByZXR1cm4g
-ZXJyb3IgZm9yIGludmFsaWQgdmNwdQphbmQgb2ZmbGluZSB2Y3B1IG9uIHRoZSBwZXIgdmNwdSBr
-aW5nLgoKU2lnbmVkLW9mZi1ieTogQWxleGFuZHJ1IElzYWlsYSA8YWlzYWlsYUBiaXRkZWZlbmRl
-ci5jb20+CgotLS0KQ2hhbmdlcyBzaW5jZSBWMToKCS0gQWRkIGNvbmRpdGlvbmFsIHN0YXRlbWVu
-dCBpbiBvcmRlciB0byBoYXZlIGEgZGlmZmVyZW5jZSBiZXR3ZWVuCglwZXJfdmNwdSBhbmQgcGVy
-X2RvbSByZXR1cm4gZXJyb3IuCi0tLQogeGVuL2FyY2gveDg2L2h2bS9zYXZlLmMgfCAzICsrLQog
-MSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdp
-dCBhL3hlbi9hcmNoL3g4Ni9odm0vc2F2ZS5jIGIveGVuL2FyY2gveDg2L2h2bS9zYXZlLmMKaW5k
-ZXggZDUyMDg5ODg0My4uMTc2NGZiMDkxOCAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L2h2bS9z
-YXZlLmMKKysrIGIveGVuL2FyY2gveDg2L2h2bS9zYXZlLmMKQEAgLTE2NSw3ICsxNjUsOCBAQCBp
-bnQgaHZtX3NhdmVfb25lKHN0cnVjdCBkb21haW4gKmQsIHVuc2lnbmVkIGludCB0eXBlY29kZSwg
-dW5zaWduZWQgaW50IGluc3RhbmNlLAogICAgIGlmICggKHJ2ID0gaHZtX3NyX2hhbmRsZXJzW3R5
-cGVjb2RlXS5zYXZlKHYsICZjdHh0KSkgIT0gMCApCiAgICAgICAgIHByaW50ayhYRU5MT0dfR19F
-UlIgIkhWTSVkIHNhdmU6IGZhaWxlZCB0byBzYXZlIHR5cGUgJSJQUkl1MTYiICglZClcbiIsCiAg
-ICAgICAgICAgICAgICBkLT5kb21haW5faWQsIHR5cGVjb2RlLCBydik7Ci0gICAgZWxzZSBpZiAo
-IHJ2ID0gLUVOT0VOVCwgY3R4dC5jdXIgPj0gc2l6ZW9mKCpkZXNjKSApCisgICAgZWxzZSBpZiAo
-IHJ2ID0gaHZtX3NyX2hhbmRsZXJzW3R5cGVjb2RlXS5raW5kID09IEhWTVNSX1BFUl9WQ1BVID8K
-KyAgICAgICAgICAgICAgLUVOT0RBVEEgOiAtRU5PRU5ULCBjdHh0LmN1ciA+PSBzaXplb2YoKmRl
-c2MpICkKICAgICB7CiAgICAgICAgIHVpbnQzMl90IG9mZjsKIAotLSAKMi4xNy4xCgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gRnJpLCBTZXAgMjEsIDIwMTggYXQgMTA6MzA6MzBBTSArMDMwMCwgQWxleGFuZHJ1IElzYWls
+YSB3cm90ZToKPiBUaGlzIHBhdGNoIGlzIG5lZWRlZCBpbiBvcmRlciB0byBoYXZlIGEgZGlmZmVy
+ZW50IHJldHVybiBlcnJvciBmb3IgaW52YWxpZCB2Y3B1Cj4gYW5kIG9mZmxpbmUgdmNwdSBvbiB0
+aGUgcGVyIHZjcHUga2luZy4KClNvcnJ5LCBJIGNhbid0IHBhcnNlIHRoaXMgc2VudGVuY2UuIFdo
+YXQgaXMgInBlciB2Y3B1IGtpbmciPwoKPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbGV4YW5kcnUgSXNh
+aWxhIDxhaXNhaWxhQGJpdGRlZmVuZGVyLmNvbT4KPiAKPiAtLS0KPiBDaGFuZ2VzIHNpbmNlIFYx
+Ogo+IAktIEFkZCBjb25kaXRpb25hbCBzdGF0ZW1lbnQgaW4gb3JkZXIgdG8gaGF2ZSBhIGRpZmZl
+cmVuY2UgYmV0d2Vlbgo+IAlwZXJfdmNwdSBhbmQgcGVyX2RvbSByZXR1cm4gZXJyb3IuCj4gLS0t
+Cj4gIHhlbi9hcmNoL3g4Ni9odm0vc2F2ZS5jIHwgMyArKy0KPiAgMSBmaWxlIGNoYW5nZWQsIDIg
+aW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94
+ODYvaHZtL3NhdmUuYyBiL3hlbi9hcmNoL3g4Ni9odm0vc2F2ZS5jCj4gaW5kZXggZDUyMDg5ODg0
+My4uMTc2NGZiMDkxOCAxMDA2NDQKPiAtLS0gYS94ZW4vYXJjaC94ODYvaHZtL3NhdmUuYwo+ICsr
+KyBiL3hlbi9hcmNoL3g4Ni9odm0vc2F2ZS5jCj4gQEAgLTE2NSw3ICsxNjUsOCBAQCBpbnQgaHZt
+X3NhdmVfb25lKHN0cnVjdCBkb21haW4gKmQsIHVuc2lnbmVkIGludCB0eXBlY29kZSwgdW5zaWdu
+ZWQgaW50IGluc3RhbmNlLAo+ICAgICAgaWYgKCAocnYgPSBodm1fc3JfaGFuZGxlcnNbdHlwZWNv
+ZGVdLnNhdmUodiwgJmN0eHQpKSAhPSAwICkKPiAgICAgICAgICBwcmludGsoWEVOTE9HX0dfRVJS
+ICJIVk0lZCBzYXZlOiBmYWlsZWQgdG8gc2F2ZSB0eXBlICUiUFJJdTE2IiAoJWQpXG4iLAo+ICAg
+ICAgICAgICAgICAgICBkLT5kb21haW5faWQsIHR5cGVjb2RlLCBydik7Cj4gLSAgICBlbHNlIGlm
+ICggcnYgPSAtRU5PRU5ULCBjdHh0LmN1ciA+PSBzaXplb2YoKmRlc2MpICkKPiArICAgIGVsc2Ug
+aWYgKCBydiA9IGh2bV9zcl9oYW5kbGVyc1t0eXBlY29kZV0ua2luZCA9PSBIVk1TUl9QRVJfVkNQ
+VSA/Cj4gKyAgICAgICAgICAgICAgLUVOT0RBVEEgOiAtRU5PRU5ULCBjdHh0LmN1ciA+PSBzaXpl
+b2YoKmRlc2MpICkKPiAgICAgIHsKPiAgICAgICAgICB1aW50MzJfdCBvZmY7Cj4gIAo+IC0tIAo+
+IDIuMTcuMQo+IAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
