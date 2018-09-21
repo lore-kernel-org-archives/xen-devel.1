@@ -1,17 +1,21 @@
-From: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH] x86/mm: don't crash on unknown memory types in
- page_get_ram_type
-Date: Fri, 21 Sep 2018 12:59:53 +0200
-Message-ID: <20180921105953.3066-1-roger.pau@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v3 6/9] x86/genapic: patch indirect calls to
+ direct ones
+Date: Fri, 21 Sep 2018 12:03:38 +0100
+Message-ID: <20180921110338.n3b46fympofoupfk@zion.uk.xensource.com>
+References: <5B97C28802000078001E7456@prv1-mh.provo.novell.com>
+ <5B97C4A502000078001E748B@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gjdu=md=citrix.com=prvs=7959a86e1=roger.pau@srs-us1.protection.inumbo.net>)
- id 1g3JB8-0007Wa-LD
- for xen-devel@lists.xenproject.org; Fri, 21 Sep 2018 11:00:54 +0000
+ <srs0=4pl1=md=citrix.com=prvs=7953d62ed=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1g3JDp-0007lq-Iu
+ for xen-devel@lists.xenproject.org; Fri, 21 Sep 2018 11:03:41 +0000
+Content-Disposition: inline
+In-Reply-To: <5B97C4A502000078001E748B@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,23 +24,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SW5zdGVhZCByZXR1cm4gUkFNX1RZUEVfVU5LTk9XTi4KClJlcG9ydGVkLWJ5OiBSYXp2YW4gQ29q
-b2NhcnUgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+ClNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBh
-dSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgotLS0KQ2M6IEphbiBCZXVsaWNoIDxqYmV1
-bGljaEBzdXNlLmNvbT4KQ2M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
-b20+CkNjOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgpDYzogUmF6dmFuIENvam9jYXJ1
-IDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29tPgotLS0KIHhlbi9hcmNoL3g4Ni9tbS5jIHwgMiAr
-LQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0t
-Z2l0IGEveGVuL2FyY2gveDg2L21tLmMgYi94ZW4vYXJjaC94ODYvbW0uYwppbmRleCA5NTVmZjBi
-ZDc4Li43MzczZjQxNjdhIDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvbW0uYworKysgYi94ZW4v
-YXJjaC94ODYvbW0uYwpAQCAtNDY1LDcgKzQ2NSw3IEBAIHVuc2lnbmVkIGludCBwYWdlX2dldF9y
-YW1fdHlwZShtZm5fdCBtZm4pCiAgICAgICAgICAgICBicmVhazsKIAogICAgICAgICBkZWZhdWx0
-OgotICAgICAgICAgICAgQVNTRVJUX1VOUkVBQ0hBQkxFKCk7CisgICAgICAgICAgICB0eXBlIHw9
-IFJBTV9UWVBFX1VOS05PV047CiAgICAgICAgIH0KICAgICB9CiAKLS0gCjIuMTkuMAoKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCBTZXAgMTEsIDIwMTggYXQgMDc6MzU6MzNBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gRm9yIChJIGhvcGUpIG9idmlvdXMgcmVhc29ucyBvbmx5IHRoZSBvbmVzIHVzZWQgYXQg
+cnVudGltZSBnZXQKPiBjb252ZXJ0ZWQuCj4gCj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2gg
+PGpiZXVsaWNoQHN1c2UuY29tPgo+IC0tLQo+IHYyOiBEcm9wIG9wZW4tY29kZWQgbnVtYmVycyBm
+cm9tIG1hY3JvIGludm9jYXRpb25zLgo+IAo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9zbXAuYwo+ICsr
+KyBiL3hlbi9hcmNoL3g4Ni9zbXAuYwo+IEBAIC0yOSwxMiArMjksMTIgQEAKPiAgCj4gIHZvaWQg
+c2VuZF9JUElfbWFzayhjb25zdCBjcHVtYXNrX3QgKm1hc2ssIGludCB2ZWN0b3IpCj4gIHsKPiAt
+ICAgIGdlbmFwaWMuc2VuZF9JUElfbWFzayhtYXNrLCB2ZWN0b3IpOwo+ICsgICAgYWx0ZXJuYXRp
+dmVfdmNhbGwoZ2VuYXBpYy5zZW5kX0lQSV9tYXNrLCBtYXNrLCB2ZWN0b3IpOwo+ICB9Cj4gIAo+
+ICB2b2lkIHNlbmRfSVBJX3NlbGYoaW50IHZlY3RvcikKPiAgewo+IC0gICAgZ2VuYXBpYy5zZW5k
+X0lQSV9zZWxmKHZlY3Rvcik7Cj4gKyAgICBhbHRlcm5hdGl2ZV92Y2FsbChnZW5hcGljLnNlbmRf
+SVBJX3NlbGYsIHZlY3Rvcik7Cj4gIH0KPiAgCj4gIC8qCj4gLS0tIGEveGVuL2luY2x1ZGUvYXNt
+LXg4Ni9tYWNoLWdlbmVyaWMvbWFjaF9hcGljLmgKPiArKysgYi94ZW4vaW5jbHVkZS9hc20teDg2
+L21hY2gtZ2VuZXJpYy9tYWNoX2FwaWMuaAo+IEBAIC0xNSw4ICsxNSwxOCBAQAo+ICAjZGVmaW5l
+IFRBUkdFVF9DUFVTICgoY29uc3QgdHlwZW9mKGNwdV9vbmxpbmVfbWFwKSAqKSZjcHVfb25saW5l
+X21hcCkKPiAgI2RlZmluZSBpbml0X2FwaWNfbGRyIChnZW5hcGljLmluaXRfYXBpY19sZHIpCj4g
+ICNkZWZpbmUgY2x1c3RlcmVkX2FwaWNfY2hlY2sgKGdlbmFwaWMuY2x1c3RlcmVkX2FwaWNfY2hl
+Y2spCj4gLSNkZWZpbmUgY3B1X21hc2tfdG9fYXBpY2lkIChnZW5hcGljLmNwdV9tYXNrX3RvX2Fw
+aWNpZCkKPiAtI2RlZmluZSB2ZWN0b3JfYWxsb2NhdGlvbl9jcHVtYXNrKGNwdSkgKGdlbmFwaWMu
+dmVjdG9yX2FsbG9jYXRpb25fY3B1bWFzayhjcHUpKQo+ICsjZGVmaW5lIGNwdV9tYXNrX3RvX2Fw
+aWNpZChtYXNrKSAoeyBcCj4gKwkvKiBcCj4gKwkgKiBUaGVyZSBhcmUgYSBudW1iZXIgb2YgcGxh
+Y2VzIHdoZXJlIHRoZSBhZGRyZXNzIG9mIGEgbG9jYWwgdmFyaWFibGUgXAo+ICsJICogZ2V0cyBw
+YXNzZWQgaGVyZS4gVGhlIHVzZSBvZiA/OiBpbiBhbHRlcm5hdGl2ZV9jYWxsPE4+KCkgdHJpZ2dl
+cnMgYW4gXAo+ICsJICogImFkZHJlc3Mgb2YgLi4uIGlzIGFsd2F5cyB0cnVlIiB3YXJuaW5nIGlu
+IHN1Y2ggYSBjYXNlIHdpdGggYXQgbGVhc3QgXAo+ICsJICogZ2NjIDcgYW5kIDguIEhlbmNlIHRo
+ZSBzZWVtaW5nbHkgcG9pbnRsZXNzIGxvY2FsIHZhcmlhYmxlIGhlcmUuIFwKPiArCSAqLyBcCgpJ
+cyB0aGlzIHN0aWxsIG5lZWRlZCBnaXZlbiB5b3UgaGF2ZSBicm91Z2h0IGJhY2sgdGhlIG1pZGRs
+ZSBvcGVyYW5kIGluID86IGluCnBhdGNoIDE/CgpXZWkuCgo+ICsJY29uc3QgY3B1bWFza190ICpt
+XyA9IChtYXNrKTsgXAo+ICsJYWx0ZXJuYXRpdmVfY2FsbChnZW5hcGljLmNwdV9tYXNrX3RvX2Fw
+aWNpZCwgbV8pOyBcCj4gK30pCj4gKyNkZWZpbmUgdmVjdG9yX2FsbG9jYXRpb25fY3B1bWFzayhj
+cHUpIFwKPiArCWFsdGVybmF0aXZlX2NhbGwoZ2VuYXBpYy52ZWN0b3JfYWxsb2NhdGlvbl9jcHVt
+YXNrLCBjcHUpCj4gIAo+ICBzdGF0aWMgaW5saW5lIHZvaWQgZW5hYmxlX2FwaWNfbW9kZSh2b2lk
+KQo+ICB7Cj4gCj4gCj4gCj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
