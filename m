@@ -1,19 +1,21 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: Current staging crashes on boot on an AMD EPYC 7251
-Date: Fri, 21 Sep 2018 12:15:45 +0200
-Message-ID: <20180921101545.th2ncxhjg4qk6rfu@mac.bytemobile.com>
-References: <79af1936-5093-d101-d3a5-2abd444551e8@bitdefender.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 6/7] vtd: change lookup_page failure
+ semantics
+Date: Fri, 21 Sep 2018 04:16:30 -0600
+Message-ID: <5BA4C4FE02000078001EA795@prv1-mh.provo.novell.com>
+References: <20180920141149.1643-1-paul.durrant@citrix.com>
+ <20180920141149.1643-7-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gjdu=md=citrix.com=prvs=7959a86e1=roger.pau@srs-us1.protection.inumbo.net>)
- id 1g3ITh-0001KT-AM
- for xen-devel@lists.xenproject.org; Fri, 21 Sep 2018 10:16:01 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=q3to=md=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1g3IUE-0001NU-QX
+ for xen-devel@lists.xenproject.org; Fri, 21 Sep 2018 10:16:34 +0000
+In-Reply-To: <20180920141149.1643-7-paul.durrant@citrix.com>
 Content-Disposition: inline
-In-Reply-To: <79af1936-5093-d101-d3a5-2abd444551e8@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,25 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: xen-devel@lists.xenproject.org, George Dunlap <george.dunlap@citrix.com>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Kevin Tian <kevin.tian@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBTZXAgMjEsIDIwMTggYXQgMTI6NDU6MThQTSArMDMwMCwgUmF6dmFuIENvam9jYXJ1
-IHdyb3RlOgo+IEhlbGxvLAo+IAo+IFdoaWxlIGRvaW5nIG15IGJlc3QgdG8gbWFrZSBzdXJlIHdo
-YXQgSSB1bmRlcnN0YW5kIHRvIGJlIEdlb3JnZSdzCj4gcHJvcG9zZWQgY2hhbmdlcyBmb3IgdGhl
-IGFsdHAybSBzZXJpZXMgSSd2ZSB0cmllZCB0byBib290IFhlbiBzdGFnaW5nIG9uCj4gYW4gQU1E
-IGhvc3QsIGJ1dCBpdCBjcmFzaGVzIGluIGFuIHVucmVsYXRlZCBwbGFjZSAoSSd2ZSB0ZXN0ZWQg
-dGhpcyBieQo+IHN0YXNoaW5nIG15IGNoYW5nZXMgYW5kIGJvb3RpbmcgYSAidmFuaWxsYSIgc3Rh
-Z2luZyk6CgpDYW4geW91IGFwcGx5IHRoZSBmb2xsb3dpbmcgZGVidWcgcGF0Y2ggYW5kIHBhc3Rl
-IHRoZSBmdWxsIGJvb3QgbG9nPwoKVGhhbmtzLCBSb2dlci4KLS0tODwtLS0KZGlmZiAtLWdpdCBh
-L3hlbi9hcmNoL3g4Ni9tbS5jIGIveGVuL2FyY2gveDg2L21tLmMKaW5kZXggOTU1ZmYwYmQ3OC4u
-MzY0ODY4MGQ1NyAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L21tLmMKKysrIGIveGVuL2FyY2gv
-eDg2L21tLmMKQEAgLTQ2NSw2ICs0NjUsOCBAQCB1bnNpZ25lZCBpbnQgcGFnZV9nZXRfcmFtX3R5
-cGUobWZuX3QgbWZuKQogICAgICAgICAgICAgYnJlYWs7CiAKICAgICAgICAgZGVmYXVsdDoKK3By
-aW50aygiWyUjbHgsICUjbHgpIHR5cGU6ICV1XG4iLCBlODIwLm1hcFtpXS5hZGRyLAorICAgICAg
-IGU4MjAubWFwW2ldLmFkZHIgKyBlODIwLm1hcFtpXS5zaXplLCBlODIwLm1hcFtpXS50eXBlKTsK
-ICAgICAgICAgICAgIEFTU0VSVF9VTlJFQUNIQUJMRSgpOwogICAgICAgICB9CiAgICAgfQoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDIwLjA5LjE4IGF0IDE2OjExLCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
+Ogo+IENvbW1pdCA0M2QxNjIyYiAidnRkOiBhZGQgbG9va3VwX3BhZ2UgbWV0aG9kIHRvIGlvbW11
+X29wcyIgYWRkZWQgYQo+IGxvb2t1cCBtZXRob2QgaW4gdG8gdGhlIFZULWQgSU9NTVUgaW1wbGVt
+ZW50YXRpb24uCgpXaXRoIHRoaXMgbm90IGhhdmluZyBnb25lIGluIHlldCwgaXMgdGhlcmUgYW55
+IHJlYXNvbiBub3QgdG8gbWFrZSB0aGUKYWRqdXN0bWVudCByaWdodCB0aGVyZT8KCkphbgoKCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
