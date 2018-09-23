@@ -1,17 +1,17 @@
 From: <gregkh@linuxfoundation.org>
 Subject: Patch "x86/EISA: Don't probe EISA bus for Xen PV
- guests" has been added to the 4.14-stable tree
-Date: Sun, 23 Sep 2018 21:33:17 +0200
-Message-ID: <1537731197165231@kroah.com>
+ guests" has been added to the 4.18-stable tree
+Date: Sun, 23 Sep 2018 21:33:37 +0200
+Message-ID: <1537731217235174@kroah.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=+hbl=mf=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1g4A9u-00068A-QF
- for xen-devel@lists.xenproject.org; Sun, 23 Sep 2018 19:35:10 +0000
+ id 1g4ACa-0006Ez-7w
+ for xen-devel@lists.xenproject.org; Sun, 23 Sep 2018 19:37:56 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,11 +26,11 @@ List-Id: xen-devel@lists.xenproject.org
 
 ClRoaXMgaXMgYSBub3RlIHRvIGxldCB5b3Uga25vdyB0aGF0IEkndmUganVzdCBhZGRlZCB0aGUg
 cGF0Y2ggdGl0bGVkCgogICAgeDg2L0VJU0E6IERvbid0IHByb2JlIEVJU0EgYnVzIGZvciBYZW4g
-UFYgZ3Vlc3RzCgp0byB0aGUgNC4xNC1zdGFibGUgdHJlZSB3aGljaCBjYW4gYmUgZm91bmQgYXQ6
+UFYgZ3Vlc3RzCgp0byB0aGUgNC4xOC1zdGFibGUgdHJlZSB3aGljaCBjYW4gYmUgZm91bmQgYXQ6
 CiAgICBodHRwOi8vd3d3Lmtlcm5lbC5vcmcvZ2l0Lz9wPWxpbnV4L2tlcm5lbC9naXQvc3RhYmxl
 L3N0YWJsZS1xdWV1ZS5naXQ7YT1zdW1tYXJ5CgpUaGUgZmlsZW5hbWUgb2YgdGhlIHBhdGNoIGlz
 OgogICAgIHg4Ni1laXNhLWRvbi10LXByb2JlLWVpc2EtYnVzLWZvci14ZW4tcHYtZ3Vlc3RzLnBh
-dGNoCmFuZCBpdCBjYW4gYmUgZm91bmQgaW4gdGhlIHF1ZXVlLTQuMTQgc3ViZGlyZWN0b3J5LgoK
+dGNoCmFuZCBpdCBjYW4gYmUgZm91bmQgaW4gdGhlIHF1ZXVlLTQuMTggc3ViZGlyZWN0b3J5LgoK
 SWYgeW91LCBvciBhbnlvbmUgZWxzZSwgZmVlbHMgaXQgc2hvdWxkIG5vdCBiZSBhZGRlZCB0byB0
 aGUgc3RhYmxlIHRyZWUsCnBsZWFzZSBsZXQgPHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmc+IGtub3cg
 YWJvdXQgaXQuCgoKRnJvbSA2YTkyYjExMTY5YTY1YjNmOGNjNTEyYzc1YTI1MmNiZDBkMDk2YmEw
@@ -61,10 +61,10 @@ KCdJJzw8OCkgKyAoJ1MnPDwxNikgKyAoJ0EnPDwyNCkpCisJcCA9IGlvcmVtYXAoMHgwRkZGRDks
 IDQpOworCWlmIChwICYmIHJlYWRsKHApID09ICdFJyArICgnSScgPDwgOCkgKyAoJ1MnIDw8IDE2
 KSArICgnQScgPDwgMjQpKQogCQlFSVNBX2J1cyA9IDE7CiAJaW91bm1hcChwKTsKIAlyZXR1cm4g
 MDsKCgpQYXRjaGVzIGN1cnJlbnRseSBpbiBzdGFibGUtcXVldWUgd2hpY2ggbWlnaHQgYmUgZnJv
-bSBib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbSBhcmUKCnF1ZXVlLTQuMTQveGVuLW5ldGZyb250
-LWZpeC13YWl0aW5nLWZvci14ZW5idXMtc3RhdGUtY2hhbmdlLnBhdGNoCnF1ZXVlLTQuMTQveDg2
+bSBib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbSBhcmUKCnF1ZXVlLTQuMTgveGVuLW5ldGZyb250
+LWZpeC13YWl0aW5nLWZvci14ZW5idXMtc3RhdGUtY2hhbmdlLnBhdGNoCnF1ZXVlLTQuMTgveDg2
 LWVpc2EtZG9uLXQtcHJvYmUtZWlzYS1idXMtZm9yLXhlbi1wdi1ndWVzdHMucGF0Y2gKcXVldWUt
-NC4xNC94ODYtbW0tcHRpLWFkZC1hbi1vdmVyZmxvdy1jaGVjay10by1wdGlfY2xvbmVfcG1kcy5w
+NC4xOC94ODYtbW0tcHRpLWFkZC1hbi1vdmVyZmxvdy1jaGVjay10by1wdGlfY2xvbmVfcG1kcy5w
 YXRjaAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
 LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
 Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
