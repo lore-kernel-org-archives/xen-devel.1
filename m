@@ -1,17 +1,17 @@
-From: Mr Oxide <mroxide88@gmail.com>
-Subject: Compatibility of the Quadro P4000
-Date: Sun, 23 Sep 2018 20:34:26 -0500
-Message-ID: <CAAhLXE7kUCnifyo+jJm-MwrhnSMWrXHvhb1nWgpNt5HcfcGjmw@mail.gmail.com>
+From: Nicolai Stange <nstange@suse.de>
+Subject: [PATCH] xen: x86: make asm/xen/events.h include
+ xen/xen.h
+Date: Sun, 23 Sep 2018 19:38:02 +0200
+Message-ID: <20180923173802.10339-1-nstange__3819.61550233445$1537765453$gmane$org@suse.de>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2125123816354256630=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=izeb=mg=gmail.com=mroxide88@srs-us1.protection.inumbo.net>)
- id 1g4Fln-0004uY-Eb
- for xen-devel@lists.xenproject.org; Mon, 24 Sep 2018 01:34:39 +0000
-Received: by mail-ed1-x52a.google.com with SMTP id j62-v6so14919117edd.7
- for <xen-devel@lists.xenproject.org>; Sun, 23 Sep 2018 18:34:38 -0700 (PDT)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=yc+k=mf=suse.de=nstange@srs-us1.protection.inumbo.net>)
+ id 1g48Kj-0006W8-5f
+ for xen-devel@lists.xenproject.org; Sun, 23 Sep 2018 17:38:13 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,39 +20,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Thomas Gleixner <tglx@linutronix.de>
+Cc: Juergen Gross <jgross@suse.com>, Nicolai Stange <nstange@suse.de>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, x86@kernel.org, linux-kernel@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, "H. Peter Anvin" <hpa@zytor.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, David Woodhouse <dwmw@amazon.co.uk>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2125123816354256630==
-Content-Type: multipart/alternative; boundary="000000000000004c47057693feeb"
-
---000000000000004c47057693feeb
-Content-Type: text/plain; charset="UTF-8"
-
-Hi, I am wondering about the compatibility of the Quadro P4000 with xen.
-Especially the version of xen being used in Qubes os currently. I've tried
-googling this with no luck at all.
-
---000000000000004c47057693feeb
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">Hi, I am wondering about the compatibilit=
-y of the=C2=A0Quadro P4000 with xen. Especially the version of xen being us=
-ed in Qubes os currently. I&#39;ve tried googling this with no luck at all.=
-</div></div>
-
---000000000000004c47057693feeb--
-
-
---===============2125123816354256630==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2125123816354256630==--
+YXJjaC94ODYvaW5jbHVkZS9hc20veGVuL2V2ZW50cy5oIHJlZmVyZW5jZXMgeGVuX2h2bV9kb21h
+aW4oKSBmcm9tIHRoZQppbmxpbmVkIHhlbl9zdXBwb3J0X2V2dGNobl9yZWJpbmQoKS4KCnhlbl9o
+dm1fZG9tYWluKCkgZ2V0cyAjZGVmaW5lZCBpbiBpbmNsdWRlL3hlbi94ZW4uaCBhbmQKYXJjaC94
+ODYvaW5jbHVkZS9hc20veGVuL2V2ZW50cy5oIGRvZXNuJ3QgaW5jbHVkZSB0aGF0LgoKT24gY3Vy
+cmVudCBMaW51cycgdHJlZSwgZXZlcnl0aGluZyB3b3JrcyBmaW5lIHRob3VnaCwgYmVjYXVzZSBv
+ZiB0aGUKZm9sbG93aW5nIGluY2x1c2lvbiBjaGFpbgoKICBpbmNsdWRlL3hlbi9ldmVudHMuaAog
+ICBhcmNoL3g4Ni9pbmNsdWRlL2FzbS94ZW4vaHlwZXJjYWxsLmgKICAgIGFyY2gveDg2L2luY2x1
+ZGUvYXNtL3BndGFibGUuaAogICAgIGFyY2gveDg2L2luY2x1ZGUvYXNtL2ZpeG1hcC5oCiAgICAg
+IGFyY2gveDg2L2luY2x1ZGUvYXNtL2FjcGkuaAogICAgICAgYXJjaC94ODYvaW5jbHVkZS9hc20v
+cmVhbG1vZGUuaAogICAgICAgIGFyY2gveDg2L2luY2x1ZGUvYXNtL2lvLmgKICAgICAgICAgaW5j
+bHVkZS94ZW4veGVuLmgKICAgYXNtL3hlbi9ldmVudHMuaAoKd2hpY2ggaGFzIGJlZW4gZXN0YWJs
+aXNoZWQgaW4gY29tbWl0IGY5OTEzNzZlNDQ0YSAoIng4Ni9tbTogQ29ycmVjdCBmaXhtYXAKaGVh
+ZGVyIHVzYWdlIG9uIGFkYXB0YWJsZSBNT0RVTEVTX0VORCIpIHJlc3AuIGNvbW1pdCBlZjM3YmMz
+NjE0NDIKKCJ4ODYvaGVhZGVyczogU2ltcGxpZnkgYXNtL2ZpeG1hcC5oIGluY2x1c2lvbiBpbnRv
+IGFzbS9wZ3RhYmxlKi5oIikuCgpTdGFibGUgNC45IGxhY2tzIGJvdGggb2YgdGhlc2UgYW5kIGJh
+Y2twb3J0aW5nIHRoZW0gd291bGRuJ3QgcmVhbGx5IG1ha2UKc2Vuc2UuCgpJbiBjb25zZXF1ZW5j
+ZSwgdGhlIGJhY2twb3J0IG9mIGNvbW1pdCA0NDdhZTMxNjY3MDIgKCJ4ODY6IERvbid0IGluY2x1
+ZGUKbGludXgvaXJxLmggZnJvbSBhc20vaGFyZGlycS5oIikgdG8gc3RhYmxlIDQuOSBicm9rZSBj
+b21waWxhdGlvbiB3aXRoCmVycm9ycyBsaWtlCgogIEluIGZpbGUgaW5jbHVkZWQgZnJvbSBpbmNs
+dWRlL3hlbi9ldmVudHMuaDoxMTowLAogICAgICAgICAgICAgICAgICAgZnJvbSBhcmNoL3g4Ni94
+ZW4vaXJxLmM6OToKICBhcmNoL3g4Ni9pbmNsdWRlL2FzbS94ZW4vZXZlbnRzLmg6IEluIGZ1bmN0
+aW9uCiAgICDigJh4ZW5fc3VwcG9ydF9ldnRjaG5fcmViaW5k4oCZOgogIGFyY2gveDg2L2luY2x1
+ZGUvYXNtL3hlbi9ldmVudHMuaDozMToyOiBlcnJvcjogaW1wbGljaXQgZGVjbGFyYXRpb24gb2YK
+ICAgIGZ1bmN0aW9uIOKAmHhlbl9odm1fZG9tYWlu4oCZIFstV2Vycm9yPWltcGxpY2l0LWZ1bmN0
+aW9uLWRlY2xhcmF0aW9uXQogICAgcmV0dXJuICgheGVuX2h2bV9kb21haW4oKSB8fCB4ZW5faGF2
+ZV92ZWN0b3JfY2FsbGJhY2spOwogICAgXgoKRmFjaWxpdGF0ZSBiYWNrcG9ydGluZyB0byB0aGUg
+c3RhYmxlIHRyZWVzIGJ5IG1ha2luZwphcmNoL3g4Ni9pbmNsdWRlL2FzbS94ZW4vZXZlbnRzLmgg
+aW5jbHVkZSB4ZW4veGVuLmguCgpGaXhlczogNDQ3YWUzMTY2NzAyICgieDg2OiBEb24ndCBpbmNs
+dWRlIGxpbnV4L2lycS5oIGZyb20gYXNtL2hhcmRpcnEuaCIpCkNjOiA8c3RhYmxlQHZnZXIua2Vy
+bmVsLm9yZz4gIyA0LjkueApTaWduZWQtb2ZmLWJ5OiBOaWNvbGFpIFN0YW5nZSA8bnN0YW5nZUBz
+dXNlLmRlPgotLS0KIGFyY2gveDg2L2luY2x1ZGUvYXNtL3hlbi9ldmVudHMuaCB8IDIgKysKIDEg
+ZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9hcmNoL3g4Ni9pbmNs
+dWRlL2FzbS94ZW4vZXZlbnRzLmggYi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS94ZW4vZXZlbnRzLmgK
+aW5kZXggZDM4MzE0MGUxZGM4Li4wNjhkOWIwNjdjODMgMTAwNjQ0Ci0tLSBhL2FyY2gveDg2L2lu
+Y2x1ZGUvYXNtL3hlbi9ldmVudHMuaAorKysgYi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS94ZW4vZXZl
+bnRzLmgKQEAgLTIsNiArMiw4IEBACiAjaWZuZGVmIF9BU01fWDg2X1hFTl9FVkVOVFNfSAogI2Rl
+ZmluZSBfQVNNX1g4Nl9YRU5fRVZFTlRTX0gKIAorI2luY2x1ZGUgPHhlbi94ZW4uaD4KKwogZW51
+bSBpcGlfdmVjdG9yIHsKIAlYRU5fUkVTQ0hFRFVMRV9WRUNUT1IsCiAJWEVOX0NBTExfRlVOQ1RJ
+T05fVkVDVE9SLAotLSAKMi4xMy43CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
