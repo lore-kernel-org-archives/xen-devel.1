@@ -1,22 +1,29 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH v2 2/6] test/depriv: Add a tool to check
- process-level depriv
-Date: Mon, 24 Sep 2018 15:45:08 +0100
-Message-ID: <7968eca4-67c1-58f5-5ea8-7480f9d6312b@citrix.com>
-References: <20180921170428.13771-1-george.dunlap@citrix.com>
- <20180921170428.13771-2-george.dunlap@citrix.com>
- <23464.49955.726494.382397@mariner.uk.xensource.com>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Subject: Re: [PATCH] x86/altp2m: clean up
+ p2m_{get/set}_suppress_ve()
+Date: Mon, 24 Sep 2018 09:05:28 -0600
+Message-ID: <CABfawhmCsx9-kUQNSNh4eqM=SPmVvNAN5C3nfjDQsqwUWi67kQ@mail.gmail.com>
+References: <1537722262-6737-1-git-send-email-rcojocaru@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=t0lp=mg=citrix.com=prvs=798996f71=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1g4S72-0001Li-Ij
- for xen-devel@lists.xenproject.org; Mon, 24 Sep 2018 14:45:24 +0000
-In-Reply-To: <23464.49955.726494.382397@mariner.uk.xensource.com>
-Content-Language: en-US
+ <srs0=sjmo=mg=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
+ id 1g4SR6-0002qY-Vq
+ for xen-devel@lists.xenproject.org; Mon, 24 Sep 2018 15:06:09 +0000
+Received: by mail-ed1-f68.google.com with SMTP id u23so7451975edx.10
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Sep 2018 08:06:07 -0700 (PDT)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com.
+ [209.85.128.51])
+ by smtp.gmail.com with ESMTPSA id 25-v6sm7956610edz.45.2018.09.24.08.06.05
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 24 Sep 2018 08:06:05 -0700 (PDT)
+Received: by mail-wm1-f51.google.com with SMTP id b19-v6so10095706wme.3
+ for <xen-devel@lists.xenproject.org>; Mon, 24 Sep 2018 08:06:05 -0700 (PDT)
+In-Reply-To: <1537722262-6737-1-git-send-email-rcojocaru@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,34 +32,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Lagerwall <ross.lagerwall@citrix.com>
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDkvMjQvMjAxOCAxMTo1NyBBTSwgSWFuIEphY2tzb24gd3JvdGU6Cj4gR2VvcmdlIER1bmxh
-cCB3cml0ZXMgKCJbUEFUQ0ggdjIgMi82XSB0ZXN0L2RlcHJpdjogQWRkIGEgdG9vbCB0byBjaGVj
-ayBwcm9jZXNzLWxldmVsIGRlcHJpdiIpOgo+PiBBZGQgYSB0b29sIHRvIGNoZWNrIHdoZXRoZXIg
-dGhlIHZhcmlvdXMgcHJvY2Vzcy1sZXZlbCBkZXByaXZpbGVnaW5nCj4+IG9wZXJhdGlvbnMgaGF2
-ZSBhY3R1YWxseSB0YWtlbiBwbGFjZSBvbiB0aGUgcHJvY2Vzcy4KPiAuLi4KPj4gKyMgRXhhbXBs
-ZSBpbnB1dDoKPj4gKyMgVWlkOgkxMTkzCTExOTMJMTE5MwkxMTkzCj4+ICtpbnB1dD0kKGdyZXAg
-VWlkIC9wcm9jLyRkbXBpZC9zdGF0dXMpCj4gCj4gQXJlIHlvdSBzdXJlIHRoaXMgZ3JlcCBkb2Vz
-IG5vdCBuZWVkIHRvIGJlIG1vcmUgc3BlY2lmaWMgPyAgV2hhdCBpZiBhCj4gbmV3IHRoaW5nIGdl
-dHMgYWRkZWQsIEkgZG9uJ3Qga25vdywKPiAgIFNwb25nbGVmbGVlcC1VaWQtQmxhcmtpbmc6IHll
-cyA0MgoKWWVzLCBpdCBwcm9iYWJseSBzaG91bGQgYmUgbW9yZSBzcGVjaWZpYy4KCj4+ICtpZiBb
-WyAiJGlucHV0IiA9fiBeVWlkOltbOnNwYWNlOl1dKihbMC05XSspW1s6c3BhY2U6XV0qKFswLTld
-KylbWzpzcGFjZTpdXSooWzAtOV0rKVtbOnNwYWNlOl1dKihbMC05XSspJCBdXSA7IHRoZW4KPiAK
-PiBJIHRoaW5rIEkgbWFkZSBtb3N0IG9mIG15IGNvbW1lbnRzIGFib3V0IHRoaXMgc2NyaXB0IGlu
-IG15IG90aGVyCj4gcmV2aWV3IGNvbW1lbnRzLgo+IAo+IEJ1dCwgc3BlY2lmaWNhbGx5LCBoZXJl
-OiBpZiB5b3UgYXJlIGNvbmZpZGVudCBhYm91dCB0aGUgZm9ybWF0IG9mIHRoZQo+IGxpbmUgaW4g
-L3Byb2MvKi9zdGF0dXMsIHlvdSBjb3VsZCBkbwo+ICAgIGZpZWxkcz0oJGlucHV0KQo+ICAgIGZv
-ciB1aWQgaW4gJHtmaWVsZHNbKl06MX07IGRvCj4gICAgICAgY29tcGFyZSB1aWQgd2l0aCBleHBl
-Y3RlZAoKSSBoYWQgc29tZXRoaW5nIGxpa2UgdGhhdCBvcmlnaW5hbGx5LCBidXQgd2Fzbid0IGNv
-bmZpZGVudCBhYm91dCBpdDsKd2hlbiBJIGVuZGVkIHVwIGhhdmluZyB0byB3cml0ZSB0aGUgcmVn
-ZXhwIGZvciAvcHJvYy8qL2xpbWl0cywgSSB3cm90ZQpvbmUgZm9yIGhlcmUgdG9vIHRvIGJlIGEg
-Yml0IG1vcmUgc2FmZS4KCkxpbnVzIGNvbnNpZGVycyBhbG1vc3QgYW55IHVzZXItc3BhY2UgcmVs
-aWFuY2Ugb24ga2VybmVsIGJlaGF2aW9yIGFzCmJpbmRpbmcsIHNvIEkgc3VzcGVjdCAoJGlucHV0
-KSBpcyBwcm9iYWJseSBzYWZlIGVub3VnaCBpZiB3ZSB3YW50IHRvCnJlbW92ZSBhdCBsZWFzdCBv
-bmUgbmFzdHkgQmFzaCByZWdleHAuCgogLUdlb3JnZQoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gU3VuLCBTZXAgMjMsIDIwMTggYXQgMTE6MDUgQU0gUmF6dmFuIENvam9jYXJ1CjxyY29qb2Nh
+cnVAYml0ZGVmZW5kZXIuY29tPiB3cm90ZToKPgo+IE1vdmUgcDJtX3tnZXQvc2V0fV9zdXBwcmVz
+c192ZSgpIHRvIHAybS5jLCByZXBsYWNlIGluY29ycmVjdAo+IEFTU0VSVCgpIGluIHAybS1wdC5j
+IChzaW5jZSBhIGd1ZXN0IGNhbiBydW4gaW4gc2hhZG93IG1vZGUgZXZlbiBvbgo+IGEgc3lzdGVt
+IHdpdGggdmlydCBleGNlcHRpb25zLCB3aGljaCB3b3VsZCB0cmlnZ2VyIHRoZSBBU1NFUlQoKSks
+Cj4gYW5kIG1vdmUgdGhlIFZNWC1pc21zIChjcHVfaGFzX3ZteF92aXJ0X2V4Y2VwdGlvbnMgY2hl
+Y2tzKSB0bwo+IHAybV9lcHRfe2dldC9zZXR9X2VudHJ5KCkuCj4KPiBTaWduZWQtb2ZmLWJ5OiBS
+YXp2YW4gQ29qb2NhcnUgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+CgpBY2tlZC1ieTogVGFt
+YXMgSyBMZW5neWVsIDx0YW1hc0B0a2xlbmd5ZWwuY29tPgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
