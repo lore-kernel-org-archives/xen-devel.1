@@ -1,15 +1,14 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 3/5] x86/hvm: Adjust hvmemul_rep_stos() to
- compile with -Wvla
-Date: Mon, 24 Sep 2018 08:16:17 -0600
-Message-ID: <5BA8F1B102000078001EB3B3@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH 5/5] xen: Disallow variable length arrays
+Date: Mon, 24 Sep 2018 08:20:14 -0600
+Message-ID: <5BA8F29E02000078001EB3CD@prv1-mh.provo.novell.com>
 References: <1537794003-30851-1-git-send-email-andrew.cooper3@citrix.com>
- <1537794003-30851-4-git-send-email-andrew.cooper3@citrix.com>
+ <1537794003-30851-6-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1537794003-30851-4-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1537794003-30851-6-git-send-email-andrew.cooper3@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -20,19 +19,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IE9uIDI0LjA5LjE4IGF0IDE1OjAwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gRm9yIGF0IGxlYXN0ICJnY2MgKFVidW50dSA1LjQuMC02dWJ1bnR1MX4xNi4wNC4xMCkg
-NS40LjAgMjAxNjA2MDkiLCB0aGUKPiB0eXBlY2FzdCBvZiBidWYgdHJpZ2dlcnMgYSBWYXJpYWJs
-ZSBMZW5ndGggQXJyYXkgd2FybmluZy4KPiAKPiBBbHRlciB0aGUgYXNtIGV4cHJlc3Npb24gdG8g
-YXZvaWQgdGhlIHR5cGVjYXN0LCB3aGljaCBuZWNlc3NpdGF0ZXMgdGhlCj4gaW50cm9kdWN0aW9u
-IG9mIGEgbWVtb3J5IGNsb2JiZXIgYXMgdGhlIGNvbXBpbGVyIGNhbiBubyBsb25nZXIgaWRlbnRp
-ZnkKPiB0aGUgdG90YWwgcXVhbnRpdHkgb2Ygd3JpdHRlbiBtZW1vcnkuCgpJIGRpc2xpa2UgdGhp
-cywgYnV0IHdoYXQgZG8geW91IGRvLiBXb3VsZCBiZSBxdWl0ZSBoZWxwZnVsIHRob3VnaCB0bwpo
-YXZlIGEgY29tbWVudCB0aGVyZSwgb3IgZWxzZSBJIG1pZ2h0IGJlIHRlbXB0ZWQgdG8gdW5kbyB0
-aGUKbWVtb3J5IGNsb2JiZXIgaW4gYSBjb3VwbGUgb2YgbW9udGhzL3llYXJzIHRpbWUuCgpKYW4K
-CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+dGU6Cj4gLS0tIGEveGVuL1J1bGVzLm1rCj4gKysrIGIveGVuL1J1bGVzLm1rCj4gQEAgLTU4LDYg
+KzU4LDcgQEAgQ0ZMQUdTICs9IC1XZXJyb3IgLVdyZWR1bmRhbnQtZGVjbHMgLVduby1wb2ludGVy
+LWFyaXRoCj4gIENGTEFHUyArPSAtcGlwZSAtRF9fWEVOX18gLWluY2x1ZGUgJChCQVNFRElSKS9p
+bmNsdWRlL3hlbi9jb25maWcuaAo+ICBDRkxBR1MtJChDT05GSUdfREVCVUdfSU5GTykgKz0gLWcK
+PiAgQ0ZMQUdTICs9ICctRF9fT0JKRUNUX0ZJTEVfXz0iJEAiJwo+ICskKGNhbGwgY2Mtb3B0aW9u
+LWFkZCxDRkxBR1MsQ0MsLVd2bGEpCgpDb3VsZCBJIHRhbGsgeW91IGludG8gbW92aW5nIHRoaXMg
+dXAgYSBmZXcgbGluZXMsIG5leHQgdG8gdGhlIG90aGVyIC1XCnNldHRpbmdzIChqdXN0IG91dCBv
+ZiBjb250ZXh0KT8gSW4gYW55IGV2ZW50CkFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hA
+c3VzZS5jb20+CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
