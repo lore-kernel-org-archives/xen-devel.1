@@ -1,11 +1,14 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 0/5] Xen: Remove the of variable length arrays
-Date: Mon, 24 Sep 2018 13:59:58 +0100
-Message-ID: <1537794003-30851-1-git-send-email-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/5] ARM/dom0: Avoid using a variable length
+ array in make_memory_node()
+Date: Mon, 24 Sep 2018 14:00:02 +0100
+Message-ID: <1537794003-30851-5-git-send-email-andrew.cooper3@citrix.com>
+References: <1537794003-30851-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <1537794003-30851-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,25 +18,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VmFyaWFibGUgbGVuZ3RoIGFycmF5cywgd2hpbGUgY29udmVuaWVudCBpbiBzb21lIGNhc2VzLCBh
-cmUgcHJvYmxlbWF0aWMgd2l0aApzbWFsbCBzdGFja3MsIGFuZCBjYW4gdHVybiBsb2dpY2FsIGJ1
-Z3MgaW50byBzdGFjayBvdmVyZmxvd3MuICBGdXJ0aGVybW9yZSwKdGhlIGNvZGUgZ2VuZXJhdGlv
-biBiZWhpbmQgdGhlbSBpcyB2ZXJ5IHBvb3IuCgpYZW4gaGFzIHR3byB1c2VzIG9mIFZMQXMgd2hp
-Y2ggY2FuIGJlIGZpeGVkIGVhc2lseSwgYW5kIG9uZSBjYXNlIHdoZXJlIHRoZSBWTEEKbG9naWMg
-dHJpZ2dlcnMgb24gYSB0eXBlLCB3aGljaCBjYW4gYmUgd29ya2VkIGFyb3VuZC4KCkFuZHJldyBD
-b29wZXIgKDUpOgogIHg4Ni9Qb0Q6IFNpbXBsaWZ5IGhhbmRsaW5nIG9mIHRoZSBxdWljayBjaGVj
-awogIHg4Ni9Qb0Q6IEF2b2lkIHVzaW5nIHZhcmlhYmxlIGxlbmd0aCBhcnJheXMgaW4gcDJtX3Bv
-ZF96ZXJvX2NoZWNrKCkKICB4ODYvaHZtOiBBZGp1c3QgaHZtZW11bF9yZXBfc3RvcygpIHRvIGNv
-bXBpbGUgd2l0aCAtV3ZsYQogIEFSTS9kb20wOiBBdm9pZCB1c2luZyBhIHZhcmlhYmxlIGxlbmd0
-aCBhcnJheSBpbiBtYWtlX21lbW9yeV9ub2RlKCkKICB4ZW46IERpc2FsbG93IHZhcmlhYmxlIGxl
-bmd0aCBhcnJheXMKCiB4ZW4vUnVsZXMubWsgICAgICAgICAgICAgICAgfCAgMSArCiB4ZW4vYXJj
-aC9hcm0vZG9tYWluX2J1aWxkLmMgfCAgNCArKystCiB4ZW4vYXJjaC94ODYvaHZtL2VtdWxhdGUu
-YyAgfCAgNiArKystLS0KIHhlbi9hcmNoL3g4Ni9tbS9wMm0tcG9kLmMgICB8IDI2ICsrKysrKysr
-KystLS0tLS0tLS0tLS0tLS0tCiA0IGZpbGVzIGNoYW5nZWQsIDE3IGluc2VydGlvbnMoKyksIDIw
-IGRlbGV0aW9ucygtKQoKLS0gCjIuMS40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+VGhlIHJlZ1tdIGFycmF5IGNhbiBoYXZlIGEgbWF4aW11bSBzaXplIG9mIDggaW4gcHJhY3RpY2Us
+IHNvIHVzZSB0aGUgd29yc3QKY2FzZSBjYWxjdWxhdGlvbiByYXRoZXIgdGhhbiBtYWtpbmcgaXQg
+dmFyaWFibGUgbGVuZ3RoLgoKU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
+b3BlcjNAY2l0cml4LmNvbT4KLS0tCkNDOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5p
+QGtlcm5lbC5vcmc+CkNDOiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgoKT25s
+eSBjb21waWxlIHRlc3RlZC4KLS0tCiB4ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMgfCA0ICsr
+Ky0KIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKCmRpZmYg
+LS1naXQgYS94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMgYi94ZW4vYXJjaC9hcm0vZG9tYWlu
+X2J1aWxkLmMKaW5kZXggMzhlMGRlMy4uYWM4ZDQ3OSAxMDA2NDQKLS0tIGEveGVuL2FyY2gvYXJt
+L2RvbWFpbl9idWlsZC5jCisrKyBiL3hlbi9hcmNoL2FybS9kb21haW5fYnVpbGQuYwpAQCAtNTM5
+LDkgKzUzOSwxMSBAQCBzdGF0aWMgaW50IF9faW5pdCBtYWtlX21lbW9yeV9ub2RlKGNvbnN0IHN0
+cnVjdCBkb21haW4gKmQsCiAgICAgaW50IHJlcywgaTsKICAgICBpbnQgcmVnX3NpemUgPSBhZGRy
+Y2VsbHMgKyBzaXplY2VsbHM7CiAgICAgaW50IG5yX2NlbGxzID0gcmVnX3NpemUqa2luZm8tPm1l
+bS5ucl9iYW5rczsKLSAgICBfX2JlMzIgcmVnW25yX2NlbGxzXTsKKyAgICBfX2JlMzIgcmVnW05S
+X01FTV9CQU5LUyAqIDQgLyogV29yc3QgY2FzZSBhZGRyY2VsbHMgKyBzaXplY2VsbHMgKi9dOwog
+ICAgIF9fYmUzMiAqY2VsbHM7CiAKKyAgICBCVUdfT04obnJfY2VsbHMgPj0gQVJSQVlfU0laRShy
+ZWcpKTsKKwogICAgIGR0X2RwcmludGsoIkNyZWF0ZSBtZW1vcnkgbm9kZSAocmVnIHNpemUgJWQs
+IG5yIGNlbGxzICVkKVxuIiwKICAgICAgICAgICAgICAgIHJlZ19zaXplLCBucl9jZWxscyk7CiAK
+LS0gCjIuMS40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
