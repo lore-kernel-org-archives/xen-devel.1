@@ -1,20 +1,20 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH] arm: fix Dom build after cd8015b634
-Date: Tue, 25 Sep 2018 17:20:13 +0100
-Message-ID: <376d1a08-45d8-1127-41c6-e70747ef40cb@arm.com>
-References: <5BAA309A02000078001EB990@prv1-mh.provo.novell.com>
- <0fa633f7-3421-0faa-5c81-152523a3f169@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Xen 4.10.2 released
+Date: Tue, 25 Sep 2018 10:26:27 -0600
+Message-ID: <5BAA61B302000078001EBD00@prv1-mh.provo.novell.com>
+References: <5AEB12F802000078001C0772@prv1-mh.provo.novell.com>
+ <5AEB132002000000000F90D3@prv1-mh.provo.novell.com>
+ <5AEB132002000078001EBCE8@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=oyid=mh=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1g4q4P-0006gf-Tr
- for xen-devel@lists.xenproject.org; Tue, 25 Sep 2018 16:20:17 +0000
-In-Reply-To: <0fa633f7-3421-0faa-5c81-152523a3f169@citrix.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=u73d=mh=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1g4qAU-0006vn-Qp
+ for xen-devel@lists.xenproject.org; Tue, 25 Sep 2018 16:26:34 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,19 +23,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
+To: xen-announce@lists.xenproject.org
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAyNS8wOS8xOCAxNDowMiwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAyNS8wOS8x
-OCAxMzo1NiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+IFRoZSByZW1vdmFsIG9mIHRoZSBWTEEgdGhl
-cmUgaGFzIGNoYW5nZWQgc2l6ZW9mKCkgZm9yIHRoZSBhcnJheS4KPj4KPj4gU2lnbmVkLW9mZi1i
-eTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+PiAtLS0KPj4gVW50ZXN0ZWQ7IHB1
-cmVseSBiYXNlZCBvbiBsb29raW5nIGF0IHRoZSBjb2RlLgoKSSBoYXZlIHRlc3RlZCBpdCwgaXQg
-cmVzb2x2ZWQgdGhlIGJvb3QuCgo+IAo+IE9vcHMuwqAgWWVzIC0gdGhhdCB3aWxsIGNhdXNlIHRo
-aW5ncyB0byBnbyB3cm9uZy4KPiAKPiBSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFs
-bEBhcm0uY29tPgoKQW5kIHB1c2hlZC4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+QWxsLAoKSSBhbSBwbGVhc2VkIHRvIGFubm91bmNlIHRoZSByZWxlYXNlIG9mIFhlbiA0LjEwLjIu
+IFRoaXMgaXMKYXZhaWxhYmxlIGltbWVkaWF0ZWx5IGZyb20gaXRzIGdpdCByZXBvc2l0b3J5Cmh0
+dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhlbi5naXQ7YT1zaG9ydGxvZztoPXJlZnMv
+aGVhZHMvc3RhYmxlLTQuMTAKKHRhZyBSRUxFQVNFLTQuMTAuMikgb3IgZnJvbSB0aGUgWGVuUHJv
+amVjdCBkb3dubG9hZCBwYWdlCmh0dHA6Ly93d3cueGVucHJvamVjdC5vcmcvZG93bmxvYWRzL3hl
+bi1hcmNoaXZlcy94ZW4tcHJvamVjdC00MTAtc2VyaWVzL3hlbi00MTAyLmh0bWwgCih3aGVyZSBh
+IGxpc3Qgb2YgY2hhbmdlcyBjYW4gYWxzbyBiZSBmb3VuZCkuCgpXZSByZWNvbW1lbmQgYWxsIHVz
+ZXJzIG9mIHRoZSA0LjEwIHN0YWJsZSBzZXJpZXMgdG8gdXBkYXRlIHRvIHRoaXMKbGF0ZXN0IHBv
+aW50IHJlbGVhc2UuCgpSZWdhcmRzLCBKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
