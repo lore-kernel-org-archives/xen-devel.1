@@ -1,17 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH] arm: fix Dom build after cd8015b634
-Date: Tue, 25 Sep 2018 06:56:58 -0600
-Message-ID: <5BAA309A02000078001EB990@prv1-mh.provo.novell.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] arm: fix Dom build after cd8015b634
+Date: Tue, 25 Sep 2018 14:02:05 +0100
+Message-ID: <0fa633f7-3421-0faa-5c81-152523a3f169@citrix.com>
+References: <5BAA309A02000078001EB990@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=u73d=mh=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1g4mtk-0001pS-GA
- for xen-devel@lists.xenproject.org; Tue, 25 Sep 2018 12:57:04 +0000
-Content-Disposition: inline
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=gmpq=mh=citrix.com=prvs=79922396b=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1g4n0j-0002b1-Iw
+ for xen-devel@lists.xenproject.org; Tue, 25 Sep 2018 13:04:17 +0000
+In-Reply-To: <5BAA309A02000078001EB990@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,20 +22,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIHJlbW92YWwgb2YgdGhlIFZMQSB0aGVyZSBoYXMgY2hhbmdlZCBzaXplb2YoKSBmb3IgdGhl
-IGFycmF5LgoKU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgot
-LS0KVW50ZXN0ZWQ7IHB1cmVseSBiYXNlZCBvbiBsb29raW5nIGF0IHRoZSBjb2RlLgoKLS0tIGEv
-eGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5jCisrKyBiL3hlbi9hcmNoL2FybS9kb21haW5fYnVp
-bGQuYwpAQCAtNTY4LDcgKzU2OCw3IEBAIHN0YXRpYyBpbnQgX19pbml0IG1ha2VfbWVtb3J5X25v
-ZGUoY29uc3Qgc3RydWN0IGRvbWFpbiAqZCwKICAgICAgICAgZHRfY2hpbGRfc2V0X3JhbmdlKCZj
-ZWxscywgYWRkcmNlbGxzLCBzaXplY2VsbHMsIHN0YXJ0LCBzaXplKTsKICAgICB9CiAKLSAgICBy
-ZXMgPSBmZHRfcHJvcGVydHkoZmR0LCAicmVnIiwgcmVnLCBzaXplb2YocmVnKSk7CisgICAgcmVz
-ID0gZmR0X3Byb3BlcnR5KGZkdCwgInJlZyIsIHJlZywgbnJfY2VsbHMgKiBzaXplb2YoKnJlZykp
-OwogICAgIGlmICggcmVzICkKICAgICAgICAgcmV0dXJuIHJlczsKIAoKCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMjUvMDkvMTggMTM6NTYsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFRoZSByZW1vdmFsIG9mIHRo
+ZSBWTEEgdGhlcmUgaGFzIGNoYW5nZWQgc2l6ZW9mKCkgZm9yIHRoZSBhcnJheS4KPgo+IFNpZ25l
+ZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPiAtLS0KPiBVbnRlc3Rl
+ZDsgcHVyZWx5IGJhc2VkIG9uIGxvb2tpbmcgYXQgdGhlIGNvZGUuCgpPb3BzLsKgIFllcyAtIHRo
+YXQgd2lsbCBjYXVzZSB0aGluZ3MgdG8gZ28gd3JvbmcuCgpSZXZpZXdlZC1ieTogQW5kcmV3IENv
+b3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
