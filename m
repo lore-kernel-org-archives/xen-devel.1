@@ -1,20 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86: silence false log messages for plain
- "xpti" / "pv-l1tf"
-Date: Wed, 26 Sep 2018 13:05:37 +0100
-Message-ID: <36b08cab-5472-0d96-232a-ce744bfe6e0d@citrix.com>
-References: <5BAB37E002000078001EBFD6@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86: assert MBI is large enough in
+ pvh-boot.c
+Date: Wed, 26 Sep 2018 06:07:30 -0600
+Message-ID: <5BAB768202000078001EC2A8@prv1-mh.provo.novell.com>
+References: <20180926110000.9764-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=v21l=mi=citrix.com=prvs=800d3b934=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1g58aT-0007iC-2s
- for xen-devel@lists.xenproject.org; Wed, 26 Sep 2018 12:06:37 +0000
-In-Reply-To: <5BAB37E002000078001EBFD6@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=an3h=mi=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1g58bN-0007n9-Bi
+ for xen-devel@lists.xenproject.org; Wed, 26 Sep 2018 12:07:33 +0000
+In-Reply-To: <20180926110000.9764-1-wei.liu2@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,18 +23,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Wei Liu <wei.liu2@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjYvMDkvMTggMDg6NDAsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFdoaWxlIGNvbW1pdCAyYTNi
-MzRlYzQ3ICgieDg2L3NwZWMtY3RybDogWWV0IG1vcmUgZml4ZXMgZm9yIHhwdGk9Cj4gcGFyc2lu
-ZyIpICBjbGFpbWVkIHRvIGhhdmUgZ290IHJpZCBvZiB0aGUgJ3BhcmFtZXRlciAieHB0aSIgaGFz
-IGludmFsaWQKPiB2YWx1ZSAiIiwgcmM9LTIyIScgbG9nIG1lc3NhZ2UgZm9yICJ4cHRpIiBhbG9u
-ZSBvbiB0aGUgY29tbWFuZCBsaW5lLAo+IHRoaXMgd2Fzbid0IHRoZSBjYXNlICh0aGUgb3B0aW9u
-IHRvb2sgZWZmZWN0IG5ldmVydGhlbGVzcykuCj4KPiBGaXggdGhpcyB0aGVyZSBhcyB3ZWxsIGFz
-IGZvciBwbGFpbiAicHYtbDF0ZiIuCj4KPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJl
-dWxpY2hAc3VzZS5jb20+CgpBY2tlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNA
-Y2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDI2LjA5LjE4IGF0IDEzOjAwLCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+LS0tIGEveGVuL2FyY2gveDg2L2d1ZXN0L3B2aC1ib290LmMKPiArKysgYi94ZW4vYXJjaC94ODYv
+Z3Vlc3QvcHZoLWJvb3QuYwo+IEBAIC00NCw2ICs0NCwxMyBAQCBzdGF0aWMgdm9pZCBfX2luaXQg
+Y29udmVydF9wdmhfaW5mbyh2b2lkKQo+ICAKPiAgICAgIEFTU0VSVChwdmhfaW5mby0+bWFnaWMg
+PT0gWEVOX0hWTV9TVEFSVF9NQUdJQ19WQUxVRSk7Cj4gIAo+ICsgICAgLyoKPiArICAgICAqIFRl
+bXBvcmFyeSBNQkkgYXJyYXkgbmVlZHMgdG8gYmUgYXQgbGVhc3Qgb25lIGVsZW1lbnQgYmlnZ2Vy
+IHRoYW4KPiArICAgICAqIHJlcXVpcmVkLiBUaGUgZXh0cmEgZWxlbWVudCBpcyB1c2VkIHRvIGFp
+ZCByZWxvY2F0aW9uLiBTZWUKPiArICAgICAqIGFyY2gveDg2L3NldHVwLmM6X19zdGFydF94ZW4o
+KS4KPiArICAgICAqLwo+ICsgICAgQVNTRVJUKEFSUkFZX1NJWkUocHZoX21iaV9tb2RzKSA+IHB2
+aF9pbmZvLT5ucl9tb2R1bGVzKTsKCkFyZSBBU1NFUlQoKXMgKGFsc28gdGhlIG90aGVyIG9uZSBp
+biBjb250ZXh0KSBhY3R1YWxseSB0aGUgcmlnaHQgdGhpbmcKaGVyZT8gSSB0aGluayB3ZSdkIGJl
+dHRlciBwYW5pYygpOiBUaGF0J2xsIGFsc28gY292ZXIgcmVsZWFzZSBidWlsZHMgYW5kCmlzIGlt
+byBtb3JlIGFwcHJvcHJpYXRlIGZvciBkYXRhIGNvbWluZyBmcm9tIHRoZSBvdXRzaWRlLgoKSmFu
+CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
+bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
