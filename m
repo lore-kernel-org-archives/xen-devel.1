@@ -1,15 +1,19 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 4/6] xen/arm: cpufeature: Add helper to
- check constant caps
-Date: Wed, 26 Sep 2018 09:53:16 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1809260950580.13735@sstabellini-ThinkPad-X260>
-References: <20180925172043.20248-1-julien.grall@arm.com>
- <20180925172043.20248-5-julien.grall@arm.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 07/12] xen: add domain specific parameter
+ support
+Date: Wed, 26 Sep 2018 18:58:57 +0200
+Message-ID: <aa87360953092ff9a16c3c53da73ac7a1878b624.camel@suse.com>
+References: <20180918060309.7186-1-jgross@suse.com>
+ <20180918060309.7186-8-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1978732676577841656=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180925172043.20248-5-julien.grall@arm.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=n8mt=mi=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1g5DA8-00064f-ES
+ for xen-devel@lists.xenproject.org; Wed, 26 Sep 2018 16:59:44 +0000
+In-Reply-To: <20180918060309.7186-8-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,44 +22,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: sstabellini@kernel.org, volodymyr_babchuk@epam.com, xen-devel@lists.xen.org
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCAyNSBTZXAgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFNvbWUgY2FwYWJhYmls
-aXRpZXMgYXJlIHNldCByaWdodCBkdXJpbmcgYm9vdCBhbmQgd2lsbCBuZXZlciBjaGFuZ2UKPiBh
-ZnRlcndhcmRzLiBBdCB0aGUgbW9tZW50LCB0aGUgZnVuY3Rpb24gY3B1X2hhdmVfY2FwcyB3aWxs
-IGNoZWNrIHdoZXRoZXIKPiB0aGUgY2FwIGlzIGVuYWJsZWQgZnJvbSB0aGUgbWVtb3J5Lgo+IAo+
-IEl0IGlzIHBvc3NpYmxlIHRvIGF2b2lkIHRoZSBsb2FkIGZyb20gdGhlIG1lbW9yeSBieSB1c2lu
-ZyBhbgo+IEFMVEVSTkFUSVZFLiBXaXRoIHRoYXQgdGhlIGNoZWNrIGlzIGp1c3QgcmVkdWNlZCB0
-byAxIGluc3RydWN0aW9uLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVu
-LmdyYWxsQGFybS5jb20+CgpJIGVuam95ZWQgcmVhZGluZyB0aGUgcGF0Y2ggOi0pICBCdXQgSSBk
-b24ndCB0aGluayBpdCBpcyB3b3J0aCBnb2luZwppbnRvIHRoaXMgZXh0cmVtZSBsZXZlbCBvZiBv
-cHRpbWl6YXRpb24uIHRlc3RfYml0IGlzIGVmZmljaWVudCBlbm91Z2gsCnJpZ2h0PyBXaGF0IGRv
-IHlvdSB0aGluayB3ZSBuZWVkIHRvIHVzZSBhbHRlcm5hdGl2ZXMganVzdCB0byBjaGVjayBvbmUK
-Yml0PwoKCj4gLS0tCj4gCj4gVGhpcyBpcyB0aGUgc3RhdGljIGtleSBmb3IgdGhlIHBvb3IuIEF0
-IHNvbWUgcG9pbnQgd2UgbWlnaHQgd2FudCB0bwo+IGludHJvZHVjZSBzb21ldGhpbmcgc2ltaWxh
-ciB0byBzdGF0aWMga2V5IGluIFhlbi4KPiAKPiAgICAgQ2hhbmdlcyBpbiB2MjoKPiAgICAgICAg
-IC0gVXNlIHVubGlrZWx5Cj4gLS0tCj4gIHhlbi9pbmNsdWRlL2FzbS1hcm0vY3B1ZmVhdHVyZS5o
-IHwgMTIgKysrKysrKysrKysrCj4gIDEgZmlsZSBjaGFuZ2VkLCAxMiBpbnNlcnRpb25zKCspCj4g
-Cj4gZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vY3B1ZmVhdHVyZS5oIGIveGVuL2lu
-Y2x1ZGUvYXNtLWFybS9jcHVmZWF0dXJlLmgKPiBpbmRleCAzZGU2YjU0MzAxLi5jNmNiYzJlYzg0
-IDEwMDY0NAo+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vY3B1ZmVhdHVyZS5oCj4gKysrIGIv
-eGVuL2luY2x1ZGUvYXNtLWFybS9jcHVmZWF0dXJlLmgKPiBAQCAtNjMsNiArNjMsMTggQEAgc3Rh
-dGljIGlubGluZSBib29sIGNwdXNfaGF2ZV9jYXAodW5zaWduZWQgaW50IG51bSkKPiAgICAgIHJl
-dHVybiB0ZXN0X2JpdChudW0sIGNwdV9od2NhcHMpOwo+ICB9Cj4gIAo+ICsvKiBTeXN0ZW0gY2Fw
-YWJpbGl0eSBjaGVjayBmb3IgY29uc3RhbnQgY2FwICovCj4gKyNkZWZpbmUgY3B1c19oYXZlX2Nv
-bnN0X2NhcChudW0pICh7ICAgICAgICAgICAgICAgICBcCj4gKyAgICAgICAgYm9vbCBfX3JldDsg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gKyAgICAgICAgYXNtIHZvbGF0aWxl
-IChBTFRFUk5BVElWRSgibW92ICUwLCAjMCIsICAgICBcCj4gKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAibW92ICUwLCAjMSIsICAgICBcCj4gKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBudW0pICAgICAgICAgICAgICBcCj4gKyAgICAgICAgICAgICAgICAgICAg
-ICA6ICI9ciIgKF9fcmV0KSk7ICAgICAgICAgICAgICBcCj4gKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gKyAgICAgICAgdW5saWtlbHkoX19y
-ZXQpOyAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gKyAgICAgICAgfSkKPiArCj4gIHN0
-YXRpYyBpbmxpbmUgdm9pZCBjcHVzX3NldF9jYXAodW5zaWduZWQgaW50IG51bSkKPiAgewo+ICAg
-ICAgaWYgKG51bSA+PSBBUk1fTkNBUFMpCj4gLS0gCj4gMi4xMS4wCj4gCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============1978732676577841656==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-+Hiu+l3cao2PjMwK50J7"
+
+
+--=-+Hiu+l3cao2PjMwK50J7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+I think the subject wants to say "cpupool specific" ?
+
+With this adjusted...
+
+On Tue, 2018-09-18 at 08:03 +0200, Juergen Gross wrote:
+> Add the framework for being able to define cpupool specific
+> parameters.
+> This includes the needed macros for defining a parameter and the
+> minimal set of functions for doing parameter parsing.
+>=20
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-+Hiu+l3cao2PjMwK50J7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlurutQACgkQFkJ4iaW4
+c+4O9Q/+MLHdvDAkm5uC75uYs8lEwTFJpZiJsd2vgnzxkYEH88NO/Yw3JCH2KXgC
+s6Rhkj8k9FB3mVHBvV/oTWIP5i8Udf1bl/czky/a7mVUX+Rhwf+HhmY/MUlRWNJ5
+ekoTyvYErwY/Te9UNc7nMRhDNAH+0B1zbZ/5iAgYvf+YwqRX1dTv37k+vBh/xAPQ
+60wp+K7lUZ05NkeAm2d7MjLCe5WnabfA8cGkz29F8qPUkpxk56CA2TY3AskVd+Ik
+KaimS9NmJRr+nPx+AJC7UdPD/6VbD0aKtuoThx2828Hg4eH+zXZMhvHNVXhBdNL8
+OqRw4yh985xzbA1i+BxpCGGkDmNI9L3ts4q99pMTCb72+/6GU1GcTrAp6friluBw
+WW66Sbwfl8ASRGJEseb3BcQ6ZVCpILK1vvWcWLtFhZQs2iTwi0xexG9VxXIJId/0
+IewMmFG2qpWMtBX6nECDGolSqJzgeQiEt63Fiowq7R0xjrc8rCNXko6fsjFXE26r
+0C46tAy5CB1ZeSEEePkZfkpkvskig5lOYx100M24irKwYHdwsXt3DBweLK2jK43K
+vtBpc968dvLzFQumTi0Tz9MQV8FYv+fajrqZcl+Gd6XKdZgCFh1YJEQRDdkoMFlD
+fvS8tXRePVZRVxcXjVv269YK2CnQnwechuDEflE/beKdr/vaqq0=
+=mA6b
+-----END PGP SIGNATURE-----
+
+--=-+Hiu+l3cao2PjMwK50J7--
+
+
+
+--===============1978732676577841656==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1978732676577841656==--
