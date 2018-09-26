@@ -1,19 +1,20 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 07/12] xen: add domain specific parameter
- support
-Date: Wed, 26 Sep 2018 18:58:57 +0200
-Message-ID: <aa87360953092ff9a16c3c53da73ac7a1878b624.camel@suse.com>
-References: <20180918060309.7186-1-jgross@suse.com>
- <20180918060309.7186-8-jgross@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [RFC PATCH 1/2] mem_access: Fix npfec.kind
+ propagation
+Date: Wed, 26 Sep 2018 18:00:21 +0100
+Message-ID: <02c6bddf-933c-5348-73eb-25d6d826d30b@citrix.com>
+References: <20180926164741.13405-1-george.dunlap@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1978732676577841656=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=n8mt=mi=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1g5DA8-00064f-ES
- for xen-devel@lists.xenproject.org; Wed, 26 Sep 2018 16:59:44 +0000
-In-Reply-To: <20180918060309.7186-8-jgross@suse.com>
+ <srs0=v21l=mi=citrix.com=prvs=800d3b934=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1g5DEo-0006nT-TQ
+ for xen-devel@lists.xenproject.org; Wed, 26 Sep 2018 17:04:34 +0000
+In-Reply-To: <20180926164741.13405-1-george.dunlap@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,76 +23,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>
+To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Alexandru Isaila <aisaila@bitdefender.com>, Tamas K Lengyel <tamas.lengyel@zentific.com>, Tim Deegan <tim@xen.org>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1978732676577841656==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-+Hiu+l3cao2PjMwK50J7"
-
-
---=-+Hiu+l3cao2PjMwK50J7
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-I think the subject wants to say "cpupool specific" ?
-
-With this adjusted...
-
-On Tue, 2018-09-18 at 08:03 +0200, Juergen Gross wrote:
-> Add the framework for being able to define cpupool specific
-> parameters.
-> This includes the needed macros for defining a parameter and the
-> minimal set of functions for doing parameter parsing.
->=20
-> Signed-off-by: Juergen Gross <jgross@suse.com>
->
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-+Hiu+l3cao2PjMwK50J7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlurutQACgkQFkJ4iaW4
-c+4O9Q/+MLHdvDAkm5uC75uYs8lEwTFJpZiJsd2vgnzxkYEH88NO/Yw3JCH2KXgC
-s6Rhkj8k9FB3mVHBvV/oTWIP5i8Udf1bl/czky/a7mVUX+Rhwf+HhmY/MUlRWNJ5
-ekoTyvYErwY/Te9UNc7nMRhDNAH+0B1zbZ/5iAgYvf+YwqRX1dTv37k+vBh/xAPQ
-60wp+K7lUZ05NkeAm2d7MjLCe5WnabfA8cGkz29F8qPUkpxk56CA2TY3AskVd+Ik
-KaimS9NmJRr+nPx+AJC7UdPD/6VbD0aKtuoThx2828Hg4eH+zXZMhvHNVXhBdNL8
-OqRw4yh985xzbA1i+BxpCGGkDmNI9L3ts4q99pMTCb72+/6GU1GcTrAp6friluBw
-WW66Sbwfl8ASRGJEseb3BcQ6ZVCpILK1vvWcWLtFhZQs2iTwi0xexG9VxXIJId/0
-IewMmFG2qpWMtBX6nECDGolSqJzgeQiEt63Fiowq7R0xjrc8rCNXko6fsjFXE26r
-0C46tAy5CB1ZeSEEePkZfkpkvskig5lOYx100M24irKwYHdwsXt3DBweLK2jK43K
-vtBpc968dvLzFQumTi0Tz9MQV8FYv+fajrqZcl+Gd6XKdZgCFh1YJEQRDdkoMFlD
-fvS8tXRePVZRVxcXjVv269YK2CnQnwechuDEflE/beKdr/vaqq0=
-=mA6b
------END PGP SIGNATURE-----
-
---=-+Hiu+l3cao2PjMwK50J7--
-
-
-
---===============1978732676577841656==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1978732676577841656==--
+T24gMjYvMDkvMTggMTc6NDcsIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4gVGhlIG5hbWUgb2YgdGhl
+ICJ3aXRoX2dsYSIgZmxhZyBpcyBjb25mdXNpbmc7IGl0IGhhcyBub3RoaW5nIHRvIGRvCj4gd2l0
+aCB0aGUgZXhpc3RlbmNlIG9yIGxhY2sgdGhlcmVvZiBvZiBhIGZhdWx0aW5nIEdMQSwgYnV0IHJh
+dGhlciB3aGVyZQo+IHRoZSBmYXVsdCBvcmlnaW5hdGVkLiAgVGhlIG5wZmVjLmtpbmQgdmFsdWUg
+aXMgYWx3YXlzIHZhbGlkLCBhbmQKPiBzaG91bGQgdGh1cyBiZSBwcm9wYWdhdGVkLCByZWdhcmRs
+ZXNzIG9mIHdoZXRoZXIgZ2xhX3ZhbGlkIGlzIHNldCBvcgo+IG5vdC4KPgo+IEluIHBhcnRpY3Vs
+YXIsIGdsYV92YWxpZCB3aWxsIG5ldmVyIGJlIHNldCBvbiBBTUQgc3lzdGVtczsgYnV0Cj4gbnBm
+ZWMua2luZCB3aWxsIHN0aWxsIGJlIHZhbGlkIGFuZCBzaG91bGQgc3RpbGwgYmUgcHJvcGFnYXRl
+ZC4KPgo+IFNpZ25lZC1vZmYtYnk6IEFsZXhhbmRydSBJc2FpbGEgPGFpc2FpbGFAYml0ZGVmZW5k
+ZXIuY29tPgo+IFNpZ25lZC1vZmYtYnk6IEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0
+cml4LmNvbT4KPiAtLS0KPiBDQzogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4
+LmNvbT4KPiBDQzogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+IENDOiBUaW0gRGVl
+Z2FuIDx0aW1AeGVuLm9yZz4KPiBDQzogVGFtYXMgSyBMZW5neWVsIDx0YW1hcy5sZW5neWVsQHpl
+bnRpZmljLmNvbT4KPiBDQzogUmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVmZW5kZXIu
+Y29tPgo+IC0tLQo+ICB4ZW4vYXJjaC94ODYvbW0vbWVtX2FjY2Vzcy5jIHwgMTAgKysrKystLS0t
+LQo+ICAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQo+Cj4g
+ZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9tbS9tZW1fYWNjZXNzLmMgYi94ZW4vYXJjaC94ODYv
+bW0vbWVtX2FjY2Vzcy5jCj4gaW5kZXggZDllNjRmY2JiOS4uNjk5YTMxNTA3NiAxMDA2NDQKPiAt
+LS0gYS94ZW4vYXJjaC94ODYvbW0vbWVtX2FjY2Vzcy5jCj4gKysrIGIveGVuL2FyY2gveDg2L21t
+L21lbV9hY2Nlc3MuYwo+IEBAIC0yMzIsMTIgKzIzMiwxMiBAQCBib29sIHAybV9tZW1fYWNjZXNz
+X2NoZWNrKHBhZGRyX3QgZ3BhLCB1bnNpZ25lZCBsb25nIGdsYSwKPiAgICAgICAgICB7Cj4gICAg
+ICAgICAgICAgIHJlcS0+dS5tZW1fYWNjZXNzLmZsYWdzIHw9IE1FTV9BQ0NFU1NfR0xBX1ZBTElE
+Owo+ICAgICAgICAgICAgICByZXEtPnUubWVtX2FjY2Vzcy5nbGEgPSBnbGE7Cj4gLQo+IC0gICAg
+ICAgICAgICBpZiAoIG5wZmVjLmtpbmQgPT0gbnBmZWNfa2luZF93aXRoX2dsYSApCj4gLSAgICAg
+ICAgICAgICAgICByZXEtPnUubWVtX2FjY2Vzcy5mbGFncyB8PSBNRU1fQUNDRVNTX0ZBVUxUX1dJ
+VEhfR0xBOwo+IC0gICAgICAgICAgICBlbHNlIGlmICggbnBmZWMua2luZCA9PSBucGZlY19raW5k
+X2luX2dwdCApCj4gLSAgICAgICAgICAgICAgICByZXEtPnUubWVtX2FjY2Vzcy5mbGFncyB8PSBN
+RU1fQUNDRVNTX0ZBVUxUX0lOX0dQVDsKPiAgICAgICAgICB9Cj4gKwo+ICsgICAgICAgIGlmICgg
+bnBmZWMua2luZCA9PSBucGZlY19raW5kX3dpdGhfZ2xhICkKPiArICAgICAgICAgICAgcmVxLT51
+Lm1lbV9hY2Nlc3MuZmxhZ3MgfD0gTUVNX0FDQ0VTU19GQVVMVF9XSVRIX0dMQTsKPiArICAgICAg
+ICBlbHNlIGlmICggbnBmZWMua2luZCA9PSBucGZlY19raW5kX2luX2dwdCApCj4gKyAgICAgICAg
+ICAgIHJlcS0+dS5tZW1fYWNjZXNzLmZsYWdzIHw9IE1FTV9BQ0NFU1NfRkFVTFRfSU5fR1BUOwoK
+Tml0LsKgIE5ld2xpbmUgaGVyZSBwbGVhc2UsIGFzIGl0IGlzIG5vdCBsb2dpY2FsbHkgcmVsYXRl
+ZCB3aXRoIHRoZSBibG9jawpiZWxvdy4KCn5BbmRyZXcKCj4gICAgICAgICAgcmVxLT51Lm1lbV9h
+Y2Nlc3MuZmxhZ3MgfD0gbnBmZWMucmVhZF9hY2Nlc3MgICAgPyBNRU1fQUNDRVNTX1IgOiAwOwo+
+ICAgICAgICAgIHJlcS0+dS5tZW1fYWNjZXNzLmZsYWdzIHw9IG5wZmVjLndyaXRlX2FjY2VzcyAg
+ID8gTUVNX0FDQ0VTU19XIDogMDsKPiAgICAgICAgICByZXEtPnUubWVtX2FjY2Vzcy5mbGFncyB8
+PSBucGZlYy5pbnNuX2ZldGNoICAgICA/IE1FTV9BQ0NFU1NfWCA6IDA7CgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
