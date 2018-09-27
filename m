@@ -1,13 +1,28 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: Xen PV: Sample new PV driver for buffer sharing
- between domains
-Date: Thu, 27 Sep 2018 10:39:36 +0100
-Message-ID: <B9D01323-5CE0-4CAE-9A7C-2B1CE482A833@xenproject.org>
-References: <CAC4nxbvWUpWQcUATQswoaVJfSq8EU7CH6-Jx1VwVGYVeOc0tZw@mail.gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
-Content-Type: multipart/mixed; boundary="===============4853633143287771523=="
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: IOREQ server on Arm
+Date: Thu, 27 Sep 2018 10:41:32 +0100
+Message-ID: <7bcf1048-8f4f-9a40-555a-88a198209d12@arm.com>
+References: <a14f8f94-d57d-351a-8862-e8505e111c01@arm.com>
+ <5BAB3E8902000078001EC01B@prv1-mh.provo.novell.com>
+ <b8c7f937-098d-bbdb-2da8-279df9866431@arm.com>
+ <a5d733bf19f148bf8822baef112ea7a6@AMSPEX02CL03.citrite.net>
+ <5BAB663D02000078001EC1EC@prv1-mh.provo.novell.com>
+ <116ce68517fa4191a484a4a0d3e9d5a5@AMSPEX02CL03.citrite.net>
+ <5BAB740E02000078001EC27C@prv1-mh.provo.novell.com>
+ <e4c73fa087fc48dcab6b8aae7a2f4346@AMSPEX02CL03.citrite.net>
+ <ff95acb5-f414-cf48-c39f-1d72c0ba4121@arm.com>
+ <37fbfbed74fd4af3afe33ad171b6a9ad@AMSPEX02CL03.citrite.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAC4nxbvWUpWQcUATQswoaVJfSq8EU7CH6-Jx1VwVGYVeOc0tZw@mail.gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=n2nz=mj=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1g5Snh-0005IX-6m
+ for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 09:41:37 +0000
+In-Reply-To: <37fbfbed74fd4af3afe33ad171b6a9ad@AMSPEX02CL03.citrite.net>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,158 +31,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Omkar Bolla <omkar.bolla@pathpartnertech.com>
-Cc: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xensource.com, Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
+To: Paul Durrant <Paul.Durrant@citrix.com>, 'Jan Beulich' <JBeulich@suse.com>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4853633143287771523==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_FE3EE81C-D827-4BA6-BE98-08E666AA027A"
-
-
---Apple-Mail=_FE3EE81C-D827-4BA6-BE98-08E666AA027A
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-Adding a few people who have recently been working on PV drivers, as =
-well as Julien
-Lars
-
-> On 27 Sep 2018, at 06:44, Omkar Bolla =
-<omkar.bolla@pathpartnertech.com> wrote:
->=20
-> Hi,
->=20
-> I am using Debian as Domain-0 and Debian as Domain-U on Hikey960 =
-platform(ARMv8) and using Xen-4.8 stable release. Here I want to create =
-a PV frontend and backend to share memory between Domain-0 and Domain-U.=20=
-
->=20
->=20
->=20
-> I used below link to create frontend and backend,
-> https://fnordig.de/2016/12/02/xen-a-backend-frontend-driver-example/ =
-<https://fnordig.de/2016/12/02/xen-a-backend-frontend-driver-example/>
->=20
-> But I am facing below errors while adding device vdevb to xenstore.=20
-> Below errors I am getting from xenbus_switch_state().
-> vdevb vdevb-0: failed to write error node for device/vdevb/0 (13 =
-writing new state)
->=20
-> Please suggest me, How to create PV drivers.
->=20
-> Thanks,
-> Omkar B
->=20
-> This message contains confidential information and is intended only =
-for the individual(s) named. If you are not the intended recipient, you =
-are notified that disclosing, copying, distributing or taking any action =
-in reliance on the contents of this mail and attached file/s is strictly =
-prohibited. Please notify the sender immediately and delete this e-mail =
-from your system. E-mail transmission cannot be guaranteed to be secured =
-or error-free as information could be intercepted, corrupted, lost, =
-destroyed, arrive late or incomplete, or contain viruses. The sender =
-therefore does not accept liability for any errors or omissions in the =
-contents of this message, which arise as a result of e-mail =
-transmission.
->=20
-> _______________________________________________
-> Xen-devel mailing list
-> Xen-devel@lists.xenproject.org
-> https://lists.xenproject.org/mailman/listinfo/xen-devel
-
-
---Apple-Mail=_FE3EE81C-D827-4BA6-BE98-08E666AA027A
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" =
-class=3D"">Adding a few people who have recently been working on PV =
-drivers, as well as Julien<br class=3D""><div>Lars</div><div><br =
-class=3D""><blockquote type=3D"cite" class=3D""><div class=3D"">On 27 =
-Sep 2018, at 06:44, Omkar Bolla &lt;<a =
-href=3D"mailto:omkar.bolla@pathpartnertech.com" =
-class=3D"">omkar.bolla@pathpartnertech.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><div dir=3D"ltr" =
-class=3D""><div dir=3D"ltr" class=3D""><div dir=3D"ltr" class=3D""><div =
-dir=3D"ltr" class=3D""><div class=3D"gmail_default" =
-style=3D"color:rgb(11,83,148)">Hi,</div><div class=3D"gmail_default" =
-style=3D"color:rgb(11,83,148)"><br class=3D""></div><div =
-class=3D"gmail_default" style=3D"color:rgb(11,83,148)">I am using Debian =
-as Domain-0 and Debian as Domain-U on Hikey960 platform(ARMv8) and using =
-Xen-4.8 stable release. Here I want to create a PV frontend and backend =
-to share memory between Domain-0 and Domain-U.&nbsp;</div><div =
-class=3D"gmail_default" style=3D"color:rgb(11,83,148)"><br =
-class=3D""></div><div class=3D"gmail_default" =
-style=3D"color:rgb(11,83,148)"><br class=3D""></div><div =
-class=3D"gmail_default"><br class=3D""></div><div =
-class=3D"gmail_default"><span style=3D"color:rgb(11,83,148)" class=3D"">I =
-used below link to create frontend and backend,</span><font =
-color=3D"#0b5394" class=3D""><br class=3D""></font></div><div =
-class=3D"gmail_default"><font color=3D"#0b5394" class=3D""><a =
-href=3D"https://fnordig.de/2016/12/02/xen-a-backend-frontend-driver-exampl=
-e/" =
-class=3D"">https://fnordig.de/2016/12/02/xen-a-backend-frontend-driver-exa=
-mple/</a></font><br class=3D""></div><div class=3D"gmail_default"><br =
-class=3D""></div><div class=3D"gmail_default"><font color=3D"#0b5394" =
-class=3D"">But I am facing below errors while adding device vdevb to =
-xenstore.&nbsp;</font></div><div class=3D"gmail_default"><font =
-color=3D"#0b5394" class=3D"">Below errors I am getting =
-from&nbsp;xenbus_switch_state().</font></div><div =
-class=3D"gmail_default"><span style=3D"color:rgb(11,83,148)" =
-class=3D"">vdevb vdevb-0: failed to write error node for device/vdevb/0 =
-(13 writing new state)</span><br class=3D""></div><div =
-class=3D"gmail_default"><span style=3D"color:rgb(11,83,148)" =
-class=3D""><br class=3D""></span></div><div class=3D"gmail_default" =
-style=3D"color:rgb(11,83,148)">Please suggest me, How to create PV =
-drivers.</div><div class=3D"gmail_default" =
-style=3D"color:rgb(11,83,148)"><br class=3D""></div><div =
-class=3D"gmail_default" style=3D"color:rgb(11,83,148)">Thanks,</div><div =
-class=3D"gmail_default" style=3D"color:rgb(11,83,148)">Omkar =
-B</div></div></div></div></div>
-
-<br class=3D""><p class=3D""><span lang=3D"EN-IN" class=3D"">This
-message contains confidential information and is intended only for the
-individual(s) named.</span><span lang=3D"EN-IN" class=3D""> </span>If =
-you are not the intended
-recipient, you are notified that disclosing, copying, distributing or =
-taking any
-action in reliance on the contents of this mail and attached file/s is =
-strictly
-prohibited<span lang=3D"EN-IN" class=3D"">. Please notify the
-sender immediately and delete this e-mail from your system. E-mail =
-transmission
-cannot be guaranteed to be secured or error-free as information could be
-intercepted, corrupted, lost, destroyed, arrive late or incomplete, or =
-contain
-viruses. The sender therefore does not accept liability for any errors =
-or
-omissions in the contents of this message, which arise as a result of =
-e-mail
-=
-transmission.</span></p>_______________________________________________<br=
- class=3D"">Xen-devel mailing list<br class=3D""><a =
-href=3D"mailto:Xen-devel@lists.xenproject.org" =
-class=3D"">Xen-devel@lists.xenproject.org</a><br =
-class=3D"">https://lists.xenproject.org/mailman/listinfo/xen-devel</div></=
-blockquote></div><br class=3D""></body></html>=
-
---Apple-Mail=_FE3EE81C-D827-4BA6-BE98-08E666AA027A--
-
-
---===============4853633143287771523==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4853633143287771523==--
+SGkgUGF1bCwKCk9uIDA5LzI3LzIwMTggMDk6MzggQU0sIFBhdWwgRHVycmFudCB3cm90ZToKPj4g
+LS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0KPj4gRnJvbTogSnVsaWVuIEdyYWxsIFttYWlsdG86
+anVsaWVuLmdyYWxsQGFybS5jb21dCj4+IFNlbnQ6IDI2IFNlcHRlbWJlciAyMDE4IDIyOjMyCj4+
+IFRvOiBQYXVsIER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPjsgJ0phbiBCZXVsaWNo
+Jwo+PiA8SkJldWxpY2hAc3VzZS5jb20+Cj4+IENjOiBBbmRyZXcgQ29vcGVyIDxBbmRyZXcuQ29v
+cGVyM0BjaXRyaXguY29tPjsgUm9nZXIgUGF1IE1vbm5lCj4+IDxyb2dlci5wYXVAY2l0cml4LmNv
+bT47IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz47IHhlbi0KPj4g
+ZGV2ZWwgPHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZz4KPj4gU3ViamVjdDogUmU6IElP
+UkVRIHNlcnZlciBvbiBBcm0KPj4KPj4gSGkgUGF1bCwKPj4KPj4gT24gMDkvMjYvMjAxOCAwMTow
+MSBQTSwgUGF1bCBEdXJyYW50IHdyb3RlOgo+Pj4+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0t
+Cj4+Pj4gRnJvbTogSmFuIEJldWxpY2ggW21haWx0bzpKQmV1bGljaEBzdXNlLmNvbV0KPj4+PiBT
+ZW50OiAyNiBTZXB0ZW1iZXIgMjAxOCAxMjo1Nwo+Pj4+IFRvOiBQYXVsIER1cnJhbnQgPFBhdWwu
+RHVycmFudEBjaXRyaXguY29tPgo+Pj4+IENjOiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBh
+cm0uY29tPjsgQW5kcmV3IENvb3Blcgo+Pj4+IDxBbmRyZXcuQ29vcGVyM0BjaXRyaXguY29tPjsg
+Um9nZXIgUGF1IE1vbm5lIDxyb2dlci5wYXVAY2l0cml4LmNvbT47Cj4+Pj4gU3RlZmFubyBTdGFi
+ZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPjsgeGVuLWRldmVsIDx4ZW4tCj4+Pj4gZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmc+Cj4+Pj4gU3ViamVjdDogUkU6IElPUkVRIHNlcnZlciBv
+biBBcm0KPj4+Pgo+Pj4+Pj4+IE9uIDI2LjA5LjE4IGF0IDEzOjAyLCA8UGF1bC5EdXJyYW50QGNp
+dHJpeC5jb20+IHdyb3RlOgo+Pj4+PiAtLS0gYS94ZW4vY29tbW9uL21lbW9yeS5jCj4+Pj4+ICsr
+KyBiL3hlbi9jb21tb24vbWVtb3J5LmMKPj4+Pj4gQEAgLTExMDUsOCArMTEwNSwxMSBAQCBzdGF0
+aWMgaW50IGFjcXVpcmVfcmVzb3VyY2UoCj4+Pj4+Cj4+Pj4+ICAgICAgICAgICAgZm9yICggaSA9
+IDA7ICFyYyAmJiBpIDwgeG1hci5ucl9mcmFtZXM7IGkrKyApCj4+Pj4+ICAgICAgICAgICAgewo+
+Pj4+PiAtICAgICAgICAgICAgcmMgPSBzZXRfZm9yZWlnbl9wMm1fZW50cnkoY3VycmQsIGdmbl9s
+aXN0W2ldLAo+Pj4+PiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgX21m
+bihtZm5fbGlzdFtpXSkpOwo+Pj4+PiArICAgICAgICAgICAgcmMgPSAoeG1hci5mbGFncyAmIFhF
+Tk1FTV9yc3JjX2FjcV9jYWxsZXJfb3duZWQpID8KPj4+Pj4gKyAgICAgICAgICAgICAgICBndWVz
+dF9waHlzbWFwX2FkZF9lbnRyeShjdXJyZCwgZ2ZuX2xpc3RbaV0sCj4+Pj4+ICsgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgX21mbihtZm5fbGlzdFtpXSksIDAsCj4+Pj4g
+cDJtX3JhbV9ydykgOgo+Pj4+PiArICAgICAgICAgICAgICAgIHNldF9mb3JlaWduX3AybV9lbnRy
+eShjdXJyZCwgZ2ZuX2xpc3RbaV0sCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIF9tZm4obWZuX2xpc3RbaV0pKTsKPj4+Pj4gICAgICAgICAgICAgICAgLyogcmMg
+c2hvdWxkIGJlIC1FSU8gZm9yIGFueSBpdGVyYXRpb24gb3RoZXIgdGhhbiB0aGUKPj4gZmlyc3QK
+Pj4+PiAqLwo+Pj4+PiAgICAgICAgICAgICAgICBpZiAoIHJjICYmIGkgKQo+Pj4+PiAgICAgICAg
+ICAgICAgICAgICAgcmMgPSAtRUlPOwo+Pj4+Pgo+Pj4+PiBCdXQgdGhlIGd1ZXN0X3BoeXNtYXBf
+YWRkX2VudHJ5KCkgaXMgcHJvYmxlbWF0aWMgYXMgaXQgd2lsbCBJT01NVSBtYXAKPj4+PiBwYWdl
+cwo+Pj4+PiBhcyB3ZWxsLCB3aGljaCBpcyBwcm9iYWJseSBub3Qgd2FudGVkLgo+Pj4+Cj4+Pj4g
+WWVhaCwgSSdkIHByZWZlciBpZiB3ZSBhdm9pZGVkIGVzdGFibGlzaGluZyBJT01NVSBtYXBwaW5n
+cyBoZXJlLgo+Pj4+IEhvdyBhYm91dCB0cmFuc2Zvcm1pbmcgc2V0X2ZvcmVpZ25fcDJtX2VudHJ5
+KCkgaW50bwo+Pj4+IHNldF9zcGVjaWFsX3AybV9lbnRyeSgpLCB3aXRoIGEgdHlwZSBwYXNzZWQg
+aW4/Cj4+Pj4KPj4+Cj4+PiBUaGF0IHNvdW5kcyBsaWtlIGl0IG1pZ2h0IHdvcmsuCj4+Pgo+Pj4g
+SnVsaWVuLCBkbyB5b3Ugd2FudCBwYWdlIHR5cGVzIHRvIGRpc3Rpbmd1aXNoIGNhbGxlci1vd25l
+ZCByZXNvdXJjZXMKPj4gZnJvbSBub3JtYWwgUkFNIGFyZSB5b3Ugb2sgd2l0aCBwMm1fcmFtX3J3
+IGV2ZW4gdGhvdWdoIGl0IGNvdWxkIGJlIHN1YmplY3QKPj4gb2YgYW5vdGhlciBkb21haW4ncyBm
+b3JlaWduIG1hcD8KPj4KPj4gQmFzZWQgb24geW91ciBwcmV2aW91cyBlLW1haWwsIEkgd291bGQg
+YmUgZmluZSB3aXRoIHRoYXQgb24gQXJtLgo+Pgo+PiBUaGlzIGJyaW5ncyBtZSB0byB0aGUgbmV4
+dCBxdWVzdGlvbi4gRG8geW91IGV4cGVjdCBzZXRfc3BlY2lhbF9wMm1fZW50cnkKPj4gdG8gdGFr
+ZSBhIHJlZmVyZW5jZSBvbiB0aGUgcGFnZT8KPj4KPj4gSWYgbm90LCB3ZSBtYXkgcnVuIGludG8g
+c29tZSB0cm91YmxlcyBiZWNhdXNlIEFGQUlDVCB5b3UgY2FuIG1hcCB0d2ljZQo+PiB0aGUgaW9y
+ZXEgcGFnZSBpbiBhIGd1ZXN0IGJ1dCByZWZlcmVuY2Ugd2lsbCBvbmx5IGJlIHRha2VuIG9uIHRo
+ZQo+PiBhbGxvY2F0aW9uLgo+Pgo+PiBIb3dldmVyLCB0aGUgdW5tYXAgcGF0aCB3aWxsIGFsd2F5
+cyBkcm9wIGEgcmVmZXJlbmNlIHdoZW4gcmVtb3ZpbmcgdGhlCj4+IHBhZ2UuIFRoaXMgaXMgYmVj
+YXVzZSBYZW4gYXQgdGhlIG1vbWVudCwgcmVmZXJlbmNlIHdpbGwgbm90IGJlIHRha2VuIG9uCj4+
+IG1hcHBpbmcgYnV0IGFsbG9jYXRpb24gKHdlIGFzc3VtZSBhIHBhZ2UgY291bGQgbm90IGJlIG1h
+cHBlZCB0d2ljZSBpbiBhCj4+IGd1ZXN0KS4KPj4KPj4gRm9yZWlnbiBtYXBwaW5nIG9uIEFybSBh
+cmUgYSBiaXQgc3BlY2lhbCBiZWNhdXNlIHdlIGdldCBhIHJlZmVyZW5jZSBvbgo+PiBtYXBwaW5n
+IHRoZW0gYW5kIHdpbGwgZHJvcCBpdCB3aGVuIHRoZSBtYXBwaW5nIGRpc2FwcGVhci4gU28gd2Ug
+d291bGQKPj4gbm90IGhhdmUgYW55IHByb2JsZW0gdGhlcmUuCj4+Cj4+IEFueSB0aG91Z2h0cz8K
+PiAKPiBXZWxsLCBhcyBKYW4gc2F5cywgb24geDg2IHdlIGRvbid0IHJlZmVyZW5jZSBjb3VudCBp
+biB0aGUgUDJNIHNvIG11bHRpcGxlIG1hcHBpbmdzIHNob3VsZCBub3QgYmUgYW4gaXNzdWUgQUZB
+SUNULgoKSSB1bmRlcnN0YW5kIHRoYXQgeW91IGRvbid0IGhhdmUgcmVmZXJlbmNlIGNvdW50IGlu
+IHRoZSBQMk0gKHRoYXQncyB0aGUgCnNhbWUgb24gQXJtIHRvZGF5IGV4Y2VwdCBmb3IgZm9yZWln
+biBtYXBwaW5nKS4gQnV0IEkgdGhpbmsgSSBjYW4gbGlzdCBhdCAKbGVhc3QgMiBtYWpvciBpc3N1
+ZXMgd2l0aCB0aGUgZGVzaWduIHRvZGF5LiBMZXQgbWUgZ2l2ZSBhbiBleGFtcGxlIGJhc2VkIApv
+biBteSB1bmRlcnN0YW5kaW5nLgoKICAgMS4gRE0gcmVxdWVzdHMgdG8gbWFwIHRoZSBJT1JFUSBw
+YWdlCglhKSBwYWdlIGFsbG9jYXRlZCAob25lIHJlZmVyZW5jZSkKCWIpIGdldCByZWZlcmVuY2Ug
+KHdpbGwgYmUgZHJvcHBlZCB3aGVuIHRoZSBJT1JFUSBzZXJ2ZXIgaXMgZGVzdHJveWVkKQoKICAg
+Mi4gRE0gcmVxdWVzdHMgdG8gbWFwIHRoZSBJT1JFUSBwYWdlIChzZWNvbmQgdGltZSkKCU5vIHJl
+ZmVyZW5jZSB0YWtlbgoKICAgMy4gRE0gdW5tYXAgdGhlIElPUkVRIHBhZ2UKICAgNC4gRE0gdW5t
+YXAgdGhlIElPUkVRIHBhZ2UKCkFGQUlVLCAzLiA0LiB3b3VsZCBiZSBkb25lIHRocm91Z2ggWEVO
+TUVNX3JlbW92ZV9mcm9tX3BoeXNtYXAuIFNvIG5vIApyZWZlcmVuY2UgZHJvcHBlZCB0aGVyZS4g
+V2hpbGUgdGhlIHJlZmVyZW5jZSAxLmIpIHdpbGwgYmUgZHJvcHBlZCBpbiAKaHZtX2ZyZWVfaW9y
+ZXFfbWZuLiBBRkFJQ1QgMS5hKSB3b3VsZCBiZSBrZXB0IHVudGlsIHRoZSBkb21haW4gZGllLiBU
+aGlzIAp3b3VsZCByZXN1bHQgdG8gWGVuIG1lbW9yeSBleGhhdXN0aW9uIGluIGxvbmcgdGVybS4g
+RGlkIEkgbWlzcyBhbnl0aGluZz8KCkJ1dCwgSSB0aGluayB0aGVyZSBhcmUgYW5vdGhlciB3YXkg
+Zm9yIGJhZGx5IHdyaXR0ZW4gZ3Vlc3QgdG8gcmVtb3ZlIHRoZSAKcGFnZS4gSXQgbG9va3MgbGlr
+ZSB5b3UgY2FuIHVzZSBYRU5NRU1fZGVjcmVhc2VfcmVzZXJ2YXRpb24gYXMgdGhlIHBhZ2UgCmJl
+bG9uZ3MgdG8gdGhlIGd1ZXN0LiBTbyBhIHJlZmVyZW5jZSB3b3VsZCBiZSBkcm9wcGVkIGJ5IDMu
+IGFuZCA0LgoKV2hpbGUgMy4gd2lsbCBkcm9wIHRoZSByZWZlcmVuY2UgZHJvcCBieSAxLmEpLCA0
+LiBtYXkgZHJvcCB0aGUgcmVmZXJlbmNlIApmcm9tIDEuYikgYW5kIHJlbGVhc2luZyB0aGUgcGFn
+ZSBmb3IgZ29vZC4gQWx0aG91Z2ggdGhlIHBhZ2Ugd2lsbCBzdGlsbCAKYmUgYXNzb2NpYXRlZCB3
+aXRoIHRoZSBJT1JFUSBzZXJ2ZXIgdW50aWwgaXQgaGFzIGJlZW4gZWZmZWN0aXZlbHkgCmRlc3Ry
+b3llZC4gRGlkIEkgbWlzcyBhbnl0aGluZyBpbiB0aGUgY29kZT8KCj4gSXQgc291bmRzIGxpa2Ug
+cmVzb3VyY2UgbWFwcGluZyBzaG91bGQgYmUgdHJlYXRlZCB0aGUgc2FtZSB3YXkgYXMgZm9yZWln
+biBtYXBwaW5nIChhbGJlaXQgd2l0aCBhIG5vbi1mb3JlaWduIGRvbWlkKSBzdWNoIHRoYXQgdGhl
+IHJlZmVyZW5jZSBhY3F1aXNpdGlvbiBvY2N1cnMgYXQgbWFwIHRpbWUuCgpJZiBteSB1bmRlcnN0
+YW5kaW5nIGlzIGNvcnJlY3QgdGhlbiB5ZXMgaXQgd291bGQgYmUgbXVjaCBzYWZlciB0byBnZXQg
+CnJlZmVyZW5jZSBoZXJlLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
