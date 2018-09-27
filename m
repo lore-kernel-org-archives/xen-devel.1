@@ -1,11 +1,31 @@
-From: Omkar Bolla <omkar.bolla@pathpartnertech.com>
-Subject: Xen PV: Sample new PV driver for buffer sharing between
- domains
-Date: Thu, 27 Sep 2018 11:14:41 +0530
-Message-ID: <CAC4nxbvWUpWQcUATQswoaVJfSq8EU7CH6-Jx1VwVGYVeOc0tZw@mail.gmail.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 00/12] add per-domain and per-cpupool
+ generic parameters
+Date: Thu, 27 Sep 2018 07:58:39 +0200
+Message-ID: <d66cfde2-ffc3-0275-60d9-231763953f6f@suse.com>
+References: =?UTF-8?Q?<20180918060309.7186=3d3d3def=3d3d3dbf=3d3d3dbd1=3d3d3?=
+ =?UTF-8?Q?def=3d3d3d=3f=3dbf=3d3dbdjgr=3f=3doss@suse.com=3f=3d>_<5BA0D44602?=
+ =?UTF-8?Q?000078001E93EA@prv1=ef=bf=bdmh.provo.novell.com>_<7cb2a460-095c-2?=
+ =?UTF-8?Q?7c8-a4cf-47ef8e7850d5@suse.com>_<5BA0DF9602000078001=3d=3fUTF-8?=
+ =?UTF-8?Q?=3fQ=3fE9448@suse.com>_<6d56ad90-7825-adb7-f4e5-6c3ceb3210f6@suse?=
+ =?UTF-8?Q?.com>_<001ab73a-078d-4ec1-4acd-2fb4389e8867@citrix.com>_<20180919?=
+ =?UTF-8?Q?172818.3aksiju4s3ipw42p@zion.uk.xens=3d=3fUTF-8=3fQ=3fource.com>_?=
+ =?UTF-8?Q?<fffd7e59-e437-8ed9-b228-b537fde050cd@suse.com>_<20180920160629.j?=
+ =?UTF-8?Q?ullgb435zi7bcbr@zi=3d=3fUTF-8=3fQ=3fon.uk.xensource.com>_<eba521d?=
+ =?UTF-8?Q?2-f6c5-5096-82c2-af5983ed2372@suse.com>_<20180921085240.dqzt5pomt?=
+ =?UTF-8?Q?nfjs665@zion.uk.xensource.com>?=
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6858121191328241399=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=ndfh=mj=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1g5PK0-0002n0-DA
+ for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 05:58:44 +0000
+In-Reply-To: <20180921085240.dqzt5pomt?=
+ =?UTF-8?Q?nfjs665@zion.uk.xensource.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,131 +34,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xensource.com
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Daniel de Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
---===============6858121191328241399==
-Content-Type: multipart/alternative; boundary="0000000000007b1ff20576d3d683"
-
---0000000000007b1ff20576d3d683
-Content-Type: text/plain; charset="UTF-8"
-
-Hi,
-
-I am using Debian as Domain-0 and Debian as Domain-U on Hikey960
-platform(ARMv8) and using Xen-4.8 stable release. Here I want to create a
-PV frontend and backend to share memory between Domain-0 and Domain-U.
-
-
-
-I used below link to create frontend and backend,
-https://fnordig.de/2016/12/02/xen-a-backend-frontend-driver-example/
-
-But I am facing below errors while adding device vdevb to xenstore.
-Below errors I am getting from xenbus_switch_state().
-vdevb vdevb-0: failed to write error node for device/vdevb/0 (13 writing
-new state)
-
-Please suggest me, How to create PV drivers.
-
-Thanks,
-Omkar B
-
--- 
-
-
-
-
-
-
-This
-message contains confidential information and is intended only 
-for the
-individual(s) named. If you are not the intended
-recipient, you are 
-notified that disclosing, copying, distributing or taking any
-action in 
-reliance on the contents of this mail and attached file/s is strictly
-
-prohibited. Please notify the
-sender immediately and delete this e-mail 
-from your system. E-mail transmission
-cannot be guaranteed to be secured or 
-error-free as information could be
-intercepted, corrupted, lost, destroyed, 
-arrive late or incomplete, or contain
-viruses. The sender therefore does 
-not accept liability for any errors or
-omissions in the contents of this 
-message, which arise as a result of e-mail
-transmission.
-
---0000000000007b1ff20576d3d683
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div cl=
-ass=3D"gmail_default" style=3D"color:rgb(11,83,148)">Hi,</div><div class=3D=
-"gmail_default" style=3D"color:rgb(11,83,148)"><br></div><div class=3D"gmai=
-l_default" style=3D"color:rgb(11,83,148)">I am using Debian as Domain-0 and=
- Debian as Domain-U on Hikey960 platform(ARMv8) and using Xen-4.8 stable re=
-lease. Here I want to create a PV frontend and backend to share memory betw=
-een Domain-0 and Domain-U.=C2=A0</div><div class=3D"gmail_default" style=3D=
-"color:rgb(11,83,148)"><br></div><div class=3D"gmail_default" style=3D"colo=
-r:rgb(11,83,148)"><br></div><div class=3D"gmail_default"><br></div><div cla=
-ss=3D"gmail_default"><span style=3D"color:rgb(11,83,148)">I used below link=
- to create frontend and backend,</span><font color=3D"#0b5394"><br></font><=
-/div><div class=3D"gmail_default"><font color=3D"#0b5394"><a href=3D"https:=
-//fnordig.de/2016/12/02/xen-a-backend-frontend-driver-example/">https://fno=
-rdig.de/2016/12/02/xen-a-backend-frontend-driver-example/</a></font><br></d=
-iv><div class=3D"gmail_default"><br></div><div class=3D"gmail_default"><fon=
-t color=3D"#0b5394">But I am facing below errors while adding device vdevb =
-to xenstore.=C2=A0</font></div><div class=3D"gmail_default"><font color=3D"=
-#0b5394">Below errors I am getting from=C2=A0xenbus_switch_state().</font><=
-/div><div class=3D"gmail_default"><span style=3D"color:rgb(11,83,148)">vdev=
-b vdevb-0: failed to write error node for device/vdevb/0 (13 writing new st=
-ate)</span><br></div><div class=3D"gmail_default"><span style=3D"color:rgb(=
-11,83,148)"><br></span></div><div class=3D"gmail_default" style=3D"color:rg=
-b(11,83,148)">Please suggest me, How to create PV drivers.</div><div class=
-=3D"gmail_default" style=3D"color:rgb(11,83,148)"><br></div><div class=3D"g=
-mail_default" style=3D"color:rgb(11,83,148)">Thanks,</div><div class=3D"gma=
-il_default" style=3D"color:rgb(11,83,148)">Omkar B</div></div></div></div><=
-/div>
-
-<br>
-
-
-
-
-<p><span lang=3D"EN-IN">This
-message contains confidential information and is intended only for the
-individual(s) named.</span><span lang=3D"EN-IN"> </span>If you are not the =
-intended
-recipient, you are notified that disclosing, copying, distributing or takin=
-g any
-action in reliance on the contents of this mail and attached file/s is stri=
-ctly
-prohibited<span lang=3D"EN-IN">. Please notify the
-sender immediately and delete this e-mail from your system. E-mail transmis=
-sion
-cannot be guaranteed to be secured or error-free as information could be
-intercepted, corrupted, lost, destroyed, arrive late or incomplete, or cont=
-ain
-viruses. The sender therefore does not accept liability for any errors or
-omissions in the contents of this message, which arise as a result of e-mai=
-l
-transmission.</span></p>
---0000000000007b1ff20576d3d683--
-
-
---===============6858121191328241399==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6858121191328241399==--
+T24gMjEvMDkvMTggMTA6NTIsIFdlaSBMaXUgd3JvdGU6Cj4gT24gRnJpLCBTZXAgMjEsIDIwMTgg
+YXQgMDc6MjM6MjNBTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPj4gT24gMjAvMDkvMTgg
+MTg6MDYsIFdlaSBMaXUgd3JvdGU6Cj4+PiBPbiBXZWQsIFNlcCAxOSwgMjAxOCBhdCAwNzo1ODo1
+MFBNICswMjAwLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+Pj4+Cj4+Pj4gRGlkIHlvdSBsb29rIGlu
+dG8gdGhlIHBhdGNoZXMsIGVzcGVjaWFsbHkgcGF0Y2ggMTA/IFRoZSBwYXJhbWV0ZXJzIHNldAo+
+Pj4+IGFyZSBhbGwgc3RvcmVkIGluIGRvbWFpbiBjb25maWcgdmlhIGxpYnhsX19hcmNoX2RvbWFp
+bl9zYXZlX2NvbmZpZygpLgo+Pj4KPj4+IE5vLCBJIGRpZG4ndC4KPj4+Cj4+PiBJIHRoaW5rIHRo
+ZSBnZW5lcmFsIGlkZWEgb2Ygd2hhdCB5b3UgZG8gaW4gcGF0Y2ggMTAgc2hvdWxkIHdvcmsuIEhv
+d2V2ZXIKPj4+IEkgd2FudCB0byBjb21tZW50IG9uIHRoZSBpbXBsZW1lbnRhdGlvbi4KPj4+Cj4+
+PiBJdCBhcHBlYXJzIHRoYXQgdGhlIGltcGxlbWVudGF0aW9uIGluIHBhdGNoIDEwIGNvbmNhdGVu
+YXRlcyB0aGUgbmV3Cj4+PiBzZXR0aW5ncyB0byB0aGUgb2xkIG9uZXMuIEl0IGlzIG5vdCB2ZXJ5
+IG5pY2UgaW1vLgo+Pj4KPj4+IElmIGZvciB0aGUgbGlmZSB0aW1lIG9mIHRoZSBkb21haW4geW91
+IHNldCBYIHRpbWVzIHRoZSBzYW1lIHBhcmFtZXRlcgo+Pj4geW91IGdldCBhIHN0cmluZyBvZiBm
+b289YmFyMSBmb289YmFyMiBpbiB0aGUgc2F2ZWQgY29uZmlnIGZpbGUuCj4+Pgo+Pj4gVGhlcmUg
+aXMgcHJvYmFibHkgYSBzaW1wbGUgc29sdXRpb246IG1ha2UgdGhlIHBhcmFtZXRlciBsaXN0IGlu
+IElETCBhCj4+PiBrZXkgdmFsdWUgbGlzdC4gWW91IHRoZW4gdXBkYXRlIHRoZSBsaXN0IGFjY29y
+ZGluZ2x5Lgo+Pgo+PiBUaGUgcHJvYmxlbSB3aXRoIHRoYXQgYXBwcm9hY2ggYXJlIHBhcmFtZXRl
+cnMgd2l0aCBzdWItcGFyYW1ldGVyczoKPj4KPj4gcGFyPXN1YjE9bm8sc3ViMj15ZXMKPj4gcGFy
+PXN1YjI9eWVzCj4gCj4gVGhhdCBtZWFucyB0aGUgdmFsdWUgdHlwZSBvZiB0aGUgdG9wIGxldmVs
+IGtleSB2YWx1ZSBsaXN0IHNob3VsZCBpZGVhbGx5Cj4gYmUgYW5vdGhlciBrZXkgdmFsdWUgbGlz
+dC4gSSBkbyBub3RpY2UgdGhlIGxpbWl0YXRpb24gaW4gdGhlIGtleSB2YWx1ZQo+IGxpc3QgdHlw
+ZTogdGhlIHZhbHVlIGNhbiBvbmx5IGJlIHN0cmluZy4KPiAKPiBUaGVyZSBpcyBhbm90aGVyIHdh
+eSB0byBzb2x2ZSB0aGlzOiBmdXJ0aGVyIHBhcnNlIHRoZSBzdWItcGFyYW1ldGVycy4KPiBUaGlz
+IGRvZXNuJ3QgcmVxdWlyZSBhbnkgcGFyYW1ldGVyIHNwZWNpZmljIGtub3dsZWRnZSBhbmQgdGhl
+cmUgYXJlCj4gYWxyZWFkeSBmdW5jdGlvbnMgdG8gc3BsaXQgc3RyaW5ncy4KCkkgZG9uJ3QgdGhp
+bmsgdGhpcyB3aWxsIHdvcmsgZm9yIHRoZSBnZW5lcmFsIGNhc2UuIEl0IG1pZ2h0IGJlIHRoYXQK
+CnBhcj1ubwoKd2lsbCBzd2l0Y2ggb2ZmIGFsbCBzdWItcGFyYW1ldGVycy4gSG93IHdvdWxkIHlv
+dSBoYW5kbGUgdGhhdD8KCkknbSBsb29raW5nIGludG8gYSB3YXkgdG8gcmVwb3J0IHRoZSBjdXJy
+ZW50IHBhcmFtZXRlciBzZXR0aW5ncy4KCgpKdWVyZ2VuCgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
