@@ -1,21 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v12 9/9] mm / iommu: split need_iommu() into
- has_iommu_pt() and need_iommu_pt_sync()
-Date: Thu, 27 Sep 2018 09:44:57 -0600
-Message-ID: <5BACFAF902000078001ECB26@prv1-mh.provo.novell.com>
-References: <20180927143333.17516-1-paul.durrant@citrix.com>
- <20180927143333.17516-10-paul.durrant@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] x86: assert MBI is large enough in
+ pvh-boot.c
+Date: Thu, 27 Sep 2018 17:06:33 +0100
+Message-ID: <20180927160633.on662jxxkqhs6x65@zion.uk.xensource.com>
+References: <20180926110000.9764-1-wei.liu2@citrix.com>
+ <717a420a-718f-7167-2f2e-74327cfa731a@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=gbjr=mj=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1g5YTO-0002Eh-5P
- for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 15:45:02 +0000
-In-Reply-To: <20180927143333.17516-10-paul.durrant@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=ygxm=mj=citrix.com=prvs=801769520=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1g5YoH-0004ET-CE
+ for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 16:06:37 +0000
 Content-Disposition: inline
+In-Reply-To: <717a420a-718f-7167-2f2e-74327cfa731a@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,48 +24,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Tamas K Lengyel <tamas@tklengyel.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, xen-devel <xen-devel@lists.xenproject.org>, Brian Woods <brian.woods@amd.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI3LjA5LjE4IGF0IDE2OjMzLCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+IHYxMjoKPiAgLSBGaXggdHdvIG1pcy11c2VzIG9mIGlvbW11X2hhcF9wdF9zaGFyZSgpLgoK
-SSBoYWQgaG9wZWQgdGhhdCB3aXRoIG15IHJlcGx5IHRvIHYxMSB5b3Ugd291bGQgaGF2ZSBnb25l
-IHRocm91Z2gKYWxsIHVzZXMsIG5vdCBqdXN0IHRoZSBvbmVzIHlvdXIgc2VyaWVzIGFkZHMgb3Ig
-bW9kaWZpZXMuIEF0IHRoZSB2ZXJ5CmxlYXN0IHRoZSBvbmUgaW4gaW9tbXVfY29uc3RydWN0KCkg
-aXMgYm9ndXMgdG9vLCBhcyBQViBkb21haW5zIGFsc28KbWFrZSBpdCB0aGVyZS4KClBlcmhhcHMg
-aW4gdGhlIGVuZCB3ZSdyZSBiZXR0ZXIgb2ZmIGFkZGluZyBpc19odm1fZG9tYWluKCkgcmlnaHQg
-dG8KaGFwX2VuYWJsZWQoKS4gUGF0Y2gganVzdCBzZW50LgoKPiAtLS0gYS94ZW4vYXJjaC94ODYv
-eDg2XzY0L21tLmMKPiArKysgYi94ZW4vYXJjaC94ODYveDg2XzY0L21tLmMKPiBAQCAtMTQyNiw4
-ICsxNDI2LDEzIEBAIGludCBtZW1vcnlfYWRkKHVuc2lnbmVkIGxvbmcgc3BmbiwgdW5zaWduZWQg
-bG9uZyBlcGZuLCB1bnNpZ25lZCBpbnQgcHhtKQo+ICAgICAgaWYgKCByZXQgKQo+ICAgICAgICAg
-IGdvdG8gZGVzdHJveV9tMnA7Cj4gIAo+IC0gICAgaWYgKCBpb21tdV9lbmFibGVkICYmICFpb21t
-dV9od2RvbV9wYXNzdGhyb3VnaCAmJgo+IC0gICAgICAgICAhbmVlZF9pb21tdShoYXJkd2FyZV9k
-b21haW4pICkKPiArICAgIC8qCj4gKyAgICAgKiBJZiBoYXJkd2FyZSBkb21haW4gaGFzIElPTU1V
-IG1hcHBpbmdzIGJ1dCBwYWdlIHRhYmxlcyBhcmUgbm90Cj4gKyAgICAgKiBzaGFyZWQsIGFuZCBh
-cmUgbm90IGJlaW5nIGtlcHQgaW4gc3luYyAod2hpY2ggaXMgdGhlIGNhc2Ugd2hlbgo+ICsgICAg
-ICogaW4gc3RyaWN0IG1vZGUpIHRoZW4gbmV3bHkgYWRkZWQgbWVtb3J5IG5lZWRzIHRvIGJlIG1h
-cHBlZCBoZXJlLgo+ICsgICAgICovCj4gKyAgICBpZiAoIGhhc19pb21tdV9wdChoYXJkd2FyZV9k
-b21haW4pICYmCj4gKyAgICAgICAgICFpb21tdV9oYXBfcHRfc2hhcmUgJiYgIWlvbW11X2h3ZG9t
-X3N0cmljdCApCgpXaHkgbm90ICFpb21tdV91c2VfaGFwX3B0KCk/IElycmVzcGVjdGl2ZSBvZiBI
-QVAgYW5kIHNoYXJpbmcgYmVpbmcKYXZhaWxhYmxlLCB0aGUgaGFyZHdhcmUgZG9tYWluIG1heSBu
-b3QgdXNlIEhBUCBhbmQvb3Igc2hhcmluZy4gQWxzbwp0aGUgdXNlIG9mIGEgdGhlIGdsb2JhbCB2
-YXJpYWJsZSBoZXJlIHJlbmRlcnMgdGhlIFBWIGNhc2Ugd3JvbmcgaW4gYXQKbGVhc3Qgb25lIG9m
-IHRoZSBwb3NzaWJsZSBjb21iaW5hdGlvbnMuCgo+IC0tLSBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJv
-dWdoL3BjaS5jCj4gKysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvcGNpLmMKPiBAQCAtMTQx
-NiwxMCArMTQxNiw5IEBAIHN0YXRpYyBpbnQgYXNzaWduX2RldmljZShzdHJ1Y3QgZG9tYWluICpk
-LCB1MTYgc2VnLCB1OCBidXMsIHU4IGRldmZuLCB1MzIgZmxhZykKPiAgCj4gICAgICAvKiBQcmV2
-ZW50IGRldmljZSBhc3NpZ24gaWYgbWVtIHBhZ2luZyBvciBtZW0gc2hhcmluZyBoYXZlIGJlZW4g
-Cj4gICAgICAgKiBlbmFibGVkIGZvciB0aGlzIGRvbWFpbiAqLwo+IC0gICAgaWYgKCB1bmxpa2Vs
-eSghbmVlZF9pb21tdShkKSAmJgo+IC0gICAgICAgICAgICAoZC0+YXJjaC5odm0ubWVtX3NoYXJp
-bmdfZW5hYmxlZCB8fAo+IC0gICAgICAgICAgICAgdm1fZXZlbnRfY2hlY2tfcmluZyhkLT52bV9l
-dmVudF9wYWdpbmcpIHx8Cj4gLSAgICAgICAgICAgICBwMm1fZ2V0X2hvc3RwMm0oZCktPmdsb2Jh
-bF9sb2dkaXJ0eSkpICkKPiArICAgIGlmICggdW5saWtlbHkoZC0+YXJjaC5odm0ubWVtX3NoYXJp
-bmdfZW5hYmxlZCB8fAo+ICsgICAgICAgICAgICAgICAgICB2bV9ldmVudF9jaGVja19yaW5nKGQt
-PnZtX2V2ZW50X3BhZ2luZykgfHwKPiArICAgICAgICAgICAgICAgICAgcDJtX2dldF9ob3N0cDJt
-KGQpLT5nbG9iYWxfbG9nZGlydHkpICkKPiAgICAgICAgICByZXR1cm4gLUVYREVWOwoKV2hpbGUg
-YXMgcGVyIHYxMSBJJ20gaW4gZnVsbCBhZ3JlZW1lbnQgd2l0aCB0aGlzIHJlbW92YWwsIEkgdGhp
-bmsgaXQgbmVlZHMKY2FsbGluZyBvdXQgaW4gdGhlIGRlc2NyaXB0aW9uLgoKSmFuCgoKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBTZXAgMjYsIDIwMTggYXQgMTI6MDU6MDVQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBPbiAyNi8wOS8xOCAxMjowMCwgV2VpIExpdSB3cm90ZToKPiA+IFRoZSByZWxvY2F0
+aW9uIGNvZGUgaW4gX19zdGFydF94ZW4gcmVxdWlyZXMgb25lIGV4dHJhIGVsZW1lbnQgaW4gdGhl
+Cj4gPiBNQkkgc3RydWN0dXJlLiBCeSB0aGUgbG9va3Mgb2YgaXQgdGhlIHRlbXBvcmFyeSBNQkkg
+YXJyYXkgaXMgYWxyZWFkeQo+ID4gbGFyZ2UgZW5vdWdoLiBBZGQgYW4gYXNzZXJ0aW9uIHRvIGNh
+dGNoIGFueSBpc3N1ZSBpbiB0aGUgZnV0dXJlLgo+ID4KPiA+IFNpZ25lZC1vZmYtYnk6IFdlaSBM
+aXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4gCj4gV2hpbGUgdGhpcyBpcyBhbGwgd2VsbCBhbmQg
+Z29vZCwgdGhlIEFTU0VSVCgpIG5ldmVyIGFjdHVhbGx5IGdldHMgb3V0Cj4gb250byB0aGUgY29u
+c29sZS7CoCBUaGlzIGlzIGJlY2F1c2UsIHdoZW4gYSBmYWlsdXJlIG9jY3VycywgdGhlIGNvbnNv
+bGUKPiBoYXNuJ3QgYmVlbiBjb25maWd1cmVkIHlldC4KPiAKPiBGb3IgZGV2ZWxvcG1lbnQgcHVy
+cG9zZXMgSSB1c2U6Cj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9kcml2ZXJzL2NoYXIvY29uc29sZS5j
+IGIveGVuL2RyaXZlcnMvY2hhci9jb25zb2xlLmMKPiBpbmRleCBlNDgwMzlkLi42NGZlYmZhIDEw
+MDY0NAo+IC0tLSBhL3hlbi9kcml2ZXJzL2NoYXIvY29uc29sZS5jCj4gKysrIGIveGVuL2RyaXZl
+cnMvY2hhci9jb25zb2xlLmMKPiBAQCAtOTEsNyArOTEsNyBAQCBzdGF0aWMgdWludDMyX3QgY29u
+cmluZ2MsIGNvbnJpbmdwOwo+IMKgc3RhdGljIGludCBfX3JlYWRfbW9zdGx5IHNlcmNvbl9oYW5k
+bGUgPSAtMTsKPiDCoAo+IMKgI2lmZGVmIENPTkZJR19YODYKPiAtc3RhdGljIGJvb2wgX19yZWFk
+X21vc3RseSBvcHRfY29uc29sZV94ZW47IC8qIGNvbnNvbGU9eGVuICovCj4gK3N0YXRpYyBib29s
+IF9fcmVhZF9tb3N0bHkgb3B0X2NvbnNvbGVfeGVuID0gdHJ1ZTsgLyogY29uc29sZT14ZW4gKi8K
+PiDCoCNlbmRpZgo+IMKgCj4gwqBzdGF0aWMgREVGSU5FX1NQSU5MT0NLKGNvbnNvbGVfbG9jayk7
+Cj4gCj4gd2hpY2ggZ2V0cyB0aGUgZGV0YWlscyBvdXQgaW50byB0aGUgTDAgbG9nLgo+IAo+IEFz
+IGFuIGFkZGVuZHVtLCBtaWdodCBpdCBiZSB3b3J0aCBoYXZpbmcgb3B0X2NvbnNvbGVfeGVuIGJl
+IHRyaXN0YXRlLAo+IGFuZCBlbmFibGVkIGJ5IHRoZSBzdGFydCBvZiB0aGUgUFZIIHBhdGgsIHNv
+IGxvZyBtZXNzYWdlcyBiZWZvcmUgdGhlCj4gY29tbWFuZCBsaW5lIGlzIHBhcnNlZCBlbmQgdXAg
+YmVpbmcgZW1pdHRlZD8KClRoaXMgaXMgZmluZSBieSBtZS4KCldlaS4KCj4gCj4gfkFuZHJldwoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
