@@ -1,19 +1,13 @@
-From: Isaila Alexandru <aisaila@bitdefender.com>
-Subject: Re: [RFC PATCH 2/2] x86/mm: Add mem access rights to NPT
-Date: Thu, 27 Sep 2018 12:38:05 +0300
-Message-ID: <609e259387df6ee56b5890588eb70c40fdf748f0.camel@bitdefender.com>
-References: <20180926164741.13405-1-george.dunlap@citrix.com>
- <20180926164741.13405-2-george.dunlap@citrix.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: Xen PV: Sample new PV driver for buffer sharing
+ between domains
+Date: Thu, 27 Sep 2018 10:39:36 +0100
+Message-ID: <B9D01323-5CE0-4CAE-9A7C-2B1CE482A833@xenproject.org>
+References: <CAC4nxbvWUpWQcUATQswoaVJfSq8EU7CH6-Jx1VwVGYVeOc0tZw@mail.gmail.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
+Content-Type: multipart/mixed; boundary="===============4853633143287771523=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=4jve=mj=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
- id 1g5SkV-0004Yp-PH
- for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 09:38:19 +0000
-In-Reply-To: <20180926164741.13405-2-george.dunlap@citrix.com>
+In-Reply-To: <CAC4nxbvWUpWQcUATQswoaVJfSq8EU7CH6-Jx1VwVGYVeOc0tZw@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,36 +16,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Razvan Cojocaru <rcojocaru@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, Tamas K Lengyel <tamas.lengyel@zentific.com>
+To: Omkar Bolla <omkar.bolla@pathpartnertech.com>
+Cc: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xensource.com, Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCAyMDE4LTA5LTI2IGF0IDE3OjQ3ICswMTAwLCBHZW9yZ2UgRHVubGFwIHdyb3RlOgo+
-IEZyb206IElzYWlsYSBBbGV4YW5kcnUgPGFpc2FpbGFAYml0ZGVmZW5kZXIuY29tPgo+IAo+IFRo
-aXMgcGF0Y2ggYWRkcyBhY2Nlc3MgY29udHJvbCBmb3IgTlBUIG1vZGUuCj4gCj4gVGhlcmUgYXJl
-buKAmXQgZW5vdWdoIGV4dHJhIGJpdHMgdG8gc3RvcmUgdGhlIGFjY2VzcyByaWdodHMgaW4gdGhl
-IE5QVAo+IHAybQo+IHRhYmxlLCBzbyB3ZSBhZGQgYSByYWRpeCB0cmVlIHRvIHN0b3JlIGV4dHJh
-IGluZm9ybWF0aW9uLgo+IAo+IEZvciBlZmZpY2llbmN5Ogo+ICAtIE9ubHkgYWxsb2NhdGUgdGhp
-cyByYWRpeCB0cmVlIHdoZW4gd2UgZmlyc3Qgc3RvcmUgIm5vbi1kZWZhdWx0Igo+ICAgIGV4dHJh
-IGluZm9ybWF0aW9uCj4gCj4gIC0gUmVtb3ZlIGVudGlyZXMgd2hpY2ggbWF0Y2ggdGhlIGRlZmF1
-bHQgZXh0cmEgaW5mb3JtYXRpb24gcmF0aGVyCj4gICAgdGhhbiBjb250aW51aW5nIHRvIHN0b3Jl
-IHRoZW0KPiAKPiAgLSBGb3Igc3VwZXJwYWdlcywgb25seSBzdG9yZSBhbiBlbnRyeSBmb3IgdGhl
-IGZpcnN0IGdmbiBpbiB0aGUKPiAgICBzdXBlcnBhZ2UuICBVc2UgdGhlIG9yZGVyIG9mIHRoZSBw
-Mm0gZW50cnkgYmVpbmcgcmVhZCB0byBkZXRlcm1pbmUKPiAgICB0aGUgcHJvcGVyIHBsYWNlIHRv
-IGxvb2sgaW4gdGhlIHJhZGl4IHRhYmxlLgo+IAo+IE1vZGlmeSBwMm1fdHlwZV90b19mbGFncygp
-IHRvIGFjY2VwdCBhbmQgaW50ZXJwcmV0IGFuIGFjY2VzcyB2YWx1ZSwKPiBwYXJhbGxlbCB0byB0
-aGUgZXB0IGNvZGUuCj4gCj4gQWRkIGEgc2V0X2RlZmF1bHRfYWNjZXNzKCkgbWV0aG9kIHRvIHRo
-ZSBwMm0tcHQgYW5kIHAybS1lcHQgdmVyc2lvbnMKPiBvZiB0aGUgcDJtIHJhdGhlciB0aGFuIHNl
-dHRpbmcgaXQgZGlyZWN0bHksIHRvIGRlYWwgd2l0aCBkaWZmZXJlbnQKPiBkZWZhdWx0IHBlcm1p
-dHRlZCBhY2Nlc3MgdmFsdWVzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFsZXhhbmRydSBJc2FpbGEg
-PGFpc2FpbGFAYml0ZGVmZW5kZXIuY29tPgo+IFNpZ25lZC1vZmYtYnk6IEdlb3JnZSBEdW5sYXAg
-PGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KPiAtLS0KPiBOQiwgdGhpcyBpcyBjb21waWxlLXRl
-c3RlZCBvbmx5LgoKSSd2ZSB0ZXN0ZWQgdGhpcyB3aXRoIHhlbi1hY2Nlc3MgYW5kIGl0IHdvcmtz
-IGFzIGV4cGVjdGVkCj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9tb25pdG9yLmMgYi94
-ZW4vYXJjaC94ODYvbW9uaXRvci5jCj4gaW5kZXggM2M0MmUyMTkwNi4uMmU2YjFlNzVlNCAxMDA2
-NDQKPiAtLS0gYS94ZW4vYXJjaC94ODYvbW9uaXRvci5jCj4gKysrIGIveGVuL2FyY2gveDg2L21v
-bml0b3IuYwo+IEBAIC0yMCw2ICsyMCw3IEBACj4gICAqLwo+ICAKPiAgI2luY2x1ZGUgPGFzbS9t
-b25pdG9yLmg+Cj4gKyNpbmNsdWRlIDxhc20vcDJtLmg+CgpJcyB0aGlzIGludGVuZGVkPwoKUmVn
-YXJkcywKQWxleAoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============4853633143287771523==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_FE3EE81C-D827-4BA6-BE98-08E666AA027A"
+
+
+--Apple-Mail=_FE3EE81C-D827-4BA6-BE98-08E666AA027A
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+Adding a few people who have recently been working on PV drivers, as =
+well as Julien
+Lars
+
+> On 27 Sep 2018, at 06:44, Omkar Bolla =
+<omkar.bolla@pathpartnertech.com> wrote:
+>=20
+> Hi,
+>=20
+> I am using Debian as Domain-0 and Debian as Domain-U on Hikey960 =
+platform(ARMv8) and using Xen-4.8 stable release. Here I want to create =
+a PV frontend and backend to share memory between Domain-0 and Domain-U.=20=
+
+>=20
+>=20
+>=20
+> I used below link to create frontend and backend,
+> https://fnordig.de/2016/12/02/xen-a-backend-frontend-driver-example/ =
+<https://fnordig.de/2016/12/02/xen-a-backend-frontend-driver-example/>
+>=20
+> But I am facing below errors while adding device vdevb to xenstore.=20
+> Below errors I am getting from xenbus_switch_state().
+> vdevb vdevb-0: failed to write error node for device/vdevb/0 (13 =
+writing new state)
+>=20
+> Please suggest me, How to create PV drivers.
+>=20
+> Thanks,
+> Omkar B
+>=20
+> This message contains confidential information and is intended only =
+for the individual(s) named. If you are not the intended recipient, you =
+are notified that disclosing, copying, distributing or taking any action =
+in reliance on the contents of this mail and attached file/s is strictly =
+prohibited. Please notify the sender immediately and delete this e-mail =
+from your system. E-mail transmission cannot be guaranteed to be secured =
+or error-free as information could be intercepted, corrupted, lost, =
+destroyed, arrive late or incomplete, or contain viruses. The sender =
+therefore does not accept liability for any errors or omissions in the =
+contents of this message, which arise as a result of e-mail =
+transmission.
+>=20
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+
+--Apple-Mail=_FE3EE81C-D827-4BA6-BE98-08E666AA027A
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" =
+class=3D"">Adding a few people who have recently been working on PV =
+drivers, as well as Julien<br class=3D""><div>Lars</div><div><br =
+class=3D""><blockquote type=3D"cite" class=3D""><div class=3D"">On 27 =
+Sep 2018, at 06:44, Omkar Bolla &lt;<a =
+href=3D"mailto:omkar.bolla@pathpartnertech.com" =
+class=3D"">omkar.bolla@pathpartnertech.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><div dir=3D"ltr" =
+class=3D""><div dir=3D"ltr" class=3D""><div dir=3D"ltr" class=3D""><div =
+dir=3D"ltr" class=3D""><div class=3D"gmail_default" =
+style=3D"color:rgb(11,83,148)">Hi,</div><div class=3D"gmail_default" =
+style=3D"color:rgb(11,83,148)"><br class=3D""></div><div =
+class=3D"gmail_default" style=3D"color:rgb(11,83,148)">I am using Debian =
+as Domain-0 and Debian as Domain-U on Hikey960 platform(ARMv8) and using =
+Xen-4.8 stable release. Here I want to create a PV frontend and backend =
+to share memory between Domain-0 and Domain-U.&nbsp;</div><div =
+class=3D"gmail_default" style=3D"color:rgb(11,83,148)"><br =
+class=3D""></div><div class=3D"gmail_default" =
+style=3D"color:rgb(11,83,148)"><br class=3D""></div><div =
+class=3D"gmail_default"><br class=3D""></div><div =
+class=3D"gmail_default"><span style=3D"color:rgb(11,83,148)" class=3D"">I =
+used below link to create frontend and backend,</span><font =
+color=3D"#0b5394" class=3D""><br class=3D""></font></div><div =
+class=3D"gmail_default"><font color=3D"#0b5394" class=3D""><a =
+href=3D"https://fnordig.de/2016/12/02/xen-a-backend-frontend-driver-exampl=
+e/" =
+class=3D"">https://fnordig.de/2016/12/02/xen-a-backend-frontend-driver-exa=
+mple/</a></font><br class=3D""></div><div class=3D"gmail_default"><br =
+class=3D""></div><div class=3D"gmail_default"><font color=3D"#0b5394" =
+class=3D"">But I am facing below errors while adding device vdevb to =
+xenstore.&nbsp;</font></div><div class=3D"gmail_default"><font =
+color=3D"#0b5394" class=3D"">Below errors I am getting =
+from&nbsp;xenbus_switch_state().</font></div><div =
+class=3D"gmail_default"><span style=3D"color:rgb(11,83,148)" =
+class=3D"">vdevb vdevb-0: failed to write error node for device/vdevb/0 =
+(13 writing new state)</span><br class=3D""></div><div =
+class=3D"gmail_default"><span style=3D"color:rgb(11,83,148)" =
+class=3D""><br class=3D""></span></div><div class=3D"gmail_default" =
+style=3D"color:rgb(11,83,148)">Please suggest me, How to create PV =
+drivers.</div><div class=3D"gmail_default" =
+style=3D"color:rgb(11,83,148)"><br class=3D""></div><div =
+class=3D"gmail_default" style=3D"color:rgb(11,83,148)">Thanks,</div><div =
+class=3D"gmail_default" style=3D"color:rgb(11,83,148)">Omkar =
+B</div></div></div></div></div>
+
+<br class=3D""><p class=3D""><span lang=3D"EN-IN" class=3D"">This
+message contains confidential information and is intended only for the
+individual(s) named.</span><span lang=3D"EN-IN" class=3D""> </span>If =
+you are not the intended
+recipient, you are notified that disclosing, copying, distributing or =
+taking any
+action in reliance on the contents of this mail and attached file/s is =
+strictly
+prohibited<span lang=3D"EN-IN" class=3D"">. Please notify the
+sender immediately and delete this e-mail from your system. E-mail =
+transmission
+cannot be guaranteed to be secured or error-free as information could be
+intercepted, corrupted, lost, destroyed, arrive late or incomplete, or =
+contain
+viruses. The sender therefore does not accept liability for any errors =
+or
+omissions in the contents of this message, which arise as a result of =
+e-mail
+=
+transmission.</span></p>_______________________________________________<br=
+ class=3D"">Xen-devel mailing list<br class=3D""><a =
+href=3D"mailto:Xen-devel@lists.xenproject.org" =
+class=3D"">Xen-devel@lists.xenproject.org</a><br =
+class=3D"">https://lists.xenproject.org/mailman/listinfo/xen-devel</div></=
+blockquote></div><br class=3D""></body></html>=
+
+--Apple-Mail=_FE3EE81C-D827-4BA6-BE98-08E666AA027A--
+
+
+--===============4853633143287771523==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4853633143287771523==--
