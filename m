@@ -1,23 +1,22 @@
-From: "Tamara B. Elizondo" <mujqqj2demnsxs@gmail.com>
-Subject: Xen PPC64
-Date: Thu, 27 Sep 2018 07:07:12 +0000
-Message-ID: <A061358D-BC38-4EE1-B1B8-CF72BA49A173@gmail.com>
+From: Oscar Salvador <osalvador@techadventures.net>
+Subject: Re: [PATCH v3] memory_hotplug: Free pages as higher
+ order
+Date: Thu, 27 Sep 2018 09:09:58 +0200
+Message-ID: <20180927070957.GA19369__36139.368141494$1538032129$gmane$org@techadventures.net>
+References: <1538031530-25489-1-git-send-email-arunks@codeaurora.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=n8cm=mj=gmail.com=mujqqj2demnsxs@srs-us1.protection.inumbo.net>)
- id 1g5QOM-0008Ng-53
- for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 07:07:18 +0000
-Received: by mail-wm1-x32c.google.com with SMTP id y26-v6so4156685wma.2
- for <xen-devel@lists.xenproject.org>; Thu, 27 Sep 2018 00:07:16 -0700 (PDT)
-Received: from [10.99.27.232] ([185.156.173.27])
- by smtp.gmail.com with ESMTPSA id 204-v6sm1672072wmh.25.2018.09.27.00.07.14
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 27 Sep 2018 00:07:15 -0700 (PDT)
+ <srs0=ymm0=mj=gmail.com=osalvador.vilardaga@srs-us1.protection.inumbo.net>)
+ id 1g5QR0-00008y-6D
+ for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 07:10:02 +0000
+Received: by mail-wm1-f66.google.com with SMTP id y25-v6so4687207wmi.1
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Sep 2018 00:10:00 -0700 (PDT)
+Content-Disposition: inline
+In-Reply-To: <1538031530-25489-1-git-send-email-arunks@codeaurora.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,16 +25,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Arun KS <arunks@codeaurora.org>
+Cc: mhocko@suse.com, vatsa@codeaurora.org, linux-mm@kvack.org, getarunks@gmail.com, kys@microsoft.com, boris.ostrovsky@oracle.com, sthemmin@microsoft.com, xen-devel@lists.xenproject.org, haiyangz@microsoft.com, yasu.isimatu@gmail.com, dan.j.williams@intel.com, akpm@linux-foundation.org, vbabka@suse.cz, osalvador@suse.de, jgross@suse.com, aaron.lu@intel.com, malat@debian.org, gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org, vinmenon@codeaurora.org, jrdr.linux@gmail.com, devel@linuxdriverproject.org, iamjoonsoo.kim@lge.com, mgorman@techsingularity.net, kirill.shutemov@linux.intel.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8sCgpJIHdvdWxkIGxpa2UgdG8gZnVuZCBhIHBvcnQgb2YgWGVuIHRvIHRoZSBQUEM2NCBh
-cmNoaXRlY3R1cmUsIG1vcmUgc3BlY2lhbGx5IFBPV0VSOSwgaW4gbGl0dGxlIGVuZGlhbiBhbmQg
-YmlnIGVuZGlhbiBtb2RlLgoKQW55b25lIHdpdGggdGhlIHJlcXVpcmVkIGNvbXBldGVuY2UgY2Fu
-IHByb3ZpZGUgbWUgd2l0aCBhbiBpZGVhIG9mIHRoZSBkZWxheSBhbmQgZnVuZHMgcmVxdWlyZWQg
-Zm9yIHRoaXM/CgpJIGFtIHB1c2hpbmcgdGhpcyBmb3J3YXJkIHRvIGVuYWJsZSBRdWJlcyBPUyBj
-b21wYXRpYmlsaXR5IG9uIHRoZSBUYWxvcyBJSSBEZXNrdG9wIFBPV0VSOSBwbGF0Zm9ybS4gKGh0
-dHBzOi8vcmFwdG9yY3MuY29tKQoKVGhhbmsgeW91CgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+T24gVGh1LCBTZXAgMjcsIDIwMTggYXQgMTI6Mjg6NTBQTSArMDUzMCwgQXJ1biBLUyB3cm90ZToK
+PiArCV9fZnJlZV9wYWdlc19ib290X2NvcmUocGFnZSwgb3JkZXIpOwoKSSBhbSBub3Qgc3VyZSwg
+YnV0IGlmIHdlIGFyZSBnb2luZyB0byB1c2UgdGhhdCBmdW5jdGlvbiBmcm9tIHRoZSBtZW1vcnkt
+aG90cGx1ZyBjb2RlLAp3ZSBtaWdodCB3YW50IHRvIHJlbmFtZSB0aGF0IGZ1bmN0aW9uIHRvIHNv
+bWV0aGluZyBtb3JlIGdlbmVyaWM/ClRoZSB3b3JkICJib290IiBzdWdnZXN0cyB0aGF0IHRoaXMg
+aXMgb25seSBjYWxsZWQgZnJvbSB0aGUgYm9vdCBzdGFnZS4KCkFuZCB3aGF0IGFib3V0IHRoZSBw
+cmVmZXRjaCBvcGVyYXRpb25zPyAKSSBzYXcgdGhhdCB5b3UgcmVtb3ZlZCB0aGVtIGluIHlvdXIg
+cHJldmlvdXMgcGF0Y2ggYW5kIHRoYXQgaGFkIHNvbWUgYmVuZWZpdHMgWzFdLgoKU2hvdWxkIHdl
+IHJlbW92ZSB0aGVtIGhlcmUgYXMgd2VsbD8KClsxXSBodHRwczovL3BhdGNod29yay5rZXJuZWwu
+b3JnL3BhdGNoLzEwNjEzMzU5LyAKClRoYW5rcwotLSAKT3NjYXIgU2FsdmFkb3IKU1VTRSBMMwoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
