@@ -1,24 +1,22 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 1/3] [not-for-unstable] xen/arm: vgic-v3:
- Delay the initialization of the domain information
-Date: Thu, 27 Sep 2018 16:11:18 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1809271602450.11573@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH 2/3] xen/arm: vgic-v3: Don't create empty
+ re-distributor regions
+Date: Thu, 27 Sep 2018 16:34:39 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1809271623390.11573@sstabellini-ThinkPad-X260>
 References: <20180904192153.17210-1-julien.grall@arm.com>
- <20180904192153.17210-2-julien.grall@arm.com>
- <d6a3666c-0e8d-1707-f0de-b7a5ad1ba11a@arm.com>
- <0da3032f-9257-4ee2-7cb5-cabe0d12bdcc@citrix.com>
- <alpine.DEB.2.10.1809251342040.15006@sstabellini-ThinkPad-X260>
- <bdd02e05-75f3-e853-2700-ae51becd358f@arm.com>
+ <20180904192153.17210-3-julien.grall@arm.com>
+ <alpine.DEB.2.10.1809251255350.15006@sstabellini-ThinkPad-X260>
+ <e53b4fcb-6ddf-17d9-740b-e2a6f8b9f696@arm.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-277536536-1538089415=:11573"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=gmte=mj=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1g5fRN-0001lf-54
- for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 23:11:25 +0000
-In-Reply-To: <bdd02e05-75f3-e853-2700-ae51becd358f@arm.com>
-Content-ID: <alpine.DEB.2.10.1809271603530.11573@sstabellini-ThinkPad-X260>
+ id 1g5fnx-0003JD-5c
+ for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 23:34:45 +0000
+In-Reply-To: <e53b4fcb-6ddf-17d9-740b-e2a6f8b9f696@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,113 +26,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@arm.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, andre.przywara@arm.com, Stefano Stabellini <sstabellini@kernel.org>, shameerali.kolothum.thodi@huawei.com, xen-devel@lists.xenproject.org
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, shameerali.kolothum.thodi@huawei.com, andre.przywara@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-277536536-1538089415=:11573
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1809271603531.11573@sstabellini-ThinkPad-X260>
-
-On Wed, 26 Sep 2018, Julien Grall wrote:
-> Hi Stefano,
-> 
-> On 09/25/2018 09:45 PM, Stefano Stabellini wrote:
-> > On Tue, 4 Sep 2018, Andrew Cooper wrote:
-> > > On 04/09/18 20:35, Julien Grall wrote:
-> > > > Hi,
-> > > > 
-> > > > On 09/04/2018 08:21 PM, Julien Grall wrote:
-> > > > > A follow-up patch will require to know the number of vCPUs when
-> > > > > initializating the vGICv3 domain structure. However this information
-> > > > > is
-> > > > > not available at domain creation. This is only known once
-> > > > > XEN_DOMCTL_max_vpus is called for that domain.
-> > > > > 
-> > > > > In order to get the max vCPUs around, delay the domain part of the
-> > > > > vGIC
-> > > > > v3 initialization until the first vCPU of the domain is initialized.
-> > > > > 
-> > > > > Signed-off-by: Julien Grall <julien.grall@arm.com>
-> > > > > 
-> > > > > ---
-> > > > > 
-> > > > > Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-> > > > > 
-> > > > > This is nasty but I can't find a better way for Xen 4.11 and older.
-> > > > > This
-> > > > > is not necessary for unstable as the number of vCPUs is known at
-> > > > > domain
-> > > > > creation.
-> > > > > 
-> > > > > Andrew, I have CCed you to know whether you have a better idea where
-> > > > > to
-> > > > > place this call on Xen 4.11 and older.
-> > > > 
-> > > > I just noticed that d->max_vcpus is initialized after
-> > > > arch_domain_create. So without this patch on Xen 4.12, it will not work.
-> > > > 
-> > > > This is getting nastier because arch_domain_init is the one initialize
-> > > > the value returned by dom0_max_vcpus. So I am not entirely sure what
-> > > > to do here.
-> > > 
-> > > The positioning after arch_domain_create() is unfortunate, but I
-> > > couldn’t manage better with ARM's current behaviour and Jan's insistence
-> > > that the allocation of d->vcpu was common.  I'd prefer if the dependency
-> > > could be broken and the allocation moved earlier.
-> > > 
-> > > One option might be to have an arch_check_domainconfig() (or similar?)
-> > > which is called very early on and can sanity check the values, including
-> > > cross-checking the vgic and max_vcpus settings?  It could even be
-> > > responsible for mutating XEN_DOMCTL_CONFIG_GIC_NATIVE into the correct
-> > > real value.
-> > > 
-> > > As for your patch here, its a gross hack, but its probably the best
-> > > which can be done.
-> > 
-> > *Sighs*
-> > If that is what we have to do, it is as ugly as hell, but that is what
-> > we'll do.
-> 
-> This is the best we can do with the current code base. I think it would be
-> worth reworking the code to make it nicer. I will add it in my TODO list.
-> 
-> > 
-> > My only suggestion to marginally improve it would be instead of:
-> > 
-> > > +    if ( v->vcpu_id == 0 )
-> > > +    {
-> > > +        rc = vgic_v3_real_domain_init(d);
-> > > +        if ( rc )
-> > > +            return rc;
-> > > +    }
-> > 
-> > to check on d->arch.vgic.rdist_regions instead:
-> > 
-> >        if ( d->arch.vgic.rdist_regions == NULL )
-> >        {
-> >           // initialize domain
-> 
-> I would prefer to keep v->vcpu_id == 0 just in case we end up to re-order the
-> allocation in the future.
-
-I was suggesting to check on (rdist_regions == NULL) exactly for
-potential re-ordering, in case in the future we end up calling
-vcpu_vgic_init differently and somehow vcpu_init(vcpu1) is done before
-before vcpu_init(vcpu0). Ideally we would like a way to check that
-vgic_v3_real_domain_init has been called before and I thought
-rdist_regions == NULL could do just that...
---8323329-277536536-1538089415=:11573
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-277536536-1538089415=:11573--
+T24gV2VkLCAyNiBTZXAgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIFN0ZWZhbm8sCj4g
+Cj4gT24gMDkvMjUvMjAxOCAwOTozOCBQTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4g
+T24gVHVlLCA0IFNlcCAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gPiA+IEF0IHRoZSBtb21l
+bnQsIFhlbiBpcyBhc3N1bWluZyB0aGUgaGFyZHdhcmUgZG9tYWluIHdpbGwgaGF2ZSB0aGUgc2Ft
+ZQo+ID4gPiBudW1iZXIgb2YgcmUtZGlzdHJpYnV0b3IgcmVnaW9ucyBhcyB0aGUgaG9zdC4gSG93
+ZXZlciwgYXMgdGhlCj4gPiA+IG51bWJlciBvZiBDUFVzIG9yIHRoZSBzdHJpZGUgKGUuZyBvbiBH
+SUN2NCkgbWF5IGJlIGRpZmZlcmVudCB3ZSBlbmQgdXAKPiA+ID4gZXhwb3NpbmcgcmVnaW9ucyB3
+aGljaCBkb2VzIG5vdCBjb250YWluIGFueSByZS1kaXN0cmlidXRvcnMuCj4gPiA+IAo+ID4gPiBX
+aGVuIGJvb3RpbmcsIExpbnV4IHdpbGwgZ28gdGhyb3VnaCBhbGwgdGhlIHJlLWRpc3RyaWJ1dG9y
+IHJlZ2lvbiB0bwo+ID4gPiBjaGVjayB3aGV0aGVyIGEgcHJvcGVydHkgKGUuZyB2UExJcykgaXMg
+YXZhaWxhYmxlIGFjY3Jvc3MgYWxsIHRoZQo+ID4gPiByZS1kaXN0cmlidXRvcnMuIFRoaXMgd2ls
+bCByZXN1bHQgdG8gYSBkYXRhIGFib3J0IG9uIGVtcHR5IHJlZ2lvbnMKPiA+ID4gYmVjYXVzZSB0
+aGVyZSBhcmUgbm8gdW5kZXJseWluZyByZS1kaXN0cmlidXRvci4KPiA+ID4gCj4gPiA+IFNvIHdl
+IG5lZWQgdG8gbGltaXQgdGhlIG51bWJlciBvZiByZWdpb25zIGV4cG9zZWQgdG8gdGhlIGhhcmR3
+YXJlCj4gPiA+IGRvbWFpbi4gVGhlIGNvZGUgcmV3b3JrZWQgdG8gb25seSBleHBvc2UgdGhlIG1p
+bmltdW4gbnVtYmVyIG9mIHJlZ2lvbnMKPiA+ID4gcmVxdWlyZWQgYnkgdGhlIGhhcmR3YXJlIGRv
+bWFpbi4gSXQgaXMgYXNzdW1lZCB0aGUgcmVnaW9ucyB3aWxsIGJlCj4gPiA+IHBvcHVsYXRlZCBz
+dGFydGluZyBmcm9tIHRoZSBmaXJzdCBvbmUuCj4gPiAKPiA+IEkgaGF2ZSBhIHF1ZXN0aW9uOiBn
+aXZlbiB0aGF0IGl0IGlzIHBvc3NpYmxlIGZvciBhIHJkaXN0X3JlZ2lvbiB0byBjb3Zlcgo+ID4g
+bW9yZSB0aGFuIDEgY3B1LCBjb3VsZCB3ZSBnZXQgaW50byB0cm91YmxlcyBpZiB0aGUgbGFzdCBy
+ZGlzdF9yZWdpb24gb2YKPiA+IHRoZSBoYXJkd2FyZV9kb21haW4gY292ZXJzIDIgY3B1cywgYnV0
+IGFjdHVhbGx5IGRvbTAgb25seSBoYXMgMSB2Y3B1Pwo+ID4gZ2V0X3ZjcHVfZnJvbV9yZGlzdCB3
+b3VsZCByZXR1cm4gTlVMTCBhbmQgdmdpY192M19yZGlzdHJfbW1pb19yZWFkL3dyaXRlCj4gPiB3
+b3VsZCByZXR1cm4gMC4KPiA+IFRoaXMgY2FzZSBzZWVtcyB0byBiZSBoYW5kbGVkIGNvcnJlY3Rs
+eSBidXQgSSB3YW50ZWQgdG8KPiA+IGRvdWJsZSBjaGVjay4KPiAKPiAwIG1lYW5zIGEgZGF0YSBh
+Ym9ydCB3aWxsIGJlIGluamVjdGVkIGludG8gdGhlIGd1ZXN0LiBIb3dldmVyLCB0aGUgZ3Vlc3QK
+PiBzaG91bGQgbmV2ZXIgdG91Y2ggdGhhdCBiZWNhdXNlIHRoZSBsYXN0IHZhbGlkIHJlLWRpc3Ry
+aWJ1dG9yIG9mIHRoZSByZWdpb25zCj4gd2lsbCBoYXZlIEdJQ1JfVFlQRVIuTGFzdCBzZXQuCj4g
+Cj4gU28gdGhlIGd1ZXN0IE9TIHdpbGwgc3RvcCBsb29raW5nIGZvciBtb3JlIHJlLWRpc3RyaWJ1
+dG9ycyBpbiB0aGF0IHJlZ2lvbi4KCk9LCgoKPiA+ICA+Cj4gPiBJIHRoaW5rIHdlIGFsc28gbmVl
+ZCB0byBmaXggdmdpY192M19yZGlzdF9jb3VudD8gVG9kYXkgaXQganVzdCByZXR1cm5zCj4gPiB2
+Z2ljX3YzX2h3Lm5yX3JkaXN0X3JlZ2lvbnMgZm9yIGRvbTAuIEl0IHdvdWxkIGJlIGJhZCBpZiB3
+ZSBsZWZ0IGl0Cj4gPiB1bmZpeGVkPyBJZiB3ZSBkbyB0aGF0LCB3ZSBtaWdodCBiZSBhYmxlIHRv
+IGdldCByaWQgb2YgdGhlIG1vZGlmaWNhdGlvbnMKPiA+IHRvIHZnaWNfdjNfcmVhbF9kb21haW5f
+aW5pdC4KPiAKPiBXZSBkb24ndCB3YW50IHRvIGZpeCB2Z2ljX3YzX3JkaXN0X2NvdW50LiBUaGUg
+aGVscGVyIHJldHVybnMgdGhlIG1heGltdW0KPiByZS1kaXN0cmlidXRvcnMgcmVnaW9ucy4KCldl
+IGRvbid0IHdhbnQgdG8gb3Igd2UgY2FuJ3Q/IEJlY2F1c2UgaXQgbG9va3MgbGlrZSB3ZSB3b3Vs
+ZCB3YW50IHRvIGZpeAp2Z2ljX3YzX3JkaXN0X2NvdW50IGlmIHdlIGNvdWxkLCByaWdodD8gSXQg
+aXMgY2FsbGVkIGZyb20gZG9tYWluCnNwZWNpZmljIGluaXRpYWxpemF0aW9uIGZ1bmN0aW9ucywg
+c28gdGhlb3JldGljYWxseSBpdCBzaG91bGQgcmV0dXJuCmRvbWFpbiBzcGVjaWZpYyB2Z2ljIGlu
+Zm9ybWF0aW9uLCBub3QgcGh5c2ljYWwgaW5mb3JtYXRpb24uCgoKPiBUaGlzIGlzIHVzZWQgdG8g
+Y29tcHV0ZSB0aGUgbnVtYmVyIG9mIElPIGhhbmRsZXJzIGFuZAo+IGFsbG9jYXRpbmcgdGhlIGFy
+cmF5IHN0b3JpbmcgdGhlIHJlZ2lvbnMuCj4gCj4gSSBhbSBwcmV0dHkgc3VyZSB5b3Ugd2lsbCBz
+YXkgd2Ugd2lsbCB3YXN0ZSBtZW1vcnkuIEhvd2V2ZXIsIGF0IHRoZSBtb21lbnQsCj4gd2UgbmVl
+ZCB0byBrbm93IHRoZSBudW1iZXIgb2YgSU8gaGFuZGxlcnMgbXVjaCBiZWZvcmUgd2Uga25vdyB0
+aGUgbnVtYmVyIG9mCj4gdkNQVXMuIEZvciB0aGUgYXJyYXksIHdlIHdvdWxkIG5lZWQgdG8gZ28g
+dGhyb3VnaCB0aGUgcmVnaW9ucyB0d2ljZSAocmVnaW9ucwo+IG1heSBub3QgYmUgdGhlIHNhbWUg
+c2l6ZSBzbyB3ZSBjYW4ndCBpbmZlciBlYXNpbHkgdGhlIG51bWJlciBuZWVkZWQpLiBPdmVyYWxs
+LAo+IHRoZSBhbW91bnQgb2YgbWVtb3J5IHVzZWQgaXMgdGhlIHNhbWUgYXMgdG9kYXkgKHNvIG5v
+dCByZWFsbHkgYSB3YXN0ZSBwZXItc2UpLgo+IAo+IEl0IG1pZ2h0IGJlIHBvc3NpYmxlIHRvIGxp
+bWl0IHRoYXQgb25jZSB3ZSByZXdvcmtlZCB0aGUgY29tbW9uIGNvZGUgdG8ga25vdwo+IHRoZSBu
+dW1iZXIgb2YgdkNQVXMgZWFybGllciBvbiAoc2VlIGRpc2N1c3Npb24gb24gcGF0Y2ggIzEpLgoK
+WWVhaCwgdGhpcyBpcyBuYXN0eSwgYnV0IGl0IGlzIGNsZWFyIHRoYXQgdW50aWwgd2UgcmV3b3Jr
+IHRoZSBjb2RlIHRvCnNldCBkLT5tYXhfdmNwdXMgZWFybGllciBpdCB3b24ndCBnZXQgZml4ZWQu
+IE5vdGhpbmcgd2UgY2FuIGRvIGhlcmUuCgpTbywgSSB0aGluayBpZGVhbGx5IHdlIHdvdWxkIHdh
+bnQgdG8gZml4IHZnaWNfdjNfcmRpc3RfY291bnQsIGJ1dCB0b2RheQp3ZSBjYW4ndC4gTWF5YmUg
+d2UgY291bGQgcmVuYW1lIHZnaWNfdjNfcmRpc3RfY291bnQgdG8KdmdpY192M19od19yZGlzdF9j
+b3VudCwgYW5kIGFkZCBhIHNob3J0IFRPRE8gY29tbWVudCBzb21ld2hlcmUgaW4gdGhlCmZpbGU/
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
