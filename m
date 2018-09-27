@@ -1,19 +1,17 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: Xen PPC64
-Date: Thu, 27 Sep 2018 10:01:20 +0100
-Message-ID: <1DB2D993-A687-4E73-9F35-D8AB484838FC@xenproject.org>
-References: <A061358D-BC38-4EE1-B1B8-CF72BA49A173@gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
-Content-Type: multipart/mixed; boundary="===============0255170857513184151=="
+From: David Hildenbrand <david@redhat.com>
+Subject: [PATCH v3 0/6] mm: online/offline_pages called w.o.
+ mem_hotplug_lock
+Date: Thu, 27 Sep 2018 11:25:48 +0200
+Message-ID: <20180927092554.13567-1-david__33295.9388419569$1538040315$gmane$org@redhat.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=koip=mj=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1g5SAo-0001XO-A5
- for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 09:01:26 +0000
-Received: by mail-wm1-x330.google.com with SMTP id y26-v6so4524646wma.2
- for <xen-devel@lists.xenproject.org>; Thu, 27 Sep 2018 02:01:24 -0700 (PDT)
-In-Reply-To: <A061358D-BC38-4EE1-B1B8-CF72BA49A173@gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=dfte=mj=redhat.com=david@srs-us1.protection.inumbo.net>)
+ id 1g5SYj-000359-CS
+ for xen-devel@lists.xenproject.org; Thu, 27 Sep 2018 09:26:09 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,102 +20,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Tamara B. Elizondo" <mujqqj2demnsxs@gmail.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: linux-mm@kvack.org
+Cc: Kate Stewart <kstewart@linuxfoundation.org>, Michal Hocko <mhocko@suse.com>, linux-doc@vger.kernel.org, Benjamin Herrenschmidt <benh@kernel.crashing.org>, Balbir Singh <bsingharora@gmail.com>, Heiko Carstens <heiko.carstens@de.ibm.com>, Paul Mackerras <paulus@samba.org>, Rashmica Gupta <rashmica.g@gmail.com>, "K. Y. Srinivasan" <kys@microsoft.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Michael Neuling <mikey@neuling.org>, Stephen Hemminger <sthemmin@microsoft.com>, Jonathan Corbet <corbet@lwn.net>, Michael Ellerman <mpe@ellerman.id.au>, David Hildenbrand <david@redhat.com>, Pavel Tatashin <pasha.tatashin@oracle.com>, linux-acpi@vger.kernel.org, xen-devel@lists.xenproject.org, Len Brown <lenb@kernel.org>, Pavel Tatashin <pavel.tatashin@microsoft.com>, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>, Haiyang Zhang <haiyangz@microsoft.com>, YASUAKI ISHIMATSU <yasu>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0255170857513184151==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_A60B1B19-44DA-4B25-9659-CF4146CA158D"
-
-
---Apple-Mail=_A60B1B19-44DA-4B25-9659-CF4146CA158D
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-Tamara,
-Have a look at this thread: =
-https://xen.markmail.org/thread/vuk7atnyqfq52epp =
-<https://xen.markmail.org/thread/vuk7atnyqfq52epp>
-That will answer some but not all of your questions: =
-https://markmail.org/message/cizu54474lvuus6k =
-<https://markmail.org/message/cizu54474lvuus6k> gives an indication of =
-size and elapsed time required
-Regards
-Lars
-
-> On 27 Sep 2018, at 08:07, Tamara B. Elizondo =
-<mujqqj2demnsxs@gmail.com> wrote:
->=20
-> Hello,
->=20
-> I would like to fund a port of Xen to the PPC64 architecture, more =
-specially POWER9, in little endian and big endian mode.
->=20
-> Anyone with the required competence can provide me with an idea of the =
-delay and funds required for this?
->=20
-> I am pushing this forward to enable Qubes OS compatibility on the =
-Talos II Desktop POWER9 platform. (https://raptorcs.com)
->=20
-> Thank you
->=20
-> _______________________________________________
-> Xen-devel mailing list
-> Xen-devel@lists.xenproject.org
-> https://lists.xenproject.org/mailman/listinfo/xen-devel
-
-
---Apple-Mail=_A60B1B19-44DA-4B25-9659-CF4146CA158D
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" =
-class=3D"">Tamara,<div class=3D"">Have a look at this thread:&nbsp;<a =
-href=3D"https://xen.markmail.org/thread/vuk7atnyqfq52epp" =
-class=3D"">https://xen.markmail.org/thread/vuk7atnyqfq52epp</a></div><div =
-class=3D"">That will answer some but not all of your questions:&nbsp;<a =
-href=3D"https://markmail.org/message/cizu54474lvuus6k" =
-class=3D"">https://markmail.org/message/cizu54474lvuus6k</a>&nbsp;gives =
-an indication of size and elapsed time required<br =
-class=3D""><div>Regards</div><div>Lars</div><div><br =
-class=3D""><blockquote type=3D"cite" class=3D""><div class=3D"">On 27 =
-Sep 2018, at 08:07, Tamara B. Elizondo &lt;<a =
-href=3D"mailto:mujqqj2demnsxs@gmail.com" =
-class=3D"">mujqqj2demnsxs@gmail.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><div =
-class=3D"">Hello,<br class=3D""><br class=3D"">I would like to fund a =
-port of Xen to the PPC64 architecture, more specially POWER9, in little =
-endian and big endian mode.<br class=3D""><br class=3D"">Anyone with the =
-required competence can provide me with an idea of the delay and funds =
-required for this?<br class=3D""><br class=3D"">I am pushing this =
-forward to enable Qubes OS compatibility on the Talos II Desktop POWER9 =
-platform. (<a href=3D"https://raptorcs.com" =
-class=3D"">https://raptorcs.com</a>)<br class=3D""><br class=3D"">Thank =
-you<br class=3D""><br =
-class=3D"">_______________________________________________<br =
-class=3D"">Xen-devel mailing list<br class=3D""><a =
-href=3D"mailto:Xen-devel@lists.xenproject.org" =
-class=3D"">Xen-devel@lists.xenproject.org</a><br =
-class=3D"">https://lists.xenproject.org/mailman/listinfo/xen-devel</div></=
-div></blockquote></div><br class=3D""></div></body></html>=
-
---Apple-Mail=_A60B1B19-44DA-4B25-9659-CF4146CA158D--
-
-
---===============0255170857513184151==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0255170857513184151==--
+QEFuZHJldywgT25seSBwYXRjaCAjNSBjaGFuZ2VkIChzZWUgY2hhbmdlIG5vdGVzIGJlbG93KS4g
+VGhhbmtzIQoKClJlYWRpbmcgdGhyb3VnaCB0aGUgY29kZSBhbmQgc3R1ZHlpbmcgaG93IG1lbV9o
+b3RwbHVnX2xvY2sgaXMgdG8gYmUgdXNlZCwKSSBub3RpY2VkIHRoYXQgdGhlcmUgYXJlIHR3byBw
+bGFjZXMgd2hlcmUgd2UgY2FuIGVuZCB1cCBjYWxsaW5nCmRldmljZV9vbmxpbmUoKS9kZXZpY2Vf
+b2ZmbGluZSgpIC0gb25saW5lX3BhZ2VzKCkvb2ZmbGluZV9wYWdlcygpIHdpdGhvdXQKdGhlIG1l
+bV9ob3RwbHVnX2xvY2suIEFuZCB0aGVyZSBhcmUgb3RoZXIgcGxhY2VzIHdoZXJlIHdlIGNhbGwK
+ZGV2aWNlX29ubGluZSgpL2RldmljZV9vZmZsaW5lKCkgd2l0aG91dCB0aGUgZGV2aWNlX2hvdHBs
+dWdfbG9jay4KCldoaWxlIGUuZy4KCWVjaG8gIm9ubGluZSIgPiAvc3lzL2RldmljZXMvc3lzdGVt
+L21lbW9yeS9tZW1vcnk5L3N0YXRlCmlzIGZpbmUsIGUuZy4KCWVjaG8gMSA+IC9zeXMvZGV2aWNl
+cy9zeXN0ZW0vbWVtb3J5L21lbW9yeTkvb25saW5lCldpbGwgbm90IHRha2UgdGhlIG1lbV9ob3Rw
+bHVnX2xvY2suIEhvd2V2ZXIgdGhlIGRldmljZV9sb2NrKCkgYW5kCmRldmljZV9ob3RwbHVnX2xv
+Y2suCgpFLmcuIHZpYSBtZW1vcnlfcHJvYmVfc3RvcmUoKSwgd2UgY2FuIGVuZCB1cCBjYWxsaW5n
+CmFkZF9tZW1vcnkoKS0+b25saW5lX3BhZ2VzKCkgd2l0aG91dCB0aGUgZGV2aWNlX2hvdHBsdWdf
+bG9jay4gU28gd2UgY2FuCmhhdmUgY29uY3VycmVudCBjYWxsZXJzIGluIG9ubGluZV9wYWdlcygp
+LiBXZSBlLmcuIHRvdWNoIGluIG9ubGluZV9wYWdlcygpCmJhc2ljYWxseSB1bnByb3RlY3RlZCB6
+b25lLT5wcmVzZW50X3BhZ2VzIHRoZW4uCgpMb29rcyBsaWtlIHRoZXJlIGlzIGEgbG9uZ2VyIGhp
+c3RvcnkgdG8gdGhhdCAoc2VlIFBhdGNoICMyIGZvciBkZXRhaWxzKSwKYW5kIGZpeGluZyBpdCB0
+byB3b3JrIHRoZSB3YXkgaXQgd2FzIGludGVuZGVkIGlzIG5vdCByZWFsbHkgcG9zc2libGUuIFdl
+CndvdWxkIGUuZy4gaGF2ZSB0byB0YWtlIHRoZSBtZW1faG90cGx1Z19sb2NrIGluIGRldmljZS9i
+YXNlL2NvcmUuYywgd2hpY2gKc291bmRzIHdyb25nLgoKU3VtbWFyeTogV2UgaGFkIGEgbG9jayBp
+bnZlcnNpb24gb24gbWVtX2hvdHBsdWdfbG9jayBhbmQgZGV2aWNlX2xvY2soKS4KTW9yZSBkZXRh
+aWxzIGNhbiBiZSBmb3VuZCBpbiBwYXRjaCAzIGFuZCBwYXRjaCA2LgoKSSBwcm9wb3NlIHRoZSBn
+ZW5lcmFsIHJ1bGVzIChkb2N1bWVudGF0aW9uIGFkZGVkIGluIHBhdGNoIDYpOgoKMS4gYWRkX21l
+bW9yeS9hZGRfbWVtb3J5X3Jlc291cmNlKCkgbXVzdCBvbmx5IGJlIGNhbGxlZCB3aXRoCiAgIGRl
+dmljZV9ob3RwbHVnX2xvY2suCjIuIHJlbW92ZV9tZW1vcnkoKSBtdXN0IG9ubHkgYmUgY2FsbGVk
+IHdpdGggZGV2aWNlX2hvdHBsdWdfbG9jay4gVGhpcyBpcwogICBhbHJlYWR5IGRvY3VtZW50ZWQg
+YW5kIGhvbGRzIGZvciBhbGwgY2FsbGVycy4KMy4gZGV2aWNlX29ubGluZSgpL2RldmljZV9vZmZs
+aW5lKCkgbXVzdCBvbmx5IGJlIGNhbGxlZCB3aXRoCiAgIGRldmljZV9ob3RwbHVnX2xvY2suIFRo
+aXMgaXMgYWxyZWFkeSBkb2N1bWVudGVkIGFuZCB0cnVlIGZvciBub3cgaW4gY29yZQogICBjb2Rl
+LiBPdGhlciBjYWxsZXJzIChyZWxhdGVkIHRvIG1lbW9yeSBob3RwbHVnKSBoYXZlIHRvIGJlIGZp
+eGVkIHVwLgo0LiBtZW1faG90cGx1Z19sb2NrIGlzIHRha2VuIGluc2lkZSBvZiBhZGRfbWVtb3J5
+L3JlbW92ZV9tZW1vcnkvCiAgIG9ubGluZV9wYWdlcy9vZmZsaW5lX3BhZ2VzLgoKVG8gbWUsIHRo
+aXMgbG9va3Mgd2F5IGNsZWFuZXIgdGhhbiB3aGF0IHdlIGhhdmUgcmlnaHQgbm93IChhbmQgZWFz
+aWVyIHRvCnZlcmlmeSkuIEFuZCBsb29raW5nIGF0IHRoZSBkb2N1bWVudGF0aW9uIG9mIHJlbW92
+ZV9tZW1vcnksIHVzaW5nCmxvY2tfZGV2aWNlX2hvdHBsdWcgYWxzbyBmb3IgYWRkX21lbW9yeSgp
+IGZlZWxzIG5hdHVyYWwuCgoKdjIgLT4gdjM6Ci0gVGFrZSBkZXZpY2VfaG90cGx1Z19sb2NrIG91
+dHNpZGUgb2YgbG9vcCBpbiBwYXRjaCAjNQotIEFkZGVkIEFjayB0byBwYXRjaCAjNQoKdjEgLT4g
+djI6Ci0gVXBzdHJlYW0gY2hhbmdlcyBpbiBwb3dlcnBjL3Bvd2VybnYgY29kZSByZXF1aXJlZCBt
+b2RpZmljYXRpb25zIHRvCiAgcGF0Y2ggIzEsICM0IGFuZCAjNS4KLSBNaW5vciBwYXRjaCBkZXNj
+cmlwdGlvbiBjaGFuZ2VzLgotIEFkZGVkIG1vcmUgbG9ja2luZyBkZXRhaWxzIGluIHBhdGNoICM2
+LgotIEFkZGVkIHJiJ3MKClJGQ3YyIC0+IHYxOgotIERyb3BwZWQgYW4gdW5uZWNlc3NhcnkgX3Jl
+ZiBmcm9tIHJlbW92ZV9tZW1vcnkoKSBpbiBwYXRjaCAjMQotIE1pbm9yIHBhdGNoIGRlc2NyaXB0
+aW9uIGZpeGVzLgotIEFkZGVkIHJiJ3MKClJGQyAtPiBSRkN2MjoKLSBEb24ndCBleHBvcnQgZGV2
+aWNlX2hvdHBsdWdfbG9jaywgcHJvdmlkZSBwcm9wZXIgcmVtb3ZlX21lbW9yeS9hZGRfbWVtb3J5
+CiAgd3JhcHBlcnMuCi0gU3BsaXQgdXAgdGhlIHBhdGNoZXMgYSBiaXQuCi0gVHJ5IHRvIGltcHJv
+dmUgcG93ZXJudiBtZW10cmFjZSBsb2NraW5nCi0gQWRkIHNvbWUgZG9jdW1lbnRhdGlvbiBmb3Ig
+bG9ja2luZyB0aGF0IG1hdGNoZXMgbXkga25vd2xlZGcKCkRhdmlkIEhpbGRlbmJyYW5kICg2KToK
+ICBtbS9tZW1vcnlfaG90cGx1ZzogbWFrZSByZW1vdmVfbWVtb3J5KCkgdGFrZSB0aGUgZGV2aWNl
+X2hvdHBsdWdfbG9jawogIG1tL21lbW9yeV9ob3RwbHVnOiBtYWtlIGFkZF9tZW1vcnkoKSB0YWtl
+IHRoZSBkZXZpY2VfaG90cGx1Z19sb2NrCiAgbW0vbWVtb3J5X2hvdHBsdWc6IGZpeCBvbmxpbmUv
+b2ZmbGluZV9wYWdlcyBjYWxsZWQgdy5vLgogICAgbWVtX2hvdHBsdWdfbG9jawogIHBvd2VycGMv
+cG93ZXJudjogaG9sZCBkZXZpY2VfaG90cGx1Z19sb2NrIHdoZW4gY2FsbGluZyBkZXZpY2Vfb25s
+aW5lKCkKICBwb3dlcnBjL3Bvd2VybnY6IGhvbGQgZGV2aWNlX2hvdHBsdWdfbG9jayB3aGVuIGNh
+bGxpbmcKICAgIG1lbXRyYWNlX29mZmxpbmVfcGFnZXMoKQogIG1lbW9yeS1ob3RwbHVnLnR4dDog
+QWRkIHNvbWUgZGV0YWlscyBhYm91dCBsb2NraW5nIGludGVybmFscwoKIERvY3VtZW50YXRpb24v
+bWVtb3J5LWhvdHBsdWcudHh0ICAgICAgICAgICAgICB8IDQyICsrKysrKysrKysrKy0KIGFyY2gv
+cG93ZXJwYy9wbGF0Zm9ybXMvcG93ZXJudi9tZW10cmFjZS5jICAgICB8ICA4ICsrLQogLi4uL3Bs
+YXRmb3Jtcy9wc2VyaWVzL2hvdHBsdWctbWVtb3J5LmMgICAgICAgIHwgIDggKy0tCiBkcml2ZXJz
+L2FjcGkvYWNwaV9tZW1ob3RwbHVnLmMgICAgICAgICAgICAgICAgfCAgNCArLQogZHJpdmVycy9i
+YXNlL21lbW9yeS5jICAgICAgICAgICAgICAgICAgICAgICAgIHwgMjIgKysrLS0tLQogZHJpdmVy
+cy94ZW4vYmFsbG9vbi5jICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDMgKwogaW5jbHVkZS9s
+aW51eC9tZW1vcnlfaG90cGx1Zy5oICAgICAgICAgICAgICAgIHwgIDQgKy0KIG1tL21lbW9yeV9o
+b3RwbHVnLmMgICAgICAgICAgICAgICAgICAgICAgICAgICB8IDU5ICsrKysrKysrKysrKysrKy0t
+LS0KIDggZmlsZXMgY2hhbmdlZCwgMTE0IGluc2VydGlvbnMoKyksIDM2IGRlbGV0aW9ucygtKQoK
+LS0gCjIuMTcuMQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
