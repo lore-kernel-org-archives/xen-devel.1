@@ -1,19 +1,12 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: [PATCH 2/2] xen: make opt_xen_console true before
- console initialisation
-Date: Fri, 28 Sep 2018 09:24:37 +0100
-Message-ID: <20180928082437.15140-3-wei.liu2@citrix.com>
-References: <20180928082437.15140-1-wei.liu2@citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: Backports to stable trees
+Date: Fri, 28 Sep 2018 10:28:01 +0200
+Message-ID: <06cf41aabd14cf596c14857cc7ef124b6724d59b.camel@suse.com>
+References: <dce9c10a-f258-3511-729a-4b436deb14fc@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0229850690395826017=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rttn=mk=citrix.com=prvs=802525662=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1g5o4p-00081v-Cn
- for xen-devel@lists.xenproject.org; Fri, 28 Sep 2018 08:24:43 +0000
-In-Reply-To: <20180928082437.15140-1-wei.liu2@citrix.com>
+In-Reply-To: <dce9c10a-f258-3511-729a-4b436deb14fc@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,29 +15,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel List <xen-devel@lists.xen.org>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBoZWxwcyBjYXB0dXJlIGlzc3VlcyBiZWZvcmUgY29uc29sZSBpcyBpbml0aWFsaXNlZC4g
-VGhlIGltcGFjdCBpcwptaW5pbWFsIGJlY2F1c2UgaXQgb25seSBhZmZlY3RzIFhlbiBydW5uaW5n
-IGluIGFzIGEgZ3Vlc3QuCgpTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXgu
-Y29tPgotLS0KIHhlbi9kcml2ZXJzL2NoYXIvY29uc29sZS5jIHwgNyArKysrKystCiAxIGZpbGUg
-Y2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEveGVu
-L2RyaXZlcnMvY2hhci9jb25zb2xlLmMgYi94ZW4vZHJpdmVycy9jaGFyL2NvbnNvbGUuYwppbmRl
-eCBlNDgwMzlkZDgyLi5iYmVjOTgzMDRlIDEwMDY0NAotLS0gYS94ZW4vZHJpdmVycy9jaGFyL2Nv
-bnNvbGUuYworKysgYi94ZW4vZHJpdmVycy9jaGFyL2NvbnNvbGUuYwpAQCAtOTEsNyArOTEsOCBA
-QCBzdGF0aWMgdWludDMyX3QgY29ucmluZ2MsIGNvbnJpbmdwOwogc3RhdGljIGludCBfX3JlYWRf
-bW9zdGx5IHNlcmNvbl9oYW5kbGUgPSAtMTsKIAogI2lmZGVmIENPTkZJR19YODYKLXN0YXRpYyBi
-b29sIF9fcmVhZF9tb3N0bHkgb3B0X2NvbnNvbGVfeGVuOyAvKiBjb25zb2xlPXhlbiAqLworLyog
-U2V0IHRvIHRydWUgYXQgc3RhcnQgb2YgZGF5IHRvIGNhdGNoIGVhcmx5IGJvb3QgaXNzdWVzICov
-CitzdGF0aWMgYm9vbCBfX3JlYWRfbW9zdGx5IG9wdF9jb25zb2xlX3hlbiA9IHRydWU7IC8qIGNv
-bnNvbGU9eGVuICovCiAjZW5kaWYKIAogc3RhdGljIERFRklORV9TUElOTE9DSyhjb25zb2xlX2xv
-Y2spOwpAQCAtODIxLDYgKzgyMiwxMCBAQCB2b2lkIF9faW5pdCBjb25zb2xlX2luaXRfcHJlaXJx
-KHZvaWQpCiAKICAgICBzZXJpYWxfaW5pdF9wcmVpcnEoKTsKIAorI2lmZGVmIENPTkZJR19YODYK
-KyAgICBvcHRfY29uc29sZV94ZW4gPSBmYWxzZTsKKyNlbmRpZgorCiAgICAgLyogV2hlcmUgc2hv
-dWxkIGNvbnNvbGUgb3V0cHV0IGdvPyAqLwogICAgIGZvciAoIHAgPSBvcHRfY29uc29sZTsgcCAh
-PSBOVUxMOyBwID0gc3RyY2hyKHAsICcsJykgKQogICAgIHsKLS0gCjIuMTEuMAoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============0229850690395826017==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-aRUY3Ttsfjr+0y/XCTf0"
+
+
+--=-aRUY3Ttsfjr+0y/XCTf0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2018-09-27 at 15:36 +0100, Andrew Cooper wrote:
+> Hello,
+>=20
+> Please can the following patches be considered for stable.
+>=20
+Can we also include:
+
+6e395f477fb85 - xen: sched/Credit2: fix bug when moving CPUs between=20
+		two Credit2 cpupools
+
+for 4.10 and 4.11 ?
+
+=46rom a quick check, it' not as easy as cherry-picking/applying the
+patch (there's 1 hunk that fails), but it shouldn't be too bad.
+
+And I can provide the backport, if you want me to.
+
+Thanks,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-aRUY3Ttsfjr+0y/XCTf0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlut5hIACgkQFkJ4iaW4
+c+51zg//btQk6kU3zq69dRcaZs8IZsagjxkJzofNVTyZWH/P7WVVz8yY63YMHR+L
+yXwPu+iUmjkEHkVBSSe6W3sn47z+CeSu9gRKgb2+3EA5ynCWM+SKkzDAo/zGGWro
+lxUnSx4uYMJo9qUmJ5EAsPJ1haF3RMb2ZC8D4fnaQ0J63OBUbYRa75s1nUS0siLo
+52VmkwFR6DR1LYTn7AfPZVtoRyVkQHqcpWKxReLEo7DXbB8F+y3wTlRg2UMONDaj
+2zlj4PIjaoR3qUOoW+suN4uxdDBYmMYyH/ZTproyzwONTWiCq561JUfMjYGVG+7y
+sv8gvV9tAw6ydncrw51G9AkB/p8+iMQ329kJ8+DnR3RrAESBaARHJF/D7yMO/hFs
+OEpSaT7L8LUBTy/iPWr0ZXblFV4iYPQEO0horkJdTkXHuMAbnIA37yaKJQvwsjQY
+Pokr2fV1PXw9WLT+pXEA/P+7FwcPYuccqyYbW25X/qMG3eyU4ZPeSUjN/Wz19lsS
+wisScfaZKer0hybeu2buL5hOJ4ZrHAJHBDzukLANjjOgLhHpm0KeFX9xOaR+lDkY
+0hE+zRfWt8ErTU5l9T8OM5hte7vgBcTAyr6tsfLpRIfzgQZv39Y3Aiq/Z5NgTETO
+xQ/d1mnPtE7h/fb576b8aYJePD+XFOQrTE9h+ILeyZszr7GT4F8=
+=tVfz
+-----END PGP SIGNATURE-----
+
+--=-aRUY3Ttsfjr+0y/XCTf0--
+
+
+
+--===============0229850690395826017==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0229850690395826017==--
