@@ -1,18 +1,21 @@
-From: Olivier Lambert <lambert.olivier@gmail.com>
-Subject: Xen performance related work needed
-Date: Fri, 28 Sep 2018 14:59:31 +0200
-Message-ID: <CACJ1ZNtZhpSKkE_dQ46eEwdvOyooWeTDPJNXHLBXL831DkSjgg@mail.gmail.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] xen/blkfront: correct purging of persistent
+ grants
+Date: Fri, 28 Sep 2018 15:13:29 +0200
+Message-ID: <772c3886-d4fe-b912-b125-a648b31a3074__1383.63879309527$1538140344$gmane$org@suse.com>
+References: <20180928072827.14229-1-jgross@suse.com>
+ <95e32835-426f-36c9-a86a-09563f090f22@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=lbdr=mk=gmail.com=lambert.olivier@srs-us1.protection.inumbo.net>)
- id 1g5sMz-0004IG-Mk
- for xen-devel@lists.xenproject.org; Fri, 28 Sep 2018 12:59:45 +0000
-Received: by mail-oi1-x22e.google.com with SMTP id w81-v6so3589893oiw.9
- for <xen-devel@lists.xenproject.org>; Fri, 28 Sep 2018 05:59:44 -0700 (PDT)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=wnhr=mk=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1g5saL-0005pj-L9
+ for xen-devel@lists.xenproject.org; Fri, 28 Sep 2018 13:13:33 +0000
+In-Reply-To: <95e32835-426f-36c9-a86a-09563f090f22@oracle.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,24 +24,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, linux-block@vger.kernel.org
+Cc: axboe@kernel.dk, konrad.wilk@oracle.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgdGhlcmUhCgpJbiBhIHBvc3NpYmxlIHNjZW5hcmlvIHdoZXJlIEkgKGFuZCBhIHdob2xlIGFj
-YWRlbWljIHRlYW0pIGNvdWxkIHdvcmsKb24gaW1wcm92aW5nIFhlbiwgd2hhdCBhcmUgdGhlIG1h
-am9yIGFyZWFzIHJlcXVpcmluZwpleHBsb3JhdGlvbi9vcHRpbWl6YXRpb25zPyBJZGVhbGx5LCBw
-YXJ0IHRoYXQgd291bGQgYmUgbm90IHRoYXQgaGFyZAp0byB3b3JrIG9uLCBidXQgYWxsb3cgaGln
-aCBwb3RlbnRpYWwgInJld2FyZCIuCgpGcm9tIG15IHBlcnNwZWN0aXZlLCBzdG9yYWdlIGlzIHBy
-b2JhYmx5IGEgc2lkZSB0aGF0IGNvdWxkIGJlCm1hc3NpdmVseSBpbXByb3ZlZCwgYnV0IGl0J3Mg
-b25seSBiYXNlZCBvbiBteSBwZXJjZXB0aW9uIG9mIFhlbgooZXNwZWNpYWxseSBvbiBOVk1lIGRy
-aXZlcywgd2hlcmUgSU9QUyBhcmUgaGlnaCBhbmQgbGF0ZW5jeSBzbWFsbCkuCgpTbyB0aGlzIHF1
-ZXN0aW9uIGhhZCBhIGJyb2FkIHNwZWN0cnVtOiBpbiB5b3VyIG9waW5pb24sIHRoZSBiZXN0IHJh
-dGlvCmJldHdlZW4gZWZmb3J0IGFuZCByZXdhcmQgdG8gaW1wcm92ZSBwZXJmcyBpbiBnZW5lcmFs
-IChjb3VsZCBiZQpzdG9yYWdlLCBuZXR3b3JrLCBjb21wdXRlKS4KCkkga25vdyBzZWN1cml0eSBp
-bXBhY3Qgc2luY2Ugc2lkZSBjaGFubmVsIGF0dGFjayBpcyBodWdlLCBzbyBpdCBjb3VsZApiZSBp
-bnRlcmVzdGluZyB0byBoYXZlIG5ldyBjb250cmlidXRvcnMgbW9yZSBmb2N1c2VkIGRpcmVjdGx5
-IG9uCnBlcmZzL29wdGltaXphdGlvbnMuCgpBbnkgaWRlYXMgYW5kIHBvaW50ZXJzIHRvd2FyZCB0
-aG9zZSBhcmVhcyBhcmUgd2VsY29tZSEKCkJlc3QsCgpPbGl2ZXIKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMjgvMDkvMjAxOCAxNDo0NSwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDkvMjgvMTgg
+MzoyOCBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPj4gQ29tbWl0IGE0NmI1MzY3MmIyYzJlMzc3
+MGIzOGE0YWJmOTBkMTYzNjRkMjU4NGIgKCJ4ZW4vYmxrZnJvbnQ6IGNsZWFudXAKPj4gc3RhbGUg
+cGVyc2lzdGVudCBncmFudHMiKSBpbnRyb2R1Y2VkIGEgcmVncmVzc2lvbiBhcyBwdXJnZWQgcGVy
+c2lzdGVudAo+PiBncmFudHMgd2VyZSBub3QgcHUgaW50byB0aGUgbGlzdCBvZiBmcmVlIGdyYW50
+cyBhZ2Fpbi4gQ29ycmVjdCB0aGF0Lgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3Nz
+IDxqZ3Jvc3NAc3VzZS5jb20+Cj4+IC0tLQo+PiAgZHJpdmVycy9ibG9jay94ZW4tYmxrZnJvbnQu
+YyB8IDQgKystLQo+PiAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlv
+bnMoLSkKPj4KPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMgYi9k
+cml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5jCj4+IGluZGV4IGE3MWQ4MTdlOTAwZC4uNDI5ZDIw
+MTMxYzdlIDEwMDY0NAo+PiAtLS0gYS9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5jCj4+ICsr
+KyBiL2RyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMKPj4gQEAgLTI2NzAsOCArMjY3MCw4IEBA
+IHN0YXRpYyB2b2lkIHB1cmdlX3BlcnNpc3RlbnRfZ3JhbnRzKHN0cnVjdCBibGtmcm9udF9pbmZv
+ICppbmZvKQo+PiAgCQkJbGlzdF9kZWwoJmdudF9saXN0X2VudHJ5LT5ub2RlKTsKPj4gIAkJCWdu
+dHRhYl9lbmRfZm9yZWlnbl9hY2Nlc3MoZ250X2xpc3RfZW50cnktPmdyZWYsIDAsIDBVTCk7Cj4+
+ICAJCQlyaW5mby0+cGVyc2lzdGVudF9nbnRzX2MtLTsKPj4gLQkJCV9fZnJlZV9wYWdlKGdudF9s
+aXN0X2VudHJ5LT5wYWdlKTsKPj4gLQkJCWtmcmVlKGdudF9saXN0X2VudHJ5KTsKPj4gKwkJCWdu
+dF9saXN0X2VudHJ5LT5ncmVmID0gR1JBTlRfSU5WQUxJRF9SRUY7Cj4+ICsJCQlsaXN0X2FkZF90
+YWlsKCZnbnRfbGlzdF9lbnRyeS0+bm9kZSwgJnJpbmZvLT5ncmFudHMpOwo+IAo+IFNvcnJ5LCBJ
+IGRvbid0IGZvbGxvdyB0aGlzLiBXaGF0IGlzIHRoZSBwdXJwb3NlIG9mIHJlbW92aW5nIHRoZSBn
+cmFudAo+IGZyb20gcmluZm8tPmdyYW50cyBsaXN0IHdpdGggbGlzdF9kZWwoKSBhbmQgdGhlbiBh
+ZGRpbmcgaXQgYmFjayB3aXRoCj4gbGlzdF9hZGRfdGFpbCgpPwoKVGhlIHBlcnNpc3RlbnQgZ3Jh
+bnRzIGFyZSBhdCB0aGUgbGlzdCBoZWFkIGFuZCB0aGUgbm9uLXBlcnNpc3RlbnQgb25lcwphdCB0
+aGUgdGFpbC4KCgpKdWVyZ2VuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
