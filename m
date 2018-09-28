@@ -1,17 +1,22 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: [PATCH] xen/blkfront: correct purging of persistent
+From: Alan.Robinson@ts.fujitsu.com (Alan Robinson)
+Subject: Re: [PATCH] xen/blkfront: correct purging of persistent
  grants
-Date: Fri, 28 Sep 2018 09:28:27 +0200
-Message-ID: <20180928072827.14229-1-jgross__46089.6038137891$1538119634$gmane$org@suse.com>
+Date: Fri, 28 Sep 2018 09:58:52 +0200
+Message-ID: <20180928075852.GC6271__7479.2898180478$1538121619$gmane$org@ts.fujitsu.com>
+References: <20180928072827.14229-1-jgross@suse.com>
+Reply-To: Alan.Robinson@ts.fujitsu.com
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7882822493646138220=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=wnhr=mk=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1g5nCQ-0002rc-QT
- for xen-devel@lists.xenproject.org; Fri, 28 Sep 2018 07:28:30 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=gcpj=mk=ts.fujitsu.com=alan.robinson@srs-us1.protection.inumbo.net>)
+ id 1g5niI-00065M-J5
+ for xen-devel@lists.xenproject.org; Fri, 28 Sep 2018 08:01:26 +0000
+Received: from abgdgate50u.abg.fsc.net ([172.25.138.66])
+ by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id w8S81DlZ025630
+ for <xen-devel@lists.xenproject.org>; Fri, 28 Sep 2018 09:01:17 +0100
+In-Reply-To: <20180928072827.14229-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,28 +25,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, linux-block@vger.kernel.org
-Cc: axboe@kernel.dk, Juergen Gross <jgross@suse.com>, boris.ostrovsky@oracle.com, konrad.wilk@oracle.com, roger.pau@citrix.com
+To: Juergen Gross <jgross@suse.com>
+Cc: "axboe@kernel.dk" <axboe@kernel.dk>, "konrad.wilk@oracle.com" <konrad.wilk@oracle.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>, "roger.pau@citrix.com" <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Q29tbWl0IGE0NmI1MzY3MmIyYzJlMzc3MGIzOGE0YWJmOTBkMTYzNjRkMjU4NGIgKCJ4ZW4vYmxr
-ZnJvbnQ6IGNsZWFudXAKc3RhbGUgcGVyc2lzdGVudCBncmFudHMiKSBpbnRyb2R1Y2VkIGEgcmVn
-cmVzc2lvbiBhcyBwdXJnZWQgcGVyc2lzdGVudApncmFudHMgd2VyZSBub3QgcHUgaW50byB0aGUg
-bGlzdCBvZiBmcmVlIGdyYW50cyBhZ2Fpbi4gQ29ycmVjdCB0aGF0LgoKU2lnbmVkLW9mZi1ieTog
-SnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgotLS0KIGRyaXZlcnMvYmxvY2sveGVuLWJs
-a2Zyb250LmMgfCA0ICsrLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVs
-ZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ibG9jay94ZW4tYmxrZnJvbnQuYyBiL2Ry
-aXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMKaW5kZXggYTcxZDgxN2U5MDBkLi40MjlkMjAxMzFj
-N2UgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMKKysrIGIvZHJpdmVy
-cy9ibG9jay94ZW4tYmxrZnJvbnQuYwpAQCAtMjY3MCw4ICsyNjcwLDggQEAgc3RhdGljIHZvaWQg
-cHVyZ2VfcGVyc2lzdGVudF9ncmFudHMoc3RydWN0IGJsa2Zyb250X2luZm8gKmluZm8pCiAJCQls
-aXN0X2RlbCgmZ250X2xpc3RfZW50cnktPm5vZGUpOwogCQkJZ250dGFiX2VuZF9mb3JlaWduX2Fj
-Y2VzcyhnbnRfbGlzdF9lbnRyeS0+Z3JlZiwgMCwgMFVMKTsKIAkJCXJpbmZvLT5wZXJzaXN0ZW50
-X2dudHNfYy0tOwotCQkJX19mcmVlX3BhZ2UoZ250X2xpc3RfZW50cnktPnBhZ2UpOwotCQkJa2Zy
-ZWUoZ250X2xpc3RfZW50cnkpOworCQkJZ250X2xpc3RfZW50cnktPmdyZWYgPSBHUkFOVF9JTlZB
-TElEX1JFRjsKKwkJCWxpc3RfYWRkX3RhaWwoJmdudF9saXN0X2VudHJ5LT5ub2RlLCAmcmluZm8t
-PmdyYW50cyk7CiAJCX0KIAogCQlzcGluX3VubG9ja19pcnFyZXN0b3JlKCZyaW5mby0+cmluZ19s
-b2NrLCBmbGFncyk7Ci0tIAoyLjE2LjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+
+--===============7882822493646138220==
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha-256; boundary="Y5rl02BVI9TCfPar"
+Content-Disposition: inline
+
+
+--Y5rl02BVI9TCfPar
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Fri, Sep 28, 2018 at 09:28:27AM +0200, Juergen Gross wrote:
+> Commit a46b53672b2c2e3770b38a4abf90d16364d2584b ("xen/blkfront: cleanup
+> stale persistent grants") introduced a regression as purged persistent
+> grants were not pu into the list of free grants again. Correct that.
+s/pu /put /
+
+Alan
+
+--Y5rl02BVI9TCfPar
+Content-Type: application/x-pkcs7-signature
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
+
+MIIKTgYJKoZIhvcNAQcCoIIKPzCCCjsCAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHAaCC
+CH8wggSjMIIDi6ADAgECAgo2C52zAAAAAlTDMA0GCSqGSIb3DQEBBQUAMC8xLTArBgNVBAMT
+JEZ1aml0c3UgVGVjaG5vbG9neSBTb2x1dGlvbnMgVXNlciBDQTAeFw0xNzA1MTIxNTM0Mjda
+Fw0xOTAzMTExMjI0NTlaMEAxFzAVBgNVBAMMDlJvYmluc29uLCBBbGFuMSUwIwYDVQQKDBxG
+dWppdHN1IFRlY2hub2xvZ3kgU29sdXRpb25zMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKB
+gQClZEMpN68qHzred2QKqifLuUSlYnt/kB4V9Kjy8U7cQK/pN+ytbEBFXsllMyP2CjgGNYFu
+oqeztgkla2vBrjV9ilrJe3s+RJqkXgioKG1RSuiDW0sBFvI90dS4mHCH7cOTPPFHO5QHuCBU
+bClqAN0HlKweu/rIbqg0/g9j+SMb8QIDAQABo4ICMjCCAi4wCwYDVR0PBAQDAgWgMIGSBgNV
+HREEgYowgYeBHGFsYW4ucm9iaW5zb25AdHMuZnVqaXRzdS5jb22BJmFsYW4ucm9iaW5zb25A
+ZW1laWFjZW1lYS5mdWppdHN1LmxvY2FsgRxhbGFuLnJvYmluc29uQGNlbWFpbC5mc2MubmV0
+gSFBbGFuLlJvYmluc29uQGZ1aml0c3Utc2llbWVucy5jb20wHQYDVR0OBBYEFIlosAD8kas+
+gZn51OiifJoSRQTUMB8GA1UdIwQYMBaAFAj1yGq/gON7UMQ59AeYRuhtfpeoMDwGA1UdHwQ1
+MDMwMaAvoC2GK2h0dHA6Ly9jZHAudHMuZnVqaXRzdS5jb20vY2RwL2Z0czAxdXNlci5jcmww
+RwYIKwYBBQUHAQEEOzA5MDcGCCsGAQUFBzAChitodHRwOi8vYWlhLnRzLmZ1aml0c3UuY29t
+L2FpYS9mdHMwMXVzZXIuY2VyMAwGA1UdEwEB/wQCMAAwPQYJKwYBBAGCNxUHBDAwLgYmKwYB
+BAGCNxUIhYXEMoGH/2GBhYEEhuyCIIHHgRp5g4igcYfS8S8CAWQCAQgwEwYDVR0lBAwwCgYI
+KwYBBQUHAwQwGwYJKwYBBAGCNxUKBA4wDDAKBggrBgEFBQcDBDBEBgkqhkiG9w0BCQ8ENzA1
+MA4GCCqGSIb3DQMCAgIAgDAOBggqhkiG9w0DBAICAIAwBwYFKw4DAgcwCgYIKoZIhvcNAwcw
+DQYJKoZIhvcNAQEFBQADggEBADwUZHvoZuxiGLFQCoURq/FgeKSyxKrjuoutb8Bs3blR2QDA
+D3NWp0W+T4Js9fDcIb3Rq3uvFx0T/EcUiz1fFeQyN4B2xT8ofAnZeWuxWxWLUqS/K73fRIUC
+m7DUNj8lgRGsnSnAIl6ZKHDrdvwnxrF7qFPRVz77B4k3BK5mkMxxNVtKjbCoPj8fnh17Vnob
+Wnb0yztrPYeOHi2CqIey5qPjVMSTxKJYOejwjvE78SBMKKQS7cHBg+iOnYK90S0m+LK2/Yz5
+vgJtjGJL+68d5i0O/rmzgefOEeuMtD0IOI9lFXoUS16hbxj8gMy0dXKxfPhoYWB7bqIlY4Ri
+mpguPFwwggPUMIICvKADAgECAhA0zRJXyDaDRuC/9z0wA24FMA0GCSqGSIb3DQEBBQUAMC8x
+LTArBgNVBAMTJEZ1aml0c3UgVGVjaG5vbG9neSBTb2x1dGlvbnMgUm9vdCBDQTAeFw0wOTAz
+MTIxMjI0NTlaFw0xOTAzMTExMjI0NTlaMC8xLTArBgNVBAMTJEZ1aml0c3UgVGVjaG5vbG9n
+eSBTb2x1dGlvbnMgVXNlciBDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALAb
+TX9HzfBJFvcukKqEBkui1MHs3p1dgZw8zkXRmp7pEbaRs2DAD3cosLZadP8zjWvowiRs5F+I
+mAo07Iib8dNUj0TWduHx2hRl6SQV+ffaumRdIrLvodWiGrNbX8ggWpQGyii7zYCLkI514XX3
+1ZOL0rgcrTtzhnFC7SdvpWFUhL8cxrfYk0sE+UZxLyqUdIjgvvf1DVTojyvVws+bu24N4noT
++YA/r+brt2CEcFf+YMnewGT3HJE32D/xmXMm3AF3xJeZ2/22Ykix3mRI8TDDPGGahSoR/ccp
+iHY5HESuzSdo/Dg+9PEBb+G+G5ntZhxn040m8W9ZzqFE7DbbIWcCAwEAAaOB6zCB6DAdBgNV
+HQ4EFgQUCPXIar+A43tQxDn0B5hG6G1+l6gwCwYDVR0PBAQDAgGGMB8GA1UdIwQYMBaAFBR1
+4le2FTcVgCqX5VFIZazPhpDLMBIGA1UdEwEB/wQIMAYBAf8CAQAwRwYIKwYBBQUHAQEEOzA5
+MDcGCCsGAQUFBzAChitodHRwOi8vYWlhLnRzLmZ1aml0c3UuY29tL2FpYS9mdHMwMXJvb3Qu
+Y2VyMDwGA1UdHwQ1MDMwMaAvoC2GK2h0dHA6Ly9jZHAudHMuZnVqaXRzdS5jb20vY2RwL2Z0
+czAxcm9vdC5jcmwwDQYJKoZIhvcNAQEFBQADggEBAEO6UD/S8PW3J7dQ4b1eVFm9c5pwAkqO
+p+sfm7qXJEM5a392iex0GYoGbmgmpPnXsS9fCPOojQwziQQbK89A3A+Fz7M3C01Hs6qhpQMi
+G74gauZsAxwFgQPRddRkcei3axzCjXRz8AFsgt6+qr+BjugPs9eilGRUj+JL7mjeWByOPNU+
+xRcRJp7ZMpaYZ3V/upkNTQAQKTDIV9GjeXVYTwDAD/JxDSdYRpPNSBvIM5KBwz0qCwrX3wJz
+YWAKob6wztsm12//cfkn9w0LswYN4aQdciTNyvH6EGkt7k6RSE33TKa3EMqyHZeCcNurP+r6
+SLNLIi1U6d8gMIDWqkEoMUkxggGXMIIBkwIBATA9MC8xLTArBgNVBAMTJEZ1aml0c3UgVGVj
+aG5vbG9neSBTb2x1dGlvbnMgVXNlciBDQQIKNgudswAAAAJUwzAJBgUrDgMCGgUAoIGxMBgG
+CSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE4MDkyODA3NTg1Mlow
+IwYJKoZIhvcNAQkEMRYEFGaKtAFzZu9vnVRDeB9gNBRUgmHnMFIGCSqGSIb3DQEJDzFFMEMw
+CgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMA0GCSqGSIb3DQEBAQUABIGAGIF5Z7uJhBa1KzaIw4hNUuzQpHTdy2pe
+Ahk/mJsX4mPGi/CDu3gHQRElCRQ8X7jD2GkiHphP/km8Wojk85pZ0Opfr1ldVl46jrYkbYIb
+CMC/AgOwTHeV3sT6o4IqabVvqqK0nPVIZRZ/GdEOnGp/kTAwg/bEdvYe9gzz1UzGlEU=
+
+--Y5rl02BVI9TCfPar--
+
+
+--===============7882822493646138220==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7882822493646138220==--
