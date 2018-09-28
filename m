@@ -1,16 +1,16 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 128163: all pass - PUSHED
-Date: Fri, 28 Sep 2018 13:45:47 +0000
-Message-ID: <osstest-128163-mainreport@xen.org>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v9] new config option vtsc_tolerance_khz to
+ avoid TSC emulation
+Date: Fri, 28 Sep 2018 15:50:52 +0200
+Message-ID: <20180928155052.5d7f66db.olaf@aepfle.de>
+References: <20180607130829.18811-1-olaf@aepfle.de>
+ <20180626191113.2d8e6876.olaf@aepfle.de>
+ <20180801181747.170405d8.olaf@aepfle.de>
+ <20180913093913.328a523a.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5120113135096760065=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=hrdv=mk=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1g5t5b-0000Ek-Ti
- for xen-devel@lists.xenproject.org; Fri, 28 Sep 2018 13:45:51 +0000
+In-Reply-To: <20180913093913.328a523a.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,50 +19,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xen.org, Andrew Cooper <andrew.cooper3@citrix.com>, Lars Kurth <lars.kurth@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyODE2MyBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjgxNjMvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
-dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiBvdm1mICAgICAgICAgICAgICAgICBiOWNlZTUyNGU2YzE5NDFiNzdiNjc4MGUxOWJkNTcw
-NTJlNTMyNDljCmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICA2NTMyZmRl
-YzExZDc5NDBhNTg0YTczNzk3YjVjYzA2N2Q2NGY4NGE1CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-MjgxNDMgIDIwMTgtMDktMjcgMTc6NTI6MTkgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
-ICAgMTI4MTYzICAyMDE4LTA5LTI4IDA4OjAyOjQ3IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQ2hhc2VsIENo
-aXUgPGNoYXNlbC5jaGl1QGludGVsLmNvbT4KICBDaGFzZWwsIENoaXUgPGNoYXNlbC5jaGl1QGlu
-dGVsLmNvbT4KICBEb25nYW8gR3VvIDxkb25nYW8uZ3VvQGludGVsLmNvbT4KICBHdW8sIERvbmdh
-byA8ZG9uZ2FvLmd1b0BpbnRlbC5jb20+CiAgSmlhbiBKIFdhbmcgPGppYW4uai53YW5nQGludGVs
-LmNvbT4KICBKaWF4aW4gV3UgPEppYXhpbi53dUBpbnRlbC5jb20+CiAgc2hlbmdsZWkgPHNoZW5n
-bGVpLnpoYW5nQGludGVsLmNvbT4KICBTdGFyIFplbmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+CiAg
-V3UgSmlheGluIDxqaWF4aW4ud3VAaW50ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
-bGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmly
-dCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
-ZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJv
-amVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMK
-CkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9n
-cy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRo
-ZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8v
-eGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1h
-aWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0
-LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUg
-Zm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7
-YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhlbi5vcmc6L2hvbWUv
-eGVuL2dpdC9vc3N0ZXN0L292bWYuZ2l0CiAgIDY1MzJmZGVjMTEuLmI5Y2VlNTI0ZTYgIGI5Y2Vl
-NTI0ZTZjMTk0MWI3N2I2NzgwZTE5YmQ1NzA1MmU1MzI0OWMgLT4geGVuLXRlc3RlZC1tYXN0ZXIK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============5120113135096760065==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/E6u/2RAMqruHl5qkA9_/mlY"; protocol="application/pgp-signature"
+
+--Sig_/E6u/2RAMqruHl5qkA9_/mlY
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 13 Sep 2018 09:39:13 +0200
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> this patch was not applied yet, even after a few "pings".
+
+No reaction since months.
+
+So scrap that patch, just in case it is still part of someones to-consider =
+queue.
+
+
+Olaf
+
+--Sig_/E6u/2RAMqruHl5qkA9_/mlY
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW64xvAAKCRBdQqD6ppg2
+fmsGAJ9mjzqefnmIZSJ+MIACImhPKsqgVwCcDEZwwckanhhm0dguk0+aZhwCo/M=
+=U0yA
+-----END PGP SIGNATURE-----
+
+--Sig_/E6u/2RAMqruHl5qkA9_/mlY--
+
+
+--===============5120113135096760065==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5120113135096760065==--
