@@ -1,16 +1,23 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v9] new config option vtsc_tolerance_khz to
- avoid TSC emulation
-Date: Fri, 28 Sep 2018 15:50:52 +0200
-Message-ID: <20180928155052.5d7f66db.olaf@aepfle.de>
-References: <20180607130829.18811-1-olaf@aepfle.de>
- <20180626191113.2d8e6876.olaf@aepfle.de>
- <20180801181747.170405d8.olaf@aepfle.de>
- <20180913093913.328a523a.olaf@aepfle.de>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] xen/blkfront: correct purging of persistent
+ grants
+Date: Fri, 28 Sep 2018 15:52:56 +0200
+Message-ID: <cfebb100-952b-4b86-9b27-222dd89031dd__34456.8546781831$1538142697$gmane$org@suse.com>
+References: <20180928072827.14229-1-jgross@suse.com>
+ <95e32835-426f-36c9-a86a-09563f090f22@oracle.com>
+ <772c3886-d4fe-b912-b125-a648b31a3074@suse.com>
+ <b454645f-de15-2912-864e-18f00736013d@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5120113135096760065=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20180913093913.328a523a.olaf@aepfle.de>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=wnhr=mk=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1g5tCV-00014n-50
+ for xen-devel@lists.xenproject.org; Fri, 28 Sep 2018 13:52:59 +0000
+In-Reply-To: <b454645f-de15-2912-864e-18f00736013d@oracle.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,53 +26,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org, Andrew Cooper <andrew.cooper3@citrix.com>, Lars Kurth <lars.kurth@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?UTF-8?B?TWFyY3p5a293c2tpLUfDs3JlY2tp?= <marmarek@invisiblethingslab.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, linux-block@vger.kernel.org
+Cc: axboe@kernel.dk, konrad.wilk@oracle.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============5120113135096760065==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/E6u/2RAMqruHl5qkA9_/mlY"; protocol="application/pgp-signature"
-
---Sig_/E6u/2RAMqruHl5qkA9_/mlY
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 13 Sep 2018 09:39:13 +0200
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> this patch was not applied yet, even after a few "pings".
-
-No reaction since months.
-
-So scrap that patch, just in case it is still part of someones to-consider =
-queue.
-
-
-Olaf
-
---Sig_/E6u/2RAMqruHl5qkA9_/mlY
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW64xvAAKCRBdQqD6ppg2
-fmsGAJ9mjzqefnmIZSJ+MIACImhPKsqgVwCcDEZwwckanhhm0dguk0+aZhwCo/M=
-=U0yA
------END PGP SIGNATURE-----
-
---Sig_/E6u/2RAMqruHl5qkA9_/mlY--
-
-
---===============5120113135096760065==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5120113135096760065==--
+T24gMjgvMDkvMjAxOCAxNTozMywgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDkvMjgvMTgg
+OToxMyBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPj4gT24gMjgvMDkvMjAxOCAxNDo0NSwgQm9y
+aXMgT3N0cm92c2t5IHdyb3RlOgo+Pj4gT24gOS8yOC8xOCAzOjI4IEFNLCBKdWVyZ2VuIEdyb3Nz
+IHdyb3RlOgo+Pj4+IENvbW1pdCBhNDZiNTM2NzJiMmMyZTM3NzBiMzhhNGFiZjkwZDE2MzY0ZDI1
+ODRiICgieGVuL2Jsa2Zyb250OiBjbGVhbnVwCj4+Pj4gc3RhbGUgcGVyc2lzdGVudCBncmFudHMi
+KSBpbnRyb2R1Y2VkIGEgcmVncmVzc2lvbiBhcyBwdXJnZWQgcGVyc2lzdGVudAo+Pj4+IGdyYW50
+cyB3ZXJlIG5vdCBwdSBpbnRvIHRoZSBsaXN0IG9mIGZyZWUgZ3JhbnRzIGFnYWluLiBDb3JyZWN0
+IHRoYXQuCj4+Pj4KPj4+PiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
+ZS5jb20+Cj4+Pj4gLS0tCj4+Pj4gIGRyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMgfCA0ICsr
+LS0KPj4+PiAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkK
+Pj4+Pgo+Pj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5jIGIvZHJp
+dmVycy9ibG9jay94ZW4tYmxrZnJvbnQuYwo+Pj4+IGluZGV4IGE3MWQ4MTdlOTAwZC4uNDI5ZDIw
+MTMxYzdlIDEwMDY0NAo+Pj4+IC0tLSBhL2RyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMKPj4+
+PiArKysgYi9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5jCj4+Pj4gQEAgLTI2NzAsOCArMjY3
+MCw4IEBAIHN0YXRpYyB2b2lkIHB1cmdlX3BlcnNpc3RlbnRfZ3JhbnRzKHN0cnVjdCBibGtmcm9u
+dF9pbmZvICppbmZvKQo+Pj4+ICAJCQlsaXN0X2RlbCgmZ250X2xpc3RfZW50cnktPm5vZGUpOwo+
+Pj4+ICAJCQlnbnR0YWJfZW5kX2ZvcmVpZ25fYWNjZXNzKGdudF9saXN0X2VudHJ5LT5ncmVmLCAw
+LCAwVUwpOwo+Pj4+ICAJCQlyaW5mby0+cGVyc2lzdGVudF9nbnRzX2MtLTsKPj4+PiAtCQkJX19m
+cmVlX3BhZ2UoZ250X2xpc3RfZW50cnktPnBhZ2UpOwo+Pj4+IC0JCQlrZnJlZShnbnRfbGlzdF9l
+bnRyeSk7Cj4+Pj4gKwkJCWdudF9saXN0X2VudHJ5LT5ncmVmID0gR1JBTlRfSU5WQUxJRF9SRUY7
+Cj4+Pj4gKwkJCWxpc3RfYWRkX3RhaWwoJmdudF9saXN0X2VudHJ5LT5ub2RlLCAmcmluZm8tPmdy
+YW50cyk7Cj4+PiBTb3JyeSwgSSBkb24ndCBmb2xsb3cgdGhpcy4gV2hhdCBpcyB0aGUgcHVycG9z
+ZSBvZiByZW1vdmluZyB0aGUgZ3JhbnQKPj4+IGZyb20gcmluZm8tPmdyYW50cyBsaXN0IHdpdGgg
+bGlzdF9kZWwoKSBhbmQgdGhlbiBhZGRpbmcgaXQgYmFjayB3aXRoCj4+PiBsaXN0X2FkZF90YWls
+KCk/Cj4+IFRoZSBwZXJzaXN0ZW50IGdyYW50cyBhcmUgYXQgdGhlIGxpc3QgaGVhZCBhbmQgdGhl
+IG5vbi1wZXJzaXN0ZW50IG9uZXMKPj4gYXQgdGhlIHRhaWwuCj4gCj4gT2gsIEkgZGlkbid0IHJl
+YWxpemUgdGhhdC4gQnV0IGlzbid0IHRoYXQgYW4gb3B0aW1pemF0aW9uIChhbmQgc28gbm90Cj4g
+Zm9sbG93aW5nIHRoaXMgcnVsZSBzaG91bGQgbm90IGNhdXNlIGVycm9ycyk/CgpJbiB0aGVvcnk6
+IHllcy4KClRoZSBwZXJzaXN0ZW50IGdyYW50IGhhbmRsaW5nIGlzIHJhdGhlciBjb21wbGljYXRl
+ZCBzbyBJJ2QgbGlrZSB0byBtYWtlCnN1cmUgbm90IHRvIGRldmlhdGUgZnJvbSB0aGUgY29tbW9u
+IHN0YW5kYXJkcy4KCldoZW4gSSBmaW5kIHNvbWUgdGltZSBJIHdhbnQgdG8gbW9kaWZ5IHRoZSBw
+ZXJzaXN0ZW50IGdyYW50IGhhbmRsaW5nIHRvCmJlIG1vcmUgZXhwbGljaXQgYW5kIGNvbnRyb2xs
+ZWQgY29tcGxldGVseSBieSB0aGUgZnJvbnRlbmQgKHdpdGhpbiB0aGUKYmFja2VuZCBkZWZpbmVk
+IGxpbWl0cywgb2YgY291cnNlKS4gVW50aWwgdGhlbiB3ZSBzaG91bGQgdHJ5IHRvIG1vZGlmeQpw
+ZXJzaXN0ZW50IGdyYW50cyBub3QgdG9vIG11Y2ggSU1PLgoKCkp1ZXJnZW4KCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
