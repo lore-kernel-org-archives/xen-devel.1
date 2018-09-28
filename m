@@ -1,17 +1,26 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 128209: tolerable all pass -
- PUSHED
-Date: Fri, 28 Sep 2018 23:40:32 +0000
-Message-ID: <osstest-128209-mainreport@xen.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 1/3] [not-for-unstable] xen/arm: vgic-v3:
+ Delay the initialization of the domain information
+Date: Fri, 28 Sep 2018 16:45:33 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1809281644170.11573@sstabellini-ThinkPad-X260>
+References: <20180904192153.17210-1-julien.grall@arm.com>
+ <20180904192153.17210-2-julien.grall@arm.com>
+ <d6a3666c-0e8d-1707-f0de-b7a5ad1ba11a@arm.com>
+ <0da3032f-9257-4ee2-7cb5-cabe0d12bdcc@citrix.com>
+ <alpine.DEB.2.10.1809251342040.15006@sstabellini-ThinkPad-X260>
+ <bdd02e05-75f3-e853-2700-ae51becd358f@arm.com>
+ <alpine.DEB.2.10.1809271602450.11573@sstabellini-ThinkPad-X260>
+ <83c64a69-0ee9-0ce9-4c49-a2c7853d4124@arm.com>
+ <36629864-4845-e8ac-5dfc-db7baa6619a1@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1251377909-1538178334=:11573"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=hrdv=mk=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1g62N9-00076r-Uo
- for xen-devel@lists.xenproject.org; Fri, 28 Sep 2018 23:40:35 +0000
+ <srs0=j+5u=mk=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1g62S0-0007Ld-MA
+ for xen-devel@lists.xenproject.org; Fri, 28 Sep 2018 23:45:36 +0000
+In-Reply-To: <36629864-4845-e8ac-5dfc-db7baa6619a1@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,51 +29,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, shameerali.kolothum.thodi@huawei.com, andre.przywara@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyODIwOSB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyODIwOS8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNo
-ZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
-ICAgICAgICAgICAgICBlZGI0NzI0ZTM2MjU2YzQ5NWE2YWEzY2YxYTEyNzIyZWZlMjcxZjlkCmJh
-c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICBiNjQxN2ZjMTlmYmE1N2M4ZDIz
-MTgwZDJlZmRhNTY4ZDhlYjc4ZDgwCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjgxOTEgIDIwMTgt
-MDktMjggMTc6MDg6MDMgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTI4MjA5ICAy
-MDE4LTA5LTI4IDIxOjA2OjMxIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
-d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgSmFuIEJldWxpY2ggPGpiZXVsaWNo
-QHN1c2UuY29tPgogIFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpqb2JzOgogYnVpbGQt
-YXJtNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFy
-bWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0t
-aTM4NiAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZp
-cnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ct
-cmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9o
-b21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmls
-ZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJv
-amVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQg
-b2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9n
-aXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAg
-aHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVB
-RE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRw
-Oi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1c2hp
-bmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9naXQveGVuLmdpdAog
-ICBiNjQxN2ZjMTlmLi5lZGI0NzI0ZTM2ICBlZGI0NzI0ZTM2MjU2YzQ5NWE2YWEzY2YxYTEyNzIy
-ZWZlMjcxZjlkIC0+IHNtb2tlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1251377909-1538178334=:11573
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Sat, 29 Sep 2018, Andrew Cooper wrote:
+> On 28/09/18 21:35, Julien Grall wrote:
+> >
+> >
+> > On 09/28/2018 12:11 AM, Stefano Stabellini wrote:
+> >> On Wed, 26 Sep 2018, Julien Grall wrote:
+> >>> Hi Stefano,
+> >>>
+> >>> On 09/25/2018 09:45 PM, Stefano Stabellini wrote:
+> >>>> On Tue, 4 Sep 2018, Andrew Cooper wrote:
+> >>>>> On 04/09/18 20:35, Julien Grall wrote:
+> >>>>>> Hi,
+> >>>>>>
+> >>>>>> On 09/04/2018 08:21 PM, Julien Grall wrote:
+> >>>>>>> A follow-up patch will require to know the number of vCPUs when
+> >>>>>>> initializating the vGICv3 domain structure. However this
+> >>>>>>> information
+> >>>>>>> is
+> >>>>>>> not available at domain creation. This is only known once
+> >>>>>>> XEN_DOMCTL_max_vpus is called for that domain.
+> >>>>>>>
+> >>>>>>> In order to get the max vCPUs around, delay the domain part of the
+> >>>>>>> vGIC
+> >>>>>>> v3 initialization until the first vCPU of the domain is
+> >>>>>>> initialized.
+> >>>>>>>
+> >>>>>>> Signed-off-by: Julien Grall <julien.grall@arm.com>
+> >>>>>>>
+> >>>>>>> ---
+> >>>>>>>
+> >>>>>>> Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+> >>>>>>>
+> >>>>>>> This is nasty but I can't find a better way for Xen 4.11 and older.
+> >>>>>>> This
+> >>>>>>> is not necessary for unstable as the number of vCPUs is known at
+> >>>>>>> domain
+> >>>>>>> creation.
+> >>>>>>>
+> >>>>>>> Andrew, I have CCed you to know whether you have a better idea
+> >>>>>>> where
+> >>>>>>> to
+> >>>>>>> place this call on Xen 4.11 and older.
+> >>>>>>
+> >>>>>> I just noticed that d->max_vcpus is initialized after
+> >>>>>> arch_domain_create. So without this patch on Xen 4.12, it will
+> >>>>>> not work.
+> >>>>>>
+> >>>>>> This is getting nastier because arch_domain_init is the one
+> >>>>>> initialize
+> >>>>>> the value returned by dom0_max_vcpus. So I am not entirely sure what
+> >>>>>> to do here.
+> >>>>>
+> >>>>> The positioning after arch_domain_create() is unfortunate, but I
+> >>>>> couldn’t manage better with ARM's current behaviour and Jan's
+> >>>>> insistence
+> >>>>> that the allocation of d->vcpu was common.  I'd prefer if the
+> >>>>> dependency
+> >>>>> could be broken and the allocation moved earlier.
+> >>>>>
+> >>>>> One option might be to have an arch_check_domainconfig() (or
+> >>>>> similar?)
+> >>>>> which is called very early on and can sanity check the values,
+> >>>>> including
+> >>>>> cross-checking the vgic and max_vcpus settings?  It could even be
+> >>>>> responsible for mutating XEN_DOMCTL_CONFIG_GIC_NATIVE into the
+> >>>>> correct
+> >>>>> real value.
+> >>>>>
+> >>>>> As for your patch here, its a gross hack, but its probably the best
+> >>>>> which can be done.
+> >>>>
+> >>>> *Sighs*
+> >>>> If that is what we have to do, it is as ugly as hell, but that is what
+> >>>> we'll do.
+> >>>
+> >>> This is the best we can do with the current code base. I think it
+> >>> would be
+> >>> worth reworking the code to make it nicer. I will add it in my TODO
+> >>> list.
+> >>>
+> >>>>
+> >>>> My only suggestion to marginally improve it would be instead of:
+> >>>>
+> >>>>> +    if ( v->vcpu_id == 0 )
+> >>>>> +    {
+> >>>>> +        rc = vgic_v3_real_domain_init(d);
+> >>>>> +        if ( rc )
+> >>>>> +            return rc;
+> >>>>> +    }
+> >>>>
+> >>>> to check on d->arch.vgic.rdist_regions instead:
+> >>>>
+> >>>>         if ( d->arch.vgic.rdist_regions == NULL )
+> >>>>         {
+> >>>>            // initialize domain
+> >>>
+> >>> I would prefer to keep v->vcpu_id == 0 just in case we end up to
+> >>> re-order the
+> >>> allocation in the future.
+> >>
+> >> I was suggesting to check on (rdist_regions == NULL) exactly for
+> >> potential re-ordering, in case in the future we end up calling
+> >> vcpu_vgic_init differently and somehow vcpu_init(vcpu1) is done before
+> >> before vcpu_init(vcpu0). Ideally we would like a way to check that
+> >> vgic_v3_real_domain_init has been called before and I thought
+> >> rdist_regions == NULL could do just that...
+> >
+> > What I meant by re-ordering is we manage to allocate the
+> > re-distributors before the vCPUs are created but still need
+> > vgic_v3_real_domain_init for other purpose.
+> >
+> > But vCPU initialization is potentially other issue.
+> >
+> > Anyway. both way have drawbacks. Yet I still prefer checking on the
+> > vCPU. It less likely vCPU0 will not be the first one initialized.
+> 
+> With the exception of the idle domain, all vcpus are strictly allocated
+> in packed ascending order.  Loads of other stuff will break if that
+> changed, so I wouldn't worry about it.
+> 
+> Furthermore, there is no obvious reason for this behaviour to ever change.
+
+OK, let's go with Julien's patch. We need a new tag for this, something
+like:
+
+Acked-but-disliked-by: Stefano Stabellini <sstabellini@kernel.org>
+
+:-)
+--8323329-1251377909-1538178334=:11573
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1251377909-1538178334=:11573--
