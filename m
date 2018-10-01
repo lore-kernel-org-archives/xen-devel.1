@@ -1,19 +1,22 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH v2 1/2] console: adjust IRQ initialization
-Date: Mon, 01 Oct 2018 10:25:33 -0600
-Message-ID: <5BB24A7D02000078001ED6BD@prv1-mh.provo.novell.com>
-References: <5BB2455202000078001ED685@prv1-mh.provo.novell.com>
+From: "Andreas Kinzler" <hfp@posteo.de>
+Subject: Re: [PATCH] libxl: keep assigned pci devices across
+ domain reboots
+Date: Mon, 01 Oct 2018 18:25:57 +0200
+Message-ID: <op.zp7rxjr7ollboj@kriftel>
+References: <20180920104025.88948-1-roger.pau@citrix.com>
+ <20180926101925.GD5318@reaktio.net>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary=----------E0olPD4ZbnKXWT22O7t9Ue
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ngkg=mn=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1g710t-0005bk-DW
- for xen-devel@lists.xenproject.org; Mon, 01 Oct 2018 16:25:39 +0000
-In-Reply-To: <5BB2455202000078001ED685@prv1-mh.provo.novell.com>
-Content-Disposition: inline
+ (envelope-from <srs0=eo1h=mn=posteo.de=hfp@srs-us1.protection.inumbo.net>)
+ id 1g711M-0005jN-3H
+ for xen-devel@lists.xenproject.org; Mon, 01 Oct 2018 16:26:08 +0000
+Received: from submission (posteo.de [89.146.220.130])
+ by mout01.posteo.de (Postfix) with ESMTPS id 3EEA521294
+ for <xen-devel@lists.xenproject.org>; Mon,  1 Oct 2018 18:26:03 +0200 (CEST)
+In-Reply-To: <20180926101925.GD5318@reaktio.net>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,82 +25,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>
+To: Roger Pau Monne <roger.pau@citrix.com>, =?iso-8859-15?Q?Pasi_K=E4rkk=E4inen?= <pasik@iki.fi>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SW4gb3JkZXIgZm9yIGEgWGVuIGludGVybmFsIFBDSSBkZXZpY2UgZHJpdmVyIHRvIGVuYWJsZSBN
-U0kgb24gdGhlCmRldmljZSwgd2UgbmVlZCBhbm90aGVyIGhvb2sgd2hpY2ggdGhlIGRyaXZlciBj
-YW4gdXNlIHRvIGNyZWF0ZSB0aGUgSVJRCihkb2luZyB0aGlzIGluIHRoZSBpbml0X3ByZWlycSBo
-b29rIGlzIHRvbyBlYXJseSwgc2luY2UgSVJRIGNvZGUgaGFzbid0CmdvdCBpbml0aWFsaXplZCBh
-dCB0aGF0IHRpbWUgeWV0LCBhbmQgZG9pbmcgaXQgaW4gaW5pdF9wb3N0aXJxIGlzIHRvbwpsYXRl
-IGJlY2F1c2UgYXQgbGVhc3Qgb24geDg2IHNtcF9pbnRyX2luaXQoKSBuZWVkcyB0byBrbm93IHRo
-ZSBJUlEKbnVtYmVyKS4KCk9uIHg4NiB0aGlzIGFkZGl0aW9uYWxseSByZXF1aXJlcyBhIHNsaWdo
-dCBvcmRlcmluZyBjaGFuZ2UgdG8gSVJRCmluaXRpYWxpemF0aW9uLCB0byBmYWNpbGl0YXRlIGNh
-bGxpbmcgdGhlIG5ldyBob29rIGJldHdlZW4gYmFzaWMKaW5pdGlhbGl6YXRpb24gYW5kIHRoZSBj
-YWxsIHBhdGggbGVhZGluZyB0byBzbXBfaW50cl9pbml0KCkuCgpTaWduZWQtb2ZmLWJ5OiBKYW4g
-QmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Ci0tLQp2MjogUmUtYmFzZS4KCi0tLSBhL3hlbi9h
-cmNoL3g4Ni9pODI1OS5jCisrKyBiL3hlbi9hcmNoL3g4Ni9pODI1OS5jCkBAIC0zNDEsOCArMzQx
-LDYgQEAgdm9pZCBfX2luaXQgaW5pdF9JUlEodm9pZCkKIAogICAgIGluaXRfODI1OUEoMCk7CiAK
-LSAgICBCVUdfT04oaW5pdF9pcnFfZGF0YSgpIDwgMCk7Ci0KICAgICBmb3IgKGlycSA9IDA7IHBs
-YXRmb3JtX2xlZ2FjeV9pcnEoaXJxKTsgaXJxKyspIHsKICAgICAgICAgc3RydWN0IGlycV9kZXNj
-ICpkZXNjID0gaXJxX3RvX2Rlc2MoaXJxKTsKICAgICAgICAgCi0tLSBhL3hlbi9hcmNoL3g4Ni9z
-ZXR1cC5jCisrKyBiL3hlbi9hcmNoL3g4Ni9zZXR1cC5jCkBAIC02NzcsNiArNjc3LDcgQEAgdm9p
-ZCBfX2luaXQgbm9yZXR1cm4gX19zdGFydF94ZW4odW5zaWduZQogICAgIHVuc2lnbmVkIGxvbmcg
-bnJfcGFnZXMsIHJhd19tYXhfcGFnZSwgbW9kdWxlc19oZWFkcm9vbSwgKm1vZHVsZV9tYXA7CiAg
-ICAgaW50IGksIGosIGU4MjBfd2FybiA9IDAsIGJ5dGVzID0gMDsKICAgICBib29sIGFjcGlfYm9v
-dF90YWJsZV9pbml0X2RvbmUgPSBmYWxzZSwgcmVsb2NhdGVkID0gZmFsc2U7CisgICAgaW50IHJl
-dDsKICAgICBzdHJ1Y3QgbnMxNjU1MF9kZWZhdWx0cyBuczE2NTUwID0gewogICAgICAgICAuZGF0
-YV9iaXRzID0gOCwKICAgICAgICAgLnBhcml0eSAgICA9ICduJywKQEAgLTE1NTksNiArMTU2MCwx
-MiBAQCB2b2lkIF9faW5pdCBub3JldHVybiBfX3N0YXJ0X3hlbih1bnNpZ25lCiAKICAgICB4MmFw
-aWNfYnNwX3NldHVwKCk7CiAKKyAgICByZXQgPSBpbml0X2lycV9kYXRhKCk7CisgICAgaWYgKCBy
-ZXQgPCAwICkKKyAgICAgICAgcGFuaWMoIkVycm9yICVkIHNldHRpbmcgdXAgSVJRIGRhdGFcbiIs
-IHJldCk7CisKKyAgICBjb25zb2xlX2luaXRfaXJxKCk7CisKICAgICBpbml0X0lSUSgpOwogCiAg
-ICAgbW9kdWxlX21hcCA9IHhtYWxsb2NfYXJyYXkodW5zaWduZWQgbG9uZywgQklUU19UT19MT05H
-UyhtYmktPm1vZHNfY291bnQpKTsKQEAgLTE2NjEsNyArMTY2OCw3IEBAIHZvaWQgX19pbml0IG5v
-cmV0dXJuIF9fc3RhcnRfeGVuKHVuc2lnbmUKICAgICAgICAgICAgIGlmICggKHBhcmtfb2ZmbGlu
-ZV9jcHVzIHx8IG51bV9vbmxpbmVfY3B1cygpIDwgbWF4X2NwdXMpICYmCiAgICAgICAgICAgICAg
-ICAgICFjcHVfb25saW5lKGkpICkKICAgICAgICAgICAgIHsKLSAgICAgICAgICAgICAgICBpbnQg
-cmV0ID0gY3B1X3VwKGkpOworICAgICAgICAgICAgICAgIHJldCA9IGNwdV91cChpKTsKICAgICAg
-ICAgICAgICAgICBpZiAoIHJldCAhPSAwICkKICAgICAgICAgICAgICAgICAgICAgcHJpbnRrKCJG
-YWlsZWQgdG8gYnJpbmcgdXAgQ1BVICV1IChlcnJvciAlZClcbiIsIGksIHJldCk7CiAgICAgICAg
-ICAgICAgICAgZWxzZSBpZiAoIG51bV9vbmxpbmVfY3B1cygpID4gbWF4X2NwdXMgfHwKLS0tIGEv
-eGVuL2RyaXZlcnMvY2hhci9jb25zb2xlLmMKKysrIGIveGVuL2RyaXZlcnMvY2hhci9jb25zb2xl
-LmMKQEAgLTkwOSw2ICs5MDksMTEgQEAgdm9pZCBfX2luaXQgY29uc29sZV9pbml0X3Jpbmcodm9p
-ZCkKICAgICBwcmludGsoIkFsbG9jYXRlZCBjb25zb2xlIHJpbmcgb2YgJXUgS2lCLlxuIiwgb3B0
-X2NvbnJpbmdfc2l6ZSA+PiAxMCk7CiB9CiAKK3ZvaWQgX19pbml0IGNvbnNvbGVfaW5pdF9pcnEo
-dm9pZCkKK3sKKyAgICBzZXJpYWxfaW5pdF9pcnEoKTsKK30KKwogdm9pZCBfX2luaXQgY29uc29s
-ZV9pbml0X3Bvc3RpcnEodm9pZCkKIHsKICAgICBzZXJpYWxfaW5pdF9wb3N0aXJxKCk7Ci0tLSBh
-L3hlbi9kcml2ZXJzL2NoYXIvc2VyaWFsLmMKKysrIGIveGVuL2RyaXZlcnMvY2hhci9zZXJpYWwu
-YwpAQCAtNTAzLDYgKzUwMywxNSBAQCB2b2lkIF9faW5pdCBzZXJpYWxfaW5pdF9wcmVpcnEodm9p
-ZCkKICAgICAgICAgICAgIGNvbVtpXS5kcml2ZXItPmluaXRfcHJlaXJxKCZjb21baV0pOwogfQog
-Cit2b2lkIF9faW5pdCBzZXJpYWxfaW5pdF9pcnEodm9pZCkKK3sKKyAgICB1bnNpZ25lZCBpbnQg
-aTsKKworICAgIGZvciAoIGkgPSAwOyBpIDwgQVJSQVlfU0laRShjb20pOyBpKysgKQorICAgICAg
-ICBpZiAoIGNvbVtpXS5kcml2ZXIgJiYgY29tW2ldLmRyaXZlci0+aW5pdF9pcnEgKQorICAgICAg
-ICAgICAgY29tW2ldLmRyaXZlci0+aW5pdF9pcnEoJmNvbVtpXSk7Cit9CisKIHZvaWQgX19pbml0
-IHNlcmlhbF9pbml0X3Bvc3RpcnEodm9pZCkKIHsKICAgICBpbnQgaTsKLS0tIGEveGVuL2luY2x1
-ZGUveGVuL2NvbnNvbGUuaAorKysgYi94ZW4vaW5jbHVkZS94ZW4vY29uc29sZS5oCkBAIC0xNSw2
-ICsxNSw3IEBAIGxvbmcgcmVhZF9jb25zb2xlX3Jpbmcoc3RydWN0IHhlbl9zeXNjdGwKIAogdm9p
-ZCBjb25zb2xlX2luaXRfcHJlaXJxKHZvaWQpOwogdm9pZCBjb25zb2xlX2luaXRfcmluZyh2b2lk
-KTsKK3ZvaWQgY29uc29sZV9pbml0X2lycSh2b2lkKTsKIHZvaWQgY29uc29sZV9pbml0X3Bvc3Rp
-cnEodm9pZCk7CiB2b2lkIGNvbnNvbGVfZW5kYm9vdCh2b2lkKTsKIGludCBjb25zb2xlX2hhcyhj
-b25zdCBjaGFyICpkZXZpY2UpOwotLS0gYS94ZW4vaW5jbHVkZS94ZW4vc2VyaWFsLmgKKysrIGIv
-eGVuL2luY2x1ZGUveGVuL3NlcmlhbC5oCkBAIC02NCw2ICs2NCw3IEBAIHN0cnVjdCBzZXJpYWxf
-cG9ydCB7CiBzdHJ1Y3QgdWFydF9kcml2ZXIgewogICAgIC8qIERyaXZlciBpbml0aWFsaXNhdGlv
-biAocHJlLSBhbmQgcG9zdC1JUlEgc3Vic3lzdGVtIHNldHVwKS4gKi8KICAgICB2b2lkICgqaW5p
-dF9wcmVpcnEpKHN0cnVjdCBzZXJpYWxfcG9ydCAqKTsKKyAgICB2b2lkICgqaW5pdF9pcnEpKHN0
-cnVjdCBzZXJpYWxfcG9ydCAqKTsKICAgICB2b2lkICgqaW5pdF9wb3N0aXJxKShzdHJ1Y3Qgc2Vy
-aWFsX3BvcnQgKik7CiAgICAgLyogSG9vayB0byBjbGVhbiB1cCBhZnRlciBYZW4gYm9vdHN0cmFw
-IChiZWZvcmUgZG9tYWluIDAgcnVucykuICovCiAgICAgdm9pZCAoKmVuZGJvb3QpKHN0cnVjdCBz
-ZXJpYWxfcG9ydCAqKTsKQEAgLTk5LDggKzEwMCw5IEBAIHN0cnVjdCB1YXJ0X2RyaXZlciB7CiAj
-ZGVmaW5lIFNFUkhORF9MTyAgICAgICAoMTw8MykgLyogRGl0dG8sIGV4Y2VwdCB0aGF0IHRoZSBN
-U0IgaXMgY2xlYXJlZC4gICovCiAjZGVmaW5lIFNFUkhORF9DT09LRUQgICAoMTw8NCkgLyogTmV3
-bGluZS9jYXJyaWFnZS1yZXR1cm4gdHJhbnNsYXRpb24/ICAgICovCiAKLS8qIFR3by1zdGFnZSBp
-bml0aWFsaXNhdGlvbiAoYmVmb3JlL2FmdGVyIElSUS1zdWJzeXN0ZW0gaW5pdGlhbGlzYXRpb24p
-LiAqLworLyogVGhyZWUtc3RhZ2UgaW5pdGlhbGlzYXRpb24gKGJlZm9yZS9kdXJpbmcvYWZ0ZXIg
-SVJRLXN1YnN5c3RlbSBzZXR1cCkuICovCiB2b2lkIHNlcmlhbF9pbml0X3ByZWlycSh2b2lkKTsK
-K3ZvaWQgc2VyaWFsX2luaXRfaXJxKHZvaWQpOwogdm9pZCBzZXJpYWxfaW5pdF9wb3N0aXJxKHZv
-aWQpOwogCiAvKiBDbGVhbi11cCBob29rIGJlZm9yZSBkb21haW4gMCBydW5zLiAqLwoKCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+------------E0olPD4ZbnKXWT22O7t9Ue
+Content-Type: text/plain; charset=iso-8859-15; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
+
+>> Fill the from_xenstore libxl_device_type hook for PCI devices so that
+>> libxl_retrieve_domain_configuration can properly retrieve PCI devices
+>> from xenstore.
+>> This fixes disappearing pci devices across domain reboots.
+> This patch seems to be committed now. Please backport this to Xen 4.10  
+> stable branch, for upcoming 4.10.3, because original bugreport was about  
+> Xen 4.10.
+
+Thanks to devs for the patch. I tested the patch and I can confirm that it  
+fixes my original problem on Xen 4.10. To use with Xen 4.10 you need a  
+small backport patch (attached).
+
+Regards Andreas
+------------E0olPD4ZbnKXWT22O7t9Ue
+Content-Disposition: attachment; filename=backport-4.10.patch
+Content-Type: application/octet-stream; name="backport-4.10.patch"
+Content-Transfer-Encoding: Base64
+
+U2lnbmVkLW9mZi1ieTogQW5kcmVhcyBLaW56bGVyIDxoZnBAcG9zdGVvLmRlPgoK
+LS0tIGtlZXAtcGNpcHQtZHVyaW5nLXJlYm9vdC5wYXRjaAlNb24gT2N0IDEgMTY6
+MTQ6NDQgMjAxOCBVVEMKKysrIGtlZXAtcGNpcHQtZHVyaW5nLXJlYm9vdC5wYXRj
+aAlNb24gT2N0IDEgMTU6MzQ6MTcgMjAxOCBVVEMKQEAgLTI3LDggKzI3LDggQEAK
+ICAKICAjZGVmaW5lIGxpYnhsX19kZXZpY2VfcGNpX3VwZGF0ZV9kZXZpZCBOVUxM
+CiAgCi0tREVGSU5FX0RFVklDRV9UWVBFX1NUUlVDVF9YKHBjaWRldiwgcGNpLCBQ
+Q0kpOwotK0RFRklORV9ERVZJQ0VfVFlQRV9TVFJVQ1RfWChwY2lkZXYsIHBjaSwg
+UENJLAorLURFRklORV9ERVZJQ0VfVFlQRV9TVFJVQ1RfWChwY2lkZXYsIHBjaSwg
+cGNpKTsKKytERUZJTkVfREVWSUNFX1RZUEVfU1RSVUNUX1gocGNpZGV2LCBwY2ks
+IHBjaSwKICsgICAgLmZyb21feGVuc3RvcmUgPSAoZGV2aWNlX2Zyb21feGVuc3Rv
+cmVfZm5fdClsaWJ4bF9fZGV2aWNlX3BjaV9mcm9tX3hzX2JlLAogKyk7CiAgCg==
+
+------------E0olPD4ZbnKXWT22O7t9Ue
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+------------E0olPD4ZbnKXWT22O7t9Ue--
