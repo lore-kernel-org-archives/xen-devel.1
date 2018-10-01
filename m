@@ -1,19 +1,19 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 1/2] xen: fix race in xen_qlock_wait()
-Date: Mon, 1 Oct 2018 10:58:40 +0200
-Message-ID: <d75416af-2cc4-595a-48dc-381d14785191__20991.5197491229$1538384242$gmane$org@suse.com>
+Subject: Re: [PATCH 2/2] xen: make xen_qlock_wait() nestable
+Date: Mon, 1 Oct 2018 11:03:08 +0200
+Message-ID: <b09903d2-b6f5-299e-5880-f048fd4e1a8b__44556.6395800144$1538384515$gmane$org@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=yvko=mn=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1g6u2O-0004CD-At
- for xen-devel@lists.xenproject.org; Mon, 01 Oct 2018 08:58:44 +0000
+ id 1g6u6g-0004z2-U0
+ for xen-devel@lists.xenproject.org; Mon, 01 Oct 2018 09:03:10 +0000
 References: =?UTF-8?B?PDIwMTgxMDAxMDcxNjQxLjE5Mjgy77+9Me+/vWpncm9zc0BzdXNl?=
- =?UTF-8?Q?=2ecom=3e_=3c20181001071641=2e19282-2-jgross=40suse=2ecom=3e_=3c5?=
- =?UTF-8?Q?BB1E0B502000078001ED124=40suse=2ecom=3e?=
+ =?UTF-8?Q?=2ecom=3e_=3c20181001071641=2e19282-3-jgross=40suse=2ecom=3e_=3c5?=
+ =?UTF-8?Q?BB1E18802000078001ED127=40suse=2ecom=3e?=
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -27,17 +27,42 @@ To: Jan Beulich <JBeulich@suse.com>
 Cc: "H. Peter Anvin" <hpa@zytor.com>, Peter Zijlstra <peterz@infradead.org>, the arch/x86 maintainers <x86@kernel.org>, lkml <linux-kernel@vger.kernel.org>, stable@vger.kernel.org, mingo@redhat.com, Borislav Petkov <bp@alien8.de>, longman@redhat.com, xen-devel <xen-devel@lists.xenproject.org>, Thomas Gleixner <tglx@linutronix.de>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMTAvMjAxOCAxMDo1NCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMDEuMTAuMTgg
-YXQgMDk6MTYsIDxqZ3Jvc3NAc3VzZS5jb20+IHdyb3RlOgo+PiBJbiB0aGUgZm9sbG93aW5nIHNp
-dHVhdGlvbiBhIHZjcHUgd2FpdGluZyBmb3IgYSBsb2NrIG1pZ2h0IG5vdCBiZQo+PiB3b2tlbiB1
-cCBmcm9tIHhlbl9wb2xsX2lycSgpOgo+Pgo+PiBDUFUgMTogICAgICAgICAgICAgICAgQ1BVIDI6
-ICAgICAgICAgICAgICAgICAgICAgIENQVSAzOgo+PiB0YWtlcyBhIHNwaW5sb2NrCj4+ICAgICAg
-ICAgICAgICAgICAgICAgICB0cmllcyB0byBnZXQgbG9jawo+PiAgICAgICAgICAgICAgICAgICAg
-ICAgLT4geGVuX3Fsb2NrX3dhaXQoKQo+PiAgICAgICAgICAgICAgICAgICAgICAgICAtPiB4ZW5f
-Y2xlYXJfaXJxX3BlbmRpbmcoKQo+IAo+IERvZXNuJ3QgdGhlIGxhc3QgbGluZSBhYm92ZSAuLi4K
-PiAKPj4gZnJlZXMgdGhlIGxvY2sKPj4gLT4geGVuX3Fsb2NrX2tpY2soY3B1MikKPiAKPiAuLi4g
-bmVlZCB0byBiZSBiZWxvdyBoZXJlPwoKWW91IGFyZSByaWdodCwgb2YgY291cnNlIQoKVGhhbmtz
-IGZvciBub3RpY2luZy4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+T24gMDEvMTAvMjAxOCAxMDo1NywgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMDEuMTAuMTgg
+YXQgMDk6MTYsIDxqZ3Jvc3NAc3VzZS5jb20+IHdyb3RlOgo+PiB4ZW5fcWxvY2tfd2FpdCgpIGlz
+bid0IHNhZmUgZm9yIG5lc3RlZCBjYWxscyBkdWUgdG8gaW50ZXJydXB0cy4gQSBjYWxsCj4+IG9m
+IHhlbl9xbG9ja19raWNrKCkgbWlnaHQgYmUgaWdub3JlZCBpbiBjYXNlIGEgZGVlcGVyIG5lc3Rp
+bmcgbGV2ZWwKPj4gd2FzIGFjdGl2ZSByaWdodCBiZWZvcmUgdGhlIGNhbGwgb2YgeGVuX3BvbGxf
+aXJxKCk6Cj4+Cj4+IENQVSAxOiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQ1BV
+IDI6Cj4+IHNwaW5fbG9jayhsb2NrMSkKPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBzcGluX2xvY2sobG9jazEpCj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgLT4geGVuX3Fsb2NrX3dhaXQoKQo+PiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIC0+IHhlbl9jbGVhcl9pcnFfcGVuZGluZygpCj4+ICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSW50ZXJydXB0IGhhcHBl
+bnMKPj4gc3Bpbl91bmxvY2sobG9jazEpCj4+IC0+IHhlbl9xbG9ja19raWNrKENQVSAyKQo+PiBz
+cGluX2xvY2tfaXJxc2F2ZShsb2NrMikKPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBzcGluX2xvY2tfaXJxc2F2ZShsb2NrMikKPj4gICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAtPiB4ZW5fcWxvY2tfd2FpdCgpCj4+ICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLT4geGVuX2NsZWFyX2lycV9wZW5kaW5n
+KCkKPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjbGVh
+cnMga2ljayBmb3IgbG9jazEKPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAtPiB4ZW5fcG9sbF9pcnEoKQo+PiBzcGluX3VubG9ja19pcnFfcmVzdG9yZShsb2Nr
+MikKPj4gLT4geGVuX3Fsb2NrX2tpY2soQ1BVIDIpCj4+ICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgd2FrZXMgdXAKPj4gICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBzcGluX3VubG9ja19pcnFfcmVzdG9yZShsb2NrMikKPj4gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBJUkVUCj4+ICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXN1bWVzIGluIHhlbl9xbG9ja193YWl0KCkK
+Pj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC0+IHhlbl9wb2xs
+X2lycSgpCj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBuZXZl
+ciB3YWtlcyB1cAo+Pgo+PiBUaGUgc29sdXRpb24gaXMgdG8gZGlzYWJsZSBpbnRlcnJ1cHRzIGlu
+IHhlbl9xbG9ja193YWl0KCkgYW5kIG5vdCB0bwo+PiBwb2xsIGZvciB0aGUgaXJxIGluIGNhc2Ug
+eGVuX3Fsb2NrX3dhaXQoKSBpcyBjYWxsZWQgaW4gbm1pIGNvbnRleHQuCj4gCj4gQXJlIHByZWNh
+dXRpb25zIGFnYWluc3QgTk1JIHJlYWxseSB3b3J0aHdoaWxlPyBMb2NrcyBhY3F1aXJlZCBib3Ro
+Cj4gaW4gTk1JIGNvbnRleHQgYXMgd2VsbCBhcyBvdXRzaWRlIG9mIGl0IGFyZSBsaWFibGUgdG8g
+ZGVhZGxvY2sgYW55d2F5LAo+IGFyZW4ndCB0aGV5PwoKVGhlIGxvY2tzIGRvbid0IG5lZWQgdG8g
+YmUgdGhlIHNhbWUuIEEgTk1JLW9ubHkgbG9jayB0cmllZCB0byBiZQphY3F1aXJlZCB3aXRoIHhl
+bl9xbG9ja193YWl0KCkgZm9yIGFub3RoZXIgbG9jayBoYXZpbmcgYmVlbiBpbnRlcnJ1cHRlZApi
+eSB0aGUgTk1JIHdpbGwgYmUgZW5vdWdoIHRvIHJpc2sgdGhlIGlzc3VlLgoKU28geWVzLCBJIGJl
+bGlldmUgdGhlIHRlc3QgZm9yIE5NSSBpcyBnb29kIHRvIGhhdmUuCgoKSnVlcmdlbgoKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
