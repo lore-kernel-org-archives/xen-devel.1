@@ -1,19 +1,19 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 0/2] xen: fix two issues in Xen pv qspinlock
- handling
-Date: Mon, 1 Oct 2018 09:37:01 +0200
-Message-ID: <9840f232-acc4-310d-d87d-8fbf329a9664__16310.3649313145$1538379363$gmane$org@suse.com>
+Subject: Re: [PATCH 1/2] xen: fix race in xen_qlock_wait()
+Date: Mon, 1 Oct 2018 09:37:37 +0200
+Message-ID: <517372ba-4aad-d60c-6543-eb82942ebd20__18595.854790374$1538379379$gmane$org@suse.com>
 References: <20181001071641.19282-1-jgross@suse.com>
+ <20181001071641.19282-2-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=yvko=mn=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1g6slM-00065P-Dq
- for xen-devel@lists.xenproject.org; Mon, 01 Oct 2018 07:37:04 +0000
-In-Reply-To: <20181001071641.19282-1-jgross@suse.com>
+ id 1g6slw-00067X-CD
+ for xen-devel@lists.xenproject.org; Mon, 01 Oct 2018 07:37:40 +0000
+In-Reply-To: <20181001071641.19282-2-jgross@suse.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,21 +24,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org
-Cc: peterz@infradead.org, mingo@redhat.com, Borislav Petkov <bp@alien8.de>, hpa@zytor.com, Waiman Long <longman@redhat.com>, boris.ostrovsky@oracle.com, tglx@linutronix.de
+Cc: peterz@infradead.org, stable@vger.kernel.org, mingo@redhat.com, bp@alien8.de, hpa@zytor.com, Waiman Long <longman@redhat.com>, boris.ostrovsky@oracle.com, tglx@linutronix.de
 List-Id: xen-devel@lists.xenproject.org
 
 Q29ycmVjdGluZyBXYWltYW4ncyBtYWlsIGFkZHJlc3MKCk9uIDAxLzEwLzIwMTggMDk6MTYsIEp1
-ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gVGhlIFhlbiBzcGVjaWZpYyBxdWV1ZSBzcGlubG9jayB3YWl0
-IGZ1bmN0aW9uIGhhcyB0d28gaXNzdWVzIHdoaWNoCj4gY291bGQgcmVzdWx0IGluIGEgaGFuZ2lu
-ZyBzeXN0ZW0uCj4gCj4gVGhleSBoYXZlIGEgc2ltaWxhciByb290IGNhdXNlIG9mIGNsZWFyaW5n
-IGEgcGVuZGluZyB3YWtldXAgb2YgYQo+IHdhaXRpbmcgdmNwdSBhbmQgbGF0ZXIgZ29pbmcgdG8g
-c2xlZXAgd2FpdGluZyBmb3IgdGhlIGp1c3QgY2xlYXJlZAo+IHdha2V1cCBldmVudCwgd2hpY2gg
-b2YgY291cnNlIHdvbid0IGV2ZXIgaGFwcGVuLgo+IAo+IEp1ZXJnZW4gR3Jvc3MgKDIpOgo+ICAg
-eGVuOiBmaXggcmFjZSBpbiB4ZW5fcWxvY2tfd2FpdCgpCj4gICB4ZW46IG1ha2UgeGVuX3Fsb2Nr
-X3dhaXQoKSBuZXN0YWJsZQo+IAo+ICBhcmNoL3g4Ni94ZW4vc3BpbmxvY2suYyB8IDMzICsrKysr
-KysrKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgMTIgaW5zZXJ0
-aW9ucygrKSwgMjEgZGVsZXRpb25zKC0pCj4gCj4gQ2M6IGxvbmdtYW5AcmVkaGF0LmNvbQo+IENj
-OiBwZXRlcnpAaW5mcmFkZWFkLm9yZwo+IAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gSW4gdGhlIGZvbGxvd2luZyBzaXR1YXRpb24gYSB2Y3B1IHdh
+aXRpbmcgZm9yIGEgbG9jayBtaWdodCBub3QgYmUKPiB3b2tlbiB1cCBmcm9tIHhlbl9wb2xsX2ly
+cSgpOgo+IAo+IENQVSAxOiAgICAgICAgICAgICAgICBDUFUgMjogICAgICAgICAgICAgICAgICAg
+ICAgQ1BVIDM6Cj4gdGFrZXMgYSBzcGlubG9jawo+ICAgICAgICAgICAgICAgICAgICAgICB0cmll
+cyB0byBnZXQgbG9jawo+ICAgICAgICAgICAgICAgICAgICAgICAtPiB4ZW5fcWxvY2tfd2FpdCgp
+Cj4gICAgICAgICAgICAgICAgICAgICAgICAgLT4geGVuX2NsZWFyX2lycV9wZW5kaW5nKCkKPiBm
+cmVlcyB0aGUgbG9jawo+IC0+IHhlbl9xbG9ja19raWNrKGNwdTIpCj4gCj4gdGFrZXMgbG9jayBh
+Z2Fpbgo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+dHJpZXMgdG8gZ2V0IGxvY2sKPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIC0+ICpsb2NrID0gX1FfU0xPV19WQUwKPiAgICAgICAgICAgICAgICAgICAg
+ICAgICAtPiAqbG9jayA9PSBfUV9TTE9XX1ZBTCA/Cj4gICAgICAgICAgICAgICAgICAgICAgICAg
+LT4geGVuX3BvbGxfaXJxKCkKPiBmcmVlcyB0aGUgbG9jawo+IC0+IHhlbl9xbG9ja19raWNrKGNw
+dTMpCj4gCj4gQW5kIGNwdSAyIHdpbGwgc2xlZXAgZm9yZXZlci4KPiAKPiBUaGlzIGNhbiBiZSBh
+dm9pZGVkIGVhc2lseSBieSBtb2RpZnlpbmcgeGVuX3Fsb2NrX3dhaXQoKSB0byBjYWxsCj4geGVu
+X3BvbGxfaXJxKCkgb25seSBpZiB0aGUgcmVsYXRlZCBpcnEgd2FzIG5vdCBwZW5kaW5nIGFuZCB0
+byBjYWxsCj4geGVuX2NsZWFyX2lycV9wZW5kaW5nKCkgb25seSBpZiBpdCB3YXMgcGVuZGluZy4K
+PiAKPiBDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZwo+IENjOiBsb25nbWFuQHJlZGhhdC5jb20K
+PiBDYzogcGV0ZXJ6QGluZnJhZGVhZC5vcmcKPiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3Nz
+IDxqZ3Jvc3NAc3VzZS5jb20+Cj4gLS0tCj4gIGFyY2gveDg2L3hlbi9zcGlubG9jay5jIHwgMTUg
+KysrKystLS0tLS0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDEwIGRl
+bGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9hcmNoL3g4Ni94ZW4vc3BpbmxvY2suYyBiL2Fy
+Y2gveDg2L3hlbi9zcGlubG9jay5jCj4gaW5kZXggOTczZjEwZTA1MjExLi5jZDIxMGE0YmE3YjEg
+MTAwNjQ0Cj4gLS0tIGEvYXJjaC94ODYveGVuL3NwaW5sb2NrLmMKPiArKysgYi9hcmNoL3g4Ni94
+ZW4vc3BpbmxvY2suYwo+IEBAIC00NSwxNyArNDUsMTIgQEAgc3RhdGljIHZvaWQgeGVuX3Fsb2Nr
+X3dhaXQodTggKmJ5dGUsIHU4IHZhbCkKPiAgCWlmIChpcnEgPT0gLTEpCj4gIAkJcmV0dXJuOwo+
+ICAKPiAtCS8qIGNsZWFyIHBlbmRpbmcgKi8KPiAtCXhlbl9jbGVhcl9pcnFfcGVuZGluZyhpcnEp
+Owo+IC0JYmFycmllcigpOwo+ICsJLyogSWYgaXJxIHBlbmRpbmcgYWxyZWFkeSBjbGVhciBpdCBh
+bmQgcmV0dXJuLiAqLwo+ICsJaWYgKHhlbl90ZXN0X2lycV9wZW5kaW5nKGlycSkpIHsKPiArCQl4
+ZW5fY2xlYXJfaXJxX3BlbmRpbmcoaXJxKTsKPiArCQlyZXR1cm47Cj4gKwl9Cj4gIAo+IC0JLyoK
+PiAtCSAqIFdlIGNoZWNrIHRoZSBieXRlIHZhbHVlIGFmdGVyIGNsZWFyaW5nIHBlbmRpbmcgSVJR
+IHRvIG1ha2Ugc3VyZQo+IC0JICogdGhhdCB3ZSB3b24ndCBtaXNzIGEgd2FrZXVwIGV2ZW50IGJl
+Y2F1c2Ugb2YgdGhlIGNsZWFyaW5nLgo+IC0JICoKPiAtCSAqIFRoZSBzeW5jX2NsZWFyX2JpdCgp
+IGNhbGwgaW4geGVuX2NsZWFyX2lycV9wZW5kaW5nKCkgaXMgYXRvbWljLgo+IC0JICogU28gaXQg
+aXMgZWZmZWN0aXZlbHkgYSBtZW1vcnkgYmFycmllciBmb3IgeDg2Lgo+IC0JICovCj4gIAlpZiAo
+UkVBRF9PTkNFKCpieXRlKSAhPSB2YWwpCj4gIAkJcmV0dXJuOwo+ICAKPiAKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
