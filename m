@@ -1,21 +1,29 @@
-From: Omkar Bolla <omkar.bolla@pathpartnertech.com>
-Subject: Re: Xen PV: Sample new PV driver for buffer sharing
- between domains
-Date: Tue, 2 Oct 2018 15:33:12 +0530
-Message-ID: <CAC4nxbsBox=FgCBx5KwkkvCHwyX2MvBGoGpa1sDyS2cF0itT=Q@mail.gmail.com>
-References: <CAC4nxbvWUpWQcUATQswoaVJfSq8EU7CH6-Jx1VwVGYVeOc0tZw@mail.gmail.com>
- <B9D01323-5CE0-4CAE-9A7C-2B1CE482A833@xenproject.org>
- <aebd40b7-e7d2-c861-b658-863b2c8f2079@gmail.com>
- <f688cda0-a342-0b66-fb5c-56238d941f9c@suse.com>
- <f8ae32f3-8399-24d3-fe1e-45d4c1669e1b@epam.com>
- <CAC4nxbvh6LA=t2iEdiw2UrqrQP3Zf2NtRcViJ1YNGZkyLZqYHg@mail.gmail.com>
- <d130b853-0e33-ecb7-5598-d99791a5f2bf@suse.com>
- <CAC4nxbuTQ1uP6rKiCAp7hDe-ygq9LKHQw8ggVM+fOVH-VvU8Tw@mail.gmail.com>
- <d2b9cd5a-2768-60bd-07bd-2055d1490399@suse.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [xen-unstable test] 128240: regressions - FAIL
+Date: Tue, 2 Oct 2018 11:06:22 +0100
+Message-ID: <a54b13c5-1f51-f93b-040c-f1cd5a9aa9e9@citrix.com>
+References: <osstest-128240-mainreport@xen.org>
+ <5BB1E30202000078001ED16E@prv1-mh.provo.novell.com>
+ <20181001143324.n6ghsnarvq6xslqt@zion.uk.xensource.com>
+ <5BB238E102000078001ED56E@prv1-mh.provo.novell.com>
+ <20181001151716.snpgmxh77crrmihq@zion.uk.xensource.com>
+ <15ad853f-b9ac-ba0b-3cc6-457b61ec787e@citrix.com>
+ <20181001153557.y4jgo37xzbaa5tgg@zion.uk.xensource.com>
+ <fc2bbc89-cfc7-d906-6fe0-b1fd76ddd2ff@citrix.com>
+ <26110706-a183-0c11-1efd-93ec76accd40@citrix.com>
+ <ffd0c284-c1c9-680c-564a-ce066a1fb210@suse.com>
+ <21b6732f17b0adc631bf85f9c42afc60510bcd73.camel@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1622781045472374045=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <d2b9cd5a-2768-60bd-07bd-2055d1490399@suse.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=dvhh=mo=citrix.com=prvs=806f68edd=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1g7HZT-000796-T6
+ for xen-devel@lists.xenproject.org; Tue, 02 Oct 2018 10:06:27 +0000
+In-Reply-To: <21b6732f17b0adc631bf85f9c42afc60510bcd73.camel@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,230 +32,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: jgross@suse.com
-Cc: xen-devel@lists.xensource.com, Oleksandr_Andrushchenko@epam.com, Oleksandr Andrushchenko <andr2000@gmail.com>, Lars Kurth <lars.kurth.xen@gmail.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, osstest service owner <osstest-admin@xenproject.org>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1622781045472374045==
-Content-Type: multipart/alternative; boundary="0000000000004995b605773c0894"
-
---0000000000004995b605773c0894
-Content-Type: text/plain; charset="UTF-8"
-
-Hi,
-
-Thanks,
-Basic state change is working now, after using above script.
-
-As I said, I want to share buffer between two domains.
-Could you please suggest outlines, how can I share buffer between 2
-domains(Guest and Host)?
-
-Thanks,
-Omkar B
-
-On Fri, Sep 28, 2018 at 7:12 PM Juergen Gross <jgross@suse.com> wrote:
-
-> On 28/09/2018 14:55, Omkar Bolla wrote:
-> > Hi,
-> > I tried to run script after pause the domain and unpause domain after
-> > run script. But I ended up with same error
->
-> I looked at the script again, it is wrong. The permissions should
-> be set for each node under the root path of the respective domains,
-> the first permission should be "n$domid" ($domid is the owner who
-> can always read/write, the n is "no access" for all domains not
-> explicitly listed), the second permission should be "r$domid" as
-> the other side should be able to read only.
->
-> In order to do it correctly the script should be:
->
-> #!/bin/bash
->
-> DOMU_ID=$1
->
-> if [ -z "$DOMU_ID"  ]; then
->   echo "Usage: $0 [domU ID]]"
->   echo
->   echo "Connects the new device, with dom0 as backend, domU as frontend"
->   exit 1
-> fi
->
-> # Pause domU as a script can't write an entry and set permission
-> # in a single operation.
-> xl pause $DOMU_ID
->
-> DEVICE=mydevice
-> DOMU_KEY=/local/domain/$DOMU_ID/device/$DEVICE/0
-> DOM0_KEY=/local/domain/0/backend/$DEVICE/$DOMU_ID/0
->
-> # Tell the domU about the new device and its backend
-> xenstore-write $DOMU_KEY/backend-id 0
-> xenstore-write $DOMU_KEY/backend
-> "/local/domain/0/backend/$DEVICE/$DOMU_ID/0"
->
-> # Tell the dom0 about the new device and its frontend
-> xenstore-write $DOM0_KEY/frontend-id $DOMU_ID
-> xenstore-write $DOM0_KEY/frontend "/local/domain/$DOMU_ID/device/$DEVICE/0"
->
-> # Activate the device, dom0 needs to be activated last
-> xenstore-write $DOMU_KEY/state 1
-> xenstore-write $DOM0_KEY/state 1
->
-> # Make sure the domU can read the dom0 data
-> xenstore-chmod -r $DOM0_KEY n0 r$DOMU_ID
-> xenstore-chmod -r $DOMU_KEY n$DOMU_ID r0
->
-> xl unpause $DOMU_ID
->
->
-> Juergen
->
-
--- 
-
-
-
-
-
-
-This
-message contains confidential information and is intended only 
-for the
-individual(s) named. If you are not the intended
-recipient, you are 
-notified that disclosing, copying, distributing or taking any
-action in 
-reliance on the contents of this mail and attached file/s is strictly
-
-prohibited. Please notify the
-sender immediately and delete this e-mail 
-from your system. E-mail transmission
-cannot be guaranteed to be secured or 
-error-free as information could be
-intercepted, corrupted, lost, destroyed, 
-arrive late or incomplete, or contain
-viruses. The sender therefore does 
-not accept liability for any errors or
-omissions in the contents of this 
-message, which arise as a result of e-mail
-transmission.
-
---0000000000004995b605773c0894
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"color:#0b5394">Hi,</=
-div><div class=3D"gmail_default" style=3D"color:#0b5394"><br></div><div cla=
-ss=3D"gmail_default" style=3D"color:#0b5394">Thanks,</div><div class=3D"gma=
-il_default" style=3D"color:#0b5394">Basic state change is working now, afte=
-r using above script.</div><div class=3D"gmail_default" style=3D"color:#0b5=
-394"><br></div><div class=3D"gmail_default" style=3D"color:#0b5394">As I sa=
-id, I want to share buffer between two domains.</div><div class=3D"gmail_de=
-fault" style=3D"color:#0b5394">Could you please suggest outlines, how can I=
- share buffer between 2 domains(Guest and Host)?</div><div class=3D"gmail_d=
-efault" style=3D"color:#0b5394"><br></div><div class=3D"gmail_default" styl=
-e=3D"color:#0b5394">Thanks,</div><div class=3D"gmail_default" style=3D"colo=
-r:#0b5394">Omkar B</div></div><br><div class=3D"gmail_quote"><div dir=3D"lt=
-r">On Fri, Sep 28, 2018 at 7:12 PM Juergen Gross &lt;<a href=3D"mailto:jgro=
-ss@suse.com">jgross@suse.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
-mail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-l=
-eft:1ex">On 28/09/2018 14:55, Omkar Bolla wrote:<br>
-&gt; Hi,<br>
-&gt; I tried to run script after pause the domain and unpause domain after<=
-br>
-&gt; run script. But I ended up with same error<br>
-<br>
-I looked at the script again, it is wrong. The permissions should<br>
-be set for each node under the root path of the respective domains,<br>
-the first permission should be &quot;n$domid&quot; ($domid is the owner who=
-<br>
-can always read/write, the n is &quot;no access&quot; for all domains not<b=
-r>
-explicitly listed), the second permission should be &quot;r$domid&quot; as<=
-br>
-the other side should be able to read only.<br>
-<br>
-In order to do it correctly the script should be:<br>
-<br>
-#!/bin/bash<br>
-<br>
-DOMU_ID=3D$1<br>
-<br>
-if [ -z &quot;$DOMU_ID&quot;=C2=A0 ]; then<br>
-=C2=A0 echo &quot;Usage: $0 [domU ID]]&quot;<br>
-=C2=A0 echo<br>
-=C2=A0 echo &quot;Connects the new device, with dom0 as backend, domU as fr=
-ontend&quot;<br>
-=C2=A0 exit 1<br>
-fi<br>
-<br>
-# Pause domU as a script can&#39;t write an entry and set permission<br>
-# in a single operation.<br>
-xl pause $DOMU_ID<br>
-<br>
-DEVICE=3Dmydevice<br>
-DOMU_KEY=3D/local/domain/$DOMU_ID/device/$DEVICE/0<br>
-DOM0_KEY=3D/local/domain/0/backend/$DEVICE/$DOMU_ID/0<br>
-<br>
-# Tell the domU about the new device and its backend<br>
-xenstore-write $DOMU_KEY/backend-id 0<br>
-xenstore-write $DOMU_KEY/backend<br>
-&quot;/local/domain/0/backend/$DEVICE/$DOMU_ID/0&quot;<br>
-<br>
-# Tell the dom0 about the new device and its frontend<br>
-xenstore-write $DOM0_KEY/frontend-id $DOMU_ID<br>
-xenstore-write $DOM0_KEY/frontend &quot;/local/domain/$DOMU_ID/device/$DEVI=
-CE/0&quot;<br>
-<br>
-# Activate the device, dom0 needs to be activated last<br>
-xenstore-write $DOMU_KEY/state 1<br>
-xenstore-write $DOM0_KEY/state 1<br>
-<br>
-# Make sure the domU can read the dom0 data<br>
-xenstore-chmod -r $DOM0_KEY n0 r$DOMU_ID<br>
-xenstore-chmod -r $DOMU_KEY n$DOMU_ID r0<br>
-<br>
-xl unpause $DOMU_ID<br>
-<br>
-<br>
-Juergen<br>
-</blockquote></div>
-
-<br>
-
-
-
-
-<p><span lang=3D"EN-IN">This
-message contains confidential information and is intended only for the
-individual(s) named.</span><span lang=3D"EN-IN"> </span>If you are not the =
-intended
-recipient, you are notified that disclosing, copying, distributing or takin=
-g any
-action in reliance on the contents of this mail and attached file/s is stri=
-ctly
-prohibited<span lang=3D"EN-IN">. Please notify the
-sender immediately and delete this e-mail from your system. E-mail transmis=
-sion
-cannot be guaranteed to be secured or error-free as information could be
-intercepted, corrupted, lost, destroyed, arrive late or incomplete, or cont=
-ain
-viruses. The sender therefore does not accept liability for any errors or
-omissions in the contents of this message, which arise as a result of e-mai=
-l
-transmission.</span></p>
---0000000000004995b605773c0894--
-
-
---===============1622781045472374045==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1622781045472374045==--
+T24gMTAvMDEvMjAxOCAwNjo1OCBQTSwgRGFyaW8gRmFnZ2lvbGkgd3JvdGU6Cj4gT24gTW9uLCAy
+MDE4LTEwLTAxIGF0IDE4OjA3ICswMjAwLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+PiBPbiAwMS8x
+MC8yMDE4IDE3OjQ4LCBHZW9yZ2UgRHVubGFwIHdyb3RlOgo+Pj4gT24gMTAvMDEvMjAxOCAwNDo0
+MCBQTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4+PiBPbiAwMS8xMC8xOCAxNjozNSwgV2VpIExp
+dSB3cm90ZToKPj4+Pj4+IFdhaXQsIHRoZSBtaWdyYXRpb24gY29kZSByZWFkcyB0aGUgc2NoZWR1
+bGVyIHBhcmFtZXRlcnMgLS0KPj4+Pj4+IGV2ZW4gaWYgdGhlc2UKPj4+Pj4+IGhhdmUgbm90IGJl
+ZW4gZXhwbGljaXRseSBzZXQgYnkgdGhlIGFkbWluIC0tIGFuZCBzZW5kcyB0aGVtCj4+Pj4+PiBh
+bG9uZyB3aXRoCj4+Pj4+PiB0aGUgbWlncmF0aW9uIHN0cmVhbT8gIEFuZCBpZiB0aGUgcmVtb3Rl
+IHNjaGVkdWxlciBpcwo+Pj4+Pj4gZGlmZmVyZW50LCB0aGUKPj4+Pj4+IG1pZ3JhdGlvbiBmYWls
+cz8KPj4+Pj4+Cj4+Pj4+PiBUaGF0J3Mgbm90IHNvIGdvb2QuIDotKQo+Pj4+Pgo+Pj4+PiBCdXQg
+b25lIGNhbiBhcmd1ZSB0aGF0IHRoZSBndWVzdCBpcyBzcGVjaWZpYyBjb25maWd1cmVkIHRoYXQK
+Pj4+Pj4gd2F5IHNvIGl0J3MKPj4+Pj4gcGFyYW1ldGVycyBzaG91bGQgYmUgcHJlc2VydmVkLiBX
+ZSBub3JtYWxseSBhbmFseXNlIHRoaW5ncyBvbiBhCj4+Pj4+IGNhc2UgYnkKPj4+Pj4gY2FzZSBi
+YXNpcy4KPj4+Pgo+Pj4+IElmIHRoZXJlIGlzbid0IGFuIG9idmlvdXMgZml4LCB0aGVuIHRoZSBz
+d2l0Y2ggb2YgZGVmYXVsdAo+Pj4+IHNjaGVkdWxlcgo+Pj4+IG5lZWRzIHJldmVydGluZyB1bnRp
+bCB0aGVyZSBpcyBhIGZpeCBwcmVzZW50LiAgVGhpcyBpcyBjdXJyZW50bHkKPj4+PiBibG9ja2lu
+ZyBtYXN0ZXIuCj4+Pgo+Pj4gQWdyZWVkLiAgSSdkIGFyZ3VlIGZvciBpZ25vcmluZyBmYWlsdXJl
+cyB0byBzZXQgc2NoZWR1bGVyCj4+PiBwYXJhbWV0ZXJzIG9uCj4+PiBtaWdyYXRlLCBvbiB0aGUg
+Z3JvdW5kcyB0aGF0IHRoaXMgd2lsbCBiZSBsZXNzIHJpc2sgdG8gdGhlIHByb2plY3QKPj4+IGFz
+IGEKPj4+IHdob2xlIHRoYW4gcmV2ZXJ0aW5nIGNyZWRpdDIgYWdhaW4uICBCdXQgZWl0aGVyIHdh
+eSB3ZSBzaG91bGQgZG8KPj4+IHNvbWV0aGluZyBxdWlja2x5Lgo+Pgo+PiBXZSBzaG91bGQgaWdu
+b3JlIGEgbWlzbWF0Y2ggb2YgdGhlIHNjaGVkdWxlci4gRmFpbHVyZXMgd2hlbiBzZXR0aW5nCj4+
+IHBhcmFtZXRlcnMgZm9yIGEgbWF0Y2hpbmcgc2NoZWR1bGVyIHNob3VsZCBub3QgYmUgaWdub3Jl
+ZCBJTU8uCj4+Cj4gSW5kZWVkISBFc3BlY2lhbGx5IGNvbnNpZGVyaW5nIHRoYXQgdGhpcyBpc24n
+dCByZWFsbHkgcmVsYXRlZCBvbiB3aGF0Cj4gdGhlIGRlZmF1bHQgc2NoZWR1bGVyIGlzIChkZXNw
+aXRlIGl0IGJlaW5nIG1ha2luZyBDcmVkaXQyIGRlZmF1bHQgdGhhdAo+IHRyaWdnZXJzIHRoZSBp
+c3N1ZSkuCj4gCj4gSW4gZmFjdCwgd2hhdCBpZjoKPiAtIHVzZXIgdXNlcyBDcmVkaXQxIChkZWZh
+dWx0IGFuZCBzdXBwb3J0ZWQpIG9uIGhvc3QgQQo+IC0gdXNlciB1c2VzIENyZWRpdDIgKHN1cHBv
+cnRlZCkgb24gaG9zdCBCCj4gLSB1c2VyIG1pZ3JhdGVzIFZNCj4gLSBCT09PTSEKPiAKPiBTbywg
+dW5sZXNzIGl0IGlzIGludGVuZGVkIC0tYW5kLCBJJ2Qgc2F5LCBhbHNvIGRvY3VtZW50ZWQgc29t
+ZXdoZXJlLS0KPiB0aGF0IG1pZ3JhdGluZyBiZXR3ZWVuIGhvc3RzIHdoaWNoIHVzZSBkaWZmZXJl
+bnQgc2NoZWR1bGVycyBpcyB0byBiZQo+IGF2b2lkZWQsIHRoaXMgaXMgYWxyZWFkeSBhIGJ1Zywg
+d2hhdGV2ZXIgdGhlIGRlZmF1bHQgc2NoZWR1bGVyIGlzLi4uCj4gCj4gR2VvcmdlLCBsZXQgbWUg
+a25vdyBpZiB5b3UncmUgd29ya2luZyBvbiBhIGZpeCBhbHJlYWR5LCBvciBpZiBJIHNob3VsZAo+
+IGRvIHRoYXQgbXlzZWxmLgoKSSByZXZlcnRlZCB0aGUgY3JlZGl0MiBkZWZhdWx0OyBidXQgcmVh
+bGx5IHdlIG5lZWQgdG8gaGF2ZSBhIGRlc2lnbgpkaXNjdXNzaW9uIGFib3V0IHdoYXQgd2Ugd2Fu
+dCB0aGUgb3ZlcmFsbCBiZWhhdmlvciB0byBiZS4gIEl0J3Mgbm90CnNpbXBsZSBvciBvYnZpb3Vz
+LgoKIC1HZW9yZ2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
