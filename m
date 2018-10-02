@@ -1,27 +1,15 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [xen-unstable test] 128240: regressions - FAIL
-Date: Tue, 02 Oct 2018 11:24:09 +0200
-Message-ID: <dd29bed2a805194f2319ffe209790b6f5d7ac56d.camel@suse.com>
-References: <osstest„128240„mainreport@xen.org>
-	 <5BB1E30202000078001ED16E@prv1„mh.provo.novell.com>
-	 <20181001143324.n6ghsnarvq6xslqt@zion.uk.xensource.com>
-	 <5BB238E102000078001ED56E@prv1„mh.provo.novell.com>
-	 <20181001151716.snpgmxh77crrmihq@zion.uk.xensource.com>
-	 <15ad853f„b9ac„ba0b„3cc6„457b61ec787e@citrix.com>
-	 <20181001153557.y4jgo37xzbaa5tgg@zion.uk.xensource.com>
-	 <fc2bbc89„cfc7„d906„6fe0„b1fd76ddd2ff@citrix.com>
-	 <26110706„a183„0c11„1efd„93ec76accd40@citrix.com>
-	 <ffd0c284-c1c9-680c-564a-ce066a1fb210@suse.com>
-	 <5BB32C7802000078001ED8FA@suse.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 2/2] xen/xsm: Add new SILO mode for XSM
+Date: Tue, 02 Oct 2018 03:33:25 -0600
+Message-ID: <5BB33B6502000078001ED999@prv1-mh.provo.novell.com>
+References: <20180929092251.17661-1-xin.li@citrix.com>
+ <20180929092251.17661-2-xin.li@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8970691701013489610=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=hhua=mo=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1g7Gue-0003hA-CG
- for xen-devel@lists.xenproject.org; Tue, 02 Oct 2018 09:24:16 +0000
-In-Reply-To: <5BB32C7802000078001ED8FA@suse.com>
+In-Reply-To: <20180929092251.17661-2-xin.li@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,86 +18,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Juergen Gross <jgross@suse.com>, George Dunlap <george.dunlap@citrix.com>, Wei Liu <wei.liu2@citrix.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, osstest service owner <osstest-admin@xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>
+To: Xin Li <talons.lee@gmail.com>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xen.org, Xin Li <xin.li@citrix.com>, Ming Lu <ming.lu@citrix.com>, Daniel de Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8970691701013489610==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-iVtOjWQNclV03oTU5bYp"
-
-
---=-iVtOjWQNclV03oTU5bYp
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2018-10-02 at 09:29 +0100, Jan Beulich wrote:
-> > > > On 01.10.18 at 18:07, <jgross@suse.com> wrote:
-> >=20
-> > We should ignore a mismatch of the scheduler. Failures when setting
-> > parameters for a matching scheduler should not be ignored IMO.
->=20
-> Well, depends on whether the scheduler was explicitly chosen.
-> I don't think migration should succeed when e.g. RTDS was used
-> and isn't available on the destination host.
->=20
-I'm not sure I'm understanding.
-
-You're saying, that, e.g., the migration of a VM between, for instance:
-
-- a Xen 4.11 host, booted without any sched=3D, and hence running Credit,
-  and another Xen 4.11 host, booted with sched=3Dcredit2,
-
-should fail _while_ :
-
-- a migration between a Xen 4.11 host, booted without any sched=3D, and=20
-  hence using Credit, and a Xen 4.12 host, booted without any sched=3D,=20
-  and hence using Credit2 (if we switch),
-
-should succeed ?
-
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-iVtOjWQNclV03oTU5bYp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAluzOTkACgkQFkJ4iaW4
-c+6NAxAAmHK/XaQSIGo57V9Xzo+nRADwbl7ImIIMHtryRa/g7GVAShzT4F/+lpTr
-hntA5T1dwRV57oQY8KIjVKZZT0ntT1gOtbdoM9xh/I3V4BLI9BHSVzgVoE/ABosE
-0wQiQhZzaUyoSkeQs/gVZ96EIUWIShG7FhPw0FUYrVM6gEeNf6O3eni13NyZ+S0d
-mHaEd/HZ1ZlGmKU3h5NoZ7HKD5MIveXtDA3Nsm5KCVv7dZGt7aFbXmH5XkvGXCta
-k9E6IFFZF/T+0eknt+xGJdA8R8xygSsc1V7zbP4b/f/EsXfU6EQBJvlnUB7uLmJx
-a624pB2LFl+tOIh/93Lb4jJ1dxz52cf+3og6wACndpKu1oxTYjp2el04xOYsIsc4
-XtBkTx3+zD/BwewWJGRiNKe52rpqkzsbvnWvxVwxHJYN3doFubhyu1w6SyPFg0pc
-tbQwgR4YAaNQ1el5IuvTe5ebhxFl+TpNUEtg0KZi03qnY/p/NANvzVeEwzdc7+f6
-WcG99h8VDVDk+4KmoWU06Nkc2F3xqi6UioH0zA9tWLD+KccPuw1vrOp2P5HBzYCn
-NrZ+LzJ3szxviffU03llLCszf5LP7lyWlZdXZeVj2jfCJtqGpLVCloiJ5GwVGv/h
-EmnTOJCm4+lYt+vF3pRH8jhleSaII7Tn1VeX+qvFZwSsCRPbRXE=
-=rID1
------END PGP SIGNATURE-----
-
---=-iVtOjWQNclV03oTU5bYp--
-
-
-
---===============8970691701013489610==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8970691701013489610==--
+Pj4+IE9uIDI5LjA5LjE4IGF0IDExOjIyLCA8dGFsb25zLmxlZUBnbWFpbC5jb20+IHdyb3RlOgo+
+IC0tLSBhL3hlbi9pbmNsdWRlL3hzbS9kdW1teS5oCj4gKysrIGIveGVuL2luY2x1ZGUveHNtL2R1
+bW15LmgKPiBAQCAtNDgsNyArNDgsMTIgQEAgdm9pZCBfX3hzbV9hY3Rpb25fbWlzbWF0Y2hfZGV0
+ZWN0ZWQodm9pZCk7Cj4gICAqIFRoZXJlIGlzIG5vIHhzbV9kZWZhdWx0X3QgYXJndW1lbnQgYXZh
+aWxhYmxlLCBzbyB0aGUgdmFsdWUgZnJvbSB0aGUgYXNzZXJ0aW9uCj4gICAqIGlzIHVzZWQgdG8g
+aW5pdGlhbGl6ZSB0aGUgdmFyaWFibGUuCj4gICAqLwo+ICsjaWZkZWYgQ09ORklHX1hTTV9TSUxP
+Cj4gKyNkZWZpbmUgWFNNX0lOTElORSBfX2F0dHJpYnV0ZV9fICgodW51c2VkKSkKClBsZWFzZSBk
+b24ndCBvcGVuLWNvZGUgX19tYXliZV91bnVzZWQuIEZ1cnRoZXJtb3JlIEkgcXVlc3Rpb24KdGhl
+IGRlcGVuZGVuY3kgb24gQ09ORklHX1hTTV9TSUxPIGhlcmU6IEFmYWljdCB5b3Ugd2FudCB0aGlz
+IGZvcgpqdXN0IHRoZSBzaW5nbGUgbmV3IGluY2x1c2lvbiBzaXRlLCB3aXRob3V0IGFmZmVjdGlu
+ZyBhbnkgb3RoZXJzLgoKPiAtLS0gYS94ZW4vaW5jbHVkZS94c20veHNtLmgKPiArKysgYi94ZW4v
+aW5jbHVkZS94c20veHNtLmgKPiBAQCAtNzMzLDYgKzczMywxMiBAQCBleHRlcm4gY29uc3QgdW5z
+aWduZWQgY2hhciB4c21fZmxhc2tfaW5pdF9wb2xpY3lbXTsKPiAgZXh0ZXJuIGNvbnN0IHVuc2ln
+bmVkIGludCB4c21fZmxhc2tfaW5pdF9wb2xpY3lfc2l6ZTsKPiAgI2VuZGlmCj4gIAo+ICsjaWZk
+ZWYgQ09ORklHX1hTTV9TSUxPCj4gK2V4dGVybiB2b2lkIHNpbG9faW5pdCh2b2lkKTsKPiArI2Vs
+c2UKPiArc3RhdGljIGlubGluZSB2b2lkIHNpbG9faW5pdCh2b2lkKSB7fQo+ICsjZW5kaWYKCkFs
+b25nIHRoZSBsaW5lcyBvZiBvbmUgb2YgbXkgcmVtYXJrcyBvbiBwYXRjaCAxLCBJIHRoaW5rIHlv
+dSB3b3VsZApiZXR0ZXIgZ2V0IGF3YXkgd2l0aG91dCB0aGUgaW5saW5lIHZhcmlhbnQsIGJ5IGFk
+ZGluZyBzdWl0YWJsZSAjaWZkZWYtcwp0byBlbGltaW5hdGUgdGhlIHJpc2sgb2Ygd3JvbmcgdXNl
+IG9mIHRoZSBuZXcgZW51bWVyYXRvci4KCj4gLS0tIGEveGVuL3hzbS9kdW1teS5jCj4gKysrIGIv
+eGVuL3hzbS9kdW1teS5jCj4gQEAgLTExLDcgKzExLDYgQEAKPiAgICovCj4gIAo+ICAjZGVmaW5l
+IFhTTV9OT19XUkFQUEVSUwo+IC0jZGVmaW5lIFhTTV9JTkxJTkUgLyogKi8KPiAgI2luY2x1ZGUg
+PHhzbS9kdW1teS5oPgoKVGhlIGNoYW5nZSBsb29rcyB1bm1vdGl2YXRlZCBoZXJlLCBwZXJoYXBz
+IGJlY2F1c2Ugb2YgdGhlCnF1ZXN0aW9uYWJsZSBDT05GSUdfWFNNX1NJTE8gZGVwZW5kZW5jeSBm
+dXJ0aGVyIHVwLiBUaGF0CnNhaWQsIGl0IGxvb2tzIGFzIGlmIHRoZSAjZGVmaW5lIGNvdWxkIGdv
+IGF3YXkgY3VycmVudGx5LCBhcyBiZWluZwpyZWR1bmRhbnQgd2l0aCB3aGF0IGR1bW15LmggYWxy
+ZWFkeSBoYXMuIFRoYXQgd291bGQgdGhlbgpiZXR0ZXIgYmUgYSBzbWFsbCBzZXBhcmF0ZSBwcmVy
+ZXEgcGF0Y2ggaW1vLgoKPiAtLS0gL2Rldi9udWxsCj4gKysrIGIveGVuL3hzbS9zaWxvLmMKPiBA
+QCAtMCwwICsxLDEwOSBAQAo+ICsvKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqCj4gKyAqIHhzbS9zaWxv
+LmMKPiArICoKPiArICogU0lMTyBtb2R1bGUgZm9yIFhTTShYZW4gU2VjdXJpdHkgTW9kdWxlcykK
+CldvdWxkIHlvdSBtaW5kIGFkZGluZyB0aGUgbWlzc2luZyBibGFuayBoZXJlPwoKPiArICogQ29w
+eXJpZ2h0IChjKSAyMDE4IENpdHJpeCBTeXN0ZW1zIEx0ZC4KPiArICoKPiArICogVGhpcyBwcm9n
+cmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBjYW4gcmVkaXN0cmlidXRlIGl0IGFuZC9vciBtb2Rp
+ZnkgaXQKPiArICogdW5kZXIgdGhlIHRlcm1zIGFuZCBjb25kaXRpb25zIG9mIHRoZSBHTlUgR2Vu
+ZXJhbCBQdWJsaWMgTGljZW5zZSwKPiArICogdmVyc2lvbiAyLCBhcyBwdWJsaXNoZWQgYnkgdGhl
+IEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbi4KPiArICoKPiArICogVGhpcyBwcm9ncmFtIGlzIGRp
+c3RyaWJ1dGVkIGluIHRoZSBob3BlIGl0IHdpbGwgYmUgdXNlZnVsLCBidXQgV0lUSE9VVAo+ICsg
+KiBBTlkgV0FSUkFOVFk7IHdpdGhvdXQgZXZlbiB0aGUgaW1wbGllZCB3YXJyYW50eSBvZiBNRVJD
+SEFOVEFCSUxJVFkgb3IKPiArICogRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuICBT
+ZWUgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGZvcgo+ICsgKiBtb3JlIGRldGFpbHMu
+Cj4gKyAqCj4gKyAqIFlvdSBzaG91bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkgb2YgdGhlIEdOVSBH
+ZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGFsb25nIHdpdGgKPiArICogdGhpcyBwcm9ncmFtOyBJZiBu
+b3QsIHNlZSA8aHR0cDovL3d3dy5nbnUub3JnL2xpY2Vuc2VzLz4uCj4gKyAqLwo+ICsjZGVmaW5l
+IFhTTV9OT19XUkFQUEVSUwo+ICsKPiArI2luY2x1ZGUgPHhzbS9kdW1teS5oPgoKUGxlYXNlIHN3
+aXRjaCBhcm91bmQgdGhlIGJsYW5rIGFuZCB0aGUgI2RlZmluZSBsaW5lcywgbWF0Y2hpbmcgaG93
+CmR1bW15LmMgaXMgd3JpdHRlbi4gVGhpcyBoZWxwcyByZWFkZXJzIHVuZGVyc3RhbmQgdGhhdCB0
+aGUgI2RlZmluZQppcyBzcGVjaWZpY2FsbHkgaW4gcHJlcGFyYXRpb24gb2YgdGhlICNpbmNsdWRl
+LgoKPiArLyoKPiArICogQ2hlY2sgaWYgaW50ZXItZG9tYWluIGNvbW11bmljYXRpb24gaXMgYWxs
+b3dlZC4KPiArICogUmV0dXJuIHRydWUgd2hlbiBwYXNzIGNoZWNrLgo+ICsgKi8KPiArc3RhdGlj
+IGJvb2wgc2lsb19tb2RlX2RvbV9jaGVjayhjb25zdCBzdHJ1Y3QgZG9tYWluICpsZG9tLAo+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCBkb21haW4gKnJkb20p
+Cj4gK3sKPiArICAgIGNvbnN0IHN0cnVjdCBkb21haW4gKmN1cl9kb20gPSBjdXJyZW50LT5kb21h
+aW47CgpXZSBjb21tb25seSBjYWxsIHN1Y2ggdmFyaWFibGVzIGN1cnJkLgoKPiArICAgIHJldHVy
+biAoaXNfY29udHJvbF9kb21haW4oY3VyX2RvbSkgfHwgaXNfY29udHJvbF9kb21haW4obGRvbSkg
+fHwKPiArICAgICAgICAgICAgaXNfY29udHJvbF9kb21haW4ocmRvbSkgfHwgbGRvbSA9PSByZG9t
+KTsKPiArfQo+ICsKPiArc3RhdGljIGludCBzaWxvX2V2dGNobl91bmJvdW5kKHN0cnVjdCBkb21h
+aW4gKmQxLCBzdHJ1Y3QgZXZ0Y2huICpjaG4sCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBkb21pZF90IGlkMikKPiArewo+ICsgICAgaW50IHJjID0gLUVQRVJNOwo+ICsgICAgc3Ry
+dWN0IGRvbWFpbiAqZDIgPSByY3VfbG9ja19kb21haW5fYnlfYW55X2lkKGlkMik7Cj4gKwo+ICsg
+ICAgaWYgKCBkMiA9PSBOVUxMICkKCldlIGdlbmVyYWxseSB0cnkgdG8gdXNlIHRoZSBzaG9ydGVy
+ICFkMiBpbiBuZXcgY29kZS4gQnV0IGl0J3MgYQptYXR0ZXIgb2YgcGVyc29uYWwgcHJlZmVyZW5j
+ZSwgSSBhZ3JlZS4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
