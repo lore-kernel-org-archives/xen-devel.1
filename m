@@ -1,17 +1,20 @@
-From: Peng Fan <peng.fan@nxp.com>
-Subject: Question, How to share interrupt between Doms
-Date: Tue, 2 Oct 2018 08:32:51 +0000
-Message-ID: <AM0PR04MB4481BE6F43F69452BE68C8AD88E80@AM0PR04MB4481.eurprd04.prod.outlook.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2 1/2] x86/iommu: fix wrong usage of
+ iommu_hwdom_inclusive
+Date: Tue, 02 Oct 2018 02:36:20 -0600
+Message-ID: <5BB32E0402000078001ED915@prv1-mh.provo.novell.com>
+References: <20181002080836.76712-1-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=vgzi=mo=nxp.com=peng.fan@srs-us1.protection.inumbo.net>)
- id 1g7G71-0007yw-U1
- for xen-devel@lists.xenproject.org; Tue, 02 Oct 2018 08:33:00 +0000
-Content-Language: en-US
+ (envelope-from <srs0=0jmz=mo=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1g7GAL-0008CA-Ha
+ for xen-devel@lists.xenproject.org; Tue, 02 Oct 2018 08:36:25 +0000
+In-Reply-To: <20181002080836.76712-1-roger.pau@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,17 +23,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSnVsaWVuLCBTdGVmYW5vLAoKRG8geW91IGhhdmUgYW55IHN1Z2dlc3Rpb25zIG9uIGhvdyB0
-byBzaGFyZSBvbmUgaW50ZXJydXB0IGJldHdlZW4gRG9tcz8KVGhlIGlzc3VlIGlzIHRoYXQgYSBn
-cGlvIGNvbnRyb2xsZXIgaGFzIDMyIGluL291dCBwb3J0LCBob3dldmVyIGl0IG9ubHkgaGFzIG9u
-ZSBiaW5kZWQgaW50ZXJydXB0LiBUaGUgaW50ZXJydXB0IGhhbmRsZXIgbmVlZHMgdG8gY2hlY2sg
-dGhlIHN0YXR1cyBiaXRzIHRvIGNoZWNrIHdoaWNoIHBvcnQgaGFzIGludGVycnVwdCBjb21pbmcu
-CkluIG15IGNhc2UsIHRoZXJlIGFyZSBkaWZmZXJlbnQgZGV2aWNlcyB1c2luZyBncGlvIGludGVy
-cnVwdCB0aGF0IG5lZWRzIHRvIGJlIGFzc2lnbmVkIHRvIGRpZmZlcmVudCBkb21zLgoKVGhhbmtz
-LApQZW5nLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDAyLjEwLjE4IGF0IDEwOjA4LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
+IGlvbW11X2h3ZG9tX2luY2x1c2l2ZSB3YXMgdXNlZCB3aGVyZSBpb21tdV9od2RvbV9yZXNlcnZl
+ZCBzaG91bGQgYmUKPiB1c2VkLgo+IAo+IFJlcG9ydGVkLWJ5OiBTdXJhdmVlIFN1dGhpa3VscGFu
+aXQgPHN1cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPgo+IFNpZ25lZC1vZmYtYnk6IFJvZ2Vy
+IFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IEphbiBCZXVs
+aWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
