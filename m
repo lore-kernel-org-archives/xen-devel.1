@@ -1,19 +1,20 @@
-From: =?UTF-8?B?0KHQtdGA0LPQtdC5?= <valor@list.ru>
-Subject: Re:
- =?utf-8?q?Weird_altp2m_behaviour_when_switching_earl?=
- =?utf-8?q?y_to_a_new_view?=
-Date: Tue, 02 Oct 2018 19:29:42 +0300
-Message-ID: <1538497782.49743598@f411.i.mail.ru>
-Reply-To: =?UTF-8?B?0KHQtdGA0LPQtdC5?= <valor@list.ru>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2 1/4] x86: split opt_xpti
+Date: Tue, 2 Oct 2018 17:36:06 +0100
+Message-ID: <7561782a-7ed7-b97d-8a58-1be4f2df5fe0@citrix.com>
+References: <5BB20CE602000078001ED341@prv1-mh.provo.novell.com>
+ <5BB20E7402000078001ED365@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=gnu7=mo=list.ru=valor@srs-us1.protection.inumbo.net>)
- id 1g7NYR-0006kQ-IK
- for xen-devel@lists.xenproject.org; Tue, 02 Oct 2018 16:29:47 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=okrt=mo=citrix.com=prvs=806f63693=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1g7Nec-0007V9-5x
+ for xen-devel@lists.xenproject.org; Tue, 02 Oct 2018 16:36:10 +0000
+In-Reply-To: <5BB20E7402000078001ED365@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,15 +23,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: rcojocaru@bitdefender.com
-Cc: =?UTF-8?B?eGVuLWRldmVs?= <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8gUmF6dmFuLgoKSGF2ZSBZb3VyIHBhdGNoIGJlZW4gYWNjZXB0ZWQgaW4gWGVuIGh5cGVy
-dmlzb3I/CgpTZWFyY2hpbmcgdGhyb3VnaCBnaXQgSSBoYXZlIGZvdW5kIGNvbW1pdCAiNjFiZGRk
-YjgyMTUxZmJmNTFjNThmNmViYzFiNGE2ODc5NDJjNDVhOCIgb24gIlRodSBKdW4gMjggMTA6NTQ6
-MDEgMjAxOCArMDMwMCIuIElzIHRoYXQgY29tbWl0IGRlYWxzIHdpdGggdGhlIGVycm9yPwoKV2l0
-aCBiZXN0IHJlZ2FyZHMKU2VyZ2V5IEtvdmFsZXYuCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDEvMTAvMTggMTM6MDksIEphbiBCZXVsaWNoIHdyb3RlOgo+IFVzZSBzZXBhcmF0ZSB0cmFj
+a2luZyB2YXJpYWJsZXMgZm9yIHRoZSBoYXJkd2FyZSBkb21haW4gYW5kIERvbVUtcy4KPgo+IE5v
+IGZ1bmN0aW9uYWwgY2hhbmdlIGludGVuZGVkLgo+Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxp
+Y2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKQWNrZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5j
+b29wZXIzQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
