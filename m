@@ -1,21 +1,17 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v2 2/2] xen/arm: vgic-v3: Don't create empty
- re-distributor regions
-Date: Tue, 2 Oct 2018 18:07:16 +0100
-Message-ID: <aba298c3-4b8b-9d6e-dda5-e35a4a0c05ea@arm.com>
-References: <20181001164227.6562-1-julien.grall@arm.com>
- <20181001164227.6562-3-julien.grall@arm.com>
- <alpine.DEB.2.10.1810011354490.25821@sstabellini-ThinkPad-X260>
+From: "DeGraaf, Daniel G" <dgdegra@nsa.gov>
+Subject: Re: [PATCH] flask: Add check for io{port,
+ mem}con sorting
+Date: Tue, 2 Oct 2018 17:39:02 +0000
+Message-ID: <BA190A75E8413C49BB9E1D2B85D118115D8A2201@MSMR-GH1-UEA01.corp.nsa.gov>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gf1e=mo=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1g7O8m-0002q0-E5
- for xen-devel@lists.xenproject.org; Tue, 02 Oct 2018 17:07:20 +0000
-In-Reply-To: <alpine.DEB.2.10.1810011354490.25821@sstabellini-ThinkPad-X260>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=m9dl=mo=nsa.gov=dgdegra@srs-us1.protection.inumbo.net>)
+ id 1g7Ode-00054L-0i
+ for xen-devel@lists.xenproject.org; Tue, 02 Oct 2018 17:39:14 +0000
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,15 +21,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, shameerali.kolothum.thodi@huawei.com, andre.przywara@arm.com
+To: 'Jan Beulich' <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, George Dunlap <dunlapg@umich.edu>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAwMS8xMC8yMDE4IDIxOjU1LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gT24g
-TW9uLCAxIE9jdCAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6CiAgPiBSZXZpZXdlZC1ieTogU3Rl
-ZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgoKVGhhbmsgeW91ISBJIGhh
-dmUgY29tbWl0dGVkIGJvdGggcGF0Y2hlcy4gQ2FuIHlvdSBxdWV1ZSB0aGVtIGZvciBiYWNrcG9y
-dD8KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+PiBGcm9tOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+DQo+ID4+PiBPbiAyOC4wOS4x
+OCBhdCAyMToxMywgPGRnZGVncmFAdHljaG8ubnNhLmdvdj4gd3JvdGU6DQo+ID4gVGhlc2UgZW50
+cmllcyBhcmUgbm90IGFsd2F5cyBzb3J0ZWQgYnkgY2hlY2twb2xpY3kuICBFbmZvcmNlIHRoZSBz
+b3J0aW5nDQo+ID4gKHdoaWNoIGNhbiBiZSBkb25lIG1hbnVhbGx5IGlmIHVzaW5nIGFuIHVucGF0
+Y2hlZCBjaGVja3BvbGljeSkgd2hlbg0KPiA+IGxvYWRpbmcgdGhlIHBvbGljeSBzbyB0aGF0IGxh
+dGVyIHVzZXMgYnkgdGhlIHNlY3VyaXR5IHNlcnZlciBkbyBub3QNCj4gPiBpbmNvcnJlY3RseSB1
+c2UgdGhlIGluaXRpYWwgc2lkLg0KPiANCj4gIkVuZm9yY2UgdGhlIHNvcnRpbmciIGNvdWxkIG1l
+YW4gdHdvIHRoaW5ncyAtIHNvcnRpbmcgd2hhdCdzIHVuc29ydGVkLA0KPiBvciAoYXMgeW91IGRv
+KSByYWlzZSBhbiBlcnJvci4gSXNuJ3QgcmFpc2luZyBhbiBlcnJvciBoZXJlIHBvc3NpYmx5IGdv
+aW5nDQo+IHRvIGltcGFjdCBzeXN0ZW1zIHdoaWNoIGN1cnJlbnRseSB3b3JrPw0KPiANCj4gSmFu
+DQoNCkEgc3lzdGVtIHdob3NlIGlvbWVtY29uIGVudHJpZXMgYXJlIHVuc29ydGVkIGlzIGN1cnJl
+bnRseSBub3QgZW5mb3JjaW5nIHRoZSBpbnRlbmRlZCBzZWN1cml0eSBwb2xpY3kuICBJdCBub3Jt
+YWxseSBlbmRzIHVwIGVuZm9yY2luZyBhIG1vcmUgcmVzdHJpY3RpdmUgcG9saWN5LCBidXQgbm90
+IGFsd2F5cyAoaXQgZGVwZW5kcyBvbiB3aGF0IHlvdSBhbGxvdyBhY2Nlc3MgdG8gdGhlIGRlZmF1
+bHQgbGFiZWwpLiBNeSBndWVzcyBpcyB0aGF0IGFueW9uZSBpbXBhY3RlZCBieSB0aGlzIHByb2Js
+ZW0gd291bGQgaGF2ZSBub3RpY2VkIHdoZW4gdGhleSBhZGRlZCB0aGUgcnVsZSBhbmQgaXQgaGFk
+IG5vIGVmZmVjdC4gSG93ZXZlciwgSSBkbyBhZ3JlZSB0aGlzIGNvdWxkIGNhdXNlIGFuIGVycm9y
+IG9uIGN1cnJlbnRseS13b3JraW5nIHN5c3RlbXMgdGhhdCBkbyB0aGluZ3MgbGlrZSBhZGQgaW9t
+ZW1jb24gZW50cmllcyB0aGF0IHRoZXkgZG9uJ3QgdXNlLg0KDQpBcmUgeW91IHN1Z2dlc3Rpbmcg
+YW4gdXBkYXRlIHRvIHRoZSBjb21taXQgbWVzc2FnZSB0byBtYWtlIHRoaXMgYnJlYWthZ2UgY2xl
+YXIsIG9yIGRvZXMgdGhlIHByb2JsZW0gbmVlZCB0byBiZSBmaXhlZCBpbiB0aGUgaHlwZXJ2aXNv
+cj8gSXQgd291bGQgYmUgcG9zc2libGUgdG8gc29ydCB0aGUgZW50cmllcyBhcyB0aGV5J3JlIGFk
+ZGVkLCBidXQgdGhhdCdzIG5vdCBhcyBlYXN5IGFzIGp1c3QgZGV0ZWN0aW5nIHRoZSBtaXMtc29y
+dCAoc2luY2UgdGhleSdyZSBhIGxpbmtlZCBsaXN0KSwgYW5kIHRoZSBwb2xpY3kgY3JlYXRpb24g
+cHJvY2VzcyBzaG91bGQgaGF2ZSBhbHJlYWR5IHNvcnRlZCB0aGVtIChleGNlcHQgdGhhdCB0aGF0
+IHBhcnQgd2FzIG1pc3NpbmcpLg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
