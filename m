@@ -1,16 +1,23 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 128338: all pass - PUSHED
-Date: Wed, 03 Oct 2018 09:57:23 +0000
-Message-ID: <osstest-128338-mainreport@xen.org>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH 2/2] xl: add target cpupool parameter to xl
+ migrate
+Date: Wed, 3 Oct 2018 11:10:31 +0100
+Message-ID: <23476.38295.657414.445152@mariner.uk.xensource.com>
+References: <20181002141934.21503-1-jgross@suse.com>
+ <20181002141934.21503-3-jgross@suse.com>
+ <f1c30cd5-4b9e-7fde-62f1-5c88ad6dc6dd@citrix.com>
+ <fd9baf82-62c7-2a88-38e6-586d28cd3bef@suse.com>
+ <20181003094416.3hz6k6irleqdnb46@zion.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=1fb9=mp=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1g7duI-0007Af-GP
- for xen-devel@lists.xenproject.org; Wed, 03 Oct 2018 09:57:26 +0000
+ <srs0=a25e=mp=citrix.com=prvs=807bdda5f=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1g7e77-00009t-Fr
+ for xen-devel@lists.xenproject.org; Wed, 03 Oct 2018 10:10:41 +0000
+In-Reply-To: <20181003094416.3hz6k6irleqdnb46@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,41 +26,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyODMzOCB4ZW4tdW5zdGFibGUtY292ZXJpdHkgcmVhbCBbcmVhbF0KaHR0cDovL2xv
-Z3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyODMzOC8KClBlcmZlY3Qg
-Oi0pCkFsbCB0ZXN0cyBpbiB0aGlzIGZsaWdodCBwYXNzZWQgYXMgcmVxdWlyZWQKdmVyc2lvbiB0
-YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIDU0ZWM1OWY2YjBiMzYz
-YzM0Y2YxODY0ZDUyMTRhMDVlMzVlYTc1ZWUKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAg
-ICAgICAgICAgIGVkYjQ3MjRlMzYyNTZjNDk1YTZhYTNjZjFhMTI3MjJlZmUyNzFmOWQKCkxhc3Qg
-dGVzdCBvZiBiYXNpcyAgIDEyODI1MyAgMjAxOC0wOS0zMCAwOToxODozNiBaICAgIDMgZGF5cwpU
-ZXN0aW5nIHNhbWUgc2luY2UgICAxMjgzMzggIDIwMTgtMTAtMDMgMDk6MTk6MDIgWiAgICAwIGRh
-eXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIg
-dGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEdlb3Jn
-ZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KICBKdWxpZW4gR3JhbGwgPGp1bGll
-bi5ncmFsbEBhcm0uY29tPgogIE1hcmMgWnluZ2llciA8bWFyYy56eW5naWVyQGFybS5jb20+CiAg
-Um9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CiAgU2hhbWVlciBLb2xvdGh1
-bSA8c2hhbWVlcmFsaS5rb2xvdGh1bS50aG9kaUBodWF3ZWkuY29tPgogIFN0ZWZhbm8gU3RhYmVs
-bGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KICBTdXJhdmVlIFN1dGhpa3VscGFuaXQgPHN1
-cmF2ZWUuc3V0aGlrdXBhbml0QGFtZC5jb20+CiAgVm9sb2R5bXlyIEJhYmNodWsgPHZvbG9keW15
-cl9iYWJjaHVrQGVwYW0uY29tPgogIFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpqb2Jz
-OgogY292ZXJpdHktYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxh
-Yi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dz
-L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0
-dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRp
-b24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAg
-IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJF
-QURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9w
-PW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2Rl
-IGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0
-ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9y
-ZzovaG9tZS94ZW4vZ2l0L3hlbi5naXQKICAgZWRiNDcyNGUzNi4uNTRlYzU5ZjZiMCAgNTRlYzU5
-ZjZiMGIzNjNjMzRjZjE4NjRkNTIxNGEwNWUzNWVhNzVlZSAtPiBjb3Zlcml0eS10ZXN0ZWQvc21v
-a2UKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+V2VpIExpdSB3cml0ZXMgKCJSZTogW1hlbi1kZXZlbF0gW1BBVENIIDIvMl0geGw6IGFkZCB0YXJn
+ZXQgY3B1cG9vbCBwYXJhbWV0ZXIgdG8geGwgbWlncmF0ZSIpOgo+IE9uIFR1ZSwgT2N0IDAyLCAy
+MDE4IGF0IDA1OjA4OjI3UE0gKzAyMDAsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gPiBBbmQgVEJI
+OiBJIGNvbnNpZGVyIHRoZSAtQyBvcHRpb24gYmVpbmcgcXVpdGUgZGFuZ2Vyb3VzLiBXaGlsZSBJ
+IGNhbgo+ID4gdW5kZXJzdGFuZCB3aHkgaXQgaXMgcHJlc2VudCBpdCBpcyBzdGlsbCBhIHJhdGhl
+ciBoYWNreSBhcHByb2FjaCBmb3IgYQo+ID4gZ2VuZXJhbCBwcm9ibGVtLiBTYW1lIGFwcGxpZXMg
+dG8gdGhlIGNhcGFiaWxpdHkgdG8gbW9kaWZ5IHJhbmRvbQo+ID4gc2V0dGluZ3Mgb2YgdGhlIGRv
+bWFpbiBjb25maWcuCj4gCj4gVGhlIC1DIG9wdGlvbiBpcyByYXRoZXIgZGFuZ2Vyb3VzLiBJdCBk
+aXNyZWdhcmRzIGFsbCBndWVzdHMgc3RhdGVzLiBZb3UKPiB3aWxsIGxpa2VseSB0byBsb3NlIHlv
+dXIgbWFjIGFkZHJlc3MgdW5sZXNzIHlvdSBoYXZlIHNldCB0aGUgc2FtZSBtYWMKPiBhZGRyZXNz
+IGluIHRoZSBvdmVycmlkZSBmaWxlLiBTYW1lIGdvZXMgZm9yIG90aGVyIHN0YXRlcyBsaWJ4bCBt
+aWdodAo+IGhhdmUgc2F2ZWQgZHVyaW5nIGRvbWFpbiBjcmVhdGlvbi4KCldlIHNob3VsZCBoYXZl
+IGEgd2F5IHRvICphbHRlciogY29uZmlnIHNldHRpbmdzIHJhdGhlciB0aGFuIG9ubHkgb25lCnRv
+IHJlcGxhY2UgdGhlIGNvbmZpZy4gIFRoYXQgaXMgbW9yZSB1c2VmdWwsIGFuZCBsZXNzIGRhbmdl
+cm91cy4KCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
