@@ -1,19 +1,21 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH 0/4] tools/xen-hvmctx: drop bogus casts
-Date: Wed, 3 Oct 2018 10:33:08 +0100
-Message-ID: <20181003093308.lpkflwzkbmffymuq@zion.uk.xensource.com>
-References: <5BB35A0F02000078001EDB39@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH 1/2] libxl: modify domain config when moving
+ domain to another cpupool
+Date: Wed, 3 Oct 2018 10:35:37 +0100
+Message-ID: <20181003093537.737ack7crsnpdpv4@zion.uk.xensource.com>
+References: <20181002141934.21503-1-jgross@suse.com>
+ <20181002141934.21503-2-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=nzpo=mp=citrix.com=prvs=80755c3b3=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1g7dX8-0004vP-T0
- for xen-devel@lists.xenproject.org; Wed, 03 Oct 2018 09:33:30 +0000
+ id 1g7dZF-00051I-HO
+ for xen-devel@lists.xenproject.org; Wed, 03 Oct 2018 09:35:41 +0000
 Content-Disposition: inline
-In-Reply-To: <5BB35A0F02000078001EDB39@prv1-mh.provo.novell.com>
+In-Reply-To: <20181002141934.21503-2-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,17 +24,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, ian.jackson@eu.citrix.com, wei.liu2@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBPY3QgMDIsIDIwMTggYXQgMDU6NDQ6MTVBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gLi4uIGFuZCB0cnkgdG8gaW1wcm92ZSByZWFkYWJpbGl0eSBvZiBzb21lIG9mIHRoZSBv
-dXRwdXQuCj4gCj4gMTogZHJvcCBib2d1cyBjYXN0cyBmcm9tIGR1bXBfY3B1KCkKPiAyOiBkcm9w
-IGJvZ3VzIGNhc3RzIGZyb20gZHVtcF9sYXBpY19yZWdzKCkKPiAzOiBkcm9wIGJvZ3VzIGNhc3Rz
-IGZyb20gZHVtcF9ocGV0KCkKPiA0OiBkcm9wIGJvZ3VzIGNhc3RzIGZyb20gZHVtcF9tdHJyKCkK
-CkFja2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKUGxlYXNlIGNvbW1pdCB0
-aGVzZSBwYXRjaGVzIHlvdXJzZWxmLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+T24gVHVlLCBPY3QgMDIsIDIwMTggYXQgMDQ6MTk6MzNQTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBUb2RheSB0aGUgZG9tYWluIGNvbmZpZyBpbmZvIGNvbnRhaW5zIHRoZSBjcHVwb29s
+IG5hbWUgdGhlIGRvbWFpbiB3YXMKPiBzdGFydGVkIGluIG9ubHkgaWYgdGhlIGNwdXBvb2wgd2Fz
+IHNwZWNpZmllZCBhdCBkb21haW4gY3JlYXRpb24uIE1vdmluZwo+IHRoZSBkb21haW4gdG8gYW5v
+dGhlciBjcHVwb29sIGxhdGVyIHdvbid0IGNoYW5nZSB0aGF0IGluZm9ybWF0aW9uLgo+IAo+IENv
+cnJlY3QgdGhhdCBieSBtb2RpZnlpbmcgdGhlIGRvbWFpbiBjb25maWcgYWNjb3JkaW5nbHkuCj4g
+Cj4gU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgo+IC0tLQo+
+ICB0b29scy9saWJ4bC9saWJ4bF9jcHVwb29sLmMgfCAyOCArKysrKysrKysrKysrKysrKysrKysr
+KysrLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAyNSBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygt
+KQo+IAo+IGRpZmYgLS1naXQgYS90b29scy9saWJ4bC9saWJ4bF9jcHVwb29sLmMgYi90b29scy9s
+aWJ4bC9saWJ4bF9jcHVwb29sLmMKPiBpbmRleCA4NWIwNjg4MmRiLi45MmNmMjliYzZiIDEwMDY0
+NAo+IC0tLSBhL3Rvb2xzL2xpYnhsL2xpYnhsX2NwdXBvb2wuYwo+ICsrKyBiL3Rvb2xzL2xpYnhs
+L2xpYnhsX2NwdXBvb2wuYwo+IEBAIC00MzAsMTcgKzQzMCwzOSBAQCBvdXQ6Cj4gIGludCBsaWJ4
+bF9jcHVwb29sX21vdmVkb21haW4obGlieGxfY3R4ICpjdHgsIHVpbnQzMl90IHBvb2xpZCwgdWlu
+dDMyX3QgZG9taWQpCj4gIHsKPiAgICAgIEdDX0lOSVQoY3R4KTsKPiArICAgIGxpYnhsX2RvbWFp
+bl9jb25maWcgZF9jb25maWc7Cj4gKyAgICBsaWJ4bF9fZG9tYWluX3VzZXJkYXRhX2xvY2sgKmxv
+Y2sgPSBOVUxMOwo+ICAgICAgaW50IHJjOwo+ICAKPiArICAgIGxpYnhsX2RvbWFpbl9jb25maWdf
+aW5pdCgmZF9jb25maWcpOwo+ICsKPiAgICAgIHJjID0geGNfY3B1cG9vbF9tb3ZlZG9tYWluKGN0
+eC0+eGNoLCBwb29saWQsIGRvbWlkKTsKPiAgICAgIGlmIChyYykgewo+ICAgICAgICAgIExPR0VW
+RChFUlJPUiwgcmMsIGRvbWlkLCAiRXJyb3IgbW92aW5nIGRvbWFpbiB0byBjcHVwb29sIik7Cj4g
+LSAgICAgICAgR0NfRlJFRTsKPiAtICAgICAgICByZXR1cm4gRVJST1JfRkFJTDsKPiArICAgICAg
+ICByYyA9IEVSUk9SX0ZBSUw7Cj4gKyAgICAgICAgZ290byBvdXQ7Cj4gKyAgICB9Cj4gKwo+ICsg
+ICAgbG9jayA9IGxpYnhsX19sb2NrX2RvbWFpbl91c2VyZGF0YShnYywgZG9taWQpOwo+ICsgICAg
+aWYgKCFsb2NrKSB7Cj4gKyAgICAgICAgcmMgPSBFUlJPUl9MT0NLX0ZBSUw7Cj4gKyAgICAgICAg
+Z290byBvdXQ7Cj4gICAgICB9CgpJdCBpcyBiZXR0ZXIgdG8gbW92ZSB0aGUgbG9jayBiZWZvcmUg
+Y2FsbGluZyB4Y19jcHVwb29sX21vdmVkb21haW4gdG8KYXZvaWQgcmFjZXMgd2hlbiB0aGVyZSBh
+cmUgbXVsdGlwbGUgY2FsbGVycyBvZiBsaWJ4bF9jcHVwb29sX21vdmVkb21haW4uCgpXZWkuCgo+
+ICAKPiArICAgIHJjID0gbGlieGxfX2dldF9kb21haW5fY29uZmlndXJhdGlvbihnYywgZG9taWQs
+ICZkX2NvbmZpZyk7Cj4gKyAgICBpZiAocmMpCj4gKyAgICAgICAgZ290byBvdXQ7Cj4gKwo+ICsg
+ICAgZnJlZShkX2NvbmZpZy5jX2luZm8ucG9vbF9uYW1lKTsKPiArICAgIGRfY29uZmlnLmNfaW5m
+by5wb29sX25hbWUgPSBsaWJ4bF9jcHVwb29saWRfdG9fbmFtZShjdHgsIHBvb2xpZCk7Cj4gKwo+
+ICsgICAgcmMgPSBsaWJ4bF9fc2V0X2RvbWFpbl9jb25maWd1cmF0aW9uKGdjLCBkb21pZCwgJmRf
+Y29uZmlnKTsKPiArCj4gK291dDoKPiArICAgIGlmIChsb2NrKSBsaWJ4bF9fdW5sb2NrX2RvbWFp
+bl91c2VyZGF0YShsb2NrKTsKPiArICAgIGxpYnhsX2RvbWFpbl9jb25maWdfZGlzcG9zZSgmZF9j
+b25maWcpOwo+ICAgICAgR0NfRlJFRTsKPiAtICAgIHJldHVybiAwOwo+ICsgICAgcmV0dXJuIHJj
+Owo+ICB9Cj4gIAo+ICAvKgo+IC0tIAo+IDIuMTYuNAo+IAoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
