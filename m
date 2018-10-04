@@ -1,29 +1,21 @@
-From: David Hildenbrand <david@redhat.com>
-Subject: Re: [PATCH RFC] mm/memory_hotplug: Introduce memory
- block types
-Date: Thu, 4 Oct 2018 10:13:48 +0200
-Message-ID: <efd50413-4be4-06c4-5ef0-711fdf05db71__10830.1650303931$1538640771$gmane$org@redhat.com>
-References: <20181001084038.GD18290@dhcp22.suse.cz>
- <d54a8509-725f-f771-72f0-15a9d93e8a49@redhat.com>
- <20181002134734.GT18290@dhcp22.suse.cz>
- <98fb8d65-b641-2225-f842-8804c6f79a06@redhat.com>
- <8736tndubn.fsf@vitty.brq.redhat.com> <20181003134444.GH4714@dhcp22.suse.cz>
- <87zhvvcf3b.fsf@vitty.brq.redhat.com>
- <49456818-238e-2d95-9df6-d1934e9c8b53@linux.intel.com>
- <87tvm3cd5w.fsf@vitty.brq.redhat.com>
- <06a35970-e478-18f8-eae6-4022925a5192@redhat.com>
- <20181004061938.GB22173@dhcp22.suse.cz>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: Weird altp2m behaviour when switching early to a
+ new view
+Date: Thu, 4 Oct 2018 12:17:20 +0300
+Message-ID: <d4d46c2c-2333-c668-485f-9b2a3fc96cce@bitdefender.com>
+References: <1538497782.49743598@f411.i.mail.ru>
+ <c9b27c6b-e6be-2a47-3123-acd27805a1c2@bitdefender.com>
+ <1538564214.335166751@f512.i.mail.ru>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="------------949B270506E4ED4A6B928097"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=tvfk=mq=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1g7yln-0007U3-09
- for xen-devel@lists.xenproject.org; Thu, 04 Oct 2018 08:14:03 +0000
-In-Reply-To: <20181004061938.GB22173@dhcp22.suse.cz>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=uicy=mq=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1g7zl8-0003Od-4Y
+ for xen-devel@lists.xenproject.org; Thu, 04 Oct 2018 09:17:26 +0000
+In-Reply-To: <1538564214.335166751@f512.i.mail.ru>
+Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -32,63 +24,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Michal Hocko <mhocko@kernel.org>
-Cc: Kate Stewart <kstewart@linuxfoundation.org>, Rich Felker <dalias@libc.org>, linux-ia64@vger.kernel.org, linux-sh@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>, Benjamin Herrenschmidt <benh@kernel.crashing.org>, Balbir Singh <bsingharora@gmail.com>, Dave Hansen <dave.hansen@linux.intel.com>, Heiko Carstens <heiko.carstens@de.ibm.com>, linux-mm@kvack.org, Paul Mackerras <paulus@samba.org>, "H. Peter Anvin" <hpa@zytor.com>, Stephen Rothwell <sfr@canb.auug.org.au>, Rashmica Gupta <rashmica.g@gmail.com>, Dan Williams <dan.j.williams@intel.com>, linux-s390@vger.kernel.org, Michael Neuling <mikey@neuling.org>, Stephen Hemminger <sthemmin@microsoft.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, Michael Ellerman <mpe@ellerman.id.au>, linux-acpi@vger.kernel.org, Ingo Molnar <mingo@redhat.com>, xen-devel@lists.xenproject.org, Len Brown <lenb@kernel.org>, Pavel
+To: =?UTF-8?B?0KHQtdGA0LPQtdC5?= <valor@list.ru>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMTAvMjAxOCAwODoxOSwgTWljaGFsIEhvY2tvIHdyb3RlOgo+IE9uIFdlZCAwMy0xMC0x
-OCAxOToxNDowNSwgRGF2aWQgSGlsZGVuYnJhbmQgd3JvdGU6Cj4+IE9uIDAzLzEwLzIwMTggMTY6
-MzQsIFZpdGFseSBLdXpuZXRzb3Ygd3JvdGU6Cj4+PiBEYXZlIEhhbnNlbiA8ZGF2ZS5oYW5zZW5A
-bGludXguaW50ZWwuY29tPiB3cml0ZXM6Cj4+Pgo+Pj4+IE9uIDEwLzAzLzIwMTggMDY6NTIgQU0s
-IFZpdGFseSBLdXpuZXRzb3Ygd3JvdGU6Cj4+Pj4+IEl0IGlzIG1vcmUgdGhhbiBqdXN0IG1lbW1h
-cHMgKGUuZy4gZm9ya2luZyB1ZGV2IHByb2Nlc3MgZG9pbmcgbWVtb3J5Cj4+Pj4+IG9ubGluaW5n
-IGFsc28gbmVlZHMgbWVtb3J5KSBidXQgeWVzLCB0aGUgbWFpbiBpZGVhIGlzIHRvIG1ha2UgdGhl
-Cj4+Pj4+IG9ubGluaW5nIHN5bmNocm9ub3VzIHdpdGggaG90cGx1Zy4KPj4+Pgo+Pj4+IFRoYXQn
-cyBhIGdvb2QgdGhlb3JldGljYWwgY29uY2Vybi4KPj4+Pgo+Pj4+IEJ1dCwgaXMgaXQgYSBwcm9i
-bGVtIHdlIG5lZWQgdG8gc29sdmUgaW4gcHJhY3RpY2U/Cj4+Pgo+Pj4gWWVzLCB1bmZvcnR1bmF0
-ZWx5LiBJdCB3YXMgcHJldmlvdXNseSBkaXNjb3ZlcmVkIHRoYXQgd2hlbiB3ZSB0cnkgdG8KPj4+
-IGhvdHBsdWcgdG9ucyBvZiBtZW1vcnkgdG8gYSBsb3cgbWVtb3J5IHN5c3RlbSAodGhpcyBpcyBh
-IGNvbW1vbiBzY2VuYXJpbwo+Pj4gd2l0aCBWTXMpIHdlIGVuZCB1cCB3aXRoIE9PTSBiZWNhdXNl
-IGZvciBhbGwgbmV3IG1lbW9yeSBibG9ja3Mgd2UgbmVlZAo+Pj4gdG8gYWxsb2NhdGUgcGFnZSB0
-YWJsZXMsIHN0cnVjdCBwYWdlcywgLi4uIGFuZCB3ZSBuZWVkIG1lbW9yeSB0byBkbwo+Pj4gdGhh
-dC4gVGhlIHVzZXJzcGFjZSBwcm9ncmFtIGRvaW5nIG1lbW9yeSBvbmxpbmluZyBhbHNvIG5lZWRz
-IG1lbW9yeSB0bwo+Pj4gcnVuIGFuZCBpbiBjYXNlIGl0IHByZWZlcnMgdG8gZm9yayB0byBoYW5k
-bGUgaHVuZHJlZHMgb2Ygbm90ZmlmaWNhdGlvbnMKPj4+IC4uLiB3ZWxsLCBpdCBtYXkgZ2V0IE9P
-TWtpbGxlZCBiZWZvcmUgaXQgbWFuYWdlcyB0byBvbmxpbmUgYW55dGhpbmcuCj4+Pgo+Pj4gQWxs
-b2NhdGluZyBhbGwga2VybmVsIG9iamVjdHMgZnJvbSB0aGUgbmV3bHkgaG90cGx1Z2dlZCBibG9j
-a3Mgd291bGQKPj4+IGRlZmluaXRlbHkgaGVscCB0byBtYW5hZ2UgdGhlIHNpdHVhdGlvbiBidXQg
-YXMgSSBzYWlkIHRoaXMgd29uJ3Qgc29sdmUKPj4+IHRoZSAnZm9ya2luZyB1ZGV2JyBwcm9ibGVt
-IGNvbXBsZXRlbHkgKGl0IHdpbGwgbGlrZWx5IHJlbWFpbiBpbgo+Pj4gJ2V4dHJlbWUnIGNhc2Vz
-IG9ubHkuIFdlIGNhbiBwcm9iYWJseSB3b3JrIGFyb3VuZCBpdCBieSBvbmxpbmluZyB3aXRoIGEK
-Pj4+IGRlZGljYXRlZCBwcm9jZXNzIHdoaWNoIGRvZXNuJ3QgZG8gbWVtb3J5IGFsbG9jYXRpb24p
-Lgo+Pj4KPj4KPj4gSSBndWVzcyB0aGUgcHJvYmxlbSBpcyBldmVuIHdvcnNlLiBXZSBhbHdheXMg
-aGF2ZSB0d28gcGhhc2VzCj4+Cj4+IDEuIGFkZCBtZW1vcnkgLSByZXF1aXJlcyBtZW1vcnkgYWxs
-b2NhdGlvbgo+PiAyLiBvbmxpbmUgbWVtb3J5IC0gbWlnaHQgcmVxdWlyZSBtZW1vcnkgYWxsb2Nh
-dGlvbnMgZS5nLiBmb3Igc2xhYi9zbHViCj4+Cj4+IFNvIGlmIHdlIGp1c3QgYWRkZWQgbWVtb3J5
-IGJ1dCBkb24ndCBoYXZlIHN1ZmZpY2llbnQgbWVtb3J5IHRvIHN0YXJ0IGEKPj4gdXNlciBzcGFj
-ZSBwcm9jZXNzIHRvIHRyaWdnZXIgb25saW5pbmcsIHRoZW4gd2UgbW9zdCBsaWtlbHkgYWxzbyBk
-b24ndAo+PiBoYXZlIHN1ZmZpY2llbnQgbWVtb3J5IHRvIG9ubGluZSB0aGUgbWVtb3J5IHJpZ2h0
-IGF3YXkgKGluIHNvbWUgc2NlbmFyaW9zKS4KPj4KPj4gV2Ugd291bGQgaGF2ZSB0byBhbGxvY2F0
-ZSBhbGwgbmV3IG1lbW9yeSBmb3IgMSBhbmQgMiBmcm9tIHRoZSBtZW1vcnkgdG8KPj4gYmUgb25s
-aW5lZC4gSSBndWVzcyB0aGUgbGF0dGVyIHBhcnQgaXMgbGVzcyB0cml2aWFsLgo+Pgo+PiBTbyB3
-aGlsZSBvbmxpbmluZyB0aGUgbWVtb3J5IGZyb20gdGhlIGtlcm5lbCBtaWdodCBtYWtlIHRoaW5n
-cyBhIGxpdHRsZQo+PiBtb3JlIHJvYnVzdCwgd2Ugd291bGQgc3RpbGwgaGF2ZSB0aGUgY2hhbmNl
-IGZvciBPT00gLyBvbmxpbmluZyBmYWlsaW5nLgo+IAo+IFllcywgX3RoZW9yZXRpY2FsbHlfLiBJ
-cyB0aGlzIGEgcHJhY3RpY2FsIHByb2JsZW0gZm9yIHJlYXNvbmFibGUKPiBjb25maWd1cmF0aW9u
-cyB0aG91Z2g/IEkgbWVhbiwgdGhpcyB3aWxsIG5ldmVyIGJlIHBlcmZlY3QgYW5kIHdlIHNpbXBs
-eQo+IGNhbm5vdCBzdXBwb3J0IGFsbCBwb3NzaWJsZSBjb25maWd1cmF0aW9ucy4gV2Ugc2hvdWxk
-IGZvY3VzIG9uCj4gcmVhc29uYWJsZSBzdWJzZXQgb2YgdGhlbS4gRnJvbSBteSBwcmFjdGljYWwg
-ZXhwZXJpZW5jZSB0aGUgdmFzdAo+IG1ham9yaXR5IG9mIG1lbW9yeSBpcyBjb25zdW1lZCBieSBt
-ZW1tYXBzIChyb3VnaGx5IDEuNSUpLiBUaGF0IGlzIG5vdCBhCj4gbG90IGJ1dCBJIGFncmVlIHRo
-YXQgYWxsb2NhdGluZyB0aGF0IGZyb20gdGhlIHpvbmUgbm9ybWFsIGFuZCBvZmYgbm9kZQo+IGlz
-IG5vdCBncmVhdC4gRXNwZWNpYWxseSB0aGUgc2Vjb25kIHBhcnQgd2hpY2ggaXMgbm90aWNlYWJs
-ZSBmb3Igd2hvbGUKPiBub2RlIGhvdHBsdWcuCj4gCj4gSSBoYXZlIGEgZmVlbGluZyB0aGF0IGFy
-Z3VpbmcgYWJvdXQgZm9yayBub3QgYWJsZSB0byBwcm9jZWVkIG9yIE9PTWluZwo+IGZvciB0aGUg
-bWVtb3J5IGhvdHBsdWcgaXMgYSBiaXQgb2YgYSBzdHJldGNoIGFuZCBhIHNpZ24gYSBvZgo+IG1p
-c2NvbmZpZ3VyYXRpb24uCj4gCgpKdXN0IHRvIHJlcGhyYXNlLCBJIGhhdmUgdGhlIHNhbWUgb3Bp
-bmlvbi4gU29tZXRoaW5nIGlzIGFscmVhZHkgbWVzc2VkCnVwIGlmIHdlIGNhbm5vdCBldmVuIGZv
-cmsgYW55bW9yZS4gV2Ugd2lsbCBoYXZlIE9PTSBhbHJlYWR5IGFsbCBvdmVyIHRoZQpwbGFjZSBi
-ZWZvcmUvZHVyaW5nL2FmdGVyIGZvcmtpbmcuCgotLSAKClRoYW5rcywKCkRhdmlkIC8gZGhpbGRl
-bmIKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+This is a multi-part message in MIME format.
+--------------949B270506E4ED4A6B928097
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+On 10/3/18 1:56 PM, Сергей wrote:
+>> No yet, we're working on it.
+> Could You point me to the branch with Your patches please? I Could not find it in https://xenbits.xen.org/gitweb/?p=xen.git
+
+I've attached the current version of the patch, which needs George's
+comments addressed (so we already know it needs more work) - but it does
+fix the frozen display issue 99% of the time.
+
+You need to apply "[PATCH V3] x86/altp2m: propagate ept.ad changes to
+all active altp2ms" first.
+
+
+Razvan
+
+--------------949B270506E4ED4A6B928097
+Content-Type: text/x-patch;
+ name="initial_hack.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="initial_hack.patch"
+
+diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
+index 3d228c2..7317e50 100644
+--- a/xen/arch/x86/mm/p2m-ept.c
++++ b/xen/arch/x86/mm/p2m-ept.c
+@@ -657,6 +657,9 @@ bool_t ept_handle_misconfig(uint64_t gpa)
+     bool_t spurious;
+     int rc;
+ 
++    if ( altp2m_active(curr->domain) )
++        p2m = p2m_get_altp2m(curr);
++
+     p2m_lock(p2m);
+ 
+     spurious = curr->arch.hvm.vmx.ept_spurious_misconfig;
+@@ -1436,6 +1439,11 @@ void p2m_init_altp2m_ept(struct domain *d, unsigned int i)
+     struct ept_data *ept;
+ 
+     p2m->ept.ad = hostp2m->ept.ad;
++    p2m->max_mapped_pfn = hostp2m->max_mapped_pfn;
++    p2m->default_access = hostp2m->default_access;
++    p2m->domain = hostp2m->domain;
++    p2m->logdirty_ranges = hostp2m->logdirty_ranges;
++    p2m->global_logdirty = hostp2m->global_logdirty;
+     p2m->min_remapped_gfn = gfn_x(INVALID_GFN);
+     p2m->max_remapped_gfn = 0;
+     ept = &p2m->ept;
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index d90c624..2d59295 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -28,6 +28,7 @@
+ #include <xen/vm_event.h>
+ #include <xen/event.h>
+ #include <public/vm_event.h>
++#include <asm/altp2m.h>
+ #include <asm/domain.h>
+ #include <asm/page.h>
+ #include <asm/paging.h>
+@@ -255,7 +256,6 @@ int p2m_init(struct domain *d)
+ int p2m_is_logdirty_range(struct p2m_domain *p2m, unsigned long start,
+                           unsigned long end)
+ {
+-    ASSERT(p2m_is_hostp2m(p2m));
+     if ( p2m->global_logdirty ||
+          rangeset_contains_range(p2m->logdirty_ranges, start, end) )
+         return 1;
+@@ -264,11 +264,9 @@ int p2m_is_logdirty_range(struct p2m_domain *p2m, unsigned long start,
+     return 0;
+ }
+ 
+-void p2m_change_entry_type_global(struct domain *d,
+-                                  p2m_type_t ot, p2m_type_t nt)
++static void _p2m_change_entry_type_global(struct p2m_domain *p2m,
++                                          p2m_type_t ot, p2m_type_t nt)
+ {
+-    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+-
+     ASSERT(ot != nt);
+     ASSERT(p2m_is_changeable(ot) && p2m_is_changeable(nt));
+ 
+@@ -278,10 +276,25 @@ void p2m_change_entry_type_global(struct domain *d,
+     p2m_unlock(p2m);
+ }
+ 
+-void p2m_memory_type_changed(struct domain *d)
++void p2m_change_entry_type_global(struct domain *d,
++                                  p2m_type_t ot, p2m_type_t nt)
+ {
+-    struct p2m_domain *p2m = p2m_get_hostp2m(d);
++#ifdef CONFIG_HVM
++    if ( unlikely(altp2m_active(d)) )
++    {
++        unsigned int i;
+ 
++        for ( i = 0; i < MAX_ALTP2M; i++ )
++            if ( d->arch.altp2m_eptp[i] != mfn_x(INVALID_MFN) )
++                _p2m_change_entry_type_global(d->arch.altp2m_p2m[i], ot, nt);
++    }
++#endif
++
++    _p2m_change_entry_type_global(p2m_get_hostp2m(d), ot, nt);
++}
++
++void _p2m_memory_type_changed(struct p2m_domain *p2m)
++{
+     if ( p2m->memory_type_changed )
+     {
+         p2m_lock(p2m);
+@@ -290,6 +303,22 @@ void p2m_memory_type_changed(struct domain *d)
+     }
+ }
+ 
++void p2m_memory_type_changed(struct domain *d)
++{
++#ifdef CONFIG_HVM
++    if ( unlikely(altp2m_active(d)) )
++    {
++        unsigned int i;
++
++        for ( i = 0; i < MAX_ALTP2M; i++ )
++            if ( d->arch.altp2m_eptp[i] != mfn_x(INVALID_MFN) )
++                _p2m_memory_type_changed(d->arch.altp2m_p2m[i]);
++    }
++#endif
++
++    _p2m_memory_type_changed(p2m_get_hostp2m(d));
++}
++
+ int p2m_set_ioreq_server(struct domain *d,
+                          unsigned int flags,
+                          struct hvm_ioreq_server *s)
+@@ -967,12 +996,12 @@ int p2m_change_type_one(struct domain *d, unsigned long gfn_l,
+ }
+ 
+ /* Modify the p2m type of a range of gfns from ot to nt. */
+-void p2m_change_type_range(struct domain *d, 
+-                           unsigned long start, unsigned long end,
+-                           p2m_type_t ot, p2m_type_t nt)
++static void _p2m_change_type_range(struct p2m_domain *p2m,
++                                   unsigned long start, unsigned long end,
++                                   p2m_type_t ot, p2m_type_t nt)
+ {
++    struct domain *d = p2m->domain;
+     unsigned long gfn = start;
+-    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     int rc = 0;
+ 
+     ASSERT(ot != nt);
+@@ -1025,6 +1054,25 @@ void p2m_change_type_range(struct domain *d,
+     p2m_unlock(p2m);
+ }
+ 
++void p2m_change_type_range(struct domain *d,
++                           unsigned long start, unsigned long end,
++                           p2m_type_t ot, p2m_type_t nt)
++{
++#ifdef CONFIG_HVM
++    if ( unlikely(altp2m_active(d)) )
++    {
++        unsigned int i;
++
++        for ( i = 0; i < MAX_ALTP2M; i++ )
++            if ( d->arch.altp2m_eptp[i] != mfn_x(INVALID_MFN) )
++                _p2m_change_type_range(d->arch.altp2m_p2m[i], start, end, ot,
++                                       nt);
++    }
++#endif
++
++    _p2m_change_type_range(p2m_get_hostp2m(d), start, end, ot, nt);
++}
++
+ /*
+  * Finish p2m type change for gfns which are marked as need_recalc in a range.
+  * Returns: 0/1 for success, negative for failure
+
+--------------949B270506E4ED4A6B928097
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--------------949B270506E4ED4A6B928097--
