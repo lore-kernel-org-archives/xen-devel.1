@@ -1,16 +1,24 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: PV guests and APIC interaction
-Date: Thu, 04 Oct 2018 07:45:32 -0600
-Message-ID: <5BB6197C02000078001EE5D2@prv1-mh.provo.novell.com>
-References: <34dc5b8c-7767-f704-593e-38fdce08e170@citrix.com>
- <5BB5EF4602000078001EE3FF@prv1-mh.provo.novell.com>
- <321ec750-7506-239f-a4c4-ad84692d6cae@citrix.com>
+From: John Pereira <john_pereira@oxfordcorp.com>
+Subject: 5 Month Contract in NH...HELP
+Date: Thu, 4 Oct 2018 13:24:00 +0000
+Message-ID: <ACC6B3CBDBEB0C40846BFEADD93B810E015A082433@PRD-MSG-MBX-002.oaifield.onasgn.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8840071641442192661=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <321ec750-7506-239f-a4c4-ad84692d6cae@citrix.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=nk86=mq=oxfordcorp.com=prvs=7815ba6bab=john_pereira@srs-us1.protection.inumbo.net>)
+ id 1g83bn-0001o0-PG
+ for xen-devel@lists.xenproject.org; Thu, 04 Oct 2018 13:24:04 +0000
+Received: from pps.filterd (m0108845.ppops.net [127.0.0.1])
+ by mx0a-00018502.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+ w94DKe2x010376
+ for <xen-devel@lists.xenproject.org>; Thu, 4 Oct 2018 06:24:01 -0700
+Received: from prd-msg-mbx-001.oaifield.onasgn.com ([192.103.251.123])
+ by mx0a-00018502.pphosted.com with ESMTP id 2mt67qg48h-2
+ (version=TLSv1 cipher=AES128-SHA bits=128 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Thu, 04 Oct 2018 06:24:01 -0700
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,57 +27,189 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Igor Druzhinin <igor.druzhinin@citrix.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen-devel List <xen-devel@lists.xen.org>, Sergey Dyasli <sergey.dyasli@citrix.com>
+To: "'xen-devel@lists.xenproject.org'" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA0LjEwLjE4IGF0IDE1OjIwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMDQvMTAvMTggMTE6NDUsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAwMy4x
-MC4xOCBhdCAxMzo1NiwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4gSXQg
-dHVybnMgb3V0IHRoYXQgWGVuIGFkdmVydGlzZSB0aGUgaGFyZHdhcmUgQVBJQyBiaXQgdG8gUFYg
-Z3Vlc3RzLAo+Pj4gd2hpY2ggaXNuJ3QgbmVjZXNzYXJpbHkgYWx3YXlzIHNldC4gIE9uIHRvcCBv
-ZiB0aGF0LCB0aGUgZGVmYXVsdAo+Pj4gcmVhZC93cml0ZS1pZ25vcmUgYmVoYXZpb3VyIG9mIE1T
-UiBsZXRzIExpbnV4IGdldCBpbnRvIGEgcG9zaXRpb24gd2hlcmUKPj4+IGl0IHRoaW5rcyBpdCBp
-cyBhY3R1YWxseSBtYWtpbmcgcmVhbCBjaGFuZ2VzIHRvIHRoZSBBUElDIG1vZGUuCj4+Pgo+Pj4g
-QXJjaGl0ZWN0dXJhbGx5IHNwZWFraW5nLCBpZiB3ZSBvZmZlciB0aGUgQVBJQyBiaXQsIHdlIHNo
-b3VsZCBob25vdXIKPj4+IHJlYWQvd3JpdGUgcmVxdWVzdHMgY29ycmVjdGx5LiAgT2J2aW91c2x5
-LCB0aGlzIGlzbid0IGEgdmlhYmxlIG9wdGlvbiAtCj4+PiBoaWRpbmcgdGhlIEFQSUMgYml0IGFu
-ZCByYWlzaW5nICNHUCdzIGlzIHRoZSBvbmx5Cj4+PiBhcmNoaXRlY3R1cmFsbHktY29ycmVjdCB3
-YXkgdG8gZG8gdGhpcy4KPj4+Cj4+PiBHaXZlbiB0aGF0IHdlJ3ZlIGFscmVhZHkgcGxheWVkICJo
-b3cgbXVjaCBkb2VzIExpbnV4IGV4cGxvZGUgaWYgaXQKPj4+IHRoaW5rcyB0aGVyZSBpcyBubyBB
-UElDIiwgZG9lcyBhbnlvbmUgaGF2ZSBhbnkgc3VnZ2VzdGlvbnMgZm9yIGhvdyB0bwo+Pj4gcmVz
-b2x2ZSB0aGlzIHdpdGhvdXQgYnJlYWtpbmcgTGludXg/Cj4+IEhpZGluZyB0aGUgQVBJQyBiaXRz
-IGlzIG5vdCBhbiBvcHRpb25zLCBhZmFpY3QsIGFzIHRoYXQgd291bGQgYWxzbwo+PiBpbXBseSBh
-YnNlbmNlIG9mIGFueSBJTy1BUElDcy4KPiAKPiBJIGRvbid0IHRoaW5rIHlvdSBzaG91bGQgZHJh
-dyBhbnkgaW1wbGljYXRpb24gYmV0d2VlbiB0aGUgdHdvLgo+IAo+IFRoZSBBUElDIGJpdCBpcyBh
-IGhhcmR3YXJlIGZhc3QtZm9yd2FyZCwgc28gY2FuIGFscmVhZHkgYmUgY2xlYXJlZCBvbgo+IGhh
-cmR3YXJlIHdpdGggSU8tQVBJQ3MuICBUaGUgQUNQSSB0YWJsZXMgZGVzY3JpYmUgdGhlIElPLUFQ
-SUNzLCBhbmQgdGhhdAo+IGlzIHRoZSBvbmx5IHdheSBhbnkgc29mdHdhcmUgaGFzIG9mIGZpbmRp
-bmcgdGhlbS4KCkJ1dCB3aXRob3V0IGtub3dpbmcgdGhlcmUgaXMgYW4gTEFQSUMgb24gZWFjaCBD
-UFUgdGhlcmUncyBubyB3YXkKdG8gdXNlIGFueSBJTy1BUElDLiBJT1cgd2l0aCBMQVBJQyBwcmVz
-ZW50IGJ1cyBkaXNhYmxlZCwgSU8tQVBJQ3MKd291bGRuJ3QgYmUgdXNhYmxlIGVpdGhlci4KCj4g
-RnVydGhlcm1vcmUsIGZvciBhIHN5c3RlbSB3aGljaCBzZXRzIGFsbCB0aGUgcmVsZXZlbnQgIm5v
-IGxlZ2FjeQo+IGhhcmR3YXJlIiBiaXRzIGluIEFDUEksIHRoZXJlIGlzIG5vIG5lZWQgdG8gaGF2
-ZSBhbiBJTy1BUElDIGF0IGFsbC4gCj4gVGhlcmUgaXMgcHJvdmlzaW9uIGluIHRoZSBsYXRlc3Qg
-UENJIHNwZWMgdG8gaGF2ZSBkZXZpY2VzIHdoaWNoIGFyZSBub3QKPiBjYXBhYmxlIG9mIGdlbmVy
-YXRpbmcgbGVnYWN5IGludGVycnVwdHMuCgpUaGF0J3MgZmluZSwgYXMgYmVpbmcgdGhlIG9wcG9z
-aXRlIGNhc2UuCgo+PiBXaGF0IEkgZG9uJ3QgdW5kZXJzdGFuZCBpcyB3aHkKPj4gd2Ugc3VyZmFj
-ZSBYMkFQSUMgdG8gUFYgZ3Vlc3RzLiBXb3VsZG4ndCBoaWRpbmcgdGhhdCBiaXQgYWxvbmUKPj4g
-YWRkcmVzcyB0aGUgc3BlY2lmaWMgaXNzdWUgYWJvdmUsIGV2ZW4gaWYgdGhlIG1vcmUgZ2VuZXJh
-bCAoeEFQSUMKPj4gcmVsYXRlZCkgb25lIGNhbid0IHJlYXNvbmFibHkgYmUgYWRkcmVzc2VkPwo+
-IAo+IEZyb20gdGhlIGNwdW1hc2sgd29yazoKPiAKPiAiTXVzdCBleHBvc2UgaG9zdHMgSFRUIGFu
-ZCBYMkFQSUMgdmFsdWUgc28gYSBndWVzdCB1c2luZyBuYXRpdmUKPiBDUFVJRCBjYW4gY29ycmVj
-dGx5IGludGVycHJldCBvdGhlciBsZWF2ZXMgd2hpY2ggY2Fubm90IGJlCj4gbWFza2VkLiIKPiAK
-PiBhbHRob3VnaCB0byBiZSBwZXJmZWN0bHkgaG9uZXN0LCBJIGRvbid0IHJlbWVtYmVyIGV4YWN0
-bHkgd2h5LiAgSXQgbWlnaHQKPiBiZSB0byBkbyB3aXRoIHRoZSB2aXNpYmlsaXR5IG9mIGxlYWYg
-MHhiLgoKOy0pCgpJJ20gbm90IGF3YXJlIG9mIGxlYWYgMHhiIGJlaW5nIHRpZWQgdG8gYW55IHBh
-cnRpY3VsYXIgb3RoZXIgQ1BVSUQKb3V0cHV0IGJpdC4gQW5kIGFueSAoaGFyZHdhcmUpIEFQSUMg
-SUQgaW4gd2hhdGV2ZXIgbGVhZiBpcwptZWFuaW5nbGVzcyB0byBQViBhbnl3YXkuCgo+IEZ1cnRo
-ZXJtb3JlLCBoaWRpbmcgdGhlIHgyQVBJQyBmZWF0dXJlIGJ1dCBhbGxvd2luZyBBUElDQkFTRSB0
-byBiZSByZWFkCj4gd2lsbCBjYXVzZSBleHRyYSBjb25mdXNpb24gdG8gdGhlIGd1ZXN0IGlmIGl0
-IGZpbmRzIEVYVEQgc2V0LgoKV2VsbCwgaXQgd291bGQgYmUgZWFzeSBlbm91Z2ggdG8gcHJvdmlk
-ZSB0aGUgZGVmYXVsdCB2YWx1ZSBoZXJlCmZvciBQViBndWVzdHMsIGluc3RlYWQgb2YgbGV0dGlu
-ZyB0aGUgcGh5c2ljYWwgcmVnaXN0ZXIgdmFsdWUKc2hpbmUgdGhyb3VnaC4KCkphbgoKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============8840071641442192661==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_ACC6B3CBDBEB0C40846BFEADD93B810E015A082433PRDMSGMBX002o_"
+
+--_000_ACC6B3CBDBEB0C40846BFEADD93B810E015A082433PRDMSGMBX002o_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Hello Xen Developer Group,
+
+One of my client needs help for about 5 months onsite in New Hampshire. Fee=
+l free to reach out if interested:
+
+5 Months (Needs to be completed by end of February 2019)
+Rate Range: $100/ hr
+MUST Skills:
+
+Xen Project (OS) Hypervisor - this is what they are working on, need this.
+Ideally some Windows or Linux  experience in/around the Kernel.
+
+Cloud experience is a big plus
+AWS - Big Plus
+C# , C
+Assembly
+
+Best,
+John
+__________________________________
+John Pereira
+Recruiter, Engineering
+Oxford Global Resources
+
+100 Cummings Center Suite 365G
+Beverly, MA 01915
+
+978.717.7645 | Direct
+
+
+
+The information transmitted, including attachments, is intended only for th=
+e person or entity to which it is addressed and may contain confidential an=
+d/or privileged material. Any review, retransmission, dissemination or othe=
+r use of, or taking of any action in reliance upon this information by pers=
+ons or entities other than the intended recipient is prohibited. If you rec=
+eived this e-mail in error, please notify the sender immediately by replyin=
+g to the message and deleting the material from your computer.
+
+--_000_ACC6B3CBDBEB0C40846BFEADD93B810E015A082433PRDMSGMBX002o_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">Hello Xen Developer Group, <o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">One of my client needs help for about 5 months onsit=
+e in New Hampshire. Feel free to reach out if interested:<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">5 Months (Needs to be completed by end of February 2=
+019)<o:p></o:p></p>
+<p class=3D"MsoNormal">Rate Range: $100/ hr <o:p></o:p></p>
+<p class=3D"MsoNormal">MUST Skills:<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Xen Project (OS) Hypervisor - this is what they are =
+working on, need this.<o:p></o:p></p>
+<p class=3D"MsoNormal">Ideally some Windows or Linux&nbsp; experience in/ar=
+ound the Kernel.
+<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Cloud experience is a big plus<o:p></o:p></p>
+<p class=3D"MsoNormal">AWS - Big Plus<o:p></o:p></p>
+<p class=3D"MsoNormal">C# , C<o:p></o:p></p>
+<p class=3D"MsoNormal">Assembly<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Best,<o:p></o:p></p>
+<p class=3D"MsoNormal">John<o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ari=
+al&quot;,sans-serif">__________________________________</span><span style=
+=3D"font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif"><o:p></=
+o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:10.0pt;font-family:&quot=
+;Arial&quot;,sans-serif">John Pereira</span></b><span style=3D"font-size:12=
+.0pt;font-family:&quot;Times New Roman&quot;,serif"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:8.0pt;font-family:&quot;=
+Arial&quot;,sans-serif">Recruiter, Engineering</span></b><span style=3D"fon=
+t-size:8.0pt;font-family:&quot;Arial&quot;,sans-serif">
+<br>
+<b>Oxford Global Resources</b> <br>
+<br>
+100 Cummings Center Suite 365G <o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ari=
+al&quot;,sans-serif">Beverly, MA 01915</span><span style=3D"font-size:12.0p=
+t;font-family:&quot;Times New Roman&quot;,serif"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;font-family:&quot;Ti=
+mes New Roman&quot;,serif"><o:p>&nbsp;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:8.0pt;font-family:&quot;Ari=
+al&quot;,sans-serif">978.717.7645
+<b>|</b> Direct</span><span style=3D"font-size:12.0pt;font-family:&quot;Tim=
+es New Roman&quot;,serif"><o:p></o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;font-family:&quot;Ti=
+mes New Roman&quot;,serif"><br>
+<br>
+</span><o:p></o:p></p>
+</div>
+<div style=3D"font-size:7.5pt;font-family:&quot;Arial&quot;,&quot;sans-seri=
+f&quot;;color:#A6A6A6"><br>
+The information transmitted, including attachments, is intended only for th=
+e person or entity to which it is addressed and may contain confidential an=
+d/or privileged material. Any review, retransmission, dissemination or othe=
+r use of, or taking of any action
+ in reliance upon this information by persons or entities other than the in=
+tended recipient is prohibited. If you received this e-mail in error, pleas=
+e notify the sender immediately by replying to the message and deleting the=
+ material from your computer.</div>
+</body>
+</html>
+
+--_000_ACC6B3CBDBEB0C40846BFEADD93B810E015A082433PRDMSGMBX002o_--
+
+
+--===============8840071641442192661==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8840071641442192661==--
