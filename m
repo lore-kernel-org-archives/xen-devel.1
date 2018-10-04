@@ -1,21 +1,21 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2 1/2] xentrace: allow sparse cpu list
-Date: Thu, 4 Oct 2018 13:25:42 +0200
-Message-ID: <8974749b-0f31-0fb9-959f-a83787091c08@suse.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH v2 2/2] xentrace: handle sparse cpu ids
+ correctly in xen trace buffer handling
+Date: Thu, 4 Oct 2018 12:39:58 +0100
+Message-ID: <c1caf173-3484-f942-a351-b614f36afff2@citrix.com>
 References: <20181004105150.27923-1-jgross@suse.com>
- <20181004105150.27923-2-jgross@suse.com>
- <2250bda9-41b5-6660-c259-87c3e02d8166@citrix.com>
+ <20181004105150.27923-3-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=vyab=mq=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1g81lJ-0006jl-Tu
- for xen-devel@lists.xenproject.org; Thu, 04 Oct 2018 11:25:45 +0000
-In-Reply-To: <2250bda9-41b5-6660-c259-87c3e02d8166@citrix.com>
-Content-Language: de-DE
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=wqag=mq=citrix.com=prvs=8089523ff=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1g81zd-00089W-KQ
+ for xen-devel@lists.xenproject.org; Thu, 04 Oct 2018 11:40:33 +0000
+In-Reply-To: <20181004105150.27923-3-jgross@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,23 +24,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
-Cc: George.Dunlap@eu.citrix.com, ian.jackson@eu.citrix.com, wei.liu2@citrix.com
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: George.Dunlap@eu.citrix.com, wei.liu2@citrix.com, ian.jackson@eu.citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDQvMTAvMjAxOCAxMzoyMiwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiBPbiAxMC8wNC8yMDE4
-IDExOjUxIEFNLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+PiBNb2RpZnkgdGhlIHhlbnRyYWNlIHV0
-aWxpdHkgdG8gYWxsb3cgc3BhcnNlIGNwdSBsaXN0IHJlc3VsdGluZyBpbiBub3QKPj4gYWxsIHBv
-c3NpYmxlIGNwdXMgaGF2aW5nIGEgdHJhY2UgYnVmZmVyIGFsbG9jYXRlZC4KPj4KPj4gU2lnbmVk
-LW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgo+IAo+IFRoaXMgbG9va3Mg
-Z29vZDoKPiAKPiBSZXZpZXdlZC1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRy
-aXguY29tPgo+IAo+IFdvdWxkIHlvdSBtaW5kIGlmIEkgZm9sZCBpbiB0aGUgYXR0YWNoZWQgY29t
-bWVudCB3aGVuIGNvbW1pdHRpbmc/CgpXaXRoIHNvbWUgYWRhcHRpb25zLCBwbGVhc2U6CgoKLSAg
-ICAvKiBNYXAgcGVyLWNwdSBidWZmZXJzICovCisgICAgLyoKKyAgICAgKiBNYXAgcGVyLWNwdSBi
-dWZmZXJzLiAgTkIgdGhhdCBpZiBhIGNwdXMgaXMgb2ZmbGluZSwgaXQgbWF5IGhhdmUKCnMvIGNw
-dXMgLyBjcHUgLwoKKyAgICAgKiBubyB0cmFjZSBidWZmZXJzLiAgSW4gdGhpcyBjYXNlLCB0aGUg
-dGhlIHJlc3BlY3RpdmUgbWZuX29mZnNldAoKcy90aGUgdGhlL3RoZS8KCisgICAgICogd2lsbCBi
-ZSAwLCBhbmQgdGhlIGluZGV4IHNob3VsZCBiZSBpZ25vcmVkLgorICAgICAqLwoKCkp1ZXJnZW4K
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTAvMDQvMjAxOCAxMTo1MSBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBUaGUgcGVyLWNw
+dSBidWZmZXJzIGZvciBYZW50cmFjZSBhcmUgYWRkcmVzc2VkIGJ5IGNwdS1pZCwgYnV0IHRoZSBp
+bmZvCj4gYXJyYXkgZm9yIHRoZSBidWZmZXJzIGlzIHNpemVkIG9ubHkgYnkgbnVtYmVyIG9mIG9u
+bGluZSBjcHVzLiBUaGlzCj4gbWlnaHQgbGVhZCB0byBjcmFzaGVzIHdoZW4gdXNpbmcgWGVudHJh
+Y2Ugd2l0aCBzbXQ9MC4KPiAKPiBUaGUgdF9pbmZvIHN0cnVjdHVyZSBoYXMgdG8gYmUgc2l6ZWQg
+YmFzZWQgb24gbnJfY3B1X2lkcy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxq
+Z3Jvc3NAc3VzZS5jb20+Cj4gLS0tCj4gIHRvb2xzL3hlbnRyYWNlL3hlbnRyYWNlLmMgfCAyICst
+Cj4gIHhlbi9jb21tb24vdHJhY2UuYyAgICAgICAgfCA2ICsrKy0tLQo+ICAyIGZpbGVzIGNoYW5n
+ZWQsIDQgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEvdG9v
+bHMveGVudHJhY2UveGVudHJhY2UuYyBiL3Rvb2xzL3hlbnRyYWNlL3hlbnRyYWNlLmMKPiBpbmRl
+eCA1OTBhOTFlMDkxLi4xMjQ5N2ExNmI0IDEwMDY0NAo+IC0tLSBhL3Rvb2xzL3hlbnRyYWNlL3hl
+bnRyYWNlLmMKPiArKysgYi90b29scy94ZW50cmFjZS94ZW50cmFjZS5jCj4gQEAgLTU5Niw3ICs1
+OTYsNyBAQCBzdGF0aWMgdW5zaWduZWQgaW50IGdldF9udW1fY3B1cyh2b2lkKQo+ICAgICAgICAg
+IGV4aXQoRVhJVF9GQUlMVVJFKTsKPiAgICAgIH0KPiAgCj4gLSAgICByZXR1cm4gcGh5c2luZm8u
+bnJfY3B1czsKPiArICAgIHJldHVybiBwaHlzaW5mby5tYXhfY3B1X2lkICsgMTsKPiAgfQo+ICAK
+PiAgLyoqCj4gZGlmZiAtLWdpdCBhL3hlbi9jb21tb24vdHJhY2UuYyBiL3hlbi9jb21tb24vdHJh
+Y2UuYwo+IGluZGV4IDhjZGMxN2I3MzEuLmMwNzk0NTRjNmEgMTAwNjQ0Cj4gLS0tIGEveGVuL2Nv
+bW1vbi90cmFjZS5jCj4gKysrIGIveGVuL2NvbW1vbi90cmFjZS5jCj4gQEAgLTExMyw3ICsxMTMs
+NyBAQCBzdGF0aWMgaW50IGNhbGN1bGF0ZV90YnVmX3NpemUodW5zaWduZWQgaW50IHBhZ2VzLCB1
+aW50MTZfdCB0X2luZm9fZmlyc3Rfb2Zmc2V0KQo+ICAgICAgc3RydWN0IHRfaW5mbyBkdW1teV9w
+YWdlczsKPiAgICAgIHR5cGVvZihkdW1teV9wYWdlcy50YnVmX3NpemUpIG1heF9wYWdlczsKPiAg
+ICAgIHR5cGVvZihkdW1teV9wYWdlcy5tZm5fb2Zmc2V0WzBdKSBtYXhfbWZuX29mZnNldDsKPiAt
+ICAgIHVuc2lnbmVkIGludCBtYXhfY3B1cyA9IG51bV9vbmxpbmVfY3B1cygpOwo+ICsgICAgdW5z
+aWduZWQgaW50IG1heF9jcHVzID0gbnJfY3B1X2lkczsKPiAgICAgIHVuc2lnbmVkIGludCB0X2lu
+Zm9fd29yZHM7Cj4gIAo+ICAgICAgLyogZm9yY2UgbWF4aW11bSB2YWx1ZSBmb3IgYW4gdW5zaWdu
+ZWQgdHlwZSAqLwo+IEBAIC0xNTEsMTEgKzE1MSwxMSBAQCBzdGF0aWMgaW50IGNhbGN1bGF0ZV90
+YnVmX3NpemUodW5zaWduZWQgaW50IHBhZ2VzLCB1aW50MTZfdCB0X2luZm9fZmlyc3Rfb2Zmc2V0
+KQo+ICAgICAgICogTkIgdGhpcyBjYWxjdWxhdGlvbiBpcyBjb3JyZWN0LCBiZWNhdXNlIHRfaW5m
+b19maXJzdF9vZmZzZXQgaXMKPiAgICAgICAqIGluIHdvcmRzLCBub3QgYnl0ZXMsIG5vdCBieXRl
+cwo+ICAgICAgICovCgpUaGlzIHNvdW5kcyBhIGJpdCBsaWtlIHNvbmcgbHlyaWNzLgoKQnV0IHRo
+YXQncyBub3QgeW91ciBmYXVsdCwgbm90IHlvdXIgZmF1bHQ6CgpSZXZpZXdlZC1ieTogR2Vvcmdl
+IER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgoKSSdsbCBmaXggdGhlIGNvbW1lbnQg
+b24gY2hlY2staW4uCgogLUdlb3JnZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
