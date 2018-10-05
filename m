@@ -1,20 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86: restrict HVMOP_pagetable_dying to
- current
-Date: Fri, 5 Oct 2018 12:58:43 +0100
-Message-ID: <6acd9399-9e43-5f01-defd-068ee81ee479@citrix.com>
-References: <5BB74B1A02000078001EECBE@prv1-mh.provo.novell.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: [PATCH] x86/HVM: move vendor independent CPU
+ save/restore logic to shared code
+Date: Fri, 5 Oct 2018 15:01:14 +0300
+Message-ID: <27e44cce-0fc9-d3db-30fb-608d9388b873@bitdefender.com>
+References: <5BB74B9702000078001EECE4@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wiz4=mr=citrix.com=prvs=8095139d5=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1g8Oko-00014p-Dm
- for xen-devel@lists.xenproject.org; Fri, 05 Oct 2018 11:58:46 +0000
-In-Reply-To: <5BB74B1A02000078001EECBE@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+ <srs0=/9nw=mr=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1g8OnG-0001pv-Cj
+ for xen-devel@lists.xenproject.org; Fri, 05 Oct 2018 12:01:18 +0000
+In-Reply-To: <5BB74B9702000078001EECE4@prv1-mh.provo.novell.com>
+Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,36 +24,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDUvMTAvMTggMTI6MjksIEphbiBCZXVsaWNoIHdyb3RlOgo+IFRoaXMgaXMgbm90IHVzZWQg
-KGFuZCBwcm9iYWJseSB3YXMgbmV2ZXIgbWVhbnQgdG8gYmUpIGJ5IHRoZSB0b29sIHN0YWNrLgo+
-IExpbWl0aW5nIGl0IHRvIHRoZSBjdXJyZW50IGRvbWFpbiBpbiBwYXJ0aWN1bGFyIGFsbG93cyB0
-byBlbGltaW5hdGUgYQo+IGJvZ3VzIHVzZSBvZiB2Q1BVIDAgaW4gcGFnZXRhYmxlX2R5aW5nKCku
-Cj4KPiBSZW1vdmUgdGhlIG5vdyB1bm5lY2Vzc2FyeSBkb21haW4vdkNQVSBwYXJhbWV0ZXJzIGZy
-b20gdGhlIHdyYXBwZXIvaG9vawo+IGZ1bmN0aW9ucyBhdCB0aGUgc2FtZSB0aW1lLgo+Cj4gU2ln
-bmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+Cj4gLS0tIGEveGVu
-L2FyY2gveDg2L2h2bS9odm0uYwo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vaHZtLmMKPiBAQCAt
-NDg5NSwxMCArNDg5NSwxMiBAQCBsb25nIGRvX2h2bV9vcCh1bnNpZ25lZCBsb25nIG9wLCBYRU5f
-R1VFCj4gICAgICAgICAgICAgIHJldHVybiAtRVNSQ0g7Cj4gIAo+ICAgICAgICAgIHJjID0gLUVJ
-TlZBTDsKPiAtICAgICAgICBpZiAoIGlzX2h2bV9kb21haW4oZCkgJiYgcGFnaW5nX21vZGVfc2hh
-ZG93KGQpICkKPiArICAgICAgICBpZiAoIHVubGlrZWx5KGQgIT0gY3VycmVudC0+ZG9tYWluKSAp
-Cj4gKyAgICAgICAgICAgIHJjID0gLUVPUE5PVFNVUFA7Cj4gKyAgICAgICAgZWxzZSBpZiAoIGlz
-X2h2bV9kb21haW4oZCkgJiYgcGFnaW5nX21vZGVfc2hhZG93KGQpICkKPiAgICAgICAgICAgICAg
-cmMgPSB4c21faHZtX3BhcmFtKFhTTV9UQVJHRVQsIGQsIG9wKTsKCkFzIHdlJ3JlIHN3aXRjaGlu
-ZyB0byBjdXJyZW50LW9ubHksIHNob3VsZG4ndCB0aGlzIHR1cm4gdG8gWFNNX0hPT0sgPwoKRXZl
-cnl0aGluZyBlbHNlIExHVE0sIHdpdGggb25lIHNtYWxsIHN1Z2dlc3Rpb24uLi4uCgo+ICAgICAg
-ICAgIGlmICggIXJjICkKPiAtICAgICAgICAgICAgcGFnZXRhYmxlX2R5aW5nKGQsIGEuZ3BhKTsK
-PiArICAgICAgICAgICAgcGFnZXRhYmxlX2R5aW5nKGEuZ3BhKTsKPiAgCj4gICAgICAgICAgcmN1
-X3VubG9ja19kb21haW4oZCk7Cj4gICAgICAgICAgYnJlYWs7Cj4gLS0tIGEveGVuL2luY2x1ZGUv
-YXNtLXg4Ni9wYWdpbmcuaAo+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvcGFnaW5nLmgKPiBA
-QCAtMzQ1LDcgKzM0NSw3IEBAIHZvaWQgcGFnaW5nX3dyaXRlX3AybV9lbnRyeShzdHJ1Y3QgcDJt
-X2QKPiAgCj4gIC8qIENhbGxlZCBmcm9tIHRoZSBndWVzdCB0byBpbmRpY2F0ZSB0aGF0IHRoZSBh
-IHByb2Nlc3MgaXMgYmVpbmcKPiAgICogdG9ybiBkb3duIGFuZCBpdHMgcGFnZXRhYmxlcyB3aWxs
-IHNvb24gYmUgZGlzY2FyZGVkICovCj4gLXZvaWQgcGFnZXRhYmxlX2R5aW5nKHN0cnVjdCBkb21h
-aW4gKmQsIHBhZGRyX3QgZ3BhKTsKPiArdm9pZCBwYWdldGFibGVfZHlpbmcocGFkZHJfdCBncGEp
-OwoKRml4IHRoZSBjb21tZW50IHN0eWxlIHdoaWxlIGluIHRoaXMgYXJlYT8KCn5BbmRyZXcKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTAvNS8xOCAyOjMxIFBNLCBKYW4gQmV1bGljaCB3cm90ZToKPiBBIGZldyBwaWVjZXMgb2Yg
+dGhlIGhhbmRsaW5nIGhlcmUgYXJlIChubyBsb25nZXI/KSB2ZW5kb3Igc3BlY2lmaWMsIGFuZAo+
+IGhlbmNlIHRoZXJlJ3Mgbm8gcG9pbnQgaW4gcmVwbGljYXRpbmcgdGhlIGNvZGUuIE1ha2Ugc3Vy
+ZSBub3Qgb3RoZXJ3aXNlCj4gcHJlLWZpbGxlZCBmaWVsZHMgb2Ygc3RydWN0IGh2bV9od19jcHUg
+aW5zdGFuY2VzIGFyZSB6ZXJvIGZpbGxlZCBiZWZvcmUKPiBjYWxsaW5nIHRoZSB2ZW5kb3IgInNh
+dmUiIGhvb2ssIGVsaW1pbmF0aW5nIHRoZSBuZWVkIGZvciB0aGUgaG9vawo+IGZ1bmN0aW9ucyB0
+byB6ZXJvIGluZGl2aWR1YWwgZmllbGRzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNo
+IDxqYmV1bGljaEBzdXNlLmNvbT4KCkFja2VkLWJ5OiBSYXp2YW4gQ29qb2NhcnUgPHJjb2pvY2Fy
+dUBiaXRkZWZlbmRlci5jb20+CgoKVGhhbmtzLApSYXp2YW4KCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
