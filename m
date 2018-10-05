@@ -1,20 +1,19 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] x86: don't build guest-walk code without
- HVM and SHADOW_PAGING
-Date: Fri, 5 Oct 2018 12:00:00 +0100
-Message-ID: <20181005110000.wk4vhr4nudlpzt3p@zion.uk.xensource.com>
-References: <5BB73B0502000078001EEBB6@prv1-mh.provo.novell.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: [PATCH] mem_access: Fix npfec.kind propagation
+Date: Fri, 5 Oct 2018 14:00:31 +0300
+Message-ID: <81f65685-d9fc-4939-542f-47427f862ded@bitdefender.com>
+References: <20180927112536.6909-1-george.dunlap@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=qudt=mr=citrix.com=prvs=80982b68a=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1g8Nq1-0003vg-BI
- for xen-devel@lists.xenproject.org; Fri, 05 Oct 2018 11:00:05 +0000
-Content-Disposition: inline
-In-Reply-To: <5BB73B0502000078001EEBB6@prv1-mh.provo.novell.com>
+ <srs0=/9nw=mr=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1g8NqX-00040H-0X
+ for xen-devel@lists.xenproject.org; Fri, 05 Oct 2018 11:00:37 +0000
+In-Reply-To: <20180927112536.6909-1-george.dunlap@citrix.com>
+Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,18 +22,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Alexandru Isaila <aisaila@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, Tamas K Lengyel <tamas.lengyel@zentific.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBPY3QgMDUsIDIwMTggYXQgMDQ6MjA6NTNBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gSXQncyBkZWFkIGNvZGUgaW4gdGhhdCBjYXNlLgo+IAo+IFdlIGNvdWxkIGdvIGZ1cnRo
-ZXIsIGFzIHdlIGRvbid0IHJlYWxseSBuZWVkIHRoZSAyLSBhbmQgMy1sZXZlbCB3YWxrCj4gY29k
-ZSBpbiBQViBtb2RlLCBidXQgdG8gZHJvcCB0aGVpciBjb21waWxhdGlvbiByZXF1aXJlcyBxdWl0
-ZSBhIGJpdCBvZgo+IGRpc2VudGFuZ2xpbmcgb2Ygc2hhZG93IG1vZGUgY29kZS4KPiAKPiBTaWdu
-ZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpXaXRoIG9yIHdpdGhv
-dXQgdGhlIGFkanVzdG1lbnQgQW5kcmV3IGFza2VkIGZvcjoKClJldmlld2VkLWJ5OiBXZWkgTGl1
-IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+T24gOS8yNy8xOCAyOjI1IFBNLCBHZW9yZ2UgRHVubGFwIHdyb3RlOgo+IFRoZSBuYW1lIG9mIHRo
+ZSAid2l0aF9nbGEiIGZsYWcgaXMgY29uZnVzaW5nOyBpdCBoYXMgbm90aGluZyB0byBkbwo+IHdp
+dGggdGhlIGV4aXN0ZW5jZSBvciBsYWNrIHRoZXJlb2Ygb2YgYSBmYXVsdGluZyBHTEEsIGJ1dCBy
+YXRoZXIgd2hlcmUKPiB0aGUgZmF1bHQgb3JpZ2luYXRlZC4gIFRoZSBucGZlYy5raW5kIHZhbHVl
+IGlzIGFsd2F5cyB2YWxpZCwgYW5kCj4gc2hvdWxkIHRodXMgYmUgcHJvcGFnYXRlZCwgcmVnYXJk
+bGVzcyBvZiB3aGV0aGVyIGdsYV92YWxpZCBpcyBzZXQgb3IKPiBub3QuCj4gCj4gSW4gcGFydGlj
+dWxhciwgZ2xhX3ZhbGlkIHdpbGwgbmV2ZXIgYmUgc2V0IG9uIEFNRCBzeXN0ZW1zOyBidXQKPiBu
+cGZlYy5raW5kIHdpbGwgc3RpbGwgYmUgdmFsaWQgYW5kIHNob3VsZCBzdGlsbCBiZSBwcm9wYWdh
+dGVkLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFsZXhhbmRydSBJc2FpbGEgPGFpc2FpbGFAYml0ZGVm
+ZW5kZXIuY29tPgo+IFNpZ25lZC1vZmYtYnk6IEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBA
+Y2l0cml4LmNvbT4KCkFja2VkLWJ5OiBSYXp2YW4gQ29qb2NhcnUgPHJjb2pvY2FydUBiaXRkZWZl
+bmRlci5jb20+CgoKVGhhbmtzLApSYXp2YW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
