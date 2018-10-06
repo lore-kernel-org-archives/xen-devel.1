@@ -1,17 +1,16 @@
-From: Vikram K <vikram.k@pathpartnertech.com>
-Subject: [ARM] Display passthrough
-Date: Sat, 6 Oct 2018 08:53:18 +0530
-Message-ID: <CAFsJcmatQSJP+d0u_2tkuzmd6w4o8vaRsfvfZg8XxP+nuUX+6w@mail.gmail.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [ovmf baseline-only test] 75359: trouble: blocked/broken
+Date: Sat, 6 Oct 2018 06:23:18 +0100
+Message-ID: <osstest-75359-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7423158538241368983=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=kukr=ms=pathpartnertech.com=vikram.k@srs-us1.protection.inumbo.net>)
- id 1g8dBl-0001NA-2f
- for xen-devel@lists.xenproject.org; Sat, 06 Oct 2018 03:23:33 +0000
-Received: by mail-io1-xd31.google.com with SMTP id p4-v6so12165181iom.3
- for <xen-devel@lists.xenproject.org>; Fri, 05 Oct 2018 20:23:30 -0700 (PDT)
+ <srs0=vm7x=ms=xenproject.org=prvs=810ca4f74=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1g8f4E-0002CV-Bz
+ for xen-devel@lists.xenproject.org; Sat, 06 Oct 2018 05:23:54 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,93 +19,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============7423158538241368983==
-Content-Type: multipart/alternative; boundary="000000000000794978057786e921"
-
---000000000000794978057786e921
-Content-Type: text/plain; charset="UTF-8"
-
-Hi,
-
-We want to passthrough the display to the guest OS.We are using Xen-4.8 and
-Hikey960. Is it possible to do pass through of display?If yes please
-provide reference.
-
--- 
-
-
-
-
-
-
-This
-message contains confidential information and is intended only 
-for the
-individual(s) named. If you are not the intended
-recipient, you are 
-notified that disclosing, copying, distributing or taking any
-action in 
-reliance on the contents of this mail and attached file/s is strictly
-
-prohibited. Please notify the
-sender immediately and delete this e-mail 
-from your system. E-mail transmission
-cannot be guaranteed to be secured or 
-error-free as information could be
-intercepted, corrupted, lost, destroyed, 
-arrive late or incomplete, or contain
-viruses. The sender therefore does 
-not accept liability for any errors or
-omissions in the contents of this 
-message, which arise as a result of e-mail
-transmission.
-
---000000000000794978057786e921
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div dir=3D"auto">Hi,</div><div dir=3D"auto"><br></div><d=
-iv dir=3D"auto">We want to passthrough the display to the guest OS.We are u=
-sing Xen-4.8 and Hikey960. Is it possible to do pass through of display?If =
-yes please provide reference.</div></div>
-
-<br>
-
-
-
-
-<p><span lang=3D"EN-IN">This
-message contains confidential information and is intended only for the
-individual(s) named.</span><span lang=3D"EN-IN"> </span>If you are not the =
-intended
-recipient, you are notified that disclosing, copying, distributing or takin=
-g any
-action in reliance on the contents of this mail and attached file/s is stri=
-ctly
-prohibited<span lang=3D"EN-IN">. Please notify the
-sender immediately and delete this e-mail from your system. E-mail transmis=
-sion
-cannot be guaranteed to be secured or error-free as information could be
-intercepted, corrupted, lost, destroyed, arrive late or incomplete, or cont=
-ain
-viruses. The sender therefore does not accept liability for any errors or
-omissions in the contents of this message, which arise as a result of e-mai=
-l
-transmission.</span></p>
---000000000000794978057786e921--
-
-
---===============7423158538241368983==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7423158538241368983==--
+VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
+NTM1OSBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
+dC9sb2dzLzc1MzU5LwoKRmFpbHVyZXMgYW5kIHByb2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0
+cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3Rz
+IHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAg
+IDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2ICAgICAgICAg
+ICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1h
+bWQ2NC1wdm9wcyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJv
+a2VuCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAg
+ICAgICAgICAgYnJva2VuCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3Rh
+dHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAg
+ICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCgpUZXN0cyB3aGljaCBkaWQg
+bm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
+ZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9h
+CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAg
+MSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgYmxvY2tlZCBuL2EKIGJ1aWxkLWkzODYtbGli
+dmlydCAgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBu
+L2EKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAg
+IGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAg
+NCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVzdGVkCiBidWlsZC1p
+Mzg2LXB2b3BzICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICBicm9rZW4gYmFz
+ZWxpbmUgdW50ZXN0ZWQKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0
+YWxsKDQpICAgICAgIGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtYW1kNjQtcHZvcHMg
+ICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVz
+dGVkCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAg
+ICBicm9rZW4gYmFzZWxpbmUgdW50ZXN0ZWQKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6
+CiBvdm1mICAgICAgICAgICAgICAgICBkMjBhZTk1YTEzZTg1MWQ1NmM2NjE4MTA4YjE4YzkzNTI2
+NTA1Y2EyCmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICBjMGIxZjc0OWVm
+MTMwNDgxMGVkNGVhNThkZWQ2NWI3ZjQxZDc5ZDNlCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAgNzUz
+NDcgIDIwMTgtMTAtMDQgMDA6NTA6MzMgWiAgICAyIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAg
+IDc1MzU5ICAyMDE4LTEwLTA2IDAwOjUwOjM3IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW50aG9ueSBQRVJB
+UkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+CiAgTWFyYy1BbmRyw6kgTHVyZWF1IDxtYXJj
+YW5kcmUubHVyZWF1QHJlZGhhdC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1pMzg2
+LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2Vu
+ICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBicm9rZW4gIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIGJ1aWxkLWkzODYt
+bGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2Vk
+IAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGJyb2tlbiAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
+b3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1p
+Mzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQg
+CgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC54cy5jaXRyaXRlLm5ldApsb2dzOiAv
+aG9tZS9vc3N0ZXN0L2xvZ3MKaW1hZ2VzOiAvaG9tZS9vc3N0ZXN0L2ltYWdlcwoKTG9ncywgY29u
+ZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9vc3N0ZXN0LnhlbnNv
+dXJjZS5jb20vb3NzdGVzdC9sb2dzCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQK
+ICAgIGh0dHA6Ly94ZW5iaXRzLnhlbnNvdXJjZS5jb20vZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1z
+dW1tYXJ5Cgpicm9rZW4tam9iIGJ1aWxkLWFtZDY0LXhzbSBicm9rZW4KYnJva2VuLWpvYiBidWls
+ZC1pMzg2IGJyb2tlbgpicm9rZW4tam9iIGJ1aWxkLWFtZDY0LXB2b3BzIGJyb2tlbgpicm9rZW4t
+am9iIGJ1aWxkLWkzODYteHNtIGJyb2tlbgpicm9rZW4tam9iIGJ1aWxkLWFtZDY0IGJyb2tlbgpi
+cm9rZW4tam9iIGJ1aWxkLWkzODYtcHZvcHMgYnJva2VuCmJyb2tlbi1zdGVwIGJ1aWxkLWFtZDY0
+IGhvc3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1hbWQ2NC14c20gaG9zdC1pbnN0YWxs
+KDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWkzODYtcHZvcHMgaG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1z
+dGVwIGJ1aWxkLWkzODYgaG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWFtZDY0LXB2
+b3BzIGhvc3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1pMzg2LXhzbSBob3N0LWluc3Rh
+bGwoNCkKClB1c2ggbm90IGFwcGxpY2FibGUuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KY29tbWl0IGQyMGFlOTVhMTNlODUxZDU2
+YzY2MTgxMDhiMThjOTM1MjY1MDVjYTIKQXV0aG9yOiBNYXJjLUFuZHLDqSBMdXJlYXUgPG1hcmNh
+bmRyZS5sdXJlYXVAcmVkaGF0LmNvbT4KRGF0ZTogICBUdWUgT2N0IDIgMTY6MTc6MjUgMjAxOCAr
+MDQwMAoKICAgIE92bWZQa2cvUGxhdGZvcm1QZWk6IGNsZWFyIENQVSBjYWNoZXMKICAgIAogICAg
+VGhpcyBpcyBmb3IgY29uZm9ybWFuY2Ugd2l0aCB0aGUgVENHICJQbGF0Zm9ybSBSZXNldCBBdHRh
+Y2sgTWl0aWdhdGlvbgogICAgU3BlY2lmaWNhdGlvbiIuIEJlY2F1c2UgY2xlYXJpbmcgdGhlIENQ
+VSBjYWNoZXMgYXQgYm9vdCBkb2Vzbid0IGltcGFjdAogICAgcGVyZm9ybWFuY2Ugc2lnbmlmaWNh
+bnRseSwgZG8gaXQgdW5jb25kaXRpb25hbGx5LCBmb3Igc2ltcGxpY2l0eSdzCiAgICBzYWtlLgog
+ICAgCiAgICBGbHVzaCB0aGUgY2FjaGUgb24gYWxsIGxvZ2ljYWwgcHJvY2Vzc29ycywgdGhhbmtz
+IHRvCiAgICBFRklfUEVJX01QX1NFUlZJQ0VTX1BQSSBhbmQgQ2FjaGVNYWludGVuYW5jZUxpYi4K
+ICAgIAogICAgQ2M6IEpvcmRhbiBKdXN0ZW4gPGpvcmRhbi5sLmp1c3RlbkBpbnRlbC5jb20+CiAg
+ICBDYzogTGFzemxvIEVyc2VrIDxsZXJzZWtAcmVkaGF0LmNvbT4KICAgIENjOiBBcmQgQmllc2hl
+dXZlbCA8YXJkLmJpZXNoZXV2ZWxAbGluYXJvLm9yZz4KICAgIENjOiBBbnRob255IFBlcmFyZCA8
+YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KICAgIENjOiBKdWxpZW4gR3JhbGwgPGp1bGllbi5n
+cmFsbEBsaW5hcm8ub3JnPgogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmli
+dXRpb24gQWdyZWVtZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTogTWFyYy1BbmRyw6kgTHVyZWF1
+IDxtYXJjYW5kcmUubHVyZWF1QHJlZGhhdC5jb20+CiAgICBUZXN0ZWQtYnk6IEFudGhvbnkgUEVS
+QVJEIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IExhc3psbyBF
+cnNlayA8bGVyc2VrQHJlZGhhdC5jb20+CiAgICBSZWdyZXNzaW9uLXRlc3RlZC1ieTogTGFzemxv
+IEVyc2VrIDxsZXJzZWtAcmVkaGF0LmNvbT4KICAgIFJldmlld2VkLWJ5OiBNaWNoYWVsIEQgS2lu
+bmV5IDxtaWNoYWVsLmQua2lubmV5QGludGVsLmNvbT4KICAgIFtsZXJzZWtAcmVkaGF0LmNvbTog
+cmVtb3ZlIGJvZ3VzIE1lc3NhZ2UtSWQgbGluZSBmcm9tIGNvbW1pdCBtc2ddCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
