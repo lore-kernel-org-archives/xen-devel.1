@@ -1,18 +1,21 @@
-From: Marek Marczykowski <marmarek@invisiblethingslab.com>
-Subject: Re: Backports to stable
-Date: Mon, 8 Oct 2018 12:40:28 +0200
-Message-ID: <20181008104028.GA1645@mail-itl>
-References: <20181007010433.GB2975@mail-itl>
- <5BBB236202000078001EF6EC@prv1-mh.provo.novell.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH] x86/vtd: fix iommu_share_p2m_table
+Date: Mon, 8 Oct 2018 12:50:33 +0200
+Message-ID: <20181008105033.yahoyswwjui7u7tg@mac.bytemobile.com>
+References: <20181008101445.38735-1-roger.pau@citrix.com>
+ <5BBB326002000078001EF7D2@prv1-mh.provo.novell.com>
+ <20181008103739.zlou3uwv7mlevrn6@mac.bytemobile.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1040022101872884264=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=mvst=mu=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1g9Sxm-00064f-Je
- for xen-devel@lists.xenproject.org; Mon, 08 Oct 2018 10:40:34 +0000
-In-Reply-To: <5BBB236202000078001EF6EC@prv1-mh.provo.novell.com>
+ <srs0=/pwx=mu=citrix.com=prvs=812c9b64b=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1g9T7a-0006uN-SB
+ for xen-devel@lists.xenproject.org; Mon, 08 Oct 2018 10:50:42 +0000
+Content-Disposition: inline
+In-Reply-To: <20181008103739.zlou3uwv7mlevrn6@mac.bytemobile.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,95 +25,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1040022101872884264==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="qDbXVdCdHGoSgWSk"
-Content-Disposition: inline
-
-
---qDbXVdCdHGoSgWSk
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Oct 08, 2018 at 03:29:06AM -0600, Jan Beulich wrote:
-> >>> On 07.10.18 at 03:04, <marmarek@invisiblethingslab.com> wrote:
-> > I'd like to propose backporting GCC7/8 fixes to all stable branches. Be=
-low
-> > is a list up to stable-4.6, but some of the patches are already on
-> > select branches (developed during that release cycle, or already
-> > backported).
->=20
-> I continue to be opposed to backporting anything that is not needed
-> for dealing security issues to branches which are in security-support-
-> only mode, i.e. anything older than 4.8 at this point in time.
-
-Ok, noted. It's hard to compile those still security-supported versions
-on recent systems. But if one need such combination (old Xen + new other
-things), then can also apply those patches locally. I just wanted to
-reduce work duplication.
-
-> Furthermore I notice that 4.6 has just moved out of security support,
-> at the end of last week.
-
-Hmm, 18+18 months from October 13, 2015 is at the end of this week.
-
-> >     e0a97098e2 x86: fix section type mismatch in mm.c
->=20
-> This describes itself as a Clang fix - has it become relevant for
-> gcc now too?
-
-Yes, for gcc 8.1 at least.
-
-> Anyway - this has been in even the original 4.7.0,
-> so as per above not a candidate for any actively maintained
-> branch.
->=20
-> >     # This one doesn't apply cleanly, because acpi stuff moved
-> >     # tools/firmware/hvmloader/acpi -> tools/acpi
-> >     858dbaaeda libacpi: fixes for iasl >=3D 20180427
->=20
-> Iirc I've applied this back to 4.8 already, and quite some time ago.
-
-Yes, this one is missing only in 4.7 and 4.6.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---qDbXVdCdHGoSgWSk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlu7NBwACgkQ24/THMrX
-1ywDrAf+NuxJQIWuolOiPch7rKWmwh1lSh37XaMuKSwvS+ODIHtw29W3ywsEa4hx
-xL6avgrNCYahd73xRMACvkYYkCYRcBeQGhV44xaPGV3BJc20IlXqB8qJsjCg8480
-oTWrQmS0fwLnwIexe0Mh8UcTMGbWLlgl5GxobrJIi8xp+1DVKcqQy7WrnjzJob43
-wotc5/20J0+yvm62zrHYKPXFXQvJ8naa0XkxpvCkcw7sqnxzHYbh3HF+DBXOELEz
-liC7291JjTEWPyae6513aHrqZpwhi12AT/nPs46aFeCB9wqYV2ZQijxsyFYFyGsF
-fcJyrhewLan60GAjp6XAdSL0Mc48zA==
-=veGC
------END PGP SIGNATURE-----
-
---qDbXVdCdHGoSgWSk--
-
-
---===============1040022101872884264==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1040022101872884264==--
+T24gTW9uLCBPY3QgMDgsIDIwMTggYXQgMTI6Mzc6MzlQTSArMDIwMCwgUm9nZXIgUGF1IE1vbm7D
+qSB3cm90ZToKPiBPbiBNb24sIE9jdCAwOCwgMjAxOCBhdCAwNDozMzowNEFNIC0wNjAwLCBKYW4g
+QmV1bGljaCB3cm90ZToKPiA+ID4+PiBPbiAwOC4xMC4xOCBhdCAxMjoxNCwgPHJvZ2VyLnBhdUBj
+aXRyaXguY29tPiB3cm90ZToKPiA+ID4gLS0tIGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvaW9t
+bXUuYwo+ID4gPiArKysgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9pb21tdS5jCj4gPiA+IEBA
+IC01MDUsNyArNTA1LDcgQEAgaW50IGlvbW11X2RvX2RvbWN0bCgKPiA+ID4gIAo+ID4gPiAgdm9p
+ZCBpb21tdV9zaGFyZV9wMm1fdGFibGVpb21tdV9zaGFyZV9wMm1fdGFibGUoc3RydWN0IGRvbWFp
+biogZCkKPiA+ID4gIHsKPiA+ID4gLSAgICBpZiAoIGlvbW11X3VzZV9oYXBfcHQoZCkgKQo+ID4g
+PiArICAgIGlmICggaW9tbXVfZW5hYmxlZCAmJiBoYXBfZW5hYmxlZChkKSAmJiBpb21tdV9oYXBf
+cHRfc2hhcmUgKQo+ID4gCj4gPiBDb25zaWRlcmluZyB0aGUgb25seSBjYWxsZXIsIHRoZSBoYXBf
+ZW5hYmxlZCgpIHBhcnQgaXMgKGFuZCB3YXMpIG5vdAo+ID4gbmVlZGVkIGhlcmUuCj4gCj4gV291
+bGQgeW91IGxpa2UgbWUgdG8gcmVtb3ZlIGl0IGluIHRoaXMgcGF0Y2g/CgpJJ3ZlIGNvbnZlcnRl
+ZCBpdCB0byBhbiBBU1NFUlQgaW5zdGVhZCBvZiBqdXN0IHJlbW92aW5nIGl0LgoKUm9nZXIuCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
