@@ -1,13 +1,20 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] xen/sched: Drop set_current_state()
-Date: Mon, 08 Oct 2018 09:35:57 -0600
-Message-ID: <5BBB795D02000078001EFB11@prv1-mh.provo.novell.com>
-References: <1539010087-13419-1-git-send-email-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 01/17] x86/shadow: put PV L1TF functions
+ under CONFIG_PV
+Date: Mon, 08 Oct 2018 09:38:42 -0600
+Message-ID: <5BBB7A0202000078001EFB14@prv1-mh.provo.novell.com>
+References: <cover.9120eb87824b754ecdc7b1a5b95ea216404877a3.1538667753.git-series.wei.liu2@citrix.com>
+ <fe5bc0f8e7ab462b8c63698de5f9919671af8542.1538667753.git-series.wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1539010087-13419-1-git-send-email-andrew.cooper3@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=bw27=mu=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1g9XcN-0007x4-Ar
+ for xen-devel@lists.xenproject.org; Mon, 08 Oct 2018 15:38:47 +0000
+In-Reply-To: <fe5bc0f8e7ab462b8c63698de5f9919671af8542.1538667753.git-series.wei.liu2@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -17,18 +24,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA4LjEwLjE4IGF0IDE2OjQ4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gVGhpcyBhcHBlYXJzIHRvIGhhdmUgYmVlbiBhIExpbnV4LWlzbSB3aGljaCBmb3VuZCBp
-dHMgd2F5IGludG8gdGhlIFhlbgo+IGNvZGViYXNlIHdpdGggdGhlIElBNjQgcG9ydCwgYW5kIHJl
-bWFpbmVkIGFmdGVyIElBNjQgd2FzIHJlbW92ZWQuCj4gCj4gQXMgZmFyIGFzIEkgY2FuIHRlbGwg
-ZnJvbSBjb2RlIGFyY2hlb2xvZ3ksIG5vbmUgb2YgdGhlIG90aGVyIGFyY2hpdGVjdHVyZXMKPiBo
-YXZlIGV2ZXIgaGFkIGEgY3VycmVudC0+c3RhdGUgZmllbGQuCj4gCj4gU2lnbmVkLW9mZi1ieTog
-QW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBKYW4g
-QmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDA0LjEwLjE4IGF0IDE3OjQzLCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+U2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCklmIGFwcGxpY2Fi
+bGUgKG5vdCBzdXJlIHdoZXRoZXIgVGltIHdvdWxkIGhhdmUgdG8gYWNrIGl0IGluc3RlYWQpOgpB
+Y2tlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
