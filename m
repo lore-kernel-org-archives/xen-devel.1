@@ -1,21 +1,14 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/2] x86/hvm: make sure
- HVM_PARAM_[BUF]IOREQ_PFN can only be set once
-Date: Mon, 08 Oct 2018 07:16:17 -0600
-Message-ID: <5BBB58A102000078001EF969@prv1-mh.provo.novell.com>
-References: <20181005134334.2645-1-paul.durrant@citrix.com>
- <20181005134334.2645-2-paul.durrant@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH 1/3] xen/xsm: remove unnecessary #define
+Date: Mon, 8 Oct 2018 14:18:58 +0100
+Message-ID: <20181008131858.4ck7unvztw2rqjhi@zion.uk.xensource.com>
+References: <20181008105903.766-1-xin.li@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=bw27=mu=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1g9VOY-0002Xz-M8
- for xen-devel@lists.xenproject.org; Mon, 08 Oct 2018 13:16:22 +0000
-In-Reply-To: <20181005134334.2645-2-paul.durrant@citrix.com>
 Content-Disposition: inline
+In-Reply-To: <20181008105903.766-1-xin.li@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,17 +17,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Xin Li <talons.lee@gmail.com>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Xin Li <xin.li@citrix.com>, root <root@lcy2-dt16.xenrtcloud>, Tim Deegan <tim@xen.org>, xen-devel@lists.xen.org, Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ming Lu <ming.lu@citrix.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA1LjEwLjE4IGF0IDE1OjQzLCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+IFRoZXNlIHBhcmFtZXRlcnMgc2hvdWxkIGhhdmUgYWx3YXlzIGJlZW4gaW4gdGhlICdzZXQg
-b25jZScgY2F0ZWdvcnkKPiBidXQgdGhpcyBoYXMsIHNvIGZhciwgbm90IGJlZW4gZW5mb3JjZWQu
-CgpCdXQgbm93IHRoYXQgd2UncmUgbm90IGV2ZW4gaGFuZGxpbmcgdGhlc2UgYW55bW9yZSwgd2h5
-IGlzIHRoZXJlIGEKbmVlZCB0byBzdGFydCBkb2luZyBzbz8gSWYgYW55dGhpbmcgd291bGRuJ3Qg
-aXQgYmUgYmV0dGVyIHRvIGFkZCB0aGVtCnRvIHRoZSBkZXByZWNhdGVkIGdyb3VwIGluIHRoYXQg
-c2FtZSBmdW5jdGlvbiAoYW5kIG1heWJlIGFsc28gaXRzCiJnZXQiIGNvdW50ZXJwYXJ0KT8KCkph
-bgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gTW9uLCBPY3QgMDgsIDIwMTggYXQgMDY6NTk6MDFQTSArMDgwMCwgWGluIExpIHdyb3RlOgo+
+IEZyb206IHJvb3QgPHJvb3RAbGN5Mi1kdDE2LnhlbnJ0Y2xvdWQ+CgpUaGlzIG5lZWRzIHRvIGJl
+IGRlbGV0ZWQgd2hpbGUgY29tbWl0dGluZy4KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
