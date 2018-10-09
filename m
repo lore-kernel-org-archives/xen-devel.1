@@ -1,24 +1,15 @@
-From: Rich Persaud <persaur@gmail.com>
-Subject: Re: x86 Community Call: Wed Oct 10,
- 14:00 - 15:00 UTC - Call for agenda items
-Date: Tue, 9 Oct 2018 16:32:44 -0400
-Message-ID: <052DBDCC-CC76-4C1D-AA0F-D472870A7010@gmail.com>
-References: <32C44945-4CE1-4118-94B9-1064B24872CF@citrix.com>
- <4460D131-1AB5-4BBA-BCA5-ACBF2852FE7B@citrix.com>
- <CABfawhkAYa0RSFAf_V44OSw2pxV75qr2Oh42LP_tx6Z32B5ggg@mail.gmail.com>
- <54320110-5cdb-82db-a03c-6c4e46cc6598@citrix.com>
- <04B1E6EF-0C14-4D8F-9AB7-EF5BF3F3DD46@citrix.com>
-Mime-Version: 1.0 (1.0)
-Content-Type: multipart/mixed; boundary="===============0830933498401434669=="
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke bisection] complete build-arm64-xsm
+Date: Tue, 09 Oct 2018 21:55:56 +0000
+Message-ID: <E1g9zyu-0000C0-AZ@osstest.test-lab.xenproject.org>
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============6527795027486416257=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ssjx=mv=gmail.com=persaur@srs-us1.protection.inumbo.net>)
- id 1g9ygU-0004Ky-60
- for xen-devel@lists.xenproject.org; Tue, 09 Oct 2018 20:32:50 +0000
-Received: by mail-it1-x144.google.com with SMTP id c23-v6so4760108itd.5
- for <xen-devel@lists.xenproject.org>; Tue, 09 Oct 2018 13:32:47 -0700 (PDT)
-In-Reply-To: <04B1E6EF-0C14-4D8F-9AB7-EF5BF3F3DD46@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=w4ff=mv=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1g9zyy-0002fH-2q
+ for xen-devel@lists.xenproject.org; Tue, 09 Oct 2018 21:56:00 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,145 +18,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth@citrix.com>
-Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, "Matt.Spencer@arm.com" <Matt.Spencer@arm.com>, "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, John Ji <john.ji@intel.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, Daniel Kiper <daniel.kiper@oracle.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, Xen-devel <xen-devel@lists.xenproject.org>, Artem Mygaiev <Artem_Mygaiev@epam.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, "christopher.w.clark@gmail.com" <christopher.w.clark@gmail.com>, Paul Durrant <Paul.Durrant@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, "intel-xen@intel.com" <intel-xen@intel.com>, Jarvis.Roach@
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
+--===============6527795027486416257==
+Content-Type: text/plain
 
---===============0830933498401434669==
-Content-Type: multipart/alternative;
-	boundary=Apple-Mail-4EA655D7-C4F7-44F0-8BA5-A29DA65F108D
-Content-Transfer-Encoding: 7bit
+branch xen-unstable-smoke
+xenbranch xen-unstable-smoke
+job build-arm64-xsm
+testid xen-build
 
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
 
---Apple-Mail-4EA655D7-C4F7-44F0-8BA5-A29DA65F108D
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+*** Found and reproduced problem changeset ***
 
-Lars,
-
-This NIST document ("A Methodology for Determining Forensic Data Requirement=
-s for Detecting Hypervisor Attacks" [1]) appears to be focused on the applic=
-ation of LibVMI in some contexts.  It is a NIST Interagency or Internal Repo=
-rt (NISTIR) document with a narrower scope than other NIST publications, e.g=
-. Special Publications (SP).  NISTIR documents are:
-
-https://www.nist.gov/nist-research-library/nist-series-publications
-"... Interim or final reports on work performed by NIST for outside sponsors=
- (both government and non-government).  May also report results of NIST proj=
-ects of transitory or limited interest, including those that will be publish=
-ed subsequently in more comprehensive form."
-
-If the Xen community wishes to provide feedback on this NISTIR draft, I sugg=
-est compiling a single document, including:
-
- - any inaccuracies + supporting references
- - vulnerability scope boundaries, including Xen hypervisor, Linux kernel af=
-fecting KVM, KVM module for Linux kernel, QEMU and hypervisor toolstack(s)
- - additional sample attack(s) and evidence coverage for forensic analysis
- - additional references on hypervisor security / vulnerability analysis
- - missing perspectives (e.g. impact of features selected via KCONFIG, disag=
-gregation)
- - other feedback
-
-If a single list can be compiled, each item can be numbered and Xen communit=
-y viewpoints can be aggregated for possible consensus in unified feedback, o=
-r individuals could submit their feedback separately.
-
-Rich
-
-[1] https://csrc.nist.gov/CSRC/media/Publications/nistir/8221/draft/document=
-s/nistir-8221-draft.pdf
-
-> On Oct 9, 2018, at 14:20, Lars Kurth <lars.kurth@citrix.com> wrote:
->=20
-> Hi all,
-> I added a NIST Security Paper to the agenda which is currently under revie=
-w and is full of inaccuracies and could potentially become very problematic t=
-o the project and vendors using Xen if officially published by NIST without b=
-eing corrected (it needs responses by the end of week). I will be struggling=
- to do this alone and would like to enlist help, in particular from people w=
-ith a security background. That would also be significantly more powerful th=
-an me providing the feedback.
-> Regards
-> Kars
->=20
-
---Apple-Mail-4EA655D7-C4F7-44F0-8BA5-A29DA65F108D
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"></head><body dir=3D"auto"><div dir=3D"ltr"><span></span></div><div di=
-r=3D"ltr"><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"><div dir=3D"ltr"><span></span></div><div dir=3D"ltr"><meta http-equiv=
-=3D"content-type" content=3D"text/html; charset=3Dutf-8"><div dir=3D"ltr"><s=
-pan></span></div><div dir=3D"ltr"><meta http-equiv=3D"content-type" content=3D=
-"text/html; charset=3Dutf-8"><div dir=3D"ltr"><span></span></div><div dir=3D=
-"ltr"><meta http-equiv=3D"content-type" content=3D"text/html; charset=3Dutf-=
-8"><div dir=3D"ltr"><span></span></div><div dir=3D"ltr"><meta http-equiv=3D"=
-content-type" content=3D"text/html; charset=3Dutf-8"><div dir=3D"ltr"><span>=
-</span></div><div dir=3D"ltr"><meta http-equiv=3D"content-type" content=3D"t=
-ext/html; charset=3Dutf-8"><div dir=3D"ltr"><span></span></div><div dir=3D"l=
-tr"><meta http-equiv=3D"content-type" content=3D"text/html; charset=3Dutf-8"=
-><div dir=3D"ltr"><span></span></div><div dir=3D"ltr"><meta http-equiv=3D"co=
-ntent-type" content=3D"text/html; charset=3Dutf-8"><div dir=3D"ltr"><span></=
-span></div><div dir=3D"ltr"><meta http-equiv=3D"content-type" content=3D"tex=
-t/html; charset=3Dutf-8"><div dir=3D"ltr"><span></span></div><div dir=3D"ltr=
-"><meta http-equiv=3D"content-type" content=3D"text/html; charset=3Dutf-8"><=
-div dir=3D"ltr"></div><div dir=3D"ltr">Lars,</div><div dir=3D"ltr"><br></div=
-><div dir=3D"ltr">This NIST document ("A Methodology for Determining Forensi=
-c Data Requirements for Detecting Hypervisor Attacks" [1]) appears to be foc=
-used on the application of LibVMI in some contexts. &nbsp;It is a NIST Inter=
-agency or Internal Report (NISTIR) document with a&nbsp;<span style=3D"backg=
-round-color: rgba(255, 255, 255, 0);">narrower scope than other NIST publica=
-tions, e.g. Special Publications (SP). &nbsp;NISTIR documents are:</span></d=
-iv><div dir=3D"ltr"><br></div><div dir=3D"ltr"><a href=3D"https://www.nist.g=
-ov/nist-research-library/nist-series-publications">https://www.nist.gov/nist=
--research-library/nist-series-publications</a></div><div dir=3D"ltr">"...&nb=
-sp;<span style=3D"background-color: rgba(255, 255, 255, 0);">Interim or fina=
-l reports on work performed by&nbsp;NIST for outside sponsors (both governme=
-nt and non-government).&nbsp;&nbsp;May also report results of&nbsp;NIST proj=
-ects of transitory or limited interest, including those that will be publish=
-ed subsequently in more comprehensive form."</span></div><div dir=3D"ltr"><s=
-pan style=3D"background-color: rgba(255, 255, 255, 0);"><br></span></div><di=
-v dir=3D"ltr">If the Xen community wishes to provide feedback on this NISTIR=
- draft, I suggest compiling a single document, including:</div><div dir=3D"l=
-tr"><br></div><div dir=3D"ltr">&nbsp;- any inaccuracies + supporting referen=
-ces</div><div dir=3D"ltr">&nbsp;- vulnerability scope boundaries, including X=
-en hypervisor, Linux kernel affecting KVM, KVM module for Linux kernel, QEMU=
- and hypervisor toolstack(s)</div><div dir=3D"ltr">&nbsp;- additional sample=
- attack(s) and evidence coverage for forensic analysis</div><div dir=3D"ltr"=
->&nbsp;- additional references on hypervisor security / vulnerability analys=
-is</div><div dir=3D"ltr"><span style=3D"background-color: rgba(255, 255, 255=
-, 0);">&nbsp;- missing perspectives (e.g. impact of features selected via KC=
-ONFIG, disaggregation)</span></div><div dir=3D"ltr">&nbsp;- other feedback</=
-div><div dir=3D"ltr"><br></div><div dir=3D"ltr">If a single list can be comp=
-iled, each item can be numbered and Xen community viewpoints can be aggregat=
-ed for possible consensus in unified feedback, or individuals could submit t=
-heir feedback separately.</div><div dir=3D"ltr"><br></div><div dir=3D"ltr">R=
-ich</div><div dir=3D"ltr"><br></div><div dir=3D"ltr">[1]&nbsp;<a href=3D"htt=
-ps://csrc.nist.gov/CSRC/media/Publications/nistir/8221/draft/documents/nisti=
-r-8221-draft.pdf">https://csrc.nist.gov/CSRC/media/Publications/nistir/8221/=
-draft/documents/nistir-8221-draft.pdf</a></div><div dir=3D"ltr"><br>On Oct 9=
-, 2018, at 14:20, Lars Kurth &lt;<a href=3D"mailto:lars.kurth@citrix.com">la=
-rs.kurth@citrix.com</a>&gt; wrote:<br><br></div><blockquote type=3D"cite"><d=
-iv dir=3D"ltr"><span>Hi all,</span><br><span>I added a NIST Security Paper t=
-o the agenda which is currently under review and is full of inaccuracies and=
- could potentially become very problematic to the project and vendors using X=
-en if officially published by NIST without being corrected (it needs respons=
-es by the end of week). I will be struggling to do this alone and would like=
- to enlist help, in particular from people with a security background. That w=
-ould also be significantly more powerful than me providing the feedback.</sp=
-an><br><span>Regards</span><br><span>Kars</span><br><br></div></blockquote><=
-/div></div></div></div></div></div></div></div></div></div></body></html>=
-
---Apple-Mail-4EA655D7-C4F7-44F0-8BA5-A29DA65F108D--
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+  Bug not present: 5e04bf333b954fcfd86eda3d258dc69bcf0586a3
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/128549/
 
 
---===============0830933498401434669==
+  commit e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+  Author: Roger Pau Monné <roger.pau@citrix.com>
+  Date:   Tue Oct 9 16:27:13 2018 +0200
+  
+      x86/vtd: fix iommu_share_p2m_table
+      
+      Commit 2916951c1 "mm / iommu: include need_iommu() test in
+      iommu_use_hap_pt()" changed the check in iommu_share_p2m_table to use
+      need_iommu(d) (as part of iommu_use_hap_pt) instead of iommu_enabled,
+      which broke the check because at the point in domain construction
+      where iommu_share_p2m_table is called need_iommu(d) will always return
+      false.
+      
+      Fix this by reverting to the previous logic.
+      
+      While there turn the hap_enabled check into an ASSERT, since the only
+      caller of iommu_share_p2m_table already performs the hap_enabled check
+      before calling the function.
+      
+      Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+      Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+      Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/xen-unstable-smoke/build-arm64-xsm.xen-build.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
+
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/xen-unstable-smoke/build-arm64-xsm.xen-build --summary-out=tmp/128549.bisection-summary --basis-template=128513 --blessings=real,real-bisect xen-unstable-smoke build-arm64-xsm xen-build
+Searching for failure / basis pass:
+ 128540 fail [host=laxton1] / 128513 ok.
+Failure / basis pass flights: 128540 / 128513
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest de5b678ca4dcdfa83e322491d478d66df56c1986 cd395b1d69a773556d2af206b4ecbf56b33057ea
+Basis pass de5b678ca4dcdfa83e322491d478d66df56c1986 85b00385827e4e061b2ff38b549c03d0f1e66b6a
+Generating revisions with ./adhoc-revtuple-generator  git://xenbits.xen.org/qemu-xen.git#de5b678ca4dcdfa83e322491d478d66df56c1986-de5b678ca4dcdfa83e322491d478d66df56c1986 git://xenbits.xen.org/xen.git#85b00385827e4e061b2ff38b549c03d0f1e66b6a-cd395b1d69a773556d2af206b4ecbf56b33057ea
+Loaded 1001 nodes in revision graph
+Searching for test results:
+ 128536 fail de5b678ca4dcdfa83e322491d478d66df56c1986 cd395b1d69a773556d2af206b4ecbf56b33057ea
+ 128547 pass de5b678ca4dcdfa83e322491d478d66df56c1986 5e04bf333b954fcfd86eda3d258dc69bcf0586a3
+ 128513 pass de5b678ca4dcdfa83e322491d478d66df56c1986 85b00385827e4e061b2ff38b549c03d0f1e66b6a
+ 128538 pass de5b678ca4dcdfa83e322491d478d66df56c1986 27225bbb6d148f6d373a4a89b0dc3f3f5bf4d193
+ 128527 fail de5b678ca4dcdfa83e322491d478d66df56c1986 cd395b1d69a773556d2af206b4ecbf56b33057ea
+ 128540 fail de5b678ca4dcdfa83e322491d478d66df56c1986 cd395b1d69a773556d2af206b4ecbf56b33057ea
+ 128544 pass de5b678ca4dcdfa83e322491d478d66df56c1986 5e04bf333b954fcfd86eda3d258dc69bcf0586a3
+ 128534 fail de5b678ca4dcdfa83e322491d478d66df56c1986 cd395b1d69a773556d2af206b4ecbf56b33057ea
+ 128539 pass de5b678ca4dcdfa83e322491d478d66df56c1986 5e04bf333b954fcfd86eda3d258dc69bcf0586a3
+ 128529 pass de5b678ca4dcdfa83e322491d478d66df56c1986 85b00385827e4e061b2ff38b549c03d0f1e66b6a
+ 128545 fail de5b678ca4dcdfa83e322491d478d66df56c1986 e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+ 128541 fail de5b678ca4dcdfa83e322491d478d66df56c1986 e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+ 128549 fail de5b678ca4dcdfa83e322491d478d66df56c1986 e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+Searching for interesting versions
+ Result found: flight 128513 (pass), for basis pass
+ Result found: flight 128527 (fail), for basis failure
+ Repro found: flight 128529 (pass), for basis pass
+ Repro found: flight 128534 (fail), for basis failure
+ 0 revisions at de5b678ca4dcdfa83e322491d478d66df56c1986 5e04bf333b954fcfd86eda3d258dc69bcf0586a3
+No revisions left to test, checking graph state.
+ Result found: flight 128539 (pass), for last pass
+ Result found: flight 128541 (fail), for first failure
+ Repro found: flight 128544 (pass), for last pass
+ Repro found: flight 128545 (fail), for first failure
+ Repro found: flight 128547 (pass), for last pass
+ Repro found: flight 128549 (fail), for first failure
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+  Bug not present: 5e04bf333b954fcfd86eda3d258dc69bcf0586a3
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/128549/
+
+
+  commit e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+  Author: Roger Pau Monné <roger.pau@citrix.com>
+  Date:   Tue Oct 9 16:27:13 2018 +0200
+  
+      x86/vtd: fix iommu_share_p2m_table
+      
+      Commit 2916951c1 "mm / iommu: include need_iommu() test in
+      iommu_use_hap_pt()" changed the check in iommu_share_p2m_table to use
+      need_iommu(d) (as part of iommu_use_hap_pt) instead of iommu_enabled,
+      which broke the check because at the point in domain construction
+      where iommu_share_p2m_table is called need_iommu(d) will always return
+      false.
+      
+      Fix this by reverting to the previous logic.
+      
+      While there turn the hap_enabled check into an ASSERT, since the only
+      caller of iommu_share_p2m_table already performs the hap_enabled check
+      before calling the function.
+      
+      Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+      Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+      Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+Revision graph left in /home/logs/results/bisect/xen-unstable-smoke/build-arm64-xsm.xen-build.{dot,ps,png,html,svg}.
+----------------------------------------
+128549: tolerable ALL FAIL
+
+flight 128549 xen-unstable-smoke real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/128549/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ build-arm64-xsm               6 xen-build               fail baseline untested
+
+
+jobs:
+ build-arm64-xsm                                              fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+
+--===============6527795027486416257==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -175,4 +183,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============0830933498401434669==--
+--===============6527795027486416257==--
