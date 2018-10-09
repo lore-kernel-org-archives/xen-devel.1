@@ -1,16 +1,24 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 128540: regressions - FAIL
-Date: Tue, 09 Oct 2018 20:23:27 +0000
-Message-ID: <osstest-128540-mainreport@xen.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Rich Persaud <persaur@gmail.com>
+Subject: Re: x86 Community Call: Wed Oct 10,
+ 14:00 - 15:00 UTC - Call for agenda items
+Date: Tue, 9 Oct 2018 16:32:44 -0400
+Message-ID: <052DBDCC-CC76-4C1D-AA0F-D472870A7010@gmail.com>
+References: <32C44945-4CE1-4118-94B9-1064B24872CF@citrix.com>
+ <4460D131-1AB5-4BBA-BCA5-ACBF2852FE7B@citrix.com>
+ <CABfawhkAYa0RSFAf_V44OSw2pxV75qr2Oh42LP_tx6Z32B5ggg@mail.gmail.com>
+ <54320110-5cdb-82db-a03c-6c4e46cc6598@citrix.com>
+ <04B1E6EF-0C14-4D8F-9AB7-EF5BF3F3DD46@citrix.com>
+Mime-Version: 1.0 (1.0)
+Content-Type: multipart/mixed; boundary="===============0830933498401434669=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=w4ff=mv=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1g9yXT-0003QF-0m
- for xen-devel@lists.xenproject.org; Tue, 09 Oct 2018 20:23:31 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=ssjx=mv=gmail.com=persaur@srs-us1.protection.inumbo.net>)
+ id 1g9ygU-0004Ky-60
+ for xen-devel@lists.xenproject.org; Tue, 09 Oct 2018 20:32:50 +0000
+Received: by mail-it1-x144.google.com with SMTP id c23-v6so4760108itd.5
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Oct 2018 13:32:47 -0700 (PDT)
+In-Reply-To: <04B1E6EF-0C14-4D8F-9AB7-EF5BF3F3DD46@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,117 +27,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Lars Kurth <lars.kurth@citrix.com>
+Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, "Matt.Spencer@arm.com" <Matt.Spencer@arm.com>, "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>, John Ji <john.ji@intel.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, Daniel Kiper <daniel.kiper@oracle.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, Xen-devel <xen-devel@lists.xenproject.org>, Artem Mygaiev <Artem_Mygaiev@epam.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, "christopher.w.clark@gmail.com" <christopher.w.clark@gmail.com>, Paul Durrant <Paul.Durrant@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, "intel-xen@intel.com" <intel-xen@intel.com>, Jarvis.Roach@
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyODU0MCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyODU0MC8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYXJtNjQteHNtICAgICAg
-ICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI4NTEz
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1pMzg2IDEwIGRlYmlhbi1odm0t
-aW5zdGFsbCBmYWlsIFJFR1IuIHZzLiAxMjg1MTMKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAg
-ICAgIDYgeGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyODUxMwoKVGVz
-dHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYXJt
-NjQtYXJtNjQteGwteHNtICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9j
-a2VkICBuL2EKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkg
-ICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAg
-MTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwoKdmVyc2lv
-biB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIGNkMzk1YjFkNjlh
-NzczNTU2ZDJhZjIwNmI0ZWNiZjU2YjMzMDU3ZWEKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAg
-ICAgICAgICAgICAgIDg1YjAwMzg1ODI3ZTRlMDYxYjJmZjM4YjU0OWMwM2QwZjFlNjZiNmEKCkxh
-c3QgdGVzdCBvZiBiYXNpcyAgIDEyODUxMyAgMjAxOC0xMC0wOCAxODowMToxMSBaICAgIDEgZGF5
-cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMjg1MjcgIDIwMTgtMTAtMDkgMTU6MDA6NDIgWiAgICAw
-IGRheXMgICAgMyBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5k
-ZXIgdGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIERh
-bmllbCBEZSBHcmFhZiA8ZGdkZWdyYUB0eWNoby5uc2EuZ292PgogIEphbiBCZXVsaWNoIDxqYmV1
-bGljaEBzdXNlLmNvbT4KICBOaWNvbGFzIFBvaXJvdCA8bmljb2xhcy5wb2lyb3RAYmVydGluLmZy
-PgogIFJhenZhbiBDb2pvY2FydSA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4KICBSb2dlciBQ
-YXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KICBXZWkgTGl1IDx3ZWkubGl1MkBjaXRy
-aXguY29tPgoKam9iczoKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcWVtdXUtZGViaWFuaHZtLWkzODYgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54
-ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2lt
-YWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6
-Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24g
-b2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0
-dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURN
-RS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9z
-c3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNh
-biBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0
-LmdpdDthPXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgY2QzOTViMWQ2OWE3NzM1
-NTZkMmFmMjA2YjRlY2JmNTZiMzMwNTdlYQpBdXRob3I6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBz
-dXNlLmNvbT4KRGF0ZTogICBUdWUgT2N0IDkgMTY6Mjc6NTkgMjAxOCArMDIwMAoKICAgIHg4Njog
-cHV0X3BhZ2VfZnJvbV9sMmUoKSBzaG91bGQgaG9ub3IgX1BBR0VfUlcKICAgIAogICAgNTZmZmYz
-ZTVlOSAoIng4NjogbnVrZSBQViBzdXBlcnBhZ2Ugb3B0aW9uIGFuZCBjb2RlIikgaGFzIGludHJv
-ZHVjZWQgYQogICAgKGx1Y2tpbHkgbGF0ZW50IG9ubHkpIGJ1ZyBoZXJlLCBpbiB0aGF0IGl0IGRp
-ZG4ndCBtYWtlIHJlZmVyZW5jZQogICAgZHJvcHBpbmcgZGVwZW5kZW50IG9uIHdoZXRoZXIgdGhl
-IHBhZ2Ugd2FzIG1hcHBlZCB3cml0YWJsZS4gVGhlIG9ubHkKICAgIGN1cnJlbnQgc291cmNlIG9m
-IGxhcmdlIHBhZ2UgbWFwcGluZ3MgZm9yIFBWIGRvbWFpbnMgaXMgdGhlIERvbTAKICAgIGJ1aWxk
-ZXIsIHdoaWNoIG9ubHkgcHJvZHVjZXMgd3JpdGVhYmxlIG9uZXMuCiAgICAKICAgIFRha2UgdGhl
-IG9wcG9ydHVuaXR5IGFuZCBhbHNvIGNvbnZlcnQgdG8gYm9vbCBib3RoIHB1dF9kYXRhX3BhZ2Uo
-KSdzCiAgICByZXNwZWN0aXZlIHBhcmFtZXRlciBhbmQgdGhlIGFyZ3VtZW50IHB1dF9wYWdlX2Zy
-b21fbDNlKCkgcGFzc2VzLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJl
-dWxpY2hAc3VzZS5jb20+CiAgICBSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT4KICAgIFJldmlld2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRy
-aXguY29tPgoKY29tbWl0IGU5YmUzNGJlNWY5YTFhNmVjYmYwNWJhOTUwMmNkNzA1YWU0NDE0NzYK
-QXV0aG9yOiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KRGF0ZTogICBU
-dWUgT2N0IDkgMTY6Mjc6MTMgMjAxOCArMDIwMAoKICAgIHg4Ni92dGQ6IGZpeCBpb21tdV9zaGFy
-ZV9wMm1fdGFibGUKICAgIAogICAgQ29tbWl0IDI5MTY5NTFjMSAibW0gLyBpb21tdTogaW5jbHVk
-ZSBuZWVkX2lvbW11KCkgdGVzdCBpbgogICAgaW9tbXVfdXNlX2hhcF9wdCgpIiBjaGFuZ2VkIHRo
-ZSBjaGVjayBpbiBpb21tdV9zaGFyZV9wMm1fdGFibGUgdG8gdXNlCiAgICBuZWVkX2lvbW11KGQp
-IChhcyBwYXJ0IG9mIGlvbW11X3VzZV9oYXBfcHQpIGluc3RlYWQgb2YgaW9tbXVfZW5hYmxlZCwK
-ICAgIHdoaWNoIGJyb2tlIHRoZSBjaGVjayBiZWNhdXNlIGF0IHRoZSBwb2ludCBpbiBkb21haW4g
-Y29uc3RydWN0aW9uCiAgICB3aGVyZSBpb21tdV9zaGFyZV9wMm1fdGFibGUgaXMgY2FsbGVkIG5l
-ZWRfaW9tbXUoZCkgd2lsbCBhbHdheXMgcmV0dXJuCiAgICBmYWxzZS4KICAgIAogICAgRml4IHRo
-aXMgYnkgcmV2ZXJ0aW5nIHRvIHRoZSBwcmV2aW91cyBsb2dpYy4KICAgIAogICAgV2hpbGUgdGhl
-cmUgdHVybiB0aGUgaGFwX2VuYWJsZWQgY2hlY2sgaW50byBhbiBBU1NFUlQsIHNpbmNlIHRoZSBv
-bmx5CiAgICBjYWxsZXIgb2YgaW9tbXVfc2hhcmVfcDJtX3RhYmxlIGFscmVhZHkgcGVyZm9ybXMg
-dGhlIGhhcF9lbmFibGVkIGNoZWNrCiAgICBiZWZvcmUgY2FsbGluZyB0aGUgZnVuY3Rpb24uCiAg
-ICAKICAgIFNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXgu
-Y29tPgogICAgUmV2aWV3ZWQtYnk6IFBhdWwgRHVycmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5j
-b20+CiAgICBSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKY29t
-bWl0IDVlMDRiZjMzM2I5NTRmY2ZkODZlZGEzZDI1OGRjNjliY2YwNTg2YTMKQXV0aG9yOiBEYW5p
-ZWwgRGUgR3JhYWYgPGRnZGVncmFAdHljaG8ubnNhLmdvdj4KRGF0ZTogICBUdWUgT2N0IDkgMTY6
-MjY6NTQgMjAxOCArMDIwMAoKICAgIGZsYXNrOiBzb3J0IGlve3BvcnQsbWVtfWNvbiBlbnRyaWVz
-CiAgICAKICAgIFRoZXNlIGVudHJpZXMgYXJlIG5vdCBhbHdheXMgc29ydGVkIGJ5IGNoZWNrcG9s
-aWN5LCBzbyBzb3J0IHRoZW0gZHVyaW5nCiAgICBwb2xpY3kgbG9hZCAoYXMgaXMgYWxyZWFkeSBk
-b25lIGZvciBsYXRlciBvY29udGV4dCBhZGRpdGlvbnMpLgogICAgCiAgICBSZXBvcnRlZC1ieTog
-Tmljb2xhcyBQb2lyb3QgPG5pY29sYXMucG9pcm90QGJlcnRpbi5mcj4KICAgIFNpZ25lZC1vZmYt
-Ynk6IERhbmllbCBEZSBHcmFhZiA8ZGdkZWdyYUB0eWNoby5uc2EuZ292PgogICAgVGVzdGVkLWJ5
-OiBOaWNvbGFzIFBvaXJvdCA8bmljb2xhcy5wb2lyb3RAYmVydGluLmZyPgogICAgUmV2aWV3ZWQt
-Ynk6IE5pY29sYXMgUG9pcm90IDxuaWNvbGFzLnBvaXJvdEBiZXJ0aW4uZnI+Cgpjb21taXQgMjcy
-MjViYmI2ZDE0OGY2ZDM3M2E0YTg5YjBkYzNmM2Y1YmY0ZDE5MwpBdXRob3I6IEphbiBCZXVsaWNo
-IDxqYmV1bGljaEBzdXNlLmNvbT4KRGF0ZTogICBUdWUgT2N0IDkgMTY6MjU6MzUgMjAxOCArMDIw
-MAoKICAgIHg4Ni9IVk06IG1vdmUgdmVuZG9yIGluZGVwZW5kZW50IENQVSBzYXZlL3Jlc3RvcmUg
-bG9naWMgdG8gc2hhcmVkIGNvZGUKICAgIAogICAgQSBmZXcgcGllY2VzIG9mIHRoZSBoYW5kbGlu
-ZyBoZXJlIGFyZSAobm8gbG9uZ2VyPykgdmVuZG9yIHNwZWNpZmljLCBhbmQKICAgIGhlbmNlIHRo
-ZXJlJ3Mgbm8gcG9pbnQgaW4gcmVwbGljYXRpbmcgdGhlIGNvZGUuIFplcm8gdGhlIGZ1bGwgc3Ry
-dWN0dXJlCiAgICBiZWZvcmUgY2FsbGluZyB0aGUgc2F2ZSBob29rLCBlbGltaW5hdGluZyB0aGUg
-bmVlZCBmb3IgdGhlIGhvb2sKICAgIGZ1bmN0aW9ucyB0byB6ZXJvIGluZGl2aWR1YWwgZmllbGRz
-LgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+
-CiAgICBBY2tlZC1ieTogUmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29t
-PgogICAgUmV2aWV3ZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
-b20+CiAgICBSZXZpZXdlZC1ieTogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3Jh
-Y2xlLmNvbQogICAgUmV2aWV3ZWQtYnk6IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29t
-PgoKY29tbWl0IDU4NjZiMDBjZTA1YTdhN2MzOWEwZDVlYjdmOWRlNDE0OWM1ZWZlOGIKQXV0aG9y
-OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgpEYXRlOiAgIFR1ZSBP
-Y3QgOSAxNTowNjoyNSAyMDE4ICswMTAwCgogICAgdG9vbHMvbGlieGVuc3RhdDogRml4IFNPTkFN
-RSBmb2xsb3dpbmcgYy9zIDU3MDc3Y2M0MgogICAgCiAgICBUaGUgdW5zdGFibGUgQUJJIHZlcnNp
-b24gaXMgNC4xMiwgbm90IDQuMTEKICAgIAogICAgU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3Bl
-ciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5OiBXZWkgTGl1IDx3ZWku
-bGl1MkBjaXRyaXguY29tPgoocWVtdSBjaGFuZ2VzIG5vdCBpbmNsdWRlZCkKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============0830933498401434669==
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-4EA655D7-C4F7-44F0-8BA5-A29DA65F108D
+Content-Transfer-Encoding: 7bit
+
+
+--Apple-Mail-4EA655D7-C4F7-44F0-8BA5-A29DA65F108D
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+Lars,
+
+This NIST document ("A Methodology for Determining Forensic Data Requirement=
+s for Detecting Hypervisor Attacks" [1]) appears to be focused on the applic=
+ation of LibVMI in some contexts.  It is a NIST Interagency or Internal Repo=
+rt (NISTIR) document with a narrower scope than other NIST publications, e.g=
+. Special Publications (SP).  NISTIR documents are:
+
+https://www.nist.gov/nist-research-library/nist-series-publications
+"... Interim or final reports on work performed by NIST for outside sponsors=
+ (both government and non-government).  May also report results of NIST proj=
+ects of transitory or limited interest, including those that will be publish=
+ed subsequently in more comprehensive form."
+
+If the Xen community wishes to provide feedback on this NISTIR draft, I sugg=
+est compiling a single document, including:
+
+ - any inaccuracies + supporting references
+ - vulnerability scope boundaries, including Xen hypervisor, Linux kernel af=
+fecting KVM, KVM module for Linux kernel, QEMU and hypervisor toolstack(s)
+ - additional sample attack(s) and evidence coverage for forensic analysis
+ - additional references on hypervisor security / vulnerability analysis
+ - missing perspectives (e.g. impact of features selected via KCONFIG, disag=
+gregation)
+ - other feedback
+
+If a single list can be compiled, each item can be numbered and Xen communit=
+y viewpoints can be aggregated for possible consensus in unified feedback, o=
+r individuals could submit their feedback separately.
+
+Rich
+
+[1] https://csrc.nist.gov/CSRC/media/Publications/nistir/8221/draft/document=
+s/nistir-8221-draft.pdf
+
+> On Oct 9, 2018, at 14:20, Lars Kurth <lars.kurth@citrix.com> wrote:
+>=20
+> Hi all,
+> I added a NIST Security Paper to the agenda which is currently under revie=
+w and is full of inaccuracies and could potentially become very problematic t=
+o the project and vendors using Xen if officially published by NIST without b=
+eing corrected (it needs responses by the end of week). I will be struggling=
+ to do this alone and would like to enlist help, in particular from people w=
+ith a security background. That would also be significantly more powerful th=
+an me providing the feedback.
+> Regards
+> Kars
+>=20
+
+--Apple-Mail-4EA655D7-C4F7-44F0-8BA5-A29DA65F108D
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><div dir=3D"ltr"><span></span></div><div di=
+r=3D"ltr"><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"><div dir=3D"ltr"><span></span></div><div dir=3D"ltr"><meta http-equiv=
+=3D"content-type" content=3D"text/html; charset=3Dutf-8"><div dir=3D"ltr"><s=
+pan></span></div><div dir=3D"ltr"><meta http-equiv=3D"content-type" content=3D=
+"text/html; charset=3Dutf-8"><div dir=3D"ltr"><span></span></div><div dir=3D=
+"ltr"><meta http-equiv=3D"content-type" content=3D"text/html; charset=3Dutf-=
+8"><div dir=3D"ltr"><span></span></div><div dir=3D"ltr"><meta http-equiv=3D"=
+content-type" content=3D"text/html; charset=3Dutf-8"><div dir=3D"ltr"><span>=
+</span></div><div dir=3D"ltr"><meta http-equiv=3D"content-type" content=3D"t=
+ext/html; charset=3Dutf-8"><div dir=3D"ltr"><span></span></div><div dir=3D"l=
+tr"><meta http-equiv=3D"content-type" content=3D"text/html; charset=3Dutf-8"=
+><div dir=3D"ltr"><span></span></div><div dir=3D"ltr"><meta http-equiv=3D"co=
+ntent-type" content=3D"text/html; charset=3Dutf-8"><div dir=3D"ltr"><span></=
+span></div><div dir=3D"ltr"><meta http-equiv=3D"content-type" content=3D"tex=
+t/html; charset=3Dutf-8"><div dir=3D"ltr"><span></span></div><div dir=3D"ltr=
+"><meta http-equiv=3D"content-type" content=3D"text/html; charset=3Dutf-8"><=
+div dir=3D"ltr"></div><div dir=3D"ltr">Lars,</div><div dir=3D"ltr"><br></div=
+><div dir=3D"ltr">This NIST document ("A Methodology for Determining Forensi=
+c Data Requirements for Detecting Hypervisor Attacks" [1]) appears to be foc=
+used on the application of LibVMI in some contexts. &nbsp;It is a NIST Inter=
+agency or Internal Report (NISTIR) document with a&nbsp;<span style=3D"backg=
+round-color: rgba(255, 255, 255, 0);">narrower scope than other NIST publica=
+tions, e.g. Special Publications (SP). &nbsp;NISTIR documents are:</span></d=
+iv><div dir=3D"ltr"><br></div><div dir=3D"ltr"><a href=3D"https://www.nist.g=
+ov/nist-research-library/nist-series-publications">https://www.nist.gov/nist=
+-research-library/nist-series-publications</a></div><div dir=3D"ltr">"...&nb=
+sp;<span style=3D"background-color: rgba(255, 255, 255, 0);">Interim or fina=
+l reports on work performed by&nbsp;NIST for outside sponsors (both governme=
+nt and non-government).&nbsp;&nbsp;May also report results of&nbsp;NIST proj=
+ects of transitory or limited interest, including those that will be publish=
+ed subsequently in more comprehensive form."</span></div><div dir=3D"ltr"><s=
+pan style=3D"background-color: rgba(255, 255, 255, 0);"><br></span></div><di=
+v dir=3D"ltr">If the Xen community wishes to provide feedback on this NISTIR=
+ draft, I suggest compiling a single document, including:</div><div dir=3D"l=
+tr"><br></div><div dir=3D"ltr">&nbsp;- any inaccuracies + supporting referen=
+ces</div><div dir=3D"ltr">&nbsp;- vulnerability scope boundaries, including X=
+en hypervisor, Linux kernel affecting KVM, KVM module for Linux kernel, QEMU=
+ and hypervisor toolstack(s)</div><div dir=3D"ltr">&nbsp;- additional sample=
+ attack(s) and evidence coverage for forensic analysis</div><div dir=3D"ltr"=
+>&nbsp;- additional references on hypervisor security / vulnerability analys=
+is</div><div dir=3D"ltr"><span style=3D"background-color: rgba(255, 255, 255=
+, 0);">&nbsp;- missing perspectives (e.g. impact of features selected via KC=
+ONFIG, disaggregation)</span></div><div dir=3D"ltr">&nbsp;- other feedback</=
+div><div dir=3D"ltr"><br></div><div dir=3D"ltr">If a single list can be comp=
+iled, each item can be numbered and Xen community viewpoints can be aggregat=
+ed for possible consensus in unified feedback, or individuals could submit t=
+heir feedback separately.</div><div dir=3D"ltr"><br></div><div dir=3D"ltr">R=
+ich</div><div dir=3D"ltr"><br></div><div dir=3D"ltr">[1]&nbsp;<a href=3D"htt=
+ps://csrc.nist.gov/CSRC/media/Publications/nistir/8221/draft/documents/nisti=
+r-8221-draft.pdf">https://csrc.nist.gov/CSRC/media/Publications/nistir/8221/=
+draft/documents/nistir-8221-draft.pdf</a></div><div dir=3D"ltr"><br>On Oct 9=
+, 2018, at 14:20, Lars Kurth &lt;<a href=3D"mailto:lars.kurth@citrix.com">la=
+rs.kurth@citrix.com</a>&gt; wrote:<br><br></div><blockquote type=3D"cite"><d=
+iv dir=3D"ltr"><span>Hi all,</span><br><span>I added a NIST Security Paper t=
+o the agenda which is currently under review and is full of inaccuracies and=
+ could potentially become very problematic to the project and vendors using X=
+en if officially published by NIST without being corrected (it needs respons=
+es by the end of week). I will be struggling to do this alone and would like=
+ to enlist help, in particular from people with a security background. That w=
+ould also be significantly more powerful than me providing the feedback.</sp=
+an><br><span>Regards</span><br><span>Kars</span><br><br></div></blockquote><=
+/div></div></div></div></div></div></div></div></div></div></body></html>=
+
+--Apple-Mail-4EA655D7-C4F7-44F0-8BA5-A29DA65F108D--
+
+
+--===============0830933498401434669==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0830933498401434669==--
