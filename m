@@ -1,16 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 128558: regressions - FAIL
-Date: Wed, 10 Oct 2018 04:40:58 +0000
-Message-ID: <osstest-128558-mainreport@xen.org>
+From: Spencer Michaels <spmichaels.work@gmail.com>
+Subject: Mapping HVM guest memory from Dom0
+Date: Tue, 9 Oct 2018 15:34:18 -0400
+Message-ID: <CAAd-cWOSqZN9LYCRxEYjgCyHq24PFsZqOFE1T_PPnq3HjDGpaA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2895818799506498083=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=r/nk=mw=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gA6Ix-00030f-0f
- for xen-devel@lists.xenproject.org; Wed, 10 Oct 2018 04:41:03 +0000
+ <srs0=vd+a=mv=gmail.com=spmichaels.work@srs-us1.protection.inumbo.net>)
+ id 1g9xm2-0007h3-Tx
+ for xen-devel@lists.xenproject.org; Tue, 09 Oct 2018 19:34:30 +0000
+Received: by mail-io1-xd32.google.com with SMTP id z16-v6so2103034iol.6
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Oct 2018 12:34:29 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,116 +20,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyODU1OCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyODU1OC8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYXJtNjQteHNtICAgICAg
-ICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI4NTEz
-CiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAgICAgICAgICAg
-ICBmYWlsIFJFR1IuIHZzLiAxMjg1MTMKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0
-IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAxIGJ1aWxk
-LWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybTY0LWFybTY0LXhs
-LXhzbSAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0
-ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4g
-ICAgICAgICAgICAgICAgICBjZDM5NWIxZDY5YTc3MzU1NmQyYWYyMDZiNGVjYmY1NmIzMzA1N2Vh
-CmJhc2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICA4NWIwMDM4NTgyN2U0ZTA2
-MWIyZmYzOGI1NDljMDNkMGYxZTY2YjZhCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjg1MTMgIDIw
-MTgtMTAtMDggMTg6MDE6MTEgWiAgICAxIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTI4NTI3
-ICAyMDE4LTEwLTA5IDE1OjAwOjQyIFogICAgMCBkYXlzICAgIDcgYXR0ZW1wdHMKCi0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9w
-bGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3IENvb3BlciA8YW5k
-cmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICBEYW5pZWwgRGUgR3JhYWYgPGRnZGVncmFAdHljaG8u
-bnNhLmdvdj4KICBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgTmljb2xhcyBQb2ly
-b3QgPG5pY29sYXMucG9pcm90QGJlcnRpbi5mcj4KICBSYXp2YW4gQ29qb2NhcnUgPHJjb2pvY2Fy
-dUBiaXRkZWZlbmRlci5jb20+CiAgUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5j
-b20+CiAgV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCmpvYnM6CiBidWlsZC1hcm02NC14
-c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJt
-aGYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAog
-dGVzdC1hcm02NC1hcm02NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1pMzg2ICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQt
-ZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9n
-cy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRj
-LiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9y
-Zy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0
-ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/
-cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8v
-eGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9
-bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5i
-aXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKTm90IHB1c2hpbmcu
-CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0KY29tbWl0IGNkMzk1YjFkNjlhNzczNTU2ZDJhZjIwNmI0ZWNiZjU2YjMzMDU3ZWEKQXV0
-aG9yOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CkRhdGU6ICAgVHVlIE9jdCA5IDE2
-OjI3OjU5IDIwMTggKzAyMDAKCiAgICB4ODY6IHB1dF9wYWdlX2Zyb21fbDJlKCkgc2hvdWxkIGhv
-bm9yIF9QQUdFX1JXCiAgICAKICAgIDU2ZmZmM2U1ZTkgKCJ4ODY6IG51a2UgUFYgc3VwZXJwYWdl
-IG9wdGlvbiBhbmQgY29kZSIpIGhhcyBpbnRyb2R1Y2VkIGEKICAgIChsdWNraWx5IGxhdGVudCBv
-bmx5KSBidWcgaGVyZSwgaW4gdGhhdCBpdCBkaWRuJ3QgbWFrZSByZWZlcmVuY2UKICAgIGRyb3Bw
-aW5nIGRlcGVuZGVudCBvbiB3aGV0aGVyIHRoZSBwYWdlIHdhcyBtYXBwZWQgd3JpdGFibGUuIFRo
-ZSBvbmx5CiAgICBjdXJyZW50IHNvdXJjZSBvZiBsYXJnZSBwYWdlIG1hcHBpbmdzIGZvciBQViBk
-b21haW5zIGlzIHRoZSBEb20wCiAgICBidWlsZGVyLCB3aGljaCBvbmx5IHByb2R1Y2VzIHdyaXRl
-YWJsZSBvbmVzLgogICAgCiAgICBUYWtlIHRoZSBvcHBvcnR1bml0eSBhbmQgYWxzbyBjb252ZXJ0
-IHRvIGJvb2wgYm90aCBwdXRfZGF0YV9wYWdlKCkncwogICAgcmVzcGVjdGl2ZSBwYXJhbWV0ZXIg
-YW5kIHRoZSBhcmd1bWVudCBwdXRfcGFnZV9mcm9tX2wzZSgpIHBhc3Nlcy4KICAgIAogICAgU2ln
-bmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgogICAgUmV2aWV3ZWQt
-Ynk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgICBSZXZpZXdl
-ZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCmNvbW1pdCBlOWJlMzRiZTVmOWEx
-YTZlY2JmMDViYTk1MDJjZDcwNWFlNDQxNDc2CkF1dGhvcjogUm9nZXIgUGF1IE1vbm7DqSA8cm9n
-ZXIucGF1QGNpdHJpeC5jb20+CkRhdGU6ICAgVHVlIE9jdCA5IDE2OjI3OjEzIDIwMTggKzAyMDAK
-CiAgICB4ODYvdnRkOiBmaXggaW9tbXVfc2hhcmVfcDJtX3RhYmxlCiAgICAKICAgIENvbW1pdCAy
-OTE2OTUxYzEgIm1tIC8gaW9tbXU6IGluY2x1ZGUgbmVlZF9pb21tdSgpIHRlc3QgaW4KICAgIGlv
-bW11X3VzZV9oYXBfcHQoKSIgY2hhbmdlZCB0aGUgY2hlY2sgaW4gaW9tbXVfc2hhcmVfcDJtX3Rh
-YmxlIHRvIHVzZQogICAgbmVlZF9pb21tdShkKSAoYXMgcGFydCBvZiBpb21tdV91c2VfaGFwX3B0
-KSBpbnN0ZWFkIG9mIGlvbW11X2VuYWJsZWQsCiAgICB3aGljaCBicm9rZSB0aGUgY2hlY2sgYmVj
-YXVzZSBhdCB0aGUgcG9pbnQgaW4gZG9tYWluIGNvbnN0cnVjdGlvbgogICAgd2hlcmUgaW9tbXVf
-c2hhcmVfcDJtX3RhYmxlIGlzIGNhbGxlZCBuZWVkX2lvbW11KGQpIHdpbGwgYWx3YXlzIHJldHVy
-bgogICAgZmFsc2UuCiAgICAKICAgIEZpeCB0aGlzIGJ5IHJldmVydGluZyB0byB0aGUgcHJldmlv
-dXMgbG9naWMuCiAgICAKICAgIFdoaWxlIHRoZXJlIHR1cm4gdGhlIGhhcF9lbmFibGVkIGNoZWNr
-IGludG8gYW4gQVNTRVJULCBzaW5jZSB0aGUgb25seQogICAgY2FsbGVyIG9mIGlvbW11X3NoYXJl
-X3AybV90YWJsZSBhbHJlYWR5IHBlcmZvcm1zIHRoZSBoYXBfZW5hYmxlZCBjaGVjawogICAgYmVm
-b3JlIGNhbGxpbmcgdGhlIGZ1bmN0aW9uLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQ
-YXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KICAgIFJldmlld2VkLWJ5OiBQYXVsIER1
-cnJhbnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVs
-aWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCmNvbW1pdCA1ZTA0YmYzMzNiOTU0ZmNmZDg2ZWRhM2Qy
-NThkYzY5YmNmMDU4NmEzCkF1dGhvcjogRGFuaWVsIERlIEdyYWFmIDxkZ2RlZ3JhQHR5Y2hvLm5z
-YS5nb3Y+CkRhdGU6ICAgVHVlIE9jdCA5IDE2OjI2OjU0IDIwMTggKzAyMDAKCiAgICBmbGFzazog
-c29ydCBpb3twb3J0LG1lbX1jb24gZW50cmllcwogICAgCiAgICBUaGVzZSBlbnRyaWVzIGFyZSBu
-b3QgYWx3YXlzIHNvcnRlZCBieSBjaGVja3BvbGljeSwgc28gc29ydCB0aGVtIGR1cmluZwogICAg
-cG9saWN5IGxvYWQgKGFzIGlzIGFscmVhZHkgZG9uZSBmb3IgbGF0ZXIgb2NvbnRleHQgYWRkaXRp
-b25zKS4KICAgIAogICAgUmVwb3J0ZWQtYnk6IE5pY29sYXMgUG9pcm90IDxuaWNvbGFzLnBvaXJv
-dEBiZXJ0aW4uZnI+CiAgICBTaWduZWQtb2ZmLWJ5OiBEYW5pZWwgRGUgR3JhYWYgPGRnZGVncmFA
-dHljaG8ubnNhLmdvdj4KICAgIFRlc3RlZC1ieTogTmljb2xhcyBQb2lyb3QgPG5pY29sYXMucG9p
-cm90QGJlcnRpbi5mcj4KICAgIFJldmlld2VkLWJ5OiBOaWNvbGFzIFBvaXJvdCA8bmljb2xhcy5w
-b2lyb3RAYmVydGluLmZyPgoKY29tbWl0IDI3MjI1YmJiNmQxNDhmNmQzNzNhNGE4OWIwZGMzZjNm
-NWJmNGQxOTMKQXV0aG9yOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CkRhdGU6ICAg
-VHVlIE9jdCA5IDE2OjI1OjM1IDIwMTggKzAyMDAKCiAgICB4ODYvSFZNOiBtb3ZlIHZlbmRvciBp
-bmRlcGVuZGVudCBDUFUgc2F2ZS9yZXN0b3JlIGxvZ2ljIHRvIHNoYXJlZCBjb2RlCiAgICAKICAg
-IEEgZmV3IHBpZWNlcyBvZiB0aGUgaGFuZGxpbmcgaGVyZSBhcmUgKG5vIGxvbmdlcj8pIHZlbmRv
-ciBzcGVjaWZpYywgYW5kCiAgICBoZW5jZSB0aGVyZSdzIG5vIHBvaW50IGluIHJlcGxpY2F0aW5n
-IHRoZSBjb2RlLiBaZXJvIHRoZSBmdWxsIHN0cnVjdHVyZQogICAgYmVmb3JlIGNhbGxpbmcgdGhl
-IHNhdmUgaG9vaywgZWxpbWluYXRpbmcgdGhlIG5lZWQgZm9yIHRoZSBob29rCiAgICBmdW5jdGlv
-bnMgdG8gemVybyBpbmRpdmlkdWFsIGZpZWxkcy4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogSmFu
-IEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgogICAgQWNrZWQtYnk6IFJhenZhbiBDb2pvY2Fy
-dSA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4KICAgIFJldmlld2VkLWJ5OiBBbmRyZXcgQ29v
-cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IEJvcmlzIE9z
-dHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20KICAgIFJldmlld2VkLWJ5OiBLZXZp
-biBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KCmNvbW1pdCA1ODY2YjAwY2UwNWE3YTdjMzlh
-MGQ1ZWI3ZjlkZTQxNDljNWVmZThiCkF1dGhvcjogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3Bl
-cjNAY2l0cml4LmNvbT4KRGF0ZTogICBUdWUgT2N0IDkgMTU6MDY6MjUgMjAxOCArMDEwMAoKICAg
-IHRvb2xzL2xpYnhlbnN0YXQ6IEZpeCBTT05BTUUgZm9sbG93aW5nIGMvcyA1NzA3N2NjNDIKICAg
-IAogICAgVGhlIHVuc3RhYmxlIEFCSSB2ZXJzaW9uIGlzIDQuMTIsIG5vdCA0LjExCiAgICAKICAg
-IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+
-CiAgICBBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KKHFlbXUgY2hhbmdl
-cyBub3QgaW5jbHVkZWQpCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+--===============2895818799506498083==
+Content-Type: multipart/alternative; boundary="00000000000084e1dd0577d0d300"
+
+--00000000000084e1dd0577d0d300
+Content-Type: text/plain; charset="UTF-8"
+
+Hello,
+
+I'm developing an application that runs in Dom0 and needs to read memory
+from a guest given a guest address (for instance, reading RIP from the
+guest CPU context and then reading the current instruction). I'm using
+xenforeignmemory_map() to map the guest memory, but this function takes the
+MFN of the guest address to read, not the address itself. Xen does not seem
+to have an API for doing the virtual address --> MFN conversion.
+
+I've figured out how to do this for PV guests: map the domain's meminfo
+struct and use the PFN for the guest address (i.e. address >>
+XC_PAGE_SHIFT) as an index into the P2M table.
+
+However, I am having trouble doing the same for HVM guests. Right now I am
+trying to follow the implementation of bg_hvm_va2mfn in
+xen/arch/x86/debug.c, but this function uses so many internal Xen functions
+it seems I would have to copy tons of code out from Xen, and I'm wondering
+if there's a better way. Is there some API I'm missing that lets me to do
+the vaddr --> MFN conversion for HVM guests? If not, what is the simplest
+way to do this conversion?
+
+Thanks,
+Spencer
+
+--00000000000084e1dd0577d0d300
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hello,<div><br></div><div>I&#39;m developing an applicatio=
+n that runs in Dom0 and needs to read memory from a guest given a guest add=
+ress (for instance, reading RIP from the guest CPU context and then reading=
+ the current instruction). I&#39;m using xenforeignmemory_map() to map the =
+guest memory, but this function takes the MFN of the guest address to read,=
+ not the address itself. Xen does not seem to have an API for doing the vir=
+tual address --&gt; MFN conversion.</div><div><br></div><div>I&#39;ve figur=
+ed out how to do this for PV guests: map the domain&#39;s meminfo struct an=
+d use the PFN for the guest address (i.e. address &gt;&gt; XC_PAGE_SHIFT) a=
+s an index into the P2M table.</div><div><br></div><div>However, I am havin=
+g trouble doing the same for HVM guests. Right now I am trying to follow th=
+e implementation of bg_hvm_va2mfn in xen/arch/x86/debug.c, but this functio=
+n uses so many internal Xen functions it seems I would have to copy tons of=
+ code out from Xen, and I&#39;m wondering if there&#39;s a better way. Is t=
+here some API I&#39;m missing that lets me to do the vaddr --&gt; MFN conve=
+rsion for HVM guests? If not, what is the simplest way to do this conversio=
+n?</div><div><br></div><div>Thanks,</div><div>Spencer</div></div>
+
+--00000000000084e1dd0577d0d300--
+
+
+--===============2895818799506498083==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2895818799506498083==--
