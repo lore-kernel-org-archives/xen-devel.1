@@ -1,17 +1,41 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: Xen optimization
-Date: Tue, 09 Oct 2018 18:46:17 +0200
-Message-ID: <995da0578f0953662536edabb5807fd76ca4d8ce.camel@suse.com>
-References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
+From: Jintack Lim <jintack@cs.columbia.edu>
+Subject: Xen network performance degradation with a net-front
+ commit
+Date: Tue, 9 Oct 2018 13:15:36 -0400
+Message-ID: <CAHyh4xhYKjhGBEqcDR_ukXHSDyuHxt8OjiAW5QJ-_k2Y-RRXsQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2332972835945156758=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=fq0i=mv=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1g9v9L-0001Ik-Qn
- for xen-devel@lists.xenproject.org; Tue, 09 Oct 2018 16:46:23 +0000
-In-Reply-To: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
+ <srs0=ozxy=mv=columbia.edu=jl4312@srs-us1.protection.inumbo.net>)
+ id 1g9vbp-0003sy-Vq
+ for xen-devel@lists.xenproject.org; Tue, 09 Oct 2018 17:15:50 +0000
+Received: from hazelnut (hazelnut.cc.columbia.edu [128.59.213.250])
+ by outprodmail01.cc.columbia.edu (8.14.4/8.14.4) with ESMTP id w99HCfQc055273
+ for <xen-devel@lists.xenproject.org>; Tue, 9 Oct 2018 13:15:47 -0400
+Received: from hazelnut (localhost.localdomain [127.0.0.1])
+ by hazelnut (Postfix) with ESMTP id BD54C6D
+ for <xen-devel@lists.xenproject.org>; Tue,  9 Oct 2018 13:15:47 -0400 (EDT)
+Received: from sendprodmail03.cc.columbia.edu (sendprodmail03.cc.columbia.edu
+ [128.59.72.15]) by hazelnut (Postfix) with ESMTP id 9FF5F6D
+ for <xen-devel@lists.xenproject.org>; Tue,  9 Oct 2018 13:15:47 -0400 (EDT)
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72])
+ by sendprodmail03.cc.columbia.edu (8.14.4/8.14.4) with ESMTP id w99HFk6W064228
+ (version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Tue, 9 Oct 2018 13:15:47 -0400
+Received: by mail-ed1-f72.google.com with SMTP id l51-v6so1638609edc.14
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Oct 2018 10:15:47 -0700 (PDT)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com.
+ [209.85.128.50])
+ by smtp.gmail.com with ESMTPSA id z33-v6sm6995028edb.85.2018.10.09.10.15.44
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 09 Oct 2018 10:15:44 -0700 (PDT)
+Received: by mail-wm1-f50.google.com with SMTP id i8-v6so2646923wmg.0
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Oct 2018 10:15:44 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,127 +44,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Milan Boberic <milanboberic94@gmail.com>, xen-devel@lists.xenproject.org
-Cc: Meng Xu <xumengpanda@gmail.com>, Julien Grall <julien.grall@arm.com>, sstabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>
+To: xen-devel@lists.xenproject.org
+Cc: malcolm.crossley@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2332972835945156758==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-Zo5eIRlni5GkYvZuqOcX"
-
-
---=-Zo5eIRlni5GkYvZuqOcX
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2018-10-09 at 12:59 +0200, Milan Boberic wrote:
-> Hi,
->
-Hi Milan,
-
-> I'm testing Xen Hypervisor 4.10 performance on UltraZed-EG board with
-> carrier card.
-> I created bare-metal application in Xilinx SDK.
-> In bm application I:
->            - start triple timer counter (ttc) which generates
-> interrupt every 1us
->            - turn on PS LED
->            - call function 100 times in for loop (function that sets
-> some values)
->            - turn off LED
->            - stop triple timer counter
->            - reset counter value
->=20
-Ok, I'm adding Stefano, Julien, and a couple of other people interested
-in RT/lowlat on Xen.
-
-> I ran this bare-metal application under Xen Hypervisor with following
-> settings:
->     - used null scheduler (sched=3Dnull) and vwfi=3Dnative
->     - bare-metal application have one vCPU and it is pinned for pCPU1
->     - domain which is PetaLinux also have one vCPU pinned for pCPU0,
-> other pCPUs are unused.
-> Under Xen Hypervisor I can see 3us jitter on oscilloscope.
->=20
-So, this is probably me not being familiar with Xen on Xilinx (and with
-Xen on ARM as a whole), but there's a few things I'm not sure I
-understand:
-- you say you use sched=3Dnull _and_ pinning? That should not be=20
-  necessary (although, it shouldn't hurt either)
-- "domain which is PetaLinux", is that dom0?
-
-IAC, if it's not terrible hard to run this kind of test, I'd say, try
-without 'vwfi=3Dnative', and also with another scheduler, like Credit,
-(but then do make sure you use pinning).
-
-> When I ran same bm application with JTAG from Xilinx SDK (without Xen
-> Hypervisor, directly on the board) there is no jitter.
->=20
-Here, when you say "without Xen", do you also mean without any
-baremetal OS at all?
-
-> I'm curios what causes this 3us jitter in Xen (which isn't small
-> jitter at all) and is there any way of decreasing it?
->=20
-Right. So, I'm not sure I've understood the test scenario either. But
-yeah, 3us jitter seems significant. Still, if we're comparing with
-bare-hw, without even an OS at all, I think it could have been expected
-for latency and jitter to be higher in the Xen case.
-
-Anyway, I am not sure anyone has done a kind of analysis that could
-help us identify accurately from where things like that come, and in
-what proportions.
-
-It would be really awesome to have something like that, so do go ahead
-if you feel like it. :-)
-
-I think tracing could help a little (although we don't have a super-
-sophisticated tracing infrastructure like Linux's perf and such), but
-sadly enough, that's still not available on ARM, I think. :-/
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-Zo5eIRlni5GkYvZuqOcX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlu821kACgkQFkJ4iaW4
-c+7fuQ//f5F5BlGuctLG1YXb9U24iODoY1yqgm2Rt4P+KkTmOzwwsj3TMFmo8JhR
-1LDf4ZHZOODrFNNkLalHvOKv5DKC5tEpplYT88QMzicyi/AI+VM8zE1kBJsFXgbC
-vkSIbojJ2MXPsfyZAwSmEGI8cU+Y+DlTbRPwsmAAX9nQXcWrbanbsGhU9xTE8e+h
-/AZ0ebQ7Ozs8rBkktqYQubqyNfYSYasBEyI6la45BT84gwaznBBhkwsgvVagcN6C
-fR2Aqz96M+vfwn0rFoXOCF4sB3EZxIx6M3MzrBiWasVgKai0omsz9oppe8QgLZhO
-DqHl5R8jgkWxLprpEh853rYL8xW5noR2sp4MB1tbswHbf5iZghzxeUkFnVh3v46M
-6Sh573aknGjUs3iDLVGZF8Tu0JWhDIiveIpFe9hi8mbLch+dYrGatEdS1oqcgx/f
-zaHzDJzLxGUADmMFXl4KTPVkxzQh8hfdv0nCD1K0VlewhSolIFEp4BNUvzD6vrE5
-Y1Y7ut2iQZZZt1OiaZFREkiwZtezIrxWN12MicbgZq/MhCSf2mmpz5XKQmlwbDBN
-MFUBNiG+YpoL5BK4upEdRVrwJKLFqssBdk88lMJQNpPtAzcWasxpRG4PSpHxcxp0
-lN8T/N2MxI3cSf5xBRl2Z/Uhpj/iancJtdzKmiTjB1lsxUH5aFU=
-=ggTq
------END PGP SIGNATURE-----
-
---=-Zo5eIRlni5GkYvZuqOcX--
-
-
-
---===============2332972835945156758==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2332972835945156758==--
+SGksCgpJJ20gb2JzZXJ2aW5nIGEgaHVnZSBwZXJmb3JtYW5jZSBkcm9wIGZvciBtZW1jYWNoZWQg
+d29ya2xvYWQgb24geDg2CndpdGggdGhlIGZvbGxvd2luZyBjb21taXQsIHdoaWNoIHdhcyBtZXJn
+ZWQgdG8gTGludXgga2VybmVsIDQuNS4KQmVmb3JlIHRoaXMgcGF0Y2gsIG1lbWNhY2hlZCBvdmVy
+aGVhZCBpcyBhYm91dCAxMTMlIChpLmUuIDEzJSBzbG93ZXIKdGhhbiBuYXRpdmUgTGludXgpIFsx
+XSwgYnV0IHdpdGggdGhpcyBwYXRjaCBpdCBiZWNvbWVzIDE3NSUuIEkKb2JzZXJ2ZWQgZXZlbiBi
+aWdnZXIgcGVyZm9ybWFuY2UgZHJvcCBvbiBvdGhlciBoYXJkd2FyZSBwbGF0Zm9ybXMuCgpjb21t
+aXQgN2QwMTA1YjUzMzRiOTcyMmI3ZDMzYWNhZDYxMzA5NmRmY2YzMzMwZQpBdXRob3I6IE1hbGNv
+bG0gQ3Jvc3NsZXkgPG1hbGNvbG0uY3Jvc3NsZXlAY2l0cml4LmNvbT4KRGF0ZTogICBUdWUgSmFu
+IDI2IDE3OjEyOjQ0IDIwMTYgKzAwMDAKCiAgICB4ZW4tbmV0ZnJvbnQ6IHJlcXVlc3QgVHggcmVz
+cG9uc2UgZXZlbnRzIG1vcmUgb2Z0ZW4KCkknbSBjb21wYXJpbmcgcGVyZm9ybWFuY2UgYmV0d2Vl
+biBMaW51eCBrZXJuZWwgNC4wIGFuZCA0LjE1IGluIERvbVUsCmFuZCBJJ20gc2VlaW5nIHRoaXMg
+YmVoYXZpb3IgYm90aCB3aXRoIFhlbiA0LjUuMCBhbmQgWGVuIDQuMTAuMS4gSSdtCnVzaW5nIDR2
+Y3B1cyBmb3IgRG9tMCBhbmQgcHZodm0gRG9tVS4KCkkgd29uZGVyIGluIHdoYXQgc2NlbmFyaW8g
+dGhpcyBwYXRjaCBoZWxwcyB0byBpbXByb3ZlIHBlcmZvcm1hbmNlIGFuZApkb2Vzbid0PyBJIGFs
+c28gd29uZGVyIGlmIG90aGVycyBvYnNlcnZlZCBhIHNpbWlsYXIgYmVoYXZpb3I/CgpUaGFua3Ms
+CkppbnRhY2sKClsxXSBodHRwOi8vd3d3LmNzLmNvbHVtYmlhLmVkdS9+Y2RhbGwvcHVicy9pc2Nh
+MjAxNi1kYWxsLnBkZgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
