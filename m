@@ -1,21 +1,11 @@
-From: Michal Hocko <mhocko@kernel.org>
-Subject: Re: [PATCH v5 2/2] mm/page_alloc: remove software
- prefetching in __free_pages_core
-Date: Tue, 9 Oct 2018 11:30:37 +0200
-Message-ID: <20181009093037.GI8528__14551.4954849661$1539077367$gmane$org@dhcp22.suse.cz>
-References: <1538727006-5727-1-git-send-email-arunks@codeaurora.org>
- <1538727006-5727-2-git-send-email-arunks@codeaurora.org>
+From: Xin Li <talons.lee@gmail.com>
+Subject: [PATCH v5 1/3] xen/xsm: remove unnecessary #define
+Date: Tue,  9 Oct 2018 17:33:18 +0800
+Message-ID: <20181009093320.24003-1-xin.li@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=mbow=mv=kernel.org=mhocko@srs-us1.protection.inumbo.net>)
- id 1g9oLf-0004ef-Me
- for xen-devel@lists.xenproject.org; Tue, 09 Oct 2018 09:30:39 +0000
-Content-Disposition: inline
-In-Reply-To: <1538727006-5727-2-git-send-email-arunks@codeaurora.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,31 +14,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Arun KS <arunks@codeaurora.org>
-Cc: vatsa@codeaurora.org, linux-mm@kvack.org, getarunks@gmail.com, kys@microsoft.com, boris.ostrovsky@oracle.com, sthemmin@microsoft.com, xen-devel@lists.xenproject.org, haiyangz@microsoft.com, yasu.isimatu@gmail.com, dan.j.williams@intel.com, akpm@linux-foundation.org, vbabka@suse.cz, osalvador@suse.de, jgross@suse.com, aaron.lu@intel.com, malat@debian.org, gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org, vinmenon@codeaurora.org, jrdr.linux@gmail.com, devel@linuxdriverproject.org, iamjoonsoo.kim@lge.com, mgorman@techsingularity.net, kirill.shutemov@linux.intel.com
+To: xen-devel@lists.xen.org
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Xin Li <xin.li@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ming Lu <ming.lu@citrix.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpIDA1LTEwLTE4IDEzOjQwOjA2LCBBcnVuIEtTIHdyb3RlOgo+IFRoZXkgbm90IG9ubHkg
-aW5jcmVhc2UgdGhlIGNvZGUgZm9vdHByaW50LCB0aGV5IGFjdHVhbGx5IG1ha2UgdGhpbmdzCj4g
-c2xvd2VyIHJhdGhlciB0aGFuIGZhc3Rlci4gUmVtb3ZlIHRoZW0gYXMgY29udGVtcG9yYXJ5IGhh
-cmR3YXJlIGRvZXNuJ3QKPiBuZWVkIGFueSBoaW50LgoKSSBhZ3JlZSB3aXRoIHRoZSBjaGFuZ2Ug
-YnV0IGl0IGlzIG11Y2ggYmV0dGVyIHRvIGFkZCBzb21lIG51bWJlcnMKd2hlbmV2ZXIgYXJndWlu
-ZyBhYm91dCBwZXJmb3JtYW5jZSBpbXBhY3QuCgo+IAo+IFN1Z2dlc3RlZC1ieTogRGFuIFdpbGxp
-YW1zIDxkYW4uai53aWxsaWFtc0BpbnRlbC5jb20+Cj4gU2lnbmVkLW9mZi1ieTogQXJ1biBLUyA8
-YXJ1bmtzQGNvZGVhdXJvcmEub3JnPgo+IC0tLQo+ICBtbS9wYWdlX2FsbG9jLmMgfCA2ICstLS0t
-LQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDUgZGVsZXRpb25zKC0pCj4gCj4g
-ZGlmZiAtLWdpdCBhL21tL3BhZ2VfYWxsb2MuYyBiL21tL3BhZ2VfYWxsb2MuYwo+IGluZGV4IDdh
-YjUyNzQuLjkwZGI0MzEgMTAwNjQ0Cj4gLS0tIGEvbW0vcGFnZV9hbGxvYy5jCj4gKysrIGIvbW0v
-cGFnZV9hbGxvYy5jCj4gQEAgLTEyNTgsMTQgKzEyNTgsMTAgQEAgdm9pZCBfX2ZyZWVfcGFnZXNf
-Y29yZShzdHJ1Y3QgcGFnZSAqcGFnZSwgdW5zaWduZWQgaW50IG9yZGVyKQo+ICAJc3RydWN0IHBh
-Z2UgKnAgPSBwYWdlOwo+ICAJdW5zaWduZWQgaW50IGxvb3A7Cj4gIAo+IC0JcHJlZmV0Y2h3KHAp
-Owo+IC0JZm9yIChsb29wID0gMDsgbG9vcCA8IChucl9wYWdlcyAtIDEpOyBsb29wKyssIHArKykg
-ewo+IC0JCXByZWZldGNodyhwICsgMSk7Cj4gKwlmb3IgKGxvb3AgPSAwOyBsb29wIDwgbnJfcGFn
-ZXMgOyBsb29wKyssIHArKykgewo+ICAJCV9fQ2xlYXJQYWdlUmVzZXJ2ZWQocCk7Cj4gIAkJc2V0
-X3BhZ2VfY291bnQocCwgMCk7Cj4gIAl9Cj4gLQlfX0NsZWFyUGFnZVJlc2VydmVkKHApOwo+IC0J
-c2V0X3BhZ2VfY291bnQocCwgMCk7Cj4gIAo+ICAJcGFnZV96b25lKHBhZ2UpLT5tYW5hZ2VkX3Bh
-Z2VzICs9IG5yX3BhZ2VzOwo+ICAJc2V0X3BhZ2VfcmVmY291bnRlZChwYWdlKTsKPiAtLSAKPiAx
-LjkuMQo+IAoKLS0gCk1pY2hhbCBIb2NrbwpTVVNFIExhYnMKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+dGhpcyAjZGVmaW5lIGlzIHVubmVjZXNzYXJ5IHNpbmNlIFhTTV9JTkxJTkUgaXMgcmVkZWZpbmVk
+IGluCnhzbS9kdW1teS5oLCBpdCdzIGEgcmlzayBvZiBidWlsZCBicmVha2FnZSwgc28gcmVtb3Zl
+IGl0LgoKU2lnbmVkLW9mZi1ieTogWGluIExpIDx4aW4ubGlAY2l0cml4LmNvbT4KUmV2aWV3ZWQt
+Ynk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCi0tLQpDQzogRGFuaWVsIERlIEdy
+YWFmIDxkZ2RlZ3JhQHR5Y2hvLm5zYS5nb3Y+CkNDOiBHZW9yZ2UgRHVubGFwIDxHZW9yZ2UuRHVu
+bGFwQGV1LmNpdHJpeC5jb20+CkNDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+CkND
+OiBLb25yYWQgUnplc3p1dGVrIFdpbGsgPGtvbnJhZC53aWxrQG9yYWNsZS5jb20+CkNDOiBTdGVm
+YW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CkNDOiBUaW0gRGVlZ2FuIDx0
+aW1AeGVuLm9yZz4KQ0M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CkNDOiBTZXJnZXkg
+RHlhc2xpIDxzZXJnZXkuZHlhc2xpQGNpdHJpeC5jb20+CkNDOiBBbmRyZXcgQ29vcGVyIDxhbmRy
+ZXcuY29vcGVyM0BjaXRyaXguY29tPgpDQzogTWluZyBMdSA8bWluZy5sdUBjaXRyaXguY29tPgoK
+djU6CjEuIG1vdmUgdGhlIHJlbW92YWwgb2YgI2RlZmluZSB0byB0aGlzIG5ldyBwYXRjaC4KMi4g
+Zml4IHdyb25nIGdpdCBhdXRob3IKCi0tLQogeGVuL3hzbS9kdW1teS5jIHwgMSAtCiAxIGZpbGUg
+Y2hhbmdlZCwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL3hlbi94c20vZHVtbXkuYyBiL3hl
+bi94c20vZHVtbXkuYwppbmRleCAzMjkwZDA0NTI3Li4wNmE2NzRmYWQwIDEwMDY0NAotLS0gYS94
+ZW4veHNtL2R1bW15LmMKKysrIGIveGVuL3hzbS9kdW1teS5jCkBAIC0xMSw3ICsxMSw2IEBACiAg
+Ki8KIAogI2RlZmluZSBYU01fTk9fV1JBUFBFUlMKLSNkZWZpbmUgWFNNX0lOTElORSAvKiAqLwog
+I2luY2x1ZGUgPHhzbS9kdW1teS5oPgogCiBzdHJ1Y3QgeHNtX29wZXJhdGlvbnMgZHVtbXlfeHNt
+X29wczsKLS0gCjIuMTguMAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
