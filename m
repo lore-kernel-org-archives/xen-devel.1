@@ -1,13 +1,15 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/3] xen/xsm: remove unnecessary #define
-Date: Tue, 09 Oct 2018 00:59:00 -0600
-Message-ID: <5BBC51B402000078001EFD3C@prv1-mh.provo.novell.com>
-References: <20181009002831.22678-1-xin.li@citrix.com>
+Subject: Re: [RFC 16/16] xen/arm: Track page accessed between
+ batch of Set/Way operations
+Date: Tue, 09 Oct 2018 01:04:01 -0600
+Message-ID: <5BBC52E102000078001EFD56@prv1-mh.provo.novell.com>
+References: <20181008183352.16291-1-julien.grall@arm.com>
+ <20181008183352.16291-17-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181009002831.22678-1-xin.li@citrix.com>
+In-Reply-To: <20181008183352.16291-17-julien.grall@arm.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -17,27 +19,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xin Li <talons.lee@gmail.com>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, xen-devel@lists.xen.org, Xin Li <xin.li@citrix.com>, Ming Lu <ming.lu@citrix.com>, Daniel de Graaf <dgdegra@tycho.nsa.gov>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, andre.przywara@linaro.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA5LjEwLjE4IGF0IDAyOjI4LCA8dGFsb25zLmxlZUBnbWFpbC5jb20+IHdyb3RlOgo+
-IHRoaXMgI2RlZmluZSBpcyB1bm5lY2Vzc2FyeSBzaW5jZSBYU01fSU5MSU5FIGlzIHJlZGVmaW5l
-ZCBpbgo+IHhzbS9kdW1teS5oLCBpdCdzIGEgcmlzayBvZiBidWlsZCBicmVha2FnZSwgc28gcmVt
-b3ZlIGl0Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IFhpbiBMaSA8eGluLmxpQGNpdHJpeC5jb20+Cj4g
-Cj4gLS0tCj4gQ0M6IERhbmllbCBEZSBHcmFhZiA8ZGdkZWdyYUB0eWNoby5uc2EuZ292Pgo+IEND
-OiBHZW9yZ2UgRHVubGFwIDxHZW9yZ2UuRHVubGFwQGV1LmNpdHJpeC5jb20+Cj4gQ0M6IEphbiBC
-ZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT4KPiBDQzogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxr
-b25yYWQud2lsa0BvcmFjbGUuY29tPgo+IENDOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxs
-aW5pQGtlcm5lbC5vcmc+Cj4gQ0M6IFRpbSBEZWVnYW4gPHRpbUB4ZW4ub3JnPgo+IENDOiBXZWkg
-TGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+IENDOiBTZXJnZXkgRHlhc2xpIDxzZXJnZXkuZHlh
-c2xpQGNpdHJpeC5jb20+Cj4gQ0M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJp
-eC5jb20+Cj4gQ0M6IE1pbmcgTHUgPG1pbmcubHVAY2l0cml4LmNvbT4KPiAKPiB2NToKPiAxLiBt
-b3ZlIHRoZSByZW1vdmFsIG9mICNkZWZpbmUgdG8gdGhpcyBuZXcgcGF0Y2guCj4gMi4gZml4IHdy
-b25nIGdpdCBhdXRob3IKCk9oLCBhbmQgcGxlYXNlLCB3aGVuIHlvdSBzZW5kIG5ldyB2ZXJzaW9u
-cywgYWRkIHByZXZpb3VzbHkKcHJvdmlkZWQgKG9mIGNvdXJzZSB1bmxlc3MgdGhleSd2ZSBiZWVu
-IGludmFsaWRhdGVkIG1lYW53aGlsZSkKdGFncywgdG8gYWlkIGJvdGggY29tbWl0dGVycyBhbmQg
-ZnV0dXJlIHJlYWRlcnMvcmV2aWV3ZXJzLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDA4LjEwLjE4IGF0IDIwOjMzLCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+
+IEF0IHRoZSBtb21lbnQsIHRoZSBpbXBsZW1lbnRhdGlvbiBvZiBTZXQvV2F5IG9wZXJhdGlvbnMg
+d2lsbCBnbyB0aHJvdWdoCj4gYWxsIHRoZSBlbnRyaWVzIG9mIHRoZSBndWVzdCBQMk0gYW5kIGZs
+dXNoIHRoZW0uIEhvd2V2ZXIsIHRoaXMgaXMgdmVyeQo+IGV4cGVuc2l2ZSBhbmQgbWF5IHJlbmRl
+ciB1bnVzYWJsZSBhIGd1ZXN0IE9TIHVzaW5nIHRoZW0uCj4gCj4gRm9yIGluc3RhbmNlLCBMaW51
+eCAzMi1iaXQgd2lsbCB1c2UgU2V0L1dheSBvcGVyYXRpb25zIGR1cmluZyBzZWNvbmRhcnkKPiBD
+UFUgYnJpbmctdXAuIEFzIHRoZSBpbXBsZW1lbnRhdGlvbiBpcyByZWFsbHkgZXhwZW5zaXZlLCBp
+dCBtYXkgYmUgcG9zc2libGUKPiB0byBoaXQgdGhlIENQVSBicmluZy11cCB0aW1lb3V0Lgo+IAo+
+IFRvIGxpbWl0IHRoZSBTZXQvV2F5IGltcGFjdCwgd2UgdHJhY2sgd2hhdCBwYWdlcyBoYXMgYmVl
+biBvZiB0aGUgZ3Vlc3QKPiBoYXMgYmVlbiBhY2Nlc3NlZCBiZXR3ZWVuIGJhdGNoIG9mIFNldC9X
+YXkgb3BlcmF0aW9ucy4gVGhpcyBpcyBkb25lCj4gdXNpbmcgYml0WzBdIChha2EgdmFsaWQgYml0
+KSBvZiB0aGUgUDJNIGVudHJ5Lgo+IAo+IFRoaXMgcGF0Y2ggYWRkcyBhIG5ldyBwZXItYXJjaCBo
+ZWxwZXIgaXMgaW50cm9kdWNlZCB0byBwZXJmb3JtIGFjdGlvbnMganVzdAo+IGJlZm9yZSB0aGUg
+Z3Vlc3QgaXMgZmlyc3QgdW5wYXVzZWQuIFRoaXMgd2lsbCBiZSB1c2VkIHRvIGludmFsaWRhdGUg
+dGhlCj4gUDJNIHRvIHRyYWNrIGFjY2VzcyBmcm9tIHRoZSBzdGFydCBvZiB0aGUgZ3Vlc3QuCgpX
+aGlsZSBJJ20gbm90IG9wcG9zZWQgdG8gdGhlIG5ldyBhcmNoIGhvb2ssIHdoeSBkb24ndCB5b3Ug
+Y3JlYXRlIHRoZQpwMm0gZW50cmllcyBpbiB0aGVpciBpbnRlbmRlZCBzdGF0ZSByaWdodCBhd2F5
+PyBBdCB0aGUgdmVyeSBsZWFzdCB0aGlzCndvdWxkIGhhdmUgdGhlIGJlbmVmaXQgb2YgY29uZmlu
+aW5nIHRoZSBlbnRpcmUgY2hhbmdlIHRvIEFybSBjb2RlLgoKSmFuCgoKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
