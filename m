@@ -1,25 +1,16 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [RFC PATCH 2/2] xen/arm: Add MESON UART driver for
- Amlogic S905 SoC
-Date: Tue, 9 Oct 2018 11:25:57 +0100
-Message-ID: <8f61a00d-b5e7-6b83-e6e4-1bf2473f4576@arm.com>
-References: <1533661673-14607-1-git-send-email-amittomer25@gmail.com>
- <1533661673-14607-3-git-send-email-amittomer25@gmail.com>
- <82dda81f-14e1-612f-fe94-5db78c1bd520@arm.com>
- <CABHD4K8zq_yfX4v130tiZMU-Mm4xhCQsuVEYG47U8kdDJ+jkPg@mail.gmail.com>
- <5f06b4fa-a026-8d46-de17-6887db429ae5@arm.com>
- <CABHD4K-zACRqA2mRNnALY3s5ZrReMYe2g67WLf9rA_U8q=wfNA@mail.gmail.com>
+From: Roger Pau Monne <roger.pau@citrix.com>
+Subject: [PATCH] xen/pvh: increase early stack size
+Date: Tue, 9 Oct 2018 12:32:37 +0200
+Message-ID: <20181009103237.52527-1-roger.pau__60.6789406903729$1539081139$gmane$org@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=iduh=mv=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1g9pDG-00020F-5V
- for xen-devel@lists.xenproject.org; Tue, 09 Oct 2018 10:26:02 +0000
-In-Reply-To: <CABHD4K-zACRqA2mRNnALY3s5ZrReMYe2g67WLf9rA_U8q=wfNA@mail.gmail.com>
-Content-Language: en-US
+ <srs0=av44=mv=citrix.com=prvs=81391bf32=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1g9pKH-0002qJ-QI
+ for xen-devel@lists.xenproject.org; Tue, 09 Oct 2018 10:33:17 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,30 +19,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Amit Tomer <amittomer25@gmail.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, wei.liu2@citrix.com, konrad.wilk@oracle.com, George Dunlap <George.Dunlap@eu.citrix.com>, ian.jackson@eu.citrix.com, tim@xen.org, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andre Przywara <andre.przywara@arm.com>, xen-devel@lists.xenproject.org
+To: linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAwNC8xMC8yMDE4IDA4OjExLCBBbWl0IFRvbWVyIHdyb3RlOgo+Pj4+PiArICAgIHJl
-ZyA9IG1lc29uX3M5MDVfcmVhZCh1YXJ0LCBVQVJUX0NPTlRST0wpOwo+Pj4+PiArICAgIHJlZyAm
-PSB+KFVBUlRfUlhfUlNUIHwgVUFSVF9UWF9SU1QgfCBVQVJUX0NMRUFSX0VSUik7Cj4+Pj4KPj4+
-Pgo+Pj4+IEkgYW0gbm90IHN1cmUgd2h5IHlvdSBhcmUgY2xlYXJpbmcgdGhvc2UgYml0cy4gQUZB
-SVUsIGluaXRfcHJlaXJxIHdpbGwgcmVzZXQKPj4+PiB0aGUgc2VyaWFscywgc28geW91IHdhbnQg
-dG8gc2V0IHRob3NlcyBiaXRzLiBUaGlzIHNlZW1zIHRvIGJlIGNvbmZpcm1lZCBieQo+Pj4+IExp
-bnV4IGluIG1lc29uX3VhcnRfcmVzZXQuCj4+Pgo+Pj4gSWRlYSBoZXJlIGlzIHRvIHNldCB0aGVz
-ZSBiaXRzIHRvIHRoZWlyIGRlZmF1bHQgdmFsdWVzKHdoaWNoIGlzIDAgKSBhbmQgaWYgeW91Cj4+
-PiBsb29rIGF0IG90aGVyIGRyaXZlcnMgaW4gWEVOLCBpdCBzZWVtcyB0byBiZSBkb25lIHNhbWUg
-dGhpbmcoY2xlYXIKPj4+IHRob3NlIGJpdHMpIHdpdGggdGhlbS4KPj4KPj4gQXJlIHlvdSBzdXJl
-IGFib3V0IHRoaXM/IFJYX1JTVCBhbmQgVFhfUlNUIGFyZSBiaXQgdG8gcmVzZXQgdGhlCj4+IHRy
-YW5zbWlzc2lvbiBhbmQgcmVjZWl2ZSBwYXRoLiBMb29raW5nIGF0IGEgY291cGxlIG9mIGRpZmZl
-cmVudCBkcml2ZXJzCj4+IChjYWNoZS11YXJ0LmMgYW5kIG12ZWJ1LXVhcnQuYyksIHRob3NlIDIg
-Yml0cyBhcmUgc2V0IGFuZCBJIHN1c3BlY3QgYmUKPj4gY2xlYXJlZCBieSB0aGUgaGFyZHdhcmUg
-b25jZSByZXNldC4KPiAKPiBJdCdzIGJpdCBjb25mdXNpbmcgdG8gbWUsIGV2ZW50dWFsbHkgTGlu
-dXggZHJpdmVyIHNlZW1zIHRvIGNsZWFyIHRob3NlIGJpdHMKCkJ1dCBpdCBzZXRzIHRoZW0gcmln
-aHQgYmVmb3JlIGhhbmQuIFdoYXQgZG9lcyB0aGUgc3BlYyBzYXlzIGFib3V0IHRob3NlIApiaXRz
-PwoKT3ZlcmFsbCwgSSBmZWVscyB0byBtZSBpdCBpcyBiZXR0ZXIgdG8gbWltaWMgdGhlIExpbnV4
-IGRyaXZlciBhcyBJIGFtIApxdWl0ZSBjb25maWRlbnQgdGhhdCB0aGUgZHJpdmVyIGlzIGRvaW5n
-IHRoZSByaWdodCB0aGluZy4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+V2hpbGUgYm9vdGluZyBvbiBhbiBBTUQgRVBZQyBib3ggdGhlIHN0YWNrIGNhbmFyeSB3b3VsZCBk
+ZXRlY3Qgc3RhY2sKb3ZlcmZsb3dzIHdoZW4gdXNpbmcgdGhlIGN1cnJlbnQgUFZIIGVhcmx5IHN0
+YWNrIHNpemUgKDI1NikuIFN3aXRjaCB0bwp1c2luZyB0aGUgdmFsdWUgZGVmaW5lZCBieSBCT09U
+X1NUQUNLX1NJWkUsIHdoaWNoIHByZXZlbnRzIHRoZSBzdGFjawpvdmVyZmxvdy4KClNpZ25lZC1v
+ZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgotLS0KQ2M6IEJv
+cmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+CkNjOiBKdWVyZ2VuIEdy
+b3NzIDxqZ3Jvc3NAc3VzZS5jb20+CkNjOiB4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+LS0tCiBhcmNoL3g4Ni94ZW4veGVuLXB2aC5TIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5z
+ZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvYXJjaC94ODYveGVuL3hlbi1w
+dmguUyBiL2FyY2gveDg2L3hlbi94ZW4tcHZoLlMKaW5kZXggY2EyZDNiMmJmMmFmLi41ODcyMmEw
+NTJmOWMgMTAwNjQ0Ci0tLSBhL2FyY2gveDg2L3hlbi94ZW4tcHZoLlMKKysrIGIvYXJjaC94ODYv
+eGVuL3hlbi1wdmguUwpAQCAtMTgxLDcgKzE4MSw3IEBAIGNhbmFyeToKIAkuZmlsbCA0OCwgMSwg
+MAogCiBlYXJseV9zdGFjazoKLQkuZmlsbCAyNTYsIDEsIDAKKwkuZmlsbCBCT09UX1NUQUNLX1NJ
+WkUsIDEsIDAKIGVhcmx5X3N0YWNrX2VuZDoKIAogCUVMRk5PVEUoWGVuLCBYRU5fRUxGTk9URV9Q
+SFlTMzJfRU5UUlksCi0tIAoyLjE5LjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
