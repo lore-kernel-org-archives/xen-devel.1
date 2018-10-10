@@ -1,18 +1,22 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v3 2/6] xen/arm: zynqmp: Forward plaform
- specific firmware calls
-Date: Wed, 10 Oct 2018 14:50:12 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1810101445290.436@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1808101435481.32304@sstabellini-ThinkPad-X260>
- <1533945710-15159-2-git-send-email-sstabellini@kernel.org>
- <5d3f6074-52eb-5f09-14d7-c3f601f53ec0@arm.com>
- <alpine.DEB.2.10.1808231641190.14449@sstabellini-ThinkPad-X260>
- <10a1783c-2e9f-8cd1-ade0-11be77df2363@arm.com>
+From: Spencer Michaels <spmichaels.work@gmail.com>
+Subject: Re: Mapping HVM guest memory from Dom0
+Date: Wed, 10 Oct 2018 18:08:36 -0400
+Message-ID: <CAAd-cWPjq6fBs0iuar+oznaphSCa2LUyD=8MJfjyPjCTL=OVrQ@mail.gmail.com>
+References: <CAAd-cWOSqZN9LYCRxEYjgCyHq24PFsZqOFE1T_PPnq3HjDGpaA@mail.gmail.com>
+ <857c04f2-345f-b9ea-44ce-6e9d0aeb8248@citrix.com>
+ <CAAd-cWMrRUrS7VzGN=3B9ekm9Gqx5aYZgayWdemV=-do1F8O9w@mail.gmail.com>
+ <CABfawhkmNaNesdxcOOH=58f8GH1sn8ZyJ0TU8h+=9WhK0DCFtg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5613943635229677503=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <10a1783c-2e9f-8cd1-ade0-11be77df2363@arm.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=oawu=mw=gmail.com=spmichaels.work@srs-us1.protection.inumbo.net>)
+ id 1gAMew-0008NP-MI
+ for xen-devel@lists.xenproject.org; Wed, 10 Oct 2018 22:08:50 +0000
+Received: by mail-io1-xd2b.google.com with SMTP id z16-v6so5120530iol.6
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Oct 2018 15:08:48 -0700 (PDT)
+In-Reply-To: <CABfawhkmNaNesdxcOOH=58f8GH1sn8ZyJ0TU8h+=9WhK0DCFtg@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,62 +25,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: edgar.iglesias@xilinx.com, Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
+To: tamas.k.lengyel@gmail.com
+Cc: andrew.cooper3@citrix.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCAyNCBBdWcgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+ID4gPiA+ICsKPiA+ID4g
-PiArYm9vbCB6eW5xbXBfZWVtaShzdHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncykKPiA+ID4gPiAr
-ewo+ID4gPiA+ICsgICAgcmV0dXJuIGZhbHNlOwo+ID4gPiA+ICt9Cj4gPiA+ID4gKwo+ID4gPiA+
-ICsvKgo+ID4gPiA+ICsgKiBMb2NhbCB2YXJpYWJsZXM6Cj4gPiA+ID4gKyAqIG1vZGU6IEMKPiA+
-ID4gPiArICogYy1maWxlLXN0eWxlOiAiQlNEIgo+ID4gPiA+ICsgKiBjLWJhc2ljLW9mZnNldDog
-NAo+ID4gPiA+ICsgKiBpbmRlbnQtdGFicy1tb2RlOiBuaWwKPiA+ID4gPiArICogRW5kOgo+ID4g
-PiA+ICsgKi8KPiA+ID4gPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3BsYXRmb3Jtcy94aWxp
-bngtenlucW1wLmMKPiA+ID4gPiBiL3hlbi9hcmNoL2FybS9wbGF0Zm9ybXMveGlsaW54LXp5bnFt
-cC5jCj4gPiA+ID4gaW5kZXggZDhjZWRlZC4uYzMxOGNmNSAxMDA2NDQKPiA+ID4gPiAtLS0gYS94
-ZW4vYXJjaC9hcm0vcGxhdGZvcm1zL3hpbGlueC16eW5xbXAuYwo+ID4gPiA+ICsrKyBiL3hlbi9h
-cmNoL2FybS9wbGF0Zm9ybXMveGlsaW54LXp5bnFtcC5jCj4gPiA+ID4gQEAgLTE4LDYgKzE4LDgg
-QEAKPiA+ID4gPiAgICAgKi8KPiA+ID4gPiAgICAgICNpbmNsdWRlIDxhc20vcGxhdGZvcm0uaD4K
-PiA+ID4gPiArI2luY2x1ZGUgPGFzbS9wbGF0Zm9ybXMveGlsaW54LXp5bnFtcC1lZW1pLmg+Cj4g
-PiA+ID4gKyNpbmNsdWRlIDxhc20vc21jY2MuaD4KPiA+ID4gPiAgICAgIHN0YXRpYyBjb25zdCBj
-aGFyICogY29uc3QgenlucW1wX2R0X2NvbXBhdFtdIF9faW5pdGNvbnN0ID0KPiA+ID4gPiAgICB7
-Cj4gPiA+ID4gQEAgLTMyLDggKzM0LDIwIEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHRfZGV2aWNl
-X21hdGNoCj4gPiA+ID4genlucW1wX2JsYWNrbGlzdF9kZXZbXSBfX2luaXRjb25zdCA9Cj4gPiA+
-ID4gICAgICAgIHsgLyogc2VudGluZWwgKi8gfSwKPiA+ID4gPiAgICB9Owo+ID4gPiA+ICAgICtz
-dGF0aWMgYm9vbCB6eW5xbXBfc21jKHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzKQo+ID4gPiA+
-ICt7Cj4gPiA+ID4gKyAgICBpZiAoICFpc182NGJpdF9kb21haW4oY3VycmVudC0+ZG9tYWluKSAp
-Cj4gPiA+ID4gKyAgICAgICAgcmV0dXJuIGZhbHNlOwo+ID4gPiA+ICsgICAgLyogT25seSBzdXBw
-b3J0IHBsYXRmb3JtcyB3aXRoIFNNQ0NDID49IDEuMSAqLwo+ID4gPiA+ICsgICAgaWYgKCBzbWNj
-Y192ZXIgPCBTTUNDQ19WRVJTSU9OKDEsIDEpICkKPiA+ID4gPiArICAgICAgICByZXR1cm4gZmFs
-c2U7Cj4gPiA+IAo+ID4gPiBEbyB5b3UgcmVhbGx5IG5lZWQgdG8gY2FsbCB0aGlzIGF0IGV2ZXJ5
-IFNNQyBjYWxsPwo+ID4gCj4gPiBEbyB5b3UgbWVhbiB0aGF0IHdlIGNvdWxkIHNraXAgdGhlIGNo
-ZWNrcz8gV2UgY291bGQgZG8gdGhlIGNoZWNrcyBhdAo+ID4gaW5pdCB0aW1lLCBidXQgdGhlbiB3
-ZSB3b3VsZCBoYXZlIHRvIG1lbW9yaXplIHRoZSByZXN1bHQgZm9yIGVhY2gKPiA+IGRvbWFpbi4g
-Tm90IHN1cmUgaXQgaXMgd29ydGggaXQuCj4gCj4gSSB3YXMgbW9zdGx5IHNwZWFraW5nIGFib3V0
-IHNtY2NjX3Zlci4gSXQgZmVlbHMgc3RyYW5nZSB0byBhbHdheXMgY2hlY2sgdGhlCj4gU01DQ0Mg
-dmVyc2lvbiB3aGVuIGNhbGxpbmcgU01DIGFzIHRoZSB2YWx1ZSB3aWxsIG5ldmVyIGNoYW5nZS4K
-PiAKPiBJIGNhbiBzZWUgdHdvIHNvbHV0aW9ucyBoZXJlOgo+IAkxKSBQcm92aWRlIGEgZGlmZmVy
-ZW50IC5zbWMgY2FsbGJhY2sgZGVwZW5kaW5nIG9uIHRoZSBTTUNDQyB2ZXJzaW9uCj4gCTIpIFBy
-b3ZpZGUgd3JhcHBlcnMgdG8gZWl0aGVyIGNhbGwgU01DQ3YxLjEgb3IgU01DQ0N2MS4wCgpJIHRo
-aW5rIHdlIGNhbiBhc3N1bWUgU01DQ0N2MS4xLCB3ZSBkb24ndCBuZWVkIHRvIHN1cHBvcnQgU01D
-Q0N2MS4wIHdpdGgKRUVNSS4gSSdsbCByZW1vdmUgdGhlIGNoZWNrLgoKCj4gPiA+ID4gKwo+ID4g
-PiA+ICsgICAgcmV0dXJuICB6eW5xbXBfZWVtaShyZWdzKTsKPiA+ID4gPiArfQo+ID4gPiA+ICsK
-PiA+ID4gPiAgICBQTEFURk9STV9TVEFSVCh4aWxpbnhfenlucW1wLCAiWGlsaW54IFp5bnFNUCIp
-Cj4gPiA+ID4gICAgICAgIC5jb21wYXRpYmxlID0genlucW1wX2R0X2NvbXBhdCwKPiA+ID4gPiAr
-ICAgIC5zbWMgPSB6eW5xbXBfc21jLAo+ID4gPiA+ICAgICAgICAuYmxhY2tsaXN0X2RldiA9IHp5
-bnFtcF9ibGFja2xpc3RfZGV2LAo+ID4gPiA+ICAgIFBMQVRGT1JNX0VORAo+ID4gPiA+ICAgIGRp
-ZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20tYXJtL3BsYXRmb3Jtcy94aWxpbngtenlucW1wLWVl
-bWkuaAo+ID4gPiA+IGIveGVuL2luY2x1ZGUvYXNtLWFybS9wbGF0Zm9ybXMveGlsaW54LXp5bnFt
-cC1lZW1pLmgKPiA+ID4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+ID4gPiA+IGluZGV4IDAwMDAw
-MDAuLjY2MzBkYzgKPiA+ID4gPiAtLS0gL2Rldi9udWxsCj4gPiA+ID4gKysrIGIveGVuL2luY2x1
-ZGUvYXNtLWFybS9wbGF0Zm9ybXMveGlsaW54LXp5bnFtcC1lZW1pLmgKPiA+ID4gPiBAQCAtMCww
-ICsxLDMgQEAKPiA+ID4gCj4gPiA+IE1pc3NpbmcgY29weXJpZ2h0IGhlYWRlcnMgYW5kIGd1YXJk
-Lgo+ID4gCj4gPiBUaGUgZ3VhcmQgaXMgbWlzc2luZywgSSdsbCBhZGQgaXQuIFJlZ2FyZGluZyB0
-aGUgY29weXJpZ2h0LCB0aGlzIGlzIGFuCj4gPiBoZWFkZXIgZmlsZSwgbm9uZSBvZiB0aGUgb3Ro
-ZXJzIGluIHRoZSBzYW1lIGRpcmVjdG9yeSBoYXZlIHRoZSBjb3B5cmlnaHQKPiA+IGhlYWRlciAt
-LSBhcmUgeW91IHN1cmUgd2UgbmVlZCBpdD8KPiAKPiBUZWNobmljYWxseSBhbnkgZmlsZSByZXF1
-aXJlIHRoZSBjb3B5cmlnaHQuIFRoaXMgd2FzIG5vdCBmb2xsb3dlZCBpbiB0aGUgdGhlCj4gaGVh
-ZGVyIHNpZGUgdW50aWwgcmVjZW50bHkuCgpJJ2xsIGFkZCB0aGUgY29weXJpZ2h0IG5vdGljZQoK
+--===============5613943635229677503==
+Content-Type: multipart/alternative; boundary="0000000000003ba7050577e7194c"
+
+--0000000000003ba7050577e7194c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Interesting =E2=80=A6 sorry, I had read the docs a while ago and my interpr=
+etation
+at the time was that it didn't. I can try to get libvmi working, but
+nonetheless I do want to figure out how to this with the Xen API itself if
+at all possible, so I'd appreciate any help in doing so.
+
+I've looked through libvmi's implementation some more; it looks like it
+does this via vmi_pagetable_lookup_cache, which in my case ends up calling
+v2p_pae (intel.c:327). As I understand it, in that function, the `dtb`
+parameter holds the pagetable base address, and you use that to walk the
+page table and get the physical address corresponding to the virtual addr.
+Based on the end of vmi_translate_kv2p (accessors.c:703), it looks like the
+value of dtb is `vmi->kpgd`, which at some point earlier is set to the
+value of the `cr3` register. Is my understanding, roughly speaking, correct=
+?
+
+I tried to replicate a simpler version of libvmi's page table walking code
+just now, and in doing so noticed that the value of CR0, as reported by
+Xen, has its 31st bit set to zero =E2=80=A6 i.e. virtual addressing is disa=
+bled
+entirely? (For reference, I'm using a 64-bit Ubuntu image set up initially
+by virt-manager but now just run via `xl create`. I don't know if I should
+expect it to have paging enabled or not.) On the other hand, if I
+understand correctly, what I mentioned earlier with regards to some HVM
+guests assuming (addr >> XC_PAGE_SHIFT) =3D MFN *is* assuming that guest pa=
+ge
+frame number =3D machine frame number, which sounds like it is what would b=
+e
+applicable in this case.
+
+Honestly, I'm not so sure what's happening here, and I'm not even sure my
+description is sensible at this point =E2=80=94 I need to look into libvmi'=
+s
+implementation more and also figure out exactly what paging mode (or lack
+thereof) my HVM guest is running in. If, on the other hand, any of the
+above sounds familiar, suggestions/hints would be very helpful.
+
+On Wed, Oct 10, 2018 at 11:25 AM Tamas K Lengyel <tamas.k.lengyel@gmail.com=
+>
+wrote:
+
+> On Wed, Oct 10, 2018 at 8:47 AM Spencer Michaels
+> <spmichaels.work@gmail.com> wrote:
+> >
+> > I have, but libvmi doesn't fit my use case =E2=80=94 it only works with=
+ Windows
+> and Linux HVM guests. I will need my application to work with PV and HVM
+> guests that are neither Windows nor Linux.
+>
+> LibVMI works with PV guests and you can initialize it without the OS
+> specific features. If you use vmi_init followed by vmi_init_paging you
+> can do v2p translation, reading/writing memory regardless of what OS
+> is running in the guest.
+>
+> Tamas
+>
+
+--0000000000003ba7050577e7194c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Interesting =E2=80=A6 sorry, I had read the docs a while a=
+go and my interpretation at the time was that it didn&#39;t. I can try to g=
+et libvmi working, but nonetheless I do want to figure out how to this with=
+ the Xen API itself if at all possible, so I&#39;d appreciate any help in d=
+oing so.<div><br></div><div>I&#39;ve looked through libvmi&#39;s implementa=
+tion some more; it looks like it does this via vmi_pagetable_lookup_cache, =
+which in my case ends up calling v2p_pae (intel.c:327). As I understand it,=
+ in that function, the `dtb` parameter holds the pagetable base address, an=
+d you use that to walk the page table and get the physical address correspo=
+nding to the virtual addr. Based on the end of vmi_translate_kv2p (accessor=
+s.c:703), it looks like the value of dtb is `vmi-&gt;kpgd`, which at some p=
+oint earlier is set to the value of the `cr3` register. Is my understanding=
+, roughly speaking, correct?</div><div><br></div><div>I tried to replicate =
+a simpler version of libvmi&#39;s page table walking code just now, and in =
+doing so noticed that the value of CR0, as reported by Xen, has its 31st bi=
+t set to zero =E2=80=A6 i.e. virtual addressing is disabled entirely? (For =
+reference, I&#39;m using a 64-bit Ubuntu image set up initially by virt-man=
+ager but now just run via `xl create`. I don&#39;t know if I should expect =
+it to have paging enabled or not.) On the other hand, if I understand corre=
+ctly, what I mentioned earlier with regards to some HVM guests assuming (ad=
+dr &gt;&gt; XC_PAGE_SHIFT) =3D MFN *is* assuming that guest page frame numb=
+er =3D machine frame number, which sounds like it is what would be applicab=
+le in this case.=C2=A0</div><div><br></div><div>Honestly, I&#39;m not so su=
+re what&#39;s happening here, and I&#39;m not even sure my description is s=
+ensible at this point =E2=80=94 I need to look into libvmi&#39;s implementa=
+tion more and also figure out exactly what paging mode (or lack thereof) my=
+ HVM guest is running in. If, on the other hand, any of the above sounds fa=
+miliar, suggestions/hints would be very helpful.</div></div><br><div class=
+=3D"gmail_quote"><div dir=3D"ltr">On Wed, Oct 10, 2018 at 11:25 AM Tamas K =
+Lengyel &lt;<a href=3D"mailto:tamas.k.lengyel@gmail.com">tamas.k.lengyel@gm=
+ail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
+margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On Wed, Oct =
+10, 2018 at 8:47 AM Spencer Michaels<br>
+&lt;<a href=3D"mailto:spmichaels.work@gmail.com" target=3D"_blank">spmichae=
+ls.work@gmail.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; I have, but libvmi doesn&#39;t fit my use case =E2=80=94 it only works=
+ with Windows and Linux HVM guests. I will need my application to work with=
+ PV and HVM guests that are neither Windows nor Linux.<br>
+<br>
+LibVMI works with PV guests and you can initialize it without the OS<br>
+specific features. If you use vmi_init followed by vmi_init_paging you<br>
+can do v2p translation, reading/writing memory regardless of what OS<br>
+is running in the guest.<br>
+<br>
+Tamas<br>
+</blockquote></div>
+
+--0000000000003ba7050577e7194c--
+
+
+--===============5613943635229677503==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5613943635229677503==--
