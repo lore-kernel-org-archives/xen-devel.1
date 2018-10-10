@@ -1,17 +1,20 @@
-From: Roger Pau Monne <roger.pau@citrix.com>
-Subject: [PATCH v2] tools/pvh: set coherent MTRR state for all
- vCPUs
-Date: Wed, 10 Oct 2018 16:39:35 +0200
-Message-ID: <20181010143935.71020-1-roger.pau@citrix.com>
+From: Spencer Michaels <spmichaels.work@gmail.com>
+Subject: Re: Mapping HVM guest memory from Dom0
+Date: Wed, 10 Oct 2018 10:45:54 -0400
+Message-ID: <CAAd-cWMrRUrS7VzGN=3B9ekm9Gqx5aYZgayWdemV=-do1F8O9w@mail.gmail.com>
+References: <CAAd-cWOSqZN9LYCRxEYjgCyHq24PFsZqOFE1T_PPnq3HjDGpaA@mail.gmail.com>
+ <857c04f2-345f-b9ea-44ce-6e9d0aeb8248@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2792845811195882167=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=5i9g=mw=citrix.com=prvs=81484c792=roger.pau@srs-us1.protection.inumbo.net>)
- id 1gAFes-00009i-By
- for xen-devel@lists.xenproject.org; Wed, 10 Oct 2018 14:40:18 +0000
+ <srs0=oawu=mw=gmail.com=spmichaels.work@srs-us1.protection.inumbo.net>)
+ id 1gAFkV-0000Ks-5U
+ for xen-devel@lists.xenproject.org; Wed, 10 Oct 2018 14:46:07 +0000
+Received: by mail-it1-x12b.google.com with SMTP id i76-v6so8335853ita.3
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Oct 2018 07:46:05 -0700 (PDT)
+In-Reply-To: <857c04f2-345f-b9ea-44ce-6e9d0aeb8248@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,122 +23,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: andrew.cooper3@citrix.com
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SW5zdGVhZCBvZiBqdXN0IGRvaW5nIGl0IGZvciB0aGUgQlNQLiBUaGlzIHJlcXVpcmVzIHN0b3Jp
-bmcgdGhlCm1heGltdW0gbnVtYmVyIG9mIHBvc3NpYmxlIHZDUFVzIGluIHhjX2RvbV9pbWFnZS4K
-ClRoaXMgaGFzIGJlZW4gYSBsYXRlbnQgYnVnIHNvIGZhciBiZWNhdXNlIFBWSCBkb2Vzbid0IHll
-dCBzdXBwb3J0CnBjaS1wYXNzdGhyb3VnaCwgc28gdGhlIGVmZmVjdGl2ZSBtZW1vcnkgY2FjaGUg
-YXR0cmlidXRlIGlzIGZvcmNlZCB0bwpXQiBieSB0aGUgaHlwZXJ2aXNvci4gTm90ZSBhbHNvIHRo
-YXQgZXZlbiB3aXRob3V0IHRoaXMgaW4gcGxhY2UgdkNQVSMwCmlzIHByZWZlcnJlZCBpbiBjZXJ0
-YWluIHNjZW5hcmlvcyBpbiBvcmRlciB0byBjYWxjdWxhdGUgdGhlIG1lbW9yeQpjYWNoZSBhdHRy
-aWJ1dGVzLgoKUmVwb3J0ZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJp
-eC5jb20+ClNpZ25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXgu
-Y29tPgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KLS0tCkNjOiBJYW4g
-SmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KQ2M6IFdlaSBMaXUgPHdlaS5saXUy
-QGNpdHJpeC5jb20+CkNjOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
-PgotLS0KQ2hhbmdlcyBzaW5jZSB2MToKIC0gcy9ucl92Y3B1cy9tYXhfdmNwdXMvLgogLSBhc3Nl
-cnQgbWF4X3ZjcHVzIGlzIHNldC4KLS0tCiB0b29scy9saWJ4Yy9pbmNsdWRlL3hjX2RvbS5oIHwg
-IDMgKysKIHRvb2xzL2xpYnhjL3hjX2RvbV94ODYuYyAgICAgfCA3MSArKysrKysrKysrKysrKysr
-KysrKysrKysrLS0tLS0tLS0tLS0KIHRvb2xzL2xpYnhsL2xpYnhsX2RvbS5jICAgICAgfCAgMiAr
-CiAzIGZpbGVzIGNoYW5nZWQsIDU0IGluc2VydGlvbnMoKyksIDIyIGRlbGV0aW9ucygtKQoKZGlm
-ZiAtLWdpdCBhL3Rvb2xzL2xpYnhjL2luY2x1ZGUveGNfZG9tLmggYi90b29scy9saWJ4Yy9pbmNs
-dWRlL3hjX2RvbS5oCmluZGV4IDBiNWE2MzJkM2MuLjU5MDBiYmU4ZmEgMTAwNjQ0Ci0tLSBhL3Rv
-b2xzL2xpYnhjL2luY2x1ZGUveGNfZG9tLmgKKysrIGIvdG9vbHMvbGlieGMvaW5jbHVkZS94Y19k
-b20uaApAQCAtMjMwLDYgKzIzMCw5IEBAIHN0cnVjdCB4Y19kb21faW1hZ2UgewogI2VuZGlmCiAK
-ICAgICB4ZW5fcGZuX3QgdnVhcnRfZ2ZuOworCisgICAgLyogTnVtYmVyIG9mIHZDUFVzICovCisg
-ICAgdW5zaWduZWQgaW50IG1heF92Y3B1czsKIH07CiAKIC8qIC0tLSBwbHVnZ2FibGUga2VybmVs
-IGxvYWRlciAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICovCmRpZmYgLS1n
-aXQgYS90b29scy9saWJ4Yy94Y19kb21feDg2LmMgYi90b29scy9saWJ4Yy94Y19kb21feDg2LmMK
-aW5kZXggZDc3ZjJkNmY2Mi4uNzdhNGM2Y2NkMCAxMDA2NDQKLS0tIGEvdG9vbHMvbGlieGMveGNf
-ZG9tX3g4Ni5jCisrKyBiL3Rvb2xzL2xpYnhjL3hjX2RvbV94ODYuYwpAQCAtOTU1LDE3ICs5NTUs
-MTYgQEAgc3RhdGljIGludCB2Y3B1X2h2bShzdHJ1Y3QgeGNfZG9tX2ltYWdlICpkb20pCiAgICAg
-ICAgIEhWTV9TQVZFX1RZUEUoSEVBREVSKSBoZWFkZXI7CiAgICAgICAgIHN0cnVjdCBodm1fc2F2
-ZV9kZXNjcmlwdG9yIGNwdV9kOwogICAgICAgICBIVk1fU0FWRV9UWVBFKENQVSkgY3B1OwotICAg
-ICAgICBzdHJ1Y3QgaHZtX3NhdmVfZGVzY3JpcHRvciBtdHJyX2Q7Ci0gICAgICAgIEhWTV9TQVZF
-X1RZUEUoTVRSUikgbXRycjsKICAgICAgICAgc3RydWN0IGh2bV9zYXZlX2Rlc2NyaXB0b3IgZW5k
-X2Q7CiAgICAgICAgIEhWTV9TQVZFX1RZUEUoRU5EKSBlbmQ7CiAgICAgfSBic3BfY3R4OwotICAg
-IGNvbnN0IEhWTV9TQVZFX1RZUEUoTVRSUikgKm10cnJfcmVjb3JkOwogICAgIHVpbnQ4X3QgKmZ1
-bGxfY3R4ID0gTlVMTDsKICAgICBpbnQgcmM7CiAKICAgICBET01QUklOVEZfQ0FMTEVEKGRvbS0+
-eGNoKTsKIAorICAgIGFzc2VydChkb20tPm1heF92Y3B1cyk7CisKICAgICAvKgogICAgICAqIEdl
-dCB0aGUgZnVsbCBIVk0gY29udGV4dCBpbiBvcmRlciB0byBoYXZlIHRoZSBoZWFkZXIsIGl0IGlz
-IG5vdAogICAgICAqIHBvc3NpYmxlIHRvIGdldCB0aGUgaGVhZGVyIHdpdGggZ2V0Y29udGV4dF9w
-YXJ0aWFsLCBhbmQgY3JhZnRpbmcgb25lCkBAIC0xMDM0LDM1ICsxMDMzLDYzIEBAIHN0YXRpYyBp
-bnQgdmNwdV9odm0oc3RydWN0IHhjX2RvbV9pbWFnZSAqZG9tKQogICAgIGlmICggZG9tLT5zdGFy
-dF9pbmZvX3NlZy5wZm4gKQogICAgICAgICBic3BfY3R4LmNwdS5yYnggPSBkb20tPnN0YXJ0X2lu
-Zm9fc2VnLnBmbiA8PCBQQUdFX1NISUZUOwogCi0gICAgLyogU2V0IHRoZSBNVFJSLiAqLwotICAg
-IGJzcF9jdHgubXRycl9kLnR5cGVjb2RlID0gSFZNX1NBVkVfQ09ERShNVFJSKTsKLSAgICBic3Bf
-Y3R4Lm10cnJfZC5pbnN0YW5jZSA9IDA7Ci0gICAgYnNwX2N0eC5tdHJyX2QubGVuZ3RoID0gSFZN
-X1NBVkVfTEVOR1RIKE1UUlIpOworICAgIC8qIFNldCB0aGUgZW5kIGRlc2NyaXB0b3IuICovCisg
-ICAgYnNwX2N0eC5lbmRfZC50eXBlY29kZSA9IEhWTV9TQVZFX0NPREUoRU5EKTsKKyAgICBic3Bf
-Y3R4LmVuZF9kLmluc3RhbmNlID0gMDsKKyAgICBic3BfY3R4LmVuZF9kLmxlbmd0aCA9IEhWTV9T
-QVZFX0xFTkdUSChFTkQpOwogCi0gICAgbXRycl9yZWNvcmQgPSBodm1fZ2V0X3NhdmVfcmVjb3Jk
-KGZ1bGxfY3R4LCBIVk1fU0FWRV9DT0RFKE1UUlIpLCAwKTsKLSAgICBpZiAoICFtdHJyX3JlY29y
-ZCApCisgICAgLyogVE9ETzogbWF5YmUgdGhpcyBzaG91bGQgYmUgYSBmaXJtd2FyZSBvcHRpb24g
-aW5zdGVhZD8gKi8KKyAgICBpZiAoICFkb20tPmRldmljZV9tb2RlbCApCiAgICAgewotICAgICAg
-ICB4Y19kb21fcGFuaWMoZG9tLT54Y2gsIFhDX0lOVEVSTkFMX0VSUk9SLAotICAgICAgICAgICAg
-ICAgICAgICAgIiVzOiB1bmFibGUgdG8gZ2V0IE1UUlIgc2F2ZSByZWNvcmQiLCBfX2Z1bmNfXyk7
-Ci0gICAgICAgIGdvdG8gb3V0OwotICAgIH0KKyAgICAgICAgc3RydWN0IHsKKyAgICAgICAgICAg
-IHN0cnVjdCBodm1fc2F2ZV9kZXNjcmlwdG9yIGhlYWRlcl9kOworICAgICAgICAgICAgSFZNX1NB
-VkVfVFlQRShIRUFERVIpIGhlYWRlcjsKKyAgICAgICAgICAgIHN0cnVjdCBodm1fc2F2ZV9kZXNj
-cmlwdG9yIG10cnJfZDsKKyAgICAgICAgICAgIEhWTV9TQVZFX1RZUEUoTVRSUikgbXRycjsKKyAg
-ICAgICAgICAgIHN0cnVjdCBodm1fc2F2ZV9kZXNjcmlwdG9yIGVuZF9kOworICAgICAgICAgICAg
-SFZNX1NBVkVfVFlQRShFTkQpIGVuZDsKKyAgICAgICAgfSBtdHJyID0geworICAgICAgICAgICAg
-LmhlYWRlcl9kID0gYnNwX2N0eC5oZWFkZXJfZCwKKyAgICAgICAgICAgIC5oZWFkZXIgPSBic3Bf
-Y3R4LmhlYWRlciwKKyAgICAgICAgICAgIC5tdHJyX2QudHlwZWNvZGUgPSBIVk1fU0FWRV9DT0RF
-KE1UUlIpLAorICAgICAgICAgICAgLm10cnJfZC5sZW5ndGggPSBIVk1fU0FWRV9MRU5HVEgoTVRS
-UiksCisgICAgICAgICAgICAuZW5kX2QgPSBic3BfY3R4LmVuZF9kLAorICAgICAgICAgICAgLmVu
-ZCA9IGJzcF9jdHguZW5kLAorICAgICAgICB9OworICAgICAgICBjb25zdCBIVk1fU0FWRV9UWVBF
-KE1UUlIpICptdHJyX3JlY29yZCA9CisgICAgICAgICAgICBodm1fZ2V0X3NhdmVfcmVjb3JkKGZ1
-bGxfY3R4LCBIVk1fU0FWRV9DT0RFKE1UUlIpLCAwKTsKKyAgICAgICAgdW5zaWduZWQgaW50IGk7
-CisKKyAgICAgICAgaWYgKCAhbXRycl9yZWNvcmQgKQorICAgICAgICB7CisgICAgICAgICAgICB4
-Y19kb21fcGFuaWMoZG9tLT54Y2gsIFhDX0lOVEVSTkFMX0VSUk9SLAorICAgICAgICAgICAgICAg
-ICAgICAgICAgICIlczogdW5hYmxlIHRvIGdldCBNVFJSIHNhdmUgcmVjb3JkIiwgX19mdW5jX18p
-OworICAgICAgICAgICAgZ290byBvdXQ7CisgICAgICAgIH0KIAotICAgIG1lbWNweSgmYnNwX2N0
-eC5tdHJyLCBtdHJyX3JlY29yZCwgc2l6ZW9mKGJzcF9jdHgubXRycikpOworICAgICAgICBtZW1j
-cHkoJm10cnIubXRyciwgbXRycl9yZWNvcmQsIHNpemVvZihtdHJyLm10cnIpKTsKIAotICAgIC8q
-IFRPRE86IG1heWJlIHRoaXMgc2hvdWxkIGJlIGEgZmlybXdhcmUgb3B0aW9uIGluc3RlYWQ/ICov
-Ci0gICAgaWYgKCAhZG9tLT5kZXZpY2VfbW9kZWwgKQogICAgICAgICAvKgogICAgICAgICAgKiBF
-bmFibGUgTVRSUiwgc2V0IGRlZmF1bHQgdHlwZSB0byBXQi4KICAgICAgICAgICogVE9ETzogYWRk
-IE1NSU8gYXJlYXMgYXMgVUMgd2hlbiBwYXNzdGhyb3VnaCBpcyBzdXBwb3J0ZWQuCiAgICAgICAg
-ICAqLwotICAgICAgICBic3BfY3R4Lm10cnIubXNyX210cnJfZGVmX3R5cGUgPSBNVFJSX1RZUEVf
-V1JCQUNLIHwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTVRSUl9E
-RUZfVFlQRV9FTkFCTEU7CisgICAgICAgIG10cnIubXRyci5tc3JfbXRycl9kZWZfdHlwZSA9IE1U
-UlJfVFlQRV9XUkJBQ0sgfCBNVFJSX0RFRl9UWVBFX0VOQUJMRTsKIAotICAgIC8qIFNldCB0aGUg
-ZW5kIGRlc2NyaXB0b3IuICovCi0gICAgYnNwX2N0eC5lbmRfZC50eXBlY29kZSA9IEhWTV9TQVZF
-X0NPREUoRU5EKTsKLSAgICBic3BfY3R4LmVuZF9kLmluc3RhbmNlID0gMDsKLSAgICBic3BfY3R4
-LmVuZF9kLmxlbmd0aCA9IEhWTV9TQVZFX0xFTkdUSChFTkQpOworICAgICAgICBmb3IgKCBpID0g
-MDsgaSA8IGRvbS0+bWF4X3ZjcHVzOyBpKysgKQorICAgICAgICB7CisgICAgICAgICAgICBtdHJy
-Lm10cnJfZC5pbnN0YW5jZSA9IGk7CisgICAgICAgICAgICByYyA9IHhjX2RvbWFpbl9odm1fc2V0
-Y29udGV4dChkb20tPnhjaCwgZG9tLT5ndWVzdF9kb21pZCwKKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICh1aW50OF90ICopJm10cnIsIHNpemVvZihtdHJyKSk7Cisg
-ICAgICAgICAgICBpZiAoIHJjICE9IDAgKQorICAgICAgICAgICAgICAgIHhjX2RvbV9wYW5pYyhk
-b20tPnhjaCwgWENfSU5URVJOQUxfRVJST1IsCisgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICIlczogU0VUSFZNQ09OVEVYVCBmYWlsZWQgKHJjPSVkKSIsIF9fZnVuY19fLCByYyk7CisgICAg
-ICAgIH0KKyAgICB9CiAKKyAgICAvKgorICAgICAqIExvYWRpbmcgdGhlIEJTUCBjb250ZXh0IHNo
-b3VsZCBiZSBkb25lIGluIHRoZSBsYXN0IGNhbGwgdG8gc2V0Y29udGV4dCwKKyAgICAgKiBzaW5j
-ZSBlYWNoIHNldGNvbnRleHQgY2FsbCB3aWxsIHB1dCBhbGwgdkNQVXMgZG93bi4KKyAgICAgKi8K
-ICAgICByYyA9IHhjX2RvbWFpbl9odm1fc2V0Y29udGV4dChkb20tPnhjaCwgZG9tLT5ndWVzdF9k
-b21pZCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAodWludDhfdCAqKSZic3Bf
-Y3R4LCBzaXplb2YoYnNwX2N0eCkpOwogICAgIGlmICggcmMgIT0gMCApCmRpZmYgLS1naXQgYS90
-b29scy9saWJ4bC9saWJ4bF9kb20uYyBiL3Rvb2xzL2xpYnhsL2xpYnhsX2RvbS5jCmluZGV4IDhh
-OGEzMmM2OTkuLmM2NmYzODkzZDcgMTAwNjQ0Ci0tLSBhL3Rvb2xzL2xpYnhsL2xpYnhsX2RvbS5j
-CisrKyBiL3Rvb2xzL2xpYnhsL2xpYnhsX2RvbS5jCkBAIC04MDMsNiArODAzLDcgQEAgaW50IGxp
-YnhsX19idWlsZF9wdihsaWJ4bF9fZ2MgKmdjLCB1aW50MzJfdCBkb21pZCwKICAgICBkb20tPnhl
-bnN0b3JlX2V2dGNobiA9IHN0YXRlLT5zdG9yZV9wb3J0OwogICAgIGRvbS0+eGVuc3RvcmVfZG9t
-aWQgPSBzdGF0ZS0+c3RvcmVfZG9taWQ7CiAgICAgZG9tLT5jbGFpbV9lbmFibGVkID0gbGlieGxf
-ZGVmYm9vbF92YWwoaW5mby0+Y2xhaW1fbW9kZSk7CisgICAgZG9tLT5tYXhfdmNwdXMgPSBpbmZv
-LT5tYXhfdmNwdXM7CiAKICAgICBpZiAoaW5mby0+bnVtX3ZudW1hX25vZGVzICE9IDApIHsKICAg
-ICAgICAgdW5zaWduZWQgaW50IGk7CkBAIC0xMjU2LDYgKzEyNTcsNyBAQCBpbnQgbGlieGxfX2J1
-aWxkX2h2bShsaWJ4bF9fZ2MgKmdjLCB1aW50MzJfdCBkb21pZCwKICAgICBkb20tPm1taW9fc3Rh
-cnQgPSBtbWlvX3N0YXJ0OwogICAgIGRvbS0+dmdhX2hvbGVfc2l6ZSA9IGRldmljZV9tb2RlbCA/
-IExJQlhMX1ZHQV9IT0xFX1NJWkUgOiAwOwogICAgIGRvbS0+ZGV2aWNlX21vZGVsID0gZGV2aWNl
-X21vZGVsOworICAgIGRvbS0+bWF4X3ZjcHVzID0gaW5mby0+bWF4X3ZjcHVzOwogCiAgICAgcmMg
-PSBsaWJ4bF9fZG9tYWluX2RldmljZV9jb25zdHJ1Y3RfcmRtKGdjLCBkX2NvbmZpZywKICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaW5mby0+dS5odm0ucmRtX21l
-bV9ib3VuZGFyeV9tZW1rYioxMDI0LAotLSAKMi4xOS4wCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============2792845811195882167==
+Content-Type: multipart/alternative; boundary="000000000000f889b70577e0e9c6"
+
+--000000000000f889b70577e0e9c6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+I have, but libvmi doesn't fit my use case =E2=80=94 it only works with Win=
+dows and
+Linux HVM guests. I will need my application to work with PV and HVM guests
+that are neither Windows nor Linux.
+
+libvmi's implementation of this, `xen_get_memory()` in
+`libvmi/driver/xen/xen.c`, seems to assume that MFN =3D (addr >> page shift=
+),
+which I've seen in a few places, but based on my testing as well as what's
+in `debug.c`, this appears not to be correct. I certainly don't end up
+mapping the correct pages using that formula, at least.
+
+On Wed, Oct 10, 2018 at 5:39 AM Andrew Cooper <andrew.cooper3@citrix.com>
+wrote:
+
+> On 09/10/18 20:34, Spencer Michaels wrote:
+> > Hello,
+> >
+> > I'm developing an application that runs in Dom0 and needs to read
+> > memory from a guest given a guest address (for instance, reading RIP
+> > from the guest CPU context and then reading the current instruction).
+> > I'm using xenforeignmemory_map() to map the guest memory, but this
+> > function takes the MFN of the guest address to read, not the address
+> > itself. Xen does not seem to have an API for doing the virtual address
+> > --> MFN conversion.
+> >
+> > I've figured out how to do this for PV guests: map the domain's
+> > meminfo struct and use the PFN for the guest address (i.e. address >>
+> > XC_PAGE_SHIFT) as an index into the P2M table.
+> >
+> > However, I am having trouble doing the same for HVM guests. Right now
+> > I am trying to follow the implementation of bg_hvm_va2mfn in
+> > xen/arch/x86/debug.c, but this function uses so many internal Xen
+> > functions it seems I would have to copy tons of code out from Xen, and
+> > I'm wondering if there's a better way. Is there some API I'm missing
+> > that lets me to do the vaddr --> MFN conversion for HVM guests? If
+> > not, what is the simplest way to do this conversion?
+>
+> Have you come across libvmi?  It seems to be exactly what you are trying
+> to make here.
+>
+> ~Andrew
+>
+
+--000000000000f889b70577e0e9c6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">I have, but libvmi doesn&#39;t fit my use case =E2=80=94 i=
+t only works with Windows and Linux HVM guests. I will need my application =
+to work with PV and HVM guests that are neither Windows nor Linux.<div><br>=
+</div><div>libvmi&#39;s implementation of this, `xen_get_memory()` in `libv=
+mi/driver/xen/xen.c`, seems to assume that MFN =3D (addr &gt;&gt; page shif=
+t), which I&#39;ve seen in a few places, but based on my testing as well as=
+ what&#39;s in `debug.c`, this appears not to be correct. I certainly don&#=
+39;t end up mapping the correct pages using that formula, at least.</div></=
+div><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Wed, Oct 10, 2018 at=
+ 5:39 AM Andrew Cooper &lt;<a href=3D"mailto:andrew.cooper3@citrix.com">and=
+rew.cooper3@citrix.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_q=
+uote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1e=
+x">On 09/10/18 20:34, Spencer Michaels wrote:<br>
+&gt; Hello,<br>
+&gt;<br>
+&gt; I&#39;m developing an application that runs in Dom0 and needs to read<=
+br>
+&gt; memory from a guest given a guest address (for instance, reading RIP<b=
+r>
+&gt; from the guest CPU context and then reading the current instruction).<=
+br>
+&gt; I&#39;m using xenforeignmemory_map() to map the guest memory, but this=
+<br>
+&gt; function takes the MFN of the guest address to read, not the address<b=
+r>
+&gt; itself. Xen does not seem to have an API for doing the virtual address=
+<br>
+&gt; --&gt; MFN conversion.<br>
+&gt;<br>
+&gt; I&#39;ve figured out how to do this for PV guests: map the domain&#39;=
+s<br>
+&gt; meminfo struct and use the PFN for the guest address (i.e. address &gt=
+;&gt;<br>
+&gt; XC_PAGE_SHIFT) as an index into the P2M table.<br>
+&gt;<br>
+&gt; However, I am having trouble doing the same for HVM guests. Right now<=
+br>
+&gt; I am trying to follow the implementation of bg_hvm_va2mfn in<br>
+&gt; xen/arch/x86/debug.c, but this function uses so many internal Xen<br>
+&gt; functions it seems I would have to copy tons of code out from Xen, and=
+<br>
+&gt; I&#39;m wondering if there&#39;s a better way. Is there some API I&#39=
+;m missing<br>
+&gt; that lets me to do the vaddr --&gt; MFN conversion for HVM guests? If<=
+br>
+&gt; not, what is the simplest way to do this conversion?<br>
+<br>
+Have you come across libvmi?=C2=A0 It seems to be exactly what you are tryi=
+ng<br>
+to make here.<br>
+<br>
+~Andrew<br>
+</blockquote></div>
+
+--000000000000f889b70577e0e9c6--
+
+
+--===============2792845811195882167==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2792845811195882167==--
