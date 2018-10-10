@@ -1,22 +1,19 @@
-From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Subject: Re: Mapping HVM guest memory from Dom0
-Date: Wed, 10 Oct 2018 09:25:02 -0600
-Message-ID: <CABfawhkmNaNesdxcOOH=58f8GH1sn8ZyJ0TU8h+=9WhK0DCFtg@mail.gmail.com>
-References: <CAAd-cWOSqZN9LYCRxEYjgCyHq24PFsZqOFE1T_PPnq3HjDGpaA@mail.gmail.com>
- <857c04f2-345f-b9ea-44ce-6e9d0aeb8248@citrix.com>
- <CAAd-cWMrRUrS7VzGN=3B9ekm9Gqx5aYZgayWdemV=-do1F8O9w@mail.gmail.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH v5 02/15] libxl_qmp: Connect to QMP socket
+Date: Wed, 10 Oct 2018 16:29:03 +0100
+Message-ID: <23486.6847.362789.991990@mariner.uk.xensource.com>
+References: <20180907151104.32306-1-anthony.perard@citrix.com>
+ <20180907151104.32306-3-anthony.perard@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=57mf=mw=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1gAGMo-0004Ui-Jq
- for xen-devel@lists.xenproject.org; Wed, 10 Oct 2018 15:25:42 +0000
-Received: by mail-wr1-x431.google.com with SMTP id l6-v6so5804296wrt.1
- for <xen-devel@lists.xenproject.org>; Wed, 10 Oct 2018 08:25:41 -0700 (PDT)
-In-Reply-To: <CAAd-cWMrRUrS7VzGN=3B9ekm9Gqx5aYZgayWdemV=-do1F8O9w@mail.gmail.com>
+ <srs0=ysci=mw=citrix.com=prvs=814707a66=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1gAGQ7-0004cr-UX
+ for xen-devel@lists.xenproject.org; Wed, 10 Oct 2018 15:29:07 +0000
+In-Reply-To: <20180907151104.32306-3-anthony.perard@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,19 +22,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: spmichaels.work@gmail.com
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xenproject.org>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBPY3QgMTAsIDIwMTggYXQgODo0NyBBTSBTcGVuY2VyIE1pY2hhZWxzCjxzcG1pY2hh
-ZWxzLndvcmtAZ21haWwuY29tPiB3cm90ZToKPgo+IEkgaGF2ZSwgYnV0IGxpYnZtaSBkb2Vzbid0
-IGZpdCBteSB1c2UgY2FzZSDigJQgaXQgb25seSB3b3JrcyB3aXRoIFdpbmRvd3MgYW5kIExpbnV4
-IEhWTSBndWVzdHMuIEkgd2lsbCBuZWVkIG15IGFwcGxpY2F0aW9uIHRvIHdvcmsgd2l0aCBQViBh
-bmQgSFZNIGd1ZXN0cyB0aGF0IGFyZSBuZWl0aGVyIFdpbmRvd3Mgbm9yIExpbnV4LgoKTGliVk1J
-IHdvcmtzIHdpdGggUFYgZ3Vlc3RzIGFuZCB5b3UgY2FuIGluaXRpYWxpemUgaXQgd2l0aG91dCB0
-aGUgT1MKc3BlY2lmaWMgZmVhdHVyZXMuIElmIHlvdSB1c2Ugdm1pX2luaXQgZm9sbG93ZWQgYnkg
-dm1pX2luaXRfcGFnaW5nIHlvdQpjYW4gZG8gdjJwIHRyYW5zbGF0aW9uLCByZWFkaW5nL3dyaXRp
-bmcgbWVtb3J5IHJlZ2FyZGxlc3Mgb2Ygd2hhdCBPUwppcyBydW5uaW5nIGluIHRoZSBndWVzdC4K
-ClRhbWFzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+QW50aG9ueSBQRVJBUkQgd3JpdGVzICgiW1BBVENIIHY1IDAyLzE1XSBsaWJ4bF9xbXA6IENvbm5l
+Y3QgdG8gUU1QIHNvY2tldCIpOgo+IFRoaXMgaXMgYSBmaXJzdCBwYXRjaCB0byBpbXBsZW1lbnQg
+bGlieGxfX2V2X3FtcCwgaXQgb25seSBjb25uZWN0cyB0bwo+IHRoZSBRTVAgc29ja2V0IG9mIFFF
+TVUgYW5kIHJlZ2lzdGVycyBhIGZkIGNhbGxiYWNrIHRoYXQgZG9lcyBub3RoaW5nLgouLi4KPiAr
+dHlwZWRlZiBlbnVtIHsKPiArICAgIC8qIGluaXRpYWwgc3RhdGUgKi8KPiArICAgIHFtcF9zdGF0
+ZV9kaXNjb25uZWN0ZWQgPSAxLAo+ICsgICAgLyogY29ubmVjdGVkIHRvIFFNUCBzb2NrZXQsIHdh
+aXRpbmcgZm9yIGdyZWV0aW5nIG1lc3NhZ2UgKi8KPiArICAgIHFtcF9zdGF0ZV9jb25uZWN0aW5n
+LAo+ICsgICAgLyogZ3JlZXRpbmcgbWVzc2FnZSByZWNlaXZlZCAqLwo+ICsgICAgcW1wX3N0YXRl
+X2dyZWV0aW5nLAo+ICsgICAgLyogcW1wX2NhcGFiaWxpdGllcyBjb21tYW5kIHNlbnQsIHdhaXRp
+bmcgZm9yIHJlcGx5ICovCj4gKyAgICBxbXBfc3RhdGVfY2FwYWJpbGl0eV9uZWdvdGlhdGlvbiwK
+PiArICAgIC8qIHJlYWR5IHRvIHNlbmQgY29tbWFuZHMgKi8KPiArICAgIHFtcF9zdGF0ZV9jb25u
+ZWN0ZWQsCj4gK30gbGlieGxfX3FtcF9zdGF0ZTsKCklXQk4gdG8gcmVsYXRlIHRoZXNlIHByaXZh
+dGUgc3RhdGVzIHRvIHRoZSBvdXR3YXJkLWZhY2luZyBBUEkgc3RhdGVzCmxpa2UgYENvbm5lY3Rl
+ZCcuCgpJIG9mdGVuIHdyaXRlIGEgdGFibGUgb2YgbGVnYWwgZmllbGQgdmFsdWVzIC0gc2VlIGZv
+ciBleGFtcGxlLApsaWJ4bF9leGVjLmMgbmVhciBsLjI0MSBhbmQgbGlieGxfc3RyZWFtX3JlYWQu
+YyBuZWFyIGwuMzUuICBCdXQgbWF5YmUKdGhpcyBpcyBub3QgY29tcGxpY2F0ZWQgZW5vdWdoIHRv
+IG5lZWQgdGhhdC4KCj4gK3N0YXRpYyBpbnQgcW1wX2V2X2Nvbm5lY3QobGlieGxfX2djICpnYywg
+bGlieGxfX2V2X3FtcCAqZXYpCj4gK3sKLi4uCj4gKyAgICByID0gY29ubmVjdChsaWJ4bF9fY2Fy
+ZWZkX2ZkKGV2LT5xbXBfY2ZkKSwKPiArICAgICAgICAgICAgICAgIChzdHJ1Y3Qgc29ja2FkZHIg
+KikgJnVuLCBzaXplb2YodW4pKTsKClVwIHRvIGhlcmU6CgpBY2tlZC1ieTogSWFuIEphY2tzb24g
+PGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CgpCdXQ6Cgo+ICtpbnQgbGlieGxfX2V2X3FtcF9z
+ZW5kKGxpYnhsX19nYyAqZ2MsIGxpYnhsX19ldl9xbXAgKmV2LAo+ICsgICAgICAgICAgICAgICAg
+ICAgICAgIGNvbnN0IGNoYXIgKmNtZCwgbGlieGxfX2pzb25fb2JqZWN0ICphcmdzKQo+ICt7Cj4g
+KyAgICBMT0dEKERFQlVHLCBldi0+ZG9taWQsICIgZXYgJXAsIGNtZCAnJXMnIiwgZXYsIGNtZCk7
+Cj4gKwo+ICsgICAgLyogQ29ubmVjdCB0byBRRU1VIGlmIG5vdCBhbHJlYWR5IGNvbm5lY3RlZCAq
+Lwo+ICsgICAgcmV0dXJuIHFtcF9ldl9jb25uZWN0KGdjLCBldik7Cj4gK30KCkkgdGhpbmsgaXQg
+d291bGQgYmUgbmljZXIgdG8gcmVhZCBhIGNvbXBsZXRlIGltcGxlbWVudGF0aW9uIG9mIHRoaXMK
+ZnVuY3Rpb24uICBSaWdodCBub3cgaXQncyBvYnZpb3VzbHkgd3JvbmcgYW5kIGltcG9zc2libGUg
+dG8gcmV2aWV3LgoKU28gcGxlYXNlIHBvc3Rwb25lIHRoaXMgaHVuay4KClRoYW5rcywKSWFuLgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
