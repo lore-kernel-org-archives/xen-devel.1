@@ -1,22 +1,24 @@
-From: Milan Boberic <milanboberic94@gmail.com>
-Subject: Re: Xen optimization
-Date: Thu, 11 Oct 2018 09:36:45 +0200
-Message-ID: <CADJ6SV1Mdnjyd8oEcB4ZCZKuR0LkJ82GCf5s1+AwgASe8vLMWg@mail.gmail.com>
-References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
- <995da0578f0953662536edabb5807fd76ca4d8ce.camel@suse.com>
- <CADJ6SV1yDBptrcaoqUPChtnXTmvhbzj-AAv2FDN2LCMyTipc-A@mail.gmail.com>
- <CAENZ-+=mWFnJ-4OFK+bjb4rimNNB_x4qHFVAbTM1mFd2Sg7s3g@mail.gmail.com>
+From: Michal Hocko <mhocko@kernel.org>
+Subject: Re: [PATCH v5 1/2] memory_hotplug: Free pages as higher
+ order
+Date: Thu, 11 Oct 2018 09:55:03 +0200
+Message-ID: <20181011075503.GQ5873__17450.0313973569$1539244448$gmane$org@dhcp22.suse.cz>
+References: <1538727006-5727-1-git-send-email-arunks@codeaurora.org>
+ <72215e75-6c7e-0aef-c06e-e3aba47cf806@suse.cz>
+ <efb65160af41d0e18cb2dcb30c2fb86a@codeaurora.org>
+ <20181010173334.GL5873@dhcp22.suse.cz>
+ <a2d576a5fc82cdf54fc89409686e58f5@codeaurora.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="00000000000018c1a30577ef09ac"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=zb/w=mx=gmail.com=milanboberic94@srs-us1.protection.inumbo.net>)
- id 1gAVWm-0001ak-4P
- for xen-devel@lists.xenproject.org; Thu, 11 Oct 2018 07:37:00 +0000
-Received: by mail-lj1-x236.google.com with SMTP id 63-v6so7293135ljs.4
- for <xen-devel@lists.xenproject.org>; Thu, 11 Oct 2018 00:36:58 -0700 (PDT)
-In-Reply-To: <CAENZ-+=mWFnJ-4OFK+bjb4rimNNB_x4qHFVAbTM1mFd2Sg7s3g@mail.gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=odc5=mx=kernel.org=mhocko@srs-us1.protection.inumbo.net>)
+ id 1gAVoM-0003Q2-CD
+ for xen-devel@lists.xenproject.org; Thu, 11 Oct 2018 07:55:10 +0000
+Content-Disposition: inline
+In-Reply-To: <a2d576a5fc82cdf54fc89409686e58f5@codeaurora.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,77 +27,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Meng Xu <xumengpanda@gmail.com>
-Cc: xen-devel@lists.xenproject.org, julien.grall@arm.com, sstabellini@kernel.org, andrii_anisov@epam.com, Dario Faggioli <dfaggioli@suse.com>
+To: Arun KS <arunks@codeaurora.org>
+Cc: vatsa@codeaurora.org, linux-mm@kvack.org, getarunks@gmail.com, kys@microsoft.com, boris.ostrovsky@oracle.com, sthemmin@microsoft.com, xen-devel@lists.xenproject.org, haiyangz@microsoft.com, yasu.isimatu@gmail.com, dan.j.williams@intel.com, akpm@linux-foundation.org, Vlastimil Babka <vbabka@suse.cz>, osalvador@suse.de, jgross@suse.com, aaron.lu@intel.com, malat@debian.org, gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org, vinmenon@codeaurora.org, jrdr.linux@gmail.com, devel@linuxdriverproject.org, iamjoonsoo.kim@lge.com, mgorman@techsingularity.net, kirill.shutemov@linux.intel.com
 List-Id: xen-devel@lists.xenproject.org
 
---00000000000018c1a30577ef09ac
-Content-Type: text/plain; charset="UTF-8"
-
-On Wed, Oct 10, 2018 at 6:41 PM Meng Xu <xumengpanda@gmail.com> wrote:
->
-> The jitter may come from Xen or the OS in dom0.
-> It will be useful to know what is the jitter if you run the test on PetaLinux.
-> (It's understandable the jitter is gone without OS. It is also common
-> that OS introduces various interferences.)
-
-Hi Meng,
-well... I'm using bare-metal application and I need it exclusively to
-be ran on one CPU as domU (guest) without OS (and I'm not sure how
-would I make the same app to be ran on PetaLinux dom0 :D haha).
-Is there a chance that PetaLinux as dom0 is creating this jitter and
-how? Is there a way of decreasing it?
-
-Yes, there are no prints.
-
-I'm not sure about this timer interrupt passthrough because I didn't
-find any example of it, in attachment I included xen-overlay.dtsi file
-which I edited to add passthrough, in earlier replies there are
-bare-metal configuration file. It would be helpful to know if those
-setting are correct. If they are not correct it would explain the
-jitter.
-
-Thanks in advance, Milan Boberic!
-
---00000000000018c1a30577ef09ac
-Content-Type: text/plain; charset="US-ASCII"; name="xen-overlay.dts.txt"
-Content-Disposition: attachment; filename="xen-overlay.dts.txt"
-Content-Transfer-Encoding: base64
-Content-ID: <f_jn49pw8g0>
-X-Attachment-Id: f_jn49pw8g0
-
-LyB7DQoJY2hvc2VuIHsNCgkJI2FkZHJlc3MtY2VsbHMgPSA8Mj47DQoJCSNzaXplLWNlbGxzID0g
-PDE+Ow0KDQoJCXhlbix4ZW4tYm9vdGFyZ3MgPSAiY29uc29sZT1kdHVhcnQgZHR1YXJ0PXNlcmlh
-bDAgZG9tMF9tZW09NzY4TSBib290c2NydWI9MCBkb20wX21heF92Y3B1cz0xIGRvbTBfdmNwdXNf
-cGluPXRydWUgdGltZXJfc2xvcD0wIHNjaGVkPW51bGwgdndmaT1uYXRpdmUiOw0KCQl4ZW4sZG9t
-MC1ib290YXJncyA9ICJjb25zb2xlPWh2YzAgZWFybHljb249eGVuIGVhcmx5cHJpbnRrPXhlbiBt
-YXhjcHVzPTEgY2xrX2lnbm9yZV91bnVzZWQiOw0KDQoJCWRvbTAgew0KCQkJY29tcGF0aWJsZSA9
-ICJ4ZW4sbGludXgtemltYWdlIiwgInhlbixtdWx0aWJvb3QtbW9kdWxlIjsNCgkJCXJlZyA9IDww
-eDAgMHg4MDAwMCAweDMxMDAwMDA+Ow0KCQl9Ow0KCX07DQoNCn07DQoNCiZzbW11IHsNCglzdGF0
-dXMgPSAib2theSI7DQoJbW11LW1hc3RlcnMgPSA8ICZnZW0wIDB4ODc0DQoJCQkmZ2VtMSAweDg3
-NQ0KCQkJJmdlbTIgMHg4NzYNCgkJCSZnZW0zIDB4ODc3DQoJCQkmZHdjM18wIDB4ODYwDQoJCQkm
-ZHdjM18xIDB4ODYxDQoJCQkmcXNwaSAweDg3Mw0KCQkJJmxwZF9kbWFfY2hhbjEgMHg4NjgNCgkJ
-CSZscGRfZG1hX2NoYW4yIDB4ODY5DQoJCQkmbHBkX2RtYV9jaGFuMyAweDg2YQ0KCQkJJmxwZF9k
-bWFfY2hhbjQgMHg4NmINCgkJCSZscGRfZG1hX2NoYW41IDB4ODZjDQoJCQkmbHBkX2RtYV9jaGFu
-NiAweDg2ZA0KCQkJJmxwZF9kbWFfY2hhbjcgMHg4NmUNCgkJCSZscGRfZG1hX2NoYW44IDB4ODZm
-DQoJCQkmZnBkX2RtYV9jaGFuMSAweDE0ZTgNCgkJCSZmcGRfZG1hX2NoYW4yIDB4MTRlOQ0KCQkJ
-JmZwZF9kbWFfY2hhbjMgMHgxNGVhDQoJCQkmZnBkX2RtYV9jaGFuNCAweDE0ZWINCgkJCSZmcGRf
-ZG1hX2NoYW41IDB4MTRlYw0KCQkJJmZwZF9kbWFfY2hhbjYgMHgxNGVkDQoJCQkmZnBkX2RtYV9j
-aGFuNyAweDE0ZWUNCgkJCSZmcGRfZG1hX2NoYW44IDB4MTRlZg0KCQkJJnNkaGNpMCAweDg3MA0K
-CQkJJnNkaGNpMSAweDg3MQ0KCQkJJm5hbmQwIDB4ODcyPjsNCn07DQoNCiZ1YXJ0MSB7DQogICB4
-ZW4scGFzc3Rocm91Z2ggPSA8MHgxPjsNCn07DQoNCiZncGlvIHsNCiAgIHhlbixwYXNzdGhyb3Vn
-aCA9IDwweDE+Ow0KfTsNCg0KJnR0YzAgew0KICAgeGVuLHBhc3N0aHJvdWdoID0gPDB4MT47DQp9
-Ow0KDQomdHRjMSB7DQogICB4ZW4scGFzc3Rocm91Z2ggPSA8MHgxPjsNCn07DQoNCiZ0dGMyIHsN
-CiAgIHhlbixwYXNzdGhyb3VnaCA9IDwweDE+Ow0KfTsNCg0KJnR0YzMgew0KICAgeGVuLHBhc3N0
-aHJvdWdoID0gPDB4MT47DQp9Ow==
---00000000000018c1a30577ef09ac
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---00000000000018c1a30577ef09ac--
+T24gVGh1IDExLTEwLTE4IDA3OjU5OjMyLCBBcnVuIEtTIHdyb3RlOgo+IE9uIDIwMTgtMTAtMTAg
+MjM6MDMsIE1pY2hhbCBIb2NrbyB3cm90ZToKPiA+IE9uIFdlZCAxMC0xMC0xOCAyMjoyNjo0MSwg
+QXJ1biBLUyB3cm90ZToKPiA+ID4gT24gMjAxOC0xMC0xMCAyMTowMCwgVmxhc3RpbWlsIEJhYmth
+IHdyb3RlOgo+ID4gPiA+IE9uIDEwLzUvMTggMTA6MTAgQU0sIEFydW4gS1Mgd3JvdGU6Cj4gPiA+
+ID4gPiBXaGVuIGZyZWUgcGFnZXMgYXJlIGRvbmUgd2l0aCBoaWdoZXIgb3JkZXIsIHRpbWUgc3Bl
+bmQgb24KPiA+ID4gPiA+IGNvYWxlc2NpbmcgcGFnZXMgYnkgYnVkZHkgYWxsb2NhdG9yIGNhbiBi
+ZSByZWR1Y2VkLiBXaXRoCj4gPiA+ID4gPiBzZWN0aW9uIHNpemUgb2YgMjU2TUIsIGhvdCBhZGQg
+bGF0ZW5jeSBvZiBhIHNpbmdsZSBzZWN0aW9uCj4gPiA+ID4gPiBzaG93cyBpbXByb3ZlbWVudCBm
+cm9tIDUwLTYwIG1zIHRvIGxlc3MgdGhhbiAxIG1zLCBoZW5jZQo+ID4gPiA+ID4gaW1wcm92aW5n
+IHRoZSBob3QgYWRkIGxhdGVuY3kgYnkgNjAlLiBNb2RpZnkgZXh0ZXJuYWwKPiA+ID4gPiA+IHBy
+b3ZpZGVycyBvZiBvbmxpbmUgY2FsbGJhY2sgdG8gYWxpZ24gd2l0aCB0aGUgY2hhbmdlLgo+ID4g
+PiA+ID4KPiA+ID4gPiA+IFNpZ25lZC1vZmYtYnk6IEFydW4gS1MgPGFydW5rc0Bjb2RlYXVyb3Jh
+Lm9yZz4KPiA+ID4gPgo+ID4gPiA+IFsuLi5dCj4gPiA+ID4KPiA+ID4gPiA+IEBAIC02NTUsMjYg
+KzY1NSw0NCBAQCB2b2lkIF9fb25saW5lX3BhZ2VfZnJlZShzdHJ1Y3QgcGFnZSAqcGFnZSkKPiA+
+ID4gPiA+ICB9Cj4gPiA+ID4gPiAgRVhQT1JUX1NZTUJPTF9HUEwoX19vbmxpbmVfcGFnZV9mcmVl
+KTsKPiA+ID4gPiA+Cj4gPiA+ID4gPiAtc3RhdGljIHZvaWQgZ2VuZXJpY19vbmxpbmVfcGFnZShz
+dHJ1Y3QgcGFnZSAqcGFnZSkKPiA+ID4gPiA+ICtzdGF0aWMgaW50IGdlbmVyaWNfb25saW5lX3Bh
+Z2Uoc3RydWN0IHBhZ2UgKnBhZ2UsIHVuc2lnbmVkIGludCBvcmRlcikKPiA+ID4gPiA+ICB7Cj4g
+PiA+ID4gPiAtCV9fb25saW5lX3BhZ2Vfc2V0X2xpbWl0cyhwYWdlKTsKPiA+ID4gPgo+ID4gPiA+
+IFRoaXMgaXMgbm93IG5vdCBjYWxsZWQgYW55bW9yZSwgYWx0aG91Z2ggdGhlIHhlbi9odiB2YXJp
+YW50cyBzdGlsbCBkbwo+ID4gPiA+IGl0LiBUaGUgZnVuY3Rpb24gc2VlbXMgZW1wdHkgdGhlc2Ug
+ZGF5cywgbWF5YmUgcmVtb3ZlIGl0IGFzIGEgZm9sbG93dXAKPiA+ID4gPiBjbGVhbnVwPwo+ID4g
+PiA+Cj4gPiA+ID4gPiAtCV9fb25saW5lX3BhZ2VfaW5jcmVtZW50X2NvdW50ZXJzKHBhZ2UpOwo+
+ID4gPiA+ID4gLQlfX29ubGluZV9wYWdlX2ZyZWUocGFnZSk7Cj4gPiA+ID4gPiArCV9fZnJlZV9w
+YWdlc19jb3JlKHBhZ2UsIG9yZGVyKTsKPiA+ID4gPiA+ICsJdG90YWxyYW1fcGFnZXMgKz0gKDFV
+TCA8PCBvcmRlcik7Cj4gPiA+ID4gPiArI2lmZGVmIENPTkZJR19ISUdITUVNCj4gPiA+ID4gPiAr
+CWlmIChQYWdlSGlnaE1lbShwYWdlKSkKPiA+ID4gPiA+ICsJCXRvdGFsaGlnaF9wYWdlcyArPSAo
+MVVMIDw8IG9yZGVyKTsKPiA+ID4gPiA+ICsjZW5kaWYKPiA+ID4gPgo+ID4gPiA+IF9fb25saW5l
+X3BhZ2VfaW5jcmVtZW50X2NvdW50ZXJzKCkgd291bGQgaGF2ZSB1c2VkCj4gPiA+ID4gYWRqdXN0
+X21hbmFnZWRfcGFnZV9jb3VudCgpIHdoaWNoIHdvdWxkIGRvIHRoZSBjaGFuZ2VzIHVuZGVyCj4g
+PiA+ID4gbWFuYWdlZF9wYWdlX2NvdW50X2xvY2suIEFyZSB3ZSBzYWZlIHdpdGhvdXQgdGhlIGxv
+Y2s/IElmIHllcywgdGhlcmUKPiA+ID4gPiBzaG91bGQgcGVyaGFwcyBiZSBhIGNvbW1lbnQgZXhw
+bGFpbmluZyB3aHkuCj4gPiA+IAo+ID4gPiBMb29rcyB1bnNhZmUgd2l0aG91dCBtYW5hZ2VkX3Bh
+Z2VfY291bnRfbG9jay4KPiA+IAo+ID4gV2h5IGRvZXMgaXQgbWF0dGVyIGFjdHVhbGx5PyBXZSBj
+YW5ub3Qgb25saW5lL29mZmxpbmUgbWVtb3J5IGluCj4gPiBwYXJhbGxlbC4gVGhpcyBpcyBub3Qg
+dGhlIGNhc2UgZm9yIHRoZSBib290IHdoZXJlIHdlIGluaXRpYWxpemUgbWVtb3J5Cj4gPiBpbiBw
+YXJhbGxlbCBvbiBtdWx0aXBsZSBub2Rlcy4gU28gdGhpcyBzZWVtcyB0byBiZSBzYWZlIGN1cnJl
+bnRseSB1bmxlc3MKPiA+IEkgYW0gbWlzc2luZyBzb21ldGhpbmcuIEEgY29tbWVudCBleHBsYWlu
+aW5nIHRoYXQgd291bGQgYmUgaGVscGZ1bAo+ID4gdGhvdWdoLgo+IAo+IE90aGVyIG1haW4gY2Fs
+bGVycyBvZiBhZGp1c3RfbWFuYWdlX3BhZ2VfY291bnQoKSwKPiAKPiBzdGF0aWMgaW5saW5lIHZv
+aWQgZnJlZV9yZXNlcnZlZF9wYWdlKHN0cnVjdCBwYWdlICpwYWdlKQo+IHsKPiAgICAgICAgIF9f
+ZnJlZV9yZXNlcnZlZF9wYWdlKHBhZ2UpOwo+ICAgICAgICAgYWRqdXN0X21hbmFnZWRfcGFnZV9j
+b3VudChwYWdlLCAxKTsKPiB9Cj4gCj4gc3RhdGljIGlubGluZSB2b2lkIG1hcmtfcGFnZV9yZXNl
+cnZlZChzdHJ1Y3QgcGFnZSAqcGFnZSkKPiB7Cj4gICAgICAgICBTZXRQYWdlUmVzZXJ2ZWQocGFn
+ZSk7Cj4gICAgICAgICBhZGp1c3RfbWFuYWdlZF9wYWdlX2NvdW50KHBhZ2UsIC0xKTsKPiB9Cj4g
+Cj4gV29uJ3QgdGhleSByYWNlIHdpdGggbWVtb3J5IGhvdHBsdWc/Cj4gCj4gRmV3IG1vcmUsCj4g
+Li9kcml2ZXJzL3hlbi9iYWxsb29uLmM6NTE5OiAgICAgICAgICAgIGFkanVzdF9tYW5hZ2VkX3Bh
+Z2VfY291bnQocGFnZSwgLTEpOwo+IC4vZHJpdmVycy92aXJ0aW8vdmlydGlvX2JhbGxvb24uYzox
+NzU6ICBhZGp1c3RfbWFuYWdlZF9wYWdlX2NvdW50KHBhZ2UsIC0xKTsKPiAuL2RyaXZlcnMvdmly
+dGlvL3ZpcnRpb19iYWxsb29uLmM6MTk2OiAgYWRqdXN0X21hbmFnZWRfcGFnZV9jb3VudChwYWdl
+LCAxKTsKPiAuL21tL2h1Z2V0bGIuYzoyMTU4OiAgICAgICAgICAgICAgICAgICAgYWRqdXN0X21h
+bmFnZWRfcGFnZV9jb3VudChwYWdlLCAxIDw8Cj4gaC0+b3JkZXIpOwoKVGhleSBjYW4sIGFuZCBJ
+IGhhdmUgbWlzc2VkIHRob3NlLgoKLS0gCk1pY2hhbCBIb2NrbwpTVVNFIExhYnMKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
