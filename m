@@ -1,25 +1,26 @@
-From: Spencer Michaels <spmichaels.work@gmail.com>
+From: Andrew Cooper <Andrew.Cooper3@citrix.com>
 Subject: Re: Mapping HVM guest memory from Dom0
-Date: Thu, 11 Oct 2018 16:43:35 -0400
-Message-ID: <CAAd-cWOH5ouLJ+oUMwxUxp5mp1gPT0aD_eMtQbqViBqjLug3Nw@mail.gmail.com>
+Date: Thu, 11 Oct 2018 20:56:06 +0000
+Message-ID: <7719aeffd9ea465b93528a31d69d8336@AMSPEX02CL02.citrite.net>
 References: <CAAd-cWOSqZN9LYCRxEYjgCyHq24PFsZqOFE1T_PPnq3HjDGpaA@mail.gmail.com>
  <857c04f2-345f-b9ea-44ce-6e9d0aeb8248@citrix.com>
  <CAAd-cWMrRUrS7VzGN=3B9ekm9Gqx5aYZgayWdemV=-do1F8O9w@mail.gmail.com>
  <CABfawhkmNaNesdxcOOH=58f8GH1sn8ZyJ0TU8h+=9WhK0DCFtg@mail.gmail.com>
  <CAAd-cWPjq6fBs0iuar+oznaphSCa2LUyD=8MJfjyPjCTL=OVrQ@mail.gmail.com>
  <e1112b31-5259-83c7-8f5a-47d6b6fe6b36@citrix.com>
- <CABfawhn4jPfMsAtAcmCkhTvNE9gyvUuAQ82Nmxy8Ozi1qXqoBg@mail.gmail.com>
+ <CABfawhn4jPfMsAtAcmCkhTvNE9gyvUuAQ82Nmxy8Ozi1qXqoBg@mail.gmail.com>,
+ <CAAd-cWOH5ouLJ+oUMwxUxp5mp1gPT0aD_eMtQbqViBqjLug3Nw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5029267269304393352=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=put7=mx=gmail.com=spmichaels.work@srs-us1.protection.inumbo.net>)
- id 1gAhoD-0004Hu-Bm
- for xen-devel@lists.xenproject.org; Thu, 11 Oct 2018 20:43:49 +0000
-Received: by mail-it1-x12d.google.com with SMTP id w200-v6so15234349itc.4
- for <xen-devel@lists.xenproject.org>; Thu, 11 Oct 2018 13:43:47 -0700 (PDT)
-In-Reply-To: <CABfawhn4jPfMsAtAcmCkhTvNE9gyvUuAQ82Nmxy8Ozi1qXqoBg@mail.gmail.com>
+ <srs0=gz9h=mx=citrix.com=prvs=815f8e7c3=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1gAi09-0005MW-El
+ for xen-devel@lists.xenproject.org; Thu, 11 Oct 2018 20:56:09 +0000
+In-Reply-To: <CAAd-cWOH5ouLJ+oUMwxUxp5mp1gPT0aD_eMtQbqViBqjLug3Nw@mail.gmail.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,354 +29,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Tamas Lengyel <tamas.k.lengyel@gmail.com>
-Cc: andrew.cooper3@citrix.com, xen-devel@lists.xenproject.org
+To: Spencer Michaels <spmichaels.work@gmail.com>, Tamas Lengyel <tamas.k.lengyel@gmail.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5029267269304393352==
-Content-Type: multipart/alternative; boundary="000000000000062f180577fa07b5"
-
---000000000000062f180577fa07b5
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Thanks very much to both of you for the info! After Andrew's post today I
-was able to write some code myself to walk the page tables and get it to
-work correctly, and xc_translate_foreign_address is exactly what I want as
-well. I had been digging through the Xen codebase for a while looking for
-just such a function but hadn't found it =E2=80=A6 the docs situation for t=
-hese
-APIs could definitely be better! I will definitely update the wiki with all
-this information once I'm sure I understand it properly.
-
-On Thu, Oct 11, 2018 at 3:05 PM Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-wrote:
-
-> On Wed, Oct 10, 2018 at 5:10 PM Andrew Cooper <andrew.cooper3@citrix.com>
-> wrote:
-> >
-> > On 10/10/18 23:08, Spencer Michaels wrote:
-> > > Interesting =E2=80=A6 sorry, I had read the docs a while ago and my
-> > > interpretation at the time was that it didn't. I can try to get libvm=
-i
-> > > working, but nonetheless I do want to figure out how to this with the
-> > > Xen API itself if at all possible, so I'd appreciate any help in doin=
-g
-> > > so.
-> > >
-> > > I've looked through libvmi's implementation some more; it looks like
-> > > it does this via vmi_pagetable_lookup_cache, which in my case ends up
-> > > calling v2p_pae (intel.c:327). As I understand it, in that function,
-> > > the `dtb` parameter holds the pagetable base address, and you use tha=
-t
-> > > to walk the page table and get the physical address corresponding to
-> > > the virtual addr. Based on the end of vmi_translate_kv2p
-> > > (accessors.c:703), it looks like the value of dtb is `vmi->kpgd`,
-> > > which at some point earlier is set to the value of the `cr3` register=
-.
-> > > Is my understanding, roughly speaking, correct?
->
-> Correct, this works because the kernel is mapped into all process'
-> address space on both Windows and Linux. So you can just take the
-> value of CR3 at any given time and you will find the kernel memory
-> range mapped in. The recent KPTI mitigations might effect this though,
-> haven't investigated it yet.
->
-> > > I tried to replicate a simpler version of libvmi's page table walking
-> > > code just now, and in doing so noticed that the value of CR0, as
-> > > reported by Xen, has its 31st bit set to zero =E2=80=A6 i.e. virtual
-> > > addressing is disabled entirely? (For reference, I'm using a 64-bit
-> > > Ubuntu image set up initially by virt-manager but now just run via `x=
-l
-> > > create`. I don't know if I should expect it to have paging enabled or
-> > > not.) On the other hand, if I understand correctly, what I mentioned
-> > > earlier with regards to some HVM guests assuming (addr >>
-> > > XC_PAGE_SHIFT) =3D MFN *is* assuming that guest page frame number =3D
-> > > machine frame number, which sounds like it is what would be applicabl=
-e
-> > > in this case.
-> > >
-> > > Honestly, I'm not so sure what's happening here, and I'm not even sur=
-e
-> > > my description is sensible at this point =E2=80=94 I need to look int=
-o
-> > > libvmi's implementation more and also figure out exactly what paging
-> > > mode (or lack thereof) my HVM guest is running in. If, on the other
-> > > hand, any of the above sounds familiar, suggestions/hints would be
-> > > very helpful.
->
-> If you want to look at another very compact implementation then libxc
-> has one too:
-> https://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dtools/libxc/xc_p=
-agetab.c;h=3Ddb25c20247573a3c638d7725c976433221a40141;hb=3DHEAD#l29
->
-> > Here are some observations/points which may help.
-> >
-> > x86 is a bit more complicated than other architectures, and as a result=
-,
-> > there is a lot of subtly incorrect terminology (including in Libvmi -
-> > sorry Tamas).
->
-> Well aware of it =3D)
->
-> >
-> > A virtual address (also called an effective address) is a segment:offse=
-t
-> > pair.  The segment is almost always implicit (%cs for instruction
-> > fetches, %ss for stack accesses, %ds for normal data accesses).  The
-> > segmentation part of address translation adds the segment base to the
-> > offset to produce a linear address.
-> >
-> > A "flat memory model" (used by almost all 32bit OSes and is
-> > unconditional in AMD64) is one where the segment base is 0, at which
-> > point offset =3D=3D linear address.  This is where most confusion over =
-the
-> > term "virtual address" arises.
-> >
-> > The paging part of address translation takes a linear address, follows
-> > the pagetable structure (rooted in %cr3), to produce a physical address
-> > as an output.  This may be guest physical or host physical depending on
-> > the VM configuration.
-> >
-> >
-> > Next, please read
-> >
-> http://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dxen/include/xen/m=
-m.h;h=3D054d02e6c0e68b411afba42424dc5fe7e7d69855;hb=3Drefs/heads/staging#l8
-> > which describes the terminology Xen uses for various address spaces.  I=
-n
-> > particular, the difference between MFN and GFN.
-> >
-> > The relevant difference PV and HVM guests as far as you are concerned i=
-s
-> > that for PV guests, GFN =3D=3D MFN because the pagetables written by th=
-e
-> > guest are walked directly by hardware.
-> >
-> > An HVM guest has GFN !=3D MFN, because the guest physical to host physi=
-cal
-> > translation is provided by HAP/EPT/NPT/SLAT (whichever term you chose t=
-o
-> > use for hardware acceleration), or by the shadow pagetables (maintained
-> > and operated by Xen, for hardware lacking HAP support).
-> >
-> > The foreign map API uses a GFN, even if the underlying API describes th=
-e
-> > parameter name as MFN.  This is a consequence of PV guests having been
-> > developed long before hardware virt extensions came along, and noone
-> > having gone through and retroactively updated the terminology.
-> >
-> > Therefore, for both PV and HVM guests, you can take the guest cr3,
-> > extract the frame part of it, and ask the foreign map API to map that
-> > guest frame.  The underlying implementation in Xen is trivial for a PV
-> > guest (GFN =3D=3D MFN), but slightly more complicated for HVM guests (G=
-FN
-> > has to be translated into an MFN by Xen walking the HAP/shadow
-> > pagetables before dom0's mapping request can be completed).
-> >
-> > I hope this clears up some of the confusion.
-> >
->
-> Thanks for the in-depth write-up! We might even want to record this on
-> a wiki page ;)
->
-> Tamas
->
-
---000000000000062f180577fa07b5
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">Thanks very much to both of you for the i=
-nfo! After Andrew&#39;s post today I was able to write some code myself to =
-walk the page tables and get it to work correctly, and xc_translate_foreign=
-_address is exactly what I want as well. I had been digging through the Xen=
- codebase for a while looking for just such a function but hadn&#39;t found=
- it =E2=80=A6 the docs situation for these APIs could definitely be better!=
- I will definitely update the wiki with all this information once I&#39;m s=
-ure I understand it properly.</div></div><br><div class=3D"gmail_quote"><di=
-v dir=3D"ltr">On Thu, Oct 11, 2018 at 3:05 PM Tamas K Lengyel &lt;<a href=
-=3D"mailto:tamas.k.lengyel@gmail.com">tamas.k.lengyel@gmail.com</a>&gt; wro=
-te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;b=
-order-left:1px #ccc solid;padding-left:1ex">On Wed, Oct 10, 2018 at 5:10 PM=
- Andrew Cooper &lt;<a href=3D"mailto:andrew.cooper3@citrix.com" target=3D"_=
-blank">andrew.cooper3@citrix.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; On 10/10/18 23:08, Spencer Michaels wrote:<br>
-&gt; &gt; Interesting =E2=80=A6 sorry, I had read the docs a while ago and =
-my<br>
-&gt; &gt; interpretation at the time was that it didn&#39;t. I can try to g=
-et libvmi<br>
-&gt; &gt; working, but nonetheless I do want to figure out how to this with=
- the<br>
-&gt; &gt; Xen API itself if at all possible, so I&#39;d appreciate any help=
- in doing<br>
-&gt; &gt; so.<br>
-&gt; &gt;<br>
-&gt; &gt; I&#39;ve looked through libvmi&#39;s implementation some more; it=
- looks like<br>
-&gt; &gt; it does this via vmi_pagetable_lookup_cache, which in my case end=
-s up<br>
-&gt; &gt; calling v2p_pae (intel.c:327). As I understand it, in that functi=
-on,<br>
-&gt; &gt; the `dtb` parameter holds the pagetable base address, and you use=
- that<br>
-&gt; &gt; to walk the page table and get the physical address corresponding=
- to<br>
-&gt; &gt; the virtual addr. Based on the end of vmi_translate_kv2p<br>
-&gt; &gt; (accessors.c:703), it looks like the value of dtb is `vmi-&gt;kpg=
-d`,<br>
-&gt; &gt; which at some point earlier is set to the value of the `cr3` regi=
-ster.<br>
-&gt; &gt; Is my understanding, roughly speaking, correct?<br>
-<br>
-Correct, this works because the kernel is mapped into all process&#39;<br>
-address space on both Windows and Linux. So you can just take the<br>
-value of CR3 at any given time and you will find the kernel memory<br>
-range mapped in. The recent KPTI mitigations might effect this though,<br>
-haven&#39;t investigated it yet.<br>
-<br>
-&gt; &gt; I tried to replicate a simpler version of libvmi&#39;s page table=
- walking<br>
-&gt; &gt; code just now, and in doing so noticed that the value of CR0, as<=
-br>
-&gt; &gt; reported by Xen, has its 31st bit set to zero =E2=80=A6 i.e. virt=
-ual<br>
-&gt; &gt; addressing is disabled entirely? (For reference, I&#39;m using a =
-64-bit<br>
-&gt; &gt; Ubuntu image set up initially by virt-manager but now just run vi=
-a `xl<br>
-&gt; &gt; create`. I don&#39;t know if I should expect it to have paging en=
-abled or<br>
-&gt; &gt; not.) On the other hand, if I understand correctly, what I mentio=
-ned<br>
-&gt; &gt; earlier with regards to some HVM guests assuming (addr &gt;&gt;<b=
-r>
-&gt; &gt; XC_PAGE_SHIFT) =3D MFN *is* assuming that guest page frame number=
- =3D<br>
-&gt; &gt; machine frame number, which sounds like it is what would be appli=
-cable<br>
-&gt; &gt; in this case.<br>
-&gt; &gt;<br>
-&gt; &gt; Honestly, I&#39;m not so sure what&#39;s happening here, and I&#3=
-9;m not even sure<br>
-&gt; &gt; my description is sensible at this point =E2=80=94 I need to look=
- into<br>
-&gt; &gt; libvmi&#39;s implementation more and also figure out exactly what=
- paging<br>
-&gt; &gt; mode (or lack thereof) my HVM guest is running in. If, on the oth=
-er<br>
-&gt; &gt; hand, any of the above sounds familiar, suggestions/hints would b=
-e<br>
-&gt; &gt; very helpful.<br>
-<br>
-If you want to look at another very compact implementation then libxc<br>
-has one too: <a href=3D"https://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblo=
-b;f=3Dtools/libxc/xc_pagetab.c;h=3Ddb25c20247573a3c638d7725c976433221a40141=
-;hb=3DHEAD#l29" rel=3D"noreferrer" target=3D"_blank">https://xenbits.xen.or=
-g/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dtools/libxc/xc_pagetab.c;h=3Ddb25c202475=
-73a3c638d7725c976433221a40141;hb=3DHEAD#l29</a><br>
-<br>
-&gt; Here are some observations/points which may help.<br>
-&gt;<br>
-&gt; x86 is a bit more complicated than other architectures, and as a resul=
-t,<br>
-&gt; there is a lot of subtly incorrect terminology (including in Libvmi -<=
-br>
-&gt; sorry Tamas).<br>
-<br>
-Well aware of it =3D)<br>
-<br>
-&gt;<br>
-&gt; A virtual address (also called an effective address) is a segment:offs=
-et<br>
-&gt; pair.=C2=A0 The segment is almost always implicit (%cs for instruction=
-<br>
-&gt; fetches, %ss for stack accesses, %ds for normal data accesses).=C2=A0 =
-The<br>
-&gt; segmentation part of address translation adds the segment base to the<=
-br>
-&gt; offset to produce a linear address.<br>
-&gt;<br>
-&gt; A &quot;flat memory model&quot; (used by almost all 32bit OSes and is<=
-br>
-&gt; unconditional in AMD64) is one where the segment base is 0, at which<b=
-r>
-&gt; point offset =3D=3D linear address.=C2=A0 This is where most confusion=
- over the<br>
-&gt; term &quot;virtual address&quot; arises.<br>
-&gt;<br>
-&gt; The paging part of address translation takes a linear address, follows=
-<br>
-&gt; the pagetable structure (rooted in %cr3), to produce a physical addres=
-s<br>
-&gt; as an output.=C2=A0 This may be guest physical or host physical depend=
-ing on<br>
-&gt; the VM configuration.<br>
-&gt;<br>
-&gt;<br>
-&gt; Next, please read<br>
-&gt; <a href=3D"http://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dxen=
-/include/xen/mm.h;h=3D054d02e6c0e68b411afba42424dc5fe7e7d69855;hb=3Drefs/he=
-ads/staging#l8" rel=3D"noreferrer" target=3D"_blank">http://xenbits.xen.org=
-/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dxen/include/xen/mm.h;h=3D054d02e6c0e68b41=
-1afba42424dc5fe7e7d69855;hb=3Drefs/heads/staging#l8</a><br>
-&gt; which describes the terminology Xen uses for various address spaces.=
-=C2=A0 In<br>
-&gt; particular, the difference between MFN and GFN.<br>
-&gt;<br>
-&gt; The relevant difference PV and HVM guests as far as you are concerned =
-is<br>
-&gt; that for PV guests, GFN =3D=3D MFN because the pagetables written by t=
-he<br>
-&gt; guest are walked directly by hardware.<br>
-&gt;<br>
-&gt; An HVM guest has GFN !=3D MFN, because the guest physical to host phys=
-ical<br>
-&gt; translation is provided by HAP/EPT/NPT/SLAT (whichever term you chose =
-to<br>
-&gt; use for hardware acceleration), or by the shadow pagetables (maintaine=
-d<br>
-&gt; and operated by Xen, for hardware lacking HAP support).<br>
-&gt;<br>
-&gt; The foreign map API uses a GFN, even if the underlying API describes t=
-he<br>
-&gt; parameter name as MFN.=C2=A0 This is a consequence of PV guests having=
- been<br>
-&gt; developed long before hardware virt extensions came along, and noone<b=
-r>
-&gt; having gone through and retroactively updated the terminology.<br>
-&gt;<br>
-&gt; Therefore, for both PV and HVM guests, you can take the guest cr3,<br>
-&gt; extract the frame part of it, and ask the foreign map API to map that<=
-br>
-&gt; guest frame.=C2=A0 The underlying implementation in Xen is trivial for=
- a PV<br>
-&gt; guest (GFN =3D=3D MFN), but slightly more complicated for HVM guests (=
-GFN<br>
-&gt; has to be translated into an MFN by Xen walking the HAP/shadow<br>
-&gt; pagetables before dom0&#39;s mapping request can be completed).<br>
-&gt;<br>
-&gt; I hope this clears up some of the confusion.<br>
-&gt;<br>
-<br>
-Thanks for the in-depth write-up! We might even want to record this on<br>
-a wiki page ;)<br>
-<br>
-Tamas<br>
-</blockquote></div>
-
---000000000000062f180577fa07b5--
-
-
---===============5029267269304393352==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5029267269304393352==--
+aHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9eGVuLmdpdDthPWJsb2I7Zj14ZW4vYXJj
+aC94ODYvbW0vZ3Vlc3Rfd2Fsay5jO2g9ZjY3YWVkYTNkMGI3M2EyZDc5ZDQzNjc0MWMwYjIzMzgw
+N2RjMjAyNDtoYj1yZWZzL2hlYWRzL3N0YWdpbmcjbDU5CgpCZSBhd2FyZSB0aG91Z2gsIHRoaXMg
+ZmlsZSBpcyBjb21waWxlZCAzIHRpbWVzIGZvciBlYWNoIG9mIHRoZSBwYWdpbmcgbW9kZXMuCgp+
+QW5kcmV3IAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KRnJvbTogU3Bl
+bmNlciBNaWNoYWVscyBbc3BtaWNoYWVscy53b3JrQGdtYWlsLmNvbV0KU2VudDogMTEgT2N0b2Jl
+ciAyMDE4IDIxOjQzClRvOiBUYW1hcyBMZW5neWVsCkNjOiBBbmRyZXcgQ29vcGVyOyB4ZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKU3ViamVjdDogUmU6IFtYZW4tZGV2ZWxdIE1hcHBpbmcg
+SFZNIGd1ZXN0IG1lbW9yeSBmcm9tIERvbTAKClRoYW5rcyB2ZXJ5IG11Y2ggdG8gYm90aCBvZiB5
+b3UgZm9yIHRoZSBpbmZvISBBZnRlciBBbmRyZXcncyBwb3N0IHRvZGF5IEkgd2FzIGFibGUgdG8g
+d3JpdGUgc29tZSBjb2RlIG15c2VsZiB0byB3YWxrIHRoZSBwYWdlIHRhYmxlcyBhbmQgZ2V0IGl0
+IHRvIHdvcmsgY29ycmVjdGx5LCBhbmQgeGNfdHJhbnNsYXRlX2ZvcmVpZ25fYWRkcmVzcyBpcyBl
+eGFjdGx5IHdoYXQgSSB3YW50IGFzIHdlbGwuIEkgaGFkIGJlZW4gZGlnZ2luZyB0aHJvdWdoIHRo
+ZSBYZW4gY29kZWJhc2UgZm9yIGEgd2hpbGUgbG9va2luZyBmb3IganVzdCBzdWNoIGEgZnVuY3Rp
+b24gYnV0IGhhZG4ndCBmb3VuZCBpdCDigKYgdGhlIGRvY3Mgc2l0dWF0aW9uIGZvciB0aGVzZSBB
+UElzIGNvdWxkIGRlZmluaXRlbHkgYmUgYmV0dGVyISBJIHdpbGwgZGVmaW5pdGVseSB1cGRhdGUg
+dGhlIHdpa2kgd2l0aCBhbGwgdGhpcyBpbmZvcm1hdGlvbiBvbmNlIEknbSBzdXJlIEkgdW5kZXJz
+dGFuZCBpdCBwcm9wZXJseS4KCk9uIFRodSwgT2N0IDExLCAyMDE4IGF0IDM6MDUgUE0gVGFtYXMg
+SyBMZW5neWVsIDx0YW1hcy5rLmxlbmd5ZWxAZ21haWwuY29tPG1haWx0bzp0YW1hcy5rLmxlbmd5
+ZWxAZ21haWwuY29tPj4gd3JvdGU6Ck9uIFdlZCwgT2N0IDEwLCAyMDE4IGF0IDU6MTAgUE0gQW5k
+cmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbTxtYWlsdG86YW5kcmV3LmNvb3Bl
+cjNAY2l0cml4LmNvbT4+IHdyb3RlOgo+Cj4gT24gMTAvMTAvMTggMjM6MDgsIFNwZW5jZXIgTWlj
+aGFlbHMgd3JvdGU6Cj4gPiBJbnRlcmVzdGluZyDigKYgc29ycnksIEkgaGFkIHJlYWQgdGhlIGRv
+Y3MgYSB3aGlsZSBhZ28gYW5kIG15Cj4gPiBpbnRlcnByZXRhdGlvbiBhdCB0aGUgdGltZSB3YXMg
+dGhhdCBpdCBkaWRuJ3QuIEkgY2FuIHRyeSB0byBnZXQgbGlidm1pCj4gPiB3b3JraW5nLCBidXQg
+bm9uZXRoZWxlc3MgSSBkbyB3YW50IHRvIGZpZ3VyZSBvdXQgaG93IHRvIHRoaXMgd2l0aCB0aGUK
+PiA+IFhlbiBBUEkgaXRzZWxmIGlmIGF0IGFsbCBwb3NzaWJsZSwgc28gSSdkIGFwcHJlY2lhdGUg
+YW55IGhlbHAgaW4gZG9pbmcKPiA+IHNvLgo+ID4KPiA+IEkndmUgbG9va2VkIHRocm91Z2ggbGli
+dm1pJ3MgaW1wbGVtZW50YXRpb24gc29tZSBtb3JlOyBpdCBsb29rcyBsaWtlCj4gPiBpdCBkb2Vz
+IHRoaXMgdmlhIHZtaV9wYWdldGFibGVfbG9va3VwX2NhY2hlLCB3aGljaCBpbiBteSBjYXNlIGVu
+ZHMgdXAKPiA+IGNhbGxpbmcgdjJwX3BhZSAoaW50ZWwuYzozMjcpLiBBcyBJIHVuZGVyc3RhbmQg
+aXQsIGluIHRoYXQgZnVuY3Rpb24sCj4gPiB0aGUgYGR0YmAgcGFyYW1ldGVyIGhvbGRzIHRoZSBw
+YWdldGFibGUgYmFzZSBhZGRyZXNzLCBhbmQgeW91IHVzZSB0aGF0Cj4gPiB0byB3YWxrIHRoZSBw
+YWdlIHRhYmxlIGFuZCBnZXQgdGhlIHBoeXNpY2FsIGFkZHJlc3MgY29ycmVzcG9uZGluZyB0bwo+
+ID4gdGhlIHZpcnR1YWwgYWRkci4gQmFzZWQgb24gdGhlIGVuZCBvZiB2bWlfdHJhbnNsYXRlX2t2
+MnAKPiA+IChhY2Nlc3NvcnMuYzo3MDMpLCBpdCBsb29rcyBsaWtlIHRoZSB2YWx1ZSBvZiBkdGIg
+aXMgYHZtaS0+a3BnZGAsCj4gPiB3aGljaCBhdCBzb21lIHBvaW50IGVhcmxpZXIgaXMgc2V0IHRv
+IHRoZSB2YWx1ZSBvZiB0aGUgYGNyM2AgcmVnaXN0ZXIuCj4gPiBJcyBteSB1bmRlcnN0YW5kaW5n
+LCByb3VnaGx5IHNwZWFraW5nLCBjb3JyZWN0PwoKQ29ycmVjdCwgdGhpcyB3b3JrcyBiZWNhdXNl
+IHRoZSBrZXJuZWwgaXMgbWFwcGVkIGludG8gYWxsIHByb2Nlc3MnCmFkZHJlc3Mgc3BhY2Ugb24g
+Ym90aCBXaW5kb3dzIGFuZCBMaW51eC4gU28geW91IGNhbiBqdXN0IHRha2UgdGhlCnZhbHVlIG9m
+IENSMyBhdCBhbnkgZ2l2ZW4gdGltZSBhbmQgeW91IHdpbGwgZmluZCB0aGUga2VybmVsIG1lbW9y
+eQpyYW5nZSBtYXBwZWQgaW4uIFRoZSByZWNlbnQgS1BUSSBtaXRpZ2F0aW9ucyBtaWdodCBlZmZl
+Y3QgdGhpcyB0aG91Z2gsCmhhdmVuJ3QgaW52ZXN0aWdhdGVkIGl0IHlldC4KCj4gPiBJIHRyaWVk
+IHRvIHJlcGxpY2F0ZSBhIHNpbXBsZXIgdmVyc2lvbiBvZiBsaWJ2bWkncyBwYWdlIHRhYmxlIHdh
+bGtpbmcKPiA+IGNvZGUganVzdCBub3csIGFuZCBpbiBkb2luZyBzbyBub3RpY2VkIHRoYXQgdGhl
+IHZhbHVlIG9mIENSMCwgYXMKPiA+IHJlcG9ydGVkIGJ5IFhlbiwgaGFzIGl0cyAzMXN0IGJpdCBz
+ZXQgdG8gemVybyDigKYgaS5lLiB2aXJ0dWFsCj4gPiBhZGRyZXNzaW5nIGlzIGRpc2FibGVkIGVu
+dGlyZWx5PyAoRm9yIHJlZmVyZW5jZSwgSSdtIHVzaW5nIGEgNjQtYml0Cj4gPiBVYnVudHUgaW1h
+Z2Ugc2V0IHVwIGluaXRpYWxseSBieSB2aXJ0LW1hbmFnZXIgYnV0IG5vdyBqdXN0IHJ1biB2aWEg
+YHhsCj4gPiBjcmVhdGVgLiBJIGRvbid0IGtub3cgaWYgSSBzaG91bGQgZXhwZWN0IGl0IHRvIGhh
+dmUgcGFnaW5nIGVuYWJsZWQgb3IKPiA+IG5vdC4pIE9uIHRoZSBvdGhlciBoYW5kLCBpZiBJIHVu
+ZGVyc3RhbmQgY29ycmVjdGx5LCB3aGF0IEkgbWVudGlvbmVkCj4gPiBlYXJsaWVyIHdpdGggcmVn
+YXJkcyB0byBzb21lIEhWTSBndWVzdHMgYXNzdW1pbmcgKGFkZHIgPj4KPiA+IFhDX1BBR0VfU0hJ
+RlQpID0gTUZOICppcyogYXNzdW1pbmcgdGhhdCBndWVzdCBwYWdlIGZyYW1lIG51bWJlciA9Cj4g
+PiBtYWNoaW5lIGZyYW1lIG51bWJlciwgd2hpY2ggc291bmRzIGxpa2UgaXQgaXMgd2hhdCB3b3Vs
+ZCBiZSBhcHBsaWNhYmxlCj4gPiBpbiB0aGlzIGNhc2UuCj4gPgo+ID4gSG9uZXN0bHksIEknbSBu
+b3Qgc28gc3VyZSB3aGF0J3MgaGFwcGVuaW5nIGhlcmUsIGFuZCBJJ20gbm90IGV2ZW4gc3VyZQo+
+ID4gbXkgZGVzY3JpcHRpb24gaXMgc2Vuc2libGUgYXQgdGhpcyBwb2ludCDigJQgSSBuZWVkIHRv
+IGxvb2sgaW50bwo+ID4gbGlidm1pJ3MgaW1wbGVtZW50YXRpb24gbW9yZSBhbmQgYWxzbyBmaWd1
+cmUgb3V0IGV4YWN0bHkgd2hhdCBwYWdpbmcKPiA+IG1vZGUgKG9yIGxhY2sgdGhlcmVvZikgbXkg
+SFZNIGd1ZXN0IGlzIHJ1bm5pbmcgaW4uIElmLCBvbiB0aGUgb3RoZXIKPiA+IGhhbmQsIGFueSBv
+ZiB0aGUgYWJvdmUgc291bmRzIGZhbWlsaWFyLCBzdWdnZXN0aW9ucy9oaW50cyB3b3VsZCBiZQo+
+ID4gdmVyeSBoZWxwZnVsLgoKSWYgeW91IHdhbnQgdG8gbG9vayBhdCBhbm90aGVyIHZlcnkgY29t
+cGFjdCBpbXBsZW1lbnRhdGlvbiB0aGVuIGxpYnhjCmhhcyBvbmUgdG9vOiBodHRwczovL3hlbmJp
+dHMueGVuLm9yZy9naXR3ZWIvP3A9eGVuLmdpdDthPWJsb2I7Zj10b29scy9saWJ4Yy94Y19wYWdl
+dGFiLmM7aD1kYjI1YzIwMjQ3NTczYTNjNjM4ZDc3MjVjOTc2NDMzMjIxYTQwMTQxO2hiPUhFQUQj
+bDI5Cgo+IEhlcmUgYXJlIHNvbWUgb2JzZXJ2YXRpb25zL3BvaW50cyB3aGljaCBtYXkgaGVscC4K
+Pgo+IHg4NiBpcyBhIGJpdCBtb3JlIGNvbXBsaWNhdGVkIHRoYW4gb3RoZXIgYXJjaGl0ZWN0dXJl
+cywgYW5kIGFzIGEgcmVzdWx0LAo+IHRoZXJlIGlzIGEgbG90IG9mIHN1YnRseSBpbmNvcnJlY3Qg
+dGVybWlub2xvZ3kgKGluY2x1ZGluZyBpbiBMaWJ2bWkgLQo+IHNvcnJ5IFRhbWFzKS4KCldlbGwg
+YXdhcmUgb2YgaXQgPSkKCj4KPiBBIHZpcnR1YWwgYWRkcmVzcyAoYWxzbyBjYWxsZWQgYW4gZWZm
+ZWN0aXZlIGFkZHJlc3MpIGlzIGEgc2VnbWVudDpvZmZzZXQKPiBwYWlyLiAgVGhlIHNlZ21lbnQg
+aXMgYWxtb3N0IGFsd2F5cyBpbXBsaWNpdCAoJWNzIGZvciBpbnN0cnVjdGlvbgo+IGZldGNoZXMs
+ICVzcyBmb3Igc3RhY2sgYWNjZXNzZXMsICVkcyBmb3Igbm9ybWFsIGRhdGEgYWNjZXNzZXMpLiAg
+VGhlCj4gc2VnbWVudGF0aW9uIHBhcnQgb2YgYWRkcmVzcyB0cmFuc2xhdGlvbiBhZGRzIHRoZSBz
+ZWdtZW50IGJhc2UgdG8gdGhlCj4gb2Zmc2V0IHRvIHByb2R1Y2UgYSBsaW5lYXIgYWRkcmVzcy4K
+Pgo+IEEgImZsYXQgbWVtb3J5IG1vZGVsIiAodXNlZCBieSBhbG1vc3QgYWxsIDMyYml0IE9TZXMg
+YW5kIGlzCj4gdW5jb25kaXRpb25hbCBpbiBBTUQ2NCkgaXMgb25lIHdoZXJlIHRoZSBzZWdtZW50
+IGJhc2UgaXMgMCwgYXQgd2hpY2gKPiBwb2ludCBvZmZzZXQgPT0gbGluZWFyIGFkZHJlc3MuICBU
+aGlzIGlzIHdoZXJlIG1vc3QgY29uZnVzaW9uIG92ZXIgdGhlCj4gdGVybSAidmlydHVhbCBhZGRy
+ZXNzIiBhcmlzZXMuCj4KPiBUaGUgcGFnaW5nIHBhcnQgb2YgYWRkcmVzcyB0cmFuc2xhdGlvbiB0
+YWtlcyBhIGxpbmVhciBhZGRyZXNzLCBmb2xsb3dzCj4gdGhlIHBhZ2V0YWJsZSBzdHJ1Y3R1cmUg
+KHJvb3RlZCBpbiAlY3IzKSwgdG8gcHJvZHVjZSBhIHBoeXNpY2FsIGFkZHJlc3MKPiBhcyBhbiBv
+dXRwdXQuICBUaGlzIG1heSBiZSBndWVzdCBwaHlzaWNhbCBvciBob3N0IHBoeXNpY2FsIGRlcGVu
+ZGluZyBvbgo+IHRoZSBWTSBjb25maWd1cmF0aW9uLgo+Cj4KPiBOZXh0LCBwbGVhc2UgcmVhZAo+
+IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhlbi5naXQ7YT1ibG9iO2Y9eGVuL2lu
+Y2x1ZGUveGVuL21tLmg7aD0wNTRkMDJlNmMwZTY4YjQxMWFmYmE0MjQyNGRjNWZlN2U3ZDY5ODU1
+O2hiPXJlZnMvaGVhZHMvc3RhZ2luZyNsOAo+IHdoaWNoIGRlc2NyaWJlcyB0aGUgdGVybWlub2xv
+Z3kgWGVuIHVzZXMgZm9yIHZhcmlvdXMgYWRkcmVzcyBzcGFjZXMuICBJbgo+IHBhcnRpY3VsYXIs
+IHRoZSBkaWZmZXJlbmNlIGJldHdlZW4gTUZOIGFuZCBHRk4uCj4KPiBUaGUgcmVsZXZhbnQgZGlm
+ZmVyZW5jZSBQViBhbmQgSFZNIGd1ZXN0cyBhcyBmYXIgYXMgeW91IGFyZSBjb25jZXJuZWQgaXMK
+PiB0aGF0IGZvciBQViBndWVzdHMsIEdGTiA9PSBNRk4gYmVjYXVzZSB0aGUgcGFnZXRhYmxlcyB3
+cml0dGVuIGJ5IHRoZQo+IGd1ZXN0IGFyZSB3YWxrZWQgZGlyZWN0bHkgYnkgaGFyZHdhcmUuCj4K
+PiBBbiBIVk0gZ3Vlc3QgaGFzIEdGTiAhPSBNRk4sIGJlY2F1c2UgdGhlIGd1ZXN0IHBoeXNpY2Fs
+IHRvIGhvc3QgcGh5c2ljYWwKPiB0cmFuc2xhdGlvbiBpcyBwcm92aWRlZCBieSBIQVAvRVBUL05Q
+VC9TTEFUICh3aGljaGV2ZXIgdGVybSB5b3UgY2hvc2UgdG8KPiB1c2UgZm9yIGhhcmR3YXJlIGFj
+Y2VsZXJhdGlvbiksIG9yIGJ5IHRoZSBzaGFkb3cgcGFnZXRhYmxlcyAobWFpbnRhaW5lZAo+IGFu
+ZCBvcGVyYXRlZCBieSBYZW4sIGZvciBoYXJkd2FyZSBsYWNraW5nIEhBUCBzdXBwb3J0KS4KPgo+
+IFRoZSBmb3JlaWduIG1hcCBBUEkgdXNlcyBhIEdGTiwgZXZlbiBpZiB0aGUgdW5kZXJseWluZyBB
+UEkgZGVzY3JpYmVzIHRoZQo+IHBhcmFtZXRlciBuYW1lIGFzIE1GTi4gIFRoaXMgaXMgYSBjb25z
+ZXF1ZW5jZSBvZiBQViBndWVzdHMgaGF2aW5nIGJlZW4KPiBkZXZlbG9wZWQgbG9uZyBiZWZvcmUg
+aGFyZHdhcmUgdmlydCBleHRlbnNpb25zIGNhbWUgYWxvbmcsIGFuZCBub29uZQo+IGhhdmluZyBn
+b25lIHRocm91Z2ggYW5kIHJldHJvYWN0aXZlbHkgdXBkYXRlZCB0aGUgdGVybWlub2xvZ3kuCj4K
+PiBUaGVyZWZvcmUsIGZvciBib3RoIFBWIGFuZCBIVk0gZ3Vlc3RzLCB5b3UgY2FuIHRha2UgdGhl
+IGd1ZXN0IGNyMywKPiBleHRyYWN0IHRoZSBmcmFtZSBwYXJ0IG9mIGl0LCBhbmQgYXNrIHRoZSBm
+b3JlaWduIG1hcCBBUEkgdG8gbWFwIHRoYXQKPiBndWVzdCBmcmFtZS4gIFRoZSB1bmRlcmx5aW5n
+IGltcGxlbWVudGF0aW9uIGluIFhlbiBpcyB0cml2aWFsIGZvciBhIFBWCj4gZ3Vlc3QgKEdGTiA9
+PSBNRk4pLCBidXQgc2xpZ2h0bHkgbW9yZSBjb21wbGljYXRlZCBmb3IgSFZNIGd1ZXN0cyAoR0ZO
+Cj4gaGFzIHRvIGJlIHRyYW5zbGF0ZWQgaW50byBhbiBNRk4gYnkgWGVuIHdhbGtpbmcgdGhlIEhB
+UC9zaGFkb3cKPiBwYWdldGFibGVzIGJlZm9yZSBkb20wJ3MgbWFwcGluZyByZXF1ZXN0IGNhbiBi
+ZSBjb21wbGV0ZWQpLgo+Cj4gSSBob3BlIHRoaXMgY2xlYXJzIHVwIHNvbWUgb2YgdGhlIGNvbmZ1
+c2lvbi4KPgoKVGhhbmtzIGZvciB0aGUgaW4tZGVwdGggd3JpdGUtdXAhIFdlIG1pZ2h0IGV2ZW4g
+d2FudCB0byByZWNvcmQgdGhpcyBvbgphIHdpa2kgcGFnZSA7KQoKVGFtYXMKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
