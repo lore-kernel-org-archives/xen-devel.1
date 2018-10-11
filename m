@@ -1,20 +1,22 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH] xen/blkfront: avoid NULL blkfront_info
- dereference on device removal
-Date: Thu, 11 Oct 2018 18:34:27 +0200
-Message-ID: <20181011163427.ilpsl4hxb2y3hcfp__10087.953360244$1539275597$gmane$org@mac.bytemobile.com>
-References: <20181011162000.19191-1-vliaskovitis@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: Xen optimization
+Date: Thu, 11 Oct 2018 19:05:19 +0200
+Message-ID: <fdb78418317861d775052bc21a9da04387d0e7ce.camel@suse.com>
+References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
+ <995da0578f0953662536edabb5807fd76ca4d8ce.camel@suse.com>
+ <CADJ6SV1yDBptrcaoqUPChtnXTmvhbzj-AAv2FDN2LCMyTipc-A@mail.gmail.com>
+ <CAENZ-+=mWFnJ-4OFK+bjb4rimNNB_x4qHFVAbTM1mFd2Sg7s3g@mail.gmail.com>
+ <CADJ6SV1Mdnjyd8oEcB4ZCZKuR0LkJ82GCf5s1+AwgASe8vLMWg@mail.gmail.com>
+ <CADJ6SV0_5fSi1YkDYGGSEra4JDPDgu0ZnBfJwsEtv9UY7r6j_A@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2889565958812462518=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=h+49=mx=citrix.com=prvs=8150a737c=roger.pau@srs-us1.protection.inumbo.net>)
- id 1gAdv3-0005hm-6l
- for xen-devel@lists.xenproject.org; Thu, 11 Oct 2018 16:34:37 +0000
-Content-Disposition: inline
-In-Reply-To: <20181011162000.19191-1-vliaskovitis@suse.com>
+ <srs0=ap2w=mx=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gAePS-0000AV-Rs
+ for xen-devel@lists.xenproject.org; Thu, 11 Oct 2018 17:06:02 +0000
+In-Reply-To: <CADJ6SV0_5fSi1YkDYGGSEra4JDPDgu0ZnBfJwsEtv9UY7r6j_A@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,35 +25,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Vasilis Liaskovitis <vliaskovitis@suse.com>
-Cc: axboe@kernel.dk, jgross@suse.com, konrad.wilk@oracle.com, linux-kernel@vger.kernel.org, linux-block@vger.kernel.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+To: Milan Boberic <milanboberic94@gmail.com>, Meng Xu <xumengpanda@gmail.com>
+Cc: xen-devel@lists.xenproject.org, julien.grall@arm.com, sstabellini@kernel.org, andrii_anisov@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBPY3QgMTEsIDIwMTggYXQgMDY6MjA6MDBQTSArMDIwMCwgVmFzaWxpcyBMaWFza292
-aXRpcyB3cm90ZToKPiBJZiBhIGJsb2NrIGRldmljZSBpcyBob3QtYWRkZWQgd2hlbiB3ZSBhcmUg
-b3V0IG9mIGdyYW50cywKPiBnbnR0YWJfZ3JhbnRfZm9yZWlnbl9hY2Nlc3MgZmFpbHMgd2l0aCAt
-RU5PU1BDIChsb2cgbWVzc2FnZSAiMjgKPiBncmFudGluZyBhY2Nlc3MgdG8gcmluZyBwYWdlIikg
-aW4gdGhpcyBjb2RlIHBhdGg6Cj4gCj4gICB0YWxrX3RvX2Jsa2JhY2sgLT4KPiAJc2V0dXBfYmxr
-cmluZyAtPgo+IAkJeGVuYnVzX2dyYW50X3JpbmcgLT4KPiAJCQlnbnR0YWJfZ3JhbnRfZm9yZWln
-bl9hY2Nlc3MKPiAKPiBhbmQgdGhlIGZhaWxpbmcgcGF0aCBpbiB0YWxrX3RvX2Jsa2JhY2sgc2V0
-cyB0aGUgZHJpdmVyX2RhdGEgdG8gTlVMTDoKPiAKPiAgZGVzdHJveV9ibGtyaW5nOgo+ICAgICAg
-ICAgYmxraWZfZnJlZShpbmZvLCAwKTsKPiAKPiAgICAgICAgIG11dGV4X2xvY2soJmJsa2Zyb250
-X211dGV4KTsKPiAgICAgICAgIGZyZWVfaW5mbyhpbmZvKTsKPiAgICAgICAgIG11dGV4X3VubG9j
-aygmYmxrZnJvbnRfbXV0ZXgpOwo+IAo+ICAgICAgICAgZGV2X3NldF9kcnZkYXRhKCZkZXYtPmRl
-diwgTlVMTCk7Cj4gCj4gVGhpcyByZXN1bHRzIGluIGEgTlVMTCBwb2ludGVyIEJVRyB3aGVuIGJs
-a2Zyb250X3JlbW92ZSBhbmQgYmxraWZfZnJlZQo+IHRyeSB0byBhY2Nlc3MgdGhlIGZhaWxpbmcg
-ZGV2aWNlJ3MgTlVMTCBzdHJ1Y3QgYmxrZnJvbnRfaW5mby4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBW
-YXNpbGlzIExpYXNrb3ZpdGlzIDx2bGlhc2tvdml0aXNAc3VzZS5jb20+Cj4gLS0tCj4gIGRyaXZl
-cnMvYmxvY2sveGVuLWJsa2Zyb250LmMgfCA0ICsrKysKPiAgMSBmaWxlIGNoYW5nZWQsIDQgaW5z
-ZXJ0aW9ucygrKQo+IAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5j
-IGIvZHJpdmVycy9ibG9jay94ZW4tYmxrZnJvbnQuYwo+IGluZGV4IDQyOWQyMDEzMWM3ZS4uOTJj
-YzZjYjZiMDc4IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMKPiAr
-KysgYi9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5jCj4gQEAgLTI0OTMsNiArMjQ5Myw5IEBA
-IHN0YXRpYyBpbnQgYmxrZnJvbnRfcmVtb3ZlKHN0cnVjdCB4ZW5idXNfZGV2aWNlICp4YmRldikK
-PiAgCj4gIAlkZXZfZGJnKCZ4YmRldi0+ZGV2LCAiJXMgcmVtb3ZlZCIsIHhiZGV2LT5ub2RlbmFt
-ZSk7Cj4gIAo+ICsJaWYgKCFpbmZvKQo+ICsJCWdvdG8gb3V0OwoKSSBkb24ndCBzZWUgdGhlIHBv
-aW50IGluIGFkZGluZyB0aGUgJ291dCcgbGFiZWwuIENhbiB5b3UganVzdCByZXR1cm4gMApoZXJl
-PwoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+
+--===============2889565958812462518==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-j3X+4jJPK25rRWoO91MK"
+
+
+--=-j3X+4jJPK25rRWoO91MK
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hey,
+
+Be a bit more careful about not top posting, please? :-)
+
+On Thu, 2018-10-11 at 14:17 +0200, Milan Boberic wrote:
+> I misunderstood the passthrough concept, it only allows guest domain
+> to use certain interrupts and memory.=20
+>
+I'm afraid we totally rely on people with much more experience than me
+(and I guess Meng's) on how things work on ARM.
+
+> Is there are way to somehow
+> route interrupt from domU (bare-metal app) to hw?
+>
+Don't interrupt _come_ from hardware and go/are routed to
+hypervisor/os/app?
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-j3X+4jJPK25rRWoO91MK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlu/gs8ACgkQFkJ4iaW4
+c+6z6hAA7zy5tmkeDyuHnDrM7m22IOn9BJSA2Z96IRws/POBw4+B+NH3LjrASIZx
+pew6a4PhV8Sn3j1C9CI1XMj3Ir+K9TxwZNqELozbINwhhBSc47lXcTBaQlv1w9xQ
+80KzTRktbR/99kkCy1XlLXLz0qOrBw+WHW3WBqEPgFAcv4UYlO6sRvhmWJ9gT5qk
+TempPhtTD+bBuTjoN3Cky45eui4zqKWn8K65YLoO5kKXmS+S2q5PLN869SrOXBST
+2ODhc8qnbqkGqA7H3xXdjQuY+6TcoyRR/XxoicwwdN4fb7JM49fsRn/Hg9kawzx9
+OxsGCmnKh8x14KdgJgcZtDPMd73PQAkueIYd9fMt3aFcSjC84l5+HjxUoFHRWRKB
+VybNv3m1pHRJ+uTwRdkgIwQBW/300s8nm1oIDOy9avKVgPj8mNvOIuoTh4fents6
+R8EJko9/nMijJbDBKeJFOsnBLCQXUnd5n8HYdSRjHCuBtMKZqdXdnWOMAJB/arwi
+qaG2/jevlcUFKU8WCBqWIHySrs/8bObyPlnm/U3ioamIWg0pcMFilDnWaaudncdd
+QsbeOYIxEQ+mKG/TlH4OIXZZRe4HHnLGB1C123JhIbOshJwkf7OZUFmESCfuQC84
+xWvL0XcAYHDdGN2WPZcSO4/ovwhlJepDpMJEntE5fRLYamBNfQ0=
+=TIHX
+-----END PGP SIGNATURE-----
+
+--=-j3X+4jJPK25rRWoO91MK--
+
+
+
+--===============2889565958812462518==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2889565958812462518==--
