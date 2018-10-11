@@ -1,16 +1,25 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-4.9 test] 128570: regressions - FAIL
-Date: Thu, 11 Oct 2018 20:13:56 +0000
-Message-ID: <osstest-128570-mainreport@xen.org>
+From: Spencer Michaels <spmichaels.work@gmail.com>
+Subject: Re: Mapping HVM guest memory from Dom0
+Date: Thu, 11 Oct 2018 16:43:35 -0400
+Message-ID: <CAAd-cWOH5ouLJ+oUMwxUxp5mp1gPT0aD_eMtQbqViBqjLug3Nw@mail.gmail.com>
+References: <CAAd-cWOSqZN9LYCRxEYjgCyHq24PFsZqOFE1T_PPnq3HjDGpaA@mail.gmail.com>
+ <857c04f2-345f-b9ea-44ce-6e9d0aeb8248@citrix.com>
+ <CAAd-cWMrRUrS7VzGN=3B9ekm9Gqx5aYZgayWdemV=-do1F8O9w@mail.gmail.com>
+ <CABfawhkmNaNesdxcOOH=58f8GH1sn8ZyJ0TU8h+=9WhK0DCFtg@mail.gmail.com>
+ <CAAd-cWPjq6fBs0iuar+oznaphSCa2LUyD=8MJfjyPjCTL=OVrQ@mail.gmail.com>
+ <e1112b31-5259-83c7-8f5a-47d6b6fe6b36@citrix.com>
+ <CABfawhn4jPfMsAtAcmCkhTvNE9gyvUuAQ82Nmxy8Ozi1qXqoBg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5029267269304393352=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=eewj=mx=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gAhLN-0001LW-6p
- for xen-devel@lists.xenproject.org; Thu, 11 Oct 2018 20:14:01 +0000
+ <srs0=put7=mx=gmail.com=spmichaels.work@srs-us1.protection.inumbo.net>)
+ id 1gAhoD-0004Hu-Bm
+ for xen-devel@lists.xenproject.org; Thu, 11 Oct 2018 20:43:49 +0000
+Received: by mail-it1-x12d.google.com with SMTP id w200-v6so15234349itc.4
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Oct 2018 13:43:47 -0700 (PDT)
+In-Reply-To: <CABfawhn4jPfMsAtAcmCkhTvNE9gyvUuAQ82Nmxy8Ozi1qXqoBg@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,301 +28,354 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Tamas Lengyel <tamas.k.lengyel@gmail.com>
+Cc: andrew.cooper3@citrix.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyODU3MCBsaW51eC00LjkgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVzdC1sYWIu
-eGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyODU3MC8KClJlZ3Jlc3Npb25zIDotKAoKVGVz
-dHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0
-cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAg
-NSBob3N0LXBpbmctY2hlY2stbmF0aXZlICAgZmFpbCBSRUdSLiB2cy4gMTI4Mzg4CiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAxNiBndWVzdC1sb2NhbG1pZ3JhdGUv
-eDEwIGZhaWwgUkVHUi4gdnMuIDEyODM4OAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBi
-dXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2
-NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyODM4OAogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxp
-a2UgMTI4Mzg4CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1z
-dG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMjgzODgKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
-dXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyODM4OAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAg
-ICAgICBmYWlsIGxpa2UgMTI4Mzg4CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZG1yZXN0cmlj
-dC1hbWQ2NC1kbXJlc3RyaWN0IDEwIGRlYmlhbi1odm0taW5zdGFsbCBmYWlsIG5ldmVyIHBhc3MK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZG1yZXN0cmljdC1hbWQ2NC1kbXJlc3RyaWN0IDEw
-IGRlYmlhbi1odm0taW5zdGFsbCBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-cHZodjItaW50ZWwgMTIgZ3Vlc3Qtc3RhcnQgICAgICAgICAgICAgICAgIGZhaWwgbmV2ZXIgcGFz
-cwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1hbWQgMTIgZ3Vlc3Qtc3RhcnQgICAgICAgICAg
-ICAgICAgICBmYWlsICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgIDEz
-IG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1k
-NjQtaTM4Ni14bC1wdnNoaW0gICAgMTIgZ3Vlc3Qtc3RhcnQgICAgICAgICAgICAgICAgICBmYWls
-ICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1
-cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxp
-YnZpcnQteHNtIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBh
-c3MKIHRlc3QtYXJtNjQtYXJtNjQteGwtY3JlZGl0MSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
-ICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAx
-MyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
-bTY0LWFybTY0LXhsLWNyZWRpdDEgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFp
-bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTMgbWlncmF0ZS1z
-dXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14
-bC1jcmVkaXQyICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQt
-Y2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAg
-MTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-cm02NC1hcm02NC14bCAgICAgICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZh
-aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtIDEzIG1pZ3JhdGUt
-c3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQt
-bGlidmlydC14c20gMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIg
-cGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hl
-Y2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVt
-dXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZl
-ciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFs
-ZSAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5l
-c3RlZC1hbWQgMTcgZGViaWFuLWh2bS1pbnN0YWxsL2wxL2wyICBmYWlsIG5ldmVyIHBhc3MKIHRl
-c3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAxMyBtaWdy
-YXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgMTMgbWlncmF0ZS1zdXBwb3J0
-LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRz
-ICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
-ZXN0LWFybWhmLWFybWhmLXhsLWN1YmlldHJ1Y2sgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAg
-ICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAxNCBz
-YXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
-cm1oZi14bC1tdWx0aXZjcHUgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICBu
-ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAxNCBzYXZlcmVzdG9yZS1z
-dXBwb3J0LWNoZWNrICAgIGZhaWwgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3Jl
-ZGl0MiAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwog
-dGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQyICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNr
-ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDEgIDEzIG1p
-Z3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYt
-YXJtaGYteGwtY3JlZGl0MSAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAg
-bmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0
-LXN0b3AgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVt
-dXQtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MK
-IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAg
-ICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAxMiBt
-aWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhm
-LWFybWhmLWxpYnZpcnQtcmF3IDEzIHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAg
-IG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgMTIgbWlncmF0ZS1zdXBw
-b3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC12
-aGQgICAgICAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNz
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxs
-ICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAt
-aTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2
-NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFp
-bCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAxMCB3aW5k
-b3dzLWluc3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9y
-IHRlc3Rpbmc6CiBsaW51eCAgICAgICAgICAgICAgICAzNjIyNDI2Y2M5M2FiNWJjNzVmYTljZjJl
-ODk3NDQxZGZmODk0YzM0CmJhc2VsaW5lIHZlcnNpb246CiBsaW51eCAgICAgICAgICAgICAgICBj
-ZGQ0OGYzODZkN2U2NjcxZTdjYzIxZTUxN2FlMjU4YjI5OGVjODc3CgpMYXN0IHRlc3Qgb2YgYmFz
-aXMgICAxMjgzODggIDIwMTgtMTAtMDQgMjE6MTI6MDcgWiAgICA2IGRheXMKVGVzdGluZyBzYW1l
-IHNpbmNlICAgMTI4NTcwICAyMDE4LTEwLTEwIDA3OjEzOjE5IFogICAgMSBkYXlzICAgIDEgYXR0
-ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQWwg
-VmlybyA8dmlyb0B6ZW5pdi5saW51eC5vcmcudWs+CiAgQW5kcmVhcyBHcnVlbmJhY2hlciA8YWdy
-dWVuYmFAcmVkaGF0LmNvbT4KICBBbmRyZXcgTW9ydG9uIDxha3BtQGxpbnV4LWZvdW5kYXRpb24u
-b3JnPgogIEFudG9uIFZhc2lseWV2IDx2YXNpbHlldkBpc3ByYXMucnU+CiAgQXJuYWxkbyBDYXJ2
-YWxobyBkZSBNZWxvIDxhY21lQHJlZGhhdC5jb20+CiAgQXJ1bmsgS2hhbmRhdmFsbGkgPGFraGFu
-ZGF2QGNvZGVhdXJvcmEub3JnPgogIEFzaGlzaCBTYW1hbnQgPGFzaGlzaC5zYW1hbnRAb3JhY2xl
-LmNvbT4KICBBdXJlbGllbiBBcHRlbCA8YWFwdGVsQHN1c2UuY29tPgogIEJlbiBHcmVlYXIgPGdy
-ZWVhcmJAY2FuZGVsYXRlY2guY29tPgogIEJlbiBIdXRjaGluZ3MgPGJlbi5odXRjaGluZ3NAY29k
-ZXRoaW5rLmNvLnVrPgogIEJlbiBTa2VnZ3MgPGJza2VnZ3NAcmVkaGF0LmNvbT4KICBCb3JpcyBP
-c3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgogIENocmlzdG9waCBIZWxsd2ln
-IDxoY2hAbHN0LmRlPgogIERhbiBDYXJwZW50ZXIgPGRhbi5jYXJwZW50ZXJAb3JhY2xlLmNvbT4K
-ICBEYW5layBEdXZhbGwgPGR1dmFsbEBjb21meWNoYWlyLm9yZz4KICBEYW5pZWwgQmxhY2sgPGRh
-bmllbEBsaW51eC5pYm0uY29tPgogIERhbmllbCBKdXJnZW5zIDxkYW5pZWxqQG1lbGxhbm94LmNv
-bT4KICBEYXZpZCBTLiBNaWxsZXIgPGRhdmVtQGRhdmVtbG9mdC5uZXQ+CiAgRW1tYW51ZWwgR3J1
-bWJhY2ggPGVtbWFudWVsLmdydW1iYWNoQGludGVsLmNvbT4KICBGZWxpcGUgQmFsYmkgPGZlbGlw
-ZS5iYWxiaUBsaW51eC5pbnRlbC5jb20+CiAgRnJlZGVyaWMgV2Vpc2JlY2tlciA8ZndlaXNiZWNA
-Z21haWwuY29tPgogIEdyZWcgS3JvYWgtSGFydG1hbiA8Z3JlZ2toQGxpbnV4Zm91bmRhdGlvbi5v
-cmc+CiAgSGFycnkgTWFsbG9uIDxoam1hbGxvbkBnbWFpbC5jb20+CiAgSGVpbnogTWF1ZWxzaGFn
-ZW4gPGhlaW56bUByZWRoYXQuY29tPgogIEhlcmJlcnQgWHUgPGhlcmJlcnRAZ29uZG9yLmFwYW5h
-Lm9yZy5hdT4KICBIaXNhbyBUYW5hYmUgPHh0YW5hYmVAZ21haWwuY29tPgogIElsYW4gUGVlciA8
-aWxhbi5wZWVyQGludGVsLmNvbT4KICBJbmdvIE1vbG5hciA8bWluZ29Aa2VybmVsLm9yZz4KICBJ
-dmFuIERlbGFsYW5kZSA8Y29sb25hQGFyaXN0YS5jb20+CiAgSmFjZWsgVG9tYWthIDxqYWNlay50
-b21ha2FAcG9jenRhLmZtPgogIEphbiBLaXN6a2EgPGphbi5raXN6a2FAc2llbWVucy5jb20+CiAg
-SmFubiBIb3JuIDxqYW5uaEBnb29nbGUuY29tPgogIEphc29uIEd1bnRob3JwZSA8amdnQG1lbGxh
-bm94LmNvbT4KICBKaWEtSnUgQmFpIDxiYWlqaWFqdTE5OTBAZ21haWwuY29tPgogIEppcmkgS29z
-aW5hIDxqa29zaW5hQHN1c2UuY3o+CiAgSm9lIFRob3JuYmVyIDxlanRAcmVkaGF0LmNvbT4KICBK
-b2hhbm5lcyBCZXJnIDxqb2hhbm5lcy5iZXJnQGludGVsLmNvbT4KICBKb24gS3VobiA8amt1aG5A
-YmFycmFjdWRhLmNvbT4KICBKb3NlcGggUWkgPGppYW5ncWk5MDNAZ21haWwuY29tPgogIEpvc2gg
-QWJyYWhhbSA8ai5hYnJhaGFtMTc3NkBnbWFpbC5jb20+CiAgSm9zaHVhIEFicmFoYW0gPGouYWJy
-YWhhbTE3NzZAZ21haWwuY29tPgogIEpvdW5pIE1hbGluZW4gPGpvdW5pQGNvZGVhdXJvcmEub3Jn
-PgogIEp1bGlhbiBXaWVkbWFubiA8andpQGxpbnV4LmlibS5jb20+CiAgSnVuIFBpYW8gPHBpYW9q
-dW5AaHVhd2VpLmNvbT4KICBLYWktSGVuZyBGZW5nIDxrYWkuaGVuZy5mZW5nQGNhbm9uaWNhbC5j
-b20+CiAgS2VlcyBDb29rIDxrZWVzY29va0BjaHJvbWl1bS5vcmc+CiAgTGVvbmFyZCBDcmVzdGV6
-IDxsZW9uYXJkLmNyZXN0ZXpAbnhwLmNvbT4KICBMaW51cyBUb3J2YWxkcyA8dG9ydmFsZHNAbGlu
-dXgtZm91bmRhdGlvbi5vcmc+CiAgTGludXMgV2FsbGVpaiA8bGludXMud2FsbGVpakBsaW5hcm8u
-b3JnPgogIEx1Y2EgQ29lbGhvIDxsdWNpYW5vLmNvZWxob0BpbnRlbC5jb20+CiAgTWFyYyBBdXLD
-qGxlIExhIEZyYW5jZSA8dHNpQHR1eW9peC5uZXQ+CiAgTWFzYWhpcm8gWWFtYWRhIDx5YW1hZGEu
-bWFzYWhpcm9Ac29jaW9uZXh0LmNvbT4KICBNaWNoYWVsIEhlbm5lcmljaCA8bWljaGFlbC5oZW5u
-ZXJpY2hAYW5hbG9nLmNvbT4KICBNaWd1ZWwgT2plZGEgPG1pZ3VlbC5vamVkYS5zYW5kb25pc0Bn
-bWFpbC5jb20+CiAgTWlrZSBTbml0emVyIDxzbml0emVyQHJlZGhhdC5jb20+CiAgTmFtaHl1bmcg
-S2ltIDxuYW1oeXVuZ0BrZXJuZWwub3JnPgogIE5hb3lhIEhvcmlndWNoaSA8bi1ob3JpZ3VjaGlA
-YWguanAubmVjLmNvbT4KICBOYXZlZW4gTi4gUmFvIDxuYXZlZW4ubi5yYW9AbGludXgudm5ldC5p
-Ym0uY29tPgogIE5ldGFuZWwgQmVsZ2F6YWwgPG5ldGFuZWxAYW1hem9uLmNvbT4KICBPbGFmIEhl
-cmluZyA8b2xhZkBhZXBmbGUuZGU+CiAgUGF1bCBNYWNrZXJyYXMgPHBhdWx1c0BvemxhYnMub3Jn
-PgogIFBhdWxvIEFsY2FudGFyYSA8cGFsY2FudGFyYUBzdXNlLmRlUj4KICBQZW5nIExpIDxsaXBl
-bmczMjFAaHVhd2VpLmNvbT4KICBQZXRlciBaaWpsc3RyYSAoSW50ZWwpIDxwZXRlcnpAaW5mcmFk
-ZWFkLm9yZz4KICBSYW5keSBEdW5sYXAgPHJkdW5sYXBAaW5mcmFkZWFkLm9yZz4KICBSaWNhcmRv
-IFJpYmFsZGEgRGVsZ2FkbyA8cmljYXJkby5yaWJhbGRhQGdtYWlsLmNvbT4KICBSaWNoYXJkIEt1
-byA8cmt1b0Bjb2RlYXVyb3JhLm9yZz4KICBTYWVlZCBNYWhhbWVlZCA8c2FlZWRtQG1lbGxhbm94
-LmNvbT4KICBTYWdpIEdyaW1iZXJnIDxzYWdpQGdyaW1iZXJnLm1lPgogIFNhbmRpcGFuIERhcyA8
-c2FuZGlwYW5AbGludXguaWJtLmNvbT4KICBTYXNoYSBMZXZpbiA8YWxleGFuZGVyLmxldmluQG1p
-Y3Jvc29mdC5jb20+CiAgU2VhbiBPJ0JyaWVuIDxzZW9icmllbkBjaHJvbWl1bS5vcmc+CiAgU2hh
-b2h1YSBMaSA8c2hsaUBmYi5jb20+CiAgU3RlcGhlbiBSb3Rod2VsbCA8c2ZyQGNhbmIuYXV1Zy5v
-cmcuYXU+CiAgU3RldmUgRnJlbmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQuY29tPgogIFN0ZXZlIFdp
-c2UgPHN3aXNlQG9wZW5ncmlkY29tcHV0aW5nLmNvbT4KICBUYWthc2hpIEl3YWkgPHRpd2FpQHN1
-c2UuZGU+CiAgVG9rZSBIw7hpbGFuZC1Kw7hyZ2Vuc2VuIDx0b2tlQHRva2UuZGs+CiAgVmluY2Vu
-dCBXaGl0Y2h1cmNoIDx2aW5jZW50LndoaXRjaHVyY2hAYXhpcy5jb20+CiAgVmluZWV0IEd1cHRh
-IDx2Z3VwdGFAc3lub3BzeXMuY29tPgogIFZpdGFseSBLdXpuZXRzb3YgPHZrdXpuZXRzQHJlZGhh
-dC5jb20+CiAgV2FpbWFuIExvbmcgPGxvbmdtYW5AcmVkaGF0LmNvbT4KICBXZW5qaWEgWmhhbmcg
-PHdlbmppYUBsaW51eC5pYm0uY29tPgogIFdpbGwgRGVhY29uIDx3aWxsLmRlYWNvbkBhcm0uY29t
-PgogIFdvbGZyYW0gU2FuZyA8d3NhQHRoZS1kcmVhbXMuZGU+CiAgWGlhbyBOaSA8eG5pQHJlZGhh
-dC5jb20+CiAgWXVhbi1DaGkgUGFuZyA8ZnUzbW82Z29vQGdtYWlsLmNvbT4KCmpvYnM6CiBidWls
-ZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWFybTY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-YXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1h
-cm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1ydW1wcnVuICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
-ODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1k
-NjQteHNtICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0
-LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2
-NC14c20gICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0
-LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhz
-bSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0
-ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXB2aHYyLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRl
-Ymlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAg
-ICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1k
-NjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2NCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43
-LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-eGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYt
-YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14
-bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC1jcmVkaXQxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFybTY0LWFybTY0LXhsLWNyZWRpdDEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1jcmVkaXQyICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhs
-LWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRtcmVzdHJp
-Y3QtYW1kNjQtZG1yZXN0cmljdCAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1x
-ZW11dS1kbXJlc3RyaWN0LWFtZDY0LWRtcmVzdHJpY3QgICAgICAgICBmYWlsICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC1leGFtaW5lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtZXhhbWluZSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWV4YW1p
-bmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYtZnJlZWJzZDEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1ydW1wcnVuLWkzODYgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2
-ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVt
-dXQtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAg
-ICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZo
-djItaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LXFlbXV0LXJoZWw2aHZtLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0
-LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1wYWlyICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZn
-cnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2c2hpbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdydWIgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFjb3cyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXJhdyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJt
-aGYteGwtcnRkcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNo
-YWRvdyAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtc2hhZG93ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2
-LXhsLXNoYWRvdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rl
-c3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczog
-L2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxl
-IGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MK
-CkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWws
-IGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDth
-PWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
-L2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhh
-cm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0
-d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKTm90IHB1c2hpbmcuCgooTm8gcmV2aXNpb24g
-bG9nOyBpdCB3b3VsZCBiZSAxNzkzIGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============5029267269304393352==
+Content-Type: multipart/alternative; boundary="000000000000062f180577fa07b5"
+
+--000000000000062f180577fa07b5
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Thanks very much to both of you for the info! After Andrew's post today I
+was able to write some code myself to walk the page tables and get it to
+work correctly, and xc_translate_foreign_address is exactly what I want as
+well. I had been digging through the Xen codebase for a while looking for
+just such a function but hadn't found it =E2=80=A6 the docs situation for t=
+hese
+APIs could definitely be better! I will definitely update the wiki with all
+this information once I'm sure I understand it properly.
+
+On Thu, Oct 11, 2018 at 3:05 PM Tamas K Lengyel <tamas.k.lengyel@gmail.com>
+wrote:
+
+> On Wed, Oct 10, 2018 at 5:10 PM Andrew Cooper <andrew.cooper3@citrix.com>
+> wrote:
+> >
+> > On 10/10/18 23:08, Spencer Michaels wrote:
+> > > Interesting =E2=80=A6 sorry, I had read the docs a while ago and my
+> > > interpretation at the time was that it didn't. I can try to get libvm=
+i
+> > > working, but nonetheless I do want to figure out how to this with the
+> > > Xen API itself if at all possible, so I'd appreciate any help in doin=
+g
+> > > so.
+> > >
+> > > I've looked through libvmi's implementation some more; it looks like
+> > > it does this via vmi_pagetable_lookup_cache, which in my case ends up
+> > > calling v2p_pae (intel.c:327). As I understand it, in that function,
+> > > the `dtb` parameter holds the pagetable base address, and you use tha=
+t
+> > > to walk the page table and get the physical address corresponding to
+> > > the virtual addr. Based on the end of vmi_translate_kv2p
+> > > (accessors.c:703), it looks like the value of dtb is `vmi->kpgd`,
+> > > which at some point earlier is set to the value of the `cr3` register=
+.
+> > > Is my understanding, roughly speaking, correct?
+>
+> Correct, this works because the kernel is mapped into all process'
+> address space on both Windows and Linux. So you can just take the
+> value of CR3 at any given time and you will find the kernel memory
+> range mapped in. The recent KPTI mitigations might effect this though,
+> haven't investigated it yet.
+>
+> > > I tried to replicate a simpler version of libvmi's page table walking
+> > > code just now, and in doing so noticed that the value of CR0, as
+> > > reported by Xen, has its 31st bit set to zero =E2=80=A6 i.e. virtual
+> > > addressing is disabled entirely? (For reference, I'm using a 64-bit
+> > > Ubuntu image set up initially by virt-manager but now just run via `x=
+l
+> > > create`. I don't know if I should expect it to have paging enabled or
+> > > not.) On the other hand, if I understand correctly, what I mentioned
+> > > earlier with regards to some HVM guests assuming (addr >>
+> > > XC_PAGE_SHIFT) =3D MFN *is* assuming that guest page frame number =3D
+> > > machine frame number, which sounds like it is what would be applicabl=
+e
+> > > in this case.
+> > >
+> > > Honestly, I'm not so sure what's happening here, and I'm not even sur=
+e
+> > > my description is sensible at this point =E2=80=94 I need to look int=
+o
+> > > libvmi's implementation more and also figure out exactly what paging
+> > > mode (or lack thereof) my HVM guest is running in. If, on the other
+> > > hand, any of the above sounds familiar, suggestions/hints would be
+> > > very helpful.
+>
+> If you want to look at another very compact implementation then libxc
+> has one too:
+> https://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dtools/libxc/xc_p=
+agetab.c;h=3Ddb25c20247573a3c638d7725c976433221a40141;hb=3DHEAD#l29
+>
+> > Here are some observations/points which may help.
+> >
+> > x86 is a bit more complicated than other architectures, and as a result=
+,
+> > there is a lot of subtly incorrect terminology (including in Libvmi -
+> > sorry Tamas).
+>
+> Well aware of it =3D)
+>
+> >
+> > A virtual address (also called an effective address) is a segment:offse=
+t
+> > pair.  The segment is almost always implicit (%cs for instruction
+> > fetches, %ss for stack accesses, %ds for normal data accesses).  The
+> > segmentation part of address translation adds the segment base to the
+> > offset to produce a linear address.
+> >
+> > A "flat memory model" (used by almost all 32bit OSes and is
+> > unconditional in AMD64) is one where the segment base is 0, at which
+> > point offset =3D=3D linear address.  This is where most confusion over =
+the
+> > term "virtual address" arises.
+> >
+> > The paging part of address translation takes a linear address, follows
+> > the pagetable structure (rooted in %cr3), to produce a physical address
+> > as an output.  This may be guest physical or host physical depending on
+> > the VM configuration.
+> >
+> >
+> > Next, please read
+> >
+> http://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dxen/include/xen/m=
+m.h;h=3D054d02e6c0e68b411afba42424dc5fe7e7d69855;hb=3Drefs/heads/staging#l8
+> > which describes the terminology Xen uses for various address spaces.  I=
+n
+> > particular, the difference between MFN and GFN.
+> >
+> > The relevant difference PV and HVM guests as far as you are concerned i=
+s
+> > that for PV guests, GFN =3D=3D MFN because the pagetables written by th=
+e
+> > guest are walked directly by hardware.
+> >
+> > An HVM guest has GFN !=3D MFN, because the guest physical to host physi=
+cal
+> > translation is provided by HAP/EPT/NPT/SLAT (whichever term you chose t=
+o
+> > use for hardware acceleration), or by the shadow pagetables (maintained
+> > and operated by Xen, for hardware lacking HAP support).
+> >
+> > The foreign map API uses a GFN, even if the underlying API describes th=
+e
+> > parameter name as MFN.  This is a consequence of PV guests having been
+> > developed long before hardware virt extensions came along, and noone
+> > having gone through and retroactively updated the terminology.
+> >
+> > Therefore, for both PV and HVM guests, you can take the guest cr3,
+> > extract the frame part of it, and ask the foreign map API to map that
+> > guest frame.  The underlying implementation in Xen is trivial for a PV
+> > guest (GFN =3D=3D MFN), but slightly more complicated for HVM guests (G=
+FN
+> > has to be translated into an MFN by Xen walking the HAP/shadow
+> > pagetables before dom0's mapping request can be completed).
+> >
+> > I hope this clears up some of the confusion.
+> >
+>
+> Thanks for the in-depth write-up! We might even want to record this on
+> a wiki page ;)
+>
+> Tamas
+>
+
+--000000000000062f180577fa07b5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Thanks very much to both of you for the i=
+nfo! After Andrew&#39;s post today I was able to write some code myself to =
+walk the page tables and get it to work correctly, and xc_translate_foreign=
+_address is exactly what I want as well. I had been digging through the Xen=
+ codebase for a while looking for just such a function but hadn&#39;t found=
+ it =E2=80=A6 the docs situation for these APIs could definitely be better!=
+ I will definitely update the wiki with all this information once I&#39;m s=
+ure I understand it properly.</div></div><br><div class=3D"gmail_quote"><di=
+v dir=3D"ltr">On Thu, Oct 11, 2018 at 3:05 PM Tamas K Lengyel &lt;<a href=
+=3D"mailto:tamas.k.lengyel@gmail.com">tamas.k.lengyel@gmail.com</a>&gt; wro=
+te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;b=
+order-left:1px #ccc solid;padding-left:1ex">On Wed, Oct 10, 2018 at 5:10 PM=
+ Andrew Cooper &lt;<a href=3D"mailto:andrew.cooper3@citrix.com" target=3D"_=
+blank">andrew.cooper3@citrix.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; On 10/10/18 23:08, Spencer Michaels wrote:<br>
+&gt; &gt; Interesting =E2=80=A6 sorry, I had read the docs a while ago and =
+my<br>
+&gt; &gt; interpretation at the time was that it didn&#39;t. I can try to g=
+et libvmi<br>
+&gt; &gt; working, but nonetheless I do want to figure out how to this with=
+ the<br>
+&gt; &gt; Xen API itself if at all possible, so I&#39;d appreciate any help=
+ in doing<br>
+&gt; &gt; so.<br>
+&gt; &gt;<br>
+&gt; &gt; I&#39;ve looked through libvmi&#39;s implementation some more; it=
+ looks like<br>
+&gt; &gt; it does this via vmi_pagetable_lookup_cache, which in my case end=
+s up<br>
+&gt; &gt; calling v2p_pae (intel.c:327). As I understand it, in that functi=
+on,<br>
+&gt; &gt; the `dtb` parameter holds the pagetable base address, and you use=
+ that<br>
+&gt; &gt; to walk the page table and get the physical address corresponding=
+ to<br>
+&gt; &gt; the virtual addr. Based on the end of vmi_translate_kv2p<br>
+&gt; &gt; (accessors.c:703), it looks like the value of dtb is `vmi-&gt;kpg=
+d`,<br>
+&gt; &gt; which at some point earlier is set to the value of the `cr3` regi=
+ster.<br>
+&gt; &gt; Is my understanding, roughly speaking, correct?<br>
+<br>
+Correct, this works because the kernel is mapped into all process&#39;<br>
+address space on both Windows and Linux. So you can just take the<br>
+value of CR3 at any given time and you will find the kernel memory<br>
+range mapped in. The recent KPTI mitigations might effect this though,<br>
+haven&#39;t investigated it yet.<br>
+<br>
+&gt; &gt; I tried to replicate a simpler version of libvmi&#39;s page table=
+ walking<br>
+&gt; &gt; code just now, and in doing so noticed that the value of CR0, as<=
+br>
+&gt; &gt; reported by Xen, has its 31st bit set to zero =E2=80=A6 i.e. virt=
+ual<br>
+&gt; &gt; addressing is disabled entirely? (For reference, I&#39;m using a =
+64-bit<br>
+&gt; &gt; Ubuntu image set up initially by virt-manager but now just run vi=
+a `xl<br>
+&gt; &gt; create`. I don&#39;t know if I should expect it to have paging en=
+abled or<br>
+&gt; &gt; not.) On the other hand, if I understand correctly, what I mentio=
+ned<br>
+&gt; &gt; earlier with regards to some HVM guests assuming (addr &gt;&gt;<b=
+r>
+&gt; &gt; XC_PAGE_SHIFT) =3D MFN *is* assuming that guest page frame number=
+ =3D<br>
+&gt; &gt; machine frame number, which sounds like it is what would be appli=
+cable<br>
+&gt; &gt; in this case.<br>
+&gt; &gt;<br>
+&gt; &gt; Honestly, I&#39;m not so sure what&#39;s happening here, and I&#3=
+9;m not even sure<br>
+&gt; &gt; my description is sensible at this point =E2=80=94 I need to look=
+ into<br>
+&gt; &gt; libvmi&#39;s implementation more and also figure out exactly what=
+ paging<br>
+&gt; &gt; mode (or lack thereof) my HVM guest is running in. If, on the oth=
+er<br>
+&gt; &gt; hand, any of the above sounds familiar, suggestions/hints would b=
+e<br>
+&gt; &gt; very helpful.<br>
+<br>
+If you want to look at another very compact implementation then libxc<br>
+has one too: <a href=3D"https://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblo=
+b;f=3Dtools/libxc/xc_pagetab.c;h=3Ddb25c20247573a3c638d7725c976433221a40141=
+;hb=3DHEAD#l29" rel=3D"noreferrer" target=3D"_blank">https://xenbits.xen.or=
+g/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dtools/libxc/xc_pagetab.c;h=3Ddb25c202475=
+73a3c638d7725c976433221a40141;hb=3DHEAD#l29</a><br>
+<br>
+&gt; Here are some observations/points which may help.<br>
+&gt;<br>
+&gt; x86 is a bit more complicated than other architectures, and as a resul=
+t,<br>
+&gt; there is a lot of subtly incorrect terminology (including in Libvmi -<=
+br>
+&gt; sorry Tamas).<br>
+<br>
+Well aware of it =3D)<br>
+<br>
+&gt;<br>
+&gt; A virtual address (also called an effective address) is a segment:offs=
+et<br>
+&gt; pair.=C2=A0 The segment is almost always implicit (%cs for instruction=
+<br>
+&gt; fetches, %ss for stack accesses, %ds for normal data accesses).=C2=A0 =
+The<br>
+&gt; segmentation part of address translation adds the segment base to the<=
+br>
+&gt; offset to produce a linear address.<br>
+&gt;<br>
+&gt; A &quot;flat memory model&quot; (used by almost all 32bit OSes and is<=
+br>
+&gt; unconditional in AMD64) is one where the segment base is 0, at which<b=
+r>
+&gt; point offset =3D=3D linear address.=C2=A0 This is where most confusion=
+ over the<br>
+&gt; term &quot;virtual address&quot; arises.<br>
+&gt;<br>
+&gt; The paging part of address translation takes a linear address, follows=
+<br>
+&gt; the pagetable structure (rooted in %cr3), to produce a physical addres=
+s<br>
+&gt; as an output.=C2=A0 This may be guest physical or host physical depend=
+ing on<br>
+&gt; the VM configuration.<br>
+&gt;<br>
+&gt;<br>
+&gt; Next, please read<br>
+&gt; <a href=3D"http://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dxen=
+/include/xen/mm.h;h=3D054d02e6c0e68b411afba42424dc5fe7e7d69855;hb=3Drefs/he=
+ads/staging#l8" rel=3D"noreferrer" target=3D"_blank">http://xenbits.xen.org=
+/gitweb/?p=3Dxen.git;a=3Dblob;f=3Dxen/include/xen/mm.h;h=3D054d02e6c0e68b41=
+1afba42424dc5fe7e7d69855;hb=3Drefs/heads/staging#l8</a><br>
+&gt; which describes the terminology Xen uses for various address spaces.=
+=C2=A0 In<br>
+&gt; particular, the difference between MFN and GFN.<br>
+&gt;<br>
+&gt; The relevant difference PV and HVM guests as far as you are concerned =
+is<br>
+&gt; that for PV guests, GFN =3D=3D MFN because the pagetables written by t=
+he<br>
+&gt; guest are walked directly by hardware.<br>
+&gt;<br>
+&gt; An HVM guest has GFN !=3D MFN, because the guest physical to host phys=
+ical<br>
+&gt; translation is provided by HAP/EPT/NPT/SLAT (whichever term you chose =
+to<br>
+&gt; use for hardware acceleration), or by the shadow pagetables (maintaine=
+d<br>
+&gt; and operated by Xen, for hardware lacking HAP support).<br>
+&gt;<br>
+&gt; The foreign map API uses a GFN, even if the underlying API describes t=
+he<br>
+&gt; parameter name as MFN.=C2=A0 This is a consequence of PV guests having=
+ been<br>
+&gt; developed long before hardware virt extensions came along, and noone<b=
+r>
+&gt; having gone through and retroactively updated the terminology.<br>
+&gt;<br>
+&gt; Therefore, for both PV and HVM guests, you can take the guest cr3,<br>
+&gt; extract the frame part of it, and ask the foreign map API to map that<=
+br>
+&gt; guest frame.=C2=A0 The underlying implementation in Xen is trivial for=
+ a PV<br>
+&gt; guest (GFN =3D=3D MFN), but slightly more complicated for HVM guests (=
+GFN<br>
+&gt; has to be translated into an MFN by Xen walking the HAP/shadow<br>
+&gt; pagetables before dom0&#39;s mapping request can be completed).<br>
+&gt;<br>
+&gt; I hope this clears up some of the confusion.<br>
+&gt;<br>
+<br>
+Thanks for the in-depth write-up! We might even want to record this on<br>
+a wiki page ;)<br>
+<br>
+Tamas<br>
+</blockquote></div>
+
+--000000000000062f180577fa07b5--
+
+
+--===============5029267269304393352==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5029267269304393352==--
