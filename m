@@ -1,22 +1,24 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: Xen optimization
-Date: Thu, 11 Oct 2018 19:05:19 +0200
-Message-ID: <fdb78418317861d775052bc21a9da04387d0e7ce.camel@suse.com>
-References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
- <995da0578f0953662536edabb5807fd76ca4d8ce.camel@suse.com>
- <CADJ6SV1yDBptrcaoqUPChtnXTmvhbzj-AAv2FDN2LCMyTipc-A@mail.gmail.com>
- <CAENZ-+=mWFnJ-4OFK+bjb4rimNNB_x4qHFVAbTM1mFd2Sg7s3g@mail.gmail.com>
- <CADJ6SV1Mdnjyd8oEcB4ZCZKuR0LkJ82GCf5s1+AwgASe8vLMWg@mail.gmail.com>
- <CADJ6SV0_5fSi1YkDYGGSEra4JDPDgu0ZnBfJwsEtv9UY7r6j_A@mail.gmail.com>
+From: George Dunlap <George.Dunlap@citrix.com>
+Subject: Re: Ping: [PATCH v3 0/4] x86/HVM: implement memory read
+ caching
+Date: Thu, 11 Oct 2018 17:36:00 +0000
+Message-ID: <EA56BE25-7C32-4788-8683-B05F524957D8@citrix.com>
+References: <5B97BEB202000078001E73FB@prv1-mh.provo.novell.com>
+ <5BAA42D102000078001EBBEB@prv1-mh.provo.novell.com>
+ <5BB34A1102000078001EDABE@prv1-mh.provo.novell.com>
+ <57c23678-c8e6-d6d8-f0de-38a48b8936f2@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2889565958812462518=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ap2w=mx=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gAePS-0000AV-Rs
- for xen-devel@lists.xenproject.org; Thu, 11 Oct 2018 17:06:02 +0000
-In-Reply-To: <CADJ6SV0_5fSi1YkDYGGSEra4JDPDgu0ZnBfJwsEtv9UY7r6j_A@mail.gmail.com>
+ <srs0=erva=mx=citrix.com=prvs=8152b1c74=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1gAesf-00030y-EF
+ for xen-devel@lists.xenproject.org; Thu, 11 Oct 2018 17:36:13 +0000
+In-Reply-To: <57c23678-c8e6-d6d8-f0de-38a48b8936f2@citrix.com>
+Content-Language: en-US
+Content-ID: <71C58D5E62D1CC438CC21A11126A9005@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,79 +27,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Milan Boberic <milanboberic94@gmail.com>, Meng Xu <xumengpanda@gmail.com>
-Cc: xen-devel@lists.xenproject.org, julien.grall@arm.com, sstabellini@kernel.org, andrii_anisov@epam.com
+To: Andrew Cooper <Andrew.Cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <Paul.Durrant@citrix.com>, George Dunlap <George.Dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2889565958812462518==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-j3X+4jJPK25rRWoO91MK"
-
-
---=-j3X+4jJPK25rRWoO91MK
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hey,
-
-Be a bit more careful about not top posting, please? :-)
-
-On Thu, 2018-10-11 at 14:17 +0200, Milan Boberic wrote:
-> I misunderstood the passthrough concept, it only allows guest domain
-> to use certain interrupts and memory.=20
->
-I'm afraid we totally rely on people with much more experience than me
-(and I guess Meng's) on how things work on ARM.
-
-> Is there are way to somehow
-> route interrupt from domU (bare-metal app) to hw?
->
-Don't interrupt _come_ from hardware and go/are routed to
-hypervisor/os/app?
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-j3X+4jJPK25rRWoO91MK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlu/gs8ACgkQFkJ4iaW4
-c+6z6hAA7zy5tmkeDyuHnDrM7m22IOn9BJSA2Z96IRws/POBw4+B+NH3LjrASIZx
-pew6a4PhV8Sn3j1C9CI1XMj3Ir+K9TxwZNqELozbINwhhBSc47lXcTBaQlv1w9xQ
-80KzTRktbR/99kkCy1XlLXLz0qOrBw+WHW3WBqEPgFAcv4UYlO6sRvhmWJ9gT5qk
-TempPhtTD+bBuTjoN3Cky45eui4zqKWn8K65YLoO5kKXmS+S2q5PLN869SrOXBST
-2ODhc8qnbqkGqA7H3xXdjQuY+6TcoyRR/XxoicwwdN4fb7JM49fsRn/Hg9kawzx9
-OxsGCmnKh8x14KdgJgcZtDPMd73PQAkueIYd9fMt3aFcSjC84l5+HjxUoFHRWRKB
-VybNv3m1pHRJ+uTwRdkgIwQBW/300s8nm1oIDOy9avKVgPj8mNvOIuoTh4fents6
-R8EJko9/nMijJbDBKeJFOsnBLCQXUnd5n8HYdSRjHCuBtMKZqdXdnWOMAJB/arwi
-qaG2/jevlcUFKU8WCBqWIHySrs/8bObyPlnm/U3ioamIWg0pcMFilDnWaaudncdd
-QsbeOYIxEQ+mKG/TlH4OIXZZRe4HHnLGB1C123JhIbOshJwkf7OZUFmESCfuQC84
-xWvL0XcAYHDdGN2WPZcSO4/ovwhlJepDpMJEntE5fRLYamBNfQ0=
-=TIHX
------END PGP SIGNATURE-----
-
---=-j3X+4jJPK25rRWoO91MK--
-
-
-
---===============2889565958812462518==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2889565958812462518==--
+DQoNCj4gT24gT2N0IDIsIDIwMTgsIGF0IDExOjUxIEFNLCBBbmRyZXcgQ29vcGVyIDxBbmRyZXcu
+Q29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToNCj4gDQo+IE9uIDAyLzEwLzE4IDExOjM2LCBKYW4g
+QmV1bGljaCB3cm90ZToNCj4+Pj4+IE9uIDI1LjA5LjE4IGF0IDE2OjE0LCA8SkJldWxpY2hAc3Vz
+ZS5jb20+IHdyb3RlOg0KPj4+IEVtdWxhdGlvbiByZXF1aXJpbmcgZGV2aWNlIG1vZGVsIGFzc2lz
+dGFuY2UgdXNlcyBhIGZvcm0gb2YgaW5zdHJ1Y3Rpb24NCj4+PiByZS1leGVjdXRpb24sIGFzc3Vt
+aW5nIHRoYXQgdGhlIHNlY29uZCAoYW5kIGFueSBmdXJ0aGVyKSBwYXNzIHRha2VzDQo+Pj4gZXhh
+Y3RseSB0aGUgc2FtZSBwYXRoLiBUaGlzIGlzIGEgdmFsaWQgYXNzdW1wdGlvbiBhcyBmYXIgYXMg
+dXNlIG9mIENQVQ0KPj4+IHJlZ2lzdGVycyBnb2VzIChhcyB0aG9zZSBjYW4ndCBjaGFuZ2Ugd2l0
+aG91dCBhbnkgb3RoZXIgaW5zdHJ1Y3Rpb24NCj4+PiBleGVjdXRpbmcgaW4gYmV0d2VlbiksIGJ1
+dCBpcyB3cm9uZyBmb3IgbWVtb3J5IGFjY2Vzc2VzLiBJbiBwYXJ0aWN1bGFyDQo+Pj4gaXQgaGFz
+IGJlZW4gb2JzZXJ2ZWQgdGhhdCBXaW5kb3dzIG1pZ2h0IHBhZ2Ugb3V0IGJ1ZmZlcnMgdW5kZXJu
+ZWF0aA0KPj4+IGFuIGluc3RydWN0aW9uIGN1cnJlbnRseSB1bmRlciBlbXVsYXRpb24gKGhpdHRp
+bmcgYmV0d2VlbiB0d28gcGFzc2VzKS4NCj4+PiBJZiB0aGUgZmlyc3QgcGFzcyB0cmFuc2xhdGVk
+IGEgbGluZWFyIGFkZHJlc3Mgc3VjY2Vzc2Z1bGx5LCBhbnkgc3Vic2VxdWVudA0KPj4+IHBhc3Mg
+bmVlZHMgdG8gZG8gc28gdG9vLCB5aWVsZGluZyB0aGUgZXhhY3Qgc2FtZSB0cmFuc2xhdGlvbi4N
+Cj4+PiANCj4+PiBJbnRyb2R1Y2UgYSBjYWNoZSAodXNlZCBqdXN0IGJ5IGd1ZXN0IHBhZ2UgdGFi
+bGUgYWNjZXNzZXMgZm9yIG5vdywgaS5lLg0KPj4+IGEgZm9ybSBvZiAicGFnaW5nIHN0cnVjdHVy
+ZSBjYWNoZSIpIHRvIG1ha2Ugc3VyZSBhYm92ZSBkZXNjcmliZWQNCj4+PiBhc3N1bXB0aW9uIGhv
+bGRzLiBUaGlzIGlzIGEgdmVyeSBzaW1wbGlzdGljIGltcGxlbWVudGF0aW9uIGZvciBub3c6IE9u
+bHkNCj4+PiBleGFjdCBtYXRjaGVzIGFyZSBzYXRpc2ZpZWQgKG5vIG92ZXJsYXBzIG9yIHBhcnRp
+YWwgcmVhZHMgb3IgYW55dGhpbmcpLg0KPj4+IA0KPj4+IFRoZXJlJ3MgYWxzbyBzb21lIHNlZW1p
+bmdseSB1bnJlbGF0ZWQgY2xlYW51cCBoZXJlIHdoaWNoIHdhcyBmb3VuZA0KPj4+IGRlc2lyYWJs
+ZSBvbiB0aGUgd2F5Lg0KPj4+IA0KPj4+IDE6IHg4Ni9tbTogYWRkIG9wdGlvbmFsIGNhY2hlIHRv
+IEdMQS0+R0ZOIHRyYW5zbGF0aW9uDQo+Pj4gMjogeDg2L21tOiB1c2Ugb3B0aW9uYWwgY2FjaGUg
+aW4gZ3Vlc3Rfd2Fsa190YWJsZXMoKQ0KPj4+IDM6IHg4Ni9IVk06IGltcGxlbWVudCBtZW1vcnkg
+cmVhZCBjYWNoaW5nDQo+Pj4gNDogeDg2L0hWTTogcHJlZmlsbCBjYWNoZSB3aXRoIFBEUFRFcyB3
+aGVuIHBvc3NpYmxlDQo+Pj4gDQo+Pj4gQXMgZm9yIHYyLCBJJ20gb21pdHRpbmcgIlZNWDogY29y
+cmVjdCBQRFBURSBsb2FkIGNoZWNrcyIgZnJvbSB2MywgYXMgSQ0KPj4+IGNhbid0IGN1cnJlbnRs
+eSBmaW5kIGVub3VnaCB0aW1lIHRvIGNhcnJ5IG91dCB0aGUgcmVxdWVzdGVkIGZ1cnRoZXINCj4+
+PiByZXdvcmsuDQo+PiBBbmRyZXcsIEdlb3JnZT8NCj4gDQo+IFlvdSd2ZSBub3QgZml4ZWQgYW55
+dGhpbmcgZnJvbSBteSBjb25jZXJucyB3aXRoIHYxLg0KPiANCj4gVGhpcyBkb2Vzbid0IGJlaGF2
+ZSBsaWtlIHJlYWwgaGFyZHdhcmUsIGFuZCBkZWZpbml0ZWx5IGRvZXNuJ3QgYmVoYXZlIGFzDQo+
+IG5hbWVkIC0gInN0cnVjdCBodm1lbXVsX2NhY2hlIiBpcyBzaW1wbHkgZmFsc2UuICBJZiBpdCB3
+ZXJlIG5hbWVkDQo+IGh2bWVtdWxfcHNjIChvciBzb21lIG90aGVyIHZhcmlhdGlvbiBvbiBQYWdp
+bmcgU3RydWN0dXJlIENhY2hlKSB0aGVuIGl0DQo+IHdvdWxkbid0IGJlIHNvIGJhZCwgYXMgdGhl
+IGluZGl2aWR1YWwgbGV2ZWxzIGRvIG1ha2UgbW9yZSBzZW5zZSBpbiB0aGF0DQo+IGNvbnRleHQg
+KG5vdCB0aGF0IGl0IHdvdWxkIG1ha2UgdGhlIGJlaGF2aW91ciBhbnkgY2xvc2VyIHRvIGhvdyBo
+YXJkd2FyZQ0KPiBhY3R1YWxseSB3b3JrcykuDQo+IA0KPiBJJ20gYWxzbyBub3Qgb3Zlcmx5IGhh
+cHB5IHdpdGggdGhlIGNvbmRpdGlvbmFsIG5hdHVyZSBvZiB0aGUgY2FjaGluZywgb3INCj4gdGhh
+dCBpdCBpc24ndCBhIHRyYW5zcGFyZW50IHJlYWQtdGhyb3VnaCBjYWNoZS4gIFRoaXMgbGVhZHMg
+dG8gYSBsYXJnZQ0KPiBhbW91bnQgb2YgYm9pbGVycGxhdGUgY29kZSBmb3IgZXZlcnkgdXNlci4N
+Cg0KV2hhdCBJ4oCZbSBoZWFyaW5nIGZyb20geW91IGFyZSB0aHJlZSBiYXNpYyBvYmplY3Rpb25z
+Og0KDQoxLiBBbHRob3VnaCBpdOKAmXMgY2xvc2VyIHRvIHJlYWwgaGFyZHdhcmUgaW4gc29tZSB3
+YXlzLCBpdOKAmXMgc3RpbGwgcHJldHR5IGZhciBhd2F5DQoNCjIuIFRoZSBuYW1lIOKAnGNhY2hl
+4oCdIGlzIGNvbmZ1c2luZw0KDQozLiBIYXZpbmcgaXQgbm9uLXRyYW5zcGFyZW50IGFkZHMgYSBs
+b3Qgb2YgYm9pbGVycGxhdGUgY29kZSB0byB0aGUgcGxhY2VzIHRoYXQgZG8gbmVlZCBpdC4NCg0K
+IzIgaXMgZWFzaWx5IGRlYWx0IHdpdGguICBUaGUgb3RoZXIgdHdvIGFyZSByZWFzb25zIHRvIGxv
+b2sgZm9yIGJldHRlciBvcHRpb25zLCBidXQgbm90IHJlYXNvbnMgdG8gcmVqZWN0IEphbuKAmXMg
+c2VyaWVzIGlmIG90aGVyIGltcHJvdmVtZW50cyBhcmUgYSBsb3Qgb2YgZXh0cmEgd29yayAob3Ig
+aXTigJlzIG5vdCBjbGVhciB0aGV54oCZcmUgYmV0dGVyKS4NCg0KU2luY2UgdGhpcyBpcyBhIGJ1
+ZyBmaXgsIHVubGVzcyB5b3UgY2FuIHNob3cgdGhhdCBKYW7igJlzIHNlcmllcyBpbnRyb2R1Y2Vz
+IHdvcnNlIGJ1Z3MsIEkgdGhpbmsgSmFu4oCZcyByZXF1ZXN0IHRoYXQgeW91IGVpdGhlciAxKSBm
+aXggaXQgeW91cnNlbGYgYnkgNC4xMiwgb3IgMikgYWNxdWllc2NlIHRvIHRoaXMgc2VyaWVzIChv
+ciBzb21ldGhpbmcgY2xvc2UgdG8gaXQpIGJlaW5nIGFjY2VwdGVkIGlzIHJlYXNvbmFibGUuDQoN
+CklmIHlvdSB3YW50IHRvIHNheSwg4oCcSSB3b27igJl0IEFjayBpdCBidXQgSSB3b27igJl0IG9i
+amVjdCBpZiBzb21lb25lIGVsc2UgZG9lc+KAnSwgdGhlbiBJ4oCZbGwgZ2V0IHRvIGl0IHdoZW4g
+SSBnZXQgYSBjaGFuY2UgKGhvcGVmdWxseSBiZWZvcmUgTm92ZW1iZXIpLg0KDQogLUdlb3JnZQpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
