@@ -1,21 +1,20 @@
-From: "Woods, Brian" <Brian.Woods@amd.com>
-Subject: Re: [PATCH] amd-iommu: get rid of pointless
- IOMMU_PAGING_MODE_LEVEL_X definitions
-Date: Fri, 12 Oct 2018 17:14:05 +0000
-Message-ID: <20181012171402.GB22686@amd.com>
-References: <20180927124601.24455-1-paul.durrant@citrix.com>
+From: Elena Ufimtseva <elena.ufimtseva@oracle.com>
+Subject: Re: [PATCH 03/12] gdbsx: Honour LDFLAGS when linking
+Date: Fri, 12 Oct 2018 10:15:23 -0700
+Message-ID: <20181012171523.GA6800@localhost.localdomain>
+References: <20181012151215.32455-1-ian.jackson@eu.citrix.com>
+ <20181012151215.32455-4-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=jdua=my=amd.com=brian.woods@srs-us1.protection.inumbo.net>)
- id 1gB10r-0007wN-Kc
- for xen-devel@lists.xenproject.org; Fri, 12 Oct 2018 17:14:09 +0000
-In-Reply-To: <20180927124601.24455-1-paul.durrant@citrix.com>
-Content-Language: en-US
-Content-ID: <1EE04F5F083FFC4DB26C40EEC374C53B@namprd12.prod.outlook.com>
+ <srs0=e/fa=my=oracle.com=elena.ufimtseva@srs-us1.protection.inumbo.net>)
+ id 1gB12F-00084Z-Hm
+ for xen-devel@lists.xenproject.org; Fri, 12 Oct 2018 17:15:35 +0000
+Content-Disposition: inline
+In-Reply-To: <20181012151215.32455-4-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,27 +23,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Woods,
- Brian" <Brian.Woods@amd.com>, "Suthikulpanit,
- Suravee" <Suravee.Suthikulpanit@amd.com>
+To: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBTZXAgMjcsIDIwMTggYXQgMDE6NDY6MDFQTSArMDEwMCwgUGF1bCBEdXJyYW50IHdy
-b3RlOgo+IFRoZSBsZXZlbHMgYXJlIGFic29sdXRlIG51bWJlcnMgc3VjaCB0aGF0IElPTU1VX1BB
-R0lOR19NT0RFX0xFVkVMX1gKPiBldmFsdWF0ZXMgdG8gWCAoZm9yIHRoZSB2YWxpZCByYW5nZSBv
-ZiAwIC0gNykgc28gc2ltcGx5IHVzZSBudW1iZXJzIGluCj4gdGhlIGNvZGUuCj4gCj4gTm8gZnVu
-Y3Rpb25hbCBjaGFuZ2UuCj4gCj4gTk9URTogVGhpcyBwYXRjaCBhbHNvIGFkZHMgZW1hY3MgYm9p
-bGVycGxhdGUgdG8gYW1kLWlvbW11LWRlZnMuaAo+IAo+IFNpZ25lZC1vZmYtYnk6IFBhdWwgRHVy
-cmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+CgpJcyB0aGVyZSBhIHN0cm9uZyByZWFzb24g
-dG8gZ2V0IHJpZCBvZiB0aGVzZT8gIFNvbWUgb2YgZXhhbXBsZXMgYmVsb3cKY3JlYXRlIHNlZW1p
-bmdseSBtYWdpYyBudW1iZXJzIGluIHRoZSBjb2RlLiAgV2hpbGUgaWYgeW91J3JlIGZhbWlsaWFy
-CndpdGggdGhlIGZ1bmN0aW9ucyB0aGlzIGlzbid0IGEgYmlnIGRlYWwsIG90aGVyd2lzZSB5b3Ug
-aGF2ZSB0byBkaWcKZnVydGhlciB0byB0ZWxsLgoKPiArICAgIHB0ZSA9IHRhYmxlICsgcGZuX3Rv
-X3BkZV9pZHgoZ2ZuLCAxKTsKCj4gKyAgICBuZWVkX2ZsdXNoID0gc2V0X2lvbW11X3BkZV9wcmVz
-ZW50KHBkZSwgbmV4dF9tZm4sIDAsIGl3LCBpcik7CgpJZiB0aGVyZSdzIGEgZ2VuZXJhbCBjb25z
-ZW5zdXMgdGhhdCBnZXR0aW5nIHJpZCBvZiB0aGVzZSBpcyBiZXR0ZXIsIEkKZG9uJ3QgbWluZCBh
-bmQgd2lsbCBhZ3JlZSB0byBpdC4KCi0tIApCcmlhbiBXb29kcwoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gRnJpLCBPY3QgMTIsIDIwMTggYXQgMDQ6MTI6MDZQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
+dGU6Cj4gRnJvbTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGNpdHJpeC5jb20+Cj4gCj4gVGhp
+cyBjb21tYW5kIGRvZXMgdGhlIGxpbmssIHNvIGl0IG5lZWRzIExERkxBR1MuCj4gCj4gU2lnbmVk
+LW9mZi1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGNpdHJpeC5jb20+CgpBY2tlZC1ieTog
+RWxlbmEgVWZpbXRzZXZhIDxlbGVuYS51ZmltdHNldmFAb3JhY2xlLmNvbT4KCj4gLS0tCj4gIHRv
+b2xzL2RlYnVnZ2VyL2dkYnN4L01ha2VmaWxlIHwgMiArLQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBp
+bnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKPiAKPiBkaWZmIC0tZ2l0IGEvdG9vbHMvZGVidWdn
+ZXIvZ2Ric3gvTWFrZWZpbGUgYi90b29scy9kZWJ1Z2dlci9nZGJzeC9NYWtlZmlsZQo+IGluZGV4
+IDcyM2EyNzQzY2MuLjhkN2NkOTRhMzEgMTAwNjQ0Cj4gLS0tIGEvdG9vbHMvZGVidWdnZXIvZ2Ri
+c3gvTWFrZWZpbGUKPiArKysgYi90b29scy9kZWJ1Z2dlci9nZGJzeC9NYWtlZmlsZQo+IEBAIC0y
+Niw3ICsyNiw3IEBAIHVuaW5zdGFsbDoKPiAgCXJtIC1mICQoREVTVERJUikkKHNiaW5kaXIpL2dk
+YnN4Cj4gIAo+ICBnZGJzeDogZ3gvZ3hfYWxsLmEgeGcveGdfYWxsLmEgCj4gLQkkKENDKSAtbyAk
+QCAkXgo+ICsJJChDQykgJChMREZMQUdTKSAtbyAkQCAkXgo+ICAKPiAgeGcveGdfYWxsLmE6Cj4g
+IAkkKE1BS0UpIC1DIHhnCj4gLS0gCj4gMi4xMS4wCj4gCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
