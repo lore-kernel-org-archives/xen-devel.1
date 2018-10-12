@@ -1,18 +1,24 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: [RFC PATCH v1 0/8] Series short description
-Date: Fri, 12 Oct 2018 19:43:45 +0200
-Message-ID: <153936590062.22652.12114301510794181099.stgit@wayrath>
+From: Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: Re: Xen optimization
+Date: Fri, 12 Oct 2018 10:43:42 -0700
+Message-ID: <alpine.DEB.2.10.1810121035440.436@sstabellini-ThinkPad-X260>
+References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
+ <995da0578f0953662536edabb5807fd76ca4d8ce.camel@suse.com>
+ <CADJ6SV1yDBptrcaoqUPChtnXTmvhbzj-AAv2FDN2LCMyTipc-A@mail.gmail.com>
+ <CAENZ-+=mWFnJ-4OFK+bjb4rimNNB_x4qHFVAbTM1mFd2Sg7s3g@mail.gmail.com>
+ <CADJ6SV1Mdnjyd8oEcB4ZCZKuR0LkJ82GCf5s1+AwgASe8vLMWg@mail.gmail.com>
+ <alpine.DEB.2.10.1810111024390.436@sstabellini-ThinkPad-X260>
+ <CADJ6SV2v5=_MqfrABdfs1rcQ-BmCUJYyi_9fG8BC7C2vyxaqBA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="8323329-2082948586-1539365785=:436"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=d/jz=my=gmail.com=raistlin.df@srs-us1.protection.inumbo.net>)
- id 1gB1Tb-0002G5-Lp
- for xen-devel@lists.xenproject.org; Fri, 12 Oct 2018 17:43:51 +0000
-Received: by mail-wr1-f67.google.com with SMTP id n11-v6so14210759wru.13
- for <xen-devel@lists.xenproject.org>; Fri, 12 Oct 2018 10:43:50 -0700 (PDT)
+ <srs0=8met=my=xilinx.com=stefanos@srs-us1.protection.inumbo.net>)
+ id 1gB1Tp-0002Gl-Ud
+ for xen-devel@lists.xenproject.org; Fri, 12 Oct 2018 17:44:06 +0000
+In-Reply-To: <CADJ6SV2v5=_MqfrABdfs1rcQ-BmCUJYyi_9fG8BC7C2vyxaqBA@mail.gmail.com>
+Content-ID: <alpine.DEB.2.10.1810121038110.436@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,95 +27,223 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Bhavesh Davda <bhavesh.davda@oracle.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@citrix.com>
+To: Milan Boberic <milanboberic94@gmail.com>
+Cc: sstabellini@kernel.org, andrii_anisov@epam.com, Dario Faggioli <dfaggioli@suse.com>, julien.grall@arm.com, Meng Xu <xumengpanda@gmail.com>, xen-devel@lists.xenproject.org, stefano.stabellini@xilinx.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8sCgpIZXJlIGl0IGNvbWVzLCBjb3JlLXNjaGVkdWxpbmcgZm9yIENyZWRpdDIgYXMgd2Vs
-bC4gV2VsbCwgdGhpcyB0aW1lLAppdCdzIGFjdHVhbGx5IGdyb3VwLXNjaGVkdWxpbmcgKHNlZSBi
-ZWxvdykuCgogZ2l0Oi8veGVuYml0cy54ZW4ub3JnL3Blb3BsZS9kYXJpb2YveGVuLmdpdCByZWwv
-c2NoZWQvY3JlZGl0Mi9ncm91cC1zY2hlZHVsaW5nLVJGQ3YxCiBodHRwOi8veGVuYml0cy54ZW4u
-b3JnL2dpdHdlYi8/cD1wZW9wbGUvZGFyaW9mL3hlbi5naXQ7YT1zaG9ydGxvZztoPXJlZnMvaGVh
-ZHMvcmVsL3NjaGVkL2NyZWRpdDIvZ3JvdXAtc2NoZWR1bGluZy1SRkN2MQoKIChPciBodHRwczov
-L2dpdGh1Yi5jb20vZmRhcmlvL3hlbi90cmVlL3JlbC9zY2hlZC9jcmVkaXQyL2dyb3VwLXNjaGVk
-dWxpbmctUkZDdjEgLAogIE9yIGh0dHBzOi8vZ2l0bGFiLmNvbS9kZmFnZ2lvbGkveGVuL3RyZWUv
-cmVsL3NjaGVkL2NyZWRpdDIvZ3JvdXAtc2NoZWR1bGluZy1SRkN2MSApCgpBbiBSRkMgc2VyaWVz
-IGltcGxlbWVudGluZyB0aGUgc2FtZSBmZWF0dXJlIGZvciBDcmVkaXQxIGlzIGhlcmU6Cmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOC0wOC9t
-c2cwMjE2NC5odG1sCgpUaGUgdHdvIHNlcmllcywgaG93ZXZlciwgYXJlIGNvbXBsZXRlbHkgaW5k
-ZXBlbmRlbnQsIGFuZCBJJ2QgcmVjb21tZW5kCmZvY3VzaW5nIG9uIHRoaXMgb25lIGZpcnN0LiBJ
-biBmYWN0LCBpbXBsZW1lbnRpbmcgdGhlIGZlYXR1cmUgaGVyZSBpbgpDcmVkaXQyIHdhcyB3YWFh
-eSBzaW1wbGVyLCBhbmQgdGhlIHJlc3VsdCBpcywgSU1PLCBhbHJlYWR5IGEgbG90IGJldHRlci4K
-ClRoZXJlZm9yZSwgSSBleHBlY3QgdGhhdCB0aGUgYW1vdW50IG9mIGVmZm9ydCByZXF1aXJlZCBm
-b3IgbWFraW5nIHRoaXMKdmVyeSBzZXJpZXMgdXBzdHJlYW1hYmxlIHRvIGJlIG11Y2ggc21hbGxl
-ciB0aGFuIGZvciB0aGUgQ3JlZGl0MSBvbmUuCldoZW4gdGhpcyBpcyBpbiwgd2UnbGwgaGF2ZSBv
-bmUgc2NoZWR1bGVyIHRoYXQgc3VwcG9ydHMKZ3JvdXAtc2NoZWR1bGluZywgYW5kIHdlIGNhbiBm
-b2N1cyBvbiB3aGF0IHRvIGRvIHdpdGggdGhlIG90aGVycy4KCkxldCBtZSBhbHNvIHBvaW50IG91
-dCwgdGhhdCB0aGVyZSBpcyBzb21lIGRpc2N1c3Npb24gKGluIHRoZSB0aHJlYWQgb2YKdGhlIENy
-ZWRpdDEgUkZDIHNlcmllcyBbMV0pLCBhYm91dCB3aGV0aGVyIGEgZGlmZmVyZW50IGFwcHJvYWNo
-IHRvd2FyZAppbXBsZW1lbnRpbmcgY29yZS9ncm91cC1zY2hlZHVsaW5nIHdvdWxkbid0IGJlIGJl
-dHRlci4gSSBoYWQgdGhpcyBjb2RlCmFsbW9zdCByZWFkeSBhbHJlYWR5LCBhbmQgc28gSSBkZWNp
-ZGVkIHRvIHNlbmQgaXQgb3V0IGFueXdheS4gSWYgaXQgdGhlbgp0dXJucyBvdXQgdGhhdCB3ZSBo
-YXZlIHRvIHRocm93IGl0IGF3YXksIHRoZW4gZmluZS4gQnV0LCBzbyBmYXIsIEknbSBhbGwKYnV0
-IGNvbnZpbmNlZCB0aGF0IHRoZSB3YXkgdGhpbmdzIGFyZSBkb25lIGluIHRoaXMgc2VyaWVzIGlz
-IG5vdCBvdXIKY3VycmVudCBiZXN0IHNvbHV0aW9uIHRvIGRlYWwgd2l0aCB0aGUgcHJvYmxlbXMg
-d2UgaGF2ZSBhdCBoYW5kLgoKU28sIHdoYXQncyBpbiBoZXJlPyBXZWxsLCB3ZSBoYXZlIGEgZ2Vu
-ZXJpYyBncm91cCBzY2hlZHVsaW5nCmltcGxlbWVudGF0aW9uIHdoaWNoIHNlZW1zIHRvIG1lIHRv
-IHdvcmsgcmVhc29uYWJseSB3ZWxsLi4uIEZvciBhbgpSRkMuIDstUAoKSSBjYWxsIGl0IGdlbmVy
-aWMgYmVjYXVzZSwgYWx0aG91Z2ggdGhlIG1haW4gYWltIGlzIGNvcmUtc2NoZWR1bGluZywgaXQK
-Y2FuIGJlIG1hZGUgdG8gd29yayAoYW5kIGluIGZhY3QsIGl0IGFscmVhZHkga2luZCBvZiBkb2Vz
-KSB3aXRoCmRpZmZlcmVudCBncm91cGluZyAobGlrZSBub2RlLCBzb2NrZXQsIG9yIGFyYml0cmFy
-eSBzZXRzIG9mIENQVXMpLgoKSSBkb2VzIG5vdCBoYXZlIHRoZSBmYWlybmVzcyBhbmQgc3RhcnZh
-dGlvbiBpc3N1ZXMgdGhhdCB0aGUgUkZDIHNlcmllcwpmb3IgQ3JlZGl0MSBsaWtlZCBhYm92ZSBo
-YXMuIEkuZS4sIGl0IGFscmVhZHkgc29ydC1vZiB3b3Jrcy4gOi1ECgpTb21lIGltcHJvdmVtZW50
-cyBhcmUgbmVjZXNzYXJ5LCBtb3N0bHkgYmVjYXVzZSBDcmVkaXQyIGlzIG5vdCBhIGZ1bGx5Cndv
-cmsgY29uc2VydmluZyBzY2hlZHVsZXIsIGFuZCB0aGlzIGh1cnRzIHdoZW4gd2UgZG8gdGhpbmdz
-IGxpa2UgZ3JvdXAKc2NoZWR1bGluZy4gU28gd2UgbmVlZCB0byBhZGQgbG9naWMgZm9yIGRvaW5n
-IHNvbWUgcXVpY2sgbG9hZC1iYWxhbmNpbmcsCm9yIHdvcmsgc3RlYWxpbmcsIHdoZW4gYSBDUFUg
-Z29lcyBpZGxlLCBidXQgdGhhdCBpcyBub3QgdGhhdCBtdWNoIG9mIGEKYmlnIGRlYWwgKEkgd2Fz
-IGFscmVhZHkgdGhpbmtpbmcgdG8gYWRkIGl0IGFueXdheSkuCgpGaW5kaW5nIGEgd2F5IG9mIGNv
-bnNpZGVyaW5nIGdyb3VwLXNjaGVkdWxpbmcgd2hpbGUgZG9pbmcgcHJvcGVyIGxvYWQKYmFsYW5j
-aW5nIGlzIGFsc28gb24gbXkgdG9kbyBsaXN0LiBJdCBpcyBsZXNzIGVhc3kgdGhhbiB0aGUgd29y
-awpjb25zZXJ2aW5nLWlmaWNhdGlvbiBkZXNjcmliZWQgYWJvdmUsIGJ1dCBhbHNvIGxlc3MgaW1w
-b3J0YW50LCBJTU8uCgpXaGF0J3Mgbm90IHRoZXJlPyBXZWxsLCBtYWlubHksIHdlJ3JlIG1pc3Np
-bmcgdXBkYXRpbmcgdGhlIGRvY3MsIGFuZAp0cmFjaW5nLiBBYm91dCB0aGUgbGF0dGVyLCBJIGhh
-dmUgYW4gdW5maW5pc2hlZCBwYXRjaCB3aGljaCBhZGRzCnRyYWNlcG9pbnRzIHRoYXQgd2lsbCBi
-ZSB1c2VmdWwgdG8gb2JzZXJ2ZSwgdW5kZXJzdGFuZCBhbmQgZGVidWcgd2hldGhlcgp0aGUgY29k
-ZSBiZWhhdmUgYXMgd2UgZXhwZWN0LiBBbmQgSSdsbCBzZW5kIG91dCB0aGF0IHNvb24gdG9vLgoK
-U29tZSBub3RlcyBvbiB0aGUgYWN0dWFsIHBhdGNoZXM6Ci0gcGF0Y2hlcyAxIGFuZCAyIGhhdmUg
-YmVlbiBzdWJtaXR0ZWQgYWxyZWFkeSwgYnV0IHRoZXkncmUgbmVjZXNzYXJ5CiAgZm9yIHRlc3Rp
-bmcgdGhpcyBzZXJpZXMsIHNvIEkndmUgaW5jbHVkZWQgdGhlbTsKLSBjcmVkaXQyX2dyb3VwX3Nj
-aGVkPWNvcmUgaGFzIGJlZW4gbm90IG9ubHkgYm9vdCB0ZXN0ZWQsIGJ1dCBJJ3ZlIGFsc28KICB0
-aHJvd24gYXQgaGltIGEgY291cGxlIG9mIChiYXNpYykgd29ya2xvYWRzLgogIGNyZWRpdDJfZ3Jv
-dXBfc2NoZWQ9bm8gaGFzIGJlZW4gYWxzbyB0ZXN0ZWQgbm90IHRvIGJyZWFrIHRoaW5ncyAoYnV0
-LAogIGUuZy4sIEkgaGF2ZW4ndCBtZWFzdXJlZCB0aGUgb3ZlcmhlYWQgdGhlIHNlcmllcyBpbnRy
-b2R1Y2VzKS4KICBjcmVkaXQyX2dyb3VwX3NjaGVkPW5vZGUgaGFzIGJlZW4gYm9vdCB0ZXN0ZWQs
-IGJ1dCBub3QgbXVjaCBlbHNlOwotIGNwdXBvb2wgYW5kIENQVSBob3RwbHVnIGhhdmUgX25vdF8g
-YmVlbiB0ZXN0ZWQ7CgpUaGFua3MgYW5kIFJlZ2FyZHMsCkRhcmlvCgpbMV0gaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE4LTA5L21zZzAwNzA3
-Lmh0bWwKICAgIGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4t
-ZGV2ZWwvMjAxOC0xMC9tc2cwMTAxMC5odG1sCgpQUy4gSSdtIENjLWluZyBhIGZldyBwZW9wbGUg
-d2l0aCB3aGljaCB3ZSd2ZSBkaXNjdXNzZWQgdGhlc2UgaXNzdWVzLCBidXQKICAgIG9ubHkgdG8g
-dGhpcyBjb3ZlciBsZXR0ZXIsIHRvIGF2b2lkIHNwYW1taW5nIHlvdSB3aXRoIHNjaGVkdWxpbmcg
-Y29kZS4KICAgIEZpbmQgdGhlIHBhdGNoZXMgb24gdGhlIGxpc3QvZ2l0LCBvciBwaW5nIG1lLCBh
-bmQgSSdsbCBtYWlsIHRoZW0gdG8KICAgIHlvdS4uLiA6LSkKLS0tCkRhcmlvIEZhZ2dpb2xpICg4
-KToKICAgICAgeGVuOiBzY2hlZDogQ3JlZGl0MjogZHVyaW5nIHNjaGVkdWxpbmcsIHVwZGF0ZSB0
-aGUgaWRsZSBtYXNrIGJlZm9yZSB1c2luZyBpdAogICAgICB4ZW46IHNjaGVkOiBDcmVkaXQyOiBh
-dm9pZCBsb29waW5nIHRvbyBtdWNoIChvdmVyIHJ1bnF1ZXVlcykgZHVyaW5nIGxvYWQgYmFsYW5j
-aW5nCiAgICAgIHhlbjogc2NoZWQ6IENyZWRpdDI6IHNob3cgcnVucXVldWUgaWQgZHVyaW5nIHJ1
-bnF1ZXVlIGR1bXAKICAgICAgeGVuOiBzY2hlZDogQ3JlZGl0MjogZ2VuZXJhbGl6ZSB0b3BvbG9n
-eSByZWxhdGVkIGJvb3RwYXJhbSBoYW5kbGluZwogICAgICB4ZW46IHNjaGVkOiBDcmVkaXQyIGdy
-b3VwLXNjaGVkdWxpbmc6IGRhdGEgc3RydWN0dXJlcwogICAgICB4ZW46IHNjaGVkOiBDcmVkaXQy
-IGdyb3VwLXNjaGVkdWxpbmc6IHNlbGVjdGluZyBuZXh0IHZjcHUgdG8gcnVuCiAgICAgIHhlbjog
-c2NoZWQ6IENyZWRpdDIgZ3JvdXAtc2NoZWR1bGluZzogdGlja2xpbmcKICAgICAgeGVuOiBzY2hl
-ZDogQ3JlZGl0MiBncm91cC1zY2hlZHVsaW5nOiBhbnRpLXN0YXJ2YXRpb24gbWVhc3VyZXMKCgog
-eGVuL2NvbW1vbi9zY2hlZF9jcmVkaXQyLmMgfCAgNDkyICsrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKy0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgNDM5IGluc2VydGlvbnMoKyks
-IDUzIGRlbGV0aW9ucygtKQotLQo8PFRoaXMgaGFwcGVucyBiZWNhdXNlIEkgY2hvb3NlIGl0IHRv
-IGhhcHBlbiE+PiAoUmFpc3RsaW4gTWFqZXJlKQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpEYXJpbyBGYWdnaW9saSwgUGgu
-RCwgaHR0cDovL2Fib3V0Lm1lL2RhcmlvLmZhZ2dpb2xpClNvZnR3YXJlIEVuZ2luZWVyIEAgU1VT
-RSBodHRwczovL3d3dy5zdXNlLmNvbS8KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-2082948586-1539365785=:436
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: QUOTED-PRINTABLE
+Content-ID: <alpine.DEB.2.10.1810121038111.436@sstabellini-ThinkPad-X260>
+
+On Fri, 12 Oct 2018, Milan Boberic wrote:
+> Hi Stefano, glad to have you back :D,
+> this is my setup:
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 - dom0 is PetaLinux, has 1 vCPU and it's pinn=
+ed for pCPU0
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 - there is only one domU and this is my bare-=
+metal app that also have one vCPU and it's pinned for pCPU1
+> so yeah, there is only dom0 and bare-metal app on the board.
+>=20
+> Jitter is the same with and without Dario's patch.
+>=20
+> I'm still not sure about timer's passthrough because there is no mention =
+of triple timer counter is device tree so I added:
+>=20
+> &ttc0 {
+> =C2=A0 =C2=A0xen,passthrough =3D <0x1>;
+> };
+>=20
+> at the end of the xen-overlay.dtsi file which I included in attachment.
+
+This is definitely wrong. Can you please also post the full host device
+tree with your modifications that you are using for Xen and Dom0?  You
+should have something like:
+
+
+        timer@ff110000 {
+            compatible =3D "cdns,ttc";
+            interrupt-parent =3D <0x2>;
+            interrupts =3D <0x0 0x24 0x4 0x0 0x25 0x4 0x0 0x26 0x4>;
+            reg =3D <0x0 0xff110000 0x0 0x1000>;
+            timer-width =3D <0x20>;
+            power-domains =3D <0x3b>;
+            xen,passthrough;
+        };
+
+For each of the nodes of the devices you are assigning to the DomU.
+
+
+> About patch you sent, I can't find this funcion void vgic_inject_irq in /=
+xen/arch/arm/vgic.c file, this is link of git repository
+> from where I build my xen so you can take a look if that printk can be pu=
+t somewhere else.
+>=20
+> https://github.com/Xilinx/xen/
+
+It's here: https://github.com/Xilinx/xen/blob/xilinx/stable-4.9/xen/arch/ar=
+m/vgic.c#L462
+
+BTW you are using a pretty old branch, I suggest you moving to:
+
+https://github.com/Xilinx/xen/tree/xilinx/versal/xen/arch/arm
+
+It will work on your board too and it is based on the much newer Xen
+4.11.
+
+
+> I ran some more testing and realized that results are the same with or wi=
+thout vwfi=3Dnative, which I think again points out that
+> passthrough that I need to provide in device tree isn't valid.
+
+In reality, the results are the same with and without vwfi=3Dnative only
+if the baremetal app never issues any wfi instructions.
+
+
+> =C2=A0And of course, higher the frequency of interrupts results in higher=
+ jitter. I'm still battling with Xilinx SDK and triple timer
+> counter that's why I can't figure out what is the exact frequency set (I'=
+m just rising it and lowering it), I'll give my best to
+> solve that ASAP because we need to know exact value of frequency set.=C2=
+=A0
+
+Yep, that's important :-)
+
+
+>=20
+> Thanks in advance!
+>=20
+> Milan
+> =C2=A0
+>=20
+>=20
+> On Fri, Oct 12, 2018 at 12:29 AM Stefano Stabellini <stefano.stabellini@x=
+ilinx.com> wrote:
+>       On Thu, 11 Oct 2018, Milan Boberic wrote:
+>       > On Wed, Oct 10, 2018 at 6:41 PM Meng Xu <xumengpanda@gmail.com> w=
+rote:
+>       > >
+>       > > The jitter may come from Xen or the OS in dom0.
+>       > > It will be useful to know what is the jitter if you run the tes=
+t on PetaLinux.
+>       > > (It's understandable the jitter is gone without OS. It is also =
+common
+>       > > that OS introduces various interferences.)
+>       >
+>       > Hi Meng,
+>       > well... I'm using bare-metal application and I need it exclusivel=
+y to
+>       > be ran on one CPU as domU (guest) without OS (and I'm not sure ho=
+w
+>       > would I make the same app to be ran on PetaLinux dom0 :D haha).
+>       > Is there a chance that PetaLinux as dom0 is creating this jitter =
+and
+>       > how? Is there a way of decreasing it?
+>       >
+>       > Yes, there are no prints.
+>       >
+>       > I'm not sure about this timer interrupt passthrough because I did=
+n't
+>       > find any example of it, in attachment I included xen-overlay.dtsi=
+ file
+>       > which I edited to add passthrough, in earlier replies there are
+>       > bare-metal configuration file. It would be helpful to know if tho=
+se
+>       > setting are correct. If they are not correct it would explain the
+>       > jitter.
+>       >
+>       > Thanks in advance, Milan Boberic!
+>=20
+>       Hi Milan,
+>=20
+>       Sorry for taking so long to go back to this thread. But I am here n=
+ow :)
+>=20
+>       First, let me ask a couple of questions to understand the scenario
+>       better: is there any interference from other virtual machines while=
+ you
+>       measure the jitter? Or is the baremetal app the only thing actively
+>       running on the board?
+>=20
+>       Second, it would be worth double-checking that Dario's patch to fix
+>       sched=3Dnull is not having unexpected side effects. I don't think s=
+o, it
+>       would be worth testing with it and without it to be sure.
+>=20
+>       I gave a look at your VM configuration. The configuration looks cor=
+rect.
+>       There is no dtdev settings, but given that none of the devices you =
+are
+>       assigning to the guest does any DMA, it should be OK. You want to m=
+ake
+>       sure that Dom0 is not trying to use those same devices -- make sure=
+ to
+>       add "xen,passthrough;" to each corresponding node on the host devic=
+e
+>       tree.
+>=20
+>       The error messages "No valid vCPU found" are due to the baremetal
+>       applications trying to configure as target cpu for the interrupt cp=
+u1
+>       (the second cpu in the system), while actually only 1 vcpu is assig=
+ned
+>       to the VM. Hence, only cpu0 is allowed. I don't think it should cau=
+se
+>       any jitter issues, because the request is simply ignored. Just to b=
+e
+>       safe, you might want to double check that the physical interrupt is
+>       delivered to the right physical cpu, which would be cpu1 in your
+>       configuration, the one running the only vcpu of the baremetal app. =
+You
+>       can do that by adding a printk to xen/arch/arm/vgic.c:vgic_inject_i=
+rq,
+>       for example:
+>=20
+>       diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
+>       index 5a4f082..208fde7 100644
+>       --- a/xen/arch/arm/vgic.c
+>       +++ b/xen/arch/arm/vgic.c
+>       @@ -591,6 +591,7 @@ void vgic_inject_irq(struct domain *d, struct v=
+cpu *v, unsigned int virq,
+>       =C2=A0out:
+>       =C2=A0 =C2=A0 =C2=A0spin_unlock_irqrestore(&v->arch.vgic.lock, flag=
+s);
+>=20
+>       +=C2=A0 =C2=A0 if (v !=3D current) printk("DEBUG irq slow path!\n")=
+;
+>       =C2=A0 =C2=A0 =C2=A0/* we have a new higher priority irq, inject it=
+ into the guest */
+>       =C2=A0 =C2=A0 =C2=A0vcpu_kick(v);
+>=20
+>       You don't want "DEBUG irq slow path!" to get printed.
+>=20
+>       Finally, I would try to set the timer to generate events less frequ=
+ently
+>       than every 1us and see what happens, maybe every 5-10us. In my test=
+s,
+>       the IRQ latency overhead caused by Xen is around 1us, so injecting =
+1
+>       interrupt every 1us, plus 1us of latency caused by Xen, cannot lead=
+ to
+>       good results.
+>=20
+>       I hope this helps, please keep us updated with your results, they a=
+re
+>       very interesting!
+>=20
+>=20
+>=20
+--8323329-2082948586-1539365785=:436
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-2082948586-1539365785=:436--
