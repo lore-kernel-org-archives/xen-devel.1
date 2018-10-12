@@ -1,21 +1,24 @@
-From: Dario Faggioli <dfaggioli@suse.com>
+From: Juergen Gross <jgross@suse.com>
 Subject: Re: [RFC PATCH v1 00/16] xen: sched: implement
  core-scheduling
-Date: Fri, 12 Oct 2018 09:49:27 +0200
-Message-ID: <8224a31a6fd968344499b52e4bc77d78576c1a8e.camel@suse.com>
+Date: Fri, 12 Oct 2018 10:35:35 +0200
+Message-ID: <60e809eb-1971-b467-9a56-c116c60445b2@suse.com>
 References: <153515305655.8598.6054293649487840735.stgit@Istar.fritz.box>
  <7553b02f-514d-d577-a4ae-3478036f8f62@suse.com>
  <3636eba03691a0331a6e82cb11a651fd41c475ec.camel@suse.com>
  <6ffe5f58-8aec-c349-e08b-58dc1d3d5469@suse.com>
+ <8224a31a6fd968344499b52e4bc77d78576c1a8e.camel@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0075944965124508260=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ulkm=my=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gAsCU-0007qE-Pt
- for xen-devel@lists.xenproject.org; Fri, 12 Oct 2018 07:49:34 +0000
-In-Reply-To: <6ffe5f58-8aec-c349-e08b-58dc1d3d5469@suse.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=14it=my=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1gAsv6-0003SO-9K
+ for xen-devel@lists.xenproject.org; Fri, 12 Oct 2018 08:35:40 +0000
+In-Reply-To: <8224a31a6fd968344499b52e4bc77d78576c1a8e.camel@suse.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,170 +27,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+To: Dario Faggioli <dfaggioli@suse.com>, xen-devel@lists.xenproject.org
 Cc: Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Bhavesh Davda <bhavesh.davda@oracle.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0075944965124508260==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-COtWP2eRmW/oI+7BqkYn"
-
-
---=-COtWP2eRmW/oI+7BqkYn
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2018-10-12 at 07:15 +0200, Juergen Gross wrote:
-> On 11/10/2018 19:37, Dario Faggioli wrote:
-> >=20
-> > So, for example:
-> > - domain A has vCore0 and vCore1
-> > - each vCore has 2 threads ({vCore0.0, vCore0.1} and
-> >   {vCore1.0, vCore1.1})
-> > - we're on a 2-way SMT host
-> > - vCore1 is running on physical core 3 on the host
-> > - more specifically, vCore1.0 is currently executing on thread 0 of
-> >   physical core 3 of the host, and vCore1.1 is currently executing
-> > on
-> >   thread 1 of core 3 of the host
-> > - say that both vCore1.0 and vCore1.1 are in guest context
-> >=20
-> > Now:
-> > * vCore1.0 blocks. What happens?
->=20
-> It is going to vBlocked (the physical thread is sitting in the
-> hypervisor waiting for either a (core-)scheduling event or for
-> unblocking vCore1.0). vCore1.1 keeps running. Or, if vCore1.1
-> is already vIdle/vBlocked, vCore1 is switching to blocked and the
-> scheduler is looking for another vCore to schedule on the physical
-> core.
->=20
-Ok. And then we'll have one thread in guest context, and one thread in
-Xen (albeit, idle, in this case). In these other cases...
-
-> > * vCore1.0 makes an hypercall. What happens?
->=20
-> Same as today. The hypercall is being executed.
->=20
-> > * vCore1.0 VMEXITs. What happens?
->=20
-> Same as today. The VMEXIT is handled.
->=20
-... we have one thread in guest context, and one thread in Xen, and the
-one in Xen is not just staying idle, it's doing hypercalls and VMEXIT
-handling.
-
-> In case you referring to a potential rendezvous for e.g. L1TF
-> mitigation: this would be handled scheduler agnostic.
->=20
-Yes, that was what I was thinking to. I.e., in order to be able to use
-core-scheduling as a _fully_effective_ mitigation for stuff like L1TF,
-we'd need something like that.
-
-In fact, core-scheduling "per-se" mitigates leaks among guests, but if
-we want to fully avoid for two threads to ever be in different security
-contexts (like one in guest and one in Xen, to prevent Xen data leaking
-to a guest), we do need some kind of synchronized Xen enters/exits,
-AFAIUI.
-
-What I'm trying to understand right now, is whether implementing things
-in this way you're proposing, would help achieving that. And what I've
-understood so far is that, no it doesn't.
-
-The main difference between the two approaches would be that we
-implement it once in schedule.c, for all schedulers. But this, I see it
-as something having both up and down sides (yeah, like everything on
-Earth, I know! :-P). More on this later.
-
-> > All in all, I like the idea, because it is about introducing nice
-> > abstractions, it is general, etc., but it looks like a major rework
-> > of
-> > the scheduler.
->=20
-> Correct. Finally something to do :-p
->=20
-Indeed! :-)
-
-> > Note that, while this series which tries to implement core-
-> > scheduling
-> > for Credit1 is rather long and messy, doing the same (and with a
-> > similar approach) for Credit2 is a lot easier and nicer. I have it
-> > almost ready, and will send it soon.
->=20
-> Okay, but would it keep vThreads of the same vCore let always running
-> together on the same physical core?
->=20
-It doesn't right now, as we don't have a way to expose such information
-to the guest, yet. And since without such a mechanism, the guest can't
-take advantage of something like this (neither from a performance nor
-from a vuln. mitigation point of view), I kept that out.
-
-But I certainly can see about making it do so (I was already planning
-to).
-
-> > Right. But again, in Credit2, I've been able to implement socket-
-> > wise
-> > coscheduling with this approach (I mean, an approach similar to the
-> > one
-> > in this series, but adapted to Credit2).
->=20
-> And then there still is sched_rt.c
->=20
-Ok, so I think this is the main benefit of this approach. We do the
-thing once, and all schedulers get core-scheduling (or whatever
-granularity of group scheduling we implement/allow).
-
-But how easy it is to opt out, if one doesn't want it? E.g., in the
-context of L1TF, what if I'm not affected, and hence am not interested
-in core-scheduling? What if I want a cpupool with core-scheduling and
-one without?
-
-I may be wrong, but out of the top of my head, but it seems to me that
-doing things in schedule.c makes this a lot harder, if possible at all.
-
-Thanks and Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-COtWP2eRmW/oI+7BqkYn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvAUgcACgkQFkJ4iaW4
-c+70qQ/+K8ugQRxmPYM6C6UEwciah43t7ghR5hGyfCGbfbs6uDXTYAA9CpzhJ1T4
-+u7TbLvy3kMhDRiuHpQwg3jvyv0Mnab2zGeZLChWkPOETAWUaUGjBsTU+SX53V6j
-9tOX8qn8khvyuZ4lba+Rq/vmPNR63LixtkYZx3/ShDoGNFiWYviHmN+JkPbiAfij
-b8MVLp1nUT5ZbH35+0+Upmt6rMU6vXtaSzgSr2aqkf86BKiZ0k0BQu9g94YxRtWV
-bpOL/9h3HXoAio3xQ8LXaZTWv6r3NRIj/mC6cp/vAKcZ9LIsNkOUXNHsMpvjvg3z
-aWdna1vkXFcCUWlMP11BI1V724M/0q+7iDfWEmTKiY4ZAabbbFUJtcACVj/FRSSb
-7GiCoHvmIasKOzackVpMqOYVecIltOaIqGt4qBMeywVUOaKgn1BgNGgyYDvgj6pX
-yE+BrH0xJFMFenmy8MTPOCF3VNEqpTCrgYImSpn6sZwXkp7vJtS6eCoQnjoOtU14
-hjn1AAI3Sy5H3GwS0XSJrbOrBZWd1Cs/bzGZ3qA2iHi/jnCTs99ms6ldhs8oa9eO
-LgpRBvjrt2+dqXHJvf7RohFw7jdVE9txzOxSp/m5xryh4uRvtGp/U3Po4LFbyMfx
-I0S3z4zZ3ORgolBZcdTp5tcr+VZWqQZ+pSTY6fAxFraWhgGDIg8=
-=1ml4
------END PGP SIGNATURE-----
-
---=-COtWP2eRmW/oI+7BqkYn--
-
-
-
---===============0075944965124508260==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0075944965124508260==--
+T24gMTIvMTAvMjAxOCAwOTo0OSwgRGFyaW8gRmFnZ2lvbGkgd3JvdGU6Cj4gT24gRnJpLCAyMDE4
+LTEwLTEyIGF0IDA3OjE1ICswMjAwLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+PiBPbiAxMS8xMC8y
+MDE4IDE5OjM3LCBEYXJpbyBGYWdnaW9saSB3cm90ZToKPj4+Cj4+PiBTbywgZm9yIGV4YW1wbGU6
+Cj4+PiAtIGRvbWFpbiBBIGhhcyB2Q29yZTAgYW5kIHZDb3JlMQo+Pj4gLSBlYWNoIHZDb3JlIGhh
+cyAyIHRocmVhZHMgKHt2Q29yZTAuMCwgdkNvcmUwLjF9IGFuZAo+Pj4gICB7dkNvcmUxLjAsIHZD
+b3JlMS4xfSkKPj4+IC0gd2UncmUgb24gYSAyLXdheSBTTVQgaG9zdAo+Pj4gLSB2Q29yZTEgaXMg
+cnVubmluZyBvbiBwaHlzaWNhbCBjb3JlIDMgb24gdGhlIGhvc3QKPj4+IC0gbW9yZSBzcGVjaWZp
+Y2FsbHksIHZDb3JlMS4wIGlzIGN1cnJlbnRseSBleGVjdXRpbmcgb24gdGhyZWFkIDAgb2YKPj4+
+ICAgcGh5c2ljYWwgY29yZSAzIG9mIHRoZSBob3N0LCBhbmQgdkNvcmUxLjEgaXMgY3VycmVudGx5
+IGV4ZWN1dGluZwo+Pj4gb24KPj4+ICAgdGhyZWFkIDEgb2YgY29yZSAzIG9mIHRoZSBob3N0Cj4+
+PiAtIHNheSB0aGF0IGJvdGggdkNvcmUxLjAgYW5kIHZDb3JlMS4xIGFyZSBpbiBndWVzdCBjb250
+ZXh0Cj4+Pgo+Pj4gTm93Ogo+Pj4gKiB2Q29yZTEuMCBibG9ja3MuIFdoYXQgaGFwcGVucz8KPj4K
+Pj4gSXQgaXMgZ29pbmcgdG8gdkJsb2NrZWQgKHRoZSBwaHlzaWNhbCB0aHJlYWQgaXMgc2l0dGlu
+ZyBpbiB0aGUKPj4gaHlwZXJ2aXNvciB3YWl0aW5nIGZvciBlaXRoZXIgYSAoY29yZS0pc2NoZWR1
+bGluZyBldmVudCBvciBmb3IKPj4gdW5ibG9ja2luZyB2Q29yZTEuMCkuIHZDb3JlMS4xIGtlZXBz
+IHJ1bm5pbmcuIE9yLCBpZiB2Q29yZTEuMQo+PiBpcyBhbHJlYWR5IHZJZGxlL3ZCbG9ja2VkLCB2
+Q29yZTEgaXMgc3dpdGNoaW5nIHRvIGJsb2NrZWQgYW5kIHRoZQo+PiBzY2hlZHVsZXIgaXMgbG9v
+a2luZyBmb3IgYW5vdGhlciB2Q29yZSB0byBzY2hlZHVsZSBvbiB0aGUgcGh5c2ljYWwKPj4gY29y
+ZS4KPj4KPiBPay4gQW5kIHRoZW4gd2UnbGwgaGF2ZSBvbmUgdGhyZWFkIGluIGd1ZXN0IGNvbnRl
+eHQsIGFuZCBvbmUgdGhyZWFkIGluCj4gWGVuIChhbGJlaXQsIGlkbGUsIGluIHRoaXMgY2FzZSku
+IEluIHRoZXNlIG90aGVyIGNhc2VzLi4uCj4gCj4+PiAqIHZDb3JlMS4wIG1ha2VzIGFuIGh5cGVy
+Y2FsbC4gV2hhdCBoYXBwZW5zPwo+Pgo+PiBTYW1lIGFzIHRvZGF5LiBUaGUgaHlwZXJjYWxsIGlz
+IGJlaW5nIGV4ZWN1dGVkLgo+Pgo+Pj4gKiB2Q29yZTEuMCBWTUVYSVRzLiBXaGF0IGhhcHBlbnM/
+Cj4+Cj4+IFNhbWUgYXMgdG9kYXkuIFRoZSBWTUVYSVQgaXMgaGFuZGxlZC4KPj4KPiAuLi4gd2Ug
+aGF2ZSBvbmUgdGhyZWFkIGluIGd1ZXN0IGNvbnRleHQsIGFuZCBvbmUgdGhyZWFkIGluIFhlbiwg
+YW5kIHRoZQo+IG9uZSBpbiBYZW4gaXMgbm90IGp1c3Qgc3RheWluZyBpZGxlLCBpdCdzIGRvaW5n
+IGh5cGVyY2FsbHMgYW5kIFZNRVhJVAo+IGhhbmRsaW5nLgo+IAo+PiBJbiBjYXNlIHlvdSByZWZl
+cnJpbmcgdG8gYSBwb3RlbnRpYWwgcmVuZGV6dm91cyBmb3IgZS5nLiBMMVRGCj4+IG1pdGlnYXRp
+b246IHRoaXMgd291bGQgYmUgaGFuZGxlZCBzY2hlZHVsZXIgYWdub3N0aWMuCj4+Cj4gWWVzLCB0
+aGF0IHdhcyB3aGF0IEkgd2FzIHRoaW5raW5nIHRvLiBJLmUuLCBpbiBvcmRlciB0byBiZSBhYmxl
+IHRvIHVzZQo+IGNvcmUtc2NoZWR1bGluZyBhcyBhIF9mdWxseV9lZmZlY3RpdmVfIG1pdGlnYXRp
+b24gZm9yIHN0dWZmIGxpa2UgTDFURiwKPiB3ZSdkIG5lZWQgc29tZXRoaW5nIGxpa2UgdGhhdC4K
+PiAKPiBJbiBmYWN0LCBjb3JlLXNjaGVkdWxpbmcgInBlci1zZSIgbWl0aWdhdGVzIGxlYWtzIGFt
+b25nIGd1ZXN0cywgYnV0IGlmCj4gd2Ugd2FudCB0byBmdWxseSBhdm9pZCBmb3IgdHdvIHRocmVh
+ZHMgdG8gZXZlciBiZSBpbiBkaWZmZXJlbnQgc2VjdXJpdHkKPiBjb250ZXh0cyAobGlrZSBvbmUg
+aW4gZ3Vlc3QgYW5kIG9uZSBpbiBYZW4sIHRvIHByZXZlbnQgWGVuIGRhdGEgbGVha2luZwo+IHRv
+IGEgZ3Vlc3QpLCB3ZSBkbyBuZWVkIHNvbWUga2luZCBvZiBzeW5jaHJvbml6ZWQgWGVuIGVudGVy
+cy9leGl0cywKPiBBRkFJVUkuCj4gCj4gV2hhdCBJJ20gdHJ5aW5nIHRvIHVuZGVyc3RhbmQgcmln
+aHQgbm93LCBpcyB3aGV0aGVyIGltcGxlbWVudGluZyB0aGluZ3MKPiBpbiB0aGlzIHdheSB5b3Un
+cmUgcHJvcG9zaW5nLCB3b3VsZCBoZWxwIGFjaGlldmluZyB0aGF0LiBBbmQgd2hhdCBJJ3ZlCj4g
+dW5kZXJzdG9vZCBzbyBmYXIgaXMgdGhhdCwgbm8gaXQgZG9lc24ndC4KClRoaXMgYXNwZWN0IHdp
+bGwgbmVlZCBhYm91dCB0aGUgc2FtZSBlZmZvcnQgaW4gYm90aCBzb2x1dGlvbnMuCk1heWJlIG15
+IHByb3Bvc2FsIHdvdWxkIG1ha2UgaXQgZWFzaWVyIHRvIGRlY2lkZSB3aGV0aGVyIHN1Y2ggYQpy
+ZW5kZXp2b3VzIGlzIG5lZWRlZCwgYXMgdGhlcmUgd291bGQgYmUgb25seSBvbmUgaW5zdGFuY2Ug
+dG8gYXNrCihzY2hlZHVsZS5jKSBpbnN0ZWFkIG9mIG11bHRpcGxlIGluc3RhbmNlcyAoc2NoZWRf
+Ki5jKS4KCj4gCj4gVGhlIG1haW4gZGlmZmVyZW5jZSBiZXR3ZWVuIHRoZSB0d28gYXBwcm9hY2hl
+cyB3b3VsZCBiZSB0aGF0IHdlCj4gaW1wbGVtZW50IGl0IG9uY2UgaW4gc2NoZWR1bGUuYywgZm9y
+IGFsbCBzY2hlZHVsZXJzLiBCdXQgdGhpcywgSSBzZWUgaXQKPiBhcyBzb21ldGhpbmcgaGF2aW5n
+IGJvdGggdXAgYW5kIGRvd24gc2lkZXMgKHllYWgsIGxpa2UgZXZlcnl0aGluZyBvbgo+IEVhcnRo
+LCBJIGtub3chIDotUCkuIE1vcmUgb24gdGhpcyBsYXRlci4KPiAKPj4+IEFsbCBpbiBhbGwsIEkg
+bGlrZSB0aGUgaWRlYSwgYmVjYXVzZSBpdCBpcyBhYm91dCBpbnRyb2R1Y2luZyBuaWNlCj4+PiBh
+YnN0cmFjdGlvbnMsIGl0IGlzIGdlbmVyYWwsIGV0Yy4sIGJ1dCBpdCBsb29rcyBsaWtlIGEgbWFq
+b3IgcmV3b3JrCj4+PiBvZgo+Pj4gdGhlIHNjaGVkdWxlci4KPj4KPj4gQ29ycmVjdC4gRmluYWxs
+eSBzb21ldGhpbmcgdG8gZG8gOi1wCj4+Cj4gSW5kZWVkISA6LSkKPiAKPj4+IE5vdGUgdGhhdCwg
+d2hpbGUgdGhpcyBzZXJpZXMgd2hpY2ggdHJpZXMgdG8gaW1wbGVtZW50IGNvcmUtCj4+PiBzY2hl
+ZHVsaW5nCj4+PiBmb3IgQ3JlZGl0MSBpcyByYXRoZXIgbG9uZyBhbmQgbWVzc3ksIGRvaW5nIHRo
+ZSBzYW1lIChhbmQgd2l0aCBhCj4+PiBzaW1pbGFyIGFwcHJvYWNoKSBmb3IgQ3JlZGl0MiBpcyBh
+IGxvdCBlYXNpZXIgYW5kIG5pY2VyLiBJIGhhdmUgaXQKPj4+IGFsbW9zdCByZWFkeSwgYW5kIHdp
+bGwgc2VuZCBpdCBzb29uLgo+Pgo+PiBPa2F5LCBidXQgd291bGQgaXQga2VlcCB2VGhyZWFkcyBv
+ZiB0aGUgc2FtZSB2Q29yZSBsZXQgYWx3YXlzIHJ1bm5pbmcKPj4gdG9nZXRoZXIgb24gdGhlIHNh
+bWUgcGh5c2ljYWwgY29yZT8KPj4KPiBJdCBkb2Vzbid0IHJpZ2h0IG5vdywgYXMgd2UgZG9uJ3Qg
+aGF2ZSBhIHdheSB0byBleHBvc2Ugc3VjaCBpbmZvcm1hdGlvbgo+IHRvIHRoZSBndWVzdCwgeWV0
+LiBBbmQgc2luY2Ugd2l0aG91dCBzdWNoIGEgbWVjaGFuaXNtLCB0aGUgZ3Vlc3QgY2FuJ3QKPiB0
+YWtlIGFkdmFudGFnZSBvZiBzb21ldGhpbmcgbGlrZSB0aGlzIChuZWl0aGVyIGZyb20gYSBwZXJm
+b3JtYW5jZSBub3IKPiBmcm9tIGEgdnVsbi4gbWl0aWdhdGlvbiBwb2ludCBvZiB2aWV3KSwgSSBr
+ZXB0IHRoYXQgb3V0Lgo+IAo+IEJ1dCBJIGNlcnRhaW5seSBjYW4gc2VlIGFib3V0IG1ha2luZyBp
+dCBkbyBzbyAoSSB3YXMgYWxyZWFkeSBwbGFubmluZwo+IHRvKS4KPiAKPj4+IFJpZ2h0LiBCdXQg
+YWdhaW4sIGluIENyZWRpdDIsIEkndmUgYmVlbiBhYmxlIHRvIGltcGxlbWVudCBzb2NrZXQtCj4+
+PiB3aXNlCj4+PiBjb3NjaGVkdWxpbmcgd2l0aCB0aGlzIGFwcHJvYWNoIChJIG1lYW4sIGFuIGFw
+cHJvYWNoIHNpbWlsYXIgdG8gdGhlCj4+PiBvbmUKPj4+IGluIHRoaXMgc2VyaWVzLCBidXQgYWRh
+cHRlZCB0byBDcmVkaXQyKS4KPj4KPj4gQW5kIHRoZW4gdGhlcmUgc3RpbGwgaXMgc2NoZWRfcnQu
+Ywo+Pgo+IE9rLCBzbyBJIHRoaW5rIHRoaXMgaXMgdGhlIG1haW4gYmVuZWZpdCBvZiB0aGlzIGFw
+cHJvYWNoLiBXZSBkbyB0aGUKPiB0aGluZyBvbmNlLCBhbmQgYWxsIHNjaGVkdWxlcnMgZ2V0IGNv
+cmUtc2NoZWR1bGluZyAob3Igd2hhdGV2ZXIKPiBncmFudWxhcml0eSBvZiBncm91cCBzY2hlZHVs
+aW5nIHdlIGltcGxlbWVudC9hbGxvdykuCj4gCj4gQnV0IGhvdyBlYXN5IGl0IGlzIHRvIG9wdCBv
+dXQsIGlmIG9uZSBkb2Vzbid0IHdhbnQgaXQ/IEUuZy4sIGluIHRoZQo+IGNvbnRleHQgb2YgTDFU
+Riwgd2hhdCBpZiBJJ20gbm90IGFmZmVjdGVkLCBhbmQgaGVuY2UgYW0gbm90IGludGVyZXN0ZWQK
+PiBpbiBjb3JlLXNjaGVkdWxpbmc/IFdoYXQgaWYgSSB3YW50IGEgY3B1cG9vbCB3aXRoIGNvcmUt
+c2NoZWR1bGluZyBhbmQKPiBvbmUgd2l0aG91dD8KPiAKPiBJIG1heSBiZSB3cm9uZywgYnV0IG91
+dCBvZiB0aGUgdG9wIG9mIG15IGhlYWQsIGJ1dCBpdCBzZWVtcyB0byBtZSB0aGF0Cj4gZG9pbmcg
+dGhpbmdzIGluIHNjaGVkdWxlLmMgbWFrZXMgdGhpcyBhIGxvdCBoYXJkZXIsIGlmIHBvc3NpYmxl
+IGF0IGFsbC4KCldoeT8gVGhpcyB3b3VsZCBiZSBhIHBlci1jcHVwb29sIHNldHRpbmcsIHNvIHRo
+ZSBzY2hlZHVsaW5nIGdyYW51bGFyaXR5CndvdWxkIGxpdmUgaW4gc3RydWN0IHNjaGVkdWxlci4K
+CgpKdWVyZ2VuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
