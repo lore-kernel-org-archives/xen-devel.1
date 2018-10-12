@@ -1,20 +1,20 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] x86: restrict HVMOP_pagetable_dying to
- current
-Date: Fri, 12 Oct 2018 15:49:23 +0100
-Message-ID: <20181012144923.ndbb5yvyyaku6s7x@zion.uk.xensource.com>
-References: <5BB74B1A02000078001EECBE@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 11/17] x86: provide stubs for entry point
+Date: Fri, 12 Oct 2018 08:56:22 -0600
+Message-ID: <5BC0B61602000078001F1113@prv1-mh.provo.novell.com>
+References: <cover.9120eb87824b754ecdc7b1a5b95ea216404877a3.1538667753.git-series.wei.liu2@citrix.com>
+ <61764e0b2721746d3a7a5febd24de380a893aa90.1538667753.git-series.wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=zta5=my=citrix.com=prvs=8166c57ff=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1gAykp-00076s-Eh
- for xen-devel@lists.xenproject.org; Fri, 12 Oct 2018 14:49:27 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=tlq1=my=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gAyrb-0007rF-ST
+ for xen-devel@lists.xenproject.org; Fri, 12 Oct 2018 14:56:27 +0000
+In-Reply-To: <61764e0b2721746d3a7a5febd24de380a893aa90.1538667753.git-series.wei.liu2@citrix.com>
 Content-Disposition: inline
-In-Reply-To: <5BB74B1A02000078001EECBE@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,18 +23,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBPY3QgMDUsIDIwMTggYXQgMDU6Mjk6MzBBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gVGhpcyBpcyBub3QgdXNlZCAoYW5kIHByb2JhYmx5IHdhcyBuZXZlciBtZWFudCB0byBi
-ZSkgYnkgdGhlIHRvb2wgc3RhY2suCj4gTGltaXRpbmcgaXQgdG8gdGhlIGN1cnJlbnQgZG9tYWlu
-IGluIHBhcnRpY3VsYXIgYWxsb3dzIHRvIGVsaW1pbmF0ZSBhCj4gYm9ndXMgdXNlIG9mIHZDUFUg
-MCBpbiBwYWdldGFibGVfZHlpbmcoKS4KPiAKPiBSZW1vdmUgdGhlIG5vdyB1bm5lY2Vzc2FyeSBk
-b21haW4vdkNQVSBwYXJhbWV0ZXJzIGZyb20gdGhlIHdyYXBwZXIvaG9vawo+IGZ1bmN0aW9ucyBh
-dCB0aGUgc2FtZSB0aW1lLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGlj
-aEBzdXNlLmNvbT4KClJldmlld2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDA0LjEwLjE4IGF0IDE3OjQzLCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+SW5zdGVhZCBvZiB0cnlpbmcgdG8gc3BsaXQgdXAgZW50cnkuUyBhbmQgY29tcGF0L2VudHJ5LlMs
+IHNpbXBseQo+IHByb3ZpZGUgc29tZSBzdHVicyBmb3IgdGhlbS4KCkknbSBub3QgY29udmluY2Vk
+OyBJJ2QgbXVjaCByYXRoZXIgc2VlIHRoZSBjYWxsIHNpdGVzIHJlY29nbml6YWJseQpjb21waWxl
+ZCBvdXQgd2l0aCAhUFYuIEknbSBjdXJpb3VzIHdoYXQgQW5kcmV3IHRoaW5rcyBoZXJlLgoKSmFu
+CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
+bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
