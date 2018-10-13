@@ -1,16 +1,15 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [ovmf baseline-only test] 75410: trouble: blocked/broken
-Date: Sat, 13 Oct 2018 20:39:42 +0100
-Message-ID: <osstest-75410-mainreport@xen.org>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable bisection] complete test-xtf-amd64-amd64-4
+Date: Sat, 13 Oct 2018 20:58:29 +0000
+Message-ID: <E1gBQzV-0006eq-Vg@osstest.test-lab.xenproject.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1430366228271343358=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=klwc=mz=xenproject.org=prvs=817c87334=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1gBPlK-0002TW-5w
- for xen-devel@lists.xenproject.org; Sat, 13 Oct 2018 19:39:46 +0000
+ <srs0=75ja=mz=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gBQza-0008MQ-7r
+ for xen-devel@lists.xenproject.org; Sat, 13 Oct 2018 20:58:34 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,86 +21,200 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
-NTQxMCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
-dC9sb2dzLzc1NDEwLwoKRmFpbHVyZXMgYW5kIHByb2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0
-cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3Rz
-IHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAg
-IDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2ICAgICAgICAg
-ICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1h
-bWQ2NC1wdm9wcyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJv
-a2VuCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAg
-ICAgICAgICAgYnJva2VuCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3Rh
-dHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAg
-ICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCgpUZXN0cyB3aGljaCBkaWQg
-bm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
-ZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9h
-CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
-ICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAg
-MSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgYmxvY2tlZCBuL2EKIGJ1aWxkLWkzODYtbGli
-dmlydCAgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBu
-L2EKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAg
-IGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAg
-NCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVzdGVkCiBidWlsZC1p
-Mzg2ICAgICAgICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICBicm9rZW4gYmFz
-ZWxpbmUgdW50ZXN0ZWQKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0
-YWxsKDQpICAgICAgIGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtaTM4Ni14c20gICAg
-ICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVz
-dGVkCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAg
-ICBicm9rZW4gYmFzZWxpbmUgdW50ZXN0ZWQKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6
-CiBvdm1mICAgICAgICAgICAgICAgICAzMDE0MDJmYTQ3OTdhYzNhMTQxZTU3NTMyOWNhMmVhOTE3
-NTY0MTRjCmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICBiYmNlMDAxNTE1
-YmJmY2FkMjRjMjE2YjFjOWMyNTA1N2U4YzQ2MWU5CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAgNzU0
-MDUgIDIwMTgtMTAtMTIgMjI6NTI6MjUgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAg
-IDc1NDEwICAyMDE4LTEwLTEzIDExOjIwOjM1IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgU2FtaSBNdWphd2Fy
-IDxzYW1pLm11amF3YXJAYXJtLmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWkzODYt
-eHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4g
-IAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGJyb2tlbiAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogYnVpbGQtaTM4Ni1s
-aWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQg
-CiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgYnJva2VuICAKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1v
-dm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAK
-CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnhzLmNpdHJpdGUubmV0CmxvZ3M6IC9o
-b21lL29zc3Rlc3QvbG9ncwppbWFnZXM6IC9ob21lL29zc3Rlc3QvaW1hZ2VzCgpMb2dzLCBjb25m
-aWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL29zc3Rlc3QueGVuc291
-cmNlLmNvbS9vc3N0ZXN0L2xvZ3MKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAog
-ICAgaHR0cDovL3hlbmJpdHMueGVuc291cmNlLmNvbS9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1
-bW1hcnkKCmJyb2tlbi1qb2IgYnVpbGQtYW1kNjQteHNtIGJyb2tlbgpicm9rZW4tam9iIGJ1aWxk
-LWkzODYgYnJva2VuCmJyb2tlbi1qb2IgYnVpbGQtYW1kNjQtcHZvcHMgYnJva2VuCmJyb2tlbi1q
-b2IgYnVpbGQtaTM4Ni14c20gYnJva2VuCmJyb2tlbi1qb2IgYnVpbGQtYW1kNjQgYnJva2VuCmJy
-b2tlbi1qb2IgYnVpbGQtaTM4Ni1wdm9wcyBicm9rZW4KYnJva2VuLXN0ZXAgYnVpbGQtYW1kNjQg
-aG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWkzODYtcHZvcHMgaG9zdC1pbnN0YWxs
-KDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWkzODYgaG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1zdGVwIGJ1
-aWxkLWFtZDY0LXhzbSBob3N0LWluc3RhbGwoNCkKYnJva2VuLXN0ZXAgYnVpbGQtaTM4Ni14c20g
-aG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWFtZDY0LXB2b3BzIGhvc3QtaW5zdGFs
-bCg0KQoKUHVzaCBub3QgYXBwbGljYWJsZS4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgMzAxNDAyZmE0Nzk3YWMzYTE0
-MWU1NzUzMjljYTJlYTkxNzU2NDE0YwpBdXRob3I6IFNhbWkgTXVqYXdhciA8c2FtaS5tdWphd2Fy
-QGFybS5jb20+CkRhdGU6ICAgVHVlIE9jdCA5IDE2OjM1OjIyIDIwMTggKzAxMDAKCiAgICBBcm1Q
-a2c6IEFkZCBzdXBwb3J0IGZvciBHSUN2NAogICAgCiAgICBVcGRhdGVkIFJlZGlzdHJpYnV0b3Ig
-YmFzZSBjYWxjdWxhdGlvbiB0byBhbGxvdyBmb3IgdGhlIGZhY3QgdGhhdAogICAgR0lDdjQgaGFz
-IDIgYWRkaXRpb25hbCA2NEtCIGZyYW1lcyAoZm9yIFZMUEkgYW5kIGEgcmVzZXJ2ZWQgZnJhbWUp
-LgogICAgVGhlIGNvZGUgbm93IHRlc3RzIHRoZSBWTFBJUyBiaXQgaW4gdGhlIEdJQyBSZWRpc3Ry
-aWJ1dG9yIFR5cGUKICAgIFJlZ2lzdGVyIChHSUNSX1RZUEVSKSBhbmQgY2FsY3VsYXRlcyB0aGUg
-UmVkaXN0cmlidXRvciBncmFudWxhcml0eQogICAgYWNjb3JkaW5nbHkuCiAgICAKICAgIFRoZSBj
-b2RlIGNoYW5nZXMgYXJlOgogICAgICBHSUNSX1RZUEVSIHJlZ2lzdGVyIGZpZWxkcywgZXRjLCBh
-ZGRlZCB0byB0aGUgaGVhZGVyLgogICAgICBMb29wIHVwZGF0ZWQgdG8gcGF5IGF0dGVudGlvbiB0
-byBHSUNSX1RZUEVSLkxhc3QuCiAgICAgIERlcml2ZSBmcmFtZSAic3RyaWRlIiBzaXplIGZyb20g
-R0lDUl9UWVBFUi5WTFBJUy4KICAgIAogICAgTm90ZTogVGhlIGFzc3VtcHRpb24gaXMgdGhhdCB0
-aGUgcmVkaXN0cmlidXRvcnMgYXJlIGFkamFjZW50IGZvcgogICAgYWxsIENQVXMuIEhvd2V2ZXIg
-dGhpcyBtYXkgbm90IGJlIHRoZSBjYXNlIGZvciBOVU1BIHN5c3RlbXMuCiAgICAKICAgIENvbnRy
-aWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVudCAxLjEKICAgIFNp
-Z25lZC1vZmYtYnk6IFNhbWkgTXVqYXdhciA8c2FtaS5tdWphd2FyQGFybS5jb20+CiAgICBSZXZp
-ZXdlZC1ieTogQXJkIEJpZXNoZXV2ZWwgPGFyZC5iaWVzaGV1dmVsQGxpbmFyby5vcmc+CgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============1430366228271343358==
+Content-Type: text/plain
+
+branch xen-unstable
+xenbranch xen-unstable
+job test-xtf-amd64-amd64-4
+testid xtf-fep
+
+Tree: linux git://xenbits.xen.org/linux-pvops.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Tree: xtf git://xenbits.xen.org/xtf.git
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+  Bug not present: 5e04bf333b954fcfd86eda3d258dc69bcf0586a3
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/128703/
+
+
+  commit e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+  Author: Roger Pau Monné <roger.pau@citrix.com>
+  Date:   Tue Oct 9 16:27:13 2018 +0200
+  
+      x86/vtd: fix iommu_share_p2m_table
+      
+      Commit 2916951c1 "mm / iommu: include need_iommu() test in
+      iommu_use_hap_pt()" changed the check in iommu_share_p2m_table to use
+      need_iommu(d) (as part of iommu_use_hap_pt) instead of iommu_enabled,
+      which broke the check because at the point in domain construction
+      where iommu_share_p2m_table is called need_iommu(d) will always return
+      false.
+      
+      Fix this by reverting to the previous logic.
+      
+      While there turn the hap_enabled check into an ASSERT, since the only
+      caller of iommu_share_p2m_table already performs the hap_enabled check
+      before calling the function.
+      
+      Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+      Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+      Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/xen-unstable/test-xtf-amd64-amd64-4.xtf-fep.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
+
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/xen-unstable/test-xtf-amd64-amd64-4.xtf-fep --summary-out=tmp/128703.bisection-summary --basis-template=128523 --blessings=real,real-bisect xen-unstable test-xtf-amd64-amd64-4 xtf-fep
+Searching for failure / basis pass:
+ 128614 fail [host=elbling0] / 128523 [host=godello1] 128498 [host=huxelrebe0] 128478 [host=fiano0] 128464 [host=elbling1] 128445 [host=albana1] 128414 [host=albana0] 128354 [host=debina0] 128333 [host=pinot1] 128314 [host=chardonnay0] 128281 [host=joubertin0] 128267 [host=huxelrebe1] 128240 [host=rimava1] 128175 [host=italia0] 128118 [host=godello0] 128084 ok.
+Failure / basis pass flights: 128614 / 128084
+(tree with no url: minios)
+(tree with no url: ovmf)
+(tree with no url: seabios)
+Tree: linux git://xenbits.xen.org/linux-pvops.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Tree: xtf git://xenbits.xen.org/xtf.git
+Latest e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 162fc8295f31240dc3670190a91e9bbc03b0d7be 089f9be25f4bb445f68241ba05ab4e17786e21a7
+Basis pass 1244bbb3e92135d247e2dddfa6fe5e3e171a9635 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 940185b2f6f343251c2b83bd96e599398cea51ec 089f9be25f4bb445f68241ba05ab4e17786e21a7
+Generating revisions with ./adhoc-revtuple-generator  git://xenbits.xen.org/linux-pvops.git#1244bbb3e92135d247e2dddfa6fe5e3e171a9635-e6abbe80c8838e9c0bdb51835e6218008fa49386 git://xenbits.xen.org/osstest/linux-firmware.git#c530a75c1e6a472b0eb9558310b518f0dfcd8860-c530a75c1e6a472b0eb9558310b518f0dfcd8860 git://xenbits.xen.org/qemu-xen-traditional.git#9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149-9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 git://xenbits.xen.org/qemu-xen.git#de5b678ca4dcdfa83e322491d478d66df56c1986-de5b678ca4dcdfa83e322491d478d66df56c1986 git://xenbits.xen.org/xen.git#940185b2f6f343251c2b83bd96e599398cea51ec-162fc8295f31240dc3670190a91e9bbc03b0d7be git://xenbits.xen.org/xtf.git#089f9be25f4bb445f68241ba05ab4e17786e21a7-089f9be25f4bb445f68241ba05ab4e17786e21a7
+Loaded 2001 nodes in revision graph
+Searching for test results:
+ 127956 [host=elbling1]
+ 127966 [host=fiano0]
+ 127997 [host=godello1]
+ 128084 pass 1244bbb3e92135d247e2dddfa6fe5e3e171a9635 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 940185b2f6f343251c2b83bd96e599398cea51ec 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128033 [host=baroque0]
+ 128118 [host=godello0]
+ 128175 [host=italia0]
+ 128240 [host=rimava1]
+ 128267 [host=huxelrebe1]
+ 128281 [host=joubertin0]
+ 128314 [host=chardonnay0]
+ 128333 [host=pinot1]
+ 128354 [host=debina0]
+ 128414 [host=albana0]
+ 128445 [host=albana1]
+ 128523 [host=godello1]
+ 128478 [host=fiano0]
+ 128464 [host=elbling1]
+ 128498 [host=huxelrebe0]
+ 128614 fail e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 162fc8295f31240dc3670190a91e9bbc03b0d7be 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128676 pass 1244bbb3e92135d247e2dddfa6fe5e3e171a9635 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 940185b2f6f343251c2b83bd96e599398cea51ec 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128679 fail e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 162fc8295f31240dc3670190a91e9bbc03b0d7be 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128682 pass 0e5cdbac030358fea3b757d033c8fda29138b866 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 edb4724e36256c495a6aa3cf1a12722efe271f9d 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128684 pass 85222eb56f2a5a92fdf1cf95cfd8ea57cc3864ff c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 359970fd8b781fac2ddcbc84dd5b890075fa08ef 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128686 pass d3ddd8e16cab439c0abbf08a33a6a0465c8e67da c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 359970fd8b781fac2ddcbc84dd5b890075fa08ef 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128687 pass e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 cc6e309c6e4368a1094b5e7593cf8cf5803ed709 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128690 pass e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 0d34bca5e6040f9874e6a69c45c7908239f024b9 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128692 pass e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 a696f4e63ca51693736a6cf7b911522287238653 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128693 pass e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 5e04bf333b954fcfd86eda3d258dc69bcf0586a3 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128695 fail e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 cd395b1d69a773556d2af206b4ecbf56b33057ea 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128697 fail e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 e9be34be5f9a1a6ecbf05ba9502cd705ae441476 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128699 pass e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 5e04bf333b954fcfd86eda3d258dc69bcf0586a3 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128700 fail e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 e9be34be5f9a1a6ecbf05ba9502cd705ae441476 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128701 pass e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 5e04bf333b954fcfd86eda3d258dc69bcf0586a3 089f9be25f4bb445f68241ba05ab4e17786e21a7
+ 128703 fail e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 e9be34be5f9a1a6ecbf05ba9502cd705ae441476 089f9be25f4bb445f68241ba05ab4e17786e21a7
+Searching for interesting versions
+ Result found: flight 128084 (pass), for basis pass
+ Result found: flight 128614 (fail), for basis failure
+ Repro found: flight 128676 (pass), for basis pass
+ Repro found: flight 128679 (fail), for basis failure
+ 0 revisions at e6abbe80c8838e9c0bdb51835e6218008fa49386 c530a75c1e6a472b0eb9558310b518f0dfcd8860 9c0eed618f37dd5b4a57c8b3fbc48ef8913e3149 de5b678ca4dcdfa83e322491d478d66df56c1986 5e04bf333b954fcfd86eda3d258dc69bcf0586a3 089f9be25f4bb445f68241ba05ab4e17786e21a7
+No revisions left to test, checking graph state.
+ Result found: flight 128693 (pass), for last pass
+ Result found: flight 128697 (fail), for first failure
+ Repro found: flight 128699 (pass), for last pass
+ Repro found: flight 128700 (fail), for first failure
+ Repro found: flight 128701 (pass), for last pass
+ Repro found: flight 128703 (fail), for first failure
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+  Bug not present: 5e04bf333b954fcfd86eda3d258dc69bcf0586a3
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/128703/
+
+
+  commit e9be34be5f9a1a6ecbf05ba9502cd705ae441476
+  Author: Roger Pau Monné <roger.pau@citrix.com>
+  Date:   Tue Oct 9 16:27:13 2018 +0200
+  
+      x86/vtd: fix iommu_share_p2m_table
+      
+      Commit 2916951c1 "mm / iommu: include need_iommu() test in
+      iommu_use_hap_pt()" changed the check in iommu_share_p2m_table to use
+      need_iommu(d) (as part of iommu_use_hap_pt) instead of iommu_enabled,
+      which broke the check because at the point in domain construction
+      where iommu_share_p2m_table is called need_iommu(d) will always return
+      false.
+      
+      Fix this by reverting to the previous logic.
+      
+      While there turn the hap_enabled check into an ASSERT, since the only
+      caller of iommu_share_p2m_table already performs the hap_enabled check
+      before calling the function.
+      
+      Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+      Reviewed-by: Paul Durrant <paul.durrant@citrix.com>
+      Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+pnmtopng: 70 colors found
+Revision graph left in /home/logs/results/bisect/xen-unstable/test-xtf-amd64-amd64-4.xtf-fep.{dot,ps,png,html,svg}.
+----------------------------------------
+128703: tolerable truncated
+
+flight 128703 xen-unstable real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/128703/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ test-xtf-amd64-amd64-4       11 xtf-fep                 fail baseline untested
+
+
+jobs:
+ test-xtf-amd64-amd64-4                                       truncated
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+
+--===============1430366228271343358==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1430366228271343358==--
