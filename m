@@ -1,16 +1,16 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 128732: regressions - FAIL
-Date: Sun, 14 Oct 2018 10:49:45 +0000
-Message-ID: <osstest-128732-mainreport@xen.org>
+Subject: [ovmf test] 128738: regressions - FAIL
+Date: Sun, 14 Oct 2018 12:10:46 +0000
+Message-ID: <osstest-128738-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=rpf4=m2=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gBdy5-0003uY-3M
- for xen-devel@lists.xenproject.org; Sun, 14 Oct 2018 10:49:53 +0000
+ id 1gBfEQ-0002Cu-I6
+ for xen-devel@lists.xenproject.org; Sun, 14 Oct 2018 12:10:50 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,8 +22,8 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyODczMiBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjg3MzIvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
+ZmxpZ2h0IDEyODczOCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjg3MzgvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
 aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMgd2hp
 Y2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAgIDYgeGVu
 LWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyODY4MAogYnVpbGQtYW1kNjQt
@@ -42,8 +42,8 @@ ICAgICAgICAgICAgICAgNjc4Zjg1MTMxMjM4NjIyZTU3NjcwNTExN2UyOTlkODFjZmY3NTVjOQpi
 YXNlbGluZSB2ZXJzaW9uOgogb3ZtZiAgICAgICAgICAgICAgICAgMzAxNDAyZmE0Nzk3YWMzYTE0
 MWU1NzUzMjljYTJlYTkxNzU2NDE0YwoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI4NjgwICAyMDE4
 LTEwLTEyIDIyOjQxOjM0IFogICAgMSBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyODY5NCAg
-MjAxOC0xMC0xMyAxMToxNjoxMyBaICAgIDAgZGF5cyAgICAzIGF0dGVtcHRzClRlc3Rpbmcgc2Ft
-ZSBzaW5jZSAgIDEyODcwOCAgMjAxOC0xMC0xMyAyMzoxMTowNiBaICAgIDAgZGF5cyAgICAyIGF0
+MjAxOC0xMC0xMyAxMToxNjoxMyBaICAgIDEgZGF5cyAgICA0IGF0dGVtcHRzClRlc3Rpbmcgc2Ft
+ZSBzaW5jZSAgIDEyODcwOCAgMjAxOC0xMC0xMyAyMzoxMTowNiBaICAgIDAgZGF5cyAgICAzIGF0
 dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
 LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFy
 ZCBCaWVzaGV1dmVsIDxhcmQuYmllc2hldXZlbEBsaW5hcm8ub3JnPgogIEhlc3MgQ2hlbiA8aGVz
