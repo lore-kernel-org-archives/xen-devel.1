@@ -1,17 +1,20 @@
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [PATCH] libxl: CODING_STYLE: Clarify line length limit
- to 75
-Date: Mon, 15 Oct 2018 14:53:27 +0100
-Message-ID: <20181015135327.22106-1-ian.jackson@eu.citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] libxl: CODING_STYLE: Clarify line length
+ limit to 75
+Date: Mon, 15 Oct 2018 14:54:19 +0100
+Message-ID: <20181015135419.fbz4knl2w6gvvl4e@zion.uk.xensource.com>
+References: <20181015135327.22106-1-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=w2gt=m3=citrix.com=prvs=81941a82a=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gC3JW-0000Pz-5i
- for xen-devel@lists.xenproject.org; Mon, 15 Oct 2018 13:53:42 +0000
+ <srs0=+aj6=m3=citrix.com=prvs=819158b4b=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1gC3KB-0000XE-2c
+ for xen-devel@lists.xenproject.org; Mon, 15 Oct 2018 13:54:23 +0000
+Content-Disposition: inline
+In-Reply-To: <20181015135327.22106-1-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,29 +23,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
+To: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-QW5kIGdpdmUgYSByZWFzb24uCgpUaGUgcHJldmlvdXMgYGxpbWl0JyBvZiA3NS04MCB3YXMgYW1i
-aWd1b3VzLgoKU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJp
-eC5jb20+CkNDOiBBbnRob255IFBFUkFSRCA8YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KLS0t
-CiB0b29scy9saWJ4bC9DT0RJTkdfU1RZTEUgfCA0ICsrKy0KIDEgZmlsZSBjaGFuZ2VkLCAzIGlu
-c2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS90b29scy9saWJ4bC9DT0RJ
-TkdfU1RZTEUgYi90b29scy9saWJ4bC9DT0RJTkdfU1RZTEUKaW5kZXggMzIxNzBlZmI5ZS4uM2Q1
-NzJmNjkyNSAxMDA2NDQKLS0tIGEvdG9vbHMvbGlieGwvQ09ESU5HX1NUWUxFCisrKyBiL3Rvb2xz
-L2xpYnhsL0NPRElOR19TVFlMRQpAQCAtMjIwLDEyICsyMjAsMTQgQEAgRG8gbm90IGxlYXZlIHdo
-aXRlc3BhY2UgZGFuZ2xpbmcgb2ZmIHRoZSBlbmRzIG9mIGxpbmVzLgogCiAyLiBMaW5lIHdpZHRo
-CiAKLUxpbmVzIGFyZSBsaW1pdGVkIHRvIDc1LTgwIGNoYXJhY3RlcnMuCitMaW5lcyBhcmUgbGlt
-aXRlZCB0byA3NSBjaGFyYWN0ZXJzLgogCiBSYXRpb25hbGU6CiAgLSBTb21lIHBlb3BsZSBsaWtl
-IHRvIHRpbGUgdGhlaXIgMjQiIHNjcmVlbnMgd2l0aCBhIDZ4NCBtYXRyaXggb2YgODB4MjQKICAg
-IHh0ZXJtcyBhbmQgdXNlIHZpIGluIGFsbCBvZiB0aGVtLiAgVGhlIGJlc3Qgd2F5IHRvIHB1bmlz
-aCB0aGVtIGlzIHRvCiAgICBsZXQgdGhlbSBrZWVwIGRvaW5nIGl0LgorIC0gSW4gYW4gODAgY29s
-dW1uIHRlcm1pbmFsLCBzb21lIHJvb20gbmVlZHMgdG8gYmUgbGVmdCBmb3IgPiBxdW90aW5nCisg
-ICBjaGFyYWN0ZXJzLCArLy0gZGlmZiBjaGFyYWN0ZXJzLCBhbmQgc28gb24sIGluIGVtYWlscy4K
-ICAtIENvZGUgYW5kIGVzcGVjaWFsbHkgcGF0Y2hlcyBpcyBtdWNoIG1vcmUgcmVhZGFibGUgaWYg
-bGltaXRlZCB0byBhIHNhbmUKICAgIGxpbmUgbGVuZ3RoLiAgRWlnaHR5IGlzIHRyYWRpdGlvbmFs
-LgogIC0gSXQgaXMgdGhlIGxpYnhlbmxpZ2h0IGNvZGluZyBzdHlsZS4KLS0gCjIuMTEuMAoKCl9f
+T24gTW9uLCBPY3QgMTUsIDIwMTggYXQgMDI6NTM6MjdQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
+dGU6Cj4gQW5kIGdpdmUgYSByZWFzb24uCj4gCj4gVGhlIHByZXZpb3VzIGBsaW1pdCcgb2YgNzUt
+ODAgd2FzIGFtYmlndW91cy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8aWFuLmph
+Y2tzb25AZXUuY2l0cml4LmNvbT4KPiBDQzogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJk
+QGNpdHJpeC5jb20+CgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9f
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
 YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
 eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
