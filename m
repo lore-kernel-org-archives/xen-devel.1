@@ -1,21 +1,16 @@
-From: Ian Jackson <ijackson@chiark.greenend.org.uk>
-Subject: Re: [Pkg-xen-devel] Ill-advised use of xs_open flag
- 1UL<<2 by Debian
-Date: Mon, 15 Oct 2018 12:25:40 +0100
-Message-ID: <23492.31028.156530.986411@chiark.greenend.org.uk>
-References: <23484.50040.685209.522202@chiark.greenend.org.uk>
- <20181009153729.zmz4zu2l62gy5oln@shell.thinkmo.de>
- <23484.55362.288130.517463@chiark.greenend.org.uk>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v2 1/5] x86/boot: Initialise the debug
+ registers correctly
+Date: Mon, 15 Oct 2018 13:28:29 +0200
+Message-ID: <20181015112829.d6bjtjyvihkbjada@mac.bytemobile.com>
+References: <1539599780-14549-1-git-send-email-andrew.cooper3@citrix.com>
+ <1539599780-14549-2-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rc04=m3=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1gC10N-00031l-Bv
- for xen-devel@lists.xenproject.org; Mon, 15 Oct 2018 11:25:47 +0000
-In-Reply-To: <23484.55362.288130.517463@chiark.greenend.org.uk>
+Content-Disposition: inline
+In-Reply-To: <1539599780-14549-2-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +19,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Bastian Blank <waldi@debian.org>, Debian Xen Team <pkg-xen-devel@lists.alioth.debian.org>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SWFuIEphY2tzb24gd3JpdGVzICgiUmU6IFtQa2cteGVuLWRldmVsXSBJbGwtYWR2aXNlZCB1c2Ug
-b2YgeHNfb3BlbiBmbGFnIDFVTDw8MiBieSBEZWJpYW4iKToKPiBCdXQgdGhhdCB3YXMgYWxsIGEg
-bG9uZyB0aW1lIGFnby4gIFRoZXJlIGlzIG5vIGxvbmdlciBhbnkgbmVlZCB0byBtYWtlCj4gdXBn
-cmFkZXMgZnJvbSBzcXVlZXplIG9yIHdoYXRldmVyIHdvcmsgY29ycmVjdGx5LgoKRm9yIHRoZSBy
-ZWFzb25zIEkgaGF2ZSBleHBsYWluZWQsIEkgaGF2ZSByZXZlcnRlZCB0aGlzIHBhdGNoIGluIG15
-CmxhdGVzdCB1cGxvYWQgKHdoaWNoIGFsc28gZml4ZXMgdGhlIHZhcmlvdXMgRlRCRlMpLgoKVGhh
-bmtzIGZvciB5b3VyIGlucHV0LgoKSWFuLgoKLS0gCklhbiBKYWNrc29uIDxpamFja3NvbkBjaGlh
-cmsuZ3JlZW5lbmQub3JnLnVrPiAgIFRoZXNlIG9waW5pb25zIGFyZSBteSBvd24uCgpJZiBJIGVt
-YWlsZWQgeW91IGZyb20gYW4gYWRkcmVzcyBAZnl2emwubmV0IG9yIEBldmFkZS5vcmcudWssIHRo
-YXQgaXMKYSBwcml2YXRlIGFkZHJlc3Mgd2hpY2ggYnlwYXNzZXMgbXkgZmllcmNlIHNwYW1maWx0
-ZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gTW9uLCBPY3QgMTUsIDIwMTggYXQgMTE6MzY6MTZBTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBJbiBwYXJ0aWN1bGFyLCBpbml0aWFsaXNpbmcgJWRyNiB3aXRoIHRoZSB2YWx1ZSAw
+IGlzIGJ1Z2d5LCBiZWNhdXNlIG9uCj4gaGFyZHdhcmUgc3VwcG9ydGluZyBUcmFuc25hdGlvbmFs
+IE1lbW9yeSwgaXQgd2lsbCBjYXVzZSB0aGUgc3RpY2t5IFJUTSBiaXQgdG8KPiBiZSBhc3NlcnRl
+ZCwgZXZlbiB0aG91Z2ggYSBkZWJ1ZyBleGNlcHRpb24gZnJvbSBhIHRyYW5zYWN0aW9uIGhhc24n
+dCBhY3R1YWxseQo+IGJlZW4gb2JzZXJ2ZWQuCj4gCj4gTW92ZSBYODZfRFI2X0RFRkFVTFQgaW50
+byB4ODYtZGVmbnMuaCBhbG9uZyB3aXRoIHRoZSBvdGhlciBhcmNoaXRlY3R1cmFsCj4gcmVnaXN0
+ZXIgY29uc3RhbnRzLCBhbmQgaW50cm9kdWNlIGEgbmV3IFg4Nl9EUjdfREVGQVVMVC4gIFVzZSB0
+aGUgZXhpc3RpbmcKPiB3cml0ZV9kZWJ1Z3JlZygpIGhlbHBlciwgcmF0aGVyIHRoYW4gb3BlbmNv
+ZGVkIGlubGluZSBhc3NlbWJseS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxh
+bmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgo+IFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJl
+dWxpY2hAc3VzZS5jb20+CgpSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1
+QGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
