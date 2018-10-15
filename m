@@ -1,22 +1,21 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 09/17] x86/amd: put setting
- pv_post_outb_hook under CONFIG_PV
-Date: Mon, 15 Oct 2018 13:19:24 +0200
-Message-ID: <20181015111924.lkjcwk7oodihz5z4@mac.bytemobile.com>
-References: <cover.9120eb87824b754ecdc7b1a5b95ea216404877a3.1538667753.git-series.wei.liu2@citrix.com>
- <f1fafccc6ba352431e3ba72e834fd37e37b9eb9e.1538667753.git-series.wei.liu2@citrix.com>
- <5BC0AC4C02000078001F1097@prv1-mh.provo.novell.com>
+From: Ian Jackson <ijackson@chiark.greenend.org.uk>
+Subject: Re: [Pkg-xen-devel] Ill-advised use of xs_open flag
+ 1UL<<2 by Debian
+Date: Mon, 15 Oct 2018 12:25:40 +0100
+Message-ID: <23492.31028.156530.986411@chiark.greenend.org.uk>
+References: <23484.50040.685209.522202@chiark.greenend.org.uk>
+ <20181009153729.zmz4zu2l62gy5oln@shell.thinkmo.de>
+ <23484.55362.288130.517463@chiark.greenend.org.uk>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=06k+=m3=citrix.com=prvs=8197794ea=roger.pau@srs-us1.protection.inumbo.net>)
- id 1gC0uL-0002GG-Ef
- for xen-devel@lists.xenproject.org; Mon, 15 Oct 2018 11:19:33 +0000
-Content-Disposition: inline
-In-Reply-To: <5BC0AC4C02000078001F1097@prv1-mh.provo.novell.com>
+ <srs0=rc04=m3=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
+ id 1gC10N-00031l-Bv
+ for xen-devel@lists.xenproject.org; Mon, 15 Oct 2018 11:25:47 +0000
+In-Reply-To: <23484.55362.288130.517463@chiark.greenend.org.uk>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,19 +24,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Bastian Blank <waldi@debian.org>, Debian Xen Team <pkg-xen-devel@lists.alioth.debian.org>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBPY3QgMTIsIDIwMTggYXQgMDg6MTQ6MzZBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gPj4+IE9uIDA0LjEwLjE4IGF0IDE3OjQzLCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gPiBJdCBpcyB1c2VkIGJ5IFBWIGNvZGUgb25seS4KPiAKPiBBbmQgd3JvbmdseSBzbyAt
-IHRoZSBzYW1lIGlzIG5lZWRlZCBmb3IgYSBQVkggRG9tMCBhZmFpY3QuCgpZZXMsIGxvb2tpbmcg
-YXQgdGhlIG1vZGVscyBhZmZlY3RlZCBieSB0aGlzIGlzc3VlIGFjY29yZGluZyB0bwppbml0X2Ft
-ZCBpdCBzZWVtcyB0byBjb3ZlciB0aGUgZnVsbCBBTUQgbGluZSAoZnJvbSBmYW1pbHkgMHhmIHRv
-CjB4MTcpLiBJIGRvbid0IHNlZW0gdG8gZmluZCBhIHJlZmVyZW5jZSBpbiB0aGUgY29kZSB0byB0
-aGUgRXJyYXRhLCBkbwp5b3Uga25vdyBpZiB0aGVyZSdzIHNvbWUgZm9ybWFsIGRlc2NyaXB0aW9u
-IG9mIGl0PwoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+SWFuIEphY2tzb24gd3JpdGVzICgiUmU6IFtQa2cteGVuLWRldmVsXSBJbGwtYWR2aXNlZCB1c2Ug
+b2YgeHNfb3BlbiBmbGFnIDFVTDw8MiBieSBEZWJpYW4iKToKPiBCdXQgdGhhdCB3YXMgYWxsIGEg
+bG9uZyB0aW1lIGFnby4gIFRoZXJlIGlzIG5vIGxvbmdlciBhbnkgbmVlZCB0byBtYWtlCj4gdXBn
+cmFkZXMgZnJvbSBzcXVlZXplIG9yIHdoYXRldmVyIHdvcmsgY29ycmVjdGx5LgoKRm9yIHRoZSBy
+ZWFzb25zIEkgaGF2ZSBleHBsYWluZWQsIEkgaGF2ZSByZXZlcnRlZCB0aGlzIHBhdGNoIGluIG15
+CmxhdGVzdCB1cGxvYWQgKHdoaWNoIGFsc28gZml4ZXMgdGhlIHZhcmlvdXMgRlRCRlMpLgoKVGhh
+bmtzIGZvciB5b3VyIGlucHV0LgoKSWFuLgoKLS0gCklhbiBKYWNrc29uIDxpamFja3NvbkBjaGlh
+cmsuZ3JlZW5lbmQub3JnLnVrPiAgIFRoZXNlIG9waW5pb25zIGFyZSBteSBvd24uCgpJZiBJIGVt
+YWlsZWQgeW91IGZyb20gYW4gYWRkcmVzcyBAZnl2emwubmV0IG9yIEBldmFkZS5vcmcudWssIHRo
+YXQgaXMKYSBwcml2YXRlIGFkZHJlc3Mgd2hpY2ggYnlwYXNzZXMgbXkgZmllcmNlIHNwYW1maWx0
+ZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
