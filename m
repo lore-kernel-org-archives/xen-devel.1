@@ -1,20 +1,20 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [RFC PATCH v2 03/17] libxl: Handle Linux stubdomain
- specific QEMU options.
-Date: Tue, 16 Oct 2018 18:16:41 +0100
-Message-ID: <23494.7417.911789.655502@mariner.uk.xensource.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [RFC PATCH v2 00/17] Add support for qemu-xen
+ runnning in a Linux-based stubdomain.
+Date: Tue, 16 Oct 2018 19:32:40 +0200
+Message-ID: <20181016173240.GA1563@mail-itl>
 References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
- <084e43a6ca74c8cb6ffb7301497f425b413cfc42.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <23494.5998.10340.694382@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5925988006232233912=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=b3lb=m4=citrix.com=prvs=820ed1191=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gCSxb-0000Bc-83
- for xen-devel@lists.xenproject.org; Tue, 16 Oct 2018 17:16:47 +0000
-In-Reply-To: <084e43a6ca74c8cb6ffb7301497f425b413cfc42.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <srs0=x11d=m4=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gCTD4-0001fR-Nb
+ for xen-devel@lists.xenproject.org; Tue, 16 Oct 2018 17:32:46 +0000
+In-Reply-To: <23494.5998.10340.694382@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,87 +23,248 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Eric Shelton <eshelton@pobox.com>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Eric Shelton <eshelton@pobox.com>
 List-Id: xen-devel@lists.xenproject.org
 
-TWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyaXRlcyAoIltSRkMgUEFUQ0ggdjIgMDMvMTdd
-IGxpYnhsOiBIYW5kbGUgTGludXggc3R1YmRvbWFpbiBzcGVjaWZpYyBRRU1VIG9wdGlvbnMuIik6
-Cj4gRnJvbTogRXJpYyBTaGVsdG9uIDxlc2hlbHRvbkBwb2JveC5jb20+Cj4gCj4gVGhpcyBwYXRj
-aCBjcmVhdGVzIGFuIGFwcHJvcHJpYXRlIGNvbW1hbmQgbGluZSBmb3IgdGhlIFFFTVUgaW5zdGFu
-Y2UKPiBydW5uaW5nIGluIGEgTGludXgtYmFzZWQgc3R1YmRvbWFpbi4KLi4uCj4gLXN0YXRpYyBj
-b25zdCBjaGFyICpsaWJ4bF90YXBpZl9zY3JpcHQobGlieGxfX2djICpnYykKPiArc3RhdGljIGNv
-bnN0IGNoYXIgKmxpYnhsX3RhcGlmX3NjcmlwdChsaWJ4bF9fZ2MgKmdjLAo+ICsgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IGxpYnhsX2RvbWFpbl9idWlsZF9pbmZv
-ICppbmZvKQo+ICB7Cj4gICNpZiBkZWZpbmVkKF9fbGludXhfXykgfHwgZGVmaW5lZChfX0ZyZWVC
-U0RfXykKPiArICAgIGlmIChpbmZvLT5zdHViZG9tYWluX3ZlcnNpb24gPT0gTElCWExfU1RVQkRP
-TUFJTl9WRVJTSU9OX0xJTlVYKQo+ICsgICAgICAgIHJldHVybiBsaWJ4bF9fc3ByaW50ZihnYywg
-Ii9ldGMvcWVtdS1pZnVwIik7Cj4gKyAgICByZXR1cm4gbGlieGxfX3N0cmR1cChnYywgIm5vIik7
-Cj4gKyNlbHNlCj4gKyAgICByZXR1cm4gR0NTUFJJTlRGKCIlcy9xZW11LWlmdXAiLCBsaWJ4bF9f
-eGVuX3NjcmlwdF9kaXJfcGF0aCgpKTsKPiArI2VuZGlmCj4gK30KPiArCj4gK3N0YXRpYyBjb25z
-dCBjaGFyICpsaWJ4bF90YXBpZl9kb3duc2NyaXB0KGxpYnhsX19nYyAqZ2MsCj4gKyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IGxpYnhsX2RvbWFpbl9idWls
-ZF9pbmZvICppbmZvKQo+ICt7Cj4gKyNpZiBkZWZpbmVkKF9fbGludXhfXykgfHwgZGVmaW5lZChf
-X0ZyZWVCU0RfXykKPiArICAgIGlmIChpbmZvLT5zdHViZG9tYWluX3ZlcnNpb24gPT0gTElCWExf
-U1RVQkRPTUFJTl9WRVJTSU9OX0xJTlVYKQo+ICsgICAgICAgIHJldHVybiBsaWJ4bF9fc3ByaW50
-ZihnYywgIi9ldGMvcWVtdS1pZmRvd24iKTsKCldlIHNob3VsZCBuZXZlciBoYXZlIHBlcm1pdHRl
-ZCB0aGlzICNpZmRlZmVyeS4gIFRoZSByZXN1bHRpbmcgZGlmZgpoZXJlIGlzIGFsbW9zdCBpbmNv
-bXByZWhlbnNpYmxlIGR1ZSB0byB0aGUgMyBsZXZlbHMgb2YgaW1wcm9wZXIKbmVzdGluZzogZGlm
-ZiwgaWZkZWYsIGFuZCBjb2RlLgoKQWxzbyB3ZSBkbyBub3QgY3VycmVudGx5IHN1cHBvcnQgYW55
-IGRvbTAncyBvdGhlciB0aGFuIExpbnV4IGFuZApGcmVlQlNEIGFueXdheSEgIFNvIHRoZSAjaWZk
-ZWYgaXMgZW50aXJlbHkgcmVkdW5kYW50LiAgVGhpcyB3YXNuJ3QgCm5vdGljZWQgd2hlbiAyYjJl
-ZjBjNTQ0NTk3MjI5NDNkYjYxNjZkYTI4ZTA5OGFmMTJhOWU2CiAgImxpYnhsOiBkb24ndCB1c2Ug
-YSBxZW11LWlmdXAgc2NyaXB0IG9uIEZyZWVCU0QiCndhcyBwcmVwYXJlZCBhbmQgYWNjZXB0ZWQu
-CgpBRkFJQ1QgdGhpcyBwYXJ0IG9mIHRoaXMgcGF0Y2ggaXMgc2VwYXJhdGluZyBvdXQgdGhlIGRv
-d24gYW5kIHVwCnZlcnNpb25zIG9mIGxpYnhsX3RhcGlmX3NjcmlwdC4gIFRoZSByZXN1bHRpbmcg
-dHdvIGZ1bmN0aW9ucyBhcmUgcXVpdGUKc2ltaWxhciB0aG91Z2guCgpJIHN1Z2dlc3QgdGhlIGZv
-bGxvd2luZyBzZXJpZXMgb2Ygc21hbGwgY2hhbmdlczoKICAgMS4gRHJvcCB0aGUgI2lmIGFuZCBh
-bGwgdGhlIGNvZGUgaW4gdGhlICNlbHNlCiAgIDIuIEFkZCBhIGxpYnhsX19kZXZpY2VfYWN0aW9u
-IHBhcmFtZXRlciB0byBsaWJ4bF90YXBpZl9zY3JpcHQKICAgMy4gTWFrZSB5b3VyIG5ldyBjb2Rl
-IGNoZWNrIGZvciBsaW51eCBzdHViZG9tIGFuZCBpZiBzbwogICAgICAgcGFzcyAgICAicWVtdSIg
-KyAoYWN0aW9uID09IGFkZCkgPyAidXAiIDoKICAgICAgICAgICAgICAgICAgICAgICAgKGFjdGlv
-biA9PSByZW1vdmUpID8gImRvd24iIDogKGFib3J0KCksMCkKICAgICAgIG9yIHNvbWUgc3VjaAoK
-V2hhdCBkbyB5b3UgdGhpbmsgPwoKPiBAQCAtMTA5OSwxMCArMTExOCwzMSBAQCBzdGF0aWMgaW50
-IGxpYnhsX19idWlsZF9kZXZpY2VfbW9kZWxfYXJnc19uZXcobGlieGxfX2djICpnYywKPiAgICAg
-ICAgICAgICAgICAgIHJldHVybiBFUlJPUl9JTlZBTDsKPiAgICAgICAgICAgICAgfQo+ICAgICAg
-ICAgICAgICBpZiAoYl9pbmZvLT51Lmh2bS5zZXJpYWwpIHsKPiAtICAgICAgICAgICAgICAgIGZs
-ZXhhcnJheV92YXBwZW5kKGRtX2FyZ3MsCj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAiLXNlcmlhbCIsIGJfaW5mby0+dS5odm0uc2VyaWFsLCBOVUxMKTsKPiAtICAgICAgICAg
-ICAgfSBlbHNlIGlmIChiX2luZm8tPnUuaHZtLnNlcmlhbF9saXN0KSB7Cj4gKyAgICAgICAgICAg
-ICAgICBpZiAoaXNfc3R1YmRvbSkgewo+ICsgICAgICAgICAgICAgICAgICAgIGZsZXhhcnJheV92
-YXBwZW5kKGRtX2FyZ3MsCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-Ii1zZXJpYWwiLAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEdDU1BS
-SU5URigiL2Rldi9odmMlZCIsCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIFNUVUJET01fQ09OU09MRV9TRVJJQUwpLAo+ICsgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIE5VTEwpOwo+ICsgICAgICAgICAgICAgICAgfSBlbHNlIHsK
-PiArICAgICAgICAgICAgICAgICAgICBmbGV4YXJyYXlfdmFwcGVuZChkbV9hcmdzLAo+ICsgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICItc2VyaWFsIiwgYl9pbmZvLT51Lmh2
-bS5zZXJpYWwsIE5VTEwpOwo+ICsgICAgICAgICAgICAgICAgfQo+ICsgICAgICAgICAgICB9IGVs
-c2UgaWYgKGJfaW5mby0+dS5odm0uc2VyaWFsX2xpc3QgJiYKPiArICAgICAgICAgICAgICAgICAg
-ICBiX2luZm8tPnUuaHZtLnNlcmlhbF9saXN0WzBdKSB7Cj4gICAgICAgICAgICAgICAgICBjaGFy
-ICoqcDsKPiArICAgICAgICAgICAgICAgIGlmIChpc19zdHViZG9tKSB7Cj4gKyAgICAgICAgICAg
-ICAgICAgICAgaWYgKGJfaW5mby0+dS5odm0uc2VyaWFsX2xpc3RbMV0pIHsKClRoaXMgY2FuJ3Qg
-cG9zc2libHkgYmUgcmlnaHQuICBUaGUgMm5kIGlmIGlzIGluIHRoZSBlbHNlIG9mIGEKY29uZGl0
-aW9uIHdoaWNoIHdpbGwgYWx3YXlzIGNhdGNoIGFsbCBvZiBpdHMgY2FzZXMuCgpBbHNvLAoKPiAr
-ICAgICAgICAgICAgICAgICAgICBmbGV4YXJyYXlfdmFwcGVuZChkbV9hcmdzLAo+ICsgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICItc2VyaWFsIiwKPiArICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBHQ1NQUklOVEYoIi9kZXYvaHZjJWQiLAo+ICsgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTVFVCRE9NX0NPTlNP
-TEVfU0VSSUFMKSwKCml0IHJlcGVhdHMgc29tZSBvZiB0aGUgY29kZS4KCj4gQEAgLTE1MDMsNyAr
-MTU0Myw5IEBAIHN0YXRpYyBpbnQgbGlieGxfX2J1aWxkX2RldmljZV9tb2RlbF9hcmdzX25ldyhs
-aWJ4bF9fZ2MgKmdjLAo+ICAgICAgICAgICAgICAgKiBJZiBxZW11IGlzbid0IGRvaW5nIHRoZSBp
-bnRlcnByZXRpbmcsIHRoZSBwYXJhbWV0ZXIgaXMKPiAgICAgICAgICAgICAgICogYWx3YXlzIHJh
-dwo+ICAgICAgICAgICAgICAgKi8KPiAtICAgICAgICAgICAgaWYgKGRpc2tzW2ldLmJhY2tlbmQg
-PT0gTElCWExfRElTS19CQUNLRU5EX1FESVNLKQo+ICsgICAgICAgICAgICBpZiAobGlieGxfZGVm
-Ym9vbF92YWwoYl9pbmZvLT5kZXZpY2VfbW9kZWxfc3R1YmRvbWFpbikpCj4gKyAgICAgICAgICAg
-ICAgICBmb3JtYXQgPSAiaG9zdF9kZXZpY2UiOwoKU28gSSBpbmZlciB0aGF0IHlvdSBoYXZlIGNy
-ZWF0ZWQgaW4gcWVtdSBhICJibG9jayBkZXZpY2UgZm9ybWF0IgpjYWxsZWQgImhvc3RfZGV2aWNl
-IiB3aGljaCBpcyBhY3R1YWxseSBhIHB2IGZyb250ZW5kID8gIE9yIGFyZSB3ZQp1c2luZyBMaW51
-eCdzIGJsa2Zyb250IGhlcmUgPyAgSW4gd2hpY2ggY2FzZSB3aHkgbm90ICJyYXciID8KCj4gKyAg
-ICAgICAgICAgIH0gZWxzZSBpZiAobGlieGxfZGVmYm9vbF92YWwoYl9pbmZvLT5kZXZpY2VfbW9k
-ZWxfc3R1YmRvbWFpbikpIHsKPiArICAgICAgICAgICAgICAgIHRhcmdldF9wYXRoID0gR0NTUFJJ
-TlRGKCIvZGV2L3h2ZCVjIiwgJ2EnICsgZGlzayk7CgpOZWVkcyBhbiBlcnJvciBjaGVjayBpbiBj
-YXNlIGRpc2sgaXMgdG9vIGxhcmdlLgoKVGhhbmtzLApJYW4uCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============5925988006232233912==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="k+w/mQv8wyuph6w0"
+Content-Disposition: inline
+
+
+--k+w/mQv8wyuph6w0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Oct 16, 2018 at 05:53:02PM +0100, Ian Jackson wrote:
+> Marek Marczykowski-G=C3=B3recki writes ("[RFC PATCH v2 00/17] Add support=
+ for qemu-xen runnning in a Linux-based stubdomain."):
+> > [stuff]
+>=20
+> Thanks for this.  I'm very keen on this approach and keen on getting
+> it upstream.  Sorry for the delay reviewing it!  I have been away a
+> lot.
+>=20
+> > General idea is to allow freely set device_model_version and
+> > device_model_stubdomain_override and choose the right options based on =
+this choice.
+> > Also, allow to specific path to stubdomain kernel/ramdisk, for greater =
+flexibility.
+> > Right now when qemu-xen in stubdomain is selected, it is assumed it's
+> > Linux-based and few decisions are based on it, specifically:
+>=20
+> That sounds sensible.
+>=20
+> >  - qemu args encoding (\x1b as separator, to allow spaces in arguments)
+>=20
+> What if the arguments contain \x1b ?=20
+
+Well, here I've changed "What if the arguments contain a space" to "What
+if the arguments contain \x1b" ;)
+
+> I think you may need a quoting
+> scheme, or to use nul.
+
+The main reason for this over alternatives (including nul) is using
+shell script on the stubdomain side to handle this. Handling nul char in
+shell is major PITA.
+
+> > It may be a good idea to document "stubdomain API" somewhere. Is there =
+such
+> > document for MiniOS one?
+>=20
+> No.
+>=20
+> >  Here is an initial version for Linux one:
+> >=20
+> >     Assumptions about Linux-based stubdomain for qemu-xen:
+> >     * qemu command line is stored by toolstack in
+> >       /vm/<target-uuid>/image/dmargs xenstore entry, arguments are sepa=
+rated
+> >       with \x1b character
+>=20
+> Oh, xenstore.  From docs/misc/xenstore.txt:
+>=20
+> | xenstore values should normally be 7-bit ASCII text strings
+> | containing bytes 0x20..0x7f only
+>=20
+> I think you could have separate xenstore keys for the seperate
+> arguments, or you could encode it somehow.
+
+What "normally" means in this context? For me it doesn't mean other
+characters are prohibited.
+
+> >     * qemu can access saved state (if any) at its FD 3
+> >     * qemu can write its state (for save/migration) to its FD 4
+>=20
+> That's a description of the protocol to *qemu*.  Is the toolstack then
+> responsible for the protocol across the domain boundary ?  I think it
+> would be nice to specify that here too.
+
+Well, toolstack is responsible for qemu command line (and QMP), so it is
+part of the stubdomain protocol...
+
+>=20
+> >     * qemu expects backend for serial console at /dev/hvc3
+> >     * disks configured for the target are available as /dev/xvd*, in
+> >       configuration order
+> >     * qemu can call /etc/qemu-ifup and /etc/qemu-ifdown to connect/disc=
+onnect
+> >       network interface to appropriate network
+
+Actually, after recent changes in our linux stubdomain, this last point
+wouldn't be needed. It's handled internally by observing qmp events.
+
+> Please can we put this in-tree and not in a 00/ cover letter :-).
+
+Sure.
+
+> > Initial version has no QMP support - in initial patches it is completely
+> > disabled, which means no suspend/restore. QMP normally would be used fo=
+r PCI
+> > passthrough setup, but it is worked around with MiniOS-like control pro=
+tocol
+> > over xenstore, which then is translated to QMP on stubdomain side.
+>=20
+> How unpleasant.  But better than nothing.
+>
+> > Some option is to use separate console for that, but that require
+> > xenstoled supporting multiple consoles per domain (the goal is to not h=
+ave qemu
+> > in dom0 at all). Also, it would be preferable to evaluate how libxl
+> > handle potentially malicious QMP responses.
+>=20
+> We are working on that latter point anyway.
+>=20
+> > Another option is to use xenstore - either translate everything needed =
+to
+> > MiniOS-like thing, or write already json-formatted requests to xenstore=
+ and
+> > watch there for responses. When using separate xenstore dir for that, w=
+ith
+> > per-command entries (command id as a key name?) that would solve concur=
+rency
+> > problem.
+>=20
+> That would be fine too.
+>=20
+> > QMP support over separate console: patch "libxl: access QMP socket via =
+console
+> > for qemu-in-stubdomain" implements some early PoC of this.
+> > Major limitation: only one connection at a time and no means of out of
+> > band reset (and re-negotiate). I've tried adding very simple `qmp_reset`
+> > command for in-band connection reset, but it is unreliable because of t=
+he
+> > first limitation - xl process running in background hold this connectio=
+n open
+> > and every other xl instance interfere with it. On the other hand, for l=
+ibvirt
+> > use case one connection could be enough (leaving alone libvirtd restart=
+).
+>=20
+> This is awkward, isn't it.  The Xen PV console protocol has no reset
+> mechanism.  Can we use libvchan here and provide qmp vchans ?
+
+That would be an option too. Require (trivial) vchan->unix socket proxy.
+
+> > Xenconsoled patches add support for multiple consoles in xenconsoled, t=
+o avoid the need
+> > for qemu in dom0 for this to work. Multiple consoles for a stubdomain a=
+re used for:
+> >  - logs (console 0)
+> >  - save + restore (console 1, 2)
+> >  - qmp (console 3)
+> >  - serial terminal to target domU (console 4)
+> > Xenconsoled patches are in fact a separate series, but I'm sending them=
+ here to
+> > ease dependencies handling (latter libxl patches use that).
+>=20
+> That sounds reasonable.
+>=20
+> > What qmp-libxenstat socket is for?
+> >=20
+> > PCI passthrough support require some more love. Right now, libxl tries =
+to setup
+> > pcifront for both target HVM and stubdomain and the former fails (race
+> > condition):
+> >     xen-pciback pci-259-0: 22 Couldn't locate PCI device (0000:00:1b.0)=
+! perhaps already in-use?
+> > Fortunately it isn't needed. There is also a PCI related problem on
+> > domain shutdown - it looks like first stubdomain is paused and then lib=
+xl waits
+> > for pcifront there.
+> > Also, MSI doesn't work (qemu output):
+> >=20
+> >     [00:05.0] xen_pt_msgctrl_reg_write: setup MSI (register: 81).
+> >     [00:05.0] msi_msix_setup: requested pirq 55 for MSI (vec: 0, entry:=
+ 0)
+> >     [00:05.0] msi_msix_setup: Error: Mapping of MSI (err: 1, vec: 0, en=
+try 0)
+> >     [00:05.0] xen_pt_msgctrl_reg_write: Warning: Can not map MSI (regis=
+ter: 80)!
+> >     [00:05.0] Write-back to unknown field 0x44 (partially) inhibited (0=
+x00)
+> >     [00:05.0] If the device doesn't work, try enabling permissive mode
+> >     [00:05.0] (unsafe) and if it helps report the problem to xen-devel
+>=20
+> I confess I don't understand PCI passthrough but it would be nice for
+> this to work.  I think a starting point might be to write down who is
+> supposed to do what...
+>=20
+> > This patch series is third (fourth?) attempt to get rid of limitation
+> > "if you want to use stubdomain, you're stuck with qemu-traditional", do=
+ne over
+> > years, by many people.
+> > I think it should be acceptable plan to gradually add features to
+> > qemu-xen+stubdomain configuration - not necessary waiting with committi=
+ng any
+> > of those patches until full feature set of qemu-xen is supported. After=
+ all,
+> > right now "feature set supported by qemu-xen+stubdom" is empty, so woul=
+dn't be
+> > worse.
+>=20
+> Absolutely.
+>=20
+> Ian.
+>=20
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--k+w/mQv8wyuph6w0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlvGILkACgkQ24/THMrX
+1ywK4Af/Z2F77xyYoDI9KRLxSVTcqxjnBPwiwahr+7pUKCD0gFTfqSMlRP7CBXLj
+rAKV+7LfZGY/aNZs+dTuJj48xFX4DCX6f6I/Oxm8XDPNqu9vwyWPfLJ5oW8kdpkO
+WsTNNHMmZv48azC4Vl/5mtXRu/JcORBtXDTs21waVLoawKsfNcev2kd5isUbq5Nf
+X0ZirC5j++fSQzYNKGC/yzHTP4R1EsieYUpkomugQ2xOFfQNRpRTvzDBDaIjPryG
+EOqi0uKlFMTcX+lXfh5k4YG8bdrmWsyw8HFhu3hF9N/gLZiNCsd+eNLhz1FUF9bo
+O7EoncyD5qJ3yFt+Z2LRl7Bx/r9D1A==
+=Xa4i
+-----END PGP SIGNATURE-----
+
+--k+w/mQv8wyuph6w0--
+
+
+--===============5925988006232233912==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5925988006232233912==--
