@@ -1,20 +1,20 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH] CONFIG_XEN_PV breaks
- xen_create_contiguous_region on ARM
-Date: Tue, 16 Oct 2018 21:02:53 +0800 (CST)
-Message-ID: <alpine.DEB.2.10.1810162102240.5150@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1810161627250.5150@sstabellini-ThinkPad-X260>
- <209b46f5-54db-72be-5d08-798550bc7d02@arm.com>
- <8deec21f-cb8a-a481-7f49-e9a8c1c7425a@oracle.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v3 4/6] xen/arm: zynqmp: eemi access control
+Date: Tue, 16 Oct 2018 14:23:25 +0100
+Message-ID: <ea9e4900-c886-415c-585a-db620ac9194c@arm.com>
+References: <alpine.DEB.2.10.1808101435481.32304@sstabellini-ThinkPad-X260>
+ <1533945710-15159-4-git-send-email-sstabellini@kernel.org>
+ <79f450e4-7f96-3f9d-d267-a3aa38b1f26a@arm.com>
+ <alpine.DEB.2.10.1810101455160.436@sstabellini-ThinkPad-X260>
+ <0efa6dec-8800-f294-e16f-8cf6d4067a84@arm.com>
+ <bb36e227-6c35-ed22-a2d0-bffec03a193d@arm.com>
+ <alpine.DEB.2.10.1810160947370.4859@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1287587876-1539694980=:5150"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=pf7c=m4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1gCP01-0002iw-Ok
- for xen-devel@lists.xenproject.org; Tue, 16 Oct 2018 13:03:01 +0000
-In-Reply-To: <8deec21f-cb8a-a481-7f49-e9a8c1c7425a@oracle.com>
+In-Reply-To: <alpine.DEB.2.10.1810160947370.4859@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,75 +23,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: jgross@suse.com, Stefano Stabellini <sstabellini@kernel.org>, Jeff.Kubascik@dornerworks.com, Julien Grall <julien.grall@arm.com>, Nathan.Studer@dornerworks.com, xen-devel@lists.xenproject.org, vkuznets@redhat.com, Jarvis.Roach@dornerworks.com
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: edgar.iglesias@xilinx.com, Stefano Stabellini <stefanos@xilinx.com>, nd <nd@arm.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1287587876-1539694980=:5150
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Tue, 16 Oct 2018, Boris Ostrovsky wrote:
-> On 10/16/18 6:56 AM, Julien Grall wrote:
-> > Hi,
-> >
-> > On 10/16/2018 09:38 AM, Stefano Stabellini wrote:
-> >> xen_create_contiguous_region has now only an implementation if
-> >> CONFIG_XEN_PV is defined. However, on ARM we never set CONFIG_XEN_PV but
-> >> we do have an implementation of xen_create_contiguous_region which is
-> >> required for swiotlb-xen to work correctly (although it just sets
-> >> *dma_handle). >
-> >> This fixes a bug introduced by 16624390816c4c40df3d777b34665d3fd01e693d.
-> >
-> > Linux is using the tag "Fixes: sha1 ("commit title")" so it can be
-> > picked up for backporting.
-> 
-> 
-> SoB would also be good to have ;-)
-> 
-> Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-
-Ooops, here it comes:
-
-Signed-off-by: Stefano Stabellini <stefanos@xilinx.com>
-
-
-> >
-> > Acked-by: Julien Grall <julien.grall@arm.com>
-> >
-> > Cheers,
-> >>
-> >> diff --git a/include/xen/xen-ops.h b/include/xen/xen-ops.h
-> >> index fd18c97..939a962 100644
-> >> --- a/include/xen/xen-ops.h
-> >> +++ b/include/xen/xen-ops.h
-> >> @@ -41,7 +41,7 @@ static inline uint32_t xen_vcpu_nr(int cpu)
-> >>     extern unsigned long *xen_contiguous_bitmap;
-> >>   -#ifdef CONFIG_XEN_PV
-> >> +#ifdef CONFIG_XEN_PV || CONFIG_ARM || CONFIG_ARM64
-> >>   int xen_create_contiguous_region(phys_addr_t pstart, unsigned int
-> >> order,
-> >>                   unsigned int address_bits,
-> >>                   dma_addr_t *dma_handle);
-> >>
-> >> _______________________________________________
-> >> Xen-devel mailing list
-> >> Xen-devel@lists.xenproject.org
-> >> https://lists.xenproject.org/mailman/listinfo/xen-devel
-> >>
-> >
-> 
---8323329-1287587876-1539694980=:5150
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1287587876-1539694980=:5150--
+SGkgU3RlZmFubywKCk9uIDEwLzE2LzIwMTggMDM6MzkgQU0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3
+cm90ZToKPiBPbiAxNS8xMC8yMDE4IDA4OjI1LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+IEhpLAo+
+Pgo+PiBPbiAxMC8xMC8yMDE4IDExOjM1IFBNLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4+
+PiBPbiBUdWUsIDI4IEF1ZyAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+Pj4gT24gMTEvMDgv
+MTggMDE6MDEsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPj4+Pj4gIMKgwqAgI2luY2x1ZGUg
+PHhlbi9pb2NhcC5oPgo+Pj4+PiAgwqDCoCAjaW5jbHVkZSA8eGVuL3NjaGVkLmg+Cj4+Pj4+ICDC
+oMKgICNpbmNsdWRlIDx4ZW4vdHlwZXMuaD4KPj4+Pj4gQEAgLTIzLDYgKzkxLDcyMSBAQAo+Pj4+
+PiAgwqDCoCAjaW5jbHVkZSA8YXNtL3JlZ3MuaD4KPj4+Pj4gIMKgwqAgI2luY2x1ZGUgPGFzbS9w
+bGF0Zm9ybXMveGlsaW54LXp5bnFtcC1lZW1pLmg+Cj4+Pj4+ICDCoMKgICtzdHJ1Y3QgcG1fYWNj
+ZXNzCj4+Pj4+ICt7Cj4+Pj4+ICvCoMKgwqAgcGFkZHJfdCBhZGRyOwo+Pj4+Cj4+Pj4gSXQgc2Vl
+bXMgdGhhdCB0aGUgYWRkcmVzcyB3aWxsIGFsd2F5cyBwYWdlLWFsaWduZWQuIFNvIGNvdWxkIHdl
+IHN0b3JlIGEKPj4+PiBmcmFtZQo+Pj4+IHVzaW5nIG1mbl90Pwo+Pj4KPj4+IFllcyB3ZSBjb3Vs
+ZCBzdG9yZSBqdXN0IHRoZSBmcmFtZS4gSSBzdGFydGVkIHRvIG1ha2UgdGhlIGNoYW5nZQo+Pj4g
+c3VnZ2VzdGVkLCBhbmQgYWxsIHRoZSByZXF1aXJlZCBjb3JyZXNwb25kaW5nIGNoYW5nZXMgdG8g
+dGhlCj4+PiBpbml0aWFsaXphdGlvbnMgYmVsb3csIGZvciBpbnN0YW5jZToKPj4+Cj4+PiAgwqDC
+oCBbTk9ERV9SUFVdID0geyBNTV9SUFUgfSwKPj4+Cj4+PiBuZWVkcyB0byBiZWNvbWU6Cj4+Pgo+
+Pj4gIMKgwqAgW05PREVfUlBVXSA9IHsgX21mbihNTV9SUFUpIH0sCj4+Pgo+Pj4gYnV0IHdoZW4g
+SSB0cmllZCB0byBkbyB0aGF0LCBJIGdldCBhIGNvbXBpbGF0aW9uIGVycm9yOgo+Pj4KPj4+ICDC
+oMKgIHhpbGlueC16eW5xbXAtZWVtaS5jOjEwNjoyMDogZXJyb3I6IGluaXRpYWxpemVyIGVsZW1l
+bnQgaXMgbm90IGNvbnN0YW50Cj4+PiAgwqDCoMKgwqDCoMKgwqAgW05PREVfUlBVXSA9IHsgX21m
+bihNTV9SUFUpIH0sCj4+Pgo+Pj4gVW5mb3J0dW5hdGVseSBpdCBpcyBub3QgcG9zc2libGUgdG8g
+dXNlIG1mbl90IGluIHN0YXRpYyBpbml0aWFsaXphdGlvbnMsCj4+PiBiZWNhdXNlIGl0IGlzIGEg
+c3RhdGljIGlubGluZS4gSSBjb3VsZCBkbzoKPj4+Cj4+Cj4+IFRoaXMgaXMgYSBidWcgaW4gR0ND
+IG9sZGVyIHRoYW4gNS4wLgo+Pgo+Pj4gIMKgwqAgW05PREVfUlBVXSA9IHsgeyBNTV9SUFUgfSB9
+LAo+Pj4KPj4+IHdoaWNoIHdvdWxkIHdvcmsgZm9yIERFQlVHIGJ1aWxkcyBidXQgd291bGRuJ3Qg
+d29yayBmb3Igbm9uLURFQlVHCj4+PiBidWlsZHMuCj4+Pgo+Pj4gSSdsbCBrZWVwIHBhZGRyX3Qg
+Zm9yIHRoZSBuZXh0IHZlcnNpb24gb2YgdGhlIHNlcmllcy4KPj4KPj4gV2hhdCBpcyB0aGUgaXNz
+dWUgd2l0aCB0aGF0IG9uIG5vbi1kZWJ1ZyBidWlsZD8gV2UgYXJlIHVzaW5nIHRoaXMKPj4gY29u
+c3RydWN0aW9uIGluIGFub3RoZXIgcGxhY2Ugd2l0aG91dCBhbnkgY29tcGlsZXIgaXNzdWUuCj4g
+Cj4gSSBtb2RpZmllZCB0aGUgY29kZSBhcyBzdWdnZXN0ZWQgYWdhaW4gYW5kIHRyaWVkIHdpdGgg
+bmV3ZXIgR0NDcyAoYm90aAo+IDYuMy4xIGFuZCA3LjMuMSkgYnV0IEkgc3RpbGwgZ2V0IHRoZSBz
+YW1lIGVycm9yOgo+IAo+IHhpbGlueC16eW5xbXAtZWVtaS5jOjEwNToyMDogZXJyb3I6IGluaXRp
+YWxpemVyIGVsZW1lbnQgaXMgbm90IGNvbnN0YW50Cj4gICAgICAgW05PREVfUlBVXSA9IHsgX21m
+bihNTV9SUFUpIH0sCgpJIGFjdHVhbGx5IG1pc3JlbWVtYmVyZWQgdGhlIHByb2JsZW0uIF9tZm4g
+aXMgdXNpbmcgYSBzdGF0aWMgaW5saW5lIApoZWxwZXIgd2hpY2ggaXMgbm90IGNvbnNpZGVyZWQg
+YXMgYSBjb25zdGFudC4KClRoZSBjb3JyZWN0IHNvbHV0aW9uIHdvdWxkIGJlIChtZm5fdCl7IE1N
+X1JQVSB9IGJ1dCBHQ0MgNS4wIChhbmQgb2xkZXIpIApkb2VzIG5vdCBwYXJzZSBjb3JyZWN0bHkg
+dGhlIHR5cGUgY2FzdC4gU28gd2Ugd29ya2Fyb3VuZCBieSBkcm9wcGluZyB0aGUgCmNhc3QgZm9y
+IHRoZSBpbml0aWFsaXplci4KCk9uIHlvdXIgcHJldmlvdXMgZS1tYWlsIHlvdSBzYWlkIHRoYXQg
+eyB7IE1NX1JQVSB9IH0gd291bGQgbm90IHdvcmsgZm9yIApkZWJ1Zy4gT25lIHNvbHV0aW9uIHdv
+dWxkIGJlIHRvIGludHJvZHVjZSBfbWZuX2luaXRpYWxpemVyKC4uLikgdGhhdCAKd291bGQgYmUg
+aW1wbGVtZW50ZWQgZGlmZmVyZW50bHkgZm9yIGRlYnVnIGFuZCBub24tZGVidWcuCgpJIHRoaW5r
+IHN1Y2ggaGVscGVyIHdvdWxkIGJlIHVzZWZ1bCBpbiBvdGhlciBjb250ZXh0IGFzIHdlbGwuCgpD
+aGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
