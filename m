@@ -1,22 +1,16 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [RFC PATCH v2 00/17] Add support for qemu-xen
- runnning in a Linux-based stubdomain.
-Date: Tue, 16 Oct 2018 22:46:28 +0200
-Message-ID: <20181016204628.GD1563@mail-itl>
-References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
- <23494.5998.10340.694382@mariner.uk.xensource.com>
- <20181016173240.GA1563@mail-itl>
- <23494.9572.676973.726194@mariner.uk.xensource.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [ovmf baseline-only test] 75433: trouble: blocked/broken
+Date: Tue, 16 Oct 2018 21:59:20 +0100
+Message-ID: <osstest-75433-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3461329037263871891=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=x11d=m4=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gCWEe-0008DL-CY
- for xen-devel@lists.xenproject.org; Tue, 16 Oct 2018 20:46:36 +0000
-In-Reply-To: <23494.9572.676973.726194@mariner.uk.xensource.com>
+ <srs0=tbbi=m4=xenproject.org=prvs=82009f164=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1gCWRA-0000kP-87
+ for xen-devel@lists.xenproject.org; Tue, 16 Oct 2018 20:59:32 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,135 +19,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Eric Shelton <eshelton@pobox.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3461329037263871891==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="RhUH2Ysw6aD5utA4"
-Content-Disposition: inline
-
-
---RhUH2Ysw6aD5utA4
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Oct 16, 2018 at 06:52:36PM +0100, Ian Jackson wrote:
-> Marek Marczykowski-G=C3=B3recki writes ("Re: [RFC PATCH v2 00/17] Add sup=
-port for qemu-xen runnning in a Linux-based stubdomain."):
-> > On Tue, Oct 16, 2018 at 05:53:02PM +0100, Ian Jackson wrote:
-> > > I think you may need a quoting
-> > > scheme, or to use nul.
-> >=20
-> > The main reason for this over alternatives (including nul) is using
-> > shell script on the stubdomain side to handle this. Handling nul char in
-> > shell is major PITA.
->=20
-> Ah.  Yes.  You could handle multiple arguments in multiple xenstore
-> keys easily enough though, I think ?
->=20
-> Or you could pass a shell string.=20
-
-=46rom those two options I'd prefer multiple xenstore keys as much
-cleaner. We do have them as an array in libxl already.
-
-So, let image/dmargs be actually a directory with entries like:
- - image/dmargs/000 =3D -xen-domid
- - image/dmargs/001 =3D 123
- - image/dmargs/002 =3D -nodefaults
- ...
-
-I wonder if there needs to be arguments count, or iterating until ENOENT
-is enough?
-
-> That is, you could shell escape the
-> arguments in libxl.  Shell escaping is a bit fiddly but not too
-> hard.[1] Then in the stubdom you can just say sh -c.
->=20
-> [1] One algorithm would be
->    1. replace all \ in each argument with '\\'
->    2. replace all ' in each argument with '\''
->    3. put ' ' around each argument
->    4. concatenate with spaces in between
->=20
-> > > | xenstore values should normally be 7-bit ASCII text strings
-> > > | containing bytes 0x20..0x7f only
-> > >=20
-> > > I think you could have separate xenstore keys for the seperate
-> > > arguments, or you could encode it somehow.
-> >=20
-> > What "normally" means in this context? For me it doesn't mean other
-> > characters are prohibited.
->=20
-> The reasoning is explained in the surrounding text,  Basically, it
-> makes debugging (listing xenstore by hand, etc) very annoying.
->=20
-> > > >     * qemu can access saved state (if any) at its FD 3
-> > > >     * qemu can write its state (for save/migration) to its FD 4
-> > >=20
-> > > That's a description of the protocol to *qemu*.  Is the toolstack then
-> > > responsible for the protocol across the domain boundary ?  I think it
-> > > would be nice to specify that here too.
-> >=20
-> > Well, toolstack is responsible for qemu command line (and QMP), so it is
-> > part of the stubdomain protocol...
->=20
-> Err, I mean, you are specifying a protocol at the qemu boundary.  It
-> is good to write that down.  But it would be nice to also write down
-> the protocol at the stubdom boundary, even though both halves of it
-> are actually implemented by part of the toolstack (the stubdom side
-> being scripts passed in by the toolstack).
->=20
-> > > This is awkward, isn't it.  The Xen PV console protocol has no reset
-> > > mechanism.  Can we use libvchan here and provide qmp vchans ?
-> >=20
-> > That would be an option too. Require (trivial) vchan->unix socket proxy.
->=20
-> Yes.  Or teaching qemu about libvchan.
-
-That's also an option. I'll see how hard it would be to add this to
-qemu.
-
-> Hey, we should teach socat about libvchan :-).
-
-:)
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---RhUH2Ysw6aD5utA4
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlvGTiQACgkQ24/THMrX
-1yzf4wgAhdWTztVC7qS1N2YnXHX/5sSqeHE2MY136xUqRBZNmI+9TgTXoZAbwXXG
-Q7oXZIZObcA5Skuu0TuM6num8eyjNJ6YGY0TUhD0F7oYarg02cO2kRHliMgZvdn4
-0OaNvuhUd0Q6Ne5JMsT4k34SepNgPOxLp/v8uIwzv9ZE+2xwnDiSkOgz3UYmS19Y
-B9DijClAWfddJXuJpz7Dwffl+9bMI301OsAZaZCBJ142d71jZjgBtS26CWn+IYRl
-kzNtW0o8OMIRkaB9eWeqzL7i7iou4H796tJp4QgPQqemHzRMtMG0uEd0uYA8A6PA
-kDPLa5iSXfskBbAL1gviX2J91F24rQ==
-=SWMW
------END PGP SIGNATURE-----
-
---RhUH2Ysw6aD5utA4--
-
-
---===============3461329037263871891==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3461329037263871891==--
+VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
+NTQzMyBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
+dC9sb2dzLzc1NDMzLwoKRmFpbHVyZXMgYW5kIHByb2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0
+cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3Rz
+IHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAg
+IDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2ICAgICAgICAg
+ICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1h
+bWQ2NC1wdm9wcyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJv
+a2VuCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAg
+ICAgICAgICAgYnJva2VuCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3Rh
+dHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAg
+ICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCgpUZXN0cyB3aGljaCBkaWQg
+bm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
+ZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9h
+CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAg
+MSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgYmxvY2tlZCBuL2EKIGJ1aWxkLWkzODYtbGli
+dmlydCAgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBu
+L2EKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAg
+IGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAg
+NCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVzdGVkCiBidWlsZC1p
+Mzg2LXB2b3BzICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICBicm9rZW4gYmFz
+ZWxpbmUgdW50ZXN0ZWQKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0
+YWxsKDQpICAgICAgIGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtaTM4Ni14c20gICAg
+ICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVz
+dGVkCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAg
+ICBicm9rZW4gYmFzZWxpbmUgdW50ZXN0ZWQKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6
+CiBvdm1mICAgICAgICAgICAgICAgICA2ZDY2NTE2OGIwYjYzMDkyNGE4ZDUzNTMxNmQwNTM3MjM5
+OThkNjU4CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICA0N2YxNWRhMTYw
+NTNmMDMxYmNmN2M1MGY2OTYwYmQwZjZjODNkMmRiCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAgNzU0
+MzEgIDIwMTgtMTAtMTYgMDk6MjA6NTkgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAg
+IDc1NDMzICAyMDE4LTEwLTE2IDE2OjIwOjMyIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgRG9uZ2FvIEd1byA8
+ZG9uZ2FvLmd1b0BpbnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1pMzg2LXhz
+bSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAK
+IGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBicm9rZW4gIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIGJ1aWxkLWkzODYtbGli
+dmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAog
+YnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIGJyb2tlbiAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgYnJva2VuICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3Zt
+Zi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2
+LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCgoK
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC54cy5jaXRyaXRlLm5ldApsb2dzOiAvaG9t
+ZS9vc3N0ZXN0L2xvZ3MKaW1hZ2VzOiAvaG9tZS9vc3N0ZXN0L2ltYWdlcwoKTG9ncywgY29uZmln
+IGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJj
+ZS5jb20vb3NzdGVzdC9sb2dzCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAg
+IGh0dHA6Ly94ZW5iaXRzLnhlbnNvdXJjZS5jb20vZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1t
+YXJ5Cgpicm9rZW4tam9iIGJ1aWxkLWFtZDY0LXhzbSBicm9rZW4KYnJva2VuLWpvYiBidWlsZC1p
+Mzg2IGJyb2tlbgpicm9rZW4tam9iIGJ1aWxkLWFtZDY0LXB2b3BzIGJyb2tlbgpicm9rZW4tam9i
+IGJ1aWxkLWkzODYteHNtIGJyb2tlbgpicm9rZW4tam9iIGJ1aWxkLWFtZDY0IGJyb2tlbgpicm9r
+ZW4tam9iIGJ1aWxkLWkzODYtcHZvcHMgYnJva2VuCmJyb2tlbi1zdGVwIGJ1aWxkLWFtZDY0IGhv
+c3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1pMzg2IGhvc3QtaW5zdGFsbCg0KQpicm9r
+ZW4tc3RlcCBidWlsZC1pMzg2LXB2b3BzIGhvc3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWls
+ZC1hbWQ2NC14c20gaG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWkzODYteHNtIGhv
+c3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1hbWQ2NC1wdm9wcyBob3N0LWluc3RhbGwo
+NCkKClB1c2ggbm90IGFwcGxpY2FibGUuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KY29tbWl0IDZkNjY1MTY4YjBiNjMwOTI0YThk
+NTM1MzE2ZDA1MzcyMzk5OGQ2NTgKQXV0aG9yOiBEb25nYW8gR3VvIDxkb25nYW8uZ3VvQGludGVs
+LmNvbT4KRGF0ZTogICBUaHUgT2N0IDExIDE0OjU3OjAzIDIwMTggKzA4MDAKCiAgICBNZGVNb2R1
+bGVQa2cvUmVndWxhckV4cHJlc3Npb25EeGU6IEFkZCBudWxsIHBvaW50ZXIgY2hlY2sKICAgIAog
+ICAgVGhpcyBpcyB0aGUgcGFydCBvZiBjb21taXQgMzk0OGM1MTBlZGFkOTAxYmI5ZjhkMjNmN2Jm
+MGY0YWU5MWI1ZmNkZS4KICAgIAogICAgQ2M6IExpbWluZyBHYW8gPGxpbWluZy5nYW9AaW50ZWwu
+Y29tPgogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmlidXRpb24gQWdyZWVt
+ZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTogRG9uZ2FvIEd1byA8ZG9uZ2FvLmd1b0BpbnRlbC5j
+b20+CiAgICBSZXZpZXdlZC1ieTogTGltaW5nIEdhbyA8bGltaW5nLmdhb0BpbnRlbC5jb20+Cgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
