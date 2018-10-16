@@ -1,21 +1,21 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [RFC PATCH v2 00/17] Add support for qemu-xen
- runnning in a Linux-based stubdomain.
-Date: Tue, 16 Oct 2018 18:52:36 +0100
-Message-ID: <23494.9572.676973.726194@mariner.uk.xensource.com>
-References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
- <23494.5998.10340.694382@mariner.uk.xensource.com>
- <20181016173240.GA1563@mail-itl>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH] libxl: extract and save affinity maps from
+ hypervisor
+Date: Tue, 16 Oct 2018 20:45:08 +0200
+Message-ID: <043cfed917c22e0799daa0763b431df8edbf667c.camel@suse.com>
+References: <409d6789ab39c20d3c90483426e6d146ad131de1.1537546261.git-series.wei.liu2@citrix.com>
+ <23494.4470.855127.777529@mariner.uk.xensource.com>
+ <6eee6a89df54025bb4316a917a67b60840026725.camel@suse.com>
+ <23494.9058.115538.263269@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4589138841850241248=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=b3lb=m4=citrix.com=prvs=820ed1191=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gCTWK-0003aN-Sy
- for xen-devel@lists.xenproject.org; Tue, 16 Oct 2018 17:52:40 +0000
-In-Reply-To: <20181016173240.GA1563@mail-itl>
+ <srs0=q9ou=m4=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gCULE-0007S3-8q
+ for xen-devel@lists.xenproject.org; Tue, 16 Oct 2018 18:45:16 +0000
+In-Reply-To: <23494.9058.115538.263269@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,53 +24,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Eric Shelton <eshelton@pobox.com>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-TWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyaXRlcyAoIlJlOiBbUkZDIFBBVENIIHYyIDAw
-LzE3XSBBZGQgc3VwcG9ydCBmb3IgcWVtdS14ZW4gcnVubm5pbmcgaW4gYSBMaW51eC1iYXNlZCBz
-dHViZG9tYWluLiIpOgo+IE9uIFR1ZSwgT2N0IDE2LCAyMDE4IGF0IDA1OjUzOjAyUE0gKzAxMDAs
-IElhbiBKYWNrc29uIHdyb3RlOgo+ID4gSSB0aGluayB5b3UgbWF5IG5lZWQgYSBxdW90aW5nCj4g
-PiBzY2hlbWUsIG9yIHRvIHVzZSBudWwuCj4gCj4gVGhlIG1haW4gcmVhc29uIGZvciB0aGlzIG92
-ZXIgYWx0ZXJuYXRpdmVzIChpbmNsdWRpbmcgbnVsKSBpcyB1c2luZwo+IHNoZWxsIHNjcmlwdCBv
-biB0aGUgc3R1YmRvbWFpbiBzaWRlIHRvIGhhbmRsZSB0aGlzLiBIYW5kbGluZyBudWwgY2hhciBp
-bgo+IHNoZWxsIGlzIG1ham9yIFBJVEEuCgpBaC4gIFllcy4gIFlvdSBjb3VsZCBoYW5kbGUgbXVs
-dGlwbGUgYXJndW1lbnRzIGluIG11bHRpcGxlIHhlbnN0b3JlCmtleXMgZWFzaWx5IGVub3VnaCB0
-aG91Z2gsIEkgdGhpbmsgPwoKT3IgeW91IGNvdWxkIHBhc3MgYSBzaGVsbCBzdHJpbmcuICBUaGF0
-IGlzLCB5b3UgY291bGQgc2hlbGwgZXNjYXBlIHRoZQphcmd1bWVudHMgaW4gbGlieGwuICBTaGVs
-bCBlc2NhcGluZyBpcyBhIGJpdCBmaWRkbHkgYnV0IG5vdCB0b28KaGFyZC5bMV0gVGhlbiBpbiB0
-aGUgc3R1YmRvbSB5b3UgY2FuIGp1c3Qgc2F5IHNoIC1jLgoKWzFdIE9uZSBhbGdvcml0aG0gd291
-bGQgYmUKICAgMS4gcmVwbGFjZSBhbGwgXCBpbiBlYWNoIGFyZ3VtZW50IHdpdGggJ1xcJwogICAy
-LiByZXBsYWNlIGFsbCAnIGluIGVhY2ggYXJndW1lbnQgd2l0aCAnXCcnCiAgIDMuIHB1dCAnICcg
-YXJvdW5kIGVhY2ggYXJndW1lbnQKICAgNC4gY29uY2F0ZW5hdGUgd2l0aCBzcGFjZXMgaW4gYmV0
-d2VlbgoKPiA+IHwgeGVuc3RvcmUgdmFsdWVzIHNob3VsZCBub3JtYWxseSBiZSA3LWJpdCBBU0NJ
-SSB0ZXh0IHN0cmluZ3MKPiA+IHwgY29udGFpbmluZyBieXRlcyAweDIwLi4weDdmIG9ubHkKPiA+
-IAo+ID4gSSB0aGluayB5b3UgY291bGQgaGF2ZSBzZXBhcmF0ZSB4ZW5zdG9yZSBrZXlzIGZvciB0
-aGUgc2VwZXJhdGUKPiA+IGFyZ3VtZW50cywgb3IgeW91IGNvdWxkIGVuY29kZSBpdCBzb21laG93
-Lgo+IAo+IFdoYXQgIm5vcm1hbGx5IiBtZWFucyBpbiB0aGlzIGNvbnRleHQ/IEZvciBtZSBpdCBk
-b2Vzbid0IG1lYW4gb3RoZXIKPiBjaGFyYWN0ZXJzIGFyZSBwcm9oaWJpdGVkLgoKVGhlIHJlYXNv
-bmluZyBpcyBleHBsYWluZWQgaW4gdGhlIHN1cnJvdW5kaW5nIHRleHQsICBCYXNpY2FsbHksIGl0
-Cm1ha2VzIGRlYnVnZ2luZyAobGlzdGluZyB4ZW5zdG9yZSBieSBoYW5kLCBldGMpIHZlcnkgYW5u
-b3lpbmcuCgo+ID4gPiAgICAgKiBxZW11IGNhbiBhY2Nlc3Mgc2F2ZWQgc3RhdGUgKGlmIGFueSkg
-YXQgaXRzIEZEIDMKPiA+ID4gICAgICogcWVtdSBjYW4gd3JpdGUgaXRzIHN0YXRlIChmb3Igc2F2
-ZS9taWdyYXRpb24pIHRvIGl0cyBGRCA0Cj4gPiAKPiA+IFRoYXQncyBhIGRlc2NyaXB0aW9uIG9m
-IHRoZSBwcm90b2NvbCB0byAqcWVtdSouICBJcyB0aGUgdG9vbHN0YWNrIHRoZW4KPiA+IHJlc3Bv
-bnNpYmxlIGZvciB0aGUgcHJvdG9jb2wgYWNyb3NzIHRoZSBkb21haW4gYm91bmRhcnkgPyAgSSB0
-aGluayBpdAo+ID4gd291bGQgYmUgbmljZSB0byBzcGVjaWZ5IHRoYXQgaGVyZSB0b28uCj4gCj4g
-V2VsbCwgdG9vbHN0YWNrIGlzIHJlc3BvbnNpYmxlIGZvciBxZW11IGNvbW1hbmQgbGluZSAoYW5k
-IFFNUCksIHNvIGl0IGlzCj4gcGFydCBvZiB0aGUgc3R1YmRvbWFpbiBwcm90b2NvbC4uLgoKRXJy
-LCBJIG1lYW4sIHlvdSBhcmUgc3BlY2lmeWluZyBhIHByb3RvY29sIGF0IHRoZSBxZW11IGJvdW5k
-YXJ5LiAgSXQKaXMgZ29vZCB0byB3cml0ZSB0aGF0IGRvd24uICBCdXQgaXQgd291bGQgYmUgbmlj
-ZSB0byBhbHNvIHdyaXRlIGRvd24KdGhlIHByb3RvY29sIGF0IHRoZSBzdHViZG9tIGJvdW5kYXJ5
-LCBldmVuIHRob3VnaCBib3RoIGhhbHZlcyBvZiBpdAphcmUgYWN0dWFsbHkgaW1wbGVtZW50ZWQg
-YnkgcGFydCBvZiB0aGUgdG9vbHN0YWNrICh0aGUgc3R1YmRvbSBzaWRlCmJlaW5nIHNjcmlwdHMg
-cGFzc2VkIGluIGJ5IHRoZSB0b29sc3RhY2spLgoKPiA+IFRoaXMgaXMgYXdrd2FyZCwgaXNuJ3Qg
-aXQuICBUaGUgWGVuIFBWIGNvbnNvbGUgcHJvdG9jb2wgaGFzIG5vIHJlc2V0Cj4gPiBtZWNoYW5p
-c20uICBDYW4gd2UgdXNlIGxpYnZjaGFuIGhlcmUgYW5kIHByb3ZpZGUgcW1wIHZjaGFucyA/Cj4g
-Cj4gVGhhdCB3b3VsZCBiZSBhbiBvcHRpb24gdG9vLiBSZXF1aXJlICh0cml2aWFsKSB2Y2hhbi0+
-dW5peCBzb2NrZXQgcHJveHkuCgpZZXMuICBPciB0ZWFjaGluZyBxZW11IGFib3V0IGxpYnZjaGFu
-LgpIZXksIHdlIHNob3VsZCB0ZWFjaCBzb2NhdCBhYm91dCBsaWJ2Y2hhbiA6LSkuCgpSZWdhcmRz
-LApJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============4589138841850241248==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-msreLJW81tIBH/wWgBp7"
+
+
+--=-msreLJW81tIBH/wWgBp7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 2018-10-16 at 18:44 +0100, Ian Jackson wrote:
+> Dario Faggioli writes ("Re: [PATCH] libxl: extract and save affinity
+> maps from hypervisor"):
+> > If on the other hand, a domain was actually explicitly specified,
+> > then
+> > I guess it makes sense to at least try to set it when resuming.
+> >=20
+> > So the point is, are we, at that time (i.e., during resume), able
+> > to
+> > tell whether the reason why the domain has an affinity, is because
+> > the
+> > user explicitly specified it? Out of the top of my head, I don't
+> > think
+> > we can, but I probably better have another look at the code
+> > tomorrow...
+> > :-/
+>=20
+> So I think what is needed is to save the original config-specified
+> affinity (plus any updates), not fish the (probably libxl-generated)
+> one out of the hypervisor.
+>=20
+I think that too.
+
+Well, we probably can even fish it from Xen, but we need to save it in
+a place/field which is not the one that is looked at in libxl to decide
+whether or not to run placement (or, in general, decide whether or not
+to use whatever libxl own default).
+
+And then make the resume code look at that new field, rather than at
+vcpu_[hard,soft]_affinity.
+
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-msreLJW81tIBH/wWgBp7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvGMbQACgkQFkJ4iaW4
+c+6Mrg//aVs+x9XMp3ZlstMzvnfR4i4SI5sqfNihR6TNb7os5hSXYdJ3B8dyC2Ea
++/cG5G8N8wONMkmkgSO+7m7LrTDC0iVVaeGh8Ymw/2ctqPRXbwX6N1sxl1JH+oPI
+iwaBGIBgd2mteg3TXAJw+Ap6jGSkn/0Zmrl2DVn7iahrZnlqNq0TLTaJAVmsjP8t
+85ASFJxS2YnR84TeLHwOzttMA2spDW5nTLsB5g8gpHSdGuLZQN1oJcokPpKYsUqw
+0Pgkmu6w7j41cNsE2nDEGRJHEgFHAE8peobNPv5+QpJ4TcAgKSyb245HYmxq3Qmk
+R/2R8CdIXCb9nbBMDQFV3dGin4vhi+LhCCTtVbNim49RB61XnD78VfKEwy5vckba
+LEv5LIs5QDlHYa2jXEDNClCrpU94wmhp3/mKmGrc4h5nq7mo3At5BUFeL4XZsW7y
+m5FTSHyw30FDaQ8Ynz8R9O0E/oGaxjY90jbISCAZP1ddINquU6SxRQU8sJ8KogCv
+md+aLEUPeitasJ68fKYuTswqJB7iQJjJfz6H8YHsxCaN/wtBCC8JEnVO8fc31AYx
+AiEXs5PQZ3YyJvPLjg7J37XNFgiHbGSfmnL+0mvFqqxZnwEUFKBoCvGz0aIoIrj2
+Un3nul59i8x6xlaOPp49+kKRmP2t8Lpp5RBl2zCglCLFPHVMvuA=
+=0cz3
+-----END PGP SIGNATURE-----
+
+--=-msreLJW81tIBH/wWgBp7--
+
+
+
+--===============4589138841850241248==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4589138841850241248==--
