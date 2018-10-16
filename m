@@ -1,18 +1,28 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v3 5/6] xen/arm: zynqmp: implement
- zynqmp_eemi
-Date: Tue, 16 Oct 2018 14:48:35 +0800 (CST)
-Message-ID: <alpine.DEB.2.10.1810161446200.5150@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1808101435481.32304@sstabellini-ThinkPad-X260>
- <1533945710-15159-5-git-send-email-sstabellini@kernel.org>
- <01aba56f-4a72-a3bf-bb36-f84b7aa37572@arm.com>
- <alpine.DEB.2.10.1810101537540.436@sstabellini-ThinkPad-X260>
- <f75422fb-a620-4471-b653-7b39738fab87@arm.com>
- <08721368-7795-6f3c-8b55-b4d3add8bc08@arm.com>
+From: Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: Re: Xen optimization
+Date: Tue, 16 Oct 2018 15:13:37 +0800
+Message-ID: <alpine.DEB.2.10.1810161450350.5150@sstabellini-ThinkPad-X260>
+References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
+ <995da0578f0953662536edabb5807fd76ca4d8ce.camel@suse.com>
+ <CADJ6SV1yDBptrcaoqUPChtnXTmvhbzj-AAv2FDN2LCMyTipc-A@mail.gmail.com>
+ <CAENZ-+=mWFnJ-4OFK+bjb4rimNNB_x4qHFVAbTM1mFd2Sg7s3g@mail.gmail.com>
+ <CADJ6SV1Mdnjyd8oEcB4ZCZKuR0LkJ82GCf5s1+AwgASe8vLMWg@mail.gmail.com>
+ <alpine.DEB.2.10.1810111024390.436@sstabellini-ThinkPad-X260>
+ <CADJ6SV2v5=_MqfrABdfs1rcQ-BmCUJYyi_9fG8BC7C2vyxaqBA@mail.gmail.com>
+ <alpine.DEB.2.10.1810121035440.436@sstabellini-ThinkPad-X260>
+ <CADJ6SV3jk=nnP=6T8R+OuvJH2uQ6uBrLmvudAHkKHP+mN-3hPA@mail.gmail.com>
+ <alpine.DEB.2.10.1810141301420.4859@sstabellini-ThinkPad-X260>
+ <CADJ6SV1n2YcUzz9WrPn1Dtp+AWQ_VJQPQ447Ys7+OsoTsXqb4A@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1793510765-1539672532=:5150"
+Content-Type: multipart/mixed; boundary="8323329-1709674500-1539673748=:5150"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <08721368-7795-6f3c-8b55-b4d3add8bc08@arm.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=vef8=m4=xilinx.com=stefanos@srs-us1.protection.inumbo.net>)
+ id 1gCJYD-0008Hz-Sm
+ for xen-devel@lists.xenproject.org; Tue, 16 Oct 2018 07:13:58 +0000
+In-Reply-To: <CADJ6SV1n2YcUzz9WrPn1Dtp+AWQ_VJQPQ447Ys7+OsoTsXqb4A@mail.gmail.com>
+Content-ID: <alpine.DEB.2.10.1810161509090.5150@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,71 +31,310 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: edgar.iglesias@xilinx.com, Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <stefano.stabellini@xilinx.com>, xen-devel@lists.xen.org, Stefano Stabellini <sstabellini@kernel.org>, nd <nd@arm.com>
+To: Milan Boberic <milanboberic94@gmail.com>
+Cc: sstabellini@kernel.org, andrii_anisov@epam.com, Dario Faggioli <dfaggioli@suse.com>, julien.grall@arm.com, Meng Xu <xumengpanda@gmail.com>, xen-devel@lists.xenproject.org, stefano.stabellini@xilinx.com
 List-Id: xen-devel@lists.xenproject.org
 
   This message is in MIME format.  The first part should be readable text,
   while the remaining parts are likely unreadable without MIME-aware tools.
 
---8323329-1793510765-1539672532=:5150
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+--8323329-1709674500-1539673748=:5150
+Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
+Content-ID: <alpine.DEB.2.10.1810161509091.5150@sstabellini-ThinkPad-X260>
 
-On Mon, 15 Oct 2018, Julien Grall wrote:
-> (Resending the e-mail using a different smtp)
+On Mon, 15 Oct 2018, Milan Boberic wrote:
+> In attachment are device-tree files I found in my project:
 > 
-> On 15/10/2018 08:32, Julien Grall wrote:
-> > Hi,
-> > 
-> > On 10/10/2018 11:49 PM, Stefano Stabellini wrote:
-> > > On Tue, 28 Aug 2018, Julien Grall wrote:
-> > > > Hi Stefano,
-> > > > 
-> > > > On 11/08/18 01:01, Stefano Stabellini wrote:
-> > > > > From: "Edgar E. Iglesias" <edgar.iglesias@xilinx.com>
-> > > > > 
-> > > > > From: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
-> > > > > 
-> > > > > zynqmp_eemi uses the defined functions and structs to decide whether
-> > > > > to
-> > > > > make a call to the firmware, or to simply return a predefined value.
-> > > > > 
-> > > > > Signed-off-by: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
-> > > > > Signed-off-by: Stefano Stabellini <stefanos@xilinx.com>
-> > > > > ---
-> > > > >    xen/arch/arm/platforms/xilinx-zynqmp-eemi.c | 143
-> > > > > +++++++++++++++++++++++++++-
-> > > > >    1 file changed, 142 insertions(+), 1 deletion(-)
-> > > > > 
-> > > > > diff --git a/xen/arch/arm/platforms/xilinx-zynqmp-eemi.c
-> > > > > b/xen/arch/arm/platforms/xilinx-zynqmp-eemi.c
-> > > > > index 62cc15c..1dbdf04 100644
-> > > > > --- a/xen/arch/arm/platforms/xilinx-zynqmp-eemi.c
-> > > > > +++ b/xen/arch/arm/platforms/xilinx-zynqmp-eemi.c
-> > > > > @@ -808,7 +808,148 @@ static bool domain_has_mmio_access(struct domain
-> > > > > *d,
-> > > > >      bool zynqmp_eemi(struct cpu_user_regs *regs)
-> > > > >    {
-> > > > > -    return false;
-> > > > > +    struct arm_smccc_res res;
-> > > > > +    bool is_mmio_write = false;
-> > > > > +    uint32_t fid = get_user_reg(regs, 0);
-> > > > > +    uint32_t nodeid = get_user_reg(regs, 1);
-> > > > > +    unsigned int pm_fn = fid & 0xFFFF;
-> > > > 
-> > > > Here you will receive all the function ID for the SIP subsystem. Can you
-> > > > confirm the EEMI can be accessed from both SMC32 and SMC64 convention?
-> > > 
-> > > Yep
-> > 
-> > Can you point me to the documentation? For instance, CALL_COUNT, UID and
-> > VERSION are only accessible via SMC32.
+> device-tree.bbappend - under
+> <path_to_project>/uz3eg_iocc_2018_2/project-spec/meta-user/recipes-bsp/device-tree/
+> 
+> xen-overlay.dtsi , system-user.dtsi and zunqmp-qemu-arm.dts - under
+> <path_to_project>/uz3eg_iocc_2018_2/project-spec/meta-user/recipes-bsp/device-tree/files
+> 
+> zynqmp-qemu-multiarch-arm and zynqmp-qemu-pmu - under
+> <path_to_project>/uz3eg_iocc_2018_2/project-spec/meta-user/recipes-bsp/device-tree/files/multi-arch
+> 
+> pcw.dtsi , pl.dtsi , system-conf.dtsi , sistem-top.dts ,
+> zynqmp-clk-ccf.dtsi and zynqmp.dtsi -
+> under<path_to_project>/uz3eg_iocc_2018_2/components/plnx_workspace/device-tree/device-tree/
+> 
+> In system-conf.dtsi file first line says:
+> /*
+>  * CAUTION: This file is automatically generated by PetaLinux SDK.
+>  * DO NOT modify this file
+>  */
+> and there is no sigh of timer.
+> If you could take a look at this and other files in attachment it
+> would be great.
 
-https://www.xilinx.com/support/documentation/user_guides/ug1200-eemi-api.pdf
+The device tree with everything seems to be system.dts, that was enough
+:-)  I don't need the dtsi files you used to build the final dts, I only
+need the one you use in uboot and for your guest.
 
-I am checking if there is a newer version of it.
---8323329-1793510765-1539672532=:5150
+In system.dts, the timers are all there:
+
+		timer@ff110000 {
+			compatible = "cdns,ttc";
+			status = "okay";
+			interrupt-parent = <0x4>;
+			interrupts = <0x0 0x24 0x4 0x0 0x25 0x4 0x0 0x26 0x4>;
+			reg = <0x0 0xff110000 0x0 0x1000>;
+			timer-width = <0x20>;
+			power-domains = <0x3b>;
+			clocks = <0x3 0x1f>;
+			xen,passthrough;
+		};
+
+		timer@ff120000 {
+			compatible = "cdns,ttc";
+			status = "disabled";
+			interrupt-parent = <0x4>;
+			interrupts = <0x0 0x27 0x4 0x0 0x28 0x4 0x0 0x29 0x4>;
+			reg = <0x0 0xff120000 0x0 0x1000>;
+			timer-width = <0x20>;
+			power-domains = <0x3b>;
+			clocks = <0x3 0x1f>;
+		};
+
+		timer@ff130000 {
+			compatible = "cdns,ttc";
+			status = "disabled";
+			interrupt-parent = <0x4>;
+			interrupts = <0x0 0x2a 0x4 0x0 0x2b 0x4 0x0 0x2c 0x4>;
+			reg = <0x0 0xff130000 0x0 0x1000>;
+			timer-width = <0x20>;
+			power-domains = <0x3c>;
+			clocks = <0x3 0x1f>;
+		};
+
+		timer@ff140000 {
+			compatible = "cdns,ttc";
+			status = "disabled";
+			interrupt-parent = <0x4>;
+			interrupts = <0x0 0x2d 0x4 0x0 0x2e 0x4 0x0 0x2f 0x4>;
+			reg = <0x0 0xff140000 0x0 0x1000>;
+			timer-width = <0x20>;
+			power-domains = <0x3d>;
+			clocks = <0x3 0x1f>;
+		};
+
+It looks like you set xen,passthrough correctly in system.dts for
+timer@ff110000, serial@ff010000, and gpio@ff0a0000.
+
+
+
+> I also tried to run bare-metal app with this changes and it worked, added:
+> 
+> &ttc0 {
+>         status = "okay";
+>         compatible = "cdns,ttc";
+>         interrupt-parent = <0x4>;
+>         interrupts = <0x0 0x24 0x4 0x0 0x25 0x4 0x0 0x26 0x4>;
+>         reg = <0x0 0xff110000 0x0 0x1000>;
+>         timer-width = <0x20>;
+>         power-domains = <0x3b>;
+>         xen,passthrough;
+> 
+> };
+> 
+> in xen-overlay.dtsi file, because it's overlay it shouldn't duplicate
+> timer nod, right?
+
+As I wrote, system.dts looks correct.
+
+
+> After build I ran:
+>  dtc -I dtb -O dts -o system.dts system.dtb
+> and checked for ttc0, it seems okay except interrupt-parent is <0x4>
+> not <0x2> like in your example:
+
+I don't know what you are referring to. In the system.dts you attached
+interrupt-parent is <0x4> which is correct:
+
+		timer@ff110000 {
+			compatible = "cdns,ttc";
+			status = "okay";
+			interrupt-parent = <0x4>;
+
+
+> timer@ff110000 {
+> compatible = "cdns,ttc";
+> status = "okay";
+> interrupt-parent = <0x4>;
+> interrupts = <0x0 0x24 0x4 0x0 0x25 0x4 0x0 0x26 0x4>;
+> reg = <0x0 0xff110000 0x0 0x1000>;
+> timer-width = <0x20>;
+> power-domains = <0x3b>;
+> clocks = <0x3 0x1f>;
+> xen,passthrough;
+> };
+> status was "disable" before.
+> system.dts is also added in attachment.
+
+status is "okay" in the system.dts you attached. That is important
+because status = "disable" it means the device cannot be used.
+
+
+> Is this the working passthrough?Because jitter is the same .
+> 
+> When legit, working passthrough is set correctly, jitter should be
+> smaller, right?
+
+If you are not getting any errors anymore when creating your baremetal
+guest, then yes, it should be working passthrough. I would double-check
+that everything is working as expected using the DEBUG patch for Xen I
+suggested to you in the other email. You might even want to remove the
+"if" check and always print something for every interrupt of your guest
+just to get an idea of what's going on. See the attached patch.
+
+Once everything is as expected I would change the frequency of the
+timer, because 1u is way too frequent. I think it should be at least
+3us, more like 5us. Keep in mind that jitter is about having
+deterministic IRQ latency, not about having extremely frequent
+interrupts.
+
+I would also double check that you are not using any other devices or
+virtual interfaces in your baremetal app because that could negatively
+affect the numbers. For instance, Linux by default uses the virtual
+timer interface ("arm,armv8-timer", I would double check that the
+baremetal app is not doing the same -- you don't want to be using two
+timers when doing your measurements.
+
+
+> Thanks in advance!
+> Milan
+> On Mon, Oct 15, 2018 at 12:50 AM Stefano Stabellini
+> <stefano.stabellini@xilinx.com> wrote:
+> >
+> > On Sat, 13 Oct 2018, Milan Boberic wrote:
+> > > > This is definitely wrong. Can you please also post the full host device
+> > > > tree with your modifications that you are using for Xen and Dom0?  You
+> > > > should have something like:
+> > > >
+> > > >         timer@ff110000 {
+> > > >             compatible = "cdns,ttc";
+> > > >             interrupt-parent = <0x2>;
+> > > >             interrupts = <0x0 0x24 0x4 0x0 0x25 0x4 0x0 0x26 0x4>;
+> > > >             reg = <0x0 0xff110000 0x0 0x1000>;
+> > > >             timer-width = <0x20>;
+> > > >             power-domains = <0x3b>;
+> > > >             xen,passthrough;
+> > > >         };
+> > > > For each of the nodes of the devices you are assigning to the DomU.
+> > >
+> > > I put
+> > > &ttc0 {
+> > >    xen,passthrough = <0x1>;
+> > > };
+> > > because when I was making bm app I was following this guide. Now I see
+> > > it's wrong. When I copied directly:
+> > > timer@ff110000 {
+> > >             compatible = "cdns,ttc";
+> > >             interrupt-parent = <0x2>;
+> > >             interrupts = <0x0 0x24 0x4 0x0 0x25 0x4 0x0 0x26 0x4>;
+> > >             reg = <0x0 0xff110000 0x0 0x1000>;
+> > >             timer-width = <0x20>;
+> > >             power-domains = <0x3b>;
+> > >             xen,passthrough;
+> > >         };
+> > > in to the xen-overlay.dtsi file it resulted an error during
+> > > device-tree build. I modified it a little bit so I can get successful
+> > > build, there are all device-tree files included in attachment. I'm not
+> > > sure how to set this passthrough properly, if you could take a look at
+> > > those files in attachment I'd be more then grateful.
+> > >
+> > > > It's here: https://github.com/Xilinx/xen/blob/xilinx/stable-4.9/xen/arch/arm/vgic.c#L462
+> > > Oh, about that. I sent you wrong branch, I was using Xen 4.10. Anyway
+> > > now I moved to Xen 4.11 like you suggested and applied your patch and
+> > > Dario's also.
+> > >
+> > > Okay, now when I want to xl create my domU (bare-metal app) I get error:
+> > >
+> > > Parsing config from timer.cfg
+> > > (XEN) IRQ 68 is already used by domain 0
+> > > libxl: error: libxl_create.c:1354:domcreate_launch_dm: Domain 1:failed
+> > > give domain access to irq 68: Device or resource busy
+> > > libxl: error: libxl_domain.c:1034:libxl__destroy_domid: Domain
+> > > 1:Non-existant domain
+> > > libxl: error: libxl_domain.c:993:domain_destroy_callback: Domain
+> > > 1:Unable to destroy guest
+> > > libxl: error: libxl_domain.c:920:domain_destroy_cb: Domain
+> > > 1:Destruction of domain failed
+> >
+> > That means that the "xen,passthrough" addition to the host device tree went wrong.
+> >
+> >
+> > > I guess my modifications of:
+> > > timer@ff110000 {
+> > >             compatible = "cdns,ttc";
+> > >             interrupt-parent = <0x2>;
+> > >             interrupts = <0x0 0x24 0x4 0x0 0x25 0x4 0x0 0x26 0x4>;
+> > >             reg = <0x0 0xff110000 0x0 0x1000>;
+> > >             timer-width = <0x20>;
+> > >             power-domains = <0x3b>;
+> > >             xen,passthrough;
+> > >         };
+> > > are not correct.
+> >
+> > Right
+> >
+> >
+> > > I tried to change interrupts to:
+> > >  interrupts = <0x0 0x44 0x4 0x0 0x45 0x4 0x0 0x46 0x4>;
+> > > because if you check here on page 310 interrupts for TTC0 are 68:70.
+> > > But that didn't work either I still get same error.
+> >
+> > The interrupt numbers specified in the DTS are the real interrupt minus
+> > 32: 68-32 = 36 = 0x24. The DTS was correct.
+> >
+> >
+> > > I also tried to change xen,passthrough; line with:
+> > > xen,passthrough = <0x1>;
+> > > but also without success, still the same error.
+> > >
+> > > Are you sure about this line:
+> > > reg = <0x0 0xff110000 0x0 0x1000>;   ?
+> > > Or it should be like this?
+> > >  reg = <0x0 0xff110000 0x1000>;
+> >
+> > Yes, that could be a problem. The format depends on the #address-cells
+> > and #size-cells parameters. You didn't send me system-conf.dtsi, so I
+> > don't know for sure which one of the two is right. In any case, you
+> > should not duplicate the timer@ff110000 node in device tree. You should
+> > only add "xen,passthrough;" to the existing timer@ff110000 node, which
+> > is probably in system-conf.dtsi. So, avoid adding a new timer node to
+> > xen-overlay.dtsi, and instead modify system-conf.dtsi.
+> >
+> >
+> > > I also included xl dmesg and dmesg in attachments (after xl create of bm app).
+> > >
+> > > Thanks in advance!
+> > >
+> > > Milan
+> > >
+> 
+--8323329-1709674500-1539673748=:5150
+Content-Type: TEXT/PLAIN; charset=US-ASCII; name=5
+Content-Transfer-Encoding: BASE64
+Content-ID: <alpine.DEB.2.10.1810161513370.5150@sstabellini-ThinkPad-X260>
+Content-Description: 
+Content-Disposition: attachment; filename=5
+
+ZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS92Z2ljLmMgYi94ZW4vYXJjaC9h
+cm0vdmdpYy5jDQppbmRleCA1YTRmMDgyLi5iN2E4ZTE3IDEwMDY0NA0KLS0t
+IGEveGVuL2FyY2gvYXJtL3ZnaWMuYw0KKysrIGIveGVuL2FyY2gvYXJtL3Zn
+aWMuYw0KQEAgLTU3Nyw3ICs1NzcsMTEgQEAgdm9pZCB2Z2ljX2luamVjdF9p
+cnEoc3RydWN0IGRvbWFpbiAqZCwgc3RydWN0IHZjcHUgKnYsIHVuc2lnbmVk
+IGludCB2aXJxLA0KIA0KICAgICAvKiB0aGUgaXJxIGlzIGVuYWJsZWQgKi8N
+CiAgICAgaWYgKCB0ZXN0X2JpdChHSUNfSVJRX0dVRVNUX0VOQUJMRUQsICZu
+LT5zdGF0dXMpICkNCisgICAgew0KICAgICAgICAgZ2ljX3JhaXNlX2d1ZXN0
+X2lycSh2LCB2aXJxLCBwcmlvcml0eSk7DQorICAgICAgICBpZiAoIGQtPmRv
+bWFpbl9pZCAhPSAwICkNCisgICAgICAgICAgICBwcmludGsoIkRFQlVHIHZp
+cnE9JWQgbG9jYWw9JWRcbiIsdmlycSx2ID09IGN1cnJlbnQpOw0KKyAgICB9
+DQogDQogICAgIGxpc3RfZm9yX2VhY2hfZW50cnkgKCBpdGVyLCAmdi0+YXJj
+aC52Z2ljLmluZmxpZ2h0X2lycXMsIGluZmxpZ2h0ICkNCiAgICAgew0K
+
+--8323329-1709674500-1539673748=:5150
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -95,4 +344,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---8323329-1793510765-1539672532=:5150--
+--8323329-1709674500-1539673748=:5150--
