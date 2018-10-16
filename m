@@ -1,20 +1,18 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 3/4] xen: introduce __symbol
-Date: Tue, 16 Oct 2018 09:34:01 +0800 (CST)
-Message-ID: <alpine.DEB.2.10.1810160917290.4859@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1810142125100.4859@sstabellini-ThinkPad-X260>
- <1539597367-25807-3-git-send-email-sstabellini@kernel.org>
- <066c1266-8e5d-ae29-e5be-cf5271e7606c@arm.com>
+Subject: Re: [PATCH v3 4/6] xen/arm: zynqmp: eemi access control
+Date: Tue, 16 Oct 2018 10:39:31 +0800 (CST)
+Message-ID: <alpine.DEB.2.10.1810160947370.4859@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1808101435481.32304@sstabellini-ThinkPad-X260>
+ <1533945710-15159-4-git-send-email-sstabellini@kernel.org>
+ <79f450e4-7f96-3f9d-d267-a3aa38b1f26a@arm.com>
+ <alpine.DEB.2.10.1810101455160.436@sstabellini-ThinkPad-X260>
+ <0efa6dec-8800-f294-e16f-8cf6d4067a84@arm.com>
+ <bb36e227-6c35-ed22-a2d0-bffec03a193d@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-202406964-1539654833=:4859"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=pf7c=m4=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1gCEFQ-0007Ik-6D
- for xen-devel@lists.xenproject.org; Tue, 16 Oct 2018 01:34:12 +0000
-In-Reply-To: <066c1266-8e5d-ae29-e5be-cf5271e7606c@arm.com>
+In-Reply-To: <bb36e227-6c35-ed22-a2d0-bffec03a193d@arm.com>
+Content-ID: <alpine.DEB.2.10.1810161000540.4859@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,52 +22,298 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@arm.com>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xenproject.org, nd@arm.com
+Cc: edgar.iglesias@xilinx.com, Stefano Stabellini <stefanos@xilinx.com>, nd <nd@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAxNSBPY3QgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpLAo+IAo+IFBsZWFz
-ZSB1c2Ugc2NyaXB0cy9nZXRfbWFpbnRhaW5lcnMucGwgdG8gQ0MgcmVsZXZhbnQgbWFpbnRhaW5l
-cnMuCj4gCj4gT24gMTUvMTAvMjAxOCAxMDo1NiwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+
-ID4gSW50cm9kdWNlIGEgbWFjcm8sIF9fc3ltYm9sLCB3aGljaCBpcyBhIHNpbXBsZSB3cmFwcGVy
-IGFyb3VuZCBSRUxPQ19ISURFCj4gPiB0byBiZSB1c2VkIGV2ZXJ5d2hlcmUgc3ltYm9scyBzdWNo
-IGFzIF9zdGV4dCBhbmQgX2V0ZXh0IGFyZSB1c2VkIGluIHRoZQo+ID4gY29kZS4KPiA+IAo+ID4g
-UkVMT0NfSElERSBpcyBuZWVkZWQgd2hlbiBhY2Nlc3Npbmcgc3ltYm9scyBzdWNoIGFzIF9zdGV4
-dCBhbmQgX2V0ZXh0Cj4gPiBiZWNhdXNlIHRoZSBDIHN0YW5kYXJkIGZvcmJpZHMgY29tcGFyaXNv
-bnMgYmV0d2VlbiBwb2ludGVycyBwb2ludGluZyB0bwo+ID4gZGlmZmVyZW50IG9iamVjdHMuIF9z
-dGV4dCwgX2V0ZXh0LCBldGMuIGFyZSBhbGwgcG9pbnRlcnMgdG8gZGlmZmVyZW50Cj4gPiBvYmpl
-Y3RzIGZyb20gQU5DSSBDIHBvaW50IG9mIHZpZXcuCj4gPiAKPiA+IFRvIHdvcmsgYXJvdW5kIHBv
-dGVudGlhbCBDIGNvbXBpbGVyIGlzc3VlcyAod2hpY2ggaGF2ZSBhY3R1YWxseQo+ID4gYmVlbiBm
-b3VuZCwgc2VlIHRoZSBjb21tZW50IG9uIHRvcCBvZiBSRUxPQ19ISURFIGluIExpbnV4KSwgYW5k
-IHRvIGhlbHAKPiA+IHdpdGggY2VydGlmaWNhdGlvbnMsIGxldCdzIGludHJvZHVjZSBzb21lIHN5
-bnRhY3RpYyBzdWdhciB0byBiZSB1c2VkIGluCj4gPiBmb2xsb3dpbmcgcGF0Y2hlcy4KPiA+IAo+
-ID4gU2lnbmVkLW9mZi1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxzdGVmYW5vc0B4aWxpbnguY29t
-Pgo+ID4gLS0tCj4gPiAgIHhlbi9pbmNsdWRlL2FzbS1hcm0vbW0uaCAgIHwgNiArKysrKysKPiA+
-ICAgeGVuL2luY2x1ZGUvYXNtLXg4Ni9wYWdlLmggfCA2ICsrKysrKwo+ID4gICAyIGZpbGVzIGNo
-YW5nZWQsIDEyIGluc2VydGlvbnMoKykKPiA+IAo+ID4gZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRl
-L2FzbS1hcm0vbW0uaCBiL3hlbi9pbmNsdWRlL2FzbS1hcm0vbW0uaAo+ID4gaW5kZXggOTQwYjc0
-Yi4uMDJjZTA1YSAxMDA2NDQKPiA+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vbW0uaAo+ID4g
-KysrIGIveGVuL2luY2x1ZGUvYXNtLWFybS9tbS5oCj4gPiBAQCAtMjg0LDYgKzI4NCwxMiBAQCBz
-dGF0aWMgaW5saW5lIHVpbnQ2NF90IGd2aXJ0X3RvX21hZGRyKHZhZGRyX3QgdmEsCj4gPiBwYWRk
-cl90ICpwYSwKPiA+ICAgI2RlZmluZSBfX21mbl90b192aXJ0KG1mbikgKG1hZGRyX3RvX3ZpcnQo
-KHBhZGRyX3QpKG1mbikgPDwgUEFHRV9TSElGVCkpCj4gPiAgICAgLyoKPiA+ICsgKiBVc2UgUkVM
-T0NfSElERSB3aXRoIHN5bWJvbHMgc3VjaCBhcyBfc3RleHQgYW5kIF9ldGV4dCB0byBhdm9pZCBl
-cnJvcnMKPiA+ICsgKiBvbiBjb21wYXJpbmcgcG9pbnRlcnMgdG8gZGlmZmVyZW50IG9iamVjdHMK
-PiA+ICsgKi8KPiA+ICsjZGVmaW5lIF9fc3ltYm9sKHgpICAgICAgICAgKChjaGFyICopUkVMT0Nf
-SElERSgodW5zaWduZWQgbG9uZykoeCksIDApKQo+IAo+IFRoZXJlIGFyZSBubyBkaWZmZXJlbnQg
-YmV0d2VlbiBhcm0gYW5kIHg4Ni4gQSBiZXR0ZXIgcGxhY2Ugd291bGQgYmUKPiB4ZW4vY29tcGls
-ZXIuaCAob3Igc29tZXRoaW5nIGNvbW1vbikuCgpPSwoKCj4gQnV0LCBhZnRlciB0aGlzIHBhdGNo
-LCB0aGVyZSBhcmUgZXZlbiBtb3JlIGNoYW5jZSB0aGUgY29tcGlsZXIgd2lsbCBjb25zaWRlcgo+
-IHRoYXQgMiBfc3ltYm9sKC4uLikgd2lsbCBjb21lIGZyb20gZGlmZmVyZW50IG9iamVjdHMuIFNv
-IGhvdyBpcyB0aGlzIG1lYW50IHRvCj4gaGVscCBoZXJlPwoKSSB0aGluayB0aGUgbWlzdGFrZSB3
-YXMgdG8gY2FzdCB0aGUgcmV0dXJuIHRvIGNoYXIqLiBJZiBJIHJlbW92ZSB0aGUKY2FzdCwgYXMg
-QW5kcmV3IHN1Z2dlc3RlZCwgdGhlbiBhbnkgY29tcGFyaXNvbiB3b3VsZCBiZSBhIGNvbXBhcmlz
-b24KYmV0d2VlbiB1bnNpZ25lZCBsb25nLCB0aGF0IHNob3VsZCBiZSBhY2NlcHRlZCBhbmQgc2Fm
-ZS4KCkhvd2V2ZXIsIHRoZSBwYXJhbWV0ZXIgdG8gUkVMT0NfSElERSBoYXMgdG8gYmUgY2FzdGVk
-IHRvIHVuc2lnbmVkIGxvbmcsCmJlY2F1c2UgbW9zdCBvZnRlbiB3ZSBwYXNzIGNoYXIqOgoKL2xv
-Y2FsL3JlcG9zL3hlbi11cHN0cmVhbS94ZW4vaW5jbHVkZS94ZW4vY29tcGlsZXIuaDoxMDA6NTog
-ZXJyb3I6IGNhc3Qgc3BlY2lmaWVzIGFycmF5IHR5cGUKICAgICAodHlwZW9mKHB0cikpIChfX3B0
-ciArIChvZmYpKTsgfSkKClNvIEkgdGhpbmsgdGhlIF9fc3ltYm9sIG1hY3JvIHNob3VsZCBiZToK
-CisjZGVmaW5lIF9fc3ltYm9sKHgpICAgICAgICAgKFJFTE9DX0hJREUoKHVuc2lnbmVkIGxvbmcp
-KHgpLCAwKSkKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-202406964-1539654833=:4859
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1810161000541.4859@sstabellini-ThinkPad-X260>
+
+On 15/10/2018 08:25, Julien Grall wrote:
+> Hi,
+> 
+> On 10/10/2018 11:35 PM, Stefano Stabellini wrote:
+> > On Tue, 28 Aug 2018, Julien Grall wrote:
+> > > On 11/08/18 01:01, Stefano Stabellini wrote:
+> > > >    #include <xen/iocap.h>
+> > > >    #include <xen/sched.h>
+> > > >    #include <xen/types.h>
+> > > > @@ -23,6 +91,721 @@
+> > > >    #include <asm/regs.h>
+> > > >    #include <asm/platforms/xilinx-zynqmp-eemi.h>
+> > > >    +struct pm_access
+> > > > +{
+> > > > +    paddr_t addr;
+> > > 
+> > > It seems that the address will always page-aligned. So could we store a
+> > > frame
+> > > using mfn_t?
+> > 
+> > Yes we could store just the frame. I started to make the change
+> > suggested, and all the required corresponding changes to the
+> > initializations below, for instance:
+> > 
+> >    [NODE_RPU] = { MM_RPU },
+> > 
+> > needs to become:
+> > 
+> >    [NODE_RPU] = { _mfn(MM_RPU) },
+> > 
+> > but when I tried to do that, I get a compilation error:
+> > 
+> >    xilinx-zynqmp-eemi.c:106:20: error: initializer element is not constant
+> >         [NODE_RPU] = { _mfn(MM_RPU) },
+> > 
+> > Unfortunately it is not possible to use mfn_t in static initializations,
+> > because it is a static inline. I could do:
+> > 
+> 
+> This is a bug in GCC older than 5.0.
+> 
+> >    [NODE_RPU] = { { MM_RPU } },
+> > 
+> > which would work for DEBUG builds but wouldn't work for non-DEBUG
+> > builds.
+> > 
+> > I'll keep paddr_t for the next version of the series.
+> 
+> What is the issue with that on non-debug build? We are using this
+> construction in another place without any compiler issue.
+
+I modified the code as suggested again and tried with newer GCCs (both
+6.3.1 and 7.3.1) but I still get the same error:
+
+xilinx-zynqmp-eemi.c:105:20: error: initializer element is not constant
+     [NODE_RPU] = { _mfn(MM_RPU) },
+
+I pushed a temporary branch here (only with patches up until this one,
+removing the #if 0, so if everything goes well you should still get the
+function unused warnings) just in case you want to give it a try:
+
+http://xenbits.xenproject.org/git-http/people/sstabellini/xen-unstable.git eemi-upstreaming-wip
+
+
+> > 
+> > 
+> > > > +    bool hwdom_access;    /* HW domain gets access regardless.  */
+> > > > +};
+> > > > +
+> > > > +/*
+> > > > + * This table maps a node into a memory address.
+> > > > + * If a guest has access to the address, it has enough control
+> > > > + * over the node to grant it access to EEMI calls for that node.
+> > > > + */
+> > > > +static const struct pm_access pm_node_access[] = {
+> > > 
+> > > [...]
+> > > 
+> > > > +
+> > > > +/*
+> > > > + * This table maps reset line IDs into a memory address.
+> > > > + * If a guest has access to the address, it has enough control
+> > > > + * over the affected node to grant it access to EEMI calls for
+> > > > + * resetting that node.
+> > > > + */
+> > > > +#define XILPM_RESET_IDX(n) (n - XILPM_RESET_PCIE_CFG)
+> > > > +static const struct pm_access pm_reset_access[] = {
+> > > 
+> > > [...]
+> > > 
+> > > > +
+> > > > +/*
+> > > > + * This table maps reset line IDs into a memory address.
+> > > > + * If a guest has access to the address, it has enough control
+> > > > + * over the affected node to grant it access to EEMI calls for
+> > > > + * resetting that node.
+> > > > + */
+> > > > +static const struct {
+> > > > +    paddr_t start;
+> > > > +    paddr_t size;
+> > > > +    uint32_t mask;   /* Zero means no mask, i.e all bits.  */
+> > > > +    enum pm_node_id node;
+> > > > +    bool hwdom_access;
+> > > > +    bool readonly;
+> > > > +} pm_mmio_access[] = {
+> > > 
+> > > Those 3 arrays contains a lot of hardcoded value. Can't any of this be
+> > > detected from the device-tree?
+> > 
+> > No, the information is not available on device tree unfortunately. >
+> > 
+> > > I would be interested to know how this is going to work with upstream
+> > > Linux.
+> > > Do you hardcode all the values there as well?
+> > 
+> > Yes: the IDs are specified on an header file, see
+> > include/linux/firmware/xlnx-zynqmp.h on the zynq/firmware branch of the
+> > arm-soc tree. In addition to the IDs, we also have the memory addresses
+> > in Xen to do the permission checks.
+> 
+> I am afraid this is not linux upstream. Can you point to the code in Linus's
+> git or explain the state of the review?
+
+It hasn't been pulled into Linux yet, I was told it has already been
+reviewed and is queued in arm-soc for upstreaming at the next merge
+window, which should be imminent.
+
+ 
+> > > > +static bool pm_check_access(const struct pm_access *acl, struct
+> > > > domain *d,
+> > > > +                            uint32_t idx)
+> > > > +{
+> > > > +    unsigned long mfn;
+> > > 
+> > > mfn_t please. The code is not that nice but at least it add more safety
+> > > in the
+> > > code. Hopefully iommu_access_permitted will be converted to typesafe MFN
+> > > soon.
+> > 
+> > Yes, I can make this change without issues.
+> > 
+> > 
+> > > > +
+> > > > +    if ( acl[idx].hwdom_access && is_hardware_domain(d) )
+> > > > +        return true;
+> > > > +
+> > > > +    if ( !acl[idx].addr )
+> > > > +        return false;
+> > > > +
+> > > > +    mfn = PFN_DOWN(acl[idx].addr);
+> > > 
+> > > maddr_to_mfn(...);
+> > 
+> > OK
+> > 
+> > 
+> > > > +    return iomem_access_permitted(d, mfn, mfn);
+> > > 
+> > > Is the address something that a guest would be allowed to read/write
+> > > directly?
+> > > If not, then iomem_access_permitted(...) should not be used.
+> > 
+> > Yes, the address would be something remapped to the guest using iomem.
+> 
+> In the documentation at the beginning of the file you say that memory ranges
+> are typically secure memory. So how a guest can access them directly?
+> 
+> I probably need a bit more background here... What is the address correspond
+> to at the end?
+
+The address corresponds to the MMIO region of the device. For instance,
+MM_GEM0 is 0xff0b0000, which is the address of the network card. It is
+accessible. The same goes for MM_CAN0, MM_TTC0, MM_SD0, and all the
+others -- they are all accessible. These are the addresses used in this
+check that should be remapped into the guest.
+
+However, things are different for the pm_mmio_access array used in
+domain_has_mmio_access to check for access rights. (That is also where
+the mask is applied to writes and not to reads, see below.) In that
+case, the addresses correspond to single registers inside the
+zynqmp-psgtr region ("ZynqMP High Speed Processing System Gigabit
+Transceiver") and pin controller region. As you can see, in
+domain_has_mmio_access the access checks are still done on the
+corresponding node address, which is the one that gets remapped. For
+instance in the case of the network card, the remapped address is
+0xff0b0000, checks are done on it, but the zynqmp-psgtr and pin
+contoller region registers are:
+
+{
+    .start = MM_CRL_APB + R_CRL_GEM0_REF_CTRL,
+    .size = 4, .node = NODE_ETH_0
+}
+[...]
+{
+    .start = MM_IOU_SLCR + R_IOU_SLCR_IOU_RAM_GEM0,
+    .size = 4, .node = NODE_ETH_0
+}
+
+The comment comes from Edgar, but I think that he meant that VMs won't
+be able to write to these regions directly. I'll improve the comment.
+
+
+> > > > +{
+> > > > +    unsigned int i;
+> > > > +    bool ret = false;
+> > > > +    uint32_t prot_mask = 0;
+> > > > +
+> > > > +    /*
+> > > > +     * The hardware domain gets read access to everything.
+> > > > +     * Lower layers will do further filtering.
+> > > > +     */
+> > > > +    if ( !write && is_hardware_domain(d) )
+> > > > +        return true;
+> > > > +
+> > > > +    /* Scan the ACL.  */
+> > > > +    for ( i = 0; i < ARRAY_SIZE(pm_mmio_access); i++ )
+> > > > +    {
+> > > > +        if ( addr < pm_mmio_access[i].start )
+> > > > +            return false;
+> > > > +        if ( addr > pm_mmio_access[i].start + pm_mmio_access[i].size
+> > > > )
+> > > 
+> > > I would add an ASSERT(pm_mmio_access[i].start >= pm_mmio_access[i].size)
+> > > to
+> > > catch wrapping.
+> > 
+> > I take that you meant the following:
+> > 
+> >    ASSERT(pm_mmio_access[i].start + pm_mmio_access[i].size >=
+> > pm_mmio_access[i].start)
+> 
+> Yes.
+> 
+> > 
+> > 
+> > > > +            continue;
+> > > > +
+> > > > +        if ( write && pm_mmio_access[i].readonly )
+> > > > +            return false;
+> > > > +        if ( pm_mmio_access[i].hwdom_access && !is_hardware_domain(d)
+> > > > )
+> > > > +            return false;
+> > > > +        if ( !domain_has_node_access(d, pm_mmio_access[i].node) )
+> > > > +            return false;
+> > > > +
+> > > > +        /* We've got access to this reg (or parts of it).  */
+> > > > +        ret = true;
+> > > > +
+> > > > +        /* Permit write access to selected bits.  */
+> > > > +        prot_mask |= pm_mmio_access[i].mask ?: 0xFFFFFFFF;
+> > > Can you use GENMASK here?
+> > 
+> > Sure
+> > 
+> > > NIT: newline
+> > 
+> > OK
+> > 
+> > > > +        break;
+> > > > +    }
+> > > > +
+> > > > +    /* Masking only applies to writes.  */
+> > > > +    if ( write )
+> > > > +        *mask &= prot_mask;
+> > > 
+> > > So for reading there are no masking? What should be the value it?
+> > 
+> > Yes, this is my understanding. The value is safe to read, but not all
+> > bits are writeable.
+> 
+> It would be good to write that assumption somewhere.
+
+OK
+--8323329-202406964-1539654833=:4859
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-202406964-1539654833=:4859--
