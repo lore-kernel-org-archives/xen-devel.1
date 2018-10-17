@@ -1,7 +1,7 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: [PATCH v3 4/6] xen/arm: zynqmp: eemi access control
-Date: Wed, 17 Oct 2018 22:03:48 +0800 (CST)
-Message-ID: <alpine.DEB.2.10.1810172201590.3835@sstabellini-ThinkPad-X260>
+Date: Wed, 17 Oct 2018 15:26:54 +0100
+Message-ID: <35d6f7b5-8ca3-dfec-9857-0f1db79723b6@arm.com>
 References: <alpine.DEB.2.10.1808101435481.32304@sstabellini-ThinkPad-X260>
  <1533945710-15159-4-git-send-email-sstabellini@kernel.org>
  <79f450e4-7f96-3f9d-d267-a3aa38b1f26a@arm.com>
@@ -10,10 +10,13 @@ References: <alpine.DEB.2.10.1808101435481.32304@sstabellini-ThinkPad-X260>
  <bb36e227-6c35-ed22-a2d0-bffec03a193d@arm.com>
  <alpine.DEB.2.10.1810160947370.4859@sstabellini-ThinkPad-X260>
  <d519296a-7076-d3fd-d6f8-27a9b9adfb76@arm.com>
+ <alpine.DEB.2.10.1810172201590.3835@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1433526422-1539785086=:3835"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <d519296a-7076-d3fd-d6f8-27a9b9adfb76@arm.com>
+In-Reply-To: <alpine.DEB.2.10.1810172201590.3835@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,185 +25,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: edgar.iglesias@xilinx.com, Stefano Stabellini <stefanos@xilinx.com>, nd <nd@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: edgar.iglesias@xilinx.com, Stefano Stabellini <stefanos@xilinx.com>, nd <nd@arm.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1433526422-1539785086=:3835
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Tue, 16 Oct 2018, Julien Grall wrote:
-> Hi,
-> 
-> Sorry I forgot to answer to the rest of the e-mail.
-> 
-> On 10/16/2018 03:39 AM, Stefano Stabellini wrote:
-> > On 15/10/2018 08:25, Julien Grall wrote:
-> > > > > > +    bool hwdom_access;    /* HW domain gets access regardless.  */
-> > > > > > +};
-> > > > > > +
-> > > > > > +/*
-> > > > > > + * This table maps a node into a memory address.
-> > > > > > + * If a guest has access to the address, it has enough control
-> > > > > > + * over the node to grant it access to EEMI calls for that node.
-> > > > > > + */
-> > > > > > +static const struct pm_access pm_node_access[] = {
-> > > > > 
-> > > > > [...]
-> > > > > 
-> > > > > > +
-> > > > > > +/*
-> > > > > > + * This table maps reset line IDs into a memory address.
-> > > > > > + * If a guest has access to the address, it has enough control
-> > > > > > + * over the affected node to grant it access to EEMI calls for
-> > > > > > + * resetting that node.
-> > > > > > + */
-> > > > > > +#define XILPM_RESET_IDX(n) (n - XILPM_RESET_PCIE_CFG)
-> > > > > > +static const struct pm_access pm_reset_access[] = {
-> > > > > 
-> > > > > [...]
-> > > > > 
-> > > > > > +
-> > > > > > +/*
-> > > > > > + * This table maps reset line IDs into a memory address.
-> > > > > > + * If a guest has access to the address, it has enough control
-> > > > > > + * over the affected node to grant it access to EEMI calls for
-> > > > > > + * resetting that node.
-> > > > > > + */
-> > > > > > +static const struct {
-> > > > > > +    paddr_t start;
-> > > > > > +    paddr_t size;
-> > > > > > +    uint32_t mask;   /* Zero means no mask, i.e all bits.  */
-> > > > > > +    enum pm_node_id node;
-> > > > > > +    bool hwdom_access;
-> > > > > > +    bool readonly;
-> > > > > > +} pm_mmio_access[] = {
-> > > > > 
-> > > > > Those 3 arrays contains a lot of hardcoded value. Can't any of this be
-> > > > > detected from the device-tree?
-> > > > 
-> > > > No, the information is not available on device tree unfortunately. >
-> > > > 
-> > > > > I would be interested to know how this is going to work with upstream
-> > > > > Linux.
-> > > > > Do you hardcode all the values there as well?
-> > > > 
-> > > > Yes: the IDs are specified on an header file, see
-> > > > include/linux/firmware/xlnx-zynqmp.h on the zynq/firmware branch of the
-> > > > arm-soc tree. In addition to the IDs, we also have the memory addresses
-> > > > in Xen to do the permission checks.
-> > > 
-> > > I am afraid this is not linux upstream. Can you point to the code in
-> > > Linus's
-> > > git or explain the state of the review?
-> > 
-> > It hasn't been pulled into Linux yet, I was told it has already been
-> > reviewed and is queued in arm-soc for upstreaming at the next merge
-> > window, which should be imminent.
-> 
-> Looking at that branch, I can see some DT bindings at least for the clock. I
-> also don't see any hardcoded value for device so far in that series. Is it
-> going to be sent separately?
-
-If you look at include/linux/firmware/xlnx-zynqmp.h, you'll see some
-hardcode values, specifically enum pm_api_id matches numerically the
-enum by the same name this series introduces in
-xen/include/asm-arm/platforms/xilinx-zynqmp-eemi.h
-
-
-> > > > > > +static bool pm_check_access(const struct pm_access *acl, struct
-> > > > > > domain *d,
-> > > > > > +                            uint32_t idx)
-> > > > > > +{
-> > > > > > +    unsigned long mfn;
-> > > > > 
-> > > > > mfn_t please. The code is not that nice but at least it add more
-> > > > > safety
-> > > > > in the
-> > > > > code. Hopefully iommu_access_permitted will be converted to typesafe
-> > > > > MFN
-> > > > > soon.
-> > > > 
-> > > > Yes, I can make this change without issues.
-> > > > 
-> > > > 
-> > > > > > +
-> > > > > > +    if ( acl[idx].hwdom_access && is_hardware_domain(d) )
-> > > > > > +        return true;
-> > > > > > +
-> > > > > > +    if ( !acl[idx].addr )
-> > > > > > +        return false;
-> > > > > > +
-> > > > > > +    mfn = PFN_DOWN(acl[idx].addr);
-> > > > > 
-> > > > > maddr_to_mfn(...);
-> > > > 
-> > > > OK
-> > > > 
-> > > > 
-> > > > > > +    return iomem_access_permitted(d, mfn, mfn);
-> > > > > 
-> > > > > Is the address something that a guest would be allowed to read/write
-> > > > > directly?
-> > > > > If not, then iomem_access_permitted(...) should not be used.
-> > > > 
-> > > > Yes, the address would be something remapped to the guest using iomem.
-> > > 
-> > > In the documentation at the beginning of the file you say that memory
-> > > ranges
-> > > are typically secure memory. So how a guest can access them directly?
-> > > 
-> > > I probably need a bit more background here... What is the address
-> > > correspond
-> > > to at the end?
-> > 
-> > The address corresponds to the MMIO region of the device. For instance,
-> > MM_GEM0 is 0xff0b0000, which is the address of the network card. It is
-> > accessible. The same goes for MM_CAN0, MM_TTC0, MM_SD0, and all the
-> > others -- they are all accessible. These are the addresses used in this
-> > check that should be remapped into the guest.
-> > 
-> > However, things are different for the pm_mmio_access array used in
-> > domain_has_mmio_access to check for access rights. (That is also where
-> > the mask is applied to writes and not to reads, see below.) In that
-> > case, the addresses correspond to single registers inside the
-> > zynqmp-psgtr region ("ZynqMP High Speed Processing System Gigabit
-> > Transceiver") and pin controller region. As you can see, in
-> > domain_has_mmio_access the access checks are still done on the
-> > corresponding node address, which is the one that gets remapped. For
-> > instance in the case of the network card, the remapped address is
-> > 0xff0b0000, checks are done on it, but the zynqmp-psgtr and pin
-> > contoller region registers are:
-> > 
-> > {
-> >      .start = MM_CRL_APB + R_CRL_GEM0_REF_CTRL,
-> >      .size = 4, .node = NODE_ETH_0
-> > }
-> > [...]
-> > {
-> >      .start = MM_IOU_SLCR + R_IOU_SLCR_IOU_RAM_GEM0,
-> >      .size = 4, .node = NODE_ETH_0
-> > }
-> > 
-> > The comment comes from Edgar, but I think that he meant that VMs won't
-> > be able to write to these regions directly. I'll improve the comment.
-> 
-> Thank you for the explanation. Can you add something similar to what you wrote
-> in the code?
- 
-Yes, I'll do that
---8323329-1433526422-1539785086=:3835
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1433526422-1539785086=:3835--
+SGkgU3RlZmFubywKCk9uIDE3LzEwLzIwMTggMTU6MDMsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90
+ZToKPiBPbiBUdWUsIDE2IE9jdCAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+IEhpLAo+Pgo+
+PiBTb3JyeSBJIGZvcmdvdCB0byBhbnN3ZXIgdG8gdGhlIHJlc3Qgb2YgdGhlIGUtbWFpbC4KPj4K
+Pj4gT24gMTAvMTYvMjAxOCAwMzozOSBBTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+Pj4g
+T24gMTUvMTAvMjAxOCAwODoyNSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+Pj4+Pj4+ICvCoMKgwqAg
+Ym9vbCBod2RvbV9hY2Nlc3M7wqDCoMKgIC8qIEhXIGRvbWFpbiBnZXRzIGFjY2VzcyByZWdhcmRs
+ZXNzLsKgICovCj4+Pj4+Pj4gK307Cj4+Pj4+Pj4gKwo+Pj4+Pj4+ICsvKgo+Pj4+Pj4+ICsgKiBU
+aGlzIHRhYmxlIG1hcHMgYSBub2RlIGludG8gYSBtZW1vcnkgYWRkcmVzcy4KPj4+Pj4+PiArICog
+SWYgYSBndWVzdCBoYXMgYWNjZXNzIHRvIHRoZSBhZGRyZXNzLCBpdCBoYXMgZW5vdWdoIGNvbnRy
+b2wKPj4+Pj4+PiArICogb3ZlciB0aGUgbm9kZSB0byBncmFudCBpdCBhY2Nlc3MgdG8gRUVNSSBj
+YWxscyBmb3IgdGhhdCBub2RlLgo+Pj4+Pj4+ICsgKi8KPj4+Pj4+PiArc3RhdGljIGNvbnN0IHN0
+cnVjdCBwbV9hY2Nlc3MgcG1fbm9kZV9hY2Nlc3NbXSA9IHsKPj4+Pj4+Cj4+Pj4+PiBbLi4uXQo+
+Pj4+Pj4KPj4+Pj4+PiArCj4+Pj4+Pj4gKy8qCj4+Pj4+Pj4gKyAqIFRoaXMgdGFibGUgbWFwcyBy
+ZXNldCBsaW5lIElEcyBpbnRvIGEgbWVtb3J5IGFkZHJlc3MuCj4+Pj4+Pj4gKyAqIElmIGEgZ3Vl
+c3QgaGFzIGFjY2VzcyB0byB0aGUgYWRkcmVzcywgaXQgaGFzIGVub3VnaCBjb250cm9sCj4+Pj4+
+Pj4gKyAqIG92ZXIgdGhlIGFmZmVjdGVkIG5vZGUgdG8gZ3JhbnQgaXQgYWNjZXNzIHRvIEVFTUkg
+Y2FsbHMgZm9yCj4+Pj4+Pj4gKyAqIHJlc2V0dGluZyB0aGF0IG5vZGUuCj4+Pj4+Pj4gKyAqLwo+
+Pj4+Pj4+ICsjZGVmaW5lIFhJTFBNX1JFU0VUX0lEWChuKSAobiAtIFhJTFBNX1JFU0VUX1BDSUVf
+Q0ZHKQo+Pj4+Pj4+ICtzdGF0aWMgY29uc3Qgc3RydWN0IHBtX2FjY2VzcyBwbV9yZXNldF9hY2Nl
+c3NbXSA9IHsKPj4+Pj4+Cj4+Pj4+PiBbLi4uXQo+Pj4+Pj4KPj4+Pj4+PiArCj4+Pj4+Pj4gKy8q
+Cj4+Pj4+Pj4gKyAqIFRoaXMgdGFibGUgbWFwcyByZXNldCBsaW5lIElEcyBpbnRvIGEgbWVtb3J5
+IGFkZHJlc3MuCj4+Pj4+Pj4gKyAqIElmIGEgZ3Vlc3QgaGFzIGFjY2VzcyB0byB0aGUgYWRkcmVz
+cywgaXQgaGFzIGVub3VnaCBjb250cm9sCj4+Pj4+Pj4gKyAqIG92ZXIgdGhlIGFmZmVjdGVkIG5v
+ZGUgdG8gZ3JhbnQgaXQgYWNjZXNzIHRvIEVFTUkgY2FsbHMgZm9yCj4+Pj4+Pj4gKyAqIHJlc2V0
+dGluZyB0aGF0IG5vZGUuCj4+Pj4+Pj4gKyAqLwo+Pj4+Pj4+ICtzdGF0aWMgY29uc3Qgc3RydWN0
+IHsKPj4+Pj4+PiArwqDCoMKgIHBhZGRyX3Qgc3RhcnQ7Cj4+Pj4+Pj4gK8KgwqDCoCBwYWRkcl90
+IHNpemU7Cj4+Pj4+Pj4gK8KgwqDCoCB1aW50MzJfdCBtYXNrO8KgwqAgLyogWmVybyBtZWFucyBu
+byBtYXNrLCBpLmUgYWxsIGJpdHMuwqAgKi8KPj4+Pj4+PiArwqDCoMKgIGVudW0gcG1fbm9kZV9p
+ZCBub2RlOwo+Pj4+Pj4+ICvCoMKgwqAgYm9vbCBod2RvbV9hY2Nlc3M7Cj4+Pj4+Pj4gK8KgwqDC
+oCBib29sIHJlYWRvbmx5Owo+Pj4+Pj4+ICt9IHBtX21taW9fYWNjZXNzW10gPSB7Cj4+Pj4+Pgo+
+Pj4+Pj4gVGhvc2UgMyBhcnJheXMgY29udGFpbnMgYSBsb3Qgb2YgaGFyZGNvZGVkIHZhbHVlLiBD
+YW4ndCBhbnkgb2YgdGhpcyBiZQo+Pj4+Pj4gZGV0ZWN0ZWQgZnJvbSB0aGUgZGV2aWNlLXRyZWU/
+Cj4+Pj4+Cj4+Pj4+IE5vLCB0aGUgaW5mb3JtYXRpb24gaXMgbm90IGF2YWlsYWJsZSBvbiBkZXZp
+Y2UgdHJlZSB1bmZvcnR1bmF0ZWx5LiA+Cj4+Pj4+Cj4+Pj4+PiBJIHdvdWxkIGJlIGludGVyZXN0
+ZWQgdG8ga25vdyBob3cgdGhpcyBpcyBnb2luZyB0byB3b3JrIHdpdGggdXBzdHJlYW0KPj4+Pj4+
+IExpbnV4Lgo+Pj4+Pj4gRG8geW91IGhhcmRjb2RlIGFsbCB0aGUgdmFsdWVzIHRoZXJlIGFzIHdl
+bGw/Cj4+Pj4+Cj4+Pj4+IFllczogdGhlIElEcyBhcmUgc3BlY2lmaWVkIG9uIGFuIGhlYWRlciBm
+aWxlLCBzZWUKPj4+Pj4gaW5jbHVkZS9saW51eC9maXJtd2FyZS94bG54LXp5bnFtcC5oIG9uIHRo
+ZSB6eW5xL2Zpcm13YXJlIGJyYW5jaCBvZiB0aGUKPj4+Pj4gYXJtLXNvYyB0cmVlLiBJbiBhZGRp
+dGlvbiB0byB0aGUgSURzLCB3ZSBhbHNvIGhhdmUgdGhlIG1lbW9yeSBhZGRyZXNzZXMKPj4+Pj4g
+aW4gWGVuIHRvIGRvIHRoZSBwZXJtaXNzaW9uIGNoZWNrcy4KPj4+Pgo+Pj4+IEkgYW0gYWZyYWlk
+IHRoaXMgaXMgbm90IGxpbnV4IHVwc3RyZWFtLiBDYW4geW91IHBvaW50IHRvIHRoZSBjb2RlIGlu
+Cj4+Pj4gTGludXMncwo+Pj4+IGdpdCBvciBleHBsYWluIHRoZSBzdGF0ZSBvZiB0aGUgcmV2aWV3
+Pwo+Pj4KPj4+IEl0IGhhc24ndCBiZWVuIHB1bGxlZCBpbnRvIExpbnV4IHlldCwgSSB3YXMgdG9s
+ZCBpdCBoYXMgYWxyZWFkeSBiZWVuCj4+PiByZXZpZXdlZCBhbmQgaXMgcXVldWVkIGluIGFybS1z
+b2MgZm9yIHVwc3RyZWFtaW5nIGF0IHRoZSBuZXh0IG1lcmdlCj4+PiB3aW5kb3csIHdoaWNoIHNo
+b3VsZCBiZSBpbW1pbmVudC4KPj4KPj4gTG9va2luZyBhdCB0aGF0IGJyYW5jaCwgSSBjYW4gc2Vl
+IHNvbWUgRFQgYmluZGluZ3MgYXQgbGVhc3QgZm9yIHRoZSBjbG9jay4gSQo+PiBhbHNvIGRvbid0
+IHNlZSBhbnkgaGFyZGNvZGVkIHZhbHVlIGZvciBkZXZpY2Ugc28gZmFyIGluIHRoYXQgc2VyaWVz
+LiBJcyBpdAo+PiBnb2luZyB0byBiZSBzZW50IHNlcGFyYXRlbHk/Cj4gCj4gSWYgeW91IGxvb2sg
+YXQgaW5jbHVkZS9saW51eC9maXJtd2FyZS94bG54LXp5bnFtcC5oLCB5b3UnbGwgc2VlIHNvbWUK
+PiBoYXJkY29kZSB2YWx1ZXMsIHNwZWNpZmljYWxseSBlbnVtIHBtX2FwaV9pZCBtYXRjaGVzIG51
+bWVyaWNhbGx5IHRoZQo+IGVudW0gYnkgdGhlIHNhbWUgbmFtZSB0aGlzIHNlcmllcyBpbnRyb2R1
+Y2VzIGluCj4geGVuL2luY2x1ZGUvYXNtLWFybS9wbGF0Zm9ybXMveGlsaW54LXp5bnFtcC1lZW1p
+LmgKCkkgZG9uJ3QgdGhpbmsgd2UgYXJlIHRhbGtpbmcgdGhlIHNhbWUgdGhpbmdzLiBJIGFtIHRh
+bGtpbmcgYWJvdXQgCnBtX25vZGVfaWQvcG1fbm9kZV9yZXNldCAobm90IHBtX2FwaV9pZCkuIEkg
+ZG9uJ3Qgc2VlIHN1Y2ggY29kZSBpbiBMaW51eCAKYXQgdGhlIG1vbWVudCBhbmQgYSBiaXQgc3Vy
+cHJpc2VkIHRoYXQgbm8gRFQgYmluZGluZ3Mgd2lsbCBiZSB1c2VkIHRvIApsaW5rIHRoZSB2YWx1
+ZSB3aXRoIGEgZGV2aWNlLgoKU28gbXkgcXVlc3Rpb24gc3RhbmRzLCBob3cgTGludXggd2lsbCB1
+c2UgcG1fbm9kZV9pZC9wbV9ub2RlX3Jlc2V0PyBDYW4gCnlvdSBwb2ludCB0byBjb2RlIGlmIHRo
+YXQgZXhpc3RzLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
