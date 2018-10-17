@@ -1,17 +1,24 @@
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH] cr-for-branches: Add linux 4.4 branch
- as that is an LTS
-Date: Wed, 17 Oct 2018 16:53:33 +0100
-Message-ID: <20181017155333.30124-1-ian.jackson@eu.citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [RFC PATCH v2 00/17] Add support for qemu-xen
+ runnning in a Linux-based stubdomain.
+Date: Wed, 17 Oct 2018 18:05:59 +0200
+Message-ID: <20181017160559.GB2755@mail-itl>
+References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <23494.5998.10340.694382@mariner.uk.xensource.com>
+ <20181016173240.GA1563@mail-itl>
+ <23494.9572.676973.726194@mariner.uk.xensource.com>
+ <20181016204628.GD1563@mail-itl>
+ <23495.21043.960987.833172@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4102368364137143745=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=pqcp=m5=citrix.com=prvs=8215e697b=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gCoCi-0005JJ-OC
- for xen-devel@lists.xenproject.org; Wed, 17 Oct 2018 15:57:48 +0000
+ <srs0=y9w2=m5=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gCoKm-0006ik-36
+ for xen-devel@lists.xenproject.org; Wed, 17 Oct 2018 16:06:08 +0000
+In-Reply-To: <23495.21043.960987.833172@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,40 +27,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Eric Shelton <eshelton@pobox.com>
 List-Id: xen-devel@lists.xenproject.org
 
-LS0tCiBjci1mb3ItYnJhbmNoZXMgfCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24o
-KyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9jci1mb3ItYnJhbmNoZXMgYi9jci1mb3It
-YnJhbmNoZXMKaW5kZXggNmY1NDQzNzkuLmY3ZTRjYWVhIDEwMDc1NQotLS0gYS9jci1mb3ItYnJh
-bmNoZXMKKysrIGIvY3ItZm9yLWJyYW5jaGVzCkBAIC0zMSw3ICszMSw3IEBAIHNjcmlwdG9wdGlv
-bnM9IiQxIjsgc2hpZnQKIExPR0ZJTEU9dG1wL2NyLWZvci1icmFuY2hlcy5sb2cKIGV4cG9ydCBM
-T0dGSUxFCiAKLTogJHtCUkFOQ0hFUzo9b3NzdGVzdCB4ZW4tNC4wLXRlc3RpbmcgeGVuLTQuMS10
-ZXN0aW5nIHhlbi00LjItdGVzdGluZyB4ZW4tNC4zLXRlc3RpbmcgeGVuLTQuNC10ZXN0aW5nIHhl
-bi00LjUtdGVzdGluZyB4ZW4tNC42LXRlc3RpbmcgeGVuLTQuNy10ZXN0aW5nIHhlbi00LjgtdGVz
-dGluZyB4ZW4tNC45LXRlc3RpbmcgeGVuLTQuMTAtdGVzdGluZyB4ZW4tNC4xMS10ZXN0aW5nIHhl
-bi11bnN0YWJsZSBxZW11LW1haW5saW5lIHFlbXUtdXBzdHJlYW0tdW5zdGFibGUgcWVtdS11cHN0
-cmVhbS00LjItdGVzdGluZyBxZW11LXVwc3RyZWFtLTQuMy10ZXN0aW5nIHFlbXUtdXBzdHJlYW0t
-NC40LXRlc3RpbmcgcWVtdS11cHN0cmVhbS00LjUtdGVzdGluZyBxZW11LXVwc3RyZWFtLTQuNi10
-ZXN0aW5nIHFlbXUtdXBzdHJlYW0tNC43LXRlc3RpbmcgcWVtdS11cHN0cmVhbS00LjgtdGVzdGlu
-ZyBxZW11LXVwc3RyZWFtLTQuOS10ZXN0aW5nIHFlbXUtdXBzdHJlYW0tNC4xMC10ZXN0aW5nIHFl
-bXUtdXBzdHJlYW0tNC4xMS10ZXN0aW5nIGxpbnV4LWxpbnVzIGxpbnV4LTQuMTQgbGludXgtNC45
-IGxpbnV4LTQuMSBsaW51eC0zLjE4IGxpbnV4LTMuMTYgbGludXgtMy4xNCBsaW51eC0zLjEwIGxp
-bnV4LTMuNCBsaW51eC1hcm0teGVuIHNlYWJpb3Mgb3ZtZiB4dGYgJHtFWFRSQV9CUkFOQ0hFU319
-Cis6ICR7QlJBTkNIRVM6PW9zc3Rlc3QgeGVuLTQuMC10ZXN0aW5nIHhlbi00LjEtdGVzdGluZyB4
-ZW4tNC4yLXRlc3RpbmcgeGVuLTQuMy10ZXN0aW5nIHhlbi00LjQtdGVzdGluZyB4ZW4tNC41LXRl
-c3RpbmcgeGVuLTQuNi10ZXN0aW5nIHhlbi00LjctdGVzdGluZyB4ZW4tNC44LXRlc3RpbmcgeGVu
-LTQuOS10ZXN0aW5nIHhlbi00LjEwLXRlc3RpbmcgeGVuLTQuMTEtdGVzdGluZyB4ZW4tdW5zdGFi
-bGUgcWVtdS1tYWlubGluZSBxZW11LXVwc3RyZWFtLXVuc3RhYmxlIHFlbXUtdXBzdHJlYW0tNC4y
-LXRlc3RpbmcgcWVtdS11cHN0cmVhbS00LjMtdGVzdGluZyBxZW11LXVwc3RyZWFtLTQuNC10ZXN0
-aW5nIHFlbXUtdXBzdHJlYW0tNC41LXRlc3RpbmcgcWVtdS11cHN0cmVhbS00LjYtdGVzdGluZyBx
-ZW11LXVwc3RyZWFtLTQuNy10ZXN0aW5nIHFlbXUtdXBzdHJlYW0tNC44LXRlc3RpbmcgcWVtdS11
-cHN0cmVhbS00LjktdGVzdGluZyBxZW11LXVwc3RyZWFtLTQuMTAtdGVzdGluZyBxZW11LXVwc3Ry
-ZWFtLTQuMTEtdGVzdGluZyBsaW51eC1saW51cyBsaW51eC00LjE0IGxpbnV4LTQuOSBsaW51eC00
-LjQgbGludXgtNC4xIGxpbnV4LTMuMTggbGludXgtMy4xNiBsaW51eC0zLjE0IGxpbnV4LTMuMTAg
-bGludXgtMy40IGxpbnV4LWFybS14ZW4gc2VhYmlvcyBvdm1mIHh0ZiAke0VYVFJBX0JSQU5DSEVT
-fX0KIGV4cG9ydCBCUkFOQ0hFUwogCiBmZXRjaHdsZW09JHdsZW0KLS0gCjIuMTEuMAoKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============4102368364137143745==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="DKU6Jbt7q3WqK7+M"
+Content-Disposition: inline
+
+
+--DKU6Jbt7q3WqK7+M
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Oct 17, 2018 at 04:16:03PM +0100, Ian Jackson wrote:
+> Marek Marczykowski-G=C3=B3recki writes ("Re: [RFC PATCH v2 00/17] Add sup=
+port for qemu-xen runnning in a Linux-based stubdomain."):
+> > [stuff]
+>=20
+> So, I only got a little way through this series, but it was a while
+> ago and you say things are done differently now.  I'm not sure if it
+> is useful for me to review the rest of it.
+>=20
+> Would it be better for me to await a repost ?
+
+All the xenconsoled stuff is unchanged (and unlikely to change), so it
+should be safe to review it. Patches 06 and 07 also shouldn't change.
+
+The thing that will change is qemu cmdline and qmp handling. TBH I'm not su=
+re
+if its better to touch qmp now, or after reworked qmp handling by
+Anthony will be merged. There will definitely be some conflicts and it
+may even affects what underlying mechanism is chosen for qmp transport.
+Based on discussion here, and in libxl__ev_qmp_* thread, I see two
+viable options:
+
+1. libvchan
+  pros:
+   - out of band reset support, so qmp capabilities negotiation can be
+     handled gracefully
+  cons:
+   - more work, require patching qemu (or adding vchan->socket proxy),
+     adds dependency on libvchan to libxl (probably not a problem)
+   - possibly more complex libxl__ev_qmp_* handling, or at least needs
+     separate handling of send/receive for stubdomain case
+2. pv console
+  pros:
+   - no qemu modifications
+   - same read()/write() on libxl side
+  cons:
+   - no out of band reset, needs libxl handling for that (skipping
+     negotiation)
+   - possibly other problems from that (events filling up some buffers
+     when no one is listening?)
+
+In both cases, there is only one simultaneous connection to qemu, so
+some locking will be needed at libxl side.
+BTW Does libxl listed for qmp events?
+
+There is also third option: xenstore, but that would probably require
+totally separate libxl__ev_qmp_* implementation, so I'd rule it out.
+
+If problems with pv console could be solved, I'd go this way. But
+otherwise libvchan seems like a good alternative.
+
+Adding Anthony.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--DKU6Jbt7q3WqK7+M
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlvHXegACgkQ24/THMrX
+1ywPfQf8C6vd77GvTRqWMACURgevDAbKMSibj9Y8d8OXHCBiTQui7IUPKCjURQGX
+LvUqBBqF4srzlLR77JQrvkDDdyhxP1Xr97bqw/zFBRpBAUK37F9k3VOPaYJI40j/
+HHuo2fhWKBz5dFRRdmW8qFGwwut7TzOSVCtRH4n4pdNI6tIk+C3S57Q2Ph5rTHor
+xJ5vtNLxpk9cWzrWYwJn7Mi+NPkgzUgFhmZCNlgSlDfrEymfsnh23BVCc8N7EE2F
+fCzCu+ziDgwr3mxN4IMmvObdyYvITgGQ+IzTZLo/c20eeOtjmrUNsjNAuZxCcXxE
+coiRm7Ynm4KyLA3q/wt82QKjYjsT7A==
+=rnJt
+-----END PGP SIGNATURE-----
+
+--DKU6Jbt7q3WqK7+M--
+
+
+--===============4102368364137143745==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4102368364137143745==--
