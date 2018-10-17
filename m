@@ -1,15 +1,25 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Ping AMD maintainers? [PATCH] x86/svm: Fix
- svm_update_guest_efer() for domains using shadow paging
-Date: Wed, 17 Oct 2018 13:08:43 +0100
-Message-ID: <11a88d75-84d5-0af6-6e4c-c9b32dcdab52@citrix.com>
-References: <1538758946-12439-1-git-send-email-andrew.cooper3@citrix.com>
+From: Omkar Bolla <omkar.bolla@pathpartnertech.com>
+Subject: Re: Xen PV: Sample new PV driver for buffer sharing
+ between domains
+Date: Wed, 17 Oct 2018 17:54:46 +0530
+Message-ID: <CAC4nxbsopU7Ths1LYE1HAB8txbBv9rLGwqCgd=kQWLNDhEz6LQ@mail.gmail.com>
+References: <CAC4nxbvWUpWQcUATQswoaVJfSq8EU7CH6-Jx1VwVGYVeOc0tZw@mail.gmail.com>
+ <B9D01323-5CE0-4CAE-9A7C-2B1CE482A833@xenproject.org>
+ <aebd40b7-e7d2-c861-b658-863b2c8f2079@gmail.com>
+ <f688cda0-a342-0b66-fb5c-56238d941f9c@suse.com>
+ <f8ae32f3-8399-24d3-fe1e-45d4c1669e1b@epam.com>
+ <CAC4nxbvh6LA=t2iEdiw2UrqrQP3Zf2NtRcViJ1YNGZkyLZqYHg@mail.gmail.com>
+ <d130b853-0e33-ecb7-5598-d99791a5f2bf@suse.com>
+ <CAC4nxbuTQ1uP6rKiCAp7hDe-ygq9LKHQw8ggVM+fOVH-VvU8Tw@mail.gmail.com>
+ <d2b9cd5a-2768-60bd-07bd-2055d1490399@suse.com>
+ <CAC4nxbsBox=FgCBx5KwkkvCHwyX2MvBGoGpa1sDyS2cF0itT=Q@mail.gmail.com>
+ <074697de-7265-a1fb-2970-4128a58f09ca@arm.com>
+ <CAC4nxbuY0vJd8o6Vj9E14m2-sw3JZ5Spbiz3vbq2K0RQhK9p3w@mail.gmail.com>
+ <c6724ce1-086f-3492-2c39-8192542ff5d8@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4806630735752980086=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1538758946-12439-1-git-send-email-andrew.cooper3@citrix.com>
-Content-Language: en-GB
+In-Reply-To: <c6724ce1-086f-3492-2c39-8192542ff5d8@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,94 +28,169 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: Julien Grall <julien.grall@arm.com>
+Cc: jgross@suse.com, xen-devel@lists.xensource.com, Oleksandr_Andrushchenko@epam.com, Oleksandr Andrushchenko <andr2000@gmail.com>, Lars Kurth <lars.kurth.xen@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDUvMTAvMTggMTg6MDIsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4gV2hlbiB1c2luZyBzaGFk
-b3cgcGFnaW5nLCBFRkVSLk5YIGlzIGEgWGVuIGNvbnRyb2xsZWQgYml0LCBhbmQgaXMgcmVxdWly
-ZWQgYnkKPiB0aGUgc2hhZG93IHBhZ2VmYXVsdCBoYW5kbGVyIHRvIGRpc3Rpbmd1aXNoIGluc3Ry
-dWN0aW9uIGZldGNoZXMgZnJvbSBkYXRhCj4gYWNjZXNzZXMuCj4KPiBUaGlzIGNhbiBiZSBvYnNl
-cnZlZCBieSBhIGd1ZXN0IHdoaWNoIGhhcyBOWCBhbmQgU01FUCBjbGVhciBidXQgU01BUCBhY3Rp
-dmUgYnkKPiBhdHRlbXB0aW5nIHRvIGV4ZWN1dGUgY29kZSBvbiBhIHVzZXIgbWFwcGluZy4gIFRo
-ZSBmaXJzdCBhdHRlbXB0IHRvIGJ1aWxkIHRoZQo+IHRhcmdldCBzaGFkb3cgd2lsbCAjUEYgc28g
-aXMgaGFuZGxlZCBieSB0aGUgc2hhZG93IGNvZGUsIGJ1dCB3aGVuIHdhbGtpbmcgdGhlCj4gdGhl
-IGd1ZXN0IHBhZ2V0YWJsZXMsIHRoZSBsYWNrIG9mIFBGRUNfaW5zbl9mZXRjaCBiZWluZyBzaWdu
-YWxsZWQgY2F1c2VzIHRoZQo+IHNoYWRvdyBjb2RlIHRvIG1pc3Rha2UgdGhlIGluc3RydWN0aW9u
-IGZldGNoIGZvciBhIGRhdGEgZmV0Y2gsIGFuZCBiZWxpZXZlCj4gdGhhdCBpdCBpcyBhIHJlYWwg
-Z3Vlc3QgZmF1bHQuICBBcyBhIHJlc3VsdCwgdGhlIGd1ZXN0IHJlY2VpdmVzICNQRlstZC1zclBd
-Cj4gZm9yIGFuIGFjdGlvbiB3aGljaCBzaG91bGQgY29tcGxldGUgc3VjY2Vzc2Z1bGx5Lgo+Cj4g
-VGhlIHN1c3BpY2lvdXMtbG9va2luZyBneW1uYXN0aWNzIHdpdGggTE1FIGlzIGFjdHVhbGx5IGEg
-c3VidGxlIGNvcm5lciBjYXNlCj4gd2l0aCBzaGFkb3cgcGFnaW5nLiAgV2hlbiBkcm9wcGluZyBv
-dXQgb2YgTG9uZyBNb2RlLCBhIGd1ZXN0cyBjaG9pY2Ugb2YgTE1FCj4gYW5kIFhlbidzIGNob2lj
-ZSBvZiBDUjAuUEcgY2F1c2UgaGFyZHdhcmUgdG8gb3BlcmF0ZSBpbiBMb25nIE1vZGUsIGJ1dCB0
-aGUKPiBzaGFkb3cgY29kZSB0byBvcGVyYXRlIGluIDItb24tMyBtb2RlLgo+Cj4gSW4gYWRkaXRp
-b24gdG8gZGVzY3JpYmluZyB0aGlzIGNvcm5lciBjYXNlIGluIHRoZSBTVk0gc2lkZSwgZXh0ZW5k
-IHRoZSBjb21tZW50Cj4gZm9yIHRoZSBzYW1lIGZpeCBvbiB0aGUgVlQteCBzaWRlLiAgKEkgaGF2
-ZSBhIHN1c3BpY2lvbiB0aGF0IEkndmUganVzdCB3b3JrZWQKPiBvdXQgd2h5IFZULXggZG9lc24n
-dCB0b2xlcmF0ZSBMTUEgIT0gTE1FIHdoZW4gVW5yZXN0cmljdGVkIEd1ZXN0IGlzIGNsZWFyLikK
-Pgo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
-b20+Cj4gLS0tCj4gQ0M6IEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT4KPiBDQzogV2Vp
-IExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KPiBDQzogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIu
-cGF1QGNpdHJpeC5jb20+Cj4gQ0M6IFRpbSBEZWVnYW4gPHRpbUB4ZW4ub3JnPgo+IENDOiBCb3Jp
-cyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgo+IENDOiBTdXJhdmVlIFN1
-dGhpa3VscGFuaXQgPHN1cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPgo+IENDOiBCcmlhbiBX
-b29kcyA8YnJpYW4ud29vZHNAYW1kLmNvbT4KPiBDQzogSnVuIE5ha2FqaW1hIDxqdW4ubmFrYWpp
-bWFAaW50ZWwuY29tPgo+IENDOiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KPgo+
-IFVubGlrZSB0aGUgVlQteCBzaWRlLCB0aGVyZSBpcyBubyBwb2ludCBwbGF5aW5nIHdpdGggdGhl
-IGNvbmRpdGlvbmFsIGludGVyY2VwdAo+IG9mIEVGRVIgcmVhZHMuICBUaGUgU1ZNRSByZXF1aXJl
-bWVudCBtZWFucyB0aGF0IG9ubHkgTDEgaHlwZXJ2aXNvcnMgd291bGQKPiBiZW5lZml0IGZyb20g
-YWNjZWxlcmF0ZWQgcmVhZHMuCj4gLS0tCj4gIHhlbi9hcmNoL3g4Ni9odm0vc3ZtL3N2bS5jIHwg
-MzEgKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLQo+ICB4ZW4vYXJjaC94ODYvaHZtL3Zt
-eC92bXguYyB8ICA2ICsrKysrKwo+ICAyIGZpbGVzIGNoYW5nZWQsIDMxIGluc2VydGlvbnMoKyks
-IDYgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2h2bS9zdm0vc3Zt
-LmMgYi94ZW4vYXJjaC94ODYvaHZtL3N2bS9zdm0uYwo+IGluZGV4IGM5OGNmYzIuLjJhYjJjNTQg
-MTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMKPiArKysgYi94ZW4vYXJj
-aC94ODYvaHZtL3N2bS9zdm0uYwo+IEBAIC02NDksMTMgKzY0OSwzMiBAQCB2b2lkIHN2bV91cGRh
-dGVfZ3Vlc3RfY3Ioc3RydWN0IHZjcHUgKnYsIHVuc2lnbmVkIGludCBjciwgdW5zaWduZWQgaW50
-IGZsYWdzKQo+ICBzdGF0aWMgdm9pZCBzdm1fdXBkYXRlX2d1ZXN0X2VmZXIoc3RydWN0IHZjcHUg
-KnYpCj4gIHsKPiAgICAgIHN0cnVjdCB2bWNiX3N0cnVjdCAqdm1jYiA9IHYtPmFyY2guaHZtLnN2
-bS52bWNiOwo+IC0gICAgYm9vbCBsbWEgPSB2LT5hcmNoLmh2bS5ndWVzdF9lZmVyICYgRUZFUl9M
-TUE7Cj4gLSAgICB1aW50NjRfdCBuZXdfZWZlcjsKPiArICAgIHVuc2lnbmVkIGxvbmcgZ3Vlc3Rf
-ZWZlciA9IHYtPmFyY2guaHZtLmd1ZXN0X2VmZXIsCj4gKyAgICAgICAgeGVuX2VmZXIgPSByZWFk
-X2VmZXIoKTsKPiAgCj4gLSAgICBuZXdfZWZlciA9ICh2LT5hcmNoLmh2bS5ndWVzdF9lZmVyIHwg
-RUZFUl9TVk1FKSAmIH5FRkVSX0xNRTsKPiAtICAgIGlmICggbG1hICkKPiAtICAgICAgICBuZXdf
-ZWZlciB8PSBFRkVSX0xNRTsKPiAtICAgIHZtY2Jfc2V0X2VmZXIodm1jYiwgbmV3X2VmZXIpOwo+
-ICsgICAgaWYgKCBwYWdpbmdfbW9kZV9zaGFkb3codi0+ZG9tYWluKSApCj4gKyAgICB7Cj4gKyAg
-ICAgICAgLyogRUZFUi5OWCBpcyBhIFhlbi1vd25lZCBiaXQgYW5kIGlzIG5vdCB1bmRlciBndWVz
-dCBjb250cm9sLiAqLwo+ICsgICAgICAgIGd1ZXN0X2VmZXIgJj0gfkVGRVJfTlg7Cj4gKyAgICAg
-ICAgZ3Vlc3RfZWZlciB8PSB4ZW5fZWZlciAmIEVGRVJfTlg7Cj4gKwo+ICsgICAgICAgIC8qCj4g
-KyAgICAgICAgICogQ1IwLlBHIGlzIGEgWGVuLW93bmVkIGJpdCwgYW5kIHJlbWFpbnMgc2V0IGV2
-ZW4gd2hlbiB0aGUgZ3Vlc3QgaGFzCj4gKyAgICAgICAgICogbG9naWNhbGx5IGRpc2FibGVkIHBh
-Z2luZy4KPiArICAgICAgICAgKgo+ICsgICAgICAgICAqIExNQSB3YXMgY2FsY3VsYXRlZCB1c2lu
-ZyB0aGUgZ3Vlc3QgQ1IwLlBHIHNldHRpbmcsIGJ1dCBMTUUgbmVlZHMKPiArICAgICAgICAgKiBj
-bGVhcmluZyB0byBhdm9pZCBpbnRlcmFjdGluZyB3aXRoIFhlbidzIENSMC5QRyBzZXR0aW5nLiAg
-QXMgd3JpdGVzCj4gKyAgICAgICAgICogdG8gQ1IwIGFyZSBpbnRlcmNlcHRlZCwgaXQgaXMgc2Fm
-ZSB0byBsZWF2ZSBMTUUgY2xlYXIgYXQgdGhpcwo+ICsgICAgICAgICAqIHBvaW50LCBhbmQgZml4
-IHVwIGJvdGggTE1FIGFuZCBMTUEgd2hlbiBDUjAuUEcgaXMgc2V0Lgo+ICsgICAgICAgICAqLwo+
-ICsgICAgICAgIGlmICggIShndWVzdF9lZmVyICYgRUZFUl9MTUEpICkKPiArICAgICAgICAgICAg
-Z3Vlc3RfZWZlciAmPSB+RUZFUl9MTUU7Cj4gKyAgICB9Cj4gKwo+ICsgICAgLyogU1ZNRSBtdXN0
-IHJlbWFpbiBzZXQgaW4gbm9uLXJvb3QgbW9kZS4gKi8KPiArICAgIGd1ZXN0X2VmZXIgfD0gRUZF
-Ul9TVk1FOwo+ICsKPiArICAgIHZtY2Jfc2V0X2VmZXIodm1jYiwgZ3Vlc3RfZWZlcik7Cj4gIAo+
-ICAgICAgQVNTRVJUKG5lc3RlZGh2bV9lbmFibGVkKHYtPmRvbWFpbikgfHwKPiAgICAgICAgICAg
-ICAhKHYtPmFyY2guaHZtLmd1ZXN0X2VmZXIgJiBFRkVSX1NWTUUpKTsKPiBkaWZmIC0tZ2l0IGEv
-eGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYwo+
-IGluZGV4IGJmOTBlMjIuLmVlYTYzMzAgMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS92
-bXgvdm14LmMKPiArKysgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYwo+IEBAIC0xNjY2LDYg
-KzE2NjYsMTIgQEAgc3RhdGljIHZvaWQgdm14X3VwZGF0ZV9ndWVzdF9lZmVyKHN0cnVjdCB2Y3B1
-ICp2KQo+ICAgICAgICAgICAqIG5vdCB0b2xlcmF0ZSB0aGUgTE1FIGFuZCBMTUEgc2V0dGluZ3Mg
-YmVpbmcgZGlmZmVyZW50LiAgQXMgd3JpdGVzCj4gICAgICAgICAgICogdG8gQ1IwIGFyZSBpbnRl
-cmNlcHRlZCwgaXQgaXMgc2FmZSB0byBsZWF2ZSBMTUUgY2xlYXIgYXQgdGhpcwo+ICAgICAgICAg
-ICAqIHBvaW50LCBhbmQgZml4IHVwIGJvdGggTE1FIGFuZCBMTUEgd2hlbiBDUjAuUEcgaXMgc2V0
-Lgo+ICsgICAgICAgICAqCj4gKyAgICAgICAgICogRnVydGhlcm1vcmUsIHdoZW4gdXNpbmcgc2hh
-ZG93IHBhZ2V0YWJsZXMgKHN1YnN1bWVkIGJ5IHRoZQo+ICsgICAgICAgICAqIFVucmVzdHJpY3Rl
-ZCBHdWVzdCBjaGVjayksIENSMC5QRyBpcyBhIFhlbi1vd25lZCBiaXQsIGFuZCByZW1haW5zCj4g
-KyAgICAgICAgICogc2V0IGV2ZW4gd2hlbiB0aGUgZ3Vlc3QgaGFzIGxvZ2ljYWxseSBkaXNhYmxl
-ZCBwYWdpbmcuICBMTUEgd2FzCj4gKyAgICAgICAgICogY2FsY3VsYXRlZCB1c2luZyB0aGUgZ3Vl
-c3QgQ1IwLlBHIHNldHRpbmcsIGJ1dCBMTUUgbmVlZHMgY2xlYXJpbmcKPiArICAgICAgICAgKiB0
-byBhdm9pZCBpbnRlcmFjdGluZyB3aXRoIFhlbidzIENSMC5QRyBzZXR0aW5nLgo+ICAgICAgICAg
-ICAqLwo+ICAgICAgICAgIGlmICggIShndWVzdF9lZmVyICYgRUZFUl9MTUEpICkKPiAgICAgICAg
-ICAgICAgZ3Vlc3RfZWZlciAmPSB+RUZFUl9MTUU7CgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============4806630735752980086==
+Content-Type: multipart/alternative; boundary="0000000000001da4bb05786bc200"
+
+--0000000000001da4bb05786bc200
+Content-Type: text/plain; charset="UTF-8"
+
+Hi,
+
+I have started finding which patch introduced Armv8 Secondary CPUs issue.
+
+I just want to start PV vdevb before domainU debian rootfs mount. Is it
+possible?
+
+Thanks,
+Omkar B
+
+
+On Mon, Oct 8, 2018 at 4:00 PM Julien Grall <julien.grall@arm.com> wrote:
+
+>
+>
+> On 08/10/2018 10:12, Omkar Bolla wrote:
+> > Hi,
+>
+> Hi,
+>
+> > This is also okay, but problem here is I am using 4.8 stable  xen
+> > because it  is working on Hkey960(ArmV8)
+>
+> This is because you can't bring up secondary CPUs on the Hikey with Xen
+> 4.11 [1], right? It would be nice to find where the bug was introduced
+> because Xen 4.8 is out of support and does not contain the latest fixes
+> (such as Meltdown/Spectre).
+>
+> > Is there any other way to share buffer dynamically?
+> You would have to write your own PV drivers or port the series to Xen 4.8.
+>
+> Cheers,
+>
+> [1]
+> https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg21576.html
+>
+> --
+> Julien Grall
+>
+
+-- 
+
+
+
+
+
+
+This
+message contains confidential information and is intended only 
+for the
+individual(s) named. If you are not the intended
+recipient, you are 
+notified that disclosing, copying, distributing or taking any
+action in 
+reliance on the contents of this mail and attached file/s is strictly
+
+prohibited. Please notify the
+sender immediately and delete this e-mail 
+from your system. E-mail transmission
+cannot be guaranteed to be secured or 
+error-free as information could be
+intercepted, corrupted, lost, destroyed, 
+arrive late or incomplete, or contain
+viruses. The sender therefore does 
+not accept liability for any errors or
+omissions in the contents of this 
+message, which arise as a result of e-mail
+transmission.
+
+--0000000000001da4bb05786bc200
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"color:#0b5394">Hi,</=
+div><div class=3D"gmail_default" style=3D"color:#0b5394"><br></div><div cla=
+ss=3D"gmail_default" style=3D"color:#0b5394">I have started finding which p=
+atch introduced Armv8 Secondary CPUs issue.</div><div class=3D"gmail_defaul=
+t" style=3D"color:#0b5394"><br></div><div class=3D"gmail_default" style=3D"=
+color:#0b5394">I just want to start PV vdevb before domainU debian rootfs m=
+ount. Is it possible?</div><div class=3D"gmail_default" style=3D"color:#0b5=
+394"><br></div><div class=3D"gmail_default" style=3D"color:#0b5394">Thanks,=
+</div><div class=3D"gmail_default" style=3D"color:#0b5394">Omkar B</div><di=
+v class=3D"gmail_default" style=3D"color:#0b5394"><br></div></div><br><div =
+class=3D"gmail_quote"><div dir=3D"ltr">On Mon, Oct 8, 2018 at 4:00 PM Julie=
+n Grall &lt;<a href=3D"mailto:julien.grall@arm.com">julien.grall@arm.com</a=
+>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0=
+ 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
+<br>
+On 08/10/2018 10:12, Omkar Bolla wrote:<br>
+&gt; Hi,<br>
+<br>
+Hi,<br>
+<br>
+&gt; This is also okay, but problem here is I am using 4.8 stable=C2=A0 xen=
+ <br>
+&gt; because it=C2=A0 is working on Hkey960(ArmV8)<br>
+<br>
+This is because you can&#39;t bring up secondary CPUs on the Hikey with Xen=
+ <br>
+4.11 [1], right? It would be nice to find where the bug was introduced <br>
+because Xen 4.8 is out of support and does not contain the latest fixes <br=
+>
+(such as Meltdown/Spectre).<br>
+<br>
+&gt; Is there any other way to share buffer dynamically?<br>
+You would have to write your own PV drivers or port the series to Xen 4.8.<=
+br>
+<br>
+Cheers,<br>
+<br>
+[1] <br>
+<a href=3D"https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg2=
+1576.html" rel=3D"noreferrer" target=3D"_blank">https://www.mail-archive.co=
+m/xen-devel@lists.xenproject.org/msg21576.html</a><br>
+<br>
+-- <br>
+Julien Grall<br>
+</blockquote></div>
+
+<br>
+
+
+
+
+<p><span lang=3D"EN-IN">This
+message contains confidential information and is intended only for the
+individual(s) named.</span><span lang=3D"EN-IN"> </span>If you are not the =
+intended
+recipient, you are notified that disclosing, copying, distributing or takin=
+g any
+action in reliance on the contents of this mail and attached file/s is stri=
+ctly
+prohibited<span lang=3D"EN-IN">. Please notify the
+sender immediately and delete this e-mail from your system. E-mail transmis=
+sion
+cannot be guaranteed to be secured or error-free as information could be
+intercepted, corrupted, lost, destroyed, arrive late or incomplete, or cont=
+ain
+viruses. The sender therefore does not accept liability for any errors or
+omissions in the contents of this message, which arise as a result of e-mai=
+l
+transmission.</span></p>
+--0000000000001da4bb05786bc200--
+
+
+--===============4806630735752980086==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4806630735752980086==--
