@@ -1,23 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v4 22/23] xen/arm: move kernel.h to asm-arm/
-Date: Wed, 17 Oct 2018 17:26:11 +0100
-Message-ID: <ed8829be-4b24-02f1-bf7c-fe57de0d485e@citrix.com>
-References: <alpine.DEB.2.10.1810051140030.24936@sstabellini-ThinkPad-X260>
- <1538765251-25256-22-git-send-email-sstabellini@kernel.org>
- <3410d002-8c94-f7f3-7c57-d2ffd53ef676@arm.com>
- <alpine.DEB.2.10.1810172242050.3835@sstabellini-ThinkPad-X260>
- <52b8cd47-2d04-f561-c684-f343f6982bc3@arm.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] Reservation of PCI device range
+ 0xc200-0xc2ff to XCP-ng Project
+Date: Wed, 17 Oct 2018 17:33:45 +0100
+Message-ID: <20181017163345.n3iitpa3nb4s56rm@zion.uk.xensource.com>
+References: <0d7eee26-529d-a900-92d4-9414bfd43eb4@schulzalex.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=pwmr=m5=citrix.com=prvs=821ff731b=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1gCoeE-0000Bj-MR
- for xen-devel@lists.xenproject.org; Wed, 17 Oct 2018 16:26:14 +0000
-In-Reply-To: <52b8cd47-2d04-f561-c684-f343f6982bc3@arm.com>
-Content-Language: en-GB
+ <srs0=aaoo=m5=citrix.com=prvs=821d74b27=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1gCola-0000yj-G1
+ for xen-devel@lists.xenproject.org; Wed, 17 Oct 2018 16:33:50 +0000
+Content-Disposition: inline
+In-Reply-To: <0d7eee26-529d-a900-92d4-9414bfd43eb4@schulzalex.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,28 +23,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Alexander Schulz - XCP-ng Project Member <code@schulzalex.de>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTcvMTAvMTggMTc6MTEsIEp1bGllbiBHcmFsbCB3cm90ZToKPgo+Cj4gT24gMTcvMTAvMjAx
-OCAxNTo0MiwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+PiBPbiBNb24sIDE1IE9jdCAyMDE4
-LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+PiBIaSBTdGVmYW5vLAo+Pj4KPj4+IE9uIDA1LzEwLzIw
-MTggMTk6NDcsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPj4+PiBJdCB3aWxsIGJlICNpbmNs
-dWRlZCBieSBhIGZpbGUgaW4gYSB4ZW4vYXJjaC9hcm0gc3ViZGlyZWN0b3J5Lgo+Pj4+Cj4+Pj4g
-U2lnbmVkLW9mZi1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxzdGVmYW5vc0B4aWxpbnguY29tPgo+
-Pj4+IC0tLQo+Pj4+IMKgwqAgeGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5jwqAgfMKgIDIgKy0K
-Pj4+PiDCoMKgIHhlbi9hcmNoL2FybS9rZXJuZWwuY8KgwqDCoMKgwqDCoMKgIHzCoCAzICstCj4+
-Pj4gwqDCoCB4ZW4vYXJjaC9hcm0va2VybmVsLmjCoMKgwqDCoMKgwqDCoCB8IDg2Cj4+Pj4gLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPj4+PiDCoMKgIHhlbi9p
-bmNsdWRlL2FzbS1hcm0va2VybmVsLmggfCA4Ngo+Pj4+ICsrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrCj4+Pgo+Pj4gVGhlcmUgYXJlIHdheSB0byBtYWtlIGdpdCBk
-aWZmIG5pY2VyIGZvciBjb2RlIG1vdmVtZW50LiBUaGlzIHNlZW1zCj4+PiB0byBiZSBkb25lCj4+
-PiBieSBkZWZhdWx0IG9uIDIuMTEuMC4gTm90IHN1cmUgZm9yIG9sZGVyIHZlcnNpb24uIFdoYXQg
-YXJlIHlvdSB1c2luZz8KPj4KPj4gR2l0IHZlcnNpb24gMS45LjEgKGFuZCBndWlsdCAwLjM1KQo+
-Cj4gQSA0IHllYXJzIG9sZCBnaXQgdmVyc2lvbi4gTWF5IEkgYXNrIHRvIHVwZGF0ZSB0byBhIG5l
-dyBnaXQgKG9yIHNlZSBpZgo+IHRoZXJlIGFyZSBhbiBvcHRpb24gZG9pbmcgdGhlIHNhbWUpPyBU
-aGlzIHdvdWxkIGhlbHAgcmV2aWV3aW5nIGNvZGUKPiBtb3ZlbWVudC4KCmdpdCBjb25maWcgLS1n
-bG9iYWwgZGlmZi5yZW5hbWVzPWNvcHkKCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCBPY3QgMTYsIDIwMTggYXQgMTA6Mjg6MDRQTSArMDIwMCwgQWxleGFuZGVyIFNjaHVs
+eiAtIFhDUC1uZyBQcm9qZWN0IE1lbWJlciB3cm90ZToKPiBXZSBhcmUgdGhlIFhDUC1uZyBwcm9q
+ZWN0IChodHRwczovL3hjcC1uZy5vcmcpIGFuZCB3YW50IHRvIGRpc3RyaWJ1dGUgb3VyCj4gb3du
+IFBWLVRvb2xzIChtYXliZSBhbHNvIHBlciB3aW5kb3dzIHVwZGF0ZXMpIHNvIHdlIG5lZWQgYW4g
+ZXh0cmEgcmFuZ2UuCj4gCj4gV2UgYWxzbyByZWdpc3RlcmVkIGEgUENJLURldmljZToKPiAKPiAi
+WENQLW5nIFByb2plY3QgUENJIERldmljZSBmb3IgV2luZG93cyBVcGRhdGUiIC0+Cj4gaHR0cHM6
+Ly9wY2ktaWRzLnVjdy5jei9yZWFkL1BDLzU4NTMvYzIwMAo+IAo+IFNpZ25lZC1vZmYtYnk6IEFs
+ZXhhbmRlciBTY2h1bHogPGNvZGVAc2NodWx6YWxleC5kZT4KCkkgdGhpbmsgeW91ciBlbWFpbCBj
+bGllbnQgLyBzZXJ2ZXIgaGFzIG1hbmdsZWQgdGhpcyBwYXRjaCBiYWRseS4gQXMgSWFuCm9ic2Vy
+dmVkLCBpdCB3b3VsZG4ndCBhcHBseS4KCkFueXdheSwgaW4gdGhlIGludGVyZXN0IG9mIGF2b2lk
+aW5nIGFub3RoZXIgcm91bmQgb2YgcG9zdGluZywgSSBoYXZlCmZpeGVkIHVwIHRoZSBwYXRjaCBh
+bmQgY29tbWl0IGl0IGZvciB5b3UuCgpXZWkuCgo+IC0tLQo+ICBkb2NzL21hbi94ZW4tcGNpLWRl
+dmljZS1yZXNlcnZhdGlvbnMucG9kLjcgfCAxICsKPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0
+aW9uKCspCj4gCj4gZGlmZiAtLWdpdCBhL2RvY3MvbWFuL3hlbi1wY2ktZGV2aWNlLXJlc2VydmF0
+aW9ucy5wb2QuNwo+IGIvZG9jcy9tYW4veGVuLXBjaS1kZXZpY2UtcmVzZXJ2YXRpb25zLnBvZC43
+Cj4gaW5kZXggMDQ5ZTQ3NDEwZi4uMWNkNWEzZTExNSAxMDA2NDQKPiAtLS0gYS9kb2NzL21hbi94
+ZW4tcGNpLWRldmljZS1yZXNlcnZhdGlvbnMucG9kLjcKPiArKysgYi9kb2NzL21hbi94ZW4tcGNp
+LWRldmljZS1yZXNlcnZhdGlvbnMucG9kLjcKPiBAQCAtNDEsNiArNDEsNyBAQCBtdWx0aXBsZSBY
+ZW4gdmVuZG9ycyB1c2luZyBjb25mbGljdGluZyBJRHMuCj4gICAgICAweDAwMDIgICAgICAgIHwg
+Q2l0cml4IFhlblNlcnZlciAoZ3JhbmRmYXRoZXJlZCBhbGxvY2F0aW9uIGZvcgo+IFhlblNlcnZl
+ciA2LjEpCj4gICAgICAweGMwMDAtMHhjMGZmIHwgQ2l0cml4IFhlblNlcnZlcgo+ICAgICAgMHhj
+MTAwLTB4YzFmZiB8IENpdHJpeCBYZW5DbGllbnQKPiArICAgICAweGMyMDAtMHhjMmZmIHwgWENQ
+LW5nIFByb2plY3QgKGh0dHBzOi8veGNwLW5nLm9yZykKPiAgID1oZWFkMSBOb3Rlcwo+ICAtLSAy
+LjE3LjEud2luZG93cy4yCj4gCj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
