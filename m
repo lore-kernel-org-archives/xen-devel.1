@@ -1,25 +1,11 @@
-From: Omkar Bolla <omkar.bolla@pathpartnertech.com>
-Subject: Re: Xen PV: Sample new PV driver for buffer sharing
- between domains
-Date: Wed, 17 Oct 2018 17:54:46 +0530
-Message-ID: <CAC4nxbsopU7Ths1LYE1HAB8txbBv9rLGwqCgd=kQWLNDhEz6LQ@mail.gmail.com>
-References: <CAC4nxbvWUpWQcUATQswoaVJfSq8EU7CH6-Jx1VwVGYVeOc0tZw@mail.gmail.com>
- <B9D01323-5CE0-4CAE-9A7C-2B1CE482A833@xenproject.org>
- <aebd40b7-e7d2-c861-b658-863b2c8f2079@gmail.com>
- <f688cda0-a342-0b66-fb5c-56238d941f9c@suse.com>
- <f8ae32f3-8399-24d3-fe1e-45d4c1669e1b@epam.com>
- <CAC4nxbvh6LA=t2iEdiw2UrqrQP3Zf2NtRcViJ1YNGZkyLZqYHg@mail.gmail.com>
- <d130b853-0e33-ecb7-5598-d99791a5f2bf@suse.com>
- <CAC4nxbuTQ1uP6rKiCAp7hDe-ygq9LKHQw8ggVM+fOVH-VvU8Tw@mail.gmail.com>
- <d2b9cd5a-2768-60bd-07bd-2055d1490399@suse.com>
- <CAC4nxbsBox=FgCBx5KwkkvCHwyX2MvBGoGpa1sDyS2cF0itT=Q@mail.gmail.com>
- <074697de-7265-a1fb-2970-4128a58f09ca@arm.com>
- <CAC4nxbuY0vJd8o6Vj9E14m2-sw3JZ5Spbiz3vbq2K0RQhK9p3w@mail.gmail.com>
- <c6724ce1-086f-3492-2c39-8192542ff5d8@arm.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH] x86/svm: Remove the pdpe fields from struct vmcb
+Date: Wed, 17 Oct 2018 13:47:48 +0100
+Message-ID: <1539780468-21748-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4806630735752980086=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <c6724ce1-086f-3492-2c39-8192542ff5d8@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,169 +14,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: jgross@suse.com, xen-devel@lists.xensource.com, Oleksandr_Andrushchenko@epam.com, Oleksandr Andrushchenko <andr2000@gmail.com>, Lars Kurth <lars.kurth.xen@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: Xen-devel <xen-devel@lists.xen.org>
+Cc: Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4806630735752980086==
-Content-Type: multipart/alternative; boundary="0000000000001da4bb05786bc200"
-
---0000000000001da4bb05786bc200
-Content-Type: text/plain; charset="UTF-8"
-
-Hi,
-
-I have started finding which patch introduced Armv8 Secondary CPUs issue.
-
-I just want to start PV vdevb before domainU debian rootfs mount. Is it
-possible?
-
-Thanks,
-Omkar B
-
-
-On Mon, Oct 8, 2018 at 4:00 PM Julien Grall <julien.grall@arm.com> wrote:
-
->
->
-> On 08/10/2018 10:12, Omkar Bolla wrote:
-> > Hi,
->
-> Hi,
->
-> > This is also okay, but problem here is I am using 4.8 stable  xen
-> > because it  is working on Hkey960(ArmV8)
->
-> This is because you can't bring up secondary CPUs on the Hikey with Xen
-> 4.11 [1], right? It would be nice to find where the bug was introduced
-> because Xen 4.8 is out of support and does not contain the latest fixes
-> (such as Meltdown/Spectre).
->
-> > Is there any other way to share buffer dynamically?
-> You would have to write your own PV drivers or port the series to Xen 4.8.
->
-> Cheers,
->
-> [1]
-> https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg21576.html
->
-> --
-> Julien Grall
->
-
--- 
-
-
-
-
-
-
-This
-message contains confidential information and is intended only 
-for the
-individual(s) named. If you are not the intended
-recipient, you are 
-notified that disclosing, copying, distributing or taking any
-action in 
-reliance on the contents of this mail and attached file/s is strictly
-
-prohibited. Please notify the
-sender immediately and delete this e-mail 
-from your system. E-mail transmission
-cannot be guaranteed to be secured or 
-error-free as information could be
-intercepted, corrupted, lost, destroyed, 
-arrive late or incomplete, or contain
-viruses. The sender therefore does 
-not accept liability for any errors or
-omissions in the contents of this 
-message, which arise as a result of e-mail
-transmission.
-
---0000000000001da4bb05786bc200
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"color:#0b5394">Hi,</=
-div><div class=3D"gmail_default" style=3D"color:#0b5394"><br></div><div cla=
-ss=3D"gmail_default" style=3D"color:#0b5394">I have started finding which p=
-atch introduced Armv8 Secondary CPUs issue.</div><div class=3D"gmail_defaul=
-t" style=3D"color:#0b5394"><br></div><div class=3D"gmail_default" style=3D"=
-color:#0b5394">I just want to start PV vdevb before domainU debian rootfs m=
-ount. Is it possible?</div><div class=3D"gmail_default" style=3D"color:#0b5=
-394"><br></div><div class=3D"gmail_default" style=3D"color:#0b5394">Thanks,=
-</div><div class=3D"gmail_default" style=3D"color:#0b5394">Omkar B</div><di=
-v class=3D"gmail_default" style=3D"color:#0b5394"><br></div></div><br><div =
-class=3D"gmail_quote"><div dir=3D"ltr">On Mon, Oct 8, 2018 at 4:00 PM Julie=
-n Grall &lt;<a href=3D"mailto:julien.grall@arm.com">julien.grall@arm.com</a=
->&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0=
- 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
-<br>
-On 08/10/2018 10:12, Omkar Bolla wrote:<br>
-&gt; Hi,<br>
-<br>
-Hi,<br>
-<br>
-&gt; This is also okay, but problem here is I am using 4.8 stable=C2=A0 xen=
- <br>
-&gt; because it=C2=A0 is working on Hkey960(ArmV8)<br>
-<br>
-This is because you can&#39;t bring up secondary CPUs on the Hikey with Xen=
- <br>
-4.11 [1], right? It would be nice to find where the bug was introduced <br>
-because Xen 4.8 is out of support and does not contain the latest fixes <br=
->
-(such as Meltdown/Spectre).<br>
-<br>
-&gt; Is there any other way to share buffer dynamically?<br>
-You would have to write your own PV drivers or port the series to Xen 4.8.<=
-br>
-<br>
-Cheers,<br>
-<br>
-[1] <br>
-<a href=3D"https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg2=
-1576.html" rel=3D"noreferrer" target=3D"_blank">https://www.mail-archive.co=
-m/xen-devel@lists.xenproject.org/msg21576.html</a><br>
-<br>
--- <br>
-Julien Grall<br>
-</blockquote></div>
-
-<br>
-
-
-
-
-<p><span lang=3D"EN-IN">This
-message contains confidential information and is intended only for the
-individual(s) named.</span><span lang=3D"EN-IN"> </span>If you are not the =
-intended
-recipient, you are notified that disclosing, copying, distributing or takin=
-g any
-action in reliance on the contents of this mail and attached file/s is stri=
-ctly
-prohibited<span lang=3D"EN-IN">. Please notify the
-sender immediately and delete this e-mail from your system. E-mail transmis=
-sion
-cannot be guaranteed to be secured or error-free as information could be
-intercepted, corrupted, lost, destroyed, arrive late or incomplete, or cont=
-ain
-viruses. The sender therefore does not accept liability for any errors or
-omissions in the contents of this message, which arise as a result of e-mai=
-l
-transmission.</span></p>
---0000000000001da4bb05786bc200--
-
-
---===============4806630735752980086==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4806630735752980086==--
+VGhlc2UgZmllbGRzIGhhdmUgZXhpc3RlZCBzaW5jZSB0aGUgU1ZNIGNvZGUgd2FzIGZpcnN0IGlu
+dHJvZHVjZWQuCgpUaGUgZWFybGllc3QgcmVmZXJlbmNlIEkgY2FuIGZpbmQgaXMgYy9zIGQxYmQx
+NTdmYmM5IHdoaWNoIGlzIHVuZm9ydW5hdGVseSBhCnJlYmFzZSAmIHNxdWFzaCBvZiBhIHNlcGFy
+YXRlIGRldiB0cmVlLiAgTG9va2luZyBhIHRoZSBjb21taXQgbWVzc2FnZSwgSSdtCmd1ZXNzaW5n
+IGl0IHdhcyBpbnRyb2R1Y2VkIGJ5OgoKICA+IHVzZXI6ICAgICAgICB0d29sbGVyQHhlbi10cncx
+LnNpdGUKICA+IGRhdGU6ICAgICAgICBUdWUgRGVjIDEzIDE5OjQ5OjUzIDIwMDUgLTA1MDAKICA+
+IGZpbGVzOiAgICAgICAuLi4geGVuL2luY2x1ZGUvYXNtLXg4Ni9zdm1fdm1jYi5oIC4uLgogID4g
+ZGVzY3JpcHRpb246CiAgPiBBZGQgU1ZNIGJhc2UgZmlsZXMgdG8gcmVwb3NpdG9yeS4KCkFueXdh
+eSwgdGhlIEFNRCBTRE0gaGFzIG5vIG1lbnRpb24gb2YgUERQRSBmaWVsZHMgaW4gdGhlIFZNQ0Ig
+YW5kIG1hcmtzIHRoaXMKcGFydCBvZiB0aGUgVk1DQiBhcyByZXNlcnZlZC4gIFRoZSBtYW51YWwg
+ZG9lcyBleHBsaWNpdGx5IHNheSB0aGF0IDMyYml0IFBBRQpwYWdpbmcgbWF5IHJlYWQgdGhlIFBE
+UEUgZmllbGRzIGZyb20gbWVtb3J5IHJhdGhlciBmcm9tIHRoZSBDUFUgcmVnaXN0ZXJzLgoKQ2hh
+bmNlcyBhcmUgdmVyeSBnb29kIHRoYXQgdGhpcyBpcyBhIHZlc3RpZ2lhbCByZW1uZW50IG9mIGFu
+IGVhcmx5IGRlc2lnbi4KWGVuIGRvZXNuJ3QgdXNlIHRoZSBmaWVsZHMgYXQgYWxsLCBleGNlcHQg
+dG8gY29weSB0aGVtIG9uIHZpcnR1YWwKdm1lbnRyeS92bWV4aXQuCgpTaWduZWQtb2ZmLWJ5OiBB
+bmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgotLS0KQ0M6IEJvcmlzIE9z
+dHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+CkNDOiBTdXJhdmVlIFN1dGhpa3Vs
+cGFuaXQgPHN1cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPgpDQzogQnJpYW4gV29vZHMgPGJy
+aWFuLndvb2RzQGFtZC5jb20+CkNDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+CkND
+OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgotLS0KIHhlbi9hcmNoL3g4Ni9odm0vc3Zt
+L25lc3RlZHN2bS5jICAgfCAxMiAtLS0tLS0tLS0tLS0KIHhlbi9pbmNsdWRlL2FzbS14ODYvaHZt
+L3N2bS92bWNiLmggfCAgNyArKy0tLS0tCiAyIGZpbGVzIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygr
+KSwgMTcgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2h2bS9zdm0vbmVz
+dGVkc3ZtLmMgYi94ZW4vYXJjaC94ODYvaHZtL3N2bS9uZXN0ZWRzdm0uYwppbmRleCAzZjRmNDAz
+Li43OGExMDE2IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvaHZtL3N2bS9uZXN0ZWRzdm0uYwor
+KysgYi94ZW4vYXJjaC94ODYvaHZtL3N2bS9uZXN0ZWRzdm0uYwpAQCAtNjM2LDEyICs2MzYsNiBA
+QCBzdGF0aWMgaW50IG5zdm1fdm1jYl9wcmVwYXJlNHZtcnVuKHN0cnVjdCB2Y3B1ICp2LCBzdHJ1
+Y3QgY3B1X3VzZXJfcmVncyAqcmVncykKICAgICAgKiBzeXNlbnRlcl9laXAuIFRoZXNlIGFyZSBo
+YW5kbGVkIHZpYSBWTVNBVkUvVk1MT0FEIGVtdWxhdGlvbi4KICAgICAgKi8KIAotICAgIC8qIFBh
+Z2UgdGFibGVzICovCi0gICAgbjJ2bWNiLT5wZHBlMCA9IG5zX3ZtY2ItPnBkcGUwOwotICAgIG4y
+dm1jYi0+cGRwZTEgPSBuc192bWNiLT5wZHBlMTsKLSAgICBuMnZtY2ItPnBkcGUyID0gbnNfdm1j
+Yi0+cGRwZTI7Ci0gICAgbjJ2bWNiLT5wZHBlMyA9IG5zX3ZtY2ItPnBkcGUzOwotCiAgICAgLyog
+UEFUICovCiAgICAgaWYgKCF2Y2xlYW5iaXRfc2V0KG5wKSkgewogICAgICAgICBuMnZtY2ItPl9n
+X3BhdCA9IG5zX3ZtY2ItPl9nX3BhdDsKQEAgLTExNzcsMTIgKzExNzEsNiBAQCBuc3ZtX3ZtY2Jf
+cHJlcGFyZTR2bWV4aXQoc3RydWN0IHZjcHUgKnYsIHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdz
+KQogICAgIC8qIENSMiAqLwogICAgIG5zX3ZtY2ItPl9jcjIgPSBuMnZtY2ItPl9jcjI7CiAKLSAg
+ICAvKiBQYWdlIHRhYmxlcyAqLwotICAgIG5zX3ZtY2ItPnBkcGUwID0gbjJ2bWNiLT5wZHBlMDsK
+LSAgICBuc192bWNiLT5wZHBlMSA9IG4ydm1jYi0+cGRwZTE7Ci0gICAgbnNfdm1jYi0+cGRwZTIg
+PSBuMnZtY2ItPnBkcGUyOwotICAgIG5zX3ZtY2ItPnBkcGUzID0gbjJ2bWNiLT5wZHBlMzsKLQog
+ICAgIC8qIFBBVCAqLwogICAgIG5zX3ZtY2ItPl9nX3BhdCA9IG4ydm1jYi0+X2dfcGF0OwogCmRp
+ZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9zdm0vdm1jYi5oIGIveGVuL2luY2x1
+ZGUvYXNtLXg4Ni9odm0vc3ZtL3ZtY2IuaAppbmRleCAzYTUxNGY4Li40OGFlZDc4IDEwMDY0NAot
+LS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9zdm0vdm1jYi5oCisrKyBiL3hlbi9pbmNsdWRl
+L2FzbS14ODYvaHZtL3N2bS92bWNiLmgKQEAgLTQ3OSwxNyArNDc5LDE0IEBAIHN0cnVjdCB2bWNi
+X3N0cnVjdCB7CiAgICAgdTY0IHN5c2VudGVyX2VzcDsKICAgICB1NjQgc3lzZW50ZXJfZWlwOwog
+ICAgIHU2NCBfY3IyOyAgICAgICAgICAgICAgICAgICAvKiBjbGVhbmJpdCA5ICovCi0gICAgdTY0
+IHBkcGUwOwotICAgIHU2NCBwZHBlMTsKLSAgICB1NjQgcGRwZTI7Ci0gICAgdTY0IHBkcGUzOwor
+ICAgIHU2NCByZXMxNls0XTsKICAgICB1NjQgX2dfcGF0OyAgICAgICAgICAgICAgICAgLyogY2xl
+YW5iaXQgNCAqLwogICAgIHU2NCBfZGVidWdjdGxtc3I7ICAgICAgICAgICAvKiBjbGVhbmJpdCAx
+MCAqLwogICAgIHU2NCBfbGFzdGJyYW5jaGZyb21pcDsgICAgICAvKiBjbGVhbmJpdCAxMCAqLwog
+ICAgIHU2NCBfbGFzdGJyYW5jaHRvaXA7ICAgICAgICAvKiBjbGVhbmJpdCAxMCAqLwogICAgIHU2
+NCBfbGFzdGludGZyb21pcDsgICAgICAgICAvKiBjbGVhbmJpdCAxMCAqLwogICAgIHU2NCBfbGFz
+dGludHRvaXA7ICAgICAgICAgICAvKiBjbGVhbmJpdCAxMCAqLwotICAgIHU2NCByZXMxNlszMDFd
+OworICAgIHU2NCByZXMxN1szMDFdOwogfTsKIAogc3RydWN0IHN2bV9kb21haW4gewotLSAKMi4x
+LjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
