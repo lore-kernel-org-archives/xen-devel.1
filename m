@@ -1,20 +1,21 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v3 4/6] xen/arm: zynqmp: eemi access control
-Date: Wed, 17 Oct 2018 21:58:15 +0800 (CST)
-Message-ID: <alpine.DEB.2.10.1810172008170.3835@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1808101435481.32304@sstabellini-ThinkPad-X260>
- <1533945710-15159-4-git-send-email-sstabellini@kernel.org>
- <79f450e4-7f96-3f9d-d267-a3aa38b1f26a@arm.com>
- <alpine.DEB.2.10.1810101455160.436@sstabellini-ThinkPad-X260>
- <0efa6dec-8800-f294-e16f-8cf6d4067a84@arm.com>
- <bb36e227-6c35-ed22-a2d0-bffec03a193d@arm.com>
- <alpine.DEB.2.10.1810160947370.4859@sstabellini-ThinkPad-X260>
- <ea9e4900-c886-415c-585a-db620ac9194c@arm.com>
+From: Paul Durrant <Paul.Durrant@citrix.com>
+Subject: Re: [PATCH] x86/mm/p2m: don't needlessly limit MMIO
+ mapping order to 4k
+Date: Wed, 17 Oct 2018 14:02:49 +0000
+Message-ID: <90ebe304b3e9450980ac453e3b02c307@AMSPEX02CL03.citrite.net>
+References: <20181016144155.24646-1-paul.durrant@citrix.com>
+ <22edb60f-3fb4-3f3c-8975-b4ab565d5acb@citrix.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-2053320843-1539778108=:3835"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <ea9e4900-c886-415c-585a-db620ac9194c@arm.com>
-Content-ID: <alpine.DEB.2.10.1810172158090.3835@sstabellini-ThinkPad-X260>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=vzhq=m5=citrix.com=prvs=821dd03bf=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1gCmRK-0002db-AR
+ for xen-devel@lists.xenproject.org; Wed, 17 Oct 2018 14:04:46 +0000
+In-Reply-To: <22edb60f-3fb4-3f3c-8975-b4ab565d5acb@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,103 +24,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: edgar.iglesias@xilinx.com, Stefano Stabellini <stefanos@xilinx.com>, nd <nd@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
+To: Andrew Cooper <Andrew.Cooper3@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-2053320843-1539778108=:3835
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1810172158091.3835@sstabellini-ThinkPad-X260>
-
-On Tue, 16 Oct 2018, Julien Grall wrote:
-> Hi Stefano,
-> 
-> On 10/16/2018 03:39 AM, Stefano Stabellini wrote:
-> > On 15/10/2018 08:25, Julien Grall wrote:
-> > > Hi,
-> > > 
-> > > On 10/10/2018 11:35 PM, Stefano Stabellini wrote:
-> > > > On Tue, 28 Aug 2018, Julien Grall wrote:
-> > > > > On 11/08/18 01:01, Stefano Stabellini wrote:
-> > > > > >     #include <xen/iocap.h>
-> > > > > >     #include <xen/sched.h>
-> > > > > >     #include <xen/types.h>
-> > > > > > @@ -23,6 +91,721 @@
-> > > > > >     #include <asm/regs.h>
-> > > > > >     #include <asm/platforms/xilinx-zynqmp-eemi.h>
-> > > > > >     +struct pm_access
-> > > > > > +{
-> > > > > > +    paddr_t addr;
-> > > > > 
-> > > > > It seems that the address will always page-aligned. So could we store
-> > > > > a
-> > > > > frame
-> > > > > using mfn_t?
-> > > > 
-> > > > Yes we could store just the frame. I started to make the change
-> > > > suggested, and all the required corresponding changes to the
-> > > > initializations below, for instance:
-> > > > 
-> > > >     [NODE_RPU] = { MM_RPU },
-> > > > 
-> > > > needs to become:
-> > > > 
-> > > >     [NODE_RPU] = { _mfn(MM_RPU) },
-> > > > 
-> > > > but when I tried to do that, I get a compilation error:
-> > > > 
-> > > >     xilinx-zynqmp-eemi.c:106:20: error: initializer element is not
-> > > > constant
-> > > >          [NODE_RPU] = { _mfn(MM_RPU) },
-> > > > 
-> > > > Unfortunately it is not possible to use mfn_t in static initializations,
-> > > > because it is a static inline. I could do:
-> > > > 
-> > > 
-> > > This is a bug in GCC older than 5.0.
-> > > 
-> > > >     [NODE_RPU] = { { MM_RPU } },
-> > > > 
-> > > > which would work for DEBUG builds but wouldn't work for non-DEBUG
-> > > > builds.
-> > > > 
-> > > > I'll keep paddr_t for the next version of the series.
-> > > 
-> > > What is the issue with that on non-debug build? We are using this
-> > > construction in another place without any compiler issue.
-> > 
-> > I modified the code as suggested again and tried with newer GCCs (both
-> > 6.3.1 and 7.3.1) but I still get the same error:
-> > 
-> > xilinx-zynqmp-eemi.c:105:20: error: initializer element is not constant
-> >       [NODE_RPU] = { _mfn(MM_RPU) },
-> 
-> I actually misremembered the problem. _mfn is using a static inline helper
-> which is not considered as a constant.
-> 
-> The correct solution would be (mfn_t){ MM_RPU } but GCC 5.0 (and older) does
-> not parse correctly the type cast. So we workaround by dropping the cast for
-> the initializer.
-> 
-> On your previous e-mail you said that { { MM_RPU } } would not work for debug.
-> One solution would be to introduce _mfn_initializer(...) that would be
-> implemented differently for debug and non-debug.
-> 
-> I think such helper would be useful in other context as well.
-
-OK, I'll do that
---8323329-2053320843-1539778108=:3835
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-2053320843-1539778108=:3835--
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBBbmRyZXcgQ29vcGVyDQo+IFNl
+bnQ6IDE3IE9jdG9iZXIgMjAxOCAxNDoyNA0KPiBUbzogUGF1bCBEdXJyYW50IDxQYXVsLkR1cnJh
+bnRAY2l0cml4LmNvbT47IHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZw0KPiBDYzogR2Vv
+cmdlIER1bmxhcCA8R2VvcmdlLkR1bmxhcEBjaXRyaXguY29tPjsgSmFuIEJldWxpY2gNCj4gPGpi
+ZXVsaWNoQHN1c2UuY29tPjsgV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4NCj4gU3ViamVj
+dDogUmU6IFtQQVRDSF0geDg2L21tL3AybTogZG9uJ3QgbmVlZGxlc3NseSBsaW1pdCBNTUlPIG1h
+cHBpbmcgb3JkZXINCj4gdG8gNGsNCj4gDQo+IE9uIDE2LzEwLzE4IDE1OjQxLCBQYXVsIER1cnJh
+bnQgd3JvdGU6DQo+ID4gVGhlIFAyTSBjb21tb24gY29kZSBjdXJyZW50bHkgcmVzdHJpY3RzIHRo
+ZSBNTUlPIG1hcHBpbmcgb3JkZXIgb2YgYW55DQo+ID4gZG9tYWluIHdpdGggSU9NTVUgbWFwcGlu
+Z3MsIGJ1dCB0aGF0IGlzIG5vdCB1c2luZyBzaGFyZWQgdGFibGVzLCB0byA0ay4NCj4gPiBUaGlz
+IGhhcyBiZWVuIHNob3duIHRvIGhhdmUgYSBodWdlIHBlcmZvcm1hbmNlIGNvc3Qgd2hlbiBwYXNz
+aW5nIHRocm91Z2gNCj4gPiBhIFBDSSBkZXZpY2Ugd2l0aCBhIHZlcnkgbGFyZ2UgQkFSIChlLmcu
+IE5WSURJQSBQNDApLCBpbmNyZWFzaW5nIHRoZQ0KPiBndWVzdA0KPiA+IGJvb3QgdGltZSBmcm9t
+IH4yMHMgdG8gc2V2ZXJhbCBtaW51dGVzIHdoZW4gaW9tbXU9bm8tc2hhcmVwdCBpcw0KPiBzcGVj
+aWZpZWQNCj4gPiBvbiB0aGUgWGVuIGNvbW1hbmQgbGluZS4NCj4gPg0KPiA+IFRoZSBsaW1pdGF0
+aW9uIHdhcyBhZGRlZCBieSBjb21taXQgYzNjNzU2YmQgIng4Ni9wMm06IHVzZSBsYXJnZSBwYWdl
+cw0KPiA+IGZvciBNTUlPIG1hcHBpbmdzIiBob3dldmVyIHRoZSB1bmRlcmx5aW5nIGltcGxlbWVu
+dGF0aW9ucyBvZiBwMm0tDQo+ID5zZXRfZW50cnkNCj4gPiBmb3IgSW50ZWwgYW5kIEFNRCBhcmUg
+Y29kZWQgdG8gY29wZSB3aXRoIG1hcHBpbmcgb3JkZXJzIGhpZ2hlciB0aGFuIDRrLA0KPiA+IGV2
+ZW4gdGhvdWdoIHRoZSBJT01NVSBtYXBwaW5nIGZ1bmN0aW9uIGlzIGl0c2VsZiBjdXJyZW50bHkg
+bGltaXRlZCB0bw0KPiA0aywNCj4gPiBzbyB0aGVyZSBpcyBubyByZWFsIG5lZWQgdG8gbGltaXQg
+dGhlIG9yZGVyIHBhc3NlZCBpbnRvIHRoZSBtZXRob2QuDQo+ID4NCj4gPiBXaXRoIHRoaXMgcGF0
+Y2ggYXBwbGllZCB0aGUgVk0gYm9vdCB0aW1lIGlzIHJlc3RvcmVkIHRvIHNvbWV0aGluZw0KPiA+
+IHJlYXNvbmFibGUuIE5vdCBhcyBmYXN0IGFzIHdpdGhvdXQgaW9tbXU9bm8tc2hhcmVwdCwgYnV0
+IHdpdGhpbiBhIGZldw0KPiA+IHNlY29uZHMgb2YgaXQuDQo+ID4NCj4gPiBOT1RFOiBUaGlzIHBh
+dGNoIHRha2VzIHRoZSBvcHBvcnR1bml0eSB0byBzaG9ydGVuIGEgY291cGxlIG9mID4gODANCj4g
+PiAgICAgICBjaGFyYWN0ZXIgbGluZXMgaW4gdGhlIGNvZGUuDQo+ID4NCj4gPiBTaWduZWQtb2Zm
+LWJ5OiBQYXVsIER1cnJhbnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPg0KPiANCj4gSSdtIGFm
+cmFpZCB0aGF0IGl0IGlzbid0IG5lZWRsZXNzLg0KPiANCj4gVGhlIGZhY3QgdGhhdCB0aGUgdW5k
+ZXJseWluZyBJT01NVSBmdW5jdGlvbnMgY2FuIG9ubHkgd29yayB3aXRoIDRrDQo+IHBhZ2VzLCBp
+biBjb21iaW5hdGlvbiB3aXRoIG5vIC1FUmVzdGFydCBzdXBwb3J0LCBpcyBwcmVjaXNlbHkgd2h5
+IHlvdQ0KPiBtdXN0IG9ubHkgZXZlciBwYXNzIGEgNGsgb3JkZXIgaGVyZS7CoCBPdGhlcndpc2Ug
+d2Ugd2lsbCBnZW51aW5lbHkgd2FpdA0KPiBmb3IgdGhlIElPTU1VIHRvIG1hcC91bm1hcCAxRyB3
+b3J0aCBvZiA0ayBwYWdlcyBhdCBhIHRpbWUsIHdoaWNoIHRoZQ0KPiBzZWN1cml0eSB0ZWFtIGhh
+cyBwcmV2aW91c2x5IGRlZW1lZCBpcyB0b28gbG9uZyB0byB3YWl0IGZvciBhIHNpbmdsZQ0KPiBv
+cGVyYXRpb24uDQo+IA0KDQpPaywgSSBhZ3JlZSB0aGF0IHRoZXJlIG1heSBiZSBhbiBpc3N1ZSB3
+aXRoIDFHIGJ1dCBub3QgZm9yIDJNLiBJIGhhdmUgdGVzdGVkIHRoZSBwYXRjaCBhbmQsIGFzIEkg
+c2FpZCBpbiBteSBjb21tZW50LCB0aGUgdG90YWwgY29zdCBvZiB0aGUgYWxsIHRoZSBkb21jdGxz
+IHdhcyBiYXJlbHkgZGlmZmVyZW50IGZyb20gd2hlbiBwYWdlIHNoYXJpbmcgd2FzIHR1cm5lZCBv
+bi4NCg0KPiBJJ20gYWZyYWlkIHRoYXQgdGhlIG9ubHkgc2FmZSBvcHRpb24gSSBzZWUgaGVyZSBp
+cyB0byBtYWtlIHRoZSBwMm0NCj4gb3BlcmF0aW9ucyBzdXBwb3J0IHByb3Blcmx5IHByZWVtcHRp
+YmxlLg0KPiANCg0KVGhhdCdzIGEgbG90IG9mIHJlLXdvcmsuIEkgYWdyZWUgaXQgaXMgdGhlIGNv
+cnJlY3Qgc29sdXRpb24gYnV0IHdpdGhvdXQgYSBwYXRjaCB0byBhbGxvdyBhdCBsZWFzdCAyTSBt
+YXBwaW5nLCBhIHN5c3RlbSB3aXRob3V0IHNoYXJlZCB0YWJsZXMgaXMgdW51c2FibGUgc28gSSB0
+aGluayBzdWNoIGEgcGF0Y2ggaXMgcmVhc29uYWJsZSBzdG9wLWdhcC4NCg0KICBQYXVsDQoNCj4g
+fkFuZHJldw0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
