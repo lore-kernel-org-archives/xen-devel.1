@@ -1,19 +1,23 @@
 From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH] Reservation of PCI device range
- 0xc200-0xc2ff to XCP-ng Project
-Date: Wed, 17 Oct 2018 16:14:39 +0100
-Message-ID: <23495.20959.216555.482910@mariner.uk.xensource.com>
-References: <0d7eee26-529d-a900-92d4-9414bfd43eb4@schulzalex.de>
+Subject: Re: [RFC PATCH v2 00/17] Add support for qemu-xen
+ runnning in a Linux-based stubdomain.
+Date: Wed, 17 Oct 2018 16:16:03 +0100
+Message-ID: <23495.21043.960987.833172@mariner.uk.xensource.com>
+References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <23494.5998.10340.694382@mariner.uk.xensource.com>
+ <20181016173240.GA1563@mail-itl>
+ <23494.9572.676973.726194@mariner.uk.xensource.com>
+ <20181016204628.GD1563@mail-itl>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=pqcp=m5=citrix.com=prvs=8215e697b=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gCnYh-0001It-Mn
- for xen-devel@lists.xenproject.org; Wed, 17 Oct 2018 15:16:27 +0000
-In-Reply-To: <0d7eee26-529d-a900-92d4-9414bfd43eb4@schulzalex.de>
+ id 1gCnaC-0001OO-2K
+ for xen-devel@lists.xenproject.org; Wed, 17 Oct 2018 15:18:00 +0000
+In-Reply-To: <20181016204628.GD1563@mail-itl>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,28 +26,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Alexander Schulz - XCP-ng Project Member <code@schulzalex.de>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
+To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Eric Shelton <eshelton@pobox.com>
 List-Id: xen-devel@lists.xenproject.org
 
-QWxleGFuZGVyIFNjaHVseiAtIFhDUC1uZyBQcm9qZWN0IE1lbWJlciB3cml0ZXMgKCJbUEFUQ0hd
-IFJlc2VydmF0aW9uIG9mIFBDSSBkZXZpY2UgcmFuZ2UgMHhjMjAwLTB4YzJmZiB0byBYQ1Atbmcg
-UHJvamVjdCIpOgo+IFdlIGFyZSB0aGUgWENQLW5nIHByb2plY3QgKGh0dHBzOi8veGNwLW5nLm9y
-ZykgYW5kIHdhbnQgdG8gZGlzdHJpYnV0ZSAKPiBvdXIgb3duIFBWLVRvb2xzIChtYXliZSBhbHNv
-IHBlciB3aW5kb3dzIHVwZGF0ZXMpIHNvIHdlIG5lZWQgYW4gZXh0cmEgcmFuZ2UuCgpUaGFua3Mu
-ICBJIGFja2VkIHlvdXIgcHJldmlvdXMgbWVzc2FnZSB3aGljaCB3YXMgc2VudCBieSBwcml2YXRl
-CmVtYWlsOyBJIHRoaW5rIHlvdSBjb3VsZCBoYXZlIHRyYW5zZmVycmVkIG15IGFjayB0byB0aGlz
-IHJlcG9zdC4KCkFja2VkLWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNv
-bT4KCkkganVzdCB3YW50ZWQgdG8gc2F5IHRoYXQgaXQgaXMgYSB2ZXJ5IGdvb2QgdGhpbmcgdG8g
-Y29tZSBoZXJlIGFuZApyZXNlcnZlIGEgbnVtYmVyLiAgV2Ugc2hvdWxkIGFzc2lnbiBudW1iZXJz
-IHdpdGhvdXQgdG9vIG11Y2gKcXVpYmJsaW5nLCB3aGljaCBpcyB3aHkgSSBoYXZlIGdpdmVuIGEg
-c3VtbWFyeSBhY2suCgpJTU8gdGhpcyBzaG91bGQgYmUgY29tbWl0dGVkIHNvb24uCgo+IFdlIGFs
-c28gcmVnaXN0ZXJlZCBhIFBDSS1EZXZpY2U6Cj4gCj4gIlhDUC1uZyBQcm9qZWN0IFBDSSBEZXZp
-Y2UgZm9yIFdpbmRvd3MgVXBkYXRlIiAtPiAKPiBodHRwczovL3BjaS1pZHMudWN3LmN6L3JlYWQv
-UEMvNTg1My9jMjAwCgpZb3UndmUgZ290IHlvdXIgb3duIFBDSSBkZXZpY2UgKmFuZCogYSByYW5n
-ZSBpbiB0aGUgWGVuIFBsYXRmb3JtIFBDSQpEZXZpY2UgPyAgSSBjb25mZXNzIEkgZG9uJ3Qga25v
-dyB3aHkgdGhhdCBpcyBuZWNlc3NhcnkuICBQZXJoYXBzIGl0IGlzCm1vcmUgb2J2aW91cyB0byB0
-aG9zZSB3aG8gdW5kZXJzdGFuZCB0aGlzIGFsbCBiZXR0ZXIgdGhhbiBJIGRvLgoKUmVnYXJkcywK
-SWFuLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+TWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyaXRlcyAoIlJlOiBbUkZDIFBBVENIIHYyIDAw
+LzE3XSBBZGQgc3VwcG9ydCBmb3IgcWVtdS14ZW4gcnVubm5pbmcgaW4gYSBMaW51eC1iYXNlZCBz
+dHViZG9tYWluLiIpOgo+IFtzdHVmZl0KClNvLCBJIG9ubHkgZ290IGEgbGl0dGxlIHdheSB0aHJv
+dWdoIHRoaXMgc2VyaWVzLCBidXQgaXQgd2FzIGEgd2hpbGUKYWdvIGFuZCB5b3Ugc2F5IHRoaW5n
+cyBhcmUgZG9uZSBkaWZmZXJlbnRseSBub3cuICBJJ20gbm90IHN1cmUgaWYgaXQKaXMgdXNlZnVs
+IGZvciBtZSB0byByZXZpZXcgdGhlIHJlc3Qgb2YgaXQuCgpXb3VsZCBpdCBiZSBiZXR0ZXIgZm9y
+IG1lIHRvIGF3YWl0IGEgcmVwb3N0ID8KClJlZ2FyZHMsCklhbi4KCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
