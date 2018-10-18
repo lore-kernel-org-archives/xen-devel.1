@@ -1,19 +1,20 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [RFC PATCH v1 00/16] xen: sched: implement
- core-scheduling
-Date: Thu, 18 Oct 2018 10:16:17 +0200
-Message-ID: <f4d1194798bf33106ec76ac6ef85b0d648f839c7.camel@suse.com>
-References: <153515305655.8598.6054293649487840735.stgit@Istar.fritz.box>
- <CABfawh=OO14x9=_Cu=7Pk6v1+esuQav6Y-V9uOxonsmRBBovbw@mail.gmail.com>
+From: "Zhao, Yan Y" <yan.y.zhao@intel.com>
+Subject: Re: [PATCH] Xen PCI passthrough: fix passthrough
+ failure when irq map failure
+Date: Thu, 18 Oct 2018 08:22:41 +0000
+Message-ID: <F22B14EC3CFBB843AD3E03B6B78F2C6A4ACFD80C@SHSMSX104.ccr.corp.intel.com>
+References: <20181016021439.6212-1-yan.y.zhao@intel.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8634238218087152883=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rzov=m6=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gD3Ts-0004CU-PS
- for xen-devel@lists.xenproject.org; Thu, 18 Oct 2018 08:16:32 +0000
-In-Reply-To: <CABfawh=OO14x9=_Cu=7Pk6v1+esuQav6Y-V9uOxonsmRBBovbw@mail.gmail.com>
+ <srs0=droc=m6=intel.com=yan.y.zhao@srs-us1.protection.inumbo.net>)
+ id 1gD3Zw-0004wy-DE
+ for xen-devel@lists.xenproject.org; Thu, 18 Oct 2018 08:22:48 +0000
+In-Reply-To: <20181016021439.6212-1-yan.y.zhao@intel.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,135 +23,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, bhavesh.davda@oracle.com, Jan Beulich <jbeulich@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>
+To: "sstabellini@kernel.org" <sstabellini@kernel.org>, "anthony.perard@citrix.com" <anthony.perard@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8634238218087152883==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-RLAuTVaacAabGO1H+WWU"
-
-
---=-RLAuTVaacAabGO1H+WWU
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2018-10-17 at 15:36 -0600, Tamas K Lengyel wrote:
-> On Fri, Aug 24, 2018 at 5:36 PM Dario Faggioli <dfaggioli@suse.com>
-> wrote:
-> >=20
-> > They give me a system that boots, where I can do basic stuff (like
-> > playing with dom0, creating guests, etc), and where the constraint
-> > of
-> > only scheduling vcpus from one domain at a time on pcpus that are
-> > part
-> > of the same core is, as far as I've seen, respected.
-> >=20
-> > There are still cases where the behavior is unideal, e.g., we could
-> > make a better use of some of the cores which are, some of the
-> > times,
-> > left idle.
-> >=20
-> > There are git branches here:
-> >  https://gitlab.com/dfaggioli/xen.git rel/sched/core-scheduling-
-> > RFCv1
-> >  https://github.com/fdario/xen.git rel/sched/core-scheduling-RFCv1
-> >=20
-> > Any comment is more than welcome.
->=20
-> Hi Dario,
->
-Hi,
-
-> thanks for the series, we are in the process of evaluating it in
-> terms
-> of performance. Our test is to setup 2 VMs each being assigned enough
-> vCPUs to completely saturate all hyperthreads and then we fire up CPU
-> benchmarking inside the VMs to spin each vCPU 100% (using swet). The
-> idea is to force the scheduler to move vCPUs in-and-out constantly to
-> see how much performance hit there would be with core-scheduling vs
-> plain credit1 vs disabling hyperthreading. After running the test on
-> a
-> handful of machines it looks like we get the best performance with
-> hyperthreading completely disabled, which is a bit unexpected. Have
-> you or anyone else encountered this?
->
-Do you mean that no-hyperthreading is better than core-scheduling, as
-per this series goes?
-
-Or do you mean that no-hyperthreading is better than plain Credit1,
-with SMT enabled and *without* this series?
-
-If the former, well, this series is not at a stage where it makes sense
-to run performance benchmarks. Not even close, I would say.
-
-If the latter, it's a bit weird, as I've often seen hyperthreading
-causing seemingly weird performance figures, but it does not happen
-very often that it actually slows down things (although, I wouldn't
-rule it out! :-P).
-
-Of course, this could also be a problem in the scheduler. Something I'd
-do is (leaving this series aside):
-- try to run the benchmark with half the number of vCPUs wrt the total
-number of CPUs (i.e., with only 1 vCPU per core);
-- try to run the benchmark as above, but explicitly pinning 1 vCPU on
-each core;
-- go back to nr vCPUs =3D=3D nr pCPUs, but explicitly pin each vCPU to one
-pCPU (i.e., to one thread, in this case).
-
-You can do all the above with Credit, and results should already tell
-us whether we may be dealing with some scheduling anomaly. If you want,
-since you don't seem to have oversubscription, you can also try the
-null scheduler, to have even more data points (in fact, one of the
-purposes of having it was exactly this, i.e., making it possible to
-have a reference for other schedulers to compare against).
-
-BTW, when you say "2 VMs with enough vCPUs to saturate all
-hyperthreads", does that include dom0 vCPUs?
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-RLAuTVaacAabGO1H+WWU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvIQVgACgkQFkJ4iaW4
-c+7T4g/+MOqVgP8fIziy/PY+lpV8fhCaDswO8HUWAm0g++Jr9PyGIqGtLkxBw41y
-sioM1h2LPMEYlQRwof9+Llu6OVyOyvrfZBXvQo2hKDDYhkTo/qnFSv7IZP4XNj5w
-0J5JRQzSOP3lO1RAuv9I+eEgMI68Z/65FQ1rvg8GPYM8PQocuv7D8yAgpRhbjueD
-OaNTe07YUsRkcXQBsdiK8Uec+zMDqwB8hQTd2KK+GQmt3zsvq6LkPtumOJKjnvXv
-1P6XFm6HchPrEl7u4C6ml2qg25UKumBRLKLet3xtZgBDkZeL5rUwnreiEkjXZXp2
-5M3PIXyJMYk3HmyOhbBcyoHaa+Z331+G60tWuxZWU88tLQsPPkq4bljdygukfvD0
-Jdjs6vzHnRsDuE8iIflmZ51QaLrCEWNDOyQvLEWlr2+Ia0M21FJEyUich/foSil7
-i28r/GfgT9caBeCdIepfDuEoSPHxIBvmHJRsr6l8le2thu4L1PrUMHkUGUvaur0i
-P3rPMhi+LsPoKMF8H4tSD3vVj1AX8nN/Yc3CHm6s+xwsCvLPmHN8hWJlXR3plkSC
-0wZ6sqj3jiKXRk4aRq1kgmusLTkRe6JEhl6fYvqn+ye6AFG0z3QV3M0EriJKN2rE
-2O6OvIN+Vnt116hM5CfdZ0QSsCxeMT+rzrJNlNAN97uOkpXk/lQ=
-=zea0
------END PGP SIGNATURE-----
-
---=-RLAuTVaacAabGO1H+WWU--
-
-
-
---===============8634238218087152883==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8634238218087152883==--
+SGkKVGhlIGJhY2tncm91bmQgZm9yIHRoaXMgcGF0Y2ggaXMgdGhhdDogZm9yIHNvbWUgcGNpIGRl
+dmljZSwgZXZlbiBpdCdzIFBDSV9JTlRFUlJVUFRfUElOIGlzIG5vdCAwLCBpdCBhY3R1YWxseSBk
+b2VzIG5vdCBzdXBwb3J0IElOVHggbW9kZSwgc28gd2Ugc2hvdWxkIGp1c3QgcmVwb3J0IGVycm9y
+LCBkaXNhYmxlIElOVHggbW9kZSBhbmQgY29udGludWUgdGhlIHBhc3N0aHJvdWdoLgpIb3dldmVy
+LCB0aGUgY29tbWl0IDVhMTFkMGY3IHJlZ2FyZHMgdGhpcyBhcyBlcnJvciBjb25kaXRpb24gYW5k
+IGxldCBxZW11IHF1aXQgcGFzc3Rocm91Z2gsIHdoaWNoIGlzIHRvbyByaWdvcm91cy4KCkVycm9y
+IG1lc3NhZ2UgaXMgYmVsb3c6CmxpYnhsOiBlcnJvcjogbGlieGxfcW1wLmM6Mjg3OnFtcF9oYW5k
+bGVfZXJyb3JfcmVzcG9uc2U6IERvbWFpbiAyOnJlY2VpdmVkIGFuIGVycm9yIG1lc3NhZ2UgZnJv
+bSBRTVAgc2VydmVyOiBNYXBwaW5nIG1hY2hpbmUgaXJxIDAgdG8gcGlycSAtMSBmYWlsZWQ6IE9w
+ZXJhdGlvbiBub3QgcGVybWl0dGVkCmxpYnhsOiBlcnJvcjogbGlieGxfcGNpLmM6MTMwNjpsaWJ4
+bF9fYWRkX3BjaWRldnM6IERvbWFpbiAyOmxpYnhsX2RldmljZV9wY2lfYWRkIGZhaWxlZDogLTMK
+bGlieGw6IGVycm9yOiBsaWJ4bF9jcmVhdGUuYzoxNDU4OmRvbWNyZWF0ZV9hdHRhY2hfZGV2aWNl
+czogRG9tYWluIDI6dW5hYmxlIHRvIGFkZCBwY2kgZGV2aWNlcwpsaWJ4bDogZXJyb3I6IGxpYnhs
+X2RvbWFpbi5jOjEwMDM6bGlieGxfX2Rlc3Ryb3lfZG9taWQ6IERvbWFpbiAgMjpOb24tZXhpc3Rh
+bnQgZG9tYWluCmxpYnhsOiBlcnJvcjogbGlieGxfZG9tYWluLmM6OTYyOmRvbWFpbl9kZXN0cm95
+X2NhbGxiYWNrOiBEb21haW4gIDI6VW5hYmxlIHRvIGRlc3Ryb3kgZ3Vlc3QKbGlieGw6IGVycm9y
+OiBsaWJ4bF9kb21haW4uYzo4ODk6ZG9tYWluX2Rlc3Ryb3lfY2I6IERvbWFpbiAyOkRlc3RydWN0
+aW9uIG9mIGRvbWFpbiBmYWlsZWQKCkFmdGVyIHBhcnRpYWxseSByZXZlcnQgNWExMWQwZjcsIHRo
+ZSBkZXZpY2UgY2FuIGJlIHBhc3NlZCB0aHJvdWdoIGludG8gZG9tVSBhbmQgcnVubmluZyBxdWl0
+ZSB3ZWxsIHVzaW5nIG1zaSBtb2RlLgoKPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZy
+b206IFpoYW8sIFlhbiBZCj4gU2VudDogVHVlc2RheSwgT2N0b2JlciAxNiwgMjAxOCAxMDoxNSBB
+TQo+IFRvOiBxZW11LWRldmVsQG5vbmdudS5vcmc7IHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc7Cj4g
+YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbTsgeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cj4gQ2M6IFpoYW8sIFlhbiBZIDx5YW4ueS56aGFvQGludGVsLmNvbT4KPiBTdWJqZWN0OiBbUEFU
+Q0hdIFhlbiBQQ0kgcGFzc3Rocm91Z2g6IGZpeCBwYXNzdGhyb3VnaCBmYWlsdXJlIHdoZW4gaXJx
+IG1hcAo+IGZhaWx1cmUKPiAKPiBDb21taXQgNWExMWQwZjcgbWlzdGFrZW5seSBjb252ZXJ0ZWQg
+YSBsb2cgbWVzc2FnZSBpbnRvIGFuIGVycm9yIGNvbmRpdGlvbgo+IHdoZW4gaXJxIG1hcCBpcyBm
+YWlsZWQgZm9yIHRoZSBwY2kgZGV2aWNlIGJlaW5nIHBhc3NlZCB0aHJvdWdoLiBSZXZlcnQgdGhh
+dCBwYXJ0Cj4gb2YgdGhlIGNvbW1pdC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBaaGFvIFlhbiA8eWFu
+Lnkuemhhb0BpbnRlbC5jb20+Cj4gLS0tCj4gIGh3L3hlbi94ZW5fcHQuYyB8IDQgKystLQo+ICAx
+IGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYg
+LS1naXQgYS9ody94ZW4veGVuX3B0LmMgYi9ody94ZW4veGVuX3B0LmMgaW5kZXggZTVhNmVmZjQ0
+Zi4uODQwZmQwZjc0OAo+IDEwMDY0NAo+IC0tLSBhL2h3L3hlbi94ZW5fcHQuYwo+ICsrKyBiL2h3
+L3hlbi94ZW5fcHQuYwo+IEBAIC04NDksNyArODQ5LDcgQEAgc3RhdGljIHZvaWQgeGVuX3B0X3Jl
+YWxpemUoUENJRGV2aWNlICpkLCBFcnJvciAqKmVycnApCj4gICAgICBtYWNoaW5lX2lycSA9IHMt
+PnJlYWxfZGV2aWNlLmlycTsKPiAgICAgIHJjID0geGNfcGh5c2Rldl9tYXBfcGlycSh4ZW5feGMs
+IHhlbl9kb21pZCwgbWFjaGluZV9pcnEsICZwaXJxKTsKPiAgICAgIGlmIChyYyA8IDApIHsKPiAt
+ICAgICAgICBlcnJvcl9zZXRnX2Vycm5vKGVycnAsIGVycm5vLCAiTWFwcGluZyBtYWNoaW5lIGly
+cSAldSB0byIKPiArICAgICAgICBYRU5fUFRfRVJSKGQsICJNYXBwaW5nIG1hY2hpbmUgaXJxICV1
+IHRvIgo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIiBwaXJxICVpIGZhaWxlZCIsIG1hY2hp
+bmVfaXJxLCBwaXJxKTsKPiAKPiAgICAgICAgICAvKiBEaXNhYmxlIFBDSSBpbnR4IGFzc2VydGlv
+biAodHVybiBvbiBiaXQxMCBvZiBkZXZjdGwpICovIEBAIC04NzEsNyArODcxLDcKPiBAQCBzdGF0
+aWMgdm9pZCB4ZW5fcHRfcmVhbGl6ZShQQ0lEZXZpY2UgKmQsIEVycm9yICoqZXJycCkKPiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgUENJX1NMT1QoZC0+ZGV2Zm4pLAo+
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlX2ludHgpOwo+ICAgICAg
+ICAgIGlmIChyYyA8IDApIHsKPiAtICAgICAgICAgICAgZXJyb3Jfc2V0Z19lcnJubyhlcnJwLCBl
+cnJubywgIkJpbmRpbmcgb2YgaW50ZXJydXB0ICV1IGZhaWxlZCIsCj4gKyAgICAgICAgICAgIFhF
+Tl9QVF9FUlIoZCwgIkJpbmRpbmcgb2YgaW50ZXJydXB0ICV1IGZhaWxlZCIsCj4gICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgZV9pbnR4KTsKPiAKPiAgICAgICAgICAgICAgLyogRGlzYWJs
+ZSBQQ0kgaW50eCBhc3NlcnRpb24gKHR1cm4gb24gYml0MTAgb2YgZGV2Y3RsKSAqLwo+IC0tCj4g
+Mi4xNy4xCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
