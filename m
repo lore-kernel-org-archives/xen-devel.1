@@ -1,25 +1,21 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [RFC PATCH v1 00/16] xen: sched: implement
- core-scheduling
-Date: Thu, 18 Oct 2018 12:40:03 +0200
-Message-ID: <1512088641b882784424092b7d1c55d9ccd217a0.camel@suse.com>
-References: <153515305655.8598.6054293649487840735.stgit@Istar.fritz.box>
- <7553b02f-514d-d577-a4ae-3478036f8f62@suse.com>
- <3636eba03691a0331a6e82cb11a651fd41c475ec.camel@suse.com>
- <6ffe5f58-8aec-c349-e08b-58dc1d3d5469@suse.com>
- <8224a31a6fd968344499b52e4bc77d78576c1a8e.camel@suse.com>
- <60e809eb-1971-b467-9a56-c116c60445b2@suse.com>
- <d6956fbf7441ae3ced4a273c58b7126db1c6466c.camel@suse.com>
- <ade01660-a6c1-340c-34e7-0d9e0b2ff51f@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 2/2] x86/altp2m: fix display frozen when
+ switching to a new view early
+Date: Thu, 18 Oct 2018 11:57:58 +0100
+Message-ID: <d7663d2d-0052-ee9e-4726-7766e3e7e268@citrix.com>
+References: <1539857272-4660-1-git-send-email-rcojocaru@bitdefender.com>
+ <1539857272-4660-3-git-send-email-rcojocaru@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2031636110289633940=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rzov=m6=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gD5it-0007QB-E6
- for xen-devel@lists.xenproject.org; Thu, 18 Oct 2018 10:40:11 +0000
-In-Reply-To: <ade01660-a6c1-340c-34e7-0d9e0b2ff51f@suse.com>
+ <srs0=adce=m6=citrix.com=prvs=822574e18=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1gD671-0000f2-Mg
+ for xen-devel@lists.xenproject.org; Thu, 18 Oct 2018 11:05:07 +0000
+In-Reply-To: <1539857272-4660-3-git-send-email-rcojocaru@bitdefender.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,120 +24,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Bhavesh Davda <bhavesh.davda@oracle.com>, Jan Beulich <jbeulich@suse.com>
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>, xen-devel@lists.xenproject.org
+Cc: george.dunlap@eu.citrix.com, kevin.tian@intel.com, wei.liu2@citrix.com, jbeulich@suse.com, jun.nakajima@intel.com
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2031636110289633940==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-y8i77qS9UCEQVnhDOgjY"
-
-
---=-y8i77qS9UCEQVnhDOgjY
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2018-10-12 at 11:23 +0200, Juergen Gross wrote:
-> On 12/10/2018 11:15, Dario Faggioli wrote:
-> >=20
-> > But, anyway, if I'm in sched_dario.c, and schedule.c makes me
-> > reason in
-> > terms of vCores, how do I deal with single CPUs for a particular
-> > cpupool that does not want core-scheduling?
->=20
-> sched_dario.c would only know of scheduling entities. Mapping of
-> vcpus
-> to scheduling entities is part of the infrastructure.
->=20
-> schedule.c would receive vcpu state changes. In case such a vcpu
-> state change leads to a scheduling entity state change the related
-> scheduler is informed about that to be able to react.
->=20
-> In case the scheduling entity is a thread (no core scheduling) each
-> vcpu state change will result in a scheduling entity state change,
-> so it will be as today.
->=20
-I think I'm starting to understand more your idea, although not
-completely (or at least, I think I understand it completely, but I
-still can't make up, in my mind, a fully complete picture of how the
-code will look, and of how it will work).
-
-I think I still see reasons why something like group-scheduling belongs
-in sched_dario.c, rather than in schedule.c, but that may partly be
-because I've been working on doing it in _that_way_ for some time, and
-my brain is wrapped around such design. :-)
-
-IAC, this really continues to look to me like a major rework of (not
-only, probably) scheduling code. This, of course, does not mean this is
-not worth doing, not per-se, at least. And although, as I said, I still
-have some doubts, it is certainly possible that they'll be proven=20
-wrong by continuing the discussion, or by writing/seeing a prototype.
-
-A little bit more on the practical side, there are patches out there
-that let us achieve the goal, the Credit2 one being in the "not too
-bad" state (at least IMO, and I'd be happy to have feedback on that).
-In fact, with some effort, the Credit2 series could even be 4.12
-material. I don't think the same would be true for the rework (and I'm
-talking both in general, and considering my current situation, assuming
-it would be me doing this --which is not necessarily the case, of
-course :-D ).
-
-So, basically, the way I personally see it more likely for us to get
-core-scheduling not too far away in time, is by means of an approach
-that does not require rewriting, and testing, and benchmarking (because
-it's scheduling, look at what the process has been/is being to switch
-to Credit2!) large portions of the scheduler.
-
-And then maybe we can focus on how to make core-scheduling useful and
-effective in really mitigating things like TLBLeed (via more topology
-awareness in both guest and Xen) and L1TF (by the doing "panopticon"
-[1] and/or truly synch'd context switches).
-
-Others? Thoughts?
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-y8i77qS9UCEQVnhDOgjY
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvIYwMACgkQFkJ4iaW4
-c+6Qiw//QxzooPt4bRoQqZ+I85EvMIdyCb9iNCodHCYYu1DnrCRlObqmlNUmk6Iq
-YCbh//hUosOWPEGf65dMZ+8NJxSFhnOGyVOhu5eCIEgl3nsnl8vm3LpBsczBKne5
-2+xs5jKLxAfSQl4hohVaP2iH+vAjA8A845tY0yCivqukciJAfBoTxOJbWIm1BMR3
-IOfKUq4DKPfag9z/nFGWwsIh+XYphrWUxrWoc36hxvamnQpQfl0uohzbZcKQsHlQ
-tUNYXCIYMCvs6XUHn0k1NvRLXmrVDGn34M19wAPUlDg0cE4yWR3eQk/rAaLLbB22
-ZWunabTBDJmbzmB94Pc52tQKXm+314809WRJxz/s/dZ31WeU5G9puKF7PvqmOjFY
-kJ9g6T0Gub6CweM/Ykd9785kicF+7jKqQLRZgcmLKZSg/OXMtIgYwEQTcwVQuH6A
-3UGBfJ+8w9vpGTVTVHvBTMGOBnhtJeW+yKDHurT6dC8Dkp3bW2PkMZTzSZBJhM3O
-YJQ5f/PQc1nD5Z75kKUil+dO8nmYBB+3y6hVl4Xy0j4jxWqIbpRAKePYo+QRmrNM
-2Ielo/lTl0U/xugf3xnDE6cMVrXsYHGO+hkMxuJUICh65a3n27xOZndDd38Orc+w
-tgMdqN+va0tzP3v0wOH6Hr3Rn4TV5pMTEeT0zQHQq2cW5zIcx5I=
-=nbLP
------END PGP SIGNATURE-----
-
---=-y8i77qS9UCEQVnhDOgjY--
-
-
-
---===============2031636110289633940==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2031636110289633940==--
+T24gMTgvMTAvMTggMTE6MDcsIFJhenZhbiBDb2pvY2FydSB3cm90ZToKPiBXaGVuIGFuIG5ldyBh
+bHRwMm0gdmlldyBpcyBjcmVhdGVkIHZlcnkgZWFybHkgb24gZ3Vlc3QgYm9vdCwgdGhlCj4gZGlz
+cGxheSB3aWxsIGZyZWV6ZSAoYWx0aG91Z2ggdGhlIGd1ZXN0IHdpbGwgcnVuIG5vcm1hbGx5KS4g
+VGhpcwo+IG1heSBhbHNvIGhhcHBlbiBvbiByZXNpemluZyB0aGUgZGlzcGxheS4gVGhlIHJlYXNv
+biBpcyB0aGUgd2F5Cj4gWGVuIGN1cnJlbnRseSAobWlzKWhhbmRsZXMgbG9nZGlydHkgVkdBOiBp
+dCBpbnRlbnRpb25hbGx5Cj4gbWlzY29uZmlndXJlcyBWR0EgcGFnZXMgc28gdGhhdCB0aGV5IHdp
+bGwgZmF1bHQuCj4KPiBUaGUgcHJvYmxlbSBpcyB0aGF0IGl0IG9ubHkgZG9lcyB0aGlzIGluIHRo
+ZSBob3N0IHAybS4gT25jZSB3ZQo+IHN3aXRjaCB0byBhIG5ldyBhbHRwMm0sIHRoZSBtaXNjb25m
+aWd1cmVkIGVudHJpZXMgd2lsbCBubyBsb25nZXIKPiBmYXVsdCwgc28gdGhlIGRpc3BsYXkgd2ls
+bCBub3QgYmUgdXBkYXRlZC4KPgo+IFRoaXMgcGF0Y2g6Cj4gKiB1cGRhdGVzIGVwdF9oYW5kbGVf
+bWlzY29uZmlnKCkgdG8gdXNlIHRoZSBhY3RpdmUgYWx0cDJtIGluc3RlYWQKPiAgIG9mIHRoZSBo
+b3N0cDJtOwo+ICogYWxsb2NhdGVzIG5ldyBsb2dkaXJ0eSByYW5nZXMgZm9yIGVhY2ggYWx0cDJt
+Owo+ICogaGFzIHAybV9pbml0X2FsdHAybV9lcHQoKSBjb3B5IG92ZXIgbWF4X21hcHBlZF9wZm4s
+Cj4gICBhbmQgZ2xvYmFsX2xvZ2RpcnR5LCBhbmQgbWVyZ2VzIHRoZSBsb2dkaXJ0eSByYW5nZXMg
+b2YgdGhlCj4gICBob3N0cDJtIGludG8gdGhlIGxvZ2RpcnR5IHJhbmdlIG9mIHRoZSBhbHRwMm07
+Cj4gKiBtb2RpZmllcyBwMm1fY2hhbmdlX2VudHJ5X3R5cGVfZ2xvYmFsKCksIHAybV9tZW1vcnlf
+dHlwZV9jaGFuZ2VkCj4gICBhbmQgcDJtX2NoYW5nZV90eXBlX3JhbmdlKCkgdG8gcHJvcGFnYXRl
+IHRoZWlyIGNoYW5nZXMgdG8gYWxsCj4gICB2YWxpZCBhbHRwMm1zLgo+Cj4gU2lnbmVkLW9mZi1i
+eTogUmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29tPgo+IFN1Z2dlc3Rl
+ZC1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgoKRnJvbSB0aGUg
+bG9va3Mgb2YgdGhpcyBwYXRjaCwgaXQgd291bGQgYmUgY2xlYW5lciB0byBzcGxpdCBvdXQgdGhl
+IHBhdGNoCmZvciBhbGxvY2F0aW5nL2ZyZWVpbmcgcmVzb3VyY2VzIGZyb20gdGhlIHBhdGNoIHdo
+aWNoIGltcGxlbWVudHMgdGhlCmxvZ2RpcnR5IG1lcmdpbmcuCgpPbiB0aGUgYWxsb2NhdGluZy9m
+cmVlaW5nIHNpZGUgb2YgdGhpbmdzIHNwZWNpZmljYWxseSwgLi4uCgo+IGRpZmYgLS1naXQgYS94
+ZW4vYXJjaC94ODYvbW0vcDJtLWVwdC5jIGIveGVuL2FyY2gveDg2L21tL3AybS1lcHQuYwo+IGlu
+ZGV4IGZhYmNkMDYuLjI4NzkwYmYgMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gveDg2L21tL3AybS1l
+cHQuYwo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9tbS9wMm0tZXB0LmMKPiBAQCAtMTQzNCwxOCArMTQz
+Nyw0NCBAQCB2b2lkIHNldHVwX2VwdF9kdW1wKHZvaWQpCj4gICAgICByZWdpc3Rlcl9rZXloYW5k
+bGVyKCdEJywgZXB0X2R1bXBfcDJtX3RhYmxlLCAiZHVtcCBWVC14IEVQVCB0YWJsZXMiLCAwKTsK
+PiAgfQo+ICAKPiAtdm9pZCBwMm1faW5pdF9hbHRwMm1fZXB0KHN0cnVjdCBkb21haW4gKmQsIHVu
+c2lnbmVkIGludCBpKQo+ICtpbnQgcDJtX2luaXRfYWx0cDJtX2VwdChzdHJ1Y3QgZG9tYWluICpk
+LCB1bnNpZ25lZCBpbnQgaSkKPiAgewo+ICAgICAgc3RydWN0IHAybV9kb21haW4gKnAybSA9IGQt
+PmFyY2guYWx0cDJtX3AybVtpXTsKPiAgICAgIHN0cnVjdCBwMm1fZG9tYWluICpob3N0cDJtID0g
+cDJtX2dldF9ob3N0cDJtKGQpOwo+ICAgICAgc3RydWN0IGVwdF9kYXRhICplcHQ7Cj4gKyAgICBp
+bnQgcmM7Cj4gKwo+ICsgICAgQVNTRVJUKCFwMm0tPnN5bmMubG9nZGlydHlfcmFuZ2VzKTsKPiAr
+ICAgIHAybS0+c3luYy5sb2dkaXJ0eV9yYW5nZXMgPSByYW5nZXNldF9uZXcoZCwgImxvZy1kaXJ0
+eSIsCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFJBTkdF
+U0VURl9wcmV0dHlwcmludF9oZXgpOwo+ICsgICAgaWYgKCAhcDJtLT5zeW5jLmxvZ2RpcnR5X3Jh
+bmdlcyApCj4gKyAgICAgICAgcmV0dXJuIC1FTk9NRU07Cj4gKwo+ICsgICAgcmMgPSByYW5nZXNl
+dF9tZXJnZShwMm0tPnN5bmMubG9nZGlydHlfcmFuZ2VzLAo+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICBob3N0cDJtLT5zeW5jLmxvZ2RpcnR5X3Jhbmdlcyk7Cj4gKyAgICBpZiAoICFyYyApCj4g
+KyAgICAgICAgcmV0dXJuIHJjOwo+ICAKPiAgICAgIHAybS0+ZXB0LmFkID0gaG9zdHAybS0+ZXB0
+LmFkOwo+ICsgICAgcDJtLT5tYXhfbWFwcGVkX3BmbiA9IGhvc3RwMm0tPm1heF9tYXBwZWRfcGZu
+Owo+ICsgICAgcDJtLT5kZWZhdWx0X2FjY2VzcyA9IGhvc3RwMm0tPmRlZmF1bHRfYWNjZXNzOwo+
+ICsgICAgcDJtLT5kb21haW4gPSBob3N0cDJtLT5kb21haW47Cj4gKwo+ICsgICAgcDJtLT5zeW5j
+Lmdsb2JhbF9sb2dkaXJ0eSA9IGhvc3RwMm0tPnN5bmMuZ2xvYmFsX2xvZ2RpcnR5Owo+ICAgICAg
+cDJtLT5taW5fcmVtYXBwZWRfZ2ZuID0gZ2ZuX3goSU5WQUxJRF9HRk4pOwo+ICAgICAgcDJtLT5t
+YXhfcmVtYXBwZWRfZ2ZuID0gMDsKPiAgICAgIGVwdCA9ICZwMm0tPmVwdDsKPiAgICAgIGVwdC0+
+bWZuID0gcGFnZXRhYmxlX2dldF9wZm4ocDJtX2dldF9wYWdldGFibGUocDJtKSk7Cj4gICAgICBk
+LT5hcmNoLmFsdHAybV9lcHRwW2ldID0gZXB0LT5lcHRwOwo+ICsKPiArICAgIHJldHVybiAwOwo+
+ICt9Cj4gKwo+ICt2b2lkIHAybV91bmluaXRfYWx0cDJtX2VwdChzdHJ1Y3QgcDJtX2RvbWFpbiAq
+cDJtKQoKRm9yIG5hbWluZyBjb25zaXN0ZW5jeSwgdGhpcyBzaG91bGQgYmUgcDJtX2Rlc3Ryb3lf
+YWx0cDJtX2VwdCgpCgpbRURJVF0gSXQgbG9va3MgbGlrZSB0aGUgcmVzdCBvZiB0aGUgY29kZSBo
+YXMgcG9vciBjb25zaXN0ZW5jeS7CoCAvc2lnaAoKPiArewo+ICsgICAgQVNTRVJUKHAybS0+c3lu
+Yy5sb2dkaXJ0eV9yYW5nZXMpOwo+ICsgICAgcmFuZ2VzZXRfZGVzdHJveShwMm0tPnN5bmMubG9n
+ZGlydHlfcmFuZ2VzKTsKPiArICAgIHAybS0+c3luYy5sb2dkaXJ0eV9yYW5nZXMgPSBOVUxMOwoK
+UGxlYXNlIG1ha2UgYWxsIGRlc3Ryb3kgZnVuY3Rpb25zIGlkZW1wb3RlbnQuwqAgaS5lLgoKaWYg
+KCBwMm0tPnN5bmMubG9nZGlydHlfcmFuZ2VzICkKewrCoMKgwqAgcmFuZ2VzZXRfZGVzdHJveShw
+Mm0tPnN5bmMubG9nZGlydHlfcmFuZ2VzKTsKwqDCoMKgIHAybS0+c3luYy5sb2dkaXJ0eV9yYW5n
+ZXMgPSBOVUxMOwp9CgphbmQgdXNlIHRoaXMgZGVzdHJveSBmdW5jdGlvbiBpbiB0aGUgY2xlYW51
+cCBwYXRoIG9mIGluaXQoKS4KCkknbSBjdXJyZW50bHkgaW4gdGhlIHByb2Nlc3Mgb2YgZG9pbmcg
+dGhpcyB0byBvdXIgZW50aXJlIGNyZWF0ZS9kZXN0cm95CmluZnJhc3RydWN0dXJlLCB3aGljaCBp
+cyBhIG5lY2Vzc2FyeSBwcmVyZXF1aXNpdGUgdG8gZml4IHRoZSAidmNwdQphbGxvY2F0aW9uIGR1
+cmluZyBkb21haW4gY3JlYXRpb24iIHByb2JsZW0gd2UndmUgZ290LgoKVGhlIGxvbmd0ZXJtIHBs
+YW4gaXMgdG8gaGF2ZSBlcnJvcnMgaW4gdGhlIGluaXQoKSBwYXRoIHJldHVybgppbW1lZGlhdGVs
+eSB3aXRoIG5vIGNsZWFudXAsIGFuZCBoYXZlIHRoZSB0b3AgbGV2ZWwgbWFrZSBvbmUgY2FsbCBp
+bnRvCnRoZSBkZXN0cm95KCkgcGF0aC7CoCBGb3IgdGhpcyB0byB3b3JrLCB0aGUgZGVzdHJveSBw
+YXRoIG5lZWRzIHRvIGJlIGFibGUKdG8gY29ycmVjdGx5IGNsZWFuIHVwIGZyb20gYW55IHBvaW50
+IG9mIGluaXRpYWxpc2F0aW9uIChpbmNsdWRpbmcgbm9uZSkuCgo+ICB9Cj4gIAo+ICB1bnNpZ25l
+ZCBpbnQgcDJtX2ZpbmRfYWx0cDJtX2J5X2VwdHAoc3RydWN0IGRvbWFpbiAqZCwgdWludDY0X3Qg
+ZXB0cCkKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L21tL3AybS5jIGIveGVuL2FyY2gveDg2
+L21tL3AybS5jCj4gaW5kZXggNDJiOWVmNC4uZTlmODM4NSAxMDA2NDQKPiAtLS0gYS94ZW4vYXJj
+aC94ODYvbW0vcDJtLmMKPiArKysgYi94ZW4vYXJjaC94ODYvbW0vcDJtLmMKPiBAQCAtMTE5LDkg
+KzEyMCw5IEBAIHN0YXRpYyBpbnQgcDJtX2luaXRfaG9zdHAybShzdHJ1Y3QgZG9tYWluICpkKQo+
+ICAKPiAgICAgIGlmICggcDJtICkKPiAgICAgIHsKPiAtICAgICAgICBwMm0tPmxvZ2RpcnR5X3Jh
+bmdlcyA9IHJhbmdlc2V0X25ldyhkLCAibG9nLWRpcnR5IiwKPiAtICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBSQU5HRVNFVEZfcHJldHR5cHJpbnRfaGV4KTsKPiAt
+ICAgICAgICBpZiAoIHAybS0+bG9nZGlydHlfcmFuZ2VzICkKPiArICAgICAgICBwMm0tPnN5bmMu
+bG9nZGlydHlfcmFuZ2VzID0gcmFuZ2VzZXRfbmV3KGQsICJsb2ctZGlydHkiLAo+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgUkFOR0VTRVRGX3ByZXR0
+eXByaW50X2hleCk7CgpUaGlzIGxvb2tzIHRvIGJlIGNvbW1vbiB3aXRoIGJpdHMgb2YgcDJtX2lu
+aXRfYWx0cDJtX2VwdCgpLsKgIFdoeSBkb2Vzbid0CnRoYXQgZ2V0IHJldXNlZD8KCj4gKyAgICAg
+ICAgaWYgKCBwMm0tPnN5bmMubG9nZGlydHlfcmFuZ2VzICkKPiAgICAgICAgICB7Cj4gICAgICAg
+ICAgICAgIGQtPmFyY2gucDJtID0gcDJtOwo+ICAgICAgICAgICAgICByZXR1cm4gMDsKPiBAQCAt
+MjM0MSw2ICsyMzk2LDcgQEAgaW50IHAybV9kZXN0cm95X2FsdHAybV9ieV9pZChzdHJ1Y3QgZG9t
+YWluICpkLCB1bnNpZ25lZCBpbnQgaWR4KQo+ICAgICAgICAgIHsKPiAgICAgICAgICAgICAgcDJt
+X2ZsdXNoX3RhYmxlKGQtPmFyY2guYWx0cDJtX3AybVtpZHhdKTsKPiAgICAgICAgICAgICAgLyog
+VW5pbml0IGFuZCByZWluaXQgZXB0IHRvIGZvcmNlIFRMQiBzaG9vdGRvd24gKi8KPiArICAgICAg
+ICAgICAgcDJtX3VuaW5pdF9hbHRwMm1fZXB0KGQtPmFyY2guYWx0cDJtX3AybVtpZHhdKTsKClNo
+b3VsZG4ndCB0aGlzIGlkZWFsbHkgYmUgY2FsbGVkIGZyb20KZXB0X3AybV91bmluaXQoZC0+YXJj
+aC5hbHRwMm1fcDJtW2lkeF0pIGluc3RlYWQ/Cgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
