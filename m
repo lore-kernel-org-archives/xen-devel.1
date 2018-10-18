@@ -1,14 +1,15 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: [PATCH 08/22] xen/arm: gic-v3: Re-order includes in
- alphabetical order
-Date: Thu, 18 Oct 2018 14:20:55 +0100
-Message-ID: <20181018132109.31192-9-julien.grall@arm.com>
-References: <20181018132109.31192-1-julien.grall@arm.com>
+From: Daniel Kiper <daniel.kiper@oracle.com>
+Subject: Re: [PATCH v2 01/18] xen: add some xen headers
+Date: Thu, 18 Oct 2018 15:45:16 +0200
+Message-ID: <20181018134516.GA4549__18416.821890469$1539870288$gmane$org@olila.i.net-space.pl>
+References: <20181009110317.6022-1-jgross@suse.com>
+ <20181009110317.6022-2-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181018132109.31192-1-julien.grall@arm.com>
+Content-Disposition: inline
+In-Reply-To: <20181009110317.6022-2-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,31 +18,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
-Cc: Julien Grall <julien.grall@arm.com>, sstabellini@kernel.org
+To: Juergen Gross <jgross@suse.com>
+Cc: hans@knorrie.org, grub-devel@gnu.org, phcoder@gmail.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-U2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KLS0tCiB4
-ZW4vYXJjaC9hcm0vZ2ljLXYzLmMgfCAyMiArKysrKysrKysrKystLS0tLS0tLS0tCiAxIGZpbGUg
-Y2hhbmdlZCwgMTIgaW5zZXJ0aW9ucygrKSwgMTAgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEv
-eGVuL2FyY2gvYXJtL2dpYy12My5jIGIveGVuL2FyY2gvYXJtL2dpYy12My5jCmluZGV4IDhmZjRl
-MGYwOGUuLmE3Y2U5NDc4OWMgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL2FybS9naWMtdjMuYworKysg
-Yi94ZW4vYXJjaC9hcm0vZ2ljLXYzLmMKQEAgLTIxLDI1ICsyMSwyNyBAQAogICogR05VIEdlbmVy
-YWwgUHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4KICAqLwogCi0jaW5jbHVkZSA8eGVu
-L2xpYi5oPgorI2luY2x1ZGUgPHhlbi9hY3BpLmg+CisjaW5jbHVkZSA8eGVuL2RlbGF5Lmg+Cisj
-aW5jbHVkZSA8eGVuL2RldmljZV90cmVlLmg+CisjaW5jbHVkZSA8eGVuL2Vycm5vLmg+CiAjaW5j
-bHVkZSA8eGVuL2luaXQuaD4KLSNpbmNsdWRlIDx4ZW4vbW0uaD4KLSNpbmNsdWRlIDx4ZW4vaXJx
-Lmg+CiAjaW5jbHVkZSA8eGVuL2lvY2FwLmg+CisjaW5jbHVkZSA8eGVuL2lycS5oPgorI2luY2x1
-ZGUgPHhlbi9saWIuaD4KKyNpbmNsdWRlIDx4ZW4vbGliZmR0L2xpYmZkdC5oPgorI2luY2x1ZGUg
-PHhlbi9tbS5oPgogI2luY2x1ZGUgPHhlbi9zY2hlZC5oPgotI2luY2x1ZGUgPHhlbi9lcnJuby5o
-PgotI2luY2x1ZGUgPHhlbi9kZWxheS5oPgotI2luY2x1ZGUgPHhlbi9kZXZpY2VfdHJlZS5oPgog
-I2luY2x1ZGUgPHhlbi9zaXplcy5oPgotI2luY2x1ZGUgPHhlbi9saWJmZHQvbGliZmR0Lmg+Ci0j
-aW5jbHVkZSA8eGVuL2FjcGkuaD4KKwogI2luY2x1ZGUgPGFjcGkvYWN0YWJsZXMuaD4KLSNpbmNs
-dWRlIDxhc20vaW8uaD4KKworI2luY2x1ZGUgPGFzbS9jcHVmZWF0dXJlLmg+CiAjaW5jbHVkZSA8
-YXNtL2RldmljZS5oPgogI2luY2x1ZGUgPGFzbS9naWMuaD4KICNpbmNsdWRlIDxhc20vZ2ljX3Yz
-X2RlZnMuaD4KICNpbmNsdWRlIDxhc20vZ2ljX3YzX2l0cy5oPgotI2luY2x1ZGUgPGFzbS9jcHVm
-ZWF0dXJlLmg+CisjaW5jbHVkZSA8YXNtL2lvLmg+CiAKIC8qIEdsb2JhbCBzdGF0ZSAqLwogc3Rh
-dGljIHN0cnVjdCB7Ci0tIAoyLjExLjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+T24gVHVlLCBPY3QgMDksIDIwMTggYXQgMDE6MDM6MDBQTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBJbiBvcmRlciB0byBzdXBwb3J0IGdydWIyIGluIFhlbiBQVkggZW52aXJvbm1lbnQg
+c29tZSBhZGRpdGlvbmFsIFhlbgo+IGhlYWRlcnMgYXJlIG5lZWRlZCBhcyBncnViMiB3aWxsIGJl
+IHN0YXJ0ZWQgaW4gUFZIIG1vZGUgcmVxdWlyaW5nIHRvCj4gdXNlIHNldmVyYWwgSFZNIGh5cGVy
+Y2FsbHMgYW5kIHN0cnVjdHVyZXMuCj4KPiBBZGQgdGhlIG5lZWRlZCBoZWFkZXJzIGZyb20gWGVu
+IDQuMTAgYmVpbmcgdGhlIGZpcnN0IFhlbiB2ZXJzaW9uIHdpdGgKPiBmdWxsIChub3Qgb25seSBl
+eHBlcmltZW50YWwpIFBWSCBndWVzdCBzdXBwb3J0LgoKU2hvdWxkIG5vdCB3ZSB1c2UgdGhlIGxh
+dGVzdCBvbmU/IDQuMTE/CgpEYW5pZWwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
