@@ -1,16 +1,16 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2 07/18] xen: add PVH specific defines to
- offset.h
-Date: Fri, 19 Oct 2018 16:39:29 +0200
-Message-ID: <6907132f-2f38-1263-adc6-88691b177052__48390.1844746017$1539959908$gmane$org@suse.com>
+Subject: Re: [PATCH v2 08/18] xen: add basic hooks for PVH in
+ current code
+Date: Fri, 19 Oct 2018 16:40:25 +0200
+Message-ID: <bdb307ce-0c68-8a8d-12ca-025d5b3b3b64__1666.59307801655$1539959951$gmane$org@suse.com>
 References: <20181009110317.6022-1-jgross@suse.com>
- <20181009110317.6022-8-jgross@suse.com>
- <20181019115411.GD4422@olila.i.net-space.pl>
+ <20181009110317.6022-9-jgross@suse.com>
+ <20181019120525.GE4422@olila.i.net-space.pl>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181019115411.GD4422@olila.i.net-space.pl>
+In-Reply-To: <20181019120525.GE4422@olila.i.net-space.pl>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,30 +24,13 @@ To: Daniel Kiper <daniel.kiper@oracle.com>
 Cc: hans@knorrie.org, grub-devel@gnu.org, xen-devel@lists.xen.org, phcoder@gmail.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTkvMTAvMjAxOCAxMzo1NCwgRGFuaWVsIEtpcGVyIHdyb3RlOgo+IE9uIFR1ZSwgT2N0IDA5
-LCAyMDE4IGF0IDAxOjAzOjA2UE0gKzAyMDAsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+IGluY2x1
-ZGUvZ3J1Yi9vZmZzZXRzLmggbmVlZHMgc29tZSBkZWZpbmVzIGZvciBYZW4gUFZIIG1vZGUuCj4+
-Cj4+IEFkZCB0aGVtLiBXaGlsZSBhdCBpdCBsaW5lIHVwIHRoZSB2YWx1ZXMgaW4gdGhlIHN1cnJv
-dW5kaW5nIGxpbmVzIHRvCj4+IHN0YXJ0IGF0IHRoZSBzYW1lIGNvbHVtbi4KPj4KPj4gU2lnbmVk
-LW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgo+PiAtLS0KPj4gIGluY2x1
-ZGUvZ3J1Yi9vZmZzZXRzLmggfCAyMSArKysrKysrKysrKystLS0tLS0tLS0KPj4gIDEgZmlsZSBj
-aGFuZ2VkLCAxMiBpbnNlcnRpb25zKCspLCA5IGRlbGV0aW9ucygtKQo+Pgo+PiBkaWZmIC0tZ2l0
-IGEvaW5jbHVkZS9ncnViL29mZnNldHMuaCBiL2luY2x1ZGUvZ3J1Yi9vZmZzZXRzLmgKPj4gaW5k
-ZXggMzMwZTRjNzA3Li5iMTYzNTMxNjMgMTAwNjQ0Cj4+IC0tLSBhL2luY2x1ZGUvZ3J1Yi9vZmZz
-ZXRzLmgKPj4gKysrIGIvaW5jbHVkZS9ncnViL29mZnNldHMuaAo+PiBAQCAtMzYsOSArMzYsMTAg
-QEAKPj4gICNkZWZpbmUgR1JVQl9ERUNPTVBSRVNTT1JfSTM4Nl9QQ19NQVhfREVDT01QUkVTU09S
-X1NJWkUgKDB4OTAwMC0weDgyMDApCj4+Cj4+ICAvKiBUaGUgc2VnbWVudCB3aGVyZSB0aGUga2Vy
-bmVsIGlzIGxvYWRlZC4gICovCj4+IC0jZGVmaW5lIEdSVUJfQk9PVF9JMzg2X1BDX0tFUk5FTF9T
-RUcJMHg4MDAKPj4gKyNkZWZpbmUgR1JVQl9CT09UX0kzODZfUENfS0VSTkVMX1NFRwkJMHg4MDAK
-Pj4KPj4gLSNkZWZpbmUgR1JVQl9LRVJORUxfSTM4Nl9QQ19MSU5LX0FERFIgIDB4OTAwMAo+PiAr
-I2RlZmluZSBHUlVCX0tFUk5FTF9JMzg2X1BDX0xJTktfQUREUgkJMHg5MDAwCj4+ICsjZGVmaW5l
-IEdSVUJfS0VSTkVMX0kzODZfWEVOUFZIX0xJTktfQUREUgkweDEwMDAwMAo+IAo+IHMvWEVOUFZI
-L1hFTl9QVkgvIEluIGdlbmVyYWwgSSBwcmVmZXIgWEVOX1BWSCBpbnN0ZWFkIG9mIFhFTlBWSC4K
-PiBTbywgcGxlYXNlIHVwZGF0ZSB0aGVtIGFsbCB3aGVyZSBwb3NzaWJsZS4gTm90IG9ubHkgaW4g
-dGhpcyBwYXRjaC4KCkRvZXMgdGhpcyBhcHBseSB0byBwYXRoIG5hbWVzIGFzIHdlbGwgKGUuZy4g
-aW5jbHVkZS9ncnViL2kzODYveGVucHZoLykgPwpPciBkbyB5b3UgbWVhbiBtYWNyb3Mvc3ltYm9s
-cyBvbmx5PwoKQlRXOiBpZiB5ZXMsIHRoaXMgd291bGQgYWZmZWN0IHRoZSB2aXNpYmxlIHBsYXRm
-b3JtIG5hbWUsIHRvby4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+T24gMTkvMTAvMjAxOCAxNDowNSwgRGFuaWVsIEtpcGVyIHdyb3RlOgo+IE9uIFR1ZSwgT2N0IDA5
+LCAyMDE4IGF0IDAxOjAzOjA3UE0gKzAyMDAsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+IEFkZCB0
+aGUgaG9va3MgdG8gY3VycmVudCBjb2RlIG5lZWRlZCBmb3IgWGVuIFBWSC4KPiAKPiBJIGFtIG5v
+dCBhZ2FpbnN0IHRoZSBjb2RlIGl0c2VsZiBidXQgaXQgd291bGQgYmUgbmljZSB0byBrbm93IHdo
+eSB5b3UKPiBhZGQsIEFJVUksIGp1c3Qgc3R1YnMgaGVyZSB3aGljaCB3aWxsIGJlIGZpbGxlZCB3
+aXRoIHByb3BlciBjb2RlIGxhdGVyLgoKWW91IHJlcXVlc3RlZCBhIHNwbGl0IG9mIHRoZSBwYXRj
+aCBhZGRpbmcgUFZIIHN0dWZmLiBUaGlzIGlzIHRoZSByZXN1bHQKb2YgdGhhdCByZXF1ZXN0LgoK
+Ckp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
