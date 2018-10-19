@@ -1,15 +1,31 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v4 12/23] xen/arm: introduce create_domUs
-Date: Fri, 19 Oct 2018 15:37:24 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1810191530340.31582@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1810051140030.24936@sstabellini-ThinkPad-X260>
- <1538765251-25256-12-git-send-email-sstabellini@kernel.org>
- <a8f08990-f8cb-ce5e-157e-3e9bd4b1436f@arm.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: Xen optimization
+Date: Sat, 20 Oct 2018 00:41:01 +0200
+Message-ID: <d3a589c5d95d70ef1c13b4fe6856b7ed387b4ee3.camel@suse.com>
+References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
+ <995da0578f0953662536edabb5807fd76ca4d8ce.camel@suse.com>
+ <CADJ6SV1yDBptrcaoqUPChtnXTmvhbzj-AAv2FDN2LCMyTipc-A@mail.gmail.com>
+ <CAENZ-+=mWFnJ-4OFK+bjb4rimNNB_x4qHFVAbTM1mFd2Sg7s3g@mail.gmail.com>
+ <CADJ6SV1Mdnjyd8oEcB4ZCZKuR0LkJ82GCf5s1+AwgASe8vLMWg@mail.gmail.com>
+ <alpine.DEB.2.10.1810111024390.436@sstabellini-ThinkPad-X260>
+ <CADJ6SV2v5=_MqfrABdfs1rcQ-BmCUJYyi_9fG8BC7C2vyxaqBA@mail.gmail.com>
+ <alpine.DEB.2.10.1810121035440.436@sstabellini-ThinkPad-X260>
+ <CADJ6SV3jk=nnP=6T8R+OuvJH2uQ6uBrLmvudAHkKHP+mN-3hPA@mail.gmail.com>
+ <e0f4fe11-eeb0-3a28-2e7e-246a8f72da19@arm.com>
+ <12a4352a-2fd1-2d04-874a-4a779d18a097@arm.com>
+ <CADJ6SV0E=cO3eFyt+meXTtZaoETYxpsHkViMDU=XV9CwNOjP8A@mail.gmail.com>
+ <21de0bb5-81f2-ca26-e2e0-916c20ab2c02@arm.com>
+ <CADJ6SV3sfqaXm8gvZDAx2wFY5_oiCf+mf0JynCGNrLBFkS-rVw@mail.gmail.com>
+ <alpine.DEB.2.10.1810191336090.31582@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7219621512916628824=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <a8f08990-f8cb-ce5e-157e-3e9bd4b1436f@arm.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=g1zh=m7=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gDdS8-0005aR-7H
+ for xen-devel@lists.xenproject.org; Fri, 19 Oct 2018 22:41:08 +0000
+In-Reply-To: <alpine.DEB.2.10.1810191336090.31582@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,137 +34,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, andrew.cooper3@citrix.com, xen-devel@lists.xen.org, jbeulich@suse.com, nd@arm.com
+To: Stefano Stabellini <stefano.stabellini@xilinx.com>, Milan Boberic <milanboberic94@gmail.com>
+Cc: sstabellini@kernel.org, andrii_anisov@epam.com, julien.grall@arm.com, Meng Xu <xumengpanda@gmail.com>, xen-devel@lists.xenproject.org, nd@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAxNSBPY3QgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpLAo+IAo+IE9uIDA1
-LzEwLzIwMTggMTk6NDcsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IENhbGwgYSBuZXcg
-ZnVuY3Rpb24sICJjcmVhdGVfZG9tVXMiLCBmcm9tIHNldHVwX3hlbiB0byBzdGFydCBEb21VIFZN
-cy4KPiA+IAo+ID4gSW50cm9kdWNlIHN1cHBvcnQgZm9yIHRoZSAieGVuLGRvbVUiIGNvbXBhdGli
-bGUgbm9kZSBvbiBkZXZpY2UgdHJlZS4KPiAKPiBzL3hlbixkb21VL3hlbixkb21haW4vCgpPSwoK
-PiA+IENyZWF0ZSBuZXcgRG9tVSBWTXMgYmFzZWQgb24gdGhlIGluZm9ybWF0aW9uIGZvdW5kIG9u
-IGRldmljZSB0cmVlIHVuZGVyCj4gPiAieGVuLGRvbVUiLiBDYWxscyBjb25zdHJ1Y3RfZG9tVSBm
-b3IgZWFjaCBkb21haW4uCj4gCj4gRGl0dG8KPiAKPiBzL0NhbGxzL0NhbGwvCgpPSwoKCj4gPiAK
-PiA+IEludHJvZHVjZSBhIHNpbXBsZSBnbG9iYWwgdmFyaWFibGUgbmFtZWQgbWF4X2luaXRfZG9t
-aWQgdG8ga2VlcCB0cmFjayBvZgo+ID4gdGhlIGluaXRpYWwgYWxsb2NhdGVkIGRvbWlkcy4gSXQg
-aG9sZHMgdGhlIG1heCBkb21pZCBhbW9uZyB0aGUgaW5pdGlhbAo+ID4gZG9tYWlucy4KPiA+IAo+
-ID4gTW92ZSB0aGUgZGlzY2FyZF9pbml0aWFsX21vZHVsZXMgYWZ0ZXIgRG9tVXMgaGF2ZSBiZWVu
-IGJ1aWx0Lgo+ID4gCj4gPiBGaXJzdCBjcmVhdGUgZG9tVXMsIHRoZW4gc3RhcnQgZG9tMCAtLSBu
-byBwb2ludCBpbiB0cnlpbmcgdG8gc3RhcnQgZG9tMAo+ID4gd2hlbiB0aGUgY3B1IGlzIGJ1c3ku
-Cj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3RlZmFub3NAeGls
-aW54LmNvbT4KPiA+IEFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4g
-PiBDQzogYW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbQo+ID4gQ0M6IGpiZXVsaWNoQHN1c2UuY29t
-Cj4gPiAtLS0KPiA+IENoYW5nZXMgaW4gdjQ6Cj4gPiAtIGNvbnN0aWZ5IHBhcmFtZXRlcnMKPiA+
-IC0gbnJfc3BpcyB0byAwIG9yICBHVUVTVF9WUEwwMTFfU1BJIC0gMzIgKyAxIGRlcGVuZGluZyBv
-biB2cGwwMTEKPiA+IC0gcmVtb3ZlIHBvaW50bGVzcyBpbml0aWFsaXplcgo+ID4gLSByZW1vdmUg
-Y2hhbmdlIHRvIGRvbWFpbl9jcmVhdGUgZm9yIGRvbTAgKHVzZWxlc3MpCj4gPiAtIG1ha2UgY29u
-c3RydWN0X2RvbVUgcmV0dXJuIGVycm9yCj4gPiAKPiA+IENoYW5nZXMgaW4gdjM6Cj4gPiAtIG1v
-dmUgcGF0Y2ggZWFybGllciBhbmQgaW50cm9kdWNlIGVtcHR5IGNvbnN0cnVjdF9kb21VIHRvIGZp
-eCBiaXNlY3Rpb24KPiA+ICAgIGJ1aWxkcwo+ID4gLSBmaXggbWF4X2luaXRfZG9taWQgdG8gYWN0
-dWFsbHkgaG9sZCB0aGUgbWF4IGRvbWlkIGFtb25nIGluaXRpYWwKPiA+ICAgIGRvbWFpbnMgKGlu
-c3RlYWQgb2YgbWF4X2RvbWlkICsgMSkKPiA+IC0gbW92ZSBkb21haW5fdW5wYXVzZV9ieV9zeXN0
-ZW1jb250cm9sbGVyKGRvbTApIGFmdGVyIGNyZWF0aW5nIGRvbVVzCj4gPiAKPiA+IENoYW5nZXMg
-aW4gdjI6Cj4gPiAtIGNvZGluZyBzdHlsZQo+ID4gLSBzZXQgbnJfc3BpcyB0byAzMgo+ID4gLSBp
-bnRyb2R1Y2UgY3JlYXRlX2RvbVVzCj4gPiAtLS0KPiA+ICAgeGVuL2FyY2gvYXJtL2RvbWFpbl9i
-dWlsZC5jIHwgNTEKPiA+ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-LS0tLQo+ID4gICB4ZW4vYXJjaC9hcm0vc2V0dXAuYyAgICAgICAgfCAgNSArKysrKwo+ID4gICB4
-ZW4vaW5jbHVkZS9hc20tYXJtL3NldHVwLmggfCAgMyArKysKPiA+ICAgeGVuL2luY2x1ZGUvYXNt
-LXg4Ni9zZXR1cC5oIHwgIDIgKysKPiA+ICAgNCBmaWxlcyBjaGFuZ2VkLCA1NyBpbnNlcnRpb25z
-KCspLCA0IGRlbGV0aW9ucygtKQo+ID4gCj4gPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2Rv
-bWFpbl9idWlsZC5jIGIveGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5jCj4gPiBpbmRleCBiYTNk
-YWQxLi41NDdiNjI0IDEwMDY0NAo+ID4gLS0tIGEveGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5j
-Cj4gPiArKysgYi94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMKPiA+IEBAIC03LDYgKzcsNyBA
-QAo+ID4gICAjaW5jbHVkZSA8YXNtL2lycS5oPgo+ID4gICAjaW5jbHVkZSA8YXNtL3JlZ3MuaD4K
-PiA+ICAgI2luY2x1ZGUgPHhlbi9lcnJuby5oPgo+ID4gKyNpbmNsdWRlIDx4ZW4vZXJyLmg+Cj4g
-PiAgICNpbmNsdWRlIDx4ZW4vZGV2aWNlX3RyZWUuaD4KPiA+ICAgI2luY2x1ZGUgPHhlbi9saWJm
-ZHQvbGliZmR0Lmg+Cj4gPiAgICNpbmNsdWRlIDx4ZW4vZ3Vlc3RfYWNjZXNzLmg+Cj4gPiBAQCAt
-MjI5MCw2ICsyMjkxLDUxIEBAIHN0YXRpYyBpbnQgX19pbml0IF9fY29uc3RydWN0X2RvbWFpbihz
-dHJ1Y3QgZG9tYWluCj4gPiAqZCwgc3RydWN0IGtlcm5lbF9pbmZvICpraW5mbwo+ID4gICAgICAg
-cmV0dXJuIDA7Cj4gPiAgIH0KPiA+ICAgK3N0YXRpYyBpbnQgX19pbml0IGNvbnN0cnVjdF9kb21V
-KHN0cnVjdCBkb21haW4gKmQsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-Y29uc3Qgc3RydWN0IGR0X2RldmljZV9ub2RlICpub2RlKQo+ID4gK3sKPiA+ICsgICAgcmV0dXJu
-IC1FTk9TWVM7Cj4gPiArfQo+ID4gKwo+ID4gK3ZvaWQgX19pbml0IGNyZWF0ZV9kb21Vcyh2b2lk
-KQo+ID4gK3sKPiA+ICsgICAgc3RydWN0IGR0X2RldmljZV9ub2RlICpub2RlOwo+ID4gKyAgICBj
-b25zdCBzdHJ1Y3QgZHRfZGV2aWNlX25vZGUgKmNob3NlbiA9IGR0X2ZpbmRfbm9kZV9ieV9uYW1l
-KGR0X2hvc3QsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgImNob3NlbiIpOwo+IAo+IE5ld2xpbmUKCk9LCgoKPiBJdCB3
-b3VsZCBhbHNvIGJlIGJldHRlciB0byB1c2UgZHRfZmluZF9ub2RlX2J5X3BhdGgoIi9jaG9zZW4i
-KSBiZWNhdXNlCj4gZHRfZmluZF9ub2RlX2J5X25hbWUgbWF5IHJldHVybiBhIGRpZmZlcmVudCBu
-b2RlIChlLmcgL2Zvby9jaG9zZW4pLgoKR29vZCBpZGVhCgoKPiA+ICsgICAgQlVHX09OKGNob3Nl
-biA9PSBOVUxMKTsKPiA+ICsgICAgZHRfZm9yX2VhY2hfY2hpbGRfbm9kZShjaG9zZW4sIG5vZGUp
-Cj4gPiArICAgIHsKPiA+ICsgICAgICAgIHUzMiBsZW47Cj4gPiArICAgICAgICBzdHJ1Y3QgZG9t
-YWluICpkOwo+ID4gKyAgICAgICAgc3RydWN0IHhlbl9kb21jdGxfY3JlYXRlZG9tYWluIGRfY2Zn
-ID0gewo+ID4gKyAgICAgICAgICAgIC5hcmNoLmdpY192ZXJzaW9uID0gWEVOX0RPTUNUTF9DT05G
-SUdfR0lDX05BVElWRSwKPiA+ICsgICAgICAgICAgICAuYXJjaC5ucl9zcGlzID0gMCwKPiA+ICsg
-ICAgICAgICAgICAubWF4X3ZjcHVzID0gMSwKPiA+ICsgICAgICAgICAgICAubWF4X2V2dGNobl9w
-b3J0ID0gLTEsCj4gPiArICAgICAgICAgICAgLm1heF9ncmFudF9mcmFtZXMgPSA2NCwKPiA+ICsg
-ICAgICAgICAgICAubWF4X21hcHRyYWNrX2ZyYW1lcyA9IDEwMjQsCj4gPiArICAgICAgICB9Owo+
-ID4gKwo+ID4gKyAgICAgICAgaWYgKCAhZHRfZGV2aWNlX2lzX2NvbXBhdGlibGUobm9kZSwgInhl
-bixkb21haW4iKSApCj4gPiArICAgICAgICAgICAgY29udGludWU7Cj4gPiArCj4gPiArICAgICAg
-ICBpZiAoIGR0X2dldF9wcm9wZXJ0eShub2RlLCAidnBsMDExIiwgJmxlbikgIT0gTlVMTCApCj4g
-Cj4gZHRfcHJvcGVydHlfcmVhZF9ib29sIHdpbGwgZG8gdGhlIHJpZ2h0IHRoaW5nIGZvciB5b3Uu
-CgpPSwoKCj4gPiArICAgICAgICAgICAgZF9jZmcuYXJjaC5ucl9zcGlzID0gR1VFU1RfVlBMMDEx
-X1NQSSAtIDMyICsgMTsKPiA+ICsgICAgICAgIGR0X3Byb3BlcnR5X3JlYWRfdTMyKG5vZGUsICJj
-cHVzIiwgJmRfY2ZnLm1heF92Y3B1cyk7Cj4gPiArCj4gPiArICAgICAgICBkID0gZG9tYWluX2Ny
-ZWF0ZSgrK21heF9pbml0X2RvbWlkLCAmZF9jZmcsIGZhbHNlKTsKPiA+ICsgICAgICAgIGlmICgg
-SVNfRVJSKGQpICkKPiA+ICsgICAgICAgICAgICBwYW5pYygiRXJyb3IgY3JlYXRpbmcgZG9tYWlu
-ICVzIiwgZHRfbm9kZV9uYW1lKG5vZGUpKTsKPiA+ICsKPiA+ICsgICAgICAgIGQtPmlzX2NvbnNv
-bGUgPSAxOwo+IAo+IGlzX2NvbnNvbGUgaXMgYSBib29sLCBzbyB0aGlzIHNob3VsZCBiZSB0cnVl
-LgoKT0sKCgo+ID4gKwo+ID4gKyAgICAgICAgaWYgKCBjb25zdHJ1Y3RfZG9tVShkLCBub2RlKSAh
-PSAwICkKPiA+ICsgICAgICAgICAgICBwYW5pYygiQ291bGQgbm90IHNldCB1cCBkb21haW4gJXMi
-LCBkdF9ub2RlX25hbWUobm9kZSkpOwo+ID4gKwo+ID4gKyAgICAgICAgZG9tYWluX3VucGF1c2Vf
-Ynlfc3lzdGVtY29udHJvbGxlcihkKTsKPiA+ICsgICAgfQo+ID4gK30KPiA+ICsKPiA+ICAgaW50
-IF9faW5pdCBjb25zdHJ1Y3RfZG9tMChzdHJ1Y3QgZG9tYWluICpkKQo+ID4gICB7Cj4gPiAgICAg
-ICBjb25zdCBzdHJ1Y3QgYm9vdGNtZGxpbmUgKmtlcm5lbCA9Cj4gPiBib290X2NtZGxpbmVfZmlu
-ZF9ieV9raW5kKEJPT1RNT0RfS0VSTkVMKTsKPiA+IEBAIC0yMzQyLDEwICsyMzg4LDcgQEAgaW50
-IF9faW5pdCBjb25zdHJ1Y3RfZG9tMChzdHJ1Y3QgZG9tYWluICpkKQo+ID4gICAgICAgaWYgKCBy
-YyA8IDAgKQo+ID4gICAgICAgICAgIHJldHVybiByYzsKPiA+ICAgLSAgICByYyA9IF9fY29uc3Ry
-dWN0X2RvbWFpbihkLCAma2luZm8pOwo+ID4gLSAgICBkaXNjYXJkX2luaXRpYWxfbW9kdWxlcygp
-Owo+ID4gLQo+ID4gLSAgICByZXR1cm4gcmM7Cj4gPiArICAgIHJldHVybiBfX2NvbnN0cnVjdF9k
-b21haW4oZCwgJmtpbmZvKTsKPiA+ICAgfQo+ID4gICAgIC8qCj4gPiBkaWZmIC0tZ2l0IGEveGVu
-L2FyY2gvYXJtL3NldHVwLmMgYi94ZW4vYXJjaC9hcm0vc2V0dXAuYwo+ID4gaW5kZXggZDZkMTU0
-Ni4uOGQ4ZjE4MCAxMDA2NDQKPiA+IC0tLSBhL3hlbi9hcmNoL2FybS9zZXR1cC5jCj4gPiArKysg
-Yi94ZW4vYXJjaC9hcm0vc2V0dXAuYwo+ID4gQEAgLTY0LDggKzY0LDExIEBAIHN0YXRpYyB1bnNp
-Z25lZCBsb25nIG9wdF94ZW5oZWFwX21lZ2FieXRlcyBfX2luaXRkYXRhOwo+ID4gICBpbnRlZ2Vy
-X3BhcmFtKCJ4ZW5oZWFwX21lZ2FieXRlcyIsIG9wdF94ZW5oZWFwX21lZ2FieXRlcyk7Cj4gPiAg
-ICNlbmRpZgo+ID4gICArZG9taWRfdCBfX3JlYWRfbW9zdGx5IG1heF9pbml0X2RvbWlkOwo+ID4g
-Kwo+ID4gICBzdGF0aWMgX191c2VkIHZvaWQgaW5pdF9kb25lKHZvaWQpCj4gPiAgIHsKPiA+ICsg
-ICAgZGlzY2FyZF9pbml0aWFsX21vZHVsZXMoKTsKPiA+ICAgICAgIGZyZWVfaW5pdF9tZW1vcnko
-KTsKPiA+ICAgICAgIHN0YXJ0dXBfY3B1X2lkbGVfbG9vcCgpOwo+ID4gICB9Cj4gPiBAQCAtOTI2
-LDYgKzkyOSw4IEBAIHZvaWQgX19pbml0IHN0YXJ0X3hlbih1bnNpZ25lZCBsb25nIGJvb3RfcGh5
-c19vZmZzZXQsCj4gPiAgICAgICAvKiBNdXN0IGJlIGRvbmUgcGFzdCBzZXR0aW5nIHN5c3RlbV9z
-dGF0ZS4gKi8KPiA+ICAgICAgIHVucmVnaXN0ZXJfaW5pdF92aXJ0dWFsX3JlZ2lvbigpOwo+ID4g
-ICArICAgIGNyZWF0ZV9kb21VcygpOwo+IAo+IEkgbWlzc2VkIHRoYXQgYml0cyBpbiB0aGUgcHJl
-dmlvdXMgdmVyc2lvbi4gSSBhbSBub3QgdmVyeSBzdXJlIHRoaXMgc2hvdWxkIGJlCj4gY2FsbGVk
-IGFmdGVyIHVucmVnaXN0ZXJfaW5pdF92aXJ0dWFsX3JlZ2lvbigpLiBJZiB5b3UgY2FsbCBpdCBh
-ZnRlciBhbmQgZ2V0IGFuCj4gaHlwZXJ2aXNvciBjcmFzaCBpbiBpbml0IGNvZGUsIHRoZW4gdGhl
-IHN0YWNrIHRyYWNlIG1heSBtaXNzIHNvbWUgaW5mb3JtYXRpb24KPiAoZS5nIGJ1ZyBmcmFtZSku
-Cj4gCj4gTG9va2luZyBhdCB4ODYsIHVucmVnaXN0ZXJfaW5pdF92aXJ0dWFsX3JlZ2lvbigpIGlz
-IGNhbGxlZCBmcm9tIGluaXRfZG9uZS4gU28KPiB3ZSBwcm9iYWJseSB3YW50IHRvIG1vdmUgdGhh
-dCBjYWxsIHRoZXJlLgoKT0sKCgoKPiA+ICsKPiA+ICAgICAgIGRvbWFpbl91bnBhdXNlX2J5X3N5
-c3RlbWNvbnRyb2xsZXIoZG9tMCk7Cj4gPiAgICAgICAgIC8qIFN3aXRjaCBvbiB0byB0aGUgZHlu
-YW1pY2FsbHkgYWxsb2NhdGVkIHN0YWNrIGZvciB0aGUgaWRsZSB2Y3B1Cj4gPiBkaWZmIC0tZ2l0
-IGEveGVuL2luY2x1ZGUvYXNtLWFybS9zZXR1cC5oIGIveGVuL2luY2x1ZGUvYXNtLWFybS9zZXR1
-cC5oCj4gPiBpbmRleCAxNzdlOGRiLi41NjIwZmU3IDEwMDY0NAo+ID4gLS0tIGEveGVuL2luY2x1
-ZGUvYXNtLWFybS9zZXR1cC5oCj4gPiArKysgYi94ZW4vaW5jbHVkZS9hc20tYXJtL3NldHVwLmgK
-PiA+IEBAIC02OCw2ICs2OCw4IEBAIHN0cnVjdCBib290aW5mbyB7Cj4gPiAgICAgZXh0ZXJuIHN0
-cnVjdCBib290aW5mbyBib290aW5mbzsKPiA+ICAgK2V4dGVybiBkb21pZF90IG1heF9pbml0X2Rv
-bWlkOwo+ID4gKwo+ID4gICB2b2lkIGFyY2hfaW5pdF9tZW1vcnkodm9pZCk7Cj4gPiAgICAgdm9p
-ZCBjb3B5X2Zyb21fcGFkZHIodm9pZCAqZHN0LCBwYWRkcl90IHBhZGRyLCB1bnNpZ25lZCBsb25n
-IGxlbik7Cj4gPiBAQCAtODQsNiArODYsNyBAQCB2b2lkIGFjcGlfY3JlYXRlX2VmaV9tbWFwX3Rh
-YmxlKHN0cnVjdCBkb21haW4gKmQsCj4gPiAgIGludCBhY3BpX21ha2VfZWZpX25vZGVzKHZvaWQg
-KmZkdCwgc3RydWN0IG1lbWJhbmsgdGJsX2FkZFtdKTsKPiA+ICAgICBpbnQgY29uc3RydWN0X2Rv
-bTAoc3RydWN0IGRvbWFpbiAqZCk7Cj4gPiArdm9pZCBfX2luaXQgY3JlYXRlX2RvbVVzKHZvaWQp
-Owo+ID4gICAgIHZvaWQgZGlzY2FyZF9pbml0aWFsX21vZHVsZXModm9pZCk7Cj4gPiAgIHZvaWQg
-ZHRfdW5yZXNlcnZlZF9yZWdpb25zKHBhZGRyX3QgcywgcGFkZHJfdCBlLAo+ID4gZGlmZiAtLWdp
-dCBhL3hlbi9pbmNsdWRlL2FzbS14ODYvc2V0dXAuaCBiL3hlbi9pbmNsdWRlL2FzbS14ODYvc2V0
-dXAuaAo+ID4gaW5kZXggNDJmZGRlYi4uMWM4MDc4MyAxMDA2NDQKPiA+IC0tLSBhL3hlbi9pbmNs
-dWRlL2FzbS14ODYvc2V0dXAuaAo+ID4gKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9zZXR1cC5o
-Cj4gPiBAQCAtNjYsNCArNjYsNiBAQCBleHRlcm4gYm9vbCBvcHRfZG9tMF9zaGFkb3c7Cj4gPiAg
-ICNlbmRpZgo+ID4gICBleHRlcm4gYm9vbCBkb20wX3B2aDsKPiA+ICAgKyNkZWZpbmUgbWF4X2lu
-aXRfZG9taWQgKDApCj4gPiArCj4gPiAgICNlbmRpZgo+ID4gCj4gCj4gQ2hlZXJzLAo+IAo+IC0t
-IAo+IEp1bGllbiBHcmFsbAo+IAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+
+--===============7219621512916628824==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-rdxaXnZKF0uQaGjztkjn"
+
+
+--=-rdxaXnZKF0uQaGjztkjn
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-10-19 at 14:02 -0700, Stefano Stabellini wrote:
+> On Wed, 17 Oct 2018, Milan Boberic wrote:
+> > I checked interrupt frequency with oscilloscope
+> > just to be sure (toggling LED on/off when interrupts occur). So,
+> > when I set:
+> > - interrupts to be generated every 8 us I get jitter of 6 us
+> > - interrupts to be generated every 10 us I get jitter of 3 us
+> > (after
+> > 2-3mins it jumps to 6 us)
+> > - interrupts to be generated every 15 us jitter is the same as when
+> > only bare-metal application runs on board (without Xen or any OS)
+>=20
+> These are very interesting numbers!=20
+>
+Indeed.
+
+> Thanks again for running these
+> experiments. I don't want to jump to conclusions but they seem to
+> verify
+> the theory that if the interrupt frequency is too high, we end up
+> spending too much time handling interrupts, the system cannot cope,
+> hence jitter increases.
+>=20
+Yep, this makes a lot of sense.
+
+> However, I would have thought that the threshold should be lower than
+> 15us, given that it takes 2.5us to inject an interrupt. I have a
+> couple
+> of experiments suggestions below.
+>=20
+FWIW, I know that numbers are always relative (hw platform, workload,
+etc), and I'm happy to see that you're quite confident that we can
+improve further... but these numbers seems rather good to me. :-)
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-rdxaXnZKF0uQaGjztkjn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvKXX0ACgkQFkJ4iaW4
+c+6x5RAA0yWV25JJZLmE4kwjHdTELH1tpcbyoPHw9Sojzw0142XH3Ge8femRZ4mi
+DnEsO6eEiJfcZOpMgFcpbIQXriDCEidg9fhQDpbX6rwfBr0ELoA9FtStB6UJsDvP
+AQY909JA11a6LY5jhRL1NLEOd3LTXk1oqrYDoGyj+fsR6I5yyUP+grWctVcSzBDb
+O2rU3E6LBwinNuZcHQJw0rFKriZa6XhRBZV6mJj50WWNTz7Nn9qjT7mOjdN9YSQh
+wrRCfy4bSWjmyQf1goMLvMCa34qt9HtA9GHMSIHDQs+APEDJgrmo5pWQDqA1ZlQa
+mFmE/NfgcR1hlizeoO3Uj3SrtXr6w09SU0mT5naGShZXVuH0rQ07zvmZ/K1z97oC
+aighViyWRAU0yj1kz2aUE7bp8G2yyyt7WbhNTotQ2h7YWZslsaTZpxdzyZ/WNh8G
+XknNoIIQMMHhl1qxZ5v07KG6FwngsALzazIv8i+LVt/Z0Nkrl3W+GHno35P5FuM4
+1xnEo0BrepqW3rJP7jPmxglJP1uppTybdeffmbfVLf70yyoICdgybI/wkKDUjT8l
+/kqOGwblE9uaoWdRNN2LGNEG3zXl13aEgcJuqfXefpr7fpZrYKJ2Gta/GV0UevSj
+o9thlOBXmKM5jNNH1OesudzFBEdLX45Fdm1WLcAajPWVT4D0EWU=
+=OuAv
+-----END PGP SIGNATURE-----
+
+--=-rdxaXnZKF0uQaGjztkjn--
+
+
+
+--===============7219621512916628824==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7219621512916628824==--
