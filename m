@@ -1,12 +1,22 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: Ongoing/future speculative mitigation work
-Date: Fri, 19 Oct 2018 10:09:30 +0200
-Message-ID: <0508ae79c8d74f6ebb7d1b239b2c3f0e428aca6b.camel@suse.com>
-References: <e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: [PATCH 2/2] x86/altp2m: fix display frozen when
+ switching to a new view early
+Date: Fri, 19 Oct 2018 11:30:04 +0300
+Message-ID: <3fc702a3-9032-7dc3-2f10-45f304b25e87@bitdefender.com>
+References: <1539857272-4660-1-git-send-email-rcojocaru@bitdefender.com>
+ <1539857272-4660-3-git-send-email-rcojocaru@bitdefender.com>
+ <d7663d2d-0052-ee9e-4726-7766e3e7e268@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8690294613943063488=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=dttg=m7=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1gDQAb-0007JI-Rd
+ for xen-devel@lists.xenproject.org; Fri, 19 Oct 2018 08:30:09 +0000
+In-Reply-To: <d7663d2d-0052-ee9e-4726-7766e3e7e268@citrix.com>
+Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,206 +25,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel List <xen-devel@lists.xen.org>
-Cc: Juergen Gross <JGross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Anthony Liguori <aliguori@amazon.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Ross Philipson <ross.philipson@oracle.com>, Daniel Kiper <daniel.kiper@oracle.com>, Konrad Wilk <konrad.wilk@oracle.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, Martin Pohlack <mpohlack@amazon.de>, Julien Grall <julien.grall@arm.com>, "Dannowski, Uwe" <uwed@amazon.de>, Jan Beulich <JBeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Mihai =?UTF-8?Q?Don=C8=9Bu?= <mdontu@bitdefender.com>, Matt Wilson <msw@amazon.com>, Joao Martins <joao.m.martins@oracle.com>, "Woodhouse, David" <dwmw@amazon.co.uk>, Roger Pau Monne <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Cc: george.dunlap@eu.citrix.com, kevin.tian@intel.com, wei.liu2@citrix.com, jbeulich@suse.com, jun.nakajima@intel.com
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8690294613943063488==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-/qr9/bcV2HMGbZTI3jSn"
-
-
---=-/qr9/bcV2HMGbZTI3jSn
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2018-10-18 at 18:46 +0100, Andrew Cooper wrote:
-> Hello,
->=20
-Hey,
-
-This is very accurate and useful... thanks for it. :-)
-
-> 1) A secrets-free hypervisor.
->=20
-> Basically every hypercall can be (ab)used by a guest, and used as an
-> arbitrary cache-load gadget.  Logically, this is the first half of a
-> Spectre SP1 gadget, and is usually the first stepping stone to
-> exploiting one of the speculative sidechannels.
->=20
-> Short of compiling Xen with LLVM's Speculative Load Hardening (which
-> is
-> still experimental, and comes with a ~30% perf hit in the common
-> case),
-> this is unavoidable.  Furthermore, throwing a few
-> array_index_nospec()
-> into the code isn't a viable solution to the problem.
->=20
-> An alternative option is to have less data mapped into Xen's virtual
-> address space - if a piece of memory isn't mapped, it can't be loaded
-> into the cache.
->=20
-> [...]
->=20
-> 2) Scheduler improvements.
->=20
-> (I'm afraid this is rather more sparse because I'm less familiar with
-> the scheduler details.)
->=20
-> At the moment, all of Xen's schedulers will happily put two vcpus
-> from
-> different domains on sibling hyperthreads.  There has been a lot of
-> sidechannel research over the past decade demonstrating ways for one
-> thread to infer what is going on the other, but L1TF is the first
-> vulnerability I'm aware of which allows one thread to directly read
-> data
-> out of the other.
->=20
-> Either way, it is now definitely a bad thing to run different guests
-> concurrently on siblings. =20
->
-Well, yes. But, as you say, L1TF, and I'd say TLBLeed as well, are the
-first serious issues discovered so far and, for instance, even on x86,
-not all Intel CPUs and none of the AMD ones, AFAIK, are affected.
-
-Therefore, although I certainly think we _must_ have the proper
-scheduler enhancements in place (and in fact I'm working on that :-D)
-it should IMO still be possible for the user to decide whether or not
-to use them (either by opting-in or opting-out, I don't care much at
-this stage).
-
-> Fixing this by simply not scheduling vcpus
-> from a different guest on siblings does result in a lower resource
-> utilisation, most notably when there are an odd number runable vcpus
-> in
-> a domain, as the other thread is forced to idle.
->=20
-Right.
-
-> A step beyond this is core-aware scheduling, where we schedule in
-> units
-> of a virtual core rather than a virtual thread.  This has much better
-> behaviour from the guests point of view, as the actually-scheduled
-> topology remains consistent, but does potentially come with even
-> lower
-> utilisation if every other thread in the guest is idle.
->=20
-Yes, basically, what you describe as 'core-aware scheduling' here can
-be build on top of what you had described above as 'not scheduling
-vcpus from different guests'.
-
-I mean, we can/should put ourselves in a position where the user can
-choose if he/she wants:
-- just 'plain scheduling', as we have now,
-- "just" that only vcpus of the same domains are scheduled on siblings
-hyperthread,
-- full 'core-aware scheduling', i.e., only vcpus that the guest
-actually sees as virtual hyperthread siblings, are scheduled on
-hardware hyperthread siblings.
-
-About the performance impact, indeed it's even higher with core-aware
-scheduling. Something that we can see about doing, is acting on the
-guest scheduler, e.g., telling it to try to "pack the load", and keep
-siblings busy, instead of trying to avoid doing that (which is what
-happens by default in most cases).
-
-In Linux, this can be done by playing with the sched-flags (see, e.g.,
-https://elixir.bootlin.com/linux/v4.18/source/include/linux/sched/topology.=
-h#L20 ,
-and /proc/sys/kernel/sched_domain/cpu*/domain*/flags ).
-
-The idea would be to avoid, as much as possible, the case when "every
-other thread is idle in the guest". I'm not sure about being able to do
-something by default, but we can certainly document things (like "if
-you enable core-scheduling, also do `echo 1234 > /proc/sys/.../flags'
-in your Linux guests").
-
-I haven't checked whether other OSs' schedulers have something similar.
-
-> A side requirement for core-aware scheduling is for Xen to have an
-> accurate idea of the topology presented to the guest.  I need to dust
-> off my Toolstack CPUID/MSR improvement series and get that upstream.
->=20
-Indeed. Without knowing which one of the guest's vcpus are to be
-considered virtual hyperthread siblings, I can only get you as far as
-"only scheduling vcpus of the same domain on siblings hyperthread". :-)
-
-> One of the most insidious problems with L1TF is that, with
-> hyperthreading enabled, a malicious guest kernel can engineer
-> arbitrary
-> data leakage by having one thread scanning the expected physical
-> address, and the other thread using an arbitrary cache-load gadget in
-> hypervisor context.  This occurs because the L1 data cache is shared
-> by
-> threads.
->
-Right. So, sorry if this is a stupid question, but how does this relate
-to the "secret-free hypervisor", and with the "if a piece of memory
-isn't mapped, it can't be loaded into the cache".
-
-So, basically, I'm asking whether I am understanding it correctly that
-secret-free Xen + core-aware scheduling would *not* be enough for
-mitigating L1TF properly (and if the answer is no, why... but only if
-you have 5 mins to explain it to me :-P).
-
-In fact, ISTR that core-scheduling plus something that looked to me
-similar enough to "secret-free Xen", is how Microsoft claims to be
-mitigating L1TF on hyper-v...
-
-> A solution to this issue was proposed, whereby Xen synchronises
-> siblings
-> on vmexit/entry, so we are never executing code in two different
-> privilege levels.  Getting this working would make it safe to
-> continue
-> using hyperthreading even in the presence of L1TF. =20
->
-Err... ok, but we still want core-aware scheduling, or at least we want
-to avoid having vcpus from different domains on siblings, don't we? In
-order to avoid leaks between guests, I mean.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-/qr9/bcV2HMGbZTI3jSn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvJkToACgkQFkJ4iaW4
-c+4qNg/+LwiVdN2HwO7L1UgBhlVXyN0ekelF2LTYm8nWsVI+7/y1CC+zHpT5P4Wr
-DviPprcILj1ztkx/O3z8dpBx3r53cjyG71h+NUzEaAG7GjsFvXNKVNq/QPN6W3Lh
-+AqnHO8BJny9yf1qEfKToCVMW+yaNbTrTw7upV2Wcifle0xLQKjwVVsJ68lDl903
-TILs+K8QPyMrzwcJlwmfcZNTII2R0Mh8+xf6cBA80Y2F/2f1HSaIdy/Dsf3Bw8E2
-n6s5RiFxuFO0M/403leYTRc2JDFig1osLaSv6BpdTl0XnhWITJ5rvw6jmzuIRflv
-nYLOzp55YD4/FgR1vBL/q2vdymdraNXOzIhycm5vhpG4sDhXLFT4Ji9gG14H79LZ
-dFUypw+cV6oE1cUFsn+lo4knzk4k0ls+QiNLionl31gF3nNeT8rrdOqkygsKNGhE
-gqnmh0ZcBdzGIa/u0/lc+1G1mm0CSY8Tt1FFYh77qV0CXlBf7rGo1Ppoo9cFZBLC
-YkpGf3WewSp5fdlBXHqAJ+pGekdnAZ0P7KZke2OSPff4aLC843J28xm7vv1dWxfA
-tUklf4yv6uBmoWGcgA/xE/7KwwIkcuqrDw2+C7UdRWe8eZyOMwd4hZpj43dmQis7
-khda4Ri49iuNGvBtSoU+vF1/TRN7zjF1kpIWTgukzOe1I0aTgYo=
-=sQ3E
------END PGP SIGNATURE-----
-
---=-/qr9/bcV2HMGbZTI3jSn--
-
-
-
---===============8690294613943063488==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8690294613943063488==--
+T24gMTAvMTgvMTggMTo1NyBQTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAxOC8xMC8xOCAx
+MTowNywgUmF6dmFuIENvam9jYXJ1IHdyb3RlOgo+PiBXaGVuIGFuIG5ldyBhbHRwMm0gdmlldyBp
+cyBjcmVhdGVkIHZlcnkgZWFybHkgb24gZ3Vlc3QgYm9vdCwgdGhlCj4+IGRpc3BsYXkgd2lsbCBm
+cmVlemUgKGFsdGhvdWdoIHRoZSBndWVzdCB3aWxsIHJ1biBub3JtYWxseSkuIFRoaXMKPj4gbWF5
+IGFsc28gaGFwcGVuIG9uIHJlc2l6aW5nIHRoZSBkaXNwbGF5LiBUaGUgcmVhc29uIGlzIHRoZSB3
+YXkKPj4gWGVuIGN1cnJlbnRseSAobWlzKWhhbmRsZXMgbG9nZGlydHkgVkdBOiBpdCBpbnRlbnRp
+b25hbGx5Cj4+IG1pc2NvbmZpZ3VyZXMgVkdBIHBhZ2VzIHNvIHRoYXQgdGhleSB3aWxsIGZhdWx0
+Lgo+Pgo+PiBUaGUgcHJvYmxlbSBpcyB0aGF0IGl0IG9ubHkgZG9lcyB0aGlzIGluIHRoZSBob3N0
+IHAybS4gT25jZSB3ZQo+PiBzd2l0Y2ggdG8gYSBuZXcgYWx0cDJtLCB0aGUgbWlzY29uZmlndXJl
+ZCBlbnRyaWVzIHdpbGwgbm8gbG9uZ2VyCj4+IGZhdWx0LCBzbyB0aGUgZGlzcGxheSB3aWxsIG5v
+dCBiZSB1cGRhdGVkLgo+Pgo+PiBUaGlzIHBhdGNoOgo+PiAqIHVwZGF0ZXMgZXB0X2hhbmRsZV9t
+aXNjb25maWcoKSB0byB1c2UgdGhlIGFjdGl2ZSBhbHRwMm0gaW5zdGVhZAo+PiAgIG9mIHRoZSBo
+b3N0cDJtOwo+PiAqIGFsbG9jYXRlcyBuZXcgbG9nZGlydHkgcmFuZ2VzIGZvciBlYWNoIGFsdHAy
+bTsKPj4gKiBoYXMgcDJtX2luaXRfYWx0cDJtX2VwdCgpIGNvcHkgb3ZlciBtYXhfbWFwcGVkX3Bm
+biwKPj4gICBhbmQgZ2xvYmFsX2xvZ2RpcnR5LCBhbmQgbWVyZ2VzIHRoZSBsb2dkaXJ0eSByYW5n
+ZXMgb2YgdGhlCj4+ICAgaG9zdHAybSBpbnRvIHRoZSBsb2dkaXJ0eSByYW5nZSBvZiB0aGUgYWx0
+cDJtOwo+PiAqIG1vZGlmaWVzIHAybV9jaGFuZ2VfZW50cnlfdHlwZV9nbG9iYWwoKSwgcDJtX21l
+bW9yeV90eXBlX2NoYW5nZWQKPj4gICBhbmQgcDJtX2NoYW5nZV90eXBlX3JhbmdlKCkgdG8gcHJv
+cGFnYXRlIHRoZWlyIGNoYW5nZXMgdG8gYWxsCj4+ICAgdmFsaWQgYWx0cDJtcy4KPj4KPj4gU2ln
+bmVkLW9mZi1ieTogUmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29tPgo+
+PiBTdWdnZXN0ZWQtYnk6IEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4K
+PiAKPj5Gcm9tIHRoZSBsb29rcyBvZiB0aGlzIHBhdGNoLCBpdCB3b3VsZCBiZSBjbGVhbmVyIHRv
+IHNwbGl0IG91dCB0aGUgcGF0Y2gKPiBmb3IgYWxsb2NhdGluZy9mcmVlaW5nIHJlc291cmNlcyBm
+cm9tIHRoZSBwYXRjaCB3aGljaCBpbXBsZW1lbnRzIHRoZQo+IGxvZ2RpcnR5IG1lcmdpbmcuCj4g
+Cj4gT24gdGhlIGFsbG9jYXRpbmcvZnJlZWluZyBzaWRlIG9mIHRoaW5ncyBzcGVjaWZpY2FsbHks
+IC4uLgoKVGhhbmtzIGZvciB0aGUgcmV2aWV3ISBJIHdhcyBwb2tpbmcgdGhlIHBhdGNoIGFyb3Vu
+ZCB0byBzZWUgaG93IEkgbWlnaHQKc3BsaXQgaXQgYXMgaW5kaWNhdGVkLCBhbmQgdGhlcmUncyBh
+IHNtYWxsIHByb2JsZW06IEkndmUgbW92ZWQKcDJtLT5sb2dkaXJ0eV9yYW5nZXMgYW5kIHAybS0+
+Z2xvYmFsX2xvZ2RpcnR5IHVuZGVyCnAybS0+c3luYy5sb2dkaXJ0eV9yYW5nZXMgYW5kIHAybS0+
+c3luYy5nbG9iYWxfbG9nZGlydHkgcmVzcGVjdGl2ZWx5LgoKVGhpcyB3YXMgcmVjb21tZW5kZWQg
+YnkgR2VvcmdlLCBidXQgYXMgaXQgaGFzIHR1cm5lZCBvdXQgd2hpbGUgY29kaW5nIGl0CmRvZXNu
+J3QgbWFrZSBhIGh1Z2UgZGlmZmVyZW5jZSAoYmV5b25kIGJlaW5nIHVzZWZ1bCB0byByZWFsbHkg
+aWRlbnRpZnkKYWxsIHBsYWNlcyB3aGVyZSB0aG9zZSB0d28gd2VyZSB1c2VkIGJlY2F1c2UgYWZ0
+ZXIgdGhlIG1vdmUgY29kZSB0aGF0Cndhc24ndCB1cGRhdGVkIHN0b3BwZWQgY29tcGlsaW5nKS4K
+CkJ1dCB0aGUgcG9pbnQgaXMgdGhhdCBpZiBJIG1vdmUgdGhlbSB1bmRlciAic3luYyIgYW5kIHVw
+ZGF0ZSBhbGwgdGhlCmNvZGUgdGhhdCB1c2VzIHRoZW0sIHRoZSBhbGxvY2F0ZSAvIGZyZWUgcGFy
+dCBvZiB0aGUgcGF0Y2ggZ3Jvd3MgdG8KcXVpdGUgYSBsb3Qgb2YgdGhlIG9yaWdpbmFsIHBhdGNo
+LgoKU2hvdWxkIEkgZHJvcCB0aGUgbW92ZSB1bmRlciAic3luYyI/Cgo+PiBkaWZmIC0tZ2l0IGEv
+eGVuL2FyY2gveDg2L21tL3AybS1lcHQuYyBiL3hlbi9hcmNoL3g4Ni9tbS9wMm0tZXB0LmMKPj4g
+aW5kZXggZmFiY2QwNi4uMjg3OTBiZiAxMDA2NDQKPj4gLS0tIGEveGVuL2FyY2gveDg2L21tL3Ay
+bS1lcHQuYwo+PiArKysgYi94ZW4vYXJjaC94ODYvbW0vcDJtLWVwdC5jCj4+IEBAIC0xNDM0LDE4
+ICsxNDM3LDQ0IEBAIHZvaWQgc2V0dXBfZXB0X2R1bXAodm9pZCkKPj4gICAgICByZWdpc3Rlcl9r
+ZXloYW5kbGVyKCdEJywgZXB0X2R1bXBfcDJtX3RhYmxlLCAiZHVtcCBWVC14IEVQVCB0YWJsZXMi
+LCAwKTsKPj4gIH0KPj4gIAo+PiAtdm9pZCBwMm1faW5pdF9hbHRwMm1fZXB0KHN0cnVjdCBkb21h
+aW4gKmQsIHVuc2lnbmVkIGludCBpKQo+PiAraW50IHAybV9pbml0X2FsdHAybV9lcHQoc3RydWN0
+IGRvbWFpbiAqZCwgdW5zaWduZWQgaW50IGkpCj4+ICB7Cj4+ICAgICAgc3RydWN0IHAybV9kb21h
+aW4gKnAybSA9IGQtPmFyY2guYWx0cDJtX3AybVtpXTsKPj4gICAgICBzdHJ1Y3QgcDJtX2RvbWFp
+biAqaG9zdHAybSA9IHAybV9nZXRfaG9zdHAybShkKTsKPj4gICAgICBzdHJ1Y3QgZXB0X2RhdGEg
+KmVwdDsKPj4gKyAgICBpbnQgcmM7Cj4+ICsKPj4gKyAgICBBU1NFUlQoIXAybS0+c3luYy5sb2dk
+aXJ0eV9yYW5nZXMpOwo+PiArICAgIHAybS0+c3luYy5sb2dkaXJ0eV9yYW5nZXMgPSByYW5nZXNl
+dF9uZXcoZCwgImxvZy1kaXJ0eSIsCj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBSQU5HRVNFVEZfcHJldHR5cHJpbnRfaGV4KTsKPj4gKyAgICBpZiAoICFw
+Mm0tPnN5bmMubG9nZGlydHlfcmFuZ2VzICkKPj4gKyAgICAgICAgcmV0dXJuIC1FTk9NRU07Cj4+
+ICsKPj4gKyAgICByYyA9IHJhbmdlc2V0X21lcmdlKHAybS0+c3luYy5sb2dkaXJ0eV9yYW5nZXMs
+Cj4+ICsgICAgICAgICAgICAgICAgICAgICAgICBob3N0cDJtLT5zeW5jLmxvZ2RpcnR5X3Jhbmdl
+cyk7Cj4+ICsgICAgaWYgKCAhcmMgKQo+PiArICAgICAgICByZXR1cm4gcmM7Cj4+ICAKPj4gICAg
+ICBwMm0tPmVwdC5hZCA9IGhvc3RwMm0tPmVwdC5hZDsKPj4gKyAgICBwMm0tPm1heF9tYXBwZWRf
+cGZuID0gaG9zdHAybS0+bWF4X21hcHBlZF9wZm47Cj4+ICsgICAgcDJtLT5kZWZhdWx0X2FjY2Vz
+cyA9IGhvc3RwMm0tPmRlZmF1bHRfYWNjZXNzOwo+PiArICAgIHAybS0+ZG9tYWluID0gaG9zdHAy
+bS0+ZG9tYWluOwo+PiArCj4+ICsgICAgcDJtLT5zeW5jLmdsb2JhbF9sb2dkaXJ0eSA9IGhvc3Rw
+Mm0tPnN5bmMuZ2xvYmFsX2xvZ2RpcnR5Owo+PiAgICAgIHAybS0+bWluX3JlbWFwcGVkX2dmbiA9
+IGdmbl94KElOVkFMSURfR0ZOKTsKPj4gICAgICBwMm0tPm1heF9yZW1hcHBlZF9nZm4gPSAwOwo+
+PiAgICAgIGVwdCA9ICZwMm0tPmVwdDsKPj4gICAgICBlcHQtPm1mbiA9IHBhZ2V0YWJsZV9nZXRf
+cGZuKHAybV9nZXRfcGFnZXRhYmxlKHAybSkpOwo+PiAgICAgIGQtPmFyY2guYWx0cDJtX2VwdHBb
+aV0gPSBlcHQtPmVwdHA7Cj4+ICsKPj4gKyAgICByZXR1cm4gMDsKPj4gK30KPj4gKwo+PiArdm9p
+ZCBwMm1fdW5pbml0X2FsdHAybV9lcHQoc3RydWN0IHAybV9kb21haW4gKnAybSkKPiAKPiBGb3Ig
+bmFtaW5nIGNvbnNpc3RlbmN5LCB0aGlzIHNob3VsZCBiZSBwMm1fZGVzdHJveV9hbHRwMm1fZXB0
+KCkKPiAKPiBbRURJVF0gSXQgbG9va3MgbGlrZSB0aGUgcmVzdCBvZiB0aGUgY29kZSBoYXMgcG9v
+ciBjb25zaXN0ZW5jeS7CoCAvc2lnaAoKSSdsbCBkbyBteSBiZXN0IHRvIHJlbmFtZSB0b3VjaGVk
+IGZ1bmN0aW9ucyBmb3IgY29uc2lzdGVuY3kgaW4gdGhlIGFsbG9jCi8gZnJlZSBwYXRjaCBhcyB3
+ZWxsIHRoZW4uCgo+PiArewo+PiArICAgIEFTU0VSVChwMm0tPnN5bmMubG9nZGlydHlfcmFuZ2Vz
+KTsKPj4gKyAgICByYW5nZXNldF9kZXN0cm95KHAybS0+c3luYy5sb2dkaXJ0eV9yYW5nZXMpOwo+
+PiArICAgIHAybS0+c3luYy5sb2dkaXJ0eV9yYW5nZXMgPSBOVUxMOwo+IAo+IFBsZWFzZSBtYWtl
+IGFsbCBkZXN0cm95IGZ1bmN0aW9ucyBpZGVtcG90ZW50LsKgIGkuZS4KPiAKPiBpZiAoIHAybS0+
+c3luYy5sb2dkaXJ0eV9yYW5nZXMgKQo+IHsKPiDCoMKgwqAgcmFuZ2VzZXRfZGVzdHJveShwMm0t
+PnN5bmMubG9nZGlydHlfcmFuZ2VzKTsKPiDCoMKgwqAgcDJtLT5zeW5jLmxvZ2RpcnR5X3Jhbmdl
+cyA9IE5VTEw7Cj4gfQo+IAo+IGFuZCB1c2UgdGhpcyBkZXN0cm95IGZ1bmN0aW9uIGluIHRoZSBj
+bGVhbnVwIHBhdGggb2YgaW5pdCgpLgoKSSdsbCBkbyB0aGF0LgoKPj4gIHVuc2lnbmVkIGludCBw
+Mm1fZmluZF9hbHRwMm1fYnlfZXB0cChzdHJ1Y3QgZG9tYWluICpkLCB1aW50NjRfdCBlcHRwKQo+
+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L21tL3AybS5jIGIveGVuL2FyY2gveDg2L21tL3Ay
+bS5jCj4+IGluZGV4IDQyYjllZjQuLmU5ZjgzODUgMTAwNjQ0Cj4+IC0tLSBhL3hlbi9hcmNoL3g4
+Ni9tbS9wMm0uYwo+PiArKysgYi94ZW4vYXJjaC94ODYvbW0vcDJtLmMKPj4gQEAgLTExOSw5ICsx
+MjAsOSBAQCBzdGF0aWMgaW50IHAybV9pbml0X2hvc3RwMm0oc3RydWN0IGRvbWFpbiAqZCkKPj4g
+IAo+PiAgICAgIGlmICggcDJtICkKPj4gICAgICB7Cj4+IC0gICAgICAgIHAybS0+bG9nZGlydHlf
+cmFuZ2VzID0gcmFuZ2VzZXRfbmV3KGQsICJsb2ctZGlydHkiLAo+PiAtICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBSQU5HRVNFVEZfcHJldHR5cHJpbnRfaGV4KTsK
+Pj4gLSAgICAgICAgaWYgKCBwMm0tPmxvZ2RpcnR5X3JhbmdlcyApCj4+ICsgICAgICAgIHAybS0+
+c3luYy5sb2dkaXJ0eV9yYW5nZXMgPSByYW5nZXNldF9uZXcoZCwgImxvZy1kaXJ0eSIsCj4+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgUkFOR0VTRVRG
+X3ByZXR0eXByaW50X2hleCk7Cj4gCj4gVGhpcyBsb29rcyB0byBiZSBjb21tb24gd2l0aCBiaXRz
+IG9mIHAybV9pbml0X2FsdHAybV9lcHQoKS7CoCBXaHkgZG9lc24ndAo+IHRoYXQgZ2V0IHJldXNl
+ZD8KCkknbGwgc2VlIGFib3V0IHRoYXQgYXMgd2VsbC4KCj4+ICsgICAgICAgIGlmICggcDJtLT5z
+eW5jLmxvZ2RpcnR5X3JhbmdlcyApCj4+ICAgICAgICAgIHsKPj4gICAgICAgICAgICAgIGQtPmFy
+Y2gucDJtID0gcDJtOwo+PiAgICAgICAgICAgICAgcmV0dXJuIDA7Cj4+IEBAIC0yMzQxLDYgKzIz
+OTYsNyBAQCBpbnQgcDJtX2Rlc3Ryb3lfYWx0cDJtX2J5X2lkKHN0cnVjdCBkb21haW4gKmQsIHVu
+c2lnbmVkIGludCBpZHgpCj4+ICAgICAgICAgIHsKPj4gICAgICAgICAgICAgIHAybV9mbHVzaF90
+YWJsZShkLT5hcmNoLmFsdHAybV9wMm1baWR4XSk7Cj4+ICAgICAgICAgICAgICAvKiBVbmluaXQg
+YW5kIHJlaW5pdCBlcHQgdG8gZm9yY2UgVExCIHNob290ZG93biAqLwo+PiArICAgICAgICAgICAg
+cDJtX3VuaW5pdF9hbHRwMm1fZXB0KGQtPmFyY2guYWx0cDJtX3AybVtpZHhdKTsKPiAKPiBTaG91
+bGRuJ3QgdGhpcyBpZGVhbGx5IGJlIGNhbGxlZCBmcm9tCj4gZXB0X3AybV91bmluaXQoZC0+YXJj
+aC5hbHRwMm1fcDJtW2lkeF0pIGluc3RlYWQ/CgpJJ2xsIGNoZWNrIGFuZCB1cGRhdGUgYWNjb3Jk
+aW5nbHkuCgoKVGhhbmtzLApSYXp2YW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
