@@ -1,23 +1,20 @@
-From: Joe Jin <joe.jin@oracle.com>
-Subject: Re: [PATCH V2] xen-swiotlb: use actually allocated size
- on check physical continuous
-Date: Fri, 19 Oct 2018 09:17:33 -0700
-Message-ID: <09206a13-0fad-bfbd-062d-259f857b6a90__40445.333303842$1539965785$gmane$org@oracle.com>
-References: <0453c762-1f8b-079f-5fdf-548e90909318@oracle.com>
- <20181018235219.GA36047@konrads-mbp.lan>
- <e476c3e8-d501-c5c6-d389-8b0b33adf4b1@oracle.com>
- <20181019134303.GC54336@Konrads-MacBook-Pro.local>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: dom0/pvh: Dom0 PVH with PCI passthrough support
+ status
+Date: Fri, 19 Oct 2018 17:22:46 +0100
+Message-ID: <20181019162246.v4u7zynxfzwjqisd@mac.bytemobile.com>
+References: <1539965325190.3407@amazon.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=e8ot=m7=oracle.com=joe.jin@srs-us1.protection.inumbo.net>)
- id 1gDXT8-0008TY-DZ
- for xen-devel@lists.xenproject.org; Fri, 19 Oct 2018 16:17:46 +0000
-In-Reply-To: <20181019134303.GC54336@Konrads-MacBook-Pro.local>
-Content-Language: en-US
+ <srs0=g1uh=m7=citrix.com=prvs=8231605b5=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1gDXY5-0000qW-Mw
+ for xen-devel@lists.xenproject.org; Fri, 19 Oct 2018 16:22:53 +0000
+Content-Disposition: inline
+In-Reply-To: <1539965325190.3407@amazon.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,13 +23,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-Cc: John Sobecki <john.sobecki@oracle.com>, "DONGLI.ZHANG" <dongli.zhang@oracle.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, konrad@kernel.org, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Christoph Helwig <hch@lst.de>
+To: "Vasile, Alexandru-catalin" <lexnv@amazon.com>
+Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTAvMTkvMTggNjo0MyBBTSwgS29ucmFkIFJ6ZXN6dXRlayBXaWxrIHdyb3RlOgo+IEkgd2ls
-bCBmb2xkIGluIHRoZSBzdGFjayB0cmFjZSBpbiBsYXRlciB0b25pZ2h0LiBUaGFua3MhCgpUaGFu
-ayB5b3UgdmVyeSBtdWNoIQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+SGVsbG8sCgpUaGFua3MgZm9yIHlvdXIgaW50ZXJlc3QgYW5kIHRlc3Rpbmcgb2YgUFZIIERvbTAh
+CgpPbiBGcmksIE9jdCAxOSwgMjAxOCBhdCAwNDowODo0NVBNICswMDAwLCBWYXNpbGUsIEFsZXhh
+bmRydS1jYXRhbGluIHdyb3RlOgo+IEhlbGxvLAo+IAo+IEkgd291bGQgbGlrZSB0byB1c2UgRG9t
+MCB3aXRoIFBWSCBtb2RlIHRvZ2V0aGVyIHdpdGggUENJIHBhc3N0aHJvdWdoIGluIG9yZGVyIHRv
+IGNvbXBhcmUgUFZIIGFuZCBIVk0gaW4gYSByZWFsIHRlc3Qgc2NlbmFyaW8gZm9yIGVhcmx5IGFk
+b3B0aW9uIG9mIFBWSC4gVGhlIG1pbmltdW0gc2V0dXAgbmVlZGVkIGlzIHRvIGhhdmUgdGhlIHBv
+c3NpYmlsaXR5IHRvIGFzc2lnbiB0byBhIGRvbWFpbiBhIFBDSSBkZXZpY2UgdGhhdCBpcyBwYXNz
+dGhyb3VnaC4KPiAKPiBBcmUgdGhlcmUgYW55IHBhdGNoZXMgaW4gcmV2aWV3IG9yIHByZXZpb3Vz
+IGRpc2N1c3Npb25zIG9uIGhhdmluZyBQQ0kgcGFzc3Rocm91Z2ggaW4gRG9tMCBQVkg/CgpDdXJy
+ZW50IGNvZGUgaW4gc3RhZ2luZyBicmFuY2ggc2hvdWxkIGhhdmUgUENJIHBhc3N0aHJvdWdoIHN1
+cHBvcnQgZm9yClBWSCBEb20wIChpZTogc28gdGhhdCBEb20wIGNhbiBjb3JyZWN0bHkgaW50ZXJh
+Y3Qgd2l0aCBwaHlzaWNhbApkZXZpY2VzIG9uIHRoZSBob3N0KSwgYWxiZWl0IGl0J3MgYWxsIGV4
+cGVyaW1lbnRhbCBhbmQgdGhpbmdzIGxpa2UKU1ItSU9WIGRldmljZXMgd29uJ3Qgd29yayBwcm9w
+ZXJseSB5ZXQuCgpZb3UgbGlrZWx5IHdhbnQgdG8gdXNlIG15IFhlbiBicmFuY2ggYXQ6CgpodHRw
+Oi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1wZW9wbGUvcm95Z2VyL3hlbi5naXQ7YT1zaG9y
+dGxvZztoPXJlZnMvaGVhZHMvZml4ZXMtcHZoLXYyCgpUaGlzIGNvbnRhaW5zIG15IGxhdGVzdCBm
+aXhlcyBmb3IgUFZIIERvbTAsIGFzIEkndmUganVzdCBwb3N0ZWQgdGhpcwp0b2RheS4gQXMgZm9y
+IHRoZSBEb20wIGtlcm5lbCB5b3Ugd2lsbCBoYXZlIHRvIHVzZSBMaW51eCA0LjE4IG9yCm5ld2Vy
+LgoKPiBPdXIgaW50ZXJuYWwgdGVzdHMgc2hvd2VkIHByb21pc2luZyByZXN1bHRzIHJlZ2FyZGlu
+ZyBwZXJmb3JtYW5jZSAobm8gUENJIHBhc3N0aHJvdWdoKSwgYnV0IG5vbmV0aGVsZXNzIGFzIGV4
+cGVjdGVkIGluIHRoaXMgZWFybHkgc3RhZ2Ugb2YgZGV2ZWxvcG1lbnQgYSBzbWFsbCBkZWNyZWFz
+ZSBiZXR3ZWVuIDIuNSAtIDEwJS4gU2FjcmlmaWNpbmcgcGVyZm9ybWFuY2UgZm9yIGEgYm9vc3Qg
+aW4gc2VjdXJpdHkgb2ZmZXJlZCBieSBQVkggc2hvdWxkIGJlIGEgcHJpb3JpdHkuIEZvciB0aGUg
+ZmluYWwgcmVzdWx0cyB0byBiZSBjb25jbHVzaXZlIGFuZCBoYXZlIGEgZmFpciBjb21wYXJpc29u
+LCBpdCBpcyBuZWNlc3NhcnkgdG8gaGF2ZSBhIHJvdWdoIGltcGxlbWVudGF0aW9uIG9mIFBDSSBw
+YXNzdGhyb3VnaCAoZS5nLiBmb3IgYSBuZXR3b3JrIGRldmljZSkuCgpJZiB5b3UgaW5zdGVhZCBt
+ZWFuIGRvaW5nIFBDSS1wYXNzdGhyb3VnaCBmcm9tIGEgUFZIIERvbTAgdG8gYSBQViBvcgpIVk0g
+RG9tVSwgSSBoYXZlbid0IHJlYWxseSB0cmllZCBpdCwgc28gdGhlcmUncyBhIGdvb2QgY2hhbmNl
+IHlvdSB3aWxsCmZpbmQgaXNzdWVzIGluIHBjaS1iYWNrIG9yIFFFTVUgd2hlbiBhdHRlbXB0aW5n
+IHRoaXMuCgpNeSBjdXJyZW50IG1haW4gZ29hbCBpcyB0byBtYWtlIFBWSCBEb20wIHN0YWJsZSwg
+YW5kIGFmdGVyd2FyZHMgSSB3aWxsCmxvb2sgYXQgYWRkaW5nIGFsbCB0aGUgbWlzc2luZyBmdW5j
+dGlvbmFsaXR5LgoKVGhlcmUgaXMgc29tZSBsb3ctaGFuZ2luZyBmcnVpdCwgYm90aCBpbiBYZW4g
+YW5kIHRoZSBMaW51eCBrZXJuZWwsCndoaWNoIGNhbiByZWFsbHkgYmUgd29ya2VkIGluIHBhcmFs
+bGVsIGJ5IGRpZmZlcmVudCBwYXJ0aWVzLCBzbyBsZXQgbWUKa25vdyBpZiB5b3UgaGF2ZSBzb21l
+IGNhcGFjaXR5IGFuZCB3ZSBjYW4gc3BlYWsgYWJvdXQgc2hhcmluZyB0aGUKd29ya2xvYWQuCgpU
+aGFua3MsIFJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
