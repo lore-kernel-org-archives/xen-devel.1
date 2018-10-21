@@ -1,23 +1,17 @@
 From: Aaron Gray <aaronngray.lists@gmail.com>
-Subject: Re: Intel Z270 support
-Date: Sun, 21 Oct 2018 21:36:56 +0100
-Message-ID: <CANkmNDfpkP0yTEyaSEqhWEteaTS4WLeiV21bjJ72EfkcT0SdGA@mail.gmail.com>
-References: <CANkmNDfWfZt_17ewcHX0=EkvpymqVGLSDyd6uyObr7rOHc9tig@mail.gmail.com>
- <375d8065-e141-4cd7-e051-e0f698d76e96@citrix.com>
- <CANkmNDfjr+2xJ9XOv=ktVnSYiquHeT6PSmBDLW1agOTyp-17KQ@mail.gmail.com>
- <f5a989eb-2f4b-cb04-9126-0ad2fbf49e21@citrix.com>
- <CANkmNDcAL6kf86FhUz3o-ahwp8As4NtQpcG0mFbbW_ycA6Mx7g@mail.gmail.com>
+Subject: Definitive Guide to the Xen Hypervisor
+Date: Sun, 21 Oct 2018 22:03:27 +0100
+Message-ID: <CANkmNDf5n1M9o_U3ui1eyDMgh-JmHa-brOSM0xzOtN7GJHmMSQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6683779847016881559=="
+Content-Type: multipart/mixed; boundary="===============0889863298331921368=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=awzl=nb=gmail.com=aaronngray.lists@srs-us1.protection.inumbo.net>)
- id 1gEKTN-0002fM-RB
- for xen-devel@lists.xenproject.org; Sun, 21 Oct 2018 20:37:17 +0000
-Received: by mail-ed1-x535.google.com with SMTP id r1-v6so36012977edd.7
- for <xen-devel@lists.xenproject.org>; Sun, 21 Oct 2018 13:37:15 -0700 (PDT)
-In-Reply-To: <CANkmNDcAL6kf86FhUz3o-ahwp8As4NtQpcG0mFbbW_ycA6Mx7g@mail.gmail.com>
+ id 1gEKt1-0004tR-R4
+ for xen-devel@lists.xenproject.org; Sun, 21 Oct 2018 21:03:47 +0000
+Received: by mail-ed1-x52a.google.com with SMTP id w19-v6so36030070eds.1
+ for <xen-devel@lists.xenproject.org>; Sun, 21 Oct 2018 14:03:46 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,219 +20,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: andrew.cooper3@citrix.com
-Cc: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============6683779847016881559==
-Content-Type: multipart/alternative; boundary="00000000000010516f0578c31aff"
+--===============0889863298331921368==
+Content-Type: multipart/alternative; boundary="000000000000e0a0b20578c37800"
 
---00000000000010516f0578c31aff
+--000000000000e0a0b20578c37800
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, 19 Oct 2018 at 19:58, Aaron Gray <aaronngray.lists@gmail.com> wrote:
-
-> On Thu, 18 Oct 2018 at 23:42, Andrew Cooper <andrew.cooper3@citrix.com>
-> wrote:
->
->> On 18/10/2018 19:45, Aaron Gray wrote:
->>
->> On Thu, 18 Oct 2018 at 19:11, Andrew Cooper <andrew.cooper3@citrix.com>
->> wrote:
->>
->>> On 18/10/2018 18:57, Aaron Gray wrote:
->>> > I have two ASUS PRIME Z270-A machines based on Intel Z270 chipset and
->>> > am wondering about when support will be available for them and what I
->>> > can do to speed this up.
->>> >
->>> > But I have not done anything to do with kernel work since years ago
->>> > when I read a lot of the main parts of the Linux 2.4 Kernel. Also I
->>> > did code to get into and out of protected mode before this.
->>> >
->>> > Heres the datasheets that cover the chipset :-
->>> >
->>> >
->>> https://www.intel.com/content/www/us/en/chipsets/200-series-chipset-pch-datasheet-vol-1.html
->>> >
->>> https://www.intel.com/content/www/us/en/chipsets/200-series-chipset-pch-datasheet-vol-2.html
->>> >
->>>
->>> Xen doesn't have a list of individual support chips/systems, because
->>> kernels don't really work like that.  We work feature by feature, or
->>> device by device.
->>>
->>> You appear to have a Broadwell-era system.  Any recent Linux distro
->>> should work for you, including the provided Xen package.
->>
->>
->> I tried installing Xen 4.9 provided with Fedora 28 but it did not work.
->> Can I get support with this please ?
->>
->>
->> What didn't work.  What went wrong?
->>
->> What logs do you have from the attempt?
->>
->> We're not mind readers.  Noone here can divine the cause of your failure
->> from nothing.
->>
->
-> Sorry I will post a proper report over the weekend.
->
->
-Heres what I am getting now which is different from before with Xen 4.9 on
-F28. Before it was actually booting past the [U]EFI stage. And I am not
-sure why it is faultering oon this. I have turned off UEFI on the
-Motherboard.
-
-Loading Xen 4.10.2.config ...
-error: file `EFI/fedora/x86_64-efi/module.mod' not found.
-error: file `EFI/fedora/x86_64-efi/multiboot.mod' not found.
-error: can't find command `multiboot'.
-Loading Linux 4.16.3-301.fc28.x86_64 ...
-error: can't find command `module'.
-Loading initial ramdisk ...
-error: file `EFI/fedora/x86_64-efi/module.mod' not found.
-error: can't find command `module'.
-
-Loading Xen 4.10.2.config ...
-error: file `EFI/fedora/x86_64-efi/module3.mod' not found.
-error: file `EFI/fedora/x86_64-efi/multiboot3.mod' not found.
-error: can't find command `multiboot3'.
-Loading Linux 4.16.3-301.fc28.x86_64 ...
-error: can't find command `module3'.
-Loading initial ramdisk ...
-error: file `EFI/fedora/x86_64-efi/module3.mod' not found.
-error: can't find command `module2'.
-
-I have managed to install, boot, and run F28 in KVM'ed F28 so my hardware
-is supported properly by KVM.
+How relevant is David Chisnall's book *Definitive Guide to the Xen
+Hypervisor* now with regards to studying Xen's source code now ?
 
 Many thanks in advance,
 
+Aaron
 -- 
 Aaron Gray
 
 Independent Open Source Software Engineer, Computer Language Researcher,
 Information Theorist, and amateur computer scientist.
 
---00000000000010516f0578c31aff
+--000000000000e0a0b20578c37800
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"lt=
-r">On Fri, 19 Oct 2018 at 19:58, Aaron Gray &lt;<a href=3D"mailto:aaronngra=
-y.lists@gmail.com">aaronngray.lists@gmail.com</a>&gt; wrote:<br></div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;padding-left=
-:1ex;border-left-color:rgb(204,204,204);border-left-width:1px;border-left-s=
-tyle:solid"><div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr">On=
- Thu, 18 Oct 2018 at 23:42, Andrew Cooper &lt;<a href=3D"mailto:andrew.coop=
-er3@citrix.com" target=3D"_blank">andrew.cooper3@citrix.com</a>&gt; wrote:<=
-br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;padding-left:1ex;border-left-color:rgb(204,204,204);border-left-width:1px=
-;border-left-style:solid">
- =20
-   =20
- =20
-  <div bgcolor=3D"#FFFFFF">
-    <div class=3D"gmail-m_6538912460164997870m_-2346656981181437284moz-cite=
--prefix">On 18/10/2018 19:45, Aaron Gray wrote:<br>
-    </div>
-    <blockquote type=3D"cite">
-     =20
-      <div dir=3D"ltr">
-        <div class=3D"gmail_quote">
-          <div dir=3D"ltr">On Thu, 18 Oct 2018 at 19:11, Andrew Cooper
-            &lt;<a href=3D"mailto:andrew.cooper3@citrix.com" target=3D"_bla=
-nk">andrew.cooper3@citrix.com</a>&gt;
-            wrote:<br>
-          </div>
-          <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;padding-left:1ex;border-left-color:rgb(204,204,204);border-left-width:1p=
-x;border-left-style:solid">On
-            18/10/2018 18:57, Aaron Gray wrote:<br>
-            &gt; I have two ASUS PRIME Z270-A machines based on Intel
-            Z270 chipset and<br>
-            &gt; am wondering about when support will be available for
-            them and what I<br>
-            &gt; can do to speed this up.<br>
-            &gt;<br>
-            &gt; But I have not done anything to do with kernel work
-            since years ago<br>
-            &gt; when I read a lot of the main parts of the Linux 2.4
-            Kernel. Also I<br>
-            &gt; did code to get into and out of protected mode before
-            this.<br>
-            &gt;<br>
-            &gt; Heres the datasheets that cover the chipset :-<br>
-            &gt;<br>
-            &gt; <a href=3D"https://www.intel.com/content/www/us/en/chipset=
-s/200-series-chipset-pch-datasheet-vol-1.html" target=3D"_blank" rel=3D"nor=
-eferrer">https://www.intel.com/content/www/us/en/chipsets/200-series-chipse=
-t-pch-datasheet-vol-1.html</a><br>
-            &gt; <a href=3D"https://www.intel.com/content/www/us/en/chipset=
-s/200-series-chipset-pch-datasheet-vol-2.html" target=3D"_blank" rel=3D"nor=
-eferrer">https://www.intel.com/content/www/us/en/chipsets/200-series-chipse=
-t-pch-datasheet-vol-2.html</a><br>
-            &gt;<br>
-            <br>
-            Xen doesn&#39;t have a list of individual support chips/systems=
-,
-            because<br>
-            kernels don&#39;t really work like that.=C2=A0 We work feature =
-by
-            feature, or<br>
-            device by device.<br>
-            <br>
-            You appear to have a Broadwell-era system.=C2=A0 Any recent Lin=
-ux
-            distro<br>
-            should work for you, including the provided Xen package.</block=
-quote>
-          <div><br>
-          </div>
-          <div>I tried installing Xen 4.9 provided with Fedora 28 but it
-            did not work. Can I get support with this please ?</div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    What didn&#39;t work.=C2=A0 What went wrong?<br>
-    <br>
-    What logs do you have from the attempt?<br>
-    <br>
-    We&#39;re not mind readers.=C2=A0 Noone here can divine the cause of yo=
-ur
-    failure from nothing.<br></div></blockquote><div><br></div><div>Sorry I=
- will post a proper report over the weekend.</div><div><br></div></div></di=
-v></blockquote><div>=C2=A0</div><div>Heres what I am getting now which is d=
-ifferent from before with Xen 4.9 on F28. Before it was actually booting pa=
-st the [U]EFI stage. And I am not sure why it is faultering oon this. I hav=
-e turned off UEFI on the Motherboard.</div><div>=C2=A0</div><div>Loading Xe=
-n 4.10.2.config ...<br>error: file `EFI/fedora/x86_64-efi/module.mod&#39; n=
-ot found.<br>error: file `EFI/fedora/x86_64-efi/multiboot.mod&#39; not foun=
-d.<br>error: can&#39;t find command `multiboot&#39;.<br>Loading Linux 4.16.=
-3-301.fc28.x86_64 ...<br>error: can&#39;t find command `module&#39;.<br>Loa=
-ding initial ramdisk ...<br>error: file `EFI/fedora/x86_64-efi/module.mod&#=
-39; not found.<br>error: can&#39;t find command `module&#39;.</div><div><br=
->Loading Xen 4.10.2.config ...<br>error: file `EFI/fedora/x86_64-efi/module=
-3.mod&#39; not found.<br>error: file `EFI/fedora/x86_64-efi/multiboot3.mod&=
-#39; not found.<br>error: can&#39;t find command `multiboot3&#39;.<br>Loadi=
-ng Linux 4.16.3-301.fc28.x86_64 ...<br>error: can&#39;t find command `modul=
-e3&#39;.<br>Loading initial ramdisk ...<br>error: file `EFI/fedora/x86_64-e=
-fi/module3.mod&#39; not found.<br>error: can&#39;t find command `module2&#3=
-9;.<br><br></div><div>I have managed to install, boot, and run F28 in KVM&#=
-39;ed F28 so my hardware is supported properly by KVM.</div><div>=C2=A0</di=
-v></div>Many thanks in advance,</div><div dir=3D"ltr"><br>-- <br><div class=
-=3D"gmail_signature" dir=3D"ltr"><div dir=3D"ltr"><div><div dir=3D"ltr"><di=
-v>Aaron Gray</div><div><br></div><div>Independent Open Source Software Engi=
-neer, Computer Language Researcher, Information Theorist, and amateur compu=
-ter scientist.<br></div></div></div></div></div></div></div>
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr">How relevant is David=C2=
+=A0<span style=3D"text-align:left;color:rgb(17,17,17);text-transform:none;l=
+ine-height:21.33px;text-indent:0px;letter-spacing:normal;font-family:&quot;=
+Amazon Ember&quot;,Arial,sans-serif;font-style:normal;font-variant:normal;f=
+ont-weight:400;text-decoration:none;word-spacing:0px;display:inline;white-s=
+pace:normal;font-size-adjust:none;font-stretch:normal;float:none;background=
+-color:transparent">Chisnall&#39;s </span>book=C2=A0<span style=3D"text-ali=
+gn:left;color:rgb(0,0,0);text-transform:none;text-indent:0px;letter-spacing=
+:normal;font-family:&quot;Lucida Grande&quot;,Arial,Helvetica,sans-serif;fo=
+nt-style:normal;font-variant:normal;text-decoration:none;word-spacing:0px;d=
+isplay:inline;white-space:normal;float:none;background-color:transparent"><=
+b>Definitive Guide to the Xen Hypervisor</b> now with regards to studying X=
+en&#39;s source code now ?</span></div><div dir=3D"ltr"><br clear=3D"all">M=
+any thanks in advance,</div><div dir=3D"ltr"><br></div><div dir=3D"ltr">Aar=
+on<br>-- <br><div class=3D"gmail_signature" dir=3D"ltr"><div dir=3D"ltr"><d=
+iv><div dir=3D"ltr"><div>Aaron Gray</div><div><br></div><div>Independent Op=
+en Source Software Engineer, Computer Language Researcher, Information Theo=
+rist, and amateur computer scientist.<br></div></div></div></div></div></di=
+v></div></div>
 
---00000000000010516f0578c31aff--
+--000000000000e0a0b20578c37800--
 
 
---===============6683779847016881559==
+--===============0889863298331921368==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -248,4 +78,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============6683779847016881559==--
+--===============0889863298331921368==--
