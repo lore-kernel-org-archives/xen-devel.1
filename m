@@ -1,17 +1,19 @@
-From: Aaron Gray <aaronngray.lists@gmail.com>
-Subject: Definitive Guide to the Xen Hypervisor
-Date: Sun, 21 Oct 2018 22:03:27 +0100
-Message-ID: <CANkmNDf5n1M9o_U3ui1eyDMgh-JmHa-brOSM0xzOtN7GJHmMSQ@mail.gmail.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: Definitive Guide to the Xen Hypervisor
+Date: Mon, 22 Oct 2018 00:20:19 +0300
+Message-ID: <c344719c-4ea4-b2dc-2cbb-8aa0925ae572@bitdefender.com>
+References: <CANkmNDf5n1M9o_U3ui1eyDMgh-JmHa-brOSM0xzOtN7GJHmMSQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0889863298331921368=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=awzl=nb=gmail.com=aaronngray.lists@srs-us1.protection.inumbo.net>)
- id 1gEKt1-0004tR-R4
- for xen-devel@lists.xenproject.org; Sun, 21 Oct 2018 21:03:47 +0000
-Received: by mail-ed1-x52a.google.com with SMTP id w19-v6so36030070eds.1
- for <xen-devel@lists.xenproject.org>; Sun, 21 Oct 2018 14:03:46 -0700 (PDT)
+ <srs0=wsfo=nb=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1gEL94-0006OT-Uw
+ for xen-devel@lists.xenproject.org; Sun, 21 Oct 2018 21:20:22 +0000
+In-Reply-To: <CANkmNDf5n1M9o_U3ui1eyDMgh-JmHa-brOSM0xzOtN7GJHmMSQ@mail.gmail.com>
+Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,62 +22,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Aaron Gray <aaronngray.lists@gmail.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0889863298331921368==
-Content-Type: multipart/alternative; boundary="000000000000e0a0b20578c37800"
-
---000000000000e0a0b20578c37800
-Content-Type: text/plain; charset="UTF-8"
-
-How relevant is David Chisnall's book *Definitive Guide to the Xen
-Hypervisor* now with regards to studying Xen's source code now ?
-
-Many thanks in advance,
-
-Aaron
--- 
-Aaron Gray
-
-Independent Open Source Software Engineer, Computer Language Researcher,
-Information Theorist, and amateur computer scientist.
-
---000000000000e0a0b20578c37800
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr">How relevant is David=C2=
-=A0<span style=3D"text-align:left;color:rgb(17,17,17);text-transform:none;l=
-ine-height:21.33px;text-indent:0px;letter-spacing:normal;font-family:&quot;=
-Amazon Ember&quot;,Arial,sans-serif;font-style:normal;font-variant:normal;f=
-ont-weight:400;text-decoration:none;word-spacing:0px;display:inline;white-s=
-pace:normal;font-size-adjust:none;font-stretch:normal;float:none;background=
--color:transparent">Chisnall&#39;s </span>book=C2=A0<span style=3D"text-ali=
-gn:left;color:rgb(0,0,0);text-transform:none;text-indent:0px;letter-spacing=
-:normal;font-family:&quot;Lucida Grande&quot;,Arial,Helvetica,sans-serif;fo=
-nt-style:normal;font-variant:normal;text-decoration:none;word-spacing:0px;d=
-isplay:inline;white-space:normal;float:none;background-color:transparent"><=
-b>Definitive Guide to the Xen Hypervisor</b> now with regards to studying X=
-en&#39;s source code now ?</span></div><div dir=3D"ltr"><br clear=3D"all">M=
-any thanks in advance,</div><div dir=3D"ltr"><br></div><div dir=3D"ltr">Aar=
-on<br>-- <br><div class=3D"gmail_signature" dir=3D"ltr"><div dir=3D"ltr"><d=
-iv><div dir=3D"ltr"><div>Aaron Gray</div><div><br></div><div>Independent Op=
-en Source Software Engineer, Computer Language Researcher, Information Theo=
-rist, and amateur computer scientist.<br></div></div></div></div></div></di=
-v></div></div>
-
---000000000000e0a0b20578c37800--
-
-
---===============0889863298331921368==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0889863298331921368==--
+T24gMTAvMjIvMTggMTI6MDMgQU0sIEFhcm9uIEdyYXkgd3JvdGU6Cj4gSG93IHJlbGV2YW50IGlz
+IERhdmlkwqBDaGlzbmFsbCdzIGJvb2vCoCpEZWZpbml0aXZlIEd1aWRlIHRvIHRoZSBYZW4KPiBI
+eXBlcnZpc29yKiBub3cgd2l0aCByZWdhcmRzIHRvIHN0dWR5aW5nIFhlbidzIHNvdXJjZSBjb2Rl
+IG5vdyA/CgpGV0lXLCBJJ3ZlIGZvdW5kIGl0IGxhcmdlbHkgaXJyZWxldmFudC4gSXQncyBiZWVu
+IHB1Ymxpc2hlZCBtb3JlIHRoYW4gYQpkZWNhZGUgYWdvIG5vdywgc28gdGhhdCdzIGZhaXIgZW5v
+dWdoLgoKSSBzdXBwb3NlIGl0J3MgaW50ZXJlc3RpbmcgaWYgeW91J2QgbGlrZSB0byBzZWUgd2hl
+cmUgWGVuIGJlZ2FuLiBJdCdzCmFsc28gdGhlIG9ubHkgYm9vayBvbiBYZW4gd3JpdHRlbiBmb3Ig
+ZGV2ZWxvcGVycywgc28gaXQncyBnb3QgdGhhdCBnb2luZwpmb3IgaXQuCgoKSFRILApSYXp2YW4K
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
