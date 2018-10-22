@@ -1,18 +1,22 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] x86: Consolidate the storage of
- MSR_AMD64_DR{0-3}_ADDRESS_MASK
-Date: Mon, 22 Oct 2018 11:58:59 +0100
-Message-ID: <20181022105859.utlqwg6p6xlg2yp4@zion.uk.xensource.com>
-References: <1539962062-9406-1-git-send-email-andrew.cooper3@citrix.com>
- <f864baa1-c151-4437-ebf4-c0ada29b147b@oracle.com>
- <20181022105317.nlvizgox4wcmschg@zion.uk.xensource.com>
- <c1d2445c-928f-5b67-8b17-77099eaefc15@citrix.com>
+Subject: Re: [PATCH v2 10/16] x86: don't setup legacy syscall
+ vector when !CONFIG_PV
+Date: Mon, 22 Oct 2018 12:12:35 +0100
+Message-ID: <20181022111235.az4o3k7wcewhiorq@zion.uk.xensource.com>
+References: <cover.a9d086fddeb7425fc8cbb3d907dbe8d99a55b46c.1539959287.git-series.wei.liu2@citrix.com>
+ <88a2440e85ce60162b6d7284530be7a2ab8ccbbc.1539959287.git-series.wei.liu2@citrix.com>
+ <0818388d-cdf7-2581-cc2a-bbb15f5cee17@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=ebok=nc=citrix.com=prvs=8264c92cc=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1gEY8V-0001uv-BF
+ for xen-devel@lists.xenproject.org; Mon, 22 Oct 2018 11:12:39 +0000
 Content-Disposition: inline
-In-Reply-To: <c1d2445c-928f-5b67-8b17-77099eaefc15@citrix.com>
+In-Reply-To: <0818388d-cdf7-2581-cc2a-bbb15f5cee17@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,32 +26,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBPY3QgMjIsIDIwMTggYXQgMTE6NTc6MTdBTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBPbiAyMi8xMC8xOCAxMTo1MywgV2VpIExpdSB3cm90ZToKPiA+IE9uIEZyaSwgT2N0
-IDE5LCAyMDE4IGF0IDA2OjUyOjAyUE0gLTA0MDAsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPiA+
-PiBPbiAxMC8xOS8xOCAxMToxNCBBTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiA+Pj4gZGlmZiAt
-LWdpdCBhL3hlbi9pbmNsdWRlL2FzbS14ODYvbXNyLmggYi94ZW4vaW5jbHVkZS9hc20teDg2L21z
-ci5oCj4gPj4+IGluZGV4IDdhMDYxYjIuLmMxY2IzOGYgMTAwNjQ0Cj4gPj4+IC0tLSBhL3hlbi9p
-bmNsdWRlL2FzbS14ODYvbXNyLmgKPiA+Pj4gKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9tc3Iu
-aAo+ID4+PiBAQCAtMjg3LDYgKzI4NywxMiBAQCBzdHJ1Y3QgdmNwdV9tc3JzCj4gPj4+ICAgICAg
-ICAgICAgICBib29sIGNwdWlkX2ZhdWx0aW5nOjE7Cj4gPj4+ICAgICAgICAgIH07Cj4gPj4+ICAg
-ICAgfSBtaXNjX2ZlYXR1cmVzX2VuYWJsZXM7Cj4gPj4+ICsKPiA+Pj4gKyAgICAvKgo+ID4+PiAr
-ICAgICAqIDB4YzAwMTEwezI3LDE5LTFifSBNU1JfQU1ENjRfRFJ7MC0zfV9BRERSRVNTX01BU0sK
-PiA+Pj4gKyAgICAgKiBUT0RPOiBOb3QgeWV0IGhhbmRsZWQgYnkgZ3Vlc3Rfe3JkLHdyfW1zcigp
-IGluZnJhc3RydWN0dXJlLgo+ID4+PiArICAgICAqLwo+ID4+PiArICAgIHVpbnQzMl90IGRyX21h
-c2tbNF07Cj4gPj4+ICB9Owo+ID4+PiAgCj4gPj4gWW91IGRvbid0IHRoaW5rIHdyYXBwaW5nIHRo
-ZXNlIGludG8gYW4gaW50ZWwvYW1kIHVuaW9uIHdvdWxkIGJlIHVzZWZ1bD8KPiA+IFNhbWUgcXVl
-c3Rpb24gaGVyZS4gRFIgbWFza3Mgc2VlbSB0byBiZSBBTUQgc3BlY2lmaWMuCj4gCj4gRG9lcyB0
-aGUgc3ZtL3Z0LXggaGVyZSBwZXJ0YWluIHRvIHRoZSBob3N0IHByb2Nlc3Nvciwgb3IgdGhlIGd1
-ZXN0Cj4gY3Jvc3MtdmVuZG9yIHNldHRpbmc/wqAgKFRoYXQncyBhIHJoZXRvcmljYWwgcXVlc3Rp
-b24uwqAgSXRzIGEgY29tcGxldGUKPiBjYW4gb2Ygd29ybXMgd2hpY2ggSSBkb24ndCB3YW50IHRv
-IG9wZW4pLgo+IAo+IEZvciB0aGUgc2FrZSBvZiAxNiBieXRlcywgSSBkb24ndCB0aGluayBpdHMg
-d29ydGggaXQuwqAgV2UgY2FuIGFsd2F5cwo+IHJldmlzaXQgdGhpcyBpbiB0aGUgZnV0dXJlIGlm
-IG5lY2Vzc2FyeS4KClN1cmUuIEZlZWwgZnJlZSB0byBhZGQgbXkgUmIgdG8geW91ciBwYXRjaC4K
-CldlaS4KCj4gCj4gfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+T24gRnJpLCBPY3QgMTksIDIwMTggYXQgMDU6MDk6NDNQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBPbiAxOS8xMC8xOCAxNToyOCwgV2VpIExpdSB3cm90ZToKPiA+IFB1dCB0aGUgY29k
+ZSBpbiBzbXBib290LmMgdW5kZXIgQ09ORklHX1BWLiBOb3QgdGhhdCB3ZSBkb24ndCBuZWVkIHRv
+Cj4gPiBzZXQgdXAgYSBzdHViIGhlcmUgYmVjYXVzZSBlbnRyeS5TIGFscmVhZHkgZG9lcyB0aGF0
+Lgo+ID4KPiA+IFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4g
+Cj4gVGhlIHN0dWIgaXNuJ3QgdGhlIHB1cnBvc2Ugb2YgdGhlIGNvZGUuwqAgVGhpcyBjb2RlIGlz
+IHRvIHN3aXRjaCBiZXR3ZWVuCj4gU1lTX0RFU0NfdHJhcF9nYXRlIGFuZCBTWVNfREVTQ19pcnFf
+Z2F0ZSBkZXBlbmRpbmcgb24gd2hldGhlciB3ZSdyZQo+IGludGVuZGluZyB0byB1c2UgWFBUSS7C
+oCBBbGwgb3RoZXIgZGV0YWlscyBpbiB0aGUgSURUIGVudHJ5IGFyZSBhbHJlYWR5Cj4gY29uZmln
+dXJlZCBjb3JyZWN0bHkgZm9yIGludDgwX2RpcmVjdF90cmFwLgo+IAo+IFRoZSBwYXRjaCBpcyBm
+aW5lLCBidXQgd2l0aCBhbiB0d2Vha2VkIGNvbW1pdCBtZXNzYWdlLCBSZXZpZXdlZC1ieToKPiBB
+bmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKSSBoYXZlIHVwZGF0ZWQg
+dGhlIGNvbW1pdCBtZXNzYWdlIHRvIHRoZSBmb2xsb3dpbmc6CgpUaGUgY29kZSBzbmlwcGV0IGlz
+IHRvIHN3aXRjaCBiZXR3ZWVuIFNZU19ERUNTX3RyYXBfZ2F0ZSBhbmQKU1lTX0RFU0NfaXJxX2dh
+dGUgZGVwZW5kaW5nIG9uIHdoZXRoZXIgWFBUSSBpcyB1c2VkLiBXaGVuIFBWIGlzIGRpc2FibGVk
+CnRoZXJlIGlzIG5vIG5lZWQgdG8gc3dpdGNoLgoKRG9lcyB0aGF0IGxvb2sgT0sgdG8geW91PwoK
+V2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
