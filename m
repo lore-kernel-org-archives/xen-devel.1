@@ -1,20 +1,16 @@
-From: Aaron Gray <aaronngray.lists@gmail.com>
-Subject: Re: Definitive Guide to the Xen Hypervisor
-Date: Sun, 21 Oct 2018 22:47:03 +0100
-Message-ID: <CANkmNDdo7e4umPjYJh8W4qUF2bvEGLfZkg6r50RA_zyFX3TPyg@mail.gmail.com>
-References: <CANkmNDf5n1M9o_U3ui1eyDMgh-JmHa-brOSM0xzOtN7GJHmMSQ@mail.gmail.com>
- <c344719c-4ea4-b2dc-2cbb-8aa0925ae572@bitdefender.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [ovmf baseline-only test] 75472: trouble: blocked/broken
+Date: Mon, 22 Oct 2018 01:00:23 +0100
+Message-ID: <osstest-75472-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1993481184475143411=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=awzl=nb=gmail.com=aaronngray.lists@srs-us1.protection.inumbo.net>)
- id 1gELZF-00082R-Tc
- for xen-devel@lists.xenproject.org; Sun, 21 Oct 2018 21:47:25 +0000
-Received: by mail-ed1-x534.google.com with SMTP id w19-v6so36079471eds.1
- for <xen-devel@lists.xenproject.org>; Sun, 21 Oct 2018 14:47:23 -0700 (PDT)
-In-Reply-To: <c344719c-4ea4-b2dc-2cbb-8aa0925ae572@bitdefender.com>
+ <srs0=uamj=nb=xenproject.org=prvs=8261f3d63=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1gENe0-0001kd-7G
+ for xen-devel@lists.xenproject.org; Mon, 22 Oct 2018 00:00:28 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,91 +19,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: rcojocaru@bitdefender.com
-Cc: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============1993481184475143411==
-Content-Type: multipart/alternative; boundary="000000000000d70e940578c41417"
-
---000000000000d70e940578c41417
-Content-Type: text/plain; charset="UTF-8"
-
-On Sun, 21 Oct 2018 at 22:20, Razvan Cojocaru <rcojocaru@bitdefender.com>
-wrote:
-
-> On 10/22/18 12:03 AM, Aaron Gray wrote:
-> > How relevant is David Chisnall's book *Definitive Guide to the Xen
-> > Hypervisor* now with regards to studying Xen's source code now ?
->
-> FWIW, I've found it largely irrelevant. It's been published more than a
-> decade ago now, so that's fair enough.
->
-
-Thanks that verifies what I thought.
-
-
-> I suppose it's interesting if you'd like to see where Xen began. It's
-> also the only book on Xen written for developers, so it's got that going
-> for it.
->
-
-Where is the best place to start for getting a logical unit level overview
-of the source code please ?
-
-Regards,
-
-Aaron
--- 
-Aaron Gray
-
-Independent Open Source Software Engineer, Computer Language Researcher,
-Information Theorist, and amateur computer scientist.
-
---000000000000d70e940578c41417
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr">On Sun, 21 Oct=
- 2018 at 22:20, Razvan Cojocaru &lt;<a href=3D"mailto:rcojocaru@bitdefender=
-.com">rcojocaru@bitdefender.com</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
-ing-left:1ex">On 10/22/18 12:03 AM, Aaron Gray wrote:<br>
-&gt; How relevant is David=C2=A0Chisnall&#39;s book=C2=A0*Definitive Guide =
-to the Xen<br>
-&gt; Hypervisor* now with regards to studying Xen&#39;s source code now ?<b=
-r>
-<br>
-FWIW, I&#39;ve found it largely irrelevant. It&#39;s been published more th=
-an a<br>
-decade ago now, so that&#39;s fair enough.<br></blockquote><div><br></div><=
-div>Thanks that verifies what I thought.</div><div>=C2=A0<br></div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
-olid;padding-left:1ex">
-I suppose it&#39;s interesting if you&#39;d like to see where Xen began. It=
-&#39;s<br>
-also the only book on Xen written for developers, so it&#39;s got that goin=
-g<br>
-for it.<br></blockquote><div><br></div><div>Where is the best place to star=
-t for getting a logical unit level overview of the source code please ?</di=
-v><div><br></div><div>Regards,</div><div><br></div><div>Aaron</div><div>-- =
-<br></div></div><div class=3D"gmail_signature" dir=3D"ltr" data-smartmail=
-=3D"gmail_signature"><div dir=3D"ltr"><div><div dir=3D"ltr"><div>Aaron Gray=
-</div><div><br></div><div>Independent Open Source Software Engineer, Comput=
-er Language Researcher, Information Theorist, and amateur computer scientis=
-t.<br></div></div></div></div></div></div>
-
---000000000000d70e940578c41417--
-
-
---===============1993481184475143411==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1993481184475143411==--
+VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
+NTQ3MiBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
+dC9sb2dzLzc1NDcyLwoKRmFpbHVyZXMgYW5kIHByb2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0
+cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3Rz
+IHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAg
+IDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2ICAgICAgICAg
+ICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1h
+bWQ2NC1wdm9wcyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJv
+a2VuCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAg
+ICAgICAgICAgYnJva2VuCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3Rh
+dHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAg
+ICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCgpUZXN0cyB3aGljaCBkaWQg
+bm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
+ZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9h
+CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAg
+MSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgYmxvY2tlZCBuL2EKIGJ1aWxkLWkzODYtbGli
+dmlydCAgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBu
+L2EKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAg
+IGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAg
+NCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVzdGVkCiBidWlsZC1p
+Mzg2LXB2b3BzICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICBicm9rZW4gYmFz
+ZWxpbmUgdW50ZXN0ZWQKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0
+YWxsKDQpICAgICAgIGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtYW1kNjQtcHZvcHMg
+ICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVz
+dGVkCiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAg
+ICBicm9rZW4gYmFzZWxpbmUgdW50ZXN0ZWQKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6
+CiBvdm1mICAgICAgICAgICAgICAgICAyYzY1ZWZhYzU3MGYxNDYzM2M1MDAxY2U0ODRkYmZmYjhh
+MTE5OTRhCmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICA3Y2VkZmExYzgx
+MTVmMDU4ZDQyM2IxNDE1NDhmZWIzYzBkMmE5MjdmCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAgNzU0
+NzAgIDIwMTgtMTAtMjEgMTQ6MjA6MjAgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAg
+IDc1NDcyICAyMDE4LTEwLTIxIDE5OjIyOjQ5IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgWW9uZ2hvbmcgWmh1
+IDx5b25naG9uZy56aHVAaW50ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtaTM4
+Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tl
+biAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiBidWlsZC1pMzg2
+LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tl
+ZCAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBicm9rZW4gIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1
+LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQt
+aTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2Vk
+IAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QueHMuY2l0cml0ZS5uZXQKbG9nczog
+L2hvbWUvb3NzdGVzdC9sb2dzCmltYWdlczogL2hvbWUvb3NzdGVzdC9pbWFnZXMKCkxvZ3MsIGNv
+bmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vb3NzdGVzdC54ZW5z
+b3VyY2UuY29tL29zc3Rlc3QvbG9ncwoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0
+CiAgICBodHRwOi8veGVuYml0cy54ZW5zb3VyY2UuY29tL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9
+c3VtbWFyeQoKYnJva2VuLWpvYiBidWlsZC1hbWQ2NC14c20gYnJva2VuCmJyb2tlbi1qb2IgYnVp
+bGQtaTM4NiBicm9rZW4KYnJva2VuLWpvYiBidWlsZC1hbWQ2NC1wdm9wcyBicm9rZW4KYnJva2Vu
+LWpvYiBidWlsZC1pMzg2LXhzbSBicm9rZW4KYnJva2VuLWpvYiBidWlsZC1hbWQ2NCBicm9rZW4K
+YnJva2VuLWpvYiBidWlsZC1pMzg2LXB2b3BzIGJyb2tlbgpicm9rZW4tc3RlcCBidWlsZC1pMzg2
+IGhvc3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1hbWQ2NCBob3N0LWluc3RhbGwoNCkK
+YnJva2VuLXN0ZXAgYnVpbGQtaTM4Ni1wdm9wcyBob3N0LWluc3RhbGwoNCkKYnJva2VuLXN0ZXAg
+YnVpbGQtaTM4Ni14c20gaG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWFtZDY0LXB2
+b3BzIGhvc3QtaW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1hbWQ2NC14c20gaG9zdC1pbnN0
+YWxsKDQpCgpQdXNoIG5vdCBhcHBsaWNhYmxlLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCAyYzY1ZWZhYzU3MGYxNDYz
+M2M1MDAxY2U0ODRkYmZmYjhhMTE5OTRhCkF1dGhvcjogWW9uZ2hvbmcgWmh1IDx5b25naG9uZy56
+aHVAaW50ZWwuY29tPgpEYXRlOiAgIFRodSBPY3QgMTggMjI6MTI6MjAgMjAxOCArMDgwMAoKICAg
+IEJhc2VUb29sczogRml4IG9uZSBjcmFzaCBidWcgaW4gdGhlIHJlcG9ydCBmb3IgRml4ZWQgc3Ry
+dWN0dXJlIFBjZAogICAgCiAgICBUaGUgY2FzZSBpczoKICAgIGluIHRoZSBEU0MgZmlsZToKICAg
+IFNLVUlEX0lERU5USUZJRVIgICAgICAgICAgICAgICA9IEFMTAogICAgCiAgICBbU2t1SWRzXQog
+ICAgICAwfERFRkFVTFQKICAgICAgMXxBCiAgICAKICAgIFtQY2RzRml4ZWRBdEJ1aWxkLmNvbW1v
+bi5BXQogICAgICBUb2tlblNwYWNlR3VpZC5UZXN0NDAxfHsweDBGLCAweDEyfQogICAgICBUb2tl
+blNwYWNlR3VpZC5UZXN0NDAxLlRFU1Q0MDFJTlQ4QVJSQVlbMF18J0InCiAgICAKICAgIGluIHRo
+ZSBidWlsZCByZXBvcnQsIERhdGEgPSBPdmVycmlkZVZhbHVlc1tLZXlzWzBdXSwgYnV0IHRoZSBL
+ZXlzWzBdCiAgICBpcyB0aGUga2V5d29yZCAiREVGQVVMVCIsIGFuZCBpbiB0aGlzIGNhc2UgdGhl
+ICJERUZBVUxUIiBTS1UgZG9lc24ndAogICAgc2F2ZSBhbnkgdmFsdWUsIHRoZW4gaXQgY2F1c2Ug
+dGhlIERhdGEgaXMgZW1wdHksIGluIHRoZSBuZXh0IGNvZGUKICAgIHdoZW4gd2UgdXNlIHRoZSBj
+b2RlIGl0IGNhdXNlIGNyYXNoLgogICAgCiAgICBDb250cmlidXRlZC11bmRlcjogVGlhbm9Db3Jl
+IENvbnRyaWJ1dGlvbiBBZ3JlZW1lbnQgMS4xCiAgICBTaWduZWQtb2ZmLWJ5OiBZb25naG9uZyBa
+aHUgPHlvbmdob25nLnpodUBpbnRlbC5jb20+CiAgICBSZXZpZXdlZC1ieTogSmFiZW4gQ2Fyc2V5
+IDxqYWJlbi5jYXJzZXlAaW50ZWwuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
