@@ -1,17 +1,10 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 128937: tolerable all pass -
- PUSHED
-Date: Mon, 22 Oct 2018 19:26:31 +0000
-Message-ID: <osstest-128937-mainreport@xen.org>
+From: Konrad Rzeszutek Wilk <konrad@darnok.org>
+Subject: [GIT PULL] (xen) stable/for-jens-4.20
+Date: Mon, 22 Oct 2018 15:31:33 -0400
+Message-ID: <20181022193132.GB20677__1579.01958232305$1540236618$gmane$org@dhcp-10-175-29-12.vpn.oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6684519529587350633=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=2/qy=nc=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gEfqW-00089d-8E
- for xen-devel@lists.xenproject.org; Mon, 22 Oct 2018 19:26:36 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,53 +13,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: axboe@kernel.dk, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyODkzNyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyODkzNy8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
-ICAgICAgICAgICAgICA3NmJmYmNlYzQyM2U4M2M0ZWQ5NzU2NDVlYmY1YTlhNGFkMjQ5NGY3CmJh
-c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICA2MmFhOWU3ZjFiOGVmNjRiOGM3
-YzFkYWNiMTEyMjM1MWNiOWZkMTMyCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMjg4ODQgIDIwMTgt
-MTAtMTkgMjA6MDA6NDEgWiAgICAyIGRheXMKRmFpbGluZyBzaW5jZSAgICAgICAgMTI4OTMxICAy
-MDE4LTEwLTIyIDEwOjAwOjQwIFogICAgMCBkYXlzICAgIDMgYXR0ZW1wdHMKVGVzdGluZyBzYW1l
-IHNpbmNlICAgMTI4OTM3ICAyMDE4LTEwLTIyIDE2OjAwOjI0IFogICAgMCBkYXlzICAgIDEgYXR0
-ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgPGpi
-ZXVsaWNoQHN1c2UuY29tPgogIEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
-b20+CiAgSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KICBXZWkgTGl1IDx3ZWku
-bGl1MkBjaXRyaXguY29tPgoKam9iczoKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
-ZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhs
-LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWkzODYgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50
-ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9t
-ZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQK
-ICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhw
-bGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMg
-YXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9Ymxv
-YjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0
-d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVz
-cyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/
-cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMu
-eGVuLm9yZzovaG9tZS94ZW4vZ2l0L3hlbi5naXQKICAgNjJhYTllN2YxYi4uNzZiZmJjZWM0MiAg
-NzZiZmJjZWM0MjNlODNjNGVkOTc1NjQ1ZWJmNWE5YTRhZDI0OTRmNyAtPiBzbW9rZQoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6684519529587350633==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="k1lZvvs/B4yU6o8G"
+Content-Disposition: inline
+
+
+--k1lZvvs/B4yU6o8G
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+
+Hi Jens,
+
+Please git pull the following branch:
+
+git pull git://git.kernel.org/pub/scm/linux/kernel/git/konrad/xen.git stable/for-jens-4.20
+
+which has exactly one tiny patch fixing an NULL pointer issue (also has stable tree CCed).
+
+Thank you!
+
+drivers/block/xen-blkfront.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+Vasilis Liaskovitis (2):
+      xen/blkfront: avoid NULL blkfront_info dereference on device removal
+
+
+--k1lZvvs/B4yU6o8G
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIcBAEBAgAGBQJbziWUAAoJEFKlDoTx2wm/LeEP/jzfxixLC5x9JxlYAg9G3VwF
+h0pzABE7VDNPfeRTIV152g63xdtiBjWMTK74bO/hkqxvmtsCEeKzIm8MQPj+QF7P
+jWadDoVLFds7yKxSJq6vm5wPqd+C6hZsmQUFVjNAnLX1nfxy8GjjsavMyJxHVMCe
+oB2WF9Frk9K6yn4gUxmjOyWWD0N2eNNFuPNb+OLjx0/l/lG7p0ADCZ0fwEZgywJ4
+6yFgHy8DBsWYqfe1RMT3t5wULFxNeaV3hiI+2YLcYtcmCoHJHwSQd4DjPhO1WsNx
+LyhK37BIhX3P4aqLwVxMlSEuBR+VPxRH6mslrJoxOAhZJCloYEEjivNUadKlO1kR
+BjM/1fVlDsHF5IbtreBghCO3mlZ+QJI7Zzr3ijh0jy5Il61VKp2BdbjxCgmbZPLq
+IeAO4h+Q/kBLrBrU2HPda0NACjah9Eq/5ajY7TcG/CoHY+V9TkNsBLL5qG4ioq5Q
+OokX1ZFbOvFvOVwLZmaJTvC9IsPnUeQrWbgr7JAPqiq7+A/CSz9uT6cXJ1mDrfZB
+I9B5M3lhugaqPcL+LkGpXFPcl+yie2LAHWUGxDTBzYMmpER+Wy8DQiw1qzcDFhzh
+L/XnPK05Kr1Dt4IROoWunwzMb53B/QJ1u3yttoQ1sTpFLi+La46O9ej7HL2l7/Hn
+oaxGGpPP4yhb8t9WJ6CQ
+=HN4e
+-----END PGP SIGNATURE-----
+
+--k1lZvvs/B4yU6o8G--
+
+
+--===============6684519529587350633==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6684519529587350633==--
