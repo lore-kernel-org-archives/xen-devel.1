@@ -1,16 +1,17 @@
-From: Wei Liu <wei.liu2@citrix.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
 Subject: Re: [PATCH] x86: Consolidate the storage of
  MSR_AMD64_DR{0-3}_ADDRESS_MASK
-Date: Mon, 22 Oct 2018 11:53:17 +0100
-Message-ID: <20181022105317.nlvizgox4wcmschg@zion.uk.xensource.com>
+Date: Mon, 22 Oct 2018 11:57:17 +0100
+Message-ID: <c1d2445c-928f-5b67-8b17-77099eaefc15@citrix.com>
 References: <1539962062-9406-1-git-send-email-andrew.cooper3@citrix.com>
  <f864baa1-c151-4437-ebf4-c0ada29b147b@oracle.com>
+ <20181022105317.nlvizgox4wcmschg@zion.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <f864baa1-c151-4437-ebf4-c0ada29b147b@oracle.com>
+In-Reply-To: <20181022105317.nlvizgox4wcmschg@zion.uk.xensource.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,25 +20,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Brian Woods <brian.woods@amd.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBPY3QgMTksIDIwMTggYXQgMDY6NTI6MDJQTSAtMDQwMCwgQm9yaXMgT3N0cm92c2t5
-IHdyb3RlOgo+IE9uIDEwLzE5LzE4IDExOjE0IEFNLCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+ID4g
-ZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS14ODYvbXNyLmggYi94ZW4vaW5jbHVkZS9hc20t
-eDg2L21zci5oCj4gPiBpbmRleCA3YTA2MWIyLi5jMWNiMzhmIDEwMDY0NAo+ID4gLS0tIGEveGVu
-L2luY2x1ZGUvYXNtLXg4Ni9tc3IuaAo+ID4gKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9tc3Iu
-aAo+ID4gQEAgLTI4Nyw2ICsyODcsMTIgQEAgc3RydWN0IHZjcHVfbXNycwo+ID4gICAgICAgICAg
-ICAgIGJvb2wgY3B1aWRfZmF1bHRpbmc6MTsKPiA+ICAgICAgICAgIH07Cj4gPiAgICAgIH0gbWlz
-Y19mZWF0dXJlc19lbmFibGVzOwo+ID4gKwo+ID4gKyAgICAvKgo+ID4gKyAgICAgKiAweGMwMDEx
-MHsyNywxOS0xYn0gTVNSX0FNRDY0X0RSezAtM31fQUREUkVTU19NQVNLCj4gPiArICAgICAqIFRP
-RE86IE5vdCB5ZXQgaGFuZGxlZCBieSBndWVzdF97cmQsd3J9bXNyKCkgaW5mcmFzdHJ1Y3R1cmUu
-Cj4gPiArICAgICAqLwo+ID4gKyAgICB1aW50MzJfdCBkcl9tYXNrWzRdOwo+ID4gIH07Cj4gPiAg
-Cj4gCj4gWW91IGRvbid0IHRoaW5rIHdyYXBwaW5nIHRoZXNlIGludG8gYW4gaW50ZWwvYW1kIHVu
-aW9uIHdvdWxkIGJlIHVzZWZ1bD8KClNhbWUgcXVlc3Rpb24gaGVyZS4gRFIgbWFza3Mgc2VlbSB0
-byBiZSBBTUQgc3BlY2lmaWMuCgpUaGUgY29kZSBjaGFuZ2UgaXRzZWxmIGxvb2tzIGdvb2QgdG8g
-bWUuCgpUaGFua3MgZm9yIHBvc3RpbmcgdGhpcyBwYXRjaC4KCldlaS4KCj4gCj4gLWJvcmlzCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
-bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
-LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMjIvMTAvMTggMTE6NTMsIFdlaSBMaXUgd3JvdGU6Cj4gT24gRnJpLCBPY3QgMTksIDIwMTgg
+YXQgMDY6NTI6MDJQTSAtMDQwMCwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+PiBPbiAxMC8xOS8x
+OCAxMToxNCBBTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4+IGRpZmYgLS1naXQgYS94ZW4vaW5j
+bHVkZS9hc20teDg2L21zci5oIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9tc3IuaAo+Pj4gaW5kZXgg
+N2EwNjFiMi4uYzFjYjM4ZiAxMDA2NDQKPj4+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS14ODYvbXNy
+LmgKPj4+ICsrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvbXNyLmgKPj4+IEBAIC0yODcsNiArMjg3
+LDEyIEBAIHN0cnVjdCB2Y3B1X21zcnMKPj4+ICAgICAgICAgICAgICBib29sIGNwdWlkX2ZhdWx0
+aW5nOjE7Cj4+PiAgICAgICAgICB9Owo+Pj4gICAgICB9IG1pc2NfZmVhdHVyZXNfZW5hYmxlczsK
+Pj4+ICsKPj4+ICsgICAgLyoKPj4+ICsgICAgICogMHhjMDAxMTB7MjcsMTktMWJ9IE1TUl9BTUQ2
+NF9EUnswLTN9X0FERFJFU1NfTUFTSwo+Pj4gKyAgICAgKiBUT0RPOiBOb3QgeWV0IGhhbmRsZWQg
+YnkgZ3Vlc3Rfe3JkLHdyfW1zcigpIGluZnJhc3RydWN0dXJlLgo+Pj4gKyAgICAgKi8KPj4+ICsg
+ICAgdWludDMyX3QgZHJfbWFza1s0XTsKPj4+ICB9Owo+Pj4gIAo+PiBZb3UgZG9uJ3QgdGhpbmsg
+d3JhcHBpbmcgdGhlc2UgaW50byBhbiBpbnRlbC9hbWQgdW5pb24gd291bGQgYmUgdXNlZnVsPwo+
+IFNhbWUgcXVlc3Rpb24gaGVyZS4gRFIgbWFza3Mgc2VlbSB0byBiZSBBTUQgc3BlY2lmaWMuCgpE
+b2VzIHRoZSBzdm0vdnQteCBoZXJlIHBlcnRhaW4gdG8gdGhlIGhvc3QgcHJvY2Vzc29yLCBvciB0
+aGUgZ3Vlc3QKY3Jvc3MtdmVuZG9yIHNldHRpbmc/wqAgKFRoYXQncyBhIHJoZXRvcmljYWwgcXVl
+c3Rpb24uwqAgSXRzIGEgY29tcGxldGUKY2FuIG9mIHdvcm1zIHdoaWNoIEkgZG9uJ3Qgd2FudCB0
+byBvcGVuKS4KCkZvciB0aGUgc2FrZSBvZiAxNiBieXRlcywgSSBkb24ndCB0aGluayBpdHMgd29y
+dGggaXQuwqAgV2UgY2FuIGFsd2F5cwpyZXZpc2l0IHRoaXMgaW4gdGhlIGZ1dHVyZSBpZiBuZWNl
+c3NhcnkuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
