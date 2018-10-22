@@ -1,16 +1,16 @@
 From: Daniel Kiper <daniel.kiper@oracle.com>
-Subject: Re: [PATCH v2 16/18] xenpvh: support building a
- standalone image
-Date: Mon, 22 Oct 2018 13:56:06 +0200
-Message-ID: <20181022115606.GF4548__38948.2926963412$1540209310$gmane$org@olila.i.net-space.pl>
+Subject: Re: [PATCH v2 17/18] xenpvh: support grub-install for
+ xenpvh
+Date: Mon, 22 Oct 2018 14:01:57 +0200
+Message-ID: <20181022120157.GG4548__43014.21469213$1540209668$gmane$org@olila.i.net-space.pl>
 References: <20181009110317.6022-1-jgross@suse.com>
- <20181009110317.6022-17-jgross@suse.com>
+ <20181009110317.6022-18-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <20181009110317.6022-17-jgross@suse.com>
+In-Reply-To: <20181009110317.6022-18-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,13 +23,11 @@ To: Juergen Gross <jgross@suse.com>
 Cc: hans@knorrie.org, grub-devel@gnu.org, phcoder@gmail.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBPY3QgMDksIDIwMTggYXQgMDE6MDM6MTVQTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3
-cm90ZToKPiBTdXBwb3J0IG1raW1hZ2UgZm9yIHhlbnB2aC4KPgo+IEluIG9yZGVyIHRvIGF2b2lk
-IHVzaW5nIHBsYWluIGludGVnZXJzIGZvciB0aGUgRUxGIG5vdGVzIHVzZSB0aGUKPiBhdmFpbGFi
-bGUgWGVuIGluY2x1ZGUgaW5zdGVhZC4gV2hpbGUgYXQgaXQgcmVwbGFjZSB0aGUgcGxhaW4gbnVt
-YmVycwo+IGZvciBYZW4gUFYgbW9kZSwgdG9vLgo+Cj4gU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBH
-cm9zcyA8amdyb3NzQHN1c2UuY29tPgoKKy8tIFhFTlBWSC94ZW5wdmggcGxheSBSZXZpZXdlZC1i
-eTogRGFuaWVsIEtpcGVyIDxkYW5pZWwua2lwZXJAb3JhY2xlLmNvbT4KCkRhbmllbAoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gVHVlLCBPY3QgMDksIDIwMTggYXQgMDE6MDM6MTZQTSArMDIwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBBZGQgeGVucHZoIHN1cHBvcnQgdG8gZ3J1Yi1pbnN0YWxsLgo+Cj4gU2lnbmVkLW9m
+Zi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgo+IFJldmlld2VkLWJ5OiBEYW5p
+ZWwgS2lwZXIgPGRhbmllbC5raXBlckBvcmFjbGUuY29tPgoKKy8tIFhFTlBWSCBwbGF5IHN0aWxs
+IFJldmlld2VkLWJ5OiBEYW5pZWwgS2lwZXIgPGRhbmllbC5raXBlckBvcmFjbGUuY29tPgoKRGFu
+aWVsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
