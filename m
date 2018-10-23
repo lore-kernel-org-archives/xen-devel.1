@@ -1,19 +1,22 @@
-From: Joe Perches <joe@perches.com>
+From: Arun Sudhilal <getarunks@gmail.com>
 Subject: Re: [PATCH] mm: convert totalram_pages,
  totalhigh_pages and managed_pages to atomic.
-Date: Mon, 22 Oct 2018 21:15:37 -0700
-Message-ID: <c57bcc584b3700c483b0311881ec3ae8786f88b1.camel__45049.4366385557$1540270342$gmane$org@perches.com>
+Date: Tue, 23 Oct 2018 10:16:51 +0530
+Message-ID: <CABOM9Zpq41Ox8wQvsNjgfCtwuqh6CnyeW1B09DWa1TQN+JKf0w__41045.4714358368$1540270367$gmane$org@mail.gmail.com>
 References: <1540229092-25207-1-git-send-email-arunks@codeaurora.org>
+ <20181022181122.GK18839@dhcp22.suse.cz>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=uew9=nd=perches.com=joe@srs-us1.protection.inumbo.net>)
- id 1gEo7A-00084b-Cu
- for xen-devel@lists.xenproject.org; Tue, 23 Oct 2018 04:16:20 +0000
-In-Reply-To: <1540229092-25207-1-git-send-email-arunks@codeaurora.org>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=xvhh=nd=gmail.com=getarunks@srs-us1.protection.inumbo.net>)
+ id 1gEoav-0001if-QF
+ for xen-devel@lists.xenproject.org; Tue, 23 Oct 2018 04:47:05 +0000
+Received: by mail-yb1-xb44.google.com with SMTP id v92-v6so24743ybi.5
+ for <xen-devel@lists.xenproject.org>; Mon, 22 Oct 2018 21:47:04 -0700 (PDT)
+In-Reply-To: <20181022181122.GK18839@dhcp22.suse.cz>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,20 +25,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Arun KS <arunks@codeaurora.org>, Guo Ren <ren_guo@c-sky.com>, Benjamin Herrenschmidt <benh@kernel.crashing.org>, Paul Mackerras <paulus@samba.org>, Michael Ellerman <mpe@ellerman.id.au>, Martin Schwidefsky <schwidefsky@de.ibm.com>, Heiko Carstens <heiko.carstens@de.ibm.com>, Jeff Dike <jdike@addtoit.com>, Richard Weinberger <richard@nod.at>, Borislav Petkov <bp@alien8.de>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, "H. Peter
- Anvin" <hpa@zytor.com>, x86@kernel.org, David Airlie <airlied@linux.ie>, Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Oded Gabbay <oded.gabbay@gmail.com>, Alex Deucher <alexander.deucher@amd.com>, Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, "David (ChunMing) Zhou" <David1.Zhou@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.in>
-Cc: getarunks@gmail.com
+To: mhocko@kernel.org
+Cc: snitzer@redhat.com, benh@kernel.crashing.org, kemi.wang@intel.com, dri-devel@lists.freedesktop.org, bfields@fieldses.org, linux-sctp@vger.kernel.org, paulus@samba.org, pavel@ucw.cz, cl@linux.com, kys@microsoft.com, sumit.semwal@linaro.org, David1.Zhou@amd.com, ptesarik@suse.com, mpe@ellerman.id.au, ceph-devel@vger.kernel.org, jejb@parisc-linux.org, kasan-dev@googlegroups.com, marcos.souza.org@gmail.com, steven.hill@cavium.com, rientjes@google.com, anthony.yznaga@oracle.com, neelx@redhat.com, guro@fb.com, len.brown@intel.com, linux-pm@vger.kernel.org, vbabka@suse.cz, linux-um@lists.infradead.org, rppt@linux.vnet.ibm.com, viro@zeniv.linux.org.uk, tglx@linutronix.de, trond.myklebust@hammerspace.com, anton@tuxera.com, linux-parisc@vger.kernel.org, malat@debian.org, gregkh@linuxfoundation.org, rdunlap@infradead.org, rjw@rjwysocki.net, linux-kernel@vger.kernel.org, cyrilbur@gma
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAyMDE4LTEwLTIyIGF0IDIyOjUzICswNTMwLCBBcnVuIEtTIHdyb3RlOgo+IFJlbW92
-ZSBtYW5hZ2VkX3BhZ2VfY291bnRfbG9jayBzcGlubG9jayBhbmQgaW5zdGVhZCB1c2UgYXRvbWlj
-Cj4gdmFyaWFibGVzLgoKUGVyaGFwcyBiZXR0ZXIgdG8gZGVmaW5lIGFuZCB1c2UgbWFjcm9zIGZv
-ciB0aGUgYWNjZXNzZXMKaW5zdGVhZCBvZiBzcGVjaWZpYyB1c2VzIG9mIGF0b21pY19sb25nXzxp
-bmMvZGVjL3JlYWQ+CgpTb21ldGhpbmcgbGlrZToKCiNkZWZpbmUgdG90YWxyYW1fcGFnZXMoKQko
-dW5zaWduZWQgbG9uZylhdG9taWNfbG9uZ19yZWFkKCZfdG90YWxyYW1fcGFnZXMpCiNkZWZpbmUg
-dG90YWxyYW1fcGFnZXNfaW5jKCkJKHVuc2lnbmVkIGxvbmcpYXRvbWljX2xvbmdfaW5jKCZfdG90
-YWxyYW1fcGFnZXMpCiNkZWZpbmUgdG90YWxyYW1fcGFnZXNfZGVjKCkJKHVuc2lnbmVkIGxvbmcp
-YXRvbWljX2xvbmdfZGVjKCZfdG90YWxyYW1fcGFnZXMpCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gTW9uLCBPY3QgMjIsIDIwMTggYXQgMTE6NDEgUE0gTWljaGFsIEhvY2tvIDxtaG9ja29Aa2Vy
+bmVsLm9yZz4gd3JvdGU6Cj4KPiBPbiBNb24gMjItMTAtMTggMjI6NTM6MjIsIEFydW4gS1Mgd3Jv
+dGU6Cj4gPiBSZW1vdmUgbWFuYWdlZF9wYWdlX2NvdW50X2xvY2sgc3BpbmxvY2sgYW5kIGluc3Rl
+YWQgdXNlIGF0b21pYwo+ID4gdmFyaWFibGVzLgo+CgpIZWxsbyBNaWNoYWwsCj4gSSBhc3N1bWUg
+dGhpcyBoYXMgYmVlbiBhdXRvLWdlbmVyYXRlZC4gSWYgeWVzLCBpdCB3b3VsZCBiZSBiZXR0ZXIg
+dG8KPiBtZW50aW9uIHRoZSBzY3JpcHQgc28gdGhhdCBwZW9wbGUgY2FuIHJldmlldyBpdCBhbmQg
+cmVnZW5lcmF0ZSBmb3IKPiBjb21wYXJpc2lvbi4gU3VjaCBhIGxhcmdlIGNoYW5nZSBpcyBoYXJk
+IHRvIHJldmlldyBtYW51YWxseS4KCkNoYW5nZXMgd2VyZSBtYWRlIHBhcnRpYWxseSB3aXRoIHNj
+cmlwdC4gIEZvciB0b3RhbHJhbV9wYWdlcyBhbmQKdG90YWxoaWdoX3BhZ2VzLAoKZmluZCBkaXIg
+LXR5cGUgZiAtZXhlYyBzZWQgLWkKJ3MvdG90YWxyYW1fcGFnZXMvYXRvbWljX2xvbmdfcmVhZChc
+JnRvdGFscmFtX3BhZ2VzKS9nJyB7fSBcOwpmaW5kIGRpciAtdHlwZSBmIC1leGVjIHNlZCAtaQon
+cy90b3RhbGhpZ2hfcGFnZXMvYXRvbWljX2xvbmdfcmVhZChcJnRvdGFsaGlnaF9wYWdlcykvZycg
+e30gXDsKCkZvciBtYW5hZ2VkX3BhZ2VzIGl0IHdhcyBtb3N0bHkgbWFudWFsIGVkaXRzIGFmdGVy
+IHVzaW5nLApmaW5kIG1tLyAtdHlwZSBmIC1leGVjIHNlZCAtaQoncy96b25lLT5tYW5hZ2VkX3Bh
+Z2VzL2F0b21pY19sb25nX3JlYWQoXCZ6b25lLT5tYW5hZ2VkX3BhZ2VzKS9nJyB7fQpcOwoKUmVn
+YXJkcywKQXJ1bgoKPiAtLQo+IE1pY2hhbCBIb2Nrbwo+IFNVU0UgTGFicwoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
