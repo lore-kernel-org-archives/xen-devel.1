@@ -1,22 +1,14 @@
-From: Andrii Anisov <Andrii_Anisov@epam.com>
-Subject: Re: [PATCH v3 1/2] xen/arm: make platform specific code
- dependent on ALL32_PLAT or ALL64_PLAT
-Date: Tue, 23 Oct 2018 11:10:30 +0000
-Message-ID: <9798acdd-e047-3f05-e112-0b50856eac79@epam.com>
-References: <alpine.DEB.2.10.1809241554040.15006@sstabellini-ThinkPad-X260>
- <1537829704-22680-1-git-send-email-sstabellini@kernel.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2] x86/boot: enable NMIs after traps init
+Date: Tue, 23 Oct 2018 12:07:46 +0100
+Message-ID: <588efa4c-c7ef-e18d-adca-e605e586d60b@citrix.com>
+References: <20181023105912.25235-1-sergey.dyasli@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=pzao=nd=epam.com=andrii_anisov@srs-us1.protection.inumbo.net>)
- id 1gEua7-0006oG-Ea
- for xen-devel@lists.xenproject.org; Tue, 23 Oct 2018 11:10:39 +0000
-In-Reply-To: <1537829704-22680-1-git-send-email-sstabellini@kernel.org>
-Content-Language: en-US
-Content-ID: <26258505944E214FA26E2AD606A4CFCB@eurprd03.prod.outlook.com>
+In-Reply-To: <20181023105912.25235-1-sergey.dyasli@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,19 +17,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, "julien.grall@arm.com" <julien.grall@arm.com>
+To: Sergey Dyasli <sergey.dyasli@citrix.com>, xen-devel@lists.xen.org
+Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8gU3RlZmFubywNCg0KDQpPbiAyNS4wOS4xOCAwMTo1NSwgU3RlZmFubyBTdGFiZWxsaW5p
-IHdyb3RlOg0KPiBDb21waWxlIHBsYXRmb3JtIGNvZGUgdGhhdCBkb2Vzbid0IGhhdmUgaXRzIG93
-biBzcGVjaWZpYyBrY29uZmlnIG9wdGlvbg0KPiBvbmx5IGlmIEFMTDMyX1BMQVQgb3IgQUxMNjRf
-UExBVCBkZXBlbmRpbmcgb24gdGhlIGFyY2hpdGVjdHVyZS4gVGhlDQo+IGJlbmVmaXQgaXMgdGhh
-dCBjaG9vc2luZyBvbmUgb2YgdGhlIHBsYXRmb3JtcyBhdmFpbGFibGUgYXMgYSBtZW51DQo+IG9w
-dGlvbiBhbGxvd3MgdGhlIHVzZXIgbm90IHRvIGJ1aWxkIG90aGVyIHVubmVjZXNzYXJ5IHBsYXRm
-b3JtIGNvZGUuDQo+DQo+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3RlZmFu
-b3NAeGlsaW54LmNvbT4NClJldmlld2VkLWJ5OiBBbmRyaWkgQW5pc292IDxhbmRyaWlfYW5pc292
-QGVwYW0uY29tPg0KDQotLSANCg0KKkFuZHJpaSBBbmlzb3YqDQoNCg0KX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMjMvMTAvMTggMTE6NTksIFNlcmdleSBEeWFzbGkgd3JvdGU6Cj4gSW4gY2VydGFpbiBzY2Vu
+YXJpb3MsIE5NSXMgbWlnaHQgYmUgZGlzYWJsZWQgZHVyaW5nIFhlbiBib290IHByb2Nlc3MuCj4g
+U3VjaCBzaXR1YXRpb24gd2lsbCBjYXVzZSBhbHRlcm5hdGl2ZV9pbnN0cnVjdGlvbnMoKSB0bzoK
+Pgo+ICAgICBwYW5pYygiVGltZWQgb3V0IHdhaXRpbmcgZm9yIGFsdGVybmF0aXZlcyBzZWxmLU5N
+SSB0byBoaXQiKTsKPgo+IFRoaXMgYnVnIHdhcyBvcmlnaW5hbGx5IHNlZW4gd2hlbiB1c2luZyBU
+Ym9vdCB0byBib290IFhlbi4KPgo+IFRvIHByZXZlbnQgdGhpcyBmcm9tIGhhcHBlbmluZywgZW5h
+YmxlIE5NSXMgZHVyaW5nIGNwdV9pbml0KCkgYW5kCj4gZHVyaW5nIF9fc3RhcnRfeGVuKCkgZm9y
+IEJTUC4KPgo+IFNpZ25lZC1vZmYtYnk6IFNlcmdleSBEeWFzbGkgPHNlcmdleS5keWFzbGlAY2l0
+cml4LmNvbT4KClJldmlld2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRy
+aXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
