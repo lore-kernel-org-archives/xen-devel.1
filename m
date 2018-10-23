@@ -1,13 +1,11 @@
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Subject: Re: [GIT PULL] (xen-swiotlb) stable/for-linus-4.20
-Date: Tue, 23 Oct 2018 11:05:54 +0100
-Message-ID: <CAHk-=whKtd8WArFUjBmszD8-+t5BbbVOwUYqWvgRn49g=f-dpg__6103.92849562249$1540289101$gmane$org@mail.gmail.com>
-References: <20181022193304.GC20677@dhcp-10-175-29-12.vpn.oracle.com>
+From: Sergey Dyasli <sergey.dyasli@citrix.com>
+Subject: [PATCH] x86/boot: enable NMIs during cpu_init()
+Date: Tue, 23 Oct 2018 11:21:54 +0100
+Message-ID: <20181023102154.32559-1-sergey.dyasli@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181022193304.GC20677@dhcp-10-175-29-12.vpn.oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,16 +14,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: konrad@darnok.org
-Cc: joe.jin@oracle.com, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, xen-devel@lists.xen.org
+To: xen-devel@lists.xen.org
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBPY3QgMjIsIDIwMTggYXQgODozMyBQTSBLb25yYWQgUnplc3p1dGVrIFdpbGsgPGtv
-bnJhZEBkYXJub2sub3JnPiB3cm90ZToKPgo+ICAgb25lIHRpbnkgZml4IGZvciB0aGUgWGVuIFNX
-SU9UTEIgbWVjaGFuaXNtIHRoYXQgb2NjYXNpb25hbGx5IGhhcHBlbmVkIHdpdGgKPiBkZXZpY2Vz
-IHRoYXQgZGlkbid0IGFsbG9jYXRlIHNpemUgaW4gcG93ZXIgb2YgdHdvIGJ1dCByYXRoZXIgc29t
-ZSBvZGQKPiBzaXplcy4gV2UgbmVnbGVjdGVkIHRvIG1ha2UgdGhlIG1lbW9yeSBjb2hlcmVudCBs
-ZWFkaW5nIHRvIGFsbCBraW5kcyBvZiBmdW4gY3Jhc2hlcy4KClB1bGxlZCwKCiAgICAgICAgICAg
-ICAgICAgIExpbnVzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+SW4gY2VydGFpbiBzY2VuYXJpb3MsIE5NSXMgbWlnaHQgYmUgZGlzYWJsZWQgZHVyaW5nIFhlbiBi
+b290IHByb2Nlc3MuClN1Y2ggc2l0dWF0aW9uIHdpbGwgY2F1c2UgYWx0ZXJuYXRpdmVfaW5zdHJ1
+Y3Rpb25zKCkgdG86CgogICAgcGFuaWMoIlRpbWVkIG91dCB3YWl0aW5nIGZvciBhbHRlcm5hdGl2
+ZXMgc2VsZi1OTUkgdG8gaGl0Iik7CgpUaGlzIGJ1ZyB3YXMgb3JpZ2luYWxseSBzZWVuIHdoZW4g
+dXNpbmcgdGJvb3QgdG8gYm9vdCBYZW4uClRvIHByZXZlbnQgdGhpcyBmcm9tIGhhcHBlbmluZywg
+ZW5hYmxlIE5NSXMgZHVyaW5nIGNwdV9pbml0KCkuCgpTaWduZWQtb2ZmLWJ5OiBTZXJnZXkgRHlh
+c2xpIDxzZXJnZXkuZHlhc2xpQGNpdHJpeC5jb20+Ci0tLQpDQzogSmFuIEJldWxpY2ggPGpiZXVs
+aWNoQHN1c2UuY29tPgpDQzogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNv
+bT4KQ0M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Ci0tLQogeGVuL2FyY2gveDg2L2Nw
+dS9jb21tb24uYyB8IDIgKysKIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykKCmRpZmYg
+LS1naXQgYS94ZW4vYXJjaC94ODYvY3B1L2NvbW1vbi5jIGIveGVuL2FyY2gveDg2L2NwdS9jb21t
+b24uYwppbmRleCAwNTc4NTlhYjE0Li4wOWZiZDk4NzY0IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94
+ODYvY3B1L2NvbW1vbi5jCisrKyBiL3hlbi9hcmNoL3g4Ni9jcHUvY29tbW9uLmMKQEAgLTgxOSw2
+ICs4MTksOCBAQCB2b2lkIGNwdV9pbml0KHZvaWQpCiAjZGVmaW5lIENEKHJlZ2lzdGVyKSBhc20g
+dm9sYXRpbGUgKCAibW92ICUwLCUlZGIiICNyZWdpc3RlciA6IDogInIiKDBVTCkgKTsKIAlDRCgw
+KTsgQ0QoMSk7IENEKDIpOyBDRCgzKTsgLyogbm8gZGI0IGFuZCBkYjUgKi87IENEKDYpOyBDRCg3
+KTsKICN1bmRlZiBDRAorCisJZW5hYmxlX25taXMoKTsKIH0KIAogdm9pZCBjcHVfdW5pbml0KHVu
+c2lnbmVkIGludCBjcHUpCi0tIAoyLjE3LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
